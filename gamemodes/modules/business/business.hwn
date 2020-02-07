@@ -39,7 +39,8 @@ enum eBiz {
 	b_cost,
 	b_moneyPocket,
     b_TYPE,
-    b_TYPE2
+    b_TYPE2,
+	b_motd
 };
 new mBiz[MAX_BIZ][eBiz]; 
 new loadedBiz; 

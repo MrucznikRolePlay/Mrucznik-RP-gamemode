@@ -41,8 +41,13 @@ YCMD:wyjdz(playerid, params[], help)
 			isNaked[playerid] = 0;
 		}
 		if(SprawdzWejscia(playerid))
+		{
 			return 1;
-		
+		}
+		else if(IsPlayerNearBusinessDoor(playerid))
+		{
+			return 1;
+		}
 		else if(IsPlayerInRangeOfPoint(playerid,5,648.9127, -1367.4266, 29.2878))//stare SAN - recepcja san news wyjscie
         {
 			SetPlayerPos(playerid, 648.4412, -1357.3232, 13.8579);
@@ -487,22 +492,6 @@ YCMD:wyjdz(playerid, params[], help)
 		    Wyjdz(playerid, -1716.1999511719,1018.200012207,17.60000038147, -1825.4000244141,1151.6999511719,6803.2998046875, 5.0);//WEJSCIE DO KRYJOWKI
 		    Wyjdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
 			Wyjdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
-			for(new i2; i2<=MAX_BIZ; i2++)
-            {
-                if(BizExist(i2))
-                {
-                    if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i2][b_exX], mBiz[i2][b_exY], mBiz[i2][b_exZ])
-					&& GetPlayerVirtualWorld(playerid) == mBiz[i2][b_vw])
-                    {
-                        SetPlayerPos(playerid, mBiz[i2][b_enX], mBiz[i2][b_enY], mBiz[i2][b_enZ]);
-                        SetPlayerVirtualWorld(playerid, 0);
-                        SetPlayerInterior(playerid, 0); 
-                        SetPLocal(playerid, PLOCAL_DEFAULT);
-                        sendTipMessageEx(playerid, COLOR_GREEN, "Zapraszamy ponownie!"); 
-                        break;
-                    }
-                }
-            }
 			for(new i; i<=MAX_NrDOM; i++)
 		    {
 				if(IsPlayerInRangeOfPoint(playerid, 5.0, IntInfo[i][Int_X], IntInfo[i][Int_Y], IntInfo[i][Int_Z]))

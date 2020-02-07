@@ -50,7 +50,14 @@ YCMD:wejdz(playerid, params[], help)
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
         
         if(SprawdzWejscia(playerid))
+        {
             return 1;
+        }
+        else if(IsPlayerNearBusinessDoor(playerid))
+        {
+
+            return 1;
+        }
         
 //======================================================================
 //==================[Windy pod /wejdz]==================================
@@ -675,37 +682,6 @@ YCMD:wejdz(playerid, params[], help)
             Wejdz(playerid, -1716.1999511719,1018.200012207,17.60000038147, -1825.4000244141,1151.6999511719,6803.2998046875, 5.0);//WEJSCIE DO KRYJOWKI
             Wejdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
-            
-            for(new i2; i2<=MAX_BIZ; i2++)
-            {
-                if(i2 == MAX_BIZ)
-                {
-                    break;
-                }
-                if(BizExist(i2))
-                {
-                    if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i2][b_enX], mBiz[i2][b_enY], mBiz[i2][b_enZ])
-                    && GetPlayerVirtualWorld(playerid) == 0)
-                    {
-                        if(mBiz[i2][b_enX] == mBiz[i2][b_exX]
-                        && mBiz[i2][b_enY] == mBiz[i2][b_exY]
-                        && mBiz[i2][b_enX] == mBiz[i2][b_exZ])
-                        {
-                            sendErrorMessage(playerid, "Ten biznes nie posiada wnêtrza!"); 
-                            sendTipMessage(playerid, "Aby skorzystaæ z udogodnieñ biznesu stañ w jego ikonce"); 
-                        }
-                        else
-                        {
-                            SetPlayerPos(playerid, mBiz[i2][b_exX], mBiz[i2][b_exY], mBiz[i2][b_exZ]);
-                            SetPlayerVirtualWorld(playerid, mBiz[i2][b_vw]);
-                            SetPlayerInterior(playerid, mBiz[i2][b_int]); 
-                            SetPLocal(playerid, mBiz[i2][b_pLocal]);
-                            sendTipMessageEx(playerid, COLOR_GREEN, "Witamy w biznesie!"); 
-                        }
-                        break;
-                    }
-                }
-            }
             for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
             {
                 if(IsPlayerInRangeOfPoint(playerid, 3.0, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]))
