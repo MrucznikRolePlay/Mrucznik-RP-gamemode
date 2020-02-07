@@ -37,6 +37,7 @@ command_zaraz_Impl(playerid, giveplayerid, disease[32])
         Log(adminLog, INFO, "Admin %s wyleczy³ %s z wszystkich chorób", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
         SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "   Admin wyleczy³ Ciê z chorób.");
         SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("   Wyleczy³eœ gracza %s ze wszystkich chorób.", GetNick(giveplayerid)));
+        return 1;
     }
 
     new eDiseases:diseaseID = GetDiseaseID(disease);
