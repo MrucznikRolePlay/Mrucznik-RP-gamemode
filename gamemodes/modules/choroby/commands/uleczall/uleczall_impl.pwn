@@ -25,6 +25,12 @@
 //------------------<[ Implementacja: ]>-------------------
 command_uleczall_Impl(playerid)
 {
+    foreach(new i : Player) 
+    {
+        CurePlayer(i);
+    }
+    Log(adminLog, INFO, "Admin %s uleczy³ wszystkich graczy.", GetPlayerLogName(playerid));
+    SendClientMessageToAll(COLOR_LIGHTBLUE, "Admin %s uleczy³ wszystkich graczy.", GetNick(playerid));
     return 1;
 }
 

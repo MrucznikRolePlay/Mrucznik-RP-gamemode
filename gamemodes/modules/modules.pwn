@@ -156,6 +156,7 @@
 //-------<[ mysql ]>-------
 #include "admin\admin_mysql.pwn"
 #include "biznesy\biznesy_mysql.pwn"
+#include "choroby\choroby_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
 #include "player_attachments\player_attachments_mysql.pwn"
 #include "pojazdy\pojazdy_mysql.pwn"

@@ -31,11 +31,13 @@
 
 //-------<[ include ]>-------
 #include "uleczall\uleczall.pwn"
+#include "zaraz\zaraz.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_uleczall();
+    command_zaraz();
     
 }

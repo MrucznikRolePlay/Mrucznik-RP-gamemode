@@ -26,5 +26,29 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+GetDiseaseID(diseaseName[]) 
+{
+	switch(YHash(diseaseName))
+	{
+		default:
+			return 0;
+	}
+	return 0;
+}
+
+CurePlayer(playerid)
+{
+
+}
+
+InfectPlayer(playerid, disease)
+{
+
+}
+
+DiagnosePlayer(playerid)
+{
+
+}
 
 //end

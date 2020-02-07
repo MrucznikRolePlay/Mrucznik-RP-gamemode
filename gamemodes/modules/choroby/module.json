@@ -4,7 +4,7 @@
     "author": "Mrucznik",
     "timers": true,
     "callbacks": true,
-    "mysql": false,
+    "mysql": true,
     "files": [],
     "commands": true,
     "date": "07.02.2020"

@@ -80,7 +80,6 @@
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
-#include "cmd/choroba.pwn"
 #include "cmd/clearwlall.pwn"
 #include "cmd/clearzone.pwn"
 #include "cmd/cmdinfo.pwn"
@@ -1472,10 +1471,6 @@ static Aliases()
 	//undemorgan
 	Command_AddAltNamed("undemorgan", "prisonoff");
 	Command_AddAltNamed("undemorgan", "unprison");
-
-	//choroba
-	Command_AddAltNamed("choroba", "setstd");
-	Command_AddAltNamed("choroba", "zaraz");
 
 	//zmienprace
 	Command_AddAltNamed("zmienprace", "setjob");
