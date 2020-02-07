@@ -796,7 +796,7 @@ public rower_sprawdzanie(playerid, carid)
     new Float:Velocity[3];
 	GetVehicleVelocity(carid, Velocity[0], Velocity[1], Velocity[2]);
 	new rower_szybkosc = rower_GetPlayerSpeed(carid);
-	if(rower_szybkosc > ROWER_VMAX) rower_SetVehSpeed(playerid, carid);
+	if(rower_szybkosc > ROWER_VMAX) rower_SetVehSpeed(carid);
 }
 public rower_skoksprawdz(playerid, Float:vehz, carid)
 {
