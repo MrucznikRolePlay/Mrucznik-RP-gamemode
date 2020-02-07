@@ -8097,7 +8097,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 	            new Float:HP;
 				GetPlayerHealth(playerid, HP);
-	   			if(/*PlayerInfo[playerid][pZiolo] >= 10 &&*/ PlayerInfo[playerid][pDrugs] >= 10 && PlayerInfo[playerid][pPiwo] >= 1 && HP >= 100 && STDPlayer[playerid] == 0)
+	   			if(/*PlayerInfo[playerid][pZiolo] >= 10 &&*/ PlayerInfo[playerid][pDrugs] >= 10 && PlayerInfo[playerid][pPiwo] >= 1 && HP >= 100 && IsPlayerHealthy(playerid))
 			    {
 	      			if(kaska[playerid] != 0 && kaska[playerid] >= 100000)
 		        	{

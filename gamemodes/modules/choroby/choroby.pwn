@@ -51,4 +51,9 @@ DiagnosePlayer(playerid)
 
 }
 
+IsPlayerHealthy(playerid)
+{
+	
+}
+
 //end

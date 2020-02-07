@@ -32,7 +32,7 @@ command_zaraz_Impl(playerid, giveplayerid, disease[32])
     }
 
     new diseaseID = GetDiseaseID(disease);
-    STDPlayer[giveplayerid] = diseaseID;
+    InfectPlayer(giveplayerid, diseaseID);
     Log(adminLog, INFO, "Admin %s zarazi³ %s chorob¹ %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), disease);
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "   Zarazi³eœ siê chorob¹");
     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("   Zarazi³eœ gracza %s chorob¹ %s.", GetNick(giveplayerid), disease));
