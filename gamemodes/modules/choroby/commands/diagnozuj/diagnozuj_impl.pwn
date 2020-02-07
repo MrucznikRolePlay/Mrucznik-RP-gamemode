@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                  uleczall                                                 //
+//                                                 diagnozuj                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -23,14 +23,26 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_uleczall_Impl(playerid)
+command_diagnozuj_Impl(playerid, giveplayerid)
 {
-    foreach(new i : Player) 
+	if (!IsAMedyk(playerid))
+	{
+		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
+        return 1;
+	}
+    
+    if(!IsPlayerNear(playerid, giveplayerid))
     {
-        CurePlayer(i);
+        sendErrorMessage(playerid, sprintf("Jesteœ zbyt daleko od gracza %s", GetNick(giveplayerid)));
+        return 1;
     }
-    Log(adminLog, INFO, "Admin %s uleczy³ wszystkich graczy.", GetPlayerLogName(playerid));
-    SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s uleczy³ wszystkich graczy.", GetNick(playerid)));
+
+    ProxDetector(20.0, playerid, sprintf("* Lekarz %s przeprowadzi³ diagnozê pacjenta %s.", GetNick(playerid), GetNick(giveplayerid)), 
+        COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
+    );
+    
+    SendClientMessage(playerid, COLOR_WHITE, sprintf("|__________ Wynik diagnozy %s __________|", GetNick(giveplayerid)));
+    SendClientMessage(playerid, COLOR_GREY, sprintf("Choroba: brak"));
     return 1;
 }
 

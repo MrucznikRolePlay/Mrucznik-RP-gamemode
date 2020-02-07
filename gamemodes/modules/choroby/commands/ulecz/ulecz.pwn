@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                  uleczall                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   ulecz                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,22 +16,56 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 07.02.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_uleczall_Impl(playerid)
+
+//-------<[ include ]>-------
+#include "ulecz_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_ulecz()
 {
-    foreach(new i : Player) 
-    {
-        CurePlayer(i);
-    }
-    Log(adminLog, INFO, "Admin %s uleczy³ wszystkich graczy.", GetPlayerLogName(playerid));
-    SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s uleczy³ wszystkich graczy.", GetNick(playerid)));
-    return 1;
+    new command = Command_GetID("ulecz");
+
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:ulecz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Ulecz gracza.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /ulecz [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_ulecz_Impl(playerid, giveplayerid);
+}

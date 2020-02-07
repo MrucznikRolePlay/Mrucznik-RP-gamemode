@@ -26,5 +26,9 @@
 //
 
 //-----------------<[ Timery: ]>-------------------
+ptask DiseaseEffects[500](playerid) 
+{
+	
+}
 
 //end

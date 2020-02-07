@@ -24,7 +24,12 @@
 //------------------<[ Enumy: ]>--------------------
 enum eDiseases {
     NONE,
-    
+    CHLAMYDIA,
+    RZEZACZKA,
+    SYPHILIS,
+    HIV,
+    PRZEZIEBIENIE,
+    CORONAVIRUS
 };
 
 //-----------------<[ Zmienne: ]>-------------------

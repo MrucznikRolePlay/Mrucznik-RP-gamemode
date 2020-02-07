@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                  uleczall                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 diagnozuj                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,22 +16,58 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 07.02.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_uleczall_Impl(playerid)
+
+//-------<[ include ]>-------
+#include "diagnozuj_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_diagnozuj()
 {
-    foreach(new i : Player) 
-    {
-        CurePlayer(i);
-    }
-    Log(adminLog, INFO, "Admin %s uleczy³ wszystkich graczy.", GetPlayerLogName(playerid));
-    SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s uleczy³ wszystkich graczy.", GetNick(playerid)));
-    return 1;
+    new command = Command_GetID("diagnozuj");
+
+    //aliases
+    Command_AddAlt(command, "diagnoza");
+    Command_AddAlt(command, "zdiagnozuj");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:diagnozuj(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zdiagnozuj, co dolega graczowi.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /diagnozuj [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_diagnozuj_Impl(playerid, giveplayerid);
+}

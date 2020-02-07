@@ -1887,6 +1887,11 @@ Float:GetDistanceBetweenPlayers(p1,p2)
 	return floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
 }
 
+IsPlayerNear(playerid, giveplayerid, distance=5)
+{
+	return (GetDistanceBetweenPlayers(playerid, giveplayerid) < distance && Spectate[giveplayerid] == INVALID_PLAYER_ID);
+}
+
 SearchingHit(playerid)
 {
 	new string[256];
