@@ -193,21 +193,39 @@ IsPlayerNearBusinessDoor(playerid)//Powoduje wejœcie do biznesu
 	}
 	return 0; 
 }
-CheckPlayerBusiness(playerid)
+SetPlayerBusiness(playerid)
 {
-	for(new i; i <= MAX_BIZ; i++)
+	new businessChecked;
+	for(new i; i<=MAX_BIZ; i++)
 	{
+		if(businessChecked == loadedBiz)
+		{
+			gBizSet[playerid]=true;
+			return 1;
+		}
 		if(BizExist(i))
 		{
 			if(mBiz[i][b_ownerUID] == PlayerInfo[playerid][pUID])
 			{
-				PlayerInfo[playerid][pBusinessOwner] = i;
-				sendTipMessage(playerid, "Pomyœlnie przypisano biznes");  
-				break;
+				PlayerInfo[playerid][pBusinessOwner] = i; 
+				gBizSet[playerid]=true;
+				return 1;
 			}
+			businessChecked++; 
 		}
 	}
-	return 1;
+	return 0; 
+}
+CheckPlayerBusiness(playerid)
+{
+	//Korekcja nieprawid³owego biznesu
+	if(PlayerInfo[playerid][pBusinessOwner] == 0
+	|| PlayerInfo[playerid][pBusinessMember] == 0)
+	{
+		PlayerInfo[playerid][pBusinessOwner] = INVALID_BUSINESSID;
+		PlayerInfo[playerid][pBusinessMember] = INVALID_BUSINESSID; 
+	}
+	return 0; 
 }
 GetTypeNameBiz(bIDE)
 {
