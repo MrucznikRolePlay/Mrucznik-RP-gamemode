@@ -26,7 +26,7 @@
 //
 // ================= UWAGA! =================
 
-/*
+
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
@@ -38,4 +38,4 @@ hook OnGameModeInit()
 {
     command_grafiti();
     
-}*/
+}
