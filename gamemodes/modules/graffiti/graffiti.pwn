@@ -76,7 +76,7 @@ graffiti_CreateGraffiti(playerid)
 	new debug_string[144];
 	SetPVarInt(playerid, "GraffitiCreating", 1);
 	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
-	pGraffiti[playerid] = CreateDynamicObject(19482, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2], 0.0, 0.0, 0.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid, 200);
+	pGraffiti[playerid] = CreateDynamicObject(19482, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2], 0.0, 0.0, 0.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), -1, 200);
     SetDynamicObjectMaterialText(pGraffiti[playerid], 0, "Test", OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, COLOR_WHITE, 0, 1);
 	sendTipMessage(playerid, Graffiti_Text[playerid]);
 	sendTipMessage(playerid, Graffiti_Color[playerid]);
