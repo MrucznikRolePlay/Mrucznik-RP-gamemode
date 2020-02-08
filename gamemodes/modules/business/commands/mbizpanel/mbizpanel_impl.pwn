@@ -30,7 +30,7 @@ command_mbizpanel_Impl(playerid)
         sendErrorMessage(playerid, "Nie posiadasz w³asnego biznesu!"); 
         return 1;
     }
-    ShowBusinessOwnerDialog(playerid); 
+    ShowBusinessOwnerDialog(playerid, DIALOG_MAIN); 
     return 1;
 }
 

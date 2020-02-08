@@ -139,6 +139,7 @@ GiveBizToPlayer(playerid, bIDE, bType, bType2)
 	SendClientMessage(playerid, COLOR_RED, string); 
 	sendTipMessage(playerid, "Mo¿esz zarz¹dzaæ swoim biznesem za pomoc¹ /bizlider"); 
 	Log(businessLog, INFO, "Gracz %s kupil biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
+	SaveBiz(bIDE);
 	return 1;
 }
 PlayerNearBusinessType(playerid, BTYPE, BTYPE2)
@@ -199,6 +200,32 @@ GetNearBusinessID(playerid)
 	}
 	return INVALID_BUSINESSID; 
 }
+GetTempPocketMaxSpace(bIDE)
+{
+	new value;
+	if(mBiz[bIDE][b_ulepszenie5] > 0)
+	{
+		value = MAX_CASH_IN_TEMPPOCKET+(mBiz[bIDE][b_ulepszenie5]*1000000); 
+	}
+	else 
+	{
+		value = MAX_CASH_IN_TEMPPOCKET;
+	}
+	return value; 
+}
+GetPocketMaxSpace(bIDE)
+{
+	new value;
+	if(mBiz[bIDE][b_ulepszenie4] > 0)
+	{
+		value = MAX_CASH_IN_MONEYPOCKET+(mBiz[bIDE][b_ulepszenie4]*1000000); 
+	}
+	else 
+	{
+		value = MAX_CASH_IN_MONEYPOCKET;
+	}
+	return value; 
+}
 DajKaseBizTemp(bIDE, playerid, value)
 {
 	new oldValue = mBiz[bIDE][b_tempPocket]; 
@@ -209,7 +236,7 @@ DajKaseBizTemp(bIDE, playerid, value)
 	}
 	if(playerid == INVALID_PLAYER_ID)//Wykonywanie dla dodania bez osoby fizycznej
 	{
-		if(mBiz[bIDE][b_tempPocket]+value <= MAX_CASH_IN_TEMPPOCKET)
+		if(mBiz[bIDE][b_tempPocket]+value <= GetTempPocketMaxSpace(bIDE))
 		{
 			mBiz[bIDE][b_tempPocket]=mBiz[bIDE][b_tempPocket]+value;
 			Log(businessCashLog, INFO, "[TEMP] W biznes %s wplynelo %d$ poprzednio %d$ nowa wartosc %d$", GetBusinessLogName(bIDE), value, oldValue, mBiz[bIDE][b_tempPocket]);
@@ -217,13 +244,45 @@ DajKaseBizTemp(bIDE, playerid, value)
 	}
 	else //Wykonanie dla dodania z osob¹ fizyczn¹
 	{
-		if(mBiz[bIDE][b_tempPocket]+value <= MAX_CASH_IN_TEMPPOCKET)
+		if(mBiz[bIDE][b_tempPocket]+value <= GetTempPocketMaxSpace(bIDE))
 		{
 			mBiz[bIDE][b_tempPocket]=mBiz[bIDE][b_tempPocket]+value; 
 			Log(businessCashLog, INFO, "[TEMP] W biznes %s wplynelo %d$ od %s poprzednio %d$ nowa wartosc %d$", GetBusinessLogName(bIDE), GetPlayerLogName(playerid), value, oldValue, mBiz[bIDE][b_tempPocket]);
 		}
 	}
 	return 1; 
+}
+PlayerRunWithMoney(playerid)
+{
+	new bIDE = PlayerInfo[playerid][pBusinessOwner];
+	new string[256];
+	if(bIDE == INVALID_BUSINESSID)
+	{
+		sendErrorMessage(playerid, "Wyst¹pi³ problem z wyp³aceniem i przewiezieniem gotówki biznesu!");
+		sendTipMessage(playerid, "Twój biznes nie odpowiada"); 
+		return 1;
+	}
+	if(mBiz[bIDE][b_tempPocket] <= 0)
+	{
+		sendTipMessage(playerid, "Nie masz nic w sejfie tymczasowym biznesu - nie mo¿esz rozpocz¹æ przewozu gotówki"); 
+		return 1;
+	}
+	if(mBiz[bIDE][b_tempPocketUsage]+1 > 3)
+	{
+		sendErrorMessage(playerid, "Mo¿esz przewoziæ gotówkê maksymalnie 3 razy dziennie!"); 
+		return 1;
+	}
+	sendTipMessageEx(playerid, COLOR_GREEN, "Rozpoczynasz przewóz gotówki!"); 
+	sendTipMessage(playerid, "Z sejfu zosta³a wyci¹gniêta gotówka, masz j¹ teraz przy sobie!"); 
+	sendTipMessage(playerid, "Uwa¿aj na z³odziejaszków, którzy czaj¹ siê za ka¿dym rogiem. Twoim zadaniem jest dostanie siê [.]");
+	sendTipMessage(playerid, "[.] bezpiecznie do banku i wpisanie komendy /mbizmoney. Mo¿esz t¹ akcje wykonywaæ maksymalnie 3x/dzieñ.");
+	sendTipMessageEx(playerid, COLOR_RED, "Uwaga! Je¿eli wyrzuci Ciê teraz z serwera - gotówka nie wróci do biznesu!");
+	format(string, sizeof(string), "%s wyci¹ga z sejfu %s gotówkê w wysokoœci %d", GetNick(playerid), mBiz[bIDE][b_Name], mBiz[bIDE][b_tempPocket]);
+	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE); 
+	PlayerMoneyFromBiz[playerid] = mBiz[bIDE][b_tempPocket]; 
+	mBiz[bIDE][b_tempPocket] = 0; 
+	mBiz[bIDE][b_tempPocketUsage]++; 
+	return 1;
 }
 SendBizLogoMessage(playerid, bIDE)
 {
@@ -232,8 +291,9 @@ SendBizLogoMessage(playerid, bIDE)
 	SendClientMessage(playerid, COLOR_GREEN, string); 
 	return 1;
 }
-ShowBusinessOwnerDialog(playerid)
+ShowBusinessOwnerDialog(playerid, dialogType)
 {
+	
 	new bIDE = PlayerInfo[playerid][pBusinessOwner]; 
 	new string[256]; 
 	if(bIDE == INVALID_BUSINESSID)
@@ -241,9 +301,46 @@ ShowBusinessOwnerDialog(playerid)
 		sendErrorMessage(playerid, "Nieprawid³owa w³asnoœæ biznesu"); 
 		return 1;
 	}
-	format(string, sizeof(string), "====<[%s]>====\nPracownicy\nSejfy\nZarzadzaj drzwiami\nDodatki", mBiz[bIDE][b_Name]); 
-	ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER, DIALOG_STYLE_LIST, "Mrucznik Role Play", 
-	string, "Akceptuj", "Odrzuæ"); 
+	if(dialogType ==  DIALOG_MAIN)
+	{
+		format(string, sizeof(string), "\t\t====<[%s]>====\nPracownicy\nSejfy\nZarzadzaj drzwiami\nDodatki", mBiz[bIDE][b_Name]); 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		string, "Akceptuj", "Odrzuæ"); 
+	}
+	else if(dialogType == DIALOG_WORKERS)
+	{
+		format(string, sizeof(string), "\t\t====<[%s]>====\nPracownicy On-line:\t%d\nPrzyjmij\nZwolnij", mBiz[bIDE][b_Name], 0); 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER2, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		string, "Akceptuj", "Wstecz"); 
+	}
+	else if(dialogType == DIALOG_SEJF)
+	{
+		format(string, sizeof(string), "\t\t====<[%s]>====\nStan sejfu G:\t$%d\nWp³aæ\nWyp³aæ\nStan sejfu T:\t$%d\nWyp³aæ", mBiz[bIDE][b_Name], mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket]); 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER3, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		string, "Akceptuj", "Wstecz"); 
+	}
+	else if(dialogType == DIALOG_DOORS)
+	{
+		format(string, sizeof(string), "\t\t====<[%s]>====\nOtwórz\nZamknij\nUstal godziny otwarcia", mBiz[bIDE][b_Name]); 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER4, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		string, "Akceptuj", "Wstecz"); 
+	}
+	else if(dialogType == DIALOG_ADDS)
+	{
+		format(string, sizeof(string), "\t\t====<[%s]>====\nZmiana nazwy\t$%d\nZmiana MOTD\t$%d\nSpawn pod biznesem\t$%d\nRozwój sejfu G\t$%d\nRozwój sejfu T\t$%d",
+		mBiz[bIDE][b_Name],
+		B_CENA_ZMIENAZWE,
+		B_CENA_ZMIENMOTD,
+		B_CENA_ZMIENSPAWN,
+		B_CENA_SEJFG,
+		B_CENA_SEJFT); 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER5, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		string, "Akceptuj", "Wstecz"); 
+	}
+	else
+	{
+		sendErrorMessage(playerid, "INVALID DIALOG TYPE"); 
+	}
 	return 1;
 }
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami

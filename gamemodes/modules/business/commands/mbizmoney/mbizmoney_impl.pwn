@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                  mbizinfo                                                 //
+//                                                 mbizmoney                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,35 +17,30 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Simeone
-// Data utworzenia: 05.02.2020
+// Data utworzenia: 08.02.2020
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_mbizinfo_Impl(playerid)
+command_mbizmoney_Impl(playerid)
 {
-    if(GetPVarInt(playerid, "MozeUzycKomendyBiz") == 1)
+    new string[256];
+    if(PlayerInfo[playerid][pBusinessOwner] == INVALID_BUSINESSID)
     {
-        sendErrorMessage(playerid, "Odczekaj 5 sekund!"); 
+        sendErrorMessage(playerid, "Nie jesteœ w³aœcicielem ¿adnego biznesu!"); 
         return 1;
     }
-    new string[250];
-    for(new i; i <= MAX_BIZ; i++)
+    if(PlayerMoneyFromBiz[playerid] == 0)
     {
-        if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]))
-        {
-            format(string, sizeof(string), "Nazwa: %s\nW³aœciciel: %s\nTyp: %s\nLokalizacja: %s\nCena: %d\ntID: %d",
-            mBiz[i][b_Name],
-            mBiz[i][b_Name_Owner],
-            GetTypeNameBiz(i),
-            mBiz[i][b_Location],
-            mBiz[i][b_cost],
-            i);
-            ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Okej", "");
-            break;  
-        }  
+        sendErrorMessage(playerid, "Nie przewozisz ¿adnej gotówki!"); 
+        return 1;
     }
+    Log(businessCashLog, INFO, "Gracz %s bezpiecznie dowiozl i otrzymal $%d z biznesu %s", GetPlayerLogName(playerid), PlayerMoneyFromBiz[playerid], GetBusinessLogName(PlayerInfo[playerid][pBusinessOwner]));
+    format(string, sizeof(string), "%s bezpiecznie dowozi i wp³aca do banku $%d.", GetNick(playerid), PlayerMoneyFromBiz[playerid]);
+	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE); 
+    DajKase(playerid, PlayerMoneyFromBiz[playerid]); 
+    PlayerMoneyFromBiz[playerid] = 0; 
     return 1;
 }
 
