@@ -52,6 +52,8 @@ enum eBiz {
 };
 new mBiz[MAX_BIZ][eBiz]; 
 new loadedBiz;
+new Text3D:businessText[MAX_BIZ]; 
+new businessIcon[MAX_BIZ];
 
 //-----------------<[ Zmienne: ]>-------------------
 //------------------<[ Forwardy: ]>--------------------

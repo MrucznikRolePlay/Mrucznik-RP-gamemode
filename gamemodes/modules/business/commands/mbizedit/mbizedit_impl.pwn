@@ -55,6 +55,10 @@ command_mbizedit_Impl(playerid, bIDE)
         Log(businessLog, INFO, "BusinessGod %s przeniosl biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
         sendTipMessage(playerid, "Twoje poczynanie zosta³o zapisane do logów serwera."); 
         SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_NOTHING);
+        DestroyBusinessIcon(bIDE);
+        DestroyBusiness3DText(bIDE);
+        CreateBusinessIcon(bIDE);
+        CreateBusinessIcon(bIDE);
         SaveBiz(bIDE);
     } 
     else if(bChoiceEdit == BIZ_CHOICE_DODAJ)

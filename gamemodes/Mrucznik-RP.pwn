@@ -263,7 +263,7 @@ public OnGameModeInit()
 	//LoadActors(); 
 	//---<[ business INIT ]>----
 	LoadBiz();
-	CreateBusinessIcon();	
+	CreateBusinessIcons();	
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
