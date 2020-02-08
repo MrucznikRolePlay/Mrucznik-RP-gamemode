@@ -187,8 +187,18 @@ RandomizeSouldBeInfected(chance, Float:ratio=1.0)
 ShowDiseaseList(playerid)
 {
 	SendClientMessage(playerid, COLOR_WHITE, "|__________________ Choroby __________________|");
-	//TODO: automatyczne generowanie nazw chorób
-	SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: grypa, zatrucie");
+	new string[144];
+	for(new i; i<_:eDiseases; i++) 
+	{
+		if(i%5 == 0) 
+		{
+			if(i != 0) SendClientMessage(playerid, COLOR_GREY, string);
+			format(string, sizeof(string), "Dostêpne nazwy: ");
+		}
+		strcat(string, DiseaseData[eDiseases:i][Name]);
+		strcat(string, " ");
+	}
+	SendClientMessage(playerid, COLOR_GREY, string);
 	SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
 	return 1;
 }
@@ -234,7 +244,7 @@ IsPlayerTreated(playerid)
 
 //-----------------<[ Disease effects: ]>-------------------
 
-AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, bool:pernament, Float:contagiousRange, infectionChance, additionalValue)
+AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, bool:pernament=false, Float:contagiousRange=0.0, infectionChance=0, additionalValue=0)
 {
 	new array[eEffectData]; //TODO: Czy mo¿na to zrobiæ inicjalizacj¹ {}?
 	strcat(array[ActivateCallback], activateCallback, 32);
