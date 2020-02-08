@@ -60,6 +60,7 @@ kuracja_akceptuj(playerid)
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), cost, commission, DiseaseData[disease][Name]
     );
 
+    ChatMe(playerid, sprintf("pod³¹cza %s do aparatury i rozpoczyna kuracjê."));
     StartPlayerTreatment(playerid, disease);
 }
 
@@ -105,8 +106,8 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
         GetNick(giveplayerid), currationTime, disease, cost, money
     ));
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* %s oferuje Ci kuracjê choroby %s.", GetNick(playerid), disease));
-    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* kuracja potrwa %d minut i bêdzie kosztowaæ %d$.", currationTime, cost));
-    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Szanse powodzenia kuracji to %d%%. wpisz /akceptuj kuracja aby siê zgodziæ.", chance));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Kuracja potrwa %d minut i bêdzie kosztowaæ %d$.", currationTime, cost));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Szanse powodzenia kuracji to %d procent. Wpisz /akceptuj kuracja aby siê zgodziæ.", chance));
 
     SetPVarInt(giveplayerid, "kuracja-doctorid", playerid);
     SetPVarInt(giveplayerid, "kuracja-uid", PlayerInfo[playerid][pUID]);

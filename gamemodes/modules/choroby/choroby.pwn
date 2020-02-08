@@ -59,6 +59,7 @@ InfectPlayer(playerid, eDiseases:disease)
 
 InfectPlayerWithoutSaving(playerid, eDiseases:disease)
 {
+	if(IsPlayerSick(playerid, disease)) return 1;
 	VECTOR_push_back_val(VPlayerDiseases[playerid], disease);
 	ActivateDiseaseEffect(playerid, disease);
 }
@@ -153,6 +154,7 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 	{
 		if(IsPlayerStreamedIn(i, playerid)) //dla optymalizacji
 		{
+			if(IsPlayerSick(playerid, disease)) return 1;
 			if(IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
 			{
 				if(PlayerImmunity[i] <= 0) 
@@ -191,13 +193,13 @@ ShowDiseaseList(playerid)
 
 StartPlayerTreatment(playerid, eDiseases:disease)
 {
-	new time = DiseaseData[disease][CureTime];
+	new time = DiseaseData[disease][CureTime]*60;
 	SetPVarInt(playerid, "disease-treatement", disease);
 
 	TogglePlayerControllable(playerid, false);
 	ApplyAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
 
-	CurrationCounter(playerid, time);
+	CurrationCounter(playerid, time+1);
 	return 1;
 }
 
@@ -207,7 +209,8 @@ EndPlayerTreatment(playerid)
 	new chance = DiseaseData[disease][DrugResistance];
 	new rand = random(100);
 	TogglePlayerControllable(playerid, true);
-	SetPVarInt(playerid, "disease-treatment", 0);
+	SetPVarInt(playerid, "disease-treatement", 0);
+	ClearAnimations(playerid);
 
 	if(rand < chance) //nie uda³o siê
 	{
@@ -247,19 +250,19 @@ AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTi
 public FeelingBadEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "poczu³ siê Ÿle.");
-	ApplyAnimation(playerid, "FAT", "IDLE_tired", 4.0999, 1, 0, 0, 1, 0, 1);
+	ApplyAnimation(playerid, "FAT", "IDLE_tired", 4.0999, 0, 0, 0, 0, 0, 1);
 	return 1;
 }
 public CouchingEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "zaczyna kaszleæ.");
-	ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+	ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0, 1);
 	return 1;
 }
 public VomitEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "zaczyna wymiotowaæ.");
-	ApplyAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 1, 0, 1);
+	ApplyAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 0, 0, 1);
 	return 1;
 }
 public HPLossEffect(playerid, disease, value)

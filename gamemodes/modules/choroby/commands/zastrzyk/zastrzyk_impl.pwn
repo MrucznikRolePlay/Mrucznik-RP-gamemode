@@ -43,18 +43,20 @@ command_zastrzyk_Impl(playerid, giveplayerid)
     if(IsPlayerHealthy(playerid)) 
     {
         SendClientMessage(giveplayerid, COLOR_WHITE, "Lekarz da³ ci zastrzyk i pooprawi³ Twoj¹ odpornoœæ.");
-        ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz jego organizm sta³ siê bardziej odporny na choroby. ((server))", GetNick(giveplayerid)), 
+        ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz jego organizm sta³ siê bardziej odporny na choroby.", GetNick(giveplayerid)), 
             COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
         );
     }
     else
     {
         SendClientMessage(giveplayerid, COLOR_WHITE, "Lekarz da³ ci zastrzyk i za³agodzi³ objawy choroby.");
-        ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz jego organizm lepiej radzi sobie z objawami choroby. ((server))", GetNick(giveplayerid)), 
+        ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz jego organizm lepiej radzi sobie z objawami choroby.", GetNick(giveplayerid)), 
             COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
         );
     }
     PlayerImmunity[giveplayerid] = 5;
+    SendClientMessage(playerid, COLOR_GRAY, "Koszt zastrzyku: "INCOLOR_RED"-500$");
+    ZabierzKase(playerid, 500);
     return 1;
 }
 

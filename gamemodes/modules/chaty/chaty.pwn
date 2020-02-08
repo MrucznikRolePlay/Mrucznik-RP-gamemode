@@ -70,7 +70,7 @@ CheckEmoji(const text[])
 	regex_replace(emojiMessFix, ";d+", "{C2A2DA}**Wystawia jêzyk i puszcza oczko**{FFFFFF}");
 	regex_replace(emojiMessFix, ":\\)+", "{C2A2DA}**Uœmiecha siê**{FFFFFF}");
 	regex_replace(emojiMessFix, ":\\(+", "{C2A2DA}**Smuci siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":O+", "{C2A2DA}**Otwiera usta szeroko**{FFFFFF}");
+	regex_replace(emojiMessFix, ":O+", "{C2A2DA}**Dziwi siê**{FFFFFF}");
 	regex_replace(emojiMessFix, ":\\*+", "{C2A2DA}**Puszcza ca³usa**{FFFFFF}");
 	regex_replace(emojiMessFix, ":v+", "{C2A2DA}**K³apie dziobem**{FFFFFF}");
 	regex_replace(emojiMessFix, ":s+", "{C2A2DA}**Krzywi siê**{FFFFFF}");
