@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 mbizpanel                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,40 +16,22 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 08.02.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "bizback\bizback.pwn"
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbizcreate\mbizcreate.pwn"
-#include "mbizedit\mbizedit.pwn"
-#include "mbizinfo\mbizinfo.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-#include "mbizpanel\mbizpanel.pwn"
-#include "mgotobiz\mgotobiz.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_mbizpanel_Impl(playerid)
 {
-    command_bizback();
-    command_mbizbuy();
-    command_mbizcreate();
-    command_mbizedit();
-    command_mbizinfo();
-    command_mbiznesy();
-    command_mbizpanel();
-    command_mgotobiz();
-    
+    if(PlayerInfo[playerid][pBusinessOwner] == INVALID_BUSINESSID)
+    {
+        sendErrorMessage(playerid, "Nie posiadasz w³asnego biznesu!"); 
+        return 1;
+    }
+    ShowBusinessOwnerDialog(playerid); 
+    return 1;
 }
+
+//end

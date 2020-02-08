@@ -199,9 +199,9 @@ GetNearBusinessID(playerid)
 	}
 	return INVALID_BUSINESSID; 
 }
-DajKaseBiz(bIDE, playerid, value)
+DajKaseBizTemp(bIDE, playerid, value)
 {
-	new oldValue = mBiz[bIDE][b_moneyPocket]; 
+	new oldValue = mBiz[bIDE][b_tempPocket]; 
 	if(!BizExist(bIDE))
 	{
 		Log(businessCashLog, INFO, "CRASH LOG DLA %d tBID", bIDE);
@@ -209,25 +209,46 @@ DajKaseBiz(bIDE, playerid, value)
 	}
 	if(playerid == INVALID_PLAYER_ID)//Wykonywanie dla dodania bez osoby fizycznej
 	{
-		if(mBiz[bIDE][b_moneyPocket]+value <= MAX_CASH_IN_MONEYPOCKET)
+		if(mBiz[bIDE][b_tempPocket]+value <= MAX_CASH_IN_TEMPPOCKET)
 		{
-			mBiz[bIDE][b_moneyPocket]=mBiz[bIDE][b_moneyPocket]+value;
-			Log(businessCashLog, INFO, "W biznes %s wplynelo %d$ poprzednio %d$ nowa wartosc %d$", GetBusinessLogName(bIDE), value, oldValue, mBiz[bIDE][b_moneyPocket]);
+			mBiz[bIDE][b_tempPocket]=mBiz[bIDE][b_tempPocket]+value;
+			Log(businessCashLog, INFO, "[TEMP] W biznes %s wplynelo %d$ poprzednio %d$ nowa wartosc %d$", GetBusinessLogName(bIDE), value, oldValue, mBiz[bIDE][b_tempPocket]);
 		}
 	}
 	else //Wykonanie dla dodania z osob¹ fizyczn¹
 	{
-		if(mBiz[bIDE][b_moneyPocket]+value <= MAX_CASH_IN_MONEYPOCKET)
+		if(mBiz[bIDE][b_tempPocket]+value <= MAX_CASH_IN_TEMPPOCKET)
 		{
-			mBiz[bIDE][b_moneyPocket]=mBiz[bIDE][b_moneyPocket]+value; 
-			Log(businessCashLog, INFO, "W biznes %s wplynelo %d$ od %s poprzednio %d$ nowa wartosc %d$", GetBusinessLogName(bIDE), GetPlayerLogName(playerid), value, oldValue, mBiz[bIDE][b_moneyPocket]);
+			mBiz[bIDE][b_tempPocket]=mBiz[bIDE][b_tempPocket]+value; 
+			Log(businessCashLog, INFO, "[TEMP] W biznes %s wplynelo %d$ od %s poprzednio %d$ nowa wartosc %d$", GetBusinessLogName(bIDE), GetPlayerLogName(playerid), value, oldValue, mBiz[bIDE][b_tempPocket]);
 		}
 	}
 	return 1; 
 }
+SendBizLogoMessage(playerid, bIDE)
+{
+	new string[124];
+	format(string, sizeof(string), "=========<[ %s ]>========", mBiz[bIDE][b_Name]);
+	SendClientMessage(playerid, COLOR_GREEN, string); 
+	return 1;
+}
+ShowBusinessOwnerDialog(playerid)
+{
+	new bIDE = PlayerInfo[playerid][pBusinessOwner]; 
+	new string[256]; 
+	if(bIDE == INVALID_BUSINESSID)
+	{
+		sendErrorMessage(playerid, "Nieprawid³owa w³asnoœæ biznesu"); 
+		return 1;
+	}
+	format(string, sizeof(string), "====<[%s]>====\nPracownicy\nSejfy\nZarzadzaj drzwiami\nDodatki", mBiz[bIDE][b_Name]); 
+	ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER, DIALOG_STYLE_LIST, "Mrucznik Role Play", 
+	string, "Akceptuj", "Odrzuæ"); 
+	return 1;
+}
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
 {
-	if(PlayerInfo[playerid][pAdmin] >= 5000)//Tylko dla H@
+	if(PlayerInfo[playerid][pAdmin] >= 5000)//Tylko dla H@ - DO ZMIANY NA UID!!!!!!!
 	{
 		return true;
 	}
