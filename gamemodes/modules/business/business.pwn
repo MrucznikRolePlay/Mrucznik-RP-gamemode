@@ -277,7 +277,7 @@ PlayerRunWithMoney(playerid)
 	sendTipMessage(playerid, "Uwa¿aj na z³odziejaszków, którzy czaj¹ siê za ka¿dym rogiem. Twoim zadaniem jest dostanie siê [.]");
 	sendTipMessage(playerid, "[.] bezpiecznie do banku i wpisanie komendy /mbizmoney. Mo¿esz t¹ akcje wykonywaæ maksymalnie 3x/dzieñ.");
 	sendTipMessageEx(playerid, COLOR_RED, "Uwaga! Je¿eli wyrzuci Ciê teraz z serwera - gotówka nie wróci do biznesu!");
-	format(string, sizeof(string), "%s wyci¹ga z sejfu %s gotówkê w wysokoœci %d", GetNick(playerid), mBiz[bIDE][b_Name], mBiz[bIDE][b_tempPocket]);
+	format(string, sizeof(string), "%s wyci¹ga z sejfu %s gotówkê w wysokoœci $%d", GetNick(playerid), mBiz[bIDE][b_Name], mBiz[bIDE][b_tempPocket]);
 	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE); 
 	PlayerMoneyFromBiz[playerid] = mBiz[bIDE][b_tempPocket]; 
 	mBiz[bIDE][b_tempPocket] = 0; 
@@ -303,7 +303,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	if(dialogType ==  DIALOG_MAIN)
 	{
-		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
 		Pracownicy\t \n\
 		Sejfy\t \n\
 		Zarzadzaj drzwiami\t \n\
@@ -313,7 +313,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	else if(dialogType == DIALOG_WORKERS)
 	{
-		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
 		Pracownicy On-line:\t{33AA33}%d\n\
 		Przyjmij\t \n\
 		Zwolnij\t ", mBiz[bIDE][b_Name], 0); 
@@ -322,7 +322,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	else if(dialogType == DIALOG_SEJF)
 	{
-		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
 		Stan sejfu G:\t{33AA33}$%d\n\
 		Wp³aæ\t \n\
 		Wyp³aæ\t \n\
@@ -333,7 +333,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	else if(dialogType == DIALOG_DOORS)
 	{
-		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
 		Otwórz\t \n\
 		Zamknij\t \n\
 		Ustal godziny otwarcia\t ", mBiz[bIDE][b_Name]); 
@@ -342,7 +342,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	else if(dialogType == DIALOG_ADDS)
 	{
-		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
 		Zmiana nazwy\t{33AA33}$%d\n\
 		Zmiana MOTD\t{33AA33}$%d\n\
 		Spawn pod biznesem\t{33AA33}$%d\n\
