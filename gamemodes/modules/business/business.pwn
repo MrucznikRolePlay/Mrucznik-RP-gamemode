@@ -345,7 +345,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	if(dialogType ==  DIALOG_MAIN)
 	{
-		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\t \n\
 		Pracownicy\t \n\
 		Sejfy\t \n\
 		Zarzadzaj drzwiami\t \n\
@@ -355,7 +355,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	else if(dialogType == DIALOG_WORKERS)
 	{
-		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\t \n\
 		Pracownicy On-line:\t{33AA33}%d\n\
 		Przyjmij\t \n\
 		Zwolnij\t ", GetBusinessName(bIDE), 0); 
@@ -364,7 +364,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	else if(dialogType == DIALOG_SEJF)
 	{
-		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\t \n\
 		Stan sejfu G:\t{33AA33}$%d\n\
 		Wp³aæ\t \n\
 		Wyp³aæ\t \n\
@@ -375,7 +375,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	else if(dialogType == DIALOG_DOORS)
 	{
-		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\t \n\
 		Otwórz\t \n\
 		Zamknij\t \n\
 		Ustal godziny otwarcia\t ", GetBusinessName(bIDE)); 
@@ -384,7 +384,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	else if(dialogType == DIALOG_ADDS)
 	{
-		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
+		format(string, sizeof(string), "{F3EB34}====<[%s]>====\t \n\
 		Zmiana nazwy\t{33AA33}$%d\n\
 		Zmiana MOTD\t{33AA33}$%d\n\
 		Spawn pod biznesem\t{33AA33}$%d\n\
