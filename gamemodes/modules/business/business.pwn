@@ -314,6 +314,11 @@ PlayerRunWithMoney(playerid)
 		sendErrorMessage(playerid, "Mo¿esz przewoziæ gotówkê maksymalnie 3 razy dziennie!"); 
 		return 1;
 	}
+	if(GetNearBusinessID(playerid) != PlayerInfo[playerid][pBusinessOwner])
+	{
+		sendErrorMessage(playerid, "Nie stoisz przy swoim biznesie!");
+		return 1;
+	}
 	sendTipMessageEx(playerid, COLOR_GREEN, "Rozpoczynasz przewóz gotówki!"); 
 	sendTipMessage(playerid, "Z sejfu zosta³a wyci¹gniêta gotówka, masz j¹ teraz przy sobie!"); 
 	sendTipMessage(playerid, "Uwa¿aj na z³odziejaszków, którzy czaj¹ siê za ka¿dym rogiem. Twoim zadaniem jest dostanie siê [.]");
