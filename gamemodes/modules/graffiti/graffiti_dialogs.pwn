@@ -28,7 +28,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 graffiti_ShowCreationDialog(playerid)
 {
-	ShowPlayerDialogEx(playerid, GRAFFITI_DIALOG_ENTER_TEXT, DIALOG_STYLE_INPUT, "Graffiti", "WprowadŸ tekst(max 120 znaków)", "Dalej", "Anuluj");
+	ShowPlayerDialogEx(playerid, GRAFFITI_DIALOG_ENTER_TEXT, DIALOG_STYLE_INPUT, "Graffiti", "WprowadŸ tekst(max 120 znaków)\n\nZachêcamy do zajrzenia w poradnik na forum dot. tworzenia graffiti!", "Dalej", "Anuluj");
 }
 
 graffiti_ShowColorMenu(playerid)
@@ -56,24 +56,23 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
             {
  
-                case 0: Graffiti_Color[playerid] = "000000";// CZARNY
+                case 0: Graffiti_Color[playerid] = KOLOR_CZARNY;// CZARNY
  
-                case 1: Graffiti_Color[playerid] = "FFFFFF"; // BIALY
+                case 1: Graffiti_Color[playerid] = KOLOR_BIALY; // BIALY
  
-                case 2: Graffiti_Color[playerid] = "F81414"; // CZERWONY
+                case 2: Graffiti_Color[playerid] = KOLOR_CZERWONY; // CZERWONY
  
-                case 3: Graffiti_Color[playerid] = "00FF22"; // ZIELONY
+                case 3: Graffiti_Color[playerid] = KOLOR_ZIELONY; // ZIELONY
  
-                case 4: Graffiti_Color[playerid] = "00CED1"; // NIEBIESKI
+                case 4: Graffiti_Color[playerid] = KOLOR_NIEBIESKI; // NIEBIESKI
  
-                case 5: Graffiti_Color[playerid] = "C3C3C3";  // SZARY
+                case 5: Graffiti_Color[playerid] = COLOR_CMDHELP;  // SZARY
  
             }
 			graffiti_CreateGraffiti(playerid);
 		}
 		else return GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
 	}
-	//elseif dialogid select list
 	return 1;
 }
 
