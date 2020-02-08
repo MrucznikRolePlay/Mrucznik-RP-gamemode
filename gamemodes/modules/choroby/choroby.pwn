@@ -62,6 +62,7 @@ InfectPlayerWithoutSaving(playerid, eDiseases:disease)
 	if(IsPlayerSick(playerid, disease)) return 1;
 	VECTOR_push_back_val(VPlayerDiseases[playerid], disease);
 	ActivateDiseaseEffect(playerid, disease);
+	return 1;
 }
 
 DiagnosePlayer(playerid, diagnoserid)
@@ -173,6 +174,7 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 			}
 		}
 	}
+	return 1;
 }
 
 RandomizeSouldBeInfected(chance, Float:ratio=1.0) 

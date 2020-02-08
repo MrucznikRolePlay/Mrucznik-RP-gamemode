@@ -62,6 +62,7 @@ kuracja_akceptuj(playerid)
 
     ChatMe(playerid, sprintf("pod³¹cza %s do aparatury i rozpoczyna kuracjê."));
     StartPlayerTreatment(playerid, disease);
+    return 1;
 }
 
 command_kuracja_Impl(playerid, giveplayerid, disease[], money)

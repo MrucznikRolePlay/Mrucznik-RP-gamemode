@@ -55,7 +55,7 @@ command_zastrzyk_Impl(playerid, giveplayerid)
         );
     }
     PlayerImmunity[giveplayerid] = 5;
-    SendClientMessage(playerid, COLOR_GRAY, "Koszt zastrzyku: "INCOLOR_RED"-500$");
+    SendClientMessage(playerid, COLOR_GREY, "Koszt zastrzyku: "INCOLOR_RED"-500$");
     ZabierzKase(playerid, 500);
     return 1;
 }
