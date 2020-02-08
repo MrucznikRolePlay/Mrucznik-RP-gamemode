@@ -17074,8 +17074,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				DialogKupSkin(playerid);
 				return 1;
 			}
+			new bIDE = GetNearBusinessID(playerid);
 			SetPlayerSkin(playerid, ShopSkins[listitem][SKIN_ID]);
 			ZabierzKase(playerid, ShopSkins[listitem][SKIN_PRICE]);
+			DajKaseBizTemp(bIDE, playerid, (ShopSkins[listitem][SKIN_PRICE]/4));
 			PlayerInfo[playerid][pSkin] = ShopSkins[listitem][SKIN_ID]; 
 			
 			sendTipMessage(playerid, sprintf("Kupi³eœ skina za %d$", ShopSkins[listitem][SKIN_PRICE])); 
