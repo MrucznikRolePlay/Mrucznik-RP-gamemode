@@ -209,6 +209,40 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
         }
     }
+    else if(dialogid == DIALOG_BIZ_OWNER)
+    {
+        if(!response)
+        {
+            sendTipMessage(playerid, "Wyszed³eœ z panelu w³aœciciela biznesu!"); 
+            return 1;
+        }
+        else
+        {
+            switch(listitem)
+            {
+                case 0: //Nazwa biz, zwrot
+                {
+                    ShowBusinessOwnerDialog(playerid); 
+                }
+                case 1:
+                {
+                    sendTipMessage(playerid, "Ju¿ nied³ugo!"); 
+                }
+                case 2:
+                {
+                    sendTipMessage(playerid, "Ju¿ nied³ugo!");
+                }
+                case 3:
+                {
+                    sendTipMessage(playerid, "Ju¿ nied³ugo!"); 
+                }
+                case 4:
+                {
+                    sendTipMessage(playerid, "Ju¿ nied³ugo!"); 
+                }
+            }
+        }
+    }
     return 1;
 }
 

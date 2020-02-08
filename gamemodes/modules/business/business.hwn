@@ -38,6 +38,7 @@ enum eBiz {
 	b_Location[64],
 	b_cost,
 	b_moneyPocket,
+	b_tempPocket,
     b_TYPE,
     b_TYPE2,
 	b_motd

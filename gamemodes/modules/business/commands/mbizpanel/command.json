@@ -1,0 +1,11 @@
+{
+    "name": "mbizpanel",
+    "description": "Komenda, która pozwala zarz¹dzaæ biznesem",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "bizpanel"
+    ],
+    "parameters": [],
+    "date": "08.02.2020"
+}

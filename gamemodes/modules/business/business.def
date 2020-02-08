@@ -25,6 +25,7 @@
 //------------------<[ Define: ]>-------------------
 #define LVL_TO_BUY_BIZ 5
 #define MAX_CASH_IN_MONEYPOCKET 20000000//20kk 
+#define MAX_CASH_IN_TEMPPOCKET 10000000//10kk
 
 //dialogi
 #define DIALOG_BIZ_BUY 6550
@@ -33,6 +34,7 @@
 #define DIALOG_BIZ_BUYBOX 6553
 #define BIZ_DIALOG_INFO 6554
 #define DIALOG_BIZ_ADMINEDIT 6555
+#define DIALOG_BIZ_OWNER 6556
 #define MAX_BIZ 200
 
 //koszta dodatkowe

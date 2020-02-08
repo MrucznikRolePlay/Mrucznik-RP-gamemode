@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 mbizpanel                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,29 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "bizback\bizback.pwn"
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbizcreate\mbizcreate.pwn"
-#include "mbizedit\mbizedit.pwn"
-#include "mbizinfo\mbizinfo.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-#include "mbizpanel\mbizpanel.pwn"
-#include "mgotobiz\mgotobiz.pwn"
-
+#include "mbizpanel_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_mbizpanel()
 {
-    command_bizback();
-    command_mbizbuy();
-    command_mbizcreate();
-    command_mbizedit();
-    command_mbizinfo();
-    command_mbiznesy();
-    command_mbizpanel();
-    command_mgotobiz();
+    new command = Command_GetID("mbizpanel");
+
+    //aliases
+    Command_AddAlt(command, "bizpanel");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:mbizpanel(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala zarz¹dzaæ biznesem");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_mbizpanel_Impl(playerid);
 }
