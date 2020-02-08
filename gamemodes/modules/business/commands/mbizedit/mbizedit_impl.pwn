@@ -44,7 +44,7 @@ command_mbizedit_Impl(playerid, bIDE)
     GetPlayerPos(playerid, pPosX, pPosY, pPosZ);
     if(bChoiceEdit == BIZ_CHOICE_NOTHING)
     {
-        ShowPlayerDialogEx(playerid, DIALOG_BIZ_ADMINEDIT, DIALOG_STYLE_LIST, "Mrucznik Role Play", "Przenieœ wejœcie\nDodaj wyjœcie\nUsuñ biznes\nUsuñ w³aœciciela\nWyzeruj pieni¹dze biznesu\nZmieñ cene biznesu", "Dalej", "Odrzuæ"); 
+        ShowPlayerDialogEx(playerid, DIALOG_BIZ_ADMINEDIT, DIALOG_STYLE_LIST, nameToDialogs, "Przenieœ wejœcie\nDodaj wyjœcie\nUsuñ biznes\nUsuñ w³aœciciela\nWyzeruj pieni¹dze biznesu\nZmieñ cene biznesu", "Dalej", "Odrzuæ"); 
     }
     else if(bChoiceEdit == BIZ_CHOICE_PRZENIES)
     {

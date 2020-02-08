@@ -41,10 +41,17 @@ enum eBiz {
 	b_tempPocket,
     b_TYPE,
     b_TYPE2,
-	b_motd
+	b_motd[64],
+	b_tempPocketUsage, 
+	b_lastOwnerDate,
+	b_ulepszenie1,//Zmiana nazwy
+	b_ulepszenie2,//Zmiana MOTD
+	b_ulepszenie3,//Mo¿liwoœæ spawnu
+	b_ulepszenie4,//sejf g³ówny
+	b_ulepszenie5//Sejf tymczasowy
 };
 new mBiz[MAX_BIZ][eBiz]; 
-new loadedBiz; 
+new loadedBiz;
 
 //-----------------<[ Zmienne: ]>-------------------
 //------------------<[ Forwardy: ]>--------------------

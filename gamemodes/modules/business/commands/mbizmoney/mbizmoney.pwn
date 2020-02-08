@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                  mbizinfo                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 mbizmoney                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,37 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 05.02.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_mbizinfo_Impl(playerid)
+
+//-------<[ include ]>-------
+#include "mbizmoney_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_mbizmoney()
 {
-    if(GetPVarInt(playerid, "MozeUzycKomendyBiz") == 1)
-    {
-        sendErrorMessage(playerid, "Odczekaj 5 sekund!"); 
-        return 1;
-    }
-    new string[250];
-    for(new i; i <= MAX_BIZ; i++)
-    {
-        if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]))
-        {
-            format(string, sizeof(string), "Nazwa: %s\nW³aœciciel: %s\nTyp: %s\nLokalizacja: %s\nCena: %d\ntID: %d",
-            mBiz[i][b_Name],
-            mBiz[i][b_Name_Owner],
-            GetTypeNameBiz(i),
-            mBiz[i][b_Location],
-            mBiz[i][b_cost],
-            i);
-            ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Okej", "");
-            break;  
-        }  
-    }
-    return 1;
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:mbizmoney(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda pozwalaj¹ca uzyskaæ pieni¹dze z biznesu");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_mbizmoney_Impl(playerid);
+}

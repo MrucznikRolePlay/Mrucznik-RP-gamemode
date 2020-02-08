@@ -26,7 +26,7 @@
 command_mbiznesy_Impl(playerid)
 {
     SendClientMessage(playerid, COLOR_GREEN, "==========<[ Biznesy Mrucznik Role Play 2.0 ]>==========");
-    SendClientMessage(playerid, COLOR_WHITE, "Autor: Simeone, Sanda³");
+    SendClientMessage(playerid, COLOR_WHITE, "Autor: Simeone");
     SendClientMessage(playerid, COLOR_WHITE, "Nowy system biznesów Mrucznik Role Play opiera siê na dowolnoœci wyboru."); 
     SendClientMessage(playerid, COLOR_WHITE, "Gracz mo¿e wybraæ jaki typ biznesu chce prowadziæ, a tak¿e swobodnie wybraæ lokalizacjê w mieœcie.");
     SendClientMessage(playerid, COLOR_WHITE, "Biznesy s¹ stale aktualizowane, zapisywane, dokumentowane - dziêki czemu straty z tym zwi¹zane s¹ minimalne.");
