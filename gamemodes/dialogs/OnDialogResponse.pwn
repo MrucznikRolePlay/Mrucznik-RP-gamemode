@@ -16826,6 +16826,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
+	else if (dialogid == DIALOG_KUPSKIN)
+	{
+		if(response) 
+		{
+			if(listitem < 0 || listitem >= sizeof(ShopSkins) || ShopSkins[listitem][SKIN_TYPE] != SKIN_TYPE_DEFAULT) 
+			{
+				//should never happend
+				return 1;
+			}
+			if(kaska[playerid] < ShopSkins[listitem][SKIN_PRICE])
+			{
+				sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki, na tego skina");
+				DialogKupSkin(playerid);
+				return 1;
+			}
+			new bIDE = GetNearBusinessID(playerid);
+			SetPlayerSkin(playerid, ShopSkins[listitem][SKIN_ID]);
+			ZabierzKase(playerid, ShopSkins[listitem][SKIN_PRICE]);
+			DajKaseBizTemp(bIDE, playerid, (ShopSkins[listitem][SKIN_PRICE]/4));
+			PlayerInfo[playerid][pSkin] = ShopSkins[listitem][SKIN_ID]; 
+			
+			sendTipMessage(playerid, sprintf("Kupi³eœ skina za %d$", ShopSkins[listitem][SKIN_PRICE])); 
+			Log(payLog, INFO, "%s kupi³ skina %d za %d$", GetPlayerLogName(playerid), ShopSkins[listitem][SKIN_ID], ShopSkins[listitem][SKIN_PRICE]);
+			return 1;
+		}
+	}
 	return 0;
 }
 //ondialogresponse koniec
