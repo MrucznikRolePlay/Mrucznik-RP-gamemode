@@ -24,7 +24,7 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 #define LVL_TO_BUY_BIZ 5
-
+#define MAX_CASH_IN_MONEYPOCKET 20000000//20kk 
 
 //dialogi
 #define DIALOG_BIZ_BUY 6550
