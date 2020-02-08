@@ -44,6 +44,7 @@ enum eBiz {
 	b_motd[64],
 	b_tempPocketUsage, 
 	b_lastOwnerDate,
+	b_neededType, 
 	b_ulepszenie1,//Zmiana nazwy
 	b_ulepszenie2,//Zmiana MOTD
 	b_ulepszenie3,//Mo¿liwoœæ spawnu

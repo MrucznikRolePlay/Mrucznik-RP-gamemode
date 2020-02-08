@@ -107,15 +107,31 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 1:
                 {
+                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
+                    pBizID, 
+                    mBiz[pBizID][b_cost]+COST_SHOPCLOTHES, 
+                    mBiz[pBizID][b_Location]); 
+                    SetPVarInt(playerid, "BuyBizChoice", 2); 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Kupujê", "Rezygnujê");
 
                 }
                 case 2:
                 {
-
+                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
+                    pBizID, 
+                    mBiz[pBizID][b_cost]+COST_CASINO, 
+                    mBiz[pBizID][b_Location]); 
+                    SetPVarInt(playerid, "BuyBizChoice", 3); 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Kupujê", "Rezygnujê");
                 }
                 case 3:
                 {
-
+                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
+                    pBizID, 
+                    mBiz[pBizID][b_cost]+COST_RESTAURANT, 
+                    mBiz[pBizID][b_Location]); 
+                    SetPVarInt(playerid, "BuyBizChoice", 4); 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Kupujê", "Rezygnujê");
                 }
             }
         }
@@ -125,7 +141,16 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(response)
         {
             new pBizID = GetPVarInt(playerid, "BuyBiz_ID");
-            new bChoice = GetPVarInt(playerid, "BuyBizChoice"); 
+            new bChoice = GetPVarInt(playerid, "BuyBizChoice");
+            if(mBiz[pBizID][b_neededType] != 9999)
+            {
+                if(mBiz[pBizID][b_neededType] != bChoice)
+                {
+                    sendErrorMessage(playerid, "Tego biznesu nie mo¿esz kupiæ z tym typem!");
+                    sendTipMessage(playerid, "Administrator zablokowa³ mo¿liwoœæ kupna tego biznesu o wybranym przez Ciebie przeznaczeniu.") ;
+                    return 1;
+                }
+            } 
             if(bChoice == 1)//Zakup sklepu 24-7
             {
                 if(mBiz[pBizID][b_ownerUID] == 0)
@@ -144,6 +169,49 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 else{ 
                     sendErrorMessage(playerid, "Ten biznes ma ju¿ swojego w³aœciciela!"); 
+                    return 1;
+                }
+            }
+            else if(bChoice == 2)//Zakup sklepu z ubraniami
+            {
+                if(mBiz[pBizID][b_ownerUID] == 0)
+                {
+                    if(kaska[playerid] < (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES))
+                    {
+                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+                        return 1;
+                    }
+                    ZabierzKase(playerid, (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
+                    GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_CLOTHESSHOP);
+                    Log(businessLog, INFO, "%s kupil biznes %s jako sklep z ubraniami za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
+
+                }
+                else 
+                {
+                    sendErrorMessage(playerid, "Ten biznes ma ju¿ swojego w³aœciciela!"); 
+                    return 1;
+                }
+            }
+            else if(bChoice == 3)//Zakup kasyna
+            {
+                sendTipMessage(playerid, "Opcja chwilowo wy³¹czona!"); 
+            }
+            else if(bChoice == 4)//Zakup restauracji
+            {
+                if(mBiz[pBizID][b_ownerUID] == 0)
+                {
+                    if(kaska[playerid] < (mBiz[pBizID][b_cost]+COST_RESTAURANT))
+                    {
+                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki na ten biznes!"); 
+                        return 1;
+                    }
+                    ZabierzKase(playerid, (mBiz[pBizID][b_cost]+COST_RESTAURANT));
+                    GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_RESTAURANT);
+                    Log(businessLog, INFO, "%s kupil biznes %s jako restauracje za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
+                }
+                else 
+                {
+                    sendErrorMessage(playerid, "Ten biznes posiada ju¿ w³aœciciela!"); 
                     return 1;
                 }
             }
@@ -207,7 +275,46 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     sendTipMessage(playerid, "Ta opcja pojawi siê ju¿ nied³ugo!"); 
                 }
+                case 6://Okreœl biznes
+                {
+                    ShowPlayerDialogEx(playerid, DIALOG_OKRESL_BIZNES, DIALOG_STYLE_LIST, nameToDialogs, 
+                    "Sklep 24-7\nSklep z ubraniami\nKasyno\nRestauracja", "Dalej", "Odrzuæ"); 
+                }
             }
+        }
+    }
+    else if(dialogid == DIALOG_OKRESL_BIZNES)
+    {
+        if(!response)
+        {
+            sendTipMessage(playerid, "Jak Bóg rzek³, tak siê niech stanie - dialog zamkniêty.");
+            return 1;
+        }
+        else 
+        {
+            new string[124];
+            new bIDE = GetPVarInt(playerid, "dialog-bIDE-admin");
+            SetPVarInt(playerid, "bChoiceOKRESL", listitem+1); 
+            format(string, sizeof(string), "Czy chcesz aby biznes %s by³\nmo¿liwy do zakupienia tylko i wy³¹cznie jako\nbiznes o typie wybranym przez Ciebie?",
+            GetBusinessName(bIDE));
+            ShowPlayerDialogEx(playerid, DIALOG_OKRESL_POTWIERDZ, DIALOG_STYLE_MSGBOX, nameToDialogs,
+            string, "Tak", "Nie"); 
+            return 1;
+        }
+    }
+    else if(dialogid == DIALOG_OKRESL_POTWIERDZ)
+    {
+        if(response)
+        {
+            new bIDE = GetPVarInt(playerid, "dialog-bIDE-admin"); 
+            mBiz[bIDE][b_neededType] = GetPVarInt(playerid, "bChoiceOKRESL"); 
+            sendTipMessage(playerid, "Pomyœlnie ustawi³eœ wymóg dla biznesu.");
+            SetPVarInt(playerid, "dialog-bIDE-admin", INVALID_BUSINESSID);  
+        }
+        else 
+        {
+            SetPVarInt(playerid, "bChoiceOKRESL", 9999);
+            sendTipMessage(playerid, "Anulowano");
         }
     }
     else if(dialogid == DIALOG_BIZ_OWNER)
@@ -497,7 +604,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 sendErrorMessage(playerid, "Nazwa nie mo¿e byæ wulgarna!");
                 return 1;
             }
-            format(string, sizeof(string), "Zmieni³eœ nazwê biznesu %s na %s", mBiz[bIDE][b_Name], inputtext); 
+            format(string, sizeof(string), "Zmieni³eœ nazwê biznesu %s na %s", GetBusinessName(bIDE), inputtext); 
             sendTipMessage(playerid, string); 
             Log(businessLog, INFO, "%s zmienil nazwe biznesu %s na %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE),inputtext);
             ZabierzKase(playerid, B_CENA_ZMIENAZWE); 
@@ -530,7 +637,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 sendErrorMessage(playerid, "MOTD nie mo¿e byæ wulgarne!");
                 return 1;
             }
-            format(string, sizeof(string), "Zmieni³eœ MOTD biznesu %s na %s", mBiz[bIDE][b_Name], inputtext); 
+            format(string, sizeof(string), "Zmieni³eœ MOTD biznesu %s na %s", GetBusinessName(bIDE), inputtext); 
             sendTipMessage(playerid, string); 
             Log(businessLog, INFO, "%s zmienil motd biznesu %s na %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE),inputtext);
             ZabierzKase(playerid, B_CENA_ZMIENMOTD); 
