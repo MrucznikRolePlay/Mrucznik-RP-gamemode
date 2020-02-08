@@ -45,6 +45,14 @@ stock FreeBizID()
 	} 
 	return INVALID_BUSINESSID;
 }
+GetBusinessName(bIDE)
+{
+	return mBiz[bIDE][b_Name]; 
+}
+GetBusinessOwnerName(bIDE)
+{
+	return mBiz[bIDE][b_Name_Owner]; 
+}
 stock CreateMBiz(playerid, bCost, bName[64])
 {
 	//=====================================[Sprawdzanie poprawnoœci]============================
@@ -63,7 +71,7 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	new query[1024];
 	new bIDE = FreeBizID();
 	//=====================================[Polecenie do bazy danych]============================
-	format(query, sizeof(query), "INSERT INTO `mru_biz` (`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Cost`, `Location`, `MoneyPocket`) VALUES ('%d', '%d', '%s', '%s', '%f', '%f', '%f', '%f', '%f', '%f', '%d', '%d', '%d', '%d', '%s', '%d')", 
+	format(query, sizeof(query), "INSERT INTO `mru_biz` (`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Cost`, `Location`, `MoneyPocket`, `bTYPE`, `bTYPE2`, `ulepszenie1`, `ulepszenie2`, `ulepszenie3`, `ulepszenie4`, `ulepszenie5`, `bMOTD`, `neededType`) VALUES ('%d', '%d', '%s', '%s', '%f', '%f', '%f', '%f', '%f', '%f', '%d', '%d', '%d', '%d', '%s', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%s', '%d')", 
 	bIDE, 
 	0,
 	"Brak",
@@ -79,7 +87,16 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	PLOCAL_DEFAULT,
 	bCost,
 	pZone,
-	0);
+	0,
+	BTYPE_DEFAULT,
+	BTYPE_DEFAULT,
+	0,
+	0,
+	0,
+	0,
+	0,
+	"[Default MOTD] Witaj w biznesie",
+	9999);
 	mysql_query(query);
 
 
@@ -99,11 +116,12 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	mBiz[bIDE][b_vw] = 0;
 	mBiz[bIDE][b_pLocal] = PLOCAL_DEFAULT; 
 	mBiz[bIDE][b_cost] = bCost;
+	mBiz[bIDE][b_neededType] = 9999;
 	mysql_real_escape_string(pZone, mBiz[bIDE][b_Location]);
 	mBiz[bIDE][b_TYPE] = BTYPE_DEFAULT; 
 	mBiz[bIDE][b_TYPE2] = BTYPE2_DEFAULT; 
-	businessText[bIDE] = CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 10.0);
-    businessIcon[bIDE] = CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
+	CreateBusiness3DText(bIDE);
+	CreateBusinessIcon(bIDE); 
 	loadedBiz++; 
 	Log(businessLog, INFO, "BusinessGod %s stworzyl biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	return 1;
@@ -155,7 +173,7 @@ GiveBizToPlayer(playerid, bIDE, bType, bType2)
 	mBiz[bIDE][b_TYPE] = bType; 
 	mBiz[bIDE][b_TYPE2] = bType2; 
 	SendClientMessage(playerid, COLOR_GREEN, "======<[Zakupi³eœ nowy biznes]>======");
-	format(string, sizeof(string), "ID: [%d] NAME: [%s] LOCATION: [%s]", bIDE, mBiz[bIDE][b_Name], mBiz[bIDE][b_Location]); 
+	format(string, sizeof(string), "ID: [%d] NAME: [%s] LOCATION: [%s]", bIDE, GetBusinessLogName(bIDE), mBiz[bIDE][b_Location]); 
 	SendClientMessage(playerid, COLOR_RED, string); 
 	sendTipMessage(playerid, "Mo¿esz zarz¹dzaæ swoim biznesem za pomoc¹ /bizlider"); 
 	Log(businessLog, INFO, "Gracz %s kupil biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
@@ -297,7 +315,7 @@ PlayerRunWithMoney(playerid)
 	sendTipMessage(playerid, "Uwa¿aj na z³odziejaszków, którzy czaj¹ siê za ka¿dym rogiem. Twoim zadaniem jest dostanie siê [.]");
 	sendTipMessage(playerid, "[.] bezpiecznie do banku i wpisanie komendy /mbizmoney. Mo¿esz t¹ akcje wykonywaæ maksymalnie 3x/dzieñ.");
 	sendTipMessageEx(playerid, COLOR_RED, "Uwaga! Je¿eli wyrzuci Ciê teraz z serwera - gotówka nie wróci do biznesu!");
-	format(string, sizeof(string), "%s wyci¹ga z sejfu %s gotówkê w wysokoœci $%d", GetNick(playerid), mBiz[bIDE][b_Name], mBiz[bIDE][b_tempPocket]);
+	format(string, sizeof(string), "%s wyci¹ga z sejfu %s gotówkê w wysokoœci $%d", GetNick(playerid), GetBusinessName(bIDE), mBiz[bIDE][b_tempPocket]);
 	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE); 
 	PlayerMoneyFromBiz[playerid] = mBiz[bIDE][b_tempPocket]; 
 	mBiz[bIDE][b_tempPocket] = 0; 
@@ -307,7 +325,7 @@ PlayerRunWithMoney(playerid)
 SendBizLogoMessage(playerid, bIDE)
 {
 	new string[124];
-	format(string, sizeof(string), "=========<[ %s ]>========", mBiz[bIDE][b_Name]);
+	format(string, sizeof(string), "=========<[ %s ]>========", GetBusinessName(bIDE));
 	SendClientMessage(playerid, COLOR_GREEN, string); 
 	return 1;
 }
@@ -327,7 +345,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Pracownicy\t \n\
 		Sejfy\t \n\
 		Zarzadzaj drzwiami\t \n\
-		Dodatki\t ", mBiz[bIDE][b_Name]); 
+		Dodatki\t ", GetBusinessName(bIDE)); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER, DIALOG_STYLE_TABLIST, nameToDialogs, 
 		string, "Akceptuj", "Odrzuæ"); 
 	}
@@ -336,7 +354,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
 		Pracownicy On-line:\t{33AA33}%d\n\
 		Przyjmij\t \n\
-		Zwolnij\t ", mBiz[bIDE][b_Name], 0); 
+		Zwolnij\t ", GetBusinessName(bIDE), 0); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER2, DIALOG_STYLE_TABLIST, nameToDialogs, 
 		string, "Akceptuj", "Wstecz"); 
 	}
@@ -347,7 +365,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Wp³aæ\t \n\
 		Wyp³aæ\t \n\
 		Stan sejfu T:\t{33AA33}$%d\n\
-		Wyp³aæ\t ", mBiz[bIDE][b_Name], mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket]); 
+		Wyp³aæ\t ", GetBusinessName(bIDE), mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket]); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER3, DIALOG_STYLE_TABLIST, nameToDialogs, 
 		string, "Akceptuj", "Wstecz"); 
 	}
@@ -356,7 +374,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		format(string, sizeof(string), "{F3EB34}====<[%s]>====\n\
 		Otwórz\t \n\
 		Zamknij\t \n\
-		Ustal godziny otwarcia\t ", mBiz[bIDE][b_Name]); 
+		Ustal godziny otwarcia\t ", GetBusinessName(bIDE)); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER4, DIALOG_STYLE_TABLIST, nameToDialogs, 
 		string, "Akceptuj", "Wstecz"); 
 	}
@@ -368,7 +386,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Spawn pod biznesem\t{33AA33}$%d\n\
 		Rozwój sejfu G\t{33AA33}$%d\n\
 		Rozwój sejfu T\t{33AA33}$%d",
-		mBiz[bIDE][b_Name],
+		GetBusinessName(bIDE),
 		B_CENA_ZMIENAZWE,
 		B_CENA_ZMIENMOTD,
 		B_CENA_ZMIENSPAWN,
@@ -428,7 +446,7 @@ IsPlayerNearBusinessDoor(playerid)//Powoduje wejœcie do biznesu
 				SetPlayerVirtualWorld(playerid, 0);
 				SetPlayerInterior(playerid, 0); 
 				SetPLocal(playerid, PLOCAL_DEFAULT);
-				format(string, sizeof(string), "Zapraszamy ponownie do %s!", mBiz[i2][b_Name]);
+				format(string, sizeof(string), "Zapraszamy ponownie do %s!", GetBusinessName(i2));
 				sendTipMessageEx(playerid, COLOR_GREEN, string); 
 				return 1;	
 			}

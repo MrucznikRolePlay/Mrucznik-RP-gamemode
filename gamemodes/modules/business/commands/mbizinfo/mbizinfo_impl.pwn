@@ -44,8 +44,8 @@ command_mbizinfo_Impl(playerid)
             if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]))
             {
                 format(string, sizeof(string), " \t{FF1493}%s\n{FFFFFF}W³aœciciel: {747b41}%s\n{FFFFFF}Typ: {747b41}%s\n{FFFFFF}Lokalizacja: {747b41}%s\n{FFFFFF}Cena: {747b41}$%d\n{FFFFFF}TID: {747b41}%d\n{FFFFFF}U1: {747b41}%d | {FFFFFF}U2: {747b41}%d | {FFFFFF}U3: {747b41}%d | {FFFFFF}U4: {747b41}%d | {FFFFFF}U5: {747b41}%d",
-                mBiz[i][b_Name],
-                mBiz[i][b_Name_Owner],
+                GetBusinessName(i),
+                GetBusinessOwnerName(i),
                 GetTypeNameBiz(i),
                 mBiz[i][b_Location],
                 mBiz[i][b_cost],
