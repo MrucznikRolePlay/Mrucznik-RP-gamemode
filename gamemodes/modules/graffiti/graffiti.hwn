@@ -22,27 +22,28 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-/*
-enum gInfo
-{
-    gID,
-    gText[128],
-    gColor,
-    Float:Xpos,
-    Float:Ypos,
-    Float:Zpos,
-    Float:XYpos,
-    Float:YYpos,
-    Float:ZYpos,
-    pCreator[MAX_PLAYER_NAME],
-    pUID,
-}
+
+// enum gInfo
+// {
+//     gID,
+//     gText[128],
+//     gColor,
+//     Float:Xpos,
+//     Float:Ypos,
+//     Float:Zpos,
+//     Float:XYpos,
+//     Float:YYpos,
+//     Float:ZYpos,
+//     pCreator[MAX_PLAYER_NAME],
+//     pUID,
+// }
 //-----------------<[ Zmienne: ]>-------------------
-new GraffitiInfo[GRAFFITI_MAX][gInfo];
+// new GraffitiInfo[GRAFFITI_MAX][gInfo];
 new Graffiti_Color[MAX_PLAYERS][12];
 new Graffiti_Text[MAX_PLAYERS][128];
 new pGraffiti[MAX_PLAYERS];
-*/
+
 
 //------------------<[ Forwardy: ]>--------------------
+forward OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz);
 //end
