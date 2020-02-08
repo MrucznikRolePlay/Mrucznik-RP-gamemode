@@ -295,7 +295,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 {
 	
 	new bIDE = PlayerInfo[playerid][pBusinessOwner]; 
-	new string[256]; 
+	new string[312]; 
 	if(bIDE == INVALID_BUSINESSID)
 	{
 		sendErrorMessage(playerid, "Nieprawid³owa w³asnoœæ biznesu"); 
@@ -303,31 +303,51 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	}
 	if(dialogType ==  DIALOG_MAIN)
 	{
-		format(string, sizeof(string), "\t\t====<[%s]>====\nPracownicy\nSejfy\nZarzadzaj drzwiami\nDodatki", mBiz[bIDE][b_Name]); 
+		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		Pracownicy\t \n\
+		Sejfy\t \n\
+		Zarzadzaj drzwiami\t \n\
+		Dodatki\t ", mBiz[bIDE][b_Name]); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER, DIALOG_STYLE_TABLIST, nameToDialogs, 
 		string, "Akceptuj", "Odrzuæ"); 
 	}
 	else if(dialogType == DIALOG_WORKERS)
 	{
-		format(string, sizeof(string), "\t\t====<[%s]>====\nPracownicy On-line:\t%d\nPrzyjmij\nZwolnij", mBiz[bIDE][b_Name], 0); 
+		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		Pracownicy On-line:\t{33AA33}%d\n\
+		Przyjmij\t \n\
+		Zwolnij\t ", mBiz[bIDE][b_Name], 0); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER2, DIALOG_STYLE_TABLIST, nameToDialogs, 
 		string, "Akceptuj", "Wstecz"); 
 	}
 	else if(dialogType == DIALOG_SEJF)
 	{
-		format(string, sizeof(string), "\t\t====<[%s]>====\nStan sejfu G:\t$%d\nWp³aæ\nWyp³aæ\nStan sejfu T:\t$%d\nWyp³aæ", mBiz[bIDE][b_Name], mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket]); 
+		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		Stan sejfu G:\t{33AA33}$%d\n\
+		Wp³aæ\t \n\
+		Wyp³aæ\t \n\
+		Stan sejfu T:\t{33AA33}$%d\n\
+		Wyp³aæ\t ", mBiz[bIDE][b_Name], mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket]); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER3, DIALOG_STYLE_TABLIST, nameToDialogs, 
 		string, "Akceptuj", "Wstecz"); 
 	}
 	else if(dialogType == DIALOG_DOORS)
 	{
-		format(string, sizeof(string), "\t\t====<[%s]>====\nOtwórz\nZamknij\nUstal godziny otwarcia", mBiz[bIDE][b_Name]); 
+		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		Otwórz\t \n\
+		Zamknij\t \n\
+		Ustal godziny otwarcia\t ", mBiz[bIDE][b_Name]); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER4, DIALOG_STYLE_TABLIST, nameToDialogs, 
 		string, "Akceptuj", "Wstecz"); 
 	}
 	else if(dialogType == DIALOG_ADDS)
 	{
-		format(string, sizeof(string), "\t\t====<[%s]>====\nZmiana nazwy\t$%d\nZmiana MOTD\t$%d\nSpawn pod biznesem\t$%d\nRozwój sejfu G\t$%d\nRozwój sejfu T\t$%d",
+		format(string, sizeof(string), " \t{F3EB34}====<[%s]>====\n\
+		Zmiana nazwy\t{33AA33}$%d\n\
+		Zmiana MOTD\t{33AA33}$%d\n\
+		Spawn pod biznesem\t{33AA33}$%d\n\
+		Rozwój sejfu G\t{33AA33}$%d\n\
+		Rozwój sejfu T\t{33AA33}$%d",
 		mBiz[bIDE][b_Name],
 		B_CENA_ZMIENAZWE,
 		B_CENA_ZMIENMOTD,
