@@ -1056,9 +1056,10 @@ new playerSeeSpec[MAX_PLAYERS];
 new gRO[MAX_PLAYERS];
 
 new gBizSet[MAX_PLAYERS]=false; 
+new PlayerMoneyFromBiz[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS]; 
 new Text3D:HiddenPlayerName[MAX_PLAYERS];
-
+new nameToDialogs[64]; 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1075,6 +1076,7 @@ ClearVariableConnect(playerid)
 	playerSeeSpec[playerid] = INVALID_SPECTATE_ID; 
 	isNaked[playerid] = 0; 
 	PlayerInfo[playerid][pBusinessOwner] = 9999;
+	PlayerMoneyFromBiz[playerid] = 0;
 	return 1;
 }
 ClearVariableDisconnect(playerid)
