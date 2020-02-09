@@ -67,6 +67,7 @@ hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Fl
     {
         if( GetPVarInt(playerid, "GraffitiCreating") == 1 )
         {
+			new f = GetPVarInt(playerid, "GraffitiID");
 			GraffitiInfo[f][grafXpos] = x;
 			GraffitiInfo[f][grafYpos] = y;
 			GraffitiInfo[f][grafZpos] = z;
@@ -120,6 +121,7 @@ graffiti_ReloadForPlayers(id)
 graffiti_CreateGraffiti(playerid)
 {
 	new f = graffiti_GetNewID();
+	SetPVarInt(playerid, "GraffitiID", f);
 	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
 	GraffitiInfo[f][grafXpos] = PlayerPos[playerid][0];
 	GraffitiInfo[f][grafYpos] = PlayerPos[playerid][1];
