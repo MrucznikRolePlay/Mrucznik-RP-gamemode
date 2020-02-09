@@ -1068,7 +1068,7 @@ new gBizSet[MAX_PLAYERS]=false;
 new PlayerMoneyFromBiz[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS]; 
 new Text3D:HiddenPlayerName[MAX_PLAYERS];
-new nameToDialogs[64]; 
+new defaultDialogCaption[64]; 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------

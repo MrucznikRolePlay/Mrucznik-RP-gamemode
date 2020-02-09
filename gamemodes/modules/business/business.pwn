@@ -359,7 +359,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Sejfy\t \n\
 		Zarzadzaj drzwiami\t \n\
 		Dodatki\t ", GetBusinessName(bIDE)); 
-		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER, DIALOG_STYLE_TABLIST, defaultDialogCaption, 
 		string, "Akceptuj", "Odrzuæ"); 
 	}
 	else if(dialogType == DIALOG_WORKERS)
@@ -368,7 +368,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Pracownicy On-line:\t{33AA33}%d\n\
 		Przyjmij\t \n\
 		Zwolnij\t ", GetBusinessName(bIDE), 0); 
-		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER2, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER2, DIALOG_STYLE_TABLIST, defaultDialogCaption, 
 		string, "Akceptuj", "Wstecz"); 
 	}
 	else if(dialogType == DIALOG_SEJF)
@@ -379,7 +379,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Wyp³aæ\t \n\
 		Stan sejfu T:\t{33AA33}$%d\n\
 		Wyp³aæ\t ", GetBusinessName(bIDE), mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket]); 
-		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER3, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER3, DIALOG_STYLE_TABLIST, defaultDialogCaption, 
 		string, "Akceptuj", "Wstecz"); 
 	}
 	else if(dialogType == DIALOG_DOORS)
@@ -388,7 +388,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Otwórz\t \n\
 		Zamknij\t \n\
 		Ustal godziny otwarcia\t ", GetBusinessName(bIDE)); 
-		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER4, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER4, DIALOG_STYLE_TABLIST, defaultDialogCaption, 
 		string, "Akceptuj", "Wstecz"); 
 	}
 	else if(dialogType == DIALOG_ADDS)
@@ -405,7 +405,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		B_CENA_ZMIENSPAWN,
 		B_CENA_SEJFG,
 		B_CENA_SEJFT); 
-		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER5, DIALOG_STYLE_TABLIST, nameToDialogs, 
+		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER5, DIALOG_STYLE_TABLIST, defaultDialogCaption, 
 		string, "Akceptuj", "Wstecz"); 
 	}
 	else
