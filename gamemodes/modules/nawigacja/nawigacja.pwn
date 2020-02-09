@@ -31,7 +31,7 @@ ShowNawiDialog(playerid, dTYPE)
 	new string[456];
 	if(dTYPE == DIALOG_NAWI_MAIN)
 	{
-		ShowPlayerDialogEx(playerid, DIALOG_NAWI_MAIN, DIALOG_STYLE_LIST, defaultDialogCaption, "Znane Miejsca\nBiznesy\nUlice\nTelefon innego gracza", "Dalej", "WyjdŸ"); 
+		ShowPlayerDialogEx(playerid, DIALOG_NAWI_MAIN, DIALOG_STYLE_LIST, "Nawigacja", "Znane Miejsca\nBiznesy\nUlice\nTelefon innego gracza", "Dalej", "WyjdŸ"); 
 	}
 	else if(dTYPE == DIALOG_NAWI_ZNANEMIEJSCA)
 	{
@@ -49,13 +49,13 @@ ShowNawiDialog(playerid, dTYPE)
 		GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_BAZA][N_POSX], posNawi[NAWI_BAZA][N_POSY], posNawi[NAWI_BAZA][N_POSZ]),
 		GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_VINYL][N_POSX], posNawi[NAWI_VINYL][N_POSY], posNawi[NAWI_VINYL][N_POSZ]),
 		GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_IBIZA][N_POSX], posNawi[NAWI_IBIZA][N_POSY], posNawi[NAWI_IBIZA][N_POSZ]));
-		ShowPlayerDialogEx(playerid, DIALOG_NAWI_ZNANEMIEJSCA, DIALOG_STYLE_TABLIST_HEADERS, defaultDialogCaption, 
+		ShowPlayerDialogEx(playerid, DIALOG_NAWI_ZNANEMIEJSCA, DIALOG_STYLE_TABLIST_HEADERS, SetDefaultCaption(), 
 		string, "JedŸ", "WyjdŸ");
 	}
 	else if(dTYPE == DIALOG_NAWI_BIZNESY)
 	{
 		//sendErrorMessage(playerid, "Wyst¹pi³ problem - nawigacja nie mo¿e po³aczyæ siê z baz¹ biznesów");
-		ShowPlayerDialogEx(playerid, DIALOG_NAWI_BIZNESY, DIALOG_STYLE_INPUT, defaultDialogCaption, "WprowadŸ poni¿ej ID b¹dŸ nazwê biznesu,\nktóry chcesz zlokalizowaæ.\nSystem przeanalizuje wszystkie istniej¹ce biznesy\npod k¹tem twoich wskazañ - mo¿e to trochê potrwaæ!",
+		ShowPlayerDialogEx(playerid, DIALOG_NAWI_BIZNESY, DIALOG_STYLE_INPUT, SetDefaultCaption(), "WprowadŸ poni¿ej ID b¹dŸ nazwê biznesu,\nktóry chcesz zlokalizowaæ.\nSystem przeanalizuje wszystkie istniej¹ce biznesy\npod k¹tem twoich wskazañ - mo¿e to trochê potrwaæ!",
 		"Akceptuj", "WyjdŸ");
 	}
 	else if(dTYPE == DIALOG_NAWI_ULICE)
