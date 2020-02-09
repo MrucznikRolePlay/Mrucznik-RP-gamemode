@@ -338,6 +338,7 @@ public OnGameModeInit()
     //noYsi
     LoadPrzewinienia();
 	
+	graffiti_LoadMySQL();
 	//discordconnect
 	DiscordConnectInit();
 
