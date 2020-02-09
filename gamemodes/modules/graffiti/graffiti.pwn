@@ -93,21 +93,34 @@ hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Fl
     return 1;
 }
 //-----------------<[ Funkcje: ]>-------------------
+GrafExist(value)
+{
+	if(GraffitiInfo[value][grafXpos] != 0)
+	{
+		return true;
+	}
+	return false; 
+}
+stock FreeGrafID()
+{
+	for(new i; i <= GRAFFITI_MAX; i++)
+	{
+		if(!GrafExist(i))
+		{
+			return i; 
+		}
+	} 
+	return INVALID_GRAFID;
+}
 graffiti_ReloadForPlayers(id)
 {
 	//delete id graffiti
 	//graffiti_LoadMySQL(id);
 	return 1;
 }
-
-graffiti_SaveMySQL(id)
-{
-	return 1;
-}
-
 graffiti_GetNewID()
 {
-	return 1;
+	FreeGrafID();
 }
 graffiti_CreateGraffiti(playerid)
 {

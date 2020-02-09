@@ -92,4 +92,5 @@ stock graffiti_LoadMySQL(id = -1)
 		return 1;
 	}
 }
+
 //end
