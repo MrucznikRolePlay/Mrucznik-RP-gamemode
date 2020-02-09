@@ -45,7 +45,7 @@ command_mbizedit_Impl(playerid, bIDE)
     SetPVarInt(playerid, "dialog-bIDE-admin", bIDE);
     if(bChoiceEdit == BIZ_CHOICE_NOTHING)
     {
-        ShowPlayerDialogEx(playerid, DIALOG_BIZ_ADMINEDIT, DIALOG_STYLE_LIST, defaultDialogCaption, "Przenieœ wejœcie\nDodaj wyjœcie\nUsuñ biznes\nUsuñ w³aœciciela\nWyzeruj pieni¹dze biznesu\nZmieñ cene biznesu\nOkreœl biznes", "Dalej", "Odrzuæ"); 
+        ShowPlayerDialogEx(playerid, DIALOG_BIZ_ADMINEDIT, DIALOG_STYLE_LIST, SetDefaultCaption(), "Przenieœ wejœcie\nDodaj wyjœcie\nUsuñ biznes\nUsuñ w³aœciciela\nWyzeruj pieni¹dze biznesu\nZmieñ cene biznesu\nOkreœl biznes", "Dalej", "Odrzuæ"); 
     }
     else if(bChoiceEdit == BIZ_CHOICE_PRZENIES)
     {
