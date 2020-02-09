@@ -21,6 +21,30 @@
 //Opis:
 /*
 	System graffiti
+
+
+	/graffiti stworz (na strefie przejêtej/nieprzejêtej - na SC & tylko dla gangów - na koniec do dodania) tworzy dialog
+	w którym wpisujemy tekst i wybieramy kolor podstawowy (mozna zmieniac kolory w trakcie, np {f0f0f0}tekst)
+	Po tym ustawiamy odpowiednie koordy naszego napisu===(do tego punktu gotowe)===, zapisuje sie w bazie danych:
+	x,y,z,xy,yy,zy,graffiti_id,graffti_tekst[128],graffiti_kolor = 0xFF+KOLOR
+
+	Nastêpnie od razu te graffiti siê usuwa i tworzy od nowa poleceniem graffiti_Load(id) aby zaaplikowaæ "\n" w tekœcie.
+	To samo z edycj¹ graffiti, po edycji wszystko zapisujemy oraz usuwamy + tworzymy od nowa funkcj¹ load_mysql.
+
+	Admin ma dostêp do komendy(1@lvl>) /graffiti sprawdz - wysy³a mu ID najblizszego graffiti (inRange 200-300)
+	Pozniej ma dostep do /graffiti edytuj <ID_graffiti> w którym otwiera sie dialog taki sam jak u gracza
+	czyli: mozliwosc zmiany tekstu, koloru, edycji po³o¿enia lub usuniêcia. Admin moze edytowac kazdego gracza graffiti
+	Gracz moze edytowac tylko swoje, na dodatek musi byc w poblizu (tzn. inrangeofpoint <= 5)
+	Admin moze edytowac na calej mapie, moze sie teleportowac /graffiti tp <id_graffiti>
+
+	Po stworzeniu graffiti, wysy³a siê ono na @czat oraz do logów<robota dla kogos innego, mrucznik pls>
+	Edycja tekstu - logi
+	Admin usuna³ graffiti - @czat
+
+	Do dodania jest tak¿e rozpuszczalnik za X$ w 24/7, pozwoli to PD/mechanikom usuwaæ graffiti, mechanicy dostan¹ np. 3-4k$ za ka¿de usuniêcie,
+	po usuniêciu musz¹ przeczekaæ payday aby usun¹æ nastêpne(¿eby nie wyczyœcili ca³ego SC z graffiti na raz)
+	
+	Limit dla gracza to 3 graffiti, limit na ca³e SC - 75-100 graffiti
 */
 
 
