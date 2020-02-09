@@ -6643,7 +6643,7 @@ public OnVehicleDeath(vehicleid, killerid)
 	//PAèDZIOCH
 	if(IsAHeliModel(GetVehicleModel(vehicleid)))
 	{
-  		for(new i=0;i<=MAX_PLAYERS;i++)
+  		for(new i : Player)
     	{
      		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
        		{
