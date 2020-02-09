@@ -6566,7 +6566,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
 				SetPVarInt(playerid,"chop_id",0);
-				for(new i=0;i<=ROPELENGTH;i++)
+				for(new i=0;i<ROPELENGTH;i++)
 				{
 					DestroyDynamicObject(r0pes[playerid][i]);
 				}
