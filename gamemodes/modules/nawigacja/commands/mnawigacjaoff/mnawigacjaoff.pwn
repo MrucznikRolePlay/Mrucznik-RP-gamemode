@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                 nawigacja                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                               mnawigacjaoff                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,29 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 09.02.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Enumy: ]>--------------------
-//-----------------<[ Zmienne: ]>-------------------
-new Float:posNawi[MAX_NAWIPOINTS][3]={
-    {1480.7100,-1732.7915,13.3828},//urzad
-    {1461.3921,-1033.9510,23.6563},//bank
-    {1529.7515,-1673.9596,13.3828},//lspd
-    {2808.5193,-1576.0283,10.9282},//baza
-    {815.9100,-1394.3357,13.3947},//vinyl
-    {411.8220,-1778.1534,5.5469}//ibiza
-}; 
-new navigationCheckPoint[MAX_PLAYERS] = INVALID_STREAMER_ID; 
-new nawiTimer[MAX_PLAYERS]; 
-new PlayerText:roadsLeft_0[MAX_PLAYERS];
-new PlayerText:roadsLeft_1[MAX_PLAYERS];
-new PlayerText:roadsLeft_2[MAX_PLAYERS];
-new PlayerText:roadsLeft_3[MAX_PLAYERS];
-new PlayerText:roadsLeft_4[MAX_PLAYERS];
-new PlayerText:roadsLeft_5[MAX_PLAYERS];
-//------------------<[ Forwardy: ]>--------------------
-forward nawiStart(playerid);
-//end
+
+//-------<[ include ]>-------
+#include "mnawigacjaoff_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_mnawigacjaoff()
+{
+    new command = Command_GetID("mnawigacjaoff");
+
+    //aliases
+    Command_AddAlt(command, "mnawoff");
+    Command_AddAlt(command, "nawoff");
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:mnawigacjaoff(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wy³¹cza punkt zaznaczony na nawigacji");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_mnawigacjaoff_Impl(playerid);
+}
