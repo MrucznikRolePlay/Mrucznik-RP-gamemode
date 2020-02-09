@@ -63,6 +63,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	//2.6.18
 	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
@@ -3152,6 +3153,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki!"); 
 						}
+					}
+					case 15://kupno nawigacji
+					{
+						if(kaska[playerid] < S_CENA_NAWIGACJA)
+						{
+							sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki!"); 
+							return 1;
+						}
+						ZabierzKase(playerid, S_CENA_NAWIGACJA);
+						format(string, sizeof(string), "~r~-$%d", S_CENA_NAWIGACJA);
+						DajKaseBizTemp(bIDE, playerid, (S_CENA_NAWIGACJA/4));
+						GameTextForPlayer(playerid, string, 5000, 1);
+						PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+						SendBizLogoMessage(playerid, bIDE);
+						PlayerInfo[playerid][pNawigacja] = 1; 
+						sendTipMessage(playerid, "Zakupi³eœ nawigacjê do samochodu! Aby u¿yæ wpisz /mnawigacja (skrót: /mnaw)"); 
 					}
 				}
 			}

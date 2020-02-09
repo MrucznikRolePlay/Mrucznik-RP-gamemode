@@ -139,6 +139,7 @@ native gpci (playerid, serial [], len);
 #include "old_modules\inne\ibiza.inc"
 #include "old_modules\inne\external.pwn"
 #include "modules\business\businessDialogs.pwn"
+#include "modules\nawigacja\nawigacjaDialogs.pwn"
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
 
@@ -1867,7 +1868,29 @@ public OnPlayerDeath(playerid, killerid, reason)
 				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : NiggaNames[reason-46]);
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
-		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
+		if(PlayerMoneyFromBiz[playerid] > 0)
+		{
+			format(string, sizeof(string), "Zgin¹³eœ podczas przewozu $%d gotówki - tracisz j¹.", PlayerMoneyFromBiz[playerid]); 
+			sendTipMessage(playerid, string); 
+			DetachPlayerItem(playerid, GetIndexFromAttachedObjectModel(playerid, 19624)); 
+			if(IsAPrzestepca(killerid))
+			{
+				format(string, sizeof(string), "Zabi³eœ %s gdy ten przewozi³ $%d gotówki z swojego biznesu! Otrzymujesz $%d",
+				GetNick(playerid),
+				PlayerMoneyFromBiz[playerid],
+				(PlayerMoneyFromBiz[playerid]/4));
+				sendTipMessageEx(killerid, COLOR_GREEN, string);
+				DajKase(killerid, (PlayerMoneyFromBiz[playerid]/4));
+				format(string, sizeof(string), "%s zabi³ %s gdy ten przewozi³ $%d gotówki - otrzyma³ $%d", 
+				GetNick(killerid), 
+				GetNick(playerid),
+				PlayerMoneyFromBiz[playerid],
+				(PlayerMoneyFromBiz[playerid]/4));
+				SendMessageToAdmin(string, COLOR_RED);
+			}
+			PlayerMoneyFromBiz[playerid]=0; 
+		}
+		if(GetPlayerState(killerid) == 2)
 		{
 			PlayerInfo[killerid][pKills] ++;
 			if(gPlayerLogged[killerid] == 0)

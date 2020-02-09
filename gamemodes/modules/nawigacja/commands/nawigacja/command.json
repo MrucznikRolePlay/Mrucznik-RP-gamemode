@@ -1,0 +1,12 @@
+{
+    "name": "mnawigacja",
+    "description": "Komenda pozwalaj¹ca odpaliæ nawigacjê",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "mnaw",
+        "nawiguj"
+    ],
+    "parameters": [],
+    "date": "09.02.2020"
+}

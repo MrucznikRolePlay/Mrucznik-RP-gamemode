@@ -1450,7 +1450,10 @@ enum pInfo
 	pBusinessOwner,
 	pBusinessMember,
 	pLiderValue,
-	pUniform
+	pUniform,
+	pNawigacja,
+	pAJreason[MAX_AJ_REASON],
+	pPodPW
 };
 enum StringData
 {
