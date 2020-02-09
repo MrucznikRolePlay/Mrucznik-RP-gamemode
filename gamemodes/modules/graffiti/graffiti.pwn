@@ -67,16 +67,15 @@ hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Fl
     {
         if( GetPVarInt(playerid, "GraffitiCreating") == 1 )
         {
-			// new f = graffiti_GetNewID();
-			// GraffitiInfo[f][Xpos] = x;
-			// GraffitiInfo[f][Ypos] = y;
-			// GraffitiInfo[f][Zpos] = z;
-			// GraffitiInfo[f][XYpos] = rx;
-			// GraffitiInfo[f][YYpos] = ry;
-			// GraffitiInfo[f][ZYpos] = rz;
+			GraffitiInfo[f][grafXpos] = x;
+			GraffitiInfo[f][grafYpos] = y;
+			GraffitiInfo[f][grafZpos] = z;
+			GraffitiInfo[f][grafXYpos] = rx;
+			GraffitiInfo[f][grafYYpos] = ry;
+			GraffitiInfo[f][grafZYpos] = rz;
             GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
-			//graffiti_SaveMySQL(f);
-			//graffiti_ReloadForPlayers(f);
+			graffiti_SaveMySQL(f, playerid);
+			graffiti_ReloadForPlayers(f);
 			DeletePVar(playerid,"GraffitiCreating");
 			graffiti_ZerujZmienne(playerid);
         }
@@ -114,23 +113,40 @@ stock graffiti_GetNewID()
 }
 graffiti_ReloadForPlayers(id)
 {
-	//delete id graffiti
-	//graffiti_LoadMySQL(id);
+	DestroyDynamicObject(GraffitiInfo[id][gID]);
+	graffiti_LoadMySQL(id);
 	return 1;
 }
 graffiti_CreateGraffiti(playerid)
 {
-	new debug_string[144];
-	SetPVarInt(playerid, "GraffitiCreating", 1);
+	new f = graffiti_GetNewID();
 	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
-	pGraffiti[playerid] = CreateDynamicObject(19482, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2], 0.0, 0.0, 0.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), -1, 200);
-    SetDynamicObjectMaterialText(pGraffiti[playerid], 0, Graffiti_Text[playerid], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, Graffiti_Color[playerid], 0, 1);
-	sendTipMessage(playerid, Graffiti_Text[playerid]);
-	sendTipMessage(playerid, Graffiti_Color[playerid]);
-	sendTipMessage(playerid, pGraffiti[playerid]);
-	format(debug_string, sizeof(debug_string), "ID: %d", graffiti_GetNewID());
-	sendTipMessage(playerid, debug_string);
-	EditDynamicObject(playerid, pGraffiti[playerid]);
+	GraffitiInfo[f][grafXpos] = PlayerPos[playerid][0];
+	GraffitiInfo[f][grafYpos] = PlayerPos[playerid][1];
+	GraffitiInfo[f][grafZpos] = PlayerPos[playerid][2];
+	GraffitiInfo[f][grafXYpos] = 0.0;
+	GraffitiInfo[f][grafYYpos] = 0.0;
+	GraffitiInfo[f][grafZYpos] = 0.0;
+	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
+	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
+	graffiti_SaveMySQL(f, playerid);
+	switch(GraffitiInfo[f][gColor])
+	{
+		case 0: GraffitiInfo[f][gColor] = GRAFFITI_CZARNY;// CZARNY
+ 
+        case 1: GraffitiInfo[f][gColor] = GRAFFITI_BIALY; // BIALY
+ 
+        case 2: GraffitiInfo[f][gColor] = GRAFFITI_CZERWONY; // CZERWONY
+ 
+        case 3: GraffitiInfo[f][gColor] = GRAFFITI_ZIELONY; // ZIELONY
+ 
+        case 4: GraffitiInfo[f][gColor] = GRAFFITI_NIEBIESKI; // NIEBIESKI
+ 
+        case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;  // SZARY
+	}
+	SetPVarInt(playerid, "GraffitiCreating", 1);
+	graffiti_ReloadForPlayers(f);
+	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
 	return 1;
 }
 graffiti_ZerujZmienne(playerid)

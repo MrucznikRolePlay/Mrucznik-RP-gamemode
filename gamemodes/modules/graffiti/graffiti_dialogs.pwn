@@ -56,17 +56,17 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
             {
  
-                case 0: Graffiti_Color[playerid] = GRAFFITI_CZARNY;// CZARNY
+                case 0: Graffiti_Color[playerid] = 0;// CZARNY
  
-                case 1: Graffiti_Color[playerid] = GRAFFITI_BIALY; // BIALY
+                case 1: Graffiti_Color[playerid] = 1; // BIALY
  
-                case 2: Graffiti_Color[playerid] = GRAFFITI_CZERWONY; // CZERWONY
+                case 2: Graffiti_Color[playerid] = 2; // CZERWONY
  
-                case 3: Graffiti_Color[playerid] = GRAFFITI_ZIELONY; // ZIELONY
+                case 3: Graffiti_Color[playerid] = 3; // ZIELONY
  
-                case 4: Graffiti_Color[playerid] = GRAFFITI_NIEBIESKI; // NIEBIESKI
+                case 4: Graffiti_Color[playerid] = 4; // NIEBIESKI
  
-                case 5: Graffiti_Color[playerid] = GRAFFITI_SZARY;  // SZARY
+                case 5: Graffiti_Color[playerid] = 5;  // SZARY
  
             }
 			graffiti_CreateGraffiti(playerid);
