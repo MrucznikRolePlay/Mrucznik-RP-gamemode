@@ -48,8 +48,28 @@ AttachPlayerItem(playerid, modelid, bone, Float:fOffsetX = 0.0, Float:fOffsetY =
 	return index;
 }
 
+GetIndexFromAttachedObjectModel(playerid, modelid)
+{
+	new value=INVALID_ATTACHED_OBJECT_INDEX;
+	for(new i; i<MAX_PLAYER_ATTACHED_OBJECTS; i++) 
+	{
+		if(!IsPlayerAttachedObjectSlotUsed(playerid, i))
+		{
+			if(AttachedObjects[playerid][i][ao_model] == modelid)
+			{
+				value = i;
+				break;
+			}
+		}
+	}
+	return value;
+}
 DetachPlayerItem(playerid, index)
 {
+	if(index == INVALID_ATTACHED_OBJECT_INDEX)
+	{
+		return 1;
+	}
 	AttachedObjects[playerid][index][ao_active] = false;
 	PlayerAttachments_SetActive(playerid, AttachedObjects[playerid][index][ao_model], false);
 	RemovePlayerAttachedObject(playerid, index);

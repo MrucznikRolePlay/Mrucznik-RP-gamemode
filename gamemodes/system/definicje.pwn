@@ -609,6 +609,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define S_CENA_CBRADIO 8000
 #define S_CENA_CYGARO 800
 #define S_CENA_KIJ 15000
+#define S_CENA_NAWIGACJA 40000
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);
 public _SafeReturnCode_(dest[], src[], bytes)
