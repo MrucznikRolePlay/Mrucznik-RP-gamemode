@@ -68,7 +68,166 @@ ShowNawiDialog(playerid, dTYPE)
 }
 StartNavigation(playerid, NAWI)
 {
-	navigationCheckPoint[playerid] = CreateDynamicCP(posNawi[NAWI][N_POSX], posNawi[NAWI][N_POSY], posNawi[NAWI][N_POSZ], 5.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid); 
+	ShowPlayerNaviTextDraws(playerid);
+	navigationCheckPoint[playerid] = CreateDynamicCP(posNawi[NAWI][N_POSX], posNawi[NAWI][N_POSY], posNawi[NAWI][N_POSZ], 5.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid, 8000.0);
+	nawiTimer[playerid] = SetTimerEx("nawiStart", 10000, true, "i", playerid); 
+	return 1;
+}
+StopPlayerNavigation(playerid, bool:dojechal=false)
+{
+	HidePlayerNaviTextDraws(playerid);
+	DestroyDynamicCP(navigationCheckPoint[playerid]);
+	navigationCheckPoint[playerid] = INVALID_STREAMER_ID; 
+	KillTimer(nawiTimer[playerid]); 
+	sendTipMessageEx(playerid, COLOR_GREEN, "==============<[ Mrucznik Navigation ]>==============");
+	if(dojechal)
+	{
+		sendTipMessage(playerid, "Gratulacje uda³o Ci siê dotrzeæ do celu!");
+	}
+	sendTipMessage(playerid, "Trwa wy³¹czanie systemu nawigacji."); 
+	sendTipMessage(playerid, "Pomyœlnie wy³¹czono!"); 
+	return 1;
+}
+CreatePlayerNaviTextDraws(playerid)
+{
+	roadsLeft_0[playerid] = CreatePlayerTextDraw(playerid, 233.000000, 388.000000, "_");
+	PlayerTextDrawFont(playerid, roadsLeft_0[playerid], 1);
+	PlayerTextDrawLetterSize(playerid, roadsLeft_0[playerid], 0.600000, 6.500000);
+	PlayerTextDrawTextSize(playerid, roadsLeft_0[playerid], 400.000000, 17.000000);
+	PlayerTextDrawSetOutline(playerid, roadsLeft_0[playerid], 1);
+	PlayerTextDrawSetShadow(playerid, roadsLeft_0[playerid], 0);
+	PlayerTextDrawAlignment(playerid, roadsLeft_0[playerid], 1);
+	PlayerTextDrawColor(playerid, roadsLeft_0[playerid], -1);
+	PlayerTextDrawBackgroundColor(playerid, roadsLeft_0[playerid], 255);
+	PlayerTextDrawBoxColor(playerid, roadsLeft_0[playerid], 232);
+	PlayerTextDrawUseBox(playerid, roadsLeft_0[playerid], 1);
+	PlayerTextDrawSetProportional(playerid, roadsLeft_0[playerid], 1);
+	PlayerTextDrawSetSelectable(playerid, roadsLeft_0[playerid], 0);
+
+	roadsLeft_1[playerid] = CreatePlayerTextDraw(playerid, 257.000000, 388.000000, "~r~Navigation System");
+	PlayerTextDrawFont(playerid, roadsLeft_1[playerid], 1);
+	PlayerTextDrawLetterSize(playerid, roadsLeft_1[playerid], 0.350000, 2.000000);
+	PlayerTextDrawTextSize(playerid, roadsLeft_1[playerid], 499.500000, -8.000000);
+	PlayerTextDrawSetOutline(playerid, roadsLeft_1[playerid], 1);
+	PlayerTextDrawSetShadow(playerid, roadsLeft_1[playerid], 3);
+	PlayerTextDrawAlignment(playerid, roadsLeft_1[playerid], 1);
+	PlayerTextDrawColor(playerid, roadsLeft_1[playerid], -1);
+	PlayerTextDrawBackgroundColor(playerid, roadsLeft_1[playerid], 255);
+	PlayerTextDrawBoxColor(playerid, roadsLeft_1[playerid], 50);
+	PlayerTextDrawUseBox(playerid, roadsLeft_1[playerid], 0);
+	PlayerTextDrawSetProportional(playerid, roadsLeft_1[playerid], 1);
+	PlayerTextDrawSetSelectable(playerid, roadsLeft_1[playerid], 0);
+
+	roadsLeft_2[playerid] = CreatePlayerTextDraw(playerid, 283.000000, 406.000000, "]Manana]");
+	PlayerTextDrawFont(playerid, roadsLeft_2[playerid], 2);
+	PlayerTextDrawLetterSize(playerid, roadsLeft_2[playerid], 0.191666, 1.100000);
+	PlayerTextDrawTextSize(playerid, roadsLeft_2[playerid], 499.500000, -8.000000);
+	PlayerTextDrawSetOutline(playerid, roadsLeft_2[playerid], 1);
+	PlayerTextDrawSetShadow(playerid, roadsLeft_2[playerid], 3);
+	PlayerTextDrawAlignment(playerid, roadsLeft_2[playerid], 1);
+	PlayerTextDrawColor(playerid, roadsLeft_2[playerid], -1);
+	PlayerTextDrawBackgroundColor(playerid, roadsLeft_2[playerid], 255);
+	PlayerTextDrawBoxColor(playerid, roadsLeft_2[playerid], 50);
+	PlayerTextDrawUseBox(playerid, roadsLeft_2[playerid], 0);
+	PlayerTextDrawSetProportional(playerid, roadsLeft_2[playerid], 1);
+	PlayerTextDrawSetSelectable(playerid, roadsLeft_2[playerid], 0);
+
+	roadsLeft_3[playerid] = CreatePlayerTextDraw(playerid, 333.000000, 423.000000, "[Manana]");
+	PlayerTextDrawFont(playerid, roadsLeft_3[playerid], 5);
+	PlayerTextDrawLetterSize(playerid, roadsLeft_3[playerid], 0.325000, 1.500000);
+	PlayerTextDrawTextSize(playerid, roadsLeft_3[playerid], 114.500000, -98.000000);
+	PlayerTextDrawSetOutline(playerid, roadsLeft_3[playerid], 1);
+	PlayerTextDrawSetShadow(playerid, roadsLeft_3[playerid], 3);
+	PlayerTextDrawAlignment(playerid, roadsLeft_3[playerid], 1);
+	PlayerTextDrawColor(playerid, roadsLeft_3[playerid], -1);
+	PlayerTextDrawBackgroundColor(playerid, roadsLeft_3[playerid], 0);
+	PlayerTextDrawBoxColor(playerid, roadsLeft_3[playerid], 0);
+	PlayerTextDrawUseBox(playerid, roadsLeft_3[playerid], 0);
+	PlayerTextDrawSetProportional(playerid, roadsLeft_3[playerid], 1);
+	PlayerTextDrawSetSelectable(playerid, roadsLeft_3[playerid], 0);
+	PlayerTextDrawSetPreviewModel(playerid, roadsLeft_3[playerid], 445);
+	PlayerTextDrawSetPreviewRot(playerid, roadsLeft_3[playerid], 3.000000, 180.000000, 35.000000, 1.000000);
+	PlayerTextDrawSetPreviewVehCol(playerid, roadsLeft_3[playerid], 29, 1);
+
+	roadsLeft_4[playerid] = CreatePlayerTextDraw(playerid, 233.000000, 417.000000, "Docelowe: ~g~Urzad Miasta Los Santos");
+	PlayerTextDrawFont(playerid, roadsLeft_4[playerid], 1);
+	PlayerTextDrawLetterSize(playerid, roadsLeft_4[playerid], 0.216666, 1.500000);
+	PlayerTextDrawTextSize(playerid, roadsLeft_4[playerid], 499.500000, -8.000000);
+	PlayerTextDrawSetOutline(playerid, roadsLeft_4[playerid], 1);
+	PlayerTextDrawSetShadow(playerid, roadsLeft_4[playerid], 3);
+	PlayerTextDrawAlignment(playerid, roadsLeft_4[playerid], 1);
+	PlayerTextDrawColor(playerid, roadsLeft_4[playerid], -1);
+	PlayerTextDrawBackgroundColor(playerid, roadsLeft_4[playerid], 255);
+	PlayerTextDrawBoxColor(playerid, roadsLeft_4[playerid], 50);
+	PlayerTextDrawUseBox(playerid, roadsLeft_4[playerid], 0);
+	PlayerTextDrawSetProportional(playerid, roadsLeft_4[playerid], 1);
+	PlayerTextDrawSetSelectable(playerid, roadsLeft_4[playerid], 0);
+
+	roadsLeft_5[playerid] = CreatePlayerTextDraw(playerid, 233.000000, 430.000000, "Pozostalo: ~g~1452.20 ~w~metrow");
+	PlayerTextDrawFont(playerid, roadsLeft_5[playerid], 1);
+	PlayerTextDrawLetterSize(playerid, roadsLeft_5[playerid], 0.216666, 1.500000);
+	PlayerTextDrawTextSize(playerid, roadsLeft_5[playerid], 499.500000, -8.000000);
+	PlayerTextDrawSetOutline(playerid, roadsLeft_5[playerid], 1);
+	PlayerTextDrawSetShadow(playerid, roadsLeft_5[playerid], 3);
+	PlayerTextDrawAlignment(playerid, roadsLeft_5[playerid], 1);
+	PlayerTextDrawColor(playerid, roadsLeft_5[playerid], -1);
+	PlayerTextDrawBackgroundColor(playerid, roadsLeft_5[playerid], 255);
+	PlayerTextDrawBoxColor(playerid, roadsLeft_5[playerid], 50);
+	PlayerTextDrawUseBox(playerid, roadsLeft_5[playerid], 0);
+	PlayerTextDrawSetProportional(playerid, roadsLeft_5[playerid], 1);
+	PlayerTextDrawSetSelectable(playerid, roadsLeft_5[playerid], 0);
+	return 0; 
+}
+DestroyPlayerNaviTextDraws(playerid)
+{
+	PlayerTextDrawDestroy(playerid, roadsLeft_0[playerid]);
+	PlayerTextDrawDestroy(playerid, roadsLeft_1[playerid]);
+	PlayerTextDrawDestroy(playerid, roadsLeft_2[playerid]);
+	PlayerTextDrawDestroy(playerid, roadsLeft_3[playerid]);
+	PlayerTextDrawDestroy(playerid, roadsLeft_4[playerid]);
+	PlayerTextDrawDestroy(playerid, roadsLeft_5[playerid]);
+	return 0; 
+}
+UpdateNaviTextDrawsForPlayer(playerid)
+{
+	new string[124];
+	new idVeh = PlayerInfo[playerid][pSkin]; 
+	new nawLokacja = GetPVarInt(playerid, "miejsceDoceloweID");
+	new nawLokacjaString[64];
+	GetPVarString(playerid, "miejsceDoceloweStr", nawLokacjaString, sizeof(nawLokacjaString));
+	if(IsPlayerInAnyVehicle(playerid))//Je¿eli jest w wozie
+	{
+		idVeh = GetPlayerVehicleID(playerid);
+	}
+	format(string, sizeof(string), "Pozostalo: ~g~%0.2f ~w~metrow", 
+	GetPlayerDistanceFromPoint(playerid, posNawi[nawLokacja][N_POSX], posNawi[nawLokacja][N_POSY], posNawi[nawLokacja][N_POSZ]));
+	PlayerTextDrawSetString(playerid, roadsLeft_5[playerid], string); 
+	format(string, sizeof(string), "Docelowe: ~g~%s", Odpolszcz(nawLokacjaString)); 
+	PlayerTextDrawSetString(playerid, roadsLeft_4[playerid], string); 
+	format(string, sizeof(string), "]%s]", Odpolszcz(VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]));
+	PlayerTextDrawSetString(playerid, roadsLeft_2[playerid], string); 
+	PlayerTextDrawSetPreviewModel(playerid, roadsLeft_3[playerid], idVeh);
+
+	return 1;
+}
+ShowPlayerNaviTextDraws(playerid)
+{
+	PlayerTextDrawShow(playerid, roadsLeft_0[playerid]);
+	PlayerTextDrawShow(playerid, roadsLeft_1[playerid]);
+	PlayerTextDrawShow(playerid, roadsLeft_2[playerid]);
+	PlayerTextDrawShow(playerid, roadsLeft_3[playerid]);
+	PlayerTextDrawShow(playerid, roadsLeft_4[playerid]);
+	PlayerTextDrawShow(playerid, roadsLeft_5[playerid]);
+	return 1; 
+}
+HidePlayerNaviTextDraws(playerid)
+{
+	PlayerTextDrawHide(playerid, roadsLeft_0[playerid]);
+	PlayerTextDrawHide(playerid, roadsLeft_1[playerid]);
+	PlayerTextDrawHide(playerid, roadsLeft_2[playerid]);
+	PlayerTextDrawHide(playerid, roadsLeft_3[playerid]);
+	PlayerTextDrawHide(playerid, roadsLeft_4[playerid]);
+	PlayerTextDrawHide(playerid, roadsLeft_5[playerid]);
 	return 1;
 }
 //end
