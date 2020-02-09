@@ -101,7 +101,7 @@ GrafExist(value)
 	}
 	return false; 
 }
-stock FreeGrafID()
+stock graffiti_GetNewID()
 {
 	for(new i; i <= GRAFFITI_MAX; i++)
 	{
@@ -117,10 +117,6 @@ graffiti_ReloadForPlayers(id)
 	//delete id graffiti
 	//graffiti_LoadMySQL(id);
 	return 1;
-}
-graffiti_GetNewID()
-{
-	FreeGrafID();
 }
 graffiti_CreateGraffiti(playerid)
 {
