@@ -44,6 +44,7 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			if(isnull(inputtext)) return GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
 			format(string, sizeof(string), "%s", inputtext);
+			format(string, sizeof(string),"%s",str_replace("\\n", "\n", inputtext)); 
 			Graffiti_Text[playerid] = string;
 			graffiti_ShowColorMenu(playerid);
 		}
@@ -56,17 +57,17 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
             {
  
-                case 0: Graffiti_Color[playerid] = KOLOR_CZARNY;// CZARNY
+                case 0: Graffiti_Color[playerid] = GRAFFITI_CZARNY;// CZARNY
  
-                case 1: Graffiti_Color[playerid] = KOLOR_BIALY; // BIALY
+                case 1: Graffiti_Color[playerid] = GRAFFITI_BIALY; // BIALY
  
-                case 2: Graffiti_Color[playerid] = KOLOR_CZERWONY; // CZERWONY
+                case 2: Graffiti_Color[playerid] = GRAFFITI_CZERWONY; // CZERWONY
  
-                case 3: Graffiti_Color[playerid] = KOLOR_ZIELONY; // ZIELONY
+                case 3: Graffiti_Color[playerid] = GRAFFITI_ZIELONY; // ZIELONY
  
-                case 4: Graffiti_Color[playerid] = KOLOR_NIEBIESKI; // NIEBIESKI
+                case 4: Graffiti_Color[playerid] = GRAFFITI_NIEBIESKI; // NIEBIESKI
  
-                case 5: Graffiti_Color[playerid] = COLOR_CMDHELP;  // SZARY
+                case 5: Graffiti_Color[playerid] = GRAFFITI_SZARY;  // SZARY
  
             }
 			graffiti_CreateGraffiti(playerid);
