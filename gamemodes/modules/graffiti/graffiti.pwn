@@ -65,30 +65,23 @@ hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Fl
 {
  	if( response == EDIT_RESPONSE_FINAL )
     {
-        if( GetPVarInt(playerid, "GraffitiCreating") == 1 )
-        {
-			new f = GetPVarInt(playerid, "GraffitiID");
-			GraffitiInfo[f][grafXpos] = x;
-			GraffitiInfo[f][grafYpos] = y;
-			GraffitiInfo[f][grafZpos] = z;
-			GraffitiInfo[f][grafXYpos] = rx;
-			GraffitiInfo[f][grafYYpos] = ry;
-			GraffitiInfo[f][grafZYpos] = rz;
-            GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
-			graffiti_SaveMySQL(f, playerid);
-			graffiti_ReloadForPlayers(f);
-			DeletePVar(playerid,"GraffitiCreating");
-			graffiti_ZerujZmienne(playerid);
-        }
+        
+		new f = GetPVarInt(playerid, "GraffitiID");
+		GraffitiInfo[f][grafXpos] = x;
+		GraffitiInfo[f][grafYpos] = y;
+		GraffitiInfo[f][grafZpos] = z;
+		GraffitiInfo[f][grafXYpos] = rx;
+		GraffitiInfo[f][grafYYpos] = ry;
+		GraffitiInfo[f][grafZYpos] = rz;
+        GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
+		graffiti_SaveMySQL(f, playerid);
+		graffiti_ReloadForPlayers(f);
+		graffiti_ZerujZmienne(playerid);
     }
     if( response == EDIT_RESPONSE_CANCEL )
     {
-        if( GetPVarInt(playerid, "GraffitiCreating") == 1 )
-        {
-            DestroyDynamicObject(pGraffiti[playerid]);
-			GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
-			DeletePVar(playerid,"GraffitiCreating");
-        }
+        DestroyDynamicObject(pGraffiti[playerid]);
+		GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
     }
     return 1;
 }
@@ -146,7 +139,6 @@ graffiti_CreateGraffiti(playerid)
  
         case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;  // SZARY
 	}
-	SetPVarInt(playerid, "GraffitiCreating", 1);
 	graffiti_ReloadForPlayers(f);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
 	return 1;
