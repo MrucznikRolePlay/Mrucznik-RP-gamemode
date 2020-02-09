@@ -619,6 +619,9 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             Log(businessLog, INFO, "%s zmienil nazwe biznesu %s na %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE),inputtext);
             ZabierzKase(playerid, B_CENA_ZMIENAZWE); 
             mysql_real_escape_string(inputtext, mBiz[bIDE][b_Name]);
+           // DestroyBussinesIcon(bIDE);
+            DestroyBusiness3DText(bIDE);
+            CreateBusiness3DText(bIDE); 
             SaveBiz(bIDE);  
         }
     }
