@@ -8228,7 +8228,7 @@ stock ShowPlayerInfoDialog(playerid, caption[], info[], bool:dialogTimer=false)
 stock SetDefaultCaption()
 {
 	new string[64]; 
-	format(string, sizeof(string), "Mrucznik Role Play %d", VERSION); 
+	format(string, sizeof(string), "Mrucznik Role Play %s", VERSION); 
 	safe_return string;
 }
 stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[], bool:dialogTimer=false)
