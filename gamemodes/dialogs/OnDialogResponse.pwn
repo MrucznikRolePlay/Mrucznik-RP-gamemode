@@ -14,7 +14,10 @@ CheckDialogId(playerid, dialogid)
 {
     if(dialogid < 0)
 	{
-		Log(serverLog, WARNING, "B³êdne ID dialogu dla [gracz %d] dialogid - %d przypisany %d", playerid, dialogid,iddialog[playerid]);
+		new strError[124];
+		format(strError, sizeof(strError), "Wyst¹pi³ b³¹d z twoim dialogiem! - %d przypisany %d", dialogid, iddialog[playerid]);
+		//Log(serverLog, WARNING, "B³êdne ID dialogu dla [gracz %d] dialogid - %d przypisany %d", playerid, dialogid,iddialog[playerid]);
+		sendErrorMessage(playerid, strError);
 		return 0; 
 	} 
     if(dialogid != iddialog[playerid])
