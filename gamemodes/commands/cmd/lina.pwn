@@ -30,7 +30,8 @@
 
 CMD:lina(playerid, cmdtext[])
 {
-    if(IsAMedyk(playerid) || IsACop(playerid))
+    /*if(IsAMedyk(playerid) || IsACop(playerid))*/
+    if(PlayerInfo[playerid][pAdmin] >= 1000)
     {
         if((OnDuty[playerid] == 1 || JobDuty[playerid] == 1) && IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetVehicleModel(GetPlayerVehicleID(playerid))) && GetPVarInt(playerid,"roped") == 0)
         {
