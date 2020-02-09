@@ -30,12 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "nawigacja\mnawigacja.pwn"
+#include "mnawigacjaoff\mnawigacjaoff.pwn"
+#include "mnawigacja\mnawigacja.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_mnawigacjaoff();
     command_mnawigacja();
     
 }

@@ -1666,6 +1666,10 @@ public OnPlayerDisconnect(playerid, reason)
 }
 public OnPlayerEnterDynamicCP(playerid, checkpointid)
 {
+	if(checkpointid == navigationCheckPoint[playerid])
+	{
+		StopPlayerNavigation(playerid, true); 
+	}
 	return 1;
 }
 
