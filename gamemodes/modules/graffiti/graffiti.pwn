@@ -55,35 +55,6 @@ hook OnPlayerConnect(playerid)
     graffiti_ZerujZmienne(playerid);
 }
 
-
-public OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz)
-{
-    CallRemoteFunction("OnPlayerEditDynamicObject", "iisffffff", playerid, objectid, response, x, y, z, rx, ry, rz);
-}
-
-hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
-{
-	new f = GetPVarInt(playerid, "GraffitiID");
- 	if( response == EDIT_RESPONSE_FINAL )
-    {
-		GraffitiInfo[f][grafXpos] = x;
-		GraffitiInfo[f][grafYpos] = y;
-		GraffitiInfo[f][grafZpos] = z;
-		GraffitiInfo[f][grafXYpos] = rx;
-		GraffitiInfo[f][grafYYpos] = ry;
-		GraffitiInfo[f][grafZYpos] = rz;
-        GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
-		graffiti_UpdateMySQL(f, playerid);
-		graffiti_ReloadForPlayers(f);
-		graffiti_ZerujZmienne(playerid);
-    }
-    if( response == EDIT_RESPONSE_CANCEL )
-    {
-		graffiti_DeleteMySQL(f, playerid);
-		GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
-    }
-    return 1;
-}
 //-----------------<[ Funkcje: ]>-------------------
 GrafExist(value)
 {
@@ -119,6 +90,7 @@ graffiti_CreateGraffiti(playerid)
 		return 1;
 	}
 	SetPVarInt(playerid, "GraffitiID", f);
+	SetPVarInt(playerid, "CreatingGraff", 1);
 	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
 	GraffitiInfo[f][grafXpos] = PlayerPos[playerid][0];
 	GraffitiInfo[f][grafYpos] = PlayerPos[playerid][1];
@@ -151,5 +123,7 @@ graffiti_ZerujZmienne(playerid)
 {
 	Graffiti_Color[playerid] = -1;
 	Graffiti_Text[playerid] = "";
+	DeletePVar(playerid, "CreatingGraff");
+	DeletePVar(playerid, "GraffitiID");
 }
 //end

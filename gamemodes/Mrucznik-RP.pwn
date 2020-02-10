@@ -4955,6 +4955,27 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
             }
         }
+		else if( response == EDIT_RESPONSE_FINAL && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new f = GetPVarInt(playerid, "GraffitiID");
+			GraffitiInfo[f][grafXpos] = x;
+			GraffitiInfo[f][grafYpos] = y;
+			GraffitiInfo[f][grafZpos] = z;
+			GraffitiInfo[f][grafXYpos] = rx;
+			GraffitiInfo[f][grafYYpos] = ry;
+			GraffitiInfo[f][grafZYpos] = rz;
+			GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
+			graffiti_UpdateMySQL(f, playerid);
+			graffiti_ReloadForPlayers(f);
+			graffiti_ZerujZmienne(playerid);
+		}
+		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new f = GetPVarInt(playerid, "GraffitiID");
+			graffiti_DeleteMySQL(f, playerid);
+			GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
+			graffiti_ZerujZmienne(playerid);
+		}
     }
 }
 
