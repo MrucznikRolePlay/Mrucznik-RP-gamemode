@@ -67,17 +67,25 @@ stock graffiti_LoadMySQL(id = -1)
 
 			switch(GraffitiInfo[i][gColor])
 			{
-				case 0: GraffitiInfo[i][gColor] = GRAFFITI_CZARNY;// CZARNY
+				case 0: GraffitiInfo[i][gColor] = GRAFFITI_CZARNY;
  
-                case 1: GraffitiInfo[i][gColor] = GRAFFITI_BIALY; // BIALY
+                case 1: GraffitiInfo[i][gColor] = GRAFFITI_BIALY;
  
-                case 2: GraffitiInfo[i][gColor] = GRAFFITI_CZERWONY; // CZERWONY
+                case 2: GraffitiInfo[i][gColor] = GRAFFITI_CZERWONY;
  
-                case 3: GraffitiInfo[i][gColor] = GRAFFITI_ZIELONY; // ZIELONY
+                case 3: GraffitiInfo[i][gColor] = GRAFFITI_ZIELONY;
  
-                case 4: GraffitiInfo[i][gColor] = GRAFFITI_NIEBIESKI; // NIEBIESKI
+                case 4: GraffitiInfo[i][gColor] = GRAFFITI_NIEBIESKI;
  
-                case 5: GraffitiInfo[i][gColor] = GRAFFITI_SZARY;  // SZARY
+                case 5: GraffitiInfo[i][gColor] = GRAFFITI_SZARY;
+
+				case 6: GraffitiInfo[i][gColor] = GRAFFITI_POMARANCZOWY;
+
+				case 7: GraffitiInfo[i][gColor] = GRAFFITI_ZOLTY;
+
+				case 8: GraffitiInfo[i][gColor] = GRAFFITI_FIOLETOWY;
+
+				case 9: GraffitiInfo[i][gColor] = GRAFFITI_ROZOWY;
 			}
 			strreplace(GraffitiInfo[i][grafText], "~n~", "\n", .ignorecase = true);
 			GraffitiInfo[i][gID] = CreateDynamicObject(19482, GraffitiInfo[i][grafXpos], GraffitiInfo[i][grafYpos], GraffitiInfo[i][grafZpos], GraffitiInfo[i][grafXYpos], GraffitiInfo[i][grafYYpos], GraffitiInfo[i][grafZYpos], 0, 0, -1, 200);
@@ -120,6 +128,14 @@ stock graffiti_LoadMySQL(id = -1)
             case 4: GraffitiInfo[id][gColor] = GRAFFITI_NIEBIESKI;
  
             case 5: GraffitiInfo[id][gColor] = GRAFFITI_SZARY;
+			
+			case 6: GraffitiInfo[id][gColor] = GRAFFITI_POMARANCZOWY;
+
+			case 7: GraffitiInfo[id][gColor] = GRAFFITI_ZOLTY;
+
+			case 8: GraffitiInfo[id][gColor] = GRAFFITI_FIOLETOWY;
+
+			case 9: GraffitiInfo[id][gColor] = GRAFFITI_ROZOWY;
 		}
 		strreplace(GraffitiInfo[id][grafText], "~n~", "\n", .ignorecase = true);
 		GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
@@ -143,10 +159,9 @@ stock graffiti_SaveMySQL(id, playerid)
 	GraffitiInfo[id][grafYYpos],
 	GraffitiInfo[id][grafZYpos]);
 	mysql_query(query);
-	sendTipMessage(playerid, "Zapisano!");
 }
 
-stock graffiti_UpdateMySQL(id, playerid, type = 1)
+stock graffiti_UpdateMySQL(id, type = 1)
 {
 	new query[1024];
 	if(type == 1)
@@ -169,16 +184,14 @@ stock graffiti_UpdateMySQL(id, playerid, type = 1)
 		id);
 		mysql_query(query);
 	}
-	sendTipMessage(playerid, "Zapisano!");
 }
 
-stock graffiti_DeleteMySQL(id, playerid)
+stock graffiti_DeleteMySQL(id)
 {
 	DestroyDynamicObject(GraffitiInfo[id][gID]);
 	new query[1024];
 	format(query, sizeof(query), "DELETE FROM `mru_graffiti` WHERE `id`='%d'", id);
 	mysql_query(query);
-	sendTipMessage(playerid, "Usuniêto!");
 }
 
 //stock graffiti_UpdateMySQL(id)

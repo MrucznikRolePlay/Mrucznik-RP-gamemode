@@ -4955,6 +4955,22 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
             }
         }
+		else if(response == EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
+            GetDynamicObjectRot(objectid, rox, roy, roz);
+            GetDynamicObjectPos(objectid, X, Y, Z);
+			if(!IsPlayerInRangeOfPoint(playerid, 3.0, x,y,z))
+            {
+                SendClientMessage(playerid, 0xFF0000FF, "Podejdz do graffiti!");
+                SetDynamicObjectPos(objectid, X, Y, Z);
+            }
+            else
+            {
+                new Float:speed = VectorSize(X-x, Y-y, Z-z);
+                MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
+            }
+		}
 		else if( response == EDIT_RESPONSE_FINAL && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
 			new f = GetPVarInt(playerid, "GraffitiID");
@@ -4965,15 +4981,15 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			GraffitiInfo[f][grafYYpos] = ry;
 			GraffitiInfo[f][grafZYpos] = rz;
 			GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
-			graffiti_UpdateMySQL(f, playerid);
+			graffiti_UpdateMySQL(f);
 			graffiti_ReloadForPlayers(f);
 			graffiti_ZerujZmienne(playerid);
 		}
 		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
 			new f = GetPVarInt(playerid, "GraffitiID");
-			graffiti_DeleteMySQL(f, playerid);
-			GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
+			graffiti_DeleteMySQL(f);
+			GameTextForPlayer(playerid, "~r~Usuniêto!",2000, 5);
 			graffiti_ZerujZmienne(playerid);
 		}
     }

@@ -114,6 +114,14 @@ graffiti_CreateGraffiti(playerid)
         case 4: GraffitiInfo[f][gColor] = GRAFFITI_NIEBIESKI;
  
         case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;
+
+		case 6: GraffitiInfo[f][gColor] = GRAFFITI_POMARANCZOWY;
+
+		case 7: GraffitiInfo[f][gColor] = GRAFFITI_ZOLTY;
+
+		case 8: GraffitiInfo[f][gColor] = GRAFFITI_FIOLETOWY;
+
+		case 9: GraffitiInfo[f][gColor] = GRAFFITI_ROZOWY;
 	}
 	graffiti_ReloadForPlayers(f);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);

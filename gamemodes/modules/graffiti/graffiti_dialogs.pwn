@@ -33,7 +33,7 @@ graffiti_ShowCreationDialog(playerid)
 
 graffiti_ShowColorMenu(playerid)
 {
-	ShowPlayerDialogEx(playerid, GRAFFITI_DIALOG_SELECT_COLOR, DIALOG_STYLE_LIST, "Graffiti", "{000000}Czarny\n{FFFFFF}Bia³y\n{F81414}Czerwony\n{00FF22}Zielony\n{00CED1}Niebieski\n{C3C3C3}Szary", "Wybierz", "Anuluj");
+	ShowPlayerDialogEx(playerid, GRAFFITI_DIALOG_SELECT_COLOR, DIALOG_STYLE_LIST, "Wybierz podstawowy kolor", "{000000}Czarny\n{FFFFFF}Bia³y\n{F81414}Czerwony\n{00FF00}Zielony\n{00CED1}Niebieski\n{C3C3C3}Szary\n{E87E15}Pomarañczowy\n{FFE100}¯ó³ty\n{8400FF}Fioletowy\n{EE00FF}Ró¿owy", "Wybierz", "Anuluj");
 }
 graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
@@ -43,8 +43,7 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new string[128];
 			if(isnull(inputtext)) return GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
-			strreplace(inputtext, "\n", "~n~", .ignorecase = true);
-			format(string, sizeof(string), "%s" , inputtext);
+			format(string, sizeof(string), "%s", inputtext);
 			Graffiti_Text[playerid] = string;
 			graffiti_ShowColorMenu(playerid);
 		}
@@ -57,17 +56,25 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			switch(listitem)
             {
  
-                case 0: Graffiti_Color[playerid] = 0;// CZARNY
+                case 0: Graffiti_Color[playerid] = 0;
  
-                case 1: Graffiti_Color[playerid] = 1; // BIALY
+                case 1: Graffiti_Color[playerid] = 1;
  
-                case 2: Graffiti_Color[playerid] = 2; // CZERWONY
+                case 2: Graffiti_Color[playerid] = 2;
  
-                case 3: Graffiti_Color[playerid] = 3; // ZIELONY
+                case 3: Graffiti_Color[playerid] = 3;
  
-                case 4: Graffiti_Color[playerid] = 4; // NIEBIESKI
+                case 4: Graffiti_Color[playerid] = 4;
  
-                case 5: Graffiti_Color[playerid] = 5;  // SZARY
+                case 5: Graffiti_Color[playerid] = 5;
+
+				case 6: Graffiti_Color[playerid] = 6;
+
+				case 7: Graffiti_Color[playerid] = 7;
+
+				case 8: Graffiti_Color[playerid] = 8;
+
+				case 9: Graffiti_Color[playerid] = 9;
  
             }
 			graffiti_CreateGraffiti(playerid);
