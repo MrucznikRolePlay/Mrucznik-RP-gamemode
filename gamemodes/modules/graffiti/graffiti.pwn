@@ -147,22 +147,22 @@ graffiti_ZerujZmienne(playerid)
 
 graffiti_FindNearest(playerid)
 {
-	new Float:ox, Float:oy, Float:oz;
 	for(new i; i <= GRAFFITI_MAX; i++)
 	{
 		if(GrafExist(i))
 		{
+			new Float:ox, Float:oy, Float:oz;
 			GetDynamicObjectPos(GraffitiInfo[i][gID], ox, oy, oz);
-			if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz))
+			if(IsPlayerInRangeOfPoint(playerid, 0.75, ox, oy, oz))
+			{
+				return i;
+			}
+			else if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz))
 			{
 				return i;
 			}
 		}
-		else
-		{
-			return INVALID_GRAFID;
-		}
 	}
-	return 1;
+	return INVALID_GRAFID;
 }
 //end
