@@ -44,6 +44,7 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[128];
 			if(isnull(inputtext)) return GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
 			format(string, sizeof(string), "%s" , inputtext);
+			strreplace(string, "\n", "~n~", .ignorecase = true);
 			Graffiti_Text[playerid] = string;
 			graffiti_ShowColorMenu(playerid);
 		}
