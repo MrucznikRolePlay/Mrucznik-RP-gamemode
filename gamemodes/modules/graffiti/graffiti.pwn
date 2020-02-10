@@ -81,6 +81,18 @@ graffiti_ReloadForPlayers(id)
 	graffiti_LoadMySQL(id);
 	return 1;
 }
+
+graffiti_ReloadAll()
+{
+	for(new i; i <= GRAFFITI_MAX; i++)
+	{
+		if(GrafExist(i))
+		{
+			DestroyDynamicObject(GraffitiInfo[i][gID]);
+		}
+	}
+	graffiti_LoadMySQL();
+}
 graffiti_CreateGraffiti(playerid)
 {
 	new f = graffiti_GetNewID();

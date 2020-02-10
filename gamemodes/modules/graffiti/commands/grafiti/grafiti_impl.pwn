@@ -25,9 +25,9 @@
 //------------------<[ Implementacja: ]>-------------------
 command_grafiti_Impl(playerid, opcja[24])
 {
+    new string[128];
     if(strcmp(opcja,"sprawdz",true) == 0)
 	{
-        new string[128];
         new i = graffiti_FindNearest(playerid);
         if(i!=INVALID_GRAFID)
         {
@@ -44,6 +44,15 @@ command_grafiti_Impl(playerid, opcja[24])
     else if(strcmp(opcja,"stworz",true) == 0)
     {
         graffiti_ShowCreationDialog(playerid);
+    }
+    else if(strcmp(opcja,"przeladuj", true) == 0 || strcmp(opcja,"reload", true) == 0)
+    {
+        if(PlayerInfo[playerid][pAdmin] >= 1000)
+        {
+            graffiti_ReloadAll();
+            format(string, sizeof(string), "[ADMCMD]%s prze³adowa³ ca³¹ bazê danych Graffiti.", GetNick(playerid));
+            SendMessageToAdmin(string, COLOR_PANICRED);
+        }
     }
     return 1;
 }

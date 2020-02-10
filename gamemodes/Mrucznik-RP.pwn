@@ -4979,6 +4979,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 GameTextForPlayer(playerid, "~r~Byles za daleko.",2000, 5);
                 graffiti_DeleteMySQL(f);
 				graffiti_ZerujZmienne(playerid);
+				return 1;
 			}
 			GraffitiInfo[f][grafXpos] = x;
 			GraffitiInfo[f][grafYpos] = y;
@@ -4999,6 +5000,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			graffiti_ZerujZmienne(playerid);
 		}
     }
+	return 1;
 }
 
 public OnRconLoginAttempt(ip[], password[], success)
