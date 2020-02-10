@@ -147,10 +147,6 @@ graffiti_FindNearest(playerid)
 			{
 				return i;
 			}
-			else
-			{
-				return INVALID_GRAFID;
-			}
 		}
 		else
 		{
