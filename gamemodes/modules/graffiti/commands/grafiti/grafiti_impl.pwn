@@ -33,10 +33,10 @@ command_grafiti_Impl(playerid, opcja[24])
             new i = graffiti_FindNearest(playerid);
             if(i!=INVALID_GRAFID)
             {
-                    format(string, sizeof(string), "[ID graffiti]:{FF0000}%d", i); 
-                    SendClientMessage(playerid, COLOR_WHITE, string);
-                    format(string, sizeof(string), "[Nazwa w³aœciciela]:{FF0000}%s", GraffitiInfo[i][pOwner]);
-                    SendClientMessage(playerid, COLOR_WHITE, string);
+                format(string, sizeof(string), "[ID graffiti]:{FF0000}%d", i); 
+                SendClientMessage(playerid, COLOR_WHITE, string);
+                format(string, sizeof(string), "[Nazwa w³aœciciela]:{FF0000}%s", GraffitiInfo[i][pOwner]);
+                SendClientMessage(playerid, COLOR_WHITE, string);
             }
             else
             {
