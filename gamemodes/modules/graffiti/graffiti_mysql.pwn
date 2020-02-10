@@ -110,17 +110,17 @@ stock graffiti_LoadMySQL(id = -1)
 		mysql_free_result();
 		switch(GraffitiInfo[id][gColor])
 		{
-			case 0: GraffitiInfo[id][gColor] = GRAFFITI_CZARNY;// CZARNY
+			case 0: GraffitiInfo[id][gColor] = GRAFFITI_CZARNY;
  
-            case 1: GraffitiInfo[id][gColor] = GRAFFITI_BIALY; // BIALY
+            case 1: GraffitiInfo[id][gColor] = GRAFFITI_BIALY;
  
-            case 2: GraffitiInfo[id][gColor] = GRAFFITI_CZERWONY; // CZERWONY
+            case 2: GraffitiInfo[id][gColor] = GRAFFITI_CZERWONY;
  
-            case 3: GraffitiInfo[id][gColor] = GRAFFITI_ZIELONY; // ZIELONY
+            case 3: GraffitiInfo[id][gColor] = GRAFFITI_ZIELONY;
  
-            case 4: GraffitiInfo[id][gColor] = GRAFFITI_NIEBIESKI; // NIEBIESKI
+            case 4: GraffitiInfo[id][gColor] = GRAFFITI_NIEBIESKI;
  
-            case 5: GraffitiInfo[id][gColor] = GRAFFITI_SZARY;  // SZARY
+            case 5: GraffitiInfo[id][gColor] = GRAFFITI_SZARY;
 		}
 		GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
     	SetDynamicObjectMaterialText(GraffitiInfo[id][gID], 0, GraffitiInfo[id][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[id][gColor], 0, 1);

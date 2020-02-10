@@ -87,7 +87,7 @@ hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Fl
 //-----------------<[ Funkcje: ]>-------------------
 GrafExist(value)
 {
-	if(GraffitiInfo[value][grafXpos] != 0)
+	if(GraffitiInfo[value][grafXpos] != 0 && GraffitiInfo[value][grafXYpos] != 0)
 	{
 		return true;
 	}
@@ -113,6 +113,11 @@ graffiti_ReloadForPlayers(id)
 graffiti_CreateGraffiti(playerid)
 {
 	new f = graffiti_GetNewID();
+	if(f == INVALID_GRAFID) 
+	{
+		sendTipMessage(playerid, "Wykorzystano limit graffiti(100) na mapê.");
+		return 1;
+	}
 	SetPVarInt(playerid, "GraffitiID", f);
 	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
 	GraffitiInfo[f][grafXpos] = PlayerPos[playerid][0];
@@ -126,17 +131,17 @@ graffiti_CreateGraffiti(playerid)
 	graffiti_SaveMySQL(f, playerid);
 	switch(GraffitiInfo[f][gColor])
 	{
-		case 0: GraffitiInfo[f][gColor] = GRAFFITI_CZARNY;// CZARNY
+		case 0: GraffitiInfo[f][gColor] = GRAFFITI_CZARNY;
  
-        case 1: GraffitiInfo[f][gColor] = GRAFFITI_BIALY; // BIALY
+        case 1: GraffitiInfo[f][gColor] = GRAFFITI_BIALY;
  
-        case 2: GraffitiInfo[f][gColor] = GRAFFITI_CZERWONY; // CZERWONY
+        case 2: GraffitiInfo[f][gColor] = GRAFFITI_CZERWONY;
  
-        case 3: GraffitiInfo[f][gColor] = GRAFFITI_ZIELONY; // ZIELONY
+        case 3: GraffitiInfo[f][gColor] = GRAFFITI_ZIELONY;
  
-        case 4: GraffitiInfo[f][gColor] = GRAFFITI_NIEBIESKI; // NIEBIESKI
+        case 4: GraffitiInfo[f][gColor] = GRAFFITI_NIEBIESKI;
  
-        case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;  // SZARY
+        case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;
 	}
 	graffiti_ReloadForPlayers(f);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
@@ -144,8 +149,7 @@ graffiti_CreateGraffiti(playerid)
 }
 graffiti_ZerujZmienne(playerid)
 {
-	pGraffiti[playerid] = -1;
-	Graffiti_Color[playerid] = 0;
+	Graffiti_Color[playerid] = -1;
 	Graffiti_Text[playerid] = "";
 }
 //end
