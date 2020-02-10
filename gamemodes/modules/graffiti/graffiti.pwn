@@ -63,10 +63,9 @@ public OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz)
 
 hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
 {
+	new f = GetPVarInt(playerid, "GraffitiID");
  	if( response == EDIT_RESPONSE_FINAL )
     {
-        
-		new f = GetPVarInt(playerid, "GraffitiID");
 		GraffitiInfo[f][grafXpos] = x;
 		GraffitiInfo[f][grafYpos] = y;
 		GraffitiInfo[f][grafZpos] = z;
@@ -74,13 +73,13 @@ hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Fl
 		GraffitiInfo[f][grafYYpos] = ry;
 		GraffitiInfo[f][grafZYpos] = rz;
         GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
-		graffiti_SaveMySQL(f, playerid);
+		graffiti_UpdateMySQL(f, playerid);
 		graffiti_ReloadForPlayers(f);
 		graffiti_ZerujZmienne(playerid);
     }
     if( response == EDIT_RESPONSE_CANCEL )
     {
-        DestroyDynamicObject(pGraffiti[playerid]);
+		graffiti_DeleteMySQL(f, playerid);
 		GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
     }
     return 1;

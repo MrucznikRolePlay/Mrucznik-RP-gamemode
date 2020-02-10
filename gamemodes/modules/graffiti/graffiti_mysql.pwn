@@ -146,5 +146,40 @@ stock graffiti_SaveMySQL(id, playerid)
 	sendTipMessage(playerid, "Zapisano!");
 }
 
+stock graffiti_UpdateMySQL(id, playerid, type = 1)
+{
+	new query[1024];
+	if(type == 1)
+	{
+		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `x`='%f',`y`='%f',`z`='%f',`xy`='%f',`yy`='%f',`zy`='%f' WHERE `id`='%d'",
+		GraffitiInfo[id][grafXpos],
+		GraffitiInfo[id][grafYpos],
+		GraffitiInfo[id][grafZpos],
+		GraffitiInfo[id][grafXYpos],
+		GraffitiInfo[id][grafYYpos],
+		GraffitiInfo[id][grafZYpos],
+		id);
+		mysql_query(query);
+	}
+	else if(type == 2)
+	{
+		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
+		GraffitiInfo[id][grafText],
+		GraffitiInfo[id][gColor],
+		id);
+		mysql_query(query);
+	}
+	sendTipMessage(playerid, "Zapisano!");
+}
+
+stock graffiti_DeleteMySQL(id, playerid)
+{
+	DestroyDynamicObject(GraffitiInfo[id][gID]);
+	new query[1024];
+	format(query, sizeof(query), "DELETE FROM `mru_graffiti` WHERE `id`='%d'", id);
+	mysql_query(query);
+	sendTipMessage(playerid, "Usuniêto!");
+}
+
 //stock graffiti_UpdateMySQL(id)
 //end
