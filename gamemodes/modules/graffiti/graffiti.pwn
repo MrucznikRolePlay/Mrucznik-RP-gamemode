@@ -81,17 +81,15 @@ graffiti_ReloadForPlayers(id)
 	graffiti_LoadMySQL(id);
 	return 1;
 }
-
-graffiti_ReloadAll()
+graffiti_Zeruj(f)
 {
-	for(new i; i <= GRAFFITI_MAX; i++)
-	{
-		if(GrafExist(i))
-		{
-			DestroyDynamicObject(GraffitiInfo[i][gID]);
-		}
-	}
-	graffiti_LoadMySQL();
+	GraffitiInfo[f][grafXpos] = 0;
+	GraffitiInfo[f][grafYpos] = 0;
+	GraffitiInfo[f][grafZpos] = 0;
+	GraffitiInfo[f][grafXYpos] = 0.0;
+	GraffitiInfo[f][grafYYpos] = 0.0;
+	GraffitiInfo[f][grafZYpos] = 0.0;
+	GraffitiInfo[f][gColor] = -1;
 }
 graffiti_CreateGraffiti(playerid)
 {
