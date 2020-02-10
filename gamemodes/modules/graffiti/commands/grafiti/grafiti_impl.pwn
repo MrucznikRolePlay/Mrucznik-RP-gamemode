@@ -36,6 +36,10 @@ command_grafiti_Impl(playerid, opcja[24])
             format(string, sizeof(string), "[Nazwa w³aœciciela]:{FF0000}%s", GraffitiInfo[i][pOwner]);
             SendClientMessage(playerid, COLOR_WHITE, string);
         }
+        else
+        {
+            sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
+        }
     }
     else if(strcmp(opcja,"stworz",true) == 0)
     {

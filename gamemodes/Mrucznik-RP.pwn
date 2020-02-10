@@ -4974,6 +4974,12 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 		else if( response == EDIT_RESPONSE_FINAL && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
 			new f = GetPVarInt(playerid, "GraffitiID");
+			if(!IsPlayerInRangeOfPoint(playerid, 3.0, x,y,z))
+            {
+                GameTextForPlayer(playerid, "~r~Byles za daleko.",2000, 5);
+                graffiti_DeleteMySQL(f);
+				graffiti_ZerujZmienne(playerid);
+			}
 			GraffitiInfo[f][grafXpos] = x;
 			GraffitiInfo[f][grafYpos] = y;
 			GraffitiInfo[f][grafZpos] = z;
@@ -4989,7 +4995,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 		{
 			new f = GetPVarInt(playerid, "GraffitiID");
 			graffiti_DeleteMySQL(f);
-			GameTextForPlayer(playerid, "~r~Usuniêto!",2000, 5);
+			GameTextForPlayer(playerid, "~r~Usunieto!",2000, 5);
 			graffiti_ZerujZmienne(playerid);
 		}
     }

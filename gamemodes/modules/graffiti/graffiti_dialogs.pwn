@@ -43,6 +43,7 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new string[128];
 			if(isnull(inputtext)) return GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
+			if(strfind(inputtext, "\n") != -1) return GameTextForPlayer(playerid, "~r~Zakazane znaki!",2000, 5);
 			format(string, sizeof(string), "%s", inputtext);
 			Graffiti_Text[playerid] = string;
 			graffiti_ShowColorMenu(playerid);

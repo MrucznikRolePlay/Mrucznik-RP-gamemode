@@ -137,11 +137,13 @@ graffiti_ZerujZmienne(playerid)
 
 graffiti_FindNearest(playerid)
 {
+	new Float:ox, Float:oy, Float:oz;
 	for(new i; i <= GRAFFITI_MAX; i++)
 	{
 		if(GrafExist(i))
 		{
-			if(IsPlayerInRangeOfPoint(playerid, 1.5, GraffitiInfo[i][grafXpos], GraffitiInfo[i][grafYpos], GraffitiInfo[i][grafZpos]))
+			GetDynamicObjectPos(GraffitiInfo[i][gID], ox, oy, oz);
+			if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz))
 			{
 				return i;
 			}
