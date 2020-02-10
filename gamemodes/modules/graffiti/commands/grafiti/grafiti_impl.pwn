@@ -25,7 +25,22 @@
 //------------------<[ Implementacja: ]>-------------------
 command_grafiti_Impl(playerid, opcja[24])
 {
-    graffiti_ShowCreationDialog(playerid);
+    if(strcmp(opcja,"sprawdz",true) == 0)
+	{
+        new string[128];
+        new i = graffiti_FindNearest(playerid);
+        if(i!=INVALID_GRAFID)
+        {
+            format(string, sizeof(string), "[ID]:{FF0000}%d", i); 
+            SendClientMessage(playerid, COLOR_WHITE, string);
+            format(string, sizeof(string), "[Nazwa w³aœciciela]:{FF0000}%s", GraffitiInfo[i][pOwner]);
+            SendClientMessage(playerid, COLOR_WHITE, string);
+        }
+    }
+    else if(strcmp(opcja,"stworz",true) == 0)
+    {
+        graffiti_ShowCreationDialog(playerid);
+    }
     return 1;
 }
 

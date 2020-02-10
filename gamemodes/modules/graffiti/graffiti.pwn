@@ -134,4 +134,27 @@ graffiti_ZerujZmienne(playerid)
 	DeletePVar(playerid, "CreatingGraff");
 	DeletePVar(playerid, "GraffitiID");
 }
+
+graffiti_FindNearest(playerid)
+{
+	for(new i; i <= GRAFFITI_MAX; i++)
+	{
+		if(GrafExist(i))
+		{
+			if(IsPlayerInRangeOfPoint(playerid, 1.5, GraffitiInfo[i][grafXpos], GraffitiInfo[i][grafYpos], GraffitiInfo[i][grafZpos]))
+			{
+				return i;
+			}
+			else
+			{
+				return INVALID_GRAFID;
+			}
+		}
+		else
+		{
+			return INVALID_GRAFID;
+		}
+	}
+	return 1;
+}
 //end

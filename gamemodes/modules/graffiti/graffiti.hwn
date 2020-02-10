@@ -42,5 +42,4 @@ new Graffiti_Color[MAX_PLAYERS];
 new Graffiti_Text[MAX_PLAYERS][128];
 
 //------------------<[ Forwardy: ]>--------------------
-forward OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz);
 //end
