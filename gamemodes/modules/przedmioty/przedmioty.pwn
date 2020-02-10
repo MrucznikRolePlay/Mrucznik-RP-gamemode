@@ -49,6 +49,10 @@ public PlayerChangeWeapon(playerid, newweaponid)
 }
 PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 {
+	/*
+	SPECJALNE (weapondata):
+		1 - paralizator
+	*/
 	if(AntySpam[playerid] == 1)
 	{
 		return sendTipMessageEx(playerid, COLOR_GRAD3, "Wyci¹gasz ju¿ broñ...");
@@ -60,10 +64,9 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 	
 	if(weaponid > 1)
 	{
-		if(starabron[playerid] == 24 && GetPVarInt(playerid, "tazer") == 1)
+		if(starabron[playerid] == 24 && MaTazer[playerid] == 1)
 		{
 			format(gname, sizeof(gname), "Paralizator");
-			SetPVarInt(playerid, "tazer", 0);
 		}
 		else
 		{
@@ -380,7 +383,7 @@ PokazDialogBronie(playerid)
 	{
 		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun2], PlayerInfo[playerid][pGun2]);
 		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun2] == starabron[playerid] && GetPVarInt(playerid, "tazer") != 1)
+		if(PlayerInfo[playerid][pGun2] == starabron[playerid] && MaTazer[playerid] != 1)
 		{
 			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 		}
@@ -548,7 +551,7 @@ PokazDialogBronie(playerid)
 	{
 		DynamicGui_AddRow(playerid, 1, 24); //paralizator
 		weaponexist = 1;
-		if(24 == starabron[playerid] && GetPVarInt(playerid, "tazer") == 1)
+		if(24 == starabron[playerid] && MaTazer[playerid] == 1)
 		{
 			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 		}

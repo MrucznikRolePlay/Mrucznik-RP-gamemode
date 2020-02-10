@@ -89,7 +89,11 @@ YCMD:newbie(playerid, params[], help)
 				return 1;
 			}
 			new nobchat[512];
-            if(PlayerInfo[playerid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] != 7 && PlayerInfo[playerid][pAdmin] != 5555)
+			if(IsAScripter(playerid))
+            {
+                format(nobchat, sizeof(nobchat), "(({DAFC10} Skrypter [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
+            }
+            else if(PlayerInfo[playerid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] != 7 && PlayerInfo[playerid][pAdmin] != 5555)
 		    {
 				format(nobchat, sizeof(nobchat), "(({FF6347} Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
 			}
@@ -97,10 +101,6 @@ YCMD:newbie(playerid, params[], help)
 		    {
 				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
 			}
-            else if(IsAScripter(playerid))
-            {
-                format(nobchat, sizeof(nobchat), "(({DAFC10} Skrypter [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
-            }
 	 		else if(IsPlayerPremiumOld(playerid))
 			{
 			    format(nobchat, sizeof(nobchat), "(({FFD700} Sponsor [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
