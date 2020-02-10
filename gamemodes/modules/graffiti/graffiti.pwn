@@ -58,7 +58,7 @@ hook OnPlayerConnect(playerid)
 //-----------------<[ Funkcje: ]>-------------------
 GrafExist(value)
 {
-	if(GraffitiInfo[value][grafXpos] != 0 && GraffitiInfo[value][grafXYpos] != 0)
+	if(GraffitiInfo[value][grafXpos] != 0)
 	{
 		return true;
 	}
