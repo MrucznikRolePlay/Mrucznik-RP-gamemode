@@ -43,7 +43,8 @@ YCMD:szukani(playerid, params[], help)
 			{
 				if(IsPlayerConnected(i))
 				{
-				    if(PoziomPoszukiwania[i] >= 2 && PoziomPoszukiwania[i] <= 5 || PoziomPoszukiwania[i] == 10)
+				    //if(PoziomPoszukiwania[i] >= 2 && PoziomPoszukiwania[i] <= 5 || PoziomPoszukiwania[i] == 10) // tymczasowo off bo nie ma FBI
+					if(true == true)
 				    {
 						GetPlayerName(i, giveplayer, sizeof(giveplayer));
 						format(string, sizeof(string), "%s%s: %d", string,giveplayer,PoziomPoszukiwania[i]);
