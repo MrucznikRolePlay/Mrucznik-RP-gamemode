@@ -1753,24 +1753,25 @@ HandlePlayerItemSelection(playerid, selecteditem)
 
     if(id == -1) return SendClientMessage(playerid, -1, "Osi¹gniêto limit barierek.");
 
-    new Float:x, Float:y, Float:z, Float:a;
+    new Float:x, Float:y, Float:z, Float:a, vw;
     GetPlayerPos(playerid, x, y, z);
     GetPlayerFacingAngle(playerid, a);
     SetPlayerPos(playerid, x, y, z+0.2);
+	vw = GetPlayerVirtualWorld(playerid);
     x+=2*floatsin(-a, degrees);
     y+=2*floatcos(-a, degrees);
 
-    BARIERKA_Create(frac, id, gSelectionItemsTag[playerid][selecteditem], x, y, z-0.5, a);
+    BARIERKA_Create(frac, id, gSelectionItemsTag[playerid][selecteditem], x, y, z-0.5, a, vw);
 
     SetPVarInt(playerid, "Barier-id", id+1);
     SetTimerEx("EditObj", 500, 0, "ii", playerid, Barier[frac][id]);
     return 1;
 }
 
-BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
+BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a, vw = 0)
 {
 	DestroyDynamicObject(Barier[frac][id]);
-	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
+	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a, vw);
 	if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
 	BarierState[frac][id] = true;
     return 1;
