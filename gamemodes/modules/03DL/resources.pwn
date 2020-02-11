@@ -1,4 +1,4 @@
-// //resoursces.pwn
+// //resources.pwn
 
 // LoadDLSkins()
 // {
