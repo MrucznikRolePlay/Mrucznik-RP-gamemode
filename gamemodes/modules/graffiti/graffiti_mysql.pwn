@@ -42,7 +42,7 @@ stock graffiti_LoadMySQL(id = -1)
 	mysql_free_result();
 	if(id == -1)
 	{
-		for(new i; i < valueGraffiti; i++) 
+		for(new i; i <= valueGraffiti; i++) 
 		{
 			lStr = "`ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`";
 			format(query, sizeof(query), "SELECT %s FROM `mru_graffiti` WHERE `id`='%d'", lStr, i);
