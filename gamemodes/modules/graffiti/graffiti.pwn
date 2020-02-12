@@ -175,6 +175,7 @@ graffiti_FindNearest(playerid)
 			}
 		}
 	}
+	sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
 	return INVALID_GRAFID;
 }
 //end
