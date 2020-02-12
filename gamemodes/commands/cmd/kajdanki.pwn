@@ -93,8 +93,7 @@ YCMD:kajdanki(playerid, params[], help)
                                 SetTimerEx("Kajdanki_debug", 1000, 0, "d", giveplayerid);
                                 return 1;
                             }
-
-                            if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
+                            else if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
                             {
                                 //Wiadomoœci
                                 format(string, sizeof(string), "* %s dociska do ziemi %s, a nastêpnie zakuwa go w kajdanki.", GetNick(playerid, true), GetNick(giveplayerid, true));
