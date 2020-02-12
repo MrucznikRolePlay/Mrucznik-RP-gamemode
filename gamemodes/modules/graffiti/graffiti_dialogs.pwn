@@ -32,29 +32,28 @@ graffiti_ShowCreationDialog(playerid)
 }
 graffiti_ShowListDialog(playerid)
 {
+	DynamicGui_Init(playerid);
 	graffiti_CountGraffs(playerid);
     graffiti_GetGraffitiIDs(playerid);
 	new dialogstring[2048];
-	DynamicGui_Init(playerid);
     if(Graffiti_Amount[playerid] > 0)
     {	
         new f;
-        //show dialog 
-		format(dialogstring, sizeof(dialogstring), "Lista twoich graffiti:\n");
+		format(dialogstring, sizeof(dialogstring), "%sLista twoich graffiti:\n", dialogstring);
 		DynamicGui_AddBlankRow(playerid);
-		format(dialogstring, sizeof(dialogstring), "%s--------------------------------\n");
+		format(dialogstring, sizeof(dialogstring), "%s{FF0000}--------------------------------\n");
 		DynamicGui_AddBlankRow(playerid);
         for(new i; i < Graffiti_Amount[playerid]; i++)
         {	
             f = Graffiti_PlayerList[playerid][i];
 			strdel(GraffitiInfo[f][grafText], 30, 128);
-            format(dialogstring, sizeof(dialogstring), "%s[%d]\t%s...\n", dialogstring, f, GraffitiInfo[f][grafText]);
+            format(dialogstring, sizeof(dialogstring), "%s{F0F0F0}[%d]»\t{FFFFFF}%s...\n", dialogstring, f, GraffitiInfo[f][grafText]);
 			DynamicGui_AddRow(playerid, f);
 		}
     }
     else
     {
-		format(dialogstring, sizeof(dialogstring), "Lista twoich graffiti:\n");
+		format(dialogstring, sizeof(dialogstring), "%sLista twoich graffiti:\n", dialogstring);
 		DynamicGui_AddBlankRow(playerid);
         format(dialogstring, sizeof(dialogstring), "%sBrak\n", dialogstring);
 		DynamicGui_AddBlankRow(playerid);

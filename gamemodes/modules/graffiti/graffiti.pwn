@@ -139,6 +139,7 @@ graffiti_Zeruj(f)
 	GraffitiInfo[f][grafXYpos] = 0.0;
 	GraffitiInfo[f][grafYYpos] = 0.0;
 	GraffitiInfo[f][grafZYpos] = 0.0;
+	format(GraffitiInfo[f][pOwner], MAX_PLAYER_NAME, "");
 	GraffitiInfo[f][gColor] = -1;
 }
 graffiti_CreateGraffiti(playerid)
