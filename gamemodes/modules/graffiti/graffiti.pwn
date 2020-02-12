@@ -83,6 +83,7 @@ graffiti_ReloadForPlayers(id)
 }
 graffiti_CountGraffs(playerid)
 {
+	Graffiti_Amount[playerid] = 0;
 	for(new i; i < GRAFFITI_MAX; i++)
 	{
 		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
