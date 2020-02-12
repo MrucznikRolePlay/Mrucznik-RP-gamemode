@@ -842,24 +842,24 @@ public PlayerAFK(playerid, afktime, breaktime)
 		if(afktime == 840 && GetPlayerAdminDutyStatus(playerid) == 1)
 		{
 			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
-			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 14 minut.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		else if(afktime == 1740 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime == 1740 && PlayerInfo[playerid][pNewAP] >= 1)
+		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1))
 		{
 			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
-			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 29 minut.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
 		else if(afktime == 1140 && IsPlayerPremiumOld(playerid))
 		{
 			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
-			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 19 minut.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
 		else if(afktime == 540)
 		{
 			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
-			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 9 minut.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
+		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 || afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
 			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
