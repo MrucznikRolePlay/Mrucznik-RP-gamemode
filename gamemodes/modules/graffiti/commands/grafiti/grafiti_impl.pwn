@@ -91,7 +91,7 @@ command_grafiti_Impl(playerid, opcja[24])
             {
                 f = Graffiti_PlayerList[playerid][i];
                 format(string, sizeof(string), "ID: %d, Tekst: %s", f, GraffitiInfo[f][grafText]);
-                SendClientMessage(playerid, COLOR_wHITE, string);
+                SendClientMessage(playerid, COLOR_WHITE, string);
             }
         }
         else
