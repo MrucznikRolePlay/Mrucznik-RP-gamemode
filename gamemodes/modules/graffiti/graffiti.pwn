@@ -92,7 +92,7 @@ graffiti_CountGraffs(playerid)
 		}
 	}
 }
-graffiti_LoadPlayerList(playerid)
+graffiti_GetGraffitiIDs(playerid)
 {
 	new licznik = 0;
 	graffiti_ZerujListe(playerid);
@@ -103,6 +103,32 @@ graffiti_LoadPlayerList(playerid)
 			Graffiti_PlayerList[playerid][licznik] = i;
 			licznik++;
 		}
+	}
+}
+graffiti_DefineColor(GRAF_ID)
+{
+	new f = GRAF_ID;
+	switch(GraffitiInfo[f][gColor])
+	{
+		case 0: GraffitiInfo[f][gColor] = GRAFFITI_CZARNY;
+ 
+        case 1: GraffitiInfo[f][gColor] = GRAFFITI_BIALY;
+ 
+        case 2: GraffitiInfo[f][gColor] = GRAFFITI_CZERWONY;
+ 
+        case 3: GraffitiInfo[f][gColor] = GRAFFITI_ZIELONY;
+ 
+        case 4: GraffitiInfo[f][gColor] = GRAFFITI_NIEBIESKI;
+ 
+        case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;
+
+		case 6: GraffitiInfo[f][gColor] = GRAFFITI_POMARANCZOWY;
+
+		case 7: GraffitiInfo[f][gColor] = GRAFFITI_ZOLTY;
+
+		case 8: GraffitiInfo[f][gColor] = GRAFFITI_FIOLETOWY;
+
+		case 9: GraffitiInfo[f][gColor] = GRAFFITI_ROZOWY;
 	}
 }
 graffiti_Zeruj(f)
@@ -135,28 +161,7 @@ graffiti_CreateGraffiti(playerid)
 	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
 	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
 	graffiti_SaveMySQL(f, playerid);
-	switch(GraffitiInfo[f][gColor])
-	{
-		case 0: GraffitiInfo[f][gColor] = GRAFFITI_CZARNY;
- 
-        case 1: GraffitiInfo[f][gColor] = GRAFFITI_BIALY;
- 
-        case 2: GraffitiInfo[f][gColor] = GRAFFITI_CZERWONY;
- 
-        case 3: GraffitiInfo[f][gColor] = GRAFFITI_ZIELONY;
- 
-        case 4: GraffitiInfo[f][gColor] = GRAFFITI_NIEBIESKI;
- 
-        case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;
-
-		case 6: GraffitiInfo[f][gColor] = GRAFFITI_POMARANCZOWY;
-
-		case 7: GraffitiInfo[f][gColor] = GRAFFITI_ZOLTY;
-
-		case 8: GraffitiInfo[f][gColor] = GRAFFITI_FIOLETOWY;
-
-		case 9: GraffitiInfo[f][gColor] = GRAFFITI_ROZOWY;
-	}
+	graffiti_DefineColor(f);
 	graffiti_ReloadForPlayers(f);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
 	return 1;

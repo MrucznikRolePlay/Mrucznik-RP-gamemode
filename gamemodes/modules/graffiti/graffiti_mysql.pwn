@@ -64,29 +64,7 @@ stock graffiti_LoadMySQL(id = -1)
 				loadedGraffiti++;
 			}
 			mysql_free_result();
-
-			switch(GraffitiInfo[i][gColor])
-			{
-				case 0: GraffitiInfo[i][gColor] = GRAFFITI_CZARNY;
- 
-                case 1: GraffitiInfo[i][gColor] = GRAFFITI_BIALY;
- 
-                case 2: GraffitiInfo[i][gColor] = GRAFFITI_CZERWONY;
- 
-                case 3: GraffitiInfo[i][gColor] = GRAFFITI_ZIELONY;
- 
-                case 4: GraffitiInfo[i][gColor] = GRAFFITI_NIEBIESKI;
- 
-                case 5: GraffitiInfo[i][gColor] = GRAFFITI_SZARY;
-
-				case 6: GraffitiInfo[i][gColor] = GRAFFITI_POMARANCZOWY;
-
-				case 7: GraffitiInfo[i][gColor] = GRAFFITI_ZOLTY;
-
-				case 8: GraffitiInfo[i][gColor] = GRAFFITI_FIOLETOWY;
-
-				case 9: GraffitiInfo[i][gColor] = GRAFFITI_ROZOWY;
-			}
+			graffiti_DefineColor(i);
 			strreplace(GraffitiInfo[i][grafText], "~n~", "\n", .ignorecase = true);
 			GraffitiInfo[i][gID] = CreateDynamicObject(19482, GraffitiInfo[i][grafXpos], GraffitiInfo[i][grafYpos], GraffitiInfo[i][grafZpos], GraffitiInfo[i][grafXYpos], GraffitiInfo[i][grafYYpos], GraffitiInfo[i][grafZYpos], 0, 0, -1, 200);
     		SetDynamicObjectMaterialText(GraffitiInfo[i][gID], 0, GraffitiInfo[i][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[i][gColor], 0, 1);
@@ -115,28 +93,7 @@ stock graffiti_LoadMySQL(id = -1)
 			GraffitiInfo[id][grafZYpos]);
 		}
 		mysql_free_result();
-		switch(GraffitiInfo[id][gColor])
-		{
-			case 0: GraffitiInfo[id][gColor] = GRAFFITI_CZARNY;
- 
-            case 1: GraffitiInfo[id][gColor] = GRAFFITI_BIALY;
- 
-            case 2: GraffitiInfo[id][gColor] = GRAFFITI_CZERWONY;
- 
-            case 3: GraffitiInfo[id][gColor] = GRAFFITI_ZIELONY;
- 
-            case 4: GraffitiInfo[id][gColor] = GRAFFITI_NIEBIESKI;
- 
-            case 5: GraffitiInfo[id][gColor] = GRAFFITI_SZARY;
-			
-			case 6: GraffitiInfo[id][gColor] = GRAFFITI_POMARANCZOWY;
-
-			case 7: GraffitiInfo[id][gColor] = GRAFFITI_ZOLTY;
-
-			case 8: GraffitiInfo[id][gColor] = GRAFFITI_FIOLETOWY;
-
-			case 9: GraffitiInfo[id][gColor] = GRAFFITI_ROZOWY;
-		}
+		graffiti_DefineColor(id);
 		strreplace(GraffitiInfo[id][grafText], "~n~", "\n", .ignorecase = true);
 		GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
     	SetDynamicObjectMaterialText(GraffitiInfo[id][gID], 0, GraffitiInfo[id][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[id][gColor], 0, 1);

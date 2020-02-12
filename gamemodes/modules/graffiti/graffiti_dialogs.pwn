@@ -33,7 +33,7 @@ graffiti_ShowCreationDialog(playerid)
 graffiti_ShowListDialog(playerid)
 {
 	graffiti_CountGraffs(playerid);
-    graffiti_LoadPlayerList(playerid);
+    graffiti_GetGraffitiIDs(playerid);
 	new dialogstring[2048];
 	DynamicGui_Init(playerid);
     if(Graffiti_Amount[playerid] > 0)
@@ -116,11 +116,11 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			new i = DynamicGui_GetValue(playerid, listitem);
+			new graffiti_id = DynamicGui_GetValue(playerid, listitem);
 			new Float:x,Float:y,Float:z;
-			x = GraffitiInfo[i][grafXpos];
-			y = GraffitiInfo[i][grafYpos];
-			z = GraffitiInfo[i][grafZpos];
+			x = GraffitiInfo[graffiti_id][grafXpos];
+			y = GraffitiInfo[graffiti_id][grafYpos];
+			z = GraffitiInfo[graffiti_id][grafZpos];
 			SetPlayerCheckpoint(playerid, x, y, z, 2);
 		}
 	}
