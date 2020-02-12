@@ -38,20 +38,20 @@ graffiti_ShowListDialog(playerid)
 	new dialogstring[2048];
     if(Graffiti_Amount[playerid] > 0)
     {	
-        new f;
+        new f, licznik = 1;
         for(new i; i < Graffiti_Amount[playerid]; i++)
         {	
             f = Graffiti_PlayerList[playerid][i];
 			strdel(GraffitiInfo[f][grafText], 30, 128);
-            format(dialogstring, sizeof(dialogstring), "%s{FAF000}[%d]»\t{FFFFFF}%s...\n", dialogstring, f, GraffitiInfo[f][grafText]);
+			strreplace(GraffitiInfo[f][grafText], "\n", "~n~", .ignorecase = true);
+            format(dialogstring, sizeof(dialogstring), "%s{FAF000}[%d]»\t{FFFFFF}%s...\n", dialogstring, licznik, GraffitiInfo[f][grafText]);
 			DynamicGui_AddRow(playerid, f, 1);
+			licznik++;
 		}
     }
     else
     {
-		format(dialogstring, sizeof(dialogstring), "%sLista twoich graffiti:\n", dialogstring);
-		DynamicGui_AddBlankRow(playerid);
-        format(dialogstring, sizeof(dialogstring), "%sBrak\n", dialogstring);
+        format(dialogstring, sizeof(dialogstring), "%s{FF0000}Brak!\n", dialogstring);
 		DynamicGui_AddBlankRow(playerid);
     }
 	ShowPlayerDialogEx(playerid, GRAFFITI_DIALOG_LIST, DIALOG_STYLE_LIST, "Lista graffiti", dialogstring, "ZnajdŸ", "X");

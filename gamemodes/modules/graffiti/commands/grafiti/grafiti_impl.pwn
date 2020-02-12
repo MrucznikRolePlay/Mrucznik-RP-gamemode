@@ -51,7 +51,7 @@ command_grafiti_Impl(playerid, opcja[24])
     else if(strcmp(opcja,"stworz",true) == 0)
     {
         graffiti_CountGraffs(playerid);
-        if(Graffiti_Amount[playerid] > 3)
+        if(Graffiti_Amount[playerid] >= 3)
         {
             sendTipMessage(playerid, "Wykorzystano limit graffiti(3).");
             return 1;
