@@ -140,7 +140,7 @@ Player_RemoveFromVeh(playerid)
 {
 	new Float:slx, Float:sly, Float:slz;
 	GetPlayerPos(playerid, slx, sly, slz);
-	SetPlayerPosEx(playerid, slx, sly, slz+1);
+	SetPlayerPos(playerid, slx, sly, slz+1);
 	ClearAnimations(playerid);	
 
 	return true;

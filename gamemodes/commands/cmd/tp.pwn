@@ -106,7 +106,7 @@ YCMD:tp(playerid, params[], help)
 					}
 					else
 					{
-						SetPlayerPosEx(plo1,plocx,plocy+2, plocz);
+						SetPlayerPos(plo1,plocx,plocy+2, plocz);
 					}
 				}
 				else

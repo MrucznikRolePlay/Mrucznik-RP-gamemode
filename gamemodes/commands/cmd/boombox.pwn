@@ -98,6 +98,7 @@ YCMD:boombox(playerid, params[], help)
             if(strcmp(sub, "znajdz", true) == 0 || strcmp(sub, "znajdŸ", true) == 0)
             {
                 SetPlayerCheckpoint(playerid, BoomBoxData[id][BBD_x], BoomBoxData[id][BBD_y], BoomBoxData[id][BBD_z], 2.0);
+                SendClientMessage(playerid, -1, "Je¿eli nie mo¿esz znaleŸæ boombox'a poproœ administratora o usuniêcie go.");
                 return 1;
             }
 

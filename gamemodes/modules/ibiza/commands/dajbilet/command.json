@@ -1,0 +1,17 @@
+{
+    "name": "dajbilet",
+    "description": "Komenda nadawaj¹ca bilet do Ibizy",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sanda³",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "01.02.2020"
+}

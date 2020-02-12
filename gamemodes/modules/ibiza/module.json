@@ -1,0 +1,11 @@
+{
+    "name": "ibiza",
+    "description": "Skrypt ibizy",
+    "author": "Sanda³",
+    "timers": false,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "01.02.2020"
+}

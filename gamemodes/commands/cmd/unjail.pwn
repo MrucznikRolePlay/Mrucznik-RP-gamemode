@@ -75,7 +75,7 @@ YCMD:unjail(playerid, params[], help)
 						PlayerInfo[playa][pMuted] = 0;
 						SetPlayerInterior(playa, 0);
 						SetPVarInt(playa, "DostalDM2", 0);//
-						SetPlayerPosEx(playa,-1677.0605,917.2449,-52.4141);
+						SetPlayerPos(playa,-1677.0605,917.2449,-52.4141);
 						SetPlayerVirtualWorld(playa, 1);
                         Wchodzenie(playa);
 						PlayerPlaySound(playa, 0, 0.0, 0.0, 0.0);

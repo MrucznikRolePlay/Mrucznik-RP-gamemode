@@ -63,11 +63,6 @@ YCMD:po(playerid, params[], help)
 							{
 								PoziomPoszukiwania[giveplayerid]+=2;
 							}
-    						else if(PoziomPoszukiwania[giveplayerid] >= 10)
-    						{
-    							sendTipMessage(playerid, "Nie mo¿esz daæ ju¿ wiêcej WL");
-    							return 1;
-    						}
     						else
     						{
                                 if(IsABOR(playerid) && PoziomPoszukiwania[giveplayerid] > 1) return sendTipMessage(playerid, "Cz³onek GSA mo¿e nadaæ tylko 1 WL."); //14.06.2014
