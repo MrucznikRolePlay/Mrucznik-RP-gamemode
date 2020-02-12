@@ -1343,29 +1343,30 @@ return 1;
 }
 
 public OgladanieDOM(playerid){
-new deem = PlayerInfo[playerid][pDomWKJ];
-if(PlayerInfo[playerid][pDomWKJ] != 0)
-{
-	SetPlayerPos(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
-	SetPlayerInterior(playerid, 0);
-	SetPlayerVirtualWorld(playerid, 0);
-	PlayerInfo[playerid][pDomWKJ] = 0;
-}
-if(isNaked[playerid])
-{
-    UndressPlayer(playerid, false); 
-}
-GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
-DomOgladany[playerid] = 1;
+	new deem = PlayerInfo[playerid][pDomWKJ];
+	if(PlayerInfo[playerid][pDomWKJ] != 0)
+	{
+		SetPlayerPos(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
+		SetPlayerInterior(playerid, 0);
+		SetPlayerVirtualWorld(playerid, 0);
+		PlayerInfo[playerid][pDomWKJ] = 0;
+		SetServerWeatherAndTime(playerid);
+	}
+	if(isNaked[playerid])
+	{
+		UndressPlayer(playerid, false); 
+	}
+	GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
+	DomOgladany[playerid] = 1;
 
-SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
-return 1;
+	SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
+	return 1;
 }
 
 public CzasOgladaniaDOM(playerid){
-DomOgladany[playerid] = 0;
-GameTextForPlayer(playerid, "~g~Znow mozesz obejrzec dom", 5000, 1);
-return 1;
+	DomOgladany[playerid] = 0;
+	GameTextForPlayer(playerid, "~g~Znow mozesz obejrzec dom", 5000, 1);
+	return 1;
 }
 
 public RSPAWN(playerid){

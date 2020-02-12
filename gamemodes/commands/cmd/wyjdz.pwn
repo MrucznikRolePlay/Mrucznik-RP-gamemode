@@ -511,6 +511,7 @@ YCMD:wyjdz(playerid, params[], help)
 			        PlayerInfo[playerid][pDomWKJ] = 0;
 			        SetPlayerTime(playerid, PlayerInfo[playerid][pDomT], 0);
         			PlayerInfo[playerid][pDomT] = 0;
+					SetServerWeatherAndTime(playerid);
 			        GameTextForPlayer(playerid, "~g~Opusciles dom", 5000, 1);
 			        return 1;
                 }
