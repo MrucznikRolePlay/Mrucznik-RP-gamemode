@@ -535,7 +535,7 @@ PokazDialogBronie(playerid)
 	}
 	if(starabron[playerid] == 39 && PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
 	{
-		DynamicGui_AddRow(playerid, 1, 40); //detonator
+		DynamicGui_AddRow(playerid, 40); //detonator
 		weaponexist = 1;
 		if(GetPVarInt(playerid, "MaDetonator") == 1)
 		{
@@ -549,7 +549,7 @@ PokazDialogBronie(playerid)
 	}
 	if((IsACop(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
 	{
-		DynamicGui_AddRow(playerid, 1, 24); //paralizator
+		DynamicGui_AddRow(playerid, 24, 1); //paralizator
 		weaponexist = 1;
 		if(24 == starabron[playerid] && MaTazer[playerid] == 1)
 		{
