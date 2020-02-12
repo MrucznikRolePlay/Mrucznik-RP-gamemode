@@ -144,6 +144,7 @@ graffiti_Zeruj(f)
 }
 graffiti_EditGraffiti(playerid, f)
 {
+	DestroyDynamicObject(GraffitiInfo[f][gID]);
 	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
 	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
 	graffiti_UpdateMySQL(f, 2);
