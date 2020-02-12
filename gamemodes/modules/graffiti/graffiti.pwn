@@ -81,6 +81,21 @@ graffiti_ReloadForPlayers(id)
 	graffiti_LoadMySQL(id);
 	return 1;
 }
+graffiti_LoadPlayerList(playerid)
+{
+	new licznik = 0;
+	for(new i; i <= GRAFFITI_MAX; i++)
+	{
+		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+		{
+			if(licznik <= 3)
+			{
+				Graffiti_PlayerList[playerid][licznik] = i;
+				licznik++;
+			}
+		}
+	}
+}
 graffiti_Zeruj(f)
 {
 	GraffitiInfo[f][grafXpos] = 0;
@@ -141,6 +156,10 @@ graffiti_ZerujZmienne(playerid)
 {
 	Graffiti_Color[playerid] = -1;
 	Graffiti_Text[playerid] = "";
+	Graffiti_Amount[playerid] = 0;
+	Graffiti_PlayerList[playerid][0] = INVALID_GRAFID;
+	Graffiti_PlayerList[playerid][1] = INVALID_GRAFID;
+	Graffiti_PlayerList[playerid][2] = INVALID_GRAFID;
 	DeletePVar(playerid, "CreatingGraff");
 	DeletePVar(playerid, "GraffitiID");
 }

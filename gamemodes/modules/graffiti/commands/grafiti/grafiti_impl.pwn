@@ -79,6 +79,24 @@ command_grafiti_Impl(playerid, opcja[24])
             sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
         }
     }
+    else if(strcmp(opcja,"lista", true) == 0)
+    {
+        graffiti_LoadPlayerList(playerid);
+        if(Graffiti_Amount[playerid] >= 1)
+        {
+            //show dialog listy
+            for(new i = 0; i <= Graffiti_Amount[playerid]-1; i++)
+            {
+                new f = Graffiti_PlayerList[playerid][i];
+                format(string, sizeof(string), "ID: %d, Tekst: %s", f, GraffitiInfo[f][grafText]);
+                sendTipMessage(playerid, string);
+            }
+        }
+        else
+        {
+            sendTipMessage(playerid, "Nie posiadasz ¿adnego graffiti!");
+        }
+    }
     return 1;
 }
 
