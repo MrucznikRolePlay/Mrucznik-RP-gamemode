@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                    biz                                                    //
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                  graffiti                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,58 +16,32 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sanda³
+// Data utworzenia: 01.02.2020
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//------------------<[ Enumy: ]>--------------------
 
-//-------<[ include ]>-------
-#include "biz_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_biz()
+enum gInfo
 {
-    new command = Command_GetID("biz");
-
-    //aliases
-    Command_AddAlt(command, "bizradio");
-    Command_AddAlt(command, "radiobiz");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
+    gID,
+    pOwner[MAX_PLAYER_NAME],
+    grafText[128],
+    gColor[16],
+    Float:grafXpos,
+    Float:grafYpos,
+    Float:grafZpos,
+    Float:grafXYpos,
+    Float:grafYYpos,
+    Float:grafZYpos,
 }
+//-----------------<[ Zmienne: ]>-------------------
+new GraffitiInfo[GRAFFITI_MAX][gInfo];
+new Graffiti_Color[MAX_PLAYERS];
+new Graffiti_Text[MAX_PLAYERS][128];
+new Graffiti_Amount[MAX_PLAYERS];
+new Graffiti_PlayerList[MAX_PLAYERS][3];
 
-//-------<[ command ]>-------
-YCMD:biz(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Radio biznesowe.");
-        return 1;
-    }
-    //fetching params
-    new message[124];
-    if(sscanf(params, "s[124]", message))
-    {
-<<<<<<< HEAD:gamemodes/modules/biznesy/commands/biz/biz.pwn
-        sendTipMessage(playerid, "U¿yj /biz [wiadomoœæ] ");
-=======
-        sendTipMessage(playerid, "U¿yj /grafiti [stworz, edytuj, usun, sprawdz, lista] ");
->>>>>>> 5ac7cfa8... Dodanie /graffiti lista:gamemodes/modules/graffiti/commands/grafiti/grafiti.pwn
-        return 1;
-    }
-    
-    //command body
-    return command_biz_Impl(playerid, message);
-}
+//------------------<[ Forwardy: ]>--------------------
+//end

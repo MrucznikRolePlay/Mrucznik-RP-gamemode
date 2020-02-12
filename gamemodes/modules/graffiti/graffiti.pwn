@@ -84,12 +84,24 @@ graffiti_ReloadForPlayers(id)
 graffiti_LoadPlayerList(playerid)
 {
 	new licznik = 0;
+<<<<<<< HEAD
 	for(new i; i < GRAFFITI_MAX; i++)
 	{
 		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
 		{
 			Graffiti_PlayerList[playerid][licznik] = i;
 			licznik++;
+=======
+	for(new i; i <= GRAFFITI_MAX; i++)
+	{
+		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+		{
+			if(licznik <= 3)
+			{
+				Graffiti_PlayerList[playerid][licznik] = i;
+				licznik++;
+			}
+>>>>>>> 5ac7cfa8... Dodanie /graffiti lista
 		}
 	}
 }
