@@ -91,7 +91,7 @@ command_grafiti_Impl(playerid, opcja[24])
             {
                 f = Graffiti_PlayerList[playerid][i];
                 format(string, sizeof(string), "ID: %d, Tekst: %s", f, GraffitiInfo[f][grafText]);
-                sendTipMessage(playerid, string);
+                SendClientMessage(playerid, COLOR_wHITE, string);
             }
         }
         else
@@ -103,7 +103,7 @@ command_grafiti_Impl(playerid, opcja[24])
     {
         graffiti_LoadPlayerMySQL(playerid);
         format(string, sizeof(string), "Iloœæ: %d", Graffiti_Amount[playerid]);
-        sendClientMessage(playerid, COLOR_WHITE, string);
+        SendClientMessage(playerid, COLOR_WHITE, string);
     }
     return 1;
 }
