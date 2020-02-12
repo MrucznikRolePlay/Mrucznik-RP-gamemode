@@ -80,6 +80,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 	}
 
 	MaTazer[playerid] = 0;
+	SetPVarInt(playerid, "MaDetonator", 0);
 
 	switch(weaponid)
 	{
@@ -293,6 +294,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 
 		case 40:
 		{
+			SetPVarInt(playerid, "MaDetonator", 1);
 			format(string, sizeof(string), "* %s wyci¹ga detonator.", specNAME);
 			ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
@@ -527,6 +529,20 @@ PokazDialogBronie(playerid)
 			format(active, sizeof(active), "{FFFFFF}");
 		}
 		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun12]]);
+	}
+	if(starabron[playerid] == 39 && PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
+	{
+		DynamicGui_AddRow(playerid, 1, 40); //detonator
+		weaponexist = 1;
+		if(GetPVarInt(playerid, "MaDetonator") == 1)
+		{
+			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+		}
+		else
+		{
+			format(active, sizeof(active), "{FFFFFF}");
+		}
+		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, "Detonator");
 	}
 	if((IsACop(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
 	{
