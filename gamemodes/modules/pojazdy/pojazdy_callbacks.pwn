@@ -236,10 +236,10 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				CarData[lUID][c_Bumper][1] = 0;
 				SendClientMessage(playerid, 0xFFC0CB, "Tuning zostanie usuniêty przy najbli¿szym respawnie.");
 			}
-			/*case 8://rejestracja prototyp
+			case 8://rejestracja (NumberPlate)
 			{
-				ShowPlayerDialogEx(playerid, D_AUTO_REJESTRACJA, DIALOG_STYLE_INPUT, "Rejestracja", "WprowadŸ nowy numer/tekst na swojej tablicy rejestracyjnej (do 5 znaków):", "Ustaw", "Wróæ");
-			}*/
+				ShowPlayerDialogEx(playerid, D_AUTO_REJESTRACJA, DIALOG_STYLE_INPUT, "Rejestracja", "WprowadŸ nowy numer/tekst na swojej tablicy rejestracyjnej\n(do 32 znaków z kolorami):", "Ustaw", "Wróæ");
+			}
 		}
 		return 1;
 	}
@@ -247,7 +247,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		new lUID = IloscAut[playerid];
 		if(!response) return RunCommand(playerid, "/car",  "");
-		if(strlen(inputtext) < 1 || strlen(inputtext) > 5)
+		if(strlen(inputtext) < 1 || strlen(inputtext) > 32)
 		{
 			RunCommand(playerid, "/car",  "");
 			SendClientMessage(playerid, COLOR_GRAD1, "Nieodpowiednia iloœæ znaków.");
