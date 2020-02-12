@@ -38,10 +38,6 @@ command_grafiti_Impl(playerid, opcja[24])
                 format(string, sizeof(string), "[Nazwa w³aœciciela]:{FF0000}%s", GraffitiInfo[i][pOwner]);
                 SendClientMessage(playerid, COLOR_WHITE, string);
             }
-            else
-            {
-                sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
-            }
         }
         else
         {
@@ -76,11 +72,12 @@ command_grafiti_Impl(playerid, opcja[24])
         }
         else
         {
-            sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
+            
         }
     }
     else if(strcmp(opcja,"lista", true) == 0)
     {
+        graffiti_LoadPlayerMySQL(playerid);
         graffiti_LoadPlayerList(playerid);
         if(Graffiti_Amount[playerid] >= 1)
         {

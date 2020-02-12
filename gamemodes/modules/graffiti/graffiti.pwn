@@ -88,11 +88,8 @@ graffiti_LoadPlayerList(playerid)
 	{
 		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
 		{
-			if(licznik <= 3)
-			{
-				Graffiti_PlayerList[playerid][licznik] = i;
-				licznik++;
-			}
+			Graffiti_PlayerList[playerid][licznik] = i;
+			licznik++;
 		}
 	}
 }
@@ -172,16 +169,13 @@ graffiti_FindNearest(playerid)
 		{
 			new Float:ox, Float:oy, Float:oz;
 			GetDynamicObjectPos(GraffitiInfo[i][gID], ox, oy, oz);
-			if(IsPlayerInRangeOfPoint(playerid, 0.75, ox, oy, oz))
-			{
-				return i;
-			}
-			else if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz))
+			if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz))
 			{
 				return i;
 			}
 		}
 	}
+	sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
 	return INVALID_GRAFID;
 }
 //end
