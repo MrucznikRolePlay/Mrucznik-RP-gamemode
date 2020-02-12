@@ -84,6 +84,7 @@ graffiti_ReloadForPlayers(id)
 graffiti_LoadPlayerList(playerid)
 {
 	new licznik = 0;
+	graffiti_ZerujListe(playerid);
 	for(new i; i < GRAFFITI_MAX; i++)
 	{
 		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
@@ -149,14 +150,18 @@ graffiti_CreateGraffiti(playerid)
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
 	return 1;
 }
+graffiti_ZerujListe(playerid)
+{
+	Graffiti_PlayerList[playerid][0] = INVALID_GRAFID;
+	Graffiti_PlayerList[playerid][1] = INVALID_GRAFID;
+	Graffiti_PlayerList[playerid][2] = INVALID_GRAFID;
+}
 graffiti_ZerujZmienne(playerid)
 {
 	Graffiti_Color[playerid] = -1;
 	Graffiti_Text[playerid] = "";
 	Graffiti_Amount[playerid] = 0;
-	Graffiti_PlayerList[playerid][0] = INVALID_GRAFID;
-	Graffiti_PlayerList[playerid][1] = INVALID_GRAFID;
-	Graffiti_PlayerList[playerid][2] = INVALID_GRAFID;
+	graffiti_ZerujListe(playerid);
 	DeletePVar(playerid, "CreatingGraff");
 	DeletePVar(playerid, "GraffitiID");
 }
