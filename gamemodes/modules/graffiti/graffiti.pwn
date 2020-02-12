@@ -148,6 +148,9 @@ graffiti_EditGraffiti(playerid, f)
 	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
 	graffiti_UpdateMySQL(f, 2);
 	graffiti_ReloadForPlayers(f);
+	SetPVarInt(playerid, "GraffitiID", f);
+	SetPVarInt(playerid, "CreatingGraff", 1);
+	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
 }
 graffiti_CreateGraffiti(playerid)
 {

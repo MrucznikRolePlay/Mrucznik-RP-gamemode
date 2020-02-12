@@ -4960,7 +4960,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
             GetDynamicObjectRot(objectid, rox, roy, roz);
             GetDynamicObjectPos(objectid, X, Y, Z);
-			if(!IsPlayerInRangeOfPoint(playerid, 3.0, x,y,z))
+			if(!IsPlayerInRangeOfPoint(playerid, 2.0, x,y,z))
             {
                 SendClientMessage(playerid, 0xFF0000FF, "Podejdz do graffiti!");
                 SetDynamicObjectPos(objectid, X, Y, Z);
@@ -4974,7 +4974,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 		else if( response == EDIT_RESPONSE_FINAL && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
 			new f = GetPVarInt(playerid, "GraffitiID");
-			if(!IsPlayerInRangeOfPoint(playerid, 3.0, x,y,z))
+			if(!IsPlayerInRangeOfPoint(playerid, 2.0, x,y,z))
             {
                 GameTextForPlayer(playerid, "~r~Byles za daleko.",2000, 5);
                 graffiti_DeleteMySQL(f);
