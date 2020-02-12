@@ -74,6 +74,7 @@ stock graffiti_LoadMySQL(id = -1)
 			else
 			{
 				graffiti_DeleteMySQL(id);
+				graffiti_Zeruj(id);
 			}
 		}
 		format(string, sizeof(string), "Zaladowano %d graffiti z %d w bazie", loadedGraffiti, valueGraffiti);
@@ -110,6 +111,7 @@ stock graffiti_LoadMySQL(id = -1)
 		else
 		{
             graffiti_DeleteMySQL(id);
+			graffiti_Zeruj(id);
 		}
 	}
 	return 0;
@@ -149,6 +151,16 @@ stock graffiti_UpdateMySQL(id, type = 1)
 	}
 	else if(type == 2)
 	{
+		if(strlen(GraffitiInfo[id][grafText]) > 1)
+		{
+			GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
+			SetDynamicObjectMaterialText(GraffitiInfo[id][gID], 0, GraffitiInfo[id][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[id][gColor], 0, 1);
+		}
+		else
+		{
+			graffiti_DeleteMySQL(id);
+			graffiti_Zeruj(id);
+		}
 		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
 		GraffitiInfo[id][grafText],
 		GraffitiInfo[id][gColor],
