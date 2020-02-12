@@ -66,7 +66,7 @@ GrafExist(value)
 }
 stock graffiti_GetNewID()
 {
-	for(new i; i <= GRAFFITI_MAX; i++)
+	for(new i; i < GRAFFITI_MAX; i++)
 	{
 		if(!GrafExist(i))
 		{
@@ -84,7 +84,7 @@ graffiti_ReloadForPlayers(id)
 graffiti_LoadPlayerList(playerid)
 {
 	new licznik = 0;
-	for(new i; i <= GRAFFITI_MAX; i++)
+	for(new i; i < GRAFFITI_MAX; i++)
 	{
 		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
 		{
@@ -163,7 +163,7 @@ graffiti_ZerujZmienne(playerid)
 
 graffiti_FindNearest(playerid)
 {
-	for(new i; i <= GRAFFITI_MAX; i++)
+	for(new i; i < GRAFFITI_MAX; i++)
 	{
 		if(GrafExist(i))
 		{
@@ -175,7 +175,6 @@ graffiti_FindNearest(playerid)
 			}
 		}
 	}
-	sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
 	return INVALID_GRAFID;
 }
 //end
