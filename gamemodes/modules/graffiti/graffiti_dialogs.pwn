@@ -39,16 +39,12 @@ graffiti_ShowListDialog(playerid)
     if(Graffiti_Amount[playerid] > 0)
     {	
         new f;
-		format(dialogstring, sizeof(dialogstring), "%sLista twoich graffiti:\n", dialogstring);
-		DynamicGui_AddBlankRow(playerid);
-		format(dialogstring, sizeof(dialogstring), "%s{FF0000}--------------------------------\n");
-		DynamicGui_AddBlankRow(playerid);
         for(new i; i < Graffiti_Amount[playerid]; i++)
         {	
             f = Graffiti_PlayerList[playerid][i];
 			strdel(GraffitiInfo[f][grafText], 30, 128);
-            format(dialogstring, sizeof(dialogstring), "%s{F0F0F0}[%d]»\t{FFFFFF}%s...\n", dialogstring, f, GraffitiInfo[f][grafText]);
-			DynamicGui_AddRow(playerid, f);
+            format(dialogstring, sizeof(dialogstring), "%s{FAF000}[%d]»\t{FFFFFF}%s...\n", dialogstring, f, GraffitiInfo[f][grafText]);
+			DynamicGui_AddRow(playerid, f, 1);
 		}
     }
     else
@@ -116,11 +112,15 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new graffiti_id = DynamicGui_GetValue(playerid, listitem);
+			new graffiti_existing = DynamicGui_GetDataInt(playerid, listitem);
 			new Float:x,Float:y,Float:z;
 			x = GraffitiInfo[graffiti_id][grafXpos];
 			y = GraffitiInfo[graffiti_id][grafYpos];
 			z = GraffitiInfo[graffiti_id][grafZpos];
-			SetPlayerCheckpoint(playerid, x, y, z, 2);
+			if(graffiti_existing == 1) SetPlayerCheckpoint(playerid, x, y, z, 2);
+			new string[128];
+			format(string, sizeof(string), "Wybrano id:%d", graffiti_id);
+			SendClientMessage(playerid, COLOR_WHITE, string);
 		}
 	}
 	return 1;
