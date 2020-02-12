@@ -50,7 +50,7 @@ command_grafiti_Impl(playerid, opcja[24])
     }
     else if(strcmp(opcja,"stworz",true) == 0)
     {
-        graffiti_LoadPlayerMySQL(playerid);
+        graffiti_CountGraffs(playerid);
         if(Graffiti_Amount[playerid] > 3)
         {
             sendTipMessage(playerid, "Wykorzystano limit graffiti(3).");
@@ -81,7 +81,7 @@ command_grafiti_Impl(playerid, opcja[24])
     }
     else if(strcmp(opcja,"lista", true) == 0)
     {
-        graffiti_LoadPlayerMySQL(playerid);
+        graffiti_CountGraffs(playerid);
         graffiti_LoadPlayerList(playerid);
         if(Graffiti_Amount[playerid] > 0)
         {
