@@ -157,7 +157,9 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 
-		ShowPlayerDialogEx(playerid, D_AUTO_ACTION, DIALOG_STYLE_LIST, "Panel pojazdu", "Spawnuj\nRespawnuj\nUnspawnuj\nZnajdŸ\nPoka¿ parking\nPrzemaluj\nZ³omuj\nUsuñ tuning\nRejestracja", "Wybierz", "WyjdŸ");
+		new string[2048];
+		format(string, sizeof(string), "Spawnuj\nRespawnuj\nUnspawnuj\nZnajdŸ\nPoka¿ parking\nPrzemaluj\nZ³omuj\nUsuñ tuning\n{E2BA1B}Tablica rejestracyjna (KP){FFFFFF}");
+		ShowPlayerDialogEx(playerid, D_AUTO_ACTION, DIALOG_STYLE_LIST, "Panel pojazdu", string, "Wybierz", "WyjdŸ");
 		IloscAut[playerid] = lUID;
 		return 1;
 	}
@@ -238,7 +240,8 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			case 8://rejestracja (NumberPlate)
 			{
-				ShowPlayerDialogEx(playerid, D_AUTO_REJESTRACJA, DIALOG_STYLE_INPUT, "Rejestracja", "WprowadŸ nowy numer/tekst na swojej tablicy rejestracyjnej\n(do 32 znaków z kolorami):", "Ustaw", "Wróæ");
+				if(!IsPlayerPremiumOld(playerid)) return sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.");
+				ShowPlayerDialogEx(playerid, D_AUTO_REJESTRACJA, DIALOG_STYLE_INPUT, "Rejestracja", "WprowadŸ nowy numer/tekst na swojej tablicy rejestracyjnej\n(do 9 znaków):", "Ustaw", "Wróæ");
 			}
 		}
 		return 1;
@@ -247,7 +250,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		new lUID = IloscAut[playerid];
 		if(!response) return RunCommand(playerid, "/car",  "");
-		if(strlen(inputtext) < 1 || strlen(inputtext) > 32)
+		if(strlen(inputtext) < 1 || strlen(inputtext) > 9)
 		{
 			RunCommand(playerid, "/car",  "");
 			SendClientMessage(playerid, COLOR_GRAD1, "Nieodpowiednia iloœæ znaków.");
