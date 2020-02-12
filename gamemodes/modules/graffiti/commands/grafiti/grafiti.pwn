@@ -59,7 +59,7 @@ YCMD:grafiti(playerid, params[], help)
     new opcja[24];
     if(sscanf(params, "s[24]", opcja))
     {
-        sendTipMessage(playerid, "U¿yj /grafiti [stworz, edytuj, usun, namierz, sprawdz] ");
+        sendTipMessage(playerid, "U¿yj /grafiti [stworz, edytuj, usun, sprawdz, lista] ");
         return 1;
     }
     
