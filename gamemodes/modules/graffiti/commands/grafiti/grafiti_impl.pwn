@@ -83,6 +83,25 @@ command_grafiti_Impl(playerid, opcja[24])
     {
        graffiti_ShowListDialog(playerid);
     }
+    else if(strcmp(opcja,"edytuj", true) == 0)
+    {
+        new i = graffiti_FindNearest(playerid);
+        if(i!=INVALID_GRAFID)
+        {
+            if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+            {
+                graffiti_ShowEditTextDialog(playerid, i);
+            }
+            else
+            {
+                sendTipMessage(playerid, "Graffiti nie nale¿y do ciebie.");
+            }
+        }
+        else
+        {
+            sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
+        }
+    }
     return 1;
 }
 

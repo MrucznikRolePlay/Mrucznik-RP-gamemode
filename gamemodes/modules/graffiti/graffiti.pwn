@@ -142,6 +142,13 @@ graffiti_Zeruj(f)
 	format(GraffitiInfo[f][pOwner], MAX_PLAYER_NAME, "");
 	GraffitiInfo[f][gColor] = -1;
 }
+graffiti_EditGraffiti(playerid, f)
+{
+	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
+	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
+	graffiti_UpdateMySQL(f, 2);
+	graffiti_ReloadForPlayers(f);
+}
 graffiti_CreateGraffiti(playerid)
 {
 	new f = graffiti_GetNewID();
