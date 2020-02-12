@@ -81,6 +81,16 @@ graffiti_ReloadForPlayers(id)
 	graffiti_LoadMySQL(id);
 	return 1;
 }
+graffiti_CountGraffs(playerid)
+{
+	for(new i; i < GRAFFITI_MAX; i++)
+	{
+		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+		{
+			Graffiti_Amount[playerid]++;
+		}
+	}
+}
 graffiti_LoadPlayerList(playerid)
 {
 	new licznik = 0;

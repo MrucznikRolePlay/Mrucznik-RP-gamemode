@@ -101,7 +101,7 @@ command_grafiti_Impl(playerid, opcja[24])
     }
     else if(strcmp(opcja,"ilosc", true) == 0)
     {
-        graffiti_LoadPlayerMySQL(playerid);
+        graffiti_CountGraffs(playerid);
         format(string, sizeof(string), "Iloœæ: %d", Graffiti_Amount[playerid]);
         SendClientMessage(playerid, COLOR_WHITE, string);
     }

@@ -143,19 +143,6 @@ stock graffiti_LoadMySQL(id = -1)
 	}
 	return 0;
 }
-
-stock graffiti_LoadPlayerMySQL(playerid)
-{
-	new query[1024];
-	new lStr[263]; 
-	format(query, sizeof(query), "SELECT COUNT(*) FROM `mru_graffiti` WHERE `ownerName` = '%s'", GetNick(playerid));
-	mysql_query(query);
-	mysql_store_result();
-	mysql_fetch_row_format(lStr,"|");
-	Graffiti_Amount[playerid] = strval(lStr);
-	mysql_free_result();
-}
-
 stock graffiti_SaveMySQL(id, playerid)
 {
 	new query[1024];
