@@ -42,7 +42,7 @@ stock graffiti_LoadMySQL(id = -1)
 	mysql_free_result();
 	if(id == -1)
 	{
-		for(new i; i <= valueGraffiti; i++) 
+		for(new i; i < GRAFFITI_MAX; i++) 
 		{
 			lStr = "`ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`";
 			format(query, sizeof(query), "SELECT %s FROM `mru_graffiti` WHERE `id`='%d'", lStr, i);
@@ -103,27 +103,18 @@ stock graffiti_LoadMySQL(id = -1)
 stock graffiti_SaveMySQL(id, playerid)
 {
 	new query[1024];
-	if(strlen(GraffitiInfo[id][grafText]) <= 1)
-	{
-		DestroyDynamicObject(GraffitiInfo[id][gID]);
-		graffiti_Zeruj(id);
-	}
-	else
-	{
-		strreplace(GraffitiInfo[id][grafText], "\n", "~n~", .ignorecase = true);
-		format(query, sizeof(query), "INSERT INTO `mru_graffiti`(`id`, `ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`) VALUES ('%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%f', '%f')",
-		id,
-		GetNick(playerid),
-		GraffitiInfo[id][grafText],
-		GraffitiInfo[id][gColor],
-		GraffitiInfo[id][grafXpos],
-		GraffitiInfo[id][grafYpos],
-		GraffitiInfo[id][grafZpos],
-		GraffitiInfo[id][grafXYpos],
-		GraffitiInfo[id][grafYYpos],
-		GraffitiInfo[id][grafZYpos]);
-		mysql_query(query);
-	}
+	format(query, sizeof(query), "INSERT INTO `mru_graffiti`(`id`, `ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`) VALUES ('%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%f', '%f')",
+	id,
+	GetNick(playerid),
+	GraffitiInfo[id][grafText],
+	GraffitiInfo[id][gColor],
+	GraffitiInfo[id][grafXpos],
+	GraffitiInfo[id][grafYpos],
+	GraffitiInfo[id][grafZpos],
+	GraffitiInfo[id][grafXYpos],
+	GraffitiInfo[id][grafYYpos],
+	GraffitiInfo[id][grafZYpos]);
+	mysql_query(query);
 }
 
 stock graffiti_UpdateMySQL(id, type = 1)
