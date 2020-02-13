@@ -193,9 +193,7 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			y = GraffitiInfo[graffiti_id][grafYpos];
 			z = GraffitiInfo[graffiti_id][grafZpos];
 			if(graffiti_existing == 1) SetPlayerCheckpoint(playerid, x, y, z, 2);
-			new string[128];
-			format(string, sizeof(string), "Wybrano id:%d", graffiti_id);
-			SendClientMessage(playerid, COLOR_WHITE, string);
+			sendTipMessage(playerid, "Stworzono znacznik gdzie to graffiti siê znajduje.");
 		}
 	}
 	return 1;
