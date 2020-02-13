@@ -25,7 +25,6 @@
 //------------------<[ Implementacja: ]>-------------------
 command_grafiti_Impl(playerid, opcja[24])
 {
-    new string[128];
     new frac = GetPlayerFraction(playerid);
     if(FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
     {
@@ -100,26 +99,6 @@ command_grafiti_Impl(playerid, opcja[24])
         return 1;
     }
     
-    if(strcmp(opcja,"sprawdz",true) == 0)
-    {
-        if(PlayerInfo[playerid][pAdmin] == 0 && !IsAScripter(playerid))
-        {
-            sendTipMessage(playerid, "Komenda dostêpna dla administracji.");
-            return 1;
-        }
-        new i = graffiti_FindNearest(playerid);
-        if(i!=INVALID_GRAFID)
-        {
-            format(string, sizeof(string), "[ID graffiti]:{FF0000}%d", i); 
-            SendClientMessage(playerid, COLOR_WHITE, string);
-            format(string, sizeof(string), "[Nazwa w³aœciciela]:{FF0000}%s", GraffitiInfo[i][pOwner]);
-            SendClientMessage(playerid, COLOR_WHITE, string);
-        }
-        else
-        {
-            sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
-        }
-    }
     return 1;
 }
 

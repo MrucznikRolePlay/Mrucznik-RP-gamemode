@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 agraffiti                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,42 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "agraffiti\agraffiti.pwn"
-#include "grafiti\grafiti.pwn"
-
+#include "agraffiti_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_agraffiti()
 {
-    command_agraffiti();
-    command_grafiti();
+    new command = Command_GetID("agraffiti");
+
+    //aliases
+    Command_AddAlt(command, "agrafiti");
     
+
+    //permissions
+    Group_SetCommand(Group_GetID("admini"), command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:agraffiti(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda administracyjna graffiti.");
+        return 1;
+    }
+    //fetching params
+    new opcja[36], id;
+    if(sscanf(params, "s[36]D(-1)", opcja, id))
+    {
+        sendTipMessage(playerid, "U¿yj /agraffiti [Sprawdz, Reload, Goto] [GOTO->ID] ");
+        return 1;
+    }
+    
+    //command body
+    return command_agraffiti_Impl(playerid, opcja, id);
 }

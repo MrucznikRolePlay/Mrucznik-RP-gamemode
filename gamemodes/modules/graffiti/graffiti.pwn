@@ -151,7 +151,7 @@ graffiti_EditGraffiti(playerid, f)
 	graffiti_ReloadForPlayers(f);
 	SetPVarInt(playerid, "GraffitiID", f);
 	SetPVarInt(playerid, "CreatingGraff", 1);
-	Log(serverLog, INFO, "Gracz %s zaaktualizowa³ graffiti. Tekst:", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
+	Log(serverLog, INFO, "Gracz %s zaaktualizowa³ graffiti. Tekst:%s", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
 }
 graffiti_CreateGraffiti(playerid)
@@ -177,7 +177,7 @@ graffiti_CreateGraffiti(playerid)
 	graffiti_DefineColor(f);
 	graffiti_ReloadForPlayers(f);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
-	Log(serverLog, INFO, "Gracz %s stworzy³ graffiti. Tekst:", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
+	Log(serverLog, INFO, "Gracz %s stworzy³ graffiti. Tekst:%s", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
 	return 1;
 }
 graffiti_ZerujListe(playerid)

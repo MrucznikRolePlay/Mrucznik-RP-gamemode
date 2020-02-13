@@ -68,7 +68,7 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setcarint /naprawskin /czyjtonumer /checkbw");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk /dajdowozu /tod");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk /dajdowozu /tod /agraffiti");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
@@ -137,6 +137,7 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** Jesteœ koxem przez X ***");
         SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zonedelay /gangzone /removezoneprotect /removeganglimit /clearzone /setzonecontrol");
+		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /agraffiti");
 	}
     if(Uprawnienia(playerid, ACCESS_PANEL)) SendClientMessage(playerid, COLOR_GRAD1, "*** UPRAWNIENIA *** /stworz /edytuj /panel [unwarn]");
     if(Uprawnienia(playerid, ACCESS_ZG)) SendClientMessage(playerid, COLOR_GRAD1, "*** UPRAWNIENIA *** /dajzaufanego");
