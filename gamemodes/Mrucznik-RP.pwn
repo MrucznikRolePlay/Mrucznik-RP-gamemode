@@ -455,7 +455,7 @@ public OnGameModeInit()
 
     pusteZgloszenia();
 
-
+	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
     print("----- OnGameModeInit done.");
 	return 1;
 }
@@ -512,7 +512,7 @@ public OnGameModeExit()
     }
 
 	DOF2_Exit();
-
+	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     GLOBAL_EXIT = true;
     print("----- OnGameModeExit done.");
 	return 1;
