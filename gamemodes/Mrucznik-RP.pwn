@@ -518,6 +518,7 @@ public OnGameModeExit()
 	DOF2_Exit();
 
     GLOBAL_EXIT = true;
+	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     print("----- OnGameModeExit done.");
 	return 1;
 }
