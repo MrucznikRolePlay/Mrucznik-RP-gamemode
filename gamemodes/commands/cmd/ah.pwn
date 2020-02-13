@@ -68,7 +68,7 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogoda /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setcarint /naprawskin /czyjtonumer /checkbw");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk /dajdowozu /tod /agraffiti");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk /dajdowozu /tod /agraffiti /banip");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
