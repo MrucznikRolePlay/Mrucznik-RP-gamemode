@@ -71,6 +71,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+
+	//2.6.19
+	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 

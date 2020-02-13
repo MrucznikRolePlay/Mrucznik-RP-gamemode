@@ -201,8 +201,8 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	return 1;
 }
 
-hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
-{
-	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-}
+// hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+// {
+	
+// }
 //end
