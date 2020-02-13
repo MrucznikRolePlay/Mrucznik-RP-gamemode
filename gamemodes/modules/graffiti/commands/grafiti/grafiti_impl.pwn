@@ -94,7 +94,7 @@ command_grafiti_Impl(playerid, opcja[24])
             }
         }
     }
-    else if(PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN)
+    else if(PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN || (FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG && PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN))
     {
         if(strcmp(opcja,"sprawdz",true) == 0)
         {
