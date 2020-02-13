@@ -311,7 +311,7 @@ new bool:ZoneAttacker[MAX_PLAYERS];
 new bool:ZoneDefender[MAX_PLAYERS];
 new ZoneProtect[MAX_ZONES];
 new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
-new ZONE_DISABLED = 1;
+new ZONE_DISABLED = 0;
 new ZONE_DEF_TIME = 900000;
 //21.07 PayDay fix
 /*new TRAIN_Checkpoints[6][3] = {
