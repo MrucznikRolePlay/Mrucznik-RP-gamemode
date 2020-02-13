@@ -95,35 +95,35 @@ stock graffiti_LoadMySQL(id = -1)
 		mysql_free_result();
 		graffiti_DefineColor(id);
 		strreplace(GraffitiInfo[id][grafText], "~n~", "\n", .ignorecase = true);
-		if(strlen(GraffitiInfo[id][grafText]) > 1)
-		{
-			GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
-			SetDynamicObjectMaterialText(GraffitiInfo[id][gID], 0, GraffitiInfo[id][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[id][gColor], 0, 1);
-		}
-		else
-		{
-            graffiti_DeleteMySQL(id);
-			graffiti_Zeruj(id);
-		}
+		GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
+		SetDynamicObjectMaterialText(GraffitiInfo[id][gID], 0, GraffitiInfo[id][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[id][gColor], 0, 1);
 	}
 	return 0;
 }
 stock graffiti_SaveMySQL(id, playerid)
 {
 	new query[1024];
-	strreplace(GraffitiInfo[id][grafText], "\n", "~n~", .ignorecase = true);
-	format(query, sizeof(query), "INSERT INTO `mru_graffiti`(`id`, `ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`) VALUES ('%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%f', '%f')",
-	id,
-	GetNick(playerid),
-	GraffitiInfo[id][grafText],
-	GraffitiInfo[id][gColor],
-	GraffitiInfo[id][grafXpos],
-	GraffitiInfo[id][grafYpos],
-	GraffitiInfo[id][grafZpos],
-	GraffitiInfo[id][grafXYpos],
-	GraffitiInfo[id][grafYYpos],
-	GraffitiInfo[id][grafZYpos]);
-	mysql_query(query);
+	if(strlen(GraffitiInfo[id][grafText]) <= 1)
+	{
+		DestroyDynamicObject(GraffitiInfo[id][gID]);
+		graffiti_Zeruj(id);
+	}
+	else
+	{
+		strreplace(GraffitiInfo[id][grafText], "\n", "~n~", .ignorecase = true);
+		format(query, sizeof(query), "INSERT INTO `mru_graffiti`(`id`, `ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`) VALUES ('%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%f', '%f')",
+		id,
+		GetNick(playerid),
+		GraffitiInfo[id][grafText],
+		GraffitiInfo[id][gColor],
+		GraffitiInfo[id][grafXpos],
+		GraffitiInfo[id][grafYpos],
+		GraffitiInfo[id][grafZpos],
+		GraffitiInfo[id][grafXYpos],
+		GraffitiInfo[id][grafYYpos],
+		GraffitiInfo[id][grafZYpos]);
+		mysql_query(query);
+	}
 }
 
 stock graffiti_UpdateMySQL(id, type = 1)
@@ -143,21 +143,20 @@ stock graffiti_UpdateMySQL(id, type = 1)
 	}
 	else if(type == 2)
 	{
-		if(strlen(GraffitiInfo[id][grafText]) > 1)
+		if(strlen(GraffitiInfo[id][grafText]) <= 1)
 		{
-			GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
-			SetDynamicObjectMaterialText(GraffitiInfo[id][gID], 0, GraffitiInfo[id][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[id][gColor], 0, 1);
-		}
-		else
-		{
+			DestroyDynamicObject(GraffitiInfo[id][gID]);
 			graffiti_DeleteMySQL(id);
 			graffiti_Zeruj(id);
 		}
-		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
-		GraffitiInfo[id][grafText],
-		GraffitiInfo[id][gColor],
-		id);
-		mysql_query(query);
+		else
+		{
+			format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
+			GraffitiInfo[id][grafText],
+			GraffitiInfo[id][gColor],
+			id);
+			mysql_query(query);
+		}
 	}
 }
 
