@@ -81,6 +81,7 @@ command_agraffiti_Impl(playerid, opcja[36], id)
             {
                 graffiti_ReloadForPlayers(i);
             }
+            sendTipMessage(playerid, "DONE.");
             Log(adminLog, INFO, "%s prze³adowa³ wszystkie Graffiti na serwerze.", GetPlayerLogName(playerid));
         }
         else
