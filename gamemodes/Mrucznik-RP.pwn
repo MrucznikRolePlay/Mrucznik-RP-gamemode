@@ -4985,6 +4985,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 GameTextForPlayer(playerid, "~r~Byles za daleko.",2000, 5);
                 graffiti_DeleteMySQL(f);
 				graffiti_ZerujZmienne(playerid);
+				graffiti_Zeruj(f);
 				return 1;
 			}
 			if(GetPVarInt(playerid, "zoneid") == -1) 
@@ -4992,6 +4993,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 				SendClientMessage(playerid, 0xFF0000FF, "Nie by³eœ na strefie!");
                 graffiti_DeleteMySQL(f);
 				graffiti_ZerujZmienne(playerid);
+				graffiti_Zeruj(f);
 				return 1;
 			}
 			GraffitiInfo[f][grafXpos] = x;
