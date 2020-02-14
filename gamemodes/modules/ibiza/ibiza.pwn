@@ -167,6 +167,13 @@ stock IbizaNadajBilet(playerid, giveplayerid, bilet)
 {
 	new nazwa_biletu[24];
 	new var[128];
+	new Float:x, Float:y, Float:z;
+	GetPlayerPos(giveplayerid, x, y, z);
+	if(!IsPlayerInRangeOfPoint(playerid, 5.0, x, y, z))
+	{
+		sendTipMessage(playerid, "Jesteœ za daleko.");
+		return 1;
+	}
 	if(bilet == 1) nazwa_biletu = "NORMAL";
 	if(bilet == 2) nazwa_biletu = "VIP";
 	if(bilet == 3) nazwa_biletu = "SUPERVIP";
