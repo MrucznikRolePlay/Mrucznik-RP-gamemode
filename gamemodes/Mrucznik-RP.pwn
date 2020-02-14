@@ -1879,7 +1879,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		{
 			Log(warningLog, INFO, "%s zabi³ %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
 			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
-	if(PlayerInfo[killerid][pLevel] > 1)
+			if(PlayerInfo[killerid][pLevel] > 1)
 			{
 				format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
 				SendMessageToAdmin(string, COLOR_YELLOW);
