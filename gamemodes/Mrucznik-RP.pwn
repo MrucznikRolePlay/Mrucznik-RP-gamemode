@@ -456,6 +456,10 @@ public OnGameModeInit()
     }
 
     pusteZgloszenia();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 52d89ce92a5ed5c6e3e6a2369e403f89a59a63d7
 	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
     print("----- OnGameModeInit done.");
 	return 1;
@@ -516,7 +520,7 @@ public OnGameModeExit()
     }
 
 	DOF2_Exit();
-
+	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     GLOBAL_EXIT = true;
 	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     print("----- OnGameModeExit done.");
@@ -1800,7 +1804,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         BoomBoxData[bbxid][BBD_Standby] = false;
         BBD_Putdown(playerid, bbxid);
     }
-    if(reason == 38 && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
+    if(reason == 38 && IsPlayerConnected(killerid) && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
     {
         format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNick(playerid, true), playerid);
         SendCommandLogMessage(string);
@@ -1875,8 +1879,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		{
 			Log(warningLog, INFO, "%s zabi³ %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
 			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
-
-			if(PlayerInfo[killerid][pLevel] > 1)
+	if(PlayerInfo[killerid][pLevel] > 1)
 			{
 				format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
 				SendMessageToAdmin(string, COLOR_YELLOW);
@@ -2246,11 +2249,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 								}
 							}
 						}
-					}
-					if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))
-					{
-						SetPVarInt(playerid, "bw-reason", reason);
-						return NadajRanny(playerid, 0, true);
+						if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1)))
+						{
+							SetPVarInt(playerid, "bw-reason", reason);
+							return NadajRanny(playerid, 0, true);
+						}
 					}
 				}
 			}
@@ -6679,7 +6682,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
 				SetPVarInt(playerid,"chop_id",0);
-				for(new i=0;i<=ROPELENGTH;i++)
+				for(new i=0;i<ROPELENGTH;i++)
 				{
 					DestroyDynamicObject(r0pes[playerid][i]);
 				}
@@ -6756,7 +6759,7 @@ public OnVehicleDeath(vehicleid, killerid)
 	//PADZIOCH
 	if(IsAHeliModel(GetVehicleModel(vehicleid)))
 	{
-  		for(new i=0;i<=MAX_PLAYERS;i++)
+  		foreach(new i : Player)
     	{
      		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
        		{
