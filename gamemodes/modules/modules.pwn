@@ -51,6 +51,7 @@
 #include "logi\logi.def"
 #include "money\money.def"
 #include "names\names.def"
+#include "nawigacja\nawigacja.def"
 #include "oferty\oferty.def"
 #include "organizacje\organizacje.def"
 #include "player_attachments\player_attachments.def"

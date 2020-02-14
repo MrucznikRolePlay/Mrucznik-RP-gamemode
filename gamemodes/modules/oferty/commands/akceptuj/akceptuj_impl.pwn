@@ -28,12 +28,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     new string[256];
     new giveplayer[MAX_PLAYER_NAME];
     new sendername[MAX_PLAYER_NAME];
-
-    if(strcmp(x_job, "biznes", false) == 0)
-    {
-        Business_AkceptujBiznes(playerid);
-    }
-    else if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
+    if(strcmp(x_job,"wizytowka",true) == 0 || strcmp(x_job,"wizytowke",true) == 0 || strcmp(x_job,"wizytówka",true) == 0 || strcmp(x_job,"wizytówkê",true) == 0 || strcmp(x_job,"wizytówke",true) == 0)
     {
         new dawacz = GetPVarInt(playerid, "wizytowka");
         new nazwa[32];
