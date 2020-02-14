@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                zabierzbilet                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sanda³
+// Data utworzenia: 14.02.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "dajbilet\dajbilet.pwn"
-#include "kupbilet\kupbilet.pwn"
-#include "panelibizy\panelibizy.pwn"
-#include "wywalibiza\wywalibiza.pwn"
-#include "zabierzbilet\zabierzbilet.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_zabierzbilet_Impl(playerid, giveplayerid)
 {
-    command_dajbilet();
-    command_kupbilet();
-    command_panelibizy();
-    command_wywalibiza();
-    command_zabierzbilet();
-    
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
+    {
+        new var[128];
+        if(IbizaTicket[giveplayerid] > 0)
+        {
+            IbizaTicket[giveplayerid] = 0;
+            format(var, sizeof(var), "Zabra³eœ bilet %s", GetNick(giveplayerid));
+            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+            format(var, sizeof(var), "%s zabra³ ci bilet od Ibizy.", GetNick(playerid));
+            sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, var);
+        }
+        else
+        {
+            sendTipMessage(playerid, "Gracz nie posiada biletu.");   
+        }
+    }
+    else
+    {
+        sendTipMessage(playerid, "Komenda dostêpna dla ibizy od [6].");
+    }
+    return 1;
 }
+
+//end
