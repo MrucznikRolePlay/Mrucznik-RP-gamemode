@@ -90,11 +90,8 @@
 #include "logi\logi.hwn"
 #include "money\money.hwn"
 #include "names\names.hwn"
-<<<<<<< HEAD
 #include "nawigacja\nawigacja.hwn"
-=======
 #include "oferty\oferty.hwn"
->>>>>>> Mrucznik
 #include "organizacje\organizacje.hwn"
 #include "player_attachments\player_attachments.hwn"
 #include "pojazdy\pojazdy.hwn"
@@ -133,11 +130,8 @@
 #include "logi\logi.pwn"
 #include "money\money.pwn"
 #include "names\names.pwn"
-<<<<<<< HEAD
 #include "nawigacja\nawigacja.pwn"
-=======
 #include "oferty\oferty.pwn"
->>>>>>> Mrucznik
 #include "organizacje\organizacje.pwn"
 #include "player_attachments\player_attachments.pwn"
 #include "pojazdy\pojazdy.pwn"
@@ -155,11 +149,8 @@
 //-------<[ timers ]>-------
 #include "admin\admin_timers.pwn"
 #include "antyspam\antyspam_timers.pwn"
-<<<<<<< HEAD
 #include "business\business_timers.pwn"
-=======
 #include "choroby\choroby_timers.pwn"
->>>>>>> Mrucznik
 #include "convoy\convoy_timers.pwn"
 #include "graffiti\graffiti_timers.pwn"
 #include "money\money_timers.pwn"
@@ -175,13 +166,10 @@
 
 //-------<[ mysql ]>-------
 #include "admin\admin_mysql.pwn"
-<<<<<<< HEAD
 #include "business\business_mysql.pwn"
 #include "graffiti\graffiti_mysql.pwn"
-=======
 #include "biznesy\biznesy_mysql.pwn"
 #include "choroby\choroby_mysql.pwn"
->>>>>>> Mrucznik
 #include "organizacje\organizacje_mysql.pwn"
 #include "player_attachments\player_attachments_mysql.pwn"
 #include "pojazdy\pojazdy_mysql.pwn"
@@ -197,11 +185,8 @@
 //-------<[ callbacks ]>-------
 #include "admin\admin_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
-<<<<<<< HEAD
-=======
 #include "biznesy\biznesy_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
->>>>>>> Mrucznik
 #include "convoy\convoy_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "money\money_callbacks.pwn"
@@ -229,11 +214,8 @@
 #include "ibiza\commands\ibiza_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "logi\commands\logi_commands.pwn"
-<<<<<<< HEAD
 #include "nawigacja\commands\nawigacja_commands.pwn"
-=======
 #include "oferty\commands\oferty_commands.pwn"
->>>>>>> Mrucznik
 #include "organizacje\commands\organizacje_commands.pwn"
 #include "player_attachments\commands\player_attachments_commands.pwn"
 #include "pojazdy\commands\pojazdy_commands.pwn"
