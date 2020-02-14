@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ pomocdom ]-----------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 diagnozuj                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,33 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Mrucznik
+// Data utworzenia: 07.02.2020
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:pomocdom(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_diagnozuj_Impl(playerid, giveplayerid)
 {
-    if(gPlayerLogged[playerid] == 1)
+	if (!IsAMedyk(playerid))
+	{
+		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
+        return 1;
+	}
+    
+    if(!IsPlayerNear(playerid, giveplayerid))
     {
-	    if(IsPlayerConnected(playerid))
-	    {
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-		}
+        sendErrorMessage(playerid, sprintf("Jesteœ zbyt daleko od gracza %s", GetNick(giveplayerid)));
+        return 1;
     }
-	return 1;
+
+    ProxDetector(20.0, playerid, sprintf("* Lekarz %s przeprowadzi³ diagnozê pacjenta %s.", GetNick(playerid), GetNick(giveplayerid)), 
+        COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
+    );
+    
+    DiagnosePlayer(giveplayerid, playerid);
+    return 1;
 }
+
+//end

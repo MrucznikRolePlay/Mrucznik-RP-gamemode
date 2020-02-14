@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ pomocdom ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   zaraz                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,57 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "zaraz_impl.pwn"
 
-YCMD:pomocdom(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_zaraz()
 {
-    if(gPlayerLogged[playerid] == 1)
+    new command = Command_GetID("zaraz");
+
+    //aliases
+    Command_AddAlt(command, "setstd");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zaraz(playerid, params[], help)
+{
+    if (help)
     {
-	    if(IsPlayerConnected(playerid))
-	    {
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-		}
+        sendTipMessage(playerid, "ZaraŸ gracza chorob¹.");
+        return 1;
     }
-	return 1;
+    //fetching params
+    new giveplayerid, disease[32];
+    if(sscanf(params, "rs[32]", giveplayerid, disease))
+    {
+        sendTipMessage(playerid, "U¿yj /zaraz [Nick/ID] [choroba] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_zaraz_Impl(playerid, giveplayerid, disease);
 }

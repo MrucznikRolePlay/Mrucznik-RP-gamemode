@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ pomocdom ]-----------------------------------------------//
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                  choroby                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,25 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Mrucznik
+// Data utworzenia: 07.02.2020
 
-// Opis:
-/*
-	
-*/
+//
 
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
 
-// Notatki skryptera:
-/*
-	
-*/
+//TODO: zmieniæ 1000 na ONE_MINUTE
+#define ONE_MINUTE 60000
 
-YCMD:pomocdom(playerid, params[], help)
-{
-    if(gPlayerLogged[playerid] == 1)
-    {
-	    if(IsPlayerConnected(playerid))
-	    {
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-		}
-    }
-	return 1;
-}
+// time settings in ms
+#define RARE_EFFECT_MIN (1000*60)
+#define RARE_EFFECT_RANGE (1000*120)
+
+#define REGULAR_EFFECT_MIN (1000*20)
+#define REGULAR_EFFECT_RANGE (1000*20)
+
+#define FREQUENT_EFFECT_MIN (1000*5)
+#define FREQUENT_EFFECT_RANGE (1000*10)
+
+//end

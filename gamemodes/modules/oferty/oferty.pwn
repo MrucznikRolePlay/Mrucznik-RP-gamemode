@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ pomocdom ]-----------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   oferty                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,15 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: Mrucznik
+// Data utworzenia: 07.02.2020
+//Opis:
 /*
-	
+	System ofert.
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
+//-----------------<[ Funkcje: ]>-------------------
 
-YCMD:pomocdom(playerid, params[], help)
-{
-    if(gPlayerLogged[playerid] == 1)
-    {
-	    if(IsPlayerConnected(playerid))
-	    {
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-		}
-    }
-	return 1;
-}
+//end

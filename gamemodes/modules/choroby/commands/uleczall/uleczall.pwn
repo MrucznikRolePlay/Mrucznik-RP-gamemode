@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ pomocdom ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  uleczall                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "uleczall_impl.pwn"
 
-YCMD:pomocdom(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_uleczall()
 {
-    if(gPlayerLogged[playerid] == 1)
+    new command = Command_GetID("uleczall");
+
+    //aliases
+    Command_AddAlt(command, "healall");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:uleczall(playerid, params[], help)
+{
+    if (help)
     {
-	    if(IsPlayerConnected(playerid))
-	    {
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-		}
+        sendTipMessage(playerid, "Leczy wszystkich graczy.");
+        return 1;
     }
-	return 1;
+    
+    
+    //command body
+    return command_uleczall_Impl(playerid);
 }

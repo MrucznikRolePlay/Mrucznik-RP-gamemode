@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ pomocdom ]-----------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  uleczall                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,28 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Mrucznik
+// Data utworzenia: 07.02.2020
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:pomocdom(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_uleczall_Impl(playerid)
 {
-    if(gPlayerLogged[playerid] == 1)
+    if(PlayerInfo[playerid][pAdmin] < 100)
     {
-	    if(IsPlayerConnected(playerid))
-	    {
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-		}
+        noAccessMessage(playerid);
+        return 1;
     }
-	return 1;
+
+    foreach(new i : Player) 
+    {
+        CureFromAllDiseases(i);
+    }
+    Log(adminLog, INFO, "Admin %s wyleczy³ wszystkich graczy z chorób.", GetPlayerLogName(playerid));
+    SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s wyleczy³ wszystkich graczy z chorób.", GetNick(playerid)));
+    return 1;
 }
+
+//end

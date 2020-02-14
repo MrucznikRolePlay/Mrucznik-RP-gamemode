@@ -1,0 +1,17 @@
+{
+    "name": "ulecz",
+    "description": "Ulecz gracza.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "07.02.2020"
+}

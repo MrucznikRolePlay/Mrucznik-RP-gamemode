@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ pomocdom ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  akceptuj                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,57 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "akceptuj_impl.pwn"
 
-YCMD:pomocdom(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_akceptuj()
 {
-    if(gPlayerLogged[playerid] == 1)
+    new command = Command_GetID("akceptuj");
+
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:akceptuj(playerid, params[], help)
+{
+    if (help)
     {
-	    if(IsPlayerConnected(playerid))
-	    {
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-		}
+        sendTipMessage(playerid, "Akceptuje ofertê od gracza.");
+        return 1;
     }
-	return 1;
+    //fetching params
+    new nazwa[32];
+    if(sscanf(params, "s[32]", nazwa))
+    {
+        SendClientMessage(playerid, COLOR_WHITE, "|__________________ Accept __________________|");
+        SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
+        SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
+        SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Gazeta, Mandat, kuracje");
+        SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka, Uwolnienie, biznes");
+        SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
+        return 1;
+    }
+    
+    //command body
+    return command_akceptuj_Impl(playerid, nazwa);
 }

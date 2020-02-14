@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   addmc                                                   //
+//                                                  zastrzyk                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,38 +17,47 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 02.07.2019
+// Data utworzenia: 07.02.2020
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_addmc_Impl(playerid, giveplayerid, value)
+command_zastrzyk_Impl(playerid, giveplayerid)
 {
-	if(!IsAKox(playerid) && !IsAMCGiver(playerid)) 
+	if ( !(IsAMedyk(playerid) && PlayerInfo[playerid][pRank] >= 1))
 	{
-		return noAccessMessage(playerid);
+		sendErrorMessage(playerid, "Nie masz 1 rangi lub nie jesteœ medykiem!");
+        return 1;
 	}
+    
+    if(!IsPlayerNear(playerid, giveplayerid))
+    {
+        sendErrorMessage(playerid, sprintf("Jesteœ zbyt daleko od gracza %s", GetNick(giveplayerid)));
+        return 1;
+    }
 
-	if(IsAMCGiver(playerid)) 
-	{
-		new mc = GetAvaibleMC();
-		if(value > mc) 
-		{
-			sendErrorMessage(playerid, sprintf("W bud¿ecie MC jest dostêpne tylko %dMC", mc));
-			return 1;
-		}
-
-		TakeMCFromBudget(value);
-	}
-
-	PremiumInfo[giveplayerid][pMC] += value;
-	MruMySQL_SaveMc(giveplayerid);
-
-	Log(premiumLog, INFO, "Admin %s doda³ %s %dMC", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value);
-	_MruAdmin(playerid, sprintf("Doda³eœ %d MC graczowi %s [ID: %d]", value, GetNick(giveplayerid, true), giveplayerid));
-	if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d dodatkowych MC od Admina %s [ID: %d]", value, GetNick(playerid, true), playerid));
-	return 1;
+    ProxDetector(20.0, playerid, sprintf("* Lekarz %s wyci¹ga strzykawkê i wstrzykuje leki %s.", GetNick(playerid), GetNick(giveplayerid)), 
+        COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
+    );
+    if(IsPlayerHealthy(playerid)) 
+    {
+        SendClientMessage(giveplayerid, COLOR_WHITE, "Lekarz da³ ci zastrzyk i pooprawi³ Twoj¹ odpornoœæ.");
+        ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz jego organizm sta³ siê bardziej odporny na choroby.", GetNick(giveplayerid)), 
+            COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
+        );
+    }
+    else
+    {
+        SendClientMessage(giveplayerid, COLOR_WHITE, "Lekarz da³ ci zastrzyk i za³agodzi³ objawy choroby.");
+        ProxDetector(20.0, playerid, sprintf("* %s czuje siê lepiej oraz jego organizm lepiej radzi sobie z objawami choroby.", GetNick(giveplayerid)), 
+            COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
+        );
+    }
+    PlayerImmunity[giveplayerid] = 5;
+    SendClientMessage(playerid, COLOR_GREY, "Koszt zastrzyku: "INCOLOR_RED"-500$");
+    ZabierzKase(playerid, 500);
+    return 1;
 }
 
 //end

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ pomocdom ]-----------------------------------------------//
+//-----------------------------------------------<< MySQL >>-------------------------------------------------//
+//                                                  choroby                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,64 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: Mrucznik
+// Data utworzenia: 07.02.2020
+//Opis:
 /*
-	
+	System chorób.
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
+/* Create table query:
+	CREATE TABLE IF NOT EXISTS `mru_diseases` (
+		`uid` int(11) NOT NULL,
+		`disease` int(11) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+	ALTER TABLE `mru_diseases` ADD PRIMARY KEY (`uid`,`disease`);
 */
 
-YCMD:pomocdom(playerid, params[], help)
+//------------------<[ MySQL: ]>--------------------
+MruMySQL_LoadDiseasesData(playerid)
 {
-    if(gPlayerLogged[playerid] == 1)
-    {
-	    if(IsPlayerConnected(playerid))
-	    {
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
-			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
-			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
+	new qr[256];
+	format(qr, sizeof(qr), "SELECT `disease` FROM `mru_diseases` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
+	mysql_query(qr);
+	mysql_store_result();
+	{
+		if(mysql_num_rows() > 0)
+		{
+			new eDiseases:diseaseType;
+			while(mysql_fetch_row_format(qr, "|"))
+			{
+				sscanf(qr, "p<|>d", diseaseType);
+				InfectPlayerWithoutSaving(playerid, diseaseType);
+			}
 		}
-    }
-	return 1;
+        mysql_free_result();
+	}
 }
+
+MruMySQL_AddDisease(playerid, eDiseases:disease)
+{
+	new string[128];
+	format(string, sizeof(string), "INSERT INTO `mru_diseases` (`uid`, `disease`) VALUES('%d', '%d')", PlayerInfo[playerid][pUID], disease);
+    mysql_query(string);
+}
+
+MruMySQL_RemoveDisease(playerid, eDiseases:disease)
+{
+	new string[128];
+	format(string, sizeof(string), "DELETE FROM `mru_diseases` WHERE `uid`='%d' AND `disease`='%d'", PlayerInfo[playerid][pUID], disease);
+    mysql_query(string);
+}
+
+MruMySQL_RemoveAllDiseases(playerid)
+{
+	new string[128];
+	format(string, sizeof(string), "DELETE FROM `mru_diseases` WHERE `uid`='%d'", PlayerInfo[playerid][pUID]);
+    mysql_query(string);
+}
+
+//end
