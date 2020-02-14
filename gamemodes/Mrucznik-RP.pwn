@@ -456,10 +456,6 @@ public OnGameModeInit()
     }
 
     pusteZgloszenia();
-<<<<<<< HEAD
-=======
-
->>>>>>> 52d89ce92a5ed5c6e3e6a2369e403f89a59a63d7
 	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
     print("----- OnGameModeInit done.");
 	return 1;
