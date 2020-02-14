@@ -13,12 +13,12 @@
             "type": "string",
             "size": "36",
             "name": "opcja",
-            "description": "Sprawdz, Reload, Goto"
+            "description": "Sprawdz, Reload, Goto, Lista"
         },
         {
             "type": "integer",
             "name": "id",
-            "description": "GOTO->ID",
+            "description": "GOTO->ID | Lista->ID",
             "defaultValue": "-1"
         }
     ],

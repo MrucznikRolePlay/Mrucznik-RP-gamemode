@@ -118,6 +118,44 @@ command_agraffiti_Impl(playerid, opcja[36], id)
             }
         }
     }
+    else if(strcmp(opcja, "lista", true) == 0)
+    {
+        if(PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN)
+        {
+            if(IsPlayerConnected(id) && id != -1)
+            {
+                new string[128];
+                new f;
+                graffiti_CountGraffs(id);
+                graffiti_GetGraffitiIDs(id);
+                format(string, sizeof(string), "Graffiti gracza %s", GetNick(id));
+                SendClientMessage(playerid, COLOR_P@, string);
+                if(Graffiti_Amount[id] >= 1)
+                {
+                    for(new i = 1; i<=Graffiti_Amount[id]; i++)
+                    {
+                        f = Graffiti_PlayerList[id][i];
+                        strdel(GraffitiInfo[f][grafText], 60, 128)
+                        strreplace(GraffitiInfo[f][grafText], "\n", "~n~", .ignorecase = true);
+                        format(string, sizeof(string), "[%d]:%s", f, GraffitiInfo[f][grafText]);
+                        SendClientMessage(playerid, COLOR_WHITE, string);
+                    }
+                }
+                else
+                {
+                    sendTipMessage(playerid, "Brak!");
+                }
+            }
+            else if(id == -1)
+            {
+                sendTipMessage(playerid, "Nie podano ID gracza.");
+            }
+            else
+            {
+                sendTipMessage(playerid, "Gracz jest nieaktywny.");
+            }
+        }
+    }
     return 1;
 }
 
