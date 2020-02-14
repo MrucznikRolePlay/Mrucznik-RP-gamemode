@@ -186,5 +186,6 @@ stock IbizaNadajBilet(playerid, giveplayerid, bilet)
     if(bilet == 1) IbizaTicket[giveplayerid] = IBIZA_NORMAL;
 	if(bilet == 2) IbizaTicket[giveplayerid] = IBIZA_VIP;
 	if(bilet == 3) IbizaTicket[giveplayerid] = IBIZA_SUPERVIP;
+	return 1;
 }
 //end
