@@ -1132,7 +1132,7 @@ public Spectator()
         }
         //END vinyl
 		//Ibiza audio check
-        if(!GetPVarInt(i, "IBIZA-stream"))
+        if(GetPVarInt(i, "IBIZA-stream") == 0)
         {
             if(IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && (GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
             {
@@ -1177,7 +1177,8 @@ public Spectator()
 				GetPlayerName(specid, specNAME, sizeof(specNAME));
 				GetPlayerHealth(specid, specHP);
 				GetPlayerIp(specid, specIP, sizeof(specIP));
-				format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
+				if(PlayerInfo[i][pAdmin] > 0 || IsAScripter(i)) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
+				else format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f",specNAME,specid,specHP);
 				GameTextForPlayer(i, string, 2500, 3);
 				SpectateTime[i]++;
 				if(GetPlayerInterior(i) != GetPlayerInterior(specid))

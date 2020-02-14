@@ -377,10 +377,10 @@ YCMD:wejdz(playerid, params[], help)
                     return 1;
                 }
             }
+            Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 25);
             SetPlayerPos(playerid, 221.530426, -1546.261352, -15.997495);
             GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
-            Wchodzenie(playerid);
             return 1;
         }
         //san news biura
