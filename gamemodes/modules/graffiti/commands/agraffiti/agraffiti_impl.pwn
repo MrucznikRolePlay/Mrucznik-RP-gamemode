@@ -135,7 +135,7 @@ command_agraffiti_Impl(playerid, opcja[36], id)
                     for(new i = 1; i<=Graffiti_Amount[id]; i++)
                     {
                         f = Graffiti_PlayerList[id][i];
-                        strdel(GraffitiInfo[f][grafText], 60, 128)
+                        strdel(GraffitiInfo[f][grafText], 60, 128);
                         strreplace(GraffitiInfo[f][grafText], "\n", "~n~", .ignorecase = true);
                         format(string, sizeof(string), "[%d]:%s", f, GraffitiInfo[f][grafText]);
                         SendClientMessage(playerid, COLOR_WHITE, string);
