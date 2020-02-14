@@ -132,7 +132,7 @@ command_agraffiti_Impl(playerid, opcja[36], id)
                 SendClientMessage(playerid, COLOR_P@, string);
                 if(Graffiti_Amount[id] >= 1)
                 {
-                    for(new i = 1; i<=Graffiti_Amount[id]; i++)
+                    for(new i; i < Graffiti_Amount[id]-1; i++)
                     {
                         f = Graffiti_PlayerList[id][i];
                         strdel(GraffitiInfo[f][grafText], 60, 128);
