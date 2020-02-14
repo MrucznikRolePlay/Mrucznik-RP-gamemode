@@ -168,7 +168,6 @@
 #include "admin\admin_mysql.pwn"
 #include "business\business_mysql.pwn"
 #include "graffiti\graffiti_mysql.pwn"
-#include "biznesy\biznesy_mysql.pwn"
 #include "choroby\choroby_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
 #include "player_attachments\player_attachments_mysql.pwn"
@@ -185,7 +184,6 @@
 //-------<[ callbacks ]>-------
 #include "admin\admin_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
-#include "biznesy\biznesy_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
 #include "convoy\convoy_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
