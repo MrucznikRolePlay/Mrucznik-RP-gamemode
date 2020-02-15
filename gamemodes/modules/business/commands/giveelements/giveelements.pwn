@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                giveelements                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,33 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "bizback\bizback.pwn"
-#include "giveelements\giveelements.pwn"
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbizcreate\mbizcreate.pwn"
-#include "mbizedit\mbizedit.pwn"
-#include "mbizinfo\mbizinfo.pwn"
-#include "mbizmoney\mbizmoney.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-#include "mbizpanel\mbizpanel.pwn"
-#include "mgotobiz\mgotobiz.pwn"
-
+#include "giveelements_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_giveelements()
 {
-    command_bizback();
-    command_giveelements();
-    command_mbizbuy();
-    command_mbizcreate();
-    command_mbizedit();
-    command_mbizinfo();
-    command_mbizmoney();
-    command_mbiznesy();
-    command_mbizpanel();
-    command_mgotobiz();
+    new command = Command_GetID("giveelements");
+
+    //aliases
+    Command_AddAlt(command, "bizallelements");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:giveelements(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która uzupe³nia wszystkim biznesom materia³y.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_giveelements_Impl(playerid);
 }

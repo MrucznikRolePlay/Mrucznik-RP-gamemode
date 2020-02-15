@@ -130,6 +130,21 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	Log(businessLog, INFO, "BusinessGod %s stworzyl biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	return 1;
 }
+CheckSymbolsInText(const inputtext[])
+{
+	new textSize = strlen(inputtext); 
+	for(new i; i <= textSize; i++)
+	{
+		if(inputtext[i] == '%'
+		|| inputtext[i] == '/'
+		|| inputtext[i] == '\n'
+		|| inputtext[i] == '#')
+		{
+			return false;
+		}
+	}
+	return true; 
+}
 DestroyBusinessIcon(bIDE)
 {
 	DestroyDynamicPickup(businessIcon[bIDE]);
@@ -171,7 +186,8 @@ CreateBusinessIcons()
 GiveBizToPlayer(playerid, bIDE, bType, bType2)
 {
 	new string[124]; 
-	mysql_real_escape_string(GetNick(playerid), mBiz[bIDE][b_Name_Owner]); 
+	strdel(mBiz[bIDE][b_Name_Owner], 0, strlen(mBiz[bIDE][b_Name_Owner]));
+    strcat(mBiz[bIDE][b_Name_Owner], GetNick(playerid), MAX_PLAYER_NAME);
 	mBiz[bIDE][b_ownerUID] = PlayerInfo[playerid][pUID]; 
 	mBiz[bIDE][b_moneyPocket] = 0; 
 	mBiz[bIDE][b_TYPE] = bType; 
@@ -398,13 +414,16 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Zmiana MOTD\t{33AA33}$%d\n\
 		Spawn pod biznesem\t{33AA33}$%d\n\
 		Rozwój sejfu G\t{33AA33}$%d\n\
-		Rozwój sejfu T\t{33AA33}$%d",
+		Rozwój sejfu T\t{33AA33}$%d\n\
+		Dodaj interior\t \n\
+		Rozwój sejfu materia³ów\t{33AA33}$%d",
 		GetBusinessName(bIDE),
 		B_CENA_ZMIENAZWE,
 		B_CENA_ZMIENMOTD,
 		B_CENA_ZMIENSPAWN,
 		B_CENA_SEJFG,
-		B_CENA_SEJFT); 
+		B_CENA_SEJFT,
+		B_CENA_SEJFE); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER5, DIALOG_STYLE_TABLIST, SetDefaultCaption(), 
 		string, "Akceptuj", "Wstecz"); 
 	}
@@ -412,6 +431,22 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	{
 		sendErrorMessage(playerid, "INVALID DIALOG TYPE"); 
 	}
+	return 1;
+}
+ShowInteriorList(playerid)
+{
+	new string[456];
+	format(string, sizeof(string), "Nazwa\tWielkoœæ\tCena\n\
+	%s\t%s\t$%d\n\
+	%s\t%s\t$%d",
+	interiorsPos[0][i_name],
+	interiorsPos[0][i_size],
+	interiorsPos[0][i_values][1],
+	interiorsPos[1][i_name],
+	interiorsPos[1][i_size],
+	interiorsPos[1][i_values][1]);
+	ShowPlayerDialogEx(playerid, DIALOG_BIZ_INTERIORLIST, DIALOG_STYLE_TABLIST_HEADERS, SetDefaultCaption(),
+	string, "Dalej", "WyjdŸ"); 
 	return 1;
 }
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
@@ -529,5 +564,22 @@ GetTypeNameBiz(bIDE)
 		format(typeName, sizeof(typeName), "Przemys³owe coœ"); 
 	}
 	return typeName;
+}
+StartLicytacjaBiz(bIDE, playerid, bChoice)
+{
+	new string[256]; 
+	foreach(new i : Player)
+	{
+		SendClientMessage(i, COLOR_GREEN, "=======<[ San Andreas Property Department ]>=======");
+		format(string, sizeof(string), "Pan(i) %s rozpoczê³a licytacjê obiektu %s [.]", GetNick(playerid), GetBusinessName(bIDE));
+		SendClientMessage(i, COLOR_WHITE, string);
+		format(string, sizeof(string), "[.] znajduj¹cego siê na %s. Cena proponowana $%d", mBiz[bIDE][b_Location], b_cost);
+		SendClientMessage(i, COLOR_WHITE, string); 
+		SendClientMessage(i, COLOR_GREEN, "=====<[ Koniec komunikatu ]>====="); 
+		sendTipMessage(playerid, "Je¿eli chcia³byœ zalicytowaæ obiekt podejdŸ do niego i wpisz /licytuj"); 
+		mBiz[bIDE][b_auction] = 1; //Trwa licytacja na ten biznes
+		//MRUCZNIK - DO DOKOÑCZENIA (LICYTACJE) 
+	}
+	return 1; 
 }
 //end
