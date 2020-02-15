@@ -3852,7 +3852,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
 			
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
-            ResetPlayerWeapons(playerid);
+            ResetPlayerWeapons(playerid); // bug?
 		}
 		//Komunikaty funkcji:
 		if(strlen(komunikat) > 0)
