@@ -565,4 +565,21 @@ GetTypeNameBiz(bIDE)
 	}
 	return typeName;
 }
+StartLicytacjaBiz(bIDE, playerid, bChoice)
+{
+	new string[256]; 
+	foreach(new i : Player)
+	{
+		SendClientMessage(i, COLOR_GREEN, "=======<[ San Andreas Property Department ]>=======");
+		format(string, sizeof(string), "Pan(i) %s rozpoczê³a licytacjê obiektu %s [.]", GetNick(playerid), GetBusinessName(bIDE));
+		SendClientMessage(i, COLOR_WHITE, string);
+		format(string, sizeof(string), "[.] znajduj¹cego siê na %s. Cena proponowana $%d", mBiz[bIDE][b_Location], b_cost);
+		SendClientMessage(i, COLOR_WHITE, string); 
+		SendClientMessage(i, COLOR_GREEN, "=====<[ Koniec komunikatu ]>====="); 
+		sendTipMessage(playerid, "Je¿eli chcia³byœ zalicytowaæ obiekt podejdŸ do niego i wpisz /licytuj"); 
+		mBiz[bIDE][b_auction] = 1; //Trwa licytacja na ten biznes
+		//MRUCZNIK - DO DOKOÑCZENIA (LICYTACJE) 
+	}
+	return 1; 
+}
 //end
