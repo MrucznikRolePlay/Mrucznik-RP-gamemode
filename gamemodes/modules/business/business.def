@@ -61,6 +61,7 @@
 #define DIALOG_INPUT_NOWEMOTD 6564
 #define DIALOG_OKRESL_BIZNES 6565
 #define DIALOG_OKRESL_POTWIERDZ 6567
+#define DIALOG_BIZ_INTERIORLIST 6568
     //Pod dialogi do OWNER
 #define DIALOG_MAIN 0//                             --> Dialog g³ówny, pozwalaj¹cy zarz¹dzaæ biznesem
 #define DIALOG_WORKERS 1//                          --> Dialog zarz¹dzania pracownikami

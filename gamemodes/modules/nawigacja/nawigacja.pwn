@@ -220,7 +220,7 @@ UpdateNaviTextDrawsForPlayer(playerid)
 	PlayerTextDrawSetString(playerid, roadsLeft_5[playerid], string); 
 	format(string, sizeof(string), "Docelowe: ~g~%s", Odpolszcz(nawLokacjaString)); 
 	PlayerTextDrawSetString(playerid, roadsLeft_4[playerid], string); 
-	PlayerTextDrawSetString(playerid, roadsLeft_2[playerid], string); 
+	PlayerTextDrawSetString(playerid, roadsLeft_2[playerid], stringVeh); 
 	PlayerTextDrawSetPreviewModel(playerid, roadsLeft_3[playerid], idVeh);
 	PlayerTextDrawSetPreviewRot(playerid, roadsLeft_3[playerid], 3.000000, 180.000000, 35.000000, 1.000000);
 	return 1;

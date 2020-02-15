@@ -398,7 +398,8 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Zmiana MOTD\t{33AA33}$%d\n\
 		Spawn pod biznesem\t{33AA33}$%d\n\
 		Rozwój sejfu G\t{33AA33}$%d\n\
-		Rozwój sejfu T\t{33AA33}$%d",
+		Rozwój sejfu T\t{33AA33}$%d\n\
+		Dodaj interior\t ",
 		GetBusinessName(bIDE),
 		B_CENA_ZMIENAZWE,
 		B_CENA_ZMIENMOTD,
@@ -412,6 +413,22 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	{
 		sendErrorMessage(playerid, "INVALID DIALOG TYPE"); 
 	}
+	return 1;
+}
+ShowInteriorList(playerid)
+{
+	new string[456];
+	format(string, sizeof(string), "Nazwa\tWielkoœæ\tCena\n\
+	%s\t%s\t$%d\n\
+	%s\t%s\t$%d",
+	interiorsPos[0][i_name],
+	interiorsPos[0][i_size],
+	interiorsPos[0][i_values][1],
+	interiorsPos[1][i_name],
+	interiorsPos[1][i_size],
+	interiorsPos[1][i_values][1]);
+	ShowPlayerDialogEx(playerid, DIALOG_BIZ_INTERIORLIST, DIALOG_STYLE_TABLIST_HEADERS, SetDefaultCaption(),
+	string, "Dalej", "WyjdŸ"); 
 	return 1;
 }
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami

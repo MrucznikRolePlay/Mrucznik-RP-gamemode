@@ -586,6 +586,10 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     Log(businessLog, INFO, "%s ulepszyl w biznesie %s sejf tymczasowy - aktualny poziom %d", GetPlayerLogName(playerid), GetBusinessLogName(bIDE), mBiz[bIDE][b_ulepszenie5]);
                     SaveBiz(bIDE); 
                 }
+                case 6:
+                {
+                    ShowInteriorList(playerid); 
+                }
             }
         }
     }
