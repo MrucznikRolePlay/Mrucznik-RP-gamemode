@@ -249,6 +249,7 @@ YCMD:wyjdz(playerid, params[], help)
         {
 			Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 21);
+			PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             SetPlayerPos(playerid, 395.9647, -1811.1703, 7.8789);
             GameTextForPlayer(playerid, "~w~Zapraszamy ponownie!", 5000, 1);
             return 1;
@@ -336,6 +337,7 @@ YCMD:wyjdz(playerid, params[], help)
             }
 			Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 22);
+			PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             SetPlayerPos(playerid, 422.2131, -1831.5657, -65.5105);
 			return 1;
         }
