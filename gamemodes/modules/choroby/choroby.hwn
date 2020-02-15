@@ -1,0 +1,103 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                  choroby                                                  //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: Mrucznik
+// Data utworzenia: 07.02.2020
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+enum eDiseases {
+    NONE,
+    GRYPA,
+    ZATRUCIE,
+    KORONAWIRUS
+};
+
+enum eEffectData {
+    //TODO: Try to refactor this to indirections
+    ActivateCallback[32], // This callback has signature Callback(playerid, disease, value)
+    DeactivateCallback[32], // This callback has signature Callback(playerid, disease, value)
+    MinTime,
+    TimeRange,
+    bool:Pernament,
+    Float:ContagiousRange,
+    InfectionChance, // chance of getting disease if player is in contagious range
+    AdditionalValue
+}
+
+enum eDiseaseData {
+    Name[32],
+    CureCost,
+    CureTime, //in minutes
+    DrugResistance, // chance of unsuccessful treatment in percent
+    Float:ContagiousRatio, // ratio of effect chance to infect other players
+    bool:SpreadingOnContact,
+    Vector:VEffects //inicjalizacja w choroby_InitEffects()
+    //TODO: najlepiej by by³o, jakby efekty funkcjami zwracaj¹cymi funkcjê a tutaj zapisywa³y by siê te funckje, ale nie wiem jak to zrobiæ w pawn
+    // potrzebowa³bym mo¿liwoœci zwrócenia funkcji o sygnaturze Callback(playerid, disease, effect) i wtedy móg³bym robiæ coœ takiego jak np w js:
+    // func CreateFeelingBadEffect(message)
+    // {
+    //     return (playerid, disease, effect) => {
+    //         ChatMe(playerid, message);
+    //     }
+    // }
+};
+
+//-----------------<[ Zmienne: ]>-------------------
+new Vector:VPlayerDiseases[MAX_PLAYERS];
+
+//TODO: Replace to dynamic arrays, vector or smth to create full dynamic system
+new DiseaseData[eDiseases][eDiseaseData] = {
+    {"", 0, 0, 0, 0.0, false, VECTOR_NULL},
+    {"Grypa", 50000, 1, 25, 1.0, false, VECTOR_NULL},
+    {"Zatrucie", 50000, 1, 25, 1.0, false, VECTOR_NULL},
+    {"Koronawirus", 200000, 5, 80, 2.5, false, VECTOR_NULL}
+};
+
+new PlayerImmunity[MAX_PLAYERS];
+
+//------------------<[ Forwardy: ]>--------------------
+forward FeelingBadEffect(playerid, disease, value);
+forward CouchingEffect(playerid, disease, value);
+forward VomitEffect(playerid, disease, value);
+forward HPLossEffect(playerid, disease, value);
+forward HPLossToDeathEffect(playerid, disease, value);
+forward BlackoutEffect(playerid, disease, value);
+forward FaintEffect(playerid, disease, value);
+forward DeathEffect(playerid, disease, value);
+
+choroby_InitEffects()
+{
+    //eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, pernament, contagiousRange, infectionChance, additionalValue)
+    AddEffect(GRYPA, "FeelingBadEffect", "", FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE);
+    AddEffect(GRYPA, "CouchingEffect", "", REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, false, 5.0, 10);
+    AddEffect(GRYPA, "HPLossEffect", "", RARE_EFFECT_MIN, RARE_EFFECT_RANGE, false, 5.0, 10, 10); //utrata 10 hp
+    
+    AddEffect(ZATRUCIE, "FeelingBadEffect", "", FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE);
+    AddEffect(ZATRUCIE, "VomitEffect", "", REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE);
+    AddEffect(ZATRUCIE, "HPLossEffect", "", RARE_EFFECT_MIN, RARE_EFFECT_RANGE, false, 0.0, 0, 10); //utrata 10 hp
+    
+    AddEffect(KORONAWIRUS, "FeelingBadEffect", "", FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE);
+    AddEffect(KORONAWIRUS, "CouchingEffect", "", REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, false, 5.0, 10);
+    AddEffect(KORONAWIRUS, "HPLossToDeathEffect", "", REGULAR_EFFECT_MIN, REGULAR_EFFECT_MIN, false, 0.0, 0, 10); //utrata 10 hp
+    AddEffect(KORONAWIRUS, "DeathEffect", "", RARE_EFFECT_MIN, RARE_EFFECT_RANGE);
+    return 1;
+}
+
+//end

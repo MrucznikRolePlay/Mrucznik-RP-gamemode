@@ -55,36 +55,6 @@ hook OnPlayerConnect(playerid)
     graffiti_ZerujZmienne(playerid);
 }
 
-
-public OPEDO(playerid, objectid, response, x, y, z, rx, ry, rz)
-{
-    CallRemoteFunction("OnPlayerEditDynamicObject", "iisffffff", playerid, objectid, response, x, y, z, rx, ry, rz);
-}
-
-hook OPEDO(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
-{
- 	if( response == EDIT_RESPONSE_FINAL )
-    {
-        
-		new f = GetPVarInt(playerid, "GraffitiID");
-		GraffitiInfo[f][grafXpos] = x;
-		GraffitiInfo[f][grafYpos] = y;
-		GraffitiInfo[f][grafZpos] = z;
-		GraffitiInfo[f][grafXYpos] = rx;
-		GraffitiInfo[f][grafYYpos] = ry;
-		GraffitiInfo[f][grafZYpos] = rz;
-        GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
-		graffiti_SaveMySQL(f, playerid);
-		graffiti_ReloadForPlayers(f);
-		graffiti_ZerujZmienne(playerid);
-    }
-    if( response == EDIT_RESPONSE_CANCEL )
-    {
-        DestroyDynamicObject(pGraffiti[playerid]);
-		GameTextForPlayer(playerid, "~r~Anulowano!",2000, 5);
-    }
-    return 1;
-}
 //-----------------<[ Funkcje: ]>-------------------
 GrafExist(value)
 {
@@ -96,7 +66,7 @@ GrafExist(value)
 }
 stock graffiti_GetNewID()
 {
-	for(new i; i <= GRAFFITI_MAX; i++)
+	for(new i; i < GRAFFITI_MAX; i++)
 	{
 		if(!GrafExist(i))
 		{
@@ -111,10 +81,89 @@ graffiti_ReloadForPlayers(id)
 	graffiti_LoadMySQL(id);
 	return 1;
 }
+graffiti_CountGraffs(playerid)
+{
+	Graffiti_Amount[playerid] = 0;
+	for(new i; i < GRAFFITI_MAX; i++)
+	{
+		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+		{
+			Graffiti_Amount[playerid]++;
+		}
+	}
+}
+graffiti_GetGraffitiIDs(playerid)
+{
+	new licznik = 0;
+	graffiti_ZerujListe(playerid);
+	for(new i; i < GRAFFITI_MAX; i++)
+	{
+		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+		{
+			Graffiti_PlayerList[playerid][licznik] = i;
+			licznik++;
+		}
+	}
+}
+graffiti_DefineColor(GRAF_ID)
+{
+	new f = GRAF_ID;
+	switch(GraffitiInfo[f][gColor])
+	{
+		case 0: GraffitiInfo[f][gColor] = GRAFFITI_CZARNY;
+ 
+        case 1: GraffitiInfo[f][gColor] = GRAFFITI_BIALY;
+ 
+        case 2: GraffitiInfo[f][gColor] = GRAFFITI_CZERWONY;
+ 
+        case 3: GraffitiInfo[f][gColor] = GRAFFITI_ZIELONY;
+ 
+        case 4: GraffitiInfo[f][gColor] = GRAFFITI_NIEBIESKI;
+ 
+        case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;
+
+		case 6: GraffitiInfo[f][gColor] = GRAFFITI_POMARANCZOWY;
+
+		case 7: GraffitiInfo[f][gColor] = GRAFFITI_ZOLTY;
+
+		case 8: GraffitiInfo[f][gColor] = GRAFFITI_FIOLETOWY;
+
+		case 9: GraffitiInfo[f][gColor] = GRAFFITI_ROZOWY;
+	}
+}
+graffiti_Zeruj(f)
+{
+	GraffitiInfo[f][grafXpos] = 0;
+	GraffitiInfo[f][grafYpos] = 0;
+	GraffitiInfo[f][grafZpos] = 0;
+	GraffitiInfo[f][grafXYpos] = 0.0;
+	GraffitiInfo[f][grafYYpos] = 0.0;
+	GraffitiInfo[f][grafZYpos] = 0.0;
+	format(GraffitiInfo[f][pOwner], MAX_PLAYER_NAME, "");
+	GraffitiInfo[f][gColor] = -1;
+}
+graffiti_EditGraffiti(playerid, f)
+{
+	DestroyDynamicObject(GraffitiInfo[f][gID]);
+	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
+	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
+	graffiti_UpdateMySQL(f, 2);
+	graffiti_ReloadForPlayers(f);
+	SetPVarInt(playerid, "GraffitiID", f);
+	SetPVarInt(playerid, "CreatingGraff", 1);
+	Log(serverLog, INFO, "Gracz %s zaaktualizowa³ graffiti. Tekst:%s", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
+	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
+}
 graffiti_CreateGraffiti(playerid)
 {
 	new f = graffiti_GetNewID();
+	if(f == INVALID_GRAFID) 
+	{
+		sendTipMessage(playerid, "Wykorzystano limit graffiti(100) na mapê.");
+		return 1;
+	}
 	SetPVarInt(playerid, "GraffitiID", f);
+	SetPVarInt(playerid, "CreatingGraff", 1);
 	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
 	GraffitiInfo[f][grafXpos] = PlayerPos[playerid][0];
 	GraffitiInfo[f][grafYpos] = PlayerPos[playerid][1];
@@ -125,28 +174,42 @@ graffiti_CreateGraffiti(playerid)
 	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
 	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
 	graffiti_SaveMySQL(f, playerid);
-	switch(GraffitiInfo[f][gColor])
-	{
-		case 0: GraffitiInfo[f][gColor] = GRAFFITI_CZARNY;// CZARNY
- 
-        case 1: GraffitiInfo[f][gColor] = GRAFFITI_BIALY; // BIALY
- 
-        case 2: GraffitiInfo[f][gColor] = GRAFFITI_CZERWONY; // CZERWONY
- 
-        case 3: GraffitiInfo[f][gColor] = GRAFFITI_ZIELONY; // ZIELONY
- 
-        case 4: GraffitiInfo[f][gColor] = GRAFFITI_NIEBIESKI; // NIEBIESKI
- 
-        case 5: GraffitiInfo[f][gColor] = GRAFFITI_SZARY;  // SZARY
-	}
+	graffiti_DefineColor(f);
 	graffiti_ReloadForPlayers(f);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
+	Log(serverLog, INFO, "Gracz %s stworzy³ graffiti. Tekst:%s", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
 	return 1;
+}
+graffiti_ZerujListe(playerid)
+{
+	Graffiti_PlayerList[playerid][0] = INVALID_GRAFID;
+	Graffiti_PlayerList[playerid][1] = INVALID_GRAFID;
+	Graffiti_PlayerList[playerid][2] = INVALID_GRAFID;
 }
 graffiti_ZerujZmienne(playerid)
 {
-	pGraffiti[playerid] = -1;
-	Graffiti_Color[playerid] = 0;
+	Graffiti_Color[playerid] = -1;
 	Graffiti_Text[playerid] = "";
+	Graffiti_Amount[playerid] = 0;
+	graffiti_ZerujListe(playerid);
+	DeletePVar(playerid, "CreatingGraff");
+	DeletePVar(playerid, "GraffitiID");
+}
+
+graffiti_FindNearest(playerid)
+{
+	for(new i; i < GRAFFITI_MAX; i++)
+	{
+		if(GrafExist(i))
+		{
+			new Float:ox, Float:oy, Float:oz;
+			GetDynamicObjectPos(GraffitiInfo[i][gID], ox, oy, oz);
+			if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz))
+			{
+				return i;
+			}
+		}
+	}
+	return INVALID_GRAFID;
 }
 //end

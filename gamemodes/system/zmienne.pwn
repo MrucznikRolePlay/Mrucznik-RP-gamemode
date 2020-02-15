@@ -311,7 +311,7 @@ new bool:ZoneAttacker[MAX_PLAYERS];
 new bool:ZoneDefender[MAX_PLAYERS];
 new ZoneProtect[MAX_ZONES];
 new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
-new ZONE_DISABLED = 1;
+new ZONE_DISABLED = 0;
 new ZONE_DEF_TIME = 900000;
 //21.07 PayDay fix
 /*new TRAIN_Checkpoints[6][3] = {
@@ -364,6 +364,9 @@ new GATE_VINYL, bool:GATE_VINYL_S=false,
     GATE_VINYL_IN[4], bool:GATE_VINYL_IN_S[4] = {false, ...};
 new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,71.0};  //pos[3] dist, vw
 new VINYL_Stream[128];
+// KOORDYNATY IBIZY DLA AUDIO STREAM
+new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 1000.0};  //pos[3] dist, vw
+new IBIZA_Stream[128];
 //22.06  system rang mysql
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
 //new FracLiderRang[MAX_FRAC][MAX_RANG_LEN];      //0.4kB
@@ -723,7 +726,6 @@ new RobbedTime[MAX_PLAYERS];
 new CP[MAX_PLAYERS];
 new MoneyMessage[MAX_PLAYERS];
 new Condom[MAX_PLAYERS];
-new STDPlayer[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
 //BW
@@ -1023,10 +1025,6 @@ new shifthour;
 
 new intrate = 1;
 new levelexp = 4;
-new STD1[] = {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3};
-new STD2[] = {0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3};
-new STD3[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3};
-new STD4[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 3};
 new SELLCAR1[] = { 1000, 1124, 1245, 1349, 1475, 1574, 1636, 1762, 1895, 1946, 2000 };
 new SELLCAR2[] = { 2099, 2135, 2255, 2378, 2457, 2563, 2614, 2721, 2878, 2988, 3000 };
 new SELLCAR3[] = { 3058, 3175, 3212, 3377, 3454, 3555, 3678, 3751, 3865, 3964, 4000 };
@@ -1156,7 +1154,7 @@ ZerujZmienne(playerid)
 	CP[playerid] = 0; Robbed[playerid] = 0; ScigaSie[playerid] = 666;
 	CarOffer[playerid] = 999; CarPrice[playerid] = 0; CarID[playerid] = 0; CarCalls[playerid] = 0; GraczDajacy[playerid] = 999; GraczDajacyNeon[playerid] = 999;
 	RobbedTime[playerid] = 0; MoneyMessage[playerid] = 0; Condom[playerid] = 0; GraczDajacyLodz[playerid] = 999; IDAuta[playerid] = 0; //JaKupuje[playerid] = 0; JaWymieniam[playerid] = 0;
-	STDPlayer[playerid] = 0;  SexOffer[playerid] = 999; SexPrice[playerid] = 0; GraczDajacySamolot[playerid] = 999; IDLodzi[playerid] = 0; IDSamolotu[playerid] = 0;
+	SexOffer[playerid] = 999; SexPrice[playerid] = 0; GraczDajacySamolot[playerid] = 999; IDLodzi[playerid] = 0; IDSamolotu[playerid] = 0;
 	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; WynajemOffer[playerid] = 999; DomOffer[playerid] = 999; DomCena[playerid] = 0;
 	TalkingLive[playerid] = INVALID_PLAYER_ID; LiveOffer[playerid] = 999; TakingLesson[playerid] = 0; CenaDawanegoSamolot[playerid] = 999;
 	RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; MapIconsShown[playerid] = 0; CenaDawanegoAuta[playerid] = 999; AntySpam[playerid] = 0; poscig[playerid] = 0;

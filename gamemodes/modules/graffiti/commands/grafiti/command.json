@@ -13,7 +13,7 @@
             "type": "string",
             "size": "24",
             "name": "opcja",
-            "description": "stworz, edytuj, usun, namierz, sprawdz"
+            "description": "lista, stworz, edytuj, usun"
         }
     ],
     "date": "02.02.2020"

@@ -61,7 +61,6 @@ command_opis_Impl(playerid)
 		
 	if( rows )
 	{
-			//for(new row = 0; row < rows; row++)
 		for(new row; row < rows; row++,db_next_row(db_result))   
 		{
 			new tmpText[256];

@@ -156,7 +156,7 @@ YCMD:armor(playerid, params[], help)
 		}
 		else
 		{
-			sendTipMessage(playerid, "U¿yj /ulecz [playerid/CzêœæNicku] [cena]");
+			sendErrorMessage(playerid, "Nie jesteœ w domu.");
 			return 1;
 		}
 	}

@@ -842,24 +842,24 @@ public PlayerAFK(playerid, afktime, breaktime)
 		if(afktime == 840 && GetPlayerAdminDutyStatus(playerid) == 1)
 		{
 			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
-			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 14 minut.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		else if(afktime == 1740 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime == 1740 && PlayerInfo[playerid][pNewAP] >= 1)
+		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1))
 		{
 			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
-			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 29 minut.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
 		else if(afktime == 1140 && IsPlayerPremiumOld(playerid))
 		{
 			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
-			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 19 minut.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
 		else if(afktime == 540)
 		{
 			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
-			SendClientMessage(playerid, COLOR_PANICRED, "Jesteœ AFK ju¿ 9 minut.");
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
+		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 || afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
 			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
@@ -1153,7 +1153,7 @@ public Spectator()
         }
         //END vinyl
 		//Ibiza audio check
-        if(!GetPVarInt(i, "IBIZA-stream"))
+        if(GetPVarInt(i, "IBIZA-stream") == 0)
         {
             if(IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && (GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
             {
@@ -1163,7 +1163,7 @@ public Spectator()
         }
         else
         {
-            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]))
+            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && !(GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
             {
                 SetPVarInt(i, "IBIZA-stream", 0);
                 StopAudioStreamForPlayer(i);
@@ -1198,7 +1198,8 @@ public Spectator()
 				GetPlayerName(specid, specNAME, sizeof(specNAME));
 				GetPlayerHealth(specid, specHP);
 				GetPlayerIp(specid, specIP, sizeof(specIP));
-				format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
+				if(PlayerInfo[i][pAdmin] > 0 || IsAScripter(i)) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
+				else format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f",specNAME,specid,specHP);
 				GameTextForPlayer(i, string, 2500, 3);
 				SpectateTime[i]++;
 				if(GetPlayerInterior(i) != GetPlayerInterior(specid))
@@ -3266,7 +3267,7 @@ public CJSkinCheck()
 {
 	foreach(new j : Player)
 	{
-		if(GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0)
+		if(gPlayerLogged[j] == 1 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0)
 		{
 			PlayerInfo[j][pSkin] = 299;
 			SetPlayerSkinEx(j, 299);

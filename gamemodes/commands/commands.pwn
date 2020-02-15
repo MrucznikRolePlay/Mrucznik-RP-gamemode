@@ -26,7 +26,6 @@
 #include "cmd/admini.pwn"
 #include "cmd/adminstats.pwn"
 #include "cmd/ah.pwn"
-#include "cmd/akceptuj.pwn"
 #include "cmd/alarm.pwn"
 #include "cmd/alkomat.pwn"
 #include "cmd/ann.pwn"
@@ -80,7 +79,6 @@
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
-#include "cmd/choroba.pwn"
 #include "cmd/clearwlall.pwn"
 #include "cmd/clearzone.pwn"
 #include "cmd/cmdinfo.pwn"
@@ -252,7 +250,6 @@
 #include "cmd/kupsamoloty.pwn"
 #include "cmd/kupskin.pwn"
 #include "cmd/kurs.pwn"
-#include "cmd/kurtka.pwn"
 #include "cmd/laptop.pwn"
 #include "cmd/licencje.pwn"
 #include "cmd/liderpomoc.pwn"
@@ -511,7 +508,6 @@
 #include "cmd/ucisz.pwn"
 #include "cmd/ugotuj.pwn"
 #include "cmd/ukradnij.pwn"
-#include "cmd/ulecz.pwn"
 #include "cmd/ulepsz.pwn"
 #include "cmd/unblock.pwn"
 #include "cmd/unbw.pwn"
@@ -608,7 +604,6 @@
 #include "cmd/zapiszkonta.pwn"
 #include "cmd/zapytaj.pwn"
 #include "cmd/zasady.pwn"
-#include "cmd/zastrzyk.pwn"
 #include "cmd/zatankuj.pwn"
 #include "cmd/zatrzymajlekcje.pwn"
 #include "cmd/zaufanyggracz.pwn"
@@ -1251,9 +1246,6 @@ static Aliases()
 	Command_AddAltNamed("ukradnij", "dropcar");
 	Command_AddAltNamed("ukradnij", "kradnijauto");
 
-	//ulecz
-	Command_AddAltNamed("ulecz", "heal");
-
 	//uleczmnie
 	Command_AddAltNamed("uleczmnie", "healme");
 
@@ -1472,10 +1464,6 @@ static Aliases()
 	//undemorgan
 	Command_AddAltNamed("undemorgan", "prisonoff");
 	Command_AddAltNamed("undemorgan", "unprison");
-
-	//choroba
-	Command_AddAltNamed("choroba", "setstd");
-	Command_AddAltNamed("choroba", "zaraz");
 
 	//zmienprace
 	Command_AddAltNamed("zmienprace", "setjob");

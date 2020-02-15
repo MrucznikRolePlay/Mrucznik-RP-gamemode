@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ kurtka ]------------------------------------------------//
+//-----------------------------------------------<< MySQL >>-------------------------------------------------//
+//                                                  choroby                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,67 +16,64 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: Mrucznik
+// Data utworzenia: 07.02.2020
+//Opis:
 /*
-	
+	System chorób.
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
+/* Create table query:
+	CREATE TABLE IF NOT EXISTS `mru_diseases` (
+		`uid` int(11) NOT NULL,
+		`disease` int(11) NOT NULL
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+	ALTER TABLE `mru_diseases` ADD PRIMARY KEY (`uid`,`disease`);
 */
 
-YCMD:kurtka(playerid, params[], help)
+//------------------<[ MySQL: ]>--------------------
+MruMySQL_LoadDiseasesData(playerid)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
-    {
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(IsAFBI(playerid))
+	new qr[256];
+	format(qr, sizeof(qr), "SELECT `disease` FROM `mru_diseases` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
+	mysql_query(qr);
+	mysql_store_result();
+	{
+		if(mysql_num_rows() > 0)
 		{
-			if (PlayerToPoint(3.5, playerid, 592.5598,-1477.5116,82.4736))//nowe fbi by ubunteq
+			new eDiseases:diseaseType;
+			while(mysql_fetch_row_format(qr, "|"))
 			{
-				if(GetPlayerVirtualWorld(playerid) == 2)
-				{
-					if(GetPlayerAdminDutyStatus(playerid) == 1)
-					{
-						sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
-						return 1;
-					}
-					if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 1)
-					{
-						format(string, sizeof(string), "* %s zak³ada kurtkê z naszywkami FBI.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						SetPlayerSkin(playerid, 286);
-						SetPlayerColor(playerid, COLOR_FBI); // czarny
-					}
-					else if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 2)
-					{
-						format(string, sizeof(string), "* %s zak³ada luŸny strój agentki FBI.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						SetPlayerSkin(playerid, 141);
-						SetPlayerColor(playerid, COLOR_FBI); // czarny
-					}
-					else
-					{
-						sendTipMessage(playerid, "Nie jesteœ na s³u¿bie!");
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteœ w szatni!"); 
-				}
-			}
-			else
-			{
-				sendTipMessage(playerid, "Nie jesteœ w szatni !");
-				return 1;
+				sscanf(qr, "p<|>d", diseaseType);
+				InfectPlayerWithoutSaving(playerid, diseaseType);
 			}
 		}
+        mysql_free_result();
 	}
-	return 1;
 }
+
+MruMySQL_AddDisease(playerid, eDiseases:disease)
+{
+	new string[128];
+	format(string, sizeof(string), "INSERT INTO `mru_diseases` (`uid`, `disease`) VALUES('%d', '%d')", PlayerInfo[playerid][pUID], disease);
+    mysql_query(string);
+}
+
+MruMySQL_RemoveDisease(playerid, eDiseases:disease)
+{
+	new string[128];
+	format(string, sizeof(string), "DELETE FROM `mru_diseases` WHERE `uid`='%d' AND `disease`='%d'", PlayerInfo[playerid][pUID], disease);
+    mysql_query(string);
+}
+
+MruMySQL_RemoveAllDiseases(playerid)
+{
+	new string[128];
+	format(string, sizeof(string), "DELETE FROM `mru_diseases` WHERE `uid`='%d'", PlayerInfo[playerid][pUID]);
+    mysql_query(string);
+}
+
+//end

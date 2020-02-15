@@ -80,6 +80,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <YSI\y_timers>
+#include <indirection>
+#include <amx_assembly\addressof>
 #define AC_MAX_CONNECTS_FROM_IP		3
 #include <nex-ac>
 #include <md5>
@@ -456,7 +458,7 @@ public OnGameModeInit()
     }
 
     pusteZgloszenia();
-
+	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
     print("----- OnGameModeInit done.");
 	return 1;
 }
@@ -516,8 +518,9 @@ public OnGameModeExit()
     }
 
 	DOF2_Exit();
-
+	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     GLOBAL_EXIT = true;
+	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     print("----- OnGameModeExit done.");
 	return 1;
 }
@@ -1799,7 +1802,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         BoomBoxData[bbxid][BBD_Standby] = false;
         BBD_Putdown(playerid, bbxid);
     }
-    if(reason == 38 && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
+    if(reason == 38 && IsPlayerConnected(killerid) && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
     {
         format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNick(playerid, true), playerid);
         SendCommandLogMessage(string);
@@ -1874,7 +1877,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 		{
 			Log(warningLog, INFO, "%s zabi³ %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
 			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
-
 			if(PlayerInfo[killerid][pLevel] > 1)
 			{
 				format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
@@ -2245,11 +2247,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 								}
 							}
 						}
-					}
-					if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))
-					{
-						SetPVarInt(playerid, "bw-reason", reason);
-						return NadajRanny(playerid, 0, true);
+						if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1)))
+						{
+							SetPVarInt(playerid, "bw-reason", reason);
+							return NadajRanny(playerid, 0, true);
+						}
 					}
 				}
 			}
@@ -4917,13 +4919,13 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 GetDynamicObjectRot(objectid, rox, roy, roz);
                 GetDynamicObjectPos(objectid, X, Y, Z);
                 SendClientMessage(playerid, -1, "Jesteœ za daleko.");
-                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, X, Y, Z+0.3, 4.0);
+                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, X, Y, Z+0.3, 4.0, GetPlayerVirtualWorld(playerid));
                 SetDynamicObjectPos(objectid, X, Y, Z);
                 SetDynamicObjectRot(objectid, rox, roy, roz);
             }
             else
             {
-                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, x, y, z+0.3, 4.0);
+                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, x, y, z+0.3, 4.0, GetPlayerVirtualWorld(playerid));
                 GetDynamicObjectPos(objectid, x, y, z);
                 GetDynamicObjectRot(objectid, rx, ry, rz);
             }
@@ -4955,7 +4957,70 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
             }
         }
+		else if(response == EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
+            GetDynamicObjectRot(objectid, rox, roy, roz);
+            GetDynamicObjectPos(objectid, X, Y, Z);
+			if(!IsPlayerInRangeOfPoint(playerid, 2.0, x,y,z))
+            {
+                SendClientMessage(playerid, 0xFF0000FF, "Podejdz do graffiti!");
+                SetDynamicObjectPos(objectid, X, Y, Z);
+            }
+            else
+            {
+                new Float:speed = VectorSize(X-x, Y-y, Z-z);
+                MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
+            }
+			if(GetPVarInt(playerid, "zoneid") == -1) 
+        	{
+				SendClientMessage(playerid, 0xFF0000FF, "Musisz byæ na strefie!");
+                SetDynamicObjectPos(objectid, X, Y, Z);
+			}
+		}
+		else if( response == EDIT_RESPONSE_FINAL && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new f = GetPVarInt(playerid, "GraffitiID");
+			if(!IsPlayerInRangeOfPoint(playerid, 2.0, x,y,z))
+            {
+                GameTextForPlayer(playerid, "~r~Byles za daleko.",2000, 5);
+                graffiti_DeleteMySQL(f);
+				graffiti_ZerujZmienne(playerid);
+				graffiti_Zeruj(f);
+				return 1;
+			}
+			if(GetPVarInt(playerid, "zoneid") == -1) 
+        	{
+				SendClientMessage(playerid, 0xFF0000FF, "Nie by³eœ na strefie!");
+                graffiti_DeleteMySQL(f);
+				graffiti_ZerujZmienne(playerid);
+				graffiti_Zeruj(f);
+				return 1;
+			}
+			GraffitiInfo[f][grafXpos] = x;
+			GraffitiInfo[f][grafYpos] = y;
+			GraffitiInfo[f][grafZpos] = z;
+			GraffitiInfo[f][grafXYpos] = rx;
+			GraffitiInfo[f][grafYYpos] = ry;
+			GraffitiInfo[f][grafZYpos] = rz;
+			GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
+			graffiti_UpdateMySQL(f);
+			graffiti_ReloadForPlayers(f);
+			graffiti_ZerujZmienne(playerid);
+			new akcja[150];
+			format(akcja,sizeof(akcja),"* %s wyci¹ga spray i tworzy nim napis.",GetNick(playerid));
+            ProxDetector(40.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                
+		}
+		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new f = GetPVarInt(playerid, "GraffitiID");
+			graffiti_DeleteMySQL(f);
+			GameTextForPlayer(playerid, "~r~Usunieto!",2000, 5);
+			graffiti_ZerujZmienne(playerid);
+		}
     }
+	return 1;
 }
 
 public OnRconLoginAttempt(ip[], password[], success)
@@ -6136,6 +6201,7 @@ OnPlayerLogin(playerid, password[])
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;
 
 	premium_loadForPlayer(playerid);
+	choroby_OnPlayerLogin(playerid);
 
 	//obiekty
 	PlayerAttachments_LoadItems(playerid);
@@ -6615,7 +6681,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
 				SetPVarInt(playerid,"chop_id",0);
-				for(new i=0;i<=ROPELENGTH;i++)
+				for(new i=0;i<ROPELENGTH;i++)
 				{
 					DestroyDynamicObject(r0pes[playerid][i]);
 				}
@@ -6692,7 +6758,7 @@ public OnVehicleDeath(vehicleid, killerid)
 	//PADZIOCH
 	if(IsAHeliModel(GetVehicleModel(vehicleid)))
 	{
-  		for(new i=0;i<=MAX_PLAYERS;i++)
+  		foreach(new i : Player)
     	{
      		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
        		{
@@ -7570,11 +7636,9 @@ public OnPlayerText(playerid, text[])
 			GetPlayer2DZone(playerid, pZone, sizeof(pZone));
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg³osimy to wszystkim jednostkom w danym obszarze.");
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
-			format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek! Nadawca: %s", turner);
-			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie: %s", text);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
-			format(wanted, sizeof(wanted), "Centrala: Lokalizacja zg³oszenia: %s", pZone);
+			format(wanted, sizeof(wanted), "Centrala: Nadawca: %s, lokalizacja zg³oszenia: %s", turner, pZone);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
 			if(org == 4 && (PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0)) PlayerRequestMedic[playerid] = 1;
 

@@ -249,6 +249,7 @@ YCMD:wyjdz(playerid, params[], help)
         {
 			Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 21);
+			PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             SetPlayerPos(playerid, 395.9647, -1811.1703, 7.8789);
             GameTextForPlayer(playerid, "~w~Zapraszamy ponownie!", 5000, 1);
             return 1;
@@ -336,9 +337,9 @@ YCMD:wyjdz(playerid, params[], help)
             }
 			Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 22);
-            SetPlayerPos(playerid, 422.2131, -1831.5657, -65.5105);
 			PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
-            return 1;
+            SetPlayerPos(playerid, 422.2131, -1831.5657, -65.5105);
+			return 1;
         }
     	//wyjœcie bileterki
     	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 397.6174,-1806.2030,7.8381) && GetPlayerOrg(playerid) == FAMILY_IBIZA && GetPlayerVirtualWorld(playerid) == 0) //RANGA
@@ -503,6 +504,7 @@ YCMD:wyjdz(playerid, params[], help)
 			        PlayerInfo[playerid][pDomWKJ] = 0;
 			        SetPlayerTime(playerid, PlayerInfo[playerid][pDomT], 0);
         			PlayerInfo[playerid][pDomT] = 0;
+					SetServerWeatherAndTime(playerid);
 			        GameTextForPlayer(playerid, "~g~Opusciles dom", 5000, 1);
 			        return 1;
                 }

@@ -71,6 +71,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+
+	//2.6.19
+	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
@@ -8146,7 +8150,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 	            new Float:HP;
 				GetPlayerHealth(playerid, HP);
-	   			if(/*PlayerInfo[playerid][pZiolo] >= 10 &&*/ PlayerInfo[playerid][pDrugs] >= 10 && PlayerInfo[playerid][pPiwo] >= 1 && HP >= 100 && STDPlayer[playerid] == 0)
+	   			if(/*PlayerInfo[playerid][pZiolo] >= 10 &&*/ PlayerInfo[playerid][pDrugs] >= 10 && PlayerInfo[playerid][pPiwo] >= 1 && HP >= 100 && IsPlayerHealthy(playerid))
 			    {
 	      			if(kaska[playerid] != 0 && kaska[playerid] >= 100000)
 		        	{
@@ -8156,7 +8160,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pDrugs] -= 10;
 						PlayerInfo[playerid][pPiwo] --;
 						//Dom[dom][hMagazyn] --;
-						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ Apteczkê za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej u¿yæ wpisz /ulecz");
+						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ Apteczkê za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej u¿yæ wpisz /apteczka");
 						KupowanieDodatkow(playerid, dom);
 						Log(payLog, INFO, "%s kupi³ do domu %s apteczkê poziomu %d za 100000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hApteczka]);
 					}
@@ -13913,8 +13917,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			GUIExit[playerid] = 0;
-			new weaponid = DynamicGui_GetDataInt(playerid, listitem);
-			new weapondata = DynamicGui_GetValue(playerid, listitem);
+			new weaponid = DynamicGui_GetValue(playerid, listitem);
+			new weapondata = DynamicGui_GetDataInt(playerid, listitem);
 			if(weaponid == starabron[playerid])
 			{
 				weaponid = PlayerInfo[playerid][pGun0];
@@ -16313,12 +16317,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra³eœ licencje na latanie!"); 
 					Log(payLog, INFO, "%s kupi³ licencje na latanie za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
-				case 8:
+				/* na póŸniej
+				case 8: //rejestracja pojazdu
 				{
 					sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
 					return 1;
 				}
-				case 9:
+				case 9: // w³asna tablica rejestracyjna
 				{
 					if(IsPlayerPremiumOld(playerid))
 					{
@@ -16330,6 +16335,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					return 1;
 				}
+				*/
 			}
 
 			ZabierzKase(playerid, DmvLicenseCost[listitem]);

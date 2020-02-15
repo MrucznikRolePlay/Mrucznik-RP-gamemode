@@ -951,13 +951,10 @@ public togczastimer(playerid)
 }
 
 public naczasbicie(playerid, playerid_atak){
-	new string[90];
 	zdazylwpisac[playerid] = 0;
 	TogglePlayerControllable(playerid_atak, 1);
 	ClearAnimations(playerid_atak);
 	SendClientMessage(playerid_atak, COLOR_NEWS, "Wygra³eœ bitwê poniewa¿ broni¹cy za d³ugo wpisywa³ znaki!");
-	format(string, sizeof(string), "AdmCmd: %s wygra³ /pobij na czas.", GetNick(playerid_atak));
-	ABroadCast(COLOR_LIGHTRED,string,1);
 	KillTimer(GetPVarInt(playerid, "timerBicia"));
 	return 1;
 }
@@ -1343,29 +1340,30 @@ return 1;
 }
 
 public OgladanieDOM(playerid){
-new deem = PlayerInfo[playerid][pDomWKJ];
-if(PlayerInfo[playerid][pDomWKJ] != 0)
-{
-	SetPlayerPos(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
-	SetPlayerInterior(playerid, 0);
-	SetPlayerVirtualWorld(playerid, 0);
-	PlayerInfo[playerid][pDomWKJ] = 0;
-}
-if(isNaked[playerid])
-{
-    UndressPlayer(playerid, false); 
-}
-GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
-DomOgladany[playerid] = 1;
+	new deem = PlayerInfo[playerid][pDomWKJ];
+	if(PlayerInfo[playerid][pDomWKJ] != 0)
+	{
+		SetPlayerPos(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
+		SetPlayerInterior(playerid, 0);
+		SetPlayerVirtualWorld(playerid, 0);
+		PlayerInfo[playerid][pDomWKJ] = 0;
+		SetServerWeatherAndTime(playerid);
+	}
+	if(isNaked[playerid])
+	{
+		UndressPlayer(playerid, false); 
+	}
+	GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
+	DomOgladany[playerid] = 1;
 
-SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
-return 1;
+	SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
+	return 1;
 }
 
 public CzasOgladaniaDOM(playerid){
-DomOgladany[playerid] = 0;
-GameTextForPlayer(playerid, "~g~Znow mozesz obejrzec dom", 5000, 1);
-return 1;
+	DomOgladany[playerid] = 0;
+	GameTextForPlayer(playerid, "~g~Znow mozesz obejrzec dom", 5000, 1);
+	return 1;
 }
 
 public RSPAWN(playerid){
@@ -1756,24 +1754,25 @@ HandlePlayerItemSelection(playerid, selecteditem)
 
     if(id == -1) return SendClientMessage(playerid, -1, "Osi¹gniêto limit barierek.");
 
-    new Float:x, Float:y, Float:z, Float:a;
+    new Float:x, Float:y, Float:z, Float:a, vw;
     GetPlayerPos(playerid, x, y, z);
     GetPlayerFacingAngle(playerid, a);
     SetPlayerPos(playerid, x, y, z+0.2);
+	vw = GetPlayerVirtualWorld(playerid);
     x+=2*floatsin(-a, degrees);
     y+=2*floatcos(-a, degrees);
 
-    BARIERKA_Create(frac, id, gSelectionItemsTag[playerid][selecteditem], x, y, z-0.5, a);
+    BARIERKA_Create(frac, id, gSelectionItemsTag[playerid][selecteditem], x, y, z-0.5, a, vw);
 
     SetPVarInt(playerid, "Barier-id", id+1);
     SetTimerEx("EditObj", 500, 0, "ii", playerid, Barier[frac][id]);
     return 1;
 }
 
-BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a)
+BARIERKA_Create(frac, id, model, Float:x, Float:y, Float:z, Float:a, vw = 0)
 {
 	DestroyDynamicObject(Barier[frac][id]);
-	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a);
+	new oid = CreateDynamicObject(model, x, y, z, 0.0, 0.0, a, vw);
 	if(Barier[frac][id] != oid) printf("Object ID moved from %d to %d", Barier[frac][id], oid), Barier[frac][id] = oid;
 	BarierState[frac][id] = true;
     return 1;
@@ -1885,6 +1884,14 @@ Float:GetDistanceBetweenPlayers(p1,p2)
 	GetPlayerPos(p1,x1,y1,z1);
 	GetPlayerPos(p2,x2,y2,z2);
 	return floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
+}
+
+IsPlayerNear(playerid, giveplayerid, distance=10)
+{
+	return (GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(giveplayerid) && 
+		GetDistanceBetweenPlayers(playerid, giveplayerid) < distance && 
+		Spectate[giveplayerid] == INVALID_PLAYER_ID
+	);
 }
 
 SearchingHit(playerid)
@@ -7858,12 +7865,12 @@ PobierzWolnySlotNaKontakt(playerid)
 	return -1; //error
 }
 
-bool:CzyMaWolnySlotNaKontakt(playerid)
+CzyMaWolnySlotNaKontakt(playerid)
 {
 	return PobierzWolnySlotNaKontakt(playerid) != -1;
 }
 
-bool:CzyKontaktIstnieje(playerid, numer)
+CzyKontaktIstnieje(playerid, numer)
 {
 	for(new i; i<MAX_KONTAKTY; i++)
 	{
@@ -8443,7 +8450,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	new sendername[MAX_PLAYER_NAME];
 	if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
 	{
-		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ wszystkich liderów\nz organizacji? (Zabierze VLD)", GetNick(para1));
+		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ\nWSZYSTKICH liderów z organizacji? (Zabierze VLD)", GetNick(para1));
 		SetPVarInt(playerid, "ID_LIDERA", para1);  
 		ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
 		return 1;

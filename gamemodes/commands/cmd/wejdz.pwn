@@ -299,7 +299,6 @@ YCMD:wejdz(playerid, params[], help)
                 return 1;
             }
             SetPlayerPos(playerid, 434.7581, -1841.0632, -64.2206);
-            PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             return 1;
         }
         //wejscia VIP
@@ -387,8 +386,8 @@ YCMD:wejdz(playerid, params[], help)
             Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 25);
             SetPlayerPos(playerid, 221.530426, -1546.261352, -15.997495);
-            GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
             PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
             return 1;
         }
         //san news biura

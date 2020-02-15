@@ -51,7 +51,7 @@ stock PlayerAttachments_Remove(playerid, model)
     new str[256];
     format(str, sizeof(str), "DELETE FROM mru_playeritems WHERE `uid`=%d AND `model`='%d'", PlayerInfo[playerid][pUID], model);
     mysql_query(str);
-	VECTOR_remove_val(VAttachedItems[playerid]);
+	VECTOR_remove_val(VAttachedItems[playerid], model);
 }
 
 PlayerAttachments_LoadItems(playerid)

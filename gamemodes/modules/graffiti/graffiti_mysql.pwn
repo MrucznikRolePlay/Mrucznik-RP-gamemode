@@ -34,7 +34,6 @@ stock graffiti_LoadMySQL(id = -1)
 	new string[128];
 	new valueGraffiti;
 	new loadedGraffiti;
-	new strtest[128];
 	format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_graffiti`");
 	mysql_query(lStr);
 	mysql_store_result();
@@ -43,7 +42,7 @@ stock graffiti_LoadMySQL(id = -1)
 	mysql_free_result();
 	if(id == -1)
 	{
-		for(new i; i <= GRAFFITI_MAX; i++) 
+		for(new i; i < GRAFFITI_MAX; i++) 
 		{
 			lStr = "`ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`";
 			format(query, sizeof(query), "SELECT %s FROM `mru_graffiti` WHERE `id`='%d'", lStr, i);
@@ -65,24 +64,10 @@ stock graffiti_LoadMySQL(id = -1)
 				loadedGraffiti++;
 			}
 			mysql_free_result();
-
-			switch(GraffitiInfo[i][gColor])
-			{
-				case 0: GraffitiInfo[i][gColor] = GRAFFITI_CZARNY;// CZARNY
- 
-                case 1: GraffitiInfo[i][gColor] = GRAFFITI_BIALY; // BIALY
- 
-                case 2: GraffitiInfo[i][gColor] = GRAFFITI_CZERWONY; // CZERWONY
- 
-                case 3: GraffitiInfo[i][gColor] = GRAFFITI_ZIELONY; // ZIELONY
- 
-                case 4: GraffitiInfo[i][gColor] = GRAFFITI_NIEBIESKI; // NIEBIESKI
- 
-                case 5: GraffitiInfo[i][gColor] = GRAFFITI_SZARY;  // SZARY
-			}
-			format(strtest, sizeof(strtest), "Test\nTesty");
+			graffiti_DefineColor(i);
+			strreplace(GraffitiInfo[i][grafText], "~n~", "\n", .ignorecase = true);
 			GraffitiInfo[i][gID] = CreateDynamicObject(19482, GraffitiInfo[i][grafXpos], GraffitiInfo[i][grafYpos], GraffitiInfo[i][grafZpos], GraffitiInfo[i][grafXYpos], GraffitiInfo[i][grafYYpos], GraffitiInfo[i][grafZYpos], 0, 0, -1, 200);
-    		SetDynamicObjectMaterialText(GraffitiInfo[i][gID], 0, strtest, OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[i][gColor], 0, 1);
+			SetDynamicObjectMaterialText(GraffitiInfo[i][gID], 0, GraffitiInfo[i][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[i][gColor], 0, 1);
 		}
 		format(string, sizeof(string), "Zaladowano %d graffiti z %d w bazie", loadedGraffiti, valueGraffiti);
 		print(string);
@@ -106,28 +91,19 @@ stock graffiti_LoadMySQL(id = -1)
 			GraffitiInfo[id][grafXYpos],
 			GraffitiInfo[id][grafYYpos],
 			GraffitiInfo[id][grafZYpos]);
+			mysql_free_result();
+			graffiti_DefineColor(id);
+			strreplace(GraffitiInfo[id][grafText], "~n~", "\n", .ignorecase = true);
+			GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
+			SetDynamicObjectMaterialText(GraffitiInfo[id][gID], 0, GraffitiInfo[id][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[id][gColor], 0, 1);
 		}
-		mysql_free_result();
-		switch(GraffitiInfo[id][gColor])
+		else
 		{
-			case 0: GraffitiInfo[id][gColor] = GRAFFITI_CZARNY;// CZARNY
- 
-            case 1: GraffitiInfo[id][gColor] = GRAFFITI_BIALY; // BIALY
- 
-            case 2: GraffitiInfo[id][gColor] = GRAFFITI_CZERWONY; // CZERWONY
- 
-            case 3: GraffitiInfo[id][gColor] = GRAFFITI_ZIELONY; // ZIELONY
- 
-            case 4: GraffitiInfo[id][gColor] = GRAFFITI_NIEBIESKI; // NIEBIESKI
- 
-            case 5: GraffitiInfo[id][gColor] = GRAFFITI_SZARY;  // SZARY
+			graffiti_Zeruj(id);
 		}
-		GraffitiInfo[id][gID] = CreateDynamicObject(19482, GraffitiInfo[id][grafXpos], GraffitiInfo[id][grafYpos], GraffitiInfo[id][grafZpos], GraffitiInfo[id][grafXYpos], GraffitiInfo[id][grafYYpos], GraffitiInfo[id][grafZYpos], 0, 0, -1, 200);
-    	SetDynamicObjectMaterialText(GraffitiInfo[id][gID], 0, GraffitiInfo[id][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[id][gColor], 0, 1);
 	}
 	return 0;
 }
-
 stock graffiti_SaveMySQL(id, playerid)
 {
 	new query[1024];
@@ -143,7 +119,48 @@ stock graffiti_SaveMySQL(id, playerid)
 	GraffitiInfo[id][grafYYpos],
 	GraffitiInfo[id][grafZYpos]);
 	mysql_query(query);
-	sendTipMessage(playerid, "Zapisano!");
+}
+
+stock graffiti_UpdateMySQL(id, type = 1)
+{
+	new query[1024];
+	if(type == 1)
+	{
+		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `x`='%f',`y`='%f',`z`='%f',`xy`='%f',`yy`='%f',`zy`='%f' WHERE `id`='%d'",
+		GraffitiInfo[id][grafXpos],
+		GraffitiInfo[id][grafYpos],
+		GraffitiInfo[id][grafZpos],
+		GraffitiInfo[id][grafXYpos],
+		GraffitiInfo[id][grafYYpos],
+		GraffitiInfo[id][grafZYpos],
+		id);
+		mysql_query(query);
+	}
+	else if(type == 2)
+	{
+		if(strlen(GraffitiInfo[id][grafText]) <= 1)
+		{
+			DestroyDynamicObject(GraffitiInfo[id][gID]);
+			graffiti_DeleteMySQL(id);
+			graffiti_Zeruj(id);
+		}
+		else
+		{
+			format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
+			GraffitiInfo[id][grafText],
+			GraffitiInfo[id][gColor],
+			id);
+			mysql_query(query);
+		}
+	}
+}
+
+stock graffiti_DeleteMySQL(id)
+{
+	DestroyDynamicObject(GraffitiInfo[id][gID]);
+	new query[1024];
+	format(query, sizeof(query), "DELETE FROM `mru_graffiti` WHERE `id`='%d'", id);
+	mysql_query(query);
 }
 
 //stock graffiti_UpdateMySQL(id)
