@@ -1,0 +1,11 @@
+{
+    "name": "giveelements",
+    "description": "Komenda, która uzupe³nia wszystkim biznesom materia³y.",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "bizallelements"
+    ],
+    "parameters": [],
+    "date": "15.02.2020"
+}

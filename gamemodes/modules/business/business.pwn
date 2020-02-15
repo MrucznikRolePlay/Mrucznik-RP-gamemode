@@ -186,7 +186,8 @@ CreateBusinessIcons()
 GiveBizToPlayer(playerid, bIDE, bType, bType2)
 {
 	new string[124]; 
-	mysql_real_escape_string(GetNick(playerid), mBiz[bIDE][b_Name_Owner]); 
+	strdel(mBiz[bIDE][b_Name_Owner], 0, strlen(mBiz[bIDE][b_Name_Owner]));
+    strcat(mBiz[bIDE][b_Name_Owner], GetNick(playerid), MAX_PLAYER_NAME);
 	mBiz[bIDE][b_ownerUID] = PlayerInfo[playerid][pUID]; 
 	mBiz[bIDE][b_moneyPocket] = 0; 
 	mBiz[bIDE][b_TYPE] = bType; 
@@ -414,13 +415,15 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Spawn pod biznesem\t{33AA33}$%d\n\
 		Rozwój sejfu G\t{33AA33}$%d\n\
 		Rozwój sejfu T\t{33AA33}$%d\n\
-		Dodaj interior\t ",
+		Dodaj interior\t \n\
+		Rozwój sejfu materia³ów\t{33AA33}$%d",
 		GetBusinessName(bIDE),
 		B_CENA_ZMIENAZWE,
 		B_CENA_ZMIENMOTD,
 		B_CENA_ZMIENSPAWN,
 		B_CENA_SEJFG,
-		B_CENA_SEJFT); 
+		B_CENA_SEJFT,
+		B_CENA_SEJFE); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER5, DIALOG_STYLE_TABLIST, SetDefaultCaption(), 
 		string, "Akceptuj", "Wstecz"); 
 	}
