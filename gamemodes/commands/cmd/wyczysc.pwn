@@ -48,9 +48,9 @@ YCMD:wyczysc(playerid, params[], help)
 					return 1;
 				}
 
-				if(PoziomPoszukiwania[giveplayerid] > 1 && PlayerInfo[playerid][pLider] != FRAC_FBI)
+				if(PoziomPoszukiwania[giveplayerid] > 2 && PlayerInfo[playerid][pLider] != FRAC_LSPD)
 				{
-					sendTipMessageEx(playerid, COLOR_GRAD1, "Mo¿esz oczyœciæ tylko graczy z 1 WL");
+					sendTipMessageEx(playerid, COLOR_GRAD1, "Mo¿esz oczyœciæ tylko graczy z 1-2 WL");
 					return 1;
 				}
 
