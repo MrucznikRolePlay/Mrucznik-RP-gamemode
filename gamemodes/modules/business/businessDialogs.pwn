@@ -67,12 +67,18 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 case 0: 
                 {
+                    new string[256]; 
+                    format(string, sizeof(string), "Typ\tDodatkowa Cena\n\
+                    Sklep 24-7\t%d$\n\
+                    Sklep z ubraniami\t%d$\n\
+                    Kasyno\t%d$\n\
+                    Restauracja\t%d$",
+                    COST_SHOP24,
+                    COST_SHOPCLOTHES,
+                    COST_CASINO,
+                    COST_RESTAURANT);
                     ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUY3, DIALOG_STYLE_TABLIST_HEADERS, "Wybierz podtyp", 
-                    "Typ\tDodatkowa Cena\n\
-                    Sklep 24-7\t500.000$\n\
-                    Sklep z ubraniami\t750.000$\n\
-                    Kasyno\t1.000.000$\n\
-                    Restauracja\t1.000.000$", "Dalej", "Anuluj");
+                    string, "Dalej", "Anuluj");
                 }
                 case 1:
                 {
@@ -198,22 +204,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             else if(bChoice == 4)//Zakup restauracji
             {
-                if(mBiz[pBizID][b_ownerUID] == 0)
-                {
-                    if(kaska[playerid] < (mBiz[pBizID][b_cost]+COST_RESTAURANT))
-                    {
-                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki na ten biznes!"); 
-                        return 1;
-                    }
-                    ZabierzKase(playerid, (mBiz[pBizID][b_cost]+COST_RESTAURANT));
-                    GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_RESTAURANT);
-                    Log(businessLog, INFO, "%s kupil biznes %s jako restauracje za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
-                }
-                else 
-                {
-                    sendErrorMessage(playerid, "Ten biznes posiada ju¿ w³aœciciela!"); 
-                    return 1;
-                }
+                sendErrorMessage(playerid, "Opcja chwilowo wy³¹czona!");
             }
         }
         else
@@ -590,6 +581,28 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     ShowInteriorList(playerid); 
                 }
+                case 7:
+                {
+                    if(kaska[playerid] < B_CENA_SEJFE)
+                    {
+                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+                        return 1;
+                    }
+                    if(mBiz[bIDE][b_ulepszenie1]+1 > 10)
+                    {
+                        sendErrorMessage(playerid, "Ten biznes osi¹gn¹³ maksymaln¹ liczbê ulepszeñ - 10!");
+                        format(string, sizeof(string), "Mo¿esz w sejfie materia³ów  zmieœciæ teraz $%d.", 2000+(mBiz[bIDE][b_ulepszenie1]*1000));
+                        sendTipMessage(playerid, string);
+                        return 1;
+                    }
+                    ZabierzKase(playerid, B_CENA_SEJFE); 
+                    mBiz[bIDE][b_ulepszenie1]++; 
+                    sendTipMessage(playerid, "Ulepszy³eœ sejf elementów w swoim biznesie!");
+                    format(string, sizeof(string), "Aktualny poziom ulepszenia [%d], mo¿esz zmieœciæ w sejfie teraz $%d", mBiz[bIDE][b_ulepszenie1], (2000+(mBiz[bIDE][b_ulepszenie1]*1000)));
+                    sendTipMessage(playerid, string); 
+                    Log(businessLog, INFO, "%s ulepszyl w biznesie %s sejf elementow - aktualny poziom %d", GetPlayerLogName(playerid), GetBusinessLogName(bIDE), mBiz[bIDE][b_ulepszenie1]);
+                    SaveBiz(bIDE); 
+                }
             }
         }
     }
@@ -622,8 +635,8 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             sendTipMessage(playerid, string); 
             Log(businessLog, INFO, "%s zmienil nazwe biznesu %s na %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE),inputtext);
             ZabierzKase(playerid, B_CENA_ZMIENAZWE); 
-            mysql_real_escape_string(inputtext, mBiz[bIDE][b_Name]);
-           // DestroyBussinesIcon(bIDE);
+            strdel(mBiz[bIDE][b_Name], 0, strlen(mBiz[bIDE][b_Name]));
+            strcat(mBiz[bIDE][b_Name], inputtext, MAX_BUSINESS_NAME);
             DestroyBusiness3DText(bIDE);
             CreateBusiness3DText(bIDE); 
             SaveBiz(bIDE);  
@@ -681,7 +694,8 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             sendTipMessage(playerid, string); 
             Log(businessLog, INFO, "%s zmienil motd biznesu %s na %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE),inputtext);
             ZabierzKase(playerid, B_CENA_ZMIENMOTD); 
-            mysql_real_escape_string(inputtext, mBiz[bIDE][b_motd]); 
+            strdel(mBiz[bIDE][b_motd], 0, strlen(mBiz[bIDE][b_motd]));
+            strcat(mBiz[bIDE][b_motd], inputtext, MAX_BUSINESS_MOTD); 
             SaveBiz(bIDE); 
         }
     }
