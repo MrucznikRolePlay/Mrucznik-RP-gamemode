@@ -1697,6 +1697,17 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	{
 		return 1;
 	}
+	
+    if(GetPVarInt(playerid, "enter-check")) 
+    {
+        // no damage when player is entering interior (Wchodzenie)
+        new Float:hp, Float:armor;
+        GetPlayerHealth(playerid, hp);
+        GetPlayerArmour(playerid, armor);
+        SetPlayerHealth(playerid, hp);
+        SetPlayerArmour(playerid, armor);
+        return 1; //Callback will not be called in other filterscripts.
+    }
 
 	Log(damageLog, INFO, "%s zosta³ zraniony przez %s o %fhp broni¹ %d", 
 		GetPlayerLogName(playerid),
