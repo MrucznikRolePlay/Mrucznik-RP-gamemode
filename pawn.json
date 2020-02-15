@@ -67,7 +67,7 @@
 		"timestamp": true,
 		"messageholelimit": 3000,
 		"messageslimit": 500,
-		"ackslimit": 3000,
+		"ackslimit": 6000,
 		"playertimeout": 10000,
 		"minconnectiontime": 0,
 		"lagcompmode": 1,
