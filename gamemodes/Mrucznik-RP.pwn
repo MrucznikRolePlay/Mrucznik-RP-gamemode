@@ -2807,17 +2807,15 @@ SetPlayerSpawnPos(playerid)
 						}
 						default:
 						{
-							new rand = random(sizeof(gRandomPlayerSpawns));
-							SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
-							SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
+							SetPlayerPos(playerid, 1742.9796,-1863.2355,13.5753);
+							SetPlayerFacingAngle(playerid, 0.0);
 						}
 				    }
 				}
 				else //Spawn cywila
 				{
-				    new rand = random(sizeof(gRandomPlayerSpawns));
-		    		SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
-		    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
+		    		SetPlayerPos(playerid, 1742.9796,-1863.2355,13.5753);
+					SetPlayerFacingAngle(playerid, 0.0);
 				}
 		    }
 		    else if(PlayerInfo[playerid][pSpawn] == 1) //Spawn przed domem
