@@ -2228,7 +2228,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 							}
 						}
 					}
-					if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))
+					if(IsPlayerConnected(killerid) && (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1)))
 					{
 						SetPVarInt(playerid, "bw-reason", reason);
 						return NadajRanny(playerid, 0, true);
