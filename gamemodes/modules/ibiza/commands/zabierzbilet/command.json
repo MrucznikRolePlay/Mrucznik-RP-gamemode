@@ -1,0 +1,17 @@
+{
+    "name": "zabierzbilet",
+    "description": "Zabiera bilet ibizy.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sanda³",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "14.02.2020"
+}

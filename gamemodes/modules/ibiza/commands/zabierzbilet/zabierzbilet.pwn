@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   addmc                                                   //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                zabierzbilet                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,56 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 02.07.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_addmc_Impl(playerid, giveplayerid, value)
+
+//-------<[ include ]>-------
+#include "zabierzbilet_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_zabierzbilet()
 {
-	if(!IsAKox(playerid) && !IsAMCGiver(playerid)) 
-	{
-		return noAccessMessage(playerid);
-	}
+    new command = Command_GetID("zabierzbilet");
 
-	if(IsAMCGiver(playerid)) 
-	{
-		new mc = GetAvaibleMC();
-		if(value > mc) 
-		{
-			sendErrorMessage(playerid, sprintf("W bud¿ecie MC jest dostêpne tylko %dMC", mc));
-			return 1;
-		}
+    //aliases
+    
 
-		TakeMCFromBudget(value);
-	}
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
 
-	PremiumInfo[giveplayerid][pMC] += value;
-	MruMySQL_SaveMc(giveplayerid);
-
-	Log(premiumLog, INFO, "Admin %s doda³ %s %dMC", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value);
-	_MruAdmin(playerid, sprintf("Doda³eœ %d MC graczowi %s [ID: %d]", value, GetNick(giveplayerid, true), giveplayerid));
-	if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d dodatkowych MC od Admina %s [ID: %d]", value, GetNick(playerid, true), playerid));
-	return 1;
+    //prefix
+    
 }
-//end
+
+//-------<[ command ]>-------
+YCMD:zabierzbilet(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zabiera bilet ibizy.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /zabierzbilet [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_zabierzbilet_Impl(playerid, giveplayerid);
+}

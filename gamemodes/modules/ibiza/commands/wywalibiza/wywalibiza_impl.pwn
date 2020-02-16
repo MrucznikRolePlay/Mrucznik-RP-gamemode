@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   addmc                                                   //
+//                                                 wywalibiza                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,51 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 02.07.2019
+// Autor: Sanda³
+// Data utworzenia: 14.02.2020
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_addmc_Impl(playerid, giveplayerid, value)
+command_wywalibiza_Impl(playerid, giveplayerid)
 {
-	if(!IsAKox(playerid) && !IsAMCGiver(playerid)) 
-	{
-		return noAccessMessage(playerid);
-	}
-
-	if(IsAMCGiver(playerid)) 
-	{
-		new mc = GetAvaibleMC();
-		if(value > mc) 
-		{
-			sendErrorMessage(playerid, sprintf("W bud¿ecie MC jest dostêpne tylko %dMC", mc));
-			return 1;
-		}
-
-		TakeMCFromBudget(value);
-	}
-
-	PremiumInfo[giveplayerid][pMC] += value;
-	MruMySQL_SaveMc(giveplayerid);
-
-	Log(premiumLog, INFO, "Admin %s doda³ %s %dMC", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value);
-	_MruAdmin(playerid, sprintf("Doda³eœ %d MC graczowi %s [ID: %d]", value, GetNick(giveplayerid, true), giveplayerid));
-	if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d dodatkowych MC od Admina %s [ID: %d]", value, GetNick(playerid, true), playerid));
-	return 1;
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 2) 
+    {
+        new Float:x,
+            Float:y,
+            Float:z;
+        GetPlayerPos(giveplayerid, x, y, z);
+        if(IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z))
+        {
+            if(GetPlayerVirtualWorld(giveplayerid) == 21 || GetPlayerVirtualWorld(giveplayerid) == 22 || GetPlayerVirtualWorld(giveplayerid) == 23 || GetPlayerVirtualWorld(giveplayerid) == 24 || GetPlayerVirtualWorld(giveplayerid) == 26 || GetPlayerVirtualWorld(giveplayerid) == 27)
+            {
+                if(giveplayerid == playerid) return 1;
+                new var[128];
+                if(IbizaTicket[giveplayerid] > 0) IbizaTicket[giveplayerid] = 0;
+                Wchodzenie(giveplayerid);
+                SetPlayerVirtualWorld(giveplayerid, 0);
+                format(var, sizeof(var), "** %s wyrzuca %s z ibizy.", GetNick(playerid), GetNick(giveplayerid));
+                ProxDetector(20.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                format(var, sizeof(var), "[IBIZA_INFO]%s wyrzuci³ %s z ibizy!", GetNick(playerid), GetNick(giveplayerid));
+                SendFamilyMessage(FAMILY_IBIZA, COLOR_P@, var);
+                SetPlayerPos(giveplayerid, 397.3062, -1805.8008, 7.8380);
+            }
+            else
+            {
+                sendTipMessage(playerid, "Gracz nie jest w ibizie.");
+            }
+        }
+        else
+        {
+            sendTipMessage(playerid, "Nie znajdujesz siê obok niego.");
+        }
+    }
+    else
+    {
+        noAccessMessage(playerid);
+    }
+    return 1;
 }
+
 //end

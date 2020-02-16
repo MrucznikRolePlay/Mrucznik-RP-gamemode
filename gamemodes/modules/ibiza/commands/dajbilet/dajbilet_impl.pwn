@@ -23,25 +23,13 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_dajbilet_Impl(playerid, giveplayerid)
+command_dajbilet_Impl(playerid, giveplayerid, opcja[24]="1")
 {
-    new var[128];
-    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 4) 
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
     {
-        if(IbizaTicket[giveplayerid] != IBIZA_SUPERVIP)
-        {
-            format(var, sizeof(var), "Da³eœ bilet supervip dla %s", GetNick(giveplayerid));
-            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
-            format(var, sizeof(var), "Otrzyma³eœ bilet supervip od %s", GetNick(playerid));
-            sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, var);
-            format(var, sizeof(var), "** %s podaje bilet Ibiza|[SUPERVIP] %s.", GetNick(playerid), GetNick(giveplayerid));
-            ProxDetector(15.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-            IbizaTicket[giveplayerid] = IBIZA_SUPERVIP;
-        }
-        else
-        {
-            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta osoba posiada ju¿ bilet supervip.");
-        }
+        if(strcmp(opcja,"1",true) == 0 || strcmp(opcja,"normal",true) == 0) IbizaNadajBilet(playerid, giveplayerid, 1);
+        if(strcmp(opcja,"2",true) == 0 || strcmp(opcja,"vip",true) == 0) IbizaNadajBilet(playerid, giveplayerid, 2);
+        if(strcmp(opcja,"3",true) == 0 || strcmp(opcja,"supervip",true) == 0 || strcmp(opcja,"svip",true) == 0) IbizaNadajBilet(playerid, giveplayerid, 3);
     }
     else
     {

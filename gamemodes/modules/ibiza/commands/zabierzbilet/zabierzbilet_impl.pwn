@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   addmc                                                   //
+//                                                zabierzbilet                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 02.07.2019
+// Autor: Sanda³
+// Data utworzenia: 14.02.2020
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_addmc_Impl(playerid, giveplayerid, value)
+command_zabierzbilet_Impl(playerid, giveplayerid)
 {
-	if(!IsAKox(playerid) && !IsAMCGiver(playerid)) 
-	{
-		return noAccessMessage(playerid);
-	}
-
-	if(IsAMCGiver(playerid)) 
-	{
-		new mc = GetAvaibleMC();
-		if(value > mc) 
-		{
-			sendErrorMessage(playerid, sprintf("W bud¿ecie MC jest dostêpne tylko %dMC", mc));
-			return 1;
-		}
-
-		TakeMCFromBudget(value);
-	}
-
-	PremiumInfo[giveplayerid][pMC] += value;
-	MruMySQL_SaveMc(giveplayerid);
-
-	Log(premiumLog, INFO, "Admin %s doda³ %s %dMC", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value);
-	_MruAdmin(playerid, sprintf("Doda³eœ %d MC graczowi %s [ID: %d]", value, GetNick(giveplayerid, true), giveplayerid));
-	if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d dodatkowych MC od Admina %s [ID: %d]", value, GetNick(playerid, true), playerid));
-	return 1;
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
+    {
+        new var[128];
+        if(IbizaTicket[giveplayerid] > 0)
+        {
+            IbizaTicket[giveplayerid] = 0;
+            format(var, sizeof(var), "Zabra³eœ bilet %s", GetNick(giveplayerid));
+            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+            format(var, sizeof(var), "%s zabra³ ci bilet od Ibizy.", GetNick(playerid));
+            sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, var);
+        }
+        else
+        {
+            sendTipMessage(playerid, "Gracz nie posiada biletu.");   
+        }
+    }
+    else
+    {
+        sendTipMessage(playerid, "Komenda dostêpna dla ibizy od [6].");
+    }
+    return 1;
 }
+
 //end
