@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                  graffiti                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,15 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sanda³
+// Data utworzenia: 01.02.2020
+//Opis:
+/*
+	System graffiti
+*/
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//-----------------<[ Timery: ]>-------------------
 
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "dajbilet\dajbilet.pwn"
-#include "kupbilet\kupbilet.pwn"
-#include "panelibizy\panelibizy.pwn"
-#include "wywalibiza\wywalibiza.pwn"
-#include "zabierzbilet\zabierzbilet.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
-{
-    command_dajbilet();
-    command_kupbilet();
-    command_panelibizy();
-    command_wywalibiza();
-    command_zabierzbilet();
-    
-}
+//end

@@ -81,60 +81,33 @@ graffiti_ReloadForPlayers(id)
 	graffiti_LoadMySQL(id);
 	return 1;
 }
-graffiti_LoadPlayerList(playerid)
+graffiti_CountGraffs(playerid)
+{
+	Graffiti_Amount[playerid] = 0;
+	for(new i; i < GRAFFITI_MAX; i++)
+	{
+		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+		{
+			Graffiti_Amount[playerid]++;
+		}
+	}
+}
+graffiti_GetGraffitiIDs(playerid)
 {
 	new licznik = 0;
-<<<<<<< HEAD
+	graffiti_ZerujListe(playerid);
 	for(new i; i < GRAFFITI_MAX; i++)
 	{
 		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
 		{
 			Graffiti_PlayerList[playerid][licznik] = i;
 			licznik++;
-=======
-	for(new i; i <= GRAFFITI_MAX; i++)
-	{
-		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
-		{
-			if(licznik <= 3)
-			{
-				Graffiti_PlayerList[playerid][licznik] = i;
-				licznik++;
-			}
->>>>>>> 5ac7cfa8... Dodanie /graffiti lista
 		}
 	}
 }
-graffiti_Zeruj(f)
+graffiti_DefineColor(GRAF_ID)
 {
-	GraffitiInfo[f][grafXpos] = 0;
-	GraffitiInfo[f][grafYpos] = 0;
-	GraffitiInfo[f][grafZpos] = 0;
-	GraffitiInfo[f][grafXYpos] = 0.0;
-	GraffitiInfo[f][grafYYpos] = 0.0;
-	GraffitiInfo[f][grafZYpos] = 0.0;
-	GraffitiInfo[f][gColor] = -1;
-}
-graffiti_CreateGraffiti(playerid)
-{
-	new f = graffiti_GetNewID();
-	if(f == INVALID_GRAFID) 
-	{
-		sendTipMessage(playerid, "Wykorzystano limit graffiti(100) na mapê.");
-		return 1;
-	}
-	SetPVarInt(playerid, "GraffitiID", f);
-	SetPVarInt(playerid, "CreatingGraff", 1);
-	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
-	GraffitiInfo[f][grafXpos] = PlayerPos[playerid][0];
-	GraffitiInfo[f][grafYpos] = PlayerPos[playerid][1];
-	GraffitiInfo[f][grafZpos] = PlayerPos[playerid][2];
-	GraffitiInfo[f][grafXYpos] = 0.0;
-	GraffitiInfo[f][grafYYpos] = 0.0;
-	GraffitiInfo[f][grafZYpos] = 0.0;
-	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
-	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
-	graffiti_SaveMySQL(f, playerid);
+	new f = GRAF_ID;
 	switch(GraffitiInfo[f][gColor])
 	{
 		case 0: GraffitiInfo[f][gColor] = GRAFFITI_CZARNY;
@@ -157,18 +130,68 @@ graffiti_CreateGraffiti(playerid)
 
 		case 9: GraffitiInfo[f][gColor] = GRAFFITI_ROZOWY;
 	}
+}
+graffiti_Zeruj(f)
+{
+	GraffitiInfo[f][grafXpos] = 0;
+	GraffitiInfo[f][grafYpos] = 0;
+	GraffitiInfo[f][grafZpos] = 0;
+	GraffitiInfo[f][grafXYpos] = 0.0;
+	GraffitiInfo[f][grafYYpos] = 0.0;
+	GraffitiInfo[f][grafZYpos] = 0.0;
+	format(GraffitiInfo[f][pOwner], MAX_PLAYER_NAME, "");
+	GraffitiInfo[f][gColor] = -1;
+}
+graffiti_EditGraffiti(playerid, f)
+{
+	DestroyDynamicObject(GraffitiInfo[f][gID]);
+	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
+	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
+	graffiti_UpdateMySQL(f, 2);
+	graffiti_ReloadForPlayers(f);
+	SetPVarInt(playerid, "GraffitiID", f);
+	SetPVarInt(playerid, "CreatingGraff", 1);
+	Log(serverLog, INFO, "Gracz %s zaaktualizowa³ graffiti. Tekst:%s", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
+	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
+}
+graffiti_CreateGraffiti(playerid)
+{
+	new f = graffiti_GetNewID();
+	if(f == INVALID_GRAFID) 
+	{
+		sendTipMessage(playerid, "Wykorzystano limit graffiti(100) na mapê.");
+		return 1;
+	}
+	SetPVarInt(playerid, "GraffitiID", f);
+	SetPVarInt(playerid, "CreatingGraff", 1);
+	GetPlayerPos(playerid, PlayerPos[playerid][0], PlayerPos[playerid][1], PlayerPos[playerid][2]);
+	GraffitiInfo[f][grafXpos] = PlayerPos[playerid][0];
+	GraffitiInfo[f][grafYpos] = PlayerPos[playerid][1];
+	GraffitiInfo[f][grafZpos] = PlayerPos[playerid][2];
+	GraffitiInfo[f][grafXYpos] = 0.0;
+	GraffitiInfo[f][grafYYpos] = 0.0;
+	GraffitiInfo[f][grafZYpos] = 0.0;
+	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
+	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
+	graffiti_SaveMySQL(f, playerid);
+	graffiti_DefineColor(f);
 	graffiti_ReloadForPlayers(f);
 	EditDynamicObject(playerid, GraffitiInfo[f][gID]);
+	Log(serverLog, INFO, "Gracz %s stworzy³ graffiti. Tekst:%s", GetPlayerLogName(playerid), GraffitiInfo[f][grafText]);
 	return 1;
+}
+graffiti_ZerujListe(playerid)
+{
+	Graffiti_PlayerList[playerid][0] = INVALID_GRAFID;
+	Graffiti_PlayerList[playerid][1] = INVALID_GRAFID;
+	Graffiti_PlayerList[playerid][2] = INVALID_GRAFID;
 }
 graffiti_ZerujZmienne(playerid)
 {
 	Graffiti_Color[playerid] = -1;
 	Graffiti_Text[playerid] = "";
 	Graffiti_Amount[playerid] = 0;
-	Graffiti_PlayerList[playerid][0] = INVALID_GRAFID;
-	Graffiti_PlayerList[playerid][1] = INVALID_GRAFID;
-	Graffiti_PlayerList[playerid][2] = INVALID_GRAFID;
+	graffiti_ZerujListe(playerid);
 	DeletePVar(playerid, "CreatingGraff");
 	DeletePVar(playerid, "GraffitiID");
 }
@@ -187,7 +210,6 @@ graffiti_FindNearest(playerid)
 			}
 		}
 	}
-	sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u.");
 	return INVALID_GRAFID;
 }
 //end

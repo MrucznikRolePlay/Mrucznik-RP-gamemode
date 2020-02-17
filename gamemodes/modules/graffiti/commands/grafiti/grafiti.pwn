@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  grafiti                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,23 +27,42 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "dajbilet\dajbilet.pwn"
-#include "kupbilet\kupbilet.pwn"
-#include "panelibizy\panelibizy.pwn"
-#include "wywalibiza\wywalibiza.pwn"
-#include "zabierzbilet\zabierzbilet.pwn"
-
+#include "grafiti_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_grafiti()
 {
-    command_dajbilet();
-    command_kupbilet();
-    command_panelibizy();
-    command_wywalibiza();
-    command_zabierzbilet();
+    new command = Command_GetID("grafiti");
+
+    //aliases
+    Command_AddAlt(command, "graffiti");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:grafiti(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "System graffiti");
+        return 1;
+    }
+    //fetching params
+    new opcja[24];
+    if(sscanf(params, "s[24]", opcja))
+    {
+        sendTipMessage(playerid, "U¿yj /grafiti [lista, stworz, edytuj, usun] ");
+        return 1;
+    }
+    
+    //command body
+    return command_grafiti_Impl(playerid, opcja);
 }
