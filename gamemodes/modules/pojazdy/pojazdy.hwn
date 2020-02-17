@@ -24,11 +24,11 @@
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
 new Car_SlotQueue[1024];
-new Rower_timerSKOK[MAX_PLAYERS];
-new Rower_timerSZYBKOSC[MAX_PLAYERS];
+// new Rower_timerSKOK[MAX_PLAYERS];
+// new Rower_timerSZYBKOSC[MAX_PLAYERS];
 
 
 //------------------<[ Forwardy: ]>--------------------
-forward rower_skoksprawdz(playerid, Float:vehz, carid);
-forward rower_sprawdzanie(playerid, carid);
+// forward rower_skoksprawdz(playerid, Float:vehz, carid);
+// forward rower_sprawdzanie(playerid, carid);
 //end

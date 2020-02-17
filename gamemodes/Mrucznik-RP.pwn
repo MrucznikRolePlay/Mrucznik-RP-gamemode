@@ -532,6 +532,8 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
+	if(!IsPlayerConnected(hitid)) return 1;
+
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) < 11 && hittype == 1)
     {
         new giveplayer[MAX_PLAYER_NAME];
@@ -1708,6 +1710,17 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	{
 		return 1;
 	}
+	
+    if(GetPVarInt(playerid, "enter-check")) 
+    {
+        // no damage when player is entering interior (Wchodzenie)
+        new Float:hp, Float:armor;
+        GetPlayerHealth(playerid, hp);
+        GetPlayerArmour(playerid, armor);
+        SetPlayerHealth(playerid, hp);
+        SetPlayerArmour(playerid, armor);
+        return 1; //Callback will not be called in other filterscripts.
+    }
 
 	Log(damageLog, INFO, "%s zosta³ zraniony przez %s o %fhp broni¹ %d", 
 		GetPlayerLogName(playerid),
@@ -2201,7 +2214,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
-				return (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1)) ? NadajBW(playerid) : 1;
+				return (IsPlayerConnected(killerid) && (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))) ? NadajBW(playerid) : 1;
 			}
 			else
 			{
@@ -2247,11 +2260,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 								}
 							}
 						}
-						if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1)))
-						{
-							SetPVarInt(playerid, "bw-reason", reason);
-							return NadajRanny(playerid, 0, true);
-						}
+					}
+					if(IsPlayerConnected(killerid) && (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1)))
+					{
+						SetPVarInt(playerid, "bw-reason", reason);
+						return NadajRanny(playerid, 0, true);
 					}
 				}
 			}

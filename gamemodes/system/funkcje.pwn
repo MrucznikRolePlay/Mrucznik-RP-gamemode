@@ -3844,7 +3844,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
 		if(x==x2 && y==y2 && z==z2) return sendErrorMessage(playerid, "Nie mo¿na tutaj wejœæ.");
-        if (vw == 55) // Bymber Casino 55
+        if (vw == 3) // Bymber Casino 55
         {
             if(PlayerInfo[playerid][pLevel] < 3) return sendTipMessageEx(playerid, COLOR_GRAD1, "Tylko gracze z conajmniej 3 lvl mog¹ graæ w kasynie!");
 			
@@ -3854,7 +3854,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             SendClientMessage(playerid, COLOR_GREEN, "Ko³o fortuny - 5 000$ za obrót /kf || Ruletka - 10 000$ za zakrêcenie /ruletka");
         }
 		
-		if(vw == 55)
+		if(vw == 3)
 		{
             SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
             SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
@@ -3863,7 +3863,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
 			
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
-            ResetPlayerWeapons(playerid);
+            ResetPlayerWeapons(playerid); // bug?
 		}
 		//Komunikaty funkcji:
 		if(strlen(komunikat) > 0)
@@ -10551,7 +10551,10 @@ GPSMode(playerid, bool:red = false)
 		foreach(new i : Player)
 		{
 			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
-				DisablePlayerCheckpoint(i);
+			{
+				if(zawodnik[i] == 0)
+					DisablePlayerCheckpoint(i);
+			}
 		}
 	}
 

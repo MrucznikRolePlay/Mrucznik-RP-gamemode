@@ -115,6 +115,28 @@ YCMD:kajdanki(playerid, params[], help)
                                 return 1;
                             }
 
+                            if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
+                            {
+                                //Wiadomoœci
+                                format(string, sizeof(string), "* %s dociska do ziemi %s, a nastêpnie zakuwa go w kajdanki.", GetNick(playerid, true), GetNick(giveplayerid, true));
+                                ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                format(string, sizeof(string), "Sku³eœ %s.", GetNick(giveplayerid, true));
+                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+                                sendTipMessageEx(giveplayerid, COLOR_BLUE, "Le¿a³eœ na ziemi - policjant sku³ ciê bez wiêkszego wysi³ku.");
+
+                                //czynnoœci
+                                zakuty[giveplayerid] = 1;
+                                uzytekajdanki[playerid] = 1;
+                                PDkuje[giveplayerid] = playerid;
+                                SkutyGracz[playerid] = giveplayerid;
+                                ClearAnimations(giveplayerid);
+                                SetPlayerSpecialAction(giveplayerid, SPECIAL_ACTION_CUFFED);
+                                SetPlayerAttachedObject(giveplayerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+                                SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
+                                SetTimerEx("Kajdanki_debug", 1000, 0, "d", giveplayerid);
+                                return 1;
+                            }
+
                             format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", GetNick(playerid, true),GetNick(giveplayerid, true));
                             ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                             ShowPlayerDialogEx(giveplayerid, 98, DIALOG_STYLE_MSGBOX, "Aresztowanie", "Policjant chce za³o¿yæ ci kajdanki, jeœli osacza ciê niedu¿a liczba policjantów mo¿esz spróbowaæ siê wyrwaæ\nJednak pamiêtaj jeœli siê wyrwiesz i jesteœ uzbrojony policjant ma prawo ciê zabiæ. \nMo¿esz tak¿e dobrowolnie poddaæ siê policjantom.", "Poddaj siê", "Wyrwij siê");
