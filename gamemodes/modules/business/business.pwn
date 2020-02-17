@@ -567,6 +567,7 @@ GetTypeNameBiz(bIDE)
 }
 StartLicytacjaBiz(bIDE, playerid, bChoice)
 {
+	#pragma unused bChoice
 	new string[256]; 
 	foreach(new i : Player)
 	{
