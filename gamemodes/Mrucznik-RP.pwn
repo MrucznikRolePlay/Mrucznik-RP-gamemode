@@ -525,6 +525,8 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
+	if(!IsPlayerConnected(hitid)) return 1;
+
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) < 11 && hittype == 1)
     {
         new giveplayer[MAX_PLAYER_NAME];
@@ -1697,6 +1699,17 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	{
 		return 1;
 	}
+	
+    if(GetPVarInt(playerid, "enter-check")) 
+    {
+        // no damage when player is entering interior (Wchodzenie)
+        new Float:hp, Float:armor;
+        GetPlayerHealth(playerid, hp);
+        GetPlayerArmour(playerid, armor);
+        SetPlayerHealth(playerid, hp);
+        SetPlayerArmour(playerid, armor);
+        return 1; //Callback will not be called in other filterscripts.
+    }
 
 	Log(damageLog, INFO, "%s zosta³ zraniony przez %s o %fhp broni¹ %d", 
 		GetPlayerLogName(playerid),
@@ -1836,30 +1849,64 @@ public OnPlayerDeath(playerid, killerid, reason)
 		PlayerInfo[playerid][pLocal] = 255;
 		PlayerInfo[playerid][pDeaths] ++;
 
-		//-------<[  Antyczity  ]>---------
-		if(reason <= 54 && reason > 0)
+		if(GetPlayerAdminDutyStatus(playerid) == 1 || GetPlayerAdminDutyStatus(killerid) == 1)
 		{
-			if(IsPlayerConnected(killerid))
-            {
-                if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) == 425) format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z Huntera", killername, killerid, playername, playerid);
-				else format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
-            }
-            else
+			SetPVarInt(playerid, "skip_bw", 1);
+		}
+
+		if(GetPlayerState(killerid) == 2)
+		{
+			Log(warningLog, INFO, "%s zabi³ %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
+			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
+
+			if(PlayerInfo[killerid][pLevel] > 1)
 			{
-				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+				format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
+				SendMessageToAdmin(string, COLOR_YELLOW);
 			}
-			SendMessageToAdminEx(string, COLOR_P@, 2);
+			else
+			{
+				format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] z DB, dosta³ kicka !", killername, killerid, playername, playerid);
+				SendMessageToAdmin(string, COLOR_YELLOW);
+				Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
+				SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
+				KickEx(killerid);
+				SetPVarInt(playerid, "skip_bw", 1);
+				return 1;
+			}
 		}
-
-		if(GetPlayerAdminDutyStatus(playerid) == 1 || (IsPlayerConnected(killerid) && GetPlayerAdminDutyStatus(killerid) == 1))
+		if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
 		{
-			PlayerKilledByAdmin[playerid] = 1;
+			format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
+			SendMessageToAdmin(string, COLOR_YELLOW);
+			Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+		}
+		if(reason == 41)
+		{
+			format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s ze spreya !", killerid, killername, playername);
+			SendMessageToAdmin(string, COLOR_YELLOW);
+			Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 		}
 
-		if(PlayerKilledByAdmin[playerid] == 0)
+		if(GetPVarInt(playerid, "skip_bw")  == 0)
 		{
 			if(PlayerInfo[playerid][pInjury] > 0)
 			{
+				//-------<[  Logi  ]>---------
+				if(reason <= 54 && reason > 0)
+				{
+					if(IsPlayerConnected(killerid))
+					{
+						if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) == 425) format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z Huntera", killername, killerid, playername, playerid);
+						else format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+					}
+					else
+					{
+						format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+					}
+					SendMessageToAdminEx(string, COLOR_P@, 2);
+				}
+
 				if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 				{
 					PlayerInfo[killerid][pKills] ++;
@@ -1867,38 +1914,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 					{
 						KickEx(killerid);
 						return 1;
-					}
-					if(GetPlayerState(killerid) == 2)
-					{
-						Log(warningLog, INFO, "%s zabi³ %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
-						SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
-
-						if(PlayerInfo[killerid][pLevel] > 1)
-						{
-							format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
-							SendMessageToAdmin(string, COLOR_YELLOW);
-						}
-						else
-						{
-							format(string, 128, "AdmWarning: %s[%d] zabi³ %s[%d] z DB, dosta³ kicka !", killername, killerid, playername, playerid);
-							SendMessageToAdmin(string, COLOR_YELLOW);
-							Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
-							SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
-							KickEx(killerid);
-							return 1;
-						}
-					}
-					if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
-					{
-						format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
-						SendMessageToAdmin(string, COLOR_YELLOW);
-						Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
-					}
-					if(reason == 41)
-					{
-						format(string, 128, "AdmWarning: [%d]%s zabi³ gracza %s ze spreya !", killerid, killername, playername);
-						SendMessageToAdmin(string, COLOR_YELLOW);
-						Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 					}
 					if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
 					{
@@ -2168,7 +2183,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
-				return (PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1))) ? NadajBW(playerid) : 1;
+				return (IsPlayerConnected(killerid) && (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))) ? NadajBW(playerid) : 1;
 			}
 			else
 			{
@@ -2178,6 +2193,20 @@ public OnPlayerDeath(playerid, killerid, reason)
 				}
 				else
 				{
+					//-------<[     Logi      ]>---------
+					if(reason <= 54 && reason > 0)
+					{
+						if(IsPlayerConnected(killerid))
+						{
+							if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) == 425) format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z Huntera", killername, killerid, playername, playerid);
+							else format(string, sizeof(string), "{FF66CC}BW-Warning: {FFFFFF}%s [%d] zrani³ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+						}
+						else
+						{
+							format(string, sizeof(string), "{FF66CC}BW-Warning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+						}
+						SendMessageToAdminEx(string, COLOR_P@, 2);
+					}
 					//-------<[     WL      ]>---------
 					if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
 					{
@@ -2200,18 +2229,18 @@ public OnPlayerDeath(playerid, killerid, reason)
 								}
 							}
 						}
-						if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1)))
-						{
-							SetPVarInt(playerid, "bw-reason", reason);
-							return NadajRanny(playerid, 0, true);
-						}
+					}
+					if(IsPlayerConnected(killerid) && (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1)))
+					{
+						SetPVarInt(playerid, "bw-reason", reason);
+						return NadajRanny(playerid, 0, true);
 					}
 				}
 			}
 		}
 		else
 		{
-			PlayerKilledByAdmin[playerid] = 0;			
+			DeletePVar(playerid, "skip_bw");		
 		}
 	}
 	SetPlayerColor(playerid,COLOR_GRAD2);
@@ -2371,6 +2400,9 @@ public OnPlayerSpawn(playerid)
     if(PlayerInfo[playerid][pStylWalki] == 1) SetPlayerFightingStyle(playerid, FIGHT_STYLE_BOXING);
 	else if(PlayerInfo[playerid][pStylWalki] == 2) SetPlayerFightingStyle(playerid, FIGHT_STYLE_KUNGFU);
 	else if(PlayerInfo[playerid][pStylWalki] == 3) SetPlayerFightingStyle(playerid, FIGHT_STYLE_KNEEHEAD);
+	//WL
+	SetPlayerWantedLevel(playerid, (PoziomPoszukiwania[playerid] > 6 ? 6 : PoziomPoszukiwania[playerid]));
+
 	//DŸwiêki
 	StopAudioStreamForPlayer(playerid);
 	PlayerFixRadio(playerid);
@@ -4864,13 +4896,13 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 GetDynamicObjectRot(objectid, rox, roy, roz);
                 GetDynamicObjectPos(objectid, X, Y, Z);
                 SendClientMessage(playerid, -1, "Jesteœ za daleko.");
-                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, X, Y, Z+0.3, 4.0);
+                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, X, Y, Z+0.3, 4.0, GetPlayerVirtualWorld(playerid));
                 SetDynamicObjectPos(objectid, X, Y, Z);
                 SetDynamicObjectRot(objectid, rox, roy, roz);
             }
             else
             {
-                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, x, y, z+0.3, 4.0);
+                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, x, y, z+0.3, 4.0, GetPlayerVirtualWorld(playerid));
                 GetDynamicObjectPos(objectid, x, y, z);
                 GetDynamicObjectRot(objectid, rx, ry, rz);
             }
@@ -7521,11 +7553,9 @@ public OnPlayerText(playerid, text[])
 			GetPlayer2DZone(playerid, pZone, sizeof(pZone));
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg³osimy to wszystkim jednostkom w danym obszarze.");
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
-			format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek! Nadawca: %s", turner);
-			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie: %s", text);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
-			format(wanted, sizeof(wanted), "Centrala: Lokalizacja zg³oszenia: %s", pZone);
+			format(wanted, sizeof(wanted), "Centrala: Nadawca: %s, lokalizacja zg³oszenia: %s", turner, pZone);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
 			if(org == 4 && (PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0)) PlayerRequestMedic[playerid] = 1;
 
