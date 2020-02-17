@@ -50,8 +50,9 @@ YCMD:wejdz(playerid, params[], help)
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
         
         if(SprawdzWejscia(playerid))
+        {
             return 1;
-        
+        }
 //======================================================================
 //==================[Windy pod /wejdz]==================================
 //======================================================================
@@ -276,10 +277,11 @@ YCMD:wejdz(playerid, params[], help)
                     return 1;
                 }
             }
+            Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 22);
             SetPlayerPos(playerid, 417.3976, -1858.9402, -65.3905);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
-            Wchodzenie(playerid);
+            PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             return 1;
         }
         //wejscie na scene/konsole
@@ -291,8 +293,6 @@ YCMD:wejdz(playerid, params[], help)
                 return 1;
             }
             SetPlayerPos(playerid, 434.7581, -1841.0632, -64.2206);
-            GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
-            Wchodzenie(playerid);
             return 1;
         }
         //wejscia VIP
@@ -380,6 +380,7 @@ YCMD:wejdz(playerid, params[], help)
             Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 25);
             SetPlayerPos(playerid, 221.530426, -1546.261352, -15.997495);
+            PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
             GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
             return 1;
         }
@@ -675,34 +676,6 @@ YCMD:wejdz(playerid, params[], help)
             Wejdz(playerid, -1716.1999511719,1018.200012207,17.60000038147, -1825.4000244141,1151.6999511719,6803.2998046875, 5.0);//WEJSCIE DO KRYJOWKI
             Wejdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
-            
-			//BIZNESY
-            for(new i=0; i<=BusinessLoaded; i++)
-            {
-                if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ])
-                && GetPlayerVirtualWorld(playerid) == 0)
-                {
-                    if(BizOpenStatus[i] == 1 
-                    && PlayerInfo[playerid][pBusinessOwner] != i
-                    && PlayerInfo[playerid][pBusinessMember] != i)
-                    {
-                        sendErrorMessage(playerid, "Ten biznes jest zamkniêty!"); 
-                        return 1;
-                    }
-                    if(Business[i][b_vw] == 0 && Business[i][b_enX] == Business[i][b_exX])
-                    {
-                        sendTipMessage(playerid, "Ten biznes nie ma wnêtrza!"); 
-                        return 1;
-                    }
-                    SetPlayerVirtualWorld(playerid, Business[i][b_vw]); 
-                    SetPlayerInterior(playerid, Business[i][b_int]); 
-                    SetPLocal(playerid, Business[i][b_pLocal]); 
-                    SetPlayerPos(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
-                    Wchodzenie(playerid);
-                    return 1;  
-                }
-            }
-
             for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
             {
                 if(IsPlayerInRangeOfPoint(playerid, 3.0, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]))

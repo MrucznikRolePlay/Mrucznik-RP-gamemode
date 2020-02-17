@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ bandana ]------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  grafiti                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,47 +16,53 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "grafiti_impl.pwn"
 
-YCMD:bandana(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_grafiti()
 {
-	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
-	{
-		new string[64];
-		new sendername[MAX_PLAYER_NAME];
+    new command = Command_GetID("grafiti");
 
-		if(HiddenPlayerName[playerid])
-		{
-			SendClientMessage(playerid, COLOR_GREY, " Musisz œci¹gn¹æ maskê z twarzy! (/maska).");
-			return 1;
-		}
-		
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
-		{
-			SetPlayerColor(playerid, TEAM_HIT_COLOR);
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "* %s sci¹ga bandane z twarzy.", sendername);
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			RemovePlayerAttachedObject(playerid,2);
-		}
-		else
-		{
-			SetPlayerColor(playerid, COLOR_BLACK);
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "* %s zak³ada bandane na twarz.", sendername);
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			SetPlayerAttachedObject(playerid, 2, 18896, 2, 0.122467, 0.007340, 0.003190, 274.433288, 0.248657, 262.665466, 1.000000, 1.000000, 1.000000 );//bandana - czarna
-		}
-	}
-	return 1;
+    //aliases
+    Command_AddAlt(command, "graffiti");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:grafiti(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "System graffiti");
+        return 1;
+    }
+    //fetching params
+    new opcja[24];
+    if(sscanf(params, "s[24]", opcja))
+    {
+        sendTipMessage(playerid, "U¿yj /grafiti [lista, stworz, edytuj, usun] ");
+        return 1;
+    }
+    
+    //command body
+    return command_grafiti_Impl(playerid, opcja);
 }

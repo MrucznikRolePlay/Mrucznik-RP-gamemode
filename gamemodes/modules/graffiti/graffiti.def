@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ bandana ]------------------------------------------------//
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                  graffiti                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,47 +16,33 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Sanda³
+// Data utworzenia: 01.02.2020
 
-// Opis:
-/*
-	
-*/
+//
+
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+
+#define GRAFFITI_MAX 100
+#define GRAFFITI_ADMIN 1 // od którego @lvl mozna zmieniaæ innych graffiti
+#define GRAFFITI_DIALOG_LIST 1250
+#define GRAFFITI_DIALOG_ENTER_TEXT 1251
+#define GRAFFITI_DIALOG_SELECT_COLOR 1252
+#define GRAFFITI_DIALOG_EDIT_COLOR 1253
+#define GRAFFITI_DIALOG_EDIT_TEXT 1254
+#define INVALID_GRAFID 9999
 
 
-// Notatki skryptera:
-/*
-	
-*/
+#define GRAFFITI_CZARNY 0xFF000000
+#define GRAFFITI_BIALY 0xFFFFFFFF
+#define GRAFFITI_CZERWONY 0xFFFF0000
+#define GRAFFITI_ZIELONY 0xFF00FF00
+#define GRAFFITI_NIEBIESKI 0xFF2B95FF
+#define GRAFFITI_SZARY 0xFFAFAFAF //
+#define GRAFFITI_POMARANCZOWY 0xFFE87E15
+#define GRAFFITI_ZOLTY 0xFFFFE100
+#define GRAFFITI_FIOLETOWY 0xFF8400FF
+#define GRAFFITI_ROZOWY 0xFFEE00FF
 
-YCMD:bandana(playerid, params[], help)
-{
-	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
-	{
-		new string[64];
-		new sendername[MAX_PLAYER_NAME];
-
-		if(HiddenPlayerName[playerid])
-		{
-			SendClientMessage(playerid, COLOR_GREY, " Musisz œci¹gn¹æ maskê z twarzy! (/maska).");
-			return 1;
-		}
-		
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
-		{
-			SetPlayerColor(playerid, TEAM_HIT_COLOR);
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "* %s sci¹ga bandane z twarzy.", sendername);
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			RemovePlayerAttachedObject(playerid,2);
-		}
-		else
-		{
-			SetPlayerColor(playerid, COLOR_BLACK);
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "* %s zak³ada bandane na twarz.", sendername);
-			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			SetPlayerAttachedObject(playerid, 2, 18896, 2, 0.122467, 0.007340, 0.003190, 274.433288, 0.248657, 262.665466, 1.000000, 1.000000, 1.000000 );//bandana - czarna
-		}
-	}
-	return 1;
-}
+//end

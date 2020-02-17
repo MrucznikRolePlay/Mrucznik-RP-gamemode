@@ -364,6 +364,8 @@ new GATE_VINYL, bool:GATE_VINYL_S=false,
     GATE_VINYL_IN[4], bool:GATE_VINYL_IN_S[4] = {false, ...};
 new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,71.0};  //pos[3] dist, vw
 new VINYL_Stream[128];
+new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 1000.0};  //pos[3] dist, vw
+new IBIZA_Stream[128];
 //22.06  system rang mysql
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
 //new FracLiderRang[MAX_FRAC][MAX_RANG_LEN];      //0.4kB
@@ -1068,7 +1070,7 @@ new playerSeeSpec[MAX_PLAYERS];
 new gRO[MAX_PLAYERS];
 
 new isNaked[MAX_PLAYERS]; 
-//new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
+new Text3D:HiddenPlayerName[MAX_PLAYERS];
 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
