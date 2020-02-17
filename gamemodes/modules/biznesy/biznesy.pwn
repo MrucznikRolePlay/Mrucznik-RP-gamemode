@@ -297,7 +297,6 @@ stock CorrectPlayerBusiness(playerid)
 	{
 		sendErrorMessage(playerid, "Posiada³eœ b³êdny biznes - zosta³ on WYZEROWANY!");
 		sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d - zg³oœ to na naszym forum!"); 
-		Log(serverLog, ERROR, "%s wyzerowanie biznesu %d", GetPlayerLogName(playerid), PlayerInfo[playerid][pBusinessOwner]);
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 	}
 	if(PlayerInfo[playerid][pBusinessMember] == 0)
