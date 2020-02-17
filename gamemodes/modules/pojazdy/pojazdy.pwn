@@ -30,7 +30,8 @@
 
 hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 {
-    if(GetVehicleModel(vehicleid) == 509 || GetVehicleModel(vehicleid) == 510 || GetVehicleModel(vehicleid) == 481)
+
+    if((GetVehicleModel(vehicleid) == 509 || GetVehicleModel(vehicleid) == 510 || GetVehicleModel(vehicleid) == 481) && !ispassenger)
 	{
   		Rower_timerSZYBKOSC[playerid] = SetTimerEx("rower_sprawdzanie", 150, true, "ii", playerid, vehicleid);
  	}
@@ -44,6 +45,14 @@ hook OnPlayerExitVehicle(playerid, vehicleid)
         KillTimer(Rower_timerSKOK[playerid]);
 	}
 }
+
+hook OnPlayerDisconnect(playerid)
+{
+    KillTimer(Rower_timerSZYBKOSC[playerid]);
+    KillTimer(Rower_timerSKOK[playerid]);
+}
+
+
 
 hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
@@ -793,10 +802,18 @@ stock rower_SetVehSpeed(carid)
 //-----------------<[ Timery: ]>--------------------
 public rower_sprawdzanie(playerid, carid)
 {
-    new Float:Velocity[3];
-	GetVehicleVelocity(carid, Velocity[0], Velocity[1], Velocity[2]);
-	new rower_szybkosc = rower_GetPlayerSpeed(carid);
-	if(rower_szybkosc > ROWER_VMAX) rower_SetVehSpeed(carid);
+    if(IsPlayerInAnyVehicle(playerid) && (GetVehicleModel(carid) == 509 || GetVehicleModel(carid) == 510 || GetVehicleModel(carid) == 481))
+    {
+        new Float:Velocity[3];
+        GetVehicleVelocity(carid, Velocity[0], Velocity[1], Velocity[2]);
+        new rower_szybkosc = rower_GetPlayerSpeed(carid);
+        if(rower_szybkosc > ROWER_VMAX) rower_SetVehSpeed(carid);
+    }
+    else
+    {
+        KillTimer(Rower_timerSZYBKOSC[playerid]);
+        KillTimer(Rower_timerSKOK[playerid]);
+    }
 }
 public rower_skoksprawdz(playerid, Float:vehz, carid)
 {
