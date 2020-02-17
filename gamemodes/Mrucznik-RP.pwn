@@ -2183,7 +2183,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
-				return (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1)) ? NadajBW(playerid) : 1;
+				return (IsPlayerConnected(killerid) && (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))) ? NadajBW(playerid) : 1;
 			}
 			else
 			{
