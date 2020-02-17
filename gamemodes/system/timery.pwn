@@ -3245,7 +3245,7 @@ public CJSkinCheck()
 {
 	foreach(new j : Player)
 	{
-		if(GetPlayerSkin(j) == 0 && PlayerInfo[j][pAdmin] == 0)
+		if(gPlayerLogged[j] == 1 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0)
 		{
 			PlayerInfo[j][pSkin] = 299;
 			SetPlayerSkinEx(j, 299);

@@ -455,7 +455,7 @@ public OnGameModeInit()
 
     pusteZgloszenia();
 
-
+	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
     print("----- OnGameModeInit done.");
 	return 1;
 }
@@ -512,7 +512,7 @@ public OnGameModeExit()
     }
 
 	DOF2_Exit();
-
+	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     GLOBAL_EXIT = true;
     print("----- OnGameModeExit done.");
 	return 1;
@@ -1791,7 +1791,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         BoomBoxData[bbxid][BBD_Standby] = false;
         BBD_Putdown(playerid, bbxid);
     }
-    if(reason == 38 && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
+    if(reason == 38 && IsPlayerConnected(killerid) && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
     {
         format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNick(playerid, true), playerid);
         SendCommandLogMessage(string);
@@ -1851,7 +1851,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 
-		if(GetPlayerAdminDutyStatus(playerid) == 1 || GetPlayerAdminDutyStatus(killerid) == 1)
+		if(GetPlayerAdminDutyStatus(playerid) == 1 || (IsPlayerConnected(killerid) && GetPlayerAdminDutyStatus(killerid) == 1))
 		{
 			PlayerKilledByAdmin[playerid] = 1;
 		}
@@ -2200,11 +2200,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 								}
 							}
 						}
-					}
-					if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1)))
-					{
-						SetPVarInt(playerid, "bw-reason", reason);
-						return NadajRanny(playerid, 0, true);
+						if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1)))
+						{
+							SetPVarInt(playerid, "bw-reason", reason);
+							return NadajRanny(playerid, 0, true);
+						}
 					}
 				}
 			}
@@ -6566,7 +6566,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
 				SetPVarInt(playerid,"chop_id",0);
-				for(new i=0;i<=ROPELENGTH;i++)
+				for(new i=0;i<ROPELENGTH;i++)
 				{
 					DestroyDynamicObject(r0pes[playerid][i]);
 				}
@@ -6643,7 +6643,7 @@ public OnVehicleDeath(vehicleid, killerid)
 	//PADZIOCH
 	if(IsAHeliModel(GetVehicleModel(vehicleid)))
 	{
-  		for(new i=0;i<=MAX_PLAYERS;i++)
+  		foreach(new i : Player)
     	{
      		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
        		{
