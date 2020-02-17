@@ -32,7 +32,7 @@ CMD:lina(playerid, cmdtext[])
 {
     sendErrorMessage(playerid, "Wy³¹czone na czas napraw");
     return 1;
-
+/*
     if(IsAMedyk(playerid) || IsACop(playerid))
     {
         if((OnDuty[playerid] == 1 || JobDuty[playerid] == 1) && IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetVehicleModel(GetPlayerVehicleID(playerid))) && GetPVarInt(playerid,"roped") == 0)
@@ -65,4 +65,5 @@ CMD:lina(playerid, cmdtext[])
         }
     }
 	return 1;
+    */
 }

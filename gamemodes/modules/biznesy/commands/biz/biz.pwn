@@ -60,11 +60,7 @@ YCMD:biz(playerid, params[], help)
     new message[124];
     if(sscanf(params, "s[124]", message))
     {
-<<<<<<< HEAD:gamemodes/modules/biznesy/commands/biz/biz.pwn
         sendTipMessage(playerid, "U¿yj /biz [wiadomoœæ] ");
-=======
-        sendTipMessage(playerid, "U¿yj /grafiti [stworz, edytuj, usun, sprawdz, lista] ");
->>>>>>> 5ac7cfa8... Dodanie /graffiti lista:gamemodes/modules/graffiti/commands/grafiti/grafiti.pwn
         return 1;
     }
     
