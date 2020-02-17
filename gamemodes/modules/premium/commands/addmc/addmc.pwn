@@ -37,6 +37,7 @@ command_addmc()
 
     //aliases
     Command_AddAlt(command, "dodajmc");
+    Command_AddAlt(command, "dajmc");
     
 
     //permissions
