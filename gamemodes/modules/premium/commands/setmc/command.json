@@ -5,9 +5,7 @@
         "everyone"
     ],
     "author": "Mrucznik",
-    "aliases": [
-        "dajmc"
-    ],
+    "aliases": [],
     "parameters": [
         {
             "type": "player",
