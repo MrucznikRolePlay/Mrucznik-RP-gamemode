@@ -44,10 +44,6 @@ YCMD:wyjdz(playerid, params[], help)
 		{
 			return 1;
 		}
-		else if(IsPlayerNearBusinessDoor(playerid))
-		{
-			return 1;
-		}
 		else if(IsPlayerInRangeOfPoint(playerid,5,648.9127, -1367.4266, 29.2878))//stare SAN - recepcja san news wyjscie
         {
 			SetPlayerPos(playerid, 648.4412, -1357.3232, 13.8579);
