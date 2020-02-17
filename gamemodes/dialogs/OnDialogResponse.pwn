@@ -13864,8 +13864,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			GUIExit[playerid] = 0;
-			new weaponid = DynamicGui_GetDataInt(playerid, listitem);
-			new weapondata = DynamicGui_GetValue(playerid, listitem);
+			new weaponid = DynamicGui_GetValue(playerid, listitem);
+			new weapondata = DynamicGui_GetDataInt(playerid, listitem);
 			if(weaponid == starabron[playerid])
 			{
 				weaponid = PlayerInfo[playerid][pGun0];
