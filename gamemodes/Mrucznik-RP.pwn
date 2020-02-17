@@ -4878,7 +4878,7 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
 
 public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
 {
-    if(IsValidDynamicObject(objectid))
+	if(IsValidDynamicObject(objectid))
 	{
 		if(GetPVarInt(playerid, "Allow-edit"))
 		{
@@ -4935,7 +4935,70 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
             }
         }
+		else if(response == EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
+            GetDynamicObjectRot(objectid, rox, roy, roz);
+            GetDynamicObjectPos(objectid, X, Y, Z);
+			if(!IsPlayerInRangeOfPoint(playerid, 2.0, x,y,z))
+            {
+                SendClientMessage(playerid, 0xFF0000FF, "Podejdz do graffiti!");
+                SetDynamicObjectPos(objectid, X, Y, Z);
+            }
+            else
+            {
+                new Float:speed = VectorSize(X-x, Y-y, Z-z);
+                MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
+            }
+			if(GetPVarInt(playerid, "zoneid") == -1) 
+        	{
+				SendClientMessage(playerid, 0xFF0000FF, "Musisz byæ na strefie!");
+                SetDynamicObjectPos(objectid, X, Y, Z);
+			}
+		}
+		else if( response == EDIT_RESPONSE_FINAL && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new f = GetPVarInt(playerid, "GraffitiID");
+			if(!IsPlayerInRangeOfPoint(playerid, 2.0, x,y,z))
+            {
+                GameTextForPlayer(playerid, "~r~Byles za daleko.",2000, 5);
+                graffiti_DeleteMySQL(f);
+				graffiti_ZerujZmienne(playerid);
+				graffiti_Zeruj(f);
+				return 1;
+			}
+			if(GetPVarInt(playerid, "zoneid") == -1) 
+        	{
+				SendClientMessage(playerid, 0xFF0000FF, "Nie by³eœ na strefie!");
+                graffiti_DeleteMySQL(f);
+				graffiti_ZerujZmienne(playerid);
+				graffiti_Zeruj(f);
+				return 1;
+			}
+			GraffitiInfo[f][grafXpos] = x;
+			GraffitiInfo[f][grafYpos] = y;
+			GraffitiInfo[f][grafZpos] = z;
+			GraffitiInfo[f][grafXYpos] = rx;
+			GraffitiInfo[f][grafYYpos] = ry;
+			GraffitiInfo[f][grafZYpos] = rz;
+			GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
+			graffiti_UpdateMySQL(f);
+			graffiti_ReloadForPlayers(f);
+			graffiti_ZerujZmienne(playerid);
+			new akcja[150];
+			format(akcja,sizeof(akcja),"* %s wyci¹ga spray i tworzy nim napis.",GetNick(playerid));
+            ProxDetector(40.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                
+		}
+		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingGraff") == 1)
+		{
+			new f = GetPVarInt(playerid, "GraffitiID");
+			graffiti_DeleteMySQL(f);
+			GameTextForPlayer(playerid, "~r~Usunieto!",2000, 5);
+			graffiti_ZerujZmienne(playerid);
+		}
     }
+	return 1;
 }
 
 public OnRconLoginAttempt(ip[], password[], success)
