@@ -38,7 +38,6 @@ CMD:lina(playerid, cmdtext[])
         if((OnDuty[playerid] == 1 || JobDuty[playerid] == 1) && IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetVehicleModel(GetPlayerVehicleID(playerid))) && GetPVarInt(playerid,"roped") == 0)
         {
             if(GetPlayerVehicleSeat(playerid) == 0) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Jesteœ pilotem! Tylko pasa¿erowie mog¹ spuœciæ siê po linie."); 
-        
             new sendername[MAX_PLAYER_NAME], string[144];
             GetPlayerName(playerid, sendername, sizeof(sendername));
             GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
@@ -64,6 +63,5 @@ CMD:lina(playerid, cmdtext[])
             return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Nie jesteœ w uprawnionym helikopterze, na s³u¿bie lub opuszczasz siê ju¿ na linie!"); 
         }
     }
-	return 1;
-    */
+	return 1;*/
 }

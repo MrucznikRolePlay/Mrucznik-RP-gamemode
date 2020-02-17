@@ -183,6 +183,16 @@ YCMD:aresztuj(playerid, params[], help)
 											}
 											ZabierzKase(giveplayerid, pricestan);
 											PoziomPoszukiwania[giveplayerid] = 0;
+											if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
+											{
+												format(string, sizeof(string), "<< Policjant %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
+												OOCNews(COLOR_LIGHTRED, string);
+											}
+											else if(PlayerInfo[playerid][pMember]==2||PlayerInfo[playerid][pLider]==2)
+											{
+												format(string, sizeof(string), "<< Agent FBI %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
+												OOCNews(COLOR_LIGHTRED, string);
+											}
 										}
 										else
 										{

@@ -35,6 +35,12 @@ YCMD:bandana(playerid, params[], help)
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];
 
+		if(HiddenPlayerName[playerid])
+		{
+			SendClientMessage(playerid, COLOR_GREY, " Musisz œci¹gn¹æ maskê z twarzy! (/maska).");
+			return 1;
+		}
+		
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
 		{
 			SetPlayerColor(playerid, TEAM_HIT_COLOR);
