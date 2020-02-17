@@ -1115,7 +1115,10 @@ bool:MruMySQL_SprawdzBany(playerid)
             return false;
         }
 	}
-	mysql_free_result();
+	else 
+	{
+		mysql_free_result();
+	}
 	return false;
 }
 

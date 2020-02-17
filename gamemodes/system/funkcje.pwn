@@ -1343,29 +1343,30 @@ return 1;
 }
 
 public OgladanieDOM(playerid){
-new deem = PlayerInfo[playerid][pDomWKJ];
-if(PlayerInfo[playerid][pDomWKJ] != 0)
-{
-	SetPlayerPos(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
-	SetPlayerInterior(playerid, 0);
-	SetPlayerVirtualWorld(playerid, 0);
-	PlayerInfo[playerid][pDomWKJ] = 0;
-}
-if(isNaked[playerid])
-{
-    UndressPlayer(playerid, false); 
-}
-GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
-DomOgladany[playerid] = 1;
+	new deem = PlayerInfo[playerid][pDomWKJ];
+	if(PlayerInfo[playerid][pDomWKJ] != 0)
+	{
+		SetPlayerPos(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
+		SetPlayerInterior(playerid, 0);
+		SetPlayerVirtualWorld(playerid, 0);
+		PlayerInfo[playerid][pDomWKJ] = 0;
+		SetServerWeatherAndTime(playerid);
+	}
+	if(isNaked[playerid])
+	{
+		UndressPlayer(playerid, false); 
+	}
+	GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
+	DomOgladany[playerid] = 1;
 
-SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
-return 1;
+	SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
+	return 1;
 }
 
 public CzasOgladaniaDOM(playerid){
-DomOgladany[playerid] = 0;
-GameTextForPlayer(playerid, "~g~Znow mozesz obejrzec dom", 5000, 1);
-return 1;
+	DomOgladany[playerid] = 0;
+	GameTextForPlayer(playerid, "~g~Znow mozesz obejrzec dom", 5000, 1);
+	return 1;
 }
 
 public RSPAWN(playerid){
@@ -3833,7 +3834,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
 		if(x==x2 && y==y2 && z==z2) return sendErrorMessage(playerid, "Nie mo¿na tutaj wejœæ.");
-        if (vw == 55) // Bymber Casino 55
+        if (vw == 3) // Bymber Casino 55
         {
             if(PlayerInfo[playerid][pLevel] < 3) return sendTipMessageEx(playerid, COLOR_GRAD1, "Tylko gracze z conajmniej 3 lvl mog¹ graæ w kasynie!");
 			
@@ -3843,7 +3844,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             SendClientMessage(playerid, COLOR_GREEN, "Ko³o fortuny - 5 000$ za obrót /kf || Ruletka - 10 000$ za zakrêcenie /ruletka");
         }
 		
-		if(vw == 55)
+		if(vw == 3)
 		{
             SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
             SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
@@ -3852,7 +3853,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
             SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
 			
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
-            ResetPlayerWeapons(playerid);
+            ResetPlayerWeapons(playerid); // bug?
 		}
 		//Komunikaty funkcji:
 		if(strlen(komunikat) > 0)
@@ -4447,6 +4448,9 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
       				PoziomPoszukiwania[playerid] = 0;
 				}
 			}
+
+			SetPlayerWantedLevel(playerid, (PoziomPoszukiwania[playerid] > 6 ? 6 : PoziomPoszukiwania[playerid]));
+			
 			if(sendmessage)
 			{
 				format(wantedmes, sizeof(wantedmes), "Posiadany Wanted Level: %d", PoziomPoszukiwania[playerid]);
@@ -8429,7 +8433,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	new sendername[MAX_PLAYER_NAME];
 	if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
 	{
-		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ wszystkich liderów\nz organizacji? (Zabierze VLD)", GetNick(para1));
+		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ\nWSZYSTKICH liderów z organizacji? (Zabierze VLD)", GetNick(para1));
 		SetPVarInt(playerid, "ID_LIDERA", para1);  
 		ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
 		return 1;

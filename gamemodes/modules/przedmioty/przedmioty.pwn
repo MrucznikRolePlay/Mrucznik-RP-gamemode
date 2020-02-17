@@ -49,6 +49,10 @@ public PlayerChangeWeapon(playerid, newweaponid)
 }
 PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 {
+	/*
+	SPECJALNE (weapondata):
+		1 - paralizator
+	*/
 	if(AntySpam[playerid] == 1)
 	{
 		return sendTipMessageEx(playerid, COLOR_GRAD3, "Wyci¹gasz ju¿ broñ...");
@@ -60,10 +64,9 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 	
 	if(weaponid > 1)
 	{
-		if(starabron[playerid] == 24 && GetPVarInt(playerid, "tazer") == 1)
+		if(starabron[playerid] == 24 && MaTazer[playerid] == 1)
 		{
 			format(gname, sizeof(gname), "Paralizator");
-			SetPVarInt(playerid, "tazer", 0);
 		}
 		else
 		{
@@ -80,6 +83,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 	}
 
 	MaTazer[playerid] = 0;
+	SetPVarInt(playerid, "MaDetonator", 0);
 
 	switch(weaponid)
 	{
@@ -293,6 +297,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 
 		case 40:
 		{
+			SetPVarInt(playerid, "MaDetonator", 1);
 			format(string, sizeof(string), "* %s wyci¹ga detonator.", specNAME);
 			ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
@@ -378,7 +383,7 @@ PokazDialogBronie(playerid)
 	{
 		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun2], PlayerInfo[playerid][pGun2]);
 		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun2] == starabron[playerid] && GetPVarInt(playerid, "tazer") != 1)
+		if(PlayerInfo[playerid][pGun2] == starabron[playerid] && MaTazer[playerid] != 1)
 		{
 			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 		}
@@ -528,11 +533,25 @@ PokazDialogBronie(playerid)
 		}
 		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun12]]);
 	}
+	if(starabron[playerid] == 39 && PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
+	{
+		DynamicGui_AddRow(playerid, 40); //detonator
+		weaponexist = 1;
+		if(GetPVarInt(playerid, "MaDetonator") == 1)
+		{
+			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+		}
+		else
+		{
+			format(active, sizeof(active), "{FFFFFF}");
+		}
+		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, "Detonator");
+	}
 	if((IsACop(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
 	{
-		DynamicGui_AddRow(playerid, 1, 24); //paralizator
+		DynamicGui_AddRow(playerid, 24, 1); //paralizator
 		weaponexist = 1;
-		if(24 == starabron[playerid] && GetPVarInt(playerid, "tazer") == 1)
+		if(24 == starabron[playerid] && MaTazer[playerid] == 1)
 		{
 			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 		}
