@@ -1085,7 +1085,10 @@ public Spectator()
 		foreach(new i : Player)
 		{
 			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
-				SetPlayerCheckpoint(i, x, y, z, 4.0);
+			{
+				if(zawodnik[i] == 0)
+					SetPlayerCheckpoint(i, x, y, z, 4.0);
+			}
 		}
 	}
 
