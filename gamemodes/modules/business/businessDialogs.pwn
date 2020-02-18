@@ -24,6 +24,15 @@
 //------------------<[ Dialogi: ]>-------------------
 business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+    //-----------------------[Kupno biznesu]-----------------------
+    /*  
+        ===[Pierwszy dialog kupna]===
+            
+            Gracz wpisuje ID biznesu, który chcia³by zakupiæ.
+            Dialog sprawdza czy ID jest poprawne, zapisuje ID wpisane przez gracza i odnoœni siê dalej. 
+            Wyœwietla dialog (DIALOG_BIZ_BUY2). 
+
+    */
     if(dialogid == DIALOG_BIZ_BUY)
     {
         if(!response)
@@ -49,10 +58,23 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 sendErrorMessage(playerid, "Taki biznes nie istnieje!"); 
                 return 1;
             }
+            if(mBiz[valueID][b_ownerUID] != 0)
+            {
+                sendErrorMessage(playerid, "Ten biznes posiada ju¿ w³aœciciela!"); 
+                return 1;
+            }
             SetPVarInt(playerid, "BuyBiz_ID", valueID);
-            ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUY2, DIALOG_STYLE_LIST, "Wybierz Typ", "Us³ugowy\nPrzemys³owy", "Dalej", "Anuluj");
+            ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUY2, DIALOG_STYLE_LIST, "Wybierz Typ", "Us³ugowy\nPrzemys³owy [Wkrótce]", "Dalej", "Anuluj");
         }
     }
+    /*  
+        ===[Drugi dialog kupna]===
+            
+            Graczowi wyœwietlone zostaj¹ typy biznesu, w zale¿noœci od poprzedniego wyboru (patrz DIALOG_BIZ_BUY). 
+            Mo¿liwe do wyboru s¹ 2 opcje, które wywo³uj¹ 2 osobne dialogi. 
+            W przypadku wyboru us³ugowych - wyœwietla DIALOG_BIZ_BUY3. 
+
+    */
     else if(dialogid == DIALOG_BIZ_BUY2)
     {
         if(!response) 
@@ -65,28 +87,40 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             switch(listitem)
             {
-                case 0: 
+                case 0: //Us³ugi
                 {
                     new string[256]; 
                     format(string, sizeof(string), "Typ\tDodatkowa Cena\n\
-                    Sklep 24-7\t%d$\n\
-                    Sklep z ubraniami\t%d$\n\
-                    Kasyno\t%d$\n\
-                    Restauracja\t%d$",
-                    COST_SHOP24,
-                    COST_SHOPCLOTHES,
-                    COST_CASINO,
-                    COST_RESTAURANT);
+                    %s\t%d$\n\
+                    %s\t%d$\n\
+                    %s\t%d$\n\
+                    %s\t%d$\n\
+                    %s\t%d$\n\
+                    %s\t%d$",
+                    BNAME_SHOP, BCOST_SHOP,
+                    BNAME_CLOTHESSHOP, BCOST_CLOTHESSHOP,
+                    BNAME_RESTAURANT, BCOST_RESTAURANT,
+                    BNAME_WORKSHOP, BCOST_WORKSHOP,
+                    BNAME_HOTEL, BCOST_HOTEL,
+                    BNAME_TRANSPORT, BCOST_TRANSPORT);
                     ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUY3, DIALOG_STYLE_TABLIST_HEADERS, "Wybierz podtyp", 
                     string, "Dalej", "Anuluj");
                 }
-                case 1:
+                case 1://Przemys³
                 {
                     sendTipMessage(playerid, "Ten typ biznesów zostanie odblokowany ju¿ nied³ugo!"); 
                 }
             }
         }
     }
+    /*  
+        ===[Trzeci dialog kupna]===
+            
+            Gracz ówczeœnie wpisa³ ID biznesu, które jest przechowywane na PVar "BuyBiz_ID", a tak¿e wybra³ typ biznesu - us³ugowy.
+            Je¿eli gracz w tym momencie zrezygnuje z kupna - przypisane zostanie na PVAR INVALID_BUSINESSID. 
+            W przypadku response - graczowi wyœwietlony zostaje dialog potwierdzaj¹cy wybory dokonane w poprzednich dialogach. 
+            
+    */
     else if(dialogid == DIALOG_BIZ_BUY3)
     {
         if(!response)
@@ -99,55 +133,8 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             new string[124];
             new pBizID = GetPVarInt(playerid, "BuyBiz_ID"); 
-            switch(listitem)
-            {
-                case 0: 
-                {
 
-                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
-                    pBizID, 
-                    mBiz[pBizID][b_cost]+COST_SHOP24, 
-                    mBiz[pBizID][b_Location]); 
-                    SetPVarInt(playerid, "BuyBizChoice", 1); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Kupujê", "Rezygnujê"); 
-                }
-                case 1:
-                {
-                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
-                    pBizID, 
-                    mBiz[pBizID][b_cost]+COST_SHOPCLOTHES, 
-                    mBiz[pBizID][b_Location]); 
-                    SetPVarInt(playerid, "BuyBizChoice", 2); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Kupujê", "Rezygnujê");
-
-                }
-                case 2:
-                {
-                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
-                    pBizID, 
-                    mBiz[pBizID][b_cost]+COST_CASINO, 
-                    mBiz[pBizID][b_Location]); 
-                    SetPVarInt(playerid, "BuyBizChoice", 3); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Kupujê", "Rezygnujê");
-                }
-                case 3:
-                {
-                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
-                    pBizID, 
-                    mBiz[pBizID][b_cost]+COST_RESTAURANT, 
-                    mBiz[pBizID][b_Location]); 
-                    SetPVarInt(playerid, "BuyBizChoice", 4); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Kupujê", "Rezygnujê");
-                }
-            }
-        }
-    }
-    else if(dialogid == DIALOG_BIZ_BUYBOX)
-    {
-        if(response)
-        {
-            new pBizID = GetPVarInt(playerid, "BuyBiz_ID");
-            new bChoice = GetPVarInt(playerid, "BuyBizChoice");
+            /*TODO: Wsadziæ to gdzieœ w ten kod tutaj: 
             if(mBiz[pBizID][b_neededType] != 9999)
             {
                 if(mBiz[pBizID][b_neededType] != bChoice)
@@ -157,64 +144,100 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     return 1;
                 }
             } 
-            if(mBiz[pBizID][b_auction] == 2)
+            */
+            switch(listitem)
             {
-                if(bChoice == 1)//Zakup sklepu 24-7
+                case 0: //Shop 24
                 {
-                    if(mBiz[pBizID][b_ownerUID] == 0)
-                    {
-                        if(kaska[playerid] >= mBiz[pBizID][b_cost]+COST_SHOP24)
-                        {
-                            ZabierzKase(playerid, mBiz[pBizID][b_cost]+COST_SHOP24);
-                            GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_SHOP); 
-                            Log(businessLog, INFO, "%s kupil biznes %s jako sklep 24-7 za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
-                        }
-                        else
-                        {
-                            sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-                            return 1;
-                        }
-                    }
-                    else{ 
-                        sendErrorMessage(playerid, "Ten biznes ma ju¿ swojego w³aœciciela!"); 
-                        return 1;
-                    }
-                }
-                else if(bChoice == 2)//Zakup sklepu z ubraniami
-                {
-                    if(mBiz[pBizID][b_ownerUID] == 0)
-                    {
-                        if(kaska[playerid] < (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES))
-                        {
-                            sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-                            return 1;
-                        }
-                        ZabierzKase(playerid, (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
-                        GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_CLOTHESSHOP);
-                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep z ubraniami za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
 
-                    }
-                    else 
-                    {
-                        sendErrorMessage(playerid, "Ten biznes ma ju¿ swojego w³aœciciela!"); 
-                        return 1;
-                    }
+                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
+                    pBizID, 
+                    mBiz[pBizID][b_cost]+COST_SHOP24, 
+                    mBiz[pBizID][b_Location]); 
+                    SetPVarInt(playerid, "BuyBizChoice", BTYPE_SHOP); 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Kupujê", "Rezygnujê"); 
                 }
-                else if(bChoice == 3)//Zakup kasyna
+                case 1://Shop with Clothes xD 
                 {
-                    sendTipMessage(playerid, "Opcja chwilowo wy³¹czona!"); 
+                    format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
+                    pBizID, 
+                    mBiz[pBizID][b_cost]+COST_SHOPCLOTHES, 
+                    mBiz[pBizID][b_Location]); 
+                    SetPVarInt(playerid, "BuyBizChoice", BTYPE_CLOTHESSHOP); 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Kupujê", "Rezygnujê");
+                    
                 }
-                else if(bChoice == 4)//Zakup restauracji
+                case 2:
                 {
-                    sendErrorMessage(playerid, "Opcja chwilowo wy³¹czona!");
+                    sendTipMessage(playerid, "Ta opcja jest zablokowana - trwaj¹ prace nad jej odblokowaniem"); 
+                }
+                case 3:
+                {
+                    sendTipMessage(playerid, "Ta opcja jest zablokowana - trwaj¹ prace nad jej odblokowaniem"); 
+                }
+                case 4:
+                {
+                    sendTipMessage(playerid, "Ta opcja jest zablokowana - trwaj¹ prace nad jej odblokowaniem"); 
+                }
+                case 5:
+                {
+                    sendTipMessage(playerid, "Ta opcja jest zablokowana - trwaj¹ prace nad jej odblokowaniem"); 
                 }
             }
-            else if(mBiz[pBizID][b_auction] == 1)
+        }
+    }
+    /*  
+        ===[Czwarty dialog kupna]===
+            
+            Je¿eli gracz potwierdzi (response) - rozpoczyna aukcje, b¹dŸ kupuje biznes.
+            Je¿eli gracz zrezygnuje wartoœci zostan¹ ustawione na INVALID. 
+
+    */
+    else if(dialogid == DIALOG_BIZ_BUYBOX)
+    {
+        if(response)
+        {
+            //Przypisanie wartoœci dla zmiennych
+            new pBizID = GetPVarInt(playerid, "BuyBiz_ID");
+            new bChoice = GetPVarInt(playerid, "BuyBizChoice");
+            
+            if(mBiz[pBizID][b_auction] == 2)                            //======> Sprawdza czy biznes mia³ ju¿ kiedyœ aukcje
+            {
+                if(bChoice == BTYPE_SHOP)                              //======> Sprawdza czy wybór gracza to sklep
+                {
+                    if(kaska[playerid] >= mBiz[pBizID][b_cost]+BCOST_SHOP)
+                    {
+                        ZabierzKase(playerid, mBiz[pBizID][b_cost]+COST_SHOP);
+                        GiveBizToPlayer(playerid, pBizID, BTYPE_SHOP); 
+                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep 24-7 za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
+                    }
+                    else
+                    {
+                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+                        return 1;
+                    }     
+                }
+                else if(bChoice == BTYPE_CLOTHESSHOP)
+                {
+                    if(kaska[playerid] >= mBiz[pBizID][b_cost]+BCOST_SHOPCLOTHES)
+                    {
+                        ZabierzKase(playerid, mBiz[pBizID][b_cost]+BCOST_SHOPCLOTHES);
+                        GiveBizToPlayer(playerid, pBizID, BTYPE_SHOPCLOTHES); 
+                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep z ubraniami za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
+                    }
+                    else
+                    {
+                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+                        return 1;
+                    } 
+                }
+            }
+            else if(mBiz[pBizID][b_auction] == 1)//Na biznes trwa ju¿ licytacja
             {
                 sendErrorMessage(playerid, "Na ten biznes aktualnie trwa aukcja!");
                 sendTipMessage(playerid, "Je¿eli chcia³byœ go zalicytowaæ podejdŸ do niego i wpisz /licytuj"); 
             }
-            else 
+            else //Rozpoczecie licytacji
             {
                 if(mBiz[pBizID][b_ownerUID] != 0)//Sytacja nie powinna zaistnieæ
                 {
@@ -229,6 +252,10 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SetPVarInt(playerid, "BuyBiz_ID", INVALID_BUSINESSID); 
         }
     }
+    //-----------------------[Kupno biznesu - KONIEC]-----------------------
+    //:
+    //:
+    //-----------------------[Dialogi informacyjne]-----------------------
     else if(dialogid == BIZ_DIALOG_INFO)
     {
         if(response)
@@ -237,6 +264,10 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SetPVarInt(playerid, "MozeUzycKomendyBiz", 1);
         }
     }
+    //-----------------------[Dialogi informacyjne - KONIEC]--------------------
+    //:
+    //:
+    //-----------------------[Panel edycji biznesu]-----------------------
     else if(dialogid == DIALOG_BIZ_ADMINEDIT)
     {
         if(response)
@@ -286,7 +317,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 case 6://Okreœl biznes
                 {
                     ShowPlayerDialogEx(playerid, DIALOG_OKRESL_BIZNES, DIALOG_STYLE_LIST, SetDefaultCaption(), 
-                    "Sklep 24-7\nSklep z ubraniami\nKasyno\nRestauracja", "Dalej", "Odrzuæ"); 
+                    "Sklep 24-7\nSklep z ubraniami\nWszystkie", "Dalej", "Odrzuæ"); 
                 }
             }
         }
@@ -302,29 +333,35 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             new string[124];
             new bIDE = GetPVarInt(playerid, "dialog-bIDE-admin");
-            SetPVarInt(playerid, "bChoiceOKRESL", listitem+1); 
-            format(string, sizeof(string), "Czy chcesz aby biznes %s by³\nmo¿liwy do zakupienia tylko i wy³¹cznie jako\nbiznes o typie wybranym przez Ciebie?",
-            GetBusinessName(bIDE));
-            ShowPlayerDialogEx(playerid, DIALOG_OKRESL_POTWIERDZ, DIALOG_STYLE_MSGBOX, SetDefaultCaption(),
-            string, "Tak", "Nie"); 
+            new stringChoice[32]; 
+            switch(listitem)
+            {
+                case 0:
+                {
+                    mBiz[bIDE][b_neededType] = BTYPE_SHOP;
+                    format(stringChoice, sizeof(stringChoice), "%s", BNAME_SHOP);
+                }
+                case 1:
+                {
+                    mBiz[bIDE][b_neededType] = BTYPE_CLOTHESSHOP; 
+                    format(stringChoice, sizeof(stringChoice), "%s", BNAME_CLOTHESSHOP);
+                }
+                case 2:
+                {
+                    mBiz[bIDE][b_neededType] = BTYPE_DEFAULT; 
+                    format(stringChoice, sizeof(stringChoice), "Wszystkie biznesy"); 
+                }
+                format(string, sizeof(string), "Ustawi³eœ biznesowi %s [%d] wymagany TYP jako %s", GetBusinessName(bIDE), bIDE, stringChoice); 
+                sendTipMessageEx(playerid, COLOR_RED, string); 
+            }
             return 1;
         }
     }
-    else if(dialogid == DIALOG_OKRESL_POTWIERDZ)
-    {
-        if(response)
-        {
-            new bIDE = GetPVarInt(playerid, "dialog-bIDE-admin"); 
-            mBiz[bIDE][b_neededType] = GetPVarInt(playerid, "bChoiceOKRESL"); 
-            sendTipMessage(playerid, "Pomyœlnie ustawi³eœ wymóg dla biznesu.");
-            SetPVarInt(playerid, "dialog-bIDE-admin", INVALID_BUSINESSID);  
-        }
-        else 
-        {
-            SetPVarInt(playerid, "bChoiceOKRESL", 9999);
-            sendTipMessage(playerid, "Anulowano");
-        }
-    }
+    //--------------------[Panel Edycji Biznesu - KONIEC]-------------------
+    //:
+    //:
+    //:
+    //---------------------[Panel w³aœciciela biznesu]---------------------
     else if(dialogid == DIALOG_BIZ_OWNER)
     {
         if(!response)
@@ -716,6 +753,9 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SaveBiz(bIDE); 
         }
     }
+    //-----------------------[Panel w³aœciciela biznesu - KONIEC]-----------------------
+    //:
+    //:
     return 1;
 }
 
