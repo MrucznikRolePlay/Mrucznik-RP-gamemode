@@ -62,15 +62,19 @@ new businessIcon[MAX_BIZ];
 enum interBiz {
 	i_name[64],
 	i_size[32],
-	i_values[4],
-	Float:i_float[3]
+	i_int,
+	i_cost, 
+	i_type,
+	Float:i_posX,
+	Float:i_posY,
+	Float:i_posZ
 };
 //-----------------<[ Zmienne: ]>-------------------
-/*
+
 new const interiorsPos[][interBiz]={
-	{"Sklep spo篡wczy", "Ma造", {18, 5000000, BTYPE_SERVICES, BTYPE2_SHOP},{-25.884498, -185.868988, 1003.546875}},
-	{"Toys Shop", "Ma造", {6, 3000000, BTYPE_SERVICES, BTYPE2_SHOP},{-2240.468505,137.060440,1035.414062}}//
-};*/
+	{"Sklep spo篡wczy", "Ma造", 18, 5000000, BTYPE_SHOP, -25.884498, -185.868988, 1003.546875},
+	{"Toys Shop", "Ma造", 6, 3000000, BTYPE_SHOP,-2240.468505,137.060440,1035.414062}//
+};
 //------------------<[ Forwardy: ]>--------------------
 
 //end
