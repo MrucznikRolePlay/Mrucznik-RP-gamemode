@@ -120,10 +120,9 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	mBiz[bIDE][b_vw] = 0;
 	mBiz[bIDE][b_pLocal] = PLOCAL_DEFAULT; 
 	mBiz[bIDE][b_cost] = bCost;
-	mBiz[bIDE][b_neededType] = 9999;
+	mBiz[bIDE][b_neededType] = BTYPE_DEFAULT;
 	mysql_real_escape_string(pZone, mBiz[bIDE][b_Location]);
-	mBiz[bIDE][b_TYPE] = BTYPE_DEFAULT; 
-	mBiz[bIDE][b_TYPE2] = BTYPE2_DEFAULT; 
+	mBiz[bIDE][b_TYPE2] = BTYPE_DEFAULT; 
 	CreateBusiness3DText(bIDE);
 	CreateBusinessIcon(bIDE); 
 	loadedBiz++; 
@@ -157,7 +156,7 @@ DestroyBusiness3DText(bIDE)
 }
 CreateBusinessIcon(bIDE)
 {
-	businessIcon[bIDE] = CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.1, 0, 0, -1, STREAMER_PICKUP_SD);
+	businessIcon[bIDE] = CreateDynamicPickup(1274, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.1, 0, 0, -1, STREAMER_PICKUP_SD);
 	return 0;
 }
 CreateBusiness3DText(bIDE)
@@ -183,24 +182,24 @@ CreateBusinessIcons()
 	}
 	return 0; 
 }
-GiveBizToPlayer(playerid, bIDE, bType, bType2)
+GiveBizToPlayer(playerid, bIDE, bType2)
 {
 	new string[124]; 
 	strdel(mBiz[bIDE][b_Name_Owner], 0, strlen(mBiz[bIDE][b_Name_Owner]));
     strcat(mBiz[bIDE][b_Name_Owner], GetNick(playerid), MAX_PLAYER_NAME);
 	mBiz[bIDE][b_ownerUID] = PlayerInfo[playerid][pUID]; 
 	mBiz[bIDE][b_moneyPocket] = 0; 
-	mBiz[bIDE][b_TYPE] = bType; 
 	mBiz[bIDE][b_TYPE2] = bType2; 
+	mBiz[bIDE][b_elementsPocket] = 2000; 
 	SendClientMessage(playerid, COLOR_GREEN, "======<[Zakupi³eœ nowy biznes]>======");
 	format(string, sizeof(string), "ID: [%d] NAME: [%s] LOCATION: [%s]", bIDE, GetBusinessLogName(bIDE), mBiz[bIDE][b_Location]); 
 	SendClientMessage(playerid, COLOR_RED, string); 
-	sendTipMessage(playerid, "Mo¿esz zarz¹dzaæ swoim biznesem za pomoc¹ /bizlider"); 
+	sendTipMessage(playerid, "Mo¿esz zarz¹dzaæ swoim biznesem za pomoc¹ /mbizpanel"); 
 	Log(businessLog, INFO, "Gracz %s kupil biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	SaveBiz(bIDE);
 	return 1;
 }
-PlayerNearBusinessType(playerid, BTYPE, BTYPE2)
+PlayerNearBusinessType(playerid, BTYPE2)
 {
 	new businessChecked; 
 	for(new i; i<=MAX_BIZ; i++)
@@ -211,23 +210,20 @@ PlayerNearBusinessType(playerid, BTYPE, BTYPE2)
 		}
 		if(BizExist(i))
 		{
-			if(mBiz[i][b_TYPE] == BTYPE)
+			if(mBiz[i][b_TYPE2] == BTYPE2)
 			{
-				if(mBiz[i][b_TYPE2] == BTYPE2)
+				if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ])
+				&& GetPlayerVirtualWorld(playerid) == 0)//SPRAWDZANIE ZEWN¥TRZ
 				{
-					if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ])
-					&& GetPlayerVirtualWorld(playerid) == 0)//SPRAWDZANIE ZEWN¥TRZ
-					{
-						return true;
-					}
-					else if(IsPlayerInRangeOfPoint(playerid, 10.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]) 
-					&& GetPlayerVirtualWorld(playerid) == mBiz[i][b_vw]
-					&& GetPlayerInterior(playerid) == mBiz[i][b_int])// SPRAWDZANIE WEWN¥TRZ
-					{
-						return true;
-					}
+					return true;
 				}
-			}
+				else if(IsPlayerInRangeOfPoint(playerid, 10.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]) 
+				&& GetPlayerVirtualWorld(playerid) == mBiz[i][b_vw]
+				&& GetPlayerInterior(playerid) == mBiz[i][b_int])// SPRAWDZANIE WEWN¥TRZ
+				{
+					return true;
+				}
+			}	
 			businessChecked++; 
 		}
 	}
@@ -310,7 +306,7 @@ DajKaseBizTemp(bIDE, playerid, value)
 	}
 	return 1; 
 }
-PlayerRunWithMoney(playerid)
+PlayerRunWithMoney(playerid)//TODO: Do przepisania zgodnie z uwaga 0Verte
 {
 	new bIDE = PlayerInfo[playerid][pBusinessOwner];
 	new string[256];
@@ -527,6 +523,7 @@ SetPlayerBusiness(playerid)
 }
 CheckPlayerBusiness(playerid)
 {
+	new string[124];
 	//Korekcja nieprawid³owego biznesu
 	if(PlayerInfo[playerid][pBusinessOwner] == 0
 	|| PlayerInfo[playerid][pBusinessMember] == 0)
@@ -534,36 +531,29 @@ CheckPlayerBusiness(playerid)
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BUSINESSID;
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BUSINESSID; 
 	}
+	else if(PlayerInfo[playerid][pBusinessOwner] > 0)
+	{
+		if(BizExist(PlayerInfo[playerid][pBusinessOwner]))
+		{
+			if(mBiz[PlayerInfo[playerid][pBusinessOwner]][b_ownerUID] != PlayerInfo[playerid][pUID])
+			{
+				format(string, sizeof(string), "ID binesu ze stats: [%d], bizOwner: [%d] -> Kliknij F8 (zrób screenshot'a)", PlayerInfo[playerid][pBusinessOwner], mBiz[PlayerInfo[playerid][pBusinessOwner]][b_ownerUID]); 
+				sendErrorMessage(playerid, "Twój biznes nale¿y do kogoœ innego // nie ma w³aœciciela!"); 
+				sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d mo¿esz napisaæ stratê na naszym forum!"); 
+				sendTipMessage(playerid, COLOR_RED, string); 
+				PlayerInfo[playerid][pBusinessOwner] = INVALID_BUSINESSID;
+			}
+		}
+		else 
+		{
+			format(string, sizeof(string), "ID biznesu ze stats: [%d] -> kliknij F8 (zrób screenshot'a)", PlayerInfo[playerid][pBusinessOwner]); 
+			sendErrorMessage(playerid, "Nie uda³o siê odnaleŸæ twojego biznesu w bazie danych.");
+			sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d mo¿esz napisaæ stratê na naszym forum!"); 
+			sendTipMessageEx(playerid, COLOR_RED, string); 
+			PlayerInfo[playerid][pBusinessOwner] = INVALID_BUSINESSID;
+		}
+	}
 	return 0; 
-}
-GetTypeNameBiz(bIDE)
-{
-	new typeName[64];
-	format(typeName, 64, "Brak"); 
-	if(mBiz[bIDE][b_TYPE] == BTYPE_SERVICES)
-	{
-		if(mBiz[bIDE][b_TYPE2] == BTYPE2_SHOP)
-		{
-			format(typeName, sizeof(typeName), "Sklep 24-7"); 
-		}
-		else if(mBiz[bIDE][b_TYPE2] == BTYPE2_CLOTHESSHOP)
-		{
-			format(typeName, sizeof(typeName), "Sklep z ubraniami");
-		}
-		else if(mBiz[bIDE][b_TYPE2] == BTYPE2_CASINO)
-		{
-			format(typeName, sizeof(typeName), "Kasyno");
-		}
-		else if(mBiz[bIDE][b_TYPE2] == BTYPE2_RESTAURANT)
-		{
-			format(typeName, sizeof(typeName), "Restauracja");
-		}
-	}
-	else if(mBiz[bIDE][b_TYPE] == BTYPE_INDUSTRY)
-	{
-		format(typeName, sizeof(typeName), "Przemys³owe coœ"); 
-	}
-	return typeName;
 }
 StartLicytacjaBiz(bIDE, playerid, bChoice)
 {
