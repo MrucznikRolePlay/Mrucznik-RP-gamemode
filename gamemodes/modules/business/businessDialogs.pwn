@@ -797,6 +797,27 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     //-----------------------[Panel w³aœciciela biznesu - KONIEC]-----------------------
     //:
     //:
+    else if(dialogid == DIALOG_AKCEPT_ZLECENIE)
+    {
+        if(response)
+        {
+            new bIDE = GetPVarInt(playerid, "pTruckerZlecenieID");
+            new string[124];
+            format(string, sizeof(string), "Pomyœlnie przyjêto zlecenie - udaj siê do %s", mBiz[bIDE][b_Location]); 
+            sendTipMessageEx(playerid, COLOR_GREEN, string); 
+            pZlecenieCost[playerid] = GetCostFromDistance(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]); 
+            pZlecenieDistance[playerid] = GetPlayerDistanceFromPoint(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]);
+            pZlecenieID[playerid] = bIDE;
+            if(PlayerHasNavigation(playerid))
+            {
+                StartNavigationEx(playerid, GetBusinessName(bIDE), mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]);
+            }
+            else 
+            {
+                sendTipMessage(playerid, "Je¿eli zakupisz nawigacjê w sklepie 24-7 - punkt docelowy bêdzie oznaczony na mapie!"); 
+            }
+        }
+    }
     return 1;
 }
 

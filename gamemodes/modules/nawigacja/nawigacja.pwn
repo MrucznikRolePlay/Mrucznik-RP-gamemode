@@ -101,6 +101,14 @@ StopPlayerNavigation(playerid, bool:dojechal=false)
 	sendTipMessage(playerid, "Pomyœlnie wy³¹czono!"); 
 	return 1;
 }
+PlayerHasNavigation(playerid)
+{
+	if(PlayerInfo[playerid][pNawigacja] == 1)
+	{
+		return true;
+	}
+	return false;
+}
 CreatePlayerNaviTextDraws(playerid)
 {
 	roadsLeft_0[playerid] = CreatePlayerTextDraw(playerid, 233.000000, 388.000000, "_");

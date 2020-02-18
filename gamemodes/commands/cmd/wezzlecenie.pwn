@@ -39,7 +39,7 @@ YCMD:wezzlecenie(playerid, params[], help)
 
         if(GetPVarInt(playerid, "trans") == 0)
         {
-            ShowPlayerDialogEx(playerid, D_TRANSPORT, DIALOG_STYLE_LIST, "Rodzaj zlecenia", "Szybkie zlecenie\nCentrum transportu", "Wybierz", "Wyjdü");
+            ShowPlayerDialogEx(playerid, D_TRANSPORT, DIALOG_STYLE_LIST, "Rodzaj zlecenia", "Szybkie zlecenie\nCentrum transportu\nTowar dla biznesÛw", "Wybierz", "Wyjdü");
         }
         else return sendErrorMessage(playerid, "Masz juø zlecenie.");
         return 1;

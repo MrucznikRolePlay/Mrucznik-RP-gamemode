@@ -206,6 +206,7 @@ YCMD:dolacz(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_WHITE, "   W niej równie¿ transportujesz towar w wyznaczone miejsca.");
                     SendClientMessage(playerid, COLOR_WHITE, "   Praca nie przynosi kokosów zw³aszcza siedz¹c na wózku. Mo¿na zarobiæ 34.1k na godzinê.");
                     SendClientMessage(playerid, COLOR_WHITE, "   Atutem jest zarabianie kasy do rêki, za ka¿de wykonane zlecenie.");
+					SendClientMessage(playerid, COLOR_WHITE, "   Dodatkowym plusem jest mo¿liwoœæ dorobienia sobie wo¿¹c materia³y do biznesów");
 				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
 				    GettingJob[playerid] = 16;
 				}
