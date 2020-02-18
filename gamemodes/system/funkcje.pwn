@@ -3541,7 +3541,7 @@ IsAtClothShop(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		if(PlayerNearBusinessType(playerid, BTYPE_SERVICES, BTYPE2_CLOTHESSHOP))
+		if(PlayerNearBusinessType(playerid, BTYPE_CLOTHESSHOP))
 		{
 			return 1; 
 		}

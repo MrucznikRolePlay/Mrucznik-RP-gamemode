@@ -2721,7 +2721,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ShowShopDialog(playerid);
 	            new string[256];
 				new bIDE = GetNearBusinessID(playerid); 
-				if(mBiz[bIDE][b_elementsPocket] < ELEMENT_COST_INSHOP)
+				if(mBiz[bIDE][b_elementsPocket] < BECOST_SHOP)
 				{
 					sendErrorMessage(playerid, "Brak towaru"); 
 					format(string, sizeof(string), "[%s] Aktualnie oczekujemy na dostawê materia³ów od dostawcy!", GetBusinessName(bIDE)); 
