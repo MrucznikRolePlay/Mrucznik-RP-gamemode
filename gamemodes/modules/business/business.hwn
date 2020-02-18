@@ -62,6 +62,7 @@ new businessIcon[MAX_BIZ];
 enum interBiz {
 	i_name[64],
 	i_size[32],
+	i_author[32],
 	i_int,
 	i_cost, 
 	i_type,
@@ -72,8 +73,10 @@ enum interBiz {
 //-----------------<[ Zmienne: ]>-------------------
 
 new const interiorsPos[][interBiz]={
-	{"Sklep spo¿ywczy", "Ma³y", 18, 5000000, BTYPE_SHOP, -25.884498, -185.868988, 1003.546875},
-	{"Toys Shop", "Ma³y", 6, 3000000, BTYPE_SHOP,-2240.468505,137.060440,1035.414062}//
+	{"Sklep spo¿ywczy", "Ma³y", "Rockstar", 17, 10000000, BTYPE_SHOP, -25.884498, -185.868988, 1003.546875},
+	{"Toys Shop", "Ma³y", "Rockstar", 6, 4500000, BTYPE_SHOP,-2240.468505,137.060440,1035.414062},//
+	{"Knajpa", "Œrednia", "Rockstar", 17, 6000000, BTYPE_DEFAULT, 377.1901,-192.6504,1000.6401},
+	{"Studio Tatto", "Ma³y", "Rockstar", 16, 4000000, BTYPE_DEFAULT, -204.2183,-27.2317,1002.2734}
 };
 //------------------<[ Forwardy: ]>--------------------
 

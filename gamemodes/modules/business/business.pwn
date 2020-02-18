@@ -197,6 +197,7 @@ GiveBizToPlayer(playerid, bIDE, bType2)
 	sendTipMessage(playerid, "Mo¿esz zarz¹dzaæ swoim biznesem za pomoc¹ /mbizpanel"); 
 	Log(businessLog, INFO, "Gracz %s kupil biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	SaveBiz(bIDE);
+	PlayerInfo[playerid][pBusinessOwner] = bIDE; 
 	return 1;
 }
 PlayerNearBusinessType(playerid, btype)
@@ -279,6 +280,11 @@ GetPocketMaxSpace(bIDE)
 		value = MAX_CASH_IN_MONEYPOCKET;
 	}
 	return value; 
+}
+GetElementsFromBusiness(bIDE, value)
+{
+	mBiz[bIDE][b_elementsPocket] = mBiz[bIDE][b_elementsPocket]-value;
+	return 1;
 }
 DajKaseBizTemp(bIDE, playerid, value)
 {
@@ -390,7 +396,8 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 		Wp³aæ\t \n\
 		Wyp³aæ\t \n\
 		Stan sejfu T:\t{33AA33}$%d\n\
-		Wyp³aæ\t ", GetBusinessName(bIDE), mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket]); 
+		Wyp³aæ\t \n\
+		Stan sejfu materia³ów:\t{33AA33}%d", GetBusinessName(bIDE), mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket], mBiz[bIDE][b_elementsPocket]); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER3, DIALOG_STYLE_TABLIST, SetDefaultCaption(), 
 		string, "Akceptuj", "Wstecz"); 
 	}
@@ -434,13 +441,21 @@ ShowInteriorList(playerid)
 	new string[456];
 	format(string, sizeof(string), "Nazwa\tWielkoœæ\tCena\n\
 	%s\t%s\t$%d\n\
+	%s\t%s\t$%d\n\
+	%s\t%s\t$%d\n\
 	%s\t%s\t$%d",
 	interiorsPos[0][i_name],
 	interiorsPos[0][i_size],
 	interiorsPos[0][i_cost],
 	interiorsPos[1][i_name],
 	interiorsPos[1][i_size],
-	interiorsPos[1][i_cost]);
+	interiorsPos[1][i_cost],
+	interiorsPos[2][i_name],
+	interiorsPos[2][i_size],
+	interiorsPos[2][i_cost],
+	interiorsPos[3][i_name],
+	interiorsPos[3][i_size],
+	interiorsPos[3][i_cost]);
 	ShowPlayerDialogEx(playerid, DIALOG_BIZ_INTERIORLIST, DIALOG_STYLE_TABLIST_HEADERS, SetDefaultCaption(),
 	string, "Dalej", "WyjdŸ"); 
 	return 1;
@@ -456,44 +471,46 @@ IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
 IsPlayerNearBusinessDoor(playerid)//Powoduje wejœcie do biznesu
 {
 	new string[124];
-	for(new i2; i2<=MAX_BIZ; i2++)
+	new checkedBiz; 
+	for(new i; i<=MAX_BIZ; i++)
 	{
-		if(i2 == MAX_BIZ)
+		if(checkedBiz == loadedBiz)
 		{
-			break;
+			sendTipMessageEx(playerid, COLOR_WHITE, "Nie uda³o siê zlokalizowaæ ¿adnego biznesu wokó³ Ciebie. Upewnij siê, ¿e stoisz w ikonce biznesu.");
+			break; 
 		}
-		if(BizExist(i2))
+		if(BizExist(i))
 		{
-			if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i2][b_enX], mBiz[i2][b_enY], mBiz[i2][b_enZ])
+			if(IsPlayerInRangeOfPoint(playerid, 3.5, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ])
 			&& GetPlayerVirtualWorld(playerid) == 0)
 			{
-				if(mBiz[i2][b_vw] == 0)
-				{
-					sendErrorMessage(playerid, "Ten biznes nie posiada wnêtrza!"); 
-					sendTipMessage(playerid, "Aby skorzystaæ z udogodnieñ biznesu stañ w jego ikonce"); 
+				if(mBiz[i][b_vw] == 0)
+				{	
+					sendErrorMessage(playerid, "Ten biznes nie posiada ¿adnego wnêtrza!"); 
+					sendTipMessage(playerid, "Je¿eli chcesz skorzystaæ z jego udogodnieñ - stañ w jego ikonce.");
+					return 1;
 				}
-				else
-				{
-					SetPlayerPos(playerid, mBiz[i2][b_exX], mBiz[i2][b_exY], mBiz[i2][b_exZ]);
-					SetPlayerVirtualWorld(playerid, mBiz[i2][b_vw]);
-					SetPlayerInterior(playerid, mBiz[i2][b_int]); 
-					SetPLocal(playerid, mBiz[i2][b_pLocal]);
-					format(string, sizeof(string), "%s", mBiz[i2][b_motd]);
-					sendTipMessageEx(playerid, COLOR_GREEN, string); 
-				}
-				return 1;
+				SetPlayerPos(playerid, mBiz[i][b_exX], mBiz[i][b_exY], mBiz[i][b_exZ]);
+				SetPlayerInterior(playerid, mBiz[i][b_int]);
+				SetPlayerVirtualWorld(playerid, mBiz[i][b_vw]);
+				sendTipMessageEx(playerid, COLOR_GREEN, mBiz[i][b_motd]); 
 			}
-			else if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i2][b_exX], mBiz[i2][b_exY], mBiz[i2][b_exZ])
+			else if(IsPlayerInRangeOfPoint(playerid, 3.5, mBiz[i][b_exX], mBiz[i][b_exY], mBiz[i][b_exZ])
 			&& GetPlayerVirtualWorld(playerid) != 0)
 			{
-				SetPlayerPos(playerid, mBiz[i2][b_enX], mBiz[i2][b_enY], mBiz[i2][b_enZ]);
-				SetPlayerVirtualWorld(playerid, 0);
-				SetPlayerInterior(playerid, 0); 
-				SetPLocal(playerid, PLOCAL_DEFAULT);
-				format(string, sizeof(string), "Zapraszamy ponownie do %s!", GetBusinessName(i2));
+				new bIDE = GetPlayerVirtualWorld(playerid)-1000; 
+				if(!BizExist(bIDE))//Nie powinno wyst¹piæ
+				{
+					sendErrorMessage(playerid, "Wyst¹pi³ b³¹d (niezgodne ID wyjœcia z interioru) - zg³oœ go na forum!");
+					return 1;
+				}
+				SetPlayerPos(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]);
+				SetPlayerInterior(playerid, mBiz[bIDE][b_int]);
+				SetPlayerVirtualWorld(playerid, mBiz[bIDE][b_vw]);
+				format(string, sizeof(string), "Dziêkujemy za przybycie i zapraszamy ponownie - %s", GetBusinessName(bIDE)); 
 				sendTipMessageEx(playerid, COLOR_GREEN, string); 
-				return 1;	
 			}
+			checkedBiz++; 
 		}
 	}
 	return 0; 
