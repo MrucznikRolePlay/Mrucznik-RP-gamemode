@@ -33,6 +33,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             Wyœwietla dialog (DIALOG_BIZ_BUY2). 
 
     */
+    
     if(dialogid == DIALOG_BIZ_BUY)
     {
         if(!response)
@@ -85,11 +86,11 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         if(response)
         {
+            new string[256]; 
             switch(listitem)
             {
                 case 0: //Us³ugi
                 {
-                    new string[256]; 
                     format(string, sizeof(string), "Typ\tDodatkowa Cena\n\
                     %s\t%d$\n\
                     %s\t%d$\n\
@@ -152,7 +153,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
                     format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
                     pBizID, 
-                    mBiz[pBizID][b_cost]+COST_SHOP24, 
+                    mBiz[pBizID][b_cost]+BCOST_SHOP, 
                     mBiz[pBizID][b_Location]); 
                     SetPVarInt(playerid, "BuyBizChoice", BTYPE_SHOP); 
                     ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Kupujê", "Rezygnujê"); 
@@ -161,7 +162,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     format(string, sizeof(string), "PotwierdŸ zakup biznesu %s\nKoszt biznesu to: %d$\nLokalizacja: %s",
                     pBizID, 
-                    mBiz[pBizID][b_cost]+COST_SHOPCLOTHES, 
+                    mBiz[pBizID][b_cost]+BCOST_CLOTHESSHOP, 
                     mBiz[pBizID][b_Location]); 
                     SetPVarInt(playerid, "BuyBizChoice", BTYPE_CLOTHESSHOP); 
                     ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Kupujê", "Rezygnujê");
@@ -207,9 +208,9 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(kaska[playerid] >= mBiz[pBizID][b_cost]+BCOST_SHOP)
                     {
-                        ZabierzKase(playerid, mBiz[pBizID][b_cost]+COST_SHOP);
+                        ZabierzKase(playerid, mBiz[pBizID][b_cost]+BCOST_SHOP);
                         GiveBizToPlayer(playerid, pBizID, BTYPE_SHOP); 
-                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep 24-7 za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
+                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep 24-7 za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+BCOST_SHOP));
                     }
                     else
                     {
@@ -219,11 +220,11 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 else if(bChoice == BTYPE_CLOTHESSHOP)
                 {
-                    if(kaska[playerid] >= mBiz[pBizID][b_cost]+BCOST_SHOPCLOTHES)
+                    if(kaska[playerid] >= mBiz[pBizID][b_cost]+BCOST_CLOTHESSHOP)
                     {
-                        ZabierzKase(playerid, mBiz[pBizID][b_cost]+BCOST_SHOPCLOTHES);
-                        GiveBizToPlayer(playerid, pBizID, BTYPE_SHOPCLOTHES); 
-                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep z ubraniami za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
+                        ZabierzKase(playerid, mBiz[pBizID][b_cost]+BCOST_CLOTHESSHOP);
+                        GiveBizToPlayer(playerid, pBizID, BTYPE_CLOTHESSHOP); 
+                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep z ubraniami za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+BCOST_SHOP));
                     }
                     else
                     {
@@ -351,9 +352,9 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     mBiz[bIDE][b_neededType] = BTYPE_DEFAULT; 
                     format(stringChoice, sizeof(stringChoice), "Wszystkie biznesy"); 
                 }
-                format(string, sizeof(string), "Ustawi³eœ biznesowi %s [%d] wymagany TYP jako %s", GetBusinessName(bIDE), bIDE, stringChoice); 
-                sendTipMessageEx(playerid, COLOR_RED, string); 
             }
+            format(string, sizeof(string), "Ustawi³eœ biznesowi %s [%d] wymagany TYP jako %s", GetBusinessName(bIDE), bIDE, stringChoice); 
+            sendTipMessageEx(playerid, COLOR_RED, string); 
             return 1;
         }
     }
