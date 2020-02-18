@@ -2475,10 +2475,6 @@ SetPlayerSpawn(playerid)
 	SetPlayerSpawnPos(playerid);
 	SetPlayerSpawnSkin(playerid);
 	SetPlayerSpawnWeapon(playerid); 
-	if(!gBizSet[playerid])
-	{
-		SetPlayerBusiness(playerid); 
-	}
 	return 1;
 }
 
@@ -6095,6 +6091,7 @@ OnPlayerLogin(playerid, password[])
 			format(string, sizeof(string), "Liderów frakcji w bazie danych: %d.", AllLeaders);
 			sendTipMessage(playerid, string); 
 		}
+		SetPlayerBusiness(playerid); 
 	}
 	else
 	{//z³e has³o
