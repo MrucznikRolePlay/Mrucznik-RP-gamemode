@@ -621,4 +621,10 @@ StartLicytacjaBiz(bIDE, playerid, bChoice)
 	mBiz[bIDE][b_auction] = 1; //Trwa licytacja na ten biznes
 	return 1; 
 }
+GetCostFromDistance(playerid, pX, pY, pZ)//TODO: Przenieœæ do osobnego modu³u
+{
+	new value = ((floatround(GetPlayerDistanceFromPoint(playerid, pX, pY, pZ))/1000)*500);
+	value = floatround(value); 
+	return value;
+}
 //end

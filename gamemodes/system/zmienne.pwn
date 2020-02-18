@@ -1057,6 +1057,10 @@ new gRO[MAX_PLAYERS];
 new PlayerMoneyFromBiz[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS]; 
 new Text3D:HiddenPlayerName[MAX_PLAYERS];
+new pZlecenieCost[MAX_PLAYERS];
+new Float:pZlecenieDistance[MAX_PLAYERS];
+new pZlecenieID[MAX_PLAYERS]; 
+
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1083,6 +1087,9 @@ ClearVariableDisconnect(playerid)
 	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
 	PlayerGames[playerid] = 0;//Zdrapki
 	DestroyPlayerNaviTextDraws(playerid); 
+	pZlecenieCost[playerid]=0;
+	pZlecenieDistance[playerid]=0.0;
+	pZlecenieID[playerid]=9999; 
 	return 1;
 }
 ZerujZmienne(playerid)

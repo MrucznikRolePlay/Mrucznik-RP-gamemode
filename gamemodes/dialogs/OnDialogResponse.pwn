@@ -14646,7 +14646,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new lStr[256];
 
         new skill, level = PlayerInfo[playerid][pTruckSkill];
-
+		//biznesy
+		new checkedBiz;
+		new firstBusiness=10000; 
+		new safeBID; 
         if(level <= 50) skill = 1;
         else if(level >= 51 && level <= 100) skill = 2;
         else if(level >= 101 && level <= 200) skill = 3;
@@ -14691,6 +14694,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 ShowPlayerDialogEx(playerid, D_TRANSPORT_LIST, DIALOG_STYLE_LIST, "Planowane zlecenie", lStr, "Wybierz", "Wróæ");
             }
+			case 2:
+			{
+				for(new i; i<=MAX_BIZ; i++)
+				{
+					if(BizExist(i))
+					{
+						if(mBiz[i][b_elementsPocket] < firstBusiness)
+						{
+							firstBusiness = mBiz[i][b_elementsPocket]; 
+							safeBID = i; 
+						}
+						checkedBiz++; 
+					}
+					if(checkedBiz == loadedBiz)
+					{
+						format(lStr, sizeof(lStr), "Znaleziono biznes: %s\nOdleg³y o: %0.2f\nPrzewidywane wynagrodzenie: $%d",
+						GetBusinessName(safeBID),
+						GetPlayerDistanceFromPoint(playerid, mBiz[safeBID][b_enX], mBiz[safeBID][b_enY], mBiz[safeBID][b_enZ]), 
+						1);//TODO: Dodaæ wynagordzenia 
+						ShowPlayerDialogEx(playerid, DIALOG_AKCEPT_ZLECENIE, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), lStr, "Akceptuj", "Odmów"); 
+						SetPVarInt(playerid, "pTruckerZlecenieID", safeBID); 
+						break; 
+					}
+				}
+			}
         }
     }
     else if(dialogid == D_TRANSPORT_LIST)
