@@ -460,6 +460,10 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {//Wyp³acanie 
                     PlayerRunWithMoney(playerid); 
                 }
+                case 6:
+                {
+                    ShowBusinessOwnerDialog(playerid, DIALOG_SEJF); 
+                }
             }
         }
     }
@@ -771,6 +775,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     if(mBiz[bIDE][b_TYPE2] != interiorsPos[listitem][i_type])
                     {
                         sendErrorMessage(playerid, "Nie posiadasz odpowiedniego typu biznesu na ten interior!"); 
+                        return 1;
                     }
                 }
                 ZabierzKase(playerid, interiorsPos[listitem][i_cost]); 

@@ -2723,9 +2723,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new bIDE = GetNearBusinessID(playerid); 
 				if(mBiz[bIDE][b_elementsPocket] < BECOST_SHOP)
 				{
-					sendErrorMessage(playerid, "Brak towaru"); 
-					format(string, sizeof(string), "[%s] Aktualnie oczekujemy na dostawê materia³ów od dostawcy!", GetBusinessName(bIDE)); 
-					sendTipMessage(playerid, string);
+					SendBizLogoMessage(playerid, bIDE);
+					sendErrorMessage(playerid, "Obecnie oczekujemy na dostawê towaru!"); 
 					return 1;
 				}
 	            switch(listitem)
@@ -2756,6 +2755,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								sendTipMessageEx(playerid, COLOR_WHITE, string);
 								DajKaseBizTemp(bIDE, playerid, (S_CENA_TELEFON/4));  
 						    }
+							GetElementsFromBusiness(bIDE, BECOST_SHOP); 
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							new randphone = 10000 + random(89999);//minimum 1000  max 9999
 							PlayerInfo[playerid][pPnumber] = randphone;
@@ -2838,6 +2838,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								}
 								PlayerGames[playerid]++; 
 							}
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -2866,6 +2867,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                PlayerInfo[playerid][pPhoneBook] = 1;
 							SendBizLogoMessage(playerid, bIDE);
 							sendTipMessage(playerid, "Zakupi³eœ ksi¹¿kê telefoniczn¹! Wpisz /numer <ID/Nick>"); 
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -2894,6 +2896,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							gDice[playerid] = 1;
 							SendBizLogoMessage(playerid, bIDE);
 							sendTipMessage(playerid, "Zakupi³eœ kostkê, mo¿esz ni¹ rzucaæ za pomoc¹ /kostka2"); 
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -2910,6 +2913,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							DajKaseBizTemp(bIDE, playerid, (S_CENA_APARAT/4));
 							SendBizLogoMessage(playerid, bIDE);
 							sendTipMessage(playerid, "Zakupi³eœ aparat z dyskiem na 100 zdjêæ! Mo¿esz robiæ zdjêcia.");
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -2974,6 +2978,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendBizLogoMessage(playerid, bIDE); 
 							sendTipMessage(playerid, "Zakupi³eœ kondoma! Mo¿esz teraz uprawiaæ bezpieczny sex (chyba)");
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -3002,6 +3007,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendBizLogoMessage(playerid, bIDE); 
 							sendTipMessage(playerid, "Kupi³eœ odtwarzacz - aby skorzystaæ z odtwarzacza MP3 wpisz /mp3 b¹dŸ /muzyka"); 
 							PlayerInfo[playerid][pCDPlayer] = 1;
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -3036,6 +3042,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessage(playerid, "Piwo mruczny Gul zakupione! Aby wypiæ wpisz /piwo"); 
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerInfo[playerid][pPiwo] += 1;
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -3070,6 +3077,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendBizLogoMessage(playerid, bIDE); 
 							sendTipMessage(playerid, "Wino Komandos zosta³o kupione, aby u¿yæ wpisz /wino!"); 
 							PlayerInfo[playerid][pWino] += 1;
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -3103,6 +3111,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendBizLogoMessage(playerid, bIDE); 
 							sendTipMessage(playerid, "Zakupi³eœ sprunka. Aby wypiæ wpisz /sprunk"); 
 							PlayerInfo[playerid][pSprunk] += 1;
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -3132,6 +3141,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessage(playerid, "Zakupi³eœ CB-RADIO. Aby u¿yæ wpisz w pojeŸdzie /cb [text]"); 
 							sendTipMessage(playerid, "Aby wyciszyæ CB-RADIO wpisz /togcb, aby wyrzuciæ /wywal"); 
 							PlayerInfo[playerid][pCB] = 1;
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 					}
@@ -3166,6 +3176,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendBizLogoMessage(playerid, bIDE); 
 							sendTipMessage(playerid, "Zakupi³eœ paczkê 5-u cygar. Aby zapaliæ wpisz /cygaro"); 
 							PlayerInfo[playerid][pCygaro] = 5;
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 						else
@@ -3187,6 +3198,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							SendBizLogoMessage(playerid, bIDE);
 							sendTipMessage(playerid, "Zakupi³eœ Kij Baseballowy, mo¿esz teraz t³uc innych!"); 
+							GetElementsFromBusiness(bIDE, BECOST_SHOP);
 							return 1;
 						}
 						else
@@ -3208,6 +3220,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 						SendBizLogoMessage(playerid, bIDE);
 						PlayerInfo[playerid][pNawigacja] = 1; 
+						GetElementsFromBusiness(bIDE, BECOST_SHOP);
 						sendTipMessage(playerid, "Zakupi³eœ nawigacjê do samochodu! Aby u¿yæ wpisz /mnawigacja (skrót: /mnaw)"); 
 					}
 				}
@@ -17112,6 +17125,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 			new bIDE = GetNearBusinessID(playerid);
+			if(mBiz[bIDE][b_elementsPocket] < BECOST_CLOTHESSHOP)
+			{
+				SendBizLogoMessage(playerid, bIDE);
+				sendErrorMessage(playerid, "Przepraszamy obecnie brakuje towaru! - oczekujemy dostawy.");
+				return 1;
+			}
+			GetElementsFromBusiness(bIDE, BECOST_CLOTHESSHOP);
 			SetPlayerSkin(playerid, ShopSkins[listitem][SKIN_ID]);
 			ZabierzKase(playerid, ShopSkins[listitem][SKIN_PRICE]);
 			DajKaseBizTemp(bIDE, playerid, (ShopSkins[listitem][SKIN_PRICE]/4));

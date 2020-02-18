@@ -3545,7 +3545,7 @@ IsAtClothShop(playerid)
 		{
 			return 1; 
 		}
-        if(PlayerToPoint(25.0,playerid,207.5627,-103.7291,1005.2578) || PlayerToPoint(25.0,playerid,203.9068,-41.0728,1001.8047))
+      /*  if(PlayerToPoint(25.0,playerid,207.5627,-103.7291,1005.2578) || PlayerToPoint(25.0,playerid,203.9068,-41.0728,1001.8047))
 		{//Binco & Suburban
 		    return 1;
 		}
@@ -3557,7 +3557,7 @@ IsAtClothShop(playerid)
 		else if(PlayerToPoint(50.0,playerid,206.4627,-137.7076,1003.0938))
 		{//pro laps
 		    return 1;
-		}
+		}*/
 	}
 	return 0;
 }
