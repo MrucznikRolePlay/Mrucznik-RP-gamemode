@@ -4905,8 +4905,19 @@ ShowStats(playerid,targetid)
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
 		new coordsstring[256];
-		new busiMem = PlayerInfo[targetid][pBusinessMember];
-		new busiOwn = PlayerInfo[targetid][pBusinessOwner]; 
+		new busiOwn=INVALID_BUSINESSID;
+		new bizranga[32]; 
+		strcat(bizranga, "Nikt", sizeof(bizranga)); 
+		if(PlayerInfo[targetid][pBusinessMember] != INVALID_BUSINESSID)
+		{
+			busiOwn = PlayerInfo[targetid][pBusinessMember]; 
+			strcat(bizranga, "Cz³onek", sizeof(bizranga)); 
+		}
+		if(PlayerInfo[targetid][pBusinessOwner] != INVALID_BUSINESSID)
+		{
+			busiOwn = PlayerInfo[targetid][pBusinessOwner];
+			strcat(bizranga, "W³aœciciel", sizeof(bizranga));  
+		}
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
@@ -4920,7 +4931,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "BizOID:[%d] BizMID[%d] Uniform[%d] JobSkin[%d] Apteczki[%d]", busiOwn, busiMem, PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
+		format(coordsstring, sizeof(coordsstring), "Biznes:[%d] [%s] [%s] Uniform[%d] JobSkin[%d] Apteczki[%d]", busiOwn, GetBusinessName(busiOwn), bizranga, PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{

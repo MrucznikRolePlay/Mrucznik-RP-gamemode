@@ -14933,10 +14933,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					if(checkedBiz == loadedBiz)
 					{
+						if(safeBID == 0 || safeBID == INVALID_BUSINESSID)
+						{
+							sendTipMessage(playerid, "Nie znaleziono biznesu, który potrzebuje dostawy!"); 
+							return 1;
+						}
+						new wynagrodzenie = GetCostFromDistance(playerid, mBiz[safeBID][b_enX], mBiz[safeBID][b_enY], mBiz[safeBID][b_enZ]);
 						format(lStr, sizeof(lStr), "Znaleziono biznes: %s\nOdleg³y o: %0.2f\nPrzewidywane wynagrodzenie: $%d",
 						GetBusinessName(safeBID),
 						GetPlayerDistanceFromPoint(playerid, mBiz[safeBID][b_enX], mBiz[safeBID][b_enY], mBiz[safeBID][b_enZ]), 
-						1);//TODO: Dodaæ wynagordzenia 
+						wynagrodzenie); 
 						ShowPlayerDialogEx(playerid, DIALOG_AKCEPT_ZLECENIE, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), lStr, "Akceptuj", "Odmów"); 
 						SetPVarInt(playerid, "pTruckerZlecenieID", safeBID); 
 						break; 
