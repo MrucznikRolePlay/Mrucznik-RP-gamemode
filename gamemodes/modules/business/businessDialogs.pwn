@@ -583,7 +583,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 2:
                 {
-                    format(string, sizeof(string), "WprowadŸ poni¿ej nowe MOTD biznesu\nPamiêtaj, ¿e maksymalna liczba znaków to 64!\nKoszt zmiany: $%d",
+                    format(string, sizeof(string), "WprowadŸ poni¿ej nowe MOTD biznesu\nPamiêtaj, ¿e maksymalna liczba znaków to 64!\nKoszt zmiany: $%d\n\n[Tip] Je¿eli wpiszesz w tekst poni¿sze frazy zostan¹ one przekszta³cone:\n[bname] - nazwa biznesu\n[bowner] - twój nick",
                     B_CENA_ZMIENMOTD);
                     ShowPlayerDialogEx(playerid, DIALOG_INPUT_NOWEMOTD, DIALOG_STYLE_INPUT, SetDefaultCaption(), 
                     string, "Akceptuj", "Main");
