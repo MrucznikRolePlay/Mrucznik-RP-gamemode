@@ -1671,8 +1671,27 @@ public OnPlayerDisconnect(playerid, reason)
 }
 public OnPlayerEnterDynamicCP(playerid, checkpointid)
 {
+	new string[124];
 	if(checkpointid == navigationCheckPoint[playerid])
 	{
+		if(PlayerInfo[playerid][pJob] == JOB_TRUCKER)
+		{
+			if(pZlecenieID[playerid] != INVALID_BUSINESSID)
+			{
+				new bIDE = pZlecenieID[playerid]; 
+				if(GetPlayerDistanceFromPoint(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]) < 10.0)
+				{
+					sendTipMessageEx(playerid, COLOR_GREEN, "Gratulacje dotar³eœ do celu!"); 
+					format(string, sizeof(string), "%s mówi: Dziêkujê za tak szybk¹ dostawê. Proszê oto pañskie wynagrodzenie {FFB76F}**podaje gotówkê**{FFFFFF}.", GetBusinessOwnerName(bIDE));
+					SendClientMessage(playerid, COLOR_WHITE, string); 
+					DajKase(playerid, pZlecenieCost[playerid]);
+					pZlecenieID[playerid] = 9999;
+					pZlecenieCost[playerid] = 0;
+					pZlecenieDistance[playerid] = 0.0; 
+					return 1;
+				}
+			}
+		}
 		StopPlayerNavigation(playerid, true); 
 	}
 	return 1;
