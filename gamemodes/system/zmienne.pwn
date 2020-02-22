@@ -406,7 +406,7 @@ new PlayerText:gSelectionItems[MAX_PLAYERS][SELECTION_ITEMS];
 new gSelectionItemsTag[MAX_PLAYERS][SELECTION_ITEMS];
 new gItemAt[MAX_PLAYERS];
 
-new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 1000.0};  //pos[3] dist, vw
+new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 500.0};  //pos[3] dist, vw
 new IBIZA_Stream[128];
 
 new Barier[MAX_FRAC][10];
