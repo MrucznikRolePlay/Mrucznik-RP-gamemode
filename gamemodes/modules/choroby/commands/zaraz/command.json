@@ -1,0 +1,25 @@
+{
+    "name": "zaraz",
+    "description": "Zaraü gracza chorobπ.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "setstd"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "string",
+            "size": "32",
+            "name": "disease",
+            "description": "choroba"
+        }
+    ],
+    "date": "07.02.2020"
+}

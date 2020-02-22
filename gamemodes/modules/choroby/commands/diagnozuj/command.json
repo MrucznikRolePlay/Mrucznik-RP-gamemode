@@ -1,0 +1,20 @@
+{
+    "name": "diagnozuj",
+    "description": "Zdiagnozuj, co dolega graczowi.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "diagnoza",
+        "zdiagnozuj"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "07.02.2020"
+}

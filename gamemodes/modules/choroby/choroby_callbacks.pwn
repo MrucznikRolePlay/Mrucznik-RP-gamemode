@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ zastrzyk ]-----------------------------------------------//
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                  choroby                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,62 +16,63 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: Mrucznik
+// Data utworzenia: 07.02.2020
+//Opis:
 /*
-	
+	System chorób.
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
+#include <YSI\y_hooks>
 
-YCMD:zastrzyk(playerid, params[], help)
+//-----------------<[ Callbacki: ]>-----------------
+choroby_OnPlayerLogin(playerid)
 {
-	new playa;
-	if(sscanf(params, "k<fix>", playa))
-	{
-		sendTipMessage(playerid, "U¿yj /zastrzyk [ID gracza]");
-		return 1;
-	}
-	
-	if(!IsPlayerConnected(playa)) 
-	{
-		return sendErrorMessage(playerid, "Nie ma takiego gracza.");
-	}
+	MruMySQL_LoadDiseasesData(playerid);
+	return 1;
+}
 
-	if (PlayerInfo[playerid][pMember] == 4 && PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pLider] == 4)
+hook OnGameModeInit()
+{
+	choroby_InitEffects();
+}
+
+hook OnPlayerDisconnect(playerid, reason)
+{
+	VECTOR_clear(VPlayerDiseases[playerid]);
+	PlayerImmunity[playerid] = 0;
+	return 1;
+}
+
+hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
+{
+	//infecting on contact
+	if(weaponid >= 0 && weaponid <= 15) //melee weapons only
 	{
-		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-		if(GetDistanceBetweenPlayers(playerid,playa) < 5 && Spectate[playa] == INVALID_PLAYER_ID)
+		if(!IsPlayerHealthy(issuerid)) 
 		{
-			if(IsPlayerConnected(playa))
+			VECTOR_foreach(i : VPlayerDiseases[issuerid])
 			{
-				if(playa != INVALID_PLAYER_ID)
+				new eDiseases:disease = eDiseases:MEM_get_val(i);
+				if(DiseaseData[disease][SpreadingOnContact])
 				{
-					SetPlayerHealth(playa, 90);
-					SendClientMessage(playa, COLOR_WHITE, "Lekarz da³ ci zastrzyk i wyleczy³ z choroby");
-					format(string, sizeof(string),"* Lekarz %s wyci¹ga strzykawkê i wstrzykuje leki %s.", sendername, giveplayer);
-					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					format(string, sizeof(string), "%s czuje siê lepiej oraz pozby³ siê choroby.", giveplayer);
-					ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					STDPlayer[playa] = 0;
+					if(IsPlayerSick(playerid, disease)) 
+						return 1;
+
+					//10% chance to get infected
+					if(RandomizeSouldBeInfected(10, DiseaseData[disease][ContagiousRatio])) 
+						return 1;
+
+					InfectPlayer(playerid, disease);
+					new messageTime = random(60000);//minuta
+					defer InfectedEffectMessage[messageTime](playerid);
 				}
 			}
 		}
-		else
-		{
-			format(string, sizeof(string),"Jesteœ zbyt daleko od gracza %s", giveplayer);
-			sendErrorMessage(playerid, string);
-		}
-	}
-	else
-	{
-		sendErrorMessage(playerid, "Nie masz 1 rangi lub nie jesteœ medykiem!");
 	}
 	return 1;
 }
+
+//end

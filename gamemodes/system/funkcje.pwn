@@ -1916,6 +1916,14 @@ Float:GetDistanceBetweenPlayers(p1,p2)
 	return floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
 }
 
+IsPlayerNear(playerid, giveplayerid, distance=10)
+{
+	return (GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(giveplayerid) && 
+		GetDistanceBetweenPlayers(playerid, giveplayerid) < distance && 
+		Spectate[giveplayerid] == INVALID_PLAYER_ID
+	);
+}
+
 SearchingHit(playerid)
 {
 	new string[256];
@@ -7882,12 +7890,12 @@ PobierzWolnySlotNaKontakt(playerid)
 	return -1; //error
 }
 
-bool:CzyMaWolnySlotNaKontakt(playerid)
+CzyMaWolnySlotNaKontakt(playerid)
 {
 	return PobierzWolnySlotNaKontakt(playerid) != -1;
 }
 
-bool:CzyKontaktIstnieje(playerid, numer)
+CzyKontaktIstnieje(playerid, numer)
 {
 	for(new i; i<MAX_KONTAKTY; i++)
 	{

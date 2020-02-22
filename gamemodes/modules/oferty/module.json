@@ -1,0 +1,11 @@
+{
+    "name": "oferty",
+    "description": "System ofert.",
+    "author": "Mrucznik",
+    "timers": false,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "07.02.2020"
+}

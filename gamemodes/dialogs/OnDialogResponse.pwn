@@ -8099,7 +8099,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 	            new Float:HP;
 				GetPlayerHealth(playerid, HP);
-	   			if(/*PlayerInfo[playerid][pZiolo] >= 10 &&*/ PlayerInfo[playerid][pDrugs] >= 10 && PlayerInfo[playerid][pPiwo] >= 1 && HP >= 100 && STDPlayer[playerid] == 0)
+	   			if(/*PlayerInfo[playerid][pZiolo] >= 10 &&*/ PlayerInfo[playerid][pDrugs] >= 10 && PlayerInfo[playerid][pPiwo] >= 1 && HP >= 100 && IsPlayerHealthy(playerid))
 			    {
 	      			if(kaska[playerid] != 0 && kaska[playerid] >= 100000)
 		        	{
@@ -8109,7 +8109,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pDrugs] -= 10;
 						PlayerInfo[playerid][pPiwo] --;
 						//Dom[dom][hMagazyn] --;
-						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ Apteczkê za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej u¿yæ wpisz /ulecz");
+						SendClientMessage(playerid, COLOR_P@, "Kupi³eœ Apteczkê za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej u¿yæ wpisz /apteczka");
 						KupowanieDodatkow(playerid, dom);
 						Log(payLog, INFO, "%s kupi³ do domu %s apteczkê poziomu %d za 100000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hApteczka]);
 					}

@@ -80,6 +80,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <YSI\y_timers>
+#include <indirection>
+#include <amx_assembly\addressof>
 #define AC_MAX_CONNECTS_FROM_IP		3
 #include <nex-ac>
 #include <md5>
@@ -6183,6 +6185,7 @@ OnPlayerLogin(playerid, password[])
     else if(PlayerInfo[playerid][pWarns] < 0) PlayerInfo[playerid][pWarns] = 0;
 
 	premium_loadForPlayer(playerid);
+	choroby_OnPlayerLogin(playerid);
 
 	//obiekty
 	PlayerAttachments_LoadItems(playerid);
