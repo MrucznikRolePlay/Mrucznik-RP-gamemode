@@ -76,7 +76,8 @@ YCMD:spec(playerid, params[], help)
 			new jailWiadomosc[64];
 			format(jailWiadomosc, sizeof(jailWiadomosc), "| Jail/AJ - %ds ", PlayerInfo[pid][pJailTime]);
 			GetPlayerIp(pid, specIP, sizeof(specIP));
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s %s| VWorld - %d | Int - %d | IP - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? (jailWiadomosc) : (""), GetPlayerVirtualWorld(pid), GetPlayerInterior(pid), specIP);
+			if(PlayerInfo[playerid][pAdmin] >= 1) format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s %s| VWorld - %d | Int - %d | IP - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? (jailWiadomosc) : (""), GetPlayerVirtualWorld(pid), GetPlayerInterior(pid), specIP);
+			else format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s %s| VWorld - %d | Int - %d",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? (jailWiadomosc) : (""), GetPlayerVirtualWorld(pid), GetPlayerInterior(pid));
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);
