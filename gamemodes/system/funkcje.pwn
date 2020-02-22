@@ -460,16 +460,44 @@ Taxi_Pay(playerid)
 	{
         new slot = GetPVarInt(playerid, "taxi-slot");
         new string[64];
+		new doZaplaty = 0;
         TransportCost[playerid] = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
+		
 	    if(PlayerInfo[playerid][pLevel] < 3)
 	    {
-	    	ZabierzKase(playerid, floatround(TransportCost[playerid]/2));//moneycheat
+			if(kaska[playerid] < floatround(TransportCost[playerid]*0.25))
+			{
+				ZabierzKase(playerid, floatround(kaska[playerid] + 5000));//moneycheat
+				doZaplaty = floatround(kaska[playerid] + 5000);
+				PoziomPoszukiwania[playerid] += 1;
+				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarza(brak pieniêdzy na sp³ate)");
+				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
+				SendClientMessage(taxidriver, COLOR_RED, string);
+			}
+			else
+			{
+				ZabierzKase(playerid, floatround(TransportCost[playerid]*0.25));//moneycheat
+				doZaplaty = floatround(TransportCost[playerid]*0.25);
+			} 
 	    }
 	    else
 	    {
-	    	ZabierzKase(playerid, floatround(TransportCost[playerid]));//moneycheat
+	    	if(kaska[playerid] < floatround(TransportCost[playerid]))
+			{
+				ZabierzKase(playerid, floatround(kaska[playerid] + 10000));//moneycheat
+				doZaplaty = floatround(kaska[playerid] + 10000);
+				PoziomPoszukiwania[playerid] += 1;
+				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarza(brak pieniêdzy na sp³ate)");
+				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
+				SendClientMessage(taxidriver, COLOR_RED, string);
+			}
+			else 
+			{
+				ZabierzKase(playerid, floatround(TransportCost[playerid]));//moneycheat
+				doZaplaty = floatround(TransportCost[playerid]);
+			}
 	    }
-		new doZaplaty = floatround(TransportCost[playerid]);
+		
 		TransportMoney[taxidriver] += doZaplaty;
 
 	    format(string, sizeof(string), "~w~Klient opuscil taxi~n~~g~Zarobiles $%d",doZaplaty+TransportValue[taxidriver]);
@@ -10530,7 +10558,10 @@ GPSMode(playerid, bool:red = false)
 		foreach(new i : Player)
 		{
 			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
-				DisablePlayerCheckpoint(i);
+			{
+				if(zawodnik[i] == 0)
+					DisablePlayerCheckpoint(i);
+			}
 		}
 	}
 
