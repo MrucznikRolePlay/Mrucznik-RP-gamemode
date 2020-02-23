@@ -5961,10 +5961,10 @@ OnPlayerLogin(playerid, password[])
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
 		CorrectPlayerBusiness(playerid);
+		CheckPlayerBusiness(playerid);
+		
 		//Lider
 		Load_MySQL_Leader(playerid); 
-		//biz
-		CheckPlayerBusiness(playerid); 
 		//Powitanie:
 		format(string, sizeof(string), "Witaj na serwerze Mrucznik Role Play, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
