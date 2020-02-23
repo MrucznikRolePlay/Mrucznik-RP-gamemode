@@ -32,13 +32,6 @@ new Float:posNawi[MAX_NAWIPOINTS][3]={
     {411.8220,-1778.1534,5.5469}//ibiza
 }; 
 new navigationCheckPoint[MAX_PLAYERS] = INVALID_STREAMER_ID; 
-new nawiTimer[MAX_PLAYERS]; 
-new PlayerText:roadsLeft_0[MAX_PLAYERS];
-new PlayerText:roadsLeft_1[MAX_PLAYERS];
-new PlayerText:roadsLeft_2[MAX_PLAYERS];
-new PlayerText:roadsLeft_3[MAX_PLAYERS];
-new PlayerText:roadsLeft_4[MAX_PLAYERS];
-new PlayerText:roadsLeft_5[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
-forward nawiStart(playerid);
+
 //end

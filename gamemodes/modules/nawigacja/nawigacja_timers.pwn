@@ -26,14 +26,5 @@
 //
 
 //-----------------<[ Timery: ]>-------------------
-public nawiStart(playerid)
-{
-	if(navigationCheckPoint[playerid] == INVALID_STREAMER_ID)
-	{
-		StopPlayerNavigation(playerid); 
-		return 1;
-	}
-	UpdateNaviTextDrawsForPlayer(playerid);
-	return 1;
-}
+
 //end

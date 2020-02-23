@@ -57,12 +57,6 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         else{
             new string[124];
-            if(navigationCheckPoint[playerid] != INVALID_STREAMER_ID)
-            {
-                sendErrorMessage(playerid, "Masz w³¹czon¹ nawigacjê na inny cel");
-                sendTipMessage(playerid, "Wpisz /mnawigacjaoff aby wy³¹czyæ nawigacjê.");
-                return 1;
-            }
             switch(listitem)
             {
                 case 0://urzad
@@ -72,8 +66,6 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(string, sizeof(string), "Do celu pozosta³o %0.2f metrów!", 
                     GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_UMLS][N_POSX], posNawi[NAWI_UMLS][N_POSY], posNawi[NAWI_UMLS][N_POSZ]));
                     sendTipMessage(playerid, string); 
-                    SetPVarString(playerid, "miejsceDoceloweStr", "Urz¹d Miasta Los Santos");
-                    SetPVarInt(playerid, "miejsceDoceloweID", NAWI_UMLS); 
                     StartNavigation(playerid, NAWI_UMLS); 
                 }
                 case 1://bank
@@ -83,8 +75,6 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(string, sizeof(string), "Do celu pozosta³o %0.2f metrów!", 
                     GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_BANK][N_POSX], posNawi[NAWI_BANK][N_POSY], posNawi[NAWI_BANK][N_POSZ]));
                     sendTipMessage(playerid, string);
-                    SetPVarString(playerid, "miejsceDoceloweStr", "Bank 0Verte");
-                    SetPVarInt(playerid, "miejsceDoceloweID", NAWI_BANK); 
                     StartNavigation(playerid, NAWI_BANK); 
                 }
                 case 2://lspd
@@ -94,8 +84,6 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(string, sizeof(string), "Do celu pozosta³o %0.2f metrów!", 
                     GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_LSPD][N_POSX], posNawi[NAWI_LSPD][N_POSY], posNawi[NAWI_LSPD][N_POSZ]));
                     sendTipMessage(playerid, string); 
-                    SetPVarString(playerid, "miejsceDoceloweStr", "Los Santos Police Dep.");
-                    SetPVarInt(playerid, "miejsceDoceloweID", NAWI_LSPD); 
                     StartNavigation(playerid, NAWI_LSPD);
                 }
                 case 3://baza mechów
@@ -105,8 +93,6 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(string, sizeof(string), "Do celu pozosta³o %0.2f metrów!", 
                     GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_BAZA][N_POSX], posNawi[NAWI_BAZA][N_POSY], posNawi[NAWI_BAZA][N_POSZ]));
                     sendTipMessage(playerid, string); 
-                    SetPVarString(playerid, "miejsceDoceloweStr", "Baza mechaników");
-                    SetPVarInt(playerid, "miejsceDoceloweID", NAWI_BAZA); 
                     StartNavigation(playerid, NAWI_BAZA);
                 }
                 case 4://vinyl
@@ -116,8 +102,6 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(string, sizeof(string), "Do celu pozosta³o %0.2f metrów!", 
                     GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_VINYL][N_POSX], posNawi[NAWI_VINYL][N_POSY], posNawi[NAWI_VINYL][N_POSZ]));
                     sendTipMessage(playerid, string);
-                    SetPVarString(playerid, "miejsceDoceloweStr", "Vinyl Club");
-                    SetPVarInt(playerid, "miejsceDoceloweID", NAWI_VINYL); 
                     StartNavigation(playerid, NAWI_VINYL); 
                 }
                 case 5://ibiza
@@ -127,8 +111,6 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     format(string, sizeof(string), "Do celu pozosta³o %0.2f metrów!", 
                     GetPlayerDistanceFromPoint(playerid, posNawi[NAWI_IBIZA][N_POSX], posNawi[NAWI_IBIZA][N_POSY], posNawi[NAWI_IBIZA][N_POSZ]));
                     sendTipMessage(playerid, string); 
-                    SetPVarString(playerid, "miejsceDoceloweStr", "Ibiza Club");
-                    SetPVarInt(playerid, "miejsceDoceloweID", NAWI_IBIZA); 
                     StartNavigation(playerid, NAWI_IBIZA);
                 }
             }

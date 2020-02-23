@@ -30,8 +30,7 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "mnawigacja\mnawigacja.pwn"
-#include "mnawigacjaoff\mnawigacjaoff.pwn"
+#include "nawigacja\mnawigacja.pwn"
 
 
 //-------<[ initialize ]>-------
