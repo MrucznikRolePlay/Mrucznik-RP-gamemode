@@ -212,9 +212,8 @@ sendErrorMessage(id, string:msg[]) {
 	return SendClientMessage(id, COLOR_LIGHTRED, _str);
 }
 
-ToggleInwigilacja(playerid, adminid, bool:NISKI_ADMIN_LVL = false)
+ToggleInwigilacja(playerid, adminid)
 {
-	if(PlayerInfo[playerid][pPodPW] == 0 && NISKI_ADMIN_LVL == true) return sendTipMessage(playerid, "W³¹czanie od 150@lvl");
 	if(PlayerInfo[playerid][pPodPW] == 0)
 	{
 		PlayerInfo[playerid][pPodPW] = 1;
@@ -2862,6 +2861,14 @@ DajBronieFrakcyjne(playerid)
 
 DajBronieOganizacji(playerid)
 {
+	if(GetPlayerOrg(playerid) == FAMILY_SEKTA)
+	{
+		if(PlayerInfo[playerid][pGun1] == 0)
+		{
+			PlayerInfo[playerid][pGun1] = 4; PlayerInfo[playerid][pAmmo1] = 1;
+			playerWeapons[playerid][weaponLegal2] = 1;
+		}
+	}
 	switch(GetPlayerOrg(playerid))
 	{
 		default:
@@ -12771,6 +12778,22 @@ public DeathWarning(playerid, killerid, reason)
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 	}
+	return 1;
+}
+
+public CuffedAction(playerid, cuffedid)
+{
+	PlayerInfo[cuffedid][pBW] = 0;
+	PlayerInfo[cuffedid][pInjury] = 0;
+	zakuty[cuffedid] = 1;
+	uzytekajdanki[playerid] = 1;
+	PDkuje[cuffedid] = playerid;
+	SkutyGracz[playerid] = cuffedid;
+	ClearAnimations(cuffedid);
+	SetPlayerSpecialAction(cuffedid, SPECIAL_ACTION_CUFFED);
+	SetPlayerAttachedObject(cuffedid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+	SetTimerEx("UzyteKajdany",30000,0,"d",cuffedid);
+	SetTimerEx("Kajdanki_debug", 1000, 0, "d", cuffedid);
 	return 1;
 }
 

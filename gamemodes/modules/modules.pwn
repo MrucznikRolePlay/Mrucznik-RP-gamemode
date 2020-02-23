@@ -167,7 +167,11 @@
 
 //-------<[ mysql ]>-------
 #include "admin\admin_mysql.pwn"
+<<<<<<< HEAD
 #include "business\business_mysql.pwn"
+=======
+#include "biznesy\biznesy_mysql.pwn"
+>>>>>>> development
 #include "graffiti\graffiti_mysql.pwn"
 #include "choroby\choroby_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"

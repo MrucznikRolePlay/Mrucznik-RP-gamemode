@@ -74,7 +74,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	//2.6.19
 	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+<<<<<<< HEAD
 	
+=======
+	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+>>>>>>> development
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
@@ -513,10 +517,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 7:
 			{
 				if(!response) return 1;
+				StopAudioStreamForPlayer(playerid);
+				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18802/");
+			}
+			case 8:
+			{
+				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
-			case 8:
+			case 9:
 			{
 			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
@@ -3465,14 +3475,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-				zakuty[playerid] = 1;
-	            uzytekajdanki[PDkuje[playerid]] = 1;
-	            SkutyGracz[PDkuje[playerid]] = playerid;
-				ClearAnimations(playerid);
-                SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+				
+				CuffedAction(PDkuje[playerid], playerid);
 		    }
-		    if(!response)
+		    else
 		    {
 		        foreach(new i : Player)
 				{
@@ -3493,11 +3499,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 					SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-					zakuty[playerid] = 1;
-		            uzytekajdanki[PDkuje[playerid]] = 1;
-		            SkutyGracz[PDkuje[playerid]] = playerid;
-					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-					SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+					
+					CuffedAction(PDkuje[playerid], playerid);
 				}
 				else if(cops == 2)
 				{
@@ -3516,11 +3519,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 						SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-						zakuty[playerid] = 1;
-			            uzytekajdanki[PDkuje[playerid]] = 1;
-			            SkutyGracz[PDkuje[playerid]] = playerid;
-						SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-						SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+						
+						CuffedAction(PDkuje[playerid], playerid);
 				    }
 				}
 				else
@@ -3544,6 +3544,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//
 		    if(response)
 		    {
+				//todo
 		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ ³owcy %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", sendername);
@@ -11236,6 +11237,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                                 if(IsPlayerInVehicle(i, veh))
                                 {
                                     PlayAudioStreamForPlayer(i, RadioSANDos);
+                                    SetPVarInt(i, "sanlisten", 2);
+                                }
+                            }
+                        }
+                    }
+                }
+				else if(strfind(inputtext, "Lepa Station") != -1)
+                {
+                    if(RadioSANDos[0] != EOF)
+                    {
+                        if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+                        {
+                            foreach(new i : Player)
+                            {
+                                if(IsPlayerInVehicle(i, veh))
+                                {
+                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18802/");
                                     SetPVarInt(i, "sanlisten", 2);
                                 }
                             }
