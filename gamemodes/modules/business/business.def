@@ -29,8 +29,6 @@
 #define MAX_OFFLINE_DAYS 14//                       --> Maksymalna nieobecnoœæ w³aœciciela biznesu (w dniach)
 #define MAX_BIZ 200//                               --> Maksymalna liczba biznesów na œwiecie
 #define INVALID_BUSINESSID 9999//                   --> ID biznesu wskazuj¹ce, na brak biznesu
-#define MAX_BUSINESS_NAME 64//                      --> Maksymalna d³ugoœæ ci¹gu biznes Name
-#define MAX_BUSINESS_MOTD 64//                      --> Maksymalna d³ugoœc ci¹gu dla biznes MOTD
 
 
 //---------------<[ Dialogi: ]>---------------
@@ -76,7 +74,7 @@
 #define B_CENA_ZMIENSPAWN 5000000//5kk              --> Cena jak¹ gracz musi zap³aciæ za mo¿liwoœæ SPAWNU biznesu
 #define B_CENA_SEJFG 2500000//2.5kk +1              --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu g³ównego
 #define B_CENA_SEJFT 7000000//7kk +1                --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu tymczasowego 
-#define B_CENA_SEJFE 8000000//8kk                   --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu elementów
+
 //koszta dodatkowe
 #define COST_SHOP24 1000000//1kk                    --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu 24-7
 #define COST_SHOPCLOTHES 1250000//1.25kk            --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu z ubraniami
@@ -97,8 +95,4 @@
     //Do TYPU PRZEMYS£OWEGO
 #define BTYPE2_CLOTHES 5
 #define BTYPE2_OIL 6
-
-
-//Poszczególne (koszta zakupów)
-#define ELEMENT_COST_INSHOP 200//                   --> Koszt zakupów w sklepie (w materia³ach)
 //end

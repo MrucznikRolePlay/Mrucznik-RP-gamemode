@@ -31,7 +31,6 @@
 
 //-------<[ include ]>-------
 #include "bizback\bizback.pwn"
-#include "giveelements\giveelements.pwn"
 #include "mbizbuy\mbizbuy.pwn"
 #include "mbizcreate\mbizcreate.pwn"
 #include "mbizedit\mbizedit.pwn"
@@ -46,7 +45,6 @@
 hook OnGameModeInit()
 {
     command_bizback();
-    command_giveelements();
     command_mbizbuy();
     command_mbizcreate();
     command_mbizedit();
