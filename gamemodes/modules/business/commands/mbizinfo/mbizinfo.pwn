@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  mbizinfo                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,36 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "mbizinfo_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_mbizinfo()
 {
-    command_mbizbuy();
-    command_mbiznesy();
+    new command = Command_GetID("mbizinfo");
+
+    //aliases
+    Command_AddAlt(command, "bizinfo");
+    Command_AddAlt(command, "businessinfo");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:mbizinfo(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Pozwala sprawdziæ informacje na temat biznesu");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_mbizinfo_Impl(playerid);
 }
