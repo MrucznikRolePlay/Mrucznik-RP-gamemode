@@ -1192,6 +1192,7 @@ public OnPlayerConnect(playerid)
         gSelectionItems[playerid][x] = PlayerText:INVALID_TEXT_DRAW;
 	}
 	gItemAt[playerid] = 0;
+	//CheckPlayerBusiness(playerid); // TYMCZASOWO BIZNESY OFF
 	return 1;
 }
 public OnPlayerPause(playerid)
