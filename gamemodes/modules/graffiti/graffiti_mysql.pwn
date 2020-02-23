@@ -67,7 +67,7 @@ stock graffiti_LoadMySQL(id = -1)
 			graffiti_DefineColor(i);
 			strreplace(GraffitiInfo[i][grafText], "~n~", "\n", .ignorecase = true);
 			GraffitiInfo[i][gID] = CreateDynamicObject(19482, GraffitiInfo[i][grafXpos], GraffitiInfo[i][grafYpos], GraffitiInfo[i][grafZpos], GraffitiInfo[i][grafXYpos], GraffitiInfo[i][grafYYpos], GraffitiInfo[i][grafZYpos], 0, 0, -1, 200);
-			SetDynamicObjectMaterialText(GraffitiInfo[i][gID], 0, GraffitiInfo[i][grafText], OBJECT_MATERIAL_SIZE_256x256, "Arial", 24, 0, GraffitiInfo[i][gColor], 0, 1);
+			SetDynamicObjectMaterialText(GraffitiInfo[i][gID], 0, GraffitiInfo[i][grafText], OBJECT_MATERIAL_SIZE_512x128, "Arial", 24, 0, GraffitiInfo[i][gColor], 0, 1);
 		}
 		format(string, sizeof(string), "Zaladowano %d graffiti z %d w bazie", loadedGraffiti, valueGraffiti);
 		print(string);
