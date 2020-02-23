@@ -1703,21 +1703,12 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 				if(GetPlayerDistanceFromPoint(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]) < 10.0)
 				{
 					sendTipMessageEx(playerid, COLOR_GREEN, "Gratulacje dotar³eœ do celu!"); 
-					format(string, sizeof(string), "%s mówi: Dziêkujê za tak szybk¹ dostawê. Proszê oto pañskie wynagrodzenie {BA55D3}**podaje  %d gotówki**{FFFFFF}.", GetBusinessOwnerName(bIDE), pZlecenieCost[playerid]);
+					format(string, sizeof(string), "%s mówi: Dziêkujê za tak szybk¹ dostawê. Proszê oto pañskie wynagrodzenie {FFB76F}**podaje gotówkê**{FFFFFF}.", GetBusinessOwnerName(bIDE));
 					SendClientMessage(playerid, COLOR_WHITE, string); 
 					DajKase(playerid, pZlecenieCost[playerid]);
-					if(mBiz[bIDE][b_elementsPocket]+500 > (2000+(mBiz[bIDE][b_ulepszenie1]*1000)))
-					{
-						mBiz[bIDE][b_elementsPocket] = 2000+(mBiz[bIDE][b_ulepszenie1]*1000); //Uzupe³nia w 100proc
-					}
-					else 
-					{//Nie bêdzie pe³ny
-						mBiz[bIDE][b_elementsPocket] = mBiz[bIDE][b_elementsPocket]+500; 
-					}
 					pZlecenieID[playerid] = 9999;
 					pZlecenieCost[playerid] = 0;
 					pZlecenieDistance[playerid] = 0.0; 
-					StopPlayerNavigation(playerid, true); 
 					return 1;
 				}
 			}

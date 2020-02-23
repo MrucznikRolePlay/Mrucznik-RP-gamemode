@@ -113,7 +113,7 @@ stock SaveBiz(bIDE)
 	`ulepszenie4`='%d',\
 	`ulepszenie5`='%d',\
 	`bMOTD`='%s',\
-	`neededType`='%d',\
+	`neededType`='%d'\
 	`bAuction`='%d', \
 	`bSejfE`='%d', \
 	WHERE `ID`='%d'", 

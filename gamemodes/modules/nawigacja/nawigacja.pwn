@@ -153,7 +153,7 @@ CreatePlayerNaviTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, roadsLeft_2[playerid], 1);
 	PlayerTextDrawSetSelectable(playerid, roadsLeft_2[playerid], 0);
 
-	roadsLeft_3[playerid] = CreatePlayerTextDraw(playerid, 333.000000, 423.000000, "[]");
+	roadsLeft_3[playerid] = CreatePlayerTextDraw(playerid, 333.000000, 423.000000, "[Manana]");
 	PlayerTextDrawFont(playerid, roadsLeft_3[playerid], 5);
 	PlayerTextDrawLetterSize(playerid, roadsLeft_3[playerid], 0.325000, 1.500000);
 	PlayerTextDrawTextSize(playerid, roadsLeft_3[playerid], 114.500000, -98.000000);
@@ -170,7 +170,7 @@ CreatePlayerNaviTextDraws(playerid)
 	PlayerTextDrawSetPreviewRot(playerid, roadsLeft_3[playerid], 3.000000, 180.000000, 35.000000, 1.000000);
 	PlayerTextDrawSetPreviewVehCol(playerid, roadsLeft_3[playerid], 29, 1);
 
-	roadsLeft_4[playerid] = CreatePlayerTextDraw(playerid, 233.000000, 417.000000, "Docelowe: ~g~*aktualizuje*");
+	roadsLeft_4[playerid] = CreatePlayerTextDraw(playerid, 233.000000, 417.000000, "Docelowe: ~g~Urzad Miasta Los Santos");
 	PlayerTextDrawFont(playerid, roadsLeft_4[playerid], 1);
 	PlayerTextDrawLetterSize(playerid, roadsLeft_4[playerid], 0.216666, 1.500000);
 	PlayerTextDrawTextSize(playerid, roadsLeft_4[playerid], 499.500000, -8.000000);
@@ -184,7 +184,7 @@ CreatePlayerNaviTextDraws(playerid)
 	PlayerTextDrawSetProportional(playerid, roadsLeft_4[playerid], 1);
 	PlayerTextDrawSetSelectable(playerid, roadsLeft_4[playerid], 0);
 
-	roadsLeft_5[playerid] = CreatePlayerTextDraw(playerid, 233.000000, 430.000000, "Pozostalo: ~g~*aktualizuje*");
+	roadsLeft_5[playerid] = CreatePlayerTextDraw(playerid, 233.000000, 430.000000, "Pozostalo: ~g~1452.20 ~w~metrow");
 	PlayerTextDrawFont(playerid, roadsLeft_5[playerid], 1);
 	PlayerTextDrawLetterSize(playerid, roadsLeft_5[playerid], 0.216666, 1.500000);
 	PlayerTextDrawTextSize(playerid, roadsLeft_5[playerid], 499.500000, -8.000000);
