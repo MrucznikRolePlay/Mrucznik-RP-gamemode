@@ -754,41 +754,6 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SaveBiz(bIDE); 
         }
     }
-    else if(dialogid == DIALOG_BIZ_INTERIORLIST)
-    {
-        if(!response)
-        {
-            ShowBusinessOwnerDialog(playerid, DIALOG_MAIN); 
-        }
-        else
-        {
-            new bIDE = PlayerInfo[playerid][pBusinessOwner];
-            new string[124]; 
-            if(kaska[playerid] >= interiorsPos[listitem][i_cost])
-            {
-                if(interiorsPos[listitem][i_type] != BTYPE_DEFAULT)
-                {
-                    if(mBiz[bIDE][b_TYPE2] != interiorsPos[listitem][i_type])
-                    {
-                        sendErrorMessage(playerid, "Nie posiadasz odpowiedniego typu biznesu na ten interior!"); 
-                    }
-                }
-                ZabierzKase(playerid, interiorsPos[listitem][i_cost]); 
-                format(string, sizeof(string), "Kupi³eœ interior %s o wielkoœci %s dla swojego biznesu %s!", interiorsPos[listitem][i_name], interiorsPos[listitem][i_size], GetBusinessName(bIDE));
-                sendTipMessageEx(playerid, COLOR_RED, string); 
-                mBiz[bIDE][b_exX] = interiorsPos[listitem][i_posX];
-                mBiz[bIDE][b_exY] = interiorsPos[listitem][i_posY];
-                mBiz[bIDE][b_exZ] = interiorsPos[listitem][i_posZ];
-                mBiz[bIDE][b_vw] = 1000+bIDE; 
-                mBiz[bIDE][b_int] = interiorsPos[listitem][i_int];  
-                 Log(businessLog, INFO, "%s rozbudowal w swoim biznesie %s interior - %d za $%d", GetPlayerLogName(playerid), GetBusinessLogName(bIDE), listitem, interior[listitem][i_cost]); 
-            }
-            else
-            {
-                sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-            }
-        }
-    }
     //-----------------------[Panel w³aœciciela biznesu - KONIEC]-----------------------
     //:
     //:

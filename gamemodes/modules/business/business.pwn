@@ -431,18 +431,18 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 }
 ShowInteriorList(playerid)
 {
-	new string[456];
+	/*new string[456];
 	format(string, sizeof(string), "Nazwa\tWielkoœæ\tCena\n\
 	%s\t%s\t$%d\n\
 	%s\t%s\t$%d",
 	interiorsPos[0][i_name],
 	interiorsPos[0][i_size],
-	interiorsPos[0][i_cost],
+	interiorsPos[0][i_values][1],
 	interiorsPos[1][i_name],
 	interiorsPos[1][i_size],
-	interiorsPos[1][i_cost]);
+	interiorsPos[1][i_values][1]);
 	ShowPlayerDialogEx(playerid, DIALOG_BIZ_INTERIORLIST, DIALOG_STYLE_TABLIST_HEADERS, SetDefaultCaption(),
-	string, "Dalej", "WyjdŸ"); 
+	string, "Dalej", "WyjdŸ"); */
 	return 1;
 }
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
@@ -505,14 +505,16 @@ SetPlayerBusiness(playerid)
 	{
 		if(businessChecked == loadedBiz)
 		{
-			break;
+			gBizSet[playerid]=true;
+			return 1;
 		}
 		if(BizExist(i))
 		{
 			if(mBiz[i][b_ownerUID] == PlayerInfo[playerid][pUID])
 			{
 				PlayerInfo[playerid][pBusinessOwner] = i; 
-				break;
+				gBizSet[playerid]=true;
+				return 1;
 			}
 			businessChecked++; 
 		}
@@ -595,7 +597,7 @@ StartLicytacjaBiz(bIDE, playerid, bChoice)
 		SendClientMessage(i, COLOR_GREEN, "=======<[ San Andreas Property Department ]>=======");
 		format(string, sizeof(string), "Pan(i) %s rozpoczê³a licytacjê obiektu %s [.]", GetNick(playerid), GetBusinessName(bIDE));
 		SendClientMessage(i, COLOR_WHITE, string);
-		format(string, sizeof(string), "[.] znajduj¹cego siê na %s. Cena proponowana $%d", mBiz[bIDE][b_Location], mBiz[bIDE][b_cost]);
+		format(string, sizeof(string), "[.] znajduj¹cego siê na %s. Cena proponowana $%d", mBiz[bIDE][b_Location], b_cost);
 		SendClientMessage(i, COLOR_WHITE, string); 
 		SendClientMessage(i, COLOR_GREEN, "=====<[ Koniec komunikatu ]>====="); 
 		sendTipMessage(playerid, "Je¿eli chcia³byœ zalicytowaæ obiekt podejdŸ do niego i wpisz /licytuj"); 
