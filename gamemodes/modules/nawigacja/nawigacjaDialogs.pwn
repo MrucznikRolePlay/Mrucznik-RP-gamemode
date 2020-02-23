@@ -158,7 +158,7 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                             "Uda³o siê znaleŸæ biznes!\nZnaleziony biznes: %s [%d]\nLokalizacja: %s\nW³aœciciel: %s\nCzy chcesz siê tam udaæ?",
                             GetBusinessName(bIDE), bIDE, mBiz[bIDE][b_Location], GetBusinessOwnerName(bIDE));
                             SetPVarInt(playerid, "ZnalazlBiz", bIDE); 
-                            ShowPlayerDialogEx(playerid, DIALOG_NAWI_BIZNESY2, DIALOG_STYLE_MSGBOX, "Znaleziono biznes", string, "Tak", "Nie"); 
+                            ShowPlayerDialogEx(playerid, DIALOG_NAWI_BIZNESY2, DIALOG_STYLE_MSGBOX, defaultDialogCaption, string, "Tak", "Nie"); 
                             return 1;
                         }
                         checkedBiz++;
@@ -175,7 +175,7 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     "Uda³o siê znaleŸæ biznes!\nZnaleziony biznes: %s [%d]\nLokalizacja: %s\nW³aœciciel: %s\nCzy chcesz siê tam udaæ?",
                     GetBusinessName(bIDE), bIDE, mBiz[bIDE][b_Location], GetBusinessOwnerName(bIDE));
                     SetPVarInt(playerid, "ZnalazlBiz", bIDE); 
-                    ShowPlayerDialogEx(playerid, DIALOG_NAWI_BIZNESY2, DIALOG_STYLE_MSGBOX, "Znaleziono bizID", string, "Tak", "Nie"); 
+                    ShowPlayerDialogEx(playerid, DIALOG_NAWI_BIZNESY2, DIALOG_STYLE_MSGBOX, defaultDialogCaption, string, "Tak", "Nie"); 
                 }
                 else 
                 {

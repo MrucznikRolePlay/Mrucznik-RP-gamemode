@@ -55,7 +55,7 @@ command_mbizinfo_Impl(playerid)
                 mBiz[i][b_ulepszenie3],
                 mBiz[i][b_ulepszenie4],
                 mBiz[i][b_ulepszenie5]);
-                ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, SetDefaultCaption(), string, "Okej", "");
+                ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, defaultDialogCaption, string, "Okej", "");
                 return 1; 
             }
             value++; 
