@@ -25,8 +25,8 @@
 //------------------<[ Implementacja: ]>-------------------
 command_mgotobiz_Impl(playerid, bIDE)
 {
-    new string[124]; 
-    if(PlayerInfo[playerid][pLVL] < LVL_TO_BUY_BIZ)
+    new string[124];
+    if(!BizExist(bIDE))
     {
         sendErrorMessage(playerid, "Nie istnieje taki biznes // Jest zbugowany!"); 
         return 1;
