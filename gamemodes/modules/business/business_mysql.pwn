@@ -74,7 +74,7 @@ stock LoadBiz()
 			mBiz[i][b_ulepszenie4],
 			mBiz[i][b_ulepszenie5],
 			mBiz[i][b_motd],
-			mBiz[i][b_neededType],
+			mBiz[i][b_neededType]
 			mBiz[i][b_auction],
 			mBiz[i][b_elementsPocket]);
 			loadedBiz++; 
