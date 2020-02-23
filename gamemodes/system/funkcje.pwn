@@ -212,9 +212,8 @@ sendErrorMessage(id, string:msg[]) {
 	return SendClientMessage(id, COLOR_LIGHTRED, _str);
 }
 
-ToggleInwigilacja(playerid, adminid, bool:NISKI_ADMIN_LVL = false)
+ToggleInwigilacja(playerid, adminid)
 {
-	if(PlayerInfo[playerid][pPodPW] == 0 && NISKI_ADMIN_LVL == true) return sendTipMessage(playerid, "W³¹czanie od 150@lvl");
 	if(PlayerInfo[playerid][pPodPW] == 0)
 	{
 		PlayerInfo[playerid][pPodPW] = 1;

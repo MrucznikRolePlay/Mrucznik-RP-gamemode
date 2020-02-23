@@ -1456,6 +1456,7 @@ public OnPlayerDisconnect(playerid, reason)
     }
     //
 	//Zapis statystyk:
+	PlayerInfo[playerid][pPodPW] = 0;
     MruMySQL_SaveAccount(playerid, false, true);
 
     if(GetPVarInt(playerid, "active_ticket") != 0)
