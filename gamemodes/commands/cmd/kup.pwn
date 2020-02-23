@@ -82,7 +82,7 @@ YCMD:kup(playerid, params[], help)
 				ShowShopDialog(playerid);
 			}
 		}*/
-		if(PlayerNearBusinessType(playerid, BTYPE_SHOP))
+		if(PlayerNearBusinessType(playerid, BTYPE_SERVICES, BTYPE2_SHOP))
 		{ 
 			ShowShopDialog(playerid); 
 		}

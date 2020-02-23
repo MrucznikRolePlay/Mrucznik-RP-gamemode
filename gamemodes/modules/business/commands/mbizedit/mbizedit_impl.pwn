@@ -95,7 +95,7 @@ command_mbizedit_Impl(playerid, bIDE)
         mysql_real_escape_string("Brak", mBiz[bIDE][b_Name_Owner]);
         mBiz[bIDE][b_ownerUID] = 0; 
         mBiz[bIDE][b_TYPE] = BTYPE_DEFAULT;
-        mBiz[bIDE][b_TYPE2] = BTYPE_DEFAULT;
+        mBiz[bIDE][b_TYPE2] = BTYPE2_DEFAULT;
         mBiz[bIDE][b_moneyPocket] = 0; 
         sendTipMessageEx(playerid, COLOR_RED, "Usuniêto w³aœciciela biznesu, wyzerowano stan gotówki i typy");
         sendTipMessage(playerid, "Twoje poczynanie zosta³o zapisane do logów serwera.");    

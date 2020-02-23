@@ -431,7 +431,7 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 }
 ShowInteriorList(playerid)
 {
-	/*new string[456];
+	new string[456];
 	format(string, sizeof(string), "Nazwa\tWielkoœæ\tCena\n\
 	%s\t%s\t$%d\n\
 	%s\t%s\t$%d",
@@ -442,7 +442,7 @@ ShowInteriorList(playerid)
 	interiorsPos[1][i_size],
 	interiorsPos[1][i_values][1]);
 	ShowPlayerDialogEx(playerid, DIALOG_BIZ_INTERIORLIST, DIALOG_STYLE_TABLIST_HEADERS, SetDefaultCaption(),
-	string, "Dalej", "WyjdŸ"); */
+	string, "Dalej", "WyjdŸ"); 
 	return 1;
 }
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
