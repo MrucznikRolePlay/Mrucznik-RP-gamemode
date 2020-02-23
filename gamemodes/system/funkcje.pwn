@@ -2864,6 +2864,14 @@ DajBronieFrakcyjne(playerid)
 
 DajBronieOganizacji(playerid)
 {
+	if(GetPlayerOrg(playerid) == FAMILY_SEKTA)
+	{
+		if(PlayerInfo[playerid][pGun1] == 0)
+		{
+			PlayerInfo[playerid][pGun1] = 4; PlayerInfo[playerid][pAmmo1] = 1;
+			playerWeapons[playerid][weaponLegal2] = 1;
+		}
+	}
 	switch(GetPlayerOrg(playerid))
 	{
 		default:
