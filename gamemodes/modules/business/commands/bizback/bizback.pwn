@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  bizback                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbizcreate\mbizcreate.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "bizback_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_bizback()
 {
-    command_mbizbuy();
-    command_mbizcreate();
-    command_mbiznesy();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:bizback(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda pozwalaj¹ca anulowaæ edycjê biznesu");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_bizback_Impl(playerid);
 }

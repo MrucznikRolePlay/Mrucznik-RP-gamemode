@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  mbizedit                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,42 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbizcreate\mbizcreate.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "mbizedit_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_mbizedit()
 {
-    command_mbizbuy();
-    command_mbizcreate();
-    command_mbiznesy();
+    new command = Command_GetID("mbizedit");
+
+    //aliases
+    Command_AddAlt(command, "bizedit");
+    Command_AddAlt(command, "edytujbiznes");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:mbizedit(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Pozwala zarz¹dzaæ biznesem");
+        return 1;
+    }
+    //fetching params
+    new bIDE;
+    if(sscanf(params, "d", bIDE))
+    {
+        sendTipMessage(playerid, "U¿yj /mbizedit [Numer tID biznesu] ");
+        return 1;
+    }
+    
+    //command body
+    return command_mbizedit_Impl(playerid, bIDE);
 }
