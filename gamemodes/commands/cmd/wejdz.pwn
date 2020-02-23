@@ -53,11 +53,11 @@ YCMD:wejdz(playerid, params[], help)
         {
             return 1;
         }
-        else if(IsPlayerNearBusinessDoor(playerid))
+        /*else if(IsPlayerNearBusinessDoor(playerid))
         {
 
             return 1;
-        }
+        }*/
         
 //======================================================================
 //==================[Windy pod /wejdz]==================================

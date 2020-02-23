@@ -145,4 +145,7 @@ forward Stanowe_CheckPlyInVeh(playerid);
 
 forward SlideRope(playerid);
 forward closeGate(i, j, playerid);
+
+forward DamagedHP(playerid);
+forward DamagedAP(playerid);
 //EOF

@@ -134,7 +134,7 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
         }
     }
-    else if(dialogid == DIALOG_NAWI_BIZNESY)
+    /*else if(dialogid == DIALOG_NAWI_BIZNESY) //TYMCZASOWO BIZNESY OFF
     {
         if(response)
         {
@@ -193,6 +193,7 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             StartNavigationEx(playerid, GetBusinessName(bIDE), mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]); 
         }
     }
+    */
     return 1;
 }
 

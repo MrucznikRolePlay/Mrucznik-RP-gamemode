@@ -3453,5 +3453,12 @@ public SpecEnd(playerid)
 	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	return 1;
 }
-//Sandal END
+
+public DamagedHP(playerid)
+{
+	SetPVarInt(playerid, 'timer_DamagedHP', 1);
+	RemovePlayerAttachedObject(playerid, 2);
+	return 1;
+}
+
 //EOF

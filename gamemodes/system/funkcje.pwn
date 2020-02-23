@@ -4364,7 +4364,7 @@ UnLockCar(carid)
 }
 */
 SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
-{//example: SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Stealing A Police Vehicle");
+{
 	if(IsPlayerConnected(playerid))
 	{
 	    PlayerInfo[playerid][pCrimes] += 1;
@@ -4482,7 +4482,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
-			    if(IsACop(playerid) && OnDuty[playerid] == 1 || IsABOR(playerid) && OnDuty[playerid] == 1 || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
+			    if((IsACop(playerid) || IsABOR(playerid) || GetPlayerOrg(playerid) == 12) && OnDuty[playerid] == 1))
 			    {
       				PoziomPoszukiwania[playerid] = 0;
 				}
@@ -4502,9 +4502,9 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 					    {
 					        if(gCrime[i] == 0)
 					        {
-								format(cbjstore, sizeof(turnmes), "HQ: Do wszystkich jednostek: Zg³osi³: %s",turner);
+								format(cbjstore, sizeof(turnmes), "HQ: Przestêpstwo: %s",reason);
 								SendClientMessage(i, COLOR_LFBI, cbjstore);
-								format(cbjstore, sizeof(turnmes), "HQ: Przestêpstwo: %s, Podejrzany: %s WL: %d",reason,turned, PoziomPoszukiwania[playerid]);
+								format(cbjstore, sizeof(turnmes), "HQ: Podejrzany: %s, ostatnia lokalizacja: %s | Nadawca: %s",turned,pZone,turner);
 								SendClientMessage(i, COLOR_LFBI, cbjstore);
 							}
 						}
@@ -12659,6 +12659,119 @@ PursuitMode(playerid, giveplayerid)
 	{
 		sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
 	}
+}
+
+public DeathWarning(playerid, killerid, reason)
+{
+	new playername[MAX_PLAYER_NAME];
+	new killername[MAX_PLAYER_NAME];
+	new string[144];
+
+	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
+
+	GetPlayerName(playerid, playername, sizeof(playername));
+	if(killerid != INVALID_PLAYER_ID)
+	{
+		new bwreason[24];
+		format(bwreason, sizeof(bwreason), "zabi³");
+		if(PlayerInfo[playerid][pBW] > 0)
+		{
+			format(bwreason, sizeof(bwreason), "dobi³");
+		}
+		else if(PlayerInfo[playerid][pInjury] > 0)
+		{
+			format(bwreason, sizeof(bwreason), "zrani³");
+		}
+
+		if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER)
+		{
+			//-------<[  Logi  ]>---------
+			Log(warningLog, INFO, "%s %s %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid), reason);
+			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy jest zakazane, robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
+			if(PlayerInfo[killerid][pLevel] > 1)
+			{
+				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [GunID %d]!", killername, killerid, playername, bwreason, playerid, reason);
+				SendMessageToAdmin(string, COLOR_YELLOW);
+			}
+			else
+			{
+				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z DB, dosta³ kicka !", killername, killerid, bwreason, playername, playerid);
+				SendMessageToAdmin(string, COLOR_YELLOW);
+				Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
+				SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
+				KickEx(killerid);
+				SetPVarInt(playerid, "skip_bw", 1);
+				return 1;
+			}
+		}
+		else
+		{
+			switch(reason)
+			{
+				case 38:
+				{
+					//-------<[  Logi  ]>---------
+					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
+					{
+						format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNick(playerid, true), playerid);
+						SendCommandLogMessage(string);
+						Log(warningLog, INFO, string);
+						SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
+					}
+					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
+					{
+						format(string, sizeof(string), "AdmWarning: [%d]%s zabi³ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
+						SendMessageToAdmin(string, COLOR_YELLOW);
+						Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+						SendMessageToAdminEx(string, COLOR_P@, 2);
+					}
+					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) == 425)
+					{
+						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z Huntera", killername, killerid, playername, playerid);
+						SendMessageToAdminEx(string, COLOR_P@, 2);
+					}
+				}
+				case 41:
+				{
+					//-------<[  Logi  ]>---------
+					format(string, sizeof(string), "AdmWarning: [%d]%s zabi³ gracza %s ze spreya !", killerid, killername, playername);
+					SendMessageToAdmin(string, COLOR_YELLOW);
+					Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+					SendMessageToAdminEx(string, COLOR_P@, 2);
+				}
+				default:
+				{
+					if(reason <= 54 && reason > 0)
+					{
+						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+						SendMessageToAdminEx(string, COLOR_P@, 2);
+					}	
+					if(GetPVarInt(playerid, "skip_bw")  == 0)
+					{
+						if(PlayerInfo[playerid][pInjury] > 0)
+						{
+							if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
+							{
+								format(string, sizeof(string), "AdmWarning: £owca Nagród [%d]%s zabi³ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
+								SendMessageToAdmin(string, COLOR_YELLOW);
+								Log(warningLog, INFO, "£owca nagród %s zabi³ gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+							}
+
+						}
+					}	
+				}
+			}
+		}
+	}
+	else
+	{
+		if(reason <= 54 && reason > 0)
+		{
+			format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+			SendMessageToAdminEx(string, COLOR_P@, 2);
+		}
+	}
+	return 1;
 }
 
 
