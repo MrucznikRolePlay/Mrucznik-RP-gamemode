@@ -2116,22 +2116,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 				}
 				else
 				{
-					//-------<[     Logi      ]>---------
-					if(reason <= 54 && reason > 0)
-					{
-						if(IsPlayerConnected(killerid))
-						{
-							if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) == 425) format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi³ %s [%d] z Huntera", killername, killerid, playername, playerid);
-							else format(string, sizeof(string), "{FF66CC}BW-Warning: {FFFFFF}%s [%d] zrani³ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
-						}
-						else
-						{
-							format(string, sizeof(string), "{FF66CC}BW-Warning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
-						}
-						SendMessageToAdminEx(string, COLOR_P@, 2);
-					}
 					//-------<[     WL      ]>---------
-					if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
+					if(IsPlayerConnected(killerid))
 					{
 						if(giveWL)
 						{
