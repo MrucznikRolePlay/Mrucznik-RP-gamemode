@@ -786,7 +786,6 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 mBiz[bIDE][b_exZ] = interiorsPos[listitem][i_posZ];
                 mBiz[bIDE][b_vw] = 1000+bIDE; 
                 mBiz[bIDE][b_int] = interiorsPos[listitem][i_int];  
-                SaveBiz(bIDE); 
                 Log(businessLog, INFO, "%s rozbudowal w swoim biznesie %s interior - %d za $%d", GetPlayerLogName(playerid), GetBusinessLogName(bIDE), listitem, interiorsPos[listitem][i_cost]); 
             }
             else

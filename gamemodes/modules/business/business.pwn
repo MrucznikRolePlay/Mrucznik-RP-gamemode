@@ -48,12 +48,7 @@ stock FreeBizID()
 GetBusinessName(bIDE)
 {
 	new string[64];
-	if(bIDE == INVALID_BUSINESSID)
-	{
-		strcat(string, "Brak biznesu", sizeof(string));
-		return string;
-	}
-	strcat(string, mBiz[bIDE][b_Name], sizeof(string));
+	format(string, sizeof(string), "%s", mBiz[bIDE][b_Name]);
 	return string; 
 }
 GetBusinessOwnerName(bIDE)
@@ -631,8 +626,8 @@ StartLicytacjaBiz(bIDE, playerid, bChoice)
 }
 GetCostFromDistance(playerid, pX, pY, pZ)//TODO: Przenieœæ do osobnego modu³u
 {
-	new Float:value = ((GetPlayerDistanceFromPoint(playerid, pX, pY, pZ)/1000)*500);
-	new valu2 = floatround(value); 
-	return valu2;
+	new value = ((floatround(GetPlayerDistanceFromPoint(playerid, pX, pY, pZ))/1000)*500);
+	value = floatround(value); 
+	return value;
 }
 //end
