@@ -103,7 +103,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     mBiz[pBizID][b_cost]+COST_SHOP24, 
                     mBiz[pBizID][b_Location]); 
                     SetPVarInt(playerid, "BuyBizChoice", 1); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, defaultDialogCaption, string, "Kupujê", "Rezygnujê"); 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Kupujê", "Rezygnujê"); 
                 }
                 case 1:
                 {
@@ -112,7 +112,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     mBiz[pBizID][b_cost]+COST_SHOPCLOTHES, 
                     mBiz[pBizID][b_Location]); 
                     SetPVarInt(playerid, "BuyBizChoice", 2); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, defaultDialogCaption, string, "Kupujê", "Rezygnujê");
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Kupujê", "Rezygnujê");
 
                 }
                 case 2:
@@ -122,7 +122,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     mBiz[pBizID][b_cost]+COST_CASINO, 
                     mBiz[pBizID][b_Location]); 
                     SetPVarInt(playerid, "BuyBizChoice", 3); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, defaultDialogCaption, string, "Kupujê", "Rezygnujê");
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Kupujê", "Rezygnujê");
                 }
                 case 3:
                 {
@@ -131,7 +131,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     mBiz[pBizID][b_cost]+COST_RESTAURANT, 
                     mBiz[pBizID][b_Location]); 
                     SetPVarInt(playerid, "BuyBizChoice", 4); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, defaultDialogCaption, string, "Kupujê", "Rezygnujê");
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Kupujê", "Rezygnujê");
                 }
             }
         }
@@ -277,7 +277,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 6://Okreœl biznes
                 {
-                    ShowPlayerDialogEx(playerid, DIALOG_OKRESL_BIZNES, DIALOG_STYLE_LIST, defaultDialogCaption, 
+                    ShowPlayerDialogEx(playerid, DIALOG_OKRESL_BIZNES, DIALOG_STYLE_LIST, nameToDialogs, 
                     "Sklep 24-7\nSklep z ubraniami\nKasyno\nRestauracja", "Dalej", "Odrzuæ"); 
                 }
             }
@@ -297,7 +297,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SetPVarInt(playerid, "bChoiceOKRESL", listitem+1); 
             format(string, sizeof(string), "Czy chcesz aby biznes %s by³\nmo¿liwy do zakupienia tylko i wy³¹cznie jako\nbiznes o typie wybranym przez Ciebie?",
             GetBusinessName(bIDE));
-            ShowPlayerDialogEx(playerid, DIALOG_OKRESL_POTWIERDZ, DIALOG_STYLE_MSGBOX, defaultDialogCaption,
+            ShowPlayerDialogEx(playerid, DIALOG_OKRESL_POTWIERDZ, DIALOG_STYLE_MSGBOX, nameToDialogs,
             string, "Tak", "Nie"); 
             return 1;
         }
@@ -398,12 +398,12 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 2:
                 {//wp³acanie
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_WPLAC, DIALOG_STYLE_INPUT, defaultDialogCaption, 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_WPLAC, DIALOG_STYLE_INPUT, nameToDialogs, 
                     "Wpisz poni¿ej sumê jak¹ chcesz wp³aciæ\nWskazówka - mo¿esz u¿ywaæ mno¿nika k (np. 10k)", "Wp³aæ", "Zrezygnuj");  
                 }
                 case 3://wyp³acanie
                 {
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_WYPLAC, DIALOG_STYLE_INPUT, defaultDialogCaption, 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_WYPLAC, DIALOG_STYLE_INPUT, nameToDialogs, 
                     "Wpisz poni¿ej sumê jak¹ chcesz wyp³aciæ\nWskazówka - mo¿esz u¿ywaæ mno¿nika k (np. 10k)", "Wyp³aæ", "Zrezygnuj");
                 }
                 case 4:
@@ -528,14 +528,14 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê biznesu.\nPamiêtaj, ¿e maksymalna liczba znaków to 64!\nKoszt zmiany: $%d",
                     B_CENA_ZMIENAZWE);
-                    ShowPlayerDialogEx(playerid, DIALOG_INPUT_NOWANAZWA, DIALOG_STYLE_INPUT, defaultDialogCaption, 
+                    ShowPlayerDialogEx(playerid, DIALOG_INPUT_NOWANAZWA, DIALOG_STYLE_INPUT, nameToDialogs, 
                     string, "Akceptuj", "Main");
                 }
                 case 2:
                 {
                     format(string, sizeof(string), "WprowadŸ poni¿ej nowe MOTD biznesu\nPamiêtaj, ¿e maksymalna liczba znaków to 64!\nKoszt zmiany: $%d",
                     B_CENA_ZMIENMOTD);
-                    ShowPlayerDialogEx(playerid, DIALOG_INPUT_NOWEMOTD, DIALOG_STYLE_INPUT, defaultDialogCaption, 
+                    ShowPlayerDialogEx(playerid, DIALOG_INPUT_NOWEMOTD, DIALOG_STYLE_INPUT, nameToDialogs, 
                     string, "Akceptuj", "Main");
                 }
                 case 3:
