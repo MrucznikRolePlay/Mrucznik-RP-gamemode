@@ -504,10 +504,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 7:
 			{
 				if(!response) return 1;
+				StopAudioStreamForPlayer(playerid);
+				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18802/");
+			}
+			case 8:
+			{
+				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
-			case 8:
+			case 9:
 			{
 			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
@@ -11165,6 +11171,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                                 if(IsPlayerInVehicle(i, veh))
                                 {
                                     PlayAudioStreamForPlayer(i, RadioSANDos);
+                                    SetPVarInt(i, "sanlisten", 2);
+                                }
+                            }
+                        }
+                    }
+                }
+				else if(strfind(inputtext, "Lepa Station") != -1)
+                {
+                    if(RadioSANDos[0] != EOF)
+                    {
+                        if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+                        {
+                            foreach(new i : Player)
+                            {
+                                if(IsPlayerInVehicle(i, veh))
+                                {
+                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18802/");
                                     SetPVarInt(i, "sanlisten", 2);
                                 }
                             }
