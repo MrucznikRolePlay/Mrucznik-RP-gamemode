@@ -107,7 +107,7 @@ YCMD:pokazdowod(playerid, params[], help)
 	                else if(PlayerInfo[playerid][pJob] == 12) { jtext = "Bokser"; }
                     else if(PlayerInfo[playerid][pJob] == 14) { jtext = "Taksówkarz"; }
                     else if(PlayerInfo[playerid][pJob] == 15) { jtext = "Gazeciarz"; }
-                    else if(PlayerInfo[playerid][pJob] == 16) { jtext = "Trucker"; }
+                    else if(PlayerInfo[playerid][pJob] == 16) { jtext = "Kurier"; }
                     else { jtext = "Bezrobotny"; }
 			       //
        				SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Dowód Osobisty ______________|");
