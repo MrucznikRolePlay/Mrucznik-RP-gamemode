@@ -69,10 +69,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	//2.6.18
 	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-	nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-
-	//2.6.19
-	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	
 	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;

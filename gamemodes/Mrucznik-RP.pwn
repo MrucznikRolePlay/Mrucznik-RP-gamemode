@@ -144,8 +144,6 @@ native gpci (playerid, serial [], len);
 //-------<[ Inne ]>-------
 #include "old_modules\inne\ibiza.inc"
 #include "old_modules\inne\external.pwn"
-//#include "modules\business\businessDialogs.pwn" //TYMCZASOWO BIZNESY OFF
-//#include "modules\nawigacja\nawigacjaDialogs.pwn" //TYMCZASOWO BIZNESY OFF
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
 
