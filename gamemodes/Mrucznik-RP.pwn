@@ -344,6 +344,7 @@ public OnGameModeInit()
 	//discordconnect
 	DiscordConnectInit();
 
+
 	//AFK timer
 	for(new i; i<MAX_PLAYERS; i++)
 	{
