@@ -507,13 +507,6 @@ public OnGameModeExit()
 
         INT_AirTowerLS_Exit(i, true, true);
     }
-	/*for(new i; i <= MAX_BIZ; i++)
-	{
-		if(BizExist(i))
-		{
-			SaveBiz(i);
-		}
-	}*/ // TYMCZASOWO BIZNESY OFF
     foreach(new i : Player)
     {
         if(noclipdata[i][cameramode] == CAMERA_MODE_FLY) CancelFlyMode(i);
