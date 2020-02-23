@@ -1,0 +1,83 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                  business                                                 //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: Simeone
+// Data utworzenia: 04.02.2020
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+enum eBiz {
+	b_Name[64], 
+	b_ownerUID,
+	b_Name_Owner[MAX_PLAYER_NAME], 
+	Float:b_enX,
+	Float:b_enY,
+	Float:b_enZ,
+	Float:b_exX,
+	Float:b_exY,
+	Float:b_exZ,
+	b_int,
+	b_vw,
+	b_pLocal,
+	b_Location[64],
+	b_cost,
+	b_auction,
+	b_moneyPocket,
+	b_tempPocket,
+    b_TYPE,
+    b_TYPE2,
+	b_motd[64],
+	b_tempPocketUsage, 
+	b_lastOwnerDate,
+	b_neededType, 
+	b_elementsPocket,
+	b_ulepszenie1,//sejf elementów
+	b_ulepszenie2,//Zmiana MOTD
+	b_ulepszenie3,//Mo¿liwoœæ spawnu
+	b_ulepszenie4,//sejf g³ówny
+	b_ulepszenie5//Sejf tymczasowy
+};
+new mBiz[MAX_BIZ][eBiz]; 
+new loadedBiz;
+new Text3D:businessText[MAX_BIZ]; 
+new businessIcon[MAX_BIZ];
+
+
+enum interBiz {
+	i_name[64],
+	i_size[32],
+	i_author[32],
+	i_int,
+	i_cost, 
+	i_type,
+	Float:i_posX,
+	Float:i_posY,
+	Float:i_posZ
+};
+//-----------------<[ Zmienne: ]>-------------------
+
+new const interiorsPos[][interBiz]={
+	{"Sklep spo¿ywczy", "Ma³y", "Rockstar", 17, 10000000, BTYPE_SHOP, -25.884498, -185.868988, 1003.546875},
+	{"Toys Shop", "Ma³y", "Rockstar", 6, 4500000, BTYPE_SHOP,-2240.468505,137.060440,1035.414062},//
+	{"Knajpa", "Œrednia", "Rockstar", 17, 6000000, BTYPE_DEFAULT, 377.1901,-192.6504,1000.6401},
+	{"Studio Tatto", "Ma³y", "Rockstar", 16, 4000000, BTYPE_DEFAULT, -204.2183,-27.2317,1002.2734}
+};
+//------------------<[ Forwardy: ]>--------------------
+
+//end

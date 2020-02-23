@@ -1,0 +1,116 @@
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                  business                                                 //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: Simeone
+// Data utworzenia: 04.02.2020
+
+//
+
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+#define LVL_TO_BUY_BIZ 5
+#define MAX_CASH_IN_MONEYPOCKET 20000000
+#define MAX_CASH_IN_TEMPPOCKET 10000000
+#define MAX_OFFLINE_DAYS 14
+#define MAX_BIZ 200
+#define INVALID_BUSINESSID 9999
+#define MAX_BUSINESS_NAME 64
+#define MAX_BUSINESS_MOTD 64
+
+
+//---------------<[ Dialogi: ]>---------------
+//dialogi kupna 
+#define DIALOG_BIZ_BUY 6550
+#define DIALOG_BIZ_BUY2 6551
+#define DIALOG_BIZ_BUY3 6552
+#define DIALOG_BIZ_BUYBOX 6553
+//Dialogi informacyjne 
+#define BIZ_DIALOG_INFO 6554
+//Dialogi dla businessGOD
+#define DIALOG_BIZ_ADMINEDIT 6555
+
+#define BIZ_CHOICE_NOTHING 0
+#define BIZ_CHOICE_PRZENIES 1
+#define BIZ_CHOICE_DODAJ 2
+#define BIZ_CHOICE_USUN_BIZ 3
+#define BIZ_CHOICE_USUN_WLAS 4
+#define BIZ_CHOICE_WYZERUJ_KASE 5
+#define BIZ_CHOICE_ZMIEN_CENE 6
+
+#define DIALOG_BIZ_OWNER 6556
+#define DIALOG_BIZ_OWNER2 6557
+#define DIALOG_BIZ_OWNER3 6558
+#define DIALOG_BIZ_OWNER4 6559
+#define DIALOG_BIZ_OWNER5 6560
+#define DIALOG_BIZ_WPLAC 6561
+#define DIALOG_BIZ_WYPLAC 6562
+#define DIALOG_INPUT_NOWANAZWA 6563
+#define DIALOG_INPUT_NOWEMOTD 6564
+#define DIALOG_OKRESL_BIZNES 6565
+#define DIALOG_AKCEPT_ZLECENIE 6567
+#define DIALOG_BIZ_INTERIORLIST 6568
+
+#define DIALOG_MAIN 0
+#define DIALOG_WORKERS 1
+#define DIALOG_SEJF 2
+#define DIALOG_DOORS 3
+#define DIALOG_ADDS 4
+
+#define B_CENA_ZMIENAZWE 1500000
+#define B_CENA_ZMIENMOTD 2000000
+#define B_CENA_ZMIENSPAWN 5000000
+#define B_CENA_SEJFG 2500000
+#define B_CENA_SEJFT 7000000
+#define B_CENA_SEJFE 8000000
+
+
+
+#define BTYPE_DEFAULT 0
+
+
+#define BTYPE_SHOP 1
+#define BNAME_SHOP "Sklep 24-7"
+#define BCOST_SHOP 1000000
+#define BECOST_SHOP 200
+
+
+#define BTYPE_CLOTHESSHOP 2 
+#define BNAME_CLOTHESSHOP "Sklep z ubraniami"
+#define BCOST_CLOTHESSHOP 1250000
+#define BECOST_CLOTHESSHOP 250
+
+#define BTYPE_RESTAURANT 3
+#define BNAME_RESTAURANT "Restauracja"
+#define BCOST_RESTAURANT 800000
+
+#define BTYPE_WORKSHOP 4
+#define BNAME_WORKSHOP "Warsztat samochodowy"
+#define BCOST_WORKSHOP 900000
+
+#define BTYPE_HOTEL 5
+#define BNAME_HOTEL "Hotel/Motel"
+#define BCOST_HOTEL 500000
+
+#define BTYPE_TRANSPORT 6//                         --> ID biznesu odpowiedzialnego za transport
+#define BNAME_TRANSPORT "Korporacja Transportowa" 
+#define BCOST_TRANSPORT 1500000
+
+#define BTYPE_OIL 101//                             --> ID biznesu przemys³owego - RAFINERIA 
+#define BNAME_OIL "Przemys³ i transport ropy"
+#define BCOST_OIL 750000
+//end
