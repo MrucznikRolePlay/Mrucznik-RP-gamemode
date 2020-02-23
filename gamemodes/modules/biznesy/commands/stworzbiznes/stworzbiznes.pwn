@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                stworzbiznes                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,38 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "stworzbiznes_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_stworzbiznes()
 {
-    command_mbizbuy();
-    command_mbiznesy();
+    new command = Command_GetID("stworzbiznes");
+
+    //aliases
+    Command_AddAlt(command, "stworzbiz");
+    Command_AddAlt(command, "createbiz");
+    Command_AddAlt(command, "createbusiness");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:stworzbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda do tworzenia biznesu");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_stworzbiznes_Impl(playerid);
 }

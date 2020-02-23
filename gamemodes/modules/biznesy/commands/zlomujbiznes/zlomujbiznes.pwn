@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                zlomujbiznes                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "zlomujbiznes_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_zlomujbiznes()
 {
-    command_mbizbuy();
-    command_mbiznesy();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zlomujbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala zez³omowaæ biznes. Musisz byæ w³aœcicielem. ");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zlomujbiznes_Impl(playerid);
 }

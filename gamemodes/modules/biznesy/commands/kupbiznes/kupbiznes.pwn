@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 kupbiznes                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "kupbiznes_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_kupbiznes()
 {
-    command_mbizbuy();
-    command_mbiznesy();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:kupbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala zakupiæ biznes. Zadzia³a tylko wtedy gdy jesteœmy w wyznaczonym do tego miejscu, a biznes nie jest kupiony.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_kupbiznes_Impl(playerid);
 }

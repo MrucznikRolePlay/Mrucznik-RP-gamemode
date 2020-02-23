@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                biznespomoc                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,28 +16,21 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 20.08.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_biznespomoc_Impl(playerid)
 {
-    command_mbizbuy();
-    command_mbiznesy();
-    
+	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
+	SendClientMessage(playerid, COLOR_WHITE,"*** BIZNES POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
+	SendClientMessage(playerid, COLOR_GRAD3,"*** BIZNES *** /bizinfo /wejdz /wyjdz /kupbiznes /sprzedajbiznes");
+	SendClientMessage(playerid, COLOR_GRAD3, "*** BIZNES *** /bizlock /biz /obiz /bizpanel");
+	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /pomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
+	return 1;
 }
+
+//end

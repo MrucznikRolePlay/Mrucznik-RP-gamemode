@@ -1,0 +1,9 @@
+{
+    "name": "biznesy",
+    "description": "System biznesów.",
+    "author": "2.5",
+    "commands": true,
+    "mysql": true,
+    "callbacks": true,
+    "date": "04.05.2019"
+}
