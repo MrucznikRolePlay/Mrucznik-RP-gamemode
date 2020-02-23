@@ -199,7 +199,7 @@ GiveBizToPlayer(playerid, bIDE, bType2)
 	SaveBiz(bIDE);
 	return 1;
 }
-PlayerNearBusinessType(playerid, btype)
+PlayerNearBusinessType(playerid, BTYPE2)
 {
 	new businessChecked; 
 	for(new i; i<=MAX_BIZ; i++)
@@ -210,7 +210,7 @@ PlayerNearBusinessType(playerid, btype)
 		}
 		if(BizExist(i))
 		{
-			if(mBiz[i][b_TYPE2] == btype)
+			if(mBiz[i][b_TYPE2] == BTYPE2)
 			{
 				if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ])
 				&& GetPlayerVirtualWorld(playerid) == 0)//SPRAWDZANIE ZEWN¥TRZ
@@ -540,7 +540,7 @@ CheckPlayerBusiness(playerid)
 				format(string, sizeof(string), "ID binesu ze stats: [%d], bizOwner: [%d] -> Kliknij F8 (zrób screenshot'a)", PlayerInfo[playerid][pBusinessOwner], mBiz[PlayerInfo[playerid][pBusinessOwner]][b_ownerUID]); 
 				sendErrorMessage(playerid, "Twój biznes nale¿y do kogoœ innego // nie ma w³aœciciela!"); 
 				sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d mo¿esz napisaæ stratê na naszym forum!"); 
-				sendTipMessageEx(playerid, COLOR_RED, string); 
+				sendTipMessage(playerid, COLOR_RED, string); 
 				PlayerInfo[playerid][pBusinessOwner] = INVALID_BUSINESSID;
 			}
 		}
@@ -555,42 +555,9 @@ CheckPlayerBusiness(playerid)
 	}
 	return 0; 
 }
-GetBusinessTypeName(bIDE)
-{
-	new string[64], businessType; 
-	businessType = mBiz[bIDE][b_TYPE2]; 
-	if(businessType == BTYPE_DEFAULT)
-	{
-		format(string, sizeof(string), "Brak typu"); 
-	}
-	else if(businessType == BTYPE_SHOP)
-	{
-		format(string, sizeof(string), "%s", BNAME_SHOP); 
-	}
-	else if(businessType == BTYPE_CLOTHESSHOP)
-	{
-		format(string, sizeof(string), "%s", BNAME_CLOTHESSHOP); 
-	}
-	else if(businessType == BTYPE_RESTAURANT)
-	{
-		format(string, sizeof(string), "%s", BNAME_RESTAURANT); 
-	}
-	else if(businessType == BTYPE_WORKSHOP)
-	{
-		format(string, sizeof(string), "%s", BNAME_WORKSHOP); 
-	}
-	else if(businessType == BTYPE_HOTEL)
-	{
-		format(string, sizeof(string), "%s", BNAME_HOTEL); 
-	} 
-	else
-	{
-		format(string, sizeof(string), "Nieznany"); 
-	}
-	return string;
-}
 StartLicytacjaBiz(bIDE, playerid, bChoice)
 {
+	#pragma unused bChoice
 	new string[256]; 
 	foreach(new i : Player)
 	{
@@ -601,9 +568,9 @@ StartLicytacjaBiz(bIDE, playerid, bChoice)
 		SendClientMessage(i, COLOR_WHITE, string); 
 		SendClientMessage(i, COLOR_GREEN, "=====<[ Koniec komunikatu ]>====="); 
 		sendTipMessage(playerid, "Je¿eli chcia³byœ zalicytowaæ obiekt podejdŸ do niego i wpisz /licytuj"); 
+		mBiz[bIDE][b_auction] = 1; //Trwa licytacja na ten biznes
 		//MRUCZNIK - DO DOKOÑCZENIA (LICYTACJE) 
 	}
-	mBiz[bIDE][b_auction] = 1; //Trwa licytacja na ten biznes
 	return 1; 
 }
 //end

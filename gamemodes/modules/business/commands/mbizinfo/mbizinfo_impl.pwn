@@ -46,7 +46,7 @@ command_mbizinfo_Impl(playerid)
                 format(string, sizeof(string), " \t{FF1493}%s\n{FFFFFF}W³aœciciel: {747b41}%s\n{FFFFFF}Typ: {747b41}%s\n{FFFFFF}Lokalizacja: {747b41}%s\n{FFFFFF}Cena: {747b41}$%d\n{FFFFFF}TID: {747b41}%d\n{FFFFFF}U1: {747b41}%d | {FFFFFF}U2: {747b41}%d | {FFFFFF}U3: {747b41}%d | {FFFFFF}U4: {747b41}%d | {FFFFFF}U5: {747b41}%d",
                 GetBusinessName(i),
                 GetBusinessOwnerName(i),
-                GetBusinessTypeName(i),
+                GetTypeNameBiz(i),
                 mBiz[i][b_Location],
                 mBiz[i][b_cost],
                 i,

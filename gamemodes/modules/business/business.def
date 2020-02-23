@@ -23,14 +23,14 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define LVL_TO_BUY_BIZ 5
-#define MAX_CASH_IN_MONEYPOCKET 20000000
-#define MAX_CASH_IN_TEMPPOCKET 10000000
-#define MAX_OFFLINE_DAYS 14
-#define MAX_BIZ 200
-#define INVALID_BUSINESSID 9999
-#define MAX_BUSINESS_NAME 64
-#define MAX_BUSINESS_MOTD 64
+#define LVL_TO_BUY_BIZ 5//                          --> Minimalny LVL, który zezwala na kupno biznesu
+#define MAX_CASH_IN_MONEYPOCKET 20000000//20kk      --> Sejf g³ówny, maksymalna gotówka standardowa
+#define MAX_CASH_IN_TEMPPOCKET 10000000//10kk       --> Sejf tymczasowy, maksymalna gotówka standardowa
+#define MAX_OFFLINE_DAYS 14//                       --> Maksymalna nieobecnoœæ w³aœciciela biznesu (w dniach)
+#define MAX_BIZ 200//                               --> Maksymalna liczba biznesów na œwiecie
+#define INVALID_BUSINESSID 9999//                   --> ID biznesu wskazuj¹ce, na brak biznesu
+#define MAX_BUSINESS_NAME 64//                      --> Maksymalna d³ugoœæ ci¹gu biznes Name
+#define MAX_BUSINESS_MOTD 64//                      --> Maksymalna d³ugoœc ci¹gu dla biznes MOTD
 
 
 //---------------<[ Dialogi: ]>---------------
@@ -43,7 +43,7 @@
 #define BIZ_DIALOG_INFO 6554
 //Dialogi dla businessGOD
 #define DIALOG_BIZ_ADMINEDIT 6555
-
+    //Choice dla businessGOD
 #define BIZ_CHOICE_NOTHING 0
 #define BIZ_CHOICE_PRZENIES 1
 #define BIZ_CHOICE_DODAJ 2
@@ -51,7 +51,7 @@
 #define BIZ_CHOICE_USUN_WLAS 4
 #define BIZ_CHOICE_WYZERUJ_KASE 5
 #define BIZ_CHOICE_ZMIEN_CENE 6
-
+//Dialogi zarz¹dzania dla businessOwner
 #define DIALOG_BIZ_OWNER 6556
 #define DIALOG_BIZ_OWNER2 6557
 #define DIALOG_BIZ_OWNER3 6558
@@ -64,45 +64,47 @@
 #define DIALOG_OKRESL_BIZNES 6565
 #define DIALOG_OKRESL_POTWIERDZ 6567
 #define DIALOG_BIZ_INTERIORLIST 6568
-
-#define DIALOG_MAIN 0
-#define DIALOG_WORKERS 1
-#define DIALOG_SEJF 2
-#define DIALOG_DOORS 3
-#define DIALOG_ADDS 4
-
-#define B_CENA_ZMIENAZWE 1500000
-#define B_CENA_ZMIENMOTD 2000000
-#define B_CENA_ZMIENSPAWN 5000000
-#define B_CENA_SEJFG 2500000
-#define B_CENA_SEJFT 7000000
-#define B_CENA_SEJFE 8000000
-
-
-
-#define BTYPE_DEFAULT 0
+    //Pod dialogi do OWNER
+#define DIALOG_MAIN 0//                             --> Dialog g³ówny, pozwalaj¹cy zarz¹dzaæ biznesem
+#define DIALOG_WORKERS 1//                          --> Dialog zarz¹dzania pracownikami
+#define DIALOG_SEJF 2//                             --> Dialog zarz¹dzania sejfami
+#define DIALOG_DOORS 3//                            --> Dialog zarz¹dzania drzwiami
+#define DIALOG_ADDS 4//                             --> Dialog kupna dodatków
+        //Cena Dodatków
+#define B_CENA_ZMIENAZWE 1500000//1.5kk             --> Cena jak¹ gracz musi zap³aciæ za zmianê nazwy biznesu
+#define B_CENA_ZMIENMOTD 2000000//2kk               --> Cena jak¹ gracz musi zap³aciæ za zmianê MOTD rodziny 
+#define B_CENA_ZMIENSPAWN 5000000//5kk              --> Cena jak¹ gracz musi zap³aciæ za mo¿liwoœæ SPAWNU biznesu
+#define B_CENA_SEJFG 2500000//2.5kk +1              --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu g³ównego
+#define B_CENA_SEJFT 7000000//7kk +1                --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu tymczasowego 
+#define B_CENA_SEJFE 8000000//8kk                   --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu elementów
 
 
-#define BTYPE_SHOP 1
+
+//Mo¿liwe typy biznesów
+    // SERVICES < 100, INDUSTRY > 100 
+#define BTYPE_DEFAULT 0//                           --> BRAK TYPU 
+
+    //Biznes polega na sprzeda¿y innym graczom obiektów (/kup)
+#define BTYPE_SHOP 1//                              --> ID sklepu 24-7
 #define BNAME_SHOP "Sklep 24-7"
 #define BCOST_SHOP 1000000
 #define BECOST_SHOP 200
 
-
-#define BTYPE_CLOTHESSHOP 2 
+    //Biznes polega na sprzeda¿y innym graczom ubrañ (/kupskin)
+#define BTYPE_CLOTHESSHOP 2//                       --> ID sklepu z ubraniami 
 #define BNAME_CLOTHESSHOP "Sklep z ubraniami"
 #define BCOST_CLOTHESSHOP 1250000
 #define BECOST_CLOTHESSHOP 250
 
-#define BTYPE_RESTAURANT 3
+#define BTYPE_RESTAURANT 3//                        --> ID restauracji
 #define BNAME_RESTAURANT "Restauracja"
 #define BCOST_RESTAURANT 800000
 
-#define BTYPE_WORKSHOP 4
+#define BTYPE_WORKSHOP 4//                          --> ID warsztatu 
 #define BNAME_WORKSHOP "Warsztat samochodowy"
 #define BCOST_WORKSHOP 900000
 
-#define BTYPE_HOTEL 5
+#define BTYPE_HOTEL 5//                             --> ID hotelu
 #define BNAME_HOTEL "Hotel/Motel"
 #define BCOST_HOTEL 500000
 
