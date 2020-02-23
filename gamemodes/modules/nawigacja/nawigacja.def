@@ -23,10 +23,10 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define DIALOG_NAWI_MAIN 7600
-#define DIALOG_NAWI_ZNANEMIEJSCA 7602
-#define DIALOG_NAWI_BIZNESY 7603
-#define DIALOG_NAWI_ULICE 7604
+#define DIALOG_NAWI_MAIN 7001
+#define DIALOG_NAWI_ZNANEMIEJSCA 7002
+#define DIALOG_NAWI_BIZNESY 7003
+#define DIALOG_NAWI_ULICE 7004
 #define MAX_NAWIPOINTS 6
 
 //nPos

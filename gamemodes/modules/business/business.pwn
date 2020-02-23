@@ -142,12 +142,12 @@ DestroyBusiness3DText(bIDE)
 }
 CreateBusinessIcon(bIDE)
 {
-	businessIcon[bIDE] = CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.1, 0, 0, -1, STREAMER_PICKUP_SD);
+	businessIcon[bIDE] = CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD);
 	return 0;
 }
 CreateBusiness3DText(bIDE)
 {
-	businessText[bIDE] = CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.3, 10.0);
+	businessText[bIDE] = CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 10.0);
 	return 0;
 }
 CreateBusinessIcons()
