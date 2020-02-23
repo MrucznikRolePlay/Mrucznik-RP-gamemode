@@ -134,66 +134,6 @@ nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
         }
     }
-    /*else if(dialogid == DIALOG_NAWI_BIZNESY) //TYMCZASOWO BIZNESY OFF
-    {
-        if(response)
-        {
-            if(strval(inputtext) == 0)//Ci¹g nie jest liczb¹
-            {
-                new checkedBiz;
-                for(new i; i<= MAX_BIZ; i++)
-                {
-                    if(checkedBiz == loadedBiz)
-                    {
-                        sendErrorMessage(playerid, "Nie uda³o siê znaleŸæ wpisanego przez Ciebie biznesu w systemie nawigacji!"); 
-                        return 1;
-                    }
-                    if(BizExist(i))
-                    {
-                        if(strfind(inputtext, mBiz[i][b_Name], false, 0))
-                        {
-                            new bIDE = i; 
-                            new string[256];
-                            format(string, sizeof(string), 
-                            "Uda³o siê znaleŸæ biznes!\nZnaleziony biznes: %s [%d]\nLokalizacja: %s\nW³aœciciel: %s\nCzy chcesz siê tam udaæ?",
-                            GetBusinessName(bIDE), bIDE, mBiz[bIDE][b_Location], GetBusinessOwnerName(bIDE));
-                            SetPVarInt(playerid, "ZnalazlBiz", bIDE); 
-                            ShowPlayerDialogEx(playerid, DIALOG_NAWI_BIZNESY2, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Tak", "Nie"); 
-                            return 1;
-                        }
-                        checkedBiz++;
-                    }
-                }
-            }
-            else 
-            {
-                new bIDE = strval(inputtext);
-                new string[256];
-                if(BizExist(bIDE))
-                {
-                    format(string, sizeof(string), 
-                    "Uda³o siê znaleŸæ biznes!\nZnaleziony biznes: %s [%d]\nLokalizacja: %s\nW³aœciciel: %s\nCzy chcesz siê tam udaæ?",
-                    GetBusinessName(bIDE), bIDE, mBiz[bIDE][b_Location], GetBusinessOwnerName(bIDE));
-                    SetPVarInt(playerid, "ZnalazlBiz", bIDE); 
-                    ShowPlayerDialogEx(playerid, DIALOG_NAWI_BIZNESY2, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Tak", "Nie"); 
-                }
-                else 
-                {
-                    sendErrorMessage(playerid, "Nie istnieje taki biznes!"); 
-                    return 1;
-                }
-            }
-        }
-    }
-    else if(dialogid == DIALOG_NAWI_BIZNESY2)
-    {
-        if(response)
-        {
-            new bIDE = GetPVarInt(playerid, "ZnalazlBiz"); 
-            StartNavigationEx(playerid, GetBusinessName(bIDE), mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]); 
-        }
-    }
-    */
     return 1;
 }
 

@@ -41,5 +41,4 @@ new PlayerText:roadsLeft_4[MAX_PLAYERS];
 new PlayerText:roadsLeft_5[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
 forward nawiStart(playerid);
-forward nawiStartEx(playerid);
 //end
