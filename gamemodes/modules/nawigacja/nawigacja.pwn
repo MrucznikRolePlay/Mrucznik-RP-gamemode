@@ -72,7 +72,7 @@ StartNavigation(playerid, NAWI)
 {
 	ShowPlayerNaviTextDraws(playerid);
 	navigationCheckPoint[playerid] = CreateDynamicCP(posNawi[NAWI][N_POSX], posNawi[NAWI][N_POSY], posNawi[NAWI][N_POSZ], 5.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid, 8000.0);
-	nawiTimer[playerid] = SetTimerEx("nawiStart", 5000, true, "i", playerid); 
+	nawiTimer[playerid] = SetTimerEx("nawiStart", 10000, true, "i", playerid); 
 	return 1;
 }
 StartNavigationEx(playerid, doceloweNazwa[64], Float:doceloweX, Float:doceloweY, Float:doceloweZ)
@@ -83,7 +83,7 @@ StartNavigationEx(playerid, doceloweNazwa[64], Float:doceloweX, Float:doceloweY,
 	SetPVarFloat(playerid, "miejsceDoceloweX", doceloweY);
 	SetPVarFloat(playerid, "miejsceDoceloweX", doceloweZ);
 	navigationCheckPoint[playerid] = CreateDynamicCP(doceloweX, doceloweY, doceloweZ, 5.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid), playerid, 8000.0);
-	nawiTimer[playerid] = SetTimerEx("nawiStartEx", 5000, true, "i", playerid); 
+	nawiTimer[playerid] = SetTimerEx("nawiStartEx", 10000, true, "i", playerid); 
 	return 1; 
 }
 StopPlayerNavigation(playerid, bool:dojechal=false)
@@ -204,46 +204,42 @@ DestroyPlayerNaviTextDraws(playerid)
 UpdateNaviTextDrawsForPlayer(playerid)
 {
 	new string[124];
-	new stringVeh[124];
 	new idVeh = PlayerInfo[playerid][pSkin]; 
-	format(stringVeh, sizeof(stringVeh), "]Pieszo]"); 
 	new nawLokacja = GetPVarInt(playerid, "miejsceDoceloweID");
 	new nawLokacjaString[64];
 	GetPVarString(playerid, "miejsceDoceloweStr", nawLokacjaString, sizeof(nawLokacjaString));
 	if(IsPlayerInAnyVehicle(playerid))//Je¿eli jest w wozie
 	{
-		idVeh = GetVehicleModel(GetPlayerVehicleID(playerid)); 
-		format(stringVeh, sizeof(stringVeh), "]%s]", Odpolszcz(VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]));
+		idVeh = GetPlayerVehicleID(playerid);
 	}
-	format(string, sizeof(string), "Pozostalo: ~g~%0.2f~w~m", 
+	format(string, sizeof(string), "Pozostalo: ~g~%0.2f ~w~metrow", 
 	GetPlayerDistanceFromPoint(playerid, posNawi[nawLokacja][N_POSX], posNawi[nawLokacja][N_POSY], posNawi[nawLokacja][N_POSZ]));
 	PlayerTextDrawSetString(playerid, roadsLeft_5[playerid], string); 
 	format(string, sizeof(string), "Docelowe: ~g~%s", Odpolszcz(nawLokacjaString)); 
 	PlayerTextDrawSetString(playerid, roadsLeft_4[playerid], string); 
-	PlayerTextDrawSetString(playerid, roadsLeft_2[playerid], stringVeh); 
+	format(string, sizeof(string), "]%s]", Odpolszcz(VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]));
+	PlayerTextDrawSetString(playerid, roadsLeft_2[playerid], string); 
 	PlayerTextDrawSetPreviewModel(playerid, roadsLeft_3[playerid], idVeh);
-	PlayerTextDrawSetPreviewRot(playerid, roadsLeft_3[playerid], 3.000000, 180.000000, 35.000000, 1.000000);
+
 	return 1;
 }
 UpdateNaviTextDrawsForPlayerEx(playerid, Float:dPosX, Float:dPosY, Float:dPosZ, dLocation[64])
 {
 	new string[124];
-	new stringVeh[124];
-	format(stringVeh, sizeof(stringVeh), "]Pieszo]"); 
 	new idVeh = PlayerInfo[playerid][pSkin]; 
 	if(IsPlayerInAnyVehicle(playerid))//Je¿eli jest w wozie
 	{
-		idVeh = GetVehicleModel(GetPlayerVehicleID(playerid)); 
-		format(stringVeh, sizeof(stringVeh), "]%s]", Odpolszcz(VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]));
+		idVeh = GetPlayerVehicleID(playerid);
 	}
-	format(string, sizeof(string), "Pozostalo: ~g~%0.2f~w~m", 
+	format(string, sizeof(string), "Pozostalo: ~g~%0.2f ~w~metrow", 
 	GetPlayerDistanceFromPoint(playerid, dPosX, dPosY, dPosZ));
 	PlayerTextDrawSetString(playerid, roadsLeft_5[playerid], string); 
 	format(string, sizeof(string), "Docelowe: ~g~%s", Odpolszcz(dLocation)); 
 	PlayerTextDrawSetString(playerid, roadsLeft_4[playerid], string); 
-	PlayerTextDrawSetString(playerid, roadsLeft_2[playerid], stringVeh); 
+	format(string, sizeof(string), "]%s]", Odpolszcz(VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]));
+	PlayerTextDrawSetString(playerid, roadsLeft_2[playerid], string); 
 	PlayerTextDrawSetPreviewModel(playerid, roadsLeft_3[playerid], idVeh);
-	PlayerTextDrawSetPreviewRot(playerid, roadsLeft_3[playerid], 3.000000, 180.000000, 35.000000, 1.000000);
+
 	return 1;
 }
 ShowPlayerNaviTextDraws(playerid)
