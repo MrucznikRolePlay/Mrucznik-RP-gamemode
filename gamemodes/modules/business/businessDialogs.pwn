@@ -157,71 +157,54 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     return 1;
                 }
             } 
-            if(mBiz[pBizID][b_auction] == 2)
+            if(bChoice == 1)//Zakup sklepu 24-7
             {
-                if(bChoice == 1)//Zakup sklepu 24-7
+                if(mBiz[pBizID][b_ownerUID] == 0)
                 {
-                    if(mBiz[pBizID][b_ownerUID] == 0)
+                    if(kaska[playerid] >= mBiz[pBizID][b_cost]+COST_SHOP24)
                     {
-                        if(kaska[playerid] >= mBiz[pBizID][b_cost]+COST_SHOP24)
-                        {
-                            ZabierzKase(playerid, mBiz[pBizID][b_cost]+COST_SHOP24);
-                            GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_SHOP); 
-                            Log(businessLog, INFO, "%s kupil biznes %s jako sklep 24-7 za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
-                        }
-                        else
-                        {
-                            sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-                            return 1;
-                        }
+                        ZabierzKase(playerid, mBiz[pBizID][b_cost]+COST_SHOP24);
+                        GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_SHOP); 
+                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep 24-7 za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
                     }
-                    else{ 
-                        sendErrorMessage(playerid, "Ten biznes ma ju¿ swojego w³aœciciela!"); 
+                    else
+                    {
+                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
                         return 1;
                     }
                 }
-                else if(bChoice == 2)//Zakup sklepu z ubraniami
-                {
-                    if(mBiz[pBizID][b_ownerUID] == 0)
-                    {
-                        if(kaska[playerid] < (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES))
-                        {
-                            sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-                            return 1;
-                        }
-                        ZabierzKase(playerid, (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
-                        GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_CLOTHESSHOP);
-                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep z ubraniami za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
-
-                    }
-                    else 
-                    {
-                        sendErrorMessage(playerid, "Ten biznes ma ju¿ swojego w³aœciciela!"); 
-                        return 1;
-                    }
-                }
-                else if(bChoice == 3)//Zakup kasyna
-                {
-                    sendTipMessage(playerid, "Opcja chwilowo wy³¹czona!"); 
-                }
-                else if(bChoice == 4)//Zakup restauracji
-                {
-                    sendErrorMessage(playerid, "Opcja chwilowo wy³¹czona!");
-                }
-            }
-            else if(mBiz[pBizID][b_auction] == 1)
-            {
-                sendErrorMessage(playerid, "Na ten biznes aktualnie trwa aukcja!");
-                sendTipMessage(playerid, "Je¿eli chcia³byœ go zalicytowaæ podejdŸ do niego i wpisz /licytuj"); 
-            }
-            else 
-            {
-                if(mBiz[pBizID][b_ownerUID] != 0)//Sytacja nie powinna zaistnieæ
-                {
-                    sendErrorMessage(playerid, "Ten biznes ma w³aœciciela - nie mo¿esz rozpocz¹æ licytacji"); 
+                else{ 
+                    sendErrorMessage(playerid, "Ten biznes ma ju¿ swojego w³aœciciela!"); 
                     return 1;
                 }
-                StartLicytacjaBiz(pBizID, playerid, bChoice); 
+            }
+            else if(bChoice == 2)//Zakup sklepu z ubraniami
+            {
+                if(mBiz[pBizID][b_ownerUID] == 0)
+                {
+                    if(kaska[playerid] < (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES))
+                    {
+                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
+                        return 1;
+                    }
+                    ZabierzKase(playerid, (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
+                    GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_CLOTHESSHOP);
+                    Log(businessLog, INFO, "%s kupil biznes %s jako sklep z ubraniami za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOPCLOTHES));
+
+                }
+                else 
+                {
+                    sendErrorMessage(playerid, "Ten biznes ma ju¿ swojego w³aœciciela!"); 
+                    return 1;
+                }
+            }
+            else if(bChoice == 3)//Zakup kasyna
+            {
+                sendTipMessage(playerid, "Opcja chwilowo wy³¹czona!"); 
+            }
+            else if(bChoice == 4)//Zakup restauracji
+            {
+                sendErrorMessage(playerid, "Opcja chwilowo wy³¹czona!");
             }
         }
         else
