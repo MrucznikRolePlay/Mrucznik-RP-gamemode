@@ -392,16 +392,12 @@ ShowBusinessOwnerDialog(playerid, dialogType)
 	else if(dialogType == DIALOG_SEJF)
 	{
 		format(string, sizeof(string), "{F3EB34}====<[%s]>====\t \n\
-		Stan sejfu G:\t{33AA33}$%d / $%d\n\
+		Stan sejfu G:\t{33AA33}$%d\n\
 		Wp³aæ\t \n\
 		Wyp³aæ\t \n\
-		Stan sejfu T:\t{33AA33}$%d / $%d\n\
+		Stan sejfu T:\t{33AA33}$%d\n\
 		Wyp³aæ\t \n\
-		Stan sejfu materia³ów:\t{33AA33}%d / %d",
-		GetBusinessName(bIDE), 
-		mBiz[bIDE][b_moneyPocket], GetPocketMaxSpace(bIDE),
-		mBiz[bIDE][b_tempPocket], GetTempPocketMaxSpace(bIDE),
-		mBiz[bIDE][b_elementsPocket], 2000+(mBiz[bIDE][b_ulepszenie1]*1000)); 
+		Stan sejfu materia³ów:\t{33AA33}%d", GetBusinessName(bIDE), mBiz[bIDE][b_moneyPocket], mBiz[bIDE][b_tempPocket], mBiz[bIDE][b_elementsPocket]); 
 		ShowPlayerDialogEx(playerid, DIALOG_BIZ_OWNER3, DIALOG_STYLE_TABLIST, SetDefaultCaption(), 
 		string, "Akceptuj", "Wstecz"); 
 	}
@@ -480,6 +476,7 @@ IsPlayerNearBusinessDoor(playerid)//Powoduje wejœcie do biznesu
 	{
 		if(checkedBiz == loadedBiz)
 		{
+			sendTipMessageEx(playerid, COLOR_WHITE, "Nie uda³o siê zlokalizowaæ ¿adnego biznesu wokó³ Ciebie. Upewnij siê, ¿e stoisz w ikonce biznesu.");
 			break; 
 		}
 		if(BizExist(i))
@@ -508,8 +505,8 @@ IsPlayerNearBusinessDoor(playerid)//Powoduje wejœcie do biznesu
 					return 1;
 				}
 				SetPlayerPos(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]);
-				SetPlayerInterior(playerid, 0);
-				SetPlayerVirtualWorld(playerid, 0);
+				SetPlayerInterior(playerid, mBiz[bIDE][b_int]);
+				SetPlayerVirtualWorld(playerid, mBiz[bIDE][b_vw]);
 				format(string, sizeof(string), "Dziêkujemy za przybycie i zapraszamy ponownie - %s", GetBusinessName(bIDE)); 
 				sendTipMessageEx(playerid, COLOR_GREEN, string); 
 			}
