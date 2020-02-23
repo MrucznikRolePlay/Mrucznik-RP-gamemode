@@ -30,14 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
+#include "mnawigacja\mnawigacja.pwn"
+#include "mnawigacjaoff\mnawigacjaoff.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_mbizbuy();
-    command_mbiznesy();
+    command_mnawigacja();
+    command_mnawigacjaoff();
     
 }

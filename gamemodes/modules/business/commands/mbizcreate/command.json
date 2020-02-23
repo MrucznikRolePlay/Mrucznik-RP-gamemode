@@ -1,0 +1,23 @@
+{
+    "name": "mbizcreate",
+    "description": "Komenda, która pozwala stworzyæ biznes",
+    "permissions": [],
+    "author": "Simeone",
+    "aliases": [
+        "mbizstworz"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "bCost",
+            "description": "Koszt biznesu"
+        },
+        {
+            "type": "string",
+            "size": "64",
+            "name": "bName",
+            "description": "Nazwa biznesu [64z]"
+        }
+    ],
+    "date": "04.02.2020"
+}

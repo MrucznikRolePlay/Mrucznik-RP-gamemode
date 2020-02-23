@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  bizlock                                                  //
+//                                                 mbizcreate                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,17 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "bizlock_impl.pwn"
+#include "mbizcreate_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_bizlock()
+command_mbizcreate()
 {
-    new command = Command_GetID("bizlock");
+    new command = Command_GetID("mbizcreate");
 
     //aliases
-    Command_AddAlt(command, "zamknijbiznes");
-    Command_AddAlt(command, "otworzbiznes");
-    Command_AddAlt(command, "businesslock");
+    Command_AddAlt(command, "mbizstworz");
     
 
     //permissions
@@ -49,15 +47,21 @@ command_bizlock()
 }
 
 //-------<[ command ]>-------
-YCMD:bizlock(playerid, params[], help)
+YCMD:mbizcreate(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Pozwala zamkn¹æ b¹dŸ otworzyæ twój biznes. Mo¿e j¹ u¿yæ zarówno cz³onek jak i w³asciciel biznesu.");
+        sendTipMessage(playerid, "Komenda, która pozwala stworzyæ biznes");
+        return 1;
+    }
+    //fetching params
+    new bCost, bName[64];
+    if(sscanf(params, "ds[64]", bCost, bName))
+    {
+        sendTipMessage(playerid, "U¿yj /mbizcreate [Koszt biznesu] [Nazwa biznesu [64z]] ");
         return 1;
     }
     
-    
     //command body
-    return command_bizlock_Impl(playerid);
+    return command_mbizcreate_Impl(playerid, bCost, bName);
 }

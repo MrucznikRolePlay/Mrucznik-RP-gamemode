@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  bizinfo                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 mbizcreate                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,45 +16,22 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 04.02.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "bizinfo_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_bizinfo()
+//------------------<[ Implementacja: ]>-------------------
+command_mbizcreate_Impl(playerid, bCost, bName[64])
 {
-    
-
-    //aliases
-    
-
-    //permissions
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:bizinfo(playerid, params[], help)
-{
-    if (help)
+    if(!IsAHeadAdmin(playerid))
     {
-        sendTipMessage(playerid, "Wyœwietla podstawowe informacje o biznesie.");
+        noAccessMessage(playerid); 
         return 1;
     }
-    
-    
-    //command body
-    return command_bizinfo_Impl(playerid);
+    CreateMBiz(playerid, bCost, bName); 
+    return 1;
 }
+
+//end
