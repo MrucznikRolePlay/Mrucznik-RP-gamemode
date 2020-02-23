@@ -77,42 +77,28 @@
 #define B_CENA_SEJFG 2500000//2.5kk +1              --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu g³ównego
 #define B_CENA_SEJFT 7000000//7kk +1                --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu tymczasowego 
 #define B_CENA_SEJFE 8000000//8kk                   --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu elementów
+//koszta dodatkowe
+#define COST_SHOP24 1000000//1kk                    --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu 24-7
+#define COST_SHOPCLOTHES 1250000//1.25kk            --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu z ubraniami
+#define COST_CASINO 5000000//5kk                    --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór kasyna   
+#define COST_RESTAURANT 750000//750k                --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór restauracji 
+//Typy (ogólnikowe)
+#define BTYPE_DEFAULT 0
+#define BTYPE_SERVICES 1
+#define BTYPE_INDUSTRY 2 
+
+//Typy (szczegó³owe)
+    //Do TYPU US£UGOWEGO
+#define BTYPE2_DEFAULT 0 
+#define BTYPE2_SHOP 1
+#define BTYPE2_CLOTHESSHOP 2
+#define BTYPE2_CASINO 3
+#define BTYPE2_RESTAURANT 4
+    //Do TYPU PRZEMYS£OWEGO
+#define BTYPE2_CLOTHES 5
+#define BTYPE2_OIL 6
 
 
-
-//Mo¿liwe typy biznesów
-    // SERVICES < 100, INDUSTRY > 100 
-#define BTYPE_DEFAULT 0//                           --> BRAK TYPU 
-
-    //Biznes polega na sprzeda¿y innym graczom obiektów (/kup)
-#define BTYPE_SHOP 1//                              --> ID sklepu 24-7
-#define BNAME_SHOP "Sklep 24-7"
-#define BCOST_SHOP 1000000
-#define BECOST_SHOP 200
-
-    //Biznes polega na sprzeda¿y innym graczom ubrañ (/kupskin)
-#define BTYPE_CLOTHESSHOP 2//                       --> ID sklepu z ubraniami 
-#define BNAME_CLOTHESSHOP "Sklep z ubraniami"
-#define BCOST_CLOTHESSHOP 1250000
-#define BECOST_CLOTHESSHOP 250
-
-#define BTYPE_RESTAURANT 3//                        --> ID restauracji
-#define BNAME_RESTAURANT "Restauracja"
-#define BCOST_RESTAURANT 800000
-
-#define BTYPE_WORKSHOP 4//                          --> ID warsztatu 
-#define BNAME_WORKSHOP "Warsztat samochodowy"
-#define BCOST_WORKSHOP 900000
-
-#define BTYPE_HOTEL 5//                             --> ID hotelu
-#define BNAME_HOTEL "Hotel/Motel"
-#define BCOST_HOTEL 500000
-
-#define BTYPE_TRANSPORT 6//                         --> ID biznesu odpowiedzialnego za transport
-#define BNAME_TRANSPORT "Korporacja Transportowa" 
-#define BCOST_TRANSPORT 1500000
-
-#define BTYPE_OIL 101//                             --> ID biznesu przemys³owego - RAFINERIA 
-#define BNAME_OIL "Przemys³ i transport ropy"
-#define BCOST_OIL 750000
+//Poszczególne (koszta zakupów)
+#define ELEMENT_COST_INSHOP 200//                   --> Koszt zakupów w sklepie (w materia³ach)
 //end

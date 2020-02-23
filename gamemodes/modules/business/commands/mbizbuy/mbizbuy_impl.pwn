@@ -37,7 +37,7 @@ command_mbizbuy_Impl(playerid)
         sendErrorMessage(playerid, "Aby tego u¿yæ musisz siê znajdowaæ w Urzêdzie Miasta!"); 
         return 1;
     }
-    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUY, DIALOG_STYLE_INPUT, "Zakup biznes", "WprowadŸ poni¿ej numer biznesu, który chcia³byœ zakupiæ.\n[UWAGA] Je¿eli biznes nigdy wczeœniej nie by³ kupywany (jego cena nie zosta³a ustalona)\npo twoim zakupie rozpoczêta zostanie licytacja.", "Dalej", "Anuluj");
+    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUY, DIALOG_STYLE_INPUT, "Zakup biznes", "WprowadŸ poni¿ej numer biznesu, który chcia³byœ zakupiæ:", "Dalej", "Anuluj");
     return 1;
 }
 
