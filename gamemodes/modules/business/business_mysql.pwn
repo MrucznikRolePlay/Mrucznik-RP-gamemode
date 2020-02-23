@@ -30,7 +30,7 @@
 stock LoadBiz()
 {
 	new query[1024];
-	new lStr[326];  
+	new lStr[263];  
 	new valueBiz; 
 	new lStr2[64];
 	new string[64];
