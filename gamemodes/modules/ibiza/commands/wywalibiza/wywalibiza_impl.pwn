@@ -38,12 +38,12 @@ command_wywalibiza_Impl(playerid, giveplayerid)
                 if(giveplayerid == playerid) return 1;
                 new var[128];
                 if(IbizaTicket[giveplayerid] > 0) IbizaTicket[giveplayerid] = 0;
-                Wchodzenie(giveplayerid);
-                SetPlayerVirtualWorld(giveplayerid, 0);
                 format(var, sizeof(var), "** %s wyrzuca %s z ibizy.", GetNick(playerid), GetNick(giveplayerid));
                 ProxDetector(20.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                 format(var, sizeof(var), "[IBIZA_INFO]%s wyrzuci³ %s z ibizy!", GetNick(playerid), GetNick(giveplayerid));
-                SendFamilyMessage(FAMILY_IBIZA, COLOR_P@, var);
+                SendNewFamilyMessage(FAMILY_IBIZA, COLOR_P@, var);
+                Wchodzenie(giveplayerid);
+                SetPlayerVirtualWorld(giveplayerid, 0);
                 SetPlayerPos(giveplayerid, 397.3062, -1805.8008, 7.8380);
             }
             else
