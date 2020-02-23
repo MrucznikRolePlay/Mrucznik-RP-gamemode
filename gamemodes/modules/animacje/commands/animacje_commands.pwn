@@ -30,12 +30,12 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "rap\rap.pwn"
+#include "anim\anim.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_rap();
+    command_anim();
     
 }

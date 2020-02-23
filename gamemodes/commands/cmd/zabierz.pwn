@@ -96,6 +96,8 @@ YCMD:zabierz(playerid, params[], help)
 				format(string, sizeof(string), "* Oficer %s zabra³ Ci licencjê na broñ.", sendername);
 				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "* Oficer %s zabra³ %s licencjê na broñ.", sendername, giveplayer);
+				SetTimerEx("AntySB", 5000, 0, "d", giveplayerid);
+				AntySpawnBroni[giveplayerid] = 5;
 				PlayerInfo[giveplayerid][pGunLic] = 0;
 			}
 			else if(strcmp(x_nr,"licencjalodz",true) == 0)
@@ -115,6 +117,8 @@ YCMD:zabierz(playerid, params[], help)
 				format(string, sizeof(string), "* Oficer %s zabra³ twoj¹ broñ.", sendername);
 				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "* Oficer %s zabra³ %s broñ.", sendername, giveplayer);
+				SetTimerEx("AntySB", 5000, 0, "d", giveplayerid);
+				AntySpawnBroni[giveplayerid] = 5;
 				ResetPlayerWeapons(giveplayerid);
 				UsunBron(giveplayerid);
 			}
@@ -142,7 +146,7 @@ YCMD:zabierz(playerid, params[], help)
 				return 1;
 			}
 
-			Log(commandLog, INFO, "%s zabra³ %s %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), x_nr);
+			Log(serverLog, INFO, "%s zabra³ %s %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), x_nr);
         }
         else
         {

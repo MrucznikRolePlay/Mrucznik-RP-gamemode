@@ -44,6 +44,7 @@
 #include "debug\debug.def"
 #include "discord\discord.def"
 #include "frakcje\frakcje.def"
+#include "ibiza\ibiza.def"
 #include "komendy\komendy.def"
 #include "logi\logi.def"
 #include "money\money.def"
@@ -54,6 +55,7 @@
 #include "pojazdy\pojazdy.def"
 #include "prace\prace.def"
 #include "premium\premium.def"
+#include "przedmioty\przedmioty.def"
 #include "sannews\sannews.def"
 #include "sila\sila.def"
 #include "urzadls\urzadls.def"
@@ -79,6 +81,7 @@
 #include "debug\debug.hwn"
 #include "discord\discord.hwn"
 #include "frakcje\frakcje.hwn"
+#include "ibiza\ibiza.hwn"
 #include "komendy\komendy.hwn"
 #include "logi\logi.hwn"
 #include "money\money.hwn"
@@ -89,6 +92,7 @@
 #include "pojazdy\pojazdy.hwn"
 #include "prace\prace.hwn"
 #include "premium\premium.hwn"
+#include "przedmioty\przedmioty.hwn"
 #include "sannews\sannews.hwn"
 #include "sila\sila.hwn"
 #include "urzadls\urzadls.hwn"
@@ -114,7 +118,6 @@
 #include "debug\debug.pwn"
 #include "discord\discord.pwn"
 #include "frakcje\frakcje.pwn"
-#include "graffiti\graffiti.pwn"
 #include "ibiza\ibiza.pwn"
 #include "komendy\komendy.pwn"
 #include "logi\logi.pwn"
@@ -126,6 +129,7 @@
 #include "pojazdy\pojazdy.pwn"
 #include "prace\prace.pwn"
 #include "premium\premium.pwn"
+#include "przedmioty\przedmioty.pwn"
 #include "sannews\sannews.pwn"
 #include "sila\sila.pwn"
 #include "urzadls\urzadls.pwn"
@@ -163,6 +167,7 @@
 
 
 //-------<[ others ]>-------
+#include "resources.pwn"
 
 
 //-------<[ callbacks ]>-------
@@ -190,6 +195,7 @@
 #include "convoy\commands\convoy_commands.pwn"
 #include "debug\commands\debug_commands.pwn"
 #include "frakcje\commands\frakcje_commands.pwn"
+#include "ibiza\commands\ibiza_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "logi\commands\logi_commands.pwn"
 #include "nawigacja\commands\nawigacja_commands.pwn"

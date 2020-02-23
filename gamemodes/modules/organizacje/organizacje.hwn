@@ -23,6 +23,11 @@
 
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
+
+//SEKTA
+new SektaKey[MAX_PLAYERS];
+new SektaUwieziony[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
+forward Float:GetDistanceBetweenPlayers(p1,p2);
 
 //end

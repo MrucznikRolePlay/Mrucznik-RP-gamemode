@@ -57,7 +57,7 @@ YCMD:sprzedajauto(playerid, params[], help)
 		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedawaæ pojazdu bo masz 1 lvl");
 		if(GetPVarInt(playerid, "CanDoIt") == 1) return sendErrorMessage(playerid, "Oferowa³eœ ju¿ komuœ zakup auta, odczekaj 15 s");
         new vehid = VehicleUID[lVeh][vUID];
- 		if(GetDistanceBetweenPlayers(playerid,playa) > 5 && Spectate[playa] != INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Ten gracz jest za daleko!");
+ 		if(GetDistanceBetweenPlayers(playerid,playa) > 5) return sendErrorMessage(playerid, "Ten gracz jest za daleko!");
 		if(!(cena > 0 && cena < 900000001)) return sendErrorMessage(playerid, "Cena od 1 do 900 000 000$ !");
 
         if(lVeh <= CAR_End) return sendErrorMessage(playerid, "Tego pojazdu nie mo¿na sprzedaæ");
@@ -68,12 +68,12 @@ YCMD:sprzedajauto(playerid, params[], help)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 
         //SetPVarInt(playa, "offer-car", gettime() + 30);
-		odczekajTimer[playa] = SetTimerEx("odczekaj15sec", 5000, false, "i", playa);
+		odczekajTimer[playa] = SetTimerEx("odczekaj15sec", 15000, false, "i", playa);
 		SetPVarInt(playa, "CanDoIt", 1);
 		SetPVarInt(playa, "WhatToDo", 1);
 		SetPVarInt(playerid, "WhatToDo", 2);
 		SetPVarInt(playerid, "CanDoIt", 1);
-		odczekajTimer[playerid] = SetTimerEx("odczekaj15sec", 5000, false, "i", playerid);
+		odczekajTimer[playerid] = SetTimerEx("odczekaj15sec", 15000, false, "i", playerid);
 	    format(string, sizeof(string), "%s oferuje ci sprzeda¿ %s za %d$. Jeœli chcesz kupiæ to auto wpisz /akceptuj pojazd aby kupiæ.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], cena);
         SendClientMessage(playa, 0xFFC0CB, string);
         //TODO

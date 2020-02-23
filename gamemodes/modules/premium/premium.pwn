@@ -396,5 +396,19 @@ PlayerHasSkin(playerid, skin)
 	return VECTOR_find_val(VPremiumSkins[playerid], skin) != INVALID_VECTOR_INDEX;
 }
 
+IsAMCGiver(playerid) {
+	if(!dini_Exists(MC_GIVER_FILE)) return false;
+	return dini_Int(MC_GIVER_FILE, "uid") == PlayerInfo[playerid][pUID];
+}
+
+GetAvaibleMC() {
+	if(!dini_Exists(MC_GIVER_FILE)) return 0;
+	return dini_Int(MC_GIVER_FILE, "budget");
+}
+
+TakeMCFromBudget(value) {
+	return dini_IntSet(MC_GIVER_FILE, "budget", GetAvaibleMC()-value);
+}
+
 
 //end

@@ -1,6 +1,9 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
 
+new SentMessagesIndex[MAX_PLAYERS] = 0;
+new SentMessages[MAX_PLAYERS][MAX_SENT_MESSAGES][144];
+
 new ServerSecret[MAX_SERVER_SECRET_LENGTH];
 
 new prawoJazdyLosowanie[9];
@@ -8,6 +11,7 @@ new prawoJazdyLosowanie[9];
 new PickupSklep01;//ZIP
 
 new CMDKomunikat;
+new PozwolenieBot = 1;
 
 new LastVehicleID[MAX_PLAYERS];
 new VehicleIDChanges[MAX_PLAYERS];
@@ -36,6 +40,7 @@ new bool:bramki_sasd_state[18];
 new cenaNorm = 50000;
 new cenaVIP = 80000;
 new kasjerkaWolna = 666;
+
 //sn
 new SN_ACCESS[MAX_PLAYERS]; 
 //PizzaJob
@@ -131,7 +136,7 @@ new PaniJanina;
 
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
-
+new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];
 
@@ -143,6 +148,8 @@ new afk_timer[MAX_PLAYERS];
 new MaTazer[MAX_PLAYERS];
 new TazerAktywny[MAX_PLAYERS];
 ///
+new ParachuteHit[MAX_PLAYERS];
+//13.11.2019
 //17.01.2015
 new TICKS_MySQLRefresh=0;
 new bool:TICKS_Second=false;
@@ -281,8 +288,6 @@ new AI_SIGN[3],
 new bool:VAR_Kolejka=false;
 //13.08  sπd int, drobne zmiany errorÛw, fly mode dla 1000+ @
 
-new brama_kt[3];
-new brama_kt_state[3];
 new Brama_HA;
 new Brama_HA1;
 new Brama_HA2;
@@ -721,6 +726,9 @@ new Condom[MAX_PLAYERS];
 new STDPlayer[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
+//BW
+new PlayerRequestMedic[MAX_PLAYERS];
+new PlayerKilledByAdmin[MAX_PLAYERS];
 
 //---------------
 new RepairOffer[MAX_PLAYERS];
@@ -748,6 +756,7 @@ new gLastCar[MAX_PLAYERS];
 new gOoc[MAX_PLAYERS];
 new gMuteDepo[MAX_PLAYERS];
 new gCrime[MAX_PLAYERS];
+new gBW[MAX_PLAYERS];
 new gNewbie[MAX_PLAYERS];
 new gNews[MAX_PLAYERS];
 new gFam[MAX_PLAYERS];
@@ -979,6 +988,7 @@ new taxitest[MAX_PLAYERS];//Taxi Test
 new mechanikid[MAX_PLAYERS];//Mechanik w GUI
 new naprawiony[MAX_PLAYERS];//Napr
 
+
 new zawodnik[MAX_PLAYERS];//Øuøel
 new wyscigz;//øuøel
 new iloscwygranych;//øuøel
@@ -986,7 +996,7 @@ new komentator[MAX_PLAYERS];//Øuøel
 new okrazenia[MAX_PLAYERS];//Øuøel
 new okregi[MAX_PLAYERS];//Øuøel
 new kodbitwy[256];//Bitwa
-new zdarzylwpisac[MAX_PLAYERS] = 1;//Bitwa
+new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
 new uzytekajdanki[MAX_PLAYERS];//Kajdany
 new zakuty[MAX_PLAYERS];//Kajdany
 new PDkuje[MAX_PLAYERS];//Kajdany
@@ -1098,13 +1108,11 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
-	
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 
-
+	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
-
-
+	organizacje_clearCache(playerid);
 	//z disconecta
 
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
@@ -1112,7 +1120,6 @@ ZerujZmienne(playerid)
     PlayerInfo[playerid][pDescLabel] = tmp_label;
 
     PlayerInfo[playerid][pDesc][0] = EOS;
-
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//Øuøel
 	komentator[playerid] = 0;//Øuøel
@@ -1137,7 +1144,7 @@ ZerujZmienne(playerid)
 	podczasbicia[playerid] = 0;
 	PlayerTied[playerid] = 0;//antyq
 	PlayerCuffed[playerid] = 0;//anty /q
-	
+	gRO[playerid] = 0;
 	
 	
     lastMsg[playerid] = 0;
@@ -1309,11 +1316,19 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pPiwo] = 0;
 	PlayerInfo[playerid][pCygaro] = 0;
 	PlayerInfo[playerid][pSprunk] = 0;
-	PlayerInfo[playerid][pPodPW] = 0;
 	PlayerInfo[playerid][pStylWalki] = 0;
 	PlayerInfo[playerid][pNewAP] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
+	//Sandal
+	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "Brak");
+	PlayerInfo[playerid][pPodPW] = 0;
+	//Creative
+	PlayerInfo[playerid][pInjury] = 0;
+	PlayerRequestMedic[playerid] = 0;
+	PlayerKilledByAdmin[playerid] = 0;
+	PlayerInfo[playerid][pHealthPacks] = 0;
+
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;
@@ -1408,6 +1423,8 @@ ZerujZmienne(playerid)
     MRP_PremiumHours[playerid]=0;
     InitMyItems[playerid] = false;
     PlayerMC[playerid] = 0;
+
+	ParachuteHit[playerid] = 0;
 
     for(new i=0;i<MAX_CAR_SLOT;i++) PlayerInfo[playerid][pCars][i] = 0;
 

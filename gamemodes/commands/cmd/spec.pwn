@@ -30,7 +30,7 @@
 
 YCMD:spec(playerid, params[], help)
 {
-	new string[128];
+	new string[144];
 	new sendername[MAX_PLAYER_NAME+1];
 	new giveplayer[MAX_PLAYER_NAME+1];
 
@@ -72,7 +72,10 @@ YCMD:spec(playerid, params[], help)
 			new cash =  GetPlayerMoney(pid);
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"));
+			new specIP[32];
+			GetPlayerIp(pid, specIP, sizeof(specIP));
+			if(PlayerInfo[playerid][pAdmin] >= 1) format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s | VWorld - %d | Int - %d | IP - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"), GetPlayerVirtualWorld(pid), GetPlayerInterior(pid), specIP);
+			else format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s | VWorld - %d | Int - %d",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"), GetPlayerVirtualWorld(pid), GetPlayerInterior(pid));
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);

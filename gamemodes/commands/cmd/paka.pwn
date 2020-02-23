@@ -103,7 +103,7 @@ YCMD:paka(playerid, params[], help)
 					}
 	    			SetPlayerInterior(suspect, 10);
 				    new losuj= random(sizeof(Cela));
-					SetPlayerPosEx(suspect, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+					SetPlayerPos(suspect, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 					PlayerInfo[suspect][pJailTime] = time * 60;
 					if(bail == 1)
 					{

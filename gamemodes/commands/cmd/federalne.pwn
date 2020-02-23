@@ -36,9 +36,9 @@ YCMD:federalne(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	 	if(!IsAFBI(playerid))
+	 	if(!IsACop(playerid))
 	 	{
-	 		sendErrorMessage(playerid, "Nie jesteœ agentem FBI!");
+	 		sendErrorMessage(playerid, "Nie jesteœ z s³u¿b porz¹dkowych!");
 		    return 1;
 		}
 	    if(OnDuty[playerid] != 1 )
@@ -53,7 +53,7 @@ YCMD:federalne(playerid, params[], help)
 			return 1;
 		}
 
-		if (IsAFBI(playerid))
+		if (IsACop(playerid) || IsAFBI(playerid))
 		{
 			if(IsPlayerConnected(giveplayerid))
 			{
@@ -73,6 +73,11 @@ YCMD:federalne(playerid, params[], help)
 								SetPlayerCriminal(giveplayerid,playerid, result);
 								SendClientMessage(giveplayerid, COLOR_LFBI, "   Pope³ni³eœ przestêpstwo federalne, twoj¹ sprawê przejê³o FBI !");
 								SendClientMessage(playerid, COLOR_LFBI, "   Oskar¿y³eœ gracza o przestêpstwo federalne. Ma on teraz 6 Poziom Poszukiwania !");
+								
+								if(IsReasonAPursuitReason(result))
+								{
+									PursuitMode(playerid, giveplayerid);
+								}
 								return 1;
 							}
 							else
@@ -100,7 +105,7 @@ YCMD:federalne(playerid, params[], help)
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jesteœ z FBI!");
+			sendErrorMessage(playerid, "Nie jesteœ z s³u¿b porz¹dkowych!");
 		}
 	}
 	return 1;

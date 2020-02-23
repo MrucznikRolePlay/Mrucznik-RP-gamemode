@@ -44,7 +44,7 @@ YCMD:wywalzsad(playerid,params[], help) //GSA
 			SendClientMessage(odbiorca,0xFFFFFFFF,str);
             format(str, 128, "* %s wyrzuca z s¹du %s", GetNick(playerid), GetNick(odbiorca));
             ProxDetector(30.0, playerid, str, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-            SetPlayerPosEx(odbiorca,1309.9658, -1367.2878, 13.7324);
+            SetPlayerPos(odbiorca,1309.9658, -1367.2878, 13.7324);
         }
         else
         {

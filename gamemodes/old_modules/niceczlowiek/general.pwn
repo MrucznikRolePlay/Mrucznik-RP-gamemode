@@ -116,7 +116,7 @@ public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Fl
 			return sendErrorMessage(playerid, "Zmiany nie zosta³y zapisane, dodatek by³ zbyt oddalony od gracza!");
 		}
 		sendTipMessage(playerid, "Zapisano pozycje edycji"); 
-		//chwilowe rozwi¹zanie (póki nie poszerzê tablicy) - tak aby gracz nie musia³ edytowaæ za ka¿dym razem
+		//chwilowe rozwi¹zanie (póki nie poszerzê tablicy) - tak aby gracz nie musia³ edytowaæ za ka¿dym razem 
 		SetPVarFloat(playerid, "d_offsetX", fOffsetX);
 		SetPVarFloat(playerid, "d_offsetY", fOffsetY);
 		SetPVarFloat(playerid, "d_offsetZ", fOffsetZ);
@@ -140,7 +140,7 @@ Player_RemoveFromVeh(playerid)
 {
 	new Float:slx, Float:sly, Float:slz;
 	GetPlayerPos(playerid, slx, sly, slz);
-	SetPlayerPosEx(playerid, slx, sly, slz+1);
+	SetPlayerPos(playerid, slx, sly, slz+1);
 	ClearAnimations(playerid);	
 
 	return true;

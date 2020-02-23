@@ -1,0 +1,32 @@
+{
+    "properties": {
+        "loglevel":{
+            "type":"keyword"
+         },
+         "logname":{
+            "type":"keyword"
+         },
+         "player":{
+           "properties":{
+              "nick":{
+                "type":"text",
+                "fields":{
+                    "keyword":{
+                       "type":"keyword",
+                       "ignore_above":256
+                    }
+                 }
+              },
+              "uid":{
+                 "type":"integer",
+                 "fields":{
+                    "keyword":{
+                       "type":"keyword",
+                       "ignore_above":256
+                    }
+                 }
+              }
+           }
+        }
+    }
+}

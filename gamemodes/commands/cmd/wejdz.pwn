@@ -155,9 +155,10 @@ YCMD:wejdz(playerid, params[], help)
             IsPlayerInRangeOfPoint(playerid,2.0, 1549.7249,-1462.1644,3.3250)|| //Strefa Pracownika
             IsPlayerInRangeOfPoint(playerid,2.0, 1526.7426,-1469.4413,23.0778) || //Sala treningowa
             IsPlayerInRangeOfPoint(playerid,2.0, 1541.2571,-1464.1281,21.8429)|| //Biura
-            IsPlayerInRangeOfPoint(playerid,2.0, 1544.1202,-1466.9008,42.8386)) //Akademia
+            IsPlayerInRangeOfPoint(playerid,2.0, 1544.1202,-1466.9008,42.8386) || //Akademia 
+            IsPlayerInRangeOfPoint(playerid,2.0, 1542.1123,-1467.8416,63.8593)) //Dach
         {
-            ShowPlayerDialogEx(playerid, D_ELEVATOR_USSS, DIALOG_STYLE_LIST, "Winda:", "{660000}[-1] {D2CFA6}Parking\n{660000}[0] {D2CFA6}Recepcja\n{660000}[1] {D2CFA6}Sala treningowa\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Biura\n{660000}[4] {D2CFA6}Akademia", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, D_ELEVATOR_USSS, DIALOG_STYLE_LIST, "Winda:", "{660000}[-1] {D2CFA6}Parking\n{660000}[0] {D2CFA6}Recepcja\n{660000}[1] {D2CFA6}Sala treningowa\n{660000}[2] {D2CFA6}Strefa pracownika\n{660000}[3] {D2CFA6}Biura\n{660000}[4] {D2CFA6}Akademia\n{660000}[5] {D2CFA6}Dach", "Wybierz", "Anuluj");
         }
 		
 //======================================================================
@@ -189,7 +190,7 @@ YCMD:wejdz(playerid, params[], help)
 
             GetVehiclePos(lVeh,PosX,PosY,PosZ);
             SetPlayerVirtualWorld(playerid, 0);
-            SetPlayerPosEx(playerid, PosX, PosY, PosZ);
+            SetPlayerPos(playerid, PosX, PosY, PosZ);
             PutPlayerInVehicleEx(playerid, lVeh, seat);
             GameTextForPlayer(playerid, "Chwytaj za stery!", 2000, 5);
         }
@@ -214,7 +215,7 @@ YCMD:wejdz(playerid, params[], help)
                     if(PlayerInfo[playerid][pBiletsamolotowy]==1 || IsPlayerInFraction(playerid, FRAC_KT, 5000))
                     {
                         GameTextForPlayer(playerid, "Witamy w samolocie! ZnajdŸ swoje miejsce", 4000, 3);
-                        SetPlayerPosEx(playerid, 3.5040+KTAir_Offsets[0],30.7375+KTAir_Offsets[1],0.5391+100+KTAir_Offsets[2]);
+                        SetPlayerPos(playerid, 3.5040+KTAir_Offsets[0],30.7375+KTAir_Offsets[1],0.5391+100+KTAir_Offsets[2]);
                         SetPlayerVirtualWorld(playerid, 2);
                         //PlayerInfo[playerid][pBiletsamolotowy]=0;
                         PlayerInfo[playerid][pWsamolocieLS]=1;
@@ -239,7 +240,7 @@ YCMD:wejdz(playerid, params[], help)
         //Wejcie do srodka int z biletem
         else if (PlayerToPoint(3.0, playerid,1886.1,-2286.4,14))
         {
-            SetPlayerPosEx(playerid, 1605,-2282.9,-74.90);
+            SetPlayerPos(playerid, 1605,-2282.9,-74.90);
             Wchodzenie(playerid);
         }
 //====================================[SAMOLOT END]=================================================
@@ -250,56 +251,176 @@ YCMD:wejdz(playerid, params[], help)
 //======================================================================
 
         
-       //chwilowe do vinyl
-      /*  else if(PlayerToPoint(1.5, playerid, 814.4426,-1378.2600,23.6475))
+       //wejscie do vinyl
+        else if(PlayerToPoint(1.5, playerid, 816.5667, -1415.4117, -22.5834))
         {
+            if(vinylStatus == 0 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
+            {
+                sendTipMessage(playerid, "Vinyl jest aktualnie zamkniêty! Skontaktuj siê z w³aœcicielem klubu."); 
+                return 1;
+            }
             if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
             {
                 sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyla!"); 
                 return 1;
             }
-            if(vinylStatus == 0)
-            {
-                sendTipMessage(playerid, "Vinyl jest aktualnie zamkniêty! Skontaktuj siê z w³aœcicielem klubu."); 
-                return 1;
-            }
             SetPLocal(playerid, PLOCAL_ORG_SN); 
-            SetPlayerPosEx(playerid, 817.0987,-1375.1685,23.6475);
+            SetPlayerVirtualWorld(playerid, 71);
+            SetPlayerPos(playerid, 816.4222, -1413.7644, -22.5834);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
             Wchodzenie(playerid);
             return 1;
-        }*/
+        }
+        //IBIZA =======================
+        //wejscie glowne, na bilet.
+        else if(PlayerToPoint(1.5, playerid, 395.9647, -1811.1703, 7.8789) && GetPlayerVirtualWorld(playerid) == 21)
+        {
+            if(IbizaTicket[playerid] == 0)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    sendErrorMessage(playerid, "Nie posiadasz biletu do Ibizy!"); 
+                    return 1;
+                }
+            }
+            SetPlayerVirtualWorld(playerid, 22);
+            SetPlayerPos(playerid, 417.3976, -1858.9402, -65.3905);
+            GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
+            Wchodzenie(playerid);
+            return 1;
+        }
+        //wejscie na scene/konsole
+        else if(PlayerToPoint(1.5, playerid, 430.4849,-1837.2827,-65.5105))
+        {
+            if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+            {
+                GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1); 
+                return 1;
+            }
+            SetPlayerPos(playerid, 434.7581, -1841.0632, -64.2206);
+            GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
+            Wchodzenie(playerid);
+            return 1;
+        }
+        //wejscia VIP
+        else if(PlayerToPoint(1.5, playerid, 425.9001, -1854.8367, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(IbizaTicket[playerid] <= 1)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 428.3247, -1855.9178, -65.2092);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
+            return 1;
+        }
+        else if(PlayerToPoint(1.5, playerid, 408.6968, -1855.0348, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(IbizaTicket[playerid] <= 1)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 406.8980, -1856.6122, -65.2092);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
+            return 1;
+        }
+        else if(PlayerToPoint(1.5, playerid, 408.8490, -1835.8851, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(IbizaTicket[playerid] <= 1)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 406.3426, -1835.0138, -65.2092);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
+            return 1;
+        }
+        else if(PlayerToPoint(1.5, playerid, 403.3954,-1843.4607,-65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(IbizaTicket[playerid] <= 1)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 416.8028, -1850.4160, -61.9043);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie VIP", 5000, 1);
+            return 1;
+        }
+        //wejscia SUPERVIP
+        else if(PlayerToPoint(1.5, playerid, 424.0322, -1837.0964, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(IbizaTicket[playerid] <= 2)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
+                    return 1;
+                }
+            }
+            SetPlayerPos(playerid, 426.7242, -1834.9066, -65.2102);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
+            return 1;
+        }
+        else if(PlayerToPoint(1.5, playerid, 422.2131, -1831.5657, -65.5105) && GetPlayerVirtualWorld(playerid) == 22)
+        {
+            if(IbizaTicket[playerid] <= 2)
+            {
+                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                {
+                    GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
+                    return 1;
+                }
+            }
+            SetPlayerVirtualWorld(playerid, 25);
+            SetPlayerPos(playerid, 221.530426, -1546.261352, -15.997495);
+            GameTextForPlayer(playerid, "~w~Witamy w strefie SUPERVIP", 5000, 1);
+            Wchodzenie(playerid);
+            return 1;
+        }
         //san news biura
         else if(PlayerToPoint(1.0, playerid, 286.0645,-1602.0117,134.4274) && posDrzwiSN[playerid] == 0)
         {
             sendTipMessageEx(playerid, COLOR_RED, "Witaj w biurze dyrektorki!"); 
-            SetPlayerPosEx(playerid, 285.8782,-1604.2446,134.4756); 
+            SetPlayerPos(playerid, 285.8782,-1604.2446,134.4756); 
             posDrzwiSN[playerid] = 1; 
             return 1;
         }
         else if(PlayerToPoint(1.0, playerid, 285.8782,-1604.2446,134.4756) && posDrzwiSN[playerid] == 1)
         {
-            SetPlayerPosEx(playerid, 286.0645,-1602.0117,134.4274); 
+            SetPlayerPos(playerid, 286.0645,-1602.0117,134.4274); 
             posDrzwiSN[playerid] = 0; 
             return 1;
         }
         else if(PlayerToPoint(1.0, playerid, 298.0779,-1603.7250,134.4482) && posDrzwiSN[playerid] == 0)
         {
             sendTipMessageEx(playerid, COLOR_RED, "Witaj w biurze v-dyrektora!"); 
-            SetPlayerPosEx(playerid, 297.9890,-1605.9541,134.4645); 
+            SetPlayerPos(playerid, 297.9890,-1605.9541,134.4645); 
             posDrzwiSN[playerid] = 1; 
             return 1;
         }
         else if(PlayerToPoint(1.0, playerid, 297.9890,-1605.9541,134.4645) && posDrzwiSN[playerid] == 1)
         {
-            SetPlayerPosEx(playerid, 298.0779,-1603.7250,134.4482); 
+            SetPlayerPos(playerid, 298.0779,-1603.7250,134.4482); 
             posDrzwiSN[playerid] = 0; 
             return 1;
         }
        //reszta
         else if (PlayerToPoint(4.0, playerid,738.8545, -1428.7880, 13.5927)) //biura LCN
         {
-            SetPlayerPosEx(playerid,738.5865, -1427.7610, 23.5927); //biura LCN wejœcie
+            SetPlayerPos(playerid,738.5865, -1427.7610, 23.5927); //biura LCN wejœcie
             GameTextForPlayer(playerid,"~w~Witamy w biurach Jetty Lounge ~n~ ~b~ By ~r~_DywaniK_",5000,1);
             SetPlayerVirtualWorld(playerid, 2);
             Wchodzenie(playerid);
@@ -307,21 +428,21 @@ YCMD:wejdz(playerid, params[], help)
         }
         else if (PlayerToPoint(2.0, playerid,-2170.0593,641.1239,1052.3817)) //Zak³ad bukmaherski WEJSCIE NA GORE
         {
-            SetPlayerPosEx(playerid,-2168.7502,636.2642,1052.7642); 
+            SetPlayerPos(playerid,-2168.7502,636.2642,1052.7642); 
             GameTextForPlayer(playerid, "~w~Witamy NA GORZE", 5000, 1);
             SetPlayerInterior(playerid, 1);
             return 1;
         }
         else if(IsPlayerInRangeOfPoint(playerid,5,648.4412, -1357.3232, 13.8579))//recepcja wejscie glowne
         {
-            SetPlayerPosEx(playerid,648.9127, -1367.4266, 29.2878);
+            SetPlayerPos(playerid,648.9127, -1367.4266, 29.2878);
             SetPlayerVirtualWorld(playerid,20);
             TogglePlayerControllable(playerid,0);
             Wchodzenie(playerid);
         }
         else if (PlayerToPoint(5.0, playerid,2420.9360,112.8245,29.0433)) //taras PD w PC
         {
-            SetPlayerPosEx(playerid,214.9873,121.0619,999.0156); //Komisariat piwnice
+            SetPlayerPos(playerid,214.9873,121.0619,999.0156); //Komisariat piwnice
             GameTextForPlayer(playerid, "~w~Witamy w Komisariacie.", 5000, 1);
             SetPlayerInterior(playerid,10);
             PlayerInfo[playerid][pInt] = 10;
@@ -330,14 +451,14 @@ YCMD:wejdz(playerid, params[], help)
         else if(IsPlayerInRangeOfPoint(playerid,5,-1674.5769,903.1641,-48.9141) )//nowe komi wejscie prawnicze
         {
             if(ApprovedLawyer[playerid] == 1 || PlayerInfo[playerid][pMember] == FRAC_FBI)
-                SetPlayerPosEx(playerid,-1674.4122,917.7183,-52.4141); //nowe komi drzwi w celach
+                SetPlayerPos(playerid,-1674.4122,917.7183,-52.4141); //nowe komi drzwi w celach
             else
                 SendClientMessage(playerid, COLOR_GRAD1, "Musisz mieæ pozwolenie prawnicze aby przejœæ");
 
         }
 		else if (IsPlayerInRangeOfPoint(playerid, 2.0, -2065.5505,575.6121,1173.0511)) // wejscie na balkon
         {
-            SetPlayerPosEx(playerid, -2473.8140,2231.9236,8.9133); // balkon bay side
+            SetPlayerPos(playerid, -2473.8140,2231.9236,8.9133); // balkon bay side
             SetPlayerInterior(playerid, 0);
             TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
@@ -347,7 +468,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(IsACop(playerid))
             {
-                SetPlayerPosEx(playerid, 2371.5246582031, 586.56274414063, 4893.2431640625); // Pokój przes³uchañ sro
+                SetPlayerPos(playerid, 2371.5246582031, 586.56274414063, 4893.2431640625); // Pokój przes³uchañ sro
                 TogglePlayerControllable(playerid, 0);
                 Wchodzenie(playerid);
                 SetPlayerInterior(playerid, 10);
@@ -363,7 +484,7 @@ YCMD:wejdz(playerid, params[], help)
         else if(IsPlayerInRangeOfPoint(playerid,3.0,1635.3210, -2286.5698, 13.4162) && IsPlayerInFraction(playerid, FRAC_KT, 5000))
         {
             INT_AirTowerLS_Init(playerid);
-            SetPlayerPosEx(playerid, 1627.3157,-2279.6157,75.0);
+            SetPlayerPos(playerid, 1627.3157,-2279.6157,75.0);
             GameTextForPlayer(playerid, "~w~/wieza", 2000, 1);
             Wchodzenie(playerid);
         }
@@ -377,7 +498,7 @@ YCMD:wejdz(playerid, params[], help)
 			{
 				if(Kredyty[playerid] >= 200)
 				{
-					SetPlayerPosEx(playerid, 1213.3364,-1807.0619,70.0682); // basen œrodek
+					SetPlayerPos(playerid, 1213.3364,-1807.0619,70.0682); // basen œrodek
 					GameTextForPlayer(playerid, "~w~Szatnie~n~ ~r~by Simeone & Sergio", 5000, 1);
 					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Aby siê przebraæ podejdŸ do szafek i wpisz /przebierz");
 					SetPlayerVirtualWorld(playerid, 43);
@@ -409,7 +530,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(Kredyty[playerid] >= 75)
             {
-                SetPlayerPosEx(playerid, 1274.3020,-1756.0800,48.5812); // sauny œrodek
+                SetPlayerPos(playerid, 1274.3020,-1756.0800,48.5812); // sauny œrodek
                 GameTextForPlayer(playerid, "~w~Wypoc swoje ~r~Problemy", 5000, 1);
                 SetPlayerVirtualWorld(playerid, 43);
                 TogglePlayerControllable(playerid, 0);
@@ -430,7 +551,7 @@ YCMD:wejdz(playerid, params[], help)
         }
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 598.6794,-2204.8613,1.8190)) // tylko dla personelu bar
         {
-            SetPlayerPosEx(playerid, 1193.2720,-1774.8802,13.7282); // recepcja
+            SetPlayerPos(playerid, 1193.2720,-1774.8802,13.7282); // recepcja
             TogglePlayerControllable(playerid, 0);
             SetPlayerVirtualWorld(playerid, 43);
             Wchodzenie(playerid);
@@ -446,7 +567,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(!IbizaDach) return sendTipMessageEx(playerid, 0xB52E2BFF, "Wyjœcie na dach jest zamkniête");
             Wchodzenie(playerid);
-            SetPlayerPosEx(playerid, 1892.9077,-2451.8071,21.6559);
+            SetPlayerPos(playerid, 1892.9077,-2451.8071,21.6559);
             SetPlayerFacingAngle(playerid, 178.8724);
             SetPlayerVirtualWorld(playerid, 1);
             SetPVarInt(playerid, "IbizaWejdz", 1);
@@ -459,7 +580,7 @@ YCMD:wejdz(playerid, params[], help)
         //wejœcie do bileterki
         else if(IsPlayerInRangeOfPoint(playerid, 12.0, 1740.8485,-2471.0625,14.2266) && GetPlayerOrg(playerid) == FAMILY_IBIZA && GetPlayerVirtualWorld(playerid) == 1) //RANGA
         {
-            SetPlayerPosEx(playerid, 397.6122,-1806.0079,7.8381);
+            SetPlayerPos(playerid, 397.6122,-1806.0079,7.8381);
             SetPlayerFacingAngle(playerid, 0.8024);
             SetPlayerVirtualWorld(playerid, 0);
             SetPVarInt(playerid, "IbizaWejdz", 0);
@@ -475,7 +596,7 @@ YCMD:wejdz(playerid, params[], help)
             if(!GetPVarInt(playerid, "IbizaBilet") && GetPlayerOrg(playerid) != FAMILY_IBIZA) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie posiadasz biletu, kup go w kasie"); //RANGA
             TogglePlayerControllable(playerid, false);
             Wchodzenie(playerid);
-            SetPlayerPosEx(playerid, 1741.5828,-2473.1572,14.2266);
+            SetPlayerPos(playerid, 1741.5828,-2473.1572,14.2266);
             SetPlayerFacingAngle(playerid, 271.2026);
             SetPlayerVirtualWorld(playerid, 1);
             SetPVarInt(playerid, "IbizaWejdz", 1);
@@ -491,7 +612,7 @@ YCMD:wejdz(playerid, params[], help)
         else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1761.7330,-2471.2756,19.7275) && GetPlayerVirtualWorld(playerid) == 1 )
         {
             TogglePlayerControllable(playerid, false);
-            SetPlayerPosEx(playerid, 1890.3613,-2494.6675,14.2266);
+            SetPlayerPos(playerid, 1890.3613,-2494.6675,14.2266);
             SetPlayerFacingAngle(playerid, 268.8783);
             PlayAudioStreamForPlayer(playerid, IbizaStream[IbizaStreamID]);
             Wchodzenie(playerid);
@@ -500,7 +621,7 @@ YCMD:wejdz(playerid, params[], help)
         // BAR - wejscie
         else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1898.4817,-2494.8752,13.6266) && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
         {
-            SetPlayerPosEx(playerid, 1900.5961,-2494.9373,13.6266);
+            SetPlayerPos(playerid, 1900.5961,-2494.9373,13.6266);
             SetPlayerFacingAngle(playerid, 271.5300);
             return 1;
         }
@@ -508,7 +629,7 @@ YCMD:wejdz(playerid, params[], help)
         else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1915.1454,-2468.3472,15.4266) && GetPlayerVirtualWorld(playerid) == 1)
         {
             if(!IbizaBiuro) return sendTipMessageEx(playerid, 0xB52E2BFF, "Biuro jest w tej chwili zamkniête");
-            SetPlayerPosEx(playerid, 1911.5500,-2466.1172,17.9850);
+            SetPlayerPos(playerid, 1911.5500,-2466.1172,17.9850);
             SetPlayerFacingAngle(playerid, 181.9157);
             PlayAudioStreamForPlayer(playerid, IbizaStream[IbizaStreamID], 1942.0912,-2468.7349,15.5266, 50.0, 1);
             return 1;
@@ -519,7 +640,7 @@ YCMD:wejdz(playerid, params[], help)
             if(IbizaZamek) return sendTipMessageEx(playerid, 0xB52E2BFF, "Klub jest w tej chwili zamkniêty");
             if(GetPlayerOrg(playerid) != FAMILY_IBIZA) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie mo¿esz têdy przejœæ, nie jesteœ z Ibiza Club!"); //RANGA
             TogglePlayerControllable(playerid, false);
-            SetPlayerPosEx(playerid, 1917.3785,-2465.4368,15.4266);
+            SetPlayerPos(playerid, 1917.3785,-2465.4368,15.4266);
             SetPlayerFacingAngle(playerid, 180.7695);
             SetPlayerVirtualWorld(playerid, 1);
             SetPVarInt(playerid, "IbizaWejdz", 1);
@@ -532,7 +653,7 @@ YCMD:wejdz(playerid, params[], help)
         //wejscie ubikacja prawa
         else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1910.2588,-2474.8745,13.6266) && GetPlayerVirtualWorld(playerid) == 1)
         {
-            SetPlayerPosEx(playerid, 1534.3746,-2553.6333,13.5890);
+            SetPlayerPos(playerid, 1534.3746,-2553.6333,13.5890);
             SetPlayerFacingAngle(playerid, 268.5209);
             SetPVarInt(playerid, "IbizaKibel", 1);
             WlaczSwiatlaP(playerid);
@@ -542,7 +663,7 @@ YCMD:wejdz(playerid, params[], help)
         //wejscie ubikacja lewa
         else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1906.1383,-2474.4417,13.6266) && GetPlayerVirtualWorld(playerid) == 1)
         {
-            SetPlayerPosEx(playerid, 1534.2446,-2550.8020,13.5890);
+            SetPlayerPos(playerid, 1534.2446,-2550.8020,13.5890);
             SetPlayerFacingAngle(playerid ,268.5209);
             SetPlayerVirtualWorld(playerid, 2);
             SetPVarInt(playerid, "IbizaKibel", 1);
@@ -584,7 +705,7 @@ YCMD:wejdz(playerid, params[], help)
                     SetPlayerVirtualWorld(playerid, Business[i][b_vw]); 
                     SetPlayerInterior(playerid, Business[i][b_int]); 
                     SetPLocal(playerid, Business[i][b_pLocal]); 
-                    SetPlayerPosEx(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
+                    SetPlayerPos(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
                     return 1;  
                 }
             }
@@ -598,7 +719,7 @@ YCMD:wejdz(playerid, params[], help)
                         new deem = Dom[i][hDomNr];
                         new h, m;
                         GetPlayerTime(playerid, h, m);
-                        SetPlayerPosEx(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
+                        SetPlayerPos(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
                         SetPlayerInterior(playerid, IntInfo[deem][Int]);
                         SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
                         SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);
@@ -611,7 +732,7 @@ YCMD:wejdz(playerid, params[], help)
 						new deem = Dom[i][hDomNr];
 						new h, m;
 						GetPlayerTime(playerid, h, m);
-						SetPlayerPosEx(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
+						SetPlayerPos(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
 						SetPlayerInterior(playerid, IntInfo[deem][Int]);
 						SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
 						SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);
@@ -624,7 +745,7 @@ YCMD:wejdz(playerid, params[], help)
 						new deem = Dom[i][hDomNr];
 						new h, m;
 						GetPlayerTime(playerid, h, m);
-						SetPlayerPosEx(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
+						SetPlayerPos(playerid, IntInfo[deem][Int_X], IntInfo[deem][Int_Y], IntInfo[deem][Int_Z]);
 						SetPlayerInterior(playerid, IntInfo[deem][Int]);
 						SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
 						SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);

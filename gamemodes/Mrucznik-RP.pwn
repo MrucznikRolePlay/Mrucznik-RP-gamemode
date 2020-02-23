@@ -29,6 +29,8 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik
 		PECET - dobry skrypter
 		LukeSqly - Niby coú zaczπ≥, ale wysz≥o jak zwykle
 		Simeone - Kox przez x
+		Creative - moøliwe øe coú potrafi
+		Sanda≥ - skleci≥ modu≥ animacji
 
 */
 //----------------------------------------------------*------------------------------------------------------//
@@ -78,13 +80,13 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik
 #include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <YSI\y_timers>
+#define AC_MAX_CONNECTS_FROM_IP		3
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
 #include <timestamp>
-#define AC_MAX_CONNECTS_FROM_IP		2
 #include <systempozarow>   //System PoøarÛw v0.1 by PECET
 #include <true_random>
 #include <PreviewModelDialog>
@@ -95,7 +97,7 @@ MrucznikÆ Role Play ----> stworzy≥ Mrucznik
 //-                                                                                                         -//
 #include "VERSION.pwn"
 #define DEBUG_MODE 0 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
-#define RESOURCES_LINK "http://51.68.141.69/models/"
+#define RESOURCES_LINK "http://5.133.9.55:8100/models/"
 
 #if !defined gpci
 native gpci (playerid, serial [], len);
@@ -112,7 +114,9 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
-#include "system\resources.pwn"
+
+//do implementacji w g≥Ûwny kod (moøliwie w modu≥y)
+#include "system\doimplementacji\vinylscript.pwn"
 
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"
@@ -153,7 +157,7 @@ native gpci (playerid, serial [], len);
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
 #include "obiekty\actorsOnWorld.pwn"
-#include "obiekty\vinylscript.pwn"
+
 
 //-------<[ Komendy ]>-------
 #include "commands\commands.pwn"
@@ -167,7 +171,7 @@ main()
 	print("\n----------------------------------");
 	print("M | --- Mrucznik Role Play --- | M");
 	print("R | ---        ****        --- | R");
-	print("U | ---        v2.5        --- | U");
+	print("U | ---        v2.6        --- | U");
 	print("C | ---        ****        --- | C");
 	print("Z | ---    by Mrucznik     --- | Z");
 	print("N | ---                    --- | N");
@@ -252,8 +256,6 @@ public OnGameModeInit()
 	
 	DefaultItems_LicenseCost();
 
-	//-------<[ 0.3DL ]>-------
-	LoadDLSkins();
 	//-------<[ commands ]>-------
 	InitCommands();
 
@@ -274,7 +276,8 @@ public OnGameModeInit()
         new ust = dini_Int("Settings.ini", "OnlyGangZones");
         SetSVarInt("BW_OnlyGangZones", ust);
         ust = dini_Int("Settings.ini", "Time");
-        SetSVarInt("BW_Time", ust);
+        //SetSVarInt("BW_Time", ust);
+		SetSVarInt("BW_Time", 120);
         SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
     }
     else
@@ -284,7 +287,7 @@ public OnGameModeInit()
         dini_IntSet("Settings.ini", "Time", 180);
         dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
         SetSVarInt("BW_OnlyGangZones", 0);
-        SetSVarInt("BW_Time", 180);
+        SetSVarInt("BW_Time", 140);//bylo 180
     }
 
 
@@ -409,6 +412,7 @@ public OnGameModeInit()
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System PoøarÛw v0.1
     SetTimer("MainTimer", 1000, true);
+	SetTimer("CheckChangeWeapon", 450, true);
     SetTimer("RPGTimer", 100, true);
 	//Ustalanie wartoúci wind
 	levelLock[FRAC_SN][5]=1;//ZamkniÍte
@@ -452,6 +456,7 @@ public OnGameModeInit()
 
     pusteZgloszenia();
 
+	Log(serverLog, INFO, "Serwer zosta≥ pomyúlnie uruchomiony.");
     print("----- OnGameModeInit done.");
 	return 1;
 }
@@ -511,7 +516,7 @@ public OnGameModeExit()
     }
 
 	DOF2_Exit();
-
+	Log(serverLog, INFO, "Serwer zosta≥ wy≥πczony.");
     GLOBAL_EXIT = true;
     print("----- OnGameModeExit done.");
 	return 1;
@@ -524,13 +529,8 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
-	//return 0; = strza≥ nie zabiera hp
-    if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24 || GetPlayerWeapon(playerid) == 22) && hittype != 1)
-    {
-    	GameTextForPlayer(playerid, "~r~NIE TRAFILES W GRACZA!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
-		MaTazer[playerid] = 0;
-        return 0;
-	}
+	if(!IsPlayerConnected(hitid)) return 1;
+
     if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) < 11 && hittype == 1)
     {
         new giveplayer[MAX_PLAYER_NAME];
@@ -552,12 +552,6 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
         ClearAnimations(hitid);
         ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
         TogglePlayerControllable(hitid, 0);
-        return 0;
-    }
-    else if(MaTazer[playerid] == 1 && (GetPlayerWeapon(playerid) == 23 || GetPlayerWeapon(playerid) == 24) && TazerAktywny[hitid] == 0 && GetDistanceBetweenPlayers(playerid,hitid) > 10 && hittype == 1)
-    {
-        GameTextForPlayer(playerid, "~r~GRACZ BYL ZA DALEKO!~n~~w~TAZER DEZAKTYWOWANY! PRZELADUJ TAZER!", 3000, 5);
-        MaTazer[playerid] = 0;
         return 0;
     }
     return 1;
@@ -624,7 +618,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		x = GetPVarFloat(playerid, "IbizaKameraX");
 		y = GetPVarFloat(playerid, "IbizaKameraY");
 		z = GetPVarFloat(playerid, "IbizaKameraZ");
-		SetPlayerPosEx(playerid, x, y, z);
+		SetPlayerPos(playerid, x, y, z);
 		SetPlayerVirtualWorld(playerid, 1);
 		SetCameraBehindPlayer(playerid);
         Wchodzenie(playerid);
@@ -695,7 +689,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 
     if(GetPVarInt(playerid, "patrol-map") == 1 && GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == Text:INVALID_TEXT_DRAW)
         {
             SendClientMessage(playerid, COLOR_PAPAYAWHIP, "Wybierz region.");
             SelectTextDraw(playerid, 0xD2691E55);
@@ -760,7 +754,7 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     }
     else if(GetPVarInt(playerid, "patrolmap") == 1)
     {
-        if(clickedid == INVALID_TEXT_DRAW)
+        if(clickedid == Text:INVALID_TEXT_DRAW)
         {
             CancelSelectTextDraw(playerid);
             Patrol_HideMap(playerid);
@@ -928,7 +922,18 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	        SetTimerEx("KickTimer",500,0,"d",playerid);
 	    }
         return 0;
- 	}
+ 	}		
+	if(PlayerInfo[playerid][pJailed] == 2)
+	{
+		Player_RemoveFromVeh(playerid);
+		SendClientMessage(playerid, COLOR_GRAD2, "Straønik zauwaøy≥, øe coú kombinujesz. Wracasz do celi.");
+		return JailDeMorgan(playerid);
+	}							
+	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
+	{
+		PlayerEnterVehOnInjury(playerid);
+		return FreezePlayerOnInjury(playerid);
+	}
 	//Sila
 	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)//Zabezpieczenie, jeúli jest podczas biegu
 	{
@@ -942,8 +947,8 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		GetPlayerPos(playerid, pX,pY,pZ);
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
-	//PAèDZIOCH
-	if(IsAHeliModel(GetVehicleModel(vehicleid)) && ispassenger)
+
+	if((GetVehicleModel(vehicleid) == 497 || GetVehicleModel(vehicleid) == 417 || GetVehicleModel(vehicleid) == 563) && ispassenger)
  	{
   		SetPVarInt(playerid,"chop_id",GetPlayerVehicleID(playerid));
     	SetPVarInt(playerid,"roped",0);
@@ -957,7 +962,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
     {
         new Float:slx, Float:sly, Float:slz;
 		GetPlayerPos(playerid, slx, sly, slz);
-		SetPlayerPosEx(playerid, slx, sly, slz+0.1);
+		SetPlayerPos(playerid, slx, sly, slz+0.1);
 		ClearAnimations(playerid);
     }
 
@@ -994,7 +999,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
-			SetPlayerPosEx(playerid, slx, sly, slz+1);
+			SetPlayerPos(playerid, slx, sly, slz+1);
 			ClearAnimations(playerid);
 		}
 	}
@@ -1026,7 +1031,6 @@ public OnPlayerConnect(playerid)
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
-
     ClearChat(playerid);
 
     // Wy≥πczone na testy
@@ -1331,7 +1335,7 @@ public OnPlayerDisconnect(playerid, reason)
 			iloscOutWiadomosci[playerid],
 			exitReason
 		); //Create LOG
-
+		
 		//Zerowanie zmiennych 
 		iloscKick[playerid] = 0;
 		iloscWarn[playerid] = 0;
@@ -1347,7 +1351,6 @@ public OnPlayerDisconnect(playerid, reason)
 		AdminDutyGodziny[playerid] = 0;
 		AdminDutyMinuty[playerid] = 0;
 		firstDutyAdmin[playerid] = 0; 
-		
 	}
 	if((PlayerInfo[playerid][pAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
 	|| (PlayerInfo[playerid][pNewAP] >= 1 && iloscPozaDuty[playerid] >= 1))//Gdy nie by≥ na admin duty, ale wykonywa≥ akcje
@@ -1510,16 +1513,14 @@ public OnPlayerDisconnect(playerid, reason)
         VAR_NGKeypad = false;
     }
 
-    if(PDGPS == playerid)
-    {
-        foreach(new i : Player)
-        {
-            if(IsACop(i) || IsAMedyk(i) || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
-            {
-                DisablePlayerCheckpoint(i);
-            }
-        }
-    }
+	if(PDGPS == playerid)
+	{
+		foreach(new i : Player)
+		{
+			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+				DisablePlayerCheckpoint(i);
+		}
+	}
 
     if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 	{
@@ -1619,7 +1620,7 @@ public OnPlayerDisconnect(playerid, reason)
 	        if(IsPlayerConnected(Boxer2))
 	        {
 	        	PlayerBoxing[Boxer2] = 0;
-	        	SetPlayerPosEx(Boxer2, 765.8433,3.2924,1000.7186);
+	        	SetPlayerPos(Boxer2, 765.8433,3.2924,1000.7186);
 	        	SetPlayerInterior(Boxer2, 5);
 	        	GameTextForPlayer(Boxer2, "~r~Walka przerwana", 5000, 1);
 			}
@@ -1629,7 +1630,7 @@ public OnPlayerDisconnect(playerid, reason)
 	        if(IsPlayerConnected(Boxer1))
 	        {
 	        	PlayerBoxing[Boxer1] = 0;
-	        	SetPlayerPosEx(Boxer1, 765.8433,3.2924,1000.7186);
+	        	SetPlayerPos(Boxer1, 765.8433,3.2924,1000.7186);
 	        	SetPlayerInterior(Boxer1, 5);
 	        	GameTextForPlayer(Boxer1, "~r~Walka przerwana", 5000, 1);
 			}
@@ -1656,6 +1657,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 	    if(JobDuty[playerid] == 1) { Mechanics -= 1; }
 	}
+	
 
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
@@ -1702,6 +1704,13 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
+	if(zakuty[playerid] > 0)
+	{
+		TogglePlayerControllable(playerid, 0);
+		GameTextForPlayer(playerid, "~r~Nie atakuj", 3500, 1);
+		SetTimerEx("FreezePlayer", 3500, false, "i", playerid);
+	}
+
 	Log(damageLog, INFO, "%s zg≥asza zranienie gracza %s o %fhp broniπ %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
@@ -1711,6 +1720,16 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+	if(GetPVarInt(playerid,"roped") == 1 && issuerid == INVALID_PLAYER_ID)
+    {
+		return 0;
+    }
+
+	if(PlayerInfo[playerid][pBW] > 0)
+    {
+		return 0;
+    }
+
 	if(issuerid < 0 || issuerid > MAX_PLAYERS)
 	{
 		return 1;
@@ -1775,6 +1794,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
+
 	return 0;
 }
 
@@ -1808,7 +1828,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         BoomBoxData[bbxid][BBD_Standby] = false;
         BBD_Putdown(playerid, bbxid);
     }
-    if(reason == 38 && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
+    if(reason == 38 && IsPlayerConnected(killerid) && PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1 && IsPlayerConnected(playerid))
     {
         format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNick(playerid, true), playerid);
         SendCommandLogMessage(string);
@@ -1816,11 +1836,7 @@ public OnPlayerDeath(playerid, killerid, reason)
         SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
     }
 
-    if(ZoneAttacker[playerid])
-    {
-        OnPlayerLeaveGangZone(playerid, GetPVarInt(playerid, "zoneid"));
-    }
-    else if(ZoneDefender[playerid])
+    if(ZoneAttacker[playerid] || ZoneDefender[playerid])
     {
         OnPlayerLeaveGangZone(playerid, GetPVarInt(playerid, "zoneid"));
     }
@@ -1832,8 +1848,9 @@ public OnPlayerDeath(playerid, killerid, reason)
     	{
      		DestroyDynamicObject(r0pes[playerid][i]);
        	}
+		ClearAnimations(playerid);
+		SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
         SetPVarInt(playerid,"roped",0);
-        DisablePlayerCheckpoint(playerid);
 	}
 
     //IBIZA
@@ -1844,37 +1861,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 		StopAudioStreamForPlayer(playerid); //POWT”RKA
 	}
 
-    //Strefy
-    if(killerid != INVALID_PLAYER_ID)
-    {
-        new frac = GetPlayerFraction(killerid);
-
-        if((IsACop(killerid) && OnDuty[killerid] == 1) || FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || frac == FRAC_BOR || frac == 5 || frac == 6 || frac == 8 || frac == 15 || GetPlayerOrgType(killerid) == ORG_TYPE_GANG || GetPlayerOrgType(killerid) == ORG_TYPE_MAFIA)
-        {
-            new bool:inzone=false;
-            for(new i=0;i<MAX_ZONES;i++)
-            {
-                if(bInZone[playerid][i])
-                {
-                    if(bInZone[killerid][i])
-                    {
-                        inzone=true;
-                        break;
-                    }
-                }
-            }
-            if(inzone || GetSVarInt("BW_OnlyGangZones") == 1)
-            {
-                new Float:x, Float:y, Float:z;
-                GetPlayerPos(playerid, x, y, z);
-                PlayerInfo[playerid][pBW] = GetSVarInt("BW_Time");
-                SetSpawnInfo(playerid, 0, GetPlayerSkin(playerid), x, y, z, 0.0, 0, 0, 0, 0, 0, 0);
-                SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
-                SetPVarInt(playerid, "bw-vw", GetPlayerVirtualWorld(playerid));
-                SetPVarInt(playerid, "bw-int", GetPlayerInterior(playerid));
-            }
-        }
-    }
 
 	if(IsPlayerConnected(playerid) && playerid != INVALID_PLAYER_ID)
 	{
@@ -1893,10 +1879,12 @@ public OnPlayerDeath(playerid, killerid, reason)
 			if(IsPlayerConnected(killerid))
             {
                 if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) == 425) format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi≥ %s [%d] z Huntera", killername, killerid, playername, playerid);
-				else format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi≥ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : NiggaNames[reason-46]);
+				else format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] zabi≥ %s [%d] z %s", killername, killerid, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
             }
             else
-				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar≥ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : NiggaNames[reason-46]);
+			{
+				format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar≥ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+			}
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 		if(PlayerMoneyFromBiz[playerid] > 0)
@@ -1923,180 +1911,365 @@ public OnPlayerDeath(playerid, killerid, reason)
 		}
 		if(GetPlayerState(killerid) == 2)
 		{
-			PlayerInfo[killerid][pKills] ++;
-			if(gPlayerLogged[killerid] == 0)
-			{
-				KickEx(killerid);
-				return 1;
-			}
-			if(GetPlayerState(killerid) == 2)
-			{
-				Log(warningLog, INFO, "%s zabi≥ %s z broni o id %d bÍdπc w aucie (moøliwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
-				SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robiπc DriveBy moøesz zostaÊ ukarany przez admina!");
+			PlayerKilledByAdmin[playerid] = 1;
+		}
 
-				if(PlayerInfo[killerid][pLevel] > 1)
+		if(PlayerKilledByAdmin[playerid] == 0)
+		{
+			if(PlayerInfo[playerid][pInjury] > 0)
+			{
+				if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID)
 				{
-					format(string, 128, "AdmWarning: %s[%d] zabi≥ %s[%d] bÍdπ w aucie (moøliwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
-					SendMessageToAdmin(string, COLOR_YELLOW);
-				}
-				else
-				{
-					format(string, 128, "AdmWarning: %s[%d] zabi≥ %s[%d] z DB, dosta≥ kicka !", killername, killerid, playername, playerid);
-					SendMessageToAdmin(string, COLOR_YELLOW);
-					Log(punishmentLog, INFO, "Gracz %s dosta≥ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
-					SendClientMessage(killerid, COLOR_PANICRED, "Dosta≥eú kicka za Drive-By do ludzi.");
-					KickEx(killerid);
-					return 1;
-				}
-			}
-			if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
-			{
-				format(string, 128, "AdmWarning: [%d]%s zabi≥ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
-				SendMessageToAdmin(string, COLOR_YELLOW);
-				Log(warningLog, INFO, "%s zabi≥ gracza %s uøywajπc miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
-			}
-			if(reason == 41)
-			{
-				format(string, 128, "AdmWarning: [%d]%s zabi≥ gracza %s ze spreya !", killerid, killername, playername);
-				SendMessageToAdmin(string, COLOR_YELLOW);
-				Log(warningLog, INFO, "%s zabi≥ gracza %s uøywajπc spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
-			}
-			if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
-			{
-                format(string, 128, "AdmWarning: £owca NagrÛd [%d]%s zabi≥ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
-				SendMessageToAdmin(string, COLOR_YELLOW);
-				Log(warningLog, INFO, "£owca nagrÛd %s zabi≥ gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
-			}
-			//-------<[    Inne    ]>---------
-			if(PlayerPaintballing[playerid] != 0)
-			{
-				PlayerPaintballKills[killerid] ++;
-				if(PlayerPaintballKills[killerid] > PaintballWinnerKills)
-				{
-					PaintballWinner = killerid;
-					PaintballWinnerKills = PlayerPaintballKills[killerid];
-					foreach(new i : Player)
+					PlayerInfo[killerid][pKills] ++;
+					if(gPlayerLogged[killerid] == 0)
 					{
-						if(IsPlayerConnected(i))
+						KickEx(killerid);
+						return 1;
+					}
+					if(GetPlayerState(killerid) == 2)
+					{
+						Log(warningLog, INFO, "%s zabi≥ %s z broni o id %d bÍdπc w aucie (moøliwe DB/CK2).", GetPlayerLogName(killerid), GetPlayerLogName(playerid), reason);
+						SendClientMessage(killerid, COLOR_YELLOW, "DriveBy Jest zakazane, Robiπc DriveBy moøesz zostaÊ ukarany przez admina!");
+
+						if(PlayerInfo[killerid][pLevel] > 1)
 						{
-							if(PlayerPaintballing[i] != 0)
+							format(string, 128, "AdmWarning: %s[%d] zabi≥ %s[%d] bÍdπ w aucie (moøliwe DB/CK2) [Gun %d]!", killername, killerid, playername, playerid, reason);
+							SendMessageToAdmin(string, COLOR_YELLOW);
+						}
+						else
+						{
+							format(string, 128, "AdmWarning: %s[%d] zabi≥ %s[%d] z DB, dosta≥ kicka !", killername, killerid, playername, playerid);
+							SendMessageToAdmin(string, COLOR_YELLOW);
+							Log(punishmentLog, INFO, "Gracz %s dosta≥ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
+							SendClientMessage(killerid, COLOR_PANICRED, "Dosta≥eú kicka za Drive-By do ludzi.");
+							KickEx(killerid);
+							return 1;
+						}
+					}
+					if(reason == 38 && GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
+					{
+						format(string, 128, "AdmWarning: [%d]%s zabi≥ gracza %s z miniguna, podejrzane !", killerid, killername, playername);
+						SendMessageToAdmin(string, COLOR_YELLOW);
+						Log(warningLog, INFO, "%s zabi≥ gracza %s uøywajπc miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+					}
+					if(reason == 41)
+					{
+						format(string, 128, "AdmWarning: [%d]%s zabi≥ gracza %s ze spreya !", killerid, killername, playername);
+						SendMessageToAdmin(string, COLOR_YELLOW);
+						Log(warningLog, INFO, "%s zabi≥ gracza %s uøywajπc spray'a", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+					}
+					if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
+					{
+						format(string, 128, "AdmWarning: £owca NagrÛd [%d]%s zabi≥ gracza %s bez oferty /poddajsie !", killerid, killername, playername);
+						SendMessageToAdmin(string, COLOR_YELLOW);
+						Log(warningLog, INFO, "£owca nagrÛd %s zabi≥ gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
+					}
+					//-------<[    Inne    ]>---------
+					if(PlayerPaintballing[playerid] != 0)
+					{
+						PlayerPaintballKills[killerid] ++;
+						if(PlayerPaintballKills[killerid] > PaintballWinnerKills)
+						{
+							PaintballWinner = killerid;
+							PaintballWinnerKills = PlayerPaintballKills[killerid];
+							foreach(new i : Player)
 							{
-								format(string, sizeof(string), "* %s jest na prowadzeniu z %d trafieniami.",killername,PaintballWinnerKills);
-								SendClientMessage(i, COLOR_WHITE, string);
+								if(IsPlayerConnected(i))
+								{
+									if(PlayerPaintballing[i] != 0)
+									{
+										format(string, sizeof(string), "* %s jest na prowadzeniu z %d trafieniami.",killername,PaintballWinnerKills);
+										SendClientMessage(i, COLOR_WHITE, string);
+									}
+								}
+							}
+						}
+						return 1;
+					}
+				} //koniec killerid connected
+				if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
+				{
+					DisablePlayerCheckpoint(playerid);
+					gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
+				}
+				if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+				{
+					SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoÒczony - nasz rozmÛwca przerwa≥ wywiad.");
+					new talker = TalkingLive[playerid];
+					TalkingLive[playerid] = INVALID_PLAYER_ID;
+					TalkingLive[talker] = INVALID_PLAYER_ID;
+				}
+				//koniec rozmowy telefonicznej
+				if(Mobile[playerid] != INVALID_PLAYER_ID)
+				{
+					SendClientMessage(playerid, COLOR_YELLOW, "Jesteú ranny - po≥πczenie zakoÒczone.");
+					if(Mobile[playerid] >= 0)
+					{
+						SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S≥ychaÊ nag≥y trzask i po≥πczenie zostaje zakoÒczone.");
+					}
+					StopACall(playerid);
+				}
+				//kajdanki
+				if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
+				{
+					OdkujKajdanki(playerid);
+				}
+				if(SkutyGracz[playerid] != 0)
+				{
+					PDkuje[SkutyGracz[playerid]] = 0;
+					zakuty[SkutyGracz[playerid]] = 0;
+					SkutyGracz[playerid] = 0;
+				}
+				if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
+				{
+					format(string, sizeof(string), "Wyúcig: {FFFFFF}%s zginπ≥ jak prawdziwy úcigant [*]", playername);
+					WyscigMessage(COLOR_YELLOW, string);
+					IloscZawodnikow --;
+					if(IloscZawodnikow <= Ukonczyl)
+					{
+						KoniecWyscigu(-1);
+					}
+				}
+				if(lowcaz[playerid] == killerid)
+				{
+					lowcaz[playerid] = 501;
+					SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta≥o anulowane - nie moøesz wziπÊ teraz zlecenia na tego samego gracza!");
+				}
+				if(GetPVarInt(playerid, "ZjadlDragi") == 1)
+				{
+					new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+					SetPVarInt(playerid, "ZjadlDragi", 0);
+					sendTipMessage(playerid, "Z powodu úmierci twÛj boost (dragÛw) zosta≥ wy≥πczony, zaøyj kolejnπ dawkÍ!"); 
+					KillTimer(TimerEfektNarkotyku[playerid]);
+					SetStrong(playerid, FirstValue);
+				}
+
+				if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
+				{
+					if(giveWL)
+					{
+						if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+						{
+							NadajWLBW(killerid, playerid, true);
+						}
+					}
+					if(PoziomPoszukiwania[playerid] >= 1)
+					{
+						//new price = PoziomPoszukiwania[playerid] * 500;
+						new price2 = PoziomPoszukiwania[playerid] * 1000;
+						new count, i = killerid;
+						if(IsACop(playerid) && OnDuty[playerid] == 1)
+						{
+							PoziomPoszukiwania[playerid] = 0;
+						}
+						else if(PlayerInfo[killerid][pJob] == 1)
+						{
+							if(PlayerInfo[i][pDetSkill] <= 50)
+							{
+								if(PoziomPoszukiwania[playerid] == 2 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 11;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+							else if(PlayerInfo[i][pDetSkill] >= 51 && PlayerInfo[i][pDetSkill] < 100)
+							{
+								if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 3 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 22;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+							else if(PlayerInfo[i][pDetSkill] >= 101 && PlayerInfo[i][pDetSkill] < 200)
+							{
+								if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 4 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 33;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+							else if(PlayerInfo[i][pDetSkill] >= 201 && PlayerInfo[i][pDetSkill] < 400)
+							{
+								if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 5 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 44;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+							else if(PlayerInfo[i][pDetSkill] >= 400)
+							{
+								if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 7 || PoziomPoszukiwania[playerid] == 10)
+								{
+									if(lowcaz[i] == playerid)
+									{
+										count = 55;
+										lowcaz[i] = 501;
+										format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+										GameTextForPlayer(i, string, 5000, 1);
+										PoziomPoszukiwania[i] = 0;
+										ClearCrime(i);
+										DajKase(i, price2);//moneycheat
+										PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+										PlayerInfo[i][pDetSkill] ++;
+										PlayerInfo[i][pDetSkill] ++;
+										SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+									}
+								}
+							}
+						}
+						if(poscig[playerid] == 1)
+						{
+							if(PoziomPoszukiwania[playerid] >= 6)
+							{
+								count = 2;
+							}
+							else
+							{
+								count = 1;
+							}
+						}
+						if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55)
+						{
+							if(!(IsACop(playerid) && OnDuty[playerid] == 1))
+							{
+								new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
+								ZabierzKase(playerid, CenaZabicia);//moneycheat
+								PlayerInfo[playerid][pWantedDeaths] += 1;
+								PlayerInfo[playerid][pJailed] = 1;
+								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
+								format(string, sizeof(string), "* Jesteú w wiÍzieniu na %d Sekund i straci≥eú $%d gdyø ucieka≥eú lub strzela≥eú do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
+								SendClientMessage(playerid, COLOR_LIGHTRED, string);
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, "Jeøeli nie chcesz aby taka sytuacja powtÛrzy≥a siÍ w przysz≥oúci, skorzystaj z us≥ug prawnika ktÛry zbije twÛj WL.");
+								PoziomPoszukiwania[playerid] = 0;
+								poscig[playerid] = 0;
+								WantLawyer[playerid] = 1;
+								UsunBron(playerid);
+							}
+						}
+						else if(count == 2)
+						{
+							if(!(IsACop(playerid) && OnDuty[playerid] == 1))
+							{
+								new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
+								ZabierzKase(playerid, CenaZabicia);//moneycheat
+								PlayerInfo[playerid][pWantedDeaths] += 1;
+								PlayerInfo[playerid][pJailed] = 2;
+								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
+								format(string, sizeof(string), "* Jesteú w DeMorgan na %d Sekund i straci≥eú $%d gdyø ucieka≥eú lub strzela≥eú do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
+								SendClientMessage(playerid, COLOR_LIGHTRED, string);
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, "Jeøeli nie chcesz aby taka sytuacja powtÛrzy≥a siÍ w przysz≥oúci, skorzystaj z us≥ug prawnika ktÛry zbije twÛj WL.");
+								PoziomPoszukiwania[playerid] = 0;
+								poscig[playerid] = 0;
+								UsunBron(playerid);
+							}
+						}
+						return 1;
+					}
+					if(PlayerInfo[playerid][pHeadValue] > 0)
+					{
+						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+						{
+							if(GoChase[killerid] == playerid)
+							{
+								SetPVarInt(playerid, "bw-hitmankiller",  1);
+								SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
 							}
 						}
 					}
+					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
-				return 1;
+				return (IsPlayerConnected(killerid) && PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1))) ? NadajBW(playerid) : 1;
 			}
-			if(PlayerInfo[playerid][pHeadValue] > 0)
+			else
 			{
-				if(IsPlayerConnected(killerid))
+				if(PlayerInfo[playerid][pBW] > 0)
 				{
-					if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+					return NadajBW(playerid, PlayerInfo[playerid][pBW], false);
+				}
+				else
+				{
+					//-------<[     WL      ]>---------
+					if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
 					{
-						if(GoChase[killerid] == playerid)
+						if(giveWL)
 						{
-							DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
-							format(string,128,"<< Hitman %s wype≥ni≥ kontrakt na: %s i zarobi≥ $%d >>",killername,playername,PlayerInfo[playerid][pHeadValue]);
-							SendFamilyMessage(8, COLOR_YELLOW, string);
-							format(string,128,"NR Marcepan_Marks: Szok! Zamach na øycie %s. Zosta≥ on ciÍøko ranny i przewieziony do szpitala.",playername);
-							SendClientMessageToAll(COLOR_NEWS, string);
-							Log(payLog, INFO, "Hitman %s zabi≥ %s i zarobi≥ %d$", GetPlayerLogName(killerid), GetPlayerLogName(playerid), PlayerInfo[playerid][pHeadValue]);
-							PlayerInfo[playerid][pHeadValue] = 0;
-							GotHit[playerid] = 0;
-							GetChased[playerid] = 999;
-							GoChase[killerid] = 999;
+							if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+							{
+								NadajWLBW(killerid, playerid, false);
+							}
+						}
+						if(PlayerInfo[playerid][pHeadValue] > 0)
+						{
+							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+							{
+								if(GoChase[killerid] == playerid)
+								{
+									SetPVarInt(playerid, "bw-hitmankiller",  1);
+									SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
+									return NadajBW(playerid, BW_TIME_CRIMINAL);
+								}
+							}
+						}
+						if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPrzestepca(killerid) || (IsACop(playerid) && OnDuty[playerid] == 1)))
+						{
+							SetPVarInt(playerid, "bw-reason", reason);
+							return NadajRanny(playerid, 0, true);
 						}
 					}
 				}
 			}
-		}//koniec killerid connected
-		if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
-		{
-			DisablePlayerCheckpoint(playerid);
-			gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
 		}
-		if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+		else
 		{
-			SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoÒczony - nasz rozmÛwca umar≥.");
-			new talker = TalkingLive[playerid];
-			TalkingLive[playerid] = INVALID_PLAYER_ID;
-			TalkingLive[talker] = INVALID_PLAYER_ID;
-		}
-		//koniec rozmowy telefonicznej
-		if(Mobile[playerid] != INVALID_PLAYER_ID)
-		{
-			SendClientMessage(playerid, COLOR_YELLOW, "Umar≥eú - po≥πczenie zakoÒczone.");
-			if(Mobile[playerid] >= 0)
-			{
-				SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S≥ychaÊ nag≥y trzask i po≥πczenie zostaje zakoÒczone.");
-			}
-			StopACall(playerid);
-		}
-		//kajdanki
-		if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
-		{
-			OdkujKajdanki(playerid);
-		}
-		if(SkutyGracz[playerid] != 0)
-		{
-			PDkuje[SkutyGracz[playerid]] = 0;
-			zakuty[SkutyGracz[playerid]] = 0;
-			SkutyGracz[playerid] = 0;
-		}
-		if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
-		{
-			format(string, sizeof(string), "Wyúcig: {FFFFFF}%s zginπ≥ jak prawdziwy úcigant [*]", playername);
-			WyscigMessage(COLOR_YELLOW, string);
-			IloscZawodnikow --;
-			if(IloscZawodnikow <= Ukonczyl)
-			{
-				KoniecWyscigu(-1);
-			}
-		}
-		if(lowcaz[playerid] == killerid)
-		{
-			lowcaz[playerid] = 501;
-			SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta≥o anulowane - nie moøesz wziπÊ teraz zlecenia na tego samego gracza!");
-		}
-		if(GetPVarInt(playerid, "ZjadlDragi") == 1)
-		{
-			new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
-			SetPVarInt(playerid, "ZjadlDragi", 0);
-			sendTipMessage(playerid, "Z powodu úmierci twÛj boost (dragÛw) zosta≥ wy≥πczony, zaøyj kolejnπ dawkÍ!"); 
-			KillTimer(TimerEfektNarkotyku[playerid]);
-			SetStrong(playerid, FirstValue);
-		}
-
-		//-------<[     WL      ]>---------
-		if(IsPlayerConnected(killerid) && killerid != INVALID_PLAYER_ID && gPlayerLogged[playerid])
-		{
-			if(giveWL)
-			{
-				if(!IsACop(killerid) && lowcaz[killerid] != playerid )
-				{
-					format(string, sizeof(string), "Morderstwo");
-					if(IsACop(playerid))
-					{
-						PoziomPoszukiwania[killerid] += 2;
-						strcat(string, " Policjanta");
-					}
-					if(lowcaz[killerid] == playerid)
-						strcat(string, " £owcy NagrÛd");
-					if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER || GetPlayerState(killerid) == PLAYER_STATE_PASSENGER)
-						strcat(string, " z okna pojazdu");
-
-					PlayerPlaySound(killerid, 1083, 0.0, 0.0, 0.0);
-					PoziomPoszukiwania[killerid] ++;
-					SetPlayerCriminal(killerid, INVALID_PLAYER_ID, string);
-					if(PoziomPoszukiwania[killerid] >= 10)
-					{
-						sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz juø 10 listÛw goÒczych!");
-						sendTipMessage(killerid, "Zaczynasz stawaÊ siÍ coraz bardziej smakowity dla ≥owcÛw! Pilnuj siÍ!"); 
-					}
-				}
-			}
+			PlayerKilledByAdmin[playerid] = 0;			
 		}
 	}
 	SetPlayerColor(playerid,COLOR_GRAD2);
@@ -2286,6 +2459,7 @@ public OnPlayerSpawn(playerid)
 	CheckPlayerBusiness(playerid);
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
+
     //Spawn Pos
 	SetTimerEx("SpawnPosInfo", 1000, false, "i", playerid);
 	return 1;
@@ -2306,9 +2480,9 @@ SetPlayerSpawnPos(playerid)
     {
 		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] >= 1)
 		{
-			SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
+			SetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 			Unspec[playerid][Coords][0] = 0.0, Unspec[playerid][Coords][1] = 0.0, Unspec[playerid][Coords][2] = 0.0;
 			Spectate[playerid] = INVALID_PLAYER_ID;
 			PhoneOnline[playerid] = 0;
@@ -2317,28 +2491,32 @@ SetPlayerSpawnPos(playerid)
     //WiÍzienie:
 	else if(PlayerInfo[playerid][pJailed] == 1)
 	{
+		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
 		SetPlayerInterior(playerid, 0);
 	    SetPlayerVirtualWorld(playerid, 1);
 	    new losuj= random(sizeof(Cela));
-		SetPlayerPosEx(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+		SetPlayerPos(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "TwÛj wyrok nie dobieg≥ koÒca, wracasz do wiÍzienia.");
 		TogglePlayerControllable(playerid, 0);
 		Wchodzenie(playerid);
 	}
 	else if(PlayerInfo[playerid][pJailed] == 2)//Stanowe
 	{
+		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "TwÛj wyrok nie dobieg≥ koÒca, wracasz do wiÍzienia stanowego");
 		JailDeMorgan(playerid);
 		return 1;
 	}
 	else if(PlayerInfo[playerid][pJailed] == 3)//AdminJail
 	{
+		new string[128];
 	    SetPlayerInterior(playerid, 0);
-		SetPlayerPosEx(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
-		PlayerInfo[playerid][pMuted] = 1;
 		SetPlayerVirtualWorld(playerid, 1000+playerid);
+		SetPlayerPos(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
+		PlayerInfo[playerid][pMuted] = 1;
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
-	//	SendClientMessage(playerid, COLOR_LIGHTRED, "Gra≥eú NON-RP. Wracasz do Admin Jaila.");
+		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}PowÛd: %s", PlayerInfo[playerid][pAJreason]);
+		SendClientMessage(playerid, COLOR_PANICRED, string);
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
 	{
@@ -2352,9 +2530,10 @@ SetPlayerSpawnPos(playerid)
 		UsunBron(playerid);
 		PlayerInfo[playerid][pJailed] = 3;
 		PlayerInfo[playerid][pJailTime] = 15*60;
+		format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
         SetPlayerVirtualWorld(playerid, 1000+playerid);
 		PlayerInfo[playerid][pMuted] = 1;
-		SetPlayerPosEx(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
+		SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 		format(string, sizeof(string), "Zosta≥eú ukarany na 15 minut. Powod: /q podczas akcji");
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po≥owÍ kasy i broÒ", sendername);
@@ -2371,25 +2550,24 @@ SetPlayerSpawnPos(playerid)
 	    ResetPlayerWeapons(playerid);
   		GivePlayerWeapon(playerid, 29, 999);
 	    new rand = random(sizeof(PaintballSpawns));
-		SetPlayerPosEx(playerid, PaintballSpawns[rand][0], PaintballSpawns[rand][1], PaintballSpawns[rand][2]);
+		SetPlayerPos(playerid, PaintballSpawns[rand][0], PaintballSpawns[rand][1], PaintballSpawns[rand][2]);
 		SetCameraBehindPlayer(playerid);
 	}
 	//BW:
-	else if(PlayerInfo[playerid][pBW] >= 1)
+	else if(PlayerInfo[playerid][pBW] > 0)
 	{
-		MedicBill[playerid] = 0;
-		MedicTime[playerid] = 0;
-		NeedMedicTime[playerid] = 0;
-		SetPlayerHealth(playerid, 10.0);
-		SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "bw-vw"));
-        SetPlayerInterior(playerid, GetPVarInt(playerid, "bw-int"));
-        SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-        TogglePlayerControllable(playerid, 0);
-        ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.1, 0, 0, 0, 0, 0, 1);
-        GameTextForPlayer(playerid, "Zostales brutalnie pobity!", 15000, 5);
-        PlayerInfo[playerid][pMuted] = 1;
-        if(GetPVarInt(playerid, "bw-skin") != 0) SetPlayerSkinEx(playerid, GetPVarInt(playerid, "bw-skin"));
-
+		if(PlayerRequestMedic[playerid] == 1)
+		{
+			ZespawnujGraczaBW(playerid);
+		}
+		else
+		{
+			ZespawnujGraczaSzpitalBW(playerid);
+		}
+	}
+	else if(PlayerInfo[playerid][pInjury] > 0)
+	{
+		ZespawnujGraczaBW(playerid);
 	}
     else
     {
@@ -2397,7 +2575,7 @@ SetPlayerSpawnPos(playerid)
 	    //Przywracanie do poprzedniego spawnu
 		if(GetPVarInt(playerid, "spawn") == 2)
 		{
-			SetPlayerPosEx(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
 			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			Wchodzenie(playerid);
@@ -2424,117 +2602,117 @@ SetPlayerSpawnPos(playerid)
 						case FRAC_LSPD: //1
 						{
 						    new rand = random(sizeof(gCopPlayerSpawns));
-							SetPlayerPosEx(playerid, gCopPlayerSpawns[rand][0], gCopPlayerSpawns[rand][1], gCopPlayerSpawns[rand][2]);
+							SetPlayerPos(playerid, gCopPlayerSpawns[rand][0], gCopPlayerSpawns[rand][1], gCopPlayerSpawns[rand][2]);
 							SetPlayerFacingAngle(playerid, 90.0);
 						}
 						case FRAC_FBI: //2
 						{
 						    if(PlayerInfo[playerid][pTajniak] == 0)
 						    {
-                                SetPlayerPosEx(playerid, 598.2130,-1491.1135,15.1351);
+                                SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
 								SetPlayerFacingAngle(playerid, 270.0);
 		  					}
 		  					else if(PlayerInfo[playerid][pTajniak] == 1)
 		  					{
-		  					    SetPlayerPosEx(playerid, 2495.2163,-1687.2322,13.5150);
+		  					    SetPlayerPos(playerid, 2495.2163,-1687.2322,13.5150);
 		  					}
 		  					else if(PlayerInfo[playerid][pTajniak] == 2)
 		  					{
-		  					    SetPlayerPosEx(playerid, 1939.1940,-1116.3353,27.0151);
+		  					    SetPlayerPos(playerid, 1939.1940,-1116.3353,27.0151);
 		  					}
 		  					else if(PlayerInfo[playerid][pTajniak] == 3)
 		  					{
-                                SetPlayerPosEx(playerid, 738.8827,-1429.9484,13.5234);
+                                SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
 		  					}
          					else if(PlayerInfo[playerid][pTajniak] == 4)
 		  					{
-                                SetPlayerPosEx(playerid, 2801.0273,-1089.4576,30.7188);
+                                SetPlayerPos(playerid, 2801.0273,-1089.4576,30.7188);
 		  					}
 		  					else if(PlayerInfo[playerid][pTajniak] == 5)
 		  					{
-		  					    SetPlayerPosEx(playerid, 2467.5117,-1278.2054,29.9264);
+		  					    SetPlayerPos(playerid, 2467.5117,-1278.2054,29.9264);
 							}
 		  					else if(PlayerInfo[playerid][pTajniak] == 6)
 		  					{
 								new rand = random(sizeof(gTajniakSpawn));
-								SetPlayerPosEx(playerid, gTajniakSpawn[rand][0], gTajniakSpawn[rand][1], gTajniakSpawn[rand][2]); // Warp the player
+								SetPlayerPos(playerid, gTajniakSpawn[rand][0], gTajniakSpawn[rand][1], gTajniakSpawn[rand][2]); // Warp the player
 								SetPlayerFacingAngle(playerid, 270.0);
 		  					}
 		  					else
 		  					{
-                                SetPlayerPosEx(playerid, 2467.5117,-1278.2054,29.9264);
+                                SetPlayerPos(playerid, 2467.5117,-1278.2054,29.9264);
 		  					}
 
 						}
 						case FRAC_NG: //3
 						{
-						    SetPlayerPosEx(playerid, 261.8342, 71.2429, 1003.2422);// stara: 2515.0200, -2459.5896, 13.8187
+						    SetPlayerPos(playerid, 261.8342, 71.2429, 1003.2422);// stara: 2515.0200, -2459.5896, 13.8187
 							SetPlayerInterior(playerid, 6);
 							SetPlayerVirtualWorld(playerid, 88);
 							Wchodzenie(playerid);
 						}
 						case FRAC_ERS:  //4
 						{
-						    SetPlayerPosEx(playerid, 1148.4323,-1315.4225,13.9841);
+						    SetPlayerPos(playerid, 1148.4323,-1315.4225,13.9841);
 		    				SetPlayerFacingAngle(playerid,358.0);
 						}
 						case FRAC_LCN: //5
 						{
-						    SetPlayerPosEx(playerid, 738.8827,-1429.9484,13.5234);
+						    SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
 						}
 						case FRAC_YKZ: //6
 						{
-                            SetPlayerPosEx(playerid, 2794.8042,-1087.1310,30.7188);
+                            SetPlayerPos(playerid, 2794.8042,-1087.1310,30.7188);
 						}
 						case FRAC_BOR: //7
 						{
-						    SetPlayerPosEx(playerid, 1519.0970,-1449.6099,13.5391);
+						    SetPlayerPos(playerid, 1519.0970,-1449.6099,13.5391);
 						}
 						case FRAC_HA: //8
 						{
-						    SetPlayerPosEx(playerid, -50.400001525879,-279.20001220703,6.0999999046326);
+						    SetPlayerPos(playerid, -50.400001525879,-279.20001220703,6.0999999046326);
 						}
 						case FRAC_SN: //9
 						{
 							if(PlayerInfo[playerid][pRank] <= 1)
 							{
-								SetPlayerPosEx(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
+								SetPlayerPos(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
 								Wchodzenie(playerid);
 								sendTipMessage(playerid, "Zrespi≥eú siÍ na dachu San News"); 
 							}
 							else if(PlayerInfo[playerid][pRank] >= 2 && PlayerInfo[playerid][pRank] < 7) 
 							{
-								SetPlayerPosEx(playerid, 288.0914,-1609.7465,17.9994); 
+								SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
 								Wchodzenie(playerid);
 							}
 							else if(PlayerInfo[playerid][pRank] >= 8)
 							{
-								SetPlayerPosEx(playerid, 288.0914,-1609.7465,17.9994); 
+								SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
 								Wchodzenie(playerid);
 							}
-						   // SetPlayerPosEx(playerid, 735.2266,-1336.5826,13.5358);
+						   // SetPlayerPos(playerid, 735.2266,-1336.5826,13.5358);
 						}
 						case FRAC_KT: //10
 						{
-						    SetPlayerPosEx(playerid, 2482.7566, -2105.6033, 32.2773);
-							SetPlayerVirtualWorld(playerid,3);
-							Wchodzenie(playerid);
+							SetPlayerPos(playerid,2468.3796,-2082.9690,13.5580);
+                            SetPlayerFacingAngle(playerid, 89.1901);
 						}
 						case FRAC_GOV: //11
 						{
 							if(PlayerInfo[playerid][pLider] == 11)
 							{
-							    SetPlayerPosEx(playerid, 1460.4297,-1853.9827,81.9475);
+							    SetPlayerPos(playerid, 1460.4297,-1853.9827,81.9475);
 							    SetPlayerVirtualWorld(playerid, 50);
 							    SetPlayerInterior(playerid, 0);
 								PlayerInfo[playerid][pLocal] = 108;
 			                    Wchodzenie(playerid);
+								SetTimerEx("Wchodzenie", 1000, false, "i", playerid);
 							}
 							else
 							{
 							    if(PlayerInfo[playerid][pRank] >= 1)
 								{
-								    SetPlayerPosEx(playerid, 1445.3516,-1827.1736,81.4602);
+								    SetPlayerPos(playerid, 1445.3516,-1827.1736,81.4602);
 									SetPlayerFacingAngle(playerid, 0.0);
 									SetPlayerVirtualWorld(playerid, 50);
 									SetPlayerInterior(playerid, 0);
@@ -2542,7 +2720,7 @@ SetPlayerSpawnPos(playerid)
 								}
 								else
 								{
-								    SetPlayerPosEx(playerid, 1471.8883,-1811.8147,77.9612);
+								    SetPlayerPos(playerid, 1471.8883,-1811.8147,77.9612);
 									SetPlayerFacingAngle(playerid, 4.6505);
 									SetPlayerVirtualWorld(playerid, 50);
 									SetPlayerInterior(playerid, 0);
@@ -2552,26 +2730,27 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_GROOVE: //12
 						{
-          					SetPlayerPosEx(playerid, 2777.9751,-1945.4319,13.5469);
+          					SetPlayerPos(playerid,2496.8523,-1685.3225,13.4172);
+                            SetPlayerFacingAngle(playerid, 345.4405);
 						}
 						case FRAC_BALLAS: //13
 						{
-						    SetPlayerPosEx(playerid,2502.7222,-1244.7454,35.4519);
+						    SetPlayerPos(playerid,2502.7222,-1244.7454,35.4519);
                             SetPlayerFacingAngle(playerid, 181.7818);
 						}
 						case FRAC_VAGOS: //14
 						{
-						    SetPlayerPosEx(playerid, 2177.1636,-984.1085,64.4688);
+						    SetPlayerPos(playerid, 2177.1636,-984.1085,64.4688);
 							SetPlayerFacingAngle(playerid, 165.360);
 						}
 						case FRAC_NOA: //15
 						{
-						    SetPlayerPosEx(playerid, 1104.4066,-1224.0862,15.8435);
+						    SetPlayerPos(playerid, 1104.4066,-1224.0862,15.8435);
 		    				SetPlayerFacingAngle(playerid, 181.0);
 						}
 						case FRAC_WPS: //16
 						{
-						    SetPlayerPosEx(playerid, 2508.0671,-2019.8987,13.9482);
+						    SetPlayerPos(playerid, 2508.0671,-2019.8987,13.9482);
 						}
 				    }
 				}
@@ -2582,14 +2761,14 @@ SetPlayerSpawnPos(playerid)
 		            {
 		                SetPlayerVirtualWorld(playerid, OrgInfo[org][o_VW]);
 		    		    SetPlayerInteriorEx(playerid, OrgInfo[org][o_Int]);
-		    		    SetPlayerPosEx(playerid, OrgInfo[org][o_Spawn][0], OrgInfo[org][o_Spawn][1], OrgInfo[org][o_Spawn][2]);
+		    		    SetPlayerPos(playerid, OrgInfo[org][o_Spawn][0], OrgInfo[org][o_Spawn][1], OrgInfo[org][o_Spawn][2]);
 		    		    SetPlayerFacingAngle(playerid, OrgInfo[org][o_Spawn][3]);
 		            }
 		            else
 		            {
 						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawnu - spawnujesz siÍ jako cywil");
                         new rand = random(sizeof(gRandomPlayerSpawns));
-			    		SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
+			    		SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 			    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
 					}
 				}
@@ -2599,41 +2778,41 @@ SetPlayerSpawnPos(playerid)
 				    {
 						case JOB_MECHANIC:
 						{
-						    SetPlayerPosEx(playerid,2794.5515,-1619.3689,10.9219);
+						    SetPlayerPos(playerid,2794.5515,-1619.3689,10.9219);
 		    				SetPlayerFacingAngle(playerid, 80.0);
 						}
 						case JOB_LAWYER:
 						{
-						    SetPlayerPosEx(playerid,319.72470092773, -1548.3374023438, 13.845289230347);
+						    SetPlayerPos(playerid,319.72470092773, -1548.3374023438, 13.845289230347);
 		    				SetPlayerFacingAngle(playerid, 230.0);
 						}
 						case JOB_LOWCA:
 						{
-						    SetPlayerPosEx(playerid,322.0553894043, 303.41961669922, 999.1484375);
+						    SetPlayerPos(playerid,322.0553894043, 303.41961669922, 999.1484375);
 		    				SetPlayerInterior(playerid,5);
 						}
 						case JOB_BOXER:
 						{
-						    SetPlayerPosEx(playerid,766.0804,14.5133,1000.7004);
+						    SetPlayerPos(playerid,766.0804,14.5133,1000.7004);
 		    				SetPlayerInterior(playerid, 5);
 						}
 						case JOB_TRUCKER:
 						{
-						    SetPlayerPosEx(playerid, 1751.4445, -2054.9761, 13.0593);
+						    SetPlayerPos(playerid, 1751.4445, -2054.9761, 13.0593);
 		    				SetPlayerFacingAngle(playerid, 180.0);
 						}
 						case JOB_BUSDRIVER:
 						{
-						    SetPlayerPosEx(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
+						    SetPlayerPos(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
 						}
 						case JOB_BODYGUARD:
 						{
-						    SetPlayerPosEx(playerid, 2207.4038,-1725.1147,13.4060);
+						    SetPlayerPos(playerid, 2207.4038,-1725.1147,13.4060);
 						}
 						default:
 						{
 							new rand = random(sizeof(gRandomPlayerSpawns));
-							SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
+							SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 							SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
 						}
 				    }
@@ -2641,7 +2820,7 @@ SetPlayerSpawnPos(playerid)
 				else //Spawn cywila
 				{
 				    new rand = random(sizeof(gRandomPlayerSpawns));
-		    		SetPlayerPosEx(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
+		    		SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 		    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
 				}
 		    }
@@ -2658,7 +2837,7 @@ SetPlayerSpawnPos(playerid)
 					SetPlayerSpawnPos(playerid);
 				    return 1;
 				}
-                SetPlayerPosEx(playerid, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]);
+                SetPlayerPos(playerid, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]);
 	  		}
 	  		else if(PlayerInfo[playerid][pSpawn] == 2) //Spawn w úrodku domu
 	  		{
@@ -2677,7 +2856,7 @@ SetPlayerSpawnPos(playerid)
    				SetPlayerTime(playerid, Dom[i][hSwiatlo], 0);
      			PlayerInfo[playerid][pDomT] = h;
                 PlayerInfo[playerid][pDomWKJ] = PlayerInfo[playerid][pDom];
-                SetPlayerPosEx(playerid, Dom[i][hInt_X], Dom[i][hInt_Y], Dom[i][hInt_Z]);
+                SetPlayerPos(playerid, Dom[i][hInt_X], Dom[i][hInt_Y], Dom[i][hInt_Z]);
                 SetPlayerInteriorEx(playerid, Dom[i][hInterior]);
                 SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
                 GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
@@ -2708,20 +2887,23 @@ SetPlayerSpawnWeapon(playerid)
 		PrzywrocBron(playerid);
 
     //HP:
-    if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
-    {
-        SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
-        //f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
-	       //SetPlayerArmour(playerid, 15);
-    }
-    else if(IsAPrzestepca(playerid))
+	if(PlayerInfo[playerid][pInjury] == 0 && PlayerInfo[playerid][pBW] == 0)
 	{
-	    SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
-        //SetPlayerArmour(playerid, 15);
-	}
-	else
-	{
-	    SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
+		if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
+		{
+			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
+			//f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
+			//SetPlayerArmour(playerid, 15);
+		}
+		else if(IsAPrzestepca(playerid))
+		{
+			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
+			//SetPlayerArmour(playerid, 15);
+		}
+		else
+		{
+			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
+		}
 	}
 	return 1;
 }
@@ -2733,86 +2915,18 @@ SetPlayerSpawnSkin(playerid)
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyúlna wartoúÊ");
 		PlayerInfo[playerid][pSkin] = 136;
 	}
-	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-  /*  if(PlayerInfo[playerid][pChar] > 0)
-		PlayerInfo[playerid][pSkin] = PlayerInfo[playerid][pChar], PlayerInfo[playerid][pChar] = 0;
-
-    if(GetPlayerFraction(playerid) == FRAC_FBI && PlayerInfo[playerid][pTajniak] != 0)
-    {
-        if(PlayerInfo[playerid][pRank] < 4)
-            PlayerInfo[playerid][pTajniak] =0;
-		else
-		{
-		    switch(PlayerInfo[playerid][pTajniak])
-		    {
-				case 1:
-				{
-                    SetPlayerSkinEx(playerid, 107);
-				}
-				case 2:
-				{
-                    SetPlayerSkinEx(playerid, 104);
-				}
-				case 3:
-				{
-                    SetPlayerSkinEx(playerid, 124);
-				}
-				case 4:
-				{
-                    SetPlayerSkinEx(playerid, 123);
-				}
-				case 5:
-				{
-                    SetPlayerSkinEx(playerid, 108);
-				}
-				case 6:
-				{
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-				}
-			}
-			return 1;
-		}
-    }
-
-	if(PlayerInfo[playerid][pSkin] != 0)
-	{
-		if(GetPlayerFraction(playerid) != 0)
-		{
-			if(IsACop(playerid)  || GetPlayerFraction(playerid) == FRAC_ERS)
-			{
-				if(OnDuty[playerid] == 1 && OnDutyCD[playerid] == 0)
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-				else
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-			}
-			else if(GetPlayerFraction(playerid) == FRAC_SN)
-			{
-				if(SanDuty[playerid] == 1)
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-				else
-					SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-			}
-			else
-            {
-				SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-                SetPVarInt(playerid, "skinF", 1);
-            }
-		}
-		else if(GetPlayerOrg(playerid) != 0)
-		{
- 			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-		}
-		else if(JobDuty[playerid] == 1)
-		{
-			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-		}
+	if((JobDuty[playerid] == 1 || OnDuty[playerid] == 1) && PlayerInfo[playerid][pUniform] > 0) {
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
 	}
-    else
+	else
 	{
-		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pModel]);
-        SetPVarInt(playerid, "skinF", 0);
-	}*/
-
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	}
+	if(isNaked[playerid] == 1)
+	{
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
+		isNaked[playerid] = 0;
+	}
 	return 1;
 }
 
@@ -2919,18 +3033,6 @@ public OnPlayerEnterCheckpoint(playerid)
 	    SetTimerEx("PizzaJobTimer01", 4000, false, "i", playerid);
 	    GameTextForPlayer(playerid, "KLIENT ZABIERA PIZZE", 4000, 3);
 	    TogglePlayerControllable(playerid,0);
-	}
-	if(GetPVarInt(playerid,"roped") == 1)
-    {
-   		SetPVarInt(playerid,"roped",0);
-        SetPVarInt(playerid,"chop_id",0);
-        ClearAnimations(playerid);
-        TogglePlayerControllable(playerid,0);
-        TogglePlayerControllable(playerid,1);
-        for(new i=0;i<=ROPELENGTH;i++)
-        {
-        	DestroyDynamicObject(r0pes[playerid][i]);
-        }
 	}
 
     TJD_CallCheckpoint(playerid, GetPlayerVehicleID(playerid));
@@ -4844,7 +4946,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 {
                     SendClientMessage(i, 0xFF0000FF, "Zejdz z obiektu!!");
                     GetPlayerPos(i, rox, roy, roz);
-                    SetPlayerPosEx(i, rox+0.3,roy+0.3,roz+0.2);
+                    SetPlayerPos(i, rox+0.3,roy+0.3,roz+0.2);
                     SetPlayerVelocity(i, 0.15, 0.12, 0.1);
                 }
             }
@@ -4928,7 +5030,7 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
     {
         SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________WybÛr skina - dostÍpne komendy_______________|");
         SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk≥ego menu wyboru skinÛw (wybiera≥ka). Tylko dla cywili.");
-        SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraÊ skin przydzielany po s≥uøbie. Tylko dla frakcji z dzia≥ajπcym /duty");
+        SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraÊ skin przydzielany po s≥uøbie. Tylko dla frakcji z dzia≥ajπcym /duty.");
         SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianÍ uniformu s≥uøbowego. Tylko dla cz≥onkÛw frakcji z pominiÍciem liderÛw.");
         SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
     }
@@ -4973,7 +5075,11 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		}
 	}
 
-	if(newstate == PLAYER_STATE_DRIVER)
+	if(PlayerInfo[playerid][pInjury] > 0 && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER))
+	{
+		return PlayerEnterVehOnInjury(playerid);
+	}
+	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
         if(newstate == PLAYER_STATE_DRIVER)
         {
@@ -5039,11 +5145,11 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         {
             new Float:slx, Float:sly, Float:slz;
     		GetPlayerPos(playerid, slx, sly, slz);
-    		SetPlayerPosEx(playerid, slx, sly, slz+0.2);
+    		SetPlayerPos(playerid, slx, sly, slz+0.2);
     		ClearAnimations(playerid);
         }
 
-        TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
+        if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
     {
@@ -5083,6 +5189,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		{
             Taxi_Pay(playerid);
 		}
+		PlayerTextDrawHide(playerid, Licznik[playerid]);
     }
 	if(newstate == PLAYER_STATE_ONFOOT)
 	{
@@ -5164,197 +5271,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_WASTED)
 	{
-		if(PoziomPoszukiwania[playerid] >= 1)
-		{
-		    new price = PoziomPoszukiwania[playerid] * 500;
-		    new price2 = PoziomPoszukiwania[playerid] * 1000;
-			new count;
-			foreach(new i : Player)
-			{
-				if(IsPlayerConnected(i))
-				{
-				    if(IsACop(playerid) && OnDuty[playerid] == 1)
-				    {
-				        PoziomPoszukiwania[playerid] = 0;
-				        return 1;
-				    }
-				    if(IsACop(i) && OnDuty[i] == 1 && CrimInRange(15.0, playerid,i))
-				    {
-				        if(PoziomPoszukiwania[playerid] >= 6)
-				        {
-                            if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
-                            {
-                                count = 2;
-                            }
-						}
-						else if(PoziomPoszukiwania[playerid] >= 2)
-						{
-							if(GetPlayerVirtualWorld(playerid) == GetPlayerVirtualWorld(i))
-                            {
-                                count = 1;
-                            }
-						}
-						if(PoziomPoszukiwania[playerid] >= 2)
-						{
-							format(string, sizeof(string), "~w~Niebezpieczny przestepca~r~Zabity~n~Nagroda~g~$%d", price);
-							SendClientMessage(i, COLOR_LIGHTBLUE, "Jeúli chcesz wiÍcej zarobiÊ za z≥apanego bandziora musisz go doprowadziÊ øywego do celi.");
-							GameTextForPlayer(i, string, 5000, 1);
-							DajKase(i, price);//moneycheat
-							PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-						}
-					}
-					else if(PlayerInfo[i][pJob] == 1 && CrimInRange(10.0, playerid,i))
-					{
-					    if(PlayerInfo[i][pDetSkill] <= 50)
-					    {
-					        if(PoziomPoszukiwania[playerid] == 2 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 11;
-						        	lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-			 				    }
-					        }
-					    }
-					    else if(PlayerInfo[i][pDetSkill] >= 51 && PlayerInfo[i][pDetSkill] < 100)
-					    {
-					        if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 3 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 22;
-                                    lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-			 				    }
-					        }
-					    }
-					    else if(PlayerInfo[i][pDetSkill] >= 101 && PlayerInfo[i][pDetSkill] < 200)
-					    {
-					        if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 4 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 33;
-                                    lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-			 				    }
-					        }
-					    }
-					    else if(PlayerInfo[i][pDetSkill] >= 201 && PlayerInfo[i][pDetSkill] < 400)
-					    {
-					        if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 5 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 44;
-                                    lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-				 				}
-					        }
-					    }
-					    else if(PlayerInfo[i][pDetSkill] >= 400)
-					    {
-					        if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 7 || PoziomPoszukiwania[playerid] == 10)
-					        {
-					            if(lowcaz[i] == playerid)
-					            {
-						        	count = 55;
-                                    lowcaz[i] = 501;
-						        	format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
-									GameTextForPlayer(i, string, 5000, 1);
-									PoziomPoszukiwania[i] = 0;
-									ClearCrime(i);
-									DajKase(i, price2);//moneycheat
-									PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-									PlayerInfo[i][pDetSkill] ++;
-									PlayerInfo[i][pDetSkill] ++;
-				 				    SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
-			 				    }
-					        }
-					    }
-					}
-				}
-			}
-			if(poscig[playerid] == 1)
-			{
-			    if(PoziomPoszukiwania[playerid] >= 6)
-			    {
-			        count = 2;
-			    }
-			    else
-			    {
-			        count = 1;
-			    }
-			}
-			if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55)
-			{
-			    if(!(IsACop(playerid) && OnDuty[playerid] == 1))
-			    {
-			        new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
-					ZabierzKase(playerid, CenaZabicia);//moneycheat
-					PlayerInfo[playerid][pWantedDeaths] += 1;
-					PlayerInfo[playerid][pJailed] = 1;
-				    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-				    format(string, sizeof(string), "* Jesteú w wiÍzieniu na %d Sekund i straci≥eú $%d gdyø ucieka≥eú lub strzela≥eú do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
-				    SendClientMessage(playerid, COLOR_LIGHTRED, string);
-				    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Jeøeli nie chcesz aby taka sytuacja powtÛrzy≥a siÍ w przysz≥oúci, skorzystaj z us≥ug prawnika ktÛry zbije twÛj WL.");
-					PoziomPoszukiwania[playerid] = 0;
-                    poscig[playerid] = 0;
-					WantLawyer[playerid] = 1;
-					UsunBron(playerid);
-				}
-			}
-			else if(count == 2)
-			{
-			    if(!(IsACop(playerid) && OnDuty[playerid] == 1))
-			    {
-     				new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
-					ZabierzKase(playerid, CenaZabicia);//moneycheat
-					PlayerInfo[playerid][pWantedDeaths] += 1;
-					PlayerInfo[playerid][pJailed] = 2;
-				    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-				    format(string, sizeof(string), "* Jesteú w DeMorgan na %d Sekund i straci≥eú $%d gdyø ucieka≥eú lub strzela≥eú do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
-					SendClientMessage(playerid, COLOR_LIGHTRED, string);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Jeøeli nie chcesz aby taka sytuacja powtÛrzy≥a siÍ w przysz≥oúci, skorzystaj z us≥ug prawnika ktÛry zbije twÛj WL.");
-					PoziomPoszukiwania[playerid] = 0;
-                    poscig[playerid] = 0;
-					UsunBron(playerid);
-				}
-			}
-		}
+		//przeniesiono do onplayerdeath
 	}
 	if(newstate == PLAYER_STATE_DRIVER) //buggy dont finnish
 	{// 38 / 49 / 56 = SS
@@ -5373,8 +5290,14 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{
-		if(IsPlayerPremiumOld(playerid)) { SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]); }
-		else { SetPlayerHealth(playerid, 50.0+PlayerInfo[playerid][pSHealth]); }
+		if(IsPlayerPremiumOld(playerid)) 
+		{ 
+			SetPlayerHealth(playerid, PlayerInfo[playerid][pHealth]); 
+		}
+		else 
+		{ 
+			SetPlayerHealth(playerid, 50.0+PlayerInfo[playerid][pSHealth]); 
+		}
 		MedicBill[playerid] = 1;
 		gPlayerSpawned[playerid] = 1;
 	}
@@ -5394,12 +5317,19 @@ public OnPlayerExitVehicle(playerid, vehicleid)
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Invalid seat");
         return 0;
     }
-
+	/*if(IsVehicleInCarPark(vehicleid))
+	{
+		new float:vPosX, float:vPosY, float:vPosZ; 
+		GetVehiclePos(vehicleid, vPosX, vPosY, vPosZ);
+		TempCarPark[vehicleid][0] = vPosX; 
+		TempCarPark[vehicleid][1] = vPosY; 
+		TempCarPark[vehicleid][2] = vPosZ; 
+	}*/
     //AT400
     if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && GetVehicleModel(vehicleid) == 577 && IsPlayerInFraction(playerid, FRAC_KT, 5000))
     {
         GameTextForPlayer(playerid, "Wracaj szybko!", 5000, 5);
-        SetPlayerPosEx(playerid, 0.1389+KTAir_Offsets[0],33.2975+KTAir_Offsets[1],0.5391+100+KTAir_Offsets[2]);
+        SetPlayerPos(playerid, 0.1389+KTAir_Offsets[0],33.2975+KTAir_Offsets[1],0.5391+100+KTAir_Offsets[2]);
         SetPlayerVirtualWorld(playerid, 2);
         Wchodzenie(playerid);
         SetCameraBehindPlayer(playerid);
@@ -5598,7 +5528,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odestki: 0.%d procent",tmpintrate);
+						format(string, sizeof(string), "  Odsetki: 0.%d procent",tmpintrate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);
@@ -5626,7 +5556,7 @@ PayDay()
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if(kaska[i] >= 10000000 && PlayerInfo[i][pLevel] <= 2 || PlayerInfo[i][pAccount] >= 10000000 && PlayerInfo[i][pLevel] <= 2)
+					if(((kaska[i] >= 10000000 || PlayerInfo[i][pAccount] >= 10000000) && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
 						Log(punishmentLog, INFO, "%s dosta≥ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
@@ -5762,6 +5692,11 @@ public OnPlayerUpdate(playerid)
 			KickEx(playerid);
 			return 0;
 		}
+	}
+
+	if((PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) && IsPlayerAimingEx(playerid))
+	{
+		return FreezePlayerOnInjury(playerid);
 	}
 
     systempozarow_OnPlayerUpdate(playerid);//System PoøarÛw v0.1
@@ -6066,7 +6001,9 @@ OnPlayerLogin(playerid, password[])
 		}
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
-		Log(connectLog, INFO, "Gracz %s zalogowa≥ siÍ na konto", GetPlayerLogName(playerid));
+		new GPCI[41];
+		gpci(playerid, GPCI, sizeof(GPCI));
+		Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] zalogowa≥ siÍ na konto", GetPlayerLogName(playerid), playerid, GetIp(playerid), GPCI);
         Car_LoadForPlayer(playerid); //System aut
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 		Command_SetPlayerDisabled(playerid, false); //W≥πczenie komend
@@ -6170,11 +6107,6 @@ OnPlayerLogin(playerid, password[])
 		dini_IntSet("Filtry.ini", "Liczba", 0);
 	}*/
 
-    if(PlayerInfo[playerid][pBW] == 60 || PlayerInfo[playerid][pBW] == 122 || PlayerInfo[playerid][pBW] == 123 || PlayerInfo[playerid][pBW] > 600)
-    {
-        PlayerInfo[playerid][pBW] = 0;
-    }
-
 	//Przywracanie Poziomu Poszukiwania
         //Punkty karne
     if (PlayerInfo[playerid][pWL] >= 10000)
@@ -6252,7 +6184,7 @@ OnPlayerLogin(playerid, password[])
 	}
 
     //Konwersja pojazdÛw:
-    CONVERT_PlayerCar(playerid);
+    //CONVERT_PlayerCar(playerid);
 
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
@@ -6264,6 +6196,10 @@ OnPlayerLogin(playerid, password[])
                 SetPVarInt(playerid, "support_duty", 1);
                 SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siÍ na s≥uøbie nowym graczom. Aby sprawdziÊ zg≥oszenia wpisz {00FF00}/tickets");
             }
+			else if(PlayerInfo[playerid][pAdmin] > 0)
+			{
+				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieÊ zg≥oszenia z /tickets wpisz {FF0000}/supportduty");
+			}
 
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)
 				ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siÍ jako cz≥onek administracji. Zostajesz poproszony o wpisanie w\nponiøsze pole has≥a weryfikacyjnego. PamiÍtaj, aby nie podawaÊ go nikomu!", "Weryfikuj", "Wyjdü");
@@ -6336,12 +6272,11 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
 		SetPlayerToTeamColor(playerid);
 		MedicBill[playerid] = 0;
-		//SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pModel], Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
-		SetPlayerPosEx(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]); //0.3DL - celowe ustawienie ze wzglÍdu na b≥πd SetSpawnInfo
-		SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);// 0.3DL - celowe ustawienie ze wzglÍdu na b≥πd SetSpawnInfo
-	    Spectate[playerid] = INVALID_PLAYER_ID;
-        TogglePlayerSpectating(playerid, 0);
-        return 0;
+		Spectate[playerid] = INVALID_PLAYER_ID;
+		//TogglePlayerSpectating(playerid, 0);
+		GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+        SetTimerEx("SpecEnd", 500, false, "d", playerid);
+		return 0;
     }
     //30.10
     if(HOLDING(KEY_ANALOG_UP))
@@ -6676,11 +6611,65 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			}
 		}
 	}
+	else
+	{
+		if(newkeys & KEY_FIRE)
+		{
+			if(GetPVarInt(playerid,"roped") == 1)
+			{
+				SetPlayerVelocity(playerid,0,0,0);
+				TogglePlayerControllable(playerid, 1);
+				ClearAnimations(playerid);
+				SetPVarInt(playerid,"roped", 0);
+				SetPVarInt(playerid,"chop_id",0);
+				for(new i=0;i<ROPELENGTH;i++)
+				{
+					DestroyDynamicObject(r0pes[playerid][i]);
+				}
+			}
+		}
+		if(PRESSED(KEY_FIRE))
+		{
+			if(GetPlayerWeapon(playerid) == 46)
+			{
+				new vehicleid = GetClosestCar(playerid, 3.0);
+				if(vehicleid != -1)
+				{
+					ParachuteHit[playerid]++;
+					if(ParachuteHit[playerid] >= 5)
+					{
+						ParachuteHit[playerid] = 0;
+						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
+						RemoveWeaponFromSlot(playerid, 11);
+						GameTextForPlayer(playerid, "~y~Spadochron wyrzucony", 5000, 1);
+					}
+					else
+					{
+						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
+        				return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Schowaj spadochron zanim w coú uderzysz."); 
+					}
+				}
+			}
+		}
+	}
     if(PRESSED(KEY_SECONDARY_ATTACK))
     {
         if(GetPlayerAnimationIndex(playerid)!=1660) SetTimerEx("VendCheck", 500, false, "d", playerid);
         return 0;
     }
+	if(newkeys & 4 && GetPVarInt(playerid, "anim_do") == 1) //animacje
+	{
+		if(!IsPlayerInAnyVehicle(playerid))
+		{
+			if(GetPlayerSpecialAction(playerid) != 0)
+			{
+				SetPlayerSpecialAction(playerid, 0);
+			}
+		}
+		ClearAnimations(playerid, 0);
+		SetPVarInt(playerid, "anim_do", 0);
+		return 0;
+	}
 	return 1;
 }
 
@@ -6710,13 +6699,11 @@ public OnVehicleDeath(vehicleid, killerid)
 	//PAèDZIOCH
 	if(IsAHeliModel(GetVehicleModel(vehicleid)))
 	{
-  		for(new i=0;i<=MAX_PLAYERS;i++)
+  		foreach(new i : Player)
     	{
      		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
        		{
-         		DisablePlayerCheckpoint(i);
           		SetPVarInt(i,"roped",0);
-            	DisablePlayerCheckpoint(i);
              	ClearAnimations(i);
               	TogglePlayerControllable(i,1);
                	for(new j=0;j<=ROPELENGTH;j++)
@@ -6780,6 +6767,14 @@ public OnVehicleSpawn(vehicleid)
         RepairVehicle(vehicleid); //
 
     }
+	/*if(IsVehicleInCarPark(vehicleid))
+	{
+		new float:vPosX, float:vPosY, float:vPosZ; 
+		GetVehiclePos(vehicleid, vPosX, vPosY, vPosZ);
+		TempCarPark[vehicleid][0] = vPosX; 
+		TempCarPark[vehicleid][1] = vPosY; 
+		TempCarPark[vehicleid][2] = vPosZ; 
+	}*/
     return 1;
 }
 
@@ -6790,6 +6785,7 @@ public OnPlayerText(playerid, text[])
 	new giveplayer[MAX_PLAYER_NAME];
 	new tmp[256];
 	new string[256];
+	new wywiad_string[256];
 	new giveplayerid;
 	if(text[0] == '@')
 	{
@@ -6798,10 +6794,11 @@ public OnPlayerText(playerid, text[])
 			sendTipMessage(playerid, "Nieprawid≥owa d≥ugoúÊ znakÛw animacji"); 
 			return 0;
 		}
-        new lVal = CallRemoteFunction("MRP_DoAnimation", "is[32]", playerid, text);
+		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) return 0;
+        new lVal = MRP_DoAnimation(playerid, text);
         if(lVal != 1)
 		{
-			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono animacji.");
+			SendClientMessage(playerid, COLOR_GRAD2, "@_MRP: Nie znaleziono (/anim)acji.");
 		} 
 		return 0;
 	}
@@ -7455,16 +7452,18 @@ public OnPlayerText(playerid, text[])
 	}
 	if(TalkingLive[playerid] != INVALID_PLAYER_ID)
 	{
+		new SanNews_nick[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, SanNews_nick, sizeof(SanNews_nick));
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 		{//todo
 			if(strlen(text) < 78)
 			{
-				
-				format(string, sizeof(string), "Reporter: %s: %s", GetNick(playerid), text);
+				format(string, sizeof(string), "%s mÛwi: %s", SanNews_nick, text);
+				format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-				OOCNews(COLOR_LIGHTGREEN, string);
-				SendDiscordMessage(DISCORD_SAN_NEWS, string);
+				OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+				SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 			}
 			else
 			{
@@ -7475,17 +7474,18 @@ public OnPlayerText(playerid, text[])
 
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
-
-					format(string, sizeof(string), "Reporter %s: %s [..]", GetNick(playerid), text);
+					format(string, sizeof(string), "%s mÛwi: %s [..]", SanNews_nick, text);
+					format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s [..]", SanNews_nick, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 
 					format(string, sizeof(string), "[..] %s", text2);
+					format(wywiad_string, sizeof(wywiad_string), "[..] %s", text2);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 					SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 				}
 			}
 		
@@ -7494,12 +7494,12 @@ public OnPlayerText(playerid, text[])
 		{
 			if(strlen(text) < 78)
 			{
-				
-				format(string, sizeof(string), "GoúÊ wywiadu %s: %s", GetNick(playerid), text);
+				format(string, sizeof(string), "%s mÛwi: %s", SanNews_nick, text);
+				format(wywiad_string, sizeof(wywiad_string), "GoúÊ wywiadu %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-				OOCNews(COLOR_LIGHTGREEN, string);
-				SendDiscordMessage(DISCORD_SAN_NEWS, string);
+				OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+				SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 			}
 			else
 			{
@@ -7511,16 +7511,18 @@ public OnPlayerText(playerid, text[])
 					strmid(text2, text, pos + 1, strlen(text));
 					strdel(text, pos, strlen(text));
 
-					format(string, sizeof(string), "GoúÊ wywiadu %s: %s [..]", GetNick(playerid), text);
+					format(string, sizeof(string), "%s mÛwi: %s [..]", SanNews_nick, text);
+					format(wywiad_string, sizeof(wywiad_string), "GoúÊ wywiadu %s: %s [..]", SanNews_nick, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 
 					format(string, sizeof(string), "[..] %s", text2);
+					format(wywiad_string, sizeof(wywiad_string), "[..] %s", text2);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 					SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
-					OOCNews(COLOR_LIGHTGREEN, string);
-					SendDiscordMessage(DISCORD_SAN_NEWS, string);
+					OOCNews(COLOR_LIGHTGREEN, wywiad_string);
+					SendDiscordMessage(DISCORD_SAN_NEWS, wywiad_string);
 				}
 			}
 		}
@@ -7569,15 +7571,19 @@ public OnPlayerText(playerid, text[])
 				Zgloszenie[id][zgloszenie_status] = 0;
 			}
 
-			new turner[MAX_PLAYER_NAME];
-			new wanted[128];
+			new turner[MAX_PLAYER_NAME], pZone[MAX_ZONE_NAME];
+			new wanted[144];
 			GetPlayerName(playerid, turner, sizeof(turner));
+			GetPlayer2DZone(playerid, pZone, sizeof(pZone));
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg≥osimy to wszystkim jednostkom w danym obszarze.");
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "DziÍkujemy za zg≥oszenie");
 			format(wanted, sizeof(wanted), "Centrala: Do wszystkich jednostek! Nadawca: %s", turner);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
 			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg≥oszenie: %s", text);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			format(wanted, sizeof(wanted), "Centrala: Lokalizacja zg≥oszenia: %s", pZone);
+			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			if(org == 4 && (PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0)) PlayerRequestMedic[playerid] = 1;
 
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoÒczona...");
 			StopACall(playerid);
@@ -7709,6 +7715,10 @@ public OnTrailerUpdate(playerid, vehicleid)
 
 public OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
+	// if(IsVehicleInCarPark(vehicleid))
+	// {
+	// 	return 0;//Testowe dzia≥anie
+	// }
     return 1;
 }
 

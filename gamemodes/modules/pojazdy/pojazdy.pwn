@@ -500,7 +500,7 @@ Car_Spawn(lUID, bool:loaddesc=true)
 
     new rejestracja[32];
     if(isnull(CarData[lUID][c_Rejestracja]))
-		format(rejestracja, sizeof(rejestracja), "LS%06d", CarData[lUID][c_UID]);
+		format(rejestracja, sizeof(rejestracja), "DMV %d", CarData[lUID][c_UID]);
 	else
 		format(rejestracja, sizeof(rejestracja), "%s", CarData[lUID][c_Rejestracja]);
 
@@ -733,135 +733,6 @@ ShowCarEditDialog(playerid)
     new color1 = VehicleColoursTableRGBA[clamp(CarData[car][c_Color][0], 0, 255)], color2=VehicleColoursTableRGBA[clamp(CarData[car][c_Color][1], 0, 255)];
     format(lStr, sizeof(lStr), "{FFFFFF}Model:\t\t{8FCB04}%d{FFFFFF}\t[ {8FCB04}%s {FFFFFF}]\nW³aœciciel:\t{8FCB04}%s{FFFFFF} » {8FCB04}%s{FFFFFF} (UID: {8FCB04}%d{FFFFFF})\nRanga:\t\t{8FCB04}%d{FFFFFF}\nOpis Pojazdu\nStan:\t\t{8FCB04}%.1f{FFFFFF}\%\nZaparkuj tutaj\nUsuñ kluczyki\n{%06x}Kolor I\n{%06x}Kolor II", CarData[car][c_Model], VehicleNames[CarData[car][c_Model]-400], CarOwnerNames[CarData[car][c_OwnerType]], Car_PrintOwner(car), CarData[car][c_Owner], CarData[car][c_Rang], lHP/10, RGBAtoRGB(color1), RGBAtoRGB(color2));
     ShowPlayerDialogEx(playerid, D_EDIT_CAR_MENU, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdów", lStr, "Wybierz", "Wróæ");
-    return 1;
-}
-
-CONVERT_PlayerCar(playerid)
-{
-    new owner[32], str[512], nick[32], dopojazdu1[64], carlist[8], model, Float:x, Float:y, Float:z, Float:angle, color1, color2, bumper1, bumper2, neon, nitro, hydraulika, felgi, spoiler, malunek, lUsed=0;
-    GetPlayerName(playerid, nick, 32);
-
-    if(PlayerInfo[playerid][pAuto1] != 0) carlist[1] = PlayerInfo[playerid][pAuto1];
-    if(PlayerInfo[playerid][pAuto2] != 0) carlist[2] = PlayerInfo[playerid][pAuto2];
-    if(PlayerInfo[playerid][pAuto3] != 0) carlist[3] = PlayerInfo[playerid][pAuto3];
-    if(PlayerInfo[playerid][pAuto4] != 0) carlist[4] = PlayerInfo[playerid][pAuto4];
-    if(PlayerInfo[playerid][pLodz] != 0) carlist[5] = PlayerInfo[playerid][pLodz];
-    if(PlayerInfo[playerid][pSamolot] != 0) carlist[6] = PlayerInfo[playerid][pSamolot];
-    if(PlayerInfo[playerid][pGaraz] != 0) carlist[7] = PlayerInfo[playerid][pGaraz];
-
-    for(new i=1;i<8;i++)
-    {
-        if(carlist[i] != 0)
-        {
-            format(dopojazdu1, sizeof(dopojazdu1), "System_Aut/Pojazd%d.ini", carlist[i]);
-            if(!dini_Exists(dopojazdu1))
-            {
-                format(str, 128, "CAR.CONVERTER: B³¹d! Brak pliku pojazdu o ID %d slot: %d.", carlist[i], i);
-                SendClientMessage(playerid, COLOR_YELLOW, str);
-                Log(serverLog, ERROR, "[CAR.CONVERTER]: File not found [%d]. Caller %s", carlist[i], nick);
-                continue;
-            }
-            strcat(owner, dini_Get(dopojazdu1, "Posiadacz"), 32);
-            if(strcmp(owner, nick) != 0)
-            {
-                format(str, 128, "SELECT `owner` FROM mru_cars WHERE `oldid`='%d'", carlist[i]);
-                mysql_query(str);
-                mysql_store_result();
-                if(mysql_num_rows())
-                {
-                    mysql_fetch_row_format(str, "|");
-                    mysql_free_result();
-                    new ownuid = strval(str);
-
-                    format(str, 128, "CAR.CONVERTER: Wygl¹da na to, ¿e nie jestes wlascicielem pojazdu %d, slot %d.", carlist[i], i);
-                    SendClientMessage(playerid, COLOR_YELLOW, str);
-                    format(str, 128, "CAR.CONVERTER: Pojazd ten przypisany ju¿ zosta³ do gracza o UID: %d", ownuid);
-                    SendClientMessage(playerid, COLOR_YELLOW, str);
-
-                    Log(serverLog, ERROR, "[CAR.CONVERTER]: Owner mismatch for CarID [%d] is [%d]. Caller %s", carlist[i], ownuid, nick);
-                    continue;
-                }
-            }
-            model = dini_Int(dopojazdu1, "Model");
-            if(model < 400 || model > 611)
-            {
-                format(str, 128, "CAR.CONVERTER: Pojazd %d nie posiada modelu.", carlist[i]);
-                SendClientMessage(playerid, COLOR_YELLOW, str);
-
-                Log(serverLog, ERROR, "[CAR.CONVERTER]: Invalid model. CarID [%d] is [%d]. Caller %s", carlist[i], model, nick);
-                continue;
-            }
-            x = dini_Float(dopojazdu1, "Pozycja_X");
-            y = dini_Float(dopojazdu1, "Pozycja_Y");
-            z = dini_Float(dopojazdu1, "Pozycja_Z");
-            angle = dini_Float(dopojazdu1, "Rotacja");
-            color1 = dini_Int(dopojazdu1, "Kolor_1");
-            color2 = dini_Int(dopojazdu1, "Kolor_2");
-            bumper1 = dini_Int(dopojazdu1, "Zderzak_1");
-            bumper2 = dini_Int(dopojazdu1, "Zderzak_2");
-            neon = dini_Int(dopojazdu1, "Neon");
-            nitro = dini_Int(dopojazdu1, "Nitro");
-            hydraulika = dini_Int(dopojazdu1, "Hydraulika");
-            felgi = dini_Int(dopojazdu1, "Felgi");
-            spoiler = dini_Int(dopojazdu1, "Spojler");
-            malunek = dini_Int(dopojazdu1, "Malunek");
-            format(str, 512, "INSERT INTO `mru_cars` (`ownertype`, `owner`, `model`, `x`, `y`, `z`, `angle`, `color1`, `color2`, `nitro`, `hydraulika`, `felgi`, `malunek`, `spoiler`, `bumper1`, `bumper2`, `neon`, `oldid`) VALUES (%d, %d, %d, %.2f, %.2f, %.2f, %.1f, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", CAR_OWNER_PLAYER, PlayerInfo[playerid][pUID], model, x, y, z, angle, color1, color2, nitro, hydraulika, felgi, malunek, spoiler, bumper1, bumper2, neon, carlist[i]);
-            if(!mysql_query(str))
-            {
-                format(str, 128, "CAR.CONVERTER: Pojazd %d nie móg³ zostaæ stworzony w bazie.", carlist[i]);
-                SendClientMessage(playerid, COLOR_YELLOW, str);
-
-                Log(serverLog, ERROR, "[CAR.CONVERTER]: Can't query CarID [%d]. Caller %s", carlist[i], nick);
-                continue;
-            }
-            new lUID = mysql_insert_id();
-
-            new bool:doadd=false;
-            new idx = Car_GetFromQueue();
-            if(idx == -1) idx = gCars, doadd=true;
-
-            CarData[idx][c_UID] = lUID;
-            CarData[idx][c_ID] = 0;
-            CarData[idx][c_Owner] = PlayerInfo[playerid][pUID];
-            CarData[idx][c_OwnerType] = CAR_OWNER_PLAYER;
-            CarData[idx][c_Model] = model;
-            CarData[idx][c_Pos][0] = x;
-            CarData[idx][c_Pos][1] = y;
-            CarData[idx][c_Pos][2] = z;
-            CarData[idx][c_Rot] = angle;
-            CarData[idx][c_HP] = 1000.0;
-            CarData[idx][c_Tires] = 0;
-            CarData[idx][c_Color][0] = color1;
-            CarData[idx][c_Color][1] = color2;
-            CarData[idx][c_Nitro] = nitro;
-            CarData[idx][c_bHydraulika] = hydraulika == 0 ? false : true;
-            CarData[idx][c_Felgi] = felgi;
-            CarData[idx][c_Malunek] = malunek;
-            CarData[idx][c_Spoiler] = spoiler;
-            CarData[idx][c_Bumper][0] = bumper1;
-            CarData[idx][c_Bumper][1] = bumper2;
-            CarData[idx][c_Keys] = 0;
-            CarData[idx][c_Neon] = neon;
-            CarData[idx][c_Rang] = 0;
-            CarData[idx][c_Int] = -1;
-            CarData[idx][c_VW] = -1;
-
-            if(doadd)
-            {
-                gCars++;
-            }
-
-            PlayerInfo[playerid][pCars][lUsed++] = idx;
-            dini_Remove(dopojazdu1);
-        }
-    }
-    PlayerInfo[playerid][pAuto1] = 0;
-    PlayerInfo[playerid][pAuto2] = 0;
-    PlayerInfo[playerid][pAuto3] = 0;
-    PlayerInfo[playerid][pAuto4] = 0;
-    PlayerInfo[playerid][pLodz] = 0;
-    PlayerInfo[playerid][pSamolot] = 0;
-    PlayerInfo[playerid][pGaraz] = 0;
     return 1;
 }
 

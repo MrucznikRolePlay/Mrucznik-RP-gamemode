@@ -210,16 +210,25 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 7)//Wejscie do VINYL
 	{
-		if(vinylStatus == 0 && GetPlayerFraction(playerid) != FRAC_SN)
+		if(vinylStatus == 0)
 		{
-			sendErrorMessage(playerid, "Klub jest teraz zamkniêty!"); 
-			return 1;
+			if(GetPlayerFraction(playerid) != FRAC_SN)
+			{
+				sendErrorMessage(playerid, "Klub jest teraz zamkniêty!"); 
+				return 1;
+			}
 		}
-		if(GetPVarInt(playerid, "Vinyl-bilet") == 0 && GetPlayerFraction(playerid) != FRAC_SN)
+		else
 		{
-			sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
-			noAccessCome[playerid] = 1; 
-			return 1;
+			if(GetPVarInt(playerid, "Vinyl-bilet") == 0)
+			{
+				if(GetPlayerFraction(playerid) != FRAC_SN)
+				{
+					sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyl Club"); 
+					noAccessCome[playerid] = 1; 
+					return 1;
+				}
+			}
 		}
 		SetPlayerTW(playerid, 5000, 1, 6); 
 		PlayAudioStreamForPlayer(playerid, VINYL_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
@@ -298,6 +307,14 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		}
 		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
 	}
+	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
+	{
+		if(SektaKey[playerid] == 0 && GetPlayerOrg(playerid) != FAMILY_SEKTA) 
+    	{
+			noAccessCome[playerid] = 1; 
+			return 1;
+		}
+	}
 	return 0; 
 }
 Sprawdz_UID_Wychodzenie(playerid, Check_ID)
@@ -309,6 +326,14 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 	else if(Check_ID == 6)
 	{
 		StopAudioStreamForPlayer(playerid);	
+	}
+	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
+	{
+		if(SektaKey[playerid] == 0 && GetPlayerOrg(playerid) != FAMILY_SEKTA) 
+    	{
+			noAccessCome[playerid] = 1; 
+			return 1;
+		}
 	}
 	else if(Check_ID == 2)
 	{
@@ -378,7 +403,7 @@ SprawdzWejscia(playerid)
 				noAccessCome[playerid] = 0;
 				return 1;
 			}
-			SetPlayerPosEx(playerid,  wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]);
+			SetPlayerPos(playerid,  wejscia[i][w_x2],  wejscia[i][w_y2], wejscia[i][w_z2]);
 			SetPlayerInterior(playerid, wejscia[i][w_int2]);
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
@@ -395,7 +420,7 @@ SprawdzWejscia(playerid)
 				noAccessCome[playerid] = 0;
 				return 1;
 			}
-			SetPlayerPosEx(playerid,  wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]);
+			SetPlayerPos(playerid,  wejscia[i][w_x1],  wejscia[i][w_y1], wejscia[i][w_z1]);
 			SetPlayerInterior(playerid, wejscia[i][w_int1]);
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 			PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;

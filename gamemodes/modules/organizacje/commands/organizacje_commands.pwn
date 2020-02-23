@@ -30,10 +30,12 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "sekta\sekta.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_sekta();
     
 }

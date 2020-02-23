@@ -47,11 +47,6 @@ GetTickDiff(newtick, oldtick)
 	return newtick - oldtick;
 }
 
-SetPlayerPosEx(playerid,Float:X,Float:Y,Float:Z)
-{
-    SetPlayerPos(playerid,X,Y,Z);
-}
-
 PutPlayerInVehicleEx(playerid,vehicleid,seatid)
 {
     PutPlayerInVehicle(playerid,vehicleid,seatid);
@@ -65,7 +60,7 @@ RemovePlayerFromVehicleEx(playerid)
     {
         new Float:x, Float:y, Float:z;
         GetPlayerPos(playerid, x, y, z);
-        SetPlayerPosEx(playerid, x, y, z+0.7);
+        SetPlayerPos(playerid, x, y, z+0.7);
     }
     RemovePlayerFromVehicle(playerid);
 }
@@ -217,17 +212,37 @@ sendErrorMessage(id, string:msg[]) {
 	return SendClientMessage(id, COLOR_LIGHTRED, _str);
 }
 
+ToggleInwigilacja(playerid, adminid, bool:NISKI_ADMIN_LVL = false)
+{
+	if(PlayerInfo[playerid][pPodPW] == 0 && NISKI_ADMIN_LVL == true) return sendTipMessage(playerid, "W³¹czanie od 150@lvl");
+	if(PlayerInfo[playerid][pPodPW] == 0)
+	{
+		PlayerInfo[playerid][pPodPW] = 1;
+		SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
+		Log(adminLog, INFO, "Admin %s w³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
+	}
+	else if(PlayerInfo[playerid][pPodPW] == 1)
+	{
+		PlayerInfo[playerid][pPodPW] = 0;
+		SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
+		Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
+	}
+	return 1;
+}
+
+
 //WRZUCANIE DO DEMORGAN
 JailDeMorgan(playerid)
 {
 	new losuj= random(sizeof(SpawnStanowe));
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPosEx(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
+	SetPlayerPos(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
 	SetCameraBehindPlayer(playerid);
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
 	GameTextForPlayer(playerid, "~w~Witamy ~r~w sztumie!", 5000, 1);
+	return 1;
 	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
@@ -235,7 +250,7 @@ JailDeMorgan(playerid)
 UnJailDeMorgan(playerid)
 {
 	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPosEx(playerid, 593.1899,-1494.0863,82.1648);
+	SetPlayerPos(playerid, 593.1899,-1494.0863,82.1648);
 	Wchodzenie(playerid);
 	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;
@@ -319,7 +334,7 @@ public OznaczCzitera(playerid)
 	return 1;
 }
 
-GetFreeVehicleSeat(vehicleid)
+/*GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
 	foreach(new i : Player)
@@ -336,6 +351,26 @@ GetFreeVehicleSeat(vehicleid)
 	else if(Seat[1] == false) return 1;
 	else if(Seat[2] == false) return 2;
 	else if(Seat[3] == false) return 3;
+	else return -1;
+}*/
+
+GetFreeVehicleSeatForArrestant(vehicleid)
+{
+	new bool:Seat[4];
+	foreach(new i : Player)
+	{
+		if(IsPlayerInVehicle(i,vehicleid))
+		{
+			if(GetPlayerVehicleSeat(i) == 3) Seat[3] = true;
+			else if(GetPlayerVehicleSeat(i) == 2) Seat[2] = true;
+			else if(GetPlayerVehicleSeat(i) == 1) Seat[1] = true;
+			else if(GetPlayerVehicleSeat(i) == 0) Seat[0] = true;
+		}
+	}
+	if(Seat[3] == false) return 3;
+	else if(Seat[2] == false) return 2;
+	else if(Seat[1] == false) return 1;
+	else if(Seat[0] == false) return 0;
 	else return -1;
 }
 
@@ -425,16 +460,44 @@ Taxi_Pay(playerid)
 	{
         new slot = GetPVarInt(playerid, "taxi-slot");
         new string[64];
+		new doZaplaty = 0;
         TransportCost[playerid] = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
+		
 	    if(PlayerInfo[playerid][pLevel] < 3)
 	    {
-	    	ZabierzKase(playerid, floatround(TransportCost[playerid]/2));//moneycheat
+			if(kaska[playerid] < floatround(TransportCost[playerid]*0.25))
+			{
+				ZabierzKase(playerid, floatround(kaska[playerid] + 5000));//moneycheat
+				doZaplaty = floatround(kaska[playerid] + 5000);
+				PoziomPoszukiwania[playerid] += 1;
+				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarza(brak pieniêdzy na sp³ate)");
+				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
+				SendClientMessage(taxidriver, COLOR_RED, string);
+			}
+			else
+			{
+				ZabierzKase(playerid, floatround(TransportCost[playerid]*0.25));//moneycheat
+				doZaplaty = floatround(TransportCost[playerid]*0.25);
+			} 
 	    }
 	    else
 	    {
-	    	ZabierzKase(playerid, floatround(TransportCost[playerid]));//moneycheat
+	    	if(kaska[playerid] < floatround(TransportCost[playerid]))
+			{
+				ZabierzKase(playerid, floatround(kaska[playerid] + 10000));//moneycheat
+				doZaplaty = floatround(kaska[playerid] + 10000);
+				PoziomPoszukiwania[playerid] += 1;
+				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarza(brak pieniêdzy na sp³ate)");
+				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
+				SendClientMessage(taxidriver, COLOR_RED, string);
+			}
+			else 
+			{
+				ZabierzKase(playerid, floatround(TransportCost[playerid]));//moneycheat
+				doZaplaty = floatround(TransportCost[playerid]);
+			}
 	    }
-		new doZaplaty = floatround(TransportCost[playerid]);
+		
 		TransportMoney[taxidriver] += doZaplaty;
 
 	    format(string, sizeof(string), "~w~Klient opuscil taxi~n~~g~Zarobiles $%d",doZaplaty+TransportValue[taxidriver]);
@@ -774,7 +837,7 @@ public Wchodzenie(playerid) //Zmiana na inteligentny system odmra¿ania
         }
         SetPVarInt(playerid, "enter-nowobj", count);
     }
-    SetTimerEx("Wchodzenie", 1000, 0, "i", playerid);
+    SetTimerEx("Wchodzenie", 1800, 0, "i", playerid);
     return 1;
 }
 public freezuj(playerid){
@@ -814,7 +877,6 @@ public TiNzPJwGUI(playerid)
 	ShowPlayerDialogEx(playerid, 13, DIALOG_STYLE_MSGBOX, "Czas min¹³!", "Przykro nam!\nUp³yn¹ czas na udzielenie poprawnej odpowiedzi.\nOblewasz egzamin i mo¿esz go zdaæ ponownie za 2h.", "Wyjdz", "");
 	return 1;
 }
-
 public Naprawianie(playerid){
 naprawiony[playerid] = 0;
 return 1;
@@ -916,9 +978,16 @@ public togczastimer(playerid)
 	return 1;
 }
 
-public naczasbicie(playerid){
-zdarzylwpisac[playerid] = 0;
-return 1;
+public naczasbicie(playerid, playerid_atak){
+	new string[90];
+	zdazylwpisac[playerid] = 0;
+	TogglePlayerControllable(playerid_atak, 1);
+	ClearAnimations(playerid_atak);
+	SendClientMessage(playerid_atak, COLOR_NEWS, "Wygra³eœ bitwê poniewa¿ broni¹cy za d³ugo wpisywa³ znaki!");
+	format(string, sizeof(string), "AdmCmd: %s wygra³ /pobij na czas.", GetNick(playerid_atak));
+	ABroadCast(COLOR_LIGHTRED,string,1);
+	KillTimer(GetPVarInt(playerid, "timerBicia"));
+	return 1;
 }
 
 /*public UzyteKajdany(playerid,giveplayerid)
@@ -1305,13 +1374,18 @@ public OgladanieDOM(playerid){
 new deem = PlayerInfo[playerid][pDomWKJ];
 if(PlayerInfo[playerid][pDomWKJ] != 0)
 {
-	SetPlayerPosEx(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
+	SetPlayerPos(playerid, Dom[deem][hWej_X], Dom[deem][hWej_Y], Dom[deem][hWej_Z]);
 	SetPlayerInterior(playerid, 0);
 	SetPlayerVirtualWorld(playerid, 0);
 	PlayerInfo[playerid][pDomWKJ] = 0;
 }
+if(isNaked[playerid])
+{
+    UndressPlayer(playerid, false); 
+}
 GameTextForPlayer(playerid, "~r~Koniec czasu, zakup ten dom!", 5000, 1);
 DomOgladany[playerid] = 1;
+
 SetTimerEx("CzasOgladaniaDOM", 180000,0,"d",playerid);
 return 1;
 }
@@ -1404,6 +1478,57 @@ IsPointInRangeOfPoint(Float:range, Float:x, Float:y, Float:z, Float:x2, Float:y2
     return ((x2 * x2) + (y2 * y2) + (z2 * z2)) < (range * range);
 }
 */
+stock UndressPlayer(playerid, bool:dressup, colorID=0)
+{
+	new string[124];
+	if(dressup)
+	{
+		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
+        isNaked[playerid] = 0;
+        format(string, sizeof(string), "%s ubiera siê.", GetNick(playerid)); 
+        ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	}
+	else
+	{
+		if(PlayerInfo[playerid][pSex] == 2)
+        {
+            if(colorID == 1)
+            {
+                SetPlayerSkinEx(playerid, 20001);
+            }
+            else
+            {
+                SetPlayerSkinEx(playerid, 20002); 
+            }
+        }
+        else
+        {
+            if(colorID == 1)
+            {
+                SetPlayerSkinEx(playerid, 252);
+            }
+            else
+            {
+                SetPlayerSkinEx(playerid, 18); 
+            }
+        }
+        format(string, sizeof(string), "%s rozbiera siê.", GetNick(playerid)); 
+        ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+        sendTipMessage(playerid, "Aby ubraæ siê spowrotem, ponownie u¿yj komendy /rozbierz.");
+        isNaked[playerid] = 1; 
+	}
+	return 1;
+}
+stock IsVehicleInRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
+{
+    if(vehicleid == INVALID_VEHICLE_ID) return 0;
+    
+    new Float:DistantaCar = GetVehicleDistanceFromPoint(vehicleid, x, y, z);
+    
+    if(DistantaCar <= range) return 1;
+    return 0;
+} 
+
 SetAntyCheatForPlayer(playerid, valueCode)
 {
 	SetPVarInt(playerid, "AntyCheatOff", valueCode);
@@ -1662,7 +1787,7 @@ HandlePlayerItemSelection(playerid, selecteditem)
     new Float:x, Float:y, Float:z, Float:a;
     GetPlayerPos(playerid, x, y, z);
     GetPlayerFacingAngle(playerid, a);
-    SetPlayerPosEx(playerid, x, y, z+0.2);
+    SetPlayerPos(playerid, x, y, z+0.2);
     x+=2*floatsin(-a, degrees);
     y+=2*floatcos(-a, degrees);
 
@@ -1852,7 +1977,7 @@ public PaintballEnded()//nowe domy biznes wa¿ne
 	            }
 	            ResetPlayerWeapons(i);
 	            PlayerPaintballing[i] = 0;
-	            SetPlayerPosEx(i, 1310.126586,-1367.812255,13.540800);
+	            SetPlayerPos(i, 1310.126586,-1367.812255,13.540800);
 	        }
 		}
 	}
@@ -2352,6 +2477,18 @@ UsunBron(playerid)
 	}
 	return 0;
 }
+stock RemoveWeaponFromSlot(playerid, iWeaponSlot) 
+{
+    new wps[13][2];
+    for(new i = 0; i < 13; i++) GetPlayerWeaponData(playerid, i, wps[i][0], wps[i][1]);
+
+    wps[iWeaponSlot][0] = 0;
+
+    ResetPlayerWeapons(playerid);
+
+    for(new i = 0; i < 13; i++) GivePlayerWeapon(playerid, wps[i][0], wps[i][1]);
+
+}
 DajBronieFrakcyjne(playerid)
 {
 	if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
@@ -2775,8 +2912,10 @@ PrzywrocBron(playerid)
     if(IsPlayerConnected(playerid))
 	{
 	    ResetPlayerWeapons(playerid);
+		new startowabron = 0;
 	    if(PlayerInfo[playerid][pGun0] == 1)
 		{
+			startowabron = 1;
 		    GivePlayerWeapon(playerid, PlayerInfo[playerid][pGun0], PlayerInfo[playerid][pAmmo0]);
 		}
 		if(PlayerInfo[playerid][pGun1] >= 2)
@@ -2807,7 +2946,7 @@ PrzywrocBron(playerid)
 		{
 		    GivePlayerWeapon(playerid, PlayerInfo[playerid][pGun7], PlayerInfo[playerid][pAmmo7]);
 		}
-		if(PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 10)
+		if(PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
 		{
 		    GivePlayerWeapon(playerid, PlayerInfo[playerid][pGun8], PlayerInfo[playerid][pAmmo8]);
 		}
@@ -2827,6 +2966,7 @@ PrzywrocBron(playerid)
 		{
 		    GivePlayerWeapon(playerid, PlayerInfo[playerid][pGun12], PlayerInfo[playerid][pAmmo12]);
 		}
+		PrzedmiotyZmienBron(playerid, startowabron);
 		return 1;
 	}
 	return 0;
@@ -3490,6 +3630,10 @@ IsAtGasStation(playerid)
 		{//Stacja pod p¹czkiem LS
 		    return 1;
 		}
+		else if(PlayerToPoint(10.0,playerid,2489.6565,-2101.3022,13.5620)) //stacja w bazie KT
+		{
+			return 1;
+		}
 	}
 	return 0;
 }
@@ -3753,7 +3897,7 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		}
 		PlayerInfo[playerid][pLocal] = local;
 		SprawdzMuzyke(playerid);
-		SetPlayerPosEx(playerid, x2, y2, z2);
+		SetPlayerPos(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, vw);
 		SetPlayerWeather(playerid, 3);
 		SetPlayerInterior(playerid, interior);
@@ -3792,7 +3936,7 @@ WyjdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
 		PlayerInfo[playerid][pLocal] = local;
 		SetPlayerTime(playerid, ServerTime, 0); 
 		SetPlayerWeather(playerid, 2);
-		SetPlayerPosEx(playerid, x2, y2, z2);
+		SetPlayerPos(playerid, x2, y2, z2);
 		SetPlayerVirtualWorld(playerid, 0);
 		SetPlayerInterior(playerid, 0);
 		Wchodzenie(playerid);
@@ -3817,7 +3961,7 @@ Wejdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:t
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
-    	SetPlayerPosEx(playerid, x2, y2, z2);
+    	SetPlayerPos(playerid, x2, y2, z2);
 	 	SetPlayerVirtualWorld(playerid, 235);
         Wchodzenie(playerid);
 		
@@ -3833,7 +3977,7 @@ Wyjdz(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:t
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
-    	SetPlayerPosEx(playerid, x2, y2, z2);
+    	SetPlayerPos(playerid, x2, y2, z2);
 	 	SetPlayerVirtualWorld(playerid, 0);
         Wchodzenie(playerid);
 		
@@ -4126,7 +4270,7 @@ Lotto(number)
 				}
 				else 
 				{
-					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d", PlayerInfo[i][pLottoNr]);
+					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d.", PlayerInfo[i][pLottoNr]);
 					SendClientMessage(i, COLOR_WHITE, string);
 					PlayerInfo[i][pLottoNr] = 0; 
 				}
@@ -4142,7 +4286,7 @@ Lotto(number)
 			{
 				new rand = random(200000); 
 				Jackpot = Jackpot+rand; 
-				format(string, sizeof(string), "Nagroda zosta³a podwy¿szona do %d$", Jackpot);
+				format(string, sizeof(string), "Nikt nie wygra³. Nagroda zosta³a podwy¿szona do %d$", Jackpot);
 				OOCOff(COLOR_WHITE, string);  
 				break; 
 			}
@@ -4321,7 +4465,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 					PoziomPoszukiwania[playerid] = 10;
 				}
 			}
-			else if(PoziomPoszukiwania[playerid] > 10)
+			else if(PoziomPoszukiwania[playerid] > 10) 
 			{
 				if(PoziomPoszukiwania[playerid] != 10)
 				{
@@ -6355,7 +6499,7 @@ KupowanieDomu(playerid, dom, platnosc)
 		DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1239, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
 	    Dom[dom][hIkonka] = 0;
-	    SetPlayerPosEx(playerid, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]);
+	    SetPlayerPos(playerid, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]);
 	    SetPlayerInterior(playerid, Dom[dom][hInterior]);
 	    SetPlayerVirtualWorld(playerid, Dom[dom][hVW]);
 	    PlayerInfo[playerid][pDomWKJ] = dom;
@@ -6787,7 +6931,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	if(model == 484)//jacht
 	{
 		SetPlayerInterior(playerid, 9);
-	    SetPlayerPosEx(playerid, 1935.6661376953, 1360.8430175781, 12313.875976563);
+	    SetPlayerPos(playerid, 1935.6661376953, 1360.8430175781, 12313.875976563);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~w~Witamy na ~b~jachcie", 5000, 1);
@@ -6795,7 +6939,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 519)//shamal
 	{
 		SetPlayerInterior(playerid, 9);
-	    SetPlayerPosEx(playerid, 1074.3032226563, -1843.8029785156, 10657.265625);
+	    SetPlayerPos(playerid, 1074.3032226563, -1843.8029785156, 10657.265625);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~odrzutowcu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6803,13 +6947,13 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 553)//nevada
 	{
         SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 1.808619,32.384357,1199.593750);
+	    SetPlayerPos(playerid, 1.808619,32.384357,1199.593750);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~nevadzie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 409)//limuzyna
 	{
 		SetPlayerInterior(playerid, 9);
-	    SetPlayerPosEx(playerid, 2985.498046875, 1866.7770996094, 371.35998535156);
+	    SetPlayerPos(playerid, 2985.498046875, 1866.7770996094, 371.35998535156);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~limuzynie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6817,14 +6961,14 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 416)//karetka
 	{
 		SetPlayerVirtualWorld(playerid, 32);
-	    SetPlayerPosEx(playerid, 1079.5173, -1309.6299, 22.0575);
+	    SetPlayerPos(playerid, 1079.5173, -1309.6299, 22.0575);
         Wchodzenie(playerid);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Skalpel ~r~w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 508)//journey
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 2512.8455,-1729.0057,778.6371);
+	    SetPlayerPos(playerid, 2512.8455,-1729.0057,778.6371);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6832,7 +6976,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 431)//autobus
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 1450.3420,-1779.3888,3.6388);
+	    SetPlayerPos(playerid, 1450.3420,-1779.3888,3.6388);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zapinaj Pasy - Jedziemy do piekla!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6841,7 +6985,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 427)//Enforcer pd
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 1479.1534,-1617.7773,-4.2809);
+	    SetPlayerPos(playerid, 1479.1534,-1617.7773,-4.2809);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Lap za bron!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6850,7 +6994,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 570)//Wagony KT
 	{
 			SetPlayerInterior(playerid, 1);
-			SetPlayerPosEx(playerid, 1708.72290, -1953.05688, -17.18891);
+			SetPlayerPos(playerid, 1708.72290, -1953.05688, -17.18891);
 			Wchodzenie(playerid);
 			TogglePlayerControllable(playerid, 0);
 			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6861,7 +7005,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 582)//sanvan
 	{
 		SetPlayerInterior(playerid, 1);
-	    SetPlayerPosEx(playerid, 739.3749,-1365.0778,7.4080);
+	    SetPlayerPos(playerid, 739.3749,-1365.0778,7.4080);
         Wchodzenie(playerid);
 	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Mikrofon w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
@@ -6878,44 +7022,44 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	model = GetVehicleModel(vehicleid);
     if(model == 484)//jacht
 	{
-	    SetPlayerPosEx(playerid, vehx, vehy, vehz+2);
+	    SetPlayerPos(playerid, vehx, vehy, vehz+2);
 	}
 	else if(model == 519)//shamal
 	{
-	    SetPlayerPosEx(playerid, vehx-0.5, vehy-2, vehz);
+	    SetPlayerPos(playerid, vehx-0.5, vehy-2, vehz);
 	}
 	else if(model == 553)//nevada
 	{
-	    SetPlayerPosEx(playerid, vehx-7, vehy, vehz);
+	    SetPlayerPos(playerid, vehx-7, vehy, vehz);
 	}
 	else if(model == 409)//limuzyna
 	{
-	    SetPlayerPosEx(playerid, vehx-2, vehy-1, vehz);
+	    SetPlayerPos(playerid, vehx-2, vehy-1, vehz);
 	}
 	else if(model == 416)//karetka
 	{
-		SetPlayerPosEx(playerid, vehx-1, vehy-1, vehz);
+		SetPlayerPos(playerid, vehx-1, vehy-1, vehz);
 	}
 	else if(model == 508)//journey
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		SetPlayerPos(playerid, vehx, vehy+0.23, vehz);
 	}
 	else if(model == 570)//kt 
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+3, vehz);
+		SetPlayerPos(playerid, vehx, vehy+3, vehz);
 	
 	}
 	else if(model == 427)
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		SetPlayerPos(playerid, vehx, vehy+0.23, vehz);
 	}
 	else if(model == 431)
 	{
-		SetPlayerPosEx(playerid, vehx, vehy+0.23, vehz);
+		SetPlayerPos(playerid, vehx, vehy+0.23, vehz);
 	}
 	else if(model == 582)//sanvan
 	{
-	    SetPlayerPosEx(playerid, vehx-1, vehy-1, vehz);
+	    SetPlayerPos(playerid, vehx-1, vehy-1, vehz);
 	}
 	GameTextForPlayer(playerid, "~w~Opusciles pojazd", 5000, 1);
     SetPlayerVirtualWorld(playerid, 0);
@@ -7280,48 +7424,39 @@ BroadCast(color,const string[])
 	return 1;
 }
 
-ABroadCast(color,const string[],level)
+ABroadCast(color,const string[],level, podglad = 0)
 {
 	foreach(new i : Player)
 	{
+		
 		if(IsPlayerConnected(i))
 		{
-			if (PlayerInfo[i][pAdmin] >= level)
+			if(podglad == 0)
 			{
-				SendClientMessage(i, color, string);
+				if (PlayerInfo[i][pAdmin] >= level)
+				{
+					SendClientMessage(i, color, string);
+				}
+				else if (PlayerInfo[i][pNewAP] >= level)
+				{
+					SendClientMessage(i, color, string);
+				}
+				else if (PlayerInfo[i][pZG] >= level)
+				{
+					SendClientMessage(i, color, string);
+				}
 			}
-			else if (PlayerInfo[i][pNewAP] >= level)
+			else
 			{
-				SendClientMessage(i, color, string);
+				if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
+				{
+					SendClientMessage(i, color, string);
+				}
+				else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
+				{
+					SendClientMessage(i, color, string);
+				}	
 			}
-			else if (PlayerInfo[i][pZG] >= level)
-			{
-				SendClientMessage(i, color, string);
-			}
-		}
-	}
-	printf("%s", string);
-	return 1;
-}
-
-ABroadCast2(color,const string[],level)
-{
-	foreach(new i : Player)
-	{
-		if(IsPlayerConnected(i))
-		{
-			if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}
-			else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}
-			/*else if (PlayerInfo[i][pZG] >= level && TogPodglad[i] == 0)
-			{
-				SendClientMessage(i, color, string);
-			}*/
 		}
 	}
 	printf("%s", string);
@@ -7416,9 +7551,42 @@ SendTeamMessage(team, color, string[], isDepo = 0)
 		}
 	}
 }
+SendTeamMessageOnDuty(team, color, string[], bool:isBW = false)
+{
+	foreach(new i : Player)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if((PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team) && (OnDuty[i] == 1 || JobDuty[i] == 1))
+		    {
+				if(isBW == true)
+				{
+					if(gBW[i] == 0) SendClientMessage(i, color, string);
+				}
+				else
+				{
+              		SendClientMessage(i, color, string);
+				}
+			}
+		}
+	}
+}
 
+PlayCrimeReportForPlayersTeam(team, suspectid, level = 16)
+{
+	foreach(new i : Player)
+	{
+		if(IsPlayerConnected(i))
+		{
+		    if(PlayerInfo[i][pMember] == team || PlayerInfo[i][pLider] == team)
+		    {
+		    	PlayCrimeReportForPlayer(i, suspectid, level);
+			}
+		}
+	}
+}
 
-SendRadioMessage(member, color, string[])
+SendRadioMessage(member, color, string[], ooc = 0)
 {
 	foreach(new i : Player)
 	{
@@ -7426,15 +7594,13 @@ SendRadioMessage(member, color, string[])
 		{
 		    if(PlayerInfo[i][pMember] == member || PlayerInfo[i][pLider] == member)
 		    {
-		        if(member == 9)
+		        if(member == 9 && SanDuty[i] == 1)
 		        {
-		            if(SanDuty[i] == 1)
-		            {
-						SendClientMessage(i, color, string);
-					}
+		            SendClientMessage(i, color, string);
 				}
 				else
 				{
+					if(gRO[i] == 1 && ooc == 1) continue;
 				    SendClientMessage(i, color, string);
 				}
 			}
@@ -7566,18 +7732,45 @@ SendSMSMessageToAll(senderNumber, message[])
 
 SendSMSMessage(senderNumber, reciverid, message[])
 {
-	new string[256];
+	new string[144], string2[144];
 	
 	new slotKontaktu = PobierzSlotKontaktuPoNumerze(reciverid, senderNumber);
-	if(slotKontaktu >= 0)
+	if(strlen(message) < 78)
 	{
-		format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", message, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+		if(slotKontaktu >= 0)
+		{
+			format(string, sizeof(string), "SMS: %s, Nadawca: %s (%d)", message, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+		}
+		else
+		{
+			format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+		}
+		SendClientMessage(reciverid, COLOR_YELLOW, string);
 	}
 	else
 	{
-		format(string, sizeof(string), "SMS: %s, Nadawca: %d", message, senderNumber);
+		new pos = strfind(message, " ", true, strlen(message) / 2);
+		if(pos != -1)
+		{
+			new text2[64], text[128];
+			strmid(text2, text, pos, strlen(text));
+			strdel(text, pos, strlen(text));
+
+			if(slotKontaktu >= 0)
+			{
+				format(string2, sizeof(string2), "[.] %s, Nadawca: %s (%d)", text2, Kontakty[reciverid][slotKontaktu][eNazwa], senderNumber);
+			}
+			else
+			{
+				format(string2, sizeof(string2), "[.] %s, Nadawca: %d", text2, senderNumber);
+			}
+
+			format(string, sizeof(string), "SMS: %s [.]", text);
+			SendClientMessage(reciverid, COLOR_YELLOW, string);
+			SendClientMessage(reciverid, COLOR_YELLOW, string2);
+		}
 	}
-	SendClientMessage(reciverid, COLOR_YELLOW, string);
+
 	PlayerPlaySound(reciverid, 6401, 0.0, 0.0, 0.0);
 	LastSMSNumber[reciverid] = senderNumber;
 }
@@ -7675,12 +7868,12 @@ ListaKontaktowGracza(playerid)
 		if(FindPlayerByNumber(Kontakty[playerid][i][eNumer]) != INVALID_PLAYER_ID)
 		{
 			//aktywny
-			format(string, sizeof(string), "%s%s - %d (on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "{FFFFFF}%s%s - %d {00FF00}(on-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 		else
 		{
 			//nieaktywny
-			format(string, sizeof(string), "%s%s - %d (off-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
+			format(string, sizeof(string), "{FFFFFF}%s%s - %d {FF0000}(off-line)\n", string, Kontakty[playerid][i][eNazwa], Kontakty[playerid][i][eNumer]);
 		}
 	}
 	
@@ -8011,7 +8204,7 @@ SetCamBack(playerid)
     {
 		new Float:plocx,Float:plocy,Float:plocz;
 		GetPlayerPos(playerid, plocx, plocy, plocz);
-		SetPlayerPosEx(playerid, -1863.15, -21.6598, 1060.15); // Warp the player
+		SetPlayerPos(playerid, -1863.15, -21.6598, 1060.15); // Warp the player
 		SetPlayerInterior(playerid,14);
 	}
 }
@@ -8177,7 +8370,7 @@ public OPCLogin(playerid)
     //format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
     //PlayAudioStreamForPlayer(playerid, str);
 	
-    /*SetPlayerPosEx(playerid, 1868.1099, -1936.2098, -10.0);
+    /*SetPlayerPos(playerid, 1868.1099, -1936.2098, -10.0);
     SetPlayerCameraPos(playerid, 1868.1099, -1936.2098, 48.0756);
     SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);*/
     SetPlayerVirtualWorld(playerid, 0);
@@ -8278,6 +8471,46 @@ public NG_OpenGateWithKey(playerid)
 	return 1;
 }
 
+UnFrakcja(playerid, para1, bool:respawn = true)
+{
+	new string[64];
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
+	if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
+	{
+		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ wszystkich liderów\nz organizacji? (Zabierze VLD)", GetNick(para1));
+		SetPVarInt(playerid, "ID_LIDERA", para1);  
+		ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
+		return 1;
+	}
+	GetPlayerName(para1, giveplayer, sizeof(giveplayer));
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+	format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", sendername);
+	SendClientMessage(para1, COLOR_LIGHTBLUE, string);
+	SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
+	SetPlayerColor(para1,TEAM_HIT_COLOR);
+	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
+	PlayerInfo[para1][pMember] = 0;
+	PlayerInfo[para1][pLider] = 0;
+	PlayerInfo[para1][pJob] = 0;
+	SetTimerEx("AntySB", 5000, 0, "d", para1);
+	AntySpawnBroni[para1] = 5;
+	orgUnInvitePlayer(para1);
+	MedicBill[para1] = 0;
+	if(respawn)
+	{
+		SetPlayerSpawn(para1);
+	}
+	else
+	{
+		SetPlayerSpawnSkin(playerid);
+		SetPlayerSpawnWeapon(playerid);
+	}
+	format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", giveplayer);
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+	return 1;
+}
+
 OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
 {
 	new Float:health;
@@ -8295,7 +8528,7 @@ OddajZycie(playerid, timevalue, const tekst[],  bool:tekstwyswietl = false)
 	}
 	return 1;
 }
-//      Aktualizacja    09.06.2014  KUBI  fix 09.07
+//      Aktualizacja    09.06.2014  KUBI  fix 09 
 ElevatorTravel(playerid, Float:x, Float:y, Float:z, vw, Float:face)
 {
     if(LSMCElevatorQueue) return;
@@ -8326,7 +8559,7 @@ ElevatorTravel(playerid, Float:x, Float:y, Float:z, vw, Float:face)
 
 public ElevatorTravelEND(playerid)
 {
-    SetPlayerPosEx(playerid, GetPVarFloat(playerid, "ElX"),GetPVarFloat(playerid, "ElY"), GetPVarFloat(playerid, "ElZ"));
+    SetPlayerPos(playerid, GetPVarFloat(playerid, "ElX"),GetPVarFloat(playerid, "ElY"), GetPVarFloat(playerid, "ElZ"));
     SetPlayerFacingAngle(playerid,GetPVarFloat(playerid, "ElFace"));
     SetCameraBehindPlayer(playerid);
     SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "ElVW"));
@@ -8539,6 +8772,11 @@ Config_FamilyScript()
             FAMILY_FDU = id;
             printf("FAMILY_FDU = %d", FAMILY_FDU);
         }
+		if(strcmp(nazwa, "FAMILY_SEKTA") == 0)
+        {
+            FAMILY_SEKTA = id;
+            printf("FAMILY_SEKTA = %d", FAMILY_SEKTA);
+        }
     }
     mysql_free_result();
 }
@@ -8614,7 +8852,7 @@ Sejf_Load()
 IsNickCorrect(nick[])
 {
 	//if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
-	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{2,})+$") >= 0)
+	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{1,})+$") >= 0)
 	{
 		return 1;
 	}
@@ -9920,11 +10158,10 @@ CancelFlyMode(playerid)
     GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
 	DeletePVar(playerid, "FlyMode");
 	CancelEdit(playerid);
-	TogglePlayerSpectating(playerid, false);
-
+	GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+    SetTimerEx("SpecEnd", 500, false, "d", playerid);
 	DestroyPlayerObject(playerid, noclipdata[playerid][flyobject]);
 	noclipdata[playerid][cameramode] = CAMERA_MODE_NONE;
-
     if(noclipdata[playerid][fireobject] != 0)
     {
         DestroyDynamicObject(noclipdata[playerid][fireobject]);
@@ -10232,7 +10469,7 @@ Patrol_Unload()
 
     for(new i = 0; i < MAX_PATROLS ; i++)
     {
-        if(PatrolMarker[i] != INVALID_TEXT_DRAW)
+        if(PatrolMarker[i] != Text:INVALID_TEXT_DRAW)
         {
             TextDrawDestroy(PatrolMarker[i]);
         }
@@ -10332,6 +10569,42 @@ Patrol_HideZones(playerid)
     GangZoneHideForPlayer(playerid, PatrolZones[7]);
 }
 
+GPSMode(playerid, bool:red = false)
+{
+	new string[144], sendername[MAX_PLAYER_NAME];
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+
+	if(PDGPS == playerid)
+	{
+		foreach(new i : Player)
+		{
+			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+			{
+				if(zawodnik[i] == 0)
+					DisablePlayerCheckpoint(i);
+			}
+		}
+	}
+
+	if(red)
+	{
+		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("- odwo³ujê RED") : ("potrzebne wsparcie! - CODE RED"));
+		PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
+	}
+	else
+	{
+		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie!"));
+		PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
+	}
+
+	SendRadioMessage(1, COLOR_YELLOW2, string);
+	SendRadioMessage(2, COLOR_YELLOW2, string);
+	SendRadioMessage(3, COLOR_YELLOW2, string);
+	SendRadioMessage(4, COLOR_YELLOW2, string);
+	//SendRadioMessage(9, COLOR_YELLOW2, string);
+	SendRadioMessage(FRAC_BOR, COLOR_YELLOW2, string); 
+}
+
 public PatrolGPS()
 {
     new Float:x, Float:y, Float:z;
@@ -10364,7 +10637,7 @@ public PatrolGPS()
 
 Patrol_CreateMarker(patrolid, Float:x, Float:y, type)
 {
-    if(PatrolMarker[patrolid] != INVALID_TEXT_DRAW)
+    if(PatrolMarker[patrolid] != Text:INVALID_TEXT_DRAW)
     {
         TextDrawDestroy(PatrolMarker[patrolid]);
         PatrolMarker[patrolid] = Text:INVALID_TEXT_DRAW;
@@ -10811,7 +11084,7 @@ Oil_Destroy(lID)
         ApplyAnimation(i, "BOMBER", "BOM_Plant_Crouch_Out", 4.0, 0, 0, 0, 0, -1);
         SendClientMessage(i, COLOR_WHITE, "[ERS] Usun¹³eœ plamê oleju! Otrzymujesz 7 500$! [ERS]");
         DajKase(i, 7500);
-        SendFamilyMessage(17, COLOR_GREEN, "[ERS] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 12 500$! [ERS]");
+        SendFamilyMessage(4, COLOR_GREEN, "[ERS] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 12 500$! [ERS]");
         Sejf_Add(FRAC_ERS, 12500);
     }
 }
@@ -10912,7 +11185,11 @@ ChangePlayerName(playerid, name[])
     orgUnInvitePlayer(playerid);
     PlayerInfo[playerid][pZmienilNick]--;
 	PlayerInfo[playerid][pMember] = 0;
-	PlayerInfo[playerid][pLider] = 0;
+	if(PlayerInfo[playerid][pLider] > 0)
+	{
+		Remove_MySQL_Leader(playerid);
+		PlayerInfo[playerid][pLider] = 0;
+	}
 	PlayerInfo[playerid][pJob] = 0;
 	PlayerInfo[playerid][pRank] = 0;
 	PlayerInfo[playerid][pZG] = 0;
@@ -10928,12 +11205,29 @@ ChangePlayerName(playerid, name[])
 CheckVulgarityString(text[])
 {
 	new valueVulgarity;
-	if(strfind(text, "kurwa") != -1
-	&& strfind(text, "chuj") != -1
-	&& strfind(text, "cipa") != -1
-	&& strfind(text, "fiut") != -1
-	&& strfind(text, "zjeb") != -1
-	&& strfind(text, "dick") != -1)
+	if(strfind(text, "kurwa", true) >=0 
+	|| strfind(text, "chuj", true) >=0 
+	|| strfind(text, "cipa", true) >=0 
+	|| strfind(text, "fiut", true) >=0 
+	|| strfind(text, "zjeb", true) >=0 
+	|| strfind(text, "dick", true) >=0 
+	|| strfind(text, "kurwy", true) >=0 
+	|| strfind(text, "jeb", true)>=0 
+	|| strfind(text , "huj" , true)>=0 
+	|| strfind(text , "pizda" , true)>=0 
+	|| strfind(text , "pizdy" , true)>=0 
+	|| strfind(text , "frajer" , true)>=0
+	|| strfind(text , "szmul" , true)>=0
+	|| strfind(text , "dzban" , true)>=0  	
+	|| strfind(text , "kurwa" , true)>=0
+	|| strfind(text , "kutas" , true)>=0 
+	|| strfind(text , "dupa" , true)>=0 
+	|| strfind(text , "cipa" , true)>=0 
+	|| strfind(text , "cipka" , true)>=0 
+	|| strfind(text , "n00b" , true)>=0 
+	|| strfind(text , "noob" , true)>=0 
+	|| strfind(text , "n0b" , true)>=0
+	|| strfind(text , "kurwy" , true)>=0)
 	{	
 		valueVulgarity = 1;
 	}
@@ -11721,7 +12015,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 1854.0327, -1845.7213, 32.9084, 1802.8463, -1853.9320, 24.3721, 12000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 1802.8463, -1853.9320, 24.3721, 1802.0990, -1854.0040, 24.4220, 11000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid, 1802.8463, -1853.9320, 0.0);
+            SetPlayerPos(playerid, 1802.8463, -1853.9320, 0.0);
             Streamer_UpdateEx(playerid, 1802.8463, -1853.9320, 0.0);
             lTime = 13000;
         }
@@ -11729,7 +12023,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 1597.6156, -1731.9628, 22.5997, 1481.4576, -1727.4557, 15.2575, 12000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 1481.4576, -1727.4557, 15.2575, 1481.4741, -1728.4609, 15.6023, 11000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid,1597.6156, -1731.9628, 0.0);
+            SetPlayerPos(playerid,1597.6156, -1731.9628, 0.0);
             Streamer_UpdateEx(playerid, 1597.6156, -1731.9628, 0.0);
             lTime = 12000;
         }
@@ -11737,7 +12031,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 1330.4507, -1423.9467, 69.1760, 1216.2252, -1343.8439, 18.0992, 15000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 1216.2252, -1343.8439, 18.0992, 1215.3202, -1343.4011, 18.0841, 14000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid, 1216.2252, -1343.8439, 0.0);
+            SetPlayerPos(playerid, 1216.2252, -1343.8439, 0.0);
             Streamer_UpdateEx(playerid, 1216.2252, -1343.8439, 0.0);
             lTime = 16000;
         }
@@ -11745,7 +12039,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 1890.8367, -2133.2148, 31.2670, 1801.7451, -2073.0071, 18.8819, 9000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 1801.7451, -2073.0071, 18.8819, 1800.7998, -2072.6538, 18.7769, 8000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid, 1801.7451, -2073.0071,0.0);
+            SetPlayerPos(playerid, 1801.7451, -2073.0071,0.0);
             Streamer_UpdateEx(playerid, 1801.7451, -2073.0071, 0.0);
             lTime = 10000;
         }
@@ -11753,7 +12047,7 @@ public TourCamera(playerid, step)
         {
             InterpolateCameraPos(playerid, 2212.6924, -1750.6774, 15.7084, 2410.6738, -1750.8768, 15.7241, 15000, CAMERA_MOVE);
             InterpolateCameraLookAt(playerid, 2410.6738, -1750.8768, 15.7241, 2409.6650, -1750.8837, 15.7341, 12000, CAMERA_MOVE);
-            SetPlayerPosEx(playerid, 2410.6738, -1750.8768, 0.0);
+            SetPlayerPos(playerid, 2410.6738, -1750.8768, 0.0);
             Streamer_UpdateEx(playerid, 2410.6738, -1750.8768, 0.0);
             lTime = 16000;
         }
@@ -11761,7 +12055,7 @@ public TourCamera(playerid, step)
         {
             SetPlayerCameraPos(playerid,421.1918, -1756.8279, 12.7905);
             SetPlayerCameraLookAt(playerid, 420.8176, -1757.7660, 12.7204);
-            SetPlayerPosEx(playerid, 421.1918, -1756.8279, 0.0);
+            SetPlayerPos(playerid, 421.1918, -1756.8279, 0.0);
             Streamer_UpdateEx(playerid, 421.1918, -1756.8279, 0.0);
         }
     }
@@ -12162,7 +12456,17 @@ ShowPersonalization(playerid, value)
 			strdel(persona_C, 0, 64); 
 			strins(persona_C, "Kary w TXD\t{FF6A6A}OFF\n", 0); 
 		}
-		format(string, sizeof(string), "%s%s%s", persona_A, persona_B, persona_C);
+		if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 0)
+		{
+			strdel(persona_D, 0, 64);
+			strins(persona_D, "Auto-GUI po zmianie broni\t{80FF00}ON\n", 0);
+		}
+		else if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 1)
+		{
+			strdel(persona_D, 0, 64); 
+			strins(persona_D, "Auto-GUI po zmianie broni\t{FF6A6A}OFF\n", 0); 
+		}
+		format(string, sizeof(string), "%s%s%s%s", persona_A, persona_B, persona_C, persona_D);
 		ShowPlayerDialogEx(playerid, D_PERS_INNE, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", string, "Akceptuj", "Wyjdz"); 
 	}
 		 
@@ -12268,6 +12572,84 @@ stock IsVehicleRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
     if(vehicleid == INVALID_VEHICLE_ID) return 0;
     return GetVehicleDistanceFromPoint(vehicleid, x, y, z) <= range;
 }  
+
+stock GetClosestCar(playerid, Float:Prevdist=5.0)
+{
+	new Prevcar = -1;
+	for(new carid = 0; carid < MAX_VEHICLES; carid++)
+	{
+		new Float:Dist = GetDistanceToCar(playerid,carid);
+		if((Dist < Prevdist))
+		{
+			Prevdist = Dist;
+			Prevcar = carid;
+		}
+	}
+	return Prevcar;
+}
+
+stock GetDistanceToCar(playerid, carid)
+{
+	new Float:x1,Float:y1,Float:z1,Float:x2,Float:y2,Float:z2,Float:Dis;
+	if (!IsPlayerConnected(playerid))return -1;
+	GetPlayerPos(playerid,x1,y1,z1);GetVehiclePos(carid,x2,y2,z2);
+	Dis = floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
+	return floatround(Dis);
+}
+
+SavePlayerSentMessage(playerid, message[])
+{
+	new idx = SentMessagesIndex[playerid];
+	format(SentMessages[playerid][idx], 144, "%s", message);
+	SentMessagesIndex[playerid] = (idx+1) % MAX_SENT_MESSAGES;
+}
+
+ShowPlayerSentMessages(playerid, forplayerid)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
+	new index = SentMessagesIndex[playerid];
+	if(index != 0) {
+		for(new i = index-1; i >= 0; i--) {
+			if(strlen(SentMessages[playerid][i])) {
+				SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
+			}
+		}
+	}
+
+	for(new i= MAX_SENT_MESSAGES-1; i >= index; i--) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
+		}
+	}
+}
+
+IsReasonAPursuitReason(result[])
+{
+	return (strfind(result, "ucieczka", true) != -1 || strfind(result, "poscig", true) != -1 || strfind(result, "poœcig", true) != -1 || strfind(result, "ucieka", true) != -1);
+}
+
+PursuitMode(playerid, giveplayerid)
+{
+	if(ProxDetectorS(80.0, playerid, giveplayerid))
+	{
+		if(poscig[giveplayerid] != 1)
+		{
+			SendClientMessage(playerid,COLOR_LIGHTBLUE,"Rozpocz¹³eœ poœcig! Trwa on 7 minut.");
+			SendClientMessage(giveplayerid,COLOR_PANICRED,"|_________________Tryb Poœcigu_________________|");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"S³u¿by porz¹dkowe ruszy³y za tob¹ w poœcig! W takim wypadku najlepiej siê poddaæ!");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"W trybie poœcigu nie mozesz wyjœæ z gry, zgin¹æ oraz byæ AFK.");
+			SendClientMessage(giveplayerid,COLOR_WHITE,"Z³amanie tych zasad skutkuje kar¹ nadawan¹ automatycznie.");
+			SendClientMessage(giveplayerid,COLOR_PANICRED,"|______________________________________________|");
+			poscig[giveplayerid] = 1;
+			SetTimerEx("PoscigTimer",7*60000,0,"d",giveplayerid);
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
+	}
+}
+
 
 //--------------------------------------------------
 

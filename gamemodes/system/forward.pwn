@@ -24,6 +24,7 @@ forward CustomPickups();
 forward IdleKick();
 forward Fillup();
 forward CheckGas();
+forward CJSkinCheck();
 forward CarCheck();
 forward KartingEnded();
 forward StartKarting();
@@ -47,7 +48,7 @@ forward BanExTimer(playerid);
 forward Matsowanie(playerid);
 forward pobito(playerid);
 forward togczastimer(playerid);
-forward naczasbicie(playerid);
+forward naczasbicie(playerid, playerid_atak);
 forward UzyteKajdany(playerid);
 forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
@@ -138,4 +139,10 @@ forward BBD_Timer();
 forward UnhireRentCar(playerid, veh);
 forward MyItems_Load(playerid);
 
+//Sandal
+forward SpecEnd(playerid);
+forward Stanowe_CheckPlyInVeh(playerid);
+
+forward SlideRope(playerid);
+forward closeGate(i, j, playerid);
 //EOF

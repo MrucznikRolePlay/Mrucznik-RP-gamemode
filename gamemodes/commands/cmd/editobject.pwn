@@ -41,20 +41,20 @@ YCMD:editobject(playerid, params[], help)
         if(IsValidDynamicObject(id))
         {
             GetDynamicObjectPos(id, x, y, z);
-            SetPlayerPosEx(playerid, x+0.2, y+0.2, z+0.5);
+            SetPlayerPos(playerid, x+0.2, y+0.2, z+0.5);
             SendClientMessage(playerid, -1, "NORMAL");
         }
         else if(IsValidDynamicObject(id))
         {
             GetDynamicObjectPos(id, x, y, z);
-            SetPlayerPosEx(playerid, x+0.2, y+0.2, z+0.5);
+            SetPlayerPos(playerid, x+0.2, y+0.2, z+0.5);
             EditDynamicObject(playerid, id);
             SendClientMessage(playerid, -1, "DYNAMIC");
          }
          else if(IsValidPlayerObject(playerid, id))
          {
             GetPlayerObjectPos(playerid, id, x, y, z);
-            SetPlayerPosEx(playerid, x+0.2, y+0.2, z+0.5);
+            SetPlayerPos(playerid, x+0.2, y+0.2, z+0.5);
             SendClientMessage(playerid, -1, "PLAYER");
          }
     }

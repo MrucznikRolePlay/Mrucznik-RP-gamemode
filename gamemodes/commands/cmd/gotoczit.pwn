@@ -32,9 +32,9 @@ YCMD:gotoczit(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] > 1 || IsAScripter(playerid))
     {
-        SetPlayerPos(playerid, czitX, czitY, czitZ);
         SetPlayerVirtualWorld(playerid, 0);
         SetPlayerInterior(playerid, 0);
+        SetPlayerPos(playerid, czitX, czitY, czitZ);
         SendClientMessage(playerid, -1, "Teleportowa³eœ siê na miejsce zbrodni");
     }
     return 1;

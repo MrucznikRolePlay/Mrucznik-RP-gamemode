@@ -36,7 +36,7 @@ YCMD:dn(playerid, params[], help)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);
-			SetPlayerPosEx(playerid, slx, sly, slz-2);
+			SetPlayerPos(playerid, slx, sly, slz-2);
 			return 1;
 		}
 		else

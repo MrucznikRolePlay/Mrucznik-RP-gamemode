@@ -163,7 +163,7 @@ enum ePat {
     patroluje[2],
     patstrefa,
     patstan,
-    patname[16],
+    patname[24],
     pataktywny,
     pattyp,
     pattime
@@ -481,7 +481,7 @@ new FractionNames[][40] = {
     "Emergency Rescue Service",
     "SA Bahamas",
     "Yakuza",
-    "Government Security Agency",
+    "United States Secret Service",
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
@@ -509,9 +509,9 @@ new JobNames[][20] = {
     "Diler broni",
     "Kierowca autobusu",
     "Rozwoziciel pizzy",//11
-    "Brak",
     "Bokser",
     "Brak",
+    "Taksówkarz",//14
     "Gazeciarz",
     "Kurier",
     "Brak",
@@ -804,7 +804,7 @@ new GunNames[47][] = {
 	"Spadochron"//46
 };
 
-new NiggaNames[9][] = {
+new DeathNames[9][] = {
     "Spadochron",
 	"Fake Pistol",//47
 	"???",//48
@@ -1235,7 +1235,6 @@ enum pSpec
 	sLocal,
 	sCam,
 };
-
 new Unspec[MAX_PLAYERS][pSpec];
 
 enum eCars
@@ -1402,7 +1401,6 @@ enum pInfo
  	pPiwo,
  	pCygaro,
  	pSprunk,
- 	pPodPW,
  	pStylWalki,
  	pNewAP,
  	pZG,
@@ -1416,6 +1414,8 @@ enum pInfo
  	pKluczeAuta,
   	pSpawn,
  	pBW,
+	pInjury,
+	pHealthPacks,
  	pNatrasiejest,
 	pDrzwibusazamkniete,
 	pPrawojazdypytania[3],
@@ -1475,7 +1475,8 @@ enum pPInfo
 	WARNDEATH,//Warningi o œmierciach
 	PERS_KARYTXD,//Wyœwietlanie kar w TXD
 	PERS_NEWNICK,//Nowe nicki w 3dtextach
-	PERS_NEWBIE//Wyœwietlanie chatu newbie
+	PERS_NEWBIE,//Wyœwietlanie chatu newbie
+	PERS_GUNSCROLL//Wyœwietlanie GUI z broñ
 };
 new PlayerPersonalization[MAX_PLAYERS][pPInfo];
 enum pHaul
@@ -1640,7 +1641,7 @@ enum pCrime
 {
 	pBplayer[32],
 	pAccusing[32],
-	pAccusedof[32],
+	pAccusedof[100],
 	pVictim[32],
 };
 

@@ -124,26 +124,13 @@ sprawdzReklame(text[], playerid)
 	}
 	return valueAdd;
 }
+
 sprawdzWulgaryzmy(text[], playerid)
 {
 	new valueWulgaryzmy;
 	new stringReturn[256];
 
-	if(strfind(text, "jeb", true)>=0 
-	||strfind(text , "huj" , true)>=0 
-	|| strfind(text , "pizda" , true)>=0 
-	|| strfind(text , "pizdy" , true)>=0 
-	|| strfind(text , "frajer" , true)>=0
-	|| strfind(text , "szmul" , true)>=0
-	|| strfind(text , "dzban" , true)>=0  	
-	|| strfind(text , "kurwa" , true)>=0
-	|| strfind(text , "kutas" , true)>=0 
-	|| strfind(text , "dupa" , true)>=0 
-	|| strfind(text , "cipa" , true)>=0 
-	|| strfind(text , "cipka" , true)>=0 
-	|| strfind(text , "n00b" , true)>=0 
-	|| strfind(text , "noob" , true)>=0 
-	|| strfind(text , "n0b" , true)>=0)
+	if(CheckVulgarityString(text) != 0)
 	{
 		if(playerid != 666)
 		{
@@ -151,7 +138,7 @@ sprawdzWulgaryzmy(text[], playerid)
 			SendClientMessage(playerid, COLOR_GRAD2, "Zosta³eœ ukarany grzywn¹ za wulgaryzmy! Kara: (20.000$)");
 			format(stringReturn, sizeof(stringReturn), "AdmWarning: [%d] %s u¿ycie wulgaryzmów (kara -20 000$): %s.",playerid,GetNick(playerid),text);
 			ZabierzKase(playerid, 20000);
-			Log(punishmentLog, INFO, "Gracz %s zosta³ ukarany kar¹ 20000$ za przelinanie.", GetPlayerLogName(playerid));
+			Log(punishmentLog, INFO, "Gracz %s zosta³ ukarany kar¹ 20000$ za przeklinanie.", GetPlayerLogName(playerid));
 		}
 		else
 		{
