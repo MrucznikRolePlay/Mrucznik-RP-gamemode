@@ -639,42 +639,19 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             new string[256];
             new bIDE = PlayerInfo[playerid][pBusinessOwner];
-            new bizName[64]; 
-            new bizOwnerName[MAX_PLAYER_NAME]; 
             if(kaska[playerid] < B_CENA_ZMIENMOTD)
             {
                 sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki!"); 
                 return 1;
             }
-            if(CheckVulgarityString(inputtext) == 1)
-            {
-                sendErrorMessage(playerid, "MOTD nie mo¿e byæ wulgarne!");
-                return 1;
-            }
-            if(!CheckSymbolsInText(inputtext))
-            {
-                sendErrorMessage(playerid, "B³¹d - u¿yto zablokowanego znaku specjalnego");
-                sendTipMessage(playerid, "Je¿eli chcesz dodaæ nazwê biznesu w swoje motd wprowadŸ w tekst dodatkowo ''[bname]''");
-                sendTipMessage(playerid, "Je¿eli chcesz dodaæ swój nick w swoje motd wprowadŸ w tekst dodatkowo ''[oname]''");
-                return 1;
-            }
-            if(strfind(inputtext, "[bname]", false, 0) >= 0)
-            {
-                format(bizName, sizeof(bizName), "%s", GetBusinessName(bIDE)); 
-                new pos = strfind(inputtext, "[bname]"); 
-                strdel(inputtext, pos, pos+7);
-                strins(inputtext, bizName, pos, 64);
-            }
-            if(strfind(inputtext, "[oname]", false, 0) >= 0)
-            {
-                format(bizOwnerName, sizeof(bizOwnerName), "%s", GetNick(playerid)); 
-                new pos = strfind(inputtext, "[oname]"); 
-                strdel(inputtext, pos, pos+7);
-                strins(inputtext, bizOwnerName, pos, 32);
-            }
             if(strlen(inputtext) > 64)
             {
                 sendErrorMessage(playerid, "Zbyt d³ugie MOTD!"); 
+                return 1;
+            }
+            if(CheckVulgarityString(inputtext) == 1)
+            {
+                sendErrorMessage(playerid, "MOTD nie mo¿e byæ wulgarne!");
                 return 1;
             }
             format(string, sizeof(string), "Zmieni³eœ MOTD biznesu %s na %s", GetBusinessName(bIDE), inputtext); 

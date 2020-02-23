@@ -130,21 +130,6 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	Log(businessLog, INFO, "BusinessGod %s stworzyl biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	return 1;
 }
-CheckSymbolsInText(const inputtext[])
-{
-	new textSize = strlen(inputtext); 
-	for(new i; i <= textSize; i++)
-	{
-		if(inputtext[i] == '%'
-		|| inputtext[i] == '/'
-		|| inputtext[i] == '\n'
-		|| inputtext[i] == '#')
-		{
-			return false;
-		}
-	}
-	return true; 
-}
 DestroyBusinessIcon(bIDE)
 {
 	DestroyDynamicPickup(businessIcon[bIDE]);
