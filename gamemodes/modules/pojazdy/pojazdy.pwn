@@ -58,12 +58,6 @@ hook OnPlayerConnect(playerid)
     pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
 }
 
-hook OnPlayerDisconnect(playerid)
-{
-    KillTimer(Rower_timerSZYBKOSC[playerid]);
-    KillTimer(Rower_timerSKOK[playerid]);
-}
-
 hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
     if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)
