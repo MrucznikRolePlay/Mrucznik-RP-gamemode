@@ -23,6 +23,7 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define ROWER_VMAX 55
+#define ROWER_VMAX 40
 #define ROWER_SKOKMAX 0.6
+#define DEFAULT_CRUISESPEED 50
 //end
