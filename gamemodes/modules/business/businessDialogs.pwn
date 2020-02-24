@@ -135,6 +135,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         ZabierzKase(playerid, mBiz[pBizID][b_cost]+COST_SHOP24);
                         GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_SHOP); 
                         Log(businessLog, INFO, "%s kupil biznes %s jako sklep 24-7 za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
+
                     }
                     else
                     {

@@ -30,36 +30,21 @@ command_mbizinfo_Impl(playerid)
         sendErrorMessage(playerid, "Odczekaj 5 sekund!"); 
         return 1;
     }
-    new string[426];
-    new value; 
+    new string[250];
     for(new i; i <= MAX_BIZ; i++)
     {
-        if(value == loadedBiz)
+        if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]))
         {
-            sendErrorMessage(playerid, "Nie znajdujesz siê obok ¿adnego biznesu!"); 
-            break;
-        }
-        if(BizExist(i))
-        {
-            if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]))
-            {
-                format(string, sizeof(string), " \t{FF1493}%s\n{FFFFFF}W³aœciciel: {747b41}%s\n{FFFFFF}Typ: {747b41}%s\n{FFFFFF}Lokalizacja: {747b41}%s\n{FFFFFF}Cena: {747b41}$%d\n{FFFFFF}TID: {747b41}%d\n{FFFFFF}U1: {747b41}%d\n{FFFFFF}U2: {747b41}%d\n{FFFFFF}U3: {747b41}%d\n{FFFFFF}U4: {747b41}%d\n{FFFFFF}U5: {747b41}%d",
-                mBiz[i][b_Name],
-                mBiz[i][b_Name_Owner],
-                GetTypeNameBiz(i),
-                mBiz[i][b_Location],
-                mBiz[i][b_cost],
-                i,
-                mBiz[i][b_ulepszenie1],
-                mBiz[i][b_ulepszenie2],
-                mBiz[i][b_ulepszenie3],
-                mBiz[i][b_ulepszenie4],
-                mBiz[i][b_ulepszenie5]);
-                ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Okej", "");
-                return 1; 
-            }
-            value++; 
-        } 
+            format(string, sizeof(string), "Nazwa: %s\nW³aœciciel: %s\nTyp: %s\nLokalizacja: %s\nCena: %d\ntID: %d",
+            mBiz[i][b_Name],
+            mBiz[i][b_Name_Owner],
+            GetTypeNameBiz(i),
+            mBiz[i][b_Location],
+            mBiz[i][b_cost],
+            i);
+            ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Okej", "");
+            break;  
+        }  
     }
     return 1;
 }
