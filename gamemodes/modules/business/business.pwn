@@ -102,33 +102,13 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	mysql_real_escape_string(pZone, mBiz[bIDE][b_Location]);
 	mBiz[bIDE][b_TYPE] = BTYPE_DEFAULT; 
 	mBiz[bIDE][b_TYPE2] = BTYPE2_DEFAULT; 
-	businessText[bIDE] = CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 10.0);
-    businessIcon[bIDE] = CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
+	CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 10.0);
+    CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
 	loadedBiz++; 
 	Log(businessLog, INFO, "BusinessGod %s stworzyl biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	return 1;
 }
-DestroyBusinessIcon(bIDE)
-{
-	DestroyDynamicPickup(businessIcon[bIDE]);
-	return 0;
-}
-DestroyBusiness3DText(bIDE)
-{
-	DestroyDynamic3DTextLabel(businessText[bIDE]);
-	return 0; 
-}
-CreateBusinessIcon(bIDE)
-{
-	businessIcon[bIDE] = CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD);
-	return 0;
-}
-CreateBusiness3DText(bIDE)
-{
-	businessText[bIDE] = CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 10.0);
-	return 0;
-}
-CreateBusinessIcons()
+CreateBusinessIcon()
 {
 	new iconsLoaded; 
 	for(new i; i <= MAX_BIZ; i++)
@@ -139,8 +119,8 @@ CreateBusinessIcons()
 		}
 		if(BizExist(i))
 		{
-			CreateBusiness3DText(i);
-			CreateBusinessIcon(i);
+			CreateDynamic3DTextLabel(mBiz[i][b_Name], 0x008080FF, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]+0.4, 10.0);
+    		CreateDynamicPickup(1272, 1, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
 			iconsLoaded++; 
 		}
 	}
