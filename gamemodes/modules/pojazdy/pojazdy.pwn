@@ -76,7 +76,6 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
     		    SetVehicleVelocity(rower_carid, Velocity[0]/1.5, Velocity[1]/1.5, Velocity[2]/1.5);
 			}
 	    }
-
         if(PRESSED(KEY_ACTION))
         {
             if(GetPVarInt(playerid, "timer_CruiseControl"))
@@ -90,20 +89,20 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
         }
         else if(PRESSED(KEY_UP))
         {
+            SendClientMessage(playerid, COLOR_WHITE, "if pressed keyup");
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
-                if(pCruiseSpeed[playerid] < 120) pCruiseSpeed[playerid] += 10;
-                CruiseControl_UpdateTXD(playerid);
-                PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
+                SendClientMessage(playerid, COLOR_WHITE, "checked if timer");
+                CruiseControl_SetSpeed(playerid, 10, true);
             }
         }
         else if(PRESSED(KEY_DOWN))
         {
+            SendClientMessage(playerid, COLOR_WHITE, "if pressed keydown");
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
-                if(pCruiseSpeed[playerid] > 30) pCruiseSpeed[playerid] -= 10;
-                CruiseControl_UpdateTXD(playerid);
-                PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
+                SendClientMessage(playerid, COLOR_WHITE, "checked if timer");
+                CruiseControl_SetSpeed(playerid, 10, false);
             }
         }
 	}
@@ -120,7 +119,7 @@ public CruiseControl(playerid)
         new playerkmh = rower_GetPlayerSpeed(carid);
         if(playerkmh > pCruiseSpeed[playerid])
         {
-            SetVehicleVelocity(GetPlayerVehicleID(playerid), vX*0.85, vY*0.85, vZ*0.85);
+            SetVehicleVelocity(GetPlayerVehicleID(playerid), vX*0.9, vY*0.9, vZ);
         }
         if(pCruiseTXD[playerid] == 4)
         {
@@ -140,11 +139,19 @@ CruiseControl_HideTXD(playerid)
     PlayerTextDrawHide(playerid, CRUISECONTROL_AMOUNT[playerid]);
 }
 
+CruiseControl_SetSpeed(playerid, speed, bool:positive)
+{
+    if(pCruiseSpeed[playerid] < 120 && positive) pCruiseSpeed[playerid] += speed;
+    else if(pCruiseSpeed[playerid] > 30 && !positive) pCruiseSpeed[playerid] -= speed; 
+    CruiseControl_UpdateTXD(playerid);
+    PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
+}
+
 CruiseControl_UpdateTXD(playerid)
 {
     new updatedMaxSpeed = pCruiseSpeed[playerid];
     new string[128];
-    format(string, sizeof(string), "MAX: %dKM", updatedMaxSpeed);
+    format(string, sizeof(string), "~r~MAX: ~w~%dKM", updatedMaxSpeed);
     PlayerTextDrawSetString(playerid, CRUISECONTROL_AMOUNT[playerid], string);
     PlayerTextDrawShow(playerid, CRUISECONTROL_AMOUNT[playerid]);
 }

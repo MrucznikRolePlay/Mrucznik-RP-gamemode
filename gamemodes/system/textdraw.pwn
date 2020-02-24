@@ -186,7 +186,7 @@ LoadTXD()
     TextDrawSetShadow(CRUISECONTROL_BG[0], 0);
     TextDrawUseBox(CRUISECONTROL_BG[0], 1);
     TextDrawBoxColor(CRUISECONTROL_BG[0], 68);
-    TextDrawTextSize(CRUISECONTROL_BG[0], 0.000000, 130.000000);
+    TextDrawTextSize(CRUISECONTROL_BG[0], 0.000000, 80.000000);
     TextDrawSetSelectable(CRUISECONTROL_BG[0], 0);
 
 
