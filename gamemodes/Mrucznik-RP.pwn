@@ -382,7 +382,7 @@ public OnGameModeInit()
 	PlayerHaul[129][pCapasity] = 300;
 	PlayerHaul[130][pCapasity] = 300;
 
-	format(motd, sizeof(motd), "Witaj na serwerze Mrucznik Role Play.");
+	format(motd, sizeof(motd), "Witaj na serwerze Mrucznik Role Play - %s.", VERSION);
 	gettime(ghour, gminute, gsecond);
     GLOB_LastHour=ghour;
 	FixHour(ghour);
