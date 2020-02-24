@@ -2720,44 +2720,39 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new bIDE = GetNearBusinessID(playerid); 
 	            switch(listitem)
 	            {
-	                case 0://Zakup telefonu
+	                case 0:
 					{
-		                if (kaska[playerid] >= S_CENA_TELEFON)
+		                if (kaska[playerid] > 500)
 						{
-						    if(PlayerInfo[playerid][pTraderPerk] > 0)//Zni¿ka ze skilla
+						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    {
-								new skill = S_CENA_TELEFON / 100;
+								new skill = 500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_TELEFON - price;
+								new payout = 500 - price;
 						        format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								format(string,sizeof(string), "Zakupi³eœ Telefon za %d (cena przed zni¿k¹ %d)", payout, S_CENA_TELEFON);
-								sendTipMessageEx(playerid, COLOR_WHITE, string); 
 								ZabierzKase(playerid, payout);
-								DajKaseBiz(bIDE, playerid, (payout/2)); 
 						    }
 						    else
 						    {
-						        format(string, sizeof(string), "~r~-$%d", S_CENA_TELEFON);
+						        format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								ZabierzKase(playerid, S_CENA_TELEFON);
-								format(string,sizeof(string), "Zakupi³eœ Telefon za %d$", S_CENA_TELEFON);
-								sendTipMessageEx(playerid, COLOR_WHITE, string);
-								DajKaseBiz(bIDE, playerid, (S_CENA_TELEFON/4));  
+								ZabierzKase(playerid, 500);
 						    }
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							new randphone = 10000 + random(89999);//minimum 1000  max 9999
 							PlayerInfo[playerid][pPnumber] = randphone;
-							format(string, sizeof(string), "Twój numer to: %d, mo¿esz go w ka¿dej chwili sprawdziæ wpisuj¹c /stats", randphone);
-							sendTipMessageEx(playerid, COLOR_GRAD4, string);
-							sendTipMessageEx(playerid, COLOR_GRAD4, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
-							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d w biznesie %d", GetPlayerLogName(playerid), randphone, GetBusinessLogName(bIDE));
+							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
+							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d", GetPlayerLogName(playerid), randphone);
 							return 1;
 						}
 					}
 					case 1:
 					{
-						if (kaska[playerid] >= S_CENA_ZDRAPKA)
+						if (kaska[playerid] > 50000)
 						{
 							if(PlayerGames[playerid] >= 4)
 							{
@@ -2769,8 +2764,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
-							ZabierzKase(playerid, S_CENA_ZDRAPKA);
-							DajKaseBiz(bIDE, playerid, (S_CENA_ZDRAPKA/2));
+							ZabierzKase(playerid, 50000);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    { 
 								if(playerValue > winValue && playerValue >= 85)

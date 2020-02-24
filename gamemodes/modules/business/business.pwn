@@ -199,32 +199,6 @@ GetNearBusinessID(playerid)
 	}
 	return INVALID_BUSINESSID; 
 }
-DajKaseBiz(bIDE, playerid, value)
-{
-	new oldValue = mBiz[bIDE][b_moneyPocket]; 
-	if(!BizExist(bIDE))
-	{
-		Log(businessCashLog, INFO, "CRASH LOG DLA %d tBID", bIDE);
-		return 1; 
-	}
-	if(playerid == INVALID_PLAYER_ID)//Wykonywanie dla dodania bez osoby fizycznej
-	{
-		if(mBiz[bIDE][b_moneyPocket]+value <= MAX_CASH_IN_MONEYPOCKET)
-		{
-			mBiz[bIDE][b_moneyPocket]=mBiz[bIDE][b_moneyPocket]+value;
-			Log(businessCashLog, INFO, "W biznes %s wplynelo %d$ poprzednio %d$ nowa wartosc %d$", GetBusinessLogName(bIDE), value, oldValue, mBiz[bIDE][b_moneyPocket]);
-		}
-	}
-	else //Wykonanie dla dodania z osob¹ fizyczn¹
-	{
-		if(mBiz[bIDE][b_moneyPocket]+value <= MAX_CASH_IN_MONEYPOCKET)
-		{
-			mBiz[bIDE][b_moneyPocket]=mBiz[bIDE][b_moneyPocket]+value; 
-			Log(businessCashLog, INFO, "W biznes %s wplynelo %d$ od %s poprzednio %d$ nowa wartosc %d$", GetBusinessLogName(bIDE), GetPlayerLogName(playerid), value, oldValue, mBiz[bIDE][b_moneyPocket]);
-		}
-	}
-	return 1; 
-}
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
 {
 	if(PlayerInfo[playerid][pAdmin] >= 5000)//Tylko dla H@

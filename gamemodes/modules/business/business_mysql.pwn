@@ -43,14 +43,14 @@ stock LoadBiz()
 
 	for(new i; i <= MAX_BIZ; i++) 
 	{
-		lStr = "`ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Cost`, `Location`, `MoneyPocket`, `bTYPE`, `bTYPE2`";
+		lStr = "`ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Cost`, `Location`, `MoneyPocket`";
 		format(query, sizeof(query), "SELECT %s FROM `mru_biz` WHERE `ID`='%d'", lStr, i);
 		mysql_query(query); 
 		mysql_store_result();
 		if (mysql_num_rows())
 		{
 			mysql_fetch_row_format(query, "|");
-			sscanf(query, "p<|>ds[32]s[64]ffffffdddds[64]ddd",
+			sscanf(query, "p<|>ds[32]s[64]ffffffdddds[64]d",
 			mBiz[i][b_ownerUID],
 			mBiz[i][b_Name_Owner],
 			mBiz[i][b_Name],
@@ -65,9 +65,7 @@ stock LoadBiz()
 			mBiz[i][b_pLocal],
 			mBiz[i][b_cost],
 			mBiz[i][b_Location],
-			mBiz[i][b_moneyPocket],
-			mBiz[i][b_TYPE],
-			mBiz[i][b_TYPE2]);
+			mBiz[i][b_moneyPocket]);
 			loadedBiz++; 
 		}
 		mysql_free_result();
@@ -95,9 +93,7 @@ stock SaveBiz(bIDE)
 	`pLocal`='%d',\
 	`Cost`='%d',\
 	`Location`='%s',\
-	`MoneyPocket`='%d',\
-	`bTYPE`='%d',\
-	`bTYPE2`='%d'\
+	`MoneyPocket`='%d'\
 	WHERE `ID`='%d'", 
 	bIDE, 
 	mBiz[bIDE][b_ownerUID],
@@ -115,8 +111,6 @@ stock SaveBiz(bIDE)
 	mBiz[bIDE][b_cost],
 	mBiz[bIDE][b_Location],
 	mBiz[bIDE][b_moneyPocket],
-	mBiz[bIDE][b_TYPE],
-	mBiz[bIDE][b_TYPE2],
 	bIDE);
 	mysql_query(query);
 	return 0;
