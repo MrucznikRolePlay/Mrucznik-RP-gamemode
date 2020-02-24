@@ -36,7 +36,6 @@
 #include "mbizedit\mbizedit.pwn"
 #include "mbizinfo\mbizinfo.pwn"
 #include "mbiznesy\mbiznesy.pwn"
-#include "mgotobiz\mgotobiz.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -48,6 +47,5 @@ hook OnGameModeInit()
     command_mbizedit();
     command_mbizinfo();
     command_mbiznesy();
-    command_mgotobiz();
     
 }
