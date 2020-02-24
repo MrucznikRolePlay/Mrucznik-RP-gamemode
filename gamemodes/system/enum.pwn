@@ -1451,7 +1451,6 @@ enum pInfo
 	pBusinessMember,
 	pLiderValue,
 	pUniform,
-	pNawigacja,
 	pAJreason[MAX_AJ_REASON],
 	pPodPW
 };

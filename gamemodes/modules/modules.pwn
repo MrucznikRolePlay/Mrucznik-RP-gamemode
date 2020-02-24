@@ -51,7 +51,6 @@
 #include "logi\logi.def"
 #include "money\money.def"
 #include "names\names.def"
-#include "nawigacja\nawigacja.def"
 #include "oferty\oferty.def"
 #include "organizacje\organizacje.def"
 #include "player_attachments\player_attachments.def"
@@ -91,7 +90,6 @@
 #include "logi\logi.hwn"
 #include "money\money.hwn"
 #include "names\names.hwn"
-#include "nawigacja\nawigacja.hwn"
 #include "oferty\oferty.hwn"
 #include "organizacje\organizacje.hwn"
 #include "player_attachments\player_attachments.hwn"
@@ -131,7 +129,6 @@
 #include "logi\logi.pwn"
 #include "money\money.pwn"
 #include "names\names.pwn"
-#include "nawigacja\nawigacja.pwn"
 #include "oferty\oferty.pwn"
 #include "organizacje\organizacje.pwn"
 #include "player_attachments\player_attachments.pwn"
@@ -155,7 +152,6 @@
 #include "convoy\convoy_timers.pwn"
 #include "graffiti\graffiti_timers.pwn"
 #include "money\money_timers.pwn"
-#include "nawigacja\nawigacja_timers.pwn"
 #include "organizacje\organizacje_timers.pwn"
 #include "pojazdy\pojazdy_timers.pwn"
 #include "prace\prace_timers.pwn"
@@ -167,11 +163,7 @@
 
 //-------<[ mysql ]>-------
 #include "admin\admin_mysql.pwn"
-<<<<<<< HEAD
-#include "business\business_mysql.pwn"
-=======
 #include "biznesy\biznesy_mysql.pwn"
->>>>>>> development
 #include "graffiti\graffiti_mysql.pwn"
 #include "choroby\choroby_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
@@ -217,7 +209,6 @@
 #include "ibiza\commands\ibiza_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "logi\commands\logi_commands.pwn"
-#include "nawigacja\commands\nawigacja_commands.pwn"
 #include "oferty\commands\oferty_commands.pwn"
 #include "organizacje\commands\organizacje_commands.pwn"
 #include "player_attachments\commands\player_attachments_commands.pwn"

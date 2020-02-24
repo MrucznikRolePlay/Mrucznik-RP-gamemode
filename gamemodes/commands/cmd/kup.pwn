@@ -47,8 +47,7 @@ ShowShopDialog(playerid)
 	Sprunk\t{80FF00}%d$\t250ml\n\
 	CB-RADIO\t{80FF00}%d$\t1\n\
 	Cygara\t{80FF00}%d$\t1\n\
-	Kij Baseballowy\t{80FF00}%d$\t1\n\
-	Nawigacja GPS\t{80FF00}%d$\t1",
+	KIJ BASEBALLOWY\t{80FF00}%d$\t1",
 	S_CENA_TELEFON,
 	S_CENA_ZDRAPKA,
 	S_CENA_KSIAZKA, 
@@ -63,8 +62,7 @@ ShowShopDialog(playerid)
  	S_CENA_SPRUNK,
  	S_CENA_CBRADIO,
  	S_CENA_CYGARO,
- 	S_CENA_KIJ,
-	S_CENA_NAWIGACJA);
+ 	S_CENA_KIJ);
 	new bIDE = GetNearBusinessID(playerid); 
 	format(nameBusiness, 64, "%s", mBiz[bIDE][b_Name]);
 	ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_TABLIST_HEADERS, nameBusiness, string,"KUP","WYJDè");		

@@ -144,8 +144,7 @@ native gpci (playerid, serial [], len);
 //-------<[ Inne ]>-------
 #include "old_modules\inne\ibiza.inc"
 #include "old_modules\inne\external.pwn"
-//#include "modules\business\businessDialogs.pwn" //TYMCZASOWO BIZNESY OFF
-//#include "modules\nawigacja\nawigacjaDialogs.pwn" //TYMCZASOWO BIZNESY OFF
+#include "modules\business\businessDialogs.pwn"
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
 
@@ -1858,29 +1857,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 		gPlayerSpawned[playerid] = 0;
 		PlayerInfo[playerid][pLocal] = 255;
 		PlayerInfo[playerid][pDeaths] ++;
-
-		if(PlayerMoneyFromBiz[playerid] > 0)
-		{
-			format(string, sizeof(string), "Zgin¹³eœ podczas przewozu $%d gotówki - tracisz j¹.", PlayerMoneyFromBiz[playerid]); 
-			sendTipMessage(playerid, string); 
-			DetachPlayerItem(playerid, GetIndexFromAttachedObjectModel(playerid, 19624)); 
-			if(IsAPrzestepca(killerid))
-			{
-				format(string, sizeof(string), "Zabi³eœ %s gdy ten przewozi³ $%d gotówki z swojego biznesu! Otrzymujesz $%d",
-				GetNick(playerid),
-				PlayerMoneyFromBiz[playerid],
-				(PlayerMoneyFromBiz[playerid]/4));
-				sendTipMessageEx(killerid, COLOR_GREEN, string);
-				DajKase(killerid, (PlayerMoneyFromBiz[playerid]/4));
-				format(string, sizeof(string), "%s zabi³ %s gdy ten przewozi³ $%d gotówki - otrzyma³ $%d", 
-				GetNick(killerid), 
-				GetNick(playerid),
-				PlayerMoneyFromBiz[playerid],
-				(PlayerMoneyFromBiz[playerid]/4));
-				SendMessageToAdmin(string, COLOR_RED);
-			}
-			PlayerMoneyFromBiz[playerid]=0; 
-		}	
 		
 		if(GetPVarInt(playerid, "skip_bw")  == 0)
 		{

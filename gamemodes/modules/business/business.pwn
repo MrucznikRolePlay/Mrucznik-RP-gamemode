@@ -329,10 +329,6 @@ PlayerRunWithMoney(playerid)
 	PlayerMoneyFromBiz[playerid] = mBiz[bIDE][b_tempPocket]; 
 	mBiz[bIDE][b_tempPocket] = 0; 
 	mBiz[bIDE][b_tempPocketUsage]++; 
-	
-	//Obiekt torby
-	AttachPlayerItem(playerid, 19624, 6, 0.0, 0.0, 0.0, 0.0,0.0, 0.0, 1.0, 1.0, 1.0, 0,0);
-	//SetPlayerAttachedObject(playerid, 7, zd, 1, GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"));
 	return 1;
 }
 SendBizLogoMessage(playerid, bIDE)
