@@ -47,15 +47,11 @@ stock FreeBizID()
 }
 GetBusinessName(bIDE)
 {
-	new string[64];
-	format(string, sizeof(string), "%s", mBiz[bIDE][b_Name]);
-	return string; 
+	return mBiz[bIDE][b_Name]; 
 }
 GetBusinessOwnerName(bIDE)
 {
-	new string[MAX_PLAYER_NAME];
-	format(string, sizeof(string), "%s", mBiz[bIDE][b_Name_Owner]);
-	return string; 
+	return mBiz[bIDE][b_Name_Owner]; 
 }
 stock CreateMBiz(playerid, bCost, bName[64])
 {

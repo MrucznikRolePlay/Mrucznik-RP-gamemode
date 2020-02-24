@@ -3548,10 +3548,6 @@ IsAtClothShop(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		if(PlayerNearBusinessType(playerid, BTYPE_SERVICES, BTYPE2_CLOTHESSHOP))
-		{
-			return 1; 
-		}
         if(PlayerToPoint(25.0,playerid,207.5627,-103.7291,1005.2578) || PlayerToPoint(25.0,playerid,203.9068,-41.0728,1001.8047))
 		{//Binco & Suburban
 		    return 1;
