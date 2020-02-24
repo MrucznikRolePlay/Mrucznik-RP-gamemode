@@ -485,7 +485,7 @@ new FractionNames[][40] = {
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
-    "Rz¹d Stanu San Andreas",//11
+    "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
     "187 North Park Avenue",
     "Hillside Nortenos 14",
@@ -1451,7 +1451,6 @@ enum pInfo
 	pBusinessMember,
 	pLiderValue,
 	pUniform,
-	pNawigacja,
 	pAJreason[MAX_AJ_REASON],
 	pPodPW
 };
@@ -1863,7 +1862,7 @@ new const Przebierz[][] = {
 	{75},{73},{72},{69},{68},{67},{66},{64},{63},{62},{58},{56},{55},
 	{54},{53},{52},{51},{50},{49},{45},{44},{43},{41},{39},{38},{37},{36},{35},
 	{34},{33},{32},{31},{30},{29},{28},{27},{26},{25},{24},{23},{22},{21},{20},
-	{19},{18},{17},{16},{15},{14},{13},{12},{11},{10},{1},{2},
+	{19},{18},{17},{16},{15},{14},{13},{12},{11},{10},{1},{2},{47},{5},{4},
 	{290},//ROSE
 	{171},//lider DMV
 	{292},//CESAR

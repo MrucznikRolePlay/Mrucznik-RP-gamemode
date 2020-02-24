@@ -136,7 +136,7 @@ new PaniJanina;
 
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
-new Float:pl_pos[MAX_PLAYERS][5];
+//new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];
 
@@ -364,9 +364,6 @@ new GATE_VINYL, bool:GATE_VINYL_S=false,
     GATE_VINYL_IN[4], bool:GATE_VINYL_IN_S[4] = {false, ...};
 new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,71.0};  //pos[3] dist, vw
 new VINYL_Stream[128];
-// KOORDYNATY IBIZY DLA AUDIO STREAM
-new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 1000.0};  //pos[3] dist, vw
-new IBIZA_Stream[128];
 //22.06  system rang mysql
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
 //new FracLiderRang[MAX_FRAC][MAX_RANG_LEN];      //0.4kB
@@ -408,6 +405,10 @@ new PlayerText:gPrevButtonTextDrawId[MAX_PLAYERS];
 new PlayerText:gSelectionItems[MAX_PLAYERS][SELECTION_ITEMS];
 new gSelectionItemsTag[MAX_PLAYERS][SELECTION_ITEMS];
 new gItemAt[MAX_PLAYERS];
+
+// KOORDYNATY IBIZY DLA AUDIO STREAM
+new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 1000.0};  //pos[3] dist, vw
+new IBIZA_Stream[128];
 
 new Barier[MAX_FRAC][10];
 new Text3D:BarText[MAX_FRAC][10];
@@ -1062,8 +1063,6 @@ new playerSeeSpec[MAX_PLAYERS];
 //SANDAL
 new gRO[MAX_PLAYERS];
 
-new gBizSet[MAX_PLAYERS]=false; 
-new PlayerMoneyFromBiz[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS]; 
 new Text3D:HiddenPlayerName[MAX_PLAYERS];
 //-----------------------------------------------
@@ -1081,18 +1080,13 @@ ClearVariableConnect(playerid)
 	playerTargetSpec[playerid] = INVALID_SPECTATE_ID;
 	playerSeeSpec[playerid] = INVALID_SPECTATE_ID; 
 	isNaked[playerid] = 0; 
-	PlayerInfo[playerid][pBusinessOwner] = 9999;
-	PlayerMoneyFromBiz[playerid] = 0;
-	CreatePlayerNaviTextDraws(playerid);
 	return 1;
 }
 ClearVariableDisconnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	SN_ACCESS[playerid] = 0;//Pozwolenie na scenÍ (pobÛr op≥at - 2kk)
-	PlayerGames[playerid] = 0;//Zdrapki
-	gBizSet[playerid]=false; 
-	DestroyPlayerNaviTextDraws(playerid); 
+	PlayerGames[playerid] = 0;//Zdrapki 
 	return 1;
 }
 ZerujZmienne(playerid)

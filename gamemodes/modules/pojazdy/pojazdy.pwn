@@ -58,6 +58,12 @@ hook OnPlayerConnect(playerid)
     pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
 }
 
+hook OnPlayerDisconnect(playerid)
+{
+    KillTimer(Rower_timerSZYBKOSC[playerid]);
+    KillTimer(Rower_timerSKOK[playerid]);
+}
+
 hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
     if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)
@@ -879,6 +885,7 @@ stock rower_SetVehSpeed(carid)
 }
 
 //-----------------<[ Timery: ]>--------------------
+/*
 public rower_sprawdzanie(playerid, carid)
 {
     if(IsPlayerInAnyVehicle(playerid) && (GetVehicleModel(carid) == 509 || GetVehicleModel(carid) == 510 || GetVehicleModel(carid) == 481))
@@ -904,6 +911,7 @@ public rower_skoksprawdz(playerid, Float:vehz, carid)
 	    SetVehiclePos(carid, vehx, vehy, vehz_s);
 	}
 }
+*/
 //------------------<[ MySQL: ]>--------------------
 
 //end

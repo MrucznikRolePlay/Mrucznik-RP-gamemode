@@ -104,7 +104,7 @@ YCMD:aresztuj(playerid, params[], help)
                                     SetPVarInt(playa, "kaucja-dlaKogo", PlayerInfo[playerid][pMember]);
 									ClearAnimations(playa);
 									SetPlayerSpecialAction(playa,SPECIAL_ACTION_NONE);
-									RemovePlayerAttachedObject(playa, 0);
+									RemovePlayerAttachedObject(playa, 5);
 									SkutyGracz[playa] = 0;
 									UsunBron(playa);//usun bron
 									SetPlayerSpawnWeapon(playa);

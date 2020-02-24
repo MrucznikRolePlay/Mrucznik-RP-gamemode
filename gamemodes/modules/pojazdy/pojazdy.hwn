@@ -24,8 +24,8 @@
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
 new Car_SlotQueue[1024];
-new Rower_timerSKOK[MAX_PLAYERS];
-new Rower_timerSZYBKOSC[MAX_PLAYERS];
+// new Rower_timerSKOK[MAX_PLAYERS];
+// new Rower_timerSZYBKOSC[MAX_PLAYERS];
 
 new pCruiseSpeed[MAX_PLAYERS];
 new pCruiseTXD[MAX_PLAYERS] = 0;

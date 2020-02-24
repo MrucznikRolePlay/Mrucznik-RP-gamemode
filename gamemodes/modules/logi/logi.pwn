@@ -33,17 +33,7 @@ GetPlayerLogName(playerid)
     } 
     safe_return sprintf("{Player: %s}", GetNick(playerid));
 }
-GetBusinessLogName(bIDE)
-{
-    if(BizExist(bIDE))
-    {
-        safe_return sprintf("{Biznes %s [tID: %d]}", mBiz[bIDE][b_Name], bIDE);
-    }
-    else
-    {
-        safe_return sprintf("{Biznes nie istnieje?}"); 
-    }
-}
+
 GetWeaponLogName(weapon, ammo=-1)
 {
     new gunname[32];
@@ -71,6 +61,16 @@ GetCarDataLogName(cardata)
 GetHouseLogName(house)
 {
     safe_return sprintf("{House: %d}", house);
+}
+
+GetBusinessLogName(business)
+{
+    safe_return sprintf("{Business: %s[%d]}", Business[business][b_Name], business);
+}
+
+GetGraffitiLogText(graffiti)
+{
+    safe_return sprintf("{Graffiti: [%d]:%s}", graffiti, GraffitiInfo[graffiti][grafText]);
 }
 
 GetFractionLogName(fraction)

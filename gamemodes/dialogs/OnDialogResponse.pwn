@@ -12,14 +12,7 @@ IsDialogProtected(dialogid)
 
 CheckDialogId(playerid, dialogid)
 {
-    if(dialogid < 0)
-	{
-		new strError[124];
-		format(strError, sizeof(strError), "Wyst¹pi³ b³¹d z twoim dialogiem! - %d przypisany %d", dialogid, iddialog[playerid]);
-		//Log(serverLog, WARNING, "B³êdne ID dialogu dla [gracz %d] dialogid - %d przypisany %d", playerid, dialogid,iddialog[playerid]);
-		sendErrorMessage(playerid, strError);
-		return 0; 
-	} 
+    if(dialogid < 0) return 0;
     if(dialogid != iddialog[playerid])
     {
         if(dialogid > 10000 && dialogid < 10100) return 0;
@@ -69,12 +62,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	//2.6.18
 	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-	business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-	nawigacja_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
 	//2.6.19
 	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-	
+	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
@@ -513,10 +504,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 7:
 			{
 				if(!response) return 1;
+				StopAudioStreamForPlayer(playerid);
+				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18802/");
+			}
+			case 8:
+			{
+				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
-			case 8:
+			case 9:
 			{
 			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
@@ -2714,65 +2711,50 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-	    else if(dialogid == 12)//shop 24-7
+	    else if(dialogid == 12)
 	    {
 	        if(response)
 	        {
 				ShowShopDialog(playerid);
 	            new string[256];
-				new bIDE = GetNearBusinessID(playerid); 
-				if(mBiz[bIDE][b_elementsPocket] < ELEMENT_COST_INSHOP)
-				{
-					sendErrorMessage(playerid, "Brak towaru"); 
-					format(string, sizeof(string), "[%s] Aktualnie oczekujemy na dostawê materia³ów od dostawcy!", GetBusinessName(bIDE)); 
-					sendTipMessage(playerid, string);
-					return 1;
-				}
 	            switch(listitem)
 	            {
-	                case 0://Zakup telefonu
+	                case 0:
 					{
-		                if (kaska[playerid] >= S_CENA_TELEFON)
+		                if (kaska[playerid] > 500)
 						{
-							SendBizLogoMessage(playerid, bIDE);
-						    if(PlayerInfo[playerid][pTraderPerk] > 0)//Zni¿ka ze skilla
+						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    {
-								new skill = S_CENA_TELEFON / 100;
+								new skill = 500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_TELEFON - price;
+								new payout = 500 - price;
 						        format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								format(string,sizeof(string), "Zakupi³eœ Telefon za %d (cena przed zni¿k¹ %d)", payout, S_CENA_TELEFON);
-								sendTipMessageEx(playerid, COLOR_WHITE, string); 
 								ZabierzKase(playerid, payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/2)); 
 						    }
 						    else
 						    {
-						        format(string, sizeof(string), "~r~-$%d", S_CENA_TELEFON);
+						        format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								ZabierzKase(playerid, S_CENA_TELEFON);
-								format(string,sizeof(string), "Zakupi³eœ Telefon za %d$", S_CENA_TELEFON);
-								sendTipMessageEx(playerid, COLOR_WHITE, string);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_TELEFON/4));  
+								ZabierzKase(playerid, 500);
 						    }
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							new randphone = 10000 + random(89999);//minimum 1000  max 9999
 							PlayerInfo[playerid][pPnumber] = randphone;
-							format(string, sizeof(string), "Twój numer to: %d, mo¿esz go w ka¿dej chwili sprawdziæ wpisuj¹c /stats", randphone);
-							sendTipMessageEx(playerid, COLOR_GRAD4, string);
-							sendTipMessageEx(playerid, COLOR_GRAD4, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
-							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d w biznesie %d", GetPlayerLogName(playerid), randphone, GetBusinessLogName(bIDE));
+							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
+							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d", GetPlayerLogName(playerid), randphone);
 							return 1;
 						}
 					}
-					case 1://Kupno zdrapki 
+					case 1:
 					{
-						if (kaska[playerid] >= S_CENA_ZDRAPKA)
+						if (kaska[playerid] > 50000)
 						{
 							if(PlayerGames[playerid] >= 4)
 							{
-								SendBizLogoMessage(playerid, bIDE);
 								sendTipMessage(playerid, "Przepraszamy, zu¿y³eœ wszystkie zdrapki na naszym magazynie!"); 
 								sendTipMessage(playerid, "Spróbuj przyjœæ za godzinê, mo¿e przyjd¹ nowe."); 
 								return 1;
@@ -2781,8 +2763,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
-							ZabierzKase(playerid, S_CENA_ZDRAPKA);
-							DajKaseBizTemp(bIDE, playerid, (S_CENA_ZDRAPKA/4));
+							ZabierzKase(playerid, 50000);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    { 
 								if(playerValue > winValue && playerValue >= 85)
@@ -2841,90 +2822,83 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 					}
-					case 2://Kupno ksi¹¿ki telefonicznej
+					case 2:
 					{
-						if (kaska[playerid] > S_CENA_KSIAZKA)
+						if (kaska[playerid] > 5000)
 						{
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    {
-								new skill = S_CENA_KSIAZKA / 100;
+								new skill = 5000 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_KSIAZKA - price;
+								new payout = 5000 - price;
 								ZabierzKase(playerid, payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/4)); 
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_KSIAZKA/4)); 
-							    ZabierzKase(playerid, S_CENA_KSIAZKA);
-								format(string, sizeof(string), "~r~-$%d", S_CENA_KSIAZKA);
+							    ZabierzKase(playerid, 5000);
+								format(string, sizeof(string), "~r~-$%d", 5000);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 			                PlayerInfo[playerid][pPhoneBook] = 1;
-							SendBizLogoMessage(playerid, bIDE);
-							sendTipMessage(playerid, "Zakupi³eœ ksi¹¿kê telefoniczn¹! Wpisz /numer <ID/Nick>"); 
+							format(string, sizeof(string), "   Ksi¹¿ka telefoniczna zakupiona! Mo¿esz teraz sprawdzaæ numery graczy !");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /numer <id/nick>.");
 							return 1;
 						}
 					}
-					case 3://Zakup kostki do gry
+					case 3:
 					{
-						if (kaska[playerid] >= S_CENA_KOSTKA)
+						if (kaska[playerid] > 500)
 						{
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    {
-								new skill = S_CENA_KOSTKA / 100;
+								new skill = 500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_KOSTKA - price;
+								new payout = 500 - price;
 								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
-								DajKaseBizTemp(bIDE, playerid, (payout/4));
 							}
 							else
 							{
-							    ZabierzKase(playerid, S_CENA_KOSTKA);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_KOSTKA/4));
+							    ZabierzKase(playerid, 500);
 								format(string, sizeof(string), "~r~-$%d", 500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							gDice[playerid] = 1;
-							SendBizLogoMessage(playerid, bIDE);
-							sendTipMessage(playerid, "Zakupi³eœ kostkê, mo¿esz ni¹ rzucaæ za pomoc¹ /kostka2"); 
+							format(string, sizeof(string), "   Kostka zakupiona. Mo¿esz ni¹ rzucaæ u¿ywaj¹c /kostka2");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
 					}
-					case 4://Kupno aparatu
+					case 4:
 					{
-						if(kaska[playerid] > S_CENA_APARAT)
+						if(kaska[playerid] > 5000)
 						{
-						    ZabierzKase(playerid, S_CENA_APARAT);
-							format(string, sizeof(string), "~r~-$%d", S_CENA_APARAT); 
-						    GameTextForPlayer(playerid, string, 5000, 1);
+						    ZabierzKase(playerid, 5000);
+						    GameTextForPlayer(playerid, "~r~-$5000", 5000, 1);
 							PlayerInfo[playerid][pGun9] = 43;
 							PlayerInfo[playerid][pAmmo9] += 100;
 						    GivePlayerWeapon(playerid, 43, 100);
-							DajKaseBizTemp(bIDE, playerid, (S_CENA_APARAT/4));
-							SendBizLogoMessage(playerid, bIDE);
-							sendTipMessage(playerid, "Zakupi³eœ aparat z dyskiem na 100 zdjêæ! Mo¿esz robiæ zdjêcia.");
+							SendClientMessage(playerid, COLOR_GRAD4, "Aparat zakupiony! Mo¿esz nim teraz robiæ zdjêcia!");
 							return 1;
 						}
 					}
-					case 5://Kupno zamka
+					case 5:
 					{
-						if (kaska[playerid] > S_CENA_ZAMEK)
+						if (kaska[playerid] > 10000)
 						{
-							SendBizLogoMessage(playerid, bIDE);
-							sendTipMessageEx(playerid, COLOR_RED, "Brak towaru! PrzyjdŸ póŸniej.");
+							SendClientMessage(playerid, COLOR_WHITE, "   Brak Towaru!");
 							return 1;
 						}
 					}
-					case 6://Kupno prêdkoœciomierza
+					case 6:
 					{
-						if (kaska[playerid] > S_CENA_PREDKOSCIOMIERZ)
+						if (kaska[playerid] > 5000)
 						{
 							/*if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
@@ -2944,271 +2918,245 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "Prêdkoœciomierz zakupiony.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /licznik ");*/
-							SendBizLogoMessage(playerid, bIDE);
-							sendTipMessageEx(playerid, COLOR_RED, "Brak takiego towaru! PrzyjdŸ póŸniej.");
+							SendClientMessage(playerid, COLOR_WHITE, "   Brak Towaru!");
 							return 1;
 						}
 					}
-					case 7://Kupno kondoma
+					case 7:
 					{
-						if (kaska[playerid] > S_CENA_KONDOM)
+						if (kaska[playerid] > 49)
 						{
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
-								new skill = S_CENA_KONDOM / 100;
+								new skill = 50 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_KONDOM - price;
+								new payout = 50 - price;
 								ZabierzKase(playerid, payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/4));
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    ZabierzKase(playerid, S_CENA_KONDOM);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_KONDOM/4));
-								format(string, sizeof(string), "~r~-$%d", S_CENA_KONDOM);
+							    ZabierzKase(playerid, 50);
+								format(string, sizeof(string), "~r~-$%d", 50);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							Condom[playerid] ++;
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendBizLogoMessage(playerid, bIDE); 
-							sendTipMessage(playerid, "Zakupi³eœ kondoma! Mo¿esz teraz uprawiaæ bezpieczny sex (chyba)");
+							format(string, sizeof(string), "Kondom Zakupiony.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
 					}
-					case 8://Kupno MP3
+					case 8:
 					{
-						if (kaska[playerid] > S_CENA_ODTWARZACZ)
+						if (kaska[playerid] > 2500)
 						{
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
-								new skill = S_CENA_ODTWARZACZ / 100;
+								new skill = 2500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_ODTWARZACZ - price;
+								new payout = 2500 - price;
 								ZabierzKase(playerid, payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/4));
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
 							    ZabierzKase(playerid, 2500);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_ODTWARZACZ/4));
 								format(string, sizeof(string), "~r~-$%d", 2500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendBizLogoMessage(playerid, bIDE); 
-							sendTipMessage(playerid, "Kupi³eœ odtwarzacz - aby skorzystaæ z odtwarzacza MP3 wpisz /mp3 b¹dŸ /muzyka"); 
+							format(string, sizeof(string), "Odtwarzacz MP3 Zakupiony.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /muzyka");
 							PlayerInfo[playerid][pCDPlayer] = 1;
 							return 1;
 						}
 					}
-					case 9://Kupno piwa
+					case 9:
 					{
-						if (kaska[playerid] > S_CENA_PIWO)
+						if (kaska[playerid] > 20)
 						{
 						    if(PlayerInfo[playerid][pPiwo] >= 4)
 						    {
-						    	sendErrorMessage(playerid, "Nie masz tyle si³y aby udŸwign¹æ kolejne piwo!"); 
-								return 1;
+						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za du¿o Piw, nie udŸwigniesz ju¿ wiêcej !");
 						    }
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
-								new skill = S_CENA_PIWO / 100;
+								new skill = 20 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_PIWO - price;
+								new payout = 20 - price;
 								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/4));
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    ZabierzKase(playerid, S_CENA_PIWO);
-								format(string, sizeof(string), "~r~-$%d", S_CENA_PIWO);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_PIWO/4));
+							    ZabierzKase(playerid, 20);
+								format(string, sizeof(string), "~r~-$%d", 20);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendBizLogoMessage(playerid, bIDE); 
-							sendTipMessage(playerid, "Piwo mruczny Gul zakupione! Aby wypiæ wpisz /piwo"); 
+							format(string, sizeof(string), "Piwo 'Mruczny Gul; zakupione.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /piwo aby wypiæ");
+							format(string, sizeof(string), "~r~-$%d", 20);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerInfo[playerid][pPiwo] += 1;
+							SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_BEER);
 							return 1;
 						}
 					}
-					case 10://Kupno wina
+					case 10:
 					{
-						if (kaska[playerid] > S_CENA_WINO)
+						if (kaska[playerid] > 25)
 						{
 						    if(PlayerInfo[playerid][pWino] >= 4)
 						    {
-						    	sendErrorMessage(playerid, "Nie masz na tyle si³y, aby udŸwign¹æ kolejne wiñsko!"); 
-								return 1;
+						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za du¿o Win, nie udŸwigniesz ju¿ wiêcej !");
 						    }
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
-								new skill = S_CENA_WINO / 100;
+								new skill = 25 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_WINO - price;
+								new payout = 25 - price;
 								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/4));
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    ZabierzKase(playerid, S_CENA_WINO);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_WINO/4));
-								format(string, sizeof(string), "~r~-$%d", S_CENA_WINO);
+							    ZabierzKase(playerid, 25);
+								format(string, sizeof(string), "~r~-$%d", 25);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							format(string, sizeof(string), "Wino 'Komandos zakupione'.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /komandos aby wypiæ");
+							format(string, sizeof(string), "~r~-$%d", 25);
 							GameTextForPlayer(playerid, string, 5000, 1);
-							SendBizLogoMessage(playerid, bIDE); 
-							sendTipMessage(playerid, "Wino Komandos zosta³o kupione, aby u¿yæ wpisz /wino!"); 
 							PlayerInfo[playerid][pWino] += 1;
+							SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_WINE);
 							return 1;
 						}
 					}
-					case 11://Kupno sprunka
+					case 11:
 					{
-						if (kaska[playerid] >= S_CENA_SPRUNK)
+						if (kaska[playerid] > 15)
 						{
-						    if(PlayerInfo[playerid][pSprunk] >= 4)
+						    if(PlayerInfo[playerid][pSprunk] >= 5)
 						    {
-						    	sendErrorMessage(playerid, "Masz zbyt ma³o si³y, aby udŸwign¹æ kolejnego sprunka!");
-								return 1;
+						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za du¿o Sprunków, nie udŸwigniesz ju¿ wiêcej !");
 						    }
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
-								new skill = S_CENA_SPRUNK / 100;
+								new skill = 15 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_SPRUNK - price;
+								new payout = 15 - price;
 								ZabierzKase(playerid, payout);
 								format(string, sizeof(string), "~r~-$%d", payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/4));
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    ZabierzKase(playerid, S_CENA_SPRUNK);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_SPRUNK/4));
-								format(string, sizeof(string), "~r~-$%d", S_CENA_SPRUNK);
+							    ZabierzKase(playerid, 15);
+								format(string, sizeof(string), "~r~-$%d", 15);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendBizLogoMessage(playerid, bIDE); 
-							sendTipMessage(playerid, "Zakupi³eœ sprunka. Aby wypiæ wpisz /sprunk"); 
+							format(string, sizeof(string), "Sprunk zakupiony.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /sprunk aby wypiæ sprunka");
+							SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
 							PlayerInfo[playerid][pSprunk] += 1;
 							return 1;
 						}
 					}
-					case 12://CB_RADIO
+					case 12:
 					{
-						if (kaska[playerid] > S_CENA_CBRADIO)
+						if (kaska[playerid] > 2500)
 						{
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
-								new skill = S_CENA_CBRADIO / 100;
+								new skill = 2500 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_CBRADIO - price;
+								new payout = 2500 - price;
 								ZabierzKase(playerid, payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/4));
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    ZabierzKase(playerid, S_CENA_CBRADIO);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_CBRADIO/4));
-								format(string, sizeof(string), "~r~-$%d", S_CENA_CBRADIO);
+							    ZabierzKase(playerid, 2500);
+								format(string, sizeof(string), "~r~-$%d", 2500);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendBizLogoMessage(playerid, bIDE); 
-							sendTipMessage(playerid, "Zakupi³eœ CB-RADIO. Aby u¿yæ wpisz w pojeŸdzie /cb [text]"); 
-							sendTipMessage(playerid, "Aby wyciszyæ CB-RADIO wpisz /togcb, aby wyrzuciæ /wywal"); 
+							format(string, sizeof(string), "CB-RADIO Zakupione.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+	     					SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /cb w pojezdzie aby rozawiwac z innymi");
 							PlayerInfo[playerid][pCB] = 1;
 							return 1;
 						}
 					}
-					case 13://Kupno cygar
+					case 13:
 					{
-						if (kaska[playerid] > S_CENA_CYGARO)
+						if (kaska[playerid] > 200)
 						{
 						    if(PlayerInfo[playerid][pCygaro] >= 1)
 						    {
-						    	sendErrorMessage(playerid, "Posiadasz ca³¹ paczkê cygar!");
-								sendTipMessage(playerid, "Wpisz /cygaro"); 
-								return 1;
+						    	SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ cygara, po co ci nastêpne?");
 						    }
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
-								new skill = S_CENA_CYGARO / 100;
+								new skill = 200 / 100;
 								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = S_CENA_CYGARO - price;
+								new payout = 200 - price;
 								ZabierzKase(playerid, payout);
-								DajKaseBizTemp(bIDE, playerid, (payout/4));
 								format(string, sizeof(string), "~r~-$%d", payout);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							else
 							{
-							    ZabierzKase(playerid, S_CENA_CYGARO);
-								DajKaseBizTemp(bIDE, playerid, (S_CENA_CYGARO/4));
-								format(string, sizeof(string), "~r~-$%d", S_CENA_CYGARO);
+							    ZabierzKase(playerid, 200);
+								format(string, sizeof(string), "~r~-$%d", 200);
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendBizLogoMessage(playerid, bIDE); 
-							sendTipMessage(playerid, "Zakupi³eœ paczkê 5-u cygar. Aby zapaliæ wpisz /cygaro"); 
+							format(string, sizeof(string), "Paczka 5 cygar zakupiona.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /cygaro aby zapaliæ");
 							PlayerInfo[playerid][pCygaro] = 5;
+							SetPlayerSpecialAction(playerid, SPECIAL_ACTION_SMOKE_CIGGY);
 							return 1;
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Nie posiadasz takiej iloœci gotówki!"); 
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
 					}
-					case 14://Kupno kija
+					case 14:
 					{
-						if (kaska[playerid] >= S_CENA_KIJ )
+						if (kaska[playerid] >= 15000 )
 						{
 							PlayerInfo[playerid][pGun1] = 5;
 		            		PlayerInfo[playerid][pAmmo1] = 1;
 							GivePlayerWeapon(playerid, 5, 1);
-							ZabierzKase(playerid, S_CENA_KIJ);
-							format(string, sizeof(string), "~r~-$%d", S_CENA_KIJ);
-							DajKaseBizTemp(bIDE, playerid, (S_CENA_KIJ/4));
+							ZabierzKase(playerid, 15000);
+							format(string, sizeof(string), "~r~-$%d", 15000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendBizLogoMessage(playerid, bIDE);
-							sendTipMessage(playerid, "Zakupi³eœ Kij Baseballowy, mo¿esz teraz t³uc innych!"); 
+							format(string, sizeof(string), "Zakupiono kij baseballowy.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki!"); 
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
-					}
-					case 15://kupno nawigacji
-					{
-						if(kaska[playerid] < S_CENA_NAWIGACJA)
-						{
-							sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki!"); 
-							return 1;
-						}
-						ZabierzKase(playerid, S_CENA_NAWIGACJA);
-						format(string, sizeof(string), "~r~-$%d", S_CENA_NAWIGACJA);
-						DajKaseBizTemp(bIDE, playerid, (S_CENA_NAWIGACJA/4));
-						GameTextForPlayer(playerid, string, 5000, 1);
-						PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-						SendBizLogoMessage(playerid, bIDE);
-						PlayerInfo[playerid][pNawigacja] = 1; 
-						sendTipMessage(playerid, "Zakupi³eœ nawigacjê do samochodu! Aby u¿yæ wpisz /mnawigacja (skrót: /mnaw)"); 
 					}
 				}
 			}
@@ -3452,14 +3400,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-				zakuty[playerid] = 1;
-	            uzytekajdanki[PDkuje[playerid]] = 1;
-	            SkutyGracz[PDkuje[playerid]] = playerid;
-				ClearAnimations(playerid);
-                SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+				
+				CuffedAction(PDkuje[playerid], playerid);
 		    }
-		    if(!response)
+		    else
 		    {
 		        foreach(new i : Player)
 				{
@@ -3480,11 +3424,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 					SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-					zakuty[playerid] = 1;
-		            uzytekajdanki[PDkuje[playerid]] = 1;
-		            SkutyGracz[PDkuje[playerid]] = playerid;
-					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-					SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+					
+					CuffedAction(PDkuje[playerid], playerid);
 				}
 				else if(cops == 2)
 				{
@@ -3503,11 +3444,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 						SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-						zakuty[playerid] = 1;
-			            uzytekajdanki[PDkuje[playerid]] = 1;
-			            SkutyGracz[PDkuje[playerid]] = playerid;
-						SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-						SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+						
+						CuffedAction(PDkuje[playerid], playerid);
 				    }
 				}
 				else
@@ -3531,6 +3469,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//
 		    if(response)
 		    {
+				//todo
 		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ ³owcy %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", sendername);
@@ -11229,6 +11168,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         }
                     }
                 }
+				else if(strfind(inputtext, "Lepa Station") != -1)
+                {
+                    if(RadioSANDos[0] != EOF)
+                    {
+                        if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+                        {
+                            foreach(new i : Player)
+                            {
+                                if(IsPlayerInVehicle(i, veh))
+                                {
+                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18802/");
+                                    SetPVarInt(i, "sanlisten", 2);
+                                }
+                            }
+                        }
+                    }
+                }
                 else if(strfind(inputtext, "Wlasny Stream") != -1)
                 {
                     if(!response) return 1;
@@ -13851,7 +13807,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new hajs = kaska[playerid];
-			if(hajs < HEALTH_PACK_PRICE)
+			if(hajs < (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR))
 			{
 				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
 				return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
@@ -17111,10 +17067,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				DialogKupSkin(playerid);
 				return 1;
 			}
-			new bIDE = GetNearBusinessID(playerid);
 			SetPlayerSkin(playerid, ShopSkins[listitem][SKIN_ID]);
 			ZabierzKase(playerid, ShopSkins[listitem][SKIN_PRICE]);
-			DajKaseBizTemp(bIDE, playerid, (ShopSkins[listitem][SKIN_PRICE]/4));
 			PlayerInfo[playerid][pSkin] = ShopSkins[listitem][SKIN_ID]; 
 			
 			sendTipMessage(playerid, sprintf("Kupi³eœ skina za %d$", ShopSkins[listitem][SKIN_PRICE])); 
