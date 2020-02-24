@@ -25,7 +25,6 @@
 //------------------<[ Define: ]>-------------------
 #define LVL_TO_BUY_BIZ 5
 #define MAX_CASH_IN_MONEYPOCKET 20000000//20kk 
-#define MAX_CASH_IN_TEMPPOCKET 10000000//10kk
 
 //dialogi
 #define DIALOG_BIZ_BUY 6550
@@ -34,30 +33,7 @@
 #define DIALOG_BIZ_BUYBOX 6553
 #define BIZ_DIALOG_INFO 6554
 #define DIALOG_BIZ_ADMINEDIT 6555
-#define DIALOG_BIZ_OWNER 6556
-#define DIALOG_BIZ_OWNER2 6557
-#define DIALOG_BIZ_OWNER3 6558
-#define DIALOG_BIZ_OWNER4 6559
-#define DIALOG_BIZ_OWNER5 6560
-#define DIALOG_BIZ_WPLAC 6561
-#define DIALOG_BIZ_WYPLAC 6562
-#define DIALOG_INPUT_NOWANAZWA 6563
-#define DIALOG_INPUT_NOWEMOTD 6564
-#define DIALOG_OKRESL_BIZNES 6565
-#define DIALOG_OKRESL_POTWIERDZ 6567
-#define DIALOG_BIZ_INTERIORLIST 6568
-    //Pod dialogi do OWNER
-#define DIALOG_MAIN 0//                             --> Dialog g³ówny, pozwalaj¹cy zarz¹dzaæ biznesem
-#define DIALOG_WORKERS 1//                          --> Dialog zarz¹dzania pracownikami
-#define DIALOG_SEJF 2//                             --> Dialog zarz¹dzania sejfami
-#define DIALOG_DOORS 3//                            --> Dialog zarz¹dzania drzwiami
-#define DIALOG_ADDS 4//                             --> Dialog kupna dodatków
-        //Cena Dodatków
-#define B_CENA_ZMIENAZWE 1500000//1.5kk             --> Cena jak¹ gracz musi zap³aciæ za zmianê nazwy biznesu
-#define B_CENA_ZMIENMOTD 2000000//2kk               --> Cena jak¹ gracz musi zap³aciæ za zmianê MOTD rodziny 
-#define B_CENA_ZMIENSPAWN 5000000//5kk              --> Cena jak¹ gracz musi zap³aciæ za mo¿liwoœæ SPAWNU biznesu
-#define B_CENA_SEJFG 2500000//2.5kk +1              --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu g³ównego
-#define B_CENA_SEJFT 7000000//7kk +1                --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu tymczasowego 
+#define MAX_BIZ 200
 
 //koszta dodatkowe
 #define COST_SHOP24 500000//500k
