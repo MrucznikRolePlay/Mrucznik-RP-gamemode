@@ -52,7 +52,6 @@ command_mbizedit_Impl(playerid, bIDE)
         mBiz[bIDE][b_enY] = pPosY;
         mBiz[bIDE][b_enZ] = pPosZ; 
         sendTipMessageEx(playerid, COLOR_GREEN, "Pomyœlnie przeniesiono biznes na nowe koordynaty"); 
-        sendTipMessage(playerid, "Twoje poczynanie zosta³o zapisane do logów serwera."); 
         SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_NOTHING);
         SaveBiz(bIDE);
     } 
@@ -73,32 +72,8 @@ command_mbizedit_Impl(playerid, bIDE)
         sendTipMessage(playerid, string);
         format(string, sizeof(string), "VW: [%d] INT: [%d] pLocal: [%d]", pBVW, pBINT, pBLocal);
         sendTipMessage(playerid, string);
-        sendTipMessage(playerid, "Twoje poczynanie zosta³o zapisane do logów serwera."); 
         SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_NOTHING);
         SaveBiz(bIDE); 
-    }
-    else if(bChoiceEdit == BIZ_CHOICE_USUN_BIZ)
-    {
-        sendTipMessage(playerid, "Ta opcja ju¿ niebawem!"); 
-        SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_NOTHING);
-    }
-    else if(bChoiceEdit == BIZ_CHOICE_USUN_WLAS)
-    {
-        mysql_real_escape_string("Brak", mBiz[bIDE][b_Name_Owner]);
-        mBiz[bIDE][b_ownerUID] = 0; 
-        mBiz[bIDE][b_TYPE] = BTYPE_DEFAULT;
-        mBiz[bIDE][b_TYPE2] = BTYPE2_DEFAULT;
-        mBiz[bIDE][b_moneyPocket] = 0; 
-        sendTipMessageEx(playerid, COLOR_RED, "Usuniêto w³aœciciela biznesu, wyzerowano stan gotówki i typy");
-        sendTipMessage(playerid, "Twoje poczynanie zosta³o zapisane do logów serwera.");  
-        SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_NOTHING);
-    }
-    else if(bChoiceEdit == BIZ_CHOICE_WYZERUJ_KASE)
-    {
-        mBiz[bIDE][b_moneyPocket] = 0;
-        sendTipMessageEx(playerid, COLOR_RED, "Wyzerowano kasê biznesu!"); 
-        sendTipMessage(playerid, "Twoje poczynanie zosta³o zapisane do logów serwera."); 
-        SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_NOTHING);
     }
     else
     {
