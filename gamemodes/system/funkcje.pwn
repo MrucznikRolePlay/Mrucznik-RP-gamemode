@@ -4485,7 +4485,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
-			    if((IsACop(playerid) || IsABOR(playerid) || GetPlayerOrg(playerid) == 12) && OnDuty[playerid] == 1))
+			    if((IsACop(playerid) || IsABOR(playerid)) && OnDuty[playerid] == 1)
 			    {
       				PoziomPoszukiwania[playerid] = 0;
 				}
@@ -4497,6 +4497,8 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			{
 				format(wantedmes, sizeof(wantedmes), "Posiadany Wanted Level: %d", PoziomPoszukiwania[playerid]);
 				SendClientMessage(playerid, COLOR_YELLOW, wantedmes);
+				new pZone[MAX_ZONE_NAME];
+            	GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);//Dzielnica
 				foreach(new i : Player)
 				{
 					if(IsPlayerConnected(i))
@@ -4505,9 +4507,9 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 					    {
 					        if(gCrime[i] == 0)
 					        {
-								format(cbjstore, sizeof(turnmes), "HQ: Przestêpstwo: %s",reason);
+								format(cbjstore, sizeof(turnmes), "HQ: Przestêpstwo: %s | Nadawca: %s",reason, turner);
 								SendClientMessage(i, COLOR_LFBI, cbjstore);
-								format(cbjstore, sizeof(turnmes), "HQ: Podejrzany: %s, ostatnia lokalizacja: %s | Nadawca: %s",turned,pZone,turner);
+								format(cbjstore, sizeof(turnmes), "HQ: Podejrzany: %s, ostatnia lokalizacja: %s",turned, pZone);
 								SendClientMessage(i, COLOR_LFBI, cbjstore);
 							}
 						}
@@ -12647,7 +12649,7 @@ PursuitMode(playerid, giveplayerid)
 	}
 }
 
-public DeathWarning(playerid, killerid, reason)
+public DeathAdminWarning(playerid, killerid, reason)
 {
 	new playername[MAX_PLAYER_NAME];
 	new killername[MAX_PLAYER_NAME];

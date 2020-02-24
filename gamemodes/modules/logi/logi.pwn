@@ -63,6 +63,11 @@ GetHouseLogName(house)
     safe_return sprintf("{House: %d}", house);
 }
 
+GetBusinessLogName(business)
+{
+    safe_return sprintf("{Business: %s[%d]}", Business[business][b_Name], business);
+}
+
 GetGraffitiLogText(graffiti)
 {
     safe_return sprintf("{Graffiti: [%d]:%s}", graffiti, GraffitiInfo[graffiti][grafText]);

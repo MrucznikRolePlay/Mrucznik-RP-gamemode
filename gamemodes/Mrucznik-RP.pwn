@@ -531,7 +531,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 	{
 		case BULLET_HIT_TYPE_NONE:
 		{
-		},
+		}
 		case BULLET_HIT_TYPE_PLAYER:
 		{
 			if(!IsPlayerConnected(hitid)) return 0;
@@ -559,14 +559,14 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 				TogglePlayerControllable(hitid, 0);
 				return 0;
 			}
-		},
+		}
 		case BULLET_HIT_TYPE_VEHICLE:
 		{
-		},
+		}
 		case BULLET_HIT_TYPE_OBJECT:
 		{
 
-		},
+		}
 		case BULLET_HIT_TYPE_PLAYER_OBJECT:
 		{
 
@@ -1845,7 +1845,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		SetPVarInt(playerid, "skip_bw", 1);
 	}
 
-	DeathWarning(playerid, killerid, reason);
+	DeathAdminWarning(playerid, killerid, reason);
 
 	if(IsPlayerConnected(playerid))
 	{
@@ -1894,6 +1894,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 				}
 				if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 				{
+					new playername[24];
+					GetPlayerName(playerid, playername, sizeof(playername));
 					format(string, sizeof(string), "Wyœcig: {FFFFFF}%s zgin¹³ jak prawdziwy œcigant [*]", playername);
 					WyscigMessage(COLOR_YELLOW, string);
 					IloscZawodnikow --;
@@ -2042,23 +2044,18 @@ public OnPlayerDeath(playerid, killerid, reason)
 						}
 					}
 					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
+					if(PlayerInfo[killerid][pLevel] >= 3 || (IsACop(killerid) && OnDuty[killerid] == 1)) return NadajBW(playerid);
 				}
-
-				
-
-				return (IsPlayerConnected(killerid) && (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))) ? NadajBW(playerid) : 1;
+				return 1;
 			}
 			else
 			{
-
-				//tutaj skonczylem
 				if(PlayerInfo[playerid][pBW] > 0)
 				{
 					return NadajBW(playerid, PlayerInfo[playerid][pBW], false);
 				}
 				else
 				{
-					//-------<[     WL      ]>---------
 					if(IsPlayerConnected(killerid))
 					{
 						if(giveWL)
@@ -2080,11 +2077,12 @@ public OnPlayerDeath(playerid, killerid, reason)
 								}
 							}
 						}
-					}
-					if(IsPlayerConnected(killerid) && (PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1)))
-					{
-						SetPVarInt(playerid, "bw-reason", reason);
-						return NadajRanny(playerid, 0, true);
+
+						if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))
+						{
+							SetPVarInt(playerid, "bw-reason", reason);
+							return NadajRanny(playerid, 0, true);
+						}
 					}
 				}
 			}

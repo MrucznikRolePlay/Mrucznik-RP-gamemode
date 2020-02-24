@@ -3448,7 +3448,7 @@ public SlideRope(playerid)
 
 public SpecEnd(playerid)
 {
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 156, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 299, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
 	TogglePlayerSpectating(playerid, false);
 	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	return 1;
@@ -3456,7 +3456,7 @@ public SpecEnd(playerid)
 
 public DamagedHP(playerid)
 {
-	SetPVarInt(playerid, 'timer_DamagedHP', 1);
+	SetPVarInt(playerid, "timer_DamagedHP", 1);
 	RemovePlayerAttachedObject(playerid, 2);
 	return 1;
 }

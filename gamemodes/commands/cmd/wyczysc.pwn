@@ -69,7 +69,7 @@ YCMD:wyczysc(playerid, params[], help)
 						format(string, sizeof(string), "HQ: Policjant %s oczyœci³ z zarzutów %s",sendername, giveplayer);
 						SendFamilyMessage(2, COLOR_PANICRED, string);
 						PoziomPoszukiwania[giveplayerid] = 0;
-						SetPlayerWantedLevel(para1, PoziomPoszukiwania[giveplayerid]);
+						SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);
 						ClearCrime(giveplayerid);
 						if(gTeam[giveplayerid]==4)
 						{

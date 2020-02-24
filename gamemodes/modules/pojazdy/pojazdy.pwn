@@ -27,46 +27,7 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 
-
-<<<<<<< HEAD
-// hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
-// {
-//     if(GetVehicleModel(vehicleid) == 509 || GetVehicleModel(vehicleid) == 510 || GetVehicleModel(vehicleid) == 481)
-// 	{
-//   		Rower_timerSZYBKOSC[playerid] = SetTimerEx("rower_sprawdzanie", 150, true, "ii", playerid, vehicleid);
-//  	}
-// }
-
-// hook OnPlayerExitVehicle(playerid, vehicleid)
-// {
-//     if(GetVehicleModel(vehicleid) == 509 || GetVehicleModel(vehicleid) == 510 || GetVehicleModel(vehicleid) == 481)
-// 	{
-// 		KillTimer(Rower_timerSZYBKOSC[playerid]);
-//         KillTimer(Rower_timerSKOK[playerid]);
-// 	}
-// }
-
-// hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
-// {
-//     if(IsPlayerInAnyVehicle(playerid))
-// 	{
-//         new rower_carid;
-//         rower_carid = GetPlayerVehicleID(playerid);
-//         if(GetVehicleModel(rower_carid) == 509 || GetVehicleModel(rower_carid) == 481 || GetVehicleModel(rower_carid) == 510)
-// 		{
-// 			if(RELEASED(KEY_ACTION))
-// 	        {
-// 		  		new Float:Velocity[3];
-// 		  		new Float:rower_vehx, Float:rower_vehy, Float:rower_vehz;
-//    				GetVehiclePos(rower_carid, rower_vehx, rower_vehy, rower_vehz);
-// 				Rower_timerSKOK[playerid] = SetTimerEx("rower_skoksprawdz", 200, false, "ifi", playerid, rower_vehz, rower_carid);
-// 				GetVehicleVelocity(rower_carid, Velocity[0], Velocity[1], Velocity[2]);
-//     		    SetVehicleVelocity(rower_carid, Velocity[0]/1.5, Velocity[1]/1.5, Velocity[2]/1.5);
-// 			}
-// 	    }
-// 	}
-// }
-=======
+/*
 hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 {
 
@@ -112,8 +73,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 			}
 	    }
 	}
-}
->>>>>>> development
+}*/
 //-----------------<[ Funkcje: ]>------------------
 Car_AddSlotToQueue(id)
 {
@@ -840,25 +800,7 @@ ShowCarEditDialog(playerid)
 // }
 
 //-----------------<[ Timery: ]>--------------------
-<<<<<<< HEAD
-// public rower_sprawdzanie(playerid, carid)
-// {
-//     new Float:Velocity[3];
-// 	GetVehicleVelocity(carid, Velocity[0], Velocity[1], Velocity[2]);
-// 	new rower_szybkosc = rower_GetPlayerSpeed(carid);
-// 	if(rower_szybkosc > ROWER_VMAX) rower_SetVehSpeed(carid);
-// }
-// public rower_skoksprawdz(playerid, Float:vehz, carid)
-// {
-// 	new Float:vehx, Float:vehy, Float:vehz_s;
-// 	GetVehiclePos(carid, vehx, vehy, vehz_s);
-// 	if(vehz_s > vehz+ROWER_SKOKMAX)
-// 	{
-//         GameTextForPlayer(playerid, "~r~Nie skacz!",800, 5);
-// 	    SetVehiclePos(carid, vehx, vehy, vehz_s);
-// 	}
-// }
-=======
+/*
 public rower_sprawdzanie(playerid, carid)
 {
     if(IsPlayerInAnyVehicle(playerid) && (GetVehicleModel(carid) == 509 || GetVehicleModel(carid) == 510 || GetVehicleModel(carid) == 481))
@@ -884,7 +826,7 @@ public rower_skoksprawdz(playerid, Float:vehz, carid)
 	    SetVehiclePos(carid, vehx, vehy, vehz_s);
 	}
 }
->>>>>>> development
+*/
 //------------------<[ MySQL: ]>--------------------
 
 //end
