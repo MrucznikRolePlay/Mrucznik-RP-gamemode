@@ -116,6 +116,7 @@ CreateBusinessIcon()
     		CreateDynamicPickup(1272, 1, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
 		}
 	}
+	return 0;
 }
 GiveBizToPlayer(playerid, bIDE, bType, bType2)
 {

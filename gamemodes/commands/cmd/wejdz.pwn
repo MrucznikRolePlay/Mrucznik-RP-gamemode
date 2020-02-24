@@ -678,29 +678,7 @@ YCMD:wejdz(playerid, params[], help)
             Wejdz(playerid, -1858.3000488281,1158.3000488281,6799, -1865.6999511719,1116.8000488281,6799.10009765, 2.0);//drzwi 1
             Wejdz(playerid, -1858.5,1160.5999755859,6799, -1877.1999511719,1178,6799.2998046875, 2.0);//drzwi 2
             
-            for(new i; i<=MAX_BIZ; i++)
-            {
-                if(BizExist(i))
-                {
-                    if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]))
-                    {
-                        if(mBiz[i][b_enX] == mBiz[i][b_exX]
-                        && mBiz[i][b_enY] == mBiz[i][b_exY]
-                        && mBiz[i][b_enX] == mBiz[i][b_exZ])
-                        {
-                            sendErrorMessage(playerid, "Ten biznes nie posiada wnêtrza!"); 
-                            sendTipMessage(playerid, "Aby skorzystaæ z udogodnieñ biznesu stañ w jego ikonce"); 
-                            return 1;
-                        }
-                        SetPlayerPos(playerid, mBiz[i][b_exX], mBiz[i][b_exY], mBiz[i][b_exZ]);
-                        SetPlayerVirtualWorld(playerid, mBiz[i][b_vw]);
-                        SetPlayerInterior(playerid, mBiz[i][b_int]); 
-                        SetPLocal(playerid, mBiz[i][b_pLocal]);
-                        sendTipMessageEx(playerid, COLOR_GREEN, "Witamy w biznesie!"); 
-                        break;
-                    }
-                }
-            }
+
             for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
             {
                 if(IsPlayerInRangeOfPoint(playerid, 3.0, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]))
