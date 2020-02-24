@@ -135,7 +135,6 @@ public CruiseControl(playerid)
 
 CruiseControl_HideTXD(playerid)
 {
-    TextDrawHideForPlayer(playerid, CRUISECONTROL_BG[0]);
     PlayerTextDrawHide(playerid, CRUISECONTROL_AMOUNT[playerid]);
 }
 
@@ -158,7 +157,6 @@ CruiseControl_UpdateTXD(playerid)
 
 CruiseControl_ShowTXD(playerid)
 {   
-    TextDrawShowForPlayer(playerid, CRUISECONTROL_BG[0]);
     PlayerTextDrawSetString(playerid, CRUISECONTROL_AMOUNT[playerid], "_");
     PlayerTextDrawShow(playerid, CRUISECONTROL_AMOUNT[playerid]);
     CruiseControl_UpdateTXD(playerid);

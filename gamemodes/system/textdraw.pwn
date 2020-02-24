@@ -49,7 +49,6 @@ new PlayerText:TAXI_DIST[MAX_PLAYERS];
 new PlayerText:TAXI_COST[MAX_PLAYERS];
 
 //TXD tempomat
-new Text:CRUISECONTROL_BG[1];
 new PlayerText:CRUISECONTROL_AMOUNT[MAX_PLAYERS];
 //TXD   Stanowe - Textdrawy keypad
 new Text:NG_GateTD[8];
@@ -175,21 +174,6 @@ LoadTXD()
     TextDrawTextSize(TAXI_BG[0], 0.000000, 130.000000);
     TextDrawSetSelectable(TAXI_BG[0], 0);
 
-	CRUISECONTROL_BG[0] = TextDrawCreate(320.000000, 67.000000, "~n~"); //box
-    TextDrawAlignment(CRUISECONTROL_BG[0], 2);
-    TextDrawBackgroundColor(CRUISECONTROL_BG[0], 255);
-    TextDrawFont(CRUISECONTROL_BG[0], 1);
-    TextDrawLetterSize(CRUISECONTROL_BG[0], 0.400000, 6.000000);
-    TextDrawColor(CRUISECONTROL_BG[0], -1);
-    TextDrawSetOutline(CRUISECONTROL_BG[0], 0);
-    TextDrawSetProportional(CRUISECONTROL_BG[0], 1);
-    TextDrawSetShadow(CRUISECONTROL_BG[0], 0);
-    TextDrawUseBox(CRUISECONTROL_BG[0], 1);
-    TextDrawBoxColor(CRUISECONTROL_BG[0], 68);
-    TextDrawTextSize(CRUISECONTROL_BG[0], 0.000000, 80.000000);
-    TextDrawSetSelectable(CRUISECONTROL_BG[0], 0);
-
-
     TAXI_BG[1] = TextDrawCreate(263.000000, 3.000000, "IMAGE"); //taxi sign
     TextDrawBackgroundColor(TAXI_BG[1], 0);
     TextDrawFont(TAXI_BG[1], 5);
@@ -300,8 +284,6 @@ UnloadTXD()
     //----------------------------------------
     for(new i=0;i<2;i++) TextDrawDestroy(TAXI_BG[i]);
     for(new i=0;i<8;i++) TextDrawDestroy(NG_GateTD[i]);
-
-	TextDrawDestroy(CRUISECONTROL_BG[0]);
 
     TextDrawDestroy(SkinSelectionAccept);
     TextDrawDestroy(SkinSelectionDenied);
