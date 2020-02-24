@@ -76,10 +76,8 @@
 #define B_CENA_SEJFT 7000000//7kk +1                --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu tymczasowego 
 
 //koszta dodatkowe
-#define COST_SHOP24 1000000//1kk                    --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu 24-7
-#define COST_SHOPCLOTHES 1250000//1.25kk            --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu z ubraniami
-#define COST_CASINO 5000000//5kk                    --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór kasyna   
-#define COST_RESTAURANT 750000//750k                --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór restauracji 
+#define COST_SHOP24 500000//500k                    --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu 24-7
+#define COST_SHOPCLOTHES 750000//750k               --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu z ubraniami
 //Typy (ogólnikowe)
 #define BTYPE_DEFAULT 0
 #define BTYPE_SERVICES 1
@@ -91,8 +89,8 @@
 #define BTYPE2_SHOP 1
 #define BTYPE2_CLOTHESSHOP 2
 #define BTYPE2_CASINO 3
-#define BTYPE2_RESTAURANT 4
+#define BTYPE2_RESTAURANT 6
     //Do TYPU PRZEMYS£OWEGO
-#define BTYPE2_CLOTHES 5
-#define BTYPE2_OIL 6
+#define BTYPE2_CLOTHES 4
+#define BTYPE2_OIL 5
 //end
