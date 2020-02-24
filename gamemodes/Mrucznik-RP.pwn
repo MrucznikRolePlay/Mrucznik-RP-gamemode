@@ -265,8 +265,7 @@ public OnGameModeInit()
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	LoadBiz();
-	//LoadActors(); 
-	CreateBusinessIcon();	
+	//LoadActors(); 	
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();

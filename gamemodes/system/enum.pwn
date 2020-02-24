@@ -485,7 +485,7 @@ new FractionNames[][40] = {
     "Hitman Agency",
     "San News",
     "Korporacja Transportowa",
-    "Rz¹d Stanu San Andreas",//11
+    "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
     "187 North Park Avenue",
     "Hillside Nortenos 14",

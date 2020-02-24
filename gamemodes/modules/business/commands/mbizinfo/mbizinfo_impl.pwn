@@ -25,11 +25,6 @@
 //------------------<[ Implementacja: ]>-------------------
 command_mbizinfo_Impl(playerid)
 {
-    if(GetPVarInt(playerid, "MozeUzycKomendyBiz") == 1)
-    {
-        sendErrorMessage(playerid, "Odczekaj 5 sekund!"); 
-        return 1;
-    }
     new string[250];
     for(new i; i <= MAX_BIZ; i++)
     {
@@ -42,9 +37,8 @@ command_mbizinfo_Impl(playerid)
             mBiz[i][b_Location],
             mBiz[i][b_cost],
             i);
-            ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Okej", "");
-            break;  
-        }  
+            ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Okej", "");  
+        }   
     }
     return 1;
 }

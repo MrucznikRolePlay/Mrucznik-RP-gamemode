@@ -156,8 +156,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(response)
         {
-            SetTimerEx("OdczekajDialogBiz", 5000, false, "i", playerid);
-            SetPVarInt(playerid, "MozeUzycKomendyBiz", 1);
+            //Coœ tu ma sie zadziaæ (Timer)
         }
     }
     else if(dialogid == DIALOG_BIZ_ADMINEDIT)
