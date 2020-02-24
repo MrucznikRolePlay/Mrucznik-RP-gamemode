@@ -2711,13 +2711,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-	    else if(dialogid == 12)//shop 24-7
+	    else if(dialogid == 12)
 	    {
 	        if(response)
 	        {
 				ShowShopDialog(playerid);
 	            new string[256];
-				new bIDE = GetNearBusinessID(playerid); 
 	            switch(listitem)
 	            {
 	                case 0:

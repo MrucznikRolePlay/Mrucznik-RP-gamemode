@@ -30,42 +30,7 @@
 
 ShowShopDialog(playerid)
 {
-	new string[800]; 
-	new nameBusiness[64];
-	format(string, sizeof(string), "Przedmiot\tCena\tIloúÊ\n\
-	Telefon\t{80FF00}{80FF00}%d$\t1\n\
-	Zdrapka\t{80FF00}%d$\t1\n\
-	Ksiπøka Telefoniczna\t{80FF00}%d$\t1\n\
-	Kostka\t{80FF00}%d$\t2\n\
-	Aparat\t{80FF00}%d$\t500x\n\
-	Zamek\t{80FF00}%d$\t1\n\
-	PrÍdkoúciomierz\t{80FF00}%d$\t1\n\
-	Kondom\t{80FF00}%d$\t4x\n\
-	Odtwarzacz MP3\t{80FF00}%d$\t1\n\
-	Piwo Mruczny Gul\t{80FF00}%d$\t500ml\n\
-	Wino Komandos\t{80FF00}%d$\t500ml\n\
-	Sprunk\t{80FF00}%d$\t250ml\n\
-	CB-RADIO\t{80FF00}%d$\t1\n\
-	Cygara\t{80FF00}%d$\t1\n\
-	KIJ BASEBALLOWY\t{80FF00}%d$\t1",
-	S_CENA_TELEFON,
-	S_CENA_ZDRAPKA,
-	S_CENA_KSIAZKA, 
-	S_CENA_KOSTKA,
- 	S_CENA_APARAT,
- 	S_CENA_ZAMEK,
- 	S_CENA_PREDKOSCIOMIERZ,
- 	S_CENA_KONDOM,
- 	S_CENA_ODTWARZACZ,
- 	S_CENA_PIWO,
- 	S_CENA_WINO,
- 	S_CENA_SPRUNK,
- 	S_CENA_CBRADIO,
- 	S_CENA_CYGARO,
- 	S_CENA_KIJ);
-	new bIDE = GetNearBusinessID(playerid); 
-	format(nameBusiness, 64, "%s", mBiz[bIDE][b_Name]);
-	ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_TABLIST_HEADERS, nameBusiness, string,"KUP","WYJDè");		
+	ShowPlayerDialogEx(playerid,12,DIALOG_STYLE_LIST,"Sklep 24/7","Telefon\t\t\t\t500$\nZdrapka\t\t\t50000$\nKsiπøka telefoniczna\t\t5000$\nKostka\t\t\t\t500$\nAparat Fotograficzny\t\t5000$\nZamek\t\t\t\t10000$\nPrÍdkoúciomierz\t\t5000$\nKondom\t\t\t50$\nOdtwarzacz MP3\t\t2500$\nPiwo Mruczny Gul\t\t20$\nWino Komandaos\t\t25$\nSprunk\t\t\t\t15$\nCB-Radio\t\t\t2500$\nCygara\t\t\t\t200$\nKij Baseballowy\t\t\t\t15000$","KUP","WYJDè");		
 }
 
 YCMD:kup(playerid, params[], help)
@@ -73,16 +38,12 @@ YCMD:kup(playerid, params[], help)
 	if(IsPlayerConnected(playerid))
 	{
 		new string[256];
-		/*if (PlayerToPoint(100, playerid,-30.875, -88.9609, 1004.53))//centerpoint 24-7
+		if (PlayerToPoint(100, playerid,-30.875, -88.9609, 1004.53))//centerpoint 24-7
 		{
 			if(GUIExit[playerid] == 0)
 			{
 				ShowShopDialog(playerid);
 			}
-		}*/
-		if(PlayerNearBusinessType(playerid, BTYPE_SERVICES, BTYPE2_SHOP))
-		{ 
-			ShowShopDialog(playerid); 
 		}
 		else if(PlayerToPoint(5.0, playerid, 809.4175,-1420.2585,-22.6193))
 		{
