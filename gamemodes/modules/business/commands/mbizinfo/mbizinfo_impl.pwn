@@ -42,7 +42,7 @@ command_mbizinfo_Impl(playerid)
             mBiz[i][b_Location],
             mBiz[i][b_cost],
             i);
-            ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Okej", "");
+            ShowPlayerDialogEx(playerid, BIZ_DIALOG_INFO, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Okej", "");
             break;  
         }  
     }

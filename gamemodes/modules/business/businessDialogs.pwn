@@ -103,7 +103,7 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     mBiz[pBizID][b_cost]+COST_SHOP24, 
                     mBiz[pBizID][b_Location]); 
                     SetPVarInt(playerid, "BuyBizChoice", 1); 
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, nameToDialogs, string, "Kupujê", "Rezygnujê"); 
+                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_BUYBOX, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Kupujê", "Rezygnujê"); 
                 }
                 case 1:
                 {
@@ -134,8 +134,6 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     {
                         ZabierzKase(playerid, mBiz[pBizID][b_cost]+COST_SHOP24);
                         GiveBizToPlayer(playerid, pBizID, BTYPE_SERVICES, BTYPE2_SHOP); 
-                        Log(businessLog, INFO, "%s kupil biznes %s jako sklep 24-7 za %d", GetPlayerLogName(playerid), GetBusinessLogName(pBizID), (mBiz[pBizID][b_cost]+COST_SHOP24));
-
                     }
                     else
                     {
@@ -224,323 +222,25 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 case 0: //Nazwa biz, zwrot
                 {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_MAIN); 
+                    ShowBusinessOwnerDialog(playerid); 
                 }
                 case 1:
                 {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_WORKERS); 
+                    sendTipMessage(playerid, "Ju¿ nied³ugo!"); 
                 }
                 case 2:
                 {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_SEJF); 
+                    sendTipMessage(playerid, "Ju¿ nied³ugo!");
                 }
                 case 3:
                 {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_DOORS);
+                    sendTipMessage(playerid, "Ju¿ nied³ugo!"); 
                 }
                 case 4:
                 {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_ADDS); 
+                    sendTipMessage(playerid, "Ju¿ nied³ugo!"); 
                 }
             }
-        }
-    }
-    else if(dialogid == DIALOG_BIZ_OWNER2)//DIALOG WORKERS
-    {
-        if(!response)
-        {
-            ShowBusinessOwnerDialog(playerid, DIALOG_MAIN); 
-            return 1;
-        }
-        else 
-        {
-            switch(listitem)
-            {
-                case 0:
-                {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_WORKERS);
-                }
-                case 1:
-                {
-                    sendTipMessage(playerid, "Ta opcja pojawi siê ju¿ nied³ugo!");
-                }
-                case 2:
-                {
-                    sendTipMessage(playerid, "Ta opcja pojawi siê ju¿ nied³ugo!"); 
-                }
-            }
-        }
-    }
-    else if(dialogid == DIALOG_BIZ_OWNER3)
-    {
-        if(!response)
-        {
-            ShowBusinessOwnerDialog(playerid, DIALOG_MAIN);
-            return 1;
-        }
-        else 
-        {
-            switch(listitem)
-            {
-                case 0:
-                {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_SEJF); 
-                }
-                case 1:
-                {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_SEJF);
-                }
-                case 2:
-                {//wp³acanie
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_WPLAC, DIALOG_STYLE_INPUT, nameToDialogs, 
-                    "Wpisz poni¿ej sumê jak¹ chcesz wp³aciæ\nWskazówka - mo¿esz u¿ywaæ mno¿nika k (np. 10k)", "Wp³aæ", "Zrezygnuj");  
-                }
-                case 3://wyp³acanie
-                {
-                    ShowPlayerDialogEx(playerid, DIALOG_BIZ_WYPLAC, DIALOG_STYLE_INPUT, nameToDialogs, 
-                    "Wpisz poni¿ej sumê jak¹ chcesz wyp³aciæ\nWskazówka - mo¿esz u¿ywaæ mno¿nika k (np. 10k)", "Wyp³aæ", "Zrezygnuj");
-                }
-                case 4:
-                {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_SEJF);
-                }
-                case 5:
-                {//Wyp³acanie 
-                    PlayerRunWithMoney(playerid); 
-                }
-            }
-        }
-    }
-    else if(dialogid == DIALOG_BIZ_WPLAC)
-    {
-        if(!response)
-        {
-            ShowBusinessOwnerDialog(playerid, DIALOG_SEJF); 
-            return 1;
-        }
-        else 
-        {
-            new value = FunkcjaK(inputtext); 
-            new bIDE = PlayerInfo[playerid][pBusinessOwner];
-            new string[124];
-            if(mBiz[bIDE][b_moneyPocket]+value > GetPocketMaxSpace(bIDE))
-            {
-                sendErrorMessage(playerid, "Nie mo¿esz wp³aciæ takiej iloœci gotówki!");
-                format(string, sizeof(string), "Twój sejf zmieœci maksymalnie: $%d", GetPocketMaxSpace(bIDE));
-                sendTipMessage(playerid, string); 
-                return 1;
-            }
-            if(kaska[playerid] < value)
-            {
-                sendErrorMessage(playerid, "Nie masz takiej iloœci gotówki!"); 
-                return 1;
-            }
-            Log(businessCashLog, INFO, "Gracz %s wplacil do sejfu %s kwote %d stary stan %d nowy stan %d",
-            GetPlayerLogName(playerid),
-            GetBusinessLogName(bIDE),
-            value,
-            mBiz[bIDE][b_moneyPocket],
-            (mBiz[bIDE][b_moneyPocket]+value));
-            format(string, sizeof(string), "Wp³aci³eœ do g³ównego sejfu biznesu $%d, nowy stan $%d", value, mBiz[bIDE][b_moneyPocket]+value); 
-            mBiz[bIDE][b_moneyPocket] = mBiz[bIDE][b_moneyPocket]+value; 
-            sendTipMessageEx(playerid, COLOR_GREEN, string);
-            ZabierzKase(playerid, value); 
-            SaveBiz(bIDE); 
-        }
-    }
-    else if(dialogid == DIALOG_BIZ_WYPLAC)
-    {
-        if(!response)
-        {
-            ShowBusinessOwnerDialog(playerid, DIALOG_SEJF); 
-            return 1;
-        }
-        else 
-        {
-            new value = FunkcjaK(inputtext); 
-            new bIDE = PlayerInfo[playerid][pBusinessOwner];
-            new string[124];
-            if(mBiz[bIDE][b_moneyPocket] < value)
-            {
-                sendErrorMessage(playerid, "Twój biznes nie posiada takiej sumy!"); 
-                return 1;
-            }
-            Log(businessCashLog, INFO, "Gracz %s wyplacil z sejfu %s kwote %d stary stan %d nowy stan %d",
-            GetPlayerLogName(playerid),
-            GetBusinessLogName(bIDE),
-            value,
-            mBiz[bIDE][b_moneyPocket],
-            (mBiz[bIDE][b_moneyPocket]-value));
-            format(string, sizeof(string), "Wyp³aci³eœz g³ównego sejfu biznesu $%d, nowy stan $%d", value, mBiz[bIDE][b_moneyPocket]-value); 
-            mBiz[bIDE][b_moneyPocket] = mBiz[bIDE][b_moneyPocket]-value; 
-            sendTipMessageEx(playerid, COLOR_GREEN, string);
-            DajKase(playerid, value); 
-            SaveBiz(bIDE); 
-            
-        }
-    }
-    else if(dialogid == DIALOG_BIZ_OWNER4)//DRZWI
-    {
-        if(!response)
-        {
-            ShowBusinessOwnerDialog(playerid, DIALOG_MAIN);
-            return 1;
-        }
-        else 
-        {
-            sendTipMessage(playerid, "Ta opcja zostanie dodana ju¿ wkrótce!"); 
-        }
-    }
-    else if(dialogid == DIALOG_BIZ_OWNER5)//DODATKI
-    {
-        if(!response)
-        {
-            ShowBusinessOwnerDialog(playerid, DIALOG_MAIN);
-            return 1;
-        }
-        else 
-        {
-            new string[256];
-            new bIDE = PlayerInfo[playerid][pBusinessOwner];
-            switch(listitem)
-            {
-                case 0: 
-                {
-                    ShowBusinessOwnerDialog(playerid, DIALOG_ADDS); 
-                }
-                case 1:
-                {
-                    format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê biznesu.\nPamiêtaj, ¿e maksymalna liczba znaków to 64!\nKoszt zmiany: $%d",
-                    B_CENA_ZMIENAZWE);
-                    ShowPlayerDialogEx(playerid, DIALOG_INPUT_NOWANAZWA, DIALOG_STYLE_INPUT, nameToDialogs, 
-                    string, "Akceptuj", "Main");
-                }
-                case 2:
-                {
-                    format(string, sizeof(string), "WprowadŸ poni¿ej nowe MOTD biznesu\nPamiêtaj, ¿e maksymalna liczba znaków to 64!\nKoszt zmiany: $%d",
-                    B_CENA_ZMIENMOTD);
-                    ShowPlayerDialogEx(playerid, DIALOG_INPUT_NOWEMOTD, DIALOG_STYLE_INPUT, nameToDialogs, 
-                    string, "Akceptuj", "Main");
-                }
-                case 3:
-                {
-                    sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
-                }
-                case 4:
-                {
-                    if(kaska[playerid] < B_CENA_SEJFG)
-                    {
-                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-                        return 1;
-                    }
-                    if(mBiz[bIDE][b_ulepszenie4]+1 > 10)
-                    {
-                        sendErrorMessage(playerid, "Ten biznes osi¹gn¹³ maksymaln¹ liczbê ulepszeñ - 10!");
-                        format(string, sizeof(string), "Mo¿esz w nim zmieœciæ teraz $%d.", GetPocketMaxSpace(bIDE));
-                        sendTipMessage(playerid, string);
-                        return 1;
-                    }
-                    ZabierzKase(playerid, B_CENA_SEJFG); 
-                    mBiz[bIDE][b_ulepszenie4]++; 
-                    sendTipMessage(playerid, "Ulepszy³eœ sejf g³ówny w swoim biznesie!");
-                    format(string, sizeof(string), "Aktualny poziom ulepszenia [%d], mo¿esz zmieœciæ w sejfie teraz $%d", mBiz[bIDE][b_ulepszenie4], GetPocketMaxSpace(bIDE));
-                    sendTipMessage(playerid, string); 
-                    Log(businessLog, INFO, "%s ulepszyl w biznesie %s sejf glowny - aktualny poziom %d", GetPlayerLogName(playerid), GetBusinessLogName(bIDE), mBiz[bIDE][b_ulepszenie4]);
-                    SaveBiz(bIDE); 
-                }
-                case 5:
-                {
-                    if(kaska[playerid] < B_CENA_SEJFT)
-                    {
-                        sendErrorMessage(playerid, "Nie masz wystarczaj¹cej iloœci gotówki!"); 
-                        return 1;
-                    }
-                    if(mBiz[bIDE][b_ulepszenie5]+1 > 10)
-                    {
-                        sendErrorMessage(playerid, "Ten biznes osi¹gn¹³ maksymaln¹ liczbê ulepszeñ - 10!");
-                        format(string, sizeof(string), "Mo¿esz w sejfie tymczasowym zmieœciæ teraz $%d.", GetTempPocketMaxSpace(bIDE));
-                        sendTipMessage(playerid, string);
-                        return 1;
-                    }
-                    ZabierzKase(playerid, B_CENA_SEJFT); 
-                    mBiz[bIDE][b_ulepszenie5]++; 
-                    sendTipMessage(playerid, "Ulepszy³eœ sejf tymczasowy w swoim biznesie!");
-                    format(string, sizeof(string), "Aktualny poziom ulepszenia [%d], mo¿esz zmieœciæ w sejfie teraz $%d", mBiz[bIDE][b_ulepszenie5], GetTempPocketMaxSpace(bIDE));
-                    sendTipMessage(playerid, string); 
-                    Log(businessLog, INFO, "%s ulepszyl w biznesie %s sejf tymczasowy - aktualny poziom %d", GetPlayerLogName(playerid), GetBusinessLogName(bIDE), mBiz[bIDE][b_ulepszenie5]);
-                    SaveBiz(bIDE); 
-                }
-                case 6:
-                {
-                    ShowInteriorList(playerid); 
-                }
-            }
-        }
-    }
-    else if(dialogid == DIALOG_INPUT_NOWANAZWA)
-    {
-        if(!response)
-        {
-            return ShowBusinessOwnerDialog(playerid, DIALOG_MAIN);
-        }
-        else 
-        {
-            new string[256];
-            new bIDE = PlayerInfo[playerid][pBusinessOwner];
-            if(kaska[playerid] < B_CENA_ZMIENAZWE)
-            {
-                sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki!"); 
-                return 1;
-            }
-            if(strlen(inputtext) > 64)
-            {
-                sendErrorMessage(playerid, "Zbyt d³uga nazwa!"); 
-                return 1;
-            }
-            if(CheckVulgarityString(inputtext) == 1)
-            {
-                sendErrorMessage(playerid, "Nazwa nie mo¿e byæ wulgarna!");
-                return 1;
-            }
-            format(string, sizeof(string), "Zmieni³eœ nazwê biznesu %s na %s", mBiz[bIDE][b_Name], inputtext); 
-            sendTipMessage(playerid, string); 
-            Log(businessLog, INFO, "%s zmienil nazwe biznesu %s na %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE),inputtext);
-            ZabierzKase(playerid, B_CENA_ZMIENAZWE); 
-            mysql_real_escape_string(inputtext, mBiz[bIDE][b_Name]);
-            SaveBiz(bIDE);  
-        }
-    }
-    else if(dialogid == DIALOG_INPUT_NOWEMOTD)
-    {
-        if(!response)
-        {
-            return ShowBusinessOwnerDialog(playerid, DIALOG_MAIN);
-        }
-        else 
-        {
-            new string[256];
-            new bIDE = PlayerInfo[playerid][pBusinessOwner];
-            if(kaska[playerid] < B_CENA_ZMIENMOTD)
-            {
-                sendErrorMessage(playerid, "Nie posiadasz wystarczaj¹cej iloœci gotówki!"); 
-                return 1;
-            }
-            if(strlen(inputtext) > 64)
-            {
-                sendErrorMessage(playerid, "Zbyt d³ugie MOTD!"); 
-                return 1;
-            }
-            if(CheckVulgarityString(inputtext) == 1)
-            {
-                sendErrorMessage(playerid, "MOTD nie mo¿e byæ wulgarne!");
-                return 1;
-            }
-            format(string, sizeof(string), "Zmieni³eœ MOTD biznesu %s na %s", mBiz[bIDE][b_Name], inputtext); 
-            sendTipMessage(playerid, string); 
-            Log(businessLog, INFO, "%s zmienil motd biznesu %s na %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE),inputtext);
-            ZabierzKase(playerid, B_CENA_ZMIENMOTD); 
-            mysql_real_escape_string(inputtext, mBiz[bIDE][b_motd]); 
-            SaveBiz(bIDE); 
         }
     }
     return 1;

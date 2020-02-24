@@ -30,7 +30,7 @@
 stock LoadBiz()
 {
 	new query[1024];
-	new lStr[456];  
+	new lStr[256];  
 	new valueBiz; 
 	new lStr2[64];
 	new string[64];
@@ -43,14 +43,14 @@ stock LoadBiz()
 
 	for(new i; i <= MAX_BIZ; i++) 
 	{
-		lStr = "`ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Cost`, `Location`, `MoneyPocket`, `bTYPE`, `bTYPE2`, `ulepszenie1`, `ulepszenie2`, `ulepszenie3`, `ulepszenie4`, `ulepszenie5`";
+		lStr = "`ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Cost`, `Location`, `MoneyPocket`, `bTYPE`, `bTYPE2`";
 		format(query, sizeof(query), "SELECT %s FROM `mru_biz` WHERE `ID`='%d'", lStr, i);
 		mysql_query(query); 
 		mysql_store_result();
 		if (mysql_num_rows())
 		{
 			mysql_fetch_row_format(query, "|");
-			sscanf(query, "p<|>ds[32]s[64]ffffffdddds[64]dddddddd",
+			sscanf(query, "p<|>ds[32]s[64]ffffffdddds[64]ddd",
 			mBiz[i][b_ownerUID],
 			mBiz[i][b_Name_Owner],
 			mBiz[i][b_Name],
@@ -67,12 +67,7 @@ stock LoadBiz()
 			mBiz[i][b_Location],
 			mBiz[i][b_moneyPocket],
 			mBiz[i][b_TYPE],
-			mBiz[i][b_TYPE2],
-			mBiz[i][b_ulepszenie1],
-			mBiz[i][b_ulepszenie2],
-			mBiz[i][b_ulepszenie3],
-			mBiz[i][b_ulepszenie4],
-			mBiz[i][b_ulepszenie5]);
+			mBiz[i][b_TYPE2]);
 			loadedBiz++; 
 		}
 		mysql_free_result();
@@ -102,12 +97,7 @@ stock SaveBiz(bIDE)
 	`Location`='%s',\
 	`MoneyPocket`='%d',\
 	`bTYPE`='%d',\
-	`bTYPE2`='%d',\
-	`ulepszenie1`='%d',\
-	`ulepszenie2`='%d',\
-	`ulepszenie3`='%d',\
-	`ulepszenie4`='%d',\
-	`ulepszenie5`='%d'\
+	`bTYPE2`='%d'\
 	WHERE `ID`='%d'", 
 	bIDE, 
 	mBiz[bIDE][b_ownerUID],
@@ -127,11 +117,6 @@ stock SaveBiz(bIDE)
 	mBiz[bIDE][b_moneyPocket],
 	mBiz[bIDE][b_TYPE],
 	mBiz[bIDE][b_TYPE2],
-	mBiz[bIDE][b_ulepszenie1],
-	mBiz[bIDE][b_ulepszenie2],
-	mBiz[bIDE][b_ulepszenie3],
-	mBiz[bIDE][b_ulepszenie4],
-	mBiz[bIDE][b_ulepszenie5],
 	bIDE);
 	mysql_query(query);
 	return 0;

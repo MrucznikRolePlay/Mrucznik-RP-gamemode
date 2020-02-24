@@ -36,8 +36,6 @@ command_mgotobiz_Impl(playerid, bIDE)
         SetPlayerPos(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]);
         format(string, sizeof(string), "Zosta³eœ teleportowany do biznesu %s", mBiz[bIDE][b_Name]); 
         sendTipMessage(playerid, string); 
-        SetPlayerVirtualWorld(playerid, 0);
-        SetPlayerInterior(playerid, 0);
     }
     return 1;
 }

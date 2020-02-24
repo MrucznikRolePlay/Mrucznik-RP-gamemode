@@ -23,33 +23,17 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define LVL_TO_BUY_BIZ 5//                          --> Minimalny LVL, który zezwala na kupno biznesu
-#define MAX_CASH_IN_MONEYPOCKET 20000000//20kk      --> Sejf g³ówny, maksymalna gotówka standardowa
-#define MAX_CASH_IN_TEMPPOCKET 10000000//10kk       --> Sejf tymczasowy, maksymalna gotówka standardowa
-#define MAX_OFFLINE_DAYS 14//                       --> Maksymalna nieobecnoœæ w³aœciciela biznesu (w dniach)
-#define MAX_BIZ 200//                               --> Maksymalna liczba biznesów na œwiecie
-#define INVALID_BUSINESSID 9999//                   --> ID biznesu wskazuj¹ce, na brak biznesu
+#define LVL_TO_BUY_BIZ 5
+#define MAX_CASH_IN_MONEYPOCKET 20000000//20kk 
+#define MAX_CASH_IN_TEMPPOCKET 10000000//10kk
 
-
-//---------------<[ Dialogi: ]>---------------
-//dialogi kupna 
+//dialogi
 #define DIALOG_BIZ_BUY 6550
 #define DIALOG_BIZ_BUY2 6551
 #define DIALOG_BIZ_BUY3 6552
 #define DIALOG_BIZ_BUYBOX 6553
-//Dialogi informacyjne 
 #define BIZ_DIALOG_INFO 6554
-//Dialogi dla businessGOD
 #define DIALOG_BIZ_ADMINEDIT 6555
-    //Choice dla businessGOD
-#define BIZ_CHOICE_NOTHING 0
-#define BIZ_CHOICE_PRZENIES 1
-#define BIZ_CHOICE_DODAJ 2
-#define BIZ_CHOICE_USUN_BIZ 3
-#define BIZ_CHOICE_USUN_WLAS 4
-#define BIZ_CHOICE_WYZERUJ_KASE 5
-#define BIZ_CHOICE_ZMIEN_CENE 6
-//Dialogi zarz¹dzania dla businessOwner
 #define DIALOG_BIZ_OWNER 6556
 #define DIALOG_BIZ_OWNER2 6557
 #define DIALOG_BIZ_OWNER3 6558
@@ -76,8 +60,8 @@
 #define B_CENA_SEJFT 7000000//7kk +1                --> Cena jak¹ gracz musi zap³aciæ za ulepszenie sejfu tymczasowego 
 
 //koszta dodatkowe
-#define COST_SHOP24 500000//500k                    --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu 24-7
-#define COST_SHOPCLOTHES 750000//750k               --> Koszt dodatkowy, jaki gracz musi zap³aciæ za wybór sklepu z ubraniami
+#define COST_SHOP24 500000//500k
+#define COST_SHOPCLOTHES 750000//750k 
 //Typy (ogólnikowe)
 #define BTYPE_DEFAULT 0
 #define BTYPE_SERVICES 1
@@ -93,4 +77,15 @@
     //Do TYPU PRZEMYS£OWEGO
 #define BTYPE2_CLOTHES 4
 #define BTYPE2_OIL 5
+
+#define INVALID_BUSINESSID 9999
+
+//Choice
+#define BIZ_CHOICE_NOTHING 0
+#define BIZ_CHOICE_PRZENIES 1
+#define BIZ_CHOICE_DODAJ 2
+#define BIZ_CHOICE_USUN_BIZ 3
+#define BIZ_CHOICE_USUN_WLAS 4
+#define BIZ_CHOICE_WYZERUJ_KASE 5
+#define BIZ_CHOICE_ZMIEN_CENE 6
 //end
