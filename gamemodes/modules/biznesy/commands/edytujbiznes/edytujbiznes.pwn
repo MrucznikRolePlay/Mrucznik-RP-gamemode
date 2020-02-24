@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                edytujbiznes                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,38 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "edytujbiznes_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_edytujbiznes()
 {
-    command_mbizbuy();
-    command_mbiznesy();
+    new command = Command_GetID("edytujbiznes");
+
+    //aliases
+    Command_AddAlt(command, "editbiz");
+    Command_AddAlt(command, "bizedit");
+    Command_AddAlt(command, "editbusiness");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:edytujbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Edycja biznesu.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_edytujbiznes_Impl(playerid);
 }

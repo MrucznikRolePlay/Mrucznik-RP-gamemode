@@ -253,6 +253,7 @@ public OnGameModeInit()
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
 	MruMySQL_IloscLiderowLoad();
+
 	
 	DefaultItems_LicenseCost();
 
@@ -263,7 +264,8 @@ public OnGameModeInit()
     systempozarow_init();
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
-	LoadBiz();
+	LoadBusiness(); 
+	LoadBusinessPickup(); 
 	//LoadActors(); 	
 	//-------<[ actors ]>-------
 	PushActors(); 
@@ -483,6 +485,10 @@ public OnGameModeExit()
         SejfR_Save(i);
         if(RANG_ApplyChanges[1][i]) EDIT_SaveRangs(1, i);
     }
+	for(new i=1; i<=BusinessLoaded; i++)
+	{
+		SaveBusiness(i); 
+	}
     UnloadTXD();
     Patrol_Unload();
     TJD_Exit();
@@ -1173,6 +1179,8 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 78, 1383.4578, 461.5694, 19.8450, 42, 0); //Stacja benzynowa w Montgomery
     SetPlayerMapIcon(playerid, 79, 2202.3503, 2474.2419, 10.5474, 42, 0); //Stacja w LV V2
 	
+	//biz
+	ResetBizOffer(playerid);
 	//system barierek by Kubi
 	gHeaderTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
     gBackgroundTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
@@ -5423,7 +5431,8 @@ PayDay()
 					format(string, sizeof(string), "  Nowy Stan Konta: $%d", PlayerInfo[i][pAccount]);
 					SendClientMessage(i, COLOR_GRAD5, string);
 					format(string, sizeof(string), "  Wynajem: -$%d", Dom[PlayerInfo[i][pWynajem]][hCenaWynajmu]);
-					SendClientMessage(i, COLOR_GRAD5, string); 
+					SendClientMessage(i, COLOR_GRAD5, string);
+					BusinessPayDay(i);  
 					format(string, sizeof(string), "~y~Wyplata");
 					GameTextForPlayer(i, string, 5000, 1);
 					PlayerInfo[i][pPayDay] = 0;
@@ -5886,6 +5895,8 @@ OnPlayerLogin(playerid, password[])
         Car_LoadForPlayer(playerid); //System aut
 		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
 		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
+		CorrectPlayerBusiness(playerid);
+		CheckPlayerBusiness(playerid);
 		
 		//Lider
 		Load_MySQL_Leader(playerid); 
@@ -5941,6 +5952,8 @@ OnPlayerLogin(playerid, password[])
 		PlayerInfo[playerid][pAccount] = 5000;
 		PlayerInfo[playerid][pReg] = 1;
 		PlayerInfo[playerid][pDowod] = 0;
+		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
+		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
 		DajKase(playerid, 5000);
 	}
 

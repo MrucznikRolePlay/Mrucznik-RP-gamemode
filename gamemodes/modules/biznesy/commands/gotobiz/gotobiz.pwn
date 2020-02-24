@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  gotobiz                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,40 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "gotobiz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_gotobiz()
 {
-    command_mbizbuy();
-    command_mbiznesy();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:gotobiz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która teleportuje nas do biznesu.");
+        return 1;
+    }
+    //fetching params
+    new businessID;
+    if(sscanf(params, "d", businessID))
+    {
+        sendTipMessage(playerid, "U¿yj /gotobiz [ID_BIZNESU] ");
+        return 1;
+    }
+    
+    //command body
+    return command_gotobiz_Impl(playerid, businessID);
 }

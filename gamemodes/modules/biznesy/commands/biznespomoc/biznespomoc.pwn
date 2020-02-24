@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                biznespomoc                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,37 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "biznespomoc_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_biznespomoc()
 {
-    command_mbizbuy();
-    command_mbiznesy();
+    new command = Command_GetID("biznespomoc");
+
+    //aliases
+    Command_AddAlt(command, "bizpomoc");
+    Command_AddAlt(command, "bizhelp");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:biznespomoc(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda wyœwietlaj¹ca listê komend zwi¹zanych z systemem biznesów.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_biznespomoc_Impl(playerid);
 }

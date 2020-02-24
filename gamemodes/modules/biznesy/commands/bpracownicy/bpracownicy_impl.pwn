@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                bpracownicy                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,28 +16,32 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 19.08.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_bpracownicy_Impl(playerid)
 {
-    command_mbizbuy();
-    command_mbiznesy();
-    
+    new string[256];
+    if(IsALeaderBusiness(playerid))
+    {
+        sendTipMessageEx(playerid, COLOR_GREEN, "=========[Pracownicy Biznesu On-Line]=========");
+        foreach(new i : Player)
+        {
+            if(PlayerInfo[i][pBusinessMember] == PlayerInfo[playerid][pBusinessOwner])
+            {
+                format(string, sizeof(string), "> %s [%d] <", GetNick(i), i); 
+                SendClientMessage(playerid, COLOR_WHITE, string); 
+            }
+        }
+        sendTipMessageEx(playerid, COLOR_GREEN, "=========[Koniec Pracowników On-Line]=========");
+    }else{
+        sendErrorMessage(playerid, "Nie jesteœ liderem biznesu!"); 
+    }
+    return 1;
 }
+
+//end

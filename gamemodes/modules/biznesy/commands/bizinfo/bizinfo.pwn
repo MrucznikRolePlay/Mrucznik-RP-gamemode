@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                 mbizcreate                                                //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  bizinfo                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,22 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Simeone
-// Data utworzenia: 04.02.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_mbizcreate_Impl(playerid, bCost, bName[64])
+
+//-------<[ include ]>-------
+#include "bizinfo_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_bizinfo()
 {
-    if(!isAHeadAdmin(playerid))
-    {
-        noAccessMessage(playerid); 
-        return 1;
-    }
-    CreateMBiz(playerid, bCost, bName); 
-    return 1;
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:bizinfo(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla podstawowe informacje o biznesie.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_bizinfo_Impl(playerid);
+}

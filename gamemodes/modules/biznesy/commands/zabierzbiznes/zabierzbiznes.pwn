@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                               zabierzbiznes                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
+#include "zabierzbiznes_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_zabierzbiznes()
 {
-    command_mbizbuy();
-    command_mbiznesy();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zabierzbiznes(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda, która pozwala zabraæ biznes graczu.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zabierzbiznes_Impl(playerid);
 }

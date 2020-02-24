@@ -28,22 +28,5 @@
 
 //dialogi
 #define DIALOG_BIZ_BUY 6550
-#define MAX_BIZ 200
-
-//Typy (ogólnikowe)
-#define BTYPE_DEFAULT 0
-#define BTYPE_SERVICES 1
-#define BTYPE_INDUSTRY 2 
-
-//Typy (szczegó³owe)
-    //Do TYPU US£UGOWEGO
-#define BTYPE2_DEFAULT 0 
-#define BTYPE2_SHOP 1
-#define BTYPE2_CLOTHESSHOP 2
-#define BTYPE2_CASINO 3
-    //Do TYPU PRZEMYS£OWEGO
-#define BTYPE2_CLOTHES 4
-#define BTYPE2_OIL 5
-
 
 //end

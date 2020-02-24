@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    obiz                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,28 +16,28 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Simeone
+// Data utworzenia: 20.08.2019
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "mbizbuy\mbizbuy.pwn"
-#include "mbiznesy\mbiznesy.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_obiz_Impl(playerid, text[124])
 {
-    command_mbizbuy();
-    command_mbiznesy();
-    
+    new ID_BUSINESS;
+    CorrectPlayerBusiness(playerid);
+    if(GetPlayerBusiness(playerid) == INVALID_BIZ_ID)
+    {
+        sendErrorMessage(playerid, "Nie jesteœ cz³onkiem ¿adnego biznesu!"); 
+        return 1;
+    }
+    new string[256]; 
+    ID_BUSINESS = GetPlayerBusiness(playerid); 
+    format(string, sizeof(string), "%s [%d]: %s", GetNick(playerid), playerid,  text); 
+    SendMessageToBiz(ID_BUSINESS, string, KOLOR_NIEBIESKI, 0);
+	Log(chatLog, INFO, "%s biznes chat OOC: %s", GetPlayerLogName(playerid), text);
+    return 1;
 }
+
+//end

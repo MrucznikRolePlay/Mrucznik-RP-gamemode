@@ -22,34 +22,6 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-enum eBiz {
-	b_Name[64], 
-	b_ownerUID,
-	b_Name_Owner[MAX_PLAYER_NAME], 
-	Float:b_enX,
-	Float:b_enY,
-	Float:b_enZ,
-	Float:b_exX,
-	Float:b_exY,
-	Float:b_exZ,
-	b_int,
-	b_vw,
-	b_pLocal,
-	b_Location[64],
-	b_cost,
-	b_moneyPocket,
-    b_TYPE,
-    b_TYPE2
-};
-new mBiz[MAX_BIZ][eBiz]; 
-
-
-enum interBiz {
-	i_name[64],
-	i_size[32],
-	i_values[4],
-	Float:i_float[3]
-};
 //-----------------<[ Zmienne: ]>-------------------
 new const interiorsPos[][interBiz]={
 	{"Sklep spo¿ywczy", "Ma³y", {18, 5000000, BTYPE_SERVICES, BTYPE2_SHOP},{-25.884498, -185.868988, 1003.546875}},
