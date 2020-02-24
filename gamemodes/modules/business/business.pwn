@@ -131,33 +131,4 @@ CheckPlayerBusiness(playerid)
 	}
 	return 1;
 }
-GetTypeNameBiz(bIDE)
-{
-	new typeName[64];
-	format(typeName, 64, "Brak"); 
-	if(mBiz[bIDE][b_TYPE] == BTYPE_SERVICES)
-	{
-		if(mBiz[bIDE][b_TYPE2] == BTYPE2_SHOP)
-		{
-			format(typeName, sizeof(typeName), "Sklep 24-7"); 
-		}
-		else if(mBiz[bIDE][b_TYPE2] == BTYPE2_CLOTHESSHOP)
-		{
-			format(typeName, sizeof(typeName), "Sklep z ubraniami");
-		}
-		else if(mBiz[bIDE][b_TYPE2] == BTYPE2_CASINO)
-		{
-			format(typeName, sizeof(typeName), "Kasyno");
-		}
-		else if(mBiz[bIDE][b_TYPE2] == BTYPE2_RESTAURANT)
-		{
-			format(typeName, sizeof(typeName), "Restauracja");
-		}
-	}
-	else if(mBiz[bIDE][b_TYPE] == BTYPE_INDUSTRY)
-	{
-		format(typeName, sizeof(typeName), "Przemys³owe coœ"); 
-	}
-	return typeName;
-}
 //end

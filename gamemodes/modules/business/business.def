@@ -31,7 +31,6 @@
 #define DIALOG_BIZ_BUY2 6551
 #define DIALOG_BIZ_BUY3 6552
 #define DIALOG_BIZ_BUYBOX 6553
-#define BIZ_DIALOG_INFO 6554
 #define MAX_BIZ 200
 
 //koszta dodatkowe
@@ -48,7 +47,6 @@
 #define BTYPE2_SHOP 1
 #define BTYPE2_CLOTHESSHOP 2
 #define BTYPE2_CASINO 3
-#define BTYPE2_RESTAURANT 6
     //Do TYPU PRZEMYS£OWEGO
 #define BTYPE2_CLOTHES 4
 #define BTYPE2_OIL 5
