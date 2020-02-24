@@ -93,7 +93,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
                 if(pCruiseSpeed[playerid] < 120) pCruiseSpeed[playerid] += 30;
-                CruiseControl_ShowTXD(playerid);
+                CruiseControl_UpdateTXD(playerid);
                 PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
             }
         }
@@ -102,7 +102,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
                 if(pCruiseSpeed[playerid] > 30) pCruiseSpeed[playerid] -= 30;
-                CruiseControl_ShowTXD(playerid);
+                CruiseControl_UpdateTXD(playerid);
                 PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
             }
         }
@@ -122,9 +122,9 @@ public CruiseControl(playerid)
         {
             SetVehicleVelocity(GetPlayerVehicleID(playerid), vX*0.85, vY*0.85, vZ*0.85);
         }
-        if(pCruiseTXD[playerid] == 3)
+        if(pCruiseTXD[playerid] == 4)
         {
-            CruiseControl_ShowTXD(playerid);
+            CruiseControl_UpdateTXD(playerid);
             pCruiseTXD[playerid] = 0;
         }
     }
@@ -136,20 +136,30 @@ public CruiseControl(playerid)
 
 CruiseControl_HideTXD(playerid)
 {
-    return 1;
+    TextDrawHideForPlayer(playerid, CRUISECONTROL_BG[0]);
+    PlayerTextDrawHide(playerid, CRUISECONTROL_AMOUNT[playerid]);
 }
 
-CruiseControl_ShowTXD(playerid)
+CruiseControl_UpdateTXD(playerid)
 {
     new updatedMaxSpeed = pCruiseSpeed[playerid];
     new string[128];
-    format(string, sizeof(string), "Aktualny limit: %d", updatedMaxSpeed);
-    SendClientMessage(playerid, COLOR_WHITE, string);
+    format(string, sizeof(string), "MAX: %dKM", updatedMaxSpeed);
+    PlayerTextDrawSetString(playerid, CRUISECONTROL_AMOUNT[playerid], string);
+    PlayerTextDrawShow(playerid, CRUISECONTROL_AMOUNT[playerid]);
+}
+
+CruiseControl_ShowTXD(playerid)
+{   
+    TextDrawShowForPlayer(playerid, CRUISECONTROL_BG[0]);
+    PlayerTextDrawSetString(playerid, CRUISECONTROL_AMOUNT[playerid], "_");
+    PlayerTextDrawShow(playerid, CRUISECONTROL_AMOUNT[playerid]);
+    CruiseControl_UpdateTXD(playerid);
 }
 
 CruiseControl_TurnOff(playerid)
 {
-    //CruiseControl_HideTXD(playerid);
+    CruiseControl_HideTXD(playerid);
     KillTimer(GetPVarInt(playerid, "timer_CruiseControl"));
     pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
     pCruiseTXD[playerid] = 0;
