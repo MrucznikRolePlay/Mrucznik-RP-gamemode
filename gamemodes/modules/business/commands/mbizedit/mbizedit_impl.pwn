@@ -59,7 +59,7 @@ command_mbizedit_Impl(playerid, bIDE)
         DestroyBusinessIcon(bIDE);
         DestroyBusiness3DText(bIDE);
         CreateBusinessIcon(bIDE);
-        CreateBusiness3DText(bIDE);
+        CreateBusinessIcon(bIDE);
         SaveBiz(bIDE);
     } 
     else if(bChoiceEdit == BIZ_CHOICE_DODAJ)

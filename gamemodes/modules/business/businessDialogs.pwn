@@ -441,11 +441,6 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 sendErrorMessage(playerid, "Nie masz takiej iloœci gotówki!"); 
                 return 1;
             }
-            if(GetPLocal(playerid) != PLOCAL_INNE_BANK && GetNearBusinessID(playerid) != PlayerInfo[playerid][pBusinessOwner])
-            {
-                sendErrorMessage(playerid, "Aby tego dokonaæ musisz znajdowaæ siê w banku lub w swoim biznesie!"); 
-                return 1;
-            }
             Log(businessCashLog, INFO, "Gracz %s wplacil do sejfu %s kwote %d stary stan %d nowy stan %d",
             GetPlayerLogName(playerid),
             GetBusinessLogName(bIDE),
@@ -474,11 +469,6 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(mBiz[bIDE][b_moneyPocket] < value)
             {
                 sendErrorMessage(playerid, "Twój biznes nie posiada takiej sumy!"); 
-                return 1;
-            }
-            if(GetPLocal(playerid) != PLOCAL_INNE_BANK && GetNearBusinessID(playerid) != PlayerInfo[playerid][pBusinessOwner])
-            {
-                sendErrorMessage(playerid, "Aby tego dokonaæ musisz znajdowaæ siê w banku lub w swoim biznesie!"); 
                 return 1;
             }
             Log(businessCashLog, INFO, "Gracz %s wyplacil z sejfu %s kwote %d stary stan %d nowy stan %d",
