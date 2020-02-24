@@ -104,7 +104,6 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 10.0);
     CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
 	loadedBiz++; 
-	Log(businessLog, INFO, "BusinessGod %s stworzyl biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	return 1;
 }
 CreateBusinessIcon()
@@ -129,7 +128,6 @@ GiveBizToPlayer(playerid, bIDE, bType, bType2)
 	sendTipMessage(playerid, "Zakupi³eœ nowy biznes!");
 	format(string, sizeof(string), "ID [%d] NAME [%s]", bIDE, mBiz[bIDE][b_Location]); 
 	SendClientMessage(playerid, COLOR_RED, string); 
-	Log(businessLog, INFO, "Gracz %s kupil biznes %s", GetPlayerLogName(playerid), GetBusinessLogName(bIDE));
 	return 1;
 }
 IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
@@ -144,16 +142,12 @@ CheckPlayerBusiness(playerid)
 {
 	for(new i; i <= MAX_BIZ; i++)
 	{
-		if(BizExist(i))
+		if(mBiz[i][b_ownerUID] == PlayerInfo[playerid][pUID])
 		{
-			if(mBiz[i][b_ownerUID] == PlayerInfo[playerid][pUID])
-			{
-				PlayerInfo[playerid][pBusinessOwner] = i;
-				sendTipMessage(playerid, "Pomyœlnie przypisano biznes");  
-				break;
-			}
+			PlayerInfo[playerid][pBusinessOwner] = i; 
 		}
 	}
+	return 1;
 }
 GetTypeNameBiz(bIDE)
 {
