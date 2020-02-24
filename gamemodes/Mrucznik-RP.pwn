@@ -2279,7 +2279,6 @@ public OnPlayerSpawn(playerid)
 		PlayerTextDrawSetString(playerid, SN_MESS[playerid], "~y~NR Marcepan Marks: ~w~Zapraszamy na nasza strone www.sannews.com");
 		PlayerTextDrawShow(playerid, SN_MESS[playerid]); 
 	}*/
-	CheckPlayerBusiness(playerid);
 	//SetPlayerSpawn:
 	SetPlayerSpawn(playerid);
 
@@ -2292,11 +2291,7 @@ SetPlayerSpawn(playerid)
 {
 	SetPlayerSpawnPos(playerid);
 	SetPlayerSpawnSkin(playerid);
-	SetPlayerSpawnWeapon(playerid); 
-	if(!gBizSet[playerid])
-	{
-		SetPlayerBusiness(playerid); 
-	}
+	SetPlayerSpawnWeapon(playerid);
 	return 1;
 }
 

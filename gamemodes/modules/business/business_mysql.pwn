@@ -80,7 +80,7 @@ stock SaveBiz(bIDE)
 	format(query, sizeof(query), "UPDATE `mru_biz` SET \
 	`ID`='%d',\
 	`ownerUID`='%d',\
-	`ownerName`='%s',\
+	`ownerName`='%s'\
 	`Name`='%s',\
 	`enX`='%f',\
 	`enY`='%f',\
@@ -113,7 +113,7 @@ stock SaveBiz(bIDE)
 	mBiz[bIDE][b_moneyPocket],
 	bIDE);
 	mysql_query(query);
-	return 0;
+	return 1;
 }
 
 //end
