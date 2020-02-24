@@ -155,7 +155,9 @@ IsPlayerNearBusinessDoor(playerid)//Powoduje wejœcie do biznesu
 			if(IsPlayerInRangeOfPoint(playerid, 4.0, mBiz[i2][b_enX], mBiz[i2][b_enY], mBiz[i2][b_enZ])
 			&& GetPlayerVirtualWorld(playerid) == 0)
 			{
-				if(mBiz[i2][b_vw] == 0)
+				if(mBiz[i2][b_enX] == mBiz[i2][b_exX]
+				&& mBiz[i2][b_enY] == mBiz[i2][b_exY]
+				&& mBiz[i2][b_enX] == mBiz[i2][b_exZ])
 				{
 					sendErrorMessage(playerid, "Ten biznes nie posiada wnêtrza!"); 
 					sendTipMessage(playerid, "Aby skorzystaæ z udogodnieñ biznesu stañ w jego ikonce"); 
