@@ -147,5 +147,6 @@ forward SlideRope(playerid);
 forward closeGate(i, j, playerid);
 
 forward DamagedHP(playerid);
-forward DamagedAP(playerid);
+forward CuffedAction(playerid, cuffedid);
+forward DeathAdminWarning(playerid, killerid, reason) ;
 //EOF

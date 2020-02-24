@@ -3456,7 +3456,6 @@ public SpecEnd(playerid)
 
 public DamagedHP(playerid)
 {
-	SetPVarInt(playerid, "timer_DamagedHP", 1);
 	RemovePlayerAttachedObject(playerid, 2);
 	return 1;
 }
