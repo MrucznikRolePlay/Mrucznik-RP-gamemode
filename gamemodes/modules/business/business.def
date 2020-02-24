@@ -28,14 +28,8 @@
 
 //dialogi
 #define DIALOG_BIZ_BUY 6550
-#define DIALOG_BIZ_BUY2 6551
-#define DIALOG_BIZ_BUY3 6552
-#define DIALOG_BIZ_BUYBOX 6553
 #define MAX_BIZ 200
 
-//koszta dodatkowe
-#define COST_SHOP24 500000//500k
-#define COST_SHOPCLOTHES 750000//750k 
 //Typy (ogólnikowe)
 #define BTYPE_DEFAULT 0
 #define BTYPE_SERVICES 1
@@ -50,8 +44,6 @@
     //Do TYPU PRZEMYS£OWEGO
 #define BTYPE2_CLOTHES 4
 #define BTYPE2_OIL 5
-
-#define INVALID_BUSINESSID 9999
 
 
 //end

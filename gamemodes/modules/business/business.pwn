@@ -43,7 +43,7 @@ stock FreeBizID()
 			return i; 
 		}
 	} 
-	return INVALID_BUSINESSID;
+	return 0;
 }
 stock CreateMBiz(playerid, bCost, bName[64])
 {
@@ -105,30 +105,6 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	CreateDynamic3DTextLabel(mBiz[bIDE][b_Name], 0x008080FF, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 10.0);
     CreateDynamicPickup(1272, 1, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]+0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
 	loadedBiz++; 
-	return 1;
-}
-GiveBizToPlayer(playerid, bIDE, bType, bType2)
-{
-	new string[124]; 
-	mysql_real_escape_string(GetNick(playerid), mBiz[bIDE][b_Name_Owner]); 
-	mBiz[bIDE][b_ownerUID] = PlayerInfo[playerid][pUID]; 
-	mBiz[bIDE][b_moneyPocket] = 0; 
-	mBiz[bIDE][b_TYPE] = bType; 
-	mBiz[bIDE][b_TYPE2] = bType2; 
-	sendTipMessage(playerid, "Zakupi³eœ nowy biznes!");
-	format(string, sizeof(string), "ID [%d] NAME [%s]", bIDE, mBiz[bIDE][b_Location]); 
-	SendClientMessage(playerid, COLOR_RED, string); 
-	return 1;
-}
-CheckPlayerBusiness(playerid)
-{
-	for(new i; i <= MAX_BIZ; i++)
-	{
-		if(mBiz[i][b_ownerUID] == PlayerInfo[playerid][pUID])
-		{
-			PlayerInfo[playerid][pBusinessOwner] = i; 
-		}
-	}
 	return 1;
 }
 //end
