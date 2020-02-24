@@ -88,13 +88,20 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
                 CruiseControl_TurnOn(playerid);
             }
         }
-
-        if(PRESSED(KEY_UP) || PRESSED(KEY_DOWN))
+        else if(PRESSED(KEY_UP))
         {
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
-                if(PRESSED(KEY_DOWN)) if(pCruiseSpeed[playerid] > 30) pCruiseSpeed[playerid] -= 30;
-                else if(PRESSED(KEY_UP)) if(pCruiseSpeed[playerid] < 120) pCruiseSpeed[playerid] += 30;
+                if(pCruiseSpeed[playerid] < 120) pCruiseSpeed[playerid] += 30;
+                CruiseControl_ShowTXD(playerid);
+                PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
+            }
+        }
+        else if(PRESSED(KEY_DOWN))
+        {
+            if(GetPVarInt(playerid, "timer_CruiseControl"))
+            {
+                if(pCruiseSpeed[playerid] > 30) pCruiseSpeed[playerid] -= 30;
                 CruiseControl_ShowTXD(playerid);
                 PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
             }
@@ -108,11 +115,12 @@ public CruiseControl(playerid)
     {
         new Float:vX, Float:vY, Float:vZ;
         pCruiseTXD[playerid]++;
+        GetVehicleVelocity(GetPlayerVehicleID(playerid), vX, vY, vZ);
         new carid = GetPlayerVehicleID(playerid);
         new playerkmh = rower_GetPlayerSpeed(carid);
         if(playerkmh > pCruiseSpeed[playerid])
         {
-            SetVehicleVelocity(GetPlayerVehicleID(playerid), vX*0.8, vY*0.8, vZ*0.8);
+            SetVehicleVelocity(GetPlayerVehicleID(playerid), vX*0.85, vY*0.85, vZ*0.85);
         }
         if(pCruiseTXD[playerid] == 3)
         {
@@ -151,7 +159,7 @@ CruiseControl_TurnOff(playerid)
 CruiseControl_TurnOn(playerid)
 {
     CruiseControl_ShowTXD(playerid);
-    new timer = SetTimerEx("CruiseControl", 300, true, "i", playerid);
+    new timer = SetTimerEx("CruiseControl", 200, true, "i", playerid);
     SetPVarInt(playerid, "timer_CruiseControl", timer);
 }
 Car_AddSlotToQueue(id)
