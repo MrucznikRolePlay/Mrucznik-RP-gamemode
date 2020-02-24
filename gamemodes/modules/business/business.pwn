@@ -110,7 +110,6 @@ stock CreateMBiz(playerid, bCost, bName[64])
 }
 CreateBusinessIcon()
 {
-	new iconsLoaded; 
 	for(new i; i <= MAX_BIZ; i++)
 	{
 		if(iconsLoaded == loadedBiz)
