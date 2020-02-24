@@ -119,14 +119,6 @@ GiveBizToPlayer(playerid, bIDE, bType, bType2)
 	SendClientMessage(playerid, COLOR_RED, string); 
 	return 1;
 }
-IsABusinessGod(playerid)//Pozwala zarz¹dzaæ biznesami
-{
-	if(PlayerInfo[playerid][pAdmin] >= 5000)//Tylko dla H@
-	{
-		return true;
-	}
-	return false; 
-}
 CheckPlayerBusiness(playerid)
 {
 	for(new i; i <= MAX_BIZ; i++)

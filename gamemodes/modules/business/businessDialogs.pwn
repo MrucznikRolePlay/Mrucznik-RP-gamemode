@@ -152,62 +152,6 @@ business_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SetPVarInt(playerid, "BuyBiz_ID", INVALID_BUSINESSID); 
         }
     }
-    else if(dialogid == BIZ_DIALOG_INFO)
-    {
-        if(response)
-        {
-            //Coœ tu ma sie zadziaæ (Timer)
-        }
-    }
-    else if(dialogid == DIALOG_BIZ_ADMINEDIT)
-    {
-        if(response)
-        {
-            switch(listitem)
-            {
-                case 0://Przenieœ wejœcie
-                {
-                    //new choiceTwo = GetPVarInt(playerid, "bizChoice");
-                    SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_PRZENIES); 
-                    sendTipMessage(playerid, "Stañ w miejscu, w którym ma zostaæ przeniesiony biznes i wpisz ponownie komendê.");
-                    sendErrorMessage(playerid, "Pamiêtaj, ¿e wpisanie komendy zmieni automatycznie pozycje!");  
-                    sendTipMessage(playerid, "Jeœli chcesz anulowaæ przenoszenie biznesu wpisz /bizback");
-                }
-                case 1://Dodaj wyjœcie
-                {
-                    SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_DODAJ); 
-                    sendTipMessage(playerid, "Stañ w miejscu, w którym ma powstaæ wyjœcie (interior).");
-                    sendTipMessage(playerid, "Mo¿esz u¿yæ /setvw i /setint do ustawienia INT i VW (pLocal tak¿e)"); 
-                    sendErrorMessage(playerid, "Pamiêtaj, ¿e wpisanie komendy zmieni automatycznie pozycje!");  
-                    sendTipMessage(playerid, "Jeœli chcesz anulowaæ przenoszenie biznesu wpisz /bizback");
-                }
-                case 2://Usuñ biznes
-                {
-                    SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_USUN_BIZ); 
-                    sendTipMessage(playerid, "PotwierdŸ usuniêcie biznesu wpisuj¹c ponownie komendê!"); 
-                    sendTipMessage(playerid, "Jeœli chcesz anulowaæ usuwanie biznesu wpisz /bizback");
-                }
-                case 3://Usuñ w³aœciciela
-                {
-                    SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_USUN_WLAS); 
-                    sendTipMessage(playerid, "PotwierdŸ usuniêcie w³aœciciela biznesu wpisuj¹c ponownie komendê!");
-                    sendErrorMessage(playerid, "Pamiêtaj, ¿e wpisanie komendy usunie automatycznie w³aœciciela!");  
-                    sendTipMessage(playerid, "Jeœli chcesz anulowaæ usuwanie w³aœciciela biznesu wpisz /bizback");
-                }
-                case 4://Wyzeruj pieni¹dze biznesu
-                {
-                    SetPVarInt(playerid, "bizChoice", BIZ_CHOICE_WYZERUJ_KASE); 
-                    sendTipMessage(playerid, "PotwierdŸ wyzerowanie gotówki zebraniej w sejfie biznesu wpisuj¹c komendê ponownie!");
-                    sendErrorMessage(playerid, "Pamiêtaj, ¿e wpisanie komendy usunie automatycznie gotówkê!");  
-                    sendTipMessage(playerid, "Jeœli chcesz anulowaæ usuwanie gotówki biznesu wpisz /bizback");   
-                }
-                case 5://Zmieñ cenê biznesu
-                {
-                    sendTipMessage(playerid, "Ta opcja pojawi siê ju¿ nied³ugo!"); 
-                }
-            }
-        }
-    }
     return 1;
 }
 

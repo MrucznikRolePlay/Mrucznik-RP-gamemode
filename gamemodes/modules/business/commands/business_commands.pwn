@@ -30,10 +30,8 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "bizback\bizback.pwn"
 #include "mbizbuy\mbizbuy.pwn"
 #include "mbizcreate\mbizcreate.pwn"
-#include "mbizedit\mbizedit.pwn"
 #include "mbizinfo\mbizinfo.pwn"
 #include "mbiznesy\mbiznesy.pwn"
 
@@ -41,10 +39,8 @@
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_bizback();
     command_mbizbuy();
     command_mbizcreate();
-    command_mbizedit();
     command_mbizinfo();
     command_mbiznesy();
     
