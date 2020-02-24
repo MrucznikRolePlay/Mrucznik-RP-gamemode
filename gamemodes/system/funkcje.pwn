@@ -12778,6 +12778,35 @@ public CuffedAction(playerid, cuffedid)
 	return 1;
 }
 
+public UnCuffedAction(playerid, cuffedid)
+{
+	new string[128];
+	new giveplayer[MAX_PLAYER_NAME];
+	new sendername[MAX_PLAYER_NAME];
+	GetPlayerName(cuffedid, giveplayer, sizeof(giveplayer));
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+	format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", sendername);
+	SendClientMessage(cuffedid, COLOR_LIGHTBLUE, string);
+	format(string, sizeof(string), "* Rozku³eœ %s.", giveplayer);
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+	GameTextForPlayer(cuffedid, "~g~Rozkuty", 2500, 3);
+
+	//czynnosci
+	TogglePlayerControllable(cuffedid, 1);
+	PlayerCuffed[cuffedid] = 0;
+	zakuty[cuffedid] = 0;
+	SkutyGracz[cuffedid] = 0;
+	uzytekajdanki[cuffedid] = 0;
+	uzytekajdanki[playerid] = 0;
+	PDkuje[playerid] = 0;
+	PDkuje[cuffedid]=0;
+	PlayerInfo[cuffedid][pMuted] = 0;
+	ClearAnimations(cuffedid);
+	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
+	RemovePlayerAttachedObject(cuffedid, 5);
+	return 1;
+}
+
 
 //--------------------------------------------------
 

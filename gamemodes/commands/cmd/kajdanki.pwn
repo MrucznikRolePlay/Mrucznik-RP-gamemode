@@ -81,7 +81,6 @@ YCMD:kajdanki(playerid, params[], help)
 
                                 //czynnoœci
                                 CuffedAction(playerid, giveplayerid);
-                                return 1;
                             }
                             else if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
                             {
@@ -94,36 +93,20 @@ YCMD:kajdanki(playerid, params[], help)
 
                                 //czynnoœci
                                 CuffedAction(playerid, giveplayerid);
-                                return 1;
                             }
-
-                            if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
+                            else
                             {
-                                //Wiadomoœci
-                                format(string, sizeof(string), "* %s dociska do ziemi %s, a nastêpnie zakuwa go w kajdanki.", GetNick(playerid, true), GetNick(giveplayerid, true));
+                                format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", GetNick(playerid, true),GetNick(giveplayerid, true));
                                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                format(string, sizeof(string), "Sku³eœ %s.", GetNick(giveplayerid, true));
-                                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                                sendTipMessageEx(giveplayerid, COLOR_BLUE, "Le¿a³eœ na ziemi - policjant sku³ ciê bez wiêkszego wysi³ku.");
-
-                                //czynnoœci
-                                CuffedAction(playerid, giveplayerid);
-                                return 1;
+                                ShowPlayerDialogEx(giveplayerid, 98, DIALOG_STYLE_MSGBOX, "Aresztowanie", "Policjant chce za³o¿yæ ci kajdanki, jeœli osacza ciê niedu¿a liczba policjantów mo¿esz spróbowaæ siê wyrwaæ\nJednak pamiêtaj jeœli siê wyrwiesz i jesteœ uzbrojony policjant ma prawo ciê zabiæ. \nMo¿esz tak¿e dobrowolnie poddaæ siê policjantom.", "Poddaj siê", "Wyrwij siê");
+                                PDkuje[giveplayerid] = playerid;
+                                //uzytekajdanki[giveplayerid] = 1;
+                                SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
                             }
-
-                            format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", GetNick(playerid, true),GetNick(giveplayerid, true));
-                            ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                            ShowPlayerDialogEx(giveplayerid, 98, DIALOG_STYLE_MSGBOX, "Aresztowanie", "Policjant chce za³o¿yæ ci kajdanki, jeœli osacza ciê niedu¿a liczba policjantów mo¿esz spróbowaæ siê wyrwaæ\nJednak pamiêtaj jeœli siê wyrwiesz i jesteœ uzbrojony policjant ma prawo ciê zabiæ. \nMo¿esz tak¿e dobrowolnie poddaæ siê policjantom.", "Poddaj siê", "Wyrwij siê");
-                            PDkuje[giveplayerid] = playerid;
-                            //uzytekajdanki[giveplayerid] = 1;
-                            SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
-                            return 1;
                         }
                         else
                         {
-                            new str[32];
-                            valstr(str, giveplayerid);
-                            RunCommand(playerid, "/rozkuj",  str);
+                            UnCuffedAction(playerid, giveplayerid);
                         }
                     } else
                     {
@@ -135,9 +118,7 @@ YCMD:kajdanki(playerid, params[], help)
                 }
             } else
             {
-                new str[32];
-                valstr(str, giveplayerid);
-                RunCommand(playerid, "/rozkuj",  str);
+                UnCuffedAction(playerid, giveplayerid);
                 return 1;
             }
         } else

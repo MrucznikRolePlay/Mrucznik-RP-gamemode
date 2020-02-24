@@ -30,11 +30,7 @@
 
 YCMD:rozkuj(playerid, params[], help)
 {
-	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
+	if(IsPlayerConnected(playerid))
     {
 		if(gTeam[playerid] == 2 || IsACop(playerid) || IsABOR(playerid))
 		{
@@ -53,25 +49,7 @@ YCMD:rozkuj(playerid, params[], help)
 					    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz odkuæ samego siebie!"); return 1; }
 						if(PlayerCuffed[giveplayerid] == 2 || zakuty[giveplayerid] >= 1)
 						{
-						    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-							GetPlayerName(playerid, sendername, sizeof(sendername));
-						    format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", sendername);
-							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string), "* Rozku³eœ %s.", giveplayer);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							GameTextForPlayer(giveplayerid, "~g~Rozkuty", 2500, 3);
-							TogglePlayerControllable(giveplayerid, 1);
-							PlayerCuffed[giveplayerid] = 0;
-							zakuty[giveplayerid] = 0;
-							SkutyGracz[giveplayerid] = 0;
-                            uzytekajdanki[giveplayerid] = 0;
-                            uzytekajdanki[playerid] = 0;
-							PDkuje[playerid] = 0;
-							PDkuje[giveplayerid]=0;
-							PlayerInfo[giveplayerid][pMuted] = 0;
-                            ClearAnimations(giveplayerid);
-        					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
-							RemovePlayerAttachedObject(giveplayerid, 5);
+							UnCuffedAction(playerid, giveplayerid);
 						}
 						else
 						{
