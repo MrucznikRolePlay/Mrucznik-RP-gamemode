@@ -106,15 +106,6 @@ stock CreateMBiz(playerid, bCost, bName[64])
 	loadedBiz++; 
 	return 1;
 }
-CreateBusinessIcon()
-{
-	for(new i; i <= MAX_BIZ; i++)
-	{
-		CreateDynamic3DTextLabel(mBiz[i][b_Name], 0x008080FF, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]+0.4, 10.0);
-    	CreateDynamicPickup(1272, 1, mBiz[i][b_enX], mBiz[i][b_enY], mBiz[i][b_enZ]-0.4, 0, 0, -1, STREAMER_PICKUP_SD); 
-	}
-	return 1;
-}
 GiveBizToPlayer(playerid, bIDE, bType, bType2)
 {
 	new string[124]; 

@@ -33,7 +33,7 @@ command_mgotobiz_Impl(playerid, bIDE)
     }
     if(PlayerInfo[playerid][pAdmin] >= 1)
     {
-        SetPlayerPos(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]);
+        SetPlayerPosEx(playerid, mBiz[bIDE][b_enX], mBiz[bIDE][b_enY], mBiz[bIDE][b_enZ]);
         format(string, sizeof(string), "Zosta³eœ teleportowany do biznesu %s", mBiz[bIDE][b_Name]); 
         sendTipMessage(playerid, string); 
     }
