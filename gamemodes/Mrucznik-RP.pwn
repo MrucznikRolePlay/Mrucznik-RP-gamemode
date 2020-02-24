@@ -263,6 +263,7 @@ public OnGameModeInit()
     systempozarow_init();
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
+	LoadBiz();
 	//LoadActors(); 	
 	//-------<[ actors ]>-------
 	PushActors(); 
@@ -338,6 +339,7 @@ public OnGameModeInit()
 	graffiti_LoadMySQL();
 	//discordconnect
 	DiscordConnectInit();
+
 
 	//AFK timer
 	for(new i; i<MAX_PLAYERS; i++)

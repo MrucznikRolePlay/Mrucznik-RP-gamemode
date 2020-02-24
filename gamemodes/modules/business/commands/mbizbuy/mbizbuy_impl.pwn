@@ -26,7 +26,7 @@
 command_mbizbuy_Impl(playerid)
 {
     new string[124]; 
-    if(PlayerInfo[playerid][pLevel] < LVL_TO_BUY_BIZ)
+    if(PlayerInfo[playerid][pLVL] < LVL_TO_BUY_BIZ)
     {
         format(string, sizeof(string), "Nie mo¿esz zakupiæ biznesu, musisz posiadaæ %d LVL!", LVL_TO_BUY_BIZ);
         sendErrorMessage(playerid, string); 
