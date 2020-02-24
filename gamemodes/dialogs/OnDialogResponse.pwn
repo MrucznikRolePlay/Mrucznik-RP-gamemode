@@ -12,11 +12,7 @@ IsDialogProtected(dialogid)
 
 CheckDialogId(playerid, dialogid)
 {
-    if(dialogid < 0)
-	{
-		Log(serverLog, WARNING, "B³êdne ID dialogu dla [gracz %d] dialogid - %d przypisany %d", playerid, dialogid,iddialog[playerid]);
-		return 0; 
-	} 
+    if(dialogid < 0) return 0;
     if(dialogid != iddialog[playerid])
     {
         if(dialogid > 10000 && dialogid < 10100) return 0;
