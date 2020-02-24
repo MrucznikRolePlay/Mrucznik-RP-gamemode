@@ -92,7 +92,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
         {
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
-                if(pCruiseSpeed[playerid] < 120) pCruiseSpeed[playerid] += 30;
+                if(pCruiseSpeed[playerid] < 120) pCruiseSpeed[playerid] += 10;
                 CruiseControl_UpdateTXD(playerid);
                 PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
             }
@@ -101,7 +101,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
         {
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
-                if(pCruiseSpeed[playerid] > 30) pCruiseSpeed[playerid] -= 30;
+                if(pCruiseSpeed[playerid] > 30) pCruiseSpeed[playerid] -= 10;
                 CruiseControl_UpdateTXD(playerid);
                 PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
             }
