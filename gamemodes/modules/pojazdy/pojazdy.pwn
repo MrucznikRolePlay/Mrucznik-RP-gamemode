@@ -64,8 +64,8 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	{
         new rower_carid;
         rower_carid = GetPlayerVehicleID(playerid);
-        if(GetVehicleModel(rower_carid) == 509 || GetVehicleModel(rower_carid) == 481 || GetVehicleModel(rower_carid) == 510)
-		{
+        if(IsARower(rower_carid))
+        {
 			if(RELEASED(KEY_ACTION))
 	        {
 		  		new Float:Velocity[3];
@@ -78,13 +78,18 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	    }
         if(PRESSED(KEY_ACTION))
         {
-            if(GetPVarInt(playerid, "timer_CruiseControl"))
+            new carid;
+            carid = GetPlayerVehicleID(playerid);
+            if(!IsARower(carid) && !IsABoat(carid) && !IsAPlane(carid) && PlayerInfo[playerid][pCruiseController] == 1)
             {
-                CruiseControl_TurnOff(playerid);
-            }
-            else
-            {
-                CruiseControl_TurnOn(playerid);
+                if(GetPVarInt(playerid, "timer_CruiseControl"))
+                {
+                    CruiseControl_TurnOff(playerid);
+                }
+                else
+                {
+                    CruiseControl_TurnOn(playerid);
+                }
             }
         }
         else if(PRESSED(KEY_UP))
