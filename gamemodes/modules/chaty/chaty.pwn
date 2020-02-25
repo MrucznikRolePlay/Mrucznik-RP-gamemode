@@ -76,6 +76,7 @@ CheckEmoji(const text[])
 	regex_replace(emojiMessFix, ":s+", "{C2A2DA}**krzywi siê**{FFFFFF}");
 	regex_replace(emojiMessFix, ":3+", "{C2A2DA}**uœmiecha siê**{FFFFFF}");
 	regex_replace(emojiMessFix, "o_o", "{C2A2DA}**dziwi siê**{FFFFFF}");
+	regex_replace(emojiMessFix, "O_o", "{C2A2DA}**dziwi siê**{FFFFFF}");
 	return emojiMessFix;
 }
 CorrectICForm(const text[])
