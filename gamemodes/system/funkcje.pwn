@@ -746,10 +746,7 @@ public PlayerFixRadio2()
 public ZestawNaprawczy_CountDown(playerid, vehicleid)
 {
 	TogglePlayerControllable(playerid, 0);
-	if(ZestawNaprawczy_Timer[playerid] == 3)
-	{
-		MRP_DoAnimation(playerid,"@bomba");
-	}
+	MRP_DoAnimation(playerid,"@bomba");
 	if (ZestawNaprawczy_Timer[playerid] > 0)
 	{
 		GameTextForPlayer(playerid, ZestawNaprawczyText[ZestawNaprawczy_Timer[playerid]-1], 2500, 6);
