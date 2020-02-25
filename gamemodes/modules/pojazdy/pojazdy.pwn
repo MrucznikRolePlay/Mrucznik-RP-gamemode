@@ -92,21 +92,17 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
                 }
             }
         }
-        else if(PRESSED(KEY_UP))
+        else if(PRESSED(KEY_FIRE))
         {
-            SendClientMessage(playerid, COLOR_WHITE, "if pressed keyup");
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
-                SendClientMessage(playerid, COLOR_WHITE, "checked if timer");
                 CruiseControl_SetSpeed(playerid, 10, true);
             }
         }
         else if(PRESSED(KEY_DOWN))
         {
-            SendClientMessage(playerid, COLOR_WHITE, "if pressed keydown");
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
-                SendClientMessage(playerid, COLOR_WHITE, "checked if timer");
                 CruiseControl_SetSpeed(playerid, 10, false);
             }
         }

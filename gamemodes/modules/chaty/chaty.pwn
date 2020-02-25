@@ -156,7 +156,7 @@ sprawdzWulgaryzmy(text[], playerid)
 	return valueWulgaryzmy;
 }
 PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true)
-{ //
+{ 
 	new string[256]; 
 	if(strlen(jakMowi) <= 1)
 	{
