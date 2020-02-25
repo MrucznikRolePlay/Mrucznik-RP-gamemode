@@ -743,6 +743,25 @@ public PlayerFixRadio2()
 		}
 	}
 }
+public ZestawNaprawczy_CountDown(playerid, vehicleid)
+{
+	TogglePlayerControllable(playerid, 0);
+	if (ZestawNaprawczy_Timer[playerid] > 0)
+	{
+		GameTextForPlayer(playerid, ZestawNaprawczyText[ZestawNaprawczy_Timer[playerid]-1], 2500, 6);
+		ZestawNaprawczy_Timer[playerid]--;
+	}
+	else
+	{
+		MRP_DoAnimation(playerid,"@bomba");
+		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
+		ZestawNaprawczy_Timer[playerid] = 15;
+		RepairVehicle(vehicleid);
+        SetVehicleHealth(vehicleid, 750);
+		TogglePlayerControllable(playerid, 1);
+		DeletePVar(playerid, "timer_ZestawNaprawczy");
+	}
+}
 
 public CountDown()
 {

@@ -79,6 +79,7 @@ forward Dopalaj(playerid); // Dopalacz auta
 forward StopMusic();
 forward PlayerFixRadio2();
 forward CountDown();
+forward ZestawNaprawczy_CountDown(playerid, vehicleid);
 forward EditObj(playerid, obj); //Timer do edycji obiektów
 forward PaintballEnded();
 forward obiekty_timer(wartosc);

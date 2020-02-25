@@ -1107,6 +1107,24 @@ new PobijText[31][31] ={
 "WYGRALES"//31
 };
 
+new ZestawNaprawczyText[15][20] = {
+	"Naprawa za ~g~1",
+	"Naprawa za ~g~2",
+	"Naprawa za ~g~3",
+	"Naprawa za ~g~4",
+	"Naprawa za ~g~5",
+	"Naprawa za ~g~6",
+	"Naprawa za ~g~7",
+	"Naprawa za ~g~8",
+	"Naprawa za ~g~9",
+	"Naprawa za ~g~10",
+	"Naprawa za ~g~11",
+	"Naprawa za ~g~12",
+	"Naprawa za ~g~13",
+	"Naprawa za ~g~14",
+	"Naprawa za ~g~15"
+};
+
 new Count = 20;
 new CountText[20][20] ={
 "respawn za ~g~1",
