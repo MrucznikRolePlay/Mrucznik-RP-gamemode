@@ -746,7 +746,7 @@ public PlayerFixRadio2()
 public ZestawNaprawczy_CountDown(playerid, vehicleid)
 {
 	TogglePlayerControllable(playerid, 0);
-	MRP_DoAnimation(playerid,"@bomba");
+	ApplyAnimation(playerid, "CAMERA", "camstnd_to_camcrch", 4.1, 0, 1, 1, 1, 1, 1);
 	if (ZestawNaprawczy_Timer[playerid] > 0)
 	{
 		GameTextForPlayer(playerid, ZestawNaprawczyText[ZestawNaprawczy_Timer[playerid]-1], 2500, 6);
