@@ -3164,7 +3164,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							PlayerInfo[playerid][pCruiseController] = 1;
 							ZabierzKase(playerid, 35000);
-							format(string, sizeof(string), "~r~-$%d", 15000);
+							format(string, sizeof(string), "~r~-$%d", 35000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Kupi³eœ ogranicznik prêdkoœci do auta.");
