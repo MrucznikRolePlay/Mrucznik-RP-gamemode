@@ -3635,6 +3635,10 @@ IsAtGasStation(playerid)
 		{//LV
 		    return 1;
 		}
+		else if(PlayerToPoint(12.0,playerid,-1471.86, 1864.23, 32.63))
+		{//lv pustynia
+			return 1;
+		}
 		else if(PlayerToPoint(8.0,playerid,-1130.1172,-1018.0840,129.2188))
 		{//¯u¿el
 		    return 1;
