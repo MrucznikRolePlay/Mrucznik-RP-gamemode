@@ -163,12 +163,14 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 		return 1;
 	}
 	text[0] = toupper(text[0]);
+	new ostatnialitera = strlen(text)-1;
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		if(strlen(text) < 78)
 		{
 			
-			format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s. ))", GetNick(playerid), playerid, text);
+			if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s ))", GetNick(playerid), playerid, text);
+			else  format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s. ))", GetNick(playerid), playerid, text);
 			ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
 		}
@@ -185,7 +187,8 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", GetNick(playerid), playerid, text);
 				ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
-				format(string, sizeof(string), "{C0C0C0}>>(([..] %s. ))", text2);
+				if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "{C0C0C0}>>(([..] %s ))", text2);
+				else format(string, sizeof(string), "{C0C0C0}>>(([..] %s. ))", text2);
 				ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			}
 		}
@@ -199,7 +202,8 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			return 1;
 		}
-		format(string, sizeof(string), "%s %s: %s.", GetNick(playerid, true), jakMowi, text);
+		if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "%s %s: %s", GetNick(playerid, true), jakMowi, text);
+		else format(string, sizeof(string), "%s %s: %s.", GetNick(playerid, true), jakMowi, text);
 		ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
@@ -214,14 +218,16 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 
 			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid, true), jakMowi, text);
 			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-			format(string, sizeof(string), "[.] %s.", text2);
+			if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "[.] %s", text2);
+			else format(string, sizeof(string), "[.] %s.", text2);
 			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
 		}
 	}
 	if(chatBooble == true)
 	{
-		format(string, sizeof(string), "%s: %s.", jakMowi, text);
+		if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "%s: %s", jakMowi, text);
+		else format(string, sizeof(string), "%s: %s.", jakMowi, text);
 		if(strfind(jakMowi, "szepcze", true, 0) != -1) SetPlayerChatBubble(playerid,string,COLOR_FADE1,5.0,8000);
 		else SetPlayerChatBubble(playerid,string,COLOR_FADE1,20.0,8000);
 	}	
@@ -233,12 +239,13 @@ PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 	if(IsPlayerConnected(playerid))
 	{
 		text[0] = toupper(text[0]);
+		new ostatnialitera = strlen(text)-1;
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
 		{
 			if(strlen(text) < 78)
 			{
-				
-				format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s. ))", GetNick(playerid), playerid, text);
+				if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s ))", GetNick(playerid), playerid, text);
+				else format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s. ))", GetNick(playerid), playerid, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				SetPlayerChatBubble(playerid,text,COLOR_FADE1,10.0,8000);
 			}
@@ -255,7 +262,8 @@ PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 					format(string, sizeof(string), "{FF6A6A}@ %s {C0C0C0}[%d] Czat OOC: (( %s [..] ))", GetNick(playerid), playerid, text);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
-					format(string, sizeof(string), "{C0C0C0}>>(([..] %s. ))", text2);
+					if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "{C0C0C0}>>(([..] %s ))", text2);
+					else format(string, sizeof(string), "{C0C0C0}>>(([..] %s. ))", text2);
 					ProxDetector(13.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 				}
 			}
@@ -263,7 +271,8 @@ PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 		}
 		if(strlen(text) < 78)
         {
-            format(string, sizeof(string), "%s [%d] Czat OOC: (( %s. ))", GetNick(playerid), playerid, text);
+            if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "%s [%d] Czat OOC: (( %s ))", GetNick(playerid), playerid, text);
+			else format(string, sizeof(string), "%s [%d] Czat OOC: (( %s. ))", GetNick(playerid), playerid, text);
             ProxDetector(rangeTalk, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
         }
         else
@@ -279,11 +288,13 @@ PlayerTalkOOC(playerid, text[], Float:rangeTalk)
                 format(string, sizeof(string), "%s [%d] Czat OOC: (( %s [.]", GetNick(playerid), playerid, text);
                 ProxDetector(rangeTalk, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
 
-                format(string, sizeof(string), "[.] %s. ))", text2);
+                if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "[.] %s ))", text2);
+				else format(string, sizeof(string), "[.] %s. ))", text2);
                 ProxDetector(rangeTalk, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
             }
         }
-	    format(string, sizeof(string), "(( %s Napisa³: %s. ))", GetNick(playerid), text);
+	    if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0 || strfind(text[ostatnialitera], ":", true, 0)  != -1)  != -1) format(string, sizeof(string), "(( %s Napisa³: %s ))", GetNick(playerid), text);
+		else format(string, sizeof(string), "(( %s Napisa³: %s. ))", GetNick(playerid), text);
 		SetPlayerChatBubble(playerid,string,COLOR_FADE1,25.0,8000);
 	    Log(chatLog, INFO, "%s OOC: %s", GetPlayerLogName(playerid), text);
 	}
