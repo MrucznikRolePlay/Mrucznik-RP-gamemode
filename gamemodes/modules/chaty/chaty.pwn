@@ -74,8 +74,8 @@ CheckEmoji(const text[])
 	regex_replace(emojiMessFix, ":\\*+", "{C2A2DA}**Puszcza ca³usa**{FFFFFF}");
 	regex_replace(emojiMessFix, ":v+", "{C2A2DA}**K³apie dziobem**{FFFFFF}");
 	regex_replace(emojiMessFix, ":s+", "{C2A2DA}**Krzywi siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":3+", "{C2A2DA}**Robi minê ala funia**{FFFFFF}");
-	regex_replace(emojiMessFix, "o_o", "{C2A2DA}**Robi okulary z d³oni**{FFFFFF}");
+	regex_replace(emojiMessFix, ":3+", "{C2A2DA}**Uœmiecha siê**{FFFFFF}");
+	regex_replace(emojiMessFix, "o_o", "{C2A2DA}**Dziwi siê**{FFFFFF}");
 	return emojiMessFix;
 }
 CorrectICForm(const text[])
