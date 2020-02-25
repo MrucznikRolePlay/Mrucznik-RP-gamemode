@@ -162,7 +162,7 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 		sendErrorMessage(playerid, "B³¹d! Zbyt krótka wartoœæ 'jakMowi'"); 
 		return 1;
 	}
-	
+	text[0] = toupper(text[0]);
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		if(strlen(text) < 78)
@@ -232,7 +232,7 @@ PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 	new string[256];
 	if(IsPlayerConnected(playerid))
 	{
-
+		text[0] = toupper(text[0]);
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
 		{
 			if(strlen(text) < 78)
