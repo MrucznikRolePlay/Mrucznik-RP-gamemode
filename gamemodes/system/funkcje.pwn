@@ -756,6 +756,8 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	{
 		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
+		ClearAnimations(playerid);
+	    SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
 		ZestawNaprawczy_Timer[playerid] = 15;
 		RepairVehicle(vehicleid);
         SetVehicleHealth(vehicleid, 750);
