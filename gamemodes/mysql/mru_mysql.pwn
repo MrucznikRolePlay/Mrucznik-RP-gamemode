@@ -183,6 +183,20 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
         Log(mysqlLog, ERROR, "MySQL:: %s - b³¹d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
         return 0;
     }
+
+	new maska_nick[32];
+	if(GetPVarString(playerid, "maska_nick", maska_nick, 32))
+	{
+		foreach(new i : Player)
+		{
+			ShowPlayerNameTagForPlayer(i, playerid, 1);
+		}
+		DestroyDynamic3DTextLabel(HiddenPlayerName[playerid]);
+		SetPlayerName(playerid, maska_nick);
+		SetRPName(playerid);
+		format(PlayerInfo[playerid][pNick], 32, "%s", maska_nick);
+		DeletePVar(playerid, "maska_nick");
+	}
 	
 	format(query, sizeof(query), "UPDATE `mru_konta` SET \
 	`Nick`='%s',\

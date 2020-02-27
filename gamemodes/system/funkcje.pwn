@@ -4931,7 +4931,7 @@ ShowStats(playerid,targetid)
 		new Float:shealth = PlayerInfo[targetid][pSHealth];
 		new Float:health;
 		new name[MAX_PLAYER_NAME];
-		GetPlayerName(targetid, name, sizeof(name));
+		if(!GetPVarString(targetid, "maska_nick", name, MAX_PLAYER_NAME)) GetPlayerName(targetid, name, sizeof(name));
 		GetPlayerHealth(targetid,health);
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
