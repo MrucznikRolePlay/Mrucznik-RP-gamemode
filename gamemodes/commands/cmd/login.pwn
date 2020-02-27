@@ -38,11 +38,36 @@ YCMD:login(playerid, params[], help)
 		{
 			if(!sscanf(params, "k<fix>", playa))
 			{
+				if(IsPlayerConnected(playa))
+				{
+					sendErrorMessage(playerid, "Gracz nie jest zalogowany.");
+					return 1;
+				}
 				self = false;
 			}
 		}
 
-		if(self == false) playerid = playa;
+		if(self == false)
+		{
+			new string[144];
+			new sendername[MAX_PLAYER_NAME];
+			new giveplayer[MAX_PLAYER_NAME];
+			new Float:slx, Float:sly, Float:slz;
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+			GetPlayerPos(playa, slx, sly, slz);
+			PlayerPlaySound(playa, 1130, slx, sly, slz+5);
+			Log(punishmentLog, INFO, "Admin %s u¿y³ (/login) i wylogowa³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
+			format(string, sizeof(string), "AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",sendername, giveplayer);
+			ABroadCast(COLOR_LIGHTRED,string,1);
+			format(string, sizeof(string), "Zosta³eœ wylogowany przez administratora %s", sendername);
+			SendClientMessage(playa, COLOR_PANICRED, string);
+			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			{
+				iloscInne[playerid] = iloscInne[playerid]+1;
+			}
+			playerid = playa;
+		}
 		//wiadomoœci
 		new reString[144];
 		format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: /login).", GetNick(playerid));
