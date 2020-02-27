@@ -1496,8 +1496,7 @@ public OnPlayerDisconnect(playerid, reason)
     }
     //
 	//Zapis statystyk:
-	PlayerInfo[playerid][pPodPW] = 0; // wy³¹czanie /inwigilacja
-    MruMySQL_SaveAccount(playerid, false, true);
+	MruMySQL_SaveAccount(playerid, false, true);
 
     if(GetPVarInt(playerid, "active_ticket") != 0)
         Support_ClearTicket(GetPVarInt(playerid, "active_ticket")-1);

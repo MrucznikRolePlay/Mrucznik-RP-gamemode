@@ -34,7 +34,7 @@ YCMD:login(playerid, params[], help)
     {
 		new bool:self = true;
 		new playa;
-		if(PlayerInfo[playerid][pAdmin] >= 150 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0)
 		{
 			if(!sscanf(params, "k<fix>", playa))
 			{
