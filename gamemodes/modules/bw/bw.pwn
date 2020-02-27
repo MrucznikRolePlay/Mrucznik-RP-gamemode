@@ -250,7 +250,7 @@ BWTimer(playerid)
 			format(string, sizeof(string), "* Otrzyma³eœ rachunek w wysokoœci %d$ za hospitalizacjê.", HOSPITALIZATION_COST);
 			SendClientMessage(i, COLOR_LIGHTBLUE, string);
 			ZabierzKase(i, HOSPITALIZATION_COST);
-			ZdejmijBW(i, 5000);
+			ZdejmijBW(i);
 			GameTextForPlayer(i, "~n~~n~~g~~h~Obudziles sie", 5000, 5);
 			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê! {FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
 			SendClientMessage(i, COLOR_NEWS, string);

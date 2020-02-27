@@ -13881,7 +13881,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				PlayerInfo[id][pHealthPacks]--;
 				pobity[playerid] = 0;
-				ZdejmijBW(playerid, 4500);
+				ZdejmijBW(playerid, 6000);
 				SetPlayerHealth(playerid, HEALTH_PACK_HP);
 			}
 		}

@@ -1773,6 +1773,25 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	    ShowPlayerFadeScreenToBlank(playerid, 20, 255, 255, 255, 255);
 		SetPlayerDrunkLevel(playerid, 3000);
 	}
+	else
+	{
+		new Float:HP;
+		GetPlayerHealth(playerid, HP);
+		amount = amount / 2;
+		if(weaponid == 24) SetPlayerHealth(playerid, HP-amount);//DesertEagle
+		if(weaponid == 22) SetPlayerHealth(playerid, HP-amount);//Colt45
+		if(weaponid == 23) SetPlayerHealth(playerid, HP-amount);//SilencedColt
+		if(weaponid == 31) SetPlayerHealth(playerid, HP-amount);//M4
+		if(weaponid == 30) SetPlayerHealth(playerid, HP-amount);//AK
+		if(weaponid == 29) SetPlayerHealth(playerid, HP-amount);//MP5
+		if(weaponid == 34) SetPlayerHealth(playerid, HP-amount);//SniperRifle
+		if(weaponid == 33) SetPlayerHealth(playerid, HP-amount);//CountryRifle
+		if(weaponid == 25) SetPlayerHealth(playerid, HP-amount);//PumpShotgun
+		if(weaponid == 27) SetPlayerHealth(playerid, HP-amount);//Spaz12
+		//SOUND
+		if(issuerid != INVALID_PLAYER_ID) PlayerPlaySound(issuerid,17802,0.0,0.0,0.0), PlayerPlaySound(playerid,17802,0.0,0.0,0.0);
+		
+	}
 
 	new Float:armour;
 	GetPlayerArmour(playerid, armour);
