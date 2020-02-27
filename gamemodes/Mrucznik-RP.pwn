@@ -1406,7 +1406,26 @@ public OnPlayerDisconnect(playerid, reason)
 	//kajdanki
 	if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
 	{
-		OdkujKajdanki(playerid);
+		UnCuffedAction(PDkuje[playerid], playerid);
+	}
+
+	if(SkutyGracz[playerid] != 0)
+	{
+		UnCuffedAction(playerid, SkutyGracz[playerid]);
+	}
+
+	if(GetPVarInt(playerid, "ma_worek"))
+	{
+		DeletePVar(GetPVarInt(playerid, "ma_worek"), "uzyl_worek");
+		DeletePVar(playerid, "ma_worek");
+		UnHave_Worek(playerid);
+	}
+
+	if(GetPVarInt(playerid, "uzyl_worek"))
+	{
+		DeletePVar(GetPVarInt(playerid, "uzyl_worek"), "ma_worek");
+		UnHave_Worek(GetPVarInt(playerid, "uzyl_worek"));
+		DeletePVar(playerid, "uzyl_worek");
 	}
 
     if(GetPVarInt(playerid, "kostka"))
@@ -1563,13 +1582,6 @@ public OnPlayerDisconnect(playerid, reason)
 	        KoniecWyscigu(-1);
 	    }
     }
-
-    if(SkutyGracz[playerid] != 0)
-	{
-	    PDkuje[SkutyGracz[playerid]] = 0;
-	    zakuty[SkutyGracz[playerid]] = 0;
-	    SkutyGracz[playerid] = 0;
-	}
 
     if(HireCar[playerid] != 0)
     {
@@ -1884,13 +1896,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 				//kajdanki
 				if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
 				{
-					OdkujKajdanki(playerid);
+					UnCuffedAction(PDkuje[playerid], playerid);
 				}
 				if(SkutyGracz[playerid] != 0)
 				{
-					PDkuje[SkutyGracz[playerid]] = 0;
-					zakuty[SkutyGracz[playerid]] = 0;
-					SkutyGracz[playerid] = 0;
+					UnCuffedAction(playerid, SkutyGracz[playerid]);
 				}
 				if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 				{

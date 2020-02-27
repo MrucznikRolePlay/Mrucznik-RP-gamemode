@@ -140,9 +140,8 @@ new PlayerText:TXDSTATS_Linia_03[MAX_PLAYERS];
 new PlayerText:TXDSTATS_Linia_04[MAX_PLAYERS];
 new PlayerText:TXDSTATS_ZnakWodny[MAX_PLAYERS];
 
-
-
-
+new Text:TXD_Worek;
+new blackmap;
 
 //Oil 16.09
 new Text:OilTXD_BG[2];
@@ -260,6 +259,19 @@ LoadTXD()
     TextDrawSetPreviewModel(TXD_Info, 19131);
     TextDrawSetPreviewRot(TXD_Info, 0.000000, 90.000000, 90.000000, 1.000000);
     TextDrawSetSelectable(TXD_Info, 1);
+
+	TXD_Worek = TextDrawCreate(-20.000000,2.000000,"|");
+	TextDrawUseBox(TXD_Worek,1);
+	TextDrawBoxColor(TXD_Worek,0x000000ff);
+	TextDrawTextSize(TXD_Worek,660.000000,22.000000);
+	TextDrawAlignment(TXD_Worek,0);
+	TextDrawBackgroundColor(TXD_Worek,0x000000ff);
+	TextDrawFont(TXD_Worek,3);
+	TextDrawLetterSize(TXD_Worek,1.000000,52.200000);
+	TextDrawColor(TXD_Worek,0x000000ff);
+	TextDrawSetOutline(TXD_Worek,1);
+	TextDrawSetProportional(TXD_Worek,1);
+	TextDrawSetShadow(TXD_Worek,1);
 }
 
 LoadingShow(playerid)
@@ -1412,6 +1424,8 @@ ZoneTXD_Load()
     TextDrawFont(ZoneTXD[3], 1);
     TextDrawSetProportional(ZoneTXD[3], 1);
     TextDrawSetSelectable(ZoneTXD[3], true);
+
+	blackmap = GangZoneCreate(-3000.0,-3000.0,3000.0,3000.0);
 }
 
 /*stock Speedo_Load()

@@ -541,6 +541,18 @@ Taxi_ShowHUD(playerid)
     PlayerTextDrawShow(playerid, TAXI_COST[playerid]);
 }
 
+stock Have_Worek(playerid)
+{
+    TextDrawShowForPlayer(playerid, TXD_Worek);
+    GangZoneShowForPlayer(playerid, blackmap, 255);
+}
+
+stock UnHave_Worek(playerid)
+{
+    TextDrawHideForPlayer(playerid, TXD_Worek);
+    GangZoneHideForPlayer(playerid, blackmap);
+}
+
 GetPlayerFraction(playerid)
 {
     if(PlayerInfo[playerid][pMember] == 0) return PlayerInfo[playerid][pLider];
@@ -1030,18 +1042,6 @@ public naczasbicie(playerid, playerid_atak){
 public UzyteKajdany(playerid){
 uzytekajdanki[playerid] = 0;
 return 1;
-}
-
-OdkujKajdanki(playerid)
-{
-	if(PDkuje[playerid] > 0)
-	{
-		new giveplayerid = PDkuje[playerid];
-		PDkuje[giveplayerid] = 0;
-		uzytekajdanki[giveplayerid] = 0;
-	}
-	PDkuje[playerid] = 0;
-	uzytekajdanki[playerid] = 0;
 }
 
 public spamujewl(playerid){
