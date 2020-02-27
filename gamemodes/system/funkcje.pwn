@@ -743,6 +743,28 @@ public PlayerFixRadio2()
 		}
 	}
 }
+public ZestawNaprawczy_CountDown(playerid, vehicleid)
+{
+	TogglePlayerControllable(playerid, 0);
+	ApplyAnimation(playerid, "CAMERA", "camstnd_to_camcrch", 4.1, 0, 1, 1, 1, 1, 1);
+	if (ZestawNaprawczy_Timer[playerid] > 0)
+	{
+		GameTextForPlayer(playerid, ZestawNaprawczyText[ZestawNaprawczy_Timer[playerid]-1], 2500, 6);
+		ZestawNaprawczy_Timer[playerid]--;
+	}
+	else
+	{
+		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
+		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
+		ClearAnimations(playerid);
+	    SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
+		ZestawNaprawczy_Timer[playerid] = 15;
+		RepairVehicle(vehicleid);
+        SetVehicleHealth(vehicleid, 750);
+		TogglePlayerControllable(playerid, 1);
+		DeletePVar(playerid, "timer_ZestawNaprawczy");
+	}
+}
 
 public CountDown()
 {
@@ -3611,6 +3633,10 @@ IsAtGasStation(playerid)
 		else if(PlayerToPoint(8.0,playerid,2113.7390,920.1079,10.5255) || PlayerToPoint(6.0,playerid,-1327.7218,2678.8723,50.0625))
 		{//LV
 		    return 1;
+		}
+		else if(PlayerToPoint(12.0,playerid,-1471.86, 1864.23, 32.63))
+		{//lv pustynia
+			return 1;
 		}
 		else if(PlayerToPoint(8.0,playerid,-1130.1172,-1018.0840,129.2188))
 		{//¯u¿el

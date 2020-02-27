@@ -47,6 +47,9 @@ new PlayerText:TextOferta1[MAX_PLAYERS];
 new Text:TAXI_BG[2];
 new PlayerText:TAXI_DIST[MAX_PLAYERS];
 new PlayerText:TAXI_COST[MAX_PLAYERS];
+
+//TXD tempomat
+new PlayerText:CRUISECONTROL_AMOUNT[MAX_PLAYERS];
 //TXD   Stanowe - Textdrawy keypad
 new Text:NG_GateTD[8];
 //25.07 stefy
@@ -1049,6 +1052,17 @@ LoadTextDraws(playerid)
     PlayerTextDrawSetShadow(playerid, TAXI_COST[playerid], 1);
     PlayerTextDrawSetSelectable(playerid, TAXI_COST[playerid], 0);
 
+	CRUISECONTROL_AMOUNT[playerid] = CreatePlayerTextDraw(playerid, 320.000000, 77.000000, "0KM");
+    PlayerTextDrawAlignment(playerid, CRUISECONTROL_AMOUNT[playerid], 2);
+    PlayerTextDrawBackgroundColor(playerid, CRUISECONTROL_AMOUNT[playerid], 255);
+    PlayerTextDrawFont(playerid, CRUISECONTROL_AMOUNT[playerid], 2);
+    PlayerTextDrawLetterSize(playerid, CRUISECONTROL_AMOUNT[playerid], 0.500000, 1.600000);
+    PlayerTextDrawColor(playerid, CRUISECONTROL_AMOUNT[playerid], -1);
+    PlayerTextDrawSetOutline(playerid, CRUISECONTROL_AMOUNT[playerid], 0);
+    PlayerTextDrawSetProportional(playerid, CRUISECONTROL_AMOUNT[playerid], 1);
+    PlayerTextDrawSetShadow(playerid, CRUISECONTROL_AMOUNT[playerid], 1);
+    PlayerTextDrawSetSelectable(playerid, CRUISECONTROL_AMOUNT[playerid], 0);
+
     Speedo_PlayerLoad(playerid);
 
     TextInformacyjny[playerid] = CreatePlayerTextDraw(playerid, 510.000000, 300.000000, "");
@@ -1094,7 +1108,7 @@ UnLoadTextDraws(playerid)
     PlayerTextDrawDestroy(playerid, TAXI_DIST[playerid]);
     PlayerTextDrawDestroy(playerid, TAXI_COST[playerid]);
     //PlayerTextDrawDestroy(playerid, Speedo_GPS[playerid]);
-
+	PlayerTextDrawDestroy(playerid, CRUISECONTROL_AMOUNT[playerid]);
     Speedo_PlayerUnload(playerid);
     ZonePTXD_Unload(playerid);
 	return 1;

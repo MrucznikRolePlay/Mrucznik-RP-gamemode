@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                  pojazdy                                                  //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ naprawpojazd ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,23 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Autor: werem
+// Data utworzenia: 25.02.2020
 
-//
+// Opis:
+/*
 
-//------------------<[ Enumy: ]>--------------------
-//-----------------<[ Zmienne: ]>-------------------
-new Car_SlotQueue[1024];
-new Rower_timerSKOK[MAX_PLAYERS];
-new Rower_timerSZYBKOSC[MAX_PLAYERS];
-
-new pCruiseSpeed[MAX_PLAYERS];
-new pCruiseTXD[MAX_PLAYERS] = 0;
+*/
 
 
-//------------------<[ Forwardy: ]>--------------------
-forward rower_skoksprawdz(playerid, Float:vehz, carid);
-forward rower_sprawdzanie(playerid, carid);
-forward CruiseControl(playerid);
-//end
+// Notatki skryptera:
+/*
+	
+*/
+YCMD:naprawpojazd(playerid, params[], help)
+{
+    new vehicleid = GetClosestCar(playerid, 2.0);
+    new Float:health;
+    new string[128];
+    GetVehicleHealth(vehicleid, health);
+    if(vehicleid == -1) return SendClientMessage(playerid, COLOR_RED, "Nie znaleziono aut w pobli¿u.");
+    if(health >= 400) return SendClientMessage(playerid, COLOR_RED, "Auto nie wymaga naprawy!(<40hp)");
+    if(GetPlayerState(playerid) == 1)
+    {
+        format(string, sizeof(string), "* %s naprawia auto z u¿yciem podrêcznego zestawu.", GetNick(playerid));
+		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+        new timer = SetTimerEx("ZestawNaprawczy_CountDown", 1000, true, "ii", playerid, vehicleid);
+    	SetPVarInt(playerid, "timer_ZestawNaprawczy", timer);
+        SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, (15 * 1000));
+    }
+    else SendClientMessage(playerid, COLOR_RED, "Musisz wyjsæ z auta.");
+    
+    return 1;
+}

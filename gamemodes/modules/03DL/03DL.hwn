@@ -56,6 +56,8 @@ enum eSkinInfo {
 new const ShopSkins[][eSkinInfo] = {
     {1, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_1.png
     {2, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_2.png
+    {4, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_4.png
+    {5, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_5.png
     {10, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_10.png
     {11, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_11.png
     {12, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_12.png
@@ -90,6 +92,7 @@ new const ShopSkins[][eSkinInfo] = {
     {43, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_43.png
     {44, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_44.png
     {45, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_45.png
+    {47, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_47.png
     {49, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_49.png
     {50, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_50.png
     {51, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_51.png

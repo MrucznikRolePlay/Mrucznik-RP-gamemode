@@ -286,6 +286,7 @@
 #include "cmd/muzyczka.pwn"
 #include "cmd/namierz.pwn"
 #include "cmd/napraw.pwn"
+#include "cmd/naprawpojazd.pwn"
 #include "cmd/nastepnylevel.pwn"
 #include "cmd/naucz.pwn"
 #include "cmd/nazywo.pwn"
