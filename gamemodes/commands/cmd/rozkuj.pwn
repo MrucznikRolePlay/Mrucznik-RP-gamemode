@@ -54,20 +54,17 @@ YCMD:rozkuj(playerid, params[], help)
 						else
 						{
 						    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest skuty !");
-						    return 1;
 						}
 					}
 					else
 					{
 					    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
-					    return 1;
 					}
 				}
 			}
 			else
 			{
 			    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-			    return 1;
 			}
 		}
 		else
