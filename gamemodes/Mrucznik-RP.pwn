@@ -2088,10 +2088,14 @@ public OnPlayerDeath(playerid, killerid, reason)
 							}
 						}
 
+						SetPVarInt(playerid, "bw-reason", reason);
 						if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))
 						{
-							SetPVarInt(playerid, "bw-reason", reason);
 							return NadajRanny(playerid, 0, true);
+						}
+						else
+						{
+							return NadajRanny(playerid, INJURY_TIME_EXCEPTION, true);
 						}
 					}
 				}
