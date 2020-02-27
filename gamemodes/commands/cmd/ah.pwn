@@ -108,7 +108,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 150)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*150* ADMIN *** /inwigilacja");
+		SendClientMessage(playerid, COLOR_GRAD4,"*150* ADMIN *** /inwigilacja /login");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 200)
 	{

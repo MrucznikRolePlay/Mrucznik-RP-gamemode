@@ -5258,9 +5258,6 @@ public OnPlayerRequestSpawn(playerid)
 }
 public OnPlayerRequestClass(playerid, classid)
 {
-	if(PlayerInfo[playerid][pSkin] == 0)
-		PlayerInfo[playerid][pSkin] = 252;
-
 	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 
 	if(gPlayerLogged[playerid] != 1)
