@@ -47,7 +47,20 @@ YCMD:setvw(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pNewAP] >= 1)
+		{
+			if(gracz == playerid)
+			{
+				SetPlayerVirtualWorld(gracz, intid);
+				format(string, sizeof(string), "Ustawi³eœ sobie virtualworld nr %d.", intid);
+				SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
+			}
+			else
+			{
+				sendTipMessage(playerid, "Mo¿esz ustawiæ virtualworld tylko sobie!");
+			}
+		}
+		else if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerVirtualWorld(gracz, intid);
 			format(string, sizeof(string), "Ustawi³eœ %s virtualworld nr %d.", GetNick(gracz), intid);
