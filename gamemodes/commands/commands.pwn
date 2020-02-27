@@ -259,6 +259,7 @@
 #include "cmd/loadinfo.pwn"
 #include "cmd/lock.pwn"
 #include "cmd/lockint.pwn"
+#include "cmd/login.pwn"
 #include "cmd/losowostworzdom.pwn"
 #include "cmd/losowypozar.pwn"
 #include "cmd/lot.pwn"
