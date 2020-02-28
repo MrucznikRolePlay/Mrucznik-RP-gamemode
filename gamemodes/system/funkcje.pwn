@@ -760,6 +760,14 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	new Float:pos[3];
 	new string[128];
 	GetVehiclePos(vehicleid, pos[0],pos[1],pos[2]);
+	if(GetVehicleSpeed(vehicleid) > 10)
+	{
+		GameTextForPlayer(playerid, "~r~Anulowano. Poruszono pojazdem.", 2500, 6);
+		ZestawNaprawczy_Timer[playerid] = 30;
+		ZestawNaprawczy_Warning[playerid] = 0;
+		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
+		DeletePVar(playerid, "timer_ZestawNaprawczy");
+	}
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{
 		GameTextForPlayer(playerid, "~r~Anulowano.", 2500, 6);

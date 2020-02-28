@@ -117,7 +117,7 @@ public CruiseControl(playerid)
         pCruiseTXD[playerid]++;
         GetVehicleVelocity(GetPlayerVehicleID(playerid), vX, vY, vZ);
         new carid = GetPlayerVehicleID(playerid);
-        new playerkmh = rower_GetPlayerSpeed(carid);
+        new playerkmh = GetVehicleSpeed(carid);
         if(playerkmh > pCruiseSpeed[playerid])
         {
             SetVehicleVelocity(GetPlayerVehicleID(playerid), vX*0.9, vY*0.9, vZ);
@@ -887,7 +887,7 @@ ShowCarEditDialog(playerid)
     return 1;
 }
 
-stock rower_GetPlayerSpeed(carid)
+stock GetVehicleSpeed(carid)
 {
     new Float:x,Float:y,Float:z,Float:speed,final_speed;
     GetVehicleVelocity(carid,x,y,z);
