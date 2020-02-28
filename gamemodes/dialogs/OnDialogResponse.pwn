@@ -3176,6 +3176,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
 					}
+					case 16:
+					{
+						if (kaska[playerid] >= 30000 )
+						{
+							if(PlayerInfo[playerid][pFixKit] <= 5)
+							{
+								PlayerInfo[playerid][pFixKit]++;
+								ZabierzKase(playerid, 30000);
+								format(string, sizeof(string), "~r~-$%d", 30000);
+								GameTextForPlayer(playerid, string, 5000, 1);
+								PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+								format(string, sizeof(string), "Kupi³eœ zestaw do naprawy aut!");
+								SendClientMessage(playerid, COLOR_GRAD4, string);
+								return 1;
+							}
+							else
+							{
+								SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz kupiæ maksymalnie 5 zestawów!");
+							}
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
+						}
+					}
 				}
 			}
 		}
