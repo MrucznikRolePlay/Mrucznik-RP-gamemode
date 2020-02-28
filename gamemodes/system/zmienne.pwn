@@ -1314,7 +1314,8 @@ ZerujZmienne(playerid)
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "Brak");
 	PlayerInfo[playerid][pPodPW] = 0;
 	PlayerInfo[playerid][pCruiseController] = 0;
-	ZestawNaprawczy_Timer[playerid] = 15;
+	PlayerInfo[playerid][pFixKit] = 0;
+	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;

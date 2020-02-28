@@ -763,7 +763,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{
 		GameTextForPlayer(playerid, "~r~Anulowano.", 2500, 6);
-		ZestawNaprawczy_Timer[playerid] = 15;
+		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
 		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 		DeletePVar(playerid, "timer_ZestawNaprawczy");
@@ -772,21 +772,23 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	{
 		if (IsPlayerInRangeOfPoint(playerid, 3.0, pos[0], pos[1], pos[2]))
 		{
-			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Pozosta³o do koñca naprawy: %ds", ZestawNaprawczy_Timer[playerid]);
+			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Pozostalo %ds", ZestawNaprawczy_Timer[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
 			SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, 1050);
 			ZestawNaprawczy_Timer[playerid]--;
+			ZestawNaprawczy_Warning[playerid] = 0;
 		}
 		else if(IsPlayerInRangeOfPoint(playerid, 10.0, pos[0], pos[1], pos[2]))
 		{
-			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~r~PodejdŸ do auta! %ds", 8-ZestawNaprawczy_Warning[playerid]);
+			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~r~Podejdz do auta! %ds", 8-ZestawNaprawczy_Warning[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
 			ZestawNaprawczy_Warning[playerid]++;
 		}
 		else
 		{
 			GameTextForPlayer(playerid, "~r~Anulowano.", 2500, 6);
-			ZestawNaprawczy_Timer[playerid] = 15;
+			ZestawNaprawczy_Timer[playerid] = 30;
+			ZestawNaprawczy_Warning[playerid] = 0;
 			KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 			DeletePVar(playerid, "timer_ZestawNaprawczy");
 		}
@@ -795,7 +797,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	{
 		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
-		ZestawNaprawczy_Timer[playerid] = 15;
+		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
 		RepairVehicle(vehicleid);
         SetVehicleHealth(vehicleid, 1000);

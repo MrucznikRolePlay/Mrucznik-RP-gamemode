@@ -1453,7 +1453,8 @@ enum pInfo
 	pUniform,
 	pAJreason[MAX_AJ_REASON],
 	pPodPW,
-	pCruiseController
+	pCruiseController,
+	pFixKit
 };
 enum StringData
 {
