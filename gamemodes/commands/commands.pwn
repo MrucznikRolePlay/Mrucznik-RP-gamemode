@@ -26,6 +26,8 @@
 #include "cmd/admini.pwn"
 #include "cmd/adminstats.pwn"
 #include "cmd/ah.pwn"
+#include "cmd/akceptujnaprawe.pwn"
+#include "cmd/akceptujtankowanie.pwn"
 #include "cmd/alarm.pwn"
 #include "cmd/alkomat.pwn"
 #include "cmd/ann.pwn"
@@ -942,7 +944,9 @@ static Aliases()
 	Command_AddAltNamed("megafon", "megaphone");
 	Command_AddAltNamed("megafon", "m");
 
-
+	//skróty akceptowania
+	Command_AddAltNamed("akceptujnaprawe", "an");
+	Command_AddAltNamed("akceptujtankowanie", "at");
 	//mi
 	Command_AddAltNamed("mi", "deathwarning");
 	Command_AddAltNamed("mi", "warningdeath");
