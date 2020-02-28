@@ -757,23 +757,48 @@ public PlayerFixRadio2()
 }
 public ZestawNaprawczy_CountDown(playerid, vehicleid)
 {
-	TogglePlayerControllable(playerid, 0);
-	ApplyAnimation(playerid, "CAMERA", "camstnd_to_camcrch", 4.1, 0, 1, 1, 1, 1, 1);
+	new Float:pos[3];
+	new string[128];
+	GetVehiclePos(vehicleid, pos[0],pos[1],pos[2]);
+	if(ZestawNaprawczy_Warning[playerid] == 8)
+	{
+		GameTextForPlayer(playerid, "~r~Anulowano.", 2500, 6);
+		ZestawNaprawczy_Timer[playerid] = 15;
+		ZestawNaprawczy_Warning[playerid] = 0;
+		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
+		DeletePVar(playerid, "timer_ZestawNaprawczy");
+	}
 	if (ZestawNaprawczy_Timer[playerid] > 0)
 	{
-		GameTextForPlayer(playerid, ZestawNaprawczyText[ZestawNaprawczy_Timer[playerid]-1], 2500, 6);
-		ZestawNaprawczy_Timer[playerid]--;
+		if (IsPlayerInRangeOfPoint(playerid, 3.0, pos[0], pos[1], pos[2]))
+		{
+			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Pozosta³o do koñca naprawy: %ds", ZestawNaprawczy_Timer[playerid]);
+			GameTextForPlayer(playerid, string, 2500, 3);
+			SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, 1050);
+			ZestawNaprawczy_Timer[playerid]--;
+		}
+		else if(IsPlayerInRangeOfPoint(playerid, 10.0, pos[0], pos[1], pos[2]))
+		{
+			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~r~PodejdŸ do auta! %ds", 8-ZestawNaprawczy_Warning[playerid]);
+			GameTextForPlayer(playerid, string, 2500, 3);
+			ZestawNaprawczy_Warning[playerid]++;
+		}
+		else
+		{
+			GameTextForPlayer(playerid, "~r~Anulowano.", 2500, 6);
+			ZestawNaprawczy_Timer[playerid] = 15;
+			KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
+			DeletePVar(playerid, "timer_ZestawNaprawczy");
+		}
 	}
 	else
 	{
 		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
-		ClearAnimations(playerid);
-	    SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
 		ZestawNaprawczy_Timer[playerid] = 15;
+		ZestawNaprawczy_Warning[playerid] = 0;
 		RepairVehicle(vehicleid);
-        SetVehicleHealth(vehicleid, 750);
-		TogglePlayerControllable(playerid, 1);
+        SetVehicleHealth(vehicleid, 1000);
 		DeletePVar(playerid, "timer_ZestawNaprawczy");
 	}
 }

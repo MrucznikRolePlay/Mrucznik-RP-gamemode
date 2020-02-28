@@ -575,6 +575,7 @@ new roleta36_b;
 new open = 0;
 
 new ZestawNaprawczy_Timer[MAX_PLAYERS];
+new ZestawNaprawczy_Warning[MAX_PLAYERS];
 
 //Zmienne ZOPTYMALIZOWANE: xD
 new StaryCzas[MAX_PLAYERS];
@@ -1314,6 +1315,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pPodPW] = 0;
 	PlayerInfo[playerid][pCruiseController] = 0;
 	ZestawNaprawczy_Timer[playerid] = 15;
+	ZestawNaprawczy_Warning[playerid] = 0;
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;

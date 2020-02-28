@@ -32,18 +32,14 @@
 YCMD:naprawpojazd(playerid, params[], help)
 {
     new vehicleid = GetClosestCar(playerid, 2.0);
-    new Float:health;
     new string[128];
-    GetVehicleHealth(vehicleid, health);
     if(vehicleid == -1) return SendClientMessage(playerid, COLOR_RED, "Nie znaleziono aut w pobli¿u.");
-    if(health >= 400) return SendClientMessage(playerid, COLOR_RED, "Auto nie wymaga naprawy!(<40hp)");
     if(GetPlayerState(playerid) == 1)
     {
         format(string, sizeof(string), "* %s naprawia auto z u¿yciem podrêcznego zestawu.", GetNick(playerid));
 		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         new timer = SetTimerEx("ZestawNaprawczy_CountDown", 1000, true, "ii", playerid, vehicleid);
     	SetPVarInt(playerid, "timer_ZestawNaprawczy", timer);
-        SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, (15 * 1000));
     }
     else SendClientMessage(playerid, COLOR_RED, "Musisz wyjsæ z auta.");
     
