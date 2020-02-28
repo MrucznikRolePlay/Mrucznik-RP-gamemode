@@ -140,7 +140,8 @@ CruiseControl_Static_TurnOn(playerid, type, entered = 0)
     //pozniej trzeba dodaæ nowy typ w pojazdy_timers.pwn
     if(entered = 0) //w³¹cza po 1.5 sekundy aby nie crashowa³o timera.
     {
-        SetTimerEx("CruiseControl_Static_TurnOn", 1500, false, "iii", playerid, type, 1);
+        entered = 1;
+        SetTimerEx("CruiseControl_Static_TurnOn", 1500, false, "iii", playerid, type, entered);
     }
     else
     {
