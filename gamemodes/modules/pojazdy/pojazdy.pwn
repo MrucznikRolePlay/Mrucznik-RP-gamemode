@@ -135,13 +135,20 @@ CruiseControl_ShowTXD(playerid)
     CruiseControl_UpdateTXD(playerid);
 }
 
-CruiseControl_Static_TurnOn(playerid, type)
+CruiseControl_Static_TurnOn(playerid, type, bool:Entered = false)
 {
     //type: 0 - dla graczy z 1lvl, 1 - dla rowerów
     //pozniej trzeba dodaæ nowy typ w pojazdy_timers.pwn
+    if(Entered == false) //w³¹cza po 1.5 sekundy aby nie crashowa³o timera.
+    {
+        Entered = true;
+        SetTimerEx("CruiseControl_Static_TurnOn", 1500, false, "iib", playerid, type, Entered);
+        return 1;
+    }
     CruiseControl_ShowTXD(playerid);
     new timer = SetTimerEx("CruiseControl_Static", 200, true, "ii", playerid, type);
     SetPVarInt(playerid, "timer_StaticCruiseControl", timer);
+    return 1;
 }
 
 CruiseControl_Static_TurnOff(playerid)
