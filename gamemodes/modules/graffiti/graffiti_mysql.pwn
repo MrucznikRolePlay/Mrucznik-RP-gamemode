@@ -51,7 +51,7 @@ stock graffiti_LoadMySQL(id = -1)
 			if (mysql_num_rows())
 			{
 				mysql_fetch_row_format(query, "|");
-				sscanf(query, "p<|>s[64]s[128]dffffff",
+				sscanf(query, "p<|>s[32]s[128]dffffff",
 				GraffitiInfo[i][pOwner],
 				GraffitiInfo[i][grafText],
 				GraffitiInfo[i][gColor],
