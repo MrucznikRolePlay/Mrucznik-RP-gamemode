@@ -33,7 +33,7 @@ hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
   		CruiseControl_Static_TurnOn(playerid, 1);
  	}
-    if(PlayerInfo[playerid][pLevel] == 1)
+    if(PlayerInfo[playerid][pLevel] == 1 && !IsARower(vehicleid))
     {
         CruiseControl_Static_TurnOn(playerid, 0);
     }
@@ -138,17 +138,18 @@ CruiseControl_Static_TurnOn(playerid, type, entered = 0)
 {
     //type: 0 - dla graczy z 1lvl, 1 - dla rowerów
     //pozniej trzeba dodaæ nowy typ w pojazdy_timers.pwn
-    if(entered = 0) //w³¹cza po 1.5 sekundy aby nie crashowa³o timera.
+    if(entered == 1)
     {
-        entered = 1;
-        SetTimerEx("CruiseControl_Static_TurnOn", 1500, false, "iii", playerid, type, entered);
-    }
-    else
-    {
-        if(type == 0) SendClientMessage(playerid, COLOR_RED, "Zosta³a ci na³o¿ona blokada prêdkoœci do 50km/h jako nowy gracz.");
+        if(type == 0) SendClientMessage(playerid, COLOR_YELLOW, "Zosta³a ci na³o¿ona blokada prêdkoœci do 50km/h jako nowy gracz.");
         CruiseControl_ShowTXD(playerid);
         new timer = SetTimerEx("CruiseControl_Static", 200, true, "ii", playerid, type);
         SetPVarInt(playerid, "timer_StaticCruiseControl", timer);
+    }
+    else
+    {
+        //w³¹cza po 3.5 sekundy aby nie crashowa³o timera.
+        entered = 1;
+        SetTimerEx("CruiseControl_Static_TurnOn", 3500, false, "iii", playerid, type, entered);
     }
 }
 
