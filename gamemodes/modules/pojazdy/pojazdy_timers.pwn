@@ -51,6 +51,17 @@ public CruiseControl(playerid)
     }
 }
 
+public CruiseControl_Static_TurnOn(playerid, type)
+{
+    //type: 0 - dla graczy z 1lvl, 1 - dla rowerów
+    //pozniej trzeba dodaæ nowy typ w pojazdy_timers.pwn
+    if(type == 0) SendClientMessage(playerid, COLOR_YELLOW, "Zosta³a ci na³o¿ona blokada prêdkoœci do 50km/h jako nowy gracz.");
+    CruiseControl_ShowTXD(playerid);
+    new timer = SetTimerEx("CruiseControl_Static", 200, true, "ii", playerid, type);
+    SetPVarInt(playerid, "timer_StaticCruiseControl", timer);
+}
+
+
 public CruiseControl_Static(playerid, type)
 {
 	if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)
