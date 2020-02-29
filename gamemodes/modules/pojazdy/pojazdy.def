@@ -23,5 +23,7 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-
+#define DEFAULT_CRUISESPEED 50
+#define CruiseControlStatic_NewPlayer 50
+#define CruiseControlStatic_Bike 40
 //end

@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------[ sprzedajbilet ]---------------------------------------------//
+//-----------------------------------------------[ naprawpojazd ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: werem
+// Data utworzenia: 25.02.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -27,22 +29,23 @@
 /*
 	
 */
-
-YCMD:sprzedajbilet(playerid, params[], help)
+YCMD:naprawpojazd(playerid, params[], help)
 {
-	if(GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
-	{
-		new id;
-		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /sprzedajbilet [id]");
-		if(!IsPlayerConnected(id) ) return sendErrorMessage(playerid, "Ten gracz nie jest zalogowanay");
-		new Float:x, Float:y, Float:z, tmp[128];
-		GetPlayerPos(id, x, y, z);
-		if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
-		format(tmp, sizeof tmp, "Proponujesz %s kupno biletu do Ibiza Club!", GetNick(id));
-		SendClientMessage(playerid, -1, tmp);
-		format(tmp, sizeof tmp, "%s proponuje Ci kupno biletu do Ibiza Club za %d$", GetNick(playerid), IbizaBilet);
-		SetPVarInt(id, "IbizaBiletSell", playerid);
-		ShowPlayerDialogEx(id, DIALOG_IBIZA_BILET, DIALOG_STYLE_MSGBOX, "Ibiza Club", tmp, "Kup", "Anuluj");
-	}
-	return 1;
+    if(PlayerInfo[playerid][pFixKit] == 0) return SendClientMessage(playerid, COLOR_RED, "Nie masz ¿adnych zestawów do naprawy aut.");
+    new vehicleid = GetClosestCar(playerid, 2.0);
+    new string[128];
+    if(vehicleid == -1) return SendClientMessage(playerid, COLOR_RED, "Nie znaleziono aut w pobli¿u.");
+    if(GetPVarInt(playerid, "timer_ZestawNaprawczy")) return SendClientMessage(playerid, COLOR_RED, "Naprawiasz ju¿ pojazd.");
+    if(GetPlayerState(playerid) == 1)
+    {
+        format(string, sizeof(string), "* %s naprawia auto z u¿yciem podrêcznego zestawu.", GetNick(playerid));
+        ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+        format(string, sizeof(string), "Rozpoczêto naprawê pojazdu. ID: [%d]", vehicleid);
+        SendClientMessage(playerid, COLOR_RED, string);
+        new timer = SetTimerEx("ZestawNaprawczy_CountDown", 1000, true, "ii", playerid, vehicleid);
+    	SetPVarInt(playerid, "timer_ZestawNaprawczy", timer);
+    }
+    else SendClientMessage(playerid, COLOR_RED, "Musisz wyjsæ z auta.");
+    
+    return 1;
 }

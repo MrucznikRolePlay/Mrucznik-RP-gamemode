@@ -311,7 +311,7 @@ new bool:ZoneAttacker[MAX_PLAYERS];
 new bool:ZoneDefender[MAX_PLAYERS];
 new ZoneProtect[MAX_ZONES];
 new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
-new ZONE_DISABLED = 1;
+new ZONE_DISABLED = 0;
 new ZONE_DEF_TIME = 900000;
 //21.07 PayDay fix
 /*new TRAIN_Checkpoints[6][3] = {
@@ -405,6 +405,10 @@ new PlayerText:gPrevButtonTextDrawId[MAX_PLAYERS];
 new PlayerText:gSelectionItems[MAX_PLAYERS][SELECTION_ITEMS];
 new gSelectionItemsTag[MAX_PLAYERS][SELECTION_ITEMS];
 new gItemAt[MAX_PLAYERS];
+
+// KOORDYNATY IBIZY DLA AUDIO STREAM
+new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 1000.0};  //pos[3] dist, vw
+new IBIZA_Stream[128];
 
 new Barier[MAX_FRAC][10];
 new Text3D:BarText[MAX_FRAC][10];
@@ -570,6 +574,9 @@ new roleta35_b;
 new roleta36_b;
 new open = 0;
 
+new ZestawNaprawczy_Timer[MAX_PLAYERS];
+new ZestawNaprawczy_Warning[MAX_PLAYERS];
+
 //Zmienne ZOPTYMALIZOWANE: xD
 new StaryCzas[MAX_PLAYERS];
 new SafeTime[MAX_PLAYERS];
@@ -727,7 +734,6 @@ new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
 //BW
 new PlayerRequestMedic[MAX_PLAYERS];
-new PlayerKilledByAdmin[MAX_PLAYERS];
 
 //---------------
 new RepairOffer[MAX_PLAYERS];
@@ -1061,8 +1067,7 @@ new playerSeeSpec[MAX_PLAYERS];
 new gRO[MAX_PLAYERS];
 
 new isNaked[MAX_PLAYERS]; 
-//new Text3D:HiddenPlayerName[MAX_PLAYERS]; //na maske moze kiedys
-
+new Text3D:HiddenPlayerName[MAX_PLAYERS];
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1308,10 +1313,13 @@ ZerujZmienne(playerid)
 	//Sandal
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "Brak");
 	PlayerInfo[playerid][pPodPW] = 0;
+	PlayerInfo[playerid][pCruiseController] = 0;
+	PlayerInfo[playerid][pFixKit] = 0;
+	ZestawNaprawczy_Timer[playerid] = 30;
+	ZestawNaprawczy_Warning[playerid] = 0;
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
-	PlayerKilledByAdmin[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
 
 	PlayerInfo[playerid][pCzystka] = 0;

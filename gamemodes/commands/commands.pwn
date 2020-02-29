@@ -26,6 +26,8 @@
 #include "cmd/admini.pwn"
 #include "cmd/adminstats.pwn"
 #include "cmd/ah.pwn"
+#include "cmd/akceptujnaprawe.pwn"
+#include "cmd/akceptujtankowanie.pwn"
 #include "cmd/alarm.pwn"
 #include "cmd/alkomat.pwn"
 #include "cmd/ann.pwn"
@@ -250,7 +252,6 @@
 #include "cmd/kupsamoloty.pwn"
 #include "cmd/kupskin.pwn"
 #include "cmd/kurs.pwn"
-#include "cmd/kurtka.pwn"
 #include "cmd/laptop.pwn"
 #include "cmd/licencje.pwn"
 #include "cmd/liderpomoc.pwn"
@@ -260,6 +261,7 @@
 #include "cmd/loadinfo.pwn"
 #include "cmd/lock.pwn"
 #include "cmd/lockint.pwn"
+#include "cmd/login.pwn"
 #include "cmd/losowostworzdom.pwn"
 #include "cmd/losowypozar.pwn"
 #include "cmd/lot.pwn"
@@ -287,6 +289,7 @@
 #include "cmd/muzyczka.pwn"
 #include "cmd/namierz.pwn"
 #include "cmd/napraw.pwn"
+#include "cmd/naprawpojazd.pwn"
 #include "cmd/nastepnylevel.pwn"
 #include "cmd/naucz.pwn"
 #include "cmd/nazywo.pwn"
@@ -403,6 +406,7 @@
 #include "cmd/selldom.pwn"
 #include "cmd/setac.pwn"
 #include "cmd/setarmor.pwn"
+#include "cmd/setcarhp.pwn"
 #include "cmd/setcarint.pwn"
 #include "cmd/setcarvw.pwn"
 #include "cmd/setint.pwn"
@@ -448,7 +452,6 @@
 #include "cmd/sprzedajalkohol.pwn"
 #include "cmd/sprzedajauto.pwn"
 #include "cmd/sprzedajapteczka.pwn"
-#include "cmd/sprzedajbilet.pwn"
 #include "cmd/sprzedajbron.pwn"
 #include "cmd/sprzedajmaterialy.pwn"
 #include "cmd/sprzedajnarkotyki.pwn"
@@ -554,6 +557,7 @@
 #include "cmd/wobiekt.pwn"
 #include "cmd/wplac.pwn"
 #include "cmd/wrzuc.pwn"
+#include "cmd/worek.pwn"
 #include "cmd/wybieralka.pwn"
 #include "cmd/wyczysc.pwn"
 #include "cmd/wyjdz.pwn"
@@ -941,7 +945,9 @@ static Aliases()
 	Command_AddAltNamed("megafon", "megaphone");
 	Command_AddAltNamed("megafon", "m");
 
-
+	//skróty akceptowania
+	Command_AddAltNamed("akceptujnaprawe", "an");
+	Command_AddAltNamed("akceptujtankowanie", "at");
 	//mi
 	Command_AddAltNamed("mi", "deathwarning");
 	Command_AddAltNamed("mi", "warningdeath");

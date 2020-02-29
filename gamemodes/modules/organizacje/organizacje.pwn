@@ -58,12 +58,12 @@ organizacje_wepchnijSekta(playerid, giveplayerid)
     {
         if(GetDistanceBetweenPlayers(playerid,giveplayerid) > 3) return sendErrorMessage(playerid, "Gracz nie jest w pobli¿u.");
 		if(SektaUwieziony[giveplayerid] == 1) return sendErrorMessage(playerid, "Gracz jest ju¿ uwiêziony.");
-        SetPlayerPos(giveplayerid, 867.1572, -1111.2548, 5.8253);
-        SetPlayerVirtualWorld(giveplayerid, 20);
         format(var, sizeof(var), "* %s og³uszy³(a) i wrzuci³(a) do celi %s.", GetNick(playerid) ,GetNick(giveplayerid));
         ProxDetector(20.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		SektaUwieziony[giveplayerid] = 1;
-		Wchodzenie(giveplayerid);
+        Wchodzenie(giveplayerid);
+        SetPlayerPos(giveplayerid, 867.1572, -1111.2548, 5.8253);
+        SetPlayerVirtualWorld(giveplayerid, 20);
     }
     else
     {

@@ -35,7 +35,6 @@
 #include "lkiz\lkiz.pwn"
 #include "opis\opis.pwn"
 #include "usunopis\usunopis.pwn"
-#include "zmiany\zmiany.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -46,6 +45,5 @@ hook OnGameModeInit()
     command_lkiz();
     command_opis();
     command_usunopis();
-    command_zmiany();
     
 }

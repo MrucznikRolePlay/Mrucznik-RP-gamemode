@@ -39,9 +39,9 @@ YCMD:sprzedajapteczke(playerid, params[], help)
 		GetPlayerPos(id, x, y, z);
 		if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
 		if(PlayerInfo[id][pHealthPacks] >= MAX_HEALTH_PACKS) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz posiada maksymaln¹ iloœæ apteczek");
-		format(tmp, sizeof tmp, "Proponujesz %s kupno apteczki za %d$", GetNick(id), HEALTH_PACK_PRICE);
+		format(tmp, sizeof tmp, "Proponujesz %s kupno apteczki za %d$", GetNick(id), (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
 		SendClientMessage(playerid, -1, tmp);
-		format(tmp, sizeof tmp, "Lekarz %s proponuje Ci kupno apteczki za %d$", GetNick(playerid), HEALTH_PACK_PRICE);
+		format(tmp, sizeof tmp, "Lekarz %s proponuje Ci kupno apteczki za %d$", GetNick(playerid), (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
 		SetPVarInt(id, "HealthPackOffer", playerid);
 		ShowPlayerDialogEx(id, D_ERS_SPRZEDAZ_APTECZKI, DIALOG_STYLE_MSGBOX, "SAM-ERS", tmp, "Kup", "Anuluj");
 	}

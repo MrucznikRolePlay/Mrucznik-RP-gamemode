@@ -50,5 +50,4 @@ command_addmc_Impl(playerid, giveplayerid, value)
 	if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d dodatkowych MC od Admina %s [ID: %d]", value, GetNick(playerid, true), playerid));
 	return 1;
 }
-
 //end

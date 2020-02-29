@@ -24,8 +24,12 @@
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
 new Car_SlotQueue[1024];
+new pCruiseSpeed[MAX_PLAYERS];
+new pCruiseTXD[MAX_PLAYERS] = 0;
 
 
 //------------------<[ Forwardy: ]>--------------------
-
+forward CruiseControl(playerid);
+forward CruiseControl_Static(playerid, type);
+forward CruiseControl_Static_TurnOn(playerid, type);
 //end

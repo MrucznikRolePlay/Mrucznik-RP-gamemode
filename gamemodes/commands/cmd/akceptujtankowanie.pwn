@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ kurtka ]------------------------------------------------//
+//-----------------------------------------------[ akceptujtankowanie ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: werem
+// Data utworzenia: 28.02.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -28,55 +30,8 @@
 	
 */
 
-YCMD:kurtka(playerid, params[], help)
+YCMD:akceptujtankowanie(playerid, params[], help)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
-    {
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(IsAFBI(playerid))
-		{
-			if (PlayerToPoint(3.5, playerid, 592.5598,-1477.5116,82.4736))//nowe fbi by ubunteq
-			{
-				if(GetPlayerVirtualWorld(playerid) == 2)
-				{
-					if(GetPlayerAdminDutyStatus(playerid) == 1)
-					{
-						sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
-						return 1;
-					}
-					if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 1)
-					{
-						format(string, sizeof(string), "* %s zak³ada kurtkê z naszywkami FBI.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						SetPlayerSkin(playerid, 286);
-						SetPlayerColor(playerid, COLOR_FBI); // czarny
-					}
-					else if(OnDuty[playerid] == 1 && PlayerInfo[playerid][pSex] == 2)
-					{
-						format(string, sizeof(string), "* %s zak³ada luŸny strój agentki FBI.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						SetPlayerSkin(playerid, 141);
-						SetPlayerColor(playerid, COLOR_FBI); // czarny
-					}
-					else
-					{
-						sendTipMessage(playerid, "Nie jesteœ na s³u¿bie!");
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteœ w szatni!"); 
-				}
-			}
-			else
-			{
-				sendTipMessage(playerid, "Nie jesteœ w szatni !");
-				return 1;
-			}
-		}
-	}
-	return 1;
+    RunCommand(playerid, "/akceptuj",  "tankowanie");
+    return 1;
 }

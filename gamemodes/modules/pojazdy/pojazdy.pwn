@@ -26,7 +26,137 @@
 //
 
 //-----------------<[ Callbacki: ]>-----------------
+
+hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
+{
+    if((GetVehicleModel(vehicleid) == 509 || GetVehicleModel(vehicleid) == 510 || GetVehicleModel(vehicleid) == 481) && !ispassenger)
+	{
+  		SetTimerEx("CruiseControl_Static_TurnOn", 5000, false, "ii", playerid, 1);
+ 	}
+    if(PlayerInfo[playerid][pLevel] == 1 && !IsARower(vehicleid))
+    {
+        SetTimerEx("CruiseControl_Static_TurnOn", 5000, false, "ii", playerid, 0);
+    }
+}
+
+hook OnPlayerExitVehicle(playerid, vehicleid)
+{
+    if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);
+    if(GetPVarInt(playerid, "timer_CruiseControl")) CruiseControl_TurnOff(playerid);
+}
+
+hook OnPlayerDisconnect(playerid)
+{
+    CruiseControl_Static_TurnOff(playerid);
+    CruiseControl_TurnOff(playerid);
+}
+
+hook OnPlayerConnect(playerid)
+{
+    pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
+}
+
+hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+{
+    if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)
+	{
+        new rcarid;
+        rcarid = GetPlayerVehicleID(playerid);
+        if(IsARower(rcarid))
+        {
+			if(RELEASED(KEY_ACTION))
+	        {
+		  		new Float:Velocity[3];
+				GetVehicleVelocity(rcarid, Velocity[0], Velocity[1], Velocity[2]);
+    		    SetVehicleVelocity(rcarid, Velocity[0]/1.5, Velocity[1]/1.5, Velocity[2]/3);
+			}
+	    }
+        if(PRESSED(KEY_ACTION) && !GetPVarInt(playerid, "timer_StaticCruiseControl"))
+        {
+            new carid;
+            carid = GetPlayerVehicleID(playerid);
+            if(!IsARower(carid) && !IsABoat(carid) && !IsAPlane(carid) && PlayerInfo[playerid][pCruiseController] == 1)
+            {
+                if(GetPVarInt(playerid, "timer_CruiseControl"))
+                {
+                    CruiseControl_TurnOff(playerid);
+                }
+                else
+                {
+                    CruiseControl_TurnOn(playerid);
+                }
+            }
+        }
+        else if(PRESSED(KEY_FIRE))
+        {
+            if(GetPVarInt(playerid, "timer_CruiseControl"))
+            {
+                CruiseControl_SetSpeed(playerid, 10, true);
+            }
+        }
+        else if(PRESSED(KEY_DOWN))
+        {
+            if(GetPVarInt(playerid, "timer_CruiseControl"))
+            {
+                CruiseControl_SetSpeed(playerid, 10, false);
+            }
+        }
+	}
+}
 //-----------------<[ Funkcje: ]>------------------
+
+CruiseControl_HideTXD(playerid)
+{
+    PlayerTextDrawHide(playerid, CRUISECONTROL_AMOUNT[playerid]);
+}
+
+CruiseControl_SetSpeed(playerid, speed, bool:positive)
+{
+    if(pCruiseSpeed[playerid] < 120 && positive) pCruiseSpeed[playerid] += speed;
+    else if(pCruiseSpeed[playerid] > 30 && !positive) pCruiseSpeed[playerid] -= speed; 
+    CruiseControl_UpdateTXD(playerid);
+    PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
+}
+
+CruiseControl_UpdateTXD(playerid)
+{
+    new updatedMaxSpeed = pCruiseSpeed[playerid];
+    new string[128];
+    format(string, sizeof(string), "~r~MAX: ~w~%dKM", updatedMaxSpeed);
+    PlayerTextDrawSetString(playerid, CRUISECONTROL_AMOUNT[playerid], string);
+    PlayerTextDrawShow(playerid, CRUISECONTROL_AMOUNT[playerid]);
+}
+
+CruiseControl_ShowTXD(playerid)
+{   
+    PlayerTextDrawSetString(playerid, CRUISECONTROL_AMOUNT[playerid], "_");
+    PlayerTextDrawShow(playerid, CRUISECONTROL_AMOUNT[playerid]);
+    CruiseControl_UpdateTXD(playerid);
+}
+
+CruiseControl_Static_TurnOff(playerid)
+{
+    CruiseControl_HideTXD(playerid);
+    KillTimer(GetPVarInt(playerid, "timer_StaticCruiseControl"));
+    DeletePVar(playerid, "timer_StaticCruiseControl");
+}
+
+
+CruiseControl_TurnOff(playerid)
+{
+    CruiseControl_HideTXD(playerid);
+    KillTimer(GetPVarInt(playerid, "timer_CruiseControl"));
+    pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
+    pCruiseTXD[playerid] = 0;
+    DeletePVar(playerid, "timer_CruiseControl");
+}
+
+CruiseControl_TurnOn(playerid)
+{
+    CruiseControl_ShowTXD(playerid);
+    new timer = SetTimerEx("CruiseControl", 200, true, "i", playerid);
+    SetPVarInt(playerid, "timer_CruiseControl", timer);
+}
 Car_AddSlotToQueue(id)
 {
     if(strlen(Car_SlotQueue) < 1020)
@@ -736,7 +866,20 @@ ShowCarEditDialog(playerid)
     return 1;
 }
 
+stock GetVehicleSpeed(carid)
+{
+    new Float:x,Float:y,Float:z,Float:speed,final_speed;
+    GetVehicleVelocity(carid,x,y,z);
+    speed = VectorSize(x, y, z) * 166.666666;
+    final_speed = floatround(speed,floatround_round);
+    return final_speed;
+}
+
+
 //-----------------<[ Timery: ]>--------------------
+/*
+
+*/
 //------------------<[ MySQL: ]>--------------------
 
 //end

@@ -72,7 +72,7 @@ YCMD:malunek(playerid, params[], help)
                                             GetPlayerName(playa, giveplayer, sizeof(giveplayer));
                                             format(string, sizeof(string), "* Zrobi³eœ graczowi %s malunek samochodu (-20 000$)",giveplayer);
                                             SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                                            format(string, sizeof(string), "* Mechanik %s zrobi³ malnuek na twoim %s",sendername, VehicleNames[model-400]);
+                                            format(string, sizeof(string), "* Mechanik %s zrobi³ malunek na twoim %s",sendername, VehicleNames[model-400]);
                                             SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                             format(string, sizeof(string),"* Mechanik %s wyci¹ga sprey i tworzy malunek na %s.", sendername, VehicleNames[model-400]);
                                             ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);

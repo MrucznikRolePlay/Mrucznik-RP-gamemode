@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   zmiany                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                zabierzbilet                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,47 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sanda³
+// Data utworzenia: 14.02.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "zmiany_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_zmiany()
+//------------------<[ Implementacja: ]>-------------------
+command_zabierzbilet_Impl(playerid, giveplayerid)
 {
-    new command = Command_GetID("zmiany");
-
-    //aliases
-    Command_AddAlt(command, "changelog");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:zmiany(playerid, params[], help)
-{
-    if (help)
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
     {
-        sendTipMessage(playerid, "Wyœwietla listê zmian wprowadzonych w aktualizacjach skryptu serwera.");
-        return 1;
+        new var[128];
+        if(IbizaTicket[giveplayerid] > 0)
+        {
+            IbizaTicket[giveplayerid] = 0;
+            format(var, sizeof(var), "Zabra³eœ bilet %s", GetNick(giveplayerid));
+            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+            format(var, sizeof(var), "%s zabra³ ci bilet od Ibizy.", GetNick(playerid));
+            sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, var);
+        }
+        else
+        {
+            sendTipMessage(playerid, "Gracz nie posiada biletu.");   
+        }
     }
-    
-    
-    //command body
-    return command_zmiany_Impl(playerid);
+    else
+    {
+        sendTipMessage(playerid, "Komenda dostêpna dla ibizy od [6].");
+    }
+    return 1;
 }
+
+//end

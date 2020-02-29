@@ -33,7 +33,7 @@ YCMD:paj(playerid, params[], help)
 	new string[128];
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+        if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || PlayerInfo[playerid][pNewAP] >= 1)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {

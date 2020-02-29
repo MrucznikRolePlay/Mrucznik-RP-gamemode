@@ -162,4 +162,30 @@ stock IbizaTicketsCostCheck(){
 	format(txt_ibiza_tickets, 128, "{FFFFFF}Rodzaj\tCena\nZwyk³y\t{00FF00}%d\n{FFFFFF}VIP\t{00FF00}%d", ibiza_priceNormal, ibiza_priceVIP);
 	return 1;
 }
+
+stock IbizaNadajBilet(playerid, giveplayerid, bilet)
+{
+	new nazwa_biletu[24];
+	new var[128];
+	new Float:x, Float:y, Float:z;
+	GetPlayerPos(giveplayerid, x, y, z);
+	if(!IsPlayerInRangeOfPoint(playerid, 5.0, x, y, z))
+	{
+		sendTipMessage(playerid, "Jesteœ za daleko.");
+		return 1;
+	}
+	if(bilet == 1) nazwa_biletu = "NORMAL";
+	if(bilet == 2) nazwa_biletu = "VIP";
+	if(bilet == 3) nazwa_biletu = "SUPERVIP";
+	format(var, sizeof(var), "Da³eœ bilet %s dla %s", nazwa_biletu, GetNick(giveplayerid));
+    sendTipMessageEx(playerid, COLOR_LIGHTBLUE, var);
+    format(var, sizeof(var), "Otrzyma³eœ bilet %s od %s", nazwa_biletu, GetNick(playerid));
+    sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, var);
+    format(var, sizeof(var), "** %s podaje bilet Ibiza|[%s] %s.", GetNick(playerid), nazwa_biletu, GetNick(giveplayerid));
+    ProxDetector(15.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+    if(bilet == 1) IbizaTicket[giveplayerid] = IBIZA_NORMAL;
+	if(bilet == 2) IbizaTicket[giveplayerid] = IBIZA_VIP;
+	if(bilet == 3) IbizaTicket[giveplayerid] = IBIZA_SUPERVIP;
+	return 1;
+}
 //end

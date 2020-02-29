@@ -50,29 +50,16 @@ YCMD:goto(playerid, params[], help)
 				GetPlayerName(playerid, sendername, sizeof(sendername));
 				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 				{
-					//SZUKANIE ADMINOW I P@ na serwerze
-
-					new bool:liczydelko=false;
-					foreach(new i : Player)
-					{
-						if(IsPlayerConnected(i))
-						{
-							if(PlayerInfo[i][pAdmin] >= 1 || (PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] < 5))
-							{
-								liczydelko=true;
-								break;
-							}
-						}
-					}
-					//koniec szukania adminkow
-					if(liczydelko==true && PlayerInfo[playerid][pZG]==10)
-					{
-						sendTipMessageEx(playerid, COLOR_GRAD1, "Na serwerze s¹ admini, nie mo¿esz u¿yæ tej komendy!");
-						return 1;
-					}
 					if(Spectate[playerid] != INVALID_PLAYER_ID)
 					{
+						PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
+						PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];
+						SetPlayerToTeamColor(playerid);
+						MedicBill[playerid] = 0;
 						Spectate[playerid] = INVALID_PLAYER_ID;
+						//TogglePlayerSpectating(playerid, 0);
+						GameTextForPlayer(playerid, "L O A D I N G", 1000, 3);
+						SetTimerEx("SpecEnd", 500, false, "d", playerid);
 					}
 					GetPlayerPos(plo, plocx, plocy, plocz);
 					SetPlayerInterior(playerid, GetPlayerInterior(plo));
