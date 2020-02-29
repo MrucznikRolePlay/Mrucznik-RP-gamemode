@@ -161,6 +161,7 @@ stock graffiti_DeleteMySQL(id)
 	new query[1024];
 	format(query, sizeof(query), "DELETE FROM `mru_graffiti` WHERE `id`='%d'", id);
 	mysql_query(query);
+	graffiti_Zeruj(id);
 }
 
 //stock graffiti_UpdateMySQL(id)
