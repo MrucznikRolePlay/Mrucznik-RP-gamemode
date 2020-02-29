@@ -1127,21 +1127,26 @@ public Next(playerid, msg[])
 public odpalanie(playerid)
 {
 	new engine, lights, alarm, doors, bonnet, boot, objective, Float:health, sendername[MAX_PLAYER_NAME], string[256];
+	new carid = GetPlayerVehicleID(playerid);
 	GetPlayerName(playerid, sendername, sizeof(sendername));
-	GetVehicleHealth(GetPlayerVehicleID(playerid), health);
- 	GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine, lights ,alarm, doors, bonnet, boot, objective);
+	GetVehicleHealth(carid, health);
+ 	GetVehicleParamsEx(carid,engine, lights ,alarm, doors, bonnet, boot, objective);
  	OdpalanieSpam[playerid] = 0;
-	if(Gas[GetPlayerVehicleID(playerid)] > 3)
+	if(Gas[carid] > 3)
 	{
 		new rand = random(1000);
 		if(rand <= health)
 		{
 			format(string, sizeof(string), "* silnik odpali³ (( %s ))", sendername);
 			ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-      		SetVehicleParamsEx(GetPlayerVehicleID(playerid) , 1, lights, alarm, doors, bonnet, boot, objective);
-			PoziomPoszukiwania[playerid] += 1;
-			SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda bez prawa jazdy");
-			SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
+      		SetVehicleParamsEx(carid , 1, lights, alarm, doors, bonnet, boot, objective);
+			if(PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] != carid)
+			{
+				PoziomPoszukiwania[playerid] += 1;
+				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda bez prawa jazdy");
+				SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
+				PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = carid;
+			}
 		}
 		else
 		{
