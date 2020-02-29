@@ -39,19 +39,20 @@ YCMD:setcarhp(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /setcarhp [carid] [hp]");
 			return 1;
 		}
-    }
-    if (PlayerInfo[playerid][pAdmin] >= 10)
-    {
-        SetVehicleHealth(vehicleid, health);
-		RepairVehicle(vehicleid);
-        Log(adminLog, INFO, "Admin %s ustawi³ hp auta na %d", GetPlayerLogName(playerid), health);
-		new string[128];
-		format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNick(playerid), health);
-		SendMessageToAdmin(string, COLOR_P@);
-    }
-    else
-    {
-        noAccessMessage(playerid);
+    
+        if (PlayerInfo[playerid][pAdmin] >= 10)
+        {
+            SetVehicleHealth(vehicleid, health);
+            RepairVehicle(vehicleid);
+            Log(adminLog, INFO, "Admin %s ustawi³ hp auta na %d", GetPlayerLogName(playerid), health);
+            new string[128];
+            format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNick(playerid), health);
+            SendMessageToAdmin(string, COLOR_P@);
+        }
+        else
+        {
+            noAccessMessage(playerid);
+        }
     }
     return 1;
 }
