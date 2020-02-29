@@ -5205,14 +5205,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         }
 		gLastCar[playerid] = newcar;
 
-		if(PlayerInfo[playerid][pCarLic] == 0 && !IsARower(newcar))
-		{
-			CruiseControl_Static_TurnOn(playerid, 0);
-		}
-		if(IsARower(newcar))
-		{
-  			CruiseControl_Static_TurnOn(playerid, 1);
-		}
+		
 
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)

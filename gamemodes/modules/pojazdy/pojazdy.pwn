@@ -26,6 +26,22 @@
 //
 
 //-----------------<[ Callbacki: ]>-----------------
+hook OnPlayerStateChange(playerid, newstate, oldstate)
+{
+    if(newstate == PLAYER_STATE_DRIVER)
+    {
+        new newcar = GetPlayerVehicleID(playerid);
+        if(PlayerInfo[playerid][pCarLic] == 0 && !IsARower(newcar))
+		{
+			CruiseControl_Static_TurnOn(playerid, 0);
+		}
+		if(IsARower(newcar))
+		{
+  			CruiseControl_Static_TurnOn(playerid, 1);
+		}
+    }
+}
+
 hook OnPlayerExitVehicle(playerid, vehicleid)
 {
     if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);
