@@ -57,8 +57,8 @@ public CruiseControl_Static_TurnOn(playerid, type)
     //pozniej trzeba dodaæ nowy typ w pojazdy_timers.pwn
     if(type == 0 && (IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)) 
 	{
-		SendClientMessage(playerid, COLOR_YELLOW, "Zosta³a ci na³o¿ona blokada prêdkoœci do 50km/h jako nowy gracz.");
-		pCruiseSpeed[playerid] = CruiseControlStatic_NewPlayer;
+		SendClientMessage(playerid, COLOR_YELLOW, "Zosta³a ci na³o¿ona blokada prêdkoœci do 50km/h, nie posiadasz prawa jazdy.");
+		pCruiseSpeed[playerid] = CruiseControlStatic_NoCarLic;
 		CruiseControl_ShowTXD(playerid);
 		new timer = SetTimerEx("CruiseControl_Static", 200, true, "ii", playerid, type);
 		SetPVarInt(playerid, "timer_StaticCruiseControl", timer);
@@ -84,7 +84,7 @@ public CruiseControl_Static(playerid, type)
         GetVehicleVelocity(GetPlayerVehicleID(playerid), vX, vY, vZ);
         new carid = GetPlayerVehicleID(playerid);
         new playerkmh = GetVehicleSpeed(carid);
-		if(type == 0) speed = CruiseControlStatic_NewPlayer;
+		if(type == 0) speed = CruiseControlStatic_NoCarLic;
 		else if(type == 1) speed = CruiseControlStatic_Bike;
         if(playerkmh > speed)
         {

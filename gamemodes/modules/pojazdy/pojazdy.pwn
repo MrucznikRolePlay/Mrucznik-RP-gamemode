@@ -26,15 +26,6 @@
 //
 
 //-----------------<[ Callbacki: ]>-----------------
-
-hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
-{
-    if((GetVehicleModel(vehicleid) == 509 || GetVehicleModel(vehicleid) == 510 || GetVehicleModel(vehicleid) == 481) && !ispassenger)
-	{
-  		SetTimerEx("CruiseControl_Static_TurnOn", 5000, false, "ii", playerid, 1);
- 	}
-}
-
 hook OnPlayerExitVehicle(playerid, vehicleid)
 {
     if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);

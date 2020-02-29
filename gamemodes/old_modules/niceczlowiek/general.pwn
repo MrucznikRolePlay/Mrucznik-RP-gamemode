@@ -323,14 +323,6 @@ Player_CanUseCar(playerid, vehicleid)
 			return 0;
 		}
 	}
-	else
-	{
-		if(PlayerInfo[playerid][pCarLic] != 1)
-		{
-			sendTipMessageEx(playerid, COLOR_GREY, "Nie masz prawa jazdy, postanawiasz opuœciæ pojazd!");
-			return 0;
-		}
-	}
 
 	return 1;
 }
