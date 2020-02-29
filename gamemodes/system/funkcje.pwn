@@ -1137,7 +1137,7 @@ public odpalanie(playerid)
 			format(string, sizeof(string), "* silnik odpali³ (( %s ))", sendername);
 			ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
       		SetVehicleParamsEx(carid , 1, lights, alarm, doors, bonnet, boot, objective);
-			if(PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] != carid)
+			if(PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] != carid && PlayerInfo[playerid][pCarLic] == 0)
 			{
 				PoziomPoszukiwania[playerid] += 1;
 				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda bez prawa jazdy");
