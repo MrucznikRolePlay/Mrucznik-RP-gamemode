@@ -6730,6 +6730,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 				ShowPlayerDialogEx(playerid, 86, DIALOG_STYLE_LIST, "Kupowanie domu - p³atnoœæ", "Zap³aæ gotówk¹\nZap³aæ przelewem z banku", "Wybierz", "Anuluj");
 		    }
+			else
+			{
+				SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+			}
 		}
 		if(dialogid == 86)//system domów
 		{
@@ -6746,6 +6750,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						KupowanieDomu(playerid, IDDomu[playerid], 2);
 					}
 		   		}
+			}
+			else
+			{
+				SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
 			}
 		}
 		if(dialogid == 87)//system domów
