@@ -244,6 +244,13 @@ Player_CanUseCar(playerid, vehicleid)
                     sendTipMessageEx(playerid,COLOR_GREY,string);
                     return 0;
                 }
+				if(vehicleid == 578 && PlayerInfo[playerid][pLevel] == 1)
+				{
+					if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+					format(string, sizeof(string), "Musisz mieæ 2 level aby prowadziæ tym pojazdem.");
+                    sendTipMessageEx(playerid,COLOR_GREY,string);
+					return 0;
+				}
             }
             else
             {
