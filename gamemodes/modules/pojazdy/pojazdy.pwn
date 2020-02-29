@@ -33,10 +33,6 @@ hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	{
   		SetTimerEx("CruiseControl_Static_TurnOn", 5000, false, "ii", playerid, 1);
  	}
-    if(PlayerInfo[playerid][pLevel] == 1 && !IsARower(vehicleid))
-    {
-        SetTimerEx("CruiseControl_Static_TurnOn", 5000, false, "ii", playerid, 0);
-    }
 }
 
 hook OnPlayerExitVehicle(playerid, vehicleid)
