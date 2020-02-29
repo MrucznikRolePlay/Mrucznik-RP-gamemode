@@ -3158,6 +3158,49 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
 					}
+					case 15:
+					{
+						if (kaska[playerid] >= 35000 )
+						{
+							PlayerInfo[playerid][pCruiseController] = 1;
+							ZabierzKase(playerid, 35000);
+							format(string, sizeof(string), "~r~-$%d", 35000);
+							GameTextForPlayer(playerid, string, 5000, 1);
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							format(string, sizeof(string), "Kupi³eœ ogranicznik prêdkoœci do auta.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							return 1;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
+						}
+					}
+					case 16:
+					{
+						if (kaska[playerid] >= 30000 )
+						{
+							if(PlayerInfo[playerid][pFixKit] <= 5)
+							{
+								PlayerInfo[playerid][pFixKit]++;
+								ZabierzKase(playerid, 30000);
+								format(string, sizeof(string), "~r~-$%d", 30000);
+								GameTextForPlayer(playerid, string, 5000, 1);
+								PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+								format(string, sizeof(string), "Kupi³eœ zestaw do naprawy aut!");
+								SendClientMessage(playerid, COLOR_GRAD4, string);
+								return 1;
+							}
+							else
+							{
+								SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz kupiæ maksymalnie 5 zestawów!");
+							}
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
+						}
+					}
 				}
 			}
 		}
@@ -3400,14 +3443,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-				zakuty[playerid] = 1;
-	            uzytekajdanki[PDkuje[playerid]] = 1;
-	            SkutyGracz[PDkuje[playerid]] = playerid;
-				ClearAnimations(playerid);
-                SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+				
+				CuffedAction(PDkuje[playerid], playerid);
 		    }
-		    if(!response)
+		    else
 		    {
 		        foreach(new i : Player)
 				{
@@ -3428,11 +3467,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 					SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-					zakuty[playerid] = 1;
-		            uzytekajdanki[PDkuje[playerid]] = 1;
-		            SkutyGracz[PDkuje[playerid]] = playerid;
-					SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-					SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+					
+					CuffedAction(PDkuje[playerid], playerid);
 				}
 				else if(cops == 2)
 				{
@@ -3451,11 +3487,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
 						SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-						zakuty[playerid] = 1;
-			            uzytekajdanki[PDkuje[playerid]] = 1;
-			            SkutyGracz[PDkuje[playerid]] = playerid;
-						SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-						SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
+						
+						CuffedAction(PDkuje[playerid], playerid);
 				    }
 				}
 				else
@@ -3479,6 +3512,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//
 		    if(response)
 		    {
+				//todo
 		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ ³owcy %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", sendername);
@@ -6696,6 +6730,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 				ShowPlayerDialogEx(playerid, 86, DIALOG_STYLE_LIST, "Kupowanie domu - p³atnoœæ", "Zap³aæ gotówk¹\nZap³aæ przelewem z banku", "Wybierz", "Anuluj");
 		    }
+			else
+			{
+				SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+			}
 		}
 		if(dialogid == 86)//system domów
 		{
@@ -6712,6 +6750,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						KupowanieDomu(playerid, IDDomu[playerid], 2);
 					}
 		   		}
+			}
+			else
+			{
+				SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
 			}
 		}
 		if(dialogid == 87)//system domów
@@ -13816,7 +13858,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new hajs = kaska[playerid];
-			if(hajs < HEALTH_PACK_PRICE)
+			if(hajs < (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR))
 			{
 				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
 				return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
@@ -13872,7 +13914,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				PlayerInfo[id][pHealthPacks]--;
 				pobity[playerid] = 0;
-				ZdejmijBW(playerid, 4500);
+				ZdejmijBW(playerid, 6000);
 				SetPlayerHealth(playerid, HEALTH_PACK_HP);
 			}
 		}
@@ -16289,12 +16331,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra³eœ licencje na latanie!"); 
 					Log(payLog, INFO, "%s kupi³ licencje na latanie za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
-				case 8:
+				/* na póŸniej
+				case 8: //rejestracja pojazdu
 				{
 					sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
 					return 1;
 				}
-				case 9:
+				case 9: // w³asna tablica rejestracyjna
 				{
 					if(IsPlayerPremiumOld(playerid))
 					{
@@ -16306,6 +16349,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					return 1;
 				}
+				*/
 			}
 
 			ZabierzKase(playerid, DmvLicenseCost[listitem]);

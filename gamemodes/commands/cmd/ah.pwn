@@ -33,7 +33,7 @@ YCMD:ah(playerid, params[], help)
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
     if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pAdmin] > 0)
 	{
-		SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /supportduty /tickets");
+		SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /supportduty /tickets /login");
 		SendClientMessage(playerid, COLOR_GRAD1, "{FF6A6A}* System @DUTY *** {C0C0C0}/adminduty {[NICK OOC] || /adminstats");
 		
 	}
@@ -41,7 +41,7 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /kick");
         SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo /czyjtonumer");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /zdejmijbpk /unbw /checkbw");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /zdejmijbpk /unbw /checkbw /paj /bp /setvw");
     }
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
@@ -77,13 +77,13 @@ YCMD:ah(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD4, "*5* ADMIN *** /gotobank /gotostacja /bw /agraffiti");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /checkdom /anulujzp");
 	}
-	if (PlayerInfo[playerid][pAdmin] >= 7)
+	if (PlayerInfo[playerid][pAdmin] == 7)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* ZAS�U�ONY *** /sban /sblock /skick /fixveh /sethp");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 10)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*10* ADMIN *** /fdaj /ksam /rozwiedz /setteam /entercar /sethp");
+		SendClientMessage(playerid, COLOR_GRAD4,"*10* ADMIN *** /fdaj /ksam /rozwiedz /setteam /entercar /sethp /setcarhp");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 15)
 	{
@@ -105,10 +105,6 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /reloadbans /dajdzwiek /checkteam /bw /dajapteczke");
 		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /dskill /dsus /setwl /zaraz /uleczall /logoutpl");
-	}
-	if (PlayerInfo[playerid][pAdmin] >= 150)
-	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*150* ADMIN *** /inwigilacja");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 200)
 	{

@@ -71,6 +71,7 @@
 #define COLOR_LFBI 0x483D8B00
 
 
+
 //nowe kolory:
     #define KOLOR_ADMIN 0xFF6A6AFF
     #define KOLOR_MAPA 0x88FFFFFF

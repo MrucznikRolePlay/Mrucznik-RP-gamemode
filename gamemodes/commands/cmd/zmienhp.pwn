@@ -53,7 +53,7 @@ YCMD:zmienhp(playerid, params[], help)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;
 					}
-					if(IsPlayerInAnyVehicle(playerid))
+					if(IsPlayerInAnyVehicle(playa))
 					{
 						new vehid = GetPlayerVehicleID(playa);
 						SetVehicleHealth(vehid, health);

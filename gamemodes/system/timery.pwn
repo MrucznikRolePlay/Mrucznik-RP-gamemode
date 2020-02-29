@@ -838,7 +838,28 @@ public PlayerAFK(playerid, afktime, breaktime)
 		else
 			format(caption, sizeof(caption), "[AFK] %d min. %d sek (%d)", afktime/60, afktime%60, playerid);
 
-		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
+
+		if(afktime == 840 && GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1))
+		{
+			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 1140 && IsPlayerPremiumOld(playerid))
+		{
+			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 540)
+		{
+			GameTextForPlayer(playerid, "~r~Rusz siê! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 || afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
 		{
 			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
@@ -1145,7 +1166,7 @@ public Spectator()
         }
         else
         {
-            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]))
+            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && !(GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
             {
                 SetPVarInt(i, "IBIZA-stream", 0);
                 StopAudioStreamForPlayer(i);
@@ -1180,7 +1201,7 @@ public Spectator()
 				GetPlayerName(specid, specNAME, sizeof(specNAME));
 				GetPlayerHealth(specid, specHP);
 				GetPlayerIp(specid, specIP, sizeof(specIP));
-				if(PlayerInfo[i][pAdmin] > 0) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
+				if(PlayerInfo[i][pAdmin] > 0 || IsAScripter(i)) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
 				else format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f",specNAME,specid,specHP);
 				GameTextForPlayer(i, string, 2500, 3);
 				SpectateTime[i]++;
@@ -3427,10 +3448,16 @@ public SlideRope(playerid)
 
 public SpecEnd(playerid)
 {
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 156, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 299, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
 	TogglePlayerSpectating(playerid, false);
 	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	return 1;
 }
-//Sandal END
+
+public DamagedHP(playerid)
+{
+	RemovePlayerAttachedObject(playerid, 2);
+	return 1;
+}
+
 //EOF

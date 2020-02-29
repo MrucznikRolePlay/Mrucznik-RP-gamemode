@@ -180,8 +180,8 @@
 //-------<[ callbacks ]>-------
 #include "admin\admin_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
-#include "biznesy\biznesy_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
+#include "biznesy\biznesy_callbacks.pwn"
 #include "convoy\convoy_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "money\money_callbacks.pwn"

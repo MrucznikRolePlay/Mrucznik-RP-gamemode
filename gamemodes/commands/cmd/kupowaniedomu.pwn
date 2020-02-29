@@ -56,6 +56,11 @@ YCMD:kupowaniedomu(playerid, params[], help)
 									//
 									mnoznik = Mnoznik(pZone);
 									new cenadomu = ((interior*mnoznik)/10)+doplata;//cena domu*/
+									if(Dom[i][hBlokada] == 1)
+									{
+										sendTipMessage(playerid, "Dom posiada zablokowan¹ mo¿liwoœæ kupna.");
+										return 1;
+									}
 									if(PlayerInfo[playerid][pLevel] < 3)
 									{
 										sendTipMessage(playerid, "Aby kupiæ dom musisz mieæ powy¿ej 3 lvl");
