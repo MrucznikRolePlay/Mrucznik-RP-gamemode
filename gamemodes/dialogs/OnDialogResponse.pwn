@@ -3176,31 +3176,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
 					}
-					case 16:
-					{
-						if (kaska[playerid] >= 30000 )
-						{
-							if(PlayerInfo[playerid][pFixKit] <= 5)
-							{
-								PlayerInfo[playerid][pFixKit]++;
-								ZabierzKase(playerid, 30000);
-								format(string, sizeof(string), "~r~-$%d", 30000);
-								GameTextForPlayer(playerid, string, 5000, 1);
-								PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-								format(string, sizeof(string), "Kupi³eœ zestaw do naprawy aut!");
-								SendClientMessage(playerid, COLOR_GRAD4, string);
-								return 1;
-							}
-							else
-							{
-								SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz kupiæ maksymalnie 5 zestawów!");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
-						}
-					}
 				}
 			}
 		}
@@ -13885,6 +13860,39 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DeletePVar(playerid, "HealthPackOffer");
 		return 1;
 	}
+
+	if(dialogid == D_MECH_SPRZEDAZ_FIXKIT)
+	{
+		new string[128];
+		new id = GetPVarInt(playerid, "FixKitOffer");
+		if(response)
+		{
+			new hajs = kaska[playerid];
+			if(hajs < 15000)
+			{
+				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
+				return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
+			}
+			else
+			{
+				format(string, sizeof string, "%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", PlayerName(playerid));
+				SendClientMessage(id, 0x0080D0FF, string);
+				format(string, sizeof string, "Kupi³eœ zestaw od Mechanika za %d$", (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
+				SendClientMessage(playerid, 0x00FF00FF, string);
+				ZabierzKase(playerid, 15000);
+				DajKase(id, 15000);
+				PlayerInfo[playerid][pFixKit]++;
+			}
+		}
+		else
+		{
+			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno apteczki.", PlayerName(playerid));
+			SendClientMessage(id, 0xFF0030FF, string);
+		}
+		DeletePVar(playerid, "HealthPackOffer");
+		return 1;
+	}
+
 	if(dialogid == D_UZYCIE_APTECZKI)
 	{
 		new string[144];
