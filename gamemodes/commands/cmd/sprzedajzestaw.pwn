@@ -47,5 +47,9 @@ YCMD:sprzedajzestaw(playerid, params[], help)
 		SetPVarInt(id, "FixKitOffer", playerid);
 		ShowPlayerDialogEx(id, D_MECH_SPRZEDAZ_FIXKIT, DIALOG_STYLE_MSGBOX, "Mechanik", tmp, "Kup", "Anuluj");
 	}
+    else
+    {
+        sendErrorMessage(playerid, "Komenda dostêpna dla mechanika.");
+    }
 	return 1;
 }
