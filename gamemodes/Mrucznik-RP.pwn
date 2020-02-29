@@ -4829,7 +4829,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 new Float:speed = VectorSize(X-x, Y-y, Z-z);
                 MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
             }
-			if( GetPVarInt(playerid, "zoneid") == -1 && (ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) ) 
+			if( GetPVarInt(playerid, "zoneid") == -1 || (ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) ) 
         	{
 				SendClientMessage(playerid, 0xFF0000FF, "Musisz byæ na swojej strefie!");
                 SetDynamicObjectPos(objectid, X, Y, Z);
@@ -4847,7 +4847,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 				graffiti_Zeruj(f);
 				return 1;
 			}
-			if( GetPVarInt(playerid, "zoneid") == -1 && (ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) )
+			if( GetPVarInt(playerid, "zoneid") == -1 || (ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) )
         	{
 				SendClientMessage(playerid, 0xFF0000FF, "Nie by³eœ na swojej strefie!");
                 graffiti_DeleteMySQL(f);
