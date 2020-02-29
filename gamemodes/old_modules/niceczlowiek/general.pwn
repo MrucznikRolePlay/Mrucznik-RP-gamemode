@@ -147,17 +147,17 @@ Player_RemoveFromVeh(playerid)
 }
 
 
-Player_CanUseCar(playerid, newcar)
+Player_CanUseCar(playerid, vehicleid)
 {
 	new string[128];
 
-	if(IsACopCar(newcar))
+	if(IsACopCar(vehicleid))
 	{
 	    if(IsACop(playerid))
 	    {
 	        if(OnDuty[playerid] == 0)
 	        {
-	            if(GetVehicleModel(newcar) != 445)
+	            if(GetVehicleModel(vehicleid) != 445)
 	            {
 	            	sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ na s³u¿bie aby jeŸdziæ autem policyjnym !");
                     return 0;
@@ -166,9 +166,9 @@ Player_CanUseCar(playerid, newcar)
 	    }
 	}
 
-	if(VehicleUID[newcar][vUID] != 0)
+	if(VehicleUID[vehicleid][vUID] != 0)
     {
-        new lcarid = VehicleUID[newcar][vUID];
+        new lcarid = VehicleUID[vehicleid][vUID];
 	    if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FRACTION)// wszystkie auta frakcji
 	    {
             if(CarData[lcarid][c_Owner] != GetPlayerFraction(playerid) && CarData[lcarid][c_Owner] != 11)
@@ -211,7 +211,7 @@ Player_CanUseCar(playerid, newcar)
     				//format(string, sizeof(string), "~w~Mozesz wypozyczyc ten pojazd~n~Cena:~g~$%d~n~~w~Aby to zrobic wpisz ~g~/rentcar~w~~n~aby wyjsc wpisz ~r~/wyjdz",5000);
     				//TogglePlayerControllable(playerid, 0);
     				//GameTextForPlayer(playerid, string, 5000, 3);
-                    //HireCar[playerid] = newcar;
+                    //HireCar[playerid] = vehicleid;
     			}
             }*/
             if(CarData[lcarid][c_Owner] == CAR_ZUZEL)
@@ -279,7 +279,7 @@ Player_CanUseCar(playerid, newcar)
 	    }
         else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_PLAYER) //Pojazdy graczy
         {
-            if(IsCarOwner(playerid, newcar, true))
+            if(IsCarOwner(playerid, vehicleid, true))
 	        {
                 if(CarData[lcarid][c_Keys] != 0 && CarData[lcarid][c_Owner] != PlayerInfo[playerid][pUID])
                 {
@@ -299,7 +299,7 @@ Player_CanUseCar(playerid, newcar)
         }
     }
 
-	if(IsABoat(newcar))
+	if(IsABoat(vehicleid))
 	{
 	    if(PlayerInfo[playerid][pBoatLic] < 1)
 		{
@@ -307,7 +307,7 @@ Player_CanUseCar(playerid, newcar)
 		    return 0;
 		}
 	}
-	else if(IsAPlane(newcar))
+	else if(IsAPlane(vehicleid))
 	{
 	    antyczolg[playerid] ++;
 	    if(PlayerInfo[playerid][pFlyLic] < 1)
