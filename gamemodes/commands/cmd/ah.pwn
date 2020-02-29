@@ -77,13 +77,13 @@ YCMD:ah(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD4, "*5* ADMIN *** /gotobank /gotostacja /bw /agraffiti");
 		SendClientMessage(playerid, COLOR_GRAD4,"*5* ADMIN *** /cca /ann /nonewbie /checkdom /anulujzp");
 	}
-	if (PlayerInfo[playerid][pAdmin] >= 7)
+	if (PlayerInfo[playerid][pAdmin] == 7)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* ZAS£U¯ONY *** /sban /sblock /skick /fixveh /sethp");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 10)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*10* ADMIN *** /fdaj /ksam /rozwiedz /setteam /entercar /sethp");
+		SendClientMessage(playerid, COLOR_GRAD4,"*10* ADMIN *** /fdaj /ksam /rozwiedz /setteam /entercar /sethp /setcarhp");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 15)
 	{
