@@ -101,6 +101,8 @@ new Tourett[MAX_PLAYERS];
 new Obled[MAX_PLAYERS];
 new AbortCurration[MAX_PLAYERS];
 
+new TourettRegexp;
+
 //------------------<[ Forwardy: ]>--------------------
 forward FeelingBadEffect(playerid, disease, value);
 forward CouchingEffect(playerid, disease, value);
