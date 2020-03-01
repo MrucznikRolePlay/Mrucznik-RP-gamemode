@@ -1808,6 +1808,7 @@ public SyncTime()
 			ServerTime = tmphour;
 		}
 	}
+	Tourett[playerid] = 0;
 	return 1;
 }
 

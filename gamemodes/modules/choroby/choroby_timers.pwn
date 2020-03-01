@@ -67,4 +67,26 @@ timer CurrationCounter[1000](playerid, count)
 	}
 }
 
+task GrypaTimer[60000]() 
+{
+	foreach(new i : Player)
+	{
+		//Grypa
+		new Float:hp;
+		GetPlayerHealth(i, hp);
+		if(hp < 10.0) 
+		{
+			Grypa[i]++;
+			if(Grypa[i] == 60)
+			{
+				InfectPlayer(i, GRYPA);
+			}
+		}
+		else
+		{
+			Grypa[i] = 0;
+		}
+	}
+}
+
 //end

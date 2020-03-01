@@ -72,6 +72,30 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
+	else 
+	{
+		//padaczka
+		if(bodypart == BODY_PART_HEAD)
+		{
+			if(random(200) == 0)
+			{
+				InfectPlayer(playerid, PADACZKA);
+			}
+		}
+	}
+	return 1;
+}
+
+hook OnPlayerText(playerid, text[])
+{
+	if(regex_match(nick, "[^a-zA-Z](kurwa|chuj|huj|cipa|fiut|zjeb|kurwy|jeb|pizda|pizdy|szmul|dzban|kutas|dupa|cipka|pierdol|pierdolony)[^a-zA-Z]") <= 0)
+	{
+		Tourett[playerid]++;
+		if(Tourett[playerid] >= 60)
+		{
+			InfectPlayer(playerid, TOURETT);
+		}
+	}
 	return 1;
 }
 

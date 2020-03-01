@@ -71,6 +71,8 @@ new DiseaseData[eDiseases][eDiseaseData] = {
 };
 
 new PlayerImmunity[MAX_PLAYERS];
+new Grypa[MAX_PLAYERS];
+new Tourett[MAX_PLAYERS];
 
 //------------------<[ Forwardy: ]>--------------------
 forward FeelingBadEffect(playerid, disease, value);

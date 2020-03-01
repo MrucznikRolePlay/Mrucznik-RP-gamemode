@@ -50,6 +50,7 @@ Kuracje mogą być przeprowadzane przez medyków tylko w szpitalu. Podczas kurac
 - /**kuracja [id] [choroba] [prowizja]** *(tylko medycy 2 ranga)* - Składa propozycje kuracji choroby gracza. Gracz może akceptować kurację za pomocą komendy /akceptuj kuracja.
 - /**diagnozuj [id]** *(tylko medycy)* - Diagnozuje choroby gracza.
 - /**zastrzyk [id]** *(tylko medycy 1 ranga)* - Zmieniono działanie komendy - komenda zwiększa odporność gracza, gdy ten jest zdrowy, lub usuwa na jakiś czas objawy jego choroby (gdy ten jest chory).
+- /**maseczka [id] [cena]** *(tylko medycy 1 ranga)* - Oferuje graczowi sprzedaż maseczki. Maseczka ustawia odporność gracza na 10.
 
 ## Dodawanie nowych chorób
 
@@ -68,11 +69,11 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
 | Koronawirus | 25.000$ | 2 minuty | 1.0 | tak | [efekty](#efekty-koronawirusa) | Komenda /zjedz nietoperza i do ugotowania |
 | Grypa | 50.000$ | 5 minut | 1.0 | nie | [efekty](#efekty-grypy) | Jeżeli gracz przez godzinę będzie pozostawał z HP mniejszym niż 10
-| Zatrucie | 50.000$ | 5 minut | 1.0 | nie | [efekty](#efekty-zatrucia) | Gdy gracz zje coś nieświeżego (?) 
-| Padaczka | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-padaczki) | Niewielka szansa podczas otrzymania postrzału w głowę |
-| Zespół Touretta | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-touretta) | Gdy gracz przekroczy licznik przekleństw na chatach IC powyżej 30 na godzinę |
+| Zatrucie | 50.000$ | 5 minut | 1.0 | nie | [efekty](#efekty-zatrucia) | 5% szans na zarażenie przy /zjedz
+| Padaczka | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-padaczki) | Niewielka szansa (0.5%) podczas otrzymania postrzału w głowę |
+| Zespół Touretta | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-touretta) | Gdy gracz przekroczy licznik przekleństw na chatach IC powyżej 60 na godzinę |
 | Astma | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-astmy) | nie wiem |
-| Schizofrenia paranoidalna | 1.500.000$ | 30 minut | 0.0 | nie | [efekty](#efekty-schizofrenii) | Gdy gracz zażywa za dużo narkotyków |
+| Schizofrenia paranoidalna | 1.500.000$ | 30 minut | 0.0 | nie | [efekty](#efekty-schizofrenii) | 2% szans gdy gracz zażywa narkotyki |
 | Epidemia zombie | 1.000$ | 5 minut | 1.0 | tak | [efekty](#efekty-zombie) | Tylko od admina |
 | HIV | 1.000.000$ | 30 minut | 1.0 | tak | [efekty](#efekty-zombie) | Podczas seksu bez zabezpieczeń |
 
