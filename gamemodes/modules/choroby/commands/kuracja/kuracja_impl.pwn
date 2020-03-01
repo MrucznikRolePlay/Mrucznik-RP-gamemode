@@ -31,6 +31,13 @@ kuracja_akceptuj(playerid)
     new commission = GetPVarInt(playerid, "kuracja-commission");
     new eDiseases:disease = eDiseases:GetPVarInt(playerid, "kuracja-disease");
 
+    if(GetPVarInt(playerid, "kuracja-akceptuj") == 0)
+    {
+        sendErrorMessage(playerid, "Nikt nie oferowa³ Ci maseczki.");
+        return 1;
+    }
+
+
     if(giveplayerid == INVALID_PLAYER_ID || !IsPlayerConnected(giveplayerid))
     {
         SendClientMessage(playerid, COLOR_GREY, "   Gracz, który oferowa³ Ci kuracjê, wyszed³ z gry.");
@@ -50,6 +57,12 @@ kuracja_akceptuj(playerid)
         return 1;
     }
 
+    if(kaska[playerid] < cost)
+    {
+        sendErrorMessage(playerid, "Nie staæ Ciê na kuracjê!");
+        return 1;
+    }
+
     //body
     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Akceptowa³eœ kuracjê %s, koszt %d$.", DiseaseData[disease][Name], cost));
 
@@ -62,6 +75,8 @@ kuracja_akceptuj(playerid)
 
     ChatMe(playerid, sprintf("pod³¹cza %s do aparatury i rozpoczyna kuracjê."));
     StartPlayerTreatment(playerid, disease);
+
+    SetPVarInt(playerid, "kuracja-akceptuj", 0);
     return 1;
 }
 
@@ -110,6 +125,7 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Kuracja potrwa %d minut i bêdzie kosztowaæ %d$.", currationTime, cost));
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Szanse powodzenia kuracji to %d procent. Wpisz /akceptuj kuracja aby siê zgodziæ.", chance));
 
+    SetPVarInt(giveplayerid, "kuracja-akceptuj", 1);
     SetPVarInt(giveplayerid, "kuracja-doctorid", playerid);
     SetPVarInt(giveplayerid, "kuracja-uid", PlayerInfo[playerid][pUID]);
     SetPVarInt(giveplayerid, "kuracja-cost", cost);
