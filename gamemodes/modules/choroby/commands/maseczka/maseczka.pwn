@@ -53,7 +53,7 @@ YCMD:maseczka(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Sprzedaje graczowi maseczkï¿½ chroniï¿½cï¿½ przed chorobami.");
+        sendTipMessage(playerid, "Sprzedaje graczowi maseczkê chroni¹c¹ przed chorobami.");
         return 1;
     }
     //fetching params

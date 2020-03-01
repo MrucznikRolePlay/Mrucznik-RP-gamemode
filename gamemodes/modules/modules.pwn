@@ -174,6 +174,7 @@
 
 
 //-------<[ others ]>-------
+#include "choroby\choroby_effects.pwn"
 #include "03DL\resources.pwn"
 
 
