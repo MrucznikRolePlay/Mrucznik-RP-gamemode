@@ -70,7 +70,7 @@ YCMD:zjedz(playerid, params[], help)
 					if(Cooking[playerid][pCookID1] == 31 && random(2) == 1) //wuhan bat
 					{
 						InfectPlayer(playerid, KORONAWIRUS);
-						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê koronawirusem! Lepiej idŸ do lekarza.");
 					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight1]));
 				    hp = Cooking[playerid][pCWeight1];
@@ -89,7 +89,7 @@ YCMD:zjedz(playerid, params[], help)
 					if(Cooking[playerid][pCookID2] == 31 && random(2) == 1) //wuhan bat
 					{
 						InfectPlayer(playerid, KORONAWIRUS);
-						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê koronawirusem! Lepiej idŸ do lekarza.");
 					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight2] / 3));
 				    hp = Cooking[playerid][pCWeight2];
@@ -108,7 +108,7 @@ YCMD:zjedz(playerid, params[], help)
 					if(Cooking[playerid][pCookID3] == 31 && random(2) == 1) //wuhan bat
 					{
 						InfectPlayer(playerid, KORONAWIRUS);
-						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê koronawirusem! Lepiej idŸ do lekarza.");
 					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight3] / 3));
 				    hp = Cooking[playerid][pCWeight3];
@@ -127,7 +127,7 @@ YCMD:zjedz(playerid, params[], help)
 					if(Cooking[playerid][pCookID4] == 31 && random(2) == 1) //wuhan bat
 					{
 						InfectPlayer(playerid, KORONAWIRUS);
-						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê koronawirusem! Lepiej idŸ do lekarza.");
 					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight4] / 3));
 				    hp = Cooking[playerid][pCWeight4];
@@ -146,7 +146,7 @@ YCMD:zjedz(playerid, params[], help)
 					if(Cooking[playerid][pCookID5] == 31 && random(2) == 1) //wuhan bat
 					{
 						InfectPlayer(playerid, KORONAWIRUS);
-						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê koronawirusem! Lepiej idŸ do lekarza.");
 					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight5] / 3));
 				    hp = Cooking[playerid][pCWeight5];
