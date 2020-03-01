@@ -54,22 +54,29 @@ YCMD:setname(playerid, params[], help)
 		{
 		    if(PlayerInfo[giveplayerid][pDom] == 0)
 		    {
-				GetPlayerName(giveplayerid, giveplayer, MAX_PLAYER_NAME);
-				GetPlayerName(playerid, sendername, MAX_PLAYER_NAME);
-				new sender_log_name[MAX_PLAYER_NAME];
-				new giveplayer_log_name[MAX_PLAYER_NAME];
-				format(sender_log_name, sizeof(sender_log_name), "%s", GetPlayerLogName(playerid));
-				format(giveplayer_log_name, sizeof(giveplayer_log_name), "%s", GetPlayerLogName(giveplayerid));
-				if(ChangePlayerName(giveplayerid, newname))
+		        if(PlayerInfo[giveplayerid][pBusinessOwner] == INVALID_BIZ_ID)
+		        {
+                    GetPlayerName(giveplayerid, giveplayer, MAX_PLAYER_NAME);
+                    GetPlayerName(playerid, sendername, MAX_PLAYER_NAME);
+					new sender_log_name[MAX_PLAYER_NAME];
+					new giveplayer_log_name[MAX_PLAYER_NAME];
+					format(sender_log_name, sizeof(sender_log_name), "%s", GetPlayerLogName(playerid));
+					format(giveplayer_log_name, sizeof(giveplayer_log_name), "%s", GetPlayerLogName(giveplayerid));
+                    if(ChangePlayerName(giveplayerid, newname))
+                    {
+    					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", sendername,giveplayer,PlayerInfo[giveplayerid][pUID],newname);
+    					SendClientMessageToAll(COLOR_LIGHTRED, string);
+						Log(adminLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);
+						Log(nickLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);
+
+                        ShowPlayerDialogEx(giveplayerid, 70, DIALOG_STYLE_MSGBOX, "Zmiana nicku", "W³aœnie zmieni³eœ nick. Nastêpuj¹ce elementy zosta³y wyzerowane:\n\nPraca\nFrakcja\nWanted Level\nRodzina\nLider\nRanga\nSkin\nZaufany Gracz\n\n\nPamiêtaj, ¿e ka¿da zmiana nicku jest na wagê z³ota wiêc nie trwoñ ich pochopnie!\nJe¿eli dosz³o do b³êdnej zmiany zg³oœ ten fakt prêdko na forum w panelu strat!\nPamiêtaj: nowa postaæ = nowe ¿ycie.", "Dalej", "");
+
+    					SetPlayerName(giveplayerid, newname);
+                    }
+				}
+				else
 				{
-					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", sendername,giveplayer,PlayerInfo[giveplayerid][pUID],newname);
-					SendClientMessageToAll(COLOR_LIGHTRED, string);
-					Log(adminLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);
-					Log(nickLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);
-
-					ShowPlayerDialogEx(giveplayerid, 70, DIALOG_STYLE_MSGBOX, "Zmiana nicku", "W³aœnie zmieni³eœ nick. Nastêpuj¹ce elementy zosta³y wyzerowane:\n\nPraca\nFrakcja\nWanted Level\nRodzina\nLider\nRanga\nSkin\nZaufany Gracz\n\n\nPamiêtaj, ¿e ka¿da zmiana nicku jest na wagê z³ota wiêc nie trwoñ ich pochopnie!\nJe¿eli dosz³o do b³êdnej zmiany zg³oœ ten fakt prêdko na forum w panelu strat!\nPamiêtaj: nowa postaæ = nowe ¿ycie.", "Dalej", "");
-
-					SetPlayerName(giveplayerid, newname);
+				    sendErrorMessage(playerid, "Ten gracz ma biznes, nie mo¿esz zmieniæ mu nicku");
 				}
 			}
 			else

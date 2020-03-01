@@ -82,7 +82,6 @@ YCMD:paka(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					ZabierzKase(suspect, moneys);
                     poscig[suspect] = 0;
-					//DajKase(playerid, moneys);
 					format(string, sizeof(string), "Aresztowany przez %s ~n~    grzywna $%d", sendername, moneys);
 					GameTextForPlayer(suspect, string, 5000, 5);
 					ResetPlayerWeapons(suspect);
@@ -101,6 +100,7 @@ YCMD:paka(playerid, params[], help)
 						format(string, sizeof(string), "<< Funkcjonariusz %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
 						OOCNews(COLOR_LIGHTRED, string);
 					}
+					UnCuffedAction(playerid, suspect);
 	    			SetPlayerInterior(suspect, 10);
 				    new losuj= random(sizeof(Cela));
 					SetPlayerPos(suspect, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);

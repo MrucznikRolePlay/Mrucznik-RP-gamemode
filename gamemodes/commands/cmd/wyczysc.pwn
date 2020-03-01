@@ -48,7 +48,7 @@ YCMD:wyczysc(playerid, params[], help)
 					return 1;
 				}
 
-				if(PoziomPoszukiwania[giveplayerid] > 2 && PlayerInfo[playerid][pLider] != FRAC_LSPD)
+				if(PoziomPoszukiwania[giveplayerid] > 2)
 				{
 					sendTipMessageEx(playerid, COLOR_GRAD1, "Mo¿esz oczyœciæ tylko graczy z 1-2 WL");
 					return 1;
@@ -69,6 +69,7 @@ YCMD:wyczysc(playerid, params[], help)
 						format(string, sizeof(string), "HQ: Policjant %s oczyœci³ z zarzutów %s",sendername, giveplayer);
 						SendFamilyMessage(2, COLOR_PANICRED, string);
 						PoziomPoszukiwania[giveplayerid] = 0;
+						SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);
 						ClearCrime(giveplayerid);
 						if(gTeam[giveplayerid]==4)
 						{

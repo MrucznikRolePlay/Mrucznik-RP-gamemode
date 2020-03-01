@@ -28,7 +28,6 @@ command_akceptuj_Impl(playerid, x_job[32])
     new string[256];
     new giveplayer[MAX_PLAYER_NAME];
     new sendername[MAX_PLAYER_NAME];
-
     if(strcmp(x_job, "biznes", false) == 0)
     {
         Business_AkceptujBiznes(playerid);
@@ -997,7 +996,8 @@ command_akceptuj_Impl(playerid, x_job[32])
             
             //Zerowanie zmiennych
             LawyerOffer[playerid] = 0;
-            ApprovedLawyer[playerid] = 0;
+            OfferPlayer[playerid] = 0;
+            ApprovedLawyer[OfferPlayer[playerid]] = 0;
             WantLawyer[playerid] = 0;
             CallLawyer[playerid] = 0;
             JailPrice[playerid] = 0;

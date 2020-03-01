@@ -297,12 +297,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define DIALOG_PASSWORD 3
 #define DIALOG_INPUT 4
 #define DIALOG_HELP 5
-#define DIALOG_CHANGELOG_RC1 6
-#define DIALOG_CHANGELOG_RC2 7
-#define DIALOG_CHANGELOG_RC3 8
-#define DIALOG_CHANGELOG_RC4 9
-#define DIALOG_CHANGELOG_RC5 11
-#define DIALOG_CHANGELOG_RC6 12
+/* 6-9 oraz 11-12 puste */
 #define DIALOG_FLYMODEHELP 10
 #define DIALOG_INFOTYPE 13
 #define DIALOG_INFOVEHICLE 14
@@ -473,6 +468,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_ERS_SPRZEDAZ_APTECZKI			10107
 #define D_UZYCIE_APTECZKI			    10108
 #define D_PRZEDMIOTY_BRONIE			    10109
+
+#define D_MECH_SPRZEDAZ_FIXKIT          10110
 
 
 //------------------------------------------------------------------------------

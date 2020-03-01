@@ -136,7 +136,7 @@ new PaniJanina;
 
 //PAèDZIOCH
 new r0pes[MAX_PLAYERS][ROPELENGTH];
-//new Float:pl_pos[MAX_PLAYERS][5];
+new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];
 
@@ -406,7 +406,8 @@ new PlayerText:gSelectionItems[MAX_PLAYERS][SELECTION_ITEMS];
 new gSelectionItemsTag[MAX_PLAYERS][SELECTION_ITEMS];
 new gItemAt[MAX_PLAYERS];
 
-new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 500.0};  //pos[3] dist, vw
+// KOORDYNATY IBIZY DLA AUDIO STREAM
+new Float:IbizaAudioPos[4] = {417.3976, -1858.9402, -65.3905, 1000.0};  //pos[3] dist, vw
 new IBIZA_Stream[128];
 
 new Barier[MAX_FRAC][10];
@@ -572,6 +573,9 @@ new roleta34_b;
 new roleta35_b;
 new roleta36_b;
 new open = 0;
+
+new ZestawNaprawczy_Timer[MAX_PLAYERS];
+new ZestawNaprawczy_Warning[MAX_PLAYERS];
 
 //Zmienne ZOPTYMALIZOWANE: xD
 new StaryCzas[MAX_PLAYERS];
@@ -1064,7 +1068,6 @@ new gRO[MAX_PLAYERS];
 
 new isNaked[MAX_PLAYERS]; 
 new Text3D:HiddenPlayerName[MAX_PLAYERS];
-
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1310,6 +1313,12 @@ ZerujZmienne(playerid)
 	//Sandal
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "Brak");
 	PlayerInfo[playerid][pPodPW] = 0;
+	PlayerInfo[playerid][pCruiseController] = 0;
+	PlayerInfo[playerid][pFixKit] = 0;
+	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
+	ZestawNaprawczy_Timer[playerid] = 30;
+	ZestawNaprawczy_Warning[playerid] = 0;
+
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;

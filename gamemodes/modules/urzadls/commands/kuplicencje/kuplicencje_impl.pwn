@@ -19,10 +19,6 @@
 // Autor: Simeone
 // Data utworzenia: 20.09.2019
 
-
-//ProxDetector(20.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
-//ProxDetector(30.0, hitid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-
 //------------------<[ Implementacja: ]>-------------------
 command_kuplicencje_Impl(playerid)
 {
@@ -42,9 +38,7 @@ command_kuplicencje_Impl(playerid)
         Prawo jazdy - teoria\t{80FF00}$%d\n\
         Prawo Jazdy - praktyka\t{80FF00}$%d\n\
         Prawo jazdy - odbiór\t{80FF00}$%d\n\
-        Licencja pilota\t{80FF00}$%d\n\
-        Rejestracja wozu\t{80FF00}$%d\n\
-        W³asna rejestracja wozu\t{80FF00}$%d", 
+        Licencja pilota\t{80FF00}$%d", 
         DmvLicenseCost[0], 
         DmvLicenseCost[1],
         DmvLicenseCost[2],
@@ -52,9 +46,11 @@ command_kuplicencje_Impl(playerid)
         DmvLicenseCost[4],
         DmvLicenseCost[5],
         DmvLicenseCost[6],
-        DmvLicenseCost[7],
-        DmvLicenseCost[8],
-        DmvLicenseCost[9]); 
+        DmvLicenseCost[7]);
+        /* na póŸniej
+        DmvLicenseCost[8], - rejestracja pojazdu
+        DmvLicenseCost[9]); - w³asna tablica rejestracyjna
+        */
         ProxDetector(30.0, playerid, "Urzêdnik mówi: Witam Pana(i) w Urzêdzie Miasta! W czym mogê Panu(i) pomóc?", COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
         ShowPlayerDialogEx(playerid, DIALOG_DMV, DIALOG_STYLE_TABLIST_HEADERS, "Wybierz dokument:", string, "Wyrób", "Wyjdz");
     }

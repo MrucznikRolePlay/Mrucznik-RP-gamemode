@@ -59,7 +59,7 @@ YCMD:kurs(playerid, params[], help)
                     BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 					GetPlayerName(playerid,sendername,sizeof(sendername));
 					format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: %d$", sendername, TransportValue[playerid]);
-					OOCNews(TEAM_GROVE_COLOR,string);
+					OOCNews(COLOR_YELLOW,string);
                 }
                 else if(GetVehicleModel(vehicleid) == 431 || GetVehicleModel(vehicleid) == 437)
                 {
@@ -75,7 +75,7 @@ YCMD:kurs(playerid, params[], help)
                 {
 					GetPlayerName(playerid,sendername,sizeof(sendername));
 					format(string, sizeof(string), "Maszynista %s jest na s³u¿bie i kursuje po stanie San Andreas.", sendername);
-					OOCNews(TEAM_GROVE_COLOR,string);
+					OOCNews(COLOR_YELLOW,string);
                 }
                 else if(IsAPlane(vehicleid))
                 {
@@ -83,16 +83,16 @@ YCMD:kurs(playerid, params[], help)
     				TaxiDrivers += 1; TransportDuty[playerid] = 1; TransportValue[playerid] = moneys;
     				GetPlayerName(playerid,sendername,sizeof(sendername));
     				format(string, sizeof(string), "Pilot %s jest na s³u¿bie wpisz /wezwij heli aby skorzystaæ z jego us³ug, koszt %d$", sendername, TransportValue[playerid]);
-    				OOCNews(TEAM_GROVE_COLOR,string);
+    				OOCNews(COLOR_YELLOW,string);
                 }
                 else
                 {
-					if(GetVehicleModel(vehicleid) == 418 || GetVehicleModel(vehicleid) == 525 || GetVehicleModel(vehicleid) == 409 || GetVehicleModel(vehicleid) == 402 || GetVehicleModel(vehicleid) == 541) return sendTipMessageEx(playerid,COLOR_GREY,"W tym pojeŸdzie nie mo¿esz wejœæ na s³u¿bê !");
+					if(GetVehicleModel(vehicleid) == 418 || GetVehicleModel(vehicleid) == 525 || GetVehicleModel(vehicleid) == 402 || GetVehicleModel(vehicleid) == 541) return sendTipMessageEx(playerid,COLOR_GREY,"W tym pojeŸdzie nie mo¿esz wejœæ na s³u¿bê !");
     				if(moneys < 150 || moneys > 2000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $150 do $2000 !"); return 1; }
     				TaxiDrivers += 1; TransportDuty[playerid] = 1; TransportValue[playerid] = moneys;
     				GetPlayerName(playerid,sendername,sizeof(sendername));
     				format(string, sizeof(string), "Taksówkarz %s jest na s³u¿bie wpisz /wezwij taxi aby skorzystaæ z jego us³ug, koszt %d$", sendername, TransportValue[playerid]);
-    				OOCNews(TEAM_GROVE_COLOR,string);
+    				OOCNews(COLOR_YELLOW,string);
                 }
 			}
 			else if(IsAMiniBus(vehicleid))
@@ -110,7 +110,7 @@ YCMD:kurs(playerid, params[], help)
 						BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 						GetPlayerName(playerid,sendername,sizeof(sendername));
 						format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: %d$", sendername, TransportValue[playerid]);
-						OOCNews(TEAM_GROVE_COLOR,string);
+						OOCNews(COLOR_YELLOW,string);
 						return 1;
 					}
 					if(PlayerInfo[playerid][pCarSkill] >= 101  && PlayerInfo[playerid][pCarSkill] <= 201)
@@ -119,7 +119,7 @@ YCMD:kurs(playerid, params[], help)
 						BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 						GetPlayerName(playerid,sendername,sizeof(sendername));
 						format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: %d$", sendername, TransportValue[playerid]);
-						OOCNews(TEAM_GROVE_COLOR,string);
+						OOCNews(COLOR_YELLOW,string);
 						return 1;
 					}
 					if(PlayerInfo[playerid][pCarSkill] >= 201  && PlayerInfo[playerid][pCarSkill] <= 401)
@@ -128,7 +128,7 @@ YCMD:kurs(playerid, params[], help)
 						BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 						GetPlayerName(playerid,sendername,sizeof(sendername));
 						format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: %d$", sendername, TransportValue[playerid]);
-						OOCNews(TEAM_GROVE_COLOR,string);
+						OOCNews(COLOR_YELLOW,string);
 						return 1;
 					}
 					if(PlayerInfo[playerid][pCarSkill] >= 401)
@@ -137,7 +137,7 @@ YCMD:kurs(playerid, params[], help)
 						BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 						GetPlayerName(playerid,sendername,sizeof(sendername));
 						format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: %d$", sendername, TransportValue[playerid]);
-						OOCNews(TEAM_GROVE_COLOR,string);
+						OOCNews(COLOR_YELLOW,string);
 						return 1;
 					}
 					else
@@ -146,14 +146,14 @@ YCMD:kurs(playerid, params[], help)
 						BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 						GetPlayerName(playerid,sendername,sizeof(sendername));
 						format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: %d$", sendername, TransportValue[playerid]);
-						OOCNews(TEAM_GROVE_COLOR,string);
+						OOCNews(COLOR_YELLOW,string);
 					}
 				}
 			}
 			else if(IsATrain(vehicleid))//poci¹gi
 			{
 				format(string, sizeof(string), "Koleje Brown Streak rozpoczê³y trasê po stanie San Andreas!");
-				OOCNews(TEAM_GROVE_COLOR,string);
+				OOCNews(COLOR_YELLOW,string);
 			}
 			else
 			{
