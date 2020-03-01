@@ -1021,6 +1021,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 11: ACCESS[id] ^= ACCESS_EDITCAR;
             case 12: ACCESS[id] ^= ACCESS_EDITRANG;
             case 13: ACCESS[id] ^= ACCESS_EDITPERM;
+            case 14: ACCESS[id] ^= ACCESS_SKRYPTER;
         }
         format(str, 128, "(PERM) %s edytowa³ Twoje uprawnienia (/uprawnienia)", GetNick(playerid));
         SendClientMessage(id, 0x05CA8CFF, str);

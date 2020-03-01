@@ -62,6 +62,7 @@ YCMD:adajrange(playerid, params[], help)
                     format(string, sizeof(string), "Admin %s zmieni³ twój stopieñ z %d na %d", GetNick(playerid), PlayerInfo[giveplayerid][pRank], rankValue); 
                     sendTipMessage(giveplayerid, string); 
                     PlayerInfo[giveplayerid][pRank] = rankValue;
+                    Log(adminLog, INFO, "%s da³ %s rangê %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), rankValue);
                     return 1;
                 }
                 else

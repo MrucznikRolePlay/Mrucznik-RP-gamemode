@@ -34,7 +34,7 @@ YCMD:pblok(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1  || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {

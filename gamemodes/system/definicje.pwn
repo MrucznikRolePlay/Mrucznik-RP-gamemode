@@ -284,9 +284,10 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define ACCESS_EDITCAR          0b1000000000
 #define ACCESS_EDITRANG         0b10000000000
 #define ACCESS_GIVEHALF         0b100000000000
-#define ACCESS_DELETEORG        0b1000000000000 //13 bit
+#define ACCESS_DELETEORG        0b1000000000000
+#define ACCESS_SKRYPTER         0b10000000000000 //14 bit
 
-#define ACCESS_OWNER            0b1111111111111
+#define ACCESS_OWNER            0b111111111111111
 
 //------------------------------------------------------------------------------
 //                              DIALOGI

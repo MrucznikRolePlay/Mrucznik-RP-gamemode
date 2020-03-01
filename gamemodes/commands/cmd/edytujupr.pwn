@@ -64,6 +64,8 @@ YCMD:edytujupr(playerid, params[], help)
     else strcat(str, "{FF0000}-{FFFFFF} Edycja rang\n");
     if(Uprawnienia(id, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ\n");
     else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    if(Uprawnienia(id, ACCESS_SKRYPTER)) strcat(str, "{00FF00}+{FFFFFF} Skrypter\n");
+    else strcat(str, "{FF0000}-{FFFFFF} Skrypter\n");
     if(Uprawnienia(id, ACCESS_OWNER)) strcat(str, "{00FF00}OWNER RIGHT'S");
     valstr(params, id);
     SetPVarString(playerid, "perm-id", params);
