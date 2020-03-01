@@ -3201,6 +3201,66 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
 					}
+					case 17: //kurczak
+					{
+						if(kaska[playerid] < 15) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿onego kurczaka!");
+							return 1;
+						}
+						if(Groceries[playerid][pChicken] != 0)
+						{
+							sendErrorMessage(playerid, "Masz ju¿ mro¿onego kurczaka.");
+							return 1;
+						}
+						Groceries[playerid][pChicken] = random(300)+110;
+						ZabierzKase(playerid, 15);
+					}
+					case 18: //pizza
+					{
+						if(kaska[playerid] < 30) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿on¹ pizze!");
+							return 1;
+						}
+						if(Groceries[playerid][pPizza] != 0)
+						{
+							sendErrorMessage(playerid, "Masz ju¿ mro¿on¹ pizze.");
+							return 1;
+						}
+						Groceries[playerid][pPizza] = random(300)+90;
+						ZabierzKase(playerid, 30);
+					}
+					case 19: //hamburger
+					{
+						if(kaska[playerid] < 25) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿onego hamburgera!");
+							return 1;
+						}
+						if(Groceries[playerid][pHamburger] != 0)
+						{
+							sendErrorMessage(playerid, "Masz ju¿ mro¿onego hamburgera.");
+							return 1;
+						}
+						Groceries[playerid][pHamburger] = random(300)+100;
+						ZabierzKase(playerid, 25);
+					}
+					case 20: //mro¿ony nietoperze z Wuhan
+					{
+						if(kaska[playerid] < 1500) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿onego nietoperza z Wuhan!");
+							return 1;
+						}
+						if(Groceries[playerid][pWuhanBat] != 0)
+						{
+							sendErrorMessage(playerid, "Masz ju¿ mro¿onego nietoperza z Wuhan.");
+							return 1;
+						}
+						Groceries[playerid][pWuhanBat] = random(650)+100;
+						ZabierzKase(playerid, 1500);
+					}
 				}
 			}
 		}

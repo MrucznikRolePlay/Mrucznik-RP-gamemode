@@ -4273,58 +4273,7 @@ ClearGroceries(playerid)
 	}
 	return 1;
 }
-/*
-Lotto(number)
-{
-	new JackpotFallen = 0;
-	new string[256];
-	new winner[MAX_PLAYER_NAME];
-	format(string, sizeof(string), "Totolotek: Wygra³a liczba: %d.", number);
-    OOCOff(COLOR_WHITE, string);
-    foreach(new i : Player)
-	{
-		if(IsPlayerConnected(i))
-		{
-		    if(PlayerInfo[i][pLottoNr] > 0)
-		    {
-			    if(PlayerInfo[i][pLottoNr] == number)
-			    {
-			        JackpotFallen = 1;
-			        GetPlayerName(i, winner, sizeof(winner));
-					format(string, sizeof(string), "Totolotek: %s Wygra³ nagrodê w wysokoœci: $%d.", winner, Jackpot);
-					OOCOff(COLOR_WHITE, string);
-					Log(payLog, INFO, "%s wygra³ w totolotku %d$ (wygra³a liczba %d)", GetPlayerLogName(i), Jackpot, number);
-					format(string, sizeof(string), "* Wygra³eœ nagrodê o wysokoœci: $%d dziêki wytypowaniu prawid³owej liczby !", Jackpot);
-					SendClientMessage(i, COLOR_YELLOW, string);
-			    	DajKase(i, Jackpot);
-			    }
-			    else
-			    {
-			        SendClientMessage(i, COLOR_LIGHTBLUE, "* Tym razem nie wygra³eœ w totolotku. Spróbuj innym razem :) .");
-			    }
-			}
-			PlayerInfo[i][pLottoNr] = 0;
-		}
-	}
-	if(JackpotFallen)
-	{
-	    new rand = random(125000); rand += 15789;
-	    Jackpot = rand;
-	    SaveStuff();
-	    format(string, sizeof(string), "Totolotek: Losowanie rozpoczête, przewidywana nagroda: $%d.", Jackpot);
-		OOCOff(COLOR_WHITE, string);
-		SendClientMessageToAll(COLOR_YELLOW, "Komora losowania jest pusta, proszê o zwolnienie blokady");
-	}
-	else
-	{
-	    new rand = random(300000); rand += 2158;
-	    Jackpot += rand;
-	    SaveStuff();
-	    format(string, sizeof(string), "Totolotek: Nagroda zosta³a podwy¿szona do: $%d.", Jackpot);
-		OOCOff(COLOR_WHITE, string);
-	}
-	return 1;
-}*/
+
 Lotto(number)
 {
 	new winners=0, string[256], status=1; 

@@ -66,6 +66,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 
 | Nazwa | Koszt kuracji | Czas kuracji | Zaraźliwość | Zarażanie przy kontakcie | Efekty | Sposób zarażenia |
 | :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
+| Koronawirus | 25.000$ | 2 minuty | 1.0 | tak | [efekty](#efekty-koronawirusa) | Komenda /zjedz nietoperza i do ugotowania |
 | Grypa | 50.000$ | 5 minut | 1.0 | nie | [efekty](#efekty-grypy) | Jeżeli gracz przez godzinę będzie pozostawał z HP mniejszym niż 10
 | Zatrucie | 50.000$ | 5 minut | 1.0 | nie | [efekty](#efekty-zatrucia) | Gdy gracz zje coś nieświeżego (?) 
 | Padaczka | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-padaczki) | Niewielka szansa podczas otrzymania postrzału w głowę |
@@ -75,9 +76,12 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Epidemia zombie | 1.000$ | 5 minut | 1.0 | tak | [efekty](#efekty-zombie) | Tylko od admina |
 | HIV | 1.000.000$ | 30 minut | 1.0 | tak | [efekty](#efekty-zombie) | Podczas seksu bez zabezpieczeń |
 
+### Efekty koronawirusa
+
+
 ### Efekty grypy
 | Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
-| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:| :-----:| :-----:|
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Słabość (FeelingBadEffect) | Gracz odtwarza animację zmęczenia | Poczuł się źle | 5 ± 10 minut | - | - | - |
 | Kaszel (CouchingEffect) | Gracz odtwarza animację kaszlania | Zaczyna kaszleć. | 20 ± 20 minut  | - | - | - |
 | Utrata 10 hp (HPLossEffect) | Gracz traci 10 punktów hp bez możliwości śmierci. | Zaczyna kaszleć krwią. | 60 ± 120 minut | 5.0 | 10 |
