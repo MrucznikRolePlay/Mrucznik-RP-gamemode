@@ -27,9 +27,6 @@ new Car_SlotQueue[1024];
 new pCruiseSpeed[MAX_PLAYERS];
 new pCruiseTXD[MAX_PLAYERS] = 0;
 
-new pCruiseSpeed[MAX_PLAYERS];
-new pCruiseTXD[MAX_PLAYERS] = 0;
-
 
 //------------------<[ Forwardy: ]>--------------------
 forward CruiseControl(playerid);
