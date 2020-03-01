@@ -53,8 +53,16 @@ CurePlayer(playerid, eDiseases:disease)
 
 InfectPlayer(playerid, eDiseases:disease)
 {
+	//TODO: sprawdzanie czy gracz nie jest ju¿ zara¿ony t¹ chorob¹ powoduje, ¿e dane powinny byæ zapisane na strukturze danych Set zamiast Vector
+	// Set nie dopuszcza powtarzania elementów
+	if(IsPlayerSick(playerid, disease))
+	{
+		return 0;
+	}
+
 	MruMySQL_AddDisease(playerid, disease);
 	InfectPlayerWithoutSaving(playerid, disease);
+	return 1;
 }
 
 InfectPlayerWithoutSaving(playerid, eDiseases:disease)
