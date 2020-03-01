@@ -97,9 +97,9 @@ command_maseczka_Impl(playerid, giveplayerid, price)
         return 1;
     }
 
-    if(price < 0) 
+    if(price < 800) 
     {
-        sendErrorMessage(playerid, "Cena musi byæ wiêksza ni¿ 0.");
+        sendErrorMessage(playerid, "Cena musi byæ wiêksza ni¿ 800$.");
         return 1;
     }
 
