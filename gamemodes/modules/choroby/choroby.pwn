@@ -203,12 +203,12 @@ ShowDiseaseList(playerid)
 	return 1;
 }
 
-StartPlayerTreatment(playerid, eDiseases:disease)
+StartPlayerTreatment(playerid, doctorid, eDiseases:disease)
 {
-	new time = DiseaseData[disease][CureTime]*60;
+	new time = DiseaseData[disease][CureTime];
 	SetPVarInt(playerid, "disease-treatement", disease);
+	SetPVarInt(playerid, "treatment-doctorid", doctorid);
 
-	TogglePlayerControllable(playerid, false);
 	ApplyAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
 
 	CurrationCounter(playerid, time+1);
@@ -220,7 +220,6 @@ EndPlayerTreatment(playerid)
 	new eDiseases:disease = eDiseases:GetPVarInt(playerid, "disease-treatement");
 	new chance = DiseaseData[disease][DrugResistance];
 	new rand = random(100);
-	TogglePlayerControllable(playerid, true);
 	SetPVarInt(playerid, "disease-treatement", 0);
 	ClearAnimations(playerid);
 
@@ -284,6 +283,11 @@ public CouchingEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "zaczyna kaszleæ.");
 	ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0, 1);
+
+	if(random(20) == 1)//5% szans
+	{
+		InfectPlayer(playerid, ZAPALENIE_PLUC);
+	}
 	return 1;
 }
 public VomitEffect(playerid, disease, value)

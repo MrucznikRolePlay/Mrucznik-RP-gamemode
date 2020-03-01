@@ -24,9 +24,21 @@
 //------------------<[ Enumy: ]>--------------------
 enum eDiseases {
     NONE,
+    KORONAWIRUS,
     GRYPA,
+    ZAPALENIE_PLUC,
     ZATRUCIE,
-    KORONAWIRUS
+    PADACZKA,
+    TOURETT,
+    ASTMA,
+    SCHIZOFRENIA,
+    ZOMBIE,
+    HIV,
+    ASTYGMATYZM,
+    NIEDOWLAD_RAK,
+    URAZ,
+    GANGRENA,
+    OBLED
 };
 
 enum eEffectData {
@@ -64,15 +76,30 @@ new Vector:VPlayerDiseases[MAX_PLAYERS];
 
 //TODO: Replace to dynamic arrays, vector or smth to create full dynamic system
 new DiseaseData[eDiseases][eDiseaseData] = {
+    //nazwa, cena, czas, lekoodpornosc, zarazliwosc, zarazanie przy kontakcie
     {"", 0, 0, 0, 0.0, false, VECTOR_NULL},
-    {"Grypa", 50000, 1, 25, 1.0, false, VECTOR_NULL},
-    {"Zatrucie", 50000, 1, 25, 1.0, false, VECTOR_NULL},
-    {"Koronawirus", 200000, 5, 80, 2.5, false, VECTOR_NULL}
+    {"Koronawirus", 1000, 20, 95, 1.0, true, VECTOR_NULL},
+    {"Grypa", 25000, 120, 0, 1.0, false, VECTOR_NULL},
+    {"Zapalenie p³uc", 100000, 240, 30, 1.0, false, VECTOR_NULL},
+    {"Zatrucie", 10000, 30, 20, 1.0, false, VECTOR_NULL},
+    {"Padaczka", 200000, 600, 10, 0.0, false, VECTOR_NULL},
+    {"Zespó³ Touretta", 100000, 300, 50, 0.0, false, VECTOR_NULL},
+    {"Astma", 25000, 60, 40, 0.0, false, VECTOR_NULL},
+    {"Schizofrenia Paranoidalna", 300000, 1200, 5, 0.0, false, VECTOR_NULL},
+    {"Virus Zombie", 1000, 30, 10, 5.0, false, VECTOR_NULL},
+    {"HIV", 100000, 300, 1, 0.3, true, VECTOR_NULL},
+    {"Astygmatyzm", 100000, 7*60, 45, 0.0, false, VECTOR_NULL},
+    {"Niedow³ad r¹k", 150000, 600, 25, 0.0, false, VECTOR_NULL},
+    {"Uraz", 10000, 60, 0, 0.0, false, VECTOR_NULL},
+    {"Gangrena", 75000, 120, 75, 0.1, true, VECTOR_NULL},
+    {"Ob³êd", 15000, 60, 90, 0.0, false, VECTOR_NULL}
 };
 
 new PlayerImmunity[MAX_PLAYERS];
 new Grypa[MAX_PLAYERS];
 new Tourett[MAX_PLAYERS];
+new Obled[MAX_PLAYERS];
+new AbortCurration[MAX_PLAYERS];
 
 //------------------<[ Forwardy: ]>--------------------
 forward FeelingBadEffect(playerid, disease, value);

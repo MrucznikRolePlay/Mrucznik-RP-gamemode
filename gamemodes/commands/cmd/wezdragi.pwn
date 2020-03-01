@@ -63,6 +63,12 @@ YCMD:wezdragi(playerid, params[], help)
 		    PlayerInfo[playerid][pDrugs] -= 2;
 		    //SetPlayerDrunkLevel(playerid, 8000);
 		    //SetPlayerWeather(playerid, -66);
+
+			//choroba
+			if(random(50) == 1)//2%
+			{
+				InfectPlayer(playerid, SCHIZOFRENIA);
+			}
 			
 			//System si³y
 			if(GetPVarInt(playerid, "ZjadlDragi") == 0)

@@ -1163,81 +1163,40 @@ command_akceptuj_Impl(playerid, x_job[32])
                         else if(PlayerInfo[SexOffer[playerid]][pSexSkill] == 400)
                         { SendClientMessage(SexOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prostytutki wynosz¹ teraz 5, Mo¿esz oferowaæ teraz lepszy sex (wiêcej ¿ycia) i trudniej sie zaraziæ."); }
                         
-                        //TODO: refactor
-                        // if(STDPlayer[playerid] == 0)
-                        // {
-                        //     if(Condom[playerid] < 1)
-                        // 	{
-                        // 	    new Float:health;
-                        // 	    new level = PlayerInfo[SexOffer[playerid]][pSexSkill];
-                        // 	    if(level >= 0 && level <= 50)
-                        // 	    {
-                        // 	        if(GetPlayerHealth(playerid, health) < 150) {
-                        // 			SetPlayerHealth(playerid, health + 30.0); }
-                        // 			new rand = random(sizeof(STD1));
-                        // 			STDPlayer[playerid] = STD1[rand];
-                        // 			STDPlayer[SexOffer[playerid]] = STD1[rand];
-                        // 			if(STD1[rand] == 0) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 30 HP + brak choroby z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Nie masz choroby z powodu sexu."); }
-                        // 			else if(STD1[rand] == 1) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 30 HP + a Chlamydia z powodu Sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Chlamydia z powodu uprawiania sexu."); }
-                        // 			else if(STD1[rand] == 2) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 30 HP + a Gonorrhea z powodu Sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Gonorrhea z powodu uprawiania sexu."); }
-                        // 			else if(STD1[rand] == 3) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 30 HP + a Syphilis z powodu Sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Syphilis z powodu uprawiania sexu."); }
-                        // 		}
-                        // 		else if(level >= 51 && level <= 100)
-                        // 	    {
-                        // 	        if(GetPlayerHealth(playerid, health) < 150) {
-                        // 			SetPlayerHealth(playerid, health + 60.0); }
-                        // 			new rand = random(sizeof(STD2));
-                        // 			STDPlayer[playerid] = STD2[rand];
-                        // 			STDPlayer[SexOffer[playerid]] = STD2[rand];
-                        // 			if(STD2[rand] == 0) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 60 HP + brak choroby z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Nie masz choroby z powodu sexu."); }
-                        // 			else if(STD2[rand] == 1) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 60 HP + a Chlamydia z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Chlamydia z powodu uprawiania sexu."); }
-                        // 			else if(STD2[rand] == 2) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 60 HP + a Gonorrhea z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Gonorrhea z powodu uprawiania sexu."); }
-                        // 			else if(STD2[rand] == 3) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 60 HP + a Syphilis z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Syphilis z powodu uprawiania sexu."); }
-                        // 		}
-                        // 		else if(level >= 101 && level <= 200)
-                        // 	    {
-                        // 	        if(GetPlayerHealth(playerid, health) < 150) {
-                        // 			SetPlayerHealth(playerid, health + 90.0); }
-                        // 			new rand = random(sizeof(STD3));
-                        // 			STDPlayer[playerid] = STD3[rand];
-                        // 			STDPlayer[SexOffer[playerid]] = STD3[rand];
-                        // 			if(STD3[rand] == 0) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 90 HP + brak choroby z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Nie masz choroby z powodu sexu."); }
-                        // 			else if(STD3[rand] == 1) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 90 HP + a Chlamydia z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Chlamydia z powodu uprawiania sexu."); }
-                        // 			else if(STD3[rand] == 2) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 90 HP + a Gonorrhea z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Gonorrhea z powodu uprawiania sexu."); }
-                        // 			else if(STD3[rand] == 3) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 90 HP + a Syphilis z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Syphilis z powodu uprawiania sexu."); }
-                        // 		}
-                        // 		else if(level >= 201 && level <= 400)
-                        // 	    {
-                        // 	        if(GetPlayerHealth(playerid, health) < 150) {
-                        // 			SetPlayerHealth(playerid, health + 120.0); }
-                        // 			new rand = random(sizeof(STD4));
-                        // 			STDPlayer[playerid] = STD4[rand];
-                        // 			STDPlayer[SexOffer[playerid]] = STD4[rand];
-                        // 			if(STD4[rand] == 0) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 120 HP + brak choroby z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Nie masz choroby z powodu sexu."); }
-                        // 			else if(STD4[rand] == 1) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 120 HP + a Chlamydia z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Chlamydia z powodu uprawiania sexu."); }
-                        // 			else if(STD4[rand] == 2) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 120 HP + a Gonorrhea z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Gonorrhea z powodu uprawiania sexu."); }
-                        // 			else if(STD4[rand] == 3) { SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Dodano ci 120 HP + a Syphilis z powodu sexu."); SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Masz Syphilis z powodu uprawiania sexu."); }
-                        // 		}
-                        // 		else if(level >= 401)
-                        // 		{
-                        // 		    if(GetPlayerHealth(playerid, health) < 150) {
-                        // 			SetPlayerHealth(playerid, health + 150.0); }
-                        // 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoje umiejêtnoœci prostytutki s¹ tak wysokie ¿e dajesz wysokie HP i nie dajesz chorób.");
-                        // 			SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Umiejêtnoœæ dziwki s¹ tak wysokie ¿e dostajesz du¿e HP i zero chorób.");
-                        // 		}
-                        // 	}
-                        // 	else
-                        // 	{
-                        // 	    SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Ten gracz u¿ywa kondom.");
-                        // 	    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* U¿y³eœ kondom.");
-                        // 	    Condom[playerid] --;
-                        // 	}
-                        // }
-                        // else
-                        // {
-                        //     SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Ten gracz zosta³ zara¿ony drog¹ p³ciow¹.");
-                        //     return 1;
-                        // }
+                        if(Condom[playerid] < 1)
+                        {
+                            new Float:health, Float:hp;
+                            new level = PlayerInfo[SexOffer[playerid]][pSexSkill];
+                            if(level >= 0 && level <= 50) hp = 30;
+                            else if(level >= 51 && level <= 100) hp = 60;
+                            else if(level >= 101 && level <= 200) hp = 90;
+                            else if(level >= 201 && level <= 400) hp = 120;
+                            else if(level >= 401)
+                            {
+                                hp = 150;
+                                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoje umiejêtnoœci prostytutki s¹ tak wysokie ¿e dajesz wysokie HP i nie dajesz chorób.");
+                                SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Umiejêtnoœæ dziwki s¹ tak wysokie ¿e dostajesz du¿e HP i zero chorób.");
+                                return 1;
+                            }
+                            GetPlayerHealth(playerid, health);
+                            if(health < 150) 
+                            {
+                                SetPlayerHealth(playerid, health + hp); 
+                            }
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP z powodu sexu.", hp));
+                            if(random(20) == 1)//5% szans na zara¿enie
+                            {
+                                InfectPlayer(playerid, HIV);
+                            }
+
+                            //TODO: przenoszenie chorób drog¹ p³ciow¹
+                        }
+                        else
+                        {
+                            SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Ten gracz u¿ywa kondom.");
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, "* U¿y³eœ kondom.");
+                            Condom[playerid] --;
+                        }
                         SexOffer[playerid] = 999;
                         return 1;
                     }

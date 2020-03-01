@@ -43,6 +43,9 @@ hook OnPlayerDisconnect(playerid, reason)
 {
 	VECTOR_clear(VPlayerDiseases[playerid]);
 	PlayerImmunity[playerid] = 0;
+	Grypa[playerid] = 0;
+	Tourett[playerid] = 0;
+	Obled[playerid] = 0;
 	return 1;
 }
 
@@ -82,21 +85,65 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 				InfectPlayer(playerid, PADACZKA);
 			}
 		}
+		else if(bodypart == BODY_PART_LEFT_ARM || bodypart == BODY_PART_RIGHT_ARM)
+		{
+			if(random(1000) == 0)//0.1% szans
+			{
+				InfectPlayer(playerid, NIEDOWLAD_RAK);
+			}
+		}
 	}
 	return 1;
 }
 
 hook OnPlayerText(playerid, text[])
 {
-	if(regex_match(nick, "[^a-zA-Z](kurwa|chuj|huj|cipa|fiut|zjeb|kurwy|jeb|pizda|pizdy|szmul|dzban|kutas|dupa|cipka|pierdol|pierdolony)[^a-zA-Z]") <= 0)
+	if(regex_match(text, "[^a-zA-Z](kurwa|chuj|huj|cipa|fiut|zjeb|kurwy|jeb|pizda|pizdy|szmul|dzban|kutas|dupa|cipka|pierdol|pierdolony)[^a-zA-Z]") <= 0)
 	{
 		Tourett[playerid]++;
-		if(Tourett[playerid] >= 60)
+		if(Tourett[playerid] >= 30)
 		{
 			InfectPlayer(playerid, TOURETT);
+			Tourett[playerid] = 0;
 		}
 	}
 	return 1;
+}
+
+hook OnPlayerDeath(playerid, killerid, reason)
+{
+	if(reason == WEAPON_DROWN)
+	{
+		if(random(2) == 0)//50%
+		{
+			InfectPlayer(playerid, ASTMA);
+		}
+	}
+
+	if(random(20) == 0)//5%
+	{
+		InfectPlayer(playerid, URAZ);
+	}
+
+	if(IsPlayerConnected(killerid))
+	{
+		Obled[killerid]++;
+		if(Obled[killerid] >= 10)
+		{
+			if(random(5) == 0) //20%
+			{
+				InfectPlayer(killerid, OBLED);
+			}
+		}
+	}
+}
+
+hook OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
+{
+	if(random(10000) == 0) //0.01% szans
+	{
+		InfectPlayer(playerid, ASTYGMATYZM);
+	}
 }
 
 //end

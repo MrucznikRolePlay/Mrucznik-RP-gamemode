@@ -64,20 +64,28 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 
 
 ## Zaimplementowane choroby
-
-| Nazwa | Koszt kuracji | Czas kuracji | Zaraźliwość | Zarażanie przy kontakcie | Efekty | Sposób zarażenia |
-| :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
-| Koronawirus | 25.000$ | 2 minuty | 1.0 | tak | [efekty](#efekty-koronawirusa) | Komenda /zjedz nietoperza i do ugotowania |
-| Grypa | 50.000$ | 5 minut | 1.0 | nie | [efekty](#efekty-grypy) | Jeżeli gracz przez godzinę będzie pozostawał z HP mniejszym niż 10
-| Zatrucie | 50.000$ | 5 minut | 1.0 | nie | [efekty](#efekty-zatrucia) | 5% szans na zarażenie przy /zjedz
-| Padaczka | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-padaczki) | Niewielka szansa (0.5%) podczas otrzymania postrzału w głowę |
-| Zespół Touretta | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-touretta) | Gdy gracz przekroczy licznik przekleństw na chatach IC powyżej 60 na godzinę |
-| Astma | 500.000$ | 20 minut | 0.0 | nie | [efekty](#efekty-astmy) | nie wiem |
-| Schizofrenia paranoidalna | 1.500.000$ | 30 minut | 0.0 | nie | [efekty](#efekty-schizofrenii) | 2% szans gdy gracz zażywa narkotyki |
-| Epidemia zombie | 1.000$ | 5 minut | 1.0 | tak | [efekty](#efekty-zombie) | Tylko od admina |
-| HIV | 1.000.000$ | 30 minut | 1.0 | tak | [efekty](#efekty-zombie) | Podczas seksu bez zabezpieczeń |
+| Nazwa | Koszt kuracji | Czas kuracji | Lekoodporność | Zaraźliwość | Zarażanie przy kontakcie | Efekty | Sposób zarażenia |
+| :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:| :-----:|
+| Koronawirus | 1000$ | 20 sekund | 95% | 1.0 | tak | [efekty](#efekty-koronawirusa) | Komenda /zjedz nietoperza i do ugotowania |
+| Grypa | 25.000$ | 2 minuty | 0% | 1.0 | nie | [efekty](#efekty-grypy) | Jeżeli gracz przez godzinę będzie pozostawał z HP mniejszym niż 20 |
+| Zapalenie płuc | 100.000$ | 4 minuty | 30% | 2.0 | nie | [efekty](#efekty-zapalenia-płuc) | Przy efektach grypy (kaszel) 5% |
+| Zatrucie | 10.000$ | 30 sekund | 20% | 1.0 | nie | [efekty](#efekty-zatrucia) | 5% szans na zarażenie przy /zjedz
+| Padaczka | 200.000$ | 10 minut | 10% | 0.0 | nie | [efekty](#efekty-padaczki) | Niewielka szansa (0.5%) podczas otrzymania postrzału w głowę |
+| Zespół Touretta | 100.000$ | 5 minut | 50% | 0.0 | nie | [efekty](#efekty-touretta) | Gdy gracz przekroczy licznik przekleństw na chatach IC powyżej 60 na godzinę |
+| Astma | 25.000$ | 1 minuta | 40% | 0.0 | nie | [efekty](#efekty-astmy) | Śmierć przez utopienie 50% |
+| Schizofrenia paranoidalna | 300.000$ | 20 minut | 5% | 0.0 | nie | [efekty](#efekty-schizofrenii) | 2% szans gdy gracz zażywa narkotyki |
+| Epidemia zombie | 1.000$ | 30 sekund | 10% | 50.0 | tak | [efekty](#efekty-zombie) | Tylko od admina |
+| HIV | 100.000$ | 5 minut | 1% | 1.0 | tak | [efekty](#efekty-zombie) | Podczas seksu bez zabezpieczeń |
+| Astygmatyzm | 100.000$ | 7 minut | 45% | 0.0 | nie | [efekty](#efekty-astygmatyzmu) | 0.01% przy strzelaniu |
+| Niedowład rąk | 150.000$ | 10 minut | 25% | 0.0 | nie | [efekty](#efekty-parkinsona) | 0.1% podczas dostania w rękę + 1% szans przy efektach gangreny |
+| Uraz | 10.000$ | 1 minuta | 0% | 0.0 | nie | [efekty](#efekty-urazu) | 5% szans podczas BW |
+| Gangrena | 75.000$ | 2 minut | 75% | 0.1 | tak | [efekty](#efekty-gangreny) | 1% szans podczas efektów urazu |
+| Obłęd | 15.000$ | 1 minut | 90% | 0.0 | nie | [efekty](#efekt-obłędu) | Gdy gracz zabije 10 osób w ciągu 10minut ma 20% szans na obłęd |
 
 ### Efekty koronawirusa
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+
 
 
 ### Efekty grypy
@@ -87,35 +95,57 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Kaszel (CouchingEffect) | Gracz odtwarza animację kaszlania | Zaczyna kaszleć. | 20 ± 20 minut  | - | - | - |
 | Utrata 10 hp (HPLossEffect) | Gracz traci 10 punktów hp bez możliwości śmierci. | Zaczyna kaszleć krwią. | 60 ± 120 minut | 5.0 | 10 |
 
+### Efekty grypy
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| Słabość (FeelingBadEffect) | Gracz odtwarza animację zmęczenia | Poczuł się źle | 5 ± 10 minut | - | - | - |
+| Kaszel (CouchingEffect) | Gracz odtwarza animację kaszlania | Zaczyna kaszleć. | 20 ± 20 minut  | - | - | - |
+| Utrata 10 hp (HPLossEffect) | Gracz traci 10 punktów hp bez możliwości śmierci. | Zaczyna kaszleć krwią. | 60 ± 120 minut | 5.0 | 10 |
+
 ### Efekty zatrucia
-| Nazwa efektu | Callback | Częstotliwośc występowania | Efekt trwały | Zasięg zarażania | Szansa na infekcję | Dodatkowa wartość |
-| :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
-| - | - | - | - | - | - | - |
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
 
 ### Efekty padaczki
-| Nazwa efektu | Callback | Częstotliwośc występowania | Efekt trwały | Zasięg zarażania | Szansa na infekcję | Dodatkowa wartość |
-| :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
-| - | - | - | - | - | - | - |
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
 
 ### Efekty touretta
-| Nazwa efektu | Callback | Częstotliwośc występowania | Efekt trwały | Zasięg zarażania | Szansa na infekcję | Dodatkowa wartość |
-| :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
-| - | - | - | - | - | - | - |
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
 
 ### Efekty astmy
-| Nazwa efektu | Callback | Częstotliwośc występowania | Efekt trwały | Zasięg zarażania | Szansa na infekcję | Dodatkowa wartość |
-| :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
-| - | - | - | - | - | - | - |
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
 
 ### Efekty schizofrenii
-| Nazwa efektu | Callback | Częstotliwośc występowania | Efekt trwały | Zasięg zarażania | Szansa na infekcję | Dodatkowa wartość |
-| :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
-| - | - | - | - | - | - | - |
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
 
 ### Efekty zombie
-| Nazwa efektu | Callback | Częstotliwośc występowania | Efekt trwały | Zasięg zarażania | Szansa na infekcję | Dodatkowa wartość |
-| :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:|
-| - | - | - | - | - | - | - |
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
+
+### Efekty astygmatyzmu
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
+
+### Efekty parkinsona
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
+
+### Efekty obłędu
+| Nazwa efektu | Opis efektu | Akcja /me | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
+| - | - | - | - | - | - |
 
 ## Zaimplementowane efekty
 
@@ -125,3 +155,8 @@ Gracz odtwarza animację zmęczenia oraz /me poczuł się źle
 
 
 
+## Pomysły na przyszłe modyfikacje
+- możliwośc opracowywania nowych chorób przez graczy na podstawie istniejących efektów
+- choroby mutują i powstają nowe, z innymi efektami
+- gracze mogą zarażać się strzykawką z wirusem
+- medycy muszą opracowywać leki na choroby, im bardziej poznają chorobę tym bardziej zmniejsza się jej lekoodporność
