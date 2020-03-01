@@ -169,7 +169,7 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 				}
 				else
 				{
-					PlayerImmunity[i]--;
+					DecreaseImmunity(i);
 				}
 			}
 		}
@@ -240,6 +240,21 @@ EndPlayerTreatment(playerid)
 IsPlayerTreated(playerid)
 {
 	return GetPVarInt(playerid, "disease-treatement") != 0;
+}
+
+DecreaseImmunity(playerid)
+{
+	if(PlayerImmunity[playerid] <= 0)
+	{
+		if(GetPVarInt(playerid, "maseczka") > 0)
+		{
+			SendClientMessage(playerid, COLOR_RED, "Twoja maseczka ju¿ nie spe³nia swojej roli ochronnej!");
+			DetachPlayerItem(playerid, GetPVarInt(playerid, "maseczka")-1);
+			SetPVarInt(playerid, "maseczka", 0);
+		}
+		return 0;
+	}
+	return --PlayerImmunity[playerid];
 }
 
 //-----------------<[ Disease effects: ]>-------------------
