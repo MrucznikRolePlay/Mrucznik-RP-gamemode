@@ -26,16 +26,19 @@
 //
 
 //-----------------<[ Callbacki: ]>-----------------
-
-hook OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
+hook OnPlayerStateChange(playerid, newstate, oldstate)
 {
-    if((GetVehicleModel(vehicleid) == 509 || GetVehicleModel(vehicleid) == 510 || GetVehicleModel(vehicleid) == 481) && !ispassenger)
-	{
-  		SetTimerEx("CruiseControl_Static_TurnOn", 5000, false, "ii", playerid, 1);
- 	}
-    if(PlayerInfo[playerid][pLevel] == 1 && !IsARower(vehicleid))
+    if(newstate == PLAYER_STATE_DRIVER)
     {
-        SetTimerEx("CruiseControl_Static_TurnOn", 5000, false, "ii", playerid, 0);
+        new newcar = GetPlayerVehicleID(playerid);
+        if(PlayerInfo[playerid][pCarLic] == 0 && !IsARower(newcar))
+		{
+			CruiseControl_Static_TurnOn(playerid, 0);
+		}
+		if(IsARower(newcar))
+		{
+  			CruiseControl_Static_TurnOn(playerid, 1);
+		}
     }
 }
 

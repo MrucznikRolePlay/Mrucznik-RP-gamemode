@@ -1454,7 +1454,8 @@ enum pInfo
 	pAJreason[MAX_AJ_REASON],
 	pPodPW,
 	pCruiseController,
-	pFixKit
+	pFixKit,
+	pTurnedOnCarWithoutCarLic
 };
 enum StringData
 {

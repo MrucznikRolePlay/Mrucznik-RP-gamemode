@@ -2762,7 +2762,7 @@ SetPlayerSpawnWeapon(playerid)
 
 SetPlayerSpawnSkin(playerid)
 {
-	if(PlayerInfo[playerid][pSkin] > 20000 && PlayerInfo[playerid][pSkin] < 20099)
+	if((PlayerInfo[playerid][pSkin] > 20000 && PlayerInfo[playerid][pSkin] < 20099) && PlayerInfo[playerid][pSkin] != 20004)
 	{
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
 		PlayerInfo[playerid][pSkin] = 136;
@@ -4816,6 +4816,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 		else if(response == EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
 			new Float:X, Float:Y, Float:Z, Float:rox, Float:roy, Float:roz;
+			new frac = GetPlayerFraction(playerid);
             GetDynamicObjectRot(objectid, rox, roy, roz);
             GetDynamicObjectPos(objectid, X, Y, Z);
 			if(!IsPlayerInRangeOfPoint(playerid, 2.0, x,y,z))
@@ -4828,15 +4829,16 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 new Float:speed = VectorSize(X-x, Y-y, Z-z);
                 MoveDynamicObject(objectid, x, y, z, speed, rx, ry, rz);
             }
-			if(GetPVarInt(playerid, "zoneid") == -1) 
+			if( GetPVarInt(playerid, "zoneid") == -1 || (ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) ) 
         	{
-				SendClientMessage(playerid, 0xFF0000FF, "Musisz byæ na strefie!");
+				SendClientMessage(playerid, 0xFF0000FF, "Musisz byæ na swojej strefie!");
                 SetDynamicObjectPos(objectid, X, Y, Z);
 			}
 		}
 		else if( response == EDIT_RESPONSE_FINAL && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
 			new f = GetPVarInt(playerid, "GraffitiID");
+			new frac = GetPlayerFraction(playerid);
 			if(!IsPlayerInRangeOfPoint(playerid, 2.0, x,y,z))
             {
                 GameTextForPlayer(playerid, "~r~Byles za daleko.",2000, 5);
@@ -4845,9 +4847,9 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 				graffiti_Zeruj(f);
 				return 1;
 			}
-			if(GetPVarInt(playerid, "zoneid") == -1) 
+			if( GetPVarInt(playerid, "zoneid") == -1 || (ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) )
         	{
-				SendClientMessage(playerid, 0xFF0000FF, "Nie by³eœ na strefie!");
+				SendClientMessage(playerid, 0xFF0000FF, "Nie by³eœ na swojej strefie!");
                 graffiti_DeleteMySQL(f);
 				graffiti_ZerujZmienne(playerid);
 				graffiti_Zeruj(f);
@@ -5199,11 +5201,14 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             if(KradniecieWozu[playerid] != newcar)
 		    {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij spróbowaæ to zrobiæ lub /wyjdz aby wyjœæ.");
-                if(PlayerInfo[playerid][pCarLic] == 1) TogglePlayerControllable(playerid, 0);
+                TogglePlayerControllable(playerid, 0);
                 KradniecieWozu[playerid] = 1;
 			}
         }
 		gLastCar[playerid] = newcar;
+
+		
+
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{

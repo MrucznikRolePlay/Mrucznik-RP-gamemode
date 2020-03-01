@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ kuppojazd ]-----------------------------------------------//
+//-----------------------------------------------[ sprzedajzestaw ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: werem
+// Data utworzenia: 29.02.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -27,21 +29,27 @@
 /*
 	
 */
-
-YCMD:kuppojazd(playerid, params[], help)
+YCMD:sprzedajzestaw(playerid, params[], help)
 {
-	if(IsPlayerInAnyVehicle(playerid))
+	if(PlayerInfo[playerid][pJob] == JOB_MECHANIC)
 	{
-		sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
-		return 1;
+		new id;
+		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /sprzedajzestaw [id]");
+		if(!IsPlayerConnected(id) ) return sendErrorMessage(playerid, "Ten gracz nie jest zalogowanay");
+		if(id == playerid) return sendErrorMessage(playerid, "Nie mo¿esz sprzedaæ samemu sobie.");
+        new Float:x, Float:y, Float:z, tmp[128];
+		GetPlayerPos(id, x, y, z);
+		if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
+		if(PlayerInfo[id][pFixKit] >= 3) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz posiada maksymaln¹ iloœæ zestawów");
+		format(tmp, sizeof tmp, "Proponujesz %s kupno zestawu za 15000$", GetNick(id));
+		SendClientMessage(playerid, -1, tmp);
+		format(tmp, sizeof tmp, "Mechanik %s proponuje Ci kupno zestawu za 15000$", GetNick(playerid));
+		SetPVarInt(id, "FixKitOffer", playerid);
+		ShowPlayerDialogEx(id, D_MECH_SPRZEDAZ_FIXKIT, DIALOG_STYLE_MSGBOX, "Mechanik", tmp, "Kup", "Anuluj");
 	}
-    if(PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
+    else
     {
-        ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriê kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa ka¿d¹ kieszeñ\nMotory\nInne pojazdy", "Wybierz", "WyjdŸ");
-	}
-	else
-	{
-	    sendTipMessage(playerid, "Nie jesteœ przy salonie aut.");
-	}
+        sendErrorMessage(playerid, "Komenda dostêpna dla mechanika.");
+    }
 	return 1;
 }

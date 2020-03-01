@@ -36,9 +36,9 @@ command_grafiti_Impl(playerid, opcja[24])
                 sendTipMessage(playerid, "Wykorzystano limit graffiti(3).");
                 return 1;
             }
-            if(GetPVarInt(playerid, "zoneid") == -1) 
+            if(GetPVarInt(playerid, "zoneid") == -1 || (ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)))
             {
-                sendTipMessageEx(playerid, -1, "Nie jestes na strefie.");
+                sendTipMessageEx(playerid, -1, "Nie jestes na swojej strefie.");
                 return 1;
             }
             if(GetPlayerVirtualWorld(playerid) != 0 || GetPlayerInterior(playerid) != 0) 
