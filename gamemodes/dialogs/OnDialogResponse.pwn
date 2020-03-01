@@ -13877,7 +13877,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				format(string, sizeof string, "%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", PlayerName(playerid));
 				SendClientMessage(id, 0x0080D0FF, string);
-				format(string, sizeof string, "Kupi³eœ zestaw od Mechanika za %d$", (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
+				format(string, sizeof string, "Kupi³eœ zestaw od Mechanika za 15000$");
 				SendClientMessage(playerid, 0x00FF00FF, string);
 				ZabierzKase(playerid, 15000);
 				DajKase(id, 15000);
