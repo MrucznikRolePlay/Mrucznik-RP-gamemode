@@ -1450,6 +1450,10 @@ command_akceptuj_Impl(playerid, x_job[32])
     {
         kuracja_akceptuj(playerid);
     }
+    else if(strcmp(x_job,"maseczke",true) == 0 || strcmp(x_job,"maseczka",true) == 0)
+    {
+        maseczka_akceptuj(playerid);
+    }
     return 1;
 }
 
