@@ -47,7 +47,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	Grypa[playerid] = 0;
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
-	Obled[playerid] = 0;
+	PTSDCounter[playerid] = 0;
 	return 1;
 }
 
@@ -91,7 +91,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		{
 			if(random(1000) == 0)//0.1% szans
 			{
-				InfectPlayer(playerid, NIEDOWLAD_RAK);
+				InfectPlayer(playerid, PARKINSON);
 			}
 		}
 	}
@@ -129,12 +129,12 @@ hook OnPlayerDeath(playerid, killerid, reason)
 
 	if(IsPlayerConnected(killerid))
 	{
-		Obled[killerid]++;
-		if(Obled[killerid] >= 10)
+		PTSDCounter[killerid]++;
+		if(PTSDCounter[killerid] >= 10)
 		{
 			if(random(5) == 0) //20%
 			{
-				InfectPlayer(killerid, OBLED);
+				InfectPlayer(killerid, PTSD);
 			}
 		}
 	}

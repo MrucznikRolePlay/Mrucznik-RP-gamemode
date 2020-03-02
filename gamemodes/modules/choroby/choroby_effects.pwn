@@ -37,7 +37,7 @@ public DusznosciEffect(playerid, disease, value)
 {
 	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "zaczyna siê dusiæ.");
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, false, false);
+	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, false);
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
 }
@@ -57,7 +57,7 @@ public KoronawirusDeathEffect(playerid, disease, value)
 	ChatDo(playerid, sprintf("Koronawirus doszczêtnie wyniszczy³ organizm %s", GetNick(playerid)));
 	ChatMe(playerid, "upada na ziemie i zaczyna umieraæ");
 	TogglePlayerControllable(playerid, 0);
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], 200, true, true);
+	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, true);
 	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	return 1;
 }
@@ -180,7 +180,7 @@ public AnaphylacticShock(playerid, disease, value)
 	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "nie mo¿e oddychaæ i zaczyna siê dusiæ.");
 	TogglePlayerControllable(playerid, 0); //TODO: nie odmra¿aæ gdy gracz ju¿ by³ zamro¿ony
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], 200, true, true);
+	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, true);
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
 }

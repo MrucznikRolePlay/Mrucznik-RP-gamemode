@@ -75,7 +75,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Astma | 25.000$ | 1 minuta | 40% | 0.0 | nie | [efekty](#efekty-astmy) | Śmierć przez utopienie 50% |
 | Schizofrenia paranoidalna | 300.000$ | 20 minut | 5% | 0.0 | nie | [efekty](#efekty-schizofrenii) | 2% szans gdy gracz zażywa narkotyki |
 | Epidemia zombie | 1.000$ | 30 sekund | 10% | 50.0 | tak | [efekty](#efekty-zombie) | Tylko od admina |
-| HIV | 100.000$ | 5 minut | 1% | 1.0 | tak | [efekty](#efekty-zombie) | Podczas seksu bez zabezpieczeń |
+| HIV | 100.000$ | 5 minut | 1% | 0.3 | tak | [efekty](#efekty-zombie) | Podczas seksu bez zabezpieczeń |
 | Astygmatyzm | 100.000$ | 7 minut | 45% | 0.0 | nie | [efekty](#efekty-astygmatyzmu) | 0.01% przy strzelaniu |
 | Niedowład rąk | 150.000$ | 10 minut | 25% | 0.0 | nie | [efekty](#efekty-parkinsona) | 0.1% podczas dostania w rękę + 1% szans przy efektach gangreny |
 | Uraz | 10.000$ | 1 minuta | 0% | 0.0 | nie | [efekty](#efekty-urazu) | 5% szans podczas BW |
@@ -172,7 +172,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Ropienie | Graczowi wycieka ropa z rany, gracz traci hp. | /do z rany John_Mrucznik zaczyna wyciekać ropa. | 5 ± 10 minut | - | - |
-| Utrata hp | Gracz traci hp z możliwością śmierci. | /me gorączkuje a zjego rany wydobywa się smród zgnilizny. | 10 ± 20 minut | 5.0 | 50 |
+| Utrata hp | Gracz traci hp z możliwością śmierci. | /me gorączkuje a zjego rany wydobywa się smród zgnilizny. | 10 ± 20 minut | - | - |
 | Omdlenie | Gracz traci na chwilę przytomność | /me omdlał. | 10 ± 20 minut  | - | - |
 
 ### Efekty PTSD

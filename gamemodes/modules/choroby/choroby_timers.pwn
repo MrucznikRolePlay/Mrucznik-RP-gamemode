@@ -116,8 +116,8 @@ task ChorobyMinutaTimer[60000]()
 		//Tourett
 		if(Tourett[i] > 0) Tourett[i]--;
 
-		//Obled
-		if(Obled[i] > 0) Obled[i]--;
+		//PTSD
+		if(PTSDCounter[i] > 0) PTSDCounter[i]--;
 	}
 }
 
