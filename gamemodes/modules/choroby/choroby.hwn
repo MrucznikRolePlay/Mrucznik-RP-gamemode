@@ -95,6 +95,19 @@ new DiseaseData[eDiseases][eDiseaseData] = {
     {"PTSD", 15000, 60, 90, 0.0, false, VECTOR_NULL}
 };
 
+new TourettWords[][] = {
+    " kurwa",
+    " jeb",
+    " funia",
+    " kox",
+    " rup",
+    " ciastko",
+    " koza",
+    " chuj",
+    " pierdol",
+    " nigga"
+};
+
 new PlayerImmunity[MAX_PLAYERS];
 new Grypa[MAX_PLAYERS];
 new Tourett[MAX_PLAYERS];

@@ -151,11 +151,19 @@ public EpilepsyEffect(playerid, disease, value)
 //Tourett
 public TourettShoutEffect(playerid, disease, value)
 {
-	static shouts[][] = {
-		""
-	};
+	//TODO:
+	// static shouts[][] = {
+	// 	""
+	// };
 
-	Krzyk(playerid, shouts[random(sizeof(shouts))]);
+	// Krzyk(playerid, shouts[random(sizeof(shouts))]);
+	switch(random(4))
+	{
+		case 0: ChatMe(playerid, "chrz¹ka.");
+		case 1: ChatMe(playerid, "wykonuje tik nerwowy.");
+		case 2: ChatMe(playerid, "uderza siê d³oni¹ w g³owê.");
+		case 3: ChatMe(playerid, "miauczy.");
+	}
 }
 public TourettPermanentEffect(playerid, disease, value)
 {
@@ -192,6 +200,13 @@ public HallucinationsEffect(playerid, disease, value)
 public ZombieSkinEffect(playerid, disease, value)
 {
 	//TODO
+	SetPlayerSkin(playerid, 20004+random(3));
+	return 1;
+}
+public ZombieSkinEffect_Off(playerid, disease, value)
+{
+	SetPlayerSkin(playerid, PlayerInfo[playerid][pSkin]);
+	return 1;
 }
 public ZombieTalkEffect(playerid, disease, value)
 {
