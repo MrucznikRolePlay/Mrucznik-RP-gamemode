@@ -1314,6 +1314,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
+	PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
+	PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
 
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
