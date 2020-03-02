@@ -193,12 +193,12 @@ choroby_InitEffects()
 {
     //eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, pernament, contagiousRange, infectionChance, additionalValue)
     AddEffect(KORONAWIRUS, "WuhanCouching", "", 
-        FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
+        ONE_MINUTE*2, ONE_MINUTE*5, 
         false, 10.0, 50, 
         0
     );
     AddEffect(KORONAWIRUS, "DusznosciEffect", "", 
-        REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
+        FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
         false, 3.0, 50, 
         30
     );
@@ -208,7 +208,7 @@ choroby_InitEffects()
         30
     );
     AddEffect(KORONAWIRUS, "KoronawirusDeathEffect", "", 
-        ONE_MINUTE*60, ONE_MINUTE*60, 
+        REGULAR_EFFECT_MIN, RARE_EFFECT_RANGE, 
         false, 10.0, 100, 
         200
     );

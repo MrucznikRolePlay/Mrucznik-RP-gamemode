@@ -86,10 +86,10 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 ### Efekty koronawirusa
 | Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
-| Wuhański kaszel | Gracz kaszle | /me zaczyna kaszleć. | 5 + 0-10 minut | 10.0 | 50 |
-| Duszności | Graczy się dusi | /me zaczyna się dusić. | 10 + 0-20 minut | 3.0 | 50 |
+| Wuhański kaszel | Gracz kaszle | /me zaczyna kaszleć. | 2 + 0-5 minut | 10.0 | 50 |
+| Duszności | Graczy się dusi | /me zaczyna się dusić. | 5 + 0-10 minut | 3.0 | 50 |
 | Gorączka | Utrata HP | /me czuje się słabo. | 10 + 0-20 minut | 3.0 | 50 |
-| Die potato | Gracz traci hp aż do śmierci | /do koronawirus doszczętnie wyniszczył organizm John_Mrucznik. | 60 + 0-60 minut | 10.0 | 100 |
+| Die potato | Gracz traci hp aż do śmierci | /do koronawirus doszczętnie wyniszczył organizm John_Mrucznik. | 20 + 0-40 minut | 10.0 | 100 |
 
 
 ### Efekty grypy
