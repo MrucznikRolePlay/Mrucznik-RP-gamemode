@@ -146,7 +146,8 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 ### Efekty HIV
 | Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
-| Obniżona odporność | - | - | efekt stały | - | - |
+| Obniżona odporność | Gracz traci odporność | /me czuje, że jego organizm ma obniżoną odporność. | 5 ± 10 minut | - | - |
+| Wyłapywanie chorób | Gracz zapada na losową chorobę | - | 60 ± 80 minut | - | - |
 
 ### Efekty astygmatyzmu
 | Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |

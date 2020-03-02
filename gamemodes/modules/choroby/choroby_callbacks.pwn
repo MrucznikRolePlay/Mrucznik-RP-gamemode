@@ -46,6 +46,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	PlayerImmunity[playerid] = 0;
 	Grypa[playerid] = 0;
 	Tourett[playerid] = 0;
+	TourettActive[playerid] = 0;
 	Obled[playerid] = 0;
 	return 1;
 }

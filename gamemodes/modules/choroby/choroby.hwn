@@ -98,6 +98,7 @@ new DiseaseData[eDiseases][eDiseaseData] = {
 new PlayerImmunity[MAX_PLAYERS];
 new Grypa[MAX_PLAYERS];
 new Tourett[MAX_PLAYERS];
+new TourettActive[MAX_PLAYERS];
 new Obled[MAX_PLAYERS];
 new AbortCurration[MAX_PLAYERS];
 
@@ -143,6 +144,7 @@ forward ZombieTalkEffect(playerid, disease, value);
 
 //HIV
 forward ReducedImmunityEffect(playerid, disease, value);
+forward RandomInfectionEffect(playerid, disease, value);
 
 //Astygmatyzm
 forward AstigmatismEffect(playerid, disease, value);

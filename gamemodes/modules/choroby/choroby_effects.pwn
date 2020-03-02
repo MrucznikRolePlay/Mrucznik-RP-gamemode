@@ -151,15 +151,19 @@ public EpilepsyEffect(playerid, disease, value)
 //Tourett
 public TourettShoutEffect(playerid, disease, value)
 {
+	static shouts[][] = {
+		""
+	};
 
+	Krzyk(playerid, shouts[random(sizeof(shouts))]);
 }
 public TourettPermanentEffect(playerid, disease, value)
 {
-
+	TourettActive[playerid] = 1;
 }
 public TourettPermanentEffect_Off(playerid, disease, value)
 {
-
+	TourettActive[playerid] = 0;
 }
 
 //Astma
@@ -197,7 +201,15 @@ public ZombieTalkEffect(playerid, disease, value)
 //HIV
 public ReducedImmunityEffect(playerid, disease, value)
 {
- 	//TODO
+	ChatMe(playerid, "czuje, ¿e jego organizm ma obni¿on¹ odpornoœæ");
+	PlayerImmunity[playerid] = 1;
+	DecreaseImmunity(playerid);
+	return 1;
+}
+public RandomInfectionEffect(playerid, disease, value)
+{
+	new rand = random(eDiseases);
+	InfectPlayer(playerid, eDiseases:rand);
 }
 
 //Astygmatyzm
