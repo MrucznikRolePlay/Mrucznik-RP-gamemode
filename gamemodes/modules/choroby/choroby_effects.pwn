@@ -305,6 +305,11 @@ public PurulenceEffect(playerid, disease, value)
 {
 	ChatDo(playerid, sprintf("Z rany %s zaczyna wyciekaæ ropa.", GetNick(playerid)));
 	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, false);
+
+	if(random(20) == 0)
+	{
+		InfectPlayer(playerid, PARKINSON);
+	}
 	return 1;
 }
 public RottenFleshEffect(playerid, disease, value)
