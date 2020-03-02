@@ -57,7 +57,7 @@ YCMD:worek(playerid, params[], help)
 						return 1;
 					}
 
-					if(GetPVarInt(giveplayerid, "ma_worek"))
+					if(GetPVarInt(giveplayerid, "ma_worek") != INVALID_PLAYER_ID)
 				    {
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));

@@ -91,7 +91,7 @@ YCMD:newbie(playerid, params[], help)
 			new nobchat[512];
 			if(IsAScripter(playerid))
             {
-                format(nobchat, sizeof(nobchat), "(({DAFC10} Skrypter [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
+                format(nobchat, sizeof(nobchat), "(({00FF8C} Skrypter [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
             }
             else if(PlayerInfo[playerid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] != 7 && PlayerInfo[playerid][pAdmin] != 5555)
 		    {

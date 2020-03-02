@@ -90,20 +90,20 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
                 }
             }
         }
-        else if(PRESSED(KEY_FIRE))
+        else if(PRESSED(KEY_FIRE) && GetPVarInt(playerid, "timer_StaticCruiseControl"))
         {
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
                 CruiseControl_SetSpeed(playerid, 10, true);
             }
         }
-        else if(PRESSED(KEY_DOWN))
+        /*else if(PRESSED(KEY_DOWN) && GetPVarInt(playerid, "timer_StaticCruiseControl"))
         {
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
                 CruiseControl_SetSpeed(playerid, 10, false);
             }
-        }
+        }*/
 	}
 }
 //-----------------<[ Funkcje: ]>------------------
@@ -115,7 +115,7 @@ CruiseControl_HideTXD(playerid)
 
 CruiseControl_SetSpeed(playerid, speed, bool:positive)
 {
-    if(pCruiseSpeed[playerid] < 120 && positive) pCruiseSpeed[playerid] += speed;
+    if(pCruiseSpeed[playerid] < 140 && positive) pCruiseSpeed[playerid] += speed;
     else if(pCruiseSpeed[playerid] > 30 && !positive) pCruiseSpeed[playerid] -= speed; 
     CruiseControl_UpdateTXD(playerid);
     PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);

@@ -184,17 +184,12 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
         return 0;
     }
 
-	new maska_nick[32];
-	if(GetPVarString(playerid, "maska_nick", maska_nick, 32))
+	new maska_nick[24];
+	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
 	{
-		foreach(new i : Player)
-		{
-			ShowPlayerNameTagForPlayer(i, playerid, 1);
-		}
-		DestroyDynamic3DTextLabel(HiddenPlayerName[playerid]);
 		SetPlayerName(playerid, maska_nick);
 		SetRPName(playerid);
-		format(PlayerInfo[playerid][pNick], 32, "%s", maska_nick);
+		format(PlayerInfo[playerid][pNick], 24, "%s", maska_nick);
 		DeletePVar(playerid, "maska_nick");
 	}
 	

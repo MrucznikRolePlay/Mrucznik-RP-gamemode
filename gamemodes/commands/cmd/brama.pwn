@@ -596,7 +596,7 @@ YCMD:brama(playerid, params[], help)
 					lspdmove13 = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,1.0,-1673.90, 876.96, -49.90))
+			if(IsPlayerInRangeOfPoint(playerid,2.0,-1673.90, 876.96, -49.90))
 			{
 				if(lspdmove1 == 0)
 				{
@@ -611,7 +611,7 @@ YCMD:brama(playerid, params[], help)
 				lspdmove1 = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,1.5,-1673.90, 902.57, -49.90))
+			if(IsPlayerInRangeOfPoint(playerid,2,-1673.90, 902.57, -49.90))
 			{
 				if(lspdmove2 == 0)
 				{
@@ -628,7 +628,7 @@ YCMD:brama(playerid, params[], help)
 					lspdmove2 = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,1.5,-1670.67, 904.90, -49.90))
+			if(IsPlayerInRangeOfPoint(playerid,2,-1670.67, 904.90, -49.90))
 			{
 				if(lspdmove3 == 0)
 				{
@@ -645,7 +645,7 @@ YCMD:brama(playerid, params[], help)
 					lspdmove3 = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,1.5,-1670.57, 876.07, -49.90))
+			if(IsPlayerInRangeOfPoint(playerid,2,-1670.57, 876.07, -49.90))
 			{
 				if(lspdmove4 == 0)
 				{

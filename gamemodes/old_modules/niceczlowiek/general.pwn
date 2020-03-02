@@ -149,6 +149,8 @@ Player_RemoveFromVeh(playerid)
 
 Player_CanUseCar(playerid, vehicleid)
 {
+	if(IsAScripter(playerid)) return 1;
+	
 	new string[128];
 
 	if(IsACopCar(vehicleid))

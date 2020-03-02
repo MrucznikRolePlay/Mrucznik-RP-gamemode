@@ -38,7 +38,7 @@ YCMD:login(playerid, params[], help)
 		{
 			if(!sscanf(params, "k<fix>", playa))
 			{
-				if(IsPlayerConnected(playa))
+				if(!IsPlayerConnected(playa))
 				{
 					sendErrorMessage(playerid, "Gracz nie jest zalogowany.");
 					return 1;
@@ -68,12 +68,8 @@ YCMD:login(playerid, params[], help)
 			}
 			playerid = playa;
 		}
-		//wiadomoœci
-		new reString[144];
-		format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: /login).", GetNick(playerid));
-		ProxDetector(25.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 		//czynnoœci
-		MruMySQL_SaveAccount(playerid);
+		OnPlayerDisconnect(playerid, 4);
 		gPlayerLogged[playerid] = 0;
 		OnPlayerConnect(playerid);
 

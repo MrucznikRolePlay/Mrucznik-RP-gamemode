@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_uleczall_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 100)
+    if(PlayerInfo[playerid][pAdmin] < 100 && !IsAScripter(playerid))
     {
         noAccessMessage(playerid);
         return 1;

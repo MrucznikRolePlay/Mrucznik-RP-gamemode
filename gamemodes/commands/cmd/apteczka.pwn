@@ -30,7 +30,6 @@
 
 YCMD:apteczka(playerid, params[], help)
 {
-	//normalna apteczka
 	new playa, giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME], string[144];
 	if(sscanf(params, "k<fix>", playa))
 	{

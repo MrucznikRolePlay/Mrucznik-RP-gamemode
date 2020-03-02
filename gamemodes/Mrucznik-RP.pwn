@@ -1047,6 +1047,7 @@ public OnPlayerConnect(playerid)
 
 	ZerujZmienne(playerid);
 	ClearVariableConnect(playerid);
+	SetPlayerTeam(playerid, 1);
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
@@ -1216,11 +1217,12 @@ public OnPlayerDisconnect(playerid, reason)
 	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //l
 
 	new reString[128];
-    new DisconnectReason[3][] =
+    new DisconnectReason[4][] =
     {
         "Timeout/Crash",
         "/q",
-        "Kick/Ban"
+        "Kick/Ban",
+		"/login"
     };
     if(Spectate[playerid] == INVALID_PLAYER_ID)
     {
@@ -1404,24 +1406,24 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	//kajdanki
-	if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
+	if(PDkuje[playerid] != INVALID_PLAYER_ID) // gdy skuty da q
 	{
 		UnCuffedAction(PDkuje[playerid], playerid);
 	}
 
-	if(SkutyGracz[playerid] != 0)
+	if(SkutyGracz[playerid] != INVALID_PLAYER_ID) // gdy skuwaj¹cy da /q
 	{
 		UnCuffedAction(playerid, SkutyGracz[playerid]);
 	}
 
-	if(GetPVarInt(playerid, "ma_worek"))
+	if(GetPVarInt(playerid, "ma_worek") != INVALID_PLAYER_ID)
 	{
 		DeletePVar(GetPVarInt(playerid, "ma_worek"), "uzyl_worek");
 		DeletePVar(playerid, "ma_worek");
 		UnHave_Worek(playerid);
 	}
 
-	if(GetPVarInt(playerid, "uzyl_worek"))
+	if(GetPVarInt(playerid, "uzyl_worek") != INVALID_PLAYER_ID)
 	{
 		DeletePVar(GetPVarInt(playerid, "uzyl_worek"), "ma_worek");
 		UnHave_Worek(GetPVarInt(playerid, "uzyl_worek"));
@@ -1778,18 +1780,16 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		GetPlayerHealth(playerid, HP);
 		amount = amount / 2;
 		if(weaponid == 24) SetPlayerHealth(playerid, HP-amount);//DesertEagle
-		if(weaponid == 22) SetPlayerHealth(playerid, HP-amount);//Colt45
-		if(weaponid == 23) SetPlayerHealth(playerid, HP-amount);//SilencedColt
-		if(weaponid == 31) SetPlayerHealth(playerid, HP-amount);//M4
-		if(weaponid == 30) SetPlayerHealth(playerid, HP-amount);//AK
-		if(weaponid == 29) SetPlayerHealth(playerid, HP-amount);//MP5
-		if(weaponid == 34) SetPlayerHealth(playerid, HP-amount);//SniperRifle
-		if(weaponid == 33) SetPlayerHealth(playerid, HP-amount);//CountryRifle
-		if(weaponid == 25) SetPlayerHealth(playerid, HP-amount);//PumpShotgun
-		if(weaponid == 27) SetPlayerHealth(playerid, HP-amount);//Spaz12
-		//SOUND
-		if(issuerid != INVALID_PLAYER_ID) PlayerPlaySound(issuerid,17802,0.0,0.0,0.0), PlayerPlaySound(playerid,17802,0.0,0.0,0.0);
-		
+		else if(weaponid == 22) SetPlayerHealth(playerid, HP-amount);//Colt45
+		else if(weaponid == 23) SetPlayerHealth(playerid, HP-amount);//SilencedColt
+		else if(weaponid == 31) SetPlayerHealth(playerid, HP-amount);//M4
+		else if(weaponid == 30) SetPlayerHealth(playerid, HP-amount);//AK
+		else if(weaponid == 29) SetPlayerHealth(playerid, HP-amount);//MP5
+		else if(weaponid == 34) SetPlayerHealth(playerid, HP-amount);//SniperRifle
+		else if(weaponid == 33) SetPlayerHealth(playerid, HP-amount);//CountryRifle
+		else if(weaponid == 25) SetPlayerHealth(playerid, HP-amount);//PumpShotgun
+		else if(weaponid == 27) SetPlayerHealth(playerid, HP-amount);//Spaz12
+		else SetPlayerHealth(playerid, HP-amount);//other
 	}
 
 	new Float:armour;
@@ -1912,14 +1912,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 					StopACall(playerid);
 				}
 				//kajdanki
-				if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
-				{
-					UnCuffedAction(PDkuje[playerid], playerid);
-				}
-				if(SkutyGracz[playerid] != 0)
+				if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy zginie
 				{
 					UnCuffedAction(playerid, SkutyGracz[playerid]);
 				}
+
 				if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 				{
 					new playername[24];
@@ -2057,6 +2054,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 									SendClientMessage(playerid, COLOR_LIGHTRED, string);
 									SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
 								}
+								return 1;
 							}
 						}
 					}
@@ -2214,7 +2212,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 public OnPlayerSpawn(playerid)
 {
-	SetPlayerTeam(playerid, NO_TEAM);
+	SetPlayerTeam(playerid, 1);
 
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)
@@ -2765,7 +2763,7 @@ SetPlayerSpawnSkin(playerid)
 	if((PlayerInfo[playerid][pSkin] > 20000 && PlayerInfo[playerid][pSkin] < 20099) && PlayerInfo[playerid][pSkin] != 20004)
 	{
 		sendTipMessage(playerid, "MRP-SKINS: Wykryto u Ciebie skin eventowy - zostaje Ci ustalona domyœlna wartoœæ");
-		PlayerInfo[playerid][pSkin] = 136;
+		PlayerInfo[playerid][pSkin] = 299;
 	}
 	if((JobDuty[playerid] == 1 || OnDuty[playerid] == 1) && PlayerInfo[playerid][pUniform] > 0) {
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
@@ -4775,13 +4773,13 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
                 GetDynamicObjectRot(objectid, rox, roy, roz);
                 GetDynamicObjectPos(objectid, X, Y, Z);
                 SendClientMessage(playerid, -1, "Jesteœ za daleko.");
-                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, X, Y, Z+0.3, 4.0, GetPlayerVirtualWorld(playerid));
+                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, X, Y, Z+0.3, 4.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, GetPlayerVirtualWorld(playerid));
                 SetDynamicObjectPos(objectid, X, Y, Z);
                 SetDynamicObjectRot(objectid, rox, roy, roz);
             }
             else
             {
-                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, x, y, z+0.3, 4.0, GetPlayerVirtualWorld(playerid));
+                BarText[frac][GetPVarInt(playerid, "Barier-id")-1] = CreateDynamic3DTextLabel(str, 0x1E90FFFF, x, y, z+0.3, 4.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, GetPlayerVirtualWorld(playerid));
                 GetDynamicObjectPos(objectid, x, y, z);
                 GetDynamicObjectRot(objectid, rx, ry, rz);
             }
@@ -4865,12 +4863,14 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			graffiti_UpdateMySQL(f);
 			graffiti_ReloadForPlayers(f);
 			graffiti_ZerujZmienne(playerid);
+			new pZone[MAX_ZONE_NAME];
+			GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
 			new akcja[150];
 			format(akcja,sizeof(akcja),"* %s wyci¹ga spray i tworzy nim napis.",GetNick(playerid));
             ProxDetector(40.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			format(akcja, sizeof(akcja), "%s stworzy³ nowe graffiti o ID:[%d]", GetNick(playerid), f);
+			format(akcja, sizeof(akcja), "%s stworzy³ nowe graffiti [ID: %d], lokalizacja: ", GetNick(playerid), f, pZone);
 			SendAdminMessage(COLOR_PANICRED, akcja);
-			Log(serverLog, INFO, "%s stworzy³ nowe graffiti %s", GetPlayerLogName(playerid), GetGraffitiLogText(f));
+			Log(serverLog, INFO, "%s stworzy³ nowe graffiti %s, lokalizacja:", GetPlayerLogName(playerid), GetGraffitiLogText(f), pZone);
 		}
 		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
@@ -5033,7 +5033,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             new Float:vSpeed = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
             new pZone[MAX_ZONE_NAME];
             GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);//Dzielnica
-            format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d~n~GPS: %s~n~%s" ,floatround(vSpeed), floatround(Gas[vehicleid]), floatround(carhp/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
+            format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d%%~n~GPS: %s~n~%s" ,floatround(vSpeed), floatround(Gas[vehicleid]), floatround(carhp/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
             PlayerTextDrawSetString(playerid, Licznik[playerid], string);
             PlayerTextDrawShow(playerid, Licznik[playerid]);
         }

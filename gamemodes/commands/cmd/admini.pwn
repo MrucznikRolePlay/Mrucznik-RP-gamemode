@@ -41,7 +41,7 @@ YCMD:admini(playerid, params[], help)
 				//GetPVarString(i, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
 				if(IsAScripter(i)) 
 				{
-					format(string, sizeof(string), "{FFFFFF}Skrypter serwera: {747b41}%s {FFFFFF}[ID: %d]", GetNick(i), i);
+					format(string, sizeof(string), "{FFFFFF}Skrypter serwera: {00FF8C}%s {FFFFFF}[ID: %d]", GetNick(i), i);
 				}
 				else if(PlayerInfo[i][pAdmin] >= 1 && PlayerInfo[i][pAdmin] != 5000)
 				{

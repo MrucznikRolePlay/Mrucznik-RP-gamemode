@@ -33,10 +33,17 @@ YCMD:bp(playerid, params[], help)//blokada pisania
 	new giveplayerid, czas, text[32], string[256];
 	if(sscanf(params, "k<fix>ds[32]", giveplayerid, czas, text))
 	{
-		sendTipMessage(playerid, "U¿yj /bp [ID gracza] [czas (w gozinach)] [nazwa chatu]");
+		sendTipMessage(playerid, "U¿yj /bp [ID gracza] [czas (w godzinach)] [nazwa chatu]");
 		return 1;
 	}
-	if (PlayerInfo[playerid][pAdmin] >= 1)
+	if (PlayerInfo[playerid][pNewAP] >= 1 && !PlayerInfo[playerid][pAdmin])
+	{
+		if(czas < 0 || czas > 1)
+		{
+			return sendTipMessage(playerid, "Czas max. 1h dla p@!");
+		}
+	}
+	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
 	{
 		if(IsPlayerConnected(giveplayerid))
 		{
@@ -62,38 +69,11 @@ YCMD:bp(playerid, params[], help)//blokada pisania
 				}
 			}
 		}
-	}
-	else if (PlayerInfo[playerid][pNewAP] >= 1)
-	{
-		if(IsPlayerConnected(giveplayerid))
+		else
 		{
-			if(giveplayerid != INVALID_PLAYER_ID)
-			{
-				if(czas == 1 || czas == 0)
-				{
-					GiveBPForPlayer(giveplayerid, playerid, czas, text);
-					if(kary_TXD_Status == 1)
-					{
-						BPPlayerTXD(giveplayerid, playerid, czas, text);
-					}
-					else if(kary_TXD_Status == 0)
-					{
-						format(string, sizeof(string), "AdmCmd: %s dosta³ Blokadê Pisania od %s na %d godzin. Powód: %s", GetNick(giveplayerid), GetNick(playerid), czas, text);
-						SendPunishMessage(string, playerid);
-					}
-					return 1;
-				}
-				else
-				{
-					sendTipMessage(playerid, "Czas max. 1h dla p@!");
-				}
-			}
+			format(string, sizeof(string), "%d jest nieaktywny.", giveplayerid);
+			sendErrorMessage(playerid, string);
 		}
-	}
-	else
-	{
-		format(string, sizeof(string), "%d jest nieaktywny.", giveplayerid);
-		sendErrorMessage(playerid, string);
 	}
 	return 1;
 }

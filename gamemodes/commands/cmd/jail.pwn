@@ -44,7 +44,7 @@ YCMD:jail(playerid, params[], help)
         }
 
 
-        if (PlayerInfo[playerid][pAdmin] >= 20)
+        if (PlayerInfo[playerid][pAdmin] >= 20 || IsAScripter(playerid))
         {
             if(IsPlayerConnected(playa))
             {

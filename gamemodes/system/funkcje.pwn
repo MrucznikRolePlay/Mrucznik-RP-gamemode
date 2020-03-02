@@ -1139,7 +1139,7 @@ public odpalanie(playerid)
       		SetVehicleParamsEx(carid , 1, lights, alarm, doors, bonnet, boot, objective);
 			if(PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] != carid && PlayerInfo[playerid][pCarLic] == 0)
 			{
-				PoziomPoszukiwania[playerid] += 1;
+				PoziomPoszukiwania[playerid]++;
 				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda bez prawa jazdy");
 				SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
 				PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = carid;
@@ -12726,13 +12726,13 @@ public DeathAdminWarning(playerid, killerid, reason)
 	GetPlayerName(playerid, playername, sizeof(playername));
 	if(killerid != INVALID_PLAYER_ID)
 	{
+		GetPlayerName(killerid, killername, sizeof(killername));
 		new bwreason[24];
-		format(bwreason, sizeof(bwreason), "zabi³");
-		if(PlayerInfo[playerid][pBW] > 0)
+		if(PlayerInfo[playerid][pInjury] > 0) // jesli jest ranny
 		{
 			format(bwreason, sizeof(bwreason), "dobi³");
 		}
-		else if(PlayerInfo[playerid][pInjury] > 0)
+		else //jesli nie jest ranny
 		{
 			format(bwreason, sizeof(bwreason), "zrani³");
 		}
@@ -12861,11 +12861,11 @@ public UnCuffedAction(playerid, cuffedid)
 	TogglePlayerControllable(cuffedid, 1);
 	PlayerCuffed[cuffedid] = 0;
 	zakuty[cuffedid] = 0;
-	SkutyGracz[cuffedid] = 0;
+	SkutyGracz[cuffedid] = INVALID_PLAYER_ID;
 	uzytekajdanki[cuffedid] = 0;
 	uzytekajdanki[playerid] = 0;
-	PDkuje[playerid] = 0;
-	PDkuje[cuffedid]=0;
+	PDkuje[playerid] = INVALID_PLAYER_ID;
+	PDkuje[cuffedid]= INVALID_PLAYER_ID;
 	PlayerInfo[cuffedid][pMuted] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
