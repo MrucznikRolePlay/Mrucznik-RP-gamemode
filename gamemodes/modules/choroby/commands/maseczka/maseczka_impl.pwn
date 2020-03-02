@@ -62,6 +62,7 @@ maseczka_akceptuj(playerid)
 
     //body
     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Akceptowa³eœ kupno maseczki od %s za %d$.", GetNick(giveplayerid), price));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Gracz %s kupi³ od Ciebie maseczkê za %d$.", GetNick(playerid), price));
 
     ZabierzKase(playerid, price);
     DajKase(giveplayerid, price);
