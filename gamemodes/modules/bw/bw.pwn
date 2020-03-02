@@ -97,11 +97,7 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	if(!customtime) customtime = INJURY_TIME;
 	PlayerInfo[playerid][pBW] = 0;
 	PlayerInfo[playerid][pInjury] = customtime;
-	if(!GetPVarInt(playerid, "timer_DamagedHP"))
-	{
-		SetPlayerAttachedObject(playerid,2,1240,17,0.587000,-0.027000,0.028000,86.100051,79.499977,-69.599990,1.000000,1.000000,1.000000); // HEALTH ICONS.
-		SetPVarInt(playerid, "timer_DamagedHP", SetTimerEx("DamagedHP", (customtime * 1000), false, "i", playerid));
-	}
+	if(!GetPVarInt(playerid, "timer_DamagedHP")) SetPVarInt(playerid, "timer_DamagedHP", SetTimerEx("DamagedHP", (customtime * 1000), false, "i", playerid));
 	SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 70.0, (customtime * 1000));
 	if(medicinformation)
 	{

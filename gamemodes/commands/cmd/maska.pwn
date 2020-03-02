@@ -40,6 +40,7 @@ YCMD:maska(playerid, params[], help)
 			}
 			else
 			{
+				if(OnDutyCD[playerid] != 1 && OnDuty[playerid] != 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /duty !");
 				sendErrorMessage(playerid, "OSTRZE¯ENIE: Nadu¿ywanie maski skutkuje natychmiastowym wyrzuceniem z frakcji.");
 			}
 		}

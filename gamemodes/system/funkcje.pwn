@@ -12865,7 +12865,7 @@ public UnCuffedAction(playerid, cuffedid)
 	uzytekajdanki[cuffedid] = 0;
 	uzytekajdanki[playerid] = 0;
 	PDkuje[playerid] = INVALID_PLAYER_ID;
-	PDkuje[cuffedid]= INVALID_PLAYER_ID;
+	PDkuje[cuffedid] = INVALID_PLAYER_ID;
 	PlayerInfo[cuffedid][pMuted] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);

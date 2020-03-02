@@ -68,8 +68,13 @@ YCMD:login(playerid, params[], help)
 			}
 			playerid = playa;
 		}
+		//wiadomoœci
+		new reString[144];
+		format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: /login).", GetNick(playerid));
+		ProxDetector(25.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 		//czynnoœci
-		OnPlayerDisconnect(playerid, 4);
+		MruMySQL_SaveAccount(playerid);
+		ZerujZmienne(playerid);
 		gPlayerLogged[playerid] = 0;
 		OnPlayerConnect(playerid);
 
