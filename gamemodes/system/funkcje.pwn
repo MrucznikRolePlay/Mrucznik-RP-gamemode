@@ -1139,7 +1139,7 @@ public odpalanie(playerid)
       		SetVehicleParamsEx(carid , 1, lights, alarm, doors, bonnet, boot, objective);
 			if(PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] != carid && PlayerInfo[playerid][pCarLic] == 0)
 			{
-				PoziomPoszukiwania[playerid] += 1;
+				PoziomPoszukiwania[playerid]++;
 				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda bez prawa jazdy");
 				SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
 				PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = carid;
@@ -12726,13 +12726,13 @@ public DeathAdminWarning(playerid, killerid, reason)
 	GetPlayerName(playerid, playername, sizeof(playername));
 	if(killerid != INVALID_PLAYER_ID)
 	{
+		GetPlayerName(killerid, killername, sizeof(killername));
 		new bwreason[24];
-		format(bwreason, sizeof(bwreason), "zabi³");
-		if(PlayerInfo[playerid][pBW] > 0)
+		if(PlayerInfo[playerid][pInjury] > 0) // jesli jest ranny
 		{
 			format(bwreason, sizeof(bwreason), "dobi³");
 		}
-		else if(PlayerInfo[playerid][pInjury] > 0)
+		else //jesli nie jest ranny
 		{
 			format(bwreason, sizeof(bwreason), "zrani³");
 		}

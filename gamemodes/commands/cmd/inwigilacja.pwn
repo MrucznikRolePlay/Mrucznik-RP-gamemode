@@ -32,7 +32,7 @@ YCMD:inwigilacja(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+        if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
         {
             new para1;
             if( sscanf(params, "k<fix>", para1))

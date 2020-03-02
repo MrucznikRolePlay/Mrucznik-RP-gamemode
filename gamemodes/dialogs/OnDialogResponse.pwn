@@ -3167,7 +3167,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "~r~-$%d", 35000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							format(string, sizeof(string), "Kupi³eœ ogranicznik prêdkoœci do auta.");
+							format(string, sizeof(string), "Kupi³eœ tempomat do auta. Wciœnij CTRL podczas jazdy, ¿eby aktywowaæ.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
@@ -11261,9 +11261,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					else format(taknieNeo, sizeof(taknieNeo), "W³¹cz");
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
-                //
-                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
-                //
+                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
 		}
@@ -13952,6 +13950,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
+			PrzedmiotyZmienBron(playerid, PlayerInfo[playerid][pGun0]);
 			GUIExit[playerid] = 0;
 			return 1;
 		}

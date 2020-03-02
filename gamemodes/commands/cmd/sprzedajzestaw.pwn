@@ -36,7 +36,6 @@ YCMD:sprzedajzestaw(playerid, params[], help)
 		new id;
 		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /sprzedajzestaw [id]");
 		if(!IsPlayerConnected(id) ) return sendErrorMessage(playerid, "Ten gracz nie jest zalogowanay");
-		if(id == playerid) return sendErrorMessage(playerid, "Nie mo¿esz sprzedaæ samemu sobie.");
         new Float:x, Float:y, Float:z, tmp[128];
 		GetPlayerPos(id, x, y, z);
 		if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
@@ -49,7 +48,7 @@ YCMD:sprzedajzestaw(playerid, params[], help)
 	}
     else
     {
-        sendErrorMessage(playerid, "Komenda dostêpna dla mechanika.");
+        sendErrorMessage(playerid, "Komenda dostêpna tylko dla mechanika.");
     }
 	return 1;
 }

@@ -315,11 +315,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			return 1;
 		}
 	}
-	else if(Check_ID == 18) //ibiza audio
-	{
-		PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
-	}
-	else if(Check_ID == 19)
+	else if(Check_ID == 18 || Check_ID == 19) //ibiza audio
 	{
 		PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}

@@ -875,7 +875,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			{
 				if(afktime > 900 && PlayerInfo[playerid][pAdmin] != 5000)
 				{
-					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas wejœcia na @Duty! Otrzymujesz Kicka (15min)");
+					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas @Duty! Otrzymujesz Kicka za AFK (15min)");
 					SetTimerEx("KickEx", 500, false, "i", playerid);
 				}
 				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);

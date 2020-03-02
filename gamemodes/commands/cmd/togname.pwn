@@ -37,7 +37,10 @@ YCMD:togname(playerid, params[], help)
         MSGBOX_Show(playerid, "Imiona ~g~ON", MSGBOX_ICON_TYPE_OK);
 
         foreach(new i : Player)
+        {
+            if(HiddenPlayerName[i]) continue;
             ShowPlayerNameTagForPlayer(playerid, i, 1);
+        }
     }
     else
     {
