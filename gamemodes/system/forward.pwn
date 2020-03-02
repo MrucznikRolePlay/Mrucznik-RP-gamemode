@@ -149,6 +149,6 @@ forward closeGate(i, j, playerid);
 
 forward DamagedHP(playerid);
 forward CuffedAction(playerid, cuffedid);
-forward UnCuffedAction(playerid, cuffedid);
+forward UnCuffedAction(cop, cuffedid);
 forward DeathAdminWarning(playerid, killerid, reason) ;
 //EOF

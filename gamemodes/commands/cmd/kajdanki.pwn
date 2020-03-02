@@ -107,6 +107,11 @@ YCMD:kajdanki(playerid, params[], help)
                         }
                         else
                         {
+                            new string[128];
+                            format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", GetNick(playerid));
+                            SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+                            format(string, sizeof(string), "* Rozku³eœ %s.", GetNick(giveplayerid));
+
                             UnCuffedAction(playerid, giveplayerid);
                         }
                     } else

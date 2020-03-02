@@ -57,7 +57,7 @@ YCMD:worek(playerid, params[], help)
 						return 1;
 					}
 
-					if(Worek_MamWorek[playerid])
+					if(Worek_MamWorek[giveplayerid])
 				    {
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -69,9 +69,9 @@ YCMD:worek(playerid, params[], help)
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						
 						Worek_MamWorek[giveplayerid] = 0;
-						Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
-						Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
-						Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
+						Worek_KomuZalozylem[Worek_KtoZalozyl[giveplayerid]] = INVALID_PLAYER_ID;
+						Worek_Uzyty[Worek_KtoZalozyl[giveplayerid]] = 0;
+						Worek_KtoZalozyl[giveplayerid] = INVALID_PLAYER_ID;
 						UnHave_Worek(giveplayerid);
 					}
 					else

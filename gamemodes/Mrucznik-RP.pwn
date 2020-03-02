@@ -1047,7 +1047,6 @@ public OnPlayerConnect(playerid)
 
 	ZerujZmienne(playerid);
 	ClearVariableConnect(playerid);
-	SetPlayerTeam(playerid, 1);
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
@@ -1307,8 +1306,6 @@ public OnPlayerDisconnect(playerid, reason)
 	//caluj
 	kissPlayerOffer[playerid] = 0;
 	//komunikaty frakcyjne
-	komunikatMinutyZerowanie[playerid]=0;
-	
 	komunikatMinutyZerowanie[playerid]=0;
 
     if(TalkingLive[playerid] != INVALID_PLAYER_ID)
@@ -2327,6 +2324,7 @@ SetPlayerSpawn(playerid)
 	SetPlayerSpawnPos(playerid);
 	SetPlayerSpawnSkin(playerid);
 	SetPlayerSpawnWeapon(playerid);
+	SetPlayerTeam(playerid, 1);
 	return 1;
 }
 

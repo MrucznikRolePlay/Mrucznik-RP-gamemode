@@ -217,13 +217,13 @@ ToggleInwigilacja(playerid, adminid)
 	if(PlayerInfo[playerid][pPodPW] == 0)
 	{
 		PlayerInfo[playerid][pPodPW] = 1;
-		SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
+		SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid, true), adminid, GetNick(playerid), playerid));
 		Log(adminLog, INFO, "Admin %s w³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
 	}
 	else if(PlayerInfo[playerid][pPodPW] == 1)
 	{
 		PlayerInfo[playerid][pPodPW] = 0;
-		SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
+		SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid, true), adminid, GetNick(playerid), playerid));
 		Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
 	}
 	return 1;
@@ -12849,16 +12849,10 @@ public CuffedAction(playerid, cuffedid)
 	return 1;
 }
 
-public UnCuffedAction(playerid, cuffedid)
+public UnCuffedAction(cop, cuffedid)
 {
-	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
-	GetPlayerName(cuffedid, giveplayer, sizeof(giveplayer));
-	GetPlayerName(playerid, sendername, sizeof(sendername));
-	format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", sendername);
-	SendClientMessage(cuffedid, COLOR_LIGHTBLUE, string);
-	format(string, sizeof(string), "* Rozku³eœ %s.", giveplayer);
+	new playerid = cop;
+	new string[144];
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	GameTextForPlayer(cuffedid, "~g~Rozkuty", 2500, 3);
 
@@ -12866,12 +12860,8 @@ public UnCuffedAction(playerid, cuffedid)
 	TogglePlayerControllable(cuffedid, 1);
 	PlayerCuffed[cuffedid] = 0;
 	Kajdanki_JestemZakuty[cuffedid] = 0;
-	Kajdanki_JestemZakuty[playerid] = 0;
-	Kajdanki_KogoSkuwam[cuffedid] = INVALID_PLAYER_ID;
 	Kajdanki_KogoSkuwam[playerid] = INVALID_PLAYER_ID;
 	Kajdanki_KtoSkuwa[cuffedid] = INVALID_PLAYER_ID;
-	Kajdanki_KtoSkuwa[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_Uzyte[cuffedid] = 0;
 	Kajdanki_Uzyte[playerid] = 0;
 	PlayerInfo[cuffedid][pMuted] = 0;
 	ClearAnimations(cuffedid);
