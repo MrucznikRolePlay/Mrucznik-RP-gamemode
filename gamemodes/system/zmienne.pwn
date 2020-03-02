@@ -1059,15 +1059,11 @@ new wantedValuePlayer;
 new timerForHunter[MAX_PLAYERS];*/
 //new newsTypePlayer[MAX_PLAYERS] = 3; 
 new AllLeaders; 
-
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
-
 //SANDAL
 new gRO[MAX_PLAYERS];
-
-new isNaked[MAX_PLAYERS]; 
-new Text3D:HiddenPlayerName[MAX_PLAYERS] = INVALID_3DTEXT_ID;
+new isNaked[MAX_PLAYERS];
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------

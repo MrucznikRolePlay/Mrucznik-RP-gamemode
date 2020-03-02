@@ -1047,6 +1047,7 @@ public OnPlayerConnect(playerid)
 
 	ZerujZmienne(playerid);
 	ClearVariableConnect(playerid);
+	SetPlayerTeam(playerid, 1);
 	ZerujKontakty(playerid);
 	dialAccess[playerid] = 0; 
 	dialTimer[playerid] = 0; 
@@ -1911,14 +1912,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 					StopACall(playerid);
 				}
 				//kajdanki
-				if(PDkuje[playerid] != INVALID_PLAYER_ID)
-				{
-					UnCuffedAction(PDkuje[playerid], playerid);
-				}
-				if(SkutyGracz[playerid] != INVALID_PLAYER_ID)
+				if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy zginie
 				{
 					UnCuffedAction(playerid, SkutyGracz[playerid]);
 				}
+
 				if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 				{
 					new playername[24];
@@ -2214,7 +2212,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 public OnPlayerSpawn(playerid)
 {
-	SetPlayerTeam(playerid, 0);
+	SetPlayerTeam(playerid, 1);
 
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)

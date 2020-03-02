@@ -38,7 +38,6 @@ YCMD:togname(playerid, params[], help)
 
         foreach(new i : Player)
         {
-            if(HiddenPlayerName[i] != INVALID_3DTEXT_ID) continue;
             ShowPlayerNameTagForPlayer(playerid, i, 1);
         }
     }

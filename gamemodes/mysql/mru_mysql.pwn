@@ -187,12 +187,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	new maska_nick[24];
 	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
 	{
-		foreach(new i : Player)
-		{
-			ShowPlayerNameTagForPlayer(i, playerid, 1);
-		}
-		DestroyDynamic3DTextLabel(HiddenPlayerName[playerid]);
-		HiddenPlayerName[playerid] = INVALID_3DTEXT_ID;
 		SetPlayerName(playerid, maska_nick);
 		SetRPName(playerid);
 		format(PlayerInfo[playerid][pNick], 24, "%s", maska_nick);
