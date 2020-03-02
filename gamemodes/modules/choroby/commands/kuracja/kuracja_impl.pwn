@@ -25,7 +25,6 @@
 //------------------<[ Implementacja: ]>-------------------
 kuracja_akceptuj(playerid)
 {
-    new string[144];
     new giveplayerid = GetPVarInt(playerid, "kuracja-doctorid");
     new uid = GetPVarInt(playerid, "kuracja-uid");
     new cost = GetPVarInt(playerid, "kuracja-cost");
