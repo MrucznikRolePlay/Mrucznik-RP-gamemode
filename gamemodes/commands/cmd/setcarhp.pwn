@@ -42,8 +42,8 @@ YCMD:setcarhp(playerid, params[], help)
     
         if (PlayerInfo[playerid][pAdmin] >= 10)
         {
+			RepairVehicle(vehicleid);
             SetVehicleHealth(vehicleid, health);
-            RepairVehicle(vehicleid);
             Log(adminLog, INFO, "Admin %s ustawi³ hp auta na %d", GetPlayerLogName(playerid), health);
             new string[128];
             format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNick(playerid), health);
