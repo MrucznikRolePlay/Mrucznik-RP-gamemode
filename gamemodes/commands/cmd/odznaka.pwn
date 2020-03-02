@@ -127,14 +127,14 @@ YCMD:odznaka(playerid, params[], help)
 					}
 					if(GetPlayerFraction(playerid) == FRAC_NG)
 					{
-						SendClientMessage(giveplayerid, COLOR_GREEN, "|______________ Odznaka SASD ______________|");
+						SendClientMessage(giveplayerid, COLOR_GREEN, "|______________ Odznaka NGSA ______________|");
 						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
                         format(string, sizeof(string), "Ranga: %s", FracRang[FRAC_NG][PlayerInfo[playerid][pRank]]);
 						SendClientMessage(giveplayerid,COLOR_WHITE,string);
-						if(OnDuty[playerid] == 0)
+						if(OnDuty[playerid] == 0 && PlayerInfo[playerid][pRank] < 7)
 						{
 							SendClientMessage(giveplayerid,COLOR_WHITE,"Mo¿liwoœæ interwencji: Nie");
 						}
@@ -144,11 +144,11 @@ YCMD:odznaka(playerid, params[], help)
 						}
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"Posiadacz tej odznaki ma uprawnienia do wylegitymowania");
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"ka¿dego obywatela na terenie stanu San Andreas.");
-						SendClientMessage(giveplayerid, COLOR_BLUE, "|____ San Andreas State Police ____|");
+						SendClientMessage(giveplayerid, COLOR_BLUE, "|____ National Guard of San Andreas ____|");
 					}
 					if(GetPlayerFraction(playerid) == FRAC_ERS)
 					{
-						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|______________ Idetyfikator ERS ______________|");
+						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|______________ Identyfikator ERS ______________|");
 						format(string, sizeof(string), "Numer identyfikatora: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
