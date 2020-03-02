@@ -1779,15 +1779,16 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		GetPlayerHealth(playerid, HP);
 		amount = amount / 2;
 		if(weaponid == 24) SetPlayerHealth(playerid, HP-amount);//DesertEagle
-		if(weaponid == 22) SetPlayerHealth(playerid, HP-amount);//Colt45
-		if(weaponid == 23) SetPlayerHealth(playerid, HP-amount);//SilencedColt
-		if(weaponid == 31) SetPlayerHealth(playerid, HP-amount);//M4
-		if(weaponid == 30) SetPlayerHealth(playerid, HP-amount);//AK
-		if(weaponid == 29) SetPlayerHealth(playerid, HP-amount);//MP5
-		if(weaponid == 34) SetPlayerHealth(playerid, HP-amount);//SniperRifle
-		if(weaponid == 33) SetPlayerHealth(playerid, HP-amount);//CountryRifle
-		if(weaponid == 25) SetPlayerHealth(playerid, HP-amount);//PumpShotgun
-		if(weaponid == 27) SetPlayerHealth(playerid, HP-amount);//Spaz12
+		else if(weaponid == 22) SetPlayerHealth(playerid, HP-amount);//Colt45
+		else if(weaponid == 23) SetPlayerHealth(playerid, HP-amount);//SilencedColt
+		else if(weaponid == 31) SetPlayerHealth(playerid, HP-amount);//M4
+		else if(weaponid == 30) SetPlayerHealth(playerid, HP-amount);//AK
+		else if(weaponid == 29) SetPlayerHealth(playerid, HP-amount);//MP5
+		else if(weaponid == 34) SetPlayerHealth(playerid, HP-amount);//SniperRifle
+		else if(weaponid == 33) SetPlayerHealth(playerid, HP-amount);//CountryRifle
+		else if(weaponid == 25) SetPlayerHealth(playerid, HP-amount);//PumpShotgun
+		else if(weaponid == 27) SetPlayerHealth(playerid, HP-amount);//Spaz12
+		else SetPlayerHealth(playerid, HP-amount);//other
 	}
 
 	new Float:armour;
@@ -2213,7 +2214,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 public OnPlayerSpawn(playerid)
 {
-	SetPlayerTeam(playerid, NO_TEAM);
+	SetPlayerTeam(playerid, 0);
 
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)
