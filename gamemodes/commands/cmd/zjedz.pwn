@@ -67,6 +67,11 @@ YCMD:zjedz(playerid, params[], help)
 					    PoziomPoszukiwania[playerid] += 1;
 						SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
 					}
+					if(Cooking[playerid][pCookID1] == 31 && random(2) == 1) //wuhan bat
+					{
+						InfectPlayer(playerid, KORONAWIRUS);
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight1]));
 				    hp = Cooking[playerid][pCWeight1];
 				    format(string, sizeof(string), "* %s zjada %s.", sendername, Cooking[playerid][pCook1]);
@@ -80,6 +85,11 @@ YCMD:zjedz(playerid, params[], help)
 					{//Dolphin or Turtle
 					    PoziomPoszukiwania[playerid] += 1;
 						SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
+					}
+					if(Cooking[playerid][pCookID2] == 31 && random(2) == 1) //wuhan bat
+					{
+						InfectPlayer(playerid, KORONAWIRUS);
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
 					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight2] / 3));
 				    hp = Cooking[playerid][pCWeight2];
@@ -95,6 +105,11 @@ YCMD:zjedz(playerid, params[], help)
 					    PoziomPoszukiwania[playerid] += 1;
 						SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
 					}
+					if(Cooking[playerid][pCookID3] == 31 && random(2) == 1) //wuhan bat
+					{
+						InfectPlayer(playerid, KORONAWIRUS);
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight3] / 3));
 				    hp = Cooking[playerid][pCWeight3];
 				    format(string, sizeof(string), "* %s zjada %s.", sendername, Cooking[playerid][pCook3]);
@@ -108,6 +123,11 @@ YCMD:zjedz(playerid, params[], help)
 					{//Dolphin or Turtle
 					    PoziomPoszukiwania[playerid] += 1;
 						SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
+					}
+					if(Cooking[playerid][pCookID4] == 31 && random(2) == 1) //wuhan bat
+					{
+						InfectPlayer(playerid, KORONAWIRUS);
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
 					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight4] / 3));
 				    hp = Cooking[playerid][pCWeight4];
@@ -123,6 +143,11 @@ YCMD:zjedz(playerid, params[], help)
 					    PoziomPoszukiwania[playerid] += 1;
 						SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
 					}
+					if(Cooking[playerid][pCookID5] == 31 && random(2) == 1) //wuhan bat
+					{
+						InfectPlayer(playerid, KORONAWIRUS);
+						SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+					}
 				    SetPlayerHealth(playerid, health + (Cooking[playerid][pCWeight5] / 3));
 				    hp = Cooking[playerid][pCWeight5];
 				    format(string, sizeof(string), "* %s zjada %s.", sendername, Cooking[playerid][pCook5]);
@@ -132,6 +157,11 @@ YCMD:zjedz(playerid, params[], help)
 				}
 		    }
 			ClearCookingID(playerid, cookid);
+
+			if(random(20) == 0) //5% szans na zatrucie
+			{
+				InfectPlayer(playerid, ZATRUCIE);
+			}
 		}
 		else
 		{

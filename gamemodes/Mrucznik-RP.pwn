@@ -7545,7 +7545,37 @@ public OnPlayerText(playerid, text[])
 	    {
 	        return 0;
       	}
-		PlayerTalkIC(playerid, text, "mówi", 15.0);
+
+		if(TourettActive[playerid])
+		{
+			//insert random tourette word
+			new newText[256];
+			new Vector:spaces;
+			for(new i; text[i] != '\0'; i++) //find spaces
+			{
+				if(text[i] == ' ') {
+					VECTOR_push_back_val(spaces, i);
+				}
+			}
+			new size = VECTOR_size(spaces);
+			if(size > 0)
+			{
+				//insert word
+				new index = random(size);
+				strcat(newText, text);
+				strins(newText, TourettWords[random(sizeof(TourettWords))], VECTOR_get_val(spaces, index));
+				PlayerTalkIC(playerid, newText, "mówi", 15.0);
+			}
+			else
+			{
+				PlayerTalkIC(playerid, text, "mówi", 15.0);
+			}
+		}
+		else
+		{
+			PlayerTalkIC(playerid, text, "mówi", 15.0);
+		}
+
 		Log(chatLog, INFO, "%s chat IC: %s", GetPlayerLogName(playerid), text);
 		return 0;
 	}

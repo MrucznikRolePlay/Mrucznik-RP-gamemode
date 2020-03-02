@@ -53,8 +53,16 @@ CurePlayer(playerid, eDiseases:disease)
 
 InfectPlayer(playerid, eDiseases:disease)
 {
+	//TODO: sprawdzanie czy gracz nie jest ju¿ zara¿ony t¹ chorob¹ powoduje, ¿e dane powinny byæ zapisane na strukturze danych Set zamiast Vector
+	// Set nie dopuszcza powtarzania elementów
+	if(IsPlayerSick(playerid, disease))
+	{
+		return 0;
+	}
+
 	MruMySQL_AddDisease(playerid, disease);
 	InfectPlayerWithoutSaving(playerid, disease);
+	return 1;
 }
 
 InfectPlayerWithoutSaving(playerid, eDiseases:disease)
@@ -169,7 +177,7 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 				}
 				else
 				{
-					PlayerImmunity[i]--;
+					DecreaseImmunity(i);
 				}
 			}
 		}
@@ -203,12 +211,12 @@ ShowDiseaseList(playerid)
 	return 1;
 }
 
-StartPlayerTreatment(playerid, eDiseases:disease)
+StartPlayerTreatment(playerid, doctorid, eDiseases:disease)
 {
-	new time = DiseaseData[disease][CureTime]*60;
+	new time = DiseaseData[disease][CureTime];
 	SetPVarInt(playerid, "disease-treatement", disease);
+	SetPVarInt(playerid, "treatment-doctorid", doctorid);
 
-	TogglePlayerControllable(playerid, false);
 	ApplyAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
 
 	CurrationCounter(playerid, time+1);
@@ -220,7 +228,6 @@ EndPlayerTreatment(playerid)
 	new eDiseases:disease = eDiseases:GetPVarInt(playerid, "disease-treatement");
 	new chance = DiseaseData[disease][DrugResistance];
 	new rand = random(100);
-	TogglePlayerControllable(playerid, true);
 	SetPVarInt(playerid, "disease-treatement", 0);
 	ClearAnimations(playerid);
 
@@ -242,8 +249,22 @@ IsPlayerTreated(playerid)
 	return GetPVarInt(playerid, "disease-treatement") != 0;
 }
 
-//-----------------<[ Disease effects: ]>-------------------
+DecreaseImmunity(playerid)
+{
+	if(PlayerImmunity[playerid] <= 0)
+	{
+		if(GetPVarInt(playerid, "maseczka") > 0)
+		{
+			SendClientMessage(playerid, COLOR_RED, "Twoja maseczka ju¿ nie spe³nia swojej roli ochronnej!");
+			DetachPlayerItem(playerid, GetPVarInt(playerid, "maseczka")-1);
+			SetPVarInt(playerid, "maseczka", 0);
+		}
+		return 0;
+	}
+	return --PlayerImmunity[playerid];
+}
 
+//-----------------<[ Disease effects: ]>-------------------
 AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, bool:pernament=false, Float:contagiousRange=0.0, infectionChance=0, additionalValue=0)
 {
 	new array[eEffectData]; //TODO: Czy mo¿na to zrobiæ inicjalizacj¹ {}?
@@ -256,62 +277,6 @@ AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTi
 	array[InfectionChance] = infectionChance;
 	array[AdditionalValue] = additionalValue;
 	VECTOR_push_back_arr(DiseaseData[disease][VEffects], array);
-	return 1;
-}
-
-public FeelingBadEffect(playerid, disease, value)
-{
-	ChatMe(playerid, "poczu³ siê Ÿle.");
-	ApplyAnimation(playerid, "FAT", "IDLE_tired", 4.0999, 0, 0, 0, 0, 0, 1);
-	return 1;
-}
-public CouchingEffect(playerid, disease, value)
-{
-	ChatMe(playerid, "zaczyna kaszleæ.");
-	ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0, 1);
-	return 1;
-}
-public VomitEffect(playerid, disease, value)
-{
-	ChatMe(playerid, "zaczyna wymiotowaæ.");
-	ApplyAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 0, 0, 1);
-	return 1;
-}
-public HPLossEffect(playerid, disease, value)
-{
-	new Float:hp;
-	GetPlayerHealth(playerid, hp);
-
-	new Float:loss = value;
-	SetPlayerHealth(playerid, (hp - loss < 0) ? 1.0 : hp-loss);
-	ChatMe(playerid, "poczu³, ¿e coœ jest nie tak z jego zdrowiem.");
-	return 1;
-}
-public HPLossToDeathEffect(playerid, disease, value)
-{
-	new Float:hp;
-	GetPlayerHealth(playerid, hp);
-
-	new Float:loss = value;
-	SetPlayerHealth(playerid, (hp - loss < 0) ? 0.0 : hp-loss);
-	ChatMe(playerid, "poczu³ mocny ból.");
-	return 1;
-}
-public BlackoutEffect(playerid, disease, value)
-{
-	//TODO
-	return 1;
-}
-public FaintEffect(playerid, disease, value)
-{
-	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
-	ChatMe(playerid, "omdla³.");
-	return 1;
-}
-public DeathEffect(playerid, disease, value)
-{
-	SetPlayerHealth(playerid, 0);
-	ChatMe(playerid, "umar³ na skutek choroby.");
 	return 1;
 }
 

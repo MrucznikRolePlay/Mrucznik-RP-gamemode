@@ -38,12 +38,7 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 		VECTOR_get_arr(DiseaseData[disease][VEffects], effectID, effect);
 		CallEffectTimer(playerid, disease, effect, effectID);
 
-		if(PlayerImmunity[playerid] > 0) 
-		{
-			PlayerImmunity[playerid]--;
-			return 1;
-		}
-
+		DecreaseImmunity(playerid);
 		if(IsPlayerTreated(playerid)) //nie wywo³uj efektów podczas leczenia
 		{
 			return 1;
@@ -57,7 +52,7 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 
 timer InfectedEffectMessage[15000](playerid) 
 {
-	ChatMe(playerid, "poczu³ siê, jakby zarazi³ siê chorob¹.");
+	ChatMe(playerid, "poczu³ siê chory.");
 	return 1;
 }
 
@@ -65,10 +60,64 @@ timer CurrationCounter[1000](playerid, count)
 {
 	GameTextForPlayer(playerid, sprintf("Leczenie: ~r~%ds", count), 1000, 1);
 
-	if(count <= 0) {
-		defer CurrationCounter(playerid, count-1);
-	} else {
+	if(count <= 0) 
+	{
+		new doctorid = GetPVarInt(playerid, "treatment-doctorid");
+		if(IsPlayerConnected(doctorid) && GetDistanceBetweenPlayers(playerid,doctorid) < 5) 
+		{	
+			AbortCurration[playerid] = 0;
+			defer CurrationCounter(playerid, count-1);
+		}
+		else
+		{
+			if(AbortCurration[playerid] == 60)
+			{
+				//abort treatment
+				if(IsPlayerConnected(doctorid))
+					GameTextForPlayer(doctorid, "Kuracja przerwana.", 1000, 1);
+				GameTextForPlayer(playerid, "Kuracja przerwana.", 1000, 1);
+				SetPVarInt(playerid, "disease-treatement", 0);
+				return;
+			}
+			if(IsPlayerConnected(doctorid))
+				GameTextForPlayer(doctorid, "Wracaj do pacjenta!", 1000, 1);
+			GameTextForPlayer(playerid, "Wracaj do lekarza!", 1000, 1);
+			AbortCurration[playerid]++;
+			defer CurrationCounter(playerid, count);
+		}
+	} 
+	else 
+	{
 		EndPlayerTreatment(playerid);
+	}
+}
+
+task ChorobyMinutaTimer[60000]() 
+{
+	foreach(new i : Player)
+	{
+		//Grypa
+		new Float:hp;
+		GetPlayerHealth(i, hp);
+		if(hp < 20.0) 
+		{
+			Grypa[i]++;
+			if(Grypa[i] == 60)
+			{
+				InfectPlayer(i, GRYPA);
+				Grypa[i] = 0;
+			}
+		}
+		else
+		{
+			Grypa[i] = 0;
+		}
+
+		//Tourett
+		if(Tourett[i] > 0) Tourett[i]--;
+
+		//PTSD
+		if(PTSDCounter[i] > 0) PTSDCounter[i]--;
 	}
 }
 

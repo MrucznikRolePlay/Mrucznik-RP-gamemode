@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  maseczka                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,27 +27,47 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "uleczall\uleczall.pwn"
-#include "zaraz\zaraz.pwn"
-#include "ulecz\ulecz.pwn"
-#include "diagnozuj\diagnozuj.pwn"
-#include "maseczka\maseczka.pwn"
-#include "kuracja\kuracja.pwn"
-#include "zastrzyk\zastrzyk.pwn"
-
+#include "maseczka_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_maseczka()
 {
-    command_uleczall();
-    command_zaraz();
-    command_ulecz();
-    command_diagnozuj();
-    command_maseczka();
-    command_kuracja();
-    command_zastrzyk();
+    new command = Command_GetID("maseczka");
+
+    //aliases
+    Command_AddAlt(command, "dajmaseczke");
+    Command_AddAlt(command, "sprzedajmaseczke");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:maseczka(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Sprzedaje graczowi maseczkê chroni¹c¹ przed chorobami.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, price;
+    if(sscanf(params, "rd", giveplayerid, price))
+    {
+        sendTipMessage(playerid, "U¿yj /maseczka [Nick/ID] [cena] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_maseczka_Impl(playerid, giveplayerid, price);
 }

@@ -249,11 +249,7 @@ IsAKox(playerid)
 
 IsAScripter(playerid)
 {
-	if(PlayerInfo[playerid][pNewAP] == 5)
-	{
-		return 1;
-	}
-	return 0;
+	return Uprawnienia(playerid, ACCESS_SKRYPTER);
 }
 
 SendMessageToAdmin(text[], mColor)//Wysy³a wiadomoœæ do administratora na s³u¿bie

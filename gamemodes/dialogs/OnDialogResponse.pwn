@@ -1021,6 +1021,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 11: ACCESS[id] ^= ACCESS_EDITCAR;
             case 12: ACCESS[id] ^= ACCESS_EDITRANG;
             case 13: ACCESS[id] ^= ACCESS_EDITPERM;
+            case 14: ACCESS[id] ^= ACCESS_SKRYPTER;
         }
         format(str, 128, "(PERM) %s edytowa³ Twoje uprawnienia (/uprawnienia)", GetNick(playerid));
         SendClientMessage(id, 0x05CA8CFF, str);
@@ -3175,6 +3176,91 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
+					}
+					case 16:
+					{
+						if (kaska[playerid] >= 30000 )
+						{
+							if(PlayerInfo[playerid][pFixKit] <= 5)
+							{
+								PlayerInfo[playerid][pFixKit]++;
+								ZabierzKase(playerid, 30000);
+								format(string, sizeof(string), "~r~-$%d", 30000);
+								GameTextForPlayer(playerid, string, 5000, 1);
+								PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+								format(string, sizeof(string), "Kupi³eœ zestaw do naprawy aut!");
+								SendClientMessage(playerid, COLOR_GRAD4, string);
+								return 1;
+							}
+							else
+							{
+								SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz kupiæ maksymalnie 5 zestawów!");
+							}
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
+						}
+					}
+					case 17: //kurczak
+					{
+						if(kaska[playerid] < 15) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿onego kurczaka!");
+							return 1;
+						}
+						if(Groceries[playerid][pChicken] != 0)
+						{
+							sendErrorMessage(playerid, "Masz ju¿ mro¿onego kurczaka.");
+							return 1;
+						}
+						Groceries[playerid][pChicken] = random(300)+110;
+						ZabierzKase(playerid, 15);
+					}
+					case 18: //pizza
+					{
+						if(kaska[playerid] < 30) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿on¹ pizze!");
+							return 1;
+						}
+						if(Groceries[playerid][pPizza] != 0)
+						{
+							sendErrorMessage(playerid, "Masz ju¿ mro¿on¹ pizze.");
+							return 1;
+						}
+						Groceries[playerid][pPizza] = random(300)+90;
+						ZabierzKase(playerid, 30);
+					}
+					case 19: //hamburger
+					{
+						if(kaska[playerid] < 25) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿onego hamburgera!");
+							return 1;
+						}
+						if(Groceries[playerid][pHamburger] != 0)
+						{
+							sendErrorMessage(playerid, "Masz ju¿ mro¿onego hamburgera.");
+							return 1;
+						}
+						Groceries[playerid][pHamburger] = random(300)+100;
+						ZabierzKase(playerid, 25);
+					}
+					case 20: //mro¿ony nietoperze z Wuhan
+					{
+						if(kaska[playerid] < 1500) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿onego nietoperza z Wuhan!");
+							return 1;
+						}
+						if(Groceries[playerid][pWuhanBat] != 0)
+						{
+							sendErrorMessage(playerid, "Masz ju¿ mro¿onego nietoperza z Wuhan.");
+							return 1;
+						}
+						Groceries[playerid][pWuhanBat] = random(650)+100;
+						ZabierzKase(playerid, 1500);
 					}
 				}
 			}

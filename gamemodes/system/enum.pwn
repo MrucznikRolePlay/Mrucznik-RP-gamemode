@@ -1221,6 +1221,7 @@ enum pGroceries
 	pHamburger,
 	pPizzas,
 	pPizza,
+	pWuhanBat
 };
 new Groceries[MAX_PLAYERS][pGroceries];
 
