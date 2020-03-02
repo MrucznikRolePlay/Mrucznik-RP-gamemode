@@ -35,7 +35,7 @@ YCMD:maska(playerid, params[], help)
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];
 		new nick[32];
-		if(IsPlayerAttachedObjectSlotUsed(playerid, 1) && GetPVarString(playerid, "maska_nick", nick, 32))
+		if(IsPlayerAttachedObjectSlotUsed(playerid, 1) && GetPVarString(playerid, "maska_nick", nick, 24))
 		{
 			SetPlayerColor(playerid, TEAM_HIT_COLOR);
 			GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -49,9 +49,10 @@ YCMD:maska(playerid, params[], help)
 				ShowPlayerNameTagForPlayer(i, playerid, 1);
 			}
 			DestroyDynamic3DTextLabel(HiddenPlayerName[playerid]);
+			HiddenPlayerName[playerid] = INVALID_3DTEXT_ID;
 			SetPlayerName(playerid, nick);
 			SetRPName(playerid);
-			format(PlayerInfo[playerid][pNick], 32, "%s", nick);
+			format(PlayerInfo[playerid][pNick], 24, "%s", nick);
 			DeletePVar(playerid, "maska_nick");
 		}
 		else
@@ -69,10 +70,10 @@ YCMD:maska(playerid, params[], help)
 			if(SetPlayerName(playerid, pName))
 			{
 				SetRPName(playerid);
-				format(PlayerInfo[playerid][pNick], 32, "%s", pName);
+				format(PlayerInfo[playerid][pNick], 24, "%s", pName);
 				SetPVarString(playerid, "maska_nick", sendername);
-				format(pName, sizeof(pName), "Nieznajomy_%d (%d)", PlayerInfo[playerid][pUID], playerid);
-				HiddenPlayerName[playerid] = CreateDynamic3DTextLabel(pName, 0xFFFFFFAA, 0.0, 0.0, 0.15, 25.0, playerid, INVALID_VEHICLE_ID, 1, -1, -1, -1);
+				format(pName, sizeof(pName), "Zamaskowany_%d (%d)", PlayerInfo[playerid][pUID], playerid);
+				HiddenPlayerName[playerid] = CreateDynamic3DTextLabel(pName, 0xFFFFFFFF, 0.0, 0.0, 0.15, 25.0, playerid, INVALID_VEHICLE_ID);
 				foreach(new i : Player)
 				{
 					ShowPlayerNameTagForPlayer(i, playerid, 0);

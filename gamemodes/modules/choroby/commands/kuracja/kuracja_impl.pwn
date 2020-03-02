@@ -25,6 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 kuracja_akceptuj(playerid)
 {
+    new string[144];
     new giveplayerid = GetPVarInt(playerid, "kuracja-doctorid");
     new uid = GetPVarInt(playerid, "kuracja-uid");
     new cost = GetPVarInt(playerid, "kuracja-cost");
@@ -60,7 +61,8 @@ kuracja_akceptuj(playerid)
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), cost, commission, DiseaseData[disease][Name]
     );
 
-    ChatMe(playerid, sprintf("pod³¹cza %s do aparatury i rozpoczyna kuracjê."));
+    format(string, sizeof(string), "* %s pod³¹cza %s do aparatury i rozpoczyna kuracjê.", GetNick(giveplayerid), GetNick(playerid));
+    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     StartPlayerTreatment(playerid, disease);
     return 1;
 }

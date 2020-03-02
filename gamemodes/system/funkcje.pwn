@@ -12861,11 +12861,11 @@ public UnCuffedAction(playerid, cuffedid)
 	TogglePlayerControllable(cuffedid, 1);
 	PlayerCuffed[cuffedid] = 0;
 	zakuty[cuffedid] = 0;
-	SkutyGracz[cuffedid] = 0;
+	SkutyGracz[cuffedid] = INVALID_PLAYER_ID;
 	uzytekajdanki[cuffedid] = 0;
 	uzytekajdanki[playerid] = 0;
-	PDkuje[playerid] = 0;
-	PDkuje[cuffedid]=0;
+	PDkuje[playerid] = INVALID_PLAYER_ID;
+	PDkuje[cuffedid]= INVALID_PLAYER_ID;
 	PlayerInfo[cuffedid][pMuted] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);

@@ -1216,11 +1216,12 @@ public OnPlayerDisconnect(playerid, reason)
 	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //l
 
 	new reString[128];
-    new DisconnectReason[3][] =
+    new DisconnectReason[4][] =
     {
         "Timeout/Crash",
         "/q",
-        "Kick/Ban"
+        "Kick/Ban",
+		"/login"
     };
     if(Spectate[playerid] == INVALID_PLAYER_ID)
     {
@@ -1404,24 +1405,24 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	//kajdanki
-	if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
+	if(PDkuje[playerid] != INVALID_PLAYER_ID) // gdy skuty da q
 	{
 		UnCuffedAction(PDkuje[playerid], playerid);
 	}
 
-	if(SkutyGracz[playerid] != 0)
+	if(SkutyGracz[playerid] != INVALID_PLAYER_ID) // gdy skuwaj¹cy da /q
 	{
 		UnCuffedAction(playerid, SkutyGracz[playerid]);
 	}
 
-	if(GetPVarInt(playerid, "ma_worek"))
+	if(GetPVarInt(playerid, "ma_worek") != INVALID_PLAYER_ID)
 	{
 		DeletePVar(GetPVarInt(playerid, "ma_worek"), "uzyl_worek");
 		DeletePVar(playerid, "ma_worek");
 		UnHave_Worek(playerid);
 	}
 
-	if(GetPVarInt(playerid, "uzyl_worek"))
+	if(GetPVarInt(playerid, "uzyl_worek") != INVALID_PLAYER_ID)
 	{
 		DeletePVar(GetPVarInt(playerid, "uzyl_worek"), "ma_worek");
 		UnHave_Worek(GetPVarInt(playerid, "uzyl_worek"));
@@ -1909,11 +1910,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 					StopACall(playerid);
 				}
 				//kajdanki
-				if(PDkuje[playerid] > 0 || uzytekajdanki[playerid] != 0)
+				if(PDkuje[playerid] != INVALID_PLAYER_ID)
 				{
 					UnCuffedAction(PDkuje[playerid], playerid);
 				}
-				if(SkutyGracz[playerid] != 0)
+				if(SkutyGracz[playerid] != INVALID_PLAYER_ID)
 				{
 					UnCuffedAction(playerid, SkutyGracz[playerid]);
 				}

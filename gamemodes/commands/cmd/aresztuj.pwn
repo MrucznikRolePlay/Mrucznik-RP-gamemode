@@ -92,7 +92,7 @@ YCMD:aresztuj(playerid, params[], help)
 									WantLawyer[playa] = 1;
 									PlayerInfo[playa][pArrested] += 1;
 									/*kajdanki*/
-									if(PDkuje[playa]) UnCuffedAction(playerid, playa);
+									if(PDkuje[playa] != INVALID_PLAYER_ID) UnCuffedAction(playerid, playa);
 									Wchodzenie(playa);
 									SetPlayerVirtualWorld(playa, 1);
 								    new losuj= random(sizeof(Cela));

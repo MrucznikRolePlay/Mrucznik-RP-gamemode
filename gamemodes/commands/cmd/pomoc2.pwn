@@ -30,7 +30,7 @@
 
 YCMD:pomoc2(playerid, params[], help)
 {
-    SendClientMessage(playerid, COLOR_GRAD1,"*** KONTO *** /zasady /stats /nextlevel /ulepszenia (/p)rzedmioty");
+    SendClientMessage(playerid, COLOR_GRAD1,"*** KONTO *** /zasady /stats /nextlevel /ulepszenia (/p)rzedmioty /naprawpojazd");
     SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /plac /datek /czas /kup /wyrzucbronie /dajklucz /zmienklucz /id /pij /muzyka /pokazlicencje /ubranie");
     SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /resetulepszen(100k) /kupbron /zamknij /skill /laptop /licencje /lotto /zmienspawn /stopani /pobij /wyscigi");
     SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /report /anuluj /akceptuj /wywal /wezdragi /kontrakt /tankuj /kanister /oczysc /wezwij /rodziny /wepchnij");

@@ -40,14 +40,23 @@ YCMD:setcarhp(playerid, params[], help)
 			return 1;
 		}
     
-        if (PlayerInfo[playerid][pAdmin] >= 10)
+        if (PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
         {
-            SetVehicleHealth(vehicleid, health);
-            RepairVehicle(vehicleid);
-            Log(adminLog, INFO, "Admin %s ustawi³ hp auta na %d", GetPlayerLogName(playerid), health);
-            new string[128];
-            format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNick(playerid), health);
-            SendMessageToAdmin(string, COLOR_P@);
+            if(GetVehicleModel(vehicleid))
+            {
+                new vuid = VehicleUID[vehicleid][vUID];
+                SetVehicleHealth(vehicleid, health);
+                RepairVehicle(vehicleid);
+                CarData[vuid][c_HP] = health;
+                Log(adminLog, INFO, "Admin %s ustawi³ hp auta [ID: %d] na %d", GetPlayerLogName(playerid), vehicleid, health);
+                new string[128];
+                format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNick(playerid), health);
+                SendMessageToAdmin(string, COLOR_P@);
+            }
+            else
+            {
+                sendTipMessage(playerid, "Niepoprawne ID pojazdu. (/dl)");
+            }
         }
         else
         {

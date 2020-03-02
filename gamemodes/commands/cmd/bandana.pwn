@@ -35,7 +35,7 @@ YCMD:bandana(playerid, params[], help)
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];
 
-		if(HiddenPlayerName[playerid])
+		if(HiddenPlayerName[playerid] != INVALID_3DTEXT_ID)
 		{
 			SendClientMessage(playerid, COLOR_GREY, " Musisz œci¹gn¹æ maskê z twarzy! (/maska).");
 			return 1;

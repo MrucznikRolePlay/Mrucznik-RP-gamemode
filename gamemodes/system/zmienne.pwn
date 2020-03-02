@@ -1004,7 +1004,7 @@ new kodbitwy[256];//Bitwa
 new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
 new uzytekajdanki[MAX_PLAYERS];//Kajdany
 new zakuty[MAX_PLAYERS];//Kajdany
-new PDkuje[MAX_PLAYERS];//Kajdany
+new PDkuje[MAX_PLAYERS] = INVALID_PLAYER_ID;//Kajdany
 new SkutyGracz[MAX_PLAYERS];//Kajdany
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
@@ -1067,7 +1067,7 @@ new playerSeeSpec[MAX_PLAYERS];
 new gRO[MAX_PLAYERS];
 
 new isNaked[MAX_PLAYERS]; 
-new Text3D:HiddenPlayerName[MAX_PLAYERS];
+new Text3D:HiddenPlayerName[MAX_PLAYERS] = INVALID_3DTEXT_ID;
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------

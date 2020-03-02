@@ -100,7 +100,7 @@ YCMD:paka(playerid, params[], help)
 						format(string, sizeof(string), "<< Funkcjonariusz %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
 						OOCNews(COLOR_LIGHTRED, string);
 					}
-					if(PDkuje[suspect]) UnCuffedAction(playerid, suspect);
+					if(PDkuje[suspect] != INVALID_PLAYER_ID) UnCuffedAction(playerid, suspect);
 	    			SetPlayerInterior(suspect, 10);
 				    new losuj= random(sizeof(Cela));
 					SetPlayerPos(suspect, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
