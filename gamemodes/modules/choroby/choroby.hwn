@@ -92,7 +92,7 @@ new DiseaseData[eDiseases][eDiseaseData] = {
     {"Niedow³ad r¹k", 150000, 600, 25, 0.0, false, VECTOR_NULL},
     {"Uraz", 10000, 60, 0, 0.0, false, VECTOR_NULL},
     {"Gangrena", 75000, 120, 75, 0.1, true, VECTOR_NULL},
-    {"Ob³êd", 15000, 60, 90, 0.0, false, VECTOR_NULL}
+    {"PTSD", 15000, 60, 90, 0.0, false, VECTOR_NULL}
 };
 
 new PlayerImmunity[MAX_PLAYERS];
@@ -104,13 +104,73 @@ new AbortCurration[MAX_PLAYERS];
 new TourettRegexp;
 
 //------------------<[ Forwardy: ]>--------------------
+//Koronawirus
+forward WuhanCouching(playerid, disease, value);
+forward DusznosciEffect(playerid, disease, value);
+forward FeverEffect(playerid, disease, value);
+forward KoronawirusDeathEffect(playerid, disease, value);
+
+//Grypa
 forward FeelingBadEffect(playerid, disease, value);
 forward CouchingEffect(playerid, disease, value);
-forward VomitEffect(playerid, disease, value);
 forward HPLossEffect(playerid, disease, value);
+
+//Zatrucie
+forward FartEffect(playerid, disease, value);
+forward DiarrheaEffect(playerid, disease, value);
+forward ShittingEffect(playerid, disease, value);
+forward AbdominalPainEffect(playerid, disease, value);
+forward VomitEffect(playerid, disease, value);
+
+//Padaka
+forward EpilepsyEffect(playerid, disease, value);
+
+//Tourett
+forward TourettShoutEffect(playerid, disease, value);
+forward TourettPermanentEffect(playerid, disease, value);
+forward TourettPermanentEffect_Off(playerid, disease, value);
+
+//Astma
+forward AnaphylacticShock(playerid, disease, value);
+
+//Schizofrenia paranoidalna
+forward HallucinationsEffect(playerid, disease, value);
+
+//Zombie effects
+forward ZombieSkinEffect(playerid, disease, value);
+forward ZombieSkinEffect_Off(playerid, disease, value);
+forward ZombieTalkEffect(playerid, disease, value);
+
+//HIV
+forward ReducedImmunityEffect(playerid, disease, value);
+
+//Astygmatyzm
+forward AstigmatismEffect(playerid, disease, value);
+forward AstigmatismEffect_Off(playerid, disease, value);
+
+//Parkinson/niedow³ad r¹k
+forward ShakingHandsEffect(playerid, disease, value);
+forward ShootingSkillEffect(playerid, disease, value);
+forward ShootingSkillEffect_Off(playerid, disease, value);
+
+//Uraz
+forward BleedingEffect(playerid, disease, value);
+forward GetGangreneEffect(playerid, disease, value);
+forward FaintEffect(playerid, disease, value);
+
+//Gangrena
+forward PurulenceEffect(playerid, disease, value);
+forward RottenFleshEffect(playerid, disease, value);
+
+//PTSD
+forward HideWeaponEffect(playerid, disease, value);
+forward ThrowWeaponEffect(playerid, disease, value);
+forward ThrowAllWeaponsEffect(playerid, disease, value);
+forward FearEffect(playerid, disease, value);
+
+//others
 forward HPLossToDeathEffect(playerid, disease, value);
 forward BlackoutEffect(playerid, disease, value);
-forward FaintEffect(playerid, disease, value);
 forward DeathEffect(playerid, disease, value);
 
 choroby_InitEffects()

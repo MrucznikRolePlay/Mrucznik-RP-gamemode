@@ -135,7 +135,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 ### Efekty schizofrenii
 | Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
-| Pelikany mnie gonią | Zmienia pogodę na dziwną | /me ma nieobecny wzrok. | - | - | - |
+| Pelikany mnie gonią | Zmienia pogodę na dziwną | /me zaczyna widzieć niestworzone rzeczy. | 10 ± 20 minut | - | - |
 
 ### Efekty zombie
 | Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
@@ -162,7 +162,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 ### Efekty urazu
 | Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
-| Krwawienie | Gracz krwawi z rany | /me zaczyna krwawić z rany. | 5 ± 10 minut  | - | - |
+| Krwawienie | Gracz krwawi z rany | /do Z rany John_Mrucznik zaczyna płynąć krew. | 5 ± 10 minut  | - | - |
 | Słabość (FeelingBadEffect) | Gracz odtwarza animację zmęczenia | /me poczuł się źle | 10 ± 20 minut | - | - |
 | Omdlenie | Gracz traci na chwilę przytomność | /me omdlał. | 20 ± 40 minut  | - | - |
 | Rozwój choroby | Gracz ma szansę zarazić się gangreną | - | 10 ± 20 minut | - | - |
