@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   zmiany                                                  //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ setcarhp ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,47 +16,52 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: werem
+// Data utworzenia: 29.02.2020
 
-// ================= UWAGA! =================
-//
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
+// Opis:
+/*
+
+*/
 
 
-//-------<[ include ]>-------
-#include "zmiany_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_zmiany()
+// Notatki skryptera:
+/*
+	
+*/
+YCMD:setcarhp(playerid, params[], help)
 {
-    new command = Command_GetID("zmiany");
-
-    //aliases
-    Command_AddAlt(command, "changelog");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:zmiany(playerid, params[], help)
-{
-    if (help)
+    if(IsPlayerConnected(playerid))
     {
-        sendTipMessage(playerid, "Wyœwietla listê zmian wprowadzonych w aktualizacjach skryptu serwera.");
-        return 1;
+		new vehicleid, health;
+		if( sscanf(params, "dd", vehicleid, health))
+		{
+			sendTipMessage(playerid, "U¿yj /setcarhp [carid] [hp]");
+			return 1;
+		}
+    
+        if (PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
+        {
+            if(GetVehicleModel(vehicleid))
+            {
+                new vuid = VehicleUID[vehicleid][vUID];
+                SetVehicleHealth(vehicleid, health);
+                RepairVehicle(vehicleid);
+                CarData[vuid][c_HP] = health;
+                Log(adminLog, INFO, "Admin %s ustawi³ hp auta [ID: %d] na %d", GetPlayerLogName(playerid), vehicleid, health);
+                new string[128];
+                format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNick(playerid), health);
+                SendMessageToAdmin(string, COLOR_P@);
+            }
+            else
+            {
+                sendTipMessage(playerid, "Niepoprawne ID pojazdu. (/dl)");
+            }
+        }
+        else
+        {
+            noAccessMessage(playerid);
+        }
     }
-    
-    
-    //command body
-    return command_zmiany_Impl(playerid);
+    return 1;
 }

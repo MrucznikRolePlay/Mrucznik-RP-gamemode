@@ -183,6 +183,15 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
         Log(mysqlLog, ERROR, "MySQL:: %s - b³¹d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
         return 0;
     }
+
+	new maska_nick[24];
+	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
+	{
+		SetPlayerName(playerid, maska_nick);
+		SetRPName(playerid);
+		format(PlayerInfo[playerid][pNick], 24, "%s", maska_nick);
+		DeletePVar(playerid, "maska_nick");
+	}
 	
 	format(query, sizeof(query), "UPDATE `mru_konta` SET \
 	`Nick`='%s',\
@@ -474,6 +483,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`StylWalki`='%d', \
 	`PAdmin`='%d', \
 	`Uniform`='%d', \
+	`CruiseController`='%d', \
+	`FixKit`='%d', \
 	`connected`='0' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
@@ -489,6 +500,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
 	PlayerInfo[playerid][pUniform],
+	PlayerInfo[playerid][pCruiseController],
+	PlayerInfo[playerid][pFixKit],
     PlayerInfo[playerid][pUID]);
 
     if(!mysql_query(query)) fault=false;
@@ -690,7 +703,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
     	mysql_query(lStr);
@@ -699,7 +712,7 @@ public MruMySQL_LoadAcocount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -714,6 +727,8 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pStylWalki],
 		PlayerInfo[playerid][pNewAP],
 		PlayerInfo[playerid][pUniform],
+		PlayerInfo[playerid][pCruiseController],
+		PlayerInfo[playerid][pFixKit],
 		PlayerInfo[playerid][pAuto1],
 		PlayerInfo[playerid][pAuto2],
 		PlayerInfo[playerid][pAuto3],

@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ paj ]--------------------------------------------------//
+//-----------------------------------------------[ naprawpojazd ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: werem
+// Data utworzenia: 25.02.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -27,51 +29,23 @@
 /*
 	
 */
-
-YCMD:paj(playerid, params[], help)
+YCMD:naprawpojazd(playerid, params[], help)
 {
-	new string[128];
-    if(IsPlayerConnected(playerid))
+    if(PlayerInfo[playerid][pFixKit] == 0) return SendClientMessage(playerid, COLOR_RED, "Nie masz ¿adnych zestawów do naprawy aut. Zakupisz je u mechanika!");
+    new vehicleid = GetClosestCar(playerid, 4.0);
+    new string[128];
+    if(vehicleid == -1) return SendClientMessage(playerid, COLOR_RED, "Nie znaleziono aut w pobli¿u.");
+    if(GetPVarInt(playerid, "timer_ZestawNaprawczy")) return SendClientMessage(playerid, COLOR_RED, "Naprawiasz ju¿ pojazd.");
+    if(GetPlayerState(playerid) == 1)
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || PlayerInfo[playerid][pNewAP] >= 1)
-		{
-		    if(AntySpam[playerid] == 1)
-		    {
-		        SendClientMessage(playerid, COLOR_GREY, "Odczekaj 5 sekund");
-		        return 1;
-		    }
-
-	   		new nick[MAX_PLAYER_NAME], czas, result[64];
-			if( sscanf(params, "s[21]ds[64]", nick, czas, result))
-			{
-                sendTipMessage(playerid, "U¿yj /paj [NICK GRACZA OFFLINE] [czas] [powod]"); //
-                return 1;
-            }
-            new giveplayerid;
-			sscanf(nick, "k<fix>", giveplayerid);
-            if(IsPlayerConnected(giveplayerid))
-			{
-			    sendErrorMessage(playerid, "Nie mo¿esz zablokowaæ tego gracza (jest online (na serwerze))");
-				return 1;
-			}
-
-			if(!MruMySQL_DoesAccountExist(nick))
-			{
-				sendErrorMessage(playerid, "Brak pliku gracza, nie mo¿na zAJotowaæ (konto nie istnieje).");
-				return 1;
-			}
-			SetPlayerPAdminJail(nick, playerid, czas, result);
-			
-			if(kary_TXD_Status == 1)
-			{
-				PAJPlayerTXD(nick, playerid, czas, result); 
-			}
-			else if(kary_TXD_Status == 0)
-			{
-				format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nick, czas, GetNick(playerid), (result));
-				SendPunishMessage(string, playerid);
-			}
-		}
+        format(string, sizeof(string), "* %s naprawia auto z u¿yciem podrêcznego zestawu.", GetNick(playerid));
+        ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+        format(string, sizeof(string), "Rozpoczêto naprawê pojazdu. ID: [%d]", vehicleid);
+        SendClientMessage(playerid, COLOR_RED, string);
+        new timer = SetTimerEx("ZestawNaprawczy_CountDown", 1000, true, "ii", playerid, vehicleid);
+    	SetPVarInt(playerid, "timer_ZestawNaprawczy", timer);
     }
-	return 1;
+    else SendClientMessage(playerid, COLOR_RED, "Musisz wyjsæ z auta.");
+    
+    return 1;
 }

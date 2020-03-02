@@ -55,6 +55,7 @@ YCMD:zmienwl(playerid, params[], help)
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PoziomPoszukiwania[para1] = level;
+					SetPlayerWantedLevel(para1, (PoziomPoszukiwania[para1] > 6 ? 6 : PoziomPoszukiwania[para1]));
 					Log(adminLog, INFO, "Admin %s zmieni³ wanted level %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					format(string, sizeof(string), "   Twój Poziom Poszukiwania zosta³ zmieniony na %d przez admina %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);

@@ -24,11 +24,12 @@
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
 new Car_SlotQueue[1024];
-new Rower_timerSKOK[MAX_PLAYERS];
-new Rower_timerSZYBKOSC[MAX_PLAYERS];
+new pCruiseSpeed[MAX_PLAYERS];
+new pCruiseTXD[MAX_PLAYERS] = 0;
 
 
 //------------------<[ Forwardy: ]>--------------------
-forward rower_skoksprawdz(playerid, Float:vehz, carid);
-forward rower_sprawdzanie(playerid, carid);
+forward CruiseControl(playerid);
+forward CruiseControl_Static(playerid, type);
+forward CruiseControl_Static_TurnOn(playerid, type);
 //end

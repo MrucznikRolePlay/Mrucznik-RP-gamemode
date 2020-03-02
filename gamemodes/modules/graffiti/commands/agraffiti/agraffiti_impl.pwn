@@ -28,7 +28,7 @@ command_agraffiti_Impl(playerid, opcja[36], id)
     if(strcmp(opcja,"sprawdz",true) == 0)
     {
         new string[128];
-        if(PlayerInfo[playerid][pAdmin] == 0 && !IsAScripter(playerid))
+        if(PlayerInfo[playerid][pAdmin] < 1 && !IsAScripter(playerid))
         {
             sendTipMessage(playerid, "Komenda dostêpna dla administracji.");
             return 1;

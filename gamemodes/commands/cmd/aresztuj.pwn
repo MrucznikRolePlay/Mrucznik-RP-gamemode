@@ -78,10 +78,6 @@ YCMD:aresztuj(playerid, params[], help)
                                     new depo2 = floatround(((price/100) * 80), floatround_round);
                                     new depo3 = floatround(((price/100) * 20), floatround_round);
                                     PoziomPoszukiwania[playa] = 0;
-                                    zakuty[playa] = 0;//Kajdany
-                                    uzytekajdanki[playa] = 0;
-                                    PDkuje[playerid] = 0;
-                                    uzytekajdanki[playerid] = 0;
                                     DajKase(playerid, depo3);
                                     Sejf_Add(PlayerInfo[playerid][pMember], depo2);
 								    format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, price, depo3);
@@ -95,6 +91,9 @@ YCMD:aresztuj(playerid, params[], help)
                                     poscig[playa] = 0;
 									WantLawyer[playa] = 1;
 									PlayerInfo[playa][pArrested] += 1;
+									/*kajdanki*/
+									if(PDkuje[playa] != INVALID_PLAYER_ID) UnCuffedAction(playerid, playa);
+									Wchodzenie(playa);
 									SetPlayerVirtualWorld(playa, 1);
 								    new losuj= random(sizeof(Cela));
 									SetPlayerPos(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
@@ -102,10 +101,6 @@ YCMD:aresztuj(playerid, params[], help)
                                     Wchodzenie(playa);
 									JailPrice[playa] = bail;
                                     SetPVarInt(playa, "kaucja-dlaKogo", PlayerInfo[playerid][pMember]);
-									ClearAnimations(playa);
-									SetPlayerSpecialAction(playa,SPECIAL_ACTION_NONE);
-									RemovePlayerAttachedObject(playa, 5);
-									SkutyGracz[playa] = 0;
 									UsunBron(playa);//usun bron
 									SetPlayerSpawnWeapon(playa);
 									if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
@@ -137,11 +132,7 @@ YCMD:aresztuj(playerid, params[], help)
 											SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 											format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
 											SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-											zakuty[playa] = 0;//Kajdany
-											uzytekajdanki[playa] = 0;
-											PDkuje[playerid] = 0;
-											uzytekajdanki[playerid] = 0;
-											SkutyGracz[playa] = 0;
+											if(PDkuje[giveplayerid]) UnCuffedAction(playerid, giveplayerid);
 											JailDeMorgan(giveplayerid);
 											UsunBron(playa);//usun bron
 											SetPlayerSpawnWeapon(playa);

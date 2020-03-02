@@ -61,9 +61,9 @@ organizacje_wepchnijSekta(playerid, giveplayerid)
         format(var, sizeof(var), "* %s og³uszy³(a) i wrzuci³(a) do celi %s.", GetNick(playerid) ,GetNick(giveplayerid));
         ProxDetector(20.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		SektaUwieziony[giveplayerid] = 1;
+        Wchodzenie(giveplayerid);
         SetPlayerPos(giveplayerid, 867.1572, -1111.2548, 5.8253);
         SetPlayerVirtualWorld(giveplayerid, 20);
-		Wchodzenie(giveplayerid);
     }
     else
     {
