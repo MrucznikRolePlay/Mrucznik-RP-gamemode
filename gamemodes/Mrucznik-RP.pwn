@@ -1418,16 +1418,16 @@ public OnPlayerDisconnect(playerid, reason)
 
 	if(GetPVarInt(playerid, "ma_worek") != INVALID_PLAYER_ID)
 	{
-		DeletePVar(GetPVarInt(playerid, "ma_worek"), "uzyl_worek");
-		DeletePVar(playerid, "ma_worek");
+		SetPVarInt(GetPVarInt(playerid, "ma_worek"), "uzyl_worek", INVALID_PLAYER_ID);
+		SetPVarInt(playerid, "ma_worek", INVALID_PLAYER_ID);
 		UnHave_Worek(playerid);
 	}
 
 	if(GetPVarInt(playerid, "uzyl_worek") != INVALID_PLAYER_ID)
 	{
-		DeletePVar(GetPVarInt(playerid, "uzyl_worek"), "ma_worek");
+		SetPVarInt(GetPVarInt(playerid, "uzyl_worek"), "ma_worek", INVALID_PLAYER_ID);
 		UnHave_Worek(GetPVarInt(playerid, "uzyl_worek"));
-		DeletePVar(playerid, "uzyl_worek");
+		SetPVarInt(playerid, "uzyl_worek", INVALID_PLAYER_ID);
 	}
 
     if(GetPVarInt(playerid, "kostka"))
@@ -1911,11 +1911,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					StopACall(playerid);
 				}
-				//kajdanki
-				if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy zginie
-				{
-					UnCuffedAction(playerid, SkutyGracz[playerid]);
-				}
 
 				if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 				{
@@ -2082,6 +2077,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 				}
 				else
 				{
+					//kajdanki
+					if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy zginie
+					{
+						UnCuffedAction(playerid, SkutyGracz[playerid]);
+					}
 					if(IsPlayerConnected(killerid))
 					{
 						if(giveWL)

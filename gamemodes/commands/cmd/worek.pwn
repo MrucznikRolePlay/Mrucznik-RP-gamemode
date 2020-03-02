@@ -45,7 +45,7 @@ YCMD:worek(playerid, params[], help)
 				return 1;
 			}
 
-			if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz za³o¿yæ samemu sobie worka!"); return 1; }
+			if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz za³o¿yæ/œci¹gn¹æ sobie samemu worka!"); return 1; }
 
 		    if(IsPlayerConnected(giveplayerid))
 			{
@@ -68,8 +68,8 @@ YCMD:worek(playerid, params[], help)
 						format(string, sizeof(string), "* %s œci¹ga %s worek z g³owy.", sendername ,giveplayer);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						
-						DeletePVar(GetPVarInt(giveplayerid, "ma_worek"), "uzyl_worek");
-						DeletePVar(giveplayerid, "ma_worek");
+						SetPVarInt(GetPVarInt(giveplayerid, "ma_worek"), "uzyl_worek", INVALID_PLAYER_ID);
+						SetPVarInt(giveplayerid, "ma_worek", INVALID_PLAYER_ID);
 						UnHave_Worek(giveplayerid);
 					}
 					else
