@@ -3763,6 +3763,10 @@ IsAtCookPlace(playerid)
 		{//Well Stacked Pizza
 		    return 1;
 		}
+		else if(IsPlayerInRangeOfPoint(playerid, 6.0, 2127.2664,-1800.8334,-54.9897))
+		{
+			return 1;
+		}
 	}
 	return 0;
 }

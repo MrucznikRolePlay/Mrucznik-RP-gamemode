@@ -40,7 +40,7 @@ YCMD:ugotuj(playerid, params[], help)
 			if( sscanf(params, "s[16]", x_nr))
 			{
 				sendTipMessage(playerid, "U¿yj /gotuj [nazwa]");
-				sendTipMessage(playerid, "Dostêpne nazwy: OstatniaRyba, Ryba, kurczak, pizza.");
+				sendTipMessage(playerid, "Dostêpne nazwy: OstatniaRyba, Ryba, kurczak, pizza, hamburger, nietoperz.");
 				return 1;
 			}
 			if(strcmp(x_nr,"ostatniaryba",true) == 0)
@@ -620,26 +620,31 @@ YCMD:ugotuj(playerid, params[], help)
 					{
 						strmid(Cooking[playerid][pCook1], string, 0, strlen(string));
 						Cooking[playerid][pCWeight1] = Groceries[playerid][pWuhanBat];
+						Cooking[playerid][pCookID1] = 31;
 					}
 					else if(Cooking[playerid][pCWeight2] == 0)
 					{
 						strmid(Cooking[playerid][pCook2], string, 0, strlen(string));
 						Cooking[playerid][pCWeight2] = Groceries[playerid][pWuhanBat];
+						Cooking[playerid][pCookID2] = 31;
 					}
 					else if(Cooking[playerid][pCWeight3] == 0)
 					{
 						strmid(Cooking[playerid][pCook3], string, 0, strlen(string));
 						Cooking[playerid][pCWeight3] = Groceries[playerid][pWuhanBat];
+						Cooking[playerid][pCookID3] = 31;
 					}
 					else if(Cooking[playerid][pCWeight4] == 0)
 					{
 						strmid(Cooking[playerid][pCook4], string, 0, strlen(string));
 						Cooking[playerid][pCWeight4] = Groceries[playerid][pWuhanBat];
+						Cooking[playerid][pCookID4] = 31;
 					}
 					else if(Cooking[playerid][pCWeight5] == 0)
 					{
 						strmid(Cooking[playerid][pCook5], string, 0, strlen(string));
 						Cooking[playerid][pCWeight5] = Groceries[playerid][pWuhanBat];
+						Cooking[playerid][pCookID5] = 31;
 					}
 					else
 					{
@@ -649,12 +654,11 @@ YCMD:ugotuj(playerid, params[], help)
 
 					format(string, sizeof(string), "* Stworzy³eœ sma¿onego nietoperza z Wuhan w piêciu smakach, wa¿¹cego %d KG.", Groceries[playerid][pWuhanBat]);
 					SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-					Cooking[playerid][pCookID1] = 31;
 					Groceries[playerid][pWuhanBat] = 0;
 				}
 				else
 				{
-					sendTipMessageEx(playerid, COLOR_GREY, "Nie masz przy sobie kurczaka !");
+					sendTipMessageEx(playerid, COLOR_GREY, "Nie masz przy sobie nietoperza!");
 					return 1;
 				}	
 			}
