@@ -1054,17 +1054,17 @@ public naczasbicie(playerid, playerid_atak){
 
 /*public UzyteKajdany(playerid,giveplayerid)
 {
-	if(PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
+	if(Kajdanki_KtoSkuwa[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
 	{
-		//uzytekajdanki[playerid] = 0;
+		//Kajdanki_Uzyte[playerid] = 0;
 		format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(giveplayerid));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
  		format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", GetNick(playerid));
 		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-		zakuty[playerid] = 1;
+		Kajdanki_JestemZakuty[playerid] = 1;
  		TogglePlayerControllable(playerid, 0);
-  		uzytekajdanki[giveplayerid] = 1;
-   		SkutyGracz[PDkuje[playerid]] = playerid;
+  		Kajdanki_Uzyte[giveplayerid] = 1;
+   		Kajdanki_KogoSkuwam[Kajdanki_KtoSkuwa[playerid]] = playerid;
 		ClearAnimations(playerid);
  		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
   		SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -1072,7 +1072,7 @@ public naczasbicie(playerid, playerid_atak){
 	return 1;
 }*/
 public UzyteKajdany(playerid){
-uzytekajdanki[playerid] = 0;
+Kajdanki_Uzyte[playerid] = 0;
 return 1;
 }
 
@@ -1597,6 +1597,11 @@ stock GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
+	new nick2[24];
+	if(GetPVarString(playerid, "maska_nick", nick2, 24))
+	{
+		return nick2;
+	}
 	if(rp) {
 		//return nickRP[playerid];
 	}
@@ -4976,8 +4981,8 @@ ShowStats(playerid,targetid)
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
 		new coordsstring[256];
-		new busiMem = PlayerInfo[targetid][pBusinessMember];
-		new busiOwn = PlayerInfo[targetid][pBusinessOwner]; 
+		//new busiMem = PlayerInfo[targetid][pBusinessMember];
+		//new busiOwn = PlayerInfo[targetid][pBusinessOwner]; 
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
@@ -4991,7 +4996,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "BizOID:[%d] BizMID[%d] Uniform[%d] JobSkin[%d] Apteczki[%d]", busiOwn, busiMem, PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
+		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
@@ -12832,10 +12837,10 @@ public CuffedAction(playerid, cuffedid)
 {
 	PlayerInfo[cuffedid][pBW] = 0;
 	PlayerInfo[cuffedid][pInjury] = 0;
-	zakuty[cuffedid] = 1;
-	uzytekajdanki[playerid] = 1;
-	PDkuje[cuffedid] = playerid;
-	SkutyGracz[playerid] = cuffedid;
+	Kajdanki_JestemZakuty[cuffedid] = 1;
+	Kajdanki_Uzyte[playerid] = 1;
+	Kajdanki_KtoSkuwa[cuffedid] = playerid;
+	Kajdanki_KogoSkuwam[playerid] = cuffedid;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid, SPECIAL_ACTION_CUFFED);
 	SetPlayerAttachedObject(cuffedid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -12860,12 +12865,14 @@ public UnCuffedAction(playerid, cuffedid)
 	//czynnosci
 	TogglePlayerControllable(cuffedid, 1);
 	PlayerCuffed[cuffedid] = 0;
-	zakuty[cuffedid] = 0;
-	SkutyGracz[cuffedid] = INVALID_PLAYER_ID;
-	uzytekajdanki[cuffedid] = 0;
-	uzytekajdanki[playerid] = 0;
-	PDkuje[playerid] = INVALID_PLAYER_ID;
-	PDkuje[cuffedid] = INVALID_PLAYER_ID;
+	Kajdanki_JestemZakuty[cuffedid] = 0;
+	Kajdanki_JestemZakuty[playerid] = 0;
+	Kajdanki_KogoSkuwam[cuffedid] = INVALID_PLAYER_ID;
+	Kajdanki_KogoSkuwam[playerid] = INVALID_PLAYER_ID;
+	Kajdanki_KtoSkuwa[cuffedid] = INVALID_PLAYER_ID;
+	Kajdanki_KtoSkuwa[playerid] = INVALID_PLAYER_ID;
+	Kajdanki_Uzyte[cuffedid] = 0;
+	Kajdanki_Uzyte[playerid] = 0;
 	PlayerInfo[cuffedid][pMuted] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);

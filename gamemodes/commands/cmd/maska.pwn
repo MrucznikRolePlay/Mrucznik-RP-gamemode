@@ -36,7 +36,7 @@ YCMD:maska(playerid, params[], help)
 		{
 			if(PlayerInfo[playerid][pRank] < 3)
 			{
-				sendErrorMessage(playerid, "Maska jest dostêpna od [3] rangi");
+				return sendErrorMessage(playerid, "Maska jest dostêpna od [3] rangi");
 			}
 			else
 			{

@@ -1406,28 +1406,33 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	//kajdanki
-	if(PDkuje[playerid] != INVALID_PLAYER_ID) // gdy skuty da q
+	if(Kajdanki_JestemZakuty[playerid] != INVALID_PLAYER_ID) // gdy skuty da q
 	{
-		UnCuffedAction(PDkuje[playerid], playerid);
+		UnCuffedAction(Kajdanki_KtoSkuwa[playerid], playerid);
 	}
 
-	if(SkutyGracz[playerid] != INVALID_PLAYER_ID) // gdy skuwaj¹cy da /q
+	if(Kajdanki_Uzyte[playerid] != INVALID_PLAYER_ID) // gdy skuwaj¹cy da /q
 	{
-		UnCuffedAction(playerid, SkutyGracz[playerid]);
+		UnCuffedAction(playerid, Kajdanki_KogoSkuwam[playerid]);
 	}
 
-	if(GetPVarInt(playerid, "ma_worek") != INVALID_PLAYER_ID)
+	if(Worek_MamWorek[playerid] != INVALID_PLAYER_ID) // gdy osoba z workiem da /q
 	{
-		SetPVarInt(GetPVarInt(playerid, "ma_worek"), "uzyl_worek", INVALID_PLAYER_ID);
-		SetPVarInt(playerid, "ma_worek", INVALID_PLAYER_ID);
+		Worek_MamWorek[playerid] = 0;
+		Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
+		Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
+		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
 
-	if(GetPVarInt(playerid, "uzyl_worek") != INVALID_PLAYER_ID)
+	if(Worek_Uzyty[playerid] != INVALID_PLAYER_ID) // gdy osoba nadajaca worek da /q
 	{
-		SetPVarInt(GetPVarInt(playerid, "uzyl_worek"), "ma_worek", INVALID_PLAYER_ID);
-		UnHave_Worek(GetPVarInt(playerid, "uzyl_worek"));
-		SetPVarInt(playerid, "uzyl_worek", INVALID_PLAYER_ID);
+		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
+		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
+		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+		Worek_Uzyty[playerid] = 0;
+		UnHave_Worek(Worek_KtoZalozyl[playerid]);
+
 	}
 
     if(GetPVarInt(playerid, "kostka"))
@@ -1444,8 +1449,8 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
-    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || zakuty[playerid] >= 1 || poscig[playerid] == 1)
+    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || Kajdanki_JestemZakuty[playerid] >= 1 || poscig[playerid] == 1)
+    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || Kajdanki_JestemZakuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
         PlayerInfo[playerid][pJailed] = 10;
         new string[130];
@@ -1458,7 +1463,7 @@ public OnPlayerDisconnect(playerid, reason)
         {
             strcat(powod, "kajdanki w aucie, ");
         }
-        if(zakuty[playerid] >= 1)
+        if(Kajdanki_JestemZakuty[playerid] >= 1)
         {
             strcat(powod, "kajdanki pieszo, ");
         }
@@ -1707,7 +1712,7 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
-	if(zakuty[playerid] > 0)
+	if(Kajdanki_JestemZakuty[playerid] > 0)
 	{
 		TogglePlayerControllable(playerid, 0);
 		GameTextForPlayer(playerid, "~r~Nie atakuj", 3500, 1);
@@ -2078,9 +2083,9 @@ public OnPlayerDeath(playerid, killerid, reason)
 				else
 				{
 					//kajdanki
-					if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy zginie
+					if(Kajdanki_Uzyte[playerid]) //gdy skuwaj¹cy zginie
 					{
-						UnCuffedAction(playerid, SkutyGracz[playerid]);
+						UnCuffedAction(playerid, Kajdanki_KogoSkuwam[playerid]);
 					}
 					if(IsPlayerConnected(killerid))
 					{

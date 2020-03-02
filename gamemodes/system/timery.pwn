@@ -2382,9 +2382,9 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if(zakuty[i] == 1)
+		if(Kajdanki_JestemZakuty[i] == 1)
 		{
-			cop = PDkuje[i];
+			cop = Kajdanki_KtoSkuwa[i];
 			if(IsPlayerConnected(cop))
 			{
 				if(IsACop(cop) || IsABOR(cop))

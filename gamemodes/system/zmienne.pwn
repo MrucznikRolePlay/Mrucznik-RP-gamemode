@@ -1002,10 +1002,16 @@ new okrazenia[MAX_PLAYERS];//¯u¿el
 new okregi[MAX_PLAYERS];//¯u¿el
 new kodbitwy[256];//Bitwa
 new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
-new uzytekajdanki[MAX_PLAYERS];//Kajdany
-new zakuty[MAX_PLAYERS];//Kajdany
-new PDkuje[MAX_PLAYERS] = INVALID_PLAYER_ID;//Kajdany
-new SkutyGracz[MAX_PLAYERS];//Kajdany
+new Kajdanki_Uzyte[MAX_PLAYERS];//Kajdany
+new Kajdanki_JestemZakuty[MAX_PLAYERS];//Kajdany
+new Kajdanki_KtoSkuwa[MAX_PLAYERS];//Kajdany
+new Kajdanki_KogoSkuwam[MAX_PLAYERS];//Kajdany
+// worek
+new Worek_Uzyty[MAX_PLAYERS];
+new Worek_MamWorek[MAX_PLAYERS];
+new Worek_KtoZalozyl[MAX_PLAYERS];
+new Worek_KomuZalozylem[MAX_PLAYERS];
+
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
@@ -1123,8 +1129,8 @@ ZerujZmienne(playerid)
  	PlayerInfo[playerid] [pMozeskakacAT] = 0;
  	PlayerInfo[playerid] [pRockHotelLiAc] = 0;
  	PlayerInfo[playerid] [pRockHotelPuAc] = 0;
-	zakuty[playerid] = 0;//Kajdany
-	uzytekajdanki[playerid] = 0;//Kajdany
+	Kajdanki_JestemZakuty[playerid] = 0;//Kajdany
+	Kajdanki_Uzyte[playerid] = 0;//Kajdany
 	pobity[playerid] = 0;//pobity
 	pobilem[playerid] = 0;
 	podczasbicia[playerid] = 0;

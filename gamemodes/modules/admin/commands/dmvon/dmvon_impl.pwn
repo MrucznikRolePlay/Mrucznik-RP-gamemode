@@ -30,7 +30,7 @@ command_dmvon_Impl(playerid)
         new string[124];
         CreateActorsInDMV(playerid);
         sendTipMessage(playerid, "W³¹czy³eœ boty w urzêdzie miasta LS!");
-        format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta na godzinê!"); 
+        format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta na godzinê!", GetNick(playerid)); 
         SendMessageToAdminEx(string, COLOR_P@, 2);     
     }
     else

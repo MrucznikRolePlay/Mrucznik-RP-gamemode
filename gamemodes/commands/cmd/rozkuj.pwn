@@ -47,7 +47,7 @@ YCMD:rozkuj(playerid, params[], help)
 				    if (ProxDetectorS(8.0, playerid, giveplayerid))
 					{
 					    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz odkuæ samego siebie!"); return 1; }
-						if(PlayerCuffed[giveplayerid] == 2 || zakuty[giveplayerid] >= 1)
+						if(PlayerCuffed[giveplayerid] == 2 || Kajdanki_JestemZakuty[giveplayerid] >= 1)
 						{
 							UnCuffedAction(playerid, giveplayerid);
 						}

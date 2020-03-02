@@ -57,7 +57,7 @@ YCMD:worek(playerid, params[], help)
 						return 1;
 					}
 
-					if(GetPVarInt(giveplayerid, "ma_worek") != INVALID_PLAYER_ID)
+					if(Worek_MamWorek[playerid])
 				    {
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -68,13 +68,15 @@ YCMD:worek(playerid, params[], help)
 						format(string, sizeof(string), "* %s œci¹ga %s worek z g³owy.", sendername ,giveplayer);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						
-						SetPVarInt(GetPVarInt(giveplayerid, "ma_worek"), "uzyl_worek", INVALID_PLAYER_ID);
-						SetPVarInt(giveplayerid, "ma_worek", INVALID_PLAYER_ID);
+						Worek_MamWorek[giveplayerid] = 0;
+						Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
+						Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
+						Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 						UnHave_Worek(giveplayerid);
 					}
 					else
 					{	
-						if(GetPVarInt(playerid, "uzyl_worek"))
+						if(Worek_Uzyty[playerid])
 						{
 							sendTipMessageEx(playerid, COLOR_GREY, "Masz tylko jeden worek, zdejmij go poprzedniej osobie !");
 							return 1;
@@ -90,8 +92,11 @@ YCMD:worek(playerid, params[], help)
 							format(string, sizeof(string), "* %s zak³ada %s worek na g³owê.", sendername ,giveplayer);
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 
-							SetPVarInt(playerid, "uzyl_worek", giveplayerid);
-							SetPVarInt(giveplayerid, "ma_worek", playerid);
+							Worek_MamWorek[giveplayerid] = 1;
+							Worek_KomuZalozylem[playerid] = giveplayerid;
+							Worek_Uzyty[playerid] = 1;
+							Worek_KtoZalozyl[giveplayerid] = playerid;
+
 							Have_Worek(giveplayerid);
 
 							//SetTimerEx("timer_MaWorek",2000,0,"d",giveplayerid);

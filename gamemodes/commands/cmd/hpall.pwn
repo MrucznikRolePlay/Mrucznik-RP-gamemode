@@ -31,15 +31,12 @@
 YCMD:hpall(playerid, params[], help)
 {
     new string[64];
-    new sendername[MAX_PLAYER_NAME];
-
-    GetPlayerName(playerid, sendername, sizeof(sendername));
 
     if(IsPlayerConnected(playerid))
     {
         if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
-            format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", sendername);
+            format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", GetNick(playerid));
             SendClientMessageToAll(COLOR_LIGHTGREEN, string);
             foreach(new i : Player)
             {

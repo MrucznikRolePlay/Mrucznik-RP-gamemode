@@ -31,7 +31,6 @@
 YCMD:setslot(playerid, params[], help)
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
 	new giveplayer[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
@@ -50,10 +49,9 @@ YCMD:setslot(playerid, params[], help)
 	        	{
                     if(!(0 <= level <= 12)) return 1;
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pCarSlots] = level;
         			Log(adminLog, INFO, "Admin %s zmieni³ %s iloœæ slotów na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
-					format(string, sizeof(string), "   Liczba slotow zostala zmieniona %d przez %s", level, sendername);
+					format(string, sizeof(string), "   Liczba slotow zostala zmieniona %d przez %s", level, GetNick(playerid));
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "   Zmieni³eœ sloty graczowi %s na %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
