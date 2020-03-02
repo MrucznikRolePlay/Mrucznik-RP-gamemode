@@ -3168,7 +3168,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "~r~-$%d", 35000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							format(string, sizeof(string), "Kupi³eœ ogranicznik prêdkoœci do auta.");
+							format(string, sizeof(string), "Kupi³eœ tempomat do auta. Wciœnij CTRL podczas jazdy, ¿eby aktywowaæ.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
@@ -3415,7 +3415,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    new string[256];
 		    new giveplayer[MAX_PLAYER_NAME];
 			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(PDkuje[playerid], giveplayer, sizeof(giveplayer));
+			GetPlayerName(Kajdanki_KtoSkuwa[playerid], giveplayer, sizeof(giveplayer));
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			new cops;
 			//
@@ -3424,9 +3424,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
+				SendClientMessage(Kajdanki_KtoSkuwa[playerid], COLOR_LIGHTBLUE, string);
 	            TogglePlayerControllable(playerid, 0);
-	            zakuty[playerid] = 2;
+	            Kajdanki_JestemZakuty[playerid] = 2;
                 SetTimerEx("Odmroz",10*60000,0,"d",playerid);
 	            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
 		    }
@@ -3450,9 +3450,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-					SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
+					SendClientMessage(Kajdanki_KtoSkuwa[playerid], COLOR_LIGHTBLUE, string);
 		            TogglePlayerControllable(playerid, 0);
-		            zakuty[playerid] = 2;
+		            Kajdanki_JestemZakuty[playerid] = 2;
 		            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
 				}
@@ -3463,7 +3463,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    {
 				        format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						PDkuje[playerid] = 0;
+						Kajdanki_KtoSkuwa[playerid] = 0;
 						PoziomPoszukiwania[playerid] += 1;
 						SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
 				    }
@@ -3472,9 +3472,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-						SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
+						SendClientMessage(Kajdanki_KtoSkuwa[playerid], COLOR_LIGHTBLUE, string);
 			            TogglePlayerControllable(playerid, 0);
-			            zakuty[playerid] = 2;
+			            Kajdanki_JestemZakuty[playerid] = 2;
 			            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
 			            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
 				    }
@@ -3483,7 +3483,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					PDkuje[playerid] = 0;
+					Kajdanki_KtoSkuwa[playerid] = 0;
 					PoziomPoszukiwania[playerid] += 1;
 					SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
 				}
@@ -3494,7 +3494,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    new string[256];
 		    new giveplayer[MAX_PLAYER_NAME];
 			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(PDkuje[playerid], giveplayer, sizeof(giveplayer));
+			GetPlayerName(Kajdanki_KtoSkuwa[playerid], giveplayer, sizeof(giveplayer));
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			new cops;
 			//
@@ -3503,9 +3503,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
+				SendClientMessage(Kajdanki_KtoSkuwa[playerid], COLOR_LIGHTBLUE, string);
 				
-				CuffedAction(PDkuje[playerid], playerid);
+				CuffedAction(Kajdanki_KtoSkuwa[playerid], playerid);
 		    }
 		    else
 		    {
@@ -3527,9 +3527,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-					SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
+					SendClientMessage(Kajdanki_KtoSkuwa[playerid], COLOR_LIGHTBLUE, string);
 					
-					CuffedAction(PDkuje[playerid], playerid);
+					CuffedAction(Kajdanki_KtoSkuwa[playerid], playerid);
 				}
 				else if(cops == 2)
 				{
@@ -3538,7 +3538,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    {
 				        format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						PDkuje[playerid] = 0;
+						Kajdanki_KtoSkuwa[playerid] = 0;
 						PoziomPoszukiwania[playerid] += 1;
 						SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
 				    }
@@ -3547,9 +3547,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-						SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
+						SendClientMessage(Kajdanki_KtoSkuwa[playerid], COLOR_LIGHTBLUE, string);
 						
-						CuffedAction(PDkuje[playerid], playerid);
+						CuffedAction(Kajdanki_KtoSkuwa[playerid], playerid);
 				    }
 				}
 				else
@@ -3557,7 +3557,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
 				    TogglePlayerControllable(playerid, 1);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					PDkuje[playerid] = 0;
+					Kajdanki_KtoSkuwa[playerid] = 0;
 					PoziomPoszukiwania[playerid] += 1;
 					SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
 				}
@@ -3568,7 +3568,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    new string[256];
 		    new giveplayer[MAX_PLAYER_NAME];
 			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(PDkuje[playerid], giveplayer, sizeof(giveplayer));
+			GetPlayerName(Kajdanki_KtoSkuwa[playerid], giveplayer, sizeof(giveplayer));
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			//
 		    if(response)
@@ -3577,11 +3577,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ ³owcy %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		        format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", sendername);
-				SendClientMessage(PDkuje[playerid], COLOR_LIGHTBLUE, string);
-				zakuty[playerid] = 1;
+				SendClientMessage(Kajdanki_KtoSkuwa[playerid], COLOR_LIGHTBLUE, string);
+				Kajdanki_JestemZakuty[playerid] = 1;
 	            TogglePlayerControllable(playerid, 0);
-	            uzytekajdanki[PDkuje[playerid]] = 1;
-	            SkutyGracz[PDkuje[playerid]] = playerid;
+	            Kajdanki_Uzyte[Kajdanki_KtoSkuwa[playerid]] = 1;
+	            Kajdanki_KogoSkuwam[Kajdanki_KtoSkuwa[playerid]] = playerid;
 				ClearAnimations(playerid);
                 SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
                 SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -3591,7 +3591,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "* %s wyrywa siê i rzuca siê na ³owcê!", sendername);
 				TogglePlayerControllable(playerid, 1);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				PDkuje[playerid] = 0;
+				Kajdanki_KtoSkuwa[playerid] = 0;
 		    }
 		}
 		else if(dialogid == 160)
@@ -11347,9 +11347,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					else format(taknieNeo, sizeof(taknieNeo), "W³¹cz");
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
-                //
-                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
-                //
+                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
 		}
@@ -13946,6 +13944,39 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		DeletePVar(playerid, "HealthPackOffer");
 		return 1;
 	}
+
+	if(dialogid == D_MECH_SPRZEDAZ_FIXKIT)
+	{
+		new string[128];
+		new id = GetPVarInt(playerid, "FixKitOffer");
+		if(response)
+		{
+			new hajs = kaska[playerid];
+			if(hajs < 15000)
+			{
+				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
+				return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
+			}
+			else
+			{
+				format(string, sizeof string, "%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", PlayerName(playerid));
+				SendClientMessage(id, 0x0080D0FF, string);
+				format(string, sizeof string, "Kupi³eœ zestaw od Mechanika za 15000$");
+				SendClientMessage(playerid, 0x00FF00FF, string);
+				ZabierzKase(playerid, 15000);
+				DajKase(id, 15000);
+				PlayerInfo[playerid][pFixKit]++;
+			}
+		}
+		else
+		{
+			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno apteczki.", PlayerName(playerid));
+			SendClientMessage(id, 0xFF0030FF, string);
+		}
+		DeletePVar(playerid, "HealthPackOffer");
+		return 1;
+	}
+
 	if(dialogid == D_UZYCIE_APTECZKI)
 	{
 		new string[144];
@@ -14005,6 +14036,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
+			PrzedmiotyZmienBron(playerid, PlayerInfo[playerid][pGun0]);
 			GUIExit[playerid] = 0;
 			return 1;
 		}

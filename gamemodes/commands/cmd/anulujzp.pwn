@@ -32,7 +32,7 @@ YCMD:anulujzp(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5) 
 	{
-        new giveid, adminnick[MAX_PLAYER_NAME], gracznick[MAX_PLAYER_NAME];
+        new giveid, gracznick[MAX_PLAYER_NAME];
 		
         if(sscanf(params, "k<fix>", giveid)) 
 			return sendTipMessage(playerid, "U¿yj /anulujzp [czêœæ nicku/id]"); 
@@ -43,10 +43,9 @@ YCMD:anulujzp(playerid, params[], help)
         }
         PlayerInfo[giveid][pPK] = 0;
         PlayerInfo[giveid][pCarLic] = 0;
-        GetPlayerName(playerid, adminnick, MAX_PLAYER_NAME);
         GetPlayerName(giveid, gracznick, MAX_PLAYER_NAME);
         new string[128];
-        format(string, sizeof(string), "Admin %s zlikwidowa³ Twoj¹ blokadê na prawo jazdy!", adminnick);
+        format(string, sizeof(string), "Admin %s zlikwidowa³ Twoj¹ blokadê na prawo jazdy!", GetNick(playerid));
         sendTipMessage(giveid, string, COLOR_LIGHTBLUE);
         format(string, sizeof(string), "Zlikwidowa³eœ %s blokadê na prawo jazdy!", gracznick);
         sendTipMessage(playerid, string, COLOR_LIGHTBLUE);

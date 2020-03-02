@@ -217,13 +217,13 @@ ToggleInwigilacja(playerid, adminid)
 	if(PlayerInfo[playerid][pPodPW] == 0)
 	{
 		PlayerInfo[playerid][pPodPW] = 1;
-		SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
+		SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid, true), adminid, GetNick(playerid), playerid));
 		Log(adminLog, INFO, "Admin %s w³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
 	}
 	else if(PlayerInfo[playerid][pPodPW] == 1)
 	{
 		PlayerInfo[playerid][pPodPW] = 0;
-		SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid), adminid, GetNick(playerid), playerid));
+		SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid, true), adminid, GetNick(playerid), playerid));
 		Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
 	}
 	return 1;
@@ -762,11 +762,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	GetVehiclePos(vehicleid, pos[0],pos[1],pos[2]);
 	if(GetVehicleSpeed(vehicleid) > 10)
 	{
-		GameTextForPlayer(playerid, "~r~Anulowano. Poruszono pojazdem.", 2500, 6);
-		ZestawNaprawczy_Timer[playerid] = 30;
-		ZestawNaprawczy_Warning[playerid] = 0;
-		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
-		DeletePVar(playerid, "timer_ZestawNaprawczy");
+		ZestawNaprawczy_Warning[playerid] = 8;
 	}
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{
@@ -807,6 +803,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
+		PlayerInfo[playerid][pFixKit]--;
 		RepairVehicle(vehicleid);
         SetVehicleHealth(vehicleid, 1000);
 		DeletePVar(playerid, "timer_ZestawNaprawczy");
@@ -1057,17 +1054,17 @@ public naczasbicie(playerid, playerid_atak){
 
 /*public UzyteKajdany(playerid,giveplayerid)
 {
-	if(PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
+	if(Kajdanki_KtoSkuwa[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
 	{
-		//uzytekajdanki[playerid] = 0;
+		//Kajdanki_Uzyte[playerid] = 0;
 		format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(giveplayerid));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
  		format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", GetNick(playerid));
 		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-		zakuty[playerid] = 1;
+		Kajdanki_JestemZakuty[playerid] = 1;
  		TogglePlayerControllable(playerid, 0);
-  		uzytekajdanki[giveplayerid] = 1;
-   		SkutyGracz[PDkuje[playerid]] = playerid;
+  		Kajdanki_Uzyte[giveplayerid] = 1;
+   		Kajdanki_KogoSkuwam[Kajdanki_KtoSkuwa[playerid]] = playerid;
 		ClearAnimations(playerid);
  		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
   		SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -1075,7 +1072,7 @@ public naczasbicie(playerid, playerid_atak){
 	return 1;
 }*/
 public UzyteKajdany(playerid){
-uzytekajdanki[playerid] = 0;
+Kajdanki_Uzyte[playerid] = 0;
 return 1;
 }
 
@@ -1127,18 +1124,26 @@ public Next(playerid, msg[])
 public odpalanie(playerid)
 {
 	new engine, lights, alarm, doors, bonnet, boot, objective, Float:health, sendername[MAX_PLAYER_NAME], string[256];
+	new carid = GetPlayerVehicleID(playerid);
 	GetPlayerName(playerid, sendername, sizeof(sendername));
-	GetVehicleHealth(GetPlayerVehicleID(playerid), health);
- 	GetVehicleParamsEx(GetPlayerVehicleID(playerid),engine, lights ,alarm, doors, bonnet, boot, objective);
+	GetVehicleHealth(carid, health);
+ 	GetVehicleParamsEx(carid,engine, lights ,alarm, doors, bonnet, boot, objective);
  	OdpalanieSpam[playerid] = 0;
-	if(Gas[GetPlayerVehicleID(playerid)] > 3)
+	if(Gas[carid] > 3)
 	{
 		new rand = random(1000);
 		if(rand <= health)
 		{
 			format(string, sizeof(string), "* silnik odpali³ (( %s ))", sendername);
 			ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-      		SetVehicleParamsEx(GetPlayerVehicleID(playerid) , 1, lights, alarm, doors, bonnet, boot, objective);
+      		SetVehicleParamsEx(carid , 1, lights, alarm, doors, bonnet, boot, objective);
+			if(PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] != carid && PlayerInfo[playerid][pCarLic] == 0)
+			{
+				PoziomPoszukiwania[playerid]++;
+				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Jazda bez prawa jazdy");
+				SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
+				PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = carid;
+			}
 		}
 		else
 		{
@@ -1592,6 +1597,11 @@ stock GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
+	new nick2[24];
+	if(GetPVarString(playerid, "maska_nick", nick2, 24))
+	{
+		return nick2;
+	}
 	if(rp) {
 		//return nickRP[playerid];
 	}
@@ -4920,8 +4930,8 @@ ShowStats(playerid,targetid)
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
 		new coordsstring[256];
-		new busiMem = PlayerInfo[targetid][pBusinessMember];
-		new busiOwn = PlayerInfo[targetid][pBusinessOwner]; 
+		//new busiMem = PlayerInfo[targetid][pBusinessMember];
+		//new busiOwn = PlayerInfo[targetid][pBusinessOwner]; 
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
@@ -4935,7 +4945,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "BizOID:[%d] BizMID[%d] Uniform[%d] JobSkin[%d] Apteczki[%d]", busiOwn, busiMem, PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
+		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
 		{
@@ -12670,13 +12680,13 @@ public DeathAdminWarning(playerid, killerid, reason)
 	GetPlayerName(playerid, playername, sizeof(playername));
 	if(killerid != INVALID_PLAYER_ID)
 	{
+		GetPlayerName(killerid, killername, sizeof(killername));
 		new bwreason[24];
-		format(bwreason, sizeof(bwreason), "zabi³");
-		if(PlayerInfo[playerid][pBW] > 0)
+		if(PlayerInfo[playerid][pInjury] > 0) // jesli jest ranny
 		{
 			format(bwreason, sizeof(bwreason), "dobi³");
 		}
-		else if(PlayerInfo[playerid][pInjury] > 0)
+		else //jesli nie jest ranny
 		{
 			format(bwreason, sizeof(bwreason), "zrani³");
 		}
@@ -12776,10 +12786,10 @@ public CuffedAction(playerid, cuffedid)
 {
 	PlayerInfo[cuffedid][pBW] = 0;
 	PlayerInfo[cuffedid][pInjury] = 0;
-	zakuty[cuffedid] = 1;
-	uzytekajdanki[playerid] = 1;
-	PDkuje[cuffedid] = playerid;
-	SkutyGracz[playerid] = cuffedid;
+	Kajdanki_JestemZakuty[cuffedid] = 1;
+	Kajdanki_Uzyte[playerid] = 1;
+	Kajdanki_KtoSkuwa[cuffedid] = playerid;
+	Kajdanki_KogoSkuwam[playerid] = cuffedid;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid, SPECIAL_ACTION_CUFFED);
 	SetPlayerAttachedObject(cuffedid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -12788,28 +12798,20 @@ public CuffedAction(playerid, cuffedid)
 	return 1;
 }
 
-public UnCuffedAction(playerid, cuffedid)
+public UnCuffedAction(cop, cuffedid)
 {
-	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
-	GetPlayerName(cuffedid, giveplayer, sizeof(giveplayer));
-	GetPlayerName(playerid, sendername, sizeof(sendername));
-	format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", sendername);
-	SendClientMessage(cuffedid, COLOR_LIGHTBLUE, string);
-	format(string, sizeof(string), "* Rozku³eœ %s.", giveplayer);
+	new playerid = cop;
+	new string[144];
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 	GameTextForPlayer(cuffedid, "~g~Rozkuty", 2500, 3);
 
 	//czynnosci
 	TogglePlayerControllable(cuffedid, 1);
 	PlayerCuffed[cuffedid] = 0;
-	zakuty[cuffedid] = 0;
-	SkutyGracz[cuffedid] = 0;
-	uzytekajdanki[cuffedid] = 0;
-	uzytekajdanki[playerid] = 0;
-	PDkuje[playerid] = 0;
-	PDkuje[cuffedid]=0;
+	Kajdanki_JestemZakuty[cuffedid] = 0;
+	Kajdanki_KogoSkuwam[playerid] = INVALID_PLAYER_ID;
+	Kajdanki_KtoSkuwa[cuffedid] = INVALID_PLAYER_ID;
+	Kajdanki_Uzyte[playerid] = 0;
 	PlayerInfo[cuffedid][pMuted] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);

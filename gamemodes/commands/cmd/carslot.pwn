@@ -32,7 +32,6 @@ YCMD:carslot(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -49,10 +48,9 @@ YCMD:carslot(playerid, params[], help)
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 			        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[playa][pCarSlots] = 4;
 					Log(adminLog, INFO, "Admin %s ustawi³ %s sloty pojazdu na 4", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-					format(string, sizeof(string), "AdmCmd: %s nada³ sloty %s",sendername, giveplayer);
+					format(string, sizeof(string), "AdmCmd: %s nada³ sloty %s",GetNick(playerid), giveplayer);
 					ABroadCast(COLOR_LIGHTRED,string,1);
 				}
 			}

@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ setcarhp ]-----------------------------------------------//
+//-----------------------------------------------[ sprzedajzestaw ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -29,39 +29,26 @@
 /*
 	
 */
-YCMD:setcarhp(playerid, params[], help)
+YCMD:sprzedajzestaw(playerid, params[], help)
 {
-    if(IsPlayerConnected(playerid))
+	if(PlayerInfo[playerid][pJob] == JOB_MECHANIC)
+	{
+		new id;
+		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /sprzedajzestaw [id]");
+		if(!IsPlayerConnected(id) ) return sendErrorMessage(playerid, "Ten gracz nie jest zalogowanay");
+        new Float:x, Float:y, Float:z, tmp[128];
+		GetPlayerPos(id, x, y, z);
+		if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
+		if(PlayerInfo[id][pFixKit] >= 3) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz posiada maksymaln¹ iloœæ zestawów");
+		format(tmp, sizeof tmp, "Proponujesz %s kupno zestawu za 15000$", GetNick(id));
+		SendClientMessage(playerid, -1, tmp);
+		format(tmp, sizeof tmp, "Mechanik %s proponuje Ci kupno zestawu za 15000$", GetNick(playerid));
+		SetPVarInt(id, "FixKitOffer", playerid);
+		ShowPlayerDialogEx(id, D_MECH_SPRZEDAZ_FIXKIT, DIALOG_STYLE_MSGBOX, "Mechanik", tmp, "Kup", "Anuluj");
+	}
+    else
     {
-		new vehicleid, health;
-		if( sscanf(params, "dd", vehicleid, health))
-		{
-			sendTipMessage(playerid, "U¿yj /setcarhp [carid] [hp]");
-			return 1;
-		}
-    
-        if (PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
-        {
-            if(GetVehicleModel(vehicleid))
-            {
-                new vuid = VehicleUID[vehicleid][vUID];
-                RepairVehicle(vehicleid);
-                SetVehicleHealth(vehicleid, health);
-                CarData[vuid][c_HP] = health;
-                Log(adminLog, INFO, "Admin %s ustawi³ hp auta [ID: %d] na %d", GetPlayerLogName(playerid), vehicleid, health);
-                new string[128];
-                format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNick(playerid), health);
-                SendMessageToAdmin(string, COLOR_P@);
-            }
-            else
-            {
-                sendTipMessage(playerid, "Niepoprawne ID pojazdu. (/dl)");
-            }
-        }
-        else
-        {
-            noAccessMessage(playerid);
-        }
+        sendErrorMessage(playerid, "Komenda dostêpna tylko dla mechanika.");
     }
-    return 1;
+	return 1;
 }

@@ -456,6 +456,7 @@
 #include "cmd/sprzedajmaterialy.pwn"
 #include "cmd/sprzedajnarkotyki.pwn"
 #include "cmd/sprzedajrybe.pwn"
+#include "cmd/sprzedajzestaw.pwn"
 #include "cmd/setactoranime.pwn"
 #include "cmd/startlotto.pwn"
 #include "cmd/startujlekcje.pwn"

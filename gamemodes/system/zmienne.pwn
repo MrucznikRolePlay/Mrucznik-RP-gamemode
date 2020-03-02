@@ -1002,10 +1002,16 @@ new okrazenia[MAX_PLAYERS];//¯u¿el
 new okregi[MAX_PLAYERS];//¯u¿el
 new kodbitwy[256];//Bitwa
 new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
-new uzytekajdanki[MAX_PLAYERS];//Kajdany
-new zakuty[MAX_PLAYERS];//Kajdany
-new PDkuje[MAX_PLAYERS];//Kajdany
-new SkutyGracz[MAX_PLAYERS];//Kajdany
+new Kajdanki_Uzyte[MAX_PLAYERS];//Kajdany
+new Kajdanki_JestemZakuty[MAX_PLAYERS];//Kajdany
+new Kajdanki_KtoSkuwa[MAX_PLAYERS];//Kajdany
+new Kajdanki_KogoSkuwam[MAX_PLAYERS];//Kajdany
+// worek
+new Worek_Uzyty[MAX_PLAYERS];
+new Worek_MamWorek[MAX_PLAYERS];
+new Worek_KtoZalozyl[MAX_PLAYERS];
+new Worek_KomuZalozylem[MAX_PLAYERS];
+
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
@@ -1059,15 +1065,11 @@ new wantedValuePlayer;
 new timerForHunter[MAX_PLAYERS];*/
 //new newsTypePlayer[MAX_PLAYERS] = 3; 
 new AllLeaders; 
-
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
-
 //SANDAL
 new gRO[MAX_PLAYERS];
-
-new isNaked[MAX_PLAYERS]; 
-new Text3D:HiddenPlayerName[MAX_PLAYERS];
+new isNaked[MAX_PLAYERS];
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1127,8 +1129,8 @@ ZerujZmienne(playerid)
  	PlayerInfo[playerid] [pMozeskakacAT] = 0;
  	PlayerInfo[playerid] [pRockHotelLiAc] = 0;
  	PlayerInfo[playerid] [pRockHotelPuAc] = 0;
-	zakuty[playerid] = 0;//Kajdany
-	uzytekajdanki[playerid] = 0;//Kajdany
+	Kajdanki_JestemZakuty[playerid] = 0;//Kajdany
+	Kajdanki_Uzyte[playerid] = 0;//Kajdany
 	pobity[playerid] = 0;//pobity
 	pobilem[playerid] = 0;
 	podczasbicia[playerid] = 0;
@@ -1315,8 +1317,10 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pPodPW] = 0;
 	PlayerInfo[playerid][pCruiseController] = 0;
 	PlayerInfo[playerid][pFixKit] = 0;
+	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
+
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;

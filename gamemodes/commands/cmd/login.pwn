@@ -38,7 +38,7 @@ YCMD:login(playerid, params[], help)
 		{
 			if(!sscanf(params, "k<fix>", playa))
 			{
-				if(IsPlayerConnected(playa))
+				if(!IsPlayerConnected(playa))
 				{
 					sendErrorMessage(playerid, "Gracz nie jest zalogowany.");
 					return 1;
@@ -50,17 +50,15 @@ YCMD:login(playerid, params[], help)
 		if(self == false)
 		{
 			new string[144];
-			new sendername[MAX_PLAYER_NAME];
 			new giveplayer[MAX_PLAYER_NAME];
 			new Float:slx, Float:sly, Float:slz;
-			GetPlayerName(playerid, sendername, sizeof(sendername));
 			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 			GetPlayerPos(playa, slx, sly, slz);
 			PlayerPlaySound(playa, 1130, slx, sly, slz+5);
 			Log(punishmentLog, INFO, "Admin %s u¿y³ (/login) i wylogowa³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-			format(string, sizeof(string), "AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",sendername, giveplayer);
+			format(string, sizeof(string), "AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",GetNick(playerid), giveplayer);
 			ABroadCast(COLOR_LIGHTRED,string,1);
-			format(string, sizeof(string), "Zosta³eœ wylogowany przez administratora %s", sendername);
+			format(string, sizeof(string), "Zosta³eœ wylogowany przez administratora %s", GetNick(playerid));
 			SendClientMessage(playa, COLOR_PANICRED, string);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{
@@ -74,6 +72,7 @@ YCMD:login(playerid, params[], help)
 		ProxDetector(25.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 		//czynnoœci
 		MruMySQL_SaveAccount(playerid);
+		ZerujZmienne(playerid);
 		gPlayerLogged[playerid] = 0;
 		OnPlayerConnect(playerid);
 

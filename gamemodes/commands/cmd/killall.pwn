@@ -31,15 +31,12 @@
 YCMD:killall(playerid, params[], help)
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
-    GetPlayerName(playerid, sendername, sizeof(sendername));
 
     if(IsPlayerConnected(playerid))
     {
         if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
-            format(string, 128, "Administrator %s [ID: %d] zabi³ wszystkich graczy.", sendername, playerid);
+            format(string, 128, "Administrator %s [ID: %d] zabi³ wszystkich graczy.", GetNick(playerid), playerid);
             foreach(new i : Player)
 			{
 			    if(IsPlayerConnected(i))

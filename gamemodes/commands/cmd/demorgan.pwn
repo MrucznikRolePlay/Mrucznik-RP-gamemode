@@ -32,7 +32,6 @@ YCMD:demorgan(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -53,10 +52,9 @@ YCMD:demorgan(playerid, params[], help)
 	        if(giveplayerid != INVALID_PLAYER_ID)
 	        {
 	            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-				GetPlayerName(playerid, sendername, sizeof(sendername));
 				format(string, sizeof(string), "* Uwiêzi³eœ %s w Fort DeMorgan.", giveplayer);
 				SendClientMessage(playerid, COLOR_LIGHTRED, string);
-				format(string, sizeof(string), "* Zosta³eœ uwiêziony w Forcie DeMorgan przez Administratora %s.", sendername);
+				format(string, sizeof(string), "* Zosta³eœ uwiêziony w Forcie DeMorgan przez Administratora %s.", GetNick(playerid));
 				SendClientMessage(giveplayerid, COLOR_LIGHTRED, string);
 				GameTextForPlayer(giveplayerid, "~w~Witamy w ~n~~r~Fort DeMorgan", 5000, 3);
 				PoziomPoszukiwania[giveplayerid] = 0;
