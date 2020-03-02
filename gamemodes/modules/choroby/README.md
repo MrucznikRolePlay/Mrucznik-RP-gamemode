@@ -84,7 +84,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Obłęd - TODO | 0$ | 0 minut | 0% | 0.0 | nie | [efekty](#efekt-obłędu) | TODO |
 
 ### Efekty koronawirusa
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Wuhański kaszel | Gracz kaszle | /me zaczyna kaszleć. | 5 + 0-10 minut | 10.0 | 50 |
 | Duszności | Graczy się dusi | /me zaczyna się dusić. | 10 + 0-20 minut | 3.0 | 50 |
@@ -93,21 +93,21 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 
 
 ### Efekty grypy
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Słabość (FeelingBadEffect) | Gracz odtwarza animację zmęczenia |  /me poczuł się źle | 5 + 0-10 minut | 3.0 | 20 |
 | Kaszel (CouchingEffect) | Gracz odtwarza animację kaszlania | /me zaczyna kaszleć. | 10 + 0-20 minut  | 15.0 | 20 |
 | Utrata 10 hp (HPLossEffect) | Gracz traci 10 punktów hp bez możliwości śmierci. | /me zaczyna kaszleć krwią. | 20 + 0-40 minut | 5.0 | 50 |
 
 ### Efekty zapalenia płuc
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Słabość (FeelingBadEffect) | Gracz odtwarza animację zmęczenia | /me poczuł się źle | 5 + 0-10 minut | 3.0 | 20 |
 | Kaszel (CouchingEffect) | Gracz odtwarza animację kaszlania | /me zaczyna kaszleć. | 10 + 0-20 minut  | 15.0 | 30 |
 | Utrata 10 hp (HPLossEffect) | Gracz traci 10 punktów hp bez możliwości śmierci. | /me zaczyna kaszleć krwią. | 20 + 0-40 minut | 5.0 | 40 |
 
 ### Efekty zatrucia
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Afrodyzjak | Gracz brzydko pachnie | /do wokół John_Mrucznik unosi się nieprzyjemna woń przetrawionego jedzenia. | 5 + 0-10 minut  | - | - |
 | Incydent kałowy | Gracz sra | /do z nogawki John_Mrucznik cieknie brązowy płyn. | 10 + 0-20 minut  | 2.0 | 25 |
@@ -116,52 +116,52 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Wymioty | Gracz wymiotuje | /me zaczyna wymiotować. | 5 + 0-10 minut | 3.0 | 80 |
 
 ### Efekty padaczki
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Padaka | Gracz upada na ziemie i odtwarza animację padaczki, traci część HP i jest zamrożony na 1-2min | upada na ziemię i zaczyna trząść się i wykonywać niekontrolowane ruchy | 20 + 0-20 minut | - | - |
 
 ### Efekty touretta
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Losowe kurwienie | Podczas wypowiadania się na chacie IC losowo dodawane są do wypowiedzi wulgaryzmy | - | efekt stały | - | - |
 | Niekontrolowane teksty | Gracz pisze na chacie IC teksty typowe dla Touretta | - | 1 + 0-5 minut  | - | - |
 
 ### Efekty astmy
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Duszenie się | Gracz odtwarza animacje duszenia i traci hp | - | 20 + 0-40 minut  | - | - |
 | Wstrząs anafilaktyczny | Gracz odtwarza animacje duszenia i powoli traci hp aż do śmierci, lub gdy coś go uleczy | - | 40 + 0-80 minut  | - | - |
 
 ### Efekty schizofrenii
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Pelikany mnie gonią | Zmienia pogodę na dziwną | /me zaczyna widzieć niestworzone rzeczy. | 10 + 0-20 minut | - | - |
 
 ### Efekty zombie
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Mowa zombie | Zmienia wypowiedziane słowa na łee bee ree itd. | - | 1 + 0-3 minut | - | - |
 | Skin zombie | Dostaje skin zombie zależny od płci | - | efekt stały | - | - |
 
 ### Efekty HIV
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Obniżona odporność | Gracz traci odporność | /me czuje, że jego organizm ma obniżoną odporność. | 5 + 0-10 minut | - | - |
 | Wyłapywanie chorób | Gracz zapada na losową chorobę | - | 60 + 0-80 minut | - | - |
 
 ### Efekty astygmatyzmu
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Celne oko | Gracz ma obniżony skill karabinów maszynowych i karabinów | - | efekt stały | - | - |
 
 ### Efekty parkinsona
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Pewna ręka | Gracz ma obniżony skill wszystkich broni | - | efekt stały | - | - |
 | Drgawki | Ręce gracza zaczynają się trząść | /do ręcę John_Mrucznik zaczynają się trząść w niekontrolowany przez niego sposób | 5 + 0-10 minut | - | - |
 
 ### Efekty urazu
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Krwawienie | Gracz krwawi z rany | /do Z rany John_Mrucznik zaczyna płynąć krew. | 5 + 0-10 minut  | - | - |
 | Słabość (FeelingBadEffect) | Gracz odtwarza animację zmęczenia | /me poczuł się źle | 10 + 0-20 minut | - | - |
@@ -169,14 +169,14 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Rozwój choroby | Gracz ma szansę zarazić się gangreną | - | 10 + 0-20 minut | - | - |
 
 ### Efekty gangreny
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Ropienie | Graczowi wycieka ropa z rany, gracz traci hp. | /do z rany John_Mrucznik zaczyna wyciekać ropa. | 5 + 0-10 minut | - | - |
 | Utrata hp | Gracz traci hp z możliwością śmierci. | /me gorączkuje a zjego rany wydobywa się smród zgnilizny. | 10 + 0-20 minut | - | - |
 | Omdlenie | Gracz traci na chwilę przytomność | /me omdlał. | 10 + 0-20 minut  | - | - |
 
 ### Efekty PTSD
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | Strach | Gracz krzyczy i chowa obecnie trzymaną broń | /k RATUNKU, POMOCY, TO ZNOWU ONI! | 5 + 0-10 minut | - | - |
 | Flashback | Gracz krzyczy i wyrzuca trzymaną broń | /me przerażony tym co zrobił, wyrzuca trzymaną broń. | 10 + 0-20 minut | - | - |
@@ -184,7 +184,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Stan lękowy | Gracz odtwarza animacje krycia się. | /me zaczyna odczuwać irracjonalny strach. | 5 + 0-10 minut | - | - |
 
 ### Efekty obłędu
-| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na infekcję |
+| Nazwa efektu | Opis efektu | Akcja | Częstotliwośc występowania | Zasięg zarażania | Szansa na zarażenie [w procentach] |
 | :-----: |:-----:|:-----:|:-----:|:-----:| :-----:|
 | - | - | - | - | - | - |
 
