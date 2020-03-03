@@ -1,0 +1,14 @@
+{
+    "name": "gotowane",
+    "description": "Pokazuje posiadane ugotowane potrawy.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "ugotowane",
+        "potrawy"
+    ],
+    "parameters": [],
+    "date": "03.03.2020"
+}

@@ -31,6 +31,7 @@
 #include "budki\budki.def"
 #include "wejscia\wejscia.def"
 #include "chaty\chaty.def"
+#include "cooking\cooking.def"
 #include "debug\debug.def"
 #include "sannews\sannews.def"
 #include "bramy\bramy.def"
@@ -70,6 +71,7 @@
 #include "budki\budki.hwn"
 #include "wejscia\wejscia.hwn"
 #include "chaty\chaty.hwn"
+#include "cooking\cooking.hwn"
 #include "debug\debug.hwn"
 #include "sannews\sannews.hwn"
 #include "bramy\bramy.hwn"
@@ -109,6 +111,7 @@
 #include "budki\budki.pwn"
 #include "wejscia\wejscia.pwn"
 #include "chaty\chaty.pwn"
+#include "cooking\cooking.pwn"
 #include "debug\debug.pwn"
 #include "sannews\sannews.pwn"
 #include "bramy\bramy.pwn"
@@ -161,6 +164,7 @@
 
 
 //-------<[ mysql ]>-------
+#include "cooking\cooking_mysql.pwn"
 #include "admin\admin_mysql.pwn"
 #include "choroby\choroby_mysql.pwn"
 #include "graffiti\graffiti_mysql.pwn"
@@ -179,6 +183,7 @@
 
 
 //-------<[ callbacks ]>-------
+#include "cooking\cooking_callbacks.pwn"
 #include "admin\admin_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
 #include "wypadek\wypadek_callbacks.pwn"
@@ -197,6 +202,7 @@
 
 //-------<[ commands ]>-------
 #include "chaty\commands\chaty_commands.pwn"
+#include "cooking\commands\cooking_commands.pwn"
 #include "debug\commands\debug_commands.pwn"
 #include "sannews\commands\sannews_commands.pwn"
 #include "bramy\commands\bramy_commands.pwn"
