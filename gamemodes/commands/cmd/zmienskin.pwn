@@ -32,9 +32,9 @@ YCMD:zmienskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if (IsAHA(playerid) || PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
+        if (IsAHA(playerid) || PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
         {
-            if(PlayerInfo[playerid][pRank] >= 1)
+            if((PlayerInfo[playerid][pRank] >= 1 && IsAHA(playerid)) || (PlayerInfo[playerid][pRank] >= 2 && IsACop(playerid)))
             {
                 if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
                 {
@@ -44,9 +44,13 @@ YCMD:zmienskin(playerid, params[], help)
                 SetPVarInt(playerid, "CheatDetected", 1);
                 ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
             } 
-            else
+            else if(IsAHA(playerid))
             {
                 sendTipMessage(playerid, "Dozwolone tylko dla rangi 1 lub wiêkszych");
+            }
+            else
+            {
+                sendTipMessage(playerid, "Dozwolone tylko dla rangi 2 lub wiêkszych");
             }
         } 
         else
