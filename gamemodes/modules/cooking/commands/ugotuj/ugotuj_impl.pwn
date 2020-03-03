@@ -23,247 +23,69 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_ugotuj_Impl(playerid, x_nr[])
+ugotuj_OnDialogResponse(playerid, listitem)
 {
-	new string[128];
-    if(IsAtCookPlace(playerid))
-    {
-        if(strcmp(x_nr,"ostatniaryba",true) == 0)
-        {
-            if(Fishes[playerid][pLastFish] > 0)
-            {
-                new found = 0;
-                if(Cooking[playerid][Weight] == 0)
-                {
-                    format(string, sizeof(string), "Gotowana  %s", FishNames[Fishes[playerid][pFishID]]);
-                    strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                    Cooking[playerid][Weight] = Fishes[playerid][pLastWeight];
-                    Cooking[playerid][ID] = Fishes[playerid][pFishID];
-                    format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹c¹ %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                    SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-                    found = 1;
-                }
-                else
-                {
-                    sendTipMessageEx(playerid, COLOR_GREY, "Nie masz ju¿ miejsca na swoje potrawy !");
-                    return 1;
-                }
-                if(found)
-                {
-                    ClearFishID(playerid, Fishes[playerid][pLastFish]);
-                    Fishes[playerid][pLastFish] = 0;
-                    Fishes[playerid][pFishID] = 0;
-                }
-            }
-            else
-            {
-                sendTipMessageEx(playerid, COLOR_GREY, "Nie z³apa³eœ ¿adnej ryby !");
-                return 1;
-            }
-        }
-        if(strcmp(x_nr,"ryba",true) == 0)
-        {
-            new fishid;
-
-            if( sscanf(string, "{s[16]}d", x_nr, fishid))
-            {
-                sendTipMessage(playerid, "U¿yj /gotuj ryba [id]");
-                return 1;
-            }
-
-            if(fishid < 1 || fishid > 5) { sendTipMessageEx(playerid, COLOR_GREY, "Numer od 1 do 5!"); return 1; }
-            else if(fishid == 1 && Fishes[playerid][pWeight1] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(1) !"); return 1; }
-            else if(fishid == 2 && Fishes[playerid][pWeight2] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(2) !"); return 1; }
-            else if(fishid == 3 && Fishes[playerid][pWeight3] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(3) !"); return 1; }
-            else if(fishid == 4 && Fishes[playerid][pWeight4] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(4) !"); return 1; }
-            else if(fishid == 5 && Fishes[playerid][pWeight5] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(5) !"); return 1; }
-        
-            if(fishid == 1)
-            {
-                format(string, sizeof(string), "Gotowana  %s", Fishes[playerid][pFish1]);
-                strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                Cooking[playerid][Weight] = Fishes[playerid][pWeight1];
-                Cooking[playerid][ID] = Fishes[playerid][pFid1];
-                format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹c¹ %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            }
-            else if(fishid == 2)
-            {
-                format(string, sizeof(string), "Gotowana  %s", Fishes[playerid][pFish2]);
-                strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                Cooking[playerid][Weight] = Fishes[playerid][pWeight2];
-                Cooking[playerid][ID] = Fishes[playerid][pFid2];
-                format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹c¹ %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            }
-            else if(fishid == 3)
-            {
-                format(string, sizeof(string), "Gotowana  %s", Fishes[playerid][pFish3]);
-                strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                Cooking[playerid][Weight] = Fishes[playerid][pWeight3];
-                Cooking[playerid][ID] = Fishes[playerid][pFid3];
-                format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹c¹ %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            }
-            else if(fishid == 4)
-            {
-                format(string, sizeof(string), "Gotowana  %s", Fishes[playerid][pFish4]);
-                strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                Cooking[playerid][Weight] = Fishes[playerid][pWeight4];
-                Cooking[playerid][ID] = Fishes[playerid][pFid4];
-                format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹c¹ %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            }
-            else if(fishid == 5)
-            {
-                format(string, sizeof(string), "Gotowana  %s", Fishes[playerid][pFish5]);
-                strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                Cooking[playerid][Weight] = Fishes[playerid][pWeight5];
-                Cooking[playerid][ID] = Fishes[playerid][pFid5];
-                format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹c¹ %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            }
-        }
-        else if(strcmp(x_nr,"kurczak",true) == 0)
-        {
-            if(PlayerToPoint(3.0,playerid,369.9786,-4.0798,1001.8589))
-            {//Cluckin Bell
-                if(Groceries[playerid][pChicken] != 0)
-                {
-                    if(Cooking[playerid][Weight] == 0)
-                    {
-                        format(string, sizeof(string), "Gotowany kurczak");
-                        strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                        Cooking[playerid][Weight] = Groceries[playerid][pChicken];
-                        Cooking[playerid][ID] = 30;
-                        Groceries[playerid][pChicken] = 0;
-                        format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹cego %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                        SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-                    }
-                    else
-                    {
-                        sendTipMessageEx(playerid, COLOR_GREY, "Nie masz ju¿ miejsca na swoje potrawy !");
-                        return 1;
-                    }
-                }
-                else
-                {
-                    sendTipMessageEx(playerid, COLOR_GREY, "Nie masz przy sobie kurczaka !");
-                    return 1;
-                }
-            }
-            else
-            {
-                sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ w  Cluckin Bell aby to ugotowaæ !");
-                return 1;
-            }
-        }
-        else if(strcmp(x_nr,"hamburger",true) == 0)
-        {
-            if(PlayerToPoint(3.0,playerid,376.4466,-60.9574,1001.5078) || PlayerToPoint(3.0,playerid,378.1215,-57.4928,1001.5078))
-            {//Burgershot
-                if(Groceries[playerid][pHamburger] != 0)
-                {
-                    if(Cooking[playerid][Weight] == 0)
-                    {
-                        format(string, sizeof(string), "Hamburgera z frytkami");
-                        strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                        Cooking[playerid][Weight] = Groceries[playerid][pHamburger];
-                        Cooking[playerid][ID] = 30;
-                        Groceries[playerid][pHamburger] = 0;
-                        format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹cego %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                        SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-                    }
-                    else
-                    {
-                        sendTipMessageEx(playerid, COLOR_GREY, "Nie masz ju¿ miejsca na swoje potrawy !");
-                        return 1;
-                    }
-                }
-                else
-                {
-                    sendTipMessageEx(playerid, COLOR_GREY, "Nie masz ze sob¹ Hamburgera !");
-                    return 1;
-                }
-            }
-            else
-            {
-                sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ w Burger Shocie aby to ugotowaæ !");
-                return 1;
-            }
-        }
-        else if(strcmp(x_nr,"pizza",true) == 0)
-        {
-            if(PlayerToPoint(3.0,playerid,374.1185,-113.6361,1001.4922) || PlayerToPoint(3.0,playerid,377.7971,-113.7668,1001.4922))
-            {//Well Stacked Pizza
-                if(Groceries[playerid][pPizza] != 0)
-                {
-                    if(Cooking[playerid][Weight] == 0)
-                    {
-                        format(string, sizeof(string), "Pizzê");
-                        strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                        Cooking[playerid][Weight] = Groceries[playerid][pHamburger];
-                        Cooking[playerid][ID] = 30;
-                        Groceries[playerid][pPizza] = 0;
-                        format(string, sizeof(string), "* Stworzy³eœ %s, wa¿¹c¹ %d KG.",Cooking[playerid][Name],Cooking[playerid][Weight]);
-                        SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-                    }
-                    else
-                    {
-                        sendTipMessageEx(playerid, COLOR_GREY, "Nie masz ju¿ miejsca na swoje potrawy !");
-                        return 1;
-                    }
-                }
-                else
-                {
-                    sendTipMessageEx(playerid, COLOR_GREY, "Nie masz pizzy ze sob¹ !");
-                    return 1;
-                }
-            }
-            else
-            {
-                sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ w pizzeri aby to ugotowaæ !");
-                return 1;
-            }
-        }
-        else if(strcmp(x_nr,"nietoperz",true) == 0)
-        {
-            if(Groceries[playerid][pWuhanBat] != 0)
-            {
-                format(string, sizeof(string), "Sma¿ony nietoperz");
-                if(Cooking[playerid][Weight] == 0)
-                {
-                    strmid(Cooking[playerid][Name], string, 0, strlen(string));
-                    Cooking[playerid][Weight] = Groceries[playerid][pWuhanBat];
-                    Cooking[playerid][ID] = 31;
-                }
-                else
-                {
-                    sendTipMessageEx(playerid, COLOR_GREY, "Nie masz ju¿ miejsca na swoje potrawy !");
-                    return 1;
-                }
-
-                format(string, sizeof(string), "* Stworzy³eœ sma¿onego nietoperza z Wuhan w piêciu smakach, wa¿¹cego %d KG.", Groceries[playerid][pWuhanBat]);
-                SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-                Groceries[playerid][pWuhanBat] = 0;
-            }
-            else
-            {
-                sendTipMessageEx(playerid, COLOR_GREY, "Nie masz przy sobie nietoperza!");
-                return 1;
-            }	
-        }
-        else
-        {
-            sendTipMessageEx(playerid, COLOR_GREY, "Z³a nazwa !");
-            return 1;
-        }
+    new name[MAX_COOKED_NAME], model;
+    new type = DynamicGui_GetValue(playerid, listitem);
+    new weight = DynamicGui_GetDataInt(playerid, listitem);
+    if(type < 30) 
+    {//fishes
+        format(name, sizeof(name), "%s", FishNames[type]);
+        model = FishModels[type];
     }
-    else
+    else 
+    {//meals
+        format(name, sizeof(name), "%s", MealNames[type-30]);
+        model = MealModels[type-30];
+    }
+
+    MruMySQL_AddCookedMeal(playerid, model, name, weight, type);
+
+    SendClientMessage(playerid,COLOR_LIGHTBLUE, sprintf("* Ugotowa³es potrawê: %s, wa¿¹c¹ %dg.",
+        name, weight   
+    ));
+}
+
+AddCookingFishRow(playerid, string[], id, weight)
+{
+    strcat(string, sprintf("%i\t%s\n", FishModels[id], FishNames[id]), MAX_COOKED_NAME);
+    DynamicGui_AddRow(playerid, id, weight);
+}
+
+AddCookingRow(playerid, string[], id, weight)
+{
+    strcat(string, sprintf("%i\t%s\n", MealModels[id], MealNames[id]), MAX_COOKED_NAME);
+    DynamicGui_AddRow(playerid, id, weight);
+}
+
+command_ugotuj_Impl(playerid)
+{
+    if(!IsAtCookPlace(playerid))
     {
         sendErrorMessage(playerid, "Nie jesteœ w miejscu przeznaczonym do gotowania (Cluckin Bell / Burger Shot / Pizzeria).");
         return 1;
     }
+
+    new string[256];
+    DynamicGui_Init(playerid);
+    if(Fishes[playerid][pWeight1] < 1) AddCookingFishRow(playerid, string, Fishes[playerid][pFid1], Fishes[playerid][pWeight1]);
+    if(Fishes[playerid][pWeight2] < 1) AddCookingFishRow(playerid, string, Fishes[playerid][pFid2], Fishes[playerid][pWeight2]);
+    if(Fishes[playerid][pWeight3] < 1) AddCookingFishRow(playerid, string, Fishes[playerid][pFid3], Fishes[playerid][pWeight3]);
+    if(Fishes[playerid][pWeight4] < 1) AddCookingFishRow(playerid, string, Fishes[playerid][pFid4], Fishes[playerid][pWeight4]);
+    if(Fishes[playerid][pWeight5] < 1) AddCookingFishRow(playerid, string, Fishes[playerid][pFid5], Fishes[playerid][pWeight5]);
+    if(Groceries[playerid][pChicken] != 0) AddCookingRow(playerid, string, 30, Groceries[playerid][pChicken]);
+    if(Groceries[playerid][pPizza] != 0) AddCookingRow(playerid, string, 31, Groceries[playerid][pPizza]);
+    if(Groceries[playerid][pHamburger] != 0) AddCookingRow(playerid, string, 32, Groceries[playerid][pHamburger]);
+    if(Groceries[playerid][pWuhanBat] != 0) AddCookingRow(playerid, string, 33, Groceries[playerid][pWuhanBat]);
+
+    if(strlen(string) < 2) 
+    {
+        sendErrorMessage(playerid, "Nie masz nic do ugotowania.");
+        return 1;
+    }
+    string[strlen(string)-1] = '\0';
+
+    ShowPlayerDialog(playerid, DIALOG_COOKING, DIALOG_STYLE_PREVIEW_MODEL, "Dostêpne do ugotowania", string, "Ugotuj", "Anuluj");
     return 1;
 }
 

@@ -8,13 +8,6 @@
     "aliases": [
         "cook", "gotuj"
     ],
-    "parameters": [
-        {
-            "type": "string",
-            "size": "20",
-            "name": "x_nr",
-            "description": "nazwa"
-        }
-    ],
+    "parameters": [],
     "date": "03.03.2020"
 }

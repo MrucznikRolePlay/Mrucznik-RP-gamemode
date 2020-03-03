@@ -23,6 +23,8 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define MAX_COOKED_NAME 20
+
 #define DIALOG_EATING 1
 #define DIALOG_COOKING 2
 

@@ -46,7 +46,7 @@ enum pFishing
 };
 
 new FishNames[][20] = {
-	{"Kie³basê"},
+	{"Kie³basê"},//0
 	{"Seriola"},
 	{"Ukuleja"},
 	{"Ognica Pstra"},
@@ -67,7 +67,32 @@ new FishNames[][20] = {
 	{"¯ó³w"},
 	{"Sum"},
 	{"Sakiewka ze z³otem"},
-	{"Miecznik"}
+	{"Miecznik"}//21
+};
+
+new FishModels[] = {
+	0,
+	1600, //seriola
+	1600, //ukuleja
+	1600, //ognica pstra
+	0,
+	19630, //pstrag
+	1604, //blue marlin
+	19630, //losos
+	19630, //markela
+	1599, //bas
+	0,
+	19630, //sandacz
+	1599, //marlin
+	19630, //okon
+	19630, //tucznyk
+	1600, //wegorz
+	1607, //delfin
+	1608, //rekin
+	1609, //zolw
+	19630, //sum
+	0,
+	1608 //miecznik
 };
 
 //-----------------<[ Zmienne: ]>-------------------

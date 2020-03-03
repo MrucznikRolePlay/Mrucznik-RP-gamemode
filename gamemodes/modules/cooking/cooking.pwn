@@ -26,6 +26,31 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+EatCookedMeal(playerid, name[], weight, type)
+{
+	new Float:hp;
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
+	GetPlayerHealth(playerid, hp);
+	SetPlayerHealth(playerid, hp+weight/10);
+
+	//handle food types
+	if(type == 16 || type == 18)
+	{//Dolphin or Turtle
+		PoziomPoszukiwania[playerid] += 1;
+		SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
+	}
+	else if(type == 33 && random(2) == 1)
+	{//wuhan bat
+		InfectPlayer(playerid, KORONAWIRUS);
+		SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+	}
+	if(random(20) == 0) 
+	{//5% szans na zatrucie
+		InfectPlayer(playerid, ZATRUCIE);
+		SendClientMessage(playerid, COLOR_RED, "To co zjad³eœ, chyba Ci zaszkodzi³o!");
+	}
+}
+
 ClearGroceries(playerid)
 {
 	if(IsPlayerConnected(playerid))
