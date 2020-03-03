@@ -1170,29 +1170,6 @@ enum pBoxingStats
 };
 new Titel[pBoxingStats];
 
-enum pFishing
-{
-	pFish1[20],
-	pFish2[20],
-	pFish3[20],
-	pFish4[20],
-	pFish5[20],
-	pWeight1,
-	pWeight2,
-	pWeight3,
-	pWeight4,
-	pWeight5,
-	pFid1,
-	pFid2,
-	pFid3,
-	pFid4,
-	pFid5,
-	pLastFish,
-	pFishID,
-	pLastWeight,
-};
-new Fishes[MAX_PLAYERS][pFishing];
-
 enum pSpec
 {
 	Float:Coords[3],

@@ -28,5 +28,9 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
+hook OnPlayerDisconnect(playerid, reason)
+{
+	Fishes[playerid][pLastFish] = 0; Fishes[playerid][pFishID] = 0;
+}
 
 //end
