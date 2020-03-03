@@ -32,7 +32,7 @@ YCMD:zmienskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if (IsAHA(playerid) || PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
+        if (IsAHA(playerid) || IsACop(playerid) && (PlayerInfo[playerid][pMember] != 3 || PlayerInfo[playerid][pLider] != 3))
         {
             if((PlayerInfo[playerid][pRank] >= 1 && IsAHA(playerid)) || (PlayerInfo[playerid][pRank] >= 2 && IsACop(playerid)))
             {
@@ -55,7 +55,7 @@ YCMD:zmienskin(playerid, params[], help)
         } 
         else
         {
-            sendTipMessage(playerid, "Tylko dla Hitman Agency i FBI.");
+            sendTipMessage(playerid, "Tylko dla Hitman Agency i FBI/LSPD.");
         }
     }
     return 1;
