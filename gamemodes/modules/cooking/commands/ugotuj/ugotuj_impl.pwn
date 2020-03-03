@@ -54,7 +54,7 @@ AddCookingFishRow(playerid, string[], id, weight)
 
 AddCookingRow(playerid, string[], id, weight)
 {
-    strcat(string, sprintf("%i\t%s\n", MealModels[id], MealNames[id]), MAX_COOKED_NAME);
+    strcat(string, sprintf("%i\t%s\n", MealModels[id-30], MealNames[id-30]), MAX_COOKED_NAME);
     DynamicGui_AddRow(playerid, id, weight);
 }
 
