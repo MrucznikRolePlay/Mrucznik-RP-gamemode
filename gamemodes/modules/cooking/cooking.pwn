@@ -26,75 +26,13 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-ClearCooking(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    Cooking[playerid][pCookID1] = 0; Cooking[playerid][pCookID2] = 0; Cooking[playerid][pCookID3] = 0;
-		Cooking[playerid][pCookID4] = 0; Cooking[playerid][pCookID5] = 0;
-		Cooking[playerid][pCook][0] = 0; Cooking[playerid][pCook][1] = 0; Cooking[playerid][pCook][3] = 0;
-		Cooking[playerid][pCWeight][3] = 0; Cooking[playerid][pCWeight][4] = 0;
-		new string[MAX_PLAYER_NAME];
-		format(string, sizeof(string), "Nothing");
-		strmid(Cooking[playerid][pCook][0], string, 0, strlen(string), 255);
-		strmid(Cooking[playerid][pCook][1], string, 0, strlen(string), 255);
-		strmid(Cooking[playerid][pCook][2], string, 0, strlen(string), 255);
-		strmid(Cooking[playerid][pCook][3], string, 0, strlen(string), 255);
-		strmid(Cooking[playerid][pCook][4], string, 0, strlen(string), 255);
-	}
-	return 1;
-}
-
-ClearCookingID(playerid, cook)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		new string[MAX_PLAYER_NAME];
-		format(string, sizeof(string), "Nothing");
-		switch (cook)
-		{
-		    case 1:
-		    {
-		        strmid(Cooking[playerid][pCook][0], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCook][0] = 0;
-		        Cooking[playerid][pCookID1] = 0;
-		    }
-		    case 2:
-		    {
-		        strmid(Cooking[playerid][pCook][1], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCook][1] = 0;
-		        Cooking[playerid][pCookID2] = 0;
-		    }
-		    case 3:
-		    {
-		        strmid(Cooking[playerid][pCook][2], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCook][3] = 0;
-		        Cooking[playerid][pCookID3] = 0;
-		    }
-		    case 4:
-		    {
-		        strmid(Cooking[playerid][pCook][3], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCWeight][3] = 0;
-		        Cooking[playerid][pCookID4] = 0;
-		    }
-		    case 5:
-		    {
-		        strmid(Cooking[playerid][pCook][4], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCWeight][4] = 0;
-		        Cooking[playerid][pCookID5] = 0;
-		    }
-		}
-	}
-	return 1;
-}
-
 ClearGroceries(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    Groceries[playerid][pChickens] = 0; Groceries[playerid][pChicken] = 0;
-	    Groceries[playerid][pHamburgers] = 0; Groceries[playerid][pHamburger] = 0;
-	    Groceries[playerid][pPizzas] = 0; Groceries[playerid][pPizza] = 0;
+	    Groceries[playerid][pChicken] = 0;
+	    Groceries[playerid][pHamburger] = 0;
+	    Groceries[playerid][pPizza] = 0;
 	}
 	return 1;
 }

@@ -30,7 +30,6 @@
 //-----------------<[ Callbacki: ]>-----------------
 hook OnPlayerDisconnect(playerid, reason)
 {
-	ClearCooking(playerid);
 	ClearGroceries(playerid);
 	return 1;
 }
