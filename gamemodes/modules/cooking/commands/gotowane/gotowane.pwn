@@ -38,6 +38,7 @@ command_gotowane()
     //aliases
     Command_AddAlt(command, "ugotowane");
     Command_AddAlt(command, "potrawy");
+    Command_AddAlt(command, "cooked");
     
 
     //permissions

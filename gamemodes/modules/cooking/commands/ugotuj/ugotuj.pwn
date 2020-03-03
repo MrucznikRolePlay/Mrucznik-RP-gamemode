@@ -37,6 +37,7 @@ command_ugotuj()
 
     //aliases
     Command_AddAlt(command, "cook");
+    Command_AddAlt(command, "gotuj");
     
 
     //permissions
@@ -52,7 +53,7 @@ YCMD:ugotuj(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Ugotuj potrawÄ™.");
+        sendTipMessage(playerid, "Ugotuj potrawê.");
         return 1;
     }
     

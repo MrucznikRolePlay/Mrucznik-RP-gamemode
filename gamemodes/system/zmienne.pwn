@@ -1365,8 +1365,6 @@ ZerujZmienne(playerid)
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);
-	ClearCooking(playerid);
-	ClearGroceries(playerid);
 	ClearMarriage(playerid);
 
 

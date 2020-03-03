@@ -36,6 +36,8 @@ command_zjedz()
     new command = Command_GetID("zjedz");
 
     //aliases
+    Command_AddAlt(command, "eat");
+    Command_AddAlt(command, "jedz");
     
 
     //permissions
@@ -51,7 +53,7 @@ YCMD:zjedz(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Zjedz ugotowanÄ… potrawÄ™.");
+        sendTipMessage(playerid, "Zjedz ugotowan¹ potrawê.");
         return 1;
     }
     

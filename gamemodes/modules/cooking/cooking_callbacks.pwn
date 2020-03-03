@@ -28,5 +28,11 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
+hook OnPlayerDisconnect(playerid, reason)
+{
+	ClearCooking(playerid);
+	ClearGroceries(playerid);
+	return 1;
+}
 
 //end

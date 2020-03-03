@@ -1193,38 +1193,6 @@ enum pFishing
 };
 new Fishes[MAX_PLAYERS][pFishing];
 
-enum pCooking
-{
-	pCook1[20],
-	pCook2[20],
-	pCook3[20],
-	pCook4[20],
-	pCook5[20],
-	pCWeight1,
-	pCWeight2,
-	pCWeight3,
-	pCWeight4,
-	pCWeight5,
-	pCookID1,
-	pCookID2,
-	pCookID3,
-	pCookID4,
-	pCookID5,
-};
-new Cooking[MAX_PLAYERS][pCooking];
-
-enum pGroceries
-{
-	pChickens,
-	pChicken,
-	pHamburgers,
-	pHamburger,
-	pPizzas,
-	pPizza,
-	pWuhanBat
-};
-new Groceries[MAX_PLAYERS][pGroceries];
-
 enum pSpec
 {
 	Float:Coords[3],

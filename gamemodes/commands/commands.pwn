@@ -184,7 +184,6 @@
 #include "cmd/gotostacja.pwn"
 #include "cmd/gotostad.pwn"
 #include "cmd/gotoszpital.pwn"
-#include "cmd/gotowane.pwn"
 #include "cmd/gps.pwn"
 #include "cmd/graj.pwn"
 #include "cmd/house.pwn"
@@ -511,7 +510,6 @@
 #include "cmd/trasybiegu.pwn"
 #include "cmd/ubranie.pwn"
 #include "cmd/ucisz.pwn"
-#include "cmd/ugotuj.pwn"
 #include "cmd/ukradnij.pwn"
 #include "cmd/ulepsz.pwn"
 #include "cmd/unblock.pwn"
@@ -624,7 +622,6 @@
 #include "cmd/zderzaki.pwn"
 #include "cmd/zdmv.pwn"
 #include "cmd/zgas.pwn"
-#include "cmd/zjedz.pwn"
 #include "cmd/zk.pwn"
 #include "cmd/zlap.pwn"
 #include "cmd/zlomuj.pwn"
@@ -785,10 +782,6 @@ static Aliases()
 
 	//glosnik
 	Command_AddAltNamed("glosnik", "sanradio");
-
-	//gotowane
-	Command_AddAltNamed("gotowane", "cooked");
-	Command_AddAltNamed("gotowane", "ugotowane");
 
 	//house
 	Command_AddAltNamed("house", "dom");
@@ -1246,10 +1239,6 @@ static Aliases()
 	//trasy
 	Command_AddAltNamed("trasy", "wyscigi");
 
-	//ugotuj
-	Command_AddAltNamed("ugotuj", "cook");
-	Command_AddAltNamed("ugotuj", "gotuj");
-
 	//ukradnij
 	Command_AddAltNamed("ukradnij", "dropcar");
 	Command_AddAltNamed("ukradnij", "kradnijauto");
@@ -1420,10 +1409,6 @@ static Aliases()
 
 	//zdmv
 	Command_AddAltNamed("zdmv", "cdmv");
-
-	//zjedz
-	Command_AddAltNamed("zjedz", "eat");
-	Command_AddAltNamed("zjedz", "jedz");
 
 	//zk
 	Command_AddAltNamed("zk", "odbierzkluczyki");

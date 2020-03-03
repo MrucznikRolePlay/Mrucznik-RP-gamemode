@@ -1,12 +1,12 @@
 {
     "name": "ugotuj",
-    "description": "Ugotuj potrawÄ™.",
+    "description": "Ugotuj potrawê.",
     "permissions": [
         "everyone"
     ],
     "author": "mrucznik",
     "aliases": [
-        "cook"
+        "cook", "gotuj"
     ],
     "parameters": [],
     "date": "03.03.2020"
