@@ -1041,7 +1041,7 @@ public OnPlayerConnect(playerid)
 {
 	new GPCI[41];
 	gpci(playerid, GPCI, sizeof(GPCI));
-	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNick(playerid), playerid, GetIp(playerid), GPCI);
+	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNickEx(playerid), playerid, GetIp(playerid), GPCI);
 
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
@@ -1209,7 +1209,7 @@ public OnPlayerDisconnect(playerid, reason)
 		return 0;
 
 	//Pobieranie starej pozycji:
-	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNick(playerid), playerid, reason);
+	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNickEx(playerid), playerid, reason);
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
@@ -1780,18 +1780,16 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	{
 		new Float:HP;
 		GetPlayerHealth(playerid, HP);
-		amount = amount / 2;
-		if(weaponid == 24) SetPlayerHealth(playerid, HP-amount);//DesertEagle
-		else if(weaponid == 22) SetPlayerHealth(playerid, HP-amount);//Colt45
-		else if(weaponid == 23) SetPlayerHealth(playerid, HP-amount);//SilencedColt
-		else if(weaponid == 31) SetPlayerHealth(playerid, HP-amount);//M4
-		else if(weaponid == 30) SetPlayerHealth(playerid, HP-amount);//AK
-		else if(weaponid == 29) SetPlayerHealth(playerid, HP-amount);//MP5
-		else if(weaponid == 34) SetPlayerHealth(playerid, HP-amount);//SniperRifle
-		else if(weaponid == 33) SetPlayerHealth(playerid, HP-amount);//CountryRifle
-		else if(weaponid == 25) SetPlayerHealth(playerid, HP-amount);//PumpShotgun
-		else if(weaponid == 27) SetPlayerHealth(playerid, HP-amount);//Spaz12
-		else SetPlayerHealth(playerid, HP-amount);//other
+		if(weaponid == 22 || weaponid == 23 || weaponid == 24 || weaponid == 25 || 
+		weaponid == 27 || weaponid == 29 || weaponid == 30 || weaponid == 31 || weaponid == 33 || weaponid == 34)
+		{
+			amount = amount / 2;
+			SetPlayerHealth(playerid, HP-amount); //weapons
+		}
+		else
+		{
+			SetPlayerHealth(playerid, HP-amount);//other
+		}
 	}
 
 	new Float:armour;
@@ -1916,9 +1914,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 				if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 				{
-					new playername[24];
-					GetPlayerName(playerid, playername, sizeof(playername));
-					format(string, sizeof(string), "Wyœcig: {FFFFFF}%s zgin¹³ jak prawdziwy œcigant [*]", playername);
+					format(string, sizeof(string), "Wyœcig: {FFFFFF}%s zgin¹³ jak prawdziwy œcigant [*]", GetNickEx(playerid));
 					WyscigMessage(COLOR_YELLOW, string);
 					IloscZawodnikow --;
 					if(IloscZawodnikow <= Ukonczyl)
@@ -2136,7 +2132,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
     GetPlayerIp(playerid, plrIP, sizeof(plrIP));
 	if(type == 0) //Type of cheating (when 0 it returns the ID, when 1 - IP)
 	{
-		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNick(playerid), playerid, ip_address);
+		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNickEx(playerid), playerid, ip_address);
 
 		if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pAdmin] > 0)
 		{
@@ -2169,7 +2165,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		if(code == 16)//ammohack
 		{
 			SetPVarInt(playerid, "ammohackdetect", 1);
-			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 16 (Ammo hack (add)).", GetNick(playerid), playerid);
+			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 16 (Ammo hack (add)).", GetNickEx(playerid), playerid);
 			SendMessageToAdmin(string, 0x9ACD32AA);
 			//format(string, sizeof(string), "[Nex-AC] AC ammo: %d, ammo: %d, weaponid: %d", ACInfo[playerid][acAmmo][ac_s], ac_a, ac_w);
 			//SendMessageToAdmin(string, 0x9ACD32AA);
@@ -2178,13 +2174,13 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		if(code == 17)//ammohack
 		{
 			SetPVarInt(playerid, "ammohackdetect", 1);
-			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 17 (Ammo hack (infinite)).", GetNick(playerid), playerid);
+			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 17 (Ammo hack (infinite)).", GetNickEx(playerid), playerid);
 			SendMessageToAdmin(string, 0x9ACD32AA);
 			//format(string, sizeof(string), "[Nex-AC] Weaponid: %d, AC ammo: %d, ammo: %d", weaponid, ACInfo[playerid][acAmmo][ac_s], ac_t);
 			//SendMessageToAdmin(string, 0x9ACD32AA);
 
 		}
-		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNick(playerid), playerid, plrIP, code);
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNickEx(playerid), playerid, plrIP, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
@@ -2214,8 +2210,6 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 public OnPlayerSpawn(playerid)
 {
-	SetPlayerTeam(playerid, 1);
-
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)
 	{

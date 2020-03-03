@@ -1593,6 +1593,24 @@ SetAntyCheatForPlayer(playerid, valueCode)
 	SetPVarInt(playerid, "AntyCheatOff", valueCode);
 	return 1;
 }
+stock GetNickEx(playerid, withmask = false)
+{
+	new nick[MAX_PLAYER_NAME];
+ 	GetPlayerName(playerid, nick, sizeof(nick));
+	if(withmask)
+	{
+		return nick;
+	}
+	else
+	{
+		new nick2[24];
+		if(GetPVarString(playerid, "maska_nick", nick2, 24))
+		{
+			return nick2;
+		}
+	}
+	return nick;
+}
 stock GetNick(playerid, rp = false)
 {
 	new nick[MAX_PLAYER_NAME];

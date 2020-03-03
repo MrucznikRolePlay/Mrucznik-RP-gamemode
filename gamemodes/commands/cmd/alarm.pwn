@@ -75,13 +75,13 @@ YCMD:alarm(playerid,cmdtext[], help)
 					if(DMV_ALARM == 0)
 					{
 						//POWIADOMIENIE DLA BOR I DMV
-						format(string, sizeof(string), "[S³uchawka bluetooth] Uwaga! %s aktywowa³ alarm w Urzêdzie - rzucaj wszystko i ruszaj tam!", GetNick(playerid, true));
+						format(string, sizeof(string), "[S³uchawka bluetooth] Uwaga! %s aktywowa³ alarm w Urzêdzie - rzucaj wszystko i ruszaj tam!", GetNick(playerid));
 						SendFamilyMessage(FRAC_BOR, 0xFFFF0000, string);
-						format(string, sizeof(string), "[RADIO] Uwaga! Kryj siê! %s aktywowa³ alarm w Urzedzie.", GetNick(playerid, true));
+						format(string, sizeof(string), "[RADIO] Uwaga! Kryj siê! %s aktywowa³ alarm w Urzedzie.", GetNick(playerid));
 						SendFamilyMessage(FRAC_GOV, 0xFFFF0000, string);
 						
 						//AKCJA 
-						format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i w³¹cza alarm.",GetNick(playerid, true));
+						format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i w³¹cza alarm.",GetNick(playerid));
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						//MOVE OBJECTS:
 						MoveDynamicObject(bramaAlarmu[0], 1458.55872, -1781.09436,  78.6217, 20, 0.00000, 0.00000, 0.00000);
@@ -103,13 +103,13 @@ YCMD:alarm(playerid,cmdtext[], help)
 					else if(DMV_ALARM == 1)
 					{
 						//POWIADOMIENIE DLA BOR I DMV
-						format(string, sizeof(string), "[S³uchawka bluetooth] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid, true));
+						format(string, sizeof(string), "[S³uchawka bluetooth] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid));
 						SendFamilyMessage(FRAC_BOR, 0xFFFF0000, string);
-						format(string, sizeof(string), "[RADIO] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid, true));
+						format(string, sizeof(string), "[RADIO] %s wy³¹czy³ alarm w Urzêdzie Miasta!", GetNick(playerid));
 						SendFamilyMessage(FRAC_GOV, 0xFFFF0000, string);
 						
 						//AKCJA 
-						format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i wy³¹cza alarm.",GetNick(playerid, true));
+						format(string,sizeof(string),"* %s wciska czerwony guzik pod biurkiem i wy³¹cza alarm.",GetNick(playerid));
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						//MOVE OBJECTS:
 					
