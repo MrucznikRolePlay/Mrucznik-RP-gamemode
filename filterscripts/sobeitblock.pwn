@@ -146,14 +146,14 @@ stock kickPlayerForSobeit(playerid, reason)
 		{
 			SendClientMessage(playerid, -1, "{FF0000} Wykryto niedozwolone programy, zostajesz wyrzucony.");
 
-			format(string, 256, "Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Sobeit", GetNick(playerid), GetIp(playerid));
+			format(string, 256, "Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Sobeit", GetNickEx(playerid), GetIp(playerid));
 			AddPlayerToLog(string);
 		}
 		case 2:
 		{
 			SendClientMessage(playerid, -1, "{FF0000} Wykryto niedozwolone programy, zostajesz wyrzucony.");
 			
-			format(string, 256, "Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Health Hack", GetNick(playerid), GetIp(playerid));
+			format(string, 256, "Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Health Hack", GetNickEx(playerid), GetIp(playerid));
 			AddPlayerToLog(string);
 		}
 	}

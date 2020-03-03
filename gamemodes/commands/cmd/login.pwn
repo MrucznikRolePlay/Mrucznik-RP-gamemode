@@ -56,9 +56,9 @@ YCMD:login(playerid, params[], help)
 			GetPlayerPos(playa, slx, sly, slz);
 			PlayerPlaySound(playa, 1130, slx, sly, slz+5);
 			Log(punishmentLog, INFO, "Admin %s u¿y³ (/login) i wylogowa³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-			format(string, sizeof(string), "AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",GetNick(playerid), giveplayer);
+			format(string, sizeof(string), "AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",GetNickEx(playerid), giveplayer);
 			ABroadCast(COLOR_LIGHTRED,string,1);
-			format(string, sizeof(string), "Zosta³eœ wylogowany przez administratora %s", GetNick(playerid));
+			format(string, sizeof(string), "Zosta³eœ wylogowany przez administratora %s", GetNickEx(playerid));
 			SendClientMessage(playa, COLOR_PANICRED, string);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{

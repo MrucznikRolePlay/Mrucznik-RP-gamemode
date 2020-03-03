@@ -45,7 +45,7 @@ YCMD:anulujzp(playerid, params[], help)
         PlayerInfo[giveid][pCarLic] = 0;
         GetPlayerName(giveid, gracznick, MAX_PLAYER_NAME);
         new string[128];
-        format(string, sizeof(string), "Admin %s zlikwidowa³ Twoj¹ blokadê na prawo jazdy!", GetNick(playerid));
+        format(string, sizeof(string), "Admin %s zlikwidowa³ Twoj¹ blokadê na prawo jazdy!", GetNickEx(playerid));
         sendTipMessage(giveid, string, COLOR_LIGHTBLUE);
         format(string, sizeof(string), "Zlikwidowa³eœ %s blokadê na prawo jazdy!", gracznick);
         sendTipMessage(playerid, string, COLOR_LIGHTBLUE);

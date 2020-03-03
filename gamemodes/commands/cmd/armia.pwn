@@ -36,7 +36,7 @@ YCMD:armia(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(GetPlayerOrg(playerid) != 12)
+		if(GetPlayerFraction(playerid) != 3)
 		{
  			sendErrorMessage(playerid, "Nie jesteœ z wojska!");
 		    return 1;

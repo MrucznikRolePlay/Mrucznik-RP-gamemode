@@ -32,7 +32,7 @@ command_dnobiekt_Impl(playerid, giveplayerid, index, model, bone, Float:x, Float
     }
 
     SetPlayerAttachedObject(giveplayerid, index, model, bone, x, y, z, rx, ry, rz, sx, sy, sz, materialcolor1, materialcolor2);
-    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("Otrzyma³eœ przyczepialny obiekt tymczasowy od admina %s", GetNick(playerid)));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("Otrzyma³eœ przyczepialny obiekt tymczasowy od admina %s", GetNickEx(playerid)));
     return 1;
 }
 

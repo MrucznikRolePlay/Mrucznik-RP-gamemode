@@ -85,11 +85,11 @@ YCMD:warn(playerid, params[], help)
 					{
 						if(PlayerInfo[giveplayerid][pWarns] >= 3)
 						{
-							format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNick(giveplayerid), GetNick(playerid), result); 
+							format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNick(giveplayerid), GetNickEx(playerid), result); 
 						}
 						else 
 						{
-							format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNick(giveplayerid), GetNick(playerid), result);
+							format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNick(giveplayerid), GetNickEx(playerid), result);
 						}
 						SendPunishMessage(string, playerid); 
 					}

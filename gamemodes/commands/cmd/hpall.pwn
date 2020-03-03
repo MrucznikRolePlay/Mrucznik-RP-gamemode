@@ -36,7 +36,7 @@ YCMD:hpall(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
-            format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", GetNick(playerid));
+            format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", GetNickEx(playerid));
             SendClientMessageToAll(COLOR_LIGHTGREEN, string);
             foreach(new i : Player)
             {

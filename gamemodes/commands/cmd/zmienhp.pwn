@@ -63,7 +63,7 @@ YCMD:zmienhp(playerid, params[], help)
 
 					Log(adminLog, INFO, "Admin %s ustawi³ %s hp na %d%s", GetPlayerLogName(playerid), GetPlayerLogName(playa), health, additional);
 					new string[128];
-					format(string, sizeof(string), "%s da³ %d hp dla %s%s", GetNick(playerid), health, giveplayer, additional);
+					format(string, sizeof(string), "%s da³ %d hp dla %s%s", GetNickEx(playerid), health, giveplayer, additional);
 					SendMessageToAdmin(string, COLOR_P@);
 				}
 			}

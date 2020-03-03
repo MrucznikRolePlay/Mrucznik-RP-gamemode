@@ -4762,7 +4762,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
         {
             new str[128];
             new frac = GetPlayerFraction(playerid);
-            format(str, 128, "[%d]\n%s\n%s", GetPVarInt(playerid, "Barier-id")-1, FractionNames[frac],GetNick(playerid));
+            format(str, 128, "[%d]\n%s\n%s", GetPVarInt(playerid, "Barier-id")-1, FractionNames[frac],GetNickEx(playerid));
 
             if(!IsPlayerInRangeOfPoint(playerid, 5.0, x, y, z))
             {

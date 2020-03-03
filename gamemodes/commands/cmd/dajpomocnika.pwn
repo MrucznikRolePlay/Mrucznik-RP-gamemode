@@ -32,8 +32,6 @@ YCMD:dajpomocnika(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
-
 	new para1, level;
 	if( sscanf(params, "k<fix>d", para1, level))
 	{ 
@@ -42,7 +40,6 @@ YCMD:dajpomocnika(playerid, params[], help)
 	}
 
 	GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-	GetPlayerName(playerid, sendername, sizeof(sendername));
     if(!Uprawnienia(playerid, ACCESS_GIVEHALF)) return noAccessMessage(playerid);
     if(IsPlayerConnected(para1))
     {

@@ -32,7 +32,7 @@ command_setvregistration_Impl(playerid, registerText[32])
             new vehID = GetPlayerVehicleID(playerid);
             new string[124];
             SetVehicleNumberPlate(vehID, registerText);
-            format(string, sizeof(string), "Administrator %s ustawi³ tablicê dla pojazdu %d - nowy text [%s]", GetNick(playerid), vehID, registerText);
+            format(string, sizeof(string), "Administrator %s ustawi³ tablicê dla pojazdu %d - nowy text [%s]", GetNickEx(playerid), vehID, registerText);
             SendMessageToAdminEx(string, COLOR_P@, 2);
             CarData[VehicleUID[vehID][vUID]][c_Rejestracja] = registerText; 
             sendTipMessage(playerid, "Teraz nale¿y zrespawnowaæ pojazd!"); 

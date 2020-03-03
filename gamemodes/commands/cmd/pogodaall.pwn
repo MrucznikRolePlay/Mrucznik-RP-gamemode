@@ -46,7 +46,7 @@ YCMD:pogodaall(playerid, params[], help)
 			SetWeatherEx(weather);
 			sendTipMessageEx(playerid, COLOR_GREY, "Pogoda zmieniona dla wszystkich !");
             new string[128];
-            format(string, 128, "CMD_Info: /pogodaall u¿yte przez %s [%d]", GetNick(playerid), playerid);
+            format(string, 128, "CMD_Info: /pogodaall u¿yte przez %s [%d]", GetNickEx(playerid), playerid);
             SendCommandLogMessage(string);
 			Log(adminLog, INFO, "Admin %s u¿y³ /pogodaall", GetPlayerLogName(playerid));
 			if(GetPlayerAdminDutyStatus(playerid) == 1)

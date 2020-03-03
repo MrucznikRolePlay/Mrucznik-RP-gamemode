@@ -40,7 +40,7 @@ YCMD:tankujauta(playerid, params[], help)
 			}
 			
 			new string[64];
-			format(string, sizeof(string), "AdmCmd: %s zatankowa³ wszystkie pojazdy.", GetNick(playerid));
+			format(string, sizeof(string), "AdmCmd: %s zatankowa³ wszystkie pojazdy.", GetNickEx(playerid));
 			SendPunishMessage(string, playerid);
 			Log(adminLog, INFO, "Admin %s zatankowa³ wszystkie pojazdy", GetPlayerLogName(playerid));
 			SendClientMessage(playerid, COLOR_GREY, "Wszystkie pojazdy zatankowane ! ");

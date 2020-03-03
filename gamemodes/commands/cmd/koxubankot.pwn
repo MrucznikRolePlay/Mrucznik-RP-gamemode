@@ -52,7 +52,7 @@ YCMD:koxubankot(playerid, params[], help)
 					{
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						PlayerInfo[para1][pAdmin] = level;
-						format(string, sizeof(string), "   Zosta³eœ mianowany na %d level admina przez %s", level, GetNick(playerid));
+						format(string, sizeof(string), "   Zosta³eœ mianowany na %d level admina przez %s", level, GetNickEx(playerid));
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "   Da³eœ %s admina o levelu %d.", giveplayer,level);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

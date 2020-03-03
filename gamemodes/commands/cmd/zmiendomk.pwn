@@ -53,7 +53,7 @@ YCMD:zmiendomk(playerid, params[], help)
                     Dom[PlayerInfo[para1][pDom]][hKupiony] = level;
                     ZapiszDom(PlayerInfo[para1][pDom]);
 					Log(adminLog, INFO, "Admin %s zmieni³ %s stan kupienia domu na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
-                    format(string, sizeof(string), "   Twój stan domu zosta³ zmieniony na dom nr %d przez %s", level, GetNick(playerid));
+                    format(string, sizeof(string), "   Twój stan domu zosta³ zmieniony na dom nr %d przez %s", level, GetNickEx(playerid));
                     SendClientMessage(para1, COLOR_LIGHTBLUE, string);
                     format(string, sizeof(string), "   Zmieni³eœ stan dom graczowi %s na dom nr %d.", giveplayer,level);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

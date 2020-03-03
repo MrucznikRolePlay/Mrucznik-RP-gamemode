@@ -182,7 +182,7 @@ YCMD:newbie(playerid, params[], help)
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
 			}
 			OOCNewbie(nobchat);
-			if(!IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0)
+			if(!IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0)
 			{
 				AntySpam[playerid] = 1;
 				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);

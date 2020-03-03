@@ -54,18 +54,18 @@ YCMD:ucisz(playerid, params[], help)
 					{
 						PlayerInfo[playa][pMuted] = 1;
         				Log(adminLog, INFO, "Admin %s uciszy³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-						format(string, sizeof(string), "AdmCmd: %s uciszyl %s",GetNick(playerid), giveplayer);
+						format(string, sizeof(string), "AdmCmd: %s uciszyl %s",GetNickEx(playerid), giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);
-						format(string, sizeof(string), "Zosta³eœ uciszony przez administratora %s, widocznie powiedzia³eœ coœ z³ego :)", GetNick(playerid));
+						format(string, sizeof(string), "Zosta³eœ uciszony przez administratora %s, widocznie powiedzia³eœ coœ z³ego :)", GetNickEx(playerid));
 						SendClientMessage(playa, COLOR_PANICRED, string);
 					}
 					else
 					{
 						PlayerInfo[playa][pMuted] = 0;
         				Log(adminLog, INFO, "Admin %s odciszy³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-						format(string, sizeof(string), "AdmCmd: %s odciszy³ %s",GetNick(playerid), giveplayer);
+						format(string, sizeof(string), "AdmCmd: %s odciszy³ %s",GetNickEx(playerid), giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);
-						format(string, sizeof(string), "Zosta³eœ odciszony przez administratora %s, popraw siê :)", GetNick(playerid));
+						format(string, sizeof(string), "Zosta³eœ odciszony przez administratora %s, popraw siê :)", GetNickEx(playerid));
 						SendClientMessage(playa, COLOR_PANICRED, string);
 					}
 					if(GetPlayerAdminDutyStatus(playerid) == 1)

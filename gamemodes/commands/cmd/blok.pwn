@@ -69,7 +69,7 @@ YCMD:blok(playerid, params[], help)
 					GiveBlockForPlayer(giveplayerid, playerid, (result));
 					if(kary_TXD_Status == 0)
 					{
-						format(string, sizeof(string), "Admin %s zablokowa³ konto gracza %s. Powód: %s", GetNick(playerid), GetNick(giveplayerid), (result)); 
+						format(string, sizeof(string), "Admin %s zablokowa³ konto gracza %s. Powód: %s", GetNickEx(playerid), GetNick(giveplayerid), (result)); 
 						SendPunishMessage(string, giveplayerid);
 					}
 					else if(kary_TXD_Status == 1)

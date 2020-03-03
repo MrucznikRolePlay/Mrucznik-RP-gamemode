@@ -44,7 +44,7 @@ AdminDutyPlayer(playerid, status)
 	if(status == 1)//Je¿eli ma wejœæ
 	{
 		AdminDutyTimer[playerid] = SetTimerEx("AdminDutyCzas", 60000, true, "i", playerid);
-		format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora!", GetNick(playerid));
+		format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora!", GetNickEx(playerid));
 		SendAdminMessage(COLOR_RED, string); 
 		MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
 		SetPVarInt(playerid, "dutyadmin", 1);

@@ -106,7 +106,7 @@ YCMD:spec(playerid, params[], help)
 					return 1;
 				}
 				format(string, sizeof(string), "[CMD_USE_WARNING] Admin %s [%d] podgl¹da  %s [%d]", 
-				GetNick(playerid), 
+				GetNickEx(playerid), 
 				playerid,
 				GetNick(pid),
 				pid); 

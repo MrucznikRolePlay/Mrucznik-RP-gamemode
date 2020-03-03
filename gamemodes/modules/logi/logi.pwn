@@ -31,7 +31,7 @@ GetPlayerLogName(playerid)
     if(IsPlayerConnected(playerid) && gPlayerLogged[playerid]) {
         safe_return sprintf("{Player: %s[%d]}", GetNick(playerid, true), PlayerInfo[playerid][pUID]);
     } 
-    safe_return sprintf("{Player: %s}", GetNick(playerid));
+    safe_return sprintf("{Player: %s}", GetNickEx(playerid));
 }
 
 GetWeaponLogName(weapon, ammo=-1)

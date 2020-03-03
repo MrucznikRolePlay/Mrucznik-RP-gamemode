@@ -66,7 +66,7 @@ YCMD:pban(playerid, params[], help)
             }
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "Admin %s zablokowa³ %s (Offline). Powód: %s", GetNick(playerid), nick, result);
+				format(string, sizeof(string), "Admin %s zablokowa³ %s (Offline). Powód: %s", GetNickEx(playerid), nick, result);
 				SendPunishMessage(string, playerid); 
 			}
 		}

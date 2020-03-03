@@ -53,9 +53,9 @@ YCMD:unjail(playerid, params[], help)
 				        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 						format(string, sizeof(string), "* Uwolni³eœ %s.", giveplayer);
 						_MruAdmin(playerid, string);
-						format(string, sizeof(string), "* Zosta³eœ uwolniony przez %s.", GetNick(playerid));
+						format(string, sizeof(string), "* Zosta³eœ uwolniony przez %s.", GetNickEx(playerid));
 						_MruAdmin(playa, string);
-						format(string, sizeof(string), "ADMCMD: Administrator %s uwolni³ %s z AJ", GetNick(playerid), giveplayer);
+						format(string, sizeof(string), "ADMCMD: Administrator %s uwolni³ %s z AJ", GetNickEx(playerid), giveplayer);
 						SendMessageToAdmin(string, COLOR_RED);
                         Log(punishmentLog, INFO, "Admin %s uwolni³ %s z AJ (typ: %d, czas: %ds)", 
 							GetPlayerLogName(playerid), 

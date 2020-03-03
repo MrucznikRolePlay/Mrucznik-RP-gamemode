@@ -50,7 +50,7 @@ YCMD:carslot(playerid, params[], help)
 			        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					PlayerInfo[playa][pCarSlots] = 4;
 					Log(adminLog, INFO, "Admin %s ustawi³ %s sloty pojazdu na 4", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-					format(string, sizeof(string), "AdmCmd: %s nada³ sloty %s",GetNick(playerid), giveplayer);
+					format(string, sizeof(string), "AdmCmd: %s nada³ sloty %s",GetNickEx(playerid), giveplayer);
 					ABroadCast(COLOR_LIGHTRED,string,1);
 				}
 			}

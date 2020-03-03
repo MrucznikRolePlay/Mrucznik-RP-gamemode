@@ -903,7 +903,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 	{
 		if(breaktime > afktime || breaktime > 180)
 		{
-			printf("%s byl afk przez %d", GetNick(playerid), afktime);
+			printf("%s byl afk przez %d", GetNickEx(playerid), afktime);
 			afk_timer[playerid] = -1;
 		}
 		else

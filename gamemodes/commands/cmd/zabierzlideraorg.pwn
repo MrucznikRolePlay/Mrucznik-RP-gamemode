@@ -38,7 +38,7 @@ YCMD:zabierzlideraorg(playerid, params[], help)
         if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Brak takiego gracza!");
         if(!gPlayerOrgLeader[id]) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie ma lidera rodziny!");
         new str[128];
-        format(str, 128, "Admin %s odebra³ Tobie kontrolê nad rodzin¹ %s", GetNick(playerid), OrgInfo[gPlayerOrg[id]][o_Name]);
+        format(str, 128, "Admin %s odebra³ Tobie kontrolê nad rodzin¹ %s", GetNickEx(playerid), OrgInfo[gPlayerOrg[id]][o_Name]);
         SendClientMessage(id, COLOR_LIGHTBLUE, str);
         format(str, 128, "Odebra³eœ kontrolê nad rodzin¹ %s graczowi %s", OrgInfo[gPlayerOrg[id]][o_Name], GetNick(id));
         SendClientMessage(playerid, COLOR_LIGHTBLUE, str);

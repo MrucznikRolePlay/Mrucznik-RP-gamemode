@@ -41,7 +41,7 @@ YCMD:unblock(playerid, params[], help)
 		}
         if(MruMySQL_Unblock(params, playerid))
         {
-    		format(string, sizeof(string), "Administrator %s ublokowa³ %s", GetNick(playerid), params);
+    		format(string, sizeof(string), "Administrator %s ublokowa³ %s", GetNickEx(playerid), params);
             //SendPunishMessage(string);
             ABroadCast(COLOR_YELLOW,string,1);
             Log(punishmentLog, INFO, "Admin %s odblokowa³ %s", GetPlayerLogName(playerid), params);

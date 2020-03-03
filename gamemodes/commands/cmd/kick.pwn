@@ -75,7 +75,7 @@ YCMD:kick(playerid, params[], help)
 						}
 						else if(kary_TXD_Status == 0)
 						{
-							format(string, sizeof(string), "Admin %s zkickowa³ %s. Powód: %s", GetNick(playerid), GetNick(giveplayerid), (result));
+							format(string, sizeof(string), "Admin %s zkickowa³ %s. Powód: %s", GetNickEx(playerid), GetNick(giveplayerid), (result));
 							SendPunishMessage(string, giveplayerid); 
 						}
 						return 1;

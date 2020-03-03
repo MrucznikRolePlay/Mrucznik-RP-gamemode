@@ -51,7 +51,7 @@ command_grafiti_Impl(playerid, opcja[24])
         new i = graffiti_FindNearest(playerid);
         if(i!=INVALID_GRAFID)
         {
-            if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0 || PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN)
+            if(strcmp(GraffitiInfo[i][pOwner],GetNickEx(playerid),true) == 0 || PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN)
             {
                 graffiti_DeleteMySQL(i);
                 graffiti_Zeruj(i);
@@ -72,7 +72,7 @@ command_grafiti_Impl(playerid, opcja[24])
         new i = graffiti_FindNearest(playerid);
         if(i!=INVALID_GRAFID)
         {
-            if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+            if(strcmp(GraffitiInfo[i][pOwner],GetNickEx(playerid),true) == 0)
             {
                 graffiti_ShowEditTextDialog(playerid, i);
             }

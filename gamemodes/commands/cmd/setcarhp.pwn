@@ -50,7 +50,7 @@ YCMD:setcarhp(playerid, params[], help)
                 CarData[vuid][c_HP] = health;
                 Log(adminLog, INFO, "Admin %s ustawi³ hp auta [ID: %d] na %d", GetPlayerLogName(playerid), vehicleid, health);
                 new string[128];
-                format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNick(playerid), health);
+                format(string, sizeof(string), "%s ustawi³ hp auta na %d", GetNickEx(playerid), health);
                 SendMessageToAdmin(string, COLOR_P@);
             }
             else

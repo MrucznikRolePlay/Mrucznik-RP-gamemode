@@ -40,11 +40,11 @@ YCMD:a(playerid, params[], help)
 		}
 		if(PlayerInfo[playerid][pAdmin] >= 1) 
 		{
-			format(string, sizeof(string), "Admin [%d] %s - %s", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
+			format(string, sizeof(string), "Admin [%d] %s - %s", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 		}
 		else if(PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 4)
 		{
-			format(string, sizeof(string), "Pó³-Admin [%d] %s - %s", PlayerInfo[playerid][pNewAP], GetNick(playerid), params);
+			format(string, sizeof(string), "Pó³-Admin [%d] %s - %s", PlayerInfo[playerid][pNewAP], GetNickEx(playerid), params);
 		}
 		else 
 		{

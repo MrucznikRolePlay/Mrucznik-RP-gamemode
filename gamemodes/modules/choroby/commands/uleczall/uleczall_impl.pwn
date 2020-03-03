@@ -36,7 +36,7 @@ command_uleczall_Impl(playerid)
         CureFromAllDiseases(i);
     }
     Log(adminLog, INFO, "Admin %s wyleczy³ wszystkich graczy z chorób.", GetPlayerLogName(playerid));
-    SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s wyleczy³ wszystkich graczy z chorób.", GetNick(playerid)));
+    SendClientMessageToAll(COLOR_LIGHTBLUE, sprintf("Admin %s wyleczy³ wszystkich graczy z chorób.", GetNickEx(playerid)));
     return 1;
 }
 

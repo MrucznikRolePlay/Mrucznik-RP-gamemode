@@ -47,7 +47,7 @@ YCMD:stworzdom(playerid, params[], help)
 			    {
 					new string[128];
                     new domid = StworzDom(playerid, interior, kesz);
-					format(string, sizeof(string), "%s stworzyl nowy dom o (id %d)", GetNick(playerid), domid);
+					format(string, sizeof(string), "%s stworzyl nowy dom o (id %d)", GetNickEx(playerid), domid);
 					Log(adminLog, INFO, "Admin %s stworzy³ dom %s o interiorze %d z dodatkow¹ op³at¹ %d$", 
 						GetPlayerLogName(playerid),
 						domid,

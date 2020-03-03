@@ -67,7 +67,7 @@ MruMySQL_Connect()
 Create_MySQL_Leader(playerid, frac, level)
 {
 	new query[256];
-	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID`, `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNick(playerid), PlayerInfo[playerid][pUID], frac, level);
+	format(query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID`, `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNickEx(playerid), PlayerInfo[playerid][pUID], frac, level);
 	mysql_query(query);
 	AllLeaders++;
 	LeadersValue[LEADER_FRAC][frac]++;   
@@ -76,7 +76,7 @@ Create_MySQL_Leader(playerid, frac, level)
 Remove_MySQL_Leader(playerid)
 {
 	new query[256];
-	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `NICK`='%s'", GetNick(playerid));
+	format(query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
 	mysql_query(query);
 	LeadersValue[LEADER_FRAC][GetPlayerFraction(playerid)]--; 
 	AllLeaders--;
@@ -98,18 +98,18 @@ Save_MySQL_Leader(playerid)
 	`FracID`='%d', \
 	`LiderValue`='%d' \
 	WHERE `NICK`='%s'",
-	GetNick(playerid),
+	GetNickEx(playerid),
 	PlayerInfo[playerid][pUID],
 	PlayerInfo[playerid][pLider],
 	PlayerInfo[playerid][pLiderValue],
-	GetNick(playerid)); 
+	GetNickEx(playerid)); 
 	mysql_query(query);
 	return 1;
 }
 Load_MySQL_Leader(playerid)
 {
 	new query[256];
-	format(query, sizeof(query), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `NICK`='%s'", GetNick(playerid));
+	format(query, sizeof(query), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
 	mysql_query(query);
 	mysql_store_result();
     if (mysql_num_rows())
@@ -154,7 +154,7 @@ MruMySQL_CreateAccount(playerid, password[])
     new hash[WHIRLPOOL_LEN], salt[SALT_LENGTH];
 	randomString(salt, sizeof(salt));
 	WP_Hash(hash, sizeof(hash), sprintf("%s%s%s", ServerSecret, password, salt));
-	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`, `Salt`) VALUES ('%s', '%s', '%s')", GetNick(playerid), hash, salt);
+	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`, `Salt`) VALUES ('%s', '%s', '%s')", GetNickEx(playerid), hash, salt);
 	mysql_query(query);
 	return 1;
 }
@@ -556,7 +556,7 @@ public MruMySQL_LoadAcocount(playerid)
 
     lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `AJreason`, `JailTime`, `Materials`,`Drugs`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
 
-    format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
+    format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
 	mysql_query(lStr);
 	mysql_store_result();
     if (mysql_num_rows())
@@ -607,7 +607,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pContractTime]);
 
         lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
-        format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
+        format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
         if(mysql_num_rows()) id++;
@@ -651,7 +651,7 @@ public MruMySQL_LoadAcocount(playerid)
 
         lStr = "`Gun0`, `Gun1`, `Gun2`, `Gun3`, `Gun4`, `Gun5`, `Gun6`, `Gun7`, `Gun8`, `Gun9`, `Gun10`, `Gun11`, `Gun12`, `Ammo0`, `Ammo1`, `Ammo2`, `Ammo3`, `Ammo4`, `Ammo5`, `Ammo6`, `Ammo7`, `Ammo8`, `Ammo9`, `Ammo10`, `Ammo11`, `Ammo12`, `CarTime`, `PayDay`, `PayDayHad`, `CDPlayer`, `Wins`, `Loses`, `AlcoholPerk`, `DrugPerk`, `MiserPerk`, `PainPerk`, `TraderPerk`, `Tutorial`, `Mission`, `Warnings`, `Block`, `Fuel`, `Married`";
 
-        format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
+        format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
         if(mysql_num_rows()) id++;
@@ -705,7 +705,7 @@ public MruMySQL_LoadAcocount(playerid)
 
         lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`";
 
-        format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNick(playerid));
+        format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
         if(mysql_num_rows()) id++;
@@ -744,7 +744,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pCzystka],
         PlayerInfo[playerid][pCarSlots]);
 
-		format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `connected`='1' WHERE `Nick`='%s'", GetNick(playerid));
+		format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `connected`='1' WHERE `Nick`='%s'", GetNickEx(playerid));
 		mysql_query(lStr);
 	}
 
@@ -754,14 +754,14 @@ public MruMySQL_LoadAcocount(playerid)
 
 	//Wczytaj liderów
 	lStr = "`NICK`, `UID`, `FracID`, `LiderValue`";
-	format(lStr, 1024, "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", lStr, GetNick(playerid));
+	format(lStr, 1024, "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", lStr, GetNickEx(playerid));
 	mysql_query(lStr);
 	mysql_store_result(); 
 	if(mysql_num_rows())
 	{
 		mysql_fetch_row_format(lStr, "|"); 
 		sscanf(lStr, "p<|>s[24]ddd",
-		GetNick(playerid),
+		GetNickEx(playerid),
 		PlayerInfo[playerid][pUID],
 		PlayerInfo[playerid][pLider],
 		PlayerInfo[playerid][pLiderValue]); 
@@ -1081,9 +1081,9 @@ MruMySQL_Banuj(playerid, powod[]="Brak", admin=-1)
     {
         new admnick[32];
         GetPlayerName(admin, admnick, 32);
-        format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%d', '%s', '%s', '%s', '%d', '%s', '%d')", uid, GetNick(playerid), ip, validpowod, PlayerInfo[admin][pUID], admnick,WARN_BAN);
+        format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%d', '%s', '%s', '%s', '%d', '%s', '%d')", uid, GetNickEx(playerid), ip, validpowod, PlayerInfo[admin][pUID], admnick,WARN_BAN);
     }
-    else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `typ`, `nadal`) VALUES ('%d', '%s', '%s', '%s', '%d', 'SYSTEM')", uid, GetNick(playerid), ip, validpowod,WARN_BAN);
+    else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `typ`, `nadal`) VALUES ('%d', '%s', '%s', '%s', '%d', 'SYSTEM')", uid, GetNickEx(playerid), ip, validpowod,WARN_BAN);
 	mysql_query(query);
 	return 1;
 }
@@ -1094,7 +1094,7 @@ bool:MruMySQL_SprawdzBany(playerid)
 
 	new ip[16], query[256];
 	GetPlayerIp(playerid,ip,sizeof(ip));
-	format(query, sizeof(query), "SELECT `typ`, `nadal_uid`, `nadal`, `powod`, `czas`, `dostal`, `dostal_uid`, `IP` FROM `mru_bany` WHERE `dostal`='%s' OR `IP` = '%s' ORDER BY `czas` DESC LIMIT 1", GetNick(playerid),ip);
+	format(query, sizeof(query), "SELECT `typ`, `nadal_uid`, `nadal`, `powod`, `czas`, `dostal`, `dostal_uid`, `IP` FROM `mru_bany` WHERE `dostal`='%s' OR `IP` = '%s' ORDER BY `czas` DESC LIMIT 1", GetNickEx(playerid),ip);
 	mysql_query(query);
 	mysql_store_result();
 

@@ -67,7 +67,7 @@ YCMD:pwarn(playerid, params[], help)
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "Admin %s nada³ warna (offline) dla %s. Powód: %s", GetNick(playerid), nick, result);
+				format(string, sizeof(string), "Admin %s nada³ warna (offline) dla %s. Powód: %s", GetNickEx(playerid), nick, result);
 				SendPunishMessage(string, playerid);
 			}
         

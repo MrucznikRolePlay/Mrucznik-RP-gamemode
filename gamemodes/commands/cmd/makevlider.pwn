@@ -62,7 +62,7 @@ YCMD:makevleader(playerid, params[], help)
 						}
 
 						Remove_MySQL_Leader(giveplayerid); 
-						format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNick(playerid));
+						format(string, sizeof(string), "* Zosta³eœ wyrzucony z frakcji przez %s.", GetNickEx(playerid));
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
 						Log(serverLog, INFO, "Lider %s usun¹³ gracza [VLD] %s z jego frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(PlayerInfo[playerid][pMember]));
@@ -92,7 +92,7 @@ YCMD:makevleader(playerid, params[], help)
 					PlayerInfo[giveplayerid][pMember] = Frac; 
 					Create_MySQL_Leader(giveplayerid, Frac, value);//Tworzenie konta LD
 					Save_MySQL_Leader(giveplayerid);  
-					format(string, sizeof(string), "%s mianowa³ Ciê liderem [%d] organizacji %s [%d]", GetNick(playerid), value, FractionNames[Frac], Frac); 
+					format(string, sizeof(string), "%s mianowa³ Ciê liderem [%d] organizacji %s [%d]", GetNickEx(playerid), value, FractionNames[Frac], Frac); 
 					sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 					format(string, sizeof(string), "Mianowa³eœ/aœ %s liderem na stopien %d dla swojej frakcji!", GetNick(giveplayerid), value); 
 					sendTipMessageEx(playerid, COLOR_P@, string); 

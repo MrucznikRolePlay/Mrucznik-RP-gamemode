@@ -996,7 +996,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(OLD_ACCESS[id] != ACCESS[id])
             {
                 OLD_ACCESS[id] = ACCESS[id];
-                format(str, 128, "(PERM) %s zapisa³ Twoje nowe uprawnienia", GetNick(playerid));
+                format(str, 128, "(PERM) %s zapisa³ Twoje nowe uprawnienia", GetNickEx(playerid));
                 SendClientMessage(id, 0x05CA8CFF, str);
                 format(str, 128, "(PERM) Zapisales prawa %s", GetNick(id));
                 SendClientMessage(playerid, 0x05CA8CFF, str);
@@ -1023,7 +1023,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 13: ACCESS[id] ^= ACCESS_EDITPERM;
             case 14: ACCESS[id] ^= ACCESS_SKRYPTER;
         }
-        format(str, 128, "(PERM) %s edytowa³ Twoje uprawnienia (/uprawnienia)", GetNick(playerid));
+        format(str, 128, "(PERM) %s edytowa³ Twoje uprawnienia (/uprawnienia)", GetNickEx(playerid));
         SendClientMessage(id, 0x05CA8CFF, str);
         RunCommand(playerid, "/edytujupr",  param);
     }
@@ -1235,7 +1235,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         GetPVarString(playerid, "panel-powod", powod, 128);
         MruMySQL_BanujOffline("Brak", powod, playerid, inputtext);
 
-        format(str, 128, "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), inputtext, powod);
+        format(str, 128, "ADM: %s - zablokowano IP: %s powód: %s", GetNickEx(playerid), inputtext, powod);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
         Log(punishmentLog, INFO, "Admin %s zablokowa³ offline ip %s, powód: %s", 
                 GetPlayerLogName(playerid),
@@ -1257,7 +1257,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         GetPVarString(playerid, "panel-powod", powod, 128);
         MruMySQL_BanujOffline(inputtext, powod, playerid);
 
-        format(str, 128, "ADM: %s - zablokowano nick: %s powód: %s", GetNick(playerid), inputtext, powod);
+        format(str, 128, "ADM: %s - zablokowano nick: %s powód: %s", GetNickEx(playerid), inputtext, powod);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
         Log(punishmentLog, INFO, "Admin %s zablokowa³ offline %s, powód: %s", 
                 GetPlayerLogName(playerid),
@@ -1294,7 +1294,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             return 1;
         }
 
-        format(str, 128, "ADM: %s - odblokowano IP: %s", GetNick(playerid), inputtext);
+        format(str, 128, "ADM: %s - odblokowano IP: %s", GetNickEx(playerid), inputtext);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
         Log(punishmentLog, INFO, "Admin %s odblokowa³ ip %s", 
                 GetPlayerLogName(playerid),
@@ -1316,7 +1316,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             return 1;
         }
 
-        format(str, 128, "ADM: %s - odblokowano nick: %s", GetNick(playerid), inputtext);
+        format(str, 128, "ADM: %s - odblokowano nick: %s", GetNickEx(playerid), inputtext);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
         Log(punishmentLog, INFO, "Admin %s odblokowa³ %s", 
                 GetPlayerLogName(playerid),
@@ -2090,7 +2090,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ClearDynamicActorAnimations(actorUID[actorpID]);
 					format(string, sizeof(string), "Wy³¹czy³eœ animacje dla %s [%d]", Actors[actorpID][a_Name], actorpID);
 					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s wyczyœci³ animacje dla actora %s [%d]", GetNick(playerid), Actors[actorpID], actorpID); 
+					format(string, sizeof(string), "Admin %s wyczyœci³ animacje dla actora %s [%d]", GetNickEx(playerid), Actors[actorpID], actorpID); 
 					SendMessageToAdmin(string, COLOR_RED);
 				}
 			}
@@ -14435,7 +14435,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new id = GetPVarInt(playerid, "edit_org"), lStr[128];
         format(lStr, sizeof(lStr), "Usuniêto organizacjê %s.", OrgInfo[id][o_Name]);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
-        format(lStr, sizeof(lStr), "Organizacja usuniêta przez %s.", GetNick(playerid));
+        format(lStr, sizeof(lStr), "Organizacja usuniêta przez %s.", GetNickEx(playerid));
         foreach(new i : Player)
         {
             if(GetPlayerOrg(i) == OrgInfo[id][o_UID])

@@ -56,9 +56,9 @@ YCMD:slap(playerid, params[], help)
 					SetPlayerPos(playa, slx, sly, slz+5);
 					PlayerPlaySound(playa, 1130, slx, sly, slz+5);
         			Log(punishmentLog, INFO, "Admin %s da³ slapa %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-					format(string, sizeof(string), "AdmCmd: %s da³ klapsa w dupsko %s",GetNick(playerid), giveplayer);
+					format(string, sizeof(string), "AdmCmd: %s da³ klapsa w dupsko %s",GetNickEx(playerid), giveplayer);
 					ABroadCast(COLOR_LIGHTRED,string,1);
-					format(string, sizeof(string), "Dosta³eœ klapsa w dupsko od administratora %s, widocznie zrobi³eœ coœ z³ego :)", GetNick(playerid));
+					format(string, sizeof(string), "Dosta³eœ klapsa w dupsko od administratora %s, widocznie zrobi³eœ coœ z³ego :)", GetNickEx(playerid));
 					SendClientMessage(playa, COLOR_PANICRED, string);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{

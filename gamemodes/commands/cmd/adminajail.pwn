@@ -77,7 +77,7 @@ YCMD:adminajail(playerid, params[], help)
 						}
 						else if(kary_TXD_Status == 0)
 						{
-							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa), GetNick(playerid), money, (result));
+							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa), GetNickEx(playerid), money, (result));
 							SendPunishMessage(string, playa);
 						}
 						return 1;

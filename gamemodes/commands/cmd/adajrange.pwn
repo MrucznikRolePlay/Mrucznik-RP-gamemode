@@ -51,7 +51,7 @@ YCMD:adajrange(playerid, params[], help)
                         return 1;
                     } 
                     format(string, sizeof(string), "AdmCmd: %s [%d] da³ %s [%d] rangê %d z poprzedniej rangi %d [w %d]", 
-                    GetNick(playerid), 
+                    GetNickEx(playerid), 
                     playerid,
                     GetNick(giveplayerid),
                     giveplayerid,

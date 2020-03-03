@@ -52,7 +52,7 @@ YCMD:makeircadmin(playerid, params[], help)
 					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "* Da³eœ %s admina kana³u IRC nr %d.", giveplayer, channel);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "* %s Mianowa³ ciê administratorem kana³u IRC nr %d.", GetNick(playerid), channel);
+					format(string, sizeof(string), "* %s Mianowa³ ciê administratorem kana³u IRC nr %d.", GetNickEx(playerid), channel);
 					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "%s", giveplayer);
 					switch(channel)

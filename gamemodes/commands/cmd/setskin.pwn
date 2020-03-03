@@ -59,7 +59,7 @@ YCMD:setskin(playerid, params[], help)
                     if(GetPlayerState(para1) != PLAYER_STATE_ONFOOT) return sendTipMessage(playerid, "Aby nadaæ skina gracz musi byæ pieszo!");
 					PlayerInfo[para1][pSkin] = level;
 					Log(adminLog, INFO, "Admin %s zmieni³ %s skin na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
-					format(string, sizeof(string), "Twój skin zosta³ zmieniony na %d przez %s", level, GetNick(playerid));
+					format(string, sizeof(string), "Twój skin zosta³ zmieniony na %d przez %s", level, GetNickEx(playerid));
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Zmieni³eœ skin graczowi %s na %d.", GetNick(para1),level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

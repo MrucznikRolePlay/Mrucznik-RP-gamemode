@@ -110,7 +110,7 @@ stock graffiti_SaveMySQL(id, playerid)
 	new query[1024];
 	format(query, sizeof(query), "INSERT INTO `mru_graffiti`(`id`, `ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`) VALUES ('%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%f', '%f')",
 	id,
-	GetNick(playerid),
+	GetNickEx(playerid),
 	GraffitiInfo[id][grafText],
 	GraffitiInfo[id][gColor],
 	GraffitiInfo[id][grafXpos],
