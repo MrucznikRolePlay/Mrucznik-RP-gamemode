@@ -559,6 +559,17 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 				TogglePlayerControllable(hitid, 0);
 				return 0;
 			}
+			else
+			{
+				if(GetPlayerAdminDutyStatus(hitid) == 1) //zakaz strzelania do admina
+				{
+					return 0;
+				}
+				else
+				{
+					//to do others
+				}
+			}
 		}
 		case BULLET_HIT_TYPE_VEHICLE:
 		{
@@ -1403,12 +1414,12 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	//kajdanki
-	if(Kajdanki_JestemZakuty[playerid] != INVALID_PLAYER_ID) // gdy skuty da q
+	if(Kajdanki_JestemZakuty[playerid]) // gdy skuty da q
 	{
 		UnCuffedAction(Kajdanki_KtoSkuwa[playerid], playerid);
 	}
 
-	if(Kajdanki_Uzyte[playerid] != INVALID_PLAYER_ID) // gdy skuwaj¹cy da /q
+	if(Kajdanki_Uzyte[playerid]) // gdy skuwaj¹cy da /q
 	{
 		UnCuffedAction(playerid, Kajdanki_KogoSkuwam[playerid]);
 	}
@@ -1732,19 +1743,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 
 	if(issuerid != INVALID_PLAYER_ID) // PvP
     {
-		if(GetPlayerAdminDutyStatus(playerid) == 1)
-		{
-			new Float:hp, Float:armor;
-			GetPlayerHealth(playerid, hp);
-			GetPlayerArmour(playerid, armor);
-			SetPlayerHealth(playerid, hp);
-			SetPlayerArmour(playerid, armor);
-			return 1;
-		}
-		else
-		{
-			//to do
-		}
+		//to do
     }
 	else //self
 	{
@@ -2210,6 +2209,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 public OnPlayerSpawn(playerid)
 {
+	SetPlayerTeam(playerid, NO_TEAM);
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)
 	{
@@ -2318,7 +2318,6 @@ SetPlayerSpawn(playerid)
 	SetPlayerSpawnPos(playerid);
 	SetPlayerSpawnSkin(playerid);
 	SetPlayerSpawnWeapon(playerid);
-	SetPlayerTeam(playerid, 1);
 	return 1;
 }
 
