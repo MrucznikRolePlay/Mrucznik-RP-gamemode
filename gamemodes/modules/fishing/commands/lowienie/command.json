@@ -1,0 +1,16 @@
+{
+    "name": "lowienie",
+    "description": "£owienie ryb.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "zlap",
+        "low",
+        "fish",
+        "ryba"
+    ],
+    "parameters": [],
+    "date": "03.03.2020"
+}

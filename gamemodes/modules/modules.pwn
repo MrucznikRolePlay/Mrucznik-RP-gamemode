@@ -28,6 +28,7 @@
 
 
 //-------<[ .def ]>-------
+#include "fishing\fishing.def"
 #include "budki\budki.def"
 #include "wejscia\wejscia.def"
 #include "chaty\chaty.def"
@@ -68,6 +69,7 @@
 
 
 //-------<[ .hwn ]>-------
+#include "fishing\fishing.hwn"
 #include "budki\budki.hwn"
 #include "wejscia\wejscia.hwn"
 #include "chaty\chaty.hwn"
@@ -108,6 +110,7 @@
 
 
 //-------<[ .pwn ]>-------
+#include "fishing\fishing.pwn"
 #include "budki\budki.pwn"
 #include "wejscia\wejscia.pwn"
 #include "chaty\chaty.pwn"
@@ -164,6 +167,7 @@
 
 
 //-------<[ mysql ]>-------
+#include "fishing\fishing_mysql.pwn"
 #include "cooking\cooking_mysql.pwn"
 #include "admin\admin_mysql.pwn"
 #include "choroby\choroby_mysql.pwn"
@@ -183,6 +187,7 @@
 
 
 //-------<[ callbacks ]>-------
+#include "fishing\fishing_callbacks.pwn"
 #include "cooking\cooking_callbacks.pwn"
 #include "admin\admin_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
@@ -201,6 +206,7 @@
 
 
 //-------<[ commands ]>-------
+#include "fishing\commands\fishing_commands.pwn"
 #include "chaty\commands\chaty_commands.pwn"
 #include "cooking\commands\cooking_commands.pwn"
 #include "debug\commands\debug_commands.pwn"

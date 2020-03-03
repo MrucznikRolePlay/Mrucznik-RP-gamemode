@@ -1,0 +1,14 @@
+{
+    "name": "sprzedajrybe",
+    "description": "Sprzedaje rybê w skelpie 24/7.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "sellfish",
+        "sprzedajryby"
+    ],
+    "parameters": [],
+    "date": "03.03.2020"
+}
