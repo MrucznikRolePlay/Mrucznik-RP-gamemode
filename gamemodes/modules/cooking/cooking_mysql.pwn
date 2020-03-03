@@ -58,6 +58,11 @@ MruMySQL_CookedMealsDialog(playerid)
 				strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", model, name, weight));
 				DynamicGui_AddRow(playerid, id);
 			}
+			if(strlen(string) < 2)
+			{
+				sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
+				return 1;
+			}
 			string[strlen(string)-1] = '\0';
 		}
 		mysql_free_result();

@@ -49,6 +49,13 @@ ugotuj_OnDialogResponse(playerid, listitem)
     {
         format(name, sizeof(name), "%s", MealNames[type-30]);
         model = MealModels[type-30];
+        switch(type)
+        {
+            case 30: Groceries[playerid][pChicken] = 0;
+            case 31: Groceries[playerid][pPizza] = 0;
+            case 32: Groceries[playerid][pHamburger] = 0;
+            case 33: Groceries[playerid][pWuhanBat] = 0;
+        }
     }
 
     MruMySQL_AddCookedMeal(playerid, model, name, weight, type);
@@ -58,15 +65,15 @@ ugotuj_OnDialogResponse(playerid, listitem)
     ));
 }
 
-AddCookingFishRow(playerid, string[], slot, id, weight)
+AddCookingFishRow(playerid, string[1024], slot, id, weight)
 {
-    strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", FishModels[id], FishNames[id], weight), MAX_COOKED_NAME);
+    strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", FishModels[id], FishNames[id], weight), 1024);
     DynamicGui_AddRow(playerid, slot, weight);
 }
 
-AddCookingRow(playerid, string[], id, weight)
+AddCookingRow(playerid, string[1024], id, weight)
 {
-    strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", MealModels[id-30], MealNames[id-30], weight), MAX_COOKED_NAME);
+    strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", MealModels[id-30], MealNames[id-30], weight), 1024);
     DynamicGui_AddRow(playerid, id, weight);
 }
 
