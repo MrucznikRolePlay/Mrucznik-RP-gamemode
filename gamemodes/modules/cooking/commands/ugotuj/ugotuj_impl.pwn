@@ -35,11 +35,11 @@ ugotuj_OnDialogResponse(playerid, listitem)
         new slot = type;
         switch(slot)
         {
-            case 1: { type=Fishes[playerid][pFid1]; weight=Fishes[playerid][pWeight1]; }
-            case 2: { type=Fishes[playerid][pFid2]; weight=Fishes[playerid][pWeight2]; }
-            case 3: { type=Fishes[playerid][pFid3]; weight=Fishes[playerid][pWeight3]; }
-            case 4: { type=Fishes[playerid][pFid4]; weight=Fishes[playerid][pWeight4]; }
-            case 5: { type=Fishes[playerid][pFid5]; weight=Fishes[playerid][pWeight5]; }
+            case 1: { type=Fishes[playerid][pFid1]; }
+            case 2: { type=Fishes[playerid][pFid2]; }
+            case 3: { type=Fishes[playerid][pFid3]; }
+            case 4: { type=Fishes[playerid][pFid4]; }
+            case 5: { type=Fishes[playerid][pFid5]; }
         }
         format(name, sizeof(name), "%s", FishNames[type]);
         model = FishModels[type];
