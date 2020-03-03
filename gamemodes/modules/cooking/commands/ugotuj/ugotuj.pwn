@@ -56,8 +56,14 @@ YCMD:ugotuj(playerid, params[], help)
         sendTipMessage(playerid, "Ugotuj potrawê.");
         return 1;
     }
-    
+    //fetching params
+    new x_nr[20];
+    if(sscanf(params, "s[20]", x_nr))
+    {
+        sendTipMessage(playerid, "U¿yj /ugotuj [nazwa] ");
+        return 1;
+    }
     
     //command body
-    return command_ugotuj_Impl(playerid);
+    return command_ugotuj_Impl(playerid, x_nr);
 }

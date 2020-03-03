@@ -32,7 +32,6 @@
 //-------<[ include ]>-------
 #include "zjedz\zjedz.pwn"
 #include "ugotuj\ugotuj.pwn"
-#include "gotowane\gotowane.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -40,6 +39,5 @@ hook OnGameModeInit()
 {
     command_zjedz();
     command_ugotuj();
-    command_gotowane();
     
 }

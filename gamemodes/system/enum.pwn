@@ -857,32 +857,6 @@ enum SAZONE_MAIN
 	Float:SAZONE_AREA[6]
 };
 
-new FishNamesNumber = 22;
-new FishNames[22][20] = {
-{"Kie³basê"},
-{"Seriola"},
-{"Ukuleja"},
-{"Ognica Pstra"},
-{"Stare gacie"},
-{"Pstr¹g"},
-{"Blue Marlin"},
-{"£osoœ"},
-{"Makrela"},
-{"Bas"},
-{"Stare Kalosze"},
-{"Sandacz"},
-{"Marlin"},
-{"Okoñ"},
-{"Tuñczyk"},
-{"Wêgorz"},
-{"Delfin"},
-{"Rekin"},
-{"¯ó³w"},
-{"Sum"},
-{"Sakiewka ze z³otem"},
-{"Miecznik"}
-};
-
 new Float:PaintballSpawns[7][3] = {
 {-394.8027,2232.2317,42.4297},
 {-430.8412,2240.5371,42.9834},

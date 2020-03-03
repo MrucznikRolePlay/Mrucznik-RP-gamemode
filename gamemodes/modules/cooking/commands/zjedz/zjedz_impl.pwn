@@ -56,13 +56,7 @@ zjedz_OnDialogResponse(playerid, response, listitem)
 
 command_zjedz_Impl(playerid)
 {
-    new Float:health, string[256];
-    if(GetPlayerHealth(playerid, health) > 80)
-    {
-        sendTipMessageEx(playerid, COLOR_GREY, "Twój poziom ¿ycia jest za wysoki, mo¿esz jeœæ od 80 HP !");
-        return 1;
-    }
-    
+    new string[256];
     ShowPlayerDialog(playerid, DIALOG_EATING, DIALOG_STYLE_TABLIST_HEADERS, "Twoje potrawy", string, "Jedz", "Anuluj");
     return 1;
 }

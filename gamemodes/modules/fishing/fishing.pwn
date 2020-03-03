@@ -93,4 +93,32 @@ PlayerHasFishes(playerid)
 	return Fishes[playerid][pWeight1] > 0 || Fishes[playerid][pWeight2] > 0 || Fishes[playerid][pWeight3] > 0 || Fishes[playerid][pWeight4] > 0 || Fishes[playerid][pWeight5] > 0;
 }
 
+IsAtFishPlace(playerid)
+{
+	if(IsPlayerConnected(playerid))
+	{
+	    if(PlayerToPoint(1.0,playerid,403.8266,-2088.7598,7.8359) || PlayerToPoint(1.0,playerid,398.7553,-2088.7490,7.8359))
+		{//Fishplace at the bigwheel
+		    return 1;
+		}
+		else if(PlayerToPoint(1.0,playerid,396.2197,-2088.6692,7.8359) || PlayerToPoint(1.0,playerid,391.1094,-2088.7976,7.8359))
+		{//Fishplace at the bigwheel
+		    return 1;
+		}
+		else if(PlayerToPoint(1.0,playerid,383.4157,-2088.7849,7.8359) || PlayerToPoint(1.0,playerid,374.9598,-2088.7979,7.8359))
+		{//Fishplace at the bigwheel
+		    return 1;
+		}
+		else if(PlayerToPoint(1.0,playerid,369.8107,-2088.7927,7.8359) || PlayerToPoint(1.0,playerid,367.3637,-2088.7925,7.8359))
+		{//Fishplace at the bigwheel
+		    return 1;
+		}
+		else if(PlayerToPoint(1.0,playerid,362.2244,-2088.7981,7.8359) || PlayerToPoint(1.0,playerid,354.5382,-2088.7979,7.8359))
+		{//Fishplace at the bigwheel
+		    return 1;
+		}
+	}
+	return 0;
+}
+
 //end

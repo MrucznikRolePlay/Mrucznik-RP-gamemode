@@ -23,12 +23,11 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_ugotuj_Impl(playerid)
+command_ugotuj_Impl(playerid, x_nr[])
 {
 	new string[128];
     if(IsAtCookPlace(playerid))
     {
-        new x_nr[16];
         if(strcmp(x_nr,"ostatniaryba",true) == 0)
         {
             if(Fishes[playerid][pLastFish] > 0)
@@ -64,7 +63,7 @@ command_ugotuj_Impl(playerid)
         }
         if(strcmp(x_nr,"ryba",true) == 0)
         {
-            new found = 0, fishid;
+            new fishid;
 
             if( sscanf(string, "{s[16]}d", x_nr, fishid))
             {

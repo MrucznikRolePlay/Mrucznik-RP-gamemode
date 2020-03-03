@@ -45,8 +45,34 @@ enum pFishing
 	pLastWeight,
 };
 
+new FishNames[][20] = {
+	{"Kie³basê"},
+	{"Seriola"},
+	{"Ukuleja"},
+	{"Ognica Pstra"},
+	{"Stare gacie"},
+	{"Pstr¹g"},
+	{"Blue Marlin"},
+	{"£osoœ"},
+	{"Makrela"},
+	{"Bas"},
+	{"Stare Kalosze"},
+	{"Sandacz"},
+	{"Marlin"},
+	{"Okoñ"},
+	{"Tuñczyk"},
+	{"Wêgorz"},
+	{"Delfin"},
+	{"Rekin"},
+	{"¯ó³w"},
+	{"Sum"},
+	{"Sakiewka ze z³otem"},
+	{"Miecznik"}
+};
+
 //-----------------<[ Zmienne: ]>-------------------
 new Fishes[MAX_PLAYERS][pFishing];
+
 
 //------------------<[ Forwardy: ]>--------------------
 

@@ -49,7 +49,7 @@ command_lowienie_Impl(playerid)
         else if(Level >= 101 && Level <= 200) { Caught = random(100)-50; }
         else if(Level >= 201 && Level <= 400) { Caught = random(160)-60; }
         else if(Level >= 401) { Caught = random(180)-70; }
-        rand = random(FishNamesNumber);
+        rand = random(sizeof(FishNames));
         
         SetTimerEx("Lowienie", 30000 ,0,"d",playerid);
         FishGood[playerid] = 1;
