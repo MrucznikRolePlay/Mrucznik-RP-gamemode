@@ -389,8 +389,6 @@
 #include "cmd/rozwiedz.pwn"
 #include "cmd/rozwod.pwn"
 #include "cmd/ruleta.pwn"
-#include "cmd/ryby.pwn"
-#include "cmd/rybypomoc.pwn"
 #include "cmd/sad.pwn"
 #include "cmd/say.pwn"
 #include "cmd/sb.pwn"
@@ -454,7 +452,6 @@
 #include "cmd/sprzedajbron.pwn"
 #include "cmd/sprzedajmaterialy.pwn"
 #include "cmd/sprzedajnarkotyki.pwn"
-#include "cmd/sprzedajrybe.pwn"
 #include "cmd/sprzedajzestaw.pwn"
 #include "cmd/setactoranime.pwn"
 #include "cmd/startlotto.pwn"
@@ -572,7 +569,6 @@
 #include "cmd/wyplac.pwn"
 #include "cmd/wyprowadz.pwn"
 #include "cmd/wypusc.pwn"
-#include "cmd/wypuscrybe.pwn"
 #include "cmd/wyrzucbronie.pwn"
 #include "cmd/wyscig.pwn"
 #include "cmd/wyscig_start.pwn"
@@ -582,8 +578,6 @@
 #include "cmd/wywaldmv.pwn"
 #include "cmd/wywaldragi.pwn"
 #include "cmd/wywalmaterialy.pwn"
-#include "cmd/wywalrybe.pwn"
-#include "cmd/wywalryby.pwn"
 #include "cmd/wywaltelefon.pwn"
 #include "cmd/wywalzsad.pwn"
 #include "cmd/wywaz.pwn"
@@ -623,7 +617,6 @@
 #include "cmd/zdmv.pwn"
 #include "cmd/zgas.pwn"
 #include "cmd/zk.pwn"
-#include "cmd/zlap.pwn"
 #include "cmd/zlomuj.pwn"
 #include "cmd/zmiendom.pwn"
 #include "cmd/zmiendomk.pwn"
@@ -1114,12 +1107,6 @@ static Aliases()
 	//ruleta
 	Command_AddAltNamed("ruleta", "ruletka");
 
-	//ryby
-	Command_AddAltNamed("ryby", "fishes");
-
-	//rybypomoc
-	Command_AddAltNamed("rybypomoc", "fishhelp");
-
 	//say
 	Command_AddAltNamed("say", "local");
 	Command_AddAltNamed("say", "l");
@@ -1333,10 +1320,6 @@ static Aliases()
 	Command_AddAltNamed("wypusc", "free");
 	Command_AddAltNamed("wypusc", "uwolnij");
 
-	//wypuscrybe
-	Command_AddAltNamed("wypuscrybe", "releasefish");
-	Command_AddAltNamed("wypuscrybe", "wyrzucrybe");
-
 	//wyrzucbronie
 	Command_AddAltNamed("wyrzucbronie", "wb");
 
@@ -1353,12 +1336,6 @@ static Aliases()
 	//wywalmaterialy
 	Command_AddAltNamed("wm", "wyrzucmaterialy");
 	Command_AddAltNamed("wm", "wm");
-
-	//wywalrybe
-	Command_AddAltNamed("wywalrybe", "throwback");
-
-	//wywalryby
-	Command_AddAltNamed("wywalryby", "throwbackall");
 
 	//wywaltelefon
 	Command_AddAltNamed("wywaltelefon", "wywaltel");
@@ -1413,13 +1390,6 @@ static Aliases()
 	//zk
 	Command_AddAltNamed("zk", "odbierzkluczyki");
 	Command_AddAltNamed("zk", "zabierzkluczyki");
-
-	//zlap
-	Command_AddAltNamed("zlap", "fish");
-	Command_AddAltNamed("zlap", "ryba");
-	Command_AddAltNamed("zlap", "wedkuj");
-	Command_AddAltNamed("zlap", "low");
-	Command_AddAltNamed("zlap", "wedka");
 
 	//zlomuj
 	Command_AddAltNamed("zlomuj", "spawnuj");

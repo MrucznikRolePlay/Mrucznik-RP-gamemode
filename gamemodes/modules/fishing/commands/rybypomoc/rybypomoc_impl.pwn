@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ ryby ]-------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 rybypomoc                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,36 +16,23 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: mrucznik
+// Data utworzenia: 03.03.2020
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:ryby(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_rybypomoc_Impl(playerid)
 {
-	new string[128];
-
-    if(IsPlayerConnected(playerid))
-    {
-        SendClientMessage(playerid, COLOR_WHITE, "|__________________ Ryby __________________|");
-        format(string, sizeof(string), "** (1) Ryba: %s.   Waga: %d.", Fishes[playerid][pFish1], Fishes[playerid][pWeight1]);
-		SendClientMessage(playerid, COLOR_GREY, string);
-		format(string, sizeof(string), "** (2) Ryba: %s.   Waga: %d.", Fishes[playerid][pFish2], Fishes[playerid][pWeight2]);
-		SendClientMessage(playerid, COLOR_GREY, string);
-		format(string, sizeof(string), "** (3) Ryba: %s.   Waga: %d.", Fishes[playerid][pFish3], Fishes[playerid][pWeight3]);
-		SendClientMessage(playerid, COLOR_GREY, string);
-		format(string, sizeof(string), "** (4) Ryba: %s.   Waga: %d.", Fishes[playerid][pFish4], Fishes[playerid][pWeight4]);
-		SendClientMessage(playerid, COLOR_GREY, string);
-		format(string, sizeof(string), "** (5) Ryba: %s.   Waga: %d.", Fishes[playerid][pFish5], Fishes[playerid][pWeight5]);
-		SendClientMessage(playerid, COLOR_GREY, string);
-		SendClientMessage(playerid, COLOR_WHITE, "|__________________________________________|");
-	}
+    SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
+	SendClientMessage(playerid, COLOR_WHITE,"*** RYBY POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
+	SendClientMessage(playerid, COLOR_GRAD3,"*** WEDKOWANIE *** /wedkuj (Próbujesz z³apaæ rybê)   /ryby (Pokazuje jakie ryby z³apa³eœ)");
+	SendClientMessage(playerid, COLOR_GRAD3,"*** WEDKOWANIE *** /wywalrybe (Wywala ostatni¹ z³apan¹ rybe)   /wywalryby");
+	SendClientMessage(playerid, COLOR_GRAD3,"*** WEDKOWANIE *** /wypuscrybe (Wypuszcza wybran¹ rybê)");
+	SendClientMessage(playerid, COLOR_GRAD3,"*** WEDKOWANIE *** [NOWE] /sprzedajrybe (sprzedajesz wybran¹ rybê w 24/7)");
+	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /pomoc /gotowaniepomoc /ircpomoc");
     return 1;
 }
+
+//end

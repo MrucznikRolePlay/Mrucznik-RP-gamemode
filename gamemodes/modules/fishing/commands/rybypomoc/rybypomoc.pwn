@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ wywalrybe ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 rybypomoc                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,33 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "rybypomoc_impl.pwn"
 
-YCMD:wywalrybe(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_rybypomoc()
 {
-    if(IsPlayerConnected(playerid))
+    new command = Command_GetID("rybypomoc");
+
+    //aliases
+    Command_AddAlt(command, "fishinghelp");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:rybypomoc(playerid, params[], help)
+{
+    if (help)
     {
-        if(Fishes[playerid][pLastFish] > 0)
-        {
-            ClearFishID(playerid, Fishes[playerid][pLastFish]);
-            Fishes[playerid][pLastFish] = 0;
-            Fishes[playerid][pFishID] = 0;
-        }
-        else
-        {
-            sendTipMessageEx(playerid, COLOR_GREY, "Nie z³owi³eœ ¿adnej ryby !");
-            return 1;
-        }
+        sendTipMessage(playerid, "Pomoc odnoœnie ³owienia ryb.");
+        return 1;
     }
-    return 1;
+    
+    
+    //command body
+    return command_rybypomoc_Impl(playerid);
 }

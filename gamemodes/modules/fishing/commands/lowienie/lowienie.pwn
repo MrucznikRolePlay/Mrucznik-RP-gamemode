@@ -40,6 +40,8 @@ command_lowienie()
     Command_AddAlt(command, "low");
     Command_AddAlt(command, "fish");
     Command_AddAlt(command, "ryba");
+    Command_AddAlt(command, "wedka");
+    Command_AddAlt(command, "wedkuj");
     
 
     //permissions

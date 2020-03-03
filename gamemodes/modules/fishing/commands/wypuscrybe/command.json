@@ -9,6 +9,12 @@
         "wywalrybe",
         "throwfish"
     ],
-    "parameters": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "fishid",
+            "description": "id ryby"
+        }
+    ],
     "date": "03.03.2020"
 }

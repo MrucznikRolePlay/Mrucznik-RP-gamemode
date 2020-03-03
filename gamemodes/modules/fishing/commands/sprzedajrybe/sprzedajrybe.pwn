@@ -56,8 +56,14 @@ YCMD:sprzedajrybe(playerid, params[], help)
         sendTipMessage(playerid, "Sprzedaje rybê w skelpie 24/7.");
         return 1;
     }
-    
+    //fetching params
+    new fishid;
+    if(sscanf(params, "d", fishid))
+    {
+        sendTipMessage(playerid, "U¿yj /sprzedajrybe [id ryby] ");
+        return 1;
+    }
     
     //command body
-    return command_sprzedajrybe_Impl(playerid);
+    return command_sprzedajrybe_Impl(playerid, fishid);
 }

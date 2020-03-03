@@ -34,6 +34,7 @@
 #include "wywalryby\wywalryby.pwn"
 #include "wypuscrybe\wypuscrybe.pwn"
 #include "sprzedajrybe\sprzedajrybe.pwn"
+#include "rybypomoc\rybypomoc.pwn"
 #include "lowienie\lowienie.pwn"
 
 
@@ -44,6 +45,7 @@ hook OnGameModeInit()
     command_wywalryby();
     command_wypuscrybe();
     command_sprzedajrybe();
+    command_rybypomoc();
     command_lowienie();
     
 }

@@ -56,8 +56,14 @@ YCMD:wypuscrybe(playerid, params[], help)
         sendTipMessage(playerid, "Wypuszczasz z³owion¹ rybê.");
         return 1;
     }
-    
+    //fetching params
+    new fishid;
+    if(sscanf(params, "d", fishid))
+    {
+        sendTipMessage(playerid, "U¿yj /wypuscrybe [id ryby] ");
+        return 1;
+    }
     
     //command body
-    return command_wypuscrybe_Impl(playerid);
+    return command_wypuscrybe_Impl(playerid, fishid);
 }
