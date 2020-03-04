@@ -1485,10 +1485,6 @@ public OnPlayerDisconnect(playerid, reason)
 		SendClientMessageToAll(-1, "debug 1");
 		OdkujKajdanki(aresztant);
 	}
-	else
-	{
-		SendClientMessageToAll(-1, "debug 3");
-	}
 
 	if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem da /q
 	{
@@ -2131,7 +2127,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					//kajdanki
 					if(Kajdanki_Uzyte[playerid] != 0) //gdy skuwaj¹cy dostanie rannego
 					{
-						SendClientMessageToAll(-1, "debug 1.2");
+						SendClientMessageToAll(-1, "debug 4");
 						OdkujKajdanki(Kajdanki_SkutyGracz[playerid]);
 					}
 
