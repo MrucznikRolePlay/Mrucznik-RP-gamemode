@@ -278,6 +278,18 @@ YCMD:wejdz(playerid, params[], help)
                     return 1;
                 }
             }
+            if  (!IsAPolicja(playerid)
+			&&  PlayerInfo[playerid][pLider] == 0 
+			&&  GetPlayerOrg(playerid) == 0)
+			{
+				SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
+				SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
+				SendClientMessage(playerid, COLOR_WHITE, "Dopiero teraz dostrzegasz czerwon¹ tabliczkê informuj¹c¹ o zakazie");
+				SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ ochroniarzowi Ibizy.");
+				SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
+				SetPVarInt(playerid, "mozeUsunacBronie", 1);
+				ResetPlayerWeapons(playerid);
+			}
             Wchodzenie(playerid);
             SetPlayerVirtualWorld(playerid, 22);
             SetPlayerPos(playerid, 417.3976, -1858.9402, -65.3905);
