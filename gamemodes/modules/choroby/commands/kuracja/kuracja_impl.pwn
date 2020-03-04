@@ -65,6 +65,8 @@ kuracja_akceptuj(playerid)
 
     //body
     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Akceptowa³eœ kuracjê %s, koszt %d$.", DiseaseData[disease][Name], cost));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Gracz %s akceptowa³ kuracjê kuracjê %s, koszt %d$.", GetNick(playerid), DiseaseData[disease][Name], cost));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "* Nie odchodŸ od gracza i wykorzystaj czas kuracji na wykonywanie akcji RP.");
 
     ZabierzKase(playerid, cost);
     DajKase(giveplayerid, commission);

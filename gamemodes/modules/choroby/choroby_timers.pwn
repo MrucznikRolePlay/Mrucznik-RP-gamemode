@@ -52,17 +52,20 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 
 timer InfectedEffectMessage[15000](playerid) 
 {
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zarazi³eœ siê jak¹œ chorob¹, lepiej idŸ do lekarza.");
 	ChatMe(playerid, "poczu³ siê chory.");
 	return 1;
 }
 
 timer CurrationCounter[1000](playerid, count)
 {
-	GameTextForPlayer(playerid, sprintf("Leczenie: ~r~%ds", count), 1000, 1);
+	new doctorid = GetPVarInt(playerid, "treatment-doctorid");
+	GameTextForPlayer(playerid, sprintf("Kuracja ~r~%ds", count), 1000, 4);
+	if(IsPlayerConnected(doctorid))
+		GameTextForPlayer(doctorid, sprintf("Kuracja ~r~%ds", count), 1000, 4);
 
 	if(count <= 0) 
 	{
-		new doctorid = GetPVarInt(playerid, "treatment-doctorid");
 		if(IsPlayerConnected(doctorid) && GetDistanceBetweenPlayers(playerid,doctorid) < 5) 
 		{	
 			AbortCurration[playerid] = 0;

@@ -107,7 +107,11 @@ new TourettWords[][] = {
     " koza",
     " chuj",
     " pierdol",
-    " nigga"
+    " nigga",
+    " nigger",
+    " frajer",
+    " hitler",
+    " kurwiszon"
 };
 
 new PlayerImmunity[MAX_PLAYERS];

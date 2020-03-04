@@ -53,8 +53,6 @@ CurePlayer(playerid, eDiseases:disease)
 
 InfectPlayer(playerid, eDiseases:disease)
 {
-	//TODO: sprawdzanie czy gracz nie jest ju¿ zara¿ony t¹ chorob¹ powoduje, ¿e dane powinny byæ zapisane na strukturze danych Set zamiast Vector
-	// Set nie dopuszcza powtarzania elementów
 	if(IsPlayerSick(playerid, disease))
 	{
 		return 0;
@@ -67,7 +65,6 @@ InfectPlayer(playerid, eDiseases:disease)
 
 InfectPlayerWithoutSaving(playerid, eDiseases:disease)
 {
-	if(IsPlayerSick(playerid, disease)) return 1;
 	VECTOR_push_back_val(VPlayerDiseases[playerid], disease);
 	ActivateDiseaseEffect(playerid, disease);
 	return 1;
