@@ -1081,10 +1081,10 @@ OdkujKajdanki(playerid)
 	if(Kajdanki_PDkuje[playerid] > 0)
 	{
 		new giveplayerid = Kajdanki_PDkuje[playerid];
-		Kajdanki_PDkuje[giveplayerid] = 0;
+		Kajdanki_PDkuje[giveplayerid] = INVALID_PLAYER_ID;
 		Kajdanki_Uzyte[giveplayerid] = 0;
 	}
-	Kajdanki_PDkuje[playerid] = 0;
+	Kajdanki_PDkuje[playerid] = INVALID_PLAYER_ID;
 	Kajdanki_Uzyte[playerid] = 0;
 }
 
@@ -3950,27 +3950,6 @@ WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Floa
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
     {
 		if(x==x2 && y==y2 && z==z2) return sendErrorMessage(playerid, "Nie mo¿na tutaj wejœæ.");
-        if (vw == 3) // Bymber Casino 55
-        {
-            if(PlayerInfo[playerid][pLevel] < 3) return sendTipMessageEx(playerid, COLOR_GRAD1, "Tylko gracze z conajmniej 3 lvl mog¹ graæ w kasynie!");
-			
-            SendClientMessage(playerid, COLOR_GREEN, "Witamy w Bymber Casino.");
-            SendClientMessage(playerid, COLOR_WHITE, "W naszym kasynie obowi¹zuj¹ nastêpuj¹ce stawki za rozpoczêcie gry:");
-            SendClientMessage(playerid, COLOR_GREEN, "Kostki - (0.5 proc. podatku) za rzut /kostka || Black Jack - 100$ za kartê /oczko");
-            SendClientMessage(playerid, COLOR_GREEN, "Ko³o fortuny - 5 000$ za obrót /kf || Ruletka - 10 000$ za zakrêcenie /ruletka");
-        }
-		
-		if(vw == 3)
-		{
-            SendClientMessage(playerid, COLOR_PANICRED, "****Piip! Piip! Piip!*****");
-            SendClientMessage(playerid, COLOR_WHITE, "Przechodz¹c przez wykrywacz metalu s³yszysz alarm.");
-            SendClientMessage(playerid, COLOR_WHITE, "Okazuje siê, ¿e do kasyna nie mozna wnosiæ broni.");
-            SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ ochronie.");
-            SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
-			
-            SetPVarInt(playerid, "mozeUsunacBronie", 1);
-            ResetPlayerWeapons(playerid); // bug?
-		}
 		//Komunikaty funkcji:
 		if(strlen(komunikat) > 0)
 		{
