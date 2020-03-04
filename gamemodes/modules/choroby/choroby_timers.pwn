@@ -58,11 +58,13 @@ timer InfectedEffectMessage[15000](playerid)
 
 timer CurrationCounter[1000](playerid, count)
 {
-	GameTextForPlayer(playerid, sprintf("Leczenie: ~r~%ds", count), 1000, 1);
+	new doctorid = GetPVarInt(playerid, "treatment-doctorid");
+	GameTextForPlayer(playerid, sprintf("Kuracja ~r~%ds", count), 1000, 4);
+	if(IsPlayerConnected(doctorid))
+		GameTextForPlayer(doctorid, sprintf("Kuracja ~r~%ds", count), 1000, 4);
 
 	if(count <= 0) 
 	{
-		new doctorid = GetPVarInt(playerid, "treatment-doctorid");
 		if(IsPlayerConnected(doctorid) && GetDistanceBetweenPlayers(playerid,doctorid) < 5) 
 		{	
 			AbortCurration[playerid] = 0;
