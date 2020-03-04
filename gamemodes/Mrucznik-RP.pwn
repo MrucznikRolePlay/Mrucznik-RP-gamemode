@@ -1481,8 +1481,9 @@ public OnPlayerDisconnect(playerid, reason)
 	}
 	else if(Kajdanki_Uzyte[playerid] != 0) //gdy skuwaj¹cy da /q
 	{
+		new aresztant = Kajdanki_SkutyGracz[playerid];
 		SendClientMessageToAll(-1, "debug 1");
-		OdkujKajdanki(Kajdanki_SkutyGracz[playerid]);
+		OdkujKajdanki(aresztant);
 	}
 	else
 	{
