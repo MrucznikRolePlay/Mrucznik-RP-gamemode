@@ -567,7 +567,19 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 				}
 				else
 				{
-					//to do others
+					new Float:HP;
+					GetPlayerHealth(hitid, HP);
+					if(weaponid == 22 || weaponid == 23 || weaponid == 24 || weaponid == 25 || 
+					weaponid == 27 || weaponid == 29 || weaponid == 30 || weaponid == 31 || weaponid == 33 || weaponid == 34)
+					{
+						amount = amount / 2;
+						SetPlayerHealth(hitid, HP-amount); //weapons
+						return 0;
+					}
+					else
+					{
+						//others weapons
+					}
 				}
 			}
 		}
