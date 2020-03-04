@@ -193,6 +193,24 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 }
 
 //-----------------<[ Funkcje: ]>-------------------
+stock GetNickEx(playerid, withmask = false)
+{
+	new nick[MAX_PLAYER_NAME];
+ 	GetPlayerName(playerid, nick, sizeof(nick));
+	if(withmask)
+	{
+		return nick;
+	}
+	else
+	{
+		new nick2[24];
+		if(GetPVarString(playerid, "maska_nick", nick2, 24))
+		{
+			return nick2;
+		}
+	}
+	return nick;
+}
 LoadConfig()
 {
 	new File:configFile;
