@@ -38,7 +38,11 @@ YCMD:a(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj (/a)dmin [admin chat]");
 			return 1;
 		}
-		if(PlayerInfo[playerid][pAdmin] >= 1) 
+		if(IsAScripter(playerid))
+		{
+			format(string, sizeof(string), "Skrypter %s - %s", GetNickEx(playerid), params);
+		}
+		else if(PlayerInfo[playerid][pAdmin] >= 1) 
 		{
 			format(string, sizeof(string), "Admin [%d] %s - %s", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 		}

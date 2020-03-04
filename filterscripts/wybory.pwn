@@ -49,7 +49,7 @@
 #define WYBORY_GLOSY_PLIK "wybory_glosy.ini"
 
 //-----------------<[ Zmienne: ]>-------------------
-new nickkk;
+new kandydaci[MAX_CANDIDATES][MAX_PLAYER_NAME];
 new wyniki[MAX_CANDIDATES];
 new iloscKandydatow;
 new dzienWyborow, godzinaPoczatek, godzinaKoniec;
@@ -62,7 +62,7 @@ new PlayerText:akceptujTxd[MAX_PLAYERS];
 new wyborKandydata[MAX_PLAYERS];
 new votingInProgress[MAX_PLAYERS];
 
-new nickkk;
+new zaglosowaliNicki[1000][MAX_PLAYER_NAME];
 new zaglosowali;
 
 new pickup;
@@ -149,7 +149,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 		dini_IntSet(WYBORY_WYNIKI_PLIK, kandydaci[wyborKandydata[playerid]], wyniki[wyborKandydata[playerid]]);
 		
 		new nick[MAX_PLAYER_NAME];
-		nick = GetNick(playerid);
+		nick = GetNickEx(playerid);
 		strcat(zaglosowaliNicki[zaglosowali], nick, sizeof(nick));
 		zaglosowali++;
 		
@@ -434,7 +434,7 @@ CzyZaglosowal(playerid)
 {
 	for(new i; i<zaglosowali; i++)
 	{	
-		if(strcmp(zaglosowaliNicki[i], GetNick(playerid), true) == 0)
+		if(strcmp(zaglosowaliNicki[i], GetNickEx(playerid), true) == 0)
 		{	
 			return true;
 		}

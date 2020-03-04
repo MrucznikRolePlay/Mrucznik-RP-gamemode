@@ -47,7 +47,7 @@ YCMD:kajdanki(playerid, params[], help)
                 return 1;
             }
 
-            if(uzytekajdanki[playerid] != 1)
+            if(Kajdanki_Uzyte[playerid] != 1)
             {
                 if(IsACop(playerid))
                 {
@@ -68,7 +68,7 @@ YCMD:kajdanki(playerid, params[], help)
                 {
                     if(GetPlayerState(playerid) == 1 && GetPlayerState(giveplayerid) == 1)
                     {
-                        if(zakuty[giveplayerid] == 0)
+                        if(Kajdanki_JestemZakuty[giveplayerid] == 0)
                         {
                             new string[128];
                             if(PlayerInfo[giveplayerid][pBW] >= 1 || PlayerInfo[giveplayerid][pInjury] >= 1)
@@ -100,8 +100,8 @@ YCMD:kajdanki(playerid, params[], help)
                                 format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", GetNick(playerid),GetNick(giveplayerid));
                                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                 ShowPlayerDialogEx(giveplayerid, 98, DIALOG_STYLE_MSGBOX, "Aresztowanie", "Policjant chce za³o¿yæ ci kajdanki, jeœli osacza ciê niedu¿a liczba policjantów mo¿esz spróbowaæ siê wyrwaæ\nJednak pamiêtaj jeœli siê wyrwiesz i jesteœ uzbrojony policjant ma prawo ciê zabiæ. \nMo¿esz tak¿e dobrowolnie poddaæ siê policjantom.", "Poddaj siê", "Wyrwij siê");
-                                PDkuje[giveplayerid] = playerid;
-                                //uzytekajdanki[giveplayerid] = 1;
+                                Kajdanki_Policjant[giveplayerid] = playerid;
+                                //Kajdanki_Uzyte[giveplayerid] = 1;
                                 SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
                             }
                         }

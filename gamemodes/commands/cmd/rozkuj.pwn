@@ -51,7 +51,7 @@ YCMD:rozkuj(playerid, params[], help)
 				    if (ProxDetectorS(8.0, playerid, giveplayerid))
 					{
 					    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz odkuæ samego siebie!"); return 1; }
-						if(PlayerCuffed[giveplayerid] == 2 || zakuty[giveplayerid] >= 1)
+						if(PlayerCuffed[giveplayerid] == 2 || Kajdanki_JestemZakuty[giveplayerid] >= 1)
 						{
 							GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 							GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -62,12 +62,12 @@ YCMD:rozkuj(playerid, params[], help)
 							GameTextForPlayer(giveplayerid, "~g~Rozkuty", 2500, 3);
 							TogglePlayerControllable(giveplayerid, 1);
 							PlayerCuffed[giveplayerid] = 0;
-							zakuty[giveplayerid] = 0;
-							SkutyGracz[giveplayerid] = 0;
-                            uzytekajdanki[giveplayerid] = 0;
-                            uzytekajdanki[playerid] = 0;
-							PDkuje[playerid] = 0;
-							PDkuje[giveplayerid]=0;
+							Kajdanki_JestemZakuty[giveplayerid] = 0;
+							Kajdanki_Aresztant[giveplayerid] = 0;
+                            Kajdanki_Uzyte[giveplayerid] = 0;
+                            Kajdanki_Uzyte[playerid] = 0;
+							Kajdanki_Policjant[playerid] = 0;
+							Kajdanki_Policjant[giveplayerid]=0;
 							PlayerInfo[giveplayerid][pMuted] = 0;
                             ClearAnimations(giveplayerid);
         					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);

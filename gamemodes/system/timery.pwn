@@ -2378,9 +2378,9 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if(zakuty[i] == 1)
+		if(Kajdanki_JestemZakuty[i] == 1)
 		{
-			cop = PDkuje[i];
+			cop = Kajdanki_Policjant[i];
 			if(IsPlayerConnected(cop))
 			{
 				if(IsACop(cop) || IsABOR(cop))
@@ -3266,9 +3266,9 @@ public CJSkinCheck()
 {
 	foreach(new j : Player)
 	{
-		if(gPlayerLogged[j] == 1 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0)
+		if(gPlayerLogged[j] > 0 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0)
 		{
-			PlayerInfo[j][pSkin] = 299;
+			//PlayerInfo[j][pSkin] = 299; na potem
 			SetPlayerSkinEx(j, 299);
 		}
 	}

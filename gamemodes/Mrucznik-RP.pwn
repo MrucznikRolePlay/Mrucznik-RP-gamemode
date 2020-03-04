@@ -1472,13 +1472,13 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	//kajdanki
-	if(PDkuje[playerid] != INVALID_PLAYER_ID) // gdy skuty da /q
+	if(Kajdanki_Policjant[playerid] != INVALID_PLAYER_ID) // gdy skuty da /q
 	{
 		OdkujKajdanki(playerid);
 	}
-	else if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy da /q
+	else if(Kajdanki_Aresztant[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy da /q
 	{
-		OdkujKajdanki(SkutyGracz[playerid]);
+		OdkujKajdanki(Kajdanki_Aresztant[playerid]);
 	}
 
 	if(Worek_MamWorek[playerid] != INVALID_PLAYER_ID) // gdy osoba z workiem da /q
@@ -1513,8 +1513,8 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
-    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || zakuty[playerid] >= 1 || poscig[playerid] == 1)
+    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || Kajdanki_JestemZakuty[playerid] >= 1 || poscig[playerid] == 1)
+    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || Kajdanki_JestemZakuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
         PlayerInfo[playerid][pJailed] = 10;
         new string[130];
@@ -1527,7 +1527,7 @@ public OnPlayerDisconnect(playerid, reason)
         {
             strcat(powod, "kajdanki w aucie, ");
         }
-        if(zakuty[playerid] >= 1)
+        if(Kajdanki_JestemZakuty[playerid] >= 1)
         {
             strcat(powod, "kajdanki pieszo, ");
         }
@@ -1776,7 +1776,7 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
-	if(zakuty[playerid] > 0)
+	if(Kajdanki_JestemZakuty[playerid] > 0)
 	{
 		TogglePlayerControllable(playerid, 0);
 		GameTextForPlayer(playerid, "~r~Nie atakuj", 3500, 1);
@@ -1838,7 +1838,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 
 	new Float:armour;
 	GetPlayerArmour(playerid, armour);
-	if(armour <= 20.0)
+	if(armour <= 40.0)
 	{
 		switch(bodypart)
 		{
@@ -2120,9 +2120,9 @@ public OnPlayerDeath(playerid, killerid, reason)
 				else
 				{
 					//kajdanki
-					if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy dostanie rannego
+					if(Kajdanki_Aresztant[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy dostanie rannego
 					{
-						OdkujKajdanki(SkutyGracz[playerid]);
+						OdkujKajdanki(Kajdanki_Aresztant[playerid]);
 					}
 
 					if(IsPlayerConnected(killerid))
