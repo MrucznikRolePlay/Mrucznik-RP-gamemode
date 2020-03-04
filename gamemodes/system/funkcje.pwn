@@ -12688,11 +12688,11 @@ public DeathAdminWarning(playerid, killerid, reason)
 		new bwreason[24];
 		if(PlayerInfo[playerid][pInjury] > 0) // jesli jest ranny
 		{
-			format(bwreason, sizeof(bwreason), "dobi³");
+			format(bwreason, sizeof(bwreason), "dobi³ (szpital)");
 		}
 		else //jesli nie jest ranny
 		{
-			format(bwreason, sizeof(bwreason), "zrani³");
+			format(bwreason, sizeof(bwreason), "zrani³ (ranny)");
 		}
 
 		if(GetPlayerState(killerid) == PLAYER_STATE_DRIVER)
