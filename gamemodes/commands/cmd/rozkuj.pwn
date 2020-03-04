@@ -51,9 +51,9 @@ YCMD:rozkuj(playerid, params[], help)
 					    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz odkuæ samego siebie!"); return 1; }
 						if(PlayerCuffed[giveplayerid] == 2 || Kajdanki_JestemSkuty[giveplayerid] >= 1)
 						{
-						    format(string, sizeof(string), "* Zosta?e? rozkuty przez %s.", GetNick(playerid));
+						    format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", GetNick(playerid));
 							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string), "* Rozku?e? %s.", GetNick(giveplayerid));
+							format(string, sizeof(string), "* Rozku³eœ %s.", GetNick(giveplayerid));
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							GameTextForPlayer(giveplayerid, "~g~Rozkuty", 2500, 3);
 							TogglePlayerControllable(giveplayerid, 1);

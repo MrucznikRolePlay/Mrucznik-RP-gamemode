@@ -1474,16 +1474,22 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	//kajdanki
-	if(Kajdanki_PDkuje[playerid] != INVALID_PLAYER_ID) // gdy skuty da /q
+	if(Kajdanki_JestemSkuty[playerid] != 0) // gdy skuty da /q
 	{
+		SendClientMessageToAll(-1, "debug 2");
 		OdkujKajdanki(playerid);
 	}
-	else if(Kajdanki_SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy da /q
+	else if(Kajdanki_Uzyte[playerid] != 0) //gdy skuwaj¹cy da /q
 	{
+		SendClientMessageToAll(-1, "debug 1");
 		OdkujKajdanki(Kajdanki_SkutyGracz[playerid]);
 	}
+	else
+	{
+		SendClientMessageToAll(-1, "debug 3");
+	}
 
-	if(Worek_MamWorek[playerid] != INVALID_PLAYER_ID) // gdy osoba z workiem da /q
+	if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem da /q
 	{
 		Worek_MamWorek[playerid] = 0;
 		Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
@@ -1491,7 +1497,7 @@ public OnPlayerDisconnect(playerid, reason)
 		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
-	else if(Worek_Uzyty[playerid] != INVALID_PLAYER_ID) // gdy osoba nadajaca worek da /q
+	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek da /q
 	{
 		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
 		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
