@@ -299,8 +299,8 @@ YCMD:wejdz(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_WHITE, "Dopiero teraz dostrzegasz czerwon¹ tabliczkê informuj¹c¹ o zakazie");
                     SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ ochroniarzowi Ibizy.");
                     SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
-                    SetTimerEx("AntySB", 5000, 0, "d", giveplayerid);
-				    AntySpawnBroni[giveplayerid] = 5;
+                    SetTimerEx("AntySB", 5000, 0, "d", playerid);
+				    AntySpawnBroni[playerid] = 5;
                     SetPVarInt(playerid, "mozeUsunacBronie", 1);
                     ResetPlayerWeapons(playerid);
                 }
