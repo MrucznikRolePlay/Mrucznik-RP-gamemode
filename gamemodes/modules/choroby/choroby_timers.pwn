@@ -52,6 +52,7 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 
 timer InfectedEffectMessage[15000](playerid) 
 {
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zarazi³eœ siê jak¹œ chorob¹, lepiej idŸ do lekarza.");
 	ChatMe(playerid, "poczu³ siê chory.");
 	return 1;
 }
