@@ -100,8 +100,16 @@ YCMD:paka(playerid, params[], help)
 						format(string, sizeof(string), "<< Funkcjonariusz %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
 						OOCNews(COLOR_LIGHTRED, string);
 					}
-					if(Kajdanki_KogoSkuwam[playerid] == suspect) UnCuffedAction(playerid, suspect);
-	    			SetPlayerInterior(suspect, 10);
+					zakuty[suspect] = 0;//Kajdany
+					uzytekajdanki[suspect] = 0;
+					PDkuje[playerid] = 0;
+					uzytekajdanki[playerid] = 0;
+					ClearAnimations(suspect);
+					SetPlayerSpecialAction(suspect,SPECIAL_ACTION_NONE);
+					RemovePlayerAttachedObject(suspect, 0);
+					PDkuje[suspect] = 0;
+									
+					SetPlayerInterior(suspect, 10);
 				    new losuj= random(sizeof(Cela));
 					SetPlayerPos(suspect, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 					PlayerInfo[suspect][pJailTime] = time * 60;

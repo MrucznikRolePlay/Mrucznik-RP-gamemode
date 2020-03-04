@@ -69,7 +69,7 @@ YCMD:poddajsie(playerid, params[], help)
 							        poddaje[playa] = 1;
 									lowcap[playa] = playerid;
 									
-									format(string, sizeof(string), "%s [%d] zaoferowa³ poddanie siê dla %s [%d]", GetNick(playerid, true), playerid, GetNick(playa, true), playa);
+									format(string, sizeof(string), "%s [%d] zaoferowa³ poddanie siê dla %s [%d]", GetNick(playerid), playerid, GetNick(playa), playa);
 									SendMessageToAdmin(string, COLOR_P@);
 								}
 								else

@@ -67,10 +67,10 @@ YCMD:wypusc(playerid, params[], help)
 			{
 				if(ProxDetectorS(10.5, playerid, giveplayerid))
 				{
-					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj uwolnienie]", GetNick(playerid, true), money);
+					format(string, sizeof(string), "Prawnik %s proponuje Ci uwolnienie z wiêzienia za %d$ {AC3737}[Aby akceptowaæ wpisz /akceptuj uwolnienie]", GetNick(playerid), money);
 					SendClientMessage(giveplayerid, COLOR_BLUE, string);
 					
-					format(string, sizeof(string), "Zaoferowa³eœ uwolnienie %s z wiêzienia za kwotê %d$ - oczekuj na akceptacjê!", GetNick(giveplayerid, true), money); 
+					format(string, sizeof(string), "Zaoferowa³eœ uwolnienie %s z wiêzienia za kwotê %d$ - oczekuj na akceptacjê!", GetNick(giveplayerid), money); 
 					SendClientMessage(playerid, COLOR_BLUE, string);
 					
 					LawyerOffer[giveplayerid] = 1;

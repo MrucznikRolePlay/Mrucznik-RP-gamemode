@@ -36,7 +36,7 @@ YCMD:sprawdzgwiazdki(playerid, params[], help)
 		return 1;
 	}
 	new string[256];
-	format(string, sizeof(string), "%s mówi: %s", GetNick(playerid, true), params);
+	format(string, sizeof(string), "%s mówi: %s", GetNick(playerid), params);
 	SendClientMessage(playerid, -1, CheckStars(string));
 	return 1;
 }

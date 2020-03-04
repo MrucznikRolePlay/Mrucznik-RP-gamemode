@@ -567,18 +567,64 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 				}
 				else
 				{
-					new Float:HP;
+					new Float:HP, Float:amount;
 					GetPlayerHealth(hitid, HP);
 					if(weaponid == 22 || weaponid == 23 || weaponid == 24 || weaponid == 25 || 
-					weaponid == 27 || weaponid == 29 || weaponid == 30 || weaponid == 31 || weaponid == 33 || weaponid == 34)
+					weaponid == 26 || weaponid == 27 || weaponid == 28 || weaponid == 29 || weaponid == 30 || weaponid == 31 || 
+					weaponid == 32 || weaponid == 33 || weaponid == 34 || weaponid == 38)
 					{
+						switch(weaponid)
+						{
+							case 22: //colt
+							{
+								amount = 8.25;
+							}
+							case 23: //silenced
+							{
+								amount = 13.2;
+							}
+							case 24: //DE
+							{
+								amount = 46.2;
+							}
+							case 25, 26, 27: //shotguny
+							{
+								amount = 30.0;
+							}
+							case 28, 32: //uzi i tec
+							{
+								amount = 6.59;
+							}
+							case 29: //mp5
+							{
+								amount = 8.25;
+							}
+							case 30, 31: //ak,m4
+							{
+								amount = 9.9;
+							}
+							case 33: //rifle
+							{
+								amount = 24.8;
+							}
+							case 34: //sniper
+							{
+								amount = 41.3;
+							}
+							case 38: //minigun
+							{
+								amount = 46.2;
+							}
+						}
+
 						amount = amount / 2;
-						SetPlayerHealth(hitid, HP-amount); //weapons
+						SetPlayerHealth(hitid, HP-amount); //weapon damage per bullet
 						return 0;
 					}
 					else
 					{
 						//others weapons
+						return 1;
 					}
 				}
 			}
@@ -1274,7 +1320,7 @@ public OnPlayerDisconnect(playerid, reason)
 	if(GetPVarInt(playerid, "DostalDM2") == 1)
 	{
 		new string[128];
-		format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [da³ /q podczas AJ DM2]", GetNick(playerid, true));
+		format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [da³ /q podczas AJ DM2]", GetNickEx(playerid));
 		SendAdminMessage(COLOR_PANICRED, string);
 		ResetPlayerWeapons(playerid);
 		UsunBron(playerid);
@@ -1426,14 +1472,13 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	//kajdanki
-	if(Kajdanki_JestemZakuty[playerid]) // gdy skuty da q
+	if(PDkuje[playerid] != INVALID_PLAYER_ID) // gdy skuty da /q
 	{
-		UnCuffedAction(Kajdanki_KtoSkuwa[playerid], playerid);
+		OdkujKajdanki(playerid);
 	}
-
-	if(Kajdanki_Uzyte[playerid]) // gdy skuwaj¹cy da /q
+	else if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy da /q
 	{
-		UnCuffedAction(playerid, Kajdanki_KogoSkuwam[playerid]);
+		OdkujKajdanki(SkutyGracz[playerid]);
 	}
 
 	if(Worek_MamWorek[playerid] != INVALID_PLAYER_ID) // gdy osoba z workiem da /q
@@ -1444,8 +1489,7 @@ public OnPlayerDisconnect(playerid, reason)
 		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
-
-	if(Worek_Uzyty[playerid] != INVALID_PLAYER_ID) // gdy osoba nadajaca worek da /q
+	else if(Worek_Uzyty[playerid] != INVALID_PLAYER_ID) // gdy osoba nadajaca worek da /q
 	{
 		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
 		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
@@ -1469,8 +1513,8 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || Kajdanki_JestemZakuty[playerid] >= 1 || poscig[playerid] == 1)
-    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || Kajdanki_JestemZakuty[playerid] >= 1 || poscig[playerid] == 1)
+    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || zakuty[playerid] >= 1 || poscig[playerid] == 1)
+    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || zakuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
         PlayerInfo[playerid][pJailed] = 10;
         new string[130];
@@ -1483,7 +1527,7 @@ public OnPlayerDisconnect(playerid, reason)
         {
             strcat(powod, "kajdanki w aucie, ");
         }
-        if(Kajdanki_JestemZakuty[playerid] >= 1)
+        if(zakuty[playerid] >= 1)
         {
             strcat(powod, "kajdanki pieszo, ");
         }
@@ -1498,7 +1542,7 @@ public OnPlayerDisconnect(playerid, reason)
             case 1: codal = "/q";
             case 2: codal = "kick/ban";
         }
-        format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNick(playerid, true), powod, codal);
+        format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNickEx(playerid), powod, codal);
         SendAdminMessage(COLOR_P@, string);
 	}
 
@@ -1732,7 +1776,7 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
-	if(Kajdanki_JestemZakuty[playerid] > 0)
+	if(zakuty[playerid] > 0)
 	{
 		TogglePlayerControllable(playerid, 0);
 		GameTextForPlayer(playerid, "~r~Nie atakuj", 3500, 1);
@@ -1789,18 +1833,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	}
 	else
 	{
-		new Float:HP;
-		GetPlayerHealth(playerid, HP);
-		if(weaponid == 22 || weaponid == 23 || weaponid == 24 || weaponid == 25 || 
-		weaponid == 27 || weaponid == 29 || weaponid == 30 || weaponid == 31 || weaponid == 33 || weaponid == 34)
-		{
-			amount = amount / 2;
-			SetPlayerHealth(playerid, HP-amount); //weapons
-		}
-		else
-		{
-			SetPlayerHealth(playerid, HP-amount);//other
-		}
+		// check: onplayerweaponshot
 	}
 
 	new Float:armour;
@@ -2087,10 +2120,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 				else
 				{
 					//kajdanki
-					if(Kajdanki_Uzyte[playerid]) //gdy skuwaj¹cy zginie
+					if(SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy dostanie rannego
 					{
-						UnCuffedAction(playerid, Kajdanki_KogoSkuwam[playerid]);
+						OdkujKajdanki(SkutyGracz[playerid]);
 					}
+
 					if(IsPlayerConnected(killerid))
 					{
 						if(giveWL)
@@ -4702,7 +4736,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 		        }
 		        else
 		        {
-		        	format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s wygra³ wyœcig %s", GetNick(playerid, true), Wyscig[Scigamy][wNazwa]);
+		        	format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s wygra³ wyœcig %s", GetNickEx(playerid), Wyscig[Scigamy][wNazwa]);
 		        	foreach(new i : Player)
 		        	{
 		        	    if(ScigaSie[i] == Scigamy && i != playerid)
@@ -4719,7 +4753,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 	            if(Ukonczyl >= IloscZawodnikow)
 		        {
 		            SendClientMessage(playerid, COLOR_LIGHTGREEN, "Ukoñczy³eœ wyœcig jako ostatni - cienias!");
-					format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s ukoñczy³ wyœcig jako ostatni !", GetNick(playerid, true));
+					format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s ukoñczy³ wyœcig jako ostatni !", GetNickEx(playerid));
 					WyscigMessage(COLOR_YELLOW, string);
 		            KoniecWyscigu(-2);
 		        }
@@ -4727,7 +4761,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 		        {
 		            format(string, sizeof(string), "Ukoñczy³eœ wyœcig jako %d !", Ukonczyl);
 					SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
-					format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s ukoñczy³ wyœcig jako %d !", GetNick(playerid, true), Ukonczyl);
+					format(string, sizeof(string), "Komunikat wyœcigu: {FFFFFF}%s ukoñczy³ wyœcig jako %d !", GetNickEx(playerid), Ukonczyl);
 					WyscigMessage(COLOR_YELLOW, string);
 	            	Ukonczyl++;
 		        }
@@ -4920,7 +4954,7 @@ public OnRconLoginAttempt(ip[], password[], success)
 			if(!dini_Exists(name))
 			{
 				new str[128];
-				format(str, 128, "RCON: U¿ytkownik %s (%d) próbowa³ siê zalogowaæ na rcona bez wymaganych uprawnieñ!", GetNick(player, true), player);
+				format(str, 128, "RCON: U¿ytkownik %s (%d) próbowa³ siê zalogowaæ na rcona bez wymaganych uprawnieñ!", GetNickEx(player), player);
 				SendAdminMessage(COLOR_PANICRED, str);
 				KickEx(player);
 				print(str);
@@ -5058,7 +5092,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
 				{
 					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
-					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNick(playerid, true), GetPlayerVehicleID(playerid));
+					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
 					SendCommandLogMessage(string);
 					Log(warningLog, INFO, string);
 					Log(punishmentLog, INFO, string);
@@ -5677,7 +5711,7 @@ public OnPlayerUpdate(playerid)
                     GetPlayerPos(playerid, czitX, czitY, czitZ);
                     if(GetPVarInt(playerid, "ACmessaged") == 0)
                     {
-                        format(acstr, 128, "%s mo¿e lagowaæ autami i dosta³ kicka U¿yj /gotoczit aby to sprawdziæ!", GetNick(playerid, true));
+                        format(acstr, 128, "%s mo¿e lagowaæ autami i dosta³ kicka U¿yj /gotoczit aby to sprawdziæ!", GetNickEx(playerid));
                         SendAdminMessage(COLOR_P@, acstr);
                         SetPVarInt(playerid, "ACmessaged", 1);
                     }
@@ -7496,7 +7530,7 @@ public OnPlayerText(playerid, text[])
 				}
 
 				strmid(Zgloszenie[id][zgloszenie_kiedy], datapowod, 0, sizeof(datapowod), 36);
-				format(Zgloszenie[id][zgloszenie_nadal], MAX_PLAYER_NAME, "%s", GetNick(playerid, true));
+				format(Zgloszenie[id][zgloszenie_nadal], MAX_PLAYER_NAME, "%s", GetNick(playerid));
 				format(Zgloszenie[id][zgloszenie_lokacja], MAX_ZONE_NAME, "%s", pZone);
 				strmid(Zgloszenie[id][zgloszenie_tresc], message, 0, strlen(message) + 9, 128);
 				Zgloszenie[id][zgloszenie_status] = 0;

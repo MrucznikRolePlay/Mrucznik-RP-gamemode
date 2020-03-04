@@ -92,7 +92,14 @@ YCMD:aresztuj(playerid, params[], help)
 									WantLawyer[playa] = 1;
 									PlayerInfo[playa][pArrested] += 1;
 									/*kajdanki*/
-									if(Kajdanki_Uzyte[playa]) UnCuffedAction(playerid, playa);
+									zakuty[playa] = 0;//Kajdany
+                                    uzytekajdanki[playa] = 0;
+                                    PDkuje[playerid] = 0;
+                                    uzytekajdanki[playerid] = 0;
+									ClearAnimations(playa);
+									SetPlayerSpecialAction(playa,SPECIAL_ACTION_NONE);
+									RemovePlayerAttachedObject(playa, 0);
+									PDkuje[playa] = 0;
 									Wchodzenie(playa);
 									SetPlayerVirtualWorld(playa, 1);
 								    new losuj= random(sizeof(Cela));
@@ -132,7 +139,11 @@ YCMD:aresztuj(playerid, params[], help)
 											SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 											format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
 											SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-											if(Kajdanki_Uzyte[giveplayerid]) UnCuffedAction(playerid, giveplayerid);
+											zakuty[playa] = 0;//Kajdany
+											uzytekajdanki[playa] = 0;
+											PDkuje[playerid] = 0;
+											uzytekajdanki[playerid] = 0;
+											SkutyGracz[playa] = 0;
 											JailDeMorgan(giveplayerid);
 											UsunBron(playa);//usun bron
 											SetPlayerSpawnWeapon(playa);

@@ -56,7 +56,7 @@ YCMD:setpogoda(playerid, params[], help)
 
 		SetPlayerWeatherEx(giveplayerid, weather);
 		new string[128];
-		format(string, sizeof(string), "Admin %s zmieni³ pogodê dla %s na %d", GetNickEx(playerid), GetNick(giveplayerid, true), weather); 
+		format(string, sizeof(string), "Admin %s zmieni³ pogodê dla %s na %d", GetNickEx(playerid), GetNick(giveplayerid), weather); 
 		SendMessageToAdmin(string, COLOR_P@);
 		format(string, sizeof(string), "Administrator %s zmieni³ Ci pogodê na %d", GetNickEx(playerid), weather);
 		sendTipMessage(giveplayerid, string); 

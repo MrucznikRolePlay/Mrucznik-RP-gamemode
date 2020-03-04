@@ -72,7 +72,7 @@ YCMD:noa(playerid, params[], help)
 		sendTipMessageEx(playerid, COLOR_WHITE, "{C0C0C0}Zostajesz ukarany kar¹ Anty-Spam na {AC3737}15 minut");
 		komunikatTime[playerid] = SetTimerEx("KomunikatCzas", 60000, true, "i", playerid);		
 		PlayerInfo[playerid][pBlokadaPisaniaFrakcjaCzas] = 15;
-		format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNick(playerid, true));
+		format(string, sizeof(string), "[ANTY_SPAM] %s otrzyma³ blokadê na 15 minut za wys³anie 2x tego samego komunikatu!", GetNickEx(playerid));
 		SendAdminMessage(COLOR_BLUE, string);
 	}
 	else

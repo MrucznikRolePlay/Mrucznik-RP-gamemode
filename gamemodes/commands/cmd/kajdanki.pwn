@@ -47,7 +47,7 @@ YCMD:kajdanki(playerid, params[], help)
                 return 1;
             }
 
-            if(Kajdanki_Uzyte[playerid] != 1)
+            if(uzytekajdanki[playerid] != 1)
             {
                 if(IsACop(playerid))
                 {
@@ -68,15 +68,15 @@ YCMD:kajdanki(playerid, params[], help)
                 {
                     if(GetPlayerState(playerid) == 1 && GetPlayerState(giveplayerid) == 1)
                     {
-                        if(Kajdanki_JestemZakuty[giveplayerid] == 0)
+                        if(zakuty[giveplayerid] == 0)
                         {
                             new string[128];
                             if(PlayerInfo[giveplayerid][pBW] >= 1 || PlayerInfo[giveplayerid][pInjury] >= 1)
                             {
                                 //Wiadomoœci
-                                format(string, sizeof(string), "* %s docisn¹³ do ziemi nieprzytomnego %s i sku³ go.", GetNick(playerid, true), GetNick(giveplayerid, true));
+                                format(string, sizeof(string), "* %s docisn¹³ do ziemi nieprzytomnego %s i sku³ go.", GetNick(playerid), GetNick(giveplayerid));
                                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                format(string, sizeof(string), "Dziêki szybkiej interwencji uda³o Ci siê skuæ %s.", GetNick(giveplayerid, true));
+                                format(string, sizeof(string), "Dziêki szybkiej interwencji uda³o Ci siê skuæ %s.", GetNick(giveplayerid));
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 sendTipMessageEx(giveplayerid, COLOR_BLUE, "Jesteœ nieprzytomny - policjant sku³ ciê bez wiêkszego wysi³ku.");
 
@@ -86,9 +86,9 @@ YCMD:kajdanki(playerid, params[], help)
                             else if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
                             {
                                 //Wiadomoœci
-                                format(string, sizeof(string), "* %s dociska do ziemi %s, a nastêpnie zakuwa go w kajdanki.", GetNick(playerid, true), GetNick(giveplayerid, true));
+                                format(string, sizeof(string), "* %s dociska do ziemi %s, a nastêpnie zakuwa go w kajdanki.", GetNick(playerid), GetNick(giveplayerid));
                                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                format(string, sizeof(string), "Sku³eœ %s.", GetNick(giveplayerid, true));
+                                format(string, sizeof(string), "Sku³eœ %s.", GetNick(giveplayerid));
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 sendTipMessageEx(giveplayerid, COLOR_BLUE, "Le¿a³eœ na ziemi - policjant sku³ ciê bez wiêkszego wysi³ku.");
 
@@ -97,22 +97,19 @@ YCMD:kajdanki(playerid, params[], help)
                             }
                             else
                             {
-                                format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", GetNick(playerid, true),GetNick(giveplayerid, true));
+                                format(string, sizeof(string), "* %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", GetNick(playerid),GetNick(giveplayerid));
                                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                 ShowPlayerDialogEx(giveplayerid, 98, DIALOG_STYLE_MSGBOX, "Aresztowanie", "Policjant chce za³o¿yæ ci kajdanki, jeœli osacza ciê niedu¿a liczba policjantów mo¿esz spróbowaæ siê wyrwaæ\nJednak pamiêtaj jeœli siê wyrwiesz i jesteœ uzbrojony policjant ma prawo ciê zabiæ. \nMo¿esz tak¿e dobrowolnie poddaæ siê policjantom.", "Poddaj siê", "Wyrwij siê");
-                                Kajdanki_KtoSkuwa[giveplayerid] = playerid;
-                                //Kajdanki_Uzyte[giveplayerid] = 1;
+                                PDkuje[giveplayerid] = playerid;
+                                //uzytekajdanki[giveplayerid] = 1;
                                 SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
                             }
                         }
                         else
                         {
-                            new string[128];
-                            format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", GetNick(playerid));
-                            SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string), "* Rozku³eœ %s.", GetNick(giveplayerid));
-
-                            UnCuffedAction(playerid, giveplayerid);
+                            new str[32];
+                            valstr(str, giveplayerid);
+                            RunCommand(playerid, "/rozkuj",  str);
                         }
                     } else
                     {
@@ -124,15 +121,9 @@ YCMD:kajdanki(playerid, params[], help)
                 }
             } else
             {
-                if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
-                {
-                    UnCuffedAction(playerid, giveplayerid);
-                }
-                else
-                {
-                    sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza którego sku³eœ.");
-                }
-                return 1;
+                new str[32];
+                valstr(str, giveplayerid);
+                RunCommand(playerid, "/rozkuj",  str);
             }
         } else
         {

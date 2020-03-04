@@ -54,7 +54,7 @@ command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost)
         if(kaska[giveplayerid] >= valueCost)
         {
             format(string, sizeof(string), "Wys³a³eœ ofertê do %s odnoœnie kupna biznesu [ID %d] za %d (-%d podatku)", 
-                GetNick(giveplayerid, true), 
+                GetNickEx(giveplayerid), 
                 businessID, 
                 valueCost,
                 valueCost/12
@@ -64,7 +64,7 @@ command_sprzedajbiznes_Impl(playerid, giveplayerid, valueCost)
             
             
             //do giveplayerid
-            format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNick(playerid, true), businessID, valueCost); 
+            format(string, sizeof(string), "Gracz %s oferuje Ci kupno biznesu [ID: %d] za kwotê %d$, wpisz /akceptuj biznes", GetNickEx(playerid), businessID, valueCost); 
             sendTipMessage(giveplayerid, string); 
             SetPVarInt(giveplayerid, "Oferujacy_ID", playerid);
             SetPVarInt(giveplayerid, "Biznes_ID", PlayerInfo[playerid][pBusinessOwner]);

@@ -553,7 +553,7 @@ hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	        format(string, sizeof(string), "%s\n ", string);
 	        if(Zgloszenie[dg_data][zgloszenie_status] == 1) {
 	            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Przyj¹³: "#HQ_COLOR_TEKST2"%s", string, Zgloszenie[dg_data][zgloszenie_przyjal]);
-	            if(!strcmp(Zgloszenie[dg_data][zgloszenie_przyjal], GetNick(playerid, true))) {
+	            if(!strcmp(Zgloszenie[dg_data][zgloszenie_przyjal], GetNick(playerid))) {
 	                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"Oznacz jako: WYKONANE", string);
 	                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"Oznacz jako: FA£SZYWE", string);    
 	                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"Oznacz jako: ANULOWANE", string);
@@ -601,7 +601,7 @@ hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	        format(string, sizeof(string), "%s\n ", string);
 	        if(ZgloszenieSasp[dg_data][zgloszenie_status] == 1) {
 	            format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_TEKST"Przyj¹³: "#HQ_COLOR_TEKST2"%s", string, ZgloszenieSasp[dg_data][zgloszenie_przyjal]);
-	            if(!strcmp(ZgloszenieSasp[dg_data][zgloszenie_przyjal], GetNick(playerid, true))) {
+	            if(!strcmp(ZgloszenieSasp[dg_data][zgloszenie_przyjal], GetNick(playerid))) {
 	                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_AKCEPTOWANE"Oznacz jako: WYKONANE", string);
 	                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ODRZUCONE"Oznacz jako: FA£SZYWE", string);    
 	                format(string, sizeof(string), "%s\n"#HQ_COLOR_STRZALKA"    »» "#HQ_COLOR_ANULOWANE"Oznacz jako: ANULOWANE", string);
@@ -633,7 +633,7 @@ hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            if(zglstatus == 0)
 	            {
 	                if(!strcmp(Zgloszenie[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na akceptowaæ!");
-	                strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+	                strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
 	                Zgloszenie[szczegol][zgloszenie_status] = 1;
 	            }
 	            else
@@ -644,7 +644,7 @@ hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            new zglstatus = Zgloszenie[szczegol][zgloszenie_status];
 	            if(zglstatus == 0) {
 	                if(!strcmp(Zgloszenie[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na odrzucaæ!");
-	                strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+	                strmid(Zgloszenie[szczegol][zgloszenie_przyjal], GetNick(playerid), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
 	                Zgloszenie[szczegol][zgloszenie_status] = 2;
 	            } else {
 	                Zgloszenie[szczegol][zgloszenie_status] = 3;
@@ -663,7 +663,7 @@ hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            if(zglstatus == 0)
 	            {
 	                if(!strcmp(ZgloszenieSasp[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na akceptowaæ!");
-	                strmid(ZgloszenieSasp[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+	                strmid(ZgloszenieSasp[szczegol][zgloszenie_przyjal], GetNick(playerid), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
 	                ZgloszenieSasp[szczegol][zgloszenie_status] = 1;
 	            }
 	            else
@@ -674,7 +674,7 @@ hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            new zglstatus = ZgloszenieSasp[szczegol][zgloszenie_status];
 	            if(zglstatus == 0) {
 	                if(!strcmp(ZgloszenieSasp[szczegol][zgloszenie_nadal], "Brak")) return sendErrorMessage(playerid, "Pustych zg³oszeñ nie mo¿na odrzucaæ!");
-	                strmid(ZgloszenieSasp[szczegol][zgloszenie_przyjal], GetNick(playerid, true), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+	                strmid(ZgloszenieSasp[szczegol][zgloszenie_przyjal], GetNick(playerid), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
 	                ZgloszenieSasp[szczegol][zgloszenie_status] = 2;
 	            } else {
 	                ZgloszenieSasp[szczegol][zgloszenie_status] = 3;

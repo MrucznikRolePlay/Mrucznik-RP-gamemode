@@ -42,9 +42,9 @@ YCMD:apteczka(playerid, params[], help)
 				if(Dom[dom][hApteczka] != 0)
 				{
 					SetPlayerHealth(playerid, 100);
-					format(string, sizeof(string), "%s wyci¹ga apteczkê domow¹, banda¿uje rany, za¿ywa mru-apap. Czuje siê lepiej.", GetNick(playerid, true));
+					format(string, sizeof(string), "%s wyci¹ga apteczkê domow¹, banda¿uje rany, za¿ywa mru-apap. Czuje siê lepiej.", GetNick(playerid));
 					ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
-					format(string, sizeof(string), "---[%s u¿y³ apteczki domowej]---", GetNick(playerid, true));
+					format(string, sizeof(string), "---[%s u¿y³ apteczki domowej]---", GetNick(playerid));
 					SendAdminMessage(COLOR_GREEN, string);
 					GameTextForPlayer(playerid, "~r~Czujesz sie lepiej ~n~ dzieki mrupap", 6000, 1);	
 					return 1;

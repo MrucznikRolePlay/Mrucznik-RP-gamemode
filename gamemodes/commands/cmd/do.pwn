@@ -45,7 +45,7 @@ YCMD:do(playerid, params[], help)
     if(strlen(params) < 78)
     {
         //format(string, sizeof(string), "* %s %s", GetNick(playerid, true), params);
-        format(string, sizeof(string), "* %s (( %s ))", params, GetNick(playerid, true));
+        format(string, sizeof(string), "* %s (( %s ))", params, GetNick(playerid));
         ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     }
     else
@@ -61,7 +61,7 @@ YCMD:do(playerid, params[], help)
             format(string, sizeof(string), "* %s [.]", params);
             ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 
-            format(string, sizeof(string), "[.] %s (( %s ))", text, GetNick(playerid, true));
+            format(string, sizeof(string), "[.] %s (( %s ))", text, GetNick(playerid));
             ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	        Log(chatLog, INFO, "%s /do: %s", GetPlayerLogName(playerid), params);
         }

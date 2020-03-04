@@ -78,11 +78,11 @@ YCMD:wywaz(playerid, params[], help)
                     if(Dom[dom][hZamek] == 0)
 					{
                         Dom[dom][hZamek] = 1;
-                        format(string, sizeof(string),"* Policjanci %s oraz %s biorπ taran policyjny i uderzajπ nim w drzwi wywaøajπc je.",GetNick(playerid, true), GetNick(giveplayerid, true));
+                        format(string, sizeof(string),"* Policjanci %s oraz %s biorπ taran policyjny i uderzajπ nim w drzwi wywaøajπc je.",GetNick(playerid), GetNick(giveplayerid));
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						format(string, sizeof(string), "* Drzwi zosta≥y wywaøone (( %s ))", GetNick(playerid, true));
+						format(string, sizeof(string), "* Drzwi zosta≥y wywaøone (( %s ))", GetNick(playerid));
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						format(string, sizeof(string), "[ALARM DOMOWY] Twoje drzwi zosta≥y wywaøone! Sprawdü to! (Podejrzany: %s)", GetNick(playerid, true));
+						format(string, sizeof(string), "[ALARM DOMOWY] Twoje drzwi zosta≥y wywaøone! Sprawdü to! (Podejrzany: %s)", GetNick(playerid));
 						sendTipMessageEx(GetPlayerIDFromName(Dom[dom][hWlasciciel]), COLOR_RED, string); 
                         return 1;
 					}

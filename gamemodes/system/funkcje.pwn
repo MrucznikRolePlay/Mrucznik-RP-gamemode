@@ -217,13 +217,13 @@ ToggleInwigilacja(playerid, adminid)
 	if(PlayerInfo[playerid][pPodPW] == 0)
 	{
 		PlayerInfo[playerid][pPodPW] = 1;
-		SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid, true), adminid, GetNick(playerid), playerid));
+		SendCommandLogMessage(sprintf("Admin %s [%d] w³¹czy³ inwigilacje dla %s [%d]", GetNickEx(adminid), adminid, GetNick(playerid), playerid));
 		Log(adminLog, INFO, "Admin %s w³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
 	}
 	else if(PlayerInfo[playerid][pPodPW] == 1)
 	{
 		PlayerInfo[playerid][pPodPW] = 0;
-		SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNick(adminid, true), adminid, GetNick(playerid), playerid));
+		SendCommandLogMessage(sprintf("Admin %s [%d] wy³¹czy³ inwigilacje dla %s [%d]", GetNickEx(adminid), adminid, GetNick(playerid), playerid));
 		Log(adminLog, INFO, "Admin %s wy³¹czy³ inwigilacje /w dla gracza %s", GetPlayerLogName(adminid), GetPlayerLogName(playerid));
 	}
 	return 1;
@@ -327,7 +327,7 @@ public OznaczCzitera(playerid)
 	if(gettime() > GetPVarInt(playerid, "lastSobMsg"))
 	{
 		SetPVarInt(playerid, "lastSobMsg", gettime() + 60);
-		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid, true), playerid);
+		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid), playerid);
 		SendAdminMessage(COLOR_PANICRED, string);
 	}
 	return 1;
@@ -1054,17 +1054,17 @@ public naczasbicie(playerid, playerid_atak){
 
 /*public UzyteKajdany(playerid,giveplayerid)
 {
-	if(Kajdanki_KtoSkuwa[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
+	if(PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
 	{
-		//Kajdanki_Uzyte[playerid] = 0;
+		//uzytekajdanki[playerid] = 0;
 		format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(giveplayerid));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
  		format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", GetNick(playerid));
 		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-		Kajdanki_JestemZakuty[playerid] = 1;
+		zakuty[playerid] = 1;
  		TogglePlayerControllable(playerid, 0);
-  		Kajdanki_Uzyte[giveplayerid] = 1;
-   		Kajdanki_KogoSkuwam[Kajdanki_KtoSkuwa[playerid]] = playerid;
+  		uzytekajdanki[giveplayerid] = 1;
+   		SkutyGracz[PDkuje[playerid]] = playerid;
 		ClearAnimations(playerid);
  		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
   		SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -1072,8 +1072,20 @@ public naczasbicie(playerid, playerid_atak){
 	return 1;
 }*/
 public UzyteKajdany(playerid){
-Kajdanki_Uzyte[playerid] = 0;
+uzytekajdanki[playerid] = 0;
 return 1;
+}
+
+OdkujKajdanki(playerid)
+{
+	if(PDkuje[playerid] > 0)
+	{
+		new giveplayerid = PDkuje[playerid];
+		PDkuje[giveplayerid] = 0;
+		uzytekajdanki[giveplayerid] = 0;
+	}
+	PDkuje[playerid] = 0;
+	uzytekajdanki[playerid] = 0;
 }
 
 public spamujewl(playerid){
@@ -1350,7 +1362,7 @@ KoniecWyscigu(playerid)
 	else if(playerid == -2)
 		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony - wszyscy dojechali do mety!", Wyscig[Scigamy][wNazwa]);
 	else
-		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony przez %s.", Wyscig[Scigamy][wNazwa], GetNick(playerid, true));
+		format(string, sizeof(string), "Komunikat wyœcigowy: {FFFFFF}Wyscig %s zakoñczony przez %s.", Wyscig[Scigamy][wNazwa], GetNickEx(playerid));
 
 	WyscigMessage(COLOR_YELLOW, string);
 
@@ -1611,18 +1623,10 @@ stock GetNickEx(playerid, withmask = false)
 	}
 	return nick;
 }
-stock GetNick(playerid, rp = false)
+stock GetNick(playerid)
 {
 	new nick[MAX_PLAYER_NAME];
  	GetPlayerName(playerid, nick, sizeof(nick));
-	new nick2[24];
-	if(GetPVarString(playerid, "maska_nick", nick2, 24))
-	{
-		return nick2;
-	}
-	if(rp) {
-		//return nickRP[playerid];
-	}
 	return nick;
 }
 stock GetIp(playerid)
@@ -2130,28 +2134,6 @@ IsAnInstructor(playerid)
 		    return 1;
 		}
 		if(leader==11)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsAMember(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==8 || member==12 || member==13 || member==14 || member==15 || member==16)
-		{
-		    return 1;
-		}
-		if(leader==5 || leader==6 || leader==8 || leader==12 || leader==13 || leader==14 || leader==15 || member==16)
-		{
-		    return 1;
-		}
-		if(GetPlayerOrg(playerid) != 0)
 		{
 		    return 1;
 		}
@@ -12529,7 +12511,7 @@ public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][pLevel] > 1)
 	{
 		new string[128];
-		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNick(playerid, true), GetNick(fakekillid, true));
+		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNickEx(playerid), GetNickEx(fakekillid));
 		SendCommandLogMessage(string);
 		Log(warningLog, INFO, string);
 		return 1;
@@ -12743,7 +12725,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 					//-------<[  Logi  ]>---------
 					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
 					{
-						format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNick(playerid, true), playerid);
+						format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
 						SendCommandLogMessage(string);
 						Log(warningLog, INFO, string);
 						SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
@@ -12808,10 +12790,10 @@ public CuffedAction(playerid, cuffedid)
 {
 	PlayerInfo[cuffedid][pBW] = 0;
 	PlayerInfo[cuffedid][pInjury] = 0;
-	Kajdanki_JestemZakuty[cuffedid] = 1;
-	Kajdanki_Uzyte[playerid] = 1;
-	Kajdanki_KtoSkuwa[cuffedid] = playerid;
-	Kajdanki_KogoSkuwam[playerid] = cuffedid;
+	zakuty[cuffedid] = 1;
+	uzytekajdanki[playerid] = 1;
+	PDkuje[cuffedid] = playerid;
+	SkutyGracz[playerid] = cuffedid;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid, SPECIAL_ACTION_CUFFED);
 	SetPlayerAttachedObject(cuffedid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -12830,10 +12812,10 @@ public UnCuffedAction(cop, cuffedid)
 	//czynnosci
 	TogglePlayerControllable(cuffedid, 1);
 	PlayerCuffed[cuffedid] = 0;
-	Kajdanki_JestemZakuty[cuffedid] = 0;
-	Kajdanki_KogoSkuwam[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_KtoSkuwa[cuffedid] = INVALID_PLAYER_ID;
-	Kajdanki_Uzyte[playerid] = 0;
+	zakuty[cuffedid] = 0;
+	SkutyGracz[playerid] = INVALID_PLAYER_ID;
+	PDkuje[cuffedid] = INVALID_PLAYER_ID;
+	uzytekajdanki[playerid] = 0;
 	PlayerInfo[cuffedid][pMuted] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
