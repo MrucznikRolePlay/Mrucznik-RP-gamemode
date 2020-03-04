@@ -30,7 +30,7 @@ eDiseases:GetDiseaseID(diseaseName[])
 {
 	for(new eDiseases:i; i<eDiseases; i++) 
 	{
-		if(strcmp(DiseaseData[i][Name], diseaseName, true) == 0) 
+		if(strcmp(DiseaseData[i][ShortName], diseaseName, true) == 0) 
 		{
 			return i;
 		}
@@ -203,7 +203,7 @@ ShowDiseaseList(playerid)
 			if(i != 0) SendClientMessage(playerid, COLOR_GREY, string);
 			format(string, sizeof(string), "Dostêpne nazwy: ");
 		}
-		strcat(string, DiseaseData[eDiseases:i][Name]);
+		strcat(string, DiseaseData[eDiseases:i][ShortName]);
 		strcat(string, " ");
 	}
 	SendClientMessage(playerid, COLOR_GREY, string);
