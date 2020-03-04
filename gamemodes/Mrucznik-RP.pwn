@@ -2130,7 +2130,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					//kajdanki
 					if(Kajdanki_Uzyte[playerid] != 0) //gdy skuwaj¹cy dostanie rannego
 					{
-						SendClientMessageToAll(-1, "debug 1");
+						SendClientMessageToAll(-1, "debug 1.2");
 						OdkujKajdanki(Kajdanki_SkutyGracz[playerid]);
 					}
 
