@@ -1078,7 +1078,7 @@ return 1;
 
 OdkujKajdanki(playerid)
 {
-	if(Kajdanki_PDkuje[playerid] > 0)
+	if(Kajdanki_PDkuje[playerid] != INVALID_PLAYER_ID)
 	{
 		new giveplayerid = Kajdanki_PDkuje[playerid];
 		Kajdanki_PDkuje[giveplayerid] = INVALID_PLAYER_ID;
