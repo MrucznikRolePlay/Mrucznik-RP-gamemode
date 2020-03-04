@@ -1084,10 +1084,12 @@ OdkujKajdanki(playerid)
 		Kajdanki_PDkuje[giveplayerid] = INVALID_PLAYER_ID;
 		Kajdanki_Uzyte[giveplayerid] = 0;
 		Kajdanki_SkutyGracz[giveplayerid] = INVALID_PLAYER_ID;
+		Kajdanki_JestemSkuty[giveplayerid] = 0;
 	}
 	Kajdanki_PDkuje[playerid] = INVALID_PLAYER_ID;
 	Kajdanki_Uzyte[playerid] = 0;
 	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
+	Kajdanki_JestemSkuty[playerid] = 0;
 }
 
 public spamujewl(playerid){
