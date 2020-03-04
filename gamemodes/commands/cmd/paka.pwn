@@ -100,14 +100,14 @@ YCMD:paka(playerid, params[], help)
 						format(string, sizeof(string), "<< Funkcjonariusz %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
 						OOCNews(COLOR_LIGHTRED, string);
 					}
-					Kajdanki_JestemZakuty[suspect] = 0;//Kajdany
+					Kajdanki_JestemSkuty[suspect] = 0;//Kajdany
 					Kajdanki_Uzyte[suspect] = 0;
-					Kajdanki_Policjant[playerid] = 0;
+					Kajdanki_PDkuje[playerid] = 0;
 					Kajdanki_Uzyte[playerid] = 0;
 					ClearAnimations(suspect);
 					SetPlayerSpecialAction(suspect,SPECIAL_ACTION_NONE);
 					RemovePlayerAttachedObject(suspect, 0);
-					Kajdanki_Policjant[suspect] = 0;
+					Kajdanki_PDkuje[suspect] = 0;
 									
 					SetPlayerInterior(suspect, 10);
 				    new losuj= random(sizeof(Cela));

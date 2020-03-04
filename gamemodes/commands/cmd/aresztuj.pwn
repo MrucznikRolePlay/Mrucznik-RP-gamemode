@@ -92,14 +92,14 @@ YCMD:aresztuj(playerid, params[], help)
 									WantLawyer[playa] = 1;
 									PlayerInfo[playa][pArrested] += 1;
 									/*kajdanki*/
-									Kajdanki_JestemZakuty[playa] = 0;//Kajdany
+									Kajdanki_JestemSkuty[playa] = 0;//Kajdany
                                     Kajdanki_Uzyte[playa] = 0;
-                                    Kajdanki_Policjant[playerid] = 0;
+                                    Kajdanki_PDkuje[playerid] = 0;
                                     Kajdanki_Uzyte[playerid] = 0;
 									ClearAnimations(playa);
 									SetPlayerSpecialAction(playa,SPECIAL_ACTION_NONE);
 									RemovePlayerAttachedObject(playa, 0);
-									Kajdanki_Policjant[playa] = 0;
+									Kajdanki_PDkuje[playa] = 0;
 									Wchodzenie(playa);
 									SetPlayerVirtualWorld(playa, 1);
 								    new losuj= random(sizeof(Cela));
@@ -139,9 +139,9 @@ YCMD:aresztuj(playerid, params[], help)
 											SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 											format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
 											SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-											Kajdanki_JestemZakuty[playa] = 0;//Kajdany
+											Kajdanki_JestemSkuty[playa] = 0;//Kajdany
 											Kajdanki_Uzyte[playa] = 0;
-											Kajdanki_Policjant[playerid] = 0;
+											Kajdanki_PDkuje[playerid] = 0;
 											Kajdanki_Uzyte[playerid] = 0;
 											Kajdanki_Aresztant[playa] = 0;
 											JailDeMorgan(giveplayerid);

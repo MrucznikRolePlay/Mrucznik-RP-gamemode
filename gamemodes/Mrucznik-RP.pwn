@@ -1472,7 +1472,7 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 	//kajdanki
-	if(Kajdanki_Policjant[playerid] != INVALID_PLAYER_ID) // gdy skuty da /q
+	if(Kajdanki_PDkuje[playerid] != INVALID_PLAYER_ID) // gdy skuty da /q
 	{
 		OdkujKajdanki(playerid);
 	}
@@ -1513,8 +1513,8 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
-    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || Kajdanki_JestemZakuty[playerid] >= 1 || poscig[playerid] == 1)
-    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || Kajdanki_JestemZakuty[playerid] >= 1 || poscig[playerid] == 1)
+    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || Kajdanki_JestemSkuty[playerid] >= 1 || poscig[playerid] == 1)
+    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || Kajdanki_JestemSkuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
         PlayerInfo[playerid][pJailed] = 10;
         new string[130];
@@ -1527,7 +1527,7 @@ public OnPlayerDisconnect(playerid, reason)
         {
             strcat(powod, "kajdanki w aucie, ");
         }
-        if(Kajdanki_JestemZakuty[playerid] >= 1)
+        if(Kajdanki_JestemSkuty[playerid] >= 1)
         {
             strcat(powod, "kajdanki pieszo, ");
         }
@@ -1776,7 +1776,7 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
-	if(Kajdanki_JestemZakuty[playerid] > 0)
+	if(Kajdanki_JestemSkuty[playerid] > 0)
 	{
 		TogglePlayerControllable(playerid, 0);
 		GameTextForPlayer(playerid, "~r~Nie atakuj", 3500, 1);

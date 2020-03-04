@@ -86,7 +86,7 @@ YCMD:pobij(playerid, params[], help)
     							        sendTipMessage(playerid, "Musisz mieæ 3 lvl aby u¿ywaæ tej komendy!");
 					       			    return 1;
     							    }
-	     				    	    if(pobity[playa] == 1 || Kajdanki_JestemZakuty[playa] >= 1 || pobity[playerid] == 1 || PlayerCuffed[playerid] == 1 || Kajdanki_JestemZakuty[playerid] >= 1 || PlayerInfo[playerid][pBW] != 0 || PlayerInfo[playerid][pInjury] != 0)
+	     				    	    if(pobity[playa] == 1 || Kajdanki_JestemSkuty[playa] >= 1 || pobity[playerid] == 1 || PlayerCuffed[playerid] == 1 || Kajdanki_JestemSkuty[playerid] >= 1 || PlayerInfo[playerid][pBW] != 0 || PlayerInfo[playerid][pInjury] != 0)
 					       			{
 					        			sendTipMessage(playerid, "Nie mo¿esz pobiæ pobitego gracza / jesteœ pobity, nie mo¿esz biæ innych.");
 						       			return 1;
