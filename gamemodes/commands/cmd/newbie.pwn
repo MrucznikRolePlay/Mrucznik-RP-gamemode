@@ -91,95 +91,95 @@ YCMD:newbie(playerid, params[], help)
 			new nobchat[512];
 			if(IsAScripter(playerid))
             {
-                format(nobchat, sizeof(nobchat), "(({00FF8C} Skrypter [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
+                format(nobchat, sizeof(nobchat), "(({00FF8C} Skrypter %s: {8D8DFF}%s ))", GetNickEx(playerid), params);
             }
             else if(PlayerInfo[playerid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] != 7 && PlayerInfo[playerid][pAdmin] != 5555)
 		    {
-				format(nobchat, sizeof(nobchat), "(({FF6347} Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
+				format(nobchat, sizeof(nobchat), "(({FF6347} Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 		    {
-				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNick(playerid), params);
+				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 			}
 	 		else if(IsPlayerPremiumOld(playerid))
 			{
-			    format(nobchat, sizeof(nobchat), "(({FFD700} Sponsor [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({FFD700} Sponsor [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 		 	else if(PlayerInfo[playerid][pLevel] == 1 || PlayerInfo[playerid][pLevel] == 2 || PlayerInfo[playerid][pLevel] == 3)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Newbie [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Newbie [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 4)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Pocz¹tkuj¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Pocz¹tkuj¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 5)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Przeciêtniak [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Przeciêtniak [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 6 || PlayerInfo[playerid][pLevel] == 7)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Kumaty [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Kumaty [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 8 || PlayerInfo[playerid][pLevel] == 9)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Obeznany [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Obeznany [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 10 || PlayerInfo[playerid][pLevel] == 11)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Doœwiadczony [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Doœwiadczony [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 12|| PlayerInfo[playerid][pLevel] == 13)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Specjalista [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Specjalista [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 14 || PlayerInfo[playerid][pLevel] == 15)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Expert [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Expert [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 16 || PlayerInfo[playerid][pLevel] == 17)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Weteran [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Weteran [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 18 || PlayerInfo[playerid][pLevel] == 19)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Stary wyjadacz [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Stary wyjadacz [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 20 || PlayerInfo[playerid][pLevel] == 21)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Mistrz [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Mistrz [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 22 || PlayerInfo[playerid][pLevel] == 23)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Pro [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Pro [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 24 || PlayerInfo[playerid][pLevel] == 25)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Elita [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Elita [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 26 || PlayerInfo[playerid][pLevel] == 27)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Król RP [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Król RP [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 28 || PlayerInfo[playerid][pLevel] == 29)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Nieomylny [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Nieomylny [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 30 || PlayerInfo[playerid][pLevel] == 31)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wyrocznia [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wyrocznia [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 32 || PlayerInfo[playerid][pLevel] == 33)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Cesarz RP [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Cesarz RP [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] == 34 || PlayerInfo[playerid][pLevel] == 35)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Legenda [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Legenda [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			else if(PlayerInfo[playerid][pLevel] >= 36)
 			{
-			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNick(playerid), params);
+			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			OOCNewbie(nobchat);
 			if(!IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0)

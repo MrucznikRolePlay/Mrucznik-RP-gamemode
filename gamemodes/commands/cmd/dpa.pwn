@@ -36,7 +36,7 @@ YCMD:dpa(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /dpa [playerid/CzêœæNicku]");
 		return 1;
 	}
-	if (PlayerInfo[playerid][pAdmin] >= 1)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		if(IsPlayerConnected(para1))
 		{

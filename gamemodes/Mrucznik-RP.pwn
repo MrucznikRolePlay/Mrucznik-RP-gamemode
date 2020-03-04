@@ -1079,7 +1079,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 	if (IsACopCar(vehicleid) && !ispassenger)
 	{
-		if(IsACop(playerid))
+		if(IsAPolicja(playerid))
 		{
 			sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
 		}
@@ -1395,7 +1395,8 @@ public OnPlayerDisconnect(playerid, reason)
 	}
 //	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pAdmin] > 0
-	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pNewAP] > 0)//Je¿eli admin by³ na duty, wykonuje zapis w logi 
+	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pNewAP] > 0
+	|| firstDutyAdmin[playerid] == 1 && IsAScripter(playerid))//Je¿eli admin by³ na duty, wykonuje zapis w logi 
 	{
 		new exitReason[16];//String do logu
 		//LOG
@@ -1441,7 +1442,8 @@ public OnPlayerDisconnect(playerid, reason)
 		firstDutyAdmin[playerid] = 0; 
 	}
 	if((PlayerInfo[playerid][pAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
-	|| (PlayerInfo[playerid][pNewAP] >= 1 && iloscPozaDuty[playerid] >= 1))//Gdy nie by³ na admin duty, ale wykonywa³ akcje
+	|| (PlayerInfo[playerid][pNewAP] >= 1 && iloscPozaDuty[playerid] >= 1)
+	|| (IsAScripter(playerid) && iloscPozaDuty[playerid] >= 1))//Gdy nie by³ na admin duty, ale wykonywa³ akcje
 	{
 		if(firstDutyAdmin[playerid] == 0)
 		{
@@ -1476,9 +1478,9 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		OdkujKajdanki(playerid);
 	}
-	else if(Kajdanki_Aresztant[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy da /q
+	else if(Kajdanki_SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy da /q
 	{
-		OdkujKajdanki(Kajdanki_Aresztant[playerid]);
+		OdkujKajdanki(Kajdanki_SkutyGracz[playerid]);
 	}
 
 	if(Worek_MamWorek[playerid] != INVALID_PLAYER_ID) // gdy osoba z workiem da /q
@@ -1628,7 +1630,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		foreach(new i : Player)
 		{
-			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+			if(IsAPolicja(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
 				DisablePlayerCheckpoint(i);
 		}
 	}
@@ -1985,7 +1987,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					PlayerInfo[killerid][pKills] ++;
 					if(giveWL)
 					{
-						if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+						if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
 						{
 							NadajWLBW(killerid, playerid, true);
 						}
@@ -1994,7 +1996,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					{
 						new price2 = PoziomPoszukiwania[playerid] * 1000;
 						new count, i = killerid;
-						if(IsACop(playerid) && OnDuty[playerid] == 1)
+						if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
 						{
 							PoziomPoszukiwania[playerid] = 0;
 						}
@@ -2066,7 +2068,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 						}
 						if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55 || count == 2)
 						{
-							if(!(IsACop(playerid) && OnDuty[playerid] == 1))
+							if(!(IsAPolicja(playerid) && OnDuty[playerid] == 1))
 							{
 								new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
 								ZabierzKase(playerid, CenaZabicia);//moneycheat
@@ -2107,7 +2109,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 						}
 					}
 					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
-					if(PlayerInfo[killerid][pLevel] >= 3 || (IsACop(killerid) && OnDuty[killerid] == 1)) return NadajBW(playerid);
+					if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPolicja(killerid) && OnDuty[killerid] == 1)) return NadajBW(playerid);
 				}
 				return 1;
 			}
@@ -2120,16 +2122,16 @@ public OnPlayerDeath(playerid, killerid, reason)
 				else
 				{
 					//kajdanki
-					if(Kajdanki_Aresztant[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy dostanie rannego
+					if(Kajdanki_SkutyGracz[playerid] != INVALID_PLAYER_ID) //gdy skuwaj¹cy dostanie rannego
 					{
-						OdkujKajdanki(Kajdanki_Aresztant[playerid]);
+						OdkujKajdanki(Kajdanki_SkutyGracz[playerid]);
 					}
 
 					if(IsPlayerConnected(killerid))
 					{
 						if(giveWL)
 						{
-							if(!IsACop(killerid) && lowcaz[killerid] != playerid )
+							if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
 							{
 								NadajWLBW(killerid, playerid, false);
 							}
@@ -2148,7 +2150,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 						}
 
 						SetPVarInt(playerid, "bw-reason", reason);
-						if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsACop(killerid) && OnDuty[killerid] == 1))
+						if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
 						{
 							return NadajRanny(playerid, 0, true);
 						}
@@ -2179,7 +2181,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 	{
 		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNickEx(playerid), playerid, ip_address);
 
-		if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pAdmin] > 0)
+		if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
 		{
 			//disable all codes for admins
 			return 1;
@@ -2372,7 +2374,7 @@ SetPlayerSpawnPos(playerid)
 	//Po /spec off
     if(Unspec[playerid][Coords][0] != 0.0 && Unspec[playerid][Coords][1] != 0.0 && Unspec[playerid][Coords][2] != 0.0)
     {
-		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] >= 1)
+		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
@@ -2781,7 +2783,7 @@ SetPlayerSpawnWeapon(playerid)
     //HP:
 	if(PlayerInfo[playerid][pInjury] == 0 && PlayerInfo[playerid][pBW] == 0)
 	{
-		if(IsACop(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
+		if(IsAPolicja(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
 		{
 			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
 			//f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
@@ -6154,7 +6156,7 @@ OnPlayerLogin(playerid, password[])
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
 	{
-        if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)
+        if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
         {
             if(PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] > 0)
             {
@@ -6351,7 +6353,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     //Kolczatki
     if(IsPlayerInAnyVehicle(playerid))
     {
-        if(IsACop(playerid) && !KolDelay[veh])
+        if(IsAPolicja(playerid) && !KolDelay[veh])
         {
             if(IsACopCar(veh) && !IsABike(veh) && !IsAPlane(veh) && !IsABoat(veh))
             {

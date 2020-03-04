@@ -35,7 +35,7 @@ YCMD:dutycd(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
+		if(IsAPolicja(playerid) && PoziomPoszukiwania[playerid] > 0)
 		{
 			sendTipMessage(playerid, "Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
 			return 1;

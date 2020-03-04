@@ -48,7 +48,7 @@ YCMD:ban(playerid, params[], help)
 	        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
 	        return 1;
 	    }
-	    if(IsPlayerConnected(giveplayerid))//bug z id
+	    if(IsPlayerConnected(giveplayerid))
 	    {
 	        if(giveplayerid != INVALID_PLAYER_ID)
 	        {

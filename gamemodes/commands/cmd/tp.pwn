@@ -51,7 +51,7 @@ YCMD:tp(playerid, params[], help)
 				GetPlayerName(plo1, giveplayer01, sizeof(giveplayer01));
 				GetPlayerName(plo, giveplayer02, sizeof(giveplayer02));
 				
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 				{
 					new bool:liczydelko=false;
 					foreach(new i : Player)

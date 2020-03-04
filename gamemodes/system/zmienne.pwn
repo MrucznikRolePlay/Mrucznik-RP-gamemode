@@ -1005,7 +1005,7 @@ new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
 new Kajdanki_Uzyte[MAX_PLAYERS];//Kajdany
 new Kajdanki_JestemSkuty[MAX_PLAYERS];//Kajdany
 new Kajdanki_PDkuje[MAX_PLAYERS];//Kajdany
-new Kajdanki_Aresztant[MAX_PLAYERS];//Kajdany
+new Kajdanki_SkutyGracz[MAX_PLAYERS];//Kajdany
 // worek
 new Worek_Uzyty[MAX_PLAYERS];
 new Worek_MamWorek[MAX_PLAYERS];

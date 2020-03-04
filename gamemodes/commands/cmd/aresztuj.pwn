@@ -36,7 +36,7 @@ YCMD:aresztuj(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
    	{
-   	    if(IsACop(playerid))
+   	    if(IsAPolicja(playerid))
    	    {
    	        if(PlayerToPoint(10.0, playerid, 222.6395,114.3951,999.0156) //old komi
 			|| IsPlayerInRangeOfPoint(playerid, 10.0, 268.3546, 83.0229, 1001.0391)//dillimore
@@ -143,7 +143,7 @@ YCMD:aresztuj(playerid, params[], help)
 											Kajdanki_Uzyte[playa] = 0;
 											Kajdanki_PDkuje[playerid] = 0;
 											Kajdanki_Uzyte[playerid] = 0;
-											Kajdanki_Aresztant[playa] = 0;
+											Kajdanki_SkutyGracz[playa] = 0;
 											JailDeMorgan(giveplayerid);
 											UsunBron(playa);//usun bron
 											SetPlayerSpawnWeapon(playa);

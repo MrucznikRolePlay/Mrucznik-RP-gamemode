@@ -439,7 +439,6 @@
 #include "cmd/spoiler.pwn"
 #include "cmd/spoilery.pwn"
 #include "cmd/sprawdzdom.pwn"
-#include "cmd/sprawdzgwiazdki.pwn"
 #include "cmd/sprawdzin.pwn"
 #include "cmd/sprawdzinv.pwn"
 #include "cmd/sprawdzkase.pwn"

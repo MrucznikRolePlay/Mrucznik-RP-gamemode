@@ -270,7 +270,7 @@ SendMessageToAdminEx(text[], mColor, condition)//Wysy³a wiadomoœæ do administrat
 	new stradm[256];
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pNewAP] > 0)
+		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pNewAP] > 0 || IsAScripter(i))
 		{
 			if(condition == 1)//Warunek w³¹czonej widocznoœci reportów
 			{

@@ -50,6 +50,13 @@ YCMD:zmiennick(playerid, params[], help)
 				}
 				else
 				{
+					new nick[24];
+					if(GetPVarString(playerid, "maska_nick", nick, 24))
+					{
+						SendClientMessage(playerid, COLOR_GREY, " Musisz œci¹gn¹æ maskê z twarzy! (/maska).");
+						return 1;
+					}
+
                     if(ChangePlayerName(playerid, params))
                     {
                     	SendClientMessageToAll(COLOR_LIGHTRED, sprintf("%s[%d] zmieni³ sobie nick - Nowy nick: %s", sendername,PlayerInfo[playerid][pUID],params));

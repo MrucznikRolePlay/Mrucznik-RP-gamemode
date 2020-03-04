@@ -48,14 +48,14 @@ YCMD:warn(playerid, params[], help)
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 		{
             if(AntySpam[playerid] == 1)
 		    {
 		        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
 		        return 1;
 		    }
-		    if(IsPlayerConnected(giveplayerid) || true)//bug z id
+		    if(IsPlayerConnected(giveplayerid))
 		    {
 		        if(giveplayerid != INVALID_PLAYER_ID)
 		        {

@@ -842,7 +842,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1))
+		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
 		{
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
@@ -857,7 +857,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 || afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
+		if(afktime > 600 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
 		{
 			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
@@ -1101,7 +1101,7 @@ public Spectator()
 		GetPlayerPos(PDGPS, x, y, z);
 		foreach(new i : Player)
 		{
-			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
+			if(IsAPolicja(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
 			{
 				if(zawodnik[i] == 0)
 					SetPlayerCheckpoint(i, x, y, z, 4.0);
@@ -2383,7 +2383,7 @@ public JednaSekundaTimer()
 			cop = Kajdanki_PDkuje[i];
 			if(IsPlayerConnected(cop))
 			{
-				if(IsACop(cop) || IsABOR(cop))
+				if(IsAPolicja(cop) || IsABOR(cop))
 				{
 					if(GetPlayerState(cop) == 1)
 					{

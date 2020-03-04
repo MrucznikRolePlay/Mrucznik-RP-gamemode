@@ -43,7 +43,7 @@ YCMD:bp(playerid, params[], help)//blokada pisania
 			return sendTipMessage(playerid, "Czas max. 1h dla p@!");
 		}
 	}
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 	{
 		if(IsPlayerConnected(giveplayerid))
 		{

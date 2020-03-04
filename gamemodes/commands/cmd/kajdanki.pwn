@@ -32,7 +32,7 @@ YCMD:kajdanki(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(IsACop(playerid) || (IsABOR(playerid) && PlayerInfo[playerid][pRank] >= 2))
+        if(IsAPolicja(playerid) || (IsABOR(playerid) && PlayerInfo[playerid][pRank] >= 2))
         {
             new giveplayerid;
             if(sscanf(params, "k<fix>", giveplayerid))
@@ -49,7 +49,7 @@ YCMD:kajdanki(playerid, params[], help)
 
             if(Kajdanki_Uzyte[playerid] != 1)
             {
-                if(IsACop(playerid))
+                if(IsAPolicja(playerid))
                 {
                     if(OnDuty[playerid] == 0)
                     {

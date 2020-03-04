@@ -1554,7 +1554,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                return 1;
 	            }
 				if(PlayerInfo[giveplayerid][pLider] > 0) { hajs += strval(inputtext)*150000; }
-				else if(IsACop(playerid)) { hajs = strval(inputtext)*100000; }
+				else if(IsAPolicja(playerid)) { hajs = strval(inputtext)*100000; }
 				else if(PlayerInfo[giveplayerid][pMember] == 9) { hajs = strval(inputtext)*85000; }
 				else if(PlayerInfo[giveplayerid][pMember] > 0 || GetPlayerOrg(giveplayerid) != 0) { hajs = strval(inputtext)*75000; }
 				else { hajs = strval(inputtext)*50000; }
@@ -2346,7 +2346,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		            	if(IsACop(playerid) || IsABOR(playerid))
+		            	if(IsAPolicja(playerid) || IsABOR(playerid))
            				{
 			                SetPlayerPos(playerid,1568.7660,-1691.4886,5.8906);
 			                SetPlayerVirtualWorld(playerid,2);
@@ -2364,7 +2364,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 1: {
 		            	// parking gorny
-		            	if(IsACop(playerid) || IsABOR(playerid))
+		            	if(IsAPolicja(playerid) || IsABOR(playerid))
            				{
 			                SetPlayerPos(playerid,1570.9799,-1636.7758,13.5713); // pos gornego
 			                SetPlayerVirtualWorld(playerid,0);
@@ -2418,7 +2418,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 6:
 		            {
-						if(IsACop(playerid) || IsABOR(playerid))
+						if(IsAPolicja(playerid) || IsABOR(playerid))
 						{
 							SetPlayerPos(playerid,1565.0798, -1665.6580, 28.4782);
 							SetPlayerVirtualWorld(playerid,0);
@@ -3436,7 +3436,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    if(IsPlayerConnected(i))
 				    {
-				        if(IsACop(i))
+				        if(IsAPolicja(i))
 						{
 						    if(GetDistanceBetweenPlayers(playerid,i) < 5)
 	     					{
@@ -3513,7 +3513,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    if(IsPlayerConnected(i))
 				    {
-				        if(IsACop(i) || IsABOR(i))
+				        if(IsAPolicja(i) || IsABOR(i))
 						{
 						    if(GetDistanceBetweenPlayers(playerid,i) < 5)
 	     					{
@@ -3581,7 +3581,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				Kajdanki_JestemSkuty[playerid] = 1;
 	            TogglePlayerControllable(playerid, 0);
 	            Kajdanki_Uzyte[Kajdanki_PDkuje[playerid]] = 1;
-	            Kajdanki_Aresztant[Kajdanki_PDkuje[playerid]] = playerid;
+	            Kajdanki_SkutyGracz[Kajdanki_PDkuje[playerid]] = playerid;
 				ClearAnimations(playerid);
                 SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
                 SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -14599,7 +14599,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			if(GetPVarInt(playerid, "ChangingPassword")) //password changing
 			{
-				if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0)
+				if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
 				{
 					ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
 				}

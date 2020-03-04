@@ -33,12 +33,12 @@ YCMD:wywaz(playerid, params[], help)
 	new string[128];
     if(IsPlayerConnected(playerid))
     {
-        if(!IsACop(playerid))
+        if(!IsAPolicja(playerid))
 		{
 		    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ policjantem!");
 		    return 1;
 		}
-        if(OnDuty[playerid] != 1 && IsACop(playerid))
+        if(OnDuty[playerid] != 1 && IsAPolicja(playerid))
 		{
 		    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ na s³u¿bie!");
 		    return 1;
@@ -60,7 +60,7 @@ YCMD:wywaz(playerid, params[], help)
 				       	sendTipMessageEx(playerid, COLOR_GREY, "Ten dom jest za daleko !");
 				        return 1;
 				    }
-				    if (!IsACop(giveplayerid) && OnDuty[giveplayerid] != 1)
+				    if (!IsAPolicja(giveplayerid) && OnDuty[giveplayerid] != 1)
 				    {
 				       	sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest policjantem na s³u¿bie!");
 				        return 1;

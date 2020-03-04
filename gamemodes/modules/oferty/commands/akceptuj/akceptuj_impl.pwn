@@ -939,7 +939,7 @@ command_akceptuj_Impl(playerid, x_job[32])
             return 1;
         }
 
-        if (IsACop(playerid))
+        if (IsAPolicja(playerid))
         {
             if(IsPlayerConnected(giveplayerid))
             {

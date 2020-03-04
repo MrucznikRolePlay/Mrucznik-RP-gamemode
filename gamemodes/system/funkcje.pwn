@@ -1064,7 +1064,7 @@ public naczasbicie(playerid, playerid_atak){
 		Kajdanki_JestemSkuty[playerid] = 1;
  		TogglePlayerControllable(playerid, 0);
   		Kajdanki_Uzyte[giveplayerid] = 1;
-   		Kajdanki_Aresztant[Kajdanki_PDkuje[playerid]] = playerid;
+   		Kajdanki_SkutyGracz[Kajdanki_PDkuje[playerid]] = playerid;
 		ClearAnimations(playerid);
  		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
   		SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -2141,7 +2141,7 @@ IsAnInstructor(playerid)
 	return 0;
 }
 
-IsACop(playerid)
+IsAPolicja(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -4509,7 +4509,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 			}
 			if(PoziomPoszukiwania[playerid] > 0)
 			{
-			    if((IsACop(playerid) || IsABOR(playerid)) && OnDuty[playerid] == 1)
+			    if((IsAPolicja(playerid) || IsABOR(playerid)) && OnDuty[playerid] == 1)
 			    {
       				PoziomPoszukiwania[playerid] = 0;
 				}
@@ -4527,7 +4527,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 				{
 					if(IsPlayerConnected(i))
 					{
-					    if(IsACop(i))
+					    if(IsAPolicja(i))
 					    {
 					        if(gCrime[i] == 0)
 					        {
@@ -4551,7 +4551,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 	    ResetPlayerWeapons(playerid);
 	    if(PlayerInfo[playerid][pJailed] < 1)
 	    {
-			if(gTeam[playerid] == 2 || IsACop(playerid))
+			if(gTeam[playerid] == 2 || IsAPolicja(playerid))
 			{
 				GivePlayerWeapon(playerid, 41, 500); //spray
 				if(OnDuty[playerid] == 1 || PlayerInfo[playerid][pMember] == 2)//Cops & FBI/ATF
@@ -4951,11 +4951,8 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 5 || PlayerInfo[playerid][pNewAP] == 1)
-		{
-			format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
-			SendClientMessage(playerid, COLOR_GRAD6,coordsstring);
-		}
+		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
+		SendClientMessage(playerid, COLOR_GRAD6,coordsstring);
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	}
 }
@@ -7998,7 +7995,7 @@ SendAdminMessage(color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1)
+		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || IsAScripter(i))
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -8010,7 +8007,7 @@ SendCommandLogMessage(string[])
 {
 	foreach(new i : Player)
 	{
-	    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1)
+	    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || IsAScripter(i))
 	    {
 			if(GetPVarInt(i, "togcmdlog") == 0) SendClientMessage(i, 0xD8C173FF, string);
 		}
@@ -8032,7 +8029,7 @@ SendZGMessage(color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || PlayerInfo[i][pZG] >= 1)
+		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || PlayerInfo[i][pZG] >= 1 || IsAScripter(i))
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -8137,7 +8134,7 @@ PolicjantWStrefie(Float:radi, playerid)
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
 	    	if(IsPlayerInRangeOfPoint(i, radi, rangex, rangey, rangez))
 	        {
-	            if(IsACop(i) && Spectate[i] == INVALID_PLAYER_ID)
+	            if(IsAPolicja(i) && Spectate[i] == INVALID_PLAYER_ID)
 	            {
 	            	return 1;
 	            }
@@ -8501,7 +8498,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	new sendername[MAX_PLAYER_NAME];
 	if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
 	{
-		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ\nWSZYSTKICH liderów z organizacji? (Zabierze VLD)", GetNick(para1));
+		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ\nWSZYSTKICH liderów z organizacji?\n(Zabierze VLD)", GetNick(para1));
 		SetPVarInt(playerid, "ID_LIDERA", para1);  
 		ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
 		return 1;
@@ -10601,7 +10598,7 @@ GPSMode(playerid, bool:red = false)
 	{
 		foreach(new i : Player)
 		{
-			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+			if(IsAPolicja(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
 			{
 				if(zawodnik[i] == 0)
 					DisablePlayerCheckpoint(i);
@@ -12793,7 +12790,7 @@ public CuffedAction(playerid, cuffedid)
 	Kajdanki_JestemSkuty[cuffedid] = 1;
 	Kajdanki_Uzyte[playerid] = 1;
 	Kajdanki_PDkuje[cuffedid] = playerid;
-	Kajdanki_Aresztant[playerid] = cuffedid;
+	Kajdanki_SkutyGracz[playerid] = cuffedid;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid, SPECIAL_ACTION_CUFFED);
 	SetPlayerAttachedObject(cuffedid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
@@ -12802,7 +12799,7 @@ public CuffedAction(playerid, cuffedid)
 	return 1;
 }
 
-public UnCuffedAction(cop, cuffedid)
+/*public UnCuffedAction(cop, cuffedid)
 {
 	new playerid = cop;
 	new string[144];
@@ -12813,7 +12810,7 @@ public UnCuffedAction(cop, cuffedid)
 	TogglePlayerControllable(cuffedid, 1);
 	PlayerCuffed[cuffedid] = 0;
 	Kajdanki_JestemSkuty[cuffedid] = 0;
-	Kajdanki_Aresztant[playerid] = INVALID_PLAYER_ID;
+	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
 	Kajdanki_PDkuje[cuffedid] = INVALID_PLAYER_ID;
 	Kajdanki_Uzyte[playerid] = 0;
 	PlayerInfo[cuffedid][pMuted] = 0;
@@ -12821,7 +12818,7 @@ public UnCuffedAction(cop, cuffedid)
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
 	RemovePlayerAttachedObject(cuffedid, 5);
 	return 1;
-}
+}  to do */
 
 
 //--------------------------------------------------

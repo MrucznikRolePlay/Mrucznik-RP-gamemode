@@ -32,9 +32,9 @@ YCMD:zmienskin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if (IsAHA(playerid) || IsACop(playerid) && (PlayerInfo[playerid][pMember] != 3 || PlayerInfo[playerid][pLider] != 3))
+        if (IsAHA(playerid) || IsAPolicja(playerid) && (PlayerInfo[playerid][pMember] != 3 || PlayerInfo[playerid][pLider] != 3))
         {
-            if((PlayerInfo[playerid][pRank] >= 1 && IsAHA(playerid)) || (PlayerInfo[playerid][pRank] >= 2 && IsACop(playerid)))
+            if((PlayerInfo[playerid][pRank] >= 1 && IsAHA(playerid)) || (PlayerInfo[playerid][pRank] >= 2 && IsAPolicja(playerid)))
             {
                 if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
                 {

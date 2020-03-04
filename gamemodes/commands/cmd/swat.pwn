@@ -36,7 +36,7 @@ YCMD:swat(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
 		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(IsACop(playerid))
+		if(IsAPolicja(playerid))
 		{
 			if (PlayerToPoint(3, playerid,255.3,77.4,1003.6)
 			|| PlayerToPoint(3,playerid,266.7904,118.9303,1004.6172)

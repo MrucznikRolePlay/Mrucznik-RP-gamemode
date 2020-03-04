@@ -37,7 +37,7 @@ YCMD:wyczysc(playerid, params[], help)
     if(IsPlayerConnected(playerid))
    	{
    	    new tmpcar = GetPlayerVehicleID(playerid);
- 		if(IsACop(playerid))
+ 		if(IsAPolicja(playerid))
 		{
 			if (IsACopCar(tmpcar) || 
 			PlayerToPoint(15.0, playerid, 253.9280,69.6094,1003.6406) || 

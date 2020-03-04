@@ -44,7 +44,7 @@ YCMD:przedmioty(playerid, params[], help)
 					GetPlayerWeaponData(playerid, i, weaponid, ammo);
 					if(ammo > 0)
 					{
-						if(weaponid == 24 && (strfind("Paralizator", option, true) != -1 || strfind("Tazer", option, true) != -1) && (IsACop(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
+						if(weaponid == 24 && (strfind("Paralizator", option, true) != -1 || strfind("Tazer", option, true) != -1) && (IsAPolicja(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
 						{
 							itemexist = 24;
 							weapondata = 1;

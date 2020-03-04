@@ -86,15 +86,15 @@ YCMD:pobij(playerid, params[], help)
     							        sendTipMessage(playerid, "Musisz mieæ 3 lvl aby u¿ywaæ tej komendy!");
 					       			    return 1;
     							    }
-	     				    	    if(pobity[playa] == 1 || Kajdanki_JestemSkuty[playa] >= 1 || pobity[playerid] == 1 || PlayerCuffed[playerid] == 1 || Kajdanki_JestemSkuty[playerid] >= 1 || PlayerInfo[playerid][pBW] != 0 || PlayerInfo[playerid][pInjury] != 0)
+	     				    	    if(pobity[playa] == 1 || pobity[playerid] == 1 ||
+									 Kajdanki_JestemSkuty[playa] >= 1 || Kajdanki_JestemSkuty[playerid] >= 1 ||
+									 PlayerCuffed[playa] == 1|| PlayerCuffed[playerid] == 1 || 
+									 PlayerInfo[playa][pBW] != 0 || PlayerInfo[playerid][pBW] != 0 ||
+									 PlayerInfo[playa][pInjury] != 0 || PlayerInfo[playerid][pInjury] != 0)
 					       			{
-					        			sendTipMessage(playerid, "Nie mo¿esz pobiæ pobitego gracza / jesteœ pobity, nie mo¿esz biæ innych.");
+					        			sendTipMessage(playerid, "Nie mo¿esz pobiæ rannego lub pobitego gracza / jesteœ ranny lub pobity, nie mo¿esz biæ innych.");
 						       			return 1;
 					       			}
-									if(PlayerInfo[playa][pBW] != 0 || PlayerInfo[playa][pInjury] != 0)
-									{
-										return sendTipMessageEx(playerid, COLOR_GRAD2, "Gracz jest ranny lub nieprzytomny. Nie kop le¿¹cego!");
-									}
 					       			if(GetPlayerWeapon(playa) >= 22)
 					       			{
 					       			    sendTipMessage(playerid, "Nie mo¿esz pobiæ gracza z broni¹!");

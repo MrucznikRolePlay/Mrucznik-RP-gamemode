@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_specshow_Impl(playerid, valueSpec)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 2000)
+    if(PlayerInfo[playerid][pAdmin] >= 2000 || IsAScripter(playerid))
     {
         new string[124];
         if(playerSeeSpec[playerid] == 0)

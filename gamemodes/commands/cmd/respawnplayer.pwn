@@ -39,7 +39,12 @@ YCMD:respawnplayer(playerid, params[], help)
     //czynnosci
     if(IsPlayerInAnyVehicle(v))
     {
-        RemovePlayerFromVehicle(v);
+        new Float:shealth;
+        new Float:slx, Float:sly, Float:slz;
+        GetPlayerHealth(v, shealth);
+        SetPlayerHealth(v, shealth-5);
+        GetPlayerPos(v, slx, sly, slz);
+        SetPlayerPos(v, slx, sly, slz+5);
     }
     
     //wiadomosci
