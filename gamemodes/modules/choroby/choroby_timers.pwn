@@ -57,7 +57,7 @@ timer InfectedEffectMessage[15000](playerid)
 	return 1;
 }
 
-timer CurrationCounter[1000](playerid, count)
+timer TreatmentCounter[1000](playerid, count)
 {
 	new doctorid = GetPVarInt(playerid, "treatment-doctorid");
 	GameTextForPlayer(playerid, sprintf("Kuracja ~r~%ds", count), 1000, 4);
@@ -72,7 +72,7 @@ timer CurrationCounter[1000](playerid, count)
 			PlayerInfo[doctorid][pLocal] == PLOCAL_FRAC_LSMC) 
 		{	
 			AbortCurration[playerid] = 0;
-			defer CurrationCounter(playerid, count-1);
+			defer TreatmentCounter(playerid, count-1);
 		}
 		else
 		{
@@ -89,7 +89,7 @@ timer CurrationCounter[1000](playerid, count)
 				GameTextForPlayer(doctorid, "Wracaj do pacjenta!", 1000, 1);
 			GameTextForPlayer(playerid, "Wracaj do lekarza!", 1000, 1);
 			AbortCurration[playerid]++;
-			defer CurrationCounter(playerid, count);
+			defer TreatmentCounter(playerid, count);
 		}
 	} 
 	else 

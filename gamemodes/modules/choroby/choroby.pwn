@@ -216,7 +216,7 @@ StartPlayerTreatment(playerid, doctorid, eDiseases:disease)
 
 	ApplyAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
 
-	CurrationCounter(playerid, time+1);
+	TreatmentCounter(playerid, time+1);
 	return 1;
 }
 
