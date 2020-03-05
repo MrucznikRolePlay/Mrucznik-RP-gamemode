@@ -32,40 +32,39 @@ YCMD:login(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		new bool:self = true;
 		new playa;
-		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || IsAScripter(playerid))
+		if(!(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || IsAScripter(playerid)))
 		{
-			if(!sscanf(params, "k<fix>", playa))
+			noAccessMessage(playerid);
+			return 1;
+		}
+
+		if(!sscanf(params, "k<fix>", playa))
+		{
+			if(!IsPlayerConnected(playa))
 			{
-				if(!IsPlayerConnected(playa))
-				{
-					sendErrorMessage(playerid, "Gracz nie jest zalogowany.");
-					return 1;
-				}
-				self = false;
+				sendErrorMessage(playerid, "Gracz nie jest zalogowany.");
+				return 1;
 			}
 		}
 
-		if(self == false)
+		new string[144];
+		new giveplayer[MAX_PLAYER_NAME];
+		new Float:slx, Float:sly, Float:slz;
+		GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+		GetPlayerPos(playa, slx, sly, slz);
+		PlayerPlaySound(playa, 1130, slx, sly, slz+5);
+		Log(punishmentLog, INFO, "Admin %s u¿y³ (/login) i wylogowa³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
+		format(string, sizeof(string), "AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",GetNickEx(playerid), giveplayer);
+		ABroadCast(COLOR_LIGHTRED,string,1);
+		format(string, sizeof(string), "Zosta³eœ wylogowany przez administratora %s", GetNickEx(playerid));
+		SendClientMessage(playa, COLOR_PANICRED, string);
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
 		{
-			new string[144];
-			new giveplayer[MAX_PLAYER_NAME];
-			new Float:slx, Float:sly, Float:slz;
-			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-			GetPlayerPos(playa, slx, sly, slz);
-			PlayerPlaySound(playa, 1130, slx, sly, slz+5);
-			Log(punishmentLog, INFO, "Admin %s u¿y³ (/login) i wylogowa³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-			format(string, sizeof(string), "AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",GetNickEx(playerid), giveplayer);
-			ABroadCast(COLOR_LIGHTRED,string,1);
-			format(string, sizeof(string), "Zosta³eœ wylogowany przez administratora %s", GetNickEx(playerid));
-			SendClientMessage(playa, COLOR_PANICRED, string);
-			if(GetPlayerAdminDutyStatus(playerid) == 1)
-			{
-				iloscInne[playerid] = iloscInne[playerid]+1;
-			}
-			playerid = playa;
+			iloscInne[playerid] = iloscInne[playerid]+1;
 		}
+		playerid = playa;
+		
 		//wiadomoœci
 		new reString[144];
 		format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: /login).", GetNick(playerid));
