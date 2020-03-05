@@ -13988,7 +13988,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno apteczki.", PlayerName(playerid));
+			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno zestawu.", PlayerName(playerid));
 			SendClientMessage(id, 0xFF0030FF, string);
 		}
 		DeletePVar(playerid, "HealthPackOffer");
