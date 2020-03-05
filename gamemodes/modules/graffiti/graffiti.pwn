@@ -172,7 +172,7 @@ graffiti_CreateGraffiti(playerid)
 	GraffitiInfo[f][grafZpos] = PlayerPos[playerid][2];
 	GraffitiInfo[f][grafXYpos] = 0.0;
 	GraffitiInfo[f][grafYYpos] = 0.0;
-	GraffitiInfo[f][grafZYpos] = Angle-180;
+	GraffitiInfo[f][grafZYpos] = 0.0;
 	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
 	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
 	graffiti_SaveMySQL(f, playerid);

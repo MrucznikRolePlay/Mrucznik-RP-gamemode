@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                 diagnozuj                                                 //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ uid ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,33 +16,37 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 07.02.2020
+// Autor: werem
+// Data utworzenia: 5.03.2020
+
+// Opis:
+/*
+
+*/
 
 
-//
+// Notatki skryptera:
+/*
+	
+*/
 
-//------------------<[ Implementacja: ]>-------------------
-command_diagnozuj_Impl(playerid, giveplayerid)
+YCMD:uid(playerid, params[], help)
 {
-	if (!IsAMedyk(playerid) && (PlayerInfo[playerid][pAdmin] == 0 || PlayerInfo[playerid][pNewAP] == 0))
-	{
-		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
-        return 1;
-	}
-    
-    if(!IsPlayerNear(playerid, giveplayerid))
+    if(PlayerInfo[playerid][pAdmin] == 0)
     {
-        sendErrorMessage(playerid, sprintf("Jesteœ zbyt daleko od gracza %s", GetNick(giveplayerid)));
+        noAccessMessage(playerid);
         return 1;
     }
-
-    ProxDetector(20.0, playerid, sprintf("* Lekarz %s przeprowadzi³ diagnozê pacjenta %s.", GetNick(playerid), GetNick(giveplayerid)), 
-        COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE
-    );
-    
-    DiagnosePlayer(giveplayerid, playerid);
+    new id;
+    if(sscanf(params, "d", id))
+    {
+        sendTipMessage(playerid, "U¿yj /uid [id]");
+        return 1;
+    }
+    new nick[MAX_PLAYER_NAME];
+    new string[128];
+    nick = MruMySQL_GetNameFromUID(id);
+    format(string, sizeof(string), "UID: %d NICK: %s", id, nick);
+    SendClientMessage(playerid, COLOR_WHITE, string);
     return 1;
 }
-
-//end
