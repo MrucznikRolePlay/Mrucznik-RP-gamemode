@@ -42,7 +42,7 @@ CureFromAllDiseases(playerid)
 {
 	VECTOR_foreach(i : VPlayerDiseases[playerid])
 	{
-		DeactivateDiseaseEffect(playerid, eDiseases:MEM_get_val(i));
+		DeactivateDiseaseEffects(playerid, eDiseases:MEM_get_val(i));
 	}
 	VECTOR_clear(VPlayerDiseases[playerid]);
 	MruMySQL_RemoveAllDiseases(playerid);
@@ -52,7 +52,7 @@ CurePlayer(playerid, eDiseases:disease)
 {
 	VECTOR_remove_val(VPlayerDiseases[playerid], disease);
 	MruMySQL_RemoveDisease(playerid, disease);
-	DeactivateDiseaseEffect(playerid, disease);
+	DeactivateDiseaseEffects(playerid, disease);
 }
 
 InfectPlayer(playerid, eDiseases:disease)
@@ -123,7 +123,7 @@ ActivateDiseaseEffect(playerid, eDiseases:disease)
 	return 1;
 }
 
-DeactivateDiseaseEffect(playerid, eDiseases:disease)
+DeactivateDiseaseEffects(playerid, eDiseases:disease)
 {
 	VECTOR_foreach(v : DiseaseData[disease][VEffects])
 	{
