@@ -45,6 +45,11 @@ EatCookedMeal(playerid, name[], weight, type)
 		InfectPlayer(playerid, KORONAWIRUS);
 		SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
 	}
+	if(type < sizeof(FishNames))
+	{
+		if(PlayerImmunity[playerid] < 5)
+			PlayerImmunity[playerid] ++;
+	}
 	if(random(20) == 0) 
 	{//5% szans na zatrucie
 		InfectPlayer(playerid, ZATRUCIE);
