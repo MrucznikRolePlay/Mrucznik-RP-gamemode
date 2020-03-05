@@ -3510,6 +3510,12 @@ IsAtPlaceGetHP(playerid)
 	}
 	return 0;
 }
+
+IsAtHealingPlace(playerid)
+{
+	return GetPlayerVirtualWorld(playerid) == 90 || GetPlayerVirtualWorld(playerid) == 32;
+}
+
 GraczBankomat(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 2.5, 2127.66210938,-1153.92480469,23.48433304))
