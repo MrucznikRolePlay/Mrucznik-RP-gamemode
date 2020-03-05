@@ -80,7 +80,7 @@ kuracja_akceptuj(playerid)
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), cost, commission, DiseaseData[disease][Name]
     );
 
-    ChatMe(playerid, sprintf("pod³¹cza %s do aparatury i rozpoczyna kuracjê.", GetNick(giveplayerid)));
+    ChatMe(giveplayerid, sprintf("pod³¹cza %s do aparatury i rozpoczyna kuracjê.", GetNick(playerid)));
     StartPlayerTreatment(playerid, giveplayerid, disease);
 
     SetPVarInt(playerid, "kuracja-akceptuj", 0);
