@@ -3181,12 +3181,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] >= 35000 )
 						{
+							if(PlayerInfo[playerid][pCruiseController] == 1)
+							{
+								format(string, sizeof(string), "Ju¿ masz tempomat!");
+								SendClientMessage(playerid, COLOR_GRAD4, string);
+								return 1;
+							}
 							PlayerInfo[playerid][pCruiseController] = 1;
 							ZabierzKase(playerid, 35000);
 							format(string, sizeof(string), "~r~-$%d", 35000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Kupi³eœ tempomat do auta. Wciœnij CTRL podczas jazdy, ¿eby aktywowaæ.");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							format(string, sizeof(string), "Aby zwiêkszyæ prêdkoœæ auta wciœnij lewy alt, zmniejszanie spacja.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
