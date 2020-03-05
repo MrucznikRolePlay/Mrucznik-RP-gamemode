@@ -352,214 +352,232 @@ PokazDialogBronie(playerid)
 	if(AntySpam[playerid] == 1) return SetPlayerArmedWeapon(playerid, starabron[playerid]);
 	if(GUIExit[playerid] != 0) return SetPlayerArmedWeapon(playerid, starabron[playerid]);
 	GUIExit[playerid] = 1;
-	DynamicGui_Init(playerid);
-	SetPlayerArmedWeapon(playerid, starabron[playerid]);
-	new dialogstring[2048], weaponexist = 0, active[144];
-	DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun0], PlayerInfo[playerid][pGun0]);
-	if(PlayerInfo[playerid][pGun0] == starabron[playerid])
+	new wps[13][2], dialogstring[2048], weaponexist = 0;
+    for(new i = 0; i < 13; i++)
 	{
-		format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+		GetPlayerWeaponData(playerid, i, wps[i][0], wps[i][1]);
+		if(wps[i][0] > 0)
+		{
+			weaponexist = 1;
+		}
+	}
+
+	if(weaponexist)
+	{
+		DynamicGui_Init(playerid);
+		SetPlayerArmedWeapon(playerid, starabron[playerid]);
+		new active[144];
+		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun0], PlayerInfo[playerid][pGun0]);
+		if(PlayerInfo[playerid][pGun0] == starabron[playerid])
+		{
+			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+		}
+		else
+		{
+			format(active, sizeof(active), "{FFFFFF}");
+		}
+		format(dialogstring, sizeof(dialogstring), "%s%s", active, GunNames[PlayerInfo[playerid][pGun0]]);
+		if(PlayerInfo[playerid][pGun1] >= 2)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun1], PlayerInfo[playerid][pGun1]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun1] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun1]]);
+		}
+		if(PlayerInfo[playerid][pGun2] >= 2 && PlayerInfo[playerid][pAmmo2] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun2], PlayerInfo[playerid][pGun2]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun2] == starabron[playerid] && MaTazer[playerid] != 1)
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun2]]);
+		}
+		if(PlayerInfo[playerid][pGun3] >= 2 && PlayerInfo[playerid][pAmmo3] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun3], PlayerInfo[playerid][pGun3]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun3] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun3]]);
+		}
+		if(PlayerInfo[playerid][pGun4] >= 2 && PlayerInfo[playerid][pAmmo4] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun4], PlayerInfo[playerid][pGun4]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun4] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun4]]);
+		}
+		if(PlayerInfo[playerid][pGun5] >= 2 && PlayerInfo[playerid][pAmmo5] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun5], PlayerInfo[playerid][pGun5]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun5] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun5]]);
+		}
+		if(PlayerInfo[playerid][pGun6] >= 2 && PlayerInfo[playerid][pAmmo6] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun6], PlayerInfo[playerid][pGun6]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun6] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun6]]);
+		}
+		if(PlayerInfo[playerid][pGun7] >= 2 && PlayerInfo[playerid][pAmmo7] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun7], PlayerInfo[playerid][pGun7]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun7] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun7]]);
+		}
+		if(PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun8], PlayerInfo[playerid][pGun8]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun8] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun8]]);
+		}
+		if(PlayerInfo[playerid][pGun9] >= 2  && PlayerInfo[playerid][pAmmo9] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun9], PlayerInfo[playerid][pGun9]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun9] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun9]]);
+		}
+		if(PlayerInfo[playerid][pGun10] >= 2)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun10], PlayerInfo[playerid][pGun10]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun10] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun10]]);
+		}
+		if(PlayerInfo[playerid][pGun11] >= 2  && PlayerInfo[playerid][pAmmo11] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun11], PlayerInfo[playerid][pGun11]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun11] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun11]]);
+		}
+		if(PlayerInfo[playerid][pGun12] >= 2  && PlayerInfo[playerid][pAmmo12] >= 10)
+		{
+			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun12], PlayerInfo[playerid][pGun12]);
+			weaponexist = 1;
+			if(PlayerInfo[playerid][pGun12] == starabron[playerid])
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun12]]);
+		}
+		if(starabron[playerid] == 39 && PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
+		{
+			DynamicGui_AddRow(playerid, 40); //detonator
+			weaponexist = 1;
+			if(GetPVarInt(playerid, "MaDetonator") == 1)
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, "Detonator");
+		}
+		if((IsAPolicja(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
+		{
+			DynamicGui_AddRow(playerid, 24, 1); //paralizator
+			weaponexist = 1;
+			if(24 == starabron[playerid] && MaTazer[playerid] == 1)
+			{
+				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
+			}
+			else
+			{
+				format(active, sizeof(active), "{FFFFFF}");
+			}
+			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, "Paralizator");
+		}
 	}
 	else
 	{
-		format(active, sizeof(active), "{FFFFFF}");
-	}
-	format(dialogstring, sizeof(dialogstring), "%s%s", active, GunNames[PlayerInfo[playerid][pGun0]]);
-	if(PlayerInfo[playerid][pGun1] >= 2)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun1], PlayerInfo[playerid][pGun1]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun1] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun1]]);
-	}
-	if(PlayerInfo[playerid][pGun2] >= 2 && PlayerInfo[playerid][pAmmo2] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun2], PlayerInfo[playerid][pGun2]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun2] == starabron[playerid] && MaTazer[playerid] != 1)
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun2]]);
-	}
-	if(PlayerInfo[playerid][pGun3] >= 2 && PlayerInfo[playerid][pAmmo3] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun3], PlayerInfo[playerid][pGun3]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun3] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun3]]);
-	}
-	if(PlayerInfo[playerid][pGun4] >= 2 && PlayerInfo[playerid][pAmmo4] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun4], PlayerInfo[playerid][pGun4]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun4] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun4]]);
-	}
-	if(PlayerInfo[playerid][pGun5] >= 2 && PlayerInfo[playerid][pAmmo5] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun5], PlayerInfo[playerid][pGun5]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun5] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun5]]);
-	}
-	if(PlayerInfo[playerid][pGun6] >= 2 && PlayerInfo[playerid][pAmmo6] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun6], PlayerInfo[playerid][pGun6]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun6] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun6]]);
-	}
-	if(PlayerInfo[playerid][pGun7] >= 2 && PlayerInfo[playerid][pAmmo7] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun7], PlayerInfo[playerid][pGun7]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun7] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun7]]);
-	}
-	if(PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun8], PlayerInfo[playerid][pGun8]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun8] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun8]]);
-	}
-	if(PlayerInfo[playerid][pGun9] >= 2  && PlayerInfo[playerid][pAmmo9] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun9], PlayerInfo[playerid][pGun9]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun9] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun9]]);
-	}
-	if(PlayerInfo[playerid][pGun10] >= 2)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun10], PlayerInfo[playerid][pGun10]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun10] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun10]]);
-	}
-	if(PlayerInfo[playerid][pGun11] >= 2  && PlayerInfo[playerid][pAmmo11] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun11], PlayerInfo[playerid][pGun11]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun11] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun11]]);
-	}
-	if(PlayerInfo[playerid][pGun12] >= 2  && PlayerInfo[playerid][pAmmo12] >= 10)
-	{
-		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun12], PlayerInfo[playerid][pGun12]);
-		weaponexist = 1;
-		if(PlayerInfo[playerid][pGun12] == starabron[playerid])
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun12]]);
-	}
-	if(starabron[playerid] == 39 && PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
-	{
-		DynamicGui_AddRow(playerid, 40); //detonator
-		weaponexist = 1;
-		if(GetPVarInt(playerid, "MaDetonator") == 1)
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, "Detonator");
-	}
-	if((IsAPolicja(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
-	{
-		DynamicGui_AddRow(playerid, 24, 1); //paralizator
-		weaponexist = 1;
-		if(24 == starabron[playerid] && MaTazer[playerid] == 1)
-		{
-			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
-		}
-		else
-		{
-			format(active, sizeof(active), "{FFFFFF}");
-		}
-		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, "Paralizator");
+		SetPlayerArmedWeapon(playerid, 0);
+		starabron[playerid] = 0;
 	}
 
 	if(!weaponexist)

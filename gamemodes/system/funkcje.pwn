@@ -2566,6 +2566,22 @@ stock RemoveWeaponFromSlot(playerid, iWeaponSlot)
     for(new i = 0; i < 13; i++) GivePlayerWeapon(playerid, wps[i][0], wps[i][1]);
 
 }
+
+
+stock RemovePlayerWeaponsTemporarity(playerid) 
+{
+    new wps[13][2];
+    for(new i = 0; i < 13; i++)
+	{
+		GetPlayerWeaponData(playerid, i, wps[i][0], wps[i][1]);
+		SetPlayerAmmo(playerid, wps[i][1], 0); // Set ammo of Shotgun to 100 bullets
+	}
+	
+	SetPlayerArmedWeapon(playerid, 0);
+	starabron[playerid] = 0;
+
+}
+
 DajBronieFrakcyjne(playerid)
 {
 	if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)

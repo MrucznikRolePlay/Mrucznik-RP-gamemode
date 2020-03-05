@@ -302,7 +302,7 @@ YCMD:wejdz(playerid, params[], help)
                     SetTimerEx("AntySB", 5000, 0, "d", playerid);
 				    AntySpawnBroni[playerid] = 5;
                     SetPVarInt(playerid, "mozeUsunacBronie", 1);
-                    ResetPlayerWeapons(playerid);
+                    RemovePlayerWeaponsTemporarity(playerid);
                 }
 			}
             Wchodzenie(playerid);
@@ -738,7 +738,7 @@ YCMD:wejdz(playerid, params[], help)
                         SendClientMessage(playerid, COLOR_PANICRED, "((broñ zostanie przywrócona po œmierci lub ponownym zalogowaniu))");
                         
                         SetPVarInt(playerid, "mozeUsunacBronie", 1);
-                        ResetPlayerWeapons(playerid); // bug?
+                        RemovePlayerWeaponsTemporarity(playerid); // bug?
                     }
                     SetPlayerVirtualWorld(playerid, Business[i][b_vw]); 
                     SetPlayerInterior(playerid, Business[i][b_int]); 
