@@ -192,8 +192,11 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			x = GraffitiInfo[graffiti_id][grafXpos];
 			y = GraffitiInfo[graffiti_id][grafYpos];
 			z = GraffitiInfo[graffiti_id][grafZpos];
-			if(graffiti_existing == 1) SetPlayerCheckpoint(playerid, x, y, z, 2);
-			sendTipMessage(playerid, "Stworzono znacznik gdzie to graffiti siê znajduje.");
+			if(graffiti_existing == 1) 
+			{
+				SetPlayerCheckpoint(playerid, x, y, z, 2);
+				sendTipMessage(playerid, "Stworzono znacznik gdzie to graffiti siê znajduje.");
+			}
 		}
 	}
 	return 1;
