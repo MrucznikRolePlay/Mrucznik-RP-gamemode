@@ -213,7 +213,7 @@ choroby_InitEffects()
         30
     );
     AddEffect(KORONAWIRUS, "KoronawirusDeathEffect", "", 
-        REGULAR_EFFECT_MIN, RARE_EFFECT_RANGE, 
+        RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
         false, 10.0, 100, 
         200
     );
