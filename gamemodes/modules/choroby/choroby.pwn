@@ -255,6 +255,7 @@ IsPlayerTreated(playerid)
 
 DecreaseImmunity(playerid)
 {
+	PlayerImmunity[playerid]--;
 	if(PlayerImmunity[playerid] <= 0)
 	{
 		if(GetPVarInt(playerid, "maseczka") > 0)
@@ -265,7 +266,7 @@ DecreaseImmunity(playerid)
 		}
 		return 0;
 	}
-	return --PlayerImmunity[playerid];
+	return PlayerImmunity[playerid];
 }
 
 //-----------------<[ Disease effects: ]>-------------------
