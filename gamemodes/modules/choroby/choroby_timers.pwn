@@ -67,9 +67,7 @@ timer TreatmentCounter[1000](playerid, count)
 	if(count >= 0) 
 	{
 		if(	IsPlayerConnected(doctorid) && 
-			GetDistanceBetweenPlayers(playerid,doctorid) < 5 && 
-			PlayerInfo[playerid][pLocal] == PLOCAL_FRAC_LSMC && 
-			PlayerInfo[doctorid][pLocal] == PLOCAL_FRAC_LSMC) 
+			GetDistanceBetweenPlayers(playerid,doctorid) < 5) 
 		{	
 			AbortCurration[playerid] = 0;
 			defer TreatmentCounter(playerid, count-1);
