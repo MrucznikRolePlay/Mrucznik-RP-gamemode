@@ -84,7 +84,7 @@ YCMD:paka(playerid, params[], help)
                     poscig[suspect] = 0;
 					format(string, sizeof(string), "Aresztowany przez %s ~n~    grzywna $%d", sendername, moneys);
 					GameTextForPlayer(suspect, string, 5000, 5);
-					ResetPlayerWeapons(suspect);
+					RemovePlayerWeaponsTemporarity(suspect);
 					if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
 					{
 						format(string, sizeof(string), "<< Policjant %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);

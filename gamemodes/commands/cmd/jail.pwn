@@ -58,7 +58,7 @@ YCMD:jail(playerid, params[], help)
                     SendClientMessage(playa, COLOR_LIGHTRED, string);
                     format(string, sizeof(string), "* %s zosta³ uwiêziony w wiêzieniu na %d minut przez admina %s.",giveplayer, money, sendername);
                     SendPunishMessage(string, playa);
-                    ResetPlayerWeapons(playa);
+                    RemovePlayerWeaponsTemporarity(playa);
                     PoziomPoszukiwania[playa] = 0;
                     PlayerInfo[playa][pJailed] = 1;
                     PlayerInfo[playa][pJailTime] = money * 60;

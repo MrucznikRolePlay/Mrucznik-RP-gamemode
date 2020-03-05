@@ -2576,10 +2576,9 @@ stock RemovePlayerWeaponsTemporarity(playerid)
 		GetPlayerWeaponData(playerid, i, wps[i][0], wps[i][1]);
 		SetPlayerAmmo(playerid, wps[i][1], 0); // Set ammo of Shotgun to 100 bullets
 	}
-	
+
 	SetPlayerArmedWeapon(playerid, 0);
 	starabron[playerid] = 0;
-
 }
 
 DajBronieFrakcyjne(playerid)

@@ -138,7 +138,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 					SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
 					SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
 					SetPVarInt(playerid, "mozeUsunacBronie", 1);
-					ResetPlayerWeapons(playerid);
+					RemovePlayerWeaponsTemporarity(playerid);
 				}
 			}
 			else
