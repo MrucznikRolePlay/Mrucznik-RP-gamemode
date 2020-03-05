@@ -1045,15 +1045,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
     new engine, lights, alarm, doors, bonnet, boot, objective;
  	GetVehicleParamsEx(vehicleid, engine, lights ,alarm, doors, bonnet, boot, objective);
-    //AT400
-    if(GetVehicleModel(vehicleid) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
-    {
-        new Float:slx, Float:sly, Float:slz;
-		GetPlayerPos(playerid, slx, sly, slz);
-		SetPlayerPos(playerid, slx, sly, slz+0.1);
-		ClearAnimations(playerid);
-    }
-
     if(!ispassenger)
 	{
         if(!Player_CanUseCar(playerid, vehicleid))
@@ -1076,33 +1067,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		}
 		
     }
-
-	if (IsACopCar(vehicleid) && !ispassenger)
-	{
-		if(IsAPolicja(playerid))
-		{
-			sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
-		}
-		else
-		{
-			new Float:slx, Float:sly, Float:slz;
-			GetPlayerPos(playerid, slx, sly, slz);
-			SetPlayerPos(playerid, slx, sly, slz+1);
-			ClearAnimations(playerid);
-		}
-	}
-	if (IsAnAmbulance(vehicleid) && !ispassenger)
-	{
-		if(!IsAMedyk(playerid))
-		{
-			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
-            Player_RemoveFromVeh(playerid);
-		}
-	}
-	if (GetVehicleModel(vehicleid) == 525)
-	{
-		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
-	}
 	return 1;
 }
 

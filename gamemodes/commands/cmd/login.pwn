@@ -39,15 +39,15 @@ YCMD:login(playerid, params[], help)
 			return 1;
 		}
 
-		if(!sscanf(params, "k<fix>", playa))
+		if(sscanf(params, "k<fix>", playa))
 		{
-			if(!IsPlayerConnected(playa))
-			{
-				sendErrorMessage(playerid, "Gracz nie jest zalogowany.");
-				return 1;
-			}
+			sendTipMessage(playerid, "U¿yj /login [id]");
+			return 1;
 		}
-
+		if(!IsPlayerConnected(playa)) {
+			sendTipMessage(playerid, "Gracz nie jest zalogowany.");
+			return 1;
+		}
 		new string[144];
 		new giveplayer[MAX_PLAYER_NAME];
 		new Float:slx, Float:sly, Float:slz;
