@@ -40,6 +40,10 @@ eDiseases:GetDiseaseID(diseaseName[])
 
 CureFromAllDiseases(playerid)
 {
+	VECTOR_foreach(i : VPlayerDiseases[playerid])
+	{
+		DeactivateDiseaseEffects(playerid, eDiseases:MEM_get_val(i));
+	}
 	VECTOR_clear(VPlayerDiseases[playerid]);
 	MruMySQL_RemoveAllDiseases(playerid);
 }
@@ -48,7 +52,7 @@ CurePlayer(playerid, eDiseases:disease)
 {
 	VECTOR_remove_val(VPlayerDiseases[playerid], disease);
 	MruMySQL_RemoveDisease(playerid, disease);
-	DeactivateDiseaseEffect(playerid, disease);
+	DeactivateDiseaseEffects(playerid, disease);
 }
 
 InfectPlayer(playerid, eDiseases:disease)
@@ -119,7 +123,7 @@ ActivateDiseaseEffect(playerid, eDiseases:disease)
 	return 1;
 }
 
-DeactivateDiseaseEffect(playerid, eDiseases:disease)
+DeactivateDiseaseEffects(playerid, eDiseases:disease)
 {
 	VECTOR_foreach(v : DiseaseData[disease][VEffects])
 	{
@@ -154,19 +158,22 @@ CallEffectDesactivateCallback(playerid, eDiseases:disease, effect[eEffectData])
 
 DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 {
+	if(PlayerInfo[playerid][pBW] != 0 && GetPlayerAdminDutyStatus(playerid) != 0)
+		return 1;
+
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
 	foreach(new i : Player)
 	{
 		if(IsPlayerStreamedIn(i, playerid)) //dla optymalizacji
 		{
-			if(IsPlayerSick(playerid, disease)) return 1;
-			if(IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
+			if(PlayerInfo[i][pBW] == 0 && GetPlayerAdminDutyStatus(i) == 0 && IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
 			{
 				if(PlayerImmunity[i] <= 0) 
 				{
 					if(RandomizeSouldBeInfected(effect[InfectionChance], DiseaseData[disease][ContagiousRatio])) // do infection
 					{
+						if(IsPlayerSick(i, disease)) return 1;
 						InfectPlayer(i, disease);
 						new messageTime = random(60000);//minuta
 						defer InfectedEffectMessage[messageTime](i);
@@ -220,7 +227,7 @@ StartPlayerTreatment(playerid, doctorid, eDiseases:disease)
 	return 1;
 }
 
-EndPlayerTreatment(playerid)
+EndPlayerTreatment(playerid, doctorid)
 {
 	new eDiseases:disease = eDiseases:GetPVarInt(playerid, "disease-treatement");
 	new chance = DiseaseData[disease][DrugResistance];
@@ -232,12 +239,15 @@ EndPlayerTreatment(playerid)
 	{
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Niestety, leczenie siê nie powiod³o. Spróbuj jeszcze raz.");
 		GameTextForPlayer(playerid, "~r~Nie uda³o siê :(", 5000, 1);
+		GameTextForPlayer(doctorid, sprintf("~r~Nie uda³o siê wyleczyc %s", GetNick(playerid)), 5000, 1);
 	}
 	else //uda³o siê
 	{
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Uda³o Ci siê pokonaæ chorobê!");
 		CurePlayer(playerid, disease);
 		GameTextForPlayer(playerid, "~g~Wyleczony!", 5000, 1);
+		GameTextForPlayer(doctorid, sprintf("~g~Pacjent %s wyleczony!", GetNick(playerid)), 5000, 1);
+		PlayerImmunity[playerid] = 5;
 	}
 }
 
@@ -248,6 +258,7 @@ IsPlayerTreated(playerid)
 
 DecreaseImmunity(playerid)
 {
+	PlayerImmunity[playerid]--;
 	if(PlayerImmunity[playerid] <= 0)
 	{
 		if(GetPVarInt(playerid, "maseczka") > 0)
@@ -258,7 +269,7 @@ DecreaseImmunity(playerid)
 		}
 		return 0;
 	}
-	return --PlayerImmunity[playerid];
+	return PlayerImmunity[playerid];
 }
 
 //-----------------<[ Disease effects: ]>-------------------

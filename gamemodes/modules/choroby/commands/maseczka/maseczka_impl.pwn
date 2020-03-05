@@ -61,7 +61,7 @@ maseczka_akceptuj(playerid)
     }
 
     //body
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Akceptowa³eœ kupno maseczki od %s za %d$.", GetNick(giveplayerid), price));
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Akceptowa³eœ kupno maseczki od %s za %d$. Aby j¹ zdj¹æ, wpisz /zdejmij.", GetNick(giveplayerid), price));
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Gracz %s kupi³ od Ciebie maseczkê za %d$.", GetNick(playerid), price));
 
     ZabierzKase(playerid, price);
@@ -69,12 +69,12 @@ maseczka_akceptuj(playerid)
     Log(payLog, INFO, "%s zap³aci³ %s $%d za maseczke", 
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), price
     );
-    PlayerImmunity[giveplayerid] = 10;
+    PlayerImmunity[giveplayerid] = 15;
     SetPVarInt(playerid, "maseczka", 1);
-    new index = AttachPlayerItem(playerid, 18919, 2, 0.122467, 0.007340, 0.003190, 274.433288, 0.248657, 262.665466, 1.000000, 1.000000, 1.000000 );//bandana
+    new index = AttachPlayerItem(playerid, 18919, 2, -0.07, 0.0, 0.0, 85.0, 170.0, 86.0, 1.000000, 1.000000, 1.000000 );//bandana
     EditAttachedObject(playerid, index);
 
-    SetPVarInt(playerid, "maseczka-akceptuj", index+1);
+    SetPVarInt(playerid, "maseczka-akceptuj", 0);
     return 1;
 }
 

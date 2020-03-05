@@ -32,6 +32,13 @@ zjedz_OnDialogResponse(playerid, listitem)
 
 command_zjedz_Impl(playerid)
 {
+    new Float:hp;
+    GetPlayerHealth(playerid, hp);
+    if(hp >= 200.0)
+    {
+        sendErrorMessage(playerid, "Jesteœ tak najedzony, ¿e nie zmieœcisz ju¿ wiêcej (masz pe³ne hp).");
+        return 1;
+    }
     MruMySQL_CookedMealsDialog(playerid);
     return 1;
 }

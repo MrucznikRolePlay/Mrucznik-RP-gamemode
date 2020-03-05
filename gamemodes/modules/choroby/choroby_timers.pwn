@@ -38,14 +38,20 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 		VECTOR_get_arr(DiseaseData[disease][VEffects], effectID, effect);
 		CallEffectTimer(playerid, disease, effect, effectID);
 
-		DecreaseImmunity(playerid);
 		if(IsPlayerTreated(playerid)) //nie wywo³uj efektów podczas leczenia
 		{
 			return 1;
 		}
 
-		CallEffectActivateCallback(playerid, disease, effect);
-		DoInfecting(playerid, disease, effect);
+		if(PlayerImmunity[playerid] <= 0) //nie wywo³uj efektów, gdy gracz ma odpornoœæ
+		{
+			CallEffectActivateCallback(playerid, disease, effect);
+			DoInfecting(playerid, disease, effect);
+		}
+		else
+		{
+			DecreaseImmunity(playerid);
+		}
 	}
 	return 1;
 }
@@ -64,12 +70,9 @@ timer TreatmentCounter[1000](playerid, count)
 	if(IsPlayerConnected(doctorid))
 		GameTextForPlayer(doctorid, sprintf("Kuracja ~r~%ds", count), 1000, 4);
 
-	if(count <= 0) 
+	if(count >= 0) 
 	{
-		if(	IsPlayerConnected(doctorid) && 
-			GetDistanceBetweenPlayers(playerid,doctorid) < 5 && 
-			PlayerInfo[playerid][pLocal] == PLOCAL_FRAC_LSMC && 
-			PlayerInfo[doctorid][pLocal] == PLOCAL_FRAC_LSMC) 
+		if(	IsPlayerConnected(doctorid) && GetDistanceBetweenPlayers(playerid,doctorid) < 5) 
 		{	
 			AbortCurration[playerid] = 0;
 			defer TreatmentCounter(playerid, count-1);
@@ -80,8 +83,12 @@ timer TreatmentCounter[1000](playerid, count)
 			{
 				//abort treatment
 				if(IsPlayerConnected(doctorid))
+				{
 					GameTextForPlayer(doctorid, "Kuracja przerwana.", 1000, 1);
+					SendClientMessage(doctorid, COLOR_RED, "Kuracja przerwana - oddali³eœ siê od pacjenta na zbyt d³ugo!");
+				}
 				GameTextForPlayer(playerid, "Kuracja przerwana.", 1000, 1);
+				SendClientMessage(playerid, COLOR_RED, "Kuracja przerwana - oddali³eœ siê od doktora na zbyt d³ugo!");
 				SetPVarInt(playerid, "disease-treatement", 0);
 				return;
 			}
@@ -94,7 +101,7 @@ timer TreatmentCounter[1000](playerid, count)
 	} 
 	else 
 	{
-		EndPlayerTreatment(playerid);
+		EndPlayerTreatment(playerid, doctorid);
 	}
 }
 

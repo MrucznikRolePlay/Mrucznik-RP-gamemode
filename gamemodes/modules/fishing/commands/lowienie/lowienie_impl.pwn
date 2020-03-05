@@ -44,11 +44,11 @@ command_lowienie_Impl(playerid)
         new fstring[MAX_PLAYER_NAME];
         new Level = PlayerInfo[playerid][pFishSkill];
         new Float:health;
-        if(Level >= 0 && Level <= 50) { Caught = random(20)-7; }
-        else if(Level >= 51 && Level <= 100) { Caught = random(50)-20; }
-        else if(Level >= 101 && Level <= 200) { Caught = random(100)-50; }
-        else if(Level >= 201 && Level <= 400) { Caught = random(160)-60; }
-        else if(Level >= 401) { Caught = random(180)-70; }
+        if(Level >= 0 && Level <= 50) { Caught = random(200)-70; }
+        else if(Level >= 51 && Level <= 100) { Caught = random(500)-200; }
+        else if(Level >= 101 && Level <= 200) { Caught = random(1000)-500; }
+        else if(Level >= 201 && Level <= 400) { Caught = random(1600)-600; }
+        else if(Level >= 401) { Caught = random(1800)-700; }
         rand = random(sizeof(FishNames));
         
         SetTimerEx("Lowienie", 30000 ,0,"d",playerid);

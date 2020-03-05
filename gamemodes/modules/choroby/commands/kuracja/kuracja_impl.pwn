@@ -37,9 +37,9 @@ kuracja_akceptuj(playerid)
         return 1;
     }
 
-    if(PlayerInfo[playerid][pLocal] != PLOCAL_FRAC_LSMC)
+    if(!IsAtHealingPlace(playerid))
     {
-        sendErrorMessage(playerid, "Kuracjê mo¿na akceptowaæ tylko w szpitalu.");
+        sendErrorMessage(playerid, "Kuracjê mo¿na akceptowaæ tylko w szpitalu / wnêtrzu karetki.");
         return 1;
     }
 
@@ -80,7 +80,7 @@ kuracja_akceptuj(playerid)
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), cost, commission, DiseaseData[disease][Name]
     );
 
-    ChatMe(playerid, sprintf("pod³¹cza %s do aparatury i rozpoczyna kuracjê.", GetNick(giveplayerid)));
+    ChatMe(giveplayerid, sprintf("pod³¹cza %s do aparatury i rozpoczyna kuracjê.", GetNick(playerid)));
     StartPlayerTreatment(playerid, giveplayerid, disease);
 
     SetPVarInt(playerid, "kuracja-akceptuj", 0);
@@ -95,9 +95,9 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
         return 1;
 	}
 
-    if(PlayerInfo[playerid][pLocal] != PLOCAL_FRAC_LSMC)
+    if(!IsAtHealingPlace(playerid))
     {
-        sendErrorMessage(playerid, "Kuracjê mo¿na oferowaæ tylko w szpitalu.");
+        sendErrorMessage(playerid, "Kuracjê mo¿na oferowaæ tylko w szpitalu / wnêtrzu karetki.");
         return 1;
     }
 
@@ -129,13 +129,13 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
     //TODO: Check czy gracz jest w szpitalu
 
     new cost = money + DiseaseData[diseaseID][CureCost];
-    new currationTime = DiseaseData[diseaseID][CureTime];
+    new Float:currationTime = DiseaseData[diseaseID][CureTime]/60.0;
     new chance = 100 - DiseaseData[diseaseID][DrugResistance];
     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Oferujesz %s %.1f minutow¹ kuracjê %s za $%d$ (prowizja %d$).", 
-        GetNick(giveplayerid), currationTime/60.0, disease, cost, money
+        GetNick(giveplayerid), currationTime, disease, cost, money
     ));
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* %s oferuje Ci kuracjê choroby %s.", GetNick(playerid), disease));
-    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Kuracja potrwa %d minut i bêdzie kosztowaæ %d$.", currationTime, cost));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Kuracja potrwa %.1f minut i bêdzie kosztowaæ %d$.", currationTime, cost));
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Szanse powodzenia kuracji to %d procent. Wpisz /akceptuj kuracja aby siê zgodziæ.", chance));
 
     SetPVarInt(giveplayerid, "kuracja-akceptuj", 1);

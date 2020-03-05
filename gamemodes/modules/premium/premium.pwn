@@ -235,7 +235,7 @@ KupPrzedmiotPremium(playerid, id)
 	);
 	
 	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", PrzedmiotyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
-	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /przedmioty");
+	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /dodatki");
 
 	premium_printMcBalance(playerid);
 	return 1;

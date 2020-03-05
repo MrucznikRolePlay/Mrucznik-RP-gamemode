@@ -1045,15 +1045,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
     new engine, lights, alarm, doors, bonnet, boot, objective;
  	GetVehicleParamsEx(vehicleid, engine, lights ,alarm, doors, bonnet, boot, objective);
-    //AT400
-    if(GetVehicleModel(vehicleid) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
-    {
-        new Float:slx, Float:sly, Float:slz;
-		GetPlayerPos(playerid, slx, sly, slz);
-		SetPlayerPos(playerid, slx, sly, slz+0.1);
-		ClearAnimations(playerid);
-    }
-
     if(!ispassenger)
 	{
         if(!Player_CanUseCar(playerid, vehicleid))
@@ -1076,33 +1067,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		}
 		
     }
-
-	if (IsACopCar(vehicleid) && !ispassenger)
-	{
-		if(IsAPolicja(playerid))
-		{
-			sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
-		}
-		else
-		{
-			new Float:slx, Float:sly, Float:slz;
-			GetPlayerPos(playerid, slx, sly, slz);
-			SetPlayerPos(playerid, slx, sly, slz+1);
-			ClearAnimations(playerid);
-		}
-	}
-	if (IsAnAmbulance(vehicleid) && !ispassenger)
-	{
-		if(!IsAMedyk(playerid))
-		{
-			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
-            Player_RemoveFromVeh(playerid);
-		}
-	}
-	if (GetVehicleModel(vehicleid) == 525)
-	{
-		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
-	}
 	return 1;
 }
 
@@ -4913,9 +4877,9 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			new akcja[150];
 			format(akcja,sizeof(akcja),"* %s wyci¹ga spray i tworzy nim napis.",GetNick(playerid));
             ProxDetector(40.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			format(akcja, sizeof(akcja), "%s stworzy³ nowe graffiti [ID: %d], lokalizacja: ", GetNick(playerid), f, pZone);
+			format(akcja, sizeof(akcja), "%s stworzy³ nowe graffiti [ID: %d], lokalizacja: %s", GetNick(playerid), f, pZone);
 			SendAdminMessage(COLOR_PANICRED, akcja);
-			Log(serverLog, INFO, "%s stworzy³ nowe graffiti %s, lokalizacja:", GetPlayerLogName(playerid), GetGraffitiLogText(f), pZone);
+			Log(serverLog, INFO, "%s stworzy³ nowe graffiti %s, lokalizacja: %s", GetPlayerLogName(playerid), GetGraffitiLogText(f), pZone);
 		}
 		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
@@ -5588,6 +5552,8 @@ PayDay()
 	CountDown();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
+	for(new i; i < GRAFFITI_MAX; i++) graffiti_ReloadForPlayers(i);
+	
 	if(DmvActorStatus && shifthour < 16 || shifthour > 22)
 	{
 		DestroyActorsInDMV(INVALID_PLAYER_ID); 

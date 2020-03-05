@@ -66,7 +66,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 ## Choroby
 | Nazwa | Koszt kuracji | Czas kuracji | Lekoodporność | Zaraźliwość | Zarażanie przy kontakcie | Efekty | Sposób zarażenia |
 | :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:| :-----:|
-| Koronawirus | 1000$ | 20 sekund | 95% | 1.0 | tak | [efekty](#efekty-koronawirusa) | Komenda /zjedz nietoperza i do ugotowania |
+| Koronawirus | 1000$ | 20 sekund | 60% | 1.0 | tak | [efekty](#efekty-koronawirusa) | Komenda /zjedz nietoperza i do ugotowania |
 | Grypa | 25.000$ | 2 minuty | 0% | 1.0 | nie | [efekty](#efekty-grypy) | Jeżeli gracz przez godzinę będzie pozostawał z HP mniejszym niż 20 |
 | Zapalenie płuc | 100.000$ | 4 minuty | 30% | 1.0 | nie | [efekty](#efekty-zapalenia-płuc) | Przy efektach grypy (kaszel) 5% |
 | Zatrucie | 10.000$ | 30 sekund | 20% | 1.0 | nie | [efekty](#efekty-zatrucia) | 5% szans na zarażenie przy /zjedz
@@ -80,7 +80,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 | Parkinson/Niedowład rąk | 150.000$ | 10 minut | 25% | 0.0 | nie | [efekty](#efekty-parkinsona) | 0.1% podczas dostania w rękę + 1% szans przy efektach gangreny |
 | Uraz | 10.000$ | 1 minuta | 0% | 0.0 | nie | [efekty](#efekty-urazu) | 5% szans podczas BW |
 | Gangrena | 75.000$ | 2 minut | 75% | 0.1 | tak | [efekty](#efekty-gangreny) | 5% szans podczas efektów urazu |
-| PTSD | 15.000$ | 1 minut | 90% | 0.0 | nie | [efekty](#efekt-PTSD) | Gdy gracz zabije 10 osób w ciągu 10minut ma 20% szans na PTSD |
+| PTSD | 15.000$ | 1 minut | 85% | 0.0 | nie | [efekty](#efekt-PTSD) | Gdy gracz zabije 10 osób w ciągu 10minut ma 20% szans na PTSD |
 | Obłęd - TODO | 0$ | 0 minut | 0% | 0.0 | nie | [efekty](#efekt-obłędu) | TODO |
 
 ### Efekty koronawirusa

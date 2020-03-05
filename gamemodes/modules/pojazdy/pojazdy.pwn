@@ -56,6 +56,8 @@ hook OnPlayerDisconnect(playerid)
 
 hook OnPlayerConnect(playerid)
 {
+    if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);
+    if(GetPVarInt(playerid, "timer_CruiseControl")) CruiseControl_TurnOff(playerid);
     pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
 }
 
@@ -63,22 +65,11 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
     if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)
 	{
-        new rcarid;
-        rcarid = GetPlayerVehicleID(playerid);
-        if(IsARower(rcarid))
-        {
-			if(RELEASED(KEY_ACTION))
-	        {
-		  		new Float:Velocity[3];
-				GetVehicleVelocity(rcarid, Velocity[0], Velocity[1], Velocity[2]);
-    		    SetVehicleVelocity(rcarid, Velocity[0]/1.5, Velocity[1]/1.5, Velocity[2]/3);
-			}
-	    }
-        if(PRESSED(KEY_ACTION) && !GetPVarInt(playerid, "timer_StaticCruiseControl"))
+        if(PRESSED(KEY_ACTION) && !GetPVarInt(playerid, "timer_StaticCruiseControl")  && PlayerInfo[playerid][pCruiseController] == 1)
         {
             new carid;
             carid = GetPlayerVehicleID(playerid);
-            if(!IsARower(carid) && !IsABoat(carid) && !IsAPlane(carid) && PlayerInfo[playerid][pCruiseController] == 1)
+            if(!IsARower(carid) && !IsABoat(carid) && !IsAPlane(carid))
             {
                 if(GetPVarInt(playerid, "timer_CruiseControl"))
                 {
@@ -90,20 +81,20 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
                 }
             }
         }
-        else if(PRESSED(KEY_FIRE) && GetPVarInt(playerid, "timer_StaticCruiseControl"))
+        else if(PRESSED(KEY_FIRE))
         {
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
                 CruiseControl_SetSpeed(playerid, 10, true);
             }
         }
-        /*else if(PRESSED(KEY_DOWN) && GetPVarInt(playerid, "timer_StaticCruiseControl"))
+        else if(PRESSED(KEY_DOWN))
         {
             if(GetPVarInt(playerid, "timer_CruiseControl"))
             {
                 CruiseControl_SetSpeed(playerid, 10, false);
             }
-        }*/
+        }
 	}
 }
 //-----------------<[ Funkcje: ]>------------------

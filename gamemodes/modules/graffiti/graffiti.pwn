@@ -157,6 +157,8 @@ graffiti_EditGraffiti(playerid, f)
 graffiti_CreateGraffiti(playerid)
 {
 	new f = graffiti_GetNewID();
+	new Float:Angle;
+	GetPlayerFacingAngle(playerid, Angle);
 	if(f == INVALID_GRAFID) 
 	{
 		sendTipMessage(playerid, "Wykorzystano limit graffiti(100) na mapê.");

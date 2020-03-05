@@ -77,6 +77,10 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
+	else if(weaponid == 42) //gaœnica
+	{
+		PlayerImmunity[playerid] = 2;
+	}
 	else 
 	{
 		//padaczka

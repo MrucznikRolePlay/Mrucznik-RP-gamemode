@@ -30,6 +30,7 @@ EatCookedMeal(playerid, name[], weight, type)
 {
 	new Float:hp;
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
+	ChatMe(playerid, sprintf("zjada %s.", name));
 	GetPlayerHealth(playerid, hp);
 	SetPlayerHealth(playerid, hp+weight/10);
 
@@ -43,6 +44,11 @@ EatCookedMeal(playerid, name[], weight, type)
 	{//wuhan bat
 		InfectPlayer(playerid, KORONAWIRUS);
 		SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
+	}
+	if(type < sizeof(FishNames))
+	{
+		if(PlayerImmunity[playerid] < 5)
+			PlayerImmunity[playerid] ++;
 	}
 	if(random(20) == 0) 
 	{//5% szans na zatrucie
