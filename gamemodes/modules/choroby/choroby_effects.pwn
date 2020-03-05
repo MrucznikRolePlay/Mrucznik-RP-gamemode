@@ -364,7 +364,7 @@ public DeathEffect(playerid, disease, value)
 
 
 //effects timers
-timer LoweringHP[250](playerid, uid, hpLoss, bool:death, bool:freeze)
+timer LoweringHP[500](playerid, uid, hpLoss, bool:death, bool:freeze)
 {
 	if(!IsPlayerConnected(playerid) || uid != PlayerInfo[playerid][pUID]) 
 		return;
@@ -388,7 +388,8 @@ timer LoweringHP[250](playerid, uid, hpLoss, bool:death, bool:freeze)
 	}
 	SetPlayerHealth(playerid, hp-1);
 
-	defer LoweringHP(playerid, uid, hpLoss-1, death, freeze);
+	if(PlayerImmunity[playerid] <= 0)
+		defer LoweringHP(playerid, uid, hpLoss-1, death, freeze);
 }
 
 timer HallucinationsOff[60000](playerid)

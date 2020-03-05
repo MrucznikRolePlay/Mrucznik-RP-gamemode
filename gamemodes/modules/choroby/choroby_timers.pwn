@@ -38,14 +38,20 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 		VECTOR_get_arr(DiseaseData[disease][VEffects], effectID, effect);
 		CallEffectTimer(playerid, disease, effect, effectID);
 
-		DecreaseImmunity(playerid);
 		if(IsPlayerTreated(playerid)) //nie wywo³uj efektów podczas leczenia
 		{
 			return 1;
 		}
 
-		CallEffectActivateCallback(playerid, disease, effect);
-		DoInfecting(playerid, disease, effect);
+		if(PlayerImmunity[playerid] <= 0) 
+		{
+			CallEffectActivateCallback(playerid, disease, effect);
+			DoInfecting(playerid, disease, effect);
+		}
+		else
+		{
+			DecreaseImmunity(playerid);
+		}
 	}
 	return 1;
 }
