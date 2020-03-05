@@ -67,7 +67,7 @@ ugotuj_OnDialogResponse(playerid, listitem)
 
 AddCookingFishRow(playerid, string[1024], slot, id, weight)
 {
-    strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", FishModels[id], FishNames[id], weight), 1024);
+    strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", FishModels[id], Odpolszcz(FishNames[id]), weight), 1024);
     DynamicGui_AddRow(playerid, slot, weight);
 }
 
@@ -105,7 +105,7 @@ command_ugotuj_Impl(playerid)
     }
     string[strlen(string)-1] = '\0';
 
-    ShowPlayerDialogEx(playerid, DIALOG_COOKING, DIALOG_STYLE_PREVIEW_MODEL, "Dostêpne do ugotowania", string, "Ugotuj", "Anuluj");
+    ShowPlayerDialogEx(playerid, DIALOG_COOKING, DIALOG_STYLE_PREVIEW_MODEL, "Dostepne do ugotowania", string, "Ugotuj", "Anuluj");
     return 1;
 }
 

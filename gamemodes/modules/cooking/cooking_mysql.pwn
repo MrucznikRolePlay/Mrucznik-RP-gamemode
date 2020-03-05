@@ -57,7 +57,7 @@ MruMySQL_CookedMealsDialog(playerid)
 			while(mysql_fetch_row_format(result, "|"))
 			{
 				sscanf(result, "p<|>dds["#MAX_COOKED_NAME"]dd", id, model, name, weight, type);
-				strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", model, name, weight));
+				strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", model, Odpolszcz(name), weight));
 				DynamicGui_AddRow(playerid, id);
 			}
 			if(strlen(string) < 2)
