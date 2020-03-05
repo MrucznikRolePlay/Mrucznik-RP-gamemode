@@ -76,7 +76,7 @@ public CruiseControl_Static_TurnOn(playerid, type)
 
 public CruiseControl_Static(playerid, type)
 {
-	if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)
+	if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0 && GetPVarInt(playerid, "timer_StaticCruiseControl"))
     {
         new Float:vX, Float:vY, Float:vZ;
 		new speed;
