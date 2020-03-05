@@ -158,19 +158,22 @@ CallEffectDesactivateCallback(playerid, eDiseases:disease, effect[eEffectData])
 
 DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 {
+	if(PlayerInfo[playerid][pBW] != 0 && GetPlayerAdminDutyStatus(playerid) != 0)
+		return 1;
+
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
 	foreach(new i : Player)
 	{
 		if(IsPlayerStreamedIn(i, playerid)) //dla optymalizacji
 		{
-			if(IsPlayerSick(playerid, disease)) return 1;
-			if(PlayerInfo[playerid][pBW] == 0 && IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
+			if(PlayerInfo[i][pBW] == 0 && GetPlayerAdminDutyStatus(i) == 0 && IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
 			{
 				if(PlayerImmunity[i] <= 0) 
 				{
 					if(RandomizeSouldBeInfected(effect[InfectionChance], DiseaseData[disease][ContagiousRatio])) // do infection
 					{
+						if(IsPlayerSick(i, disease)) return 1;
 						InfectPlayer(i, disease);
 						new messageTime = random(60000);//minuta
 						defer InfectedEffectMessage[messageTime](i);
