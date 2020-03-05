@@ -56,6 +56,8 @@ hook OnPlayerDisconnect(playerid)
 
 hook OnPlayerConnect(playerid)
 {
+    if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);
+    if(GetPVarInt(playerid, "timer_CruiseControl")) CruiseControl_TurnOff(playerid);
     pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
 }
 
