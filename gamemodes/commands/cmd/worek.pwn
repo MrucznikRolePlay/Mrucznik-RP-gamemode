@@ -57,6 +57,12 @@ YCMD:worek(playerid, params[], help)
 						return 1;
 					}
 
+					if(PlayerInfo[giveplayerid][pInjury] == 0 && PlayerTied[giveplayerid] == 0 && pobity[giveplayerid] == 0)
+					{
+						sendErrorMessage(playerid, "Mo¿esz za³o¿yæ worek na g³owê tylko graczowi, który jest pobity/zwi¹zany lub ranny.");
+						return 1;
+					}
+
 					if(Worek_MamWorek[giveplayerid])
 				    {
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
