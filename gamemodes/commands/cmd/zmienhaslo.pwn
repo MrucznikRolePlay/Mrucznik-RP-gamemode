@@ -56,7 +56,7 @@ YCMD:zmienhaslo(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_PANICRED, tmppass);
 
 		Log(serverLog, INFO, "Gracz %s zmieni³ sobie has³o.", GetPlayerLogName(playerid));
-		MruMySQL_ChangePassword(GetNick(playerid), tmppass);
+		MruMySQL_ChangePassword(GetNickEx(playerid), tmppass);
 	}
 	return 1;
 }

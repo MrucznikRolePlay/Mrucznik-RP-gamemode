@@ -33,7 +33,7 @@ YCMD:pwarn(playerid, params[], help)
 	new string[128];
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -67,7 +67,7 @@ YCMD:pwarn(playerid, params[], help)
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "Admin %s nada³ warna (offline) dla %s. Powód: %s", GetNick(playerid), nick, result);
+				format(string, sizeof(string), "Admin %s nada³ warna (offline) dla %s. Powód: %s", GetNickEx(playerid), nick, result);
 				SendPunishMessage(string, playerid);
 			}
         

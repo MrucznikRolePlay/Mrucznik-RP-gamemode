@@ -35,12 +35,12 @@ YCMD:sluzba(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsACop(playerid) && PoziomPoszukiwania[playerid] > 0)
+        if(IsAPolicja(playerid) && PoziomPoszukiwania[playerid] > 0)
         {
             sendTipMessage(playerid, "Osoby poszukiwane przez policjê nie mog¹ rozpocz¹æ s³u¿by !");
             return 1;
         }
-        if(IsACop(playerid) && OnDutyCD[playerid] == 1)
+        if(IsAPolicja(playerid) && OnDutyCD[playerid] == 1)
         {
             sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /dutycd !");
             return 1;
@@ -51,7 +51,7 @@ YCMD:sluzba(playerid, params[], help)
 			return 1;
 		}
 
-        if((IsACop(playerid) || IsAMedyk(playerid) || GetPlayerFraction(playerid) == FRAC_BOR) && PlayerInfo[playerid][pUniform] == 0)
+        if((IsAPolicja(playerid) || IsAMedyk(playerid) || GetPlayerFraction(playerid) == FRAC_BOR) && PlayerInfo[playerid][pUniform] == 0)
         {
             sendTipMessage(playerid, "Nie masz skina frakcyjnego, u¿yj /fskin !");
             return 1;

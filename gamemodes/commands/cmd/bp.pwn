@@ -43,7 +43,7 @@ YCMD:bp(playerid, params[], help)//blokada pisania
 			return sendTipMessage(playerid, "Czas max. 1h dla p@!");
 		}
 	}
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 	{
 		if(IsPlayerConnected(giveplayerid))
 		{
@@ -58,7 +58,7 @@ YCMD:bp(playerid, params[], help)//blokada pisania
 					}
 					else if(kary_TXD_Status == 0)
 					{
-						format(string, sizeof(string), "AdmCmd: %s dosta³ Blokadê Pisania od %s na %d godzin. Powód: %s", GetNick(giveplayerid), GetNick(playerid), czas, text);
+						format(string, sizeof(string), "AdmCmd: %s dosta³ Blokadê Pisania od %s na %d godzin. Powód: %s", GetNick(giveplayerid), GetNickEx(playerid), czas, text);
 						SendPunishMessage(string, playerid);
 					}
 					return 1;

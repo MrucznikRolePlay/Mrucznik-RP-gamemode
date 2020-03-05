@@ -39,12 +39,17 @@ YCMD:respawnplayer(playerid, params[], help)
     //czynnosci
     if(IsPlayerInAnyVehicle(v))
     {
-        RemovePlayerFromVehicle(v);
+        new Float:shealth;
+        new Float:slx, Float:sly, Float:slz;
+        GetPlayerHealth(v, shealth);
+        SetPlayerHealth(v, shealth-5);
+        GetPlayerPos(v, slx, sly, slz);
+        SetPlayerPos(v, slx, sly, slz+5);
     }
     
     //wiadomosci
     new str[128];
-    format(str, 128, "$System$ » Zosta³eœ zrespawnowany przez admina %s", GetNick(playerid));
+    format(str, 128, "$System$ » Zosta³eœ zrespawnowany przez admina %s", GetNickEx(playerid));
     SendClientMessage(v, COLOR_LIGHTGREEN, str);
     format(str, 128, "$System$ » Zrespawnowa³eœ gracza o nicku %s", GetNick(v));
     SendClientMessage(playerid, COLOR_LIGHTGREEN, str);

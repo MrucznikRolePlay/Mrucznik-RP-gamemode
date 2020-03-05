@@ -40,7 +40,7 @@ YCMD:blok(playerid, params[], help)
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -69,7 +69,7 @@ YCMD:blok(playerid, params[], help)
 					GiveBlockForPlayer(giveplayerid, playerid, (result));
 					if(kary_TXD_Status == 0)
 					{
-						format(string, sizeof(string), "Admin %s zablokowa³ konto gracza %s. Powód: %s", GetNick(playerid), GetNick(giveplayerid), (result)); 
+						format(string, sizeof(string), "Admin %s zablokowa³ konto gracza %s. Powód: %s", GetNickEx(playerid), GetNick(giveplayerid), (result)); 
 						SendPunishMessage(string, giveplayerid);
 					}
 					else if(kary_TXD_Status == 1)

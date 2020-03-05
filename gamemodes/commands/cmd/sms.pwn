@@ -43,7 +43,7 @@ YCMD:sms(playerid, params[], help)
 		sendErrorMessage(playerid, "Nie posiadasz telefonu w wiêzieniu!"); 
 		return 1;
 	}
-	if(Kajdanki_JestemZakuty[playerid] == 1)
+	if(Kajdanki_JestemSkuty[playerid] == 1)
 	{
 		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas bycia skutym!");
 		return 1;
@@ -108,7 +108,7 @@ YCMD:sms(playerid, params[], help)
 		ZabierzKase(playerid, smsCost); 
 		format(string, sizeof(string), "Dodatkowy koszt p³atnego SMS: %d$", smsCost);
 		SendClientMessage(playerid, COLOR_WHITE, string);
-		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid, true));
+		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	    Log(chatLog, INFO, "%s sms SAN %d: %s", GetPlayerLogName(playerid), givePlayerNumber, messSMS);
 		foreach(new i : Player)
@@ -149,7 +149,7 @@ YCMD:sms(playerid, params[], help)
 			sendErrorMessage(playerid, string);
 			return 1;
 		}
-		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid, true));
+		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	    Log(chatLog, INFO, "%s sms do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(checkNumberPlayer), messSMS);
 		if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[checkNumberPlayer][pPodPW] == 1) //podgl?d admina

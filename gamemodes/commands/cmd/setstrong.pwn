@@ -47,9 +47,9 @@ YCMD:setstrong(playerid, params[], help)
 	{
 		if(PlayerInfo[giveplayerid][pStrong] != MAX_STRONG_VALUE)
 		{
-			if(PlayerInfo[playerid][pAdmin] >= 3500 || PlayerInfo[playerid][pNewAP] == 5)
+			if(PlayerInfo[playerid][pAdmin] >= 3500 || IsAScripter(playerid))
 			{
-				format(string, sizeof(string), "Administrator %s ustali³ Ci wartoœæ si³y na %d [Poprzednia wartoœæ %d]", GetNick(playerid), valueStrong, PlayerInfo[giveplayerid][pStrong]);
+				format(string, sizeof(string), "Administrator %s ustali³ Ci wartoœæ si³y na %d [Poprzednia wartoœæ %d]", GetNickEx(playerid), valueStrong, PlayerInfo[giveplayerid][pStrong]);
 				sendTipMessageEx(giveplayerid, COLOR_P@, string);
 				format(string, sizeof(string), "Ustali³eœ wartoœæ si³y %s na %d - jego poprzednia wartoœæ to %d", GetNick(giveplayerid), valueStrong, PlayerInfo[giveplayerid][pStrong]); 
 				sendTipMessageEx(playerid, COLOR_P@, string); 

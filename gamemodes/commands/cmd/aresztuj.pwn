@@ -36,7 +36,7 @@ YCMD:aresztuj(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
    	{
-   	    if(IsACop(playerid))
+   	    if(IsAPolicja(playerid))
    	    {
    	        if(PlayerToPoint(10.0, playerid, 222.6395,114.3951,999.0156) //old komi
 			|| IsPlayerInRangeOfPoint(playerid, 10.0, 268.3546, 83.0229, 1001.0391)//dillimore
@@ -92,7 +92,14 @@ YCMD:aresztuj(playerid, params[], help)
 									WantLawyer[playa] = 1;
 									PlayerInfo[playa][pArrested] += 1;
 									/*kajdanki*/
-									if(Kajdanki_Uzyte[playa]) UnCuffedAction(playerid, playa);
+									Kajdanki_JestemSkuty[playa] = 0;//Kajdany
+                                    Kajdanki_Uzyte[playa] = 0;
+                                    Kajdanki_PDkuje[playerid] = 0;
+                                    Kajdanki_Uzyte[playerid] = 0;
+									ClearAnimations(playa);
+									SetPlayerSpecialAction(playa,SPECIAL_ACTION_NONE);
+									RemovePlayerAttachedObject(playa, 0);
+									Kajdanki_PDkuje[playa] = 0;
 									Wchodzenie(playa);
 									SetPlayerVirtualWorld(playa, 1);
 								    new losuj= random(sizeof(Cela));
@@ -132,7 +139,11 @@ YCMD:aresztuj(playerid, params[], help)
 											SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 											format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
 											SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-											if(Kajdanki_Uzyte[giveplayerid]) UnCuffedAction(playerid, giveplayerid);
+											Kajdanki_JestemSkuty[playa] = 0;//Kajdany
+											Kajdanki_Uzyte[playa] = 0;
+											Kajdanki_PDkuje[playerid] = 0;
+											Kajdanki_Uzyte[playerid] = 0;
+											Kajdanki_SkutyGracz[playa] = 0;
 											JailDeMorgan(giveplayerid);
 											UsunBron(playa);//usun bron
 											SetPlayerSpawnWeapon(playa);

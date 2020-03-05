@@ -155,7 +155,7 @@ Player_CanUseCar(playerid, vehicleid)
 
 	if(IsACopCar(vehicleid))
 	{
-	    if(IsACop(playerid))
+	    if(IsAPolicja(playerid))
 	    {
 	        if(OnDuty[playerid] == 0)
 	        {

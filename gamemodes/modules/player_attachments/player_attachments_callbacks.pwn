@@ -186,7 +186,7 @@ attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 			new giveplayerid = GetPVarInt(playerid, "ZdejmijGiveplayerid");
 			DetachPlayerItem(giveplayerid, index);
 
-			SendClientMessage(giveplayerid, COLOR_RED, sprintf("Administrator %s zdj¹³ twój obiekt, popraw jego u³o¿enie, inaczej mo¿esz otrzymaæ karê.", GetNick(playerid)));
+			SendClientMessage(giveplayerid, COLOR_RED, sprintf("Administrator %s zdj¹³ twój obiekt, popraw jego u³o¿enie, inaczej mo¿esz otrzymaæ karê.", GetNickEx(playerid)));
 			sendTipMessage(playerid, sprintf("Zdj¹³eœ obiekt graczowi %s", GetNick(giveplayerid)));
 		}
 		return 1;

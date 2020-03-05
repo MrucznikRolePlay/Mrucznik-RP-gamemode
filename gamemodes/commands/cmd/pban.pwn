@@ -33,7 +33,7 @@ YCMD:pban(playerid, params[], help)
 	new string[128];
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1)
+        if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -51,7 +51,7 @@ YCMD:pban(playerid, params[], help)
 			sscanf(nick, "k<fix>", giveplayerid);
             if(IsPlayerConnected(giveplayerid))
 			{
-			    sendErrorMessage(playerid, "Nie mo¿esz zablokowaæ tego gracza (jest online (na serwerze))");
+			    sendErrorMessage(playerid, "Nie mo¿esz zbanowaæ tego gracza (jest online (na serwerze))");
 				return 1;
 			}
             if(MruMySQL_DoesAccountExist(nick) != -1)
@@ -66,7 +66,7 @@ YCMD:pban(playerid, params[], help)
             }
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "Admin %s zablokowa³ %s (Offline). Powód: %s", GetNick(playerid), nick, result);
+				format(string, sizeof(string), "Admin %s zbanowa³ %s (Offline). Powód: %s", GetNickEx(playerid), nick, result);
 				SendPunishMessage(string, playerid); 
 			}
 		}

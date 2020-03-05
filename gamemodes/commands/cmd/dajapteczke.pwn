@@ -64,7 +64,7 @@ YCMD:dajapteczke(playerid, params[], help)
 					Log(adminLog, INFO, "Admin %s ustawi³ %s apteczki na %d", GetPlayerLogName(playerid), GetPlayerLogName(playa), ilosc);
 					format(string, sizeof(string), "%s ustawi³ %d apteczki dla %s", sendername, ilosc, giveplayer);
 					SendMessageToAdmin(string, COLOR_P@);
-					if(playerid != playa) _MruAdmin(playa, sprintf("Admin %s [%d] ustawi³ Ci poziom apteczek na [%d]", GetNick(playerid, true), playerid, ilosc));
+					if(playerid != playa) _MruAdmin(playa, sprintf("Admin %s [%d] ustawi³ Ci poziom apteczek na [%d]", GetNickEx(playerid), playerid, ilosc));
 				}
 			}
 		}

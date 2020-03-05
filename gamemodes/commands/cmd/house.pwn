@@ -31,8 +31,6 @@
 YCMD:house(playerid, params[], help)
 {
     new string[128];
-    new sendername[MAX_PLAYER_NAME];
-    GetPlayerName(playerid, sendername, MAX_PLAYER_NAME);
 
     if(gPlayerLogged[playerid] == 1)
     {

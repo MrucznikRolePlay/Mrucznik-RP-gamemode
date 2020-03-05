@@ -198,12 +198,12 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 	{
 		if(strfind(jakMowi, "krzyczy", true, 0)  != -1)
 		{
-			format(string, sizeof(string), "%s %s: %s!", GetNick(playerid, true), jakMowi, text);
+			format(string, sizeof(string), "%s %s: %s!", GetNick(playerid), jakMowi, text);
 			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			return 1;
 		}
-		if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0) != -1 || strfind(text[ostatnialitera], ":", true, 0)  != -1 || strfind(text[ostatnialitera], "*", true, 0) != -1) format(string, sizeof(string), "%s %s: %s", GetNick(playerid, true), jakMowi, text);
-		else format(string, sizeof(string), "%s %s: %s.", GetNick(playerid, true), jakMowi, text);
+		if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0) != -1 || strfind(text[ostatnialitera], ":", true, 0)  != -1 || strfind(text[ostatnialitera], "*", true, 0) != -1) format(string, sizeof(string), "%s %s: %s", GetNick(playerid), jakMowi, text);
+		else format(string, sizeof(string), "%s %s: %s.", GetNick(playerid), jakMowi, text);
 		ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
@@ -216,7 +216,7 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 			strmid(text2, text, pos + 1, strlen(text));
 			strdel(text, pos, strlen(text));
 
-			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid, true), jakMowi, text);
+			format(string, sizeof(string), "%s %s: %s [.]", GetNick(playerid), jakMowi, text);
 			ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 			if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0) != -1 || strfind(text[ostatnialitera], ":", true, 0)  != -1 || strfind(text[ostatnialitera], "*", true, 0) != -1) format(string, sizeof(string), "[.] %s", text2);
 			else format(string, sizeof(string), "[.] %s.", text2);
@@ -389,7 +389,7 @@ sendFractionMessageToAll(playerid, text[])
 			fractionMessageRange++; 
 			format(sContent, sizeof(sContent), "|___________ %s ___________|", FractionNames[GetPlayerFraction(playerid)]); 
 			SendClientMessage(i, COLOR_WHITE, sContent); 
-			format(sContent, sizeof(sContent), "%s %s: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]], GetNick(playerid, true), text);
+			format(sContent, sizeof(sContent), "%s %s: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]], GetNickEx(playerid), text);
 			SendClientMessage(i, GetFractionColor(PlayerInfo[playerid][pMember]), sContent); 
 		}
 	}

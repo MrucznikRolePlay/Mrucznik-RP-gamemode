@@ -181,7 +181,7 @@ YCMD:megafon(playerid, params[], help)
 			{
 				if(IsPlayerInRangeOfPoint(playerid, 1000, 430.4849,-1837.2827,-65.5105))
 				{
-					format(string, sizeof(string), "[Ochrona Ibizy %s: %s]", sendername, params);
+					format(string, sizeof(string), "[Ibiza> %s: %s]", sendername, params);
 					ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 				}
 			}

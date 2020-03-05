@@ -149,7 +149,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 		dini_IntSet(WYBORY_WYNIKI_PLIK, kandydaci[wyborKandydata[playerid]], wyniki[wyborKandydata[playerid]]);
 		
 		new nick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, nick, sizeof(nick));
+		nick = GetNickEx(playerid);
 		strcat(zaglosowaliNicki[zaglosowali], nick, sizeof(nick));
 		zaglosowali++;
 		
@@ -193,6 +193,24 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 }
 
 //-----------------<[ Funkcje: ]>-------------------
+stock GetNickEx(playerid, withmask = false)
+{
+	new nick[MAX_PLAYER_NAME];
+ 	GetPlayerName(playerid, nick, sizeof(nick));
+	if(withmask)
+	{
+		return nick;
+	}
+	else
+	{
+		new nick2[24];
+		if(GetPVarString(playerid, "maska_nick", nick2, 24))
+		{
+			return nick2;
+		}
+	}
+	return nick;
+}
 LoadConfig()
 {
 	new File:configFile;
@@ -432,11 +450,9 @@ HideElectionTextdraws(playerid)
 
 CzyZaglosowal(playerid)
 {
-	new nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
 	for(new i; i<zaglosowali; i++)
 	{	
-		if(strcmp(zaglosowaliNicki[i], nick, true) == 0)
+		if(strcmp(zaglosowaliNicki[i], GetNickEx(playerid), true) == 0)
 		{	
 			return true;
 		}
@@ -510,9 +526,7 @@ PlayerCantVoteMessage(playerid)
 //-----------------<[ Komendy: ]>-------------------
 CMD:reloadwybory(playerid)
 {
-	new nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	if(!strcmp(nick, "Tom_Russell") || IsPlayerAdmin(playerid))
+	if(IsPlayerAdmin(playerid))
 	{
 		SendClientMessage(playerid, -1, "RELOADFS WYBORY");
 		SendRconCommand("reloadfs wybory");

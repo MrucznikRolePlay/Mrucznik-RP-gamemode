@@ -45,7 +45,7 @@ YCMD:bw(playerid, params[], help)
 			return sendTipMessage(playerid, string);
 		}
 		NadajBW(giveplayerid, czas, false);
-		format(string, sizeof(string), "Administrator %s nada³ Ci BW na %d sekund", GetNick(playerid), czas); 
+		format(string, sizeof(string), "Administrator %s nada³ Ci BW na %d sekund", GetNickEx(playerid), czas); 
 		sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 		SendClientMessage(playerid, COLOR_GRAD2, "Nadano BW");
 	}

@@ -36,7 +36,7 @@ YCMD:federalne(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	 	if(!IsACop(playerid))
+	 	if(!IsAPolicja(playerid))
 	 	{
 	 		sendErrorMessage(playerid, "Nie jesteœ z s³u¿b porz¹dkowych!");
 		    return 1;
@@ -53,13 +53,13 @@ YCMD:federalne(playerid, params[], help)
 			return 1;
 		}
 
-		if (IsACop(playerid) || IsAFBI(playerid))
+		if (IsAPolicja(playerid) || IsAFBI(playerid))
 		{
 			if(IsPlayerConnected(giveplayerid))
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-					if (!(IsACop(giveplayerid) && OnDuty[giveplayerid] == 1))
+					if (!(IsAPolicja(giveplayerid) && OnDuty[giveplayerid] == 1))
 					{
 						if(spamwl[giveplayerid] == 0)
 						{

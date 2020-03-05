@@ -54,7 +54,7 @@ YCMD:setteam(playerid, params[], help)
 					//SetPlayerWeapons(para1);
 					SetPlayerSpawn(para1);
         			Log(adminLog, INFO, "Admin %s zmieni³ %s dru¿ynê na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
-					format(string, sizeof(string), "Twoja dru¿yna zosta³a zmieniona na %d przez %s", level, GetNick(playerid));
+					format(string, sizeof(string), "Twoja dru¿yna zosta³a zmieniona na %d przez %s", level, GetNickEx(playerid));
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Zmieni³eœ dru¿ynê graczowi %s na %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

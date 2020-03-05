@@ -1002,9 +1002,9 @@ new okregi[MAX_PLAYERS];//¯u¿el
 new kodbitwy[256];//Bitwa
 new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
 new Kajdanki_Uzyte[MAX_PLAYERS];//Kajdany
-new Kajdanki_JestemZakuty[MAX_PLAYERS];//Kajdany
-new Kajdanki_KtoSkuwa[MAX_PLAYERS];//Kajdany
-new Kajdanki_KogoSkuwam[MAX_PLAYERS];//Kajdany
+new Kajdanki_JestemSkuty[MAX_PLAYERS];//Kajdany
+new Kajdanki_PDkuje[MAX_PLAYERS];//Kajdany
+new Kajdanki_SkutyGracz[MAX_PLAYERS];//Kajdany
 // worek
 new Worek_Uzyty[MAX_PLAYERS];
 new Worek_MamWorek[MAX_PLAYERS];
@@ -1128,7 +1128,7 @@ ZerujZmienne(playerid)
  	PlayerInfo[playerid] [pMozeskakacAT] = 0;
  	PlayerInfo[playerid] [pRockHotelLiAc] = 0;
  	PlayerInfo[playerid] [pRockHotelPuAc] = 0;
-	Kajdanki_JestemZakuty[playerid] = 0;//Kajdany
+	Kajdanki_JestemSkuty[playerid] = 0;//Kajdany
 	Kajdanki_Uzyte[playerid] = 0;//Kajdany
 	pobity[playerid] = 0;//pobity
 	pobilem[playerid] = 0;

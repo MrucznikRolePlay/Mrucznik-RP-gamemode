@@ -53,7 +53,7 @@ YCMD:setint(playerid, params[], help)
 			PlayerInfo[gracz][pInt] = intid;
 			format(string, sizeof(string), "Ustawi³eœ %s interior nr %d.", GetNick(gracz), intid);
 			SendClientMessage(playerid, COLOR_GRAD1, string);
-			format(string, sizeof(string), "Admin %s ustawi³ ci interior nr %d.", GetNick(playerid), intid);
+			format(string, sizeof(string), "Admin %s ustawi³ ci interior nr %d.", GetNickEx(playerid), intid);
 			SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{

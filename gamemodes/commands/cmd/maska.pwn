@@ -30,9 +30,16 @@
 
 YCMD:maska(playerid, params[], help)
 {
-	if(IsACop(playerid) || IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
+	if(IsAPolicja(playerid) || IsAPrzestepca(playerid))
 	{
-		if(IsACop(playerid))
+		if(IsAFBI(playerid))
+		{
+			if(PlayerInfo[playerid][pRank] < 2)
+			{
+				return sendErrorMessage(playerid, "Maska jest dostêpna od [2] rangi");
+			}
+		}
+		else if(IsAPolicja(playerid))
 		{
 			if(PlayerInfo[playerid][pRank] < 3)
 			{
@@ -40,7 +47,7 @@ YCMD:maska(playerid, params[], help)
 			}
 			else
 			{
-				if(OnDutyCD[playerid] != 1 && OnDuty[playerid] != 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /duty !");
+				if(OnDutyCD[playerid] != 1 && OnDuty[playerid] != 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Najpierw u¿yj /duty !");
 				sendErrorMessage(playerid, "OSTRZE¯ENIE: Nadu¿ywanie maski skutkuje natychmiastowym wyrzuceniem z frakcji.");
 			}
 		}
@@ -53,7 +60,7 @@ YCMD:maska(playerid, params[], help)
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			format(string, sizeof(string), "* %s sci¹ga maskê z twarzy.", sendername);
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			if(!IsACop(playerid)) RemovePlayerAttachedObject(playerid,1);
+			if(!IsAPolicja(playerid)) RemovePlayerAttachedObject(playerid,1);
 			MSGBOX_Show(playerid, "~g~~h~Pokazano ~w~twarz", MSGBOX_ICON_TYPE_OK);
 			SetPlayerName(playerid, nick);
 			SetRPName(playerid);
@@ -67,7 +74,7 @@ YCMD:maska(playerid, params[], help)
     		GetPlayerPos( playerid, X, Y, Z );
 			format(string, sizeof(string), "* %s zak³ada maskê na twarz.", sendername);
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			if(!IsACop(playerid)) SetPlayerAttachedObject(playerid, 1, 19036, 2, 0.1, 0.05, -0.005, 0, 90, 90);//maska hokeisty biala
+			if(!IsAPolicja(playerid)) SetPlayerAttachedObject(playerid, 1, 19036, 2, 0.1, 0.05, -0.005, 0, 90, 90);//maska hokeisty biala
 			MSGBOX_Show(playerid, "~r~~h~Ukryto ~w~twarz", MSGBOX_ICON_TYPE_OK);
 			format(pName, sizeof(pName), "Zamaskowany_%d", PlayerInfo[playerid][pUID]);
 			if(SetPlayerName(playerid, pName))

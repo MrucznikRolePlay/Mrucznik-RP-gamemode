@@ -55,7 +55,7 @@ YCMD:kup(playerid, params[], help)
 				}
 				else
 				{
-					format(string, sizeof(string), "Aktualnie kasjerka obs³uguje %s - odczekaj chwile!", GetNick(kasjerkaWolna, true));
+					format(string, sizeof(string), "Aktualnie kasjerka obs³uguje %s - odczekaj chwile!", GetNick(kasjerkaWolna));
 					sendTipMessage(playerid, string);
 				}
 		}

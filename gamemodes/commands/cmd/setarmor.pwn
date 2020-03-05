@@ -31,7 +31,6 @@
 YCMD:setarmor(playerid, params[], help)
 {
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -49,7 +48,6 @@ YCMD:setarmor(playerid, params[], help)
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 		            GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerArmour(playa, health);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{

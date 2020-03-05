@@ -48,6 +48,12 @@ YCMD:setname(playerid, params[], help)
 			sendErrorMessage(playerid, string); 
 			return 1;
 		}
+		new nick[24];
+		if(GetPVarString(giveplayerid, "maska_nick", nick, 24))
+		{
+			SendClientMessage(playerid, COLOR_GREY, " Gracz musi œci¹gn¹æ maskê z twarzy! (/maska).");
+			return 1;
+		}
 
 		if(giveplayerid != INVALID_PLAYER_ID)
 		{
@@ -62,7 +68,7 @@ YCMD:setname(playerid, params[], help)
 					format(giveplayer_log_name, sizeof(giveplayer_log_name), "%s", GetPlayerLogName(giveplayerid));
                     if(ChangePlayerName(giveplayerid, newname))
                     {
-    					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", GetNick(playerid),giveplayer,PlayerInfo[giveplayerid][pUID],newname);
+    					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", GetNickEx(playerid),giveplayer,PlayerInfo[giveplayerid][pUID],newname);
     					SendClientMessageToAll(COLOR_LIGHTRED, string);
 						Log(adminLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);
 						Log(nickLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);

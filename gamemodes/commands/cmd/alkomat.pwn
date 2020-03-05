@@ -36,9 +36,9 @@ YCMD:alkomat(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /alkomat [ID gracza]");
 		return 1;
 	}
-	if (IsACop(playerid) || IsAHA(playerid))
+	if (IsAPolicja(playerid) || IsAHA(playerid))
 	{
-		if(OnDuty[playerid] == 0 && IsACop(playerid))
+		if(OnDuty[playerid] == 0 && IsAPolicja(playerid))
 		{
 			sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie");
 			return 1;

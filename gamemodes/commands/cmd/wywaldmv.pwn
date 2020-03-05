@@ -49,7 +49,7 @@ YCMD:wywaldmv(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-			        if(IsABOR(giveplayerid) || IsACop(giveplayerid))
+			        if(IsABOR(giveplayerid) || IsAPolicja(giveplayerid))
 			        {
 			            sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz wywaliæ policjanta/bor !");
 				        return 1;

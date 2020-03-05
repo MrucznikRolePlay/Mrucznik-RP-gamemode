@@ -63,10 +63,10 @@ YCMD:banip(playerid, params[], help)
                 sendErrorMessage(playerid, "Niepoprawny adres IP (dots)!");
                 return 1;
             }
-            format(str, sizeof(str), "ADM: %s - zablokowal IP: %s powód: %s", GetNick(playerid), var, powod);
+            format(str, sizeof(str), "ADM: %s - zablokowal IP: %s powód: %s", GetNickEx(playerid), var, powod);
             SendCommandLogMessage(str);
             MruMySQL_BanujOffline("Brak", powod, playerid, var);
-            format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
+            format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNickEx(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{

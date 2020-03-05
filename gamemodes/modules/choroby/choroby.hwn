@@ -54,6 +54,7 @@ enum eEffectData {
 }
 
 enum eDiseaseData {
+    ShortName[32],
     Name[32],
     CureCost,
     CureTime, //in minutes
@@ -77,22 +78,22 @@ new Vector:VPlayerDiseases[MAX_PLAYERS];
 //TODO: Replace to dynamic arrays, vector or smth to create full dynamic system
 new DiseaseData[eDiseases][eDiseaseData] = {
     //nazwa, cena, czas, lekoodpornosc, zarazliwosc, zarazanie przy kontakcie
-    {"", 0, 0, 0, 0.0, false, VECTOR_NULL},
-    {"Koronawirus", 1000, 20, 95, 1.0, true, VECTOR_NULL},
-    {"Grypa", 25000, 120, 0, 1.0, false, VECTOR_NULL},
-    {"Zapalenie p³uc", 100000, 240, 30, 1.0, false, VECTOR_NULL},
-    {"Zatrucie", 10000, 30, 20, 1.0, false, VECTOR_NULL},
-    {"Padaczka", 200000, 600, 10, 0.0, false, VECTOR_NULL},
-    {"Zespó³ Touretta", 100000, 300, 50, 0.0, false, VECTOR_NULL},
-    {"Astma", 25000, 60, 40, 0.0, false, VECTOR_NULL},
-    {"Schizofrenia Paranoidalna", 300000, 1200, 5, 0.0, false, VECTOR_NULL},
-    {"Virus Zombie", 1000, 30, 10, 5.0, false, VECTOR_NULL},
-    {"HIV", 100000, 300, 1, 0.3, true, VECTOR_NULL},
-    {"Astygmatyzm", 100000, 7*60, 45, 0.0, false, VECTOR_NULL},
-    {"Parkinson", 150000, 600, 25, 0.0, false, VECTOR_NULL},
-    {"Uraz", 10000, 60, 0, 0.0, false, VECTOR_NULL},
-    {"Gangrena", 75000, 120, 75, 0.1, true, VECTOR_NULL},
-    {"PTSD", 15000, 60, 90, 0.0, false, VECTOR_NULL}
+    {"", "", 0, 0, 0, 0.0, false, VECTOR_NULL},
+    {"koronawirus", "Koronawirus", 1000, 20, 95, 1.0, true, VECTOR_NULL},
+    {"grypa", "Grypa", 25000, 120, 0, 1.0, false, VECTOR_NULL},
+    {"zapaleniepluc", "Zapalenie p³uc", 100000, 240, 30, 1.0, false, VECTOR_NULL},
+    {"zatrucie", "Zatrucie", 10000, 30, 20, 1.0, false, VECTOR_NULL},
+    {"padaczka", "Padaczka", 200000, 600, 10, 0.0, false, VECTOR_NULL},
+    {"tourett", "Zespó³ Touretta", 100000, 300, 50, 0.0, false, VECTOR_NULL},
+    {"astma", "Astma", 25000, 60, 40, 0.0, false, VECTOR_NULL},
+    {"schizofrenia", "Schizofrenia Paranoidalna", 300000, 1200, 5, 0.0, false, VECTOR_NULL},
+    {"zombie", "Virus Zombie", 1000, 30, 10, 5.0, false, VECTOR_NULL},
+    {"HIV", "HIV", 100000, 300, 1, 0.3, true, VECTOR_NULL},
+    {"astygmatyzm", "Astygmatyzm", 100000, 7*60, 45, 0.0, false, VECTOR_NULL},
+    {"parkinson", "Parkinson", 150000, 600, 25, 0.0, false, VECTOR_NULL},
+    {"uraz", "Uraz", 10000, 60, 0, 0.0, false, VECTOR_NULL},
+    {"gangrena", "Gangrena", 75000, 120, 75, 0.1, true, VECTOR_NULL},
+    {"PTSD", "PTSD", 15000, 60, 90, 0.0, false, VECTOR_NULL}
 };
 
 //TODO: wiêcej tików
@@ -106,7 +107,11 @@ new TourettWords[][] = {
     " koza",
     " chuj",
     " pierdol",
-    " nigga"
+    " nigga",
+    " nigger",
+    " frajer",
+    " hitler",
+    " kurwiszon"
 };
 
 new PlayerImmunity[MAX_PLAYERS];

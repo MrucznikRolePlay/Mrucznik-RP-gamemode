@@ -58,7 +58,7 @@ YCMD:glosowanie(playerid, params[], help)
 			{
 				iloscInne[playerid]++; 
 			}
-			format(string, sizeof(string), "Admin %s rozpocz¹³ ankietê na temat:{C0C0C0}%s", GetNick(playerid), result);
+			format(string, sizeof(string), "Admin %s rozpocz¹³ ankietê na temat:{C0C0C0}%s", GetNickEx(playerid), result);
 			SendClientMessageToAll(COLOR_RED, string);
 			SendClientMessageToAll(COLOR_WHITE,  "Aby zag³osowaæ wpisz /glosuja");
 			format(string, sizeof(string), "G³osowanie potrwa %d sekund", timeValue); 

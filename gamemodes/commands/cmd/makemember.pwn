@@ -56,7 +56,7 @@ YCMD:makemember(playerid, params[], help)
 		            }
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					PlayerInfo[para1][pMember] = level;
-					format(string, sizeof(string), "Zosta³eœ mianowany pracownikiem frakcji numer %d przez Administratora: %s", level,GetNick(playerid));
+					format(string, sizeof(string), "Zosta³eœ mianowany pracownikiem frakcji numer %d przez Administratora: %s", level,GetNickEx(playerid));
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ membera graczowi %s nad frakcj¹ numer %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

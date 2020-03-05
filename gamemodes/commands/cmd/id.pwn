@@ -48,7 +48,7 @@ YCMD:id(playerid, params[], help)
         }
 
         SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
-        format(string, sizeof(string), "Gracz (ID: %d) %s.", giveplayerid, GetNick(giveplayerid, true));
+        format(string, sizeof(string), "Gracz (ID: %d) %s.", giveplayerid, GetNick(giveplayerid));
         SendClientMessage(playerid, COLOR_GRAD1, string);
 
         return 1;

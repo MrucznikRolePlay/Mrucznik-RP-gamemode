@@ -67,7 +67,7 @@ YCMD:sprzedajbron(playerid, params[], help)
             {
                 if(PlayerInfo[giveplayerid][pLevel] >= 2)
                 {
-                    if(PlayerInfo[giveplayerid][pGunLic] == 1 || IsAPrzestepca(giveplayerid) || IsACop(giveplayerid) || IsABOR(giveplayerid) || strcmp(x_weapon,"pistolety",true) == 0)
+                    if(PlayerInfo[giveplayerid][pGunLic] == 1 || IsAPrzestepca(giveplayerid) || IsAPolicja(giveplayerid) || IsABOR(giveplayerid) || strcmp(x_weapon,"pistolety",true) == 0)
                     {
                         if(giveplayerid != INVALID_PLAYER_ID)
                         {

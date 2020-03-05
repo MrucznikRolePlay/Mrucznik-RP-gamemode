@@ -35,7 +35,7 @@ YCMD:zniszczobiekty(playerid, params[], help)
         DestroyAllDynamicObjects();
 	    SendClientMessage(playerid, COLOR_PANICRED, "Wszystkie obiekty zniszczone!");
         new string[128];
-        format(string, 128, "CMD_Info: /zniszczobiekty u¿yte przez %s [%d]", GetNick(playerid), playerid);
+        format(string, 128, "CMD_Info: /zniszczobiekty u¿yte przez %s [%d]", GetNickEx(playerid), playerid);
         SendCommandLogMessage(string);
 		Log(adminLog, INFO, "Admin %s u¿y³ /zniszczobiekty", GetPlayerLogName(playerid));
     }

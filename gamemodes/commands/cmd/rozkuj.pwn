@@ -32,7 +32,9 @@ YCMD:rozkuj(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
     {
-		if(gTeam[playerid] == 2 || IsACop(playerid) || IsABOR(playerid))
+		new string[128];
+
+		if(gTeam[playerid] == 2 || IsAPolicja(playerid) || IsABOR(playerid))
 		{
 		    new giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))
@@ -47,14 +49,25 @@ YCMD:rozkuj(playerid, params[], help)
 				    if (ProxDetectorS(8.0, playerid, giveplayerid))
 					{
 					    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz odkuæ samego siebie!"); return 1; }
-						if(PlayerCuffed[giveplayerid] == 2 || Kajdanki_JestemZakuty[giveplayerid] >= 1)
+						if(PlayerCuffed[giveplayerid] == 2 || Kajdanki_JestemSkuty[giveplayerid] >= 1)
 						{
-							new string[128];
-                            format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", GetNick(playerid));
-                            SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string), "* Rozku³eœ %s.", GetNick(giveplayerid));
-							
-							UnCuffedAction(playerid, giveplayerid);
+						    format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", GetNick(playerid));
+							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+							format(string, sizeof(string), "* Rozku³eœ %s.", GetNick(giveplayerid));
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+							GameTextForPlayer(giveplayerid, "~g~Rozkuty", 2500, 3);
+							TogglePlayerControllable(giveplayerid, 1);
+							PlayerCuffed[giveplayerid] = 0;
+							Kajdanki_JestemSkuty[giveplayerid] = 0;
+							Kajdanki_SkutyGracz[giveplayerid] = 0;
+                            Kajdanki_Uzyte[giveplayerid] = 0;
+                            Kajdanki_Uzyte[playerid] = 0;
+							Kajdanki_PDkuje[playerid] = 0;
+							Kajdanki_PDkuje[giveplayerid]=0;
+							PlayerInfo[giveplayerid][pMuted] = 0;
+                            ClearAnimations(giveplayerid);
+        					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
+							RemovePlayerAttachedObject(giveplayerid, 5);
 						}
 						else
 						{

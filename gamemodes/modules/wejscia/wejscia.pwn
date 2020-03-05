@@ -299,7 +299,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 16)//Wiêzienie stanowe - wejœcie i wyjœcie
 	{
-		if(!IsACop(playerid) && !IsABOR(playerid))
+		if(!IsAPolicja(playerid) && !IsABOR(playerid))
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "Simon_Mrucznikov mówi: Zaraz zaraz kolego! A ty gdzie? Nie mo¿esz tu wejœæ!"); 
 			noAccessCome[playerid] = 1;

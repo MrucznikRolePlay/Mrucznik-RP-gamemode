@@ -39,7 +39,7 @@ YCMD:pracownicy(playerid, params[], help)
 		{
 		    if(frac == GetPlayerFraction(i))
 		    {
-		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i, true), i, PlayerInfo[i][pRank]);
+		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][pRank]);
 		        SendClientMessage(playerid, COLOR_GRAD1, string);
 		    }
 		}

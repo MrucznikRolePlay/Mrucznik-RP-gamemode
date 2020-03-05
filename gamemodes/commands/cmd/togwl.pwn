@@ -32,7 +32,7 @@ YCMD:togwl(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(IsACop(playerid))
+        if(IsAPolicja(playerid))
         {
 			if (!gCrime[playerid])
 			{

@@ -30,7 +30,7 @@ eDiseases:GetDiseaseID(diseaseName[])
 {
 	for(new eDiseases:i; i<eDiseases; i++) 
 	{
-		if(strcmp(DiseaseData[i][Name], diseaseName, true) == 0) 
+		if(strcmp(DiseaseData[i][ShortName], diseaseName, true) == 0) 
 		{
 			return i;
 		}
@@ -53,8 +53,6 @@ CurePlayer(playerid, eDiseases:disease)
 
 InfectPlayer(playerid, eDiseases:disease)
 {
-	//TODO: sprawdzanie czy gracz nie jest ju¿ zara¿ony t¹ chorob¹ powoduje, ¿e dane powinny byæ zapisane na strukturze danych Set zamiast Vector
-	// Set nie dopuszcza powtarzania elementów
 	if(IsPlayerSick(playerid, disease))
 	{
 		return 0;
@@ -67,7 +65,6 @@ InfectPlayer(playerid, eDiseases:disease)
 
 InfectPlayerWithoutSaving(playerid, eDiseases:disease)
 {
-	if(IsPlayerSick(playerid, disease)) return 1;
 	VECTOR_push_back_val(VPlayerDiseases[playerid], disease);
 	ActivateDiseaseEffect(playerid, disease);
 	return 1;
@@ -203,7 +200,7 @@ ShowDiseaseList(playerid)
 			if(i != 0) SendClientMessage(playerid, COLOR_GREY, string);
 			format(string, sizeof(string), "Dostêpne nazwy: ");
 		}
-		strcat(string, DiseaseData[eDiseases:i][Name]);
+		strcat(string, DiseaseData[eDiseases:i][ShortName]);
 		strcat(string, " ");
 	}
 	SendClientMessage(playerid, COLOR_GREY, string);

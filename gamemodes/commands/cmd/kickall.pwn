@@ -33,7 +33,7 @@ YCMD:kickall(playerid, params[], help)
 	if(IsAHeadAdmin(playerid))
 	{
 		new string[64];
-		format(string, sizeof(string), "Admin %s (id:%d) zkickowal wszystkich graczy",GetNick(playerid), playerid);
+		format(string, sizeof(string), "Admin %s (id:%d) zkickowal wszystkich graczy",GetNickEx(playerid), playerid);
 		SendClientMessageToAll(COLOR_RED, string);
 		Log(adminLog, INFO, "Admin %s zkickowa³ wszystkich graczy", GetPlayerLogName(playerid));   
 

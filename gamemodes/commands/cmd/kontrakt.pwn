@@ -68,7 +68,7 @@ YCMD:kontrakt(playerid, params[], help)
 			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
 			        return 1;
 			    }
-			    else if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1)
+			    else if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || IsAScripter(giveplayerid))
 			    {
 			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
 			        return 1;
@@ -78,7 +78,7 @@ YCMD:kontrakt(playerid, params[], help)
 			        sendTipMessageEx(playerid, COLOR_GREY, "Za g³owê lidera trzeba zap³aciæ conajmniej 100000$ !");
 			        return 1;
 			    }
-			    else if(IsACop(giveplayerid) && moneys < 50000)
+			    else if(IsAPolicja(giveplayerid) && moneys < 50000)
 			    {
 			        sendTipMessageEx(playerid, COLOR_GREY, "Za g³owê policjanta trzeba zap³aciæ conajmniej 50000$ !");
 			        return 1;

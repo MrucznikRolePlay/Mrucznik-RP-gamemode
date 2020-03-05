@@ -547,7 +547,7 @@ PokazDialogBronie(playerid)
 		}
 		format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, "Detonator");
 	}
-	if((IsACop(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
+	if((IsAPolicja(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
 	{
 		DynamicGui_AddRow(playerid, 24, 1); //paralizator
 		weaponexist = 1;

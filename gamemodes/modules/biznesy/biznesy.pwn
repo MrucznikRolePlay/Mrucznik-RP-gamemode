@@ -441,10 +441,10 @@ Business_AkceptujBiznes(playerid)
 	Sejf_Save(FRAC_GOV); 
 
 	format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", 
-		GetNick(playerid, true), 
+		GetNickEx(playerid), 
 		playerid, 
 		businessID, 
-		GetNick(giveplayerid, true), 
+		GetNickEx(giveplayerid), 
 		giveplayerid, 
 		price
 	);

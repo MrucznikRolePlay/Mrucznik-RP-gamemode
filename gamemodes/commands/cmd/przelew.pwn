@@ -41,7 +41,7 @@ YCMD:przelew(playerid, params[], help)
 		}
 		if(PlayerPersonalization[playerid][PERS_KB] == 0)
 		{
-			format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", GetNick(playerid, true));
+			format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", GetNick(playerid));
 			ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poni¿ej ID odbiorcy", "Wykonaj", "Odrzuæ");
 		}
 		else

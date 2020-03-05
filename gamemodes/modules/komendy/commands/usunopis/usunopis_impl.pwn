@@ -37,9 +37,9 @@ command_usunopis_Impl(playerid, giveplayerid)
 		Update3DTextLabelText(PlayerInfo[giveplayerid][pDescLabel], 0xBBACCFFF, "");
 		PlayerInfo[giveplayerid][pDesc][0] = EOS;
 		new msg[128];
-		format(msg, 128, "Administrator %s usun¹³ twój opis", GetNick(playerid, true));
+		format(msg, 128, "Administrator %s usun¹³ twój opis", GetNickEx(playerid));
 		sendErrorMessage(giveplayerid, msg);
-		format(msg, 128, "Usun¹³eœ opis %s", GetNick(giveplayerid, true));
+		format(msg, 128, "Usun¹³eœ opis %s", GetNick(giveplayerid));
 		sendErrorMessage(playerid, msg);
 	}
 	return 1;

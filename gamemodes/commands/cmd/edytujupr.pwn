@@ -34,7 +34,7 @@ YCMD:edytujupr(playerid, params[], help)
     new id;
     if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(PERM) - Podaj Nick lub ID gracza.");
     new str[512];
-    format(str, sizeof(str), "\t\tUPRAWNIENIA %s\n", GetNick(id, true));
+    format(str, sizeof(str), "\t\tUPRAWNIENIA %s\n", GetNickEx(id));
     if(Uprawnienia(id, ACCESS_PANEL)) strcat(str, "{00FF00}+{FFFFFF} Panel administracyjny\n");
     else strcat(str, "{FF0000}-{FFFFFF} Panel administracyjny\n");
     if(Uprawnienia(id, ACCESS_KARY)) strcat(str, "{00FF00}+{FFFFFF} Panel kar\n");

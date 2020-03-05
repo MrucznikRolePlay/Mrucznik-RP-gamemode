@@ -86,7 +86,7 @@ graffiti_CountGraffs(playerid)
 	Graffiti_Amount[playerid] = 0;
 	for(new i; i < GRAFFITI_MAX; i++)
 	{
-		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+		if(strcmp(GraffitiInfo[i][pOwner],GetNickEx(playerid),true) == 0)
 		{
 			Graffiti_Amount[playerid]++;
 		}
@@ -98,7 +98,7 @@ graffiti_GetGraffitiIDs(playerid)
 	graffiti_ZerujListe(playerid);
 	for(new i; i < GRAFFITI_MAX; i++)
 	{
-		if(strcmp(GraffitiInfo[i][pOwner],GetNick(playerid),true) == 0)
+		if(strcmp(GraffitiInfo[i][pOwner],GetNickEx(playerid),true) == 0)
 		{
 			Graffiti_PlayerList[playerid][licznik] = i;
 			licznik++;

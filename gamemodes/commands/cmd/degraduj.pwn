@@ -48,7 +48,7 @@ YCMD:degraduj(playerid, params[], help)
 					{
                         if(PlayerInfo[para1][pLider] != 0) return sendErrorMessage(playerid, "Nie mo¿esz wyrzuciæ lidera.");
 
-                        SendClientMessage(para1, COLOR_RED, sprintf("%s zdegradowa³ Ciê. Masz ju¿ rangê 0 - zostajesz zwolniony z frakcji", GetNick(playerid, true)));
+                        SendClientMessage(para1, COLOR_RED, sprintf("%s zdegradowa³ Ciê. Masz ju¿ rangê 0 - zostajesz zwolniony z frakcji", GetNickEx(playerid)));
 
                         new str[32];
                         valstr(str, para1);
@@ -59,9 +59,9 @@ YCMD:degraduj(playerid, params[], help)
 						PlayerInfo[para1][pRank] -= 1;
 						new level = PlayerInfo[para1][pRank];
 
-                        SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zdegradowa³eœ %s na rangê %s", GetNick(para1, true), FracRang[GetPlayerFraction(para1)][level]));
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zdegradowa³eœ %s na rangê %s", GetNickEx(para1), FracRang[GetPlayerFraction(para1)][level]));
                         if(playerid != para1)
-                            SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Zosta³eœ zdegradowany na rangê %s przez %s", FracRang[GetPlayerFraction(para1)][level],  GetNick(playerid, true)));
+                            SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Zosta³eœ zdegradowany na rangê %s przez %s", FracRang[GetPlayerFraction(para1)][level],  GetNickEx(playerid)));
 
                         MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][pRank]);
 					}
