@@ -4913,9 +4913,9 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			new akcja[150];
 			format(akcja,sizeof(akcja),"* %s wyci¹ga spray i tworzy nim napis.",GetNick(playerid));
             ProxDetector(40.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			format(akcja, sizeof(akcja), "%s stworzy³ nowe graffiti [ID: %d], lokalizacja: ", GetNick(playerid), f, pZone);
+			format(akcja, sizeof(akcja), "%s stworzy³ nowe graffiti [ID: %d], lokalizacja: %s", GetNick(playerid), f, pZone);
 			SendAdminMessage(COLOR_PANICRED, akcja);
-			Log(serverLog, INFO, "%s stworzy³ nowe graffiti %s, lokalizacja:", GetPlayerLogName(playerid), GetGraffitiLogText(f), pZone);
+			Log(serverLog, INFO, "%s stworzy³ nowe graffiti %s, lokalizacja: %s", GetPlayerLogName(playerid), GetGraffitiLogText(f), pZone);
 		}
 		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingGraff") == 1)
 		{
