@@ -117,6 +117,46 @@ IsAtFishPlace(playerid)
 		{//Fishplace at the bigwheel
 		    return 1;
 		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 403.9787,-2088.7947,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 398.8863,-2088.4109,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 395.9289,-2088.2773,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 391.1751,-2088.2493,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 383.6028,-2088.4607,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 374.8348,-2088.3501,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 370.0244,-2088.3254,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 367.5755,-2088.2151,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 362.0309,-2088.1899,7.8359))
+		{
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 1.5, 354.6362,-2088.3010,7.8359))
+		{
+			return 1;
+		}
 	}
 	return 0;
 }
