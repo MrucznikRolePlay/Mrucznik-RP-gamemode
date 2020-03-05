@@ -244,6 +244,7 @@ EndPlayerTreatment(playerid, doctorid)
 		CurePlayer(playerid, disease);
 		GameTextForPlayer(playerid, "~g~Wyleczony!", 5000, 1);
 		GameTextForPlayer(doctorid, sprintf("~g~Pacjent %s wyleczony!", GetNick(playerid)), 5000, 1);
+		PlayerImmunity[playerid] = 5;
 	}
 }
 
