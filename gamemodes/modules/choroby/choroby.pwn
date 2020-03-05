@@ -40,6 +40,10 @@ eDiseases:GetDiseaseID(diseaseName[])
 
 CureFromAllDiseases(playerid)
 {
+	VECTOR_foreach(i : VPlayerDiseases[playerid])
+	{
+		DeactivateDiseaseEffect(playerid, eDiseases:MEM_get_val(i));
+	}
 	VECTOR_clear(VPlayerDiseases[playerid]);
 	MruMySQL_RemoveAllDiseases(playerid);
 }
@@ -220,7 +224,7 @@ StartPlayerTreatment(playerid, doctorid, eDiseases:disease)
 	return 1;
 }
 
-EndPlayerTreatment(playerid)
+EndPlayerTreatment(playerid, doctorid)
 {
 	new eDiseases:disease = eDiseases:GetPVarInt(playerid, "disease-treatement");
 	new chance = DiseaseData[disease][DrugResistance];
@@ -232,12 +236,14 @@ EndPlayerTreatment(playerid)
 	{
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Niestety, leczenie siê nie powiod³o. Spróbuj jeszcze raz.");
 		GameTextForPlayer(playerid, "~r~Nie uda³o siê :(", 5000, 1);
+		GameTextForPlayer(doctorid, sprintf("~r~Nie uda³o siê wyleczyc %s", GetNick(playerid), 5000, 1);
 	}
 	else //uda³o siê
 	{
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, "Uda³o Ci siê pokonaæ chorobê!");
 		CurePlayer(playerid, disease);
 		GameTextForPlayer(playerid, "~g~Wyleczony!", 5000, 1);
+		GameTextForPlayer(doctorid, sprintf("~g~Pacjent %s wyleczony!", GetNick(playerid), 5000, 1);
 	}
 }
 

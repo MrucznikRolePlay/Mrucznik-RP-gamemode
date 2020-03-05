@@ -64,7 +64,7 @@ timer TreatmentCounter[1000](playerid, count)
 	if(IsPlayerConnected(doctorid))
 		GameTextForPlayer(doctorid, sprintf("Kuracja ~r~%ds", count), 1000, 4);
 
-	if(count <= 0) 
+	if(count >= 0) 
 	{
 		if(	IsPlayerConnected(doctorid) && 
 			GetDistanceBetweenPlayers(playerid,doctorid) < 5 && 
@@ -94,7 +94,7 @@ timer TreatmentCounter[1000](playerid, count)
 	} 
 	else 
 	{
-		EndPlayerTreatment(playerid);
+		EndPlayerTreatment(playerid, doctorid);
 	}
 }
 
