@@ -1091,14 +1091,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 			ClearAnimations(playerid);
 		}
 	}
-	if (IsAnAmbulance(vehicleid) && !ispassenger)
-	{
-		if(!IsAMedyk(playerid))
-		{
-			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
-            Player_RemoveFromVeh(playerid);
-		}
-	}
 	if (GetVehicleModel(vehicleid) == 525)
 	{
 		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");

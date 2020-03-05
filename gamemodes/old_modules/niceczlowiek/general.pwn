@@ -149,10 +149,17 @@ Player_RemoveFromVeh(playerid)
 
 Player_CanUseCar(playerid, vehicleid)
 {
-	if(IsAScripter(playerid)) return 1;
+	if(IsAScripter(playerid) || IsAHeadAdmin(playerid)) return 1;
 	
 	new string[128];
-
+	if (IsAnAmbulance(vehicleid))
+	{
+		if(!IsAMedyk(playerid))
+		{
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
+			return 0;
+		}
+	}
 	if(IsACopCar(vehicleid))
 	{
 	    if(IsAPolicja(playerid))
