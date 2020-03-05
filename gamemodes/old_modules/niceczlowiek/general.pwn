@@ -152,6 +152,10 @@ Player_CanUseCar(playerid, vehicleid)
 	if(IsAScripter(playerid) || IsAHeadAdmin(playerid)) return 1;
 	
 	new string[128];
+	if(GetVehicleModel(vehicleid) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
+    {
+		return 0;
+	}
 	if (IsAnAmbulance(vehicleid))
 	{
 		if(!IsAMedyk(playerid))
@@ -159,6 +163,10 @@ Player_CanUseCar(playerid, vehicleid)
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
 			return 0;
 		}
+	}
+	if (GetVehicleModel(vehicleid) == 525)
+	{
+		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
 	}
 	if(IsACopCar(vehicleid))
 	{
@@ -172,6 +180,11 @@ Player_CanUseCar(playerid, vehicleid)
                     return 0;
 	            }
 	        }
+			else
+			{
+				sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
+				return 1;
+			}
 	    }
 	}
 
