@@ -46,7 +46,8 @@ YCMD:dajskryptera(playerid, params[], help)
     {
         if(para1 != INVALID_PLAYER_ID)
         {
-            PlayerInfo[para1][pNewAP] = 5;
+            MruMySQL_ZapiszUprawnienia(para1);
+            ACCESS[para1] ^= ACCESS_SKRYPTER;
             format(string, sizeof(string), "Zosta³eœ mianowany na skryptera przez %s", GetNickEx(playerid));
             SendClientMessage(para1, COLOR_LIGHTBLUE, string);
             format(string, sizeof(string), "Da³eœ %s skryptera - to ustawienie mo¿e byæ ryzykowne!", giveplayer);
