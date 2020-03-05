@@ -3266,10 +3266,19 @@ public CJSkinCheck()
 {
 	foreach(new j : Player)
 	{
-		if(gPlayerLogged[j] > 0 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0)
+		if(gPlayerLogged[j] > 0 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
 		{
-			//PlayerInfo[j][pSkin] = 299; na potem
-			SetPlayerSkinEx(j, 299);
+			if(PlayerInfo[j][pSkin] > 0)
+			{
+			 	SetPlayerSpawnSkin(j);
+			}
+			else 
+			{
+				//PlayerInfo[j][pSkin] = 299; na potem
+				SetPlayerSkinEx(j, 299);
+				sendTipMessage(j, "Posiada³eœ skin CJ-a ID [0] - przywróciliœmy Ci domyœlny skin. Uwa¿asz, ¿e to b³¹d? Zg³oœ utratê w dziale b³êdów.");
+				sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w rodzinie, frakcji. Pomocna bêdzie ka¿da informacja.");
+			}
 		}
 	}
 }
