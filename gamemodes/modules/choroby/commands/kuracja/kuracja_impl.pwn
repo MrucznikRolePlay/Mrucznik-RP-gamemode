@@ -33,10 +33,15 @@ kuracja_akceptuj(playerid)
 
     if(GetPVarInt(playerid, "kuracja-akceptuj") == 0)
     {
-        sendErrorMessage(playerid, "Nikt nie oferowa³ Ci maseczki.");
+        sendErrorMessage(playerid, "Nikt nie oferowa³ Ci kuracji.");
         return 1;
     }
 
+    if(PlayerInfp[playerid][pLocal] != PLOCAL_FRAC_LSMC)
+    {
+        sendErrorMessage(playerid, "Kuracjê mo¿na akceptowaæ tylko w szpitalu.");
+        return 1;
+    }
 
     if(giveplayerid == INVALID_PLAYER_ID || !IsPlayerConnected(giveplayerid))
     {
@@ -89,6 +94,12 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
 		sendErrorMessage(playerid, "Nie masz 2 rangi lub nie jesteœ medykiem!");
         return 1;
 	}
+
+    if(PlayerInfp[playerid][pLocal] != PLOCAL_FRAC_LSMC)
+    {
+        sendErrorMessage(playerid, "Kuracjê mo¿na oferowaæ tylko w szpitalu.");
+        return 1;
+    }
 
     new eDiseases:diseaseID = GetDiseaseID(disease);
     if(diseaseID == eDiseases:NONE) 
