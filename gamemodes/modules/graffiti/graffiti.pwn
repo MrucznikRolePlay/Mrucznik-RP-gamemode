@@ -157,6 +157,8 @@ graffiti_EditGraffiti(playerid, f)
 graffiti_CreateGraffiti(playerid)
 {
 	new f = graffiti_GetNewID();
+	new Float:Angle;
+	GetPlayerFacingAngle(playerid, Angle);
 	if(f == INVALID_GRAFID) 
 	{
 		sendTipMessage(playerid, "Wykorzystano limit graffiti(100) na mapê.");
@@ -170,7 +172,7 @@ graffiti_CreateGraffiti(playerid)
 	GraffitiInfo[f][grafZpos] = PlayerPos[playerid][2];
 	GraffitiInfo[f][grafXYpos] = 0.0;
 	GraffitiInfo[f][grafYYpos] = 0.0;
-	GraffitiInfo[f][grafZYpos] = 0.0;
+	GraffitiInfo[f][grafZYpos] = Angle-180;
 	GraffitiInfo[f][grafText] = Graffiti_Text[playerid];
 	GraffitiInfo[f][gColor] = Graffiti_Color[playerid];
 	graffiti_SaveMySQL(f, playerid);
