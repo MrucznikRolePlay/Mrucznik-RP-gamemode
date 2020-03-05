@@ -71,7 +71,7 @@ maseczka_akceptuj(playerid)
     );
     PlayerImmunity[giveplayerid] = 10;
     SetPVarInt(playerid, "maseczka", 1);
-    new index = AttachPlayerItem(playerid, 18919, 2, 0.122467, 0.007340, 0.003190, 274.433288, 0.248657, 262.665466, 1.000000, 1.000000, 1.000000 );//bandana
+    new index = AttachPlayerItem(playerid, 18919, 2, -0.07, 0.0, 0.0, 85.0, 170.0, 86.0, 1.000000, 1.000000, 1.000000 );//bandana
     EditAttachedObject(playerid, index);
 
     SetPVarInt(playerid, "maseczka-akceptuj", 0);
