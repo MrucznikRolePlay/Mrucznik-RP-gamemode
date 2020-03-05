@@ -27,15 +27,17 @@
 
 // DB structure:
 // CREATE TABLE IF NOT EXISTS `mru_player_cooking` (
-//   `PID` int(11) NOT NULL,
-//   `slot` int(11) NOT NULL,
+// `id` int(11) NOT NULL,
+//   `owner` int(11) NOT NULL,
+//   `model` int(11) NOT NULL,
 //   `name` varchar(20) COLLATE latin1_general_ci NOT NULL,
 //   `weight` int(11) NOT NULL,
-//   `id` int(11) NOT NULL
-// ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+//   `type` int(11) NOT NULL
+// ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+//
+// ALTER TABLE `mru_player_cooking` ADD PRIMARY KEY (`id`), ADD KEY `owner` (`owner`);
+// ALTER TABLE `mru_player_cooking` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 
-// ALTER TABLE `mru_player_cooking`
-//  ADD PRIMARY KEY (`PID`,`slot`);
 
 //------------------<[ MySQL: ]>--------------------
 MruMySQL_CookedMealsDialog(playerid)
