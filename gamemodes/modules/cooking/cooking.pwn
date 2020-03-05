@@ -30,6 +30,7 @@ EatCookedMeal(playerid, name[], weight, type)
 {
 	new Float:hp;
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
+	ChatMe(playerid, sprintf("zjada %s.", name));
 	GetPlayerHealth(playerid, hp);
 	SetPlayerHealth(playerid, hp+weight/10);
 
