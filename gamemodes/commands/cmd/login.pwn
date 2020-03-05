@@ -33,7 +33,7 @@ YCMD:login(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
 		new playa;
-		if(!(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || IsAScripter(playerid)))
+		if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0 && !IsAScripter(playerid)))
 		{
 			noAccessMessage(playerid);
 			return 1;
@@ -64,7 +64,7 @@ YCMD:login(playerid, params[], help)
 			iloscInne[playerid] = iloscInne[playerid]+1;
 		}
 		playerid = playa;
-		
+
 		//wiadomoœci
 		new reString[144];
 		format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: /login).", GetNick(playerid));
