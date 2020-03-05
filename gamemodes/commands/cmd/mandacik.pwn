@@ -36,12 +36,12 @@ YCMD:mandacik(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(!IsACop(playerid))
+        if(!IsAPolicja(playerid))
 		{
 		    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ policjantem!");
 		    return 1;
 		}
-        if(OnDuty[playerid] != 1 && IsACop(playerid))
+        if(OnDuty[playerid] != 1 && IsAPolicja(playerid))
 		{
 		    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ na s³u¿bie!");
 		    return 1;

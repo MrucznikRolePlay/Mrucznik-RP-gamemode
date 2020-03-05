@@ -47,12 +47,12 @@ YCMD:setvw(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || PlayerInfo[playerid][pNewAP] >= 1)
 		{
 			SetPlayerVirtualWorld(gracz, intid);
 			format(string, sizeof(string), "Ustawi³eœ %s virtualworld nr %d.", GetNick(gracz), intid);
 			SendClientMessage(playerid, COLOR_GRAD1, string);
-			format(string, sizeof(string), "Admin %s ustawi³ ci virtualworld nr %d.", GetNick(playerid), intid);
+			format(string, sizeof(string), "Admin %s ustawi³ ci virtualworld nr %d.", GetNickEx(playerid), intid);
 			SendClientMessage(gracz, COLOR_LIGHTBLUE, string);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{

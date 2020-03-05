@@ -45,15 +45,14 @@ YCMD:zmienhp(playerid, params[], help)
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-					new giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME], additional[54];
+					new giveplayer[MAX_PLAYER_NAME], additional[54];
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
 					SetPlayerHealth(playa, health);
 					if(GetPlayerAdminDutyStatus(playerid) == 1)
 					{
 						iloscInne[playerid] = iloscInne[playerid]+1;
 					}
-					if(IsPlayerInAnyVehicle(playerid))
+					if(IsPlayerInAnyVehicle(playa))
 					{
 						new vehid = GetPlayerVehicleID(playa);
 						SetVehicleHealth(vehid, health);
@@ -64,7 +63,7 @@ YCMD:zmienhp(playerid, params[], help)
 
 					Log(adminLog, INFO, "Admin %s ustawi³ %s hp na %d%s", GetPlayerLogName(playerid), GetPlayerLogName(playa), health, additional);
 					new string[128];
-					format(string, sizeof(string), "%s da³ %d hp dla %s%s", sendername, health, giveplayer, additional);
+					format(string, sizeof(string), "%s da³ %d hp dla %s%s", GetNickEx(playerid), health, giveplayer, additional);
 					SendMessageToAdmin(string, COLOR_P@);
 				}
 			}

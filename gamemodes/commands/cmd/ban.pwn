@@ -48,7 +48,7 @@ YCMD:ban(playerid, params[], help)
 	        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
 	        return 1;
 	    }
-	    if(IsPlayerConnected(giveplayerid))//bug z id
+	    if(IsPlayerConnected(giveplayerid))
 	    {
 	        if(giveplayerid != INVALID_PLAYER_ID)
 	        {
@@ -92,7 +92,7 @@ YCMD:ban(playerid, params[], help)
 					}
 					if(kary_TXD_Status == 0)
 					{
-						format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, result);
+						format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayer, result);
 						SendPunishMessage(string, giveplayerid);
 					}
 					if(kary_TXD_Status == 1)
@@ -100,9 +100,9 @@ YCMD:ban(playerid, params[], help)
 						BanPlayerTXD(giveplayerid, playerid, result);
 					}
 					//adminowe logi
-			        format(str, sizeof(str), "Admini/%s.ini", sendername);
+			        format(str, sizeof(str), "Admini/%s.ini", GetNickEx(playerid));
 			        dini_IntSet(str, "Ilosc_Banow", dini_Int(str, "Ilosc_Banow")+1 );
-					format(str,sizeof(str),"~y~Ban Info:~n~~r~Osoba zbanowana: ~w~%s~n~~r~Powod: ~w~%s~n~~r~Nalozyl: ~w~%s", giveplayer ,result, sendername);
+					format(str,sizeof(str),"~y~Ban Info:~n~~r~Osoba zbanowana: ~w~%s~n~~r~Powod: ~w~%s~n~~r~Nalozyl: ~w~%s", giveplayer ,result, GetNickEx(playerid));
 					MruMySQL_Banuj(giveplayerid, result, playerid);
 					KickEx(giveplayerid);
 					if(PlayerInfo[giveplayerid][pAdmin] >= 1)
@@ -140,7 +140,7 @@ YCMD:ban(playerid, params[], help)
 							return 1;
                         }
 						SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
-						format(string, sizeof(string), "AdmCmd: Pó³Admin %s zbanowa³ %s, powód: %s",  sendername, giveplayer, (result));
+						format(string, sizeof(string), "AdmCmd: Pó³Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayer, (result));
                         SendPunishMessage(string, giveplayerid);
 						Log(punishmentLog, INFO, "Pó³Admin %s ukara³ %s kar¹ bana, powód: %s", 
 							GetPlayerLogName(playerid),

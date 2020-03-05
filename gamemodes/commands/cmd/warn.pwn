@@ -48,14 +48,14 @@ YCMD:warn(playerid, params[], help)
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 		{
             if(AntySpam[playerid] == 1)
 		    {
 		        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
 		        return 1;
 		    }
-		    if(IsPlayerConnected(giveplayerid) || true)//bug z id
+		    if(IsPlayerConnected(giveplayerid))
 		    {
 		        if(giveplayerid != INVALID_PLAYER_ID)
 		        {
@@ -85,11 +85,11 @@ YCMD:warn(playerid, params[], help)
 					{
 						if(PlayerInfo[giveplayerid][pWarns] >= 3)
 						{
-							format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNick(giveplayerid), GetNick(playerid), result); 
+							format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNick(giveplayerid), GetNickEx(playerid), result); 
 						}
 						else 
 						{
-							format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNick(giveplayerid), GetNick(playerid), result);
+							format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNick(giveplayerid), GetNickEx(playerid), result);
 						}
 						SendPunishMessage(string, playerid); 
 					}

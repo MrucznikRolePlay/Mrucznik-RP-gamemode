@@ -37,7 +37,7 @@ YCMD:usunpozar(playerid, params[], help)
 	    sendTipMessage(playerid, "Aby wywo³aæ losowy po¿ar wpisz /losowypozar !");
 	    
 	    new string[128];
-        format(string, 128, "CMD_Info: /usunpozar u¿yte przez %s [%d]", GetNick(playerid), playerid);
+        format(string, 128, "CMD_Info: /usunpozar u¿yte przez %s [%d]", GetNickEx(playerid), playerid);
         SendCommandLogMessage(string);
 		Log(adminLog, INFO, "Admin %s u¿y³ /usunpozar", GetPlayerLogName(playerid));
 	}

@@ -46,7 +46,7 @@ YCMD:ja(playerid, params[], help)
 
     if(strlen(params) < 78)
     {
-        format(string, sizeof(string), "* %s %s", GetNick(playerid, true), params);
+        format(string, sizeof(string), "* %s %s", GetNick(playerid), params);
         ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
     } else
     {
@@ -58,7 +58,7 @@ YCMD:ja(playerid, params[], help)
             strmid(text, params, pos + 1, strlen(params));
             strdel(params, pos, strlen(params));
 
-            format(string, sizeof(string), "* %s %s [.]", GetNick(playerid, true), params);
+            format(string, sizeof(string), "* %s %s [.]", GetNick(playerid), params);
             ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 
             format(string, sizeof(string), "[.] %s", text);

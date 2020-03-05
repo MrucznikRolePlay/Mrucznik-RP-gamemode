@@ -1,0 +1,11 @@
+{
+    "name": "choroby",
+    "description": "System chorób.",
+    "author": "Mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": true,
+    "files": ["choroby_effects.pwn"],
+    "commands": true,
+    "date": "07.02.2020"
+}

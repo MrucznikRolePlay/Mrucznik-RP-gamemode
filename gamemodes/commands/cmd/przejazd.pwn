@@ -46,7 +46,7 @@ YCMD:przejazd(playerid, params[], help) {
 					bramy[j][b_flaga] = false;
 					SetTimerEx("closeGate", 5000, false, "iii", i, j, playerid);
 					bramki_sasd_state[i] = true;
-					if(IsACop(playerid) && OnDuty[playerid] == 1)
+					if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
 					{
 						sendTipMessage(playerid, "Jesteœ funkcjonariuszem na s³u¿bie. Twój przejazd jest darmowy!");
 					}

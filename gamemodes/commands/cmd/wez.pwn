@@ -121,7 +121,7 @@ YCMD:wez(playerid, params[], help)
 					{
 						if(Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))
 						{
-							format(string, sizeof(string), "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***", GetNick(playerid, true));
+							format(string, sizeof(string), "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***", GetNick(playerid));
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							GivePlayerWeapon(playerid, 42, 9999);
 	                     	PlayerInfo[playerid][pGun9] = 42;

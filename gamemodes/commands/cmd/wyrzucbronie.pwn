@@ -53,7 +53,7 @@ YCMD:wyrzucbronie(playerid, params[], help)
     		format(string, sizeof(string),"%s wyrzuci³ broñ na ziemiê.", sendername);
     		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     		SendClientMessage(playerid, COLOR_WHITE, "   Twoja broñ zostanie przywrócona po œmierci.");
-    		ResetPlayerWeapons(playerid);
+    		RemovePlayerWeaponsTemporarity(playerid);
             SetPVarInt(playerid, "mozeUsunacBronie", 1);
         }
 	}

@@ -253,7 +253,7 @@ IsPlayerInConvoyCar(playerid)
 
 IsInAConvoyTeam(playerid)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1) return 1;
+	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) return 1;
 	return 0;
 }
 

@@ -42,7 +42,7 @@ YCMD:startlotto(playerid, params[], help)
             if(rand < 77) { rand += 3; }
             Lotto(rand);
 
-            format(string, sizeof(string), "CMD_Info: /startlotto u¿yte przez %s [%d]", GetNick(playerid), playerid);
+            format(string, sizeof(string), "CMD_Info: /startlotto u¿yte przez %s [%d]", GetNickEx(playerid), playerid);
             SendCommandLogMessage(string);
 	        Log(adminLog, INFO, "Admin %s u¿y³ /startlotto", GetPlayerLogName(playerid));
         }

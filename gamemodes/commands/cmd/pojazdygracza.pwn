@@ -46,9 +46,9 @@ YCMD:pojazdygracza(playerid, params[], help)
         }
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 		{
-            format(string, sizeof(string), "|---------- Auta %s ----------|",GetNick(para1, true));
+            format(string, sizeof(string), "|---------- Auta %s ----------|",GetNickEx(para1));
     		SendClientMessage(playerid, COLOR_GREEN, string);
             new lUID, lPID = PlayerInfo[para1][pUID];
             for(new i=0;i<MAX_CAR_SLOT;i++)

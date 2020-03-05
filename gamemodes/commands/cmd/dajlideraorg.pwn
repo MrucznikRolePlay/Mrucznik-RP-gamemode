@@ -47,7 +47,7 @@ YCMD:dajlideraorg(playerid, params[], help)
 		new orgUID = orgID(family);
 		if(orgUID != 0xFFFF)
 		{
-			format(str, sizeof(str), "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNick(playerid), OrgInfo[orgUID][o_Name], family);
+			format(str, sizeof(str), "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNickEx(playerid), OrgInfo[orgUID][o_Name], family);
 			SendClientMessage(id, COLOR_LIGHTBLUE, str);
 			format(str, sizeof(str), "Da³eœ kontrolê nad rodzin¹ %s (%d) graczowi %s", OrgInfo[orgUID][o_Name], family, GetNick(id));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, str);

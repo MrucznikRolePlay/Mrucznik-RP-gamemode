@@ -64,7 +64,7 @@ YCMD:setveh(playerid, params[], help)
                         {
                             format(string, 256, "Gracz posiada³ auto (UID: %d) na slocie %d. Pojazd zostaje bez w³asciciela.", CarData[PlayerInfo[para1][pCars][nrcar-1]][c_UID], nrcar);
                             SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                            format(string, 256, "Admin %s zmieni³ Ci auto (UID: %d) na slocie %d. Pojazd zostaje bez w³asciciela.", GetNick(playerid), CarData[PlayerInfo[para1][pCars][nrcar-1]][c_UID], nrcar);
+                            format(string, 256, "Admin %s zmieni³ Ci auto (UID: %d) na slocie %d. Pojazd zostaje bez w³asciciela.", GetNickEx(playerid), CarData[PlayerInfo[para1][pCars][nrcar-1]][c_UID], nrcar);
                             SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 
                             CarData[PlayerInfo[para1][pCars][nrcar-1]][c_OwnerType] = INVALID_CAR_OWNER;

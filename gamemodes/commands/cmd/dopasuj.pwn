@@ -34,7 +34,7 @@ YCMD:dopasuj(playerid, params[], help)
     if(sscanf(params, "s[24]", type)) {
         return sendTipMessage(playerid, "Dostepne /dopasuj: kamizelke");
     }
-	if(IsACop(playerid) || IsABOR(playerid))
+	if(IsAPolicja(playerid) || IsABOR(playerid))
 	{
 		if(!strcmp(type, "kamizelke", true))
 		{

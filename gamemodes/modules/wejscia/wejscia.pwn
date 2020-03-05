@@ -138,7 +138,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 					SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
 					SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
 					SetPVarInt(playerid, "mozeUsunacBronie", 1);
-					ResetPlayerWeapons(playerid);
+					RemovePlayerWeaponsTemporarity(playerid);
 				}
 			}
 			else
@@ -299,7 +299,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 16)//Wiêzienie stanowe - wejœcie i wyjœcie
 	{
-		if(!IsACop(playerid) && !IsABOR(playerid))
+		if(!IsAPolicja(playerid) && !IsABOR(playerid))
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "Simon_Mrucznikov mówi: Zaraz zaraz kolego! A ty gdzie? Nie mo¿esz tu wejœæ!"); 
 			noAccessCome[playerid] = 1;
@@ -314,6 +314,10 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			noAccessCome[playerid] = 1; 
 			return 1;
 		}
+	}
+	else if(Check_ID == 18 || Check_ID == 19) //ibiza audio
+	{
+		PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}
 	return 0; 
 }
@@ -362,7 +366,7 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 					SendClientMessage(playerid, COLOR_WHITE, "Nie chcesz k³opotów, wiêc oddajesz swój arsena³ agentowi USSS.");
 					SendClientMessage(playerid, COLOR_PANICRED, "((Broñ otrzymasz po œmierci//ponownym zalogowaniu))");
 					SetPVarInt(playerid, "mozeUsunacBronie", 1);
-					ResetPlayerWeapons(playerid);
+					RemovePlayerWeaponsTemporarity(playerid);
 				}
 			}
 			else
@@ -387,6 +391,14 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 			return 1;
 		}
 		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
+	}
+	else if(Check_ID == 18) //ibiza audio
+	{
+		PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
+	}
+	else if(Check_ID == 19)
+	{
+		StopAudioStreamForPlayer(playerid); 
 	}
 
 	return 0; 

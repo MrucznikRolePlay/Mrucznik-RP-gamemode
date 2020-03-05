@@ -8,7 +8,7 @@ public CheckCode2003(killerid, playerid)
     if(IsPlayerConnected(playerid))
 	{
     	MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNick(killerid, true));
+		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNickEx(killerid));
     	SendCommandLogMessage(string);
     	KickEx(killerid);
 		Log(warningLog, INFO, string);
@@ -16,7 +16,7 @@ public CheckCode2003(killerid, playerid)
 	}
 	else
 	{
-	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNick(killerid, true));
+	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNickEx(killerid));
     	SendCommandLogMessage(string);
 		Log(warningLog, INFO, string);
 	}
@@ -108,9 +108,7 @@ public Naprawa(playerid)
 	{
 		new string[256];
 		new giveplayer[MAX_PLAYER_NAME];
-		new sendername[MAX_PLAYER_NAME];
 		GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
-		GetPlayerName(playerid, sendername, sizeof(sendername));
 		RepairCar[playerid] = GetPlayerVehicleID(playerid);
 		SetVehicleHealth(RepairCar[playerid], 1000.0);
 		RepairVehicle(RepairCar[playerid]);
@@ -838,7 +836,28 @@ public PlayerAFK(playerid, afktime, breaktime)
 		else
 			format(caption, sizeof(caption), "[AFK] %d min. %d sek (%d)", afktime/60, afktime%60, playerid);
 
-		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
+
+		if(afktime == 840 && GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		{
+			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 1140 && IsPlayerPremiumOld(playerid))
+		{
+			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 540)
+		{
+			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		if(afktime > 600 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
 		{
 			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
@@ -854,7 +873,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			{
 				if(afktime > 900 && PlayerInfo[playerid][pAdmin] != 5000)
 				{
-					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas wejœcia na @Duty! Otrzymujesz Kicka (15min)");
+					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas @Duty! Otrzymujesz Kicka za AFK (15min)");
 					SetTimerEx("KickEx", 500, false, "i", playerid);
 				}
 				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
@@ -884,9 +903,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 	{
 		if(breaktime > afktime || breaktime > 180)
 		{
-			new name[MAX_PLAYER_NAME];
-			GetPlayerName(playerid, name, sizeof(name));
-			printf("%s byl afk przez %d", name, afktime);
+			printf("%s byl afk przez %d", GetNickEx(playerid), afktime);
 			afk_timer[playerid] = -1;
 		}
 		else
@@ -914,7 +931,7 @@ public CheckChangeWeapon()
 	{
 		new weaponID = GetPlayerWeapon(i);
 		new playerState = GetPlayerState(i);
-		if(starabron[i]!=weaponID)
+		if(PlayerHasWeapon[i]!=weaponID)
 		{
 			if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
 			{
@@ -928,10 +945,10 @@ public CheckChangeWeapon()
 						}
 						else
 						{
-							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, starabron[i]);
+							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, PlayerHasWeapon[i]);
 							if(PokazDialogBronie(i) == 0)
 							{
-								starabron[i] = 0;
+								PlayerHasWeapon[i] = 0;
 								SetPlayerArmedWeapon(i, 0);
 							}
 						}
@@ -1084,7 +1101,7 @@ public Spectator()
 		GetPlayerPos(PDGPS, x, y, z);
 		foreach(new i : Player)
 		{
-			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
+			if(IsAPolicja(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
 			{
 				if(zawodnik[i] == 0)
 					SetPlayerCheckpoint(i, x, y, z, 4.0);
@@ -1135,7 +1152,7 @@ public Spectator()
         }
         //END vinyl
 		//Ibiza audio check
-        if(!GetPVarInt(i, "IBIZA-stream"))
+        if(GetPVarInt(i, "IBIZA-stream") == 0)
         {
             if(IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && (GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
             {
@@ -1145,7 +1162,7 @@ public Spectator()
         }
         else
         {
-            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]))
+            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && !(GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
             {
                 SetPVarInt(i, "IBIZA-stream", 0);
                 StopAudioStreamForPlayer(i);
@@ -1180,7 +1197,7 @@ public Spectator()
 				GetPlayerName(specid, specNAME, sizeof(specNAME));
 				GetPlayerHealth(specid, specHP);
 				GetPlayerIp(specid, specIP, sizeof(specIP));
-				if(PlayerInfo[i][pAdmin] > 0) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
+				if(PlayerInfo[i][pAdmin] > 0 || IsAScripter(i)) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
 				else format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f",specNAME,specid,specHP);
 				GameTextForPlayer(i, string, 2500, 3);
 				SpectateTime[i]++;
@@ -2134,7 +2151,7 @@ public RPGTimer()
         if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][pAdmin] < 1)//rpg czit
         {
 			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
-			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i, true));
+			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i));
 			SendCommandLogMessage(string);
 			Kick(i);
 		}
@@ -2302,15 +2319,15 @@ public JednaSekundaTimer()
 					SetPlayerPos(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
-					PlayerKilledByAdmin[i] = 1;
+					SetPVarInt(i, "skip_bw", 1);
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
 					if(GetPVarInt(i, "DostalDM2") == 1)
 					{
-						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]", GetNick(i, true));
+						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [Odsiedzia³ karê za DM2]", GetNick(i));
 						SendAdminMessage(COLOR_PANICRED, string);
-						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i, true));
+						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i));
 						sendTipMessage(i, string);
 						ResetPlayerWeapons(i);
 						UsunBron(i);
@@ -2361,12 +2378,12 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if(zakuty[i] == 1)
+		if(Kajdanki_JestemSkuty[i] == 1)
 		{
-			cop = PDkuje[i];
+			cop = Kajdanki_PDkuje[i];
 			if(IsPlayerConnected(cop))
 			{
-				if(IsACop(cop) || IsABOR(cop))
+				if(IsAPolicja(cop) || IsABOR(cop))
 				{
 					if(GetPlayerState(cop) == 1)
 					{
@@ -3249,10 +3266,19 @@ public CJSkinCheck()
 {
 	foreach(new j : Player)
 	{
-		if(gPlayerLogged[j] == 1 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0)
+		if(gPlayerLogged[j] > 0 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
 		{
-			PlayerInfo[j][pSkin] = 299;
-			SetPlayerSkinEx(j, 299);
+			if(PlayerInfo[j][pSkin] > 0)
+			{
+			 	SetPlayerSpawnSkin(j);
+			}
+			else 
+			{
+				//PlayerInfo[j][pSkin] = 299; na potem
+				SetPlayerSkinEx(j, 299);
+				sendTipMessage(j, "Posiada³eœ skin CJ-a ID [0] - przywróciliœmy Ci domyœlny skin. Uwa¿asz, ¿e to b³¹d? Zg³oœ utratê w dziale b³êdów.");
+				sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w rodzinie, frakcji. Pomocna bêdzie ka¿da informacja.");
+			}
 		}
 	}
 }
@@ -3427,10 +3453,16 @@ public SlideRope(playerid)
 
 public SpecEnd(playerid)
 {
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 156, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 299, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
 	TogglePlayerSpectating(playerid, false);
 	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	return 1;
 }
-//Sandal END
+
+public DamagedHP(playerid)
+{
+	RemovePlayerAttachedObject(playerid, 2);
+	return 1;
+}
+
 //EOF

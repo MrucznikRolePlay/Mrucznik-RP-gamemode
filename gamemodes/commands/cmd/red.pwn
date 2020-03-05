@@ -32,7 +32,7 @@ YCMD:red(playerid, params[], help)
 {
     new frac;
     frac = GetPlayerFraction(playerid);
-    if(!IsACop(playerid) && frac != FRAC_LSPD)
+    if(!IsAPolicja(playerid) && frac != FRAC_LSPD)
 	{
 		return sendErrorMessage(playerid, "Nie jesteœ policjantem.");
 	}

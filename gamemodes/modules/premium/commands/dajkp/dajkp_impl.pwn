@@ -37,8 +37,8 @@ command_dajkp_Impl(playerid, giveplayerid, time)
 		}
 
 		Log(premiumLog, INFO, "Admin %s da³ %s konto premium na %d sekund", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), time);
-		_MruAdmin(playerid, sprintf("Da³eœ KP graczowi %s [ID: %d] na czas %d.", GetNick(giveplayerid, true), giveplayerid, time));
-		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ KP od Admina %s [ID: %d]", GetNick(playerid, true), playerid));
+		_MruAdmin(playerid, sprintf("Da³eœ KP graczowi %s [ID: %d] na czas %d.", GetNickEx(giveplayerid), giveplayerid, time));
+		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ KP od Admina %s [ID: %d]", GetNickEx(playerid), playerid));
 		return 1;
 	}
 	else return noAccessMessage(playerid);

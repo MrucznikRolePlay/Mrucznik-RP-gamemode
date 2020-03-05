@@ -47,7 +47,7 @@ YCMD:sb(playerid, params[], help)
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-				if(Spectate[giveplayerid] == playerid)
+				if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
 				{
 					sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie!");
 					return 1;

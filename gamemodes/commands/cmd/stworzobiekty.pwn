@@ -35,7 +35,7 @@ YCMD:stworzobiekty(playerid, params[], help)
         Stworz_Obiekty();
 	    SendClientMessage(playerid, COLOR_PANICRED, "Wszystkie obiekty stworzone!");
         new string[128];
-        format(string, 128, "CMD_Info: /stworzobiekty u¿yte przez %s [%d]", GetNick(playerid), playerid);
+        format(string, 128, "CMD_Info: /stworzobiekty u¿yte przez %s [%d]", GetNickEx(playerid), playerid);
         SendCommandLogMessage(string);
         Log(adminLog, INFO, "Admin %s u¿y³ /stworzobiekty", GetPlayerLogName(playerid));
     }

@@ -55,10 +55,10 @@ YCMD:dajbilet(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new giveplayerid;
-    if(sscanf(params, "r", giveplayerid))
+    new giveplayerid, opcja[24];
+    if(sscanf(params, "rs[24]", giveplayerid, opcja))
     {
-        sendTipMessage(playerid, "U¿yj /dajbilet [Nick/ID] ");
+        sendTipMessage(playerid, "U¿yj /dajbilet [Nick/ID] [normal[1], vip[2], supervip[3]] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -67,5 +67,5 @@ YCMD:dajbilet(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_dajbilet_Impl(playerid, giveplayerid);
+    return command_dajbilet_Impl(playerid, giveplayerid, opcja);
 }

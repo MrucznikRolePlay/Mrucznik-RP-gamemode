@@ -33,7 +33,25 @@ YCMD:apteczka(playerid, params[], help)
 	new playa, giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME], string[144];
 	if(sscanf(params, "k<fix>", playa))
 	{
-		sendTipMessage(playerid, "U¿yj /apteczka [ID gracza]");
+		//domowa apteczka
+		if(PlayerInfo[playerid][pDomWKJ] == PlayerInfo[playerid][pDom] || PlayerInfo[playerid][pDomWKJ] == PlayerInfo[playerid][pWynajem] && Dom[PlayerInfo[playerid][pDom]][hUL_D] != 0)
+		{
+			new dom = PlayerInfo[playerid][pDom];
+			if(IsPlayerInRangeOfPoint(playerid, 50.0, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]))
+			{
+				if(Dom[dom][hApteczka] != 0)
+				{
+					SetPlayerHealth(playerid, 100);
+					format(string, sizeof(string), "%s wyci¹ga apteczkê domow¹, banda¿uje rany, za¿ywa mru-apap. Czuje siê lepiej.", GetNick(playerid));
+					ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+					format(string, sizeof(string), "---[%s u¿y³ apteczki domowej]---", GetNick(playerid));
+					SendAdminMessage(COLOR_GREEN, string);
+					GameTextForPlayer(playerid, "~r~Czujesz sie lepiej ~n~ dzieki mrupap", 6000, 1);	
+					return 1;
+				}
+			}
+		}
+		sendTipMessage(playerid, "U¿yj /apteczka [ID gracza], b¹dŸ /apteczka bêd¹c w domu.");
 		return 1;
 	}
 	if(!IsPlayerConnected(playa) || playa == INVALID_PLAYER_ID) 

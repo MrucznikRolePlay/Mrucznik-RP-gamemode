@@ -45,7 +45,7 @@ YCMD:setservpass(playerid, params[], help)
 				sendErrorMessage(playerid, "Zbyt krótkie has³o"); 
 				return 1;
 			}
-			format(string, sizeof(string), "%s zarz¹dzi³ zamkniêcie serwera! Has³o zosta³o w³¹czone", GetNick(playerid));
+			format(string, sizeof(string), "%s zarz¹dzi³ zamkniêcie serwera! Has³o zosta³o w³¹czone", GetNickEx(playerid));
 			foreach(new i : Player)
 			{
 				sendErrorMessage(i, string);

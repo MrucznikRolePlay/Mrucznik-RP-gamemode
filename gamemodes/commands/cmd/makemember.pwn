@@ -32,7 +32,6 @@ YCMD:makemember(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -56,9 +55,8 @@ YCMD:makemember(playerid, params[], help)
 		                return 1;
 		            }
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
 					PlayerInfo[para1][pMember] = level;
-					format(string, sizeof(string), "Zosta³eœ mianowany pracownikiem frakcji numer %d przez Administratora: %s", level,sendername);
+					format(string, sizeof(string), "Zosta³eœ mianowany pracownikiem frakcji numer %d przez Administratora: %s", level,GetNickEx(playerid));
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Da³eœ membera graczowi %s nad frakcj¹ numer %d.", giveplayer,level);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

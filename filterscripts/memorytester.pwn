@@ -69,7 +69,6 @@ public OnClientCheckResponse(clientid, actionid, checksum, crc)
 				pHaveSobeit[clientid] = true;
 				pCountCheck[clientid] = 0;
 				OznaczCzitera(clientid);
-				//kickPlayerForSobeit(clientid, 1);
 				
 			}
 			else if(checksum & 0x00ff0000 == 0x00CC0000)
@@ -77,7 +76,6 @@ public OnClientCheckResponse(clientid, actionid, checksum, crc)
 				pHaveSobeit[clientid] = true;
 				pCountCheck[clientid] = 0;
 				OznaczCzitera(clientid);
-				//kickPlayerForSobeit(clientid, 2);
 			}
 			else if(checksum & 0x00ff0000 == 0x00FC0000)
 			{

@@ -47,7 +47,7 @@ YCMD:dzwon(playerid, params[], help)
 		sendErrorMessage(playerid, "Nie posiadasz telefonu !");
 		return 1;
 	}
-	if(zakuty[playerid] == 1)
+	if(Kajdanki_JestemSkuty[playerid])
 	{
 		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas bycia skutym!");
 		return 1;

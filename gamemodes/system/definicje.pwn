@@ -284,9 +284,10 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define ACCESS_EDITCAR          0b1000000000
 #define ACCESS_EDITRANG         0b10000000000
 #define ACCESS_GIVEHALF         0b100000000000
-#define ACCESS_DELETEORG        0b1000000000000 //13 bit
+#define ACCESS_DELETEORG        0b1000000000000
+#define ACCESS_SKRYPTER         0b10000000000000 //14 bit
 
-#define ACCESS_OWNER            0b1111111111111
+#define ACCESS_OWNER            0b111111111111111
 
 //------------------------------------------------------------------------------
 //                              DIALOGI
@@ -297,12 +298,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define DIALOG_PASSWORD 3
 #define DIALOG_INPUT 4
 #define DIALOG_HELP 5
-#define DIALOG_CHANGELOG_RC1 6
-#define DIALOG_CHANGELOG_RC2 7
-#define DIALOG_CHANGELOG_RC3 8
-#define DIALOG_CHANGELOG_RC4 9
-#define DIALOG_CHANGELOG_RC5 11
-#define DIALOG_CHANGELOG_RC6 12
+/* 6-9 oraz 11-12 puste */
 #define DIALOG_FLYMODEHELP 10
 #define DIALOG_INFOTYPE 13
 #define DIALOG_INFOVEHICLE 14
@@ -474,6 +470,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_UZYCIE_APTECZKI			    10108
 #define D_PRZEDMIOTY_BRONIE			    10109
 
+#define D_MECH_SPRZEDAZ_FIXKIT          10110
+
 
 //------------------------------------------------------------------------------
 //                              INNE
@@ -502,7 +500,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 //25.07
 #define MAX_ZONES   65
 #define ZONE_COLOR_GROOVE 0x00B90000
-#define ZONE_COLOR_BALLAZ 0xB9009700
+#define ZONE_COLOR_BALLAZ 0xC2000000
 #define ZONE_COLOR_VAGOS 0xDFD32800
 #define ZONE_COLOR_WPS 0x5BCFE600
 //13.08 fly data

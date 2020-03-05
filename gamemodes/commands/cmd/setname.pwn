@@ -32,7 +32,6 @@ YCMD:setname(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
 	new newname[MAX_PLAYER_NAME];
 	if (PlayerInfo[playerid][pAdmin] >= 5000)//(Uprawnienia(playerid, ACCESS_OWNER))
@@ -49,6 +48,12 @@ YCMD:setname(playerid, params[], help)
 			sendErrorMessage(playerid, string); 
 			return 1;
 		}
+		new nick[24];
+		if(GetPVarString(giveplayerid, "maska_nick", nick, 24))
+		{
+			SendClientMessage(playerid, COLOR_GREY, " Gracz musi œci¹gn¹æ maskê z twarzy! (/maska).");
+			return 1;
+		}
 
 		if(giveplayerid != INVALID_PLAYER_ID)
 		{
@@ -57,14 +62,13 @@ YCMD:setname(playerid, params[], help)
 		        if(PlayerInfo[giveplayerid][pBusinessOwner] == INVALID_BIZ_ID)
 		        {
                     GetPlayerName(giveplayerid, giveplayer, MAX_PLAYER_NAME);
-                    GetPlayerName(playerid, sendername, MAX_PLAYER_NAME);
 					new sender_log_name[MAX_PLAYER_NAME];
 					new giveplayer_log_name[MAX_PLAYER_NAME];
 					format(sender_log_name, sizeof(sender_log_name), "%s", GetPlayerLogName(playerid));
 					format(giveplayer_log_name, sizeof(giveplayer_log_name), "%s", GetPlayerLogName(giveplayerid));
                     if(ChangePlayerName(giveplayerid, newname))
                     {
-    					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", sendername,giveplayer,PlayerInfo[giveplayerid][pUID],newname);
+    					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", GetNickEx(playerid),giveplayer,PlayerInfo[giveplayerid][pUID],newname);
     					SendClientMessageToAll(COLOR_LIGHTRED, string);
 						Log(adminLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);
 						Log(nickLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);

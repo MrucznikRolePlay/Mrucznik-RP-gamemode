@@ -25,6 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_ac_Impl(playerid)
 {
+    sendTipMessage(playerid, "W budowie.");
     return 1;
 }
 

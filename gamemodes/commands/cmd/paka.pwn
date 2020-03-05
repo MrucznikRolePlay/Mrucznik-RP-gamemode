@@ -36,9 +36,9 @@ YCMD:paka(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
    	{
-		if(IsACop(playerid) && PlayerInfo[playerid][pRank] >= 3)
+		if(IsAPolicja(playerid) && PlayerInfo[playerid][pRank] >= 3)
 		{
-			if(OnDuty[playerid] != 1 && IsACop(playerid))
+			if(OnDuty[playerid] != 1 && IsAPolicja(playerid))
 			{
 			    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ na s³u¿bie!");
 			    return 1;
@@ -82,10 +82,9 @@ YCMD:paka(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					ZabierzKase(suspect, moneys);
                     poscig[suspect] = 0;
-					//DajKase(playerid, moneys);
 					format(string, sizeof(string), "Aresztowany przez %s ~n~    grzywna $%d", sendername, moneys);
 					GameTextForPlayer(suspect, string, 5000, 5);
-					ResetPlayerWeapons(suspect);
+					RemovePlayerWeaponsTemporarity(suspect);
 					if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
 					{
 						format(string, sizeof(string), "<< Policjant %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
@@ -101,7 +100,16 @@ YCMD:paka(playerid, params[], help)
 						format(string, sizeof(string), "<< Funkcjonariusz %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
 						OOCNews(COLOR_LIGHTRED, string);
 					}
-	    			SetPlayerInterior(suspect, 10);
+					Kajdanki_JestemSkuty[suspect] = 0;//Kajdany
+					Kajdanki_Uzyte[suspect] = 0;
+					Kajdanki_PDkuje[playerid] = 0;
+					Kajdanki_Uzyte[playerid] = 0;
+					ClearAnimations(suspect);
+					SetPlayerSpecialAction(suspect,SPECIAL_ACTION_NONE);
+					RemovePlayerAttachedObject(suspect, 0);
+					Kajdanki_PDkuje[suspect] = 0;
+									
+					SetPlayerInterior(suspect, 10);
 				    new losuj= random(sizeof(Cela));
 					SetPlayerPos(suspect, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 					PlayerInfo[suspect][pJailTime] = time * 60;

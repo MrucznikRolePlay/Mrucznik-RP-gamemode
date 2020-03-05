@@ -38,10 +38,8 @@ YCMD:cnn(playerid, params[], help)
 			return 1;
 		}
 		new string[128];
-		new sendername[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, sendername, sizeof(sendername));
 		//
-		format(string, sizeof(string), "~b~%s: ~w~%s",sendername,params);
+		format(string, sizeof(string), "~b~%s: ~w~%s",GetNickEx(playerid),params);
         if(!issafefortextdraw(string)) return sendErrorMessage(playerid, "Niekompletny tekst (tyldy etc)");
 		foreach(new i : Player)
 		{

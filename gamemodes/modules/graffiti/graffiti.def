@@ -1,0 +1,48 @@
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                  graffiti                                                 //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: Sanda³
+// Data utworzenia: 01.02.2020
+
+//
+
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+
+#define GRAFFITI_MAX 100
+#define GRAFFITI_ADMIN 1 // od którego @lvl mozna zmieniaæ innych graffiti
+#define GRAFFITI_DIALOG_LIST 1250
+#define GRAFFITI_DIALOG_ENTER_TEXT 1251
+#define GRAFFITI_DIALOG_SELECT_COLOR 1252
+#define GRAFFITI_DIALOG_EDIT_COLOR 1253
+#define GRAFFITI_DIALOG_EDIT_TEXT 1254
+#define INVALID_GRAFID 9999
+
+
+#define GRAFFITI_CZARNY 0xFF000000
+#define GRAFFITI_BIALY 0xFFFFFFFF
+#define GRAFFITI_CZERWONY 0xFFFF0000
+#define GRAFFITI_ZIELONY 0xFF00FF00
+#define GRAFFITI_NIEBIESKI 0xFF2B95FF
+#define GRAFFITI_SZARY 0xFFAFAFAF //
+#define GRAFFITI_POMARANCZOWY 0xFFE87E15
+#define GRAFFITI_ZOLTY 0xFFFFE100
+#define GRAFFITI_FIOLETOWY 0xFF8400FF
+#define GRAFFITI_ROZOWY 0xFFEE00FF
+
+//end

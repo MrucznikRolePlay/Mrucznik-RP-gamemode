@@ -79,6 +79,7 @@ forward Dopalaj(playerid); // Dopalacz auta
 forward StopMusic();
 forward PlayerFixRadio2();
 forward CountDown();
+forward ZestawNaprawczy_CountDown(playerid, vehicleid);
 forward EditObj(playerid, obj); //Timer do edycji obiektów
 forward PaintballEnded();
 forward obiekty_timer(wartosc);
@@ -145,4 +146,9 @@ forward Stanowe_CheckPlyInVeh(playerid);
 
 forward SlideRope(playerid);
 forward closeGate(i, j, playerid);
+
+forward DamagedHP(playerid);
+forward CuffedAction(playerid, cuffedid);
+//forward UnCuffedAction(cop, cuffedid); to do
+forward DeathAdminWarning(playerid, killerid, reason) ;
 //EOF

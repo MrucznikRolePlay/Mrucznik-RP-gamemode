@@ -60,7 +60,7 @@ stock SetAnimatiorToActorMess(playerid, qActor)
 	new string[124]; 
 	format(string, sizeof(string), "W³¹czy³eœ animacjê dla %s [%d]", Actors[qActor][a_Name], qActor);
 	sendTipMessage(playerid, string); 
-	format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNick(playerid), Actors[qActor][a_Name], qActor); 
+	format(string, sizeof(string), "Admin %s w³¹czy³ animacjê dla Actora %s [%d]", GetNickEx(playerid), Actors[qActor][a_Name], qActor); 
 	SendMessageToAdmin(string, COLOR_RED); 
 	return 1;
 }

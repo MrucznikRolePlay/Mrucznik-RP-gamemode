@@ -31,7 +31,6 @@
 YCMD:forum(playerid, params[], help)
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -41,8 +40,7 @@ YCMD:forum(playerid, params[], help)
         }
         if(PlayerInfo[playerid][pAdmin] >= 1)
         {
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			format(string, sizeof(string), "Adres forum: Mrucznik-RP.pl !! ((%s))", sendername);
+			format(string, sizeof(string), "Adres forum: Mrucznik-RP.pl !! ((%s))", GetNickEx(playerid));
 			SendClientMessageToAll(0xff00ff, string);
 		}
 		else

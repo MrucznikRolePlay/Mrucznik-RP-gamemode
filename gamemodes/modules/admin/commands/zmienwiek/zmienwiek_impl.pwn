@@ -32,7 +32,7 @@ command_zmienwiek_Impl(playerid, giveplayerid, valueWiek)
         {
             PlayerInfo[giveplayerid][pAge] = valueWiek;
             Log(adminLog, INFO, "Admin %s zmieni³ wiek %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), valueWiek);
-            format(string, sizeof(string), "   Twój wiek zosta³ zmieniony na %d lat przez %s", valueWiek, GetNick(playerid));
+            format(string, sizeof(string), "   Twój wiek zosta³ zmieniony na %d lat przez %s", valueWiek, GetNickEx(playerid));
             SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
             format(string, sizeof(string), "   Zmieni³eœ wiek graczowi %s na %d lat.", GetNick(giveplayerid),valueWiek);
             SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

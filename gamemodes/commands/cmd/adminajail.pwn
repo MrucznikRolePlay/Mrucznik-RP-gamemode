@@ -44,7 +44,7 @@ YCMD:adminajail(playerid, params[], help)
 		{
 			if (PlayerInfo[playa][pJailed] == 0)
 			{
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || IsAScripter(playerid))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
 				{
 					if (PlayerInfo[playerid][pZG] >= 6 && PlayerInfo[playerid][pZG] < 8 && money > 7)
 					{
@@ -77,7 +77,7 @@ YCMD:adminajail(playerid, params[], help)
 						}
 						else if(kary_TXD_Status == 0)
 						{
-							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
+							format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa), GetNickEx(playerid), money, (result));
 							SendPunishMessage(string, playa);
 						}
 						return 1;
@@ -113,11 +113,11 @@ YCMD:adminajail(playerid, params[], help)
 					}
 					else if(kary_TXD_Status == 0)
 					{
-						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNick(playa, true), GetNick(playerid), money, (result));
+						format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina %s. Czas: %d min Powod: %s.", GetNickEx(playa), GetNickEx(playerid), money, (result));
 						SendPunishMessage(string, playa);
 					}
 					//adminowe logi
-					format(string, sizeof(string), "Admini/%s.ini", GetNick(playerid));
+					format(string, sizeof(string), "Admini/%s.ini", GetNickEx(playerid));
 					dini_IntSet(string, "Ilosc_AJ", dini_Int(string, "Ilosc_AJ")+1 );
 					SendClientMessage(playa, COLOR_NEWS, "Sprawdü czy otrzymana kara jest zgodna z listπ kar i zasad, znajdziesz jπ na www.Mrucznik-RP.pl");
 					Wchodzenie(playa);

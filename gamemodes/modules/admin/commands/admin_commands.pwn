@@ -30,20 +30,20 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "dmvoff\dmvoff.pwn"
+#include "specshow\specshow.pwn"
 #include "dmvon\dmvon.pwn"
 #include "setvregistration\setvregistration.pwn"
-#include "specshow\specshow.pwn"
 #include "zmienwiek\zmienwiek.pwn"
+#include "dmvoff\dmvoff.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_dmvoff();
+    command_specshow();
     command_dmvon();
     command_setvregistration();
-    command_specshow();
     command_zmienwiek();
+    command_dmvoff();
     
 }

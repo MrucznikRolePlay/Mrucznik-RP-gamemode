@@ -43,7 +43,7 @@ YCMD:rozbierz(playerid, params[], help)
         return 1;
     }
 
-    if(GetPlayerVirtualWorld(playerid) == 40 || PlayerInfo[playerid][pDomWKJ] != 0)
+    if(GetPlayerVirtualWorld(playerid) == 40 || PlayerInfo[playerid][pDomWKJ] != 0) //ostatni warunek to INT SEKTA
     {
         UndressPlayer(playerid,false, colorID); 
     }

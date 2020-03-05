@@ -45,7 +45,7 @@ YCMD:fdaj(playerid, params[], help)
 			if(PlayerInfo[playerid][pLevel] >= 1)
 			{
 				SetPlayerFightingStyle(playerid, level);
-				format(string, sizeof(string), "Administrator %s ustawi³ Ci styl walki na %d", GetNick(playerid), level); 
+				format(string, sizeof(string), "Administrator %s ustawi³ Ci styl walki na %d", GetNickEx(playerid), level); 
 				sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 				format(string, sizeof(string), "Ustawi³eœ styl walki dla %s na %d", GetNick(giveplayerid), level);
 				sendTipMessageEx(playerid, COLOR_P@, string); 

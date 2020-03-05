@@ -35,11 +35,11 @@ YCMD:app(playerid, params[], help) {
     if(GetPVarInt(ofertaod, "pozwolenie-oferujeDla") != playerid) return sendErrorMessage(playerid, "Osoba, która oferowa³a Ci pozwolenie wysz³a z serwera!");
     if(kaska[playerid] < CENA_POZWOLENIE) return sendErrorMessage(playerid, "Nie staæ Cie na pozwolenie prawnicze");
     new string[128];
-    format(string, sizeof(string), "%s akceptowa³ Twoj¹ ofertê pozwolenia prawiczego, otrzymujesz $"#CENA_POZWOLENIE_ZYSK, GetNick(playerid, true));
+    format(string, sizeof(string), "%s akceptowa³ Twoj¹ ofertê pozwolenia prawiczego, otrzymujesz $"#CENA_POZWOLENIE_ZYSK, GetNick(playerid));
     sendTipMessage(ofertaod, string, COLOR_LIGHTBLUE);
-    format(string, sizeof(string), "Otrzymujesz pozwolenie prawnicze od %s", GetNick(ofertaod, true));
+    format(string, sizeof(string), "Otrzymujesz pozwolenie prawnicze od %s", GetNick(ofertaod));
     sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
-    format(string, sizeof(string), "* %s da³ zgodê na uwolnienie wiêŸnia prawnikowi %s", GetNick(ofertaod, true), GetNick(playerid, true));
+    format(string, sizeof(string), "* %s da³ zgodê na uwolnienie wiêŸnia prawnikowi %s", GetNick(ofertaod), GetNick(playerid));
     SendRadioMessage(1, COLOR_PANICRED, string);
     SendRadioMessage(2, COLOR_PANICRED, string);
     SendRadioMessage(3, COLOR_PANICRED, string);

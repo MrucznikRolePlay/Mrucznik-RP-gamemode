@@ -36,7 +36,7 @@ YCMD:federalne(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	 	if(!IsACop(playerid))
+	 	if(!IsAPolicja(playerid))
 	 	{
 	 		sendErrorMessage(playerid, "Nie jesteœ z s³u¿b porz¹dkowych!");
 		    return 1;
@@ -53,13 +53,13 @@ YCMD:federalne(playerid, params[], help)
 			return 1;
 		}
 
-		if (IsACop(playerid) || IsAFBI(playerid))
+		if (IsAPolicja(playerid) || IsAFBI(playerid))
 		{
 			if(IsPlayerConnected(giveplayerid))
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-					if (!(IsACop(giveplayerid) && OnDuty[giveplayerid] == 1))
+					if (!(IsAPolicja(giveplayerid) && OnDuty[giveplayerid] == 1))
 					{
 						if(spamwl[giveplayerid] == 0)
 						{
@@ -70,6 +70,7 @@ YCMD:federalne(playerid, params[], help)
 								PoziomPoszukiwania[giveplayerid] = 6;
 								spamwl[giveplayerid] = 1;
 								SetTimerEx("spamujewl",60000,0,"d",giveplayerid);
+								PlayCrimeReportForPlayer(playerid,giveplayerid,5);
 								SetPlayerCriminal(giveplayerid,playerid, result);
 								SendClientMessage(giveplayerid, COLOR_LFBI, "   Pope³ni³eœ przestêpstwo federalne, twoj¹ sprawê przejê³o FBI !");
 								SendClientMessage(playerid, COLOR_LFBI, "   Oskar¿y³eœ gracza o przestêpstwo federalne. Ma on teraz 6 Poziom Poszukiwania !");

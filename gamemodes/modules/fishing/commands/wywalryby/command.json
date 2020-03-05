@@ -1,0 +1,14 @@
+{
+    "name": "wywalryby",
+    "description": "Wyrzuca wszystkie ryby.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "wyrzucryby",
+        "throwfishes"
+    ],
+    "parameters": [],
+    "date": "03.03.2020"
+}
