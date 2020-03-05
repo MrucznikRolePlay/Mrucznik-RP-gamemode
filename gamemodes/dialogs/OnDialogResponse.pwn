@@ -3242,6 +3242,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						Groceries[playerid][pChicken] = random(300)+110;
 						ZabierzKase(playerid, 15);
+						GameTextForPlayer(playerid, "~r~-$15", 5000, 1);
+						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego kurczaka.");
 					}
 					case 18: //pizza
 					{
@@ -3257,6 +3259,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						Groceries[playerid][pPizza] = random(300)+90;
 						ZabierzKase(playerid, 30);
+						GameTextForPlayer(playerid, "~r~-$30", 5000, 1);
+						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿on¹ pizzê.");
 					}
 					case 19: //hamburger
 					{
@@ -3272,6 +3276,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						Groceries[playerid][pHamburger] = random(300)+100;
 						ZabierzKase(playerid, 25);
+						GameTextForPlayer(playerid, "~r~-$25", 5000, 1);
+						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego hamburgera.");
 					}
 					case 20: //mro¿ony nietoperze z Wuhan
 					{
@@ -3287,6 +3293,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						Groceries[playerid][pWuhanBat] = random(650)+100;
 						ZabierzKase(playerid, 1500);
+						GameTextForPlayer(playerid, "~r~-$1500", 5000, 1);
+						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego nietoperza z Wuhan.");
 					}
 				}
 			}
