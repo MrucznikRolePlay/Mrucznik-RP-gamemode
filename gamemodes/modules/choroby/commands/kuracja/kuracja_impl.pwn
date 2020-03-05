@@ -37,7 +37,7 @@ kuracja_akceptuj(playerid)
         return 1;
     }
 
-    if(PlayerInfo[playerid][pLocal] != PLOCAL_FRAC_LSMC)
+    if(PlayerInfo[playerid][pLocal] != PLOCAL_FRAC_LSMC && GetPlayerVirtualWorld(playerid) != 90)
     {
         sendErrorMessage(playerid, "Kuracjê mo¿na akceptowaæ tylko w szpitalu.");
         return 1;
@@ -95,7 +95,7 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
         return 1;
 	}
 
-    if(PlayerInfo[playerid][pLocal] != PLOCAL_FRAC_LSMC)
+    if(PlayerInfo[playerid][pLocal] != PLOCAL_FRAC_LSMC && GetPlayerVirtualWorld(playerid) != 90)
     {
         sendErrorMessage(playerid, "Kuracjê mo¿na oferowaæ tylko w szpitalu.");
         return 1;

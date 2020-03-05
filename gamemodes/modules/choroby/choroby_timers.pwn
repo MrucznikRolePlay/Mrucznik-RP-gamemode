@@ -80,8 +80,12 @@ timer TreatmentCounter[1000](playerid, count)
 			{
 				//abort treatment
 				if(IsPlayerConnected(doctorid))
+				{
 					GameTextForPlayer(doctorid, "Kuracja przerwana.", 1000, 1);
+					SendClientMessage(doctorid, COLOR_RED, "Kuracja przerwana - oddali³eœ siê od pacjenta na zbyt d³ugo!");
+				}
 				GameTextForPlayer(playerid, "Kuracja przerwana.", 1000, 1);
+				SendClientMessage(playerid, COLOR_RED, "Kuracja przerwana - oddali³eœ siê od doktora na zbyt d³ugo!");
 				SetPVarInt(playerid, "disease-treatement", 0);
 				return;
 			}
