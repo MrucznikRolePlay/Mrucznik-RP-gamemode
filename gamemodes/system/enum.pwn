@@ -857,32 +857,6 @@ enum SAZONE_MAIN
 	Float:SAZONE_AREA[6]
 };
 
-new FishNamesNumber = 22;
-new FishNames[22][20] = {
-{"Kie³basê"},
-{"Seriola"},
-{"Ukuleja"},
-{"Ognica Pstra"},
-{"Stare gacie"},
-{"Pstr¹g"},
-{"Blue Marlin"},
-{"£osoœ"},
-{"Makrela"},
-{"Bas"},
-{"Stare Kalosze"},
-{"Sandacz"},
-{"Marlin"},
-{"Okoñ"},
-{"Tuñczyk"},
-{"Wêgorz"},
-{"Delfin"},
-{"Rekin"},
-{"¯ó³w"},
-{"Sum"},
-{"Sakiewka ze z³otem"},
-{"Miecznik"}
-};
-
 new Float:PaintballSpawns[7][3] = {
 {-394.8027,2232.2317,42.4297},
 {-430.8412,2240.5371,42.9834},
@@ -1169,61 +1143,6 @@ enum pBoxingStats
     TitelLoses,
 };
 new Titel[pBoxingStats];
-
-enum pFishing
-{
-	pFish1[20],
-	pFish2[20],
-	pFish3[20],
-	pFish4[20],
-	pFish5[20],
-	pWeight1,
-	pWeight2,
-	pWeight3,
-	pWeight4,
-	pWeight5,
-	pFid1,
-	pFid2,
-	pFid3,
-	pFid4,
-	pFid5,
-	pLastFish,
-	pFishID,
-	pLastWeight,
-};
-new Fishes[MAX_PLAYERS][pFishing];
-
-enum pCooking
-{
-	pCook1[20],
-	pCook2[20],
-	pCook3[20],
-	pCook4[20],
-	pCook5[20],
-	pCWeight1,
-	pCWeight2,
-	pCWeight3,
-	pCWeight4,
-	pCWeight5,
-	pCookID1,
-	pCookID2,
-	pCookID3,
-	pCookID4,
-	pCookID5,
-};
-new Cooking[MAX_PLAYERS][pCooking];
-
-enum pGroceries
-{
-	pChickens,
-	pChicken,
-	pHamburgers,
-	pHamburger,
-	pPizzas,
-	pPizza,
-	pWuhanBat
-};
-new Groceries[MAX_PLAYERS][pGroceries];
 
 enum pSpec
 {

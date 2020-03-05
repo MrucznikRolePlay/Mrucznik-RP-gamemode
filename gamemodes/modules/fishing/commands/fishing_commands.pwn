@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ wywalrybe ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,33 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+#include <YSI\y_hooks>
 
-YCMD:wywalrybe(playerid, params[], help)
+//-------<[ include ]>-------
+#include "ryby\ryby.pwn"
+#include "wywalryby\wywalryby.pwn"
+#include "wypuscrybe\wypuscrybe.pwn"
+#include "sprzedajrybe\sprzedajrybe.pwn"
+#include "rybypomoc\rybypomoc.pwn"
+#include "lowienie\lowienie.pwn"
+
+
+//-------<[ initialize ]>-------
+hook OnGameModeInit()
 {
-    if(IsPlayerConnected(playerid))
-    {
-        if(Fishes[playerid][pLastFish] > 0)
-        {
-            ClearFishID(playerid, Fishes[playerid][pLastFish]);
-            Fishes[playerid][pLastFish] = 0;
-            Fishes[playerid][pFishID] = 0;
-        }
-        else
-        {
-            sendTipMessageEx(playerid, COLOR_GREY, "Nie z³owi³eœ ¿adnej ryby !");
-            return 1;
-        }
-    }
-    return 1;
+    command_ryby();
+    command_wywalryby();
+    command_wypuscrybe();
+    command_sprzedajrybe();
+    command_rybypomoc();
+    command_lowienie();
+    
 }

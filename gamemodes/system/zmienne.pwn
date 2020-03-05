@@ -695,7 +695,6 @@ new PlayerTazeTime[MAX_PLAYERS];
 new FindTimePoints[MAX_PLAYERS];
 new FindTime[MAX_PLAYERS];
 new BoxWaitTime[MAX_PLAYERS];
-new TestFishes[MAX_PLAYERS];
 new BoxOffer[MAX_PLAYERS];
 new CarOffer[MAX_PLAYERS];
 new CarPrice[MAX_PLAYERS];
@@ -1162,7 +1161,7 @@ ZerujZmienne(playerid)
 	DrugGram[playerid] = 0; ConnectedToPC[playerid] = 0; OrderReady[playerid] = 0;
 	JailPrice[playerid] = 0; MedicTime[playerid] = 0; NeedMedicTime[playerid] = 0; MedicBill[playerid] = 0; GotHit[playerid] = 0;
 	GoChase[playerid] = 999; GetChased[playerid] = 999; PlacedNews[playerid] = 0;
-	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; PoziomPoszukiwania[playerid] = 0; TestFishes[playerid] = 0;
+	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; PoziomPoszukiwania[playerid] = 0;
 	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; ChangePos2[playerid][1] = 0; iddialog[playerid] = -1;
 	TransportDuty[playerid] = 0; PlayerTied[playerid] = 0; weryfikacja[playerid] = 0;
 	BusCallTime[playerid] = 0; TaxiCallTime[playerid] = 0; MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;
@@ -1188,7 +1187,6 @@ ZerujZmienne(playerid)
 	TransportValue[playerid] = 0; TransportMoney[playerid] = 0; TransportCost[playerid] = 0; TransportDriver[playerid] = 999;
 	Locator[playerid] = 0; PlayerOnMission[playerid] = 0; MissionCheckpoint[playerid] = 0;
 	WatchingTV[playerid] = 0; PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
-	Fishes[playerid][pLastFish] = 0; Fishes[playerid][pFishID] = 0;
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
 	BiletAlhambra[playerid] = 0;
 	PlayerInfo[playerid][pLevel] = 0;
@@ -1365,8 +1363,6 @@ ZerujZmienne(playerid)
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
 	ClearFishes(playerid);
-	ClearCooking(playerid);
-	ClearGroceries(playerid);
 	ClearMarriage(playerid);
 
 

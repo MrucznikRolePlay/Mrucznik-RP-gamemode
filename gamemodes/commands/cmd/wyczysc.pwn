@@ -39,7 +39,7 @@ YCMD:wyczysc(playerid, params[], help)
    	    new tmpcar = GetPlayerVehicleID(playerid);
  		if(IsAPolicja(playerid))
 		{
-			if (IsACopCar(tmpcar) || 
+			if ((tmpcar != INVALID_VEHICLE_ID && IsACopCar(tmpcar)) || 
 			PlayerToPoint(15.0, playerid, 253.9280,69.6094,1003.6406) || 
 			PlayerToPoint(20.0, playerid, 246.3568,120.3933,1003.2682) || 
 			PlayerToPoint(50, playerid, 1189.5999755859,-1574.6999511719,-54.5 ) || 
@@ -53,16 +53,15 @@ YCMD:wyczysc(playerid, params[], help)
 					return 1;
 				}
 
-				if(PoziomPoszukiwania[giveplayerid] > 2)
-				{
-					sendTipMessageEx(playerid, COLOR_GRAD1, "Mo¿esz oczyœciæ tylko graczy z 1-2 WL");
-					return 1;
-				}
-
 				if(IsPlayerConnected(giveplayerid))
 				{
 				    if(giveplayerid != INVALID_PLAYER_ID)
 				    {
+						if(PoziomPoszukiwania[giveplayerid] > 2)
+						{
+							sendTipMessageEx(playerid, COLOR_GRAD1, "Mo¿esz oczyœciæ tylko graczy z 1-2 WL");
+							return 1;
+						}
 					    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						format(string, sizeof(string), "* Oczyœci³eœ z zarzutów %s.", giveplayer);

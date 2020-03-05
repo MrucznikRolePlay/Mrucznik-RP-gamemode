@@ -57,7 +57,7 @@ YCMD:przeszukaj(playerid, params[], help)
 					    new text1[20], text2[20], text3[20], text4[20], text5[20];
 					    if(PlayerInfo[giveplayerid][pDrugs] > 0) { text1 = "| Narkotyki."; } else { text1 = "| Pusta kieszeñ."; }
 					    if(PlayerInfo[giveplayerid][pMats] > 0) { text2 = "| Materia³y."; } else { text2 = "| Pusta kieszeñ."; }
-					    if(Fishes[giveplayerid][pWeight1] > 0 || Fishes[giveplayerid][pWeight2] > 0 || Fishes[giveplayerid][pWeight3] > 0 || Fishes[giveplayerid][pWeight4] > 0 || Fishes[giveplayerid][pWeight5] > 0) { text3 = "| Fishes."; } else { text3 = "| Empty Pocket."; }
+					    if(PlayerHasFishes(giveplayerid)) { text3 = "| Ryby."; } else { text3 = "| Pusta kieszeñ."; }
 					    if(PlayerInfo[giveplayerid][pPhoneBook] > 0) { text4 = "| Ksi¹¿ka tel."; } else { text4 = "| Pusta kieszeñ."; }
 					    if(PlayerInfo[giveplayerid][pCDPlayer] > 0) { text5 = "| MP3."; } else { text5 = "| Pusta kieszeñ."; }
 					    format(string, sizeof(string), "|__________ Wynik przeszukania %s __________|", giveplayer);

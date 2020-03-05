@@ -3723,67 +3723,15 @@ IsAtGasStation(playerid)
 			return 1;
 		}
 		else if(PlayerToPoint(15.0,playerid,1362.5422,-1819.4730,13.5639))
-		{
+		{//Plac manewrowy
 		    return 1;
-		}//Plac manewrowy
+		}
 		else if(PlayerToPoint(10.0,playerid,2471.2898,-2105.1948,14.1259) || PlayerToPoint(6.0,playerid,1011.8489,-1356.9026,13.5839))
 		{//Stacja pod p¹czkiem LS
 		    return 1;
 		}
-		else if(PlayerToPoint(10.0,playerid,2489.6565,-2101.3022,13.5620)) //stacja w bazie KT
-		{
-			return 1;
-		}
-	}
-	return 0;
-}
-
-IsAtFishPlace(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    if(PlayerToPoint(1.0,playerid,403.8266,-2088.7598,7.8359) || PlayerToPoint(1.0,playerid,398.7553,-2088.7490,7.8359))
-		{//Fishplace at the bigwheel
-		    return 1;
-		}
-		else if(PlayerToPoint(1.0,playerid,396.2197,-2088.6692,7.8359) || PlayerToPoint(1.0,playerid,391.1094,-2088.7976,7.8359))
-		{//Fishplace at the bigwheel
-		    return 1;
-		}
-		else if(PlayerToPoint(1.0,playerid,383.4157,-2088.7849,7.8359) || PlayerToPoint(1.0,playerid,374.9598,-2088.7979,7.8359))
-		{//Fishplace at the bigwheel
-		    return 1;
-		}
-		else if(PlayerToPoint(1.0,playerid,369.8107,-2088.7927,7.8359) || PlayerToPoint(1.0,playerid,367.3637,-2088.7925,7.8359))
-		{//Fishplace at the bigwheel
-		    return 1;
-		}
-		else if(PlayerToPoint(1.0,playerid,362.2244,-2088.7981,7.8359) || PlayerToPoint(1.0,playerid,354.5382,-2088.7979,7.8359))
-		{//Fishplace at the bigwheel
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsAtCookPlace(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    if(PlayerToPoint(3.0,playerid,369.9786,-4.0798,1001.8589))
-	    {//Cluckin Bell
-	        return 1;
-	    }
-	    else if(PlayerToPoint(3.0,playerid,376.4466,-60.9574,1001.5078) || PlayerToPoint(3.0,playerid,378.1215,-57.4928,1001.5078))
-		{//Burgershot
-		    return 1;
-		}
-		else if(PlayerToPoint(3.0,playerid,374.1185,-113.6361,1001.4922) || PlayerToPoint(3.0,playerid,377.7971,-113.7668,1001.4922))
-		{//Well Stacked Pizza
-		    return 1;
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 6.0, 2127.2664,-1800.8334,-54.9897))
-		{
+		else if(PlayerToPoint(10.0,playerid,2489.6565,-2101.3022,13.5620)) 
+		{//stacja w bazie KT
 			return 1;
 		}
 	}
@@ -4151,140 +4099,6 @@ ClearCrime(playerid)
 	return 1;
 }
 
-ClearFishes(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    Fishes[playerid][pFid1] = 0; Fishes[playerid][pFid2] = 0; Fishes[playerid][pFid3] = 0;
-		Fishes[playerid][pFid4] = 0; Fishes[playerid][pFid5] = 0;
-		Fishes[playerid][pWeight1] = 0; Fishes[playerid][pWeight2] = 0; Fishes[playerid][pWeight3] = 0;
-		Fishes[playerid][pWeight4] = 0; Fishes[playerid][pWeight5] = 0;
-		new string[MAX_PLAYER_NAME];
-		format(string, sizeof(string), "None");
-		strmid(Fishes[playerid][pFish1], string, 0, strlen(string), 255);
-		strmid(Fishes[playerid][pFish2], string, 0, strlen(string), 255);
-		strmid(Fishes[playerid][pFish3], string, 0, strlen(string), 255);
-		strmid(Fishes[playerid][pFish4], string, 0, strlen(string), 255);
-		strmid(Fishes[playerid][pFish5], string, 0, strlen(string), 255);
-	}
-	return 1;
-}
-
-ClearFishID(playerid, fish)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		new string[MAX_PLAYER_NAME];
-		format(string, sizeof(string), "None");
-		switch (fish)
-		{
-		    case 1:
-		    {
-		        strmid(Fishes[playerid][pFish1], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight1] = 0;
-		        Fishes[playerid][pFid1] = 0;
-		    }
-		    case 2:
-		    {
-		        strmid(Fishes[playerid][pFish2], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight2] = 0;
-		        Fishes[playerid][pFid2] = 0;
-		    }
-		    case 3:
-		    {
-		        strmid(Fishes[playerid][pFish3], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight3] = 0;
-		        Fishes[playerid][pFid3] = 0;
-		    }
-		    case 4:
-		    {
-		        strmid(Fishes[playerid][pFish4], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight4] = 0;
-		        Fishes[playerid][pFid4] = 0;
-		    }
-		    case 5:
-		    {
-		        strmid(Fishes[playerid][pFish5], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight5] = 0;
-		        Fishes[playerid][pFid5] = 0;
-		    }
-		}
-	}
-	return 1;
-}
-
-ClearCooking(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    Cooking[playerid][pCookID1] = 0; Cooking[playerid][pCookID2] = 0; Cooking[playerid][pCookID3] = 0;
-		Cooking[playerid][pCookID4] = 0; Cooking[playerid][pCookID5] = 0;
-		Cooking[playerid][pCWeight1] = 0; Cooking[playerid][pCWeight2] = 0; Cooking[playerid][pCWeight3] = 0;
-		Cooking[playerid][pCWeight4] = 0; Cooking[playerid][pCWeight5] = 0;
-		new string[MAX_PLAYER_NAME];
-		format(string, sizeof(string), "Nothing");
-		strmid(Cooking[playerid][pCook1], string, 0, strlen(string), 255);
-		strmid(Cooking[playerid][pCook2], string, 0, strlen(string), 255);
-		strmid(Cooking[playerid][pCook3], string, 0, strlen(string), 255);
-		strmid(Cooking[playerid][pCook4], string, 0, strlen(string), 255);
-		strmid(Cooking[playerid][pCook5], string, 0, strlen(string), 255);
-	}
-	return 1;
-}
-
-ClearCookingID(playerid, cook)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		new string[MAX_PLAYER_NAME];
-		format(string, sizeof(string), "Nothing");
-		switch (cook)
-		{
-		    case 1:
-		    {
-		        strmid(Cooking[playerid][pCook1], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCWeight1] = 0;
-		        Cooking[playerid][pCookID1] = 0;
-		    }
-		    case 2:
-		    {
-		        strmid(Cooking[playerid][pCook2], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCWeight2] = 0;
-		        Cooking[playerid][pCookID2] = 0;
-		    }
-		    case 3:
-		    {
-		        strmid(Cooking[playerid][pCook3], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCWeight3] = 0;
-		        Cooking[playerid][pCookID3] = 0;
-		    }
-		    case 4:
-		    {
-		        strmid(Cooking[playerid][pCook4], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCWeight4] = 0;
-		        Cooking[playerid][pCookID4] = 0;
-		    }
-		    case 5:
-		    {
-		        strmid(Cooking[playerid][pCook5], string, 0, strlen(string), 255);
-		        Cooking[playerid][pCWeight5] = 0;
-		        Cooking[playerid][pCookID5] = 0;
-		    }
-		}
-	}
-	return 1;
-}
-
-ClearGroceries(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    Groceries[playerid][pChickens] = 0; Groceries[playerid][pChicken] = 0;
-	    Groceries[playerid][pHamburgers] = 0; Groceries[playerid][pHamburger] = 0;
-	    Groceries[playerid][pPizzas] = 0; Groceries[playerid][pPizza] = 0;
-	}
-	return 1;
-}
 
 Lotto(number)
 {

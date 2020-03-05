@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ wywalryby ]-----------------------------------------------//
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                  cooking                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,22 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: mrucznik
+// Data utworzenia: 03.03.2020
+//Opis:
 /*
-	
+	System gotowania potraw
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
+#include <YSI\y_hooks>
 
-YCMD:wywalryby(playerid, params[], help)
+//-----------------<[ Callbacki: ]>-----------------
+hook OnPlayerDisconnect(playerid, reason)
 {
-    if(IsPlayerConnected(playerid))
-    {
-        if(Fishes[playerid][pWeight1] > 0 || Fishes[playerid][pWeight2] > 0 || Fishes[playerid][pWeight3] > 0 || Fishes[playerid][pWeight4] > 0 || Fishes[playerid][pWeight5] > 0)
-        {
-            ClearFishes(playerid);
-			Fishes[playerid][pLastFish] = 0;
-			Fishes[playerid][pFishID] = 0;
-			sendTipMessageEx(playerid, COLOR_GREY, "Wywali³eœ ryby !");
-        }
-        else
-        {
-            sendTipMessageEx(playerid, COLOR_GREY, "Nie z³owi³eœ ¿adnej ryby !");
-            return 1;
-        }
-    }
-    return 1;
+	ClearGroceries(playerid);
+	return 1;
 }
+
+//end

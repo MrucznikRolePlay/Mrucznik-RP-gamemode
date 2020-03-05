@@ -55,6 +55,24 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	antyHider[playerid] = 0;
 	
+	//2.6.19
+	if(dialogid == DIALOG_EATING)
+	{
+		if(response)
+		{
+			zjedz_OnDialogResponse(playerid, listitem);
+		}
+		return 1;
+	}
+	if(dialogid == DIALOG_COOKING)
+	{
+		if(response)
+		{
+			ugotuj_OnDialogResponse(playerid, listitem);
+		}
+		return 1;
+	}
+
 	//2.5.8
 	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
