@@ -165,7 +165,7 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 		if(IsPlayerStreamedIn(i, playerid)) //dla optymalizacji
 		{
 			if(IsPlayerSick(playerid, disease)) return 1;
-			if(IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
+			if(PlayerInfo[playerid][pBW] == 0 && IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
 			{
 				if(PlayerImmunity[i] <= 0) 
 				{
