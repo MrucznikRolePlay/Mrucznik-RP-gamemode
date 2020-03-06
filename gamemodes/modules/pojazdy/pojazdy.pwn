@@ -42,17 +42,6 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
     }
 }
 
-hook OnPlayerUpdate(playerid)
-{
-    if(GetPVarInt(playerid, "timer_CruiseControl") && pCruiseCanChange[playerid] == 1)
-    {
-        new keys, ud,lr;
-        GetPlayerKeys(playerid, keys, ud, lr);
-        if(ud == KEY_DOWN) CruiseControl_SetSpeed(playerid, 10, false);
-        else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
-    }
-}
-
 hook OnPlayerExitVehicle(playerid, vehicleid)
 {
     if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);

@@ -5738,6 +5738,13 @@ public OnPlayerUpdate(playerid)
         if(lr == KEY_RIGHT) Oil_OnPlayerPress(playerid, KEY_RIGHT*2);
         else if(lr == KEY_LEFT) Oil_OnPlayerPress(playerid, KEY_LEFT*2);
     }
+	if(GetPVarInt(playerid, "timer_CruiseControl") && pCruiseCanChange[playerid] == 1)
+    {
+        new keys, ud,lr;
+        GetPlayerKeys(playerid, keys, ud, lr);
+        if(ud == KEY_DOWN) CruiseControl_SetSpeed(playerid, 10, false);
+        else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
+    }
 	return 1;
 }
 
