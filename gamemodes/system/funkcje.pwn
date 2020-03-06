@@ -778,7 +778,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		{
 			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Pozostalo %ds", ZestawNaprawczy_Timer[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
-			SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, 1050);
+			SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, 2500);
 			ZestawNaprawczy_Timer[playerid]--;
 			ZestawNaprawczy_Warning[playerid] = 0;
 		}
