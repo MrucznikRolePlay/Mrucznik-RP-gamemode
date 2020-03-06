@@ -567,8 +567,9 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 				}
 				else
 				{
-					new Float:HP, Float:amount;
+					new Float:HP, Float:AP, Float:amount;
 					GetPlayerHealth(hitid, HP);
+					GetPlayerArmour(hitid, AP);
 					if(weaponid == 22 || weaponid == 23 || weaponid == 24 || weaponid == 25 || 
 					weaponid == 26 || weaponid == 27 || weaponid == 28 || weaponid == 29 || weaponid == 30 || weaponid == 31 || 
 					weaponid == 32 || weaponid == 33 || weaponid == 34 || weaponid == 38)
@@ -618,6 +619,13 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 						}
 
 						amount = amount / 2;
+						if(AP > 0)
+						{
+							amount = amount * 2;
+							if(AP <= amount) return 1;
+							return SetPlayerArmour(hitid, AP-amount); //weapon damage per bullet
+						}
+						else if(HP <= amount) return 1;
 						SetPlayerHealth(hitid, HP-amount); //weapon damage per bullet
 						return 0;
 					}
@@ -1038,10 +1046,8 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 	if((GetVehicleModel(vehicleid) == 497 || GetVehicleModel(vehicleid) == 417 || GetVehicleModel(vehicleid) == 563) && ispassenger)
  	{
-  		SetPVarInt(playerid,"chop_id",GetPlayerVehicleID(playerid));
-    	SetPVarInt(playerid,"roped",0);
+  		SetPVarInt(playerid,"roped",0);
     }
-    else SetPVarInt(playerid,"chop_id",0);
 
     new engine, lights, alarm, doors, bonnet, boot, objective;
  	GetVehicleParamsEx(vehicleid, engine, lights ,alarm, doors, bonnet, boot, objective);
@@ -1896,7 +1902,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		PlayerInfo[playerid][pLocal] = 255;
 		PlayerInfo[playerid][pDeaths] ++;
 		
-		if(GetPVarInt(playerid, "skip_bw")  == 0)
+		if(GetPVarInt(playerid, "skip_bw") == 0)
 		{
 			if(PlayerInfo[playerid][pInjury] > 0)
 			{
@@ -2059,17 +2065,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 									SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
 								}
 								return 1;
-							}
-						}
-					}
-					if(PlayerInfo[playerid][pHeadValue] > 0)
-					{
-						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
-						{
-							if(GoChase[killerid] == playerid)
-							{
-								SetPVarInt(playerid, "bw-hitmankiller",  1);
-								SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
 							}
 						}
 					}
@@ -4877,7 +4872,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			new akcja[150];
 			format(akcja,sizeof(akcja),"* %s wyci¹ga spray i tworzy nim napis.",GetNick(playerid));
             ProxDetector(40.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			format(akcja, sizeof(akcja), "%s stworzy³ nowe graffiti [ID: %d], lokalizacja: %s", GetNick(playerid), f, pZone);
+			format(akcja, sizeof(akcja), "%s [%d] stworzy³ nowe graffiti [ID: %d], lokalizacja: %s", GetNick(playerid), playerid, f, pZone);
 			SendAdminMessage(COLOR_PANICRED, akcja);
 			Log(serverLog, INFO, "%s stworzy³ nowe graffiti %s, lokalizacja: %s", GetPlayerLogName(playerid), GetGraffitiLogText(f), pZone);
 		}
@@ -6555,7 +6550,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				TogglePlayerControllable(playerid, 1);
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
-				SetPVarInt(playerid,"chop_id",0);
 				for(new i=0;i<ROPELENGTH;i++)
 				{
 					DestroyDynamicObject(r0pes[playerid][i]);
@@ -6627,24 +6621,6 @@ public OnVehicleDeath(vehicleid, killerid)
             new str[64];
             format(str, 64, "Szok! Samolot KT rozbi³ siê i zginê³o %d osób!", osoby);
 			OOCNews(COLOR_LIGHTGREEN, str);
-		}
-	}
-
-	//PADZIOCH
-	if(IsAHeliModel(GetVehicleModel(vehicleid)))
-	{
-  		foreach(new i : Player)
-    	{
-     		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
-       		{
-          		SetPVarInt(i,"roped",0);
-             	ClearAnimations(i);
-              	TogglePlayerControllable(i,1);
-               	for(new j=0;j<=ROPELENGTH;j++)
-                {
-                	DestroyDynamicObject(r0pes[i][j]);
-                }
-			}
 		}
 	}
 

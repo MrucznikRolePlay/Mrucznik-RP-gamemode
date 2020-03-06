@@ -32,6 +32,10 @@ YCMD:maska(playerid, params[], help)
 {
 	if(IsAPolicja(playerid) || IsAPrzestepca(playerid))
 	{
+		if(GetPlayerAdminDutyStatus(playerid) == 1)
+		{
+			return sendErrorMessage(playerid, "Nie mo¿esz za³o¿yæ maski bêd¹c na AdminDuty!"); 
+		}
 		if(IsAFBI(playerid))
 		{
 			if(PlayerInfo[playerid][pRank] < 2)
