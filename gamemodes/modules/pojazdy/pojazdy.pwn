@@ -44,7 +44,7 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 
 hook OnPlayerUpdate(playerid)
 {
-    if(GetPVarInt(playerid, "timer_CruiseControl"))
+    if(GetPVarInt(playerid, "timer_CruiseControl") && pCruiseCanChange[playerid] == 1)
     {
         new keys, ud,lr;
         GetPlayerKeys(playerid, keys, ud, lr);
@@ -57,12 +57,14 @@ hook OnPlayerExitVehicle(playerid, vehicleid)
 {
     if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);
     if(GetPVarInt(playerid, "timer_CruiseControl")) CruiseControl_TurnOff(playerid);
+    pCruiseCanChange[playerid] = 1;
 }
 
 hook OnPlayerDisconnect(playerid)
 {
     CruiseControl_Static_TurnOff(playerid);
     CruiseControl_TurnOff(playerid);
+    pCruiseCanChange[playerid] = 1;
 }
 
 hook OnPlayerConnect(playerid)
@@ -70,6 +72,7 @@ hook OnPlayerConnect(playerid)
     if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);
     if(GetPVarInt(playerid, "timer_CruiseControl")) CruiseControl_TurnOff(playerid);
     pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
+    pCruiseCanChange[playerid] = 1;
 }
 
 hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
@@ -103,8 +106,17 @@ CruiseControl_HideTXD(playerid)
 
 CruiseControl_SetSpeed(playerid, speed, bool:positive)
 {
-    if(pCruiseSpeed[playerid] < 140 && positive) pCruiseSpeed[playerid] += speed;
-    else if(pCruiseSpeed[playerid] > 30 && !positive) pCruiseSpeed[playerid] -= speed; 
+    if(pCruiseSpeed[playerid] < 140 && positive)
+    {
+        pCruiseSpeed[playerid] += speed;
+        pCruiseCanChange[playerid] = 0;
+    }
+    else if(pCruiseSpeed[playerid] > 30 && !positive)
+    {
+        pCruiseSpeed[playerid] -= speed;
+        pCruiseCanChange[playerid] = 0;
+        SetTimerEx("CruiseControl_ChangedKeyBool", 200, false, "i", playerid);
+    } 
     CruiseControl_UpdateTXD(playerid);
     PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
 }
@@ -130,6 +142,7 @@ CruiseControl_Static_TurnOff(playerid)
     CruiseControl_HideTXD(playerid);
     KillTimer(GetPVarInt(playerid, "timer_StaticCruiseControl"));
     DeletePVar(playerid, "timer_StaticCruiseControl");
+    pCruiseCanChange[playerid] = 1;
 }
 
 
@@ -140,6 +153,7 @@ CruiseControl_TurnOff(playerid)
     pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
     pCruiseTXD[playerid] = 0;
     DeletePVar(playerid, "timer_CruiseControl");
+    pCruiseCanChange[playerid] = 1;
 }
 
 CruiseControl_TurnOn(playerid)
