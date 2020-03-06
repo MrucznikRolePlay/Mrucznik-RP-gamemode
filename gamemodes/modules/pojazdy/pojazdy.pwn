@@ -106,19 +106,23 @@ CruiseControl_HideTXD(playerid)
 
 CruiseControl_SetSpeed(playerid, speed, bool:positive)
 {
-    if(pCruiseSpeed[playerid] < 140 && positive)
+    if(pCruiseCanChange[playerid] == 1)
     {
-        pCruiseSpeed[playerid] += speed;
-        pCruiseCanChange[playerid] = 0;
+        if(pCruiseSpeed[playerid] < 140 && positive)
+        {
+            pCruiseSpeed[playerid] += speed;
+            pCruiseCanChange[playerid] = 0;
+            SetTimerEx("CruiseControl_ChangedKeyBool", 400, false, "i", playerid);
+        }
+        else if(pCruiseSpeed[playerid] > 30 && !positive)
+        {
+            pCruiseSpeed[playerid] -= speed;
+            pCruiseCanChange[playerid] = 0;
+            SetTimerEx("CruiseControl_ChangedKeyBool", 400, false, "i", playerid);
+        } 
+        CruiseControl_UpdateTXD(playerid);
+        PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
     }
-    else if(pCruiseSpeed[playerid] > 30 && !positive)
-    {
-        pCruiseSpeed[playerid] -= speed;
-        pCruiseCanChange[playerid] = 0;
-        SetTimerEx("CruiseControl_ChangedKeyBool", 200, false, "i", playerid);
-    } 
-    CruiseControl_UpdateTXD(playerid);
-    PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
 }
 
 CruiseControl_UpdateTXD(playerid)
