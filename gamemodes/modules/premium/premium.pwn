@@ -149,7 +149,7 @@ DajKP(playerid, time, bool:msg=true)
 
 DajMC(playerid, mc)
 {
-	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s nadano %dMC", GetPlayerLogName(playerid), mc);
+	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s nadano %dMC, poprzedni stan: %dMC", GetPlayerLogName(playerid), mc, PlayerInfo[playerid][pMC]);
 	if(mc <= 0)
 	{
 		Log(premiumLog, ERROR,"ERROR: funkcja DajMC miala ujemna wartosc dla %s Wartosc: %d", GetPlayerLogName(playerid), mc);
@@ -163,7 +163,7 @@ DajMC(playerid, mc)
 
 ZabierzMC(playerid, mc)
 {
-	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s zabrano %dMC", GetPlayerLogName(playerid), mc);
+	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s zabrano %dMC, poprzedni stan: %dMC", GetPlayerLogName(playerid), mc, PlayerInfo[playerid][pMC]);
 	if(mc <= 0)
 	{
 		Log(premiumLog, ERROR, "ERROR: funkcja ZabierzMC miala ujemna wartosc dla %s", GetPlayerLogName(playerid), mc);
