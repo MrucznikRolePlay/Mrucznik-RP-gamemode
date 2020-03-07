@@ -3203,32 +3203,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
 						}
 					}
-					case 16:
-					{
-						if (kaska[playerid] >= 30000 )
-						{
-							if(PlayerInfo[playerid][pFixKit] <= 5)
-							{
-								PlayerInfo[playerid][pFixKit]++;
-								ZabierzKase(playerid, 30000);
-								format(string, sizeof(string), "~r~-$%d", 30000);
-								GameTextForPlayer(playerid, string, 5000, 1);
-								PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-								format(string, sizeof(string), "Kupi³eœ zestaw do naprawy aut!");
-								SendClientMessage(playerid, COLOR_GRAD4, string);
-								return 1;
-							}
-							else
-							{
-								SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz kupiæ maksymalnie 5 zestawów!");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniêdzy !");
-						}
-					}
-					case 17: //kurczak
+					case 16: //kurczak
 					{
 						if(kaska[playerid] < 15) 
 						{
@@ -3245,7 +3220,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~r~-$15", 5000, 1);
 						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego kurczaka.");
 					}
-					case 18: //pizza
+					case 17: //pizza
 					{
 						if(kaska[playerid] < 30) 
 						{
@@ -3262,7 +3237,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~r~-$30", 5000, 1);
 						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿on¹ pizzê.");
 					}
-					case 19: //hamburger
+					case 18: //hamburger
 					{
 						if(kaska[playerid] < 25) 
 						{
@@ -3279,7 +3254,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~r~-$25", 5000, 1);
 						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego hamburgera.");
 					}
-					case 20: //mro¿ony nietoperze z Wuhan
+					case 19: //mro¿ony nietoperze z Wuhan
 					{
 						if(kaska[playerid] < 1500) 
 						{
