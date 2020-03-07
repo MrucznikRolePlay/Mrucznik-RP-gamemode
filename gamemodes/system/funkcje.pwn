@@ -6809,6 +6809,7 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 	else if(model == 416)//karetka
 	{
 		SetPlayerVirtualWorld(playerid, 32);
+		SetPlayerInterior(playerid, 1);
 	    SetPlayerPos(playerid, 1079.5173, -1309.6299, 22.0575);
         Wchodzenie(playerid);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Skalpel ~r~w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
