@@ -1866,7 +1866,7 @@ public OnPlayerDeath(playerid, killerid, reason)
     }
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
-  		for(new i=0;i<=ROPELENGTH;i++)
+  		for(new i=0;i<ROPELENGTH;i++)
     	{
      		DestroyDynamicObject(r0pes[playerid][i]);
        	}
