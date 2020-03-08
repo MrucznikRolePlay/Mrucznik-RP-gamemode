@@ -6336,11 +6336,9 @@ KupowanieDomu(playerid, dom, platnosc)
 		}
 		printf(str2);
 		PlayerInfo[playerid][pDom] = dom;
-	    new GeT[MAX_PLAYER_NAME];
 	    new h, m;
-		GetPlayerName(playerid, GeT, sizeof(GeT));
 		GetPlayerTime(playerid, h, m);
-		Dom[dom][hWlasciciel] = GeT;
+		Dom[dom][hWlasciciel] = GetNickEx(playerid);
 		Dom[dom][hKupiony] = 1;
 		Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
 		DestroyDynamicPickup(Dom[dom][hPickup]);

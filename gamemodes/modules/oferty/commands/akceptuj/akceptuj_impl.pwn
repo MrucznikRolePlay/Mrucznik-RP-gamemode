@@ -1375,7 +1375,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                     format(string, sizeof(string), "Kupi³eœ dom od %s za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom", giveplayer, DomCena[playerid]);
                     SendClientMessage(playerid, COLOR_NEWS, string);
                     SendClientMessage(playerid, COLOR_PANICRED, "UWAGA! Pamiêtaj aby zmieniæ kod do sejfu !!!!!!");
-                    Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = sendername;
+                    Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = GetNickEx(playerid);
                     PlayerInfo[playerid][pDom] = PlayerInfo[DomOffer[playerid]][pDom];
                     PlayerInfo[DomOffer[playerid]][pDom] = 0;
                     ZabierzKase(playerid, DomCena[playerid]);
