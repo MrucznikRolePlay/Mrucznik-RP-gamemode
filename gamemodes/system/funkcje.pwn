@@ -3513,7 +3513,15 @@ IsAtPlaceGetHP(playerid)
 
 IsAtHealingPlace(playerid)
 {
-	return GetPlayerVirtualWorld(playerid) == 90 || GetPlayerVirtualWorld(playerid) == 32;
+	if(GetPlayerVirtualWorld(playerid) == 90)
+	{
+		return 1;
+	}
+	else if(GetPlayerVirtualWorld(playerid) == 32 || GetPlayerInterior(playerid) == 1)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 GraczBankomat(playerid)
