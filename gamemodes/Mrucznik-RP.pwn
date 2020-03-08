@@ -1316,7 +1316,7 @@ public OnPlayerDisconnect(playerid, reason)
 	//PAèDZIOCH - lina SWAT
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
-  		for(new i=0;i<=ROPELENGTH;i++)
+  		for(new i=0;i<ROPELENGTH;i++)
   		{
     		DestroyDynamicObject(r0pes[playerid][i]);
       	}
@@ -6648,7 +6648,7 @@ public OnVehicleDeath(vehicleid, killerid)
           		SetPVarInt(i,"roped",0);
              	ClearAnimations(i);
               	TogglePlayerControllable(i,1);
-               	for(new j=0;j<=ROPELENGTH;j++)
+               	for(new j=0;j<ROPELENGTH;j++)
                 {
                 	DestroyDynamicObject(r0pes[i][j]);
                 }
