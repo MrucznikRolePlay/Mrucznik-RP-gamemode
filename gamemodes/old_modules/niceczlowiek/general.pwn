@@ -168,25 +168,6 @@ Player_CanUseCar(playerid, vehicleid)
 	{
 		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
 	}
-	if(IsACopCar(vehicleid))
-	{
-	    if(IsAPolicja(playerid))
-	    {
-	        if(OnDuty[playerid] == 0)
-	        {
-	            if(GetVehicleModel(vehicleid) != 445)
-	            {
-	            	sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ na s³u¿bie aby jeŸdziæ autem policyjnym !");
-                    return 0;
-	            }
-	        }
-			else
-			{
-				sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
-				return 1;
-			}
-	    }
-	}
 
 	if(VehicleUID[vehicleid][vUID] != 0)
     {
@@ -327,6 +308,24 @@ Player_CanUseCar(playerid, vehicleid)
 	       	}
         }
     }
+	if(IsACopCar(vehicleid))
+	{
+	    if(IsAPolicja(playerid))
+	    {
+	        if(OnDuty[playerid] == 0)
+	        {
+	            if(GetVehicleModel(vehicleid) != 445)
+	            {
+	            	sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ na s³u¿bie aby jeŸdziæ autem policyjnym !");
+                    return 0;
+	            }
+	        }
+			else
+			{
+				sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
+			}
+	    }
+	}
 
 	if(IsABoat(vehicleid))
 	{

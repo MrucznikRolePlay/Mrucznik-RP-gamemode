@@ -89,9 +89,9 @@ kuracja_akceptuj(playerid)
 
 command_kuracja_Impl(playerid, giveplayerid, disease[], money)
 {
-	if (!(IsAMedyk(playerid) && PlayerInfo[playerid][pRank] >= 2))
+	if (!(IsAMedyk(playerid) && PlayerInfo[playerid][pRank] >= 1))
 	{
-		sendErrorMessage(playerid, "Nie masz 2 rangi lub nie jesteœ medykiem!");
+		sendErrorMessage(playerid, "Nie masz 1 rangi lub nie jesteœ medykiem!");
         return 1;
 	}
 

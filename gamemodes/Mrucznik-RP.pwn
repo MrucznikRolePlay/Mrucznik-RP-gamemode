@@ -1316,7 +1316,7 @@ public OnPlayerDisconnect(playerid, reason)
 	//PAèDZIOCH - lina SWAT
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
-  		for(new i=0;i<=ROPELENGTH;i++)
+  		for(new i=0;i<ROPELENGTH;i++)
   		{
     		DestroyDynamicObject(r0pes[playerid][i]);
       	}
@@ -1866,7 +1866,7 @@ public OnPlayerDeath(playerid, killerid, reason)
     }
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
-  		for(new i=0;i<=ROPELENGTH;i++)
+  		for(new i=0;i<ROPELENGTH;i++)
     	{
      		DestroyDynamicObject(r0pes[playerid][i]);
        	}
@@ -5042,6 +5042,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             new Float:vSpeed = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
             new pZone[MAX_ZONE_NAME];
             GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);//Dzielnica
+			if(floatround(vSpeed) > pCruiseSpeed[playerid]) vSpeed = pCruiseSpeed[playerid];
             format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d%%~n~GPS: %s~n~%s" ,floatround(vSpeed), floatround(Gas[vehicleid]), floatround(carhp/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
             PlayerTextDrawSetString(playerid, Licznik[playerid], string);
             PlayerTextDrawShow(playerid, Licznik[playerid]);
@@ -5736,6 +5737,13 @@ public OnPlayerUpdate(playerid)
         else if(ud == KEY_UP) Oil_OnPlayerPress(playerid, KEY_UP);
         if(lr == KEY_RIGHT) Oil_OnPlayerPress(playerid, KEY_RIGHT*2);
         else if(lr == KEY_LEFT) Oil_OnPlayerPress(playerid, KEY_LEFT*2);
+    }
+	if(GetPVarInt(playerid, "timer_CruiseControl") && pCruiseCanChange[playerid] == 1)
+    {
+        new keys, ud,lr;
+        GetPlayerKeys(playerid, keys, ud, lr);
+        if(ud == KEY_DOWN) CruiseControl_SetSpeed(playerid, 10, false);
+        else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
     }
 	return 1;
 }
@@ -6640,7 +6648,7 @@ public OnVehicleDeath(vehicleid, killerid)
           		SetPVarInt(i,"roped",0);
              	ClearAnimations(i);
               	TogglePlayerControllable(i,1);
-               	for(new j=0;j<=ROPELENGTH;j++)
+               	for(new j=0;j<ROPELENGTH;j++)
                 {
                 	DestroyDynamicObject(r0pes[i][j]);
                 }
