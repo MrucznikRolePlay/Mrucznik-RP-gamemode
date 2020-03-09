@@ -2734,8 +2734,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowShopDialog(playerid);
-	            new string[256];
+				new string[256];
+				switch(listitem)
+	            {
+					case 0..19:
+					{
+						ShowShopDialog(playerid);
+					}
+				}
 	            switch(listitem)
 	            {
 	                case 0:
@@ -3273,6 +3279,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 20: //maseczka ochronna
 					{
+						if(GetPVarInt(playerid, "maseczka") == 1)
+						{
+							format(string, sizeof(string), "Ju¿ masz maseczkê!");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							return 1;
+						}
 						ZabierzKase(playerid, 15000);
 						PlayerImmunity[playerid] = 10;
 						SetPVarInt(playerid, "maseczka", 1);

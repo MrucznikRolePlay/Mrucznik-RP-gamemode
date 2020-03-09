@@ -571,8 +571,8 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 					new Float:HP, Float:AP, Float:amount;
 					GetPlayerHealth(hitid, HP);
 					GetPlayerArmour(hitid, AP);
-					if(weaponid == 22 || weaponid == 23 || weaponid == 24 || weaponid == 25 || 
-					weaponid == 26 || weaponid == 27 || weaponid == 28 || weaponid == 29 || weaponid == 30 || weaponid == 31 || 
+					if(weaponid == 22 || weaponid == 23 || weaponid == 24 || weaponid == 25 || weaponid == 26 || 
+					weaponid == 27 || weaponid == 28 || weaponid == 29 || weaponid == 30 || weaponid == 31 || 
 					weaponid == 32 || weaponid == 33 || weaponid == 34 || weaponid == 38)
 					{
 						/* \/ \/ \/ DO NOT TOUCH - sampowe DMG \/ \/ \/ */
@@ -619,15 +619,17 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 								amount = 46.2;
 							}
 						}
+						/* /\ /\ /\ DO NOT TOUCH - sampowe DMG /\ /\ /\ */
 
 						if(AP > 0)
 						{
-							SetPlayerArmour(hitid, AP-amount); //zabierz sampowe dmg kamizelce
+							if(AP < amount) SetPlayerArmour(hitid, 0);
+							else SetPlayerArmour(hitid, AP-amount); //zabierz sampowe dmg kamizelce
 							return 0;
 						}
 
 						amount = amount / 2; //CUSTOMOWE DMG
-						
+
 						if(HP <= amount) return 1; //wyœlij nabój (zabij)
 						SetPlayerHealth(hitid, HP-amount); //lub zabierz mu customowe dmg
 						return 0;
