@@ -73,6 +73,8 @@ public CruiseControl_Static_TurnOn(playerid, type)
 	}
 }
 
+public CruiseControl_ChangedKeyBool(playerid) pCruiseCanChange[playerid] = 1;
+
 
 public CruiseControl_Static(playerid, type)
 {

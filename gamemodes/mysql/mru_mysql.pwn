@@ -485,7 +485,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Uniform`='%d', \
 	`CruiseController`='%d', \
 	`FixKit`='%d', \
-	`connected`='0' \
+	`connected`='%d' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
 	PoziomPoszukiwania[playerid],
@@ -502,6 +502,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pUniform],
 	PlayerInfo[playerid][pCruiseController],
 	PlayerInfo[playerid][pFixKit],
+	forcequit ? 0 : 2,
     PlayerInfo[playerid][pUID]);
 
     if(!mysql_query(query)) fault=false;
@@ -744,7 +745,7 @@ public MruMySQL_LoadAcocount(playerid)
 		PlayerInfo[playerid][pCzystka],
         PlayerInfo[playerid][pCarSlots]);
 
-		format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `connected`='1' WHERE `Nick`='%s'", GetNickEx(playerid));
+		format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `connected`='1' WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
 		mysql_query(lStr);
 	}
 

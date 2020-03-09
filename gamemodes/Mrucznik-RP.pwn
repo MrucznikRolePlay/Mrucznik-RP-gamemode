@@ -1046,10 +1046,12 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
 
-	if((GetVehicleModel(vehicleid) == 497 || GetVehicleModel(vehicleid) == 417 || GetVehicleModel(vehicleid) == 563) && ispassenger)
+	if(IsAHeliModel(GetVehicleModel(vehicleid)) && ispassenger)
  	{
+		SetPVarInt(playerid,"chop_id",GetPlayerVehicleID(playerid));
   		SetPVarInt(playerid,"roped",0);
     }
+	else SetPVarInt(playerid,"chop_id",0);
 
     new engine, lights, alarm, doors, bonnet, boot, objective;
  	GetVehicleParamsEx(vehicleid, engine, lights ,alarm, doors, bonnet, boot, objective);
@@ -1324,7 +1326,7 @@ public OnPlayerDisconnect(playerid, reason)
 	//PAèDZIOCH - lina SWAT
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
-  		for(new i=0;i<=ROPELENGTH;i++)
+  		for(new i=0;i<ROPELENGTH;i++)
   		{
     		DestroyDynamicObject(r0pes[playerid][i]);
       	}
@@ -1874,7 +1876,7 @@ public OnPlayerDeath(playerid, killerid, reason)
     }
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
-  		for(new i=0;i<=ROPELENGTH;i++)
+  		for(new i=0;i<ROPELENGTH;i++)
     	{
      		DestroyDynamicObject(r0pes[playerid][i]);
        	}
@@ -5039,6 +5041,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             new Float:vSpeed = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
             new pZone[MAX_ZONE_NAME];
             GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);//Dzielnica
+			if(floatround(vSpeed) > pCruiseSpeed[playerid]) vSpeed = pCruiseSpeed[playerid];
             format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d%%~n~GPS: %s~n~%s" ,floatround(vSpeed), floatround(Gas[vehicleid]), floatround(carhp/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
             PlayerTextDrawSetString(playerid, Licznik[playerid], string);
             PlayerTextDrawShow(playerid, Licznik[playerid]);
@@ -5733,6 +5736,13 @@ public OnPlayerUpdate(playerid)
         else if(ud == KEY_UP) Oil_OnPlayerPress(playerid, KEY_UP);
         if(lr == KEY_RIGHT) Oil_OnPlayerPress(playerid, KEY_RIGHT*2);
         else if(lr == KEY_LEFT) Oil_OnPlayerPress(playerid, KEY_LEFT*2);
+    }
+	if(GetPVarInt(playerid, "timer_CruiseControl") && pCruiseCanChange[playerid] == 1)
+    {
+        new keys, ud,lr;
+        GetPlayerKeys(playerid, keys, ud, lr);
+        if(ud == KEY_DOWN) CruiseControl_SetSpeed(playerid, 10, false);
+        else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
     }
 	return 1;
 }
@@ -6552,6 +6562,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				TogglePlayerControllable(playerid, 1);
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
+				SetPVarInt(playerid,"chop_id",0);
 				for(new i=0;i<ROPELENGTH;i++)
 				{
 					DestroyDynamicObject(r0pes[playerid][i]);
@@ -6623,6 +6634,24 @@ public OnVehicleDeath(vehicleid, killerid)
             new str[64];
             format(str, 64, "Szok! Samolot KT rozbi≥ siÍ i zginÍ≥o %d osÛb!", osoby);
 			OOCNews(COLOR_LIGHTGREEN, str);
+		}
+	}
+
+	//PAèDZIOCH
+	if(IsAHeliModel(GetVehicleModel(vehicleid)))
+	{
+  		foreach(new i : Player)
+    	{
+     		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
+       		{
+          		SetPVarInt(i,"roped",0);
+             	ClearAnimations(i);
+              	TogglePlayerControllable(i,1);
+               	for(new j=0;j<ROPELENGTH;j++)
+                {
+                	DestroyDynamicObject(r0pes[i][j]);
+                }
+			}
 		}
 	}
 

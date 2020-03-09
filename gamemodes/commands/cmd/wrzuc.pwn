@@ -40,6 +40,12 @@ YCMD:wrzuc(playerid, params[], help)
     	if( sscanf(params, "k<fix>d", person, seat4))
     	return sendTipMessage(playerid, "U¿yj /wepchnij [ID Gracza] [miejsce 2-4]");
 
+		if(!IsPlayerConnected(person))
+		{
+			sendErrorMessage(playerid, "Nie ma takiego gracza.");
+			return 1;
+		}
+
     	if (GetPlayerState(playerid)!=PLAYER_STATE_DRIVER)
     	return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie.");
 
