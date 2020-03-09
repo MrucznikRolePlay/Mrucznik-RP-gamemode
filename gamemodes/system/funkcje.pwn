@@ -6041,13 +6041,11 @@ Dom_ChangeOwner(playerid, dom, forid)
 
 	Log(adminLog, INFO, "Admin %s zmieni³ w³aœciciela domu %d z %s na %s", GetPlayerLogName(playerid), dom, Dom[dom][hWlasciciel], GetPlayerLogName(forid));
     PlayerInfo[forid][pDom] = dom;
-    new GeT[MAX_PLAYER_NAME];
-	GetPlayerName(forid, GeT, sizeof(GeT));
-	Dom[dom][hWlasciciel] = GeT;
+	Dom[dom][hWlasciciel] = GetNickEx(forid);
 	Dom[dom][hKupiony] = 1;
 	Dom[dom][hUID_W] = PlayerInfo[forid][pUID];
 
-	format(string, sizeof(string), "Zmiana wlasciciela - OK. || Dom %d || NrDom %d || Wlasciciel: %s", dom, Dom[dom][hDomNr], GeT);
+	format(string, sizeof(string), "Zmiana wlasciciela - OK. || Dom %d || NrDom %d || Wlasciciel: %s", dom, Dom[dom][hDomNr], GetNickEx(forid));
 	SendClientMessage(playerid, COLOR_NEWS, string);
 
 	//
@@ -6498,12 +6496,11 @@ ZlomowanieDomu(playerid, dom)
 
 SprawdzSpojnoscWlascicielaDomu(playerid)
 {
-	new string[64], sendername[MAX_PLAYER_NAME];
+	new string[64];
 	format(string, sizeof(string), "Domy/Dom%d.ini", PlayerInfo[playerid][pDom]);
 	if(dini_Exists(string))
 	{
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(strcmp(Dom[PlayerInfo[playerid][pDom]][hWlasciciel], sendername, true) != 0)
+		if(strcmp(Dom[PlayerInfo[playerid][pDom]][hWlasciciel], GetNickEx(playerid), true) != 0)
 		{
 			return 0;
 		}
