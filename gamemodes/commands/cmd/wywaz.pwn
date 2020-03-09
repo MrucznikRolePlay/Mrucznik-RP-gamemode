@@ -33,12 +33,12 @@ YCMD:wywaz(playerid, params[], help)
 	new string[128];
     if(IsPlayerConnected(playerid))
     {
-        if(!IsACop(playerid))
+        if(!IsAPolicja(playerid))
 		{
 		    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteú policjantem!");
 		    return 1;
 		}
-        if(OnDuty[playerid] != 1 && IsACop(playerid))
+        if(OnDuty[playerid] != 1 && IsAPolicja(playerid))
 		{
 		    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteú na s≥uøbie!");
 		    return 1;
@@ -60,7 +60,7 @@ YCMD:wywaz(playerid, params[], help)
 				       	sendTipMessageEx(playerid, COLOR_GREY, "Ten dom jest za daleko !");
 				        return 1;
 				    }
-				    if (!IsACop(giveplayerid) && OnDuty[giveplayerid] != 1)
+				    if (!IsAPolicja(giveplayerid) && OnDuty[giveplayerid] != 1)
 				    {
 				       	sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest policjantem na s≥uøbie!");
 				        return 1;
@@ -78,11 +78,11 @@ YCMD:wywaz(playerid, params[], help)
                     if(Dom[dom][hZamek] == 0)
 					{
                         Dom[dom][hZamek] = 1;
-                        format(string, sizeof(string),"* Policjanci %s oraz %s biorπ taran policyjny i uderzajπ nim w drzwi wywaøajπc je.",GetNick(playerid, true), GetNick(giveplayerid, true));
+                        format(string, sizeof(string),"* Policjanci %s oraz %s biorπ taran policyjny i uderzajπ nim w drzwi wywaøajπc je.",GetNick(playerid), GetNick(giveplayerid));
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						format(string, sizeof(string), "* Drzwi zosta≥y wywaøone (( %s ))", GetNick(playerid, true));
+						format(string, sizeof(string), "* Drzwi zosta≥y wywaøone (( %s ))", GetNick(playerid));
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						format(string, sizeof(string), "[ALARM DOMOWY] Twoje drzwi zosta≥y wywaøone! Sprawdü to! (Podejrzany: %s)", GetNick(playerid, true));
+						format(string, sizeof(string), "[ALARM DOMOWY] Twoje drzwi zosta≥y wywaøone! Sprawdü to! (Podejrzany: %s)", GetNick(playerid));
 						sendTipMessageEx(GetPlayerIDFromName(Dom[dom][hWlasciciel]), COLOR_RED, string); 
                         return 1;
 					}

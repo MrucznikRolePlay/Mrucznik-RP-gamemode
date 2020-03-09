@@ -34,11 +34,13 @@ YCMD:pokazcb(playerid, params[], help)
 	{
 		if(adminpodgladcb[playerid] == 0)
 		{
+			MSGBOX_Show(playerid, "Wlaczono podglad CB-radia", MSGBOX_ICON_TYPE_OK);
 			adminpodgladcb[playerid] = 1;
 			return 1;
 		}
 		else
 		{
+			MSGBOX_Show(playerid, "Wylaczono podglad CB-radia", MSGBOX_ICON_TYPE_ERROR);
 			adminpodgladcb[playerid] = 0;
 			return 1;
 		}

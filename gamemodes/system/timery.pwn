@@ -8,7 +8,7 @@ public CheckCode2003(killerid, playerid)
     if(IsPlayerConnected(playerid))
 	{
     	MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNick(killerid, true));
+		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNickEx(killerid));
     	SendCommandLogMessage(string);
     	KickEx(killerid);
 		Log(warningLog, INFO, string);
@@ -16,7 +16,7 @@ public CheckCode2003(killerid, playerid)
 	}
 	else
 	{
-	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNick(killerid, true));
+	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNickEx(killerid));
     	SendCommandLogMessage(string);
 		Log(warningLog, INFO, string);
 	}
@@ -108,9 +108,7 @@ public Naprawa(playerid)
 	{
 		new string[256];
 		new giveplayer[MAX_PLAYER_NAME];
-		new sendername[MAX_PLAYER_NAME];
 		GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
-		GetPlayerName(playerid, sendername, sizeof(sendername));
 		RepairCar[playerid] = GetPlayerVehicleID(playerid);
 		SetVehicleHealth(RepairCar[playerid], 1000.0);
 		RepairVehicle(RepairCar[playerid]);
@@ -165,6 +163,7 @@ public textVinylT(){
 forward FreezePlayer(playerid);
 public FreezePlayer(playerid){
 	TogglePlayerControllable(playerid, 1);
+	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	return 1;
 }
 
@@ -186,22 +185,9 @@ public SetTimeAndWeather(playerid)
 forward odczekaj15sec(playerid);
 public odczekaj15sec(playerid)
 {
-	timerTime[playerid]++; 
-	if(timerTime[playerid] == 3)
-	{
-		if(GetPVarInt(playerid, "WhatToDo") == 1)
-		{
-			timerTime[playerid] = 0;
-			SetPVarInt(playerid, "CanDoIt", 0); 
-			KillTimer(odczekajTimer[playerid]);
-		}
-		else if(GetPVarInt(playerid, "WhatToDo") == 2)
-		{
-			timerTime[playerid] = 0;
-			SetPVarInt(playerid, "CanDoIt", 0); 
-			KillTimer(odczekajTimer[playerid]);
-		}
-	}
+	SetPVarInt(playerid, "CanDoIt", 0); 
+	SetPVarInt(playerid, "WhatToDo", 0);
+	KillTimer(odczekajTimer[playerid]);
 	return 1; 
 }
 forward glosuj_admin_ankieta();
@@ -303,15 +289,17 @@ public AktywujPozar()
 {
     SetTimer("UsunPozar", 3600000, false);
     new losowy = random(15);
+	new fraction_name[128];
+	format(fraction_name, sizeof(fraction_name), "--------[%s]--------", FractionNames[4]);
 	if(losowy == 1)
 	{
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: DOM JEDNORODZINNY - IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH KUCHENKI GAZOWEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-   		SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: DOM JEDNORODZINNY - IDLEWOOD");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH KUCHENKI GAZOWEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+   		SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: DOM JEDNORODZINNY - IDLEWOOD",1);
     	AddFire(2016.998,-1696.110,15.036, 400);
 		AddFire(2016.998,-1697.411,15.036, 400);
@@ -336,13 +324,13 @@ public AktywujPozar()
     }
 	else if(losowy == 2)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 W OKOLICACH DMV");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK SKLEPU");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 W OKOLICACH DMV");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK SKLEPU");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP 24/7 W OKOLICACH DMV",1);
     	AddFire(1362.514,-1759.767,12.359,400);
 		AddFire(1361.113,-1759.767,12.359,400);
@@ -372,13 +360,13 @@ public AktywujPozar()
     }
 	else if(losowy == 3)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: PIZZERIA IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA KUCHENKI GAZOWEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK RESTAURACJI");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: PIZZERIA IDLEWOOD");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: AWARIA KUCHENKI GAZOWEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK RESTAURACJI");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: PIZZERIA IDLEWOOD",1);
 		AddFire(2105.741,-1796.412,12.551, 400);
 		AddFire(2105.741,-1797.312,12.551, 400);
@@ -405,13 +393,13 @@ public AktywujPozar()
     }
 	else if(losowy == 4)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP BINCO - GANTON");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP BINCO - GANTON");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP BINCO - GANTON",1);
 		AddFire(2248.296,-1667.368,14.286, 400);
 		AddFire(2247.255,-1667.017,14.286, 400);
@@ -428,13 +416,13 @@ public AktywujPozar()
     }
 	else if(losowy == 5)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: STACJA PALIW - TEMPLE");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH DYSTRYBUTORA");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK STACJI");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: STACJA PALIW - TEMPLE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH DYSTRYBUTORA");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK STACJI");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: STACJA PALIW - TEMPLE",1);
     	AddFire(995.978,-938.445,40.229, 400);
 		AddFire(997.778,-938.445,40.229, 400);
@@ -451,13 +439,13 @@ public AktywujPozar()
     }
 	else if(losowy == 6)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: KONTENERY - LOSTNISKO LOS SANTOS");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: OCHRONA LOTNISKA");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: KONTENERY - LOSTNISKO LOS SANTOS");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: OCHRONA LOTNISKA");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: KONTENERY - LOSTNISKO LOS SANTOS",1);
     	AddFire(2067.007,-2206.814,13.666, 400);
 		AddFire(2067.007,-2208.004,13.666, 400);
@@ -487,13 +475,13 @@ public AktywujPozar()
     }
 	else if(losowy == 7)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: P¥CZKARNIA NA MARKET");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: P¥CZKARNIA NA MARKET");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: P¥CZKARNIA NA MARKET",1);
 		AddFire(1037.776,-1341.086,12.726, 400);
 		AddFire(1038.607,-1341.086,12.726, 400);
@@ -518,13 +506,13 @@ public AktywujPozar()
     }
 	else if(losowy == 8)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BAR W DILLIMORE");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: BAR W DILLIMORE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BAR W DILLIMORE",1);
     	AddFire(681.627,-473.598,15.457, 400);
 		AddFire(681.627,-473.598,14.177, 400);
@@ -559,13 +547,13 @@ public AktywujPozar()
     }
 	else if(losowy == 9)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: URZ¥D MIASTA PALOMINO CREEK");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK URZÊDU MIASTA");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: URZ¥D MIASTA PALOMINO CREEK");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK URZÊDU MIASTA");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: URZ¥D MIASTA PALOMINO CREEK",1);
     	AddFire(2269.603,-74.425,25.554, 400);
 		AddFire(2269.603,-74.425,24.344, 400);
@@ -590,13 +578,13 @@ public AktywujPozar()
     }
 	else if(losowy == 10)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 - IDLEWOOD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: SKLEP 24/7 - IDLEWOOD");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SKLEP 24/7 - IDLEWOOD",1);
 		AddFire(1833.399,-1840.566,12.578, 400);
 		AddFire(1833.399,-1838.866,12.578, 400);
@@ -621,13 +609,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 11)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: MOTEL JEFFERSON");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: MOTEL JEFFERSON");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: MOTEL JEFFERSON",1);
     	AddFire(2233.332,-1160.049,23.629, 400);
 		AddFire(2233.332,-1160.049,25.089, 400);
@@ -663,13 +651,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 12)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: SALON AUT");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: SALON AUT");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: SALON AUT",1);
     	AddFire(2133.200,-1151.196,23.681, 400);
     	AddFire(2133.200,-1151.196,22.271, 400);
@@ -699,13 +687,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 13)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: GUNSHOP OBOK BAZY LSFD");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: GUNSHOP OBOK BAZY LSFD");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: PODPALENIE");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRACOWNIK");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: GUNSHOP OBOK BAZY LSFD",1);
     	AddFire(1781.413,-1161.296,22.015, 400);
     	AddFire(1781.413,-1161.296,23.765, 400);
@@ -735,13 +723,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 14)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK BIUROWCA FBI");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK BIUROWCA FBI");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BUDYNEK OBOK BIUROWCA FBI",1);
     	AddFire(651.468,-1458.514,14.407, 400);
     	AddFire(651.468,-1459.935,14.407, 400);
@@ -771,13 +759,13 @@ public AktywujPozar()
 	}
 	else if(losowy == 15)
 	{
-		SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
-    	SendFamilyMessage(17, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(17, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK VINYL CLUB");
-    	SendFamilyMessage(17, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
-    	SendFamilyMessage(17, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
-    	SendFamilyMessage(17, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
-    	SendFamilyMessage(17, 0xFFFFFFAA, "--------[LOS SANTOS FIRE DEPARTMENT]--------");
+		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: BUDYNEK OBOK VINYL CLUB");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH INSTALACJI ELEKTRYCZNEJ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: PRZECHODZIEÑ");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
+    	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: BUDYNEK OBOK VINYL CLUB",1);
     	AddFire(830.011,-1385.443,15.928, 400);
     	AddFire(830.862,-1385.703,15.928, 400);
@@ -809,7 +797,6 @@ public AktywujPozar()
     	AddFire(830.952,-1385.703,17.368, 400);
     	AddFire(833.223,-1385.703,17.368, 400);
     	AddFire(834.723,-1385.703,17.368, 400);
-
 	}
     return 1;
 }
@@ -849,9 +836,30 @@ public PlayerAFK(playerid, afktime, breaktime)
 		else
 			format(caption, sizeof(caption), "[AFK] %d min. %d sek (%d)", afktime/60, afktime%60, playerid);
 
-		if(afktime > 600 && PlayerInfo[playerid][pAdmin] >= 1 ||afktime > 600 && PlayerInfo[playerid][pNewAP] >= 1)
+
+		if(afktime == 840 && GetPlayerAdminDutyStatus(playerid) == 1)
 		{
-			if(GetPVarInt(playerid, "dutyadmin") == 0)
+			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		{
+			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 1140 && IsPlayerPremiumOld(playerid))
+		{
+			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		else if(afktime == 540)
+		{
+			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
+			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
+		}
+		if(afktime > 600 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		{
+			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
 				if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
 				{
@@ -863,9 +871,9 @@ public PlayerAFK(playerid, afktime, breaktime)
 			}
 			else
 			{
-				if(afktime > 600 && PlayerInfo[playerid][pAdmin] != 5000)
+				if(afktime > 900 && PlayerInfo[playerid][pAdmin] != 5000)
 				{
-					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas wejœcia na @Duty! Otrzymujesz Kicka (10min)");
+					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas @Duty! Otrzymujesz Kicka za AFK (15min)");
 					SetTimerEx("KickEx", 500, false, "i", playerid);
 				}
 				SetPlayerChatBubble(playerid, caption, 0x33AA33AA, 20.0, 1500);
@@ -895,9 +903,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 	{
 		if(breaktime > afktime || breaktime > 180)
 		{
-			new name[MAX_PLAYER_NAME];
-			GetPlayerName(playerid, name, sizeof(name));
-			printf("%s byl afk przez %d", name, afktime);
+			printf("%s byl afk przez %d", GetNickEx(playerid), afktime);
 			afk_timer[playerid] = -1;
 		}
 		else
@@ -914,9 +920,50 @@ public syncanim(playerid)
 {
 	if(GetPVarInt(playerid,"roped") == 0) return 0;
  	SetTimerEx("syncanim",DUR,0,"i",playerid);
-  	ApplyAnimation(playerid,"ped","abseil",4.0,0,0,0,1,0);
+  	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
    	return 1;
 }
+
+forward CheckChangeWeapon();
+public CheckChangeWeapon()
+{
+	foreach (new i : Player)
+	{
+		new weaponID = GetPlayerWeapon(i);
+		new playerState = GetPlayerState(i);
+		if(PlayerHasWeapon[i]!=weaponID)
+		{
+			if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
+			{
+				if(playerState == 1)
+				{
+					if(GetPVarInt(i, "dutyadmin") == 0)
+					{
+						if(PlayerInfo[i][pInjury] > 0 || PlayerInfo[i][pBW] > 0)
+						{
+							return PlayerChangeWeaponOnInjury(i);
+						}
+						else
+						{
+							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, PlayerHasWeapon[i]);
+							if(PokazDialogBronie(i) == 0)
+							{
+								PlayerHasWeapon[i] = 0;
+								SetPlayerArmedWeapon(i, 0);
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				ResetPlayerWeapons(i);
+			}
+		}
+	}
+	return 1;
+}
+
 
 forward MainTimer();
 public MainTimer()
@@ -945,6 +992,7 @@ public MainTimer()
     }
     if(TICKS_1Min == 59)
     {
+		CJSkinCheck();
         SyncUp();
     }
     if(TICKS_5Min == (60*5)-1)
@@ -1053,8 +1101,11 @@ public Spectator()
 		GetPlayerPos(PDGPS, x, y, z);
 		foreach(new i : Player)
 		{
-			if(IsACop(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
-				SetPlayerCheckpoint(i, x, y, z, 4.0);
+			if(IsAPolicja(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) )
+			{
+				if(zawodnik[i] == 0)
+					SetPlayerCheckpoint(i, x, y, z, 4.0);
+			}
 		}
 	}
 
@@ -1100,6 +1151,24 @@ public Spectator()
             }
         }
         //END vinyl
+		//Ibiza audio check
+        if(GetPVarInt(i, "IBIZA-stream") == 0)
+        {
+            if(IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && (GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
+            {
+                SetPVarInt(i, "IBIZA-stream", 1);
+                PlayAudioStreamForPlayer(i, IBIZA_Stream,IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2], IbizaAudioPos[3], 1);
+            }
+        }
+        else
+        {
+            if(!IsPlayerInRangeOfPoint(i, IbizaAudioPos[3], IbizaAudioPos[0],IbizaAudioPos[1],IbizaAudioPos[2]) && !(GetPlayerVirtualWorld(i) == 21 || GetPlayerVirtualWorld(i) == 22 || GetPlayerVirtualWorld(i) == 23 || GetPlayerVirtualWorld(i) == 24 || GetPlayerVirtualWorld(i) == 26 || GetPlayerVirtualWorld(i) == 27))
+            {
+                SetPVarInt(i, "IBIZA-stream", 0);
+                StopAudioStreamForPlayer(i);
+            }
+        }
+        //END ibiza
 		if(GetPlayerPing(i) >= 2000 && PlayerInfo[i][pAdmin] == 0)
 		{
 			if(gPlayerLogged[i] == 1)
@@ -1112,34 +1181,24 @@ public Spectator()
 			}
 		}
         //BW
+		if(PlayerInfo[i][pInjury] > 0)
+        {
+            RannyTimer(i);
+        }
         if(PlayerInfo[i][pBW] > 0)
         {
-            if(GetPVarInt(i, "bw-sync") != 1 && GetPlayerState(i) == PLAYER_STATE_ONFOOT)
-            {
-                SetPVarInt(i, "bw-sync", 1);
-                PlayerInfo[i][pMuted] = 1;
-            }
-            ApplyAnimation(i, "CRACK", "crckidle1", 4.0, 1, 0, 1, 1, 1);
-            PlayerInfo[i][pBW]-=2;
-            format(string, 128, "~n~~n~~n~~n~~n~~n~~y~%d", PlayerInfo[i][pBW]);
-            GameTextForPlayer(i, string, 2500, 3);
-            if(PlayerInfo[i][pBW] <= 0)
-            {
-                PlayerInfo[i][pBW]=0;
-                TogglePlayerControllable(i, 1);
-                ClearAnimations(i);
-                GameTextForPlayer(i, "Obudziles sie po pobiciu!", 5000, 5);
-                SetPVarInt(i, "bw-sync", 0);
-                PlayerInfo[i][pMuted] = 0;
-            }
+			BWTimer(i);
         }
 		if((specid = Spectate[i]) != INVALID_PLAYER_ID)
 		{
 			if(IsPlayerConnected(specid))
 			{
+				new specIP[32];
 				GetPlayerName(specid, specNAME, sizeof(specNAME));
 				GetPlayerHealth(specid, specHP);
-				format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f",specNAME,specid,specHP);
+				GetPlayerIp(specid, specIP, sizeof(specIP));
+				if(PlayerInfo[i][pAdmin] > 0 || IsAScripter(i)) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
+				else format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f",specNAME,specid,specHP);
 				GameTextForPlayer(i, string, 2500, 3);
 				SpectateTime[i]++;
 				if(GetPlayerInterior(i) != GetPlayerInterior(specid))
@@ -1714,281 +1773,7 @@ public Spectator()
 			ResetPlayerWeapons(i);
 		}
 	//}
-//---------------------------[/me wyci¹ga broñ ...]---------------------------
-        if(starabron[i]!=weaponID)
-		{
-			if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
-			{
-				if(playerState == 1 || playerState == 2 || playerState == 3)
-				{
-					if(GetPVarInt(i, "dutyadmin") == 0)
-					{
-						GetPlayerName(i, specNAME, sizeof(specNAME));
-						switch(weaponID)
-						{
-							case 0:
-							{
-								format(string, sizeof(string), "* %s chowa Broñ.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 1:
-							{
-								format(string, sizeof(string), "* %s chowa Broñ.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 2:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Kij Golfowy.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 3:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Pa³kê Policyjn¹.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 4:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Nó¿.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 5:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Bejzbol.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 6:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga £opatê.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 7:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Kij Bilardowy.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 8:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Katane.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 9:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Pi³ê Mechaniczn¹.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 14:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Kwiaty.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 15:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Dêbow¹ Laskê.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 16:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Granat.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 17:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Gaz £zawi¹cy.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 18:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Koktajl Mo³otova.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							//bron 19 20 i 21 nie istnieje
-
-							case 22:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga z kieszeni Pistolety 9mm.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 23:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Pistolet z T³umikiem.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 24:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Pistolet Deagle.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 25:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga zza koszuli Shotgun'a.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 26:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga z rzeŸni Obrzyny.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 27:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga zza koszuli Spas-12.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 28:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga z kabury UZI.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 29:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga zza koszuli MP5.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 30:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga zza koszuli AK47.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 31:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga zza koszuli M4.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 32:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga z kabury TEC-9.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 33:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga zza koszuli Strzelbê.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 34:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga zza koszuli Snajperkê.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 35:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga zza ucha RPG.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 36:
-							{
-								format(string, sizeof(string), "* %s wyczarowuje Rakietnice.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 37:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga z ognia Miotacz Ognia.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 38:
-							{
-								format(string, sizeof(string), "* %s wysrywa miniguna.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 39:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga z torby C4.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 40:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga detonator.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 41:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Gaz Pieprzowy / Spray.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 42:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Gaœnicê.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 43:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga Aparat Fotograficzny.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-
-							case 44:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga noktowizor", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								ResetPlayerWeapons(i);
-							}
-
-							case 45:
-							{
-								format(string, sizeof(string), "* %s wyci¹ga termowizor.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								ResetPlayerWeapons(i);
-							}
-
-							case 46:
-							{
-								format(string, sizeof(string), "* %s zak³ada Spadochron na plecy.", specNAME);
-								ProxDetector(10.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							}
-						}
-						if(weaponID >= 22 && weaponID <= 38)
-						{
-							if(GetPVarInt(i, "tazer") == 1)
-							{
-								format(string, sizeof(string), "* %s wy³¹cza i chowa paralizator do kabury.", specNAME);
-								ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								RemovePlayerAttachedObject(i, 9);
-								SetPVarInt(i, "tazer", 0);
-							}
-						}
-						starabron[i]=weaponID;
-					}
-				}
-			}
-			else
-			{
-				ResetPlayerWeapons(i);
-			}
-		 }
+	//tu bylo /me wyciaga bron
 	}
     return 1;
 }
@@ -2057,15 +1842,7 @@ public CustomPickups()
 	foreach(new i : Player)
 	{
         mystate = GetPlayerState(i);
-		if (IsPlayerInRangeOfPoint(i, 2.0, 1173.2563,-1323.3102,15.3943))
-		{// Hospital near Ammu
-			GameTextForPlayer(i, "~w~Wpisz /uleczmnie aby sie uleczyc", 5000, 5);
-		}
-		else if (IsPlayerInRangeOfPoint(i, 2.0, 2029.5945,-1404.6426,17.2512))
-		{// Hospital near speedway
-			GameTextForPlayer(i, "~w~Wpisz /uleczmnie aby sie uleczyc", 5000, 5);
-		}
-		else if (IsPlayerInRangeOfPoint(i, 2.0, 323.0342,1118.5804,1083.8828))
+		if (IsPlayerInRangeOfPoint(i, 2.0, 323.0342,1118.5804,1083.8828))
 		{//Buyable Drugs for Drug Dealers
 			GameTextForPlayer(i, "~w~Wpisz /get dragi aby wziasc ~r~Dragi~y~~n~Dostosowane do twojego skillu", 5000, 3);
 		}
@@ -2374,7 +2151,7 @@ public RPGTimer()
         if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][pAdmin] < 1)//rpg czit
         {
 			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
-			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i, true));
+			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i));
 			SendCommandLogMessage(string);
 			Kick(i);
 		}
@@ -2434,11 +2211,11 @@ public JednaSekundaTimer()
 					new slotKontaktu = PobierzSlotKontaktuPoNumerze(i, PlayerInfo[caller][pPnumber]);
 					if(slotKontaktu >= 0)
 					{
-						format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %s (%d)", Kontakty[i][slotKontaktu][eNazwa], PlayerInfo[caller][pPnumber]);
+						format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /od) dzwoni¹cy: %s (%d)", Kontakty[i][slotKontaktu][eNazwa], PlayerInfo[caller][pPnumber]);
 					}
 					else
 					{
-						format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /p) dzwoni¹cy: %d", PlayerInfo[caller][pPnumber]);
+						format(string, sizeof(string), "Twój telefon dzwoni, (aby odebraæ wpisz: /od) dzwoni¹cy: %d", PlayerInfo[caller][pPnumber]);
 					}
 					SendClientMessage(i, COLOR_YELLOW, string);
 					format(string, sizeof(string), "* Telefon %s zaczyna dzwoniæ.", GetNick(i));
@@ -2453,32 +2230,35 @@ public JednaSekundaTimer()
 			CellTime[i]++;
 		}
 		
-		if(State == PLAYER_STATE_DRIVER && !ToggleSpeedo[i])
+		if(State == PLAYER_STATE_DRIVER || State == PLAYER_STATE_PASSENGER)
 		{
-			VehicleModel = GetVehicleModel(vehicleid);
-            if(VehicleModel != 0)
-            {
-                GetVehicleHealth(vehicleid, health);
+			if(!ToggleSpeedo[i])
+			{
+				VehicleModel = GetVehicleModel(vehicleid);
+				if(VehicleModel != 0)
+				{
+					GetVehicleHealth(vehicleid, health);
 
-    			if(VehicleModel==509||VehicleModel==481||VehicleModel==510)
-    			{
-    				SetVehicleHealth(vehicleid, 1000.0);
-    				Gas[vehicleid] = 100;
-    			}
-    			if(VehicleModel==520||VehicleModel==476||VehicleModel==593||VehicleModel==553||VehicleModel==513||VehicleModel==512||VehicleModel==577||VehicleModel==592||VehicleModel==511||VehicleModel==539||VehicleModel==464||VehicleModel==519)
-    			{
-    				Gas[vehicleid] = 100;
-    			}
+					if(VehicleModel==509||VehicleModel==481||VehicleModel==510)
+					{
+						SetVehicleHealth(vehicleid, 1000.0);
+						Gas[vehicleid] = 100;
+					}
+					if(VehicleModel==520||VehicleModel==476||VehicleModel==593||VehicleModel==553||VehicleModel==513||VehicleModel==512||VehicleModel==577||VehicleModel==592||VehicleModel==511||VehicleModel==539||VehicleModel==464||VehicleModel==519)
+					{
+						Gas[vehicleid] = 100;
+					}
 
-                GetVehicleVelocity(vehicleid, vel[0], vel[1], vel[2]);
-                Dis = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
+					GetVehicleVelocity(vehicleid, vel[0], vel[1], vel[2]);
+					Dis = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
 
-                GetPlayer2DZone(i, pZone, MAX_ZONE_NAME);
-    			format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d\%~n~GPS: %s~n~%s" ,floatround(Dis), floatround(Gas[vehicleid]),floatround(health/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
-                PlayerTextDrawSetString(i, Licznik[i], string);
-            }
+					GetPlayer2DZone(i, pZone, MAX_ZONE_NAME);
+					format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d\%~n~GPS: %s~n~%s" ,floatround(Dis), floatround(Gas[vehicleid]),floatround(health/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
+					PlayerTextDrawSetString(i, Licznik[i], string);
+				}
 
-			OldCoordsX[i] = x; OldCoordsY[i] = y;
+				OldCoordsX[i] = x; OldCoordsY[i] = y;
+			}
 		}
         //PAYDAY
         level = PlayerInfo[i][pLevel];
@@ -2508,17 +2288,25 @@ public JednaSekundaTimer()
 					SetPlayerSpawn(i); 
 				}
 			}
+			if(PlayerInfo[i][pJailed] == 3)
+			{
+				if(!IsPlayerInRangeOfPoint(i, AJ_MAXRANGE, AJ_POSX, AJ_POSY, AJ_POSZ))
+				{
+					sendErrorMessage(i, "Nie znajdujesz siê w AJ! Pozycja przywrócona do poprawnej!");
+					SetPlayerSpawn(i); 
+				}
+			}
 			if(PlayerInfo[i][pJailTime] <= 0 && WantLawyer[i] == 0)
 			{
 				PlayerInfo[i][pJailTime] = 0;
 				if(PlayerInfo[i][pJailed] == 1)
 				{
-					SetPlayerPosEx(i,-1681.1091,917.8300,-52.4141);
+					SetPlayerPos(i,-1681.1091,917.8300,-52.4141);
 				}
 				else if(PlayerInfo[i][pJailed] == 2)
 				{
 					//SetPlayerWorldBounds(i,20000.0000,-20000.0000,20000.0000,-20000.0000); //Reset world to player
-                    //SetPlayerPosEx(i, NG_JAIL_X,NG_JAIL_Y,NG_JAIL_Z);
+                    //SetPlayerPos(i, NG_JAIL_X,NG_JAIL_Y,NG_JAIL_Z);
 					UnJailDeMorgan(i);
 				}
 				else if(PlayerInfo[i][pJailed] == 3)
@@ -2528,17 +2316,18 @@ public JednaSekundaTimer()
 					PlayerInfo[i][pJailTime] = 0;
 					SetPlayerVirtualWorld(i, 0);
 					PlayerInfo[i][pMuted] = 0;
-					SetPlayerPosEx(i,1481.1666259766,-1790.2204589844,156.7875213623);
+					SetPlayerPos(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
+					SetPVarInt(i, "skip_bw", 1);
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
 					if(GetPVarInt(i, "DostalDM2") == 1)
 					{
-						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczu %s broñ [Odsiedzia³ karê za DM2]", GetNick(i, true));
+						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [Odsiedzia³ karê za DM2]", GetNick(i));
 						SendAdminMessage(COLOR_PANICRED, string);
-						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i, true));
+						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i));
 						sendTipMessage(i, string);
 						ResetPlayerWeapons(i);
 						UsunBron(i);
@@ -2589,21 +2378,25 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if(zakuty[i] == 1)
+		if(Kajdanki_JestemSkuty[i] == 1)
 		{
-			cop = PDkuje[i];
+			cop = Kajdanki_PDkuje[i];
 			if(IsPlayerConnected(cop))
 			{
-				if(IsACop(cop) || IsABOR(cop))
+				if(IsAPolicja(cop) || IsABOR(cop))
 				{
 					if(GetPlayerState(cop) == 1)
 					{
-						SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
-						SetPlayerInterior(i, GetPlayerInterior(cop));
-						GetPlayerPos(cop, x, y, z);
-						SetPlayerPosEx(i, x-0.5, y-0.5, z);
-						TogglePlayerControllable(i, 0);
-						SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
+						if(!ProxDetectorS(3.5, cop, i))
+						{
+							SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
+							SetPlayerInterior(i, GetPlayerInterior(cop));
+							GetPlayerPos(cop, x, y, z);
+							SetPlayerPos(i, x-0.5, y-0.5, z);
+							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
+							TogglePlayerControllable(i, 0);
+							if(PlayerInfo[i][pBW] == 0) SetTimerEx("FreezePlayer", 2000, false, "i", i);
+						}
 					}
 					else
 					{
@@ -2611,12 +2404,11 @@ public JednaSekundaTimer()
                         new veh_zakuty = GetPlayerVehicleID(i);
                         if(veh != veh_zakuty) 
                         {
-                            new seat = GetFreeVehicleSeat(veh);
+                            new seat = GetFreeVehicleSeatForArrestant(veh);
                             if(seat != -1)
                             {
                                 PutPlayerInVehicleEx(i, veh, seat);
                                 TogglePlayerControllable(i, 0);
-                                SetPVarInt(i, "kajdany_siedzenie", seat);
                             }
                         }
 					}
@@ -2879,7 +2671,7 @@ public JednaSekundaTimer()
 			TutTime[i] += 1;
 			if(TutTime[i] == 3)
 			{
-				SetPlayerPosEx(i, 849.62371826172, -989.92199707031, -5.0);
+				SetPlayerPos(i, 849.62371826172, -989.92199707031, -5.0);
 				SetPlayerCameraPos(i, 849.62371826172, -989.92199707031, 53.211112976074);// kamera
 				SetPlayerCameraLookAt(i, 907.40313720703, -913.14117431641, 77.788856506348);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: Pocz¹tek ____|");
@@ -2890,7 +2682,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 14)
 			{
-				SetPlayerPosEx(i, 326.09194946289, -1521.3157958984, 20.0);
+				SetPlayerPos(i, 326.09194946289, -1521.3157958984, 20.0);
 				SetPlayerCameraPos(i, 398.16021728516, -1511.9237060547, 78.641815185547);// kamera
 				SetPlayerCameraLookAt(i, 326.09194946289, -1521.3157958984, 42.154850006104);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - DM i Nick ____|");
@@ -2906,7 +2698,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 30)
 			{
-				SetPlayerPosEx(i, 1016.9872436523, -1372.0234375, -5.0);
+				SetPlayerPos(i, 1016.9872436523, -1372.0234375, -5.0);
 				SetPlayerCameraPos(i, 1053.3154296875, -1326.3295898438, 28.300031661987);// kamera
 				SetPlayerCameraLookAt(i, 1016.9872436523, -1372.0234375, 15.836219787598);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - Bug Using i cheatowanie ____|");
@@ -2920,7 +2712,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 52)
 			{
-				SetPlayerPosEx(i, 1352.2797851563, -1757.189453125, -5.0);
+				SetPlayerPos(i, 1352.2797851563, -1757.189453125, -5.0);
 				SetPlayerCameraPos(i, 1352.4576416016, -1725.1925048828, 23.291763305664);// kamera
 				SetPlayerCameraLookAt(i, 1352.2797851563, -1757.189453125, 13.5078125);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady Serwera - OOC i IC ____|");
@@ -2936,7 +2728,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 74)
 			{
-				SetPlayerPosEx(i, 370.02825927734, -2083.5886230469, -10.0);
+				SetPlayerPos(i, 370.02825927734, -2083.5886230469, -10.0);
 				SetPlayerCameraPos(i, 340.61755371094, -2091.701171875, 22.800081253052);// kamera
 				SetPlayerCameraLookAt(i, 370.02825927734, -2083.5886230469, 8.1386299133301);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - IC ____|");
@@ -2950,7 +2742,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 96)
 			{
-				SetPlayerPosEx(i, 1172.8602294922, -1331.978515625, -5.0);
+				SetPlayerPos(i, 1172.8602294922, -1331.978515625, -5.0);
 				SetPlayerCameraPos(i, 1228.7977294922, -1345.1479492188, 21.532119750977);// kamera
 				SetPlayerCameraLookAt(i, 1172.8602294922, -1331.978515625, 14.317019462585);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zasady serwera - MG i PG ____|");
@@ -2965,7 +2757,7 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 112)
 			{
-				SetPlayerPosEx(i, 412.80743408203, -1312.4066162109, -5.0);
+				SetPlayerPos(i, 412.80743408203, -1312.4066162109, -5.0);
 				SetPlayerCameraPos(i, 402.2776184082, -1351.4703369141, 43.704566955566);// kamera
 				SetPlayerCameraLookAt(i, 412.80743408203, -1312.4066162109, 39.677307128906);// patrz
 				SendClientMessage(i, COLOR_PURPLE, "|____ Tutorial: zakoñczenie ____|");
@@ -2983,7 +2775,7 @@ public JednaSekundaTimer()
 			{
 				TogglePlayerSpectating(i, false);
 				
-				SetPlayerPosEx(i, 208.3876,-34.8742,1001.9297);
+				SetPlayerPos(i, 208.3876,-34.8742,1001.9297);
 				SetPlayerFacingAngle(i, 138.8926);
 
 				SetPlayerCameraPos(i, 206.288314, -38.114028, 1002.229675);
@@ -3102,7 +2894,7 @@ public JednaSekundaTimer()
 					{
 						if(IsPlayerConnected(Boxer1) && IsPlayerConnected(Boxer2))
 						{
-							SetPlayerPosEx(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPosEx(Boxer2, 765.8433,3.2924,1000.7186);
+							SetPlayerPos(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPos(Boxer2, 765.8433,3.2924,1000.7186);
 							SetPlayerInterior(Boxer1, 5); SetPlayerInterior(Boxer2, 5);
 							GetPlayerName(Boxer1, loser, sizeof(loser));
 							GetPlayerName(Boxer2, winner, sizeof(winner));
@@ -3178,7 +2970,7 @@ public JednaSekundaTimer()
 					{
 						if(IsPlayerConnected(Boxer1) && IsPlayerConnected(Boxer2))
 						{
-							SetPlayerPosEx(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPosEx(Boxer2, 765.8433,3.2924,1000.7186);
+							SetPlayerPos(Boxer1, 765.8433,3.2924,1000.7186); SetPlayerPos(Boxer2, 765.8433,3.2924,1000.7186);
 							SetPlayerInterior(Boxer1, 5); SetPlayerInterior(Boxer2, 5);
 							GetPlayerName(Boxer1, winner, sizeof(winner));
 							GetPlayerName(Boxer2, loser, sizeof(loser));
@@ -3381,7 +3173,6 @@ public JednaSekundaTimer()
 				format(string, sizeof(string), "* %s po wielu próbach poluzowa³ sznur i jest wolny.", winner);
 				ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				GameTextForPlayer(i, "~r~Jestes wolny!", 2500, 3);
-				TogglePlayerControllable(i, 1);
 				PlayerCuffed[i] = 0;
 				PlayerCuffedTime[i] = 0;
 				pobity[i] = 0;
@@ -3389,7 +3180,6 @@ public JednaSekundaTimer()
 				PlayerTied[i] = 0;
                 PlayerInfo[i][pBW]=0;
                 TogglePlayerControllable(i, 1);
-                GameTextForPlayer(i, "Obudziles sie po pobiciu!", 5000, 5);
                 SetPVarInt(i, "bw-sync", 0);
                 PlayerInfo[i][pMuted] = 0;
 			}
@@ -3472,6 +3262,26 @@ public Fillup()
 	return 1;
 }
 
+public CJSkinCheck()
+{
+	foreach(new j : Player)
+	{
+		if(gPlayerLogged[j] > 0 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
+		{
+			if(PlayerInfo[j][pSkin] > 0)
+			{
+			 	SetPlayerSpawnSkin(j);
+			}
+			else 
+			{
+				//PlayerInfo[j][pSkin] = 299; na potem
+				SetPlayerSkinEx(j, 299);
+				sendTipMessage(j, "Posiada³eœ skin CJ-a ID [0] - przywróciliœmy Ci domyœlny skin. Uwa¿asz, ¿e to b³¹d? Zg³oœ utratê w dziale b³êdów.");
+				sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w rodzinie, frakcji. Pomocna bêdzie ka¿da informacja.");
+			}
+		}
+	}
+}
 //11.06.2014
 public CarCheck()
 {
@@ -3602,13 +3412,19 @@ public VehicleUpdate()
                     CarData[VehicleUID[i][vUID]][c_HP] = 250.0;
                 GetVehicleParamsEx(i, engine, lights, alarm, doors, bonnect, boot, objective);
                 SetVehicleParamsEx(i, 0, lights, alarm, doors, bonnect, boot, objective);
-                Oil_GenerateFromVehicle(i);
+                new hour,minute,second;
+				gettime(hour,minute,second);
+				FixHour(hour);
+				if(shifthour >= 4)
+				{
+					Oil_GenerateFromVehicle(i);
+				}
             }
         }
     }
 }
 
-forward closeGate(i, j, playerid);
+
 public closeGate(i, j, playerid)
 {
     bramki_sasd_state[i] = false;
@@ -3619,5 +3435,34 @@ public closeGate(i, j, playerid)
 }
 
 
+public SlideRope(playerid)
+{
+    if(GetPVarInt(playerid,"sliderope") == 1)
+    {
+		new Float:X;
+	    new Float:Y;
+	    new Float:Z;
+	    GetPlayerPos(playerid, X, Y, Z);
+  	 	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
+	    SetPlayerPos(playerid, X, Y, Z - 2.00);
+		SetPlayerVelocity(playerid,0,0,0);
+	    SetTimerEx("SlideRope", 1000, 0, "i", playerid);
+ 	}
+	return 1;
+}
+
+public SpecEnd(playerid)
+{
+	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 299, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	TogglePlayerSpectating(playerid, false);
+	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+	return 1;
+}
+
+public DamagedHP(playerid)
+{
+	RemovePlayerAttachedObject(playerid, 2);
+	return 1;
+}
 
 //EOF

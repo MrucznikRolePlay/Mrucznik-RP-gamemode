@@ -32,7 +32,6 @@ YCMD:unjail(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -52,12 +51,11 @@ YCMD:unjail(playerid, params[], help)
 		            if(PlayerInfo[playa][pJailed] == 3)
 		            {
 				        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
 						format(string, sizeof(string), "* Uwolni³eœ %s.", giveplayer);
 						_MruAdmin(playerid, string);
-						format(string, sizeof(string), "* Zosta³eœ uwolniony przez %s.", sendername);
+						format(string, sizeof(string), "* Zosta³eœ uwolniony przez %s.", GetNickEx(playerid));
 						_MruAdmin(playa, string);
-						format(string, sizeof(string), "ADMCMD: Administrator %s uwolni³ %s z AJ", sendername, giveplayer);
+						format(string, sizeof(string), "ADMCMD: Administrator %s uwolni³ %s z AJ", GetNickEx(playerid), giveplayer);
 						SendMessageToAdmin(string, COLOR_RED);
                         Log(punishmentLog, INFO, "Admin %s uwolni³ %s z AJ (typ: %d, czas: %ds)", 
 							GetPlayerLogName(playerid), 
@@ -75,7 +73,7 @@ YCMD:unjail(playerid, params[], help)
 						PlayerInfo[playa][pMuted] = 0;
 						SetPlayerInterior(playa, 0);
 						SetPVarInt(playa, "DostalDM2", 0);//
-						SetPlayerPosEx(playa,-1677.0605,917.2449,-52.4141);
+						SetPlayerPos(playa,-1677.0605,917.2449,-52.4141);
 						SetPlayerVirtualWorld(playa, 1);
                         Wchodzenie(playa);
 						PlayerPlaySound(playa, 0, 0.0, 0.0, 0.0);

@@ -35,7 +35,7 @@ YCMD:mdc(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(!IsACop(playerid))
+        if(!IsAPolicja(playerid))
         {
             sendErrorMessage(playerid, "Nie jesteœ policjantem!");
             return 1;

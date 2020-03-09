@@ -173,6 +173,19 @@ YCMD:megafon(playerid, params[], help)
                 return sendTipMessage(playerid, "Jako wyk³adowca mo¿esz u¿ywaæ mikrofonu tylko na sali wyk³adowczej!");
             }
         }
+		else if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] > 1)
+        {
+			new player_vw;
+			player_vw = GetPlayerVirtualWorld(playerid);
+			if(player_vw == 21 || player_vw == 22 || player_vw == 23 || player_vw == 24 || player_vw == 26 || player_vw == 27)
+			{
+				if(IsPlayerInRangeOfPoint(playerid, 1000, 430.4849,-1837.2827,-65.5105))
+				{
+					format(string, sizeof(string), "[Ibiza> %s: %s]", sendername, params);
+					ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+				}
+			}
+		}
         else if(GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
         {
             if(IsPlayerInRangeOfPoint(playerid,5,1315.6835,-1348.1102,73.9968)

@@ -44,7 +44,7 @@ public MRP_SetPlayerMoney(playerid, val)  kaska[playerid] = val;
 public MRP_SetPlayerCarSlots(playerid, val)  PlayerInfo[playerid][pCarSlots] = val;
 public MRP_SetPlayerPhone(playerid, val)  {
     PlayerInfo[playerid][pPnumber] = val;
-    MruMySQL_SetAccInt("PhoneNr", GetNick(playerid), val);
+    MruMySQL_SetAccInt("PhoneNr", GetNickEx(playerid), val);
 }
 public MRP_SetPlayerNickChanges(playerid, val)  PlayerInfo[playerid][pZmienilNick] = val;
 public MRP_SetPlayerAge(playerid, val)  PlayerInfo[playerid][pAge] = val;

@@ -58,17 +58,15 @@ YCMD:glosowanie(playerid, params[], help)
 			{
 				iloscInne[playerid]++; 
 			}
-			format(string, sizeof(string), "Admin %s rozpocz¹³ ankietê na temat:{C0C0C0}%s", GetNick(playerid), result);
+			format(string, sizeof(string), "Admin %s rozpocz¹³ ankietê na temat:{C0C0C0}%s", GetNickEx(playerid), result);
 			SendClientMessageToAll(COLOR_RED, string);
 			SendClientMessageToAll(COLOR_WHITE,  "Aby zag³osowaæ wpisz /glosuja");
-			format(string, sizeof(string), "G³osowanie potrwa %d minut", timeValue); 
+			format(string, sizeof(string), "G³osowanie potrwa %d sekund", timeValue); 
 			SendClientMessageToAll(COLOR_WHITE, string);
 			glosowanie_admina_status = 1;
 			glosowanie_admina_tak = 0;
 			glosowanie_admina_nie = 0;
-			format(string, sizeof(string), "Zmienna po przeliczeniu to %d", (timeValue*60000));
-			sendTipMessage(playerid, string); 
-			SetTimer("glosuj_admin_ankieta", (timeValue*60000), false);
+			SetTimer("glosuj_admin_ankieta", (timeValue*1000), false);
 			foreach(new i : Player)
 			{
 				SetPVarInt(i, "glosowal_w_ankiecie", 0);

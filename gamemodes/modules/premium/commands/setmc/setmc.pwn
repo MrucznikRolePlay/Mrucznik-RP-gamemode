@@ -36,7 +36,6 @@ command_setmc()
     new command = Command_GetID("setmc");
 
     //aliases
-    Command_AddAlt(command, "dajmc");
     
 
     //permissions

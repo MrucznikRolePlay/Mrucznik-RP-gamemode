@@ -33,7 +33,7 @@ YCMD:paj(playerid, params[], help)
 	new string[128];
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -68,7 +68,7 @@ YCMD:paj(playerid, params[], help)
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nick, czas, GetNick(playerid), (result));
+				format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nick, czas, GetNickEx(playerid), (result));
 				SendPunishMessage(string, playerid);
 			}
 		}

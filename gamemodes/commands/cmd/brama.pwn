@@ -476,7 +476,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(IsACop(playerid) || IsAHA(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(IsAPolicja(playerid) || IsAHA(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 			if(PlayerToPoint(25.0, playerid, 1595.4099, -1638.2567, 14.0207) || PlayerToPoint(10.0, playerid, 1588.5547, -1638.2567, 14.0207))
 			{
@@ -596,7 +596,7 @@ YCMD:brama(playerid, params[], help)
 					lspdmove13 = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1673.90, 876.96, -49.90))
+			if(IsPlayerInRangeOfPoint(playerid,2.0,-1673.90, 876.96, -49.90))
 			{
 				if(lspdmove1 == 0)
 				{
@@ -611,7 +611,7 @@ YCMD:brama(playerid, params[], help)
 				lspdmove1 = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1673.90, 902.57, -49.90))
+			if(IsPlayerInRangeOfPoint(playerid,2,-1673.90, 902.57, -49.90))
 			{
 				if(lspdmove2 == 0)
 				{
@@ -628,7 +628,7 @@ YCMD:brama(playerid, params[], help)
 					lspdmove2 = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1670.67, 904.90, -49.90))
+			if(IsPlayerInRangeOfPoint(playerid,2,-1670.67, 904.90, -49.90))
 			{
 				if(lspdmove3 == 0)
 				{
@@ -645,7 +645,7 @@ YCMD:brama(playerid, params[], help)
 					lspdmove3 = 0;
 				}
 			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1670.57, 876.07, -49.90))
+			if(IsPlayerInRangeOfPoint(playerid,2,-1670.57, 876.07, -49.90))
 			{
 				if(lspdmove4 == 0)
 				{
@@ -901,7 +901,7 @@ YCMD:brama(playerid, params[], help)
 			}
 
 		}
-		if(IsACop(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(IsAPolicja(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 			if(PlayerToPoint(7.5, playerid, 266.57534790039, 112.58443450928, 1006.2540283203))
 			{
@@ -1067,7 +1067,7 @@ YCMD:brama(playerid, params[], help)
 		}
 
 		//old komi
-		if(PlayerInfo[playerid][pAdmin] >= 1000 || IsACop(playerid))
+		if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAPolicja(playerid))
 		{
 			if(PlayerToPoint(10.0, playerid, 212.88121032715,124.91903686523,998.40710449219))
 			{
@@ -1463,32 +1463,6 @@ YCMD:brama(playerid, params[], help)
 
         	}
         }
-		if(IsPlayerInFraction(playerid, FRAC_KT, 5000))
-		{
-			new Float:gate_pos[3][2][6] = {
-				{	//x, y, z, rx, ry, rz
-					{2424.25342, -2096.28613, 13.22150,   0.00000, 0.00000, 90.00000}, //open
-					{2424.25342, -2096.28613, 13.22150,   0.00000, 90.00000, 90.00000} //close
-				},
-				{
-					{2424.25342, -2081.89453, 13.22150,   0.00000, 0.00000, 90.00000}, 
-					{2424.25342, -2081.89453, 13.22150,   0.00000, -90.00000, 90.00000}
-				},
-				{
-					{2540.9431, -2117.0085, 11.0,   0.00000, 0.00000, 90.00000}, 
-					{2540.94312, -2117.00854, 14.19210,   0.00000, 0.00000, 90.00000}
-				}
-			};
-			for(new i; i<3; i++)
-			{
-				if(IsPlayerInRangeOfPoint(playerid, 15.0, gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2]))
-				{
-					MoveDynamicObject(brama_kt[i], gate_pos[i][brama_kt_state[i]][0], gate_pos[i][brama_kt_state[i]][1], gate_pos[i][brama_kt_state[i]][2], 2,
-						gate_pos[i][brama_kt_state[i]][3], gate_pos[i][brama_kt_state[i]][4], gate_pos[i][brama_kt_state[i]][5]);
-					brama_kt_state[i] = !brama_kt_state[i];
-				}
-			}
-		}
 		if(IsAUrzednik(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 		    if(IsPlayerInRangeOfPoint(playerid, 5.0, -2059.30249023,568.60919189,1172.05114746))

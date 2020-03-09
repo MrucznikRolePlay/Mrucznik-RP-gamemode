@@ -1,0 +1,13 @@
+{
+    "name": "rybypomoc",
+    "description": "Pomoc odnoœnie ³owienia ryb.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "fishinghelp"
+    ],
+    "parameters": [],
+    "date": "03.03.2020"
+}

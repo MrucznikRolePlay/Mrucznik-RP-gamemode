@@ -149,7 +149,7 @@ DajKP(playerid, time, bool:msg=true)
 
 DajMC(playerid, mc)
 {
-	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s nadano %dMC", GetPlayerLogName(playerid), mc);
+	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s nadano %dMC, poprzedni stan: %dMC", GetPlayerLogName(playerid), mc, PremiumInfo[playerid][pMC]);
 	if(mc <= 0)
 	{
 		Log(premiumLog, ERROR,"ERROR: funkcja DajMC miala ujemna wartosc dla %s Wartosc: %d", GetPlayerLogName(playerid), mc);
@@ -163,7 +163,7 @@ DajMC(playerid, mc)
 
 ZabierzMC(playerid, mc)
 {
-	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s zabrano %dMC", GetPlayerLogName(playerid), mc);
+	Log(premiumLog, E_LOGLEVEL:DEBUG, "%s zabrano %dMC, poprzedni stan: %dMC", GetPlayerLogName(playerid), mc, PremiumInfo[playerid][pMC]);
 	if(mc <= 0)
 	{
 		Log(premiumLog, ERROR, "ERROR: funkcja ZabierzMC miala ujemna wartosc dla %s", GetPlayerLogName(playerid), mc);
@@ -235,7 +235,7 @@ KupPrzedmiotPremium(playerid, id)
 	);
 	
 	_MruAdmin(playerid, sprintf("Gratulujemy dobrego wyboru. Kupi³eœ przedmiot o ID %d za %d MC.", PrzedmiotyPremium[id][Model], PrzedmiotyPremium[id][Cena]));
-	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /przedmioty");
+	_MruAdmin(playerid, "Listê swoich przedmiotów premium znajdziesz pod komend¹ /dodatki");
 
 	premium_printMcBalance(playerid);
 	return 1;
@@ -394,6 +394,20 @@ stock IsAUnikatowyPojazd(modelid)
 PlayerHasSkin(playerid, skin)
 {
 	return VECTOR_find_val(VPremiumSkins[playerid], skin) != INVALID_VECTOR_INDEX;
+}
+
+IsAMCGiver(playerid) {
+	if(!dini_Exists(MC_GIVER_FILE)) return false;
+	return dini_Int(MC_GIVER_FILE, "uid") == PlayerInfo[playerid][pUID];
+}
+
+GetAvaibleMC() {
+	if(!dini_Exists(MC_GIVER_FILE)) return 0;
+	return dini_Int(MC_GIVER_FILE, "budget");
+}
+
+TakeMCFromBudget(value) {
+	return dini_IntSet(MC_GIVER_FILE, "budget", GetAvaibleMC()-value);
 }
 
 

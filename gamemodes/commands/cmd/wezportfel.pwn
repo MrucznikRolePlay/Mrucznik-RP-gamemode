@@ -30,7 +30,7 @@
 
 YCMD:wezportfel(playerid, params[], help)
 {
-	if(IsAMember(playerid))
+	if(IsAPrzestepca(playerid))
 	{
 		if(PlayerInfo[playerid][pRank] < 3)
 		{
@@ -63,19 +63,17 @@ YCMD:wezportfel(playerid, params[], help)
 						{
 							if(PlayerInfo[giveplayerid][pConnectTime] >= 2)
 							{
-								new string[128], giveplayer[MAX_PLAYER_NAME], sendername[MAX_PLAYER_NAME];
-								GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-								GetPlayerName(playerid, sendername, sizeof(sendername));
+								new string[128];
 								pieniadze = kaska[giveplayerid] / 4;
 								if(pieniadze > 1000000)
 								{
 									pieniadze = 1000000;
 								}
 								
-                                SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("%s zabra³ Ci portfel z $%d w œrodku", GetNick(playerid, true), pieniadze));
-                                SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zabra³eœ portfel %s, w œrodku jest $%d", GetNick(giveplayerid, true), pieniadze));
+                                SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("%s zabra³ Ci portfel z $%d w œrodku", GetNick(playerid), pieniadze));
+                                SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zabra³eœ portfel %s, w œrodku jest $%d", GetNick(giveplayerid), pieniadze));
 
-								format(string, sizeof(string), "* %s zabiera portfel %s razem z %d$", sendername ,giveplayer, pieniadze);
+								format(string, sizeof(string), "* %s zabiera portfel %s razem z %d$", GetNick(playerid), GetNick(giveplayerid), pieniadze);
 								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 								Log(payLog, INFO, "%s zabra³ portfel %s razem z %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), pieniadze);
 								DajKase(playerid, pieniadze);

@@ -30,9 +30,11 @@ command_setmc_Impl(playerid, giveplayerid, value)
 		PremiumInfo[giveplayerid][pMC] = value;
 		MruMySQL_SaveMc(giveplayerid);
 
-		Log(premiumLog, INFO, "Admin %s da³ %s %dMC", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value);
-		_MruAdmin(playerid, sprintf("Da³eœ %d MC graczowi %s [ID: %d]", value, GetNick(giveplayerid, true), giveplayerid));
-		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d MC od Admina %s [ID: %d]", value, GetNick(playerid, true), playerid));
+		Log(premiumLog, INFO, "Admin %s da³ %s %dMC, poprzedni stan: %dMC", 
+			GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), value, PremiumInfo[giveplayerid][pMC]-value
+		);
+		_MruAdmin(playerid, sprintf("Da³eœ %d MC graczowi %s [ID: %d]", value, GetNickEx(giveplayerid), giveplayerid));
+		if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Dosta³eœ %d MC od Admina %s [ID: %d]", value, GetNickEx(playerid), playerid));
 
 		return 1;
 

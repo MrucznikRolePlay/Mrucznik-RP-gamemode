@@ -38,22 +38,22 @@ YCMD:admini(playerid, params[], help)
 		{
 			if(GetPlayerAdminDutyStatus(i) == 1)
 			{
-				//GetPVarString(i, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname)); 
-				if(PlayerInfo[i][pAdmin] >= 1 && PlayerInfo[i][pAdmin] != 5000)
+				//GetPVarString(i, "pAdminDutyNickOff", FirstNickname, sizeof(FirstNickname));
+				if(PlayerInfo[i][pAdmin] == 5000)
 				{
-					format(string, sizeof(string), "{FFFFFF}Administrator: {FF6A6A}%s {FFFFFF}[ID: %d] [@LVL: %d]", GetNick(i), i, PlayerInfo[i][pAdmin]); 
+					format(string, sizeof(string), "{FFFFFF}H@: {FF6A6A}%s {FFFFFF}[ID: %d]", GetNickEx(i), i);
 				}
-				else if(PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] != 5)
+				else if(IsAScripter(i)) 
 				{
-					format(string, sizeof(string), "{FFFFFF}Pó³-Admin: {00C0FF}%s {FFFFFF}[ID: %d] [P@LVL: %d]", GetNick(i), i, PlayerInfo[i][pNewAP]); 
+					format(string, sizeof(string), "{FFFFFF}Skrypter: {747b41}%s {FFFFFF}[ID: %d]", GetNickEx(i), i);
+				} 
+				else if(PlayerInfo[i][pAdmin] >= 1)
+				{
+					format(string, sizeof(string), "{FFFFFF}Administrator: {FF6A6A}%s {FFFFFF}[ID: %d] [@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pAdmin]); 
 				}
-				else if(PlayerInfo[i][pNewAP] == 5) 
+				else if(PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] <= 4)
 				{
-					format(string, sizeof(string), "{FFFFFF}Skrypter serwera: {747b41}%s {FFFFFF}[ID: %d]", GetNick(i), i);
-				}
-				else if(PlayerInfo[i][pAdmin] == 5000)
-				{
-					format(string, sizeof(string), "{FFFFFF}H@: {FF6A6A}%s {FFFFFF}[ID: %d]", GetNick(i), i);
+					format(string, sizeof(string), "{FFFFFF}Pó³-Admin: {00C0FF}%s {FFFFFF}[ID: %d] [P@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pNewAP]); 
 				}
 				sendTipMessage(playerid, string); 
 			}

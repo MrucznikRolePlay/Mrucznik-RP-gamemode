@@ -38,7 +38,7 @@ YCMD:wybieralka(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /wybieralka [playerid/CzêœæNicku]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -48,8 +48,8 @@ YCMD:wybieralka(playerid, params[], help)
 
 					NowaWybieralka_Setup(para1);
 
-					_MruAdmin(playerid, sprintf("Wys³a³eœ gracza %s [%d] do wybiera³ki skinów.", GetNick(para1, true), para1));
-                    _MruAdmin(para1, sprintf("Zosta³eœ wys³any do wybiera³ki skinów przez Admina %s [%d].", GetNick(playerid, true), playerid));
+					_MruAdmin(playerid, sprintf("Wys³a³eœ gracza %s [%d] do wybiera³ki skinów.", GetNick(para1), para1));
+                    _MruAdmin(para1, sprintf("Zosta³eœ wys³any do wybiera³ki skinów przez Admina %s [%d].", GetNickEx(playerid), playerid));
 				}
 			}
 		}

@@ -116,7 +116,7 @@ public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Fl
 			return sendErrorMessage(playerid, "Zmiany nie zosta³y zapisane, dodatek by³ zbyt oddalony od gracza!");
 		}
 		sendTipMessage(playerid, "Zapisano pozycje edycji"); 
-		//chwilowe rozwi¹zanie (póki nie poszerzê tablicy) - tak aby gracz nie musia³ edytowaæ za ka¿dym razem
+		//chwilowe rozwi¹zanie (póki nie poszerzê tablicy) - tak aby gracz nie musia³ edytowaæ za ka¿dym razem 
 		SetPVarFloat(playerid, "d_offsetX", fOffsetX);
 		SetPVarFloat(playerid, "d_offsetY", fOffsetY);
 		SetPVarFloat(playerid, "d_offsetZ", fOffsetZ);
@@ -140,35 +140,38 @@ Player_RemoveFromVeh(playerid)
 {
 	new Float:slx, Float:sly, Float:slz;
 	GetPlayerPos(playerid, slx, sly, slz);
-	SetPlayerPosEx(playerid, slx, sly, slz+1);
+	SetPlayerPos(playerid, slx, sly, slz+1);
 	ClearAnimations(playerid);	
 
 	return true;
 }
 
 
-Player_CanUseCar(playerid, newcar)
+Player_CanUseCar(playerid, vehicleid)
 {
+	if(IsAScripter(playerid) || IsAHeadAdmin(playerid)) return 1;
+	
 	new string[128];
-
-	if(IsACopCar(newcar))
+	if(GetVehicleModel(vehicleid) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
+    {
+		return 0;
+	}
+	if (IsAnAmbulance(vehicleid))
 	{
-	    if(IsACop(playerid))
-	    {
-	        if(OnDuty[playerid] == 0)
-	        {
-	            if(GetVehicleModel(newcar) != 445)
-	            {
-	            	sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ na s³u¿bie aby jeŸdziæ autem policyjnym !");
-                    return 0;
-	            }
-	        }
-	    }
+		if(!IsAMedyk(playerid))
+		{
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
+			return 0;
+		}
+	}
+	if (GetVehicleModel(vehicleid) == 525)
+	{
+		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
 	}
 
-	if(VehicleUID[newcar][vUID] != 0)
+	if(VehicleUID[vehicleid][vUID] != 0)
     {
-        new lcarid = VehicleUID[newcar][vUID];
+        new lcarid = VehicleUID[vehicleid][vUID];
 	    if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FRACTION)// wszystkie auta frakcji
 	    {
             if(CarData[lcarid][c_Owner] != GetPlayerFraction(playerid) && CarData[lcarid][c_Owner] != 11)
@@ -211,7 +214,7 @@ Player_CanUseCar(playerid, newcar)
     				//format(string, sizeof(string), "~w~Mozesz wypozyczyc ten pojazd~n~Cena:~g~$%d~n~~w~Aby to zrobic wpisz ~g~/rentcar~w~~n~aby wyjsc wpisz ~r~/wyjdz",5000);
     				//TogglePlayerControllable(playerid, 0);
     				//GameTextForPlayer(playerid, string, 5000, 3);
-                    //HireCar[playerid] = newcar;
+                    //HireCar[playerid] = vehicleid;
     			}
             }*/
             if(CarData[lcarid][c_Owner] == CAR_ZUZEL)
@@ -244,6 +247,13 @@ Player_CanUseCar(playerid, newcar)
                     sendTipMessageEx(playerid,COLOR_GREY,string);
                     return 0;
                 }
+				if(vehicleid == 578 && PlayerInfo[playerid][pLevel] == 1)
+				{
+					if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+					format(string, sizeof(string), "Musisz mieæ 2 level aby prowadziæ tym pojazdem.");
+                    sendTipMessageEx(playerid,COLOR_GREY,string);
+					return 0;
+				}
             }
             else
             {
@@ -279,7 +289,7 @@ Player_CanUseCar(playerid, newcar)
 	    }
         else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_PLAYER) //Pojazdy graczy
         {
-            if(IsCarOwner(playerid, newcar, true))
+            if(IsCarOwner(playerid, vehicleid, true))
 	        {
                 if(CarData[lcarid][c_Keys] != 0 && CarData[lcarid][c_Owner] != PlayerInfo[playerid][pUID])
                 {
@@ -298,8 +308,26 @@ Player_CanUseCar(playerid, newcar)
 	       	}
         }
     }
+	if(IsACopCar(vehicleid))
+	{
+	    if(IsAPolicja(playerid))
+	    {
+	        if(OnDuty[playerid] == 0)
+	        {
+	            if(GetVehicleModel(vehicleid) != 445)
+	            {
+	            	sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ na s³u¿bie aby jeŸdziæ autem policyjnym !");
+                    return 0;
+	            }
+	        }
+			else
+			{
+				sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
+			}
+	    }
+	}
 
-	if(IsABoat(newcar))
+	if(IsABoat(vehicleid))
 	{
 	    if(PlayerInfo[playerid][pBoatLic] < 1)
 		{
@@ -307,20 +335,12 @@ Player_CanUseCar(playerid, newcar)
 		    return 0;
 		}
 	}
-	else if(IsAPlane(newcar))
+	else if(IsAPlane(vehicleid))
 	{
 	    antyczolg[playerid] ++;
 	    if(PlayerInfo[playerid][pFlyLic] < 1)
 		{
 			sendTipMessageEx(playerid, COLOR_GREY, "Nie wiesz w jaki sposób lataæ samolotem, wiêc decydujesz siê go opuœciæ !");
-			return 0;
-		}
-	}
-	else
-	{
-		if(PlayerInfo[playerid][pCarLic] != 1)
-		{
-			sendTipMessageEx(playerid, COLOR_GREY, "Nie masz prawa jazdy, postanawiasz opuœciæ pojazd!");
 			return 0;
 		}
 	}

@@ -28,7 +28,7 @@
 
 #define PREMIUM_DIALOG(%0) (_:%0+7450)
 #define MAX_PREMIUM_VEHICLES 18
-#define MAX_PREMIUM_SKINS 43
+#define MAX_PREMIUM_SKINS 44
 #define MAX_PREMIUM_ITEMS 133
 
 //Czas
@@ -55,7 +55,7 @@
 #define PRZEDMIOT_PRZECIETNY_CENA 15
 #define PRZEDMIOT_TANI_CENA 5
 
-
+#define MC_GIVER_FILE "mc.conf"
 
 //Kolorki
 

@@ -39,7 +39,7 @@ YCMD:respawn(playerid, params[], help)
 		{
 			SendClientMessage(playerid,COLOR_YELLOW, "Odliczanie rozpoczête");
 			BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
-			format(string, sizeof(string), "AdmCmd: %s [ID: %d] rozpocz¹³ odliczanie do Respawnu Aut !", GetNick(playerid, true), playerid);
+			format(string, sizeof(string), "AdmCmd: %s [ID: %d] rozpocz¹³ odliczanie do Respawnu Aut !", GetNickEx(playerid), playerid);
 			ABroadCast(COLOR_PANICRED,string,1);
 			CountDown();	
 		}

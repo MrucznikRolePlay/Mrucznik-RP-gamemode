@@ -1,0 +1,19 @@
+{
+    "properties":{
+       "account_before":{
+          "type":"integer"
+       },
+       "cash_before":{
+          "type":"integer"
+       },
+       "income":{
+          "type":"integer"
+       },
+       "loss":{
+          "type":"integer"
+       },
+       "set":{
+          "type":"integer"
+       }
+    }
+ }

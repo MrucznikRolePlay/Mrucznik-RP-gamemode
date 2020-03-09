@@ -39,6 +39,13 @@ YCMD:adminduty(playerid, params[], help)
 				sendErrorMessage(playerid, "Nie w³¹czyæ s³u¿by gdy jesteœ na s³u¿bie IC!"); 
 				return 1;
 			}
+
+			new nick[24];
+			if(GetPVarString(playerid, "maska_nick", nick, 24))
+			{
+				SendClientMessage(playerid, COLOR_GREY, " Musisz œci¹gn¹æ maskê z twarzy! (/maska).");
+				return 1;
+			}
 		/*	if(strlen(PlayerInfo[playerid][pAdminName]) >= 3)
 			{
 				foreach(new i : Player)

@@ -33,8 +33,13 @@ YCMD:bandana(playerid, params[], help)
 	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
 	{
 		new string[64];
-		new sendername[MAX_PLAYER_NAME];
-
+		new nick[24], sendername[MAX_PLAYER_NAME];
+		if(GetPVarString(playerid, "maska_nick", nick, 24))
+		{
+			SendClientMessage(playerid, COLOR_GREY, " Musisz œci¹gn¹æ maskê z twarzy! (/maska).");
+			return 1;
+		}
+		
 		if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
 		{
 			SetPlayerColor(playerid, TEAM_HIT_COLOR);

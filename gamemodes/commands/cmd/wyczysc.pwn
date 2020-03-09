@@ -37,9 +37,14 @@ YCMD:wyczysc(playerid, params[], help)
     if(IsPlayerConnected(playerid))
    	{
    	    new tmpcar = GetPlayerVehicleID(playerid);
- 		if(IsACop(playerid))
+ 		if(IsAPolicja(playerid))
 		{
-			if (IsACopCar(tmpcar) || PlayerToPoint(15.0, playerid, 253.9280,69.6094,1003.6406) || PlayerToPoint(20.0, playerid, 246.3568,120.3933,1003.2682) || PlayerToPoint(50, playerid, 1189.5999755859,-1574.6999511719,-54.5 ) || PlayerInfo[playerid][pLocal] == 210)
+			if ((tmpcar != INVALID_VEHICLE_ID && IsACopCar(tmpcar)) || 
+			PlayerToPoint(15.0, playerid, 253.9280,69.6094,1003.6406) || 
+			PlayerToPoint(20.0, playerid, 246.3568,120.3933,1003.2682) || 
+			PlayerToPoint(50, playerid, 1189.5999755859,-1574.6999511719,-54.5 ) || 
+			PlayerToPoint(50, playerid, -1672.8372,890.2657,-48.9141 ) || //komisariat LSPD
+			PlayerInfo[playerid][pLocal] == 210)
 			{
 				new giveplayerid;
 				if( sscanf(params, "k<fix>",giveplayerid))
@@ -48,27 +53,27 @@ YCMD:wyczysc(playerid, params[], help)
 					return 1;
 				}
 
-				if(PoziomPoszukiwania[giveplayerid] > 1 && PlayerInfo[playerid][pLider] != FRAC_FBI)
-				{
-					sendTipMessageEx(playerid, COLOR_GRAD1, "Mo¿esz oczyœciæ tylko graczy z 1 WL");
-					return 1;
-				}
-
 				if(IsPlayerConnected(giveplayerid))
 				{
 				    if(giveplayerid != INVALID_PLAYER_ID)
 				    {
+						if(PoziomPoszukiwania[giveplayerid] > 2)
+						{
+							sendTipMessageEx(playerid, COLOR_GRAD1, "Mo¿esz oczyœciæ tylko graczy z 1-2 WL");
+							return 1;
+						}
 					    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						format(string, sizeof(string), "* Oczyœci³eœ z zarzutów %s.", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* Policjant %s oczyœci³ ciê z zarzutów (Wanted Level).", sendername);
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "HQ: Polijant %s oczyœci³ z zarzutów %s",sendername, giveplayer);
+						format(string, sizeof(string), "HQ: Policjant %s oczyœci³ z zarzutów %s",sendername, giveplayer);
 						SendFamilyMessage(1, COLOR_PANICRED, string);
-						format(string, sizeof(string), "HQ: Polijant %s oczyœci³ z zarzutów %s",sendername, giveplayer);
+						format(string, sizeof(string), "HQ: Policjant %s oczyœci³ z zarzutów %s",sendername, giveplayer);
 						SendFamilyMessage(2, COLOR_PANICRED, string);
 						PoziomPoszukiwania[giveplayerid] = 0;
+						SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);
 						ClearCrime(giveplayerid);
 						if(gTeam[giveplayerid]==4)
 						{

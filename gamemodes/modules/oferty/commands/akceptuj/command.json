@@ -1,0 +1,19 @@
+{
+    "name": "akceptuj",
+    "description": "Akceptuje ofertê od gracza.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "32",
+            "name": "nazwa",
+            "description": "nazwa"
+        }
+    ],
+    "date": "07.02.2020",
+    "custom": true
+}

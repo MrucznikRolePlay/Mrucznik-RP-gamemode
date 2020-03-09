@@ -44,7 +44,7 @@ YCMD:jail(playerid, params[], help)
         }
 
 
-        if (PlayerInfo[playerid][pAdmin] >= 20)
+        if (PlayerInfo[playerid][pAdmin] >= 20 || IsAScripter(playerid))
         {
             if(IsPlayerConnected(playa))
             {
@@ -56,16 +56,16 @@ YCMD:jail(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_LIGHTRED, string);
                     format(string, sizeof(string), "* Zosta³eœ uwiêziony przez Admina %s.", sendername);
                     SendClientMessage(playa, COLOR_LIGHTRED, string);
-                    format(string, sizeof(string), "* %s zosta³ uwiêziony w wiêzieniu na %d sekund przez admina %s.",giveplayer, money, sendername);
+                    format(string, sizeof(string), "* %s zosta³ uwiêziony w wiêzieniu na %d minut przez admina %s.",giveplayer, money, sendername);
                     SendPunishMessage(string, playa);
-                    ResetPlayerWeapons(playa);
+                    RemovePlayerWeaponsTemporarity(playa);
                     PoziomPoszukiwania[playa] = 0;
                     PlayerInfo[playa][pJailed] = 1;
                     PlayerInfo[playa][pJailTime] = money * 60;
                     SetPlayerInterior(playa, 0);
                     SetPlayerVirtualWorld(playa, 1);
                     new losuj= random(sizeof(Cela));
-                    SetPlayerPosEx(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+                    SetPlayerPos(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
                     format(string, sizeof(string), "Zosta³eœ uwiêziony na %s minut.   Kaucja: Niedostêpna", money);
                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                     Wchodzenie(playa);

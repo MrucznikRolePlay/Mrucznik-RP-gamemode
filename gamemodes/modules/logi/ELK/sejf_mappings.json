@@ -1,0 +1,22 @@
+{
+    "properties":{
+       "balance_before":{
+          "type":"integer"
+       },
+       "id":{
+          "type":"integer",
+          "fields":{
+             "keyword":{
+                "type":"keyword",
+                "ignore_above":256
+             }
+          }
+       },
+       "income":{
+          "type":"integer"
+       },
+       "sejf_type":{
+          "type":"keyword"
+       }
+    }
+ }

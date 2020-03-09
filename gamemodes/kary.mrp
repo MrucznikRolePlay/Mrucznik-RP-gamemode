@@ -6,6 +6,7 @@ BMX Bunny Hopping (BBH)|0|Skakanie na BMX'ie po samochodach graczy/graczach (kar
 Ninja Jacking (NJ)|1|Wyrzucanie gracza (kierowcy) z pojazdu bez wyraŸnego powodu IC.
 MetaGaming (MG)|1|Znaczne naruszenie zasady nieprzenikalnoœci informacji OOC do œwiata IC. * Twoja postaæ nie mo¿e mówiæ o twoich osobistych sprawach, o komendach do sterowania ni¹, o tym, ¿e grasz teraz na serwerze. Ona po prostu o tym nie wie.
 DM 1 Stopnia|1|Wystêpuje, gdy gracz do DM'u u¿ywa tylko broni bia³ej (oprócz pi³y) b¹dŸ piêœci.
+Jazda na dachu|1|Jazda na pojeŸdzie w ruchu bez uprzedniej akcji RP oraz animacji imituj¹cej próbê utrzymania siê na dachu (np. /animfinale 3) lub znajdowania siê w baga¿niku. Bêd¹c na pojeŸdzie w trakcie jazdy nie mo¿na siê poruszaæ ani mieæ wyci¹gniêtej broni. Na pojeŸdzie mo¿e znajdowaæ siê jednoczeœnie tylko jedna osoba.
 DM 2 Stopnia|2|Wystêpuje gdy gracz do DM'u u¿ywa broni palnej/pi³y/materia³ów wybuchowych.
 PowerGaming (PG)|2|Znaczne z³amanie/naruszenie zasady umo¿liwienia reakcji lub zachowania realizmu. 
 Celowe Zderzenia|2|Niszczenie przydro¿nych konstrukcji, uderzanie w samochody oraz graczy bez wyraŸnego powodu IC (jedynie w celu dezorganizacji gry).
@@ -17,14 +18,14 @@ Heli Kill (HK)|3|Zabicie gracza œmig³em helikoptera.
 Drive By (DB)|3|Strzelanie z pojazdu na miejscu kierowcy.
 Mordowanie za WL|3|Za umyœlne zamordowanie gracza z WL (Poziom Poszukiwania, Wanted Level) bez próby zatrzymania go lub mordowanie graczy z WL którzy podnieœli rêce i rzucili broñ na ziemiê.
 Nabijanie WL|3|Kilkukrotne zwiêkszenie WL (Poziom Poszukiwania, Wanted Level) graczowi za to samo przestêpstwo ( w czasie krótszym ni¿ 5min).
-Obra¿anie OOC|3|Kierowanie do gracza s³ów uznawanych za wulgarne maj¹cych na celu jego zniewa¿enie.
+Obra¿anie OOC|3|Kierowanie do gracza s³ów maj¹cych na celu jego zniewa¿enie.
 Gwa³t/okaleczenie bez zgody OOC|4|Aby zgwa³ciæ lub okaleczyæ gracza, gracz gwa³cony/okaleczany musi siê na zgodziæ na chacie OOC.
 DM Podczas Eventu|4|DM podczas eventu lub masowego wydarzenia w którym uczestniczy wiêcej ni¿ 10 osób maj¹cy na celu jego dezorganizacjê (nie wydarzeñ polegaj¹cych lub wymuszaj¹cych wzajemn¹ wymian¹ ognia)
 EXtremalny DM|4|Zabicie wiêcej ni¿ conajmniej 5 graczy w krótkim odstêpie czasu.
 Spamowanie|4|Kilkukrotne napisanie wiadomoœci o takim samym sensie merytorycznym w krótkim odstêpie czasu.
 Oszustwa OOC|4|Oszukiwanie OOC w sprawach dotycz¹cych rozgrywki na serwerze.
 Szkodzenie serwerowi|4|Zachowania uznawane za szkodzenie serwerowi s¹ opisane poni¿ej i tylko te zachowania mog¹ byæ uznane za szkodzenie serwerowi. * » Zastawiwanie przejazdu poci¹giem * » Crashowanie serwera * » Holowanie czo³gu, samolotów, helikopterów w celu dezorganizacji rozgrywki * » Spychanie helikopterów LSPD z dachu komistariatu
-Bug Using (BU)|4|Wykorzystywanie buga/niedoci¹gniêcia na serwerze w celu uzyskania korzyœci b¹dŸ utrudnienia/uprzykrzenia rozgrywki innym. * Pod Bug Using podchodzi tak¿e oszukiwanie systemów serwera (np. nabijanie skilla). *  *  {ffffff}Za BU s¹ uznawane:{a9c4e4} * » BU animacje ( /animped, /animswat ) * » C-BUG, Glitch ( DE z okna ) *  * {ffffff}Za BU nie s¹ uznawane: {a9c4e4} * » BU NRG w LV, Maverick w LV * » Tappowanie (naciskanie strza³ki na motorze) * » BU szybsze poruszanie siê * » BU szlabany pod komi
+Bug Using (BU)|4|Wykorzystywanie buga/niedoci¹gniêcia na serwerze w celu uzyskania korzyœci b¹dŸ utrudnienia/uprzykrzenia rozgrywki innym. * Pod Bug Using podchodzi tak¿e oszukiwanie systemów serwera (np. nabijanie skilla). *  *  {ffffff}Za BU s¹ uznawane:{a9c4e4} * » BU animacje ( /animped, /animswat, /animnevada, /animpara ) * » C-BUG, Glitch ( DE z okna ) *  * {ffffff}Za BU nie s¹ uznawane: {a9c4e4} * » BU NRG w LV, Maverick w LV * » Tappowanie (naciskanie strza³ki na motorze) * » BU szybsze poruszanie siê * » BU szlabany pod komi
 Ban Evading (BE)|5|Omijanie kary bana (kara bana dotyczy realnej osoby, nie postaci).
 Reklamowanie|5|Pisanie na jakimkolwiek czacie reklam lub nazw czy odnoœników do innych serwerów RP.
 Kradzie¿ kont|5|Niepowo³ane wejœcie na konto innego gracza.

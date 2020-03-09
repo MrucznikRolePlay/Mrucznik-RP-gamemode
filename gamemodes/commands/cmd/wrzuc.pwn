@@ -40,16 +40,22 @@ YCMD:wrzuc(playerid, params[], help)
     	if( sscanf(params, "k<fix>d", person, seat4))
     	return sendTipMessage(playerid, "U¿yj /wepchnij [ID Gracza] [miejsce 2-4]");
 
+		if(!IsPlayerConnected(person))
+		{
+			sendErrorMessage(playerid, "Nie ma takiego gracza.");
+			return 1;
+		}
+
     	if (GetPlayerState(playerid)!=PLAYER_STATE_DRIVER)
     	return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie.");
 
     	if (IsPlayerInAnyVehicle(person))
     	return sendTipMessage(playerid, "Gracz nie mo¿e znajdowaæ siê w pojeŸdzie.");
 
-    	if(pobity[person] >= 1 || PlayerInfo[person][pBW] > 0)
+    	if(pobity[person] >= 1 || PlayerInfo[person][pBW] > 0 || PlayerInfo[person][pInjury] > 0)
         {
     		if (GetDistanceBetweenPlayers(playerid,person) > 5) return sendErrorMessage(playerid, "Gracz nie jest w pobli¿u.");
-
+			ZdejmijBW(person);
             TogglePlayerControllable(person, 1);
     		new Float:pos[6];
     		GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
@@ -73,6 +79,7 @@ YCMD:wrzuc(playerid, params[], help)
     		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
             sendTipMessage(playerid, "Po trzech minutach osoba zostanie rozwi¹zana!");
             sendTipMessage(person, "Po trzech minutach zostaniesz rozwi¹zany!");
+			SetPlayerChatBubble(person, " ", 0xFF0000FF, 70.0, 1000);
     		return 1;
     	}
     	else

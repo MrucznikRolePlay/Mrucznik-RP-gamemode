@@ -31,7 +31,6 @@
 YCMD:tp(playerid, params[], help)
 {
 	new string[128];
-	new sendername[MAX_PLAYER_NAME];
 	new giveplayer01[MAX_PLAYER_NAME];
 	new giveplayer02[MAX_PLAYER_NAME];
 
@@ -49,11 +48,10 @@ YCMD:tp(playerid, params[], help)
 		{
 		    if(plo != INVALID_PLAYER_ID && plo1 != INVALID_PLAYER_ID)
 		    {
-				GetPlayerName(playerid, sendername, sizeof(sendername));
 				GetPlayerName(plo1, giveplayer01, sizeof(giveplayer01));
 				GetPlayerName(plo, giveplayer02, sizeof(giveplayer02));
 				
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 				{
 					new bool:liczydelko=false;
 					foreach(new i : Player)
@@ -79,9 +77,9 @@ YCMD:tp(playerid, params[], help)
 					GetPlayerPos(plo, plocx, plocy, plocz);
 					SetPlayerInterior(plo1, GetPlayerInterior(plo));
 					SetPlayerVirtualWorld(plo1, GetPlayerVirtualWorld(plo));
-					format(string, sizeof(string), "Zosta³eœ teleportowany do %s (ID: %d) przez Admina %s.", giveplayer02, plo, sendername);
+					format(string, sizeof(string), "Zosta³eœ teleportowany do %s (ID: %d) przez Admina %s.", giveplayer02, plo, GetNickEx(playerid));
 					SendClientMessage(plo1, COLOR_GRAD1, string);
-					format(string, sizeof(string), "Teleportowano tutaj %s (ID: %d) przez Admina %s.", giveplayer01, plo1, sendername);
+					format(string, sizeof(string), "Teleportowano tutaj %s (ID: %d) przez Admina %s.", giveplayer01, plo1, GetNickEx(playerid));
 					SendClientMessage(plo, COLOR_GRAD1, string);
 					format(string, sizeof(string), "Teleportowano %s (ID: %d) do %s (ID: %d).", giveplayer01, plo1, giveplayer02, plo);
 					SendClientMessage(playerid, COLOR_GRAD1, string);
@@ -106,7 +104,7 @@ YCMD:tp(playerid, params[], help)
 					}
 					else
 					{
-						SetPlayerPosEx(plo1,plocx,plocy+2, plocz);
+						SetPlayerPos(plo1,plocx,plocy+2, plocz);
 					}
 				}
 				else

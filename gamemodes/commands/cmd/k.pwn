@@ -52,7 +52,7 @@ YCMD:k(playerid, params[], help)
             return 1;
         }
 
-        PlayerTalkIC(playerid, params, "krzyczy", 15.0, true);
+        PlayerTalkIC(playerid, params, "krzyczy", 18.0, true);
 	    Log(chatLog, INFO, "%s krzyk: %s", GetPlayerLogName(playerid), params);
     }
     if(!IsPlayerInAnyVehicle(playerid))

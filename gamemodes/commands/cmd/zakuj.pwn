@@ -36,7 +36,7 @@ YCMD:zakuj(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(gTeam[playerid] == 2 || IsACop(playerid) || IsABOR(playerid))
+		if(gTeam[playerid] == 2 || IsAPolicja(playerid) || IsABOR(playerid))
 		{
 		    new giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))
@@ -49,7 +49,7 @@ YCMD:zakuj(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-			        if(gTeam[giveplayerid] == 2 || IsACop(giveplayerid))
+			        if(gTeam[giveplayerid] == 2 || IsAPolicja(giveplayerid))
 			        {
 			            sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz skuæ policjanta !");
 				        return 1;

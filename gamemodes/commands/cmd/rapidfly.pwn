@@ -34,8 +34,14 @@ YCMD:rapidfly(playerid, params[], help)
     {
         new typ;
         sscanf(params, "D(0)", typ);
-    	if(GetPVarType(playerid, "FlyMode")) CancelFlyMode(playerid);
-    	else FlyMode(playerid, typ);
+    	if(GetPVarType(playerid, "FlyMode"))
+        {   
+            CancelFlyMode(playerid);
+        }
+    	else 
+        {
+            FlyMode(playerid, typ);
+        }
     }
     return 1;
 }

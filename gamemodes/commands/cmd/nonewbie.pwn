@@ -56,7 +56,7 @@ YCMD:nonewbie(playerid, params[], help)
 				BroadCast(COLOR_GRAD2, "Czat newbie zosta³ odblokowany przez Administratora !");
 			}
 			
-			format(string, 128, "CMD_Info: /nonewbie u¿yte przez %s [%d]", GetNick(playerid), playerid);
+			format(string, 128, "CMD_Info: /nonewbie u¿yte przez %s [%d]", GetNickEx(playerid), playerid);
 			SendCommandLogMessage(string);
 			Log(adminLog, INFO, "Admin %s u¿y³ /nonewbie", GetPlayerLogName(playerid));
 		}

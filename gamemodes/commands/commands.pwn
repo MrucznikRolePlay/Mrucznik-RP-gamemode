@@ -26,7 +26,8 @@
 #include "cmd/admini.pwn"
 #include "cmd/adminstats.pwn"
 #include "cmd/ah.pwn"
-#include "cmd/akceptuj.pwn"
+#include "cmd/akceptujnaprawe.pwn"
+#include "cmd/akceptujtankowanie.pwn"
 #include "cmd/alarm.pwn"
 #include "cmd/alkomat.pwn"
 #include "cmd/ann.pwn"
@@ -57,13 +58,13 @@
 #include "cmd/blok.pwn"
 #include "cmd/blokujnoba.pwn"
 #include "cmd/blokujsprzedarz.pwn"
-#include "cmd/boks.pwn"
-#include "cmd/boksstats.pwn"
+#include "cmd/boxstats.pwn"
 #include "cmd/bonehead.pwn"
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
 #include "cmd/brama.pwn"
 #include "cmd/bus.pwn"
+#include "cmd/bw.pwn"
 #include "cmd/bwsettings.pwn"
 #include "cmd/bwtime.pwn"
 #include "cmd/c.pwn"
@@ -76,10 +77,10 @@
 #include "cmd/cca.pwn"
 #include "cmd/cennik.pwn"
 #include "cmd/check.pwn"
+#include "cmd/checkbw.pwn"
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
-#include "cmd/choroba.pwn"
 #include "cmd/clearwlall.pwn"
 #include "cmd/clearzone.pwn"
 #include "cmd/cmdinfo.pwn"
@@ -94,7 +95,6 @@
 #include "cmd/cziterzy.pwn"
 #include "cmd/czyjtonumer.pwn"
 #include "cmd/czysc.pwn"
-#include "cmd/dajbilet.pwn"
 #include "cmd/dajdowozu.pwn"
 #include "cmd/dajdzwiek.pwn"
 #include "cmd/dajfiltr.pwn"
@@ -184,7 +184,6 @@
 #include "cmd/gotostacja.pwn"
 #include "cmd/gotostad.pwn"
 #include "cmd/gotoszpital.pwn"
-#include "cmd/gotowane.pwn"
 #include "cmd/gps.pwn"
 #include "cmd/graj.pwn"
 #include "cmd/house.pwn"
@@ -193,7 +192,6 @@
 #include "cmd/hpall.pwn"
 #include "cmd/hydraulika.pwn"
 #include "cmd/i.pwn"
-#include "cmd/ibiza.pwn"
 #include "cmd/icons.pwn"
 #include "cmd/id.pwn"
 #include "cmd/idz.pwn"
@@ -249,10 +247,10 @@
 #include "cmd/kupneony.pwn"
 #include "cmd/kupowaniedomu.pwn"
 #include "cmd/kuppojazd.pwn"
+#include "cmd/kuppozwolenie.pwn"
 #include "cmd/kupsamoloty.pwn"
 #include "cmd/kupskin.pwn"
 #include "cmd/kurs.pwn"
-#include "cmd/kurtka.pwn"
 #include "cmd/laptop.pwn"
 #include "cmd/licencje.pwn"
 #include "cmd/liderpomoc.pwn"
@@ -262,6 +260,7 @@
 #include "cmd/loadinfo.pwn"
 #include "cmd/lock.pwn"
 #include "cmd/lockint.pwn"
+#include "cmd/login.pwn"
 #include "cmd/losowostworzdom.pwn"
 #include "cmd/losowypozar.pwn"
 #include "cmd/lot.pwn"
@@ -289,6 +288,7 @@
 #include "cmd/muzyczka.pwn"
 #include "cmd/namierz.pwn"
 #include "cmd/napraw.pwn"
+#include "cmd/naprawpojazd.pwn"
 #include "cmd/nastepnylevel.pwn"
 #include "cmd/naucz.pwn"
 #include "cmd/nazywo.pwn"
@@ -299,7 +299,6 @@
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
 #include "cmd/o.pwn"
-#include "cmd/obezwladnij.pwn"
 #include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
@@ -322,7 +321,6 @@
 #include "cmd/paliwo.pwn"
 #include "cmd/panel.pwn"
 #include "cmd/panelbasenu.pwn"
-#include "cmd/paralizuj.pwn"
 #include "cmd/patrol.pwn"
 #include "cmd/pban.pwn"
 #include "cmd/pblok.pwn"
@@ -347,7 +345,6 @@
 #include "cmd/polej.pwn"
 #include "cmd/pomoc2.pwn"
 #include "cmd/pomocdom.pwn"
-#include "cmd/poscig.pwn"
 #include "cmd/pozwolenie.pwn"
 #include "cmd/pr.pwn"
 #include "cmd/pracownicy.pwn"
@@ -357,6 +354,7 @@
 #include "cmd/przeszukaj.pwn"
 #include "cmd/przyjmij.pwn"
 #include "cmd/pwarn.pwn"
+#include "cmd/przedmioty.pwn"
 #include "cmd/qf.pwn"
 #include "cmd/quitpraca.pwn"
 #include "cmd/r.pwn"
@@ -365,6 +363,7 @@
 #include "cmd/rapidfly.pwn"
 #include "cmd/raport.pwn"
 #include "cmd/re.pwn"
+#include "cmd/red.pwn"
 #include "cmd/reflektor.pwn"
 #include "cmd/reklama.pwn"
 #include "cmd/reloadbans.pwn"
@@ -384,13 +383,12 @@
 #include "cmd/rodzinny.pwn"
 #include "cmd/roleta.pwn"
 #include "cmd/rooc.pwn"
+#include "cmd/rozbierz.pwn"
 #include "cmd/rozkuj.pwn"
 #include "cmd/rozwiaz.pwn"
 #include "cmd/rozwiedz.pwn"
 #include "cmd/rozwod.pwn"
 #include "cmd/ruleta.pwn"
-#include "cmd/ryby.pwn"
-#include "cmd/rybypomoc.pwn"
 #include "cmd/sad.pwn"
 #include "cmd/say.pwn"
 #include "cmd/sb.pwn"
@@ -405,6 +403,7 @@
 #include "cmd/selldom.pwn"
 #include "cmd/setac.pwn"
 #include "cmd/setarmor.pwn"
+#include "cmd/setcarhp.pwn"
 #include "cmd/setcarint.pwn"
 #include "cmd/setcarvw.pwn"
 #include "cmd/setint.pwn"
@@ -437,7 +436,6 @@
 #include "cmd/spoiler.pwn"
 #include "cmd/spoilery.pwn"
 #include "cmd/sprawdzdom.pwn"
-#include "cmd/sprawdzgwiazdki.pwn"
 #include "cmd/sprawdzin.pwn"
 #include "cmd/sprawdzinv.pwn"
 #include "cmd/sprawdzkase.pwn"
@@ -449,17 +447,15 @@
 #include "cmd/sprunk.pwn"
 #include "cmd/sprzedajalkohol.pwn"
 #include "cmd/sprzedajauto.pwn"
-#include "cmd/sprzedajbilet.pwn"
+#include "cmd/sprzedajapteczka.pwn"
 #include "cmd/sprzedajbron.pwn"
 #include "cmd/sprzedajmaterialy.pwn"
 #include "cmd/sprzedajnarkotyki.pwn"
-#include "cmd/sprzedajrybe.pwn"
-#include "cmd/stanowe.pwn"
+#include "cmd/sprzedajzestaw.pwn"
 #include "cmd/setactoranime.pwn"
 #include "cmd/startlotto.pwn"
 #include "cmd/startujlekcje.pwn"
 #include "cmd/staty.pwn"
-#include "cmd/stazer.pwn"
 #include "cmd/stopanim.pwn"
 #include "cmd/stopbieg.pwn"
 #include "cmd/streamer.pwn"
@@ -479,7 +475,6 @@
 #include "cmd/tankujauta.pwn"
 #include "cmd/tankveh.pwn"
 #include "cmd/taryfikator.pwn"
-#include "cmd/tazer.pwn"
 #include "cmd/teczka.pwn"
 #include "cmd/telefonpomoc.pwn"
 #include "cmd/teleturniej.pwn"
@@ -495,12 +490,15 @@
 #include "cmd/togdepo.pwn"
 #include "cmd/togfam.pwn"
 #include "cmd/togfinfo.pwn"
+#include "cmd/togglepozwo.pwn"
 #include "cmd/toglicznik.pwn"
 #include "cmd/togname.pwn"
 #include "cmd/togooc.pwn"
 #include "cmd/togpodglad.pwn"
 #include "cmd/togtxda.pwn"
 #include "cmd/togwl.pwn"
+#include "cmd/togbw.pwn"
+#include "cmd/togscroll.pwn"
 #include "cmd/tp.pwn"
 #include "cmd/trampolina.pwn"
 #include "cmd/trasa.pwn"
@@ -508,10 +506,8 @@
 #include "cmd/trasybiegu.pwn"
 #include "cmd/ubranie.pwn"
 #include "cmd/ucisz.pwn"
-#include "cmd/ugotuj.pwn"
 #include "cmd/ukradnij.pwn"
-#include "cmd/ulecz.pwn"
-#include "cmd/uleczmnie.pwn"
+#include "cmd/uid.pwn"
 #include "cmd/ulepsz.pwn"
 #include "cmd/unblock.pwn"
 #include "cmd/unbw.pwn"
@@ -532,6 +528,7 @@
 #include "cmd/veh.pwn"
 #include "cmd/vopis.pwn"
 #include "cmd/vopispomoc.pwn"
+#include "cmd/walka.pwn"
 #include "cmd/warn.pwn"
 #include "cmd/wczytajrangi.pwn"
 #include "cmd/wczytajskiny.pwn"
@@ -556,7 +553,7 @@
 #include "cmd/wobiekt.pwn"
 #include "cmd/wplac.pwn"
 #include "cmd/wrzuc.pwn"
-#include "cmd/wtazer.pwn"
+#include "cmd/worek.pwn"
 #include "cmd/wybieralka.pwn"
 #include "cmd/wyczysc.pwn"
 #include "cmd/wyjdz.pwn"
@@ -572,7 +569,6 @@
 #include "cmd/wyplac.pwn"
 #include "cmd/wyprowadz.pwn"
 #include "cmd/wypusc.pwn"
-#include "cmd/wypuscrybe.pwn"
 #include "cmd/wyrzucbronie.pwn"
 #include "cmd/wyscig.pwn"
 #include "cmd/wyscig_start.pwn"
@@ -582,8 +578,6 @@
 #include "cmd/wywaldmv.pwn"
 #include "cmd/wywaldragi.pwn"
 #include "cmd/wywalmaterialy.pwn"
-#include "cmd/wywalrybe.pwn"
-#include "cmd/wywalryby.pwn"
 #include "cmd/wywaltelefon.pwn"
 #include "cmd/wywalzsad.pwn"
 #include "cmd/wywaz.pwn"
@@ -593,6 +587,7 @@
 #include "cmd/yo4.pwn"
 #include "cmd/z.pwn"
 #include "cmd/zabierz.pwn"
+#include "cmd/zabierzgps.pwn"
 #include "cmd/zabierzlideraorg.pwn"
 #include "cmd/zablokujtel.pwn"
 #include "cmd/zablokujw.pwn"
@@ -607,7 +602,6 @@
 #include "cmd/zapiszkonta.pwn"
 #include "cmd/zapytaj.pwn"
 #include "cmd/zasady.pwn"
-#include "cmd/zastrzyk.pwn"
 #include "cmd/zatankuj.pwn"
 #include "cmd/zatrzymajlekcje.pwn"
 #include "cmd/zaufanyggracz.pwn"
@@ -622,9 +616,7 @@
 #include "cmd/zderzaki.pwn"
 #include "cmd/zdmv.pwn"
 #include "cmd/zgas.pwn"
-#include "cmd/zjedz.pwn"
 #include "cmd/zk.pwn"
-#include "cmd/zlap.pwn"
 #include "cmd/zlomuj.pwn"
 #include "cmd/zmiendom.pwn"
 #include "cmd/zmiendomk.pwn"
@@ -656,9 +648,11 @@
 #include "cmd/staty2.pwn"
 #include "cmd/makevlider.pwn"
 #include "cmd/dajscene.pwn"
+#include "cmd/dajapteczke.pwn"
 #include "cmd/fracinfo.pwn"
 #include "cmd/wlsett.pwn"
-
+#include "cmd/inwigilacja.pwn"
+#include "cmd/togro.pwn"
 InitCommands()
 {
 	Aliases();
@@ -666,9 +660,9 @@ InitCommands()
 
 static Aliases()
 {
-	Command_AddAltNamed("staty2", "stats2"); 
 	//autorzy
 	Command_AddAltNamed("autorzy", "tworcy"); 
+
 	//tognewbie
 	Command_AddAltNamed("tognewbie", "togn"); 
 	//setserverpass
@@ -692,6 +686,8 @@ static Aliases()
 	Command_AddAltNamed("carhelp", "samochodpomoc");
 	//adminduty
 	Command_AddAltNamed("adminduty", "aduty"); 
+	//boxstats
+	Command_AddAltNamed("boxstats", "boksstats");
 	//cbradio
 	Command_AddAltNamed("cbradio", "cb");
 	Command_AddAltNamed("cbradio", "cb_radio");
@@ -706,6 +702,11 @@ static Aliases()
 
 	//czas
 	Command_AddAltNamed("czas", "time");
+
+
+	//dajapteczke
+	Command_AddAltNamed("dajapteczke", "dajapteczka");
+	Command_AddAltNamed("sprzedajapteczke", "sprzedajapteczke");
 
 	//dajklucze
 	Command_AddAltNamed("dajklucze", "kluczyki");
@@ -774,10 +775,6 @@ static Aliases()
 
 	//glosnik
 	Command_AddAltNamed("glosnik", "sanradio");
-
-	//gotowane
-	Command_AddAltNamed("gotowane", "cooked");
-	Command_AddAltNamed("gotowane", "ugotowane");
 
 	//house
 	Command_AddAltNamed("house", "dom");
@@ -935,7 +932,9 @@ static Aliases()
 	Command_AddAltNamed("megafon", "megaphone");
 	Command_AddAltNamed("megafon", "m");
 
-
+	//skróty akceptowania
+	Command_AddAltNamed("akceptujnaprawe", "an");
+	Command_AddAltNamed("akceptujtankowanie", "at");
 	//mi
 	Command_AddAltNamed("mi", "deathwarning");
 	Command_AddAltNamed("mi", "warningdeath");
@@ -977,17 +976,13 @@ static Aliases()
 	//o
 	Command_AddAltNamed("o", "ooc");
 
-	//obezwladnij
-	Command_AddAltNamed("obezwladnij", "ob");
-
 	//ochrona
 	Command_AddAltNamed("ochrona", "guard");
 	Command_AddAltNamed("ochrona", "sellkami");
 	Command_AddAltNamed("ochrona", "sellkamizelke");
 
 	//od
-	Command_AddAltNamed("od", "podnies");
-	Command_AddAltNamed("od", "p");
+	Command_AddAltNamed("od", "odbierz");
 
 	//og
 	Command_AddAltNamed("og", "advertise");
@@ -1006,8 +1001,6 @@ static Aliases()
 	Command_AddAltNamed("paliwo", "fuel");
 	Command_AddAltNamed("paliwo", "licznikpaliwa");
 
-	//paralizuj
-	Command_AddAltNamed("paralizuj", "paraliz");
 	//personalizuj
 	Command_AddAltNamed("personalizuj", "personalizacja");
 	Command_AddAltNamed("personalizuj", "personalize");
@@ -1114,12 +1107,6 @@ static Aliases()
 	//ruleta
 	Command_AddAltNamed("ruleta", "ruletka");
 
-	//ryby
-	Command_AddAltNamed("ryby", "fishes");
-
-	//rybypomoc
-	Command_AddAltNamed("rybypomoc", "fishhelp");
-
 	//say
 	Command_AddAltNamed("say", "local");
 	Command_AddAltNamed("say", "l");
@@ -1187,8 +1174,10 @@ static Aliases()
 	Command_AddAltNamed("startujlekcje", "startegzamin");
 
 	//staty
-	Command_AddAltNamed("staty", "stats");
+	/*Command_AddAltNamed("staty", "stats");
 	Command_AddAltNamed("staty", "statystyki");
+	Command_AddAltNamed("staty2", "stats2"); */ //na razie zawieszamy stats do czasu dopracowania tego textdrawa. Zgodnie z decyzj¹ 0Verte.
+	Command_AddAltNamed("staty2", "stats");
 
 	//stopanim
 	Command_AddAltNamed("stopanim", "stopani");
@@ -1237,19 +1226,15 @@ static Aliases()
 	//trasy
 	Command_AddAltNamed("trasy", "wyscigi");
 
-	//ugotuj
-	Command_AddAltNamed("ugotuj", "cook");
-	Command_AddAltNamed("ugotuj", "gotuj");
-
 	//ukradnij
 	Command_AddAltNamed("ukradnij", "dropcar");
 	Command_AddAltNamed("ukradnij", "kradnijauto");
 
-	//ulecz
-	Command_AddAltNamed("ulecz", "heal");
-
 	//uleczmnie
 	Command_AddAltNamed("uleczmnie", "healme");
+
+	//system przedmiotow
+	Command_AddAltNamed("przedmioty", "p");
 
 	//ulepsz
 	Command_AddAltNamed("ulepsz", "upgrade");
@@ -1261,6 +1246,10 @@ static Aliases()
 
 	//usunbron
 	Command_AddAltNamed("usunbron", "ub");
+
+	//walka
+	Command_AddAltNamed("walka", "boks");
+	Command_AddAltNamed("walka", "walcz");
 
 	//wejdz
 	Command_AddAltNamed("wejdz", "enter");
@@ -1331,10 +1320,6 @@ static Aliases()
 	Command_AddAltNamed("wypusc", "free");
 	Command_AddAltNamed("wypusc", "uwolnij");
 
-	//wypuscrybe
-	Command_AddAltNamed("wypuscrybe", "releasefish");
-	Command_AddAltNamed("wypuscrybe", "wyrzucrybe");
-
 	//wyrzucbronie
 	Command_AddAltNamed("wyrzucbronie", "wb");
 
@@ -1352,12 +1337,6 @@ static Aliases()
 	Command_AddAltNamed("wm", "wyrzucmaterialy");
 	Command_AddAltNamed("wm", "wm");
 
-	//wywalrybe
-	Command_AddAltNamed("wywalrybe", "throwback");
-
-	//wywalryby
-	Command_AddAltNamed("wywalryby", "throwbackall");
-
 	//wywaltelefon
 	Command_AddAltNamed("wywaltelefon", "wywaltel");
 
@@ -1368,6 +1347,9 @@ static Aliases()
 
 	//zabierz
 	Command_AddAltNamed("zabierz", "take");
+	
+	//zabierzgps
+	Command_AddAltNamed("zabierzgps", "takegps");
 
 	//zablokujtel
 	Command_AddAltNamed("zablokujtel", "togphone");
@@ -1405,20 +1387,9 @@ static Aliases()
 	//zdmv
 	Command_AddAltNamed("zdmv", "cdmv");
 
-	//zjedz
-	Command_AddAltNamed("zjedz", "eat");
-	Command_AddAltNamed("zjedz", "jedz");
-
 	//zk
 	Command_AddAltNamed("zk", "odbierzkluczyki");
 	Command_AddAltNamed("zk", "zabierzkluczyki");
-
-	//zlap
-	Command_AddAltNamed("zlap", "fish");
-	Command_AddAltNamed("zlap", "ryba");
-	Command_AddAltNamed("zlap", "wedkuj");
-	Command_AddAltNamed("zlap", "low");
-	Command_AddAltNamed("zlap", "wedka");
 
 	//zlomuj
 	Command_AddAltNamed("zlomuj", "spawnuj");
@@ -1456,10 +1427,6 @@ static Aliases()
 	//undemorgan
 	Command_AddAltNamed("undemorgan", "prisonoff");
 	Command_AddAltNamed("undemorgan", "unprison");
-
-	//choroba
-	Command_AddAltNamed("choroba", "setstd");
-	Command_AddAltNamed("choroba", "zaraz");
 
 	//zmienprace
 	Command_AddAltNamed("zmienprace", "setjob");

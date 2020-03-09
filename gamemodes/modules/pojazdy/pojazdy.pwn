@@ -26,7 +26,135 @@
 //
 
 //-----------------<[ Callbacki: ]>-----------------
+hook OnPlayerStateChange(playerid, newstate, oldstate)
+{
+    if(newstate == PLAYER_STATE_DRIVER)
+    {
+        new newcar = GetPlayerVehicleID(playerid);
+        if(PlayerInfo[playerid][pCarLic] == 0 && !IsARower(newcar))
+		{
+			CruiseControl_Static_TurnOn(playerid, 0);
+		}
+		if(IsARower(newcar))
+		{
+  			CruiseControl_Static_TurnOn(playerid, 1);
+		}
+    }
+}
+
+hook OnPlayerExitVehicle(playerid, vehicleid)
+{
+    if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);
+    if(GetPVarInt(playerid, "timer_CruiseControl")) CruiseControl_TurnOff(playerid);
+    pCruiseCanChange[playerid] = 1;
+}
+
+hook OnPlayerDisconnect(playerid)
+{
+    CruiseControl_Static_TurnOff(playerid);
+    CruiseControl_TurnOff(playerid);
+    pCruiseCanChange[playerid] = 1;
+}
+
+hook OnPlayerConnect(playerid)
+{
+    if(GetPVarInt(playerid, "timer_StaticCruiseControl")) CruiseControl_Static_TurnOff(playerid);
+    if(GetPVarInt(playerid, "timer_CruiseControl")) CruiseControl_TurnOff(playerid);
+    pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
+    pCruiseCanChange[playerid] = 1;
+}
+
+hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+{
+    if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)
+	{
+        if(PRESSED(KEY_ACTION) && !GetPVarInt(playerid, "timer_StaticCruiseControl")  && PlayerInfo[playerid][pCruiseController] == 1)
+        {
+            new carid;
+            carid = GetPlayerVehicleID(playerid);
+            if(!IsARower(carid) && !IsABoat(carid) && !IsAPlane(carid))
+            {
+                if(GetPVarInt(playerid, "timer_CruiseControl"))
+                {
+                    CruiseControl_TurnOff(playerid);
+                }
+                else
+                {
+                    CruiseControl_TurnOn(playerid);
+                }
+            }
+        }
+	}
+}
 //-----------------<[ Funkcje: ]>------------------
+
+CruiseControl_HideTXD(playerid)
+{
+    PlayerTextDrawHide(playerid, CRUISECONTROL_AMOUNT[playerid]);
+}
+
+CruiseControl_SetSpeed(playerid, speed, bool:positive)
+{
+    if(pCruiseCanChange[playerid] == 1)
+    {
+        if(pCruiseSpeed[playerid] < 140 && positive)
+        {
+            pCruiseSpeed[playerid] += speed;
+            pCruiseCanChange[playerid] = 0;
+            SetTimerEx("CruiseControl_ChangedKeyBool", 400, false, "i", playerid);
+        }
+        else if(pCruiseSpeed[playerid] > 30 && !positive)
+        {
+            pCruiseSpeed[playerid] -= speed;
+            pCruiseCanChange[playerid] = 0;
+            SetTimerEx("CruiseControl_ChangedKeyBool", 400, false, "i", playerid);
+        } 
+        CruiseControl_UpdateTXD(playerid);
+        PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
+    }
+}
+
+CruiseControl_UpdateTXD(playerid)
+{
+    new updatedMaxSpeed = pCruiseSpeed[playerid];
+    new string[128];
+    format(string, sizeof(string), "~r~MAX: ~w~%dKM", updatedMaxSpeed);
+    PlayerTextDrawSetString(playerid, CRUISECONTROL_AMOUNT[playerid], string);
+    PlayerTextDrawShow(playerid, CRUISECONTROL_AMOUNT[playerid]);
+}
+
+CruiseControl_ShowTXD(playerid)
+{   
+    PlayerTextDrawSetString(playerid, CRUISECONTROL_AMOUNT[playerid], "_");
+    PlayerTextDrawShow(playerid, CRUISECONTROL_AMOUNT[playerid]);
+    CruiseControl_UpdateTXD(playerid);
+}
+
+CruiseControl_Static_TurnOff(playerid)
+{
+    CruiseControl_HideTXD(playerid);
+    KillTimer(GetPVarInt(playerid, "timer_StaticCruiseControl"));
+    DeletePVar(playerid, "timer_StaticCruiseControl");
+    pCruiseCanChange[playerid] = 1;
+}
+
+
+CruiseControl_TurnOff(playerid)
+{
+    CruiseControl_HideTXD(playerid);
+    KillTimer(GetPVarInt(playerid, "timer_CruiseControl"));
+    pCruiseSpeed[playerid] = DEFAULT_CRUISESPEED;
+    pCruiseTXD[playerid] = 0;
+    DeletePVar(playerid, "timer_CruiseControl");
+    pCruiseCanChange[playerid] = 1;
+}
+
+CruiseControl_TurnOn(playerid)
+{
+    CruiseControl_ShowTXD(playerid);
+    new timer = SetTimerEx("CruiseControl", 200, true, "i", playerid);
+    SetPVarInt(playerid, "timer_CruiseControl", timer);
+}
 Car_AddSlotToQueue(id)
 {
     if(strlen(Car_SlotQueue) < 1020)
@@ -500,7 +628,7 @@ Car_Spawn(lUID, bool:loaddesc=true)
 
     new rejestracja[32];
     if(isnull(CarData[lUID][c_Rejestracja]))
-		format(rejestracja, sizeof(rejestracja), "LS%06d", CarData[lUID][c_UID]);
+		format(rejestracja, sizeof(rejestracja), "DMV %d", CarData[lUID][c_UID]);
 	else
 		format(rejestracja, sizeof(rejestracja), "%s", CarData[lUID][c_Rejestracja]);
 
@@ -736,136 +864,20 @@ ShowCarEditDialog(playerid)
     return 1;
 }
 
-CONVERT_PlayerCar(playerid)
+stock GetVehicleSpeed(carid)
 {
-    new owner[32], str[512], nick[32], dopojazdu1[64], carlist[8], model, Float:x, Float:y, Float:z, Float:angle, color1, color2, bumper1, bumper2, neon, nitro, hydraulika, felgi, spoiler, malunek, lUsed=0;
-    GetPlayerName(playerid, nick, 32);
-
-    if(PlayerInfo[playerid][pAuto1] != 0) carlist[1] = PlayerInfo[playerid][pAuto1];
-    if(PlayerInfo[playerid][pAuto2] != 0) carlist[2] = PlayerInfo[playerid][pAuto2];
-    if(PlayerInfo[playerid][pAuto3] != 0) carlist[3] = PlayerInfo[playerid][pAuto3];
-    if(PlayerInfo[playerid][pAuto4] != 0) carlist[4] = PlayerInfo[playerid][pAuto4];
-    if(PlayerInfo[playerid][pLodz] != 0) carlist[5] = PlayerInfo[playerid][pLodz];
-    if(PlayerInfo[playerid][pSamolot] != 0) carlist[6] = PlayerInfo[playerid][pSamolot];
-    if(PlayerInfo[playerid][pGaraz] != 0) carlist[7] = PlayerInfo[playerid][pGaraz];
-
-    for(new i=1;i<8;i++)
-    {
-        if(carlist[i] != 0)
-        {
-            format(dopojazdu1, sizeof(dopojazdu1), "System_Aut/Pojazd%d.ini", carlist[i]);
-            if(!dini_Exists(dopojazdu1))
-            {
-                format(str, 128, "CAR.CONVERTER: B³¹d! Brak pliku pojazdu o ID %d slot: %d.", carlist[i], i);
-                SendClientMessage(playerid, COLOR_YELLOW, str);
-                Log(serverLog, ERROR, "[CAR.CONVERTER]: File not found [%d]. Caller %s", carlist[i], nick);
-                continue;
-            }
-            strcat(owner, dini_Get(dopojazdu1, "Posiadacz"), 32);
-            if(strcmp(owner, nick) != 0)
-            {
-                format(str, 128, "SELECT `owner` FROM mru_cars WHERE `oldid`='%d'", carlist[i]);
-                mysql_query(str);
-                mysql_store_result();
-                if(mysql_num_rows())
-                {
-                    mysql_fetch_row_format(str, "|");
-                    mysql_free_result();
-                    new ownuid = strval(str);
-
-                    format(str, 128, "CAR.CONVERTER: Wygl¹da na to, ¿e nie jestes wlascicielem pojazdu %d, slot %d.", carlist[i], i);
-                    SendClientMessage(playerid, COLOR_YELLOW, str);
-                    format(str, 128, "CAR.CONVERTER: Pojazd ten przypisany ju¿ zosta³ do gracza o UID: %d", ownuid);
-                    SendClientMessage(playerid, COLOR_YELLOW, str);
-
-                    Log(serverLog, ERROR, "[CAR.CONVERTER]: Owner mismatch for CarID [%d] is [%d]. Caller %s", carlist[i], ownuid, nick);
-                    continue;
-                }
-            }
-            model = dini_Int(dopojazdu1, "Model");
-            if(model < 400 || model > 611)
-            {
-                format(str, 128, "CAR.CONVERTER: Pojazd %d nie posiada modelu.", carlist[i]);
-                SendClientMessage(playerid, COLOR_YELLOW, str);
-
-                Log(serverLog, ERROR, "[CAR.CONVERTER]: Invalid model. CarID [%d] is [%d]. Caller %s", carlist[i], model, nick);
-                continue;
-            }
-            x = dini_Float(dopojazdu1, "Pozycja_X");
-            y = dini_Float(dopojazdu1, "Pozycja_Y");
-            z = dini_Float(dopojazdu1, "Pozycja_Z");
-            angle = dini_Float(dopojazdu1, "Rotacja");
-            color1 = dini_Int(dopojazdu1, "Kolor_1");
-            color2 = dini_Int(dopojazdu1, "Kolor_2");
-            bumper1 = dini_Int(dopojazdu1, "Zderzak_1");
-            bumper2 = dini_Int(dopojazdu1, "Zderzak_2");
-            neon = dini_Int(dopojazdu1, "Neon");
-            nitro = dini_Int(dopojazdu1, "Nitro");
-            hydraulika = dini_Int(dopojazdu1, "Hydraulika");
-            felgi = dini_Int(dopojazdu1, "Felgi");
-            spoiler = dini_Int(dopojazdu1, "Spojler");
-            malunek = dini_Int(dopojazdu1, "Malunek");
-            format(str, 512, "INSERT INTO `mru_cars` (`ownertype`, `owner`, `model`, `x`, `y`, `z`, `angle`, `color1`, `color2`, `nitro`, `hydraulika`, `felgi`, `malunek`, `spoiler`, `bumper1`, `bumper2`, `neon`, `oldid`) VALUES (%d, %d, %d, %.2f, %.2f, %.2f, %.1f, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)", CAR_OWNER_PLAYER, PlayerInfo[playerid][pUID], model, x, y, z, angle, color1, color2, nitro, hydraulika, felgi, malunek, spoiler, bumper1, bumper2, neon, carlist[i]);
-            if(!mysql_query(str))
-            {
-                format(str, 128, "CAR.CONVERTER: Pojazd %d nie móg³ zostaæ stworzony w bazie.", carlist[i]);
-                SendClientMessage(playerid, COLOR_YELLOW, str);
-
-                Log(serverLog, ERROR, "[CAR.CONVERTER]: Can't query CarID [%d]. Caller %s", carlist[i], nick);
-                continue;
-            }
-            new lUID = mysql_insert_id();
-
-            new bool:doadd=false;
-            new idx = Car_GetFromQueue();
-            if(idx == -1) idx = gCars, doadd=true;
-
-            CarData[idx][c_UID] = lUID;
-            CarData[idx][c_ID] = 0;
-            CarData[idx][c_Owner] = PlayerInfo[playerid][pUID];
-            CarData[idx][c_OwnerType] = CAR_OWNER_PLAYER;
-            CarData[idx][c_Model] = model;
-            CarData[idx][c_Pos][0] = x;
-            CarData[idx][c_Pos][1] = y;
-            CarData[idx][c_Pos][2] = z;
-            CarData[idx][c_Rot] = angle;
-            CarData[idx][c_HP] = 1000.0;
-            CarData[idx][c_Tires] = 0;
-            CarData[idx][c_Color][0] = color1;
-            CarData[idx][c_Color][1] = color2;
-            CarData[idx][c_Nitro] = nitro;
-            CarData[idx][c_bHydraulika] = hydraulika == 0 ? false : true;
-            CarData[idx][c_Felgi] = felgi;
-            CarData[idx][c_Malunek] = malunek;
-            CarData[idx][c_Spoiler] = spoiler;
-            CarData[idx][c_Bumper][0] = bumper1;
-            CarData[idx][c_Bumper][1] = bumper2;
-            CarData[idx][c_Keys] = 0;
-            CarData[idx][c_Neon] = neon;
-            CarData[idx][c_Rang] = 0;
-            CarData[idx][c_Int] = -1;
-            CarData[idx][c_VW] = -1;
-
-            if(doadd)
-            {
-                gCars++;
-            }
-
-            PlayerInfo[playerid][pCars][lUsed++] = idx;
-            dini_Remove(dopojazdu1);
-        }
-    }
-    PlayerInfo[playerid][pAuto1] = 0;
-    PlayerInfo[playerid][pAuto2] = 0;
-    PlayerInfo[playerid][pAuto3] = 0;
-    PlayerInfo[playerid][pAuto4] = 0;
-    PlayerInfo[playerid][pLodz] = 0;
-    PlayerInfo[playerid][pSamolot] = 0;
-    PlayerInfo[playerid][pGaraz] = 0;
-    return 1;
+    new Float:x,Float:y,Float:z,Float:speed,final_speed;
+    GetVehicleVelocity(carid,x,y,z);
+    speed = VectorSize(x, y, z) * 166.666666;
+    final_speed = floatround(speed,floatround_round);
+    return final_speed;
 }
 
+
 //-----------------<[ Timery: ]>--------------------
+/*
+
+*/
 //------------------<[ MySQL: ]>--------------------
 
 //end

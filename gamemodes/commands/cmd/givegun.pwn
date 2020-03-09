@@ -116,7 +116,7 @@ YCMD:givegun(playerid, params[], help)
 					{
 					    PlayerInfo[playa][pGun8] = gun;
 		            	PlayerInfo[playa][pAmmo8] = ammo;
-		            	PlayerInfo[playa][pGun12] = 1;
+		            	PlayerInfo[playa][pGun12] = 40;
 		            	PlayerInfo[playa][pAmmo12] = 1;
 						GivePlayerWeapon(playa, gun, ammo);
 						GivePlayerWeapon(playa, 40, 1);
@@ -146,7 +146,7 @@ YCMD:givegun(playerid, params[], help)
 					}
 					
 					//logi broñ
-					format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNick(playerid), gun, ammo, GetNick(playa));
+					format(string, sizeof(string), "Admin %s dal bron (ID:[%d], AMMO:[%d]) graczowi %s.", GetNickEx(playerid), gun, ammo, GetNick(playa));
 					SendCommandLogMessage(string);
 					Log(adminLog, INFO, "Admin %s da³ graczowi %s broñ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa), GetWeaponLogName(gun, ammo));
 				}

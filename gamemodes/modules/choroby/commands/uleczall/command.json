@@ -1,0 +1,13 @@
+{
+    "name": "uleczall",
+    "description": "Leczy wszystkich graczy.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "healall"
+    ],
+    "parameters": [],
+    "date": "07.02.2020"
+}

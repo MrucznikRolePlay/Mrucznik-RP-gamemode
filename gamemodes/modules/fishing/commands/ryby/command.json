@@ -1,0 +1,13 @@
+{
+    "name": "ryby",
+    "description": "Pokazuje posiadane ryby.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "fishes"
+    ],
+    "parameters": [],
+    "date": "03.03.2020"
+}

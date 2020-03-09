@@ -63,6 +63,12 @@ YCMD:wezdragi(playerid, params[], help)
 		    PlayerInfo[playerid][pDrugs] -= 2;
 		    //SetPlayerDrunkLevel(playerid, 8000);
 		    //SetPlayerWeather(playerid, -66);
+
+			//choroba
+			if(random(50) == 1)//2%
+			{
+				InfectPlayer(playerid, SCHIZOFRENIA);
+			}
 			
 			//System si³y
 			if(GetPVarInt(playerid, "ZjadlDragi") == 0)
@@ -100,22 +106,22 @@ YCMD:wezdragi(playerid, params[], help)
 				}
 			}
 		    
-		    
-		    if(STDPlayer[playerid]==1)
-			{
-			     STDPlayer[playerid] = 0;
-			     SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ chroy dziêki narkotykom !");
-			}
-			else if(STDPlayer[playerid]==2)
-			{
-			     STDPlayer[playerid] = 1;
-			     SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoja chroba zmala³a do Chlamydia dziêki narkotykom !");
-			}
-			else if(STDPlayer[playerid]==3)
-			{
-			     STDPlayer[playerid] = 2;
-			     SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoja chroboa zmala³a do Gonorrhea dziêki narkotykom !");
-			}
+		    //TODO: refactor
+		    // if(STDPlayer[playerid]==1)
+			// {
+			//      STDPlayer[playerid] = 0;
+			//      SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ chroy dziêki narkotykom !");
+			// }
+			// else if(STDPlayer[playerid]==2)
+			// {
+			//      STDPlayer[playerid] = 1;
+			//      SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoja chroba zmala³a do Chlamydia dziêki narkotykom !");
+			// }
+			// else if(STDPlayer[playerid]==3)
+			// {
+			//      STDPlayer[playerid] = 2;
+			//      SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoja chroboa zmala³a do Gonorrhea dziêki narkotykom !");
+			// }
 		}
 		else
 		{

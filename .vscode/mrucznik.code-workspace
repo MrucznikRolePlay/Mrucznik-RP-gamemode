@@ -8,6 +8,7 @@
 		"vzfiletemplates.userTemplatesFolders": [
 			"./.vscode/templates"
 		],
-		"uncrustify.configPath": "./.vscode/uncrustify.cfg"
+		"uncrustify.configPath": "./.vscode/uncrustify.cfg",
+		"files.autoGuessEncoding": false,
 	}
 }

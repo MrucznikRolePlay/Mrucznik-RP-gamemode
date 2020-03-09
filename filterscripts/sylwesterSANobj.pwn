@@ -1,0 +1,91 @@
+//obiekty SAN na sylwestra
+
+#include <a_samp>
+#include <streamer>
+
+#define OBJECTS_NUMBER 99
+new objects[OBJECTS_NUMBER];
+new idx = 0;
+
+public OnFilterScriptInit()
+{
+	CreateFSDynamicObject(994,1272.5000000,-1137.1000000,23.0000000,0.0000000,0.0000000,86.0000000); //object(lhouse_barrier2) (1)
+	CreateFSDynamicObject(994,1272.1000000,-1143.2000000,23.0000000,0.0000000,0.0000000,85.9950000); //object(lhouse_barrier2) (2)
+	CreateFSDynamicObject(994,1271.4000000,-1152.5000000,23.0000000,0.0000000,0.0000000,83.4950000); //object(lhouse_barrier2) (3)
+	CreateFSDynamicObject(994,1271.0000000,-1158.7000000,23.0000000,0.0000000,0.0000000,85.9950000); //object(lhouse_barrier2) (4)
+	CreateFSDynamicObject(996,1280.1000000,-1131.6000000,23.4000000,0.0000000,0.0000000,270.0000000); //object(lhouse_barrier1) (1)
+	CreateFSDynamicObject(996,1280.1000000,-1139.6000000,23.4000000,0.0000000,0.0000000,270.0000000); //object(lhouse_barrier1) (2)
+	CreateFSDynamicObject(996,1280.1000000,-1147.7000000,23.4000000,0.0000000,0.0000000,270.0000000); //object(lhouse_barrier1) (3)
+	CreateFSDynamicObject(996,1280.1000000,-1155.9000000,23.4000000,0.0000000,0.0000000,270.0000000); //object(lhouse_barrier1) (4)
+	CreateFSDynamicObject(996,1311.0000000,-1138.6000000,23.4000000,0.0000000,0.0000000,90.0000000); //object(lhouse_barrier1) (5)
+	CreateFSDynamicObject(996,1311.0000000,-1146.7000000,23.4000000,0.0000000,0.0000000,90.0000000); //object(lhouse_barrier1) (6)
+	CreateFSDynamicObject(996,1311.0000000,-1154.8000000,23.4000000,0.0000000,0.0000000,90.0000000); //object(lhouse_barrier1) (7)
+	CreateFSDynamicObject(1425,1330.5000000,-1144.8000000,23.1000000,0.0000000,0.0000000,91.2500000); //object(dyn_roadbarrier_3) (1)
+	CreateFSDynamicObject(3666,1272.7000000,-1144.1000000,23.2000000,0.0000000,0.0000000,0.0000000); //object(airuntest_las) (1)
+	CreateFSDynamicObject(3666,1272.7000000,-1145.5000000,23.2000000,0.0000000,0.0000000,0.0000000); //object(airuntest_las) (2)
+	CreateFSDynamicObject(974,1280.2000000,-1157.9000000,23.1000000,0.0000000,0.0000000,90.2500000); //object(tall_fence) (1)
+	CreateFSDynamicObject(974,1288.2000000,-1155.4000000,23.1000000,0.0000000,0.0000000,180.9970000); //object(tall_fence) (2)
+	CreateFSDynamicObject(974,1295.2000000,-1158.5000000,23.1000000,0.0000000,0.0000000,88.9940000); //object(tall_fence) (3)
+	CreateFSDynamicObject(2224,1282.0000000,-1160.0000000,23.0000000,0.0000000,0.0000000,88.0000000); //object(cj_sphere_tv) (1)
+	CreateFSDynamicObject(2232,1279.5000000,-1155.2000000,23.4000000,0.0000000,0.0000000,222.0000000); //object(med_speaker_4) (1)
+	CreateFSDynamicObject(2232,1278.9000000,-1135.2000000,23.4000000,0.0000000,0.0000000,320.0000000); //object(med_speaker_4) (2)
+	CreateFSDynamicObject(2333,1284.8000000,-1158.9000000,23.0000000,0.0000000,0.0000000,180.0000000); //object(cj_bed_furn_1b) (1)
+	CreateFSDynamicObject(2632,1283.7000000,-1160.4000000,23.0000000,0.0000000,0.0000000,0.0000000); //object(gym_mat02) (1)
+	CreateFSDynamicObject(2632,1287.3000000,-1156.6000000,22.8000000,0.0000000,0.0000000,0.0000000); //object(gym_mat02) (2)
+	CreateFSDynamicObject(14391,1308.2000000,-1152.7000000,23.6000000,0.0000000,0.0000000,180.5000000); //object(dr_gsnew07) (1)
+	CreateFSDynamicObject(1671,1306.6000000,-1151.1000000,23.3000000,0.0000000,0.0000000,14.0000000); //object(swivelchair_a) (1)
+	CreateFSDynamicObject(1726,1286.3000000,-1156.1000000,22.8000000,0.0000000,0.0000000,0.0000000); //object(mrk_seating2) (1)
+	CreateFSDynamicObject(1726,1280.9000000,-1158.0000000,22.8000000,0.0000000,0.0000000,90.0000000); //object(mrk_seating2) (2)
+	CreateFSDynamicObject(2632,1281.3000000,-1157.2000000,22.8000000,0.0000000,0.0000000,90.2500000); //object(gym_mat02) (3)
+	CreateFSDynamicObject(1670,1284.6000000,-1159.7000000,24.0000000,0.0000000,0.0000000,0.0000000); //object(propcollecttable) (1)
+	CreateFSDynamicObject(991,1311.4000000,-1154.7000000,23.8000000,0.0000000,0.0000000,269.7500000); //object(bar_barriergate1) (1)
+	CreateFSDynamicObject(1425,1264.2000000,-1134.3000000,23.3000000,0.0000000,0.0000000,210.0000000); //object(dyn_roadbarrier_3) (2)
+	CreateFSDynamicObject(3863,1267.6000000,-1156.5000000,24.0000000,0.0000000,0.0000000,180.0000000); //object(marketstall03_sfxrf) (1)
+	CreateFSDynamicObject(3860,1263.3000000,-1156.5000000,24.0000000,0.0000000,0.0000000,179.5000000); //object(marketstall04_sfxrf) (1)
+	CreateFSDynamicObject(2453,1268.6000000,-1155.7000000,24.0000000,0.0000000,0.0000000,0.0000000); //object(cj_pizza_dispf) (1)
+	CreateFSDynamicObject(2814,1267.8000000,-1155.7000000,23.6000000,0.0000000,0.0000000,0.0000000); //object(gb_takeaway01) (1)
+	CreateFSDynamicObject(2425,1264.2000000,-1155.7000000,23.7000000,0.0000000,0.0000000,180.0000000); //object(cj_ff_juice) (1)
+	CreateFSDynamicObject(2429,1264.4000000,-1155.9000000,23.7000000,0.0000000,0.0000000,269.7500000); //object(cj_ff_cup_disp) (1)
+	CreateFSDynamicObject(2222,1266.7000000,-1155.7000000,23.7000000,0.0000000,0.0000000,274.0000000); //object(rustyhigh) (1)
+	CreateFSDynamicObject(2683,1263.0000000,-1155.7000000,23.8000000,0.0000000,0.0000000,298.0000000); //object(pizza_s_p) (1)
+	CreateFSDynamicObject(2683,1262.5000000,-1155.7000000,23.8000000,0.0000000,0.0000000,247.9990000); //object(pizza_s_p) (2)
+	CreateFSDynamicObject(3035,1259.6000000,-1157.8000000,23.6000000,0.0000000,0.0000000,0.0000000); //object(tmp_bin) (1)
+	CreateFSDynamicObject(932,1275.4000000,-1139.3000000,22.7000000,0.0000000,0.0000000,56.0000000); //object(h_wheelchair) (1)
+	CreateFSDynamicObject(1571,1267.4000000,-1147.5000000,24.0000000,0.0000000,0.0000000,0.0000000); //object(cj_noodle_1) (1)
+	CreateFSDynamicObject(1432,1268.9000000,-1152.0000000,22.7000000,0.0000000,0.0000000,0.0000000); //object(dyn_table_2) (1)
+	CreateFSDynamicObject(1432,1264.5000000,-1152.0000000,22.7000000,0.0000000,0.0000000,0.0000000); //object(dyn_table_2) (2)
+	CreateFSDynamicObject(3437,1286.2000000,-1131.3000000,27.8000000,0.0000000,0.0000000,358.4360000); //object(ballypllr01_lvs) (1)
+	CreateFSDynamicObject(3437,1298.0000000,-1131.5000000,27.8000000,0.0000000,0.0000000,3.6820000); //object(ballypllr01_lvs) (2)
+	CreateFSDynamicObject(994,1261.5000000,-1154.4000000,22.7000000,0.0000000,0.0000000,89.2500000); //object(lhouse_barrier2) (5)
+	CreateFSDynamicObject(3666,1270.8000000,-1147.7000000,23.2000000,0.0000000,0.0000000,0.0000000); //object(airuntest_las) (3)
+	CreateFSDynamicObject(997,1262.0000000,-1147.8000000,22.7000000,0.0000000,0.0000000,0.0000000); //object(lhouse_barrier3) (1)
+	CreateFSDynamicObject(2232,1270.8000000,-1155.0000000,23.3000000,0.0000000,0.0000000,221.9950000); //object(med_speaker_4) (4)
+	CreateFSDynamicObject(1337,1262.8000000,-1148.4000000,23.3000000,0.0000000,0.0000000,0.0000000); //object(binnt07_la) (7)
+	CreateFSDynamicObject(2606,1308.8000000,-1152.5000000,24.6000000,0.0000000,0.0000000,270.2450000); //object(cj_police_counter2) (2)
+	CreateFSDynamicObject(11292,1307.1000000,-1153.0000000,24.0000000,0.0000000,0.0000000,270.0000000); //object(gasstatiohut) (1)
+	CreateFSDynamicObject(1671,1306.4000000,-1153.5000000,23.3000000,0.0000000,0.0000000,119.2470000); //object(swivelchair_a) (2)
+	CreateFSDynamicObject(2373,1291.8000000,-1161.9000000,23.0000000,0.0000000,0.0000000,177.5000000); //object(clothes_rail3) (1)
+	CreateFSDynamicObject(2374,1292.2000000,-1161.2000000,24.3000000,0.0000000,0.0000000,196.7500000); //object(cj_tshirt) (2)
+	CreateFSDynamicObject(2389,1291.0000000,-1161.2000000,24.4000000,0.0000000,0.0000000,143.0000000); //object(cj_4_sweaters) (1)
+	CreateFSDynamicObject(2392,1290.1000000,-1161.3000000,23.6000000,0.0000000,0.0000000,269.0000000); //object(cj_8_jeans_med) (1)
+	CreateFSDynamicObject(2698,1293.4000000,-1159.9000000,23.9000000,0.0000000,0.0000000,0.0000000); //object(cj_duds_rail01) (1)
+	CreateFSDynamicObject(2597,1291.3000000,-1156.4000000,23.7000000,0.0000000,0.0000000,0.0000000); //object(dildo_rack1) (1)
+	CreateFSDynamicObject(2541,1286.0000000,-1158.7000000,22.3000000,0.0000000,0.0000000,222.5000000); //object(cj_ss_3_m) (1)
+	CreateFSDynamicObject(1253,1305.5000000,-1149.6000000,24.5000000,0.0000000,0.0000000,90.2500000); //object(camerapickup) (1)
+	CreateFSDynamicObject(2855,1284.0000000,-1159.8000000,24.0000000,0.0000000,0.0000000,0.0000000); //object(gb_bedmags05) (1)
+	CreateFSDynamicObject(354,1259.6000000,-1159.3000000,41.0000000,0.0000000,0.0000000,0.0000000); //object(1)
+	CreateFSDynamicObject(354,1272.7000000,-1131.0000000,51.9000000,0.0000000,0.0000000,0.0000000); //object(2)
+	return 1;
+}
+
+
+public OnPlayerConnect(playerid)
+{
+	return 1;
+}
+
+CreateFSDynamicObject(modelid, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, worldid = -1, interiorid = -1, playerid = -1, Float:streamdistance = STREAMER_OBJECT_SD, Float:drawdistance = STREAMER_OBJECT_DD, areaid = -1, priority = 0)
+{
+	objects[idx] = CreateDynamicObject(modelid, x, y, z, rx, ry, rz, worldid, interiorid, playerid, streamdistance, drawdistance, areaid, priority);
+	return objects[idx++];
+}

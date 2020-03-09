@@ -42,7 +42,7 @@ YCMD:tod(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
             SetWorldTime(hour);
             ServerTime = hour;
@@ -50,7 +50,7 @@ YCMD:tod(playerid, params[], help)
 			format(string, sizeof(string), "Czas zmieniony na %d Godzine.", hour);
 			BroadCast(COLOR_GRAD1, string);
 
-            format(string, sizeof(string), "CMD_Info: /tod u¿yte przez %s [%d]", GetNick(playerid), playerid);
+            format(string, sizeof(string), "CMD_Info: /tod u¿yte przez %s [%d]", GetNickEx(playerid), playerid);
             SendCommandLogMessage(string);
         	Log(adminLog, INFO, "Admin %s u¿y³ /tod z wartoœci¹ %d", GetPlayerLogName(playerid), hour);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)

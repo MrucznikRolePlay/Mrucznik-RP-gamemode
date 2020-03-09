@@ -55,8 +55,8 @@ YCMD:flip(playerid, params[], help)
 	  		SetVehiclePos(VehicleID, X, Y, Z);
 	  		SetVehicleZAngle(VehicleID, 0);
 
-            _MruAdmin(playerid, sprintf("Postawi³eœ na ko³ach %s [ID: %d]", GetNick(giveplayerid, true), giveplayerid));
-            if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Admin %s [ID: %d] postawi³ Ciê na ko³ach", GetNick(playerid, true), playerid));
+            _MruAdmin(playerid, sprintf("Postawi³eœ na ko³ach %s [ID: %d]", GetNick(giveplayerid), giveplayerid));
+            if(giveplayerid != playerid) _MruAdmin(giveplayerid, sprintf("Admin %s [ID: %d] postawi³ Ciê na ko³ach", GetNickEx(playerid), playerid));
 		}
 	}
 	return 1;

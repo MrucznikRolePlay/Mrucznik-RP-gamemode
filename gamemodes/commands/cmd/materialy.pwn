@@ -117,7 +117,7 @@ YCMD:materialy(playerid, params[], help)
 			            GetPlayerName(playerid, sendername, sizeof(sendername));
 					    format(string, sizeof(string), "AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport", sendername);
                         SendPunishMessage(string, playerid);
-						Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: teleport do matsów");
+						Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: teleport do matsów", GetPlayerLogName(playerid));
 			        	KickEx(playerid);
 			        	return 1;
 		        	}

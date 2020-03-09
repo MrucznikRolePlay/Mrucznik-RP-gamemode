@@ -32,7 +32,6 @@ YCMD:makeircadmin(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -51,10 +50,9 @@ YCMD:makeircadmin(playerid, params[], help)
 		        if(giveplayerid != INVALID_PLAYER_ID)
 		        {
 					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Da³eœ %s admina kana³u IRC nr %d.", giveplayer, channel);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "* %s Mianowa³ ciê administratorem kana³u IRC nr %d.", sendername, channel);
+					format(string, sizeof(string), "* %s Mianowa³ ciê administratorem kana³u IRC nr %d.", GetNickEx(playerid), channel);
 					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "%s", giveplayer);
 					switch(channel)

@@ -75,16 +75,16 @@ YCMD:sprawdzneon(playerid, params[], help)
             {
                 kolorneonu = "ró¿owe";
             }
-            format(string, sizeof(string), "Mechanik %s: Pojazd %s posiada %s neony", GetNick(playerid, true), VehicleNames[GetVehicleModel(veh_id)-400], kolorneonu);
+            format(string, sizeof(string), "Mechanik %s: Pojazd %s posiada %s neony", GetNick(playerid), VehicleNames[GetVehicleModel(veh_id)-400], kolorneonu);
         }   
         else
         {
-            format(string, sizeof(string), "Mechanik %s: Pojazd %s nie posiada neonów", GetNick(playerid, true), VehicleNames[GetVehicleModel(veh_id)-400]);
+            format(string, sizeof(string), "Mechanik %s: Pojazd %s nie posiada neonów", GetNick(playerid), VehicleNames[GetVehicleModel(veh_id)-400]);
         }
         //SendClientMessage(pid, COLOR_GRAD1, string);
         //if(playerid != pid) SendClientMessage(playerid, COLOR_GRAD1, string);
         ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
-        format(string, sizeof(string), "Pomog³eœ %s w sprawdzeniu neonów! Skill +1", GetNick(pid, true));
+        format(string, sizeof(string), "Pomog³eœ %s w sprawdzeniu neonów! Skill +1", GetNick(pid));
         SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         ZabierzKase(playerid, 10000);
         PlayerInfo[playerid][pMechSkill] ++;

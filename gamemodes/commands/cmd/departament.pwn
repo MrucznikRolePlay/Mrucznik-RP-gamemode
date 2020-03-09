@@ -43,6 +43,11 @@ YCMD:departament(playerid, params[], help)
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: (/d)epartament [tekst]");
                 return 1;
             }
+            if(PlayerInfo[playerid][pMuted] == 1)
+            {
+                sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
+                return 1;
+            }
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{
 				sendErrorMessage(playerid, "Dobry admin nie powinien robiæ OOC w IC! Pisz poprzez /depo [treœæ]");
@@ -52,7 +57,7 @@ YCMD:departament(playerid, params[], help)
 			
             if(0 < member <= 4 || member == FRAC_BOR)// || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
             {
-                format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid, true), params);
+                format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
                 SendTeamMessage(4, COLOR_ALLDEPT, string);
                 SendTeamMessage(3, COLOR_ALLDEPT, string);
                 SendTeamMessage(2, COLOR_ALLDEPT, string);

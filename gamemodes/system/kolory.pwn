@@ -9,7 +9,7 @@
 #define COLOR_GREY 0xAFAFAFAA
 #define COLOR_GREEN 0x33AA33AA
 #define COLOR_RED 0xAA3333AA
-#define 				COLOR3 					0xff49A350
+#define COLOR3 0xff49A350
 #define COLOR_LIGHTRED 0xFF6347AA
 #define COLOR_LIGHTBLUE 0x33CCFFAA
 #define COLOR_LIGHTGREEN 0x9ACD32AA
@@ -70,69 +70,68 @@
 #define COLOR_SPEC 0xFFFFFF00//0xBFC0C200
 #define COLOR_LFBI 0x483D8B00
 
-
 //nowe kolory:
-    #define KOLOR_ADMIN 0xFF6A6AFF
-    #define KOLOR_MAPA 0x88FFFFFF
-    #define KOLOR_AC 0xFF80C0FF
+#define KOLOR_ADMIN 0xFF6A6AFF
+#define KOLOR_MAPA 0x88FFFFFF
+#define KOLOR_AC 0xFF80C0FF
 
-    #define KOLOR_JA 0xB871FFFF
-	#define KOLOR_DO 0x9797FFFF
-	#define JA 					"{B871FF}"
-	#define DO 					"{9797FF}"
-	#define ME 					"{FFB76F}"
+#define KOLOR_JA 0xB871FFFF
+#define KOLOR_DO 0x9797FFFF
+#define JA 					"{B871FF}"
+#define DO 					"{9797FF}"
+#define ME 					"{FFB76F}"
 
-	#define KOLOR_OOC 0xE2E2E2FF
-	#define KOLOR_IC 0xFFFFC6FF
+#define KOLOR_OOC 0xE2E2E2FF
+#define KOLOR_IC 0xFFFFC6FF
 
-    #define KOLOR_NIEWIDZIALNY 0xFFFFFF00
-	#define KOLOR_BIALY 0xFFFFFFFF
-	#define KOLOR_CZARNY 0x000000FF
-	#define KOLOR_ZOLTY 0xFFFF00FF
-	#define KOLOR_POMARANCZOWY 0xFF8040FF
-	#define KOLOR_CZERWONY 0xFF2F2FFF
-	#define KOLOR_ROZOWY 0xFF80FFFF
-	#define KOLOR_NIEBIESKI 0x2B95FFFF
-	#define KOLOR_BRAZOWY 0x9D4F4FFF
-	#define KOLOR_ZIELONY 0x80FF00FF
-	#define KOLOR_JZIELONY 0xB7FF6FFF
-	#define KOLOR_TURKUSOWY 0x00FFFFFF
-	#define KOLOR_SZARY 0xC0C0C0FF
-	#define KOLOR_FILOETOWY 0x800040FF
-	#define KOLOR_BEZOWY 0xFFFFA6FF
-	#define KOLOR_BORDOWY 0x800000FF
-	#define COLOR_GOLD 0xFCAD43FF
-	#define ADMIN 				"{FF6A6A}"
-	#define MAPA 				"{88FFFF}"
- 	#define AC 					"{FF80C0}"
- 	#define BIALY 				"{FFFFFF}"
-	#define CZARNY 				"{000000}"
-	#define ZOLTY 				"{FFFF00}"
-	#define POMARANCZOWY 		"{FF7F50}"
-	#define CZERWONY 			"{FF0000}"
-	#define ROZOWY 				"{FF1493}"
-	#define NIEBIESKI 			"{4169E1}"
-	#define BRAZOWY 			"{A0522D}"
-	#define ZIELONY 			"{80FF00}"
-	#define TURKUSOWY 			"{00FFFF}"
-	#define SZARY 				"{C0C0C0}"
-	#define FILOETOWY 			"{BA55D3}"
-	#define BEZOWY 				"{FFDEAD}"
-	#define BORDOWY 			"{B22222}"
-	#define KOLOR_CZERWONYA 	"{FF5555}"
-	#define KOLOR_ZIELONYA 		"{33AA33}"
-	#define COL_WHITE			"{FFFFFF}"
-	#define COL_BLACK			"{000000}"
-	#define COL_GREY			"{C3C3C3}"
-	#define COL_GREY2			"{AAAAAA}"
-	#define COL_GREEN 			"{37AC45}"
-	#define COL_RED				"{AC3737}"
-	#define COL_YELLOW			"{F3EB34}"
-	#define COL_ORANGE			"{FA9C1A}"
-	#define COL_BLUE			"{0080D0}"
-	#define COL_PINK			"{FF60D0}"
-	#define COL_LIGHTBLUE		"{00C0FF}"
-	#define COL_LGREEN			"{747b41}"
+#define KOLOR_NIEWIDZIALNY 0xFFFFFF00
+#define KOLOR_BIALY 0xFFFFFFFF
+#define KOLOR_CZARNY 0x000000FF
+#define KOLOR_ZOLTY 0xFFFF00FF
+#define KOLOR_POMARANCZOWY 0xFF8040FF
+#define KOLOR_CZERWONY 0xFF2F2FFF
+#define KOLOR_ROZOWY 0xFF80FFFF
+#define KOLOR_NIEBIESKI 0x2B95FFFF
+#define KOLOR_BRAZOWY 0x9D4F4FFF
+#define KOLOR_ZIELONY 0x80FF00FF
+#define KOLOR_JZIELONY 0xB7FF6FFF
+#define KOLOR_TURKUSOWY 0x00FFFFFF
+#define KOLOR_SZARY 0xC0C0C0FF
+#define KOLOR_FILOETOWY 0x800040FF
+#define KOLOR_BEZOWY 0xFFFFA6FF
+#define KOLOR_BORDOWY 0x800000FF
+#define COLOR_GOLD 0xFCAD43FF
+#define ADMIN 				"{FF6A6A}"
+#define MAPA 				"{88FFFF}"
+#define AC 					"{FF80C0}"
+#define BIALY 				"{FFFFFF}"
+#define CZARNY 				"{000000}"
+#define ZOLTY 				"{FFFF00}"
+#define POMARANCZOWY 		"{FF7F50}"
+#define CZERWONY 			"{FF0000}"
+#define ROZOWY 				"{FF1493}"
+#define NIEBIESKI 			"{4169E1}"
+#define BRAZOWY 			"{A0522D}"
+#define ZIELONY 			"{80FF00}"
+#define TURKUSOWY 			"{00FFFF}"
+#define SZARY 				"{C0C0C0}"
+#define FILOETOWY 			"{BA55D3}"
+#define BEZOWY 				"{FFDEAD}"
+#define BORDOWY 			"{B22222}"
+#define KOLOR_CZERWONYA 	"{FF5555}"
+#define KOLOR_ZIELONYA 		"{33AA33}"
+#define COL_WHITE			"{FFFFFF}"
+#define COL_BLACK			"{000000}"
+#define COL_GREY			"{C3C3C3}"
+#define COL_GREY2			"{AAAAAA}"
+#define COL_GREEN 			"{37AC45}"
+#define COL_RED				"{AC3737}"
+#define COL_YELLOW			"{F3EB34}"
+#define COL_ORANGE			"{FA9C1A}"
+#define COL_BLUE			"{0080D0}"
+#define COL_PINK			"{FF60D0}"
+#define COL_LIGHTBLUE		"{00C0FF}"
+#define COL_LGREEN			"{747b41}"
 	
 //Podstawowe kolory:
 #define INCOLOR_WHITE		"{FFFFFF}"

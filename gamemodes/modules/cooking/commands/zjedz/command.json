@@ -1,0 +1,11 @@
+{
+    "name": "zjedz",
+    "description": "Zjedz ugotowan¹ potrawê.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": ["eat", "jedz"],
+    "parameters": [],
+    "date": "03.03.2020"
+}

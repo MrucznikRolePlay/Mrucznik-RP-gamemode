@@ -40,8 +40,9 @@ YCMD:clearwlall(playerid, params[], help)
 			{
 				PoziomPoszukiwania[i] = 0;
 				PlayerInfo[i][pWL] = 0;
+				SetPlayerWantedLevel(i, 0);
 			}
-			format(string, sizeof(string), "Admin %s wyczyœci³ wszystkim wanted level", GetNick(playerid));
+			format(string, sizeof(string), "Admin %s wyczyœci³ wszystkim wanted level", GetNickEx(playerid));
 			SendClientMessageToAll(COLOR_LIGHTBLUE, string);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{

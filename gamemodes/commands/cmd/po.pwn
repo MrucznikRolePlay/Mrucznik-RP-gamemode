@@ -36,7 +36,7 @@ YCMD:po(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if( (IsABOR(playerid) || IsACop(playerid)) && OnDuty[playerid] == 1 || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
+        if( (IsABOR(playerid) || IsAPolicja(playerid)) && OnDuty[playerid] == 1 || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
         {
     		if (PlayerInfo[playerid][pMember] == 2 && PlayerInfo[playerid][pRank] == 3 && PlayerInfo[playerid][pRank] == 4)
     		{
@@ -53,7 +53,7 @@ YCMD:po(playerid, params[], help)
     		{
     			if(giveplayerid != INVALID_PLAYER_ID)
     			{
-    				if (!(IsACop(giveplayerid) && OnDuty[giveplayerid] == 1))
+    				if (!(IsAPolicja(giveplayerid) && OnDuty[giveplayerid] == 1))
     				{
     					if(spamwl[giveplayerid] == 0)
     					{
@@ -63,11 +63,6 @@ YCMD:po(playerid, params[], help)
 							{
 								PoziomPoszukiwania[giveplayerid]+=2;
 							}
-    						else if(PoziomPoszukiwania[giveplayerid] >= 10)
-    						{
-    							sendTipMessage(playerid, "Nie mo¿esz daæ ju¿ wiêcej WL");
-    							return 1;
-    						}
     						else
     						{
                                 if(IsABOR(playerid) && PoziomPoszukiwania[giveplayerid] > 1) return sendTipMessage(playerid, "Cz³onek GSA mo¿e nadaæ tylko 1 WL."); //14.06.2014
@@ -79,6 +74,11 @@ YCMD:po(playerid, params[], help)
     						SetPlayerCriminal(giveplayerid,playerid, result);
     						format(string, sizeof(string), "%s ma teraz %d WL. Jest poszukiwany za: %s", giveplayer, PoziomPoszukiwania[giveplayerid], result);
     						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+							
+							if(IsReasonAPursuitReason(result))
+							{
+								PursuitMode(playerid, giveplayerid);
+							}
     						return 1;
     					}
     					else

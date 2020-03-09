@@ -34,6 +34,7 @@ YCMD:gotoin(playerid, params[], help)
     {
 		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
+			SetPlayerInterior(playerid,1);
 			if (GetPlayerState(playerid) == 2)
 			{
 				new tmpcar = GetPlayerVehicleID(playerid);
@@ -41,10 +42,9 @@ YCMD:gotoin(playerid, params[], help)
 			}
 			else
 			{
-				SetPlayerPosEx(playerid, 1416.107000,0.268620,1000.926000);
+				SetPlayerPos(playerid, 1416.107000,0.268620,1000.926000);
 			}
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
-			SetPlayerInterior(playerid,1);
 		}
 		else
 		{

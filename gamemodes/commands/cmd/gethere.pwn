@@ -72,7 +72,7 @@ YCMD:gethere(playerid, params[], help)
 					}
 					else
 					{
-						SetPlayerPosEx(plo,plocx,plocy+2, plocz);
+						SetPlayerPos(plo,plocx,plocy+2, plocz);
 					}
                     SetPlayerInterior(plo, GetPlayerInterior(playerid));
 					SetPlayerVirtualWorld(plo, GetPlayerVirtualWorld(playerid));

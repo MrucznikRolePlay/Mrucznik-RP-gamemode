@@ -1,0 +1,22 @@
+{
+    "name": "maseczka",
+    "description": "Sprzedaje graczowi maseczkê chroni¹c¹ przed chorobami.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Mrucznik",
+    "aliases": ["dajmaseczke", "sprzedajmaseczke"],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "price",
+            "description": "cena"
+        }
+    ],
+    "date": "1.03.2020"
+}

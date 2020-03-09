@@ -47,13 +47,17 @@ YCMD:dzwon(playerid, params[], help)
 		sendErrorMessage(playerid, "Nie posiadasz telefonu !");
 		return 1;
 	}
+	if(Kajdanki_JestemSkuty[playerid])
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas bycia skutym!");
+		return 1;
+	}
 	if(PlayerInfo[playerid][pJailed] != 0)
 	{
 		sendErrorMessage(playerid, "Nie posiadasz telefonu w wiêzieniu!"); 
 		return 1;
 	}
 	new numerTelefonuOdbiorcy;
-	new reciverid;
 	if( sscanf(params, "d", numerTelefonuOdbiorcy))
 	{
 		sendTipMessage(playerid, "U¿yj /dzwon [numer telefonu]");
@@ -77,23 +81,26 @@ YCMD:dzwon(playerid, params[], help)
 		sendErrorMessage(playerid, "Dzwonisz ju¿ do kogoœ.");
 		return 1;
 	}
-	if(GetPlayerAdminDutyStatus(reciverid) == 1)
-	{
-		sendErrorMessage(playerid, "Osoba do której próbujesz zadzwoniæ jest nieosi¹galna!"); 
-		return 1;
-	}
+
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas s³u¿by administratora!"); 
 		return 1;
 	}
 	
+	new reciverid;
 	if(numerTelefonuOdbiorcy != 911)
 	{
 		reciverid = FindPlayerByNumber(numerTelefonuOdbiorcy);
 		if(reciverid == INVALID_PLAYER_ID)
 		{
 			sendErrorMessage(playerid, "Gracz o takim numerze jest offline.");
+			return 1;
+		}
+
+		if(GetPlayerAdminDutyStatus(reciverid) == 1)
+		{
+			sendErrorMessage(playerid, "Osoba do której próbujesz zadzwoniæ jest nieosi¹galna!"); 
 			return 1;
 		}
 		

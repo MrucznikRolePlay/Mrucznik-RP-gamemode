@@ -90,8 +90,8 @@ YCMD:naucz(playerid, params[], help)
                                     SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem.");
                                     SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê.");
                                     SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-                                    SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                                    SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                    SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+                                    SetPlayerPos(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
                                     GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
                                     //if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
 									/*if(BoxDelay < 1){ BoxDelay = 20; }
@@ -160,8 +160,8 @@ YCMD:naucz(playerid, params[], help)
                                         SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
                                         SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
                                         SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-                                        SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                                        SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                        SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+                                        SetPlayerPos(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
                                         TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
                                         GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
                                         if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);
@@ -224,8 +224,8 @@ YCMD:naucz(playerid, params[], help)
                                         SendClientMessage(playa, COLOR_PANICRED, "Aby przyzwyczaiæ siê do nowego stylu musisz stoczyæ walkê z bokserem");
                                         SendClientMessage(playerid, COLOR_PANICRED, "Aby przyzwyczaiæ ucznia do nowego stylu musisz stoczyæ z nim walkê");
                                         SetPlayerInterior(playerid, 5); SetPlayerInterior(playa, 5);
-                                        SetPlayerPosEx(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                                        SetPlayerPosEx(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
+                                        SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+                                        SetPlayerPos(playa, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(playa, 313.1165);
                                         TogglePlayerControllable(playerid, 0); TogglePlayerControllable(playa, 0);
                                         GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(playa, "~r~Czekaj", 3000, 1);
                                         if(BoxOffer[playerid] == 999) return GameTextForPlayer(playa, "~r~Brak oferty", 3000, 1);

@@ -22,9 +22,17 @@
 /*
 	System organizacji przestêpczych.
 */
-
+#include <YSI\y_hooks>
 //
 
 //-----------------<[ Callbacki: ]>-----------------
-
+hook OnPlayerDisconnect(playerid, reason)
+{
+    new var[128];
+    if(SektaUwieziony[playerid] == 1)
+    {
+        format(var, sizeof(var), "[INFO]%s opuœci³ serwer podczas pobytu w celi.", GetNick(playerid));
+        SendNewFamilyMessage(FAMILY_SEKTA, COLOR_RED, var);
+    }
+}
 //end

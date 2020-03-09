@@ -30,13 +30,13 @@
 
 YCMD:spec(playerid, params[], help)
 {
-	new string[128];
+	new string[144];
 	new sendername[MAX_PLAYER_NAME+1];
 	new giveplayer[MAX_PLAYER_NAME+1];
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 3)
+        if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 3)
         {
             GetPlayerName(playerid, sendername, sizeof(sendername));
             new pid;
@@ -72,7 +72,25 @@ YCMD:spec(playerid, params[], help)
 			new cash =  GetPlayerMoney(pid);
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
-			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s | AJ/Jail - %s",giveplayer,pid,cash,PlayerInfo[pid][pLevel],(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),(PlayerInfo[pid][pJailTime] > 0) ? ("Tak") : ("Nie"));
+			new specIP[32], iptext[64], jailWiadomosc[64];
+			format(jailWiadomosc, sizeof(jailWiadomosc), " | Jail/AJ - %ds ", PlayerInfo[pid][pJailTime]);
+			GetPlayerIp(pid, specIP, sizeof(specIP));
+			if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+			{
+				format(iptext, sizeof(iptext)," | IP - %s", specIP);
+			} 
+			format(string, sizeof(string), "Podglad: %s [%d] $%d | Lvl: %d | Prawko - %s%s| VWorld - %d | Int - %d%s",
+				giveplayer,
+				pid,
+				cash,
+				PlayerInfo[pid][pLevel],
+				(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),
+				(PlayerInfo[pid][pJailTime] > 0) ? (jailWiadomosc) : (" "), 
+				GetPlayerVirtualWorld(pid), 
+				GetPlayerInterior(pid), 
+				(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid)) ? iptext : ""
+			);
+				
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);
@@ -88,7 +106,7 @@ YCMD:spec(playerid, params[], help)
 					return 1;
 				}
 				format(string, sizeof(string), "[CMD_USE_WARNING] Admin %s [%d] podgl¹da  %s [%d]", 
-				GetNick(playerid), 
+				GetNickEx(playerid), 
 				playerid,
 				GetNick(pid),
 				pid); 

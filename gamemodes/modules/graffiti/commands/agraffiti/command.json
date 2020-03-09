@@ -1,0 +1,26 @@
+{
+    "name": "agraffiti",
+    "description": "Komenda administracyjna graffiti.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "Sanda³",
+    "aliases": [
+        "agrafiti"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "36",
+            "name": "opcja",
+            "description": "Sprawdz, Reload, Goto, Lista"
+        },
+        {
+            "type": "integer",
+            "name": "id",
+            "description": "GOTO->ID | Lista->ID",
+            "defaultValue": "-1"
+        }
+    ],
+    "date": "13.02.2020"
+}

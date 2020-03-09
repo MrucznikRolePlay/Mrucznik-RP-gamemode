@@ -34,7 +34,7 @@ YCMD:edytujupr(playerid, params[], help)
     new id;
     if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(PERM) - Podaj Nick lub ID gracza.");
     new str[512];
-    format(str, sizeof(str), "\t\tUPRAWNIENIA %s\n", GetNick(id, true));
+    format(str, sizeof(str), "\t\tUPRAWNIENIA %s\n", GetNickEx(id));
     if(Uprawnienia(id, ACCESS_PANEL)) strcat(str, "{00FF00}+{FFFFFF} Panel administracyjny\n");
     else strcat(str, "{FF0000}-{FFFFFF} Panel administracyjny\n");
     if(Uprawnienia(id, ACCESS_KARY)) strcat(str, "{00FF00}+{FFFFFF} Panel kar\n");
@@ -64,6 +64,8 @@ YCMD:edytujupr(playerid, params[], help)
     else strcat(str, "{FF0000}-{FFFFFF} Edycja rang\n");
     if(Uprawnienia(id, ACCESS_EDITPERM)) strcat(str, "{00FF00}+{FFFFFF} Edycja uprawnieñ\n");
     else strcat(str, "{FF0000}-{FFFFFF} Edycja uprawnieñ\n");
+    if(Uprawnienia(id, ACCESS_SKRYPTER)) strcat(str, "{00FF00}+{FFFFFF} Skrypter\n");
+    else strcat(str, "{FF0000}-{FFFFFF} Skrypter\n");
     if(Uprawnienia(id, ACCESS_OWNER)) strcat(str, "{00FF00}OWNER RIGHT'S");
     valstr(params, id);
     SetPVarString(playerid, "perm-id", params);

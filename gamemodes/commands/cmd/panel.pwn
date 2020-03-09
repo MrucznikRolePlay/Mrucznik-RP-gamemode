@@ -64,7 +64,7 @@ YCMD:panel(playerid, params[], help)
                 return 1;
             }
 
-            format(str, sizeof(str), "ADM: %s - odblokowano nick: %s", GetNick(playerid), var);
+            format(str, sizeof(str), "ADM: %s - odblokowano nick: %s", GetNickEx(playerid), var);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
             Log(punishmentLog, INFO, "Admin %s odbanowa³ %s", GetPlayerLogName(playerid), var);
             return 1;
@@ -98,7 +98,7 @@ YCMD:panel(playerid, params[], help)
                 return 1;
             }
 
-            format(str, sizeof(str), "ADM: %s - odblokowano IP: %s", GetNick(playerid), var);
+            format(str, sizeof(str), "ADM: %s - odblokowano IP: %s", GetNickEx(playerid), var);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
             Log(punishmentLog, INFO, "Admin %s oblokowa³ ip %s", GetPlayerLogName(playerid), var);
             return 1;
@@ -122,7 +122,7 @@ YCMD:panel(playerid, params[], help)
             }
             MruMySQL_BanujOffline(var, powod, playerid);
 
-            format(str, sizeof(str), "ADM: %s - zablokowano nick: %s powód: %s", GetNick(playerid), var, powod);
+            format(str, sizeof(str), "ADM: %s - zablokowano nick: %s powód: %s", GetNickEx(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
             Log(punishmentLog, INFO, "Admin %s ukara³ offline %s kar¹ bana, powód: %s", 
                 GetPlayerLogName(playerid),
@@ -155,7 +155,7 @@ YCMD:panel(playerid, params[], help)
             }
             MruMySQL_BanujOffline("Brak", powod, playerid, var);
 
-            format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNick(playerid), var, powod);
+            format(str, sizeof(str), "ADM: %s - zablokowano IP: %s powód: %s", GetNickEx(playerid), var, powod);
             SendClientMessage(playerid, COLOR_LIGHTRED, str);
             Log(punishmentLog, INFO, "Admin %s zablokowa³ ip %s, powód: %s", 
                 GetPlayerLogName(playerid),
@@ -165,6 +165,11 @@ YCMD:panel(playerid, params[], help)
         }
         else if(strcmp(sub, "unwarn", true) == 0)
         {
+            if(!Uprawnienia(playerid, ACCESS_KARY_UNBAN))
+            {
+                sendErrorMessage(playerid, "Uprawnienia: Nie posiadasz wystarczaj¹cych uprawnieñ.");
+                return 1;
+            }
             if(strlen(var) < 1 || strlen(var) > MAX_PLAYER_NAME)
             {
                 SendClientMessage(playerid, COLOR_RED, "Niepoprawna d³ugosc!");
@@ -186,7 +191,7 @@ YCMD:panel(playerid, params[], help)
             if(warny > 0)
             {
                 MruMySQL_Unwarn(var);
-                format(str, sizeof(str), "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNick(playerid));
+                format(str, sizeof(str), "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNickEx(playerid));
                 ABroadCast(COLOR_YELLOW,str,1);
 				if(!IsPlayerAdmin(playerid))
 				{

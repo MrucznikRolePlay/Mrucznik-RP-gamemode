@@ -1,0 +1,11 @@
+{
+    "name": "cooking",
+    "description": "System gotowania potraw",
+    "author": "mrucznik",
+    "timers": false,
+    "callbacks": true,
+    "mysql": true,
+    "files": [],
+    "commands": true,
+    "date": "03.03.2020"
+}

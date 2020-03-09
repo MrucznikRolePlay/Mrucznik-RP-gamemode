@@ -29,9 +29,9 @@
 GetPlayerLogName(playerid)
 {
     if(IsPlayerConnected(playerid) && gPlayerLogged[playerid]) {
-        safe_return sprintf("{Player: %s[%d]}", GetNick(playerid), PlayerInfo[playerid][pUID]);
+        safe_return sprintf("{Player: %s[%d]}", GetNickEx(playerid), PlayerInfo[playerid][pUID]);
     } 
-    safe_return sprintf("{Player: %s}", GetNick(playerid));
+    safe_return sprintf("{Player: %s}", GetNickEx(playerid));
 }
 
 GetWeaponLogName(weapon, ammo=-1)
@@ -66,6 +66,11 @@ GetHouseLogName(house)
 GetBusinessLogName(business)
 {
     safe_return sprintf("{Business: %s[%d]}", Business[business][b_Name], business);
+}
+
+GetGraffitiLogText(graffiti)
+{
+    safe_return sprintf("{Graffiti: [%d]:%s}", graffiti, GraffitiInfo[graffiti][grafText]);
 }
 
 GetFractionLogName(fraction)

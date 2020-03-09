@@ -69,6 +69,8 @@ YCMD:rozwiaz(playerid, params[], help)
 							TogglePlayerControllable(giveplayerid, 1);
 							PlayerTied[giveplayerid] = 0;
 							pobity[giveplayerid] = 0;
+							PlayerCuffedTime[giveplayerid] = 0;
+							PlayerCuffed[giveplayerid] = 0;
 						}
 						else
 						{

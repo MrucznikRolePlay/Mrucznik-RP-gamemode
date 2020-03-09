@@ -42,7 +42,7 @@ YCMD:uwb(playerid, params[], help)//usuñ wszystkie bronie
 		sendTipMessage(playerid, "Wszystkie bronie usuniête");
 		//komunikat o wyrzuceniu
 		new string[256];
-		format(string, sizeof(string), "%s wyrzuca na ziemie swoj¹ zepsut¹ broñ.", GetNick(playerid, true)); 
+		format(string, sizeof(string), "%s wyrzuca na ziemie swoj¹ zepsut¹ broñ.", GetNick(playerid)); 
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	}
 	return 1;

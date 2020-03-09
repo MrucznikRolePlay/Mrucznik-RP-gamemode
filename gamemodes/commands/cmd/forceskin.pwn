@@ -32,7 +32,6 @@ YCMD:forceskin(playerid, params[], help)
 {
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -56,8 +55,7 @@ YCMD:forceskin(playerid, params[], help)
 			            return 1;
 			        }
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "* Zosta³eœ wybrany do zmiany skinu przez Administratora %s.", sendername);
+					format(string, sizeof(string), "* Zosta³eœ wybrany do zmiany skinu przez Administratora %s.", GetNickEx(playerid));
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "* Wymusi³eœ zmiane skinu na %s.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);

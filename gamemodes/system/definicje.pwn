@@ -43,6 +43,8 @@
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
 
+//podglπd PW
+#define MAX_SENT_MESSAGES 10
 
 //salt
 #define MAX_SERVER_SECRET_LENGTH 16
@@ -79,8 +81,14 @@
 
 //specshow
 #define INVALID_SPECTATE_ID 9999
+
+//adminjail
+#define AJ_POSX 1481.1666259766
+#define AJ_POSY -1790.2204589844
+#define AJ_POSZ 156.7875213623
+#define AJ_MAXRANGE 5.0
 //PAèDZIOCH
-#define ROPELENGTH 50 //D≥ugoúÊ maksymalna liny (ingame metr)
+#define ROPELENGTH 100 //D≥ugoúÊ maksymalna liny (ingame metr)
 
 #define OFFSETZ 12
 #define DUR 250
@@ -132,7 +140,9 @@
 #define LEADERS_TYPES 3
 #define LEADER_FRAC 1
 #define LEADER_FAM 2
-
+#define CENA_POZWOLENIE 35000
+#define CENA_POZWOLENIE_ZYSK 15000
+#define CENA_POZWOLENIE_SEJF 20000
 //Kary:
 #define KARA_BAN 1
 #define KARA_BLOCK 2
@@ -213,7 +223,7 @@
 #define HYDRA_D 250000
 
 new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
-    FAMILY_FDU = -1;
+    FAMILY_FDU = -1, FAMILY_SEKTA = -1;
 
 //2015.09.12
 #define TAJNIAK_FBI		0
@@ -274,9 +284,10 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define ACCESS_EDITCAR          0b1000000000
 #define ACCESS_EDITRANG         0b10000000000
 #define ACCESS_GIVEHALF         0b100000000000
-#define ACCESS_DELETEORG        0b1000000000000 //13 bit
+#define ACCESS_DELETEORG        0b1000000000000
+#define ACCESS_SKRYPTER         0b10000000000000 //14 bit
 
-#define ACCESS_OWNER        0b1111111111111
+#define ACCESS_OWNER            0b111111111111111
 
 //------------------------------------------------------------------------------
 //                              DIALOGI
@@ -287,12 +298,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define DIALOG_PASSWORD 3
 #define DIALOG_INPUT 4
 #define DIALOG_HELP 5
-#define DIALOG_CHANGELOG_RC1 6
-#define DIALOG_CHANGELOG_RC2 7
-#define DIALOG_CHANGELOG_RC3 8
-#define DIALOG_CHANGELOG_RC4 9
-#define DIALOG_CHANGELOG_RC5 11
-#define DIALOG_CHANGELOG_RC6 12
+/* 6-9 oraz 11-12 puste */
 #define DIALOG_FLYMODEHELP 10
 #define DIALOG_INFOTYPE 13
 #define DIALOG_INFOVEHICLE 14
@@ -423,6 +429,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_VINYL_J 5525
 #define D_VINYL_CAM 5526
 
+
 #define SCENA_DIALOG_MAIN       5998
 #define SCENA_DIALOG_CREATE     5999
 #define SCENA_DIALOG_EFEKTY     6000
@@ -441,6 +448,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define SCENA_DIALOG_AUDIO      6030
 #define SCENA_DIALOG_GETMONEY 6031
 #define DIALOG_UNFRAKCJA 6032
+#define DIALOG_KUPSKIN 6033
 
 #define D_UNIFORM_LCN   7005
 #define D_UNIFORM_RSC   7114
@@ -457,6 +465,12 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_KONTAKTY_EDYTUJ_NOWA_NAZWA	10104
 #define D_KONTAKTY_USUN					10105
 #define D_KONTAKTY_LISTA				10106
+
+#define D_ERS_SPRZEDAZ_APTECZKI			10107
+#define D_UZYCIE_APTECZKI			    10108
+#define D_PRZEDMIOTY_BRONIE			    10109
+
+#define D_MECH_SPRZEDAZ_FIXKIT          10110
 
 
 //------------------------------------------------------------------------------
@@ -486,7 +500,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 //25.07
 #define MAX_ZONES   65
 #define ZONE_COLOR_GROOVE 0x00B90000
-#define ZONE_COLOR_BALLAZ 0xB9009700
+#define ZONE_COLOR_BALLAZ 0xC2000000
 #define ZONE_COLOR_VAGOS 0xDFD32800
 #define ZONE_COLOR_WPS 0x5BCFE600
 //13.08 fly data
@@ -523,7 +537,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define TJD_LOADUNLOAD_TIME 1000
 
 #define MAX_BOOMBOX         15
-#define MAX_BBD_DISTANCE    20.0
+#define MAX_BBD_DISTANCE    25.0
 
 //14.11
 #define MAX_CARS        100000
@@ -574,6 +588,9 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 //Okienka
 #define OKIENKO_DMV_RANGE 2
+
+//AJ powÛd
+#define MAX_AJ_REASON 64
 
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);

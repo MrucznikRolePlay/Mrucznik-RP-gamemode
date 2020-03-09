@@ -26,7 +26,8 @@
 command_setloglevel_Impl(playerid, logname[32], loglevel)
 {
     if(!IsAKox(playerid)) {
-        return noAccessMessage(playerid);
+        noAccessMessage(playerid);
+        return 1;
     }
 
     new Logger:logger;

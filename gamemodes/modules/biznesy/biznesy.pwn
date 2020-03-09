@@ -295,10 +295,13 @@ stock CorrectPlayerBusiness(playerid)
 	}
 	if(PlayerInfo[playerid][pBusinessOwner] > MAX_BIZNES)
 	{
-		sendErrorMessage(playerid, "Posiada³eœ b³êdny biznes - zosta³ on WYZEROWANY!");
+		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
+		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
+
+		/*sendErrorMessage(playerid, "Posiada³eœ b³êdny biznes - zosta³ on WYZEROWANY!");
 		sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d - zg³oœ to na naszym forum!"); 
 		Log(serverLog, ERROR, "%s wyzerowanie biznesu %d", GetPlayerLogName(playerid), PlayerInfo[playerid][pBusinessOwner]);
-		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
+		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;*/
 	}
 	if(PlayerInfo[playerid][pBusinessMember] == 0)
 	{
@@ -438,10 +441,10 @@ Business_AkceptujBiznes(playerid)
 	Sejf_Save(FRAC_GOV); 
 
 	format(string, sizeof(string), "%s [ID:%d] kupi³ biznes [ID: %d] od %s [ID: %d] za %d$", 
-		GetNick(playerid, true), 
+		GetNickEx(playerid), 
 		playerid, 
 		businessID, 
-		GetNick(giveplayerid, true), 
+		GetNickEx(giveplayerid), 
 		giveplayerid, 
 		price
 	);

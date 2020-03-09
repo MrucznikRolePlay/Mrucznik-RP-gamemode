@@ -30,7 +30,7 @@ Komenda pozwalaj¹ca nadaæ rangê dla innego ID - stworzona dla adminów z wysokim 
 
 YCMD:adajrange(playerid, params[], help)
 {
-    if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
+    if(IsAHeadAdmin(playerid) || IsAScripter(playerid) || Uprawnienia(playerid, ACCESS_MAKELEADER) || Uprawnienia(playerid, ACCESS_PANEL) || Uprawnienia(playerid, ACCESS_MAKEFAMILY)) //uprawnienia dla panelu KO - TYMCZASOWO do czasu refactoringu
     {
         new giveplayerid, rankValue, string[256]; 
         if(sscanf(params, "k<fix>d", giveplayerid, rankValue))
@@ -51,7 +51,7 @@ YCMD:adajrange(playerid, params[], help)
                         return 1;
                     } 
                     format(string, sizeof(string), "AdmCmd: %s [%d] da³ %s [%d] rangê %d z poprzedniej rangi %d [w %d]", 
-                    GetNick(playerid), 
+                    GetNickEx(playerid), 
                     playerid,
                     GetNick(giveplayerid),
                     giveplayerid,
@@ -59,9 +59,10 @@ YCMD:adajrange(playerid, params[], help)
                     PlayerInfo[giveplayerid][pRank], 
                     GetPlayerFraction(giveplayerid)); 
                     SendMessageToAdmin(string, COLOR_RED);
-                    format(string, sizeof(string), "Admin %s zmieni³ twój stopieñ z %d na %d", GetNick(playerid), PlayerInfo[giveplayerid][pRank], rankValue); 
+                    format(string, sizeof(string), "Admin %s zmieni³ twój stopieñ z %d na %d", GetNickEx(playerid), PlayerInfo[giveplayerid][pRank], rankValue); 
                     sendTipMessage(giveplayerid, string); 
                     PlayerInfo[giveplayerid][pRank] = rankValue;
+                    Log(adminLog, INFO, "%s da³ %s rangê %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), rankValue);
                     return 1;
                 }
                 else

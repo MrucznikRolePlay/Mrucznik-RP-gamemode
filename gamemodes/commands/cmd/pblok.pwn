@@ -34,7 +34,7 @@ YCMD:pblok(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1  || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -61,6 +61,11 @@ YCMD:pblok(playerid, params[], help)
 				sendErrorMessage(playerid, "Brak gracza w bazie, nie mo¿na zablokowaæ (konto nie istnieje).");
 				return 1;
 			}
+			else
+			{
+				if(MruMySQL_GetAccInt("Block", nick) != 0) return sendErrorMessage(playerid, "Gracz ma ju¿ aktywn¹ blokadê postaci.");
+			}
+			
 			GivePBlockForPlayer((nick), playerid, (result));
 			if(kary_TXD_Status == 1)
 			{
@@ -68,7 +73,7 @@ YCMD:pblok(playerid, params[], help)
             }
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "Admin %s zablokowa³ (offline) konto gracza %s. Powód: %s", GetNick(playerid), nick, result);
+				format(string, sizeof(string), "Admin %s zablokowa³ (offline) konto gracza %s. Powód: %s", GetNickEx(playerid), nick, result);
 				SendPunishMessage(string, playerid); 
 			}
 		}

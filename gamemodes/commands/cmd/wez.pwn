@@ -30,7 +30,7 @@
 
 YCMD:wez(playerid, params[], help)
 {
-	new string[128];
+	new string[144];
 
     if(IsPlayerConnected(playerid))
     {
@@ -38,9 +38,9 @@ YCMD:wez(playerid, params[], help)
 		new ammount=0;
 		if( sscanf(params, "s[16]D", x_job, ammount))
 		{
-			SendClientMessage(playerid, COLOR_WHITE, "|__________________ Get __________________|");
+			SendClientMessage(playerid, COLOR_WHITE, "|__________________ WeŸ __________________|");
 			SendClientMessage(playerid, COLOR_WHITE, "U¿yj /wez [nazwa]");
-	  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Dragi, Kanister");
+	  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Dragi, Kanister, Gasnice");
 			SendClientMessage(playerid, COLOR_GREEN, "|_________________________________________|");
 			return 1;
 		}
@@ -107,6 +107,49 @@ YCMD:wez(playerid, params[], help)
 			else
 			{
 				SendClientMessage(playerid,COLOR_GREY," Nie jesteœ na stacji benzynowej!");
+				return 1;
+			}
+		}
+		else if(strcmp(x_job,"gasnice",true) == 0 || strcmp(x_job,"gasnica",true) == 0)
+		{
+			if (PlayerInfo[playerid][pMember] == 4)
+			{
+				new vehicleid = GetClosestCar(playerid, 3.5);
+				if(vehicleid != -1)
+    			{
+					if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && (GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544))// wszystkie auta frakcji
+					{
+						if(Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))
+						{
+							format(string, sizeof(string), "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***", GetNick(playerid));
+							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							GivePlayerWeapon(playerid, 42, 9999);
+	                     	PlayerInfo[playerid][pGun9] = 42;
+	                     	PlayerInfo[playerid][pAmmo9] = 9999;
+							return 1;
+						}
+						else
+						{
+							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do ERS.");
+							return 1;
+						}
+					}
+					else
+					{
+						format(string, sizeof(string), "Ten pojazd nie jest wozem stra¿ackim ERS. (%s)", VehicleNames[GetVehicleModel(vehicleid)-400]);
+						sendTipMessage(playerid, string);
+						return 1;
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Brak aut w pobli¿u.");
+					return 1;
+				}
+			}
+			else
+			{
+				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla ERS.");
 				return 1;
 			}
 		}

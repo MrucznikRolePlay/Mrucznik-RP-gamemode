@@ -39,7 +39,7 @@ command_dajobiekt_Impl(playerid, giveplayerid, bone, model, Float:x, Float:y, Fl
 
     new index = AttachPlayerItem(giveplayerid, model, bone, x,y,z ,rx,ry,rz, sx,sy,sz, materialcolor1, materialcolor2);
     EditAttachedObject(giveplayerid, index);
-    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("Otrzyma³eœ przyczepialny obiekt od admina %s", GetNick(playerid)));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("Otrzyma³eœ przyczepialny obiekt od admina %s", GetNickEx(playerid)));
 
     Log(adminLog, INFO, "%s da³ %s przyczepialny obiekt %d",
         GetPlayerLogName(playerid),

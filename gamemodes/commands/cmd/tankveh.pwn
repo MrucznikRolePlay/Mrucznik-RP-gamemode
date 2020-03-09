@@ -35,7 +35,7 @@ YCMD:tankveh(playerid, params[], help)
         if(!IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GREY, "»» Nie jesteœ w pojeŸdzie!");
         if(IsPlayerInAnyVehicle(playerid)) {
             new string[128];
-            if (PlayerInfo[playerid][pAdmin] >= 5)
+            if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
             {
 				new vehicleid = GetPlayerVehicleID(playerid);
 				new vuid = VehicleUID[vehicleid][vUID];
@@ -43,7 +43,7 @@ YCMD:tankveh(playerid, params[], help)
                 format(string, sizeof(string), " »» Pojazd o ID (%d) zosta³ dotankowany", vehicleid);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string); 
 				
-				format(string, sizeof(string), "AdmCmD: %s zatankowa³ auto %s (%d)[%d].", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
+				format(string, sizeof(string), "AdmCmD: %s zatankowa³ auto %s (%d)[%d].", GetNickEx(playerid), VehicleNames[GetVehicleModel(vehicleid)-400], vehicleid, vuid);
 				//SendPunishMessage(string, playerid);
                 SendMessageToAdmin(string, COLOR_RED); 
 				Log(adminLog, INFO, "Admin %s zatankowa³ auto %s", GetPlayerLogName(playerid), GetVehicleLogName(vehicleid));

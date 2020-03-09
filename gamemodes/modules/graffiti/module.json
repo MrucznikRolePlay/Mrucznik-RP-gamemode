@@ -1,0 +1,11 @@
+{
+    "name": "graffiti",
+    "description": "System graffiti",
+    "author": "Sanda³",
+    "timers": true,
+    "callbacks": false,
+    "mysql": true,
+    "files": [],
+    "commands": true,
+    "date": "01.02.2020"
+}

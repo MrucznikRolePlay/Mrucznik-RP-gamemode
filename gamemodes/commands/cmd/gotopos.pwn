@@ -48,7 +48,7 @@ YCMD:gotopos(playerid, params[], help)
 			}
 			else
 			{
-				SetPlayerPosEx(playerid, x, y, z);
+				SetPlayerPos(playerid, x, y, z);
 			}
 			_MruAdmin(playerid, "Zosta³eœ teleportowany");
 			//SetPlayerInterior(playerid,0);

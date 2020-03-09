@@ -49,7 +49,7 @@ YCMD:wywaldmv(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-			        if(IsABOR(giveplayerid) || IsACop(giveplayerid))
+			        if(IsABOR(giveplayerid) || IsAPolicja(giveplayerid))
 			        {
 			            sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz wywaliæ policjanta/bor !");
 				        return 1;
@@ -67,7 +67,7 @@ YCMD:wywaldmv(playerid, params[], help)
 							format(string, sizeof(string), "* Wywali³eœ z dmv %s na 10 minut.", giveplayer);
 							wywalzdmv[giveplayerid] = 1;
 							SetTimerEx("Wywalonyzdmv",600000,0,"d",giveplayerid);
-							SetPlayerPosEx(giveplayerid,1481.1531,-1770.0277,18.7958);
+							SetPlayerPos(giveplayerid,1481.1531,-1770.0277,18.7958);
 							SetPlayerInterior(giveplayerid,0);
 						}
 						else
