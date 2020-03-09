@@ -313,6 +313,11 @@ ZdejmijBW(playerid, drunklvl = 7000)
 	PlayerInfo[i][pMuted] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	TogglePlayerControllable(i, 1);
+	if(GetPVarInt(playerid, "timer_DamagedHP"))
+	{
+		KillTimer(GetPVarInt(playerid, "timer_DamagedHP"));
+		DamagedHP(playerid);
+	}
 	SetPVarInt(i, "bw-sync", 0);
 	ClearAnimations(i);
 	SetPlayerSpecialAction(i,SPECIAL_ACTION_NONE);

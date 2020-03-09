@@ -13989,7 +13989,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno zestawu.", PlayerName(playerid));
 			SendClientMessage(id, 0xFF0030FF, string);
 		}
-		DeletePVar(playerid, "HealthPackOffer");
+		DeletePVar(playerid, "FixKitOffer");
 		return 1;
 	}
 

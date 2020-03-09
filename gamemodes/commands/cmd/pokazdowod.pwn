@@ -128,7 +128,7 @@ YCMD:pokazdowod(playerid, params[], help)
 					}
 					if(PlayerInfo[playerid][pMember] >= 1 || PlayerInfo[playerid][pLider] >= 1)
 					{
-						format(string, sizeof(string), "- Zatrudnie: %s", ttext);
+						format(string, sizeof(string), "- Zatrudnienie: %s", ttext);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 					}
 					format(string, sizeof(string), "- Numer telefonu: %d", PlayerInfo[playerid][pPnumber]);
