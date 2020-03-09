@@ -531,6 +531,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 	{
 		case BULLET_HIT_TYPE_NONE:
 		{
+			//else
 		}
 		case BULLET_HIT_TYPE_PLAYER:
 		{
@@ -639,14 +640,15 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 		}
 		case BULLET_HIT_TYPE_VEHICLE:
 		{
+			//else
 		}
 		case BULLET_HIT_TYPE_OBJECT:
 		{
-
+			//else
 		}
 		case BULLET_HIT_TYPE_PLAYER_OBJECT:
 		{
-
+			//else
 		}
 	}
 
