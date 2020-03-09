@@ -577,8 +577,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 					{
 						if(AP > 0)
 						{
-							SetPlayerArmour(playerid, AP-amount); //zabierz defaultowe dmg kamizelce
-							return 0;
+							return 1; //zabierz defaultowe dmg kamizelce
 						}
 
 						switch(weaponid)
