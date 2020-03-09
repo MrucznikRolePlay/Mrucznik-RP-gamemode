@@ -40,10 +40,15 @@ hook OnGameModeInit()
 	TourettRegexp = regex_exbuild(".*[^a-zA-Z](kurwa|chuj|huj|cipa|fiut|zjeb|kurwy|jeb|pizda|pizdy|szmul|dzban|kutas|dupa|cipka|pierdol|pierdolony)[^a-zA-Z].*");
 }
 
+hook OnPlayerConnect(playerid)
+{
+	PlayerImmunity[playerid] = 2;
+	return 1;
+}
+
 hook OnPlayerDisconnect(playerid, reason)
 {
 	VECTOR_clear(VPlayerDiseases[playerid]);
-	PlayerImmunity[playerid] = 0;
 	Grypa[playerid] = 0;
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
