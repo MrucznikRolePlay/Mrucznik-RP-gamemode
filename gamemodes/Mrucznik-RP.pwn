@@ -574,6 +574,12 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 					weaponid == 26 || weaponid == 27 || weaponid == 28 || weaponid == 29 || weaponid == 30 || weaponid == 31 || 
 					weaponid == 32 || weaponid == 33 || weaponid == 34 || weaponid == 38)
 					{
+						if(AP > 0)
+						{
+							SetPlayerArmour(playerid, AP-amount); //zabierz defaultowe dmg kamizelce
+							return 0;
+						}
+
 						switch(weaponid)
 						{
 							case 22: //colt
@@ -618,15 +624,9 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 							}
 						}
 
-						amount = amount / 2;
-						if(AP > 0)
-						{
-							amount = amount * 2;
-							if(AP <= amount) return 1;
-							return SetPlayerArmour(hitid, AP-amount); //weapon damage per bullet
-						}
-						else if(HP <= amount) return 1;
-						SetPlayerHealth(hitid, HP-amount); //weapon damage per bullet
+						amount = amount / 2; //nowe dmg
+						if(HP <= amount) return 1; //wyœlij nabój (zabij)
+						SetPlayerHealth(hitid, HP-amount); //lub zabierz mu tyle hp ile nowe dmg
 						return 0;
 					}
 					else
