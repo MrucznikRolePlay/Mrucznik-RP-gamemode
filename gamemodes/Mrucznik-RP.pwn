@@ -1048,7 +1048,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	if(IsAHeliModel(GetVehicleModel(vehicleid)) && ispassenger)
  	{
 		SetPVarInt(playerid,"chop_id",GetPlayerVehicleID(playerid));
-  		SetPVarInt(playerid,"roped",0);
+  		SetPVarInt(playerid,"roped",0); 
     }
 	else SetPVarInt(playerid,"chop_id",0);
 
