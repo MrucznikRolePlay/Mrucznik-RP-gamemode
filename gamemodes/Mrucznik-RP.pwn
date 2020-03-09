@@ -6096,6 +6096,7 @@ OnPlayerLogin(playerid, password[])
 		Dom[PlayerInfo[playerid][pDom]][hData_DD] = 0;
     	if(Dom[PlayerInfo[playerid][pDom]][hPDW] < 0) Dom[PlayerInfo[playerid][pDom]][hPDW] = 0;//naprawa wynajmu
     	if(Dom[PlayerInfo[playerid][pDom]][hPW] < 0) Dom[PlayerInfo[playerid][pDom]][hPW] = 0;
+		ZapiszDom(PlayerInfo[playerid][pDom]);
 	}
 
 	//Spawnowanie gracza
