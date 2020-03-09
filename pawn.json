@@ -24,8 +24,7 @@
 		"Pottus/ColAndreas:v1.4.0.3",
 		"BigETI/pawn-map",
 		"Y-Less/indirection",
-		"Zeex/amx_assembly",
-		"dakyskye/pawn-randomize"
+		"Zeex/amx_assembly"
 	],
 	"build": {
 		"name": "",
