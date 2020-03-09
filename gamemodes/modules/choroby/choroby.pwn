@@ -189,9 +189,9 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 	return 1;
 }
 
-RandomizeSouldBeInfected(chance, Float:ratio=1.0) 
+RandomizeSouldBeInfected(Float:chance, Float:ratio=1.0) 
 {
-	new infectionRand = random(100);
+	new Float:infectionRand = Rand_Float(0.0, 100);
 	new Float:infectionChance = chance * ratio;
 	return infectionRand < infectionChance;
 }
