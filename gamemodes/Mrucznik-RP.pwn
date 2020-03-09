@@ -575,11 +575,6 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 					weaponid == 26 || weaponid == 27 || weaponid == 28 || weaponid == 29 || weaponid == 30 || weaponid == 31 || 
 					weaponid == 32 || weaponid == 33 || weaponid == 34 || weaponid == 38)
 					{
-						if(AP > 0)
-						{
-							return 1; //zabierz defaultowe dmg kamizelce
-						}
-
 						switch(weaponid)
 						{
 							case 22: //colt
@@ -622,6 +617,12 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 							{
 								amount = 46.2;
 							}
+						}
+
+						if(AP > 0)
+						{
+							SetPlayerArmour(hitid, AP-amount); //zabierz tylko armor
+							return 0; //zabierz defaultowe dmg kamizelce
 						}
 
 						amount = amount / 2; //nowe dmg
