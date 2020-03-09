@@ -129,13 +129,13 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
     //TODO: Check czy gracz jest w szpitalu
 
     new cost = money + DiseaseData[diseaseID][CureCost];
-    new Float:currationTime = DiseaseData[diseaseID][CureTime]/60.0;
+    new currationTime = DiseaseData[diseaseID][CureTime]/60;
     new chance = 100 - DiseaseData[diseaseID][DrugResistance];
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Oferujesz %s %.1f minutow¹ kuracjê %s za $%d$ (prowizja %d$).", 
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Oferujesz %s %d minutow¹ kuracjê %s za $%d$ (prowizja %d$).", 
         GetNick(giveplayerid), currationTime, disease, cost, money
     ));
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* %s oferuje Ci kuracjê choroby %s.", GetNick(playerid), disease));
-    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Kuracja potrwa %.1f minut i bêdzie kosztowaæ %d$.", currationTime, cost));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Kuracja potrwa %d minut i bêdzie kosztowaæ %d$.", currationTime, cost));
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* Szanse powodzenia kuracji to %d procent. Wpisz /akceptuj kuracja aby siê zgodziæ.", chance));
 
     SetPVarInt(giveplayerid, "kuracja-akceptuj", 1);
