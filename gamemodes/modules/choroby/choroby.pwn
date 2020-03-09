@@ -77,9 +77,11 @@ InfectPlayerWithoutSaving(playerid, eDiseases:disease)
 DiagnosePlayer(playerid, diagnoserid)
 {
     SendClientMessage(diagnoserid, COLOR_WHITE, sprintf("|__________ Wynik diagnozy %s __________|", GetNick(playerid)));
+    SendClientMessage(playerid, COLOR_WHITE, sprintf("|__________ Diagnoza od lekarza %s __________|", GetNick(diagnoserid)));
 	if(IsPlayerHealthy(playerid))
 	{
 		SendClientMessage(diagnoserid, COLOR_GREY, "Gracz jest zdrowy.");
+		SendClientMessage(playerid, COLOR_GREY, "Jesteœ zdrowy.");
 		return 1;
 	}
 
@@ -87,6 +89,7 @@ DiagnosePlayer(playerid, diagnoserid)
 	{
 		new eDiseases:disease = eDiseases:MEM_get_val(i);
 		SendClientMessage(diagnoserid, COLOR_GREY, sprintf("Wykryto chorobê: "INCOLOR_LIGHTBLUE"%s", DiseaseData[disease][Name]));
+		SendClientMessage(playerid, COLOR_GREY, sprintf("Wykryto chorobê: "INCOLOR_LIGHTBLUE"%s", DiseaseData[disease][Name]));
 	}
 	return 1;
 }
