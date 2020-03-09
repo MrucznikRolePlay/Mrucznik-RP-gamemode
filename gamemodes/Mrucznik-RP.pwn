@@ -5057,7 +5057,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         {
             new vehicleid = GetPlayerVehicleID(playerid);
             if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
-			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pNewAP] != 5)
+			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
 				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
