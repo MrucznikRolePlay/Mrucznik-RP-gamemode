@@ -39,7 +39,7 @@ command_ulecz_Impl(playerid, giveplayerid)
     
     new giveambu = GetPlayerVehicleID(giveplayerid);
     new playambu = GetPlayerVehicleID(playerid);
-    if ( !(IsAnAmbulance(playambu) && playambu == giveambu) && !IsInHealingPlace(playerid) )
+    if ( !(IsAnAmbulance(playambu) && playambu == giveambu) && !IsAtHealingPlace(playerid) )
     {
         sendErrorMessage(playerid, "Nie jesteú w pojeüdzie medycznym / Chopper / szpitalu !");
         return 1;
