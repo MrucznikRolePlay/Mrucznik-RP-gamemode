@@ -623,7 +623,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 
 						if(AP > 0)
 						{
-							if(AP < amount) SetPlayerArmour(hitid, 0);
+							if(AP < amount) SetPlayerArmour(hitid, 0); // tutaj ma zostaæ 0, bo wartosc armora poni¿ej 0 daje 100 armora (samp bug)
 							else SetPlayerArmour(hitid, AP-amount); //zabierz sampowe dmg kamizelce
 							return 0;
 						}
