@@ -6625,7 +6625,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				{
 					if(!IsAPolicja(playerid)) RemovePlayerAttachedObject(playerid, 1);
 				}
-				else
+				else if(RELEASED(KEY_HANDBRAKE))
 				{
 					if(!IsAPolicja(playerid)) SetPlayerAttachedObject(playerid, 1, 19036, 2, 0.1, 0.05, -0.005, 0, 90, 90);//maska hokeisty biala
 				}
