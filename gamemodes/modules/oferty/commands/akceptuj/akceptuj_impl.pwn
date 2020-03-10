@@ -994,14 +994,6 @@ command_akceptuj_Impl(playerid, x_job[32])
             format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s za kwotê %d$", sendername, money);
             SendClientMessage(OfferPlayer[playerid], COLOR_LIGHTBLUE, string);
             
-            //Zerowanie zmiennych
-            LawyerOffer[playerid] = 0;
-            OfferPlayer[playerid] = 0;
-            ApprovedLawyer[OfferPlayer[playerid]] = 0;
-            WantLawyer[playerid] = 0;
-            CallLawyer[playerid] = 0;
-            JailPrice[playerid] = 0;
-            
             //Czynnoœci
             PlayerInfo[playerid][pJailTime] = 1;
             ZabierzKase(playerid, money);
@@ -1020,11 +1012,13 @@ command_akceptuj_Impl(playerid, x_job[32])
             { SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
             
             //zerowanie zmiennych 2
+            ApprovedLawyer[OfferPlayer[playerid]] = 0;
+            WantLawyer[playerid] = 0;
+            CallLawyer[playerid] = 0;
+            JailPrice[playerid] = 0;
             OfferPrice[playerid] = 0;
             LawyerOffer[playerid] = 0;
             OfferPlayer[playerid] = -1;
-            
-            
         }
         else
         {
