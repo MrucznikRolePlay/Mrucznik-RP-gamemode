@@ -2116,7 +2116,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 								NadajWLBW(killerid, playerid, false);
 							}
 						}
-						
+
 						if(PlayerInfo[playerid][pHeadValue] > 0)
 						{
 							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
@@ -5226,8 +5226,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         {
             if(KradniecieWozu[playerid] != newcar)
 		    {
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij spróbowaæ to zrobiæ lub /wyjdz aby wyjœæ.");
-                TogglePlayerControllable(playerid, 0);
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij aby spróbowaæ to zrobiæ.");
                 KradniecieWozu[playerid] = 1;
 			}
         }
@@ -5302,6 +5301,12 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	if(IDWymienianegoAuta[playerid] != 0)
 	{
 	    IDWymienianegoAuta[playerid] = 0;
+	}
+	if(KradniecieWozu[playerid] >= 1)
+	{
+		KradniecieWozu[playerid] = 0;
+		NieSpamujKradnij[playerid] = 0;
+		KillTimer(GetPVarInt(playerid, "timerKradnij"));
 	}
 	return 1;
 }
