@@ -6615,6 +6615,22 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				}
 			}
 		}
+
+		if(GetPlayerWeapon(playerid) == 34)
+		{
+			new nick[32];
+			if(GetPVarString(playerid, "maska_nick", nick, 24))
+			{
+				if(HOLDING(KEY_HANDBRAKE)) //usuwanie maski podczas celowania snajperk¹ i przywracanie
+				{
+					if(!IsAPolicja(playerid)) RemovePlayerAttachedObject(playerid, 1);
+				}
+				else
+				{
+					if(!IsAPolicja(playerid)) SetPlayerAttachedObject(playerid, 1, 19036, 2, 0.1, 0.05, -0.005, 0, 90, 90);//maska hokeisty biala
+				}
+			}
+		}
 	}
     if(PRESSED(KEY_SECONDARY_ATTACK))
     {
