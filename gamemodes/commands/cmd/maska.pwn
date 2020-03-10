@@ -42,10 +42,6 @@ YCMD:maska(playerid, params[], help)
 			{
 				return sendErrorMessage(playerid, "Maska jest dostêpna od [2] rangi");
 			}
-			if(GetPlayerSkin(playerid) != 285)
-			{
-				return sendErrorMessage(playerid, "¯eby u¿yæ maski musisz mieæ skin SWAT (/swat)");
-			}
 		}
 		else if(IsAPolicja(playerid))
 		{
@@ -56,11 +52,8 @@ YCMD:maska(playerid, params[], help)
 			else
 			{
 				if(OnDutyCD[playerid] != 1 && OnDuty[playerid] != 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Najpierw u¿yj /duty !");
+				if(GetPlayerSkin(playerid) != 285) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "¯eby u¿yæ maski musisz mieæ skin SWAT (/swat)");
 				sendErrorMessage(playerid, "OSTRZE¯ENIE: Nadu¿ywanie maski skutkuje natychmiastowym wyrzuceniem z frakcji.");
-			}
-			if(GetPlayerSkin(playerid) != 285)
-			{
-				return sendErrorMessage(playerid, "¯eby u¿yæ maski musisz mieæ skin SWAT (/swat)");
 			}
 		}
 		new string[64];
