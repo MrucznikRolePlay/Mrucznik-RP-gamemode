@@ -3513,7 +3513,15 @@ IsAtPlaceGetHP(playerid)
 
 IsAtHealingPlace(playerid)
 {
-	return GetPlayerVirtualWorld(playerid) == 90 || GetPlayerVirtualWorld(playerid) == 32;
+	if(GetPlayerVirtualWorld(playerid) == 90)
+	{
+		return 1;
+	}
+	else if(GetPlayerVirtualWorld(playerid) == 32 || GetPlayerInterior(playerid) == 1)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 GraczBankomat(playerid)
@@ -6033,13 +6041,11 @@ Dom_ChangeOwner(playerid, dom, forid)
 
 	Log(adminLog, INFO, "Admin %s zmieni³ w³aœciciela domu %d z %s na %s", GetPlayerLogName(playerid), dom, Dom[dom][hWlasciciel], GetPlayerLogName(forid));
     PlayerInfo[forid][pDom] = dom;
-    new GeT[MAX_PLAYER_NAME];
-	GetPlayerName(forid, GeT, sizeof(GeT));
-	Dom[dom][hWlasciciel] = GeT;
+	Dom[dom][hWlasciciel] = GetNickEx(forid);
 	Dom[dom][hKupiony] = 1;
 	Dom[dom][hUID_W] = PlayerInfo[forid][pUID];
 
-	format(string, sizeof(string), "Zmiana wlasciciela - OK. || Dom %d || NrDom %d || Wlasciciel: %s", dom, Dom[dom][hDomNr], GeT);
+	format(string, sizeof(string), "Zmiana wlasciciela - OK. || Dom %d || NrDom %d || Wlasciciel: %s", dom, Dom[dom][hDomNr], GetNickEx(forid));
 	SendClientMessage(playerid, COLOR_NEWS, string);
 
 	//
@@ -6336,11 +6342,9 @@ KupowanieDomu(playerid, dom, platnosc)
 		}
 		printf(str2);
 		PlayerInfo[playerid][pDom] = dom;
-	    new GeT[MAX_PLAYER_NAME];
 	    new h, m;
-		GetPlayerName(playerid, GeT, sizeof(GeT));
 		GetPlayerTime(playerid, h, m);
-		Dom[dom][hWlasciciel] = GeT;
+		Dom[dom][hWlasciciel] = GetNickEx(playerid);
 		Dom[dom][hKupiony] = 1;
 		Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
 		DestroyDynamicPickup(Dom[dom][hPickup]);
@@ -6492,12 +6496,11 @@ ZlomowanieDomu(playerid, dom)
 
 SprawdzSpojnoscWlascicielaDomu(playerid)
 {
-	new string[64], sendername[MAX_PLAYER_NAME];
+	new string[64];
 	format(string, sizeof(string), "Domy/Dom%d.ini", PlayerInfo[playerid][pDom]);
 	if(dini_Exists(string))
 	{
-		GetPlayerName(playerid, sendername, sizeof(sendername));
-		if(strcmp(Dom[PlayerInfo[playerid][pDom]][hWlasciciel], sendername, true) != 0)
+		if(strcmp(Dom[PlayerInfo[playerid][pDom]][hWlasciciel], GetNickEx(playerid), true) != 0)
 		{
 			return 0;
 		}
@@ -12608,8 +12611,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 
 public CuffedAction(playerid, cuffedid)
 {
-	PlayerInfo[cuffedid][pBW] = 0;
-	PlayerInfo[cuffedid][pInjury] = 0;
+	if(PlayerInfo[cuffedid][pInjury] > 0 || PlayerInfo[cuffedid][pBW] > 0) ZdejmijBW(cuffedid, 4000);
 	Kajdanki_JestemSkuty[cuffedid] = 1;
 	Kajdanki_Uzyte[playerid] = 1;
 	Kajdanki_PDkuje[cuffedid] = playerid;

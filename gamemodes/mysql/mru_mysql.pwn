@@ -184,13 +184,11 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
         return 0;
     }
 
+	//wy³¹cz na chwilkê maskowanie nicku (pNick)
 	new maska_nick[24];
 	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
 	{
-		SetPlayerName(playerid, maska_nick);
-		SetRPName(playerid);
 		format(PlayerInfo[playerid][pNick], 24, "%s", maska_nick);
-		DeletePVar(playerid, "maska_nick");
 	}
 	
 	format(query, sizeof(query), "UPDATE `mru_konta` SET \
@@ -536,6 +534,14 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_NEWBIE],
 	PlayerPersonalization[playerid][PERS_GUNSCROLL],
 	PlayerInfo[playerid][pUID]); 
+
+	//przywróæ maskowanie nicku (pNick)
+	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
+	{
+		new playernickname[MAX_PLAYER_NAME];
+		GetPlayerName(playerid, playernickname, sizeof(playernickname));
+		format(PlayerInfo[playerid][pNick], 24, "%s", playernickname);
+	}
 
 	if(!mysql_query(query)) fault=false;
 	

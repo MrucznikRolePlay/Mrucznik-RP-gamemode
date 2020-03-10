@@ -759,9 +759,9 @@ command_akceptuj_Impl(playerid, x_job[32])
             {
                 GetPlayerName(playerid, sendername, sizeof(sendername));
                 GetPlayerName(MechanicCall, giveplayer, sizeof(giveplayer));
-                format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, masz 30 sekund aby tam dojechaæ.",giveplayer);
+                format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, masz 60 sekund aby tam dojechaæ.",giveplayer);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Po 30 sekundach marker zniknie.");
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Po 60 sekundach marker zniknie.");
                 format(string, sizeof(string), "* Mechanik %s akceptowa³ twoje zlecenie, czekaj i nie ruszaj siê z miejsca.",sendername);
                 SendClientMessage(MechanicCall, COLOR_LIGHTBLUE, string);
                 new Float:X,Float:Y,Float:Z;
@@ -1375,7 +1375,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                     format(string, sizeof(string), "Kupi³eœ dom od %s za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom", giveplayer, DomCena[playerid]);
                     SendClientMessage(playerid, COLOR_NEWS, string);
                     SendClientMessage(playerid, COLOR_PANICRED, "UWAGA! Pamiêtaj aby zmieniæ kod do sejfu !!!!!!");
-                    Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = sendername;
+                    Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = GetNickEx(playerid);
                     PlayerInfo[playerid][pDom] = PlayerInfo[DomOffer[playerid]][pDom];
                     PlayerInfo[DomOffer[playerid]][pDom] = 0;
                     ZabierzKase(playerid, DomCena[playerid]);

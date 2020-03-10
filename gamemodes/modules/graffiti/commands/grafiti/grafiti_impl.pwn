@@ -62,6 +62,10 @@ command_grafiti_Impl(playerid, opcja[24])
                 sendTipMessage(playerid, "To nie jest twoje graffiti!");
             }
         }
+        else
+        {
+            sendTipMessage(playerid, "Nie znaleziono graffiti w pobliøu. (podejdü bliøej)");
+        }
     }
     else if(strcmp(opcja,"lista", true) == 0)
     {

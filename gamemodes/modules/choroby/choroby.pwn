@@ -77,9 +77,11 @@ InfectPlayerWithoutSaving(playerid, eDiseases:disease)
 DiagnosePlayer(playerid, diagnoserid)
 {
     SendClientMessage(diagnoserid, COLOR_WHITE, sprintf("|__________ Wynik diagnozy %s __________|", GetNick(playerid)));
+    SendClientMessage(playerid, COLOR_WHITE, sprintf("|__________ Diagnoza od lekarza %s __________|", GetNick(diagnoserid)));
 	if(IsPlayerHealthy(playerid))
 	{
 		SendClientMessage(diagnoserid, COLOR_GREY, "Gracz jest zdrowy.");
+		SendClientMessage(playerid, COLOR_GREY, "Jesteœ zdrowy.");
 		return 1;
 	}
 
@@ -87,6 +89,7 @@ DiagnosePlayer(playerid, diagnoserid)
 	{
 		new eDiseases:disease = eDiseases:MEM_get_val(i);
 		SendClientMessage(diagnoserid, COLOR_GREY, sprintf("Wykryto chorobê: "INCOLOR_LIGHTBLUE"%s", DiseaseData[disease][Name]));
+		SendClientMessage(playerid, COLOR_GREY, sprintf("Wykryto chorobê: "INCOLOR_LIGHTBLUE"%s", DiseaseData[disease][Name]));
 	}
 	return 1;
 }
@@ -189,10 +192,10 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 	return 1;
 }
 
-RandomizeSouldBeInfected(chance, Float:ratio=1.0) 
+RandomizeSouldBeInfected(Float:chance, Float:ratio=1.0) 
 {
-	new infectionRand = random(100);
-	new Float:infectionChance = chance * ratio;
+	new infectionRand = random(100000); //dok³adnoœæ do 0.001%
+	new Float:infectionChance = chance * ratio * 1000;
 	return infectionRand < infectionChance;
 }
 

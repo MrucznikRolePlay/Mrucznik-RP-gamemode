@@ -2734,8 +2734,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowShopDialog(playerid);
-	            new string[256];
+				new string[256];
+				switch(listitem)
+	            {
+					case 0..19:
+					{
+						ShowShopDialog(playerid);
+					}
+				}
 	            switch(listitem)
 	            {
 	                case 0:
@@ -3270,6 +3276,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ZabierzKase(playerid, 1500);
 						GameTextForPlayer(playerid, "~r~-$1500", 5000, 1);
 						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego nietoperza z Wuhan.");
+					}
+					case 20: //maseczka ochronna
+					{
+						if(GetPVarInt(playerid, "maseczka") == 1)
+						{
+							format(string, sizeof(string), "Ju¿ masz maseczkê!");
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							return 1;
+						}
+						ZabierzKase(playerid, 15000);
+						PlayerImmunity[playerid] = 10;
+						SetPVarInt(playerid, "maseczka", 1);
+						EditAttachedObject(playerid, AttachPlayerItem(playerid, 18919, 2, -0.07, 0.0, 0.0, 85.0, 170.0, 86.0, 1.000000, 1.000000, 1.000000 ));
 					}
 				}
 			}
@@ -13982,7 +14001,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno zestawu.", PlayerName(playerid));
 			SendClientMessage(id, 0xFF0030FF, string);
 		}
-		DeletePVar(playerid, "HealthPackOffer");
+		DeletePVar(playerid, "FixKitOffer");
 		return 1;
 	}
 
