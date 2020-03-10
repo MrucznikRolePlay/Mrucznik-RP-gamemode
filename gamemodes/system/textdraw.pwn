@@ -1651,7 +1651,7 @@ Speedo_PlayerLoad(playerid)
     PlayerTextDrawSetShadow(playerid,Speedo_GPS[playerid], 1);
     PlayerTextDrawSetSelectable(playerid,Speedo_GPS[playerid], 0); */
 
-    Licznik[playerid] = CreatePlayerTextDraw(playerid,529.000000, 379.000000, "Speed: 320 km/h~n~Paliwo: 320/320l~n~Stan:   100%~n~GPS: Los Santos Airport");
+    Licznik[playerid] = CreatePlayerTextDraw(playerid,529.000000, 379.000000, "Speed: 320 km/h~n~Paliwo: 320/320l~n~Stan:   100~n~GPS: Los Santos Airport");
     PlayerTextDrawBackgroundColor(playerid,Licznik[playerid], 153);
     PlayerTextDrawFont(playerid,Licznik[playerid], 1);
     PlayerTextDrawLetterSize(playerid,Licznik[playerid], 0.340000, 1.100000);

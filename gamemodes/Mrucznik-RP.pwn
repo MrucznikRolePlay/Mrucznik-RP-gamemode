@@ -625,7 +625,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 						
 						if(AP > 0)
 						{
-							if(AP < amount) SetPlayerArmour(hitid, 0);
+							if(AP < amount) SetPlayerArmour(hitid, 0); // tutaj ma zostaæ 0, bo wartosc armora poni¿ej 0 daje 100 armora (samp bug)
 							else SetPlayerArmour(hitid, AP-amount); //zabierz sampowe dmg kamizelce
 							return 0;
 						}
@@ -5046,7 +5046,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             new pZone[MAX_ZONE_NAME];
             GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);//Dzielnica
 			if(floatround(vSpeed) > pCruiseSpeed[playerid]) vSpeed = pCruiseSpeed[playerid];
-            format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d%%~n~GPS: %s~n~%s" ,floatround(vSpeed), floatround(Gas[vehicleid]), floatround(carhp/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
+            format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d~n~GPS: %s~n~%s" ,floatround(vSpeed), floatround(Gas[vehicleid]), floatround(carhp/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
             PlayerTextDrawSetString(playerid, Licznik[playerid], string);
             PlayerTextDrawShow(playerid, Licznik[playerid]);
         }
