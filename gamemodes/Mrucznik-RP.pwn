@@ -620,8 +620,6 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 							}
 						}
 						/* /\ /\ /\ DO NOT TOUCH - sampowe DMG /\ /\ /\ */
-
-						amount = amount / 2; //CUSTOMOWE DMG
 						
 						if(AP > 0)
 						{
@@ -629,6 +627,8 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 							else SetPlayerArmour(hitid, AP-amount); //zabierz sampowe dmg kamizelce
 							return 0;
 						}
+
+						amount = amount / 2; //CUSTOMOWE DMG (dopiero po wydrenowaniu armora)
 
 						if(HP <= amount) return 1; //wyœlij nabój (zabij)
 						SetPlayerHealth(hitid, HP-amount); //lub zabierz mu customowe dmg
