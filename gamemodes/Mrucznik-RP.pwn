@@ -1971,6 +1971,18 @@ public OnPlayerDeath(playerid, killerid, reason)
 							NadajWLBW(killerid, playerid, true);
 						}
 					}
+					if(PlayerInfo[playerid][pHeadValue] > 0)
+					{
+						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+						{
+							if(GoChase[killerid] == playerid)
+							{
+								SetPVarInt(playerid, "bw-hitmankiller",  1);
+								SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
+								return NadajBW(playerid, BW_TIME_CRIMINAL);
+							}
+						}
+					}
 					if(PoziomPoszukiwania[playerid] >= 1)
 					{
 						new price2 = PoziomPoszukiwania[playerid] * 1000;
@@ -2072,7 +2084,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 									SendClientMessage(playerid, COLOR_LIGHTRED, string);
 									SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
 								}
-								return 1;
+								return 1; //zrespawnuj gracza w wiêzieniu
 							}
 						}
 					}
@@ -2104,6 +2116,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 								NadajWLBW(killerid, playerid, false);
 							}
 						}
+						
 						if(PlayerInfo[playerid][pHeadValue] > 0)
 						{
 							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
