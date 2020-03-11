@@ -1961,6 +1961,23 @@ public OnPlayerDeath(playerid, killerid, reason)
 					SetStrong(playerid, FirstValue);
 				}
 
+				if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem trafi do szpitala
+				{
+					Worek_MamWorek[playerid] = 0;
+					Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
+					Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
+					Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
+					UnHave_Worek(playerid);
+				}
+				else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
+				{
+					Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
+					Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
+					Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+					Worek_Uzyty[playerid] = 0;
+					UnHave_Worek(Worek_KtoZalozyl[playerid]);
+				}
+
 				if(IsPlayerConnected(killerid))
 				{
 					PlayerInfo[killerid][pKills] ++;
