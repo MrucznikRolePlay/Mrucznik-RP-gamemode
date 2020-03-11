@@ -1911,7 +1911,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(GetPVarInt(playerid, "skip_bw") == 0)
 		{
-			if(PlayerInfo[playerid][pInjury] > 0)
+			if(PlayerInfo[playerid][pInjury] > 0) //TRYB BW
 			{
 				if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
 				{
@@ -2109,7 +2109,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 				}
 				return 1;
 			}
-			else
+			else //TRYB RANNEGO
 			{
 				if(PlayerInfo[playerid][pBW] > 0)
 				{
