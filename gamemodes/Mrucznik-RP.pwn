@@ -6616,12 +6616,12 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			}
 		}
 
-		if(GetPlayerWeapon(playerid) == 34)
+		if(GetPlayerWeapon(playerid) == 34 || GetPlayerWeapon(playerid) == 43)  //usuwanie obiektu maski podczas celowania snajperk¹/aparatem i przywracanie
 		{
 			new nick[32];
 			if(GetPVarString(playerid, "maska_nick", nick, 24))
 			{
-				if(HOLDING(KEY_HANDBRAKE)) //usuwanie maski podczas celowania snajperk¹ i przywracanie
+				if(HOLDING(KEY_HANDBRAKE))
 				{
 					if(!IsAPolicja(playerid)) RemovePlayerAttachedObject(playerid, 1);
 				}
