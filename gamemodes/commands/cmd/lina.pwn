@@ -30,6 +30,7 @@
 
 CMD:lina(playerid, cmdtext[])
 {
+    return 0;
     if(AntySpam[playerid] == 1)
     {
         sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 10 sekund");
