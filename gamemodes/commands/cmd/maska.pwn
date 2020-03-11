@@ -90,7 +90,7 @@ YCMD:maska(playerid, params[], help)
 			MSGBOX_Show(playerid, "~r~~h~Ukryto ~w~twarz", MSGBOX_ICON_TYPE_OK);
 			new maskid[6];
 			randomString(maskid, sizeof(maskid));
-			upper(maskid);
+			strToUpper(maskid);
 			format(pName, sizeof(pName), "Zamaskowany_%d", maskid);
 			if(SetPlayerName(playerid, pName))
 			{

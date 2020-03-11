@@ -38,14 +38,14 @@ IsVehicleEmpty(vehicleid)
 }
 */
 
-stock upper(str[])
-{
-    for(new i = 0, n = strlen(str); i <n; i ++)
-    {
-        str[i] = toupper(str[i]);
+stock strToUpper(string[]) {
+    new 
+        i = 0;
+    while(EOS != string[i]) {
+        if('a' <= string[i] <= 'z') string[i] -= 32; 
+        ++i;
     }
-    return 1;
-} 
+}
 
 stock randomString(strDest[], strLen) // credits go to: RyDeR`
 {
