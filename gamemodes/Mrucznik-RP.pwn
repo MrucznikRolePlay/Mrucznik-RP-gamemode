@@ -1470,14 +1470,13 @@ public OnPlayerDisconnect(playerid, reason)
 		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
-	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek da /q
+	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
 	{
 		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
 		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
-		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+		UnHave_Worek(Worek_KomuZalozylem[playerid]);
 		Worek_Uzyty[playerid] = 0;
-		UnHave_Worek(Worek_KtoZalozyl[playerid]);
-
+		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
 	}
 
     if(GetPVarInt(playerid, "kostka"))
@@ -1973,9 +1972,9 @@ public OnPlayerDeath(playerid, killerid, reason)
 				{
 					Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
 					Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
-					Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+					UnHave_Worek(Worek_KomuZalozylem[playerid]);
 					Worek_Uzyty[playerid] = 0;
-					UnHave_Worek(Worek_KtoZalozyl[playerid]);
+					Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
 				}
 
 				if(IsPlayerConnected(killerid))
