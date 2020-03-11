@@ -1097,7 +1097,7 @@ OdkujKajdanki(playerid)
 {
 	if(Kajdanki_PDkuje[playerid] != INVALID_PLAYER_ID)
 	{
-		new giveplayerid = Kajdanki_PDkuje[playerid];
+		new giveplayerid = Kajdanki_PDkuje[playerid]; //id policjanta
 		Kajdanki_PDkuje[giveplayerid] = INVALID_PLAYER_ID;
 		Kajdanki_Uzyte[giveplayerid] = 0;
 		Kajdanki_SkutyGracz[giveplayerid] = INVALID_PLAYER_ID;
@@ -5135,7 +5135,7 @@ orgInvitePlayer(playerid, orguid)
     if(!orgIsValid(orgid)) return 0;
     gPlayerOrg[playerid] = orgid;
     PlayerInfo[playerid][pOrg] = orguid;
-    PlayerInfo[playerid][pSkin] = FAM_SKINS[orguid][0];
+    //PlayerInfo[playerid][pSkin] = FAM_SKINS[orguid][0]; temporarity off
     PlayerInfo[playerid][pTeam] = 5;
     gPlayerOrgLeader[playerid] = false;
     gTeam[playerid] = 5;

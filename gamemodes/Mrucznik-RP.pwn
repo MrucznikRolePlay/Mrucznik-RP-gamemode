@@ -270,27 +270,6 @@ public OnGameModeInit()
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
-	//-------<[ Kubi BW ]>-------
-    if(dini_Exists("Settings.ini"))
-    {
-        new ust = dini_Int("Settings.ini", "OnlyGangZones");
-        SetSVarInt("BW_OnlyGangZones", ust);
-        ust = dini_Int("Settings.ini", "Time");
-        //SetSVarInt("BW_Time", ust);
-		SetSVarInt("BW_Time", 120);
-        SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
-    }
-    else
-    {
-        dini_Create("Settings.ini");
-        dini_IntSet("Settings.ini", "OnlyGangZones", 0);
-        dini_IntSet("Settings.ini", "Time", 180);
-        dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
-        SetSVarInt("BW_OnlyGangZones", 0);
-        SetSVarInt("BW_Time", 140);//bylo 180
-    }
-
-
     LoadConfig();
     WczytajRangi();
     WczytajSkiny();
@@ -1856,7 +1835,7 @@ public StandUp(playerid)
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-	new string[128];
+	new string[144];
 
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
 
@@ -1987,12 +1966,20 @@ public OnPlayerDeath(playerid, killerid, reason)
 							NadajWLBW(killerid, playerid, true);
 						}
 					}
-					if(PlayerInfo[playerid][pHeadValue] > 0)
+					if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
 					{
 						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
 						{
 							if(GoChase[killerid] == playerid)
 							{
+								//jeœli zabity mia³ kajdanki
+								if(Kajdanki_JestemSkuty[playerid] != 0) // gdy skuty da /q
+								{
+									format(string, sizeof(string), "* Wiêzieñ %s zosta³ zastrzelony przez Hitmana (MK). Nastêpnym razem zadbaj o bezpieczeñstwo swojego wiêŸnia *", GetNick(playerid));
+									SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTRED, string);
+									OdkujKajdanki(playerid);
+								}
+
 								SetPVarInt(playerid, "bw-hitmankiller",  1);
 								SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
 								return NadajBW(playerid, BW_TIME_CRIMINAL);
@@ -2130,19 +2117,6 @@ public OnPlayerDeath(playerid, killerid, reason)
 							if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
 							{
 								NadajWLBW(killerid, playerid, false);
-							}
-						}
-
-						if(PlayerInfo[playerid][pHeadValue] > 0)
-						{
-							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
-							{
-								if(GoChase[killerid] == playerid)
-								{
-									SetPVarInt(playerid, "bw-hitmankiller",  1);
-									SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
-									return NadajBW(playerid, BW_TIME_CRIMINAL);
-								}
 							}
 						}
 
@@ -7187,6 +7161,8 @@ public OnPlayerText(playerid, text[])
 		    			GotHit[hitmanid] = 1;
 		    			hitmanid = 0;
 		    			hitfound = 0;
+
+						ConnectedToPC[playerid] = 0; //roz³¹czanie z laptopem po akcji
 				        return 0;
 				    }
 				    else
@@ -7410,7 +7386,6 @@ public OnPlayerText(playerid, text[])
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Order");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Rangi");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Wyloguj");
-		    SendClientMessage(playerid, COLOR_YELLOW2, "|");
 			SendClientMessage(playerid, COLOR_WHITE, "|______________|00:00|");
 		    return 0;
 		}

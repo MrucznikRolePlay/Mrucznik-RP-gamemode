@@ -111,8 +111,6 @@
 		> msgbox - wyœwietla MSG box
 		> gotoczit - teleportuje na miejsce zbrodni 
 		> anulujzp - anuluje zabranie prawa jazdy dla gracza o ID
-		> bwsettings - odpala ustawienia BW
-		> bwtime - ustala BW time
 		> addcar - dodaje pojazd na mapê o podanym ID
 		> removecar - usuwa pojazd z mapy o podanym ID
 		> setac - ustawia anty-cheat'a

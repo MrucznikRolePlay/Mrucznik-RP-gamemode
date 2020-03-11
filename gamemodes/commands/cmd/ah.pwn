@@ -95,7 +95,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 25)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*25* ADMIN *** /flip /snn /unaj /setfamily /forceskin /skydive NEW: /bonehead");
+		SendClientMessage(playerid, COLOR_GRAD4,"*25* ADMIN *** /flip /snn /unaj /setfamily /forceskin /skydive");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 35)
 	{
@@ -114,7 +114,7 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /weather /weatherall /makeadmin /makeleader /tod /savemission /loadmission /startlotto");
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /barierka /usunbarier /wydaj /cela /sprzedaja");
-		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /unfrakcja /makeircadmin /makemember /unmember /giverank /checkcars NEW: /bwsettings");
+		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /unfrakcja /makeircadmin /makemember /unmember /giverank /checkcars");
 		SendClientMessage(playerid, COLOR_GRAD1, "{FF6A6A}* System @DUTY *** {C0C0C0}/checkadminstats [ID]");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 2000)
@@ -127,13 +127,13 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /KickEx_all /bdaj /starttimer /startalltimer /killtimer /killalltimer /zniszczobiekty /stworzobiekty");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /setmats /setskin /setjob /setdom /setdomk /setwiek /setname /setstat /setarmor /givegun /money /givemoney");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zrobdom /lzrobdom /usundom /blokujdom /resetsejfhasla /zapiszdomy /zapiszkonta");
-		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /rodzinalider /scena /houseowner /domint /dajskryptera /bwtime /bw");
+		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /rodzinalider /scena /houseowner /domint /dajskryptera /bw");
 	}
 	if (IsAHeadAdmin(playerid) || IsAScripter(playerid))
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** Jesteœ koxem przez X ***");
         SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zonedelay /gangzone /removezoneprotect /removeganglimit /clearzone /setzonecontrol");
-		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /agraffiti /adajrange /antybh /bwsettings /bwtime /dajlicencje /glosowanie");
+		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /agraffiti /adajrange /antybh /dajlicencje /glosowanie");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /makeleader /makemember /msgbox /restart /setac /setarmor /setserverpass");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /showkary /startskinevent(!) /stworzobiekty /unfrakcja /wczytajskrypt /wlsett");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zmiendom /zmienprace /zniszczobiekt /setvregistration /zmienwiek /dnobiekt");
