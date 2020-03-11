@@ -37,6 +37,23 @@ IsVehicleEmpty(vehicleid)
   return 1;
 }
 */
+
+stock upper(str[])
+{
+    for(new i = 0, n = strlen(str); i <n; i ++)
+    {
+        str[i] = toupper(str[i]);
+    }
+    return 1;
+} 
+
+stock randomString(strDest[], strLen) // credits go to: RyDeR`
+{
+	strDest[--strLen] = '\0';
+    while(strLen--)
+        strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
+}
+
 GetTickDiff(newtick, oldtick)
 {
 	if (oldtick < 0 && newtick >= 0) {

@@ -81,9 +81,13 @@ YCMD:maska(playerid, params[], help)
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			if(!IsAPolicja(playerid)) SetPlayerAttachedObject(playerid, 1, 19036, 2, 0.1, 0.05, -0.005, 0, 90, 90);//maska hokeisty biala
 			MSGBOX_Show(playerid, "~r~~h~Ukryto ~w~twarz", MSGBOX_ICON_TYPE_OK);
-			format(pName, sizeof(pName), "Zamaskowany_%d", PlayerInfo[playerid][pUID]);
+			new maskid[6];
+			randomString(maskid, sizeof(maskid));
+			upper(maskid);
+			format(pName, sizeof(pName), "Zamaskowany_%d", maskid);
 			if(SetPlayerName(playerid, pName))
 			{
+				Log(maskLog, INFO, "Gracz %s za³o¿y³ maskê %s", GetPlayerLogName(playerid), pName);
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);
 				SetRPName(playerid);
 				format(PlayerInfo[playerid][pNick], 24, "%s", pName);

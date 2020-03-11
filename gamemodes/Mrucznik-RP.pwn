@@ -5795,13 +5795,6 @@ OnPlayerRegister(playerid, password[])
 	return 1;
 }
 
-stock randomString(strDest[], strLen) // credits go to: RyDeR`
-{
-	strDest[--strLen] = '\0';
-    while(strLen--)
-        strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
-}
-
 DialogChangePasswordRequired(playerid)
 {
 	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wymagana jest zmiana has³a do konta.\n{FF00FF}Istnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ..");
