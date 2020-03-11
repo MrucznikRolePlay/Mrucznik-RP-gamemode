@@ -1419,6 +1419,15 @@ ZerujZmienne(playerid)
 
 	ParachuteHit[playerid] = 0;
 
+	new nick[32];
+	if(GetPVarString(playerid, "maska_nick", nick, 24))
+	{
+		SetPlayerName(playerid, nick);
+		SetRPName(playerid);
+		format(PlayerInfo[playerid][pNick], 24, "%s", nick);
+		DeletePVar(playerid, "maska_nick");
+	}
+
     for(new i=0;i<MAX_CAR_SLOT;i++) PlayerInfo[playerid][pCars][i] = 0;
 
     strdel(PlayerDesc[playerid], 0, 128 char);

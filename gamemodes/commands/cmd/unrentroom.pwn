@@ -39,7 +39,7 @@ YCMD:unrentroom(playerid, params[], help)
 				new lokator[MAX_PLAYER_NAME];
 			    new kox12[MAX_PLAYER_NAME];
 			    format(kox12, sizeof(kox12), "Brak");
-			    GetPlayerName(playerid, lokator, sizeof(lokator));
+				lokator = GetNickEx(playerid);
 			    new dom = PlayerInfo[playerid][pWynajem];
 			    if(strcmp(Dom[dom][hL1], lokator, true) == 0)
 			    {

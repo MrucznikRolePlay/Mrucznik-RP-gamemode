@@ -1290,7 +1290,7 @@ command_akceptuj_Impl(playerid, x_job[32])
             if(kaska[playerid] > Dom[dom][hCenaWynajmu] && Dom[dom][hCenaWynajmu] > 0)
             {
                 GetPlayerName(WynajemOffer[playerid], giveplayer, sizeof(giveplayer));
-                GetPlayerName(playerid, sendername, sizeof(sendername));
+                sendername = GetNickEx(playerid);
                 if(Dom[dom][hPW] == 0)
                 {
                     Dom[dom][hL1] = sendername;

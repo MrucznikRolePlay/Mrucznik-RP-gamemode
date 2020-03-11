@@ -5489,7 +5489,13 @@ ZaladujDomy()
 	            new GeT[MAX_PLAYER_NAME];
 	            new message[128];
 	            new SEJF[20];
-	            format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
+				format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
+				if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
+				{
+					new playernick[26];
+    				strmid(playernick, MruMySQL_GetNameFromUID(dini_Int(string, "UID_Wlascicela")), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+					format(GeT, sizeof(GeT), "%s", playernick);
+				}
     			Dom[i][hID] = i;
     			Dom[i][hDomNr] = dini_Int(string, "DomNr");
     			Dom[i][hZamek] = dini_Int(string, "Zamek");

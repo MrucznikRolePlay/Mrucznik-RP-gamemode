@@ -51,7 +51,7 @@ YCMD:rentroom(playerid, params[], help)
 								{
 								    if(Dom[i][hWynajem] == 1)
 									{
-										GetPlayerName(playerid, sendername, sizeof(sendername));
+										sendername = GetNickEx(playerid);
 										if(Dom[i][hPW] == 0)
 										{
 											Dom[i][hL1] = sendername;
@@ -104,7 +104,7 @@ YCMD:rentroom(playerid, params[], help)
 									    {
 										    if(Dom[i][hTWW] == PlayerInfo[playerid][pMember] || Dom[i][hTWW] == PlayerInfo[playerid][pLider])
 										    {
-                                                GetPlayerName(playerid, sendername, sizeof(sendername));
+                                                sendername = GetNickEx(playerid);
 												if(Dom[i][hPW] == 0)
 												{
 													Dom[i][hL1] = sendername;

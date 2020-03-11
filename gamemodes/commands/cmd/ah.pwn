@@ -50,12 +50,12 @@ YCMD:ah(playerid, params[], help)
 	}
     if (IsAScripter(playerid))
     {
-        SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /respawn /(a) dmin chat /setint /getint /setvw /getvw");
-        SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /goto /gotopos /gethere /respawnplayer");
-        SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
-        SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
-        SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /gotomechy /gotobank /gotostacja");
-		SendClientMessage(playerid, COLOR_GRAD1, "*5* SKRYPTER *** /zdejmijbpk /dajdowozu /specshow");
+        SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /respawn /(a) dmin chat /setint /getint /setvw /getvw");
+        SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /goto /gotopos /gethere /respawnplayer");
+        SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
+        SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
+        SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotomechy /gotobank /gotostacja");
+		SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /zdejmijbpk /dajdowozu /specshow");
     }
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
@@ -133,7 +133,7 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_WHITE,"*** Jesteœ koxem przez X ***");
         SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zonedelay /gangzone /removezoneprotect /removeganglimit /clearzone /setzonecontrol");
-		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /agraffiti /adajrange /antybh /dajlicencje /glosowanie");
+		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /agraffiti /adajrange /antybh /dajlicencje /glosowanie /gotodom");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /makeleader /makemember /msgbox /restart /setac /setarmor /setserverpass");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /showkary /startskinevent(!) /stworzobiekty /unfrakcja /wczytajskrypt /wlsett");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zmiendom /zmienprace /zniszczobiekt /setvregistration /zmienwiek /dnobiekt");
