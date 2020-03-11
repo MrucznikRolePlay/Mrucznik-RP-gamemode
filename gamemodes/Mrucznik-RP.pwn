@@ -2120,6 +2120,18 @@ public OnPlayerDeath(playerid, killerid, reason)
 							}
 						}
 
+						if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
+						{
+							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+							{
+								if(GoChase[killerid] == playerid)
+								{
+									format(string, sizeof(string), "* Dobij %s, ¿eby wype³niæ kontrakt *", GetNick(playerid));
+									SendClientMessage(killerid, COLOR_LIGHTRED, string);
+								}
+							}
+						}
+
 						SetPVarInt(playerid, "bw-reason", reason);
 						if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
 						{

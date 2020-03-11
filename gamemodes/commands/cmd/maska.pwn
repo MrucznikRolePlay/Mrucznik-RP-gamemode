@@ -56,6 +56,13 @@ YCMD:maska(playerid, params[], help)
 				sendErrorMessage(playerid, "OSTRZE¯ENIE: Nadu¿ywanie maski skutkuje natychmiastowym wyrzuceniem z frakcji.");
 			}
 		}
+		if(AntySpam[playerid] == 1)
+	    {
+	        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
+	        return 1;
+	    }
+		SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+		AntySpam[playerid] = 1;
 		new string[64];
 		new sendername[MAX_PLAYER_NAME];
 		new nick[32];
