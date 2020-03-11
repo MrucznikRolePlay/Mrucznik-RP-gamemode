@@ -14068,7 +14068,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			PrzedmiotyZmienBron(playerid, PlayerInfo[playerid][pGun0]);
+			//PrzedmiotyZmienBron(playerid, PlayerInfo[playerid][pGun0]);
 			GUIExit[playerid] = 0;
 			return 1;
 		}
