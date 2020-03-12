@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ bonehead ]-----------------------------------------------//
+//------------------------------------------------[ gotodom ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,16 +28,34 @@
 	
 */
 
-YCMD:bonehead(playerid, params[], help) {
-    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 25 || IsAScripter(playerid)) {
-        new ust[128];
-        if(sscanf(params, "s[128]", ust)) return sendTipMessage(playerid, "U¿yj /bonehead [URL do linku muzyki]");
-        //dini_IntSet("BWSettings.ini", "Time", ust);
-        //SetSVarInt("BW_Time", ust);
-        dini_Set("Settings.ini", "muzyka_bonehead", ust);
-        SetSVarString("muzyka_bonehead", ust);
-    } else {
-        return noAccessMessage(playerid);
-    }
-    return 1;
+YCMD:gotodom(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+		if(IsAScripter(playerid))
+		{
+		    new domid;
+			if( sscanf(params, "d", domid))
+			{
+				sendTipMessage(playerid, "U¿yj /gotodom [domid]");
+				return 1;
+			}
+
+			if (GetPlayerState(playerid) == 2)
+			{
+				new tmpcar = GetPlayerVehicleID(playerid);
+				SetVehiclePos(tmpcar, Dom[domid][hWej_X], Dom[domid][hWej_Y], Dom[domid][hWej_Z]);
+			}
+			else
+			{
+				SetPlayerPos(playerid, Dom[domid][hWej_X], Dom[domid][hWej_Y], Dom[domid][hWej_Z]);
+			}
+			_MruAdmin(playerid, "Zosta³eœ teleportowany");
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
+	return 1;
 }

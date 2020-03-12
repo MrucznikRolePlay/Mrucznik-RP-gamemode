@@ -270,27 +270,6 @@ public OnGameModeInit()
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
-	//-------<[ Kubi BW ]>-------
-    if(dini_Exists("Settings.ini"))
-    {
-        new ust = dini_Int("Settings.ini", "OnlyGangZones");
-        SetSVarInt("BW_OnlyGangZones", ust);
-        ust = dini_Int("Settings.ini", "Time");
-        //SetSVarInt("BW_Time", ust);
-		SetSVarInt("BW_Time", 120);
-        SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
-    }
-    else
-    {
-        dini_Create("Settings.ini");
-        dini_IntSet("Settings.ini", "OnlyGangZones", 0);
-        dini_IntSet("Settings.ini", "Time", 180);
-        dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
-        SetSVarInt("BW_OnlyGangZones", 0);
-        SetSVarInt("BW_Time", 140);//bylo 180
-    }
-
-
     LoadConfig();
     WczytajRangi();
     WczytajSkiny();
@@ -1470,14 +1449,13 @@ public OnPlayerDisconnect(playerid, reason)
 		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
-	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek da /q
+	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
 	{
 		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
 		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
-		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+		UnHave_Worek(Worek_KomuZalozylem[playerid]);
 		Worek_Uzyty[playerid] = 0;
-		UnHave_Worek(Worek_KtoZalozyl[playerid]);
-
+		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
 	}
 
     if(GetPVarInt(playerid, "kostka"))
@@ -1857,7 +1835,7 @@ public StandUp(playerid)
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-	new string[128];
+	new string[144];
 
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
 
@@ -1912,7 +1890,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(GetPVarInt(playerid, "skip_bw") == 0)
 		{
-			if(PlayerInfo[playerid][pInjury] > 0)
+			if(PlayerInfo[playerid][pInjury] > 0) //TRYB BW
 			{
 				if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
 				{
@@ -1961,6 +1939,23 @@ public OnPlayerDeath(playerid, killerid, reason)
 					SetStrong(playerid, FirstValue);
 				}
 
+				if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem trafi do szpitala
+				{
+					Worek_MamWorek[playerid] = 0;
+					Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
+					Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
+					Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
+					UnHave_Worek(playerid);
+				}
+				else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
+				{
+					Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
+					Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
+					UnHave_Worek(Worek_KomuZalozylem[playerid]);
+					Worek_Uzyty[playerid] = 0;
+					Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+				}
+
 				if(IsPlayerConnected(killerid))
 				{
 					PlayerInfo[killerid][pKills] ++;
@@ -1971,12 +1966,20 @@ public OnPlayerDeath(playerid, killerid, reason)
 							NadajWLBW(killerid, playerid, true);
 						}
 					}
-					if(PlayerInfo[playerid][pHeadValue] > 0)
+					if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
 					{
 						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
 						{
 							if(GoChase[killerid] == playerid)
 							{
+								//jeœli zabity mia³ kajdanki
+								if(Kajdanki_JestemSkuty[playerid] != 0) // gdy skuty da /q
+								{
+									format(string, sizeof(string), "* Wiêzieñ %s zosta³ zastrzelony przez Hitmana (MK). Nastêpnym razem zadbaj o bezpieczeñstwo swojego wiêŸnia *", GetNick(playerid));
+									SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTRED, string);
+									OdkujKajdanki(playerid);
+								}
+
 								SetPVarInt(playerid, "bw-hitmankiller",  1);
 								SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
 								return NadajBW(playerid, BW_TIME_CRIMINAL);
@@ -2093,7 +2096,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 				}
 				return 1;
 			}
-			else
+			else //TRYB RANNEGO
 			{
 				if(PlayerInfo[playerid][pBW] > 0)
 				{
@@ -2117,15 +2120,14 @@ public OnPlayerDeath(playerid, killerid, reason)
 							}
 						}
 
-						if(PlayerInfo[playerid][pHeadValue] > 0)
+						if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
 						{
 							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
 							{
 								if(GoChase[killerid] == playerid)
 								{
-									SetPVarInt(playerid, "bw-hitmankiller",  1);
-									SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
-									return NadajBW(playerid, BW_TIME_CRIMINAL);
+									format(string, sizeof(string), "* Dobij %s, ¿eby wype³niæ kontrakt *", GetNick(playerid));
+									SendClientMessage(killerid, COLOR_LIGHTRED, string);
 								}
 							}
 						}
@@ -5779,13 +5781,6 @@ OnPlayerRegister(playerid, password[])
 	return 1;
 }
 
-stock randomString(strDest[], strLen) // credits go to: RyDeR`
-{
-	strDest[--strLen] = '\0';
-    while(strLen--)
-        strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
-}
-
 DialogChangePasswordRequired(playerid)
 {
 	SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Wymagana jest zmiana has³a do konta.\n{FF00FF}Istnieje ryzyko, ¿e Twoje has³o wyciek³o w postaci zaszyfrowanej.\nJe¿eli u¿ywa³eœ takiego samego has³a do innych kont/us³ug - radzimy je zmieniæ..");
@@ -6616,12 +6611,12 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			}
 		}
 
-		if(GetPlayerWeapon(playerid) == 34)
+		if(GetPlayerWeapon(playerid) == 34 || GetPlayerWeapon(playerid) == 43)  //usuwanie obiektu maski podczas celowania snajperk¹/aparatem i przywracanie
 		{
 			new nick[32];
 			if(GetPVarString(playerid, "maska_nick", nick, 24))
 			{
-				if(HOLDING(KEY_HANDBRAKE)) //usuwanie maski podczas celowania snajperk¹ i przywracanie
+				if(HOLDING(KEY_HANDBRAKE))
 				{
 					if(!IsAPolicja(playerid)) RemovePlayerAttachedObject(playerid, 1);
 				}
@@ -7178,6 +7173,8 @@ public OnPlayerText(playerid, text[])
 		    			GotHit[hitmanid] = 1;
 		    			hitmanid = 0;
 		    			hitfound = 0;
+
+						ConnectedToPC[playerid] = 0; //roz³¹czanie z laptopem po akcji
 				        return 0;
 				    }
 				    else
@@ -7401,7 +7398,6 @@ public OnPlayerText(playerid, text[])
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Order");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Rangi");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Wyloguj");
-		    SendClientMessage(playerid, COLOR_YELLOW2, "|");
 			SendClientMessage(playerid, COLOR_WHITE, "|______________|00:00|");
 		    return 0;
 		}

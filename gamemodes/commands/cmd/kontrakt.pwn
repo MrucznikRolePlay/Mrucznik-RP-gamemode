@@ -51,61 +51,58 @@ YCMD:kontrakt(playerid, params[], help)
 		}
 		if (IsPlayerConnected(giveplayerid))
 		{
-		    if(giveplayerid != INVALID_PLAYER_ID)
-		    {
-			    if(PlayerInfo[playerid][pMember] == 8 )
-			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu bêd¹c hitmanem!");
-			        return 1;
-			    }
-			    else if(PlayerInfo[playerid][pMember] == 8)
-			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu bêd¹c hitmanem!");
-			        return 1;
-			    }
-			    else if(PlayerInfo[giveplayerid][pMember] == 8||PlayerInfo[giveplayerid][pLider] == 8)
-			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
-			        return 1;
-			    }
-			    else if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || IsAScripter(giveplayerid))
-			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
-			        return 1;
-			    }
-			    if(PlayerInfo[giveplayerid][pLider] >= 1 && moneys < 100000)
-			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Za g³owê lidera trzeba zap³aciæ conajmniej 100000$ !");
-			        return 1;
-			    }
-			    else if(IsAPolicja(giveplayerid) && moneys < 50000)
-			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Za g³owê policjanta trzeba zap³aciæ conajmniej 50000$ !");
-			        return 1;
-			    }
-			    else if(PlayerInfo[giveplayerid][pMember] >= 1 && moneys < 20000)
-			    {
-			        sendTipMessageEx(playerid, COLOR_GREY, "Za g³owê cz³onka organizacji trzeba zap³aciæ conajmniej 20000$ !");
-			        return 1;
-			    }
-			    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz daæ kontraktu na samego siebie!"); return 1; }
-				GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				new playermoney = kaska[playerid];
-				if (moneys > 0 && playermoney >= moneys)
-				{
-					ZabierzKase(playerid, moneys);
-					PlayerInfo[giveplayerid][pHeadValue]+=moneys;
-					format(string, sizeof(string), "%s podpisa³ kontrakt na %s, nagroda za wykonanie $%d.",sendername, giveplayer, moneys);
-					SendFamilyMessage(8, COLOR_YELLOW, string);
-					format(string, sizeof(string), "* Podpisa³eœ kontrakt na %s, za $%d.",giveplayer, moneys);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-				}
-				else
-				{
-					sendTipMessageEx(playerid, COLOR_GRAD1, "Z³a kwota.");
-				}
+			if(PlayerInfo[playerid][pMember] == 8 )
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu bêd¹c hitmanem!");
+				return 1;
+			}
+			else if(PlayerInfo[playerid][pMember] == 8)
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu bêd¹c hitmanem!");
+				return 1;
+			}
+			else if(PlayerInfo[giveplayerid][pMember] == 8||PlayerInfo[giveplayerid][pLider] == 8)
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
+				return 1;
+			}
+			else if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || IsAScripter(giveplayerid))
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
+				return 1;
+			}
+			if(PlayerInfo[giveplayerid][pLider] >= 1 && moneys < 100000)
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Za g³owê lidera trzeba zap³aciæ conajmniej 100000$ !");
+				return 1;
+			}
+			else if(IsAPolicja(giveplayerid) && moneys < 50000)
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Za g³owê policjanta trzeba zap³aciæ conajmniej 50000$ !");
+				return 1;
+			}
+			else if(PlayerInfo[giveplayerid][pMember] >= 1 && moneys < 20000)
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Za g³owê cz³onka organizacji trzeba zap³aciæ conajmniej 20000$ !");
+				return 1;
+			}
+			if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz daæ kontraktu na samego siebie!"); return 1; }
+			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			new playermoney = kaska[playerid];
+			if (moneys > 0 && playermoney >= moneys)
+			{
+				ZabierzKase(playerid, moneys);
+				PlayerInfo[giveplayerid][pHeadValue]+=moneys;
+				format(string, sizeof(string), "%s podpisa³ kontrakt na %s, nagroda za wykonanie $%d.",sendername, giveplayer, moneys);
+				SendFamilyMessage(8, COLOR_YELLOW, string);
+				format(string, sizeof(string), "* Podpisa³eœ kontrakt na %s, za $%d.",giveplayer, moneys);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+				PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+			}
+			else
+			{
+				sendTipMessageEx(playerid, COLOR_GRAD1, "Z³a kwota.");
 			}
 		}
 		else
