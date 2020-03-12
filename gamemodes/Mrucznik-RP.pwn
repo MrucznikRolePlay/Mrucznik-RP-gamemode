@@ -5576,7 +5576,6 @@ PayDay()
 	CountDown();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
-	for(new i; i < GRAFFITI_MAX; i++) graffiti_ReloadForPlayers(i);
 	
 	if(DmvActorStatus && shifthour < 16 || shifthour > 22)
 	{
