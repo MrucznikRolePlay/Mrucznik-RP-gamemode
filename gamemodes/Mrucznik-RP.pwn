@@ -6298,13 +6298,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     {
         if(GetPlayerVehicleSeat(playerid) == 0)
         {
-            #if BLINK_ALLOW_EMERGENCY == 1
-            if(PRESSED(KEY_LOOK_BEHIND))
-            {
-                if(!IsCarBlinking(veh)) SetCarBlinking(veh, 2), SetPVarInt(playerid, "blink-car", veh);
-    		    else DisableCarBlinking(veh);
-            }
-            #endif
         	if(PRESSED(KEY_LOOK_LEFT))
             {
     			if(!IsCarBlinking(veh)) SetCarBlinking(veh, 0), SetPVarInt(playerid, "blink-car", veh);
