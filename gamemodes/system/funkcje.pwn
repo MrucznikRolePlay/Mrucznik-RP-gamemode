@@ -27,16 +27,6 @@ SSCANF:fix(string[])
 	
 	return ret;
 }
-/*
-IsVehicleEmpty(vehicleid)
-{
-  for(new i; i < MAX_PLAYERS; i++)
-  {
-    if(IsPlayerConnected(i) && IsPlayerInAnyVehicle(i) && GetPlayerVehicleID(i) == vehicleid) return 0;
-  }
-  return 1;
-}
-*/
 
 stock strToUpper(string[]) {
     new i = 0;
