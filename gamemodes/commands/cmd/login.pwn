@@ -48,6 +48,12 @@ YCMD:login(playerid, params[], help)
 			sendTipMessage(playerid, "Gracz nie jest zalogowany.");
 			return 1;
 		}
+		new nick[24];
+		if(GetPVarString(playa, "maska_nick", nick, 24))
+		{
+			SendClientMessage(playerid, COLOR_GREY, " Gracz musi œci¹gn¹æ maskê z twarzy! (/maska).");
+			return 1;
+		}
 		new string[144];
 		new giveplayer[MAX_PLAYER_NAME];
 		new Float:slx, Float:sly, Float:slz;

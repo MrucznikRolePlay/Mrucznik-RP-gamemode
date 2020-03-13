@@ -44,6 +44,7 @@ hook OnGameModeInit()
 	connectLog = CreateLog("logi/connect", ALL, false);
 	mysqlLog = CreateLog("logi/mysql", ALL, true);
 	moneyLog = CreateLog("logi/money", ALL, false);
+	maskLog = CreateLog("logi/mask", ALL, false);
 	errorLog = CreateLog("logi/error", ERROR, true);
 
 	//old
@@ -66,6 +67,7 @@ hook OnGameModeExit()
 	DestroyLog(connectLog);
 	DestroyLog(mysqlLog);
 	DestroyLog(moneyLog);
+	DestroyLog(maskLog);
 	DestroyLog(errorLog);
 	DestroyLog(admindutyLog);
 }

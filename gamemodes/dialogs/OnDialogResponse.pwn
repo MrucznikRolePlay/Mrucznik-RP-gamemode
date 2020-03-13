@@ -3279,10 +3279,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 20: //maseczka ochronna
 					{
+						if(kaska[playerid] < 15000) 
+						{
+							sendErrorMessage(playerid, "Nie staæ Ciê na maseczkê ochronn¹!");
+							return 1;
+						}
 						if(GetPVarInt(playerid, "maseczka") == 1)
 						{
-							format(string, sizeof(string), "Ju¿ masz maseczkê!");
-							SendClientMessage(playerid, COLOR_GRAD4, string);
+							sendErrorMessage(playerid, "Masz ju¿ maseczkê ochronn¹!");
 							return 1;
 						}
 						ZabierzKase(playerid, 15000);
@@ -14064,7 +14068,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			PrzedmiotyZmienBron(playerid, PlayerInfo[playerid][pGun0]);
+			//PrzedmiotyZmienBron(playerid, PlayerInfo[playerid][pGun0]);
 			GUIExit[playerid] = 0;
 			return 1;
 		}

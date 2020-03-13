@@ -37,6 +37,11 @@ YCMD:ruleta(playerid, params[], help)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, 1038.22924805,-1090.59741211,-67.52223969))
         {
+			if(kaska[playerid] < 10000) 
+			{
+				sendErrorMessage(playerid, "Nie staæ Ciê na grê w ruletkê ($10000)!");
+				return 1;
+			}
 			new ruletka = true_random(36);
 			if(ruletka == 0)
 			{

@@ -37,6 +37,23 @@ IsVehicleEmpty(vehicleid)
   return 1;
 }
 */
+
+stock strToUpper(string[]) {
+    new 
+        i = 0;
+    while(EOS != string[i]) {
+        if('a' <= string[i] <= 'z') string[i] -= 32; 
+        ++i;
+    }
+}
+
+stock randomString(strDest[], strLen) // credits go to: RyDeR`
+{
+	strDest[--strLen] = '\0';
+    while(strLen--)
+        strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
+}
+
 GetTickDiff(newtick, oldtick)
 {
 	if (oldtick < 0 && newtick >= 0) {
@@ -1080,7 +1097,7 @@ OdkujKajdanki(playerid)
 {
 	if(Kajdanki_PDkuje[playerid] != INVALID_PLAYER_ID)
 	{
-		new giveplayerid = Kajdanki_PDkuje[playerid];
+		new giveplayerid = Kajdanki_PDkuje[playerid]; //id policjanta
 		Kajdanki_PDkuje[giveplayerid] = INVALID_PLAYER_ID;
 		Kajdanki_Uzyte[giveplayerid] = 0;
 		Kajdanki_SkutyGracz[giveplayerid] = INVALID_PLAYER_ID;
@@ -5118,7 +5135,7 @@ orgInvitePlayer(playerid, orguid)
     if(!orgIsValid(orgid)) return 0;
     gPlayerOrg[playerid] = orgid;
     PlayerInfo[playerid][pOrg] = orguid;
-    PlayerInfo[playerid][pSkin] = FAM_SKINS[orguid][0];
+    //PlayerInfo[playerid][pSkin] = FAM_SKINS[orguid][0]; temporarity off
     PlayerInfo[playerid][pTeam] = 5;
     gPlayerOrgLeader[playerid] = false;
     gTeam[playerid] = 5;
@@ -5472,7 +5489,13 @@ ZaladujDomy()
 	            new GeT[MAX_PLAYER_NAME];
 	            new message[128];
 	            new SEJF[20];
-	            format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
+				format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
+				if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
+				{
+					new playernick[26];
+    				strmid(playernick, MruMySQL_GetNameFromUID(dini_Int(string, "UID_Wlascicela")), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+					format(GeT, sizeof(GeT), "%s", playernick);
+				}
     			Dom[i][hID] = i;
     			Dom[i][hDomNr] = dini_Int(string, "DomNr");
     			Dom[i][hZamek] = dini_Int(string, "Zamek");

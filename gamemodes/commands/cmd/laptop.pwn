@@ -45,10 +45,10 @@ YCMD:laptop(playerid, params[], help)
 		    GetPlayerName(playerid, sendername, sizeof(sendername));
 		    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* W³¹czy³eœ swój laptop i po³¹czy³eœ siê z agencj¹.");
 		    SendClientMessage(playerid, COLOR_WHITE, "|___ Hitman Agency ___|");
-		    SendClientMessage(playerid, COLOR_YELLOW2, "|");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - News");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Kontrakty");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Givehit");
+		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Backup");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Order");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Rangi");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Wyloguj");

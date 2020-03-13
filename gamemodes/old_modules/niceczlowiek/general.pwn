@@ -320,10 +320,6 @@ Player_CanUseCar(playerid, vehicleid)
                     return 0;
 	            }
 	        }
-			else
-			{
-				sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
-			}
 	    }
 	}
 

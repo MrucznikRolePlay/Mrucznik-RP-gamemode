@@ -35,7 +35,7 @@ command_zaraz_Impl(playerid, giveplayerid, disease[32])
     {
         CureFromAllDiseases(giveplayerid);
         Log(adminLog, INFO, "Admin %s wyleczy³ %s z wszystkich chorób", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
-        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "   Admin wyleczy³ Ciê z chorób.");
+        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("   Admin %s wyleczy³ Ciê ze wszystkich chorób.", GetNickEx(playerid)));
         SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("   Wyleczy³eœ gracza %s ze wszystkich chorób.", GetNick(giveplayerid)));
         return 1;
     }
