@@ -199,22 +199,22 @@ choroby_InitEffects()
     //eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, pernament, contagiousRange, infectionChance, additionalValue)
     AddEffect(KORONAWIRUS, "WuhanCouching", "", 
         ONE_MINUTE*2, ONE_MINUTE*5, 
-        false, 10.0, 50, 
+        false, 7.0, 10, 
         0
     );
     AddEffect(KORONAWIRUS, "DusznosciEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 3.0, 50, 
-        30
+        false, 3.0, 10, 
+        15
     );
     AddEffect(KORONAWIRUS, "FeverEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 3.0, 50, 
+        false, 3.0, 10, 
         30
     );
     AddEffect(KORONAWIRUS, "KoronawirusDeathEffect", "", 
         RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 10.0, 100, 
+        false, 5.0, 50, 
         200
     );
 

@@ -5095,7 +5095,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     		SetPlayerPos(playerid, slx, sly, slz+0.2);
     		ClearAnimations(playerid);
         }
-
+		if(IsACopCar(GetPlayerVehicleID(playerid))) sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
         if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
@@ -5576,7 +5576,6 @@ PayDay()
 	CountDown();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
-	for(new i; i < GRAFFITI_MAX; i++) graffiti_ReloadForPlayers(i);
 	
 	if(DmvActorStatus && shifthour < 16 || shifthour > 22)
 	{
@@ -6298,13 +6297,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     {
         if(GetPlayerVehicleSeat(playerid) == 0)
         {
-            #if BLINK_ALLOW_EMERGENCY == 1
-            if(PRESSED(KEY_LOOK_BEHIND))
-            {
-                if(!IsCarBlinking(veh)) SetCarBlinking(veh, 2), SetPVarInt(playerid, "blink-car", veh);
-    		    else DisableCarBlinking(veh);
-            }
-            #endif
         	if(PRESSED(KEY_LOOK_LEFT))
             {
     			if(!IsCarBlinking(veh)) SetCarBlinking(veh, 0), SetPVarInt(playerid, "blink-car", veh);
