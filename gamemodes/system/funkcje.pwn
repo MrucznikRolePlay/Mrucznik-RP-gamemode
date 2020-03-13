@@ -39,10 +39,9 @@ IsVehicleEmpty(vehicleid)
 */
 
 stock strToUpper(string[]) {
-    new 
-        i = 0;
+    new i = 0;
     while(EOS != string[i]) {
-        if('a' <= string[i] <= 'z') string[i] -= 32; 
+        if('a' >= string[i] && string[i] <= 'z') string[i] -= 32; 
         ++i;
     }
 }
