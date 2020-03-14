@@ -5124,7 +5124,10 @@ orgInvitePlayer(playerid, orguid)
     if(!orgIsValid(orgid)) return 0;
     gPlayerOrg[playerid] = orgid;
     PlayerInfo[playerid][pOrg] = orguid;
-    //PlayerInfo[playerid][pSkin] = FAM_SKINS[orguid][0]; temporarity off
+	if(FAM_SKINS[orguid][0] > 0)
+	{
+		PlayerInfo[playerid][pUniform] = FAM_SKINS[orguid][0];
+	}
     PlayerInfo[playerid][pTeam] = 5;
     gPlayerOrgLeader[playerid] = false;
     gTeam[playerid] = 5;
