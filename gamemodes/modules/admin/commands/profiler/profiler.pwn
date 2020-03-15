@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  profiler                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,27 +27,41 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "diagnozuj\diagnozuj.pwn"
-#include "kuracja\kuracja.pwn"
-#include "maseczka\maseczka.pwn"
-#include "ulecz\ulecz.pwn"
-#include "uleczall\uleczall.pwn"
-#include "zaraz\zaraz.pwn"
-#include "zastrzyk\zastrzyk.pwn"
-
+#include "profiler_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_profiler()
 {
-    command_diagnozuj();
-    command_kuracja();
-    command_maseczka();
-    command_ulecz();
-    command_uleczall();
-    command_zaraz();
-    command_zastrzyk();
+    new command = Command_GetID("profiler");
+
+    //aliases
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:profiler(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zarz¹dzanie profilerem.");
+        return 1;
+    }
+    //fetching params
+    new option[32];
+    if(sscanf(params, "s[32]", option))
+    {
+        sendTipMessage(playerid, "U¿yj /profiler [start|stop|dump|status] ");
+        return 1;
+    }
+    
+    //command body
+    return command_profiler_Impl(playerid, option);
 }
