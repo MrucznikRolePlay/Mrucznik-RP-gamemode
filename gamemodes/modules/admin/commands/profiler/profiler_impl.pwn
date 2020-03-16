@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_profiler_Impl(playerid, option[32])
 {
-    if(IsPlayerAdmin(playerid)) 
+    if(!IsPlayerAdmin(playerid)) 
     {
         noAccessMessage(playerid);
         return 1;
