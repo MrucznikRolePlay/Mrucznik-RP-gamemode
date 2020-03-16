@@ -62,7 +62,6 @@ command_profiler_Impl(playerid, option[32])
 			case PROFILER_STOPPING: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_STOPPING");
 			case PROFILER_STOPPED: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_STOPPED");
 		}
-        SendClientMessage(playerid, 0xFFFFFFFF, "Dump stworzony.");
         return 1;
     }
     return 1;
