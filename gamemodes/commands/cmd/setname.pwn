@@ -62,8 +62,8 @@ YCMD:setname(playerid, params[], help)
 		        if(PlayerInfo[giveplayerid][pBusinessOwner] == INVALID_BIZ_ID)
 		        {
                     GetPlayerName(giveplayerid, giveplayer, MAX_PLAYER_NAME);
-					new sender_log_name[MAX_PLAYER_NAME];
-					new giveplayer_log_name[MAX_PLAYER_NAME];
+					new sender_log_name[50];
+					new giveplayer_log_name[50];
 					format(sender_log_name, sizeof(sender_log_name), "%s", GetPlayerLogName(playerid));
 					format(giveplayer_log_name, sizeof(giveplayer_log_name), "%s", GetPlayerLogName(giveplayerid));
                     if(ChangePlayerName(giveplayerid, newname))

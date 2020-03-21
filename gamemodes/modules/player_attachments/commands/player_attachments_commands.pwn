@@ -32,8 +32,8 @@
 //-------<[ include ]>-------
 #include "dajobiekt\dajobiekt.pwn"
 #include "dnobiekt\dnobiekt.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
 #include "dodatki\dodatki.pwn"
+#include "zabierzobiekt\zabierzobiekt.pwn"
 #include "zdejmij\zdejmij.pwn"
 
 
@@ -42,8 +42,8 @@ hook OnGameModeInit()
 {
     command_dajobiekt();
     command_dnobiekt();
-    command_zabierzobiekt();
     command_dodatki();
+    command_zabierzobiekt();
     command_zdejmij();
     
 }
