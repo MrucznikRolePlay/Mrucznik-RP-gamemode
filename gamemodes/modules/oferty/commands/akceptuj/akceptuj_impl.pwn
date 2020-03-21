@@ -986,13 +986,11 @@ command_akceptuj_Impl(playerid, x_job[32])
                 sendErrorMessage(playerid, "Nikt nie oferowa³ Ci uwolnienia z wiêzienia!"); 
                 return 1;
             }
-            //Test XD
-            GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));
             format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia za kwotê %d$", GetNick(playerid), money);
-            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-            
-            format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s za kwotê %d$", sendername, money);
             SendClientMessage(OfferPlayer[playerid], COLOR_LIGHTBLUE, string);
+            
+            format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s za kwotê %d$", GetNick(OfferPlayer[playerid]), money);
+            SendClientMessage(playerid , COLOR_LIGHTBLUE, string);
             
             //Czynnoœci
             PlayerInfo[playerid][pJailTime] = 1;
