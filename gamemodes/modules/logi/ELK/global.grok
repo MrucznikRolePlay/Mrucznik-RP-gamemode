@@ -36,3 +36,4 @@ SEJF_LOG SEJF %{DATA:sejf_type:string} \[%{INT:id:int}\] \+ \[%{INT:income:int}\
 
 NICK_LOG %{PLAYER_NAME} zmienił nick na: %{NICKNAME:new_name:string}
 NICK_LOG_ADMIN Admin %{PLAYER_ADMIN} zmienił %{PLAYER_NAME} nick na %{NICKNAME:new_name:string}
+NICK_LOG_MASKA Gracz %{PLAYER_NAME} założył maskę %{NICKNAME:new_name:string}
