@@ -561,8 +561,9 @@ SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 	{
 		iloscPozaDuty[adminid]++; 
 	}
+	new actual_aj_time = MruMySQL_GetAccInt("JailTime", nickOdbieracza);
 	MruMySQL_SetAccInt("Jailed", nickOdbieracza, 3);
-	MruMySQL_SetAccInt("JailTime", nickOdbieracza, timeVal*60);
+	MruMySQL_SetAccInt("JailTime", nickOdbieracza, actual_aj_time + (timeVal * 60));
 	MruMySQL_SetAccString("AJreason", nickOdbieracza, result);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
