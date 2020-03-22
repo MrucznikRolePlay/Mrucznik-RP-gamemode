@@ -27,22 +27,11 @@ SSCANF:fix(string[])
 	
 	return ret;
 }
-/*
-IsVehicleEmpty(vehicleid)
-{
-  for(new i; i < MAX_PLAYERS; i++)
-  {
-    if(IsPlayerConnected(i) && IsPlayerInAnyVehicle(i) && GetPlayerVehicleID(i) == vehicleid) return 0;
-  }
-  return 1;
-}
-*/
 
 stock strToUpper(string[]) {
-    new 
-        i = 0;
+    new i = 0;
     while(EOS != string[i]) {
-        if('a' <= string[i] <= 'z') string[i] -= 32; 
+        if('a' >= string[i] && string[i] <= 'z') string[i] -= 32; 
         ++i;
     }
 }
@@ -5135,7 +5124,10 @@ orgInvitePlayer(playerid, orguid)
     if(!orgIsValid(orgid)) return 0;
     gPlayerOrg[playerid] = orgid;
     PlayerInfo[playerid][pOrg] = orguid;
-    //PlayerInfo[playerid][pSkin] = FAM_SKINS[orguid][0]; temporarity off
+	if(FAM_SKINS[orguid][0] > 0)
+	{
+		PlayerInfo[playerid][pUniform] = FAM_SKINS[orguid][0];
+	}
     PlayerInfo[playerid][pTeam] = 5;
     gPlayerOrgLeader[playerid] = false;
     gTeam[playerid] = 5;

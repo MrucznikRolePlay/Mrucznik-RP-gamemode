@@ -30,24 +30,24 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "skiny\skiny.pwn"
-#include "premiumpanel\premiumpanel.pwn"
-#include "setmc\setmc.pwn"
-#include "premiumskin\premiumskin.pwn"
 #include "addmc\addmc.pwn"
 #include "checkpremium\checkpremium.pwn"
 #include "dajkp\dajkp.pwn"
+#include "premiumpanel\premiumpanel.pwn"
+#include "premiumskin\premiumskin.pwn"
+#include "setmc\setmc.pwn"
+#include "skiny\skiny.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_skiny();
-    command_premiumpanel();
-    command_setmc();
-    command_premiumskin();
     command_addmc();
     command_checkpremium();
     command_dajkp();
+    command_premiumpanel();
+    command_premiumskin();
+    command_setmc();
+    command_skiny();
     
 }

@@ -55,7 +55,7 @@ YCMD:ah(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotomechy /gotobank /gotostacja");
-		SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /zdejmijbpk /dajdowozu /specshow");
+		SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /zdejmijbpk /dajdowozu /specshow /setdrunk");
     }
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
@@ -99,7 +99,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 35)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*35* ADMIN *** /undemorgan /fuelcars /setchamp /logout");
+		SendClientMessage(playerid, COLOR_GRAD4,"*35* ADMIN *** /undemorgan /fuelcars /setchamp /logout /setdrunk");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 100)
 	{

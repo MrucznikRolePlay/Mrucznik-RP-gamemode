@@ -30,7 +30,7 @@
 
 YCMD:bw(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 100)
+    if(PlayerInfo[playerid][pAdmin] >= 100 || IsAScripter(playerid))
 	{
 		new giveplayerid, czas, string[144];
 		if(sscanf(params, "k<fix>d", giveplayerid, czas))

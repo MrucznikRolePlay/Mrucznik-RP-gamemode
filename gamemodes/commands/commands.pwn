@@ -292,6 +292,7 @@
 #include "cmd/newbie.pwn"
 #include "cmd/newcar.pwn"
 #include "cmd/noa.pwn"
+#include "cmd/setdrunk.pwn"
 #include "cmd/nonewbie.pwn"
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"

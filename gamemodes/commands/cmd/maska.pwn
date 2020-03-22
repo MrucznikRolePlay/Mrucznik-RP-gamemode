@@ -94,11 +94,11 @@ YCMD:maska(playerid, params[], help)
 			format(pName, sizeof(pName), "Zamaskowany_%d", maskid);
 			if(SetPlayerName(playerid, pName))
 			{
-				Log(maskLog, INFO, "Gracz %s za³o¿y³ maskê %s", GetPlayerLogName(playerid), pName);
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);
 				SetRPName(playerid);
 				format(PlayerInfo[playerid][pNick], 24, "%s", pName);
 				SetPVarString(playerid, "maska_nick", sendername);
+				Log(nickLog, INFO, "Gracz %s za³o¿y³ maskê %s", GetPlayerLogName(playerid), pName);
 			}
 		
 		} 

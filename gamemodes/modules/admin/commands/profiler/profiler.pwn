@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                    logi                                                   //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  profiler                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,52 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//-----------------<[ Zmienne: ]>-------------------
-new Logger:adminLog; //Logi akcji administracyjnych
-new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
-new Logger:premiumLog; //Logi z systemu premium
-new Logger:punishmentLog; //Logi nadawania oraz zdejmowania kar dla graczy
-new Logger:warningLog; //Logi warningów administracyjnych
-new Logger:commandLog; //Logi komendy wykonanych przez graczy
-new Logger:nickLog; //Logi zmian nicków
-new Logger:sejfLog; //Logi stanu sejfów
-new Logger:serverLog; //Logi akcji serwera
-new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
-new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
-new Logger:chatLog; //Logi chatów
-new Logger:moneyLog; //Logi akcji zwi¹zanych z pieniêdzmi
-new Logger:errorLog; //Logi b³êdów wraz ze œcie¿k¹ wyst¹pienia
-new Logger:mysqlLog; //B³êdy mySQL
 
-//old
-new Logger:admindutyLog;
+//-------<[ include ]>-------
+#include "profiler_impl.pwn"
 
-//------------------<[ Enumy: ]>--------------------
-//------------------<[ Forwardy: ]>--------------------
+//-------<[ initialize ]>-------
+command_profiler()
+{
+    new command = Command_GetID("profiler");
 
-//end
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:profiler(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zarz¹dzanie profilerem.");
+        return 1;
+    }
+    //fetching params
+    new option[32];
+    if(sscanf(params, "s[32]", option))
+    {
+        sendTipMessage(playerid, "U¿yj /profiler [start|stop|dump|status] ");
+        return 1;
+    }
+    
+    //command body
+    return command_profiler_Impl(playerid, option);
+}

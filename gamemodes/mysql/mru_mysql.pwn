@@ -1167,7 +1167,7 @@ stock MruMySQL_GetAccString(kolumna[], nick[])
 	mysql_real_escape_string(kolumna, kolumna);
 	mysql_real_escape_string(nick, nick);
 	
-	format(string, sizeof(string), "SELECT `%s` FROM `mru_konta` WHERE `Nick` = '%d'", kolumna, nick);
+	format(string, sizeof(string), "SELECT `%s` FROM `mru_konta` WHERE `Nick` = '%s'", kolumna, nick);
 	mysql_query(string);
 	mysql_store_result();
 		

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                    logi                                                   //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  profiler                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,31 +17,54 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Mrucznik
-// Data utworzenia: 04.05.2019
+// Data utworzenia: 15.03.2020
+
 
 //
 
-//-----------------<[ Zmienne: ]>-------------------
-new Logger:adminLog; //Logi akcji administracyjnych
-new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
-new Logger:premiumLog; //Logi z systemu premium
-new Logger:punishmentLog; //Logi nadawania oraz zdejmowania kar dla graczy
-new Logger:warningLog; //Logi warningów administracyjnych
-new Logger:commandLog; //Logi komendy wykonanych przez graczy
-new Logger:nickLog; //Logi zmian nicków
-new Logger:sejfLog; //Logi stanu sejfów
-new Logger:serverLog; //Logi akcji serwera
-new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
-new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
-new Logger:chatLog; //Logi chatów
-new Logger:moneyLog; //Logi akcji zwi¹zanych z pieniêdzmi
-new Logger:errorLog; //Logi b³êdów wraz ze œcie¿k¹ wyst¹pienia
-new Logger:mysqlLog; //B³êdy mySQL
+//------------------<[ Implementacja: ]>-------------------
+command_profiler_Impl(playerid, option[32])
+{
+    if(!IsPlayerAdmin(playerid)) 
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
 
-//old
-new Logger:admindutyLog;
-
-//------------------<[ Enumy: ]>--------------------
-//------------------<[ Forwardy: ]>--------------------
+    if(strcmp(option, "start", true) == 0)
+    {
+		Profiler_Start();
+        SendClientMessage(playerid, 0xFFFFFFFF, "Profilowanie wystartowane.");
+        return 1;
+    }
+	else if(strcmp(option, "stop", true) == 0)
+    {
+		Profiler_Stop();
+        SendClientMessage(playerid, 0xFFFFFFFF, "Profilowanie zatrzymane.");
+        return 1;
+    }
+	else if(strcmp(option, "dump", true) == 0)
+    {
+		Profiler_Dump();
+        SendClientMessage(playerid, 0xFFFFFFFF, "Dump stworzony.");
+        return 1;
+    }
+	else if(strcmp(option, "status", true) == 0)
+    {
+		new ProfilerState:s = Profiler_GetState();
+		switch(s) 
+		{
+			case PROFILER_DISABLED: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_DISABLED");
+			case PROFILER_ATTACHING: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_ATTACHING");
+			case PROFILER_ATTACHED: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_ATTACHED");
+			case PROFILER_STARTING: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_STARTING");
+			case PROFILER_STARTED: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_STARTED");
+			case PROFILER_STOPPING: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_STOPPING");
+			case PROFILER_STOPPED: SendClientMessage(playerid, 0xFFFFFFFF, "PROFILER_STOPPED");
+		}
+        return 1;
+    }
+    return 1;
+}
 
 //end

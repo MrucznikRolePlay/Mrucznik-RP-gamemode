@@ -59,6 +59,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <timestamptodate>
 #include <discord-connector>
 #include <memory>
+#include <profiler_plugin>
 //TODO: add plugins
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
@@ -1747,6 +1748,7 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
 		amount,
 		weaponid);
+	return 1;
 }
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
@@ -5230,6 +5232,9 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij aby spróbowaæ to zrobiæ.");
                 KradniecieWozu[playerid] = 1;
+				new engine, lights, alarm, doors, bonnet, boot, objective;
+				GetVehicleParamsEx(newcar, engine, lights, alarm, doors, bonnet, boot, objective);
+				if(engine) SetVehicleParamsEx(newcar, 0, lights, alarm, doors, bonnet, boot, objective);
 			}
         }
 		gLastCar[playerid] = newcar;

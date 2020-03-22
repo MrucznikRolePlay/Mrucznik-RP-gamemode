@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                    logi                                                   //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//------------------------------------------------[ nodrunk ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,56 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 04.05.2019
 
-//
+// Opis:
+/*
+	
+*/
 
-//-----------------<[ Zmienne: ]>-------------------
-new Logger:adminLog; //Logi akcji administracyjnych
-new Logger:payLog; //Logi z transakcji zwi¹zanych z pieniêdzmi graczy
-new Logger:premiumLog; //Logi z systemu premium
-new Logger:punishmentLog; //Logi nadawania oraz zdejmowania kar dla graczy
-new Logger:warningLog; //Logi warningów administracyjnych
-new Logger:commandLog; //Logi komendy wykonanych przez graczy
-new Logger:nickLog; //Logi zmian nicków
-new Logger:sejfLog; //Logi stanu sejfów
-new Logger:serverLog; //Logi akcji serwera
-new Logger:connectLog; //Logi logowañ/po³¹czeñ/roz³¹czeñ
-new Logger:damageLog; //Logi œmierci oraz obra¿eñ odniesionych przez graczy
-new Logger:chatLog; //Logi chatów
-new Logger:moneyLog; //Logi akcji zwi¹zanych z pieniêdzmi
-new Logger:errorLog; //Logi b³êdów wraz ze œcie¿k¹ wyst¹pienia
-new Logger:mysqlLog; //B³êdy mySQL
 
-//old
-new Logger:admindutyLog;
+// Notatki skryptera:
+/*
+	
+*/
 
-//------------------<[ Enumy: ]>--------------------
-//------------------<[ Forwardy: ]>--------------------
+YCMD:setdrunk(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        new string[144];
+		if (PlayerInfo[playerid][pAdmin] >= 35 || IsAScripter(playerid) )
+		{
+			new giveplayerid, level;
+			if(sscanf(params, "dd", giveplayerid, level))
+			{
+				sendTipMessage(playerid, "U¿yj /setdrunk [ID] [poziom (2000 wy³¹cza | max 50000)]");
+				return 1;
+			}
 
-//end
+			if(IsPlayerConnected(giveplayerid))
+            {
+				if(level < 2000) level = 2000;
+				else if(level > 50000) return sendTipMessage(playerid, "U¿yj /setdrunk [ID] [poziom (2000 wy³¹cza | max 50000)]");
+
+				SetPlayerDrunkLevel(giveplayerid, level);
+				format(string, sizeof(string), "AdmCmd: %s [%d] ustawi³ %s [%d] efekt pijactwa na [%d]", 
+					GetNickEx(playerid), 
+					playerid,
+					GetNick(giveplayerid),
+					giveplayerid,
+					(level == 2000 ? '0' : level)
+				); 
+				SendMessageToAdmin(string, COLOR_RED);
+            }
+            else
+            {
+                return sendErrorMessage(playerid, "Nie ma takiego gracza"); 
+            }
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
+	return 1;
+}
