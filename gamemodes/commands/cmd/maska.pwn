@@ -89,18 +89,16 @@ YCMD:maska(playerid, params[], help)
 			if(!IsAPolicja(playerid)) SetPlayerAttachedObject(playerid, 1, 19036, 2, 0.1, 0.05, -0.005, 0, 90, 90);//maska hokeisty biala
 			MSGBOX_Show(playerid, "~r~~h~Ukryto ~w~twarz", MSGBOX_ICON_TYPE_OK);
 			new maskid[6];
-			new oldNickLogName[50];
-			strcat(oldNickLogName, GetPlayerLogName(playerid));
 			randomString(maskid, sizeof(maskid));
 			strToUpper(maskid);
 			format(pName, sizeof(pName), "Zamaskowany_%d", maskid);
 			if(SetPlayerName(playerid, pName))
 			{
-				Log(nickLog, INFO, "Gracz %s za³o¿y³ maskê %s", oldNickLogName, pName);
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);
 				SetRPName(playerid);
 				format(PlayerInfo[playerid][pNick], 24, "%s", pName);
 				SetPVarString(playerid, "maska_nick", sendername);
+				Log(nickLog, INFO, "Gracz %s za³o¿y³ maskê %s", GetPlayerLogName(playerid), pName);
 			}
 		
 		} 
