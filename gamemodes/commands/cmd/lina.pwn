@@ -30,7 +30,6 @@
 
 CMD:lina(playerid, cmdtext[])
 {
-    if(!DEVELOPMENT) return 0;
     if(AntySpam[playerid] == 1)
     {
         sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 10 sekund");
@@ -55,10 +54,6 @@ CMD:lina(playerid, cmdtext[])
         format(string, sizeof(string), "* %s opuszcza siê na linie z helikoptera.", sendername);
         ProxDetector(60.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         for(new i=0;i!=10;i++) ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
-        for(new i=0;i<=pl_pos[playerid][4];i++)
-        {
-            r0pes[playerid][i] = CreateDynamicObject(3004,pl_pos[playerid][0],pl_pos[playerid][1],floatadd(pl_pos[playerid][3],i),87.640026855469,342.13500976563, 350.07507324219);
-        }
         SetTimerEx("syncanim",DUR,0,"i",playerid);
     }
     else

@@ -1306,15 +1306,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		KillTimer(saveMyAccountTimer[playerid]);
 	}
-
-	//PAèDZIOCH - lina SWAT
-	if(GetPVarInt(playerid,"roped") == 1)
- 	{
-  		for(new i=0;i<ROPELENGTH;i++)
-  		{
-    		DestroyDynamicObject(r0pes[playerid][i]);
-      	}
-	}
+	
     //budki telefoniczne
     if(GetPVarInt(playerid, "budka-Mobile") != 999) {
         new caller = GetPVarInt(playerid, "budka-Mobile");
@@ -1862,10 +1854,6 @@ public OnPlayerDeath(playerid, killerid, reason)
     }
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
-  		for(new i=0;i<ROPELENGTH;i++)
-    	{
-     		DestroyDynamicObject(r0pes[playerid][i]);
-       	}
 		ClearAnimations(playerid);
 		SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
         SetPVarInt(playerid,"roped",0);
@@ -6580,10 +6568,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
 				SetPVarInt(playerid,"chop_id",0);
-				for(new i=0;i<ROPELENGTH;i++)
-				{
-					DestroyDynamicObject(r0pes[playerid][i]);
-				}
 			}
 		}
 		if(PRESSED(KEY_FIRE))
@@ -6680,10 +6664,6 @@ public OnVehicleDeath(vehicleid, killerid)
           		SetPVarInt(i,"roped",0);
              	ClearAnimations(i);
               	TogglePlayerControllable(i,1);
-               	for(new j=0;j<ROPELENGTH;j++)
-                {
-                	DestroyDynamicObject(r0pes[i][j]);
-                }
 			}
 		}
 	}
