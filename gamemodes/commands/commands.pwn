@@ -236,7 +236,6 @@
 #include "cmd/kup.pwn"
 #include "cmd/kuparmor.pwn"
 #include "cmd/kupbiletpociag.pwn"
-#include "cmd/kupbron.pwn"
 #include "cmd/kupdildo.pwn"
 #include "cmd/kuphelikopter.pwn"
 #include "cmd/kupkredyty.pwn"
@@ -851,9 +850,6 @@ static Aliases()
 
 	//kup
 	Command_AddAltNamed("kup", "buy");
-
-	//kuparmor
-	Command_AddAltNamed("kupbron", "buygun");
 
 	//kupbiletpociag
 	Command_AddAltNamed("kupbiletpociag", "kbpo");
