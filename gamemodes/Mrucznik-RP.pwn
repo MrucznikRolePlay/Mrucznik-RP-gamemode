@@ -1479,6 +1479,7 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pJailed] = 10;
         new string[130];
         new powod[36];
+		new additional[36];
         if(PlayerTied[playerid] >= 1)
         {
             strcat(powod, "bycie zwiazanym, ");
@@ -1490,6 +1491,7 @@ public OnPlayerDisconnect(playerid, reason)
         if(Kajdanki_JestemSkuty[playerid] >= 1)
         {
             strcat(powod, "kajdanki pieszo, ");
+			format(additional, sizeof(additional), " - skuwaj¹cy: %s [%d]", GetNick(Kajdanki_PDkuje[playerid]), Kajdanki_PDkuje[playerid]);
         }
         if(poscig[playerid] >= 1)
         {
@@ -1502,7 +1504,7 @@ public OnPlayerDisconnect(playerid, reason)
             case 1: codal = "/q";
             case 2: codal = "kick/ban";
         }
-        format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNickEx(playerid), powod, codal);
+        format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)%s", GetNickEx(playerid), powod, codal, additional);
         SendAdminMessage(COLOR_P@, string);
 	}
 
