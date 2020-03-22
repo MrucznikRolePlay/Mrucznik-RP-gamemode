@@ -36,6 +36,7 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu!");
 						SejfR_Add(FAMILY_IBIZA, ibiza_priceNormal);
+						Log(payLog, INFO, "%s kupi³ bilet normalny (Ibiza) za $ %d", GetPlayerLogName(playerid), ibiza_priceNormal);
 					}else{
 						SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy!");
 					}
@@ -47,6 +48,7 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu VIP!");
 						SejfR_Add(FAMILY_IBIZA, ibiza_priceVIP);
+						Log(payLog, INFO, "%s kupi³ bilet VIP (Ibiza) za $ %d", GetPlayerLogName(playerid), ibiza_priceNormal);
 					}else{
 						SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy!");
 					}
@@ -113,30 +115,28 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 				case 6:{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_NORMAL_TICKET, DIALOG_STYLE_INPUT, "IbizaClub - Normalny bilet", "Wpisz cenê biletu normalnego", "ZatwierdŸ", "Anuluj");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_NORMAL_TICKET, DIALOG_STYLE_INPUT, "IbizaClub - Normalny bilet", "Wpisz cenê biletu normalnego\nMax 250000 $", "ZatwierdŸ", "Anuluj");
 				}
 				case 7:{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_VIP_TICKET, DIALOG_STYLE_INPUT, "IbizaClub - Normalny bilet", "Wpisz cenê biletu VIP", "ZatwierdŸ", "Anuluj");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_VIP_TICKET, DIALOG_STYLE_INPUT, "IbizaClub - Normalny bilet", "Wpisz cenê biletu VIP\nMax 500000 $", "ZatwierdŸ", "Anuluj");
 				}
 			}
 		}
 	}
 	if(dialogid == DIALOG_IBIZA_NORMAL_TICKET){
 		if(response){
-			ibiza_priceNormal = strval(inputtext);
-            if(ibiza_priceNormal < 0)
-            {
-                ibiza_priceNormal = 0;
-            }
+			new price = strval(inputtext);
+			if(price < 0) ibiza_priceNormal = 0;
+			else if(price > 250000) ibiza_priceNormal = 250000;
+			else ibiza_priceNormal = price;
 		}
 	}
 	if(dialogid == DIALOG_IBIZA_VIP_TICKET){
 		if(response){
-			ibiza_priceVIP = strval(inputtext);
-            if(ibiza_priceVIP < 0)
-            {
-                ibiza_priceVIP = 0;
-            }
+			new price = strval(inputtext);
+			if(price < 0) ibiza_priceVIP = 0;
+			else if(price > 500000) ibiza_priceVIP = 500000;
+			else ibiza_priceVIP = price;
 		}
 	}
 	if(dialogid == DIALOG_IBIZA_TEXT_ONE){
