@@ -39,6 +39,7 @@ YCMD:sprzedajzestaw(playerid, params[], help)
 		{
 			if(id != INVALID_PLAYER_ID)
 			{
+				if(id == playerid)  return sendTipMessage(playerid, "Nie mo¿esz sprzedaæ sobie zestawu.");
 				if(AntySpam[playerid] == 1)
 				{
 					sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 15 sekund");
