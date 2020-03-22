@@ -28,6 +28,11 @@ command_lowienie_Impl(playerid)
     new string[128];
     if(PlayerInfo[playerid][pFishes] > 5)
     {
+        if(!GetPVarInt(playerid, "AntySpamLowienie"))
+        {
+			SetPVarInt(playerid, "AntySpamLowienie", 1);
+            SetTimerEx("AntySpamLowienie", 840000, 0, "d",playerid); //14 minut
+        }
         sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 10-15 minut zanim znowu zaczniesz ³owiæ!");
         return 1;
     }
