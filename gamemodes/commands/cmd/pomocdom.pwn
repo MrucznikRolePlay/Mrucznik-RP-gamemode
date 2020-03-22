@@ -36,7 +36,7 @@ YCMD:pomocdom(playerid, params[], help)
 	    {
 			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
 			SendClientMessage(playerid, COLOR_WHITE,"*** DOM POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom /tv (off/gracz) /apteczka /pancerz /zbrojownia");
+			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /wejdz /wyjdz /dom /zlomujdom (off/gracz) /apteczka /armor /zbrojownia");
 			SendClientMessage(playerid, COLOR_GRAD3,"*** DOM *** /sejf /dominfo /garazuj");
 			SendClientMessage(playerid, COLOR_GREEN,"______________________________________________________________________________");
 		}

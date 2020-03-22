@@ -4793,7 +4793,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
-		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
+		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d] MruCoins [%d]", housekey,PlayerInfo[targetid][pKluczeAuta], PremiumInfo[targetid][pMC]);
 		SendClientMessage(playerid, COLOR_GRAD6,coordsstring);
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	}
@@ -7981,7 +7981,7 @@ PolicjantWStrefie(Float:radi, playerid)
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
 	    	if(IsPlayerInRangeOfPoint(i, radi, rangex, rangey, rangez))
 	        {
-	            if(IsAPolicja(i) && Spectate[i] == INVALID_PLAYER_ID)
+	            if(IsAPolicja(i) && Spectate[i] == INVALID_PLAYER_ID && i != playerid)
 	            {
 	            	return 1;
 	            }
