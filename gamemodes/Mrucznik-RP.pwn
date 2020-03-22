@@ -1306,7 +1306,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		KillTimer(saveMyAccountTimer[playerid]);
 	}
-	
+
     //budki telefoniczne
     if(GetPVarInt(playerid, "budka-Mobile") != 999) {
         new caller = GetPVarInt(playerid, "budka-Mobile");
@@ -5940,7 +5940,7 @@ OnPlayerLogin(playerid, password[])
 		//£adowanie konta i zmiennych:
 		//----------------------------
 
-		if( !MruMySQL_LoadAcocount(playerid) )
+		if( !MruMySQL_LoadAccount(playerid) )
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b³¹d konta. Zg³oœ zaistnia³¹ sytuacjê na forum.");
 			Log(serverLog, ERROR, "Krytyczny b³¹d konta %s (pusty rekord?)", nick);

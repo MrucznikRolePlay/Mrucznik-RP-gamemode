@@ -54,6 +54,7 @@ forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
 forward PoscigTimer(playerid);
 forward AntySpamTimer(playerid);
+forward AntySpamLowienie(playerid);
 forward AntyBusCzit(playerid);
 forward spamujebronia(playerid);
 forward odpalanie(playerid);
@@ -127,7 +128,7 @@ forward Scena_ScreenEffect();
 forward VehicleUpdate();
 forward OnPlayerEnterOilSpot(playerid);
 //
-forward MruMySQL_LoadAcocount(playerid);
+forward MruMySQL_LoadAccount(playerid);
 //12.10
 forward VendCheck(playerid);
 //30.10
