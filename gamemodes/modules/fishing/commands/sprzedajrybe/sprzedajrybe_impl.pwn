@@ -61,7 +61,7 @@ command_sprzedajrybe_Impl(playerid, fishid)
     else if(fishid == 2 && Fishes[playerid][pWeight2] >= 1)
     {
         SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 2!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish2], Fishes[playerid][pWeight2], Fishes[playerid][pWeight2]*20);
+        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish2], Fishes[playerid][pWeight2], Fishes[playerid][pWeight2]*5);
         SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         DajKase(playerid, Fishes[playerid][pWeight2]*25);
         ClearFishID(playerid, fishid);
@@ -72,7 +72,7 @@ command_sprzedajrybe_Impl(playerid, fishid)
     else if(fishid == 3 && Fishes[playerid][pWeight3] >= 1)
     {
         SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 3!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish3], Fishes[playerid][pWeight3], Fishes[playerid][pWeight3]*20);
+        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish3], Fishes[playerid][pWeight3], Fishes[playerid][pWeight3]*5);
         SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         DajKase(playerid, Fishes[playerid][pWeight3]*25);
         ClearFishID(playerid, fishid);
@@ -83,7 +83,7 @@ command_sprzedajrybe_Impl(playerid, fishid)
     else if(fishid == 4 && Fishes[playerid][pWeight4] >= 1)
     {
         SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 4!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish4], Fishes[playerid][pWeight4], Fishes[playerid][pWeight4]*20);
+        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish4], Fishes[playerid][pWeight4], Fishes[playerid][pWeight4]*5);
         SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         DajKase(playerid, Fishes[playerid][pWeight4]*25);
         ClearFishID(playerid, fishid);
@@ -94,7 +94,7 @@ command_sprzedajrybe_Impl(playerid, fishid)
     else if(fishid == 5 && Fishes[playerid][pWeight5] >= 1)
     {
         SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 5!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish5], Fishes[playerid][pWeight5], Fishes[playerid][pWeight5]*20);
+        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish5], Fishes[playerid][pWeight5], Fishes[playerid][pWeight5]*5);
         SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
         DajKase(playerid, Fishes[playerid][pWeight5]*25);
         ClearFishID(playerid, fishid);
