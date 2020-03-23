@@ -38,35 +38,9 @@ enum gGroups
 };
 
 //-----------------<[ Zmienne: ]>-------------------
-/*new pPerms[] = 
-{
-    GROUP_PERM_SPECIAL,
-    GROUP_PERM_DRAFT,
-    GROUP_PERM_ARREST,
-    GLOBAL_GROUP_CHAT,
-    GLOBAL_GROUP_MEGAFON,
-    GLOBAL_GROUP_OOC,
-    GLOBAL_GROUP_NICK,
-    GLOBAL_GROUP_CRIME,
-    GLOBAL_GROUP_GPS,
-    GLOBAL_GROUP_LINA,
-    GLOBAL_GROUP_WYPLAC,
-    GLOBAL_GROUP_CHATIC,
-    GLOBAL_GROUP_HAK,
-    GLOBAL_GROUP_INCOGNITO,
-    GLOBAL_GROUP_DEPT,
-    GLOBAL_GROUP_NEWS,
-    GLOBAL_GROUP_TAG,
-    GLOBAL_GROUP_GANGZONE,
-    GLOBAL_GROUP_LISTING,
-    GLOBAL_GROUP_ARREST,
-    GLOBAL_GROUP_DRIVEBY,
-    GLOBAL_GROUP_ROBBERY
-};
-*/
 new GroupInfo[MAX_GROUPS][gGroups];
 new RankInfo[MAX_GROUPS][rRanks];
-new PermsInfo[MAX_GROUPS][MAX_RANKS][MAX_PERMISSION];
+new PermsInfo[MAX_GROUPS][MAX_RANKS][MAX_PERMISSION]; //U¯YCIE: PermsInfo[group_id][rank_level][perm_code]
 
 //------------------<[ Forwardy: ]>--------------------
 

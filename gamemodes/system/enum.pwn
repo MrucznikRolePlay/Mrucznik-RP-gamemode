@@ -1228,6 +1228,7 @@ enum pInfo
 	//pZiolo,
 	pLider,
 	pMember,
+	pGroup,
 	pOrg,
 	pRank,
 	pChar,

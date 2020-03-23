@@ -251,6 +251,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Materials`='%d',\
 	`Drugs`='%d',\
 	`Member`='%d',\
+	`Group`='%d',\
 	`FMember`='%d',\
 	`Rank`='%d',\
 	`Char`='%d',\
@@ -282,6 +283,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pMats],
 	PlayerInfo[playerid][pDrugs],
 	PlayerInfo[playerid][pMember],
+	PlayerInfo[playerid][pGroup],
 	PlayerInfo[playerid][pOrg],
 	(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]),
 	PlayerInfo[playerid][pChar],
@@ -561,7 +563,7 @@ public MruMySQL_LoadAccount(playerid)
 
 	new lStr[1024], id=0;
 
-    lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `AJreason`, `JailTime`, `Materials`,`Drugs`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
+    lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `AJreason`, `JailTime`, `Materials`,`Drugs`, `Member`, `Group`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
 
     format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
 	mysql_query(lStr);
@@ -571,7 +573,7 @@ public MruMySQL_LoadAccount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
         id++;
-		sscanf(lStr, "p<|>ds[24]dddddddddddddddddddddddddddds[64]ddddddddd",
+		sscanf(lStr, "p<|>ds[24]dddddddddddddddddddddddddddds[64]dddddddddd",
 		PlayerInfo[playerid][pUID],
 		PlayerInfo[playerid][pNick],
 		PlayerInfo[playerid][pLevel], 
@@ -607,6 +609,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pMats], 
 		PlayerInfo[playerid][pDrugs], 
 		PlayerInfo[playerid][pMember], 
+		PlayerInfo[playerid][pGroup], 
 		PlayerInfo[playerid][pOrg],
 		PlayerInfo[playerid][pRank], 
 		PlayerInfo[playerid][pChar], 

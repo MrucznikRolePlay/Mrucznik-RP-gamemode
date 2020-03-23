@@ -23,48 +23,46 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 
-#define MAX_GROUPS      200
-#define MAX_RANKS       10
-#define MAX_PERMISSION  38
+#define MAX_GROUPS          30
+#define MAX_RANKS           10
+#define MAX_PERMISSION      3
 
-#define GROUP_PERM_SPECIAL  	1
-#define GROUP_PERM_DRAFT    	2
-#define GROUP_PERM_ARREST       3
+#define GROUP_PERM_TEST  	1
+#define GROUP_PERM_ARREST   2
 
-#define GLOBAL_GROUP_CHAT   	4
-#define GLOBAL_GROUP_MEGAFON    5
-#define GLOBAL_GROUP_OOC        6
-#define GLOBAL_GROUP_NICK       7
-#define GLOBAL_GROUP_CRIME      8
-#define GLOBAL_GROUP_GPS        9
-#define GLOBAL_GROUP_LINA       10
-#define GLOBAL_GROUP_WYPLAC     11
-#define GLOBAL_GROUP_CHATIC     12
-#define GLOBAL_GROUP_HAK	   	13
-#define GLOBAL_GROUP_INCOGNITO  14
-#define GLOBAL_GROUP_DEPT       15
-#define GLOBAL_GROUP_NEWS       16
-#define GLOBAL_GROUP_TAG        18
-#define GLOBAL_GROUP_GANGZONE	19
-#define GLOBAL_GROUP_LISTING    20
-#define GLOBAL_GROUP_ARREST     21
-#define GLOBAL_GROUP_DRIVEBY	22
-#define GLOBAL_GROUP_ROBBERY	23
+#define GROUP_PERM_CHAT       4
+#define GROUP_PERM_MEGAFON    5
+#define GROUP_PERM_OOC        6
+#define GROUP_PERM_NICK       7
+#define GROUP_PERM_CRIME      8
+#define GROUP_PERM_GPS        9
+#define GROUP_PERM_LINA       10
+#define GROUP_PERM_WYPLAC     11
+#define GROUP_PERM_CHATIC     12
+#define GROUP_PERM_HAK	   	  13
+#define GROUP_PERM_INCOGNITO  14
+#define GROUP_PERM_DEPT       15
+#define GROUP_PERM_NEWS       16
+#define GROUP_PERM_TAG        18
+#define GROUP_PERM_GANGZONE	  19
+#define GROUP_PERM_LISTING    20
+#define GROUP_PERM_DRIVEBY	  22
+#define GROUP_PERM_ROBBERY    23
 
 
-#define GROUP_ORDER_POLICE      24
-#define GROUP_ORDER_MEDIC       25
-#define GROUP_ORDER_SHOP        26
-#define GROUP_ORDER_GANG        27
-#define GROUP_ORDER_MAFIA       28
-#define GROUP_ORDER_RACE        29
-#define GROUP_ORDER_FIRE        30
-#define GROUP_ORDER_GASTRO      31
-#define GROUP_ORDER_WORKSHOP    32
-#define GROUP_ORDER_VEHSALON    33
-#define GROUP_ORDER_SILOWNIA    34
-#define GROUP_ORDER_TAXI        35
-#define GROUP_ORDER_HOTEL	    36
-#define GROUP_ORDER_GOV		    37
+#define GROUP_TYPE_POLICE      1
+#define GROUP_TYPE_MEDIC       2
+#define GROUP_TYPE_SHOP        3
+#define GROUP_TYPE_GANG        4
+#define GROUP_TYPE_MAFIA       5
+#define GROUP_TYPE_RACE        6
+#define GROUP_TYPE_FIRE        7
+#define GROUP_TYPE_GASTRO      8
+#define GROUP_TYPE_WORKSHOP    9
+#define GROUP_TYPE_VEHSALON    10
+#define GROUP_TYPE_SILOWNIA    11
+#define GROUP_TYPE_TAXI        12
+#define GROUP_TYPE_HOTEL	   13
+#define GROUP_TYPE_GOV		   14
 
 //end
