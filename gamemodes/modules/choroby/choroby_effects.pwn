@@ -100,7 +100,7 @@ public HPLossToDeathEffect(playerid, disease, value)
 	GetPlayerHealth(playerid, hp);
 
 	new Float:loss = value;
-	if(hp - loss < 0)
+	if(hp - loss <= 0)
 	{
 		NadajRanny(playerid, INJURY_TIME_DISEASES);
 	}
