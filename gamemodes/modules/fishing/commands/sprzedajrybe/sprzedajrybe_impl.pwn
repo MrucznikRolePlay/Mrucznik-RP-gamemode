@@ -59,27 +59,27 @@ SprzedajeRybe(playerid, fishid = 0)
 	if(fishid == 1)
 	{
 		FishWeight = Fishes[playerid][pWeight1];
-		FishName = Fishes[playerid][pFish1];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish1]);
 	}
 	else if(fishid == 2)
 	{
 		FishWeight = Fishes[playerid][pWeight2];
-		FishName = Fishes[playerid][pFish2];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish2]);
 	}
 	else if(fishid == 3)
 	{
 		FishWeight = Fishes[playerid][pWeight3];
-		FishName = Fishes[playerid][pFish3];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish3]);
 	}
 	else if(fishid == 4)
 	{
 		FishWeight = Fishes[playerid][pWeight4];
-		FishName = Fishes[playerid][pFish4];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish4]);
 	}
 	else if(fishid == 5)
 	{
 		FishWeight = Fishes[playerid][pWeight5];
-		FishName = Fishes[playerid][pFish5];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish5]);
 	}
 
 	if(FishWeight < 1) {
