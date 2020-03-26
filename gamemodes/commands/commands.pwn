@@ -563,7 +563,7 @@
 #include "cmd/wynajempomoc.pwn"
 #include "cmd/wyniki.pwn"
 #include "cmd/wypij.pwn"
-//#include "cmd/wypisz.pwn"
+#include "cmd/wypisz.pwn"
 #include "cmd/wyplac.pwn"
 #include "cmd/wyprowadz.pwn"
 #include "cmd/wypusc.pwn"
@@ -1309,7 +1309,7 @@ static Aliases()
 	Command_AddAltNamed("wypij", "pij");
 
 	//wypisz
-	//Command_AddAltNamed("wypisz", "wydaj");
+	Command_AddAltNamed("wypisz", "wydaj");
 
 	//wyplac
 	Command_AddAltNamed("wyplac", "withdraw");

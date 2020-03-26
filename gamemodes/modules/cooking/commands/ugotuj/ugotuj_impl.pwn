@@ -63,6 +63,7 @@ ugotuj_OnDialogResponse(playerid, listitem)
     SendClientMessage(playerid,COLOR_LIGHTBLUE, sprintf("* Ugotowa³es potrawê: %s, wa¿¹c¹ %dg.",
         name, weight   
     ));
+    command_ugotuj_Impl(playerid);
 }
 
 AddCookingFishRow(playerid, string[1024], slot, id, weight)
