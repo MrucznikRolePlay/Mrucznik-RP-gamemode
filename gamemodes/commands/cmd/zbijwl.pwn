@@ -105,6 +105,7 @@ YCMD:zbijwl(playerid, params[], help)
 			   						        skill = 600;
 			   						    }
 			   						    PoziomPoszukiwania[playa] = 0;
+										SetPlayerWantedLevel(playa, 0);
 			   						    GetPlayerName(playerid, sendername, sizeof(sendername));
 					        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					        			new kosztskill = koszt-skill;
