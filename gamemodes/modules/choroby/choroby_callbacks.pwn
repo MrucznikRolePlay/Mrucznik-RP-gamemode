@@ -71,7 +71,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 					if(IsPlayerSick(playerid, disease)) 
 						return 1;
 
-					//10% chance to get infected
+					//0.5% chance to get infected
 					if(RandomizeSouldBeInfected(0.5, DiseaseData[disease][ContagiousRatio])) 
 						return 1;
 

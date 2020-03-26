@@ -25,6 +25,7 @@
 //------------------<[ Define: ]>-------------------
 #define INJURY_TIME 122 //czas trybu rannego = 2 min
 #define INJURY_TIME_EXCEPTION 32 //czas trybu rannego dla wyj¹tku = 30 sec
+#define INJURY_TIME_DISEASES 62 //czas trybu rannego/bw dla choroby = 60 sec
 #define INJURY_HP 30 //hp nadawane na tryb ranny i bw
 #define BW_TIME 182 //czas jak zostanie dobity = 3 min
 #define BW_TIME_CRIMINAL 302 // czas jak zostanie dobity przez przestêpce / hitmana = 5 min

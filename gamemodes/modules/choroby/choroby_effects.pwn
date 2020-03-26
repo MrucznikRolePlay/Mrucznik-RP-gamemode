@@ -100,7 +100,11 @@ public HPLossToDeathEffect(playerid, disease, value)
 	GetPlayerHealth(playerid, hp);
 
 	new Float:loss = value;
-	SetPlayerHealth(playerid, (hp - loss < 0) ? 0.0 : hp-loss);
+	if(hp - loss < 0)
+	{
+		NadajRanny(playerid, INJURY_TIME_DISEASES);
+	}
+	else SetPlayerHealth(playerid, hp-loss);
 	ChatMe(playerid, "poczu³ mocny ból.");
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
@@ -357,8 +361,9 @@ public BlackoutEffect(playerid, disease, value)
 }
 public DeathEffect(playerid, disease, value)
 {
-	SetPlayerHealth(playerid, 0);
 	ChatMe(playerid, "umar³ na skutek choroby.");
+	NadajBW(playerid, INJURY_TIME_DISEASES);
+	ZespawnujGraczaSzpitalBW(playerid);
 	return 1;
 }
 
@@ -381,8 +386,9 @@ timer LoweringHP[500](playerid, uid, hpLoss, bool:death, bool:freeze)
 	{
 		if(death)
 		{
-			SetPlayerHealth(playerid, 0);
 			ChatMe(playerid, "umar³ na skutek choroby");
+			NadajBW(playerid, INJURY_TIME_DISEASES);
+			ZespawnujGraczaSzpitalBW(playerid);
 		}
 		return;
 	}
