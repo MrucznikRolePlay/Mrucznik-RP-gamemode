@@ -41,7 +41,7 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /kick");
         SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo /czyjtonumer");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /zdejmijbpk /unbw /checkbw /paj /setvw /diagnoza");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /zdejmijbpk /unbw /checkbw /setvw /diagnoza");
     }
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
