@@ -28,7 +28,7 @@ command_lowienie_Impl(playerid)
     new string[128];
     if(PlayerInfo[playerid][pFishes] > 5)
     {
-        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 10-15 minut zanim znowu zaczniesz ³owiæ!");
+        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 15 minut zanim znowu zaczniesz ³owiæ!");
         return 1;
     }
     if(Fishes[playerid][pWeight1] > 0 && Fishes[playerid][pWeight2] > 0 && Fishes[playerid][pWeight3] > 0 && Fishes[playerid][pWeight4] > 0 && Fishes[playerid][pWeight5] > 0)

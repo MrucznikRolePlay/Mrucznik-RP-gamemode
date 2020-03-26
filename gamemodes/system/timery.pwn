@@ -1831,6 +1831,7 @@ public Production()
 		if(PlayerInfo[i][pPayDay] < 6 && !IsPlayerPaused(i)) { PlayerInfo[i][pPayDay] += 1; } //+ 5 min to PayDay anti-abuse
 		new wl = PoziomPoszukiwania[i];
 		PlayerInfo[i][pWL] = wl;
+		if(PlayerInfo[i][pFishes] >= 5) { if(FishCount[i] >= 3) { PlayerInfo[i][pFishes] = 0; FishCount[i] = 0; } else { FishCount[i]++; } }
 	}
 	return 1;
 }
@@ -2098,8 +2099,6 @@ public IdleKick()
 			PlayerPos[i][4] = PlayerPos[i][1];
 			PlayerPos[i][5] = PlayerPos[i][2];
 		}
-		
-		if(PlayerInfo[i][pFishes] >= 5) { if(FishCount[i] >= 3) { PlayerInfo[i][pFishes] = 0; } else { FishCount[i] += 1; } }
 	}
 	return 1;
 }/*
