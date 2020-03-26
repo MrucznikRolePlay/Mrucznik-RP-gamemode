@@ -59,6 +59,7 @@ YCMD:poddajesie(playerid, params[], help)
 		        SendClientMessage(lowcap[playerid], COLOR_LIGHTBLUE, string);
 		        SendClientMessage(lowcap[playerid], COLOR_GRAD3, "Skill + 4");
                 PoziomPoszukiwania[playerid] = 0;
+				SetPlayerWantedLevel(playerid, 0);
 		        PlayerInfo[lowcap[playerid]][pDetSkill]+=4;
 		        DajKase(lowcap[playerid], lowcak);
 				poddaje[playerid] = 0;
