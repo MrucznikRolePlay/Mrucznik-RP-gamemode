@@ -37,8 +37,9 @@ command_lowienie_Impl(playerid)
         return 1;
     }
     new Veh = GetPlayerVehicleID(playerid);
-    if((IsAtFishPlace(playerid)) || IsABoat(Veh))
+    if(IsAtFishPlace(playerid) || IsABoat(Veh))
     {
+        if(Veh && !IsABoat(Veh)) return sendTipMessageEx(playerid, COLOR_GREY, "Wysi¹dŸ z pojazdu. £owiæ mo¿na tylko pieszo lub na kutrze rybackim !");
         new Caught;
         new rand;
         new fstring[MAX_PLAYER_NAME];
