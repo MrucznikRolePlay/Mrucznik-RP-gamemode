@@ -48,7 +48,7 @@ public FeverEffect(playerid, disease, value)
 	GetPlayerHealth(playerid, hp);
 
 	new Float:loss = value;
-	SetPlayerHealth(playerid, (hp - loss < 0) ? 1.0 : hp-loss);
+	SetPlayerHealth(playerid, (hp - loss <= 0) ? 1.0 : hp-loss);
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
 }
@@ -87,7 +87,7 @@ public HPLossEffect(playerid, disease, value)
 	GetPlayerHealth(playerid, hp);
 
 	new Float:loss = value;
-	SetPlayerHealth(playerid, (hp - loss < 0) ? 1.0 : hp-loss);
+	SetPlayerHealth(playerid, (hp - loss <= 0) ? 1.0 : hp-loss);
 	ChatMe(playerid, "czuje siê s³abo.");
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
@@ -133,7 +133,7 @@ public AbdominalPainEffect(playerid, disease, value)
 	GetPlayerHealth(playerid, hp);
 
 	new Float:loss = value;
-	SetPlayerHealth(playerid, (hp - loss < 0) ? 1.0 : hp-loss);
+	SetPlayerHealth(playerid, (hp - loss <= 0) ? 1.0 : hp-loss);
 }
 public VomitEffect(playerid, disease, value)
 {
