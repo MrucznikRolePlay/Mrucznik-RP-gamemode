@@ -3269,7 +3269,7 @@ public PlayersCheckerMinute()
 		{
 			if(PlayerInfo[j][pFishes] >= 5) 
 			{ 
-				if(FishCount[j] >= 15) 
+				if(FishCount[j] >= 14) //15 minut
 				{
 					PlayerInfo[j][pFishes] = 0; 
 					FishCount[j] = 0;

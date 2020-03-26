@@ -26,12 +26,12 @@
 command_lowienie_Impl(playerid)
 {
     new string[128];
-    if(PlayerInfo[playerid][pFishes] > 5)
+    if(PlayerInfo[playerid][pFishes] >= 5)
     {
         sendTipMessageEx(playerid, COLOR_GREY, sprintf("Odczekaj ~%d minut zanim znowu zaczniesz ³owiæ!", (15 - FishCount[playerid])));
         return 1;
     }
-    if(Fishes[playerid][pWeight1] > 0 && Fishes[playerid][pWeight2] > 0 && Fishes[playerid][pWeight3] > 0 && Fishes[playerid][pWeight4] > 0 && Fishes[playerid][pWeight5] > 0)
+        if(Fishes[playerid][pWeight1] > 0 && Fishes[playerid][pWeight2] > 0 && Fishes[playerid][pWeight3] > 0 && Fishes[playerid][pWeight4] > 0 && Fishes[playerid][pWeight5] > 0)
     {
         sendTipMessageEx(playerid, COLOR_GREY, "Masz ju¿ 5 ryb, ugotuj je / sprzedaj / wywal !");
         return 1;
