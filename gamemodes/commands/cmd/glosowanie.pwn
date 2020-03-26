@@ -32,14 +32,12 @@ YCMD:glosowanie(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-
 		if(glosowanie_admina_status == 0)
 		{
 			if(PlayerInfo[playerid][pAdmin] >= 200 || IsAScripter(playerid))
 			{
 				new timeValue;
 				new result[128];
-				new string[256];
 				if(sscanf(params, "ds[128]", timeValue, result))
 				{
 					sendTipMessage(playerid, "U¿yj /glosowanie [czas_trwania_w_minutach] [temat]");
@@ -61,15 +59,12 @@ YCMD:glosowanie(playerid, params[], help)
 				{
 					iloscInne[playerid]++; 
 				}
-				format(string, sizeof(string), "Admin %s rozpocz¹³ ankietê na temat:{C0C0C0}%s", GetNickEx(playerid), result);
-				SendClientMessageToAll(COLOR_RED, string);
-				SendClientMessageToAll(COLOR_WHITE,  "Aby zag³osowaæ wpisz /glosowanie");
-				format(string, sizeof(string), "G³osowanie potrwa %d sekund", timeValue); 
-				SendClientMessageToAll(COLOR_WHITE, string);
+				SendClientMessageToAll(COLOR_RED, sprintf("Admin %s rozpocz¹³ ankietê na temat: {FFFFFF}%s", GetNickEx(playerid), result));
+				SendClientMessageToAll(COLOR_WHITE, sprintf("Aby zag³osowaæ wpisz {EFF542}/glosowanie{FFFFFF}. G³osowanie potrwa %d minut.", timeValue));
 				glosowanie_admina_status = 1;
 				glosowanie_admina_tak = 0;
 				glosowanie_admina_nie = 0;
-				SetTimer("glosuj_admin_ankieta", (timeValue*1000), false);
+				SetTimer("glosuj_admin_ankieta", (timeValue*1000) * 60, false);
 				foreach(new i : Player)
 				{
 					SetPVarInt(i, "glosowal_w_ankiecie", 0);
