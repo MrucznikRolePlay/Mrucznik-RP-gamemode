@@ -55,7 +55,7 @@ command_opis_Impl(playerid)
 	DynamicGui_AddBlankRow(playerid);
 
 	new DBResult:db_result;
-	db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`=%d ORDER BY `last_used` DESC LIMIT 5", PlayerInfo[playerid][pUID]));
+	db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`=%d ORDER BY `last_used` DESC LIMIT 5", PlayerInfo[playerid][UID]));
 
 	new rows = db_num_rows(db_result);
 		

@@ -54,7 +54,6 @@ forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
 forward PoscigTimer(playerid);
 forward AntySpamTimer(playerid);
-forward AntySpamLowienie(playerid);
 forward AntyBusCzit(playerid);
 forward spamujebronia(playerid);
 forward odpalanie(playerid);

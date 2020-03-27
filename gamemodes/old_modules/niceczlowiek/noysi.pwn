@@ -81,7 +81,7 @@ opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		mysql_real_escape_string(inputOpis, inputOpis);
 		
 		new DBResult:db_result;
-		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`='%d' AND `text`='%s'", PlayerInfo[playerid][pUID], inputOpis));
+		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`='%d' AND `text`='%s'", PlayerInfo[playerid][UID], inputOpis));
 
 		new rows = db_num_rows(db_result);
 
@@ -126,7 +126,7 @@ opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			db_free_result(db_query(db_handle, sprintf("INSERT INTO `mru_opisy` (`uid`,`text`, `owner`, `last_used`) VALUES (null, '%s', '%d', '%d')", inputOpis, PlayerInfo[playerid][pUID], gettime())));
+			db_free_result(db_query(db_handle, sprintf("INSERT INTO `mru_opisy` (`uid`,`text`, `owner`, `last_used`) VALUES (null, '%s', '%d', '%d')", inputOpis, PlayerInfo[playerid][UID], gettime())));
 		}
 
 		strcopy(PlayerInfo[playerid][pDesc], inputOpis);

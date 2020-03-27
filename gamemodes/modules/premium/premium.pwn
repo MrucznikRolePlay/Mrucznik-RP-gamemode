@@ -398,7 +398,7 @@ PlayerHasSkin(playerid, skin)
 
 IsAMCGiver(playerid) {
 	if(!dini_Exists(MC_GIVER_FILE)) return false;
-	return dini_Int(MC_GIVER_FILE, "uid") == PlayerInfo[playerid][pUID];
+	return dini_Int(MC_GIVER_FILE, "uid") == PlayerInfo[playerid][UID];
 }
 
 GetAvaibleMC() {

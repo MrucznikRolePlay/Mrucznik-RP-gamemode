@@ -64,7 +64,7 @@ command_kupbiznes_Impl(playerid)
 		return 1;
 	}
 	PlayerInfo[playerid][pBusinessOwner] = businessID; 
-	Business[businessID][b_ownerUID] = PlayerInfo[playerid][pUID]; 
+	Business[businessID][b_ownerUID] = PlayerInfo[playerid][UID]; 
 	Business[businessID][b_Name_Owner] = GetNick(playerid); 
 	new string[124]; 
 	sendTipMessageEx(playerid, COLOR_GREEN, "===[Zakupi³eœ swój w³asny biznes]===");

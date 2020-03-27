@@ -80,7 +80,7 @@ public Lowienie(playerid)
 saveLegale(playerid) {
 	//LEGAL
 	new lStr[256];
-	format(lStr, sizeof lStr, "UPDATE mru_legal SET weapon1=%d, weapon2=%d, weapon3=%d, weapon4=%d, weapon5=%d, weapon6=%d, weapon7=%d, weapon8=%d, weapon9=%d, weapon10=%d, weapon11=%d,weapon12=%d,weapon13=%d WHERE pID = %d", playerWeapons[playerid][weaponLegal1],playerWeapons[playerid][weaponLegal2],playerWeapons[playerid][weaponLegal3],playerWeapons[playerid][weaponLegal4],playerWeapons[playerid][weaponLegal5],playerWeapons[playerid][weaponLegal6],playerWeapons[playerid][weaponLegal7],playerWeapons[playerid][weaponLegal8],playerWeapons[playerid][weaponLegal9],playerWeapons[playerid][weaponLegal10],playerWeapons[playerid][weaponLegal11],playerWeapons[playerid][weaponLegal12],playerWeapons[playerid][weaponLegal13], PlayerInfo[playerid][pUID]);
+	format(lStr, sizeof lStr, "UPDATE mru_legal SET weapon1=%d, weapon2=%d, weapon3=%d, weapon4=%d, weapon5=%d, weapon6=%d, weapon7=%d, weapon8=%d, weapon9=%d, weapon10=%d, weapon11=%d,weapon12=%d,weapon13=%d WHERE pID = %d", playerWeapons[playerid][weaponLegal1],playerWeapons[playerid][weaponLegal2],playerWeapons[playerid][weaponLegal3],playerWeapons[playerid][weaponLegal4],playerWeapons[playerid][weaponLegal5],playerWeapons[playerid][weaponLegal6],playerWeapons[playerid][weaponLegal7],playerWeapons[playerid][weaponLegal8],playerWeapons[playerid][weaponLegal9],playerWeapons[playerid][weaponLegal10],playerWeapons[playerid][weaponLegal11],playerWeapons[playerid][weaponLegal12],playerWeapons[playerid][weaponLegal13], PlayerInfo[playerid][UID]);
 	db_free_result(db_query(db_handle, lStr));
 }
 
@@ -88,7 +88,7 @@ saveLegale(playerid) {
 loadKamiPos(playerid)
 {
 	new lStr[256];
-	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
+	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][UID]);
 	new DBResult:db_result;
 	db_result = db_query(db_handle, lStr);
 
@@ -126,13 +126,13 @@ loadKamiPos(playerid)
 saveKevlarPos(playerid, recurention=1)
 {
 	new lStr[256];
-	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
+	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][UID]);
 	new DBResult:db_result;
 	db_result = db_query(db_handle, lStr);
 
 	if(!db_num_rows(db_result)) 
 	{
-		format(lStr, sizeof lStr, "INSERT INTO `mru_kevlar` (`pID`,`offsetX`, `offsetY`, `offsetZ`, `rotX`, `rotY`, `rotZ`, `scaleX`, `scaleY`, `scaleZ`) VALUES (%d, 0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2,1.0)", PlayerInfo[playerid][pUID]);
+		format(lStr, sizeof lStr, "INSERT INTO `mru_kevlar` (`pID`,`offsetX`, `offsetY`, `offsetZ`, `rotX`, `rotY`, `rotZ`, `scaleX`, `scaleY`, `scaleZ`) VALUES (%d, 0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2,1.0)", PlayerInfo[playerid][UID]);
 
 		db_free_result(db_query(db_handle, lStr));
 
@@ -141,7 +141,7 @@ saveKevlarPos(playerid, recurention=1)
 	}
 	else
 	{
-		format(lStr, sizeof lStr, "UPDATE mru_kevlar SET offsetX=%f, offsetY=%f, offsetZ=%f, rotX=%f, rotY=%f, rotZ=%f, scaleX=%f, scaleY=%f, scaleZ=%f WHERE pID = %d", GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"), PlayerInfo[playerid][pUID]);
+		format(lStr, sizeof lStr, "UPDATE mru_kevlar SET offsetX=%f, offsetY=%f, offsetZ=%f, rotX=%f, rotY=%f, rotZ=%f, scaleX=%f, scaleY=%f, scaleZ=%f WHERE pID = %d", GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"), PlayerInfo[playerid][UID]);
 
 		db_free_result(db_query(db_handle, lStr));
 	}
@@ -1121,12 +1121,6 @@ return 1;
 public AntySpamTimer(playerid){
 AntySpam[playerid] = 0;
 return 1;
-}
-
-public AntySpamLowienie(playerid){
-	PlayerInfo[playerid][pFishes] = 0;
-	DeletePVar(playerid, "AntySpamLowienie");
-	return 1;
 }
 
 public AntyBusCzit(playerid){
@@ -4483,7 +4477,7 @@ ShowStats2(playerid)
 	format(plWantedD, sizeof(plWantedD), "Wanted-Death: %d", PlayerInfo[playerid][pWantedDeaths]);
 	format(plAresztCzas, sizeof(plAresztCzas), "Czas aresztu: %d", PlayerInfo[playerid][pArrested]);  
 	new plRodzina[64], plRespekt[64], plOnline[64], plRodzinkaRank[64], plBMID[64], plBOID[64], plDom[64], plSkin[64], plWarny[64]; 
-	format(plUID, sizeof(plUID), "UID: %d", PlayerInfo[playerid][pUID]);
+	format(plUID, sizeof(plUID), "UID: %d", PlayerInfo[playerid][UID]);
 	format(plSmierci, sizeof(plSmierci), "Smierci: %d", PlayerInfo[playerid][pDeaths]);
 	format(plZabic, sizeof(plZabic), "Zabic: %d", PlayerInfo[playerid][pKills]);
 	format(plZN, sizeof(plZN), "ZmienNick: %d", PlayerInfo[playerid][pZmienilNick]); 
@@ -4779,7 +4773,7 @@ ShowStats(playerid,targetid)
 		//new busiMem = PlayerInfo[targetid][pBusinessMember];
 		//new busiOwn = PlayerInfo[targetid][pBusinessOwner]; 
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
-		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
+		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][UID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Level:[%d] P³eæ:[%s] Wiek:[%d] Pochodzenie:[%s] Zdrowie:[%.1f] Kasa:[$%d] Bank:[$%d] Telefon:[%d]", level,atext,age,otext,shealth+50, cash, account, pnumber);
 		SendClientMessage(playerid, COLOR_GRAD1,coordsstring);
@@ -6064,7 +6058,7 @@ Dom_ChangeOwner(playerid, dom, forid)
     PlayerInfo[forid][pDom] = dom;
 	Dom[dom][hWlasciciel] = GetNickEx(forid);
 	Dom[dom][hKupiony] = 1;
-	Dom[dom][hUID_W] = PlayerInfo[forid][pUID];
+	Dom[dom][hUID_W] = PlayerInfo[forid][UID];
 
 	format(string, sizeof(string), "Zmiana wlasciciela - OK. || Dom %d || NrDom %d || Wlasciciel: %s", dom, Dom[dom][hDomNr], GetNickEx(forid));
 	SendClientMessage(playerid, COLOR_NEWS, string);
@@ -6367,7 +6361,7 @@ KupowanieDomu(playerid, dom, platnosc)
 		GetPlayerTime(playerid, h, m);
 		Dom[dom][hWlasciciel] = GetNickEx(playerid);
 		Dom[dom][hKupiony] = 1;
-		Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
+		Dom[dom][hUID_W] = PlayerInfo[playerid][UID];
 		DestroyDynamicPickup(Dom[dom][hPickup]);
 		DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1239, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
@@ -11063,7 +11057,7 @@ ChangePlayerName(playerid, name[])
 	SetPlayerName(playerid, name);
 	SetRPName(playerid);
 	
-    format(PlayerInfo[playerid][pNick], 32, "%s", name);
+    format(PlayerInfo[playerid][Nick], 32, "%s", name);
 	
     MruMySQL_SaveAccount(playerid);
     return 1;

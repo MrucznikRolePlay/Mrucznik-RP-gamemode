@@ -6379,7 +6379,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if (kaska[playerid] >= 60000000)
 						{
 							PlayerInfo[playerid][pZmienilNick] ++;
-							format(string, sizeof(string), "%s[%d] cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid),PlayerInfo[playerid][pUID]);
+							format(string, sizeof(string), "%s[%d] cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid),PlayerInfo[playerid][UID]);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 60.000.000$");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 60000000$", GetPlayerLogName(playerid));
@@ -14716,7 +14716,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						foreach(new i : Player)
 						{
-							if(PlayerInfo[i][pUID] == lUID)
+							if(PlayerInfo[i][UID] == lUID)
 							{
 								for(new j=0;j<MAX_CAR_SLOT;j++)
 								{
@@ -14785,7 +14785,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						foreach(new i : Player)
 						{
-							if(PlayerInfo[i][pUID] == lUID)
+							if(PlayerInfo[i][UID] == lUID)
 							{
 								for(new j=0;j<MAX_CAR_SLOT;j++)
 								{
@@ -14833,7 +14833,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				foreach(new i : Player)
 				{
-					if(PlayerInfo[i][pUID] == lUID)
+					if(PlayerInfo[i][UID] == lUID)
 					{
 						for(new j=0;j<MAX_CAR_SLOT;j++)
 						{
@@ -14862,7 +14862,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             foreach(new i : Player)
             {
-                if(PlayerInfo[i][pUID] == strval(inputtext))
+                if(PlayerInfo[i][UID] == strval(inputtext))
                 {
                     Car_MakePlayerOwner(i, car);
                     break;

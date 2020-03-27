@@ -296,9 +296,9 @@ Player_CanUseCar(playerid, vehicleid)
         {
             if(IsCarOwner(playerid, vehicleid, true))
 	        {
-                if(CarData[lcarid][c_Keys] != 0 && CarData[lcarid][c_Owner] != PlayerInfo[playerid][pUID])
+                if(CarData[lcarid][c_Keys] != 0 && CarData[lcarid][c_Owner] != PlayerInfo[playerid][UID])
                 {
-                    if(CarData[lcarid][c_Keys] != PlayerInfo[playerid][pUID])
+                    if(CarData[lcarid][c_Keys] != PlayerInfo[playerid][UID])
     	       	    {
                         sendTipMessageEx(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta³y zabrane przez w³aœciciela.");
                         PlayerInfo[playerid][pKluczeAuta] = 0;

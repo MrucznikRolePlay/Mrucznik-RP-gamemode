@@ -29,7 +29,7 @@
 GetPlayerLogName(playerid)
 {
     if(IsPlayerConnected(playerid) && gPlayerLogged[playerid]) {
-        safe_return sprintf("{Player: %s[%d]}", GetNickEx(playerid), PlayerInfo[playerid][pUID]);
+        safe_return sprintf("{Player: %s[%d]}", GetNickEx(playerid), PlayerInfo[playerid][UID]);
     } 
     safe_return sprintf("{Player: %s}", GetNickEx(playerid));
 }

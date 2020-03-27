@@ -58,7 +58,7 @@ YCMD:dajklucze(playerid, params[], help)
 					if(CarData[PlayerInfo[playerid][pCars][numerp]][c_Keys] == 0)
 					{
 						PlayerInfo[playa][pKluczeAuta] = CarData[PlayerInfo[playerid][pCars][numerp]][c_UID];
-                        CarData[PlayerInfo[playerid][pCars][numerp]][c_Keys] = PlayerInfo[playa][pUID];
+                        CarData[PlayerInfo[playerid][pCars][numerp]][c_Keys] = PlayerInfo[playa][UID];
 						Car_Save(PlayerInfo[playerid][pCars][numerp], CAR_SAVE_OWNER);
 				    }
 				    else

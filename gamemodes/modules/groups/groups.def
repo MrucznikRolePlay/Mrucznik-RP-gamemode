@@ -24,11 +24,11 @@
 //------------------<[ Define: ]>-------------------
 
 #define MAX_GROUPS          30
-#define MAX_RANKS           10
-#define MAX_PERMISSION      3
+#define MAX_RANKS           11
+#define MAX_PERMISSION      2
 
-#define GROUP_PERM_TEST  	1
-#define GROUP_PERM_ARREST   2
+#define GROUP_PERM_TEST  	0
+#define GROUP_PERM_ARREST  	1
 
 #define GROUP_PERM_CHAT       4
 #define GROUP_PERM_MEGAFON    5

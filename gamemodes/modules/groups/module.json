@@ -3,5 +3,6 @@
     "description": "System grup.",
     "author": "Creative",
     "commands": true,
+    "callbacks": true,
     "date": "22.03.2020"
 }

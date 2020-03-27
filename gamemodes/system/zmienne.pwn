@@ -1423,7 +1423,7 @@ ZerujZmienne(playerid)
 	{
 		SetPlayerName(playerid, nick);
 		SetRPName(playerid);
-		format(PlayerInfo[playerid][pNick], 24, "%s", nick);
+		format(PlayerInfo[playerid][Nick], 24, "%s", nick);
 		DeletePVar(playerid, "maska_nick");
 	}
 

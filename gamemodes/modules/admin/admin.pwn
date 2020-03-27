@@ -241,7 +241,7 @@ IsAHeadAdmin(playerid)
 IsAKox(playerid)
 {
 	if(DEVELOPMENT) return true;
-	return PlayerInfo[playerid][pUID] == 1 || PlayerInfo[playerid][pUID] == 2;
+	return PlayerInfo[playerid][UID] == 1 || PlayerInfo[playerid][UID] == 2;
 }
 
 IsAScripter(playerid)

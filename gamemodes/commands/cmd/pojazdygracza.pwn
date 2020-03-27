@@ -50,7 +50,7 @@ YCMD:pojazdygracza(playerid, params[], help)
 		{
             format(string, sizeof(string), "|---------- Auta %s ----------|",GetNickEx(para1));
     		SendClientMessage(playerid, COLOR_GREEN, string);
-            new lUID, lPID = PlayerInfo[para1][pUID];
+            new lUID, lPID = PlayerInfo[para1][UID];
             for(new i=0;i<MAX_CAR_SLOT;i++)
             {
                 if((lUID = PlayerInfo[para1][pCars][i]) != 0)

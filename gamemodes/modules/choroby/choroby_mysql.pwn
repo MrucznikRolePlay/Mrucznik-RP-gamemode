@@ -38,7 +38,7 @@
 MruMySQL_LoadDiseasesData(playerid)
 {
 	new qr[256];
-	format(qr, sizeof(qr), "SELECT `disease` FROM `mru_diseases` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
+	format(qr, sizeof(qr), "SELECT `disease` FROM `mru_diseases` WHERE `UID`='%d'", PlayerInfo[playerid][UID]);
 	mysql_query(qr);
 	mysql_store_result();
 	{
@@ -58,21 +58,21 @@ MruMySQL_LoadDiseasesData(playerid)
 MruMySQL_AddDisease(playerid, eDiseases:disease)
 {
 	new string[128];
-	format(string, sizeof(string), "INSERT INTO `mru_diseases` (`uid`, `disease`) VALUES('%d', '%d')", PlayerInfo[playerid][pUID], disease);
+	format(string, sizeof(string), "INSERT INTO `mru_diseases` (`uid`, `disease`) VALUES('%d', '%d')", PlayerInfo[playerid][UID], disease);
     mysql_query(string);
 }
 
 MruMySQL_RemoveDisease(playerid, eDiseases:disease)
 {
 	new string[128];
-	format(string, sizeof(string), "DELETE FROM `mru_diseases` WHERE `uid`='%d' AND `disease`='%d'", PlayerInfo[playerid][pUID], disease);
+	format(string, sizeof(string), "DELETE FROM `mru_diseases` WHERE `uid`='%d' AND `disease`='%d'", PlayerInfo[playerid][UID], disease);
     mysql_query(string);
 }
 
 MruMySQL_RemoveAllDiseases(playerid)
 {
 	new string[128];
-	format(string, sizeof(string), "DELETE FROM `mru_diseases` WHERE `uid`='%d'", PlayerInfo[playerid][pUID]);
+	format(string, sizeof(string), "DELETE FROM `mru_diseases` WHERE `uid`='%d'", PlayerInfo[playerid][UID]);
     mysql_query(string);
 }
 

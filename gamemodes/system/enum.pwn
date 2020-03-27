@@ -1189,8 +1189,8 @@ new News[hNews];
 
 enum pInfo
 {
-	pUID,
-	pNick[24],
+	UID,
+	Nick[24],
 	pKey[129],
 	pSalt[SALT_LENGTH],
 	pLevel,

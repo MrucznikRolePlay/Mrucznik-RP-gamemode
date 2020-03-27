@@ -153,7 +153,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                     new vehicle = GetPlayerVehicleID(GraczDajacy[playerid]);
                     if(vehicle == CarData[IDAuta[playerid]][c_ID])
                     {
-                        if(CarData[IDAuta[playerid]][c_Owner] != PlayerInfo[GraczDajacy[playerid]][pUID])
+                        if(CarData[IDAuta[playerid]][c_Owner] != PlayerInfo[GraczDajacy[playerid]][UID])
                         {
                             GraczDajacy[playerid] = 0;
                             CenaDawanegoAuta[playerid] = 0;
@@ -219,7 +219,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                 {
                     if(GetPlayerVehicleID(GraczWymieniajacy[playerid]) == CarData[IDAuta[playerid]][c_ID])
                     {
-                        if(CarData[IDAuta[playerid]][c_Owner] != PlayerInfo[GraczWymieniajacy[playerid]][pUID])
+                        if(CarData[IDAuta[playerid]][c_Owner] != PlayerInfo[GraczWymieniajacy[playerid]][UID])
                         {
                             GraczWymieniajacy[playerid] = 0;
                             CenaWymienianegoAuta[playerid] = 0;

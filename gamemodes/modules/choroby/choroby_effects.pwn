@@ -37,7 +37,7 @@ public DusznosciEffect(playerid, disease, value)
 {
 	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "zaczyna siê dusiæ.");
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, false);
+	defer LoweringHP(playerid, PlayerInfo[playerid][UID], value, true, false);
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
 }
@@ -57,7 +57,7 @@ public KoronawirusDeathEffect(playerid, disease, value)
 	ChatDo(playerid, sprintf("Koronawirus doszczêtnie wyniszczy³ organizm %s", GetNick(playerid)));
 	ChatMe(playerid, "upada na ziemie i zaczyna umieraæ");
 	TogglePlayerControllable(playerid, 0);
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, true);
+	defer LoweringHP(playerid, PlayerInfo[playerid][UID], value, true, true);
 	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	return 1;
 }
@@ -148,7 +148,7 @@ public EpilepsyEffect(playerid, disease, value)
 	ApplyAnimation(playerid, "CRACK", "crckdeth1", 4.1, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "upada na ziemiê i zaczyna siê trz¹œæ oraz wykonywaæ niekontrolowane ruchy.");
 	TogglePlayerControllable(playerid, 0); //TODO: nie odmra¿aæ gdy gracz ju¿ by³ zamro¿ony
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, true);
+	defer LoweringHP(playerid, PlayerInfo[playerid][UID], value, true, true);
 	return 1;
 }
 
@@ -184,7 +184,7 @@ public AnaphylacticShock(playerid, disease, value)
 	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "nie mo¿e oddychaæ i zaczyna siê dusiæ.");
 	TogglePlayerControllable(playerid, 0); //TODO: nie odmra¿aæ gdy gracz ju¿ by³ zamro¿ony
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, true);
+	defer LoweringHP(playerid, PlayerInfo[playerid][UID], value, true, true);
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
 }
@@ -285,7 +285,7 @@ public ShootingSkillEffect_Off(playerid, disease, value)
 public BleedingEffect(playerid, disease, value)
 {
 	ChatDo(playerid, sprintf("Z rany %s zaczyna p³yn¹æ krew.", GetNick(playerid)));
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, false, false);
+	defer LoweringHP(playerid, PlayerInfo[playerid][UID], value, false, false);
 	return 1;
 }
 public GetGangreneEffect(playerid, disease, value)
@@ -308,7 +308,7 @@ public FaintEffect(playerid, disease, value)
 public PurulenceEffect(playerid, disease, value)
 {
 	ChatDo(playerid, sprintf("Z rany %s zaczyna wyciekaæ ropa.", GetNick(playerid)));
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, false);
+	defer LoweringHP(playerid, PlayerInfo[playerid][UID], value, true, false);
 
 	if(random(20) == 0)
 	{
@@ -319,7 +319,7 @@ public PurulenceEffect(playerid, disease, value)
 public RottenFleshEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "gor¹czkuje, a z jego rany wydobywa siê smród zgnilizny.");
-	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, false, false);
+	defer LoweringHP(playerid, PlayerInfo[playerid][UID], value, false, false);
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
 }
@@ -371,7 +371,7 @@ public DeathEffect(playerid, disease, value)
 //effects timers
 timer LoweringHP[500](playerid, uid, hpLoss, bool:death, bool:freeze)
 {
-	if(!IsPlayerConnected(playerid) || uid != PlayerInfo[playerid][pUID]) 
+	if(!IsPlayerConnected(playerid) || uid != PlayerInfo[playerid][UID]) 
 		return;
 
 	if(hpLoss <= 0) 

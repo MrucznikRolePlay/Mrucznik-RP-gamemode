@@ -198,6 +198,7 @@
 #include "convoy\convoy_callbacks.pwn"
 #include "cooking\cooking_callbacks.pwn"
 #include "fishing\fishing_callbacks.pwn"
+#include "groups\groups_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "money\money_callbacks.pwn"
 #include "organizacje\organizacje_callbacks.pwn"

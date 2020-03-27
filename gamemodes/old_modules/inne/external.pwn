@@ -27,7 +27,7 @@ public MRP_GetPlayerCarSlots(playerid) return PlayerInfo[playerid][pCarSlots];
 public MRP_GetPlayerPhone(playerid) return PlayerInfo[playerid][pPnumber];
 public MRP_GetPlayerNickChanges(playerid) return PlayerInfo[playerid][pZmienilNick];
 public MRP_GetPlayerAge(playerid) return PlayerInfo[playerid][pAge];
-public MRP_GetPlayerUID(playerid) return PlayerInfo[playerid][pUID];
+public MRP_GetPlayerUID(playerid) return PlayerInfo[playerid][UID];
 public MRP_IsInPolice(playerid)
 {
     if(GetPlayerFraction(playerid) == FRAC_LSPD || GetPlayerFraction(playerid) == FRAC_FBI || GetPlayerFraction(playerid) == FRAC_NG) return 1;

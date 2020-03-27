@@ -37,7 +37,7 @@ YCMD:mojeauta(playerid, params[], help)
     {
         format(string, sizeof(string), "|---------- Auta %s ----------|",sendername);
 		SendClientMessage(playerid, COLOR_GREEN, string);
-        new lUID, lPID = PlayerInfo[playerid][pUID];
+        new lUID, lPID = PlayerInfo[playerid][UID];
         for(new i=0;i<MAX_CAR_SLOT;i++)
         {
             if((lUID = PlayerInfo[playerid][pCars][i]) != 0)

@@ -41,7 +41,7 @@ maseczka_akceptuj(playerid)
         return 1;
     }
 
-    if(uid != PlayerInfo[giveplayerid][pUID]) 
+    if(uid != PlayerInfo[giveplayerid][UID]) 
     {
         SendClientMessage(playerid, COLOR_GREY, "   Gracz, który oferowa³ Ci maseczkê, wyszed³ z gry.");
         SetPVarInt(playerid, "maseczka-doctorid", INVALID_PLAYER_ID);
@@ -111,7 +111,7 @@ command_maseczka_Impl(playerid, giveplayerid, price)
 
     SetPVarInt(giveplayerid, "maseczka-akceptuj", 1);
     SetPVarInt(giveplayerid, "maseczka-doctorid", playerid);
-    SetPVarInt(giveplayerid, "maseczka-uid", PlayerInfo[playerid][pUID]);
+    SetPVarInt(giveplayerid, "maseczka-uid", PlayerInfo[playerid][UID]);
     SetPVarInt(giveplayerid, "maseczka-price", price);
     return 1;
 }

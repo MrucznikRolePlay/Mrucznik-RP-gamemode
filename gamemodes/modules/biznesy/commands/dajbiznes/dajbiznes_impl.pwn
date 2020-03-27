@@ -46,7 +46,7 @@ command_dajbiznes_Impl(playerid, giveplayerid, valueBiz)
         return 1;
     }
     PlayerInfo[playerid][pBusinessOwner] = valueBiz; 
-    Business[valueBiz][b_ownerUID] = PlayerInfo[giveplayerid][pUID]; 
+    Business[valueBiz][b_ownerUID] = PlayerInfo[giveplayerid][UID]; 
 	Business[valueBiz][b_Name_Owner] = GetNick(giveplayerid); 
 
     Log(adminLog, INFO, "%s dal biznes %s graczowi %s",

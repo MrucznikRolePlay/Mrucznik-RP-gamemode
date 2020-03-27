@@ -215,7 +215,7 @@ Car_MakePlayerOwner(playerid, uid)
 
     if(uid >= MAX_CARS) return 0;
     CarData[uid][c_OwnerType] = CAR_OWNER_PLAYER;
-    CarData[uid][c_Owner] = PlayerInfo[playerid][pUID];
+    CarData[uid][c_Owner] = PlayerInfo[playerid][UID];
     CarData[uid][c_Keys] = 0;
     Car_Save(uid, CAR_SAVE_OWNER);
     return 1;
@@ -463,7 +463,7 @@ Car_LoadEx(lUID)
 
 Car_LoadForPlayer(playerid)
 {
-    new lStr[256], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8], unused;
+    new lStr[256], lUsed = 0, lPUID = PlayerInfo[playerid][UID], lList[64], lsID, lsSearch[8], unused;
 
     for(new i=0;i<MAX_VEHICLES;i++)
     {
@@ -716,8 +716,8 @@ Car_Unspawn(v, bool:playercall=false)
         new keys = CarData[VehicleUID[v][vUID]][c_Keys];
         foreach(new i : Player)
         {
-            if(PlayerInfo[i][pUID] == 0) continue;
-            if(PlayerInfo[i][pUID] == lOwner || PlayerInfo[i][pUID] == keys)
+            if(PlayerInfo[i][UID] == 0) continue;
+            if(PlayerInfo[i][UID] == lOwner || PlayerInfo[i][UID] == keys)
             {
                 lExist=true;
                 break;

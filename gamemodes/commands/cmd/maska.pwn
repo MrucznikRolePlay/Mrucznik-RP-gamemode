@@ -76,7 +76,7 @@ YCMD:maska(playerid, params[], help)
 			MSGBOX_Show(playerid, "~g~~h~Pokazano ~w~twarz", MSGBOX_ICON_TYPE_OK);
 			SetPlayerName(playerid, nick);
 			SetRPName(playerid);
-			format(PlayerInfo[playerid][pNick], 24, "%s", nick);
+			format(PlayerInfo[playerid][Nick], 24, "%s", nick);
 			DeletePVar(playerid, "maska_nick");
 		}
 		else
@@ -96,7 +96,7 @@ YCMD:maska(playerid, params[], help)
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);
 				SetRPName(playerid);
-				format(PlayerInfo[playerid][pNick], 24, "%s", pName);
+				format(PlayerInfo[playerid][Nick], 24, "%s", pName);
 				SetPVarString(playerid, "maska_nick", sendername);
 				Log(nickLog, INFO, "Gracz %s za³o¿y³ maskê %s", GetPlayerLogName(playerid), pName);
 			}

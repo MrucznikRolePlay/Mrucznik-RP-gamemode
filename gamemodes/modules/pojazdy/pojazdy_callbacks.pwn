@@ -38,7 +38,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			new idx = Car_GetIDXFromUID(lUID);
 			if(idx == -1) return 1;
-			if(CarData[idx][c_Keys] != PlayerInfo[playerid][pUID])
+			if(CarData[idx][c_Keys] != PlayerInfo[playerid][UID])
 			{
 				SendClientMessage(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta³y zabrane przez w³aœciciela.");
 				PlayerInfo[playerid][pKluczeAuta] = 0;

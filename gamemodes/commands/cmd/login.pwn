@@ -54,7 +54,7 @@ YCMD:login(playerid, params[], help)
 			if(!IsAPolicja(playa)) RemovePlayerAttachedObject(playa,1);
 			SetPlayerName(playa, nick);
 			SetRPName(playa);
-			format(PlayerInfo[playa][pNick], 24, "%s", nick);
+			format(PlayerInfo[playa][Nick], 24, "%s", nick);
 			DeletePVar(playa, "maska_nick");
 		}
 		SetPlayerColor(playa, TEAM_HIT_COLOR);
