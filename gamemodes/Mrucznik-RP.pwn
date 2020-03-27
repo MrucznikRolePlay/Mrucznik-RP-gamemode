@@ -5777,18 +5777,34 @@ public OnPlayerUpdate(playerid)
     {
 		new keys, ud,lr, actualid = INVALID_PLAYER_ID;
         GetPlayerKeys(playerid, keys, ud, lr);
-        if(lr == KEY_RIGHT)
+        if(lr == KEY_RIGHT) //NEXT
 		{
-			foreach(new i : Player){
+			foreach(new i : Player)
+			{
 				if(actualid != INVALID_PLAYER_ID) //if is set
 				{
 					new str[6];
                 	valstr(str, i);
                     RunCommand(playerid, "/spec",  str);
+					break;
 				}
                 else if(i == Spectate[playerid]) //if not set and expect
 				{
 					actualid = i;
+				}
+            }
+		}
+		else if(lr == KEY_LEFT) //BACK
+		{
+			foreach(new i : Player)
+			{
+				actualid = i;
+                if(i == Spectate[playerid]) //if not set and expect
+				{
+					new str[6];
+                	valstr(str, actualid);
+                    RunCommand(playerid, "/spec",  str);
+					break;
 				}
             }
 		}
