@@ -26,9 +26,9 @@
 command_lowienie_Impl(playerid)
 {
     new string[128];
-    if(PlayerInfo[playerid][pFishes] > 5)
+    if(PlayerInfo[playerid][pFishes] >= 5)
     {
-        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 10-15 minut zanim znowu zaczniesz ³owiæ!");
+        sendTipMessageEx(playerid, COLOR_GREY, sprintf("Odczekaj ~%d minut zanim znowu zaczniesz ³owiæ!", (15 - FishCount[playerid])));
         return 1;
     }
     if(Fishes[playerid][pWeight1] > 0 && Fishes[playerid][pWeight2] > 0 && Fishes[playerid][pWeight3] > 0 && Fishes[playerid][pWeight4] > 0 && Fishes[playerid][pWeight5] > 0)
@@ -37,8 +37,9 @@ command_lowienie_Impl(playerid)
         return 1;
     }
     new Veh = GetPlayerVehicleID(playerid);
-    if((IsAtFishPlace(playerid)) || IsABoat(Veh))
+    if(IsAtFishPlace(playerid) || IsABoat(Veh))
     {
+        if(Veh && !IsABoat(Veh)) return sendTipMessageEx(playerid, COLOR_GREY, "Wysi¹dŸ z pojazdu. £owiæ mo¿na tylko pieszo lub na kutrze rybackim !");
         new Caught;
         new rand;
         new fstring[MAX_PLAYER_NAME];

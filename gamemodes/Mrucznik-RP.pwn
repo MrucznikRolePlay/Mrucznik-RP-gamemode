@@ -2071,7 +2071,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 								PlayerInfo[playerid][pWantedDeaths] += 1;
 								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
 								PoziomPoszukiwania[playerid] = 0;
-								SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
+								SetPlayerWantedLevel(playerid, 0);
 								poscig[playerid] = 0;
 								UsunBron(playerid);
 								if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55)

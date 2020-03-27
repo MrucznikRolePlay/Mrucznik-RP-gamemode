@@ -78,6 +78,7 @@ YCMD:aresztuj(playerid, params[], help)
                                     new depo2 = floatround(((price/100) * 80), floatround_round);
                                     new depo3 = floatround(((price/100) * 20), floatround_round);
                                     PoziomPoszukiwania[playa] = 0;
+									SetPlayerWantedLevel(playa, 0);
                                     DajKase(playerid, depo3);
                                     Sejf_Add(PlayerInfo[playerid][pMember], depo2);
 								    format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, price, depo3);
@@ -185,6 +186,7 @@ YCMD:aresztuj(playerid, params[], help)
 											}
 											ZabierzKase(giveplayerid, pricestan);
 											PoziomPoszukiwania[giveplayerid] = 0;
+											SetPlayerWantedLevel(giveplayerid, 0);
 											if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
 											{
 												format(string, sizeof(string), "<< Policjant %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);

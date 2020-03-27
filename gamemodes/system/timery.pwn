@@ -992,7 +992,7 @@ public MainTimer()
     }
     if(TICKS_1Min == 59)
     {
-		CJSkinCheck();
+		PlayersCheckerMinute();
         SyncUp();
     }
     if(TICKS_5Min == (60*5)-1)
@@ -2098,8 +2098,6 @@ public IdleKick()
 			PlayerPos[i][4] = PlayerPos[i][1];
 			PlayerPos[i][5] = PlayerPos[i][2];
 		}
-		
-		if(PlayerInfo[i][pFishes] >= 5) { if(FishCount[i] >= 3) { PlayerInfo[i][pFishes] = 0; } else { FishCount[i] += 1; } }
 	}
 	return 1;
 }/*
@@ -3263,22 +3261,37 @@ public Fillup()
 	return 1;
 }
 
-public CJSkinCheck()
+public PlayersCheckerMinute()
 {
 	foreach(new j : Player)
 	{
-		if(gPlayerLogged[j] > 0 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
+		if(gPlayerLogged[j] > 0)
 		{
-			if(PlayerInfo[j][pSkin] > 0)
-			{
-			 	SetPlayerSpawnSkin(j);
+			if(PlayerInfo[j][pFishes] >= 5) 
+			{ 
+				if(FishCount[j] >= 14) //15 minut
+				{
+					PlayerInfo[j][pFishes] = 0; 
+					FishCount[j] = 0;
+				} 
+				else 
+				{ 
+					FishCount[j]++; 
+				} 
 			}
-			else 
+			if(GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
 			{
-				//PlayerInfo[j][pSkin] = 299; na potem
-				SetPlayerSkinEx(j, 299);
-				sendTipMessage(j, "Posiada³eœ skin CJ-a ID [0] - przywróciliœmy Ci domyœlny skin. Uwa¿asz, ¿e to b³¹d? Zg³oœ utratê w dziale b³êdów.");
-				sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w rodzinie, frakcji. Pomocna bêdzie ka¿da informacja.");
+				if(PlayerInfo[j][pSkin] > 0)
+				{
+					SetPlayerSpawnSkin(j);
+				}
+				else 
+				{
+					//PlayerInfo[j][pSkin] = 299; na potem
+					SetPlayerSkinEx(j, 299);
+					sendTipMessage(j, "Posiada³eœ skin CJ-a ID [0] - przywróciliœmy Ci domyœlny skin. Uwa¿asz, ¿e to b³¹d? Zg³oœ utratê w dziale b³êdów.");
+					sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w rodzinie, frakcji. Pomocna bêdzie ka¿da informacja.");
+				}
 			}
 		}
 	}

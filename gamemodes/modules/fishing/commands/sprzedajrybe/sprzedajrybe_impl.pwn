@@ -25,8 +25,6 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sprzedajrybe_Impl(playerid, fishid)
 {
-    const moneyPerKg = 15;
-    new string[128];
     if (!PlayerToPoint(100, playerid,-30.875, -88.9609, 1004.53))//centerpoint 24-7
     {
         SendClientMessage(playerid, COLOR_WHITE, "Rybê mo¿esz sprzedaæ tylko w 24/7!");
@@ -34,77 +32,68 @@ command_sprzedajrybe_Impl(playerid, fishid)
     }
     if(FishGood[playerid] == 1)
     {
-        new sendername[MAX_PLAYER_NAME];
-        GetPlayerName(playerid, sendername, sizeof(sendername));
-        format(string, sizeof(string), "AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport(ryby)", sendername);
-        SendPunishMessage(string, playerid);
+        SendPunishMessage(sprintf("AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport (ryby)", GetNickEx(playerid)), playerid);
         Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: teleport (ryby)");
         KickEx(playerid);
         return 1;
     }
 
-    if(fishid < 1 || fishid > 5) { sendTipMessageEx(playerid, COLOR_GREY, "Numer ryby od 1 do 5 !"); return 1; }
-    else if(fishid == 1 && Fishes[playerid][pWeight1] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(1) !"); return 1; }
-    else if(fishid == 2 && Fishes[playerid][pWeight2] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(2) !"); return 1; }
-    else if(fishid == 3 && Fishes[playerid][pWeight3] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(3) !"); return 1; }
-    else if(fishid == 4 && Fishes[playerid][pWeight4] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(4) !"); return 1; }
-    else if(fishid == 5 && Fishes[playerid][pWeight5] < 1) { SendClientMessage(playerid, COLOR_GREY, "   Nie z³owi³eœ ¿adnej ryby pod numerem(5) !"); return 1; }
-    else if(fishid == 1 && Fishes[playerid][pWeight1] >= 1)
+    switch(fishid)
     {
-        SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 1!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish1], Fishes[playerid][pWeight1], Fishes[playerid][pWeight1]*moneyPerKg);
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-        DajKase(playerid, Fishes[playerid][pWeight1]*moneyPerKg);
-        ClearFishID(playerid, fishid);
-        Fishes[playerid][pLastFish] = 0;
-        Fishes[playerid][pFishID] = 0;
-        FishGood[playerid] = 0;
-    }
-    else if(fishid == 2 && Fishes[playerid][pWeight2] >= 1)
-    {
-        SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 2!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish2], Fishes[playerid][pWeight2], Fishes[playerid][pWeight2]*moneyPerKg);
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-        DajKase(playerid, Fishes[playerid][pWeight2]*moneyPerKg);
-        ClearFishID(playerid, fishid);
-        Fishes[playerid][pLastFish] = 0;
-        Fishes[playerid][pFishID] = 0;
-        FishGood[playerid] = 0;
-    }
-    else if(fishid == 3 && Fishes[playerid][pWeight3] >= 1)
-    {
-        SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 3!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish3], Fishes[playerid][pWeight3], Fishes[playerid][pWeight3]*moneyPerKg);
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-        DajKase(playerid, Fishes[playerid][pWeight3]*moneyPerKg);
-        ClearFishID(playerid, fishid);
-        Fishes[playerid][pLastFish] = 0;
-        Fishes[playerid][pFishID] = 0;
-        FishGood[playerid] = 0;
-    }
-    else if(fishid == 4 && Fishes[playerid][pWeight4] >= 1)
-    {
-        SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 4!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish4], Fishes[playerid][pWeight4], Fishes[playerid][pWeight4]*moneyPerKg);
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-        DajKase(playerid, Fishes[playerid][pWeight4]*moneyPerKg);
-        ClearFishID(playerid, fishid);
-        Fishes[playerid][pLastFish] = 0;
-        Fishes[playerid][pFishID] = 0;
-        FishGood[playerid] = 0;
-    }
-    else if(fishid == 5 && Fishes[playerid][pWeight5] >= 1)
-    {
-        SendClientMessage(playerid, COLOR_GREY, "Sprzeda³eœ rybê numer 5!");
-        format(string, sizeof(string), "Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", Fishes[playerid][pFish5], Fishes[playerid][pWeight5], Fishes[playerid][pWeight5]*moneyPerKg);
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-        DajKase(playerid, Fishes[playerid][pWeight5]*moneyPerKg);
-        ClearFishID(playerid, fishid);
-        Fishes[playerid][pLastFish] = 0;
-        Fishes[playerid][pFishID] = 0;
-        FishGood[playerid] = 0;
+        case 1..5:
+        {
+            SprzedajeRybe(playerid, fishid);
+        }
+        default:
+        {
+            return sendTipMessageEx(playerid, COLOR_GREY, "Numer ryby od 1 do 5 !"); 
+        }
     }
     return 1;
+}
+
+SprzedajeRybe(playerid, fishid = 0)
+{
+	if(!fishid) return 0;
+	new FishWeight, FishName[20];
+	if(fishid == 1)
+	{
+		FishWeight = Fishes[playerid][pWeight1];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish1]);
+	}
+	else if(fishid == 2)
+	{
+		FishWeight = Fishes[playerid][pWeight2];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish2]);
+	}
+	else if(fishid == 3)
+	{
+		FishWeight = Fishes[playerid][pWeight3];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish3]);
+	}
+	else if(fishid == 4)
+	{
+		FishWeight = Fishes[playerid][pWeight4];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish4]);
+	}
+	else if(fishid == 5)
+	{
+		FishWeight = Fishes[playerid][pWeight5];
+		format(FishName, sizeof(FishName), Fishes[playerid][pFish5]);
+	}
+
+	if(FishWeight < 1) {
+		return SendClientMessage(playerid, COLOR_GREY, sprintf("** Nie z³owi³eœ ¿adnej ryby pod numerem [%d] !", fishid)); 
+	}
+	const moneyPerKg = 15;
+	SendClientMessage(playerid, COLOR_GREY, sprintf("** Sprzeda³eœ rybê numer [%d]!", fishid));
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", FishName, FishWeight, FishWeight * moneyPerKg));
+	DajKase(playerid, FishWeight * moneyPerKg);
+	ClearFishID(playerid, fishid);
+	Fishes[playerid][pLastFish] = 0;
+	Fishes[playerid][pFishID] = 0;
+	FishGood[playerid] = 0;
+	return 1;
 }
 
 //end

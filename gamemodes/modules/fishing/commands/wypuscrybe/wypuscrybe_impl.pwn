@@ -34,6 +34,7 @@ command_wypuscrybe_Impl(playerid, fishid)
     ClearFishID(playerid, fishid);
     Fishes[playerid][pLastFish] = 0;
     Fishes[playerid][pFishID] = 0;
+    SendClientMessage(playerid, COLOR_GREY, sprintf("* Wypuœci³eœ rybkê pod numerem [%d] *", fishid));
     return 1;
 }
 

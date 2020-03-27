@@ -239,8 +239,18 @@ Player_CanUseCar(playerid, vehicleid)
                 }
                 if(wywal)
                 {
-                    format(string, sizeof(string), "Aby prowadziæ ten pojazd potrzebujesz %d skilla w zawodzie %s.", CarData[lcarid][c_Rang], JobNames[CarData[lcarid][c_Owner]]);
-                    sendTipMessageEx(playerid,COLOR_GREY,string);
+					new skill = 0;
+					switch(PlayerInfo[playerid][pJob])
+					{
+						case JOB_LOWCA: skill = PlayerInfo[playerid][pDetSkill];
+						case JOB_LAWYER: skill = PlayerInfo[playerid][pLawSkill];
+						case JOB_MECHANIC: skill = PlayerInfo[playerid][pMechSkill];
+						case JOB_BUSDRIVER: skill = PlayerInfo[playerid][pCarSkill];
+						case JOB_TRUCKER: skill = PlayerInfo[playerid][pTruckSkill];
+						default: wywal=false;
+					}
+                    sendTipMessageEx(playerid,COLOR_GREY,sprintf("Aby prowadziæ ten pojazd potrzebujesz %d skilla w zawodzie %s.", CarData[lcarid][c_Rang], JobNames[CarData[lcarid][c_Owner]]));
+					sendTipMessageEx(playerid,COLOR_GREY,sprintf("Twoje punkty skilla w zawodzie %s wynosz¹: %d pkt", JobNames[CarData[lcarid][c_Owner]], skill));
                     return 0;
                 }
 				if(GetVehicleModel(vehicleid) == 578 && PlayerInfo[playerid][pLevel] == 1)

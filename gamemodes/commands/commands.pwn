@@ -626,7 +626,6 @@
 #include "cmd/zmienskin.pwn"
 #include "cmd/zmienwl.pwn"
 #include "cmd/zniszczobiekty.pwn"
-#include "cmd/zobp.pwn"
 #include "cmd/zonedelay.pwn"
 #include "cmd/zoneid.pwn"
 #include "cmd/zrobkolejke.pwn"
@@ -1446,10 +1445,6 @@ static Aliases()
 
 	//cziterzy
 	Command_AddAltNamed("cziterzy", "czity");
-
-	//zobp
-	Command_AddAltNamed("zobp", "checkprawko");
-	Command_AddAltNamed("zobp", "zobaczprawko");
 
 	//ustawmistrz
 	Command_AddAltNamed("ustawmistrz", "setchamp");

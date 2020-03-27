@@ -44,12 +44,12 @@ YCMD:checkbw(playerid, params[], help)
 			if(PlayerInfo[id][pBW] > 0)
 			{
 				typeint = PlayerInfo[id][pBW];
-				type = "(nieprzytomny)";
+				format(type, sizeof(type), "(nieprzytomny)");
 			}
 			else
 			{
 				typeint = PlayerInfo[id][pInjury];
-				type = "(ranny)";
+				format(type, sizeof(type), "(ranny)");
 			}
 			format(string, sizeof(string), "Graczowi %s zosta³o do koñca BW: %d sekund %s", GetNick(id), typeint, type); 
 			SendClientMessage(playerid, COLOR_GRAD2, string);
