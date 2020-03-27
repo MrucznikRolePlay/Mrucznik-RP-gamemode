@@ -41,7 +41,7 @@ YCMD:carslot(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /carslot [playerid/CzêœæNicku]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >=1000)
+		if (PlayerInfo[playerid][Admin] >=1000)
 		{
 		    if(IsPlayerConnected(playa))
 		    {

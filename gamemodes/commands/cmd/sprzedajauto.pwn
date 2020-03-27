@@ -53,8 +53,8 @@ YCMD:sprzedajauto(playerid, params[], help)
 		//
         new lVeh = GetPlayerVehicleID(playerid);
 		if(!IsCarOwner(playerid, lVeh)) return sendTipMessage(playerid, "Nie jesteœ w³aœcicielem tego pojazdu.");
-		if(PlayerInfo[playa][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedaæ temu graczowi pojazdu poniewa¿ ma 1lvl");
-		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedawaæ pojazdu bo masz 1 lvl");
+		if(PlayerInfo[playa][Level] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedaæ temu graczowi pojazdu poniewa¿ ma 1lvl");
+		if(PlayerInfo[playerid][Level] == 1) return sendTipMessage(playerid, "Nie mo¿esz sprzedawaæ pojazdu bo masz 1 lvl");
 		if(GetPVarInt(playerid, "CanDoIt") == 1) return sendErrorMessage(playerid, "Oferowa³eœ ju¿ komuœ zakup auta, odczekaj 15 s");
         new vehid = VehicleUID[lVeh][vUID];
  		if(GetDistanceBetweenPlayers(playerid,playa) > 5) return sendErrorMessage(playerid, "Ten gracz jest za daleko!");

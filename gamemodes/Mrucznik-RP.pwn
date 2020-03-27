@@ -1344,8 +1344,8 @@ public OnPlayerDisconnect(playerid, reason)
 		StopACall(playerid);
 	}
 //	if(GetPlayerAdminDutyStatus(playerid) == 1)
-	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pAdmin] > 0
-	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pNewAP] > 0
+	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][Admin] > 0
+	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][HalfAdmin] > 0
 	|| firstDutyAdmin[playerid] == 1 && IsAScripter(playerid))//Je¿eli admin by³ na duty, wykonuje zapis w logi 
 	{
 		new exitReason[16];//String do logu
@@ -1391,8 +1391,8 @@ public OnPlayerDisconnect(playerid, reason)
 		AdminDutyMinuty[playerid] = 0;
 		firstDutyAdmin[playerid] = 0; 
 	}
-	if((PlayerInfo[playerid][pAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
-	|| (PlayerInfo[playerid][pNewAP] >= 1 && iloscPozaDuty[playerid] >= 1)
+	if((PlayerInfo[playerid][Admin] >= 1 && iloscPozaDuty[playerid] >= 1)
+	|| (PlayerInfo[playerid][HalfAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
 	|| (IsAScripter(playerid) && iloscPozaDuty[playerid] >= 1))//Gdy nie by³ na admin duty, ale wykonywa³ akcje
 	{
 		if(firstDutyAdmin[playerid] == 0)
@@ -1707,11 +1707,11 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		BusDrivers -= 1;
 	}
-	if(PlayerInfo[playerid][pJob] == 11)
+	if(PlayerInfo[playerid][Job] == 11)
 	{
 	    if(JobDuty[playerid] == 1) { Medics -= 1; }
 	}
-	else if(PlayerInfo[playerid][pJob] == 7)
+	else if(PlayerInfo[playerid][Job] == 7)
 	{
 	    if(JobDuty[playerid] == 1) { Mechanics -= 1; }
 	}
@@ -1878,7 +1878,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		StopAudioStreamForPlayer(playerid);
 		gPlayerSpawned[playerid] = 0;
 		PlayerInfo[playerid][pLocal] = 255;
-		PlayerInfo[playerid][pDeaths] ++;
+		PlayerInfo[playerid][Deaths] ++;
 		
 		if(GetPVarInt(playerid, "skip_bw") == 0)
 		{
@@ -1950,7 +1950,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 				if(IsPlayerConnected(killerid))
 				{
-					PlayerInfo[killerid][pKills] ++;
+					PlayerInfo[killerid][Kills] ++;
 					if(giveWL)
 					{
 						if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
@@ -1986,7 +1986,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 						{
 							PoziomPoszukiwania[playerid] = 0;
 						}
-						else if(PlayerInfo[killerid][pJob] == 1)
+						else if(PlayerInfo[killerid][Job] == 1)
 						{
 							if(lowcaz[i] == playerid)
 							{
@@ -2058,7 +2058,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 							{
 								new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
 								ZabierzKase(playerid, CenaZabicia);//moneycheat
-								PlayerInfo[playerid][pWantedDeaths] += 1;
+								PlayerInfo[playerid][WantedDeaths] += 1;
 								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
 								PoziomPoszukiwania[playerid] = 0;
 								SetPlayerWantedLevel(playerid, 0);
@@ -2084,7 +2084,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 						}
 					}
 					if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
-					if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPolicja(killerid) && OnDuty[killerid] == 1)) return NadajBW(playerid);
+					if(PlayerInfo[killerid][Level] >= 3 || (IsAPolicja(killerid) && OnDuty[killerid] == 1)) return NadajBW(playerid);
 				}
 				return 1;
 			}
@@ -2125,7 +2125,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 						}
 
 						SetPVarInt(playerid, "bw-reason", reason);
-						if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
+						if(PlayerInfo[killerid][Level] >= 3 || IsAPrzestepca(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
 						{
 							return NadajRanny(playerid, 0, true);
 						}
@@ -2156,13 +2156,13 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 	{
 		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNickEx(playerid), playerid, ip_address);
 
-		if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][HalfAdmin] > 0 || PlayerInfo[playerid][Admin] > 0 || IsAScripter(playerid))
 		{
 			//disable all codes for admins
 			return 1;
 		}
 
-		if(IsProblematicCode(code) && PlayerInfo[playerid][pLevel] > 1)
+		if(IsProblematicCode(code) && PlayerInfo[playerid][Level] > 1)
 		{
 			//disable problematic codes for trusted players
 			return 1;
@@ -2246,7 +2246,7 @@ public OnPlayerSpawn(playerid)
 	}
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
-    PlayerInfo[playerid][pMuted] = 0;
+    PlayerInfo[playerid][Mute] = 0;
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
 	if(GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0)
@@ -2258,9 +2258,9 @@ public OnPlayerSpawn(playerid)
     	SetPlayerWeatherEx(playerid, 3);//Pogoda
 	}
 	//Diler Broni
-	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
+	if(PlayerInfo[playerid][Job] == 9 && !IsADilerBroni(playerid))
 	{
-	    PlayerInfo[playerid][pJob] = 0;
+	    PlayerInfo[playerid][Job] = 0;
 	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
 	}
     // usuwanie
@@ -2349,7 +2349,7 @@ SetPlayerSpawnPos(playerid)
 	//Po /spec off
     if(Unspec[playerid][Coords][0] != 0.0 && Unspec[playerid][Coords][1] != 0.0 && Unspec[playerid][Coords][2] != 0.0)
     {
-		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][Admin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][HalfAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
@@ -2384,7 +2384,7 @@ SetPlayerSpawnPos(playerid)
 	    SetPlayerInterior(playerid, 0);
 		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		SetPlayerPos(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
-		PlayerInfo[playerid][pMuted] = 1;
+		PlayerInfo[playerid][Mute] = 1;
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
 		SendClientMessage(playerid, COLOR_PANICRED, string);
@@ -2403,7 +2403,7 @@ SetPlayerSpawnPos(playerid)
 		PlayerInfo[playerid][pJailTime] = 15*60;
 		format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
         SetPlayerVirtualWorld(playerid, 1000+playerid);
-		PlayerInfo[playerid][pMuted] = 1;
+		PlayerInfo[playerid][Mute] = 1;
 		SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 		format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -2643,9 +2643,9 @@ SetPlayerSpawnPos(playerid)
 			    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
 					}
 				}
-				else if(PlayerInfo[playerid][pJob] > 0) //Spawn Prac
+				else if(PlayerInfo[playerid][Job] > 0) //Spawn Prac
 				{
-				    switch(PlayerInfo[playerid][pJob])
+				    switch(PlayerInfo[playerid][Job])
 				    {
 						case JOB_MECHANIC:
 						{
@@ -2750,7 +2750,7 @@ SetPlayerSpawnWeapon(playerid)
     	DajBronieFrakcyjne(playerid);
 	if(GetPlayerOrg(playerid))
 		DajBronieOganizacji(playerid);
-	if(PlayerInfo[playerid][pJob])
+	if(PlayerInfo[playerid][Job])
 	    DajBroniePracy(playerid);
     if(MaZapisanaBron(playerid))
 		PrzywrocBron(playerid);
@@ -3239,7 +3239,7 @@ public OnPlayerEnterCheckpoint(playerid)
 				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 				CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(PlayerInfo[playerid][Job] == 10)
 				{
 				Przystanek(playerid, COLOR_BLUE, "Linia ZAJ\nLinia 55 do zajezdni Commerce\n{778899}Trasa: Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
 				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -3489,7 +3489,7 @@ public OnPlayerEnterCheckpoint(playerid)
 				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 				CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(PlayerInfo[playerid][Job] == 10)
 				{
 				Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia ZAJ\nLinia 72 do zajezdni Commerce\n{778899}Trasa: Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
 				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -3730,7 +3730,7 @@ public OnPlayerEnterCheckpoint(playerid)
 				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 				CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(PlayerInfo[playerid][Job] == 10)
 				{
 				Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia ZAJ\nLinia 82 do zajezdni Commerce\n{778899}Trasa: Commerce\n{808080}Zatrzymuje siê na przystankach");
 				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -4037,7 +4037,7 @@ public OnPlayerEnterCheckpoint(playerid)
 					SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 					CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(PlayerInfo[playerid][Job] == 10)
 				{
 					Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia ZAJ\nLinia 96 do zajezdni Commerce\n{778899}Trasa: Ocean Docks - Lotnisko - El Corona - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
 					SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -4314,7 +4314,7 @@ public OnPlayerEnterCheckpoint(playerid)
 					SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 					CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(PlayerInfo[playerid][Job] == 10)
 				{
 					Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia ZAJ\nLinia 85 do zajezdni Commerce\n{778899}Trasa: Willowfield - Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
 					SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -4993,7 +4993,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(GetPVarInt(playerid, "iLastDrive") != 0 && (gettime() - GetPVarInt(playerid, "iLastDrive")) <= 1) {
             SetPVarInt(playerid, "iFlags", GetPVarInt(playerid, "iLastDrive")+1);
             if(GetPVarInt(playerid, "iLastDrive") >= 2) {
-                format(string, 256, "%s podejrzany o tepanie aut. Dostal kicka. LVL: %d (%dh online)", GetNick(playerid), PlayerInfo[playerid][pLevel], PlayerInfo[playerid][pConnectTime]);
+                format(string, 256, "%s podejrzany o tepanie aut. Dostal kicka. LVL: %d (%dh online)", GetNick(playerid), PlayerInfo[playerid][Level], PlayerInfo[playerid][OnlineHours]);
                 SendAdminMessage(COLOR_LIGHTRED, string);
                 Kick(playerid);
                 return true;
@@ -5063,7 +5063,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(newstate == PLAYER_STATE_DRIVER)
         {
             new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
+            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][Admin] < 1
 			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
@@ -5177,7 +5177,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "* Klient %s wszed³ do Twojej taryfy.", name);
 						SendClientMessage(i, COLOR_LIGHTBLUE, string);
-                        if(PlayerInfo[playerid][pLevel] < 3)
+                        if(PlayerInfo[playerid][Level] < 3)
                         {
                             ZabierzKase(playerid, floatround(TransportValue[i]/4));//moneycheat
                             sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jesteœ nowym graczem, obowi¹zuje Cie rabat 75 procent na taksówkê.");
@@ -5410,7 +5410,7 @@ PayDay()
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][pLevel] > 0)
+		    if(PlayerInfo[i][Level] > 0)
 		    {
 			    if(MoneyMessage[i]==1)
 				{
@@ -5419,7 +5419,7 @@ PayDay()
 					SetPlayerCriminal(i,INVALID_PLAYER_ID, "Niesp³acanie d³ugu");
 				}
 				GetPlayerName(i, playername2, sizeof(playername2));
-				account = PlayerInfo[i][pAccount];
+				account = PlayerInfo[i][BankMoney];
 
 				if (PlayerInfo[i][pDom] != 0)
 				{
@@ -5433,7 +5433,7 @@ PayDay()
 				}
 				if(PlayerInfo[i][pPayDay] >= 5)
 				{
-				    if(PlayerInfo[i][pAdmin] >= 1)
+				    if(PlayerInfo[i][Admin] >= 1)
 				    {
 				        format(string, sizeof(string), "Admini/%s.ini", playername2);
 				        dini_IntSet(string, "Godziny_Online", dini_Int(string, "Godziny_Online")+1 );
@@ -5444,24 +5444,24 @@ PayDay()
 				        dini_IntSet(string, "Godziny_Online", dini_Int(string, "Godziny_Online")+1 );
 				    }
 				    Tax += TaxValue;//Should work for every player online
-				    PlayerInfo[i][pAccount] -= TaxValue;
+				    PlayerInfo[i][BankMoney] -= TaxValue;
 					checks = PlayerInfo[i][pPayCheck];
-				    ebill = (PlayerInfo[i][pAccount]/10000)*(PlayerInfo[i][pLevel]);
+				    ebill = (PlayerInfo[i][BankMoney]/10000)*(PlayerInfo[i][Level]);
 				    DajKase(i, checks);
-				    if(PlayerInfo[i][pAccount] > 0)
+				    if(PlayerInfo[i][BankMoney] > 0)
 				    {
-				    	PlayerInfo[i][pAccount] -= ebill;
+				    	PlayerInfo[i][BankMoney] -= ebill;
 					}
 					else
 					{
 					    ebill = 0;
 					}
-					interest = (PlayerInfo[i][pAccount]/1000)*(tmpintrate);
-					PlayerInfo[i][pExp]++;
+					interest = (PlayerInfo[i][BankMoney]/1000)*(tmpintrate);
+					PlayerInfo[i][Exp]++;
 					PlayerPlayMusic(i);
-					if(PlayerInfo[i][pAccount] <= 100000000)
+					if(PlayerInfo[i][BankMoney] <= 100000000)
 					{
-						PlayerInfo[i][pAccount] = account+interest;
+						PlayerInfo[i][BankMoney] = account+interest;
 					}
 					SendClientMessage(i, COLOR_WHITE, "|___ STAN KONTA ___|");
 					format(string, sizeof(string), "  Wyp³ata: $%d   Podatek: -$%d", checks, TaxValue);
@@ -5473,7 +5473,7 @@ PayDay()
 					}
 					format(string, sizeof(string), "  Stan konta: $%d", account);
 					SendClientMessage(i, COLOR_GRAD1, string);
-					if(PlayerInfo[i][pAccount] <= 100000000)
+					if(PlayerInfo[i][BankMoney] <= 100000000)
 					{
 						format(string, sizeof(string), "  Odsetki: 0.%d procent",tmpintrate);
 						SendClientMessage(i, COLOR_GRAD2, string);
@@ -5488,7 +5488,7 @@ PayDay()
 						SendClientMessage(i, COLOR_GRAD3, string);
 					}
 					SendClientMessage(i, COLOR_GRAD4, "|--------------------------------------|");
-					format(string, sizeof(string), "  Nowy Stan Konta: $%d", PlayerInfo[i][pAccount]);
+					format(string, sizeof(string), "  Nowy Stan Konta: $%d", PlayerInfo[i][BankMoney]);
 					SendClientMessage(i, COLOR_GRAD5, string);
 					format(string, sizeof(string), "  Wynajem: -$%d", Dom[PlayerInfo[i][pWynajem]][hCenaWynajmu]);
 					SendClientMessage(i, COLOR_GRAD5, string);
@@ -5497,17 +5497,17 @@ PayDay()
 					GameTextForPlayer(i, string, 5000, 1);
 					PlayerInfo[i][pPayDay] = 0;
 					PlayerInfo[i][pPayCheck] = 0;
-					PlayerInfo[i][pConnectTime] += 1;
+					PlayerInfo[i][OnlineHours] += 1;
 					PlayerGames[i] = 0;
                     MRP_PremiumHours[i]++;
 					if(PlayerInfo[i][pBP] >= 1)
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if(((kaska[i] >= 10000000 || PlayerInfo[i][pAccount] >= 10000000) && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
+					if(((kaska[i] >= 10000000 || PlayerInfo[i][BankMoney] >= 10000000) && PlayerInfo[i][Level] <= 2) && !DEVELOPMENT)
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
-						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
+						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][BankMoney]);
 						KickEx(i);
 					}
 					if(IsPlayerPremiumOld(i))
@@ -5515,7 +5515,7 @@ PayDay()
 					    PlayerInfo[i][pPayDayHad] += 1;
 					    if(PlayerInfo[i][pPayDayHad] >= 5)
 					    {
-					        PlayerInfo[i][pExp]++;
+					        PlayerInfo[i][Exp]++;
 					        PlayerInfo[i][pPayDayHad] = 0;
 					    }
 					}
@@ -5958,7 +5958,7 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 			return 1;
 		}
-        else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][pCK] == 1)
+        else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][CK] == 1)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Ta postaæ jest uœmiercona, nie mo¿esz na niej graæ.");
 			KickEx(playerid);
@@ -5968,7 +5968,7 @@ OnPlayerLogin(playerid, password[])
 
 		//Nadawanie pieniêdzy:
 		ResetujKase(playerid);
-		if(PlayerInfo[playerid][pCash] < 0)
+		if(PlayerInfo[playerid][BankMoney] < 0)
 		{
 			if(PlayerInfo[playerid][pWL] < 9)
 			{
@@ -5980,11 +5980,11 @@ OnPlayerLogin(playerid, password[])
 				PlayerInfo[playerid][pWL] = 10; 
 				sendTipMessage(playerid, "Masz ju¿ 10 poziom poszukiwania! Czêœæ jest spowodowana d³ugami! Zrób coœ z tym!"); 
 			}
-			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
+			ZabierzKase(playerid, -PlayerInfo[playerid][BankMoney]);
 		}
-		else if(PlayerInfo[playerid][pCash] >= 0)
+		else if(PlayerInfo[playerid][BankMoney] >= 0)
 		{
-			DajKase(playerid, PlayerInfo[playerid][pCash]); 
+			DajKase(playerid, PlayerInfo[playerid][BankMoney]); 
 		}
 		//Ustawianie na zalogowany:
 		gPlayerLogged[playerid] = 1;
@@ -6031,9 +6031,9 @@ OnPlayerLogin(playerid, password[])
 	}
 
 	//Nadawanie pocz¹tkowych itemów po rejestracji:
-	if(PlayerInfo[playerid][pReg] == 0)
+	if(PlayerInfo[playerid][Registered] == 0)
 	{
-		PlayerInfo[playerid][pLevel] = 1;
+		PlayerInfo[playerid][Level] = 1;
 		PlayerInfo[playerid][pSHealth] = 0.0;
 		PlayerInfo[playerid][pHealth] = 50.0;
 		PlayerInfo[playerid][pPos_x] = 2246.6;
@@ -6048,8 +6048,8 @@ OnPlayerLogin(playerid, password[])
 		PlayerInfo[playerid][pPnumber] = 0;
 		PlayerInfo[playerid][pDom] = 0;
 		PlayerInfo[playerid][pPbiskey] = 255;
-		PlayerInfo[playerid][pAccount] = 5000;
-		PlayerInfo[playerid][pReg] = 1;
+		PlayerInfo[playerid][BankMoney] = 5000;
+		PlayerInfo[playerid][Registered] = 1;
 		PlayerInfo[playerid][pDowod] = 0;
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
@@ -6180,14 +6180,14 @@ OnPlayerLogin(playerid, password[])
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
 	{
-        if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
+        if(PlayerInfo[playerid][Admin] > 0 || PlayerInfo[playerid][HalfAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
         {
-            if(PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] > 0)
+            if(PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][HalfAdmin] > 0)
             {
                 SetPVarInt(playerid, "support_duty", 1);
                 SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
             }
-			else if(PlayerInfo[playerid][pAdmin] > 0)
+			else if(PlayerInfo[playerid][Admin] > 0)
 			{
 				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/supportduty");
 			}
@@ -6212,7 +6212,7 @@ OnPlayerLogin(playerid, password[])
     {
         SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
-		PlayerInfo[playerid][pMuted] = 1;
+		PlayerInfo[playerid][Mute] = 1;
 		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");
 		SendClientMessage(playerid, COLOR_WHITE, "Aby zacz¹æ grê musisz przejœæ procedury rejestracji.");
 		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeœli jesteœ tu nowy, to przygotowaliœmy dla ciebie poradnik\nZa chwilê bêdziesz móg³ go obejrzeæ, lecz najpierw bêdziesz musia³ opisaæ postaæ któr¹ bêdziesz sterowa³\nAby przejœæ dalej wciœnij przycisk 'dalej'", "Dalej", "");
@@ -6793,7 +6793,7 @@ public OnPlayerText(playerid, text[])
 		} 
 		return 0;
 	}
-	if(PlayerInfo[playerid][pMuted] == 1)
+	if(PlayerInfo[playerid][Mute] == 1)
 	{
 		sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ jesteœ uciszony");
 		return 0;
@@ -6829,7 +6829,7 @@ public OnPlayerText(playerid, text[])
 				{
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerName(ProposedTo[playerid], giveplayer, sizeof(giveplayer));
-					if(PlayerInfo[playerid][pSex] == 1 && PlayerInfo[ProposedTo[playerid]][pSex] == 2)
+					if(PlayerInfo[playerid][Gender] == 1 && PlayerInfo[ProposedTo[playerid]][Gender] == 2)
 					{
 						format(string, sizeof(string), "Ksi¹dz: %s i %s zostaliœcie mê¿em i ¿on¹, mo¿ecie siê poca³owaæ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);
@@ -6838,7 +6838,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "Koœció³: Mamy now¹ pare, %s & %s zostali zarêczeni.", sendername, giveplayer);
 						OOCNews(COLOR_WHITE, string);
 					}
-					else if(PlayerInfo[playerid][pSex] == 1 && PlayerInfo[ProposedTo[playerid]][pSex] == 1)
+					else if(PlayerInfo[playerid][Gender] == 1 && PlayerInfo[ProposedTo[playerid]][Gender] == 1)
 					{
 					    format(string, sizeof(string), "Ksi¹dz: %s i %s Zostaliœcie mê¿em i mê¿em, mo¿ecie siê poca³owaæ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);
@@ -6847,7 +6847,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "Koœció³: Mamy now¹ gejowsk¹ pare, %s & %s zostali zarêczeni.", sendername, giveplayer);
 						OOCNews(COLOR_WHITE, string);
 					}
-					else if(PlayerInfo[playerid][pSex] == 2 && PlayerInfo[ProposedTo[playerid]][pSex] == 2)
+					else if(PlayerInfo[playerid][Gender] == 2 && PlayerInfo[ProposedTo[playerid]][Gender] == 2)
 					{
 					    format(string, sizeof(string), "Ksi¹dz: %s i %s Zostaliœcie ¿on¹ i ¿on¹, mo¿ecie siê poca³owaæ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);

@@ -62,7 +62,7 @@ YCMD:kup(playerid, params[], help)
 		else if(IsPlayerInRangeOfPoint(playerid, 2.0, 800.8901,-1410.6635,-22.6093) 
 		|| IsPlayerInRangeOfPoint(playerid, 2.0, 833.8511,-1391.2689,-17.6433))
 		{
-			if(PlayerInfo[playerid][pAge] >= 18)
+			if(PlayerInfo[playerid][Age] >= 18)
 			{
 				if(IsPlayerInRangeOfPoint(playerid, 2.0, 833.8511,-1391.2689,-17.6433))
 				{

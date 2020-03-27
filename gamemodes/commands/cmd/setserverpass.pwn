@@ -32,7 +32,7 @@ YCMD:setservpass(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
 		{
 			new string[128], passServ[64]; 
 			if( sscanf(params, "s[64]", passServ))
@@ -50,7 +50,7 @@ YCMD:setservpass(playerid, params[], help)
 			{
 				sendErrorMessage(i, string);
 				sendErrorMessage(i, "Wracamy za krótk¹ chwilê!"); 
-				if(!IsAScripter(i) && PlayerInfo[i][pAdmin] == 0)
+				if(!IsAScripter(i) && PlayerInfo[i][Admin] == 0)
 				{
 					Kick(i); 
 				}

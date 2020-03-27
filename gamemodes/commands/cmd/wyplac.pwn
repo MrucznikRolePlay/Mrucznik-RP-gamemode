@@ -40,22 +40,22 @@ YCMD:wyplac(playerid, params[], help)
 			if( sscanf(params, "s[32]", string))
 			{
 				sendTipMessage(playerid, "U¿yj /wyplac [kwota]");
-				format(string, sizeof(string), "Masz teraz $%d na swoim koncie.", PlayerInfo[playerid][pAccount]);
+				format(string, sizeof(string), "Masz teraz $%d na swoim koncie.", PlayerInfo[playerid][BankMoney]);
 				sendTipMessage(playerid, string);
 				return 1;
 			}
 			cashdeposit = FunkcjaK(string);
 
-			if (cashdeposit > PlayerInfo[playerid][pAccount] || cashdeposit < 1)
+			if (cashdeposit > PlayerInfo[playerid][BankMoney] || cashdeposit < 1)
 			{
 				sendTipMessage(playerid, "Nie masz tyle !");
 				return 1;
 			}
 			DajKase(playerid,cashdeposit);
-			PlayerInfo[playerid][pAccount]=PlayerInfo[playerid][pAccount]-cashdeposit;
-			format(string, sizeof(string), "Wyp³aci³eœ $%d ze swojego konta, obecny stan to: $%d ", cashdeposit,PlayerInfo[playerid][pAccount]);
+			PlayerInfo[playerid][BankMoney]=PlayerInfo[playerid][BankMoney]-cashdeposit;
+			format(string, sizeof(string), "Wyp³aci³eœ $%d ze swojego konta, obecny stan to: $%d ", cashdeposit,PlayerInfo[playerid][BankMoney]);
 			SendClientMessage(playerid, COLOR_YELLOW, string);
-			Log(payLog, INFO, "%s wyp³aci³ ze swojego konta %d$. Nowu stan: %d$", GetPlayerLogName(playerid), cashdeposit, PlayerInfo[playerid][pAccount]);
+			Log(payLog, INFO, "%s wyp³aci³ ze swojego konta %d$. Nowu stan: %d$", GetPlayerLogName(playerid), cashdeposit, PlayerInfo[playerid][BankMoney]);
 			return 1;
 		}
 		else

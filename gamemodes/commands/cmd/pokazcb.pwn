@@ -30,7 +30,7 @@
 
 YCMD:pokazcb(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1)
+	if(PlayerInfo[playerid][Admin] >= 1)
 	{
 		if(adminpodgladcb[playerid] == 0)
 		{

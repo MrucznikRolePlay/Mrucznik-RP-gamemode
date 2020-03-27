@@ -55,7 +55,7 @@ YCMD:tablet(playerid, params[], help)
 			    {
 			        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-			        format(string, sizeof(string), "Imiê i nazwisko:\t%s\nWiek:\t%d\n{00ABFF}Przestêpstwo:\t{FF0000}%s\n{00ABFF}Zg³oszone przez:\t{FF0000}%s\n{FF3535}Poziom poszukiwania:\t{FF3535}%d", giveplayer, PlayerInfo[giveplayerid][pAge], PlayerCrime[giveplayerid][pAccusedof], PlayerCrime[giveplayerid][pVictim], PoziomPoszukiwania[giveplayerid]);
+			        format(string, sizeof(string), "Imiê i nazwisko:\t%s\nWiek:\t%d\n{00ABFF}Przestêpstwo:\t{FF0000}%s\n{00ABFF}Zg³oszone przez:\t{FF0000}%s\n{FF3535}Poziom poszukiwania:\t{FF3535}%d", giveplayer, PlayerInfo[giveplayerid][Age], PlayerCrime[giveplayerid][pAccusedof], PlayerCrime[giveplayerid][pVictim], PoziomPoszukiwania[giveplayerid]);
 	                ShowPlayerDialogEx(playerid, 9111, DIALOG_STYLE_TABLIST, "TABLET POLICYJNY", string, "Zamknij", "");
 	                format(string, sizeof(string), "* %s wyci¹ga z kieszeni tablet, po czym wpisuje dane.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);

@@ -48,11 +48,10 @@ new RankInfo[MAX_GROUPS][MAX_RANKS][gRanks];
 new PermsInfo[MAX_GROUPS][MAX_RANKS][MAX_PERMISSION]; //U¯YCIE: PermsInfo[group_id][rank_level][perm_code]
 new PlayerText:Textdraw0[MAX_PLAYERS];
 new PlayerText:Textdraw1[MAX_PLAYERS];
-new PlayerText:Textdraw2[MAX_PLAYERS];
-new PlayerText:Textdraw12[MAX_PLAYERS];
+new PlayerText:Textdraw4[MAX_PLAYERS];
+new PlayerText:Textdraw7[MAX_PLAYERS];
+new PlayerText:Textdraw10[MAX_PLAYERS];
 new PlayerText:Textdraw13[MAX_PLAYERS];
-new PlayerText:Textdraw14[MAX_PLAYERS];
-new PlayerText:Textdraw15[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
 
 //end

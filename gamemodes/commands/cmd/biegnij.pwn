@@ -32,7 +32,7 @@ YCMD:biegnij(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pAdmin] >= 2000)//chwilowa blokada
+		if(PlayerInfo[playerid][Admin] >= 2000)//chwilowa blokada
 		{
 			if(GetPlayerStrong(playerid) <= 980)
 			{

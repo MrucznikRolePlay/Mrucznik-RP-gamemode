@@ -34,7 +34,7 @@ YCMD:poddajsie2(playerid, params[], help)
 	/*
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pJob] == 1)
+		if(PlayerInfo[playerid][Job] == 1)
 		{
 			if(Kajdanki_Uzyte[playerid] != 1)
 			{

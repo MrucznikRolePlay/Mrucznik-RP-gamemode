@@ -36,7 +36,7 @@ YCMD:walka(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pJob] != 12)
+        if(PlayerInfo[playerid][Job] != 12)
         {
             sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ bokserem !");
             return 1;

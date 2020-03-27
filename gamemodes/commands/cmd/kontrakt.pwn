@@ -44,7 +44,7 @@ YCMD:kontrakt(playerid, params[], help)
 		}
 
 		if(moneys < 30000 || moneys > 1000000) { sendTipMessageEx(playerid, COLOR_GREY, "Kontrakt musi wynosiæ od $30 000, do $1 000 000!"); return 1; }
-		if(PlayerInfo[playerid][pLevel] < 3)
+		if(PlayerInfo[playerid][Level] < 3)
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Musisz mieæ 3 lvl aby podpisywaæ kontrakty.");
 			return 1;
@@ -66,7 +66,7 @@ YCMD:kontrakt(playerid, params[], help)
 				sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
 				return 1;
 			}
-			else if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || IsAScripter(giveplayerid))
+			else if(PlayerInfo[giveplayerid][Admin] >= 1 || PlayerInfo[giveplayerid][HalfAdmin] >= 1 || IsAScripter(giveplayerid))
 			{
 				sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
 				return 1;

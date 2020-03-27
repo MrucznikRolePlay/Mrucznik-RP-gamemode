@@ -30,7 +30,7 @@
 
 YCMD:zrobkolejke(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] < 5000) return 1;
+    if(PlayerInfo[playerid][Admin] < 5000) return 1;
     if(!VAR_Kolejka)
     {
         MoveDynamicObject(AI_SIGN[2], 3807.618408, -537.492492, 8.635930, 10.0); //text

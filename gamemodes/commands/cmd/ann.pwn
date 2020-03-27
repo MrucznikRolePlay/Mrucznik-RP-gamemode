@@ -30,7 +30,7 @@
 
 YCMD:ann(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pAdmin] > 5)
+	if(PlayerInfo[playerid][Admin] > 5)
 	{
 		new string[128];
 		if(isnull(params))

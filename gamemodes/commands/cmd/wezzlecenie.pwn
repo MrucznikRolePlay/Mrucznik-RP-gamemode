@@ -30,7 +30,7 @@
 
 YCMD:wezzlecenie(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pJob] == JOB_TRUCKER)
+    if(PlayerInfo[playerid][Job] == JOB_TRUCKER)
     {
         new veh = GetPlayerVehicleID(playerid);
         if(veh == 0) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");
@@ -52,7 +52,7 @@ YCMD:wezzlecenie(playerid, params[], help)
     {
         if(gPlayerLogged[playerid] != 0)
         {
-            if(PlayerInfo[playerid][pJob] == 1)
+            if(PlayerInfo[playerid][Job] == 1)
             {
                 new playa;
 				if( sscanf(params, "k<fix>", playa))

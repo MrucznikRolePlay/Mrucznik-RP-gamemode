@@ -30,17 +30,17 @@ ClearFishes(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    Fishes[playerid][pFid1] = 0; Fishes[playerid][pFid2] = 0; Fishes[playerid][pFid3] = 0;
-		Fishes[playerid][pFid4] = 0; Fishes[playerid][pFid5] = 0;
-		Fishes[playerid][pWeight1] = 0; Fishes[playerid][pWeight2] = 0; Fishes[playerid][pWeight3] = 0;
-		Fishes[playerid][pWeight4] = 0; Fishes[playerid][pWeight5] = 0;
+	    PlayerFishes[playerid][pFid1] = 0; PlayerFishes[playerid][pFid2] = 0; PlayerFishes[playerid][pFid3] = 0;
+		PlayerFishes[playerid][pFid4] = 0; PlayerFishes[playerid][pFid5] = 0;
+		PlayerFishes[playerid][pWeight1] = 0; PlayerFishes[playerid][pWeight2] = 0; PlayerFishes[playerid][pWeight3] = 0;
+		PlayerFishes[playerid][pWeight4] = 0; PlayerFishes[playerid][pWeight5] = 0;
 		new string[MAX_PLAYER_NAME];
 		format(string, sizeof(string), "None");
-		strmid(Fishes[playerid][pFish1], string, 0, strlen(string), 255);
-		strmid(Fishes[playerid][pFish2], string, 0, strlen(string), 255);
-		strmid(Fishes[playerid][pFish3], string, 0, strlen(string), 255);
-		strmid(Fishes[playerid][pFish4], string, 0, strlen(string), 255);
-		strmid(Fishes[playerid][pFish5], string, 0, strlen(string), 255);
+		strmid(PlayerFishes[playerid][pFish1], string, 0, strlen(string), 255);
+		strmid(PlayerFishes[playerid][pFish2], string, 0, strlen(string), 255);
+		strmid(PlayerFishes[playerid][pFish3], string, 0, strlen(string), 255);
+		strmid(PlayerFishes[playerid][pFish4], string, 0, strlen(string), 255);
+		strmid(PlayerFishes[playerid][pFish5], string, 0, strlen(string), 255);
 	}
 	return 1;
 }
@@ -55,33 +55,33 @@ ClearFishID(playerid, fish)
 		{
 		    case 1:
 		    {
-		        strmid(Fishes[playerid][pFish1], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight1] = 0;
-		        Fishes[playerid][pFid1] = 0;
+		        strmid(PlayerFishes[playerid][pFish1], string, 0, strlen(string), 255);
+		        PlayerFishes[playerid][pWeight1] = 0;
+		        PlayerFishes[playerid][pFid1] = 0;
 		    }
 		    case 2:
 		    {
-		        strmid(Fishes[playerid][pFish2], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight2] = 0;
-		        Fishes[playerid][pFid2] = 0;
+		        strmid(PlayerFishes[playerid][pFish2], string, 0, strlen(string), 255);
+		        PlayerFishes[playerid][pWeight2] = 0;
+		        PlayerFishes[playerid][pFid2] = 0;
 		    }
 		    case 3:
 		    {
-		        strmid(Fishes[playerid][pFish3], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight3] = 0;
-		        Fishes[playerid][pFid3] = 0;
+		        strmid(PlayerFishes[playerid][pFish3], string, 0, strlen(string), 255);
+		        PlayerFishes[playerid][pWeight3] = 0;
+		        PlayerFishes[playerid][pFid3] = 0;
 		    }
 		    case 4:
 		    {
-		        strmid(Fishes[playerid][pFish4], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight4] = 0;
-		        Fishes[playerid][pFid4] = 0;
+		        strmid(PlayerFishes[playerid][pFish4], string, 0, strlen(string), 255);
+		        PlayerFishes[playerid][pWeight4] = 0;
+		        PlayerFishes[playerid][pFid4] = 0;
 		    }
 		    case 5:
 		    {
-		        strmid(Fishes[playerid][pFish5], string, 0, strlen(string), 255);
-		        Fishes[playerid][pWeight5] = 0;
-		        Fishes[playerid][pFid5] = 0;
+		        strmid(PlayerFishes[playerid][pFish5], string, 0, strlen(string), 255);
+		        PlayerFishes[playerid][pWeight5] = 0;
+		        PlayerFishes[playerid][pFid5] = 0;
 		    }
 		}
 	}
@@ -90,7 +90,7 @@ ClearFishID(playerid, fish)
 
 PlayerHasFishes(playerid)
 {
-	return Fishes[playerid][pWeight1] > 0 || Fishes[playerid][pWeight2] > 0 || Fishes[playerid][pWeight3] > 0 || Fishes[playerid][pWeight4] > 0 || Fishes[playerid][pWeight5] > 0;
+	return PlayerFishes[playerid][pWeight1] > 0 || PlayerFishes[playerid][pWeight2] > 0 || PlayerFishes[playerid][pWeight3] > 0 || PlayerFishes[playerid][pWeight4] > 0 || PlayerFishes[playerid][pWeight5] > 0;
 }
 
 IsAtFishPlace(playerid)

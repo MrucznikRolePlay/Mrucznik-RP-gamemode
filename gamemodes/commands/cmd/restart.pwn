@@ -32,7 +32,7 @@ YCMD:restart(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
 		{
 			new string[128];
 			new playerNick[MAX_PLAYER_NAME];

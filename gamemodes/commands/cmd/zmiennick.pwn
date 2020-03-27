@@ -32,7 +32,7 @@ YCMD:zmiennick(playerid, params[], help)
 {
 	new sendername[MAX_PLAYER_NAME];
 
-	if (PlayerInfo[playerid][pLevel] >= 3)
+	if (PlayerInfo[playerid][Level] >= 3)
 	{
         //Nowy system
         if(PlayerInfo[playerid][pZmienilNick] < 1) return sendTipMessage(playerid, "Nie posidasz pakietu zmiany nicku.");

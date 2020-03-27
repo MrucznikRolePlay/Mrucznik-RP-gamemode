@@ -35,7 +35,7 @@ YCMD:fooc(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	    /*if(PlayerInfo[playerid][pMuted] == 1)
+	    /*if(PlayerInfo[playerid][Mute] == 1)
 		{
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
 			return 1;

@@ -32,7 +32,7 @@ YCMD:gotostad(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(playerid,4);
 			SetPlayerPos(playerid, -1435.75, -652.664, 1054.94);

@@ -33,7 +33,7 @@ YCMD:noooc(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         new string[128];
-		if (PlayerInfo[playerid][pAdmin] >= 20)
+		if (PlayerInfo[playerid][Admin] >= 20)
 		{
 			if(!noooc)
 			{

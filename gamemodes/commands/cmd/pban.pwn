@@ -33,7 +33,7 @@ YCMD:pban(playerid, params[], help)
 	new string[128];
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+        if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {

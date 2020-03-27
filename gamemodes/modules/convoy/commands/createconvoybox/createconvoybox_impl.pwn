@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_createconvoybox_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 5000)
+    if(PlayerInfo[playerid][Admin] < 5000)
     {
         noAccessMessage(playerid);
         return 1;

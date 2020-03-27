@@ -32,7 +32,7 @@ YCMD:skydive(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 25)
+		if (PlayerInfo[playerid][Admin] >= 25)
 		{
             new Float:rx, Float:ry, Float:rz;
             GetPlayerPos(playerid, rx, ry, rz);

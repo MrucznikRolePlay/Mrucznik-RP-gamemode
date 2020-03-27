@@ -30,7 +30,7 @@
 
 YCMD:gotomechy(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid)) {
+    if(PlayerInfo[playerid][Admin] > 0 || IsAScripter(playerid)) {
 		SetPlayerInterior(playerid,0);
 		SetPlayerVirtualWorld(playerid, 0);
 		if (GetPlayerState(playerid) == 2)

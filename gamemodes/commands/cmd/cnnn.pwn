@@ -30,7 +30,7 @@
 
 YCMD:cnnn(playerid, params[], help)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 5000)
+	if (PlayerInfo[playerid][Admin] >= 5000)
 	{
 		new txtid, result[128];
 		if( sscanf(params, "ds[128]", txtid, result))

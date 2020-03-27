@@ -91,7 +91,7 @@ YCMD:aresztuj(playerid, params[], help)
 								    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     poscig[playa] = 0;
 									WantLawyer[playa] = 1;
-									PlayerInfo[playa][pArrested] += 1;
+									PlayerInfo[playa][Arrested] += 1;
 									/*kajdanki*/
 									Kajdanki_JestemSkuty[playa] = 0;//Kajdany
                                     Kajdanki_Uzyte[playa] = 0;

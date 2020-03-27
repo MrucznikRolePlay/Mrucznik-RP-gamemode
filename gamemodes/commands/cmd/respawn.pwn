@@ -35,7 +35,7 @@ YCMD:respawn(playerid, params[], help)
 	
 	if(Count >= 20)
 	{
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 && PlayerInfo[playerid][HalfAdmin] <= 3 || IsAScripter(playerid))
 		{
 			SendClientMessage(playerid,COLOR_YELLOW, "Odliczanie rozpoczête");
 			BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");

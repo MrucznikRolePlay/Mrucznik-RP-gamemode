@@ -32,7 +32,7 @@ YCMD:losowostworzdom(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][pAdmin] >= 5000 )
+	    if(PlayerInfo[playerid][Admin] >= 5000 )
 		{
    			new kategoria, kesz;
 			if( sscanf(params, "dd", kategoria, kesz))

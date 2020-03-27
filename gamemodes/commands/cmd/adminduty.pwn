@@ -30,7 +30,7 @@
 
 YCMD:adminduty(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+	if(PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1)
 	{	
 		if(GetPlayerAdminDutyStatus(playerid) == 0)
 		{

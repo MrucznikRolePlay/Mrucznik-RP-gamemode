@@ -30,7 +30,7 @@
 
 YCMD:checkbw(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || IsAScripter(playerid))
 	{
 		new id, string[144], typeint, type[144];
 		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /checkbw [ID]");

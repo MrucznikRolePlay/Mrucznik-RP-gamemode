@@ -36,7 +36,7 @@ YCMD:sprzedajnarkotyki(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	    if(PlayerInfo[playerid][pJob] != 4)
+	    if(PlayerInfo[playerid][Job] != 4)
 	    {
 			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ Dilerem Dragów!");
 			return 1;

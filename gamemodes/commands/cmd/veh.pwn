@@ -34,7 +34,7 @@ YCMD:veh(playerid, params[], help) //TODO: naprawiæ/usun¹æ
 
     if(IsPlayerConnected(playerid))
     {
-        if (PlayerInfo[playerid][pAdmin] != 5000)
+        if (PlayerInfo[playerid][Admin] != 5000)
 		{
 		    noAccessMessage(playerid);
 		    return 1;

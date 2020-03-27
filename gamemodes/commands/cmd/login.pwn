@@ -33,7 +33,7 @@ YCMD:login(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
 		new playa;
-		if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0 && !IsAScripter(playerid))
+		if(PlayerInfo[playerid][Admin] == 0 && PlayerInfo[playerid][HalfAdmin] == 0 && !IsAScripter(playerid))
 		{
 			noAccessMessage(playerid);
 			return 1;

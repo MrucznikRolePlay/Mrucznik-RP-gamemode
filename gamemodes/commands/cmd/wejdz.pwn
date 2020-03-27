@@ -725,7 +725,7 @@ YCMD:wejdz(playerid, params[], help)
                     }
                     if (Business[i][b_vw] == 55 && Business[i][b_int] == 3) // Bymber Casino 
                     {
-                        if(PlayerInfo[playerid][pLevel] < 3) return sendTipMessageEx(playerid, COLOR_GRAD1, "Tylko gracze z conajmniej 3 lvl mog¹ graæ w kasynie!");
+                        if(PlayerInfo[playerid][Level] < 3) return sendTipMessageEx(playerid, COLOR_GRAD1, "Tylko gracze z conajmniej 3 lvl mog¹ graæ w kasynie!");
                         
                         SendClientMessage(playerid, COLOR_GREEN, "Witamy w Bymber Casino.");
                         SendClientMessage(playerid, COLOR_WHITE, "W naszym kasynie obowi¹zuj¹ nastêpuj¹ce stawki za rozpoczêcie gry:");
@@ -779,7 +779,7 @@ YCMD:wejdz(playerid, params[], help)
 						PlayerInfo[playerid][pDomWKJ] = i;
 						GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
 					}
-					else if(PlayerInfo[playerid][pAdmin] >= 1000)
+					else if(PlayerInfo[playerid][Admin] >= 1000)
 					{
 						new deem = Dom[i][hDomNr];
 						new h, m;

@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zaraz_Impl(playerid, giveplayerid, disease[32])
 {
-    if(PlayerInfo[playerid][pAdmin] < 100 && !IsAScripter(playerid))
+    if(PlayerInfo[playerid][Admin] < 100 && !IsAScripter(playerid))
     {
         noAccessMessage(playerid);
         return 1;

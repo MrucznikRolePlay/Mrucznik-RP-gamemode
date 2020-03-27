@@ -39,7 +39,7 @@ YCMD:zmienhp(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 10 || PlayerInfo[playerid][Admin] == 7 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

@@ -33,7 +33,7 @@ YCMD:kuppozwolenie(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pJob] == 2)
+        if(PlayerInfo[playerid][Job] == 2)
         {
             if(IsPlayerInRangeOfPoint(playerid, 3.0, -1677.7097,893.5458,-48.9141) && (GetPlayerVirtualWorld(playerid)==1)) 
             {

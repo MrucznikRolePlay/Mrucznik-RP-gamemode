@@ -41,7 +41,7 @@ YCMD:sban(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 4 || PlayerInfo[playerid][pAdmin] == 7)
+		if (PlayerInfo[playerid][Admin] >= 5000 || PlayerInfo[playerid][HalfAdmin] == 4 || PlayerInfo[playerid][Admin] == 7)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -52,7 +52,7 @@ YCMD:sban(playerid, params[], help)
 		    {
 		        if(giveplayerid != INVALID_PLAYER_ID)
 		        {
-					if(PlayerInfo[giveplayerid][pAdmin] >= 1)
+					if(PlayerInfo[giveplayerid][Admin] >= 1)
 					{
 						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina!");
 						return 1;

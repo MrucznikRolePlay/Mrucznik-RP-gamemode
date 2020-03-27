@@ -35,7 +35,7 @@ YCMD:materialy(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	    if (PlayerInfo[playerid][pJob] != 9)
+	    if (PlayerInfo[playerid][Job] != 9)
 		{
 		    sendTipMessageEx(playerid,COLOR_GREY,"Nie jesteœ dilerem broni !");
 		    return 1;

@@ -1181,35 +1181,35 @@ ZerujZmienne(playerid)
 	//BusTime[playerid] = 0; BusTime2[playerid] = 0; BusTime3[playerid] = 0; BusTime4[playerid] = 0; BusTime5[playerid] = 0;//bustime
 	//BusTime6[playerid] = 0; BusTime7[playerid] = 0; BusTime8[playerid] = 0; BusTime9[playerid] = 0; BusTime10[playerid] = 0; BusTime11[playerid] = 0; BusTime12[playerid] = 0; BusTime13[playerid] = 0;//bustime
 	//BusTime14[playerid] = 0; BusTime15[playerid] = 0; BusTime16[playerid] = 0; BusTime17[playerid] = 0; BusTime18[playerid] = 0; BusTime19[playerid] = 0; BusTime20[playerid] = 0;//bustime
-	PlayerInfo[playerid][pCash] = dollah; Respawn[playerid] = 0;//Respawn
+	PlayerInfo[playerid][BankMoney] = dollah; Respawn[playerid] = 0;//Respawn
 	HireCar[playerid] = 0; PlayersChannel[playerid] = 999;
 	TransportValue[playerid] = 0; TransportMoney[playerid] = 0; TransportCost[playerid] = 0; TransportDriver[playerid] = 999;
 	Locator[playerid] = 0; PlayerOnMission[playerid] = 0; MissionCheckpoint[playerid] = 0;
 	WatchingTV[playerid] = 0; PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
 	BiletAlhambra[playerid] = 0;
-	PlayerInfo[playerid][pLevel] = 0;
-	PlayerInfo[playerid][pAdmin] = 0;
-	PlayerInfo[playerid][pNewAP] = 0;
+	PlayerInfo[playerid][Level] = 0;
+	PlayerInfo[playerid][Admin] = 0;
+	PlayerInfo[playerid][HalfAdmin] = 0;
 	PlayerInfo[playerid][pZG] = 0;
-	PlayerInfo[playerid][pDonateRank] = 0;
-	PlayerInfo[playerid][gPupgrade] = 0;
-	PlayerInfo[playerid][pConnectTime] = 0;
-	PlayerInfo[playerid][pReg] = 0;
-	PlayerInfo[playerid][pSex] = 0;
-	PlayerInfo[playerid][pAge] = 0;
-	PlayerInfo[playerid][pOrigin] = 0;
-	PlayerInfo[playerid][pExp] = 0;
-	PlayerInfo[playerid][pAccount] = 0;
-	PlayerInfo[playerid][pCrimes] = 0;
-	PlayerInfo[playerid][pDeaths] = 0;
-	PlayerInfo[playerid][pArrested] = 0;
-	PlayerInfo[playerid][pWantedDeaths] = 0;
-	PlayerInfo[playerid][pPhoneBook] = 0;
-	PlayerInfo[playerid][pLottoNr] = 0;
-	PlayerInfo[playerid][pFishes] = 0;
-	PlayerInfo[playerid][pBiggestFish] = 0;
-	PlayerInfo[playerid][pJob] = 0;
+	PlayerInfo[playerid][OldDonateRank] = 0;
+	PlayerInfo[playerid][UpgradeLvl] = 0;
+	PlayerInfo[playerid][OnlineHours] = 0;
+	PlayerInfo[playerid][Registered] = 0;
+	PlayerInfo[playerid][Gender] = 0;
+	PlayerInfo[playerid][Age] = 0;
+	PlayerInfo[playerid][Origin] = 0;
+	PlayerInfo[playerid][Exp] = 0;
+	PlayerInfo[playerid][BankMoney] = 0;
+	PlayerInfo[playerid][Crimes] = 0;
+	PlayerInfo[playerid][Deaths] = 0;
+	PlayerInfo[playerid][Arrested] = 0;
+	PlayerInfo[playerid][WantedDeaths] = 0;
+	PlayerInfo[playerid][Item_PhoneBook] = 0;
+	PlayerInfo[playerid][LottoNr] = 0;
+	PlayerInfo[playerid][Fishes] = 0;
+	PlayerInfo[playerid][BiggestFish] = 0;
+	PlayerInfo[playerid][Job] = 0;
 	PlayerInfo[playerid][pPayCheck] = 0;
 	PlayerInfo[playerid][pHeadValue] = 0;
 	PlayerInfo[playerid][pBP] = 0;
@@ -1306,7 +1306,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pCygaro] = 0;
 	PlayerInfo[playerid][pSprunk] = 0;
 	PlayerInfo[playerid][pStylWalki] = 0;
-	PlayerInfo[playerid][pNewAP] = 0;
+	PlayerInfo[playerid][HalfAdmin] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
 	//Sandal

@@ -32,7 +32,7 @@ YCMD:togadminmess(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
 		{
 			sendTipMessage(playerid, "Nie s³yszysz ju¿ nic! Nie widzisz ju¿ nic! Taki z ciebie admin"); 
 			DeathWarning[playerid] = 0;

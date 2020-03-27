@@ -30,7 +30,7 @@
 
 YCMD:sh(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 15)
+    if(PlayerInfo[playerid][Admin] >= 15)
     {
 		OddajZycie(playerid, 3, "Zresetowano HP", true);
 	    new Float:x,Float:y,Float:z;

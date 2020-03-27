@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_diagnozuj_Impl(playerid, giveplayerid)
 {
-	if (!IsAMedyk(playerid) && (PlayerInfo[playerid][pAdmin] == 0 || PlayerInfo[playerid][pNewAP] == 0))
+	if (!IsAMedyk(playerid) && (PlayerInfo[playerid][Admin] == 0 || PlayerInfo[playerid][HalfAdmin] == 0))
 	{
 		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
         return 1;

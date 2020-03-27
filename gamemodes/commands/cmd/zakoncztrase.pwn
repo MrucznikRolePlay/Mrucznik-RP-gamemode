@@ -30,11 +30,11 @@
 
 YCMD:zakoncztrase(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][pJob] == 10)
+	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][Job] == 10)
 	{
 		if(IsPlayerConnected(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pJob] == 10)
+			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][Job] == 10)
 			{
 				DisablePlayerCheckpoint(playerid);
 				CP[playerid] = 0;

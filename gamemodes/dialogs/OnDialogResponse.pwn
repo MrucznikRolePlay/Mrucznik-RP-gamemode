@@ -1418,7 +1418,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new string[128];
 		format(string, sizeof(string), "Twoje nowe has³o to: >>>>>> %s <<<<< -> zapisz je!", inputtext);
 
-		if(strcmp(PlayerInfo[playerid][pKey],inputtext, true ) != 0)
+		if(strcmp(PlayerInfo[playerid][Key],inputtext, true ) != 0)
 		{
 			SendClientMessage(playerid, COLOR_PANICRED, string);
 			SendClientMessage(playerid, COLOR_PANICRED, string);
@@ -1940,7 +1940,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %s - pozostawiaj¹c VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), GetFractionLogName(PlayerInfo[id_Lidera][pMember]));
 			PlayerInfo[id_Lidera][pMember] = 0;
 			PlayerInfo[id_Lidera][pLider] = 0;
-			PlayerInfo[id_Lidera][pJob] = 0;
+			PlayerInfo[id_Lidera][Job] = 0;
 			orgUnInvitePlayer(id_Lidera);
 			MedicBill[id_Lidera] = 0;
 			SetPlayerSpawn(id_Lidera);
@@ -2867,7 +2867,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-			                PlayerInfo[playerid][pPhoneBook] = 1;
+			                PlayerInfo[playerid][Item_PhoneBook] = 1;
 							format(string, sizeof(string), "   Ksi¹¿ka telefoniczna zakupiona! Mo¿esz teraz sprawdzaæ numery graczy !");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /numer <id/nick>.");
@@ -3350,7 +3350,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerCuffed[playerid] = 3;
 						PlayerCuffedTime[playerid] = 45;
 						pobity[playerid] = 1;
-						PlayerInfo[playerid][pMuted] = 1;
+						PlayerInfo[playerid][Mute] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
 						SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
 						pobilem[bijep[playerid]] = 1;
@@ -3387,7 +3387,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerCuffed[playerid] = 3;
 					PlayerCuffedTime[playerid] = 45;
 					pobity[playerid] = 1;
-					PlayerInfo[playerid][pMuted] = 1;
+					PlayerInfo[playerid][Mute] = 1;
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
 					SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
 					pobilem[bijep[playerid]] = 1;
@@ -3425,7 +3425,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerCuffed[playerid] = 3;
 				PlayerCuffedTime[playerid] = 45;
 				pobity[playerid] = 1;
-				PlayerInfo[playerid][pMuted] = 1;
+				PlayerInfo[playerid][Mute] = 1;
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
 				SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
 				pobilem[bijep[playerid]] = 1;
@@ -4400,7 +4400,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
@@ -4415,7 +4415,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
@@ -4430,7 +4430,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4446,7 +4446,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4462,7 +4462,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4478,7 +4478,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4494,7 +4494,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4510,7 +4510,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4526,7 +4526,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4542,7 +4542,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4558,7 +4558,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4574,7 +4574,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4590,7 +4590,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4606,7 +4606,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -4622,7 +4622,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][pJob] = 14;
+		                    PlayerInfo[playerid][Job] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
@@ -6392,7 +6392,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 1:
 					{
-						if (kaska[playerid] >= 25000000 && PlayerInfo[playerid][pExp] >= 180)
+						if (kaska[playerid] >= 25000000 && PlayerInfo[playerid][Exp] >= 180)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -6400,7 +6400,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 25000000$ i 180 punktów respektu", GetPlayerLogName(playerid));
 							PlayerInfo[playerid][pZmienilNick] ++;
 							ZabierzKase(playerid, 25000000);
-							PlayerInfo[playerid][pExp] -=180;
+							PlayerInfo[playerid][Exp] -=180;
 						}
 						else
 						{
@@ -6409,14 +6409,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 2:
 					{
-					    if (PlayerInfo[playerid][pExp] >= 340)
+					    if (PlayerInfo[playerid][Exp] >= 340)
 						{
 							format(string, sizeof(string), "%s cofn¹³eœ jedn¹ zmianê nicku. Iloœæ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktów respektu");
 							Log(payLog, INFO, "%s cofn¹³ sobie zmianê nicku za 340 punktów respektu", GetPlayerLogName(playerid));
 							PlayerInfo[playerid][pZmienilNick] ++;
-							PlayerInfo[playerid][pExp] -=340;
+							PlayerInfo[playerid][Exp] -=340;
 						}
 						else
 						{
@@ -6688,13 +6688,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    case 0://men
 				    {
 				        ShowPlayerDialogEx(playerid, 72, DIALOG_STYLE_LIST, "Wybierz pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");//Ameryka Pó³nocna\nAmeryka Œrodkowa\nAmeryka Po³udniowa\nAfryka\nAustralia\nEuropa Wschodnia\nEuropa Zachodnia\nAzja
-	                    PlayerInfo[playerid][pSex] = 1;
+	                    PlayerInfo[playerid][Gender] = 1;
 	                    SendClientMessage(playerid, COLOR_NEWS, "Twoja postaæ jest mê¿czyzn¹.");
 					}
 				    case 1://baba
 				    {
 				        ShowPlayerDialogEx(playerid, 72, DIALOG_STYLE_LIST, "Wybierz pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");//Ameryka Pó³nocna\nAmeryka Œrodkowa\nAmeryka Po³udniowa\nAfryka\nAustralia\nEuropa Wschodnia\nEuropa Zachodnia\nAzja
-	                    PlayerInfo[playerid][pSex] = 2;
+	                    PlayerInfo[playerid][Gender] = 2;
 	                    SendClientMessage(playerid, COLOR_NEWS, "Twoja postaæ jest kobiet¹.");
 					}
 				}
@@ -6712,18 +6712,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0://usa
 				    {
-				        PlayerInfo[playerid][pOrigin] = 1;
+				        PlayerInfo[playerid][Origin] = 1;
 				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaæ jest teraz obywatelem USA.");
 				    }
 				    case 1://europa
 				    {
-				        PlayerInfo[playerid][pOrigin] = 2;
+				        PlayerInfo[playerid][Origin] = 2;
 				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaæ jest teraz Europejskim imigrantem.");
 				    }
 				    case 2://azja
 				    {
 				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaæ jest teraz Azjatyckim imigrantem.");
-				        PlayerInfo[playerid][pOrigin] = 3;
+				        PlayerInfo[playerid][Origin] = 3;
 				    }
 				}
 				ShowPlayerDialogEx(playerid, 73, DIALOG_STYLE_INPUT, "Wybierz wiek postaci", "Wpisz wiek swojej postaci (od 16 do 140 lat)", "Dalej", "Wstecz");
@@ -6741,7 +6741,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            {
 	                if(strval(inputtext) >= 16 && strval(inputtext) <= 140)
 	                {
-	                    PlayerInfo[playerid][pAge] = strval(inputtext);
+	                    PlayerInfo[playerid][Age] = strval(inputtext);
 						ShowPlayerDialogEx(playerid, 74, DIALOG_STYLE_MSGBOX, "Samouczek", "To ju¿ wszystkie dane jakie musia³eœ podaæ. Teraz musisz przejœæ samouczek.\nAby go rozpocz¹æ wciœnij 'dalej'", "Dalej", "Wstecz");
 	                }
 	                else
@@ -6761,7 +6761,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(dialogid == 74)
 		{
-            if(PlayerInfo[playerid][pLevel] > 1) return 1;
+            if(PlayerInfo[playerid][Level] > 1) return 1;
 		    if(response)
 		    {
 		        gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
@@ -7065,7 +7065,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        new godz = strval(inputtext);
 		        new string[256];
-		        if(godz >= 0 && godz <= 24 || PlayerInfo[playerid][pAdmin] >= 100)
+		        if(godz >= 0 && godz <= 24 || PlayerInfo[playerid][Admin] >= 100)
 		        {
 					format(string, sizeof(string), "Oœwietlenie domu zmienione na %d godzinê", godz);
 					SendClientMessage(playerid, COLOR_NEWS, string);
@@ -8102,7 +8102,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			   	{
-	      			if(PlayerInfo[playerid][pMats] >= (5000*(Dom[dom][hSejf]+1)) && PlayerInfo[playerid][pDrugs] >= (2*(Dom[dom][hSejf]+1)) /*&& PlayerInfo[playerid][pZiolo] >= (2*(Dom[dom][hSejf]+1))*/ && PlayerInfo[playerid][pLevel] >= (Dom[dom][hSejf]+1))
+	      			if(PlayerInfo[playerid][pMats] >= (5000*(Dom[dom][hSejf]+1)) && PlayerInfo[playerid][pDrugs] >= (2*(Dom[dom][hSejf]+1)) /*&& PlayerInfo[playerid][pZiolo] >= (2*(Dom[dom][hSejf]+1))*/ && PlayerInfo[playerid][Level] >= (Dom[dom][hSejf]+1))
 			       	{
 				        if(kaska[playerid] != 0 && kaska[playerid] >= 1000000*((Dom[dom][hSejf]-10)+1))
 				        {
@@ -11080,7 +11080,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                GetPlayerName(playerid, nick, sizeof(nick));
 
                         SejfR_Add(lider, -kasa);
-						PlayerInfo[playerid][pAccount] += kasa;
+						PlayerInfo[playerid][BankMoney] += kasa;
 
 			            new komunikat[256];
 			            format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
@@ -12638,35 +12638,35 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			   	{
 				   	case 0://Policjant bia³y(Pulaski)
 				   	{
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 93 : 266;
+						new skin = (PlayerInfo[playerid][Gender] == 2) ? 93 : 266;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni³eœ swój uniform.");
 					}
 					case 1://Policjant tempeny
 					{
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 211 : 265;
+						new skin = (PlayerInfo[playerid][Gender] == 2) ? 211 : 265;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni³eœ swój uniform.");
 					}
 					case 2://Policjant Latynos
 					{	
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 192 : 267;
+						new skin = (PlayerInfo[playerid][Gender] == 2) ? 192 : 267;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni³eœ swój uniform.");
 					}
 					case 3://Policjant bia³y
 					{	
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 148 : 280;
+						new skin = (PlayerInfo[playerid][Gender] == 2) ? 148 : 280;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni³eœ swój uniform.");
 					}
 					case 4://Policjant bia³y(z w¹sem)
 					{	
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 141 : 281;
+						new skin = (PlayerInfo[playerid][Gender] == 2) ? 141 : 281;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni³eœ swój uniform.");
@@ -13107,7 +13107,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	{
 				   		if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-						    if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 50) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+						    if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 50) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia55]=1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS.");
@@ -13150,7 +13150,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-						 	if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 200) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+						 	if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 200) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia96]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -13175,7 +13175,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia82]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -13200,7 +13200,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia96]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -13225,7 +13225,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 								Przystanek(playerid, COLOR_BLUE, "Wycieczka\nKoszt: 7500$\n Wiêcej informacji u kierowcy.");
 				    			/*BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= 15000;
@@ -13245,7 +13245,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 6:
 					{
-				    	if(PlayerInfo[playerid][pJob] == 10)
+				    	if(PlayerInfo[playerid][Job] == 10)
 			    			{
            						SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
 								CP[playerid]=1201;
@@ -13879,7 +13879,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new id = GetPVarInt(playerid, "IbizaBiletSell");
 		if(response)
 		{
-			//if(PlayerInfo[playerid][pCash] < IbizaBilet) return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
+			//if(PlayerInfo[playerid][BankMoney] < IbizaBilet) return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
 			new hajs = kaska[playerid];
 			if(hajs < IbizaBilet)
 			{
@@ -13888,7 +13888,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				//PlayerInfo[playerid][pCash]-=IbizaBilet;
+				//PlayerInfo[playerid][BankMoney]-=IbizaBilet;
 				ZabierzKase(playerid, IbizaBilet); //HAJS coœ takiego jak wy¿ej, nwm dok³adnie jak macie
 				SejfR_Add(FAMILY_IBIZA, IbizaBilet);
 				SetPVarInt(playerid, "IbizaBilet", 1);
@@ -13916,7 +13916,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			new hajs = kaska[playerid]; //HAJS zmieniæ na pobieranie ze struktury
 			new drink = GetPVarInt(playerid, "IbizaDrink");
-			if(hajs >=IbizaDrinkiCeny[drink]) //if(PlayerInfo[playerid][pCash] >= IbizaDrinkiCeny[drink] )
+			if(hajs >=IbizaDrinkiCeny[drink]) //if(PlayerInfo[playerid][BankMoney] >= IbizaDrinkiCeny[drink] )
 			{
 				ZabierzKase(playerid, IbizaDrinkiCeny[drink]); //HAJS zabranie pieniêdzy ze struktury
 				SejfR_Add(FAMILY_IBIZA, IbizaDrinkiCeny[drink]);
@@ -14626,7 +14626,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			if(GetPVarInt(playerid, "ChangingPassword")) //password changing
 			{
-				if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
+				if(PlayerInfo[playerid][Admin] > 0 || PlayerInfo[playerid][HalfAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
 				{
 					ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
 				}
@@ -15158,7 +15158,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				//dzia³anie dialogu
                 case 0://Stan konta
 				{
-					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta: {80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta: {80FF00}%d$", giveplayer, PlayerInfo[playerid][BankMoney]);
 					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
                 case 1://Wp³aæ
@@ -15234,27 +15234,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota!");
 					return 1;
 				}
-				if(PlayerInfo[playerid][pAccount] + money > 2_000_000_000)
+				if(PlayerInfo[playerid][BankMoney] + money > 2_000_000_000)
 				{
 					sendTipMessage(playerid, "Konto bankowe przepe³nione, mo¿emy przechowywaæ nie wiêcej ni¿ 2 miliardy!");
 					return 1;
 				}
 				ZabierzKase(playerid, money);
-				new currentFunds = PlayerInfo[playerid][pAccount];
+				new currentFunds = PlayerInfo[playerid][BankMoney];
 				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
 				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", currentFunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
-				PlayerInfo[playerid][pAccount] = money + PlayerInfo[playerid][pAccount];
+				PlayerInfo[playerid][BankMoney] = money + PlayerInfo[playerid][BankMoney];
 				format(string, sizeof(string), "  Depozyt: {80FF00}$%d", money);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
-				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
+				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][BankMoney]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
 				
 				Log(payLog, INFO, "%s wp³aci³ na swoje konto %d$. Nowy stan: %d$",
 					GetPlayerLogName(playerid),
 					money, 
-					PlayerInfo[playerid][pAccount]);
+					PlayerInfo[playerid][BankMoney]);
 			}	
 			return 1;
 		}
@@ -15551,14 +15551,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new money = strval(inputtext);
 				money = FunkcjaK(inputtext);//--Funkcja wp³acania na k
 				
-				if (money > PlayerInfo[playerid][pAccount] || money < 1)//Zabezpieczenie
+				if (money > PlayerInfo[playerid][BankMoney] || money < 1)//Zabezpieczenie
 				{
 					sendTipMessage(playerid, "Nie masz tyle \\ B³êdna kwota");
 					return 1;
 				}
 				
 				//Komunikaty:
-				new currentFunds = PlayerInfo[playerid][pAccount];
+				new currentFunds = PlayerInfo[playerid][BankMoney];
 				SendClientMessage(playerid, COLOR_WHITE, "|___ {80FF00}STAN KONTA {FFFFFF}___|");
 				format(string, sizeof(string), "  Poprzedni stan: {80FF00}$%d", currentFunds);
 				SendClientMessage(playerid, COLOR_GRAD2, string);
@@ -15566,16 +15566,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GRAD4, string);
 				//Czynnoœci:
 				DajKase(playerid, money);
-				PlayerInfo[playerid][pAccount] -= money;
+				PlayerInfo[playerid][BankMoney] -= money;
 				//Komunikaty:
 				SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
-				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
+				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][BankMoney]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
 				
 				Log(payLog, INFO, "%s wyp³aci³ ze swojego konta %d$. Nowu stan: %d$", 
 					GetPlayerLogName(playerid), 
 					money, 
-					PlayerInfo[playerid][pAccount]);
+					PlayerInfo[playerid][BankMoney]);
 			}	
 			return 1;
 		}
@@ -15683,9 +15683,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 			
-			if(money >= 1 && money <= PlayerInfo[playerid][pAccount])//Zabezpieczenie 
+			if(money >= 1 && money <= PlayerInfo[playerid][BankMoney])//Zabezpieczenie 
 			{
-				if(PlayerInfo[giveplayerid][pAccount]+money > MAX_MONEY_IN_BANK)
+				if(PlayerInfo[giveplayerid][BankMoney]+money > MAX_MONEY_IN_BANK)
 				{
 					sendErrorMessage(playerid, "Gracz do którego próbowa³eœ przelaæ gotówkê - ma zbyt du¿o pieniêdzy na koncie."); 
 					return 1;
@@ -15696,8 +15696,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					return 1;
 				}
 				//Czynnoœci:
-				PlayerInfo[playerid][pAccount] -= money;
-				PlayerInfo[giveplayerid][pAccount] += money;
+				PlayerInfo[playerid][BankMoney] -= money;
+				PlayerInfo[giveplayerid][BankMoney] += money;
 				
 				//komunikaty:
 				format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s . Pieni¹dze znajduj¹ siê na twoim koncie.", money, sendername);
@@ -15800,13 +15800,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				sendErrorMessage(playerid, "Gracz, do którego próbowa³eœ przelaæ gotówkê wyszed³ z serwera!"); 
 				return 1;
 			}
-			if(PlayerInfo[giveplayerid][pAccount]+money > MAX_MONEY_IN_BANK)
+			if(PlayerInfo[giveplayerid][BankMoney]+money > MAX_MONEY_IN_BANK)
 			{
 				sendErrorMessage(playerid, "Gracz do którego próbowa³eœ przelaæ gotówkê - ma zbyt du¿o pieniêdzy na koncie."); 
 				return 1;
 			}
 			
-			PlayerInfo[giveplayerid][pAccount] += money;
+			PlayerInfo[giveplayerid][BankMoney] += money;
 			Sejf_Add(frakcja, -money);
 			Sejf_Save(frakcja);
 			
@@ -16230,7 +16230,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0)
+					if(PlayerInfo[playerid][Admin] == 0 && PlayerInfo[playerid][HalfAdmin] == 0)
 					{
 						sendTipMessage(playerid, "Nie jesteœ administratorem"); 
 						return 1;

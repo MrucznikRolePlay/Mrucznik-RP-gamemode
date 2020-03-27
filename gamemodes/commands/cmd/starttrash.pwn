@@ -32,7 +32,7 @@ YCMD:starttrash(playerid, params[], help)
 {
 	if(IsPlayerConnected((playerid))
 	{
-		if(PlayerInfo[playerid][pJob] == 17)
+		if(PlayerInfo[playerid][Job] == 17)
 		{
 			if(GetPlayerVehicleID(playerid) == 408)
 			{

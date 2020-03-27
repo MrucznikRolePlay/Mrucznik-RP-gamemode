@@ -37,11 +37,11 @@ YCMD:checkadminstats(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /checkadminstats [ID]");
 		return 1;
 	}
-	if(PlayerInfo[playerid][pAdmin] >= 1000) 
+	if(PlayerInfo[playerid][Admin] >= 1000) 
 	{
 		if(giveplayerid != INVALID_PLAYER_ID)
 		{
-			if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1)
+			if(PlayerInfo[giveplayerid][Admin] >= 1 || PlayerInfo[giveplayerid][HalfAdmin] >= 1)
 			{
 				if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
 				{

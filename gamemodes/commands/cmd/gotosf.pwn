@@ -32,7 +32,7 @@ YCMD:gotosf(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 5 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(playerid, 0);
 			SetPlayerVirtualWorld(playerid, 0);

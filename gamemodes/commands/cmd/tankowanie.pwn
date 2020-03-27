@@ -36,7 +36,7 @@ YCMD:tankowanie(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	    if(PlayerInfo[playerid][pJob] == 7 || (PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] == 0) || IsANoA(playerid))
+	    if(PlayerInfo[playerid][Job] == 7 || (PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] == 0) || IsANoA(playerid))
 	    {
 			new playa, money;
 			if( sscanf(params, "k<fix>d", playa, money))

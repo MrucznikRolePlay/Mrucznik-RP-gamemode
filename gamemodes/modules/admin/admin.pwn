@@ -231,7 +231,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 IsAHeadAdmin(playerid)
 {
-	if(PlayerInfo[playerid][pAdmin] == 5000)
+	if(PlayerInfo[playerid][Admin] == 5000)
 	{
 		return 1;
 	}
@@ -267,7 +267,7 @@ SendMessageToAdminEx(text[], mColor, condition)//Wysy³a wiadomoœæ do administrat
 	new stradm[256];
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pNewAP] > 0 || IsAScripter(i))
+		if(PlayerInfo[i][Admin] > 0 || PlayerInfo[i][HalfAdmin] > 0 || IsAScripter(i))
 		{
 			if(condition == 1)//Warunek w³¹czonej widocznoœci reportów
 			{
@@ -578,7 +578,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	PlayerInfo[playerid][pJailTime] = timeVal*60;
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, result);
 	SetPlayerVirtualWorld(playerid, 1000+playerid);
-	PlayerInfo[playerid][pMuted] = 1;
+	PlayerInfo[playerid][Mute] = 1;
 	SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 	poscig[playerid] = 0;
 	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNickEx(adminid), timeVal, (result)); 

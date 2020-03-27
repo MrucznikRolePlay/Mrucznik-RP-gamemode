@@ -34,7 +34,7 @@ YCMD:glosowanie(playerid, params[], help)
 	{
 		if(glosowanie_admina_status == 0)
 		{
-			if(PlayerInfo[playerid][pAdmin] >= 200 || IsAScripter(playerid))
+			if(PlayerInfo[playerid][Admin] >= 200 || IsAScripter(playerid))
 			{
 				new timeValue;
 				new result[128];

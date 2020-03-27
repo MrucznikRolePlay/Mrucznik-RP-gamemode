@@ -58,7 +58,7 @@ YCMD:przeszukaj(playerid, params[], help)
 					    if(PlayerInfo[giveplayerid][pDrugs] > 0) { text1 = "| Narkotyki."; } else { text1 = "| Pusta kieszeñ."; }
 					    if(PlayerInfo[giveplayerid][pMats] > 0) { text2 = "| Materia³y."; } else { text2 = "| Pusta kieszeñ."; }
 					    if(PlayerHasFishes(giveplayerid)) { text3 = "| Ryby."; } else { text3 = "| Pusta kieszeñ."; }
-					    if(PlayerInfo[giveplayerid][pPhoneBook] > 0) { text4 = "| Ksi¹¿ka tel."; } else { text4 = "| Pusta kieszeñ."; }
+					    if(PlayerInfo[giveplayerid][Item_PhoneBook] > 0) { text4 = "| Ksi¹¿ka tel."; } else { text4 = "| Pusta kieszeñ."; }
 					    if(PlayerInfo[giveplayerid][pCDPlayer] > 0) { text5 = "| MP3."; } else { text5 = "| Pusta kieszeñ."; }
 					    format(string, sizeof(string), "|__________ Wynik przeszukania %s __________|", giveplayer);
 				        SendClientMessage(playerid, COLOR_WHITE, string);

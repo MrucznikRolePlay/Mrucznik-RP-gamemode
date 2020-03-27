@@ -35,7 +35,7 @@ YCMD:megafon(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pMuted] == 1)
+        if(PlayerInfo[playerid][Mute] == 1)
 		{
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
 			return 1;
@@ -134,7 +134,7 @@ YCMD:megafon(playerid, params[], help)
 		    format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
-		else if(PlayerInfo[playerid][pJob] == 1 && PlayerInfo[playerid][pDetSkill] > 400)
+		else if(PlayerInfo[playerid][Job] == 1 && PlayerInfo[playerid][pDetSkill] > 400)
 		{
 		    format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);

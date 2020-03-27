@@ -51,7 +51,7 @@ command_grafiti_Impl(playerid, opcja[24])
         new i = graffiti_FindNearest(playerid);
         if(i!=INVALID_GRAFID)
         {
-            if(strcmp(GraffitiInfo[i][pOwner],GetNickEx(playerid),true) == 0 || PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN)
+            if(strcmp(GraffitiInfo[i][pOwner],GetNickEx(playerid),true) == 0 || PlayerInfo[playerid][Admin] >= GRAFFITI_ADMIN)
             {
                 graffiti_DeleteMySQL(i);
                 graffiti_Zeruj(i);

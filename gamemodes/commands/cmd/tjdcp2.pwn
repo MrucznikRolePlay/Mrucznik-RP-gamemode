@@ -30,7 +30,7 @@
 
 YCMD:tjdcp2(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] < 5) return 1;
+    if(PlayerInfo[playerid][Admin] < 5) return 1;
     new idx;
     sscanf(params, "d", idx);
     new id = GetPlayerVehicleID(playerid);

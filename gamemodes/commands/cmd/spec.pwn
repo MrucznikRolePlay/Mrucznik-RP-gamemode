@@ -36,14 +36,14 @@ YCMD:spec(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 3)
+        if(IsAScripter(playerid) || PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 3)
         {
             GetPlayerName(playerid, sendername, sizeof(sendername));
             new pid;
 			if(sscanf(params, "k<fix>", pid)) return sendTipMessage(playerid, "U¿yj /spec [Nick lub ID gracza] - Aby wy³¹czyæ - Klawisz skoku");
             if(pid == INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Cel nie jest osiagalny.");
             if(pid == playerid) return sendErrorMessage(playerid, "Cel nie jest osiagalny.");
-			if(PlayerInfo[pid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] < 1000) return sendErrorMessage(playerid, "Nie mo¿esz specowaæ tego admina!"); 
+			if(PlayerInfo[pid][Admin] >= 1 && PlayerInfo[playerid][Admin] < 1000) return sendErrorMessage(playerid, "Nie mo¿esz specowaæ tego admina!"); 
 	        /*if(SpectateTime[playerid] >= 1)
 	        {
 				new Float:spectime = (SpectateTime[playerid]*2)/60;
@@ -75,7 +75,7 @@ YCMD:spec(playerid, params[], help)
 			new specIP[32], iptext[64], jailWiadomosc[64];
 			format(jailWiadomosc, sizeof(jailWiadomosc), " | Jail/AJ - %ds ", PlayerInfo[pid][pJailTime]);
 			GetPlayerIp(pid, specIP, sizeof(specIP));
-			if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+			if(PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
 			{
 				format(iptext, sizeof(iptext)," | IP - %s", specIP);
 			} 
@@ -83,12 +83,12 @@ YCMD:spec(playerid, params[], help)
 				giveplayer,
 				pid,
 				cash,
-				PlayerInfo[pid][pLevel],
+				PlayerInfo[pid][Level],
 				(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),
 				(PlayerInfo[pid][pJailTime] > 0) ? (jailWiadomosc) : (" "), 
 				GetPlayerVirtualWorld(pid), 
 				GetPlayerInterior(pid), 
-				(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid)) ? iptext : ""
+				(PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid)) ? iptext : ""
 			);
 				
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
@@ -100,7 +100,7 @@ YCMD:spec(playerid, params[], help)
             else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
 			if(playerTargetSpec[playerid] != INVALID_SPECTATE_ID)
 			{
-				if(PlayerInfo[playerTargetSpec[playerid]][pAdmin] < 2000)
+				if(PlayerInfo[playerTargetSpec[playerid]][Admin] < 2000)
 				{
 					playerTargetSpec[playerid] = INVALID_SPECTATE_ID; 
 					return 1;

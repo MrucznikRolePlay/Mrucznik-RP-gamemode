@@ -52,11 +52,11 @@ YCMD:sb(playerid, params[], help)
 					sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie!");
 					return 1;
 				}
-				if (ProxDetectorS(8.0, playerid, giveplayerid) ||  PlayerInfo[playerid][pAdmin] > 0)
+				if (ProxDetectorS(8.0, playerid, giveplayerid) ||  PlayerInfo[playerid][Admin] > 0)
 				{
-				    if((!IsPlayerInAnyVehicle(playerid) && !IsPlayerInAnyVehicle(giveplayerid)) || PlayerInfo[playerid][pAdmin] > 0)
+				    if((!IsPlayerInAnyVehicle(playerid) && !IsPlayerInAnyVehicle(giveplayerid)) || PlayerInfo[playerid][Admin] > 0)
 				    {
-					    if(giveplayerid == playerid && PlayerInfo[playerid][pAdmin] < 1)
+					    if(giveplayerid == playerid && PlayerInfo[playerid][Admin] < 1)
 						{
 							sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz przeszukaæ samego siebie!");
 							return 1;
@@ -145,7 +145,7 @@ YCMD:sb(playerid, params[], help)
 						    format(string, sizeof(string), "Bronie: %s", GunNames[BronieF[0][0]]);
 							SendClientMessage(playerid, COLOR_P@, string);
 						}
-						if(PlayerInfo[playerid][pAdmin] < 1)
+						if(PlayerInfo[playerid][Admin] < 1)
 						{
 							format(string, sizeof(string), "* %s przeszuka³ %s w poszukiwaniu broni.", sendername ,giveplayer);
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);

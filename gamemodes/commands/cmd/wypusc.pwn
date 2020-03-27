@@ -32,7 +32,7 @@ YCMD:wypusc(playerid, params[], help)
 {
 	new string[128];
 
-    if(PlayerInfo[playerid][pJob] != 2)
+    if(PlayerInfo[playerid][Job] != 2)
     {
         sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ prawnikiem!");
         return 1;

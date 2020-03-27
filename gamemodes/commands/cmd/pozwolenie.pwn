@@ -34,7 +34,7 @@ YCMD:pozwolenie(playerid, params[], help) {
     if(sscanf(params, "k<fix>", komu)) return sendTipMessage(playerid, "U¿yj /pozwolenie [id gracza / czêœæ nazwy]");
     if(!IsPlayerConnected(komu)) return sendErrorMessage(playerid, "Nie ma takiego gracza!");
     if(!ProxDetectorS(4.5, playerid, komu)) return sendErrorMessage(playerid, "Tego gracza nie ma w pobli¿u!");
-    if(PlayerInfo[komu][pJob] != 2) return sendErrorMessage(playerid, "Gracz nie jest prawnikiem!");
+    if(PlayerInfo[komu][Job] != 2) return sendErrorMessage(playerid, "Gracz nie jest prawnikiem!");
     SetPVarInt(komu, "pozwolenie-oferuje", playerid);
     SetPVarInt(playerid, "pozwolenie-oferujeDla", komu);
     new string[128];

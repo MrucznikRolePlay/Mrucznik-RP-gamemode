@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zabierzobiekt_Impl(playerid, giveplayerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1)
+    if(PlayerInfo[playerid][Admin] < 1)
     {
         sendErrorMessage(playerid, "Nie jesteœ uprawniony!");
         return 1;

@@ -32,7 +32,7 @@ YCMD:dajdzwiek(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 100)
+		if(PlayerInfo[playerid][Admin] >= 100)
 		{
             new giveplayerid, level;
 			if( sscanf(params, "k<fix>d", giveplayerid, level))

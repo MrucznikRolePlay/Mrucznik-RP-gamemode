@@ -30,7 +30,7 @@
 
 YCMD:ksam(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >=10)
+    if(PlayerInfo[playerid][Admin] >=10)
 	{
 	    new level;
 		if( sscanf(params, "d", level))

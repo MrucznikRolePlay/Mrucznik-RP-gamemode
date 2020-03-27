@@ -46,7 +46,7 @@ YCMD:pojazdygracza(playerid, params[], help)
         }
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 		{
             format(string, sizeof(string), "|---------- Auta %s ----------|",GetNickEx(para1));
     		SendClientMessage(playerid, COLOR_GREEN, string);

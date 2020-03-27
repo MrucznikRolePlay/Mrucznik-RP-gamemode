@@ -34,11 +34,11 @@ YCMD:zd(playerid, params[], help)
 	new sendername[MAX_PLAYER_NAME];
 
     new Veh = GetPlayerVehicleID(playerid);
-	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][pJob] == 10)
+	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][Job] == 10)
 	{
 		if(IsPlayerConnected(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pJob] == 10)
+			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][Job] == 10)
 			{
 				if(IS_KomunikacjaMiejsca(Veh))
 				{

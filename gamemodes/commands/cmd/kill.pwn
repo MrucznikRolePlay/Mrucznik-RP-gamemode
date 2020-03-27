@@ -42,7 +42,7 @@ YCMD:kill(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1)
+		if (PlayerInfo[playerid][Admin] >= 1)
 		{
 		    if(IsPlayerConnected(playa))
 		    {

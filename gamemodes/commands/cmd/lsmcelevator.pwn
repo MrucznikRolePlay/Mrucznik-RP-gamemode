@@ -30,7 +30,7 @@
 
 YCMD:lsmcelevator(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] < 20) return 1;
+    if(PlayerInfo[playerid][Admin] < 20) return 1;
     ChangeLSMCElevatorState();
     sendTipMessageEx(playerid, COLOR_GREEN, "OK.");
     return 1;

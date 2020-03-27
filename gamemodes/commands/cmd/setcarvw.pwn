@@ -36,7 +36,7 @@ YCMD:setcarvw(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /setcarvw [carid] [VW]");
 		return 1;
 	}
-	if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+	if(PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
 	{
 		SetVehicleVirtualWorld(valueCAR, valueVW);
 		sendTipMessageEx(playerid, COLOR_RED, "Ustawi³eœ nowy VW dla pojazdu"); 

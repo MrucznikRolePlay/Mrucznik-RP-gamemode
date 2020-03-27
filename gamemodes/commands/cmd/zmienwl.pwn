@@ -42,7 +42,7 @@ YCMD:zmienwl(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /setwl [playerid/CzêœæNicku] [iloœæ wl]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 100 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 100 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {

@@ -30,7 +30,7 @@
 
 YCMD:scenadisallow(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] < 200 ) return 1;
+    if(PlayerInfo[playerid][Admin] < 200 ) return 1;
     new id;
     if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /scenadisallow [Nick/ID]");
     if(GetPVarInt(id, "scena-allow") != 1) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie ma takiego pozwolenia.");

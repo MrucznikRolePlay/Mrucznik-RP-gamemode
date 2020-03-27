@@ -39,7 +39,7 @@ YCMD:dajapteczke(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 100 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 100 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

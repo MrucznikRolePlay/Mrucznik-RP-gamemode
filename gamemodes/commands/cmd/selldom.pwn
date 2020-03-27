@@ -74,7 +74,7 @@ YCMD:selldom(playerid, params[], help)
 					        {
 					            if(IsPlayerInRangeOfPoint(giveplayerid, 10.0, Dom[PlayerInfo[playerid][pDom]][hWej_X], Dom[PlayerInfo[playerid][pDom]][hWej_Y], Dom[PlayerInfo[playerid][pDom]][hWej_Z]))
 	            				{
-	            				    if(PlayerInfo[giveplayerid][pLevel] < 3)
+	            				    if(PlayerInfo[giveplayerid][Level] < 3)
 	            				    {
 	            				        SendClientMessage(playerid, COLOR_GRAD2, "Gracz któremu sprzedajesz dom musi mieæ co najmniej 3 lvl!");
 					    				return 1;

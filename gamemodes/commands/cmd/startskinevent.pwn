@@ -37,7 +37,7 @@ YCMD:startskinevent(playerid, params[], help)
 	// 	sendTipMessage(playerid, "U¿yj: /startskinevent [ID]"); 
 	// 	return 1;
 	// }
-	// if(PlayerInfo[playerid][pAdmin] >= 3500 || IsAScripter(playerid))
+	// if(PlayerInfo[playerid][Admin] >= 3500 || IsAScripter(playerid))
 	// {
 	// 	if(value >= 20001 && value <= skinsLoaded_Event)
 	// 	{

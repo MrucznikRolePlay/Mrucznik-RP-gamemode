@@ -31,17 +31,17 @@
 YCMD:vopis(playerid, params[], help)
 {
     //SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
-    if(PlayerInfo[playerid][pConnectTime] < 4) return sendErrorMessage(playerid, "Opis dostêpny od 4 godzin online!");
+    if(PlayerInfo[playerid][OnlineHours] < 4) return sendErrorMessage(playerid, "Opis dostêpny od 4 godzin online!");
 
     new var[8], id=-1;
-    if(sscanf(params, "s[8]D(-1)", var, id) && PlayerInfo[playerid][pAdmin] > 0)
+    if(sscanf(params, "s[8]D(-1)", var, id) && PlayerInfo[playerid][Admin] > 0)
 	{
 		sendTipMessage(playerid, "U¿yj /vopis (usuñ) (id pojazdu)");
 	}
 	
     if(strlen(var) == 4 && (strcmp(var, "usuñ", true) == 0 || strcmp(var, "usun", true) == 0))
     {
-        if(id != -1 && PlayerInfo[playerid][pAdmin] >= 1)
+        if(id != -1 && PlayerInfo[playerid][Admin] >= 1)
         {
             if(Car_GetOwnerType(id) != CAR_OWNER_PLAYER && !Uprawnienia(playerid, ACCESS_EDITCAR)) 
 			{

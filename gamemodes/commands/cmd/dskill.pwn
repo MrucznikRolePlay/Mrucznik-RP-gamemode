@@ -30,7 +30,7 @@
 
 YCMD:dskill(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >=100)
+    if(PlayerInfo[playerid][Admin] >=100)
 	{
 	    new giveplayerid, idskill, level;
 		if( sscanf(params, "k<fix>dd", giveplayerid, idskill, level))
@@ -39,7 +39,7 @@ YCMD:dskill(playerid, params[], help)
 			return 1;
 		}
 
-		if(PlayerInfo[playerid][pLevel] >= 1)
+		if(PlayerInfo[playerid][Level] >= 1)
 		{
 		    if(idskill < 11 && idskill >= 0)
 			{

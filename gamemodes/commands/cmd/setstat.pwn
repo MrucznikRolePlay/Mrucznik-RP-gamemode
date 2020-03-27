@@ -50,13 +50,13 @@ YCMD:setstat(playerid, params[], help)
     	{
     	    if(giveplayerid != INVALID_PLAYER_ID)
     	    {
-				if (PlayerInfo[playerid][pAdmin] >= 5000)
+				if (PlayerInfo[playerid][Admin] >= 5000)
 				{
 					switch (stat)
 					{
 						case 1:
 						{
-							PlayerInfo[giveplayerid][pLevel] = amount;
+							PlayerInfo[giveplayerid][Level] = amount;
 							format(string, sizeof(string), "Level gracza zmieniony na %d", amount);
 						}
 						case 2:
@@ -66,7 +66,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 3:
 						{
-							PlayerInfo[giveplayerid][gPupgrade] = amount;
+							PlayerInfo[giveplayerid][UpgradeLvl] = amount;
 							format(string, sizeof(string), "Punkty Ulepszenia gracza zmienione na %d", amount);
 						}
 						case 4:
@@ -78,7 +78,7 @@ YCMD:setstat(playerid, params[], help)
 						{
 						    if(IsAHeadAdmin(playerid))
 						    {
-								PlayerInfo[giveplayerid][pAccount] = amount;
+								PlayerInfo[giveplayerid][BankMoney] = amount;
 								format(string, sizeof(string), "Kwota w Koncie Bankowym gracza zmieniona na $%d", amount);
 							}
 							else
@@ -94,7 +94,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 7:
 						{
-							PlayerInfo[giveplayerid][pExp] = amount;
+							PlayerInfo[giveplayerid][Exp] = amount;
 							format(string, sizeof(string), "Punkty respektu gracza zmienione na %d", amount);
 						}
 						case 8:
@@ -178,7 +178,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 24:
 						{
-							PlayerInfo[giveplayerid][pJob] = amount;
+							PlayerInfo[giveplayerid][Job] = amount;
 							format(string, sizeof(string), "Praca gracza zmieniona na %d", amount);
 						}
 						case 25:
@@ -188,7 +188,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 1337:
 						{
-							PlayerInfo[giveplayerid][pConnectTime] = amount;
+							PlayerInfo[giveplayerid][OnlineHours] = amount;
 							format(string, sizeof(string), "Czas gry gracza zmieniony na %d", amount);
 						}
 						default:

@@ -54,8 +54,8 @@ YCMD:wymiana(playerid, params[], help)
         new lVeh = GetPlayerVehicleID(playerid);
 		if(!IsCarOwner(playerid, lVeh)) return sendTipMessage(playerid, "Nie jesteœ w³aœcicielem tego pojazdu.");
 		if(!IsCarOwner(playa, GetPlayerVehicleID(playa))) return sendTipMessage(playerid, "Gracz nie jest w³aœcicielem pojazdu.");
-		if(PlayerInfo[playa][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ siê z tym graczem, poniewa¿ ma 1 lvl");
-		if(PlayerInfo[playerid][pLevel] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ pojazdu, poniewa¿ masz 1 lvl");
+		if(PlayerInfo[playa][Level] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ siê z tym graczem, poniewa¿ ma 1 lvl");
+		if(PlayerInfo[playerid][Level] == 1) return sendTipMessage(playerid, "Nie mo¿esz wymieniæ pojazdu, poniewa¿ masz 1 lvl");
 		
 		new vehid = VehicleUID[lVeh][vUID];
 

@@ -43,7 +43,7 @@ YCMD:forceskin(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 25)
+		if (PlayerInfo[playerid][Admin] >= 25)
 		{
 		    if(IsPlayerConnected(para1))
 		    {

@@ -71,7 +71,7 @@ YCMD:mandacik(playerid, params[], help)
 		        if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 				{
 					new stawki = moneys;
-					moneys = (PlayerInfo[giveplayerid][pLevel] > 21) ? (stawki*3080) : (stawki*(PlayerInfo[giveplayerid][pLevel]*180));
+					moneys = (PlayerInfo[giveplayerid][Level] > 21) ? (stawki*3080) : (stawki*(PlayerInfo[giveplayerid][Level]*180));
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					format(string, sizeof(string), "* Da³eœ %s mandat $%d (%dSD), %d PK, powód: %s", giveplayer, moneys, stawki, karne, (result));

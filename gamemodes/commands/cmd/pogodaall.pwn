@@ -32,7 +32,7 @@ YCMD:pogodaall(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 7 || IsAScripter(playerid))
+        if(PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 7 || IsAScripter(playerid))
 		{
 			new weather;
 			if( sscanf(params, "d", weather))

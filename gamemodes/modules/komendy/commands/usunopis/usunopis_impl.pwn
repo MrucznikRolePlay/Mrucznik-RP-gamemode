@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_usunopis_Impl(playerid, giveplayerid)
 {
-    if(PlayerInfo[playerid][pAdmin] == 0) return 1;
+    if(PlayerInfo[playerid][Admin] == 0) return 1;
     if(!IsPlayerConnected(giveplayerid)) return sendErrorMessage(playerid, "Nie ma takiego gracza");
 
     if(isnull(PlayerInfo[giveplayerid][pDesc]))

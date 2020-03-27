@@ -43,7 +43,7 @@ YCMD:getint(playerid, params[], help)
 		return 1;
 	}
 
-	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+	if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
 	{
 		format(string, sizeof(string), "Interior gracza %s to %d.", GetNick(gracz), GetPlayerInterior(gracz));
 		SendClientMessage(playerid, COLOR_GRAD1, string);

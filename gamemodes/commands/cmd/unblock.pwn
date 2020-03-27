@@ -32,7 +32,7 @@ YCMD:unblock(playerid, params[], help)
 {
 	new string[128];
 
-    if(PlayerInfo[playerid][pAdmin] >= 1)
+    if(PlayerInfo[playerid][Admin] >= 1)
 	{
 		if(isnull(params))
 		{

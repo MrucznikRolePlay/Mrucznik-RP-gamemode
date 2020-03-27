@@ -30,7 +30,7 @@
 
 YCMD:checkcar(playerid, params[], help)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL)  || PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
+	if (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL)  || PlayerInfo[playerid][Admin] == 7 || IsAScripter(playerid))
 	{
         new vehid;
 		if( sscanf(params, "d", vehid))

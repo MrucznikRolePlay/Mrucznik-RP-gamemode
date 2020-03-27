@@ -93,7 +93,7 @@ YCMD:szukani(playerid, params[], help)
 			    SendClientMessage(playerid, COLOR_YELLOW, string);
 			}
 		}
-		else if(PlayerInfo[playerid][pJob] == 1)
+		else if(PlayerInfo[playerid][Job] == 1)
 		{
 		    if(PlayerToPoint(5.0,playerid,325.0463,306.9240,999.1484))
 		    {
@@ -273,7 +273,7 @@ YCMD:szukani(playerid, params[], help)
  				SendClientMessage(playerid, COLOR_YELLOW, "Nie jesteœ w biurze £owcy Nagród");
 			}
 		}
-		else if(PlayerInfo[playerid][pJob] == 2)
+		else if(PlayerInfo[playerid][Job] == 2)
 		{
 			new x;
 			SendClientMessage(playerid, COLOR_GREEN, "Lista potencjalnych klientów:");

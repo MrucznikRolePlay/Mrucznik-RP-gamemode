@@ -49,17 +49,17 @@ YCMD:grupy(playerid, params[], help)
 	if(sscanf(params, "s[32]S()[126]", sub, rest))
 	{
 		ShowGroupsForPlayer(playerid);
-		SendClientMessage(playerid, CLR_GRAY, "TIP: /g [info/online/v/zapros/zadania/wypros/kolor/wplac/wyplac]");
+		SendClientMessage(playerid, COLOR_GREY, "TIP: /g [info/online/v/zapros/zadania/wypros/kolor/wplac/wyplac]");
 		return 1;
 	}
-    if(PlayerInfo[playerid][Group] == 0) return SendClientMessage(playerid, CLR_GRAY, "Nie jesteœ w ¿adnej grupie.");
+    if(PlayerInfo[playerid][Group] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ w ¿adnej grupie.");
 	if(strcmp(sub, "info", true) == 0)
 	{
  		new str[256];
         format(str, sizeof(str), "UID:\t%d\nNazwa:\t%s\nKonto bankowe:\t$%d", GroupInfo[PlayerInfo[playerid][Group]][UID], GroupInfo[PlayerInfo[playerid][Group]][Name], GroupInfo[PlayerInfo[playerid][Group]][Balance]);
 		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", str); 
 	}
-	else if(strcmp(sub, "online", true) == 0)
+	/*else if(strcmp(sub, "online", true) == 0)
 	{
 		ShowOnlineGroupPlayers(playerid);
 	}
@@ -377,19 +377,15 @@ YCMD:grupy(playerid, params[], help)
 			}
 		}
 	}
+    */
+    SendClientMessage(playerid, -1, sprintf("Aresztowanie NA RANGE [%d]: %d", PlayerInfo[playerid][pRank], PermsInfo[PlayerInfo[playerid][Group]][PlayerInfo[playerid][pRank]][GROUP_PERM_ARREST]));
 	return 1;
-}
-    new groupid = PlayerInfo[playerid][pGroup];
-    new rankid = PlayerInfo[playerid][pRank];
-    PermsInfo[groupid][rankid][GROUP_PERM_ARREST] = 1;
-    SendClientMessage(playerid, -1, sprintf("Aresztowanie: %d, Cos tam: %d", PermsInfo[groupid][rankid][GROUP_PERM_ARREST], PermsInfo[groupid][rankid][GROUP_PERM_TEST]));
-    return 1;
 }
 
 YCMD:test2(playerid, params[], help)
 {
-    PlayerInfo[playerid][pGroup] = 2;
-    new groupid = PlayerInfo[playerid][pGroup];
+    PlayerInfo[playerid][Group] = 2;
+    new groupid = PlayerInfo[playerid][Group];
     new rankid = PlayerInfo[playerid][pRank];
     PermsInfo[groupid][rankid][GROUP_PERM_ARREST] = 1;
     SendClientMessage(playerid, -1, sprintf("Aresztowanie: %d, Cos tam: %d", PermsInfo[groupid][rankid][GROUP_PERM_ARREST], PermsInfo[groupid][rankid][GROUP_PERM_TEST]));

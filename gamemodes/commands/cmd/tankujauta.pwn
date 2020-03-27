@@ -32,7 +32,7 @@ YCMD:tankujauta(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 35)
+        if(PlayerInfo[playerid][Admin] >= 35)
         {
             for(new c=0;c<CAR_AMOUNT;c++)
 			{

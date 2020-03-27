@@ -31,7 +31,7 @@
 YCMD:fdaj(playerid, params[], help)
 {
 	new string[256];
-    if(PlayerInfo[playerid][pAdmin] >=10 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][Admin] >=10 || IsAScripter(playerid))
 	{
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))
@@ -42,7 +42,7 @@ YCMD:fdaj(playerid, params[], help)
 
 		if(level == 4 || level == 5 || level == 6 || level == 7 || level == 15 || level == 16)
 		{
-			if(PlayerInfo[playerid][pLevel] >= 1)
+			if(PlayerInfo[playerid][Level] >= 1)
 			{
 				SetPlayerFightingStyle(playerid, level);
 				format(string, sizeof(string), "Administrator %s ustawi³ Ci styl walki na %d", GetNickEx(playerid), level); 

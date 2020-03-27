@@ -468,7 +468,7 @@ Taxi_Pay(playerid)
 		new doZaplaty = 0;
         TransportCost[playerid] = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
 		
-	    if(PlayerInfo[playerid][pLevel] < 3)
+	    if(PlayerInfo[playerid][Level] < 3)
 	    {
 			if(kaska[playerid] < floatround(TransportCost[playerid]*0.25))
 			{
@@ -984,7 +984,7 @@ return 1;
 
 public pobito(playerid){
 pobilem[playerid] = 0;
-PlayerInfo[playerid][pMuted] = 0;
+PlayerInfo[playerid][Mute] = 0;
 return 1;
 }
 
@@ -1060,7 +1060,7 @@ public naczasbicie(playerid, playerid_atak){
 
 /*public UzyteKajdany(playerid,giveplayerid)
 {
-	if(Kajdanki_PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
+	if(Kajdanki_PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][Job] == 1)
 	{
 		//Kajdanki_Uzyte[playerid] = 0;
 		format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(giveplayerid));
@@ -1571,7 +1571,7 @@ stock UndressPlayer(playerid, bool:dressup, colorID=0)
 	}
 	else
 	{
-		if(PlayerInfo[playerid][pSex] == 2)
+		if(PlayerInfo[playerid][Gender] == 2)
         {
             if(colorID == 1)
             {
@@ -2114,7 +2114,7 @@ DollahScoreUpdate()
 	new LevScore;
 	foreach(new i : Player)
 	{
-		LevScore = PlayerInfo[i][pLevel];
+		LevScore = PlayerInfo[i][Level];
 		SetPlayerScore(i, LevScore);
 	}
 	return 1;
@@ -2313,7 +2313,7 @@ IsPlayerInFraction(playerid, frac, adminlvl=-1)
     new leader = PlayerInfo[playerid][pLider];
     new member = PlayerInfo[playerid][pMember];
     if(member==frac || leader == frac) return 1;
-    else if(adminlvl != -1 && PlayerInfo[playerid][pAdmin] >= adminlvl) return 1;
+    else if(adminlvl != -1 && PlayerInfo[playerid][Admin] >= adminlvl) return 1;
 	return 0;
 }
 
@@ -2981,7 +2981,7 @@ DajBronieOganizacji(playerid)
 
 DajBroniePracy(playerid)
 {
-	switch(PlayerInfo[playerid][pJob])
+	switch(PlayerInfo[playerid][Job])
 	{
 		case JOB_MECHANIC:
 		{
@@ -4131,18 +4131,18 @@ Lotto(number)
 	{
 		if(IsPlayerConnected(i))
 		{
-			if(PlayerInfo[i][pLottoNr] > 0)
+			if(PlayerInfo[i][LottoNr] > 0)
 			{
-				if(PlayerInfo[i][pLottoNr] == number)
+				if(PlayerInfo[i][LottoNr] == number)
 				{
 					winners++; 
 					status=2;
 				}
 				else 
 				{
-					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d.", PlayerInfo[i][pLottoNr]);
+					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d.", PlayerInfo[i][LottoNr]);
 					SendClientMessage(i, COLOR_WHITE, string);
-					PlayerInfo[i][pLottoNr] = 0; 
+					PlayerInfo[i][LottoNr] = 0; 
 				}
 			}
 		}
@@ -4172,13 +4172,13 @@ Lotto(number)
 				status = 1;
 				break;
 			}
-			if(PlayerInfo[i2][pLottoNr] > 0 && PlayerInfo[i2][pLottoNr] == number)
+			if(PlayerInfo[i2][LottoNr] > 0 && PlayerInfo[i2][LottoNr] == number)
 			{
 				new kasaWin = Jackpot/dzielnik; 
 				format(string, sizeof(string), "%s wygra³ w totolotku %d$", GetNick(i2), kasaWin); 
 				OOCOff(COLOR_WHITE, string);
 				DajKase(i2, kasaWin);
-				PlayerInfo[i2][pLottoNr] =0;
+				PlayerInfo[i2][LottoNr] =0;
 				winners--;   
 			}
 		}
@@ -4230,7 +4230,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    PlayerInfo[playerid][pCrimes] += 1;
+	    PlayerInfo[playerid][Crimes] += 1;
 	    new points = PoziomPoszukiwania[playerid];
 		new turned[MAX_PLAYER_NAME];
 		new turner[MAX_PLAYER_NAME];
@@ -4472,41 +4472,41 @@ ShowStats2(playerid)
 	format(plCzas, sizeof(plCzas), "%d:%d", hour, minute); 
 	format(plPKT, sizeof(plPKT), "Punkty Karne: %d", PlayerInfo[playerid][pPK]);
 	format(plWL, sizeof(plWL), "WantedLevel: %d", PlayerInfo[playerid][pWL]); 
-	format(plRyba, sizeof(plRyba), "Ryba: %d kg", PlayerInfo[playerid][pFishes]); 
+	format(plRyba, sizeof(plRyba), "Ryba: %d kg", PlayerInfo[playerid][Fishes]); 
 	format(plWozKlucz, sizeof(plWozKlucz), "Klucze auta: %d", PlayerInfo[playerid][pKluczeAuta]);
-	format(plWantedD, sizeof(plWantedD), "Wanted-Death: %d", PlayerInfo[playerid][pWantedDeaths]);
-	format(plAresztCzas, sizeof(plAresztCzas), "Czas aresztu: %d", PlayerInfo[playerid][pArrested]);  
+	format(plWantedD, sizeof(plWantedD), "Wanted-Death: %d", PlayerInfo[playerid][WantedDeaths]);
+	format(plAresztCzas, sizeof(plAresztCzas), "Czas aresztu: %d", PlayerInfo[playerid][Arrested]);  
 	new plRodzina[64], plRespekt[64], plOnline[64], plRodzinkaRank[64], plBMID[64], plBOID[64], plDom[64], plSkin[64], plWarny[64]; 
 	format(plUID, sizeof(plUID), "UID: %d", PlayerInfo[playerid][UID]);
-	format(plSmierci, sizeof(plSmierci), "Smierci: %d", PlayerInfo[playerid][pDeaths]);
-	format(plZabic, sizeof(plZabic), "Zabic: %d", PlayerInfo[playerid][pKills]);
+	format(plSmierci, sizeof(plSmierci), "Smierci: %d", PlayerInfo[playerid][Deaths]);
+	format(plZabic, sizeof(plZabic), "Zabic: %d", PlayerInfo[playerid][Kills]);
 	format(plZN, sizeof(plZN), "ZmienNick: %d", PlayerInfo[playerid][pZmienilNick]); 
-	format(plPrzestepstwa, sizeof(plPrzestepstwa), "Crimes: %d", PlayerInfo[playerid][pCrimes]); 
-	format(plLVL, sizeof(plLVL), "Level: %d", PlayerInfo[playerid][pLevel]); 
+	format(plPrzestepstwa, sizeof(plPrzestepstwa), "Crimes: %d", PlayerInfo[playerid][Crimes]); 
+	format(plLVL, sizeof(plLVL), "Level: %d", PlayerInfo[playerid][Level]); 
 	format(plKasa, sizeof(plKasa), "Kasa: %d$", kaska[playerid]); 
-	format(plBank, sizeof(plBank), "Bank: %d$", PlayerInfo[playerid][pAccount]); 
+	format(plBank, sizeof(plBank), "Bank: %d$", PlayerInfo[playerid][BankMoney]); 
 	format(plZdrowie, sizeof(plZdrowie), "Zdrowie: %.1f", PlayerInfo[playerid][pSHealth]+50);
 	format(plTelefon, sizeof(plTelefon), "Telefon: %d", PlayerInfo[playerid][pPnumber]);
-	format(plOnline, sizeof(plOnline), "On-line: %d", PlayerInfo[playerid][pConnectTime]);
+	format(plOnline, sizeof(plOnline), "On-line: %d", PlayerInfo[playerid][OnlineHours]);
 	format(plBMID, sizeof(plBMID), "B-MID: %d", PlayerInfo[playerid][pBusinessMember]); 
 	format(plBOID, sizeof(plBOID), "B-OID: %d", PlayerInfo[playerid][pBusinessOwner]); 
 	format(plSkin, sizeof(plSkin), "Skin: %d", PlayerInfo[playerid][pSkin]); 
 	format(plWarny, sizeof(plWarny), "Warny: %d", PlayerInfo[playerid][pWarns]); 
 	format(plMats, sizeof(plMats), "Mats: %d", PlayerInfo[playerid][pMats]);
 	format(plDrugs, sizeof(plDrugs), "Drugs: %d", PlayerInfo[playerid][pDrugs]); 
-	format(plAdmin, sizeof(plAdmin), "Admin: %d", PlayerInfo[playerid][pAdmin]); 
-	format(plPraca, sizeof(plPraca), "Praca: %s", JobNames[PlayerInfo[playerid][pJob]]); 
+	format(plAdmin, sizeof(plAdmin), "Admin: %d", PlayerInfo[playerid][Admin]); 
+	format(plPraca, sizeof(plPraca), "Praca: %s", JobNames[PlayerInfo[playerid][Job]]); 
 	format(plDom, sizeof(plDom), "Dom: %d", PlayerInfo[playerid][pDom]);
 	format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: Unknow"); 
-	format(plRespekt, sizeof(plRespekt), "Respekt: %d/%d", PlayerInfo[playerid][pExp], ((PlayerInfo[playerid][pLevel]+1)*levelexp)); 
-	format(plWiek, sizeof(plWiek), "Wiek: %d",PlayerInfo[playerid][pAge]);
+	format(plRespekt, sizeof(plRespekt), "Respekt: %d/%d", PlayerInfo[playerid][Exp], ((PlayerInfo[playerid][Level]+1)*levelexp)); 
+	format(plWiek, sizeof(plWiek), "Wiek: %d",PlayerInfo[playerid][Age]);
 	if(IsPlayerPremiumOld(playerid)) { plKP = "~y~Sponsor"; }
 	else { plKP = "~y~Zwykly wieprz"; }
-	if(PlayerInfo[playerid][pOrigin] == 1) { plPochodzenie = "Pochodzenie: USA"; }
-	else if(PlayerInfo[playerid][pOrigin] == 2) { plPochodzenie = "Pochodzenie: Europa"; }
-	else if(PlayerInfo[playerid][pOrigin] == 3) { plPochodzenie = "Pochodzoenie: Azja"; }
-	if(PlayerInfo[playerid][pSex] == 1) { plPlec = "Plec: Mezczyzna"; }
-	else if(PlayerInfo[playerid][pSex] == 2) { plPlec = "Plec: Kobieta"; }
+	if(PlayerInfo[playerid][Origin] == 1) { plPochodzenie = "Pochodzenie: USA"; }
+	else if(PlayerInfo[playerid][Origin] == 2) { plPochodzenie = "Pochodzenie: Europa"; }
+	else if(PlayerInfo[playerid][Origin] == 3) { plPochodzenie = "Pochodzoenie: Azja"; }
+	if(PlayerInfo[playerid][Gender] == 1) { plPlec = "Plec: Mezczyzna"; }
+	else if(PlayerInfo[playerid][Gender] == 2) { plPlec = "Plec: Kobieta"; }
 	if(strlen(PlayerInfo[playerid][pMarriedTo]) > 20)
 	{
 		format(plSlub, sizeof(plSlub), "Slub: Unknow");
@@ -4706,12 +4706,12 @@ ShowStats(playerid,targetid)
 	{
 		new cash = kaska[targetid];
 		new atext[20];
-		if(PlayerInfo[targetid][pSex] == 1) { atext = "Mê¿czyzna"; }
-		else if(PlayerInfo[targetid][pSex] == 2) { atext = "Kobieta"; }
+		if(PlayerInfo[targetid][Gender] == 1) { atext = "Mê¿czyzna"; }
+		else if(PlayerInfo[targetid][Gender] == 2) { atext = "Kobieta"; }
   		new otext[20];
-		if(PlayerInfo[targetid][pOrigin] == 1) { otext = "USA"; }
-		else if(PlayerInfo[targetid][pOrigin] == 2) { otext = "Europa"; }
-		else if(PlayerInfo[targetid][pOrigin] == 3) { otext = "Azja"; }
+		if(PlayerInfo[targetid][Origin] == 1) { otext = "USA"; }
+		else if(PlayerInfo[targetid][Origin] == 2) { otext = "Europa"; }
+		else if(PlayerInfo[targetid][Origin] == 3) { otext = "Azja"; }
 
 	    new ftext[40];
         format(ftext, 40, "%s", FractionNames[GetPlayerFraction(targetid)]);
@@ -4735,29 +4735,29 @@ ShowStats(playerid,targetid)
 		}
         else rtext = "Brak";
         new jtext[20];
-        format(jtext, 20, "%s", JobNames[PlayerInfo[targetid][pJob]]);
+        format(jtext, 20, "%s", JobNames[PlayerInfo[targetid][Job]]);
 		new drank[20];
 		if(IsPlayerPremiumOld(targetid)) { drank = "Sponsor"; }
 		else { drank = "Zwykly wieprz"; }
-		new age = PlayerInfo[targetid][pAge];
-		new ptime = PlayerInfo[targetid][pConnectTime];
+		new age = PlayerInfo[targetid][Age];
+		new ptime = PlayerInfo[targetid][OnlineHours];
 		new znick = PlayerInfo[targetid][pZmienilNick];
-		new lotto = PlayerInfo[targetid][pLottoNr];
-		new deaths = PlayerInfo[targetid][pDeaths];
-		new fishes = PlayerInfo[targetid][pFishes];
-		new bigfish = PlayerInfo[targetid][pBiggestFish];
-		new crimes = PlayerInfo[targetid][pCrimes];
-		new arrests = PlayerInfo[targetid][pArrested];
-		new warrests = PlayerInfo[targetid][pWantedDeaths];
+		new lotto = PlayerInfo[targetid][LottoNr];
+		new deaths = PlayerInfo[targetid][Deaths];
+		new fishes = PlayerInfo[targetid][Fishes];
+		new bigfish = PlayerInfo[targetid][BiggestFish];
+		new crimes = PlayerInfo[targetid][Crimes];
+		new arrests = PlayerInfo[targetid][Arrested];
+		new warrests = PlayerInfo[targetid][WantedDeaths];
 		new drugs = PlayerInfo[targetid][pDrugs];
 		new mats = PlayerInfo[targetid][pMats];
 		new wanted = PoziomPoszukiwania[targetid];
-		new level = PlayerInfo[targetid][pLevel];
-		new exp = PlayerInfo[targetid][pExp];
-		new kills = PlayerInfo[targetid][pKills];
+		new level = PlayerInfo[targetid][Level];
+		new exp = PlayerInfo[targetid][Exp];
+		new kills = PlayerInfo[targetid][Kills];
 		new pnumber = PlayerInfo[targetid][pPnumber];
-		new account = PlayerInfo[targetid][pAccount];
-		new nxtlevel = PlayerInfo[targetid][pLevel]+1;
+		new account = PlayerInfo[targetid][BankMoney];
+		new nxtlevel = PlayerInfo[targetid][Level]+1;
 		new expamount = nxtlevel*levelexp;
 		new costlevel = nxtlevel*levelcost;//10k for testing purposes
 		new housekey = PlayerInfo[targetid][pDom];
@@ -4804,7 +4804,7 @@ RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - givep
 		{
 			PlayerInfo[i][pMember] = 0;
 			PlayerInfo[i][pLider] = 0;
-			PlayerInfo[i][pJob] = 0;
+			PlayerInfo[i][Job] = 0;
 			orgUnInvitePlayer(i);
 			MedicBill[i] = 0;
 			SetPlayerSpawn(i);
@@ -4823,7 +4823,7 @@ RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - givep
 	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %s - usuwajac VLD.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(givePlayerFrac));
 	PlayerInfo[giveplayerid][pMember] = 0;
 	PlayerInfo[giveplayerid][pLider] = 0;
-	PlayerInfo[giveplayerid][pJob] = 0;
+	PlayerInfo[giveplayerid][Job] = 0;
 	orgUnInvitePlayer(giveplayerid);
 	MedicBill[giveplayerid] = 0;
 	SetPlayerSpawn(giveplayerid);
@@ -6343,10 +6343,10 @@ KupowanieDomu(playerid, dom, platnosc)
 	    }
 	    if(platnosc == 2)
 		{
-		    if(PlayerInfo[playerid][pAccount] >= cenadomu && cenadomu != 0 && cenadomu > 0 && PlayerInfo[playerid][pAccount] != 0 && PlayerInfo[playerid][pAccount] > 0)
+		    if(PlayerInfo[playerid][BankMoney] >= cenadomu && cenadomu != 0 && cenadomu > 0 && PlayerInfo[playerid][BankMoney] != 0 && PlayerInfo[playerid][BankMoney] > 0)
 	        {
-				PlayerInfo[playerid][pAccount] += -cenadomu;
-				format(str2, sizeof(str2), "Gratulacje! Kupi³eœ dom za %d$. Zosta³o one odliczone od twojego konta bankowego które wynosi teraz %d", cenadomu, PlayerInfo[playerid][pAccount]);
+				PlayerInfo[playerid][BankMoney] += -cenadomu;
+				format(str2, sizeof(str2), "Gratulacje! Kupi³eœ dom za %d$. Zosta³o one odliczone od twojego konta bankowego które wynosi teraz %d", cenadomu, PlayerInfo[playerid][BankMoney]);
 				SendClientMessage(playerid, COLOR_PANICRED, str2);
 			}
 			else
@@ -7300,11 +7300,11 @@ ABroadCast(color,const string[],level, podglad = 0)
 		{
 			if(podglad == 0)
 			{
-				if (PlayerInfo[i][pAdmin] >= level)
+				if (PlayerInfo[i][Admin] >= level)
 				{
 					SendClientMessage(i, color, string);
 				}
-				else if (PlayerInfo[i][pNewAP] >= level)
+				else if (PlayerInfo[i][HalfAdmin] >= level)
 				{
 					SendClientMessage(i, color, string);
 				}
@@ -7315,11 +7315,11 @@ ABroadCast(color,const string[],level, podglad = 0)
 			}
 			else
 			{
-				if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
+				if (PlayerInfo[i][Admin] >= level && TogPodglad[i] == 0)
 				{
 					SendClientMessage(i, color, string);
 				}
-				else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
+				else if (PlayerInfo[i][HalfAdmin] >= level && TogPodglad[i] == 0)
 				{
 					SendClientMessage(i, color, string);
 				}	
@@ -7495,7 +7495,7 @@ SendJobMessage(job, color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][pJob] == job)
+		    if(PlayerInfo[i][Job] == job)
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -7836,7 +7836,7 @@ SendAdminMessage(color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || IsAScripter(i))
+		    if(PlayerInfo[i][Admin] >= 1 || PlayerInfo[i][HalfAdmin] >= 1 || IsAScripter(i))
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -7848,7 +7848,7 @@ SendCommandLogMessage(string[])
 {
 	foreach(new i : Player)
 	{
-	    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || IsAScripter(i))
+	    if(PlayerInfo[i][Admin] >= 1 || PlayerInfo[i][HalfAdmin] >= 1 || IsAScripter(i))
 	    {
 			if(GetPVarInt(i, "togcmdlog") == 0) SendClientMessage(i, 0xD8C173FF, string);
 		}
@@ -7870,7 +7870,7 @@ SendZGMessage(color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || PlayerInfo[i][pZG] >= 1 || IsAScripter(i))
+		    if(PlayerInfo[i][Admin] >= 1 || PlayerInfo[i][HalfAdmin] >= 1 || PlayerInfo[i][pZG] >= 1 || IsAScripter(i))
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -8353,7 +8353,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
-	PlayerInfo[para1][pJob] = 0;
+	PlayerInfo[para1][Job] = 0;
 	SetTimerEx("AntySB", 5000, 0, "d", para1);
 	AntySpawnBroni[para1] = 5;
 	orgUnInvitePlayer(para1);
@@ -11050,7 +11050,7 @@ ChangePlayerName(playerid, name[])
 		Remove_MySQL_Leader(playerid);
 		PlayerInfo[playerid][pLider] = 0;
 	}
-	PlayerInfo[playerid][pJob] = 0;
+	PlayerInfo[playerid][Job] = 0;
 	PlayerInfo[playerid][pRank] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
@@ -11304,7 +11304,7 @@ TJD_JobEnd(playerid, bool:quiter=false)
 
 TJD_CallCheckpoint(playerid, veh)
 {
-    if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return 1;
+    if(PlayerInfo[playerid][Job] != JOB_TRUCKER) return 1;
     if(GetVehicleModel(veh) == 578)
     {
         new idx = GetPVarInt(playerid, "trans");
@@ -11367,7 +11367,7 @@ TJD_CallCheckpoint(playerid, veh)
 
 TJD_CallRaceCheckpoint(playerid)
 {
-    if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
+    if(PlayerInfo[playerid][Job] != JOB_TRUCKER) return;
     if(GetPVarInt(playerid, "TJDend") == 1)
     {
         TJD_JobEnd(playerid);
@@ -11377,7 +11377,7 @@ TJD_CallRaceCheckpoint(playerid)
 
 TJD_CallEnterVeh(playerid, veh)
 {
-    if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
+    if(PlayerInfo[playerid][Job] != JOB_TRUCKER) return;
     if(GetVehicleModel(veh) == 530)
     {
         if(GLOBAL_DISABLETRUCKER) return;
@@ -11401,7 +11401,7 @@ TJD_CallEnterVeh(playerid, veh)
 
 TJD_CallExitVeh(playerid)
 {
-    if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
+    if(PlayerInfo[playerid][Job] != JOB_TRUCKER) return;
     if(GetPVarInt(playerid, "transjob") == 1)
     {
         if(GetPVarInt(playerid, "TJDend") == 1)
@@ -12345,7 +12345,7 @@ stock SetPlayerTW(playerid, valueTime, time, weather)
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {
-	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][pLevel] > 1)
+	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][Admin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][Level] > 1)
 	{
 		new string[128];
 		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNickEx(playerid), GetNickEx(fakekillid));
@@ -12537,7 +12537,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 			//-------<[  Logi  ]>---------
 			Log(warningLog, INFO, "%s %s %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid), reason);
 			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy jest zakazane, robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
-			if(PlayerInfo[killerid][pLevel] > 1)
+			if(PlayerInfo[killerid][Level] > 1)
 			{
 				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [GunID %d]!", killername, killerid, playername, bwreason, playerid, reason);
 				SendMessageToAdmin(string, COLOR_YELLOW);
@@ -12560,7 +12560,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				case 38:
 				{
 					//-------<[  Logi  ]>---------
-					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
+					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][Admin] < 1)
 					{
 						format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
 						SendCommandLogMessage(string);
@@ -12652,7 +12652,7 @@ public CuffedAction(playerid, cuffedid)
 	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
 	Kajdanki_PDkuje[cuffedid] = INVALID_PLAYER_ID;
 	Kajdanki_Uzyte[playerid] = 0;
-	PlayerInfo[cuffedid][pMuted] = 0;
+	PlayerInfo[cuffedid][Mute] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
 	RemovePlayerAttachedObject(cuffedid, 5);

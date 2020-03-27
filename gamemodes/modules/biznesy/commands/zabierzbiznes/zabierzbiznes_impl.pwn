@@ -31,7 +31,7 @@ command_zabierzbiznes_Impl(playerid)
 		sendErrorMessage(playerid, "Nie jesteœ obok biznesu!");
 		return 1;
 	}
-    if(PlayerInfo[playerid][pAdmin] < 1000 && !IsAScripter(playerid))
+    if(PlayerInfo[playerid][Admin] < 1000 && !IsAScripter(playerid))
     {
         noAccessMessage(playerid); 
         return 1;   

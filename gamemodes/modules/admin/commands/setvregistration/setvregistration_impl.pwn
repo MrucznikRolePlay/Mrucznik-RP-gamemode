@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_setvregistration_Impl(playerid, registerText[32])
 {
-    if(PlayerInfo[playerid][pAdmin] >= 4000 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][Admin] >= 4000 || IsAScripter(playerid))
     {
         if(IsPlayerInAnyVehicle(playerid))
         {

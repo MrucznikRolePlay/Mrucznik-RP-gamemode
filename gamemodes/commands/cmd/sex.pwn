@@ -36,7 +36,7 @@ YCMD:sex(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
    	{
-        if(PlayerInfo[playerid][pJob] == 3)
+        if(PlayerInfo[playerid][Job] == 3)
 		{
 		    if(!IsPlayerInAnyVehicle(playerid))
 		    {

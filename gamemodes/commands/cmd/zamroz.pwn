@@ -39,7 +39,7 @@ YCMD:zamroz(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /freeze [playerid/CzêœæNicku]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 7 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 7 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

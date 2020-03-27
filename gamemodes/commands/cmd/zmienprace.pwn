@@ -42,7 +42,7 @@ YCMD:zmienprace(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /setjob [playerid/CzêœæNicku] [id pracy]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -51,7 +51,7 @@ YCMD:zmienprace(playerid, params[], help)
                     if(!(0 <= level <= 17)) return 1;
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-					PlayerInfo[para1][pJob] = level;
+					PlayerInfo[para1][Job] = level;
 					Log(adminLog, INFO, "Admin %s zmieni³ pracê %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					format(string, sizeof(string), "   Twoja praca zosta³a zmieniona na %d przez %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);

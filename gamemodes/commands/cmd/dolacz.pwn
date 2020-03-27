@@ -32,9 +32,9 @@ YCMD:dolacz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pJob] == 0 )
+		if(PlayerInfo[playerid][Job] == 0 )
 		{
-		    if(PlayerInfo[playerid][pJob] == 0 )
+		    if(PlayerInfo[playerid][Job] == 0 )
 			{
 			    if((PlayerInfo[playerid][pMember] >= 1 && PlayerInfo[playerid][pMember] <= 4) || (PlayerInfo[playerid][pMember] >= 9 && PlayerInfo[playerid][pMember] <= 11) 
 					|| (PlayerInfo[playerid][pLider] >= 1 && PlayerInfo[playerid][pLider] <= 4) || (PlayerInfo[playerid][pLider] >= 9 && PlayerInfo[playerid][pLider] <= 11))

@@ -61,12 +61,12 @@ YCMD:pokazdowod(playerid, params[], help)
 				    //new otext[20];
 				    new jtext[20];
                     new otext[8];
-				    new age = PlayerInfo[playerid][pAge];
-                    if(PlayerInfo[playerid][pSex] == 1) { atext = "Mê¿czyzna"; }
-	                else if(PlayerInfo[playerid][pSex] == 2) { atext = "Kobieta"; }
-	                /*if(PlayerInfo[playerid][pOrigin] == 1) { otext = "Los Santos"; }
-                    else if(PlayerInfo[playerid][pOrigin] == 2) { otext = "San Fierro"; }
-	                else if(PlayerInfo[playerid][pOrigin] == 3) { otext = "LV"; }*/
+				    new age = PlayerInfo[playerid][Age];
+                    if(PlayerInfo[playerid][Gender] == 1) { atext = "Mê¿czyzna"; }
+	                else if(PlayerInfo[playerid][Gender] == 2) { atext = "Kobieta"; }
+	                /*if(PlayerInfo[playerid][Origin] == 1) { otext = "Los Santos"; }
+                    else if(PlayerInfo[playerid][Origin] == 2) { otext = "San Fierro"; }
+	                else if(PlayerInfo[playerid][Origin] == 3) { otext = "LV"; }*/
 	                //
 	                new ttext[20];
 					if(gTeam[playerid] == 3 || gTeam[playerid] == 4) { ttext = "Cywil"; }
@@ -87,33 +87,33 @@ YCMD:pokazdowod(playerid, params[], help)
 					else if(PlayerInfo[playerid][pMember] == 15 || PlayerInfo[playerid][pLider] == 15) { ttext = "Warsztat tuningu"; }//NoA
 					else if(PlayerInfo[playerid][pMember] == 16 || PlayerInfo[playerid][pLider] == 16) { ttext = "Bonehead Club"; }//WPS
 	                // 1 usa 2 europa 3 azja
-                    new pochodzenie = PlayerInfo[playerid][pOrigin];
+                    new pochodzenie = PlayerInfo[playerid][Origin];
                     switch(pochodzenie) {
                         case 1: otext = "USA";
                         case 2: otext = "Europa";
                         case 3: otext = "Azja";
                     }
                     // 
-                    if(PlayerInfo[playerid][pJob] == 1) { jtext = "£owca Nagród"; }
-                    else if(PlayerInfo[playerid][pJob] == 2) { jtext = "Prawnik"; }
-                    else if(PlayerInfo[playerid][pJob] == 3) { jtext = "Prostytutka"; }
-                    //else if(PlayerInfo[playerid][pJob] == 4) { jtext = "Diler Zio³a"; }
-                    //else if(PlayerInfo[playerid][pJob] == 5) { jtext = "Z³odziej Aut"; }
-                    else if(PlayerInfo[playerid][pJob] == 6) { jtext = "Reporter"; }
-                    else if(PlayerInfo[playerid][pJob] == 7) { jtext = "Mechanik"; }
-                    else if(PlayerInfo[playerid][pJob] == 8) { jtext = "Ochroniarz"; }
-                    //else if(PlayerInfo[playerid][pJob] == 9) { jtext = "Diler Broni"; }
-                    else if(PlayerInfo[playerid][pJob] == 10) { jtext = "Kierowca Autobusu"; }
-	                else if(PlayerInfo[playerid][pJob] == 12) { jtext = "Bokser"; }
-                    else if(PlayerInfo[playerid][pJob] == 14) { jtext = "Taksówkarz"; }
-                    else if(PlayerInfo[playerid][pJob] == 15) { jtext = "Gazeciarz"; }
-                    else if(PlayerInfo[playerid][pJob] == 16) { jtext = "Kurier"; }
+                    if(PlayerInfo[playerid][Job] == 1) { jtext = "£owca Nagród"; }
+                    else if(PlayerInfo[playerid][Job] == 2) { jtext = "Prawnik"; }
+                    else if(PlayerInfo[playerid][Job] == 3) { jtext = "Prostytutka"; }
+                    //else if(PlayerInfo[playerid][Job] == 4) { jtext = "Diler Zio³a"; }
+                    //else if(PlayerInfo[playerid][Job] == 5) { jtext = "Z³odziej Aut"; }
+                    else if(PlayerInfo[playerid][Job] == 6) { jtext = "Reporter"; }
+                    else if(PlayerInfo[playerid][Job] == 7) { jtext = "Mechanik"; }
+                    else if(PlayerInfo[playerid][Job] == 8) { jtext = "Ochroniarz"; }
+                    //else if(PlayerInfo[playerid][Job] == 9) { jtext = "Diler Broni"; }
+                    else if(PlayerInfo[playerid][Job] == 10) { jtext = "Kierowca Autobusu"; }
+	                else if(PlayerInfo[playerid][Job] == 12) { jtext = "Bokser"; }
+                    else if(PlayerInfo[playerid][Job] == 14) { jtext = "Taksówkarz"; }
+                    else if(PlayerInfo[playerid][Job] == 15) { jtext = "Gazeciarz"; }
+                    else if(PlayerInfo[playerid][Job] == 16) { jtext = "Kurier"; }
                     else { jtext = "Bezrobotny"; }
 			       //
        				SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Dowód Osobisty ______________|");
 					format(string, sizeof(string), "- Imie i Nazwisko: %s", sendername);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
-					format(string, sizeof(string), "- SSN: %d%d%d%d%d%d%d", PlayerInfo[playerid][pMember],age,PlayerInfo[playerid][pLider],PlayerInfo[playerid][pPnumber],PlayerInfo[playerid][pJob],PlayerInfo[playerid][pSex],PlayerInfo[playerid][pLevel]);
+					format(string, sizeof(string), "- SSN: %d%d%d%d%d%d%d", PlayerInfo[playerid][pMember],age,PlayerInfo[playerid][pLider],PlayerInfo[playerid][pPnumber],PlayerInfo[playerid][Job],PlayerInfo[playerid][Gender],PlayerInfo[playerid][Level]);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
 					format(string, sizeof(string), "- P³eæ: %s", atext);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
@@ -121,7 +121,7 @@ YCMD:pokazdowod(playerid, params[], help)
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
 					format(string, sizeof(string), "- Wiek: %d", age);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
-					if(PlayerInfo[playerid][pJob] >= 1 && PlayerInfo[playerid][pJob] != 9 && PlayerInfo[playerid][pJob] != 4 && PlayerInfo[playerid][pJob] != 5)
+					if(PlayerInfo[playerid][Job] >= 1 && PlayerInfo[playerid][Job] != 9 && PlayerInfo[playerid][Job] != 4 && PlayerInfo[playerid][Job] != 5)
 					{
 						format(string, sizeof(string), "- Praca: %s", jtext);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);

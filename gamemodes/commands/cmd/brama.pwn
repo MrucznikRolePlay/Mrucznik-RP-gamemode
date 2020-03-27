@@ -303,7 +303,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(PlayerInfo[playerid][pLider] == 5 || PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(PlayerInfo[playerid][pLider] == 5 || PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(PlayerToPoint(10.0, playerid, -792.44158935547, 495.30035400391, 1370.7421875))
 			{
@@ -323,7 +323,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if (GetPlayerFraction(playerid) == FRAC_NOA || PlayerInfo[playerid][pAdmin] >= 1000 || GetPlayerOrg(playerid) == 16)//warsztat niebieski
+		if (GetPlayerFraction(playerid) == FRAC_NOA || PlayerInfo[playerid][Admin] >= 1000 || GetPlayerOrg(playerid) == 16)//warsztat niebieski
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 20, 2313.5000000,-1217.6999512,24.7000008) || IsPlayerInRangeOfPoint(playerid, 12, 2313.5000000,-1217.6999512,24.7000008))
 			{
@@ -341,7 +341,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-        if(PlayerInfo[playerid][pLider] == 9 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pAdmin] >= 3000)
+        if(PlayerInfo[playerid][pLider] == 9 || PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][Admin] >= 3000)
 		{
             if(IsPlayerInRangeOfPoint(playerid,3,657.5705, -1353.2709, 29.1975))//recepcja
         	{
@@ -458,7 +458,7 @@ YCMD:brama(playerid, params[], help)
 			}
 			return 1;
     	}//koniec bramy do konfesjona?u
-		/*if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
+		/*if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(PlayerToPoint(20.0, playerid, 1544.6816, -1630.8596, 12.9796))
 			{
@@ -476,7 +476,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(IsAPolicja(playerid) || IsAHA(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(IsAPolicja(playerid) || IsAHA(playerid) || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(PlayerToPoint(25.0, playerid, 1595.4099, -1638.2567, 14.0207) || PlayerToPoint(10.0, playerid, 1588.5547, -1638.2567, 14.0207))
 			{
@@ -497,7 +497,7 @@ YCMD:brama(playerid, params[], help)
 			}
 		}*/
         // nowe bramy dla PD
-        if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
+        if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][Admin] >= 1000)
         {
             if(PlayerToPoint(25.5, playerid, 1588.4932, -1638.2795, 12.3959))
             {
@@ -516,7 +516,7 @@ YCMD:brama(playerid, params[], help)
         }
         // end nowe bramy dla PD
 		//stary komisariat (old komi)
-		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(PlayerToPoint(5.0, playerid, 253.18164062,108.04980469,1002.21875000))
 			{
@@ -532,7 +532,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(PlayerToPoint(5.0, playerid, 253.22167969,124.16796875,1002.21875000))
 			{
@@ -548,7 +548,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(PlayerToPoint(5.0, playerid, 238.32324219,119.16503906,1002.21875000))
 			{
@@ -564,7 +564,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(PlayerToPoint(5.0, playerid, 220.67187500,118.53125000,1010.50921631))
 			{
@@ -581,7 +581,7 @@ YCMD:brama(playerid, params[], help)
 			}
 		}
 		//nowe komi bramy
-		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(IsPlayerInRangeOfPoint(playerid,3,-1670.9452,915.7548,-52.4141))
 			{
@@ -884,7 +884,7 @@ YCMD:brama(playerid, params[], help)
 		}*/ 
 		//==============================[KONIEC]====================================================
 		//..
-		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] > 1/*PlayerInfo[playerid][pJob] == 14*/)
+		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][Admin] > 1/*PlayerInfo[playerid][Job] == 14*/)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 10.0, -1113.25769043,-1008.68634033,128.90229797))
 			{
@@ -901,7 +901,7 @@ YCMD:brama(playerid, params[], help)
 			}
 
 		}
-		if(IsAPolicja(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(IsAPolicja(playerid) || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(PlayerToPoint(7.5, playerid, 266.57534790039, 112.58443450928, 1006.2540283203))
 			{
@@ -919,7 +919,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(IsAHA(playerid) || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(IsAHA(playerid) || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(10.0, playerid, -1.39941406,-267.09960938,7.19999981))
 			{
@@ -935,7 +935,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(7.5, playerid, 1240.9154052734, -767.32855224609, 91.052940368652))
 			{
@@ -951,7 +951,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(10.0, playerid, 1285.09960938,-1006.29980469,29.89999962))
 			{
@@ -967,7 +967,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(10.0, playerid, 1285.09997559,-966.40002441,33.59999847))
 			{
@@ -983,7 +983,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(3.0, playerid, 1289.59960938,-1080.09960938,5972.39990234))
 			{
@@ -1001,7 +1001,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(3.0, playerid, 1288.21972656,-1086.67968750,5971.18017578))
 			{
@@ -1017,7 +1017,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(3.0, playerid, 1276.29980469,-1084.68652344,5971.10009766))
 			{
@@ -1033,7 +1033,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(20.0, playerid, -1770.29980469,984.19921875,25.29999924))
 			{
@@ -1049,7 +1049,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][pAdmin] >= 5000)
+		if(GetPlayerOrg(playerid) != 0 || PlayerInfo[playerid][Admin] >= 5000)
 		{
 			if(PlayerToPoint(3.0, playerid, -1837.09960938,1159.31933594,6797.899902))
 			{
@@ -1067,7 +1067,7 @@ YCMD:brama(playerid, params[], help)
 		}
 
 		//old komi
-		if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAPolicja(playerid))
+		if(PlayerInfo[playerid][Admin] >= 1000 || IsAPolicja(playerid))
 		{
 			if(PlayerToPoint(10.0, playerid, 212.88121032715,124.91903686523,998.40710449219))
 			{
@@ -1118,7 +1118,7 @@ YCMD:brama(playerid, params[], help)
 				FBImove4 = 0;
 			}
 		}*/
-		if(IsAFBI(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(IsAFBI(playerid) || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			//sale przesluchan oraz cele
 			if(IsPlayerInRangeOfPoint(playerid,5,613.93781, -1482.25500, 89.61260))
@@ -1162,7 +1162,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		/*if(IsAFBI(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		/*if(IsAFBI(playerid) || PlayerInfo[playerid][Admin] >= 1000)
 		{
 		    if(IsPlayerInRangeOfPoint(playerid, 20.0, 615.2236328125, -1509.96484375, 16.714672088623))
 			{
@@ -1178,7 +1178,7 @@ YCMD:brama(playerid, params[], help)
 			    }
 			}
 		} */
-		if(IsAMedyk(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)//POCZ?TEK
+		if(IsAMedyk(playerid) || PlayerInfo[playerid][Admin] >= 1000)//POCZ?TEK
 		{
             if(IsPlayerInRangeOfPoint(playerid,3,1158.82922, -1325.31738, 31.39840))
         	{
@@ -1463,7 +1463,7 @@ YCMD:brama(playerid, params[], help)
 
         	}
         }
-		if(IsAUrzednik(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(IsAUrzednik(playerid) || PlayerInfo[playerid][Admin] >= 1000)
 		{
 		    if(IsPlayerInRangeOfPoint(playerid, 5.0, -2059.30249023,568.60919189,1172.05114746))
 			{
@@ -1479,7 +1479,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(IsABOR(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(IsABOR(playerid) || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(IsPlayerInRangeOfPoint(playerid,3,1073.5038, 1071.0618, -17.5000))
 			{
@@ -1508,7 +1508,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(IsAUrzednik(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+		if(IsAUrzednik(playerid) || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			if(IsPlayerInRangeOfPoint(playerid,3,1062.3588, 1063.4921, -17.5000))
 			{
@@ -1629,7 +1629,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
         }
-        if(IsAUrzednik(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
+        if(IsAUrzednik(playerid) || PlayerInfo[playerid][Admin] >= 1000)
 		{
 			//bramy 2nd floor
 			if(IsPlayerInRangeOfPoint(playerid,3,-1779.7819, 499.8180, -20.8394))

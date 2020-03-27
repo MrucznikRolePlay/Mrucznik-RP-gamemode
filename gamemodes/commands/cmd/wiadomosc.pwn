@@ -61,14 +61,14 @@ YCMD:wiadomosc(playerid, params[], help)
             sendTipMessage(playerid, "Ktoœ z was ma zablokowane wiadomoœci!"); 
             return 1;
         }
-        if(AntySpam[playerid] == 1 && PlayerInfo[playerid][pConnectTime] <= 3)
+        if(AntySpam[playerid] == 1 && PlayerInfo[playerid][OnlineHours] <= 3)
         {
             sendErrorMessage(playerid, "Odczekaj 3 sekundy zanim wyœlesz kolejn¹ wiadomoœæ!"); 
             return 1;
         }
         if(PlayerInfo[playerid][pInjury] > 0 && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0)
         {
-            if(!PlayerInfo[playerid][pAdmin] && !PlayerInfo[playerid][pNewAP] && !PlayerInfo[playerid][pZG] && !IsAScripter(playerid)) 
+            if(!PlayerInfo[playerid][Admin] && !PlayerInfo[playerid][HalfAdmin] && !PlayerInfo[playerid][pZG] && !IsAScripter(playerid)) 
             {
                 return sendErrorMessage(playerid, "Gdy jesteœ nieprzytomny mo¿esz wysy³aæ wiadomoœci jedynie na ma³¹ odleg³oœæ");
             }

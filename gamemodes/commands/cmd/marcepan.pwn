@@ -32,7 +32,7 @@ YCMD:marcepan(playerid, params[], help)
 {
 	//komenda tymczasowo wy³¹czona
     /*
-    if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][Admin] > 0 || IsAScripter(playerid))
     {
         new id;
         if(sscanf(params, "k<fix>", id)) return SendClientMessage(playerid, -1, "(MARCEPAN) - Podaj Nick lub ID gracza.");

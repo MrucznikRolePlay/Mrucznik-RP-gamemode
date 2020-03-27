@@ -54,7 +54,7 @@ YCMD:kick(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 1 || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -65,8 +65,8 @@ YCMD:kick(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-                    if(PlayerInfo[giveplayerid][pAdmin] >= 1) return sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ Admina !");
-  					if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+                    if(PlayerInfo[giveplayerid][Admin] >= 1) return sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ Admina !");
+  					if(PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][HalfAdmin] >= 1 || IsAScripter(playerid))
   					{
       					GiveKickForPlayer(giveplayerid, playerid, (result));
 						if(kary_TXD_Status == 1)

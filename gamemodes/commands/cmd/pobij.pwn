@@ -81,7 +81,7 @@ YCMD:pobij(playerid, params[], help)
  				    	    {
  				    	        if(GUIExit[playerid] == 0 && GUIExit[playa] == 0)
     							{
-    							    if(PlayerInfo[playerid][pLevel] < 3)
+    							    if(PlayerInfo[playerid][Level] < 3)
     							    {
     							        sendTipMessage(playerid, "Musisz mieæ 3 lvl aby u¿ywaæ tej komendy!");
 					       			    return 1;

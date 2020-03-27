@@ -35,7 +35,7 @@ YCMD:tankveh(playerid, params[], help)
         if(!IsPlayerInAnyVehicle(playerid)) return SendClientMessage(playerid, COLOR_GREY, "»» Nie jesteœ w pojeŸdzie!");
         if(IsPlayerInAnyVehicle(playerid)) {
             new string[128];
-            if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
+            if (PlayerInfo[playerid][Admin] >= 5 || IsAScripter(playerid))
             {
 				new vehicleid = GetPlayerVehicleID(playerid);
 				new vuid = VehicleUID[vehicleid][vUID];

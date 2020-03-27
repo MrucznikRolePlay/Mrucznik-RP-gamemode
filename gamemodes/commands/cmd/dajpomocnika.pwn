@@ -48,7 +48,7 @@ YCMD:dajpomocnika(playerid, params[], help)
             if(level == 0 || level == 1 || level == 2 || level == 3 || level == 4)
             {
 
-				PlayerInfo[para1][pNewAP] = level;
+				PlayerInfo[para1][HalfAdmin] = level;
 				format(string, sizeof(string), "Zosta³eœ mianowany na %d level pó³admina przez %s", level, GetNickEx(playerid));
 				SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "Da³eœ %s pó³admina o levelu %d.", giveplayer,level);

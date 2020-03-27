@@ -61,7 +61,7 @@ YCMD:wezportfel(playerid, params[], help)
 					{
 						if(kaska[giveplayerid] >= 1)
 						{
-							if(PlayerInfo[giveplayerid][pConnectTime] >= 2)
+							if(PlayerInfo[giveplayerid][OnlineHours] >= 2)
 							{
 								new string[128];
 								pieniadze = kaska[giveplayerid] / 4;

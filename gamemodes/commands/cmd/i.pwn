@@ -40,7 +40,7 @@ YCMD:i(playerid, params[], help)
             sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ na kanale IRC !");
             return 1;
         }
-        if(PlayerInfo[playerid][pMuted] == 1)
+        if(PlayerInfo[playerid][Mute] == 1)
         {
             sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ, jesteœ uciszony");
             return 1;

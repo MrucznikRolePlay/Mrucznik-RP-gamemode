@@ -26,11 +26,11 @@
 command_zmienwiek_Impl(playerid, giveplayerid, valueWiek)
 {
     new string[128];
-    if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
+    if (PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
     {
         if(giveplayerid != INVALID_PLAYER_ID)
         {
-            PlayerInfo[giveplayerid][pAge] = valueWiek;
+            PlayerInfo[giveplayerid][Age] = valueWiek;
             Log(adminLog, INFO, "Admin %s zmieni³ wiek %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), valueWiek);
             format(string, sizeof(string), "   Twój wiek zosta³ zmieniony na %d lat przez %s", valueWiek, GetNickEx(playerid));
             SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);

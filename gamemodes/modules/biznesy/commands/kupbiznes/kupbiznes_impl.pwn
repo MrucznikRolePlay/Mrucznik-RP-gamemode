@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kupbiznes_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pLevel] < 2)
+    if(PlayerInfo[playerid][Level] < 2)
 	{
 		sendTipMessage(playerid, "Mo¿esz zakupiæ w³asny biznes dopiero od poziomu 2");
 		return 1;

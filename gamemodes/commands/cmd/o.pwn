@@ -39,9 +39,9 @@ YCMD:o(playerid, params[], help)
         {
             return 1;
         }
-		if ((noooc) && PlayerInfo[playerid][pAdmin] < 1)
+		if ((noooc) && PlayerInfo[playerid][Admin] < 1)
 		{
-		    if(PlayerInfo[playerid][pNewAP] < 1)
+		    if(PlayerInfo[playerid][HalfAdmin] < 1)
 		    {
 		        if(PlayerInfo[playerid][pZG] < 5)
 		        {
@@ -53,7 +53,7 @@ YCMD:o(playerid, params[], help)
 				}
 			}
 		}
-		if(PlayerInfo[playerid][pMuted] == 1)
+		if(PlayerInfo[playerid][Mute] == 1)
 		{
 			sendTipMessage(playerid, "Nie mo¿esz mówiæ gdy¿ zosta³eœ uciszony!", TEAM_CYAN_COLOR);
 			return 1;

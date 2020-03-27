@@ -38,7 +38,7 @@ YCMD:wczytajskrypt(playerid, params[], help)
 			sendTipMessage(playerid, "/wczytajskrypt [nazwa fs]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
 		{
 			format(string, sizeof(string), "loadfs %s", params);
 			SendRconCommand(string);

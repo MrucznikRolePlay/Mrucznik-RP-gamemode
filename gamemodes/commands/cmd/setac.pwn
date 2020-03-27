@@ -30,7 +30,7 @@
 
 YCMD:setac(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))
+	if(PlayerInfo[playerid][Admin] >= 1000 || IsAScripter(playerid))
 	{
 		new string[128];
 		new ac_option;

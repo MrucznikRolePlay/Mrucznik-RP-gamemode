@@ -30,7 +30,7 @@
 
 YCMD:zapiszdomy(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pAdmin] >= 5000)
+	if(PlayerInfo[playerid][Admin] >= 5000)
 	{
 		ZapiszDomy();
 		SendClientMessage(playerid, COLOR_WHITE, "Wszystkie domy zosta³y zapisane");

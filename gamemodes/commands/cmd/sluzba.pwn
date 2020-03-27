@@ -193,7 +193,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 90);
                     SetPlayerHealth(playerid, 100);
 					
-					if(PlayerInfo[playerid][pSex] == 1)
+					if(PlayerInfo[playerid][Gender] == 1)
 						SetPlayerSkinEx(playerid, 287);
 					else
 						SetPlayerSkinEx(playerid, 191);
@@ -301,7 +301,7 @@ YCMD:sluzba(playerid, params[], help)
                 SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
             }
         }
-        else if(PlayerInfo[playerid][pJob] == 7)
+        else if(PlayerInfo[playerid][Job] == 7)
         {
             if(AntySpam[playerid] == 0)
             {

@@ -40,7 +40,7 @@ YCMD:setcarhp(playerid, params[], help)
 			return 1;
 		}
     
-        if (PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
+        if (PlayerInfo[playerid][Admin] >= 10 || IsAScripter(playerid))
         {
             if(GetVehicleModel(vehicleid))
             {

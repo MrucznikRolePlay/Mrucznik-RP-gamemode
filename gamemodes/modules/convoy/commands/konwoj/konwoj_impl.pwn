@@ -34,7 +34,7 @@ command_konwoj_Impl(playerid)
         return 1;
     }
 
-    if(PlayerInfo[playerid][pAdmin] < 1) 
+    if(PlayerInfo[playerid][Admin] < 1) 
     {
         if(!IsAConvoyTeamLeader(playerid))
         {

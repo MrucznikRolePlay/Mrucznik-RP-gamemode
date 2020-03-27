@@ -38,7 +38,7 @@ YCMD:forum(playerid, params[], help)
         {
             return 1;
         }
-        if(PlayerInfo[playerid][pAdmin] >= 1)
+        if(PlayerInfo[playerid][Admin] >= 1)
         {
 			format(string, sizeof(string), "Adres forum: Mrucznik-RP.pl !! ((%s))", GetNickEx(playerid));
 			SendClientMessageToAll(0xff00ff, string);

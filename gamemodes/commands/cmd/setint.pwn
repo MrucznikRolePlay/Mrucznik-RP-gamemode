@@ -47,7 +47,7 @@ YCMD:setint(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(gracz,intid);
 			PlayerInfo[gracz][pInt] = intid;

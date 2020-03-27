@@ -30,7 +30,7 @@
 
 YCMD:wezpizze(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pJob] == JOB_PIZZA)
+    if(PlayerInfo[playerid][Job] == JOB_PIZZA)
     {
         new veh = GetPlayerVehicleID(playerid);
         if(veh == 0) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");

@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_stworzbiznes_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] == 5000)
+    if(PlayerInfo[playerid][Admin] == 5000)
     {
         if(GetPVarInt(playerid, "ActionCreateBiz") == 0)
         {

@@ -53,7 +53,7 @@ YCMD:wypij(playerid, params[], help)
 				}
 			    if(strcmp(x_nr,"piwo",true) == 0)
 				{
-					if(PlayerInfo[playerid][pAge] < 17)
+					if(PlayerInfo[playerid][Age] < 17)
 					{
 					    SendClientMessage(playerid, COLOR_WHITE, "Barman: Musisz byæ pe³noletni aby piæ alkohole.");
 					    return 1;
@@ -78,7 +78,7 @@ YCMD:wypij(playerid, params[], help)
 				}
 				else if(strcmp(x_nr,"wodka",true) == 0)
 				{
-				    if(PlayerInfo[playerid][pAge] < 18)
+				    if(PlayerInfo[playerid][Age] < 18)
 					{
 					    SendClientMessage(playerid, COLOR_WHITE, "Barman: Musisz byæ pe³noletni aby piæ alkohole.");
 					    return 1;
@@ -97,7 +97,7 @@ YCMD:wypij(playerid, params[], help)
 				}
 				else if(strcmp(x_nr,"whiskey",true) == 0)
 				{
-				    if(PlayerInfo[playerid][pAge] < 18)
+				    if(PlayerInfo[playerid][Age] < 18)
 					{
 					    SendClientMessage(playerid, COLOR_WHITE, "Barman: Musisz byæ pe³noletni aby piæ alkohole.");
 					    return 1;
@@ -157,7 +157,7 @@ YCMD:wypij(playerid, params[], help)
 				}
 				else if(strcmp(x_nr,"wino",true) == 0)
 				{
-					if(PlayerInfo[playerid][pAge] < 17)
+					if(PlayerInfo[playerid][Age] < 17)
 					{
 					    SendClientMessage(playerid, COLOR_WHITE, "Barman: Musisz byæ pe³noletni aby piæ alkohole.");
 					    return 1;
@@ -191,7 +191,7 @@ YCMD:wypij(playerid, params[], help)
 				}
 				else if(strcmp(x_nr,"jabol",true) == 0)
 				{
-					if(PlayerInfo[playerid][pAge] < 17)
+					if(PlayerInfo[playerid][Age] < 17)
 					{
 					    SendClientMessage(playerid, COLOR_WHITE, "Barman: Musisz byæ pe³noletni aby piæ alkohole.");
 					    return 1;
@@ -210,7 +210,7 @@ YCMD:wypij(playerid, params[], help)
 				}
 				else if(strcmp(x_nr,"twojastara",true) == 0)
 				{
-				    if(PlayerInfo[playerid][pAge] < 18)
+				    if(PlayerInfo[playerid][Age] < 18)
 					{
 					    SendClientMessage(playerid, COLOR_WHITE, "Barman: Musisz byæ pe³noletni aby piæ swoj¹ star¹.");
 					    return 1;
