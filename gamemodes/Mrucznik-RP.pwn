@@ -5769,6 +5769,7 @@ public OnPlayerUpdate(playerid)
 		{
 			foreach(new i : Player)
 			{
+				if(i == playerid) continue;
 				if(actualid != INVALID_PLAYER_ID) //if is set
 				{
 					new str[6];
@@ -5779,20 +5780,6 @@ public OnPlayerUpdate(playerid)
                 else if(i == Spectate[playerid]) //if not set and expect
 				{
 					actualid = i;
-				}
-            }
-		}
-		else if(lr == KEY_LEFT) //BACK
-		{
-			foreach(new i : Player)
-			{
-				actualid = i;
-                if(i == Spectate[playerid]) //if not set and expect
-				{
-					new str[6];
-                	valstr(str, actualid);
-                    RunCommand(playerid, "/spec",  str);
-					break;
 				}
             }
 		}
