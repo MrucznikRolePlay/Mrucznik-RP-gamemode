@@ -8718,8 +8718,7 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-	//if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
-	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{1,})+$") >= 0)
+	if(regex_match(nick, "^[A-Z][a-z]+([ _][A-Z][a-z]+([A-HJ-Z][a-z]+)?){1,2}$") >= 0)
 	{
 		return 1;
 	}

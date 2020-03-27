@@ -129,6 +129,7 @@ YCMD:paka(playerid, params[], help)
 					PlayerInfo[suspect][pJailed] = 1;
 			        PlayerInfo[suspect][pArrested] += 1;
 					PoziomPoszukiwania[suspect] = 0;
+					SetPlayerWantedLevel(suspect, 0);
 					WantLawyer[suspect] = 1;
 				}//distance
 			}//not connected
