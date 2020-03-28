@@ -107,6 +107,13 @@ hook OnPlayerConnect(playerid)
 	return 1;
 }
 
+hook OnGameModeInit()
+{
+	MruMySQL_LoadGroups();
+	MruMySQL_LoadRanks();
+	MruMySQL_LoadRanksPerms();
+}
+
 hook OnPlayerClickPTextDraw(playerid, PlayerText:playertextid)
 {
 	/*if(playertextid == Textdraw4[playerid])
