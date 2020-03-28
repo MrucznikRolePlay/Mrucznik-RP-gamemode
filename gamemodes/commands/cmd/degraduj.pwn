@@ -44,7 +44,7 @@ YCMD:degraduj(playerid, params[], help)
 			{
 				if(PlayerInfo[playerid][pLider] == PlayerInfo[para1][pMember] || PlayerInfo[playerid][pLider] == PlayerInfo[para1][pLider])
 				{
-					if(PlayerInfo[para1][pRank] == 0)
+					if(PlayerInfo[para1][Rank] == 0)
 					{
                         if(PlayerInfo[para1][pLider] != 0) return sendErrorMessage(playerid, "Nie mo¿esz wyrzuciæ lidera.");
 
@@ -56,14 +56,14 @@ YCMD:degraduj(playerid, params[], help)
 					}
 					else
 					{
-						PlayerInfo[para1][pRank] -= 1;
-						new level = PlayerInfo[para1][pRank];
+						PlayerInfo[para1][Rank] -= 1;
+						new level = PlayerInfo[para1][Rank];
 
                         SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zdegradowa³eœ %s na rangê %s", GetNickEx(para1), FracRang[GetPlayerFraction(para1)][level]));
                         if(playerid != para1)
                             SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Zosta³eœ zdegradowany na rangê %s przez %s", FracRang[GetPlayerFraction(para1)][level],  GetNickEx(playerid)));
 
-                        MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][pRank]);
+                        MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][Rank]);
 					}
 				}
 				else

@@ -45,7 +45,7 @@ YCMD:depo(playerid, params[], help)
         new member = GetPlayerFraction(playerid);
         if(0 < member <= 4 || member == FRAC_BOR)// || GetPlayerOrg(playerid) == 12)
         {
-			format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNickEx(playerid), params);
+			format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][Rank]],PlayerInfo[playerid][Rank],GetNickEx(playerid), params);
 			SendTeamMessage(4, COLOR_ALLDEPT, string, 1);
 			SendTeamMessage(3, COLOR_ALLDEPT, string, 1);
 			SendTeamMessage(2, COLOR_ALLDEPT, string, 1);

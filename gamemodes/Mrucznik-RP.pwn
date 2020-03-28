@@ -2264,13 +2264,13 @@ public OnPlayerSpawn(playerid)
 	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
 	}
     // usuwanie
-    if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
-        PlayerInfo[playerid][pRank] = 0;
+    if(PlayerInfo[playerid][Rank] == 99 && PlayerInfo[playerid][pMember] == 99) {
+        PlayerInfo[playerid][Rank] = 0;
         PlayerInfo[playerid][pMember] = 0;
         gTeam[playerid] = 3;
         PlayerInfo[playerid][pTeam] = 3;
         PlayerInfo[playerid][pMember] = 0;
-        PlayerInfo[playerid][pRank] = 0;
+        PlayerInfo[playerid][Rank] = 0;
         PlayerInfo[playerid][pUniform] = 0;
         PlayerInfo[playerid][pTajniak] = 0;
         MruMySQL_SetAccInt("Rank", GetNick(playerid), 0);
@@ -2545,18 +2545,18 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_SN: //9
 						{
-							if(PlayerInfo[playerid][pRank] <= 1)
+							if(PlayerInfo[playerid][Rank] <= 1)
 							{
 								SetPlayerPos(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
 								Wchodzenie(playerid);
 								sendTipMessage(playerid, "Zrespi³eœ siê na dachu San News"); 
 							}
-							else if(PlayerInfo[playerid][pRank] >= 2 && PlayerInfo[playerid][pRank] < 7) 
+							else if(PlayerInfo[playerid][Rank] >= 2 && PlayerInfo[playerid][Rank] < 7) 
 							{
 								SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
 								Wchodzenie(playerid);
 							}
-							else if(PlayerInfo[playerid][pRank] >= 8)
+							else if(PlayerInfo[playerid][Rank] >= 8)
 							{
 								SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
 								Wchodzenie(playerid);
@@ -2581,7 +2581,7 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{
-							    if(PlayerInfo[playerid][pRank] >= 1)
+							    if(PlayerInfo[playerid][Rank] >= 1)
 								{
 								    SetPlayerPos(playerid, 1445.3516,-1827.1736,81.4602);
 									SetPlayerFacingAngle(playerid, 0.0);
@@ -6163,7 +6163,7 @@ OnPlayerLogin(playerid, password[])
 	if(GetPlayerOrg(playerid) != 0)
 	{
         gPlayerOrg[playerid] = orgID(PlayerInfo[playerid][pOrg]);
-        if(PlayerInfo[playerid][pRank] >= 1000) gPlayerOrgLeader[playerid] = true, PlayerInfo[playerid][pRank]-=1000;
+        if(PlayerInfo[playerid][Rank] >= 1000) gPlayerOrgLeader[playerid] = true, PlayerInfo[playerid][Rank]-=1000;
 
         if(gPlayerOrg[playerid] == 0xFFFF) SendClientMessage(playerid, COLOR_PANICRED, "B£¥D PRZYPISANIA TWOJEJ RODZINY!!!");
         else if(strlen(OrgInfo[gPlayerOrg[playerid]][o_Motd]) > 3)
@@ -6171,7 +6171,7 @@ OnPlayerLogin(playerid, password[])
     		format(string, sizeof(string), "Rodzina MOTD: %s.", OrgInfo[gPlayerOrg[playerid]][o_Motd]);
     		SendClientMessage(playerid, OrgInfo[gPlayerOrg[playerid]][o_Color], string);
         }
-        if(PlayerInfo[playerid][pRank] < 0 || PlayerInfo[playerid][pRank] > 9) PlayerInfo[playerid][pRank] = 9;
+        if(PlayerInfo[playerid][Rank] < 0 || PlayerInfo[playerid][Rank] > 9) PlayerInfo[playerid][Rank] = 9;
 	}
 
     //Konwersja pojazdów:
@@ -6931,7 +6931,7 @@ public OnPlayerText(playerid, text[])
 	    tmp = strtok(text, idx);
 	    if ((strcmp("Contracts", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("Contracts")) || (strcmp("Kontrakty", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("Kontrakty")))
 		{
-		    if(PlayerInfo[playerid][pRank] < 4)
+		    if(PlayerInfo[playerid][Rank] < 4)
 		    {
 		        SendClientMessage(playerid, COLOR_GREY, "Tylko Hitmani z 4 rang¹ mog¹ sprawdzaæ listê kontraktów !");
 		        return 0;
@@ -6963,7 +6963,7 @@ public OnPlayerText(playerid, text[])
 				if(strcmp(x_nr,"1",true) == 0)
 				{
 				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz miec 3 rangê aby pisaæ newsy Hitman Agency !"); return 0; }
+				    if(PlayerInfo[playerid][Rank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz miec 3 rangê aby pisaæ newsy Hitman Agency !"); return 0; }
 				    if(News[hTaken1] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -6983,7 +6983,7 @@ public OnPlayerText(playerid, text[])
 				else if(strcmp(x_nr,"2",true) == 0)
 				{
 				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
+				    if(PlayerInfo[playerid][Rank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken2] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -7003,7 +7003,7 @@ public OnPlayerText(playerid, text[])
 				else if(strcmp(x_nr,"3",true) == 0)
 				{
 				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
+				    if(PlayerInfo[playerid][Rank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken3] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -7023,7 +7023,7 @@ public OnPlayerText(playerid, text[])
 				else if(strcmp(x_nr,"4",true) == 0)
 				{
 				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
+				    if(PlayerInfo[playerid][Rank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken4] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -7043,7 +7043,7 @@ public OnPlayerText(playerid, text[])
 				else if(strcmp(x_nr,"5",true) == 0)
 				{
 				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
-				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
+				    if(PlayerInfo[playerid][Rank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken5] == 0)
 				    {
 				        GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -7062,7 +7062,7 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"delete",true) == 0)
 				{
-				    if(PlayerInfo[playerid][pRank] < 4)
+				    if(PlayerInfo[playerid][Rank] < 4)
 				    {
 				        SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 4 rangê aby usuwaæ newsy z kana³u Hitman Agency !");
 				        return 0;
@@ -7144,7 +7144,7 @@ public OnPlayerText(playerid, text[])
 		}
 		else if ((strcmp("Givehit", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("Givehit")))
 		{
-		    if(PlayerInfo[playerid][pRank] < 4)
+		    if(PlayerInfo[playerid][Rank] < 4)
 		    {
 		        SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 4 rangê aby dawaæ kontrakty Hitmanom !");
 		        return 0;
@@ -7217,7 +7217,7 @@ public OnPlayerText(playerid, text[])
 				    if(PlayerInfo[i][pMember] == 8||PlayerInfo[i][pLider] == 8)
 				    {
 						GetPlayerName(i, giveplayer, sizeof(giveplayer));
-				        format(string, sizeof(string), "* %s: Ranga %d", giveplayer,PlayerInfo[i][pRank]);
+				        format(string, sizeof(string), "* %s: Ranga %d", giveplayer,PlayerInfo[i][Rank]);
 						SendClientMessage(playerid, COLOR_GREY, string);
 					}
 				}
@@ -7233,7 +7233,7 @@ public OnPlayerText(playerid, text[])
 		    tmp = strtok(text, idx);
 		    if ((strcmp("1", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("1")))
 			{
-			    //if(PlayerInfo[playerid][pRank] < 0) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    //if(PlayerInfo[playerid][Rank] < 0) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 2499)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczkê numer 1 ($2500), zostanie dostarczona do drzwi Agencji.");
@@ -7248,7 +7248,7 @@ public OnPlayerText(playerid, text[])
 			}
 		    else if ((strcmp("2", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("2")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 1) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 1) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 4999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczkê numer 2 ($5000), zostanie dostarczona do drzwi Agencji.");
@@ -7263,7 +7263,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("3", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("3")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 5999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 3 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -7278,7 +7278,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("4", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("4")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 5999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 4 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -7293,7 +7293,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("5", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("5")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 7999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 5 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -7308,7 +7308,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("6", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("6")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 7999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 6 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -7323,7 +7323,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("7", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("7")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 8499)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 7 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -7338,7 +7338,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("8", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("8")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 8499)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 8 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -7353,7 +7353,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("9", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("9")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 9999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 9 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -7368,7 +7368,7 @@ public OnPlayerText(playerid, text[])
 			}
 			else if ((strcmp("10", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("10")))
 			{
-			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
+			    if(PlayerInfo[playerid][Rank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
 			    if(kaska[playerid] > 9999)
 			    {
 			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 10 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
@@ -7384,16 +7384,16 @@ public OnPlayerText(playerid, text[])
 			else
 			{
 			    SendClientMessage(playerid, COLOR_WHITE, "|__________________ Dostêpne paczki __________________|");
-			    if(PlayerInfo[playerid][pRank] >= 0) { SendClientMessage(playerid, COLOR_GREY, "|(1) ($2500) Ranga 0: Nó¿, Desert Eagle, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 1) { SendClientMessage(playerid, COLOR_GREY, "|(2) ($5000) Ranga 1: Nó¿, Desert Eagle, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(3) ($6000) Ranga 2: Nó¿, Desert Eagle, M4, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(4) ($6000) Ranga 2: Nó¿, Desert Eagle, AK47, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(5) ($8000) Ranga 3: Nó¿, Desert Eagle, M4, MP5, Shotgun, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(6) ($8000) Ranga 3: Nó¿, Desert Eagle, AK47, MP5, Shotgun, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(7) ($8500) Ranga 4: Nó¿, Desert Eagle, M4, MP5, Spas12, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(8) ($8500) Ranga 4: Nó¿, Desert Eagle, AK47, MP5, Spas12, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(9) ($10000) Ranga 5-9: Nó¿, Desert Eagle, M4, UZI, Spas12, Snajperka, Pancerz"); }
-                if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(10) ($10000) Ranga 5-9: Nó¿, Desert Eagle, AK47, UZI, Spas12, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 0) { SendClientMessage(playerid, COLOR_GREY, "|(1) ($2500) Ranga 0: Nó¿, Desert Eagle, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 1) { SendClientMessage(playerid, COLOR_GREY, "|(2) ($5000) Ranga 1: Nó¿, Desert Eagle, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(3) ($6000) Ranga 2: Nó¿, Desert Eagle, M4, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(4) ($6000) Ranga 2: Nó¿, Desert Eagle, AK47, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(5) ($8000) Ranga 3: Nó¿, Desert Eagle, M4, MP5, Shotgun, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(6) ($8000) Ranga 3: Nó¿, Desert Eagle, AK47, MP5, Shotgun, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(7) ($8500) Ranga 4: Nó¿, Desert Eagle, M4, MP5, Spas12, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(8) ($8500) Ranga 4: Nó¿, Desert Eagle, AK47, MP5, Spas12, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][Rank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(9) ($10000) Ranga 5-9: Nó¿, Desert Eagle, M4, UZI, Spas12, Snajperka, Pancerz"); }
+                if(PlayerInfo[playerid][Rank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(10) ($10000) Ranga 5-9: Nó¿, Desert Eagle, AK47, UZI, Spas12, Snajperka, Pancerz"); }
 				SendClientMessage(playerid, COLOR_WHITE, "|________________________________________________________|");
 			    return 0;
 			}

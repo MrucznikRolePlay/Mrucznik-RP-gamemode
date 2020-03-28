@@ -36,7 +36,7 @@ YCMD:stworztrase(playerid, params[], help)
 	{
 		if(IsANoA(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 4)
+			if(PlayerInfo[playerid][Rank] >= 4)
 			{
 				new ow = IsAWyscigTworzony();
 				if(ow == -1)

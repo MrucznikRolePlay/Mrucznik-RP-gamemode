@@ -94,7 +94,7 @@ YCMD:dutycd(playerid, params[], help)
 				return 1;
 			}
 		}
-		else if((PlayerInfo[playerid][pMember] == FRAC_BOR && PlayerInfo[playerid][pRank] >= 2) || PlayerInfo[playerid][pLider] == FRAC_BOR)
+		else if((PlayerInfo[playerid][pMember] == FRAC_BOR && PlayerInfo[playerid][Rank] >= 2) || PlayerInfo[playerid][pLider] == FRAC_BOR)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 5.0, 1521.8843,-1479.6427,22.9377))
 			{

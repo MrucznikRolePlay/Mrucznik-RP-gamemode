@@ -1229,7 +1229,7 @@ enum pInfo
 	Group,
 	GroupsShow,
 	pOrg,
-	pRank,
+	Rank,
 	pChar,
 	pSkin,
 	pContractTime,

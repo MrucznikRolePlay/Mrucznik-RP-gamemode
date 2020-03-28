@@ -285,7 +285,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pMember],
 	PlayerInfo[playerid][Group],
 	PlayerInfo[playerid][pOrg],
-	(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]),
+	(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][Rank]+1000) : (PlayerInfo[playerid][Rank]),
 	PlayerInfo[playerid][pChar],
 	PlayerInfo[playerid][pSkin],
 	PlayerInfo[playerid][pContractTime],
@@ -611,7 +611,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pMember], 
 		PlayerInfo[playerid][Group], 
 		PlayerInfo[playerid][pOrg],
-		PlayerInfo[playerid][pRank], 
+		PlayerInfo[playerid][Rank], 
 		PlayerInfo[playerid][pChar], 
 		PlayerInfo[playerid][pSkin], 
 		PlayerInfo[playerid][pContractTime]);

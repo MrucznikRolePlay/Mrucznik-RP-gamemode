@@ -32,7 +32,7 @@ YCMD:wezportfel(playerid, params[], help)
 {
 	if(IsAPrzestepca(playerid))
 	{
-		if(PlayerInfo[playerid][pRank] < 3)
+		if(PlayerInfo[playerid][Rank] < 3)
 		{
 			sendTipMessage(playerid, "Potrzebujesz rangi 3 lub wy¿szej, ¿eby móc zabieraæ pieni¹dze!");
 			return 1;

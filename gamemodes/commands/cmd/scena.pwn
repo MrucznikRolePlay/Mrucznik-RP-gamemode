@@ -34,7 +34,7 @@ YCMD:scena(playerid, params[], help)
     {
         if(GetPVarInt(playerid, "scena-allow") != 1)
         {
-            if(PlayerInfo[playerid][pRank] < 4) return sendTipMessageEx(playerid, COLOR_GRAD2, "Scena dostêpna za pozwoleniem adminów i od 4 rangi!");
+            if(PlayerInfo[playerid][Rank] < 4) return sendTipMessageEx(playerid, COLOR_GRAD2, "Scena dostêpna za pozwoleniem adminów i od 4 rangi!");
             else
             {
                 if(GetPVarInt(playerid, "scena-req") == 1)

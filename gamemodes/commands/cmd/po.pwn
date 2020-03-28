@@ -38,7 +38,7 @@ YCMD:po(playerid, params[], help)
     {
         if( (IsABOR(playerid) || IsAPolicja(playerid)) && OnDuty[playerid] == 1 || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
         {
-    		if (PlayerInfo[playerid][pMember] == 2 && PlayerInfo[playerid][pRank] == 3 && PlayerInfo[playerid][pRank] == 4)
+    		if (PlayerInfo[playerid][pMember] == 2 && PlayerInfo[playerid][Rank] == 3 && PlayerInfo[playerid][Rank] == 4)
     		{
     			sendTipMessage(playerid, "Tajniacy nie mog¹ dawaæ WL, poproœ o danie WL kolegów na /r !");
                 return 1;

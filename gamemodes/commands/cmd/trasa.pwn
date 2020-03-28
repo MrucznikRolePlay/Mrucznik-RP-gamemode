@@ -35,7 +35,7 @@ YCMD:trasa(playerid, params[], help)
 	{
 		if(IsPlayerConnected(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 0 || PlayerInfo[playerid][Job] == 10)
+			if(PlayerInfo[playerid][Rank] >= 0 || PlayerInfo[playerid][Job] == 10)
 			{
 				if(IS_KomunikacjaMiejsca(Veh))
 				{

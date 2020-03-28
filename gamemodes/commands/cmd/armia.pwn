@@ -41,7 +41,7 @@ YCMD:armia(playerid, params[], help)
  			sendErrorMessage(playerid, "Nie jesteœ z wojska!");
 		    return 1;
 		}
-		if(PlayerInfo[playerid][pRank] < 9)
+		if(PlayerInfo[playerid][Rank] < 9)
 		{
 		    sendErrorMessage(playerid, "Musisz mieæ 9 rangê aby tego u¿ywaæ !");
 		    return 1;

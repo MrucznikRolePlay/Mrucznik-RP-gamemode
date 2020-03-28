@@ -38,7 +38,7 @@ YCMD:rozwiaz(playerid, params[], help)
     {
 		if(IsAPrzestepca(playerid))
 		{
-		    if(PlayerInfo[playerid][pRank] < 2)
+		    if(PlayerInfo[playerid][Rank] < 2)
 		    {
 		        sendTipMessageEx(playerid, COLOR_GREY, "Musisz mieæ 2 lub wy¿sz¹ rangê, aby kogoœ rozwi¹zaæ !");
 		        return 1;

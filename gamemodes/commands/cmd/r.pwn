@@ -52,7 +52,7 @@ YCMD:r(playerid, params[], help)
         new member = GetPlayerFraction(playerid);
         if(0 < member <= 4 || member == 11 || member == 7 || member == 17)
 	    {
-            format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
+            format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][Rank]],GetNick(playerid), params);
             SendRadioMessage(member, TEAM_BLUE_COLOR, string);
             format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid), params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
@@ -62,7 +62,7 @@ YCMD:r(playerid, params[], help)
         else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie+DMV
         {
             member = GetPlayerOrg(playerid);
-            format(string, sizeof(string), "** %s %s: %s **", FamRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
+            format(string, sizeof(string), "** %s %s: %s **", FamRang[member][PlayerInfo[playerid][Rank]],GetNick(playerid), params);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
 			SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
             SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);

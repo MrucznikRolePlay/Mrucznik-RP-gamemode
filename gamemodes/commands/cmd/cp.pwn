@@ -34,7 +34,7 @@ YCMD:cp(playerid, params[], help)
 
 	if(IsANoA(playerid))
 	{
-		if(PlayerInfo[playerid][pRank] >= 4)
+		if(PlayerInfo[playerid][Rank] >= 4)
 		{
 		    if(tworzenietrasy[playerid] != 666)
 		    {

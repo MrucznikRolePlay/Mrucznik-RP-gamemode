@@ -32,14 +32,14 @@ YCMD:pracownicy(playerid, params[], help)
 {
     new frac = GetPlayerFraction(playerid);
 	new string[64];
-	if(frac > 0 && PlayerInfo[playerid][pRank] >= 1)
+	if(frac > 0 && PlayerInfo[playerid][Rank] >= 1)
 	{
 	    SendClientMessage(playerid, COLOR_GREEN, "Pracownicy Online:");
 		foreach(new i : Player)
 		{
 		    if(frac == GetPlayerFraction(i))
 		    {
-		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][pRank]);
+		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][Rank]);
 		        SendClientMessage(playerid, COLOR_GRAD1, string);
 		    }
 		}

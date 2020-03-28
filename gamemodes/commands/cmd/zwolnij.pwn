@@ -64,7 +64,7 @@ YCMD:zwolnij(playerid, params[], help)
 							gTeam[para1] = 3;
 							PlayerInfo[para1][pTeam] = 3;
 							PlayerInfo[para1][pMember] = 0;
-							PlayerInfo[para1][pRank] = 0;
+							PlayerInfo[para1][Rank] = 0;
 							PlayerInfo[para1][pUniform] = 0;
 							PlayerInfo[para1][pTajniak] = 0;
 							JobDuty[para1] = 0;

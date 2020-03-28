@@ -34,11 +34,11 @@ YCMD:trasy(playerid, params[], help)
 	{
 		if(IsANoA(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 4)
+			if(PlayerInfo[playerid][Rank] >= 4)
 			{
 				ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyœcigów: Wybierz opcjê", "Poka¿ trasy\nZorganizuj wyœcig\nEdytuj trasê\nUsuñ trasê", "Wybierz", "Anuluj");
 			}
-			else if(PlayerInfo[playerid][pRank] >= 2)
+			else if(PlayerInfo[playerid][Rank] >= 2)
 			{
 				ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyœcigów: Wybierz opcjê", "Poka¿ trasy\nZorganizuj wyœcig", "Wybierz", "Anuluj");
 			}

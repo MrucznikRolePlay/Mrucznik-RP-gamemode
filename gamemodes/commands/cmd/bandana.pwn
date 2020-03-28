@@ -30,7 +30,7 @@
 
 YCMD:bandana(playerid, params[], help)
 {
-	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][pRank] >= 2))
+	if(IsAPrzestepca(playerid) || (IsAFBI(playerid) && PlayerInfo[playerid][Rank] >= 2))
 	{
 		new string[64];
 		new nick[24], sendername[MAX_PLAYER_NAME];

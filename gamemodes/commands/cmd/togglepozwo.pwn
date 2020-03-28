@@ -34,7 +34,7 @@ YCMD:togglepozwo(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pMember] == 1 && PlayerInfo[playerid][pRank] >= 6)
+        if(PlayerInfo[playerid][pMember] == 1 && PlayerInfo[playerid][Rank] >= 6)
         {
             if(PozwolenieBot == 1)
             {

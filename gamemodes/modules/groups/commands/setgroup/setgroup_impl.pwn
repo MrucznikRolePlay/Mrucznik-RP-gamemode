@@ -35,7 +35,7 @@ command_setgroup_Impl(playerid, id, uid)
 
     sendTipMessageEx(id, COLOR_P@, sprintf("Administrator %s ustawi³ Ci przynale¿noœæ do grupy %s [UID %d]", GetNickEx(playerid), GroupInfo[uid][Name], uid)); 
     sendTipMessageEx(playerid, COLOR_P@, sprintf("Ustawi³eœ przynale¿noœæ do grupy %s [UID %d] dla %s", GroupInfo[uid][Name], uid, GetNick(id))); 
-    MruMySQL_SetPlayerGroup(id, uid);
+    SetPlayerGroup(id, uid);
     return 1;
 }
 

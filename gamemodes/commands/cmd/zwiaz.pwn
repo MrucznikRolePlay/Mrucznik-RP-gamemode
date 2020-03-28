@@ -38,7 +38,7 @@ YCMD:zwiaz(playerid, params[], help)
     {
 		if(IsAPrzestepca(playerid))
 		{
-		    if(PlayerInfo[playerid][pRank] < 2)
+		    if(PlayerInfo[playerid][Rank] < 2)
 		    {
 		        sendTipMessageEx(playerid, COLOR_GREY, "Potrzebujesz 2 rangi aby zwi¹zywaæ ludzi !");
 		        return 1;

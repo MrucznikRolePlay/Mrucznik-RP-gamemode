@@ -389,7 +389,7 @@ sendFractionMessageToAll(playerid, text[])
 			fractionMessageRange++; 
 			format(sContent, sizeof(sContent), "|___________ %s ___________|", FractionNames[GetPlayerFraction(playerid)]); 
 			SendClientMessage(i, COLOR_WHITE, sContent); 
-			format(sContent, sizeof(sContent), "%s %s: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]], GetNickEx(playerid), text);
+			format(sContent, sizeof(sContent), "%s %s: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][Rank]], GetNickEx(playerid), text);
 			SendClientMessage(i, GetFractionColor(PlayerInfo[playerid][pMember]), sContent); 
 		}
 	}

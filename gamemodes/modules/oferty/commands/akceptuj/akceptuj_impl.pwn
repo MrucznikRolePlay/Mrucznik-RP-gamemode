@@ -800,7 +800,7 @@ command_akceptuj_Impl(playerid, x_job[32])
             Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][Job]);
             if(GettingJob[playerid] == 14)
             {
-                PlayerInfo[playerid][pRank] = 0;
+                PlayerInfo[playerid][Rank] = 0;
 
                 SetPlayerInterior(playerid,0);
                 new rand = random(sizeof(gInviteSpawns));

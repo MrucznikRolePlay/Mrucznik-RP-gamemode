@@ -30,7 +30,7 @@
 
 YCMD:wywalzsad(playerid,params[], help) //GSA
 {
-    if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2 || GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 3)
+    if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][Rank] > 2 || GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][Rank] > 3)
 	{
 	   if(IsPlayerInRangeOfPoint(playerid,5,1321.1561, -1322.0787, 40.2077)
 	   || IsPlayerInRangeOfPoint(playerid,20,1309.6487, -1299.8835, 36.5567)

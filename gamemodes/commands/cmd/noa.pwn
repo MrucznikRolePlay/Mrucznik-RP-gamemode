@@ -34,7 +34,7 @@ YCMD:noa(playerid, params[], help)
 	new sendername[MAX_PLAYER_NAME];
 	new content[256];
 
-	if(IsANoA(playerid) && PlayerInfo[playerid][pRank] >= 6)
+	if(IsANoA(playerid) && PlayerInfo[playerid][Rank] >= 6)
 	{
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))

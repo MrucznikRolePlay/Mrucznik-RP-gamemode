@@ -64,4 +64,12 @@ stock ShowGroupsForPlayer(playerid)
 	return 1;
 }
 
+SetPlayerGroup(playerid, uid)
+{
+	PlayerInfo[playerid][Group] = uid;
+	PlayerInfo[playerid][Rank] = 0;
+	PlayerInfo[playerid][pUniform] = 0;
+	return 1;
+}
+
 //end

@@ -57,7 +57,7 @@ YCMD:dl(playerid, params[], help)
 				
 			    if(strcmp(x_nr,"auto",true) == 0)
 				{
-				    if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
+				    if(PlayerInfo[playerid][Rank] >= 1 || PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
 		            {
 						if(PlayerInfo[giveplayerid][pDowod] >= 1 || PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
 						{
@@ -101,7 +101,7 @@ YCMD:dl(playerid, params[], help)
 				}
 				else if(strcmp(x_nr,"lot",true) == 0)
 				{
-				    if(PlayerInfo[playerid][pRank] >= 3)
+				    if(PlayerInfo[playerid][Rank] >= 3)
 		            {
 						if(PlayerInfo[giveplayerid][pDowod] >= 1)
 						{
@@ -149,7 +149,7 @@ YCMD:dl(playerid, params[], help)
 				}
 				else if(strcmp(x_nr,"lodzie",true) == 0)
 				{
-					if(PlayerInfo[playerid][pRank] >= 2)
+					if(PlayerInfo[playerid][Rank] >= 2)
 		            {
 						if(PlayerInfo[giveplayerid][pDowod] >= 1)
 						{
@@ -238,7 +238,7 @@ YCMD:dl(playerid, params[], help)
 				}
 				else if(strcmp(x_nr,"bron",true) == 0)
 				{
-					if(PlayerInfo[playerid][pRank] >= 1)
+					if(PlayerInfo[playerid][Rank] >= 1)
 		            {
 						if(PlayerInfo[giveplayerid][pDowod] >= 1)
 						{

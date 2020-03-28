@@ -44,18 +44,18 @@ YCMD:awans(playerid, params[], help)
 			{
 				if(PlayerInfo[playerid][pLider] == PlayerInfo[para1][pMember] || PlayerInfo[playerid][pLider] == PlayerInfo[para1][pLider])
 				{
-                    new rang = PlayerInfo[para1][pRank];
+                    new rang = PlayerInfo[para1][Rank];
                     if(rang == 9) return 1;
                     if(strlen(FracRang[GetPlayerFraction(playerid)][rang+1]) < 1) return SendClientMessage(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
 
-					PlayerInfo[para1][pRank] += 1;
-					new level = PlayerInfo[para1][pRank];
+					PlayerInfo[para1][Rank] += 1;
+					new level = PlayerInfo[para1][Rank];
 
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Awansowa³eœ %s na rangê %s", GetNickEx(para1), FracRang[GetPlayerFraction(para1)][level]));
                     if(playerid != para1)
                         SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Gratulacje! Otrzyma³eœ awans na rangê %s od %s", FracRang[GetPlayerFraction(para1)][level],  GetNickEx(playerid)));
 
-                    MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][pRank]);
+                    MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][Rank]);
 				}
 				else
 				{

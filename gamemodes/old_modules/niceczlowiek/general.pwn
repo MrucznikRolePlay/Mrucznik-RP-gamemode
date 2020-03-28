@@ -182,8 +182,8 @@ Player_CanUseCar(playerid, vehicleid)
             }
             if(CarData[lcarid][c_Owner] == 11)
             {
-                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][pRank] >= CarData[lcarid][c_Rang]) return 1;
-                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][Rank] >= CarData[lcarid][c_Rang]) return 1;
+                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][Rank] < CarData[lcarid][c_Rang])
 	        	{
                 	format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
 		        	sendTipMessageEx(playerid,COLOR_GREY,string);
@@ -194,7 +194,7 @@ Player_CanUseCar(playerid, vehicleid)
                 sendTipMessageEx(playerid,COLOR_GREY,string);
                 return 0;
             }
-	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+	        if(PlayerInfo[playerid][Rank] < CarData[lcarid][c_Rang])
 	        {
                 format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
 		        sendTipMessageEx(playerid,COLOR_GREY,string);
@@ -284,7 +284,7 @@ Player_CanUseCar(playerid, vehicleid)
                 sendTipMessageEx(playerid,COLOR_GREY,string);
                 return 0;
             }
-	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+	        if(PlayerInfo[playerid][Rank] < CarData[lcarid][c_Rang])
 	        {
                 if(PlayerInfo[playerid][Admin] >= 5000) return 1;
                 format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);

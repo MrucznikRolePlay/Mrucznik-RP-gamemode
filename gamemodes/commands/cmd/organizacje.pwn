@@ -50,7 +50,7 @@ YCMD:organizacje(playerid, params[], help)
         if(GetPlayerOrg(i) == lID)
         {
             if(gPlayerOrgLeader[i]) format(lStr, 128, "* %s (LIDER)", GetNick(i));
-            else format(lStr, 128, "* %s (Ranga: %d)", GetNick(i), PlayerInfo[i][pRank]);
+            else format(lStr, 128, "* %s (Ranga: %d)", GetNick(i), PlayerInfo[i][Rank]);
             SendClientMessage(playerid, COLOR_GRAD2, lStr);
         }
     }

@@ -45,12 +45,12 @@ YCMD:finfo(playerid, params[], help)
 			noAccessMessage(playerid);
 			return 1;
 		}
-		if(PlayerInfo[playerid][pRank] < 3 && GetPlayerFraction(playerid) != FRAC_ERS)
+		if(PlayerInfo[playerid][Rank] < 3 && GetPlayerFraction(playerid) != FRAC_ERS)
 		{
 			noAccessMessage(playerid); 
 			return 1;
 		}
-		if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] < 2)
+		if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][Rank] < 2)
 		{
 			sendErrorMessage(playerid, "Ta funkcja dostêpna jest od stopnia drugiego!"); 
 			return 1;

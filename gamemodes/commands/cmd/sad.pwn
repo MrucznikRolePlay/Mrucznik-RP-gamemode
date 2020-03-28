@@ -41,7 +41,7 @@ YCMD:sad(playerid, params[], help)
  			sendErrorMessage(playerid, "Nie jesteœ z s¹du!");
 		    return 1;
 		}
-		if(PlayerInfo[playerid][pRank] < 3)
+		if(PlayerInfo[playerid][Rank] < 3)
 		{
 		    sendErrorMessage(playerid, "Musisz mieæ 3 range aby tego u¿ywaæ !");
 		    return 1;

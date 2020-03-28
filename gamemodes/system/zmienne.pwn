@@ -1222,7 +1222,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][Group] = 0;
 	PlayerInfo[playerid][GroupsShow] = 0;
 	PlayerInfo[playerid][pOrg] = 0;
-	PlayerInfo[playerid][pRank] = 0;
+	PlayerInfo[playerid][Rank] = 0;
 	PlayerInfo[playerid][pChar] = 0;
 	PlayerInfo[playerid][pContractTime] = 0;
 	PlayerInfo[playerid][pDetSkill] = 0;

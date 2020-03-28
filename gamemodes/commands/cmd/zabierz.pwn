@@ -38,7 +38,7 @@ YCMD:zabierz(playerid, params[], help)
     {
         if(gTeam[playerid] == 2 || IsAPolicja(playerid))
         {
-            if(PlayerInfo[playerid][pRank] < 1)
+            if(PlayerInfo[playerid][Rank] < 1)
             {
                 SendClientMessage(playerid, COLOR_GREY, "Potrzebujesz 1 rangi aby zabieraæ przedmioty!");
                 return 1;

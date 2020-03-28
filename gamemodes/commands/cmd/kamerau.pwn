@@ -32,7 +32,7 @@ YCMD:kamerau(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(IsABOR(playerid) || PlayerInfo[playerid][pRank] >= 2 )
+        if(IsABOR(playerid) || PlayerInfo[playerid][Rank] >= 2 )
         {
             new kamid;
             if( sscanf(params, "d", kamid))

@@ -30,7 +30,7 @@
 
 YCMD:alarm(playerid,cmdtext[], help)
 {
-    if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2 || GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
+    if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][Rank] > 2 || GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][Rank] > 2)
 	{
         if(IsPlayerInRangeOfPoint(playerid,5,1315.6504,-1271.2982,82.3418)
         || IsPlayerInRangeOfPoint(playerid,5,1315.0375,-1355.7534,62.0792)
@@ -63,7 +63,7 @@ YCMD:alarm(playerid,cmdtext[], help)
             }
     	}
     }
-	else if(GetPlayerFraction(playerid) == FRAC_GOV && PlayerInfo[playerid][pRank] > 0 || GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2)
+	else if(GetPlayerFraction(playerid) == FRAC_GOV && PlayerInfo[playerid][Rank] > 0 || GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][Rank] > 2)
 	{
 		new string [128];
 		if(GetPlayerAdminDutyStatus(playerid) == 0)

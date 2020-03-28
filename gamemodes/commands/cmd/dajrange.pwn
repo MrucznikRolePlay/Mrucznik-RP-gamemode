@@ -57,13 +57,13 @@ YCMD:dajrange(playerid, params[], help)
 
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-						PlayerInfo[para1][pRank] = level;
+						PlayerInfo[para1][Rank] = level;
 						format(string, sizeof(string), "Lider %s zmieni³ twoj¹ rangê", sendername);
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "Da³eœ %s Rangê %d.", giveplayer,level);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						Log(serverLog, INFO, "Lider %s da³ %s rangê %d.", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
-                        MruMySQL_SetAccInt("Rank", giveplayer, PlayerInfo[para1][pRank]);
+                        MruMySQL_SetAccInt("Rank", giveplayer, PlayerInfo[para1][Rank]);
 					}
 					else
 					{

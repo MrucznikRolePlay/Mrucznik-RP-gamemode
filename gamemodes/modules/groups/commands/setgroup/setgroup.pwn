@@ -28,6 +28,7 @@
 
 
 //-------<[ include ]>-------
+#include "setgroup_impl.pwn"
 
 //-------<[ initialize ]>-------
 command_setgroup()

@@ -34,7 +34,7 @@ YCMD:radiostacja(playerid, params[], help)
     {
         if(IsPlayerInFraction(playerid, FRAC_SN))
 	    {
-            if(PlayerInfo[playerid][pRank] < 3) return sendTipMessageEx(playerid, COLOR_GREY, "Od 3 rangi!");
+            if(PlayerInfo[playerid][Rank] < 3) return sendTipMessageEx(playerid, COLOR_GREY, "Od 3 rangi!");
             ShowPlayerDialogEx(playerid, 667, DIALOG_STYLE_LIST, "Wybierz nag³oœniê", "R SAN 01\nR SAN 02", "Wybierz", "Anuluj");
         }
         else return sendErrorMessage(playerid, "Nie nale¿ysz do SN!");
