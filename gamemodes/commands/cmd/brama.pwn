@@ -833,7 +833,7 @@ YCMD:brama(playerid, params[], help)
 	
 			/*if(IsPlayerInRangeOfPoint(playerid, 3.5, 1450.117919, -1784.158203, 78.235244))
 			{
-				if(PlayerInfo[playerid][Rank] >= 1)
+				if(PlayerInfo[playerid][pRank] >= 1)
 				{
 					if(urzadnewm == 0)
 					{
@@ -884,7 +884,7 @@ YCMD:brama(playerid, params[], help)
 		}*/ 
 		//==============================[KONIEC]====================================================
 		//..
-		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] > 1/*PlayerInfo[playerid][Job] == 14*/)
+		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] > 1/*PlayerInfo[playerid][pJob] == 14*/)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 10.0, -1113.25769043,-1008.68634033,128.90229797))
 			{
@@ -1737,7 +1737,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) == 16 && PlayerInfo[playerid][Rank] >= 3)
+		if(GetPlayerOrg(playerid) == 16 && PlayerInfo[playerid][pRank] >= 3)
 		{
 			if(IsPlayerInRangeOfPoint(playerid,3, 482.15, -1523.25, 45.01))//drzwi vipa
 			{
@@ -1900,7 +1900,7 @@ YCMD:brama(playerid, params[], help)
         }
         if(GetPlayerOrg(playerid) == FAMILY_IBIZA)
         {
-            if(IsPlayerInRangeOfPoint(playerid, 5.0, 1903.2273,-2466.0583,17.9950) && PlayerInfo[playerid][Rank] > 5 && GetPlayerVirtualWorld(playerid) == 1) //RANGA
+            if(IsPlayerInRangeOfPoint(playerid, 5.0, 1903.2273,-2466.0583,17.9950) && PlayerInfo[playerid][pRank] > 5 && GetPlayerVirtualWorld(playerid) == 1) //RANGA
         	{
         		if(IbizaKanciapa) //otwarte
         		{
@@ -1914,7 +1914,7 @@ YCMD:brama(playerid, params[], help)
         		}
         		return 1;
         	}
-        	if(IsPlayerInRangeOfPoint(playerid, 18.0, 420.9000, -1783.4000, 4.3100 ) && PlayerInfo[playerid][Rank] >=4) //RANGA
+        	if(IsPlayerInRangeOfPoint(playerid, 18.0, 420.9000, -1783.4000, 4.3100 ) && PlayerInfo[playerid][pRank] >=4) //RANGA
         	{
 
         		if(IbizaBrama[0])
@@ -1929,7 +1929,7 @@ YCMD:brama(playerid, params[], help)
         		}
         		return 1;
         	}
-        	if(IsPlayerInRangeOfPoint(playerid, 18.0, 358.4000, -1783.9000, 4.2000) && PlayerInfo[playerid][Rank] >= 4 ) //RANGA
+        	if(IsPlayerInRangeOfPoint(playerid, 18.0, 358.4000, -1783.9000, 4.2000) && PlayerInfo[playerid][pRank] >= 4 ) //RANGA
         	{
         		if(IbizaBrama[1])
         		{

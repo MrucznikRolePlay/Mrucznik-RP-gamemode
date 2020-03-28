@@ -178,7 +178,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 24:
 						{
-							PlayerInfo[giveplayerid][Job] = amount;
+							PlayerInfo[giveplayerid][pJob] = amount;
 							format(string, sizeof(string), "Praca gracza zmieniona na %d", amount);
 						}
 						case 25:

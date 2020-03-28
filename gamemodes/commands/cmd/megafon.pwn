@@ -134,7 +134,7 @@ YCMD:megafon(playerid, params[], help)
 		    format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
-		else if(PlayerInfo[playerid][Job] == 1 && PlayerInfo[playerid][pDetSkill] > 400)
+		else if(PlayerInfo[playerid][pJob] == 1 && PlayerInfo[playerid][pDetSkill] > 400)
 		{
 		    format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
@@ -150,7 +150,7 @@ YCMD:megafon(playerid, params[], help)
 			format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
-		else if( (PlayerInfo[playerid][pMember] == FRAC_KT || PlayerInfo[playerid][pLider] == FRAC_KT) && PlayerInfo[playerid][Rank] >= 3)
+		else if( (PlayerInfo[playerid][pMember] == FRAC_KT || PlayerInfo[playerid][pLider] == FRAC_KT) && PlayerInfo[playerid][pRank] >= 3)
 		{
 			format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
@@ -161,7 +161,7 @@ YCMD:megafon(playerid, params[], help)
 			format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 			ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
-        else if((PlayerInfo[playerid][pMember] == 11 || PlayerInfo[playerid][pLider] == 11) && PlayerInfo[playerid][Rank] >= 5)
+        else if((PlayerInfo[playerid][pMember] == 11 || PlayerInfo[playerid][pLider] == 11) && PlayerInfo[playerid][pRank] >= 5)
         {
             if(IsPlayerInRangeOfPoint(playerid, 5.0, 1471.2521,-1825.2295,78.3412))
             {
@@ -173,7 +173,7 @@ YCMD:megafon(playerid, params[], help)
                 return sendTipMessage(playerid, "Jako wyk³adowca mo¿esz u¿ywaæ mikrofonu tylko na sali wyk³adowczej!");
             }
         }
-		else if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][Rank] > 1)
+		else if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] > 1)
         {
 			new player_vw;
 			player_vw = GetPlayerVirtualWorld(playerid);
@@ -186,7 +186,7 @@ YCMD:megafon(playerid, params[], help)
 				}
 			}
 		}
-        else if(GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][Rank] > 2)
+        else if(GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
         {
             if(IsPlayerInRangeOfPoint(playerid,5,1315.6835,-1348.1102,73.9968)
         	|| IsPlayerInRangeOfPoint(playerid,5,1315.5305,-1308.1102,73.9968)

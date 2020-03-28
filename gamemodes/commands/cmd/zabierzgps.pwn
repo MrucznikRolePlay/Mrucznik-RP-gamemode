@@ -51,7 +51,7 @@ YCMD:zabierzgps(playerid, params[], help)
                 ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                 format(string, sizeof(string), "* Zabra³eœ %s nadajnik GPS. Nadawanie lokalizacji zosta³o przerwane.", GetNick(para1));
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                format(string, sizeof(string), "=: Sygna³ z nadajnika GPS %s %s zosta³ przerwany. Ostatnia lokalizacja: %s :=", FracRang[GetPlayerFraction(para1)][PlayerInfo[para1][Rank]], GetNick(para1), pZone);
+                format(string, sizeof(string), "=: Sygna³ z nadajnika GPS %s %s zosta³ przerwany. Ostatnia lokalizacja: %s :=", FracRang[GetPlayerFraction(para1)][PlayerInfo[para1][pRank]], GetNick(para1), pZone);
                 SendRadioMessage(1, COLOR_YELLOW2, string);
                 SendRadioMessage(2, COLOR_YELLOW2, string);
                 SendRadioMessage(3, COLOR_YELLOW2, string);

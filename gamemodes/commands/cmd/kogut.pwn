@@ -42,7 +42,7 @@ YCMD:kogut(playerid, params[], help)
             new veh = GetPlayerVehicleID(playerid);
 		    if(IsAPolicja(playerid) || IsABOR(playerid))
 		    {
-		        if(PlayerInfo[playerid][Rank] >= 1)
+		        if(PlayerInfo[playerid][pRank] >= 1)
 		        {
 					if(IsAKogutCar(veh))
 			        {

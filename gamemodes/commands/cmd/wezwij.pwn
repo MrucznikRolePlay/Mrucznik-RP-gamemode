@@ -63,7 +63,7 @@ YCMD:wezwij(playerid, params[], help)
 				format(string, sizeof(string), "%s [ID: %d] potrzebuje pomocy prawnika w wiêzieniu! JedŸ tam i uwoolnij go za op³at¹!", GetNick(playerid), playerid); 
 				foreach(new checkPrawnik : Player)
 				{
-					if(PlayerInfo[checkPrawnik][Job] == 2)
+					if(PlayerInfo[checkPrawnik][pJob] == 2)
 					{
 						jestPrawnik=true; 
 						sendTipMessageEx(checkPrawnik, COLOR_P@, string); 
@@ -183,7 +183,7 @@ YCMD:wezwij(playerid, params[], help)
 		        }
 		        foreach(new i : Player)
 				{
-				    if(JobDuty[i] >= 1 && PlayerInfo[i][Job] == 7)
+				    if(JobDuty[i] >= 1 && PlayerInfo[i][pJob] == 7)
 				    {
 				    	GetPlayerName(playerid, sendername, sizeof(sendername));
 					    format(string, sizeof(string), "** %s potrzebuje mechanika. (wpisz /akceptuj mechanik aby zaakceptowaæ zlecenie)", sendername);

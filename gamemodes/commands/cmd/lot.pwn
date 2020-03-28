@@ -134,7 +134,7 @@ YCMD:lot(playerid, params[], help)
     	}
     	else if(strcmp(data,"koszt",true) == 0)
     	{
-    	    if(PlayerInfo[playerid][Rank]>=4)
+    	    if(PlayerInfo[playerid][pRank]>=4)
     	    {
                 new koszt;
         		if(sscanf(sub, "d", koszt)) return sendTipMessage(playerid, "U¿yj /lot koszt [ilosc]");

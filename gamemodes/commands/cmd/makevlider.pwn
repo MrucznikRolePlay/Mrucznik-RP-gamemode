@@ -68,7 +68,7 @@ YCMD:makevleader(playerid, params[], help)
 						Log(serverLog, INFO, "Lider %s usun¹³ gracza [VLD] %s z jego frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(PlayerInfo[playerid][pMember]));
 						PlayerInfo[giveplayerid][pMember] = 0;
 						PlayerInfo[giveplayerid][pLider] = 0;
-						PlayerInfo[giveplayerid][Job] = 0;
+						PlayerInfo[giveplayerid][pJob] = 0;
 						orgUnInvitePlayer(giveplayerid);
 						MedicBill[giveplayerid] = 0;
 						SetPlayerSpawn(giveplayerid);

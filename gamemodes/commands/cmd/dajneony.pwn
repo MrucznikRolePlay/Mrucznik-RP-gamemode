@@ -36,7 +36,7 @@ YCMD:dajneony(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsANoA(playerid) && PlayerInfo[playerid][Rank] >= 3 || GetPlayerOrg(playerid) == 15)
+        if(IsANoA(playerid) && PlayerInfo[playerid][pRank] >= 3 || GetPlayerOrg(playerid) == 15)
         {
             if(IsPlayerInRangeOfPoint(playerid, 25.0, 2333.9292,-1245.2999,22.5000) || IsPlayerInRangeOfPoint(playerid, 25.0, 1805.0804,-1711.9927,13.7336))
             {

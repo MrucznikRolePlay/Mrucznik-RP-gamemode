@@ -34,7 +34,7 @@ YCMD:studia(playerid, params[], help)
 
     if(gPlayerLogged[playerid] == 1)
     {
-        if(PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][Rank] >= 2 || PlayerInfo[playerid][pLider] == 9)
+        if(PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || PlayerInfo[playerid][pLider] == 9)
         {
             new drukarniatxt[32];
 			new studiovictxt[32];

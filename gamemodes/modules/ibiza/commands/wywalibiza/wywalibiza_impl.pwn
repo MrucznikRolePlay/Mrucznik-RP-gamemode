@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_wywalibiza_Impl(playerid, giveplayerid)
 {
-    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][Rank] >= 2) 
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 2) 
     {
         new Float:x,
             Float:y,

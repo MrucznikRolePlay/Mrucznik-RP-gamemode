@@ -45,7 +45,7 @@ YCMD:zabierzlideraorg(playerid, params[], help)
         Log(adminLog, INFO, "Admin %s zabra³ graczowi %s lidera rodziny %s[%d]", GetPlayerLogName(playerid), GetPlayerLogName(id), OrgInfo[gPlayerOrg[id]][o_Name], gPlayerOrg[id]);
         
         gPlayerOrgLeader[id] = false;
-        orgGivePlayerRank(id, INVALID_PLAYER_ID, PlayerInfo[id][Rank]);
+        orgGivePlayerRank(id, INVALID_PLAYER_ID, PlayerInfo[id][pRank]);
     }
     return 1;
 }

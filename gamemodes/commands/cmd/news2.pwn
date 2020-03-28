@@ -33,7 +33,7 @@ YCMD:news2(playerid, params[], help)
 	new string[124], text[124]; 
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pMember] == FRAC_SN && PlayerInfo[playerid][Rank] >= 5)
+		if(PlayerInfo[playerid][pMember] == FRAC_SN && PlayerInfo[playerid][pRank] >= 5)
 		{
 			if(sscanf(params, "s[124]", text))
 			{

@@ -36,7 +36,7 @@ YCMD:poddajsie(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][Job] == 1)
+		if(PlayerInfo[playerid][pJob] == 1)
 	 	{
 	 	    new playa;
 			if( sscanf(params, "k<fix>", playa))

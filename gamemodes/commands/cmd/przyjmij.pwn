@@ -51,7 +51,7 @@ YCMD:przyjmij(playerid, params[], help)
 		        {
 				    if (GetPlayerFraction(para1) == 0 && GetPlayerOrg(para1) == 0)
 				    {
-				        if(PlayerInfo[para1][Job] > 0)
+				        if(PlayerInfo[para1][pJob] > 0)
 				        {
 				            sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz przyj¹æ tego gracza, gdy¿ posiada ju¿ pracê!");
 				            return 1;
@@ -78,8 +78,8 @@ YCMD:przyjmij(playerid, params[], help)
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 						PlayerInfo[para1][pMember] = PlayerInfo[playerid][pLider];
-						PlayerInfo[para1][Rank] = 0;
-						PlayerInfo[para1][Job] = 0;
+						PlayerInfo[para1][pRank] = 0;
+						PlayerInfo[para1][pJob] = 0;
 						Log(serverLog, INFO, "%s przyj¹³ %s do frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(ftextid));
 						format(string, sizeof(string), "Zosta³eœ przyjêty do %s przez lidera %s", FractionNames[ftextid], sendername);
 						sendTipMessageEx(para1, COLOR_LIGHTBLUE, string);

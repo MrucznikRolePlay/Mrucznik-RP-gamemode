@@ -94,26 +94,26 @@ YCMD:pokazdowod(playerid, params[], help)
                         case 3: otext = "Azja";
                     }
                     // 
-                    if(PlayerInfo[playerid][Job] == 1) { jtext = "£owca Nagród"; }
-                    else if(PlayerInfo[playerid][Job] == 2) { jtext = "Prawnik"; }
-                    else if(PlayerInfo[playerid][Job] == 3) { jtext = "Prostytutka"; }
-                    //else if(PlayerInfo[playerid][Job] == 4) { jtext = "Diler Zio³a"; }
-                    //else if(PlayerInfo[playerid][Job] == 5) { jtext = "Z³odziej Aut"; }
-                    else if(PlayerInfo[playerid][Job] == 6) { jtext = "Reporter"; }
-                    else if(PlayerInfo[playerid][Job] == 7) { jtext = "Mechanik"; }
-                    else if(PlayerInfo[playerid][Job] == 8) { jtext = "Ochroniarz"; }
-                    //else if(PlayerInfo[playerid][Job] == 9) { jtext = "Diler Broni"; }
-                    else if(PlayerInfo[playerid][Job] == 10) { jtext = "Kierowca Autobusu"; }
-	                else if(PlayerInfo[playerid][Job] == 12) { jtext = "Bokser"; }
-                    else if(PlayerInfo[playerid][Job] == 14) { jtext = "Taksówkarz"; }
-                    else if(PlayerInfo[playerid][Job] == 15) { jtext = "Gazeciarz"; }
-                    else if(PlayerInfo[playerid][Job] == 16) { jtext = "Kurier"; }
+                    if(PlayerInfo[playerid][pJob] == 1) { jtext = "£owca Nagród"; }
+                    else if(PlayerInfo[playerid][pJob] == 2) { jtext = "Prawnik"; }
+                    else if(PlayerInfo[playerid][pJob] == 3) { jtext = "Prostytutka"; }
+                    //else if(PlayerInfo[playerid][pJob] == 4) { jtext = "Diler Zio³a"; }
+                    //else if(PlayerInfo[playerid][pJob] == 5) { jtext = "Z³odziej Aut"; }
+                    else if(PlayerInfo[playerid][pJob] == 6) { jtext = "Reporter"; }
+                    else if(PlayerInfo[playerid][pJob] == 7) { jtext = "Mechanik"; }
+                    else if(PlayerInfo[playerid][pJob] == 8) { jtext = "Ochroniarz"; }
+                    //else if(PlayerInfo[playerid][pJob] == 9) { jtext = "Diler Broni"; }
+                    else if(PlayerInfo[playerid][pJob] == 10) { jtext = "Kierowca Autobusu"; }
+	                else if(PlayerInfo[playerid][pJob] == 12) { jtext = "Bokser"; }
+                    else if(PlayerInfo[playerid][pJob] == 14) { jtext = "Taksówkarz"; }
+                    else if(PlayerInfo[playerid][pJob] == 15) { jtext = "Gazeciarz"; }
+                    else if(PlayerInfo[playerid][pJob] == 16) { jtext = "Kurier"; }
                     else { jtext = "Bezrobotny"; }
 			       //
        				SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Dowód Osobisty ______________|");
 					format(string, sizeof(string), "- Imie i Nazwisko: %s", sendername);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
-					format(string, sizeof(string), "- SSN: %d%d%d%d%d%d%d", PlayerInfo[playerid][pMember],age,PlayerInfo[playerid][pLider],PlayerInfo[playerid][pPnumber],PlayerInfo[playerid][Job],PlayerInfo[playerid][pGender],PlayerInfo[playerid][pLevel]);
+					format(string, sizeof(string), "- SSN: %d%d%d%d%d%d%d", PlayerInfo[playerid][pMember],age,PlayerInfo[playerid][pLider],PlayerInfo[playerid][pPnumber],PlayerInfo[playerid][pJob],PlayerInfo[playerid][pGender],PlayerInfo[playerid][pLevel]);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
 					format(string, sizeof(string), "- P³eæ: %s", atext);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
@@ -121,7 +121,7 @@ YCMD:pokazdowod(playerid, params[], help)
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
 					format(string, sizeof(string), "- Wiek: %d", age);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
-					if(PlayerInfo[playerid][Job] >= 1 && PlayerInfo[playerid][Job] != 9 && PlayerInfo[playerid][Job] != 4 && PlayerInfo[playerid][Job] != 5)
+					if(PlayerInfo[playerid][pJob] >= 1 && PlayerInfo[playerid][pJob] != 9 && PlayerInfo[playerid][pJob] != 4 && PlayerInfo[playerid][pJob] != 5)
 					{
 						format(string, sizeof(string), "- Praca: %s", jtext);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);

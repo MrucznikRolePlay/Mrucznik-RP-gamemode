@@ -45,7 +45,7 @@ YCMD:naucz(playerid, params[], help)
             SendClientMessage(playerid, COLOR_LIGHTGREEN, "Aby zarobic dawaj 2-4 razy wiêksze ceny");
             return 1;
         }
-        if(PlayerInfo[playerid][Job] == 12 || PlayerInfo[playerid][pAdmin] >= 1000)
+        if(PlayerInfo[playerid][pJob] == 12 || PlayerInfo[playerid][pAdmin] >= 1000)
         {
             if(ProxDetectorS(8.0, playerid, playa) && IsPlayerInRangeOfPoint(playerid, 9.0, 762.9852,2.4439,1001.5942))
             {

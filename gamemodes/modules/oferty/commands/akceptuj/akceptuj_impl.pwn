@@ -491,7 +491,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                 else if(level >= 101 && level <= 200) { points = 60; }
                 else if(level >= 201 && level <= 400) { points = 70; }
                 else if(level >= 401) { points = 80; }
-                if(PlayerInfo[playerid][Job] == 12)
+                if(PlayerInfo[playerid][pJob] == 12)
                 {
                     new clevel = PlayerInfo[playerid][pBoxSkill];
                     if(clevel >= 0 && clevel <= 50) { mypoints = 40; }
@@ -659,7 +659,7 @@ command_akceptuj_Impl(playerid, x_job[32])
             SendClientMessage(playerid, COLOR_GREY, "   Jesteœ na misji, nie mo¿esz u¿ywaæ tej komendy !");
             return 1;
         }
-        if(PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] < 400)
+        if(PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] < 400)
         {
             SendClientMessage(playerid, COLOR_GREY, "   Potrzebujesz 5 skilla kierowcy autobusu aby móc odbieraæ wezwania !");
             return 1;
@@ -738,7 +738,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job,"mechanic",true) == 0 || strcmp(x_job,"mechanik",true) == 0)
     {
-        if(PlayerInfo[playerid][Job] != 7)
+        if(PlayerInfo[playerid][pJob] != 7)
         {
             SendClientMessage(playerid, COLOR_GREY, "   Nie jesteœ mechanikiem !");
             return 1;
@@ -796,11 +796,11 @@ command_akceptuj_Impl(playerid, x_job[32])
             }
             SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Podpisa³eœ umowe na 2,5 godziny, zaczynasz now¹ pracê.");
             SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Gratulujemy nowej pracy, wpisz /pomoc aby zobaczyæ nowe komendy.");
-            PlayerInfo[playerid][Job] = GettingJob[playerid];
-            Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][Job]);
+            PlayerInfo[playerid][pJob] = GettingJob[playerid];
+            Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pJob]);
             if(GettingJob[playerid] == 14)
             {
-                PlayerInfo[playerid][Rank] = 0;
+                PlayerInfo[playerid][pRank] = 0;
 
                 SetPlayerInterior(playerid,0);
                 new rand = random(sizeof(gInviteSpawns));
@@ -945,7 +945,7 @@ command_akceptuj_Impl(playerid, x_job[32])
             {
                 if(giveplayerid != INVALID_PLAYER_ID)
                 {
-                    if(PlayerInfo[giveplayerid][Job] == 2)
+                    if(PlayerInfo[giveplayerid][pJob] == 2)
                     {
                         if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania pozwolenia prawniczego to $10 000. Nie masz tyle!");
                         GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));

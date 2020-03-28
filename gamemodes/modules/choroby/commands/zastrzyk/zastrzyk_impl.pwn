@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zastrzyk_Impl(playerid, giveplayerid)
 {
-	if ( !(IsAMedyk(playerid) && PlayerInfo[playerid][Rank] >= 1))
+	if ( !(IsAMedyk(playerid) && PlayerInfo[playerid][pRank] >= 1))
 	{
 		sendErrorMessage(playerid, "Nie masz 1 rangi lub nie jesteœ medykiem!");
         return 1;

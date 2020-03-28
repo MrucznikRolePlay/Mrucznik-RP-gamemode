@@ -91,7 +91,7 @@ YCMD:makemember(playerid, params[], help)
                     MruMySQL_SetAccInt("Member", giveplayer, level);
                     MruMySQL_SetAccInt("Rank", giveplayer, 0);
 
-                    PlayerInfo[para1][Rank] = 0;
+                    PlayerInfo[para1][pRank] = 0;
 				}
 			}//not connected
 		}

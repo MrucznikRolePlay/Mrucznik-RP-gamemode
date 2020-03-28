@@ -34,7 +34,7 @@ YCMD:zmienskin(playerid, params[], help)
     {
         if (IsAHA(playerid) || IsAPolicja(playerid) && (PlayerInfo[playerid][pMember] != 3 || PlayerInfo[playerid][pLider] != 3))
         {
-            if((PlayerInfo[playerid][Rank] >= 1 && IsAHA(playerid)) || (PlayerInfo[playerid][Rank] >= 2 && IsAPolicja(playerid)))
+            if((PlayerInfo[playerid][pRank] >= 1 && IsAHA(playerid)) || (PlayerInfo[playerid][pRank] >= 2 && IsAPolicja(playerid)))
             {
                 if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
                 {

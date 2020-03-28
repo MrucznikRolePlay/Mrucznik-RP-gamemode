@@ -1204,12 +1204,12 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pCrimes] = 0;
 	PlayerInfo[playerid][pDeaths] = 0;
 	PlayerInfo[playerid][pArrested] = 0;
-	PlayerInfo[playerid][WantedDeaths] = 0;
-	PlayerInfo[playerid][Item_PhoneBook] = 0;
-	PlayerInfo[playerid][LottoNr] = 0;
-	PlayerInfo[playerid][Fishes] = 0;
-	PlayerInfo[playerid][BiggestFish] = 0;
-	PlayerInfo[playerid][Job] = 0;
+	PlayerInfo[playerid][pWantedDeaths] = 0;
+	PlayerInfo[playerid][pItem_PhoneBook] = 0;
+	PlayerInfo[playerid][pLottoNr] = 0;
+	PlayerInfo[playerid][pFishes] = 0;
+	PlayerInfo[playerid][pBiggestFish] = 0;
+	PlayerInfo[playerid][pJob] = 0;
 	PlayerInfo[playerid][pPayCheck] = 0;
 	PlayerInfo[playerid][pHeadValue] = 0;
 	PlayerInfo[playerid][pBP] = 0;
@@ -1222,7 +1222,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pGroup] = 0;
 	PlayerInfo[playerid][pGroupsShow] = 0;
 	PlayerInfo[playerid][pOrg] = 0;
-	PlayerInfo[playerid][Rank] = 0;
+	PlayerInfo[playerid][pRank] = 0;
 	PlayerInfo[playerid][pChar] = 0;
 	PlayerInfo[playerid][pContractTime] = 0;
 	PlayerInfo[playerid][pDetSkill] = 0;
@@ -1297,7 +1297,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pMissionNr] = 0;
 	PlayerInfo[playerid][pWarns] = 0;
 	PlayerInfo[playerid][pFuel] = 0;
-	PlayerInfo[playerid][BlockType] = 0;
+	PlayerInfo[playerid][pBlockType] = 0;
 	PlayerInfo[playerid][pCB] = 0;
 	PlayerInfo[playerid][pWL] = 0;
 	PlayerInfo[playerid][pDowod] = 0;

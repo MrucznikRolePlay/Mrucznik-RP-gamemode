@@ -301,7 +301,7 @@ YCMD:sluzba(playerid, params[], help)
                 SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
             }
         }
-        else if(PlayerInfo[playerid][Job] == 7)
+        else if(PlayerInfo[playerid][pJob] == 7)
         {
             if(AntySpam[playerid] == 0)
             {

@@ -1940,7 +1940,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %s - pozostawiaj¹c VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), GetFractionLogName(PlayerInfo[id_Lidera][pMember]));
 			PlayerInfo[id_Lidera][pMember] = 0;
 			PlayerInfo[id_Lidera][pLider] = 0;
-			PlayerInfo[id_Lidera][Job] = 0;
+			PlayerInfo[id_Lidera][pJob] = 0;
 			orgUnInvitePlayer(id_Lidera);
 			MedicBill[id_Lidera] = 0;
 			SetPlayerSpawn(id_Lidera);
@@ -2156,53 +2156,53 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 			        case 0:
 			        {
-						if(PlayerInfo[playerid][Rank] == 0)
+						if(PlayerInfo[playerid][pRank] == 0)
 						{
 							
 							
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
-						else if(PlayerInfo[playerid][Rank] == 1)
+						else if(PlayerInfo[playerid][pRank] == 1)
 						{
 	
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
-						else if(PlayerInfo[playerid][Rank] == 2)
+						else if(PlayerInfo[playerid][pRank] == 2)
 						{
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty Wêdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broñ\n Patenty ¯eglarskie", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
-						else if(PlayerInfo[playerid][Rank] >= 3 || PlayerInfo[playerid][pLider] == 11)
+						else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
 						{
-							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Uniwersalne", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+							format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Uniwersalne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);	
 						}
 			        }
 			        case 1:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siê\n u tej samej osoby", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 2:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Teoretyczne\n{008080}Ka¿de kolejne podejœcie\n wymaga zachowania 1h odstêpu", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 3:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 4:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Rejestracja", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Rejestracja", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 5:
 			        {
-						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {FA9C1A} Zaraz Wracam", okienkoid+1,FracRang[11][PlayerInfo[playerid][Rank]],mojeimie,playerid);
+						format(string, sizeof(string), "Urz¹d Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {FA9C1A} Zaraz Wracam", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 6:
@@ -2867,7 +2867,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-			                PlayerInfo[playerid][Item_PhoneBook] = 1;
+			                PlayerInfo[playerid][pItem_PhoneBook] = 1;
 							format(string, sizeof(string), "   Ksi¹¿ka telefoniczna zakupiona! Mo¿esz teraz sprawdzaæ numery graczy !");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /numer <id/nick>.");
@@ -4400,8 +4400,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
-					        PlayerInfo[playerid][Rank] = 0;
+		                    PlayerInfo[playerid][pJob] = 14;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4415,8 +4415,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
-					        PlayerInfo[playerid][Rank] = 0;
+		                    PlayerInfo[playerid][pJob] = 14;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4430,9 +4430,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4446,9 +4446,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4462,9 +4462,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4478,9 +4478,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4494,9 +4494,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4510,9 +4510,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4526,9 +4526,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4542,9 +4542,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4558,9 +4558,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4574,9 +4574,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4590,9 +4590,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4606,9 +4606,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -4622,9 +4622,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        {
 							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda³o ci siê wyrobiæ licencje taksówkarsk¹! Zostajesz taksówkarzem. Œwietnie znasz miasto.", "OK", "WyjdŸ");
 		                    taxitest[playerid] = 0;
-		                    PlayerInfo[playerid][Job] = 14;
+		                    PlayerInfo[playerid][pJob] = 14;
 
-					        PlayerInfo[playerid][Rank] = 0;
+					        PlayerInfo[playerid][pRank] = 0;
 					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
@@ -12076,7 +12076,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(IsANoA(playerid))
  				{
- 				    if(PlayerInfo[playerid][Rank] >= 4)
+ 				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
 						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyœcigów: Wybierz opcjê", "Poka¿ trasy\nZorganizuj wyœcig\nEdytuj trasê\nUsuñ trasê", "Wybierz", "Anuluj");
 					}
@@ -12112,7 +12112,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(IsANoA(playerid))
  				{
- 				    if(PlayerInfo[playerid][Rank] >= 4)
+ 				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
 						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyœcigów: Wybierz opcjê", "Poka¿ trasy\nZorganizuj wyœcig\nEdytuj trasê\nUsuñ trasê", "Wybierz", "Anuluj");
 					}
@@ -12144,7 +12144,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
                 if(IsANoA(playerid))
  				{
- 				    if(PlayerInfo[playerid][Rank] >= 4)
+ 				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
 						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyœcigów: Wybierz opcjê", "Poka¿ trasy\nZorganizuj wyœcig\nEdytuj trasê\nUsuñ trasê", "Wybierz", "Anuluj");
 					}
@@ -12178,7 +12178,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(IsANoA(playerid))
  				{
- 				    if(PlayerInfo[playerid][Rank] >= 4)
+ 				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
 						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyœcigów: Wybierz opcjê", "Poka¿ trasy\nZorganizuj wyœcig\nEdytuj trasê\nUsuñ trasê", "Wybierz", "Anuluj");
 					}
@@ -12260,7 +12260,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 				SendClientMessage(playerid, COLOR_RED, "Trasa pomyœlnie zlikwidowana!");
 				tworzenietrasy[playerid] = 666;
-			    if(PlayerInfo[playerid][Rank] >= 4)
+			    if(PlayerInfo[playerid][pRank] >= 4)
  			    {
 					ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyœcigów: Wybierz opcjê", "Poka¿ trasy\nZorganizuj wyœcig\nEdytuj trasê\nUsuñ trasê", "Wybierz", "Anuluj");
 				}
@@ -12853,7 +12853,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 4://Shatei
 					{
-	    				if(PlayerInfo[playerid][Rank] <= 2)
+	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
 					   	SetPlayerSkinEx(playerid, 287);
@@ -12866,7 +12866,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 5://Gosho
 					{
-	    				if(PlayerInfo[playerid][Rank] <= 2)
+	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
 					   	SetPlayerSkinEx(playerid, 287);
@@ -12879,7 +12879,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 6://Taka Hosho
 					{
-	    				if(PlayerInfo[playerid][Rank] <= 2)
+	    				if(PlayerInfo[playerid][pRank] <= 2)
 		 				{
 						PlayerInfo[playerid][pSkin] = 287;
 					   	SetPlayerSkinEx(playerid, 287);
@@ -12892,7 +12892,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
     				case 7://Daimao
 					{
-	    				if(PlayerInfo[playerid][Rank] <= 5)
+	    				if(PlayerInfo[playerid][pRank] <= 5)
 		 				{
 						PlayerInfo[playerid][pSkin] = 186;
 					   	SetPlayerSkinEx(playerid, 186);
@@ -12905,7 +12905,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 8://Oyabun
 					{
-	    				if(PlayerInfo[playerid][Rank] <= 5)
+	    				if(PlayerInfo[playerid][pRank] <= 5)
 		 				{
 						PlayerInfo[playerid][pSkin] = 120;
 					   	SetPlayerSkinEx(playerid, 120);
@@ -13107,7 +13107,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   	{
 				   		if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-						    if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 50) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+						    if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 50) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia55]=1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS.");
@@ -13150,7 +13150,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-						 	if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 200) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+						 	if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 200) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia96]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -13175,7 +13175,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia82]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -13200,7 +13200,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia96]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
@@ -13225,7 +13225,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
-							if( (PlayerInfo[playerid][Job] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][Rank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
+							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 								Przystanek(playerid, COLOR_BLUE, "Wycieczka\nKoszt: 7500$\n Wiêcej informacji u kierowcy.");
 				    			/*BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= 15000;
@@ -13245,7 +13245,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					case 6:
 					{
-				    	if(PlayerInfo[playerid][Job] == 10)
+				    	if(PlayerInfo[playerid][pJob] == 10)
 			    			{
            						SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
 								CP[playerid]=1201;

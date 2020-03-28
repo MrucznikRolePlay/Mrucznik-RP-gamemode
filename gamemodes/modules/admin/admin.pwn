@@ -667,7 +667,7 @@ GiveBlockForPlayer(playerid, adminid, result[])
 			GetPlayerLogName(adminid),
 			GetPlayerLogName(playerid),
 			result);
-	PlayerInfo[playerid][BlockType] = 1;
+	PlayerInfo[playerid][pBlockType] = 1;
 	KickEx(playerid);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;

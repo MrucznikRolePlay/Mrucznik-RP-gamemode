@@ -32,7 +32,7 @@ YCMD:ukradnij(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
    	{
-        if(PlayerInfo[playerid][Job] == 5)
+        if(PlayerInfo[playerid][pJob] == 5)
 		{
 		    if(PlayerOnMission[playerid] > 0)
 		    {

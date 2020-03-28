@@ -1811,7 +1811,7 @@ public SaveAccounts()
 {
     foreach(new i : Player)
 	{
-		if(PlayerInfo[i][Job] > 0)
+		if(PlayerInfo[i][pJob] > 0)
 		{
 			if(PlayerInfo[i][pContractTime] < 25)
 			{
@@ -1851,57 +1851,57 @@ public CustomPickups()
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 322.3034,317.0233,999.1484))
 		{
-			if(PlayerInfo[i][Job] > 0 || PlayerInfo[i][pMember] > 0) {}
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Lowca Nagrod~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 310.3626,-1503.3282,13.8096))
 		{
-			if(PlayerInfo[i][Job] > 0) {}
+			if(PlayerInfo[i][pJob] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Prawnikiem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1215.1304,-11.8431,1000.9219))
 		{
-			if(PlayerInfo[i][Job] > 0 || PlayerInfo[i][pMember] > 0) {}
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Prostytutka~n~~w~Wpisz /dolacz jesli chcesz nia zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2166.3772,-1675.3829,15.0859))
 		{
-			if(PlayerInfo[i][Job] > 0 || PlayerInfo[i][pMember] > 0) {}
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Dilerem Dragow~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1109.3318,-1796.3042,16.5938))
 		{
-			if(PlayerInfo[i][Job] > 0) {}
+			if(PlayerInfo[i][pJob] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Zlodziejem Aut~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 0.5,1820.0637,-1315.9836,109.9520))
 		{
 			if(PlayerInfo[i][pMember] == 9 || PlayerInfo[i][pLider] == 9) { GameTextForPlayer(i, "~w~Wpisz ~r~/gazeta ~w~aby stworzyc nowa gazete",5000,3); }
-			else if(PlayerInfo[i][Job] == 15) { GameTextForPlayer(i, "~w~Wpisz ~r~/gazety ~w~aby zobaczyc wszystki gazety",5000, 3); }
+			else if(PlayerInfo[i][pJob] == 15) { GameTextForPlayer(i, "~w~Wpisz ~r~/gazety ~w~aby zobaczyc wszystki gazety",5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, -1932.3859,276.2117,41.0391) || mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2769.8376,-1610.7819,10.9219))
 		{
-			if(PlayerInfo[i][Job] > 0 || PlayerInfo[i][pMember] > 0) {}
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Mechanikiem i Kierowca Wyscigowym~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2226.1716,-1718.1792,13.5165))
 		{
-			if(PlayerInfo[i][Job] > 0 || PlayerInfo[i][pMember] > 0) {}
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Ochroniarzem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1366.4325,-1275.2096,13.5469))
 		{
-			if(PlayerInfo[i][Job] > 0 || PlayerInfo[i][pMember] > 0) {}
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Dilerem Broni~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 766.0804,14.5133,1000.7004))
 		{
-			if(PlayerInfo[i][Job] > 0 || PlayerInfo[i][pMember] > 0) {}
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Bokserem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, -77.7288,-1136.3896,1.0781))
 		{
-			if(PlayerInfo[i][Job] > 0 || PlayerInfo[i][pMember] > 0) {}
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Truckerem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1381.0413,-1088.8511,27.3906))
@@ -2897,15 +2897,15 @@ public JednaSekundaTimer()
 							SetPlayerInterior(Boxer1, 5); SetPlayerInterior(Boxer2, 5);
 							GetPlayerName(Boxer1, loser, sizeof(loser));
 							GetPlayerName(Boxer2, winner, sizeof(winner));
-							if(PlayerInfo[Boxer1][Job] == 12) { PlayerInfo[Boxer1][pLoses] += 1; }
-							if(PlayerInfo[Boxer2][Job] == 12) { PlayerInfo[Boxer2][pWins] += 1; }
+							if(PlayerInfo[Boxer1][pJob] == 12) { PlayerInfo[Boxer1][pLoses] += 1; }
+							if(PlayerInfo[Boxer2][pJob] == 12) { PlayerInfo[Boxer2][pWins] += 1; }
 							if(TBoxer < 255)
 							{
 								if(IsPlayerConnected(TBoxer))
 								{
 									if(TBoxer != Boxer2)
 									{
-										if(PlayerInfo[Boxer2][Job] == 12)
+										if(PlayerInfo[Boxer2][pJob] == 12)
 										{
 											TBoxer = Boxer2;
 											GetPlayerName(TBoxer, titel, sizeof(titel));
@@ -2960,7 +2960,7 @@ public JednaSekundaTimer()
 								SetPlayerHealth(Boxer2, 50.0);
 							}
 							GameTextForPlayer(Boxer1, "~g~Walka skonczona", 5000, 1); GameTextForPlayer(Boxer2, "~g~Walka skonczona", 5000, 1);
-							if(PlayerInfo[Boxer2][Job] == 12) { PlayerInfo[Boxer2][pBoxSkill] += 1; }
+							if(PlayerInfo[Boxer2][pJob] == 12) { PlayerInfo[Boxer2][pBoxSkill] += 1; }
 							PlayerBoxing[Boxer1] = 0;
 							PlayerBoxing[Boxer2] = 0;
 						}
@@ -2973,15 +2973,15 @@ public JednaSekundaTimer()
 							SetPlayerInterior(Boxer1, 5); SetPlayerInterior(Boxer2, 5);
 							GetPlayerName(Boxer1, winner, sizeof(winner));
 							GetPlayerName(Boxer2, loser, sizeof(loser));
-							if(PlayerInfo[Boxer2][Job] == 12) { PlayerInfo[Boxer2][pLoses] += 1; }
-							if(PlayerInfo[Boxer1][Job] == 12) { PlayerInfo[Boxer1][pWins] += 1; }
+							if(PlayerInfo[Boxer2][pJob] == 12) { PlayerInfo[Boxer2][pLoses] += 1; }
+							if(PlayerInfo[Boxer1][pJob] == 12) { PlayerInfo[Boxer1][pWins] += 1; }
 							if(TBoxer < 255)
 							{
 								if(IsPlayerConnected(TBoxer))
 								{
 									if(TBoxer != Boxer1)
 									{
-										if(PlayerInfo[Boxer1][Job] == 12)
+										if(PlayerInfo[Boxer1][pJob] == 12)
 										{
 											TBoxer = Boxer1;
 											GetPlayerName(TBoxer, titel, sizeof(titel));
@@ -3036,7 +3036,7 @@ public JednaSekundaTimer()
 								SetPlayerHealth(Boxer2, 50.0);
 							}
 							GameTextForPlayer(Boxer1, "~g~Koniec walki", 5000, 1); GameTextForPlayer(Boxer2, "~g~Koniec walki", 5000, 1);
-							if(PlayerInfo[Boxer1][Job] == 12) { PlayerInfo[Boxer1][pBoxSkill] += 1; }
+							if(PlayerInfo[Boxer1][pJob] == 12) { PlayerInfo[Boxer1][pBoxSkill] += 1; }
 							PlayerBoxing[Boxer1] = 0;
 							PlayerBoxing[Boxer2] = 0;
 						}
@@ -3267,11 +3267,11 @@ public PlayersCheckerMinute()
 	{
 		if(gPlayerLogged[j] > 0)
 		{
-			if(PlayerInfo[j][Fishes] >= 5) 
+			if(PlayerInfo[j][pFishes] >= 5) 
 			{ 
 				if(FishCount[j] >= 14) //15 minut
 				{
-					PlayerInfo[j][Fishes] = 0; 
+					PlayerInfo[j][pFishes] = 0; 
 					FishCount[j] = 0;
 				} 
 				else 

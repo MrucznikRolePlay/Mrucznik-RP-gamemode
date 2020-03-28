@@ -378,7 +378,7 @@ YCMD:setgroup(playerid, params[], help)
 		}
 	}
     */
-    SendClientMessage(playerid, -1, sprintf("Aresztowanie NA RANGE [%d]: %d", PlayerInfo[playerid][Rank], PermsInfo[PlayerInfo[playerid][pGroup]][PlayerInfo[playerid][Rank]][GROUP_PERM_ARREST]));
+    SendClientMessage(playerid, -1, sprintf("Aresztowanie NA RANGE [%d]: %d", PlayerInfo[playerid][pRank], PermsInfo[PlayerInfo[playerid][pGroup]][PlayerInfo[playerid][pRank]][GROUP_PERM_ARREST]));
 	return 1;
 }
 
@@ -386,7 +386,7 @@ YCMD:test2(playerid, params[], help)
 {
     PlayerInfo[playerid][pGroup] = 2;
     new groupid = PlayerInfo[playerid][pGroup];
-    new rankid = PlayerInfo[playerid][Rank];
+    new rankid = PlayerInfo[playerid][pRank];
     PermsInfo[groupid][rankid][GROUP_PERM_ARREST] = 1;
     SendClientMessage(playerid, -1, sprintf("Aresztowanie: %d, Cos tam: %d", PermsInfo[groupid][rankid][GROUP_PERM_ARREST], PermsInfo[groupid][rankid][GROUP_PERM_TEST]));
     return 1;

@@ -38,14 +38,14 @@ YCMD:maska(playerid, params[], help)
 		}
 		if(IsAFBI(playerid))
 		{
-			if(PlayerInfo[playerid][Rank] < 2)
+			if(PlayerInfo[playerid][pRank] < 2)
 			{
 				return sendErrorMessage(playerid, "Maska jest dostêpna od [2] rangi");
 			}
 		}
 		else if(IsAPolicja(playerid))
 		{
-			if(PlayerInfo[playerid][Rank] < 3)
+			if(PlayerInfo[playerid][pRank] < 3)
 			{
 				return sendErrorMessage(playerid, "Maska jest dostêpna od [3] rangi");
 			}

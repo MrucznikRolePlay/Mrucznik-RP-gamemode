@@ -182,8 +182,8 @@ Player_CanUseCar(playerid, vehicleid)
             }
             if(CarData[lcarid][c_Owner] == 11)
             {
-                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][Rank] >= CarData[lcarid][c_Rang]) return 1;
-                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][Rank] < CarData[lcarid][c_Rang])
+                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][pRank] >= CarData[lcarid][c_Rang]) return 1;
+                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
 	        	{
                 	format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
 		        	sendTipMessageEx(playerid,COLOR_GREY,string);
@@ -194,7 +194,7 @@ Player_CanUseCar(playerid, vehicleid)
                 sendTipMessageEx(playerid,COLOR_GREY,string);
                 return 0;
             }
-	        if(PlayerInfo[playerid][Rank] < CarData[lcarid][c_Rang])
+	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
 	        {
                 format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
 		        sendTipMessageEx(playerid,COLOR_GREY,string);
@@ -225,10 +225,10 @@ Player_CanUseCar(playerid, vehicleid)
         }
         else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_JOB) //reszta do pracy
         {
-            if(CarData[lcarid][c_Owner] == PlayerInfo[playerid][Job])
+            if(CarData[lcarid][c_Owner] == PlayerInfo[playerid][pJob])
             {
                 new bool:wywal;
-                switch(PlayerInfo[playerid][Job])
+                switch(PlayerInfo[playerid][pJob])
                 {
                     case JOB_LOWCA: if(PlayerInfo[playerid][pDetSkill] < CarData[lcarid][c_Rang]) wywal=true;
                     case JOB_LAWYER: if(PlayerInfo[playerid][pLawSkill] < CarData[lcarid][c_Rang]) wywal=true;
@@ -240,7 +240,7 @@ Player_CanUseCar(playerid, vehicleid)
                 if(wywal)
                 {
 					new skill = 0;
-					switch(PlayerInfo[playerid][Job])
+					switch(PlayerInfo[playerid][pJob])
 					{
 						case JOB_LOWCA: skill = PlayerInfo[playerid][pDetSkill];
 						case JOB_LAWYER: skill = PlayerInfo[playerid][pLawSkill];
@@ -284,7 +284,7 @@ Player_CanUseCar(playerid, vehicleid)
                 sendTipMessageEx(playerid,COLOR_GREY,string);
                 return 0;
             }
-	        if(PlayerInfo[playerid][Rank] < CarData[lcarid][c_Rang])
+	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
 	        {
                 if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
                 format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);

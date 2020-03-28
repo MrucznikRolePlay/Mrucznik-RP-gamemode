@@ -34,7 +34,7 @@ YCMD:ochrona(playerid, params[], help)
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
-    if(PlayerInfo[playerid][Job] != 8)
+    if(PlayerInfo[playerid][pJob] != 8)
     {
 		sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ ochroniarzem!");
 		return 1;

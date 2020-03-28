@@ -387,7 +387,7 @@ YCMD:wyjdz(playerid, params[], help)
     		return 1;
     	}
     	// BAR - wyjscie
-    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1900.5961,-2494.9373,13.6266) && PlayerInfo[playerid][Rank] && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1900.5961,-2494.9373,13.6266) && PlayerInfo[playerid][pRank] && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
     	{
     		SetPlayerPos(playerid, 1898.4817,-2494.8752,13.6266);
     		SetPlayerFacingAngle(playerid, 271.3850);

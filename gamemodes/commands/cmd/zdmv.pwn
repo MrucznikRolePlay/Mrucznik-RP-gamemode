@@ -33,7 +33,7 @@ YCMD:zdmv(playerid, params[], help)
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
 
-	if((IsAnInstructor(playerid) && PlayerInfo[playerid][Rank] >= 1))
+	if((IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 1))
 	{
 		if(dmv == 1)
 		{

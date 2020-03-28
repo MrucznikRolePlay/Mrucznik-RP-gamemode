@@ -34,7 +34,7 @@ YCMD:pjtest(playerid, params[], help)
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
-	if(IsAUrzednik(playerid) && PlayerInfo[playerid][pLocal] == 108 && PlayerInfo[playerid][Rank] >= 1)
+	if(IsAUrzednik(playerid) && PlayerInfo[playerid][pLocal] == 108 && PlayerInfo[playerid][pRank] >= 1)
 	{
 		new giveplayerid;
 		if( sscanf(params, "k<fix>", giveplayerid))

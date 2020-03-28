@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_panelibizy_Impl(playerid)
 {
-    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][Rank] >= 6) 
+    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
     {
        if(IsPlayerInRangeOfPoint(playerid, 20, 433.1950,-1845.3390,-64.2206)){
             IbizaPanelCheck();

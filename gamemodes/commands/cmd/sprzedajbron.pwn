@@ -36,7 +36,7 @@ YCMD:sprzedajbron(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Job] == 9)
+        if(PlayerInfo[playerid][pJob] == 9)
         {
             new umiejetnosc;
             new skillz;

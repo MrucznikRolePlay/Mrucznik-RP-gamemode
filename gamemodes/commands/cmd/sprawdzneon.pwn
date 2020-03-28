@@ -30,7 +30,7 @@
 
 YCMD:sprawdzneon(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Job] == 7)
+    if(PlayerInfo[playerid][pJob] == 7)
     {
         if(gettime() < GetPVarInt(playerid, "checkNeonLimit")) return sendErrorMessage(playerid, "Neony mo¿esz sprawdzaæ co 40 sekund");
         if(PlayerInfo[playerid][pMechSkill] < 101) return sendErrorMessage(playerid, "Komenda od 3 skilla w górê");

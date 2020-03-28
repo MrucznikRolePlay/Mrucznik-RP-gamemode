@@ -30,7 +30,7 @@
 
 YCMD:wyprowadz(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][Rank] >= 2 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+	if(PlayerInfo[playerid][pRank] >= 2 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
 	{
 		new id;
 		if(sscanf(params, "d", id)) return sendTipMessage(playerid, "U¿yj /wyprowadz [id]");

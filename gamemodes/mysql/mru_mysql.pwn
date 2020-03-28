@@ -225,7 +225,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pGender],
 	PlayerInfo[playerid][pAge],
 	PlayerInfo[playerid][pOrigin],
-	PlayerInfo[playerid][CK],
+	PlayerInfo[playerid][pCK],
 	PlayerInfo[playerid][pMute],
 	PlayerInfo[playerid][pExp],
 	PlayerInfo[playerid][pBankMoney],
@@ -234,10 +234,10 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pKills],
 	PlayerInfo[playerid][pDeaths],
 	PlayerInfo[playerid][pArrested],
-	PlayerInfo[playerid][WantedDeaths],
-	PlayerInfo[playerid][Item_PhoneBook],
-	PlayerInfo[playerid][LottoNr],
-	PlayerInfo[playerid][Fishes]);
+	PlayerInfo[playerid][pWantedDeaths],
+	PlayerInfo[playerid][pItem_PhoneBook],
+	PlayerInfo[playerid][pLottoNr],
+	PlayerInfo[playerid][pFishes]);
 
     format(query, sizeof(query), "%s\
 	`BiggestFish`='%d',\
@@ -272,8 +272,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Czystka`='%d',\
     `CarSlots`='%d'\
 	WHERE `UID`='%d'", query,
-	PlayerInfo[playerid][BiggestFish],
-	PlayerInfo[playerid][Job],
+	PlayerInfo[playerid][pBiggestFish],
+	PlayerInfo[playerid][pJob],
 	PlayerInfo[playerid][pPayCheck],
 	PlayerInfo[playerid][pHeadValue],
 	PlayerInfo[playerid][pBP],
@@ -285,7 +285,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pMember],
 	PlayerInfo[playerid][pGroup],
 	PlayerInfo[playerid][pOrg],
-	(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][Rank]+1000) : (PlayerInfo[playerid][Rank]),
+	(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]),
 	PlayerInfo[playerid][pChar],
 	PlayerInfo[playerid][pSkin],
 	PlayerInfo[playerid][pContractTime],
@@ -464,7 +464,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pTut],
 	PlayerInfo[playerid][pMissionNr],
 	PlayerInfo[playerid][pWarns],
-    PlayerInfo[playerid][BlockType],
+    PlayerInfo[playerid][pBlockType],
 	PlayerInfo[playerid][pFuel],
 	PlayerInfo[playerid][pMarried],
 	PlayerInfo[playerid][pMarriedTo]);
@@ -585,7 +585,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pGender], 
 		PlayerInfo[playerid][pAge], 
 		PlayerInfo[playerid][pOrigin], 
-		PlayerInfo[playerid][CK], 
+		PlayerInfo[playerid][pCK], 
 		PlayerInfo[playerid][pMute], 
 		PlayerInfo[playerid][pExp], 
 		PlayerInfo[playerid][pBankMoney], 
@@ -594,12 +594,12 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pKills], 
 		PlayerInfo[playerid][pDeaths], 
 		PlayerInfo[playerid][pArrested], 
-		PlayerInfo[playerid][WantedDeaths], 
-		PlayerInfo[playerid][Item_PhoneBook], 
-		PlayerInfo[playerid][LottoNr], 
-		PlayerInfo[playerid][Fishes], 
-		PlayerInfo[playerid][BiggestFish], 
-		PlayerInfo[playerid][Job], 
+		PlayerInfo[playerid][pWantedDeaths], 
+		PlayerInfo[playerid][pItem_PhoneBook], 
+		PlayerInfo[playerid][pLottoNr], 
+		PlayerInfo[playerid][pFishes], 
+		PlayerInfo[playerid][pBiggestFish], 
+		PlayerInfo[playerid][pJob], 
 		PlayerInfo[playerid][pPayCheck], 
 		PlayerInfo[playerid][pHeadValue], 
 		PlayerInfo[playerid][pBP], 
@@ -611,7 +611,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pMember], 
 		PlayerInfo[playerid][pGroup], 
 		PlayerInfo[playerid][pOrg],
-		PlayerInfo[playerid][Rank], 
+		PlayerInfo[playerid][pRank], 
 		PlayerInfo[playerid][pChar], 
 		PlayerInfo[playerid][pSkin], 
 		PlayerInfo[playerid][pContractTime]);
@@ -709,7 +709,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pTut], 
 		PlayerInfo[playerid][pMissionNr], 
 		PlayerInfo[playerid][pWarns], 
-		PlayerInfo[playerid][BlockType], 
+		PlayerInfo[playerid][pBlockType], 
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 

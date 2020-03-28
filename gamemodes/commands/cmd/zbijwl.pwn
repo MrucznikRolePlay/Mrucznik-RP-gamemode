@@ -36,7 +36,7 @@ YCMD:zbijwl(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][Job] == 2)
+		if(PlayerInfo[playerid][pJob] == 2)
 	 	{
 	 	    new playa;
 			if( sscanf(params, "k<fix>", playa))

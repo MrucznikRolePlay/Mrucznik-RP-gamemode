@@ -32,7 +32,7 @@ YCMD:wyscig_start(playerid, params[], help)
 {
     if(IsANoA(playerid))
     {
-		if(PlayerInfo[playerid][Rank] >= 2)
+		if(PlayerInfo[playerid][pRank] >= 2)
 		{
             if(owyscig[playerid] != 666)
             {

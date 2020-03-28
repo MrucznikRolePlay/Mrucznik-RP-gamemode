@@ -26,7 +26,7 @@
 command_lowienie_Impl(playerid)
 {
     new string[128];
-    if(PlayerInfo[playerid][Fishes] >= 5)
+    if(PlayerInfo[playerid][pFishes] >= 5)
     {
         sendTipMessageEx(playerid, COLOR_GREY, sprintf("Odczekaj ~%d minut zanim znowu zaczniesz ³owiæ!", (15 - FishCount[playerid])));
         return 1;
@@ -103,7 +103,7 @@ command_lowienie_Impl(playerid)
         }
         if(PlayerFishes[playerid][pWeight1] == 0)
         {
-            PlayerInfo[playerid][Fishes] += 1;
+            PlayerInfo[playerid][pFishes] += 1;
             PlayerInfo[playerid][pFishSkill] += 1;
             format(fstring, sizeof(fstring), "%s", FishNames[rand]);
             strmid(PlayerFishes[playerid][pFish1], fstring, 0, strlen(fstring));
@@ -114,16 +114,16 @@ command_lowienie_Impl(playerid)
             PlayerFishes[playerid][pLastFish] = 1;
             PlayerFishes[playerid][pFid1] = rand;
             PlayerFishes[playerid][pFishID] = rand;
-            if(Caught > PlayerInfo[playerid][BiggestFish])
+            if(Caught > PlayerInfo[playerid][pBiggestFish])
             {
-                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][BiggestFish], Caught);
+                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][pBiggestFish], Caught);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                PlayerInfo[playerid][BiggestFish] = Caught;
+                PlayerInfo[playerid][pBiggestFish] = Caught;
             }
         }
         else if(PlayerFishes[playerid][pWeight2] == 0)
         {
-            PlayerInfo[playerid][Fishes] += 1;
+            PlayerInfo[playerid][pFishes] += 1;
             PlayerInfo[playerid][pFishSkill] += 1;
             format(fstring, sizeof(fstring), "%s", FishNames[rand]);
             strmid(PlayerFishes[playerid][pFish2], fstring, 0, strlen(fstring));
@@ -134,16 +134,16 @@ command_lowienie_Impl(playerid)
             PlayerFishes[playerid][pLastFish] = 2;
             PlayerFishes[playerid][pFid2] = rand;
             PlayerFishes[playerid][pFishID] = rand;
-            if(Caught > PlayerInfo[playerid][BiggestFish])
+            if(Caught > PlayerInfo[playerid][pBiggestFish])
             {
-                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][BiggestFish], Caught);
+                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][pBiggestFish], Caught);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                PlayerInfo[playerid][BiggestFish] = Caught;
+                PlayerInfo[playerid][pBiggestFish] = Caught;
             }
         }
         else if(PlayerFishes[playerid][pWeight3] == 0)
         {
-            PlayerInfo[playerid][Fishes] += 1;
+            PlayerInfo[playerid][pFishes] += 1;
             PlayerInfo[playerid][pFishSkill] += 1;
             format(fstring, sizeof(fstring), "%s", FishNames[rand]);
             strmid(PlayerFishes[playerid][pFish3], fstring, 0, strlen(fstring));
@@ -154,16 +154,16 @@ command_lowienie_Impl(playerid)
             PlayerFishes[playerid][pLastFish] = 3;
             PlayerFishes[playerid][pFid3] = rand;
             PlayerFishes[playerid][pFishID] = rand;
-            if(Caught > PlayerInfo[playerid][BiggestFish])
+            if(Caught > PlayerInfo[playerid][pBiggestFish])
             {
-                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][BiggestFish], Caught);
+                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][pBiggestFish], Caught);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                PlayerInfo[playerid][BiggestFish] = Caught;
+                PlayerInfo[playerid][pBiggestFish] = Caught;
             }
         }
         else if(PlayerFishes[playerid][pWeight4] == 0)
         {
-            PlayerInfo[playerid][Fishes] += 1;
+            PlayerInfo[playerid][pFishes] += 1;
             PlayerInfo[playerid][pFishSkill] += 1;
             format(fstring, sizeof(fstring), "%s", FishNames[rand]);
             strmid(PlayerFishes[playerid][pFish4], fstring, 0, strlen(fstring));
@@ -174,16 +174,16 @@ command_lowienie_Impl(playerid)
             PlayerFishes[playerid][pLastFish] = 4;
             PlayerFishes[playerid][pFid4] = rand;
             PlayerFishes[playerid][pFishID] = rand;
-            if(Caught > PlayerInfo[playerid][BiggestFish])
+            if(Caught > PlayerInfo[playerid][pBiggestFish])
             {
-                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][BiggestFish], Caught);
+                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][pBiggestFish], Caught);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                PlayerInfo[playerid][BiggestFish] = Caught;
+                PlayerInfo[playerid][pBiggestFish] = Caught;
             }
         }
         else if(PlayerFishes[playerid][pWeight5] == 0)
         {
-            PlayerInfo[playerid][Fishes] += 1;
+            PlayerInfo[playerid][pFishes] += 1;
             PlayerInfo[playerid][pFishSkill] += 1;
             format(fstring, sizeof(fstring), "%s", FishNames[rand]);
             strmid(PlayerFishes[playerid][pFish5], fstring, 0, strlen(fstring));
@@ -194,11 +194,11 @@ command_lowienie_Impl(playerid)
             PlayerFishes[playerid][pLastFish] = 5;
             PlayerFishes[playerid][pFid5] = rand;
             PlayerFishes[playerid][pFishID] = rand;
-            if(Caught > PlayerInfo[playerid][BiggestFish])
+            if(Caught > PlayerInfo[playerid][pBiggestFish])
             {
-                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][BiggestFish], Caught);
+                format(string, sizeof(string), "* Twój stary rekord wynosi³ %d kg, zosta³ on pobity i twój rekord wynosi teraz: %d KG.", PlayerInfo[playerid][pBiggestFish], Caught);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                PlayerInfo[playerid][BiggestFish] = Caught;
+                PlayerInfo[playerid][pBiggestFish] = Caught;
             }
         }
         else

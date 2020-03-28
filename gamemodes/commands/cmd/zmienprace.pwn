@@ -51,7 +51,7 @@ YCMD:zmienprace(playerid, params[], help)
                     if(!(0 <= level <= 17)) return 1;
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-					PlayerInfo[para1][Job] = level;
+					PlayerInfo[para1][pJob] = level;
 					Log(adminLog, INFO, "Admin %s zmieni³ pracê %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
 					format(string, sizeof(string), "   Twoja praca zosta³a zmieniona na %d przez %s", level, sendername);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);

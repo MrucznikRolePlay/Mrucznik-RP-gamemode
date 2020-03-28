@@ -1060,7 +1060,7 @@ public naczasbicie(playerid, playerid_atak){
 
 /*public UzyteKajdany(playerid,giveplayerid)
 {
-	if(Kajdanki_PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][Job] == 1)
+	if(Kajdanki_PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
 	{
 		//Kajdanki_Uzyte[playerid] = 0;
 		format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(giveplayerid));
@@ -2710,7 +2710,7 @@ DajBronieFrakcyjne(playerid)
 	        playerWeapons[playerid][weaponLegal10] = 1;
 	    }
 	}
-    else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][Rank] <= 3)
+    else if(GetPlayerFraction(playerid) == FRAC_ERS && PlayerInfo[playerid][pRank] <= 3)
 	{
         if(JobDuty[playerid] == 1)
         {
@@ -2981,7 +2981,7 @@ DajBronieOganizacji(playerid)
 
 DajBroniePracy(playerid)
 {
-	switch(PlayerInfo[playerid][Job])
+	switch(PlayerInfo[playerid][pJob])
 	{
 		case JOB_MECHANIC:
 		{
@@ -4131,18 +4131,18 @@ Lotto(number)
 	{
 		if(IsPlayerConnected(i))
 		{
-			if(PlayerInfo[i][LottoNr] > 0)
+			if(PlayerInfo[i][pLottoNr] > 0)
 			{
-				if(PlayerInfo[i][LottoNr] == number)
+				if(PlayerInfo[i][pLottoNr] == number)
 				{
 					winners++; 
 					status=2;
 				}
 				else 
 				{
-					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d.", PlayerInfo[i][LottoNr]);
+					format(string, sizeof(string), "Niestety nie uda³o Ci siê wygraæ loterii z numerem %d.", PlayerInfo[i][pLottoNr]);
 					SendClientMessage(i, COLOR_WHITE, string);
-					PlayerInfo[i][LottoNr] = 0; 
+					PlayerInfo[i][pLottoNr] = 0; 
 				}
 			}
 		}
@@ -4172,13 +4172,13 @@ Lotto(number)
 				status = 1;
 				break;
 			}
-			if(PlayerInfo[i2][LottoNr] > 0 && PlayerInfo[i2][LottoNr] == number)
+			if(PlayerInfo[i2][pLottoNr] > 0 && PlayerInfo[i2][pLottoNr] == number)
 			{
 				new kasaWin = Jackpot/dzielnik; 
 				format(string, sizeof(string), "%s wygra³ w totolotku %d$", GetNick(i2), kasaWin); 
 				OOCOff(COLOR_WHITE, string);
 				DajKase(i2, kasaWin);
-				PlayerInfo[i2][LottoNr] =0;
+				PlayerInfo[i2][pLottoNr] =0;
 				winners--;   
 			}
 		}
@@ -4472,9 +4472,9 @@ ShowStats2(playerid)
 	format(plCzas, sizeof(plCzas), "%d:%d", hour, minute); 
 	format(plPKT, sizeof(plPKT), "Punkty Karne: %d", PlayerInfo[playerid][pPK]);
 	format(plWL, sizeof(plWL), "WantedLevel: %d", PlayerInfo[playerid][pWL]); 
-	format(plRyba, sizeof(plRyba), "Ryba: %d kg", PlayerInfo[playerid][Fishes]); 
+	format(plRyba, sizeof(plRyba), "Ryba: %d kg", PlayerInfo[playerid][pFishes]); 
 	format(plWozKlucz, sizeof(plWozKlucz), "Klucze auta: %d", PlayerInfo[playerid][pKluczeAuta]);
-	format(plWantedD, sizeof(plWantedD), "Wanted-Death: %d", PlayerInfo[playerid][WantedDeaths]);
+	format(plWantedD, sizeof(plWantedD), "Wanted-Death: %d", PlayerInfo[playerid][pWantedDeaths]);
 	format(plAresztCzas, sizeof(plAresztCzas), "Czas aresztu: %d", PlayerInfo[playerid][pArrested]);  
 	new plRodzina[64], plRespekt[64], plOnline[64], plRodzinkaRank[64], plBMID[64], plBOID[64], plDom[64], plSkin[64], plWarny[64]; 
 	format(plUID, sizeof(plUID), "UID: %d", PlayerInfo[playerid][pUID]);
@@ -4495,7 +4495,7 @@ ShowStats2(playerid)
 	format(plMats, sizeof(plMats), "Mats: %d", PlayerInfo[playerid][pMats]);
 	format(plDrugs, sizeof(plDrugs), "Drugs: %d", PlayerInfo[playerid][pDrugs]); 
 	format(plAdmin, sizeof(plAdmin), "Admin: %d", PlayerInfo[playerid][pAdmin]); 
-	format(plPraca, sizeof(plPraca), "Praca: %s", JobNames[PlayerInfo[playerid][Job]]); 
+	format(plPraca, sizeof(plPraca), "Praca: %s", JobNames[PlayerInfo[playerid][pJob]]); 
 	format(plDom, sizeof(plDom), "Dom: %d", PlayerInfo[playerid][pDom]);
 	format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: Unknow"); 
 	format(plRespekt, sizeof(plRespekt), "Respekt: %d/%d", PlayerInfo[playerid][pExp], ((PlayerInfo[playerid][pLevel]+1)*levelexp)); 
@@ -4524,14 +4524,14 @@ ShowStats2(playerid)
 	{
 		if(orgIsValid(gPlayerOrg[playerid])) format(plRodzina, 30, "Rodzina: %s",OrgInfo[gPlayerOrg[playerid]][o_Name]);
 		//Przypisane rangi
-		if(strlen(FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][Rank]]) > 1)
+		if(strlen(FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]) > 1)
 		{
-			format(plRodzinkaRank, sizeof(plRodzinkaRank), "%s", FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][Rank]]);
+			format(plRodzinkaRank, sizeof(plRodzinkaRank), "%s", FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]);
 		}
 		//Rangi podstawowe
 		else
 		{
-			format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: %s", FamRang[0][PlayerInfo[playerid][Rank]]);
+			format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: %s", FamRang[0][PlayerInfo[playerid][pRank]]);
 		}
 		plFraction = "Frakcja: Brak";
 		plFractionRank = "Ranga: Brak"; 
@@ -4541,7 +4541,7 @@ ShowStats2(playerid)
 	{
 		plRodzina= "Rodzina: Brak";
 		plRodzinkaRank= "Ranga: Brak";
-		format(plFractionRank, sizeof(plFractionRank), "Ranga: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][Rank]]);
+		format(plFractionRank, sizeof(plFractionRank), "Ranga: %s", FracRang[PlayerInfo[playerid][pMember]][PlayerInfo[playerid][pRank]]);
 		format(plFraction, sizeof(plFraction), "Frakcja: %s", FractionNames[GetPlayerFraction(playerid)]);
 	}
 	else
@@ -4725,30 +4725,30 @@ ShowStats(playerid,targetid)
 	    if(GetPlayerOrg(targetid) != 0)//The 2 Organisations
 	    {
             //Przypisane rangi
-            if(strlen(FamRang[GetPlayerOrg(targetid)][PlayerInfo[targetid][Rank]]) > 1) format(rtext, sizeof(rtext), "%s", FamRang[GetPlayerOrg(targetid)][PlayerInfo[targetid][Rank]]);
+            if(strlen(FamRang[GetPlayerOrg(targetid)][PlayerInfo[targetid][pRank]]) > 1) format(rtext, sizeof(rtext), "%s", FamRang[GetPlayerOrg(targetid)][PlayerInfo[targetid][pRank]]);
             //Rangi podstawowe
-            else format(rtext, sizeof(rtext), "%s", FamRang[0][PlayerInfo[targetid][Rank]]);
+            else format(rtext, sizeof(rtext), "%s", FamRang[0][PlayerInfo[targetid][pRank]]);
 		}
 		else if(GetPlayerFraction(targetid) > 0)//PD Ranks
 		{
-            format(rtext, sizeof(rtext), "%s", FracRang[PlayerInfo[targetid][pMember]][PlayerInfo[targetid][Rank]]);
+            format(rtext, sizeof(rtext), "%s", FracRang[PlayerInfo[targetid][pMember]][PlayerInfo[targetid][pRank]]);
 		}
         else rtext = "Brak";
         new jtext[20];
-        format(jtext, 20, "%s", JobNames[PlayerInfo[targetid][Job]]);
+        format(jtext, 20, "%s", JobNames[PlayerInfo[targetid][pJob]]);
 		new drank[20];
 		if(IsPlayerPremiumOld(targetid)) { drank = "Sponsor"; }
 		else { drank = "Zwykly wieprz"; }
 		new age = PlayerInfo[targetid][pAge];
 		new ptime = PlayerInfo[targetid][pOnlineHours];
 		new znick = PlayerInfo[targetid][pZmienilNick];
-		new lotto = PlayerInfo[targetid][LottoNr];
+		new lotto = PlayerInfo[targetid][pLottoNr];
 		new deaths = PlayerInfo[targetid][pDeaths];
-		new fishes = PlayerInfo[targetid][Fishes];
-		new bigfish = PlayerInfo[targetid][BiggestFish];
+		new fishes = PlayerInfo[targetid][pFishes];
+		new bigfish = PlayerInfo[targetid][pBiggestFish];
 		new crimes = PlayerInfo[targetid][pCrimes];
 		new arrests = PlayerInfo[targetid][pArrested];
-		new warrests = PlayerInfo[targetid][WantedDeaths];
+		new warrests = PlayerInfo[targetid][pWantedDeaths];
 		new drugs = PlayerInfo[targetid][pDrugs];
 		new mats = PlayerInfo[targetid][pMats];
 		new wanted = PoziomPoszukiwania[targetid];
@@ -4804,7 +4804,7 @@ RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - givep
 		{
 			PlayerInfo[i][pMember] = 0;
 			PlayerInfo[i][pLider] = 0;
-			PlayerInfo[i][Job] = 0;
+			PlayerInfo[i][pJob] = 0;
 			orgUnInvitePlayer(i);
 			MedicBill[i] = 0;
 			SetPlayerSpawn(i);
@@ -4823,7 +4823,7 @@ RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - givep
 	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %s - usuwajac VLD.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetFractionLogName(givePlayerFrac));
 	PlayerInfo[giveplayerid][pMember] = 0;
 	PlayerInfo[giveplayerid][pLider] = 0;
-	PlayerInfo[giveplayerid][Job] = 0;
+	PlayerInfo[giveplayerid][pJob] = 0;
 	orgUnInvitePlayer(giveplayerid);
 	MedicBill[giveplayerid] = 0;
 	SetPlayerSpawn(giveplayerid);
@@ -5186,7 +5186,7 @@ orgGivePlayerRank(playerid, callerid, rankid)
     new lStr[128];
     format(lStr, 128, "ORG » Otrzyma³eœ %d rangê (%s) w organizacji %s. Nada³: %s.", rankid, (strlen(FamRang[PlayerInfo[playerid][pOrg]][rankid]) > 1) ? (FamRang[PlayerInfo[playerid][pOrg]][rankid]) : (FamRang[0][rankid]), OrgInfo[orgid][o_Name], (callerid == INVALID_PLAYER_ID) ? ("SYSTEM") : (GetNick(callerid)));
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
-    PlayerInfo[playerid][Rank] = rankid;
+    PlayerInfo[playerid][pRank] = rankid;
     return 1;
 }
 
@@ -7495,7 +7495,7 @@ SendJobMessage(job, color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][Job] == job)
+		    if(PlayerInfo[i][pJob] == job)
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -8353,7 +8353,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
-	PlayerInfo[para1][Job] = 0;
+	PlayerInfo[para1][pJob] = 0;
 	SetTimerEx("AntySB", 5000, 0, "d", para1);
 	AntySpawnBroni[para1] = 5;
 	orgUnInvitePlayer(para1);
@@ -9777,7 +9777,7 @@ ZoneTXD_Show(playerid, zoneid)
 {
     new bool:gang=false;
     new frac=GetPlayerFraction(playerid);
-    if((FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG) && PlayerInfo[playerid][Rank] > 3) gang = true;
+    if((FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG) && PlayerInfo[playerid][pRank] > 3) gang = true;
     if(ZoneControl[zoneid] != 0 && (ZoneControl[zoneid] == frac || ZoneControl[zoneid]-100==GetPlayerOrg(playerid))) gang = false;
 
     for(new i=0;i<3;i++)
@@ -10448,12 +10448,12 @@ GPSMode(playerid, bool:red = false)
 
 	if(red)
 	{
-		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][Rank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("- odwo³ujê RED") : ("potrzebne wsparcie! - CODE RED"));
+		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("- odwo³ujê RED") : ("potrzebne wsparcie! - CODE RED"));
 		PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
 	}
 	else
 	{
-		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][Rank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie!"));
+		format(string, sizeof(string), "=: %s %s %s GPS %s :=", FracRang[GetPlayerFraction(playerid)][PlayerInfo[playerid][pRank]], sendername, (PDGPS == playerid) ? ("deaktywowa³") : ("aktywowa³"), (PDGPS == playerid) ? ("") : ("potrzebne wsparcie!"));
 		PDGPS = (PDGPS == playerid) ? (-1) : (playerid);
 	}
 
@@ -11050,8 +11050,8 @@ ChangePlayerName(playerid, name[])
 		Remove_MySQL_Leader(playerid);
 		PlayerInfo[playerid][pLider] = 0;
 	}
-	PlayerInfo[playerid][Job] = 0;
-	PlayerInfo[playerid][Rank] = 0;
+	PlayerInfo[playerid][pJob] = 0;
+	PlayerInfo[playerid][pRank] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
 	SetPlayerName(playerid, name);
@@ -11304,7 +11304,7 @@ TJD_JobEnd(playerid, bool:quiter=false)
 
 TJD_CallCheckpoint(playerid, veh)
 {
-    if(PlayerInfo[playerid][Job] != JOB_TRUCKER) return 1;
+    if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return 1;
     if(GetVehicleModel(veh) == 578)
     {
         new idx = GetPVarInt(playerid, "trans");
@@ -11367,7 +11367,7 @@ TJD_CallCheckpoint(playerid, veh)
 
 TJD_CallRaceCheckpoint(playerid)
 {
-    if(PlayerInfo[playerid][Job] != JOB_TRUCKER) return;
+    if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
     if(GetPVarInt(playerid, "TJDend") == 1)
     {
         TJD_JobEnd(playerid);
@@ -11377,7 +11377,7 @@ TJD_CallRaceCheckpoint(playerid)
 
 TJD_CallEnterVeh(playerid, veh)
 {
-    if(PlayerInfo[playerid][Job] != JOB_TRUCKER) return;
+    if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
     if(GetVehicleModel(veh) == 530)
     {
         if(GLOBAL_DISABLETRUCKER) return;
@@ -11401,7 +11401,7 @@ TJD_CallEnterVeh(playerid, veh)
 
 TJD_CallExitVeh(playerid)
 {
-    if(PlayerInfo[playerid][Job] != JOB_TRUCKER) return;
+    if(PlayerInfo[playerid][pJob] != JOB_TRUCKER) return;
     if(GetPVarInt(playerid, "transjob") == 1)
     {
         if(GetPVarInt(playerid, "TJDend") == 1)

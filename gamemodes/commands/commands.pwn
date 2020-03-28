@@ -44,7 +44,6 @@
 #include "cmd/autoranny.pwn"
 #include "cmd/awans.pwn"
 #include "cmd/b.pwn"
-#include "cmd/balans.pwn"
 #include "cmd/ban.pwn"
 #include "cmd/bandana.pwn"
 #include "cmd/banip.pwn"

@@ -32,7 +32,7 @@ YCMD:namierz(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][Job] == 1 || PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2 || IsAHA(playerid))
+		if(PlayerInfo[playerid][pJob] == 1 || PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2 || IsAHA(playerid))
 		{
 			if(UsedFind[playerid] != 0)
 			{
@@ -68,7 +68,7 @@ YCMD:namierz(playerid, params[], help)
 				sendErrorMessage(playerid, "Nie uda³o siê namierzyæ telefonu...");
 				return 1;
 			}
-			if(PlayerInfo[playerid][Job] == 1 && lowcaz[playerid] != giveplayerid)
+			if(PlayerInfo[playerid][pJob] == 1 && lowcaz[playerid] != giveplayerid)
 			{
 				sendErrorMessage(playerid, "Nie masz zlecenia na tego gracza!");
 				return 1;

@@ -32,7 +32,7 @@ command_news_Impl(playerid, newsText[256])
     }
     else
     {
-        if(PlayerInfo[playerid][Rank] == 0) return sendErrorMessage(playerid, "Masz za nisk¹ rangê!"); 
+        if(PlayerInfo[playerid][pRank] == 0) return sendErrorMessage(playerid, "Masz za nisk¹ rangê!"); 
     }
 
     if(AntySpam[playerid] == 1)

@@ -34,7 +34,7 @@ YCMD:lotto(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][LottoNr] > 0)
+        if(PlayerInfo[playerid][pLottoNr] > 0)
         {
             sendTipMessageEx(playerid, COLOR_GREY, "Posiadasz ju¿ los loteryjny !");
             return 1;
@@ -55,7 +55,7 @@ YCMD:lotto(playerid, params[], help)
 		format(string, sizeof(string), "* Kupi³eœ los lotto z numerem: %d.", lottonr);
 		sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
 		ZabierzKase(playerid, 5000);
-		PlayerInfo[playerid][LottoNr] = lottonr;
+		PlayerInfo[playerid][pLottoNr] = lottonr;
         Jackpot = Jackpot+4500; //500 podatku od hazadru
     }
     return 1;

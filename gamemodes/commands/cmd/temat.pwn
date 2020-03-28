@@ -30,7 +30,7 @@
 
 YCMD:temat(playerid,cmdtext[], help)
 {
-    if(!((PlayerInfo[playerid][pMember] == 4 && PlayerInfo[playerid][Rank] >= 2) || PlayerInfo[playerid][pLider] == 4)) return SendClientMessage(playerid, COLOR_GRAD1, "   Nie nale¿ysz do LSMC albo nie masz 2 rangi.");
+    if(!((PlayerInfo[playerid][pMember] == 4 && PlayerInfo[playerid][pRank] >= 2) || PlayerInfo[playerid][pLider] == 4)) return SendClientMessage(playerid, COLOR_GRAD1, "   Nie nale¿ysz do LSMC albo nie masz 2 rangi.");
     if(!IsPlayerInRangeOfPoint(playerid, 5.0, 1165.83545, -1378.50378, 25.89570)) return 1;
     new tekscik[64];
     if(sscanf(cmdtext, "s[64]", tekscik)) return SendClientMessage (playerid, 0xAFAFAFAA, "Uzyj: /Temat: [Opisy]");

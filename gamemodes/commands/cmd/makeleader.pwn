@@ -119,7 +119,7 @@ YCMD:makeleader(playerid, params[], help)
 		{
 			gTeam[para1] = 11;
 			PlayerInfo[para1][pTeam] = 11;
-			PlayerInfo[para1][Rank] = 6;
+			PlayerInfo[para1][pRank] = 6;
 		}
 	}
 	return 1;

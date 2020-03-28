@@ -71,7 +71,7 @@ YCMD:wez(playerid, params[], help)
 			{ tel = 50; if(ammount < 1 || ammount > 30) { sendTipMessageEx(playerid, COLOR_GREY, "Mo¿esz braæ od 1 do 30g przy tym poziomie Dilera Dragów!"); return 1; } }
 			else if(level >= 401)
 			{ tel = 10; if(ammount < 1 || ammount > 99) { sendTipMessageEx(playerid, COLOR_GREY, "Mo¿esz braæ od 1 do 99g przy tym poziomie Dilera Dragów!"); return 1; } }
-		    if (PlayerInfo[playerid][Job] == 4 && PlayerToPoint(5.0, playerid, 322.6724,1117.9385,1083.8828) || PlayerInfo[playerid][Job] == 4 && PlayerToPoint(5.0, playerid, -1022.34930420,-2158.46484375,33.91813278))
+		    if (PlayerInfo[playerid][pJob] == 4 && PlayerToPoint(5.0, playerid, 322.6724,1117.9385,1083.8828) || PlayerInfo[playerid][pJob] == 4 && PlayerToPoint(5.0, playerid, -1022.34930420,-2158.46484375,33.91813278))
 			{
 			    price = ammount * tel;
 			    if(kaska[playerid] > price)

@@ -32,7 +32,7 @@ YCMD:kamera_wiezienie(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Job] == 2)
+        if(PlayerInfo[playerid][pJob] == 2)
         {
             if(PlayerToPoint(10.0,playerid,319.72470092773, -1548.3374023438, 13.845289230347) || PlayerToPoint(5.0,playerid,214.6996,121.2643,1008.2188))
             {

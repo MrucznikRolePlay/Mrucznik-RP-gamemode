@@ -31,7 +31,7 @@
 */
 YCMD:sprzedajzestaw(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][Job] == JOB_MECHANIC)
+	if(PlayerInfo[playerid][pJob] == JOB_MECHANIC)
 	{
 		new id;
 		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /sprzedajzestaw [id]");
