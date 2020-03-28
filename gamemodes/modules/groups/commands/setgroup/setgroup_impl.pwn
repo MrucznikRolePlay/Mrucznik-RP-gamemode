@@ -27,7 +27,7 @@ command_setgroup_Impl(playerid, id, uid)
 {
     if(!IsAScripter(playerid) && !Uprawnienia(playerid, ACCESS_MAKELEADER) && !Uprawnienia(playerid, ACCESS_MAKELEADER)) return 1;
 
-    if(GroupInfo[uid][UID] == 0 || uid > MAX_GROUPS)
+    if(uid <= 0 || uid > MAX_GROUPS || GroupInfo[uid][UID] == 0)
     {
         sendTipMessage(playerid, "B³êdne UID grupy.");
         return 1;

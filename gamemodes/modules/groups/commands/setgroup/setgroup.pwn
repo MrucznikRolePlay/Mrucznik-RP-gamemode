@@ -58,6 +58,13 @@ YCMD:setgroup(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /setgroup [ID/CZÊŒÆ_NICKU] [UID GRUPY]"); 
 		return 1;
 	}
+	
+	
+	if(id == INVALID_PLAYER_ID)
+	{
+		sendErrorMessage(playerid, "Nie ma takiego gracza !");
+		return 1;
+	}
     
     //command body
     return command_setgroup_Impl(playerid, id, gid);

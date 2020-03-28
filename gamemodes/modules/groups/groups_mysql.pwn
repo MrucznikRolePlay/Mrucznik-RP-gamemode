@@ -30,17 +30,14 @@
 forward MruMySQL_LoadGroups();
 public MruMySQL_LoadGroups()
 {
-	new query[144], i = 0;
-    format(query, sizeof(query), "SELECT * FROM `mru_groups`");
-	mysql_query(query);
-
+	new query[256], i;
+    mysql_query("SELECT * FROM `mru_groups`");
     mysql_store_result();
-
-    while(mysql_fetch_row_format(query, "|") == 1)
+    while(mysql_fetch_row_format(query, "|"))
 	{
 	    new uid;
     	sscanf(query, "p<|>d", uid);
-		sscanf(query,  "p<|>dds[32]s[6]ffffddd", 
+		sscanf(query,  "p<|>dds[32]s[6]ffffddd",
 			GroupInfo[uid][UID],
 			GroupInfo[uid][Type],
 			GroupInfo[uid][Name],
@@ -62,13 +59,10 @@ public MruMySQL_LoadGroups()
 forward MruMySQL_LoadRanks();
 public MruMySQL_LoadRanks()
 {
-	new query[450], i = 0;
-    format(query, sizeof(query), "SELECT * FROM `mru_groups_rank`");
-	mysql_query(query);
-
+	new query[256], i;
+    mysql_query("SELECT * FROM `mru_groups_rank`");
     mysql_store_result();
-
-    while(mysql_fetch_row_format(query, "|") == 1)
+    while(mysql_fetch_row_format(query, "|"))
 	{
 		new recordid, group_id, level, name[32];
 		sscanf(query,  "p<|>ddds[32]", 
@@ -89,13 +83,10 @@ public MruMySQL_LoadRanks()
 forward MruMySQL_LoadRanksPerms();
 public MruMySQL_LoadRanksPerms()
 {
-	new query[450], i = 0;
-    format(query, sizeof(query), "SELECT * FROM `mru_groups_perm`");
-	mysql_query(query);
-
+	new query[256], i;
+    mysql_query("SELECT * FROM `mru_groups_perm`");
     mysql_store_result();
-
-    while(mysql_fetch_row_format(query, "|") == 1)
+    while(mysql_fetch_row_format(query, "|"))
 	{
 		new recordid, group_id, level, name[32], permissions[MAX_PERMISSION];
 		sscanf(query,  "p<|>ddds[32]dd", 
