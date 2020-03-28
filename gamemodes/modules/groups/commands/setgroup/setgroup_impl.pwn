@@ -35,6 +35,7 @@ command_setgroup_Impl(playerid, id, uid)
 
     sendTipMessageEx(id, COLOR_P@, sprintf("Administrator %s ustawi³ Ci przynale¿noœæ do grupy %s [UID %d]", GetNickEx(playerid), GroupInfo[uid][gName], uid)); 
     sendTipMessageEx(playerid, COLOR_P@, sprintf("Ustawi³eœ przynale¿noœæ do grupy %s [UID %d] dla %s", GroupInfo[uid][gName], uid, GetNick(id))); 
+    Log(adminLog, INFO, "Admin %s ustawi³ graczowi %s przynale¿noœæ do grupy UID [%d]", GetPlayerLogName(playerid), GetPlayerLogName(id), uid);
     SetPlayerGroup(id, uid);
     return 1;
 }

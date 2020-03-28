@@ -35,7 +35,7 @@ YCMD:dskill(playerid, params[], help)
 	    new giveplayerid, idskill, level;
 		if( sscanf(params, "k<fix>dd", giveplayerid, idskill, level))
 		{
-			sendTipMessage(playerid, "/dskill [id gracza] [id skilla] [pLevel]");
+			sendTipMessage(playerid, "/dskill [id gracza] [id skilla] [level]");
 			return 1;
 		}
 

@@ -956,9 +956,6 @@ static Aliases()
 	//newbie
 	Command_AddAltNamed("newbie", "n");
 
-	//noa
-	Command_AddAltNamed("noa", "fdu");
-
 	//nos
 	Command_AddAltNamed("nos", "nitro");
 

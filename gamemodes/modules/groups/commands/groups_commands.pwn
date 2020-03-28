@@ -30,11 +30,13 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "group\group.pwn"
 #include "setgroup\setgroup.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_group();
     command_setgroup();
 }

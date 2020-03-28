@@ -266,14 +266,23 @@ public OnGameModeInit()
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	LoadBusiness(); 
-	LoadBusinessPickup(); 
-	//LoadActors(); 	
+	LoadBusinessPickup(); 	
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
-    LoadConfig();
+
+	//Config
+	LoadConfig();
+
+	//Groups
+	MruMySQL_LoadGroups();
+	MruMySQL_LoadRanks();
+	MruMySQL_LoadRanksPerms();
+
+	//Old Groups - to remove \/
     WczytajRangi();
     WczytajSkiny();
+
     //Konfiguracja ID skryptu dla rodzin  - daj -1 w bazie aby wy³¹czyæ korzystanie ze skryptu dla slotu
     Config_FamilyScript();
     //

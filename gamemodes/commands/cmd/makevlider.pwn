@@ -40,7 +40,7 @@ YCMD:makevleader(playerid, params[], help)
 				new giveplayerid, value; 
 				if(sscanf(params, "k<fix>d", giveplayerid, value))
 				{
-					sendTipMessage(playerid, "U¿yj /makevleader [pNick] [Poziom Lidera]"); 
+					sendTipMessage(playerid, "U¿yj /makevleader [Nick] [Poziom Lidera]"); 
 					sendTipMessage(playerid, "Poziom 0 - NIKT [Zabiera lidera pomocniczego]");
 					sendTipMessage(playerid, "Poziom 2 - VLD [Pe³ny dostêp, nie mo¿e mianowaæ innych VLD]");
 					sendTipMessage(playerid, "Poziom 3 - Kierownik [Tylko /przyjmij, /awans /zwolnij"); 

@@ -27,7 +27,7 @@
 #define MAX_RANKS           11 //[0 - 10] rang
 #define MAX_PERMISSION      2 // iloœæ uprawnieñ
 
-#define GROUP_PERM_TEST  	0
+#define GROUP_PERM_WYPLAC  	0
 #define GROUP_PERM_ARREST  	1
 
 #define GROUP_PERM_CHAT       4
@@ -37,7 +37,6 @@
 #define GROUP_PERM_CRIME      8
 #define GROUP_PERM_GPS        9
 #define GROUP_PERM_LINA       10
-#define GROUP_PERM_WYPLAC     11
 #define GROUP_PERM_CHATIC     12
 #define GROUP_PERM_HAK	   	  13
 #define GROUP_PERM_INCOGNITO  14

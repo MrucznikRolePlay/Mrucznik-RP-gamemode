@@ -10938,6 +10938,8 @@ Oil_Destroy(lID)
         if(GetPVarInt(i, "oil_id") != lID) continue;
         Oil_UnloadPTXD(i);
         SetPVarInt(i, "oil_clear", 0);
+		ClearAnimations(i);
+	    SetPlayerSpecialAction(i,SPECIAL_ACTION_NONE);
         TogglePlayerControllable(i, 1);
         TextDrawHideForPlayer(i, OilTXD_BG[0]);
         TextDrawHideForPlayer(i, OilTXD_BG[1]);

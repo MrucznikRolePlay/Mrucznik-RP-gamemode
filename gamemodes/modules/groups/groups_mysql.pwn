@@ -88,22 +88,42 @@ public MruMySQL_LoadRanksPerms()
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
 	{
-		new recordid, group_id, level, name[32], permissions[MAX_PERMISSION];
-		sscanf(query,  "p<|>ddds[32]dd", 
+		new recordid, group_id, level;
+		sscanf(query,  "p<|>ddd", 
+			recordid,
+			group_id,
+			level
+		);
+		sscanf(query,  "p<|>ddddd", 
 			recordid,
 			group_id,
 			level,
-			name,
-			permissions[GROUP_PERM_TEST],
-			permissions[GROUP_PERM_ARREST]
+			PermsInfo[group_id][level][GROUP_PERM_WYPLAC],
+			PermsInfo[group_id][level][GROUP_PERM_ARREST]
 		);
-
-		PermsInfo[group_id][level][GROUP_PERM_TEST] = permissions[GROUP_PERM_TEST];
-		PermsInfo[group_id][level][GROUP_PERM_ARREST] = permissions[GROUP_PERM_ARREST];
 		i++;
 	}
 	mysql_free_result();
 	printf("Za³adowano uprawnienia rang - %d (GRUPY)", i);
+}
+
+forward MruMySQL_SaveGroup(uid);
+public MruMySQL_SaveGroup(uid)
+{
+	new str[256];
+	format(str, sizeof(str), "UPDATE `mru_groups` SET `name` = '%s', `color` = '%s', `spawnX` = '%f', `spawnY` = '%f', `spawnZ` = '%f', `spawnA` = '%f', `spawnVW` = '%d', `spawnINT` = '%d', `balance` = '%d' WHERE `id` = '%d'",
+		GroupInfo[uid][gName],
+		GroupInfo[uid][gColor],
+		GroupInfo[uid][gSpawnX],
+		GroupInfo[uid][gSpawnY],
+		GroupInfo[uid][gSpawnZ],
+		GroupInfo[uid][gSpawnA],
+		GroupInfo[uid][gSpawnVW],
+		GroupInfo[uid][gSpawnINT],
+		GroupInfo[uid][gBalance],
+		uid
+	);
+	mysql_query(str);
 }
 
 //end

@@ -109,31 +109,19 @@ hook OnPlayerConnect(playerid)
 
 hook OnGameModeInit()
 {
-	MruMySQL_LoadGroups();
-	MruMySQL_LoadRanks();
-	MruMySQL_LoadRanksPerms();
+	print("Grupy by Creative");
+	return 1;
 }
 
 hook OnPlayerClickPTextDraw(playerid, PlayerText:playertextid)
 {
-	/*if(playertextid == Textdraw4[playerid])
+	if(playertextid == Textdraw4[playerid])
 	{
 		ShowGroupsForPlayer(playerid);
-		cmd_g(playerid, "1 online");
+		RunCommand(playerid, "/g",  "online");
 		CancelSelectTextDraw(playerid);
 	}
-	if(playertextid == Textdraw5[playerid])
-	{
-		ShowGroupsForPlayer(playerid);
-		cmd_g(playerid, "2 online");
-		CancelSelectTextDraw(playerid);
-	}
-	if(playertextid == Textdraw6[playerid])
-	{
-		ShowGroupsForPlayer(playerid);
-		cmd_g(playerid, "3 online");
-		CancelSelectTextDraw(playerid);
-	}
+	/*
 	if(playertextid == Textdraw7[playerid])
 	{
 		ShowGroupsForPlayer(playerid);
