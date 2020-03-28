@@ -464,7 +464,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pTut],
 	PlayerInfo[playerid][pMissionNr],
 	PlayerInfo[playerid][pWarns],
-    PlayerInfo[playerid][pBlock],
+    PlayerInfo[playerid][BlockType],
 	PlayerInfo[playerid][pFuel],
 	PlayerInfo[playerid][pMarried],
 	PlayerInfo[playerid][pMarriedTo]);
@@ -709,7 +709,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pTut], 
 		PlayerInfo[playerid][pMissionNr], 
 		PlayerInfo[playerid][pWarns], 
-		PlayerInfo[playerid][pBlock], 
+		PlayerInfo[playerid][BlockType], 
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 

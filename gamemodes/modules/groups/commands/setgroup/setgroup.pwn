@@ -53,9 +53,9 @@ YCMD:setgroup(playerid, params[], help)
     }
 
 	new id, gid;
-	if(sscanf(params, "ud", id, gid))
+	if(sscanf(params, "k<fix>d", id, gid))
 	{
-		SendClientMessage(playerid, COLOR_GREY, "TIP: /setgroup [ID/Po³owa nicku] [UID grupy]");
+		sendTipMessage(playerid, "U¿yj /setgroup [ID/CZÊŒÆ_NICKU] [UID GRUPY]"); 
 		return 1;
 	}
     

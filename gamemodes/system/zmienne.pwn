@@ -1297,7 +1297,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pMissionNr] = 0;
 	PlayerInfo[playerid][pWarns] = 0;
 	PlayerInfo[playerid][pFuel] = 0;
-	PlayerInfo[playerid][pBlock] = 0;
+	PlayerInfo[playerid][BlockType] = 0;
 	PlayerInfo[playerid][pCB] = 0;
 	PlayerInfo[playerid][pWL] = 0;
 	PlayerInfo[playerid][pDowod] = 0;

@@ -5951,14 +5951,14 @@ OnPlayerLogin(playerid, password[])
 		}
 
 		//Sprawdzanie blocków:
-		if(PlayerInfo[playerid][pBlock] == 1)
+		if(PlayerInfo[playerid][BlockType] == 1)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
 			KickEx(playerid);
 			return 1;
 		}
-        else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][CK] == 1)
+        else if(PlayerInfo[playerid][BlockType] == 2 || PlayerInfo[playerid][CK] == 1)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Ta postaæ jest uœmiercona, nie mo¿esz na niej graæ.");
 			KickEx(playerid);

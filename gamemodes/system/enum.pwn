@@ -1308,7 +1308,7 @@ enum pInfo
 	pTut,
 	pMissionNr,
 	pWarns,
-	pBlock,
+	BlockType,
 	pFuel,
 	pMarried,
 	pMarriedTo[32],
@@ -1387,7 +1387,7 @@ new PlayerInfo[MAX_PLAYERS][pInfo];
 enum pPInfo
 {
 	PERS_KB,//Personalizacja korzystania z konta bankowego
-	PERS_AD,//Personalizacja wyœwietlania og³oszeñ
+	PERS_AD,//Personalizacja wyœwietlania og³oszeñ i newsów
 	PERS_LICZNIK,//Wyœwietlanie licznika
 	PERS_FINFO,//Og³oszenia frakcji
 	PERS_FAMINFO,//OG£OSZENIA RODZIN
