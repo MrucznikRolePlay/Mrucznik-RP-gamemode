@@ -67,7 +67,7 @@ YCMD:ban(playerid, params[], help)
 						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina, P@ i ZG!");
 						return 1;
 					}
-					if(PlayerInfo[giveplayerid][Level] > 1 && PlayerInfo[playerid][pZG] >= 4 && PlayerInfo[playerid][pZG] < 6)
+					if(PlayerInfo[giveplayerid][pLevel] > 1 && PlayerInfo[playerid][pZG] >= 4 && PlayerInfo[playerid][pZG] < 6)
 					{
 						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ gracza z levelem wiekszym niz 1!");
 						return 1;

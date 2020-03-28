@@ -39,7 +39,7 @@ YCMD:r(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj (/r)adio [tekst]");
 			return 1;
 		}
-		if(PlayerInfo[playerid][Mute] == 1)
+		if(PlayerInfo[playerid][pMute] == 1)
 		{
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
 			return 1;

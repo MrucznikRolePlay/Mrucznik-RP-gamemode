@@ -30,7 +30,7 @@
 
 timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 {
-	if(PlayerInfo[playerid][UID] != uid) return 1;
+	if(PlayerInfo[playerid][pUID] != uid) return 1;
 
 	if(IsPlayerSick(playerid, disease)) 
 	{

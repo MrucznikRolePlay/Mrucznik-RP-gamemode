@@ -68,7 +68,7 @@ YCMD:setname(playerid, params[], help)
 					format(giveplayer_log_name, sizeof(giveplayer_log_name), "%s", GetPlayerLogName(giveplayerid));
                     if(ChangePlayerName(giveplayerid, newname))
                     {
-    					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", GetNickEx(playerid),giveplayer,PlayerInfo[giveplayerid][UID],newname);
+    					format(string, sizeof(string), "Administrator %s zmieni³ nick %s[%d] - Nowy nick: %s", GetNickEx(playerid),giveplayer,PlayerInfo[giveplayerid][pUID],newname);
     					SendClientMessageToAll(COLOR_LIGHTRED, string);
 						Log(adminLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);
 						Log(nickLog, INFO, "Admin %s zmieni³ %s nick na %s", sender_log_name, giveplayer_log_name, newname);

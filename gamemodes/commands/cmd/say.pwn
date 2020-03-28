@@ -36,7 +36,7 @@ YCMD:say(playerid, params[], help)
 		{
 			return 1;
 		}
-		if(PlayerInfo[playerid][Mute] == 1)
+		if(PlayerInfo[playerid][pMute] == 1)
 		{
 			sendTipMessage(playerid, "Jesteœ uciszony! Nie mo¿esz mówiæ"); 
 			return 1;

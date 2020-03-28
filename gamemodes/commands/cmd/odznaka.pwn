@@ -50,7 +50,7 @@ YCMD:odznaka(playerid, params[], help)
 					if(GetPlayerFraction(playerid) == FRAC_LSPD)
 					{
 						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "|______________ Odznaka LSPD _____________|");
-						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][Gender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][Crimes]);
+						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pGender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
@@ -87,7 +87,7 @@ YCMD:odznaka(playerid, params[], help)
 					if(GetPlayerFraction(playerid) == FRAC_FBI)
 					{
 						SendClientMessage(giveplayerid, COLOR_FBI, "|______________ Odznaka FBI ______________|");
-						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][Gender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][Crimes]);
+						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pGender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
@@ -128,7 +128,7 @@ YCMD:odznaka(playerid, params[], help)
 					if(GetPlayerFraction(playerid) == FRAC_NG)
 					{
 						SendClientMessage(giveplayerid, COLOR_GREEN, "|______________ Odznaka NGSA ______________|");
-						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][Gender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][Crimes]);
+						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pGender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
@@ -149,7 +149,7 @@ YCMD:odznaka(playerid, params[], help)
 					if(GetPlayerFraction(playerid) == FRAC_ERS)
 					{
 						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|______________ Identyfikator ERS ______________|");
-						format(string, sizeof(string), "Numer identyfikatora: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][Gender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][Crimes]);
+						format(string, sizeof(string), "Numer identyfikatora: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pGender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
@@ -170,7 +170,7 @@ YCMD:odznaka(playerid, params[], help)
 					if (GetPlayerFraction(playerid) == FRAC_BOR)
 					{
 						SendClientMessage(giveplayerid, COLOR_PURPLE, "|______________ Odznaka USSS _____________|");
-						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][Gender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][Crimes]);
+						format(string, sizeof(string), "Numer odznaki: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pGender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
@@ -223,7 +223,7 @@ YCMD:odznaka(playerid, params[], help)
 					if (GetPlayerFraction(playerid) == FRAC_SN)
 					{
 						SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Identyfikator SAN _____________|");
-						format(string, sizeof(string), "Numer identyfikatora: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][Gender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][Crimes]);
+						format(string, sizeof(string), "Numer identyfikatora: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pGender], PlayerInfo[playerid][Rank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);

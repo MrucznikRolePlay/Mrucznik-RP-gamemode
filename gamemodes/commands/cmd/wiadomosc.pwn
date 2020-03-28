@@ -61,7 +61,7 @@ YCMD:wiadomosc(playerid, params[], help)
             sendTipMessage(playerid, "Ktoœ z was ma zablokowane wiadomoœci!"); 
             return 1;
         }
-        if(AntySpam[playerid] == 1 && PlayerInfo[playerid][OnlineHours] <= 3)
+        if(AntySpam[playerid] == 1 && PlayerInfo[playerid][pOnlineHours] <= 3)
         {
             sendErrorMessage(playerid, "Odczekaj 3 sekundy zanim wyœlesz kolejn¹ wiadomoœæ!"); 
             return 1;

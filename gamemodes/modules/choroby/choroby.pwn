@@ -141,7 +141,7 @@ DeactivateDiseaseEffects(playerid, eDiseases:disease)
 CallEffectTimer(playerid, eDiseases:disease, effect[eEffectData], effectID) 
 {
 	new effectTime = effect[MinTime] + random(effect[TimeRange]);
-	defer EffectTimer[effectTime](playerid, PlayerInfo[playerid][UID], disease, effectID);
+	defer EffectTimer[effectTime](playerid, PlayerInfo[playerid][pUID], disease, effectID);
 	return 1;
 }
 

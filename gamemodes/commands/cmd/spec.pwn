@@ -83,7 +83,7 @@ YCMD:spec(playerid, params[], help)
 				giveplayer,
 				pid,
 				cash,
-				PlayerInfo[pid][Level],
+				PlayerInfo[pid][pLevel],
 				(PlayerInfo[pid][pCarLic]==1) ? ("Tak") : ("Nie"),
 				(PlayerInfo[pid][pJailTime] > 0) ? (jailWiadomosc) : (" "), 
 				GetPlayerVirtualWorld(pid), 

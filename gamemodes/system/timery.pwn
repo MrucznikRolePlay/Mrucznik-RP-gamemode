@@ -2260,7 +2260,7 @@ public JednaSekundaTimer()
 			}
 		}
         //PAYDAY
-        level = PlayerInfo[i][Level];
+        level = PlayerInfo[i][pLevel];
 		if(level >= 0 && level <= 2) { PlayerInfo[i][pPayCheck] += 1; }
 		else if(level >= 3 && level <= 4) { PlayerInfo[i][pPayCheck] += 2; }
 		else if(level >= 5 && level <= 6) { PlayerInfo[i][pPayCheck] += 3; }
@@ -2314,7 +2314,7 @@ public JednaSekundaTimer()
 					PlayerInfo[i][pJailed] = 0;
 					PlayerInfo[i][pJailTime] = 0;
 					SetPlayerVirtualWorld(i, 0);
-					PlayerInfo[i][Mute] = 0;
+					PlayerInfo[i][pMute] = 0;
 					SetPlayerPos(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
@@ -2637,7 +2637,7 @@ public JednaSekundaTimer()
 				MedicBill[i] = 0;
 				MedicTime[i] = 0;
 				NeedMedicTime[i] = 0;
-				PlayerInfo[i][Deaths] += 1;
+				PlayerInfo[i][pDeaths] += 1;
 				PlayerFixRadio(i);
 				SetPlayerSpawn(i);
 			}
@@ -2785,7 +2785,7 @@ public JednaSekundaTimer()
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
 				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
 				MedicBill[i] = 0;
-				PlayerInfo[i][Mute] = 0;
+				PlayerInfo[i][pMute] = 0;
 				
 				SendClientMessage(i, COLOR_NEWS, "A teraz wybierz, jak ma wygl¹daæ twoja postaæ.");
 				SetPVarInt(i, "wyborPierwszego", 1);
@@ -3175,12 +3175,12 @@ public JednaSekundaTimer()
 				PlayerCuffed[i] = 0;
 				PlayerCuffedTime[i] = 0;
 				pobity[i] = 0;
-				PlayerInfo[i][Mute] = 0;
+				PlayerInfo[i][pMute] = 0;
 				PlayerTied[i] = 0;
                 PlayerInfo[i][pBW]=0;
                 TogglePlayerControllable(i, 1);
                 SetPVarInt(i, "bw-sync", 0);
-                PlayerInfo[i][Mute] = 0;
+                PlayerInfo[i][pMute] = 0;
 			}
 			else
 			{
@@ -3306,7 +3306,7 @@ public CarCheck()
 		{
 			if(MoneyMessage[j]==0)
 			{
-				format(string, sizeof(string), "Masz d³ugi, musisz zarobiæ do nastêpnej wyp³aty $%d inaczej naœlemy na ciebie policje.",PlayerInfo[j][BankMoney]);
+				format(string, sizeof(string), "Masz d³ugi, musisz zarobiæ do nastêpnej wyp³aty $%d inaczej naœlemy na ciebie policje.",PlayerInfo[j][pBankMoney]);
 				SendClientMessage(j, COLOR_LIGHTRED, string);
 				MoneyMessage[j] = 1;
 			}

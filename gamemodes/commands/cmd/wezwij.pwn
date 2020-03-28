@@ -89,7 +89,7 @@ YCMD:wezwij(playerid, params[], help)
 		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnych taksówkarzy !");
 		        }
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-				if(PlayerInfo[playerid][Level] <= 3)
+				if(PlayerInfo[playerid][pLevel] <= 3)
 				{
 					format(string, sizeof(string), "**[NEW_PLAYER] %s potrzebuje transportu. (wpisz /akceptuj taxi aby zaaceptowaæ zg³oszenie)", sendername);
 					SendFamilyMessage(10, 0xE88A2DFF, string);

@@ -39,7 +39,7 @@ YCMD:news(playerid, params[], help)
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
 		{
 		    new newcar = GetPlayerVehicleID(playerid);
-	        if(PlayerInfo[playerid][Mute] == 1)
+	        if(PlayerInfo[playerid][pMute] == 1)
 			{
 				sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ poniewa¿ zosta³eœ wyciszony");
 				return 1;

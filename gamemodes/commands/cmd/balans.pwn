@@ -37,7 +37,7 @@ YCMD:balans(playerid, params[], help)
     {
 		if(PlayerInfo[playerid][pLocal] == 103 || GraczBankomat(playerid))
         {
-			format(string, sizeof(string), "Masz teraz $%d na swoim koncie.",PlayerInfo[playerid][BankMoney]);
+			format(string, sizeof(string), "Masz teraz $%d na swoim koncie.",PlayerInfo[playerid][pBankMoney]);
 			sendTipMessageEx(playerid, COLOR_YELLOW, string);
 		}
 		else

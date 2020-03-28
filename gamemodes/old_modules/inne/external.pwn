@@ -26,8 +26,8 @@ public MRP_GetPlayerMC(playerid) return PlayerMC[playerid];
 public MRP_GetPlayerCarSlots(playerid) return PlayerInfo[playerid][pCarSlots];
 public MRP_GetPlayerPhone(playerid) return PlayerInfo[playerid][pPnumber];
 public MRP_GetPlayerNickChanges(playerid) return PlayerInfo[playerid][pZmienilNick];
-public MRP_GetPlayerAge(playerid) return PlayerInfo[playerid][Age];
-public MRP_GetPlayerUID(playerid) return PlayerInfo[playerid][UID];
+public MRP_GetPlayerAge(playerid) return PlayerInfo[playerid][pAge];
+public MRP_GetPlayerUID(playerid) return PlayerInfo[playerid][pUID];
 public MRP_IsInPolice(playerid)
 {
     if(GetPlayerFraction(playerid) == FRAC_LSPD || GetPlayerFraction(playerid) == FRAC_FBI || GetPlayerFraction(playerid) == FRAC_NG) return 1;
@@ -47,7 +47,7 @@ public MRP_SetPlayerPhone(playerid, val)  {
     MruMySQL_SetAccInt("PhoneNr", GetNickEx(playerid), val);
 }
 public MRP_SetPlayerNickChanges(playerid, val)  PlayerInfo[playerid][pZmienilNick] = val;
-public MRP_SetPlayerAge(playerid, val)  PlayerInfo[playerid][Age] = val;
+public MRP_SetPlayerAge(playerid, val)  PlayerInfo[playerid][pAge] = val;
 
 forward MRPWeryfikacja(index, response_code, data[]);
 public MRPWeryfikacja(index, response_code, data[])

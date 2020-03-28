@@ -1,8 +1,8 @@
 NICKNAME \w+[_ ]\w+(?:[_ ]\w+)?
-PLAYER_NAME \{Player: %{NICKNAME:[player][nick]:string}(?:\[%{INT:[player][uid]:int}\])?}
-PLAYER_ATTACKER \{Player: %{NICKNAME:[attacker][nick]:string}\[%{INT:[attacker][uid]:int}\]\}
-PLAYER_VICTIM \{Player: %{NICKNAME:[victim][nick]:string}\[%{INT:[victim][uid]:int}\]\}
-PLAYER_ADMIN \{Player: %{NICKNAME:[pAdmin][nick]:string}\[%{INT:[pAdmin][uid]:int}\]\}
+PLAYER_NAME \{Player: %{NICKNAME:[player][pNick]:string}(?:\[%{INT:[player][uid]:int}\])?}
+PLAYER_ATTACKER \{Player: %{NICKNAME:[attacker][pNick]:string}\[%{INT:[attacker][uid]:int}\]\}
+PLAYER_VICTIM \{Player: %{NICKNAME:[victim][pNick]:string}\[%{INT:[victim][uid]:int}\]\}
+PLAYER_ADMIN \{Player: %{NICKNAME:[pAdmin][pNick]:string}\[%{INT:[pAdmin][uid]:int}\]\}
 
 WEAPON \{Weapon: %{DATA:[weapon][name]:string}:\[id: %{INT:[weapon][id]:int}\]\}
 WEAPON_AMMO %{DATA:[weapon][name]:string}:\[id: %{INT:[weapon][id]:int}, ammo: %{INT:[weapon][ammo]:int}\]\}
@@ -15,8 +15,8 @@ GPCI [0-9A-F]{40}
 
 LOG_PREAMBLE \[%{DATESTAMP:[@metadata][timestamp]}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}
 
-CONNECT_LOG Gracz %{NICKNAME:[player][nick]:string}\[id: %{INT:[player][id]:int}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]:string}\] połączył się z serwerem
-DISCONNECT_LOG Gracz %{NICKNAME:[player][nick]:string}\[id: %{INT:[player][id]:int}\] rozłączył się, powód: %{INT:dc_reason:int}
+CONNECT_LOG Gracz %{NICKNAME:[player][pNick]:string}\[id: %{INT:[player][id]:int}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]:string}\] połączył się z serwerem
+DISCONNECT_LOG Gracz %{NICKNAME:[player][pNick]:string}\[id: %{INT:[player][id]:int}\] rozłączył się, powód: %{INT:dc_reason:int}
 OLD_LOGIN_LOG Gracz %{PLAYER_NAME} zalogował się na konto
 NEW_LOGIN_LOG Gracz %{PLAYER_NAME}\[id: %{INT:[player][id]:int}, ip: %{IPV4:[player][ip]}, gpci: %{GPCI:[player][gpci]:string}\] zalogował się na konto
 

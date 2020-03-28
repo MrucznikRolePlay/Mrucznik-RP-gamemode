@@ -39,7 +39,7 @@ YCMD:bdaj(playerid, params[], help)
 			return 1;
 		}
 
-		if(PlayerInfo[playerid][Level] >= 1)
+		if(PlayerInfo[playerid][pLevel] >= 1)
 		{
 		    SetPlayerArmedWeapon(giveplayerid, level);
 		}

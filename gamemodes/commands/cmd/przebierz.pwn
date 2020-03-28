@@ -34,7 +34,7 @@ YCMD:przebierz(playerid, params[], help)
     {
         if(Kredyty[playerid] >= 5)
         {
-		    if(PlayerInfo[playerid][Gender] == 1)
+		    if(PlayerInfo[playerid][pGender] == 1)
 		    {
 		        new rand = random(5);
 		        if(rand == 1)

@@ -112,7 +112,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		case COMMAND_UNDEFINED, COMMAND_HIDDEN:
 		{
 			sendErrorMessage(playerid, "Ta komenda nie istnieje. Wpisz /komendy aby zobaczyæ listê dostêpnych komend.");
-			/*if(PlayerInfo[playerid][Level] <= 1)//Anty slapper X_D - na LVL 1, pomo¿e troszkê ogarn¹æ sytuacje
+			/*if(PlayerInfo[playerid][pLevel] <= 1)//Anty slapper X_D - na LVL 1, pomo¿e troszkê ogarn¹æ sytuacje
 			{
 				if(IsPlayerInAnyVehicle(playerid))
 				{

@@ -52,11 +52,11 @@ YCMD:plac(playerid, params[], help)
 			    sendTipMessage(playerid, "Kwota musi wynosiæ mniej ni¿ 100 000$ .");
 			    return 1;
 			}
-			if(moneys > 12500 && PlayerInfo[playerid][Level] < 2 && PlayerInfo[playerid][pLocal] != 108)
+			if(moneys > 12500 && PlayerInfo[playerid][pLevel] < 2 && PlayerInfo[playerid][pLocal] != 108)
 			{
 				return sendTipMessage(playerid, "Nie mo¿esz p³aciæ wiêcej niz $12500");
 			}
-			if(PlayerInfo[playerid][OnlineHours] == 0)
+			if(PlayerInfo[playerid][pOnlineHours] == 0)
 			{
 				sendTipMessage(playerid, "Zanim bêdziesz móg³ p³aciæ, musisz graæ wiêcej ni¿ 1 godzinê online!");
 			    return 1;

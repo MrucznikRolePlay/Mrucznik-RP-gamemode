@@ -52,8 +52,7 @@ YCMD:awans(playerid, params[], help)
 					new level = PlayerInfo[para1][Rank];
 
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Awansowa³eœ %s na rangê %s", GetNickEx(para1), FracRang[GetPlayerFraction(para1)][level]));
-                    if(playerid != para1)
-                        SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Gratulacje! Otrzyma³eœ awans na rangê %s od %s", FracRang[GetPlayerFraction(para1)][level],  GetNickEx(playerid)));
+                    if(playerid != para1) SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Gratulacje! Otrzyma³eœ awans na rangê %s od %s", FracRang[GetPlayerFraction(para1)][level],  GetNickEx(playerid)));
 
                     MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][Rank]);
 				}

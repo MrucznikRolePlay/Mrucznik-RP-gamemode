@@ -21,30 +21,30 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-enum gRanks
+enum eRanks
 {
-    Name[32],
-    Level
+    rName[32],
+    rLevel
 };
 
-enum gGroups
+enum eGroups
 {
-	UID,
-    Type,
-    Name[32],
-	Color[6],
-    Float:SpawnX,
-    Float:SpawnY,
-    Float:SpawnZ,
-    Float:SpawnA,
-    Float:SpawnVW,
-    Float:SpawnINT,
-	Balance
+	gUID,
+    gType,
+    gName[32],
+	gColor[6],
+    Float:gSpawnX,
+    Float:gSpawnY,
+    Float:gSpawnZ,
+    Float:gSpawnA,
+    Float:gSpawnVW,
+    Float:gSpawnINT,
+	gBalance
 };
 
 //-----------------<[ Zmienne: ]>-------------------
-new GroupInfo[MAX_GROUPS][gGroups];
-new RankInfo[MAX_GROUPS][MAX_RANKS][gRanks];
+new GroupInfo[MAX_GROUPS][eGroups];
+new RankInfo[MAX_GROUPS][MAX_RANKS][eRanks];
 new PermsInfo[MAX_GROUPS][MAX_RANKS][MAX_PERMISSION]; //U¯YCIE: PermsInfo[group_id][rank_level][perm_code]
 new PlayerText:Textdraw0[MAX_PLAYERS];
 new PlayerText:Textdraw1[MAX_PLAYERS];

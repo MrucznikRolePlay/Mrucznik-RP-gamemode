@@ -80,7 +80,7 @@ public Lowienie(playerid)
 saveLegale(playerid) {
 	//LEGAL
 	new lStr[256];
-	format(lStr, sizeof lStr, "UPDATE mru_legal SET weapon1=%d, weapon2=%d, weapon3=%d, weapon4=%d, weapon5=%d, weapon6=%d, weapon7=%d, weapon8=%d, weapon9=%d, weapon10=%d, weapon11=%d,weapon12=%d,weapon13=%d WHERE pID = %d", playerWeapons[playerid][weaponLegal1],playerWeapons[playerid][weaponLegal2],playerWeapons[playerid][weaponLegal3],playerWeapons[playerid][weaponLegal4],playerWeapons[playerid][weaponLegal5],playerWeapons[playerid][weaponLegal6],playerWeapons[playerid][weaponLegal7],playerWeapons[playerid][weaponLegal8],playerWeapons[playerid][weaponLegal9],playerWeapons[playerid][weaponLegal10],playerWeapons[playerid][weaponLegal11],playerWeapons[playerid][weaponLegal12],playerWeapons[playerid][weaponLegal13], PlayerInfo[playerid][UID]);
+	format(lStr, sizeof lStr, "UPDATE mru_legal SET weapon1=%d, weapon2=%d, weapon3=%d, weapon4=%d, weapon5=%d, weapon6=%d, weapon7=%d, weapon8=%d, weapon9=%d, weapon10=%d, weapon11=%d,weapon12=%d,weapon13=%d WHERE pID = %d", playerWeapons[playerid][weaponLegal1],playerWeapons[playerid][weaponLegal2],playerWeapons[playerid][weaponLegal3],playerWeapons[playerid][weaponLegal4],playerWeapons[playerid][weaponLegal5],playerWeapons[playerid][weaponLegal6],playerWeapons[playerid][weaponLegal7],playerWeapons[playerid][weaponLegal8],playerWeapons[playerid][weaponLegal9],playerWeapons[playerid][weaponLegal10],playerWeapons[playerid][weaponLegal11],playerWeapons[playerid][weaponLegal12],playerWeapons[playerid][weaponLegal13], PlayerInfo[playerid][pUID]);
 	db_free_result(db_query(db_handle, lStr));
 }
 
@@ -88,7 +88,7 @@ saveLegale(playerid) {
 loadKamiPos(playerid)
 {
 	new lStr[256];
-	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][UID]);
+	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
 	new DBResult:db_result;
 	db_result = db_query(db_handle, lStr);
 
@@ -126,13 +126,13 @@ loadKamiPos(playerid)
 saveKevlarPos(playerid, recurention=1)
 {
 	new lStr[256];
-	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][UID]);
+	format(lStr, sizeof lStr, "SELECT * FROM `mru_kevlar` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
 	new DBResult:db_result;
 	db_result = db_query(db_handle, lStr);
 
 	if(!db_num_rows(db_result)) 
 	{
-		format(lStr, sizeof lStr, "INSERT INTO `mru_kevlar` (`pID`,`offsetX`, `offsetY`, `offsetZ`, `rotX`, `rotY`, `rotZ`, `scaleX`, `scaleY`, `scaleZ`) VALUES (%d, 0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2,1.0)", PlayerInfo[playerid][UID]);
+		format(lStr, sizeof lStr, "INSERT INTO `mru_kevlar` (`pID`,`offsetX`, `offsetY`, `offsetZ`, `rotX`, `rotY`, `rotZ`, `scaleX`, `scaleY`, `scaleZ`) VALUES (%d, 0.1,0.05,0.0,0.0,0.0,0.0,1.0,1.2,1.0)", PlayerInfo[playerid][pUID]);
 
 		db_free_result(db_query(db_handle, lStr));
 
@@ -141,7 +141,7 @@ saveKevlarPos(playerid, recurention=1)
 	}
 	else
 	{
-		format(lStr, sizeof lStr, "UPDATE mru_kevlar SET offsetX=%f, offsetY=%f, offsetZ=%f, rotX=%f, rotY=%f, rotZ=%f, scaleX=%f, scaleY=%f, scaleZ=%f WHERE pID = %d", GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"), PlayerInfo[playerid][UID]);
+		format(lStr, sizeof lStr, "UPDATE mru_kevlar SET offsetX=%f, offsetY=%f, offsetZ=%f, rotX=%f, rotY=%f, rotZ=%f, scaleX=%f, scaleY=%f, scaleZ=%f WHERE pID = %d", GetPVarFloat(playerid, "k_offsetX"), GetPVarFloat(playerid, "k_offsetY"), GetPVarFloat(playerid, "k_offsetZ"), GetPVarFloat(playerid, "k_rotX"), GetPVarFloat(playerid, "k_rotY"), GetPVarFloat(playerid, "k_rotZ"), GetPVarFloat(playerid, "k_scaleX"), GetPVarFloat(playerid, "k_scaleY"), GetPVarFloat(playerid, "k_scaleZ"), PlayerInfo[playerid][pUID]);
 
 		db_free_result(db_query(db_handle, lStr));
 	}
@@ -468,7 +468,7 @@ Taxi_Pay(playerid)
 		new doZaplaty = 0;
         TransportCost[playerid] = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
 		
-	    if(PlayerInfo[playerid][Level] < 3)
+	    if(PlayerInfo[playerid][pLevel] < 3)
 	    {
 			if(kaska[playerid] < floatround(TransportCost[playerid]*0.25))
 			{
@@ -984,7 +984,7 @@ return 1;
 
 public pobito(playerid){
 pobilem[playerid] = 0;
-PlayerInfo[playerid][Mute] = 0;
+PlayerInfo[playerid][pMute] = 0;
 return 1;
 }
 
@@ -1571,7 +1571,7 @@ stock UndressPlayer(playerid, bool:dressup, colorID=0)
 	}
 	else
 	{
-		if(PlayerInfo[playerid][Gender] == 2)
+		if(PlayerInfo[playerid][pGender] == 2)
         {
             if(colorID == 1)
             {
@@ -2114,7 +2114,7 @@ DollahScoreUpdate()
 	new LevScore;
 	foreach(new i : Player)
 	{
-		LevScore = PlayerInfo[i][Level];
+		LevScore = PlayerInfo[i][pLevel];
 		SetPlayerScore(i, LevScore);
 	}
 	return 1;
@@ -4230,7 +4230,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    PlayerInfo[playerid][Crimes] += 1;
+	    PlayerInfo[playerid][pCrimes] += 1;
 	    new points = PoziomPoszukiwania[playerid];
 		new turned[MAX_PLAYER_NAME];
 		new turner[MAX_PLAYER_NAME];
@@ -4475,19 +4475,19 @@ ShowStats2(playerid)
 	format(plRyba, sizeof(plRyba), "Ryba: %d kg", PlayerInfo[playerid][Fishes]); 
 	format(plWozKlucz, sizeof(plWozKlucz), "Klucze auta: %d", PlayerInfo[playerid][pKluczeAuta]);
 	format(plWantedD, sizeof(plWantedD), "Wanted-Death: %d", PlayerInfo[playerid][WantedDeaths]);
-	format(plAresztCzas, sizeof(plAresztCzas), "Czas aresztu: %d", PlayerInfo[playerid][Arrested]);  
+	format(plAresztCzas, sizeof(plAresztCzas), "Czas aresztu: %d", PlayerInfo[playerid][pArrested]);  
 	new plRodzina[64], plRespekt[64], plOnline[64], plRodzinkaRank[64], plBMID[64], plBOID[64], plDom[64], plSkin[64], plWarny[64]; 
-	format(plUID, sizeof(plUID), "UID: %d", PlayerInfo[playerid][UID]);
-	format(plSmierci, sizeof(plSmierci), "Smierci: %d", PlayerInfo[playerid][Deaths]);
-	format(plZabic, sizeof(plZabic), "Zabic: %d", PlayerInfo[playerid][Kills]);
+	format(plUID, sizeof(plUID), "UID: %d", PlayerInfo[playerid][pUID]);
+	format(plSmierci, sizeof(plSmierci), "Smierci: %d", PlayerInfo[playerid][pDeaths]);
+	format(plZabic, sizeof(plZabic), "Zabic: %d", PlayerInfo[playerid][pKills]);
 	format(plZN, sizeof(plZN), "ZmienNick: %d", PlayerInfo[playerid][pZmienilNick]); 
-	format(plPrzestepstwa, sizeof(plPrzestepstwa), "Crimes: %d", PlayerInfo[playerid][Crimes]); 
-	format(plLVL, sizeof(plLVL), "Level: %d", PlayerInfo[playerid][Level]); 
+	format(plPrzestepstwa, sizeof(plPrzestepstwa), "Crimes: %d", PlayerInfo[playerid][pCrimes]); 
+	format(plLVL, sizeof(plLVL), "Level: %d", PlayerInfo[playerid][pLevel]); 
 	format(plKasa, sizeof(plKasa), "Kasa: %d$", kaska[playerid]); 
-	format(plBank, sizeof(plBank), "Bank: %d$", PlayerInfo[playerid][BankMoney]); 
+	format(plBank, sizeof(plBank), "Bank: %d$", PlayerInfo[playerid][pBankMoney]); 
 	format(plZdrowie, sizeof(plZdrowie), "Zdrowie: %.1f", PlayerInfo[playerid][pSHealth]+50);
 	format(plTelefon, sizeof(plTelefon), "Telefon: %d", PlayerInfo[playerid][pPnumber]);
-	format(plOnline, sizeof(plOnline), "On-line: %d", PlayerInfo[playerid][OnlineHours]);
+	format(plOnline, sizeof(plOnline), "On-line: %d", PlayerInfo[playerid][pOnlineHours]);
 	format(plBMID, sizeof(plBMID), "B-MID: %d", PlayerInfo[playerid][pBusinessMember]); 
 	format(plBOID, sizeof(plBOID), "B-OID: %d", PlayerInfo[playerid][pBusinessOwner]); 
 	format(plSkin, sizeof(plSkin), "Skin: %d", PlayerInfo[playerid][pSkin]); 
@@ -4498,15 +4498,15 @@ ShowStats2(playerid)
 	format(plPraca, sizeof(plPraca), "Praca: %s", JobNames[PlayerInfo[playerid][Job]]); 
 	format(plDom, sizeof(plDom), "Dom: %d", PlayerInfo[playerid][pDom]);
 	format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: Unknow"); 
-	format(plRespekt, sizeof(plRespekt), "Respekt: %d/%d", PlayerInfo[playerid][Exp], ((PlayerInfo[playerid][Level]+1)*levelexp)); 
-	format(plWiek, sizeof(plWiek), "Wiek: %d",PlayerInfo[playerid][Age]);
+	format(plRespekt, sizeof(plRespekt), "Respekt: %d/%d", PlayerInfo[playerid][pExp], ((PlayerInfo[playerid][pLevel]+1)*levelexp)); 
+	format(plWiek, sizeof(plWiek), "Wiek: %d",PlayerInfo[playerid][pAge]);
 	if(IsPlayerPremiumOld(playerid)) { plKP = "~y~Sponsor"; }
 	else { plKP = "~y~Zwykly wieprz"; }
-	if(PlayerInfo[playerid][Origin] == 1) { plPochodzenie = "Pochodzenie: USA"; }
-	else if(PlayerInfo[playerid][Origin] == 2) { plPochodzenie = "Pochodzenie: Europa"; }
-	else if(PlayerInfo[playerid][Origin] == 3) { plPochodzenie = "Pochodzoenie: Azja"; }
-	if(PlayerInfo[playerid][Gender] == 1) { plPlec = "Plec: Mezczyzna"; }
-	else if(PlayerInfo[playerid][Gender] == 2) { plPlec = "Plec: Kobieta"; }
+	if(PlayerInfo[playerid][pOrigin] == 1) { plPochodzenie = "Pochodzenie: USA"; }
+	else if(PlayerInfo[playerid][pOrigin] == 2) { plPochodzenie = "Pochodzenie: Europa"; }
+	else if(PlayerInfo[playerid][pOrigin] == 3) { plPochodzenie = "Pochodzoenie: Azja"; }
+	if(PlayerInfo[playerid][pGender] == 1) { plPlec = "Plec: Mezczyzna"; }
+	else if(PlayerInfo[playerid][pGender] == 2) { plPlec = "Plec: Kobieta"; }
 	if(strlen(PlayerInfo[playerid][pMarriedTo]) > 20)
 	{
 		format(plSlub, sizeof(plSlub), "Slub: Unknow");
@@ -4706,12 +4706,12 @@ ShowStats(playerid,targetid)
 	{
 		new cash = kaska[targetid];
 		new atext[20];
-		if(PlayerInfo[targetid][Gender] == 1) { atext = "Mê¿czyzna"; }
-		else if(PlayerInfo[targetid][Gender] == 2) { atext = "Kobieta"; }
+		if(PlayerInfo[targetid][pGender] == 1) { atext = "Mê¿czyzna"; }
+		else if(PlayerInfo[targetid][pGender] == 2) { atext = "Kobieta"; }
   		new otext[20];
-		if(PlayerInfo[targetid][Origin] == 1) { otext = "USA"; }
-		else if(PlayerInfo[targetid][Origin] == 2) { otext = "Europa"; }
-		else if(PlayerInfo[targetid][Origin] == 3) { otext = "Azja"; }
+		if(PlayerInfo[targetid][pOrigin] == 1) { otext = "USA"; }
+		else if(PlayerInfo[targetid][pOrigin] == 2) { otext = "Europa"; }
+		else if(PlayerInfo[targetid][pOrigin] == 3) { otext = "Azja"; }
 
 	    new ftext[40];
         format(ftext, 40, "%s", FractionNames[GetPlayerFraction(targetid)]);
@@ -4739,25 +4739,25 @@ ShowStats(playerid,targetid)
 		new drank[20];
 		if(IsPlayerPremiumOld(targetid)) { drank = "Sponsor"; }
 		else { drank = "Zwykly wieprz"; }
-		new age = PlayerInfo[targetid][Age];
-		new ptime = PlayerInfo[targetid][OnlineHours];
+		new age = PlayerInfo[targetid][pAge];
+		new ptime = PlayerInfo[targetid][pOnlineHours];
 		new znick = PlayerInfo[targetid][pZmienilNick];
 		new lotto = PlayerInfo[targetid][LottoNr];
-		new deaths = PlayerInfo[targetid][Deaths];
+		new deaths = PlayerInfo[targetid][pDeaths];
 		new fishes = PlayerInfo[targetid][Fishes];
 		new bigfish = PlayerInfo[targetid][BiggestFish];
-		new crimes = PlayerInfo[targetid][Crimes];
-		new arrests = PlayerInfo[targetid][Arrested];
+		new crimes = PlayerInfo[targetid][pCrimes];
+		new arrests = PlayerInfo[targetid][pArrested];
 		new warrests = PlayerInfo[targetid][WantedDeaths];
 		new drugs = PlayerInfo[targetid][pDrugs];
 		new mats = PlayerInfo[targetid][pMats];
 		new wanted = PoziomPoszukiwania[targetid];
-		new level = PlayerInfo[targetid][Level];
-		new exp = PlayerInfo[targetid][Exp];
-		new kills = PlayerInfo[targetid][Kills];
+		new level = PlayerInfo[targetid][pLevel];
+		new exp = PlayerInfo[targetid][pExp];
+		new kills = PlayerInfo[targetid][pKills];
 		new pnumber = PlayerInfo[targetid][pPnumber];
-		new account = PlayerInfo[targetid][BankMoney];
-		new nxtlevel = PlayerInfo[targetid][Level]+1;
+		new account = PlayerInfo[targetid][pBankMoney];
+		new nxtlevel = PlayerInfo[targetid][pLevel]+1;
 		new expamount = nxtlevel*levelexp;
 		new costlevel = nxtlevel*levelcost;//10k for testing purposes
 		new housekey = PlayerInfo[targetid][pDom];
@@ -4773,7 +4773,7 @@ ShowStats(playerid,targetid)
 		//new busiMem = PlayerInfo[targetid][pBusinessMember];
 		//new busiOwn = PlayerInfo[targetid][pBusinessOwner]; 
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
-		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][UID]);
+		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Level:[%d] P³eæ:[%s] Wiek:[%d] Pochodzenie:[%s] Zdrowie:[%.1f] Kasa:[$%d] Bank:[$%d] Telefon:[%d]", level,atext,age,otext,shealth+50, cash, account, pnumber);
 		SendClientMessage(playerid, COLOR_GRAD1,coordsstring);
@@ -6058,7 +6058,7 @@ Dom_ChangeOwner(playerid, dom, forid)
     PlayerInfo[forid][pDom] = dom;
 	Dom[dom][hWlasciciel] = GetNickEx(forid);
 	Dom[dom][hKupiony] = 1;
-	Dom[dom][hUID_W] = PlayerInfo[forid][UID];
+	Dom[dom][hUID_W] = PlayerInfo[forid][pUID];
 
 	format(string, sizeof(string), "Zmiana wlasciciela - OK. || Dom %d || NrDom %d || Wlasciciel: %s", dom, Dom[dom][hDomNr], GetNickEx(forid));
 	SendClientMessage(playerid, COLOR_NEWS, string);
@@ -6343,10 +6343,10 @@ KupowanieDomu(playerid, dom, platnosc)
 	    }
 	    if(platnosc == 2)
 		{
-		    if(PlayerInfo[playerid][BankMoney] >= cenadomu && cenadomu != 0 && cenadomu > 0 && PlayerInfo[playerid][BankMoney] != 0 && PlayerInfo[playerid][BankMoney] > 0)
+		    if(PlayerInfo[playerid][pBankMoney] >= cenadomu && cenadomu != 0 && cenadomu > 0 && PlayerInfo[playerid][pBankMoney] != 0 && PlayerInfo[playerid][pBankMoney] > 0)
 	        {
-				PlayerInfo[playerid][BankMoney] += -cenadomu;
-				format(str2, sizeof(str2), "Gratulacje! Kupi³eœ dom za %d$. Zosta³o one odliczone od twojego konta bankowego które wynosi teraz %d", cenadomu, PlayerInfo[playerid][BankMoney]);
+				PlayerInfo[playerid][pBankMoney] += -cenadomu;
+				format(str2, sizeof(str2), "Gratulacje! Kupi³eœ dom za %d$. Zosta³o one odliczone od twojego konta bankowego które wynosi teraz %d", cenadomu, PlayerInfo[playerid][pBankMoney]);
 				SendClientMessage(playerid, COLOR_PANICRED, str2);
 			}
 			else
@@ -6361,7 +6361,7 @@ KupowanieDomu(playerid, dom, platnosc)
 		GetPlayerTime(playerid, h, m);
 		Dom[dom][hWlasciciel] = GetNickEx(playerid);
 		Dom[dom][hKupiony] = 1;
-		Dom[dom][hUID_W] = PlayerInfo[playerid][UID];
+		Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
 		DestroyDynamicPickup(Dom[dom][hPickup]);
 		DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1239, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
@@ -11057,7 +11057,7 @@ ChangePlayerName(playerid, name[])
 	SetPlayerName(playerid, name);
 	SetRPName(playerid);
 	
-    format(PlayerInfo[playerid][Nick], 32, "%s", name);
+    format(PlayerInfo[playerid][pNick], 32, "%s", name);
 	
     MruMySQL_SaveAccount(playerid);
     return 1;
@@ -12345,7 +12345,7 @@ stock SetPlayerTW(playerid, valueTime, time, weather)
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {
-	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][Level] > 1)
+	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][pLevel] > 1)
 	{
 		new string[128];
 		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNickEx(playerid), GetNickEx(fakekillid));
@@ -12537,7 +12537,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 			//-------<[  Logi  ]>---------
 			Log(warningLog, INFO, "%s %s %s z broni o id %d bêd¹c w aucie (mo¿liwe DB/CK2).", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid), reason);
 			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy jest zakazane, robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
-			if(PlayerInfo[killerid][Level] > 1)
+			if(PlayerInfo[killerid][pLevel] > 1)
 			{
 				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [GunID %d]!", killername, killerid, playername, bwreason, playerid, reason);
 				SendMessageToAdmin(string, COLOR_YELLOW);
@@ -12652,7 +12652,7 @@ public CuffedAction(playerid, cuffedid)
 	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
 	Kajdanki_PDkuje[cuffedid] = INVALID_PLAYER_ID;
 	Kajdanki_Uzyte[playerid] = 0;
-	PlayerInfo[cuffedid][Mute] = 0;
+	PlayerInfo[cuffedid][pMute] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
 	RemovePlayerAttachedObject(cuffedid, 5);

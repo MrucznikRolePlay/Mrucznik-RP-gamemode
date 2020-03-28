@@ -50,9 +50,9 @@ YCMD:ucisz(playerid, params[], help)
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 				    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					if(PlayerInfo[playa][Mute] == 0)
+					if(PlayerInfo[playa][pMute] == 0)
 					{
-						PlayerInfo[playa][Mute] = 1;
+						PlayerInfo[playa][pMute] = 1;
         				Log(adminLog, INFO, "Admin %s uciszy³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 						format(string, sizeof(string), "AdmCmd: %s uciszyl %s",GetNickEx(playerid), giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);
@@ -61,7 +61,7 @@ YCMD:ucisz(playerid, params[], help)
 					}
 					else
 					{
-						PlayerInfo[playa][Mute] = 0;
+						PlayerInfo[playa][pMute] = 0;
         				Log(adminLog, INFO, "Admin %s odciszy³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 						format(string, sizeof(string), "AdmCmd: %s odciszy³ %s",GetNickEx(playerid), giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);

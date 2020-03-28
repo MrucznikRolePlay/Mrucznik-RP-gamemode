@@ -53,7 +53,7 @@ YCMD:kamera_wiezienie(playerid, params[], help)
                     }
                     TogglePlayerControllable(playerid, 0);
                     SetPlayerInterior(playerid, 10);
-                    PlayerInfo[playerid][Mute] = 1;
+                    PlayerInfo[playerid][pMute] = 1;
                     SetPlayerPos(playerid, 214.6996,121.2643,1008.2188);
                 }
 
@@ -68,7 +68,7 @@ YCMD:kamera_wiezienie(playerid, params[], help)
                     SetPlayerInterior(playerid, 0);
                     TogglePlayerControllable(playerid, 1);
                     SetCameraBehindPlayer(playerid);
-                    PlayerInfo[playerid][Mute] = 0;
+                    PlayerInfo[playerid][pMute] = 0;
                     SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
                     Wchodzenie(playerid);
                 }

@@ -45,7 +45,7 @@ YCMD:wplac(playerid, params[], help)
 			if( sscanf(params, "s[32]", string))
 			{
 				sendTipMessage(playerid, "U¿yj /wplac [kwota]");
-				format(string, sizeof(string), "Masz teraz $%d na swoim koncie.", PlayerInfo[playerid][BankMoney]);
+				format(string, sizeof(string), "Masz teraz $%d na swoim koncie.", PlayerInfo[playerid][pBankMoney]);
 				sendTipMessage(playerid, string);
                 if(GraczBankomat(playerid)) {
                     sendTipMessage(playerid, "UWAGA! Przy wp³atach przez bankomat prowizja to 6 procent!", COLOR_LIGHTBLUE);
@@ -61,7 +61,7 @@ YCMD:wplac(playerid, params[], help)
 				return 1;
 			}
 
-			if(PlayerInfo[playerid][BankMoney] + cashdeposit >=100000000)
+			if(PlayerInfo[playerid][pBankMoney] + cashdeposit >=100000000)
 			{
 				sendTipMessage(playerid, "Maksymalnie w banku mo¿esz trzymaæ 100 milionów!"); 
 				return 1;
@@ -72,21 +72,21 @@ YCMD:wplac(playerid, params[], help)
 			}
 
 			ZabierzKase(playerid, cashdeposit);
-            PlayerInfo[playerid][BankMoney] += (cashdeposit - bankomat_fee);
+            PlayerInfo[playerid][pBankMoney] += (cashdeposit - bankomat_fee);
 
-			Log(payLog, INFO, "%s wp³aci³ na swoje konto %d$. Koszt wp³aty %d, nowy stan %d$.", GetPlayerLogName(playerid), cashdeposit-bankomat_fee, bankomat_fee, PlayerInfo[playerid][BankMoney]);
+			Log(payLog, INFO, "%s wp³aci³ na swoje konto %d$. Koszt wp³aty %d, nowy stan %d$.", GetPlayerLogName(playerid), cashdeposit-bankomat_fee, bankomat_fee, PlayerInfo[playerid][pBankMoney]);
 
             if(GraczBankomat(playerid)) {
-                format(string, sizeof(string), "Wp³aci³eœ $%d na swoje konto (prowizja %d), obecny stan to: $%d ", cashdeposit-bankomat_fee, bankomat_fee, PlayerInfo[playerid][BankMoney]);
+                format(string, sizeof(string), "Wp³aci³eœ $%d na swoje konto (prowizja %d), obecny stan to: $%d ", cashdeposit-bankomat_fee, bankomat_fee, PlayerInfo[playerid][pBankMoney]);
                 SendClientMessage(playerid, COLOR_YELLOW, string);
             } else {
                 SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
-                format(string, sizeof(string), "  Poprzedni stan: $%d", PlayerInfo[playerid][BankMoney]);
+                format(string, sizeof(string), "  Poprzedni stan: $%d", PlayerInfo[playerid][pBankMoney]);
                 SendClientMessage(playerid, COLOR_GRAD2, string);
                 format(string, sizeof(string), "  Depozyt: $%d", cashdeposit);
                 SendClientMessage(playerid, COLOR_GRAD4, string);
                 SendClientMessage(playerid, COLOR_GRAD6, "|-----------------------------------------|");
-                format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][BankMoney]);
+                format(string, sizeof(string), "  Nowy stan: $%d", PlayerInfo[playerid][pBankMoney]);
                 SendClientMessage(playerid, COLOR_WHITE, string);
             }
 			return 1;

@@ -1181,29 +1181,29 @@ ZerujZmienne(playerid)
 	//BusTime[playerid] = 0; BusTime2[playerid] = 0; BusTime3[playerid] = 0; BusTime4[playerid] = 0; BusTime5[playerid] = 0;//bustime
 	//BusTime6[playerid] = 0; BusTime7[playerid] = 0; BusTime8[playerid] = 0; BusTime9[playerid] = 0; BusTime10[playerid] = 0; BusTime11[playerid] = 0; BusTime12[playerid] = 0; BusTime13[playerid] = 0;//bustime
 	//BusTime14[playerid] = 0; BusTime15[playerid] = 0; BusTime16[playerid] = 0; BusTime17[playerid] = 0; BusTime18[playerid] = 0; BusTime19[playerid] = 0; BusTime20[playerid] = 0;//bustime
-	PlayerInfo[playerid][BankMoney] = dollah; Respawn[playerid] = 0;//Respawn
+	PlayerInfo[playerid][pBankMoney] = dollah; Respawn[playerid] = 0;//Respawn
 	HireCar[playerid] = 0; PlayersChannel[playerid] = 999;
 	TransportValue[playerid] = 0; TransportMoney[playerid] = 0; TransportCost[playerid] = 0; TransportDriver[playerid] = 999;
 	Locator[playerid] = 0; PlayerOnMission[playerid] = 0; MissionCheckpoint[playerid] = 0;
 	WatchingTV[playerid] = 0; PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
 	BiletAlhambra[playerid] = 0;
-	PlayerInfo[playerid][Level] = 0;
+	PlayerInfo[playerid][pLevel] = 0;
 	PlayerInfo[playerid][pAdmin] = 0;
 	PlayerInfo[playerid][pHalfAdmin] = 0;
 	PlayerInfo[playerid][pZG] = 0;
-	PlayerInfo[playerid][OldDonateRank] = 0;
-	PlayerInfo[playerid][UpgradeLvl] = 0;
-	PlayerInfo[playerid][OnlineHours] = 0;
-	PlayerInfo[playerid][Registered] = 0;
-	PlayerInfo[playerid][Gender] = 0;
-	PlayerInfo[playerid][Age] = 0;
-	PlayerInfo[playerid][Origin] = 0;
-	PlayerInfo[playerid][Exp] = 0;
-	PlayerInfo[playerid][BankMoney] = 0;
-	PlayerInfo[playerid][Crimes] = 0;
-	PlayerInfo[playerid][Deaths] = 0;
-	PlayerInfo[playerid][Arrested] = 0;
+	PlayerInfo[playerid][pOldDonateRank] = 0;
+	PlayerInfo[playerid][pUpgradeLvl] = 0;
+	PlayerInfo[playerid][pOnlineHours] = 0;
+	PlayerInfo[playerid][pRegistered] = 0;
+	PlayerInfo[playerid][pGender] = 0;
+	PlayerInfo[playerid][pAge] = 0;
+	PlayerInfo[playerid][pOrigin] = 0;
+	PlayerInfo[playerid][pExp] = 0;
+	PlayerInfo[playerid][pBankMoney] = 0;
+	PlayerInfo[playerid][pCrimes] = 0;
+	PlayerInfo[playerid][pDeaths] = 0;
+	PlayerInfo[playerid][pArrested] = 0;
 	PlayerInfo[playerid][WantedDeaths] = 0;
 	PlayerInfo[playerid][Item_PhoneBook] = 0;
 	PlayerInfo[playerid][LottoNr] = 0;
@@ -1425,7 +1425,7 @@ ZerujZmienne(playerid)
 	{
 		SetPlayerName(playerid, nick);
 		SetRPName(playerid);
-		format(PlayerInfo[playerid][Nick], 24, "%s", nick);
+		format(PlayerInfo[playerid][pNick], 24, "%s", nick);
 		DeletePVar(playerid, "maska_nick");
 	}
 

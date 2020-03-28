@@ -36,7 +36,7 @@ YCMD:kb(playerid, params[], help)
         {
 			new giveplayer[MAX_PLAYER_NAME];
 			new string[128];
-			if(PlayerInfo[playerid][Level] >= 3)
+			if(PlayerInfo[playerid][pLevel] >= 3)
 			{
 				if(PlayerInfo[playerid][pLocal] == 103)
 				{

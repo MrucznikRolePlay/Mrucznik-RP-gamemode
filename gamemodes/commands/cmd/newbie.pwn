@@ -38,7 +38,7 @@ YCMD:newbie(playerid, params[], help)
             sendTipMessageEx(playerid, COLOR_GRAD2, "Chat newbie jest wy³¹czony!");
 			return 1;
         }
-        if(PlayerInfo[playerid][Mute] == 1)
+        if(PlayerInfo[playerid][pMute] == 1)
 		{
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ zosta³eœ uciszony !");
 			return 1;
@@ -105,79 +105,79 @@ YCMD:newbie(playerid, params[], help)
 			{
 			    format(nobchat, sizeof(nobchat), "(({FFD700} Sponsor [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-		 	else if(PlayerInfo[playerid][Level] == 1 || PlayerInfo[playerid][Level] == 2 || PlayerInfo[playerid][Level] == 3)
+		 	else if(PlayerInfo[playerid][pLevel] == 1 || PlayerInfo[playerid][pLevel] == 2 || PlayerInfo[playerid][pLevel] == 3)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Newbie [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 4)
+			else if(PlayerInfo[playerid][pLevel] == 4)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Pocz¹tkuj¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 5)
+			else if(PlayerInfo[playerid][pLevel] == 5)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Przeciêtniak [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 6 || PlayerInfo[playerid][Level] == 7)
+			else if(PlayerInfo[playerid][pLevel] == 6 || PlayerInfo[playerid][pLevel] == 7)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Kumaty [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 8 || PlayerInfo[playerid][Level] == 9)
+			else if(PlayerInfo[playerid][pLevel] == 8 || PlayerInfo[playerid][pLevel] == 9)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Obeznany [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 10 || PlayerInfo[playerid][Level] == 11)
+			else if(PlayerInfo[playerid][pLevel] == 10 || PlayerInfo[playerid][pLevel] == 11)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Doœwiadczony [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 12|| PlayerInfo[playerid][Level] == 13)
+			else if(PlayerInfo[playerid][pLevel] == 12|| PlayerInfo[playerid][pLevel] == 13)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Specjalista [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 14 || PlayerInfo[playerid][Level] == 15)
+			else if(PlayerInfo[playerid][pLevel] == 14 || PlayerInfo[playerid][pLevel] == 15)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Expert [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 16 || PlayerInfo[playerid][Level] == 17)
+			else if(PlayerInfo[playerid][pLevel] == 16 || PlayerInfo[playerid][pLevel] == 17)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Weteran [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 18 || PlayerInfo[playerid][Level] == 19)
+			else if(PlayerInfo[playerid][pLevel] == 18 || PlayerInfo[playerid][pLevel] == 19)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Stary wyjadacz [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 20 || PlayerInfo[playerid][Level] == 21)
+			else if(PlayerInfo[playerid][pLevel] == 20 || PlayerInfo[playerid][pLevel] == 21)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Mistrz [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 22 || PlayerInfo[playerid][Level] == 23)
+			else if(PlayerInfo[playerid][pLevel] == 22 || PlayerInfo[playerid][pLevel] == 23)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Pro [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 24 || PlayerInfo[playerid][Level] == 25)
+			else if(PlayerInfo[playerid][pLevel] == 24 || PlayerInfo[playerid][pLevel] == 25)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Elita [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 26 || PlayerInfo[playerid][Level] == 27)
+			else if(PlayerInfo[playerid][pLevel] == 26 || PlayerInfo[playerid][pLevel] == 27)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Król RP [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 28 || PlayerInfo[playerid][Level] == 29)
+			else if(PlayerInfo[playerid][pLevel] == 28 || PlayerInfo[playerid][pLevel] == 29)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Nieomylny [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 30 || PlayerInfo[playerid][Level] == 31)
+			else if(PlayerInfo[playerid][pLevel] == 30 || PlayerInfo[playerid][pLevel] == 31)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wyrocznia [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 32 || PlayerInfo[playerid][Level] == 33)
+			else if(PlayerInfo[playerid][pLevel] == 32 || PlayerInfo[playerid][pLevel] == 33)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Cesarz RP [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] == 34 || PlayerInfo[playerid][Level] == 35)
+			else if(PlayerInfo[playerid][pLevel] == 34 || PlayerInfo[playerid][pLevel] == 35)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Legenda [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][Level] >= 36)
+			else if(PlayerInfo[playerid][pLevel] >= 36)
 			{
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}

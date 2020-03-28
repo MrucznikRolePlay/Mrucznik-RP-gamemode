@@ -38,17 +38,17 @@ public MruMySQL_LoadGroups()
 	    new uid;
     	sscanf(query, "p<|>d", uid);
 		sscanf(query,  "p<|>dds[32]s[6]ffffddd",
-			GroupInfo[uid][UID],
-			GroupInfo[uid][Type],
-			GroupInfo[uid][Name],
-			GroupInfo[uid][Color],
-			GroupInfo[uid][SpawnX],
-			GroupInfo[uid][SpawnY],
-			GroupInfo[uid][SpawnZ],
-			GroupInfo[uid][SpawnA],
-			GroupInfo[uid][SpawnVW],
-			GroupInfo[uid][SpawnINT],
-			GroupInfo[uid][Balance]
+			GroupInfo[uid][gUID],
+			GroupInfo[uid][gType],
+			GroupInfo[uid][gName],
+			GroupInfo[uid][gColor],
+			GroupInfo[uid][gSpawnX],
+			GroupInfo[uid][gSpawnY],
+			GroupInfo[uid][gSpawnZ],
+			GroupInfo[uid][gSpawnA],
+			GroupInfo[uid][gSpawnVW],
+			GroupInfo[uid][gSpawnINT],
+			GroupInfo[uid][gBalance]
 		);
 		i++;
 	}
@@ -72,8 +72,8 @@ public MruMySQL_LoadRanks()
 			name
 		);
 
-		RankInfo[group_id][level][Name] = name;
-		RankInfo[group_id][level][Level] = level;
+		RankInfo[group_id][level][rName] = name;
+		RankInfo[group_id][level][rLevel] = level;
 		i++;
 	}
 	mysql_free_result();

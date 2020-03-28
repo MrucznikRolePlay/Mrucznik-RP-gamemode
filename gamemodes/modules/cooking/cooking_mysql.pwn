@@ -46,7 +46,7 @@ MruMySQL_CookedMealsDialog(playerid)
 	new string[(44+MAX_COOKED_NAME)*50]; //message length: 12+1+MAX_COOKED_NAME+9+12+2=56, 64 for safety
 
 	mysql_query(sprintf("SELECT id, model, name, weight, type FROM mru_player_cooking WHERE owner='%d' ORDER BY id DESC LIMIT 50", 
-		PlayerInfo[playerid][UID]
+		PlayerInfo[playerid][pUID]
 	));
 	mysql_store_result();
 	{
@@ -77,7 +77,7 @@ MruMySQL_CookedMealsDialog(playerid)
 MruMySQL_AddCookedMeal(playerid, model, name[], weight, type)
 {
 	mysql_query(sprintf("INSERT INTO mru_player_cooking (owner, model, name, weight, type) VALUES ('%d', '%d', '%s', '%d', '%d')",
-		PlayerInfo[playerid][UID], model, name, weight, type
+		PlayerInfo[playerid][pUID], model, name, weight, type
 	));
 	return mysql_insert_id();
 }

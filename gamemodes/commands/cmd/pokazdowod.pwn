@@ -61,12 +61,12 @@ YCMD:pokazdowod(playerid, params[], help)
 				    //new otext[20];
 				    new jtext[20];
                     new otext[8];
-				    new age = PlayerInfo[playerid][Age];
-                    if(PlayerInfo[playerid][Gender] == 1) { atext = "Mê¿czyzna"; }
-	                else if(PlayerInfo[playerid][Gender] == 2) { atext = "Kobieta"; }
-	                /*if(PlayerInfo[playerid][Origin] == 1) { otext = "Los Santos"; }
-                    else if(PlayerInfo[playerid][Origin] == 2) { otext = "San Fierro"; }
-	                else if(PlayerInfo[playerid][Origin] == 3) { otext = "LV"; }*/
+				    new age = PlayerInfo[playerid][pAge];
+                    if(PlayerInfo[playerid][pGender] == 1) { atext = "Mê¿czyzna"; }
+	                else if(PlayerInfo[playerid][pGender] == 2) { atext = "Kobieta"; }
+	                /*if(PlayerInfo[playerid][pOrigin] == 1) { otext = "Los Santos"; }
+                    else if(PlayerInfo[playerid][pOrigin] == 2) { otext = "San Fierro"; }
+	                else if(PlayerInfo[playerid][pOrigin] == 3) { otext = "LV"; }*/
 	                //
 	                new ttext[20];
 					if(gTeam[playerid] == 3 || gTeam[playerid] == 4) { ttext = "Cywil"; }
@@ -87,7 +87,7 @@ YCMD:pokazdowod(playerid, params[], help)
 					else if(PlayerInfo[playerid][pMember] == 15 || PlayerInfo[playerid][pLider] == 15) { ttext = "Warsztat tuningu"; }//NoA
 					else if(PlayerInfo[playerid][pMember] == 16 || PlayerInfo[playerid][pLider] == 16) { ttext = "Bonehead Club"; }//WPS
 	                // 1 usa 2 europa 3 azja
-                    new pochodzenie = PlayerInfo[playerid][Origin];
+                    new pochodzenie = PlayerInfo[playerid][pOrigin];
                     switch(pochodzenie) {
                         case 1: otext = "USA";
                         case 2: otext = "Europa";
@@ -113,7 +113,7 @@ YCMD:pokazdowod(playerid, params[], help)
        				SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Dowód Osobisty ______________|");
 					format(string, sizeof(string), "- Imie i Nazwisko: %s", sendername);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
-					format(string, sizeof(string), "- SSN: %d%d%d%d%d%d%d", PlayerInfo[playerid][pMember],age,PlayerInfo[playerid][pLider],PlayerInfo[playerid][pPnumber],PlayerInfo[playerid][Job],PlayerInfo[playerid][Gender],PlayerInfo[playerid][Level]);
+					format(string, sizeof(string), "- SSN: %d%d%d%d%d%d%d", PlayerInfo[playerid][pMember],age,PlayerInfo[playerid][pLider],PlayerInfo[playerid][pPnumber],PlayerInfo[playerid][Job],PlayerInfo[playerid][pGender],PlayerInfo[playerid][pLevel]);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
 					format(string, sizeof(string), "- P³eæ: %s", atext);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);

@@ -35,7 +35,7 @@ YCMD:opis2(playerid, params[], help)
 {
     //SendClientMessage(playerid, COLOR_RED, "Komenda wy³¹czona na czas naprawy. Przepraszamy za utrudnienia.");
     /*
-    if(PlayerInfo[playerid][OnlineHours] < 4) return sendErrorMessage(playerid, "Opis dostêpny od 4 godzin online!");
+    if(PlayerInfo[playerid][pOnlineHours] < 4) return sendErrorMessage(playerid, "Opis dostêpny od 4 godzin online!");
     new var[8], id=-1;
     sscanf(params, "s[8]K<fix>(-1)", var, id);
     if(strlen(var) == 4 && (strcmp(var, "usuñ", true) == 0 || strcmp(var, "usun", true) == 0))

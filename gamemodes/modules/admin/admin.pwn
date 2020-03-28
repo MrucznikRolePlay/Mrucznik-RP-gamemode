@@ -241,7 +241,7 @@ IsAHeadAdmin(playerid)
 IsAKox(playerid)
 {
 	if(DEVELOPMENT) return true;
-	return PlayerInfo[playerid][UID] == 1 || PlayerInfo[playerid][UID] == 2;
+	return PlayerInfo[playerid][pUID] == 1 || PlayerInfo[playerid][pUID] == 2;
 }
 
 IsAScripter(playerid)
@@ -578,7 +578,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	PlayerInfo[playerid][pJailTime] = timeVal*60;
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, result);
 	SetPlayerVirtualWorld(playerid, 1000+playerid);
-	PlayerInfo[playerid][Mute] = 1;
+	PlayerInfo[playerid][pMute] = 1;
 	SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 	poscig[playerid] = 0;
 	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNickEx(adminid), timeVal, (result)); 

@@ -192,8 +192,8 @@ YCMD:setgroup(playerid, params[], help)
 		if(group == 1)
 		{
 			if(PlayerInfo[playerid][Group1] == 0) return SendClientMessage(playerid, CLR_GRAY, "Na tym slocie nie posiadasz ¿adnej grupy.");
-			if(kwota > PlayerInfo[playerid][Cash]) return 1;
-			PlayerInfo[playerid][Cash] -= kwota;
+			if(kwota > PlayerInfo[playerid][pCash]) return 1;
+			PlayerInfo[playerid][pCash] -= kwota;
 			GivePlayerMoney(playerid, -kwota);
 			GroupInfo[PlayerInfo[playerid][Group1]][gCash] += kwota;
   			ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_MSGBOX, ""NAME" » Grupy", "Pomyœlnie wp³aci³eœ podan¹ kwotê na konto grupy.", "OK", "");
@@ -203,8 +203,8 @@ YCMD:setgroup(playerid, params[], help)
 		else if(group == 2)
 		{
 			if(PlayerInfo[playerid][Group2] == 0) return SendClientMessage(playerid, CLR_GRAY, "Na tym slocie nie posiadasz ¿adnej grupy.");
-			if(kwota > PlayerInfo[playerid][Cash]) return 1;
-			PlayerInfo[playerid][Cash] -= kwota;
+			if(kwota > PlayerInfo[playerid][pCash]) return 1;
+			PlayerInfo[playerid][pCash] -= kwota;
 			GivePlayerMoney(playerid, -kwota);
 			GroupInfo[PlayerInfo[playerid][Group2]][gCash] += kwota;
   			ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_MSGBOX, ""NAME" » Grupy", "Pomyœlnie wp³aci³eœ podan¹ kwotê na konto grupy.", "OK", "");
@@ -214,8 +214,8 @@ YCMD:setgroup(playerid, params[], help)
 		else if(group == 3)
 		{
 			if(PlayerInfo[playerid][Group3] == 0) return SendClientMessage(playerid, CLR_GRAY, "Na tym slocie nie posiadasz ¿adnej grupy.");
-			if(kwota > PlayerInfo[playerid][Cash]) return 1;
-			PlayerInfo[playerid][Cash] -= kwota;
+			if(kwota > PlayerInfo[playerid][pCash]) return 1;
+			PlayerInfo[playerid][pCash] -= kwota;
 			GivePlayerMoney(playerid, -kwota);
 			GroupInfo[PlayerInfo[playerid][Group3]][gCash] += kwota;
   			ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_MSGBOX, ""NAME" » Grupy", "Pomyœlnie wp³aci³eœ podan¹ kwotê na konto grupy.", "OK", "");
@@ -233,7 +233,7 @@ YCMD:setgroup(playerid, params[], help)
 			if(PlayerInfo[playerid][Group1] == 0) return SendClientMessage(playerid, CLR_GRAY, "Na tym slocie nie posiadasz ¿adnej grupy.");
 			if(GroupInfo[PlayerInfo[playerid][Group1]][gPerm] & GLOBAL_GROUP_WYPLAC) return SendClientMessage(playerid, CLR_GRAY, "Ta grupa ma zablokowan¹ mo¿liwoœæ wyp³aty pieniêdzy.");
 			if(kwota > GroupInfo[PlayerInfo[playerid][Group1]][gCash]) return 1;
-			PlayerInfo[playerid][Cash] += kwota;
+			PlayerInfo[playerid][pCash] += kwota;
 			GivePlayerMoney(playerid, kwota);
 			GroupInfo[PlayerInfo[playerid][Group1]][gCash] -= kwota;
   			ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_MSGBOX, ""NAME" » Grupy", "Pomyœlnie wyp³aci³eœ podan¹ kwotê z konta grupy.", "OK", "");
@@ -245,7 +245,7 @@ YCMD:setgroup(playerid, params[], help)
 			if(PlayerInfo[playerid][Group2] == 0) return SendClientMessage(playerid, CLR_GRAY, "Na tym slocie nie posiadasz ¿adnej grupy.");
 			if(GroupInfo[PlayerInfo[playerid][Group2]][gPerm] & GLOBAL_GROUP_WYPLAC) return SendClientMessage(playerid, CLR_GRAY, "Ta grupa ma zablokowan¹ mo¿liwoœæ wyp³aty pieniêdzy.");
 			if(kwota > GroupInfo[PlayerInfo[playerid][Group2]][gCash]) return 1;
-			PlayerInfo[playerid][Cash] += kwota;
+			PlayerInfo[playerid][pCash] += kwota;
 			GivePlayerMoney(playerid, kwota);
 			GroupInfo[PlayerInfo[playerid][Group2]][gCash] -= kwota;
   			ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_MSGBOX, ""NAME" » Grupy", "Pomyœlnie wyp³aci³eœ podan¹ kwotê z konta grupy.", "OK", "");
@@ -257,7 +257,7 @@ YCMD:setgroup(playerid, params[], help)
 			if(PlayerInfo[playerid][Group3] == 0) return SendClientMessage(playerid, CLR_GRAY, "Na tym slocie nie posiadasz ¿adnej grupy.");
 			if(GroupInfo[PlayerInfo[playerid][Group3]][gPerm] & GLOBAL_GROUP_WYPLAC) return SendClientMessage(playerid, CLR_GRAY, "Ta grupa ma zablokowan¹ mo¿liwoœæ wyp³aty pieniêdzy.");
 			if(kwota > GroupInfo[PlayerInfo[playerid][Group3]][gCash]) return 1;
-			PlayerInfo[playerid][Cash] += kwota;
+			PlayerInfo[playerid][pCash] += kwota;
 			GivePlayerMoney(playerid, kwota);
 			GroupInfo[PlayerInfo[playerid][Group3]][gCash] -= kwota;
   			ShowPlayerDialog(playerid, DIALOG_INFO, DIALOG_STYLE_MSGBOX, ""NAME" » Grupy", "Pomyœlnie wyp³aci³eœ podan¹ kwotê z konta grupy.", "OK", "");

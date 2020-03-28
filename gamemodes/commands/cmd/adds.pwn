@@ -32,7 +32,7 @@ YCMD:adds(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][Level] >= 3)
+		if(PlayerInfo[playerid][pLevel] >= 3)
 		{
 			sendTipMessage(playerid, "W trakcie prac"); 
 		}

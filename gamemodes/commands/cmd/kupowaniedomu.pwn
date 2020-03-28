@@ -61,13 +61,13 @@ YCMD:kupowaniedomu(playerid, params[], help)
 										sendTipMessage(playerid, "Dom posiada zablokowan¹ mo¿liwoœæ kupna.");
 										return 1;
 									}
-									if(PlayerInfo[playerid][Level] < 3)
+									if(PlayerInfo[playerid][pLevel] < 3)
 									{
 										sendTipMessage(playerid, "Aby kupiæ dom musisz mieæ powy¿ej 3 lvl");
 										return 1;
 									}
 									new cenadomu = Dom[i][hCena];
-									if(cenadomu < kaska[playerid] || cenadomu < PlayerInfo[playerid][BankMoney])
+									if(cenadomu < kaska[playerid] || cenadomu < PlayerInfo[playerid][pBankMoney])
 									{
 										IDDomu[playerid] = i;
 										format(string, sizeof(string), "Czy na pewno chcesz kupiæ ten dom za %d$?\nAby kupiæ wciœnij 'Tak', aby anulowaæ naciœnij 'Nie'", cenadomu);

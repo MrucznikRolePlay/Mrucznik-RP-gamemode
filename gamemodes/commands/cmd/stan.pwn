@@ -40,7 +40,7 @@ YCMD:stan(playerid, params[], help)
           		sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie!");
 	            return 1;
 	        }
-			format(string, sizeof(string), "Na swoim koncie bankowym masz aktualnie $%d.", PlayerInfo[playerid][BankMoney]);
+			format(string, sizeof(string), "Na swoim koncie bankowym masz aktualnie $%d.", PlayerInfo[playerid][pBankMoney]);
 			sendTipMessageEx(playerid, COLOR_GREEN, string); 
 		}
 	}

@@ -49,7 +49,7 @@ kuracja_akceptuj(playerid)
         return 1;
     }
 
-    if(uid != PlayerInfo[giveplayerid][UID]) 
+    if(uid != PlayerInfo[giveplayerid][pUID]) 
     {
         SendClientMessage(playerid, COLOR_GREY, "   Gracz, który oferowa³ Ci kuracjê, wyszed³ z gry.");
         SetPVarInt(playerid, "kuracja-doctorid", INVALID_PLAYER_ID);
@@ -145,7 +145,7 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
 
     SetPVarInt(giveplayerid, "kuracja-akceptuj", 1);
     SetPVarInt(giveplayerid, "kuracja-doctorid", playerid);
-    SetPVarInt(giveplayerid, "kuracja-uid", PlayerInfo[playerid][UID]);
+    SetPVarInt(giveplayerid, "kuracja-uid", PlayerInfo[playerid][pUID]);
     SetPVarInt(giveplayerid, "kuracja-cost", cost);
     SetPVarInt(giveplayerid, "kuracja-commission", money);
     SetPVarInt(giveplayerid, "kuracja-disease", diseaseID);

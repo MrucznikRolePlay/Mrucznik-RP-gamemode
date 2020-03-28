@@ -35,11 +35,11 @@ YCMD:dskill(playerid, params[], help)
 	    new giveplayerid, idskill, level;
 		if( sscanf(params, "k<fix>dd", giveplayerid, idskill, level))
 		{
-			sendTipMessage(playerid, "/dskill [id gracza] [id skilla] [level]");
+			sendTipMessage(playerid, "/dskill [id gracza] [id skilla] [pLevel]");
 			return 1;
 		}
 
-		if(PlayerInfo[playerid][Level] >= 1)
+		if(PlayerInfo[playerid][pLevel] >= 1)
 		{
 		    if(idskill < 11 && idskill >= 0)
 			{

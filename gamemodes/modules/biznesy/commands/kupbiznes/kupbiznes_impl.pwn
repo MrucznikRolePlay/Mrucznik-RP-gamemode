@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kupbiznes_Impl(playerid)
 {
-    if(PlayerInfo[playerid][Level] < 2)
+    if(PlayerInfo[playerid][pLevel] < 2)
 	{
 		sendTipMessage(playerid, "Mo¿esz zakupiæ w³asny biznes dopiero od poziomu 2");
 		return 1;
@@ -64,7 +64,7 @@ command_kupbiznes_Impl(playerid)
 		return 1;
 	}
 	PlayerInfo[playerid][pBusinessOwner] = businessID; 
-	Business[businessID][b_ownerUID] = PlayerInfo[playerid][UID]; 
+	Business[businessID][b_ownerUID] = PlayerInfo[playerid][pUID]; 
 	Business[businessID][b_Name_Owner] = GetNick(playerid); 
 	new string[124]; 
 	sendTipMessageEx(playerid, COLOR_GREEN, "===[Zakupi³eœ swój w³asny biznes]===");

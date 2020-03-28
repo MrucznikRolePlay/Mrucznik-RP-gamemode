@@ -317,7 +317,7 @@ CheckPlayerBusiness(playerid)
 	new businessID = PlayerInfo[playerid][pBusinessOwner];
 	if(businessID != INVALID_BIZ_ID)
 	{
-		if(Business[businessID][b_ownerUID] != PlayerInfo[playerid][UID])
+		if(Business[businessID][b_ownerUID] != PlayerInfo[playerid][pUID])
 		{
 			sendErrorMessage(playerid, "Wczytywanie twojego biznesu siê nie powiod³o! Zostaje Ci on odebrany"); 
 			sendErrorMessage(playerid, "Je¿eli uwa¿asz to za b³¹d skryptu - zg³oœ stratê na naszym forum!");
@@ -455,7 +455,7 @@ Business_AkceptujBiznes(playerid)
 	PlayerInfo[giveplayerid][pBusinessOwner] = INVALID_BIZ_ID; 
 	PlayerInfo[playerid][pBusinessOwner] = businessID;
 	Business[businessID][b_cost] = price;
-	Business[businessID][b_ownerUID] = PlayerInfo[playerid][UID]; 
+	Business[businessID][b_ownerUID] = PlayerInfo[playerid][pUID]; 
 	Business[businessID][b_Name_Owner] = GetNick(playerid); 
 	MruMySQL_SaveAccount(playerid);
 	MruMySQL_SaveAccount(giveplayerid); 

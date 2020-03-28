@@ -253,7 +253,7 @@ Player_CanUseCar(playerid, vehicleid)
 					sendTipMessageEx(playerid,COLOR_GREY,sprintf("Twoje punkty skilla w zawodzie %s wynosz¹: %d pkt", JobNames[CarData[lcarid][c_Owner]], skill));
                     return 0;
                 }
-				if(GetVehicleModel(vehicleid) == 578 && PlayerInfo[playerid][Level] == 1)
+				if(GetVehicleModel(vehicleid) == 578 && PlayerInfo[playerid][pLevel] == 1)
 				{
 					format(string, sizeof(string), "Musisz mieæ 2 level aby prowadziæ tym pojazdem.");
                     sendTipMessageEx(playerid,COLOR_GREY,string);
@@ -296,9 +296,9 @@ Player_CanUseCar(playerid, vehicleid)
         {
             if(IsCarOwner(playerid, vehicleid, true))
 	        {
-                if(CarData[lcarid][c_Keys] != 0 && CarData[lcarid][c_Owner] != PlayerInfo[playerid][UID])
+                if(CarData[lcarid][c_Keys] != 0 && CarData[lcarid][c_Owner] != PlayerInfo[playerid][pUID])
                 {
-                    if(CarData[lcarid][c_Keys] != PlayerInfo[playerid][UID])
+                    if(CarData[lcarid][c_Keys] != PlayerInfo[playerid][pUID])
     	       	    {
                         sendTipMessageEx(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta³y zabrane przez w³aœciciela.");
                         PlayerInfo[playerid][pKluczeAuta] = 0;

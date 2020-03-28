@@ -44,7 +44,7 @@ YCMD:kontrakt(playerid, params[], help)
 		}
 
 		if(moneys < 30000 || moneys > 1000000) { sendTipMessageEx(playerid, COLOR_GREY, "Kontrakt musi wynosiæ od $30 000, do $1 000 000!"); return 1; }
-		if(PlayerInfo[playerid][Level] < 3)
+		if(PlayerInfo[playerid][pLevel] < 3)
 		{
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Musisz mieæ 3 lvl aby podpisywaæ kontrakty.");
 			return 1;
