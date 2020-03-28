@@ -1219,6 +1219,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pDrugs] = 0;
 	PlayerInfo[playerid][pLider] = 0;
 	PlayerInfo[playerid][pMember] = 0;
+	PlayerInfo[playerid][Group] = 0;
+	PlayerInfo[playerid][GroupsShow] = 0;
 	PlayerInfo[playerid][pOrg] = 0;
 	PlayerInfo[playerid][pRank] = 0;
 	PlayerInfo[playerid][pChar] = 0;

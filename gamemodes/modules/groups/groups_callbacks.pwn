@@ -40,7 +40,7 @@ hook OnPlayerConnect(playerid)
 	PlayerTextDrawSetProportional(playerid,Textdraw0[playerid], 1);
 	PlayerTextDrawSetSelectable(playerid,Textdraw0[playerid], 0);
 
-	Textdraw1[playerid] = CreatePlayerTextDraw(playerid,125.000000, 190.000000, "1  LSPD");
+	Textdraw1[playerid] = CreatePlayerTextDraw(playerid,125.000000, 190.000000, "1  Nazwa");
 	PlayerTextDrawBackgroundColor(playerid,Textdraw1[playerid], 255);
 	PlayerTextDrawFont(playerid,Textdraw1[playerid], 1);
 	PlayerTextDrawLetterSize(playerid,Textdraw1[playerid], 0.500000, 1.500000);

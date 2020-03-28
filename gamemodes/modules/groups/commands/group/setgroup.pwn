@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   test                                                    //
+//                                                 setgroup                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -30,9 +30,9 @@
 //-------<[ include ]>-------
 
 //-------<[ initialize ]>-------
-command_test()
+command_setgroup()
 {
-    new command = Command_GetID("test");
+    new command = Command_GetID("setgroup");
 
     //permissions
     Group_SetGlobalCommand(command, true);
@@ -43,7 +43,7 @@ command_test()
 }
 
 //-------<[ command ]>-------
-YCMD:grupy(playerid, params[], help)
+YCMD:setgroup(playerid, params[], help)
 {
 	new sub[32], rest[126];
 	if(sscanf(params, "s[32]S()[126]", sub, rest))
