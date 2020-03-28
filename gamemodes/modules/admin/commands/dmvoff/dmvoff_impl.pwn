@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dmvoff_Impl(playerid)
 {
-    if(PlayerInfo[playerid][Admin] >= 10 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
     {
         new string[124];
         DestroyActorsInDMV(playerid);

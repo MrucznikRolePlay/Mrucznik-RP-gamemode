@@ -32,7 +32,7 @@ YCMD:carjump(playerid, params[], help)
 {
 	if(IsPlayerInAnyVehicle(playerid))
 	{
-	    if(PlayerInfo[playerid][Admin] >= 1)
+	    if(PlayerInfo[playerid][pAdmin] >= 1)
     	{
 	        SetVehicleVelocity(GetPlayerVehicleID(playerid), 0.0, 0.0, 0.2);
 			return 1;

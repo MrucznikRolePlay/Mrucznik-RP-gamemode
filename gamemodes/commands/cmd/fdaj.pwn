@@ -31,7 +31,7 @@
 YCMD:fdaj(playerid, params[], help)
 {
 	new string[256];
-    if(PlayerInfo[playerid][Admin] >=10 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >=10 || IsAScripter(playerid))
 	{
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))

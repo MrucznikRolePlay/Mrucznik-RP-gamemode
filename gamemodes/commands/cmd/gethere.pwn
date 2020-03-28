@@ -47,7 +47,7 @@ YCMD:gethere(playerid, params[], help)
 		{
 		    if(plo != INVALID_PLAYER_ID)
 		    {
-				if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 				{
 					GetPlayerPos(playerid, plocx, plocy, plocz);
 					if(PlayerInfo[playerid][pInt] > 0)

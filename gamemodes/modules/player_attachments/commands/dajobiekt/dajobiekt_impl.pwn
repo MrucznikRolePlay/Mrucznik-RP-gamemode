@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dajobiekt_Impl(playerid, giveplayerid, bone, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, materialcolor1, materialcolor2)
 {
-    if(PlayerInfo[playerid][Admin] < 1000)
+    if(PlayerInfo[playerid][pAdmin] < 1000)
     {
         sendErrorMessage(playerid, "Nie jesteœ uprawniony!");
         return 1;

@@ -39,7 +39,7 @@ YCMD:wylogujgracz(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][Admin] >= 100)
+		if (PlayerInfo[playerid][pAdmin] >= 100)
 		{
 		    if(IsPlayerConnected(giveplayerid)&&giveplayerid != INVALID_PLAYER_ID)
 		    {

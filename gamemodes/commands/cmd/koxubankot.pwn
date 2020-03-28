@@ -51,7 +51,7 @@ YCMD:koxubankot(playerid, params[], help)
 					if(para1 != INVALID_PLAYER_ID)
 					{
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));
-						PlayerInfo[para1][Admin] = level;
+						PlayerInfo[para1][pAdmin] = level;
 						format(string, sizeof(string), "   Zosta³eœ mianowany na %d level admina przez %s", level, GetNickEx(playerid));
 						SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "   Da³eœ %s admina o levelu %d.", giveplayer,level);

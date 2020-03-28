@@ -35,7 +35,7 @@ YCMD:demorgan(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Admin] < 20)
+        if(PlayerInfo[playerid][pAdmin] < 20)
         {
             noAccessMessage(playerid);
             return 1;

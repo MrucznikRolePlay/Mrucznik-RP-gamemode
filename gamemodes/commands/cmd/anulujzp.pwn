@@ -30,7 +30,7 @@
 
 YCMD:anulujzp(playerid, params[], help) 
 {
-    if(PlayerInfo[playerid][Admin] >= 5) 
+    if(PlayerInfo[playerid][pAdmin] >= 5) 
 	{
         new giveid, gracznick[MAX_PLAYER_NAME];
 		

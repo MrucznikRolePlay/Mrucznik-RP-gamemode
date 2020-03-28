@@ -32,7 +32,7 @@ YCMD:getposp(playerid, params[], help)
 {
 	new string[64];
 
-    if(PlayerInfo[playerid][Admin] >= 5 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
 	{
 	    new giveplayerid;
 		if( sscanf(params, "k<fix>", giveplayerid))

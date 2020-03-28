@@ -68,7 +68,7 @@ YCMD:wiadomosc(playerid, params[], help)
         }
         if(PlayerInfo[playerid][pInjury] > 0 && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0)
         {
-            if(!PlayerInfo[playerid][Admin] && !PlayerInfo[playerid][HalfAdmin] && !PlayerInfo[playerid][pZG] && !IsAScripter(playerid)) 
+            if(!PlayerInfo[playerid][pAdmin] && !PlayerInfo[playerid][pHalfAdmin] && !PlayerInfo[playerid][pZG] && !IsAScripter(playerid)) 
             {
                 return sendErrorMessage(playerid, "Gdy jesteœ nieprzytomny mo¿esz wysy³aæ wiadomoœci jedynie na ma³¹ odleg³oœæ");
             }

@@ -35,7 +35,7 @@ YCMD:ustawmistrz(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Admin] >= 50)
+        if(PlayerInfo[playerid][pAdmin] >= 50)
         {
             new  giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))

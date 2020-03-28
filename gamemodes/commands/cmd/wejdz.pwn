@@ -779,7 +779,7 @@ YCMD:wejdz(playerid, params[], help)
 						PlayerInfo[playerid][pDomWKJ] = i;
 						GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
 					}
-					else if(PlayerInfo[playerid][Admin] >= 1000)
+					else if(PlayerInfo[playerid][pAdmin] >= 1000)
 					{
 						new deem = Dom[i][hDomNr];
 						new h, m;

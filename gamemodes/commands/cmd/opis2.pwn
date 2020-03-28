@@ -40,7 +40,7 @@ YCMD:opis2(playerid, params[], help)
     sscanf(params, "s[8]K<fix>(-1)", var, id);
     if(strlen(var) == 4 && (strcmp(var, "usuñ", true) == 0 || strcmp(var, "usun", true) == 0))
     {
-        if(id != -1 && PlayerInfo[playerid][Admin] >= 1)
+        if(id != -1 && PlayerInfo[playerid][pAdmin] >= 1)
         {
             if(!Opis_Usun(id)) return SendClientMessage(playerid, -1, "Opis: Gracz nie posiada opisu.");
             else

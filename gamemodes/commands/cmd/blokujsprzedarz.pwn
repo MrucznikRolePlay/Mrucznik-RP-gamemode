@@ -36,7 +36,7 @@ YCMD:blokujsprzedarz(playerid, params[], help)
     {
 	    if(IsPlayerConnected(playerid))
 	    {
-	        if(PlayerInfo[playerid][Admin] >= 5000)
+	        if(PlayerInfo[playerid][pAdmin] >= 5000)
 			{
 			    new dom;
 				if( sscanf(params, "d", dom))

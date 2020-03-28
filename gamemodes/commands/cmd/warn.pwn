@@ -48,7 +48,7 @@ YCMD:warn(playerid, params[], help)
 			}
 		}
 
-		if (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid))
 		{
             if(AntySpam[playerid] == 1)
 		    {
@@ -59,7 +59,7 @@ YCMD:warn(playerid, params[], help)
 		    {
 		        if(giveplayerid != INVALID_PLAYER_ID)
 		        {
-		            if(PlayerInfo[giveplayerid][Admin] >= 1)
+		            if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 		            {
 		                sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zwarnowaæ Admina !");
 		                return 1;

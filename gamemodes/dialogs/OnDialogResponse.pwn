@@ -7065,7 +7065,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        new godz = strval(inputtext);
 		        new string[256];
-		        if(godz >= 0 && godz <= 24 || PlayerInfo[playerid][Admin] >= 100)
+		        if(godz >= 0 && godz <= 24 || PlayerInfo[playerid][pAdmin] >= 100)
 		        {
 					format(string, sizeof(string), "Oœwietlenie domu zmienione na %d godzinê", godz);
 					SendClientMessage(playerid, COLOR_NEWS, string);
@@ -14626,7 +14626,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			if(GetPVarInt(playerid, "ChangingPassword")) //password changing
 			{
-				if(PlayerInfo[playerid][Admin] > 0 || PlayerInfo[playerid][HalfAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
+				if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pHalfAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
 				{
 					ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
 				}
@@ -16230,7 +16230,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					if(PlayerInfo[playerid][Admin] == 0 && PlayerInfo[playerid][HalfAdmin] == 0)
+					if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pHalfAdmin] == 0)
 					{
 						sendTipMessage(playerid, "Nie jesteœ administratorem"); 
 						return 1;

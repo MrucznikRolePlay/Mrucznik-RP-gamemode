@@ -42,7 +42,7 @@ YCMD:setteam(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][Admin] >= 10)
+		if (PlayerInfo[playerid][pAdmin] >= 10)
 		{
 		    if(IsPlayerConnected(para1))
 		    {

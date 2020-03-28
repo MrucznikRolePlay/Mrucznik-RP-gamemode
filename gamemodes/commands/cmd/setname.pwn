@@ -34,7 +34,7 @@ YCMD:setname(playerid, params[], help)
 	new giveplayer[MAX_PLAYER_NAME];
 
 	new newname[MAX_PLAYER_NAME];
-	if (PlayerInfo[playerid][Admin] >= 5000)//(Uprawnienia(playerid, ACCESS_OWNER))
+	if (PlayerInfo[playerid][pAdmin] >= 5000)//(Uprawnienia(playerid, ACCESS_OWNER))
 	{
 		new giveplayerid;
 		if( sscanf(params, "k<fix>s[25]", giveplayerid, newname))

@@ -46,7 +46,7 @@ YCMD:gotoint(playerid, params[], help)
 		{
 		    if(plo <= 100)
 		    {
-				if (PlayerInfo[playerid][Admin] >= 20)
+				if (PlayerInfo[playerid][pAdmin] >= 20)
 				{
 					SetPlayerInterior(playerid, IntInfo[plo][Int]);
 					SetPlayerPos(playerid, IntInfo[plo][Int_X], IntInfo[plo][Int_Y], IntInfo[plo][Int_Z]);

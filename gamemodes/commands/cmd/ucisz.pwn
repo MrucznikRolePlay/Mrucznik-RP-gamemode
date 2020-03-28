@@ -43,7 +43,7 @@ YCMD:ucisz(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 && PlayerInfo[playerid][HalfAdmin] <= 5 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 && PlayerInfo[playerid][pHalfAdmin] <= 5 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

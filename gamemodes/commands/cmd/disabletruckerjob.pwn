@@ -30,7 +30,7 @@
 
 YCMD:disabletruckerjob(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Admin] != 5000) return 1;
+    if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
     if(!GLOBAL_DISABLETRUCKER) GLOBAL_DISABLETRUCKER = true;
     else GLOBAL_DISABLETRUCKER = false;
     SendClientMessage(playerid, COLOR_GRAD2, " OK");

@@ -2313,7 +2313,7 @@ IsPlayerInFraction(playerid, frac, adminlvl=-1)
     new leader = PlayerInfo[playerid][pLider];
     new member = PlayerInfo[playerid][pMember];
     if(member==frac || leader == frac) return 1;
-    else if(adminlvl != -1 && PlayerInfo[playerid][Admin] >= adminlvl) return 1;
+    else if(adminlvl != -1 && PlayerInfo[playerid][pAdmin] >= adminlvl) return 1;
 	return 0;
 }
 
@@ -4494,7 +4494,7 @@ ShowStats2(playerid)
 	format(plWarny, sizeof(plWarny), "Warny: %d", PlayerInfo[playerid][pWarns]); 
 	format(plMats, sizeof(plMats), "Mats: %d", PlayerInfo[playerid][pMats]);
 	format(plDrugs, sizeof(plDrugs), "Drugs: %d", PlayerInfo[playerid][pDrugs]); 
-	format(plAdmin, sizeof(plAdmin), "Admin: %d", PlayerInfo[playerid][Admin]); 
+	format(plAdmin, sizeof(plAdmin), "Admin: %d", PlayerInfo[playerid][pAdmin]); 
 	format(plPraca, sizeof(plPraca), "Praca: %s", JobNames[PlayerInfo[playerid][Job]]); 
 	format(plDom, sizeof(plDom), "Dom: %d", PlayerInfo[playerid][pDom]);
 	format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: Unknow"); 
@@ -7300,11 +7300,11 @@ ABroadCast(color,const string[],level, podglad = 0)
 		{
 			if(podglad == 0)
 			{
-				if (PlayerInfo[i][Admin] >= level)
+				if (PlayerInfo[i][pAdmin] >= level)
 				{
 					SendClientMessage(i, color, string);
 				}
-				else if (PlayerInfo[i][HalfAdmin] >= level)
+				else if (PlayerInfo[i][pHalfAdmin] >= level)
 				{
 					SendClientMessage(i, color, string);
 				}
@@ -7315,11 +7315,11 @@ ABroadCast(color,const string[],level, podglad = 0)
 			}
 			else
 			{
-				if (PlayerInfo[i][Admin] >= level && TogPodglad[i] == 0)
+				if (PlayerInfo[i][pAdmin] >= level && TogPodglad[i] == 0)
 				{
 					SendClientMessage(i, color, string);
 				}
-				else if (PlayerInfo[i][HalfAdmin] >= level && TogPodglad[i] == 0)
+				else if (PlayerInfo[i][pHalfAdmin] >= level && TogPodglad[i] == 0)
 				{
 					SendClientMessage(i, color, string);
 				}	
@@ -7836,7 +7836,7 @@ SendAdminMessage(color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][Admin] >= 1 || PlayerInfo[i][HalfAdmin] >= 1 || IsAScripter(i))
+		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pHalfAdmin] >= 1 || IsAScripter(i))
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -7848,7 +7848,7 @@ SendCommandLogMessage(string[])
 {
 	foreach(new i : Player)
 	{
-	    if(PlayerInfo[i][Admin] >= 1 || PlayerInfo[i][HalfAdmin] >= 1 || IsAScripter(i))
+	    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pHalfAdmin] >= 1 || IsAScripter(i))
 	    {
 			if(GetPVarInt(i, "togcmdlog") == 0) SendClientMessage(i, 0xD8C173FF, string);
 		}
@@ -7870,7 +7870,7 @@ SendZGMessage(color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][Admin] >= 1 || PlayerInfo[i][HalfAdmin] >= 1 || PlayerInfo[i][pZG] >= 1 || IsAScripter(i))
+		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pHalfAdmin] >= 1 || PlayerInfo[i][pZG] >= 1 || IsAScripter(i))
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -12345,7 +12345,7 @@ stock SetPlayerTW(playerid, valueTime, time, weather)
 forward OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid);
 public OnPlayerTakeDamageWeaponHack(playerid, weaponid, fakekillid)
 {
-	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][Admin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][Level] > 1)
+	if(WeaponHackCheck(playerid, weaponid) > 0 && PlayerInfo[playerid][pAdmin] < 1 && IsPlayerConnected(fakekillid) && PlayerInfo[fakekillid][Level] > 1)
 	{
 		new string[128];
 		format(string, sizeof string, "ACv2 [#2002]: %s mo¿e mieæ weapon hack. | Jeœli fakekill, to: %s .", GetNickEx(playerid), GetNickEx(fakekillid));
@@ -12560,7 +12560,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				case 38:
 				{
 					//-------<[  Logi  ]>---------
-					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][Admin] < 1)
+					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
 					{
 						format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
 						SendCommandLogMessage(string);

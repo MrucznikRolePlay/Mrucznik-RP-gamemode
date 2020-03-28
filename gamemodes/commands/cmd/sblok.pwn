@@ -41,7 +41,7 @@ YCMD:sblok(playerid, params[], help)
             return 1;
         }
 
-		if (PlayerInfo[playerid][Admin] >= 5000 || PlayerInfo[playerid][HalfAdmin] == 4)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pHalfAdmin] == 4)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -52,7 +52,7 @@ YCMD:sblok(playerid, params[], help)
         	{
             	if(giveplayerid != INVALID_PLAYER_ID)
             	{
-            	    if(PlayerInfo[giveplayerid][Admin] >= 1)
+            	    if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 		            {
 		                sendErrorMessage(playerid, "Nie mozesz zablokowaæ Admina !");
 		                return 1;

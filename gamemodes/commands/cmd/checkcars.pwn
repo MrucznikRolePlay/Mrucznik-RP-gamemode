@@ -40,7 +40,7 @@ YCMD:checkcars(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][Admin] >= 1000)
+		if (PlayerInfo[playerid][pAdmin] >= 1000)
 		{
             ShowCarsForPlayer(para1, playerid);
 		}

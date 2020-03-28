@@ -41,7 +41,7 @@ YCMD:skick(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][Admin] >= 5000 || PlayerInfo[playerid][HalfAdmin] == 4 || PlayerInfo[playerid][Admin] == 7)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pHalfAdmin] == 4 || PlayerInfo[playerid][pAdmin] == 7)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -52,7 +52,7 @@ YCMD:skick(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-			        if(PlayerInfo[giveplayerid][Admin] >= 1 || PlayerInfo[giveplayerid][HalfAdmin] >= 1 || PlayerInfo[giveplayerid][pZG] >= 4)
+			        if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pHalfAdmin] >= 1 || PlayerInfo[giveplayerid][pZG] >= 4)
 		            {
 		                sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ Admina !");
 		                return 1;

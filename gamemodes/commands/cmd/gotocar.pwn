@@ -39,7 +39,7 @@ YCMD:gotocar(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			new Float:cwx2,Float:cwy2,Float:cwz2;
 			GetVehiclePos(testcar, cwx2, cwy2, cwz2);

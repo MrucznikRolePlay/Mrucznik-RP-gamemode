@@ -38,7 +38,7 @@ YCMD:setcarint(playerid, params[], help)
             sendTipMessage(playerid, "U¿yj /setcarint [carid]");
             return 1;
         }
-        if (PlayerInfo[playerid][Admin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
+        if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
         {
             LinkVehicleToInterior(plo, GetPlayerInterior(playerid));
 

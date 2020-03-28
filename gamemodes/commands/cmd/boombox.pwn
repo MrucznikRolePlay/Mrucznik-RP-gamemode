@@ -70,7 +70,7 @@ YCMD:boombox(playerid, params[], help)
         }
         else
         {
-            if(PlayerInfo[playerid][Admin] > 0)
+            if(PlayerInfo[playerid][pAdmin] > 0)
             {
                 if(strcmp(sub, "usun", true) == 0)
                 {

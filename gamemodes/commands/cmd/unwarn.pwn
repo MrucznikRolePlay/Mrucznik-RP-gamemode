@@ -43,7 +43,7 @@ YCMD:unwarn(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][Admin] >= 1 || Uprawnienia(playerid, ACCESS_KARY_UNBAN))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_KARY_UNBAN))
 		{
 		    if(IsPlayerConnected(giveplayerid))
 		    {

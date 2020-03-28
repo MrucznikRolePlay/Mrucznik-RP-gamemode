@@ -44,7 +44,7 @@ YCMD:adminajail(playerid, params[], help)
 		{
 			if (PlayerInfo[playa][pJailed] == 0)
 			{
-				if (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || (PlayerInfo[playerid][HalfAdmin] >= 1 && PlayerInfo[playerid][HalfAdmin] <= 3) || IsAScripter(playerid))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || (PlayerInfo[playerid][pHalfAdmin] >= 1 && PlayerInfo[playerid][pHalfAdmin] <= 3) || IsAScripter(playerid))
 				{
 					if (PlayerInfo[playerid][pZG] >= 6 && PlayerInfo[playerid][pZG] < 8 && money > 7)
 					{

@@ -39,9 +39,9 @@ YCMD:o(playerid, params[], help)
         {
             return 1;
         }
-		if ((noooc) && PlayerInfo[playerid][Admin] < 1)
+		if ((noooc) && PlayerInfo[playerid][pAdmin] < 1)
 		{
-		    if(PlayerInfo[playerid][HalfAdmin] < 1)
+		    if(PlayerInfo[playerid][pHalfAdmin] < 1)
 		    {
 		        if(PlayerInfo[playerid][pZG] < 5)
 		        {

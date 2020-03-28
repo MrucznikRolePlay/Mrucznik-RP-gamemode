@@ -30,7 +30,7 @@
 
 YCMD:gotostacja(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Admin] >= 5 || IsAScripter(playerid)) {
+    if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid)) {
         SetPlayerInterior(playerid, 0);
         SetPlayerVirtualWorld(playerid, 0);
         if (GetPlayerState(playerid) == 2)

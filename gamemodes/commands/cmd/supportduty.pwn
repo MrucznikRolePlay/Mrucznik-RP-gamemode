@@ -30,7 +30,7 @@
 
 YCMD:supportduty(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][HalfAdmin] == 0 && PlayerInfo[playerid][Admin] == 0) return 1;
+    if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pHalfAdmin] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
     if(GetPVarInt(playerid, "support_duty") == 0)
     {
         SetPVarInt(playerid, "support_duty", 1);

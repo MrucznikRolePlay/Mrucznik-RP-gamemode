@@ -41,7 +41,7 @@ YCMD:slap(playerid, params[], help)
 			return sendTipMessage(playerid, "U¿yj /slap [playerid/CzêœæNicku]");
 		}
 
-		if (PlayerInfo[playerid][Admin] >=1 || PlayerInfo[playerid][HalfAdmin] >= 1 && PlayerInfo[playerid][HalfAdmin] <= 3 || PlayerInfo[playerid][pZG] >= 2 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >=1 || PlayerInfo[playerid][pHalfAdmin] >= 1 && PlayerInfo[playerid][pHalfAdmin] <= 3 || PlayerInfo[playerid][pZG] >= 2 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

@@ -36,17 +36,17 @@ YCMD:dpa(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /dpa [playerid/CzêœæNicku]");
 		return 1;
 	}
-	if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		if(IsPlayerConnected(para1))
 		{
 			if(para1 != INVALID_PLAYER_ID)
 			{
-				if(PlayerInfo[para1][HalfAdmin] >= 1 && PlayerInfo[para1][HalfAdmin] <= 3)
+				if(PlayerInfo[para1][pHalfAdmin] >= 1 && PlayerInfo[para1][pHalfAdmin] <= 3)
 				{
 					new string[128], giveplayer[MAX_PLAYER_NAME];
-					PlayerInfo[para1][HalfAdmin] -= 1;
-					new level = PlayerInfo[para1][HalfAdmin];
+					PlayerInfo[para1][pHalfAdmin] -= 1;
+					new level = PlayerInfo[para1][pHalfAdmin];
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "   Zosta³eœ zdegradowany przez admina %s, masz teraz %d rangê pó³admina", GetNickEx(playerid), level);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);

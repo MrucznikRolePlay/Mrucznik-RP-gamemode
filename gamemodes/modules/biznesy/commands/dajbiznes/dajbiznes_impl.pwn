@@ -40,7 +40,7 @@ command_dajbiznes_Impl(playerid, giveplayerid, valueBiz)
         sendErrorMessage(playerid, "Ten biznes ju¿ do kogoœ nale¿y!"); 
         return 1;
     }
-    if(PlayerInfo[playerid][Admin] < 1000 && !IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] < 1000 && !IsAScripter(playerid))
     {
         sendErrorMessage(playerid, "Nie masz uprawnieñ.");
         return 1;

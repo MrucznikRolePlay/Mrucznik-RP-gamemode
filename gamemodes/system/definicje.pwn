@@ -480,7 +480,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define HTTP_SEND_LOGS  600
 
 #define TEXT_D_PANEL_KARY "Nadaj karê\nZdejmij karê\nWyszukiwanie danych gracza"
-#define TEXT_D_PANEL_LOGOW "-------------[IC]-------------\nCK.log\nNICK.log\nPAY.log\n-------------[STATS]-------------\nSETSTATS.log\n-------------[ADMIN]-------------\nBAN.log\nCZIT.log\nKICK.log\nWARN.log\nWARNING.log\n-------------[Special]-------------\nMySQL"
+#define TEXT_D_PANEL_LOGOW "-------------[IC]-------------\nCK.log\nNICK.log\nPAY.log\n-------------[STATS]-------------\nSETSTATS.log\n-------------[pAdmin]-------------\nBAN.log\nCZIT.log\nKICK.log\nWARN.log\nWARNING.log\n-------------[Special]-------------\nMySQL"
 
 //bugozord
 #define MAX_KONTAKTY	10

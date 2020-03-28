@@ -33,7 +33,7 @@ YCMD:ip(playerid, params[], help)
     new string[128];
     new giveplayer[MAX_PLAYER_NAME];
 
-    if (PlayerInfo[playerid][Admin] >= 1)
+    if (PlayerInfo[playerid][pAdmin] >= 1)
     {
         new giveplayerid;
         if( sscanf(params, "k<fix>", giveplayerid))

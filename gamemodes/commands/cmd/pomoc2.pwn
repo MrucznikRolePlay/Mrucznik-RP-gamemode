@@ -101,7 +101,7 @@ YCMD:pomoc2(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz *** (/r)adio (/d)epartment /sluzba /finfo /sprzedajapteczke /togbw /togdepo");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz ***/ulecz /apteczka /zastrzyk /diagnoza /zmienplec /kuracja /maseczka");
     }
-    if (PlayerInfo[playerid][Admin] >= 1)
+    if (PlayerInfo[playerid][pAdmin] >= 1)
     {
         SendClientMessage(playerid, COLOR_GRAD6, "*** ADMIN *** (/a)dmin (/ah)elp");
     }

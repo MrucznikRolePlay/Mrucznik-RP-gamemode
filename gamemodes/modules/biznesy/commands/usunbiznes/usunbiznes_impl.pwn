@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_usunbiznes_Impl(playerid)
 {
-    if(PlayerInfo[playerid][Admin] == 5000 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] == 5000 || IsAScripter(playerid))
     {
         sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
     }

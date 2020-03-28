@@ -30,7 +30,7 @@
 
 YCMD:scena(playerid, params[], help)
 {
-    if(GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][Admin] < 200)
+    if(GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pAdmin] < 200)
     {
         if(GetPVarInt(playerid, "scena-allow") != 1)
         {
@@ -56,7 +56,7 @@ YCMD:scena(playerid, params[], help)
             }
         }
     }
-    if(PlayerInfo[playerid][Admin] < 200 && GetPVarInt(playerid, "scena-allow") != 1) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 200 && GetPVarInt(playerid, "scena-allow") != 1) return 1;
     if(GetPlayerFraction(playerid) != FRAC_SN && SN_ACCESS[playerid] == 0)
     {
         ShowPlayerDialogEx(playerid, SCENA_DIALOG_GETMONEY, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "Aby postawiæ scenê w swoim zakresie musisz umieœciæ op³atê\nW sejf San News w wysokoœci 2 milionów!!!!\nJe¿eli organizujesz event OOC zg³oœ siê do lidera SN po pozwolenie na scenê (darmow¹)", "Zap³aæ", "Anuluj"); 

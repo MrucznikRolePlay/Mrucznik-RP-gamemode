@@ -32,7 +32,7 @@ YCMD:gotoin(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(playerid,1);
 			if (GetPlayerState(playerid) == 2)

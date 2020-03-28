@@ -44,7 +44,7 @@ YCMD:sprawdzteam(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][Admin] >= 10)
+		if (PlayerInfo[playerid][pAdmin] >= 10)
 		{
 		    if(IsPlayerConnected(para1))
 		    {

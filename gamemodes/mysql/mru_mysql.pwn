@@ -217,7 +217,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Fishes`='%d',",
 	PlayerInfo[playerid][Nick],
 	PlayerInfo[playerid][Level],
-	PlayerInfo[playerid][Admin],
+	PlayerInfo[playerid][pAdmin],
 	PlayerInfo[playerid][OldDonateRank],
 	PlayerInfo[playerid][UpgradeLvl],
 	PlayerInfo[playerid][OnlineHours],
@@ -283,7 +283,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pMats],
 	PlayerInfo[playerid][pDrugs],
 	PlayerInfo[playerid][pMember],
-	PlayerInfo[playerid][Group],
+	PlayerInfo[playerid][pGroup],
 	PlayerInfo[playerid][pOrg],
 	(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][Rank]+1000) : (PlayerInfo[playerid][Rank]),
 	PlayerInfo[playerid][pChar],
@@ -498,7 +498,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pSprunk],
 	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
-	PlayerInfo[playerid][HalfAdmin],
+	PlayerInfo[playerid][pHalfAdmin],
 	PlayerInfo[playerid][pUniform],
 	PlayerInfo[playerid][pCruiseController],
 	PlayerInfo[playerid][pFixKit],
@@ -577,7 +577,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][UID],
 		PlayerInfo[playerid][Nick],
 		PlayerInfo[playerid][Level], 
-		PlayerInfo[playerid][Admin], 
+		PlayerInfo[playerid][pAdmin], 
 		PlayerInfo[playerid][OldDonateRank], 
 		PlayerInfo[playerid][UpgradeLvl], 
 		PlayerInfo[playerid][OnlineHours], 
@@ -609,7 +609,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pMats], 
 		PlayerInfo[playerid][pDrugs], 
 		PlayerInfo[playerid][pMember], 
-		PlayerInfo[playerid][Group], 
+		PlayerInfo[playerid][pGroup], 
 		PlayerInfo[playerid][pOrg],
 		PlayerInfo[playerid][Rank], 
 		PlayerInfo[playerid][pChar], 
@@ -735,7 +735,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pSprunk],
 		PlayerInfo[playerid][pPodPW],
 		PlayerInfo[playerid][pStylWalki],
-		PlayerInfo[playerid][HalfAdmin],
+		PlayerInfo[playerid][pHalfAdmin],
 		PlayerInfo[playerid][pUniform],
 		PlayerInfo[playerid][pCruiseController],
 		PlayerInfo[playerid][pFixKit],
@@ -992,7 +992,7 @@ MruMySQL_Blockuj(nick[], admin, powod[])
     {
         new admnick[32];
         GetPlayerName(admin, admnick, 32);
-        format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`,`powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%s', '%d', '%s', '%d')", validnick, validpowod, PlayerInfo[admin][UID], admnick,WARN_BLOCK);
+        format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`,`powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%s', '%d', '%s', '%d')", validnick, validpowod, PlayerInfo[pAdmin][UID], admnick,WARN_BLOCK);
     }
     else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `powod`, `typ`, `nadal`) VALUES ('%s', '%s', '%d', 'SYSTEM')", validnick, validpowod,WARN_BLOCK);
 	mysql_query(query);
@@ -1016,7 +1016,7 @@ MruMySQL_BanujOffline(nick[]="Brak", powod[]="Brak", admin=-1, ip[]="nieznane")
     new uid=-1;
     if(strcmp(nick, "Brak", false) != 0) uid = MruMySQL_GetAccInt("UID", nick);
 	
-	if(admin != -1) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%d', '%s', '%s', '%s', '%d', '%s', '%d')", uid, nick, ip,validpowod, PlayerInfo[admin][UID], GetNick(admin),WARN_BAN);
+	if(admin != -1) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%d', '%s', '%s', '%s', '%d', '%s', '%d')", uid, nick, ip,validpowod, PlayerInfo[pAdmin][UID], GetNick(admin),WARN_BAN);
 	else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `typ`) VALUES ('%d', '%s', '%s', '%s', '%d')", uid, nick,ip, validpowod,WARN_BAN);
 	mysql_query(query);
 	
@@ -1048,8 +1048,8 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
     }
 
 
-	if(strcmp(nick, "Brak", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`, `IP`) VALUES ('%s', '%d', '%s', '%d', '%s')", nick, PlayerInfo[admin][UID], admnick,WARN_UNBAN, ip);
-    else if(strcmp(ip, "nieznane", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`IP`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", ip, PlayerInfo[admin][UID], admnick,WARN_UNBAN);
+	if(strcmp(nick, "Brak", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`, `IP`) VALUES ('%s', '%d', '%s', '%d', '%s')", nick, PlayerInfo[pAdmin][UID], admnick,WARN_UNBAN, ip);
+    else if(strcmp(ip, "nieznane", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`IP`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", ip, PlayerInfo[pAdmin][UID], admnick,WARN_UNBAN);
     if(strlen(query) < 30) return 0;
     if(!mysql_query(query)) return 0;
 	return 1;
@@ -1069,7 +1069,7 @@ MruMySQL_Unblock(nick[]="Brak", admin)
     mysql_query(query);
     query="\0";
 
-	if(strcmp(nick, "Brak", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", nick, PlayerInfo[admin][UID], admnick,WARN_UNBLOCK);
+	if(strcmp(nick, "Brak", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", nick, PlayerInfo[pAdmin][UID], admnick,WARN_UNBLOCK);
     if(strlen(query) < 30) return 0;
     if(!mysql_query(query)) return 0;
 	return 1;
@@ -1091,7 +1091,7 @@ MruMySQL_Banuj(playerid, powod[]="Brak", admin=-1)
     {
         new admnick[32];
         GetPlayerName(admin, admnick, 32);
-        format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%d', '%s', '%s', '%s', '%d', '%s', '%d')", uid, GetNickEx(playerid), ip, validpowod, PlayerInfo[admin][UID], admnick,WARN_BAN);
+        format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `nadal_uid`, `nadal`, `typ`) VALUES ('%d', '%s', '%s', '%s', '%d', '%s', '%d')", uid, GetNickEx(playerid), ip, validpowod, PlayerInfo[pAdmin][UID], admnick,WARN_BAN);
     }
     else format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal_uid`, `dostal`, `IP`, `powod`, `typ`, `nadal`) VALUES ('%d', '%s', '%s', '%s', '%d', 'SYSTEM')", uid, GetNickEx(playerid), ip, validpowod,WARN_BAN);
 	mysql_query(query);

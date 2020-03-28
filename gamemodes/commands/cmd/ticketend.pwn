@@ -30,7 +30,7 @@
 
 YCMD:ticketend(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][HalfAdmin] == 0 && PlayerInfo[playerid][Admin] == 0) return 1;
+    if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pHalfAdmin] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
     if(GetPVarInt(playerid, "validticket") != 1) return 1;
     SetPVarInt(playerid, "validticket", 0);
     if(Unspec[playerid][Coords][0] != 0)

@@ -32,7 +32,7 @@ YCMD:fixallveh(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Admin] < 1000)
+        if(PlayerInfo[playerid][pAdmin] < 1000)
         {
             noAccessMessage(playerid);
             return 1;

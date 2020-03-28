@@ -46,7 +46,7 @@ YCMD:og(playerid, params[], help)
 			format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
 			return SendClientMessage(playerid, TEAM_CYAN_COLOR, string);
 		}
-		else if ((!adds) && (!IsPlayerPremiumOld(playerid)) && PlayerInfo[playerid][Admin] < 10)
+		else if ((!adds) && (!IsPlayerPremiumOld(playerid)) && PlayerInfo[playerid][pAdmin] < 10)
 		{
 			format(string, sizeof(string), "Spróbuj póŸniej, %d sekund miêdzy og³oszeniami !",  (addtimer/1000));
 			return SendClientMessage(playerid, COLOR_GRAD2, string);
@@ -65,7 +65,7 @@ YCMD:og(playerid, params[], help)
 			Log(chatLog, INFO, "%s og³oszenie: %s", GetPlayerLogName(playerid), params);
 			format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
 			GameTextForPlayer(playerid, string, 5000, 5);
-			if (PlayerInfo[playerid][Admin] < 1 && (!IsPlayerPremiumOld(playerid)))
+			if (PlayerInfo[playerid][pAdmin] < 1 && (!IsPlayerPremiumOld(playerid)))
 			{
 				SetTimer("AddsOn", addtimer, 0);adds = 0;
 			}

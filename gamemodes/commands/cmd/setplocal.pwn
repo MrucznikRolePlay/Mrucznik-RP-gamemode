@@ -43,7 +43,7 @@ YCMD:setplocal(playerid, params[], help)
 			sendTipMessage(playerid, "Nie ma takiego gracza"); 
 			return 1;
 		}
-		if(!IsAScripter(playerid) || PlayerInfo[playerid][Admin] <= 200)
+		if(!IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] <= 200)
 		{
 			sendTipMessage(playerid, "Brak uprawnieñ"); 
 			return 1;

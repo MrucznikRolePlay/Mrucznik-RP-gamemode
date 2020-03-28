@@ -28,7 +28,7 @@ command_agraffiti_Impl(playerid, opcja[36], id)
     if(strcmp(opcja,"sprawdz",true) == 0)
     {
         new string[128];
-        if(PlayerInfo[playerid][Admin] < 1 && !IsAScripter(playerid))
+        if(PlayerInfo[playerid][pAdmin] < 1 && !IsAScripter(playerid))
         {
             sendTipMessage(playerid, "Komenda dostêpna dla administracji.");
             return 1;
@@ -91,7 +91,7 @@ command_agraffiti_Impl(playerid, opcja[36], id)
     }
     else if(strcmp(opcja, "goto", true) == 0)
     {
-        if(PlayerInfo[playerid][Admin] >= GRAFFITI_ADMIN)
+        if(PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN)
         {
             if(id == -1)
             {
@@ -120,7 +120,7 @@ command_agraffiti_Impl(playerid, opcja[36], id)
     }
     else if(strcmp(opcja, "lista", true) == 0)
     {
-        if(PlayerInfo[playerid][Admin] >= GRAFFITI_ADMIN)
+        if(PlayerInfo[playerid][pAdmin] >= GRAFFITI_ADMIN)
         {
             if(IsPlayerConnected(id) && id != -1)
             {

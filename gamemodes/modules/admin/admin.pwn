@@ -231,7 +231,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 IsAHeadAdmin(playerid)
 {
-	if(PlayerInfo[playerid][Admin] == 5000)
+	if(PlayerInfo[playerid][pAdmin] == 5000)
 	{
 		return 1;
 	}
@@ -267,7 +267,7 @@ SendMessageToAdminEx(text[], mColor, condition)//Wysy³a wiadomoœæ do administrat
 	new stradm[256];
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][Admin] > 0 || PlayerInfo[i][HalfAdmin] > 0 || IsAScripter(i))
+		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pHalfAdmin] > 0 || IsAScripter(i))
 		{
 			if(condition == 1)//Warunek w³¹czonej widocznoœci reportów
 			{

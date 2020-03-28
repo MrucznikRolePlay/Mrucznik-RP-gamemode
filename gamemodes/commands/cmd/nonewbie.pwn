@@ -33,7 +33,7 @@ YCMD:nonewbie(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         new string[128];
-		if (PlayerInfo[playerid][Admin] >= 5 || IsAScripter(playerid) )
+		if (PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid) )
 		{
 			if(!newbie)
 			{

@@ -30,7 +30,7 @@
 
 YCMD:gotoadmin(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Admin] < 1) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     SetPlayerVirtualWorld(playerid, 5000);
 	SetPlayerPos(playerid, 3524.550292, -236.021621, 35.619190);
     Wchodzenie(playerid);

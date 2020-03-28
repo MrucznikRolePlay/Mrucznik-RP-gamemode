@@ -30,7 +30,7 @@
 
 YCMD:houseowner(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Admin] >= 5000 )
+    if(PlayerInfo[playerid][pAdmin] >= 5000 )
     {
         new dld, id;
         if( sscanf(params, "dd", dld, id))

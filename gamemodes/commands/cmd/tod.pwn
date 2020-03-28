@@ -42,7 +42,7 @@ YCMD:tod(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][Admin] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
             SetWorldTime(hour);
             ServerTime = hour;

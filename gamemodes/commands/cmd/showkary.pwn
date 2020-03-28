@@ -30,7 +30,7 @@
 
 YCMD:showkary(playerid, params[], help)
 {
-	if(IsAScripter(playerid) || PlayerInfo[playerid][Admin] > 4500)
+	if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] > 4500)
 	{
 		if(kary_TXD_Status == 0)
 		{

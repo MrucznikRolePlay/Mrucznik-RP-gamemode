@@ -34,7 +34,7 @@ YCMD:startlotto(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Admin] >= 2000)
+        if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
             format(string, sizeof(string), "Nowoœci lotto: Losowanie rozpoczête.");
             OOCOff(COLOR_WHITE, string);

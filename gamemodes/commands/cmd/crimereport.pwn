@@ -32,7 +32,7 @@ YCMD:crimereport(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][Admin] >= 1000)
+		if(PlayerInfo[playerid][pAdmin] >= 1000)
 		{
             new giveplayerid, level;
 			if( sscanf(params, "k<fix>d", giveplayerid, level))

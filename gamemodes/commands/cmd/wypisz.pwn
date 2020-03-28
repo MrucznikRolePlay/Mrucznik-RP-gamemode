@@ -36,7 +36,7 @@ YCMD:wypisz(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAUrzednik(playerid) || PlayerInfo[playerid][Admin] >= 1000)
+        if(IsAUrzednik(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)
         {
             new x_nr[16];
 			new giveplayerid;

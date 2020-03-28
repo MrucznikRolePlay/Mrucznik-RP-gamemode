@@ -32,7 +32,7 @@ YCMD:wyloguj(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][Admin] >= 35)
+		if (PlayerInfo[playerid][pAdmin] >= 35)
 		{
             MruMySQL_SaveAccount(playerid);
 			gPlayerLogged[playerid] = 0;

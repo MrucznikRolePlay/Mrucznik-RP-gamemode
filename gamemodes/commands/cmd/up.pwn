@@ -32,7 +32,7 @@ YCMD:up(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][Admin] >= 1)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			new Float:slx, Float:sly, Float:slz;
 			GetPlayerPos(playerid, slx, sly, slz);

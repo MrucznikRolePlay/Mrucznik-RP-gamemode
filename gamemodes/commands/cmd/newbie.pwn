@@ -33,7 +33,7 @@ YCMD:newbie(playerid, params[], help)
 	new string[128];
     if(IsPlayerConnected(playerid))
     {
-        if(newbie == 1 && PlayerInfo[playerid][Admin] == 0 && !IsAScripter(playerid))
+        if(newbie == 1 && PlayerInfo[playerid][pAdmin] == 0 && !IsAScripter(playerid))
         {
             sendTipMessageEx(playerid, COLOR_GRAD2, "Chat newbie jest wy³¹czony!");
 			return 1;
@@ -93,13 +93,13 @@ YCMD:newbie(playerid, params[], help)
             {
                 format(nobchat, sizeof(nobchat), "(({00FF8C} Skrypter %s: {8D8DFF}%s ))", GetNickEx(playerid), params);
             }
-            else if(PlayerInfo[playerid][Admin] >= 1 && PlayerInfo[playerid][Admin] != 7 && PlayerInfo[playerid][Admin] != 5555)
+            else if(PlayerInfo[playerid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] != 7 && PlayerInfo[playerid][pAdmin] != 5555)
 		    {
-				format(nobchat, sizeof(nobchat), "(({FF6347} Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][Admin], GetNickEx(playerid), params);
+				format(nobchat, sizeof(nobchat), "(({FF6347} Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][HalfAdmin] >= 1 && PlayerInfo[playerid][HalfAdmin] <= 3)
+			else if(PlayerInfo[playerid][pHalfAdmin] >= 1 && PlayerInfo[playerid][pHalfAdmin] <= 3)
 		    {
-				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][Admin], GetNickEx(playerid), params);
+				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 			}
 	 		else if(IsPlayerPremiumOld(playerid))
 			{
@@ -182,7 +182,7 @@ YCMD:newbie(playerid, params[], help)
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			OOCNewbie(nobchat);
-			if(!IsAScripter(playerid) && PlayerInfo[playerid][Admin] == 0 && PlayerInfo[playerid][HalfAdmin] == 0)
+			if(!IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pHalfAdmin] == 0)
 			{
 				AntySpam[playerid] = 1;
 				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);

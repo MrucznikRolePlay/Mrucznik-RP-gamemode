@@ -32,7 +32,7 @@
 
 YCMD:uid(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Admin] == 0)
+    if(PlayerInfo[playerid][pAdmin] == 0)
     {
         noAccessMessage(playerid);
         return 1;

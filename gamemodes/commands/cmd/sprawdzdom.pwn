@@ -44,7 +44,7 @@ YCMD:sprawdzdom(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][Admin] >= 5)
+		if (PlayerInfo[playerid][pAdmin] >= 5)
 		{
 		    if(IsPlayerConnected(para1))
 		    {

@@ -50,7 +50,7 @@ YCMD:setstat(playerid, params[], help)
     	{
     	    if(giveplayerid != INVALID_PLAYER_ID)
     	    {
-				if (PlayerInfo[playerid][Admin] >= 5000)
+				if (PlayerInfo[playerid][pAdmin] >= 5000)
 				{
 					switch (stat)
 					{

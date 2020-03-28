@@ -1344,8 +1344,8 @@ public OnPlayerDisconnect(playerid, reason)
 		StopACall(playerid);
 	}
 //	if(GetPlayerAdminDutyStatus(playerid) == 1)
-	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][Admin] > 0
-	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][HalfAdmin] > 0
+	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pAdmin] > 0
+	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pHalfAdmin] > 0
 	|| firstDutyAdmin[playerid] == 1 && IsAScripter(playerid))//Je¿eli admin by³ na duty, wykonuje zapis w logi 
 	{
 		new exitReason[16];//String do logu
@@ -1391,8 +1391,8 @@ public OnPlayerDisconnect(playerid, reason)
 		AdminDutyMinuty[playerid] = 0;
 		firstDutyAdmin[playerid] = 0; 
 	}
-	if((PlayerInfo[playerid][Admin] >= 1 && iloscPozaDuty[playerid] >= 1)
-	|| (PlayerInfo[playerid][HalfAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
+	if((PlayerInfo[playerid][pAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
+	|| (PlayerInfo[playerid][pHalfAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
 	|| (IsAScripter(playerid) && iloscPozaDuty[playerid] >= 1))//Gdy nie by³ na admin duty, ale wykonywa³ akcje
 	{
 		if(firstDutyAdmin[playerid] == 0)
@@ -2156,7 +2156,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 	{
 		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNickEx(playerid), playerid, ip_address);
 
-		if(PlayerInfo[playerid][HalfAdmin] > 0 || PlayerInfo[playerid][Admin] > 0 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pHalfAdmin] > 0 || PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
 		{
 			//disable all codes for admins
 			return 1;
@@ -2349,7 +2349,7 @@ SetPlayerSpawnPos(playerid)
 	//Po /spec off
     if(Unspec[playerid][Coords][0] != 0.0 && Unspec[playerid][Coords][1] != 0.0 && Unspec[playerid][Coords][2] != 0.0)
     {
-		if(PlayerInfo[playerid][Admin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][HalfAdmin] >= 1 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
@@ -5063,7 +5063,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(newstate == PLAYER_STATE_DRIVER)
         {
             new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][Admin] < 1
+            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
 			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
             {
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD
@@ -5433,7 +5433,7 @@ PayDay()
 				}
 				if(PlayerInfo[i][pPayDay] >= 5)
 				{
-				    if(PlayerInfo[i][Admin] >= 1)
+				    if(PlayerInfo[i][pAdmin] >= 1)
 				    {
 				        format(string, sizeof(string), "Admini/%s.ini", playername2);
 				        dini_IntSet(string, "Godziny_Online", dini_Int(string, "Godziny_Online")+1 );
@@ -6180,14 +6180,14 @@ OnPlayerLogin(playerid, password[])
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
 	{
-        if(PlayerInfo[playerid][Admin] > 0 || PlayerInfo[playerid][HalfAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
+        if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pHalfAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
         {
-            if(PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][HalfAdmin] > 0)
+            if(PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pHalfAdmin] > 0)
             {
                 SetPVarInt(playerid, "support_duty", 1);
                 SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
             }
-			else if(PlayerInfo[playerid][Admin] > 0)
+			else if(PlayerInfo[playerid][pAdmin] > 0)
 			{
 				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/supportduty");
 			}

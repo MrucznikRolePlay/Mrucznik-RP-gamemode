@@ -41,7 +41,7 @@ YCMD:getcar(playerid, params[], help)
 		new Float:plocx,Float:plocy,Float:plocz;
 
 
-		if (PlayerInfo[playerid][Admin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 		{
 			GetPlayerPos(playerid, plocx, plocy, plocz);
 			SetVehiclePos(plo,plocx,plocy+4, plocz);

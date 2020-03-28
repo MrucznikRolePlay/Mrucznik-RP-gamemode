@@ -45,7 +45,7 @@ YCMD:banip(playerid, params[], help)
 	        return 1;
 	    }
 		new str[128];
-	    if(PlayerInfo[playerid][Admin] >= 1)
+	    if(PlayerInfo[playerid][pAdmin] >= 1)
         {
             if(strlen(var) < 7 || strlen(var) > 16)
             {

@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_specshow_Impl(playerid, valueSpec)
 {
-    if(PlayerInfo[playerid][Admin] >= 2000 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 2000 || IsAScripter(playerid))
     {
         new string[124];
         if(playerSeeSpec[playerid] == 0)
@@ -38,7 +38,7 @@ command_specshow_Impl(playerid, valueSpec)
             }
             if(IsPlayerConnected(valueSpec))
             {
-                if(PlayerInfo[valueSpec][Admin] == 0 && PlayerInfo[valueSpec][HalfAdmin] == 0)
+                if(PlayerInfo[valueSpec][pAdmin] == 0 && PlayerInfo[valueSpec][pHalfAdmin] == 0)
                 {
                     sendErrorMessage(playerid, "Ta osoba nie jest administratorem!"); 
                     return 1;

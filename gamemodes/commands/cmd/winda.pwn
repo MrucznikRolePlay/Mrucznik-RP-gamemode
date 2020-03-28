@@ -32,7 +32,7 @@ YCMD:winda(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(PlayerInfo[playerid][pLider] == 6 || PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][Admin] >= 1000)
+		if(PlayerInfo[playerid][pLider] == 6 || PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 			if(PlayerToPoint(10.0, playerid, 2808.0749511719, -1080.8464355469, 31.582866668701) || PlayerToPoint(10.0, playerid, 2808.07421875, -1080.845703125, 38.98286819458))
 			{

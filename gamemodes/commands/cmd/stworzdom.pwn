@@ -32,7 +32,7 @@ YCMD:stworzdom(playerid, params[], help)
 {
     if(gPlayerLogged[playerid] == 1)
     {
-	    if(PlayerInfo[playerid][Admin] == 5000)
+	    if(PlayerInfo[playerid][pAdmin] == 5000)
 		{
    			new interior, kesz;
 			if( sscanf(params, "dd", interior, kesz))

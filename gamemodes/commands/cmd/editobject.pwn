@@ -30,7 +30,7 @@
 
 YCMD:editobject(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Admin] != 5000) return 1;
+    if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
     SetPVarInt(playerid, "Allow-edit", 1);
     new id=-1;
     sscanf(params, "D(-1)", id);

@@ -32,7 +32,7 @@ YCMD:mi(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Admin] >= 1)
+        if(PlayerInfo[playerid][pAdmin] >= 1)
         {
 			if (!DeathWarning[playerid])
 			{

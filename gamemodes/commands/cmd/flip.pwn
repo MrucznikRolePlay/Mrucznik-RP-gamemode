@@ -32,7 +32,7 @@ YCMD:flip(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Admin] < 1  && PlayerInfo[playerid][Admin] != 7)
+        if(PlayerInfo[playerid][pAdmin] < 1  && PlayerInfo[playerid][pAdmin] != 7)
 		{
 		    noAccessMessage(playerid);
 		    return 1;

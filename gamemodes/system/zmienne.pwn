@@ -1189,8 +1189,8 @@ ZerujZmienne(playerid)
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
 	BiletAlhambra[playerid] = 0;
 	PlayerInfo[playerid][Level] = 0;
-	PlayerInfo[playerid][Admin] = 0;
-	PlayerInfo[playerid][HalfAdmin] = 0;
+	PlayerInfo[playerid][pAdmin] = 0;
+	PlayerInfo[playerid][pHalfAdmin] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][OldDonateRank] = 0;
 	PlayerInfo[playerid][UpgradeLvl] = 0;
@@ -1219,8 +1219,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pDrugs] = 0;
 	PlayerInfo[playerid][pLider] = 0;
 	PlayerInfo[playerid][pMember] = 0;
-	PlayerInfo[playerid][Group] = 0;
-	PlayerInfo[playerid][GroupsShow] = 0;
+	PlayerInfo[playerid][pGroup] = 0;
+	PlayerInfo[playerid][pGroupsShow] = 0;
 	PlayerInfo[playerid][pOrg] = 0;
 	PlayerInfo[playerid][Rank] = 0;
 	PlayerInfo[playerid][pChar] = 0;
@@ -1308,7 +1308,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pCygaro] = 0;
 	PlayerInfo[playerid][pSprunk] = 0;
 	PlayerInfo[playerid][pStylWalki] = 0;
-	PlayerInfo[playerid][HalfAdmin] = 0;
+	PlayerInfo[playerid][pHalfAdmin] = 0;
 	PlayerInfo[playerid][pZG] = 0;
 	PlayerInfo[playerid][pBW] = 0;
 	//Sandal

@@ -52,11 +52,11 @@ YCMD:setgroup(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GREY, "TIP: /g [info/online/v/zapros/zadania/wypros/kolor/wplac/wyplac]");
 		return 1;
 	}
-    if(PlayerInfo[playerid][Group] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ w ¿adnej grupie.");
+    if(PlayerInfo[playerid][pGroup] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ w ¿adnej grupie.");
 	if(strcmp(sub, "info", true) == 0)
 	{
  		new str[256];
-        format(str, sizeof(str), "UID:\t%d\nNazwa:\t%s\nKonto bankowe:\t$%d", GroupInfo[PlayerInfo[playerid][Group]][UID], GroupInfo[PlayerInfo[playerid][Group]][Name], GroupInfo[PlayerInfo[playerid][Group]][Balance]);
+        format(str, sizeof(str), "UID:\t%d\nNazwa:\t%s\nKonto bankowe:\t$%d", GroupInfo[PlayerInfo[playerid][pGroup]][UID], GroupInfo[PlayerInfo[playerid][pGroup]][Name], GroupInfo[PlayerInfo[playerid][pGroup]][Balance]);
 		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", str); 
 	}
 	/*else if(strcmp(sub, "online", true) == 0)
@@ -378,14 +378,14 @@ YCMD:setgroup(playerid, params[], help)
 		}
 	}
     */
-    SendClientMessage(playerid, -1, sprintf("Aresztowanie NA RANGE [%d]: %d", PlayerInfo[playerid][Rank], PermsInfo[PlayerInfo[playerid][Group]][PlayerInfo[playerid][Rank]][GROUP_PERM_ARREST]));
+    SendClientMessage(playerid, -1, sprintf("Aresztowanie NA RANGE [%d]: %d", PlayerInfo[playerid][Rank], PermsInfo[PlayerInfo[playerid][pGroup]][PlayerInfo[playerid][Rank]][GROUP_PERM_ARREST]));
 	return 1;
 }
 
 YCMD:test2(playerid, params[], help)
 {
-    PlayerInfo[playerid][Group] = 2;
-    new groupid = PlayerInfo[playerid][Group];
+    PlayerInfo[playerid][pGroup] = 2;
+    new groupid = PlayerInfo[playerid][pGroup];
     new rankid = PlayerInfo[playerid][Rank];
     PermsInfo[groupid][rankid][GROUP_PERM_ARREST] = 1;
     SendClientMessage(playerid, -1, sprintf("Aresztowanie: %d, Cos tam: %d", PermsInfo[groupid][rankid][GROUP_PERM_ARREST], PermsInfo[groupid][rankid][GROUP_PERM_TEST]));

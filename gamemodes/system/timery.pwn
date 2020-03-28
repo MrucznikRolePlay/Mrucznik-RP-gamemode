@@ -842,7 +842,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		else if(afktime == 1740 && (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || IsAScripter(playerid)))
+		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid)))
 		{
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
@@ -857,11 +857,11 @@ public PlayerAFK(playerid, afktime, breaktime)
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		if(afktime > 600 && (PlayerInfo[playerid][Admin] >= 1 || PlayerInfo[playerid][HalfAdmin] >= 1 || IsAScripter(playerid)))
+		if(afktime > 600 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid)))
 		{
 			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
-				if(afktime > 1800 && PlayerInfo[playerid][Admin] != 5000)
+				if(afktime > 1800 && PlayerInfo[playerid][pAdmin] != 5000)
 				{
 					SendClientMessage(playerid, 0xAA3333AA, "Zosta³eœ skickowany za zbyt d³ugie AFK (30 minut).");
 					SetTimerEx("KickEx", 500, false, "i", playerid);
@@ -871,7 +871,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			}
 			else
 			{
-				if(afktime > 900 && PlayerInfo[playerid][Admin] != 5000)
+				if(afktime > 900 && PlayerInfo[playerid][pAdmin] != 5000)
 				{
 					SendClientMessage(playerid, 0xAA3333AA, "Nie wolno afczyæ podczas @Duty! Otrzymujesz Kicka za AFK (15min)");
 					SetTimerEx("KickEx", 500, false, "i", playerid);
@@ -1169,7 +1169,7 @@ public Spectator()
             }
         }
         //END ibiza
-		if(GetPlayerPing(i) >= 2000 && PlayerInfo[i][Admin] == 0)
+		if(GetPlayerPing(i) >= 2000 && PlayerInfo[i][pAdmin] == 0)
 		{
 			if(gPlayerLogged[i] == 1)
 			{
@@ -1197,7 +1197,7 @@ public Spectator()
 				GetPlayerName(specid, specNAME, sizeof(specNAME));
 				GetPlayerHealth(specid, specHP);
 				GetPlayerIp(specid, specIP, sizeof(specIP));
-				if(PlayerInfo[i][Admin] > 0 || IsAScripter(i)) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
+				if(PlayerInfo[i][pAdmin] > 0 || IsAScripter(i)) format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f~n~~y~IP: %s",specNAME,specid,specHP,specIP);
 				else format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~%s(ID:%d)~n~~y~HP:%.1f",specNAME,specid,specHP);
 				GameTextForPlayer(i, string, 2500, 3);
 				SpectateTime[i]++;
@@ -2087,7 +2087,7 @@ public IdleKick()
 {
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][Admin] < 1 || PlayerInfo[i][HalfAdmin] < 1)
+		if(PlayerInfo[i][pAdmin] < 1 || PlayerInfo[i][pHalfAdmin] < 1)
 		{
 			GetPlayerPos(i, PlayerPos[i][0], PlayerPos[i][1], PlayerPos[i][2]);
 			if(PlayerPos[i][0] == PlayerPos[i][3] && PlayerPos[i][1] == PlayerPos[i][4] && PlayerPos[i][2] == PlayerPos[i][5])
@@ -2147,7 +2147,7 @@ public RPGTimer()
         new rpgammo;
         new string[128];
         GetPlayerWeaponData(i, 7, rpggun, rpgammo);
-        if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][Admin] < 1)//rpg czit
+        if(rpggun == 35 && rpgammo == 0 && PlayerInfo[i][pAdmin] < 1)//rpg czit
         {
 			MruDialog(i, "ACv2: Kod #2005", "Zosta³eœ wyrzucony za weapon hack RPG.");
 			format(string, sizeof string, "ACv2 [#2005]: %s zosta³ wyrzucony za weapon hack RPG.", GetNick(i));

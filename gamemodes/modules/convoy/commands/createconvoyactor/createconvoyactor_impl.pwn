@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_createconvoyactor_Impl(playerid, skin)
 {
-    if(PlayerInfo[playerid][Admin] < 1) {
+    if(PlayerInfo[playerid][pAdmin] < 1) {
         noAccessMessage(playerid);
         return 1;
     }

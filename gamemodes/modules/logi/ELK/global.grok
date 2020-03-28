@@ -2,7 +2,7 @@ NICKNAME \w+[_ ]\w+(?:[_ ]\w+)?
 PLAYER_NAME \{Player: %{NICKNAME:[player][nick]:string}(?:\[%{INT:[player][uid]:int}\])?}
 PLAYER_ATTACKER \{Player: %{NICKNAME:[attacker][nick]:string}\[%{INT:[attacker][uid]:int}\]\}
 PLAYER_VICTIM \{Player: %{NICKNAME:[victim][nick]:string}\[%{INT:[victim][uid]:int}\]\}
-PLAYER_ADMIN \{Player: %{NICKNAME:[admin][nick]:string}\[%{INT:[admin][uid]:int}\]\}
+PLAYER_ADMIN \{Player: %{NICKNAME:[pAdmin][nick]:string}\[%{INT:[pAdmin][uid]:int}\]\}
 
 WEAPON \{Weapon: %{DATA:[weapon][name]:string}:\[id: %{INT:[weapon][id]:int}\]\}
 WEAPON_AMMO %{DATA:[weapon][name]:string}:\[id: %{INT:[weapon][id]:int}, ammo: %{INT:[weapon][ammo]:int}\]\}

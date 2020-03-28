@@ -30,7 +30,7 @@
 
 YCMD:jump(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Admin] >= 15)
+    if(PlayerInfo[playerid][pAdmin] >= 15)
     {
         OddajZycie(playerid, 3, "Oddano Ci ¿ycie", true);
         new Float:x,Float:y,Float:z;

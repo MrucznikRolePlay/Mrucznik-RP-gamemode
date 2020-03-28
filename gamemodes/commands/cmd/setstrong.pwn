@@ -47,7 +47,7 @@ YCMD:setstrong(playerid, params[], help)
 	{
 		if(PlayerInfo[giveplayerid][pStrong] != MAX_STRONG_VALUE)
 		{
-			if(PlayerInfo[playerid][Admin] >= 3500 || IsAScripter(playerid))
+			if(PlayerInfo[playerid][pAdmin] >= 3500 || IsAScripter(playerid))
 			{
 				format(string, sizeof(string), "Administrator %s ustali³ Ci wartoœæ si³y na %d [Poprzednia wartoœæ %d]", GetNickEx(playerid), valueStrong, PlayerInfo[giveplayerid][pStrong]);
 				sendTipMessageEx(giveplayerid, COLOR_P@, string);

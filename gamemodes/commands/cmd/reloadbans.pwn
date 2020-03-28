@@ -30,7 +30,7 @@
 
 YCMD:reloadbans(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][Admin] >= 100)
+	if(PlayerInfo[playerid][pAdmin] >= 100)
 	{
 	    SendClientMessage(playerid, COLOR_GRAD6,"Trwa prze³adowywanie pliku samp.ban...");
 	    SendRconCommand("reloadbans");

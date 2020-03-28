@@ -266,7 +266,7 @@ Player_CanUseCar(playerid, vehicleid)
                 {
                     if(GetPlayerFraction(playerid) == FRAC_KT) return 1;
                 }
-                if(PlayerInfo[playerid][Admin] >= 5000) return 1;
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
                 format(string, sizeof(string), "Aby prowadziæ ten pojazd musisz byæ w zawodzie %s.", JobNames[CarData[lcarid][c_Owner]]);
                 sendTipMessageEx(playerid,COLOR_GREY,string);
 				return 0;
@@ -277,7 +277,7 @@ Player_CanUseCar(playerid, vehicleid)
 	    {
             if(CarData[lcarid][c_Owner] != GetPlayerOrg(playerid))
             {
-                if(PlayerInfo[playerid][Admin] >= 5000) return 1;
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
 				//ERROR WUT
                 //format(string, sizeof(string), " Ten pojazd nale¿y do rodziny %s i nie mo¿esz nim kierowaæ.", OrgInfo[orgID(CarData[lcarid][c_Owner])][o_Name]);
                 format(string, sizeof(string), " Ten pojazd nale¿y do rodziny i nie mo¿esz nim kierowaæ.");
@@ -286,7 +286,7 @@ Player_CanUseCar(playerid, vehicleid)
             }
 	        if(PlayerInfo[playerid][Rank] < CarData[lcarid][c_Rang])
 	        {
-                if(PlayerInfo[playerid][Admin] >= 5000) return 1;
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
                 format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
 		        sendTipMessageEx(playerid,COLOR_GREY,string);
 		        return 0;

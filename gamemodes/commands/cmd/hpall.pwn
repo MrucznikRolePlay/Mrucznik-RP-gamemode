@@ -34,7 +34,7 @@ YCMD:hpall(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][Admin] >= 2000)
+        if(PlayerInfo[playerid][pAdmin] >= 2000)
         {
             format(string, sizeof(string), "Administrator %s uleczyl wszystkich.", GetNickEx(playerid));
             SendClientMessageToAll(COLOR_LIGHTGREEN, string);

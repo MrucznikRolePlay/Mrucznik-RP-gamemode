@@ -41,7 +41,7 @@ YCMD:setarmor(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][Admin] >= 1000 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

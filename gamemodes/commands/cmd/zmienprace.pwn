@@ -42,7 +42,7 @@ YCMD:zmienprace(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /setjob [playerid/CzêœæNicku] [id pracy]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][Admin] >= 5000 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {

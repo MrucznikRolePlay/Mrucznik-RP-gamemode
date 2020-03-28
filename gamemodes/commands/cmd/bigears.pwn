@@ -30,7 +30,7 @@
 
 YCMD:bigears(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][Admin] >= 200)
+    if(PlayerInfo[playerid][pAdmin] >= 200)
     {
 		if (!BigEar[playerid])
 		{
