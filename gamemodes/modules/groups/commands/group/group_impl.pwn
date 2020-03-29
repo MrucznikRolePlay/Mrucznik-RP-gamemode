@@ -28,7 +28,7 @@ command_group_Impl(playerid, sub[32], rest[126])
     if(strcmp(sub, "info", true) == 0)
 	{
  		new str[256];
-        format(str, sizeof(str), "UID:\t%d\nNazwa:\t%s\nKonto bankowe:\t$%d", GroupInfo[PlayerInfo[playerid][pGroup]][gUID], GroupInfo[PlayerInfo[playerid][pGroup]][gName], GroupInfo[PlayerInfo[playerid][pGroup]][gBalance]);
+        format(str, sizeof(str), "{FFFFFF}UID:\t%d\nNazwa:\t%s\nKolor:\t{%s}#%s{FFFFFF}\nKonto bankowe:\t$%d", GroupInfo[PlayerInfo[playerid][pGroup]][gUID], GroupInfo[PlayerInfo[playerid][pGroup]][gName], GroupInfo[PlayerInfo[playerid][pGroup]][gColor], GroupInfo[PlayerInfo[playerid][pGroup]][gColor], GroupInfo[PlayerInfo[playerid][pGroup]][gBalance]);
 		ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", str); 
 	}
 	else if(strcmp(sub, "online", true) == 0)

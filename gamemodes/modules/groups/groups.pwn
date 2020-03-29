@@ -85,8 +85,8 @@ stock ShowOnlineGroupPlayers(playerid)
 		}
 	}
 	format(header, sizeof(header), "Pracownicy (%s)", GroupInfo[PlayerInfo[playerid][pGroup]][gName]);
-	if(plrs) ShowPlayerDialogEx(playerid, DIALOG_LIST, DIALOG_STYLE_LIST, header, big_str, "OK", "");
-	else ShowPlayerDialogEx(playerid, DIALOG_LIST, DIALOG_STYLE_LIST, header, "Nie ma nikogo online z tej grupy.", "OK", "");
+	if(plrs) ShowPlayerDialogEx(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_LIST, header, big_str, "OK", "");
+	else ShowPlayerDialogEx(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_LIST, header, "Nie ma nikogo online z tej grupy.", "OK", "");
 	return 1;
 }
 
