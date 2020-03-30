@@ -6943,7 +6943,6 @@ public OnPlayerText(playerid, text[])
 				}//lets start
 				if(strcmp(x_nr,"1",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz miec 3 rangê aby pisaæ newsy Hitman Agency !"); return 0; }
 				    if(News[hTaken1] == 0)
 				    {
@@ -6951,7 +6950,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "Za krótki tekst newsa !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd1], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact1], string, 0, strlen(string));
-						News[hTaken1] = 1; PlacedNews[playerid] = 1;
+						News[hTaken1] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -6963,7 +6962,6 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"2",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken2] == 0)
 				    {
@@ -6971,7 +6969,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krótki !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd2], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact2], string, 0, strlen(string));
-						News[hTaken2] = 1; PlacedNews[playerid] = 1;
+						News[hTaken2] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -6983,7 +6981,6 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"3",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken3] == 0)
 				    {
@@ -6991,7 +6988,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krótki !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd3], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact3], string, 0, strlen(string));
-						News[hTaken3] = 1; PlacedNews[playerid] = 1;
+						News[hTaken3] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -7003,7 +7000,6 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"4",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken4] == 0)
 				    {
@@ -7011,7 +7007,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krótki !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd4], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact4], string, 0, strlen(string));
-						News[hTaken4] = 1; PlacedNews[playerid] = 1;
+						News[hTaken4] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -7023,7 +7019,6 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"5",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajêty, usuñ wiadomoœæ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieæ 3 rangê aby pisaæ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken5] == 0)
 				    {
@@ -7031,7 +7026,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krótki !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd5], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact5], string, 0, strlen(string));
-						News[hTaken5] = 1; PlacedNews[playerid] = 1;
+						News[hTaken5] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieœci³eœ news na kanale Hitman Agency.");
 						return 0;
 				    }
