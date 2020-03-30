@@ -1,0 +1,14 @@
+{
+    "name": "laptop",
+    "description": "Uruchamia laptop Hitman Agency.",
+    "permissions": [
+        "everyone",
+        "frakcja_HA"
+    ],
+    "author": "Mrucznik",
+    "aliases": [
+        "portable"
+    ],
+    "parameters": [],
+    "date": "30.03.2020"
+}

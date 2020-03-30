@@ -1,0 +1,11 @@
+{
+    "name": "hitman",
+    "description": "Modu³ zawieraj¹cy funkcjonalnoœci frakcji Hitman Agency.",
+    "author": "Mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": true,
+    "files": [],
+    "commands": true,
+    "date": "30.03.2020"
+}
