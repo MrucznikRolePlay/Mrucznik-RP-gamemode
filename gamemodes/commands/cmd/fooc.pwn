@@ -40,7 +40,7 @@ YCMD:fooc(playerid, params[], help)
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
 			return 1;
 		}*/
-		GetPlayerName(playerid, sendername, sizeof(sendername));
+		sendername = GetNickEx(playerid);
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj (/fo)oc [tekst]");
