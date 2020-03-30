@@ -5870,23 +5870,24 @@ VerifyPlayerIp(playerid)
 
 VeryfiLastLogin(playerid)
 {
-	//TODO: MySQL
-	// new query[128];
-	// format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s' LIMIT 1", GetNick(playerid));
-	// mysql_query(query);
-	// mysql_store_result();
-	// if(mysql_num_rows()) //ostatnie logowanie po 15
-	// {
-	// 	mysql_free_result();
-	// 	Log(serverLog, INFO, "Logon matched for %s", GetNick(playerid));
-	// 	return true;
-	// }
-	// else
-	// {
-	// 	mysql_free_result();
-	// 	Log(serverLog, INFO, "Logon mismatched for %s", GetNick(playerid));
-	// 	return false;
-	// }
+	new query[128];
+	format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s' LIMIT 1", GetNick(playerid));
+	new Cache:result = mysql_query(mruMySQL_Connection, query);
+	if(cache_is_valid(result))
+	{
+		if(cache_num_rows())
+		{
+			cache_delete(result);
+			Log(serverLog, INFO, "Logon matched for %s", GetNick(playerid));
+			return true;
+		}
+		else
+		{
+			cache_delete(result);
+			Log(serverLog, INFO, "Logon mismatched for %s", GetNick(playerid));
+			return false;
+		}
+	}
 }
 
 PasswordConversion(playerid, accountPass[], password[])
