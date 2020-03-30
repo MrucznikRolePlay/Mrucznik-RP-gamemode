@@ -31,7 +31,7 @@
 YCMD:respawnplayer(playerid, params[], help)
 {
     //walidacja
-    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pHalfAdmin] < 1) return 1;
     new v;
     if(sscanf(params, "k<fix>", v)) return sendTipMessage(playerid, "U¿yj /respawnplayer [ID/Nick]");
     if(!IsPlayerConnected(v)) return sendErrorMessage(playerid, "Niepoprawne ID gracza.");

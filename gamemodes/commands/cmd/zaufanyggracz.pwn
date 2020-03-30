@@ -41,7 +41,7 @@ YCMD:zaufanygracz(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /zg [admin chat]");
 			return 1;
 		}
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
+		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1)
 		{
 			sendTipMessage(playerid, "Zaufani nie istniej¹! PogódŸ siê z tym."); 
 			return 1;

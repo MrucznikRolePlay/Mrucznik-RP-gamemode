@@ -45,7 +45,7 @@ YCMD:panel(playerid, params[], help)
     else
     {
         new var[32], sub[32], powod[64];
-        if(sscanf(params, "s[32]s[32]S()[64]", sub, var, powod)) return SendClientMessage(playerid, COLOR_GRAD2, "Parametry: unban [nick] | unbanip [IP] | ban [nick] [powód] | banip [IP] [powód] | unwarn [nick]");
+        if(sscanf(params, "s[32]s[32]S()[64]", sub, var, powod)) return SendClientMessage(playerid, COLOR_GRAD2, "Parametry: unban [pNick] | unbanip [IP] | ban [pNick] [powód] | banip [IP] [powód] | unwarn [pNick]");
         if(strcmp(sub, "unban", true) == 0)
         {
             if(!Uprawnienia(playerid, ACCESS_KARY_UNBAN))

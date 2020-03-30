@@ -67,7 +67,7 @@ YCMD:kupowaniedomu(playerid, params[], help)
 										return 1;
 									}
 									new cenadomu = Dom[i][hCena];
-									if(cenadomu < kaska[playerid] || cenadomu < PlayerInfo[playerid][pAccount])
+									if(cenadomu < kaska[playerid] || cenadomu < PlayerInfo[playerid][pBankMoney])
 									{
 										IDDomu[playerid] = i;
 										format(string, sizeof(string), "Czy na pewno chcesz kupiæ ten dom za %d$?\nAby kupiæ wciœnij 'Tak', aby anulowaæ naciœnij 'Nie'", cenadomu);

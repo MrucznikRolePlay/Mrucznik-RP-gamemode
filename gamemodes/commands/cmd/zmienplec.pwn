@@ -55,13 +55,13 @@ YCMD:zmienplec(playerid, params[], help)
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         ZabierzKase(playerid, 50000);
                         Sejf_Add(FRAC_ERS, 50000);
-						if(PlayerInfo[playa][pSex] == 1)
+						if(PlayerInfo[playa][pGender] == 1)
 						{
 							format(string, sizeof(string), "Lekarz %s przeprowadzi³ na tobie operacje zmiany p³ci. Jesteœ teraz kobiet¹!", giveplayer);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Operacja zmiany p³ci powiod³a siê! %s jest teraz kobiet¹ ((%s))", giveplayer, sendername);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							PlayerInfo[playa][pSex] = 2;
+							PlayerInfo[playa][pGender] = 2;
 						}
 						else
 						{
@@ -69,7 +69,7 @@ YCMD:zmienplec(playerid, params[], help)
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string), "* Operacja zmiany p³ci powiod³a siê! %s jest teraz mê¿czyzn¹ ((%s))", giveplayer, sendername);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							PlayerInfo[playa][pSex] = 1;
+							PlayerInfo[playa][pGender] = 1;
 						}
 					}
 					else

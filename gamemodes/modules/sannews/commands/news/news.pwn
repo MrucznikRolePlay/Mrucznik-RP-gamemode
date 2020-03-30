@@ -58,7 +58,7 @@ YCMD:news(playerid, params[], help)
     new newsText[256];
     if(sscanf(params, "s[256]", newsText))
     {
-        sendTipMessage(playerid, "U¿yj /news [Na parametrze przetrzymywane jest to co gracz wpisa³ u¿ywaj¹c komendy /news] ");
+        sendTipMessage(playerid, "U¿yj /news [tekst] - pomarañczowy tekst");
         return 1;
     }
     

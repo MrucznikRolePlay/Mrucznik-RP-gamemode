@@ -38,7 +38,7 @@ YCMD:wybieralka(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /wybieralka [playerid/CzêœæNicku]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {

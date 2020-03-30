@@ -270,7 +270,7 @@ ZespawnujGraczaSzpitalBW(playerid)
 	PlayerInfo[playerid][pPos_x] = HospitalBeds[randbed][0];
 	PlayerInfo[playerid][pPos_y] = HospitalBeds[randbed][1];
 	PlayerInfo[playerid][pPos_z] = HospitalBeds[randbed][2];		
-	PlayerInfo[playerid][pMuted] = 1;
+	PlayerInfo[playerid][pMute] = 1;
 	ZespawnujGraczaBW(playerid);
 	SetPlayerCameraPos(playerid,HospitalBeds[randbed][0] + 3, HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
 	SetPlayerCameraLookAt(playerid,HospitalBeds[randbed][0], HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
@@ -310,7 +310,7 @@ ZdejmijBW(playerid, drunklvl = 7000)
 	new i = playerid;
 	PlayerInfo[i][pBW]=0;
 	PlayerInfo[i][pInjury]=0;
-	PlayerInfo[i][pMuted] = 0;
+	PlayerInfo[i][pMute] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	TogglePlayerControllable(i, 1);
 	if(GetPVarInt(playerid, "timer_DamagedHP"))

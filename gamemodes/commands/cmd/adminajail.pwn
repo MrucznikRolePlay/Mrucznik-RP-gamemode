@@ -44,7 +44,7 @@ YCMD:adminajail(playerid, params[], help)
 		{
 			if (PlayerInfo[playa][pJailed] == 0)
 			{
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || (PlayerInfo[playerid][pHalfAdmin] >= 1 && PlayerInfo[playerid][pHalfAdmin] <= 3) || IsAScripter(playerid))
 				{
 					if (PlayerInfo[playerid][pZG] >= 6 && PlayerInfo[playerid][pZG] < 8 && money > 7)
 					{
@@ -90,7 +90,7 @@ YCMD:adminajail(playerid, params[], help)
 					PlayerInfo[playa][pJailed] = 3;
 					PlayerInfo[playa][pJailTime] = money*60;
 					SetPlayerVirtualWorld(playa, 1000+playa);
-					PlayerInfo[playa][pMuted] = 1;
+					PlayerInfo[playa][pMute] = 1;
 					SetPlayerPos(playa, AJ_POSX, AJ_POSY, AJ_POSZ);
 					poscig[playa] = 0;
 					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ AJ %d minut, powód: %s", 

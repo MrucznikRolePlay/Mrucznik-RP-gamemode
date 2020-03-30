@@ -70,7 +70,7 @@ YCMD:makeleader(playerid, params[], help)
 			sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest we frakcji jako cz³onek lub w rodzinie !");
 			return 1;
 		}
-		/*if((LeadersValue[LEADER_FRAC][level]+1) > MAX_LEADERS_ON_FRAC)
+		/*if((LeadersValue[LEADER_FRAC][pLevel]+1) > MAX_LEADERS_ON_FRAC)
 		{
 			format(string, sizeof(string), "Nie mo¿esz przyj¹æ kolejnego lidera! Limit to %d", MAX_LEADERS_ON_FRAC); 
 			sendErrorMessage(playerid, string); 

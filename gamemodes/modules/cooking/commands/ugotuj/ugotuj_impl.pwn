@@ -35,11 +35,11 @@ ugotuj_OnDialogResponse(playerid, listitem)
         new slot = type;
         switch(slot)
         {
-            case 1: { type=Fishes[playerid][pFid1]; }
-            case 2: { type=Fishes[playerid][pFid2]; }
-            case 3: { type=Fishes[playerid][pFid3]; }
-            case 4: { type=Fishes[playerid][pFid4]; }
-            case 5: { type=Fishes[playerid][pFid5]; }
+            case 1: { type=PlayerFishes[playerid][pFid1]; }
+            case 2: { type=PlayerFishes[playerid][pFid2]; }
+            case 3: { type=PlayerFishes[playerid][pFid3]; }
+            case 4: { type=PlayerFishes[playerid][pFid4]; }
+            case 5: { type=PlayerFishes[playerid][pFid5]; }
         }
         format(name, sizeof(name), "%s", FishNames[type]);
         model = FishModels[type];
@@ -89,11 +89,11 @@ command_ugotuj_Impl(playerid)
     new string[1024];
     DynamicGui_Init(playerid);
     //TODO: refactor koniecznie
-    if(Fishes[playerid][pWeight1] > 1) AddCookingFishRow(playerid, string, 1, Fishes[playerid][pFid1], Fishes[playerid][pWeight1]);
-    if(Fishes[playerid][pWeight2] > 1) AddCookingFishRow(playerid, string, 2, Fishes[playerid][pFid2], Fishes[playerid][pWeight2]);
-    if(Fishes[playerid][pWeight3] > 1) AddCookingFishRow(playerid, string, 3, Fishes[playerid][pFid3], Fishes[playerid][pWeight3]);
-    if(Fishes[playerid][pWeight4] > 1) AddCookingFishRow(playerid, string, 4, Fishes[playerid][pFid4], Fishes[playerid][pWeight4]);
-    if(Fishes[playerid][pWeight5] > 1) AddCookingFishRow(playerid, string, 5, Fishes[playerid][pFid5], Fishes[playerid][pWeight5]);
+    if(PlayerFishes[playerid][pWeight1] > 1) AddCookingFishRow(playerid, string, 1, PlayerFishes[playerid][pFid1], PlayerFishes[playerid][pWeight1]);
+    if(PlayerFishes[playerid][pWeight2] > 1) AddCookingFishRow(playerid, string, 2, PlayerFishes[playerid][pFid2], PlayerFishes[playerid][pWeight2]);
+    if(PlayerFishes[playerid][pWeight3] > 1) AddCookingFishRow(playerid, string, 3, PlayerFishes[playerid][pFid3], PlayerFishes[playerid][pWeight3]);
+    if(PlayerFishes[playerid][pWeight4] > 1) AddCookingFishRow(playerid, string, 4, PlayerFishes[playerid][pFid4], PlayerFishes[playerid][pWeight4]);
+    if(PlayerFishes[playerid][pWeight5] > 1) AddCookingFishRow(playerid, string, 5, PlayerFishes[playerid][pFid5], PlayerFishes[playerid][pWeight5]);
     if(Groceries[playerid][pChicken] != 0) AddCookingRow(playerid, string, 30, Groceries[playerid][pChicken]);
     if(Groceries[playerid][pPizza] != 0) AddCookingRow(playerid, string, 31, Groceries[playerid][pPizza]);
     if(Groceries[playerid][pHamburger] != 0) AddCookingRow(playerid, string, 32, Groceries[playerid][pHamburger]);

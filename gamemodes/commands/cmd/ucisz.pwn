@@ -43,16 +43,16 @@ YCMD:ucisz(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 5 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 && PlayerInfo[playerid][pHalfAdmin] <= 5 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 				    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-					if(PlayerInfo[playa][pMuted] == 0)
+					if(PlayerInfo[playa][pMute] == 0)
 					{
-						PlayerInfo[playa][pMuted] = 1;
+						PlayerInfo[playa][pMute] = 1;
         				Log(adminLog, INFO, "Admin %s uciszy³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 						format(string, sizeof(string), "AdmCmd: %s uciszyl %s",GetNickEx(playerid), giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);
@@ -61,7 +61,7 @@ YCMD:ucisz(playerid, params[], help)
 					}
 					else
 					{
-						PlayerInfo[playa][pMuted] = 0;
+						PlayerInfo[playa][pMute] = 0;
         				Log(adminLog, INFO, "Admin %s odciszy³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 						format(string, sizeof(string), "AdmCmd: %s odciszy³ %s",GetNickEx(playerid), giveplayer);
 						ABroadCast(COLOR_LIGHTRED,string,1);

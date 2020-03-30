@@ -70,7 +70,7 @@ YCMD:unjail(playerid, params[], help)
 						}
 						PlayerInfo[playa][pJailed] = 0;
 						PlayerInfo[playa][pJailTime] = 0;
-						PlayerInfo[playa][pMuted] = 0;
+						PlayerInfo[playa][pMute] = 0;
 						SetPlayerInterior(playa, 0);
 						SetPVarInt(playa, "DostalDM2", 0);//
 						SetPlayerPos(playa,-1677.0605,917.2449,-52.4141);

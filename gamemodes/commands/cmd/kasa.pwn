@@ -46,7 +46,7 @@ YCMD:kasa(playerid, params[], help)
 		        if(playa != INVALID_PLAYER_ID)
 		        {
 					ResetujKase(playa);
-					PlayerInfo[playa][pCash] = 0;
+					PlayerInfo[playa][pBankMoney] = 0;
 					DajKase(playa, money);
 					Log(adminLog, INFO, "Admin %s da³ %s kwotê %d$ (/money)", GetPlayerLogName(playerid), GetPlayerLogName(playa), money);
 				}

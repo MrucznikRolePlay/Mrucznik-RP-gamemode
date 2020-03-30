@@ -127,7 +127,7 @@ forward Scena_ScreenEffect();
 forward VehicleUpdate();
 forward OnPlayerEnterOilSpot(playerid);
 //
-forward MruMySQL_LoadAcocount(playerid);
+forward MruMySQL_LoadAccount(playerid);
 //12.10
 forward VendCheck(playerid);
 //30.10

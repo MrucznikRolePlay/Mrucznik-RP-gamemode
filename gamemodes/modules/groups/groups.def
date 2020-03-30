@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ balans ]------------------------------------------------//
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                  choroby                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,41 +16,52 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Creative
+// Data utworzenia: 22.03.2020
+//
 
-// Opis:
-/*
-	
-*/
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
 
+#define MAX_GROUPS          30
+#define MAX_RANKS           11 //[0 - 10] rang
+#define MAX_PERMISSION      2 // iloœæ uprawnieñ
 
-// Notatki skryptera:
-/*
-	
-*/
+#define GROUP_PERM_WYPLAC  	0
+#define GROUP_PERM_ARREST  	1
 
-YCMD:balans(playerid, params[], help)
-{
-/*
-	new string[64];
-
-    if(IsPlayerConnected(playerid))
-    {
-		if(PlayerInfo[playerid][pLocal] == 103 || GraczBankomat(playerid))
-        {
-			format(string, sizeof(string), "Masz teraz $%d na swoim koncie.",PlayerInfo[playerid][pAccount]);
-			sendTipMessageEx(playerid, COLOR_YELLOW, string);
-		}
-		else
-		{
-			sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie !");
-            return 1;
-        }
-	}*/
-	if(IsPlayerConnected(playerid))
-	{
-		sendTipMessage(playerid, "U¿yj /kontobankowe (W skrócie /kb)"); 
-	}
-	return 1;
-}
+#define GROUP_PERM_CHAT       4
+#define GROUP_PERM_MEGAFON    5
+#define GROUP_PERM_OOC        6
+#define GROUP_PERM_NICK       7
+#define GROUP_PERM_CRIME      8
+#define GROUP_PERM_GPS        9
+#define GROUP_PERM_LINA       10
+#define GROUP_PERM_CHATIC     12
+#define GROUP_PERM_HAK	   	  13
+#define GROUP_PERM_INCOGNITO  14
+#define GROUP_PERM_DEPT       15
+#define GROUP_PERM_NEWS       16
+#define GROUP_PERM_TAG        18
+#define GROUP_PERM_GANGZONE	  19
+#define GROUP_PERM_LISTING    20
+#define GROUP_PERM_DRIVEBY	  22
+#define GROUP_PERM_ROBBERY    23
 
 
+#define GROUP_TYPE_POLICE      1
+#define GROUP_TYPE_MEDIC       2
+#define GROUP_TYPE_SHOP        3
+#define GROUP_TYPE_GANG        4
+#define GROUP_TYPE_MAFIA       5
+#define GROUP_TYPE_RACE        6
+#define GROUP_TYPE_FIRE        7
+#define GROUP_TYPE_GASTRO      8
+#define GROUP_TYPE_WORKSHOP    9
+#define GROUP_TYPE_VEHSALON    10
+#define GROUP_TYPE_SILOWNIA    11
+#define GROUP_TYPE_TAXI        12
+#define GROUP_TYPE_HOTEL	   13
+#define GROUP_TYPE_GOV		   14
+
+//end

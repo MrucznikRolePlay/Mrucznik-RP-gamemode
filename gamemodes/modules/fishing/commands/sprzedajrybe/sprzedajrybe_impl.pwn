@@ -58,28 +58,28 @@ SprzedajeRybe(playerid, fishid = 0)
 	new FishWeight, FishName[20];
 	if(fishid == 1)
 	{
-		FishWeight = Fishes[playerid][pWeight1];
-		format(FishName, sizeof(FishName), Fishes[playerid][pFish1]);
+		FishWeight = PlayerFishes[playerid][pWeight1];
+		format(FishName, sizeof(FishName), PlayerFishes[playerid][pFish1]);
 	}
 	else if(fishid == 2)
 	{
-		FishWeight = Fishes[playerid][pWeight2];
-		format(FishName, sizeof(FishName), Fishes[playerid][pFish2]);
+		FishWeight = PlayerFishes[playerid][pWeight2];
+		format(FishName, sizeof(FishName), PlayerFishes[playerid][pFish2]);
 	}
 	else if(fishid == 3)
 	{
-		FishWeight = Fishes[playerid][pWeight3];
-		format(FishName, sizeof(FishName), Fishes[playerid][pFish3]);
+		FishWeight = PlayerFishes[playerid][pWeight3];
+		format(FishName, sizeof(FishName), PlayerFishes[playerid][pFish3]);
 	}
 	else if(fishid == 4)
 	{
-		FishWeight = Fishes[playerid][pWeight4];
-		format(FishName, sizeof(FishName), Fishes[playerid][pFish4]);
+		FishWeight = PlayerFishes[playerid][pWeight4];
+		format(FishName, sizeof(FishName), PlayerFishes[playerid][pFish4]);
 	}
 	else if(fishid == 5)
 	{
-		FishWeight = Fishes[playerid][pWeight5];
-		format(FishName, sizeof(FishName), Fishes[playerid][pFish5]);
+		FishWeight = PlayerFishes[playerid][pWeight5];
+		format(FishName, sizeof(FishName), PlayerFishes[playerid][pFish5]);
 	}
 
 	if(FishWeight < 1) {
@@ -90,8 +90,8 @@ SprzedajeRybe(playerid, fishid = 0)
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", FishName, FishWeight, FishWeight * moneyPerKg));
 	DajKase(playerid, FishWeight * moneyPerKg);
 	ClearFishID(playerid, fishid);
-	Fishes[playerid][pLastFish] = 0;
-	Fishes[playerid][pFishID] = 0;
+	PlayerFishes[playerid][pLastFish] = 0;
+	PlayerFishes[playerid][pFishID] = 0;
 	FishGood[playerid] = 0;
 	return 1;
 }

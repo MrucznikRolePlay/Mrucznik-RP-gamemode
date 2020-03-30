@@ -30,7 +30,7 @@
 //-----------------<[ Callbacki: ]>-----------------
 hook OnPlayerDisconnect(playerid, reason)
 {
-	Fishes[playerid][pLastFish] = 0; Fishes[playerid][pFishID] = 0;
+	PlayerFishes[playerid][pLastFish] = 0; PlayerFishes[playerid][pFishID] = 0;
 }
 
 //end

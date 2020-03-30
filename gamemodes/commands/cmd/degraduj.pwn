@@ -60,8 +60,7 @@ YCMD:degraduj(playerid, params[], help)
 						new level = PlayerInfo[para1][pRank];
 
                         SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zdegradowa³eœ %s na rangê %s", GetNickEx(para1), FracRang[GetPlayerFraction(para1)][level]));
-                        if(playerid != para1)
-                            SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Zosta³eœ zdegradowany na rangê %s przez %s", FracRang[GetPlayerFraction(para1)][level],  GetNickEx(playerid)));
+                        if(playerid != para1) SendClientMessage(para1, COLOR_LIGHTBLUE, sprintf("Zosta³eœ zdegradowany na rangê %s przez %s", FracRang[GetPlayerFraction(para1)][level],  GetNickEx(playerid)));
 
                         MruMySQL_SetAccInt("Rank", GetNick(para1), PlayerInfo[para1][pRank]);
 					}

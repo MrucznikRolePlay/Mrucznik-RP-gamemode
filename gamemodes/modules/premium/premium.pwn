@@ -30,7 +30,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 premium_ConvertToNewSystem(playerid)
 {
-	if(PlayerInfo[playerid][pDonateRank] != 0)
+	if(PlayerInfo[playerid][pOldDonateRank] != 0)
 	{
 		DajKP(playerid, gettime()+KP_3_MIESIACE, false); // KP na 3 msc dla osób, które mieli premiuma na starym systemie
 		DajMC(playerid, 500); // i jeszcze prezent...
@@ -38,8 +38,8 @@ premium_ConvertToNewSystem(playerid)
 		_MruGracz(playerid, "Uwaga! Twoje premium zosta³o przeniesione na nowy system!");
 		_MruGracz(playerid, "Otrzyma³eœ Konto Premium na 3 miesi¹ce i dodatkowe 500 MC do wykorzystania.");
 
-		Log(premiumLog, INFO, "%s otrzyma³ konwersje KP %d na nowy system", GetPlayerLogName(playerid), PlayerInfo[playerid][pDonateRank]);
-		PlayerInfo[playerid][pDonateRank] = 0;
+		Log(premiumLog, INFO, "%s otrzyma³ konwersje KP %d na nowy system", GetPlayerLogName(playerid), PlayerInfo[playerid][pOldDonateRank]);
+		PlayerInfo[playerid][pOldDonateRank] = 0;
 	}
 }
 
@@ -54,7 +54,7 @@ premium_clearCache(playerid)
 
 premium_loadForPlayer(playerid)
 {
-	if(PlayerInfo[playerid][pDonateRank] != 0)
+	if(PlayerInfo[playerid][pOldDonateRank] != 0)
 	{
 		premium_ConvertToNewSystem(playerid);
 	}
@@ -378,7 +378,7 @@ IsPlayerPremiumOld(playerid)
 {
 	if(PremiumInfo[playerid][pKP] == 1)
 		return 1;
-	if(PlayerInfo[playerid][pDonateRank] != 0)
+	if(PlayerInfo[playerid][pOldDonateRank] != 0)
 		return 1;
 	return 0;
 }

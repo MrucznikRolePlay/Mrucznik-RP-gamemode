@@ -36,7 +36,7 @@ YCMD:unblock(playerid, params[], help)
 	{
 		if(isnull(params))
 		{
-			sendTipMessage(playerid, "U¿yj /unblock [nick]");
+			sendTipMessage(playerid, "U¿yj /unblock [pNick]");
 			return 1;
 		}
         if(MruMySQL_Unblock(params, playerid))

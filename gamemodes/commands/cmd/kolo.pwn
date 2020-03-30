@@ -37,6 +37,11 @@ YCMD:kolo(playerid, params[], help)
     {
         if(IsPlayerInRangeOfPoint(playerid, 5.0, 1016.93560791,-1101.91369629,-67.59101868))
         {
+            if(kaska[playerid] < 5000)
+            {
+                return SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Potrzebujesz $5000 aby zakrêciæ ko³em.");
+            }
+            
             new kolo = true_random(61);
             GetPlayerName(playerid, sendername, sizeof(sendername));
             if(kolo >= 1 && kolo <= 30)//1

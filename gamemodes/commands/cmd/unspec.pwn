@@ -32,7 +32,7 @@ YCMD:unspec(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 3 || IsAScripter(playerid))
+        if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 3 || IsAScripter(playerid))
         {
 			PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
 			PlayerInfo[playerid][pLocal] = Unspec[playerid][sLocal];

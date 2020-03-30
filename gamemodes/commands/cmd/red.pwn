@@ -79,7 +79,7 @@ YCMD:red(playerid, params[], help)
     }
     else if(frac == FRAC_NG)
     {
-        frakcja = "SASD";
+        frakcja = "NGSA";
     }
 
     if(PDGPS == playerid)

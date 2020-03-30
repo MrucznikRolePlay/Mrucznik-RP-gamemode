@@ -57,7 +57,7 @@ stock InTheFractionCar(playerid, frac)
 }
 stock PlayerConditionToNews(playerid)
 {
-	if(PlayerInfo[playerid][pMuted] == 1)
+	if(PlayerInfo[playerid][pMute] == 1)
     {
         sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ poniewa¿ zosta³eœ wyciszony");
         return false;

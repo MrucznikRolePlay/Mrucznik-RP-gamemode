@@ -39,7 +39,7 @@ YCMD:odmroz(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /unfreeze [playerid]");
 			return 1;
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 6 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

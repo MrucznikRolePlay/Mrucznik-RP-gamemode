@@ -37,7 +37,6 @@
 #include "cmd/app.pwn"
 #include "cmd/apteczka.pwn"
 #include "cmd/aresztuj.pwn"
-#include "cmd/armia.pwn"
 #include "cmd/armor.pwn"
 #include "cmd/atakuj.pwn"
 #include "cmd/autorzy.pwn"
@@ -45,7 +44,6 @@
 #include "cmd/autoranny.pwn"
 #include "cmd/awans.pwn"
 #include "cmd/b.pwn"
-#include "cmd/balans.pwn"
 #include "cmd/ban.pwn"
 #include "cmd/bandana.pwn"
 #include "cmd/banip.pwn"
@@ -236,7 +234,6 @@
 #include "cmd/kup.pwn"
 #include "cmd/kuparmor.pwn"
 #include "cmd/kupbiletpociag.pwn"
-#include "cmd/kupbron.pwn"
 #include "cmd/kupdildo.pwn"
 #include "cmd/kuphelikopter.pwn"
 #include "cmd/kupkredyty.pwn"
@@ -291,7 +288,6 @@
 #include "cmd/nazywo.pwn"
 #include "cmd/newbie.pwn"
 #include "cmd/newcar.pwn"
-#include "cmd/noa.pwn"
 #include "cmd/setdrunk.pwn"
 #include "cmd/nonewbie.pwn"
 #include "cmd/noooc.pwn"
@@ -387,7 +383,6 @@
 #include "cmd/rozwiedz.pwn"
 #include "cmd/rozwod.pwn"
 #include "cmd/ruleta.pwn"
-#include "cmd/sad.pwn"
 #include "cmd/say.pwn"
 #include "cmd/sb.pwn"
 #include "cmd/sban.pwn"
@@ -852,9 +847,6 @@ static Aliases()
 	//kup
 	Command_AddAltNamed("kup", "buy");
 
-	//kuparmor
-	Command_AddAltNamed("kupbron", "buygun");
-
 	//kupbiletpociag
 	Command_AddAltNamed("kupbiletpociag", "kbpo");
 	Command_AddAltNamed("kupbiletpociag", "kpociag");
@@ -963,9 +955,6 @@ static Aliases()
 
 	//newbie
 	Command_AddAltNamed("newbie", "n");
-
-	//noa
-	Command_AddAltNamed("noa", "fdu");
 
 	//nos
 	Command_AddAltNamed("nos", "nitro");

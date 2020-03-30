@@ -42,7 +42,7 @@ YCMD:pakietmrucznika(playerid, params[], help)
     PlayerInfo[playerid][pFishLic] = 1;
     PlayerInfo[playerid][pGunLic] = 1;
     PlayerInfo[playerid][pCarSlots] = 10;
-    PlayerInfo[playerid][pConnectTime] = 2137;
+    PlayerInfo[playerid][pOnlineHours] = 2137;
 
     DajKase(playerid, 200000000);
 

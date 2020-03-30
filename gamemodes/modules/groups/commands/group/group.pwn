@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ kupbron ]------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   group                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,51 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "group_impl.pwn"
 
-YCMD:kupbron(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_group()
 {
-	sendErrorMessage(playerid, "Sprzeda¿ broni zosta³a zakazana!");
-	/*if(PlayerInfo[playerid][pConnectTime] >= 4)
+    new command = Command_GetID("grupa");
+
+	//aliases
+	Command_AddAlt(command, "g");
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:grupa(playerid, params[], help)
+{
+	new sub[32], rest[126];
+	if(sscanf(params, "s[32]S()[126]", sub, rest))
 	{
-		if(PlayerInfo[playerid][pGunLic] == 1)
-		{
-			if(PlayerToPoint(7.0, playerid, 296.1448,-38.1248,1001.5156))
-			{
-				if(kaska[playerid] < 1)
-				{
-					SendClientMessage(playerid, COLOR_GREY, "   Nie masz przy sobie wystarczaj¹co du¿o pieniêdzy !");
-					return 1;
-				}
-				if(GUIExit[playerid] == 0)
-				{
-					ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroñ bia³a\t\t>>\nInne\t\t\t>>", "Wybierz", "WyjdŸ");
-				}
-			}
-			else
-			{
-				SendClientMessage(playerid, COLOR_WHITE,"*** Nie jesteœ przy kasach Mrucznikowego GS***");
-			}
-		}
-		else
-		{
-			SendClientMessage(playerid, COLOR_WHITE,"*** Nie mo¿esz kupowaæ w gun shopie bez licencji ***");
-		}
-	}
-	else
-	{
-		SendClientMessage(playerid, COLOR_WHITE,"Musisz mieæ przegrane 4h na serwerze aby móc kupowaæ broñ.");
+		ShowGroupsForPlayer(playerid);
+		SendClientMessage(playerid, COLOR_GREY, "TIP: /g [info/online/v/zapros/zadania/wypros/kolor/wplac/wyplac]");
 		return 1;
-	}*/
-	return 1;
+	}
+    if(PlayerInfo[playerid][pGroup] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ w ¿adnej grupie.");
+
+	return command_group_Impl(playerid, sub, rest);
 }

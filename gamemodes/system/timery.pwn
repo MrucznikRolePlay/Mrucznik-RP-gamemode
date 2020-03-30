@@ -842,7 +842,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		else if(afktime == 1740 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid)))
 		{
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
@@ -857,7 +857,7 @@ public PlayerAFK(playerid, afktime, breaktime)
 			GameTextForPlayer(playerid, "~r~Rusz sie! Anty-AFK!",5000, 5);
 			SendClientMessage(playerid, COLOR_PANICRED, "Za minutê zostaniesz wyrzucony za Anty-AFK.");
 		}
-		if(afktime > 600 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		if(afktime > 600 && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid)))
 		{
 			if(GetPlayerAdminDutyStatus(playerid) == 0)
 			{
@@ -2087,7 +2087,7 @@ public IdleKick()
 {
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][pAdmin] < 1 || PlayerInfo[i][pNewAP] < 1)
+		if(PlayerInfo[i][pAdmin] < 1 || PlayerInfo[i][pHalfAdmin] < 1)
 		{
 			GetPlayerPos(i, PlayerPos[i][0], PlayerPos[i][1], PlayerPos[i][2]);
 			if(PlayerPos[i][0] == PlayerPos[i][3] && PlayerPos[i][1] == PlayerPos[i][4] && PlayerPos[i][2] == PlayerPos[i][5])
@@ -2314,7 +2314,7 @@ public JednaSekundaTimer()
 					PlayerInfo[i][pJailed] = 0;
 					PlayerInfo[i][pJailTime] = 0;
 					SetPlayerVirtualWorld(i, 0);
-					PlayerInfo[i][pMuted] = 0;
+					PlayerInfo[i][pMute] = 0;
 					SetPlayerPos(i,1481.1666259766,-1790.2204589844,156.7875213623);
 					format(string, sizeof(string), "~w~Wolnosc~n~~r~GRAJ RP!!!");
 					GameTextForPlayer(i, string, 5000, 1);
@@ -2785,7 +2785,7 @@ public JednaSekundaTimer()
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
 				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
 				MedicBill[i] = 0;
-				PlayerInfo[i][pMuted] = 0;
+				PlayerInfo[i][pMute] = 0;
 				
 				SendClientMessage(i, COLOR_NEWS, "A teraz wybierz, jak ma wygl¹daæ twoja postaæ.");
 				SetPVarInt(i, "wyborPierwszego", 1);
@@ -3175,12 +3175,12 @@ public JednaSekundaTimer()
 				PlayerCuffed[i] = 0;
 				PlayerCuffedTime[i] = 0;
 				pobity[i] = 0;
-				PlayerInfo[i][pMuted] = 0;
+				PlayerInfo[i][pMute] = 0;
 				PlayerTied[i] = 0;
                 PlayerInfo[i][pBW]=0;
                 TogglePlayerControllable(i, 1);
                 SetPVarInt(i, "bw-sync", 0);
-                PlayerInfo[i][pMuted] = 0;
+                PlayerInfo[i][pMute] = 0;
 			}
 			else
 			{
@@ -3306,7 +3306,7 @@ public CarCheck()
 		{
 			if(MoneyMessage[j]==0)
 			{
-				format(string, sizeof(string), "Masz d³ugi, musisz zarobiæ do nastêpnej wyp³aty $%d inaczej naœlemy na ciebie policje.",PlayerInfo[j][pCash]);
+				format(string, sizeof(string), "Masz d³ugi, musisz zarobiæ do nastêpnej wyp³aty $%d inaczej naœlemy na ciebie policje.",PlayerInfo[j][pBankMoney]);
 				SendClientMessage(j, COLOR_LIGHTRED, string);
 				MoneyMessage[j] = 1;
 			}

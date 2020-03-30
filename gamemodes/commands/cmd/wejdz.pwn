@@ -274,8 +274,8 @@ YCMD:wejdz(playerid, params[], help)
             {
                 if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
                 {
-                    sendErrorMessage(playerid, "Nie posiadasz biletu do Ibizy!"); 
-                    return 1;
+                    if(IsAPolicja(playerid) && OnDuty[playerid] != 1) return sendErrorMessage(playerid, "Musisz byæ na s³u¿bie ¿eby wejœæ bez biletu."); 
+                    return sendErrorMessage(playerid, "Nie posiadasz biletu do Ibizy!"); 
                 }
             }
             if  (!IsAPolicja(playerid)

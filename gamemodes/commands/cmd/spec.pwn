@@ -36,7 +36,7 @@ YCMD:spec(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] >= 3)
+        if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 3)
         {
             GetPlayerName(playerid, sendername, sizeof(sendername));
             new pid;

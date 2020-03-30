@@ -38,7 +38,7 @@ command_specshow_Impl(playerid, valueSpec)
             }
             if(IsPlayerConnected(valueSpec))
             {
-                if(PlayerInfo[valueSpec][pAdmin] == 0 && PlayerInfo[valueSpec][pNewAP] == 0)
+                if(PlayerInfo[valueSpec][pAdmin] == 0 && PlayerInfo[valueSpec][pHalfAdmin] == 0)
                 {
                     sendErrorMessage(playerid, "Ta osoba nie jest administratorem!"); 
                     return 1;

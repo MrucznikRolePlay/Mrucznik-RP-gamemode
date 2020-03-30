@@ -25,11 +25,11 @@
 //------------------<[ Implementacja: ]>-------------------
 command_wywalryby_Impl(playerid)
 {
-    if(Fishes[playerid][pWeight1] > 0 || Fishes[playerid][pWeight2] > 0 || Fishes[playerid][pWeight3] > 0 || Fishes[playerid][pWeight4] > 0 || Fishes[playerid][pWeight5] > 0)
+    if(PlayerFishes[playerid][pWeight1] > 0 || PlayerFishes[playerid][pWeight2] > 0 || PlayerFishes[playerid][pWeight3] > 0 || PlayerFishes[playerid][pWeight4] > 0 || PlayerFishes[playerid][pWeight5] > 0)
     {
         ClearFishes(playerid);
-        Fishes[playerid][pLastFish] = 0;
-        Fishes[playerid][pFishID] = 0;
+        PlayerFishes[playerid][pLastFish] = 0;
+        PlayerFishes[playerid][pFishID] = 0;
         sendTipMessageEx(playerid, COLOR_GREY, "Wywali³eœ ryby !");
     }
     else

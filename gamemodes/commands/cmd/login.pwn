@@ -33,7 +33,7 @@ YCMD:login(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
 		new playa;
-		if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0 && !IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pHalfAdmin] == 0 && !IsAScripter(playerid))
 		{
 			noAccessMessage(playerid);
 			return 1;
@@ -75,6 +75,8 @@ YCMD:login(playerid, params[], help)
 		format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: /login).", GetNick(playerid));
 		ProxDetector(25.0, playerid, reString, COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 		//czynnoœci
+		PlayerTextDrawHide(playerid, Kary[playerid]); 
+		PlayerTextDrawHide(playerid, Licznik[playerid]);
 		MruMySQL_SaveAccount(playerid);
 		ZerujZmienne(playerid);
 		gPlayerLogged[playerid] = 0;

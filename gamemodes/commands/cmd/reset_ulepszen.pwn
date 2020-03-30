@@ -49,7 +49,7 @@ YCMD:reset_ulepszen(playerid, params[], help)
 			sendTipMessage(playerid, "Musisz mieæ wiêcej ni¿ 2 level");
 			return 1;
 		}
-		PlayerInfo[playerid][gPupgrade] = (PlayerInfo[playerid][pLevel]-1)*2;
+		PlayerInfo[playerid][pUpgradeLvl] = (PlayerInfo[playerid][pLevel]-1)*2;
 		PlayerInfo[playerid][pSHealth] = 0.0;
 		PlayerInfo[playerid][pAlcoholPerk] = 0;
 		PlayerInfo[playerid][pDrugPerk] = 0;
@@ -58,7 +58,7 @@ YCMD:reset_ulepszen(playerid, params[], help)
 		PlayerInfo[playerid][pTraderPerk] = 0;
 		ZabierzKase(playerid,100000);
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-		format(string, sizeof(string), "   Masz teraz %d niewykorzystanych Punktów Ulepszenia !",PlayerInfo[playerid][gPupgrade]);
+		format(string, sizeof(string), "   Masz teraz %d niewykorzystanych Punktów Ulepszenia !",PlayerInfo[playerid][pUpgradeLvl]);
 		SendClientMessage(playerid, COLOR_GRAD2, string);
 	}
 	return 1;

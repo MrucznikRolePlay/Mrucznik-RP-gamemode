@@ -61,7 +61,7 @@ YCMD:przelew(playerid, params[], help)
 				}
 				if(giveplayerid != playerid)
 				{
-					if(PlayerInfo[playerid][pAccount] < value)
+					if(PlayerInfo[playerid][pBankMoney] < value)
 					{	
 						sendErrorMessage(playerid, "Nie masz takiej kwoty na swoim koncie!"); 
 						return 1;
@@ -71,14 +71,14 @@ YCMD:przelew(playerid, params[], help)
 						sendErrorMessage(playerid, "Nie mo¿esz wykonywaæ przelewów na minus / zero.");
 						return 1;
 					}
-					if(PlayerInfo[giveplayerid][pAccount]+value > MAX_MONEY_IN_BANK)
+					if(PlayerInfo[giveplayerid][pBankMoney]+value > MAX_MONEY_IN_BANK)
 					{
 						sendErrorMessage(playerid, "Gracz do którego próbowa³eœ przelaæ gotówkê - ma zbyt du¿o pieniêdzy na koncie."); 
 						return 1;
 					}
 					//Czynnoœci:
-					PlayerInfo[playerid][pAccount] -= value;
-					PlayerInfo[giveplayerid][pAccount] += value;
+					PlayerInfo[playerid][pBankMoney] -= value;
+					PlayerInfo[giveplayerid][pBankMoney] += value;
 				
 					//komunikaty:
 					format(string, sizeof(string), "Otrzyma³eœ przelew w wysokoœci %d$ od %s . Pieni¹dze znajduj¹ siê na twoim koncie.", value, GetNick(playerid));

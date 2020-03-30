@@ -36,7 +36,7 @@ YCMD:nastepnylevel(playerid, params[], help)
     {
 		if (gPlayerLogged[playerid] != 0)
 		{
-		    PlayerInfo[playerid][pCash] = kaska[playerid];
+		    PlayerInfo[playerid][pBankMoney] = kaska[playerid];
 			if(PlayerInfo[playerid][pLevel] >= 0)
 			{
 				new nxtlevel = PlayerInfo[playerid][pLevel]+1;
@@ -73,11 +73,11 @@ YCMD:nastepnylevel(playerid, params[], help)
 					{
 						PlayerInfo[playerid][pExp] = 0;
 					}
-					PlayerInfo[playerid][gPupgrade] = PlayerInfo[playerid][gPupgrade]+2;
+					PlayerInfo[playerid][pUpgradeLvl] = PlayerInfo[playerid][pUpgradeLvl]+2;
 					GameTextForPlayer(playerid, string, 5000, 1);
 					format(infostring, 128, "Masz teraz %d level, dosta³eœ bonus $%d, u¿yj /ulepszenia aby zobaczyæ bonusy", nxtlevel, costlevel);
 					sendTipMessageEx(playerid, COLOR_GRAD1, infostring);
-					format(infostring, 128, "Dosta³eœ bonus %d punktów Ulepszenia",PlayerInfo[playerid][gPupgrade]);
+					format(infostring, 128, "Dosta³eœ bonus %d punktów Ulepszenia",PlayerInfo[playerid][pUpgradeLvl]);
 					sendTipMessageEx(playerid, COLOR_GRAD2, infostring);
 				}
 			}

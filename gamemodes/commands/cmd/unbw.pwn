@@ -30,7 +30,7 @@
 
 YCMD:unbw(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid))
 	{
 		new id;
 		if(sscanf(params, "k<fix>", id)) return sendTipMessage(playerid, "U¿yj /unbw [ID]");

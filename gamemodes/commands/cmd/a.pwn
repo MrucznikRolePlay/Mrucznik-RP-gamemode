@@ -50,9 +50,9 @@ YCMD:a(playerid, params[], help)
 		{
 			format(string, sizeof(string), "Admin [%d] %s - %s", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 		}
-		else if(PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 4)
+		else if(PlayerInfo[playerid][pHalfAdmin] >= 1 && PlayerInfo[playerid][pHalfAdmin] <= 4)
 		{
-			format(string, sizeof(string), "Pó³-Admin [%d] %s - %s", PlayerInfo[playerid][pNewAP], GetNickEx(playerid), params);
+			format(string, sizeof(string), "Pó³-Admin [%d] %s - %s", PlayerInfo[playerid][pHalfAdmin], GetNickEx(playerid), params);
 		}
 		else 
 		{
