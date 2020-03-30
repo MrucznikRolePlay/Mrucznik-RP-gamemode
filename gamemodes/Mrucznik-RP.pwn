@@ -5089,7 +5089,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     		SetPlayerPos(playerid, slx, sly, slz+0.2);
     		ClearAnimations(playerid);
         }
-		if(IsACopCar(GetPlayerVehicleID(playerid))) sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
+		if(IsACopCar(GetPlayerVehicleID(playerid)) && IsAPolicja(playerid)) sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
         if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
