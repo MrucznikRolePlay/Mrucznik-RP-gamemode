@@ -2698,14 +2698,15 @@ SetPlayerSpawnPos(playerid)
 						}
 						default:
 						{
-							SetPlayerPos(playerid, 1742.9796,-1863.2355,13.5753);
+							
+							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
 							SetPlayerFacingAngle(playerid, 0.0);
 						}
 				    }
 				}
 				else //Spawn cywila
 				{
-		    		SetPlayerPos(playerid, 1742.9796,-1863.2355,13.5753);
+		    		SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
 					SetPlayerFacingAngle(playerid, 0.0);
 				}
 		    }
