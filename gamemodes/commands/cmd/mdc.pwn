@@ -54,6 +54,9 @@ YCMD:mdc(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
+					new nick[32];
+					if(GetPVarString(giveplayerid, "maska_nick", nick, 24)) return sendTipMessage(playerid, "Nie mo¿na namierzyæ osoby zamaskowanej.");
+
 			        new pZone[MAX_ZONE_NAME];
 			        new pojazd = GetPlayerVehicleID(giveplayerid);
 			        GetPlayer2DZone(giveplayerid, pZone, MAX_ZONE_NAME);

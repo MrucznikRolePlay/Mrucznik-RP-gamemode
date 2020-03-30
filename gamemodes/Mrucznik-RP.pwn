@@ -5771,6 +5771,44 @@ public OnPlayerUpdate(playerid)
         GetPlayerKeys(playerid, keys, ud, lr);
         if(ud == KEY_DOWN) CruiseControl_SetSpeed(playerid, 10, false);
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
+		return 1;
+    }
+	if(Spectate[playerid] != INVALID_PLAYER_ID)
+    {
+		new keys, ud,lr, actualid = INVALID_PLAYER_ID;
+        GetPlayerKeys(playerid, keys, ud, lr);
+        if(lr == KEY_RIGHT) //NEXT
+		{
+			foreach(new i : Player)
+			{
+				if(actualid != INVALID_PLAYER_ID) //if is set
+				{
+					new str[6];
+                	valstr(str, i);
+                    RunCommand(playerid, "/spec",  str);
+					break;
+				}
+                else if(i == Spectate[playerid]) //if not set and expect
+				{
+					actualid = i;
+				}
+            }
+		}
+		else if(lr == KEY_LEFT) //BACK
+		{
+			foreach(new i : Player)
+			{
+				actualid = i;
+                if(i == Spectate[playerid]) //if not set and expect
+				{
+					new str[6];
+                	valstr(str, actualid);
+                    RunCommand(playerid, "/spec",  str);
+					break;
+				}
+            }
+		}
+		return 1;
     }
 	return 1;
 }
@@ -6228,7 +6266,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
         }
     }
 
-    //11.06.2014
    	if(PRESSED(KEY_JUMP) && Spectate[playerid] != INVALID_PLAYER_ID)
     {
 		PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
