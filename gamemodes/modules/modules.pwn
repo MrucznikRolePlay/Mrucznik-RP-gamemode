@@ -29,6 +29,7 @@
 
 //-------<[ .def ]>-------
 #include "03DL\03DL.def"
+#include "accounts\accounts.def"
 #include "actors\actors.def"
 #include "admin\admin.def"
 #include "adminduty\adminduty.def"
@@ -70,6 +71,7 @@
 
 //-------<[ .hwn ]>-------
 #include "03DL\03DL.hwn"
+#include "accounts\accounts.hwn"
 #include "actors\actors.hwn"
 #include "admin\admin.hwn"
 #include "adminduty\adminduty.hwn"
@@ -111,6 +113,7 @@
 
 //-------<[ .pwn ]>-------
 #include "03DL\03DL.pwn"
+#include "accounts\accounts.pwn"
 #include "actors\actors.pwn"
 #include "admin\admin.pwn"
 #include "adminduty\adminduty.pwn"
@@ -151,6 +154,7 @@
 
 
 //-------<[ timers ]>-------
+#include "accounts\accounts_timers.pwn"
 #include "admin\admin_timers.pwn"
 #include "antyspam\antyspam_timers.pwn"
 #include "choroby\choroby_timers.pwn"
@@ -167,6 +171,7 @@
 
 
 //-------<[ mysql ]>-------
+#include "accounts\accounts_mysql.pwn"
 #include "admin\admin_mysql.pwn"
 #include "biznesy\biznesy_mysql.pwn"
 #include "choroby\choroby_mysql.pwn"
@@ -187,6 +192,7 @@
 
 
 //-------<[ callbacks ]>-------
+#include "accounts\accounts_callbacks.pwn"
 #include "admin\admin_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
 #include "biznesy\biznesy_callbacks.pwn"

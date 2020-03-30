@@ -1,69 +1,56 @@
 //mru_mysql.pwn
 
-new bool:MYSQL_ON = true;
-new bool:MYSQL_SAVING = true;
+new MySQL:mruMySQL_Connection;
 
-new MYSQL_HOST[32];
-new MYSQL_USER[32];
-new MYSQL_DATABASE[32];
-new MYSQL_PASS[256];
-
-public OnQueryError(errorid, error[], resultid, extraid, callback[], query[], connectionHandle)
+MySQL:MruMySQL_Init()
 {
-	Log(mysqlLog, ERROR, "%s | resultid: %d | extraid: %d | callback: %s | query: %s", error, resultid, extraid, callback, query);
-	return 1;
-}
+	#if DEBUG == 1
+		mysql_log(ALL);
+	#else
+		mysql_log(WARNING | ERROR);
+	#endif
 
-//Moje funkcje:
+	mysql_global_options(DUPLICATE_CONNECTIONS, false);
+	mysql_global_options(DUPLICATE_CONNECTION_WARNING, true);
 
-//--------------------------------------------------------------<[ Konta ]>--------------------------------------------------------------
-LoadConnectionValues()
-{
-	new file[64];
-	format(file, sizeof(file), "MySQL/connect.ini");
-	if(dini_Exists(file)) 
-	{
-		strcat(MYSQL_HOST, dini_Get(file, "Host"));
-		strcat(MYSQL_USER, dini_Get(file, "User"));
-		strcat(MYSQL_DATABASE, dini_Get(file, "DB"));
-		strcat(MYSQL_PASS, dini_Get(file, "Pass"));
-		return 1;
-	}
-	return 0;
-}
+	mruMySQL_Connection = mysql_connect_file("MySQL/connection.ini");
 
-MruMySQL_Connect()
-{
-	if(!MYSQL_ON) return 0;
-	if(!LoadConnectionValues())
-	{
-		print("MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
-		SendRconCommand("gamemodetext Brak polaczenia MySQL");
-		SendRconCommand("exit");
-	}
-
-    mysql_connect(MYSQL_HOST, MYSQL_USER, MYSQL_DATABASE, MYSQL_PASS);
-	print(" ");
-	if(mysql_ping() == 1)
-	{
-		print("MYSQL: Polaczono sie z baza MySQL");
-	}
-	else
+	if(mruMySQL_Connection == MYSQL_INVALID_HANDLE)
 	{
 		print("MYSQL: Nieudane polaczenie z baza MySQL");
 		SendRconCommand("gamemodetext Brak polaczenia MySQL");
 		SendRconCommand("exit");
-		return 0;
+		return MYSQL_INVALID_HANDLE;
 	}
-	#if DEBUG_MODE == 1
-		mysql_debug(1);
-	#else
-		mysql_debug(0);
-	#endif
 	
-	mysql_query("SET NAMES 'cp1250'");
-	return 1;
+	mysql_set_charset("cp1250");
+
+	//Create tables
+	MruMySQL_CreateTables();
+
+	//Create ORM's
+	for(new i; i<MAX_PLAYERS; i++)
+	{
+		MruMySQL_CreateKontaORM(i);
+	}
+
+	return mruMySQL_Connection;
 }
+
+MruMySQL_Exit()
+{
+	mysql_close(mruMySQL_Connection);
+}
+
+MruMySQL_CreateTables()
+{
+	mysql_tquery_file(mruMySQL_Connection, "MySQL/create_tables.sql");
+}
+
+
+//Moje funkcje:
+
+//--------------------------------------------------------------<[ Konta ]>--------------------------------------------------------------
 Create_MySQL_Leader(playerid, frac, level)
 {
 	new query[256];

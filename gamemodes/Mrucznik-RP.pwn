@@ -53,7 +53,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <sscanf2>
 #include <libRegEx>
 #include <streamer>
-#include <mysql_R5>
+#include <a_mysql>
+#include <a_mysql_yinline>
 //#include <a_mysql> TODO: replace R5 plugin
 #include <whirlpool>
 #include <timestamptodate>
