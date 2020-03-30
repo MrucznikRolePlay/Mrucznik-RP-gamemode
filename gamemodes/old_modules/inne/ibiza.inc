@@ -145,20 +145,21 @@ WlaczSwiatlaP(playerid)
 
 IbizaDrinkiPobierz()
 {
-	new string[128];
-	for(new i=0; i<12; i++)
-	{
-		format(string, sizeof string, "SELECT cena FROM ibizadrinki WHERE id=%d", i);
-		mysql_query(string);
-		mysql_store_result();
-		if(mysql_num_rows())
-		{
-			mysql_fetch_row_format(string, "|");
-			sscanf(string, "d", IbizaDrinkiCeny[i]);
-		}
-		mysql_free_result();
-	}
-	return 1;
+	//TODO: MySQL
+	// new string[128];
+	// for(new i=0; i<12; i++)
+	// {
+	// 	format(string, sizeof string, "SELECT cena FROM ibizadrinki WHERE id=%d", i);
+	// 	mysql_query(string);
+	// 	mysql_store_result();
+	// 	if(mysql_num_rows())
+	// 	{
+	// 		mysql_fetch_row_format(string, "|");
+	// 		sscanf(string, "d", IbizaDrinkiCeny[i]);
+	// 	}
+	// 	mysql_free_result();
+	// }
+	// return 1;
 }
 
 IbizaWyjscie(playerid)
@@ -296,15 +297,12 @@ public TelebimAnim(ile)
 IBIZA_Reszta()
 {
     IbizaDrinkiPobierz();
-	mysql_query("SELECT `hajs` FROM `ibiza` WHERE `id`=2");
-	mysql_store_result();
-	if(mysql_num_rows())
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT `hajs` FROM `ibiza` WHERE `id`=2", true);
+    if(cache_is_valid(result))
 	{
-		new bufor[64];
-		mysql_fetch_row_format(bufor, "|");
-		sscanf(bufor, "d", IbizaBilet);
+        cache_get_value_index_int(0, 0, IbizaBilet);
+		cache_delete(result);
 	}
-	mysql_free_result();
 	//TEXTDRAWY
 
     TDIbiza[0] = TextDrawCreate(390.00000, 21.500000, "01/01/1999  21:21");

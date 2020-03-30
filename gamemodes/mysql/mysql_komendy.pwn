@@ -1,81 +1,80 @@
-
 MruMySQL_ClearZone(zoneid)
 {
     new str[64];
     format(str, 64, "UPDATE `mru_strefy` SET `gang`='0' WHERE `id`='%d'", zoneid);
-    mysql_query(str);
+    mysql_tquery(mruMySQL_Connection, str);
 }
 
 MruMySQL_CzyjToNumer(playerid, number)
 {
-    new string[128];
-    format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `PhoneNr`='%d'", number);
-    mysql_query(string);
-    mysql_store_result();
-    if(mysql_num_rows())
+    new query[128];
+    format(query, sizeof(query), "SELECT `Nick` FROM mru_konta WHERE `PhoneNr`='%d'", number);
+    new Cache:result = mysql_query(mruMySQL_Connection, query);
+    if(cache_is_valid(result))
     {
-        while(mysql_fetch_row_format(string, "|"))
+        for(new i; i < cache_num_rows(); i++)
         {
             new nick[MAX_PLAYER_NAME];
-            sscanf(string, "p<|>s[24]", nick);
+            cache_get_value_index(i, 0, nick);
             SendClientMessage(playerid, COLOR_WHITE, nick);
         }
+		cache_delete(result);
     }
-    mysql_free_result();
 }
 
 MruMySQL_ListaLiderow(playerid, family)
 {
-    new string[128];
+    new query[128];
     SendClientMessage(playerid, COLOR_RED, "================ LISTA LIDERÓW ================");
-    format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `FMember`='%d' AND `Rank`>1000", family);
-    mysql_query(string);
-    new nick[24];
-    while(mysql_fetch_row_format(string, "|"))
+    format(query, sizeof(query), "SELECT `Nick` FROM `mru_konta` WHERE `FMember`='%d' AND `Rank`>1000", family);
+    new Cache:result = mysql_query(mruMySQL_Connection, query);
+
+    if(cache_is_valid(result))
     {
-        sscanf(string, "p<|>s[24]", nick);
-        SendClientMessage(playerid, -1, nick);
+        for(new i; i < cache_num_rows(); i++)
+        {
+            new nick[MAX_PLAYER_NAME];
+            cache_get_value_index(i, 0, nick);
+            SendClientMessage(playerid, -1, nick);
+        }
+        SendClientMessage(playerid, COLOR_RED, "================ KONIEC ================");
+		cache_delete(result);
     }
-    mysql_store_result();
-    SendClientMessage(playerid, COLOR_RED, "================ KONIEC ================");
 }
 
 MruMySQL_Gangzone(zoneid)
 {
     new str[64];
-    format(str, sizeof(str), "UPDATE `mru_config` SET `gangzone`='%d'", zoneid);
-    mysql_query(str);
+    mysql_format(mruMySQL_Connection, str, sizeof(str), "UPDATE `mru_config` SET `gangzone`='%d'", zoneid);
+    mysql_tquery(mruMySQL_Connection, str);
 }
 
 MruMySQL_KodStanowca(code)
 {
     new lStr[64];
-    format(lStr, sizeof(lStr), "UPDATE `mru_config` SET `stanowe_key`='%d'", code);
-    mysql_query(lStr);
+    mysql_format(mruMySQL_Connection, lStr, sizeof(lStr), "UPDATE `mru_config` SET `stanowe_key`='%d'", code);
+    mysql_tquery(mruMySQL_Connection, lStr);
 }
+
 MruMySQL_Unwarn(nick[])
 {
     new str[128];
-    new escaped_nick[MAX_PLAYER_NAME];
-    mysql_real_escape_string(nick, escaped_nick);
-    format(str, sizeof(str), "UPDATE `mru_konta` SET `Warnings` = `Warnings`-1 WHERE `Nick` = '%s'", escaped_nick);
-    mysql_query(str);
+    mysql_format(mruMySQL_Connection, str, sizeof(str), "UPDATE `mru_konta` SET `Warnings` = `Warnings`-1 WHERE `Nick` = '%e'", nick);
+    mysql_tquery(mruMySQL_Connection, str);
 }
 
 MruMySQL_UpdateFamily(id, nazwa[])
 {
     new query[75];
-	new nazwa_escaped[32];
-	mysql_real_escape_string(nazwa, nazwa_escaped);
-    format(query, sizeof(query), "UPDATE `mru_rodziny` SET `id`=%d WHERE `name`='%s'", id, nazwa_escaped);
-    mysql_query(query);
+    mysql_format(mruMySQL_Connection, query, sizeof(query), "UPDATE `mru_rodziny` SET `id`=%d WHERE `name`='%e'", id, nazwa);
+    mysql_tquery(mruMySQL_Connection, query);
 }
 
 MruMySQL_SetZoneControl(frac, id)
 {
     new str[128];
     format(str, 128, "UPDATE `mru_strefy` SET `gang`='%d' WHERE `id`='%d'", frac, id);
-    mysql_query(str);
+    mysql_tquery(mruMySQL_Connection, str);
 }
 
 MruMySQL_ChangePassword(nick[], password[])
@@ -85,14 +84,13 @@ MruMySQL_ChangePassword(nick[], password[])
     new hashedPassword[WHIRLPOOL_LEN], salt[SALT_LENGTH];
     randomString(salt, sizeof(salt));
     WP_Hash(hashedPassword, sizeof(hashedPassword), sprintf("%s%s%s", ServerSecret, password, salt));
-    mysql_real_escape_string(nick, escaped_nick);
-    format(string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s', `Salt` = '%s' WHERE `Nick` = '%s'", hashedPassword, salt, escaped_nick);
-    mysql_query(string);
+    mysql_format(mruMySQL_Connection, string, sizeof(string), "UPDATE `mru_konta` SET `Key` = '%s' WHERE `Nick` = '%e'", password, nick);
+    mysql_tquery(mruMySQL_Connection, string);
 }
 
 MruMySQL_ZoneDelay(zoneid)
 {
     new str[64];
     format(str, sizeof(str), "UPDATE `mru_config` SET `gangtimedelay`='%d'", zoneid);
-    mysql_query(str);
+    mysql_tquery(mruMySQL_Connection, str);
 }

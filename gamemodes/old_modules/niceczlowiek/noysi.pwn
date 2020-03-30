@@ -78,7 +78,7 @@ opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new inputOpis[256];
 		strcopy(inputOpis, inputtext, 256);
 
-		mysql_real_escape_string(inputOpis, inputOpis);
+		mysql_escape_string(inputOpis, inputOpis);
 		
 		new DBResult:db_result;
 		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`='%d' AND `text`='%s'", PlayerInfo[playerid][pUID], inputOpis));

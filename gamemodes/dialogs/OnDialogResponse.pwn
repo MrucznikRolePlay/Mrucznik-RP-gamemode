@@ -7901,7 +7901,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            new message[128];
 	                format(message, sizeof(message), "%s", inputtext);
-	                mysql_real_escape_string(message, message);
+	                mysql_escape_string(message, message);
 		            Dom[dom][hKomunikatWynajmu] = message;
 				    ZapiszDom(dom);
 				    SendClientMessage(playerid, COLOR_P@, "Komunikat wynajmu to teraz:");
@@ -8467,7 +8467,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	             	new kod[64];
 	                new kodplik[20];
 	                format(kodplik, sizeof(kodplik), "%s", inputtext);
-	                mysql_real_escape_string(kodplik, kodplik);
+	                mysql_escape_string(kodplik, kodplik);
 					Dom[PlayerInfo[playerid][pDom]][hKodSejf] = kodplik;
 					ZapiszDom(PlayerInfo[playerid][pDom]);
 					format(kod, sizeof(kod), "Kod do sejfu to teraz: %s", inputtext);
@@ -14966,7 +14966,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new typ = GetPVarInt(playerid, "edit_rang_typ");
         new id = GetPVarInt(playerid, "edit_rang_id");
         new name[20];
-        mysql_real_escape_string(inputtext, name);
+        mysql_escape_string(inputtext, name);
         if(inputtext[0] == '-')
         {
             if(typ == 0) strdel(FracRang[id][idx], 0, MAX_RANG_LEN);
