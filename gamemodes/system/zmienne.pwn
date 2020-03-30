@@ -804,10 +804,14 @@ new rexl;
 new addtimer = 60000;
 new Float:stareVHP[MAX_PLAYERS];//zapis uszkodzen
 new SANradio = 0;
+new KLUBOWEradio = 0;
+new Text3D:KLUBOWE3d;
 new Text3D:SAN3d;
 new Text3D:NapislotLS1, Text3D:NapislotLS2, Text3D:NapislotLV1, Text3D:NapislotSF1;
 new SANrepertuar[128];
+new KLUBOWErepertuar[128];
 new Float:SANzasieg, Float:SANx, Float:SANy, Float:SANz;
+new Float:KLUBOWEzasieg, Float:KLUBOWEx, Float:KLUBOWEy, Float:KLUBOWEz;
 //kubi
 new RadioSANUno[128];
 new RadioSANDos[128];

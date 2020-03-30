@@ -11560,6 +11560,71 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             format(SANrepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
+		else if(dialogid == 768)
+		{
+			if(response)
+		    {
+		        switch(listitem)
+		        {
+                    case 0: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://s1.slotex.pl:7170");
+                    case 1: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://4stream.pl:18240");
+		            case 2: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 3: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 4: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 5: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 6: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 7: return ShowPlayerDialogEx(playerid, 770, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL do wybranego utworu", "Wybierz", "Anuluj");
+		        }
+                ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
+		    }
+		}
+		else if(dialogid == 770)
+        {
+            if(!response) return 1;
+            format(KLUBOWErepertuar, 128, inputtext);
+            ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
+        }
+		if(dialogid == 769)
+		{
+		    if(response)
+		    {
+		        switch(listitem)
+		        {
+		            case 0: KLUBOWEzasieg = 10.0;
+                    case 1: KLUBOWEzasieg = 20.0;
+                    case 2: KLUBOWEzasieg = 35.0;
+                    case 3: KLUBOWEzasieg = 50.0;
+				}
+                new Float:x1,Float:y1,Float:z1, Float:a1, nick[MAX_PLAYER_NAME], string[256];
+				GetPlayerPos(playerid,x1,y1,z1);
+				GetPlayerFacingAngle(playerid, a1);
+				GetPlayerName(playerid, nick, sizeof(nick));
+				KLUBOWEradio = CreateDynamicObject(2232, x1, y1, z1-0.3, 0, 0, a1-180);
+				KLUBOWEx = x1;
+				KLUBOWEy = y1;
+				KLUBOWEz = z1;
+                KLUBOWE3d = CreateDynamic3DTextLabel("G³oœnik Klubowy", COLOR_NEWS, x1, y1, z1+0.5, 10.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
+				format(string, sizeof(string), "* %s stawia g³oœnik na ziemi i w³¹cza.", nick);
+				ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				SendClientMessage(playerid, COLOR_NEWS, "Ustawi³eœ g³oœnik klubowy. Aby go wy³¹czyæ wpisz /glosnik");
+                //
+                foreach(new i : Player)
+                {
+                    if(IsPlayerConnected(i))
+                    {
+                        if(!GetPVarInt(i, "kluboweaudio"))
+                        {
+                            if(PlayerToPoint(KLUBOWEzasieg, i, KLUBOWEx, KLUBOWEy, KLUBOWEz))
+                            {
+                                PlayAudioStreamForPlayer(i, KLUBOWErepertuar, KLUBOWEx, KLUBOWEy, KLUBOWEz, KLUBOWEzasieg, 1);
+                                SetPVarInt(i, "kluboweaudio", 1);
+                            }
+                        }
+                    }
+                }
+                //
+			}
+		}
         else if(dialogid == 1401)
 		{
 		    if(response)

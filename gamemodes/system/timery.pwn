@@ -2351,11 +2351,27 @@ public JednaSekundaTimer()
 				PlayAudioStreamForPlayer(i, SANrepertuar, SANx, SANy, SANz, SANzasieg, 1);
 			}
 		}
+		else if(GetPVarInt(i, "kluboweaudio") == 0 && KLUBOWEradio != 0)
+		{
+			if(IsPlayerInRangeOfPoint(i,KLUBOWEzasieg,KLUBOWEx, KLUBOWEy, KLUBOWEz))
+			{
+				SetPVarInt(i, "kluboweaudio", 1);
+				PlayAudioStreamForPlayer(i, KLUBOWErepertuar, KLUBOWEx, KLUBOWEy, KLUBOWEz, KLUBOWEzasieg, 1);
+			}
+		}
 		else if(GetPVarInt(i, "sanaudio") == 1 && SANradio != 0)
 		{
 			if(!IsPlayerInRangeOfPoint(i,SANzasieg,SANx, SANy, SANz))
 			{
 				SetPVarInt(i, "sanaudio", 0);
+				StopAudioStreamForPlayer(i);
+			}
+		}
+		else if(GetPVarInt(i, "kluboweaudio") == 1 && KLUBOWEradio != 0)
+		{
+			if(!IsPlayerInRangeOfPoint(i,KLUBOWEzasieg,KLUBOWEx, KLUBOWEy, KLUBOWEz))
+			{
+				SetPVarInt(i, "kluboweaudio", 1);
 				StopAudioStreamForPlayer(i);
 			}
 		}
