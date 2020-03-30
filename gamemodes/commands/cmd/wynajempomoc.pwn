@@ -32,7 +32,7 @@ YCMD:wynajempomoc(playerid, params[], help)
 {
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	SendClientMessage(playerid, COLOR_WHITE,"*** WYNAJMOWANIE POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-	SendClientMessage(playerid, COLOR_GRAD3,"*** RENT *** /unrent /wejdz /wyjdz /zamknij /dom /reentroom /wynajmijpokoj");
-	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /pomoc /bizpomoc /liderpomoc /rybypomoc /gotowaniepomoc /ircpomoc");
+	SendClientMessage(playerid, COLOR_GRAD3,"*** RENT *** /unrent /wejdz /wyjdz /dom /wynajmijpokoj");
+	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /pomoc /bizpomoc /liderpomoc /rybypomoc /ircpomoc");
 	return 1;
 }
