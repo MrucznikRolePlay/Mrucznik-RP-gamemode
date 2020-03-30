@@ -94,19 +94,15 @@ Save_MySQL_Leader(playerid)
 }
 Load_MySQL_Leader(playerid)
 {
-	//TODO: MySQL
-	// new query[256];
-	// format(query, sizeof(query), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
-	// mysql_query(query);
-	// mysql_store_result();
-    // if (mysql_num_rows())
-	// {
-    //     mysql_fetch_row_format(query, "|");
-	// 	sscanf(query, "p<|>dd", 
-	// 	PlayerInfo[playerid][pLider],
-	// 	PlayerInfo[playerid][pLiderValue]);
-	// }
-	// mysql_free_result();
+	new query[256];
+	format(query, sizeof(query), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
+	if(cache_is_valid(result))
+	{
+		cache_get_value_index_int(0, 0, PlayerInfo[playerid][pLider]);
+		cache_get_value_index_int(0, 1, PlayerInfo[playerid][pLiderValue]);
+		cache_delete(result);
+	}
 	return 1;
 }
 MruMySQL_IloscLiderowLoad()
