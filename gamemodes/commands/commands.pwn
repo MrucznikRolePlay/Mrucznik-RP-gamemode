@@ -37,7 +37,6 @@
 #include "cmd/app.pwn"
 #include "cmd/apteczka.pwn"
 #include "cmd/aresztuj.pwn"
-#include "cmd/armia.pwn"
 #include "cmd/armor.pwn"
 #include "cmd/atakuj.pwn"
 #include "cmd/autorzy.pwn"
