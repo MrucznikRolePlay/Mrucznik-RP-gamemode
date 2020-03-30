@@ -836,7 +836,7 @@ MruMySQL_WczytajOpis(handle, uid, typ)
 {
     new string[128];
     format(string, sizeof(string), "SELECT `desc` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
-	new Cache:result = mysql_query(mruMySQL_Connection, string);
+	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 
 	if(cache_is_valid(result))
     {
@@ -889,7 +889,7 @@ MruMySQL_LoadAccess(playerid)
 	new query[128];
 	format(query, sizeof(query), "SELECT CAST(`FLAGS` AS UNSIGNED) AS `FLAGS` FROM `mru_uprawnienia` WHERE `UID`=%d", PlayerInfo[playerid][pUID]);
 
-	new Cache:result = mysql_query(mruMySQL_Connection, query);
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 
 	if(cache_is_valid(result))
     {
@@ -905,7 +905,7 @@ MruMySQL_DoesAccountExist(nick[])
 {
 	new string[128];
 	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT (BINARY `Nick` = '%e') AS CASE_CHECK FROM `mru_konta` WHERE `Nick` = '%e'", nick, nick);
-	new Cache:result = mysql_query(mruMySQL_Connection, string);
+	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 	if(cache_is_valid(result))
     {
 		if(cache_num_rows() > 0)
@@ -930,7 +930,7 @@ MruMySQL_ReturnPassword(nick[], key[], salt[])
 {
 	new string[128], key[129];
 	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT `Key`, `Salt` FROM `mru_konta` WHERE `Nick` = '%e'", nick);
-	new Cache:result = mysql_query(mruMySQL_Connection, string);
+	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 	if(cache_is_valid(result))
     {
 		cache_get_value_index(0, 0, key, 129);
@@ -1023,7 +1023,7 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
     if(strcmp(ip, "nieznane") == 0)
     {
         format(query, 256, "SELECT `IP` FROM `mru_bany` WHERE `dostal`='%s' ORDER BY `czas` LIMIT 1", nick);
-		new Cache:result = mysql_query(mruMySQL_Connection, query);
+		new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 		if(cache_is_valid(result))
     	{
 			cache_get_value_index(0, 0, ip, 16);
@@ -1084,7 +1084,7 @@ bool:MruMySQL_SprawdzBany(playerid)
 	new ip[16], query[256];
 	GetPlayerIp(playerid,ip,sizeof(ip));
 	format(query, sizeof(query), "SELECT `typ`, `nadal_uid`, `nadal`, `powod`, `czas`, `dostal`, `dostal_uid`, `IP` FROM `mru_bany` WHERE `dostal`='%s' OR `IP` = '%s' ORDER BY `czas` DESC LIMIT 1", GetNick(playerid),ip);
-	new Cache:result = mysql_query(mruMySQL_Connection, query);
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 	if(cache_is_valid(result))
 	{
 		new row_count;
@@ -1130,7 +1130,7 @@ bool:MruMySQL_SprawdzBany(playerid)
 MruMySQL_GetNameFromUID(uid) {
 	new nick[MAX_PLAYER_NAME], string[128];
 	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `UID` = '%d'", uid);
-	new Cache:result = mysql_query(mruMySQL_Connection, string);
+	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 	if(cache_is_valid(result))
 	{
 		cache_get_value_index(0, 0, nick);
@@ -1151,7 +1151,7 @@ MruMySQL_GetAccInt(kolumna[], nick[])
 {
 	new string[128], wartosc;
 	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT `%e` FROM `mru_konta` WHERE `Nick` = '%e'", kolumna, nick);
-	new Cache:result = mysql_query(mruMySQL_Connection, string);
+	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 	if(cache_is_valid(result))
 	{
 		cache_get_value_index_int(0, 0, wartosc);
@@ -1172,7 +1172,7 @@ MruMySQL_LoadPhoneContacts(playerid)
 {
 	new string[128];
 	format(string, sizeof(string), "SELECT UID, Number, Name FROM mru_kontakty WHERE Owner='%d' LIMIT 10", PlayerInfo[playerid][pUID]); //MAX_KONTAKTY
-	new Cache:result = mysql_query(mruMySQL_Connection, string);
+	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 	if(cache_is_valid(result))
 	{
 		for(new i; i < cache_num_rows(); i++)
@@ -1194,7 +1194,7 @@ MruMySQL_AddPhoneContact(playerid, nazwa[], numer)
 	new string[128], escapedName[32];
 	mysql_escape_string(nazwa, escapedName);
 	format(string, sizeof(string), "INSERT INTO mru_kontakty (Owner, Number, Name) VALUES ('%d', '%d', '%s')", PlayerInfo[playerid][pUID], numer, escapedName);
-	new Cache:result = mysql_query(mruMySQL_Connection, string);
+	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 	new uid = -1;
 	if(cache_is_valid(result))
 	{
@@ -1220,23 +1220,6 @@ MruMySQL_DeletePhoneContact(uid)
 	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);
 	mysql_tquery(mruMySQL_Connection, string);
 	return 1;
-}
-
-MruMySQL_Error(error[]) //TODO: use
-{
-    new str[256];
-    format(str, sizeof(str), "MySQL/error.log");
-    new File:f, h,m,s,dd,mm,yy;
-    gettime(h,m,s);
-    getdate(yy,mm,dd);
-    f = fopen(str, io_append);
-    if(f)
-    {
-        format(str, 256, "[%02d/%02d/%d - %02d:%02d:%02d] %s\r\n", dd,mm,yy,h,m,s,error);
-        fwrite(f, str);
-        fclose(f);
-    } else printf("File handle error at error.log [%s]", error);
-    return 1;
 }
 
 //EOF

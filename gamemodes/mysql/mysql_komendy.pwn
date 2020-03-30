@@ -9,7 +9,7 @@ MruMySQL_CzyjToNumer(playerid, number)
 {
     new query[128];
     format(query, sizeof(query), "SELECT `Nick` FROM mru_konta WHERE `PhoneNr`='%d'", number);
-    new Cache:result = mysql_query(mruMySQL_Connection, query);
+    new Cache:result = mysql_query(mruMySQL_Connection, query, true);
     if(cache_is_valid(result))
     {
         for(new i; i < cache_num_rows(); i++)
@@ -27,7 +27,7 @@ MruMySQL_ListaLiderow(playerid, family)
     new query[128];
     SendClientMessage(playerid, COLOR_RED, "================ LISTA LIDERÓW ================");
     format(query, sizeof(query), "SELECT `Nick` FROM `mru_konta` WHERE `FMember`='%d' AND `Rank`>1000", family);
-    new Cache:result = mysql_query(mruMySQL_Connection, query);
+    new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 
     if(cache_is_valid(result))
     {

@@ -2,7 +2,7 @@ MruMySQL_ZapiszUprawnienia(playerid)
 {
     new str[128];
     mysql_format(mruMySQL_Connection, str, sizeof(str), "SELECT `UID` FROM `mru_uprawnienia` WHERE `UID`=%d", PlayerInfo[playerid][pUID]);
-    new Cache:result = mysql_query(mruMySQL_Connection, str);
+    new Cache:result = mysql_query(mruMySQL_Connection, str, true);
 
 	if(cache_is_valid(result))
     {
@@ -27,7 +27,7 @@ MruMySQL_PobierzStatystyki(playerid, nickoruid[])
     mysql_escape_string(nickoruid, nick_escaped);
     new uid = strval(nickoruid);
     mysql_format(mruMySQL_Connection, lStr, sizeof(lStr), "SELECT `Level`, `Admin`, `ZaufanyGracz`, `PAdmin`, `DonateRank`, `Money`, `Bank`, `PhoneNr`, `Job`, `BlokadaPisania`, `Member`, `FMember`, `Dom`, `Block`, `ZmienilNick`, `Warnings`, `UID` FROM `mru_konta` WHERE `Nick`='%e' OR `UID`='%d'", nick_escaped, uid);
-    new Cache:result = mysql_query(mruMySQL_Connection, lStr);
+    new Cache:result = mysql_query(mruMySQL_Connection, lStr, true);
     if(cache_is_valid(result))
     {
         if(cache_num_rows() > 0)
@@ -69,7 +69,7 @@ MruMySQL_ZnajdzBanaPoIP(playerid, ip[])
 {
     new query[256], str[800];
     mysql_format(mruMySQL_Connection, query, sizeof(query), "SELECT `nadal_uid`, `nadal`, `powod`, `czas`, `dostal`, `dostal_uid`, `typ` FROM `mru_bany` WHERE `IP` = '%e' AND `typ`>1 ORDER BY `czas` DESC LIMIT 4", ip);
-    new Cache:result = mysql_query(mruMySQL_Connection, query);
+    new Cache:result = mysql_query(mruMySQL_Connection, query, true);
     if(cache_is_valid(result))
     {
         for(new i; i < cache_num_rows(); i++)
@@ -104,7 +104,7 @@ MruMySQL_ZnajdzBanaPoNicku(playerid, nick[])
 {
     new query[256], str[800];
     mysql_format(mruMySQL_Connection, query, sizeof(query), "SELECT `nadal_uid`, `nadal`, `powod`, `czas`, `IP`, `dostal_uid`, `typ` FROM `mru_bany` WHERE `dostal` = '%e' AND `typ`>1 ORDER BY `czas` DESC LIMIT 4", nick);
-    new Cache:result = mysql_query(mruMySQL_Connection, query);
+    new Cache:result = mysql_query(mruMySQL_Connection, query, true);
     if(cache_is_valid(result))
     {
         for(new i; i < cache_num_rows(); i++)

@@ -145,21 +145,16 @@ WlaczSwiatlaP(playerid)
 
 IbizaDrinkiPobierz()
 {
-	//TODO: MySQL
-	// new string[128];
-	// for(new i=0; i<12; i++)
-	// {
-	// 	format(string, sizeof string, "SELECT cena FROM ibizadrinki WHERE id=%d", i);
-	// 	mysql_query(string);
-	// 	mysql_store_result();
-	// 	if(mysql_num_rows())
-	// 	{
-	// 		mysql_fetch_row_format(string, "|");
-	// 		sscanf(string, "d", IbizaDrinkiCeny[i]);
-	// 	}
-	// 	mysql_free_result();
-	// }
-	// return 1;
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT cena FROM ibizadrinki");
+	if(cache_is_valid(result))
+	{
+		for(new i=0; i<12; i++)
+		{
+			cache_get_value_index_int(i, 0, IbizaDrinkiCeny[i]);
+		}
+		cache_delete(result);
+	}
+	return 1;
 }
 
 IbizaWyjscie(playerid)
