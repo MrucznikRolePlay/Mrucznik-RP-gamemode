@@ -105,23 +105,6 @@ YCMD:wezdragi(playerid, params[], help)
 					MSGBOX_Show(playerid, "Sila -15", MSGBOX_ICON_TYPE_EXPLODE, 3);
 				}
 			}
-		    
-		    //TODO: refactor
-		    // if(STDPlayer[playerid]==1)
-			// {
-			//      STDPlayer[playerid] = 0;
-			//      SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ chroy dziêki narkotykom !");
-			// }
-			// else if(STDPlayer[playerid]==2)
-			// {
-			//      STDPlayer[playerid] = 1;
-			//      SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoja chroba zmala³a do Chlamydia dziêki narkotykom !");
-			// }
-			// else if(STDPlayer[playerid]==3)
-			// {
-			//      STDPlayer[playerid] = 2;
-			//      SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoja chroboa zmala³a do Gonorrhea dziêki narkotykom !");
-			// }
 		}
 		else
 		{
