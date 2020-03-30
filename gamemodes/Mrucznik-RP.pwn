@@ -2397,6 +2397,12 @@ SetPlayerSpawnPos(playerid)
 		PlayerInfo[playerid][pMuted] = 1;
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
+		if(strfind((PlayerInfo[playerid][pAJreason]), "DM2", true) == -1
+		&& strfind((PlayerInfo[playerid][pAJreason]), "Death Match 2", true) == -1)
+		{
+			ResetPlayerWeapons(playerid);
+			UsunBron(playerid);
+		}
 		SendClientMessage(playerid, COLOR_PANICRED, string);
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail

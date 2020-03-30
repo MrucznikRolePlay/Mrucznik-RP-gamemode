@@ -4230,6 +4230,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {
 	if(IsPlayerConnected(playerid))
 	{
+		if(GetPlayerVirtualWorld(playerid) == 5000) return 1;
 	    PlayerInfo[playerid][pCrimes] += 1;
 	    new points = PoziomPoszukiwania[playerid];
 		new turned[MAX_PLAYER_NAME];
