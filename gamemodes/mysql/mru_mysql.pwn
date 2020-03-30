@@ -107,28 +107,17 @@ Load_MySQL_Leader(playerid)
 }
 MruMySQL_IloscLiderowLoad()
 {
-	//TODO: MySQL
-    // new lStr[64];
-    // format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_liderzy`");
-	// mysql_query(lStr);
-	// mysql_store_result();
-	// new szmuleonetescik[24];
-	// mysql_fetch_row_format(szmuleonetescik,"|");
-	// AllLeaders = strval(szmuleonetescik);
-	// mysql_free_result();
-	
-	// for(new i; i<MAX_FRAC; i++)
-	// {
-	// 	if(i != 0)
-	// 	{
-	// 		format(lStr, sizeof(lStr), "SELECT COUNT(*) FROM `mru_liderzy` WHERE `FracID`='%d'", i); 
-	// 		mysql_query(lStr); 
-	// 		mysql_store_result();
-	// 		mysql_fetch_row_format(szmuleonetescik,"|");
-	// 		LeadersValue[LEADER_FRAC][i] = strval(szmuleonetescik);
-	// 		mysql_free_result();
-	// 	}
-	// }
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT FracID, COUNT(*) FROM `mru_liderzy` GROUP BY FracID", true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+		{
+			new idx;
+			cache_get_value_index_int(i, 0, idx);
+			cache_get_value_index_int(i, 1, LeadersValue[LEADER_FRAC][idx]);
+		}
+		cache_delete(result);
+	}
 }
 
 //--------------------------------------------------------------<[ Konta ]>--------------------------------------------------------------
