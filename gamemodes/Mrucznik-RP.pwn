@@ -5831,42 +5831,41 @@ DialogChangePasswordRequired(playerid)
 
 VerifyPlayerIp(playerid)
 {
-	//TODO: MySQL
-	// new ip[16], query[256];
-	// GetPlayerIp(playerid, ip, sizeof(ip));
+	new ip[16], query[256];
+	GetPlayerIp(playerid, ip, sizeof(ip));
 
-	// format(query, sizeof(query), "SELECT DISTINCT t.ip FROM ( SELECT ip, time FROM mru_konta k JOIN mru_logowania l ON k.UID=l.PID WHERE Nick='%s' ORDER BY l.time DESC) t LIMIT 25 ", GetNick(playerid));
-	// mysql_query(query);
-	// mysql_store_result();
-    // if(mysql_num_rows())
-    // {
-    //     while(mysql_fetch_row_format(query, "|"))
-    //     {
-    //         new lastIp[MAX_PLAYER_NAME];
-    //         sscanf(query, "p<|>s[16]", lastIp);
+	format(query, sizeof(query), "SELECT DISTINCT t.ip FROM (SELECT ip, time FROM mru_konta k JOIN mru_logowania l ON k.UID=l.PID WHERE Nick='%s' ORDER BY l.time DESC) t LIMIT 25 ", GetNick(playerid));
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 
-	// 		if(strcmp(ip, MD5_Hash(lastIp), true ) == 0)
-	// 		{
-    // 			mysql_free_result();
-	// 			Log(serverLog, INFO, "Ip %s matched for %s", ip, GetNick(playerid));
-	// 			return true;
-	// 		}
-	// 		else
-	// 		{
-	// 			new host1, host2, lastHost1, lastHost2;
-	// 			sscanf(ip, "p<.>dd", host1, host2);
-	// 			sscanf(lastIp, "p<.>dd", lastHost1, lastHost2);
-	// 			if(host1 == lastHost1 && host2 == lastHost2)
-	// 			{
-	// 				mysql_free_result();
-	// 				Log(serverLog, INFO, "Host %s matched for %s", ip, GetNick(playerid));
-	// 				return true;
-	// 			}
-	// 		}
-    //     }
-    // }
-    // mysql_free_result();
-	// return false;
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+        {
+            new lastIp[MAX_PLAYER_NAME];
+			cache_get_value_index(0, 0, lastIp, MAX_PLAYER_NAME);
+
+			if(strcmp(ip, MD5_Hash(lastIp), true ) == 0)
+			{
+				cache_delete(result);
+				Log(serverLog, INFO, "Ip %s matched for %s", ip, GetNick(playerid));
+				return true;
+			}
+			else
+			{
+				new host1, host2, lastHost1, lastHost2;
+				sscanf(ip, "p<.>dd", host1, host2);
+				sscanf(lastIp, "p<.>dd", lastHost1, lastHost2);
+				if(host1 == lastHost1 && host2 == lastHost2)
+				{
+					cache_delete(result);
+					Log(serverLog, INFO, "Host %s matched for %s", ip, GetNick(playerid));
+					return true;
+				}
+			}
+		}
+		cache_delete(result);
+	}
+	return false;
 }
 
 VeryfiLastLogin(playerid)
