@@ -274,11 +274,6 @@ public OnGameModeInit()
 	//Config
 	LoadConfig();
 
-	//Groups
-	MruMySQL_LoadGroups();
-	MruMySQL_LoadRanks();
-	MruMySQL_LoadRanksPerms();
-
 	//Old Groups - to remove \/
     WczytajRangi();
     WczytajSkiny();
