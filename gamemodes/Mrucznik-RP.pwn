@@ -128,15 +128,14 @@ native gpci (playerid, serial [], len);
 #include "old_modules\niceczlowiek\noysi.pwn"
 #include "old_modules\niceczlowiek\wybieralka.pwn"
 
-//-------<[ 3.0 style ]>-------
-#include "modules\modules.pwn"
-
 //-------<[ MySQL ]>-------
 #include "mysql\mru_mysql.pwn"
 #include "mysql\mysql_komendy.pwn"
 #include "mysql\mysql_noysi.pwn"
 #include "mysql\mysql_OnDialogResponse.pwn"
 
+//-------<[ 3.0 style ]>-------
+#include "modules\modules.pwn"
 
 /*
 #include "modules\ActorSystem\actors.pwn"
@@ -253,7 +252,7 @@ public OnGameModeInit()
     Streamer_SetTickRate(50);
 
 	//-------<[ MySQL ]>-------
-	MruMySQL_Connect();//mysql
+	MruMySQL_Init();//mysql
 	MruMySQL_IloscLiderowLoad();
 
 	
@@ -5832,61 +5831,63 @@ DialogChangePasswordRequired(playerid)
 
 VerifyPlayerIp(playerid)
 {
-	new ip[16], query[256];
-	GetPlayerIp(playerid, ip, sizeof(ip));
+	//TODO: MySQL
+	// new ip[16], query[256];
+	// GetPlayerIp(playerid, ip, sizeof(ip));
 
-	format(query, sizeof(query), "SELECT DISTINCT t.ip FROM ( SELECT ip, time FROM mru_konta k JOIN mru_logowania l ON k.UID=l.PID WHERE Nick='%s' ORDER BY l.time DESC) t LIMIT 25 ", GetNick(playerid));
-	mysql_query(query);
-	mysql_store_result();
-    if(mysql_num_rows())
-    {
-        while(mysql_fetch_row_format(query, "|"))
-        {
-            new lastIp[MAX_PLAYER_NAME];
-            sscanf(query, "p<|>s[16]", lastIp);
+	// format(query, sizeof(query), "SELECT DISTINCT t.ip FROM ( SELECT ip, time FROM mru_konta k JOIN mru_logowania l ON k.UID=l.PID WHERE Nick='%s' ORDER BY l.time DESC) t LIMIT 25 ", GetNick(playerid));
+	// mysql_query(query);
+	// mysql_store_result();
+    // if(mysql_num_rows())
+    // {
+    //     while(mysql_fetch_row_format(query, "|"))
+    //     {
+    //         new lastIp[MAX_PLAYER_NAME];
+    //         sscanf(query, "p<|>s[16]", lastIp);
 
-			if(strcmp(ip, MD5_Hash(lastIp), true ) == 0)
-			{
-    			mysql_free_result();
-				Log(serverLog, INFO, "Ip %s matched for %s", ip, GetNick(playerid));
-				return true;
-			}
-			else
-			{
-				new host1, host2, lastHost1, lastHost2;
-				sscanf(ip, "p<.>dd", host1, host2);
-				sscanf(lastIp, "p<.>dd", lastHost1, lastHost2);
-				if(host1 == lastHost1 && host2 == lastHost2)
-				{
-					mysql_free_result();
-					Log(serverLog, INFO, "Host %s matched for %s", ip, GetNick(playerid));
-					return true;
-				}
-			}
-        }
-    }
-    mysql_free_result();
-	return false;
+	// 		if(strcmp(ip, MD5_Hash(lastIp), true ) == 0)
+	// 		{
+    // 			mysql_free_result();
+	// 			Log(serverLog, INFO, "Ip %s matched for %s", ip, GetNick(playerid));
+	// 			return true;
+	// 		}
+	// 		else
+	// 		{
+	// 			new host1, host2, lastHost1, lastHost2;
+	// 			sscanf(ip, "p<.>dd", host1, host2);
+	// 			sscanf(lastIp, "p<.>dd", lastHost1, lastHost2);
+	// 			if(host1 == lastHost1 && host2 == lastHost2)
+	// 			{
+	// 				mysql_free_result();
+	// 				Log(serverLog, INFO, "Host %s matched for %s", ip, GetNick(playerid));
+	// 				return true;
+	// 			}
+	// 		}
+    //     }
+    // }
+    // mysql_free_result();
+	// return false;
 }
 
 VeryfiLastLogin(playerid)
 {
-	new query[128];
-	format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s' LIMIT 1", GetNick(playerid));
-	mysql_query(query);
-	mysql_store_result();
-	if(mysql_num_rows()) //ostatnie logowanie po 15
-	{
-		mysql_free_result();
-		Log(serverLog, INFO, "Logon matched for %s", GetNick(playerid));
-		return true;
-	}
-	else
-	{
-		mysql_free_result();
-		Log(serverLog, INFO, "Logon mismatched for %s", GetNick(playerid));
-		return false;
-	}
+	//TODO: MySQL
+	// new query[128];
+	// format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s' LIMIT 1", GetNick(playerid));
+	// mysql_query(query);
+	// mysql_store_result();
+	// if(mysql_num_rows()) //ostatnie logowanie po 15
+	// {
+	// 	mysql_free_result();
+	// 	Log(serverLog, INFO, "Logon matched for %s", GetNick(playerid));
+	// 	return true;
+	// }
+	// else
+	// {
+	// 	mysql_free_result();
+	// 	Log(serverLog, INFO, "Logon mismatched for %s", GetNick(playerid));
+	// 	return false;
+	// }
 }
 
 PasswordConversion(playerid, accountPass[], password[])
@@ -7553,7 +7554,7 @@ public OnPlayerText(playerid, text[])
 					return 0;
 				}
 				new id, message[128];
-				mysql_real_escape_string(text, message);
+				mysql_escape_string(text, message);
 				new Hour, Minute;
 				gettime(Hour, Minute);
 				new datapowod[160];
