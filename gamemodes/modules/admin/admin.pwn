@@ -111,8 +111,6 @@
 		> msgbox - wyœwietla MSG box
 		> gotoczit - teleportuje na miejsce zbrodni 
 		> anulujzp - anuluje zabranie prawa jazdy dla gracza o ID
-		> bwsettings - odpala ustawienia BW
-		> bwtime - ustala BW time
 		> addcar - dodaje pojazd na mapê o podanym ID
 		> removecar - usuwa pojazd z mapy o podanym ID
 		> setac - ustawia anty-cheat'a
@@ -141,7 +139,6 @@
 		> bw - nadaje BW graczowi o ID
 		> checkbw - informacja o czasie BW gracza
 		> cziterzy - pokazuje liste osób, które AC uzna³ za cziterów 
-		> checkprawko - sprawdza czy gracz ma prawo jazdy
 		> restart - restartuje serwera
 		> wczytajskrypt - wczytuje FS'a 
 		> setmistrz - mianuje gracza o ID mistrzem bokserskim 

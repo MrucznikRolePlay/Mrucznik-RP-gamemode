@@ -35,7 +35,7 @@ YCMD:anuluj(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "|__________________ Cancel __________________|");
 		SendClientMessage(playerid, COLOR_WHITE, "U¯YJ: /anuluj [nazwa]");
-		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Wywiad, Tankowanie, Auto, Boks");
+		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Wywiad, Tankowanie, Auto, Boks, Kontrakt");
 		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Taxi, Bus, Medyk, Mechanik, Gazeta, Mandat, Swiadek, Slub, Rozwod, taxicall");
 		SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
 		return 1;
@@ -132,6 +132,24 @@ YCMD:anuluj(playerid, params[], help)
    			else
    			{
 	           sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z Korporacji !");
+   			}
+   		}
+   	}
+	else if(strcmp(x_job,"kontrakt",true) == 0)
+	{
+		if(PlayerInfo[playerid][pMember]==8 || PlayerInfo[playerid][pLider]==8)
+ 		{
+   			if(GoChase[playerid] < 999)
+      		{
+				SendFamilyMessage(8, COLOR_YELLOW, sprintf("Kontrakt na %s, nagroda za wykonanie $%d.", GetNickEx(GoChase[playerid]), PlayerInfo[GoChase[playerid]][pHeadValue]));
+				GotHit[playerid] = 0;
+				GetChased[GoChase[playerid]] = 999;
+				GoChase[playerid] = 999;
+				GameTextForPlayer(playerid, "~w~Anulowano~n~~r~kontrakt", 5000, 1);
+   			}
+   			else
+   			{
+	           sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z HA !");
    			}
    		}
    	}

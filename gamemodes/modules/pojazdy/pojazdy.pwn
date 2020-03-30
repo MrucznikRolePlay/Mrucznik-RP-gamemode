@@ -68,7 +68,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
     if(IsPlayerInAnyVehicle(playerid) && GetPlayerVehicleSeat(playerid) == 0)
 	{
-        if(PRESSED(KEY_ACTION) && !GetPVarInt(playerid, "timer_StaticCruiseControl")  && PlayerInfo[playerid][pCruiseController] == 1)
+        if(PRESSED(KEY_LOOK_BEHIND) && !GetPVarInt(playerid, "timer_StaticCruiseControl")  && PlayerInfo[playerid][pCruiseController] == 1)
         {
             new carid;
             carid = GetPlayerVehicleID(playerid);

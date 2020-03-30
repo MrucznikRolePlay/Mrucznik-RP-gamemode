@@ -48,17 +48,22 @@ YCMD:login(playerid, params[], help)
 			sendTipMessage(playerid, "Gracz nie jest zalogowany.");
 			return 1;
 		}
-		new string[144];
-		new giveplayer[MAX_PLAYER_NAME];
+		new nick[24];
+		if(GetPVarString(playa, "maska_nick", nick, 24))
+		{
+			if(!IsAPolicja(playa)) RemovePlayerAttachedObject(playa,1);
+			SetPlayerName(playa, nick);
+			SetRPName(playa);
+			format(PlayerInfo[playa][pNick], 24, "%s", nick);
+			DeletePVar(playa, "maska_nick");
+		}
+		SetPlayerColor(playa, TEAM_HIT_COLOR);
 		new Float:slx, Float:sly, Float:slz;
-		GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 		GetPlayerPos(playa, slx, sly, slz);
 		PlayerPlaySound(playa, 1130, slx, sly, slz+5);
 		Log(punishmentLog, INFO, "Admin %s u¿y³ (/login) i wylogowa³ %s", GetPlayerLogName(playerid), GetPlayerLogName(playa));
-		format(string, sizeof(string), "AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",GetNickEx(playerid), giveplayer);
-		ABroadCast(COLOR_LIGHTRED,string,1);
-		format(string, sizeof(string), "Zosta³eœ wylogowany przez administratora %s", GetNickEx(playerid));
-		SendClientMessage(playa, COLOR_PANICRED, string);
+		ABroadCast(COLOR_LIGHTRED,sprintf("AdmCmd: %s wylogowa³ poprzez (/login) gracza %s",GetNickEx(playerid), GetNickEx(playa)),1);
+		SendClientMessage(playa, COLOR_PANICRED, sprintf("Zosta³eœ wylogowany przez administratora %s", GetNickEx(playerid)));
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
 		{
 			iloscInne[playerid] = iloscInne[playerid]+1;

@@ -36,14 +36,7 @@ YCMD:bp(playerid, params[], help)//blokada pisania
 		sendTipMessage(playerid, "U¿yj /bp [ID gracza] [czas (w godzinach)] [nazwa chatu]");
 		return 1;
 	}
-	if (PlayerInfo[playerid][pNewAP] >= 1 && !PlayerInfo[playerid][pAdmin])
-	{
-		if(czas < 0 || czas > 1)
-		{
-			return sendTipMessage(playerid, "Czas max. 1h dla p@!");
-		}
-	}
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		if(IsPlayerConnected(giveplayerid))
 		{

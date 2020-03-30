@@ -441,12 +441,12 @@ public AktywujPozar()
 	{
 		SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
     	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "           UWAGA: WYBUCH£ PO¯AR!");
-    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: KONTENERY - LOSTNISKO LOS SANTOS");
+    	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "MIEJSCE PO¯ARU: KONTENERY - LOTNISKO LOS SANTOS");
     	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "PRZYCZYNA PO¯ARU: WYBUCH");
     	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "ZG£OSI£: OCHRONA LOTNISKA");
     	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "         !!!!UDAJ SIÊ NA MIEJSCE!!!!");
     	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, fraction_name);
-    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: KONTENERY - LOSTNISKO LOS SANTOS",1);
+    	ABroadCast(COLOR_YELLOW,"[SYSTEM PO¯ARÓW] Aktywowano po¿ar: KONTENERY - LOTNISKO LOS SANTOS",1);
     	AddFire(2067.007,-2206.814,13.666, 400);
 		AddFire(2067.007,-2208.004,13.666, 400);
 		AddFire(2067.007,-2209.165,13.666, 400);
@@ -992,7 +992,7 @@ public MainTimer()
     }
     if(TICKS_1Min == 59)
     {
-		CJSkinCheck();
+		PlayersCheckerMinute();
         SyncUp();
     }
     if(TICKS_5Min == (60*5)-1)
@@ -1826,7 +1826,6 @@ public Production()
 {
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][pFishes] >= 5) { if(FishCount[i] >= 3) { PlayerInfo[i][pFishes] = 0; } else { FishCount[i] += 1; } }
 		if(PlayerDrunk[i] > 0) { PlayerDrunkTime[i] = 0; GameTextForPlayer(i, "~p~Jestes mniej pijany~n~~r~Pijaku", 3500, 1); }
 		if(GetPlayerDrunkLevel(i) < 1999 && PlayerDrunk[i] > 0) { PlayerDrunk[i] = 0; PlayerDrunkTime[i] = 0; GameTextForPlayer(i, "~p~Wytrzezwiales~n~~r~Pijaku", 3500, 1); }
 		if(PlayerInfo[i][pPayDay] < 6 && !IsPlayerPaused(i)) { PlayerInfo[i][pPayDay] += 1; } //+ 5 min to PayDay anti-abuse
@@ -3262,22 +3261,37 @@ public Fillup()
 	return 1;
 }
 
-public CJSkinCheck()
+public PlayersCheckerMinute()
 {
 	foreach(new j : Player)
 	{
-		if(gPlayerLogged[j] > 0 && GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
+		if(gPlayerLogged[j] > 0)
 		{
-			if(PlayerInfo[j][pSkin] > 0)
-			{
-			 	SetPlayerSpawnSkin(j);
+			if(PlayerInfo[j][pFishes] >= 5) 
+			{ 
+				if(FishCount[j] >= 14) //15 minut
+				{
+					PlayerInfo[j][pFishes] = 0; 
+					FishCount[j] = 0;
+				} 
+				else 
+				{ 
+					FishCount[j]++; 
+				} 
 			}
-			else 
+			if(GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
 			{
-				//PlayerInfo[j][pSkin] = 299; na potem
-				SetPlayerSkinEx(j, 299);
-				sendTipMessage(j, "Posiada³eœ skin CJ-a ID [0] - przywróciliœmy Ci domyœlny skin. Uwa¿asz, ¿e to b³¹d? Zg³oœ utratê w dziale b³êdów.");
-				sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w rodzinie, frakcji. Pomocna bêdzie ka¿da informacja.");
+				if(PlayerInfo[j][pSkin] > 0)
+				{
+					SetPlayerSpawnSkin(j);
+				}
+				else 
+				{
+					//PlayerInfo[j][pSkin] = 299; na potem
+					SetPlayerSkinEx(j, 299);
+					sendTipMessage(j, "Posiada³eœ skin CJ-a ID [0] - przywróciliœmy Ci domyœlny skin. Uwa¿asz, ¿e to b³¹d? Zg³oœ utratê w dziale b³êdów.");
+					sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w rodzinie, frakcji. Pomocna bêdzie ka¿da informacja.");
+				}
 			}
 		}
 	}

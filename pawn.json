@@ -13,7 +13,6 @@
 		"Southclaws/pawn-requests:0.8.7",
 		"Open-GTO/sa-mp-fixes",
 		"emmet-jones/New-SA-MP-callbacks",
-		"NexiusTailer/Nex-AC",
 		"oscar-broman/strlib",
 		"pawn-lang/YSI-Includes@4.x",
 		"Southclaws/samp-whirlpool",
@@ -24,7 +23,8 @@
 		"Pottus/ColAndreas:v1.4.0.3",
 		"BigETI/pawn-map",
 		"Y-Less/indirection",
-		"Zeex/amx_assembly"
+		"Zeex/amx_assembly",
+		"Mrucznik/samp-plugin-profiler:v2.15.4"
 	],
 	"build": {
 		"name": "",

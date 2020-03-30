@@ -59,14 +59,11 @@
 #include "cmd/blokujnoba.pwn"
 #include "cmd/blokujsprzedarz.pwn"
 #include "cmd/boxstats.pwn"
-#include "cmd/bonehead.pwn"
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
 #include "cmd/brama.pwn"
 #include "cmd/bus.pwn"
 #include "cmd/bw.pwn"
-#include "cmd/bwsettings.pwn"
-#include "cmd/bwtime.pwn"
 #include "cmd/c.pwn"
 #include "cmd/caluj.pwn"
 #include "cmd/car.pwn"
@@ -164,13 +161,13 @@
 #include "cmd/giveroom.pwn"
 #include "cmd/glosnik.pwn"
 #include "cmd/glosowanie.pwn"
-#include "cmd/glosuja.pwn"
 #include "cmd/gokarty.pwn"
 #include "cmd/goto.pwn"
 #include "cmd/gotoadmin.pwn"
 #include "cmd/gotobank.pwn"
 #include "cmd/gotocar.pwn"
 #include "cmd/gotoczit.pwn"
+#include "cmd/gotodom.pwn"
 #include "cmd/gotoin.pwn"
 #include "cmd/gotoint.pwn"
 #include "cmd/gotojet.pwn"
@@ -295,6 +292,7 @@
 #include "cmd/newbie.pwn"
 #include "cmd/newcar.pwn"
 #include "cmd/noa.pwn"
+#include "cmd/setdrunk.pwn"
 #include "cmd/nonewbie.pwn"
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
@@ -565,7 +563,7 @@
 #include "cmd/wynajempomoc.pwn"
 #include "cmd/wyniki.pwn"
 #include "cmd/wypij.pwn"
-//#include "cmd/wypisz.pwn"
+#include "cmd/wypisz.pwn"
 #include "cmd/wyplac.pwn"
 #include "cmd/wyprowadz.pwn"
 #include "cmd/wypusc.pwn"
@@ -628,7 +626,6 @@
 #include "cmd/zmienskin.pwn"
 #include "cmd/zmienwl.pwn"
 #include "cmd/zniszczobiekty.pwn"
-#include "cmd/zobp.pwn"
 #include "cmd/zonedelay.pwn"
 #include "cmd/zoneid.pwn"
 #include "cmd/zrobkolejke.pwn"
@@ -1311,7 +1308,7 @@ static Aliases()
 	Command_AddAltNamed("wypij", "pij");
 
 	//wypisz
-	//Command_AddAltNamed("wypisz", "wydaj");
+	Command_AddAltNamed("wypisz", "wydaj");
 
 	//wyplac
 	Command_AddAltNamed("wyplac", "withdraw");
@@ -1448,10 +1445,6 @@ static Aliases()
 
 	//cziterzy
 	Command_AddAltNamed("cziterzy", "czity");
-
-	//zobp
-	Command_AddAltNamed("zobp", "checkprawko");
-	Command_AddAltNamed("zobp", "zobaczprawko");
 
 	//ustawmistrz
 	Command_AddAltNamed("ustawmistrz", "setchamp");

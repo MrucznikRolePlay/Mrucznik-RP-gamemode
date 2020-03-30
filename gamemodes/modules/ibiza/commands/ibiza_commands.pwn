@@ -31,9 +31,9 @@
 
 //-------<[ include ]>-------
 #include "dajbilet\dajbilet.pwn"
-#include "wywalibiza\wywalibiza.pwn"
 #include "kupbilet\kupbilet.pwn"
 #include "panelibizy\panelibizy.pwn"
+#include "wywalibiza\wywalibiza.pwn"
 #include "zabierzbilet\zabierzbilet.pwn"
 
 
@@ -41,9 +41,9 @@
 hook OnGameModeInit()
 {
     command_dajbilet();
-    command_wywalibiza();
     command_kupbilet();
     command_panelibizy();
+    command_wywalibiza();
     command_zabierzbilet();
     
 }

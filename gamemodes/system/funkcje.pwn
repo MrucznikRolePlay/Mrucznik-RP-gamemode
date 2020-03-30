@@ -27,16 +27,22 @@ SSCANF:fix(string[])
 	
 	return ret;
 }
-/*
-IsVehicleEmpty(vehicleid)
-{
-  for(new i; i < MAX_PLAYERS; i++)
-  {
-    if(IsPlayerConnected(i) && IsPlayerInAnyVehicle(i) && GetPlayerVehicleID(i) == vehicleid) return 0;
-  }
-  return 1;
+
+stock strToUpper(string[]) {
+    new i = 0;
+    while(EOS != string[i]) {
+        if('a' >= string[i] && string[i] <= 'z') string[i] -= 32; 
+        ++i;
+    }
 }
-*/
+
+stock randomString(strDest[], strLen) // credits go to: RyDeR`
+{
+	strDest[--strLen] = '\0';
+    while(strLen--)
+        strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
+}
+
 GetTickDiff(newtick, oldtick)
 {
 	if (oldtick < 0 && newtick >= 0) {
@@ -1080,7 +1086,7 @@ OdkujKajdanki(playerid)
 {
 	if(Kajdanki_PDkuje[playerid] != INVALID_PLAYER_ID)
 	{
-		new giveplayerid = Kajdanki_PDkuje[playerid];
+		new giveplayerid = Kajdanki_PDkuje[playerid]; //id policjanta
 		Kajdanki_PDkuje[giveplayerid] = INVALID_PLAYER_ID;
 		Kajdanki_Uzyte[giveplayerid] = 0;
 		Kajdanki_SkutyGracz[giveplayerid] = INVALID_PLAYER_ID;
@@ -5118,7 +5124,10 @@ orgInvitePlayer(playerid, orguid)
     if(!orgIsValid(orgid)) return 0;
     gPlayerOrg[playerid] = orgid;
     PlayerInfo[playerid][pOrg] = orguid;
-    PlayerInfo[playerid][pSkin] = FAM_SKINS[orguid][0];
+	if(FAM_SKINS[orguid][0] > 0)
+	{
+		PlayerInfo[playerid][pUniform] = FAM_SKINS[orguid][0];
+	}
     PlayerInfo[playerid][pTeam] = 5;
     gPlayerOrgLeader[playerid] = false;
     gTeam[playerid] = 5;
@@ -5472,7 +5481,13 @@ ZaladujDomy()
 	            new GeT[MAX_PLAYER_NAME];
 	            new message[128];
 	            new SEJF[20];
-	            format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
+				format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
+				if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
+				{
+					new playernick[26];
+    				strmid(playernick, MruMySQL_GetNameFromUID(dini_Int(string, "UID_Wlascicela")), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
+					format(GeT, sizeof(GeT), "%s", playernick);
+				}
     			Dom[i][hID] = i;
     			Dom[i][hDomNr] = dini_Int(string, "DomNr");
     			Dom[i][hZamek] = dini_Int(string, "Zamek");
@@ -7960,7 +7975,7 @@ PolicjantWStrefie(Float:radi, playerid)
 		    GetPlayerPos(playerid, rangex, rangey, rangez);
 	    	if(IsPlayerInRangeOfPoint(i, radi, rangex, rangey, rangez))
 	        {
-	            if(IsAPolicja(i) && Spectate[i] == INVALID_PLAYER_ID)
+	            if(IsAPolicja(i) && Spectate[i] == INVALID_PLAYER_ID && i != playerid)
 	            {
 	            	return 1;
 	            }
@@ -8697,8 +8712,7 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-	//if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
-	if(regex_match(nick, "^[A-Z][a-z]+(( |_)[A-Z][a-z]{1,})+$") >= 0)
+	if(regex_match(nick, "^[A-Z][a-z]+([ _][A-Z][a-z]+([A-HJ-Z][a-z]+)?){1,2}$") >= 0)
 	{
 		return 1;
 	}

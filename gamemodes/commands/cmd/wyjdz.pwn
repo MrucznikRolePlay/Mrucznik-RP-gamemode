@@ -519,16 +519,7 @@ YCMD:wyjdz(playerid, params[], help)
                 }
 			}
 		}
-		if(KradniecieWozu[playerid] >= 1 && IsPlayerInAnyVehicle(playerid) && PlayerCuffed[playerid] == 0)
-		{
-			TogglePlayerControllable(playerid, 1);
-			RemovePlayerFromVehicleEx(playerid);
-			KradniecieWozu[playerid] = 0;
-			NieSpamujKradnij[playerid] = 0;
-			KillTimer(GetPVarInt(playerid, "timerKradnij"));
-			return 1;
-		}
-        else if(HireCar[playerid] >= 1 && IsPlayerInAnyVehicle(playerid) && PlayerCuffed[playerid] == 0)
+		if(HireCar[playerid] >= 1 && IsPlayerInAnyVehicle(playerid) && PlayerCuffed[playerid] == 0)
 		{
 			TogglePlayerControllable(playerid, 1);
 			RemovePlayerFromVehicleEx(playerid);

@@ -59,6 +59,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <timestamptodate>
 #include <discord-connector>
 #include <memory>
+#include <profiler_plugin>
 //TODO: add plugins
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
@@ -270,27 +271,6 @@ public OnGameModeInit()
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
-	//-------<[ Kubi BW ]>-------
-    if(dini_Exists("Settings.ini"))
-    {
-        new ust = dini_Int("Settings.ini", "OnlyGangZones");
-        SetSVarInt("BW_OnlyGangZones", ust);
-        ust = dini_Int("Settings.ini", "Time");
-        //SetSVarInt("BW_Time", ust);
-		SetSVarInt("BW_Time", 120);
-        SetSVarString("muzyka_bonehead", dini_Get("Settings.ini", "muzyka_bonehead"));
-    }
-    else
-    {
-        dini_Create("Settings.ini");
-        dini_IntSet("Settings.ini", "OnlyGangZones", 0);
-        dini_IntSet("Settings.ini", "Time", 180);
-        dini_Set("Settings.ini", "muzyka_bonehead", "http://cp.eu4.fastcast4u.com:2199/tunein/nikoud00.pls");
-        SetSVarInt("BW_OnlyGangZones", 0);
-        SetSVarInt("BW_Time", 140);//bylo 180
-    }
-
-
     LoadConfig();
     WczytajRangi();
     WczytajSkiny();
@@ -1470,14 +1450,13 @@ public OnPlayerDisconnect(playerid, reason)
 		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
-	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek da /q
+	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
 	{
 		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
 		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
-		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+		UnHave_Worek(Worek_KomuZalozylem[playerid]);
 		Worek_Uzyty[playerid] = 0;
-		UnHave_Worek(Worek_KtoZalozyl[playerid]);
-
+		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
 	}
 
     if(GetPVarInt(playerid, "kostka"))
@@ -1769,6 +1748,7 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
 		amount,
 		weaponid);
+	return 1;
 }
 
 public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
@@ -1857,7 +1837,7 @@ public StandUp(playerid)
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-	new string[128];
+	new string[144];
 
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
 
@@ -1912,7 +1892,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(GetPVarInt(playerid, "skip_bw") == 0)
 		{
-			if(PlayerInfo[playerid][pInjury] > 0)
+			if(PlayerInfo[playerid][pInjury] > 0) //TRYB BW
 			{
 				if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
 				{
@@ -1961,6 +1941,23 @@ public OnPlayerDeath(playerid, killerid, reason)
 					SetStrong(playerid, FirstValue);
 				}
 
+				if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem trafi do szpitala
+				{
+					Worek_MamWorek[playerid] = 0;
+					Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
+					Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
+					Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
+					UnHave_Worek(playerid);
+				}
+				else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
+				{
+					Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
+					Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
+					UnHave_Worek(Worek_KomuZalozylem[playerid]);
+					Worek_Uzyty[playerid] = 0;
+					Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+				}
+
 				if(IsPlayerConnected(killerid))
 				{
 					PlayerInfo[killerid][pKills] ++;
@@ -1969,6 +1966,26 @@ public OnPlayerDeath(playerid, killerid, reason)
 						if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
 						{
 							NadajWLBW(killerid, playerid, true);
+						}
+					}
+					if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
+					{
+						if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+						{
+							if(GoChase[killerid] == playerid)
+							{
+								//jeœli zabity mia³ kajdanki
+								if(Kajdanki_JestemSkuty[playerid] != 0) // gdy skuty da /q
+								{
+									format(string, sizeof(string), "* Wiêzieñ %s zosta³ zastrzelony przez Hitmana (MK). Nastêpnym razem zadbaj o bezpieczeñstwo swojego wiêŸnia *", GetNick(playerid));
+									SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTRED, string);
+									OdkujKajdanki(playerid);
+								}
+
+								SetPVarInt(playerid, "bw-hitmankiller",  1);
+								SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
+								return NadajBW(playerid, BW_TIME_CRIMINAL);
+							}
 						}
 					}
 					if(PoziomPoszukiwania[playerid] >= 1)
@@ -2054,7 +2071,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 								PlayerInfo[playerid][pWantedDeaths] += 1;
 								PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
 								PoziomPoszukiwania[playerid] = 0;
-								SetPlayerWantedLevel(playerid, PoziomPoszukiwania[playerid]);
+								SetPlayerWantedLevel(playerid, 0);
 								poscig[playerid] = 0;
 								UsunBron(playerid);
 								if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55)
@@ -2072,7 +2089,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 									SendClientMessage(playerid, COLOR_LIGHTRED, string);
 									SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
 								}
-								return 1;
+								return 1; //zrespawnuj gracza w wiêzieniu
 							}
 						}
 					}
@@ -2081,7 +2098,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 				}
 				return 1;
 			}
-			else
+			else //TRYB RANNEGO
 			{
 				if(PlayerInfo[playerid][pBW] > 0)
 				{
@@ -2104,15 +2121,15 @@ public OnPlayerDeath(playerid, killerid, reason)
 								NadajWLBW(killerid, playerid, false);
 							}
 						}
-						if(PlayerInfo[playerid][pHeadValue] > 0)
+
+						if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
 						{
 							if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
 							{
 								if(GoChase[killerid] == playerid)
 								{
-									SetPVarInt(playerid, "bw-hitmankiller",  1);
-									SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
-									return NadajBW(playerid, BW_TIME_CRIMINAL);
+									format(string, sizeof(string), "* Dobij %s, ¿eby wype³niæ kontrakt *", GetNick(playerid));
+									SendClientMessage(killerid, COLOR_LIGHTRED, string);
 								}
 							}
 						}
@@ -5080,7 +5097,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     		SetPlayerPos(playerid, slx, sly, slz+0.2);
     		ClearAnimations(playerid);
         }
-
+		if(IsACopCar(GetPlayerVehicleID(playerid))) sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
         if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
@@ -5213,9 +5230,11 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         {
             if(KradniecieWozu[playerid] != newcar)
 		    {
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij spróbowaæ to zrobiæ lub /wyjdz aby wyjœæ.");
-                TogglePlayerControllable(playerid, 0);
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij aby spróbowaæ to zrobiæ.");
                 KradniecieWozu[playerid] = 1;
+				new engine, lights, alarm, doors, bonnet, boot, objective;
+				GetVehicleParamsEx(newcar, engine, lights, alarm, doors, bonnet, boot, objective);
+				if(engine) SetVehicleParamsEx(newcar, 0, lights, alarm, doors, bonnet, boot, objective);
 			}
         }
 		gLastCar[playerid] = newcar;
@@ -5289,6 +5308,12 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	if(IDWymienianegoAuta[playerid] != 0)
 	{
 	    IDWymienianegoAuta[playerid] = 0;
+	}
+	if(KradniecieWozu[playerid] >= 1)
+	{
+		KradniecieWozu[playerid] = 0;
+		NieSpamujKradnij[playerid] = 0;
+		KillTimer(GetPVarInt(playerid, "timerKradnij"));
 	}
 	return 1;
 }
@@ -5556,7 +5581,6 @@ PayDay()
 	CountDown();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
-	for(new i; i < GRAFFITI_MAX; i++) graffiti_ReloadForPlayers(i);
 	
 	if(DmvActorStatus && shifthour < 16 || shifthour > 22)
 	{
@@ -5759,13 +5783,6 @@ OnPlayerRegister(playerid, password[])
 		OnPlayerLogin(playerid, password);
 	}
 	return 1;
-}
-
-stock randomString(strDest[], strLen) // credits go to: RyDeR`
-{
-	strDest[--strLen] = '\0';
-    while(strLen--)
-        strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
 }
 
 DialogChangePasswordRequired(playerid)
@@ -6285,13 +6302,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     {
         if(GetPlayerVehicleSeat(playerid) == 0)
         {
-            #if BLINK_ALLOW_EMERGENCY == 1
-            if(PRESSED(KEY_LOOK_BEHIND))
-            {
-                if(!IsCarBlinking(veh)) SetCarBlinking(veh, 2), SetPVarInt(playerid, "blink-car", veh);
-    		    else DisableCarBlinking(veh);
-            }
-            #endif
         	if(PRESSED(KEY_LOOK_LEFT))
             {
     			if(!IsCarBlinking(veh)) SetCarBlinking(veh, 0), SetPVarInt(playerid, "blink-car", veh);
@@ -6594,6 +6604,22 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 						SetPlayerArmedWeapon(playerid, 0); //chowanie spadochronu
         				return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Schowaj spadochron zanim w coœ uderzysz."); 
 					}
+				}
+			}
+		}
+
+		if(GetPlayerWeapon(playerid) == 34 || GetPlayerWeapon(playerid) == 43)  //usuwanie obiektu maski podczas celowania snajperk¹/aparatem i przywracanie
+		{
+			new nick[32];
+			if(GetPVarString(playerid, "maska_nick", nick, 24))
+			{
+				if(HOLDING(KEY_HANDBRAKE))
+				{
+					if(!IsAPolicja(playerid)) RemovePlayerAttachedObject(playerid, 1);
+				}
+				else if(RELEASED(KEY_HANDBRAKE))
+				{
+					if(!IsAPolicja(playerid)) SetPlayerAttachedObject(playerid, 1, 19036, 2, 0.1, 0.05, -0.005, 0, 90, 90);//maska hokeisty biala
 				}
 			}
 		}
@@ -7144,6 +7170,8 @@ public OnPlayerText(playerid, text[])
 		    			GotHit[hitmanid] = 1;
 		    			hitmanid = 0;
 		    			hitfound = 0;
+
+						ConnectedToPC[playerid] = 0; //roz³¹czanie z laptopem po akcji
 				        return 0;
 				    }
 				    else
@@ -7367,7 +7395,6 @@ public OnPlayerText(playerid, text[])
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Order");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Rangi");
 		    SendClientMessage(playerid, COLOR_YELLOW2, "| - Wyloguj");
-		    SendClientMessage(playerid, COLOR_YELLOW2, "|");
 			SendClientMessage(playerid, COLOR_WHITE, "|______________|00:00|");
 		    return 0;
 		}

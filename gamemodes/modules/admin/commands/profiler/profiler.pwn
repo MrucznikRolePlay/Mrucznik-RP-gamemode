@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ zobp ]-------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  profiler                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,61 +16,52 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "profiler_impl.pwn"
 
-YCMD:zobp(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_profiler()
 {
-	new string[128];
-	new giveplayer[MAX_PLAYER_NAME];
-	new sendername[MAX_PLAYER_NAME];
+    new command = Command_GetID("profiler");
 
-    if(IsPlayerConnected(playerid))
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:profiler(playerid, params[], help)
+{
+    if (help)
     {
-        new giveplayerid;
-		if( sscanf(params, "k<fix>", giveplayerid))
-		{
-			sendTipMessage(playerid, "U¿yj /zobp(pokazlicencje) [playerid/CzêœæNicku]");
-			return 1;
-		}
-
-		if(IsPlayerConnected(giveplayerid))
-		{
-		    if(PlayerInfo[playerid][pZG] >=5 || PlayerInfo[playerid][pAdmin] >=1 )
-		    {
-				if(giveplayerid != INVALID_PLAYER_ID)
-				{
-    				if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz pokazaæ licencji samemu sobie, u¿yj /licencje!"); return 1; }
-				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-	    			new text1[8];
-					if(PlayerInfo[giveplayerid][pCarLic] == 1) { text1 = "Tak"; } else { text1 = "Brak"; }
-  					format(string, sizeof(string), "|__________ %s __________|", giveplayer);
-		        	SendClientMessage(playerid, COLOR_WHITE, string);
-			        format(string, sizeof(string), "** Prawo jazdy: %s.", text1);
-        			SendClientMessage(playerid, COLOR_WHITE, string);
-				}
-			}
-			else
-	        {
-	            noAccessMessage(playerid);
-	            return 1;
-	        }
-		}
-        else
-        {
-            sendErrorMessage(playerid, "Nie ma takiego gracza !");
-            return 1;
-        }
-	}
-    return 1;
+        sendTipMessage(playerid, "Zarz¹dzanie profilerem.");
+        return 1;
+    }
+    //fetching params
+    new option[32];
+    if(sscanf(params, "s[32]", option))
+    {
+        sendTipMessage(playerid, "U¿yj /profiler [start|stop|dump|status] ");
+        return 1;
+    }
+    
+    //command body
+    return command_profiler_Impl(playerid, option);
 }

@@ -202,11 +202,11 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		sendTipMessage(playerid, "* Aby zarz¹dzaæ kontem swojej frakcji przejdŸ w zak³adkê ''Frakcyjne''");
 		sendTipMessage(playerid, "* Sejf znajduje siê  6m pod ziemi¹ --> Bezpieczna lokata!");	
 	}
-	else if(Check_ID == 6)
+	else if(Check_ID == 6) //bonehead club
 	{
-		new muzik[128];
-		GetSVarString("muzyka_bonehead", muzik, 128);
-		PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
+		//tutaj ewentualne link do muzyki - odkomentowaæ ni¿ej
+		//new muzik[128];
+		//PlayAudioStreamForPlayer(playerid,muzik,2447.8284,-1963.1549,13.5469,100,0);
 	}
 	else if(Check_ID == 7)//Wejscie do VINYL
 	{

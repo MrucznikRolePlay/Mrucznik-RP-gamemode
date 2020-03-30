@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ glosuja ]------------------------------------------------//
+//------------------------------------------------[ gotodom ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,22 +28,34 @@
 	
 */
 
-YCMD:glosuja(playerid, params[], help)
+YCMD:gotodom(playerid, params[], help)
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPVarInt(playerid, "glosowal_w_ankiecie") == 1)
+    if(IsPlayerConnected(playerid))
+    {
+		if(IsAScripter(playerid))
 		{
-			sendErrorMessage(playerid, "G³osowa³eœ ju¿ w tej ankiecie"); 
-			return 1;
+		    new domid;
+			if( sscanf(params, "d", domid))
+			{
+				sendTipMessage(playerid, "U¿yj /gotodom [domid]");
+				return 1;
+			}
+
+			if (GetPlayerState(playerid) == 2)
+			{
+				new tmpcar = GetPlayerVehicleID(playerid);
+				SetVehiclePos(tmpcar, Dom[domid][hWej_X], Dom[domid][hWej_Y], Dom[domid][hWej_Z]);
+			}
+			else
+			{
+				SetPlayerPos(playerid, Dom[domid][hWej_X], Dom[domid][hWej_Y], Dom[domid][hWej_Z]);
+			}
+			_MruAdmin(playerid, "Zosta³eœ teleportowany");
 		}
-		if(glosowanie_admina_status == 0)
+		else
 		{
-			sendErrorMessage(playerid, "Aktualnie nie ma ¿adnej ankiety!"); 
-			return 1;
+			noAccessMessage(playerid);
 		}
-		ShowPlayerDialogEx(playerid, 9666, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", "G³osowanie\nKliknij poni¿ej przycisk wed³ug w³asnego uznania\nPamiêtaj! Mo¿esz oddaæ tylko jeden g³os!\n", "Tak", "Nie");
-	
 	}
 	return 1;
 }

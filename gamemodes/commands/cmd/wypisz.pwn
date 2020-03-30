@@ -52,9 +52,9 @@ YCMD:wypisz(playerid, params[], help)
 				{
 				    if(giveplayerid != INVALID_PLAYER_ID)
 				    {
-                        SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Da³eœ dowód osobisty %s", GetNick(giveplayerid, true)));
+                        SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Da³eœ dowód osobisty %s", GetNickEx(giveplayerid)));
                         if(giveplayerid != playerid)
-                            SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("Urzêdnik %s da³ Tobie dowód osobisty", GetNick(playerid, true)));
+                            SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("Urzêdnik %s da³ Tobie dowód osobisty", GetNickEx(playerid)));
 
 				        PlayerInfo[giveplayerid][pDowod] = 1;
 				        return 1;

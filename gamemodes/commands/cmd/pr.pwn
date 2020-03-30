@@ -104,6 +104,11 @@ YCMD:pr(playerid, params[], help)
 
 				if(IsPlayerConnected(giveplayerid))
 				{
+					if(gPlayerLogged[giveplayerid] == 0)
+                    {
+                        sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany.");
+						return 1;
+                    }
 				    if(giveplayerid != INVALID_PLAYER_ID)
 				    {
 				        if(GetPlayerOrg(giveplayerid) != 0 || GetPlayerFraction(giveplayerid) != 0)

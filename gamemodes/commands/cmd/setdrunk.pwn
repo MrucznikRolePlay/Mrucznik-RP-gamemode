@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ bwtime ]------------------------------------------------//
+//------------------------------------------------[ nodrunk ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,17 +28,44 @@
 	
 */
 
-YCMD:bwtime(playerid, params[], help) {
-    if(Uprawnienia(playerid, ACCESS_PANEL) || PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid)) {
-        new ust;
-        if(sscanf(params, "d", ust)) return sendTipMessage(playerid, "U¿yj /bwtime [Czas BW w Sekundach]");
-        dini_IntSet("Settings.ini", "Time", ust);
-        SetSVarInt("BW_Time", ust);
-		new string[70];
-		format(string, sizeof(string), "Od teraz BW trwaæ bêdzie %ds", ust);
-		sendTipMessage(playerid, string);
-    } else {
-        return noAccessMessage(playerid);
-    }
-    return 1;
+YCMD:setdrunk(playerid, params[], help)
+{
+    if(IsPlayerConnected(playerid))
+    {
+        new string[144];
+		if (PlayerInfo[playerid][pAdmin] >= 35 || IsAScripter(playerid) )
+		{
+			new giveplayerid, level;
+			if(sscanf(params, "dd", giveplayerid, level))
+			{
+				sendTipMessage(playerid, "U¿yj /setdrunk [ID] [poziom (2000 wy³¹cza | max 50000)]");
+				return 1;
+			}
+
+			if(IsPlayerConnected(giveplayerid))
+            {
+				if(level < 2000) level = 2000;
+				else if(level > 50000) return sendTipMessage(playerid, "U¿yj /setdrunk [ID] [poziom (2000 wy³¹cza | max 50000)]");
+
+				SetPlayerDrunkLevel(giveplayerid, level);
+				format(string, sizeof(string), "AdmCmd: %s [%d] ustawi³ %s [%d] efekt pijactwa na [%d]", 
+					GetNickEx(playerid), 
+					playerid,
+					GetNick(giveplayerid),
+					giveplayerid,
+					(level == 2000 ? '0' : level)
+				); 
+				SendMessageToAdmin(string, COLOR_RED);
+            }
+            else
+            {
+                return sendErrorMessage(playerid, "Nie ma takiego gracza"); 
+            }
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
+	return 1;
 }

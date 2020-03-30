@@ -986,21 +986,11 @@ command_akceptuj_Impl(playerid, x_job[32])
                 sendErrorMessage(playerid, "Nikt nie oferowa³ Ci uwolnienia z wiêzienia!"); 
                 return 1;
             }
-            //Test XD
-            GetPlayerName(OfferPlayer[playerid], sendername, sizeof(sendername));
             format(string, sizeof(string), "* Uwolni³eœ %s z wiêzienia za kwotê %d$", GetNick(playerid), money);
-            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-            
-            format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s za kwotê %d$", sendername, money);
             SendClientMessage(OfferPlayer[playerid], COLOR_LIGHTBLUE, string);
             
-            //Zerowanie zmiennych
-            LawyerOffer[playerid] = 0;
-            OfferPlayer[playerid] = 0;
-            ApprovedLawyer[OfferPlayer[playerid]] = 0;
-            WantLawyer[playerid] = 0;
-            CallLawyer[playerid] = 0;
-            JailPrice[playerid] = 0;
+            format(string, sizeof(string), "* Zosta³eœ uwolniony przez prawnika %s za kwotê %d$", GetNick(OfferPlayer[playerid]), money);
+            SendClientMessage(playerid , COLOR_LIGHTBLUE, string);
             
             //Czynnoœci
             PlayerInfo[playerid][pJailTime] = 1;
@@ -1020,11 +1010,13 @@ command_akceptuj_Impl(playerid, x_job[32])
             { SendClientMessage(OfferPlayer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci prawnika wynosz¹ teraz 5, Mo¿esz taniej zbijaæ WL."); }
             
             //zerowanie zmiennych 2
+            ApprovedLawyer[OfferPlayer[playerid]] = 0;
+            WantLawyer[playerid] = 0;
+            CallLawyer[playerid] = 0;
+            JailPrice[playerid] = 0;
             OfferPrice[playerid] = 0;
             LawyerOffer[playerid] = 0;
             OfferPlayer[playerid] = -1;
-            
-            
         }
         else
         {
@@ -1296,7 +1288,7 @@ command_akceptuj_Impl(playerid, x_job[32])
             if(kaska[playerid] > Dom[dom][hCenaWynajmu] && Dom[dom][hCenaWynajmu] > 0)
             {
                 GetPlayerName(WynajemOffer[playerid], giveplayer, sizeof(giveplayer));
-                GetPlayerName(playerid, sendername, sizeof(sendername));
+                sendername = GetNickEx(playerid);
                 if(Dom[dom][hPW] == 0)
                 {
                     Dom[dom][hL1] = sendername;
