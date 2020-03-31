@@ -7817,6 +7817,11 @@ public OnPlayerStreamIn(playerid, forplayerid)
     return 1;
 }
 
+public OnVehicleMod(playerid, vehicleid, componentid)
+{
+	return 0; //turn off singleplayer workshops
+}
+
 AntiDeAMX() //suprise motherfucker
 {
     new whack[][] =
