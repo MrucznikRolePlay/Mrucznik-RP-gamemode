@@ -127,37 +127,36 @@ stock graffiti_SaveMySQL(id, playerid)
 
 stock graffiti_UpdateMySQL(id, type = 1)
 {
-	//TODO: MySQL
-	// new query[1024];
-	// if(type == 1)
-	// {
-	// 	format(query, sizeof(query), "UPDATE `mru_graffiti` SET `x`='%f',`y`='%f',`z`='%f',`xy`='%f',`yy`='%f',`zy`='%f' WHERE `id`='%d'",
-	// 	GraffitiInfo[id][grafXpos],
-	// 	GraffitiInfo[id][grafYpos],
-	// 	GraffitiInfo[id][grafZpos],
-	// 	GraffitiInfo[id][grafXYpos],
-	// 	GraffitiInfo[id][grafYYpos],
-	// 	GraffitiInfo[id][grafZYpos],
-	// 	id);
-	// 	mysql_query(query);
-	// }
-	// else if(type == 2)
-	// {
-	// 	if(strlen(GraffitiInfo[id][grafText]) <= 1)
-	// 	{
-	// 		DestroyDynamicObject(GraffitiInfo[id][gID]);
-	// 		graffiti_DeleteMySQL(id);
-	// 		graffiti_Zeruj(id);
-	// 	}
-	// 	else
-	// 	{
-	// 		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
-	// 		GraffitiInfo[id][grafText],
-	// 		GraffitiInfo[id][gColor],
-	// 		id);
-	// 		mysql_query(query);
-	// 	}
-	// }
+	new query[1024];
+	if(type == 1)
+	{
+		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `x`='%f',`y`='%f',`z`='%f',`xy`='%f',`yy`='%f',`zy`='%f' WHERE `id`='%d'",
+			GraffitiInfo[id][grafXpos],
+			GraffitiInfo[id][grafYpos],
+			GraffitiInfo[id][grafZpos],
+			GraffitiInfo[id][grafXYpos],
+			GraffitiInfo[id][grafYYpos],
+			GraffitiInfo[id][grafZYpos],
+			id);
+		mysql_query(mruMySQL_Connection, query);
+	}
+	else if(type == 2)
+	{
+		if(strlen(GraffitiInfo[id][grafText]) <= 1)
+		{
+			DestroyDynamicObject(GraffitiInfo[id][gID]);
+			graffiti_DeleteMySQL(id);
+			graffiti_Zeruj(id);
+		}
+		else
+		{
+			format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
+			GraffitiInfo[id][grafText],
+			GraffitiInfo[id][gColor],
+			id);
+			mysql_query(mruMySQL_Connection, query);
+		}
+	}
 }
 
 stock graffiti_DeleteMySQL(id)
