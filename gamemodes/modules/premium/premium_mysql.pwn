@@ -62,23 +62,9 @@ MruMySQL_InsertSkin(playerid, id)
 
 MruMySQL_RemoveKP(playerid)
 {
-	//TODO: MySQL
-	// new query[128];
-	// format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	// mysql_query(query);
-	// mysql_store_result();
-	// {
-	// 	if(mysql_num_rows())
-	// 	{
-	// 		format(query, sizeof(query), "UPDATE `mru_premium` SET `p_activeKp`=0, `p_endDate`=NOW() WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	// 		mysql_query(query);
-	// 	}
-	// 	else
-	// 	{
-	// 		Log(premiumLog, ERROR, "ERROR: ZabierzKP zosta³o wykonane na osobie, która nie posiada³a premium! %s", GetPlayerLogName(playerid));
-	// 	}
-    //     mysql_free_result();
-	// }
+	new query[128];
+	format(query, sizeof(query), "UPDATE `mru_premium` SET `p_activeKp`=0, `p_endDate`=NOW() WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
+	mysql_query(mruMySQL_Connection, query);
 }
 
 MruMySQL_SaveMc(playerid)
