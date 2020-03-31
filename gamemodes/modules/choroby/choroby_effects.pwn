@@ -402,3 +402,36 @@ timer HallucinationsOff[60000](playerid)
 {
 	SetPlayerWeather(playerid, ServerWeather);
 }
+
+// FANATYK WÊDKARSTWA
+public RzucTekstemZPasty(playerid, disease, value)
+{
+
+}
+
+public RzucMeZPasty(playerid, disease, value)
+{
+
+}
+
+public PrzyczepWedke(playerid, disease, value)
+{
+
+}
+
+public Ryboglowy(playerid, disease, value)
+{
+
+}
+
+public UpuscRybe(playerid, disease, value)
+{
+
+}
+
+public SkinWedkarza(playerid, disease, value)
+{
+
+}
+
+
