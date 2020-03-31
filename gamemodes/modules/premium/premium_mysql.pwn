@@ -82,7 +82,7 @@ MruMySQL_LoadPlayerPremiumSkins(playerid)
 {
 	new qr[256];
 	format(qr, sizeof(qr), "SELECT `s_ID` FROM `mru_premium_skins` WHERE `s_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	new Cache:result = mysql_query(mruMySQL_Connection, qr);
+	new Cache:result = mysql_query(mruMySQL_Connection, qr, true);
 	new skinID;
 	if(cache_is_valid(result))
 	{
@@ -95,21 +95,22 @@ MruMySQL_LoadPlayerPremiumSkins(playerid)
 	}
 }
 
-MruMySQL_IsPhoneNumberAvailable(number) {
-    
-	//TODO: MySQL
-    // if(100 <= number && number <= 150) return false;
-    // if(number == 555) return false;
-    // new string[70];
-    // format(string, sizeof(string), "SELECT `UID` FROM `mru_konta` WHERE `PhoneNr` = %d", number);
-    // mysql_query(string);
-    // mysql_store_result();
-    // if(mysql_num_rows() > 0)
-    // {
-    //     mysql_free_result();
-    //     return false;
-    // }
-    // mysql_free_result();
-    // return true;
+MruMySQL_IsPhoneNumberAvailable(number) 
+{
+    if(100 <= number && number <= 150) return false;
+    if(number == 555) return false;
+    new string[70];
+    format(string, sizeof(string), "SELECT `UID` FROM `mru_konta` WHERE `PhoneNr` = %d", number);
+    new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+	if(cache_is_valid(result))
+	{
+		if(cache_num_rows())
+		{
+			cache_delete(result);
+        	return false;
+		}
+	}
+	cache_delete(result);
+    return true;
 }
 //end
