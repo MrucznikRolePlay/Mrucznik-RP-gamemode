@@ -69,26 +69,13 @@ MruMySQL_RemoveKP(playerid)
 
 MruMySQL_SaveMc(playerid)
 {
-	//TODO: MySQL
-	// new query[128];
-    // format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	// mysql_query(query);
-	// mysql_store_result();
-    // if(mysql_num_rows())
-    // {
-    //     mysql_free_result();
-    //     format(query, sizeof(query), "UPDATE `mru_premium` SET `p_MC`='%d' WHERE `p_charUID`='%d'", PremiumInfo[playerid][pMC], PlayerInfo[playerid][pUID]);
-    //     mysql_query(query);
-    // }
-    // else
-    // {
-    //     mysql_free_result();
-    //     if(PremiumInfo[playerid][pMC] > 0)
-    //     {
-    //         format(query, sizeof(query), "INSERT INTO `mru_premium` (`p_charUID`, `p_MC`) VALUES('%d', '%d')", PlayerInfo[playerid][pUID], PremiumInfo[playerid][pMC]);
-    //         mysql_query(query);
-    //     }
-    // }
+	new query[128];
+	format(query, sizeof(query), "INSERT INTO `mru_premium` (`p_charUID`, `p_MC`) VALUES('%d', '%d') \
+		ON DUPLICATE KEY UPDATE `p_charUID`='%d', `p_MC`='%d'", 
+		PlayerInfo[playerid][pUID], PremiumInfo[playerid][pMC], 
+		PlayerInfo[playerid][pUID], PremiumInfo[playerid][pMC]
+	);
+	mysql_query(mruMySQL_Connection, query);
 }
 
 MruMySQL_LoadPlayerPremiumSkins(playerid)
