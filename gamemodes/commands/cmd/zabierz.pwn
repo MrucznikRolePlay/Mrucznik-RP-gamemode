@@ -129,7 +129,10 @@ YCMD:zabierz(playerid, params[], help)
 				format(string, sizeof(string), "* Oficer %s zabra³ twoje narkotyki.", sendername);
 				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "* Oficer %s zabra³ %s dragi %d.", sendername, giveplayer, PlayerInfo[giveplayerid][pDrugs]);
+				Log(serverLog, INFO, "%s zabra³ %s %d %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), PlayerInfo[giveplayerid][pDrugs], x_nr);
 				PlayerInfo[giveplayerid][pDrugs] = 0;
+    			SetPVarInt(playerid, "lic-timer", gettime() + 30);
+				return 1;
 			}
 			else if(strcmp(x_nr,"mats",true) == 0)
 			{
@@ -138,7 +141,10 @@ YCMD:zabierz(playerid, params[], help)
 				format(string, sizeof(string), "* Oficer %s zabra³ twoje Materia³y.", sendername);
 				SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "* Oficer %s zabra³ %s matsy %d.", sendername, giveplayer, PlayerInfo[giveplayerid][pMats]);
+				Log(serverLog, INFO, "%s zabra³ %s %d %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), PlayerInfo[giveplayerid][pMats], x_nr);
 				PlayerInfo[giveplayerid][pMats] = 0;
+    			SetPVarInt(playerid, "lic-timer", gettime() + 30);
+				return 1;
 			}
 			else
 			{
