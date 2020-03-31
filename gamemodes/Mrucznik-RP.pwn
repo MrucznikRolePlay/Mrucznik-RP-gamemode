@@ -2670,7 +2670,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case JOB_LAWYER:
 						{
-						    SetPlayerPos(playerid,319.72470092773, -1548.3374023438, 13.845289230347);
+							Wchodzenie(playerid);
+						    SetPlayerPos(playerid,319.72470092773, -1548.3374023438, 14.555289230347);
 		    				SetPlayerFacingAngle(playerid, 230.0);
 						}
 						case JOB_LOWCA:
