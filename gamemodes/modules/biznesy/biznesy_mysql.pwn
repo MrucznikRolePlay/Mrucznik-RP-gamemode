@@ -83,18 +83,12 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 }
 ClearBusinessOwner(businessID)
 {
-	//TODO: MySQL
-	// new query[256];
-	// format(query, sizeof(query), "UPDATE `mru_konta` SET \
-	// `bizz`='%d' \
-	// WHERE `bizz`='%d'", INVALID_BIZ_ID, businessID); 
-	// mysql_query(query); 
-	// format(query, sizeof(query), "UPDATE `mru_business` SET \
-	// `ownerUID`='%d', \
-	// `ownerName`='Brak' \
-	// WHERE `ID`='%d'", 0, businessID);
-	// mysql_query(query); 
-	// return 1;
+	new query[256];
+	format(query, sizeof(query), "UPDATE `mru_konta` SET `bizz`='"#INVALID_BIZ_ID"' WHERE `bizz`='%d'", businessID); 
+	mysql_query(mruMySQL_Connection, query); 
+	format(query, sizeof(query), "UPDATE `mru_business` SET `ownerUID`='0', `ownerName`='Brak' WHERE `ID`='%d'", businessID);
+	mysql_query(mruMySQL_Connection, query); 
+	return 1;
 }
 Create_BusinessMySQL(bus_ID)
 {
