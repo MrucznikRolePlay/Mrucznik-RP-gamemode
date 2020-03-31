@@ -135,7 +135,6 @@ new lastMsg[MAX_PLAYERS];
 new PaniJanina;
 
 //PAèDZIOCH
-new r0pes[MAX_PLAYERS][ROPELENGTH];
 new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];
@@ -713,7 +712,6 @@ new PlayerCuffed[MAX_PLAYERS];
 new PlayerCuffedTime[MAX_PLAYERS];
 new LiveOffer[MAX_PLAYERS];
 new TalkingLive[MAX_PLAYERS];
-new PlacedNews[MAX_PLAYERS];
 new SelectChar[MAX_PLAYERS];
 new SelectCharID[MAX_PLAYERS];
 new SelectCharPlace[MAX_PLAYERS];
@@ -1160,7 +1158,7 @@ ZerujZmienne(playerid)
 	DrugPrice[playerid] = 0; OnCK[playerid] = 999; GettingCK[playerid] = 999; OdpalanieSpam[playerid] = 0;
 	DrugGram[playerid] = 0; ConnectedToPC[playerid] = 0; OrderReady[playerid] = 0;
 	JailPrice[playerid] = 0; MedicTime[playerid] = 0; NeedMedicTime[playerid] = 0; MedicBill[playerid] = 0; GotHit[playerid] = 0;
-	GoChase[playerid] = 999; GetChased[playerid] = 999; PlacedNews[playerid] = 0;
+	GoChase[playerid] = 999; GetChased[playerid] = 999;
 	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; PoziomPoszukiwania[playerid] = 0;
 	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; ChangePos2[playerid][1] = 0; iddialog[playerid] = -1;
 	TransportDuty[playerid] = 0; PlayerTied[playerid] = 0; weryfikacja[playerid] = 0;

@@ -31,7 +31,7 @@ command_rybypomoc_Impl(playerid)
 	SendClientMessage(playerid, COLOR_GRAD3,"*** WEDKOWANIE *** /wywalrybe (Wywala ostatni¹ z³apan¹ rybe)   /wywalryby");
 	SendClientMessage(playerid, COLOR_GRAD3,"*** WEDKOWANIE *** /wypuscrybe (Wypuszcza wybran¹ rybê)");
 	SendClientMessage(playerid, COLOR_GRAD3,"*** WEDKOWANIE *** [NOWE] /sprzedajrybe (sprzedajesz wybran¹ rybê w 24/7)");
-	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /pomoc /gotowaniepomoc /ircpomoc");
+	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /pomoc /ircpomoc");
     return 1;
 }
 

@@ -266,14 +266,18 @@ public OnGameModeInit()
     FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	LoadBusiness(); 
-	LoadBusinessPickup(); 
-	//LoadActors(); 	
+	LoadBusinessPickup(); 	
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
-    LoadConfig();
+
+	//Config
+	LoadConfig();
+
+	//Old Groups - to remove \/
     WczytajRangi();
     WczytajSkiny();
+
     //Konfiguracja ID skryptu dla rodzin  - daj -1 w bazie aby wy≥πczyÊ korzystanie ze skryptu dla slotu
     Config_FamilyScript();
     //
@@ -1307,14 +1311,6 @@ public OnPlayerDisconnect(playerid, reason)
 		KillTimer(saveMyAccountTimer[playerid]);
 	}
 
-	//PAèDZIOCH - lina SWAT
-	if(GetPVarInt(playerid,"roped") == 1)
- 	{
-  		for(new i=0;i<ROPELENGTH;i++)
-  		{
-    		DestroyDynamicObject(r0pes[playerid][i]);
-      	}
-	}
     //budki telefoniczne
     if(GetPVarInt(playerid, "budka-Mobile") != 999) {
         new caller = GetPVarInt(playerid, "budka-Mobile");
@@ -1860,10 +1856,6 @@ public OnPlayerDeath(playerid, killerid, reason)
     }
 	if(GetPVarInt(playerid,"roped") == 1)
  	{
-  		for(new i=0;i<ROPELENGTH;i++)
-    	{
-     		DestroyDynamicObject(r0pes[playerid][i]);
-       	}
 		ClearAnimations(playerid);
 		SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
         SetPVarInt(playerid,"roped",0);
@@ -5097,7 +5089,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     		SetPlayerPos(playerid, slx, sly, slz+0.2);
     		ClearAnimations(playerid);
         }
-		if(IsACopCar(GetPlayerVehicleID(playerid))) sendTipMessageEx(playerid, COLOR_BLUE, "Po≥πczy≥eú siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnπ");
+		if(IsACopCar(GetPlayerVehicleID(playerid)) && IsAPolicja(playerid)) sendTipMessageEx(playerid, COLOR_BLUE, "Po≥πczy≥eú siÍ z komputerem policyjnym, wpisz /mdc aby zobaczyÊ kartotekÍ policyjnπ");
         if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
@@ -5582,7 +5574,7 @@ PayDay()
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
 	
-	if(DmvActorStatus && shifthour < 16 || shifthour > 22)
+	if(DmvActorStatus && (shifthour < 16 || shifthour > 22))
 	{
 		DestroyActorsInDMV(INVALID_PLAYER_ID); 
 	}
@@ -5771,6 +5763,31 @@ public OnPlayerUpdate(playerid)
         GetPlayerKeys(playerid, keys, ud, lr);
         if(ud == KEY_DOWN) CruiseControl_SetSpeed(playerid, 10, false);
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
+		return 1;
+    }
+	if(Spectate[playerid] != INVALID_PLAYER_ID)
+    {
+		new keys, ud,lr, actualid = INVALID_PLAYER_ID;
+        GetPlayerKeys(playerid, keys, ud, lr);
+        if(lr == KEY_RIGHT) //NEXT
+		{
+			foreach(new i : Player)
+			{
+				if(i == playerid) continue;
+				if(actualid != INVALID_PLAYER_ID) //if is set
+				{
+					new str[6];
+                	valstr(str, i);
+                    RunCommand(playerid, "/spec",  str);
+					break;
+				}
+                else if(i == Spectate[playerid]) //if not set and expect
+				{
+					actualid = i;
+				}
+            }
+		}
+		return 1;
     }
 	return 1;
 }
@@ -5914,7 +5931,7 @@ OnPlayerLogin(playerid, password[])
 		//£adowanie konta i zmiennych:
 		//----------------------------
 
-		if( !MruMySQL_LoadAcocount(playerid) )
+		if( !MruMySQL_LoadAccount(playerid) )
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b≥πd konta. Zg≥oú zaistnia≥π sytuacjÍ na forum.");
 			Log(serverLog, ERROR, "Krytyczny b≥πd konta %s (pusty rekord?)", nick);
@@ -6228,7 +6245,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
         }
     }
 
-    //11.06.2014
    	if(PRESSED(KEY_JUMP) && Spectate[playerid] != INVALID_PLAYER_ID)
     {
 		PlayerInfo[playerid][pInt] = Unspec[playerid][sPint];
@@ -6578,10 +6594,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 				ClearAnimations(playerid);
 				SetPVarInt(playerid,"roped", 0);
 				SetPVarInt(playerid,"chop_id",0);
-				for(new i=0;i<ROPELENGTH;i++)
-				{
-					DestroyDynamicObject(r0pes[playerid][i]);
-				}
 			}
 		}
 		if(PRESSED(KEY_FIRE))
@@ -6678,10 +6690,6 @@ public OnVehicleDeath(vehicleid, killerid)
           		SetPVarInt(i,"roped",0);
              	ClearAnimations(i);
               	TogglePlayerControllable(i,1);
-               	for(new j=0;j<ROPELENGTH;j++)
-                {
-                	DestroyDynamicObject(r0pes[i][j]);
-                }
 			}
 		}
 	}
@@ -6943,7 +6951,6 @@ public OnPlayerText(playerid, text[])
 				}//lets start
 				if(strcmp(x_nr,"1",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz miec 3 rangÍ aby pisaÊ newsy Hitman Agency !"); return 0; }
 				    if(News[hTaken1] == 0)
 				    {
@@ -6951,7 +6958,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "Za krÛtki tekst newsa !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd1], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact1], string, 0, strlen(string));
-						News[hTaken1] = 1; PlacedNews[playerid] = 1;
+						News[hTaken1] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieúci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -6963,7 +6970,6 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"2",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken2] == 0)
 				    {
@@ -6971,7 +6977,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krÛtki !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd2], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact2], string, 0, strlen(string));
-						News[hTaken2] = 1; PlacedNews[playerid] = 1;
+						News[hTaken2] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieúci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -6983,7 +6989,6 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"3",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken3] == 0)
 				    {
@@ -6991,7 +6996,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krÛtki !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd3], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact3], string, 0, strlen(string));
-						News[hTaken3] = 1; PlacedNews[playerid] = 1;
+						News[hTaken3] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieúci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -7003,7 +7008,6 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"4",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken4] == 0)
 				    {
@@ -7011,7 +7015,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krÛtki !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd4], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact4], string, 0, strlen(string));
-						News[hTaken4] = 1; PlacedNews[playerid] = 1;
+						News[hTaken4] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieúci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -7023,7 +7027,6 @@ public OnPlayerText(playerid, text[])
 				}
 				else if(strcmp(x_nr,"5",true) == 0)
 				{
-				    if(PlacedNews[playerid] == 1) { SendClientMessage(playerid, COLOR_GREY, "Ten numer jest zajÍty, usuÒ wiadomoúÊ z tego numeru !"); return 0; }
 				    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Musisz mieÊ 3 rangÍ aby pisaÊ newsy na kanale Hitman Agency !"); return 0; }
 				    if(News[hTaken5] == 0)
 				    {
@@ -7031,7 +7034,7 @@ public OnPlayerText(playerid, text[])
 				        if(strlen(text)-(strlen(x_nr)) < 9) { SendClientMessage(playerid, COLOR_GREY, "News jest za krÛtki !"); return 0; }
 						format(string, sizeof(string), "%s",rightStr(text,strlen(text)-7)); strmid(News[hAdd5], string, 0, strlen(string));
 						format(string, sizeof(string), "%s",sendername); strmid(News[hContact5], string, 0, strlen(string));
-						News[hTaken5] = 1; PlacedNews[playerid] = 1;
+						News[hTaken5] = 1;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Umieúci≥eú news na kanale Hitman Agency.");
 						return 0;
 				    }
@@ -7812,6 +7815,11 @@ public OnPlayerStreamIn(playerid, forplayerid)
         ShowPlayerNameTagForPlayer(forplayerid, playerid, 0);
 
     return 1;
+}
+
+public OnVehicleMod(playerid, vehicleid, componentid)
+{
+	return 0; //turn off singleplayer workshops
 }
 
 AntiDeAMX() //suprise motherfucker

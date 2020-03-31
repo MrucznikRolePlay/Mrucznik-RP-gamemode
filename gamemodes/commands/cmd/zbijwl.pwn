@@ -133,7 +133,7 @@ YCMD:zbijwl(playerid, params[], help)
 									}
 									else
 									{
-									    sendErrorMessage(playerid, "Jesteœ zbyt blisko policjanta aby ziæ komuœ WL!");
+									    sendErrorMessage(playerid, "Jesteœ zbyt blisko policjanta aby zbiæ komuœ WL!");
 									}
 								}
 								else
