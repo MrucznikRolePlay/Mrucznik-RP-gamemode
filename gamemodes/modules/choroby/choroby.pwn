@@ -61,7 +61,7 @@ InfectPlayer(playerid, eDiseases:disease)
 	{
 		return 0;
 	}
-
+	if(GetPlayerAdminDutyStatus(i) == 1) return 0;
 	MruMySQL_AddDisease(playerid, disease);
 	InfectPlayerWithoutSaving(playerid, disease);
 	return 1;
@@ -106,6 +106,7 @@ IsPlayerSick(playerid, eDiseases:disease)
 
 ActivateDiseaseEffect(playerid, eDiseases:disease)
 {
+	if(GetPlayerAdminDutyStatus(i) == 1) return 1;
 	new effectID = 0;
 	VECTOR_foreach(v : DiseaseData[disease][VEffects])
 	{
@@ -128,6 +129,7 @@ ActivateDiseaseEffect(playerid, eDiseases:disease)
 
 DeactivateDiseaseEffects(playerid, eDiseases:disease)
 {
+	if(GetPlayerAdminDutyStatus(i) == 1) return 1;
 	VECTOR_foreach(v : DiseaseData[disease][VEffects])
 	{
 		new effect[eEffectData];
@@ -261,6 +263,7 @@ IsPlayerTreated(playerid)
 
 DecreaseImmunity(playerid)
 {
+	if(GetPlayerAdminDutyStatus(i) == 1) return 1;
 	PlayerImmunity[playerid]--;
 	if(PlayerImmunity[playerid] <= 0)
 	{
