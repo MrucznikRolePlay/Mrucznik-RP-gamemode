@@ -135,7 +135,6 @@ new lastMsg[MAX_PLAYERS];
 new PaniJanina;
 
 //PAèDZIOCH
-new r0pes[MAX_PLAYERS][ROPELENGTH];
 new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];

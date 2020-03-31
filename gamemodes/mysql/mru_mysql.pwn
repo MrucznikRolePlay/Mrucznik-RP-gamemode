@@ -528,7 +528,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	// return fault;
 }
 
-public MruMySQL_LoadAcocount(playerid)
+public MruMySQL_LoadAccount(playerid)
 {
     //TODO: MySQL
 

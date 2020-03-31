@@ -31,7 +31,6 @@
 YCMD:fooc(playerid, params[], help)
 {
 	new string[256];
-	new sendername[MAX_PLAYER_NAME];
 
     if(IsPlayerConnected(playerid))
     {
@@ -40,7 +39,6 @@ YCMD:fooc(playerid, params[], help)
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
 			return 1;
 		}*/
-		sendername = GetNickEx(playerid);
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj (/fo)oc [tekst]");
@@ -51,7 +49,7 @@ YCMD:fooc(playerid, params[], help)
 		    new member = GetPlayerFraction(playerid);
             if(member > 0 && PlayerInfo[playerid][pTajniak] == 0)
             {
-                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
     			SendFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
 				SendDiscordFracMessage(member, string);
                 //Tajniacy
@@ -62,31 +60,31 @@ YCMD:fooc(playerid, params[], help)
             }
 			else if(PlayerInfo[playerid][pTajniak] == 1)
 			{
-                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_GROOVE][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_GROOVE][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 SendFamilyMessage(FRAC_GROOVE, TEAM_AZTECAS_COLOR, string);
                 SendTajniakMessage(1, TEAM_AZTECAS_COLOR, string);
 			}
 			else if(PlayerInfo[playerid][pTajniak] == 2)
 			{
-                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_BALLAS][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_BALLAS][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 SendFamilyMessage(FRAC_BALLAS, TEAM_AZTECAS_COLOR, string);
                 SendTajniakMessage(2, TEAM_AZTECAS_COLOR, string);
 			}
 			else if(PlayerInfo[playerid][pTajniak] == 3)
 			{
-                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_LCN][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_LCN][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 SendFamilyMessage(FRAC_LCN, TEAM_AZTECAS_COLOR, string);
 				SendTajniakMessage(3, TEAM_AZTECAS_COLOR, string);
 			}
 			else if(PlayerInfo[playerid][pTajniak] == 4)
 			{
-                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_YKZ][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_YKZ][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 SendFamilyMessage(FRAC_YKZ, TEAM_AZTECAS_COLOR, string);
 				SendTajniakMessage(4, TEAM_AZTECAS_COLOR, string);
 			}
 			else if(PlayerInfo[playerid][pTajniak] == 5)
 			{
-                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_VAGOS][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+                format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[FRAC_VAGOS][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 SendFamilyMessage(FRAC_VAGOS, TEAM_AZTECAS_COLOR, string);
 				SendTajniakMessage(5, TEAM_AZTECAS_COLOR, string);
 			}
@@ -94,9 +92,9 @@ YCMD:fooc(playerid, params[], help)
 		    {
                 member = GetPlayerOrg(playerid);
                 //Przypisane rangi
-                if(strlen(FamRang[member][PlayerInfo[playerid][pRank]]) > 1) format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+                if(strlen(FamRang[member][PlayerInfo[playerid][pRank]]) > 1) format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 //Rangi podstawowe
-                else format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+                else format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
 				SendDiscordOrgMessage(member, string);
 			}
@@ -106,7 +104,7 @@ YCMD:fooc(playerid, params[], help)
         else if(GetPlayerFraction(playerid) == FRAC_GOV || GetPlayerFraction(playerid) == FRAC_BOR|| GetPlayerOrg(playerid) == 1) //DMV i BOR po³aczenie
         {
             new member = GetPlayerFraction(playerid);
-            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], sendername, params);
+            format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
     		SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
 			SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
