@@ -45,24 +45,12 @@ MruMySQL_LoadPremiumData(playerid, &kpMC, &kpEnds, &kpStarted, &kpLastLogin, &kp
 
 MruMySQL_SetKP(playerid, time)
 {
-	//TODO: MySQL
-	// new query[256];
-	// format(query, sizeof(query), "SELECT `p_charUID` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	// mysql_query(query);
-	// mysql_store_result();
-	// if(mysql_num_rows())
-	// {
-	// 	format(query, sizeof(query), "UPDATE `mru_premium` SET `p_endDate`=FROM_UNIXTIME('%d'), `p_startDate`=NOW(), `p_LastCheck`=NOW(), `p_activeKp`=1 WHERE `p_charUID`='%d'", 
-	// 		time, PlayerInfo[playerid][pUID]);
-	// 	mysql_query(query);
-	// }
-	// else
-	// {
-	// 	format(query, sizeof(query), "INSERT INTO `mru_premium` (`p_endDate`, `p_charUID`, `p_LastCheck`, `p_startDate`, `p_activeKp`) VALUES(FROM_UNIXTIME('%d'), '%d', NOW(), NOW(), 1)", 
-	// 		time, PlayerInfo[playerid][pUID]);
-	// 	mysql_query(query);
-	// }
-	// mysql_free_result();
+	mysql_query(sprintf("INSERT INTO `mru_premium` (`p_endDate`, `p_charUID`, `p_LastCheck`, `p_startDate`, `p_activeKp`) \
+		VALUES (FROM_UNIXTIME('%d'), '%d', NOW(), NOW(), 1) \
+		ON DUPLICATE KEY UPDATE `p_endDate`='%d', `p_charUID`='%d', `p_LastCheck`=NOW(), `p_startDate`=NOW(), `p_activeKp`='1'", 
+		time, PlayerInfo[playerid][pUID],
+		time, PlayerInfo[playerid][pUID]
+	));
 }
 
 MruMySQL_InsertSkin(playerid, id)
