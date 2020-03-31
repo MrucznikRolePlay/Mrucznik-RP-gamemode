@@ -59,7 +59,7 @@ PlayerAttachments_LoadItems(playerid)
 {
 	new str[256], model, bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, bool:active;
     format(str, sizeof(str), "SELECT `model`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`, `active`,`bone` FROM `mru_playeritems` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
-    new Cache:result = mysql_query(mruMySQL_Connection, str);
+    new Cache:result = mysql_query(mruMySQL_Connection, str, true);
     if(cache_is_valid(result))
 	{
 		for(new i; i < cache_num_rows(); i++)
@@ -95,7 +95,7 @@ PlayerAttachments_LoadItem(playerid, model)
 		PlayerInfo[playerid][pUID],
 		model
 	);
-    new Cache:result = mysql_query(mruMySQL_Connection, str);
+    new Cache:result = mysql_query(mruMySQL_Connection, str, true);
     if(cache_is_valid(result))
 	{
         sscanf(str, "p<|>fffffffffdd", x, y, z, rx, ry, rz, sx, sy, sz, active, bone);

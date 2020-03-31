@@ -5872,7 +5872,7 @@ VeryfiLastLogin(playerid)
 {
 	new query[128];
 	format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s' LIMIT 1", GetNick(playerid));
-	new Cache:result = mysql_query(mruMySQL_Connection, query);
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 	if(cache_is_valid(result))
 	{
 		if(cache_num_rows())

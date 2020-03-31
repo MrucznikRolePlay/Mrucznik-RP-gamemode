@@ -30,7 +30,7 @@ MruMySQL_LoadPremiumData(playerid, &kpMC, &kpEnds, &kpStarted, &kpLastLogin, &kp
 {
 	new qr[256];
 	format(qr, sizeof(qr), "SELECT `p_MC`, UNIX_TIMESTAMP(`p_endDate`), UNIX_TIMESTAMP(`p_startDate`), UNIX_TIMESTAMP(`p_LastCheck`), `p_activeKp` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	new Cache:result = mysql_query(mruMySQL_Connection, qr);
+	new Cache:result = mysql_query(mruMySQL_Connection, qr, true);
 	if(cache_is_valid(result))
 	{
 		cache_get_value_index_int(0, 0, kpMC);
@@ -45,7 +45,7 @@ MruMySQL_LoadPremiumData(playerid, &kpMC, &kpEnds, &kpStarted, &kpLastLogin, &kp
 
 MruMySQL_SetKP(playerid, time)
 {
-	mysql_query(sprintf("INSERT INTO `mru_premium` (`p_endDate`, `p_charUID`, `p_LastCheck`, `p_startDate`, `p_activeKp`) \
+	mysql_query(mruMySQL_Connection, sprintf("INSERT INTO `mru_premium` (`p_endDate`, `p_charUID`, `p_LastCheck`, `p_startDate`, `p_activeKp`) \
 		VALUES (FROM_UNIXTIME('%d'), '%d', NOW(), NOW(), 1) \
 		ON DUPLICATE KEY UPDATE `p_endDate`='%d', `p_charUID`='%d', `p_LastCheck`=NOW(), `p_startDate`=NOW(), `p_activeKp`='1'", 
 		time, PlayerInfo[playerid][pUID],

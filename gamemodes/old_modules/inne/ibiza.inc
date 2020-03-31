@@ -145,7 +145,7 @@ WlaczSwiatlaP(playerid)
 
 IbizaDrinkiPobierz()
 {
-	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT cena FROM ibizadrinki");
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT cena FROM ibizadrinki", true);
 	if(cache_is_valid(result))
 	{
 		for(new i=0; i<12; i++)

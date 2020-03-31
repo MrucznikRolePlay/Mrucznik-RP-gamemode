@@ -37,7 +37,7 @@
 //------------------<[ MySQL: ]>--------------------
 MruMySQL_LoadDiseasesData(playerid)
 {
-	new Cache:result = mysql_query(mruMySQL_Connection, sprintf("SELECT `disease` FROM `mru_diseases` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]));
+	new Cache:result = mysql_query(mruMySQL_Connection, sprintf("SELECT `disease` FROM `mru_diseases` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]), true);
 	if(cache_is_valid(result))
 	{
 		for(new i; i < cache_num_rows(); i++)

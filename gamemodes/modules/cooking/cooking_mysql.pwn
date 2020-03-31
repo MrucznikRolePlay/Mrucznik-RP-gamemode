@@ -47,7 +47,7 @@ MruMySQL_CookedMealsDialog(playerid)
 	new Cache:result = mysql_query(mruMySQL_Connection, 
 		sprintf("SELECT id, model, name, weight, type FROM mru_player_cooking WHERE owner='%d' ORDER BY id DESC LIMIT 50", 
 		PlayerInfo[playerid][pUID]
-	));
+	), true);
 
 	if(cache_is_valid(result))
 	{
@@ -89,7 +89,7 @@ MruMySQL_AddCookedMeal(playerid, model, name[], weight, type)
 
 MruMySQL_EatCookedMeal(playerid, id)
 {
-	new Cache:result = mysql_query(mruMySQL_Connection, sprintf("SELECT name, weight, type FROM mru_player_cooking WHERE id='%d'", id));
+	new Cache:result = mysql_query(mruMySQL_Connection, sprintf("SELECT name, weight, type FROM mru_player_cooking WHERE id='%d'", id), true);
 	if(cache_is_valid(result))
 	{
 		new name[MAX_COOKED_NAME], weight, type;
