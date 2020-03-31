@@ -81,11 +81,11 @@ MruMySQL_CookedMealsDialog(playerid)
 
 MruMySQL_AddCookedMeal(playerid, model, name[], weight, type)
 {
-	//TODO: MySQL
-	// mysql_query(sprintf("INSERT INTO mru_player_cooking (owner, model, name, weight, type) VALUES ('%d', '%d', '%s', '%d', '%d')",
-	// 	PlayerInfo[playerid][pUID], model, name, weight, type
-	// ));
-	// return mysql_insert_id();
+	mysql_query(mruMySQL_Connection, 
+		sprintf("INSERT INTO mru_player_cooking (owner, model, name, weight, type) VALUES ('%d', '%d', '%s', '%d', '%d')",
+		PlayerInfo[playerid][pUID], model, name, weight, type
+	));
+	return cache_insert_id();
 }
 
 MruMySQL_EatCookedMeal(playerid, id)
