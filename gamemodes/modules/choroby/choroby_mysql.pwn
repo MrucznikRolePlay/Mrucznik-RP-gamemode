@@ -37,23 +37,17 @@
 //------------------<[ MySQL: ]>--------------------
 MruMySQL_LoadDiseasesData(playerid)
 {
-	//TODO: MySQL
-	// new qr[256];
-	// format(qr, sizeof(qr), "SELECT `disease` FROM `mru_diseases` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
-	// mysql_query(qr);
-	// mysql_store_result();
-	// {
-	// 	if(mysql_num_rows() > 0)
-	// 	{
-	// 		new eDiseases:diseaseType;
-	// 		while(mysql_fetch_row_format(qr, "|"))
-	// 		{
-	// 			sscanf(qr, "p<|>d", diseaseType);
-	// 			InfectPlayerWithoutSaving(playerid, diseaseType);
-	// 		}
-	// 	}
-    //     mysql_free_result();
-	// }
+	new Cache:result = mysql_query(mruMySQL_Connection, sprintf("SELECT `disease` FROM `mru_diseases` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]));
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+		{
+			new eDiseases:diseaseType;
+			cache_get_value_index_int(i, 0, diseaseType);
+			InfectPlayerWithoutSaving(playerid, diseaseType);
+		}
+		cache_delete(result);
+	}
 }
 
 MruMySQL_AddDisease(playerid, eDiseases:disease)
