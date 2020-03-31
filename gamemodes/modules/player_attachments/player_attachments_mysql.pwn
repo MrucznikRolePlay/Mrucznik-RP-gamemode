@@ -59,7 +59,7 @@ PlayerAttachments_LoadItems(playerid)
 {
 	new str[256], model, bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, bool:active;
     format(str, sizeof(str), "SELECT `model`, `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`, `active`,`bone` FROM `mru_playeritems` WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
-    mysql_query(mruMySQL_Connection, str);
+    new Cache:result = mysql_query(mruMySQL_Connection, str);
     if(cache_is_valid(result))
 	{
 		for(new i; i < cache_num_rows(); i++)
@@ -89,22 +89,32 @@ PlayerAttachments_LoadItems(playerid)
 
 PlayerAttachments_LoadItem(playerid, model)
 {
-	//TODO: MySQL
-	// new str[256], bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, bool:active;
-    // new index = INVALID_ATTACHED_OBJECT_INDEX;
-	// format(str, sizeof(str), "SELECT `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`, `active`,`bone` FROM `mru_playeritems` WHERE `UID`='%d' AND `model`='%d'", 
-	// 	PlayerInfo[playerid][pUID],
-	// 	model
-	// );
-    // mysql_query(str);
-    // mysql_store_result();
-    // if(mysql_fetch_row_format(str, "|"))
-    // {
-    //     sscanf(str, "p<|>fffffffffdd", x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
-    //     index = AttachPlayerItem(playerid, model, bone, x, y, z, rx, ry, rz, sx, sy, sz);
-    // }
-    // mysql_free_result();
-    // return index;
+	new str[256], bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, bool:active;
+    new index = INVALID_ATTACHED_OBJECT_INDEX;
+	format(str, sizeof(str), "SELECT `x`, `y`, `z`, `rx`, `ry`, `rz`, `sx`, `sy`, `sz`, `active`,`bone` FROM `mru_playeritems` WHERE `UID`='%d' AND `model`='%d'", 
+		PlayerInfo[playerid][pUID],
+		model
+	);
+    new Cache:result = mysql_query(mruMySQL_Connection, str);
+    if(cache_is_valid(result))
+	{
+        sscanf(str, "p<|>fffffffffdd", x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
+        cache_get_value_index_float(0, 0, x);
+        cache_get_value_index_float(0, 1, y);
+        cache_get_value_index_float(0, 2, z);
+        cache_get_value_index_float(0, 3, rx);
+        cache_get_value_index_float(0, 4, ry);
+        cache_get_value_index_float(0, 5, rz);
+        cache_get_value_index_float(0, 6, sx);
+        cache_get_value_index_float(0, 7, sy);
+        cache_get_value_index_float(0, 8, sz);
+        cache_get_value_index_int(0, 9, active);
+        cache_get_value_index_int(0, 10, bone);
+        index = AttachPlayerItem(playerid, model, bone, x, y, z, rx, ry, rz, sx, sy, sz);
+		cache_delete(result);
+    }
+    return index;
+
 }
 
 PlayerAttachments_UpdateItem(playerid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, bone, active) {
