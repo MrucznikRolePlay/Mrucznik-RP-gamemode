@@ -162,12 +162,11 @@ stock graffiti_UpdateMySQL(id, type = 1)
 
 stock graffiti_DeleteMySQL(id)
 {
-	//TODO: MySQL
-	// DestroyDynamicObject(GraffitiInfo[id][gID]);
-	// new query[1024];
-	// format(query, sizeof(query), "DELETE FROM `mru_graffiti` WHERE `id`='%d'", id);
-	// mysql_query(query);
-	// graffiti_Zeruj(id);
+	DestroyDynamicObject(GraffitiInfo[id][gID]);
+	new query[1024];
+	format(query, sizeof(query), "DELETE FROM `mru_graffiti` WHERE `id`='%d'", id);
+	mysql_query(mruMySQL_Connection, query);
+	graffiti_Zeruj(id);
 }
 
 //stock graffiti_UpdateMySQL(id)
