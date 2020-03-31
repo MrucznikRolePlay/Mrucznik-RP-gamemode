@@ -812,6 +812,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		PlayerInfo[playerid][pFixKit]--;
 		RepairVehicle(vehicleid);
         SetVehicleHealth(vehicleid, 1000);
+		CarData[VehicleUID[vehicleid][vUID]][c_HP] = 1000.0;
 		DeletePVar(playerid, "timer_ZestawNaprawczy");
 	}
 }
