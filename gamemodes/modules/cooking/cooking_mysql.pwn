@@ -42,7 +42,6 @@
 //------------------<[ MySQL: ]>--------------------
 MruMySQL_CookedMealsDialog(playerid)
 {
-	//TODO: MySQL
 	new string[(44+MAX_COOKED_NAME)*50]; //message length: 12+1+MAX_COOKED_NAME+9+12+2=56, 64 for safety
 
 	new Cache:result = mysql_query(mruMySQL_Connection, 
@@ -90,22 +89,21 @@ MruMySQL_AddCookedMeal(playerid, model, name[], weight, type)
 
 MruMySQL_EatCookedMeal(playerid, id)
 {
-	//TODO: MySQL
-	// new result[128];
-	// new name[MAX_COOKED_NAME], weight, type;
+	new Cache:result = mysql_query(mruMySQL_Connection, sprintf("SELECT name, weight, type FROM mru_player_cooking WHERE id='%d'", id));
+	if(cache_is_valid(result))
+	{
+		new name[MAX_COOKED_NAME], weight, type;
+		cache_get_value_index(0, 0, name);
+		cache_get_value_index_int(0, 1, weight);
+		cache_get_value_index_int(0, 2, type);
 
-	// mysql_query(sprintf("SELECT name, weight, type FROM mru_player_cooking WHERE id='%d'", id));
-	// mysql_store_result();
-	// {
-	// 	mysql_fetch_row_format(result, "|");
-	// 	sscanf(result, "p<|>s["#MAX_COOKED_NAME"]dd", name, weight, type);
-    //     mysql_free_result();
-	// }
+		EatCookedMeal(playerid, name, weight, type);
+		cache_delete(result);
 
-	// EatCookedMeal(playerid, name, weight, type);
+		mysql_query(mruMySQL_Connection, sprintf("DELETE FROM mru_player_cooking WHERE id='%d'", id));
+	}
 
-	// mysql_query(sprintf("DELETE FROM mru_player_cooking WHERE id='%d'", id));
-	// return;
+	return;
 }
 
 //end
