@@ -80,23 +80,19 @@ MruMySQL_SaveMc(playerid)
 
 MruMySQL_LoadPlayerPremiumSkins(playerid)
 {
-	//TODO: MySQL
-	// new qr[256];
-	// format(qr, sizeof(qr), "SELECT `s_ID` FROM `mru_premium_skins` WHERE `s_charUID`='%d'", PlayerInfo[playerid][pUID]);
-	// mysql_query(qr);
-	// new skinID;
-	// mysql_store_result();
-	// {
-	// 	if(mysql_num_rows()>0)
-	// 	{
-	// 		while(mysql_fetch_row_format(qr, "|"))
-	// 		{
-	// 			sscanf(qr, "p<|>d", skinID);
-	// 			VECTOR_push_back_val(VPremiumSkins[playerid], skinID);
-	// 		}
-	// 	}
-    //     mysql_free_result();
-	// }
+	new qr[256];
+	format(qr, sizeof(qr), "SELECT `s_ID` FROM `mru_premium_skins` WHERE `s_charUID`='%d'", PlayerInfo[playerid][pUID]);
+	new Cache:result = mysql_query(mruMySQL_Connection, qr);
+	new skinID;
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index_int(i, 0, skinID);
+			VECTOR_push_back_val(VPremiumSkins[playerid], skinID);
+		}
+		cache_delete(result);
+	}
 }
 
 MruMySQL_IsPhoneNumberAvailable(number) {
