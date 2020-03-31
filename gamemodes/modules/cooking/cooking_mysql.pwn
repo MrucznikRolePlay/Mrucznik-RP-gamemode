@@ -43,36 +43,40 @@
 MruMySQL_CookedMealsDialog(playerid)
 {
 	//TODO: MySQL
-	// new result[(48+MAX_COOKED_NAME)*50+10]; //fetched data max length: 12+12+12+MAX_COOKED_NAME+12=68 + 10 for safety
-	// new string[(44+MAX_COOKED_NAME)*50]; //message length: 12+1+MAX_COOKED_NAME+9+12+2=56, 64 for safety
+	new string[(44+MAX_COOKED_NAME)*50]; //message length: 12+1+MAX_COOKED_NAME+9+12+2=56, 64 for safety
 
-	// mysql_query(sprintf("SELECT id, model, name, weight, type FROM mru_player_cooking WHERE owner='%d' ORDER BY id DESC LIMIT 50", 
-	// 	PlayerInfo[playerid][pUID]
-	// ));
-	// mysql_store_result();
-	// {
-	// 	if(mysql_num_rows()>0)
-	// 	{
-	// 		new id, model, name[MAX_COOKED_NAME], weight, type;
-	// 		DynamicGui_Init(playerid);
-	// 		while(mysql_fetch_row_format(result, "|"))
-	// 		{
-	// 			sscanf(result, "p<|>dds["#MAX_COOKED_NAME"]dd", id, model, name, weight, type);
-	// 			strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", model, Odpolszcz(name), weight));
-	// 			DynamicGui_AddRow(playerid, id);
-	// 		}
-	// 		if(strlen(string) < 2)
-	// 		{
-	// 			sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
-	// 			return 1;
-	// 		}
-	// 		string[strlen(string)-1] = '\0';
-	// 	}
-	// 	mysql_free_result();
-	// }
+	new Cache:result = mysql_query(mruMySQL_Connection, 
+		sprintf("SELECT id, model, name, weight, type FROM mru_player_cooking WHERE owner='%d' ORDER BY id DESC LIMIT 50", 
+		PlayerInfo[playerid][pUID]
+	));
 
-    // ShowPlayerDialogEx(playerid, DIALOG_EATING, DIALOG_STYLE_PREVIEW_MODEL, "Twoje potrawy", string, "Jedz", "Anuluj");
-	// return 1;
+	if(cache_is_valid(result))
+	{
+		new rows = cache_num_rows();
+		new id, model, name[MAX_COOKED_NAME], weight, type;
+		DynamicGui_Init(playerid);
+		for(new i; i < rows; i++)
+		{
+			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, model);
+			cache_get_value_index(i, 2, name);
+			cache_get_value_index_int(i, 3, weight);
+			cache_get_value_index_int(i, 4, type);
+
+			strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", model, Odpolszcz(name), weight));
+			DynamicGui_AddRow(playerid, id);
+		}
+		if(rows == 0)
+		{
+			sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
+			return 1;
+		}
+		string[strlen(string)-1] = '\0';
+		cache_delete(result);
+	}
+
+    ShowPlayerDialogEx(playerid, DIALOG_EATING, DIALOG_STYLE_PREVIEW_MODEL, "Twoje potrawy", string, "Jedz", "Anuluj");
+	return 1;
 }
 
 MruMySQL_AddCookedMeal(playerid, model, name[], weight, type)
