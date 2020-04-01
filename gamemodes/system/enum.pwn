@@ -1189,6 +1189,7 @@ new News[hNews];
 
 enum pInfo
 {
+	ORM:pORM,
 	pUID,
 	pNick[24],
 	pKey[129],
@@ -1324,13 +1325,6 @@ enum pInfo
  	pStylWalki,
  	pNewAP,
  	pZG,
-    pAuto1,
- 	pAuto2,
- 	pAuto3,
- 	pAuto4,
- 	pLodz,
- 	pSamolot,
- 	pGaraz,
  	pKluczeAuta,
   	pSpawn,
  	pBW,
@@ -1375,7 +1369,9 @@ enum pInfo
 	pPodPW,
 	pCruiseController,
 	pFixKit,
-	pTurnedOnCarWithoutCarLic
+	pTurnedOnCarWithoutCarLic,
+	pConnected,
+	pFW
 };
 enum StringData
 {

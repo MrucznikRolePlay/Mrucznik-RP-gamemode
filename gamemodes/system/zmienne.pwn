@@ -1346,16 +1346,6 @@ ZerujZmienne(playerid)
     PlayerInfo[playerid][pRockHotelLiAc] = 0;
     PlayerInfo[playerid][pRockHotelPuAc] = 0;
     PlayerInfo[playerid][pPK] = 0;
-    //
-	PlayerInfo[playerid][pSpawn] = 0;
-    PlayerInfo[playerid][pSpawn] = 0;
-	PlayerInfo[playerid][pAuto1] = 0;
-	PlayerInfo[playerid][pAuto2] = 0;
-	PlayerInfo[playerid][pAuto3] = 0;
-	PlayerInfo[playerid][pAuto4] = 0;
-	PlayerInfo[playerid][pLodz] = 0;
-	PlayerInfo[playerid][pSamolot] = 0;
-	PlayerInfo[playerid][pGaraz] = 0;
 	//Bilet poci¹gu
 	timerTime[playerid] = 0; 
 

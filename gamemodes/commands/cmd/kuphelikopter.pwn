@@ -37,17 +37,10 @@ YCMD:kuphelikopter(playerid, params[], help)
 			sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
 			return 1;
 		}
-        if(PlayerInfo[playerid][pSamolot] == 0)
-	    {
-	        if(GUIExit[playerid] == 0)
-	    	{
-                ShowPlayerDialogEx(playerid, 420, DIALOG_STYLE_LIST, "Kupowanie Helikopteru", "Sparrow\t\t125 000 000$\nMaverick\t\t200 000 000$\nLeviathan\t\t265 000 000$\nRaindance\t\t325 000 000$", "Wybierz", "WyjdŸ");
-            }
-	    }
-	    else
-	    {
-	        sendErrorMessage(playerid, "Posiadasz ju¿ helikopter.");
-	    }
+		if(GUIExit[playerid] == 0)
+		{
+			ShowPlayerDialogEx(playerid, 420, DIALOG_STYLE_LIST, "Kupowanie Helikopteru", "Sparrow\t\t125 000 000$\nMaverick\t\t200 000 000$\nLeviathan\t\t265 000 000$\nRaindance\t\t325 000 000$", "Wybierz", "WyjdŸ");
+		}
     }
     else
     {

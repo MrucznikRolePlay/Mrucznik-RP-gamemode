@@ -118,6 +118,7 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
+new MySQL:mruMySQL_Connection;
 
 //do implementacji w g³ówny kod (mo¿liwie w modu³y)
 #include "system\doimplementacji\vinylscript.pwn"
@@ -128,14 +129,14 @@ native gpci (playerid, serial [], len);
 #include "old_modules\niceczlowiek\noysi.pwn"
 #include "old_modules\niceczlowiek\wybieralka.pwn"
 
+//-------<[ 3.0 style ]>-------
+#include "modules\modules.pwn"
+
 //-------<[ MySQL ]>-------
 #include "mysql\mru_mysql.pwn"
 #include "mysql\mysql_komendy.pwn"
 #include "mysql\mysql_noysi.pwn"
 #include "mysql\mysql_OnDialogResponse.pwn"
-
-//-------<[ 3.0 style ]>-------
-#include "modules\modules.pwn"
 
 /*
 #include "modules\ActorSystem\actors.pwn"
@@ -5934,7 +5935,7 @@ OnPlayerLogin(playerid, password[])
 		//£adowanie konta i zmiennych:
 		//----------------------------
 
-		if( !MruMySQL_LoadAccount(playerid) )
+		if(!MruMySQL_LoadAccount(playerid))
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b³¹d konta. Zg³oœ zaistnia³¹ sytuacjê na forum.");
 			Log(serverLog, ERROR, "Krytyczny b³¹d konta %s (pusty rekord?)", nick);
