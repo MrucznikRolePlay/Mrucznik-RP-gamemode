@@ -74,7 +74,7 @@ YCMD:glosnik(playerid, params[], help)
 				new bool:inpos=true;
 				if(inpos)
 				{
-					ShowPlayerDialogEx(playerid, 765, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio 1\nMrucznik Radio 2\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 768, DIALOG_STYLE_LIST, "Wybierz muzykê", "Mrucznik Radio 1\nMrucznik Radio 2\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW³asna", "Wybierz", "Anuluj");
 				}
 			}
 			else
