@@ -55,6 +55,11 @@ YCMD:selldom(playerid, params[], help)
 						return 1;
 					}
 					money = FunkcjaK(string);
+					if(!IsPlayerConnected(giveplayerid))
+					{
+						sendErrorMessage(playerid, "Nie ma takiego gracza");
+						return 1;
+					}
 
 					if(money <= 9999)
 					{

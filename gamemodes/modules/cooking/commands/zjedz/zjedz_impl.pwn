@@ -34,7 +34,7 @@ command_zjedz_Impl(playerid)
 {
     new Float:hp;
     GetPlayerHealth(playerid, hp);
-    if(hp >= 200.0)
+    if(hp >= 100.0)
     {
         sendErrorMessage(playerid, "Jesteœ tak najedzony, ¿e nie zmieœcisz ju¿ wiêcej (masz pe³ne hp).");
         return 1;

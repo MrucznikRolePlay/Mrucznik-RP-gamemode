@@ -14044,22 +14044,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	if(dialogid == D_MECH_SPRZEDAZ_FIXKIT)
 	{
-		new string[128];
 		new id = GetPVarInt(playerid, "FixKitOffer");
 		if(response)
 		{
-			new hajs = kaska[playerid];
-			if(hajs < 15000)
+			if(kaska[playerid] < 15000)
 			{
 				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
 				return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
 			}
 			else
 			{
-				format(string, sizeof string, "%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", PlayerName(playerid));
-				SendClientMessage(id, 0x0080D0FF, string);
-				format(string, sizeof string, "Kupi³eœ zestaw od Mechanika za 15000$");
-				SendClientMessage(playerid, 0x00FF00FF, string);
+				SendClientMessage(id, 0x0080D0FF, sprintf("%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", GetNick(playerid)));
+				SendClientMessage(playerid, 0x00FF00FF, sprintf("Kupi³eœ zestaw od mechanika %s za 15000$", GetNick(id)));
 				ZabierzKase(playerid, 15000);
 				DajKase(id, 15000);
 				PlayerInfo[playerid][pFixKit]++;
@@ -14067,8 +14063,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			format(string, sizeof string, "Gracz %s nie zgodzi³ siê na kupno zestawu.", PlayerName(playerid));
-			SendClientMessage(id, 0xFF0030FF, string);
+			SendClientMessage(id, 0xFF0030FF, sprintf("Gracz %s nie zgodzi³ siê na kupno zestawu.", GetNick(playerid)));
 		}
 		DeletePVar(playerid, "FixKitOffer");
 		return 1;

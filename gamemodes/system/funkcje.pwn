@@ -1124,6 +1124,12 @@ AntySpam[playerid] = 0;
 return 1;
 }
 
+public AntySpamLowienie(playerid){
+	PlayerInfo[playerid][pFishes] = 0;
+	DeletePVar(playerid, "AntySpamLowienie");
+	return 1;
+}
+
 public AntyBusCzit(playerid){
 BusCzit[playerid] = 0;
 return 1;
@@ -4788,8 +4794,8 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
-		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d]", housekey,PlayerInfo[targetid][pKluczeAuta]);
-		SendClientMessage(playerid, COLOR_GRAD6,coordsstring);
+		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d] MruCoins [%d]", housekey,PlayerInfo[targetid][pKluczeAuta], PremiumInfo[targetid][pMC]);
+		SendClientMessage(playerid, COLOR_GRAD6,coordsstring); 
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	}
 }
@@ -8351,7 +8357,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	SendClientMessage(para1, COLOR_LIGHTBLUE, string);
 	SendClientMessage(para1, COLOR_LIGHTBLUE, "* Jesteœ cywilem.");
 	SetPlayerColor(para1,TEAM_HIT_COLOR);
-	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), PlayerInfo[para1][pMember]);
+	Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(PlayerInfo[para1][pMember]));
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
 	PlayerInfo[para1][pJob] = 0;
@@ -10939,6 +10945,8 @@ Oil_Destroy(lID)
         if(GetPVarInt(i, "oil_id") != lID) continue;
         Oil_UnloadPTXD(i);
         SetPVarInt(i, "oil_clear", 0);
+		ClearAnimations(i);
+	    SetPlayerSpecialAction(i,SPECIAL_ACTION_NONE);
         TogglePlayerControllable(i, 1);
         TextDrawHideForPlayer(i, OilTXD_BG[0]);
         TextDrawHideForPlayer(i, OilTXD_BG[1]);
