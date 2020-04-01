@@ -31,8 +31,7 @@ MySQL:MruMySQL_Init()
 	//Create ORM's
 	for(new i; i<MAX_PLAYERS; i++)
 	{
-		//TODO: MySQL
-		//MruMySQL_CreateKontaORM(i);
+		MruMySQL_CreateKontaORM(i);
 	}
 
 	return mruMySQL_Connection;
@@ -48,77 +47,6 @@ MruMySQL_CreateTables()
 	mysql_tquery_file(mruMySQL_Connection, "MySQL/create_tables.sql");
 }
 
-
-//--------------------------------------------------------------<[ Liderzy ]>--------------------------------------------------------------
-Create_MySQL_Leader(playerid, frac, level)
-{
-	new query[256];
-	mysql_format(mruMySQL_Connection, query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID`, `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNickEx(playerid), PlayerInfo[playerid][pUID], frac, level);
-	mysql_tquery(mruMySQL_Connection, query);
-	AllLeaders++;
-	LeadersValue[LEADER_FRAC][frac]++;   
-	return 1;
-}
-Remove_MySQL_Leader(playerid)
-{
-	new query[256];
-	mysql_format(mruMySQL_Connection, query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
-	mysql_tquery(mruMySQL_Connection, query);
-	LeadersValue[LEADER_FRAC][GetPlayerFraction(playerid)]--; 
-	AllLeaders--;
-	return 1;
-}
-Remove_MySQL_Leaders(fracID)
-{
-	new query[126];
-	mysql_format(mruMySQL_Connection, query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `FracID`='%d'", fracID);
-	new i; while(i <= AllLeaders) { mysql_tquery(mruMySQL_Connection, query); i++; }
-	return 1;
-}
-Save_MySQL_Leader(playerid)
-{
-	new query[256];
-	mysql_format(mruMySQL_Connection, query, sizeof(query), "UPDATE `mru_liderzy` SET \
-		`NICK`='%s', \
-		`UID`='%d', \
-		`FracID`='%d', \
-		`LiderValue`='%d' \
-		WHERE `NICK`='%s'",
-		GetNickEx(playerid),
-		PlayerInfo[playerid][pUID],
-		PlayerInfo[playerid][pLider],
-		PlayerInfo[playerid][pLiderValue],
-		GetNickEx(playerid)); 
-	mysql_tquery(mruMySQL_Connection, query);
-	return 1;
-}
-Load_MySQL_Leader(playerid)
-{
-	new query[256];
-	format(query, sizeof(query), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
-	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
-	if(cache_is_valid(result))
-	{
-		cache_get_value_index_int(0, 0, PlayerInfo[playerid][pLider]);
-		cache_get_value_index_int(0, 1, PlayerInfo[playerid][pLiderValue]);
-		cache_delete(result);
-	}
-	return 1;
-}
-MruMySQL_IloscLiderowLoad()
-{
-	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT FracID, COUNT(*) FROM `mru_liderzy` GROUP BY FracID", true);
-	if(cache_is_valid(result))
-	{
-		for(new i; i < cache_num_rows(); i++)
-		{
-			new idx;
-			cache_get_value_index_int(i, 0, idx);
-			cache_get_value_index_int(i, 1, LeadersValue[LEADER_FRAC][idx]);
-		}
-		cache_delete(result);
-	}
-}
 
 //--------------------------------------------------------------<[ Konta ]>--------------------------------------------------------------
 MruMySQL_CreateAccount(playerid, password[])
@@ -1153,6 +1081,7 @@ MruMySQL_SetAccInt(kolumna[], nick[], wartosc)
 	return 1;
 }
 
+//--------------------------------------------------------------<[ Kontakty ]>--------------------------------------------------------------
 MruMySQL_LoadPhoneContacts(playerid)
 {
 	new string[128];
@@ -1205,6 +1134,77 @@ MruMySQL_DeletePhoneContact(uid)
 	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);
 	mysql_tquery(mruMySQL_Connection, string);
 	return 1;
+}
+
+//--------------------------------------------------------------<[ Liderzy ]>--------------------------------------------------------------
+Create_MySQL_Leader(playerid, frac, level)
+{
+	new query[256];
+	mysql_format(mruMySQL_Connection, query, sizeof(query), "INSERT INTO `mru_liderzy` (`NICK`, `UID`, `FracID`, `LiderValue`) VALUES ('%s', '%d', '%d', '%d')", GetNickEx(playerid), PlayerInfo[playerid][pUID], frac, level);
+	mysql_tquery(mruMySQL_Connection, query);
+	AllLeaders++;
+	LeadersValue[LEADER_FRAC][frac]++;   
+	return 1;
+}
+Remove_MySQL_Leader(playerid)
+{
+	new query[256];
+	mysql_format(mruMySQL_Connection, query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
+	mysql_tquery(mruMySQL_Connection, query);
+	LeadersValue[LEADER_FRAC][GetPlayerFraction(playerid)]--; 
+	AllLeaders--;
+	return 1;
+}
+Remove_MySQL_Leaders(fracID)
+{
+	new query[126];
+	mysql_format(mruMySQL_Connection, query, sizeof(query), "DELETE FROM `mru_liderzy` WHERE `FracID`='%d'", fracID);
+	new i; while(i <= AllLeaders) { mysql_tquery(mruMySQL_Connection, query); i++; }
+	return 1;
+}
+Save_MySQL_Leader(playerid)
+{
+	new query[256];
+	mysql_format(mruMySQL_Connection, query, sizeof(query), "UPDATE `mru_liderzy` SET \
+		`NICK`='%s', \
+		`UID`='%d', \
+		`FracID`='%d', \
+		`LiderValue`='%d' \
+		WHERE `NICK`='%s'",
+		GetNickEx(playerid),
+		PlayerInfo[playerid][pUID],
+		PlayerInfo[playerid][pLider],
+		PlayerInfo[playerid][pLiderValue],
+		GetNickEx(playerid)); 
+	mysql_tquery(mruMySQL_Connection, query);
+	return 1;
+}
+Load_MySQL_Leader(playerid)
+{
+	new query[256];
+	format(query, sizeof(query), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
+	if(cache_is_valid(result))
+	{
+		cache_get_value_index_int(0, 0, PlayerInfo[playerid][pLider]);
+		cache_get_value_index_int(0, 1, PlayerInfo[playerid][pLiderValue]);
+		cache_delete(result);
+	}
+	return 1;
+}
+MruMySQL_IloscLiderowLoad()
+{
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT FracID, COUNT(*) FROM `mru_liderzy` GROUP BY FracID", true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+		{
+			new idx;
+			cache_get_value_index_int(i, 0, idx);
+			cache_get_value_index_int(i, 1, LeadersValue[LEADER_FRAC][idx]);
+		}
+		cache_delete(result);
+	}
 }
 
 //EOF
