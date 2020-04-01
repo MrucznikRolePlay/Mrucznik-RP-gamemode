@@ -14059,6 +14059,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ZabierzKase(playerid, 15000);
 				DajKase(id, 15000);
 				PlayerInfo[playerid][pFixKit]++;
+				PlayerInfo[id][pMechSkill]++;
+                if(PlayerInfo[id][pMechSkill] == 50)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 100)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 200)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 400)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
 			}
 		}
 		else
