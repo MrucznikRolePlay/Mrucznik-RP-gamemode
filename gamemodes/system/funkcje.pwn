@@ -1124,12 +1124,6 @@ AntySpam[playerid] = 0;
 return 1;
 }
 
-public AntySpamLowienie(playerid){
-	PlayerInfo[playerid][pFishes] = 0;
-	DeletePVar(playerid, "AntySpamLowienie");
-	return 1;
-}
-
 public AntyBusCzit(playerid){
 BusCzit[playerid] = 0;
 return 1;
