@@ -64,14 +64,12 @@ YCMD:id(playerid, params[], help)
 
         new c = 0;
         new nick[MAX_PLAYER_NAME];
-        new nickmaska[MAX_PLAYER_NAME];
         foreach(new i : Player)
         {
             if(c >= 10) { break; }
 
             GetPlayerName(i, nick, sizeof(nick));
-            nickmaska = GetNickEx(i);
-            if((strfind(nick, params, true) != -1) || (strfind(nickmaska, params, true) != -1))
+            if(strfind(nick, params, true) != -1)
             {
                 format(string, sizeof(string), "ID: (%d) %s",i,nick);
                 SendClientMessage(playerid, COLOR_GRAD1, string);
