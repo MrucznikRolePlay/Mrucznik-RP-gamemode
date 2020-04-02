@@ -807,56 +807,53 @@ IsAHeliModel(carid)
 
 Car_PrintOwner(car)
 {
-	//TODO: MySQL
-    // new string[64];
-    // new type = CarData[car][c_OwnerType];
-    // switch(type)
-    // {
-    //     case INVALID_CAR_OWNER: string="Brak";
-    //     case CAR_OWNER_FRACTION:
-    //     {
-    //         format(string, sizeof(string), "%s", FractionNames[CarData[car][c_Owner]]);
-    //     }
-    //     case CAR_OWNER_FAMILY:
-    //     {
-    //         format(string, sizeof(string), "%s", OrgInfo[orgID(CarData[car][c_Owner])][o_Name]);
-    //     }
-    //     case CAR_OWNER_PLAYER:
-    //     {
-    //         format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `UID`='%d'", CarData[car][c_Owner]);
-    //         mysql_query(string);
-    //         mysql_store_result();
-    //         if(mysql_num_rows())
-    //         {
-    //             mysql_fetch_row_format(string, "|");
-    //             mysql_free_result();
-    //         }
-	// 		else
-	// 		{
-	// 			format(string, sizeof(string), "Nieistniej¹cy");
-	// 		}
-    //     }
-    //     case CAR_OWNER_JOB:
-    //     {
-    //         format(string, sizeof(string), "%s", JobNames[CarData[car][c_Owner]]);
-    //     }
-    //     case CAR_OWNER_SPECIAL:
-    //     {
-    //         switch(CarData[car][c_Owner])
-    //         {
-    //             case 1: string="Wypo¿yczalnia";
-    //             case 2: string="GoKart";
-    //             case 3: string="¯u¿el";
-    //             default: string="Brak";
-    //         }
-    //     }
-    //     case CAR_OWNER_PUBLIC:
-    //     {
-    //         string = "Brak";
-    //     }
-    //     default: string="Brak";
-    // }
-    // return string;
+    new string[64];
+    new type = CarData[car][c_OwnerType];
+    switch(type)
+    {
+        case INVALID_CAR_OWNER: string="Brak";
+        case CAR_OWNER_FRACTION:
+        {
+            format(string, sizeof(string), "%s", FractionNames[CarData[car][c_Owner]]);
+        }
+        case CAR_OWNER_FAMILY:
+        {
+            format(string, sizeof(string), "%s", OrgInfo[orgID(CarData[car][c_Owner])][o_Name]);
+        }
+        case CAR_OWNER_PLAYER:
+        {
+            format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `UID`='%d'", CarData[car][c_Owner]);
+            new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+            if(cache_is_valid(result))
+            {
+                if(cache_num_rows())
+                {
+                    format(string, sizeof(string), "Nieistniej¹cy");
+                }
+                cache_delete(result);
+            }
+        }
+        case CAR_OWNER_JOB:
+        {
+            format(string, sizeof(string), "%s", JobNames[CarData[car][c_Owner]]);
+        }
+        case CAR_OWNER_SPECIAL:
+        {
+            switch(CarData[car][c_Owner])
+            {
+                case 1: string="Wypo¿yczalnia";
+                case 2: string="GoKart";
+                case 3: string="¯u¿el";
+                default: string="Brak";
+            }
+        }
+        case CAR_OWNER_PUBLIC:
+        {
+            string = "Brak";
+        }
+        default: string="Brak";
+    }
+    return string;
 }
 
 ShowCarEditDialog(playerid)
