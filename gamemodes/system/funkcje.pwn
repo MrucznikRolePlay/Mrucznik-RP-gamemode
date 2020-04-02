@@ -8564,33 +8564,36 @@ LoadConfig()
 
 WczytajRangi()
 {
-	//TODO: MySQL
-    // new query[512], id, typ, rangi[256],ranga[MAX_RANG][MAX_RANG_LEN];
-    // mysql_query("SELECT * FROM `mru_nazwyrang`");
-    // mysql_store_result();
+    new id, typ, rangi[256], ranga[MAX_RANG][MAX_RANG_LEN];
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_nazwyrang`", true);
+	if(cache_is_valid(result))
+    {
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, typ);
+			cache_get_value_index(i, 2, rangi);
+        	sscanf(rangi, "p<,>A<s[25]>()[10]", ranga);
+		}
 
-    // while(mysql_fetch_row_format(query, "|"))
-    // {
-    //     sscanf(query, "p<|>dds[256]", id, typ, rangi);
-    //     sscanf(rangi, "p<,>A<s[25]>()[10]", ranga);
-    //     //Assign true rangs
-    //     if(typ == 1)
-    //     {
-    //         for(new i=0;i<MAX_RANG;i++)
-    //         {
-    //             if(strlen(ranga[i]) > 1) format(FracRang[id][i], 25, "%s", ranga[i]);
-    //         }
-    //     }
-    //     else
-    //     {
-    //         for(new i=0;i<MAX_RANG;i++)
-    //         {
-    //             if(strlen(ranga[i]) > 1) format(FamRang[id][i], 25, "%s", ranga[i]);
-    //         }
-    //     }
-    // }
-    // mysql_free_result();
-    // print("Wczytano rangi");
+        //Assign true rangs
+        if(typ == 1)
+        {
+            for(new i=0;i<MAX_RANG;i++)
+            {
+                if(strlen(ranga[i]) > 1) format(FracRang[id][i], 25, "%s", ranga[i]);
+            }
+        }
+        else
+        {
+            for(new i=0;i<MAX_RANG;i++)
+            {
+                if(strlen(ranga[i]) > 1) format(FamRang[id][i], 25, "%s", ranga[i]);
+            }
+        }
+		cache_delete(result);
+	}
+    print("Wczytano rangi");
 }
 
 WczytajSkiny()
