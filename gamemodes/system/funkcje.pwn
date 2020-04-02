@@ -9323,108 +9323,107 @@ ZoneTXD_Unload()
 
 Zone_StartAttack(zoneid, attacker, defender)
 {
-	//TODO: MySQL
-    // ZoneAttack[zoneid] = true; //make
+    ZoneAttack[zoneid] = true; //make
 
-    // if(attacker > 100) //gangi
-    // {
-    //     if(defender > 100) //gang-gang
-    //     {
-    //         foreach(new i : Player)
-    //         {
-    //             if(GetPlayerOrg(i) == attacker-100)
-    //             {
-    //                 MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-    //                 if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-    //                 SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
-    //             }
-    //             else if(GetPlayerOrg(i) == defender-100)
-    //             {
-    //                 MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-    //                 if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
-    //             }
-    //         }
-    //     }
-    //     else
-    //     {
-    //         foreach(new i : Player) //gang-frac
-    //         {
-    //             if(GetPlayerOrg(i) == attacker-100)
-    //             {
-    //                 MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-    //                 if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-    //                 SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
-    //             }
-    //             else if(defender != 0 && GetPlayerFraction(i) == defender)
-    //             {
-    //                 MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-    //                 if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
-    //             }
-    //         }
-    //     }
-    // }
-    // else  //frac
-    // {
-    //     if(defender > 100) //frac - gang
-    //     {
-    //         foreach(new i : Player)
-    //         {
-    //             if(GetPlayerFraction(i) == attacker)
-    //             {
-    //                 MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-    //                 if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-    //                 SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
-    //             }
-    //             else if(GetPlayerOrg(i) == defender-100)
-    //             {
-    //                 MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-    //                 if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
-    //             }
-    //         }
-    //     }
-    //     else
-    //     {
-    //         foreach(new i : Player) //frac - frac
-    //         {
-    //             if(GetPlayerFraction(i) == attacker)
-    //             {
-    //                 MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-    //                 if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-    //                 SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
-    //             }
-    //             else if(defender != 0 && GetPlayerFraction(i) == defender)
-    //             {
-    //                 MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-    //                 if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
-    //             }
-    //         }
-    //     }
-    // }
+    if(attacker > 100) //gangi
+    {
+        if(defender > 100) //gang-gang
+        {
+            foreach(new i : Player)
+            {
+                if(GetPlayerOrg(i) == attacker-100)
+                {
+                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
+                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
+                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
+                }
+                else if(GetPlayerOrg(i) == defender-100)
+                {
+                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
+                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
+                }
+            }
+        }
+        else
+        {
+            foreach(new i : Player) //gang-frac
+            {
+                if(GetPlayerOrg(i) == attacker-100)
+                {
+                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
+                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
+                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
+                }
+                else if(defender != 0 && GetPlayerFraction(i) == defender)
+                {
+                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
+                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
+                }
+            }
+        }
+    }
+    else  //frac
+    {
+        if(defender > 100) //frac - gang
+        {
+            foreach(new i : Player)
+            {
+                if(GetPlayerFraction(i) == attacker)
+                {
+                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
+                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
+                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
+                }
+                else if(GetPlayerOrg(i) == defender-100)
+                {
+                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
+                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
+                }
+            }
+        }
+        else
+        {
+            foreach(new i : Player) //frac - frac
+            {
+                if(GetPlayerFraction(i) == attacker)
+                {
+                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
+                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
+                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
+                }
+                else if(defender != 0 && GetPlayerFraction(i) == defender)
+                {
+                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
+                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
+                }
+            }
+        }
+    }
 
-    // new str[128];
-    // format(str, 128, "DELETE FROM `mru_strefylimit` WHERE `gang`='%d'", attacker);
-    // mysql_query(str);
-    // format(str, 128, "INSERT INTO `mru_strefylimit` (`gang`, `data`) VALUES ('%d', '%d')", attacker, gettime());
-    // mysql_query(str);
-    // format(str, 128, "UPDATE `mru_strefy` SET `expire`='%d' WHERE `id`='%d'", gettime()+86400, zoneid);
-    // mysql_query(str);
+    new str[128];
+    format(str, sizeof(str), "DELETE FROM `mru_strefylimit` WHERE `gang`='%d'", attacker);
+    mysql_tquery(mruMySQL_Connection, str);
+    format(str, sizeof(str), "INSERT INTO `mru_strefylimit` (`gang`, `data`) VALUES ('%d', '%d')", attacker, gettime());
+    mysql_tquery(mruMySQL_Connection, str);
+    format(str, sizeof(str), "UPDATE `mru_strefy` SET `expire`='%d' WHERE `id`='%d'", gettime()+86400, zoneid);
+    mysql_tquery(mruMySQL_Connection, str);
 
-    // ZoneProtect[zoneid] = 1;
-    // ZoneAttackData[zoneid][2] = attacker;
-    // ZoneAttackData[zoneid][3] = defender;
-    // ZoneGangLimit[attacker] = false;
-    // format(str, 128, "ZONEDEFTIME_%d", zoneid);
-    // SetSVarInt(str, ZONE_DEF_TIME);
-    // ZoneAttackTimer[zoneid] = SetTimerEx("Zone_AttackEnd", ZONE_DEF_TIME*1000, 0, "iii", zoneid, attacker, defender);
-    // printf("[GangZone] Atak na strefê %d przez %d. Atakuje %d osób broni %d osób.", zoneid, attacker, ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
+    ZoneProtect[zoneid] = 1;
+    ZoneAttackData[zoneid][2] = attacker;
+    ZoneAttackData[zoneid][3] = defender;
+    ZoneGangLimit[attacker] = false;
+    format(str, sizeof(str), "ZONEDEFTIME_%d", zoneid);
+    SetSVarInt(str, ZONE_DEF_TIME);
+    ZoneAttackTimer[zoneid] = SetTimerEx("Zone_AttackEnd", ZONE_DEF_TIME*1000, 0, "iii", zoneid, attacker, defender);
+    printf("[GangZone] Atak na strefê %d przez %d. Atakuje %d osób broni %d osób.", zoneid, attacker, ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
 }
 
 Zone_GangUpdate(bool:cash=false)
