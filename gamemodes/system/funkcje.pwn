@@ -5065,25 +5065,29 @@ orgLoad()
     printf("%d | Wczytano organizacje", rows);
 }
 
-orgSave(lID, savetype)
+orgSave(id, savetype)
 {
-	//TODO: MySQL
-    // if(!orgIsValid(lID)) return 0;
-    // if(!MYSQL_SAVING) return 1;
-    // new lQuery[512];
-	// new name_escaped[32];
-	// new motd_escaped[128];
-	// mysql_real_escape_string(OrgInfo[lID][o_Name], name_escaped);
-	// mysql_real_escape_string(OrgInfo[lID][o_Motd], motd_escaped);
+    if(!orgIsValid(id)) return 0;
+    new query[512];
 	
-    // switch(savetype)
-    // {
-    //     case ORG_SAVE_TYPE_BASIC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `UID`='%d'",
-    //     OrgInfo[lID][o_Type],OrgInfo[lID][o_Color],OrgInfo[lID][o_Spawn][0],OrgInfo[lID][o_Spawn][1],OrgInfo[lID][o_Spawn][2],OrgInfo[lID][o_Spawn][3], OrgInfo[lID][o_Int], OrgInfo[lID][o_VW], OrgInfo[lID][o_UID]);
-    //     case ORG_SAVE_TYPE_DESC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Name`='%s', `Motd`='%s' WHERE `UID`='%d'", name_escaped, motd_escaped, OrgInfo[lID][o_UID]);
-    // }
-    // if(lQuery[0]) mysql_query(lQuery);
-    // return 1;
+    switch(savetype)
+    {
+        case ORG_SAVE_TYPE_BASIC: 
+		{
+			mysql_format(mruMySQL_Connection, query, sizeof(query), 
+				"UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `UID`='%d'",
+        		OrgInfo[id][o_Type],OrgInfo[id][o_Color],OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], OrgInfo[id][o_Int], OrgInfo[id][o_VW], OrgInfo[id][o_UID]
+			);
+		}
+        case ORG_SAVE_TYPE_DESC: 
+		{
+			mysql_format(mruMySQL_Connection, query, sizeof(query), "UPDATE `mru_org` SET `Name`='%e', `Motd`='%e' WHERE `UID`='%d'", 
+				OrgInfo[id][o_Name], OrgInfo[id][o_Motd], OrgInfo[id][o_UID]
+			);
+		}
+    }
+    if(query[0]) mysql_tquery(mruMySQL_Connection, query);
+    return 1;
 }
 
 orgAdd(typ, name[], uid, id)
