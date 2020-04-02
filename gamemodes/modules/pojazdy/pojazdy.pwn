@@ -541,15 +541,14 @@ Car_LoadForPlayer(playerid)
 
 Car_UnloadForPlayer(playerid)
 {
-    //TODO: MySQL
-    // new lVehUID;
-    // for(new i=0;i<MAX_CAR_SLOT;i++)
-    // {
-	// 	lVehUID = PlayerInfo[playerid][pCars][i];
-    //     if(lVehUID <= 0 || lVehUID >= MAX_CARS) continue;
-    //     if(CarData[lVehUID][c_ID] != 0) continue;
-    //     Car_ClearMem(lVehUID);
-    // }
+    new lVehUID;
+    for(new i=0;i<MAX_CAR_SLOT;i++)
+    {
+		lVehUID = PlayerInfo[playerid][pCars][i];
+        if(lVehUID <= 0 || lVehUID >= MAX_CARS) continue;
+        if(CarData[lVehUID][c_ID] != 0) continue;
+        Car_ClearMem(lVehUID);
+    }
 }
 
 CountPlayerCars(playerid)
