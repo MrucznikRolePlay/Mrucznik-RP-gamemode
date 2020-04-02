@@ -9435,8 +9435,8 @@ Zone_GangUpdate(bool:cash=false)
 	{
 		for(new i; i < cache_num_rows(); i++)
         {
-			cache_get_value_index_int(0, 0, gangid);
-			cache_get_value_index_int(0, 1, timegang);
+			cache_get_value_index_int(i, 0, gangid);
+			cache_get_value_index_int(i, 1, timegang);
 			
 			if(!(0 <= gangid <= MAX_FRAC)) continue;
 			if(gettime()-timegang >= 86400) ZoneGangLimit[gangid] = true; //1 day
