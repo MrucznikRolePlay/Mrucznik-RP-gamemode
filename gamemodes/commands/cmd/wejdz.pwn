@@ -34,7 +34,7 @@ YCMD:wejdz(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
 		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
-		
+		SetInteriorTimeAndWeather(playerid);
 //======================================================================
 //=================[Przeniesione - na nowy system]======================
 //======================================================================
