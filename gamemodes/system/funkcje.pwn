@@ -8598,33 +8598,34 @@ WczytajRangi()
 
 WczytajSkiny()
 {
-	//TODO: MySQL
-    // new query[256], id, typ, skiny[128],skin[MAX_SKIN_SELECT];
-    // mysql_query("SELECT * FROM `mru_skins`");
-    // mysql_store_result();
-
-    // while(mysql_fetch_row_format(query, "|"))
-    // {
-    //     sscanf(query, "p<|>dds[128]", typ, id, skiny);
-    //     sscanf(skiny, "p<,>A<d>(0)[22]", skin);
-
-    //     if(typ == 1)
-    //     {
-    //         for(new i=0;i<MAX_SKIN_SELECT;i++)
-    //         {
-    //             if(skin[i] > 0) FRAC_SKINS[id][i] = skin[i];
-    //         }
-    //     }
-    //     else
-    //     {
-    //         for(new i=0;i<MAX_SKIN_SELECT;i++)
-    //         {
-    //             if(skin[i] > 0) FAM_SKINS[id][i] = skin[i];
-    //         }
-    //     }
-    // }
-    // mysql_free_result();
-    // print("Wczytano skiny");
+    new id, typ, skiny[128], skin[MAX_SKIN_SELECT];
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_skins`", true);
+	if(cache_is_valid(result))
+    {
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index_int(i, 0, typ);
+			cache_get_value_index_int(i, 1, id);
+			cache_get_value_index(i, 2, skiny);
+        	sscanf(skiny, "p<,>A<d>(0)[22]", skin);
+			if(typ == 1)
+			{
+				for(new j; j<MAX_SKIN_SELECT; j++)
+				{
+					if(skin[j] > 0) FRAC_SKINS[id][j] = skin[j];
+				}
+			}
+			else
+			{
+				for(new j; j<MAX_SKIN_SELECT; j++)
+				{
+					if(skin[j] > 0) FAM_SKINS[id][j] = skin[j];
+				}
+			}
+		}
+		cache_delete(result);
+	}
+    print("Wczytano skiny");
 }
 
 Config_FamilyScript()
