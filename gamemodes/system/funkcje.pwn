@@ -9428,33 +9428,37 @@ Zone_StartAttack(zoneid, attacker, defender)
 
 Zone_GangUpdate(bool:cash=false)
 {
-	//TODO: MySQL
-    // new string[256];
-    // new gangid, timegang;
-    // mysql_query("SELECT * FROM `mru_strefylimit`");
-    // mysql_store_result();
-    // while(mysql_fetch_row_format(string, "|"))
-    // {
-    //     sscanf(string, "p<|>dd", gangid, timegang);
-    //     if(!(0 <= gangid <= MAX_FRAC)) continue;
-    //     if(gettime()-timegang >= 86400) ZoneGangLimit[gangid] = true; //1 day
-    //     else ZoneGangLimit[gangid] = false;
-    // }
-    // mysql_free_result();
-    // if(cash)
-    // {
-    //     for(new i=0;i<MAX_ZONES;i++)
-    //     {
-    //         if(ZoneControl[i] > 0 && ZoneControl[i] < 100)
-    //         {
-    //             //Sejf_Add(ZoneControl[i], Zone_GetCash(i));
-    //         }
-    //         else if(ZoneControl[i]>100)
-    //         {
-    //             //SejfR_Add(ZoneControl[i]-100, Zone_GetCash(i));
-    //         }
-    //     }
-    // }
+    new string[256];
+    new gangid, timegang;
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_strefylimit`", true);
+
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+        {
+			cache_get_value_index_int(0, 0, gangid);
+			cache_get_value_index_int(0, 1, timegang);
+			
+			if(!(0 <= gangid <= MAX_FRAC)) continue;
+			if(gettime()-timegang >= 86400) ZoneGangLimit[gangid] = true; //1 day
+			else ZoneGangLimit[gangid] = false;
+		}
+		cache_delete(result);
+	}
+    if(cash)
+    {
+        for(new i=0;i<MAX_ZONES;i++)
+        {
+            if(ZoneControl[i] > 0 && ZoneControl[i] < 100)
+            {
+                //Sejf_Add(ZoneControl[i], Zone_GetCash(i));
+            }
+            else if(ZoneControl[i]>100)
+            {
+                //SejfR_Add(ZoneControl[i]-100, Zone_GetCash(i));
+            }
+        }
+    }
 }
 
 public Zone_AttackEnd(zoneid, attacker, defender)
