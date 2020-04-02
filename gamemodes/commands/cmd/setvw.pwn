@@ -49,7 +49,7 @@ YCMD:setvw(playerid, params[], help)
 
 		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || PlayerInfo[playerid][pNewAP] >= 1)
 		{
-			if(GetPlayerVirtualWorld(gracz) == intid) return SendClientMessage(playerid, COLOR_GRAD1, sprintf("%s ma ju¿ ustawiony %d virtualworld.", GetNick(gracz), intid));
+			if(GetPlayerVirtualWorld(gracz) == intid) return 1;
 			SetPlayerVirtualWorld(gracz, intid);
 			format(string, sizeof(string), "Ustawi³eœ %s virtualworld nr %d.", GetNick(gracz), intid);
 			SendClientMessage(playerid, COLOR_GRAD1, string);
