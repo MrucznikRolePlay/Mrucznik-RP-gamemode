@@ -5774,27 +5774,37 @@ public OnPlayerUpdate(playerid)
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
 		return 1;
     }
-	if(Spectate[playerid] != INVALID_PLAYER_ID)
+	if(Spectate[playerid] != INVALID_PLAYER_ID && pSpectatingCanChange[playerid] == 1)
     {
-		new keys, ud,lr, actualid = INVALID_PLAYER_ID;
+		new keys, ud,lr;
         GetPlayerKeys(playerid, keys, ud, lr);
         if(lr == KEY_RIGHT) //NEXT
 		{
-			foreach(new i : Player)
+			if(IsPlayerConnected(Spectate[playerid]++))
 			{
-				if(i == playerid) continue;
-				if(actualid != INVALID_PLAYER_ID) //if is set
+				if(PlayerInfo[Spectate[playerid]++][pAdmin] > 0)
 				{
-					new str[6];
-                	valstr(str, i);
-                    RunCommand(playerid, "/spec",  str);
-					break;
+					SendClientMessage(playerid, COLOR_LIGHTRED, "Nastêpne id jest admina.");
+					return 1;
 				}
-                else if(i == Spectate[playerid]) //if not set and expect
+				new str[6];
+				valstr(str, Spectate[playerid]++);
+				RunCommand(playerid, "/spec",  str);
+			}
+		}
+		else if(lr == KEY_LEFT)
+		{
+			if(IsPlayerConnected(Spectate[playerid]--))
+			{
+				if(PlayerInfo[Spectate[playerid]--][pAdmin] > 0)
 				{
-					actualid = i;
+					SendClientMessage(playerid, COLOR_LIGHTRED, "Nastêpne id jest admina.");
+					return 1;
 				}
-            }
+				new str[6];
+				valstr(str, Spectate[playerid]--);
+				RunCommand(playerid, "/spec",  str);
+			}
 		}
 		return 1;
     }

@@ -66,10 +66,14 @@ YCMD:spec(playerid, params[], help)
                 Unspec[playerid][sPvw] = GetPlayerVirtualWorld(playerid);
             }
 		   	Spectate[playerid] = pid;
+			pSpectatingCanChange[playerid] = 0;
+			SetTimerEx("Spectator_ChangedKeyBool", 250, false, "i", playerid);
 			new Float:health;
 			GetPlayerHealth(pid, health);
 			GetPlayerName(pid, giveplayer, sizeof(giveplayer));
 			new cash =  GetPlayerMoney(pid);
+			SetPlayerInterior(playerid, GetPlayerInterior(pid));
+			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
 			new specIP[32], iptext[64], jailWiadomosc[64];
@@ -95,8 +99,12 @@ YCMD:spec(playerid, params[], help)
 			PhoneOnline[playerid] = 1;
             TogglePlayerSpectating(playerid, 1);
             Streamer_ToggleAllItems(playerid, STREAMER_TYPE_OBJECT, 0);
+			TogglePlayerSpectating(playerid, 1);
+            Streamer_ToggleAllItems(playerid, STREAMER_TYPE_OBJECT, 0);
             SetTimerEx("SpecToggle", 3000, false, "i", playerid);
             if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
+            else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
+			if(IsPlayerInAnyVehicle(pid)) PlayerSpectateVehicle(playerid, GetPlayerVehicleID(pid), SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 2);
             else PlayerSpectatePlayer(playerid, pid, SPECTATE_MODE_NORMAL), SetPVarInt(playerid, "spec-type", 1);
 			if(playerTargetSpec[playerid] != INVALID_SPECTATE_ID)
 			{

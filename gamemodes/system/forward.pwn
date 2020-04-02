@@ -151,4 +151,6 @@ forward DamagedHP(playerid);
 forward CuffedAction(playerid, cuffedid);
 //forward UnCuffedAction(cop, cuffedid); to do
 forward DeathAdminWarning(playerid, killerid, reason) ;
+
+forward Spectator_ChangedKeyBool(playerid);
 //EOF
