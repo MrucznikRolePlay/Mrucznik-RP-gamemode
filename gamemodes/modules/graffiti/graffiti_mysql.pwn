@@ -28,7 +28,6 @@
 //------------------<[ MySQL: ]>--------------------
 stock graffiti_LoadMySQL(id = -1)
 {
-	new string[128];
 	new valueGraffiti;
 	new loadedGraffiti;
 	if(id == -1) //get all

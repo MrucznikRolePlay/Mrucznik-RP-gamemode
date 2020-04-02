@@ -291,7 +291,7 @@ Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
 
 Car_Load()
 {
-    new lLoad=gCars, unused;
+    new lLoad=gCars;
     new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_cars` WHERE `ownertype` != 3 AND `ownertype` != 0", true);
 	if(cache_is_valid(result))
 	{

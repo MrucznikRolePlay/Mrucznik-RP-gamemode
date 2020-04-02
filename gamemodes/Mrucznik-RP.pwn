@@ -5868,6 +5868,7 @@ VeryfiLastLogin(playerid)
 			return false;
 		}
 	}
+	return false;
 }
 
 PasswordConversion(playerid, accountPass[], password[])
