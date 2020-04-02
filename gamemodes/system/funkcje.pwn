@@ -8738,9 +8738,9 @@ Sejf_Load()
 	{
 		for(new i; i < cache_num_rows(); i++)
 		{
-			cache_get_value_index_int(0, 0, id);
-			cache_get_value_index_int(0, 1, typ);
-			cache_get_value_index_int(0, 2, kasa);
+			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, typ);
+			cache_get_value_index_int(i, 2, kasa);
 			if(typ == 1) Sejf_Frakcji[id] = kasa, validF[id] = true;
 			else if(typ == 2) Sejf_Rodziny[id] = kasa, validR[id] = true;
 			SafeLoaded = true;
@@ -9677,40 +9677,42 @@ Zone_Sync(playerid)
 
 Zone_Load()
 {
-	//TODO: MySQL
-    // new query[128];
-    // mysql_query("SELECT * FROM `mru_strefy`");
-    // mysql_store_result();
-    // new id, kontrol, expire, time=gettime();
-    // while(mysql_fetch_row_format(query, "|"))
-    // {
-    //     sscanf(query, "p<|>ddd", id, kontrol, expire);
-    //     ZoneControl[id] = kontrol;
-    //     if(expire == -1) ZoneProtect[id] = 1;
-    //     else if(time - expire < 86400) ZoneProtect[id] = 1;
-    //     else ZoneProtect[id] = 0;
-    // }
-    // mysql_free_result();
+    new id, kontrol, expire, time=gettime();
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_strefy`", true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+        {
+			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, kontrol);
+			cache_get_value_index_int(i, 2, expire);
+			ZoneControl[id] = kontrol;
+			if(expire == -1) ZoneProtect[id] = 1;
+			else if(time - expire < 86400) ZoneProtect[id] = 1;
+			else ZoneProtect[id] = 0;
+		}
+		cache_delete(result);
+	}
 
-    // if(ZoneControl[id] > 100)
-    // {
-    //     if(orgID(ZoneControl[id]-100) == 0xFFFF)
-    //     {
-    //         ZoneControl[id] = 0;
-    //         ZoneProtect[id] = 0;
-    //     }
-    // }
+    if(ZoneControl[id] > 100)
+    {
+        if(orgID(ZoneControl[id]-100) == 0xFFFF)
+        {
+            ZoneControl[id] = 0;
+            ZoneProtect[id] = 0;
+        }
+    }
 
-    // Zone_GangUpdate();
+    Zone_GangUpdate();
 
-    // for(new i=0;i<MAX_ZONES;i++)
-    // {
-    //     id = GangZoneCreate(Zone_Data[i][0],Zone_Data[i][1],Zone_Data[i][2],Zone_Data[i][3]);
-    //     if(i == 0) Zone_Points[0] = id;
+    for(new i=0;i<MAX_ZONES;i++)
+    {
+        id = GangZoneCreate(Zone_Data[i][0],Zone_Data[i][1],Zone_Data[i][2],Zone_Data[i][3]);
+        if(i == 0) Zone_Points[0] = id;
 
-    //     Zone_Area[i] = ((Zone_Data[i][2]-Zone_Data[i][0])*(Zone_Data[i][3]-Zone_Data[i][1]));
-    // }
-    // Zone_Points[1] = id;
+        Zone_Area[i] = ((Zone_Data[i][2]-Zone_Data[i][0])*(Zone_Data[i][3]-Zone_Data[i][1]));
+    }
+    Zone_Points[1] = id;
 }
 
 Zone_CheckPossToAttack(playerid, zoneid)
