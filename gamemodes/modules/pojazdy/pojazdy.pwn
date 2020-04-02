@@ -418,50 +418,52 @@ Car_Load()
 
 Car_LoadEx(lUID)
 {
-    //TODO: MySQL
-    // new string[256];
-    // new lVehID = Car_GetFromQueue(), bool:doadd=false, unused;
-    // if(lVehID == -1) lVehID = gCars, doadd=true;
-    // format(string, 256, "SELECT * FROM `mru_cars` WHERE `UID`='%d'", lUID);
-    // mysql_query(string);
-    // mysql_store_result();
-    // if(mysql_num_rows())
-    // {
-    //     mysql_fetch_row_format(string, "|");
-    //     sscanf(string, "p<|>ddddfffffddddlddddddddddds[32]",
-    //     CarData[lVehID][c_UID],
-    //     CarData[lVehID][c_OwnerType],
-    //     CarData[lVehID][c_Owner],
-    //     CarData[lVehID][c_Model],
-    //     CarData[lVehID][c_Pos][0],
-    //     CarData[lVehID][c_Pos][1],
-    //     CarData[lVehID][c_Pos][2],
-    //     CarData[lVehID][c_Rot],
-    //     CarData[lVehID][c_HP],
-    //     CarData[lVehID][c_Tires],
-    //     CarData[lVehID][c_Color][0],
-    //     CarData[lVehID][c_Color][1],
-    //     CarData[lVehID][c_Nitro],
-    //     CarData[lVehID][c_bHydraulika],
-    //     CarData[lVehID][c_Felgi],
-    //     CarData[lVehID][c_Malunek],
-    //     CarData[lVehID][c_Spoiler],
-    //     CarData[lVehID][c_Bumper][0],
-    //     CarData[lVehID][c_Bumper][1],
-    //     CarData[lVehID][c_Keys],
-    //     CarData[lVehID][c_Neon],
-    //     CarData[lVehID][c_Rang],
-    //     CarData[lVehID][c_Int],
-    //     CarData[lVehID][c_VW],
-    //     CarData[lVehID][c_Rejestracja],
-    //     unused);
+    new string[256];
+    new lVehID = Car_GetFromQueue(), bool:doadd=false;
+    if(lVehID == -1) lVehID = gCars, doadd=true;
+    format(string, 256, "SELECT * FROM `mru_cars` WHERE `UID`='%d'", lUID);
+    new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+    if(cache_is_valid(result))
+    {
+        if(cache_num_rows())
+        {
+            cache_get_value_index_int(0, 0, CarData[gCars][c_UID]);
+            cache_get_value_index_int(0, 1, CarData[gCars][c_OwnerType]);
+            cache_get_value_index_int(0, 2, CarData[gCars][c_Owner]);
+            cache_get_value_index_int(0, 3, CarData[gCars][c_Model]);
+            cache_get_value_index_float(0, 4, CarData[gCars][c_Pos][0]);
+            cache_get_value_index_float(0, 5, CarData[gCars][c_Pos][1]);
+            cache_get_value_index_float(0, 6, CarData[gCars][c_Pos][2]);
+            cache_get_value_index_float(0, 7, CarData[gCars][c_Rot]);
+            cache_get_value_index_float(0, 8, CarData[gCars][c_HP]);
+            cache_get_value_index_int(0, 9, CarData[gCars][c_Tires]);
+            cache_get_value_index_int(0, 10, CarData[gCars][c_Color][0]);
+            cache_get_value_index_int(0, 11, CarData[gCars][c_Color][1]);
+            cache_get_value_index_int(0, 12, CarData[gCars][c_Nitro]);
+            cache_get_value_index_int(0, 13, CarData[gCars][c_bHydraulika]);
+            cache_get_value_index_int(0, 14, CarData[gCars][c_Felgi]);
+            cache_get_value_index_int(0, 15, CarData[gCars][c_Malunek]);
+            cache_get_value_index_int(0, 16, CarData[gCars][c_Spoiler]);
+            cache_get_value_index_int(0, 17, CarData[gCars][c_Bumper][0]);
+            cache_get_value_index_int(0, 18, CarData[gCars][c_Bumper][1]);
+            cache_get_value_index_int(0, 19, CarData[gCars][c_Keys]);
+            cache_get_value_index_int(0, 20, CarData[gCars][c_Neon]);
+            cache_get_value_index_int(0, 21, CarData[gCars][c_Rang]);
+            cache_get_value_index_int(0, 22, CarData[gCars][c_Int]);
+            cache_get_value_index_int(0, 23, CarData[gCars][c_VW]);
+            //24 unused
+            cache_get_value_index_int(0, 25, CarData[gCars][c_Siren]);
+            cache_get_value_index(0, 26, CarData[gCars][c_Rejestracja]);
 
-    //     if(doadd) gCars++;
-
-    //     mysql_free_result();
-    // }
-    // else return -1;
-    // return lVehID;
+            if(doadd) gCars++;
+        }
+        else
+        {
+            lVehID = -1;
+        }
+        cache_delete(result);
+    }
+    return lVehID;
 }
 
 Car_LoadForPlayer(playerid)
