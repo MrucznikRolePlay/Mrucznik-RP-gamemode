@@ -468,77 +468,77 @@ Car_LoadEx(lUID)
 
 Car_LoadForPlayer(playerid)
 {
-    //TODO: MySQL
-    // new string[256], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8], unused;
+    new string[256], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8];
 
-    // for(new i=0;i<MAX_VEHICLES;i++)
-    // {
-    //     new lcar = VehicleUID[i][vUID];
-    //     if(lcar == 0) continue;
-    //     if(CarData[lcar][c_OwnerType] == CAR_OWNER_PLAYER && CarData[lcar][c_Owner] == lPUID)
-    //     {
-    //         format(string, 64, "%d|", CarData[lcar][c_UID]);
-    //         strcat(lList, string);
-    //         //Przypisanie auta, które ju¿ istenije w grze - brak potrzeby ponownego ³adowania do systemu, tylko pobranie z bazy.
-    //         PlayerInfo[playerid][pCars][lUsed++] = lcar;
-    //     }
-    // }
+    for(new i=0;i<MAX_VEHICLES;i++)
+    {
+        new lcar = VehicleUID[i][vUID];
+        if(lcar == 0) continue;
+        if(CarData[lcar][c_OwnerType] == CAR_OWNER_PLAYER && CarData[lcar][c_Owner] == lPUID)
+        {
+            format(string, 64, "%d|", CarData[lcar][c_UID]);
+            strcat(lList, string);
+            //Przypisanie auta, które ju¿ istenije w grze - brak potrzeby ponownego ³adowania do systemu, tylko pobranie z bazy.
+            PlayerInfo[playerid][pCars][lUsed++] = lcar;
+        }
+    }
 
-    // new lVehID = Car_GetFromQueue();
-    // if(lVehID == -1) lVehID = gCars;
+    new lVehID = Car_GetFromQueue();
+    if(lVehID == -1) lVehID = gCars;
 
-    // format(string, 128, "SELECT * FROM `mru_cars` WHERE `ownertype`='%d' AND `owner`='%d'", CAR_OWNER_PLAYER, lPUID);
-    // mysql_query(string);
-    // mysql_store_result();
-    // while(mysql_fetch_row_format(string, "|"))
-    // {
-    //     sscanf(string, "p<|>d", lsID);
-    //     format(lsSearch, 8, "%d|", lsID);
-    //     if(strfind(lList, lsSearch) == -1)
-    //     {
-    //         sscanf(string, "p<|>ddddfffffddddlddddddddddds[32]",
-    //         CarData[lVehID][c_UID],
-    //         CarData[lVehID][c_OwnerType],
-    //         CarData[lVehID][c_Owner],
-    //         CarData[lVehID][c_Model],
-    //         CarData[lVehID][c_Pos][0],
-    //         CarData[lVehID][c_Pos][1],
-    //         CarData[lVehID][c_Pos][2],
-    //         CarData[lVehID][c_Rot],
-    //         CarData[lVehID][c_HP],
-    //         CarData[lVehID][c_Tires],
-    //         CarData[lVehID][c_Color][0],
-    //         CarData[lVehID][c_Color][1],
-    //         CarData[lVehID][c_Nitro],
-    //         CarData[lVehID][c_bHydraulika],
-    //         CarData[lVehID][c_Felgi],
-    //         CarData[lVehID][c_Malunek],
-    //         CarData[lVehID][c_Spoiler],
-    //         CarData[lVehID][c_Bumper][0],
-    //         CarData[lVehID][c_Bumper][1],
-    //         CarData[lVehID][c_Keys],
-    //         CarData[lVehID][c_Neon],
-    //         CarData[lVehID][c_Rang],
-    //         CarData[lVehID][c_Int],
-    //         CarData[lVehID][c_VW],
-    //         CarData[lVehID][c_Rejestracja],
-    //         unused);
+    format(string, sizeof(string), "SELECT * FROM `mru_cars` WHERE `ownertype`='%d' AND `owner`='%d'", CAR_OWNER_PLAYER, lPUID);
+    new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+        {
+            cache_get_value_index_int(i, 0, lsID);
+            if(strfind(lList, lsSearch) == -1)
+            {
+                cache_get_value_index_int(i, 0, CarData[gCars][c_UID]);
+                cache_get_value_index_int(i, 1, CarData[gCars][c_OwnerType]);
+                cache_get_value_index_int(i, 2, CarData[gCars][c_Owner]);
+                cache_get_value_index_int(i, 3, CarData[gCars][c_Model]);
+                cache_get_value_index_float(i, 4, CarData[gCars][c_Pos][0]);
+                cache_get_value_index_float(i, 5, CarData[gCars][c_Pos][1]);
+                cache_get_value_index_float(i, 6, CarData[gCars][c_Pos][2]);
+                cache_get_value_index_float(i, 7, CarData[gCars][c_Rot]);
+                cache_get_value_index_float(i, 8, CarData[gCars][c_HP]);
+                cache_get_value_index_int(i, 9, CarData[gCars][c_Tires]);
+                cache_get_value_index_int(i, 10, CarData[gCars][c_Color][0]);
+                cache_get_value_index_int(i, 11, CarData[gCars][c_Color][1]);
+                cache_get_value_index_int(i, 12, CarData[gCars][c_Nitro]);
+                cache_get_value_index_int(i, 13, CarData[gCars][c_bHydraulika]);
+                cache_get_value_index_int(i, 14, CarData[gCars][c_Felgi]);
+                cache_get_value_index_int(i, 15, CarData[gCars][c_Malunek]);
+                cache_get_value_index_int(i, 16, CarData[gCars][c_Spoiler]);
+                cache_get_value_index_int(i, 17, CarData[gCars][c_Bumper][0]);
+                cache_get_value_index_int(i, 18, CarData[gCars][c_Bumper][1]);
+                cache_get_value_index_int(i, 19, CarData[gCars][c_Keys]);
+                cache_get_value_index_int(i, 20, CarData[gCars][c_Neon]);
+                cache_get_value_index_int(i, 21, CarData[gCars][c_Rang]);
+                cache_get_value_index_int(i, 22, CarData[gCars][c_Int]);
+                cache_get_value_index_int(i, 23, CarData[gCars][c_VW]);
+                //24 unused
+                cache_get_value_index_int(i, 25, CarData[gCars][c_Siren]);
+                cache_get_value_index(i, 26, CarData[gCars][c_Rejestracja]);
 
-    //         PlayerInfo[playerid][pCars][lUsed++] = lVehID;
+                PlayerInfo[playerid][pCars][lUsed++] = lVehID;
 
-    //         lVehID = Car_GetFromQueue();
-    //         if(lVehID == -1) lVehID = ++gCars;
-    //     }
-    // }
-    // mysql_free_result();
+                lVehID = Car_GetFromQueue();
+                if(lVehID == -1) lVehID = ++gCars;
+            }
+        }
+        cache_delete(result);
+    }
 
-    // new keys = PlayerInfo[playerid][pKluczeAuta];
-    // if(keys > 0)
-    // {
-    //     //Wczytanie pojazdu z kluczyków
-    //     new id = Car_GetIDXFromUID(keys);
-    //     if(id == -1) Car_LoadEx(keys);
-    // }
+    new keys = PlayerInfo[playerid][pKluczeAuta];
+    if(keys > 0)
+    {
+        //Wczytanie pojazdu z kluczyków
+        new id = Car_GetIDXFromUID(keys);
+        if(id == -1) Car_LoadEx(keys);
+    }
 }
 
 Car_UnloadForPlayer(playerid)
