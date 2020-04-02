@@ -5041,17 +5041,28 @@ SaveIRC()
 
 orgLoad()
 {
-	//TODO: MySQL
-    // new lQuery[256], lID, lRow;
-    // mysql_query("SELECT * FROM `mru_org`");
-    // mysql_store_result();
-    // while(mysql_fetch_row_format(lQuery, "|"))
-    // {
-    //     sscanf(lQuery, "p<|>de<dds[32]s[128]hffffdd>", lRow, OrgInfo[lID]);
-    //     lID++;
-    // }
-    // mysql_free_result();
-    // printf("%d | Wczytano organizacje", lID);
+    new rows;
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_org`", true);
+	if(cache_is_valid(result))
+	{
+		rows = cache_num_rows();
+		for(new i; i < rows; i++)
+		{
+			cache_get_value_index_int(i, 0, OrgInfo[i][o_UID]);
+			cache_get_value_index_int(i, 1, OrgInfo[i][o_Type]);
+			cache_get_value_index(i, 2, OrgInfo[i][o_Name], 32);
+			cache_get_value_index(i, 3, OrgInfo[i][o_Motd], 128);
+			cache_get_value_index_int(i, 4, OrgInfo[i][o_Color]);
+			cache_get_value_index_float(i, 5, OrgInfo[i][o_Spawn][0]);
+			cache_get_value_index_float(i, 6, OrgInfo[i][o_Spawn][1]);
+			cache_get_value_index_float(i, 7, OrgInfo[i][o_Spawn][2]);
+			cache_get_value_index_float(i, 8, OrgInfo[i][o_Spawn][3]);
+			cache_get_value_index_int(i, 9, OrgInfo[i][o_Int]);
+			cache_get_value_index_int(i, 10, OrgInfo[i][o_VW]);
+		}
+		cache_delete(result);
+	}
+    printf("%d | Wczytano organizacje", rows);
 }
 
 orgSave(lID, savetype)
