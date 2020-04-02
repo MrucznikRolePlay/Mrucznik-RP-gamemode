@@ -32,6 +32,7 @@ YCMD:wejdz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
+        if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
 		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
 		
 //======================================================================
