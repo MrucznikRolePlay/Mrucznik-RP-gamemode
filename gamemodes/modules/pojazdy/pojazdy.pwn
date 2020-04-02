@@ -739,13 +739,12 @@ Car_Unspawn(v, bool:playercall=false)
 
 Car_Destroy(lV)
 {
-	//TODO: MySQL
-    // if(CarData[lV][c_ID] != 0) Car_Unspawn(CarData[lV][c_ID], true);
-    // new string[64];
-    // format(string, 64, "DELETE FROM `mru_cars` WHERE `UID`='%d'", CarData[lV][c_UID]);
-    // mysql_query(string);
+    if(CarData[lV][c_ID] != 0) Car_Unspawn(CarData[lV][c_ID], true);
+    new string[64];
+    format(string, 64, "DELETE FROM `mru_cars` WHERE `UID`='%d'", CarData[lV][c_UID]);
+    mysql_tquery(mruMySQL_Connection, string);
 
-    // Car_ClearMem(lV);
+    Car_ClearMem(lV);
 }
 
 Car_Save(lUID, lType)
