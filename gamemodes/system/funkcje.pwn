@@ -8534,7 +8534,6 @@ LoadServerInfo()
 
 LoadConfig()
 {
-	//TODO: remove from mysql
     new data[256];
     new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_config`", true);
     if(cache_is_valid(result))
@@ -8630,50 +8629,53 @@ WczytajSkiny()
 
 Config_FamilyScript()
 {
-	//TODO: MySQL
-    // new query[256], id, nazwa[20];
-    // mysql_query("SELECT * FROM `mru_rodziny`");
-    // mysql_store_result();
-    // while(mysql_fetch_row_format(query, "|"))
-    // {
-    //     sscanf(query, "p<|>s[20]d",nazwa, id);
-    //     if(strcmp(nazwa, "FAMILY_SAD") == 0)
-    //     {
-    //         FAMILY_SAD = id;
-    //         printf("FAMILY_SAD = %d", FAMILY_SAD);
-    //     }
-    //     if(strcmp(nazwa, "FAMILY_RSC") == 0)
-    //     {
-    //         FAMILY_RSC = id;
-    //         printf("FAMILY_RSC = %d", FAMILY_RSC);
-    //     }
-    //     if(strcmp(nazwa, "FAMILY_ALHAMBRA") == 0)
-    //     {
-    //         FAMILY_ALHAMBRA = id;
-    //         printf("FAMILY_ALHAMBRA = %d", FAMILY_ALHAMBRA);
-    //     }
-    //     if(strcmp(nazwa, "FAMILY_VINYL") == 0)
-    //     {
-    //         FAMILY_VINYL = id;
-    //         printf("FAMILY_VINYL = %d", FAMILY_VINYL);
-    //     }
-    //     if(strcmp(nazwa, "FAMILY_IBIZA") == 0)
-    //     {
-    //         FAMILY_IBIZA = id;
-    //         printf("FAMILY_IBIZA = %d", FAMILY_IBIZA);
-    //     }
-    //     if(strcmp(nazwa, "FAMILY_FDU") == 0)
-    //     {
-    //         FAMILY_FDU = id;
-    //         printf("FAMILY_FDU = %d", FAMILY_FDU);
-    //     }
-	// 	if(strcmp(nazwa, "FAMILY_SEKTA") == 0)
-    //     {
-    //         FAMILY_SEKTA = id;
-    //         printf("FAMILY_SEKTA = %d", FAMILY_SEKTA);
-    //     }
-    // }
-    // mysql_free_result();
+    new id, nazwa[20];
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_rodziny`", true);
+	
+	if(cache_is_valid(result))
+    {
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index(i, 0, nazwa);
+			cache_get_value_index_int(i, 0, id);
+			if(strcmp(nazwa, "FAMILY_SAD") == 0)
+			{
+				FAMILY_SAD = id;
+				printf("FAMILY_SAD = %d", FAMILY_SAD);
+			}
+			if(strcmp(nazwa, "FAMILY_RSC") == 0)
+			{
+				FAMILY_RSC = id;
+				printf("FAMILY_RSC = %d", FAMILY_RSC);
+			}
+			if(strcmp(nazwa, "FAMILY_ALHAMBRA") == 0)
+			{
+				FAMILY_ALHAMBRA = id;
+				printf("FAMILY_ALHAMBRA = %d", FAMILY_ALHAMBRA);
+			}
+			if(strcmp(nazwa, "FAMILY_VINYL") == 0)
+			{
+				FAMILY_VINYL = id;
+				printf("FAMILY_VINYL = %d", FAMILY_VINYL);
+			}
+			if(strcmp(nazwa, "FAMILY_IBIZA") == 0)
+			{
+				FAMILY_IBIZA = id;
+				printf("FAMILY_IBIZA = %d", FAMILY_IBIZA);
+			}
+			if(strcmp(nazwa, "FAMILY_FDU") == 0)
+			{
+				FAMILY_FDU = id;
+				printf("FAMILY_FDU = %d", FAMILY_FDU);
+			}
+			if(strcmp(nazwa, "FAMILY_SEKTA") == 0)
+			{
+				FAMILY_SEKTA = id;
+				printf("FAMILY_SEKTA = %d", FAMILY_SEKTA);
+			}
+		}
+		cache_delete(result);
+	}
 }
 
 WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
@@ -8730,18 +8732,21 @@ SejfR_Save(frakcja)
 
 Sejf_Load()
 {
-	//TODO: MySQL
-    // new query[128], id, typ, kasa, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
-    // mysql_query("SELECT * FROM `mru_sejfy`");
-    // mysql_store_result();
-    // while(mysql_fetch_row_format(query, "|"))
-    // {
-    //     sscanf(query, "p<|>ddd", id, typ, kasa);
-    //     if(typ == 1) Sejf_Frakcji[id] = kasa, validF[id] = true;
-    //     else if(typ == 2) Sejf_Rodziny[id] = kasa, validR[id] = true;
-    //     SafeLoaded = true;
-    // }
-    // mysql_free_result();
+    new id, typ, kasa, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_sejfy`", true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index_int(0, 0, id);
+			cache_get_value_index_int(0, 1, typ);
+			cache_get_value_index_int(0, 2, kasa);
+			if(typ == 1) Sejf_Frakcji[id] = kasa, validF[id] = true;
+			else if(typ == 2) Sejf_Rodziny[id] = kasa, validR[id] = true;
+			SafeLoaded = true;
+		}
+		cache_delete(result);
+	}
 }
 
 
