@@ -235,20 +235,21 @@ Car_RemovePlayerOwner(playerid, uid)
 
 Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
 {
-    new lUID, string[256], idx=-1;
+    new uid, string[256], idx=-1;
     format(string, 256, "INSERT INTO `mru_cars` (`model`, `x`, `y`, `z`, `angle`, `color1`, `color2`) \
         VALUES (%d, %.2f, %.2f, %.2f, %.1f, %d, %d)", 
         model, x, y, z, angle, color1, color2
     );
-    if(mysql_query(string))
+    new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+    if(cache_is_valid(result) && cache_insert_id() != -1)
     {
-        lUID = mysql_insert_id();
+        uid = cache_insert_id();
 
         new bool:doadd=false;
         idx = Car_GetFromQueue();
         if(idx == -1) idx = gCars, doadd=true;
 
-        CarData[idx][c_UID] = lUID;
+        CarData[idx][c_UID] = uid;
         CarData[idx][c_ID] = CreateVehicle(model, x, y, z, angle, color1, color2, -1);
         CarData[idx][c_Owner] = 0;
         CarData[idx][c_OwnerType] = 0;
