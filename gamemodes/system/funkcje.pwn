@@ -9428,7 +9428,6 @@ Zone_StartAttack(zoneid, attacker, defender)
 
 Zone_GangUpdate(bool:cash=false)
 {
-    new string[256];
     new gangid, timegang;
 	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_strefylimit`", true);
 
@@ -9463,180 +9462,179 @@ Zone_GangUpdate(bool:cash=false)
 
 public Zone_AttackEnd(zoneid, attacker, defender)
 {
-	//TODO: MySQL
-    // ZoneAttack[zoneid] = false;
-    // new str[128];
-    // if(ZoneAttackData[zoneid][1] < ZoneAttackData[zoneid][0]) //win
-    // {
-    //     format(str, 128, "UPDATE `mru_strefy` SET `gang`='%d' WHERE `id`='%d'", attacker, zoneid);
-    //     mysql_query(str);
+    ZoneAttack[zoneid] = false;
+    new str[128];
+    if(ZoneAttackData[zoneid][1] < ZoneAttackData[zoneid][0]) //win
+    {
+        format(str, 128, "UPDATE `mru_strefy` SET `gang`='%d' WHERE `id`='%d'", attacker, zoneid);
+        mysql_tquery(mruMySQL_Connection, str);
 
-    //     ZoneControl[zoneid] = attacker;
-    //     new thisorg = orgID(ZoneControl[zoneid]-100);
-    //     foreach(new i : Player)
-    //     {
-    //         if(ZoneControl[zoneid] == FRAC_GROOVE)
-    //         {
-    //             GangZoneHideForPlayer(i, zoneid);
-    //             GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_GROOVE | 0x44);
-    //         }
-    //         else if(ZoneControl[zoneid] == FRAC_BALLAS)
-    //         {
-    //             GangZoneHideForPlayer(i, zoneid);
-    //             GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_BALLAZ | 0x44);
-    //         }
-    //         else if(ZoneControl[zoneid] == FRAC_VAGOS)
-    //         {
-    //             GangZoneHideForPlayer(i, zoneid);
-    //             GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_VAGOS | 0x44);
-    //         }
-    //         else if(ZoneControl[zoneid] == FRAC_WPS)
-    //         {
-    //             GangZoneHideForPlayer(i, zoneid);
-    //             GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_WPS | 0x44);
-    //         }
-    //         else
-    //         {
-    //             GangZoneHideForPlayer(i, zoneid);
-    //             GangZoneShowForPlayer(i, zoneid, OrgInfo[thisorg][o_Color] | 0x44);
-    //         }
-    //     }
+        ZoneControl[zoneid] = attacker;
+        new thisorg = orgID(ZoneControl[zoneid]-100);
+        foreach(new i : Player)
+        {
+            if(ZoneControl[zoneid] == FRAC_GROOVE)
+            {
+                GangZoneHideForPlayer(i, zoneid);
+                GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_GROOVE | 0x44);
+            }
+            else if(ZoneControl[zoneid] == FRAC_BALLAS)
+            {
+                GangZoneHideForPlayer(i, zoneid);
+                GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_BALLAZ | 0x44);
+            }
+            else if(ZoneControl[zoneid] == FRAC_VAGOS)
+            {
+                GangZoneHideForPlayer(i, zoneid);
+                GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_VAGOS | 0x44);
+            }
+            else if(ZoneControl[zoneid] == FRAC_WPS)
+            {
+                GangZoneHideForPlayer(i, zoneid);
+                GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_WPS | 0x44);
+            }
+            else
+            {
+                GangZoneHideForPlayer(i, zoneid);
+                GangZoneShowForPlayer(i, zoneid, OrgInfo[thisorg][o_Color] | 0x44);
+            }
+        }
         
-    //     if(attacker > 100) //gangi
-    //     {
-    //         if(defender > 100) //gang-gang
-    //         {
-    //             foreach(new i : Player)
-    //             {
-    //                 if(GetPlayerOrg(i) == attacker-100)
-    //                 {
-    //                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //                 else if(GetPlayerOrg(i) == defender-100)
-    //                 {
-    //                     MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             foreach(new i : Player) //gang-frac
-    //             {
-    //                 if(GetPlayerOrg(i) == attacker-100)
-    //                 {
-    //                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //                 else if(defender != 0 && GetPlayerFraction(i) == defender)
-    //                 {
-    //                     MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     else  //frac
-    //     {
-    //         if(defender > 100) //frac - gang
-    //         {
-    //             foreach(new i : Player)
-    //             {
-    //                 if(GetPlayerFraction(i) == attacker)
-    //                 {
-    //                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //                 else if(GetPlayerOrg(i) == defender-100)
-    //                 {
-    //                     MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             foreach(new i : Player) //frac - frac
-    //             {
-    //                 if(GetPlayerFraction(i) == attacker)
-    //                 {
-    //                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //                 else if(defender != 0 && GetPlayerFraction(i) == defender)
-    //                 {
-    //                     MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // else
-    // {
+        if(attacker > 100) //gangi
+        {
+            if(defender > 100) //gang-gang
+            {
+                foreach(new i : Player)
+                {
+                    if(GetPlayerOrg(i) == attacker-100)
+                    {
+                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                    else if(GetPlayerOrg(i) == defender-100)
+                    {
+                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                }
+            }
+            else
+            {
+                foreach(new i : Player) //gang-frac
+                {
+                    if(GetPlayerOrg(i) == attacker-100)
+                    {
+                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                    else if(defender != 0 && GetPlayerFraction(i) == defender)
+                    {
+                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                }
+            }
+        }
+        else  //frac
+        {
+            if(defender > 100) //frac - gang
+            {
+                foreach(new i : Player)
+                {
+                    if(GetPlayerFraction(i) == attacker)
+                    {
+                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                    else if(GetPlayerOrg(i) == defender-100)
+                    {
+                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                }
+            }
+            else
+            {
+                foreach(new i : Player) //frac - frac
+                {
+                    if(GetPlayerFraction(i) == attacker)
+                    {
+                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                    else if(defender != 0 && GetPlayerFraction(i) == defender)
+                    {
+                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
 
-    //     if(attacker > 100) //gangi
-    //     {
-    //         if(defender > 100) //gang-gang
-    //         {
-    //             foreach(new i : Player)
-    //             {
-    //                 if(GetPlayerOrg(i) == attacker-100)
-    //                 {
-    //                     MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //                 else if(GetPlayerOrg(i) == defender-100)
-    //                 {
-    //                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             foreach(new i : Player) //gang-frac
-    //             {
-    //                 if(GetPlayerOrg(i) == attacker-100)
-    //                 {
-    //                     MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //                 else if(defender != 0 && GetPlayerFraction(i) == defender)
-    //                 {
-    //                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     else  //frac
-    //     {
-    //         if(defender > 100) //frac - gang
-    //         {
-    //             foreach(new i : Player)
-    //             {
-    //                 if(GetPlayerFraction(i) == attacker)
-    //                 {
-    //                     MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //                 else if(GetPlayerOrg(i) == defender-100)
-    //                 {
-    //                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //             }
-    //         }
-    //         else
-    //         {
-    //             foreach(new i : Player) //frac - frac
-    //             {
-    //                 if(GetPlayerFraction(i) == attacker)
-    //                 {
-    //                     MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //                 else if(defender != 0 && GetPlayerFraction(i) == defender)
-    //                 {
-    //                     MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    // format(str, 128, "ZONEDEFTIME_%d", zoneid);
-    // DeleteSVar(str);
-    // printf("FINAL Attackers: %d Defenders: %d", ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
-    // GangZoneStopFlashForAll(zoneid);
-    // ZoneAttackData[zoneid][0] = 0;
-    // ZoneAttackData[zoneid][1] = 0;
+        if(attacker > 100) //gangi
+        {
+            if(defender > 100) //gang-gang
+            {
+                foreach(new i : Player)
+                {
+                    if(GetPlayerOrg(i) == attacker-100)
+                    {
+                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                    else if(GetPlayerOrg(i) == defender-100)
+                    {
+                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                }
+            }
+            else
+            {
+                foreach(new i : Player) //gang-frac
+                {
+                    if(GetPlayerOrg(i) == attacker-100)
+                    {
+                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                    else if(defender != 0 && GetPlayerFraction(i) == defender)
+                    {
+                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                }
+            }
+        }
+        else  //frac
+        {
+            if(defender > 100) //frac - gang
+            {
+                foreach(new i : Player)
+                {
+                    if(GetPlayerFraction(i) == attacker)
+                    {
+                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                    else if(GetPlayerOrg(i) == defender-100)
+                    {
+                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                }
+            }
+            else
+            {
+                foreach(new i : Player) //frac - frac
+                {
+                    if(GetPlayerFraction(i) == attacker)
+                    {
+                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                    else if(defender != 0 && GetPlayerFraction(i) == defender)
+                    {
+                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
+                    }
+                }
+            }
+        }
+    }
+    format(str, 128, "ZONEDEFTIME_%d", zoneid);
+    DeleteSVar(str);
+    printf("FINAL Attackers: %d Defenders: %d", ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
+    GangZoneStopFlashForAll(zoneid);
+    ZoneAttackData[zoneid][0] = 0;
+    ZoneAttackData[zoneid][1] = 0;
 }
 
 Zone_Sync(playerid)
