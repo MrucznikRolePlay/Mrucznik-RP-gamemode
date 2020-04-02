@@ -8503,7 +8503,7 @@ ChangeLSMCElevatorState()
 
 LoadServerInfo()
 {
-	//TODO: MySQL
+	//TODO: MySQL or remove
     // ServerInfo="\0";
     // mysql_query("SELECT `info` FROM `mru_serverinfo` WHERE `aktywne`=1 LIMIT 1");
     // mysql_store_result();
@@ -8534,28 +8534,32 @@ LoadServerInfo()
 
 LoadConfig()
 {
-	//TODO: MySQL
-    // new query[1024], data[256];
-    // mysql_query("SELECT * FROM `mru_config`");
-    // mysql_store_result();
-    // if(mysql_num_rows())
-    // {
-    //     mysql_fetch_row_format(query, "|");
-    //     sscanf(query, "p<|>s[128]s[128]dds[256]dd", RadioSANUno, RadioSANDos, ZONE_DISABLED, ZONE_DEF_TIME, data, STANOWE_GATE_KEY, TJD_Materials);
-    //     sscanf(data, "a<s[16]>[20]", AUDIO_LoginData);
-    // }
-	// mysql_free_result();
-    // for(new i=0;i<20;i++)
-    // {
-    //     if(strlen(AUDIO_LoginData[i]) > 1) AUDIO_LoginTotal++;
-    //     else break;
-    // }
+	//TODO: remove from mysql
+    new data[256];
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_config`", true);
+    if(cache_is_valid(result))
+    {
+		cache_get_value_index(0, 0, RadioSANUno);
+		cache_get_value_index(0, 1, RadioSANDos);
+		cache_get_value_index_int(0, 2, ZONE_DISABLED);
+		cache_get_value_index_int(0, 3, ZONE_DEF_TIME);
+		cache_get_value_index(0, 4, data);
+		cache_get_value_index_int(0, 5, STANOWE_GATE_KEY);
+		cache_get_value_index_int(0, 6, TJD_Materials);
+        sscanf(data, "a<s[16]>[20]", AUDIO_LoginData);
+		cache_delete(result);
+    }
+    for(new i=0;i<20;i++)
+    {
+        if(strlen(AUDIO_LoginData[i]) > 1) AUDIO_LoginTotal++;
+        else break;
+    }
 
-    // format(data, 256, "mrucznik-loginsound.lqs.pl/game/audio/%s.ogg", AUDIO_LoginData[0]);
+    format(data, 256, "mrucznik-loginsound.lqs.pl/game/audio/%s.ogg", AUDIO_LoginData[0]);
 
-    // format(VINYL_Stream, 128, "%s",RadioSANDos);
+    format(VINYL_Stream, 128, "%s",RadioSANDos);
 
-    // print("Wczytano podstawow¹ konfiguracjê");
+    print("Wczytano podstawow¹ konfiguracjê");
 }
 
 WczytajRangi()
