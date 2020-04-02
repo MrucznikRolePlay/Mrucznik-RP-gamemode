@@ -11872,34 +11872,26 @@ EDIT_ShowRangNames(playerid, typ, uid, bool:edit=false)
 
 EDIT_SaveRangs(typ, uid)
 {
-	//TODO: MySQL
-    // new lStr[256], lStr_escaped[256], query[512];
+    new string[256], query[512];
 
-    // for(new i=0;i<MAX_RANG;i++)
-    // {
-    //     if(strlen((typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i])) < 2)
-    //         format(lStr, 256, "%s-, ", lStr);
-    //     else
-    //         format(lStr, 256, "%s%s, ", lStr, (typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i]));
-    // }
-    // strdel(lStr, strlen(lStr)-2, strlen(lStr));
+    for(new i=0;i<MAX_RANG;i++)
+    {
+        if(strlen((typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i])) < 2)
+            format(string, 256, "%s-, ", string);
+        else
+            format(string, 256, "%s%s, ", string, (typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i]));
+    }
+    strdel(string, strlen(string)-2, strlen(string));
 
-    // format(query, 512, "SELECT `ID` FROM mru_nazwyrang WHERE `ID`='%d' AND `typ`='%d'", uid, typ+1);
-    // mysql_query(query);
-    // mysql_store_result();
-	// mysql_real_escape_string(lStr, lStr_escaped);
-    // if(mysql_num_rows())
-    // {
-    //     format(query, 512, "UPDATE mru_nazwyrang SET rangi='%s' WHERE `ID`='%d' AND `typ`='%d'", lStr_escaped, uid, typ+1);
-    // }
-    // else
-    // {
-    //     format(query, 512, "INSERT INTO mru_nazwyrang (rangi, ID, typ) VALUES ('%s', '%d', '%d')", lStr_escaped, uid, typ+1);
-    // }
-	// mysql_free_result();
-    // mysql_query(query);
-    // RANG_ApplyChanges[typ][uid] = false;
-    // return 1;
+	mysql_format(mruMySQL_Connection, query, sizeof(query), 
+		"INSERT INTO mru_nazwyrang (rangi, ID, typ) VALUES ('%e', '%d', '%d') \
+		ON DUPLICATE KEY UPDATE rangi='%e'", 
+		string, uid, typ+1, 
+		string
+	);
+    mysql_tquery(mruMySQL_Connection, query);
+    RANG_ApplyChanges[typ][uid] = false;
+    return 1;
 }
 
 forward TourCamera(playerid, step);
