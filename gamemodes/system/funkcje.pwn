@@ -5092,16 +5092,13 @@ orgSave(id, savetype)
 
 orgAdd(typ, name[], uid, id)
 {
-	//TODO: MySQL
-    // OrgInfo[id][o_UID] = uid;
-    // OrgInfo[id][o_Type] = typ;
-    // OrgInfo[id][o_Color] = 0xFF0000;
-    // orgSetName(id, name);
-    // new lStr[128];
-	// new name_escaped[32];
-	// mysql_real_escape_string(OrgInfo[id][o_Name], name_escaped);
-    // format(lStr, 128, "INSERT INTO `mru_org` (`UID`, `Name`, `Type`) VALUES ('%d', '%s', '%d')", uid, name_escaped, typ);
-    // mysql_query(lStr);
+    OrgInfo[id][o_UID] = uid;
+    OrgInfo[id][o_Type] = typ;
+    OrgInfo[id][o_Color] = 0xFF0000;
+    orgSetName(id, name);
+    new query[128];
+    mysql_format(mruMySQL_Connection, query, sizeof(query), "INSERT INTO `mru_org` (`UID`, `Name`, `Type`) VALUES ('%d', '%e', '%d')", uid, name, typ);
+    mysql_tquery(mruMySQL_Connection, query);
 }
 
 GetPlayerOrgType(playerid) return orgType(gPlayerOrg[playerid]);
