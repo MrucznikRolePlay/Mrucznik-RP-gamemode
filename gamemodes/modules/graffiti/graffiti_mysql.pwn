@@ -87,9 +87,9 @@ LoadGraffitiRow(i)
 stock graffiti_SaveMySQL(id, playerid)
 {
 	new query[1024];
-	format(query, sizeof(query), 
+	mysql_format(mruMySQL_Connection, query, sizeof(query), 
 		"INSERT INTO `mru_graffiti`(`id`, `ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`) \
-		VALUES ('%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%f', '%f')",
+		VALUES ('%d', '%e', '%e', '%d', '%f', '%f', '%f', '%f', '%f', '%f')",
 		id,
 		GetNickEx(playerid),
 		GraffitiInfo[id][grafText],
@@ -128,7 +128,7 @@ stock graffiti_UpdateMySQL(id, type = 1)
 		}
 		else
 		{
-			format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
+			mysql_format(mruMySQL_Connection, query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%e',`kolor`='%d' WHERE `id`='%d'",
 			GraffitiInfo[id][grafText],
 			GraffitiInfo[id][gColor],
 			id);
