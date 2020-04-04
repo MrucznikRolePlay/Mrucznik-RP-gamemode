@@ -105,7 +105,7 @@ stock graffiti_SaveMySQL(id, playerid)
 
 stock graffiti_UpdateMySQL(id, type = 1)
 {
-	new query[1024];
+	new query[1024], escaped_text[128];
 	if(type == 1)
 	{
 		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `x`='%f',`y`='%f',`z`='%f',`xy`='%f',`yy`='%f',`zy`='%f' WHERE `id`='%d'",
