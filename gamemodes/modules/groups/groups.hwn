@@ -52,6 +52,7 @@ new PlayerText:Textdraw4[MAX_PLAYERS];
 new PlayerText:Textdraw7[MAX_PLAYERS];
 new PlayerText:Textdraw10[MAX_PLAYERS];
 new PlayerText:Textdraw13[MAX_PLAYERS];
+new Groups_GPS[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
 
 //end

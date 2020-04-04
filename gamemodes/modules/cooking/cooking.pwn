@@ -92,4 +92,27 @@ IsAtCookPlace(playerid)
 	return 0;
 }
 
+cooking_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	#pragma unused inputtext
+	if(dialogid == DIALOG_EATING)
+	{
+		if(response)
+		{
+			MruMySQL_EatCookedMeal(playerid, DynamicGui_GetValue(playerid, listitem));
+			MruMySQL_CookedMealsDialog(playerid);
+		}
+		return 1;
+	}
+	if(dialogid == DIALOG_COOKING)
+	{
+		if(response)
+		{
+			ugotuj_OnDialogResponse(playerid, listitem);
+		}
+		return 1;
+	}
+    return 1;
+}
+
 //end

@@ -23,13 +23,6 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-zjedz_OnDialogResponse(playerid, listitem)
-{
-    MruMySQL_EatCookedMeal(playerid, DynamicGui_GetValue(playerid, listitem));
-    MruMySQL_CookedMealsDialog(playerid);
-    return 1;
-}
-
 command_zjedz_Impl(playerid)
 {
     new Float:hp;

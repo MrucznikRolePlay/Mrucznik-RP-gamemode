@@ -99,7 +99,8 @@ public MruMySQL_LoadRanksPerms()
 			group_id,
 			level,
 			PermsInfo[group_id][level][GROUP_PERM_WYPLAC],
-			PermsInfo[group_id][level][GROUP_PERM_ARREST]
+			PermsInfo[group_id][level][GROUP_PERM_ARREST],
+			PermsInfo[group_id][level][GROUP_PERM_GPS]
 		);
 		i++;
 	}

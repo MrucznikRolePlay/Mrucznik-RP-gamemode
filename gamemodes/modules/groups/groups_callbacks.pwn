@@ -179,4 +179,13 @@ hook OnPlayerClickPTextDraw(playerid, PlayerText:playertextid)
 	return 1;
 }
 
+hook OnPlayerStateChange(playerid, newstate, oldstate)
+{
+	if(newstate == PLAYER_STATE_ONFOOT)
+	{
+		KillTimer(Groups_GPS[playerid]);
+		PlayerInfo[playerid][pGPS] = 0;
+	}
+}
+
 //end

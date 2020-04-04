@@ -55,39 +55,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	antyHider[playerid] = 0;
 	
-	//2.6.19
-	if(dialogid == DIALOG_EATING)
-	{
-		if(response)
-		{
-			zjedz_OnDialogResponse(playerid, listitem);
-		}
-		return 1;
-	}
-	if(dialogid == DIALOG_COOKING)
-	{
-		if(response)
-		{
-			ugotuj_OnDialogResponse(playerid, listitem);
-		}
-		return 1;
-	}
-
-	//2.5.8
+	cooking_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-
-
-	//2.6.18
 	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-
-	//2.6.19
 	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
-	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
-	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	groups_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
-	//2.5.2
 	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)

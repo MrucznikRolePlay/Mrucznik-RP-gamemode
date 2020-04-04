@@ -35,50 +35,64 @@ command_group_Impl(playerid, sub[32], rest[126])
 	{
 		ShowOnlineGroupPlayers(playerid);
 	}
-	/*
 	else if(strcmp(sub, "zapros", true) == 0)
 	{
+		//uprawnienia lidera?
  		new giveid;
- 		if(sscanf(rest, "u", giveid)) return SendClientMessage(playerid, CLR_GRAY, "TIP: /g zapros [id/po³owa nicku]");
-		InvitePlayerToGroup(playerid, giveid);
+ 		if(sscanf(rest, "k<fix>", giveid)) return sendTipMessage(playerid, "TIP: /g zapros [id/po³owa nicku]");
+		if(giveid != INVALID_PLAYER_ID)
+		{
+			if(GetDistanceBetweenPlayers(playerid, giveid) < 5)
+			{
+				InvitePlayerToGroup(playerid, giveid);
+			}
+			else
+			{
+				return sendTipMessage(playerid, "Gracz musi byæ przy Tobie!", COLOR_LIGHTBLUE);				            
+			}
+		}
 	}
-	else if(strcmp(sub, "lider", true) == 0)
+	/*else if(strcmp(sub, "lider", true) == 0)
 	{
 	 	new giveid;
- 		if(sscanf(rest, "u", giveid)) return SendClientMessage(playerid, CLR_GRAY, "TIP: /g lider [id/po³owa nicku]");
-		SetLeaderGroup(playerid, giveid);
-	}
+ 		if(sscanf(rest, "k<fix>", giveid)) return SendClientMessage(playerid, CLR_GRAY, "TIP: /g lider [id/po³owa nicku]");
+		//SetLeaderGroup(playerid, giveid);
+		//tu save vlidera
+	}*/
 	else if(strcmp(sub, "gps", true) == 0)
 	{
- 		new str[256];
-        if(GroupInfo[PlayerInfo[playerid][Group1]][gPerm] & GLOBAL_GROUP_GPS) return 1;
-        if(PlayerInfo[playerid][GPS] == 0)
+        if(!PermsInfo[PlayerInfo[playerid][pGroup]][PlayerInfo[playerid][pRank]][GROUP_PERM_GPS]) return 1;
+		if(!IsPlayerInAnyVehicle(playerid)) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie grupy.");
+		//+ sprawdzanie czy pojazd nalezy do grupy
+        if(PlayerInfo[playerid][pGPS] == 0)
         {
-            PlayerInfo[playerid][GPS] = 1;
-            PlayerInfo[playerid][gpsIcon] = 0;
+            PlayerInfo[playerid][pGPS] = 1;
+            PlayerInfo[playerid][pGPSIcon] = 0;
             new Float:PlayerPosX[MAX_PLAYERS], Float:PlayerPosY[MAX_PLAYERS], Float:PlayerPosZ[MAX_PLAYERS];
-            foreach(Player, i)
+            foreach(new i : Player)
             {
-                if(PlayerInfo[i][Group1] == PlayerInfo[playerid][Group1] || PlayerInfo[i][Group2] == PlayerInfo[playerid][Group1] || PlayerInfo[i][Group3] == PlayerInfo[playerid][Group1])
+                if(PlayerInfo[i][pGroup] == PlayerInfo[playerid][pGroup] && PlayerInfo[i][pGroupDuty])
                 {
                     GetPlayerPos(i, PlayerPosX[i], PlayerPosY[i], PlayerPosZ[i]);
                     SetPlayerMapIcon(playerid, i, PlayerPosX[i], PlayerPosY[i], PlayerPosZ[i], 30, 0xFFFFFFFF, MAPICON_GLOBAL);
-                    PlayerInfo[playerid][gpsIcon]++;
+                    PlayerInfo[playerid][pGPSIcon]++;
                 }
             }
-            GPSon[playerid] = SetTimerEx("gGPS", 4000, 1, "dd", group, playerid);
+			ProxDetector(60.0, playerid, sprintf("* %s aktywowa³ namierzanie GPS.", GetNick(playerid)), COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+            Groups_GPS[playerid] = SetTimerEx("gGPS", 4000, 1, "d", playerid);
         }
         else
         {
-            new max_icons = PlayerInfo[playerid][gpsIcon];
+            new max_icons = PlayerInfo[playerid][pGPSIcon];
             for(new i; i < max_icons; i++)
             {
                 RemovePlayerMapIcon(playerid, i);
             }
-            KillTimer(GPSon[playerid]);
-            PlayerInfo[playerid][GPS] = 0;
+            KillTimer(Groups_GPS[playerid]);
+            PlayerInfo[playerid][pGPS] = 0;
         }
 	}
+	/*
 	else if(strcmp(sub, "zadania", true) == 0)
 	{
 		if(group == 1)

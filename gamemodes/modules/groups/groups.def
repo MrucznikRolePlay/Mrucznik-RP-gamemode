@@ -25,17 +25,18 @@
 
 #define MAX_GROUPS          30
 #define MAX_RANKS           11 //[0 - 10] rang
-#define MAX_PERMISSION      2 // iloœæ uprawnieñ
+#define MAX_PERMISSION      3 // iloœæ uprawnieñ
 
 #define GROUP_PERM_WYPLAC  	0
 #define GROUP_PERM_ARREST  	1
+#define GROUP_PERM_GPS  	2
 
+/*
 #define GROUP_PERM_CHAT       4
 #define GROUP_PERM_MEGAFON    5
 #define GROUP_PERM_OOC        6
 #define GROUP_PERM_NICK       7
 #define GROUP_PERM_CRIME      8
-#define GROUP_PERM_GPS        9
 #define GROUP_PERM_LINA       10
 #define GROUP_PERM_CHATIC     12
 #define GROUP_PERM_HAK	   	  13
@@ -63,5 +64,11 @@
 #define GROUP_TYPE_TAXI        12
 #define GROUP_TYPE_HOTEL	   13
 #define GROUP_TYPE_GOV		   14
+*/
+#define DIALOG_GROUPS_INVITE 1257
+#define DIALOG_GROUPS_INVITE 1257
+
+//1257 - 1259
+//1262 - 1269
 
 //end

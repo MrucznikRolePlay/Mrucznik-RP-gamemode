@@ -23,8 +23,6 @@
 	System grup.
 */
 
-//
-
 //-----------------<[ Funkcje: ]>-------------------
 stock ShowGroupsForPlayer(playerid)
 {
@@ -89,5 +87,64 @@ stock ShowOnlineGroupPlayers(playerid)
 	else ShowPlayerDialogEx(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_LIST, header, "Nie ma nikogo online z tej grupy.", "OK", "");
 	return 1;
 }
+
+stock InvitePlayerToGroup(playerid, giveid)
+{
+	if(PlayerInfo[giveid][pGroup] == 0)
+	{
+		//PlayerInfo[giveid][pGroup] = PlayerInfo[playerid][pGroup];
+		SetPVarInt(giveid, "groups_invite_author", playerid);
+		new str[126];
+		format(str, sizeof(str), "Zosta³eœ zaproszony do grupy %s [%d] przez %s [%d].", GroupInfo[PlayerInfo[playerid][pGroup]][gName], GroupInfo[PlayerInfo[playerid][pGroup]][gUID], GetNick(playerid), playerid);
+		ShowPlayerDialogEx(giveid, DIALOG_GROUPS_INVITE, DIALOG_STYLE_MSGBOX, "Zaproszenie do grupy", str, "Akceptuj", "Odrzuæ");
+		ShowPlayerDialogEx(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, "Wys³ano zaproszenie", "Zaprosi³eœ gracza do grupy.", "OK", "");
+	}
+	else
+	{
+		ShowPlayerDialogEx(playerid, DIALOG_EMPTY_SC, DIALOG_STYLE_MSGBOX, "Zaproszenie do grupy", "Gracz posiada maksymaln¹ iloœæ grup.", "OK", "");
+	}
+	return 1;
+}
+
+forward gGPS(playerid);
+public gGPS(playerid)
+{
+	if(PlayerInfo[playerid][pGPS] == 1)
+	{
+		new Float:PlayerPosX[MAX_PLAYERS], Float:PlayerPosY[MAX_PLAYERS], Float:PlayerPosZ[MAX_PLAYERS];
+		foreach(new i : Player)
+		{
+			if(PlayerInfo[i][pGroup] == PlayerInfo[playerid][pGroup] && PlayerInfo[i][pGroupDuty])
+			{
+				GetPlayerPos(i, PlayerPosX[i], PlayerPosY[i], PlayerPosZ[i]);
+				SetPlayerMapIcon(playerid, i, PlayerPosX[i], PlayerPosY[i], PlayerPosZ[i], 30, 0xFFFFFFFF, MAPICON_GLOBAL);
+			}
+		}
+	}
+	return 1;
+}
+
+groups_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	#pragma unused listitem
+	#pragma unused inputtext
+	if(dialogid == DIALOG_GROUPS_INVITE)
+	{
+		new inviter = GetPVarInt(playerid, "groups_invite_author");
+		if(response)
+		{
+			PlayerInfo[playerid][pGroup] = PlayerInfo[inviter][pGroup];
+        	ProxDetector(60.0, playerid, sprintf("* %s podpisuje umowê.", GetNick(playerid)), COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+			SendClientMessage(playerid, COLOR_GREY, "TIP: /g [info/online/v/zapros/zadania/wypros/kolor/wplac/wyplac]");
+			return 1;
+		}
+		else 
+		{
+			return sendErrorMessage(inviter, sprintf("%s odrzuci³ zaproszenie do grupy.", GetNick(playerid)));
+		}
+	}
+	return 1;
+}
+
 
 //end

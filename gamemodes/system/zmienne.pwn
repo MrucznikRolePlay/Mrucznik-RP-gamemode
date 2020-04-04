@@ -1220,6 +1220,9 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pMember] = 0;
 	PlayerInfo[playerid][pGroup] = 0;
 	PlayerInfo[playerid][pGroupsShow] = 0;
+	PlayerInfo[playerid][pGroupDuty] = 0;
+	PlayerInfo[playerid][pGPS] = 0;
+	PlayerInfo[playerid][pGPSIcon] = 0;
 	PlayerInfo[playerid][pOrg] = 0;
 	PlayerInfo[playerid][pRank] = 0;
 	PlayerInfo[playerid][pChar] = 0;
