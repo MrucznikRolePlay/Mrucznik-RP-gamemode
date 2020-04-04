@@ -57,7 +57,7 @@ CurePlayer(playerid, eDiseases:disease)
 
 InfectPlayer(playerid, eDiseases:disease)
 {
-	if(IsPlayerSick(playerid, disease))
+	if(IsPlayerSick(playerid, disease) || Spectate[playerid] != INVALID_PLAYER_ID)
 	{
 		return 0;
 	}

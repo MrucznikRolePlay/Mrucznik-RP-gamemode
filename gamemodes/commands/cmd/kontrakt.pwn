@@ -66,7 +66,7 @@ YCMD:kontrakt(playerid, params[], help)
 				sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
 				return 1;
 			}
-			else if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || IsAScripter(giveplayerid))
+			else if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pHalfAdmin] >= 1 || IsAScripter(giveplayerid))
 			{
 				sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz podpisaæ kontraktu na te osobe !");
 				return 1;

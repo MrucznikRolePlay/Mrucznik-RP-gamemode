@@ -274,6 +274,11 @@ public OnGameModeInit()
 	//Config
 	LoadConfig();
 
+	//Groups
+	MruMySQL_LoadGroups();
+	MruMySQL_LoadRanks();
+	MruMySQL_LoadRanksPerms();
+
 	//Old Groups - to remove \/
     WczytajRangi();
     WczytajSkiny();
@@ -1349,7 +1354,7 @@ public OnPlayerDisconnect(playerid, reason)
 	}
 //	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	if(firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pAdmin] > 0
-	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pNewAP] > 0
+	|| firstDutyAdmin[playerid] == 1 && PlayerInfo[playerid][pHalfAdmin] > 0
 	|| firstDutyAdmin[playerid] == 1 && IsAScripter(playerid))//Je¿eli admin by³ na duty, wykonuje zapis w logi 
 	{
 		new exitReason[16];//String do logu
@@ -1363,7 +1368,7 @@ public OnPlayerDisconnect(playerid, reason)
 			format(exitReason, sizeof(exitReason), "AFK");
 		}
 		
-		//Log dla 0Verte [Nick][UID] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
+		//Log dla 0Verte [pNick][UID] [HH:mm] [Bany] [Warny] [AJ] [Kicki] [Inne] [Reporty+zapytania] [/w] [/w2] [powod zakoñczenia s³u¿by]
 		Log(admindutyLog, INFO, "Admin %s zakonczyl sluzbe - wykonal w czasie %d:%d [B%d/W%d/K%d/I%d/OA%d/Z%d/WI%d/WO%d] - Wyszedl poprzez %s", 
 			GetPlayerLogName(playerid), 
 			AdminDutyGodziny[playerid], 
@@ -1396,7 +1401,7 @@ public OnPlayerDisconnect(playerid, reason)
 		firstDutyAdmin[playerid] = 0; 
 	}
 	if((PlayerInfo[playerid][pAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
-	|| (PlayerInfo[playerid][pNewAP] >= 1 && iloscPozaDuty[playerid] >= 1)
+	|| (PlayerInfo[playerid][pHalfAdmin] >= 1 && iloscPozaDuty[playerid] >= 1)
 	|| (IsAScripter(playerid) && iloscPozaDuty[playerid] >= 1))//Gdy nie by³ na admin duty, ale wykonywa³ akcje
 	{
 		if(firstDutyAdmin[playerid] == 0)
@@ -1475,6 +1480,7 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pJailed] = 10;
         new string[130];
         new powod[36];
+		new additional[36];
         if(PlayerTied[playerid] >= 1)
         {
             strcat(powod, "bycie zwiazanym, ");
@@ -1486,6 +1492,7 @@ public OnPlayerDisconnect(playerid, reason)
         if(Kajdanki_JestemSkuty[playerid] >= 1)
         {
             strcat(powod, "kajdanki pieszo, ");
+			format(additional, sizeof(additional), " - skuwaj¹cy: %s [%d]", GetNick(Kajdanki_PDkuje[playerid]), Kajdanki_PDkuje[playerid]);
         }
         if(poscig[playerid] >= 1)
         {
@@ -1498,7 +1505,7 @@ public OnPlayerDisconnect(playerid, reason)
             case 1: codal = "/q";
             case 2: codal = "kick/ban";
         }
-        format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNickEx(playerid), powod, codal);
+        format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)%s", GetNickEx(playerid), powod, codal, additional);
         SendAdminMessage(COLOR_P@, string);
 	}
 
@@ -2158,7 +2165,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 	{
 		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNickEx(playerid), playerid, ip_address);
 
-		if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pHalfAdmin] > 0 || PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
 		{
 			//disable all codes for admins
 			return 1;
@@ -2248,7 +2255,7 @@ public OnPlayerSpawn(playerid)
 	}
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
-    PlayerInfo[playerid][pMuted] = 0;
+    PlayerInfo[playerid][pMute] = 0;
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
 	if(GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0)
@@ -2351,7 +2358,7 @@ SetPlayerSpawnPos(playerid)
 	//Po /spec off
     if(Unspec[playerid][Coords][0] != 0.0 && Unspec[playerid][Coords][1] != 0.0 && Unspec[playerid][Coords][2] != 0.0)
     {
-		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid))
 		{
 			SetPlayerInterior(playerid, Unspec[playerid][sPint]);
 			SetPlayerVirtualWorld(playerid, Unspec[playerid][sPvw]);
@@ -2386,7 +2393,7 @@ SetPlayerSpawnPos(playerid)
 	    SetPlayerInterior(playerid, 0);
 		SetPlayerVirtualWorld(playerid, 1000+playerid);
 		SetPlayerPos(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
-		PlayerInfo[playerid][pMuted] = 1;
+		PlayerInfo[playerid][pMute] = 1;
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
 		SendClientMessage(playerid, COLOR_PANICRED, string);
@@ -2405,7 +2412,7 @@ SetPlayerSpawnPos(playerid)
 		PlayerInfo[playerid][pJailTime] = 15*60;
 		format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
         SetPlayerVirtualWorld(playerid, 1000+playerid);
-		PlayerInfo[playerid][pMuted] = 1;
+		PlayerInfo[playerid][pMute] = 1;
 		SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 		format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
 		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
@@ -4995,7 +5002,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         if(GetPVarInt(playerid, "iLastDrive") != 0 && (gettime() - GetPVarInt(playerid, "iLastDrive")) <= 1) {
             SetPVarInt(playerid, "iFlags", GetPVarInt(playerid, "iLastDrive")+1);
             if(GetPVarInt(playerid, "iLastDrive") >= 2) {
-                format(string, 256, "%s podejrzany o tepanie aut. Dostal kicka. LVL: %d (%dh online)", GetNick(playerid), PlayerInfo[playerid][pLevel], PlayerInfo[playerid][pConnectTime]);
+                format(string, 256, "%s podejrzany o tepanie aut. Dostal kicka. LVL: %d (%dh online)", GetNick(playerid), PlayerInfo[playerid][pLevel], PlayerInfo[playerid][pOnlineHours]);
                 SendAdminMessage(COLOR_LIGHTRED, string);
                 Kick(playerid);
                 return true;
@@ -5421,7 +5428,7 @@ PayDay()
 					SetPlayerCriminal(i,INVALID_PLAYER_ID, "Niesp³acanie d³ugu");
 				}
 				GetPlayerName(i, playername2, sizeof(playername2));
-				account = PlayerInfo[i][pAccount];
+				account = PlayerInfo[i][pBankMoney];
 
 				if (PlayerInfo[i][pDom] != 0)
 				{
@@ -5446,24 +5453,24 @@ PayDay()
 				        dini_IntSet(string, "Godziny_Online", dini_Int(string, "Godziny_Online")+1 );
 				    }
 				    Tax += TaxValue;//Should work for every player online
-				    PlayerInfo[i][pAccount] -= TaxValue;
+				    PlayerInfo[i][pBankMoney] -= TaxValue;
 					checks = PlayerInfo[i][pPayCheck];
-				    ebill = (PlayerInfo[i][pAccount]/10000)*(PlayerInfo[i][pLevel]);
+				    ebill = (PlayerInfo[i][pBankMoney]/10000)*(PlayerInfo[i][pLevel]);
 				    DajKase(i, checks);
-				    if(PlayerInfo[i][pAccount] > 0)
+				    if(PlayerInfo[i][pBankMoney] > 0)
 				    {
-				    	PlayerInfo[i][pAccount] -= ebill;
+				    	PlayerInfo[i][pBankMoney] -= ebill;
 					}
 					else
 					{
 					    ebill = 0;
 					}
-					interest = (PlayerInfo[i][pAccount]/1000)*(tmpintrate);
+					interest = (PlayerInfo[i][pBankMoney]/1000)*(tmpintrate);
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
-					if(PlayerInfo[i][pAccount] <= 100000000)
+					if(PlayerInfo[i][pBankMoney] <= 100000000)
 					{
-						PlayerInfo[i][pAccount] = account+interest;
+						PlayerInfo[i][pBankMoney] = account+interest;
 					}
 					SendClientMessage(i, COLOR_WHITE, "|___ STAN KONTA ___|");
 					format(string, sizeof(string), "  Wyp³ata: $%d   Podatek: -$%d", checks, TaxValue);
@@ -5475,7 +5482,7 @@ PayDay()
 					}
 					format(string, sizeof(string), "  Stan konta: $%d", account);
 					SendClientMessage(i, COLOR_GRAD1, string);
-					if(PlayerInfo[i][pAccount] <= 100000000)
+					if(PlayerInfo[i][pBankMoney] <= 100000000)
 					{
 						format(string, sizeof(string), "  Odsetki: 0.%d procent",tmpintrate);
 						SendClientMessage(i, COLOR_GRAD2, string);
@@ -5490,7 +5497,7 @@ PayDay()
 						SendClientMessage(i, COLOR_GRAD3, string);
 					}
 					SendClientMessage(i, COLOR_GRAD4, "|--------------------------------------|");
-					format(string, sizeof(string), "  Nowy Stan Konta: $%d", PlayerInfo[i][pAccount]);
+					format(string, sizeof(string), "  Nowy Stan Konta: $%d", PlayerInfo[i][pBankMoney]);
 					SendClientMessage(i, COLOR_GRAD5, string);
 					format(string, sizeof(string), "  Wynajem: -$%d", Dom[PlayerInfo[i][pWynajem]][hCenaWynajmu]);
 					SendClientMessage(i, COLOR_GRAD5, string);
@@ -5499,17 +5506,17 @@ PayDay()
 					GameTextForPlayer(i, string, 5000, 1);
 					PlayerInfo[i][pPayDay] = 0;
 					PlayerInfo[i][pPayCheck] = 0;
-					PlayerInfo[i][pConnectTime] += 1;
+					PlayerInfo[i][pOnlineHours] += 1;
 					PlayerGames[i] = 0;
                     MRP_PremiumHours[i]++;
 					if(PlayerInfo[i][pBP] >= 1)
 					{
 					    PlayerInfo[i][pBP]--;
 					}
-					if(((kaska[i] >= 10000000 || PlayerInfo[i][pAccount] >= 10000000) && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
+					if(((kaska[i] >= 10000000 || PlayerInfo[i][pBankMoney] >= 10000000) && PlayerInfo[i][pLevel] <= 2) && !DEVELOPMENT)
 					{
 						MruMySQL_Banuj(i, "10MLN i 1 lvl");
-						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pAccount]);
+						Log(punishmentLog, INFO, "%s dosta³ bana za 10MLN i 1 lvl (Portfel: %d$, Bank: %d$)", GetPlayerLogName(i), kaska[i], PlayerInfo[i][pBankMoney]);
 						KickEx(i);
 					}
 					if(IsPlayerPremiumOld(i))
@@ -5940,14 +5947,14 @@ OnPlayerLogin(playerid, password[])
 		}
 
 		//Sprawdzanie blocków:
-		if(PlayerInfo[playerid][pBlock] == 1)
+		if(PlayerInfo[playerid][pBlockType] == 1)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
 			KickEx(playerid);
 			return 1;
 		}
-        else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][pCK] == 1)
+        else if(PlayerInfo[playerid][pBlockType] == 2 || PlayerInfo[playerid][pCK] == 1)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Ta postaæ jest uœmiercona, nie mo¿esz na niej graæ.");
 			KickEx(playerid);
@@ -6020,7 +6027,7 @@ OnPlayerLogin(playerid, password[])
 	}
 
 	//Nadawanie pocz¹tkowych itemów po rejestracji:
-	if(PlayerInfo[playerid][pReg] == 0)
+	if(PlayerInfo[playerid][pRegistered] == 0)
 	{
 		PlayerInfo[playerid][pLevel] = 1;
 		PlayerInfo[playerid][pSHealth] = 0.0;
@@ -6037,8 +6044,8 @@ OnPlayerLogin(playerid, password[])
 		PlayerInfo[playerid][pPnumber] = 0;
 		PlayerInfo[playerid][pDom] = 0;
 		PlayerInfo[playerid][pPbiskey] = 255;
-		PlayerInfo[playerid][pAccount] = 5000;
-		PlayerInfo[playerid][pReg] = 1;
+		PlayerInfo[playerid][pBankMoney] = 5000;
+		PlayerInfo[playerid][pRegistered] = 1;
 		PlayerInfo[playerid][pDowod] = 0;
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
@@ -6169,9 +6176,9 @@ OnPlayerLogin(playerid, password[])
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
 	{
-        if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
+        if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pHalfAdmin] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
         {
-            if(PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pNewAP] > 0)
+            if(PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pHalfAdmin] > 0)
             {
                 SetPVarInt(playerid, "support_duty", 1);
                 SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
@@ -6201,7 +6208,7 @@ OnPlayerLogin(playerid, password[])
     {
         SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
-		PlayerInfo[playerid][pMuted] = 1;
+		PlayerInfo[playerid][pMute] = 1;
 		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");
 		SendClientMessage(playerid, COLOR_WHITE, "Aby zacz¹æ grê musisz przejœæ procedury rejestracji.");
 		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeœli jesteœ tu nowy, to przygotowaliœmy dla ciebie poradnik\nZa chwilê bêdziesz móg³ go obejrzeæ, lecz najpierw bêdziesz musia³ opisaæ postaæ któr¹ bêdziesz sterowa³\nAby przejœæ dalej wciœnij przycisk 'dalej'", "Dalej", "");
@@ -6782,7 +6789,7 @@ public OnPlayerText(playerid, text[])
 		} 
 		return 0;
 	}
-	if(PlayerInfo[playerid][pMuted] == 1)
+	if(PlayerInfo[playerid][pMute] == 1)
 	{
 		sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ jesteœ uciszony");
 		return 0;
@@ -6818,7 +6825,7 @@ public OnPlayerText(playerid, text[])
 				{
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerName(ProposedTo[playerid], giveplayer, sizeof(giveplayer));
-					if(PlayerInfo[playerid][pSex] == 1 && PlayerInfo[ProposedTo[playerid]][pSex] == 2)
+					if(PlayerInfo[playerid][pGender] == 1 && PlayerInfo[ProposedTo[playerid]][pGender] == 2)
 					{
 						format(string, sizeof(string), "Ksi¹dz: %s i %s zostaliœcie mê¿em i ¿on¹, mo¿ecie siê poca³owaæ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);
@@ -6827,7 +6834,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "Koœció³: Mamy now¹ pare, %s & %s zostali zarêczeni.", sendername, giveplayer);
 						OOCNews(COLOR_WHITE, string);
 					}
-					else if(PlayerInfo[playerid][pSex] == 1 && PlayerInfo[ProposedTo[playerid]][pSex] == 1)
+					else if(PlayerInfo[playerid][pGender] == 1 && PlayerInfo[ProposedTo[playerid]][pGender] == 1)
 					{
 					    format(string, sizeof(string), "Ksi¹dz: %s i %s Zostaliœcie mê¿em i mê¿em, mo¿ecie siê poca³owaæ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);
@@ -6836,7 +6843,7 @@ public OnPlayerText(playerid, text[])
 						format(string, sizeof(string), "Koœció³: Mamy now¹ gejowsk¹ pare, %s & %s zostali zarêczeni.", sendername, giveplayer);
 						OOCNews(COLOR_WHITE, string);
 					}
-					else if(PlayerInfo[playerid][pSex] == 2 && PlayerInfo[ProposedTo[playerid]][pSex] == 2)
+					else if(PlayerInfo[playerid][pGender] == 2 && PlayerInfo[ProposedTo[playerid]][pGender] == 2)
 					{
 					    format(string, sizeof(string), "Ksi¹dz: %s i %s Zostaliœcie ¿on¹ i ¿on¹, mo¿ecie siê poca³owaæ.", sendername, giveplayer);
 						SendClientMessage(playerid, COLOR_WHITE, string);

@@ -984,7 +984,7 @@ return 1;
 
 public pobito(playerid){
 pobilem[playerid] = 0;
-PlayerInfo[playerid][pMuted] = 0;
+PlayerInfo[playerid][pMute] = 0;
 return 1;
 }
 
@@ -1577,7 +1577,7 @@ stock UndressPlayer(playerid, bool:dressup, colorID=0)
 	}
 	else
 	{
-		if(PlayerInfo[playerid][pSex] == 2)
+		if(PlayerInfo[playerid][pGender] == 2)
         {
             if(colorID == 1)
             {
@@ -4490,10 +4490,10 @@ ShowStats2(playerid)
 	format(plPrzestepstwa, sizeof(plPrzestepstwa), "Crimes: %d", PlayerInfo[playerid][pCrimes]); 
 	format(plLVL, sizeof(plLVL), "Level: %d", PlayerInfo[playerid][pLevel]); 
 	format(plKasa, sizeof(plKasa), "Kasa: %d$", kaska[playerid]); 
-	format(plBank, sizeof(plBank), "Bank: %d$", PlayerInfo[playerid][pAccount]); 
+	format(plBank, sizeof(plBank), "Bank: %d$", PlayerInfo[playerid][pBankMoney]); 
 	format(plZdrowie, sizeof(plZdrowie), "Zdrowie: %.1f", PlayerInfo[playerid][pSHealth]+50);
 	format(plTelefon, sizeof(plTelefon), "Telefon: %d", PlayerInfo[playerid][pPnumber]);
-	format(plOnline, sizeof(plOnline), "On-line: %d", PlayerInfo[playerid][pConnectTime]);
+	format(plOnline, sizeof(plOnline), "On-line: %d", PlayerInfo[playerid][pOnlineHours]);
 	format(plBMID, sizeof(plBMID), "B-MID: %d", PlayerInfo[playerid][pBusinessMember]); 
 	format(plBOID, sizeof(plBOID), "B-OID: %d", PlayerInfo[playerid][pBusinessOwner]); 
 	format(plSkin, sizeof(plSkin), "Skin: %d", PlayerInfo[playerid][pSkin]); 
@@ -4511,8 +4511,8 @@ ShowStats2(playerid)
 	if(PlayerInfo[playerid][pOrigin] == 1) { plPochodzenie = "Pochodzenie: USA"; }
 	else if(PlayerInfo[playerid][pOrigin] == 2) { plPochodzenie = "Pochodzenie: Europa"; }
 	else if(PlayerInfo[playerid][pOrigin] == 3) { plPochodzenie = "Pochodzoenie: Azja"; }
-	if(PlayerInfo[playerid][pSex] == 1) { plPlec = "Plec: Mezczyzna"; }
-	else if(PlayerInfo[playerid][pSex] == 2) { plPlec = "Plec: Kobieta"; }
+	if(PlayerInfo[playerid][pGender] == 1) { plPlec = "Plec: Mezczyzna"; }
+	else if(PlayerInfo[playerid][pGender] == 2) { plPlec = "Plec: Kobieta"; }
 	if(strlen(PlayerInfo[playerid][pMarriedTo]) > 20)
 	{
 		format(plSlub, sizeof(plSlub), "Slub: Unknow");
@@ -4712,8 +4712,8 @@ ShowStats(playerid,targetid)
 	{
 		new cash = kaska[targetid];
 		new atext[20];
-		if(PlayerInfo[targetid][pSex] == 1) { atext = "Mê¿czyzna"; }
-		else if(PlayerInfo[targetid][pSex] == 2) { atext = "Kobieta"; }
+		if(PlayerInfo[targetid][pGender] == 1) { atext = "Mê¿czyzna"; }
+		else if(PlayerInfo[targetid][pGender] == 2) { atext = "Kobieta"; }
   		new otext[20];
 		if(PlayerInfo[targetid][pOrigin] == 1) { otext = "USA"; }
 		else if(PlayerInfo[targetid][pOrigin] == 2) { otext = "Europa"; }
@@ -4746,7 +4746,7 @@ ShowStats(playerid,targetid)
 		if(IsPlayerPremiumOld(targetid)) { drank = "Sponsor"; }
 		else { drank = "Zwykly wieprz"; }
 		new age = PlayerInfo[targetid][pAge];
-		new ptime = PlayerInfo[targetid][pConnectTime];
+		new ptime = PlayerInfo[targetid][pOnlineHours];
 		new znick = PlayerInfo[targetid][pZmienilNick];
 		new lotto = PlayerInfo[targetid][pLottoNr];
 		new deaths = PlayerInfo[targetid][pDeaths];
@@ -4762,7 +4762,7 @@ ShowStats(playerid,targetid)
 		new exp = PlayerInfo[targetid][pExp];
 		new kills = PlayerInfo[targetid][pKills];
 		new pnumber = PlayerInfo[targetid][pPnumber];
-		new account = PlayerInfo[targetid][pAccount];
+		new account = PlayerInfo[targetid][pBankMoney];
 		new nxtlevel = PlayerInfo[targetid][pLevel]+1;
 		new expamount = nxtlevel*levelexp;
 		new costlevel = nxtlevel*levelcost;//10k for testing purposes
@@ -4794,7 +4794,7 @@ ShowStats(playerid,targetid)
 		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
 		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d] MruCoins [%d]", housekey,PlayerInfo[targetid][pKluczeAuta], PremiumInfo[targetid][pMC]);
-		SendClientMessage(playerid, COLOR_GRAD6,coordsstring); 
+		SendClientMessage(playerid, COLOR_GRAD6, coordsstring);  
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	}
 }
@@ -6349,10 +6349,10 @@ KupowanieDomu(playerid, dom, platnosc)
 	    }
 	    if(platnosc == 2)
 		{
-		    if(PlayerInfo[playerid][pAccount] >= cenadomu && cenadomu != 0 && cenadomu > 0 && PlayerInfo[playerid][pAccount] != 0 && PlayerInfo[playerid][pAccount] > 0)
+		    if(PlayerInfo[playerid][pBankMoney] >= cenadomu && cenadomu != 0 && cenadomu > 0 && PlayerInfo[playerid][pBankMoney] != 0 && PlayerInfo[playerid][pBankMoney] > 0)
 	        {
-				PlayerInfo[playerid][pAccount] += -cenadomu;
-				format(str2, sizeof(str2), "Gratulacje! Kupi³eœ dom za %d$. Zosta³o one odliczone od twojego konta bankowego które wynosi teraz %d", cenadomu, PlayerInfo[playerid][pAccount]);
+				PlayerInfo[playerid][pBankMoney] += -cenadomu;
+				format(str2, sizeof(str2), "Gratulacje! Kupi³eœ dom za %d$. Zosta³o one odliczone od twojego konta bankowego które wynosi teraz %d", cenadomu, PlayerInfo[playerid][pBankMoney]);
 				SendClientMessage(playerid, COLOR_PANICRED, str2);
 			}
 			else
@@ -7310,7 +7310,7 @@ ABroadCast(color,const string[],level, podglad = 0)
 				{
 					SendClientMessage(i, color, string);
 				}
-				else if (PlayerInfo[i][pNewAP] >= level)
+				else if (PlayerInfo[i][pHalfAdmin] >= level)
 				{
 					SendClientMessage(i, color, string);
 				}
@@ -7325,7 +7325,7 @@ ABroadCast(color,const string[],level, podglad = 0)
 				{
 					SendClientMessage(i, color, string);
 				}
-				else if (PlayerInfo[i][pNewAP] >= level && TogPodglad[i] == 0)
+				else if (PlayerInfo[i][pHalfAdmin] >= level && TogPodglad[i] == 0)
 				{
 					SendClientMessage(i, color, string);
 				}	
@@ -7842,7 +7842,7 @@ SendAdminMessage(color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || IsAScripter(i))
+		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pHalfAdmin] >= 1 || IsAScripter(i))
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -7854,7 +7854,7 @@ SendCommandLogMessage(string[])
 {
 	foreach(new i : Player)
 	{
-	    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || IsAScripter(i))
+	    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pHalfAdmin] >= 1 || IsAScripter(i))
 	    {
 			if(GetPVarInt(i, "togcmdlog") == 0) SendClientMessage(i, 0xD8C173FF, string);
 		}
@@ -7876,7 +7876,7 @@ SendZGMessage(color, string[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pNewAP] >= 1 || PlayerInfo[i][pZG] >= 1 || IsAScripter(i))
+		    if(PlayerInfo[i][pAdmin] >= 1 || PlayerInfo[i][pHalfAdmin] >= 1 || PlayerInfo[i][pZG] >= 1 || IsAScripter(i))
 		    {
 				SendClientMessage(i, color, string);
 			}
@@ -12660,7 +12660,7 @@ public CuffedAction(playerid, cuffedid)
 	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
 	Kajdanki_PDkuje[cuffedid] = INVALID_PLAYER_ID;
 	Kajdanki_Uzyte[playerid] = 0;
-	PlayerInfo[cuffedid][pMuted] = 0;
+	PlayerInfo[cuffedid][pMute] = 0;
 	ClearAnimations(cuffedid);
 	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
 	RemovePlayerAttachedObject(cuffedid, 5);

@@ -46,7 +46,7 @@ YCMD:teczka(playerid, params[], help)
 			}
 			moneys = FunkcjaK(string);
 
-			if(PlayerInfo[playerid][pConnectTime] == 0)
+			if(PlayerInfo[playerid][pOnlineHours] == 0)
 			{
 				sendTipMessage(playerid, "Zanim bêdziesz móg³ p³aciæ, musisz graæ wiêcej ni¿ 1 godzinê online!");
 			    return 1;

@@ -34,7 +34,7 @@ YCMD:og(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         if(gPlayerLogged[playerid] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
-		else if(PlayerInfo[playerid][pConnectTime] == 0 && PlayerInfo[playerid][pLevel] == 1) return sendErrorMessage(playerid, "Aby pisaæ og³oszenia musisz przegraæ 1h na serwerze!");
+		else if(PlayerInfo[playerid][pOnlineHours] == 0 && PlayerInfo[playerid][pLevel] == 1) return sendErrorMessage(playerid, "Aby pisaæ og³oszenia musisz przegraæ 1h na serwerze!");
 		else if(GetPlayerAdminDutyStatus(playerid) == 1) return sendErrorMessage(playerid, "Nie mo¿esz pisaæ og³oszeñ podczas s³u¿by administratora!");
 		else if(PlayerInfo[playerid][pJailed] != 0) return sendErrorMessage(playerid, "Nie posiadasz telefonu w wiêzieniu!");
         else if(PlayerInfo[playerid][pPnumber] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie masz telefonu. Kup go w 24/7 !");

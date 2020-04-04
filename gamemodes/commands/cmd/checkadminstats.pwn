@@ -41,7 +41,7 @@ YCMD:checkadminstats(playerid, params[], help)
 	{
 		if(giveplayerid != INVALID_PLAYER_ID)
 		{
-			if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1)
+			if(PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pHalfAdmin] >= 1)
 			{
 				if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
 				{

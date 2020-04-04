@@ -38,7 +38,7 @@ YCMD:newbie(playerid, params[], help)
             sendTipMessageEx(playerid, COLOR_GRAD2, "Chat newbie jest wy³¹czony!");
 			return 1;
         }
-        if(PlayerInfo[playerid][pMuted] == 1)
+        if(PlayerInfo[playerid][pMute] == 1)
 		{
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ zosta³eœ uciszony !");
 			return 1;
@@ -97,7 +97,7 @@ YCMD:newbie(playerid, params[], help)
 		    {
 				format(nobchat, sizeof(nobchat), "(({FF6347} Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 			}
-			else if(PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
+			else if(PlayerInfo[playerid][pHalfAdmin] >= 1 && PlayerInfo[playerid][pHalfAdmin] <= 3)
 		    {
 				format(nobchat, sizeof(nobchat), "(({AA3333} Pó³ Administrator [%d] %s: {8D8DFF}%s ))", PlayerInfo[playerid][pAdmin], GetNickEx(playerid), params);
 			}
@@ -182,7 +182,7 @@ YCMD:newbie(playerid, params[], help)
 			    format(nobchat, sizeof(nobchat), "(({7B68EE} Wszechwiedz¹cy [%d] %s: {8D8DFF}%s ))", playerid, GetNickEx(playerid), params);
 			}
 			OOCNewbie(nobchat);
-			if(!IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0)
+			if(!IsAScripter(playerid) && PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pHalfAdmin] == 0)
 			{
 				AntySpam[playerid] = 1;
 				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);

@@ -66,7 +66,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 3:
 						{
-							PlayerInfo[giveplayerid][gPupgrade] = amount;
+							PlayerInfo[giveplayerid][pUpgradeLvl] = amount;
 							format(string, sizeof(string), "Punkty Ulepszenia gracza zmienione na %d", amount);
 						}
 						case 4:
@@ -78,7 +78,7 @@ YCMD:setstat(playerid, params[], help)
 						{
 						    if(IsAHeadAdmin(playerid))
 						    {
-								PlayerInfo[giveplayerid][pAccount] = amount;
+								PlayerInfo[giveplayerid][pBankMoney] = amount;
 								format(string, sizeof(string), "Kwota w Koncie Bankowym gracza zmieniona na $%d", amount);
 							}
 							else
@@ -188,7 +188,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 1337:
 						{
-							PlayerInfo[giveplayerid][pConnectTime] = amount;
+							PlayerInfo[giveplayerid][pOnlineHours] = amount;
 							format(string, sizeof(string), "Czas gry gracza zmieniony na %d", amount);
 						}
 						default:

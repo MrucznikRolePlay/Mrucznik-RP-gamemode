@@ -35,7 +35,7 @@ YCMD:ksiazkatel(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pPhoneBook] == 1)
+		if (PlayerInfo[playerid][pItem_PhoneBook] == 1)
 		{
 			new giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))

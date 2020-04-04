@@ -30,7 +30,7 @@
 
 YCMD:respawncar(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
+    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pHalfAdmin] < 1) return 1;
     new v;
     if(sscanf(params, "d", v)) return sendTipMessage(playerid, "U¿yj /respawncar [ID pojazdu]");
     if(!(0 < v < MAX_VEHICLES)) return 1;

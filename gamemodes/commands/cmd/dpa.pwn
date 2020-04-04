@@ -42,11 +42,11 @@ YCMD:dpa(playerid, params[], help)
 		{
 			if(para1 != INVALID_PLAYER_ID)
 			{
-				if(PlayerInfo[para1][pNewAP] >= 1 && PlayerInfo[para1][pNewAP] <= 3)
+				if(PlayerInfo[para1][pHalfAdmin] >= 1 && PlayerInfo[para1][pHalfAdmin] <= 3)
 				{
 					new string[128], giveplayer[MAX_PLAYER_NAME];
-					PlayerInfo[para1][pNewAP] -= 1;
-					new level = PlayerInfo[para1][pNewAP];
+					PlayerInfo[para1][pHalfAdmin] -= 1;
+					new level = PlayerInfo[para1][pHalfAdmin];
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "   Zosta³eœ zdegradowany przez admina %s, masz teraz %d rangê pó³admina", GetNickEx(playerid), level);
 					SendClientMessage(para1, COLOR_LIGHTBLUE, string);

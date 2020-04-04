@@ -78,7 +78,7 @@ YCMD:kamerau(playerid, params[], help)
                     SetPlayerPos(playerid, 1456.8298,-1782.6688,77.9502);
                     TogglePlayerControllable(playerid, 1);
                     SetCameraBehindPlayer(playerid);
-                    PlayerInfo[playerid][pMuted] = 0;
+                    PlayerInfo[playerid][pMute] = 0;
                     sendTipMessage(playerid, "Wy³¹czy³eœ podgl¹d kamer");
                 }
 

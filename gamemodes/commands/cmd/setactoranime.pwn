@@ -32,7 +32,7 @@ YCMD:setactoranim(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pNewAP] != 5 && PlayerInfo[playerid][pAdmin] < 3000)
+        if(PlayerInfo[playerid][pHalfAdmin] != 5 && PlayerInfo[playerid][pAdmin] < 3000)
         {
             noAccessMessage(playerid); 
             return 1;

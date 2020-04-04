@@ -1,0 +1,9 @@
+{
+    "name": "setgroup",
+    "description": "Ustawia grupe.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Creative",
+    "date": "28.03.2020"
+}

@@ -96,7 +96,7 @@ new FishModels[] = {
 };
 
 //-----------------<[ Zmienne: ]>-------------------
-new Fishes[MAX_PLAYERS][pFishing];
+new PlayerFishes[MAX_PLAYERS][pFishing];
 
 
 //------------------<[ Forwardy: ]>--------------------

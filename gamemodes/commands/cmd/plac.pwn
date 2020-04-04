@@ -56,7 +56,7 @@ YCMD:plac(playerid, params[], help)
 			{
 				return sendTipMessage(playerid, "Nie mo¿esz p³aciæ wiêcej niz $12500");
 			}
-			if(PlayerInfo[playerid][pConnectTime] == 0)
+			if(PlayerInfo[playerid][pOnlineHours] == 0)
 			{
 				sendTipMessage(playerid, "Zanim bêdziesz móg³ p³aciæ, musisz graæ wiêcej ni¿ 1 godzinê online!");
 			    return 1;

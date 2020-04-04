@@ -30,7 +30,7 @@
 
 YCMD:czyjtonumer(playerid, params[], help)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pHalfAdmin] >= 1 || IsAScripter(playerid))
 	{
 		new number, offline, string[128];
 		if( sscanf(params, "dD(0)", number, offline))

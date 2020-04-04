@@ -29,7 +29,7 @@
 public DajKase(playerid, money)
 {
 	new logstring[256];
-	format(logstring, sizeof(logstring), "%s dostal %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pAccount]);
+	format(logstring, sizeof(logstring), "%s dostal %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pBankMoney]);
 
 	kaska[playerid] += money;
 	GivePlayerMoney(playerid, money);
@@ -48,7 +48,7 @@ public DajKase(playerid, money)
 public ZabierzKase(playerid, money)
 {
 	new logstring[256];
-	format(logstring, sizeof(logstring), "%s zabrano %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pAccount]);
+	format(logstring, sizeof(logstring), "%s zabrano %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pBankMoney]);
 
 	kaska[playerid] -= money;
 	GivePlayerMoney(playerid, -money);
@@ -67,7 +67,7 @@ public ZabierzKase(playerid, money)
 public UstawKase(playerid, money)
 {
 	new logstring[256];
-	format(logstring, sizeof(logstring), "%s ustawiono %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pAccount]);
+	format(logstring, sizeof(logstring), "%s ustawiono %d$ [kasa: %d$][bank: %d$]", GetPlayerLogName(playerid), money, kaska[playerid], PlayerInfo[playerid][pBankMoney]);
 
 	kaska[playerid] = money;
 	ResetPlayerMoney(playerid);

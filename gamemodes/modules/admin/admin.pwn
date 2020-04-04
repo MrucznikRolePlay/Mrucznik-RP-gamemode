@@ -267,7 +267,7 @@ SendMessageToAdminEx(text[], mColor, condition)//Wysy³a wiadomoœæ do administrat
 	new stradm[256];
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pNewAP] > 0 || IsAScripter(i))
+		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pHalfAdmin] > 0 || IsAScripter(i))
 		{
 			if(condition == 1)//Warunek w³¹czonej widocznoœci reportów
 			{
@@ -578,7 +578,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	PlayerInfo[playerid][pJailTime] = timeVal*60;
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, result);
 	SetPlayerVirtualWorld(playerid, 1000+playerid);
-	PlayerInfo[playerid][pMuted] = 1;
+	PlayerInfo[playerid][pMute] = 1;
 	SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 	poscig[playerid] = 0;
 	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNickEx(adminid), timeVal, (result)); 
@@ -667,7 +667,7 @@ GiveBlockForPlayer(playerid, adminid, result[])
 			GetPlayerLogName(adminid),
 			GetPlayerLogName(playerid),
 			result);
-	PlayerInfo[playerid][pBlock] = 1;
+	PlayerInfo[playerid][pBlockType] = 1;
 	KickEx(playerid);
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;

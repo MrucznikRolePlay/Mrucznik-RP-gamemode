@@ -62,8 +62,8 @@ YCMD:pokazdowod(playerid, params[], help)
 				    new jtext[20];
                     new otext[8];
 				    new age = PlayerInfo[playerid][pAge];
-                    if(PlayerInfo[playerid][pSex] == 1) { atext = "Mê¿czyzna"; }
-	                else if(PlayerInfo[playerid][pSex] == 2) { atext = "Kobieta"; }
+                    if(PlayerInfo[playerid][pGender] == 1) { atext = "Mê¿czyzna"; }
+	                else if(PlayerInfo[playerid][pGender] == 2) { atext = "Kobieta"; }
 	                /*if(PlayerInfo[playerid][pOrigin] == 1) { otext = "Los Santos"; }
                     else if(PlayerInfo[playerid][pOrigin] == 2) { otext = "San Fierro"; }
 	                else if(PlayerInfo[playerid][pOrigin] == 3) { otext = "LV"; }*/
@@ -113,7 +113,7 @@ YCMD:pokazdowod(playerid, params[], help)
        				SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Dowód Osobisty ______________|");
 					format(string, sizeof(string), "- Imie i Nazwisko: %s", sendername);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
-					format(string, sizeof(string), "- SSN: %d%d%d%d%d%d%d", PlayerInfo[playerid][pMember],age,PlayerInfo[playerid][pLider],PlayerInfo[playerid][pPnumber],PlayerInfo[playerid][pJob],PlayerInfo[playerid][pSex],PlayerInfo[playerid][pLevel]);
+					format(string, sizeof(string), "- SSN: %d%d%d%d%d%d%d", PlayerInfo[playerid][pMember],age,PlayerInfo[playerid][pLider],PlayerInfo[playerid][pPnumber],PlayerInfo[playerid][pJob],PlayerInfo[playerid][pGender],PlayerInfo[playerid][pLevel]);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);
 					format(string, sizeof(string), "- P³eæ: %s", atext);
 					SendClientMessage(giveplayerid, COLOR_WHITE, string);

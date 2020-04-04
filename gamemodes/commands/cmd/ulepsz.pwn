@@ -37,7 +37,7 @@ YCMD:ulepsz(playerid, params[], help)
 		new gunid[16];
 		if( sscanf(params, "s[16] ", gunid))
 		{
-			format(string, sizeof(string), "U¯YJ: /ulepsz [nazwaulepszenia] (Posiadasz %d Punktów Ulepszenia)",PlayerInfo[playerid][gPupgrade]);
+			format(string, sizeof(string), "U¯YJ: /ulepsz [nazwaulepszenia] (Posiadasz %d Punktów Ulepszenia)",PlayerInfo[playerid][pUpgradeLvl]);
 			SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 			SendClientMessage(playerid, COLOR_WHITE,"*** ULEPSZENIA ***");
 			sendTipMessage(playerid,string);
@@ -61,7 +61,7 @@ YCMD:ulepsz(playerid, params[], help)
 			SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 			return 1;
 		}
-		if (PlayerInfo[playerid][gPupgrade] > 1)
+		if (PlayerInfo[playerid][pUpgradeLvl] > 1)
 		{
 			if (PlayerInfo[playerid][pLevel] >= 1 && (strcmp(gunid, "hp", true, strlen(gunid)) == 0))
 			{
@@ -82,7 +82,7 @@ YCMD:ulepsz(playerid, params[], help)
 				{
 					PlayerInfo[playerid][pAlcoholPerk] += 1;
 					format(string, 128, "Nowe Ulepszenie: Twój poziom Alkoholika wynosi teraz %d.",PlayerInfo[playerid][pAlcoholPerk]);
-					PlayerInfo[playerid][gPupgrade]--;
+					PlayerInfo[playerid][pUpgradeLvl]--;
 				}
 				else
 				{
@@ -96,7 +96,7 @@ YCMD:ulepsz(playerid, params[], help)
 				{
 					PlayerInfo[playerid][pDrugPerk] += 1;
 					format(string, 128, "Nowe Ulepszenie: Twój poziom Cpuna wynosi teraz %d.",PlayerInfo[playerid][pDrugPerk]);
-					PlayerInfo[playerid][gPupgrade]--;
+					PlayerInfo[playerid][pUpgradeLvl]--;
 				}
 				else
 				{
@@ -110,7 +110,7 @@ YCMD:ulepsz(playerid, params[], help)
 				{
 					PlayerInfo[playerid][pMiserPerk] += 1;
 					format(string, 128, "Nowe Ulepszenie: Twój poziom matsiarz wynosi teraz %d.",PlayerInfo[playerid][pMiserPerk]);
-					PlayerInfo[playerid][gPupgrade]--;
+					PlayerInfo[playerid][pUpgradeLvl]--;
 				}
 				else
 				{
@@ -124,7 +124,7 @@ YCMD:ulepsz(playerid, params[], help)
 				{
 					PlayerInfo[playerid][pTraderPerk] += 1;
 					format(string, 128, "Nowe Ulepszenie: Twój poziom Handlowca wynosi teraz %d.",PlayerInfo[playerid][pTraderPerk]);
-					PlayerInfo[playerid][gPupgrade]--;
+					PlayerInfo[playerid][pUpgradeLvl]--;
 				}
 				else
 				{
@@ -138,7 +138,7 @@ YCMD:ulepsz(playerid, params[], help)
 				{
 					PlayerInfo[playerid][pPainPerk] += 1;
 					format(string, 128, "Nowe Ulepszenie: Twój poziom Lekomana wynosi teraz %d.",PlayerInfo[playerid][pPainPerk]);
-					PlayerInfo[playerid][gPupgrade]--;
+					PlayerInfo[playerid][pUpgradeLvl]--;
 				}
 				else
 				{
@@ -158,7 +158,7 @@ YCMD:ulepsz(playerid, params[], help)
 			return 1;
 		}
 		SendClientMessage(playerid, COLOR_GRAD6, string);
-		PlayerInfo[playerid][gPupgrade]--;
+		PlayerInfo[playerid][pUpgradeLvl]--;
 	}
 	return 1;
 }

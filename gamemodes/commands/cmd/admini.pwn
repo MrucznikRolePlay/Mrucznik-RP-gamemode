@@ -51,9 +51,9 @@ YCMD:admini(playerid, params[], help)
 				{
 					format(string, sizeof(string), "{FFFFFF}Administrator: {FF6A6A}%s {FFFFFF}[ID: %d] [@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pAdmin]); 
 				}
-				else if(PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] <= 4)
+				else if(PlayerInfo[i][pHalfAdmin] >= 1 && PlayerInfo[i][pHalfAdmin] <= 4)
 				{
-					format(string, sizeof(string), "{FFFFFF}Pó³-Admin: {00C0FF}%s {FFFFFF}[ID: %d] [P@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pNewAP]); 
+					format(string, sizeof(string), "{FFFFFF}Pó³-Admin: {00C0FF}%s {FFFFFF}[ID: %d] [P@LVL: %d]", GetNickEx(i), i, PlayerInfo[i][pHalfAdmin]); 
 				}
 				sendTipMessage(playerid, string); 
 			}

@@ -149,9 +149,13 @@ YCMD:anuluj(playerid, params[], help)
    			}
    			else
    			{
-	           sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z HA !");
+	           sendTipMessageEx(playerid, COLOR_GREY, "Nie masz ¿adnego kontraktu !");
    			}
    		}
+		else
+		{
+			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z HA !");
+		}
    	}
 	else if(strcmp(x_job,"bus",true) == 0)
 	{

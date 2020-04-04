@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                  frakcje                                                  //
+//                                                  choroby                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,13 +16,42 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 15.05.2019
-
+// Autor: Creative
+// Data utworzenia: 22.03.2020
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum eRanks
+{
+    rName[32],
+    rLevel
+};
+
+enum eGroups
+{
+	gUID,
+    gType,
+    gName[32],
+	gColor[6],
+    Float:gSpawnX,
+    Float:gSpawnY,
+    Float:gSpawnZ,
+    Float:gSpawnA,
+    Float:gSpawnVW,
+    Float:gSpawnINT,
+	gBalance
+};
+
 //-----------------<[ Zmienne: ]>-------------------
+new GroupInfo[MAX_GROUPS][eGroups];
+new RankInfo[MAX_GROUPS][MAX_RANKS][eRanks];
+new PermsInfo[MAX_GROUPS][MAX_RANKS][MAX_PERMISSION]; //U¯YCIE: PermsInfo[group_id][rank_level][perm_code]
+new PlayerText:Textdraw0[MAX_PLAYERS];
+new PlayerText:Textdraw1[MAX_PLAYERS];
+new PlayerText:Textdraw4[MAX_PLAYERS];
+new PlayerText:Textdraw7[MAX_PLAYERS];
+new PlayerText:Textdraw10[MAX_PLAYERS];
+new PlayerText:Textdraw13[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
 
 //end

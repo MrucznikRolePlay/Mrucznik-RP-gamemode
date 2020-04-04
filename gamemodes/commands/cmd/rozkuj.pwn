@@ -64,7 +64,7 @@ YCMD:rozkuj(playerid, params[], help)
                             Kajdanki_Uzyte[playerid] = 0;
 							Kajdanki_PDkuje[playerid] = 0;
 							Kajdanki_PDkuje[giveplayerid]=0;
-							PlayerInfo[giveplayerid][pMuted] = 0;
+							PlayerInfo[giveplayerid][pMute] = 0;
                             ClearAnimations(giveplayerid);
         					SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
 							RemovePlayerAttachedObject(giveplayerid, 5);
