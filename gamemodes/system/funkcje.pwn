@@ -8752,7 +8752,7 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z][a-z]+([ _][A-Z][a-z]+([A-HJ-Z][a-z]+)?){1,2}$") >= 0)
+	if(Regex_Check(nick, NICK_REGEXP) >= 0)
 	{
 		return 1;
 	}

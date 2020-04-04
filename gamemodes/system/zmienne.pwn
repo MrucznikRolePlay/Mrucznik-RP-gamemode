@@ -1,6 +1,8 @@
 //zmienne.pwn
 new DEVELOPMENT = false;
+new MySQL:mruMySQL_Connection;
 
+//
 new SentMessagesIndex[MAX_PLAYERS] = 0;
 new SentMessages[MAX_PLAYERS][MAX_SENT_MESSAGES][144];
 

@@ -62,20 +62,20 @@ CheckEmoji(const text[])
 {
 	new emojiMessFix[256];
 	strcat(emojiMessFix, text); 
-	regex_replace(emojiMessFix, ":D+", "{C2A2DA}**œmieje siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":P+", "{C2A2DA}**wystawia jêzyk**{FFFFFF}");
-	regex_replace(emojiMessFix, "[xX][dD]+", "{C2A2DA}**œmieje siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ";\\)+", "{C2A2DA}**puszcza oczko**{FFFFFF}");
-	regex_replace(emojiMessFix, ";D+", "{C2A2DA}**puszcza oczko i œmieje siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ";d+", "{C2A2DA}**wystawia jêzyk i puszcza oczko**{FFFFFF}");
-	regex_replace(emojiMessFix, ":\\)+", "{C2A2DA}**uœmiecha siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":\\(+", "{C2A2DA}**smuci siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":O+", "{C2A2DA}**dziwi siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":\\*+", "{C2A2DA}**puszcza ca³usa**{FFFFFF}");
-	regex_replace(emojiMessFix, ":v+", "{C2A2DA}**k³apie dziobem**{FFFFFF}");
-	regex_replace(emojiMessFix, ":s+", "{C2A2DA}**krzywi siê**{FFFFFF}");
-	regex_replace(emojiMessFix, ":3+", "{C2A2DA}**uœmiecha siê**{FFFFFF}");
-	regex_replace(emojiMessFix, "[oO]_o", "{C2A2DA}**dziwi siê**{FFFFFF}");
+	Regex_Replace(emojiMessFix, REGEX_LAUGH, "{C2A2DA}**œmieje siê**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_TONGUE, "{C2A2DA}**wystawia jêzyk**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_XD, "{C2A2DA}**œmieje siê**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_WINK, "{C2A2DA}**puszcza oczko**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_WINKLAUGH, "{C2A2DA}**puszcza oczko i œmieje siê**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_WINKTONGUE, "{C2A2DA}**wystawia jêzyk i puszcza oczko**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_SMILE, "{C2A2DA}**uœmiecha siê**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_SAD, "{C2A2DA}**smuci siê**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_O, "{C2A2DA}**dziwi siê**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_KISS, "{C2A2DA}**puszcza ca³usa**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_V, "{C2A2DA}**k³apie dziobem**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_S, "{C2A2DA}**krzywi siê**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_3, "{C2A2DA}**uœmiecha siê**{FFFFFF}", emojiMessFix);
+	Regex_Replace(emojiMessFix, REGEX_o_O, "{C2A2DA}**dziwi siê**{FFFFFF}", emojiMessFix);
 	return emojiMessFix;
 }
 CorrectICForm(const text[])

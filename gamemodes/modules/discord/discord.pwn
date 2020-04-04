@@ -95,15 +95,20 @@ SendDiscordOrgMessage(orgid, message[])
 
 	return 1;
 }
-public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[])
+public DCC_OnMessageCreate(DCC_Message:message)
 {
+	new DCC_Channel:channel, DCC_User:author, messageText[MAX_MESSAGE_LENGTH];
+	DCC_GetMessageChannel(message, channel);
+	DCC_GetMessageAuthor(message, author);
+	DCC_GetMessageContent(message, messageText);
+
 	new bool:IsBot;
 	DCC_IsUserBot(author, IsBot);
 	if(channel == g_AdminChannelId && IsBot == false)
 	{
-		new user_name[32 + 1],str[128], dest[128];
+		new user_name[32 + 1],str[MAX_MESSAGE_LENGTH], dest[MAX_MESSAGE_LENGTH];
 		DCC_GetUserName(author, user_name);
-		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
+		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, messageText);
 		utf8decode(dest, str);
 		strreplace(dest,"%","#");
 		SendAdminMessage(0xFFC0CB, dest);
@@ -112,9 +117,9 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 	}
 	else if(channel == g_OrgChannel[1] && IsBot == false)
 	{
-		new user_name[32 + 1],str[128], dest[128];
+		new user_name[32 + 1],str[MAX_MESSAGE_LENGTH], dest[MAX_MESSAGE_LENGTH];
 		DCC_GetUserName(author, user_name);
-		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
+		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, messageText);
 		utf8decode(dest, str);
 		strreplace(dest,"%","#");
 		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, dest);
@@ -124,9 +129,9 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 	{
 		if(channel == g_FracChannel[i] && IsBot == false) 
 		{
-			new user_name[32 + 1],str[128],dest[128];
+			new user_name[32 + 1],str[MAX_MESSAGE_LENGTH],dest[MAX_MESSAGE_LENGTH];
 			DCC_GetUserName(author, user_name);
-			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
+			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, messageText);
 			utf8decode(dest, str);
 			strreplace(dest,"%","#");
 			if(0 < i <= 4 || i == 11 || i == 7 || i == 17)

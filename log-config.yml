@@ -1,0 +1,54 @@
+Logger:
+  plugins/log-plugin:
+    Append: true # false - deletes the plugin log file on server startup
+  logi/admin:
+    LogLevel: All
+  logi/pay:
+    LogLevel: All
+  logi/premium:
+    LogLevel: All
+  logi/punishment:
+    LogLevel: All
+  logi/warning:
+    LogLevel: All
+  logi/nick:
+    LogLevel: All
+  logi/sejf:
+    LogLevel: All
+  logi/server:
+    LogLevel: All
+  logi/command:
+    LogLevel: All
+  logi/chat:
+    LogLevel: All
+  logi/damage:
+    LogLevel: All
+  logi/connect:
+    LogLevel: All
+  logi/mysql:
+    LogLevel: All
+  logi/money:
+    LogLevel: All
+  logi/error:
+    LogLevel: All
+  logi/adminduty:
+    LogLevel: All
+  samp-server: # Server console redirection
+    LogLevel: All
+LogLevel:
+  Fatal:
+    PrintToConsole: true
+  Error:
+    PrintToConsole: true
+  Warning:
+    PrintToConsole: true
+EnableColors: true
+LogTimeFormat: '[%d/%m/%Y %H:%M:%S] %F'
+
+
+
+
+
+
+
+

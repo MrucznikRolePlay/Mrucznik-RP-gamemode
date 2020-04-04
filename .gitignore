@@ -100,3 +100,6 @@ samp.ban
 __pycache__/
 *.py[cod]
 *$py.class
+
+# junction
+scriptfiles/DANGEROUS_SERVER_ROOT

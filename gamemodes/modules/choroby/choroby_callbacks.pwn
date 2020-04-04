@@ -37,7 +37,7 @@ choroby_OnPlayerLogin(playerid)
 hook OnGameModeInit()
 {
 	choroby_InitEffects();
-	TourettRegexp = regex_exbuild(".*[^a-zA-Z](kurwa|chuj|huj|cipa|fiut|zjeb|kurwy|jeb|pizda|pizdy|szmul|dzban|kutas|dupa|cipka|pierdol|pierdolony)[^a-zA-Z].*");
+	TourettRegexp = Regex_New(".*[^a-zA-Z](kurwa|chuj|huj|cipa|fiut|zjeb|kurwy|jeb|pizda|pizdy|szmul|dzban|kutas|dupa|cipka|pierdol|pierdolony)[^a-zA-Z].*");
 }
 
 hook OnPlayerConnect(playerid)
@@ -109,7 +109,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 
 hook OnPlayerText(playerid, text[])
 {
-	if(regex_exmatch(text, TourettRegexp) >= 0)
+	if(Regex_Check(text, TourettRegexp) >= 0)
 	{
 		Tourett[playerid]++;
 		if(Tourett[playerid] >= 30)

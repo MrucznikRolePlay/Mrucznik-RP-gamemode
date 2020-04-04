@@ -51,7 +51,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <crashdetect>
 #include <log-plugin>
 #include <sscanf2>
-#include <libRegEx>
+#include <Pawn.Regex>
 #include <streamer>
 #include <a_mysql>
 #include <a_mysql_yinline>
@@ -117,7 +117,7 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
-new MySQL:mruMySQL_Connection;
+#include "system\regexps.pwn"
 
 //do implementacji w g³ówny kod (mo¿liwie w modu³y)
 #include "system\doimplementacji\vinylscript.pwn"
@@ -241,9 +241,9 @@ public OnGameModeInit()
 		// - off (broñ trzymana w obu rêkach jest trzymana jedn¹, skiny chodz¹ swoim chodem)
 		// - on  (broñ trzymana jest normalnie, wszystkie skiny chodz¹ jak CJ)
 
-	//-------<[ libRegEx ]>-------
-	regex_syntax(SYNTAX_PERL);
-	
+	//-------<[ regexps ]>-------
+	InitRegexps();
+
 	//-------<[ sscanf ]>-------
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
 
@@ -1106,7 +1106,7 @@ public OnPlayerConnect(playerid)
 		KickEx(playerid);
 		return 1;
     }*/
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
+	if(Regex_Check(nick, NICK_REGEXP) <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);

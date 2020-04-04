@@ -227,7 +227,6 @@
 #include "graffiti\commands\graffiti_commands.pwn"
 #include "ibiza\commands\ibiza_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
-#include "logi\commands\logi_commands.pwn"
 #include "oferty\commands\oferty_commands.pwn"
 #include "organizacje\commands\organizacje_commands.pwn"
 #include "player_attachments\commands\player_attachments_commands.pwn"
