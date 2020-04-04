@@ -92,7 +92,6 @@ stock InvitePlayerToGroup(playerid, giveid)
 {
 	if(PlayerInfo[giveid][pGroup] == 0)
 	{
-		//PlayerInfo[giveid][pGroup] = PlayerInfo[playerid][pGroup];
 		SetPVarInt(giveid, "groups_invite_author", playerid);
 		new str[126];
 		format(str, sizeof(str), "Zosta³eœ zaproszony do grupy %s [%d] przez %s [%d].", GroupInfo[PlayerInfo[playerid][pGroup]][gName], GroupInfo[PlayerInfo[playerid][pGroup]][gUID], GetNick(playerid), playerid);
@@ -114,7 +113,8 @@ public gGPS(playerid)
 		new Float:PlayerPosX[MAX_PLAYERS], Float:PlayerPosY[MAX_PLAYERS], Float:PlayerPosZ[MAX_PLAYERS];
 		foreach(new i : Player)
 		{
-			if(PlayerInfo[i][pGroup] == PlayerInfo[playerid][pGroup] && PlayerInfo[i][pGroupDuty])
+			//&& PlayerInfo[i][pGroupDuty]
+			if(PlayerInfo[i][pGroup] == PlayerInfo[playerid][pGroup])
 			{
 				GetPlayerPos(i, PlayerPosX[i], PlayerPosY[i], PlayerPosZ[i]);
 				SetPlayerMapIcon(playerid, i, PlayerPosX[i], PlayerPosY[i], PlayerPosZ[i], 30, 0xFFFFFFFF, MAPICON_GLOBAL);
