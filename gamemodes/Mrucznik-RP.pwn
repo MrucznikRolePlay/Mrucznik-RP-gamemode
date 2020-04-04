@@ -2189,7 +2189,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		if(code == 16)//ammohack
 		{
 			SetPVarInt(playerid, "ammohackdetect", 1);
-			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 16 (Ammo hack (add)).", GetNickEx(playerid), playerid);
+			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Ammohack", GetNickEx(playerid), playerid);
 			SendMessageToAdmin(string, 0x9ACD32AA);
 			//format(string, sizeof(string), "[Nex-AC] AC ammo: %d, ammo: %d, weaponid: %d", ACInfo[playerid][acAmmo][ac_s], ac_a, ac_w);
 			//SendMessageToAdmin(string, 0x9ACD32AA);
@@ -2198,13 +2198,71 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		if(code == 17)//ammohack
 		{
 			SetPVarInt(playerid, "ammohackdetect", 1);
-			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 17 (Ammo hack (infinite)).", GetNickEx(playerid), playerid);
+			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Nieskoñczony AmmoHack", GetNickEx(playerid), playerid);
 			SendMessageToAdmin(string, 0x9ACD32AA);
 			//format(string, sizeof(string), "[Nex-AC] Weaponid: %d, AC ammo: %d, ammo: %d", weaponid, ACInfo[playerid][acAmmo][ac_s], ac_t);
 			//SendMessageToAdmin(string, 0x9ACD32AA);
 
 		}
-		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNickEx(playerid), playerid, plrIP, code);
+		new code_decoded[32];
+        switch(code)
+        {
+            case 1:     format(code_decoded, sizeof(code_decoded), "AirBreak (pieszo)");
+            case 2:     format(code_decoded, sizeof(code_decoded), "AirBreak (pojazd)");
+            case 3:     format(code_decoded, sizeof(code_decoded), "TP (pieszo)");
+            case 4:     format(code_decoded, sizeof(code_decoded), "TP (pojazd)");
+            case 5:     format(code_decoded, sizeof(code_decoded), "TP (do/miedzy auta)");
+            case 6:     format(code_decoded, sizeof(code_decoded), "TP (auto do gracza)");
+            case 7:     format(code_decoded, sizeof(code_decoded), "TP (do pickupow)");
+            case 8:     format(code_decoded, sizeof(code_decoded), "Fly (pieszo)");
+            case 9:     format(code_decoded, sizeof(code_decoded), "Fly (pojazd)");
+            case 10:    format(code_decoded, sizeof(code_decoded), "Speed (pieszo)");
+            case 11:    format(code_decoded, sizeof(code_decoded), "Speed (pojazd)");
+            case 12:    format(code_decoded, sizeof(code_decoded), "HP (pojazd)");
+            case 13:    format(code_decoded, sizeof(code_decoded), "HP (pieszo)");
+            case 14:    format(code_decoded, sizeof(code_decoded), "Kamizelka");
+            case 15:    format(code_decoded, sizeof(code_decoded), "Pieniadze");
+            case 16:    format(code_decoded, sizeof(code_decoded), "Bronie");
+            case 17:    format(code_decoded, sizeof(code_decoded), "Dodawanie ammo");
+            case 18:    format(code_decoded, sizeof(code_decoded), "Nieskonczonosc ammo");
+            case 19:    format(code_decoded, sizeof(code_decoded), "AnimHack");
+            case 20:    format(code_decoded, sizeof(code_decoded), "GodMode (pieszo)");
+            case 21:    format(code_decoded, sizeof(code_decoded), "GodMode (pojazd)");
+            case 22:    format(code_decoded, sizeof(code_decoded), "Niewidzialnosc");
+            //case 23:  format(code_decoded, sizeof(code_decoded), "Lagcomp");
+            case 24:    format(code_decoded, sizeof(code_decoded), "Tuning");
+            case 25:    format(code_decoded, sizeof(code_decoded), "Parkour mod");
+            case 26:    format(code_decoded, sizeof(code_decoded), "Szybkie animki");
+            case 27:    format(code_decoded, sizeof(code_decoded), "Rapidfire");
+            case 28:    format(code_decoded, sizeof(code_decoded), "FakeSpawn");
+            case 29:    format(code_decoded, sizeof(code_decoded), "FakeKill");
+            case 30:    format(code_decoded, sizeof(code_decoded), "Aimbot");
+            case 31:    format(code_decoded, sizeof(code_decoded), "Bieg CJa");
+            case 32:    format(code_decoded, sizeof(code_decoded), "Strzelanie autami");
+            case 33:    format(code_decoded, sizeof(code_decoded), "Kradniecie aut");
+            case 34:    format(code_decoded, sizeof(code_decoded), "Unfreeze");
+            //case 35:  format(code_decoded, sizeof(code_decoded), "AFK-Ghosting");
+            case 36:    format(code_decoded, sizeof(code_decoded), "Aimbot (2)");
+            //case 37:  format(code_decoded, sizeof(code_decoded), "Fake NPC");
+            //case 38:  format(code_decoded, sizeof(code_decoded), "Reconnect");
+            case 39:    format(code_decoded, sizeof(code_decoded), "Wysoki ping");
+            case 40:    format(code_decoded, sizeof(code_decoded), "Czitowanie dialogow");
+            //case 41:  format(code_decoded, sizeof(code_decoded), "Sandbox");
+            case 42:    format(code_decoded, sizeof(code_decoded), "Zla wersja samp");
+            case 43:    format(code_decoded, sizeof(code_decoded), "Rcon-Hack");
+            case 44:    format(code_decoded, sizeof(code_decoded), "Tuning Crasher");
+            case 45:    format(code_decoded, sizeof(code_decoded), "Inv. seat Crasher");
+            case 46:    format(code_decoded, sizeof(code_decoded), "Dialog Crasher");
+            case 47:    format(code_decoded, sizeof(code_decoded), "Dodatki Crasher");
+            case 48:    format(code_decoded, sizeof(code_decoded), "Bronie Crasher");
+            //case 49:  format(code_decoded, sizeof(code_decoded), "flood connect");
+            //case 50:  format(code_decoded, sizeof(code_decoded), "flood callbacks");
+            //case 51:  format(code_decoded, sizeof(code_decoded), "flood change seat");
+            case 52:    format(code_decoded, sizeof(code_decoded), "DDOS");
+            case 53:    format(code_decoded, sizeof(code_decoded), "Anti-NOPs");
+            default:    format(code_decoded, sizeof(code_decoded), "Inne");
+        }
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, plrIP, code_decoded, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
