@@ -1115,8 +1115,6 @@ ZerujZmienne(playerid)
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
 
     PlayerInfo[playerid][pDescLabel] = tmp_label;
-	ObrazeniaIndex[playerid] = 0;
-	for(new i = 0; i<10; i++) Obrazenia[playerid][i--][DAMAGE] = 0.0;
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
@@ -1376,7 +1374,8 @@ ZerujZmienne(playerid)
 
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
-	
+	ObrazeniaIndex[playerid] = 0;
+	for(new i = 0; i<10; i++) Obrazenia[playerid][i][DAMAGE] = 0.0;
 	if(tworzenietrasy[playerid] != 666)
 	{
 	    format(Wyscig[tworzenietrasy[playerid]][wOpis], 50, "");
