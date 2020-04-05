@@ -12469,7 +12469,7 @@ SavePlayerSentMessage(playerid, message[])
 SavePlayerDamaged(playerid, attackerid, Float:damage, weapon)
 {
 	new hour, minute, second;
-	new sec = gettime();
+	new sec = gettime() + 7200;
 	new day;
     day = floatround(sec / 86400);
     hour = floatround((sec - (day * 86400)) / 3600);
@@ -12489,17 +12489,13 @@ ShowPlayerDamaged(playerid, forplayerid)
 {
 	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Damagelog gracza %s: ---", GetNick(playerid)));
 	new index = ObrazeniaIndex[playerid];
-	if(index == 0) 
+	new string[72];
+	new weapon_decoded[24];
+	new godzin[2],minut[2],sekund[2];
+	new godzina,minuta,sekunda,Float:hp;
+	new atakujacy[MAX_PLAYER_NAME];
+	if(index != 0) 
 	{
-		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, "Brak");
-		return 1;
-	}
-	else
-	{
-		new string[72];
-		new weapon_decoded[24];
-		new godzina,minuta,sekunda,Float:hp;
-		new atakujacy[MAX_PLAYER_NAME];
 		for(new i = index-1; i>=0; i--)
 		{
 			switch(Obrazenia[playerid][index][WEAPONID])
@@ -12549,11 +12545,77 @@ ShowPlayerDamaged(playerid, forplayerid)
 			godzina = Obrazenia[playerid][i][HOURS];
 			minuta = Obrazenia[playerid][i][MINUTES];
 			sekunda = Obrazenia[playerid][i][SECONDS];
-			hp = Obrazenia[playerid][i][DAMAGE];
+			hp = Obrazenia[playerid][i][DAMAGE] / 2;
+			if(godzina < 10) format(godzin, sizeof(godzin), "0%d", Obrazenia[playerid][i][HOURS]);
+			else format(godzin, sizeof(godzin), "%d", Obrazenia[playerid][i][HOURS]);
+			if(minuta < 10) format(minut, sizeof(minut), "0%d", Obrazenia[playerid][i][MINUTES]);
+			else format(minut, sizeof(minut), "%d", Obrazenia[playerid][i][MINUTES]);
+			if(sekunda < 10) format(sekund, sizeof(sekund), "0%d", Obrazenia[playerid][i][SECONDS]);
+			else format(sekund, sizeof(sekund), "%d", Obrazenia[playerid][i][SECONDS]);
 			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-			format(string, sizeof(string), "%d:%d:%d | %s -> %s zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, hp);
+			format(string, sizeof(string), "%s:%s:%s | %s -> %s[%d] zada³o %0.1fHP.", godzin, minut, sekund, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
+	}
+	for(new i= 9; i >= index; i--) 
+	{
+		switch(Obrazenia[playerid][index][WEAPONID])
+		{
+			case 0: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Piêœæ");
+			case 1: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kastet");
+			case 2: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij golfowy");
+			case 3: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pa³ka policyjna");
+			case 4: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Nó¿");
+			case 5: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Bejsbol");
+			case 6: format(weapon_decoded, sizeof(weapon_decoded), "%s", "£opata");
+			case 7: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij bilardowy");
+			case 8: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Katana");
+			case 9: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pi³a");
+			case 10: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Fioletowe dildo");
+			case 11: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Dildo");
+			case 12: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
+			case 13: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
+			case 14: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kwiaty");
+			case 15: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Laska");
+			case 16: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Granat");
+			case 17: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaz ³zawi¹cy");
+			case 18: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Koktajl Mo³otowa");
+			case 22: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet 9mm");
+			case 23: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet z t³umikiem");
+			case 24: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Desert Eagle");
+			case 25: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Shotgun");
+			case 26: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Œrótówka");
+			case 27: format(weapon_decoded, sizeof(weapon_decoded), "%s", "SPAS-12");
+			case 28: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Uzi");
+			case 29: format(weapon_decoded, sizeof(weapon_decoded), "%s", "MP5");
+			case 30: format(weapon_decoded, sizeof(weapon_decoded), "%s", "AK-47");
+			case 31: format(weapon_decoded, sizeof(weapon_decoded), "%s", "M4");
+			case 32: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Tec-9");
+			case 33: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gwintówka");
+			case 34: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Snajperka");
+			case 35: format(weapon_decoded, sizeof(weapon_decoded), "%s", "RPG");
+			case 36: format(weapon_decoded, sizeof(weapon_decoded), "%s", "HS Rocket");
+			case 37: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Miotacz ognia");
+			case 38: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Minigun");
+			case 39: format(weapon_decoded, sizeof(weapon_decoded), "%s", "C4");
+			case 40: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Detonator");		
+			case 41: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Spray");
+			case 42: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaœnica");
+			default: format(weapon_decoded, sizeof(weapon_decoded), "%s", "?");
+		}
+		godzina = Obrazenia[playerid][i][HOURS];
+		minuta = Obrazenia[playerid][i][MINUTES];
+		sekunda = Obrazenia[playerid][i][SECONDS];
+		hp = Obrazenia[playerid][i][DAMAGE] / 2;
+		if(godzina < 10) format(godzin, sizeof(godzin), "0%d", Obrazenia[playerid][i][HOURS]);
+		else format(godzin, sizeof(godzin), "%d", Obrazenia[playerid][i][HOURS]);
+		if(minuta < 10) format(minut, sizeof(minut), "0%d", Obrazenia[playerid][i][MINUTES]);
+		else format(minut, sizeof(minut), "%d", Obrazenia[playerid][i][MINUTES]);
+		if(sekunda < 10) format(sekund, sizeof(sekund), "0%d", Obrazenia[playerid][i][SECONDS]);
+		else format(sekund, sizeof(sekund), "%d", Obrazenia[playerid][i][SECONDS]);
+		format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
+		format(string, sizeof(string), "%s:%s:%s | %s -> %s[%d] zada³o %0.1fHP.", godzin, minut, sekund, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 	}
 	return 1;
 }
