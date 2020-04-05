@@ -2180,7 +2180,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1; 
 		}
 		
-		if(GetPVarInt(playerid, "CheatDetected") == 1)
+		if(GetPVarInt(playerid, "CheatDetected") == 1 || GetPVarInt(playerid, "CheatDetectedEx") == 1)
 		{
 			//kod wy³¹czony, jeœli wykryto (zapobiega dublowaniu komunikatów o wykryciu kodu nim gracz zostanie skickowany).
 			return 1;
@@ -2272,6 +2272,10 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		{
 			Kick(playerid);
 			SetPVarInt(playerid, "CheatDetected", 1);
+		}
+		else if(code == 16 || code == 17)
+		{
+			SetPVarInt(playerid, "CheatDetectedEx", 1);
 		}
 		else
 		{

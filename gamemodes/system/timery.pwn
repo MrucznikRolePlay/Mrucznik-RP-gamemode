@@ -3203,7 +3203,10 @@ public JednaSekundaTimer()
 				PlayerCuffedTime[i] -= 1;
 			}
 		}
-
+		if(GetPVarInt(i, "CheatDetectedEx") == 1)
+		{
+			KickEx(i);
+		}
 	}
 	return 1;
 }
