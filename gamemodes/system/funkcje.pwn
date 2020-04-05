@@ -12498,7 +12498,9 @@ ShowPlayerDamaged(playerid, forplayerid)
 	{
 		for(new i = index-1; i>=0; i--)
 		{
-			switch(Obrazenia[playerid][index][WEAPONID])
+			hp = Obrazenia[playerid][i][DAMAGE];
+			if(hp <= 0.1) continue;
+			switch(Obrazenia[playerid][i][WEAPONID])
 			{
 				case 0: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Piêœæ");
 				case 1: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kastet");
@@ -12545,21 +12547,17 @@ ShowPlayerDamaged(playerid, forplayerid)
 			godzina = Obrazenia[playerid][i][HOURS];
 			minuta = Obrazenia[playerid][i][MINUTES];
 			sekunda = Obrazenia[playerid][i][SECONDS];
-			hp = Obrazenia[playerid][i][DAMAGE] / 2;
-			if(godzina < 10) format(godzin, sizeof(godzin), "0%d", Obrazenia[playerid][i][HOURS]);
-			else format(godzin, sizeof(godzin), "%d", Obrazenia[playerid][i][HOURS]);
-			if(minuta < 10) format(minut, sizeof(minut), "0%d", Obrazenia[playerid][i][MINUTES]);
-			else format(minut, sizeof(minut), "%d", Obrazenia[playerid][i][MINUTES]);
-			if(sekunda < 10) format(sekund, sizeof(sekund), "0%d", Obrazenia[playerid][i][SECONDS]);
-			else format(sekund, sizeof(sekund), "%d", Obrazenia[playerid][i][SECONDS]);
+			hp = hp / 2;
 			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-			format(string, sizeof(string), "%s:%s:%s | %s -> %s[%d] zada³o %0.1fHP.", godzin, minut, sekund, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+			format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
 	}
 	for(new i= 9; i >= index; i--) 
 	{
-		switch(Obrazenia[playerid][index][WEAPONID])
+		hp = Obrazenia[playerid][i][DAMAGE];
+		if(hp <= 0.1) continue;
+		switch(Obrazenia[playerid][i][WEAPONID])
 		{
 			case 0: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Piêœæ");
 			case 1: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kastet");
@@ -12606,15 +12604,9 @@ ShowPlayerDamaged(playerid, forplayerid)
 		godzina = Obrazenia[playerid][i][HOURS];
 		minuta = Obrazenia[playerid][i][MINUTES];
 		sekunda = Obrazenia[playerid][i][SECONDS];
-		hp = Obrazenia[playerid][i][DAMAGE] / 2;
-		if(godzina < 10) format(godzin, sizeof(godzin), "0%d", Obrazenia[playerid][i][HOURS]);
-		else format(godzin, sizeof(godzin), "%d", Obrazenia[playerid][i][HOURS]);
-		if(minuta < 10) format(minut, sizeof(minut), "0%d", Obrazenia[playerid][i][MINUTES]);
-		else format(minut, sizeof(minut), "%d", Obrazenia[playerid][i][MINUTES]);
-		if(sekunda < 10) format(sekund, sizeof(sekund), "0%d", Obrazenia[playerid][i][SECONDS]);
-		else format(sekund, sizeof(sekund), "%d", Obrazenia[playerid][i][SECONDS]);
+		hp = hp/2;
 		format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-		format(string, sizeof(string), "%s:%s:%s | %s -> %s[%d] zada³o %0.1fHP.", godzin, minut, sekund, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+		format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
 		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 	}
 	return 1;
