@@ -42,4 +42,9 @@ Aby skompilować gamemode z użyciem sampctl, należy [zainstalować sampctl](ht
 - `sampctl package ensure`
 - `sampctl package build`
 
+## Uruchamianie serwera testowego
+- Na swoim systemie: `sampctl package run`
+- Z użyciem dockera: `docker build . -t mrucznik/mrucznik-rp:v2.6` `docker run -e "SAMP_DISCORD_BOT_TOKEN=[token]" mrucznik/mrucznik-rp:v2.6`
+- Z użyciem docker-compose: `docker-compose up` (razem z developersą bazą mysql!)
+
 ## Inne repozytoria

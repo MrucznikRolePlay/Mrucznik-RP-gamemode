@@ -81,10 +81,6 @@
 			"conncookies": true,
 			"cookielogging": false,
 			"output": true
-		},
-		{
-			"name": "dev2",
-			"version": "0.3.7"
 		}
 	]
 }

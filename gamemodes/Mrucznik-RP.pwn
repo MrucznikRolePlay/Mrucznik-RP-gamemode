@@ -252,7 +252,7 @@ public OnGameModeInit()
     Streamer_SetTickRate(50);
 
 	//-------<[ MySQL ]>-------
-	MruMySQL_Init();//mysql
+	if(MruMySQL_Init() == MYSQL_INVALID_HANDLE) return 1;
 	MruMySQL_IloscLiderowLoad();
 
 	
