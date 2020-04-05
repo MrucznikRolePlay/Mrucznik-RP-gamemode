@@ -12544,7 +12544,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 				case 36: format(weapon_decoded, sizeof(weapon_decoded), "%s", "HS Rocket");
 				case 37: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Miotacz ognia");
 				case 38: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Minigun");
-				case 39: format(weapon_decoded, sizeof(weapon_decoded), "%s", "C4")
+				case 39: format(weapon_decoded, sizeof(weapon_decoded), "%s", "C4");
 				case 40: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Detonator");		
 				case 41: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Spray");
 				case 42: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaœnica");
