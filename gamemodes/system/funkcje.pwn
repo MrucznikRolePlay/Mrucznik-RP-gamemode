@@ -12506,60 +12506,57 @@ ShowPlayerDamaged(playerid, forplayerid)
 		new atakujacy[MAX_PLAYER_NAME];
 		for(new i = index-1; i>=0; i--)
 		{
-			if(strlen(Obrazenia[playerid][index][ATTACKER]))
+			switch(Obrazenia[playerid][index][WEAPONID])
 			{
-				switch(Obrazenia[playerid][index][WEAPONID])
-				{
-					case 0: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Piêœæ");
-					case 1: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kastet");
-					case 2: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij golfowy");
-					case 3: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pa³ka policyjna");
-					case 4: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Nó¿");
-					case 5: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Bejsbol");
-					case 6: format(weapon_decoded, sizeof(weapon_decoded), "%s", "£opata");
-					case 7: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij bilardowy");
-					case 8: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Katana");
-					case 9: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pi³a");
-					case 10: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Fioletowe dildo");
-					case 11: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Dildo");
-					case 12: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
-					case 13: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
-					case 14: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kwiaty");
-					case 15: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Laska");
-					case 16: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Granat");
-					case 17: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaz ³zawi¹cy");
-					case 18: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Koktajl Mo³otowa");
-					case 22: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet 9mm");
-					case 23: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet z t³umikiem");
-					case 24: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Desert Eagle");
-					case 25: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Shotgun");
-					case 26: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Œrótówka");
-					case 27: format(weapon_decoded, sizeof(weapon_decoded), "%s", "SPAS-12");
-					case 28: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Uzi");
-					case 29: format(weapon_decoded, sizeof(weapon_decoded), "%s", "MP5");
-					case 30: format(weapon_decoded, sizeof(weapon_decoded), "%s", "AK-47");
-					case 31: format(weapon_decoded, sizeof(weapon_decoded), "%s", "M4");
-					case 32: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Tec-9");
-					case 33: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gwintówka");
-					case 34: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Snajperka");
-					case 35: format(weapon_decoded, sizeof(weapon_decoded), "%s", "RPG");
-					case 36: format(weapon_decoded, sizeof(weapon_decoded), "%s", "HS Rocket");
-					case 37: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Miotacz ognia");
-					case 38: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Minigun");
-					case 39: format(weapon_decoded, sizeof(weapon_decoded), "%s", "C4");
-					case 40: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Detonator");
-					case 41: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Spray");
-					case 42: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaœnica");
-					default: format(weapon_decoded, sizeof(weapon_decoded), "%s", "?");
-				}
-				godzina = Obrazenia[playerid][index][HOURS];
-				minuta = Obrazenia[playerid][index][MINUTES];
-				sekunda = Obrazenia[playerid][index][SECONDS];
-				hp = Obrazenia[playerid][index][DAMAGE];
-				format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][index][ATTACKER]);
-				format(string, sizeof(string), "%d:%d:%d | %s -> %s zada³o %fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, hp);
-				SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
+				case 0: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Piêœæ");
+				case 1: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kastet");
+				case 2: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij golfowy");
+				case 3: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pa³ka policyjna");
+				case 4: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Nó¿");
+				case 5: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Bejsbol");
+				case 6: format(weapon_decoded, sizeof(weapon_decoded), "%s", "£opata");
+				case 7: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij bilardowy");
+				case 8: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Katana");
+				case 9: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pi³a");
+				case 10: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Fioletowe dildo");
+				case 11: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Dildo");
+				case 12: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
+				case 13: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
+				case 14: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kwiaty");
+				case 15: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Laska");
+				case 16: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Granat");
+				case 17: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaz ³zawi¹cy");
+				case 18: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Koktajl Mo³otowa");
+				case 22: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet 9mm");
+				case 23: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet z t³umikiem");
+				case 24: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Desert Eagle");
+				case 25: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Shotgun");
+				case 26: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Œrótówka");
+				case 27: format(weapon_decoded, sizeof(weapon_decoded), "%s", "SPAS-12");
+				case 28: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Uzi");
+				case 29: format(weapon_decoded, sizeof(weapon_decoded), "%s", "MP5");
+				case 30: format(weapon_decoded, sizeof(weapon_decoded), "%s", "AK-47");
+				case 31: format(weapon_decoded, sizeof(weapon_decoded), "%s", "M4");
+				case 32: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Tec-9");
+				case 33: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gwintówka");
+				case 34: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Snajperka");
+				case 35: format(weapon_decoded, sizeof(weapon_decoded), "%s", "RPG");
+				case 36: format(weapon_decoded, sizeof(weapon_decoded), "%s", "HS Rocket");
+				case 37: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Miotacz ognia");
+				case 38: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Minigun");
+				case 39: format(weapon_decoded, sizeof(weapon_decoded), "%s", "C4")
+				case 40: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Detonator");		
+				case 41: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Spray");
+				case 42: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaœnica");
+				default: format(weapon_decoded, sizeof(weapon_decoded), "%s", "?");
 			}
+			godzina = Obrazenia[playerid][index][HOURS];
+			minuta = Obrazenia[playerid][index][MINUTES];
+			sekunda = Obrazenia[playerid][index][SECONDS];
+			hp = Obrazenia[playerid][index][DAMAGE];
+			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][index][ATTACKER]);
+			format(string, sizeof(string), "%d:%d:%d | %s -> %s zada³o %fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, hp);
+			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
 	}
 	return 1;
