@@ -12491,7 +12491,6 @@ ShowPlayerDamaged(playerid, forplayerid)
 	new index = ObrazeniaIndex[playerid];
 	new string[72];
 	new weapon_decoded[24];
-	new godzin[2],minut[2],sekund[2];
 	new godzina,minuta,sekunda,Float:hp;
 	new atakujacy[MAX_PLAYER_NAME];
 	if(index != 0) 
