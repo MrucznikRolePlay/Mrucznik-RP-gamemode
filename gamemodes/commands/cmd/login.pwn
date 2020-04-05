@@ -81,7 +81,6 @@ YCMD:login(playerid, params[], help)
 		ZerujZmienne(playerid);
 		gPlayerLogged[playerid] = 0;
 		OnPlayerConnect(playerid);
-		SetPlayerDrunkLevel(playerid, 0);
 
 		TogglePlayerSpectating(playerid, true);
 		SetTimerEx("OPCLogin", 100, 0, "i", playerid);

@@ -53,7 +53,6 @@ YCMD:zaparkuj(playerid, params[], help)
 				CarData[VehicleUID[lVeh][vUID]][c_VW] = VW; 
                 CarData[VehicleUID[lVeh][vUID]][c_Rot] = A;
                 Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE);
-                Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE);
 
 				format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(lVeh)-400]);
 				sendTipMessage(playerid, string, COLOR_LIGHTBLUE);

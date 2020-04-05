@@ -2434,11 +2434,7 @@ SetPlayerSpawnPos(playerid)
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
 		if(strfind((PlayerInfo[playerid][pAJreason]), "DM2", true) == -1
-		&& strfind((PlayerInfo[playerid][pAJreason]), "Death Match 2", true) == -1)
-		{
-			ResetPlayerWeapons(playerid);
-			UsunBron(playerid);
-		}
+		&& strfind((PlayerInfo[playerid][pAJreason]), "Death Match 2", true) == -1) SetPVarInt(playerid, "DostalDM2", 1);
 		SendClientMessage(playerid, COLOR_PANICRED, string);
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
@@ -5818,7 +5814,7 @@ public OnPlayerUpdate(playerid)
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
 		return 1;
     }
-	if(Spectate[playerid] != INVALID_PLAYER_ID && pSpectatingCanChange[playerid] == 1)
+	if(Spectate[playerid] != INVALID_PLAYER_ID && GetPVarInt(playerid, "SpecChange") == 1)
     {
 		new keys, ud,lr;
         GetPlayerKeys(playerid, keys, ud, lr);

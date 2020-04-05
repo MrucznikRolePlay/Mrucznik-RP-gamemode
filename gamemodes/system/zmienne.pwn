@@ -1106,7 +1106,7 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
-
+	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
 	organizacje_clearCache(playerid);
