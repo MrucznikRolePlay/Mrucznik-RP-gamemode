@@ -12449,16 +12449,7 @@ stock GetClosestCar(playerid, Float:Prevdist=5.0)
 		}
 	}
 	return Prevcar;
-}
-stock TimeConvertEx(sec, &hours, &minutes, &seconds)
-{
-	new days;
-    days = floatround(sec / 86400);
-    hours = floatround((sec - (days * 86400)) / 3600);
-    minutes = floatround((sec - (days * 86400) - (hours * 3600)) / 60);
-    seconds = sec % 60;
-    return 1;
-}  
+} 
 stock GetDistanceToCar(playerid, carid)
 {
 	new Float:x1,Float:y1,Float:z1,Float:x2,Float:y2,Float:z2,Float:Dis;
@@ -12478,7 +12469,12 @@ SavePlayerSentMessage(playerid, message[])
 SavePlayerDamaged(playerid, attackerid, Float:damage, weapon)
 {
 	new hour, minute, second;
-	TimeConvertEx(gettime(), hour, minute, second);
+	new sec = gettime();
+	new day;
+    day = floatround(sec / 86400);
+    hour = floatround((sec - (day * 86400)) / 3600);
+    minute = floatround((sec - (day * 86400) - (hour * 3600)) / 60);
+    second = sec % 60;
 	new idx = ObrazeniaIndex[playerid];
 	format(Obrazenia[playerid][idx][ATTACKER], MAX_PLAYER_NAME, "%s", GetNick(attackerid));
 	Obrazenia[playerid][idx][DAMAGE] = damage;
@@ -12555,7 +12551,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 			sekunda = Obrazenia[playerid][index][SECONDS];
 			hp = Obrazenia[playerid][index][DAMAGE];
 			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][index][ATTACKER]);
-			format(string, sizeof(string), "%d:%d:%d | %s -> %s zada³o %fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, hp);
+			format(string, sizeof(string), "%d:%d:%d | %s -> %s zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, hp);
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
 	}
