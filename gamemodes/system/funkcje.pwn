@@ -12050,6 +12050,7 @@ IsProblematicCode(code)
 	|| code == 5 //5 Anti-teleport hack (vehicle to player)
 	|| code == 6 //6 Anti-teleport hack (pickups)
 	|| code == 8 //8 Anti-FlyHack (in vehicle)
+	|| code == 9 // 9 Anti-Slapper/FlyHack
 	|| code == 11 //11 Anti-Health hack (in vehicle)
 	|| code == 15 //15 Anti-Weapon hack
 	|| code == 18 //18 Anti-Special actions hack
