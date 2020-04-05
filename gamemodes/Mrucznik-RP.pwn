@@ -1777,6 +1777,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		amount,
 		weaponid
 	);
+	SavePlayerDamaged(playerid, issuerid, amount, weaponid);
 
     SetTimerEx("OnPlayerTakeDamageWeaponHack", 500, false, "iii", issuerid, weaponid, playerid);
 

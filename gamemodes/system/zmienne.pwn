@@ -1012,7 +1012,9 @@ new Worek_Uzyty[MAX_PLAYERS];
 new Worek_MamWorek[MAX_PLAYERS];
 new Worek_KtoZalozyl[MAX_PLAYERS];
 new Worek_KomuZalozylem[MAX_PLAYERS];
-
+//cmd obrazenia
+new ObrazeniaIndex[MAX_PLAYERS];
+new Obrazenia[MAX_PLAYERS][10][eOBRAZENIA];
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
@@ -1113,7 +1115,7 @@ ZerujZmienne(playerid)
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
 
     PlayerInfo[playerid][pDescLabel] = tmp_label;
-
+	ObrazeniaIndex[playerid] = 0;
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
