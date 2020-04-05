@@ -12546,11 +12546,11 @@ ShowPlayerDamaged(playerid, forplayerid)
 				case 42: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaœnica");
 				default: format(weapon_decoded, sizeof(weapon_decoded), "%s", "?");
 			}
-			godzina = Obrazenia[playerid][index][HOURS];
-			minuta = Obrazenia[playerid][index][MINUTES];
-			sekunda = Obrazenia[playerid][index][SECONDS];
-			hp = Obrazenia[playerid][index][DAMAGE];
-			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][index][ATTACKER]);
+			godzina = Obrazenia[playerid][i][HOURS];
+			minuta = Obrazenia[playerid][i][MINUTES];
+			sekunda = Obrazenia[playerid][i][SECONDS];
+			hp = Obrazenia[playerid][i][DAMAGE];
+			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
 			format(string, sizeof(string), "%d:%d:%d | %s -> %s zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, hp);
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
