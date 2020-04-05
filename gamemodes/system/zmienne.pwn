@@ -1116,6 +1116,7 @@ ZerujZmienne(playerid)
 
     PlayerInfo[playerid][pDescLabel] = tmp_label;
 	ObrazeniaIndex[playerid] = 0;
+	for(new i = 0; i<=9; i++) Obrazenia[playerid][i--][DAMAGE] = 0.0;
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
