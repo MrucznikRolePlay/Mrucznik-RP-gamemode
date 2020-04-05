@@ -1744,6 +1744,7 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
 		amount,
 		weaponid);
+	SavePlayerDamaged(damagedid, playerid, amount, weaponid);
 	return 1;
 }
 
@@ -1777,7 +1778,6 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		amount,
 		weaponid
 	);
-	SavePlayerDamaged(playerid, issuerid, amount, weaponid);
 
     SetTimerEx("OnPlayerTakeDamageWeaponHack", 500, false, "iii", issuerid, weaponid, playerid);
 
@@ -2186,25 +2186,6 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//kod wy³¹czony, jeœli wykryto (zapobiega dublowaniu komunikatów o wykryciu kodu nim gracz zostanie skickowany).
 			return 1;
 		}
-
-		if(code == 16)//ammohack
-		{
-			SetPVarInt(playerid, "ammohackdetect", 1);
-			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Ammohack", GetNickEx(playerid), playerid);
-			SendMessageToAdmin(string, 0x9ACD32AA);
-			//format(string, sizeof(string), "[Nex-AC] AC ammo: %d, ammo: %d, weaponid: %d", ACInfo[playerid][acAmmo][ac_s], ac_a, ac_w);
-			//SendMessageToAdmin(string, 0x9ACD32AA);
-			
-		}
-		if(code == 17)//ammohack
-		{
-			SetPVarInt(playerid, "ammohackdetect", 1);
-			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Nieskoñczony AmmoHack", GetNickEx(playerid), playerid);
-			SendMessageToAdmin(string, 0x9ACD32AA);
-			//format(string, sizeof(string), "[Nex-AC] Weaponid: %d, AC ammo: %d, ammo: %d", weaponid, ACInfo[playerid][acAmmo][ac_s], ac_t);
-			//SendMessageToAdmin(string, 0x9ACD32AA);
-
-		}
 		new code_decoded[32];
         switch(code)
         {
@@ -2276,7 +2257,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		}
 		else if(code == 16 || code == 17)
 		{
-			SetPVarInt(playerid, "CheatDetectedEx", 1);
+			SetPVarInt(playerid, "ammohackdetect", 1);
 		}
 		else
 		{

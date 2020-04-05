@@ -2488,7 +2488,8 @@ public JednaSekundaTimer()
 		// serce zapisu broni
 		if(State >= 1 && State <= 6)
 		{
-			if(MaZapisanaBron(i) && GetPVarInt(i, "ammohackdetect") != 1)//if(PlayerInfo[i][pGun2] >= 2) - dziwne, ¿e wczeœniej nikt tego b³êdu nie zauwa¿y³.
+			if(GetPVarInt(i, "ammohackdetect") == 1) KickEx(i);
+			if(MaZapisanaBron(i))//if(PlayerInfo[i][pGun2] >= 2) - dziwne, ¿e wczeœniej nikt tego b³êdu nie zauwa¿y³.
 			{
                 weaponID = GetPlayerWeapon(i);
                 ammo = GetPlayerAmmo(i);
@@ -3202,10 +3203,6 @@ public JednaSekundaTimer()
 			{
 				PlayerCuffedTime[i] -= 1;
 			}
-		}
-		if(GetPVarInt(i, "CheatDetectedEx") == 1)
-		{
-			KickEx(i);
 		}
 	}
 	return 1;
