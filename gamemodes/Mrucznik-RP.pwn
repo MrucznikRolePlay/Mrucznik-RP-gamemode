@@ -5623,7 +5623,7 @@ PayDay()
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
 	
-	if(DmvActorStatus && (shifthour < 16 || shifthour > 22))
+	if(DmvActorStatus && (shifthour < 9 || shifthour > 23))
 	{
 		DestroyActorsInDMV(INVALID_PLAYER_ID); 
 	}
