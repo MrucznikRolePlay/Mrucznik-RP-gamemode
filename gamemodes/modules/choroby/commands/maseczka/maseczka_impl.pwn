@@ -103,6 +103,11 @@ command_maseczka_Impl(playerid, giveplayerid, price)
         sendErrorMessage(playerid, "Cena musi byæ wiêksza ni¿ 800$.");
         return 1;
     }
+    if(price => 15000)
+    {
+        sendErrorMessage(playerid, "Cena musi byæ mniejsza ni¿ 15000$.");
+        return 1;
+    }
 
     //body
     SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Oferujesz %s kupno maseczki ochronnej za %d$.", GetNick(giveplayerid), price));
