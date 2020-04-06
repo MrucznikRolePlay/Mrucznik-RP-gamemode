@@ -82,7 +82,6 @@ YCMD:zaparkuj(playerid, params[], help)
             CarData[VehicleUID[lVeh][vUID]][c_Pos][2] = Z;
             CarData[VehicleUID[lVeh][vUID]][c_Rot] = A;
 			CarData[VehicleUID[lVeh][vUID]][c_VW] = VW; 
-            Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE); //x2 bo bug z zapisem na raz
             Car_Save(VehicleUID[lVeh][vUID], CAR_SAVE_STATE);
 
 			format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(lVeh)-400]);
