@@ -1492,31 +1492,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 			    case 0:
 				{
-					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != 4)
-					{
-						SendClientMessage(playerid, -1, "Poziom zablokowany.");
-						return 1;
-					}
 				    ElevatorTravel(playerid,-2805.0967,2596.0566,-98.0829, 90,0.0);//pkostnica
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
 				case 1:
 				{
+					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
 					ElevatorTravel(playerid,1144.4740, -1333.2556, 13.8348, 0,90.0);//parking
 					PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 				}
 				case 2:
+				{
+        			ElevatorTravel(playerid,1134.0449,-1320.7128,68.3750,90,270.0);//p1
+					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+				}
+				case 3:
 				{
 					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != 4)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
 					}
-        			ElevatorTravel(playerid,1134.0449,-1320.7128,68.3750,90,270.0);//p1
-					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
-				}
-				case 3:
-				{
 					ElevatorTravel(playerid,1183.3129,-1333.5684,88.1627,90,90.0);//p2
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
@@ -1542,16 +1542,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 8:
             	{
-					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != 4)
-					{
-						SendClientMessage(playerid, -1, "Poziom zablokowany.");
-						return 1;
-					}
 					ElevatorTravel(playerid,1178.2081,-1330.6317,191.5315,90,90.0);//p7
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
                 case 9:
 				{
+					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
             		ElevatorTravel(playerid,1161.8228, -1337.0521, 31.6112,0,180.0);//dach
 					PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 				}
