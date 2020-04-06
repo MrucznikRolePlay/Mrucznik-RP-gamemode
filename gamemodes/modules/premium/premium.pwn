@@ -322,7 +322,6 @@ KupNumerTelefonu(playerid, string:_numer[])
 	if(!IsPlayerConnected(playerid)) return 1;
 	if(strlen(_numer) < 1) return DialogTelefon(playerid);
 	if(strlen(_numer) > 9) return DialogTelefon(playerid);
-	if(_numer[0] == '0') return DialogTelefon(playerid);
 
 	new numer = strval(_numer);
 
