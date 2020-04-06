@@ -107,11 +107,12 @@ stock graffiti_LoadMySQL(id = -1)
 }
 stock graffiti_SaveMySQL(id, playerid)
 {
-	new query[1024];
+	new query[1024], escaped_text[128];
+	mysql_real_escape_string(GraffitiInfo[id][grafText], escaped_text);
 	format(query, sizeof(query), "INSERT INTO `mru_graffiti`(`id`, `ownerName`, `text`, `kolor`, `x`, `y`, `z`, `xy`, `yy`, `zy`) VALUES ('%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%f', '%f')",
 	id,
 	GetNickEx(playerid),
-	GraffitiInfo[id][grafText],
+	escaped_text,
 	GraffitiInfo[id][gColor],
 	GraffitiInfo[id][grafXpos],
 	GraffitiInfo[id][grafYpos],
@@ -124,7 +125,7 @@ stock graffiti_SaveMySQL(id, playerid)
 
 stock graffiti_UpdateMySQL(id, type = 1)
 {
-	new query[1024];
+	new query[1024], escaped_text[128];
 	if(type == 1)
 	{
 		format(query, sizeof(query), "UPDATE `mru_graffiti` SET `x`='%f',`y`='%f',`z`='%f',`xy`='%f',`yy`='%f',`zy`='%f' WHERE `id`='%d'",
@@ -147,8 +148,9 @@ stock graffiti_UpdateMySQL(id, type = 1)
 		}
 		else
 		{
+			mysql_real_escape_string(GraffitiInfo[id][grafText], escaped_text);
 			format(query, sizeof(query), "UPDATE `mru_graffiti` SET `text`='%s',`kolor`='%d' WHERE `id`='%d'",
-			GraffitiInfo[id][grafText],
+			escaped_text,
 			GraffitiInfo[id][gColor],
 			id);
 			mysql_query(query);
