@@ -2328,8 +2328,8 @@ public JednaSekundaTimer()
 						SendAdminMessage(COLOR_PANICRED, string);
 						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i));
 						sendTipMessage(i, string);
-						SetTimerEx("AntySB", 5000, 0, "d", giveplayerid);
-						AntySpawnBroni[giveplayerid] = 5;
+						SetTimerEx("AntySB", 5000, 0, "d", i);
+						AntySpawnBroni[i] = 5;
 						ResetPlayerWeapons(i);
 						UsunBron(i);
 					}
