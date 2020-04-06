@@ -322,21 +322,21 @@ KupNumerTelefonu(playerid, string:_numer[])
 	if(!IsPlayerConnected(playerid)) return 1;
 	if(strlen(_numer) < 1) return DialogTelefon(playerid);
 	if(strlen(_numer) > 9) return DialogTelefon(playerid);
+	if(_numer[0] == '0') return DialogTelefon(playerid);
 
 	new numer = strval(_numer);
 
 	if(MruMySQL_IsPhoneNumberAvailable(numer))
 	{
-
 		new cena;
 
-		if(strlen(_numer) == 1)
+		if(numer > 0 && numer < 10)
 			cena = TELEFON_CENA_1;
-		else if(strlen(_numer) == 2)
+		else if(numer > 10 && numer < 100)
 			cena = TELEFON_CENA_2;
-		else if(strlen(_numer) == 3)
+		else if(numer > 100 && numer < 1000)
 			cena = TELEFON_CENA_3;
-		else if(strlen(_numer) == 4)
+		else if(numer > 1000 && numer < 10000)
 			cena = TELEFON_CENA_4;
 		else
 			cena = TELEFON_CENA_5;
