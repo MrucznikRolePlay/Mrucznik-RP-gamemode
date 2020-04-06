@@ -1492,6 +1492,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 			    case 0:
 				{
+					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
 				    ElevatorTravel(playerid,-2805.0967,2596.0566,-98.0829, 90,0.0);//pkostnica
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
@@ -1502,6 +1507,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
+					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
         			ElevatorTravel(playerid,1134.0449,-1320.7128,68.3750,90,270.0);//p1
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
@@ -1532,6 +1542,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 8:
             	{
+					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
 					ElevatorTravel(playerid,1178.2081,-1330.6317,191.5315,90,90.0);//p7
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
