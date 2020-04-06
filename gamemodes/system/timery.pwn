@@ -1925,7 +1925,7 @@ public CustomPickups()
 				    case 1:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 5000);
+						ZabierzKase(i, 2500);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
