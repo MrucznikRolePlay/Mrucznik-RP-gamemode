@@ -3495,5 +3495,4 @@ public DamagedHP(playerid)
 	return 1;
 }
 
-public Spectator_ChangedKeyBool(playerid) pSpectatingCanChange[playerid] = 1;
 //EOF

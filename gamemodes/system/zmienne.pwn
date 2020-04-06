@@ -1049,8 +1049,6 @@ new Float:TeleportDest[MAX_PLAYERS][3];
 
 new Float:OldCoordsX[MAX_PLAYERS], Float:OldCoordsY[MAX_PLAYERS];
 
-new pSpectatingCanChange[MAX_PLAYERS];
-
 new Gas[CAR_AMOUNT];
 new Refueling[MAX_PLAYERS];
 new Naprawiasie[MAX_PLAYERS];
@@ -1123,7 +1121,6 @@ ZerujZmienne(playerid)
 	okregi[playerid] = 0;//¯u¿el
 	SpamujeMechanik[playerid] = 0;//mechanik
 	AntySpam[playerid] = 0;
-	pSpectatingCanChange[playerid] = 1;
 	CenaDawanegoAuta[playerid] = 0;
 	BusCzit[playerid] = 0;
 	GraczWymiany[playerid] = 999;
@@ -1425,7 +1422,7 @@ ZerujZmienne(playerid)
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
-
+	SetPVarInt(playerid, "SpecChange", 1);
 	new nick[32];
 	if(GetPVarString(playerid, "maska_nick", nick, 24))
 	{

@@ -4788,7 +4788,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
-		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d] MruCoins [%d]", housekey,PlayerInfo[targetid][pKluczeAuta], PremiumInfo[targetid][pMC]);
+		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d] MruCoins [%d] Zestawy [%d]", housekey,PlayerInfo[targetid][pKluczeAuta], PremiumInfo[targetid][pMC],PlayerInfo[targetid][pFixKit]);
 		SendClientMessage(playerid, COLOR_GRAD6,coordsstring); 
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	}

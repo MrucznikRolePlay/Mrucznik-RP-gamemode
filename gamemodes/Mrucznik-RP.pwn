@@ -5814,39 +5814,46 @@ public OnPlayerUpdate(playerid)
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
 		return 1;
     }
-	if(Spectate[playerid] != INVALID_PLAYER_ID && GetPVarInt(playerid, "SpecChange") == 1)
+	if(Spectate[playerid] != INVALID_PLAYER_ID)
     {
 		new keys, ud,lr;
         GetPlayerKeys(playerid, keys, ud, lr);
-        if(lr == KEY_RIGHT) //NEXT
+        if(lr == KEY_RIGHT && GetPVarInt(playerid, "SpecChange") == 1) //NEXT
 		{
-			if(IsPlayerConnected(Spectate[playerid]++))
+			if(IsPlayerConnected(Spectate[playerid]+1)  && Spectate[playerid]+1 != INVALID_PLAYER_ID)
 			{
-				if(PlayerInfo[Spectate[playerid]++][pAdmin] > 0)
+				if(playerid !=  Spectate[playerid]+1)
 				{
-					SendClientMessage(playerid, COLOR_LIGHTRED, "Nastêpne id jest admina.");
-					return 1;
+					new str[6];
+					valstr(str, Spectate[playerid]+1);
+					RunCommand(playerid, "/spec",  str);
 				}
-				new str[6];
-				valstr(str, Spectate[playerid]++);
-				RunCommand(playerid, "/spec",  str);
+				else
+				{
+					new str[6];
+					valstr(str, Spectate[playerid]+2);
+					RunCommand(playerid, "/spec",  str);
+				}
 			}
 		}
-		else if(lr == KEY_LEFT)
+		else if(lr == KEY_LEFT && GetPVarInt(playerid, "SpecChange") == 1)
 		{
-			if(IsPlayerConnected(Spectate[playerid]--))
+			if(IsPlayerConnected(Spectate[playerid]-1) && Spectate[playerid]-1 != INVALID_PLAYER_ID)
 			{
-				if(PlayerInfo[Spectate[playerid]--][pAdmin] > 0)
+				if(playerid !=  Spectate[playerid]-1)
 				{
-					SendClientMessage(playerid, COLOR_LIGHTRED, "Nastêpne id jest admina.");
-					return 1;
+					new str[6];
+					valstr(str, Spectate[playerid]-1);
+					RunCommand(playerid, "/spec",  str);
 				}
-				new str[6];
-				valstr(str, Spectate[playerid]--);
-				RunCommand(playerid, "/spec",  str);
+				else
+				{
+					new str[6];
+					valstr(str, Spectate[playerid]-2);
+					RunCommand(playerid, "/spec",  str);
+				}
 			}
 		}
-		return 1;
     }
 	return 1;
 }
