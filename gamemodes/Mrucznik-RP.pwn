@@ -5816,44 +5816,27 @@ public OnPlayerUpdate(playerid)
     }
 	if(Spectate[playerid] != INVALID_PLAYER_ID)
     {
-		new keys, ud,lr;
+		new keys, ud,lr, actualid = INVALID_PLAYER_ID;
         GetPlayerKeys(playerid, keys, ud, lr);
-        if(lr == KEY_RIGHT && GetPVarInt(playerid, "SpecChange") == 1) //NEXT
+        if(lr == KEY_RIGHT) //NEXT
 		{
-			if(IsPlayerConnected(Spectate[playerid]+1))
+			foreach(new i : Player)
 			{
-				if(playerid !=  Spectate[playerid]+1)
+				if(i == playerid) continue;
+				if(actualid != INVALID_PLAYER_ID) //if is set
 				{
 					new str[6];
-					valstr(str, Spectate[playerid]+1);
-					RunCommand(playerid, "/spec",  str);
+                	valstr(str, i);
+                    RunCommand(playerid, "/spec",  str);
+					break;
 				}
-				else
+                else if(i == Spectate[playerid]) //if not set and expect
 				{
-					new str[6];
-					valstr(str, Spectate[playerid]+2);
-					RunCommand(playerid, "/spec",  str);
+					actualid = i;
 				}
-			}
+            }
 		}
-		else if(lr == KEY_LEFT && GetPVarInt(playerid, "SpecChange") == 1)
-		{
-			if(IsPlayerConnected(Spectate[playerid]-1))
-			{
-				if(playerid !=  Spectate[playerid]-1)
-				{
-					new str[6];
-					valstr(str, Spectate[playerid]-1);
-					RunCommand(playerid, "/spec",  str);
-				}
-				else
-				{
-					new str[6];
-					valstr(str, Spectate[playerid]-2);
-					RunCommand(playerid, "/spec",  str);
-				}
-			}
-		}
+		return 1;
     }
 	return 1;
 }
