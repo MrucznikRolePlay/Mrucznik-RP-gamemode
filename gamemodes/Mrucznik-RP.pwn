@@ -2432,7 +2432,12 @@ SetPlayerSpawnPos(playerid)
 		SetPlayerPos(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
 		PlayerInfo[playerid][pMuted] = 1;
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
-		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
+
+		if(GetPVarInt(playerid, "DostalAJkomunikat") == 0) 
+		{
+			format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
+			SetPVarInt(playerid, "DostalAJkomunikat", 1);
+		}
 		if(strfind((PlayerInfo[playerid][pAJreason]), "DM2", true) != -1
 		|| strfind((PlayerInfo[playerid][pAJreason]), "Death Match 2", true) != -1) SetPVarInt(playerid, "DostalDM2", 1);
 		SendClientMessage(playerid, COLOR_PANICRED, string);
