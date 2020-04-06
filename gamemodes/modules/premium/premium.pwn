@@ -201,12 +201,14 @@ KupPojazdPremium(playerid, id)
 		sendErrorMessage(playerid, "Nie staæ Ciê na ten pojazd");
 		return DialogPojazdyPremium(playerid);
 	}
-	MRP_ShopPurchaseCar(playerid, PojazdyPremium[id][Model], PojazdyPremium[id][Cena]);
-	Log(premiumLog, INFO, "%s kupil pojazd premium %s za %dMC",
-		GetPlayerLogName(playerid), 
-		VehicleNames[PojazdyPremium[id][Model]-400], 
-		PojazdyPremium[id][Cena]);
-	premium_printMcBalance(playerid);
+	if(MRP_ShopPurchaseCar(playerid, PojazdyPremium[id][Model], PojazdyPremium[id][Cena]))
+	{
+		Log(premiumLog, INFO, "%s kupil pojazd premium %s za %dMC",
+			GetPlayerLogName(playerid), 
+			VehicleNames[PojazdyPremium[id][Model]-400], 
+			PojazdyPremium[id][Cena]);
+		premium_printMcBalance(playerid);
+	}
 	DialogMenuDotacje(playerid);
 	return 1;
 }
