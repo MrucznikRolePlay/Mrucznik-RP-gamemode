@@ -5820,7 +5820,7 @@ public OnPlayerUpdate(playerid)
         GetPlayerKeys(playerid, keys, ud, lr);
         if(lr == KEY_RIGHT && GetPVarInt(playerid, "SpecChange") == 1) //NEXT
 		{
-			if(IsPlayerConnected(Spectate[playerid]+1)  && Spectate[playerid]+1 != INVALID_PLAYER_ID)
+			if(IsPlayerConnected(Spectate[playerid]+1))
 			{
 				if(playerid !=  Spectate[playerid]+1)
 				{
@@ -5838,7 +5838,7 @@ public OnPlayerUpdate(playerid)
 		}
 		else if(lr == KEY_LEFT && GetPVarInt(playerid, "SpecChange") == 1)
 		{
-			if(IsPlayerConnected(Spectate[playerid]-1) && Spectate[playerid]-1 != INVALID_PLAYER_ID)
+			if(IsPlayerConnected(Spectate[playerid]-1))
 			{
 				if(playerid !=  Spectate[playerid]-1)
 				{
