@@ -1097,6 +1097,8 @@ OdkujKajdanki(playerid)
 	Kajdanki_Uzyte[playerid] = 0;
 	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
 	Kajdanki_JestemSkuty[playerid] = 0;
+	ClearAnimations(playerid);
+	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 }
 
 public spamujewl(playerid){
