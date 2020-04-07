@@ -41,12 +41,12 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /kick");
         SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo /czyjtonumer");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /zdejmijbpk /unbw /checkbw /setvw /diagnoza /checktankmod");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /zdejmijbpk /unbw /checkbw /setvw /diagnoza /checktank");
     }
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
-		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /zdejmijbpk /checktankmod");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /zdejmijbpk /checktank");
 	}
     if (IsAScripter(playerid))
     {
@@ -54,7 +54,7 @@ YCMD:ah(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /goto /gotopos /gethere /respawnplayer");
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
-        SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotomechy /gotobank /gotostacja /checktankmod");
+        SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotomechy /gotobank /gotostacja /checktank");
 		SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /zdejmijbpk /dajdowozu /specshow /setdrunk");
     }
 	if (PlayerInfo[playerid][pAdmin] >= 1)
@@ -63,7 +63,7 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /freeze /unfreeze /mute /kill /dpa /mark /gotomark");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setint /getint /setvw /getvw /wybieralka");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /mordinfo /gotomechy /podglad /gotocar /ip");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /check /pojazdygracza /sb /pokazcb /checktankmod");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /check /pojazdygracza /sb /pokazcb /checktank");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /carjump /goto /up /getcar /gethere");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");

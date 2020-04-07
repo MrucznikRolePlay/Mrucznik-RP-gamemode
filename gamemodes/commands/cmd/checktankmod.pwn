@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ checktankmod ]---------------------------------------------//
+//-----------------------------------------------[ checktank ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -29,14 +29,14 @@
 /*
 	
 */
-YCMD:checktankmod(playerid, params[], help)
+YCMD:checktank(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
 		new giveid;
 		if( sscanf(params, "k<fix>", giveid))
 		{
-			sendTipMessage(playerid, "U¿yj /checktankmod [id gracza/czêœæ nicku]");
+			sendTipMessage(playerid, "U¿yj /checktank [id gracza/czêœæ nicku]");
 			return 1;
 		}
 
