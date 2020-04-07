@@ -29,28 +29,28 @@
 //-----------------<[ Funkcje: ]>-------------------
 DiscordConnectInit()
 {
-	g_SanNewsChannelId=DCC_FindChannelById("538403089263362098"); //ig-san-news
-	g_AdminChannelId=DCC_FindChannelById("538403269077106725"); //ig-admin
-	g_ReportChannelId=DCC_FindChannelById("538403303550091264"); //ig-report
+	g_SanNewsChannelId=DCC_FindChannelById("696491963582513272"); //ig-san-news
+	g_AdminChannelId=DCC_FindChannelById("696501357208797214"); //ig-admin
+	g_ReportChannelId=DCC_FindChannelById("696501866812407888"); //ig-report
 
-	g_FracChannel[1]=DCC_FindChannelById("545045344652886056");
-	g_FracChannel[2]=DCC_FindChannelById("545620322423144459");
-	g_FracChannel[3]=DCC_FindChannelById("574930724973576207");
-	g_FracChannel[4]=DCC_FindChannelById("545619975151288321");
-	g_FracChannel[5]=DCC_FindChannelById("545625556578992128");
-	g_FracChannel[6]=DCC_FindChannelById("574930782007853066");
-	g_FracChannel[7]=DCC_FindChannelById("545626921950511104");
-	g_FracChannel[8]=DCC_FindChannelById("574930925209780228");
-	g_FracChannel[9]=DCC_FindChannelById("545621434098253824");
-	g_FracChannel[10]=DCC_FindChannelById("545622580246347776");
-	g_FracChannel[11]=DCC_FindChannelById("545622546939117569");
-	g_FracChannel[12]=DCC_FindChannelById("545642957106053123");
-	g_FracChannel[13]=DCC_FindChannelById("557567568198631441");
-	g_FracChannel[14]=DCC_FindChannelById("574931026888097802");
-	g_FracChannel[15]=DCC_FindChannelById("545643012437311491");
-	g_FracChannel[16]=DCC_FindChannelById("545643300736991235");
-	g_FracChannel[17]=DCC_FindChannelById("545619305832775700");
-	g_OrgChannel[1]=DCC_FindChannelById("545643431112867841");
+	g_FracChannel[1]=DCC_FindChannelById("696503084230246441"); //lspd
+	g_FracChannel[2]=DCC_FindChannelById("696502567944847410"); //fbi
+	g_FracChannel[3]=DCC_FindChannelById("696506775708368998"); //ng/szeryfy
+	g_FracChannel[4]=DCC_FindChannelById("696502406246301796"); //ers
+	g_FracChannel[5]=DCC_FindChannelById("696503755629396029"); //bahamas (lcn)
+	g_FracChannel[6]=DCC_FindChannelById("696502831850455061"); //ykz
+	g_FracChannel[7]=DCC_FindChannelById("696502330350108732"); //usss
+	g_FracChannel[8]=DCC_FindChannelById("696503652399185921"); //ha
+	g_FracChannel[9]=DCC_FindChannelById("696503843168583721"); //san
+	g_FracChannel[10]=DCC_FindChannelById("696503261557162095"); //kt
+	g_FracChannel[11]=DCC_FindChannelById("696503517099065434"); //dmv
+	g_FracChannel[12]=DCC_FindChannelById("696502501377310750"); //groove
+	g_FracChannel[13]=DCC_FindChannelById("696503206791872572"); //89-border society
+	g_FracChannel[14]=DCC_FindChannelById("696506988313444402"); //northenos
+	g_FracChannel[15]=DCC_FindChannelById("696506868050165810"); //nightmare adrenaline
+	g_FracChannel[16]=DCC_FindChannelById("696502619505426454"); //sanreich
+	g_FracChannel[17]=DCC_FindChannelById("696506926825078864"); //wps? puste
+	g_OrgChannel[1]=DCC_FindChannelById("696507102503632906"); //s¹d
 
 
 	return 1;
