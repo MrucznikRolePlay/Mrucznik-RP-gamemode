@@ -1103,7 +1103,7 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
-	SetPVarInt(playerid, "DostalAJkomunikat", 0);
+	DeletePVar(playerid, "DostalAJkomunikat");
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
