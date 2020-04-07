@@ -55,7 +55,7 @@ MRP_DoAnimation(playerid, arg1[])
 	}
 	else if(strcmp(arg1, "@dance", true, 6) == 0)
 	{
-		strmid(arg1, arg1, 6, 8);
+		strmid(arg1, arg1, 6, 8, 32);
 		var0 = strval(arg1);
 
 

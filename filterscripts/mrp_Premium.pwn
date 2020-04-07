@@ -258,8 +258,8 @@ public MRP_ShowPremiumMenu(playerid) {
 					}
 					new nr[20];
 					filterSqli(inputtext2, nr);
-					new len = strlen(nr);
 					new nrTele = strval(nr);
+					new len = strlen(nrTele);
 					if(nrTele < 0) return SendClientMessageE(playerid, COLOR3, "Numer nie mo¿e byæ na minusie!");
 					if(typ == 0 && (len < 6 || len > 9)) {
 						SendClientMessageE(playerid, COLOR3, "D³ugoœæ numeru nie zgadza siê z wymogami us³ugi");
