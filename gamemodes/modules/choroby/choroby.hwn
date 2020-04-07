@@ -111,7 +111,10 @@ new TourettWords[][] = {
     " nigger",
     " frajer",
     " hitler",
-    " kurwiszon"
+    " kurwiszon",
+    " dupa",
+    " cycki",
+    " sram"
 };
 
 new PlayerImmunity[MAX_PLAYERS];

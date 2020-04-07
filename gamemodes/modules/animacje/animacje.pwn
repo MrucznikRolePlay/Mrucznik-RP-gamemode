@@ -55,23 +55,25 @@ MRP_DoAnimation(playerid, arg1[])
 	}
 	else if(strcmp(arg1, "@dance", true, 6) == 0)
 	{
-		strmid(arg1, arg1, 6, 8, 32);
+		strmid(arg1, arg1, 6, 8);
 		var0 = strval(arg1);
+
+
 		if(var0 == 0 || var0 == 1)
 		{
-			SetPlayerSpecialAction(playerid, 5);
+			SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DANCE1);
 		}
 		else if(var0 == 2)
 		{
-			SetPlayerSpecialAction(playerid, 6);
+			SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DANCE2);
 		}
 		else if(var0 == 3)
 		{
-			SetPlayerSpecialAction(playerid, 7);
+			SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DANCE3);
 		}
 		else if(var0 == 4)
 		{
-			SetPlayerSpecialAction(playerid, 8);
+			SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DANCE4);
 		}
 		if(var0 >= 0 && var0 < 5)
 		{
