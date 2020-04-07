@@ -45,13 +45,10 @@ YCMD:checktank(playerid, params[], help)
             new carid = GetPlayerVehicleID(giveid);
             if(!carid) return sendErrorMessage(playerid, sprintf("%s [%d] musi znajdowaæ siê w pojeŸdzie!", GetNick(giveid), giveid));
             
-            new Float:vhealth, Float:newvhealth, result, string[144];
+            new Float:vhealth;
             GetVehicleHealth(carid, vhealth);
             SetVehicleHealth(carid, vhealth - 15);
-            GetVehicleHealth(carid, newvhealth);
-            result = (vhealth == newvhealth ? true : false);
-            format(string, sizeof(string), "Admin %s [%d] sprawdzi³ %s [%d]. Wynik: %s", GetNickEx(playerid), playerid, GetNick(giveid), giveid, (result ? "{fad052}prawdopodobny tankmode (zalecany /spec)" : "{fa5252}negatywny (brak tankmode)"));
-            SendCommandLogMessage(string);
+            SetTimerEx("CheckTankMode", 100, false, "iiif", playerid, giveid, carid, vhealth);
         }
         else
         {

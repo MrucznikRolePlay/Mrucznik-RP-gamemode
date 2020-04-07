@@ -3382,6 +3382,15 @@ public GangZone_Process()
         }
     }
 }
+forward CheckTankMode(playerid, giveid, carid, Float:vhealth);
+public CheckTankMode(playerid, giveid, carid, Float:vhealth)
+{
+	new result, string[144], Float:newvhealth;
+	GetVehicleHealth(carid, newvhealth);
+	result = (vhealth == newvhealth ? true : false);
+    format(string, sizeof(string), "Admin %s [%d] sprawdzi³ %s [%d]. Wynik: %s", GetNickEx(playerid), playerid, GetNick(giveid), giveid, (result ? "{fad052}prawdopodobny tankmode (zalecany /spec)" : "{fa5252}negatywny (brak tankmode)"));
+    SendCommandLogMessage(string);
+}
 forward GangZone_ShowInfoToParticipants();
 public GangZone_ShowInfoToParticipants() {
     new string[60];
