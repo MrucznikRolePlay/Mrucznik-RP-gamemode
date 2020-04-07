@@ -7658,7 +7658,7 @@ public OnPlayerText(playerid, text[])
 	        return 0;
       	}
 
-		if(TourettActive[playerid])
+		if(TourettActive[playerid] && GetPlayerAdminDutyStatus(playerid) == 0)
 		{
 			//insert random tourette word
 			new newText[256];
