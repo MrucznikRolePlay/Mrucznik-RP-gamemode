@@ -50,8 +50,8 @@ YCMD:checktankmod(playerid, params[], help)
             SetVehicleHealth(carid, vhealth - 15);
             GetVehicleHealth(carid, newvhealth);
             result = (vhealth == newvhealth ? true : false);
-            format(string, sizeof(string), "Admin %s [%d] sprawdzi³ tankmode gracza %s [%d]. Wynik: %s", GetNickEx(playerid), playerid, GetNick(giveid), giveid, (result ? "{fad052}prawdopodobny tankmode (zalecany /spec)" : "{fa5252}negatywny"));
-            SendCommandLogMessage(string, COLOR_LIGHTGREEN);
+            format(string, sizeof(string), "Admin %s [%d] sprawdzi³ %s [%d]. Wynik: %s", GetNickEx(playerid), playerid, GetNick(giveid), giveid, (result ? "{fad052}prawdopodobny tankmode (zalecany /spec)" : "{fa5252}negatywny (brak tankmode)"));
+            SendCommandLogMessage(string);
         }
         else
         {
