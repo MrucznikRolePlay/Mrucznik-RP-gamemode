@@ -4364,7 +4364,7 @@ SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 				{
 					if(IsPlayerConnected(i))
 					{
-					    if(IsAPolicja(i))
+					    if(IsAPolicja(i) && (OnDutyCD[i] || OnDuty[i]))
 					    {
 					        if(gCrime[i] == 0)
 					        {

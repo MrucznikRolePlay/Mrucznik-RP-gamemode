@@ -2742,18 +2742,18 @@ SetPlayerSpawnPos(playerid)
 						{
 						    SetPlayerPos(playerid, 2207.4038,-1725.1147,13.4060);
 						}
-						default:
+						default: //Spawn cywila
 						{
 							
 							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-							SetPlayerFacingAngle(playerid, 0.0);
+							SetPlayerFacingAngle(playerid, 0.94);
 						}
 				    }
 				}
 				else //Spawn cywila
 				{
 		    		SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-					SetPlayerFacingAngle(playerid, 0.0);
+					SetPlayerFacingAngle(playerid, 0.94);
 				}
 		    }
 		    else if(PlayerInfo[playerid][pSpawn] == 1) //Spawn przed domem
