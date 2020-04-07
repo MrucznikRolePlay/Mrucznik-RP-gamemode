@@ -30,17 +30,16 @@
 
 YCMD:id(playerid, params[], help)
 {
-    if(isnull(params))
+    new giveplayerid; 
+    if(sscanf(params, "k<fix>", giveplayerid))
     {
-        sendTipMessage(playerid, "U¿yj /id [playerid/czêœæ nicku]");
+        sendTipMessage(playerid, "U¿yj /id [ID/czêœæ nicku]"); 
         return 1;
     }
 
     new string[333];
     if(IsNumeric(params))
     {
-        new giveplayerid = strval(params);
-
         if(!IsPlayerConnected(giveplayerid))
         {
             sendTipMessage(playerid, "Obecnie na serwerze nie ma gracza o tym ID.");
@@ -48,11 +47,12 @@ YCMD:id(playerid, params[], help)
         }
 
         SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
-        format(string, sizeof(string), "Gracz (ID: %d) %s.", giveplayerid, GetNick(giveplayerid));
+        format(string, sizeof(string), "Gracz (ID: %d) %s", giveplayerid, GetNick(giveplayerid));
         SendClientMessage(playerid, COLOR_GRAD1, string);
 
         return 1;
-    } else
+    } 
+    else
     {
         if(strlen(params) < 3)
         {
@@ -63,15 +63,13 @@ YCMD:id(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
 
         new c = 0;
-        new nick[MAX_PLAYER_NAME];
         foreach(new i : Player)
         {
             if(c >= 10) { break; }
 
-            GetPlayerName(i, nick, sizeof(nick));
-            if(strfind(nick, params, true) != -1)
+            if(strfind(GetNick(i), params, true) != -1)
             {
-                format(string, sizeof(string), "ID: (%d) %s",i,nick);
+                format(string, sizeof(string), "Gracz (ID: %d) %s", i, GetNick(i));
                 SendClientMessage(playerid, COLOR_GRAD1, string);
                 c++;
             }
