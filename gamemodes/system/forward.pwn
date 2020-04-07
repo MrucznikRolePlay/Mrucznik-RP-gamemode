@@ -150,7 +150,5 @@ forward closeGate(i, j, playerid);
 forward DamagedHP(playerid);
 forward CuffedAction(playerid, cuffedid);
 //forward UnCuffedAction(cop, cuffedid); to do
-forward DeathAdminWarning(playerid, killerid, reason) ;
-
-forward Spectator_ChangedKeyBool(playerid);
+forward DeathAdminWarning(playerid, killerid, reason);
 //EOF
