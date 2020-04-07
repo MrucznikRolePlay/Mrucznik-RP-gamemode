@@ -11,7 +11,7 @@ MySQL:MruMySQL_Init()
 	mysql_global_options(DUPLICATE_CONNECTIONS, false);
 	mysql_global_options(DUPLICATE_CONNECTION_WARNING, true);
 
-	mruMySQL_Connection = mysql_connect_file("MySQL/connection.ini");
+	mruMySQL_Connection = mysql_connect_file("mysql.cfg");
 
 	if(mruMySQL_Connection == MYSQL_INVALID_HANDLE)
 	{
@@ -23,20 +23,12 @@ MySQL:MruMySQL_Init()
 	
 	mysql_set_charset("cp1250");
 
-	//Create tables
-	MruMySQL_CreateTables();
-
 	return mruMySQL_Connection;
 }
 
 MruMySQL_Exit()
 {
 	mysql_close(mruMySQL_Connection);
-}
-
-MruMySQL_CreateTables()
-{
-	mysql_tquery_file(mruMySQL_Connection, "MySQL/create_tables.sql");
 }
 
 MruMySQL_CreateKontaORM(playerid)

@@ -6,6 +6,7 @@ services:
     build: .
     volumes:
       - ./scriptfiles:/samp/scriptfiles
+      - ./logs:/samp/logs
     expose:
       - "7777"
     ports:
