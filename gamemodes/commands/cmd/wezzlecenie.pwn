@@ -132,7 +132,7 @@ YCMD:wezzlecenie(playerid, params[], help)
 						    		}
 						    		else if(PlayerInfo[playerid][pDetSkill] >= 400)
 						    		{
-                                        if(PoziomPoszukiwania[playa] >= 2 && PoziomPoszukiwania[playa] <= 7 || PoziomPoszukiwania[playa] == 10)
+                                        if(PoziomPoszukiwania[playa] >= 2 && PoziomPoszukiwania[playa] <= 10)
 						    			{
 						    			    lowcaz[playerid] = playa;
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
