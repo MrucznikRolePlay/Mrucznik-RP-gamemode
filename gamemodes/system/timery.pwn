@@ -3390,6 +3390,8 @@ public CheckTankMode(playerid, giveid, carid, Float:vhealth)
 	result = (vhealth == newvhealth ? true : false);
     format(string, sizeof(string), "Admin %s [%d] sprawdzi³ %s [%d]. Wynik: %s", GetNickEx(playerid), playerid, GetNick(giveid), giveid, (result ? "{fad052}prawdopodobny tankmode (zalecany /spec)" : "{fa5252}negatywny (brak tankmode)"));
     SendCommandLogMessage(string);
+	if(vhealth != newvhealth) SetVehicleHealth(carid, newvhealth+15);
+	return 1;
 }
 forward GangZone_ShowInfoToParticipants();
 public GangZone_ShowInfoToParticipants() {
