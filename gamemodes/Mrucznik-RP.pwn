@@ -1893,7 +1893,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(GetPVarInt(playerid, "skip_bw") == 0)
 		{
-			if(PlayerInfo[playerid][pInjury] > 0) //TRYB BW
+			if(PlayerInfo[playerid][pInjury] > 0) //TRYB BW (GDY ZGINIE JAK MA RANNEGO)
 			{
 				if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
 				{
