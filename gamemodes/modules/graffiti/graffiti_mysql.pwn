@@ -37,7 +37,7 @@ stock graffiti_LoadMySQL(id = -1)
 		{
 			for(new i; i < cache_num_rows(); i++)
 			{
-				LoadGraffitiRow(id);
+				LoadGraffitiRow(i);
 				loadedGraffiti++;
 			}
 			printf("Zaladowano %d graffiti z %d w bazie", loadedGraffiti, valueGraffiti);

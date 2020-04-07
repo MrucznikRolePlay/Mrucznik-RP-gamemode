@@ -11,7 +11,14 @@ MySQL:MruMySQL_Init()
 	mysql_global_options(DUPLICATE_CONNECTIONS, false);
 	mysql_global_options(DUPLICATE_CONNECTION_WARNING, true);
 
-	mruMySQL_Connection = mysql_connect_file("mysql.cfg");
+	mruMySQL_Connection = mysql_connect_file("mysql.ini");
+	new errno = mysql_errno(mruMySQL_Connection);
+	if (errno != 0) 
+	{
+		new error[100];
+		mysql_error(error, sizeof (error), mruMySQL_Connection);
+		printf("[ERROR] #%d '%s'", errno, error);
+	}
 
 	if(mruMySQL_Connection == MYSQL_INVALID_HANDLE)
 	{
