@@ -1,6 +1,7 @@
 Logger:
   plugins/log-plugin:
     Append: true # false - deletes the plugin log file on server startup
+    LogLevel: All
   logi/admin:
     LogLevel: All
   logi/pay:
