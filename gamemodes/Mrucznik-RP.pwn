@@ -7616,9 +7616,9 @@ public OnPlayerText(playerid, text[])
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg這simy to wszystkim jednostkom w danym obszarze.");
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dzi瘯ujemy za zg這szenie");
 			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg這szenie: %s", text);
-			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
 			format(wanted, sizeof(wanted), "Centrala: Nadawca: %s, lokalizacja zg這szenia: %s", turner, pZone);
-			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
 			if(org == 4 && (PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0)) PlayerRequestMedic[playerid] = 1;
 
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zako鎍zona...");

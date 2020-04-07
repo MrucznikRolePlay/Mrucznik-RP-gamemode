@@ -7539,7 +7539,7 @@ WyscigMessage(color, string[])
 	}
 }
 
-SendFamilyMessage(family, color, string[])
+SendFamilyMessage(family, color, string[], onduty = false)
 {
 	foreach(new i : Player)
 	{
@@ -7549,7 +7549,14 @@ SendFamilyMessage(family, color, string[])
 		    {
                 if(!gFam[i])
                 {
-					SendClientMessage(i, color, string);
+					if(onduty) 
+					{
+						if(OnDuty[i] == 1 || OnDutyCD[i] == 1) SendClientMessage(i, color, string);
+					}
+					else
+					{
+						SendClientMessage(i, color, string);
+					}
 				}
 			}
 		}
