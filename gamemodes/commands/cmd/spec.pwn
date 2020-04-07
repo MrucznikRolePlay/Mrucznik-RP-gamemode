@@ -59,6 +59,7 @@ YCMD:spec(playerid, params[], help)
 				}
 	        	SpectateTime[playerid] = 0;
 	        }*/
+			SetPVarInt(playerid, "OnSpecChanging", 1);
             if(Unspec[playerid][Coords][0] == 0.0)
             {
                 GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
@@ -66,8 +67,6 @@ YCMD:spec(playerid, params[], help)
                 Unspec[playerid][sPvw] = GetPlayerVirtualWorld(playerid);
             }
 		   	Spectate[playerid] = pid;
-			SetPVarInt(playerid, "SpecChange", 0);
-			SetTimerEx("SetPVarInt", 250, false, "isi", playerid, "SpecChange", 1);
 			new Float:health;
 			GetPlayerHealth(pid, health);
 			GetPlayerName(pid, giveplayer, sizeof(giveplayer));
@@ -114,6 +113,7 @@ YCMD:spec(playerid, params[], help)
 				pid); 
 				SendClientMessage(playerTargetSpec[playerid], COLOR_RED, string); 
 			}
+			SetTimerEx("SetPVarInt", 250, false, "dsd", playerid, "OnSpecChanging", 0);
         }
 	}
 	return 1;

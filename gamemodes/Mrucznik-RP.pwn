@@ -5827,7 +5827,7 @@ public OnPlayerUpdate(playerid)
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
 		return 1;
     }
-	if(Spectate[playerid] != INVALID_PLAYER_ID)
+	if(Spectate[playerid] != INVALID_PLAYER_ID && !GetPVarInt(playerid, "OnSpecChanging"))
     {
 		new keys, ud,lr, actualid = INVALID_PLAYER_ID;
         GetPlayerKeys(playerid, keys, ud, lr);
@@ -5835,7 +5835,7 @@ public OnPlayerUpdate(playerid)
 		{
 			foreach(new i : Player)
 			{
-				if(i == playerid) continue;
+				if(i == playerid || PlayerInfo[i][pAdmin] > 1) continue;
 				if(actualid != INVALID_PLAYER_ID) //if is set
 				{
 					new str[6];

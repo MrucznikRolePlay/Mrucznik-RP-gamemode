@@ -1423,7 +1423,7 @@ ZerujZmienne(playerid)
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
-	SetPVarInt(playerid, "SpecChange", 1);
+	DeletePVar(playerid, "OnSpecChanging");
 	new nick[32];
 	if(GetPVarString(playerid, "maska_nick", nick, 24))
 	{
