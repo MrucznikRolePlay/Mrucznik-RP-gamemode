@@ -12545,7 +12545,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 			switch(Obrazenia[playerid][i][WEAPONID])
 			{
 				case 0..42: format(weapon_decoded, sizeof(weapon_decoded), "%s", GunNames[Obrazenia[playerid][i][WEAPONID]]);
-				default: format(weapon_decoded, sizeof(weapon_decoded), "???");
+				default: format(weapon_decoded, sizeof(weapon_decoded), "Inne");
 			}
 			godzina = Obrazenia[playerid][i][HOURS];
 			minuta = Obrazenia[playerid][i][MINUTES];
@@ -12563,7 +12563,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 		switch(Obrazenia[playerid][i][WEAPONID])
 		{
 			case 0..42: format(weapon_decoded, sizeof(weapon_decoded), "%s", GunNames[Obrazenia[playerid][i][WEAPONID]]);
-			default: format(weapon_decoded, sizeof(weapon_decoded), "???");
+			default: format(weapon_decoded, sizeof(weapon_decoded), "Inne");
 		}
 		godzina = Obrazenia[playerid][i][HOURS];
 		minuta = Obrazenia[playerid][i][MINUTES];
