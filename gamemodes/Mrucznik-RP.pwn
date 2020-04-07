@@ -1757,7 +1757,15 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 
 	if(issuerid != INVALID_PLAYER_ID) // PvP
     {
-		//to do
+		if(Kajdanki_JestemSkuty[issuerid] > 0)
+		{
+			new Float:hp, Float:armor;
+			GetPlayerHealth(playerid, hp);
+			GetPlayerArmour(playerid, armor);
+			SetPlayerHealth(playerid, hp);
+			SetPlayerArmour(playerid, armor);
+			return 1;
+		}
     }
 	else //self
 	{
@@ -2438,8 +2446,8 @@ SetPlayerSpawnPos(playerid)
 			format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
 			SetPVarInt(playerid, "DostalAJkomunikat", 1);
 		}
-		if(strfind((PlayerInfo[playerid][pAJreason]), "DM2", true) != -1
-		|| strfind((PlayerInfo[playerid][pAJreason]), "Death Match 2", true) != -1) SetPVarInt(playerid, "DostalDM2", 1);
+		if(strfind(PlayerInfo[playerid][pAJreason], "DM2", true) != -1 || 
+		strfind(PlayerInfo[playerid][pAJreason], "Death Match 2", true) != -1) SetPVarInt(playerid, "DostalDM2", 1);
 		SendClientMessage(playerid, COLOR_PANICRED, string);
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
