@@ -475,6 +475,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18434");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 1:
@@ -482,6 +483,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANUno);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 2:
@@ -489,6 +491,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANDos);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 3:
@@ -496,6 +499,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://zet-net-01.cdn.eurozet.pl:8400/listen.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 4:
@@ -503,6 +507,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmffm.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 5:
@@ -510,6 +515,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 6:
@@ -517,6 +523,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "https://waw01-03.ic.smcdn.pl/t092-1.mp3");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 7:
@@ -524,6 +531,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18802/");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			}
 			case 8:
 			{
@@ -538,6 +546,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerFixRadio(playerid);
 				StopAudioStreamForPlayer(playerid);
 				SetPVarInt(playerid, "SluchaBasenu", 0);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 		}
@@ -550,6 +559,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//{
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, inputtext);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			//}
 			//else
 			//{
@@ -11556,7 +11566,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(IsPlayerConnected(i))
                     {
-                        if(!GetPVarInt(i, "sanaudio"))
+                        if(!GetPVarInt(i, "sanaudio") && !GetPVarInt(i, "HaveAMp3Stream"))
                         {
                             if(PlayerToPoint(SANzasieg, i, SANx, SANy, SANz))
                             {
@@ -11627,7 +11637,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(IsPlayerConnected(i))
                     {
-                        if(!GetPVarInt(i, "kluboweaudio"))
+                        if(!GetPVarInt(i, "kluboweaudio") && !GetPVarInt(i, "HaveAMp3Stream"))
                         {
                             if(PlayerToPoint(KLUBOWEzasieg, i, KLUBOWEx, KLUBOWEy, KLUBOWEz))
                             {
