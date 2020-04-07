@@ -43,8 +43,17 @@ Aby skompilować gamemode z użyciem sampctl, należy [zainstalować sampctl](ht
 - `sampctl package build`
 
 ## Uruchamianie serwera testowego
-- Na swoim systemie: `sampctl package run`
-- Z użyciem dockera: `docker build . -t mrucznik/mrucznik-rp:v2.6` `docker run -e "SAMP_DISCORD_BOT_TOKEN=[token]" mrucznik/mrucznik-rp:v2.6`
-- Z użyciem docker-compose: `docker-compose up` (razem z developersą bazą mysql!)
+### Na swoim systemie: 
+- Skopiuj pliki mysql.ini i log-config.yml do folderu `~/.samp/runtime/0.3.DL/` (jeśli nie masz takiego folderu, wykonaj najpierw `sampctl package run`)
+- Ustaw odpowiednie dane do bazy danych w pliku `~/.samp/runtime/0.3.DL/mysql.ini`
+- Uruchom serwer: `sampctl package run`
+
+### Z użyciem dockera
+- Zbuduj obraz serwera `docker build . -t mrucznik/mrucznik-rp:v2.6`
+- Uruchom obraz serwera `docker run -e "SAMP_DISCORD_BOT_TOKEN=[token]" mrucznik/mrucznik-rp:v2.6`
+
+### Z użyciem docker-compose
+- Uruchom serwer: `docker-compose up`
+Uruchamianie serwera poprze docker-compose tworzy dodatkowo czystą developerską wersję bazy danych mysql jako kontener oraz odpala kontener z phpmyadminem dostępny pod adresem http://localhost:8080/.
 
 ## Inne repozytoria
