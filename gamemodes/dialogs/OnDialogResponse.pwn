@@ -546,7 +546,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerFixRadio(playerid);
 				StopAudioStreamForPlayer(playerid);
 				SetPVarInt(playerid, "SluchaBasenu", 0);
-				SetPVarInt(playerid, "HaveAMp3Stream", 1);
+				DeletePVar(playerid, "HaveAMp3Stream");
 				return 1;
 			}
 		}
