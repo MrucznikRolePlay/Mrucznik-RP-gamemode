@@ -154,7 +154,7 @@ YCMD:zbijwl(playerid, params[], help)
 					}
 					else
 					{
-					    sendErrorMessage(playerid, "Gracz nie jest za daleko");
+					    sendErrorMessage(playerid, "Gracz jest za daleko");
 					}
 				}
 				else

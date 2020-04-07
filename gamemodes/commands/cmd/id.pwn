@@ -64,13 +64,11 @@ YCMD:id(playerid, params[], help)
 
         new c = 0;
         new nick[MAX_PLAYER_NAME];
-
         foreach(new i : Player)
         {
             if(c >= 10) { break; }
 
             GetPlayerName(i, nick, sizeof(nick));
-
             if(strfind(nick, params, true) != -1)
             {
                 format(string, sizeof(string), "ID: (%d) %s",i,nick);

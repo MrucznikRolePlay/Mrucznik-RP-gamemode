@@ -1925,7 +1925,7 @@ public CustomPickups()
 				    case 1:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 5000);
+						ZabierzKase(i, 2500);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
@@ -2328,6 +2328,8 @@ public JednaSekundaTimer()
 						SendAdminMessage(COLOR_PANICRED, string);
 						format(string, sizeof(string), "%s zabra³em twoj¹ broñ. Z pozdrowieniami - Marcepan Marks", GetNick(i));
 						sendTipMessage(i, string);
+						SetTimerEx("AntySB", 5000, 0, "d", i);
+						AntySpawnBroni[i] = 5;
 						ResetPlayerWeapons(i);
 						UsunBron(i);
 					}
@@ -2351,11 +2353,27 @@ public JednaSekundaTimer()
 				PlayAudioStreamForPlayer(i, SANrepertuar, SANx, SANy, SANz, SANzasieg, 1);
 			}
 		}
+		else if(GetPVarInt(i, "kluboweaudio") == 0 && KLUBOWEradio != 0)
+		{
+			if(IsPlayerInRangeOfPoint(i,KLUBOWEzasieg,KLUBOWEx, KLUBOWEy, KLUBOWEz))
+			{
+				SetPVarInt(i, "kluboweaudio", 1);
+				PlayAudioStreamForPlayer(i, KLUBOWErepertuar, KLUBOWEx, KLUBOWEy, KLUBOWEz, KLUBOWEzasieg, 1);
+			}
+		}
 		else if(GetPVarInt(i, "sanaudio") == 1 && SANradio != 0)
 		{
 			if(!IsPlayerInRangeOfPoint(i,SANzasieg,SANx, SANy, SANz))
 			{
 				SetPVarInt(i, "sanaudio", 0);
+				StopAudioStreamForPlayer(i);
+			}
+		}
+		else if(GetPVarInt(i, "kluboweaudio") == 1 && KLUBOWEradio != 0)
+		{
+			if(!IsPlayerInRangeOfPoint(i,KLUBOWEzasieg,KLUBOWEx, KLUBOWEy, KLUBOWEz))
+			{
+				SetPVarInt(i, "kluboweaudio", 1);
 				StopAudioStreamForPlayer(i);
 			}
 		}
@@ -2472,7 +2490,8 @@ public JednaSekundaTimer()
 		// serce zapisu broni
 		if(State >= 1 && State <= 6)
 		{
-			if(MaZapisanaBron(i) && GetPVarInt(i, "ammohackdetect") != 1)//if(PlayerInfo[i][pGun2] >= 2) - dziwne, ¿e wczeœniej nikt tego b³êdu nie zauwa¿y³.
+			if(GetPVarInt(i, "ammohackdetect") == 1) KickEx(i);
+			if(MaZapisanaBron(i))//if(PlayerInfo[i][pGun2] >= 2) - dziwne, ¿e wczeœniej nikt tego b³êdu nie zauwa¿y³.
 			{
                 weaponID = GetPlayerWeapon(i);
                 ammo = GetPlayerAmmo(i);
@@ -3187,7 +3206,6 @@ public JednaSekundaTimer()
 				PlayerCuffedTime[i] -= 1;
 			}
 		}
-
 	}
 	return 1;
 }

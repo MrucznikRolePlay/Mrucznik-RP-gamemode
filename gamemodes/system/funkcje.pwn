@@ -772,7 +772,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	}
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{
-		GameTextForPlayer(playerid, "~r~Anulowano.", 2500, 6);
+		SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
 		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
@@ -796,7 +796,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		}
 		else
 		{
-			GameTextForPlayer(playerid, "~r~Anulowano.", 2500, 6);
+			SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
 			ZestawNaprawczy_Timer[playerid] = 30;
 			ZestawNaprawczy_Warning[playerid] = 0;
 			KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
@@ -812,6 +812,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		PlayerInfo[playerid][pFixKit]--;
 		RepairVehicle(vehicleid);
         SetVehicleHealth(vehicleid, 1000);
+		CarData[VehicleUID[vehicleid][vUID]][c_HP] = 1000.0;
 		DeletePVar(playerid, "timer_ZestawNaprawczy");
 	}
 }
@@ -1121,12 +1122,6 @@ return 1;
 public AntySpamTimer(playerid){
 AntySpam[playerid] = 0;
 return 1;
-}
-
-public AntySpamLowienie(playerid){
-	PlayerInfo[playerid][pFishes] = 0;
-	DeletePVar(playerid, "AntySpamLowienie");
-	return 1;
 }
 
 public AntyBusCzit(playerid){
@@ -4791,7 +4786,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks]);
+		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d] Zestawy [%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks],PlayerInfo[targetid][pFixKit]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
 		format(coordsstring, sizeof(coordsstring), "Dom [%d] Klucz Wozu [%d] MruCoins [%d]", housekey,PlayerInfo[targetid][pKluczeAuta], PremiumInfo[targetid][pMC]);
 		SendClientMessage(playerid, COLOR_GRAD6,coordsstring); 
@@ -11618,8 +11613,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
         if(TransportJobData[idx][eTJDStartX] == 0.0) speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[0][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[0][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[0][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         else speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[idx][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[idx][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[idx][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         if(speed < 8.5) ile = TransportJobData[idx][eTJDMoney];
-        else if(speed > 30) ile = -TransportJobData[idx][eTJDMoney];
-        else ile = floatround(TransportJobData[idx][eTJDMoney] - ((speed - 8.5) * 100));
+        else if(speed > 30) ile = TransportJobData[idx][eTJDMoney];
 
         format(str, 64, "Towar wy³adowany, zarabiasz %d$", ile);
         SendClientMessage(playerid, 0x00FF00FF, str);
@@ -12056,6 +12050,7 @@ IsProblematicCode(code)
 	|| code == 5 //5 Anti-teleport hack (vehicle to player)
 	|| code == 6 //6 Anti-teleport hack (pickups)
 	|| code == 8 //8 Anti-FlyHack (in vehicle)
+	|| code == 9 // 9 Anti-Slapper/FlyHack
 	|| code == 11 //11 Anti-Health hack (in vehicle)
 	|| code == 15 //15 Anti-Weapon hack
 	|| code == 18 //18 Anti-Special actions hack
@@ -12454,8 +12449,7 @@ stock GetClosestCar(playerid, Float:Prevdist=5.0)
 		}
 	}
 	return Prevcar;
-}
-
+} 
 stock GetDistanceToCar(playerid, carid)
 {
 	new Float:x1,Float:y1,Float:z1,Float:x2,Float:y2,Float:z2,Float:Dis;
@@ -12470,6 +12464,151 @@ SavePlayerSentMessage(playerid, message[])
 	new idx = SentMessagesIndex[playerid];
 	format(SentMessages[playerid][idx], 144, "%s", message);
 	SentMessagesIndex[playerid] = (idx+1) % MAX_SENT_MESSAGES;
+}
+
+SavePlayerDamaged(playerid, attackerid, Float:damage, weapon)
+{
+	new hour, minute, second;
+	new sec = gettime() + 7200;
+	new day;
+    day = floatround(sec / 86400);
+    hour = floatround((sec - (day * 86400)) / 3600);
+    minute = floatround((sec - (day * 86400) - (hour * 3600)) / 60);
+    second = sec % 60;
+	new idx = ObrazeniaIndex[playerid];
+	format(Obrazenia[playerid][idx][ATTACKER], MAX_PLAYER_NAME, "%s", GetNick(attackerid));
+	Obrazenia[playerid][idx][DAMAGE] = damage;
+	Obrazenia[playerid][idx][WEAPONID] = weapon;
+	Obrazenia[playerid][idx][HOURS] = hour;
+	Obrazenia[playerid][idx][MINUTES] = minute;
+	Obrazenia[playerid][idx][SECONDS] = second;
+	ObrazeniaIndex[playerid] = (idx+1) % 10;
+}
+
+ShowPlayerDamaged(playerid, forplayerid)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Damagelog gracza %s: ---", GetNick(playerid)));
+	new index = ObrazeniaIndex[playerid];
+	new string[72];
+	new weapon_decoded[24];
+	new godzina,minuta,sekunda,Float:hp;
+	new atakujacy[MAX_PLAYER_NAME];
+	if(index != 0) 
+	{
+		for(new i = index-1; i>=0; i--)
+		{
+			hp = Obrazenia[playerid][i][DAMAGE];
+			if(hp <= 0.1) continue;
+			switch(Obrazenia[playerid][i][WEAPONID])
+			{
+				case 0: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Piêœæ");
+				case 1: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kastet");
+				case 2: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij golfowy");
+				case 3: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pa³ka policyjna");
+				case 4: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Nó¿");
+				case 5: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Bejsbol");
+				case 6: format(weapon_decoded, sizeof(weapon_decoded), "%s", "£opata");
+				case 7: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij bilardowy");
+				case 8: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Katana");
+				case 9: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pi³a");
+				case 10: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Fioletowe dildo");
+				case 11: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Dildo");
+				case 12: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
+				case 13: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
+				case 14: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kwiaty");
+				case 15: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Laska");
+				case 16: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Granat");
+				case 17: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaz ³zawi¹cy");
+				case 18: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Koktajl Mo³otowa");
+				case 22: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet 9mm");
+				case 23: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet z t³umikiem");
+				case 24: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Desert Eagle");
+				case 25: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Shotgun");
+				case 26: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Œrótówka");
+				case 27: format(weapon_decoded, sizeof(weapon_decoded), "%s", "SPAS-12");
+				case 28: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Uzi");
+				case 29: format(weapon_decoded, sizeof(weapon_decoded), "%s", "MP5");
+				case 30: format(weapon_decoded, sizeof(weapon_decoded), "%s", "AK-47");
+				case 31: format(weapon_decoded, sizeof(weapon_decoded), "%s", "M4");
+				case 32: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Tec-9");
+				case 33: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gwintówka");
+				case 34: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Snajperka");
+				case 35: format(weapon_decoded, sizeof(weapon_decoded), "%s", "RPG");
+				case 36: format(weapon_decoded, sizeof(weapon_decoded), "%s", "HS Rocket");
+				case 37: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Miotacz ognia");
+				case 38: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Minigun");
+				case 39: format(weapon_decoded, sizeof(weapon_decoded), "%s", "C4");
+				case 40: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Detonator");		
+				case 41: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Spray");
+				case 42: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaœnica");
+				default: format(weapon_decoded, sizeof(weapon_decoded), "%s", "?");
+			}
+			godzina = Obrazenia[playerid][i][HOURS];
+			minuta = Obrazenia[playerid][i][MINUTES];
+			sekunda = Obrazenia[playerid][i][SECONDS];
+			hp = hp / 2;
+			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
+			format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
+		}
+	}
+	for(new i= 9; i >= index; i--) 
+	{
+		hp = Obrazenia[playerid][i][DAMAGE];
+		if(hp <= 0.1) continue;
+		switch(Obrazenia[playerid][i][WEAPONID])
+		{
+			case 0: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Piêœæ");
+			case 1: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kastet");
+			case 2: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij golfowy");
+			case 3: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pa³ka policyjna");
+			case 4: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Nó¿");
+			case 5: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Bejsbol");
+			case 6: format(weapon_decoded, sizeof(weapon_decoded), "%s", "£opata");
+			case 7: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kij bilardowy");
+			case 8: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Katana");
+			case 9: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pi³a");
+			case 10: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Fioletowe dildo");
+			case 11: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Dildo");
+			case 12: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
+			case 13: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Wibrator");
+			case 14: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Kwiaty");
+			case 15: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Laska");
+			case 16: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Granat");
+			case 17: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaz ³zawi¹cy");
+			case 18: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Koktajl Mo³otowa");
+			case 22: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet 9mm");
+			case 23: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Pistolet z t³umikiem");
+			case 24: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Desert Eagle");
+			case 25: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Shotgun");
+			case 26: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Œrótówka");
+			case 27: format(weapon_decoded, sizeof(weapon_decoded), "%s", "SPAS-12");
+			case 28: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Uzi");
+			case 29: format(weapon_decoded, sizeof(weapon_decoded), "%s", "MP5");
+			case 30: format(weapon_decoded, sizeof(weapon_decoded), "%s", "AK-47");
+			case 31: format(weapon_decoded, sizeof(weapon_decoded), "%s", "M4");
+			case 32: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Tec-9");
+			case 33: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gwintówka");
+			case 34: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Snajperka");
+			case 35: format(weapon_decoded, sizeof(weapon_decoded), "%s", "RPG");
+			case 36: format(weapon_decoded, sizeof(weapon_decoded), "%s", "HS Rocket");
+			case 37: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Miotacz ognia");
+			case 38: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Minigun");
+			case 39: format(weapon_decoded, sizeof(weapon_decoded), "%s", "C4");
+			case 40: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Detonator");		
+			case 41: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Spray");
+			case 42: format(weapon_decoded, sizeof(weapon_decoded), "%s", "Gaœnica");
+			default: format(weapon_decoded, sizeof(weapon_decoded), "%s", "?");
+		}
+		godzina = Obrazenia[playerid][i][HOURS];
+		minuta = Obrazenia[playerid][i][MINUTES];
+		sekunda = Obrazenia[playerid][i][SECONDS];
+		hp = hp/2;
+		format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
+		format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
+	}
+	return 1;
 }
 
 ShowPlayerSentMessages(playerid, forplayerid)
