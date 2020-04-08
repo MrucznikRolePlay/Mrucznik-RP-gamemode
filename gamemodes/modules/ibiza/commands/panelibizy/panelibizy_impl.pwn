@@ -29,7 +29,7 @@ command_panelibizy_Impl(playerid)
     {
        if(IsPlayerInRangeOfPoint(playerid, 20, 433.1950,-1845.3390,-64.2206)){
             IbizaPanelCheck();
-		    ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PANEL, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
+		    ShowPlayerDialogEx(playerid, 6042, DIALOG_STYLE_TABLIST, "IbizaClub - Panel", txt_ibiza_klub, "Wybierz", "Anuluj");
 	    }
         else
         {

@@ -70,7 +70,7 @@ MruMySQL_CookedMealsDialog(playerid)
 		mysql_free_result();
 	}
 
-    ShowPlayerDialogEx(playerid, DIALOG_EATING, DIALOG_STYLE_PREVIEW_MODEL, "Twoje potrawy", string, "Jedz", "Anuluj");
+    ShowPlayerDialogEx(playerid, 55376, DIALOG_STYLE_PREVIEW_MODEL, "Twoje potrawy", string, "Jedz", "Anuluj");
 	return 1;
 }
 

@@ -27,7 +27,7 @@ command_kupbilet_Impl(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 7,  402.6997, -1808.4082, 7.8789)){
 		IbizaTicketsCostCheck();
-		ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TICKET, DIALOG_STYLE_TABLIST_HEADERS, "IbizaClub - Kup bilet", txt_ibiza_tickets, "Wybierz", "Anuluj");	
+		ShowPlayerDialogEx(playerid, 6041, DIALOG_STYLE_TABLIST_HEADERS, "IbizaClub - Kup bilet", txt_ibiza_tickets, "Wybierz", "Anuluj");	
 	}
 	else
 	{
