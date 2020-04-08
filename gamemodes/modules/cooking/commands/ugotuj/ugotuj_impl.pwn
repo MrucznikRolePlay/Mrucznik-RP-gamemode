@@ -105,7 +105,7 @@ command_ugotuj_Impl(playerid)
     }
     string[strlen(string)-1] = '\0';
 
-    ShowPlayerDialogEx(playerid, DIALOG_COOKING, DIALOG_STYLE_PREVIEW_MODEL, "Dostepne do ugotowania", string, "Ugotuj", "Anuluj");
+    ShowPlayerDialogEx(playerid, 55377, DIALOG_STYLE_PREVIEW_MODEL, "Dostepne do ugotowania", string, "Ugotuj", "Anuluj");
     return 1;
 }
 

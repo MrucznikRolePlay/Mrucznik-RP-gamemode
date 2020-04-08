@@ -15,7 +15,6 @@ CheckDialogId(playerid, dialogid)
     if(dialogid < 0) return 0;
     if(dialogid != iddialog[playerid])
     {
-        if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B³êdne ID GUI.");
         Log(serverLog, WARNING, "B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
@@ -24,7 +23,6 @@ CheckDialogId(playerid, dialogid)
 	return 1;
 }
 
-//ID DIALOGÓW 9900+ BIZNESY.
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if(!CheckDialogId(playerid, dialogid)) return 1;
@@ -54,9 +52,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 
 	antyHider[playerid] = 0;
-	
-	//2.6.19
-	if(dialogid == DIALOG_EATING)
+
+	if(dialogid == 55376)
 	{
 		if(response)
 		{
@@ -64,7 +61,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		return 1;
 	}
-	if(dialogid == DIALOG_COOKING)
+	else if(dialogid == 55377)
 	{
 		if(response)
 		{
@@ -73,15 +70,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		return 1;
 	}
 
-	//2.5.8
+	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
-
-	//2.6.18
-	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-
-	//2.6.19
 	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
