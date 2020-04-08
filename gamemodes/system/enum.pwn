@@ -497,7 +497,7 @@ new FractionNames[][40] = {
     "Grove Street Families",
     "Crackville Boyz",
     "Hillside Nortenos 14",
-    "Nightmare of Adrenalin",
+    "89 Border Society",
     "IV Saint Reich",
     "Brak",
     "Brak",
