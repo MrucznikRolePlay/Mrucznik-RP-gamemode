@@ -201,12 +201,14 @@ KupPojazdPremium(playerid, id)
 		sendErrorMessage(playerid, "Nie staæ Ciê na ten pojazd");
 		return DialogPojazdyPremium(playerid);
 	}
-	MRP_ShopPurchaseCar(playerid, PojazdyPremium[id][Model], PojazdyPremium[id][Cena]);
-	Log(premiumLog, INFO, "%s kupil pojazd premium %s za %dMC",
-		GetPlayerLogName(playerid), 
-		VehicleNames[PojazdyPremium[id][Model]-400], 
-		PojazdyPremium[id][Cena]);
-	premium_printMcBalance(playerid);
+	if(MRP_ShopPurchaseCar(playerid, PojazdyPremium[id][Model], PojazdyPremium[id][Cena]))
+	{
+		Log(premiumLog, INFO, "%s kupil pojazd premium %s za %dMC",
+			GetPlayerLogName(playerid), 
+			VehicleNames[PojazdyPremium[id][Model]-400], 
+			PojazdyPremium[id][Cena]);
+		premium_printMcBalance(playerid);
+	}
 	DialogMenuDotacje(playerid);
 	return 1;
 }
@@ -327,16 +329,15 @@ KupNumerTelefonu(playerid, string:_numer[])
 
 	if(MruMySQL_IsPhoneNumberAvailable(numer))
 	{
-
 		new cena;
 
-		if(strlen(_numer) == 1)
+		if(numer > 0 && numer < 10)
 			cena = TELEFON_CENA_1;
-		else if(strlen(_numer) == 2)
+		else if(numer > 10 && numer < 100)
 			cena = TELEFON_CENA_2;
-		else if(strlen(_numer) == 3)
+		else if(numer > 100 && numer < 1000)
 			cena = TELEFON_CENA_3;
-		else if(strlen(_numer) == 4)
+		else if(numer > 1000 && numer < 10000)
 			cena = TELEFON_CENA_4;
 		else
 			cena = TELEFON_CENA_5;

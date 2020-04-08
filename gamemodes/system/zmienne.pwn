@@ -804,10 +804,14 @@ new rexl;
 new addtimer = 60000;
 new Float:stareVHP[MAX_PLAYERS];//zapis uszkodzen
 new SANradio = 0;
+new KLUBOWEradio = 0;
+new Text3D:KLUBOWE3d;
 new Text3D:SAN3d;
 new Text3D:NapislotLS1, Text3D:NapislotLS2, Text3D:NapislotLV1, Text3D:NapislotSF1;
 new SANrepertuar[128];
+new KLUBOWErepertuar[128];
 new Float:SANzasieg, Float:SANx, Float:SANy, Float:SANz;
+new Float:KLUBOWEzasieg, Float:KLUBOWEx, Float:KLUBOWEy, Float:KLUBOWEz;
 //kubi
 new RadioSANUno[128];
 new RadioSANDos[128];
@@ -1010,7 +1014,9 @@ new Worek_Uzyty[MAX_PLAYERS];
 new Worek_MamWorek[MAX_PLAYERS];
 new Worek_KtoZalozyl[MAX_PLAYERS];
 new Worek_KomuZalozylem[MAX_PLAYERS];
-
+//cmd obrazenia
+new ObrazeniaIndex[MAX_PLAYERS];
+new Obrazenia[MAX_PLAYERS][10][eOBRAZENIA];
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
@@ -1099,8 +1105,9 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	DeletePVar(playerid, "DostalAJkomunikat");
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
-
+	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
 	organizacje_clearCache(playerid);
@@ -1109,7 +1116,6 @@ ZerujZmienne(playerid)
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
 
     PlayerInfo[playerid][pDescLabel] = tmp_label;
-
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
@@ -1358,7 +1364,8 @@ ZerujZmienne(playerid)
 
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
-	
+	ObrazeniaIndex[playerid] = 0;
+	for(new i = 0; i<10; i++) Obrazenia[playerid][i][DAMAGE] = 0.0;
 	if(tworzenietrasy[playerid] != 666)
 	{
 	    format(Wyscig[tworzenietrasy[playerid]][wOpis], 50, "");
@@ -1408,7 +1415,7 @@ ZerujZmienne(playerid)
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
-
+	DeletePVar(playerid, "OnSpecChanging");
 	new nick[32];
 	if(GetPVarString(playerid, "maska_nick", nick, 24))
 	{

@@ -189,7 +189,15 @@ enum eScenaNeon {
     bool:SCNeonSliderRefresh,
     SCNeonZderzacz
 };
-
+//obrazenia
+enum eOBRAZENIA {
+	HOURS,
+	MINUTES,
+	SECONDS,
+	ATTACKER[MAX_PLAYER_NAME],
+	WEAPONID,
+	Float:DAMAGE
+}
 //25.07 system stref gangów
 new Float:Zone_Data[MAX_ZONES][4] = {
     {1983.0, -1027.0, 2266.0, -933.0},

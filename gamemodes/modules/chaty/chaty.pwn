@@ -92,15 +92,16 @@ sprawdzReklame(text[], playerid)
 	|| strfind(text , ".pl" , true)>=0 
 	|| strfind(text , "serw" , true)>=0  
 	|| strfind(text , "serv" , true)>=0 
-	|| strfind(text , ":7" , true)>=0 
-	|| strfind(text , ":2" , true)>=0 
-	|| strfind(text , ":3" , true)>=0 
-	|| strfind(text , ":4" , true)>=0 
-	|| strfind(text , ":5" , true)>=0 
-	|| strfind(text , ":6" , true)>=0 
-	|| strfind(text , ":8" , true)>=0
+	|| strfind(text , ":7777" , true)>=0 
+	|| strfind(text , ":2000" , true)>=0 
+	|| strfind(text , ":3000" , true)>=0 
+	|| strfind(text , ":4000" , true)>=0 
+	|| strfind(text , ":5000" , true)>=0 
+	|| strfind(text , ":6000" , true)>=0 
+	|| strfind(text , ":8000" , true)>=0
 	|| strfind(text, "lsrp", true)>=0
 	|| strfind(text, "ls-rp", true)>=0
+	|| strfind(text, "stories", true)>=0
 	|| strfind(text, "n4g", true)>=0
 	|| strfind(text, "fox", true)>=0)
 	{

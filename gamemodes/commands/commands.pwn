@@ -37,7 +37,6 @@
 #include "cmd/app.pwn"
 #include "cmd/apteczka.pwn"
 #include "cmd/aresztuj.pwn"
-#include "cmd/armia.pwn"
 #include "cmd/armor.pwn"
 #include "cmd/atakuj.pwn"
 #include "cmd/autorzy.pwn"
@@ -78,6 +77,7 @@
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
+#include "cmd/checktank.pwn"
 #include "cmd/clearwlall.pwn"
 #include "cmd/clearzone.pwn"
 #include "cmd/cmdinfo.pwn"
@@ -296,6 +296,7 @@
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
 #include "cmd/o.pwn"
+#include "cmd/obrazenia.pwn"
 #include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
@@ -688,6 +689,10 @@ static Aliases()
 	Command_AddAltNamed("cbradio", "cb");
 	Command_AddAltNamed("cbradio", "cb_radio");
 
+	//checktank
+	Command_AddAltNamed("checktank", "checktankmode");
+	Command_AddAltNamed("checktank", "checktankmod");
+	
 	//cp_usun
 	Command_AddAltNamed("cp_usun", "czekpoint_usun");
 	Command_AddAltNamed("cp_usun", "checkpoint_usun");

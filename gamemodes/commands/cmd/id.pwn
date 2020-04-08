@@ -30,65 +30,64 @@
 
 YCMD:id(playerid, params[], help)
 {
-    if(isnull(params))
+    if(IsPlayerConnected(playerid))
     {
-        sendTipMessage(playerid, "U¿yj /id [playerid/czêœæ nicku]");
-        return 1;
-    }
-
-    new string[333];
-    if(IsNumeric(params))
-    {
-        new giveplayerid = strval(params);
-
-        if(!IsPlayerConnected(giveplayerid))
+        new giveplayerid; 
+        if(sscanf(params, "k<fix>", giveplayerid))
         {
-            sendTipMessage(playerid, "Obecnie na serwerze nie ma gracza o tym ID.");
+            sendTipMessage(playerid, "U¿yj /id [ID/czêœæ nicku]"); 
             return 1;
         }
 
-        SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
-        format(string, sizeof(string), "Gracz (ID: %d) %s.", giveplayerid, GetNick(giveplayerid));
-        SendClientMessage(playerid, COLOR_GRAD1, string);
-
-        return 1;
-    } else
-    {
-        if(strlen(params) < 3)
+        new string[333];
+        if(IsNumeric(params))
         {
-            sendErrorMessage(playerid, "Za krótka fraza.");
-            return 1;
-        }
-
-        SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
-
-        new c = 0;
-        new nick[MAX_PLAYER_NAME];
-
-        foreach(new i : Player)
-        {
-            if(c >= 10) { break; }
-
-            GetPlayerName(i, nick, sizeof(nick));
-
-            if(strfind(nick, params, true) != -1)
+            if(!IsPlayerConnected(giveplayerid))
             {
-                format(string, sizeof(string), "ID: (%d) %s",i,nick);
-                SendClientMessage(playerid, COLOR_GRAD1, string);
-                c++;
+                sendTipMessage(playerid, "Obecnie na serwerze nie ma gracza o tym ID.");
+                return 1;
             }
-        }
 
-        if(c >= 10)
-        {
-            sendErrorMessage(playerid, "Zbyt du¿o wyników, zmieñ kryteria.");
-            return 1;
-        }
+            SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
+            format(string, sizeof(string), "Gracz (ID: %d) %s", giveplayerid, GetNick(giveplayerid));
+            SendClientMessage(playerid, COLOR_GRAD1, string);
 
-        if(c == 0)
-        {
-            sendErrorMessage(playerid, "Nie znaleziono takiego nicku.");
             return 1;
+        } 
+        else
+        {
+            if(strlen(params) < 3)
+            {
+                sendErrorMessage(playerid, "Za krótka fraza.");
+                return 1;
+            }
+
+            SendClientMessage(playerid, COLOR_GREEN, "Znalezione osoby:");
+
+            new c = 0;
+            foreach(new i : Player)
+            {
+                if(c >= 10) { break; }
+
+                if(strfind(GetNick(i), params, true) != -1)
+                {
+                    format(string, sizeof(string), "Gracz (ID: %d) %s", i, GetNick(i));
+                    SendClientMessage(playerid, COLOR_GRAD1, string);
+                    c++;
+                }
+            }
+
+            if(c >= 10)
+            {
+                sendErrorMessage(playerid, "Zbyt du¿o wyników, zmieñ kryteria.");
+                return 1;
+            }
+
+            if(c == 0)
+            {
+                sendErrorMessage(playerid, "Nie znaleziono takiego nicku.");
+                return 1;
+            }
         }
     }
     return 1;

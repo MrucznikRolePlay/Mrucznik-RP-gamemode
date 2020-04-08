@@ -58,6 +58,6 @@ YCMD:unfrakcja(playerid, params[], help)
 		return 1;
 	}
 
-	UnFrakcja(playerid, para1);
+	UnFrakcja(playerid, para1, false);
 	return 1;
 }

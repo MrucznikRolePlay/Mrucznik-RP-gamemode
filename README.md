@@ -15,7 +15,7 @@ Mapa serwera Mrucznik Role Play, kreowana od 2009 roku.
 ## Twórcy
 
 - [Mrucznik] Twórca mapy i założyciel serwera Mrucznik Role Play,
-- [Simeone] Developer od 2018 roku
+- [Simeone] Developer w latach 2018 - 2019
 - [Pecet] Developer w latach 2017-2019
 - [Akil] Developer (brak szczegółowych danych)
 - [Kubi] Developer do 2015 roku

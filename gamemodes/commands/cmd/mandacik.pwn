@@ -68,6 +68,11 @@ YCMD:mandacik(playerid, params[], help)
 		{
   			if(giveplayerid != INVALID_PLAYER_ID)
 		    {
+				if(giveplayerid == playerid)
+				{
+					SendClientMessage(playerid, COLOR_LIGHTRED, "Nie mo¿esz daæ samemu sobie mandat.");
+					return 1;
+				}
 		        if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
 				{
 					new stawki = moneys;

@@ -577,6 +577,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	PlayerInfo[playerid][pJailed] = 3;
 	PlayerInfo[playerid][pJailTime] = timeVal*60;
 	format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, result);
+	RemovePlayerFromVehicle(playerid);
 	SetPlayerVirtualWorld(playerid, 1000+playerid);
 	PlayerInfo[playerid][pMuted] = 1;
 	SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
