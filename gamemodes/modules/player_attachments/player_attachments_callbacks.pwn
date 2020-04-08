@@ -109,7 +109,7 @@ hook OnPlayerSpawn(playerid)
 attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	#pragma unused inputtext
-	if(dialogid == DIALOG_PRZEDMIOTYGRACZA)
+	if(dialogid == 7449)
 	{
 		if(response)
 		{
@@ -136,12 +136,12 @@ attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 				return 1;
 			}
 
-			ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_EDYCJA, DIALOG_STYLE_MSGBOX, "Przedmioty - edycja", "Czy chcesz edytowaæ pozycjê przedmiotu?", "Tak", "Nie");
+			ShowPlayerDialogEx(playerid, 7448, DIALOG_STYLE_MSGBOX, "Przedmioty - edycja", "Czy chcesz edytowaæ pozycjê przedmiotu?", "Tak", "Nie");
 			SetPVarInt(playerid, "AttachedItem_EditIndex", index);
 		}
 		return 1;
 	}
-	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_EDYCJA)
+	else if(dialogid == 7448)
 	{
 		if(response)
 		{
@@ -150,7 +150,29 @@ attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 		}
 		return 1;
 	}
-	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_KOSC)
+	else if(dialogid == 7447)
+	{
+		if(response)
+		{
+			new index = DynamicGui_GetDataInt(playerid, listitem);
+			DetachPlayerItem(playerid, index);
+		}
+		return 1;
+	}
+	else if(dialogid == 7446)
+	{
+		if(response)
+		{
+			new index = DynamicGui_GetDataInt(playerid, listitem);
+			new giveplayerid = GetPVarInt(playerid, "ZdejmijGiveplayerid");
+			DetachPlayerItem(giveplayerid, index);
+
+			SendClientMessage(giveplayerid, COLOR_RED, sprintf("Administrator %s zdj¹³ twój obiekt, popraw jego u³o¿enie, inaczej mo¿esz otrzymaæ karê.", GetNickEx(playerid)));
+			sendTipMessage(playerid, sprintf("Zdj¹³eœ obiekt graczowi %s", GetNick(giveplayerid)));
+		}
+		return 1;
+	}
+	else if(dialogid == 7445)
 	{
 		if(response)
 		{
@@ -166,28 +188,6 @@ attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]
 
 			EditAttachedObject(playerid, index);
 			sendTipMessage(playerid, "Wybierz pozycjê obiektu.");
-		}
-		return 1;
-	}
-	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ)
-	{
-		if(response)
-		{
-			new index = DynamicGui_GetDataInt(playerid, listitem);
-			DetachPlayerItem(playerid, index);
-		}
-		return 1;
-	}
-	if(dialogid == DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ_ADMIN)
-	{
-		if(response)
-		{
-			new index = DynamicGui_GetDataInt(playerid, listitem);
-			new giveplayerid = GetPVarInt(playerid, "ZdejmijGiveplayerid");
-			DetachPlayerItem(giveplayerid, index);
-
-			SendClientMessage(giveplayerid, COLOR_RED, sprintf("Administrator %s zdj¹³ twój obiekt, popraw jego u³o¿enie, inaczej mo¿esz otrzymaæ karê.", GetNickEx(playerid)));
-			sendTipMessage(playerid, sprintf("Zdj¹³eœ obiekt graczowi %s", GetNick(giveplayerid)));
 		}
 		return 1;
 	}

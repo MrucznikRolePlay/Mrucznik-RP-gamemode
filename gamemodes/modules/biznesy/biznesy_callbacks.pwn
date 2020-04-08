@@ -37,7 +37,7 @@ biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     // -1: Stop processing this callback instantly and return 0.
     // -2: Stop processing this callback instantly and return 1. 
 
-	if(dialogid == DIALOG_PANEL_BIZ)
+	if(dialogid == 4469)
 	{
 		if(!response)
 		{

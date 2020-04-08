@@ -53,31 +53,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	antyHider[playerid] = 0;
 
-	if(dialogid == 55376)
-	{
-		if(response)
-		{
-			zjedz_OnDialogResponse(playerid, listitem);
-		}
-		return 1;
-	}
-	else if(dialogid == 55377)
-	{
-		if(response)
-		{
-			ugotuj_OnDialogResponse(playerid, listitem);
-		}
-		return 1;
-	}
+	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // custom
+	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 1250 - 1254
+	noYsi_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 1590 - 1594
+	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 1595 - 1597
+	fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 1958 - 1966
+	opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 4192 - 4193
+	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 6041 - 6047
+	attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 7445 - 7449 
+	cooking_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 55376 - 55377
 
-	ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-	premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-	hq_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
-
-	graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
-	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
-	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); 
+	// 31 - 34, 36 - 38, 303, 400 - 410, 411 - 417, 420 - 424, 440, 443, 450 - 459, 
+	// 499 - 500, 4000 - 4017, 4100 - 4124, 4200 - 4209, 4300 - 4305, 4400 - 4404, 4500 - 4503, 4600 - 4605, 4700 - 4705,
+	// 4800 - 4807, 4900 - 4907, 7780 - 7781, 7783
 
 	//2.5.2
 	if(dialogid == DIALOG_HA_ZMIENSKIN(0))

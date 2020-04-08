@@ -316,17 +316,6 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define WINDA_SAN               120
 #define WINDA_LSPD              300
 
-#define D_AUTO                  499
-#define D_AUTO_ACTION           500
-#define D_AUTO_RESPAWN          7780
-#define D_AUTO_UNSPAWN          7781
-#define D_AUTO_REJESTRACJA      7783
-#define D_AUTO_RESPRAY          33
-#define D_AUTO_RESPRAY2         34
-#define D_AUTO_RESPRAY_OWN      37
-#define D_AUTO_RESPRAY_OWN2     38
-#define D_AUTO_DESTROY          303
-
 #define D_INFO      712
 #define D_PERM      713
 #define D_SERVERINFO 715

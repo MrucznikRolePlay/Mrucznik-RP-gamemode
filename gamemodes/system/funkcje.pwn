@@ -12615,26 +12615,34 @@ public CuffedAction(playerid, cuffedid)
 	return 1;
 }
 
-/*public UnCuffedAction(cop, cuffedid)
+BreakLines(string[], delimiter[], limit)
 {
-	new playerid = cop;
-	new string[144];
-	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	GameTextForPlayer(cuffedid, "~g~Rozkuty", 2500, 3);
-
-	//czynnosci
-	TogglePlayerControllable(cuffedid, 1);
-	PlayerCuffed[cuffedid] = 0;
-	Kajdanki_JestemSkuty[cuffedid] = 0;
-	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_PDkuje[cuffedid] = INVALID_PLAYER_ID;
-	Kajdanki_Uzyte[playerid] = 0;
-	PlayerInfo[cuffedid][pMuted] = 0;
-	ClearAnimations(cuffedid);
-	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
-	RemovePlayerAttachedObject(cuffedid, 5);
-	return 1;
-}  to do */
+	new inserts, tempLimit = limit, pos[50], string2[150], lastEmptyPos;
+	format(string2, 150, string);
+	
+	for(new i; i < strlen(string); i++)
+	{
+		if( string[i] == ' ' ) lastEmptyPos = i;
+		if( string[i] == '~' && string[i+1] == 'n' && string[i+2] == '~' ) tempLimit = i + limit;
+		if( i >= tempLimit )
+		{
+			inserts += 1;
+			tempLimit = i + limit;
+			
+			pos[inserts-1] = lastEmptyPos + ((inserts-1) * strlen(delimiter));
+			if( inserts > 1 ) pos[inserts-1] -= (inserts-1);
+		}
+	}
+	
+	for(new d; d < 50; d++)
+	{
+		if( pos[d] == 0 ) break;
+		strdel(string2, pos[d], pos[d]+1);
+		strins(string2, delimiter, pos[d]);
+	}
+	
+	return _:string2;
+}
 
 
 //--------------------------------------------------

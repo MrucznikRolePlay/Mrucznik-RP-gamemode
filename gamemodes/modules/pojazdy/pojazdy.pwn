@@ -203,7 +203,7 @@ ShowCarsForPlayer(playerid, forplayerid)
             lSlots++;
         }
     }
-    if(lSlots > 0) ShowPlayerDialogEx(forplayerid, D_AUTO, DIALOG_STYLE_LIST, "Twoje pojazdy", lStr, "Wybierz", "Anuluj");
+    if(lSlots > 0) ShowPlayerDialogEx(forplayerid, 499, DIALOG_STYLE_LIST, "Twoje pojazdy", lStr, "Wybierz", "Anuluj");
     else SendClientMessage(forplayerid, COLOR_GRAD2, "Brak jakichkolwiek pojazdów!");
 }
 

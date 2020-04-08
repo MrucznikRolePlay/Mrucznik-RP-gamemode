@@ -137,7 +137,7 @@ DialogPlayerAttachedItems(playerid)
 
 	if(count==0) return sendErrorMessage(playerid, "Nie masz ¿adnych zak³adalnych przedmiotów.");
 
-	ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA, DIALOG_STYLE_PREVIEW_MODEL, "Twoje przedmioty", list, "Ustaw", "Wyjdz");
+	ShowPlayerDialogEx(playerid, 7449, DIALOG_STYLE_PREVIEW_MODEL, "Twoje przedmioty", list, "Ustaw", "Wyjdz");
 	return 1;
 }
 
@@ -159,7 +159,7 @@ DialogRemovePlayerAttachedItems(playerid)
 
 	if(count==0) return sendErrorMessage(playerid, "Nie masz za³o¿onych przedmiotów.");
 
-	ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ, DIALOG_STYLE_PREVIEW_MODEL, "Twoje przedmioty", list, "Zdejmij", "Wyjdz");
+	ShowPlayerDialogEx(playerid, 7447, DIALOG_STYLE_PREVIEW_MODEL, "Twoje przedmioty", list, "Zdejmij", "Wyjdz");
 	return 1;
 }
 
@@ -182,7 +182,7 @@ DialogAdminRemoveAttachedItems(playerid, giveplayerid)
 	if(count==0) return sendErrorMessage(playerid, "Ten gracz nie ma za³o¿onych przedmiotów.");
 
 	SetPVarInt(playerid, "ZdejmijGiveplayerid", giveplayerid);
-	ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_ZDEJMIJ_ADMIN, DIALOG_STYLE_PREVIEW_MODEL, "Przedmioty gracza", list, "Zdejmij", "Wyjdz");
+	ShowPlayerDialogEx(playerid, 7446, DIALOG_STYLE_PREVIEW_MODEL, "Przedmioty gracza", list, "Zdejmij", "Wyjdz");
 	return 1;
 }
 
@@ -200,7 +200,7 @@ DialogBoneSelect(playerid, bone=0)
 			strcat(string, sprintf("%s\n", BoneNames[i]));
 		}
 	}
-	ShowPlayerDialogEx(playerid, DIALOG_PRZEDMIOTYGRACZA_KOSC, DIALOG_STYLE_LIST, "Wybierz gdzie przyczepiæ przedmiot.", 
+	ShowPlayerDialogEx(playerid, 7445, DIALOG_STYLE_LIST, "Wybierz gdzie przyczepiæ przedmiot.", 
 		string, 
 		"Przyczep",
 		"WyjdŸ"

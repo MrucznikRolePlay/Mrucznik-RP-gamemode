@@ -40,28 +40,28 @@ command_panelbiznesu_Impl(playerid, choice[32])
     {
         format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej ID gracza\nktórego pragniesz zatrudniæ w swoim biznesie.\n",
         Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]); 
-        ShowPlayerDialogEx(playerid, DIALOG_PANEL_BIZ, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
+        ShowPlayerDialogEx(playerid, 4469, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
         SetPVarInt(playerid, "bizWhatToDo", 1); 
     }
     else if(strcmp(choice, "Zwolnij", true) == 0)
     {
         format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej ID gracza\nktórego pragniesz zwolniæ ze swojego biznesu.\n",
         Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]); 
-        ShowPlayerDialogEx(playerid, DIALOG_PANEL_BIZ, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
+        ShowPlayerDialogEx(playerid, 4469, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
         SetPVarInt(playerid, "bizWhatToDo", 2); 
     }
     else if(strcmp(choice, "Wplac", true) == 0)
     {
         format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej kwotê jak¹ chcesz wp³aciæ\ndo swojego sejfu!",
         Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]); 
-        ShowPlayerDialogEx(playerid, DIALOG_PANEL_BIZ, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
+        ShowPlayerDialogEx(playerid, 4469, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
         SetPVarInt(playerid, "bizWhatToDo", 3); 
     }
     else if(strcmp(choice, "Wyplac", true) == 0)
     {
         format(string, sizeof(string), "{FF00FF}%s\n{FFFFFF}Wpisz poni¿ej kwotê jak¹ chcesz wyp³aciæ\nze swojego sejfu biznesowego",
         Business[PlayerInfo[playerid][pBusinessOwner]][b_Name]); 
-        ShowPlayerDialogEx(playerid, DIALOG_PANEL_BIZ, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
+        ShowPlayerDialogEx(playerid, 4469, DIALOG_STYLE_INPUT, "Mrucznik Role Play", string, "Akceptuj", "Odrzuæ"); 
         SetPVarInt(playerid, "bizWhatToDo", 4); 
     }
     else if(strcmp(choice, "Stan", true) == 0)

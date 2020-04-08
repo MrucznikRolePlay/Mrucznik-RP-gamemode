@@ -48,8 +48,11 @@
 */
 
 
-#include <YSI\y_hooks>
+#include "graffiti.def"
+#include "graffiti.hwn"
 #include "graffiti_dialogs.pwn"
+#include "graffiti_mysql.pwn"
+#include "graffiti_timers.pwn"
 hook OnPlayerConnect(playerid)
 {
     graffiti_ZerujZmienne(playerid);

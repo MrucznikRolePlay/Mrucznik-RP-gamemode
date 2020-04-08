@@ -123,7 +123,6 @@ native gpci (playerid, serial [], len);
 //-------<[ Niceczlowiek ]>-------
 #include "old_modules\niceczlowiek\general.pwn"
 #include "old_modules\niceczlowiek\dynamicgui.pwn"
-#include "old_modules\niceczlowiek\noysi.pwn"
 #include "old_modules\niceczlowiek\wybieralka.pwn"
 
 //-------<[ 3.0 style ]>-------
