@@ -50,7 +50,7 @@ YCMD:reklama(playerid, params[], help)
         SendCommandLogMessage(string);
 		foreach(new i : Player)
 		{
-			if(PlayerInfo[i][pMember] == 8 || PlayerInfo[i][pLider] == 8 )
+			if(PlayerInfo[i][pAdmin] == 0 && PlayerInfo[i][pNewAP] == 0 && (PlayerInfo[i][pMember] == 8 || PlayerInfo[i][pLider] == 8))
 			{
 				SendClientMessage(i, 0xD8C173FF, string);
 			}

@@ -79,7 +79,7 @@ YCMD:wez(playerid, params[], help)
 			        format(string, sizeof(string), "* Kupi³eœ %d gram dragów za $%d.", ammount, price);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			        ZabierzKase(playerid, price);
-					PlayerInfo[playerid][pDrugs] = ammount;
+					PlayerInfo[playerid][pDrugs] += ammount;
 			    }
 			    else
 			    {
