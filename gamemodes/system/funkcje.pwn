@@ -12552,7 +12552,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 			sekunda = Obrazenia[playerid][i][SECONDS];
 			hp = hp / 2;
 			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-			format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+			format(string, sizeof(string), "%d:%d:%d | %s zada³ mu %0.1fHP z %s[%d]", godzina, minuta, sekunda, atakujacy, hp, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
 	}
@@ -12570,7 +12570,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 		sekunda = Obrazenia[playerid][i][SECONDS];
 		hp = hp/2;
 		format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-		format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+		format(string, sizeof(string), "%d:%d:%d | %s zada³ mu %0.1fHP z %s[%d]", godzina, minuta, sekunda, atakujacy, hp, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
 		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 	}
 	return 1;

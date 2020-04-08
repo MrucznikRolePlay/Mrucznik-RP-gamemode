@@ -763,7 +763,7 @@ new BlinkOffset[][eBO] = {
 };
 
 new GunNames[47][] = {
-	"Brak",//0
+	"Piêœci",//0
 	"Kastet",//1
 	"Kij golfowy",//2
 	"Pa³ka policyjna",//3
