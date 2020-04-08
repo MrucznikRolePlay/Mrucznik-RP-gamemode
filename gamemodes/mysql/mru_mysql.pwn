@@ -12,6 +12,10 @@ MruMySQL_Init()
 	mysql_global_options(DUPLICATE_CONNECTION_WARNING, true);
 
 	mruMySQL_Connection = mysql_connect_file("mysql.ini");
+	if(mruMySQL_Connection == MYSQL_INVALID_HANDLE)
+	{
+		mruMySQL_Connection = mysql_connect("mysqld", "root", "secret", "samp");
+	}
 	new errno = mysql_errno(mruMySQL_Connection);
 	if (errno != 0) 
 	{

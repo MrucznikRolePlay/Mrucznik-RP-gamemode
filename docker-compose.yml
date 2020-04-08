@@ -9,7 +9,7 @@ services:
     #   - ./mysql.ini:/root/.samp/runtime/0.3.DL/mysql.ini
     #   - ./log-config.yml:/root/.samp/runtime/0.3.DL/log-config.yml
     #   - ./logs:/root/.samp/runtime/0.3.DL/logs
-    command: ["server", "run"]
+    command: ["server", "run", "--dir", "/samp"]
     expose:
       - "7777"
     ports:
@@ -17,9 +17,7 @@ services:
     environment:
       SAMP_DISCORD_BOT_TOKEN: NjA0NzIwMzk3NTk4MDY0NjUx.XTyEBw.NGrfO3u_0HdE2iUI60IQFQMY_6k
     networks:
-      intranet:
-        aliases:
-          - samp
+      - intranet
     depends_on:
       - mysqld
       # - migrations
