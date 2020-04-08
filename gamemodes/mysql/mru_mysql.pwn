@@ -1,6 +1,6 @@
 //mru_mysql.pwn
 
-MySQL:MruMySQL_Init()
+MruMySQL_Init()
 {
 	#if DEBUG_MODE == 1
 		mysql_log(ALL);
@@ -17,20 +17,15 @@ MySQL:MruMySQL_Init()
 	{
 		new error[100];
 		mysql_error(error, sizeof (error), mruMySQL_Connection);
+		print("[ERROR] MYSQL: Nieudane polaczenie z baza MySQL!");
 		printf("[ERROR] #%d '%s'", errno, error);
-	}
-
-	if(mruMySQL_Connection == MYSQL_INVALID_HANDLE)
-	{
-		print("MYSQL: Nieudane polaczenie z baza MySQL");
 		SendRconCommand("gamemodetext Brak polaczenia MySQL");
 		SendRconCommand("exit");
-		return MYSQL_INVALID_HANDLE;
+		return 0;
 	}
 	
 	mysql_set_charset("cp1250");
-
-	return mruMySQL_Connection;
+	return 1;
 }
 
 MruMySQL_Exit()

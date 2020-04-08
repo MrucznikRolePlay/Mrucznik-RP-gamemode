@@ -63,7 +63,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //TODO: add plugins
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
-// #include <requests>
 // #include <colandreas>
 
 //-------<[ Include ]>-------
@@ -252,7 +251,7 @@ public OnGameModeInit()
     Streamer_SetTickRate(50);
 
 	//-------<[ MySQL ]>-------
-	if(MruMySQL_Init() == MYSQL_INVALID_HANDLE) return 1;
+	if(!MruMySQL_Init()) return 1;
 	MruMySQL_IloscLiderowLoad();
 
 	

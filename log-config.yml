@@ -44,4 +44,4 @@ LogLevel:
   Warning:
     PrintToConsole: true
 EnableColors: true
-LogTimeFormat: '[%d/%m/%Y %H:%M:%S] %F'
+LogTimeFormat: '%d/%m/%Y %H:%M:%S'

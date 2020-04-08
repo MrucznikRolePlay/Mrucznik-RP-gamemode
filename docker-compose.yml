@@ -4,9 +4,12 @@ services:
   samp:
     image: mrucznik/mrucznik-rp:v2.6
     build: .
-    volumes:
-      - ./scriptfiles:/samp/scriptfiles
-      - ./logs:/samp/logs
+    # volumes:
+    #   - ./scriptfiles:/root/.samp/runtime/0.3.DL/scriptfiles
+    #   - ./mysql.ini:/root/.samp/runtime/0.3.DL/mysql.ini
+    #   - ./log-config.yml:/root/.samp/runtime/0.3.DL/log-config.yml
+    #   - ./logs:/root/.samp/runtime/0.3.DL/logs
+    command: ["server", "run"]
     expose:
       - "7777"
     ports:

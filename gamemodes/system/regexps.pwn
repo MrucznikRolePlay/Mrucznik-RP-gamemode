@@ -31,7 +31,7 @@ InitRegexps()
 	REGEX_WINKTONGUE = Regex_New(";[pP]+");
 	REGEX_SMILE = Regex_New(":\\)+");
 	REGEX_SAD = Regex_New(":\\(+");
-	REGEX_O = Regex_New(":[oO]]+");
+	REGEX_O = Regex_New(":[oO]+");
 	REGEX_KISS = Regex_New(":\\*+");
 	REGEX_V = Regex_New(":[vV]+");
 	REGEX_S = Regex_New(":[sS]+");
