@@ -88,6 +88,14 @@ IsAtCookPlace(playerid)
 		{//Nowa Pizzeria
 			return 1;
 		}
+		else if(PlayerInfo[playerid][pDomWKJ] == PlayerInfo[playerid][pDom] || PlayerInfo[playerid][pDomWKJ] == PlayerInfo[playerid][pWynajem] && Dom[PlayerInfo[playerid][pDom]][hUL_D] != 0)
+		{
+			new dom = PlayerInfo[playerid][pDom];
+			if(IsPlayerInRangeOfPoint(playerid, 50.0, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]))
+			{
+				return 1;
+			}
+		}
 	}
 	return 0;
 }

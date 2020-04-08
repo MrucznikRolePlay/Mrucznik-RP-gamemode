@@ -35,7 +35,6 @@ YCMD:finfo(playerid, params[], help)
 	if(IsPlayerConnected(playerid))
 	{
 		if(GetPlayerFraction(playerid) == 0 
-		|| GetPlayerFraction(playerid) == 6
 		|| GetPlayerFraction(playerid) == 8
 		|| GetPlayerFraction(playerid) == 12
 		|| GetPlayerFraction(playerid) == 13

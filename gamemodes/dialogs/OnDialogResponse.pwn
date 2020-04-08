@@ -475,6 +475,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18434");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 1:
@@ -482,6 +483,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANUno);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 2:
@@ -489,6 +491,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANDos);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 3:
@@ -496,6 +499,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://zet-net-01.cdn.eurozet.pl:8400/listen.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 4:
@@ -503,6 +507,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmffm.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 5:
@@ -510,6 +515,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 6:
@@ -517,6 +523,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "https://waw01-03.ic.smcdn.pl/t092-1.mp3");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 7:
@@ -524,6 +531,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18802/");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			}
 			case 8:
 			{
@@ -538,6 +546,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerFixRadio(playerid);
 				StopAudioStreamForPlayer(playerid);
 				SetPVarInt(playerid, "SluchaBasenu", 0);
+				DeletePVar(playerid, "HaveAMp3Stream");
 				return 1;
 			}
 		}
@@ -550,6 +559,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//{
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, inputtext);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			//}
 			//else
 			//{
@@ -1497,6 +1507,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
+					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
 					ElevatorTravel(playerid,1144.4740, -1333.2556, 13.8348, 0,90.0);//parking
 					PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 				}
@@ -1507,6 +1522,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
+					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
 					ElevatorTravel(playerid,1183.3129,-1333.5684,88.1627,90,90.0);//p2
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
@@ -1537,6 +1557,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
                 case 9:
 				{
+					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
             		ElevatorTravel(playerid,1161.8228, -1337.0521, 31.6112,0,180.0);//dach
 					PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 				}
@@ -11541,7 +11566,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(IsPlayerConnected(i))
                     {
-                        if(!GetPVarInt(i, "sanaudio"))
+                        if(!GetPVarInt(i, "sanaudio") && !GetPVarInt(i, "HaveAMp3Stream"))
                         {
                             if(PlayerToPoint(SANzasieg, i, SANx, SANy, SANz))
                             {
@@ -11560,6 +11585,71 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             format(SANrepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
+		else if(dialogid == 768)
+		{
+			if(response)
+		    {
+		        switch(listitem)
+		        {
+                    case 0: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://s1.slotex.pl:7170");
+                    case 1: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://4stream.pl:18240");
+		            case 2: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 3: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 4: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 5: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 6: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 7: return ShowPlayerDialogEx(playerid, 770, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL do wybranego utworu", "Wybierz", "Anuluj");
+		        }
+                ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
+		    }
+		}
+		else if(dialogid == 770)
+        {
+            if(!response) return 1;
+            format(KLUBOWErepertuar, 128, inputtext);
+            ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
+        }
+		if(dialogid == 769)
+		{
+		    if(response)
+		    {
+		        switch(listitem)
+		        {
+		            case 0: KLUBOWEzasieg = 10.0;
+                    case 1: KLUBOWEzasieg = 20.0;
+                    case 2: KLUBOWEzasieg = 35.0;
+                    case 3: KLUBOWEzasieg = 50.0;
+				}
+                new Float:x1,Float:y1,Float:z1, Float:a1, nick[MAX_PLAYER_NAME], string[256];
+				GetPlayerPos(playerid,x1,y1,z1);
+				GetPlayerFacingAngle(playerid, a1);
+				GetPlayerName(playerid, nick, sizeof(nick));
+				KLUBOWEradio = CreateDynamicObject(2232, x1, y1, z1-0.3, 0, 0, a1-180);
+				KLUBOWEx = x1;
+				KLUBOWEy = y1;
+				KLUBOWEz = z1;
+                KLUBOWE3d = CreateDynamic3DTextLabel("G³oœnik Klubowy", COLOR_NEWS, x1, y1, z1+0.5, 10.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
+				format(string, sizeof(string), "* %s stawia g³oœnik na ziemi i w³¹cza.", nick);
+				ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				SendClientMessage(playerid, COLOR_NEWS, "Ustawi³eœ g³oœnik klubowy. Aby go wy³¹czyæ wpisz /glosnik");
+                //
+                foreach(new i : Player)
+                {
+                    if(IsPlayerConnected(i))
+                    {
+                        if(!GetPVarInt(i, "kluboweaudio") && !GetPVarInt(i, "HaveAMp3Stream"))
+                        {
+                            if(PlayerToPoint(KLUBOWEzasieg, i, KLUBOWEx, KLUBOWEy, KLUBOWEz))
+                            {
+                                PlayAudioStreamForPlayer(i, KLUBOWErepertuar, KLUBOWEx, KLUBOWEy, KLUBOWEz, KLUBOWEzasieg, 1);
+                                SetPVarInt(i, "kluboweaudio", 1);
+                            }
+                        }
+                    }
+                }
+                //
+			}
+		}
         else if(dialogid == 1401)
 		{
 		    if(response)
@@ -13994,6 +14084,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ZabierzKase(playerid, 15000);
 				DajKase(id, 15000);
 				PlayerInfo[playerid][pFixKit]++;
+				PlayerInfo[id][pMechSkill]++;
+                if(PlayerInfo[id][pMechSkill] == 50)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 100)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 200)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 400)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
 			}
 		}
 		else

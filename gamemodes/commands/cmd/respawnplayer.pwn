@@ -46,7 +46,14 @@ YCMD:respawnplayer(playerid, params[], help)
         GetPlayerPos(v, slx, sly, slz);
         SetPlayerPos(v, slx, sly, slz+5);
     }
-    
+    if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem da /q
+	{
+		Worek_MamWorek[playerid] = 0;
+		Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
+		Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
+		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
+		UnHave_Worek(playerid);
+	}
     //wiadomosci
     new str[128];
     format(str, 128, "$System$ » Zosta³eœ zrespawnowany przez admina %s", GetNickEx(playerid));

@@ -59,6 +59,7 @@ YCMD:spec(playerid, params[], help)
 				}
 	        	SpectateTime[playerid] = 0;
 	        }*/
+			SetPVarInt(playerid, "OnSpecChanging", 1);
             if(Unspec[playerid][Coords][0] == 0.0)
             {
                 GetPlayerPos(playerid, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2]);
@@ -112,6 +113,7 @@ YCMD:spec(playerid, params[], help)
 				pid); 
 				SendClientMessage(playerTargetSpec[playerid], COLOR_RED, string); 
 			}
+			SetTimerEx("SetPVarInt", 250, false, "dsd", playerid, "OnSpecChanging", 0);
         }
 	}
 	return 1;
