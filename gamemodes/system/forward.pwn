@@ -54,7 +54,6 @@ forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
 forward PoscigTimer(playerid);
 forward AntySpamTimer(playerid);
-forward AntySpamLowienie(playerid);
 forward AntyBusCzit(playerid);
 forward spamujebronia(playerid);
 forward odpalanie(playerid);
@@ -151,5 +150,5 @@ forward closeGate(i, j, playerid);
 forward DamagedHP(playerid);
 forward CuffedAction(playerid, cuffedid);
 //forward UnCuffedAction(cop, cuffedid); to do
-forward DeathAdminWarning(playerid, killerid, reason) ;
+forward DeathAdminWarning(playerid, killerid, reason);
 //EOF

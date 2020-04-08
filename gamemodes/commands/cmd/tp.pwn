@@ -37,7 +37,7 @@ YCMD:tp(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         new plo, plo1;
-		if( sscanf(params, "k<fix>d", plo1, plo))
+		if( sscanf(params, "k<fix>k<fix>", plo1, plo))
 		{
 			sendTipMessage(playerid, "U¿yj /tp [playerid/CzêœæNicku] [playerid/CzêœæNicku]");
 			return 1;

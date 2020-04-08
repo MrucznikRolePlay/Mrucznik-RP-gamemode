@@ -52,7 +52,7 @@ YCMD:od(playerid, params[], help)
 	
 	sendTipMessageEx(callerid, COLOR_GRAD2, "Twój rozmówca odebra³ telefon.");
 	sendTipMessageEx(playerid, COLOR_GRAD2, "Odebra³eœ telefon.");
-	format(string, sizeof(string), "* %s odbiera telefon.", GetNickEx(playerid));
+	format(string, sizeof(string), "* %s odbiera telefon.", GetNick(playerid));
 	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	return 1;
 }

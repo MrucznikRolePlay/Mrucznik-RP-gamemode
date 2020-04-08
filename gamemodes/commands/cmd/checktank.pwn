@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ wynajempomoc ]---------------------------------------------//
+//-----------------------------------------------[ checktank ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Creative
+// Data utworzenia: 07.04.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -27,12 +29,31 @@
 /*
 	
 */
-
-YCMD:wynajempomoc(playerid, params[], help)
+YCMD:checktank(playerid, params[], help)
 {
-	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
-	SendClientMessage(playerid, COLOR_WHITE,"*** WYNAJMOWANIE POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-	SendClientMessage(playerid, COLOR_GRAD3,"*** RENT *** /unrent /wejdz /wyjdz /dom /wynajmijpokoj");
-	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /pomoc /bizpomoc /liderpomoc /rybypomoc /ircpomoc");
-	return 1;
+    if(IsPlayerConnected(playerid))
+    {
+		new giveid;
+		if( sscanf(params, "k<fix>", giveid))
+		{
+			sendTipMessage(playerid, "U¿yj /checktank [id gracza/czêœæ nicku]");
+			return 1;
+		}
+
+        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+        {
+            new carid = GetPlayerVehicleID(giveid);
+            if(!carid) return sendErrorMessage(playerid, sprintf("%s [%d] musi znajdowaæ siê w pojeŸdzie!", GetNick(giveid), giveid));
+            
+            new Float:vhealth;
+            GetVehicleHealth(carid, vhealth);
+            SetVehicleHealth(carid, vhealth - 15);
+            SetTimerEx("CheckTankMode", 100, false, "iiif", playerid, giveid, carid, vhealth);
+        }
+        else
+        {
+            noAccessMessage(playerid);
+        }
+    }
+    return 1;
 }

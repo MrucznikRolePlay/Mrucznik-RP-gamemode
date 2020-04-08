@@ -22,7 +22,6 @@
 /*
 	System graffiti
 
-
 	/graffiti stworz (na strefie przejêtej/nieprzejêtej - na SC & tylko dla gangów - na koniec do dodania) tworzy dialog
 	w którym wpisujemy tekst i wybieramy kolor podstawowy (mozna zmieniac kolory w trakcie, np {f0f0f0}tekst)
 	Po tym ustawiamy odpowiednie koordy naszego napisu===(do tego punktu gotowe)===, zapisuje sie w bazie danych:
