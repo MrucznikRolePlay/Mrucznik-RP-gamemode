@@ -63,7 +63,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 7445 - 7449 
 	cooking_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); // 55376 - 55377
 
-	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 	pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext); 
 	// 31 - 34, 36 - 38, 303, 400 - 410, 411 - 417, 420 - 424, 440, 443, 450 - 459, 
 	// 499 - 500, 4000 - 4017, 4100 - 4124, 4200 - 4209, 4300 - 4305, 4400 - 4404, 4500 - 4503, 4600 - 4605, 4700 - 4705,
