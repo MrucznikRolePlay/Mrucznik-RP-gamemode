@@ -17,7 +17,6 @@ services:
     environment:
       SAMP_DISCORD_BOT_TOKEN: NjA0NzIwMzk3NTk4MDY0NjUx.XTyEBw.NGrfO3u_0HdE2iUI60IQFQMY_6k
     networks:
-      - default
       - intranet
     depends_on:
       - mysqld
