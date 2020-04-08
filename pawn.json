@@ -14,7 +14,7 @@
 		"emmet-jones/New-SA-MP-callbacks",
 		"oscar-broman/strlib",
 		"pawn-lang/YSI-Includes@4.x",
-		"Southclaws/samp-whirlpool",
+		"Southclaws/samp-whirlpool:v1.0.0",
 		"Wuzi/vending",
 		"BigETI/pawn-memory:2.0.1",
 		"BigETI/pawn-vector",
@@ -25,7 +25,7 @@
 		"Zeex/amx_assembly",
 		"Mrucznik/samp-plugin-profiler:v2.15.4",
 		"maddinat0r/samp-mysql-yinline-include",
-		"urShadow/Pawn.Regex"
+		"urShadow/Pawn.Regex:1.1.2"
 	],
 	"build": {
 		"name": "",
