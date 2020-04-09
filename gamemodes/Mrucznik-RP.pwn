@@ -2252,7 +2252,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
             case 52:    format(code_decoded, sizeof(code_decoded), "Anti-NOPs");
             default:    format(code_decoded, sizeof(code_decoded), "Inne");
         }
-		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, plrIP, code_decoded, code);
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), code_decoded, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | %s [%d]", code_decoded, code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
