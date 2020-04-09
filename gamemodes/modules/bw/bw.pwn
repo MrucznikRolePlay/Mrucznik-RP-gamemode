@@ -303,6 +303,7 @@ NadajWLBW(killerid, victim, bool:bw)
 		sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
 		sendTipMessage(killerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
 	}
+	return 1;
 }
 
 ZdejmijBW(playerid, drunklvl = 7000)
@@ -325,6 +326,7 @@ ZdejmijBW(playerid, drunklvl = 7000)
 	SetPlayerChatBubble(playerid, "** Og³uszony **", COLOR_PANICRED, 70.0, (120 * 1000));
 	// SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000); - lub usuwamy napis nad g³ow¹
 	SetPlayerDrunkLevel(playerid, drunklvl);
+	return 1;
 }
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------
