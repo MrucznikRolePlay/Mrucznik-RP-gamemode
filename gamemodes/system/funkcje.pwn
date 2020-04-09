@@ -2591,7 +2591,7 @@ stock RemovePlayerWeaponsTemporarity(playerid)
 
 	ResetPlayerWeapons(playerid);
 	SetPlayerArmedWeapon(playerid, 0);
-	PlayerHasWeapon[playerid] = 0;
+	MyWeapon[playerid] = 0;
 }
 
 DajBronieFrakcyjne(playerid)

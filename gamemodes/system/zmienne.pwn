@@ -915,7 +915,7 @@ new BramaZuz;
 new BramaZuzS = 1;
 //koniec garazpd
 //inne
-new PlayerHasWeapon[MAX_PLAYERS];
+new MyWeapon[MAX_PLAYERS];
 new ZapisSkinu[MAX_PLAYERS];
 new PDGPS = -1;//gps
 //koniec przedmioty

@@ -172,7 +172,7 @@ PlayerEnterVehOnInjury(playerid)
 PlayerChangeWeaponOnInjury(playerid)
 {
 	//SendClientMessageToAll(COLOR_GRAD2, "#5: PlayerChangeWeaponOnInjury");
-	SetPlayerArmedWeapon(playerid, PlayerHasWeapon[playerid]);
+	SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 	return 1;
 }
 ZespawnujGraczaBW(playerid)

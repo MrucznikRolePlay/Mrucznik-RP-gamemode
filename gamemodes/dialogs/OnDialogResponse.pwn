@@ -14151,7 +14151,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GUIExit[playerid] = 0;
 			new weaponid = DynamicGui_GetValue(playerid, listitem);
 			new weapondata = DynamicGui_GetDataInt(playerid, listitem);
-			if(weaponid == PlayerHasWeapon[playerid])
+			if(weaponid == MyWeapon[playerid])
 			{
 				weaponid = PlayerInfo[playerid][pGun0];
 			}

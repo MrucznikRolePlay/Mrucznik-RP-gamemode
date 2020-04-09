@@ -5082,6 +5082,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
+		SetPlayerArmedWeapon(playerid, 0); //anty driveby
         if(newstate == PLAYER_STATE_DRIVER)
         {
         	new vehicleid = GetPlayerVehicleID(playerid);
@@ -5201,6 +5202,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    KartingPlayers --;
 		}
 		SetPVarInt(playerid, "IsAGetInTheCar", 0); 
+		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]); //back weapon antydriveby
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) // TAXI & BUSSES
 	{
