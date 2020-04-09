@@ -69,28 +69,22 @@ YCMD:warn(playerid, params[], help)
                         sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany, u¿yj kicka.");
 						return 1;
                     }
+					if(PlayerInfo[giveplayerid][pWarns] >= 2)
+					{
+						SetPVarInt(playerid, "PunishWarnPlayer", giveplayerid);
+						SetPVarString(playerid, "PunishWarnPlayer_Reason", result);
+						format(string, sizeof string, "{FFFFFF}Gracz %s ma ju¿ 2 warny, otrzymanie kolejnego jest równoznaczne z {FF0000}BANEM{FFFFFF}.\n{ffe524}Czy potwierdzasz nadanie bana graczowi?\n{FFFFFF}Je¿eli to mo¿liwe, mo¿esz ukaraæ gracza l¿ejsz¹ kar¹.", GetNick(giveplayerid));
+						ShowPlayerDialogEx(playerid, 9521, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Nadaj warna", "Anuluj karê");
+						return 1;
+					}
 					GiveWarnForPlayer(giveplayerid, playerid, result);
 					if(kary_TXD_Status == 1)
 					{
-						if(PlayerInfo[giveplayerid][pWarns] >= 3)
-						{
-							format(string, sizeof(string), "%s (3 Warny)", result);
-							BanPlayerTXD(giveplayerid, playerid, string); 
-							return 1;
-						}
 						WarnPlayerTXD(giveplayerid, playerid, result);
-						
 					}
 					else if(kary_TXD_Status == 0)
 					{
-						if(PlayerInfo[giveplayerid][pWarns] >= 3)
-						{
-							format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNick(giveplayerid), GetNickEx(playerid), result); 
-						}
-						else 
-						{
-							format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNick(giveplayerid), GetNickEx(playerid), result);
-						}
+						format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNickEx(giveplayerid), GetNickEx(playerid), result);
 						SendPunishMessage(string, playerid); 
 					}
 				  

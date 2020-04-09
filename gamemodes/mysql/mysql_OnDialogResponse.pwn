@@ -35,7 +35,7 @@ MruMySQL_PobierzStatystyki(playerid, nickoruid[])
         {
             mysql_fetch_row_format(query2, "|");
             mysql_free_result();
-            new stringban[144], typ, powod[64], admin[32];
+            new typ, powod[64], admin[32];
             sscanf(query2, "p<|>ds[32]s[64]", typ, admin, powod);
 
             if(typ == WARN_BAN)
