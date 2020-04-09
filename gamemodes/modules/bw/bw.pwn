@@ -280,6 +280,7 @@ ZespawnujGraczaSzpitalBW(playerid)
 
 NadajWLBW(killerid, victim, bool:bw)
 {
+	if(GetPlayerVirtualWorld(killerid) == 5000) return 1;
 	//SendClientMessageToAll(COLOR_GRAD2, "#10: NadajWLBW");
 	new string[144];
 	new playerid = victim;
