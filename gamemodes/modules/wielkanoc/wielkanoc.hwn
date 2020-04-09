@@ -28,6 +28,8 @@ enum eEasterEggs
     Float:egg_x_pos,
     Float:egg_y_pos,
     Float:egg_z_pos,
+    eggVW,
+    eggINT,
     eggTYPE,
 }
 

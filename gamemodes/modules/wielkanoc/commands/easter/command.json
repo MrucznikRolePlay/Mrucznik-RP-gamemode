@@ -13,13 +13,13 @@
             "type": "string",
             "size": "24",
             "name": "opcja",
-            "description": "wlacz, wylacz, setmc, setcash, stworz, usun"
+            "description": "wlacz, wylacz, setmc, setcash, stworz, usun, goto"
         },
         {
             "type": "string",
             "size": "24",
             "name": "opcja2",
-            "description": "stworz -> typ (mc / cash)",
+            "description": "stworz -> typ (mc / cash), goto -> ID, setcash/setmc -> ilosc",
             "defaultValue": "none"
         }
     ],

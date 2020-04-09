@@ -41,6 +41,22 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
             format(string, sizeof(string), "[EasterEgg]Admin %s wy³¹czy³ mo¿liwoœæ podnoszenia jajek!", GetNick(playerid));
             SendMessageToAdmin(string, COLOR_P@);
         }
+        if(strcmp(opcja,"goto",true) == 0)
+        {
+            if(strcmp(opcja2,"none", true) == 0) SendTipMessage(playerid, "Wpisz ID jajka.");
+            else
+            {
+                new id = valstr(opcja2);
+                if(EasterEggs_Exist(id))
+                {
+                    Wchodzenie(playerid);
+                    SetPlayerVirtualWorld(EasterEgg[id][eggVW]);
+                    SetPlayerInterior(EasterEgg[id][eggINT]);
+                    SetPlayerPos(playerid, EasterEgg[id][egg_x_pos], EasterEgg[id][egg_y_pos], EasterEgg[id][egg_z_pos]);
+                }
+                else SendTipMessage(playerid, "Jajko nie istnieje.");
+            }
+        }
         if(strcmp(opcja,"setmc",true) == 0)
         {
             new value, string[128];

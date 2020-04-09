@@ -59,7 +59,7 @@ YCMD:easter(playerid, params[], help)
     new opcja[24], opcja2[24];
     if(sscanf(params, "s[24]S(none)[24]", opcja, opcja2))
     {
-        sendTipMessage(playerid, "U¿yj /easter [wlacz, wylacz, setmc, setcash, stworz, usun] [stworz -> typ (mc / cash)] ");
+        sendTipMessage(playerid, "U¿yj /easter [wlacz, wylacz, setmc, setcash, stworz, usun, goto] [stworz -> typ (mc / cash), goto -> ID, setcash/setmc -> ilosc] ");
         return 1;
     }
     

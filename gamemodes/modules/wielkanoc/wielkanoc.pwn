@@ -62,8 +62,10 @@ stock EasterEggs_FindNearest(playerid)
 		if(EasterEggs_Exist(i))
 		{
 			new Float:ox, Float:oy, Float:oz;
+			new vw = GetPlayerVirtualWorld(playerid);
+			new int = GetPlayerInterior(playerid);
 			GetDynamicObjectPos(EasterEggs[i][eggID], ox, oy, oz);
-			if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz))
+			if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz) && (vw == EasterEggs[i][eggVW]&& int == EasterEggs[i][eggINT]))
 			{
 				return i;
 			}
@@ -97,13 +99,18 @@ stock EasterEggs_Create(playerid, Float:x, Float:y, Float:z, type)
 	else
 	{
 		new model = true_random(3)+1;
+		new vw, int;
+		vw = GetPlayerVirtualWorld(playerid);
+		int = GetPlayerInterior(playerid);
 		SetPVarInt(playerid, "EGGID", egg_id);
 		SetPVarInt(playerid, "CreatingEGG", 1);
 		EasterEggs[egg_id][egg_x_pos] = x;
 		EasterEggs[egg_id][egg_y_pos] = y;
 		EasterEggs[egg_id][egg_z_pos] = z;
+		EasterEggs[egg_id][eggVW] = vw;
+		EasterEggs[egg_id][eggINT] = int;
 		EasterEggs[egg_id][eggTYPE] = type;
-		EasterEggs[egg_id][eggID] = CreateDynamicObject(EasterEggsModel[model], x, y, z, 0.0, 0.0, 0.0, 0, 0, -1, 80);
+		EasterEggs[egg_id][eggID] = CreateDynamicObject(EasterEggsModel[model], x, y, z, 0.0, 0.0, 0.0, vw, int, -1, 80);
 		EditDynamicObject(playerid, EasterEggs[egg_id][eggID]);
 	}
 	return 1;
