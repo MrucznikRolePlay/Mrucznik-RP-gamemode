@@ -2252,7 +2252,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
             case 52:    format(code_decoded, sizeof(code_decoded), "Anti-NOPs");
             default:    format(code_decoded, sizeof(code_decoded), "Inne");
         }
-		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, plrIP, code_decoded, code);
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), code_decoded, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | %s [%d]", code_decoded, code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
@@ -5082,6 +5082,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
+		if(!IsAPrzestepca(playerid) && !IsAPolicja(playerid) || IsAPolicja(playerid) && !OnDuty[playerid] && !OnDutyCD[playerid]) SetPlayerArmedWeapon(playerid, 0); //anty driveby
         if(newstate == PLAYER_STATE_DRIVER)
         {
         	new vehicleid = GetPlayerVehicleID(playerid);
@@ -5201,6 +5202,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    KartingPlayers --;
 		}
 		SetPVarInt(playerid, "IsAGetInTheCar", 0); 
+		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]); //back weapon antydriveby
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) // TAXI & BUSSES
 	{
@@ -5362,7 +5364,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	{
 	    IDWymienianegoAuta[playerid] = 0;
 	}
-	if(KradniecieWozu[playerid] >= 1)
+	if(KradniecieWozu[playerid] == 1)
 	{
 		KradniecieWozu[playerid] = 0;
 		NieSpamujKradnij[playerid] = 0;

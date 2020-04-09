@@ -25,11 +25,38 @@ MruMySQL_PobierzStatystyki(playerid, nickoruid[])
         mysql_fetch_row_format(lStr, "|");
         new pnickname[MAX_PLAYER_NAME], plvl, padmin, pzg, ppadmin, ppremium, pmoney, pbank, pnr, pjob, pbp, pmember, porg, pdom, pblock, pzn, pwarn, puid;
         sscanf(lStr, "p<|>s[24]ddddddddddddddddd", pnickname, plvl, padmin, pzg, ppadmin, ppremium, pmoney, pbank, pnr, pjob, pbp, pmember, porg, pdom, pblock, pzn, pwarn, puid);
+        
+        new query2[256], stringban[144];
+        format(query2, sizeof(query2), "SELECT `typ`, `nadal`, `powod` FROM `mru_bany` WHERE `dostal`='%s' ORDER BY `czas` DESC LIMIT 1", pnickname);
+        mysql_query(query2);
+        mysql_store_result();
+
+        if (mysql_num_rows())
+        {
+            mysql_fetch_row_format(query2, "|");
+            mysql_free_result();
+            new typ, powod[64], admin[32];
+            sscanf(query2, "p<|>ds[32]s[64]", typ, admin, powod);
+
+            if(typ == WARN_BAN)
+            {
+                format(stringban, sizeof(stringban), "{FF0000}(%s) od %s", powod, admin);
+            }
+            else
+            {
+                format(stringban, sizeof(stringban), "{00FF00}brak");
+            }
+        }
+        else
+        {
+            format(stringban, sizeof(stringban), "{00FF00}brak");
+        }
+
         format(lStr, sizeof(lStr), "> %s {FFFFFF}(UID: %d)", pnickname, puid);
         SendClientMessage(playerid, COLOR_RED, lStr);
         format(lStr, sizeof(lStr), "Level: %d ¦ Kasa: %d ¦ Bank: %d ¦ Numer tel.: %d ¦ ZN: %d ¦ Dom: %d", plvl, pmoney, pbank, pnr, pzn, pdom);
         SendClientMessage(playerid, -1, lStr);
-        format(lStr, sizeof(lStr), "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d : Warny: %d", padmin, ppadmin, pzg, pbp, pblock, pwarn);
+        format(lStr, sizeof(lStr), "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d ¦ Warny: %d | Ban: %s", padmin, ppadmin, pzg, pbp, pblock, pwarn, stringban);
         SendClientMessage(playerid, -1, lStr);
         format(lStr, sizeof(lStr), "Premium: %d ¦ Praca: %d ¦ Frakcja: %d ¦ Org.: %d", ppremium, pjob, pmember, porg);
         SendClientMessage(playerid, -1, lStr);

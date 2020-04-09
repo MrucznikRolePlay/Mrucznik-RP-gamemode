@@ -497,7 +497,7 @@ new FractionNames[][40] = {
     "Grove Street Families",
     "Crackville Boyz",
     "Hillside Nortenos 14",
-    "Nightmare of Adrenalin",
+    "89 Border Society",
     "IV Saint Reich",
     "Brak",
     "Brak",
@@ -763,7 +763,7 @@ new BlinkOffset[][eBO] = {
 };
 
 new GunNames[47][] = {
-	"Brak",//0
+	"Piêœci",//0
 	"Kastet",//1
 	"Kij golfowy",//2
 	"Pa³ka policyjna",//3

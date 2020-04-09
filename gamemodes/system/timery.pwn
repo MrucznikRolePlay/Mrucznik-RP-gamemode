@@ -931,7 +931,7 @@ public CheckChangeWeapon()
 	{
 		new weaponID = GetPlayerWeapon(i);
 		new playerState = GetPlayerState(i);
-		if(PlayerHasWeapon[i]!=weaponID)
+		if(MyWeapon[i]!=weaponID)
 		{
 			if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
 			{
@@ -945,10 +945,10 @@ public CheckChangeWeapon()
 						}
 						else
 						{
-							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, PlayerHasWeapon[i]);
+							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, MyWeapon[i]);
 							if(PokazDialogBronie(i) == 0)
 							{
-								PlayerHasWeapon[i] = 0;
+								MyWeapon[i] = 0;
 								SetPlayerArmedWeapon(i, 0);
 							}
 						}
