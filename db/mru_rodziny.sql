@@ -1,0 +1,21 @@
+
+CREATE TABLE IF NOT EXISTS `mru_rodziny` (
+  `name` varchar(20) COLLATE utf8_polish_ci NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+INSERT INTO `mru_rodziny` (`name`, `id`) VALUES
+('FAMILY_SAD', 1),
+('FAMILY_RSC', -1),
+('FAMILY_ALHAMBRA', 16),
+('FAMILY_VINYL', 17),
+('FAMILY_IBIZA', 18),
+('FAMILY_FDU', 14),
+('FAMILY_LCN', 40),
+('FAMILY_YKZ', 41),
+('FAMILY_GROVE', 42),
+('FAMILY_BALLAS', 43),
+('FAMILY_VAGOS', 44),
+('FAMILY_NOA', 45),
+('FAMILY_WPS', 46),
+('FAMILY_SEKTA', 27);
