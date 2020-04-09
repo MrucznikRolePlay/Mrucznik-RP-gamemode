@@ -82,6 +82,7 @@ EasterEggs_Delete(playerid, egg_id)
 		new string[120];
 		format(string, sizeof(string), "Admin %s usun¹³ jajko ID:[%d]", GetNick(playerid), egg_id);
 		SendMessageToAdmin(string, COLOR_P@);
+		// DODATKOWO ZEROWANIE LISTY OSÓB KTÓRE WZIE£Y TO JAJKO
 	}
 	else
 	{
