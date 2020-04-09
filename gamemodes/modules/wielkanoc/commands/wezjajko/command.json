@@ -1,0 +1,13 @@
+{
+    "name": "wezjajko",
+    "description": "Komenda do wielkanocnego eventu",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "gumbal",
+    "aliases": [
+        "wezjajo"
+    ],
+    "parameters": [],
+    "date": "09.04.2020"
+}

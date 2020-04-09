@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                 wielkanoc                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   easter                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,17 +16,53 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: gumbal
-// Data utworzenia: 09.04.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define EASTER_MAX_CASH 100000 // 0 - EASTER_MAX_CASH
-#define EASTER_MAX_MCOINS 50 // 0 - EASTER_MAX_MCOINS
-#define EASTER_MAX_EGGS 2
-#define EASTER_TYPE_CASH 1
-#define EASTER_TYPE_MC 2
-#define INVALID_EGG_ID -1
-//end
+
+//-------<[ include ]>-------
+#include "easter_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_easter()
+{
+    new command = Command_GetID("easter");
+
+    //aliases
+    Command_AddAlt(command, "easteregg");
+    
+
+    //permissions
+    Group_SetCommand(Group_GetID("admini"), command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:easter(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "komenda do zarz¹dzania wielkanocnym eventem");
+        return 1;
+    }
+    //fetching params
+    new opcja[24], opcja2[24];
+    if(sscanf(params, "s[24]S(none)[24]", opcja, opcja2))
+    {
+        sendTipMessage(playerid, "U¿yj /easter [wlacz, wylacz, setmc, setcash, stworz, usun] [stworz -> typ (mc / cash)] ");
+        return 1;
+    }
+    
+    //command body
+    return command_easter_Impl(playerid, opcja, opcja2);
+}

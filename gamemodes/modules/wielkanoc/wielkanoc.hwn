@@ -22,7 +22,22 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum eEasterEggs
+{
+    eggID,
+    Float:egg_x_pos,
+    Float:egg_y_pos,
+    Float:egg_z_pos,
+    eggTYPE,
+}
+
 //-----------------<[ Zmienne: ]>-------------------
+new EasterEggs[EASTER_MAX_EGGS][eEasterEggs];
+new EasterEggsAdminUID[3] = {"404", "1", "1"};
+new EasterEggsModel[5] = {"19341", "19342", "19434", "19434", "19345"};
+new EasterEggs_Setting_CASH = EASTER_MAX_CASH;
+new EasterEggs_Setting_MCOINS = EASTER_MAX_MCOINS;
+new EasterEggs_Setting_Started = 0;
 //------------------<[ Forwardy: ]>--------------------
 
 //end

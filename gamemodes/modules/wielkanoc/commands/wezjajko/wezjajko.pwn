@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                 wielkanoc                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  wezjajko                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,17 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: gumbal
-// Data utworzenia: 09.04.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define EASTER_MAX_CASH 100000 // 0 - EASTER_MAX_CASH
-#define EASTER_MAX_MCOINS 50 // 0 - EASTER_MAX_MCOINS
-#define EASTER_MAX_EGGS 2
-#define EASTER_TYPE_CASH 1
-#define EASTER_TYPE_MC 2
-#define INVALID_EGG_ID -1
-//end
+
+//-------<[ include ]>-------
+#include "wezjajko_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_wezjajko()
+{
+    new command = Command_GetID("wezjajko");
+
+    //aliases
+    Command_AddAlt(command, "wezjajo");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:wezjajko(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda do wielkanocnego eventu");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_wezjajko_Impl(playerid);
+}

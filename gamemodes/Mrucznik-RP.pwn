@@ -4961,6 +4961,25 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			GameTextForPlayer(playerid, "~r~Usunieto!",2000, 5);
 			graffiti_ZerujZmienne(playerid);
 		}
+		else if( response == EDIT_RESPONSE_FINAL && GetPVarInt(playerid, "CreatingEGG") == 1)
+		{
+			new egg_id = GetPVarInt(playerid, "EGGID");
+			EasterEggs[egg_id][egg_x_pos] = x;
+			EasterEggs[egg_id][egg_y_pos] = y;
+			EasterEggs[egg_id][egg_z_pos] = z;
+			GameTextForPlayer(playerid, "~g~Stworzono.",2000, 5);
+			DeletePVar(playerid, "CreatingEGG");
+			new string[120];
+			format(string, sizeof(string), "Admin %s stworzy³ jajko wielkanocne, ID:[%d]", GetNick(playerid), egg_id);
+			SendMessageToAdmin(string, COLOR_P@);
+		}
+		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingEGG") == 1)
+		{
+			new egg_id = GetPVarInt(playerid, "EGGID");
+			EasterEggs_Delete(playerid, egg_id);
+			GameTextForPlayer(playerid, "~r~Usunieto!",2000, 5);
+			DeletePVar(playerid, "CreatingEGG");
+		}
     }
 	return 1;
 }

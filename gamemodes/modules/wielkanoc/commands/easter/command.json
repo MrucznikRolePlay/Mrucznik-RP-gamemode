@@ -1,0 +1,27 @@
+{
+    "name": "easter",
+    "description": "komenda do zarz¹dzania wielkanocnym eventem",
+    "permissions": [
+        "admini"
+    ],
+    "author": "gumbal",
+    "aliases": [
+        "easteregg"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "24",
+            "name": "opcja",
+            "description": "wlacz, wylacz, setmc, setcash, stworz, usun"
+        },
+        {
+            "type": "string",
+            "size": "24",
+            "name": "opcja2",
+            "description": "stworz -> typ (mc / cash)",
+            "defaultValue": "none"
+        }
+    ],
+    "date": "09.04.2020"
+}

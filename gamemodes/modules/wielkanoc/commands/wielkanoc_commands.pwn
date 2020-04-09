@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                 wielkanoc                                                 //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,17 +16,28 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: gumbal
-// Data utworzenia: 09.04.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define EASTER_MAX_CASH 100000 // 0 - EASTER_MAX_CASH
-#define EASTER_MAX_MCOINS 50 // 0 - EASTER_MAX_MCOINS
-#define EASTER_MAX_EGGS 2
-#define EASTER_TYPE_CASH 1
-#define EASTER_TYPE_MC 2
-#define INVALID_EGG_ID -1
-//end
+
+#include <YSI\y_hooks>
+
+//-------<[ include ]>-------
+#include "easter\easter.pwn"
+#include "wezjajko\wezjajko.pwn"
+
+
+//-------<[ initialize ]>-------
+hook OnGameModeInit()
+{
+    command_easter();
+    command_wezjajko();
+    
+}
