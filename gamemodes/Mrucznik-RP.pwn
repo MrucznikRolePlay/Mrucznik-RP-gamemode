@@ -5082,7 +5082,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
-		if(!IsAPolicja(playerid) || IsAPolicja(playerid) && !OnDuty[playerid] && !OnDutyCD[playerid]) SetPlayerArmedWeapon(playerid, 0); //anty driveby
+		if(!IsAPrzestepca(playerid) && !IsAPolicja(playerid) || IsAPolicja(playerid) && !OnDuty[playerid] && !OnDutyCD[playerid]) SetPlayerArmedWeapon(playerid, 0); //anty driveby
         if(newstate == PLAYER_STATE_DRIVER)
         {
         	new vehicleid = GetPlayerVehicleID(playerid);
