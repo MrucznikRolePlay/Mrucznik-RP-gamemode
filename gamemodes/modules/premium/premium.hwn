@@ -70,21 +70,21 @@ enum ePrzedmiotyPremium
 }
 
 //-----------------<[ Zmienne: ]>-------------------
-new Vector:VPremiumSkins[MAX_PLAYERS]; //TODO: Maybe zamieniæ na bintree, bo w sumie wiecej szukania niz wkladania.
+new Vector:VPremiumSkins[MAX_PLAYERS]; //TODO: Maybe zamieniï¿½ na bintree, bo w sumie wiecej szukania niz wkladania.
 
 new PremiumInfo[MAX_PLAYERS][ePremiumInfo];
 
-//-----------------<[ Sta³e: ]>-------------------
+//-----------------<[ Staï¿½e: ]>-------------------
 new const PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =
 {
 	//drogie:
 	{486, 15000}, //0 Dozer
 	{494, 9000}, //1 Hotring Racer
-	{530, 9000}, //2 Wózek wid³owy
+	{530, 9000}, //2 Wï¿½zek widï¿½owy
 	{548, 8000}, //3 Cargobob
 	{525, 8000}, //4 Holownik
 	{531, 5000}, //5 Traktor
-	//œrednio drogie:
+	//ï¿½rednio drogie:
 	{578, 5000}, //6 DFT-30
 	{428, 4000}, //7 Securicar
 	{509, 4000}, //8 Rower
@@ -153,177 +153,180 @@ new const SkinyPremium[MAX_PREMIUM_SKINS][eSkinyPremium] =
 new const PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] = 
 {
 	//name, item, bone, price
-	{"dynia", 19320, 2, 50}, //https://files.prineside.com/gtasa_samp_model_id/white/19320_w.jpg
+	//{"dynia", 19320, 2, 50}, //https://files.prineside.com/gtasa_samp_model_id/white/19320_w.jpg
+	{"Zielone jajko wielkanocne", 19343, 2, 25}, // https://dev.prineside.com/en/gtasa_samp_model_id/model/19343-easter_egg03/
+	{"Å»Ã³Å‚te jajko wielkanocne", 19343, 2, 25}, // https://dev.prineside.com/en/gtasa_samp_model_id/model/19344-easter_egg04/
+	{"Jajko wielkanocne w paski", 19343, 2, 100}, // https://dev.prineside.com/en/gtasa_samp_model_id/model/19341-easter_egg01/
 
 	{"papuga", 19079, 1, PRZEDMIOT_DROGI_CENA * 20}, //https://files.prineside.com/gtasa_samp_model_id/white/19079_w.jpg
-	//{"œwi¹teczna czapka", 19065, 1, PRZEDMIOT_DROGI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19065_w.jpg
+	//{"ï¿½wiï¿½teczna czapka", 19065, 1, PRZEDMIOT_DROGI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19065_w.jpg
 
 	//okulary aviatory
-	{"bia³e aviatory", 19022, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19022_w.jpg
+	{"biaï¿½e aviatory", 19022, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19022_w.jpg
 	{"niebieskie aviatory", 19023, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19023_w.jpg
 	{"flioletowe aviatory", 19024, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19024_w.jpg
-	{"ró¿owe aviatory", 19025, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19025_w.jpg
+	{"rï¿½owe aviatory", 19025, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19025_w.jpg
 	{"czerwone aviatory", 19026, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19026_w.jpg
-	{"pomarañczowe aviatory", 19027, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19027_w.jpg
-	{"¿ó³te aviatory", 19028, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19028_w.jpg
+	{"pomaraï¿½czowe aviatory", 19027, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19027_w.jpg
+	{"ï¿½ï¿½te aviatory", 19028, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19028_w.jpg
 	{"zielone aviatory", 19029, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19029_w.jpg
 
-	//okulary przeciws³oneczne
-	{"okulary przeciws³oneczne", 19033, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19033_w.jpg
-	{"okulary przeciws³oneczne", 19021, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19021_w.jpg
-	{"okulary przeciws³oneczne", 19020, 1, PRZEDMIOT_TANI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19020_w.jpg
+	//okulary przeciwsï¿½oneczne
+	{"okulary przeciwsï¿½oneczne", 19033, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19033_w.jpg
+	{"okulary przeciwsï¿½oneczne", 19021, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19021_w.jpg
+	{"okulary przeciwsï¿½oneczne", 19020, 1, PRZEDMIOT_TANI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19020_w.jpg
 	{"okulary przeciwsloneczne", 19019, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19019_w.jpg
-	{"okulary przeciws³oneczne", 19018, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19018_w.jpg
-	{"okulary przeciws³oneczene", 19017, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19017_w.jpg
+	{"okulary przeciwsï¿½oneczne", 19018, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19018_w.jpg
+	{"okulary przeciwsï¿½oneczene", 19017, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19017_w.jpg
 
-	//okluary z dziur¹
-	{"niebieskie okulary z dziur¹", 19009, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19009_w.jpg
-	{"¿ó³te okulary z dziur¹", 19007, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19007_w.jpg
-	{"zielone okulary z dziur¹", 19008, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19008_w.jpg
-	{"ró¿owe okulary z dziur¹", 19010, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19010_w.jpg
-	{"bia³e okulary z dziur¹", 19012, 1, PRZEDMIOT_TANI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19012_w.jpg
-	{"pomarañczowe okluary z dziur¹", 19006, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19006_w.jpg
+	//okluary z dziurï¿½
+	{"niebieskie okulary z dziurï¿½", 19009, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19009_w.jpg
+	{"ï¿½ï¿½te okulary z dziurï¿½", 19007, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19007_w.jpg
+	{"zielone okulary z dziurï¿½", 19008, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19008_w.jpg
+	{"rï¿½owe okulary z dziurï¿½", 19010, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19010_w.jpg
+	{"biaï¿½e okulary z dziurï¿½", 19012, 1, PRZEDMIOT_TANI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19012_w.jpg
+	{"pomaraï¿½czowe okluary z dziurï¿½", 19006, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19006_w.jpg
 
 	//zegarki
-	{"z³oty zegarek", 19039, 1, PRZEDMIOT_DROGI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19039_w.jpg
+	{"zï¿½oty zegarek", 19039, 1, PRZEDMIOT_DROGI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19039_w.jpg
 	{"podrabiany srebrny zegarek", 19040, 1, PRZEDMIOT_PRZECIETNY_CENA * 7}, //https://files.prineside.com/gtasa_samp_model_id/white/19040_w.jpg
-	{"podrabiany z³oty zegarek", 19041, 1, PRZEDMIOT_PRZECIETNY_CENA * 7}, //https://files.prineside.com/gtasa_samp_model_id/white/19041_w.jpg
-	{"podrabiany z³oty zegarek", 19042, 1, PRZEDMIOT_PRZECIETNY_CENA * 7}, //https://files.prineside.com/gtasa_samp_model_id/white/19042_w.jpg
+	{"podrabiany zï¿½oty zegarek", 19041, 1, PRZEDMIOT_PRZECIETNY_CENA * 7}, //https://files.prineside.com/gtasa_samp_model_id/white/19041_w.jpg
+	{"podrabiany zï¿½oty zegarek", 19042, 1, PRZEDMIOT_PRZECIETNY_CENA * 7}, //https://files.prineside.com/gtasa_samp_model_id/white/19042_w.jpg
 	{"srebrny zegarek", 19043, 1, PRZEDMIOT_DROGI_CENA * 5}, //https://files.prineside.com/gtasa_samp_model_id/white/19043_w.jpg
 	{"fioletowy zegarek", 19044, 1, PRZEDMIOT_TANI_CENA * 5}, //https://files.prineside.com/gtasa_samp_model_id/white/19044_w.jpg
 	{"czerwony zegarek", 19045, 1, PRZEDMIOT_TANI_CENA * 5}, //https://files.prineside.com/gtasa_samp_model_id/white/19045_w.jpg
 	{"zielony zegarek", 19046, 1, PRZEDMIOT_TANI_CENA * 5}, //https://files.prineside.com/gtasa_samp_model_id/white/19046_w.jpg
 	{"fioletowy zegarek", 19047, 1, PRZEDMIOT_TANI_CENA * 5}, //https://files.prineside.com/gtasa_samp_model_id/white/19047_w.jpg
-	{"elektryzuj¹cy zegarek", 19048, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19048_w.jpg
+	{"elektryzujï¿½cy zegarek", 19048, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19048_w.jpg
 	{"psychodeliczny zegarek", 19049, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19049_w.jpg
 	{"niebiesko-falowy zegarek", 19050, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19050_w.jpg
-	{"pomarañczowo-czarny zegarek", 19051, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19051_w.jpg
-	{"ró¿owy zegarek", 19052, 1, PRZEDMIOT_PRZECIETNY_CENA * 7}, //https://files.prineside.com/gtasa_samp_model_id/white/19052_w.jpg
-	{"zegarek PRO z wê¿owej skóry", 19053, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19053_w.jpg
+	{"pomaraï¿½czowo-czarny zegarek", 19051, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19051_w.jpg
+	{"rï¿½owy zegarek", 19052, 1, PRZEDMIOT_PRZECIETNY_CENA * 7}, //https://files.prineside.com/gtasa_samp_model_id/white/19052_w.jpg
+	{"zegarek PRO z wï¿½owej skï¿½ry", 19053, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19053_w.jpg
 
 	//czapki z daszkiem
 	{"moro czapka z daszkiem", 18926, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18926_w.jpg
 	{"niebieska czapka z daszkiem do przodu", 18927, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18927_w.jpg
 	//{"niebieska czapka z daszkiem", 18957, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18957_w.jpg
-	{"elektryzuj¹ca czapka z daszkiem", 18931, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18931_w.jpg
-	{"czarna czapka z bia³ym daszkiem", 18941, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18941_w.jpg
-	{"be¿owa czapka z bia³ym daszkiem", 18942, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18942_w.jpg
-	{"zielona czapka z bia³ym daszkiem", 18943, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18943_w.jpg
+	{"elektryzujï¿½ca czapka z daszkiem", 18931, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18931_w.jpg
+	{"czarna czapka z biaï¿½ym daszkiem", 18941, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18941_w.jpg
+	{"beï¿½owa czapka z biaï¿½ym daszkiem", 18942, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18942_w.jpg
+	{"zielona czapka z biaï¿½ym daszkiem", 18943, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18943_w.jpg
 	{"ognista czapka z daszkiem", 18930, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18930_w.jpg
-	//{"pomarañczowa czapka z daszkiem", 18955, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18955_w.jpg
-	{"pomarañczowa czapka z daszkiem", 18932, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18932_w.jpg
+	//{"pomaraï¿½czowa czapka z daszkiem", 18955, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18955_w.jpg
+	{"pomaraï¿½czowa czapka z daszkiem", 18932, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18932_w.jpg
 	{"psychodeliczna czapka z daszkiem", 18928, 1, PRZEDMIOT_PRZECIETNY_CENA * 13}, //https://files.prineside.com/gtasa_samp_model_id/white/18928_w.jpg
 	{"policyjna czapka z daszkiem", 18636, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18636_w.jpg
 	{"czapka policyjna", 19162, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19162_w.jpg
 	{"czapka policyjna", 19161, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19161_w.jpg
 
 	//czapki
-	{"elektryzuj¹ca czapka", 18956, 1, PRZEDMIOT_PRZECIETNY_CENA * 12}, //https://files.prineside.com/gtasa_samp_model_id/white/18956_w.jpg
-	{"pomarañczowa czapka", 18969, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18969_w.jpg
+	{"elektryzujï¿½ca czapka", 18956, 1, PRZEDMIOT_PRZECIETNY_CENA * 12}, //https://files.prineside.com/gtasa_samp_model_id/white/18956_w.jpg
+	{"pomaraï¿½czowa czapka", 18969, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18969_w.jpg
 	{"czarna czapka", 18964, 1, PRZEDMIOT_TANI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18964_w.jpg
-	{"bia³a czapka w zielon¹ kratkê", 18968, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18968_w.jpg
-	{"czarna czapka z czaszk¹", 19069, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19069_w.jpg
+	{"biaï¿½a czapka w zielonï¿½ kratkï¿½", 18968, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18968_w.jpg
+	{"czarna czapka z czaszkï¿½", 19069, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19069_w.jpg
 	{"czarna czapka", 18953, 1, PRZEDMIOT_TANI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/18953_w.jpg
 	{"zielona czapka z wzorkami", 18929, 1, PRZEDMIOT_PRZECIETNY_CENA * 12}, //https://files.prineside.com/gtasa_samp_model_id/white/18929_w.jpg
 	{"niebieski beret", 18923, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/18923_w.jpg
-	{"bia³¹ czpaka z wzorkami", 18933, 1, PRZEDMIOT_PRZECIETNY_CENA * 12}, //https://files.prineside.com/gtasa_samp_model_id/white/18933_w.jpg
+	{"biaï¿½ï¿½ czpaka z wzorkami", 18933, 1, PRZEDMIOT_PRZECIETNY_CENA * 12}, //https://files.prineside.com/gtasa_samp_model_id/white/18933_w.jpg
 	{"czerwony beret", 18922, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/18922_w.jpg
 	{"czarny beret?", 18921, 1, PRZEDMIOT_TANI_CENA * 5}, //https://files.prineside.com/gtasa_samp_model_id/white/18921_w.jpg
 	{"czarna czapka", 18965, 1, PRZEDMIOT_TANI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18965_w.jpg
 	{"ciemnozielona czapka", 18954, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18954_w.jpg
 	{"serowa czapka", 18935, 1, PRZEDMIOT_PRZECIETNY_CENA * 12}, //https://files.prineside.com/gtasa_samp_model_id/white/18935_w.jpg
 	{"skejt czapa", 19068, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/19068_w.jpg
-	{"pomarañczowa czapka", 18934, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18934_w.jpg
-	{"¿ó³ta czapka dude", 19160, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19160_w.jpg
+	{"pomaraï¿½czowa czapka", 18934, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18934_w.jpg
+	{"ï¿½ï¿½ta czapka dude", 19160, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19160_w.jpg
 	{"czerwona skejt czapa", 19067, 1, PRZEDMIOT_PRZECIETNY_CENA * 13}, //https://files.prineside.com/gtasa_samp_model_id/white/19067_w.jpg
 	{"psychodeliczna czapka skejtowa", 18966, 1, PRZEDMIOT_DROGI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18966_w.jpg
 
 	//kapelusze
-	{"be¿owy kapelusz policyjny", 19100, 1, PRZEDMIOT_DROGI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19100_w.jpg
+	{"beï¿½owy kapelusz policyjny", 19100, 1, PRZEDMIOT_DROGI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19100_w.jpg
 	{"czarny kapelusz szeryfa", 19099, 1, PRZEDMIOT_DROGI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19099_w.jpg
 	{"cylinder", 19352, 1, PRZEDMIOT_DROGI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19352_w.jpg
 	{"kapelusz z czerwono czarnym paskiem", 18946, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18946_w.jpg
 	{"czarny kapelusz", 18962, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18962_w.jpg
 	{"czerwony kapelusz", 18944, 1, PRZEDMIOT_PRZECIETNY_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/18944_w.jpg
 	{"czarny kapelusz", 19096, 1, PRZEDMIOT_TANI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19096_w.jpg
-	{"be¿owy kapelusz", 19098, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19098_w.jpg
+	{"beï¿½owy kapelusz", 19098, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19098_w.jpg
 	{"czerwony kapelusz", 18950, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18950_w.jpg
 	{"zielony kapelusz z wzorkami", 18945, 1, PRZEDMIOT_PRZECIETNY_CENA * 13}, //https://files.prineside.com/gtasa_samp_model_id/white/18945_w.jpg
-	{"be¿owy kapelusz", 19095, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19095_w.jpg
+	{"beï¿½owy kapelusz", 19095, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19095_w.jpg
 	{"czerwony kapelusz", 19097, 1, PRZEDMIOT_PRZECIETNY_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/19097_w.jpg
-	{"pomarañczowo-czarny kapelusz", 18972, 1, PRZEDMIOT_PRZECIETNY_CENA * 13}, //https://files.prineside.com/gtasa_samp_model_id/white/18972_w.jpg
-	{"¿ó³ty kapelusz z czarnym paskiem", 18951, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18951_w.jpg
-	{"kapelusz w bia³o-czarn¹ kratkê", 18971, 1, PRZEDMIOT_PRZECIETNY_CENA * 13}, //https://files.prineside.com/gtasa_samp_model_id/white/18971_w.jpg
-	{"kapelusz w panterkê", 18970, 1, PRZEDMIOT_PRZECIETNY_CENA * 14}, //https://files.prineside.com/gtasa_samp_model_id/white/18970_w.jpg
-	{"kapelusz z wê¿owej skóry", 18973, 1, PRZEDMIOT_PRZECIETNY_CENA * 14}, //https://files.prineside.com/gtasa_samp_model_id/white/18973_w.jpg
+	{"pomaraï¿½czowo-czarny kapelusz", 18972, 1, PRZEDMIOT_PRZECIETNY_CENA * 13}, //https://files.prineside.com/gtasa_samp_model_id/white/18972_w.jpg
+	{"ï¿½ï¿½ty kapelusz z czarnym paskiem", 18951, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18951_w.jpg
+	{"kapelusz w biaï¿½o-czarnï¿½ kratkï¿½", 18971, 1, PRZEDMIOT_PRZECIETNY_CENA * 13}, //https://files.prineside.com/gtasa_samp_model_id/white/18971_w.jpg
+	{"kapelusz w panterkï¿½", 18970, 1, PRZEDMIOT_PRZECIETNY_CENA * 14}, //https://files.prineside.com/gtasa_samp_model_id/white/18970_w.jpg
+	{"kapelusz z wï¿½owej skï¿½ry", 18973, 1, PRZEDMIOT_PRZECIETNY_CENA * 14}, //https://files.prineside.com/gtasa_samp_model_id/white/18973_w.jpg
 
 	//bandany
 	{"moro bandana", 18914, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18914_w.jpg
-	{"bia³a bandana", 18919, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18919_w.jpg
+	{"biaï¿½a bandana", 18919, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18919_w.jpg
 	{"czarna bandana", 18913, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18913_w.jpg
 	{"wzorzysta bandana", 18915, 1, PRZEDMIOT_DROGI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18915_w.jpg
 	{"kwiatowa bandana", 18920, 1, PRZEDMIOT_DROGI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18920_w.jpg
 	{"iluminati bandana", 18916, 1, PRZEDMIOT_DROGI_CENA * 8}, //https://files.prineside.com/gtasa_samp_model_id/white/18916_w.jpg
 	{"psychodeliczna bandana", 18900, 1, PRZEDMIOT_PRZECIETNY_CENA * 15}, //https://files.prineside.com/gtasa_samp_model_id/white/18900_w.jpg
 	{"czarna bandana", 18912, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18912_w.jpg
-	{"elektryzuj¹ca bandana", 18917, 1, PRZEDMIOT_PRZECIETNY_CENA * 15}, //https://files.prineside.com/gtasa_samp_model_id/white/18917_w.jpg
+	{"elektryzujï¿½ca bandana", 18917, 1, PRZEDMIOT_PRZECIETNY_CENA * 15}, //https://files.prineside.com/gtasa_samp_model_id/white/18917_w.jpg
 	{"czarna bandana", 18918, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18918_w.jpg
 	{"czarna bandana z czachami", 18911, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18911_w.jpg
 
-	//chusty na g³owê
-	{"zielona chusta na g³owê", 18898, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18898_w.jpg
-	{"niebieska chusta na g³owê z wzorkiem", 18908, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18908_w.jpg
-	{"ognista chusta na g³owê", 18910, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18910_w.jpg
-	{"czarna chusta na g³owê z czachami", 18895, 1, PRZEDMIOT_PRZECIETNY_CENA * 14}, //https://files.prineside.com/gtasa_samp_model_id/white/18895_w.jpg
-	{"elektryzuj¹ca chusta na g³owê", 18904, 1, PRZEDMIOT_PRZECIETNY_CENA * 16}, //https://files.prineside.com/gtasa_samp_model_id/white/18904_w.jpg
-	{"ognista chusta na g³owê", 18892, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18892_w.jpg
-	{"bia³y szum chusta na g³owê", 18909, 1, PRZEDMIOT_TANI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/18909_w.jpg
-	{"bia³o-czerwona chusta na g³owê", 18893, 1, PRZEDMIOT_PRZECIETNY_CENA * 12}, //https://files.prineside.com/gtasa_samp_model_id/white/18893_w.jpg
-	{"ró¿owa chusta na g³owê", 18899, 1, PRZEDMIOT_PRZECIETNY_CENA * 15}, //https://files.prineside.com/gtasa_samp_model_id/white/18899_w.jpg
-	{"znaczkowa be¿owa chusta na g³owê", 18901, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18901_w.jpg
-	{"zio³owa chusta na g³owê", 18894, 1, PRZEDMIOT_DROGI_CENA}, //https://files.prineside.com/gtasa_samp_model_id/white/18894_w.jpg
-	{"psychodeliczna chusta na g³owê", 18907, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18907_w.jpg
-	{"czarna chusta na g³owê", 18896, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18896_w.jpg
-	{"niebieska chusta na g³owê", 18897, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18897_w.jpg
+	//chusty na gï¿½owï¿½
+	{"zielona chusta na gï¿½owï¿½", 18898, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18898_w.jpg
+	{"niebieska chusta na gï¿½owï¿½ z wzorkiem", 18908, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18908_w.jpg
+	{"ognista chusta na gï¿½owï¿½", 18910, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18910_w.jpg
+	{"czarna chusta na gï¿½owï¿½ z czachami", 18895, 1, PRZEDMIOT_PRZECIETNY_CENA * 14}, //https://files.prineside.com/gtasa_samp_model_id/white/18895_w.jpg
+	{"elektryzujï¿½ca chusta na gï¿½owï¿½", 18904, 1, PRZEDMIOT_PRZECIETNY_CENA * 16}, //https://files.prineside.com/gtasa_samp_model_id/white/18904_w.jpg
+	{"ognista chusta na gï¿½owï¿½", 18892, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/18892_w.jpg
+	{"biaï¿½y szum chusta na gï¿½owï¿½", 18909, 1, PRZEDMIOT_TANI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/18909_w.jpg
+	{"biaï¿½o-czerwona chusta na gï¿½owï¿½", 18893, 1, PRZEDMIOT_PRZECIETNY_CENA * 12}, //https://files.prineside.com/gtasa_samp_model_id/white/18893_w.jpg
+	{"rï¿½owa chusta na gï¿½owï¿½", 18899, 1, PRZEDMIOT_PRZECIETNY_CENA * 15}, //https://files.prineside.com/gtasa_samp_model_id/white/18899_w.jpg
+	{"znaczkowa beï¿½owa chusta na gï¿½owï¿½", 18901, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18901_w.jpg
+	{"zioï¿½owa chusta na gï¿½owï¿½", 18894, 1, PRZEDMIOT_DROGI_CENA}, //https://files.prineside.com/gtasa_samp_model_id/white/18894_w.jpg
+	{"psychodeliczna chusta na gï¿½owï¿½", 18907, 1, PRZEDMIOT_PRZECIETNY_CENA * 11}, //https://files.prineside.com/gtasa_samp_model_id/white/18907_w.jpg
+	{"czarna chusta na gï¿½owï¿½", 18896, 1, PRZEDMIOT_TANI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18896_w.jpg
+	{"niebieska chusta na gï¿½owï¿½", 18897, 1, PRZEDMIOT_PRZECIETNY_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/18897_w.jpg
 
-	//he³my
-	{"he³m", 19103, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19103_w.jpg
-	{"he³m", 19105, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19105_w.jpg
-	{"he³m", 19102, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19102_w.jpg
-	{"he³m", 19101, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19101_w.jpg
-	{"he³m", 19104, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19104_w.jpg
+	//heï¿½my
+	{"heï¿½m", 19103, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19103_w.jpg
+	{"heï¿½m", 19105, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19105_w.jpg
+	{"heï¿½m", 19102, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19102_w.jpg
+	{"heï¿½m", 19101, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19101_w.jpg
+	{"heï¿½m", 19104, 1, PRZEDMIOT_PRZECIETNY_CENA * 2}, //https://files.prineside.com/gtasa_samp_model_id/white/19104_w.jpg
 	{"czapka moro", 19110, 1, PRZEDMIOT_PRZECIETNY_CENA * 3}, //https://files.prineside.com/gtasa_samp_model_id/white/19110_w.jpg
 	{"moro czapka", 19106, 1, PRZEDMIOT_PRZECIETNY_CENA * 3}, //https://files.prineside.com/gtasa_samp_model_id/white/19106_w.jpg
 	{"moro czapka", 19108, 1, PRZEDMIOT_PRZECIETNY_CENA * 3}, //https://files.prineside.com/gtasa_samp_model_id/white/19108_w.jpg
 	{"moro czapka", 19109, 1, PRZEDMIOT_PRZECIETNY_CENA * 3}, //https://files.prineside.com/gtasa_samp_model_id/white/19109_w.jpg
-	{"moro czapka/he³m", 19107, 1, PRZEDMIOT_PRZECIETNY_CENA * 3}, //https://files.prineside.com/gtasa_samp_model_id/white/19107_w.jpg
+	{"moro czapka/heï¿½m", 19107, 1, PRZEDMIOT_PRZECIETNY_CENA * 3}, //https://files.prineside.com/gtasa_samp_model_id/white/19107_w.jpg
 	{"moro beret", 18924, 1, PRZEDMIOT_TANI_CENA * 5}, //https://files.prineside.com/gtasa_samp_model_id/white/18924_w.jpg
 
 	//maski
 	{"maska anty-terrorysty", 19141, 1, PRZEDMIOT_PRZECIETNY_CENA * 15}, //https://files.prineside.com/gtasa_samp_model_id/white/19141_w.jpg
-	{"bia³a maska bejsbolowa", 19036, 1, PRZEDMIOT_TANI_CENA * 1}, //https://files.prineside.com/gtasa_samp_model_id/white/19036_w.jpg
+	{"biaï¿½a maska bejsbolowa", 19036, 1, PRZEDMIOT_TANI_CENA * 1}, //https://files.prineside.com/gtasa_samp_model_id/white/19036_w.jpg
 	{"czerowna maska bejsbolowa", 19037, 1, PRZEDMIOT_TANI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19037_w.jpg
 	{"zielona maska bejsbolowa", 19038, 1, PRZEDMIOT_TANI_CENA * 6}, //https://files.prineside.com/gtasa_samp_model_id/white/19038_w.jpg
 	{"maska sado-maso", 19163, 1, PRZEDMIOT_PRZECIETNY_CENA * 13}, //https://files.prineside.com/gtasa_samp_model_id/white/19163_w.jpg
 
 	//kaski
 	// {"czerwony kask motocyklowy", 18645, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18645_w.jpg
-	// {"bia³y kask", 18978, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18978_w.jpg
+	// {"biaï¿½y kask", 18978, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18978_w.jpg
 	// {"czerwony kask", 18977, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18977_w.jpg
-	// {"ró¿owy kask", 18979, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18979_w.jpg
-	// {"bia³o-czarny kask", 18976, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18976_w.jpg
+	// {"rï¿½owy kask", 18979, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18979_w.jpg
+	// {"biaï¿½o-czarny kask", 18976, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/18976_w.jpg
 	// {"kask budowlany", 19093, 1, 100}, //https://files.prineside.com/gtasa_samp_model_id/white/19093_w.jpg
 
 	//policyjne
 	{"kevlar policyjny", 19142, 1, PRZEDMIOT_TANI_CENA * 3}, //https://files.prineside.com/gtasa_samp_model_id/white/19142_w.jpg
 
-	//s³uchawki
-	{"¿ó³te s³uchawki", 19421, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19421_w.jpg
-	{"czarne s³uchawki", 19422, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19422_w.jpg
-	{"¿ó³te s³uchawki", 19423, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19423_w.jpg
-	{"niebieskie s³uchawki", 19424, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19424_w.jpg
+	//sï¿½uchawki
+	{"ï¿½ï¿½te sï¿½uchawki", 19421, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19421_w.jpg
+	{"czarne sï¿½uchawki", 19422, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19422_w.jpg
+	{"ï¿½ï¿½te sï¿½uchawki", 19423, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19423_w.jpg
+	{"niebieskie sï¿½uchawki", 19424, 1, PRZEDMIOT_PRZECIETNY_CENA * 9}, //https://files.prineside.com/gtasa_samp_model_id/white/19424_w.jpg
 
-	{"ogieñ", 18693, 1, PRZEDMIOT_DROGI_CENA * 50}, //https://files.prineside.com/gtasa_samp_model_id/white/18693_w.jpg
+	{"ogieï¿½", 18693, 1, PRZEDMIOT_DROGI_CENA * 50}, //https://files.prineside.com/gtasa_samp_model_id/white/18693_w.jpg
 	{"serduszko", 1240, 1, PRZEDMIOT_DROGI_CENA * 40} //https://files.prineside.com/gtasa_samp_model_id/white/1240_w.jpg
 };
 
