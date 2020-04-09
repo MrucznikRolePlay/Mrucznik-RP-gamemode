@@ -1,0 +1,11 @@
+{
+    "name": "wielkanoc",
+    "description": "Skrypty dla wielkanocy",
+    "author": "gumbal",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": false,
+    "date": "09.04.2020"
+}
