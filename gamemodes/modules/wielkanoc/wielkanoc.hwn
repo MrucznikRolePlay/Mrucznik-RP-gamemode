@@ -33,8 +33,8 @@ enum eEasterEggs
 
 //-----------------<[ Zmienne: ]>-------------------
 new EasterEggs[EASTER_MAX_EGGS][eEasterEggs];
-new EasterEggsAdminUID[3] = {"404", "1", "1"};
-new EasterEggsModel[5] = {"19341", "19342", "19434", "19434", "19345"};
+new EasterEggsAdminUID[3] = {404, 1, 1};
+new EasterEggsModel[5] = {19341, 19342, 19343, 19345, 19346};
 new EasterEggs_Setting_CASH = EASTER_MAX_CASH;
 new EasterEggs_Setting_MCOINS = EASTER_MAX_MCOINS;
 new EasterEggs_Setting_Started = 0;
