@@ -5364,7 +5364,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	{
 	    IDWymienianegoAuta[playerid] = 0;
 	}
-	if(KradniecieWozu[playerid] >= 1)
+	if(KradniecieWozu[playerid] == 1)
 	{
 		KradniecieWozu[playerid] = 0;
 		NieSpamujKradnij[playerid] = 0;
