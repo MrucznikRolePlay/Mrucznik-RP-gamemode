@@ -19,6 +19,7 @@ branches:
   - creative
   - Sandal
   - donsimeone
+  - wielkanoc
   - '/^2\.6\.\d+$/'
 
 addons:
@@ -60,7 +61,7 @@ deploy:
   on:
     repo: Mrucznik/Mrucznik-RP-2.5
     all_branches: true
-    condition: ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} =~ ^development|hotfixy|panpecet-new|creative|donsimeone|mrucznik|Sandal|(2\.6\.[0-9]+)$
+    condition: ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} =~ ^development|hotfixy|panpecet-new|creative|donsimeone|mrucznik|Sandal|wielkanoc|(2\.6\.[0-9]+)$
 - provider: releases
   api_key:
     secure: SVD7s021RVq630lrOpaA9vDQLzXCvCid7LFNdz13J/xOgWkR+8mL9Ea0UwqsqEtOdkdx4IC8ltbU9jgxt5ZEEh/vQ5Euamp1Zrx9witn6dcS5B0ndQd4Ipjq+vq8Z2WFOYGbulBF4lQo5ZzZ17tDd2HJLBdG5iALIjEYeFvAdqba9Q1qLwQ8kBESoZrdr5i+0FWpZNHvsFeqXHKu4E+GI60Kv1wDT8YUMN/FBvVghkAyAfwTKzllt72lxqL+fZ6aDSIUARXF1r9afy6n4plZsBCzYvkQA1mvF2o0a16dZKml6ZSDaL/L39VKCa3gF63Zbl/YOMLwj6mUJkAf87siQsSa1ykv83ByyiOVxI8r+zgIa7Qt628HifUd+2Dq3RREB9tTvuhtJMIHBDDgmJCITmHLyRuyaD5M+L1xsa8vAGS9rCxeY6U5Gk/oY92O1Qd2QJC4zGBnAzUwlFuXLbGDx/X2PeL19jj+zO3h1ps7+vLQn/vKaQDuBdAvBkifcIJ5JHylrC5mBh329evf5EzTSC4t/2gWymcj5U4vZqY8EeCBm1kMkcIw+WvSpRD/vCBoEF4qcql6y+XpupDZSX1UYJMU3Ern4FQ+Yo9HHPLfPdCIvbWsz7MVya6chyxM6KrFwVs5rK98l0z5SqoU3Vm87s9oBo2mGXw1RqP0JemrOOQ=
