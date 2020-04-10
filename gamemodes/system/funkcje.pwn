@@ -5039,7 +5039,7 @@ SaveIRC()
 orgLoad()
 {
     new rows;
-    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_org`", true);
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT `UID`, `Type`, `Name`, `Motd`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW` FROM `mru_org`", true);
 	if(cache_is_valid(result))
 	{
 		rows = cache_num_rows();
@@ -8540,7 +8540,7 @@ LoadConfig()
 {
     new data[256];
     new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_config`", true);
-    if(cache_is_valid(result))
+    if(cache_is_valid(result) && cache_num_rows())
     {
 		cache_get_value_index(0, 0, RadioSANUno);
 		cache_get_value_index(0, 1, RadioSANDos);
@@ -8550,8 +8550,8 @@ LoadConfig()
 		cache_get_value_index_int(0, 5, STANOWE_GATE_KEY);
 		cache_get_value_index_int(0, 6, TJD_Materials);
         sscanf(data, "a<s[16]>[20]", AUDIO_LoginData);
-		cache_delete(result);
     }
+	cache_delete(result);
     for(new i=0;i<20;i++)
     {
         if(strlen(AUDIO_LoginData[i]) > 1) AUDIO_LoginTotal++;
@@ -8634,14 +8634,14 @@ WczytajSkiny()
 Config_FamilyScript()
 {
     new id, nazwa[20];
-	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_rodziny`", true);
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT `name`, `id` FROM `mru_rodziny`", true);
 	
 	if(cache_is_valid(result))
     {
 		for(new i; i < cache_num_rows(); i++)
 		{
 			cache_get_value_index(i, 0, nazwa);
-			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, id);
 			if(strcmp(nazwa, "FAMILY_SAD") == 0)
 			{
 				FAMILY_SAD = id;

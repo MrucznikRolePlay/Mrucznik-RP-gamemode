@@ -146,7 +146,7 @@ WlaczSwiatlaP(playerid)
 IbizaDrinkiPobierz()
 {
 	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT cena FROM ibizadrinki", true);
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
 	{
 		for(new i=0; i<12; i++)
 		{
@@ -293,11 +293,11 @@ IBIZA_Reszta()
 {
     IbizaDrinkiPobierz();
 	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT `hajs` FROM `ibiza` WHERE `id`=2", true);
-    if(cache_is_valid(result))
+    if(cache_is_valid(result) && cache_num_rows())
 	{
         cache_get_value_index_int(0, 0, IbizaBilet);
-		cache_delete(result);
 	}
+	cache_delete(result);
 	//TEXTDRAWY
 
     TDIbiza[0] = TextDrawCreate(390.00000, 21.500000, "01/01/1999  21:21");

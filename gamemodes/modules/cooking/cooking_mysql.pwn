@@ -92,12 +92,15 @@ MruMySQL_EatCookedMeal(playerid, id)
 	new Cache:result = mysql_query(mruMySQL_Connection, sprintf("SELECT name, weight, type FROM mru_player_cooking WHERE id='%d'", id), true);
 	if(cache_is_valid(result))
 	{
-		new name[MAX_COOKED_NAME], weight, type;
-		cache_get_value_index(0, 0, name);
-		cache_get_value_index_int(0, 1, weight);
-		cache_get_value_index_int(0, 2, type);
+		if(cache_num_rows())
+		{
+			new name[MAX_COOKED_NAME], weight, type;
+			cache_get_value_index(0, 0, name);
+			cache_get_value_index_int(0, 1, weight);
+			cache_get_value_index_int(0, 2, type);
 
-		EatCookedMeal(playerid, name, weight, type);
+			EatCookedMeal(playerid, name, weight, type);
+		}
 		cache_delete(result);
 
 		mysql_query(mruMySQL_Connection, sprintf("DELETE FROM mru_player_cooking WHERE id='%d'", id));

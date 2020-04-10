@@ -324,19 +324,19 @@ public MruMySQL_LoadAccount(playerid)
 	//Wczytaj liderów
 	format(string, sizeof(string), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `UID`='%s'", PlayerInfo[playerid][pUID]);
 	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
 	{
 		cache_get_value_index_int(0, 0, PlayerInfo[playerid][pLider]);
 		cache_get_value_index_int(0, 1, PlayerInfo[playerid][pLiderValue]);
-		cache_delete(result);
 	}
+	cache_delete(result);
 
 	//Wczytaj personalizacje
 	format(string, sizeof(string), 
 		"SELECT `KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`, `BronieScroll`\
 		FROM `mru_personalization` WHERE `UID`=%d", PlayerInfo[playerid][pUID]);
 	result = mysql_query(mruMySQL_Connection, string, true);
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
 	{
 		cache_get_value_index_int(0, 0, PlayerPersonalization[playerid][PERS_KB]);
 		cache_get_value_index_int(0, 1, PlayerPersonalization[playerid][PERS_AD]);
@@ -351,8 +351,8 @@ public MruMySQL_LoadAccount(playerid)
 		cache_get_value_index_int(0, 10, PlayerPersonalization[playerid][PERS_NEWNICK]);
 		cache_get_value_index_int(0, 11, PlayerPersonalization[playerid][PERS_NEWBIE]);
 		cache_get_value_index_int(0, 12, PlayerPersonalization[playerid][PERS_GUNSCROLL]);
-		cache_delete(result);
 	}
+	cache_delete(result);
 
     MruMySQL_LoadAccess(playerid);
     //MruMySQL_WczytajOpis(playerid, PlayerInfo[playerid][pUID], 1);
@@ -377,7 +377,7 @@ MruMySQL_WczytajOpis(handle, uid, typ)
     format(string, sizeof(string), "SELECT `desc` FROM `mru_opisy` WHERE `owner`='%d' AND `typ`=%d", uid, typ);
 	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
     {
 		cache_get_value_index(0, 0, string);
         if(typ == 1)
@@ -388,8 +388,8 @@ MruMySQL_WczytajOpis(handle, uid, typ)
 		{
             strpack(CarDesc[handle], string);
 		}
-		cache_delete(result);
 	}
+	cache_delete(result);
     return 1;
 }
 
@@ -430,12 +430,12 @@ MruMySQL_LoadAccess(playerid)
 
 	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
     {
 		cache_get_value_index_int(0, 0, ACCESS[playerid]);
         OLD_ACCESS[playerid] = ACCESS[playerid];
-		cache_delete(result);
 	}
+	cache_delete(result);
     return 1;
 }
 
@@ -470,12 +470,12 @@ MruMySQL_ReturnPassword(nick[], key[WHIRLPOOL_LEN], salt[SALT_LENGTH])
 	new string[128];
 	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT `Key`, `Salt` FROM `mru_konta` WHERE `Nick` = '%e'", nick);
 	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
     {
 		cache_get_value_index(0, 0, key, WHIRLPOOL_LEN);
 		cache_get_value_index(0, 1, salt, SALT_LENGTH);
-		cache_delete(result);
 	}
+	cache_delete(result);
 	
 	return key;
 }
@@ -563,11 +563,11 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
     {
         format(query, 256, "SELECT `IP` FROM `mru_bany` WHERE `dostal`='%s' ORDER BY `czas` LIMIT 1", nick);
 		new Cache:result = mysql_query(mruMySQL_Connection, query, true);
-		if(cache_is_valid(result))
+		if(cache_is_valid(result) && cache_num_rows())
     	{
 			cache_get_value_index(0, 0, ip, 16);
-			cache_delete(result);
 		}
+		cache_delete(result);
     }
 
 
@@ -626,8 +626,7 @@ bool:MruMySQL_SprawdzBany(playerid)
 	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 	if(cache_is_valid(result))
 	{
-		new row_count;
-		if(cache_get_row_count(row_count))
+		if(cache_num_rows())
 		{
 			new string[256], powod[64], admin[32], id, typ, czas[32], nick[32], mip[16], pid;
 			cache_get_value_index_int(0, 0, typ);
@@ -670,11 +669,11 @@ MruMySQL_GetNameFromUID(uid) {
 	new nick[MAX_PLAYER_NAME], string[128];
 	format(string, sizeof(string), "SELECT `Nick` FROM `mru_konta` WHERE `UID` = '%d'", uid);
 	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
 	{
 		cache_get_value_index(0, 0, nick);
-		cache_delete(result);
 	}
+	cache_delete(result);
 	return nick;
 }
 
@@ -691,11 +690,11 @@ MruMySQL_GetAccInt(kolumna[], nick[])
 	new string[128], wartosc;
 	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT `%e` FROM `mru_konta` WHERE `Nick` = '%e'", kolumna, nick);
 	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
 	{
 		cache_get_value_index_int(0, 0, wartosc);
-		cache_delete(result);
 	}
+	cache_delete(result);
 	return wartosc;
 }
 
@@ -810,12 +809,12 @@ Load_MySQL_Leader(playerid)
 	new query[256];
 	format(query, sizeof(query), "SELECT `FracID`, `LiderValue` FROM `mru_liderzy` WHERE `NICK`='%s'", GetNickEx(playerid));
 	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
-	if(cache_is_valid(result))
+	if(cache_is_valid(result) && cache_num_rows())
 	{
 		cache_get_value_index_int(0, 0, PlayerInfo[playerid][pLider]);
 		cache_get_value_index_int(0, 1, PlayerInfo[playerid][pLiderValue]);
-		cache_delete(result);
 	}
+	cache_delete(result);
 	return 1;
 }
 MruMySQL_IloscLiderowLoad()

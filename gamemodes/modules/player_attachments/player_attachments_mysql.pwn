@@ -96,7 +96,7 @@ PlayerAttachments_LoadItem(playerid, model)
 		model
 	);
     new Cache:result = mysql_query(mruMySQL_Connection, str, true);
-    if(cache_is_valid(result))
+    if(cache_is_valid(result) && cache_num_rows())
 	{
         sscanf(str, "p<|>fffffffffdd", x, y, z, rx, ry, rz, sx, sy, sz, active, bone);
         cache_get_value_index_float(0, 0, x);
@@ -111,8 +111,8 @@ PlayerAttachments_LoadItem(playerid, model)
         cache_get_value_index_int(0, 9, active);
         cache_get_value_index_int(0, 10, bone);
         index = AttachPlayerItem(playerid, model, bone, x, y, z, rx, ry, rz, sx, sy, sz);
-		cache_delete(result);
     }
+    cache_delete(result);
     return index;
 
 }
