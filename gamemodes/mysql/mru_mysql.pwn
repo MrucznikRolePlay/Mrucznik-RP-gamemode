@@ -43,6 +43,8 @@ MruMySQL_CreateKontaORM(playerid)
 
 	orm_addvar_int(orm, PlayerInfo[playerid][pUID], "UID");
 	orm_addvar_string(orm, PlayerInfo[playerid][pNick], MAX_PLAYER_NAME, "Nick");
+	orm_addvar_string(orm, PlayerInfo[playerid][pKey], WHIRLPOOL_LEN, "Key");
+	orm_addvar_string(orm, PlayerInfo[playerid][pSalt], SALT_LENGTH, "Salt");
 	orm_addvar_int(orm, PlayerInfo[playerid][pLevel], "Level");
 	orm_addvar_int(orm, PlayerInfo[playerid][pAdmin], "Admin");
 	orm_addvar_int(orm, PlayerInfo[playerid][pDonateRank], "DonateRank");
@@ -227,7 +229,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	new oldRank = PlayerInfo[playerid][pRank];
 	PlayerInfo[playerid][pRank] = (gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]);
 	PlayerInfo[playerid][pConnected] = forcequit ? 0 : 2;
-	new fault = orm_save(PlayerInfo[playerid][pORM]);
+	new fault = orm_update(PlayerInfo[playerid][pORM]);
 	PlayerInfo[playerid][pRank] = oldRank;
 	if(forcequit) orm_destroy(PlayerInfo[playerid][pORM]);
 
