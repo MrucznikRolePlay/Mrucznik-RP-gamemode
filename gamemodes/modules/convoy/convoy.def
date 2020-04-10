@@ -26,7 +26,6 @@
 #define MAX_BOXES 50
 #define BOX_BONUS_BASE 1000
 #define BOX_BONUS 50000
-#define BOX_OBJECT 19320 // box - 1271, pumpkin - 19320
 #define BOX_ONFOOT_Z_OFFSET 0.7
 #define BOX_VEHICLE_Z_OFFSET 0.85
 #define CONVOY_CAR 428
@@ -37,9 +36,9 @@
 #define CONVOY_PRICE 0 // 1_000_000
 #define CONVOY_BONUS 2_000_000
 #define CONVOY_ACTOR_DELIVERY_DISTANCE 3.0
-#define CONVOY_ACTOR_NAME "Upiorny handlarz"
-
 #define CONVOY_BEGIN_POS 0.0,0.0,0.0
 #define CONVOY_END_POS 0.0,0.0,0.0
-
+// --------Ustawienia pod eventy---------
+#define CONVOY_ACTOR_NAME "Wielkanocny handlarz" // Halloween - Upiorny handlarz
+#define BOX_OBJECT 19341 //19320 - dynia, 19341 - jajko wielkanocne
 //end
