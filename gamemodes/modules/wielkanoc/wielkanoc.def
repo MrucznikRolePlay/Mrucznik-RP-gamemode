@@ -31,6 +31,6 @@
 #define INVALID_EGG_ID -1
 //------ustawienia potrzebne do w³¹czenia eventu wielkanocnego-----
 #define EASTERS_MONTH 4
-#define EASTERS_DAY 11,12,13
+#define EASTERS_DAY[3] {11,12,13}
 #define EASTERS_YEAR 2020
 //end

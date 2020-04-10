@@ -30,7 +30,7 @@ stock EasterEggs_CanUse(playerid)
 {
 	new year, month,day;
 	getdate(year, month, day);
-	if(DEVELOPMENT || (year == EASTERS_YEAR && month == EASTERS_MONTH && day == EASTERS_DAY))
+	if(DEVELOPMENT || (year == EASTERS_YEAR && month == EASTERS_MONTH && (day == EASTERS_DAY[0] || day == EASTERS_DAY[1] || day == EASTERS_DAY[2])))
 	{
 		if(IsAHeadAdmin(playerid)) return 1;
 		if(IsAMCGiver(playerid)) return 1;
