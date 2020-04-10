@@ -39,6 +39,6 @@
 #define CONVOY_BEGIN_POS 0.0,0.0,0.0
 #define CONVOY_END_POS 0.0,0.0,0.0
 // --------Ustawienia pod eventy---------
-#define CONVOY_ACTOR_NAME "Wielkanocny handlarz" // Halloween - Upiorny handlarz
+#define CONVOY_ACTOR_NAME "Jojo Rabbit" // Halloween - Upiorny handlarz
 #define BOX_OBJECT 19341 //19320 - dynia, 19341 - jajko wielkanocne
 //end

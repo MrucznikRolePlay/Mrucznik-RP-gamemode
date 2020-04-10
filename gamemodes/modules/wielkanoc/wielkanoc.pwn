@@ -65,7 +65,7 @@ stock EasterEggs_FindNearest(playerid)
 			new vw = GetPlayerVirtualWorld(playerid);
 			new int = GetPlayerInterior(playerid);
 			GetDynamicObjectPos(EasterEggs[i][eggID], ox, oy, oz);
-			if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz) && (vw == EasterEggs[i][eggVW]&& int == EasterEggs[i][eggINT]))
+			if(IsPlayerInRangeOfPoint(playerid, 1.5, ox, oy, oz) && (vw == EasterEggs[i][eggVW] && int == EasterEggs[i][eggINT]))
 			{
 				return i;
 			}
@@ -93,10 +93,7 @@ stock EasterEggs_Create(playerid, Float:x, Float:y, Float:z, type)
 {
 	new egg_id;
 	egg_id = EasterEggs_GetFreeID();
-	if(egg_id == INVALID_EGG_ID)
-	{
-		SendClientMessage(playerid, COLOR_PANICRED, "Osi¹gniêto maksymaln¹ liczbê jajek na mapie!");
-	}
+	if(egg_id == INVALID_EGG_ID) SendClientMessage(playerid, COLOR_PANICRED, "Osi¹gniêto maksymaln¹ liczbê jajek na mapie!");
 	else
 	{
 		new model = true_random(3)+1;
