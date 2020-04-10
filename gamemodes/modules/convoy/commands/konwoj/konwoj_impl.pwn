@@ -42,9 +42,9 @@ command_konwoj_Impl(playerid)
             return 1;
         }
 
-        if(hour < 15 || hour > 22)
+        if(hour < 12 || hour > 21)
         {
-            sendErrorMessage(playerid, "Konwój mo¿na wystartowaæ tylko od godziny 15:00 do 23:00.");
+            sendErrorMessage(playerid, "Konwój mo¿na wystartowaæ tylko od godziny 12:00 do 22:00.");
             return 1;
         }
 
