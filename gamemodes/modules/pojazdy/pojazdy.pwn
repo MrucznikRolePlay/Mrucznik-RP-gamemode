@@ -401,7 +401,10 @@ Car_Load()
 			result = mysql_query(mruMySQL_Connection, qText, true);
             if(cache_is_valid(result))
             {
-                cache_get_value_index(0, 0, ldesc);
+                if(cache_num_rows())
+                {
+                    cache_get_value_index(0, 0, ldesc);
+                }
                 cache_delete(result);
             }
             WordWrap(ldesc, true, lText);
