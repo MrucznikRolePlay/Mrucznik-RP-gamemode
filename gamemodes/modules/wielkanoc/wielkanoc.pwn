@@ -28,11 +28,16 @@
 //-----------------<[ Funkcje: ]>-------------------
 stock EasterEggs_CanUse(playerid)
 {
-	if(IsAHeadAdmin(playerid)) return 1;
-	if(IsAMCGiver(playerid)) return 1;
-	for(int i=0; i<3; i++)
+	new year, month,day;
+	getdate(year, month, day);
+	if(DEVELOPMENT || (year == EASTERS_YEAR && month == EASTERS_MONTH && day == EASTERS_DAY))
 	{
-		if(PlayerInfo[playerid][pUID] == EasterEggsAdminUID[i]) return 1;
+		if(IsAHeadAdmin(playerid)) return 1;
+		if(IsAMCGiver(playerid)) return 1;
+		for(int i=0; i<3; i++)
+		{
+			if(PlayerInfo[playerid][pUID] == EasterEggsAdminUID[i]) return 1;
+		}
 	}
 	return 0;
 }

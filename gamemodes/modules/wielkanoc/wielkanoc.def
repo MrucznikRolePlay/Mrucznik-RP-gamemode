@@ -23,10 +23,14 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define EASTER_MAX_CASH 100000 // 0 - EASTER_MAX_CASH
-#define EASTER_MAX_MCOINS 50 // 0 - EASTER_MAX_MCOINS
+#define EASTER_MAX_CASH 100000
+#define EASTER_MAX_MCOINS 50
 #define EASTER_MAX_EGGS 2
 #define EASTER_TYPE_CASH 1
 #define EASTER_TYPE_MC 2
 #define INVALID_EGG_ID -1
+//------ustawienia potrzebne do w³¹czenia eventu wielkanocnego-----
+#define EASTERS_MONTH 4
+#define EASTERS_DAY 11,12,13
+#define EASTERS_YEAR 2020
 //end
