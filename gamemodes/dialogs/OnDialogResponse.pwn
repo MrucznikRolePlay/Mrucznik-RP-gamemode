@@ -172,6 +172,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		ZabierzKase(playerid, 30000);
 		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i ¿ycie");
 	}	
+	else if(dialogid == 9521) //kara warn
+	{
+		new giveplayerid = GetPVarInt(playerid, "PunishWarnPlayer");
+		if(!response) return sendTipMessage(playerid, sprintf("Anulowano nadawanie kary warna dla %s", GetNick(giveplayerid)));
+		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		{
+			new reason[64], string[256];
+			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
+			GiveWarnForPlayer(giveplayerid, playerid, reason);
+			DeletePVar(playerid, "PunishWarnPlayer");
+			if(kary_TXD_Status == 1)
+			{
+				format(string, sizeof(string), "%s (3 warny)", reason);
+				BanPlayerTXD(giveplayerid, playerid, string); 
+			}
+			else if(kary_TXD_Status == 0)
+			{
+				format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
+				SendPunishMessage(string, playerid); 
+			}
+		}
+		return 1;
+	}
 	else if(dialogid == 6999)//vinyl panel
 	{
 		if(!response) return 1;
@@ -14151,7 +14174,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GUIExit[playerid] = 0;
 			new weaponid = DynamicGui_GetValue(playerid, listitem);
 			new weapondata = DynamicGui_GetDataInt(playerid, listitem);
-			if(weaponid == PlayerHasWeapon[playerid])
+			if(weaponid == MyWeapon[playerid])
 			{
 				weaponid = PlayerInfo[playerid][pGun0];
 			}

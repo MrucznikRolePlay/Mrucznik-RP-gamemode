@@ -2591,7 +2591,7 @@ stock RemovePlayerWeaponsTemporarity(playerid)
 
 	ResetPlayerWeapons(playerid);
 	SetPlayerArmedWeapon(playerid, 0);
-	PlayerHasWeapon[playerid] = 0;
+	MyWeapon[playerid] = 0;
 }
 
 DajBronieFrakcyjne(playerid)
@@ -2960,6 +2960,24 @@ DajBronieFrakcyjne(playerid)
 
 DajBronieOganizacji(playerid)
 {
+	if( GetPlayerOrg(playerid) == 7) /* darki HA */
+	{
+		if(PlayerInfo[playerid][pGun1] == 0)
+		{
+			PlayerInfo[playerid][pGun1] = 4; PlayerInfo[playerid][pAmmo1] = 1;
+			playerWeapons[playerid][weaponLegal2] = 1;
+		}
+     	if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
+	    {
+	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
+	        playerWeapons[playerid][weaponLegal3] = 0;
+	    }
+	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
+	    {
+	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
+	        playerWeapons[playerid][weaponLegal6] = 0;
+	    }
+	}
 	if(GetPlayerOrg(playerid) == FAMILY_SEKTA)
 	{
 		if(PlayerInfo[playerid][pGun1] == 0)
@@ -12552,7 +12570,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 			sekunda = Obrazenia[playerid][i][SECONDS];
 			hp = hp / 2;
 			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-			format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+			format(string, sizeof(string), "%d:%d:%d | %s zada³ mu %0.1fHP z %s[%d]", godzina, minuta, sekunda, atakujacy, hp, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
 	}
@@ -12570,7 +12588,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 		sekunda = Obrazenia[playerid][i][SECONDS];
 		hp = hp/2;
 		format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-		format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+		format(string, sizeof(string), "%d:%d:%d | %s zada³ mu %0.1fHP z %s[%d]", godzina, minuta, sekunda, atakujacy, hp, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
 		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 	}
 	return 1;
