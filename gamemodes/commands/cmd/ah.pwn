@@ -114,10 +114,6 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_GRAD4,"*200* ADMIN *** /mole {FF0000}/scena /scenaallow /scenadisallow");
 	}
-	if (PlayerInfo[playerid][pAdmin] >= 900)
-	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*900* ADMIN *** /zmienwiek");
-	}
 	if (PlayerInfo[playerid][pAdmin] >= 1000)
 	{
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /weatherall /makeleader");

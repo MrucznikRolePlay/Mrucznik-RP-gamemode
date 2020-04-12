@@ -5082,8 +5082,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
-		if(!IsAPrzestepca(playerid) && !IsAPolicja(playerid) || IsAPolicja(playerid) && !OnDuty[playerid] && !OnDutyCD[playerid]) SetPlayerArmedWeapon(playerid, 0); //anty driveby
-        if(newstate == PLAYER_STATE_DRIVER)
+		if(newstate == PLAYER_STATE_DRIVER)
         {
         	new vehicleid = GetPlayerVehicleID(playerid);
         	new lcarid = VehicleUID[vehicleid][vUID];
@@ -5156,6 +5155,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
     {
+		SetPlayerArmedWeapon(playerid, PlayerInfo[playerid][pGun0]); //anty driveby
         DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
         new vehicleid = GetPVarInt(playerid, "car-id");
         if(VehicleUID[vehicleid][vSiren] != 0)
