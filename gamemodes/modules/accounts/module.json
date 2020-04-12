@@ -1,0 +1,11 @@
+{
+    "name": "accounts",
+    "description": "Konta graczy.",
+    "author": "Mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": true,
+    "files": [],
+    "commands": false,
+    "date": "30.03.2020"
+}

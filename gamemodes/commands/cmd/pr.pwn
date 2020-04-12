@@ -58,7 +58,7 @@ YCMD:pr(playerid, params[], help)
 					sendTipMessage(playerid, "U¿yj /pr nazwa [Nazwa Rodziny]");
 					return 1;
 				}
-                mysql_real_escape_string(name, name);
+                mysql_escape_string(name, name);
                 if(orgSetName(org, name)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ nazwê swojej rodziny.");
 			}
 			else if(strcmp(x_nr,"motd",true) == 0)
@@ -69,7 +69,7 @@ YCMD:pr(playerid, params[], help)
 					sendTipMessage(playerid, "U¿yj /pr MOTD [Tekst MOTD Rodziny]");
 					return 1;
 				}
-                mysql_real_escape_string(lStr, lStr);
+                mysql_escape_string(lStr, lStr);
 			    if(orgSetMotd(org, lStr)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ MOTD rodziny.");
 			}
 			else if(strcmp(x_nr,"color",true) == 0 || strcmp(x_nr,"kolor",true) == 0)

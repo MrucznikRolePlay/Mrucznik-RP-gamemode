@@ -30,24 +30,24 @@
 //-----------------<[ Callbacki: ]>-----------------
 hook OnGameModeInit()
 {
-	adminLog = CreateLog("logi/admin", ALL, false); 
-	payLog = CreateLog("logi/pay", ALL, false);
-	premiumLog = CreateLog("logi/premium", ALL, false);
-	punishmentLog = CreateLog("logi/punishment", ALL, false);
-	warningLog = CreateLog("logi/warning", ALL, false);
-	nickLog = CreateLog("logi/nick", ALL, false);
-	sejfLog = CreateLog("logi/sejf", ALL, false);
-	serverLog = CreateLog("logi/server", ALL, false);
-	commandLog = CreateLog("logi/command", ALL, false);
-	chatLog = CreateLog("logi/chat", ALL, false);
-	damageLog = CreateLog("logi/damage", ALL, false);
-	connectLog = CreateLog("logi/connect", ALL, false);
-	mysqlLog = CreateLog("logi/mysql", ALL, true);
-	moneyLog = CreateLog("logi/money", ALL, false);
-	errorLog = CreateLog("logi/error", ERROR, true);
+	adminLog = CreateLog("logi/admin", false); 
+	payLog = CreateLog("logi/pay", false);
+	premiumLog = CreateLog("logi/premium", false);
+	punishmentLog = CreateLog("logi/punishment", false);
+	warningLog = CreateLog("logi/warning", false);
+	nickLog = CreateLog("logi/nick", false);
+	sejfLog = CreateLog("logi/sejf", false);
+	serverLog = CreateLog("logi/server", false);
+	commandLog = CreateLog("logi/command", false);
+	chatLog = CreateLog("logi/chat", false);
+	damageLog = CreateLog("logi/damage", false);
+	connectLog = CreateLog("logi/connect", false);
+	mysqlLog = CreateLog("logi/mysql", true);
+	moneyLog = CreateLog("logi/money", false);
+	errorLog = CreateLog("logi/error", true);
 
 	//old
-	admindutyLog = CreateLog("logi/adminduty", ALL, false);
+	admindutyLog = CreateLog("logi/adminduty", false);
 }
 
 hook OnGameModeExit()

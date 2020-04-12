@@ -983,7 +983,6 @@ public MainTimer()
     }
     if(TICKS_MySQLRefresh == 14)
     {
-        MySQL_Refresh();
         CheckGas();
     }
     if(TICKS_HalfMin == 29)

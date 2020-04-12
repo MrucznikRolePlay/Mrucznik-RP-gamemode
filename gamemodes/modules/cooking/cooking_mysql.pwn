@@ -42,32 +42,36 @@
 //------------------<[ MySQL: ]>--------------------
 MruMySQL_CookedMealsDialog(playerid)
 {
-	new result[(48+MAX_COOKED_NAME)*50+10]; //fetched data max length: 12+12+12+MAX_COOKED_NAME+12=68 + 10 for safety
 	new string[(44+MAX_COOKED_NAME)*50]; //message length: 12+1+MAX_COOKED_NAME+9+12+2=56, 64 for safety
 
-	mysql_query(sprintf("SELECT id, model, name, weight, type FROM mru_player_cooking WHERE owner='%d' ORDER BY id DESC LIMIT 50", 
+	new Cache:result = mysql_query(mruMySQL_Connection, 
+		sprintf("SELECT id, model, name, weight, type FROM mru_player_cooking WHERE owner='%d' ORDER BY id DESC LIMIT 50", 
 		PlayerInfo[playerid][pUID]
-	));
-	mysql_store_result();
+	), true);
+
+	if(cache_is_valid(result))
 	{
-		if(mysql_num_rows()>0)
+		new rows = cache_num_rows();
+		new id, model, name[MAX_COOKED_NAME], weight, type;
+		DynamicGui_Init(playerid);
+		for(new i; i < rows; i++)
 		{
-			new id, model, name[MAX_COOKED_NAME], weight, type;
-			DynamicGui_Init(playerid);
-			while(mysql_fetch_row_format(result, "|"))
-			{
-				sscanf(result, "p<|>dds["#MAX_COOKED_NAME"]dd", id, model, name, weight, type);
-				strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", model, Odpolszcz(name), weight));
-				DynamicGui_AddRow(playerid, id);
-			}
-			if(strlen(string) < 2)
-			{
-				sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
-				return 1;
-			}
-			string[strlen(string)-1] = '\0';
+			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, model);
+			cache_get_value_index(i, 2, name);
+			cache_get_value_index_int(i, 3, weight);
+			cache_get_value_index_int(i, 4, type);
+
+			strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", model, Odpolszcz(name), weight));
+			DynamicGui_AddRow(playerid, id);
 		}
-		mysql_free_result();
+		if(rows == 0)
+		{
+			sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
+			return 1;
+		}
+		string[strlen(string)-1] = '\0';
+		cache_delete(result);
 	}
 
     ShowPlayerDialogEx(playerid, DIALOG_EATING, DIALOG_STYLE_PREVIEW_MODEL, "Twoje potrawy", string, "Jedz", "Anuluj");
@@ -76,28 +80,32 @@ MruMySQL_CookedMealsDialog(playerid)
 
 MruMySQL_AddCookedMeal(playerid, model, name[], weight, type)
 {
-	mysql_query(sprintf("INSERT INTO mru_player_cooking (owner, model, name, weight, type) VALUES ('%d', '%d', '%s', '%d', '%d')",
+	mysql_query(mruMySQL_Connection, 
+		sprintf("INSERT INTO mru_player_cooking (owner, model, name, weight, type) VALUES ('%d', '%d', '%s', '%d', '%d')",
 		PlayerInfo[playerid][pUID], model, name, weight, type
 	));
-	return mysql_insert_id();
+	return cache_insert_id();
 }
 
 MruMySQL_EatCookedMeal(playerid, id)
 {
-	new result[128];
-	new name[MAX_COOKED_NAME], weight, type;
-
-	mysql_query(sprintf("SELECT name, weight, type FROM mru_player_cooking WHERE id='%d'", id));
-	mysql_store_result();
+	new Cache:result = mysql_query(mruMySQL_Connection, sprintf("SELECT name, weight, type FROM mru_player_cooking WHERE id='%d'", id), true);
+	if(cache_is_valid(result))
 	{
-		mysql_fetch_row_format(result, "|");
-		sscanf(result, "p<|>s["#MAX_COOKED_NAME"]dd", name, weight, type);
-        mysql_free_result();
+		if(cache_num_rows())
+		{
+			new name[MAX_COOKED_NAME], weight, type;
+			cache_get_value_index(0, 0, name);
+			cache_get_value_index_int(0, 1, weight);
+			cache_get_value_index_int(0, 2, type);
+
+			EatCookedMeal(playerid, name, weight, type);
+		}
+		cache_delete(result);
+
+		mysql_query(mruMySQL_Connection, sprintf("DELETE FROM mru_player_cooking WHERE id='%d'", id));
 	}
 
-	EatCookedMeal(playerid, name, weight, type);
-
-	mysql_query(sprintf("DELETE FROM mru_player_cooking WHERE id='%d'", id));
 	return;
 }
 

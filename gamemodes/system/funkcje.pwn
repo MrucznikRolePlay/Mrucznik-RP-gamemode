@@ -5056,35 +5056,52 @@ SaveIRC()
 
 orgLoad()
 {
-    new lQuery[256], lID, lRow;
-    mysql_query("SELECT * FROM `mru_org`");
-    mysql_store_result();
-    while(mysql_fetch_row_format(lQuery, "|"))
-    {
-        sscanf(lQuery, "p<|>de<dds[32]s[128]hffffdd>", lRow, OrgInfo[lID]);
-        lID++;
-    }
-    mysql_free_result();
-    printf("%d | Wczytano organizacje", lID);
+    new rows;
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT `UID`, `Type`, `Name`, `Motd`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW` FROM `mru_org`", true);
+	if(cache_is_valid(result))
+	{
+		rows = cache_num_rows();
+		for(new i; i < rows; i++)
+		{
+			cache_get_value_index_int(i, 0, OrgInfo[i][o_UID]);
+			cache_get_value_index_int(i, 1, OrgInfo[i][o_Type]);
+			cache_get_value_index(i, 2, OrgInfo[i][o_Name], 32);
+			cache_get_value_index(i, 3, OrgInfo[i][o_Motd], 128);
+			cache_get_value_index_int(i, 4, OrgInfo[i][o_Color]);
+			cache_get_value_index_float(i, 5, OrgInfo[i][o_Spawn][0]);
+			cache_get_value_index_float(i, 6, OrgInfo[i][o_Spawn][1]);
+			cache_get_value_index_float(i, 7, OrgInfo[i][o_Spawn][2]);
+			cache_get_value_index_float(i, 8, OrgInfo[i][o_Spawn][3]);
+			cache_get_value_index_int(i, 9, OrgInfo[i][o_Int]);
+			cache_get_value_index_int(i, 10, OrgInfo[i][o_VW]);
+		}
+		cache_delete(result);
+	}
+    printf("%d | Wczytano organizacje", rows);
 }
 
-orgSave(lID, savetype)
+orgSave(id, savetype)
 {
-    if(!orgIsValid(lID)) return 0;
-    if(!MYSQL_SAVING) return 1;
-    new lQuery[512];
-	new name_escaped[32];
-	new motd_escaped[128];
-	mysql_real_escape_string(OrgInfo[lID][o_Name], name_escaped);
-	mysql_real_escape_string(OrgInfo[lID][o_Motd], motd_escaped);
+    if(!orgIsValid(id)) return 0;
+    new query[512];
 	
     switch(savetype)
     {
-        case ORG_SAVE_TYPE_BASIC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `UID`='%d'",
-        OrgInfo[lID][o_Type],OrgInfo[lID][o_Color],OrgInfo[lID][o_Spawn][0],OrgInfo[lID][o_Spawn][1],OrgInfo[lID][o_Spawn][2],OrgInfo[lID][o_Spawn][3], OrgInfo[lID][o_Int], OrgInfo[lID][o_VW], OrgInfo[lID][o_UID]);
-        case ORG_SAVE_TYPE_DESC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Name`='%s', `Motd`='%s' WHERE `UID`='%d'", name_escaped, motd_escaped, OrgInfo[lID][o_UID]);
+        case ORG_SAVE_TYPE_BASIC: 
+		{
+			mysql_format(mruMySQL_Connection, query, sizeof(query), 
+				"UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `UID`='%d'",
+        		OrgInfo[id][o_Type],OrgInfo[id][o_Color],OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], OrgInfo[id][o_Int], OrgInfo[id][o_VW], OrgInfo[id][o_UID]
+			);
+		}
+        case ORG_SAVE_TYPE_DESC: 
+		{
+			mysql_format(mruMySQL_Connection, query, sizeof(query), "UPDATE `mru_org` SET `Name`='%e', `Motd`='%e' WHERE `UID`='%d'", 
+				OrgInfo[id][o_Name], OrgInfo[id][o_Motd], OrgInfo[id][o_UID]
+			);
+		}
     }
-    if(lQuery[0]) mysql_query(lQuery);
+    if(query[0]) mysql_tquery(mruMySQL_Connection, query);
     return 1;
 }
 
@@ -5094,11 +5111,9 @@ orgAdd(typ, name[], uid, id)
     OrgInfo[id][o_Type] = typ;
     OrgInfo[id][o_Color] = 0xFF0000;
     orgSetName(id, name);
-    new lStr[128];
-	new name_escaped[32];
-	mysql_real_escape_string(OrgInfo[id][o_Name], name_escaped);
-    format(lStr, 128, "INSERT INTO `mru_org` (`UID`, `Name`, `Type`) VALUES ('%d', '%s', '%d')", uid, name_escaped, typ);
-    mysql_query(lStr);
+    new query[128];
+    mysql_format(mruMySQL_Connection, query, sizeof(query), "INSERT INTO `mru_org` (`UID`, `Name`, `Type`) VALUES ('%d', '%e', '%d')", uid, name, typ);
+    mysql_tquery(mruMySQL_Connection, query);
 }
 
 GetPlayerOrgType(playerid) return orgType(gPlayerOrg[playerid]);
@@ -8510,46 +8525,51 @@ ChangeLSMCElevatorState()
 
 LoadServerInfo()
 {
-    ServerInfo="\0";
-    mysql_query("SELECT `info` FROM `mru_serverinfo` WHERE `aktywne`=1 LIMIT 1");
-    mysql_store_result();
-    if(mysql_num_rows())
-    {
-        mysql_fetch_row_format(ServerInfo, "|");
-        new lPos=0;
-        while((lPos = strfind(ServerInfo, "\\n", false, lPos)) != -1)
-        {
-            strdel(ServerInfo, lPos, lPos+2);
-            strins(ServerInfo, "\n", lPos);
-            lPos++;
-        }
-        lPos=0;
-        while((lPos = strfind(ServerInfo, "\\t", false, lPos)) != -1)
-        {
-            strdel(ServerInfo, lPos, lPos+2);
-            strins(ServerInfo, "\t", lPos);
-            lPos++;
-        }
-        foreach(new i : Player)
-        {
-            if(gPlayerLogged[i] == 1) TextDrawShowForPlayer(i, TXD_Info);
-        }
-    }
-	mysql_free_result();
+	//TODO: MySQL or remove
+    // ServerInfo="\0";
+    // mysql_query("SELECT `info` FROM `mru_serverinfo` WHERE `aktywne`=1 LIMIT 1");
+    // mysql_store_result();
+    // if(mysql_num_rows())
+    // {
+    //     mysql_fetch_row_format(ServerInfo, "|");
+    //     new lPos=0;
+    //     while((lPos = strfind(ServerInfo, "\\n", false, lPos)) != -1)
+    //     {
+    //         strdel(ServerInfo, lPos, lPos+2);
+    //         strins(ServerInfo, "\n", lPos);
+    //         lPos++;
+    //     }
+    //     lPos=0;
+    //     while((lPos = strfind(ServerInfo, "\\t", false, lPos)) != -1)
+    //     {
+    //         strdel(ServerInfo, lPos, lPos+2);
+    //         strins(ServerInfo, "\t", lPos);
+    //         lPos++;
+    //     }
+    //     foreach(new i : Player)
+    //     {
+    //         if(gPlayerLogged[i] == 1) TextDrawShowForPlayer(i, TXD_Info);
+    //     }
+    // }
+	// mysql_free_result();
 }
 
 LoadConfig()
 {
-    new query[1024], data[256];
-    mysql_query("SELECT * FROM `mru_config`");
-    mysql_store_result();
-    if(mysql_num_rows())
+    new data[256];
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_config`", true);
+    if(cache_is_valid(result) && cache_num_rows())
     {
-        mysql_fetch_row_format(query, "|");
-        sscanf(query, "p<|>s[128]s[128]dds[256]dd", RadioSANUno, RadioSANDos, ZONE_DISABLED, ZONE_DEF_TIME, data, STANOWE_GATE_KEY, TJD_Materials);
+		cache_get_value_index(0, 0, RadioSANUno);
+		cache_get_value_index(0, 1, RadioSANDos);
+		cache_get_value_index_int(0, 2, ZONE_DISABLED);
+		cache_get_value_index_int(0, 3, ZONE_DEF_TIME);
+		cache_get_value_index(0, 4, data);
+		cache_get_value_index_int(0, 5, STANOWE_GATE_KEY);
+		cache_get_value_index_int(0, 6, TJD_Materials);
         sscanf(data, "a<s[16]>[20]", AUDIO_LoginData);
     }
-	mysql_free_result();
+	cache_delete(result);
     for(new i=0;i<20;i++)
     {
         if(strlen(AUDIO_LoginData[i]) > 1) AUDIO_LoginTotal++;
@@ -8565,14 +8585,18 @@ LoadConfig()
 
 WczytajRangi()
 {
-    new query[512], id, typ, rangi[256],ranga[MAX_RANG][MAX_RANG_LEN];
-    mysql_query("SELECT * FROM `mru_nazwyrang`");
-    mysql_store_result();
-
-    while(mysql_fetch_row_format(query, "|"))
+    new id, typ, rangi[256], ranga[MAX_RANG][MAX_RANG_LEN];
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_nazwyrang`", true);
+	if(cache_is_valid(result))
     {
-        sscanf(query, "p<|>dds[256]", id, typ, rangi);
-        sscanf(rangi, "p<,>A<s[25]>()[10]", ranga);
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, typ);
+			cache_get_value_index(i, 2, rangi);
+        	sscanf(rangi, "p<,>A<s[25]>()[10]", ranga);
+		}
+
         //Assign true rangs
         if(typ == 1)
         {
@@ -8588,86 +8612,92 @@ WczytajRangi()
                 if(strlen(ranga[i]) > 1) format(FamRang[id][i], 25, "%s", ranga[i]);
             }
         }
-    }
-    mysql_free_result();
+		cache_delete(result);
+	}
     print("Wczytano rangi");
 }
 
 WczytajSkiny()
 {
-    new query[256], id, typ, skiny[128],skin[MAX_SKIN_SELECT];
-    mysql_query("SELECT * FROM `mru_skins`");
-    mysql_store_result();
-
-    while(mysql_fetch_row_format(query, "|"))
+    new id, typ, skiny[128], skin[MAX_SKIN_SELECT];
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_skins`", true);
+	if(cache_is_valid(result))
     {
-        sscanf(query, "p<|>dds[128]", typ, id, skiny);
-        sscanf(skiny, "p<,>A<d>(0)[22]", skin);
-
-        if(typ == 1)
-        {
-            for(new i=0;i<MAX_SKIN_SELECT;i++)
-            {
-                if(skin[i] > 0) FRAC_SKINS[id][i] = skin[i];
-            }
-        }
-        else
-        {
-            for(new i=0;i<MAX_SKIN_SELECT;i++)
-            {
-                if(skin[i] > 0) FAM_SKINS[id][i] = skin[i];
-            }
-        }
-    }
-    mysql_free_result();
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index_int(i, 0, typ);
+			cache_get_value_index_int(i, 1, id);
+			cache_get_value_index(i, 2, skiny);
+        	sscanf(skiny, "p<,>A<d>(0)[22]", skin);
+			if(typ == 1)
+			{
+				for(new j; j<MAX_SKIN_SELECT; j++)
+				{
+					if(skin[j] > 0) FRAC_SKINS[id][j] = skin[j];
+				}
+			}
+			else
+			{
+				for(new j; j<MAX_SKIN_SELECT; j++)
+				{
+					if(skin[j] > 0) FAM_SKINS[id][j] = skin[j];
+				}
+			}
+		}
+		cache_delete(result);
+	}
     print("Wczytano skiny");
 }
 
 Config_FamilyScript()
 {
-    new query[256], id, nazwa[20];
-    mysql_query("SELECT * FROM `mru_rodziny`");
-    mysql_store_result();
-    while(mysql_fetch_row_format(query, "|"))
+    new id, nazwa[20];
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT `name`, `id` FROM `mru_rodziny`", true);
+	
+	if(cache_is_valid(result))
     {
-        sscanf(query, "p<|>s[20]d",nazwa, id);
-        if(strcmp(nazwa, "FAMILY_SAD") == 0)
-        {
-            FAMILY_SAD = id;
-            printf("FAMILY_SAD = %d", FAMILY_SAD);
-        }
-        if(strcmp(nazwa, "FAMILY_RSC") == 0)
-        {
-            FAMILY_RSC = id;
-            printf("FAMILY_RSC = %d", FAMILY_RSC);
-        }
-        if(strcmp(nazwa, "FAMILY_ALHAMBRA") == 0)
-        {
-            FAMILY_ALHAMBRA = id;
-            printf("FAMILY_ALHAMBRA = %d", FAMILY_ALHAMBRA);
-        }
-        if(strcmp(nazwa, "FAMILY_VINYL") == 0)
-        {
-            FAMILY_VINYL = id;
-            printf("FAMILY_VINYL = %d", FAMILY_VINYL);
-        }
-        if(strcmp(nazwa, "FAMILY_IBIZA") == 0)
-        {
-            FAMILY_IBIZA = id;
-            printf("FAMILY_IBIZA = %d", FAMILY_IBIZA);
-        }
-        if(strcmp(nazwa, "FAMILY_FDU") == 0)
-        {
-            FAMILY_FDU = id;
-            printf("FAMILY_FDU = %d", FAMILY_FDU);
-        }
-		if(strcmp(nazwa, "FAMILY_SEKTA") == 0)
-        {
-            FAMILY_SEKTA = id;
-            printf("FAMILY_SEKTA = %d", FAMILY_SEKTA);
-        }
-    }
-    mysql_free_result();
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index(i, 0, nazwa);
+			cache_get_value_index_int(i, 1, id);
+			if(strcmp(nazwa, "FAMILY_SAD") == 0)
+			{
+				FAMILY_SAD = id;
+				printf("FAMILY_SAD = %d", FAMILY_SAD);
+			}
+			if(strcmp(nazwa, "FAMILY_RSC") == 0)
+			{
+				FAMILY_RSC = id;
+				printf("FAMILY_RSC = %d", FAMILY_RSC);
+			}
+			if(strcmp(nazwa, "FAMILY_ALHAMBRA") == 0)
+			{
+				FAMILY_ALHAMBRA = id;
+				printf("FAMILY_ALHAMBRA = %d", FAMILY_ALHAMBRA);
+			}
+			if(strcmp(nazwa, "FAMILY_VINYL") == 0)
+			{
+				FAMILY_VINYL = id;
+				printf("FAMILY_VINYL = %d", FAMILY_VINYL);
+			}
+			if(strcmp(nazwa, "FAMILY_IBIZA") == 0)
+			{
+				FAMILY_IBIZA = id;
+				printf("FAMILY_IBIZA = %d", FAMILY_IBIZA);
+			}
+			if(strcmp(nazwa, "FAMILY_FDU") == 0)
+			{
+				FAMILY_FDU = id;
+				printf("FAMILY_FDU = %d", FAMILY_FDU);
+			}
+			if(strcmp(nazwa, "FAMILY_SEKTA") == 0)
+			{
+				FAMILY_SEKTA = id;
+				printf("FAMILY_SEKTA = %d", FAMILY_SEKTA);
+			}
+		}
+		cache_delete(result);
+	}
 }
 
 WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
@@ -8711,7 +8741,7 @@ Sejf_Save(frakcja)
     if(!SafeLoaded) return;
     new query[128];
     format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d WHERE `ID`=%d AND `typ`=1", Sejf_Frakcji[frakcja], frakcja);
-    if(MYSQL_SAVING) mysql_query(query);
+    mysql_query(mruMySQL_Connection, query);
 }
 
 SejfR_Save(frakcja)
@@ -8719,28 +8749,32 @@ SejfR_Save(frakcja)
     if(!SafeLoaded) return;
     new query[128];
     format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d WHERE `ID`=%d AND `typ`=2", Sejf_Rodziny[frakcja], frakcja);
-    if(MYSQL_SAVING) mysql_query(query);
+    mysql_query(mruMySQL_Connection, query);
 }
 
 Sejf_Load()
 {
-    new query[128], id, typ, kasa, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
-    mysql_query("SELECT * FROM `mru_sejfy`");
-    mysql_store_result();
-    while(mysql_fetch_row_format(query, "|"))
-    {
-        sscanf(query, "p<|>ddd", id, typ, kasa);
-        if(typ == 1) Sejf_Frakcji[id] = kasa, validF[id] = true;
-        else if(typ == 2) Sejf_Rodziny[id] = kasa, validR[id] = true;
-        SafeLoaded = true;
-    }
-    mysql_free_result();
+    new id, typ, kasa, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_sejfy`", true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, typ);
+			cache_get_value_index_int(i, 2, kasa);
+			if(typ == 1) Sejf_Frakcji[id] = kasa, validF[id] = true;
+			else if(typ == 2) Sejf_Rodziny[id] = kasa, validR[id] = true;
+			SafeLoaded = true;
+		}
+		cache_delete(result);
+	}
 }
 
 
 IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z][a-z]+([ _][A-Z][a-z]+([A-HJ-Z][a-z]+)?){1,2}$") >= 0)
+	if(Regex_Check(nick, NICK_REGEXP) >= 0)
 	{
 		return 1;
 	}
@@ -9397,18 +9431,18 @@ Zone_StartAttack(zoneid, attacker, defender)
     }
 
     new str[128];
-    format(str, 128, "DELETE FROM `mru_strefylimit` WHERE `gang`='%d'", attacker);
-    mysql_query(str);
-    format(str, 128, "INSERT INTO `mru_strefylimit` (`gang`, `data`) VALUES ('%d', '%d')", attacker, gettime());
-    mysql_query(str);
-    format(str, 128, "UPDATE `mru_strefy` SET `expire`='%d' WHERE `id`='%d'", gettime()+86400, zoneid);
-    mysql_query(str);
+    format(str, sizeof(str), "DELETE FROM `mru_strefylimit` WHERE `gang`='%d'", attacker);
+    mysql_tquery(mruMySQL_Connection, str);
+    format(str, sizeof(str), "INSERT INTO `mru_strefylimit` (`gang`, `data`) VALUES ('%d', '%d')", attacker, gettime());
+    mysql_tquery(mruMySQL_Connection, str);
+    format(str, sizeof(str), "UPDATE `mru_strefy` SET `expire`='%d' WHERE `id`='%d'", gettime()+86400, zoneid);
+    mysql_tquery(mruMySQL_Connection, str);
 
     ZoneProtect[zoneid] = 1;
     ZoneAttackData[zoneid][2] = attacker;
     ZoneAttackData[zoneid][3] = defender;
     ZoneGangLimit[attacker] = false;
-    format(str, 128, "ZONEDEFTIME_%d", zoneid);
+    format(str, sizeof(str), "ZONEDEFTIME_%d", zoneid);
     SetSVarInt(str, ZONE_DEF_TIME);
     ZoneAttackTimer[zoneid] = SetTimerEx("Zone_AttackEnd", ZONE_DEF_TIME*1000, 0, "iii", zoneid, attacker, defender);
     printf("[GangZone] Atak na strefê %d przez %d. Atakuje %d osób broni %d osób.", zoneid, attacker, ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
@@ -9416,18 +9450,22 @@ Zone_StartAttack(zoneid, attacker, defender)
 
 Zone_GangUpdate(bool:cash=false)
 {
-    new string[256];
     new gangid, timegang;
-    mysql_query("SELECT * FROM `mru_strefylimit`");
-    mysql_store_result();
-    while(mysql_fetch_row_format(string, "|"))
-    {
-        sscanf(string, "p<|>dd", gangid, timegang);
-        if(!(0 <= gangid <= MAX_FRAC)) continue;
-        if(gettime()-timegang >= 86400) ZoneGangLimit[gangid] = true; //1 day
-        else ZoneGangLimit[gangid] = false;
-    }
-    mysql_free_result();
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_strefylimit`", true);
+
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+        {
+			cache_get_value_index_int(i, 0, gangid);
+			cache_get_value_index_int(i, 1, timegang);
+			
+			if(!(0 <= gangid <= MAX_FRAC)) continue;
+			if(gettime()-timegang >= 86400) ZoneGangLimit[gangid] = true; //1 day
+			else ZoneGangLimit[gangid] = false;
+		}
+		cache_delete(result);
+	}
     if(cash)
     {
         for(new i=0;i<MAX_ZONES;i++)
@@ -9451,7 +9489,7 @@ public Zone_AttackEnd(zoneid, attacker, defender)
     if(ZoneAttackData[zoneid][1] < ZoneAttackData[zoneid][0]) //win
     {
         format(str, 128, "UPDATE `mru_strefy` SET `gang`='%d' WHERE `id`='%d'", attacker, zoneid);
-        mysql_query(str);
+        mysql_tquery(mruMySQL_Connection, str);
 
         ZoneControl[zoneid] = attacker;
         new thisorg = orgID(ZoneControl[zoneid]-100);
@@ -9661,19 +9699,22 @@ Zone_Sync(playerid)
 
 Zone_Load()
 {
-    new query[128];
-    mysql_query("SELECT * FROM `mru_strefy`");
-    mysql_store_result();
     new id, kontrol, expire, time=gettime();
-    while(mysql_fetch_row_format(query, "|"))
-    {
-        sscanf(query, "p<|>ddd", id, kontrol, expire);
-        ZoneControl[id] = kontrol;
-        if(expire == -1) ZoneProtect[id] = 1;
-        else if(time - expire < 86400) ZoneProtect[id] = 1;
-        else ZoneProtect[id] = 0;
-    }
-    mysql_free_result();
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_strefy`", true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+        {
+			cache_get_value_index_int(i, 0, id);
+			cache_get_value_index_int(i, 1, kontrol);
+			cache_get_value_index_int(i, 2, expire);
+			ZoneControl[id] = kontrol;
+			if(expire == -1) ZoneProtect[id] = 1;
+			else if(time - expire < 86400) ZoneProtect[id] = 1;
+			else ZoneProtect[id] = 0;
+		}
+		cache_delete(result);
+	}
 
     if(ZoneControl[id] > 100)
     {
@@ -11160,7 +11201,7 @@ TJD_Exit()
 
     new lStr[64];
     format(lStr, 64, "UPDATE mru_config SET `trucker_magazyn`='%d'", TJD_Materials);
-    if(MYSQL_SAVING) mysql_query(lStr);
+    mysql_query(mruMySQL_Connection, lStr);
 }
 
 TJD_Load()
@@ -11887,31 +11928,24 @@ EDIT_ShowRangNames(playerid, typ, uid, bool:edit=false)
 
 EDIT_SaveRangs(typ, uid)
 {
-    new lStr[256], lStr_escaped[256], query[512];
+    new string[256], query[512];
 
     for(new i=0;i<MAX_RANG;i++)
     {
         if(strlen((typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i])) < 2)
-            format(lStr, 256, "%s-, ", lStr);
+            format(string, 256, "%s-, ", string);
         else
-            format(lStr, 256, "%s%s, ", lStr, (typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i]));
+            format(string, 256, "%s%s, ", string, (typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i]));
     }
-    strdel(lStr, strlen(lStr)-2, strlen(lStr));
+    strdel(string, strlen(string)-2, strlen(string));
 
-    format(query, 512, "SELECT `ID` FROM mru_nazwyrang WHERE `ID`='%d' AND `typ`='%d'", uid, typ+1);
-    mysql_query(query);
-    mysql_store_result();
-	mysql_real_escape_string(lStr, lStr_escaped);
-    if(mysql_num_rows())
-    {
-        format(query, 512, "UPDATE mru_nazwyrang SET rangi='%s' WHERE `ID`='%d' AND `typ`='%d'", lStr_escaped, uid, typ+1);
-    }
-    else
-    {
-        format(query, 512, "INSERT INTO mru_nazwyrang (rangi, ID, typ) VALUES ('%s', '%d', '%d')", lStr_escaped, uid, typ+1);
-    }
-	mysql_free_result();
-    mysql_query(query);
+	mysql_format(mruMySQL_Connection, query, sizeof(query), 
+		"INSERT INTO mru_nazwyrang (rangi, ID, typ) VALUES ('%e', '%d', '%d') \
+		ON DUPLICATE KEY UPDATE rangi='%e'", 
+		string, uid, typ+1, 
+		string
+	);
+    mysql_tquery(mruMySQL_Connection, query);
     RANG_ApplyChanges[typ][uid] = false;
     return 1;
 }

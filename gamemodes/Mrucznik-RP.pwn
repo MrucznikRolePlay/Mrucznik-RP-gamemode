@@ -51,10 +51,10 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <crashdetect>
 #include <log-plugin>
 #include <sscanf2>
-#include <libRegEx>
+#include <Pawn.Regex>
 #include <streamer>
-#include <mysql_R5>
-//#include <a_mysql> TODO: replace R5 plugin
+#include <a_mysql>
+#include <a_mysql_yinline>
 #include <whirlpool>
 #include <timestamptodate>
 #include <discord-connector>
@@ -63,7 +63,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //TODO: add plugins
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
-// #include <requests>
 // #include <colandreas>
 
 //-------<[ Include ]>-------
@@ -117,6 +116,7 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
+#include "system\regexps.pwn"
 
 //do implementacji w g³ówny kod (mo¿liwie w modu³y)
 #include "system\doimplementacji\vinylscript.pwn"
@@ -135,7 +135,6 @@ native gpci (playerid, serial [], len);
 #include "mysql\mysql_komendy.pwn"
 #include "mysql\mysql_noysi.pwn"
 #include "mysql\mysql_OnDialogResponse.pwn"
-
 
 /*
 #include "modules\ActorSystem\actors.pwn"
@@ -241,9 +240,9 @@ public OnGameModeInit()
 		// - off (broñ trzymana w obu rêkach jest trzymana jedn¹, skiny chodz¹ swoim chodem)
 		// - on  (broñ trzymana jest normalnie, wszystkie skiny chodz¹ jak CJ)
 
-	//-------<[ libRegEx ]>-------
-	regex_syntax(SYNTAX_PERL);
-	
+	//-------<[ regexps ]>-------
+	InitRegexps();
+
 	//-------<[ sscanf ]>-------
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
 
@@ -252,7 +251,7 @@ public OnGameModeInit()
     Streamer_SetTickRate(50);
 
 	//-------<[ MySQL ]>-------
-	MruMySQL_Connect();//mysql
+	if(!MruMySQL_Init()) return 1;
 	MruMySQL_IloscLiderowLoad();
 
 	
@@ -497,6 +496,7 @@ public OnGameModeExit()
         MruMySQL_SaveAccount(i, true, true);
     }
 
+	MruMySQL_Exit();
 	DOF2_Exit();
     GLOBAL_EXIT = true;
 	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
@@ -1105,7 +1105,7 @@ public OnPlayerConnect(playerid)
 		KickEx(playerid);
 		return 1;
     }*/
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
+	if(Regex_Check(nick, NICK_REGEXP) <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
@@ -5896,19 +5896,19 @@ VerifyPlayerIp(playerid)
 	new ip[16], query[256];
 	GetPlayerIp(playerid, ip, sizeof(ip));
 
-	format(query, sizeof(query), "SELECT DISTINCT t.ip FROM ( SELECT ip, time FROM mru_konta k JOIN mru_logowania l ON k.UID=l.PID WHERE Nick='%s' ORDER BY l.time DESC) t LIMIT 25 ", GetNick(playerid));
-	mysql_query(query);
-	mysql_store_result();
-    if(mysql_num_rows())
-    {
-        while(mysql_fetch_row_format(query, "|"))
+	format(query, sizeof(query), "SELECT DISTINCT t.ip FROM (SELECT ip, time FROM mru_konta k JOIN mru_logowania l ON k.UID=l.PID WHERE Nick='%s' ORDER BY l.time DESC) t LIMIT 25 ", GetNick(playerid));
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
+
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
         {
             new lastIp[MAX_PLAYER_NAME];
-            sscanf(query, "p<|>s[16]", lastIp);
+			cache_get_value_index(0, 0, lastIp, MAX_PLAYER_NAME);
 
 			if(strcmp(ip, MD5_Hash(lastIp), true ) == 0)
 			{
-    			mysql_free_result();
+				cache_delete(result);
 				Log(serverLog, INFO, "Ip %s matched for %s", ip, GetNick(playerid));
 				return true;
 			}
@@ -5919,14 +5919,14 @@ VerifyPlayerIp(playerid)
 				sscanf(lastIp, "p<.>dd", lastHost1, lastHost2);
 				if(host1 == lastHost1 && host2 == lastHost2)
 				{
-					mysql_free_result();
+					cache_delete(result);
 					Log(serverLog, INFO, "Host %s matched for %s", ip, GetNick(playerid));
 					return true;
 				}
 			}
-        }
-    }
-    mysql_free_result();
+		}
+		cache_delete(result);
+	}
 	return false;
 }
 
@@ -5934,20 +5934,23 @@ VeryfiLastLogin(playerid)
 {
 	new query[128];
 	format(query, sizeof(query), "SELECT `Nick` FROM mru_last_logons WHERE `Nick`='%s' LIMIT 1", GetNick(playerid));
-	mysql_query(query);
-	mysql_store_result();
-	if(mysql_num_rows()) //ostatnie logowanie po 15
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
+	if(cache_is_valid(result))
 	{
-		mysql_free_result();
-		Log(serverLog, INFO, "Logon matched for %s", GetNick(playerid));
-		return true;
+		if(cache_num_rows())
+		{
+			cache_delete(result);
+			Log(serverLog, INFO, "Logon matched for %s", GetNick(playerid));
+			return true;
+		}
+		else
+		{
+			cache_delete(result);
+			Log(serverLog, INFO, "Logon mismatched for %s", GetNick(playerid));
+			return false;
+		}
 	}
-	else
-	{
-		mysql_free_result();
-		Log(serverLog, INFO, "Logon mismatched for %s", GetNick(playerid));
-		return false;
-	}
+	return false;
 }
 
 PasswordConversion(playerid, accountPass[], password[])
@@ -6014,7 +6017,7 @@ OnPlayerLogin(playerid, password[])
 		//£adowanie konta i zmiennych:
 		//----------------------------
 
-		if( !MruMySQL_LoadAccount(playerid) )
+		if(!MruMySQL_LoadAccount(playerid))
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Krytyczny b³¹d konta. Zg³oœ zaistnia³¹ sytuacjê na forum.");
 			Log(serverLog, ERROR, "Krytyczny b³¹d konta %s (pusty rekord?)", nick);
@@ -7606,7 +7609,7 @@ public OnPlayerText(playerid, text[])
 					return 0;
 				}
 				new id, message[128];
-				mysql_real_escape_string(text, message);
+				mysql_escape_string(text, message);
 				new Hour, Minute;
 				gettime(Hour, Minute);
 				new datapowod[160];

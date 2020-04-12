@@ -124,7 +124,7 @@ new TourettActive[MAX_PLAYERS];
 new PTSDCounter[MAX_PLAYERS];
 new AbortCurration[MAX_PLAYERS];
 
-new TourettRegexp;
+new Regex:TourettRegexp;
 
 //------------------<[ Forwardy: ]>--------------------
 //Koronawirus

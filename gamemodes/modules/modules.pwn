@@ -29,6 +29,7 @@
 
 //-------<[ .def ]>-------
 #include "organizacje\organizacje.def"
+#include "accounts\accounts.def"
 #include "03DL\03DL.def"
 #include "graffiti\graffiti.def"
 #include "antyspam\antyspam.def"
@@ -71,6 +72,7 @@
 
 //-------<[ .hwn ]>-------
 #include "organizacje\organizacje.hwn"
+#include "accounts\accounts.hwn"
 #include "03DL\03DL.hwn"
 #include "graffiti\graffiti.hwn"
 #include "antyspam\antyspam.hwn"
@@ -113,6 +115,7 @@
 
 //-------<[ .pwn ]>-------
 #include "organizacje\organizacje.pwn"
+#include "accounts\accounts.pwn"
 #include "03DL\03DL.pwn"
 #include "graffiti\graffiti.pwn"
 #include "antyspam\antyspam.pwn"
@@ -155,6 +158,7 @@
 
 //-------<[ timers ]>-------
 #include "organizacje\organizacje_timers.pwn"
+#include "accounts\accounts_timers.pwn"
 #include "graffiti\graffiti_timers.pwn"
 #include "antyspam\antyspam_timers.pwn"
 #include "premium\premium_timers.pwn"
@@ -172,6 +176,7 @@
 
 //-------<[ mysql ]>-------
 #include "organizacje\organizacje_mysql.pwn"
+#include "accounts\accounts_mysql.pwn"
 #include "graffiti\graffiti_mysql.pwn"
 #include "premium\premium_mysql.pwn"
 #include "prace\prace_mysql.pwn"
@@ -192,6 +197,7 @@
 
 //-------<[ callbacks ]>-------
 #include "organizacje\organizacje_callbacks.pwn"
+#include "accounts\accounts_callbacks.pwn"
 #include "premium\premium_callbacks.pwn"
 #include "convoy\convoy_callbacks.pwn"
 #include "prace\prace_callbacks.pwn"
@@ -227,7 +233,6 @@
 #include "komendy\commands\komendy_commands.pwn"
 #include "player_attachments\commands\player_attachments_commands.pwn"
 #include "frakcje\commands\frakcje_commands.pwn"
-#include "logi\commands\logi_commands.pwn"
 #include "urzadls\commands\urzadls_commands.pwn"
 #include "bramy\commands\bramy_commands.pwn"
 #include "pojazdy\commands\pojazdy_commands.pwn"

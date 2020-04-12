@@ -159,46 +159,46 @@ Car_AddSlotToQueue(id)
 {
     if(strlen(Car_SlotQueue) < 1020)
     {
-        new lStr[8];
-        format(lStr, 8, "%d|", id);
-        strcat(Car_SlotQueue, lStr);
+        new string[8];
+        format(string, 8, "%d|", id);
+        strcat(Car_SlotQueue, string);
     }
 }
 
 Car_GetFromQueue()
 {
-    new lID[8];
+    new id[8];
     new pos = strfind(Car_SlotQueue, "|");
     if(pos != -1)
     {
-        strmid(lID, Car_SlotQueue, 0, pos);
+        strmid(id, Car_SlotQueue, 0, pos);
         strdel(Car_SlotQueue, 0, pos+1);
-        return strval(lID);
+        return strval(id);
     }
     return -1;
 }
 
 ShowCarsForPlayer(playerid, forplayerid)
 {
-    new lStr[512], lSlots, lMaxCars = PlayerInfo[playerid][pCarSlots], lID;
+    new string[512], lSlots, lMaxCars = PlayerInfo[playerid][pCarSlots], id;
     for(new i=0;i<MAX_CAR_SLOT;i++)
     {
-		lID = PlayerInfo[playerid][pCars][i];
-        if( lID != 0)
+		id = PlayerInfo[playerid][pCars][i];
+        if( id != 0)
         {
-            if(CarData[lID][c_UID] == 0) continue;
+            if(CarData[id][c_UID] == 0) continue;
             if(lSlots < lMaxCars)
             {
-                format(lStr, 512, "%s{000000}%d\t{8FCB04}%s\n", lStr, lID, VehicleNames[CarData[lID][c_Model]-400]);
+                format(string, sizeof(string), "%s{000000}%d\t{8FCB04}%s\n", string, id, VehicleNames[CarData[id][c_Model]-400]);
             }
             else
             {
-                format(lStr, 512, "%s{000000}-%d\t{888888}%s\n", lStr, lID, VehicleNames[CarData[lID][c_Model]-400]);
+                format(string, sizeof(string), "%s{000000}-%d\t{888888}%s\n", string, id, VehicleNames[CarData[id][c_Model]-400]);
             }
             lSlots++;
         }
     }
-    if(lSlots > 0) ShowPlayerDialogEx(forplayerid, D_AUTO, DIALOG_STYLE_LIST, "Twoje pojazdy", lStr, "Wybierz", "Anuluj");
+    if(lSlots > 0) ShowPlayerDialogEx(forplayerid, D_AUTO, DIALOG_STYLE_LIST, "Twoje pojazdy", string, "Wybierz", "Anuluj");
     else SendClientMessage(forplayerid, COLOR_GRAD2, "Brak jakichkolwiek pojazdów!");
 }
 
@@ -235,17 +235,21 @@ Car_RemovePlayerOwner(playerid, uid)
 
 Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
 {
-    new lUID, lStr[256], idx=-1;
-    format(lStr, 256, "INSERT INTO `mru_cars` (`model`, `x`, `y`, `z`, `angle`, `color1`, `color2`) VALUES (%d, %.2f, %.2f, %.2f, %.1f, %d, %d)", model, x, y, z, angle, color1, color2);
-    if(mysql_query(lStr))
+    new uid, string[256], idx=-1;
+    format(string, 256, "INSERT INTO `mru_cars` (`model`, `x`, `y`, `z`, `angle`, `color1`, `color2`) \
+        VALUES (%d, %.2f, %.2f, %.2f, %.1f, %d, %d)", 
+        model, x, y, z, angle, color1, color2
+    );
+    new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+    if(cache_is_valid(result) && cache_insert_id() != -1)
     {
-        lUID = mysql_insert_id();
+        uid = cache_insert_id();
 
         new bool:doadd=false;
         idx = Car_GetFromQueue();
         if(idx == -1) idx = gCars, doadd=true;
 
-        CarData[idx][c_UID] = lUID;
+        CarData[idx][c_UID] = uid;
         CarData[idx][c_ID] = CreateVehicle(model, x, y, z, angle, color1, color2, -1);
         CarData[idx][c_Owner] = 0;
         CarData[idx][c_OwnerType] = 0;
@@ -287,43 +291,44 @@ Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
 
 Car_Load()
 {
-    new lStr[512], lLoad=gCars, unused;
-    mysql_query("SELECT * FROM `mru_cars` WHERE `ownertype` != 3 AND `ownertype` != 0");
-    mysql_store_result();
-    while(mysql_fetch_row_format(lStr, "|"))
-    {
-        sscanf(lStr, "p<|>ddddfffffddddldddddddddddds[32]",
-        CarData[gCars][c_UID],
-        CarData[gCars][c_OwnerType],
-        CarData[gCars][c_Owner],
-        CarData[gCars][c_Model],
-        CarData[gCars][c_Pos][0],
-        CarData[gCars][c_Pos][1],
-        CarData[gCars][c_Pos][2],
-        CarData[gCars][c_Rot],
-        CarData[gCars][c_HP],
-        CarData[gCars][c_Tires],
-        CarData[gCars][c_Color][0],
-        CarData[gCars][c_Color][1],
-        CarData[gCars][c_Nitro],
-        CarData[gCars][c_bHydraulika],
-        CarData[gCars][c_Felgi],
-        CarData[gCars][c_Malunek],
-        CarData[gCars][c_Spoiler],
-        CarData[gCars][c_Bumper][0],
-        CarData[gCars][c_Bumper][1],
-        CarData[gCars][c_Keys],
-        CarData[gCars][c_Neon],
-        CarData[gCars][c_Rang],
-        CarData[gCars][c_Int],
-        CarData[gCars][c_VW],
-		unused,
-		CarData[gCars][c_Siren],
-		CarData[gCars][c_Rejestracja]);
+    new lLoad=gCars;
+    new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_cars` WHERE `ownertype` != 3 AND `ownertype` != 0", true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+        {
+            cache_get_value_index_int(i, 0, CarData[gCars][c_UID]);
+            cache_get_value_index_int(i, 1, CarData[gCars][c_OwnerType]);
+            cache_get_value_index_int(i, 2, CarData[gCars][c_Owner]);
+            cache_get_value_index_int(i, 3, CarData[gCars][c_Model]);
+            cache_get_value_index_float(i, 4, CarData[gCars][c_Pos][0]);
+            cache_get_value_index_float(i, 5, CarData[gCars][c_Pos][1]);
+            cache_get_value_index_float(i, 6, CarData[gCars][c_Pos][2]);
+            cache_get_value_index_float(i, 7, CarData[gCars][c_Rot]);
+            cache_get_value_index_float(i, 8, CarData[gCars][c_HP]);
+            cache_get_value_index_int(i, 9, CarData[gCars][c_Tires]);
+            cache_get_value_index_int(i, 10, CarData[gCars][c_Color][0]);
+            cache_get_value_index_int(i, 11, CarData[gCars][c_Color][1]);
+            cache_get_value_index_int(i, 12, CarData[gCars][c_Nitro]);
+            cache_get_value_index_int(i, 13, CarData[gCars][c_bHydraulika]);
+            cache_get_value_index_int(i, 14, CarData[gCars][c_Felgi]);
+            cache_get_value_index_int(i, 15, CarData[gCars][c_Malunek]);
+            cache_get_value_index_int(i, 16, CarData[gCars][c_Spoiler]);
+            cache_get_value_index_int(i, 17, CarData[gCars][c_Bumper][0]);
+            cache_get_value_index_int(i, 18, CarData[gCars][c_Bumper][1]);
+            cache_get_value_index_int(i, 19, CarData[gCars][c_Keys]);
+            cache_get_value_index_int(i, 20, CarData[gCars][c_Neon]);
+            cache_get_value_index_int(i, 21, CarData[gCars][c_Rang]);
+            cache_get_value_index_int(i, 22, CarData[gCars][c_Int]);
+            cache_get_value_index_int(i, 23, CarData[gCars][c_VW]);
+            //24 unused
+            cache_get_value_index_int(i, 25, CarData[gCars][c_Siren]);
+            cache_get_value_index(i, 26, CarData[gCars][c_Rejestracja]);
 
-        gCars++;
+            gCars++;
+        }
+        cache_delete(result);
     }
-    mysql_free_result();
 
     //SPAWN
     for(new i=lLoad;i<gCars;i++)
@@ -393,77 +398,80 @@ Car_Load()
 		{
 			
 			format(qText, sizeof(qText), "SELECT `desc` FROM `mru_opisy` WHERE `typ`=2 AND `owner`=%d LIMIT 1", CarData[VehicleUID[i][vUID]][c_UID]);
-			mysql_query(qText);
-			mysql_store_result();
-			if(mysql_num_rows())
-			{
-				mysql_fetch_row_format(lStr, "|");
-				sscanf(lStr, "s[128]", ldesc);
-				
-				WordWrap(ldesc, true, lText);
+			result = mysql_query(mruMySQL_Connection, qText, true);
+            if(cache_is_valid(result))
+            {
+                if(cache_num_rows())
+                {
+                    cache_get_value_index(0, 0, ldesc);
+                }
+                cache_delete(result);
+            }
+            WordWrap(ldesc, true, lText);
 
-				CarOpis[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i);
-				format(CarOpisCaller[i], MAX_PLAYER_NAME, "SYSTEM");
+            CarOpis[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i);
+            format(CarOpisCaller[i], MAX_PLAYER_NAME, "SYSTEM");
 
-				strpack(CarDesc[i], ldesc);
-			}
+            strpack(CarDesc[i], ldesc);
 		}
 	}
 	
-    mysql_free_result();
     printf("Wczytano %d pojazdów", gCars-1);
 }
 
 Car_LoadEx(lUID)
 {
-    new lStr[256];
-    new lVehID = Car_GetFromQueue(), bool:doadd=false, unused;
+    new string[256];
+    new lVehID = Car_GetFromQueue(), bool:doadd=false;
     if(lVehID == -1) lVehID = gCars, doadd=true;
-    format(lStr, 256, "SELECT * FROM `mru_cars` WHERE `UID`='%d'", lUID);
-    mysql_query(lStr);
-    mysql_store_result();
-    if(mysql_num_rows())
+    format(string, 256, "SELECT * FROM `mru_cars` WHERE `UID`='%d'", lUID);
+    new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+    if(cache_is_valid(result))
     {
-        mysql_fetch_row_format(lStr, "|");
-        sscanf(lStr, "p<|>ddddfffffddddlddddddddddds[32]",
-        CarData[lVehID][c_UID],
-        CarData[lVehID][c_OwnerType],
-        CarData[lVehID][c_Owner],
-        CarData[lVehID][c_Model],
-        CarData[lVehID][c_Pos][0],
-        CarData[lVehID][c_Pos][1],
-        CarData[lVehID][c_Pos][2],
-        CarData[lVehID][c_Rot],
-        CarData[lVehID][c_HP],
-        CarData[lVehID][c_Tires],
-        CarData[lVehID][c_Color][0],
-        CarData[lVehID][c_Color][1],
-        CarData[lVehID][c_Nitro],
-        CarData[lVehID][c_bHydraulika],
-        CarData[lVehID][c_Felgi],
-        CarData[lVehID][c_Malunek],
-        CarData[lVehID][c_Spoiler],
-        CarData[lVehID][c_Bumper][0],
-        CarData[lVehID][c_Bumper][1],
-        CarData[lVehID][c_Keys],
-        CarData[lVehID][c_Neon],
-        CarData[lVehID][c_Rang],
-        CarData[lVehID][c_Int],
-        CarData[lVehID][c_VW],
-        CarData[lVehID][c_Rejestracja],
-        unused);
+        if(cache_num_rows())
+        {
+            cache_get_value_index_int(0, 0, CarData[gCars][c_UID]);
+            cache_get_value_index_int(0, 1, CarData[gCars][c_OwnerType]);
+            cache_get_value_index_int(0, 2, CarData[gCars][c_Owner]);
+            cache_get_value_index_int(0, 3, CarData[gCars][c_Model]);
+            cache_get_value_index_float(0, 4, CarData[gCars][c_Pos][0]);
+            cache_get_value_index_float(0, 5, CarData[gCars][c_Pos][1]);
+            cache_get_value_index_float(0, 6, CarData[gCars][c_Pos][2]);
+            cache_get_value_index_float(0, 7, CarData[gCars][c_Rot]);
+            cache_get_value_index_float(0, 8, CarData[gCars][c_HP]);
+            cache_get_value_index_int(0, 9, CarData[gCars][c_Tires]);
+            cache_get_value_index_int(0, 10, CarData[gCars][c_Color][0]);
+            cache_get_value_index_int(0, 11, CarData[gCars][c_Color][1]);
+            cache_get_value_index_int(0, 12, CarData[gCars][c_Nitro]);
+            cache_get_value_index_int(0, 13, CarData[gCars][c_bHydraulika]);
+            cache_get_value_index_int(0, 14, CarData[gCars][c_Felgi]);
+            cache_get_value_index_int(0, 15, CarData[gCars][c_Malunek]);
+            cache_get_value_index_int(0, 16, CarData[gCars][c_Spoiler]);
+            cache_get_value_index_int(0, 17, CarData[gCars][c_Bumper][0]);
+            cache_get_value_index_int(0, 18, CarData[gCars][c_Bumper][1]);
+            cache_get_value_index_int(0, 19, CarData[gCars][c_Keys]);
+            cache_get_value_index_int(0, 20, CarData[gCars][c_Neon]);
+            cache_get_value_index_int(0, 21, CarData[gCars][c_Rang]);
+            cache_get_value_index_int(0, 22, CarData[gCars][c_Int]);
+            cache_get_value_index_int(0, 23, CarData[gCars][c_VW]);
+            //24 unused
+            cache_get_value_index_int(0, 25, CarData[gCars][c_Siren]);
+            cache_get_value_index(0, 26, CarData[gCars][c_Rejestracja]);
 
-        if(doadd) gCars++;
-
-        mysql_free_result();
+            if(doadd) gCars++;
+        }
+        else
+        {
+            lVehID = -1;
+        }
+        cache_delete(result);
     }
-    else return -1;
     return lVehID;
 }
 
 Car_LoadForPlayer(playerid)
 {
-    new lStr[256], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8], unused;
+    new string[256], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8];
 
     for(new i=0;i<MAX_VEHICLES;i++)
     {
@@ -471,8 +479,8 @@ Car_LoadForPlayer(playerid)
         if(lcar == 0) continue;
         if(CarData[lcar][c_OwnerType] == CAR_OWNER_PLAYER && CarData[lcar][c_Owner] == lPUID)
         {
-            format(lStr, 64, "%d|", CarData[lcar][c_UID]);
-            strcat(lList, lStr);
+            format(string, 64, "%d|", CarData[lcar][c_UID]);
+            strcat(lList, string);
             //Przypisanie auta, które ju¿ istenije w grze - brak potrzeby ponownego ³adowania do systemu, tylko pobranie z bazy.
             PlayerInfo[playerid][pCars][lUsed++] = lcar;
         }
@@ -481,50 +489,51 @@ Car_LoadForPlayer(playerid)
     new lVehID = Car_GetFromQueue();
     if(lVehID == -1) lVehID = gCars;
 
-    format(lStr, 128, "SELECT * FROM `mru_cars` WHERE `ownertype`='%d' AND `owner`='%d'", CAR_OWNER_PLAYER, lPUID);
-    mysql_query(lStr);
-    mysql_store_result();
-    while(mysql_fetch_row_format(lStr, "|"))
-    {
-        sscanf(lStr, "p<|>d", lsID);
-        format(lsSearch, 8, "%d|", lsID);
-        if(strfind(lList, lsSearch) == -1)
+    format(string, sizeof(string), "SELECT * FROM `mru_cars` WHERE `ownertype`='%d' AND `owner`='%d'", CAR_OWNER_PLAYER, lPUID);
+    new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+	if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
         {
-            sscanf(lStr, "p<|>ddddfffffddddlddddddddddds[32]",
-            CarData[lVehID][c_UID],
-            CarData[lVehID][c_OwnerType],
-            CarData[lVehID][c_Owner],
-            CarData[lVehID][c_Model],
-            CarData[lVehID][c_Pos][0],
-            CarData[lVehID][c_Pos][1],
-            CarData[lVehID][c_Pos][2],
-            CarData[lVehID][c_Rot],
-            CarData[lVehID][c_HP],
-            CarData[lVehID][c_Tires],
-            CarData[lVehID][c_Color][0],
-            CarData[lVehID][c_Color][1],
-            CarData[lVehID][c_Nitro],
-            CarData[lVehID][c_bHydraulika],
-            CarData[lVehID][c_Felgi],
-            CarData[lVehID][c_Malunek],
-            CarData[lVehID][c_Spoiler],
-            CarData[lVehID][c_Bumper][0],
-            CarData[lVehID][c_Bumper][1],
-            CarData[lVehID][c_Keys],
-            CarData[lVehID][c_Neon],
-            CarData[lVehID][c_Rang],
-            CarData[lVehID][c_Int],
-            CarData[lVehID][c_VW],
-            CarData[lVehID][c_Rejestracja],
-            unused);
+            cache_get_value_index_int(i, 0, lsID);
+            if(strfind(lList, lsSearch) == -1)
+            {
+                cache_get_value_index_int(i, 0, CarData[gCars][c_UID]);
+                cache_get_value_index_int(i, 1, CarData[gCars][c_OwnerType]);
+                cache_get_value_index_int(i, 2, CarData[gCars][c_Owner]);
+                cache_get_value_index_int(i, 3, CarData[gCars][c_Model]);
+                cache_get_value_index_float(i, 4, CarData[gCars][c_Pos][0]);
+                cache_get_value_index_float(i, 5, CarData[gCars][c_Pos][1]);
+                cache_get_value_index_float(i, 6, CarData[gCars][c_Pos][2]);
+                cache_get_value_index_float(i, 7, CarData[gCars][c_Rot]);
+                cache_get_value_index_float(i, 8, CarData[gCars][c_HP]);
+                cache_get_value_index_int(i, 9, CarData[gCars][c_Tires]);
+                cache_get_value_index_int(i, 10, CarData[gCars][c_Color][0]);
+                cache_get_value_index_int(i, 11, CarData[gCars][c_Color][1]);
+                cache_get_value_index_int(i, 12, CarData[gCars][c_Nitro]);
+                cache_get_value_index_int(i, 13, CarData[gCars][c_bHydraulika]);
+                cache_get_value_index_int(i, 14, CarData[gCars][c_Felgi]);
+                cache_get_value_index_int(i, 15, CarData[gCars][c_Malunek]);
+                cache_get_value_index_int(i, 16, CarData[gCars][c_Spoiler]);
+                cache_get_value_index_int(i, 17, CarData[gCars][c_Bumper][0]);
+                cache_get_value_index_int(i, 18, CarData[gCars][c_Bumper][1]);
+                cache_get_value_index_int(i, 19, CarData[gCars][c_Keys]);
+                cache_get_value_index_int(i, 20, CarData[gCars][c_Neon]);
+                cache_get_value_index_int(i, 21, CarData[gCars][c_Rang]);
+                cache_get_value_index_int(i, 22, CarData[gCars][c_Int]);
+                cache_get_value_index_int(i, 23, CarData[gCars][c_VW]);
+                //24 unused
+                cache_get_value_index_int(i, 25, CarData[gCars][c_Siren]);
+                cache_get_value_index(i, 26, CarData[gCars][c_Rejestracja]);
 
-            PlayerInfo[playerid][pCars][lUsed++] = lVehID;
+                PlayerInfo[playerid][pCars][lUsed++] = lVehID;
 
-            lVehID = Car_GetFromQueue();
-            if(lVehID == -1) lVehID = ++gCars;
+                lVehID = Car_GetFromQueue();
+                if(lVehID == -1) lVehID = ++gCars;
+            }
         }
+        cache_delete(result);
     }
-    mysql_free_result();
 
     new keys = PlayerInfo[playerid][pKluczeAuta];
     if(keys > 0)
@@ -736,32 +745,32 @@ Car_Unspawn(v, bool:playercall=false)
 Car_Destroy(lV)
 {
     if(CarData[lV][c_ID] != 0) Car_Unspawn(CarData[lV][c_ID], true);
-    new lStr[64];
-    format(lStr, 64, "DELETE FROM `mru_cars` WHERE `UID`='%d'", CarData[lV][c_UID]);
-    mysql_query(lStr);
+    new string[64];
+    format(string, 64, "DELETE FROM `mru_cars` WHERE `UID`='%d'", CarData[lV][c_UID]);
+    mysql_tquery(mruMySQL_Connection, string);
 
     Car_ClearMem(lV);
 }
 
 Car_Save(lUID, lType)
 {
-    new lStr[256];
+    new string[256];
     switch(lType)
     {
         case CAR_SAVE_OWNER:
         {
-            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `owner`='%d', `ownertype`='%d', `keys`='%d', `ranga`='%d' WHERE `UID`='%d'", CarData[lUID][c_Owner], CarData[lUID][c_OwnerType], CarData[lUID][c_Keys], CarData[lUID][c_Rang], CarData[lUID][c_UID]);
-            mysql_query(lStr);
+            format(string, sizeof(string), "UPDATE `mru_cars` SET `owner`='%d', `ownertype`='%d', `keys`='%d', `ranga`='%d' WHERE `UID`='%d'", CarData[lUID][c_Owner], CarData[lUID][c_OwnerType], CarData[lUID][c_Keys], CarData[lUID][c_Rang], CarData[lUID][c_UID]);
+            mysql_tquery(mruMySQL_Connection, string);
         }
         case CAR_SAVE_STATE:
         {
-            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `model`='%d', `x`='%f', `y`='%f', `z`='%f', `angle`='%.1f', `hp`='%.1f', `tires`='%d', `int`='%d', `vw`='%d' WHERE `UID`='%d'", CarData[lUID][c_Model], CarData[lUID][c_Pos][0], CarData[lUID][c_Pos][1], CarData[lUID][c_Pos][2], CarData[lUID][c_Rot], CarData[lUID][c_HP], CarData[lUID][c_Tires], CarData[lUID][c_Int], CarData[lUID][c_VW], CarData[lUID][c_UID]);
-            mysql_query(lStr);
+            format(string, sizeof(string), "UPDATE `mru_cars` SET `model`='%d', `x`='%f', `y`='%f', `z`='%f', `angle`='%.1f', `hp`='%.1f', `tires`='%d', `int`='%d', `vw`='%d' WHERE `UID`='%d'", CarData[lUID][c_Model], CarData[lUID][c_Pos][0], CarData[lUID][c_Pos][1], CarData[lUID][c_Pos][2], CarData[lUID][c_Rot], CarData[lUID][c_HP], CarData[lUID][c_Tires], CarData[lUID][c_Int], CarData[lUID][c_VW], CarData[lUID][c_UID]);
+            mysql_tquery(mruMySQL_Connection, string);
         }
         case CAR_SAVE_TUNE:
         {
-            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `color1`='%d', `color2`='%d', `nitro`='%d', `hydraulika`='%d', `felgi`='%d', `malunek`='%d', `spoiler`='%d', `bumper1`='%d', `bumper2`='%d', `neon`='%d' WHERE `UID`='%d'", CarData[lUID][c_Color][0],CarData[lUID][c_Color][1],CarData[lUID][c_Nitro],CarData[lUID][c_bHydraulika],CarData[lUID][c_Felgi],CarData[lUID][c_Malunek],CarData[lUID][c_Spoiler], CarData[lUID][c_Bumper][0], CarData[lUID][c_Bumper][1], CarData[lUID][c_Neon], CarData[lUID][c_UID]);
-            mysql_query(lStr);
+            format(string, sizeof(string), "UPDATE `mru_cars` SET `color1`='%d', `color2`='%d', `nitro`='%d', `hydraulika`='%d', `felgi`='%d', `malunek`='%d', `spoiler`='%d', `bumper1`='%d', `bumper2`='%d', `neon`='%d' WHERE `UID`='%d'", CarData[lUID][c_Color][0],CarData[lUID][c_Color][1],CarData[lUID][c_Nitro],CarData[lUID][c_bHydraulika],CarData[lUID][c_Felgi],CarData[lUID][c_Malunek],CarData[lUID][c_Spoiler], CarData[lUID][c_Bumper][0], CarData[lUID][c_Bumper][1], CarData[lUID][c_Neon], CarData[lUID][c_UID]);
+            mysql_tquery(mruMySQL_Connection, string);
         }
         default:
         {
@@ -802,65 +811,63 @@ IsAHeliModel(carid)
 
 Car_PrintOwner(car)
 {
-    new lStr[64];
+    new string[64];
     new type = CarData[car][c_OwnerType];
     switch(type)
     {
-        case INVALID_CAR_OWNER: lStr="Brak";
+        case INVALID_CAR_OWNER: string="Brak";
         case CAR_OWNER_FRACTION:
         {
-            format(lStr, sizeof(lStr), "%s", FractionNames[CarData[car][c_Owner]]);
+            format(string, sizeof(string), "%s", FractionNames[CarData[car][c_Owner]]);
         }
         case CAR_OWNER_FAMILY:
         {
-            format(lStr, sizeof(lStr), "%s", OrgInfo[orgID(CarData[car][c_Owner])][o_Name]);
+            format(string, sizeof(string), "%s", OrgInfo[orgID(CarData[car][c_Owner])][o_Name]);
         }
         case CAR_OWNER_PLAYER:
         {
-            format(lStr, sizeof(lStr), "SELECT `Nick` FROM mru_konta WHERE `UID`='%d'", CarData[car][c_Owner]);
-            mysql_query(lStr);
-            mysql_store_result();
-            if(mysql_num_rows())
+            format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `UID`='%d'", CarData[car][c_Owner]);
+            new Cache:result = mysql_query(mruMySQL_Connection, string, true);
+            if(cache_is_valid(result))
             {
-                mysql_fetch_row_format(lStr, "|");
-                mysql_free_result();
+                if(cache_num_rows())
+                {
+                    format(string, sizeof(string), "Nieistniej¹cy");
+                }
+                cache_delete(result);
             }
-			else
-			{
-				format(lStr, sizeof(lStr), "Nieistniej¹cy");
-			}
         }
         case CAR_OWNER_JOB:
         {
-            format(lStr, sizeof(lStr), "%s", JobNames[CarData[car][c_Owner]]);
+            format(string, sizeof(string), "%s", JobNames[CarData[car][c_Owner]]);
         }
         case CAR_OWNER_SPECIAL:
         {
             switch(CarData[car][c_Owner])
             {
-                case 1: lStr="Wypo¿yczalnia";
-                case 2: lStr="GoKart";
-                case 3: lStr="¯u¿el";
-                default: lStr="Brak";
+                case 1: string="Wypo¿yczalnia";
+                case 2: string="GoKart";
+                case 3: string="¯u¿el";
+                default: string="Brak";
             }
         }
         case CAR_OWNER_PUBLIC:
         {
-            lStr = "Brak";
+            string = "Brak";
         }
-        default: lStr="Brak";
+        default: string="Brak";
     }
-    return lStr;
+    return string;
 }
 
 ShowCarEditDialog(playerid)
 {
-    new lStr[512], car = GetPVarInt(playerid, "edit-car"), Float:lHP;
+    new string[512], car = GetPVarInt(playerid, "edit-car"), Float:lHP;
     if(CarData[car][c_ID] == 0) lHP = CarData[car][c_HP];
     else GetVehicleHealth(CarData[car][c_ID], lHP);
     new color1 = VehicleColoursTableRGBA[clamp(CarData[car][c_Color][0], 0, 255)], color2=VehicleColoursTableRGBA[clamp(CarData[car][c_Color][1], 0, 255)];
-    format(lStr, sizeof(lStr), "{FFFFFF}Model:\t\t{8FCB04}%d{FFFFFF}\t[ {8FCB04}%s {FFFFFF}]\nW³aœciciel:\t{8FCB04}%s{FFFFFF} » {8FCB04}%s{FFFFFF} (UID: {8FCB04}%d{FFFFFF})\nRanga:\t\t{8FCB04}%d{FFFFFF}\nOpis Pojazdu\nStan:\t\t{8FCB04}%.1f{FFFFFF}\%\nZaparkuj tutaj\nUsuñ kluczyki\n{%06x}Kolor I\n{%06x}Kolor II", CarData[car][c_Model], VehicleNames[CarData[car][c_Model]-400], CarOwnerNames[CarData[car][c_OwnerType]], Car_PrintOwner(car), CarData[car][c_Owner], CarData[car][c_Rang], lHP/10, RGBAtoRGB(color1), RGBAtoRGB(color2));
-    ShowPlayerDialogEx(playerid, D_EDIT_CAR_MENU, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdów", lStr, "Wybierz", "Wróæ");
+    format(string, sizeof(string), "{FFFFFF}Model:\t\t{8FCB04}%d{FFFFFF}\t[ {8FCB04}%s {FFFFFF}]\nW³aœciciel:\t{8FCB04}%s{FFFFFF} » {8FCB04}%s{FFFFFF} (UID: {8FCB04}%d{FFFFFF})\nRanga:\t\t{8FCB04}%d{FFFFFF}\nOpis Pojazdu\nStan:\t\t{8FCB04}%.1f{FFFFFF}\%\nZaparkuj tutaj\nUsuñ kluczyki\n{%06x}Kolor I\n{%06x}Kolor II", CarData[car][c_Model], VehicleNames[CarData[car][c_Model]-400], CarOwnerNames[CarData[car][c_OwnerType]], Car_PrintOwner(car), CarData[car][c_Owner], CarData[car][c_Rang], lHP/10, RGBAtoRGB(color1), RGBAtoRGB(color2));
+    ShowPlayerDialogEx(playerid, D_EDIT_CAR_MENU, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdów", string, "Wybierz", "Wróæ");
     return 1;
 }
 
