@@ -48,6 +48,19 @@ EasterEggs_Exist(id)
 	else return false;
 }
 
+EasterEggs_IsUID(id, uid, i)
+{
+	if(EasterEggs_Blocked[id][i] == uid) return true;
+	else return false;
+}
+
+EasterEggs_AddBlock(egg_id, uid)
+{
+	new id = EasterEggs_Blocked_ControlPoint[egg_id];
+	EasterEggs_Blocked[egg_id][id] = uid;
+	id++;
+}
+
 stock EasterEggs_GetFreeID()
 {
 	for(int i=0; i<EASTER_MAX_EGGS; i++)
@@ -85,9 +98,11 @@ EasterEggs_Delete(playerid, egg_id)
 		EasterEggs[egg_id][egg_x_pos] = 0.0;
 		DestroyDynamicObject(EasterEggs[egg_id][eggID]);
 		new string[120];
+		new id = EasterEggs_Blocked_ControlPoint[egg_id];
 		format(string, sizeof(string), "Admin %s usun¹³ jajko ID:[%d]", GetNick(playerid), egg_id);
 		SendMessageToAdmin(string, COLOR_P@);
-		// DODATKOWO ZEROWANIE LISTY OSÓB KTÓRE WZIE£Y TO JAJKO
+		for(new i=0; i<id; i++) EasterEggs_Blocked[egg_id][i] = 0;
+		id = 0;
 	}
 	else
 	{
@@ -120,9 +135,11 @@ stock EasterEggs_Create(playerid, Float:x, Float:y, Float:z, type)
 }
 stock EasterEggs_CanPickup(playerid, egg_id)
 {
-	// SKRYPT DO SPRAWDZANIA CZY GRACZ NIE PODNIÓS£ TEGO ID JAJKA! @Mrucznik
-	if(!EasterEggs_Exist(egg_id)) return 0;
-	return 1;
+	new maxegg = EasterEggs_Blocked_ControlPoint[egg_id];
+	new pUID = PlayerInfo[playerid][pUID];
+	for(int i=0; i<maxegg; i++) if(EasterEggs_IsUID(egg_id, pUID, i)) return false;
+	if(!EasterEggs_Exist(egg_id)) return false;
+	return true;
 }
 stock EasterEggs_Pickup(playerid, egg_id)
 {
@@ -153,8 +170,7 @@ stock EasterEggs_Pickup(playerid, egg_id)
 		format(string, sizeof(string), "[EasterEggs] %s podniós³ jajko wielkanocne.", GetNick(playerid));
 		SendMessageToAdmin(string, COLOR_P@);
 		Log(payLog, INFO, "[EasterEggs]Gracz %s podniós³ jajko z %d%s.", GetPlayerLogName(playerid), quantity, type);
-
-		// Skrypt do zapisu ¿eby gracz ju¿ nie podniós³ tego jajka 2gi raz.
+		EasterEggs_AddBlock(egg_id, PlayerInfo[playerid][pUID]);
 		return 1;
 	}
 	else
