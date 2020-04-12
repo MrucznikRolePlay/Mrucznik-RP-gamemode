@@ -38,6 +38,7 @@ YCMD:sprzedajbron(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pJob] == 9)
         {
+            if(GetPlayerOrg(playerid) == 21 && PlayerInfo[playerid][pRank] < 6) SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [6] w tej rodzinie.");
             new umiejetnosc;
             new skillz;
             new x_weapon[16],weapon[MAX_PLAYERS],ammo[MAX_PLAYERS],price[MAX_PLAYERS];
