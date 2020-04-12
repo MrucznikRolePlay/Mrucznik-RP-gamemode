@@ -56,7 +56,7 @@ MruMySQL_PobierzStatystyki(playerid, nickoruid[])
         SendClientMessage(playerid, COLOR_RED, lStr);
         format(lStr, sizeof(lStr), "Level: %d ¦ Kasa: %d ¦ Bank: %d ¦ Numer tel.: %d ¦ ZN: %d ¦ Dom: %d", plvl, pmoney, pbank, pnr, pzn, pdom);
         SendClientMessage(playerid, -1, lStr);
-        format(lStr, sizeof(lStr), "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d ¦ Warny: %d | Ban: %s", padmin, ppadmin, pzg, pbp, pblock, pwarn, stringban);
+        format(lStr, sizeof(lStr), "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d ¦ Warny: %d ¦ Ban: %s", padmin, ppadmin, pzg, pbp, pblock, pwarn, stringban);
         SendClientMessage(playerid, -1, lStr);
         format(lStr, sizeof(lStr), "Premium: %d ¦ Praca: %d ¦ Frakcja: %d ¦ Org.: %d", ppremium, pjob, pmember, porg);
         SendClientMessage(playerid, -1, lStr);
