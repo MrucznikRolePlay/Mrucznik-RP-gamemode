@@ -49,7 +49,7 @@ YCMD:zdejmijbpk(playerid, params[], help)
 		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcjaCzas] = 0;
 		KillTimer(komunikatTime[giveplayerid]);
 		format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania na komunikatach frakcyjnych", GetNickEx(playerid));
-		sendTipMessageEx(playerid, COLOR_P@, string);
+		sendTipMessageEx(giveplayerid, COLOR_P@, string);
 		format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s. Mo¿e on teraz swobodnie pisaæ komunikat frakcyjny", GetNickEx(playerid), GetNick(giveplayerid));
 		SendAdminMessage(COLOR_RED, string);
 		
