@@ -1451,6 +1451,10 @@ static Aliases()
 	//zaufanyggracz
 	Command_AddAltNamed("zaufanyggracz", "zg");
 
+	//zdejmijbpk
+	Command_AddAltNamed("zdejmijbpk", "zdejmijbp");
+	Command_AddAltNamed("zdejmijbpk", "unbp");
+
 	//wyloguj
 	Command_AddAltNamed("wyloguj", "logout");
 

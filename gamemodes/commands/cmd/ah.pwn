@@ -41,12 +41,12 @@ YCMD:ah(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /slap /aj /wybieralka /check /freeze /unfreeze /ucisz /kick");
         SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /ban /goto /spec /respawn /a(dmin) chat /cmdinfo /czyjtonumer");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /zdejmijbpk /unbw /checkbw /setvw /diagnoza /checktank");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1-2-3* PӣADMIN *** /unbp /unbw /checkbw /setvw /diagnoza /checktank");
     }
 	if (PlayerInfo[playerid][pNewAP] == 4)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /check /sban /sblock /goto /spec /a(dmin) chat");
-		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /zdejmijbpk /checktank");
+		SendClientMessage(playerid, COLOR_GRAD1, "*4* PӣADMIN *** /unbp /checktank");
 	}
     if (IsAScripter(playerid))
     {
@@ -55,7 +55,7 @@ YCMD:ah(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /mark /gotomark /gotocar /getcar /getposp");
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotols /gotoszpital /gotolv /gotosf /gotoin /gotostad /gotojet");
         SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /gotomechy /gotobank /gotostacja /checktank");
-		SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /zdejmijbpk /dajdowozu /specshow /setdrunk");
+		SendClientMessage(playerid, COLOR_GRAD1, "* SKRYPTER *** /unbp /dajdowozu /specshow /setdrunk");
     }
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
@@ -68,7 +68,7 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogodaall");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /czity /respawnplayer /respawncar /unbw /cmdinfo");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setcarint /czyjtonumer /checkbw /diagnoza");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /zdejmijbpk /dajdowozu /tod /agraffiti /banip /uid");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /unbp /dajdowozu /tod /agraffiti /banip /uid");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
