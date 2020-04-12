@@ -47,6 +47,11 @@ YCMD:wymiana(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ podczas @Duty");
 			return 1;
 		}
+		if(playerid == playa) 
+		{
+			sendErrorMessage(playerid, "Nie mo¿esz wymieniæ siê z samym sob¹.");
+			return 1;
+		}
         if(!IsPlayerConnected(playa)) return sendErrorMessage(playerid, "Brak takiego gracza.");
         if(!IsPlayerInAnyVehicle(playa)) return sendTipMessage(playerid, "Gracz musi byæ w pojeŸdzie.");
 		cena = FunkcjaK(string);

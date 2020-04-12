@@ -51,7 +51,8 @@ DiscordConnectInit()
 	g_FracChannel[16]=DCC_FindChannelById("696502619505426454"); //sanreich
 	g_FracChannel[17]=DCC_FindChannelById("696506926825078864"); //wps? puste
 	g_OrgChannel[1]=DCC_FindChannelById("696507102503632906"); //s¹d
-	g_OrgChannel[3]=DCC_FindChannelById("697175866547109899 "); //rodzin 
+	g_OrgChannel[3]=DCC_FindChannelById("697175866547109899"); //rodzin 
+	g_OrgChannel[7]=DCC_FindChannelById("698090550066282536");
 
 
 	return 1;
