@@ -55,7 +55,7 @@ CMD:lina(playerid, cmdtext[])
         format(string, sizeof(string), "* %s opuszcza siê na linie z helikoptera.", sendername);
         ProxDetector(60.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         for(new i=0;i!=10;i++) ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
-        SetTimerEx("syncanim",DUR,0,"i",playerid);
+        SetTimerEx("syncanim", 250, 0, "if", playerid, pl_pos[playerid][4]);
     }
     else
     {
