@@ -38,6 +38,7 @@ CMD:lina(playerid, cmdtext[])
     if(IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetVehicleModel(GetPlayerVehicleID(playerid))) && GetPVarInt(playerid,"roped") == 0)
     {
         if(GetPlayerVehicleSeat(playerid) == 0) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Jesteœ pilotem! Tylko pasa¿erowie mog¹ spuœciæ siê po linie."); 
+        if(IsPlayerInRangeOfPoint(playerid, 20.0, 2866.0037, -1585.6312, 22.3482)) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "W tym miejscu nie mo¿na u¿yæ liny."); 
         new sendername[MAX_PLAYER_NAME], string[144];
         GetPlayerName(playerid, sendername, sizeof(sendername));
         GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
