@@ -31,19 +31,19 @@
 
 //-------<[ include ]>-------
 #include "lkiz\lkiz.pwn"
-#include "hq\hq.pwn"
 #include "fpanel\fpanel.pwn"
 #include "usunopis\usunopis.pwn"
 #include "opis\opis.pwn"
+#include "hq\hq.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_lkiz();
-    command_hq();
     command_fpanel();
     command_usunopis();
     command_opis();
+    command_hq();
     
 }

@@ -30,44 +30,44 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "quitbusiness\quitbusiness.pwn"
-#include "bizlock\bizlock.pwn"
-#include "biz\biz.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "obiz\obiz.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "biznespomoc\biznespomoc.pwn"
 #include "bizinfo\bizinfo.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "gotobiz\gotobiz.pwn"
 #include "zabierzbiznes\zabierzbiznes.pwn"
+#include "gotobiz\gotobiz.pwn"
+#include "usunbiznes\usunbiznes.pwn"
+#include "quitbusiness\quitbusiness.pwn"
+#include "kupbiznes\kupbiznes.pwn"
+#include "panelbiznesu\panelbiznesu.pwn"
 #include "stworzbiznes\stworzbiznes.pwn"
+#include "biz\biz.pwn"
+#include "edytujbiznes\edytujbiznes.pwn"
+#include "zlomujbiznes\zlomujbiznes.pwn"
+#include "sprzedajbiznes\sprzedajbiznes.pwn"
+#include "dajbiznes\dajbiznes.pwn"
+#include "bizlock\bizlock.pwn"
+#include "obiz\obiz.pwn"
+#include "biznespomoc\biznespomoc.pwn"
+#include "bpracownicy\bpracownicy.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_quitbusiness();
-    command_bizlock();
-    command_biz();
-    command_sprzedajbiznes();
-    command_usunbiznes();
-    command_dajbiznes();
-    command_panelbiznesu();
-    command_zlomujbiznes();
-    command_kupbiznes();
-    command_obiz();
-    command_edytujbiznes();
-    command_biznespomoc();
     command_bizinfo();
-    command_bpracownicy();
-    command_gotobiz();
     command_zabierzbiznes();
+    command_gotobiz();
+    command_usunbiznes();
+    command_quitbusiness();
+    command_kupbiznes();
+    command_panelbiznesu();
     command_stworzbiznes();
+    command_biz();
+    command_edytujbiznes();
+    command_zlomujbiznes();
+    command_sprzedajbiznes();
+    command_dajbiznes();
+    command_bizlock();
+    command_obiz();
+    command_biznespomoc();
+    command_bpracownicy();
     
 }
