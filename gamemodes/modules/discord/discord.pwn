@@ -31,7 +31,7 @@ DiscordConnectInit()
 {
 	g_SanNewsChannelId=DCC_FindChannelById("696491963582513272"); //ig-san-news
 	g_AdminChannelId=DCC_FindChannelById("696501357208797214"); //ig-admin
-	g_ReportChannelId=DCC_FindChannelById("696501866812407888"); //ig-report
+	g_ReportChannelId=DCC_FindChannelById("697009695495422012"); //ig-report
 
 	g_FracChannel[1]=DCC_FindChannelById("696503084230246441"); //lspd
 	g_FracChannel[2]=DCC_FindChannelById("696502567944847410"); //fbi
@@ -45,12 +45,14 @@ DiscordConnectInit()
 	g_FracChannel[10]=DCC_FindChannelById("696503261557162095"); //kt
 	g_FracChannel[11]=DCC_FindChannelById("696503517099065434"); //dmv
 	g_FracChannel[12]=DCC_FindChannelById("696502501377310750"); //groove
-	g_FracChannel[13]=DCC_FindChannelById("696503206791872572"); //89-border society
+	g_FracChannel[13]=DCC_FindChannelById("696840092404154418"); //89-border society (crackville)
 	g_FracChannel[14]=DCC_FindChannelById("696506988313444402"); //northenos
 	g_FracChannel[15]=DCC_FindChannelById("696506868050165810"); //nightmare adrenaline
 	g_FracChannel[16]=DCC_FindChannelById("696502619505426454"); //sanreich
 	g_FracChannel[17]=DCC_FindChannelById("696506926825078864"); //wps? puste
 	g_OrgChannel[1]=DCC_FindChannelById("696507102503632906"); //s¹d
+	g_OrgChannel[3]=DCC_FindChannelById("697175866547109899"); //rodzin 
+	g_OrgChannel[7]=DCC_FindChannelById("698090550066282536");
 
 
 	return 1;

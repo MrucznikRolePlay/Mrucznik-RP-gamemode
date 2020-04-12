@@ -53,7 +53,6 @@ YCMD:maska(playerid, params[], help)
 			{
 				if(OnDutyCD[playerid] != 1 && OnDuty[playerid] != 1) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Najpierw u¿yj /duty !");
 				if(GetPlayerSkin(playerid) != 285) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "¯eby u¿yæ maski musisz mieæ skin SWAT (/swat)");
-				sendErrorMessage(playerid, "OSTRZE¯ENIE: Nadu¿ywanie maski skutkuje natychmiastowym wyrzuceniem z frakcji.");
 			}
 		}
 		if(AntySpam[playerid] == 1)
@@ -99,6 +98,7 @@ YCMD:maska(playerid, params[], help)
 				format(PlayerInfo[playerid][pNick], 24, "%s", pName);
 				SetPVarString(playerid, "maska_nick", sendername);
 				Log(nickLog, INFO, "Gracz %s za³o¿y³ maskê %s", GetPlayerLogName(playerid), pName);
+				sendErrorMessage(playerid, "OSTRZE¯ENIE: Nadu¿ywanie maski skutkuje natychmiastowym wyrzuceniem z frakcji.");
 			}
 		
 		} 
