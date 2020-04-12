@@ -50,19 +50,43 @@ MruMySQL_PobierzStatystyki(playerid, nickoruid[])
             cache_get_value_index_int(0, 14, pzn);
             cache_get_value_index_int(0, 15, pwarn);
             cache_get_value_index_int(0, 16, puid);
-
-            format(lStr, sizeof(lStr), "> %s {FFFFFF}(UID: %d)", nick_escaped, puid);
-            SendClientMessage(playerid, COLOR_RED, lStr);
-            format(lStr, sizeof(lStr), "Level: %d ¦ Kasa: %d ¦ Bank: %d ¦ Numer tel.: %d ¦ ZN: %d ¦ Dom: %d", plvl, pmoney, pbank, pnr, pzn, pdom);
-            SendClientMessage(playerid, -1, lStr);
-            format(lStr, sizeof(lStr), "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d : Warny: %d", padmin, ppadmin, pzg, pbp, pblock, pwarn);
-            SendClientMessage(playerid, -1, lStr);
-            format(lStr, sizeof(lStr), "Premium: %d ¦ Praca: %d ¦ Frakcja: %d ¦ Org.: %d", ppremium, pjob, pmember, porg);
-            SendClientMessage(playerid, -1, lStr);
-            SendClientMessage(playerid, COLOR_YELLOW, "--------------------------------------------------------------------------");
         }
 		cache_delete(result);
+            sscanf(query2, "p<|>ds[32]s[64]", typ, admin, powod);
     }
+
+    new banstring[144]; 
+    format(lStr, sizeof(lStr), "SELECT `typ`, `nadal`, `powod` FROM `mru_bany` WHERE `dostal`='%s' ORDER BY `czas` DESC LIMIT 1", pnickname);
+    result = mysql_query(mruMySQL_Connection, lStr, true);
+    if(cache_is_valid(result))
+    {
+        if(cache_num_rows() > 0)
+        {
+            new typ, powod[64], admin[32];
+            cache_get_value_index_int(0, 0, typ);
+            cache_get_value_index(0, 1, admin);
+            cache_get_value_index(0, 2, powod);
+            if(typ == WARN_BAN)
+            {
+                format(stringban, sizeof(stringban), "{FF0000}(%s) od %s", powod, admin);
+            }
+            else
+            {
+                format(stringban, sizeof(stringban), "{00FF00}brak");
+            }
+        }
+        cache_delete(result);
+    }
+
+    format(lStr, sizeof(lStr), "> %s {FFFFFF}(UID: %d)", nick_escaped, puid);
+    SendClientMessage(playerid, COLOR_RED, lStr);
+    format(lStr, sizeof(lStr), "Level: %d ¦ Kasa: %d ¦ Bank: %d ¦ Numer tel.: %d ¦ ZN: %d ¦ Dom: %d", plvl, pmoney, pbank, pnr, pzn, pdom);
+    SendClientMessage(playerid, -1, lStr);
+    format(lStr, sizeof(lStr), "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d ¦ Warny: %d ¦ Ban: %s", padmin, ppadmin, pzg, pbp, pblock, pwarn, banstring);
+    SendClientMessage(playerid, -1, lStr);
+    format(lStr, sizeof(lStr), "Premium: %d ¦ Praca: %d ¦ Frakcja: %d ¦ Org.: %d", ppremium, pjob, pmember, porg);
+    SendClientMessage(playerid, -1, lStr);
+    SendClientMessage(playerid, COLOR_YELLOW, "--------------------------------------------------------------------------");
 }
 
 MruMySQL_ZnajdzBanaPoIP(playerid, ip[])
