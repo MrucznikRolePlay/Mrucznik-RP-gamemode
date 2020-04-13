@@ -34,7 +34,7 @@ stock EasterEggs_CanUse(playerid)
 	{
 		if(IsAHeadAdmin(playerid)) return 1;
 		if(IsAMCGiver(playerid)) return 1;
-		for(int i=0; i<3; i++)
+		for(new i=0; i<3; i++)
 		{
 			if(PlayerInfo[playerid][pUID] == EasterEggsAdminUID[i]) return 1;
 		}
@@ -63,7 +63,7 @@ EasterEggs_AddBlock(egg_id, uid)
 
 stock EasterEggs_GetFreeID()
 {
-	for(int i=0; i<EASTER_MAX_EGGS; i++)
+	for(new i=0; i<EASTER_MAX_EGGS; i++)
 	{
 		if(!EasterEggs_Exist(i))
 		{
@@ -136,8 +136,8 @@ stock EasterEggs_Create(playerid, Float:x, Float:y, Float:z, type)
 stock EasterEggs_CanPickup(playerid, egg_id)
 {
 	new maxegg = EasterEggs_Blocked_ControlPoint[egg_id];
-	new pUID = PlayerInfo[playerid][pUID];
-	for(int i=0; i<maxegg; i++) if(EasterEggs_IsUID(egg_id, pUID, i)) return false;
+	new uid = PlayerInfo[playerid][pUID];
+	for(new i=0; i<maxegg; i++) if(EasterEggs_IsUID(egg_id, uid, i)) return false;
 	if(!EasterEggs_Exist(egg_id)) return false;
 	return true;
 }
@@ -145,7 +145,7 @@ stock EasterEggs_Pickup(playerid, egg_id)
 {
 	if(EasterEggs_Setting_Started == 0)
 	{
-		SendClientMessage(playerid, COLOR_GRAY, "Event siê jeszcze nie rozpocz¹³.");
+		SendClientMessage(playerid, COLOR_GREY, "Event siê jeszcze nie rozpocz¹³.");
 		return 0;
 	}
 	if(EasterEggs_CanPickup(playerid, egg_id))
@@ -164,7 +164,7 @@ stock EasterEggs_Pickup(playerid, egg_id)
 			PremiumInfo[playerid][pMC] += quantity;
 			MruMySQL_SaveMc(playerid);
 		}
-		SendClientMessage(playerid, COLOR_LIGHTGREEN, "Podnios³eœ jajko wielkanocne!")
+		SendClientMessage(playerid, COLOR_LIGHTGREEN, "Podnios³eœ jajko wielkanocne!");
 		format(string, sizeof(string), "Twoja nagroda to %d%s!", quantity, type);
 		SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
 		format(string, sizeof(string), "[EasterEggs] %s podniós³ jajko wielkanocne.", GetNick(playerid));
@@ -175,7 +175,7 @@ stock EasterEggs_Pickup(playerid, egg_id)
 	}
 	else
 	{
-		SendClientMessage(playerid, COLOR_GRAY, "Podnios³eœ ju¿ to jajko.");
+		SendClientMessage(playerid, COLOR_GREY, "Podnios³eœ ju¿ to jajko.");
 		return 0;
 	}
 }

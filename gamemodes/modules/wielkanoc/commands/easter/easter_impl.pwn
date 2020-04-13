@@ -43,18 +43,19 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
         }
         if(strcmp(opcja,"goto",true) == 0)
         {
-            if(strcmp(opcja2,"none", true) == 0) SendTipMessage(playerid, "Wpisz ID jajka.");
+            if(strcmp(opcja2,"none", true) == 0) sendTipMessage(playerid, "Wpisz ID jajka.");
             else
             {
-                new id = valstr(opcja2);
+                new id;
+                valstr(opcja2, id);
                 if(EasterEggs_Exist(id))
                 {
                     Wchodzenie(playerid);
-                    SetPlayerVirtualWorld(EasterEgg[id][eggVW]);
-                    SetPlayerInterior(EasterEgg[id][eggINT]);
-                    SetPlayerPos(playerid, EasterEgg[id][egg_x_pos], EasterEgg[id][egg_y_pos], EasterEgg[id][egg_z_pos]);
+                    SetPlayerVirtualWorld(playerid, EasterEggs[id][eggVW]);
+                    SetPlayerInterior(playerid, EasterEggs[id][eggINT]);
+                    SetPlayerPos(playerid, EasterEggs[id][egg_x_pos], EasterEggs[id][egg_y_pos], EasterEggs[id][egg_z_pos]);
                 }
-                else SendTipMessage(playerid, "Jajko nie istnieje.");
+                else sendTipMessage(playerid, "Jajko nie istnieje.");
             }
         }
         if(strcmp(opcja,"setmc",true) == 0)
@@ -81,7 +82,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
         }
         if(strcmp(opcja,"stworz",true) == 0)
         {
-            new value, Float:x, Float:y, Float:z;
+            new Float:x, Float:y, Float:z;
             GetPlayerPos(playerid, x, y, z);
             if(strcmp(opcja2,"mc",true) == 0)
             {
@@ -104,7 +105,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
                 }
                 else
                 {
-                    SendTipMessage(playerid, "Nie znaleziono jajka w pobli¿u.");
+                    sendTipMessage(playerid, "Nie znaleziono jajka w pobli¿u.");
                 }
             }
             else EasterEggs_Delete(playerid, strval(opcja2));
