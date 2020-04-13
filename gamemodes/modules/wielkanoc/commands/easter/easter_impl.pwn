@@ -46,8 +46,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
             if(strcmp(opcja2,"none", true) == 0) sendTipMessage(playerid, "Wpisz ID jajka.");
             else
             {
-                new id;
-                valstr(opcja2, id);
+                new id = opcja2;
                 if(EasterEggs_Exist(id))
                 {
                     Wchodzenie(playerid);
@@ -61,23 +60,25 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
         if(strcmp(opcja,"setmc",true) == 0)
         {
             new value, string[128];
-            value = strval(opcja2);
+            value = opcja2;
             if(value < 0 || value > EASTER_MAX_MCOINS) SendClientMessage(playerid, COLOR_RED, "Za wysoka kwota MC!");
             else
             {
                 format(string, sizeof(string), "[EasterEgg]Admin %s ustawi³ nagrodê MC w wysokoœci %dMC!", GetNick(playerid), value);
                 SendMessageToAdmin(string, COLOR_P@); 
+                EasterEggs_Setting_MCOINS = value;
             }
         }
         if(strcmp(opcja,"setcash",true) == 0)
         {
             new value, string[128];
-            value = strval(opcja2);
+            value = opcja2;
             if(value < 0 || value > EASTER_MAX_CASH) SendClientMessage(playerid, COLOR_RED, "Za wysoka kwota!");
             else
             {
                 format(string, sizeof(string), "[EasterEgg]Admin %s ustawi³ nagrodê pieniê¿n¹ %d$!", GetNick(playerid), value);
                 SendMessageToAdmin(string, COLOR_P@);
+                EasterEggs_Setting_CASH = value;
             }
         }
         if(strcmp(opcja,"stworz",true) == 0)
@@ -108,7 +109,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
                     sendTipMessage(playerid, "Nie znaleziono jajka w pobli¿u.");
                 }
             }
-            else EasterEggs_Delete(playerid, strval(opcja2));
+            else EasterEggs_Delete(playerid, opcja2);
         }
     }
     return 1;
