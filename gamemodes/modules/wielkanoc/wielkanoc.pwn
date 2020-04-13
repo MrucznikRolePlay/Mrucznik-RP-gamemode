@@ -56,7 +56,7 @@ EasterEggs_IsUID(egg_id, uid)
 
 EasterEggs_AddBlock(egg_id, uid)
 {
-	VECTOR_set_val(EasterEggs[egg_id][VZebrali], uid);
+	VECTOR_push_back_val(EasterEggs[egg_id][VZebrali], uid);
 }
 
 stock EasterEggs_GetFreeID()
@@ -144,7 +144,7 @@ stock EasterEggs_Pickup(playerid, egg_id)
 		SendClientMessage(playerid, COLOR_GREY, "Event jest wy³¹czony!");
 		return 0;
 	}
-	if(EasterEggs_CanPickup(playerid, egg_id) == true)
+	if(EasterEggs_CanPickup(playerid, egg_id))
 	{
 		new string[120], type[5], quantity;
 		if(EasterEggs[egg_id][eggTYPE] == 1)

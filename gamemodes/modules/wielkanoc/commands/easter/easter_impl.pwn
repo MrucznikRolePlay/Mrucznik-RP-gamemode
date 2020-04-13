@@ -50,7 +50,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
             if(strcmp(opcja2,"none", true) == 0) sendTipMessage(playerid, "Wpisz ID jajka.");
             else
             {
-                new id = opcja2;
+                new id = strval(opcja2);
                 if(EasterEggs_Exist(id))
                 {
                     Wchodzenie(playerid);
@@ -65,7 +65,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
         if(strcmp(opcja,"setmc",true) == 0)
         {
             new value, string[128];
-            value = opcja2;
+            value = strval(opcja2);
             if(value < 0 || value > EASTER_MAX_MCOINS) SendClientMessage(playerid, COLOR_RED, "Za wysoka kwota MC!");
             else
             {
@@ -78,7 +78,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
         if(strcmp(opcja,"setcash",true) == 0)
         {
             new value, string[128];
-            value = opcja2;
+            value = strval(opcja2);
             if(value < 0 || value > EASTER_MAX_CASH) SendClientMessage(playerid, COLOR_RED, "Za wysoka kwota!");
             else
             {
