@@ -8303,25 +8303,16 @@ public OPCLogin(playerid)
     new result;
     result = MruMySQL_DoesAccountExist(nick);
 	//Sprawdzanie czy konto istnieje:
-	if(result == -1 || result == 1) //logowanie
+	if(result) //logowanie
 	{
         //Logowanie
+		PlayerInfo[playerid][pUID] = result;
 		new string[256];
 		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na serwerze Mrucznik Role Play! Zaloguj siê aby rozpocz¹æ grê.");
 		format(string, sizeof(string), "Nick %s jest zarejestrowany.\nZaloguj siê wpisuj¹c w okienko poni¿ej has³o.\nJeœli nie znasz has³a do tego konta, wejdŸ pod innym nickiem", nick);
 		ShowPlayerDialogEx(playerid, D_LOGIN, DIALOG_STYLE_PASSWORD, "Logowanie", string, "Zaloguj", "WyjdŸ");
 		gPlayerAccount[playerid] = 1; //logowanie
 	}
-    else if(result == -999)
-    {
-        new string[256];
-		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na serwerze Mrucznik Role Play! Zaloguj siê aby rozpocz¹æ grê.");
-		format(string, sizeof(string), "Nick podobny do %s jest zarejestrowany.\n{FF0000}Podobny nick jest ju¿ w bazie, sprawdŸ wielkosæ znaków.", nick);
-        SendClientMessage(playerid, COLOR_RED, string);
-        SendClientMessage(playerid, COLOR_RED, string);
-        SendClientMessage(playerid, COLOR_RED, string);
-        KickEx(playerid);
-    }
 	else //rejestracja
 	{
         if(VAR_MySQLREGISTER)

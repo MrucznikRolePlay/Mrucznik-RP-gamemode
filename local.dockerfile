@@ -1,16 +1,3 @@
-# build stage
-FROM southclaws/sampctl as builder
-
-ENV SAMPCTL_GITHUB_TOKEN=1dd34de10953ad0a125f021b8fe16e403db5c870
-
-COPY . /samp
-
-WORKDIR /samp
-
-RUN sampctl package ensure
-RUN sampctl package build
-
-# server
 FROM southclaws/sampctl as server
 
 ARG GIT_COMMIT
@@ -28,13 +15,13 @@ COPY ./log-config.yml /samp/log-config.yml
 COPY ./mysql.ini /samp/mysql.ini
 COPY ./samp.json /samp/samp.json
 COPY ./scriptfiles /samp/scriptfiles
-COPY --from=builder /samp/gamemodes/Mrucznik-RP.amx /samp/gamemodes/Mrucznik-RP.amx
 
 RUN sampctl server ensure
 RUN cd scriptfiles && ln -s .. DANGEROUS_SERVER_ROOT
 
 VOLUME /samp/scriptfiles
 VOLUME /samp/logs
+VOLUME /samp/gamemodes/Mrucznik-RP.amx
 
 ENTRYPOINT ["sampctl"]
 CMD ["server", "run"]

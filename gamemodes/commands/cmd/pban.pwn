@@ -54,7 +54,7 @@ YCMD:pban(playerid, params[], help)
 			    sendErrorMessage(playerid, "Nie mo¿esz zbanowaæ tego gracza (jest online (na serwerze))");
 				return 1;
 			}
-            if(MruMySQL_DoesAccountExist(nick) != -1)
+            if(!MruMySQL_DoesAccountExist(nick))
 			{
 				sendErrorMessage(playerid, "Brak pliku gracza, nie mo¿na zbanowaæ (konto nie istnieje).");
 				return 1;

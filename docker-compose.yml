@@ -2,14 +2,16 @@ version: "3"
 
 services:
   samp:
-    image: mrucznik/mrucznik-rp:v2.6
-    build: .
-    # volumes:
-    #   - ./scriptfiles:/root/.samp/runtime/0.3.DL/scriptfiles
-    #   - ./mysql.ini:/root/.samp/runtime/0.3.DL/mysql.ini
-    #   - ./log-config.yml:/root/.samp/runtime/0.3.DL/log-config.yml
-    #   - ./logs:/root/.samp/runtime/0.3.DL/logs
+    image: mrucznik/mrucznik-rp:latest
+    build: 
+      context: .
+      dockerfile: local.dockerfile
     command: ["server", "run", "--dir", "/samp"]
+    volumes:
+      - ./scriptfiles:/samp/scriptfiles
+      - ./logs:/samp/logs
+      - ./db:/samp/db
+      - ./gamemodes/Mrucznik-RP.amx:/samp/gamemodes/Mrucznik-RP.amx
     expose:
       - "7777/udp"
     ports:
@@ -36,6 +38,19 @@ services:
         aliases:
           - mysqld
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+    networks:
+      - intranet
+    depends_on:
+      - mysqld
+
   # migrations:
   #   image: mysql_migration
   #   volumes:
@@ -52,19 +67,6 @@ services:
   #     intranet:
   #       aliases:
   #         - migrations
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      - PMA_ARBITRARY=1
-    ports:
-      - 8080:80
-    volumes:
-      - /sessions
-    networks:
-      - intranet
-    depends_on:
-      - mysqld
 
 networks:
   intranet:

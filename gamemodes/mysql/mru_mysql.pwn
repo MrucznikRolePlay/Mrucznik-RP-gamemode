@@ -5,7 +5,14 @@ MruMySQL_Init()
 	#if DEBUG_MODE == 1
 		mysql_log(ALL);
 	#else
-		mysql_log(WARNING | ERROR);
+		if(DEVELOPMENT)
+		{
+			mysql_log(DEBUG | INFO | WARNING | ERROR);
+		}
+		else
+		{
+			mysql_log(WARNING | ERROR);
+		}
 	#endif
 
 	mysql_global_options(DUPLICATE_CONNECTIONS, false);
@@ -205,6 +212,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     }
 
 	new query[1024];
+	new UID = PlayerInfo[playerid][pUID];
 
 	if(forcegmx == false)
 	{
@@ -229,9 +237,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	new oldRank = PlayerInfo[playerid][pRank];
 	PlayerInfo[playerid][pRank] = (gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]);
 	PlayerInfo[playerid][pConnected] = forcequit ? 0 : 2;
-	new fault = orm_update(PlayerInfo[playerid][pORM]);
+	new fault = orm_update(PlayerInfo[playerid][pORM], "OnPlayerAccountSaved", "dd", playerid, forcequit);
 	PlayerInfo[playerid][pRank] = oldRank;
-	if(forcequit) orm_destroy(PlayerInfo[playerid][pORM]);
 
 	format(query, sizeof(query), "UPDATE `mru_personalization` SET \
 		`KontoBankowe` = '%d', \
@@ -261,7 +268,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 		PlayerPersonalization[playerid][PERS_NEWNICK],
 		PlayerPersonalization[playerid][PERS_NEWBIE],
 		PlayerPersonalization[playerid][PERS_GUNSCROLL],
-		PlayerInfo[playerid][pUID]); 
+		UID); 
 	mysql_tquery(mruMySQL_Connection, query);
 
 	MruMySQL_SaveMc(playerid);
@@ -278,10 +285,17 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	return fault;
 }
 
+forward OnPlayerAccountSaved(playerid, forcequit);
+public OnPlayerAccountSaved(playerid, forcequit)
+{
+	if(forcequit) orm_destroy(PlayerInfo[playerid][pORM]);
+	return 1;
+}
+
 public MruMySQL_LoadAccount(playerid)
 {
 	MruMySQL_CreateKontaORM(playerid);
-	new fault = orm_load(PlayerInfo[playerid][pORM]);
+	new fault = orm_load(PlayerInfo[playerid][pORM], "OnPlayerAccountLoaded", "d", playerid);
 
 	loadKamiPos(playerid);
 
@@ -369,7 +383,12 @@ MruMySQL_CreateAccount(playerid, password[])
 	randomString(salt, sizeof(salt));
 	WP_Hash(hash, sizeof(hash), sprintf("%s%s%s", ServerSecret, password, salt));
 	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`, `Salt`) VALUES ('%s', '%s', '%s')", GetNickEx(playerid), hash, salt);
-	mysql_query(mruMySQL_Connection, query);
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
+	if(cache_is_valid(result))
+	{
+		PlayerInfo[playerid][pUID] = cache_insert_id();
+		cache_delete(result);
+	}
 	return 1;
 }
 
@@ -428,7 +447,7 @@ MruMySQL_DeleteOpis(uid, typ)
 MruMySQL_LoadAccess(playerid)
 {
 	new query[128];
-	format(query, sizeof(query), "SELECT CAST(`FLAGS` AS UNSIGNED) AS `FLAGS` FROM `mru_uprawnienia` WHERE `UID`=%d", PlayerInfo[playerid][pUID]);
+	format(query, sizeof(query), "SELECT `FLAGS` FROM `mru_uprawnienia` WHERE `UID`=%d", PlayerInfo[playerid][pUID]);
 
 	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 
@@ -441,26 +460,19 @@ MruMySQL_LoadAccess(playerid)
     return 1;
 }
 
-
+//returns 0 if not exists, account uid if exits
 MruMySQL_DoesAccountExist(nick[])
 {
 	new string[128];
-	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT (BINARY `Nick` = '%e') AS CASE_CHECK FROM `mru_konta` WHERE `Nick` = '%e'", nick, nick);
+	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT `UID` FROM `mru_konta` WHERE `Nick` = BINARY '%e'", nick);
 	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 	if(cache_is_valid(result))
     {
 		if(cache_num_rows() > 0)
 		{
-			new caseCheck;
-			cache_get_value_index_int(0, 0, caseCheck);
-			if(caseCheck)
-			{
-				return 1;
-			}
-			else
-			{
-				return -1;
-			}
+			new uid;
+			cache_get_value_index_int(0, 0, uid);
+			return uid;
 		}
 		cache_delete(result);
 	}

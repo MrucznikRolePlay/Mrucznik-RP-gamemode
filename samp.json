@@ -20,7 +20,7 @@
     "echo": "-",
     "rcon_password": "funiol",
     "port": 7777,
-    "hostname": "!PL! Mrucznik Role Play - local development !PL!",
+    "hostname": "!PL! Mrucznik Role Play - development server !PL!",
     "maxplayers": 1000,
     "language": "Polski",
     "mapname": "San Andreas",
