@@ -43,7 +43,7 @@ new EasterEggs_Setting_MCOINS = EASTER_MAX_MCOINS;
 new EasterEggs_Setting_Started = 0;
 
 new EasterEggs_Blocked[EASTER_MAX_EGGS][3000];
-new EasterEggs_Blocked_ControlPoint[EASTER_MAX_EGGS];
+new EasterEggs_Blocked_ControlPoint[EASTER_MAX_EGGS] = 0;
 //------------------<[ Forwardy: ]>--------------------
 
 //end

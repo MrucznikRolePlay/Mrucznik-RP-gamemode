@@ -48,9 +48,9 @@ EasterEggs_Exist(id)
 	else return false;
 }
 
-EasterEggs_IsUID(id, uid, i)
+EasterEggs_IsUID(egg_id, uid, i)
 {
-	if(EasterEggs_Blocked[id][i] == uid) return true;
+	if(EasterEggs_Blocked[egg_id][i] == uid) return true;
 	else return false;
 }
 
@@ -58,7 +58,7 @@ EasterEggs_AddBlock(egg_id, uid)
 {
 	new id = EasterEggs_Blocked_ControlPoint[egg_id];
 	EasterEggs_Blocked[egg_id][id] = uid;
-	id++;
+	EasterEggs_Blocked_ControlPoint[egg_id]++;
 }
 
 stock EasterEggs_GetFreeID()
@@ -138,19 +138,18 @@ stock EasterEggs_CanPickup(playerid, egg_id)
 	new maxegg = EasterEggs_Blocked_ControlPoint[egg_id];
 	new uid = PlayerInfo[playerid][pUID];
 	for(new i=0; i<maxegg; i++) if(EasterEggs_IsUID(egg_id, uid, i)) return false;
-	if(!EasterEggs_Exist(egg_id)) return false;
 	return true;
 }
 stock EasterEggs_Pickup(playerid, egg_id)
 {
 	if(EasterEggs_Setting_Started == 0)
 	{
-		SendClientMessage(playerid, COLOR_GREY, "Event siê jeszcze nie rozpocz¹³.");
+		SendClientMessage(playerid, COLOR_GREY, "Event jest wy³¹czony!");
 		return 0;
 	}
-	if(EasterEggs_CanPickup(playerid, egg_id))
+	if(EasterEggs_CanPickup(playerid, egg_id) == true)
 	{
-		new string[120], type[2], quantity;
+		new string[120], type[5], quantity;
 		if(EasterEggs[egg_id][eggTYPE] == 1)
 		{
 			format(type, sizeof(type), "$");
@@ -167,7 +166,7 @@ stock EasterEggs_Pickup(playerid, egg_id)
 		SendClientMessage(playerid, COLOR_LIGHTGREEN, "Podnios³eœ jajko wielkanocne!");
 		format(string, sizeof(string), "Twoja nagroda to %d%s!", quantity, type);
 		SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
-		format(string, sizeof(string), "[EasterEggs] %s podniós³ jajko wielkanocne.", GetNick(playerid));
+		format(string, sizeof(string), "[EasterEggs] %s podniós³ jajko wielkanocne z $d%s.", GetNick(playerid), quantity, type);
 		SendMessageToAdmin(string, COLOR_P@);
 		Log(payLog, INFO, "[EasterEggs]Gracz %s podniós³ jajko z %d%s.", GetPlayerLogName(playerid), quantity, type);
 		EasterEggs_AddBlock(egg_id, PlayerInfo[playerid][pUID]);
