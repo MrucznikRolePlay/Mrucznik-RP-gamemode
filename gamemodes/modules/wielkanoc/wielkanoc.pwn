@@ -48,17 +48,15 @@ EasterEggs_Exist(id)
 	else return false;
 }
 
-EasterEggs_IsUID(egg_id, uid, i)
+EasterEggs_IsUID(egg_id, uid)
 {
-	if(EasterEggs_Blocked[egg_id][i] == uid) return true;
+	if(VECTOR_find_val(EasterEggs[egg_id][VZebrali], uid) != INVALID_VECTOR_INDEX) return true;
 	else return false;
 }
 
 EasterEggs_AddBlock(egg_id, uid)
 {
-	new id = EasterEggs_Blocked_ControlPoint[egg_id];
-	EasterEggs_Blocked[egg_id][id] = uid;
-	EasterEggs_Blocked_ControlPoint[egg_id]++;
+	VECTOR_set_val(EasterEggs[egg_id][VZebrali], uid);
 }
 
 stock EasterEggs_GetFreeID()
@@ -98,11 +96,9 @@ EasterEggs_Delete(playerid, egg_id)
 		EasterEggs[egg_id][egg_x_pos] = 0.0;
 		DestroyDynamicObject(EasterEggs[egg_id][eggID]);
 		new string[120];
-		new id = EasterEggs_Blocked_ControlPoint[egg_id];
 		format(string, sizeof(string), "Admin %s usun¹³ jajko ID:[%d]", GetNick(playerid), egg_id);
 		SendMessageToAdmin(string, COLOR_P@);
-		for(new i=0; i<id; i++) EasterEggs_Blocked[egg_id][i] = 0;
-		id = 0;
+		VECTOR_clear(EasterEggs[egg_id][VZebrali]);
 	}
 	else
 	{
@@ -130,15 +126,15 @@ stock EasterEggs_Create(playerid, Float:x, Float:y, Float:z, type)
 		EasterEggs[egg_id][eggTYPE] = type;
 		EasterEggs[egg_id][eggID] = CreateDynamicObject(EasterEggsModel[model], x, y, z, 0.0, 0.0, 0.0, vw, int, -1, 80);
 		EditDynamicObject(playerid, EasterEggs[egg_id][eggID]);
+		VECTOR_clear(EasterEggs[egg_id][VZebrali]);
 	}
 	return 1;
 }
 stock EasterEggs_CanPickup(playerid, egg_id)
 {
-	new maxegg = EasterEggs_Blocked_ControlPoint[egg_id];
 	new uid = PlayerInfo[playerid][pUID];
-	for(new i=0; i<maxegg; i++) if(EasterEggs_IsUID(egg_id, uid, i)) return false;
-	return true;
+	if(EasterEggs_IsUID(egg_id, uid)) return false;
+	else return true;
 }
 stock EasterEggs_Pickup(playerid, egg_id)
 {
