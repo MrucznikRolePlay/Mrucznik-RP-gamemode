@@ -89,7 +89,7 @@ stock EasterEggs_FindNearest(playerid)
 	}
 	return INVALID_EGG_ID;
 }
-EasterEggs_Delete(egg_id, playerid)
+EasterEggs_Delete(playerid, egg_id)
 {
 	if(EasterEggs_Exist(egg_id))
 	{
