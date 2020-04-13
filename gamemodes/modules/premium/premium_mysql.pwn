@@ -28,15 +28,15 @@
 //------------------<[ MySQL: ]>--------------------
 MruMySQL_LoadPremiumData(playerid, &kpMC, &kpEnds, &kpStarted, &kpLastLogin, &kpActive)
 {
-	new qr[256];
+	new qr[256], bool:isNull;
 	format(qr, sizeof(qr), "SELECT `p_MC`, UNIX_TIMESTAMP(`p_endDate`), UNIX_TIMESTAMP(`p_startDate`), UNIX_TIMESTAMP(`p_LastCheck`), `p_activeKp` FROM `mru_premium` WHERE `p_charUID`='%d'", PlayerInfo[playerid][pUID]);
 	new Cache:result = mysql_query(mruMySQL_Connection, qr, true);
 	if(cache_is_valid(result) && cache_num_rows())
 	{
 		cache_get_value_index_int(0, 0, kpMC);
-		cache_get_value_index_int(0, 1, kpEnds);
-		cache_get_value_index_int(0, 2, kpStarted);
-		cache_get_value_index_int(0, 3, kpLastLogin);
+		if(cache_is_value_index_null(0, 1, isNull) && !isNull) cache_get_value_index_int(0, 1, kpEnds);
+		if(cache_is_value_index_null(0, 2, isNull) && !isNull) cache_get_value_index_int(0, 2, kpStarted);
+		if(cache_is_value_index_null(0, 3, isNull) && !isNull) cache_get_value_index_int(0, 3, kpLastLogin);
 		cache_get_value_index_int(0, 4, kpActive);
 	}
 	cache_delete(result);
