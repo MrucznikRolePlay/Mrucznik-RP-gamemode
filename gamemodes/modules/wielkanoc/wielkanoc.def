@@ -29,7 +29,7 @@
 #define EASTER_TYPE_CASH 1
 #define EASTER_TYPE_MC 2
 #define INVALID_EGG_ID -1
-//------ustawienia potrzebne do w³¹czenia eventu wielkanocnego-----
+//------ustawienia potrzebne do wï¿½ï¿½czenia eventu wielkanocnego-----
 #define EASTERS_MONTH 4
 #define EASTERS_YEAR 2020
 //end
