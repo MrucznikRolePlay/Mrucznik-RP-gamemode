@@ -89,7 +89,7 @@ stock EasterEggs_FindNearest(playerid)
 	}
 	return INVALID_EGG_ID;
 }
-EasterEggs_Delete(egg_id, playerid)
+EasterEggs_Delete(playerid, egg_id)
 {
 	if(EasterEggs_Exist(egg_id))
 	{
@@ -163,7 +163,7 @@ stock EasterEggs_Pickup(playerid, egg_id)
 		SendClientMessage(playerid, COLOR_LIGHTGREEN, "Podnios³eœ jajko wielkanocne!");
 		format(string, sizeof(string), "Twoja nagroda to %d%s!", quantity, type);
 		SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
-		format(string, sizeof(string), "[EasterEggs] %s podniós³ jajko wielkanocne z $d%s.", GetNick(playerid), quantity, type);
+		format(string, sizeof(string), "[EasterEggs] %s podniós³ jajko wielkanocne z %d%s.", GetNick(playerid), quantity, type);
 		SendMessageToAdmin(string, COLOR_P@);
 		Log(payLog, INFO, "[EasterEggs]Gracz %s podniós³ jajko z %d%s.", GetPlayerLogName(playerid), quantity, type);
 		EasterEggs_AddBlock(egg_id, PlayerInfo[playerid][pUID]);
