@@ -30,16 +30,16 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "zp\zp.pwn"
-#include "op\op.pwn"
 #include "kask\kask.pwn"
+#include "op\op.pwn"
+#include "zp\zp.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_zp();
-    command_op();
     command_kask();
+    command_op();
+    command_zp();
     
 }
