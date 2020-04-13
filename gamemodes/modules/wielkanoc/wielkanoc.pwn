@@ -48,17 +48,15 @@ EasterEggs_Exist(id)
 	else return false;
 }
 
-EasterEggs_IsUID(id, uid, i)
+EasterEggs_IsUID(egg_id, uid)
 {
-	if(EasterEggs_Blocked[id][i] == uid) return true;
+	if(VECTOR_find_val(EasterEggs[egg_id][VZebrali], uid) != INVALID_VECTOR_INDEX) return true;
 	else return false;
 }
 
 EasterEggs_AddBlock(egg_id, uid)
 {
-	new id = EasterEggs_Blocked_ControlPoint[egg_id];
-	EasterEggs_Blocked[egg_id][id] = uid;
-	id++;
+	VECTOR_set_val(EasterEggs[egg_id][VZebrali], uid);
 }
 
 stock EasterEggs_GetFreeID()
@@ -91,18 +89,17 @@ stock EasterEggs_FindNearest(playerid)
 	}
 	return INVALID_EGG_ID;
 }
-EasterEggs_Delete(playerid, egg_id)
+EasterEggs_Delete(egg_id, playerid)
 {
 	if(EasterEggs_Exist(egg_id))
 	{
 		EasterEggs[egg_id][egg_x_pos] = 0.0;
 		DestroyDynamicObject(EasterEggs[egg_id][eggID]);
 		new string[120];
-		new id = EasterEggs_Blocked_ControlPoint[egg_id];
 		format(string, sizeof(string), "Admin %s usun¹³ jajko ID:[%d]", GetNick(playerid), egg_id);
+		Log(adminLog, INFO, "%s usun¹³ jajko o id %d.", GetPlayerLogName(playerid), egg_id);
 		SendMessageToAdmin(string, COLOR_P@);
-		for(new i=0; i<id; i++) EasterEggs_Blocked[egg_id][i] = 0;
-		id = 0;
+		VECTOR_clear(EasterEggs[egg_id][VZebrali]);
 	}
 	else
 	{
@@ -130,27 +127,26 @@ stock EasterEggs_Create(playerid, Float:x, Float:y, Float:z, type)
 		EasterEggs[egg_id][eggTYPE] = type;
 		EasterEggs[egg_id][eggID] = CreateDynamicObject(EasterEggsModel[model], x, y, z, 0.0, 0.0, 0.0, vw, int, -1, 80);
 		EditDynamicObject(playerid, EasterEggs[egg_id][eggID]);
+		VECTOR_clear(EasterEggs[egg_id][VZebrali]);
 	}
-	return 1;
+	return egg_id;
 }
 stock EasterEggs_CanPickup(playerid, egg_id)
 {
-	new maxegg = EasterEggs_Blocked_ControlPoint[egg_id];
 	new uid = PlayerInfo[playerid][pUID];
-	for(new i=0; i<maxegg; i++) if(EasterEggs_IsUID(egg_id, uid, i)) return false;
-	if(!EasterEggs_Exist(egg_id)) return false;
-	return true;
+	if(EasterEggs_IsUID(egg_id, uid)) return false;
+	else return true;
 }
 stock EasterEggs_Pickup(playerid, egg_id)
 {
 	if(EasterEggs_Setting_Started == 0)
 	{
-		SendClientMessage(playerid, COLOR_GREY, "Event siê jeszcze nie rozpocz¹³.");
+		SendClientMessage(playerid, COLOR_GREY, "Event jest wy³¹czony!");
 		return 0;
 	}
-	if(EasterEggs_CanPickup(playerid, egg_id))
+	if(EasterEggs_CanPickup(playerid, egg_id) == true)
 	{
-		new string[120], type[2], quantity;
+		new string[120], type[5], quantity;
 		if(EasterEggs[egg_id][eggTYPE] == 1)
 		{
 			format(type, sizeof(type), "$");
@@ -167,7 +163,7 @@ stock EasterEggs_Pickup(playerid, egg_id)
 		SendClientMessage(playerid, COLOR_LIGHTGREEN, "Podnios³eœ jajko wielkanocne!");
 		format(string, sizeof(string), "Twoja nagroda to %d%s!", quantity, type);
 		SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
-		format(string, sizeof(string), "[EasterEggs] %s podniós³ jajko wielkanocne.", GetNick(playerid));
+		format(string, sizeof(string), "[EasterEggs] %s podniós³ jajko wielkanocne z $d%s.", GetNick(playerid), quantity, type);
 		SendMessageToAdmin(string, COLOR_P@);
 		Log(payLog, INFO, "[EasterEggs]Gracz %s podniós³ jajko z %d%s.", GetPlayerLogName(playerid), quantity, type);
 		EasterEggs_AddBlock(egg_id, PlayerInfo[playerid][pUID]);
