@@ -155,8 +155,8 @@ new const PrzedmiotyPremium[MAX_PREMIUM_ITEMS][ePrzedmiotyPremium] =
 	//name, item, bone, price
 	//{"dynia", 19320, 2, 50}, //https://files.prineside.com/gtasa_samp_model_id/white/19320_w.jpg
 	{"Zielone jajko wielkanocne", 19343, 2, 25}, // https://dev.prineside.com/en/gtasa_samp_model_id/model/19343-easter_egg03/
-	{"¯ó³te jajko wielkanocne", 19343, 2, 25}, // https://dev.prineside.com/en/gtasa_samp_model_id/model/19344-easter_egg04/
-	{"Jajko wielkanocne w paski", 19343, 2, 100}, // https://dev.prineside.com/en/gtasa_samp_model_id/model/19341-easter_egg01/
+	{"¯ó³te jajko wielkanocne", 19342, 2, 25}, // https://dev.prineside.com/en/gtasa_samp_model_id/model/19344-easter_egg04/
+	{"Jajko wielkanocne w paski", 19341, 2, 100}, // https://dev.prineside.com/en/gtasa_samp_model_id/model/19341-easter_egg01/
 
 	{"papuga", 19079, 1, PRZEDMIOT_DROGI_CENA * 20}, //https://files.prineside.com/gtasa_samp_model_id/white/19079_w.jpg
 	//{"œwi¹teczna czapka", 19065, 1, PRZEDMIOT_DROGI_CENA * 10}, //https://files.prineside.com/gtasa_samp_model_id/white/19065_w.jpg
