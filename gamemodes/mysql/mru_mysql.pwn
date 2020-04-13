@@ -281,7 +281,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 public MruMySQL_LoadAccount(playerid)
 {
 	MruMySQL_CreateKontaORM(playerid);
-	new fault = orm_load(PlayerInfo[playerid][pORM]);
+	new fault = orm_load(PlayerInfo[playerid][pORM], "OnPlayerAccountLoaded", "d", playerid);
 
 	loadKamiPos(playerid);
 
@@ -428,7 +428,7 @@ MruMySQL_DeleteOpis(uid, typ)
 MruMySQL_LoadAccess(playerid)
 {
 	new query[128];
-	format(query, sizeof(query), "SELECT CAST(`FLAGS` AS UNSIGNED) AS `FLAGS` FROM `mru_uprawnienia` WHERE `UID`=%d", PlayerInfo[playerid][pUID]);
+	format(query, sizeof(query), "SELECT `FLAGS` FROM `mru_uprawnienia` WHERE `UID`=%d", PlayerInfo[playerid][pUID]);
 
 	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
 

@@ -3,6 +3,9 @@ version: "3"
 services:
   samp:
     image: mrucznik/mrucznik-rp:latest
+    build: 
+      context: .
+      dockerfile: local.dockerfile
     command: ["server", "run", "--dir", "/samp"]
     volumes:
       - ./scriptfiles:/samp/scriptfiles
@@ -34,6 +37,19 @@ services:
         aliases:
           - mysqld
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+    networks:
+      - intranet
+    depends_on:
+      - mysqld
+
   # migrations:
   #   image: mysql_migration
   #   volumes:
@@ -50,19 +66,6 @@ services:
   #     intranet:
   #       aliases:
   #         - migrations
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      - PMA_ARBITRARY=1
-    ports:
-      - 8080:80
-    volumes:
-      - /sessions
-    networks:
-      - intranet
-    depends_on:
-      - mysqld
 
 networks:
   intranet:

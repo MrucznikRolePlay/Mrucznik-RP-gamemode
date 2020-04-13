@@ -6005,70 +6005,6 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 			return 1;
 		}
-
-		//Sprawdzanie blocków:
-		if(PlayerInfo[playerid][pBlock] == 1)
-		{
-			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
-			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
-			KickEx(playerid);
-			return 1;
-		}
-        else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][pCK] == 1)
-		{
-			SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Ta postaæ jest uœmiercona, nie mo¿esz na niej graæ.");
-			KickEx(playerid);
-			return 1;
-		}
-		
-
-		//Nadawanie pieniêdzy:
-		ResetujKase(playerid);
-		if(PlayerInfo[playerid][pCash] < 0)
-		{
-			if(PlayerInfo[playerid][pWL] < 9)
-			{
-				PlayerInfo[playerid][pWL]++; 
-				sendTipMessage(playerid, "Masz d³ugi pieniê¿ne wobec pañstwa, twój poziom poszukiwania roœnie."); 
-			}
-			if(PlayerInfo[playerid][pWL] >= 9)
-			{
-				PlayerInfo[playerid][pWL] = 10; 
-				sendTipMessage(playerid, "Masz ju¿ 10 poziom poszukiwania! Czêœæ jest spowodowana d³ugami! Zrób coœ z tym!"); 
-			}
-			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
-		}
-		else if(PlayerInfo[playerid][pCash] >= 0)
-		{
-			DajKase(playerid, PlayerInfo[playerid][pCash]); 
-		}
-		//Ustawianie na zalogowany:
-		gPlayerLogged[playerid] = 1;
-		new GPCI[41];
-		gpci(playerid, GPCI, sizeof(GPCI));
-		Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] zalogowa³ siê na konto", GetPlayerLogName(playerid), playerid, GetIp(playerid), GPCI);
-        Car_LoadForPlayer(playerid); //System aut
-		MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
-		Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
-		CorrectPlayerBusiness(playerid);
-		CheckPlayerBusiness(playerid);
-		
-		//Lider
-		Load_MySQL_Leader(playerid); 
-
-		//Powitanie:
-		format(string, sizeof(string), "Witaj na serwerze Mrucznik Role Play, %s!",nick);
-		SendClientMessage(playerid, COLOR_WHITE,string);
-		printf("%s has logged in.",nick);
-		if (IsPlayerPremiumOld(playerid))
-		{
-			SendClientMessage(playerid, COLOR_WHITE,"Jesteœ posiadaczem {E2BA1B}Konta Premium.");
-		}
-		if(Uprawnienia(playerid, ACCESS_PANEL))
-		{
-			format(string, sizeof(string), "Liderów frakcji w bazie danych: %d.", AllLeaders);
-			sendTipMessage(playerid, string); 
-		}
 	}
 	else
 	{//z³e has³o
@@ -6084,6 +6020,76 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 		}
 		return 1;
+	}
+	return 1;
+}
+
+forward OnPlayerAccountLoaded(playerid);
+public OnPlayerAccountLoaded(playerid)
+{
+	new string[256];
+	//Sprawdzanie blocków:
+	if(PlayerInfo[playerid][pBlock] == 1)
+	{
+		SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
+		SendClientMessage(playerid, COLOR_WHITE, "[SERVER] Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
+		KickEx(playerid);
+		return 1;
+	}
+	else if(PlayerInfo[playerid][pBlock] == 2 || PlayerInfo[playerid][pCK] == 1)
+	{
+		SendClientMessage(playerid, COLOR_WHITE, "[SERVER] {FF0000}Ta postaæ jest uœmiercona, nie mo¿esz na niej graæ.");
+		KickEx(playerid);
+		return 1;
+	}
+	
+
+	//Nadawanie pieniêdzy:
+	ResetujKase(playerid);
+	if(PlayerInfo[playerid][pCash] < 0)
+	{
+		if(PlayerInfo[playerid][pWL] < 9)
+		{
+			PlayerInfo[playerid][pWL]++; 
+			sendTipMessage(playerid, "Masz d³ugi pieniê¿ne wobec pañstwa, twój poziom poszukiwania roœnie."); 
+		}
+		if(PlayerInfo[playerid][pWL] >= 9)
+		{
+			PlayerInfo[playerid][pWL] = 10; 
+			sendTipMessage(playerid, "Masz ju¿ 10 poziom poszukiwania! Czêœæ jest spowodowana d³ugami! Zrób coœ z tym!"); 
+		}
+		ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
+	}
+	else if(PlayerInfo[playerid][pCash] >= 0)
+	{
+		DajKase(playerid, PlayerInfo[playerid][pCash]); 
+	}
+	//Ustawianie na zalogowany:
+	gPlayerLogged[playerid] = 1;
+	new GPCI[41];
+	gpci(playerid, GPCI, sizeof(GPCI));
+	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] zalogowa³ siê na konto", GetPlayerLogName(playerid), playerid, GetIp(playerid), GPCI);
+	Car_LoadForPlayer(playerid); //System aut
+	MruMySQL_LoadPhoneContacts(playerid); //Kontakty telefonu
+	Command_SetPlayerDisabled(playerid, false); //W³¹czenie komend
+	CorrectPlayerBusiness(playerid);
+	CheckPlayerBusiness(playerid);
+	
+	//Lider
+	Load_MySQL_Leader(playerid); 
+
+	//Powitanie:
+	format(string, sizeof(string), "Witaj na serwerze Mrucznik Role Play, %s!", GetNick(playerid));
+	SendClientMessage(playerid, COLOR_WHITE,string);
+	printf("%s has logged in.", GetNick(playerid));
+	if (IsPlayerPremiumOld(playerid))
+	{
+		SendClientMessage(playerid, COLOR_WHITE,"Jesteœ posiadaczem {E2BA1B}Konta Premium.");
+	}
+	if(Uprawnienia(playerid, ACCESS_PANEL))
+	{
+		format(string, sizeof(string), "Liderów frakcji w bazie danych: %d.", AllLeaders);
+		sendTipMessage(playerid, string); 
 	}
 
 	//Nadawanie pocz¹tkowych itemów po rejestracji:
