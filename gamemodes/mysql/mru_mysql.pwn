@@ -212,6 +212,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     }
 
 	new query[1024];
+	new UID = PlayerInfo[playerid][pUID];
 
 	if(forcegmx == false)
 	{
@@ -267,7 +268,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 		PlayerPersonalization[playerid][PERS_NEWNICK],
 		PlayerPersonalization[playerid][PERS_NEWBIE],
 		PlayerPersonalization[playerid][PERS_GUNSCROLL],
-		PlayerInfo[playerid][pUID]); 
+		UID); 
 	mysql_tquery(mruMySQL_Connection, query);
 
 	MruMySQL_SaveMc(playerid);
@@ -382,7 +383,12 @@ MruMySQL_CreateAccount(playerid, password[])
 	randomString(salt, sizeof(salt));
 	WP_Hash(hash, sizeof(hash), sprintf("%s%s%s", ServerSecret, password, salt));
 	format(query, sizeof(query), "INSERT INTO `mru_konta` (`Nick`, `Key`, `Salt`) VALUES ('%s', '%s', '%s')", GetNickEx(playerid), hash, salt);
-	mysql_query(mruMySQL_Connection, query);
+	new Cache:result = mysql_query(mruMySQL_Connection, query, true);
+	if(cache_is_valid(result))
+	{
+		PlayerInfo[playerid][pUID] = cache_insert_id();
+		cache_delete(result);
+	}
 	return 1;
 }
 
@@ -454,26 +460,19 @@ MruMySQL_LoadAccess(playerid)
     return 1;
 }
 
-
+//returns 0 if not exists, account uid if exits
 MruMySQL_DoesAccountExist(nick[])
 {
 	new string[128];
-	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT (BINARY `Nick` = '%e') AS CASE_CHECK FROM `mru_konta` WHERE `Nick` = '%e'", nick, nick);
+	mysql_format(mruMySQL_Connection, string, sizeof(string), "SELECT `UID` FROM `mru_konta` WHERE `Nick` = BINARY '%e'", nick);
 	new Cache:result = mysql_query(mruMySQL_Connection, string, true);
 	if(cache_is_valid(result))
     {
 		if(cache_num_rows() > 0)
 		{
-			new caseCheck;
-			cache_get_value_index_int(0, 0, caseCheck);
-			if(caseCheck)
-			{
-				return 1;
-			}
-			else
-			{
-				return -1;
-			}
+			new uid;
+			cache_get_value_index_int(0, 0, uid);
+			return uid;
 		}
 		cache_delete(result);
 	}
