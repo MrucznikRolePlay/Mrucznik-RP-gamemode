@@ -5,7 +5,14 @@ MruMySQL_Init()
 	#if DEBUG_MODE == 1
 		mysql_log(ALL);
 	#else
-		mysql_log(WARNING | ERROR);
+		if(DEVELOPMENT)
+		{
+			mysql_log(DEBUG | INFO | WARNING | ERROR);
+		}
+		else
+		{
+			mysql_log(WARNING | ERROR);
+		}
 	#endif
 
 	mysql_global_options(DUPLICATE_CONNECTIONS, false);
@@ -229,9 +236,8 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	new oldRank = PlayerInfo[playerid][pRank];
 	PlayerInfo[playerid][pRank] = (gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]);
 	PlayerInfo[playerid][pConnected] = forcequit ? 0 : 2;
-	new fault = orm_update(PlayerInfo[playerid][pORM]);
+	new fault = orm_update(PlayerInfo[playerid][pORM], "OnPlayerAccountSaved", "dd", playerid, forcequit);
 	PlayerInfo[playerid][pRank] = oldRank;
-	if(forcequit) orm_destroy(PlayerInfo[playerid][pORM]);
 
 	format(query, sizeof(query), "UPDATE `mru_personalization` SET \
 		`KontoBankowe` = '%d', \
@@ -276,6 +282,13 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 		format(PlayerInfo[playerid][pNick], 24, "%s", playernickname);
 	}
 	return fault;
+}
+
+forward OnPlayerAccountSaved(playerid, forcequit);
+public OnPlayerAccountSaved(playerid, forcequit)
+{
+	if(forcequit) orm_destroy(PlayerInfo[playerid][pORM]);
+	return 1;
 }
 
 public MruMySQL_LoadAccount(playerid)

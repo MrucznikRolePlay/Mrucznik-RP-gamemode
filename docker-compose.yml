@@ -11,6 +11,7 @@ services:
       - ./scriptfiles:/samp/scriptfiles
       - ./logs:/samp/logs
       - ./db:/samp/db
+      - ./gamemodes/Mrucznik-RP.amx:/samp/gamemodes/Mrucznik-RP.amx
     expose:
       - "7777/udp"
     ports:

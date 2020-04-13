@@ -15,13 +15,13 @@ COPY ./log-config.yml /samp/log-config.yml
 COPY ./mysql.ini /samp/mysql.ini
 COPY ./samp.json /samp/samp.json
 COPY ./scriptfiles /samp/scriptfiles
-COPY  ./gamemodes/Mrucznik-RP.amx /samp/gamemodes/Mrucznik-RP.amx
 
 RUN sampctl server ensure
 RUN cd scriptfiles && ln -s .. DANGEROUS_SERVER_ROOT
 
 VOLUME /samp/scriptfiles
 VOLUME /samp/logs
+VOLUME /samp/gamemodes/Mrucznik-RP.amx
 
 ENTRYPOINT ["sampctl"]
 CMD ["server", "run"]
