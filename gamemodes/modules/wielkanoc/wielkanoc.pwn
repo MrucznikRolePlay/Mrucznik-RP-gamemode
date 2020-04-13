@@ -89,7 +89,7 @@ stock EasterEggs_FindNearest(playerid)
 	}
 	return INVALID_EGG_ID;
 }
-EasterEggs_Delete(playerid, egg_id)
+EasterEggs_Delete(egg_id)
 {
 	if(EasterEggs_Exist(egg_id))
 	{
@@ -97,6 +97,7 @@ EasterEggs_Delete(playerid, egg_id)
 		DestroyDynamicObject(EasterEggs[egg_id][eggID]);
 		new string[120];
 		format(string, sizeof(string), "Admin %s usun¹³ jajko ID:[%d]", GetNick(playerid), egg_id);
+		Log(adminLog, INFO, "%s usun¹³ jajko o id %d.", GetPlayerLogName(playerid), egg_id);
 		SendMessageToAdmin(string, COLOR_P@);
 		VECTOR_clear(EasterEggs[egg_id][VZebrali]);
 	}
@@ -128,7 +129,7 @@ stock EasterEggs_Create(playerid, Float:x, Float:y, Float:z, type)
 		EditDynamicObject(playerid, EasterEggs[egg_id][eggID]);
 		VECTOR_clear(EasterEggs[egg_id][VZebrali]);
 	}
-	return 1;
+	return egg_id;
 }
 stock EasterEggs_CanPickup(playerid, egg_id)
 {

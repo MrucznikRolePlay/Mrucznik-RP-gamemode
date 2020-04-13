@@ -33,6 +33,8 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
             EasterEggs_Setting_Started = 1;
             format(string, sizeof(string), "[EasterEgg]Admin %s w³¹czy³ mo¿liwoœæ podnoszenia jajek!", GetNick(playerid));
             SendMessageToAdmin(string, COLOR_P@);
+            SendClientMessage(playerid, COLOR_GREY, "Podnoszenie jajek w³¹czone.");
+            Log(adminLog, INFO, "%s w³¹czy³ mo¿liwoœæ podnoszenia jajek.", GetPlayerLogName(playerid));
         }
         if(strcmp(opcja,"wylacz",true) == 0)
         {
@@ -40,6 +42,8 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
             EasterEggs_Setting_Started = 0;
             format(string, sizeof(string), "[EasterEgg]Admin %s wy³¹czy³ mo¿liwoœæ podnoszenia jajek!", GetNick(playerid));
             SendMessageToAdmin(string, COLOR_P@);
+            SendClientMessage(playerid, COLOR_GREY, "Podnoszenie jajek wy³¹czone.");
+            Log(adminLog, INFO, "%s wy³¹czy³ mo¿liwoœæ podnoszenia jajek.", GetPlayerLogName(playerid));
         }
         if(strcmp(opcja,"goto",true) == 0)
         {
@@ -53,6 +57,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
                     SetPlayerVirtualWorld(playerid, EasterEggs[id][eggVW]);
                     SetPlayerInterior(playerid, EasterEggs[id][eggINT]);
                     SetPlayerPos(playerid, EasterEggs[id][egg_x_pos], EasterEggs[id][egg_y_pos], EasterEggs[id][egg_z_pos]);
+                    Log(adminLog, INFO, "%s teleportowa³ siê do jajka o id %d.", GetPlayerLogName(playerid), id);
                 }
                 else sendTipMessage(playerid, "Jajko nie istnieje.");
             }
@@ -67,6 +72,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
                 format(string, sizeof(string), "[EasterEgg]Admin %s ustawi³ nagrodê MC w wysokoœci %dMC!", GetNick(playerid), value);
                 SendMessageToAdmin(string, COLOR_P@); 
                 EasterEggs_Setting_MCOINS = value;
+                Log(adminLog, INFO, "%s ustawi³ nagrodê za podniesienie jajka na %dMC.", GetPlayerLogName(playerid), value);
             }
         }
         if(strcmp(opcja,"setcash",true) == 0)
@@ -79,6 +85,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
                 format(string, sizeof(string), "[EasterEgg]Admin %s ustawi³ nagrodê pieniê¿n¹ %d$!", GetNick(playerid), value);
                 SendMessageToAdmin(string, COLOR_P@);
                 EasterEggs_Setting_CASH = value;
+                Log(adminLog, INFO, "%s ustawi³ nagrodê za podniesienie jajka na %d$.", GetPlayerLogName(playerid), value);
             }
         }
         if(strcmp(opcja,"stworz",true) == 0)
@@ -87,11 +94,13 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
             GetPlayerPos(playerid, x, y, z);
             if(strcmp(opcja2,"mc",true) == 0)
             {
-                EasterEggs_Create(playerid, x, y, z, 2);
+                new id = EasterEggs_Create(playerid, x, y, z, 2);
+                Log(adminLog, INFO, "%s stworzy³ jajko z Mrucznik Coinsami o id %d.", GetPlayerLogName(playerid), id);
             }
             else if(strcmp(opcja2,"cash",true) == 0)
             {
-                EasterEggs_Create(playerid, x, y, z, 1);
+                new id = EasterEggs_Create(playerid, x, y, z, 1);
+                Log(adminLog, INFO, "%s stworzy³ jajko z hajsem o id %d.", GetPlayerLogName(playerid), id);
             }
             else SendClientMessage(playerid, COLOR_RED, "Nie podano opcji (mc/cash)!");
         }
@@ -109,7 +118,7 @@ command_easter_Impl(playerid, opcja[24], opcja2[24])
                     sendTipMessage(playerid, "Nie znaleziono jajka w pobli¿u.");
                 }
             }
-            else EasterEggs_Delete(playerid, opcja2);
+            else EasterEggs_Delete(playerid, strval(opcja2));
         }
     }
     return 1;
