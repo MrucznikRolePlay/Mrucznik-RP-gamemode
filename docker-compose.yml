@@ -14,7 +14,6 @@ services:
       - "7777:7777/udp"
     environment:
       SAMP_DISCORD_BOT_TOKEN: NjA0NzIwMzk3NTk4MDY0NjUx.XTyEBw.NGrfO3u_0HdE2iUI60IQFQMY_6k
-      SAMPCTL_GITHUB_TOKEN: 76d29e4b16613d7920403fb70f45086c38886e05
     networks:
       - intranet
     depends_on:
