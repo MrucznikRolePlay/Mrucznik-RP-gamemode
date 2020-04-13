@@ -25,7 +25,7 @@
 //------------------<[ Define: ]>-------------------
 #define EASTER_MAX_CASH 100000
 #define EASTER_MAX_MCOINS 50
-#define EASTER_MAX_EGGS 2
+#define EASTER_MAX_EGGS 110
 #define EASTER_TYPE_CASH 1
 #define EASTER_TYPE_MC 2
 #define INVALID_EGG_ID -1
