@@ -6112,46 +6112,6 @@ OnPlayerLogin(playerid, password[])
 		DajKase(playerid, 5000);
 	}
 
-	//Filtry na konto:
-	/*if(dini_Exists("Filtry.ini"))
-	{
-		new filtr;
-		new filtr_ip[64];
-		new filtr_nick[64];
-		new ip[16];
-		GetPlayerIp(playerid, ip, sizeof(ip));
-		for(new i = 0; i < dini_Int("Filtry.ini", "Liczba"); i++)
-		{
-			format(filtr_ip, sizeof(filtr_ip), "IP_%d", i);
-			if(strcmp(ip, dini_Get("Filtry.ini", filtr_ip), true) == 0)
-			{
-				format(filtr_nick, sizeof(filtr_nick), "Nick_%d", i);
-				if(strcmp(nick, dini_Get("Filtry.ini", filtr_nick), true) == 0)
-				{
-					SendClientMessage(playerid, COLOR_WHITE,"SERVER: Jesteœ posiadaczem filtru na konto.");
-					filtr = 0;
-					break;
-				}
-				else
-				{
-					filtr++;
-				}
-			}
-		}
-		if(filtr != 0)
-		{
-			SendClientMessage(playerid, COLOR_WHITE,"SERVER: Zosta³eœ zkickowany, powód: Filtr na konto.");
-			SendClientMessage(playerid, COLOR_WHITE,"SERVER: Aby go zdj¹æ napisz na forum www.Mrucznik-RP.pl");
-			KickEx(playerid);
-			return 1;
-		}
-	}
-	else
-	{
-		dini_Create("Filtry.ini");
-		dini_IntSet("Filtry.ini", "Liczba", 0);
-	}*/
-
 	//Przywracanie Poziomu Poszukiwania
         //Punkty karne
     if (PlayerInfo[playerid][pWL] >= 10000)
