@@ -4972,6 +4972,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 			new string[120];
 			format(string, sizeof(string), "Admin %s stworzy³ jajko wielkanocne, ID:[%d]", GetNick(playerid), egg_id);
 			SendMessageToAdmin(string, COLOR_P@);
+			Log(adminLog, INFO, "%s stworzy³ przez GUI jajko o id %d.", GetPlayerLogName(playerid), egg_id);
 		}
 		else if( response == EDIT_RESPONSE_CANCEL && GetPVarInt(playerid, "CreatingEGG") == 1)
 		{

@@ -91,7 +91,7 @@ stock EasterEggs_FindNearest(playerid)
 	}
 	return INVALID_EGG_ID;
 }
-EasterEggs_Delete(playerid, egg_id)
+EasterEggs_Delete(egg_id)
 {
 	if(EasterEggs_Exist(egg_id))
 	{
@@ -100,6 +100,7 @@ EasterEggs_Delete(playerid, egg_id)
 		new string[120];
 		new id = EasterEggs_Blocked_ControlPoint[egg_id];
 		format(string, sizeof(string), "Admin %s usun¹³ jajko ID:[%d]", GetNick(playerid), egg_id);
+		Log(adminLog, INFO, "%s usun¹³ jajko o id %d.", GetPlayerLogName(playerid), egg_id);
 		SendMessageToAdmin(string, COLOR_P@);
 		for(new i=0; i<id; i++) EasterEggs_Blocked[egg_id][i] = 0;
 		id = 0;
@@ -131,7 +132,7 @@ stock EasterEggs_Create(playerid, Float:x, Float:y, Float:z, type)
 		EasterEggs[egg_id][eggID] = CreateDynamicObject(EasterEggsModel[model], x, y, z, 0.0, 0.0, 0.0, vw, int, -1, 80);
 		EditDynamicObject(playerid, EasterEggs[egg_id][eggID]);
 	}
-	return 1;
+	return egg_id;
 }
 stock EasterEggs_CanPickup(playerid, egg_id)
 {
