@@ -73,22 +73,16 @@ YCMD:warn(playerid, params[], help)
 					{
 						SetPVarInt(playerid, "PunishWarnPlayer", giveplayerid);
 						SetPVarString(playerid, "PunishWarnPlayer_Reason", result);
-						format(string, sizeof string, "{FFFFFF}Gracz %s ma ju¿ 2 warny, otrzymanie kolejnego jest równoznaczne z {FF0000}BANEM{FFFFFF}.\n{ffe524}Czy potwierdzasz nadanie bana graczowi?\n{FFFFFF}Je¿eli to mo¿liwe, mo¿esz ukaraæ gracza l¿ejsz¹ kar¹.", GetNick(giveplayerid));
+						format(string, sizeof string, "{FFFFFF}Gracz {B7EB34}%s {FFFFFF}ma ju¿ 2 warny, otrzymanie kolejnego jest równoznaczne z {FFA217}BANEM{FFFFFF}.\n{f0d71f}Czy potwierdzasz nadanie bana graczowi?\n{FFFFFF}Je¿eli to mo¿liwe, mo¿esz ukaraæ gracza l¿ejsz¹ kar¹.", GetNick(giveplayerid));
 						ShowPlayerDialogEx(playerid, 9521, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Nadaj warna", "Anuluj karê");
-						return 1;
 					}
-					GiveWarnForPlayer(giveplayerid, playerid, result);
-					if(kary_TXD_Status == 1)
+					else
 					{
-						WarnPlayerTXD(giveplayerid, playerid, result);
+						SetPVarInt(playerid, "PunishWarnPlayer", giveplayerid);
+						SetPVarString(playerid, "PunishWarnPlayer_Reason", result);
+						format(string, sizeof string, "{FFFFFF}Czy podj¹³eœ dialog z graczem {B7EB34}%s{FFFFFF}?\nJe¿eli to mo¿liwe, mo¿esz ukaraæ gracza l¿ejsz¹ kar¹.", GetNick(giveplayerid));
+						ShowPlayerDialogEx(playerid, 9521, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Nadaj warna", "Anuluj karê");
 					}
-					else if(kary_TXD_Status == 0)
-					{
-						format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNickEx(giveplayerid), GetNickEx(playerid), result);
-						SendPunishMessage(string, playerid); 
-					}
-				  
-					return 1;
 				}
 			}//not connected
             else

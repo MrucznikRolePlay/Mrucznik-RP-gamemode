@@ -55,8 +55,8 @@ opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new DBResult:db_result;
 			db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `uid`=%d", DynamicGui_GetDataInt(playerid, listitem)));
 
-			new oldDesc[256];
-			db_get_field_assoc(db_result, "text", oldDesc, 256);
+			new oldDesc[128];
+			db_get_field_assoc(db_result, "text", oldDesc, 128);
 
 			db_result = db_query(db_handle, sprintf("UPDATE * FROM `mru_opisy` SET `last_used`=%d WHERE `uid`=%d", gettime(), DynamicGui_GetDataInt(playerid, listitem)));
 
