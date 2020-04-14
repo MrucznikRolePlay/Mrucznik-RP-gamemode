@@ -1328,7 +1328,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
-
+	MyWeapon[playerid] = 0;
+	
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;
