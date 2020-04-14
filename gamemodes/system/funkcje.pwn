@@ -8785,11 +8785,10 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z][a-z]+([ _][A-Z][a-z]+([A-HJ-Z][a-z]+)?){1,2}$") >= 0)
-	{
-		return 1;
-	}
-	return 0;
+    if(strfind(nick,"Sandra_Rabucha",true) !== -1) return 0;
+    else if(strfind(pname,"rabuc",true) !== -1) return 0;
+    else if(strfind(pname,"rebuc",true) !== -1) return 0;
+	return 1;
 }
 
 CheckAlfaNumeric(password[])
