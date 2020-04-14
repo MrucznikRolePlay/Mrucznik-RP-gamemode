@@ -2253,11 +2253,11 @@ IsAMafia(playerid)
 	{
 	    new leader = PlayerInfo[playerid][pLider];
 	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==16)
+	    if(member==5 || member==6 || member==16 || member==13)
 		{
 		    return 1;
 		}
-		else if(leader==5 || leader==6 || member==16)
+		else if(leader==5 || leader==6 || member==16 || member==13)
 		{
 		    return 1;
 		}
