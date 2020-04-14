@@ -20,7 +20,6 @@
 //                              PVARS
 //------------------------------------------------------------------------------
 #define PVAR_PRZELEW_ID "przelej_id"
-//#define petla(%1,%2) for(new %1 = 0; %1 < %2; %1++);
 #define petla(%2,%1) for(new %2 = 0; %2 < %1; %2++)
 
 #define chrtoupper(%1) \
