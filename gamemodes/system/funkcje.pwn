@@ -8785,9 +8785,28 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-    if(strfind(nick,"Sandra_Rabucha",true) !== -1) return 0;
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+NickCensoreCorrect(nick[])
+{
+    if(strfind(nick,"Sandra_Rabucha",true) !== -1) return 0; //Rozalka
     else if(strfind(pname,"rabuc",true) !== -1) return 0;
     else if(strfind(pname,"rebuc",true) !== -1) return 0;
+	else if(strfind(pname,"Damian_Szymanski",true) !== -1) return 0; //Creative
+	else if(strfind(pname,"szymanski",true) !== -1) return 0;
+	else if(strfind(pname,"szymansky",true) !== -1) return 0;
+	else if(strfind(pname,"szymanczak",true) !== -1) return 0;
+	else if(strfind(pname,"Szymon_Gajda",true) !== -1) return 0; //Mrucznik
+	else if(strfind(pname,"gajda",true) !== -1) return 0;
+	else if(strfind(pname,"Kalisiewicz",true) !== -1) return 0; //Telehama
+	else if(strfind(pname,"kalisie",true) !== -1) return 0;
+	else if(strfind(pname,"kalisio",true) !== -1) return 0;
+	else if(strfind(pname,"kalisia",true) !== -1) return 0;
 	return 1;
 }
 
