@@ -1322,6 +1322,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
+	KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
+	DeletePVar(playerid, "timer_ZestawNaprawczy");
 
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;

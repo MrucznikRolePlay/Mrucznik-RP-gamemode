@@ -769,8 +769,6 @@ forward InfoHide(playerid);
 public InfoHide(playerid)
 {
 	TextDrawHideForPlayer(playerid, Text:InfoT[playerid]);
-	TextDrawHideForPlayer(playerid, Text:DoorText[playerid]);
-	PlayerInfo[playerid][pPickupDoor] = 0;
 }
 
 
