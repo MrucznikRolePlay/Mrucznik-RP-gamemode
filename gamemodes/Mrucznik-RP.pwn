@@ -873,6 +873,11 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
    	return 1;
 }
 
+public OnDynamicActorStreamIn(actorid, forplayerid)
+{
+	return 1;
+}
+
 public OnPlayerEnterDynamicArea(playerid, areaid)
 {
     if(IsPlayerInAnyVehicle(playerid))
