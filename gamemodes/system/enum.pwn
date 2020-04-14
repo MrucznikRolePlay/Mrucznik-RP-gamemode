@@ -1370,7 +1370,7 @@ enum pInfo
     pCarSlots,
     pHat,
 	pBlokadaPisaniaFrakcjaCzas,
-    Text3D:pDescLabel,
+    Text3D:pDescLabel[128],
     pDesc[128],
 	pStrong,
 	pCard,

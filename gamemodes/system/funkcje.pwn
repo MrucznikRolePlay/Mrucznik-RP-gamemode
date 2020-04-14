@@ -8701,6 +8701,39 @@ WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
     return 1;
 }
 
+stock wordwrapEx(givenString[128])
+{
+	new temporalString[ 128 ];
+	memcpy(temporalString, givenString, 0, 128 * 4);
+
+	new comaPosition = strfind(temporalString, ",", true, 0),
+		dotPosition  = strfind(temporalString, ".", true, 0);
+	while(comaPosition != -1)
+	{
+		if(temporalString[comaPosition+1] != ' ') strins(temporalString, " ", comaPosition + 1);
+		comaPosition = strfind(temporalString, ",", true, comaPosition + 1);
+	}
+	while(dotPosition != -1)
+	{
+		if(temporalString[dotPosition+1] != ' ') strins(temporalString, " ", dotPosition + 1);
+		dotPosition = strfind(temporalString, ",", true, dotPosition + 1);
+	}
+
+	new spaceCounter = 0,
+		spacePosition = strfind(temporalString, " ", true, 0);
+
+	while(spacePosition != -1)
+	{
+		spaceCounter++;
+		if(spaceCounter % 4 == 0 && spaceCounter != 0)
+		{
+			strins(temporalString, "\n", spacePosition + 1);
+		}
+		spacePosition = strfind(temporalString, " ", true, spacePosition + 1);
+	}
+	return temporalString;
+}
+
 //Sjefy
 Sejf_Add(frakcja, kasa)
 {
