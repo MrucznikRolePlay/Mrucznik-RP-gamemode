@@ -49,10 +49,6 @@ YCMD:qf(playerid, params[], help)
             orgUnInvitePlayer(playerid);
 			MedicBill[playerid] = 0;
 			SetPlayerSpawnSkin(playerid);
-			SetTimerEx("AntySB", 5000, 0, "d", playerid);
-			AntySpawnBroni[playerid] = 5;
-			UsunBron(playerid);
-			SetPlayerSpawnWeapon(playerid);
 			return 1;
 		}
 		else

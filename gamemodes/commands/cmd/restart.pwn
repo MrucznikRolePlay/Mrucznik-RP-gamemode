@@ -40,6 +40,8 @@ YCMD:restart(playerid, params[], help)
 			format(string, sizeof(string), "%s zarz¹dzi³ restart serwera! Trwa próba ponownego po³¹czenia", playerNick);
 			foreach(new i : Player)
 			{
+				TogglePlayerControllable(i, 0);
+				MruMySQL_SaveAccount(i);
 				sendErrorMessage(i, string);
 			}
 			ZapiszDomy();

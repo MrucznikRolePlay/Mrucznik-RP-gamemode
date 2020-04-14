@@ -71,6 +71,16 @@ stock SetActorAnimationEx(actorIDu, alib[40], aname[40], loop, lockx, locky)//Us
 	Actors[actorIDu][a_animName] = aname;
 	return 1;
 }
+hook OnDynamicActorStreamIn(actorid, forplayerid)
+{
+	new Float:x, Float:y, Float:z;
+	Streamer_GetFloatData(STREAMER_TYPE_ACTOR, actorid, E_STREAMER_X, x);
+	Streamer_GetFloatData(STREAMER_TYPE_ACTOR, actorid, E_STREAMER_Y, y);
+	Streamer_GetFloatData(STREAMER_TYPE_ACTOR, actorid, E_STREAMER_Z, z);
+
+	SetDynamicActorPos(actorid, x, y, z);
+}
+
 stock RepairActors(worldID, interiorID)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza'
 {
 	for(new i; i<valActor; i++)

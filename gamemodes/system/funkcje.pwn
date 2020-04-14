@@ -761,6 +761,16 @@ public PlayerFixRadio2()
 		}
 	}
 }
+
+forward func_SetPVarInt(playerid, key[], value);
+public func_SetPVarInt(playerid, key[], value)
+{
+	new str[32];
+	format(str, sizeof str, "%s", key);
+	SetPVarInt(playerid, str, value);
+	return 1;
+}
+
 public ZestawNaprawczy_CountDown(playerid, vehicleid)
 {
 	new Float:pos[3];
@@ -2591,7 +2601,7 @@ stock RemovePlayerWeaponsTemporarity(playerid)
 
 	ResetPlayerWeapons(playerid);
 	SetPlayerArmedWeapon(playerid, 0);
-	PlayerHasWeapon[playerid] = 0;
+	MyWeapon[playerid] = 0;
 }
 
 DajBronieFrakcyjne(playerid)
@@ -2960,6 +2970,24 @@ DajBronieFrakcyjne(playerid)
 
 DajBronieOganizacji(playerid)
 {
+	if( GetPlayerOrg(playerid) == 7) /* darki HA */
+	{
+		if(PlayerInfo[playerid][pGun1] == 0)
+		{
+			PlayerInfo[playerid][pGun1] = 4; PlayerInfo[playerid][pAmmo1] = 1;
+			playerWeapons[playerid][weaponLegal2] = 1;
+		}
+     	if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
+	    {
+	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
+	        playerWeapons[playerid][weaponLegal3] = 0;
+	    }
+	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
+	    {
+	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
+	        playerWeapons[playerid][weaponLegal6] = 0;
+	    }
+	}
 	if(GetPlayerOrg(playerid) == FAMILY_SEKTA)
 	{
 		if(PlayerInfo[playerid][pGun1] == 0)
@@ -8673,6 +8701,39 @@ WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
     return 1;
 }
 
+stock wordwrapEx(givenString[128])
+{
+	new temporalString[ 128 ];
+	memcpy(temporalString, givenString, 0, 128 * 4);
+
+	new comaPosition = strfind(temporalString, ",", true, 0),
+		dotPosition  = strfind(temporalString, ".", true, 0);
+	while(comaPosition != -1)
+	{
+		if(temporalString[comaPosition+1] != ' ') strins(temporalString, " ", comaPosition + 1);
+		comaPosition = strfind(temporalString, ",", true, comaPosition + 1);
+	}
+	while(dotPosition != -1)
+	{
+		if(temporalString[dotPosition+1] != ' ') strins(temporalString, " ", dotPosition + 1);
+		dotPosition = strfind(temporalString, ",", true, dotPosition + 1);
+	}
+
+	new spaceCounter = 0,
+		spacePosition = strfind(temporalString, " ", true, 0);
+
+	while(spacePosition != -1)
+	{
+		spaceCounter++;
+		if(spaceCounter % 4 == 0 && spaceCounter != 0)
+		{
+			strins(temporalString, "\n", spacePosition + 1);
+		}
+		spacePosition = strfind(temporalString, " ", true, spacePosition + 1);
+	}
+	return temporalString;
+}
+
 //Sjefy
 Sejf_Add(frakcja, kasa)
 {
@@ -10582,9 +10643,6 @@ Scena_CreateAt(Float:x, Float:y, Float:z)
     CreateDynamicObject(18766, 7.14500, 3.60040, 3.81240,   0.00000, 90.00000, 90.00000);
     objend = CreateDynamicObject(18766, 7.13720, 6.41620, 3.81240,   0.00000, 90.00000, 90.00000);
     for(new i=objstart;i<=objend;i++) SetDynamicObjectMaterial(i, 0, -1, "none", "none", 0xFF000000);
-    //
-    CreateDynamicObject(18761, -2.64870, 0.00000, 3.81240,   0.00000, 0.00000, 90.00000);
-
     CreateDynamicObject(16089, 6.62030, 0.00000, 0.52010,   0.00000, 0.00000, 0.00000);
     //Blinkery
     CreateDynamicObject(19150, 5.89259, 5.30542, 7.19990,   0.00000, 0.00000, 90.00000);
@@ -12552,7 +12610,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 			sekunda = Obrazenia[playerid][i][SECONDS];
 			hp = hp / 2;
 			format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-			format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+			format(string, sizeof(string), "%d:%d:%d | %s zada³ mu %0.1fHP z %s[%d]", godzina, minuta, sekunda, atakujacy, hp, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
 	}
@@ -12570,7 +12628,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 		sekunda = Obrazenia[playerid][i][SECONDS];
 		hp = hp/2;
 		format(atakujacy, sizeof(atakujacy), "%s", Obrazenia[playerid][i][ATTACKER]);
-		format(string, sizeof(string), "%d:%d:%d | %s -> %s[%d] zada³o %0.1fHP.", godzina, minuta, sekunda, atakujacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID], hp);
+		format(string, sizeof(string), "%d:%d:%d | %s zada³ mu %0.1fHP z %s[%d]", godzina, minuta, sekunda, atakujacy, hp, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
 		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 	}
 	return 1;
@@ -12624,13 +12682,10 @@ PursuitMode(playerid, giveplayerid)
 
 public DeathAdminWarning(playerid, killerid, reason)
 {
-	new playername[MAX_PLAYER_NAME];
 	new killername[MAX_PLAYER_NAME];
 	new string[144];
 
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
-
-	GetPlayerName(playerid, playername, sizeof(playername));
 	if(killerid != INVALID_PLAYER_ID)
 	{
 		GetPlayerName(killerid, killername, sizeof(killername));
@@ -12651,12 +12706,12 @@ public DeathAdminWarning(playerid, killerid, reason)
 			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy jest zakazane, robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
 			if(PlayerInfo[killerid][pLevel] > 1)
 			{
-				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [GunID %d]!", killername, killerid, playername, bwreason, playerid, reason);
+				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [GunID %d]!", killername, killerid, bwreason, GetNick(playerid), playerid, reason);
 				SendMessageToAdmin(string, COLOR_YELLOW);
 			}
 			else
 			{
-				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z DB, dosta³ kicka !", killername, killerid, bwreason, playername, playerid);
+				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z DB, dosta³ kicka !", killername, killerid, bwreason, GetNick(playerid), playerid);
 				SendMessageToAdmin(string, COLOR_YELLOW);
 				Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
 				SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
@@ -12681,21 +12736,21 @@ public DeathAdminWarning(playerid, killerid, reason)
 					}
 					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
 					{
-						format(string, sizeof(string), "AdmWarning: [%d]%s %s gracza %s z miniguna, podejrzane !", killerid, killername, bwreason, playername);
+						format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z miniguna, podejrzane !", killername, killerid, bwreason, GetNick(playerid), playerid);
 						SendMessageToAdmin(string, COLOR_YELLOW);
 						Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 						SendMessageToAdminEx(string, COLOR_P@, 2);
 					}
 					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) == 425)
 					{
-						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] %s %s [%d] z Huntera", killername, killerid, bwreason, playername, playerid);
+						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s[%d] %s %s[%d] z Huntera",  killername, killerid, bwreason, GetNick(playerid), playerid);
 						SendMessageToAdminEx(string, COLOR_P@, 2);
 					}
 				}
 				case 41:
 				{
 					//-------<[  Logi  ]>---------
-					format(string, sizeof(string), "AdmWarning: [%d]%s %s gracza %s ze spreya !", killerid, killername, bwreason, playername);
+					format(string, sizeof(string), "AdmWarning: [%d]%s %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
 					SendMessageToAdmin(string, COLOR_YELLOW);
 					Log(warningLog, INFO, "%s %s gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
 					SendMessageToAdminEx(string, COLOR_P@, 2);
@@ -12704,7 +12759,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				{
 					if(reason <= 54 && reason > 0)
 					{
-						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] %s %s [%d] z %s", killername, killerid, bwreason, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s[%d] %s %s[%d] z %s", killername, killerid, bwreason, GetNick(playerid), playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
 						SendMessageToAdminEx(string, COLOR_P@, 2);
 					}	
 					if(GetPVarInt(playerid, "skip_bw")  == 0)
@@ -12713,7 +12768,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 						{
 							if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
 							{
-								format(string, sizeof(string), "AdmWarning: £owca Nagród [%d]%s %s gracza %s bez oferty /poddajsie !", killerid, killername, bwreason, playername);
+								format(string, sizeof(string), "AdmWarning: £owca Nagród %s[%d] %s %s[%d] bez oferty /poddajsie !", killername, killerid, bwreason, GetNick(playerid), playerid);
 								SendMessageToAdmin(string, COLOR_YELLOW);
 								Log(warningLog, INFO, "£owca nagród %s %s gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
 							}
@@ -12728,7 +12783,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 	{
 		if(reason <= 54 && reason > 0)
 		{
-			format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+			format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", GetNick(playerid), playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 	}

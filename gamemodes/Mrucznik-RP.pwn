@@ -437,7 +437,7 @@ public OnGameModeInit()
 
     for(new i;i<MAX_PLAYERS;i++)
     {
-        PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
+        PlayerInfo[i][pDescLabel] = Create3DTextLabel(" ", 0xBBACCFFF, 0.0, 0.0, 0.0, 5.0, 0, 1);
     }
 
     pusteZgloszenia();
@@ -873,6 +873,11 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
    	return 1;
 }
 
+public OnDynamicActorStreamIn(actorid, forplayerid)
+{
+	return 1;
+}
+
 public OnPlayerEnterDynamicArea(playerid, areaid)
 {
     if(IsPlayerInAnyVehicle(playerid))
@@ -1295,7 +1300,7 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
 
-    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
 
 	//AFK timer
 	if(afk_timer[playerid] != -1)
@@ -2252,7 +2257,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
             case 52:    format(code_decoded, sizeof(code_decoded), "Anti-NOPs");
             default:    format(code_decoded, sizeof(code_decoded), "Inne");
         }
-		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, plrIP, code_decoded, code);
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), code_decoded, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
 		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | %s [%d]", code_decoded, code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
@@ -5082,8 +5087,9 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
-        if(newstate == PLAYER_STATE_DRIVER)
+		if(newstate == PLAYER_STATE_DRIVER)
         {
+			SetPlayerArmedWeapon(playerid, PlayerInfo[playerid][pGun0]); //anty driveby
         	new vehicleid = GetPlayerVehicleID(playerid);
         	new lcarid = VehicleUID[vehicleid][vUID];
         	if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL)
@@ -5102,6 +5108,24 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 			}
 			SetPVarInt(playerid, "IsAGetInTheCar", 0); 
+
+			//ACv2: Kicking players that are trying to drive the car without permission
+            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
+			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
+            {
+                // Skurwysyn kieruje bez prawka lub autem frakcji xD (Xd)
+				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
+				{
+					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
+					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
+					SendCommandLogMessage(string);
+					Log(warningLog, INFO, string);
+					Log(punishmentLog, INFO, string);
+					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
+					KickEx(playerid);
+				}
+            }
+			//AC END CODE
 		}
         if(!ToggleSpeedo[playerid])
         {
@@ -5120,28 +5144,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             PlayerTextDrawSetString(playerid, Licznik[playerid], string);
             PlayerTextDrawShow(playerid, Licznik[playerid]);
         }
-        //
-
-        //ACv2: Kicking players that are trying to drive the car without permission
-        if(newstate == PLAYER_STATE_DRIVER)
-        {
-            new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
-			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
-            {
-                // Skurwysyn kieruje bez prawka lub autem frakcji xD
-				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
-				{
-					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
-					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
-					SendCommandLogMessage(string);
-					Log(warningLog, INFO, string);
-					Log(punishmentLog, INFO, string);
-					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
-					KickEx(playerid);
-				}
-            }
-        }
         //AT400
         if(Car_GetOwnerType(GetPlayerVehicleID(playerid)) == CAR_OWNER_FRACTION && GetVehicleModel(GetPlayerVehicleID(playerid)) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
         {
@@ -5155,7 +5157,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
     {
-        DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
+		DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
         new vehicleid = GetPVarInt(playerid, "car-id");
         if(VehicleUID[vehicleid][vSiren] != 0)
     	{
@@ -5201,6 +5203,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    KartingPlayers --;
 		}
 		SetPVarInt(playerid, "IsAGetInTheCar", 0); 
+		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]); //back weapon antydriveby
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) // TAXI & BUSSES
 	{
@@ -5284,7 +5287,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             if(KradniecieWozu[playerid] != newcar)
 		    {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij aby spróbowaæ to zrobiæ.");
-                KradniecieWozu[playerid] = 1;
 				new engine, lights, alarm, doors, bonnet, boot, objective;
 				GetVehicleParamsEx(newcar, engine, lights, alarm, doors, bonnet, boot, objective);
 				if(engine) SetVehicleParamsEx(newcar, 0, lights, alarm, doors, bonnet, boot, objective);
@@ -5362,7 +5364,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	{
 	    IDWymienianegoAuta[playerid] = 0;
 	}
-	if(KradniecieWozu[playerid] >= 1)
+	if(KradniecieWozu[playerid] == 1)
 	{
 		KradniecieWozu[playerid] = 0;
 		NieSpamujKradnij[playerid] = 0;

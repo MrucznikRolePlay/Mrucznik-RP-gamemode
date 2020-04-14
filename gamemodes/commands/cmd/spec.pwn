@@ -113,7 +113,7 @@ YCMD:spec(playerid, params[], help)
 				pid); 
 				SendClientMessage(playerTargetSpec[playerid], COLOR_RED, string); 
 			}
-			SetTimerEx("SetPVarInt", 250, false, "dsd", playerid, "OnSpecChanging", 0);
+			SetTimerEx("func_SetPVarInt", 250, false, "dsd", playerid, "OnSpecChanging", 0);
         }
 	}
 	return 1;

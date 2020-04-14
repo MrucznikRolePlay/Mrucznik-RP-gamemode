@@ -35,7 +35,7 @@ YCMD:zdejmijbpk(playerid, params[], help)
 		new giveplayerid; 
 		if(sscanf(params, "k<fix>", giveplayerid))
 		{
-			sendTipMessage(playerid, "U¿yj /zdejmijbpk [ID GRACZA]"); 
+			sendTipMessage(playerid, "U¿yj /unbp [ID GRACZA]"); 
 			return 1;
 		}
 		if(!IsPlayerConnected(giveplayerid))
@@ -47,10 +47,11 @@ YCMD:zdejmijbpk(playerid, params[], help)
 		format(string, sizeof(string), "null");
 		SetPVarString(giveplayerid, "trescOgloszenia", string);			
 		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcjaCzas] = 0;
+		PlayerInfo[giveplayerid][pBP] = 0;
 		KillTimer(komunikatTime[giveplayerid]);
-		format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania na komunikatach frakcyjnych", GetNickEx(playerid));
-		sendTipMessageEx(playerid, COLOR_P@, string);
-		format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s. Mo¿e on teraz swobodnie pisaæ komunikat frakcyjny", GetNickEx(playerid), GetNick(giveplayerid));
+		format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania.", GetNickEx(playerid));
+		sendTipMessageEx(giveplayerid, COLOR_P@, string);
+		format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s.", GetNickEx(playerid), GetNick(giveplayerid));
 		SendAdminMessage(COLOR_RED, string);
 		
 	}

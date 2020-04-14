@@ -343,7 +343,7 @@ BPPlayerTXD(playerid, adminid, timeVal, reason[])
 BanPlayerTXD(playerid, adminid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Banicja~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", GetNick(playerid), GetNickEx(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Banicja~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", GetNickEx(playerid), GetNickEx(adminid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -419,7 +419,7 @@ GivePWarnForPlayer(player[], adminid, result[])
 						player,
 						result);
 	MruMySQL_SetAccInt("Warnings", nickDoWarna, MruMySQL_GetAccInt("Warnings", nickDoWarna)+1);
-	if(strfind(result, "/q") != -1 || strfind(result, "ucieczka") != -1) MruMySQL_SetAccInt("Jailed", nickDoWarna, 0);
+	if(strfind(result, "/q") != -1 || strfind(result, "ucieczka") != -1 || strfind(result, "q podczas akcji") != -1) MruMySQL_SetAccInt("Jailed", nickDoWarna, 0);
 
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
@@ -732,6 +732,25 @@ GivePBlockForPlayer(player[], adminid, result[])
 	return 1;
 }
 
+Admin_LoadTXD()
+{
+	foreach(new i : Player)
+	{
+    	InfoT[i] = TextDrawCreate(35.000000,267.000000,"");
+		TextDrawUseBox(InfoT[i],1);
+		TextDrawBoxColor(InfoT[i],0x00000066);
+		TextDrawTextSize(InfoT[i],216.000000,25.000000);
+		TextDrawAlignment(InfoT[i],0);
+		TextDrawBackgroundColor(InfoT[i],0x000000ff);
+		TextDrawFont(InfoT[i],1);
+		TextDrawLetterSize(InfoT[i],0.299999,1.000000);
+		TextDrawColor(InfoT[i],0xffffffff);
+		TextDrawSetOutline(InfoT[i],1);
+		TextDrawSetProportional(InfoT[i],1);
+		TextDrawSetShadow(InfoT[i],1);
+	}
+}
+
 
 //-----------------<[ Timery: ]>-------------------
 
@@ -744,6 +763,12 @@ public StopDraw()
 	}
 	KillTimer(karaTimer);
 	return 1;
+}
+
+forward InfoHide(playerid);
+public InfoHide(playerid)
+{
+	TextDrawHideForPlayer(playerid, Text:InfoT[playerid]);
 }
 
 
