@@ -26,7 +26,7 @@
 command_zmienwiek_Impl(playerid, giveplayerid, valueWiek)
 {
     new string[128];
-    if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
+    if (PlayerInfo[playerid][pAdmin] >= 100 || IsAScripter(playerid))
     {
         if(giveplayerid != INVALID_PLAYER_ID)
         {

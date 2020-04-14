@@ -915,7 +915,7 @@ new BramaZuz;
 new BramaZuzS = 1;
 //koniec garazpd
 //inne
-new PlayerHasWeapon[MAX_PLAYERS];
+new MyWeapon[MAX_PLAYERS];
 new ZapisSkinu[MAX_PLAYERS];
 new PDGPS = -1;//gps
 //koniec przedmioty
@@ -1322,12 +1322,14 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
+	KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
-
+	MyWeapon[playerid] = 0;
+	
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;
@@ -1423,7 +1425,6 @@ ZerujZmienne(playerid)
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
-	DeletePVar(playerid, "OnSpecChanging");
 	new nick[32];
 	if(GetPVarString(playerid, "maska_nick", nick, 24))
 	{

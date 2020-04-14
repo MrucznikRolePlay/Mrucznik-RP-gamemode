@@ -49,10 +49,10 @@ YCMD:skill(playerid, params[], help)
 	if (level == 1)//£owca nagród
 	{
 		level = PlayerInfo[playerid][pDetSkill];
-		if(level >= 0 && level <= 50) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 1."); format(string, sizeof(string), "Musisz znaleœæ %d ludzi aby zwiêkszyæ skill.", 50 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 51 && level <= 100) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 2."); format(string, sizeof(string), "Musisz znaleœæ %d ludzi aby zwiêkszyæ skill.", 100 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 101 && level <= 200) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 3."); format(string, sizeof(string), "Musisz znaleœæ %d ludzi aby zwiêkszyæ skill.", 200 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz znaleœæ %d ludzi aby zwiêkszyæ skill.", 400 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		if(level >= 0 && level <= 50) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 1."); format(string, sizeof(string), "Musisz znaleŸæ %d ludzi aby zwiêkszyæ skill.", 50 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 51 && level <= 100) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 2."); format(string, sizeof(string), "Musisz znaleŸæ %d ludzi aby zwiêkszyæ skill.", 100 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 101 && level <= 200) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 3."); format(string, sizeof(string), "Musisz znaleŸæ %d ludzi aby zwiêkszyæ skill.", 200 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz znaleŸæ %d ludzi aby zwiêkszyæ skill.", 400 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
 		else if(level >= 401) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci £owcy Nagród s¹ na poziomie = 5."); }
 	}
 	else if (level == 2)//Lawyer

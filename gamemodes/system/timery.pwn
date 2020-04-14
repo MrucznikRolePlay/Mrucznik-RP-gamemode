@@ -915,12 +915,24 @@ public PlayerAFK(playerid, afktime, breaktime)
 }
 
 //PAèDZIOCH
-forward syncanim(playerid);
-public syncanim(playerid)
+forward syncanim(playerid, Float:maxpos);
+public syncanim(playerid, Float:maxpos)
 {
 	if(GetPVarInt(playerid,"roped") == 0) return 0;
- 	SetTimerEx("syncanim",DUR,0,"i",playerid);
-  	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
+	GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
+    pl_pos[playerid][4] = floatsub(pl_pos[playerid][2],pl_pos[playerid][3]);
+	if((pl_pos[playerid][4] - 2.0) <= maxpos)
+	{
+		SetPlayerVelocity(playerid,0,0,0);
+		TogglePlayerControllable(playerid, 1);
+		ClearAnimations(playerid);
+		SetPVarInt(playerid,"roped", 0);
+		SetPVarInt(playerid,"chop_id",0);
+		return 1;
+	}
+	
+	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
+ 	SetTimerEx("syncanim", 250, 0, "i", playerid);
    	return 1;
 }
 
@@ -931,7 +943,7 @@ public CheckChangeWeapon()
 	{
 		new weaponID = GetPlayerWeapon(i);
 		new playerState = GetPlayerState(i);
-		if(PlayerHasWeapon[i]!=weaponID)
+		if(MyWeapon[i]!=weaponID)
 		{
 			if(gPlayerLogged[i] == 1 || TutTime[i] >= 1)
 			{
@@ -945,10 +957,10 @@ public CheckChangeWeapon()
 						}
 						else
 						{
-							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, PlayerHasWeapon[i]);
+							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, MyWeapon[i]);
 							if(PokazDialogBronie(i) == 0)
 							{
-								PlayerHasWeapon[i] = 0;
+								MyWeapon[i] = 0;
 								SetPlayerArmedWeapon(i, 0);
 							}
 						}
