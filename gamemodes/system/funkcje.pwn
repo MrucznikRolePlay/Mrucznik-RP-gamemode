@@ -8795,18 +8795,18 @@ IsNickCorrect(nick[])
 NickCensoreCorrect(nick[])
 {
     if(strfind(nick,"Sandra_Rabucha",true) !== -1) return 0; //Rozalka
-    else if(strfind(pname,"rabuc",true) !== -1) return 0;
-    else if(strfind(pname,"rebuc",true) !== -1) return 0;
-	else if(strfind(pname,"Damian_Szymanski",true) !== -1) return 0; //Creative
-	else if(strfind(pname,"szymanski",true) !== -1) return 0;
-	else if(strfind(pname,"szymansky",true) !== -1) return 0;
-	else if(strfind(pname,"szymanczak",true) !== -1) return 0;
-	else if(strfind(pname,"Szymon_Gajda",true) !== -1) return 0; //Mrucznik
-	else if(strfind(pname,"gajda",true) !== -1) return 0;
-	else if(strfind(pname,"Kalisiewicz",true) !== -1) return 0; //Telehama
-	else if(strfind(pname,"kalisie",true) !== -1) return 0;
-	else if(strfind(pname,"kalisio",true) !== -1) return 0;
-	else if(strfind(pname,"kalisia",true) !== -1) return 0;
+    else if(strfind(nick,"rabuc",true) !== -1) return 0;
+    else if(strfind(nick,"rebuc",true) !== -1) return 0;
+	else if(strfind(nick,"Damian_Szymanski",true) !== -1) return 0; //Creative
+	else if(strfind(nick,"szymanski",true) !== -1) return 0;
+	else if(strfind(nick,"szymansky",true) !== -1) return 0;
+	else if(strfind(nick,"szymanczak",true) !== -1) return 0;
+	else if(strfind(nick,"Szymon_Gajda",true) !== -1) return 0; //Mrucznik
+	else if(strfind(nick,"gajda",true) !== -1) return 0;
+	else if(strfind(nick,"Kalisiewicz",true) !== -1) return 0; //Telehama
+	else if(strfind(nick,"kalisie",true) !== -1) return 0;
+	else if(strfind(nick,"kalisio",true) !== -1) return 0;
+	else if(strfind(nick,"kalisia",true) !== -1) return 0;
 	return 1;
 }
 

@@ -69,6 +69,8 @@ YCMD:warn(playerid, params[], help)
                         sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany, u¿yj kicka.");
 						return 1;
                     }
+					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+					AntySpam[playerid] = 1;
 					if(PlayerInfo[giveplayerid][pWarns] >= 2)
 					{
 						SetPVarInt(playerid, "PunishWarnPlayer", giveplayerid);
