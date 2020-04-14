@@ -1089,6 +1089,7 @@ new PobijText[31][31] ={
 "WYGRALES"//31
 };
 
+//respawn count
 new Count = 30;
 
 new Float:gCopPlayerSpawns[2][3] = {
