@@ -38,6 +38,7 @@ CMD:lina(playerid, cmdtext[])
     if(IsPlayerInAnyVehicle(playerid) && IsAHeliModel(GetVehicleModel(GetPlayerVehicleID(playerid))) && GetPVarInt(playerid,"roped") == 0)
     {
         if(GetPlayerVehicleSeat(playerid) == 0) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "Jesteœ pilotem! Tylko pasa¿erowie mog¹ spuœciæ siê po linie."); 
+        if(IsPlayerInRangeOfPoint(playerid, 70.0, 2866.0037, -1585.6312, 22.3482)) return ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "W tym miejscu nie mo¿na u¿yæ liny."); 
         new sendername[MAX_PLAYER_NAME], string[144];
         GetPlayerName(playerid, sendername, sizeof(sendername));
         GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
@@ -54,7 +55,7 @@ CMD:lina(playerid, cmdtext[])
         format(string, sizeof(string), "* %s opuszcza siê na linie z helikoptera.", sendername);
         ProxDetector(60.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
         for(new i=0;i!=10;i++) ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
-        SetTimerEx("syncanim",DUR,0,"i",playerid);
+        SetTimerEx("syncanim", 250, 0, "if", playerid, pl_pos[playerid][4]);
     }
     else
     {

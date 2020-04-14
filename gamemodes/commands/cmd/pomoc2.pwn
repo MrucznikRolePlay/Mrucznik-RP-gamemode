@@ -30,13 +30,14 @@
 
 YCMD:pomoc2(playerid, params[], help)
 {
-    SendClientMessage(playerid, COLOR_GRAD1,"*** KONTO *** /stats /nextlevel /ulepszenia /ugotuj");
-    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /plac /datek /czas /kup /wyrzucbronie /id /pij /muzyka /pokazlicencje /ubranie (/p)rzedmioty /naprawpojazd");
-    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /resetulepszen(100k) /skill /licencje /lotto /zmienspawn /stopani /pobij /wyscigi /wywalmaterialy /wywaldragi");
+    SendClientMessage(playerid, COLOR_GRAD1,"*** KONTO *** /stats /nextlevel /ulepszenia /personalizuj");
+    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /plac /datek /czas /kup /wyrzucbronie /dajkluczyki /zmienklucz /id /pij /muzyka /pokazlicencje /ubranie");
+    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /resetulepszen(100k) /lock /skill /licencje /lotto /zmienspawn /stopani /pobij /wyscigi");
     SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /report /anuluj /akceptuj /wywal /kontrakt /tankuj /kanister /oczysc /wezwij /rodziny");
+    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** (/p)rzedmioty /naprawpojazd /wywalmaterialy /wywaldragi /ugotuj"); 
     SendClientMessage(playerid, COLOR_GRAD3,"*** CHAT *** (/w)iadomosc (/o)oc (/k)rzyk (/s)zept (/l)ocal (/b) (/og)loszenie (/f)amily /me (/n)ewbie /sprobuj /apteczka");
-    SendClientMessage(playerid, COLOR_GRAD3,"*** BLOKADY *** /togooc /togfam /togw /togtel /toglicznik /tognewbie /togadmin /togscroll");
-    SendClientMessage(playerid, COLOR_GRAD4,"*** BANK *** /stan /wyplac /bank /przelew");
+    SendClientMessage(playerid, COLOR_GRAD3,"*** BLOKADY *** /togooc /togdepo /togfam /togw /togtel /toglicznik /tognewbie /togadmin");
+    SendClientMessage(playerid, COLOR_GRAD4,"*** BANK *** /stan /wyplac /bank /przelew /kb(kontobankowe)");
     if(PlayerInfo[playerid][pJob] == 1) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /namierz /wanted /poddajsie /zlecenie (/m)egafon"); }
     else if(PlayerInfo[playerid][pJob] == 2) {
@@ -67,7 +68,7 @@ YCMD:pomoc2(playerid, params[], help)
     else if(PlayerInfo[playerid][pJob] == 15) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /gazety /wezgazete /gazeta"); }
     if(PlayerInfo[playerid][pMember] == 11||PlayerInfo[playerid][pLider] == 11){
-    SendClientMessage(playerid,COLOR_GRAD5,"*** DMV *** /startlekcja /stoplekcja /zaliczegz /pjtest /dajlicencje /wydaj /odmv /cdmv"); }
+    SendClientMessage(playerid,COLOR_GRAD5,"*** DMV *** /startlekcja /stoplekcja /zaliczegz /dajlicencje /odmv /cdmv"); }
     if(PlayerInfo[playerid][pMember] == 8||PlayerInfo[playerid][pLider] == 8){
     SendClientMessage(playerid,COLOR_GRAD5,"*** Hitman Agency *** /laptop /zmienskin /reklama /namierz"); }
     if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7){
@@ -83,14 +84,14 @@ YCMD:pomoc2(playerid, params[], help)
     if(GetPlayerOrg(playerid) == FAMILY_IBIZA) SendClientMessage(playerid,COLOR_GRAD5,"*** Klub *** /dajbilet /ibiza /konsola  /sprzedajalkohol /wywalibiza /zabierzbilet /glosnik");
     if (IsAPolicja(playerid))
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat /wywaz /gps /odznaka /maska /togdepo");
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /barierka /skuj /rozkuj /mdc /aresztuj /sluzba /poszukiwani");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat /wywaz /gps /odznaka /maska");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /barierka /skuj /rozkuj /mdc /aresztuj /sluzba /poszukiwani /dutycd");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** (/r)adio (/d)epartment /ro(radiooc) /depo(departamentooc) (/m)egafon (/su)spect");
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /paka /togcrime /pozwolenie /finfo /red /c /tablet /togro /fed /togglepozwo");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /togcrime /pozwolenie /finfo /red /c /tablet /togro /fed /togglepozwo");
     }
     if (PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** FBI *** /zmienskin /namierz /federalne /paka");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** FBI *** /zmienskin /namierz /(fed)eralne");
     }
     if (PlayerInfo[playerid][pMember] == 17 || PlayerInfo[playerid][pLider] == 17)
     {

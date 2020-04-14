@@ -92,15 +92,16 @@ sprawdzReklame(text[], playerid)
 	|| strfind(text , ".pl" , true)>=0 
 	|| strfind(text , "serw" , true)>=0  
 	|| strfind(text , "serv" , true)>=0 
-	|| strfind(text , ":7" , true)>=0 
-	|| strfind(text , ":2" , true)>=0 
-	|| strfind(text , ":3" , true)>=0 
-	|| strfind(text , ":4" , true)>=0 
-	|| strfind(text , ":5" , true)>=0 
-	|| strfind(text , ":6" , true)>=0 
-	|| strfind(text , ":8" , true)>=0
+	|| strfind(text , ":7777" , true)>=0 
+	|| strfind(text , ":2000" , true)>=0 
+	|| strfind(text , ":3000" , true)>=0 
+	|| strfind(text , ":4000" , true)>=0 
+	|| strfind(text , ":5000" , true)>=0 
+	|| strfind(text , ":6000" , true)>=0 
+	|| strfind(text , ":8000" , true)>=0
 	|| strfind(text, "lsrp", true)>=0
 	|| strfind(text, "ls-rp", true)>=0
+	|| strfind(text, "stories", true)>=0
 	|| strfind(text, "n4g", true)>=0
 	|| strfind(text, "fox", true)>=0)
 	{
@@ -512,9 +513,9 @@ stock ChatDo(playerid, text[], Float:zasieg=ME_RANGE)
 {
     new string[256];
 	format(string, sizeof(string), "** %s **", text);
-	SetPlayerChatBubble(playerid,string, COLOR_PURPLE, zasieg, CHATBUBBLE_TIME);
+	SetPlayerChatBubble(playerid,string, COLOR_DO, zasieg, CHATBUBBLE_TIME);
     format(string, sizeof(string), "* %s ((%s))", text, GetNick(playerid));
-    RangeMessageColor(playerid, string, zasieg, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+    RangeMessageColor(playerid, string, zasieg, COLOR_DO, COLOR_DO, COLOR_DO, COLOR_DO, COLOR_DO);
 	format(string, sizeof(string), "--/do:-- %s", text);
 	Log(chatLog, INFO, "Chat do: %s", text);
 	return 1;

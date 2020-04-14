@@ -20,7 +20,7 @@
 //                              PVARS
 //------------------------------------------------------------------------------
 #define PVAR_PRZELEW_ID "przelej_id"
-
+#define petla(%2,%1) for(new %2 = 0; %2 < %1; %2++)
 
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
@@ -91,7 +91,6 @@
 #define ROPELENGTH 100 //D³ugoœæ maksymalna liny (ingame metr)
 
 #define OFFSETZ 12
-#define DUR 250
 
 //sn
 #define COST_SN_SMS_0 0

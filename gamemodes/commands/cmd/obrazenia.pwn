@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ wynajempomoc ]---------------------------------------------//
+//-----------------------------------------------[ obrazenia ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: werem
+// Data utworzenia: 5.04.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -27,12 +29,28 @@
 /*
 	
 */
-
-YCMD:wynajempomoc(playerid, params[], help)
+YCMD:obrazenia(playerid, params[], help)
 {
-	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
-	SendClientMessage(playerid, COLOR_WHITE,"*** WYNAJMOWANIE POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");
-	SendClientMessage(playerid, COLOR_GRAD3,"*** RENT *** /unrent /wejdz /wyjdz /dom /wynajmijpokoj");
-	SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /pomoc /bizpomoc /liderpomoc /rybypomoc /ircpomoc");
+    if(IsPlayerConnected(playerid))
+    {
+		new giveplayerid;
+		if( sscanf(params, "k<fix>", giveplayerid))
+		{
+			sendTipMessage(playerid, "U¿yj /obrazenia [playerid/CzêœæNicku]");
+			return 1;
+		}
+
+		if (PlayerInfo[playerid][pAdmin] >= 100)
+		{
+		    if(IsPlayerConnected(giveplayerid))
+		    {
+				ShowPlayerDamaged(giveplayerid, playerid);
+			}
+		}
+		else
+		{
+			noAccessMessage(playerid);
+		}
+	}
 	return 1;
 }

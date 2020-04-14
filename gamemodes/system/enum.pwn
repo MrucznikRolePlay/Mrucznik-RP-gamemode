@@ -189,7 +189,15 @@ enum eScenaNeon {
     bool:SCNeonSliderRefresh,
     SCNeonZderzacz
 };
-
+//obrazenia
+enum eOBRAZENIA {
+	HOURS,
+	MINUTES,
+	SECONDS,
+	ATTACKER[MAX_PLAYER_NAME],
+	WEAPONID,
+	Float:DAMAGE
+}
 //25.07 system stref gangów
 new Float:Zone_Data[MAX_ZONES][4] = {
     {1983.0, -1027.0, 2266.0, -933.0},
@@ -487,9 +495,9 @@ new FractionNames[][40] = {
     "Korporacja Transportowa",
     "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
-    "Crackville Boyz",
+    "CRIMINAL CONNECTION",
     "Hillside Nortenos 14",
-    "Nightmare of Adrenalin",
+    "89 Border Society",
     "IV Saint Reich",
     "Brak",
     "Brak",
@@ -755,7 +763,7 @@ new BlinkOffset[][eBO] = {
 };
 
 new GunNames[47][] = {
-	"Brak",//0
+	"Piêœci",//0
 	"Kastet",//1
 	"Kij golfowy",//2
 	"Pa³ka policyjna",//3
@@ -1081,29 +1089,8 @@ new PobijText[31][31] ={
 "WYGRALES"//31
 };
 
-new Count = 20;
-new CountText[20][20] ={
-"respawn za ~g~1",
-"respawn za ~g~2",
-"respawn za ~g~3",
-"respawn za ~g~4",
-"respawn za ~g~5",
-"respawn za ~g~6",
-"respawn za ~g~7",
-"respawn za ~g~8",
-"respawn za ~g~9",
-"respawn za ~g~10",
-"respawn za ~g~11",
-"respawn za ~g~12",
-"respawn za ~g~13",
-"respawn za ~g~14",
-"respawn za ~g~15",
-"respawn za ~g~16",
-"respawn za ~g~17",
-"respawn za ~g~18",
-"respawn za ~g~19",
-"respawn za ~g~20"
-};
+//respawn count
+new Count = 30;
 
 new Float:gCopPlayerSpawns[2][3] = {
 {1578.2158,-1633.9244,13.3991},
@@ -1365,7 +1352,7 @@ enum pInfo
     pCarSlots,
     pHat,
 	pBlokadaPisaniaFrakcjaCzas,
-    Text3D:pDescLabel,
+    Text3D:pDescLabel[128],
     pDesc[128],
 	pStrong,
 	pCard,

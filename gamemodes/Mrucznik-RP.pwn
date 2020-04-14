@@ -442,7 +442,7 @@ public OnGameModeInit()
 
     for(new i;i<MAX_PLAYERS;i++)
     {
-        PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
+        PlayerInfo[i][pDescLabel] = Create3DTextLabel(" ", 0xBBACCFFF, 0.0, 0.0, 0.0, 5.0, 0, 1);
     }
 
     pusteZgloszenia();
@@ -878,6 +878,11 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
    	return 1;
 }
 
+public OnDynamicActorStreamIn(actorid, forplayerid)
+{
+	return 1;
+}
+
 public OnPlayerEnterDynamicArea(playerid, areaid)
 {
     if(IsPlayerInAnyVehicle(playerid))
@@ -1300,7 +1305,7 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
 
-    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
 
 	//AFK timer
 	if(afk_timer[playerid] != -1)
@@ -1751,6 +1756,7 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 		IsPlayerConnected(damagedid) ? GetPlayerLogName(damagedid) : sprintf("%d", damagedid),
 		amount,
 		weaponid);
+	SavePlayerDamaged(damagedid, playerid, amount, weaponid);
 	return 1;
 }
 
@@ -1763,7 +1769,15 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 
 	if(issuerid != INVALID_PLAYER_ID) // PvP
     {
-		//to do
+		if(Kajdanki_JestemSkuty[issuerid] > 0)
+		{
+			new Float:hp, Float:armor;
+			GetPlayerHealth(playerid, hp);
+			GetPlayerArmour(playerid, armor);
+			SetPlayerHealth(playerid, hp);
+			SetPlayerArmour(playerid, armor);
+			return 1;
+		}
     }
 	else //self
 	{
@@ -1891,7 +1905,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		
 		if(GetPVarInt(playerid, "skip_bw") == 0)
 		{
-			if(PlayerInfo[playerid][pInjury] > 0) //TRYB BW
+			if(PlayerInfo[playerid][pInjury] > 0) //TRYB BW (GDY ZGINIE JAK MA RANNEGO)
 			{
 				if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
 				{
@@ -2187,33 +2201,72 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1; 
 		}
 		
-		if(GetPVarInt(playerid, "CheatDetected") == 1)
+		if(GetPVarInt(playerid, "CheatDetected") == 1 || GetPVarInt(playerid, "CheatDetectedEx") == 1)
 		{
 			//kod wy³¹czony, jeœli wykryto (zapobiega dublowaniu komunikatów o wykryciu kodu nim gracz zostanie skickowany).
 			return 1;
 		}
-
-		if(code == 16)//ammohack
-		{
-			SetPVarInt(playerid, "ammohackdetect", 1);
-			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 16 (Ammo hack (add)).", GetNickEx(playerid), playerid);
-			SendMessageToAdmin(string, 0x9ACD32AA);
-			//format(string, sizeof(string), "[Nex-AC] AC ammo: %d, ammo: %d, weaponid: %d", ACInfo[playerid][acAmmo][ac_s], ac_a, ac_w);
-			//SendMessageToAdmin(string, 0x9ACD32AA);
-			
-		}
-		if(code == 17)//ammohack
-		{
-			SetPVarInt(playerid, "ammohackdetect", 1);
-			format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] - wykryto Kod: 17 (Ammo hack (infinite)).", GetNickEx(playerid), playerid);
-			SendMessageToAdmin(string, 0x9ACD32AA);
-			//format(string, sizeof(string), "[Nex-AC] Weaponid: %d, AC ammo: %d, ammo: %d", weaponid, ACInfo[playerid][acAmmo][ac_s], ac_t);
-			//SendMessageToAdmin(string, 0x9ACD32AA);
-
-		}
-		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | Kod: %d.", GetNickEx(playerid), playerid, plrIP, code);
+		new code_decoded[32];
+        switch(code)
+        {
+            case 0:     format(code_decoded, sizeof(code_decoded), "AirBreak (pieszo)");
+            case 1:     format(code_decoded, sizeof(code_decoded), "AirBreak (pojazd)");
+            case 2:     format(code_decoded, sizeof(code_decoded), "TP (pieszo)");
+            case 3:     format(code_decoded, sizeof(code_decoded), "TP (pojazd)");
+            case 4:     format(code_decoded, sizeof(code_decoded), "TP (do/miedzy auta)");
+            case 5:     format(code_decoded, sizeof(code_decoded), "TP (auto do gracza)");
+            case 6:     format(code_decoded, sizeof(code_decoded), "TP (do pickupow)");
+            case 7:     format(code_decoded, sizeof(code_decoded), "Fly (pieszo)");
+            case 8:     format(code_decoded, sizeof(code_decoded), "Fly (pojazd)");
+            case 9:    format(code_decoded, sizeof(code_decoded), "Speed (pieszo)");
+            case 10:    format(code_decoded, sizeof(code_decoded), "Speed (pojazd)");
+            case 11:    format(code_decoded, sizeof(code_decoded), "HP (pojazd)");
+            case 12:    format(code_decoded, sizeof(code_decoded), "HP (pieszo)");
+            case 13:    format(code_decoded, sizeof(code_decoded), "Kamizelka");
+            case 14:    format(code_decoded, sizeof(code_decoded), "Pieniadze");
+            case 15:    format(code_decoded, sizeof(code_decoded), "Bronie");
+            case 16:    format(code_decoded, sizeof(code_decoded), "Dodawanie ammo");
+            case 17:    format(code_decoded, sizeof(code_decoded), "Nieskonczonosc ammo");
+            case 18:    format(code_decoded, sizeof(code_decoded), "AnimHack");
+            case 19:    format(code_decoded, sizeof(code_decoded), "GodMode (pieszo)");
+            case 20:    format(code_decoded, sizeof(code_decoded), "GodMode (pojazd)");
+            case 21:    format(code_decoded, sizeof(code_decoded), "Niewidzialnosc");
+            //case 22:  format(code_decoded, sizeof(code_decoded), "Lagcomp");
+            case 23:    format(code_decoded, sizeof(code_decoded), "Tuning");
+            case 24:    format(code_decoded, sizeof(code_decoded), "Parkour mod");
+            case 25:    format(code_decoded, sizeof(code_decoded), "Szybkie animki");
+            case 26:    format(code_decoded, sizeof(code_decoded), "Rapidfire");
+            case 27:    format(code_decoded, sizeof(code_decoded), "FakeSpawn");
+            case 28:    format(code_decoded, sizeof(code_decoded), "FakeKill");
+            case 29:    format(code_decoded, sizeof(code_decoded), "Aimbot");
+            case 30:    format(code_decoded, sizeof(code_decoded), "Bieg CJa");
+            case 31:    format(code_decoded, sizeof(code_decoded), "Strzelanie autami");
+            case 32:    format(code_decoded, sizeof(code_decoded), "Kradniecie aut");
+            case 33:    format(code_decoded, sizeof(code_decoded), "Unfreeze");
+            //case 34:  format(code_decoded, sizeof(code_decoded), "AFK-Ghosting");
+            case 35:    format(code_decoded, sizeof(code_decoded), "Aimbot (2)");
+            //case 36:  format(code_decoded, sizeof(code_decoded), "Fake NPC");
+            //case 37:  format(code_decoded, sizeof(code_decoded), "Reconnect");
+            case 38:    format(code_decoded, sizeof(code_decoded), "Wysoki ping");
+            case 39:    format(code_decoded, sizeof(code_decoded), "Czitowanie dialogow");
+            //case 40:  format(code_decoded, sizeof(code_decoded), "Sandbox");
+            case 41:    format(code_decoded, sizeof(code_decoded), "Zla wersja samp");
+            case 42:    format(code_decoded, sizeof(code_decoded), "Rcon-Hack");
+            case 43:    format(code_decoded, sizeof(code_decoded), "Tuning Crasher");
+            case 44:    format(code_decoded, sizeof(code_decoded), "Inv. seat Crasher");
+            case 45:    format(code_decoded, sizeof(code_decoded), "Dialog Crasher");
+            case 46:    format(code_decoded, sizeof(code_decoded), "Dodatki Crasher");
+            case 47:    format(code_decoded, sizeof(code_decoded), "Bronie Crasher");
+            //case 48:  format(code_decoded, sizeof(code_decoded), "flood connect");
+            //case 49:  format(code_decoded, sizeof(code_decoded), "flood callbacks");
+            //case 50:  format(code_decoded, sizeof(code_decoded), "flood change seat");
+            case 51:    format(code_decoded, sizeof(code_decoded), "DDOS");
+            case 52:    format(code_decoded, sizeof(code_decoded), "Anti-NOPs");
+            default:    format(code_decoded, sizeof(code_decoded), "Inne");
+        }
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), code_decoded, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
-		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | Kod: %d.", code);
+		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | %s [%d]", code_decoded, code);
 		SendClientMessage(playerid, 0x9ACD32AA, string);
 		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
         Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
@@ -2221,6 +2274,10 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		{
 			Kick(playerid);
 			SetPVarInt(playerid, "CheatDetected", 1);
+		}
+		else if(code == 16 || code == 17)
+		{
+			SetPVarInt(playerid, "ammohackdetect", 1);
 		}
 		else
 		{
@@ -2395,7 +2452,14 @@ SetPlayerSpawnPos(playerid)
 		SetPlayerPos(playerid,1481.1666259766,-1790.2204589844,156.7875213623);
 		PlayerInfo[playerid][pMute] = 1;
 		PlayerPlaySound(playerid, 141, 0.0, 0.0, 0.0);
-		format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
+
+		if(GetPVarInt(playerid, "DostalAJkomunikat") == 0) 
+		{
+			format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
+			SetPVarInt(playerid, "DostalAJkomunikat", 1);
+		}
+		if(strfind(PlayerInfo[playerid][pAJreason], "DM2", true) != -1 || 
+		strfind(PlayerInfo[playerid][pAJreason], "Death Match 2", true) != -1) SetPVarInt(playerid, "DostalDM2", 1);
 		SendClientMessage(playerid, COLOR_PANICRED, string);
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
@@ -2663,7 +2727,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case JOB_LAWYER:
 						{
-						    SetPlayerPos(playerid,319.72470092773, -1548.3374023438, 13.845289230347);
+							Wchodzenie(playerid);
+						    SetPlayerPos(playerid,319.72470092773, -1548.3374023438, 14.555289230347);
 		    				SetPlayerFacingAngle(playerid, 230.0);
 						}
 						case JOB_LOWCA:
@@ -2689,17 +2754,18 @@ SetPlayerSpawnPos(playerid)
 						{
 						    SetPlayerPos(playerid, 2207.4038,-1725.1147,13.4060);
 						}
-						default:
+						default: //Spawn cywila
 						{
-							SetPlayerPos(playerid, 1742.9796,-1863.2355,13.5753);
-							SetPlayerFacingAngle(playerid, 0.0);
+							
+							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+							SetPlayerFacingAngle(playerid, 0.94);
 						}
 				    }
 				}
 				else //Spawn cywila
 				{
-		    		SetPlayerPos(playerid, 1742.9796,-1863.2355,13.5753);
-					SetPlayerFacingAngle(playerid, 0.0);
+		    		SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+					SetPlayerFacingAngle(playerid, 0.94);
 				}
 		    }
 		    else if(PlayerInfo[playerid][pSpawn] == 1) //Spawn przed domem
@@ -5028,8 +5094,9 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
-        if(newstate == PLAYER_STATE_DRIVER)
+		if(newstate == PLAYER_STATE_DRIVER)
         {
+			SetPlayerArmedWeapon(playerid, PlayerInfo[playerid][pGun0]); //anty driveby
         	new vehicleid = GetPlayerVehicleID(playerid);
         	new lcarid = VehicleUID[vehicleid][vUID];
         	if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL)
@@ -5048,6 +5115,24 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 			}
 			SetPVarInt(playerid, "IsAGetInTheCar", 0); 
+
+			//ACv2: Kicking players that are trying to drive the car without permission
+            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
+			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
+            {
+                // Skurwysyn kieruje bez prawka lub autem frakcji xD (Xd)
+				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
+				{
+					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
+					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
+					SendCommandLogMessage(string);
+					Log(warningLog, INFO, string);
+					Log(punishmentLog, INFO, string);
+					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
+					KickEx(playerid);
+				}
+            }
+			//AC END CODE
 		}
         if(!ToggleSpeedo[playerid])
         {
@@ -5066,28 +5151,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             PlayerTextDrawSetString(playerid, Licznik[playerid], string);
             PlayerTextDrawShow(playerid, Licznik[playerid]);
         }
-        //
-
-        //ACv2: Kicking players that are trying to drive the car without permission
-        if(newstate == PLAYER_STATE_DRIVER)
-        {
-            new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
-			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
-            {
-                // Skurwysyn kieruje bez prawka lub autem frakcji xD
-				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
-				{
-					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
-					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
-					SendCommandLogMessage(string);
-					Log(warningLog, INFO, string);
-					Log(punishmentLog, INFO, string);
-					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
-					KickEx(playerid);
-				}
-            }
-        }
         //AT400
         if(Car_GetOwnerType(GetPlayerVehicleID(playerid)) == CAR_OWNER_FRACTION && GetVehicleModel(GetPlayerVehicleID(playerid)) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
         {
@@ -5101,7 +5164,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
     {
-        DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
+		DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
         new vehicleid = GetPVarInt(playerid, "car-id");
         if(VehicleUID[vehicleid][vSiren] != 0)
     	{
@@ -5147,6 +5210,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		    KartingPlayers --;
 		}
 		SetPVarInt(playerid, "IsAGetInTheCar", 0); 
+		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]); //back weapon antydriveby
 	}
 	if(newstate == PLAYER_STATE_PASSENGER) // TAXI & BUSSES
 	{
@@ -5230,7 +5294,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             if(KradniecieWozu[playerid] != newcar)
 		    {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij aby spróbowaæ to zrobiæ.");
-                KradniecieWozu[playerid] = 1;
 				new engine, lights, alarm, doors, bonnet, boot, objective;
 				GetVehicleParamsEx(newcar, engine, lights, alarm, doors, bonnet, boot, objective);
 				if(engine) SetVehicleParamsEx(newcar, 0, lights, alarm, doors, bonnet, boot, objective);
@@ -5308,7 +5371,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 	{
 	    IDWymienianegoAuta[playerid] = 0;
 	}
-	if(KradniecieWozu[playerid] >= 1)
+	if(KradniecieWozu[playerid] == 1)
 	{
 		KradniecieWozu[playerid] = 0;
 		NieSpamujKradnij[playerid] = 0;
@@ -5553,6 +5616,7 @@ PayDay()
 				{
 				    SendClientMessage(i, COLOR_LIGHTRED, "* Nie grasz wystarczaj¹co d³ugo, aby dostaæ wyp³atê.");
 				}
+				SetPlayerWantedLevel(i, PoziomPoszukiwania[i]);
 			}
 		}
 	}
@@ -5575,13 +5639,13 @@ PayDay()
 	  	Lotto(rand);
 	}
   	SendClientMessageToAll(COLOR_YELLOW, "Odliczanie do respawnu rozpoczête");
-	BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
+	BroadCast(COLOR_PANICRED, "Uwaga! Za 30 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
     printf("-> Doing respawn");
-	CountDown();
+	CountDownVehsRespawn();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
 	
-	if(DmvActorStatus && (shifthour < 16 || shifthour > 22))
+	if(DmvActorStatus && (shifthour < 9 || shifthour > 23))
 	{
 		DestroyActorsInDMV(INVALID_PLAYER_ID); 
 	}
@@ -5772,7 +5836,7 @@ public OnPlayerUpdate(playerid)
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
 		return 1;
     }
-	if(Spectate[playerid] != INVALID_PLAYER_ID)
+	if(Spectate[playerid] != INVALID_PLAYER_ID && !GetPVarInt(playerid, "OnSpecChanging"))
     {
 		new keys, ud,lr, actualid = INVALID_PLAYER_ID;
         GetPlayerKeys(playerid, keys, ud, lr);
@@ -5780,7 +5844,7 @@ public OnPlayerUpdate(playerid)
 		{
 			foreach(new i : Player)
 			{
-				if(i == playerid) continue;
+				if(i == playerid || PlayerInfo[i][pAdmin] > 1) continue;
 				if(actualid != INVALID_PLAYER_ID) //if is set
 				{
 					new str[6];
@@ -7561,9 +7625,9 @@ public OnPlayerText(playerid, text[])
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Centrala: Zg³osimy to wszystkim jednostkom w danym obszarze.");
 			SendClientMessage(playerid, TEAM_CYAN_COLOR, "Dziêkujemy za zg³oszenie");
 			format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie: %s", text);
-			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
 			format(wanted, sizeof(wanted), "Centrala: Nadawca: %s, lokalizacja zg³oszenia: %s", turner, pZone);
-			SendFamilyMessage(org, COLOR_ALLDEPT, wanted);
+			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
 			if(org == 4 && (PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0)) PlayerRequestMedic[playerid] = 1;
 
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
@@ -7603,7 +7667,7 @@ public OnPlayerText(playerid, text[])
 	        return 0;
       	}
 
-		if(TourettActive[playerid])
+		if(TourettActive[playerid] && GetPlayerAdminDutyStatus(playerid) == 0)
 		{
 			//insert random tourette word
 			new newText[256];

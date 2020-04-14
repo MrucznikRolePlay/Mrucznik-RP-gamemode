@@ -48,7 +48,7 @@ YCMD:newbie(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj (/n)ewbie [tekst]");
 			return 1;
 		}
-		if(strlen(params) > 78)
+		if(strlen(params) > 105)
 		{
 			sendErrorMessage(playerid, "Twoja wiadomoœæ by³a zbyt d³uga, skróæ j¹!"); 
 			return 1;

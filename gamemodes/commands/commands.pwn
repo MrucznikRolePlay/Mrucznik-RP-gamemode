@@ -76,6 +76,7 @@
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
+#include "cmd/checktank.pwn"
 #include "cmd/clearwlall.pwn"
 #include "cmd/clearzone.pwn"
 #include "cmd/cmdinfo.pwn"
@@ -293,6 +294,7 @@
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
 #include "cmd/o.pwn"
+#include "cmd/obrazenia.pwn"
 #include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
@@ -684,6 +686,10 @@ static Aliases()
 	Command_AddAltNamed("cbradio", "cb");
 	Command_AddAltNamed("cbradio", "cb_radio");
 
+	//checktank
+	Command_AddAltNamed("checktank", "checktankmode");
+	Command_AddAltNamed("checktank", "checktankmod");
+	
 	//cp_usun
 	Command_AddAltNamed("cp_usun", "czekpoint_usun");
 	Command_AddAltNamed("cp_usun", "checkpoint_usun");
@@ -764,6 +770,12 @@ static Aliases()
 	//giveroom
 	Command_AddAltNamed("giveroom", "dajpokoj");
 	Command_AddAltNamed("giveroom", "dajwynajem");
+
+	//goto
+	Command_AddAltNamed("goto", "to");
+
+	//gethere
+	Command_AddAltNamed("gethere", "tm");
 
 	//glosnik
 	Command_AddAltNamed("glosnik", "sanradio");
@@ -1441,6 +1453,10 @@ static Aliases()
 
 	//zaufanyggracz
 	Command_AddAltNamed("zaufanyggracz", "zg");
+
+	//zdejmijbpk
+	Command_AddAltNamed("zdejmijbpk", "zdejmijbp");
+	Command_AddAltNamed("zdejmijbpk", "unbp");
 
 	//wyloguj
 	Command_AddAltNamed("wyloguj", "logout");
