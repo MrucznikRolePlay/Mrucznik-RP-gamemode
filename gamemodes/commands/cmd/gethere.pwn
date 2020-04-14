@@ -40,7 +40,7 @@ YCMD:gethere(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /tm [playerid/CzêœæNicku]");
 			return 1;
 		}
-		new Float:plocx,Float:plocy,Float:plocz;
+		new Float:X,Float:Y,Float:Z;
 
 
 		if(plo != INVALID_PLAYER_ID)

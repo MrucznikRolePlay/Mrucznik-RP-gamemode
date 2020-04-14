@@ -39,7 +39,7 @@ YCMD:goto(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /to [playerid/CzêœæNicku]");
 			return 1;
 		}
-		new Float:plocx,Float:plocy,Float:plocz;
+		new Float:X,Float:Y,Float:Z;
 
 		if(plo != INVALID_PLAYER_ID)
 		{

@@ -761,6 +761,16 @@ public PlayerFixRadio2()
 		}
 	}
 }
+
+forward func_SetPVarInt(playerid, key[], value);
+public func_SetPVarInt(playerid, key[], value)
+{
+	new str[32];
+	format(str, sizeof str, "%s", key);
+	SetPVarInt(playerid, str, value);
+	return 1;
+}
+
 public ZestawNaprawczy_CountDown(playerid, vehicleid)
 {
 	new Float:pos[3];

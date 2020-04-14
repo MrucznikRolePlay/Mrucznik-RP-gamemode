@@ -1323,7 +1323,6 @@ ZerujZmienne(playerid)
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
 	KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
-	DeletePVar(playerid, "timer_ZestawNaprawczy");
 
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
@@ -1425,7 +1424,6 @@ ZerujZmienne(playerid)
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
-	DeletePVar(playerid, "OnSpecChanging");
 	new nick[32];
 	if(GetPVarString(playerid, "maska_nick", nick, 24))
 	{
