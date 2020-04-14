@@ -22,7 +22,11 @@
 /*
 	System grup.
 */
-
+#include "groups.def"
+#include "groups.hwn"
+#include "groups_callbacks.pwn"
+#include "groups_mysql.pwn"
+#include "commands\groups_commands.pwn"
 //-----------------<[ Funkcje: ]>-------------------
 stock ShowGroupsForPlayer(playerid)
 {

@@ -25,7 +25,7 @@
 
 #define MAX_GROUPS          30
 #define MAX_RANKS           11 //[0 - 10] rang
-#define MAX_PERMISSION      3 // iloœæ uprawnieñ
+#define MAX_PERMISSIONS      3 // iloœæ uprawnieñ
 
 #define GROUP_PERM_WYPLAC  	0
 #define GROUP_PERM_ARREST  	1

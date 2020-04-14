@@ -42,10 +42,11 @@ enum eGroups
 	gBalance
 };
 
+
 //-----------------<[ Zmienne: ]>-------------------
 new GroupInfo[MAX_GROUPS][eGroups];
 new RankInfo[MAX_GROUPS][MAX_RANKS][eRanks];
-new PermsInfo[MAX_GROUPS][MAX_RANKS][MAX_PERMISSION]; //U¯YCIE: PermsInfo[group_id][rank_level][perm_code]
+new PermsInfo[MAX_GROUPS][MAX_RANKS][MAX_PERMISSIONS]; //U¯YCIE: PermsInfo[group_id][rank_level][perm_code]
 new PlayerText:Textdraw0[MAX_PLAYERS];
 new PlayerText:Textdraw1[MAX_PLAYERS];
 new PlayerText:Textdraw4[MAX_PLAYERS];
@@ -53,6 +54,11 @@ new PlayerText:Textdraw7[MAX_PLAYERS];
 new PlayerText:Textdraw10[MAX_PLAYERS];
 new PlayerText:Textdraw13[MAX_PLAYERS];
 new Groups_GPS[MAX_PLAYERS];
+new PermNames[MAX_PERMISSIONS] ={
+    "Wyp³ata z konta grupy",
+    "Aresztowanie",
+    "GPS"
+};
 //------------------<[ Forwardy: ]>--------------------
 
 //end
