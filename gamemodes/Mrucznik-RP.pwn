@@ -5632,9 +5632,9 @@ PayDay()
 	  	Lotto(rand);
 	}
   	SendClientMessageToAll(COLOR_YELLOW, "Odliczanie do respawnu rozpoczête");
-	BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
+	BroadCast(COLOR_PANICRED, "Uwaga! Za 30 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
     printf("-> Doing respawn");
-	CountDown();
+	CountDownVehsRespawn();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
 	

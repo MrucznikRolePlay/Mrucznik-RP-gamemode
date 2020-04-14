@@ -827,20 +827,22 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	}
 }
 
-public CountDown()
+public CountDownVehsRespawn()
 {
 	if (Count > 0)
 	{
-		GameTextForAll( CountText[Count-1], 2500, 1);
+		new text[56];
+		format(text, sizeof text, "respawn za ~g~%d", Count-1);
+		GameTextForAll(text, 2500, 1);
 		Count--;
 		SoundForAll(1056);
-		SetTimer("CountDown", 1000, 0);
+		SetTimer("CountDownVehsRespawn", 1000, 0);
 	}
 	else
 	{
 		GameTextForAll("~g~Respawn", 2500, 1);
 		SendClientMessageToAll(COLOR_PANICRED, "|___Nast¹pi³ respawn nieu¿ywanych pojazdów___|");
-		Count = 20;
+		Count = 30;
 		new bool:used[CAR_AMOUNT] = {false, ... };
 		foreach(new p : Player)
 		{

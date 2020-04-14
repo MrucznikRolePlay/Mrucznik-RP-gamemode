@@ -1089,29 +1089,7 @@ new PobijText[31][31] ={
 "WYGRALES"//31
 };
 
-new Count = 20;
-new CountText[20][20] ={
-"respawn za ~g~1",
-"respawn za ~g~2",
-"respawn za ~g~3",
-"respawn za ~g~4",
-"respawn za ~g~5",
-"respawn za ~g~6",
-"respawn za ~g~7",
-"respawn za ~g~8",
-"respawn za ~g~9",
-"respawn za ~g~10",
-"respawn za ~g~11",
-"respawn za ~g~12",
-"respawn za ~g~13",
-"respawn za ~g~14",
-"respawn za ~g~15",
-"respawn za ~g~16",
-"respawn za ~g~17",
-"respawn za ~g~18",
-"respawn za ~g~19",
-"respawn za ~g~20"
-};
+new Count = 30;
 
 new Float:gCopPlayerSpawns[2][3] = {
 {1578.2158,-1633.9244,13.3991},
