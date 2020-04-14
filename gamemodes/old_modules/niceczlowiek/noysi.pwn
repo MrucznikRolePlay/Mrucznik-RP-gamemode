@@ -65,7 +65,7 @@ opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
 
 
-			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, BreakLines(oldDesc, "\n", 32));
+			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, wordwrapEx(oldDesc));
 			
 			sendTipMessage(playerid, "Ustawiono nowy opis:");
 			new stropis[126];
