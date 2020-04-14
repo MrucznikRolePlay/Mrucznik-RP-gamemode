@@ -774,6 +774,12 @@ static Aliases()
 	Command_AddAltNamed("giveroom", "dajpokoj");
 	Command_AddAltNamed("giveroom", "dajwynajem");
 
+	//goto
+	Command_AddAltNamed("goto", "to");
+
+	//gethere
+	Command_AddAltNamed("gethere", "tm");
+
 	//glosnik
 	Command_AddAltNamed("glosnik", "sanradio");
 
