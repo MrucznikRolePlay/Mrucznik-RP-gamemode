@@ -2774,6 +2774,7 @@ SetPlayerSpawnPos(playerid)
 					SetPlayerSpawnPos(playerid);
 				    return 1;
 				}
+				Wchodzenie(playerid);
                 SetPlayerPos(playerid, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]);
 	  		}
 	  		else if(PlayerInfo[playerid][pSpawn] == 2) //Spawn w œrodku domu
