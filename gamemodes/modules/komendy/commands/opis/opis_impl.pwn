@@ -35,7 +35,7 @@ command_opis_Impl(playerid, params[])
 	{
 		new tak = 1, givenString[128];
 		format(givenString, sizeof(givenString), "%s", opis);
-		//for(new i = 0; i <= strlen(givenString); i++)
+		//todo: kolorowe opisy tylko dla KP
 		petla(i, strlen(givenString))
 		{
 			givenString[i] = tolower(givenString[i]);
