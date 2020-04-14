@@ -513,9 +513,9 @@ stock ChatDo(playerid, text[], Float:zasieg=ME_RANGE)
 {
     new string[256];
 	format(string, sizeof(string), "** %s **", text);
-	SetPlayerChatBubble(playerid,string, COLOR_PURPLE, zasieg, CHATBUBBLE_TIME);
+	SetPlayerChatBubble(playerid,string, COLOR_DO, zasieg, CHATBUBBLE_TIME);
     format(string, sizeof(string), "* %s ((%s))", text, GetNick(playerid));
-    RangeMessageColor(playerid, string, zasieg, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+    RangeMessageColor(playerid, string, zasieg, COLOR_DO, COLOR_DO, COLOR_DO, COLOR_DO, COLOR_DO);
 	format(string, sizeof(string), "--/do:-- %s", text);
 	Log(chatLog, INFO, "Chat do: %s", text);
 	return 1;
