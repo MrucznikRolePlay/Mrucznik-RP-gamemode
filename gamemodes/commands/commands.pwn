@@ -56,7 +56,7 @@
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
 #include "cmd/blokujnoba.pwn"
-#include "cmd/blokujsprzedarz.pwn"
+#include "cmd/blokujsprzedaz.pwn"
 #include "cmd/boxstats.pwn"
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
