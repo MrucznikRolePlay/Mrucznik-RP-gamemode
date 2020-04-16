@@ -106,7 +106,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 format(string, sizeof(string), "* %s akceptowa³ sprzeda¿ neonów, zarabiasz 25 000$.", sendername);
                                 SendClientMessage(dawacz, COLOR_LIGHTBLUE, string);
-                                Log(payLog, INFO, "%s kupi³ od %s neony do auta %s", GetPlayerLogName(playerid), GetPlayerLogName(dawacz), GetVehicleLogName(pojazd));
+                                Log(payLog, INFO, "%s kupi³ od %s neony do auta %s za 3000000$", GetPlayerLogName(playerid), GetPlayerLogName(dawacz), GetVehicleLogName(pojazd));
                                 ZabierzKase(playerid, 3000000);
                                 DajKase(dawacz, 75000);
                                 Sejf_Add(FRAC_NOA, 50000);//wplacanie kasy
