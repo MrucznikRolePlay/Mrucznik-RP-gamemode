@@ -2277,7 +2277,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                 	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze stra¿¹ po¿arn¹, prosze czekaæ...");
     				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaæ krótki opis zdarzenia.");	
-    				Mobile[playerid] = SHERIFF_NUMBER;
+    				Mobile[playerid] = LSMC_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 2:
