@@ -129,20 +129,14 @@ sprawdzReklame(text[], playerid)
 sprawdzWulgaryzmy(text[], playerid)
 {
 	new valueWulgaryzmy;
-	new stringReturn[256];
-
+	
 	if(CheckVulgarityString(text) != 0)
 	{
 		if(playerid != 666)
 		{
-		
 			SendClientMessage(playerid, COLOR_GRAD2, "Zosta³eœ ukarany grzywn¹ za wulgaryzmy! Kara: (20.000$)");
 			ZabierzKase(playerid, 20000);
 			Log(punishmentLog, INFO, "Gracz %s zosta³ ukarany kar¹ 20000$ za przeklinanie.", GetPlayerLogName(playerid));
-		}
-		else
-		{
-			format(stringReturn, sizeof(stringReturn), "AdmWarning: %s - pojawi³y siê wulgaryzmy");
 		}
 		Log(warningLog, INFO, "%s przeklina: %s", GetPlayerLogName(playerid), text);
 		valueWulgaryzmy = 1;
