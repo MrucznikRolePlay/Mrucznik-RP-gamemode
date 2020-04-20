@@ -43,7 +43,7 @@ YCMD:screenshot(playerid, params[], help)
             else
             {
                 UnHave_Worek(playerid);
-                DeletePVarInt(playerid, "HasScreenFilter");
+                DeletePVar(playerid, "HasScreenFilter");
             }
         }
         else sendErrorMessage(playerid, "Masz na sobie za³o¿ony worek!");
