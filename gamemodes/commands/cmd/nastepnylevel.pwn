@@ -79,7 +79,7 @@ YCMD:nastepnylevel(playerid, params[], help)
 					sendTipMessageEx(playerid, COLOR_GRAD1, infostring);
 					format(infostring, 128, "Dosta³eœ bonus %d punktów Ulepszenia",PlayerInfo[playerid][gPupgrade]);
 					sendTipMessageEx(playerid, COLOR_GRAD2, infostring);
-					if(PlayerInfo[playerid][pLEvel] % 10 == 0)
+					if(PlayerInfo[playerid][pLevel] % 10 == 0)
 					{
 						format(infostring, sizeof(infostring), "Otrzyma³eœ darmow¹ zmianê nicku w ramach %d poziomu!", nxtlevel);
 						PlayerInfo[playerid][pZmienilNick]++;

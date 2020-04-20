@@ -2322,8 +2322,8 @@ public JednaSekundaTimer()
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
-					if((GetPVarInt(i, "DostalDM2") == 1) || strfind((PlayerInfo[playerid][pAJreason]), "DM2", true) > 0
-					&& strfind((PlayerInfo[playerid][pAJreason]), "Death Match 2", true) > 0)
+					if((GetPVarInt(i, "DostalDM2") == 1) || strfind((PlayerInfo[i][pAJreason]), "DM2", true) > 0
+					&& strfind((PlayerInfo[i][pAJreason]), "Death Match 2", true) > 0)
 					{
 						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [Odsiedzia³ karê za DM2]", GetNick(i));
 						SendAdminMessage(COLOR_PANICRED, string);
