@@ -395,6 +395,7 @@
 #include "cmd/scena.pwn"
 #include "cmd/scenaallow.pwn"
 #include "cmd/scenadisallow.pwn"
+#include "cmd/screenshot.pwn"
 #include "cmd/sejffrakcja.pwn"
 #include "cmd/sejfpomoc.pwn"
 #include "cmd/sejfrodzina.pwn"
@@ -1109,6 +1110,9 @@ static Aliases()
 	//sb
 	Command_AddAltNamed("sb", "sprawdzbron");
 	Command_AddAltNamed("sb", "szukajbroni");
+
+	//screenshot
+	Command_AddAltNamed("screenshot", "ss");
 
 	//sejffrakcja
 	Command_AddAltNamed("sejffrakcja", "sejff");
