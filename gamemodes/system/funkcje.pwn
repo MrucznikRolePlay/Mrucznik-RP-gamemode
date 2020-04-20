@@ -1310,6 +1310,10 @@ public nieudalo3(playerid){
     	RemovePlayerFromVehicleEx(playerid);
     	KradniecieWozu[playerid] = 0;
     	NieSpamujKradnij[playerid] = 0;
+		new pZone[MAX_ZONE_NAME];
+		GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
+		format(komunikat, sizeof(komunikat), "HQ: Zg³oszono próbê kradzie¿y %s na %s.", VehicleNames[GetVehicleModel(vehi)-400], pZone);
+		SendFamilyMessage(FRAC_LSPD, COLOR_LIGHTRED, komunikat, true);
     }
     else
     {
