@@ -1048,11 +1048,9 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!Player_CanUseCar(playerid, vehicleid))
         	return Player_RemoveFromVeh(playerid);
     }
-	if(IsARower(vehicleid))
-	{
-	    SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
-	}
-	
+	// -- customowe parametry dla poszczególnych pojazdów
+	if(IsARower(vehicleid)) SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
+	else if (GetVehicleModel(vehicleid) == 525) sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
     if(!ispassenger && !engine)
 	{
 		if(GetPlayerVehicleID(playerid) >= CAR_End) //do kradziezy
