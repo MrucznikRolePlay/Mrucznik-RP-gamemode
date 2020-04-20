@@ -60,7 +60,7 @@ YCMD:og(playerid, params[], help)
 				return SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			}
 			ZabierzKase(playerid, payout);
-			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d", params, GetNick(playerid), PlayerInfo[playerid][pPnumber]);
+			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d", params, PlayerInfo[playerid][pPnumber]);
 			OOCNews(TEAM_GROVE_COLOR,string);
 			Log(chatLog, INFO, "%s og³oszenie: %s", GetPlayerLogName(playerid), params);
 			format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
