@@ -241,27 +241,6 @@ YCMD:wyjdz(playerid, params[], help)
 			SetPLocal(playerid, PLOCAL_DEFAULT); 
 			return 1;
 		}
-		
-		//wejscie do vinyl
-        else if(PlayerToPoint(1.5, playerid, ))
-        {
-            if(vinylStatus == 0 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
-            {
-                sendTipMessage(playerid, "Vinyl jest aktualnie zamkniêty! Skontaktuj siê z w³aœcicielem klubu."); 
-                return 1;
-            }
-            if(GetPVarInt(playerid, "Vinyl-bilet") < 1 && PlayerInfo[playerid][pMember] != 9 && PlayerInfo[playerid][pLider] != 9)
-            {
-                sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyla!"); 
-                return 1;
-            }
-            SetPLocal(playerid, PLOCAL_ORG_SN); 
-            SetPlayerVirtualWorld(playerid, 71);
-            SetPlayerPos(playerid, 816.4222, -1413.7644, -22.5834);
-            GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
-            Wchodzenie(playerid);
-            return 1;
-        }
         //IBIZA
 		//wyjscie glowne
     	else if(PlayerToPoint(1.5, playerid, 417.3976, -1858.9402, -65.3905))
