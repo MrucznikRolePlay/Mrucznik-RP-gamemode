@@ -732,6 +732,25 @@ GivePBlockForPlayer(player[], adminid, result[])
 	return 1;
 }
 
+Admin_LoadTXD()
+{
+	foreach(new i : Player)
+	{
+    	InfoT[i] = TextDrawCreate(35.000000,267.000000,"");
+		TextDrawUseBox(InfoT[i],1);
+		TextDrawBoxColor(InfoT[i],0x00000066);
+		TextDrawTextSize(InfoT[i],216.000000,25.000000);
+		TextDrawAlignment(InfoT[i],0);
+		TextDrawBackgroundColor(InfoT[i],0x000000ff);
+		TextDrawFont(InfoT[i],1);
+		TextDrawLetterSize(InfoT[i],0.299999,1.000000);
+		TextDrawColor(InfoT[i],0xffffffff);
+		TextDrawSetOutline(InfoT[i],1);
+		TextDrawSetProportional(InfoT[i],1);
+		TextDrawSetShadow(InfoT[i],1);
+	}
+}
+
 
 //-----------------<[ Timery: ]>-------------------
 
@@ -744,6 +763,12 @@ public StopDraw()
 	}
 	KillTimer(karaTimer);
 	return 1;
+}
+
+forward InfoHide(playerid);
+public InfoHide(playerid)
+{
+	TextDrawHideForPlayer(playerid, Text:InfoT[playerid]);
 }
 
 

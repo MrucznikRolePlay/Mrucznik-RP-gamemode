@@ -175,22 +175,99 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	else if(dialogid == 9521) //kara warn
 	{
 		new giveplayerid = GetPVarInt(playerid, "PunishWarnPlayer");
-		if(!response) return sendTipMessage(playerid, sprintf("Anulowano nadawanie kary warna dla %s", GetNick(giveplayerid)));
+		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary warna dla %s.", GetNick(giveplayerid)));
 		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
 		{
 			new reason[64], string[256];
 			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
 			GiveWarnForPlayer(giveplayerid, playerid, reason);
 			DeletePVar(playerid, "PunishWarnPlayer");
+			DeletePVar(playerid, "PunishWarnPlayer_Reason");
+			
+			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			{
+				iloscBan[playerid]++;
+			}
+			else if(GetPlayerAdminDutyStatus(playerid) == 0)
+			{
+				iloscPozaDuty[playerid]++; 
+			}
 			if(kary_TXD_Status == 1)
 			{
-				format(string, sizeof(string), "%s (3 warny)", reason);
-				BanPlayerTXD(giveplayerid, playerid, string); 
+				if(PlayerInfo[giveplayerid][pWarns] >= 3)
+				{
+					format(string, sizeof(string), "%s (3 warny)", reason);
+					BanPlayerTXD(giveplayerid, playerid, string); 
+				}
+				else 
+				{
+					WarnPlayerTXD(giveplayerid, playerid, reason);
+				}
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
+				if(PlayerInfo[giveplayerid][pWarns] >= 3)
+				{
+					format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
+				}
+				else
+				{
+					format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
+				}
 				SendPunishMessage(string, playerid); 
+			}
+		}
+		return 1;
+	}
+	else if(dialogid == 9522) //kara ban
+	{
+		new giveplayerid = GetPVarInt(playerid, "PunishBanPlayer");
+		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary bana dla %s.", GetNick(giveplayerid)));
+		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid)))
+		{
+			new reason[64], string[256];
+			GetPVarString(playerid, "PunishBanPlayer_Reason", reason, sizeof(reason));
+			GiveWarnForPlayer(giveplayerid, playerid, reason);
+			DeletePVar(playerid, "PunishBanPlayer");
+			DeletePVar(playerid, "PunishBanPlayer_Reason");
+			
+
+			SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
+			Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ bana, powód: %s", 
+				GetPlayerLogName(playerid),
+				GetPlayerLogName(giveplayerid),
+				reason
+			);
+			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			{
+				iloscBan[playerid]++;
+			}
+			else if(GetPlayerAdminDutyStatus(playerid) == 0)
+			{
+				iloscPozaDuty[playerid]++; 
+			}
+			if(kary_TXD_Status == 1)
+			{
+				BanPlayerTXD(giveplayerid, playerid, reason); 
+			}
+			else if(kary_TXD_Status == 0)
+			{
+				format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayerid, reason);
+				SendPunishMessage(string, playerid); 
+			}		
+			//adminowe logi
+			new str[128];
+			format(str, sizeof(str), "Admini/%s.ini", GetNickEx(playerid));
+			dini_IntSet(str, "Ilosc_Banow", dini_Int(str, "Ilosc_Banow")+1 );
+			MruMySQL_Banuj(giveplayerid, reason, playerid);
+			KickEx(giveplayerid);
+			if(PlayerInfo[giveplayerid][pAdmin] >= 1)
+			{
+				MruMySQL_Banuj(playerid, reason, giveplayerid);
+				Log(punishmentLog, INFO, "Admin %s zosta³ zbanowany za zbanowanie admina %s", 
+					GetPlayerLogName(playerid),
+					GetPlayerLogName(giveplayerid));
+				KickEx(playerid);
 			}
 		}
 		return 1;

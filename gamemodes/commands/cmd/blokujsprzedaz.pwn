@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:blokujsprzedarz(playerid, params[], help)
+YCMD:blokujsprzedaz(playerid, params[], help)
 {
 	new string[64];
 

@@ -56,7 +56,7 @@
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
 #include "cmd/blokujnoba.pwn"
-#include "cmd/blokujsprzedarz.pwn"
+#include "cmd/blokujsprzedaz.pwn"
 #include "cmd/boxstats.pwn"
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
@@ -775,6 +775,12 @@ static Aliases()
 	Command_AddAltNamed("giveroom", "dajpokoj");
 	Command_AddAltNamed("giveroom", "dajwynajem");
 
+	//goto
+	Command_AddAltNamed("goto", "to");
+
+	//gethere
+	Command_AddAltNamed("gethere", "tm");
+
 	//glosnik
 	Command_AddAltNamed("glosnik", "sanradio");
 
@@ -1454,6 +1460,10 @@ static Aliases()
 
 	//zaufanyggracz
 	Command_AddAltNamed("zaufanyggracz", "zg");
+
+	//zdejmijbpk
+	Command_AddAltNamed("zdejmijbpk", "zdejmijbp");
+	Command_AddAltNamed("zdejmijbpk", "unbp");
 
 	//wyloguj
 	Command_AddAltNamed("wyloguj", "logout");

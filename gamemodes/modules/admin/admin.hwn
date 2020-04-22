@@ -25,7 +25,7 @@
 new kary_TXD_Status = 1;
 new togADMTXD[MAX_PLAYERS];
 new karaTimer;
-
+new Text:InfoT[MAX_PLAYERS];
 
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------
