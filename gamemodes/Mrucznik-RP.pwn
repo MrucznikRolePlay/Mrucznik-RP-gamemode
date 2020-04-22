@@ -1743,6 +1743,7 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 		amount,
 		weaponid);
 	SavePlayerDamaged(damagedid, playerid, amount, weaponid);
+	SavePlayerDamage(playerid, damagedid, amount, weaponid)
 	return 1;
 }
 

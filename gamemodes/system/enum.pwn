@@ -198,6 +198,14 @@ enum eOBRAZENIA {
 	WEAPONID,
 	Float:DAMAGE
 }
+enum eOBRAZENIAZADANE {
+	HOURS,
+	MINUTES,
+	SECONDS,
+	DEFENDER[MAX_PLAYER_NAME],
+	WEAPONID,
+	Float:DAMAGE
+}
 //25.07 system stref gangów
 new Float:Zone_Data[MAX_ZONES][4] = {
     {1983.0, -1027.0, 2266.0, -933.0},
