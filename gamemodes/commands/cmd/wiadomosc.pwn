@@ -119,7 +119,7 @@ YCMD:wiadomosc(playerid, params[], help)
             }
             if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
             {
-                format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                format(string, sizeof(string), "[I]%s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
                 ABroadCast(COLOR_LIGHTGREEN,string,1,1);
             }
         }
@@ -138,7 +138,15 @@ YCMD:wiadomosc(playerid, params[], help)
             
                 format(string, sizeof(string), "[.] %s", text2);
                 SendClientMessage(playerid, COLOR_YELLOW, string); 
-                SavePlayerSentMessage(playerid, string);          
+                SavePlayerSentMessage(playerid, string);    
+
+                if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
+                {
+                    format(string, sizeof(string), "[I]%s(%d) /w -> %s(%d): %s [.]", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                    ABroadCast(COLOR_LIGHTGREEN,string,1,1);
+                    format(string, sizeof(string), "[.] %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text2);
+                    ABroadCast(COLOR_LIGHTGREEN,string,1,1);
+                }      
                 
                 format(string, sizeof(string), "лл %s (%d): %s [.]", GetNick(playerid), playerid, text);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
