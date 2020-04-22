@@ -82,6 +82,7 @@ YCMD:nastepnylevel(playerid, params[], help)
 					if(PlayerInfo[playerid][pLevel] % 10 == 0)
 					{
 						format(infostring, sizeof(infostring), "Otrzyma³eœ darmow¹ zmianê nicku w ramach %d poziomu!", nxtlevel);
+						sendTipMessageEx(playerid, COLOR_GRAD1, infostring);
 						PlayerInfo[playerid][pZmienilNick]++;
 					}
 				}
