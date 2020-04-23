@@ -3139,6 +3139,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] > 2500)
 						{
+							if(PlayerInfo[playerid][pLevel] < 2)
+							{
+								sendErrorMessage(playerid, "CB Radio tylko od 2 lvl!");
+								return 1;
+							}
+
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
 								new skill = 2500 / 100;
