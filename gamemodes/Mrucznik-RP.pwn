@@ -1104,12 +1104,12 @@ public OnPlayerConnect(playerid)
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-   	/*if(!IsNickCorrect(nick))
+   	if(!NickCensoreCorrect(nick))
     {
         SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
 		return 1;
-    }*/
+    }
 	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
@@ -2774,6 +2774,7 @@ SetPlayerSpawnPos(playerid)
 					SetPlayerSpawnPos(playerid);
 				    return 1;
 				}
+				Wchodzenie(playerid);
                 SetPlayerPos(playerid, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]);
 	  		}
 	  		else if(PlayerInfo[playerid][pSpawn] == 2) //Spawn w œrodku domu

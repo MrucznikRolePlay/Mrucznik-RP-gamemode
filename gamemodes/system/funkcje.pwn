@@ -8785,11 +8785,29 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z][a-z]+([ _][A-Z][a-z]+([A-HJ-Z][a-z]+)?){1,2}$") >= 0)
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
 	{
 		return 1;
 	}
 	return 0;
+}
+
+NickCensoreCorrect(nick[])
+{
+    if(strfind(nick,"Sandra_Rabucha",true) != -1) return 0; //Rozalka
+    else if(strfind(nick,"rabuc",true) != -1) return 0;
+    else if(strfind(nick,"rebuc",true) != -1) return 0;
+	else if(strfind(nick,"Damian_Szymanski",true) != -1) return 0; //Creative
+	else if(strfind(nick,"szymanski",true) != -1) return 0;
+	else if(strfind(nick,"szymansky",true) != -1) return 0;
+	else if(strfind(nick,"szymanczak",true) != -1) return 0;
+	else if(strfind(nick,"Szymon_Gajda",true) != -1) return 0; //Mrucznik
+	else if(strfind(nick,"gajda",true) != -1) return 0;
+	else if(strfind(nick,"Kalisiewicz",true) != -1) return 0; //Telehama
+	else if(strfind(nick,"kalisie",true) != -1) return 0;
+	else if(strfind(nick,"kalisio",true) != -1) return 0;
+	else if(strfind(nick,"kalisia",true) != -1) return 0;
+	return 1;
 }
 
 CheckAlfaNumeric(password[])

@@ -1,32 +1,3 @@
-BreakLines(string[], delimiter[], limit)
-{
-	new inserts, tempLimit = limit, pos[50], string2[150], lastEmptyPos;
-	format(string2, 150, string);
-	
-	for(new i; i < strlen(string); i++)
-	{
-		if( string[i] == ' ' ) lastEmptyPos = i;
-		if( string[i] == '~' && string[i+1] == 'n' && string[i+2] == '~' ) tempLimit = i + limit;
-		if( i >= tempLimit )
-		{
-			inserts += 1;
-			tempLimit = i + limit;
-			
-			pos[inserts-1] = lastEmptyPos + ((inserts-1) * strlen(delimiter));
-			if( inserts > 1 ) pos[inserts-1] -= (inserts-1);
-		}
-	}
-	
-	for(new d; d < 50; d++)
-	{
-		if( pos[d] == 0 ) break;
-		strdel(string2, pos[d], pos[d]+1);
-		strins(string2, delimiter, pos[d]);
-	}
-	
-	return _:string2;
-}
-
 #define DLG_NO_ACTION		1
 #define DG_DESC_DELETE 		2
 #define DG_DESC_ADD 		3
