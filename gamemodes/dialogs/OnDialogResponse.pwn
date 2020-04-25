@@ -2354,7 +2354,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                 	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze stra¿¹ po¿arn¹, prosze czekaæ...");
     				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaæ krótki opis zdarzenia.");	
-    				Mobile[playerid] = SHERIFF_NUMBER;
+    				Mobile[playerid] = LSMC_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 2:
@@ -2678,12 +2678,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,2);
 						SetPlayerPos(playerid,1093.0625,1530.8715,6.6905);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 						PlayerInfo[playerid][pLocal] = 255;
 						GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
-						Wchodzenie(playerid);
 					}
 					case 1://parking
 					{
@@ -2692,12 +2692,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,0);
 						SetPlayerPos(playerid,596.5255, -1489.2544, 15.3587);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
 						GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
-						Wchodzenie(playerid);
 					}
 					case 2://stanowe
 					{
@@ -2706,11 +2706,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 1);
 						SetPlayerPos(playerid, 594.05334, -1476.27490, 81.82840+0.5);
 						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
-						Wchodzenie(playerid);
 					}
 					case 3://recepcja
 					{
@@ -2719,7 +2719,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,1);
 						SetPlayerPos(playerid,586.83704, -1473.89270, 89.30576);
@@ -2735,8 +2734,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,2);
 						SetPlayerPos(playerid,592.65466, -1486.76575, 82.10487);
@@ -2754,7 +2751,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,3);
 						SetPlayerPos(playerid,591.37579, -1482.26672, 80.43560);
@@ -2762,7 +2758,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
-						Wchodzenie(playerid);
 
 					}
 					case 6://Biura federalne
@@ -2772,7 +2767,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,4);
 						SetPlayerPos(playerid,596.21857, -1477.92395, 84.06664);
@@ -2788,7 +2782,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,5);
 						SetPlayerPos(playerid,589.23029, -1479.66357, 91.74274);
@@ -2803,13 +2796,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPos(playerid,585.70782, -1479.54211, 99.01273);
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,6);
+						SetPlayerPos(playerid,585.70782, -1479.54211, 99.01273);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, CID/ERT");
 						PlayerInfo[playerid][pLocal] = 212;
-						Wchodzenie(playerid);
 					}
 					case 9://sale treningowe
 					{
@@ -2818,12 +2809,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPos(playerid, 590.42767, -1447.62939, 80.95732);
-						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 7);
+						SetPlayerPos(playerid, 590.42767, -1447.62939, 80.95732);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
-						Wchodzenie(playerid);
 					}
 					case 10:
 					{
@@ -2832,12 +2821,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPos(playerid, 605.5609, -1462.2583, 88.1674);
-						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 8);
+						SetPlayerPos(playerid, 605.5609, -1462.2583, 88.1674);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Sale przes³uchañ");
-						Wchodzenie(playerid);
 					}
 					case 11://dach
 					{
@@ -2846,11 +2833,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,0);
 						SetPlayerPos(playerid,613.4404,-1471.9745,73.8816);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
 						PlayerInfo[playerid][pLocal] = 255;
-						Wchodzenie(playerid);
 					}
 				}
 			}
@@ -3229,6 +3216,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] > 2500)
 						{
+							if(PlayerInfo[playerid][pLevel] < 2)
+							{
+								sendErrorMessage(playerid, "CB Radio tylko od 2 lvl!");
+								return 1;
+							}
+
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
 								new skill = 2500 / 100;
@@ -4856,6 +4849,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
+							);
 							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
@@ -4923,6 +4919,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
+							);
 							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
@@ -4992,6 +4991,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
+							);
 							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
@@ -5052,6 +5054,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
+							);
 							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
@@ -5088,6 +5093,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							GetPlayerLogName(playerid), GetPlayerLogName(playa), 1133, 1117, GetVehicleLogName(pojazd), 10000
+						);
 						ZabierzKase(playerid, 10000);
 						format(string, sizeof(string), "~r~-$%d", 10000);
 						GameTextForPlayer(playerid, string, 5000, 1);

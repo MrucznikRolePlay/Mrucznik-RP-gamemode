@@ -11605,7 +11605,7 @@ TJD_TryPickup(playerid, veh)
                 TJDBoxUsed[idx] = true;
                 TJDVehBox[veh] = idx+1;
                 TJDBoxOwner[idx] = playerid;
-                AttachDynamicObjectToVehicle(TJDBoxes[idx], veh, 0.0, 0.6, 0.43, 0.0, 0.0, 0.0);
+                // AttachDynamicObjectToVehicle(TJDBoxes[idx], veh, 0.0, 0.6, 0.43, 0.0, 0.0, 0.0);
 
                 new rand = random(2);
                 switch(rand)
@@ -11655,69 +11655,69 @@ public TJD_LoadTime(playerid, count, maxcount)
     }
     else
     {
-        if(!IsPlayerInAnyVehicle(playerid))
-        {
-            for(new i=0;i<12;i++)
-            {
-                if(TransObjects[playerid][i] != 0)
-                {
-                    if(IsValidDynamicObject(TransObjects[playerid][i]))
-                    {
-                        DestroyDynamicObject(TransObjects[playerid][i]);
-                        TransObjects[playerid][i] = 0;
-                    }
-                }
-            }
-            return;
-        }
+        // if(!IsPlayerInAnyVehicle(playerid))
+        // {
+        //     for(new i=0;i<12;i++)
+        //     {
+        //         if(TransObjects[playerid][i] != 0)
+        //         {
+        //             if(IsValidDynamicObject(TransObjects[playerid][i]))
+        //             {
+        //                 DestroyDynamicObject(TransObjects[playerid][i]);
+        //                 TransObjects[playerid][i] = 0;
+        //             }
+        //         }
+        //     }
+        //     return;
+        // }
 
-        TransObjects[playerid][count] = CreateDynamicObject(TransportJobData[idx][eTJDModel], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        // TransObjects[playerid][count] = CreateDynamicObject(TransportJobData[idx][eTJDModel], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
-        new Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz;
+        // new Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz;
 
-        new Float:step = floatdiv(floatsub(TJD_PLACE_MAX_Y, TJD_PLACE_MIN_Y),(maxcount));
+        // new Float:step = floatdiv(floatsub(TJD_PLACE_MAX_Y, TJD_PLACE_MIN_Y),(maxcount));
 
-        if(maxcount > 5)
-        {
-            if(count%2==0)
-            {
-                x = -TJD_PLACE_X;
-                y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*(count-(maxcount/2)));
-            }
-            else
-            {
-                x = TJD_PLACE_X;
-                y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*((count-1)-(maxcount/2)));
-            }
-        }
-        else y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*(count-(maxcount/2)));
-        z = TJD_PLACE_Z;
+        // if(maxcount > 5)
+        // {
+        //     if(count%2==0)
+        //     {
+        //         x = -TJD_PLACE_X;
+        //         y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*(count-(maxcount/2)));
+        //     }
+        //     else
+        //     {
+        //         x = TJD_PLACE_X;
+        //         y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*((count-1)-(maxcount/2)));
+        //     }
+        // }
+        // else y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*(count-(maxcount/2)));
+        // z = TJD_PLACE_Z;
 
 
-        if(TransportJobData[idx][eTJDModel] == 1454) rx = 90.0, z-=0.1;
-        else if(TransportJobData[idx][eTJDModel] == 1217) z -= 0.3;
-        else if(TransportJobData[idx][eTJDModel] == 1271)
-        {
-            SetDynamicObjectMaterial(TransObjects[playerid][count], 0, 3630, "compthotrans_la", "sjmlawarplt3");
-            z -= 0.4;
-            if(count%2==0) x = -(TJD_PLACE_X/2);
-            else x = TJD_PLACE_X/2;
-        }
-        else if(TransportJobData[idx][eTJDModel] == 3035)
-        {
-            rz = 90.0;
-        }
-        else if(TransportJobData[idx][eTJDModel] == 944 && maxcount == 5)
-        {
-            y+=0.6;
-        }
+        // if(TransportJobData[idx][eTJDModel] == 1454) rx = 90.0, z-=0.1;
+        // else if(TransportJobData[idx][eTJDModel] == 1217) z -= 0.3;
+        // else if(TransportJobData[idx][eTJDModel] == 1271)
+        // {
+        //     SetDynamicObjectMaterial(TransObjects[playerid][count], 0, 3630, "compthotrans_la", "sjmlawarplt3");
+        //     z -= 0.4;
+        //     if(count%2==0) x = -(TJD_PLACE_X/2);
+        //     else x = TJD_PLACE_X/2;
+        // }
+        // else if(TransportJobData[idx][eTJDModel] == 3035)
+        // {
+        //     rz = 90.0;
+        // }
+        // else if(TransportJobData[idx][eTJDModel] == 944 && maxcount == 5)
+        // {
+        //     y+=0.6;
+        // }
 
-        AttachDynamicObjectToVehicle(TransObjects[playerid][count], GetPlayerVehicleID(playerid), x,y,z, rx, ry, rz);
+        // AttachDynamicObjectToVehicle(TransObjects[playerid][count], GetPlayerVehicleID(playerid), x,y,z, rx, ry, rz);
 
         TJDTransporter[GetPlayerVehicleID(playerid)] = playerid+1;
 
         count++;
-        Streamer_Update(playerid);
+        // Streamer_Update(playerid);
         SetTimerEx("TJD_LoadTime", TJD_LOADUNLOAD_TIME, 0, "iii", playerid, count, maxcount);
     }
 }
@@ -11753,8 +11753,8 @@ public TJD_UnloadTime(playerid, count, maxcount)
     }
     else
     {
-        DestroyDynamicObject(TransObjects[playerid][count]);
-        TransObjects[playerid][count] = 0;
+        // DestroyDynamicObject(TransObjects[playerid][count]);
+        // TransObjects[playerid][count] = 0;
         count++;
         SetTimerEx("TJD_UnloadTime", TJD_LOADUNLOAD_TIME, 0, "iii", playerid, count, maxcount);
     }

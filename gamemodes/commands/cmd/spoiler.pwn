@@ -309,8 +309,12 @@ YCMD:spoiler(playerid, params[], help)
                                                 else
                                                 {
                                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "W tym wozie nie mo¿na zamontowaæ spojleru Alien ani X-Flow");
+                                                    return 1;
                                                 }
                                             }
+                                            Log(payLog, INFO, "Gracz %s zamontowa³ %s spoiler %d na pojazd %s za %d$",
+                                                GetPlayerLogName(playerid), GetPlayerLogName(playa), spojlerid, GetVehicleLogName(pojazd), 25000
+                                            );
                                         }
                                         else
                                         {
