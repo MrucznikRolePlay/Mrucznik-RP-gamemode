@@ -1322,6 +1322,10 @@ public nieudalo3(playerid){
     	RemovePlayerFromVehicleEx(playerid);
     	KradniecieWozu[playerid] = 0;
     	NieSpamujKradnij[playerid] = 0;
+		new pZone[MAX_ZONE_NAME];
+		GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
+		format(komunikat, sizeof(komunikat), "HQ: Zg³oszono próbê kradzie¿y %s na %s.", VehicleNames[GetVehicleModel(vehi)-400], pZone);
+		SendFamilyMessage(FRAC_LSPD, COLOR_LIGHTRED, komunikat, true);
     }
     else
     {
@@ -12603,7 +12607,26 @@ SavePlayerDamaged(playerid, attackerid, Float:damage, weapon)
 	Obrazenia[playerid][idx][HOURS] = hour;
 	Obrazenia[playerid][idx][MINUTES] = minute;
 	Obrazenia[playerid][idx][SECONDS] = second;
-	ObrazeniaIndex[playerid] = (idx+1) % 10;
+	ObrazeniaIndex[playerid] = (idx+1) % 20;
+}
+
+SavePlayerDamage(playerid, defenderid, Float:damage, weapon)
+{
+	new hour, minute, second;
+	new sec = gettime() + 7200;
+	new day;
+    day = floatround(sec / 86400);
+    hour = floatround((sec - (day * 86400)) / 3600);
+    minute = floatround((sec - (day * 86400) - (hour * 3600)) / 60);
+    second = sec % 60;
+	new idx = ObrazeniaZadaneIndex[playerid];
+	format(ObrazeniaZadane[playerid][idx][DEFENDER], MAX_PLAYER_NAME, "%s", GetNick(defenderid));
+	ObrazeniaZadane[playerid][idx][DAMAGE] = damage;
+	ObrazeniaZadane[playerid][idx][WEAPONID] = weapon;
+	ObrazeniaZadane[playerid][idx][HOURS] = hour;
+	ObrazeniaZadane[playerid][idx][MINUTES] = minute;
+	ObrazeniaZadane[playerid][idx][SECONDS] = second;
+	ObrazeniaZadaneIndex[playerid] = (idx+1) % 20;
 }
 
 ShowPlayerDamaged(playerid, forplayerid)
@@ -12634,7 +12657,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
 	}
-	for(new i= 9; i >= index; i--) 
+	for(new i= 19; i >= index; i--) 
 	{
 		hp = Obrazenia[playerid][i][DAMAGE];
 		if(hp <= 0.1) continue;
@@ -12653,6 +12676,55 @@ ShowPlayerDamaged(playerid, forplayerid)
 	}
 	return 1;
 }
+
+ShowPlayerDamage(playerid, forplayerid)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Damagelog gracza %s: ---", GetNick(playerid)));
+	new index = ObrazeniaZadaneIndex[playerid];
+	new string[72];
+	new weapon_decoded[24];
+	new godzina,minuta,sekunda,Float:hp;
+	new broniacy[MAX_PLAYER_NAME];
+	if(index != 0) 
+	{
+		for(new i = index-1; i>=0; i--)
+		{
+			hp = ObrazeniaZadane[playerid][i][DAMAGE];
+			if(hp <= 0.1) continue;
+			switch(ObrazeniaZadane[playerid][i][WEAPONID])
+			{
+				case 0..42: format(weapon_decoded, sizeof(weapon_decoded), "%s", GunNames[ObrazeniaZadane[playerid][i][WEAPONID]]);
+				default: format(weapon_decoded, sizeof(weapon_decoded), "[WeaponID %d]", ObrazeniaZadane[playerid][i][WEAPONID]);
+			}
+			godzina = ObrazeniaZadane[playerid][i][HOURS];
+			minuta = ObrazeniaZadane[playerid][i][MINUTES];
+			sekunda = ObrazeniaZadane[playerid][i][SECONDS];
+			hp = hp / 2;
+			format(broniacy, sizeof(broniacy), "%s", ObrazeniaZadane[playerid][i][DEFENDER]);
+			format(string, sizeof(string), "%d:%d:%d | zada³ %0.1fHP graczowi %s z %s[%d]", godzina, minuta, sekunda, hp, broniacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
+			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
+		}
+	}
+	for(new i= 19; i >= index; i--) 
+	{
+		hp = ObrazeniaZadane[playerid][i][DAMAGE];
+		if(hp <= 0.1) continue;
+		switch(ObrazeniaZadane[playerid][i][WEAPONID])
+		{
+			case 0..42: format(weapon_decoded, sizeof(weapon_decoded), "%s", GunNames[ObrazeniaZadane[playerid][i][WEAPONID]]);
+			default: format(weapon_decoded, sizeof(weapon_decoded), "[WeaponID %d]", ObrazeniaZadane[playerid][i][WEAPONID]);
+		}
+		godzina = ObrazeniaZadane[playerid][i][HOURS];
+		minuta = ObrazeniaZadane[playerid][i][MINUTES];
+		sekunda = ObrazeniaZadane[playerid][i][SECONDS];
+		hp = hp / 2;
+		format(broniacy, sizeof(broniacy), "%s", ObrazeniaZadane[playerid][i][DEFENDER]);
+		format(string, sizeof(string), "%d:%d:%d | zada³ %0.1fHP graczowi %s z %s[%d]", godzina, minuta, sekunda, hp, broniacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
+		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
+	}
+	return 1;
+}
+
 
 ShowPlayerSentMessages(playerid, forplayerid)
 {

@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ pracownicy ]----------------------------------------------//
+//-----------------------------------------------[ screenshot ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: werem
+// Data utworzenia: 20.04.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -27,26 +29,24 @@
 /*
 	
 */
-
-YCMD:pracownicy(playerid, params[], help)
+YCMD:screenshot(playerid, params[], help)
 {
-    new frac = GetPlayerFraction(playerid);
-	new string[64];
-	if(frac != 0 && PlayerInfo[playerid][pRank] >= 1)
-	{
-	    SendClientMessage(playerid, COLOR_GREEN, "Pracownicy Online:");
-		foreach(new i : Player)
-		{
-		    if(frac == GetPlayerFraction(i))
-		    {
-		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][pRank]);
-		        SendClientMessage(playerid, COLOR_GRAD1, string);
-		    }
-		}
-	}
-	else
-	{
-	    sendErrorMessage(playerid, "Nie jesteœ liderem lub osob¹ z 1 rang¹!");
-	}
-	return 1;
+    if(IsPlayerConnected(playerid))
+    {
+        if(!Worek_MamWorek[playerid])
+        {
+            if(!GetPVarInt(playerid, "HasScreenFilter"))
+            {
+                Have_Worek(playerid);
+                SetPVarInt(playerid, "HasScreenFilter", 1);
+            }
+            else
+            {
+                UnHave_Worek(playerid);
+                DeletePVar(playerid, "HasScreenFilter");
+            }
+        }
+        else sendErrorMessage(playerid, "Masz na sobie za³o¿ony worek!");
+    }
+    return 1;
 }

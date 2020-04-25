@@ -193,10 +193,6 @@ YCMD:panel(playerid, params[], help)
                 MruMySQL_Unwarn(var);
                 format(str, sizeof(str), "AdmCmd: Konto gracza %s zosta³o unwarnowane przez %s.", var, GetNickEx(playerid));
                 ABroadCast(COLOR_YELLOW,str,1);
-				if(!IsPlayerAdmin(playerid))
-				{
-					SendClientMessage(playerid, COLOR_YELLOW, str);
-				}
                 Log(punishmentLog, INFO, "Admin %s unwarnowa³ %s", GetPlayerLogName(playerid), var);
             }
             else sendTipMessage(playerid, "Gracz nie posiada warnów");

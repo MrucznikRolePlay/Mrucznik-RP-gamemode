@@ -1014,7 +1014,9 @@ new Worek_KtoZalozyl[MAX_PLAYERS];
 new Worek_KomuZalozylem[MAX_PLAYERS];
 //cmd obrazenia
 new ObrazeniaIndex[MAX_PLAYERS];
-new Obrazenia[MAX_PLAYERS][10][eOBRAZENIA];
+new ObrazeniaZadaneIndex[MAX_PLAYERS];
+new Obrazenia[MAX_PLAYERS][20][eOBRAZENIA];
+new ObrazeniaZadane[MAX_PLAYERS][20][eOBRAZENIAZADANE];
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
