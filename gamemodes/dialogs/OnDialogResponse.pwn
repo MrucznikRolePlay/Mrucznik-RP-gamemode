@@ -2877,12 +2877,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    }
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							new randphone = 10000 + random(89999);//minimum 1000  max 9999
-							PlayerInfo[playerid][pPnumber] = randphone;
 							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
 							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
-							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d", GetPlayerLogName(playerid), randphone);
+							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
+								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
+							);
+							PlayerInfo[playerid][pPnumber] = randphone;
 							return 1;
 						}
 					}
