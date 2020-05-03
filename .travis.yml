@@ -54,7 +54,7 @@ before_deploy:
 
 deploy:
 - provider: script
-  script: CI_scripts/sftp_deploy.sh 54.37.136.94 22 samp /home/samp/samp03/gamemodes
+  script: CI_scripts/sftp_deploy.sh 54.37.136.94 22 samp /home/samp/serverfiles/gamemodes
     gamemodes/Mrucznik-RP.amx
   skip_cleanup: true
   on:
