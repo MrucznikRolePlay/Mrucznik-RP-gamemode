@@ -49,6 +49,7 @@ AdminDutyPlayer(playerid, status)
 		MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
 		SetPlayerColor(playerid, 0xFF0000FF);
 		firstDutyAdmin[playerid] = 1; 
+		SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
 	}
 	else//Je¿eli ma zejœæ
 	{	

@@ -458,30 +458,18 @@ GiveWarnForPlayer(playerid, adminid, result[])
 		KickEx(playerid);
 		return 1;	
 	}
-	else
-	{
-		Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ warna, powód: %s", 
-			GetPlayerLogName(adminid),
-			GetPlayerLogName(playerid),
-			result);
-	}
-	format(str, sizeof(str), "Dosta³eœ warna od %s, powód: %s", GetNickEx(adminid), (result));
-	SendClientMessage(playerid, COLOR_LIGHTRED, str);
+
 	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ warna, powód: %s", 
 			GetPlayerLogName(adminid),
 			GetPlayerLogName(playerid),
 			result);
-	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
-	AntySpam[adminid] = 1;
-	KickEx(playerid);
-	if(GetPlayerAdminDutyStatus(adminid) == 1)
-	{
-		iloscWarn[adminid] = iloscWarn[adminid]+1;
-	}
-	else if(GetPlayerAdminDutyStatus(adminid) == 0)
-	{
-		iloscPozaDuty[adminid]++; 
-	}
+	format(str, sizeof(str), "Dosta³eœ warna od %s, powód: %s", GetNickEx(adminid), (result));
+	SendClientMessage(playerid, COLOR_LIGHTRED, str);
+	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ warna, powód: %s", 
+		GetPlayerLogName(adminid),
+		GetPlayerLogName(playerid),
+		result
+	);
 	return 1;
 }
 GiveBanForPlayer(playerid, adminid, result[])

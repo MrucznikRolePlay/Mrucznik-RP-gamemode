@@ -7831,25 +7831,6 @@ ProxDetector(Float:radi, playerid, string[],col1,col2,col3,col4,col5)
 	return 1;
 }
 
-CrimInRange(Float:radi, playerid,copid)
-{
-	if(IsPlayerConnected(playerid)&&IsPlayerConnected(copid))
-	{
-		new Float:posx, Float:posy, Float:posz;
-		new Float:oldposx, Float:oldposy, Float:oldposz;
-		new Float:tempposx, Float:tempposy;
-		GetPlayerPos(playerid, oldposx, oldposy, oldposz);
-		GetPlayerPos(copid, posx, posy, posz);
-		tempposx = (oldposx -posx);
-		tempposy = (oldposy -posy);
-		if (((tempposx < radi) && (tempposx > -radi)) && ((tempposy < radi) && (tempposy > -radi)))
-		{
-			return 1;
-		}
-	}
-	return 0;
-}
-
 PolicjantWStrefie(Float:radi, playerid)
 {
 	if(IsPlayerConnected(playerid))

@@ -184,14 +184,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			DeletePVar(playerid, "PunishWarnPlayer");
 			DeletePVar(playerid, "PunishWarnPlayer_Reason");
 			
+
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{
-				iloscBan[playerid]++;
+				if(PlayerInfo[giveplayerid][pWarns] >= 3)
+				{
+					iloscBan[playerid]++;
+				}
+				else
+				{
+					iloscWarn[playerid] = iloscWarn[playerid]+1;
+				}
 			}
-			else if(GetPlayerAdminDutyStatus(playerid) == 0)
+			else
 			{
 				iloscPozaDuty[playerid]++; 
 			}
+
 			if(kary_TXD_Status == 1)
 			{
 				if(PlayerInfo[giveplayerid][pWarns] >= 3)
@@ -2648,7 +2657,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				switch(listitem)//Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
+				switch(listitem)//Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Areszt federalny\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
 				{
 					case 0://parking podziemny
 					{
@@ -2678,7 +2687,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
 					}
-					case 2://stanowe
+					case 2://areszt federalny
 					{
 						if(levelLock[FRAC_FBI][2] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
@@ -2688,7 +2697,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 1);
 						SetPlayerPos(playerid, 594.05334, -1476.27490, 81.82840+0.5);
-						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
+						GameTextForPlayer(playerid, "~p~Areszt federalny", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
 					}
 					case 3://recepcja

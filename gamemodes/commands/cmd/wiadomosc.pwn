@@ -153,7 +153,7 @@ YCMD:wiadomosc(playerid, params[], help)
             }
             if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
             {
-                format(string, sizeof(string), "[I]%s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                format(string, sizeof(string), "%s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
                 ABroadCast(COLOR_LIGHTGREEN,string,1,1);
             }
         }
@@ -176,7 +176,7 @@ YCMD:wiadomosc(playerid, params[], help)
 
                 if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
                 {
-                    format(string, sizeof(string), "[I]%s(%d) /w -> %s(%d): %s [.]", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                    format(string, sizeof(string), "%s(%d) /w -> %s(%d): %s [.]", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
                     ABroadCast(COLOR_LIGHTGREEN,string,1,1);
                     format(string, sizeof(string), "[.] %s", text2);
                     ABroadCast(COLOR_LIGHTGREEN,string,1,1);

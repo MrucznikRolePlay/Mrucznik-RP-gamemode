@@ -1054,7 +1054,11 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         	return Player_RemoveFromVeh(playerid);
     }
 	// -- customowe parametry dla poszczególnych pojazdów
-	if(IsARower(vehicleid)) SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
+	if(IsARower(vehicleid))
+	{
+		SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
+		engine = 1;
+	}
 	else if (GetVehicleModel(vehicleid) == 525) sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
     if(!ispassenger && !engine)
 	{
@@ -5087,6 +5091,11 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
+		if(GetPVarInt(playerid, "Timer_OnChangingWeapon"))
+		{
+			KillTimer(GetPVarInt(playerid, "Timer_OnChangingWeapon"));
+			DeletePVar(playerid, "Timer_OnChangingWeapon");
+		}
 		if(newstate == PLAYER_STATE_DRIVER)
         {
 			SetPlayerArmedWeapon(playerid, PlayerInfo[playerid][pGun0]); //anty driveby
