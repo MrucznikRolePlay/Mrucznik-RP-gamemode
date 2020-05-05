@@ -2640,7 +2640,7 @@ DajBronieFrakcyjne(playerid)
 	        playerWeapons[playerid][weaponLegal10] = 1;
 	    }
 	}
-	if(PlayerInfo[playerid][pMember] == 2)
+	else if(PlayerInfo[playerid][pMember] == 2)
 	{
 	    if(PlayerInfo[playerid][pGun1] == 0)
 	    {
@@ -2745,40 +2745,6 @@ DajBronieFrakcyjne(playerid)
     	    }
         }
 	}
-	else if(PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][pLider] == 5)
-	{
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pLider] == 6)
-	{
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 8; PlayerInfo[playerid][pAmmo1] = 1;
-	    }
-     	if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	        playerWeapons[playerid][weaponLegal6] = 0;
-	    }
-	}
 	else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7)
 	{
 	    if(PlayerInfo[playerid][pGun1] == 0)
@@ -2845,131 +2811,6 @@ DajBronieFrakcyjne(playerid)
 			PlayerInfo[playerid][pGun1] = 2; PlayerInfo[playerid][pAmmo1] = 1;
 			playerWeapons[playerid][weaponLegal1] = 1;
 		}
-	}
-	else if(PlayerInfo[playerid][pMember] == 12 || PlayerInfo[playerid][pLider] == 12)
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0  || PlayerInfo[playerid][pGun2] == 22 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 22; PlayerInfo[playerid][pAmmo2] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 32 && PlayerInfo[playerid][pAmmo4] < 25 || PlayerInfo[playerid][pAmmo4] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun4] = 32; PlayerInfo[playerid][pAmmo4] = 150;
-	        playerWeapons[playerid][weaponLegal5] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 2;
-	        playerWeapons[playerid][weaponLegal2] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 50 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 1000;
-	        playerWeapons[playerid][weaponLegal10] = 0;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 13 || PlayerInfo[playerid][pLider] == 13)
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0  || PlayerInfo[playerid][pGun2] == 22 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 22; PlayerInfo[playerid][pAmmo2] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 32 && PlayerInfo[playerid][pAmmo4] < 25 || PlayerInfo[playerid][pAmmo4] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun4] = 32; PlayerInfo[playerid][pAmmo4] = 150;
-	        playerWeapons[playerid][weaponLegal5] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 2;
-	        playerWeapons[playerid][weaponLegal2] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 50 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 1000;
-	        playerWeapons[playerid][weaponLegal10] = 0;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 14 || PlayerInfo[playerid][pLider] == 14)
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0  || PlayerInfo[playerid][pGun2] == 22 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 22; PlayerInfo[playerid][pAmmo2] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 32 && PlayerInfo[playerid][pAmmo4] < 25 || PlayerInfo[playerid][pAmmo4] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun4] = 32; PlayerInfo[playerid][pAmmo4] = 150;
-	        playerWeapons[playerid][weaponLegal5] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 2;
-	        playerWeapons[playerid][weaponLegal2] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 50 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 1000;
-	        playerWeapons[playerid][weaponLegal10] = 0;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 15 || PlayerInfo[playerid][pLider] == 15)//NoA
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0  || PlayerInfo[playerid][pGun2] == 22 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 22; PlayerInfo[playerid][pAmmo2] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 32 && PlayerInfo[playerid][pAmmo4] < 25 || PlayerInfo[playerid][pAmmo4] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun4] = 32; PlayerInfo[playerid][pAmmo4] = 150;
-	        playerWeapons[playerid][weaponLegal5] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 2;
-	        playerWeapons[playerid][weaponLegal2] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 50 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 1000;
-	        playerWeapons[playerid][weaponLegal10] = 0;
-	    }
-	}
- 	else if(PlayerInfo[playerid][pMember] == 16 || PlayerInfo[playerid][pLider] == 16)
-	{
-     	if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
 	}
 	return 1;
 }
