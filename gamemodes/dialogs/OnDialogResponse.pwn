@@ -227,17 +227,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new reason[64], string[256];
 			GetPVarString(playerid, "PunishBanPlayer_Reason", reason, sizeof(reason));
-			GiveWarnForPlayer(giveplayerid, playerid, reason);
+			GiveBanForPlayer(giveplayerid, playerid, reason);
 			DeletePVar(playerid, "PunishBanPlayer");
 			DeletePVar(playerid, "PunishBanPlayer_Reason");
-			
 
-			SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
-			Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ bana, powód: %s", 
-				GetPlayerLogName(playerid),
-				GetPlayerLogName(giveplayerid),
-				reason
-			);
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{
 				iloscBan[playerid]++;
@@ -255,20 +248,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayerid, reason);
 				SendPunishMessage(string, playerid); 
 			}		
-			//adminowe logi
-			new str[128];
-			format(str, sizeof(str), "Admini/%s.ini", GetNickEx(playerid));
-			dini_IntSet(str, "Ilosc_Banow", dini_Int(str, "Ilosc_Banow")+1 );
-			MruMySQL_Banuj(giveplayerid, reason, playerid);
-			KickEx(giveplayerid);
-			if(PlayerInfo[giveplayerid][pAdmin] >= 1)
-			{
-				MruMySQL_Banuj(playerid, reason, giveplayerid);
-				Log(punishmentLog, INFO, "Admin %s zosta³ zbanowany za zbanowanie admina %s", 
-					GetPlayerLogName(playerid),
-					GetPlayerLogName(giveplayerid));
-				KickEx(playerid);
-			}
 		}
 		return 1;
 	}

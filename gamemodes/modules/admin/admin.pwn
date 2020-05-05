@@ -484,6 +484,32 @@ GiveWarnForPlayer(playerid, adminid, result[])
 	}
 	return 1;
 }
+GiveBanForPlayer(playerid, adminid, result[])
+{
+	new str[256];
+	SendClientMessage(playerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
+	format(str, sizeof(str), "Dosta³eœ bana od %s, powód: %s", GetNickEx(adminid), (result));
+	SendClientMessage(playerid, COLOR_LIGHTRED, str);
+	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ bana, powód: %s", 
+		GetPlayerLogName(adminid),
+		GetPlayerLogName(playerid),
+		result
+	);
+
+	format(str, sizeof(str), "Admini/%s.ini", GetNickEx(adminid));
+	dini_IntSet(str, "Ilosc_Banow", dini_Int(str, "Ilosc_Banow")+1 );
+	MruMySQL_Banuj(playerid, result, adminid);
+	KickEx(playerid);
+	if(PlayerInfo[playerid][pAdmin] >= 1)
+	{
+		MruMySQL_Banuj(adminid, result, playerid);
+		Log(punishmentLog, INFO, "Admin %s zosta³ zbanowany za zbanowanie admina %s", 
+			GetPlayerLogName(adminid),
+			GetPlayerLogName(playerid));
+		KickEx(adminid);
+	}
+	return 1;
+}
 PBlockPlayerTXD(player[], adminid, reason[])
 {
 	new str[128];
