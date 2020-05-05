@@ -250,7 +250,6 @@
 #include "cmd/laptop.pwn"
 #include "cmd/licencje.pwn"
 #include "cmd/liderpomoc.pwn"
-#include "cmd/lina.pwn"
 #include "cmd/linie.pwn"
 #include "cmd/loadconfig.pwn"
 #include "cmd/loadinfo.pwn"

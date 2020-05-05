@@ -1039,13 +1039,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
 
-	if(IsAHeliModel(GetVehicleModel(vehicleid)) && ispassenger)
- 	{
-		SetPVarInt(playerid,"chop_id",GetPlayerVehicleID(playerid));
-  		SetPVarInt(playerid,"roped",0); 
-    }
-	else SetPVarInt(playerid,"chop_id",0);
-
     new engine, lights, alarm, doors, bonnet, boot, objective;
  	GetVehicleParamsEx(vehicleid, engine, lights ,alarm, doors, bonnet, boot, objective);
     if(!ispassenger)
@@ -1777,7 +1770,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
     }
 	else //self
 	{
-		if(GetPVarInt(playerid,"roped") == 1 || PlayerInfo[playerid][pBW] > 0 || (issuerid < 0 || issuerid > MAX_PLAYERS) || GetPVarInt(playerid, "enter-check") || gPlayerLogged[issuerid] != 1)
+		if(PlayerInfo[playerid][pBW] > 0 || (issuerid < 0 || issuerid > MAX_PLAYERS) || GetPVarInt(playerid, "enter-check") || gPlayerLogged[issuerid] != 1)
 		{
 			new Float:hp, Float:armor;
 			GetPlayerHealth(playerid, hp);
@@ -1871,12 +1864,6 @@ public OnPlayerDeath(playerid, killerid, reason)
     {
         OnPlayerLeaveGangZone(playerid, GetPVarInt(playerid, "zoneid"));
     }
-	if(GetPVarInt(playerid,"roped") == 1)
- 	{
-		ClearAnimations(playerid);
-		SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
-        SetPVarInt(playerid,"roped",0);
-	}
     if(GetPVarInt(playerid, "IbizaWejdz") || GetPVarInt(playerid, "IbizaBilet") )
 	{
 		DeletePVar(playerid, "IbizaWejdz");
@@ -2877,7 +2864,6 @@ public OnPlayerEnterCheckpoint(playerid)
 	new name[MAX_PLAYER_NAME];
     DisablePlayerCheckpoint(playerid);
 
-	//PAèDZIOCH
 	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
 	{
 		if(GetPVarInt(playerid, "WybralBieg") == 1)
@@ -5725,7 +5711,7 @@ public OnPlayerUpdate(playerid)
 
     systempozarow_OnPlayerUpdate(playerid);//System PoøarÛw v0.1
 
-	//Anty BH PAèDZIOCH
+	//Anty BH
 	if(GetPVarInt(playerid, "Jumping") == 1)
 	{
 		new Float:x, Float:y, Float:z;
@@ -6658,17 +6644,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	else
 	{
-		if(newkeys & KEY_FIRE)
-		{
-			if(GetPVarInt(playerid,"roped") == 1)
-			{
-				SetPlayerVelocity(playerid,0,0,0);
-				TogglePlayerControllable(playerid, 1);
-				ClearAnimations(playerid);
-				SetPVarInt(playerid,"roped", 0);
-				SetPVarInt(playerid,"chop_id",0);
-			}
-		}
 		if(PRESSED(KEY_FIRE))
 		{
 			if(GetPlayerWeapon(playerid) == 46)
@@ -6750,20 +6725,6 @@ public OnVehicleDeath(vehicleid, killerid)
             new str[64];
             format(str, 64, "Szok! Samolot KT rozbi≥ siÍ i zginÍ≥o %d osÛb!", osoby);
 			OOCNews(COLOR_LIGHTGREEN, str);
-		}
-	}
-
-	//PAèDZIOCH
-	if(IsAHeliModel(GetVehicleModel(vehicleid)))
-	{
-  		foreach(new i : Player)
-    	{
-     		if(GetPVarInt(i,"chop_id") == vehicleid && GetPVarInt(i,"roped") == 1)
-       		{
-          		SetPVarInt(i,"roped",0);
-             	ClearAnimations(i);
-              	TogglePlayerControllable(i,1);
-			}
 		}
 	}
 

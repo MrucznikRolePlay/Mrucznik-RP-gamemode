@@ -134,8 +134,6 @@ new lastMsg[MAX_PLAYERS];
 //Actor
 new PaniJanina;
 
-//PAèDZIOCH
-new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];
 

@@ -553,7 +553,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-	//PAèDZIOCH
 	else if(dialogid == DIALOGID_MUZYKA) 
 	{
 		switch(listitem)
