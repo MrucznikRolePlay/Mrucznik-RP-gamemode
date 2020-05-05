@@ -45,12 +45,11 @@ YCMD:wezportfel(playerid, params[], help)
 		}
 		if(IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
 		{
-			if(PlayerTied[giveplayerid] > 0 || (PlayerInfo[giveplayerid][pBW] > 0 && PlayerInfo[giveplayerid][pInjury] > 0))
+			if(PlayerTied[giveplayerid] > 0 || PlayerInfo[giveplayerid][pBW] > 0 || PlayerInfo[giveplayerid][pInjury] > 0)
 			{
-				if (ProxDetectorS(8.0, playerid, giveplayerid))
+				if(ProxDetectorS(8.0, playerid, giveplayerid))
 				{
-					new car = GetPlayerVehicleID(playerid);
-					new pieniadze;
+					new pieniadze = 1000000;
 					if(giveplayerid == playerid) { sendErrorMessage(playerid, "Nie mo¿esz zwi¹zaæ sam siebie!"); return 1; }
 					if(okradziony[giveplayerid] == 0)
 					{
@@ -59,9 +58,8 @@ YCMD:wezportfel(playerid, params[], help)
 							if(PlayerInfo[giveplayerid][pConnectTime] >= 2)
 							{
 								new string[128];
-								if(kaska[giveplayerid] > 1000000)
+								if(kaska[giveplayerid] >= pieniadze)
 								{
-									pieniadze = 1000000;
 									SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("%s zabra³ Ci portfel z $%d w œrodku", GetNick(playerid), pieniadze));
 									SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zabra³eœ portfel %s, w œrodku jest $%d", GetNick(giveplayerid), pieniadze));
 									format(string, sizeof(string), "* %s zabiera portfel %s razem z %d$", GetNick(playerid), GetNick(giveplayerid), pieniadze);
@@ -72,22 +70,21 @@ YCMD:wezportfel(playerid, params[], help)
 									okradziony[giveplayerid] = 1;
 									PoziomPoszukiwania[playerid] += 3;
 									SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Porwanie + kradzie¿");
+									return 1;
 								}
-								if(kaska[giveplayerid] < 1000001)
-								{
-									pieniadze = kaska[giveplayerid];
-									SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("%s zabra³ Ci portfel z $%d w œrodku", GetNick(playerid), pieniadze));
-									SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zabra³eœ portfel %s, w œrodku jest $%d", GetNick(giveplayerid), pieniadze));
-									format(string, sizeof(string), "* %s zabiera portfel %s razem z %d$", GetNick(playerid), GetNick(giveplayerid), pieniadze);
-									ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-									Log(payLog, INFO, "%s zabra³ portfel %s razem z %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), pieniadze);
-									DajKase(playerid, pieniadze);
-									ZabierzKase(giveplayerid, pieniadze);
-									okradziony[giveplayerid] = 1;
-									PoziomPoszukiwania[playerid] += 3;
-									SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Porwanie + kradzie¿");
-								}								
 								
+								pieniadze = kaska[giveplayerid];
+								SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("%s zabra³ Ci portfel z $%d w œrodku", GetNick(playerid), pieniadze));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Zabra³eœ portfel %s, w œrodku jest $%d", GetNick(giveplayerid), pieniadze));
+								format(string, sizeof(string), "* %s zabiera portfel %s razem z %d$", GetNick(playerid), GetNick(giveplayerid), pieniadze);
+								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								Log(payLog, INFO, "%s zabra³ portfel %s razem z %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), pieniadze);
+								DajKase(playerid, pieniadze);
+								ZabierzKase(giveplayerid, pieniadze);
+								okradziony[giveplayerid] = 1;
+								PoziomPoszukiwania[playerid] += 3;
+								SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Porwanie + kradzie¿");	
+								return 1;							
 							}
 							else
 							{
@@ -112,7 +109,7 @@ YCMD:wezportfel(playerid, params[], help)
 			}
 			else
 			{
-				sendTipMessage(playerid, "Ta osoba nie jest zwi¹zana lub gracz nie ma BW!");
+				sendTipMessage(playerid, "Ta osoba nie jest zwi¹zana lub nie ma BW/nie jest ranna!");
 				return 1;
 			}
 		}
