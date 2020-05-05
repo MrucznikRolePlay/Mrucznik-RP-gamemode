@@ -1159,21 +1159,25 @@ command_akceptuj_Impl(playerid, x_job[32])
                         {
                             new Float:health, Float:hp;
                             new level = PlayerInfo[SexOffer[playerid]][pSexSkill];
-                            if(level >= 0 && level <= 50) hp = 30;
-                            else if(level >= 51 && level <= 100) hp = 60;
-                            else if(level >= 101 && level <= 200) hp = 90;
-                            else if(level >= 201 && level <= 400) hp = 120;
+                            if(level >= 0 && level <= 50) hp = 20;
+                            else if(level >= 51 && level <= 100) hp = 40;
+                            else if(level >= 101 && level <= 200) hp = 60;
+                            else if(level >= 201 && level <= 400) hp = 80;
                             else if(level >= 401)
                             {
-                                hp = 150;
+                                hp = 100;
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoje umiejêtnoœci prostytutki s¹ tak wysokie ¿e dajesz wysokie HP i nie dajesz chorób.");
                                 SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Umiejêtnoœæ dziwki s¹ tak wysokie ¿e dostajesz du¿e HP i zero chorób.");
                                 return 1;
                             }
                             GetPlayerHealth(playerid, health);
-                            if(health < 150) 
+                            if((health + hp) < 100) 
                             {
                                 SetPlayerHealth(playerid, health + hp); 
+                            }
+                            else
+                            {
+                                SetPlayerArmour(playerid, hp);  
                             }
                             SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP z powodu sexu.", hp));
                             if(random(20) == 1)//5% szans na zara¿enie
