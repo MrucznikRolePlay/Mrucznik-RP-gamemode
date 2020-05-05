@@ -232,12 +232,13 @@ YCMD:wyjdz(playerid, params[], help)
 			SetPlayerVirtualWorld(playerid,0);
 		}
 		//vinyl
-		else if(IsPlayerInRangeOfPoint(playerid, 1.5, 817.0987,-1375.1685,23.6475))
+		else if(IsPlayerInRangeOfPoint(playerid, 1.5, 816.50, -1413.75, -22.58))
 		{
-			SetPlayerPos(playerid, 814.4426,-1378.2600,23.6475);
+			Wchodzenie(playerid);
+			SetPlayerVirtualWorld(playerid, 72);
+			SetPlayerPos(playerid, 816.5667, -1415.4117, -22.5834);
 			GameTextForPlayer(playerid, "~w~Impreza dalej trwa~n~~r~bez ciebie", 5000, 1);
 			SetPLocal(playerid, PLOCAL_DEFAULT); 
-            Wchodzenie(playerid);
 			return 1;
 		}
         //IBIZA

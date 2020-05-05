@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ dajdowozu ]-----------------------------------------------//
+//--------------------------------------------[ blokujsprzedarz ]--------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,20 +28,45 @@
 	
 */
 
-YCMD:dajdowozu(playerid, params[], help)
+YCMD:blokujsprzedaz(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))
-	{
-	    new giveplayerid, level;
-		if( sscanf(params, "k<fix>d", giveplayerid, level))
-		{
-			sendTipMessage(playerid, "U¿yj /dajdowozu [id gracza] [id wozu]");
-			return 1;
-		}
+	new string[64];
 
-		SetAntyCheatForPlayer(giveplayerid, 2001); 
-		PutPlayerInVehicleEx(giveplayerid, level, 0);
-		Log(adminLog, INFO, "Admin %s u¿y³ /dajdowozu na graczu %s id wozu %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), level);
+    if(gPlayerLogged[playerid] == 1)
+    {
+	    if(IsPlayerConnected(playerid))
+	    {
+	        if(PlayerInfo[playerid][pAdmin] >= 5000)
+			{
+			    new dom;
+				if( sscanf(params, "d", dom))
+				{
+					sendTipMessage(playerid, "U¿yj /blokujdom [id domu]");
+					return 1;
+				}
+
+				format(string, sizeof(string), "Domy/Dom%d.ini", dom);
+				if(dini_Exists(string))
+				{
+				    if(Dom[dom][hBlokada] == 0)
+				    {
+					    Dom[dom][hBlokada] = 1;
+						ZapiszDom(dom);
+						SendClientMessage(playerid, COLOR_RED, "Dom zablokowany");
+					}
+					else if(Dom[dom][hBlokada] == 1)
+					{
+                        Dom[dom][hBlokada] = 0;
+						ZapiszDom(dom);
+						SendClientMessage(playerid, COLOR_GREEN, "Dom odblokowany");
+					}
+				}
+				else
+				{
+				    SendClientMessage(playerid, COLOR_GRAD2, "Dom nie istnieje");
+				}
+			}
+		}
 	}
 	return 1;
 }

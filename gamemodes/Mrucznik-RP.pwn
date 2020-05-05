@@ -437,7 +437,7 @@ public OnGameModeInit()
 
     for(new i;i<MAX_PLAYERS;i++)
     {
-        PlayerInfo[i][pDescLabel] = Create3DTextLabel("", 0xBBACCFFF, 0.0, 0.0, 0.0, 4.0, 0, 1);
+        PlayerInfo[i][pDescLabel] = Create3DTextLabel(" ", 0xBBACCFFF, 0.0, 0.0, 0.0, 5.0, 0, 1);
     }
 
     pusteZgloszenia();
@@ -873,6 +873,11 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
    	return 1;
 }
 
+public OnDynamicActorStreamIn(actorid, forplayerid)
+{
+	return 1;
+}
+
 public OnPlayerEnterDynamicArea(playerid, areaid)
 {
     if(IsPlayerInAnyVehicle(playerid))
@@ -1048,11 +1053,9 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!Player_CanUseCar(playerid, vehicleid))
         	return Player_RemoveFromVeh(playerid);
     }
-	if(IsARower(vehicleid))
-	{
-	    SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
-	}
-	
+	// -- customowe parametry dla poszczególnych pojazdów
+	if(IsARower(vehicleid)) SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
+	else if (GetVehicleModel(vehicleid) == 525) sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
     if(!ispassenger && !engine)
 	{
 		if(GetPlayerVehicleID(playerid) >= CAR_End) //do kradziezy
@@ -1099,12 +1102,12 @@ public OnPlayerConnect(playerid)
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-   	/*if(!IsNickCorrect(nick))
+   	if(!NickCensoreCorrect(nick))
     {
         SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);
 		return 1;
-    }*/
+    }
 	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
@@ -1295,7 +1298,7 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
 
-    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
 
 	//AFK timer
 	if(afk_timer[playerid] != -1)
@@ -1745,6 +1748,7 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 		amount,
 		weaponid);
 	SavePlayerDamaged(damagedid, playerid, amount, weaponid);
+	SavePlayerDamage(playerid, damagedid, amount, weaponid);
 	return 1;
 }
 
@@ -2667,8 +2671,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_BALLAS: //13
 						{
-						    SetPlayerPos(playerid,2436.7615,-1309.0743,24.8008);
-                            SetPlayerFacingAngle(playerid, 181.7818);
+						    SetPlayerPos(playerid,173.6043,-150.9147,1.5781);
+                            SetPlayerFacingAngle(playerid, 319.2664);
 						}
 						case FRAC_VAGOS: //14
 						{
@@ -2769,6 +2773,7 @@ SetPlayerSpawnPos(playerid)
 					SetPlayerSpawnPos(playerid);
 				    return 1;
 				}
+				Wchodzenie(playerid);
                 SetPlayerPos(playerid, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z]);
 	  		}
 	  		else if(PlayerInfo[playerid][pSpawn] == 2) //Spawn w œrodku domu
@@ -5082,9 +5087,9 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	}
 	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
     {
-		if(!IsAPrzestepca(playerid) && !IsAPolicja(playerid) || IsAPolicja(playerid) && !OnDuty[playerid] && !OnDutyCD[playerid]) SetPlayerArmedWeapon(playerid, 0); //anty driveby
-        if(newstate == PLAYER_STATE_DRIVER)
+		if(newstate == PLAYER_STATE_DRIVER)
         {
+			SetPlayerArmedWeapon(playerid, PlayerInfo[playerid][pGun0]); //anty driveby
         	new vehicleid = GetPlayerVehicleID(playerid);
         	new lcarid = VehicleUID[vehicleid][vUID];
         	if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL)
@@ -5103,6 +5108,24 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 			}
 			SetPVarInt(playerid, "IsAGetInTheCar", 0); 
+
+			//ACv2: Kicking players that are trying to drive the car without permission
+            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
+			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
+            {
+                // Skurwysyn kieruje bez prawka lub autem frakcji xD (Xd)
+				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
+				{
+					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
+					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
+					SendCommandLogMessage(string);
+					Log(warningLog, INFO, string);
+					Log(punishmentLog, INFO, string);
+					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
+					KickEx(playerid);
+				}
+            }
+			//AC END CODE
 		}
         if(!ToggleSpeedo[playerid])
         {
@@ -5121,28 +5144,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             PlayerTextDrawSetString(playerid, Licznik[playerid], string);
             PlayerTextDrawShow(playerid, Licznik[playerid]);
         }
-        //
-
-        //ACv2: Kicking players that are trying to drive the car without permission
-        if(newstate == PLAYER_STATE_DRIVER)
-        {
-            new vehicleid = GetPlayerVehicleID(playerid);
-            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
-			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
-            {
-                // Skurwysyn kieruje bez prawka lub autem frakcji xD
-				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
-				{
-					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
-					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
-					SendCommandLogMessage(string);
-					Log(warningLog, INFO, string);
-					Log(punishmentLog, INFO, string);
-					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
-					KickEx(playerid);
-				}
-            }
-        }
         //AT400
         if(Car_GetOwnerType(GetPlayerVehicleID(playerid)) == CAR_OWNER_FRACTION && GetVehicleModel(GetPlayerVehicleID(playerid)) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
         {
@@ -5156,7 +5157,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     }
     else if(oldstate == PLAYER_STATE_DRIVER)
     {
-        DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
+		DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
         new vehicleid = GetPVarInt(playerid, "car-id");
         if(VehicleUID[vehicleid][vSiren] != 0)
     	{
@@ -5286,7 +5287,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             if(KradniecieWozu[playerid] != newcar)
 		    {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij aby spróbowaæ to zrobiæ.");
-                KradniecieWozu[playerid] = 1;
 				new engine, lights, alarm, doors, bonnet, boot, objective;
 				GetVehicleParamsEx(newcar, engine, lights, alarm, doors, bonnet, boot, objective);
 				if(engine) SetVehicleParamsEx(newcar, 0, lights, alarm, doors, bonnet, boot, objective);
@@ -5632,9 +5632,9 @@ PayDay()
 	  	Lotto(rand);
 	}
   	SendClientMessageToAll(COLOR_YELLOW, "Odliczanie do respawnu rozpoczête");
-	BroadCast(COLOR_PANICRED, "Uwaga! Za 20 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
+	BroadCast(COLOR_PANICRED, "Uwaga! Za 30 sekund nast¹pi respawn nieu¿ywanych pojazdów !");
     printf("-> Doing respawn");
-	CountDown();
+	CountDownVehsRespawn();
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
 	

@@ -13,7 +13,7 @@ MruMySQL_ZapiszUprawnienia(playerid)
 
 MruMySQL_PobierzStatystyki(playerid, nickoruid[])
 {
-    new lStr[300];
+    new lStr[1024];
     new nick_escaped[MAX_PLAYER_NAME];
     mysql_real_escape_string(nickoruid, nick_escaped);
     new uid = strval(nickoruid);
@@ -56,7 +56,9 @@ MruMySQL_PobierzStatystyki(playerid, nickoruid[])
         SendClientMessage(playerid, COLOR_RED, lStr);
         format(lStr, sizeof(lStr), "Level: %d ¦ Kasa: %d ¦ Bank: %d ¦ Numer tel.: %d ¦ ZN: %d ¦ Dom: %d", plvl, pmoney, pbank, pnr, pzn, pdom);
         SendClientMessage(playerid, -1, lStr);
-        format(lStr, sizeof(lStr), "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d ¦ Warny: %d | Ban: %s", padmin, ppadmin, pzg, pbp, pblock, pwarn, stringban);
+        format(lStr, sizeof(lStr), "Admin: %d ¦ P@: %d ¦ ZG: %d ¦ BP: %d ¦ Block: %d", padmin, ppadmin, pzg, pbp, pblock);
+        SendClientMessage(playerid, -1, lStr);
+        format(lStr, sizeof(lStr), "Warny: %d ¦ Ban: %s", pwarn, stringban);
         SendClientMessage(playerid, -1, lStr);
         format(lStr, sizeof(lStr), "Premium: %d ¦ Praca: %d ¦ Frakcja: %d ¦ Org.: %d", ppremium, pjob, pmember, porg);
         SendClientMessage(playerid, -1, lStr);

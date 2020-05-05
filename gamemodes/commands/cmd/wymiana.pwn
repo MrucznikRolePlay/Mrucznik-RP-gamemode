@@ -37,19 +37,15 @@ YCMD:wymiana(playerid, params[], help)
 	if(IsPlayerInAnyVehicle(playerid))
     {
    		new playa, cena;
-		if( sscanf(params, "k<fix>s[32]", playa, string))
+		if(sscanf(params, "k<fix>s[32]", playa, string))
 		{
 			sendTipMessage(playerid, "U¿yj /wymiana [Nick/ID] [cena]");
 			return 1;
 		}
-		if(GetPlayerAdminDutyStatus(playerid) == 1)
-		{
-			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ podczas @Duty");
-			return 1;
-		}
+		if(GetPlayerAdminDutyStatus(playerid) == 1) return sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ podczas @Duty");
+		if(playerid == playa) return sendErrorMessage(playerid, "Nie mo¿esz wymieniæ siê z samym sob¹.");
         if(!IsPlayerConnected(playa)) return sendErrorMessage(playerid, "Brak takiego gracza.");
         if(!IsPlayerInAnyVehicle(playa)) return sendTipMessage(playerid, "Gracz musi byæ w pojeŸdzie.");
-		cena = FunkcjaK(string);
 		//
         new lVeh = GetPlayerVehicleID(playerid);
 		if(!IsCarOwner(playerid, lVeh)) return sendTipMessage(playerid, "Nie jesteœ w³aœcicielem tego pojazdu.");
@@ -60,6 +56,8 @@ YCMD:wymiana(playerid, params[], help)
 		new vehid = VehicleUID[lVeh][vUID];
 
  		if(!ProxDetectorS(10.0, playerid, playa)) return sendErrorMessage(playerid, "Ten gracz jest za daleko !");
+		
+		cena = FunkcjaK(string);
 		if(!(cena >= 0 && cena < 900000001)) return sendTipMessage(playerid, "Cena od 0 do 900 000 000$ !");
 
         if(lVeh <= CAR_End) return sendErrorMessage(playerid, "Tego pojazdu nie mo¿na sprzedaæ.");

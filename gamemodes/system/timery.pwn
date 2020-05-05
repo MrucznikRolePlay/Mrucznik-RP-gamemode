@@ -915,12 +915,24 @@ public PlayerAFK(playerid, afktime, breaktime)
 }
 
 //PAèDZIOCH
-forward syncanim(playerid);
-public syncanim(playerid)
+forward syncanim(playerid, Float:maxpos);
+public syncanim(playerid, Float:maxpos)
 {
 	if(GetPVarInt(playerid,"roped") == 0) return 0;
- 	SetTimerEx("syncanim",DUR,0,"i",playerid);
-  	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
+	GetPlayerPos(playerid,pl_pos[playerid][0],pl_pos[playerid][1],pl_pos[playerid][2]);
+    pl_pos[playerid][4] = floatsub(pl_pos[playerid][2],pl_pos[playerid][3]);
+	if((pl_pos[playerid][4] - 2.0) <= maxpos)
+	{
+		SetPlayerVelocity(playerid,0,0,0);
+		TogglePlayerControllable(playerid, 1);
+		ClearAnimations(playerid);
+		SetPVarInt(playerid,"roped", 0);
+		SetPVarInt(playerid,"chop_id",0);
+		return 1;
+	}
+	
+	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
+ 	SetTimerEx("syncanim", 250, 0, "i", playerid);
    	return 1;
 }
 
@@ -2322,7 +2334,8 @@ public JednaSekundaTimer()
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
-					if(GetPVarInt(i, "DostalDM2") == 1)
+					if((GetPVarInt(i, "DostalDM2") == 1) || strfind((PlayerInfo[i][pAJreason]), "DM2", true) > 0
+					&& strfind((PlayerInfo[i][pAJreason]), "Death Match 2", true) > 0)
 					{
 						format(string, sizeof(string), "[Marcepan Marks] Zabra≥em graczowi %s broÒ [Odsiedzia≥ karÍ za DM2]", GetNick(i));
 						SendAdminMessage(COLOR_PANICRED, string);

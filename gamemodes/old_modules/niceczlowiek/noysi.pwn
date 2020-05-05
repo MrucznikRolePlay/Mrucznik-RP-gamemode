@@ -1,32 +1,3 @@
-BreakLines(string[], delimiter[], limit)
-{
-	new inserts, tempLimit = limit, pos[50], string2[150], lastEmptyPos;
-	format(string2, 150, string);
-	
-	for(new i; i < strlen(string); i++)
-	{
-		if( string[i] == ' ' ) lastEmptyPos = i;
-		if( string[i] == '~' && string[i+1] == 'n' && string[i+2] == '~' ) tempLimit = i + limit;
-		if( i >= tempLimit )
-		{
-			inserts += 1;
-			tempLimit = i + limit;
-			
-			pos[inserts-1] = lastEmptyPos + ((inserts-1) * strlen(delimiter));
-			if( inserts > 1 ) pos[inserts-1] -= (inserts-1);
-		}
-	}
-	
-	for(new d; d < 50; d++)
-	{
-		if( pos[d] == 0 ) break;
-		strdel(string2, pos[d], pos[d]+1);
-		strins(string2, delimiter, pos[d]);
-	}
-	
-	return _:string2;
-}
-
 #define DLG_NO_ACTION		1
 #define DG_DESC_DELETE 		2
 #define DG_DESC_ADD 		3
@@ -34,6 +5,7 @@ BreakLines(string[], delimiter[], limit)
 
 opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	#pragma unused inputtext
 	if(dialogid==4192)
 	{
 		if( response == 0 ) return 1;
@@ -54,8 +26,8 @@ opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new DBResult:db_result;
 			db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `uid`=%d", DynamicGui_GetDataInt(playerid, listitem)));
 
-			new oldDesc[256];
-			db_get_field_assoc(db_result, "text", oldDesc, 256);
+			new oldDesc[128];
+			db_get_field_assoc(db_result, "text", oldDesc, 128);
 
 			db_result = db_query(db_handle, sprintf("UPDATE * FROM `mru_opisy` SET `last_used`=%d WHERE `uid`=%d", gettime(), DynamicGui_GetDataInt(playerid, listitem)));
 
@@ -64,77 +36,13 @@ opis_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
 
 
-			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, BreakLines(oldDesc, "\n", 32));
+			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, wordwrapEx(oldDesc));
 			
-			sendTipMessage(playerid, "Ustawi³eœ nowy opis");
+			sendTipMessage(playerid, "Ustawiono nowy opis:");
+			new stropis[126];
+			format(stropis, sizeof(stropis), "%s", oldDesc);
+			SendClientMessage(playerid, 0xBBACCFFF, stropis);
 		}
-	}
-	if(dialogid==4193)
-	{
-		if( response == 0 ) return RunCommand(playerid, "/opis",  "");
-
-		if(strlen(inputtext) > 110) return sendTipMessage(playerid, "Zbyt d³uga wiadomoœæ");
-
-		new inputOpis[256];
-		strcopy(inputOpis, inputtext, 256);
-
-		mysql_real_escape_string(inputOpis, inputOpis);
-		
-		new DBResult:db_result;
-		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`='%d' AND `text`='%s'", PlayerInfo[playerid][pUID], inputOpis));
-
-		new rows = db_num_rows(db_result);
-
-		new dLen = strlen(inputOpis);
-		
-		new initPoint, endPoint, tempCounts;
-
-		for(endPoint = 0; endPoint < dLen; endPoint++) {
-
-		    if(inputOpis[endPoint] == '{') {
-
-		        initPoint = endPoint;
-		        endPoint += 7;
-		        if(endPoint < dLen) {
-
-		            if(inputOpis[endPoint] == '}') {
-
-		                for(tempCounts = 1; tempCounts < 7; tempCounts++) {
-
-		                    if(!(tolower(inputOpis[initPoint+tempCounts]) >= 97
-		                    && tolower(inputOpis[initPoint+tempCounts]) <= 102)
-		                    && !(inputOpis[initPoint+tempCounts] >= 48
-		                    && inputOpis[initPoint+tempCounts] <= 57))
-		                        break;
-						}
-						if(tempCounts != 7)
-						    continue;
-
-						strdel(inputOpis, initPoint, ++endPoint);
-						dLen = strlen(inputOpis);
-						endPoint -= 8;
-					}
-				}
-			}
-		}
-
-		if( rows )
-		{
-			new descUid = db_get_field_assoc_int(db_result, "uid");
-
-			db_result = db_query(db_handle, sprintf("UPDATE `mru_opisy` SET `last_used`=%d WHERE `uid`=%d", gettime(), descUid));
-		}
-		else
-		{
-			db_free_result(db_query(db_handle, sprintf("INSERT INTO `mru_opisy` (`uid`,`text`, `owner`, `last_used`) VALUES (null, '%s', '%d', '%d')", inputOpis, PlayerInfo[playerid][pUID], gettime())));
-		}
-
-		strcopy(PlayerInfo[playerid][pDesc], inputOpis);
-
-
-		Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
-		Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, BreakLines(inputOpis, "\n", 32));
-		sendTipMessage(playerid, "Ustawi³eœ nowy opis");
 	}
 	return 0;
 }

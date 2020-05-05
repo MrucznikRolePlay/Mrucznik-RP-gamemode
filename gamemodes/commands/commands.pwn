@@ -56,7 +56,7 @@
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
 #include "cmd/blokujnoba.pwn"
-#include "cmd/blokujsprzedarz.pwn"
+#include "cmd/blokujsprzedaz.pwn"
 #include "cmd/boxstats.pwn"
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
@@ -395,6 +395,7 @@
 #include "cmd/scena.pwn"
 #include "cmd/scenaallow.pwn"
 #include "cmd/scenadisallow.pwn"
+#include "cmd/screenshot.pwn"
 #include "cmd/sejffrakcja.pwn"
 #include "cmd/sejfpomoc.pwn"
 #include "cmd/sejfrodzina.pwn"
@@ -774,6 +775,12 @@ static Aliases()
 	Command_AddAltNamed("giveroom", "dajpokoj");
 	Command_AddAltNamed("giveroom", "dajwynajem");
 
+	//goto
+	Command_AddAltNamed("goto", "to");
+
+	//gethere
+	Command_AddAltNamed("gethere", "tm");
+
 	//glosnik
 	Command_AddAltNamed("glosnik", "sanradio");
 
@@ -1109,6 +1116,9 @@ static Aliases()
 	//sb
 	Command_AddAltNamed("sb", "sprawdzbron");
 	Command_AddAltNamed("sb", "szukajbroni");
+
+	//screenshot
+	Command_AddAltNamed("screenshot", "ss");
 
 	//sejffrakcja
 	Command_AddAltNamed("sejffrakcja", "sejff");
@@ -1450,6 +1460,10 @@ static Aliases()
 
 	//zaufanyggracz
 	Command_AddAltNamed("zaufanyggracz", "zg");
+
+	//zdejmijbpk
+	Command_AddAltNamed("zdejmijbpk", "zdejmijbp");
+	Command_AddAltNamed("zdejmijbpk", "unbp");
 
 	//wyloguj
 	Command_AddAltNamed("wyloguj", "logout");
