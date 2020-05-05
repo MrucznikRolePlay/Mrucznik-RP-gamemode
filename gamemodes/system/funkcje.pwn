@@ -835,14 +835,14 @@ public CountDownVehsRespawn()
 		format(text, sizeof text, "respawn za ~g~%d", Count-1);
 		GameTextForAll(text, 2500, 1);
 		Count--;
-		SoundForAll(1056);
+		if((Count + 1) % 5 == 0) SoundForAll(1056);
 		SetTimer("CountDownVehsRespawn", 1000, 0);
 	}
 	else
 	{
 		GameTextForAll("~g~Respawn", 2500, 1);
 		SendClientMessageToAll(COLOR_PANICRED, "|___Nast¹pi³ respawn nieu¿ywanych pojazdów___|");
-		Count = 30;
+		Count = 20;
 		new bool:used[CAR_AMOUNT] = {false, ... };
 		foreach(new p : Player)
 		{

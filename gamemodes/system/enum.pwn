@@ -1098,7 +1098,7 @@ new PobijText[31][31] ={
 };
 
 //respawn count
-new Count = 30;
+new Count = 20;
 
 new Float:gCopPlayerSpawns[2][3] = {
 {1578.2158,-1633.9244,13.3991},
