@@ -325,6 +325,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_AUTO_RESPRAY_OWN      37
 #define D_AUTO_RESPRAY_OWN2     38
 #define D_AUTO_DESTROY          303
+#define D_AUTO_ACTION_TUNING    304
 
 #define D_INFO      712
 #define D_PERM      713
