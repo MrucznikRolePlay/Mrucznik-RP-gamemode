@@ -8637,7 +8637,7 @@ IsNickCorrect(nick[])
 	return 0;
 }
 
-NickCensoreCorrect(nick[])
+/*NickCensoreCorrect(nick[])
 {
     if(strfind(nick,"Sandra_Rabucha",true) != -1) return 0; //Rozalka
     else if(strfind(nick,"rabuc",true) != -1) return 0;
@@ -8654,6 +8654,7 @@ NickCensoreCorrect(nick[])
 	else if(strfind(nick,"kalisia",true) != -1) return 0;
 	return 1;
 }
+*/
 
 CheckAlfaNumeric(password[])
 {
