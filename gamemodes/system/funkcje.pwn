@@ -765,9 +765,7 @@ public PlayerFixRadio2()
 forward func_SetPVarInt(playerid, key[], value);
 public func_SetPVarInt(playerid, key[], value)
 {
-	new str[32];
-	format(str, sizeof str, "%s", key);
-	SetPVarInt(playerid, str, value);
+	SetPVarInt(playerid, key, value);
 	return 1;
 }
 
@@ -834,8 +832,8 @@ public CountDownVehsRespawn()
 		new text[56];
 		format(text, sizeof text, "respawn za ~g~%d", Count-1);
 		GameTextForAll(text, 2500, 1);
+		if(Count % 5 == 0) SoundForAll(1056);
 		Count--;
-		if((Count + 1) % 5 == 0) SoundForAll(1056);
 		SetTimer("CountDownVehsRespawn", 1000, 0);
 	}
 	else

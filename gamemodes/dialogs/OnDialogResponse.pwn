@@ -2823,7 +2823,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,0);
 						SetPlayerPos(playerid,613.4404,-1471.9745,73.8816);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Dach");
 						PlayerInfo[playerid][pLocal] = 255;
 					}
 				}

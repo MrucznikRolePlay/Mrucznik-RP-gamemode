@@ -147,7 +147,7 @@ new const ShopSkins[][eSkinInfo] = {
     {139, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_139.png
     {140, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_140.png
     {142, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_142.png
-    {143, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_143.png
+    //{143, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_143.png
     {144, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_144.png
     {145, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_145.png
     {146, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_146.png

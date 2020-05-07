@@ -47,7 +47,7 @@ command_opis_Impl(playerid, params[])
 			&& givenString[i] != 'ø' && givenString[i] != 'ü' && givenString[i] != 'Ê' && givenString[i] != 'Ò' && givenString[i] != ' ' && givenString[i] != '”' && givenString[i] != '•'
 			&& givenString[i] != 'å' && givenString[i] != '£' && givenString[i] != 'Ø' && givenString[i] != 'è' && givenString[i] != '∆' && givenString[i] != '—' && givenString[i] != ' '
 			&& givenString[i] != '1' && givenString[i] != '2' && givenString[i] != '3' && givenString[i] != '4' && givenString[i] != '5' && givenString[i] != '6' && givenString[i] != '7'
-			&& givenString[i] != '8' && givenString[i] != '9' && givenString[i] != '-' && givenString[i] != '0' && givenString[i] != '|' && givenString[i] != '/' && givenString[i] != '@'))
+			&& givenString[i] != '8' && givenString[i] != '9' && givenString[i] != '-' && givenString[i] != '0' && givenString[i] != '|' && givenString[i] != '/' && givenString[i] != '@' && givenString[i] != '(' && givenString[i] != ')'))
 			{
 				SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[i]));
 				return 1;
@@ -97,10 +97,9 @@ command_opis_Impl(playerid, params[])
 		new str[256];
 		strcopy(str, PlayerInfo[playerid][pDesc], sizeof str);
 		strdel(str, 55, sizeof str);
-		format(string, sizeof(string), "{f4f5fa}%s...\n", str);
+		format(string, sizeof(string), "{f4f5fa}%s...", str);
 		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
-	
-		format(string, sizeof(string), "%s{888888}##\n{ff0000}UsuÒ (/opis usun)\n", string);
+		format(string, sizeof(string), "%s\n{ff0000}UsuÒ (/opis usun)\n", string);
 		DynamicGui_AddRow(playerid, DG_DESC_DELETE);
 	}
 	else

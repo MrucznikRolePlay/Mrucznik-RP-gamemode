@@ -5079,6 +5079,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     {
 		if(GetPVarInt(playerid, "Timer_OnChangingWeapon"))
 		{
+			AntySpam[playerid] = 0;
 			KillTimer(GetPVarInt(playerid, "Timer_OnChangingWeapon"));
 			DeletePVar(playerid, "Timer_OnChangingWeapon");
 		}
@@ -5832,7 +5833,7 @@ public OnPlayerUpdate(playerid)
 		{
 			foreach(new i : Player)
 			{
-				if(i == playerid || PlayerInfo[i][pAdmin] > 1) continue;
+				if(i == playerid || PlayerInfo[i][pAdmin] >= 1) continue;
 				if(actualid != INVALID_PLAYER_ID) //if is set
 				{
 					new str[6];
