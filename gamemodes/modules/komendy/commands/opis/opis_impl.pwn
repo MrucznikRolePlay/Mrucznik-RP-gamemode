@@ -62,7 +62,7 @@ command_opis_Impl(playerid, params[])
 			return 1;
 		}
 
-		format(opis, sizeof(opis), "%s", CheckColouredText(opis));
+		ReColor(opis);
 
 		mysql_real_escape_string(opis, opis);
 		new DBResult:db_result;
@@ -127,7 +127,8 @@ command_opis_Impl(playerid, params[])
 			new tmpText[256];
 			db_get_field(db_result, 1, tmpText, sizeof(tmpText));
 			strdel(tmpText, 55, 256);
-			format(string, sizeof(string), "%s(%d)\t%s...\n", string, row+1, tmpText);
+			ReColor(tmpText);
+			format(string, sizeof(string), "%s(%d)\t{FFFFFF}%s...\n", string, row+1, tmpText);
 			DynamicGui_AddRow(playerid, DG_DESC_USEOLD, db_get_field_assoc_int(db_result, "uid"));
 		}
 	}

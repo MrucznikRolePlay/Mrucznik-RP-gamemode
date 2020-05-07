@@ -2228,31 +2228,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	else if(dialogid == iddialog[playerid]) //TODO: WTF
 	{
-		if(dialogid == 1)
+		if(dialogid == 1) SPAWNTUTAJ
 	    {
 	        if(response)
 	        {
-	            GUIExit[playerid] = 0;
-	      		SendClientMessage(playerid, 0xFFFFFFFF, "Pozycja przywrócona");
-	      		lowcap[playerid] = 0;
-
-                SetPVarInt(playerid, "spawn", 2);
-                if(PlayerInfo[playerid][pPos_x] == 2246.6 || PlayerInfo[playerid][pPos_y] == -1161.9 || PlayerInfo[playerid][pPos_z] == 1029.7 || PlayerInfo[playerid][pPos_x] == 0 || PlayerInfo[playerid][pPos_y] == 0)
+	    		if(PlayerInfo[playerid][pPos_x] == 2246.6 || PlayerInfo[playerid][pPos_y] == -1161.9 || PlayerInfo[playerid][pPos_z] == 1029.7 || PlayerInfo[playerid][pPos_x] == 0 || PlayerInfo[playerid][pPos_y] == 0)
 	      		{
 	                SendClientMessage(playerid, 0xFFFFFFFF, "Twoja pozycja zosta³a b³êdnie zapisana, dlatego zespawnujesz siê na zwyk³ym spawnie.");
-                    SetPVarInt(playerid, "spawn", 1);
                 }
-				TogglePlayerSpectating(playerid, false);
-		        return 1;
+				else
+				{
+					SendClientMessage(playerid, 0xFFFFFFFF, "Pozycja przywrócona");
+					SetPVarInt(playerid, "spawn", 2);
+					SetPlayerSpawnPos(playerid);
+				}
 			}
-			if(!response)
+			else if(!response)
 			{
-                SetPVarInt(playerid, "spawn", 1);
-			    GUIExit[playerid] = 0;
-				TogglePlayerSpectating(playerid, false);
-			    lowcap[playerid] = 0;
 				PlayerInfo[playerid][pLocal] = 255;
 			}
+			GUIExit[playerid] = 0;
+			lowcap[playerid] = 0;
+			return 1;
 	    }
 	    //OnDialogResposne OKNA DMV
 		if(dialogid == 99)

@@ -837,7 +837,8 @@ public CountDownVehsRespawn()
 		SetTimer("CountDownVehsRespawn", 1000, 0);
 	}
 	else
-	{
+	{	
+		SoundForAll(1057);
 		GameTextForAll("~g~Respawn", 2500, 1);
 		SendClientMessageToAll(COLOR_PANICRED, "|___Nast¹pi³ respawn nieu¿ywanych pojazdów___|");
 		Count = 20;
@@ -862,7 +863,6 @@ public CountDownVehsRespawn()
 			}
 		}
 	}
-	SoundForAll(1057);
 }
 
 public Odmroz(playerid)

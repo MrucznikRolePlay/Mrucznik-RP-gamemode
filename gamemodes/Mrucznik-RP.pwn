@@ -6247,8 +6247,12 @@ OnPlayerLogin(playerid, password[])
         else if(PlayerInfo[playerid][pJailed] == 0)
         {
     		lowcap[playerid] = 1;
-			if(GetPVarInt(playerid, "ChangingPassword") != 1)
-    			ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
+			if(GetPVarInt(playerid, "ChangingPassword") != 1){
+				SetPVarInt(playerid, "spawn", 1);
+				SetPlayerSpawn(playerid);
+				TogglePlayerSpectating(playerid, false);
+				ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
+			}
         }
         else
         {

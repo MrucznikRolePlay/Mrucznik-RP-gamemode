@@ -58,17 +58,17 @@ YCMD:ban(playerid, params[], help)
 	            {
 					if(IsPlayerAdmin(giveplayerid) || Uprawnienia(giveplayerid, ACCESS_OWNER))
 					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Head Admina !");
+						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Head Admina !");
 						return 1;
 					}
 					if( (PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || PlayerInfo[giveplayerid][pZG] >= 4) && PlayerInfo[playerid][pZG] >= 4)
 					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina, P@ i ZG!");
+						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Admina, P@ i ZG!");
 						return 1;
 					}
 					if(PlayerInfo[giveplayerid][pLevel] > 1 && PlayerInfo[playerid][pZG] >= 4 && PlayerInfo[playerid][pZG] < 6)
 					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ gracza z levelem wiekszym niz 1!");
+						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ gracza z levelem wiekszym niz 1!");
 						return 1;
 					}
                     if(gPlayerLogged[giveplayerid] == 0)
@@ -81,7 +81,7 @@ YCMD:ban(playerid, params[], help)
 					SetPVarInt(playerid, "PunishBanPlayer", giveplayerid);
 					SetPVarString(playerid, "PunishBanPlayer_Reason", result);
 					format(string, sizeof string, "{FFFFFF}Czy podj¹³eœ dialog z graczem {B7EB34}%s{FFFFFF}?\nJe¿eli to mo¿liwe, mo¿esz ukaraæ gracza l¿ejsz¹ kar¹.", GetNick(giveplayerid));
-					ShowPlayerDialogEx(playerid, 9522, DIALOG_STYLE_MSGBOX, "Nadawanie bana", string, "Podj¹³em dialog, ban", "Anuluj karê");
+					ShowPlayerDialogEx(playerid, 9522, DIALOG_STYLE_MSGBOX, "Nadawanie bana", string, "Ban :(", "Anuluj karê");
 					return 1;
 			  	}
 				else
@@ -90,12 +90,12 @@ YCMD:ban(playerid, params[], help)
 				    {
                         if(IsPlayerAdmin(giveplayerid) || Uprawnienia(giveplayerid, ACCESS_OWNER))
     					{
-    						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Head Admina !");
+    						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Head Admina !");
     						return 1;
     					}
 						if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 						{
-							sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina !");
+							sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Admina !");
 							return 1;
 						}
                         if(gPlayerLogged[giveplayerid] == 0)

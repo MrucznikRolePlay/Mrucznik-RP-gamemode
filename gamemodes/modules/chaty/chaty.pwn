@@ -84,12 +84,32 @@ CorrectICForm(const text[])
 	format(correctForm, sizeof(correctForm), "%s", CheckEmoji(CheckStars(text)));
 	return correctForm;
 }
-CheckColouredText(const text[])
+ReColor(text[])
 {
-	new MessFix[256];
-	strcat(MessFix, text); 
-	regex_replace(MessFix, "\\(([a-fA-F0-9]{6})\\)", "{$1}");
-	return MessFix;
+    new
+        pos = -1;
+    while ((pos = strfind(text, "(", false, pos + 1)) != -1)
+    {
+        new
+            c = pos + 1,
+            n = 0,
+            ch;
+        // Note that the order of these is important!
+        while ((ch = text[c]) && n != 6)
+        {
+            if (!('a' <= ch <= 'f' || 'A' <= ch <= 'F' || '0' <= ch <= '9'))
+            {
+                break;
+            }
+            ++c;
+            ++n;
+        }
+        if (n == 6 && ch == ')')
+        {
+            text[pos] = '{';
+            text[c] = '}';
+        }
+    }
 }
 sprawdzReklame(text[], playerid)
 {
