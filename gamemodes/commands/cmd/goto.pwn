@@ -78,10 +78,8 @@ YCMD:goto(playerid, params[], help)
 					PlayerInfo[playerid][pInt] = PlayerInfo[plo][pInt];
 					PlayerInfo[playerid][pLocal] = PlayerInfo[plo][pLocal];
 				}
-
-				TextDrawShowForPlayer(playerid, Text:InfoT[playerid]);
-				TextDrawSetString(Text:InfoT[playerid], "Teleportowales sie jako admin pomyslnie!");
-				SetTimerEx("InfoHide", 5000, 0, "u", playerid);
+				sendTipMessage(playerid, "Teleportowa³eœ siê pomyœlnie!");
+				
 			}
 			else
 			{

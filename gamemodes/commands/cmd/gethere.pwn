@@ -68,9 +68,7 @@ YCMD:gethere(playerid, params[], help)
 					PlayerInfo[plo][pInt] = PlayerInfo[playerid][pInt];
 					PlayerInfo[plo][pLocal] = PlayerInfo[playerid][pLocal];
 				}
-				TextDrawShowForPlayer(playerid, Text:InfoT[playerid]);
-				TextDrawSetString(Text:InfoT[playerid], "Teleportowales gracza do siebie!");
-				SetTimerEx("InfoHide", 5000, 0, "u", playerid);
+				sendTipMessage(playerid, "Teleportowales gracza do siebie!");
 				if(GetPlayerAdminDutyStatus(playerid) == 1)
 				{
 					iloscInne[playerid] = iloscInne[playerid]+1;

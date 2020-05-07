@@ -272,8 +272,6 @@ LoadTXD()
 	TextDrawSetOutline(TXD_Worek,1);
 	TextDrawSetProportional(TXD_Worek,1);
 	TextDrawSetShadow(TXD_Worek,1);
-
-	Admin_LoadTXD();
 }
 
 LoadingShow(playerid)

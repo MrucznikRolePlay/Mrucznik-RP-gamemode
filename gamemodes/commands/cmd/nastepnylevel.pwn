@@ -81,6 +81,7 @@ YCMD:nastepnylevel(playerid, params[], help)
 					sendTipMessageEx(playerid, COLOR_GRAD2, infostring);
 					if(PlayerInfo[playerid][pLevel] % 10 == 0)
 					{
+						Log(nickLog, INFO, "Gracz %s otrzyma³ darmow¹ zmianê nicku w ramach %d poziomu postaci", GetPlayerLogName(playerid), nxtlevel);
 						format(infostring, sizeof(infostring), "Otrzyma³eœ darmow¹ zmianê nicku w ramach %d poziomu!", nxtlevel);
 						sendTipMessageEx(playerid, COLOR_GRAD1, infostring);
 						PlayerInfo[playerid][pZmienilNick]++;

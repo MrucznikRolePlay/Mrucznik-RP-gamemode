@@ -84,6 +84,13 @@ CorrectICForm(const text[])
 	format(correctForm, sizeof(correctForm), "%s", CheckEmoji(CheckStars(text)));
 	return correctForm;
 }
+CheckColouredText(const text[])
+{
+	new MessFix[256];
+	strcat(MessFix, text); 
+	regex_replace(MessFix, "\\(([a-fA-F0-9]{6})\\)", "{$1}");
+	return MessFix;
+}
 sprawdzReklame(text[], playerid)
 {
 	new valueAdd;
