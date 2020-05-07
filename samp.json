@@ -15,7 +15,8 @@
 		"IllidanS4/PawnPlus:v1.2.1",
 		"Pottus/ColAndreas:1.5.0",
 		"Mrucznik/samp-plugin-profiler:v2.15.4",
-		"urShadow/Pawn.Regex:1.1.2"
+		"urShadow/Pawn.Regex:1.1.2",
+		"Mrucznik/samp-mruv-api-plugin"
 	],
     "echo": "-",
     "rcon_password": "funiol",
