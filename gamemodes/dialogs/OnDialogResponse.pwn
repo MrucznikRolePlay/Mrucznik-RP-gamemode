@@ -6316,14 +6316,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						weryfikacja[playerid] = 1;
 						if(PlayerInfo[playerid][pJailed] == 0)
 						{
+							SetPVarInt(playerid, "spawn", 1);
+							SetPlayerSpawn(playerid);
+							TogglePlayerSpectating(playerid, false);
 							lowcap[playerid] = 1;
 							ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
 						}
 						else
 						{
 							SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
-							TogglePlayerSpectating(playerid, false);
 							SetPlayerSpawn(playerid);
+							TogglePlayerSpectating(playerid, false);
 						}
 					}
 					else
@@ -6331,7 +6334,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany!");
 						ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
 						GUIExit[playerid] = 0;
-						SetPlayerVirtualWorld(playerid, 0);
+						SetPlayerVirtualWorld(playerid, 50);
 						KickEx(playerid);
 					}
 			    }
@@ -6340,7 +6343,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za niewpisanie has³a!");
 					ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany z powodu bezpieczeñstwa za wpisanie pustego lub zbyt d³ugiego has³a. Zapraszamy ponownie.", "WyjdŸ", "");
 					GUIExit[playerid] = 0;
-				    SetPlayerVirtualWorld(playerid, 0);
+				    SetPlayerVirtualWorld(playerid, 50);
 					KickEx(playerid);
 			    }
 		    }
@@ -6349,7 +6352,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        SendClientMessage(playerid, COLOR_PANICRED, "Wyszed³eœ z weryfikacji, zosta³eœ roz³¹czony!");
 	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed³eœ z weryfikacji, zosta³eœ roz³¹czony!", "WyjdŸ", "");
 	            GUIExit[playerid] = 0;
-	            SetPlayerVirtualWorld(playerid, 0);
+	            SetPlayerVirtualWorld(playerid, 50);
 				KickEx(playerid);
 		    }
 		}
@@ -14825,8 +14828,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 
 				if(PlayerInfo[playerid][pJailed] == 0)
-				{
-					lowcap[playerid] = 1;
+				{ 
+    				lowcap[playerid] = 1;
+					SetPVarInt(playerid, "spawn", 1);
+					SetPlayerSpawn(playerid);
+					TogglePlayerSpectating(playerid, false);
 					ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
 				}
 			}

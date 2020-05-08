@@ -6257,8 +6257,8 @@ OnPlayerLogin(playerid, password[])
         else
         {
             SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
-            TogglePlayerSpectating(playerid, false);
-			SetPlayerSpawn(playerid);
+            SetPlayerSpawn(playerid);
+			TogglePlayerSpectating(playerid, false);
         }
 	}
     else
