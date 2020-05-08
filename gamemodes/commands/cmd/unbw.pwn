@@ -37,6 +37,7 @@ YCMD:unbw(playerid, params[], help)
 		if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
 		if(PlayerInfo[id][pBW] <= 0 && PlayerInfo[id][pInjury] <= 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz nie jest ranny.");
 		ZdejmijBW(id, 2000);
+		SetPlayerChatBubble(id, " ", 0xFF0000FF, 100.0, 1000);
 		SendClientMessage(playerid, COLOR_GRAD2, "Zdjêto BW.");
 	}
     return 1;
