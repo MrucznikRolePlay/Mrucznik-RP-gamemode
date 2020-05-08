@@ -1058,35 +1058,26 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
 MruMySQL_Unblock(nick[]="Brak", admin)
 {
 	if(!MYSQL_ON) return 0;
-	new query[256];
-    mysql_real_escape_string(nick, query);
-    format(nick, 32, "%s", query);
+	new query[358];
+    mysql_real_escape_string(nick, nick);
+    format(nick, 32, "%s", nick);
 
     new admnick[32];
     GetPlayerName(admin, admnick, 32);
 
-	if(strcmp(nick, "Brak", false) != 0)
+	format(query, sizeof(query), "SELECT `Nick` FROM `mru_konta` WHERE `Nick`='%s'", nick);
+	mysql_query(query);
+	mysql_store_result();
+
+	if (mysql_num_rows())
 	{
-		format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", nick, PlayerInfo[admin][pUID], admnick,WARN_UNBLOCK);
-		if(strlen(query) < 30) return 0;
+		mysql_free_result();
+		format(query, sizeof query, "UPDATE `mru_konta` SET `Block`=0, `CK`=0 WHERE `Nick`='%s'", nick);
 		if(!mysql_query(query)) return 0;
 	}
 	else
 	{
-		format(query, sizeof(query), "SELECT `Nick` FROM `mru_konta` WHERE `Nick`='%s'", nick);
-		mysql_query(query);
-		mysql_store_result();
-
-		if (mysql_num_rows())
-		{
-			mysql_free_result();
-			format(query, sizeof query, "UPDATE `mru_konta` SET `Block`=0, `CK`=0 WHERE `Nick`='%s'", nick);
-			if(!mysql_query(query)) return 0;
-		}
-		else
-		{
-			return 2;
-		}
+		return 2;
 	}
 	return 1;
 }

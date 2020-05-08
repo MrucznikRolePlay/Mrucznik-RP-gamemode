@@ -35,6 +35,11 @@ command_opis_Impl(playerid, params[])
 	{
 		new givenString[128];
 		format(givenString, sizeof(givenString), "%s", opis);
+		if(strfind(givenString, "(FF0000)", true) != -1)
+		{
+			SendClientMessage(playerid, COLOR_GRAD1, "Znaleziono niedozwolony kolor: (FF0000)");
+			return 1;
+		}
 		//todo: kolorowe opisy tylko dla KP
 		petla(i, strlen(givenString))
 		{
