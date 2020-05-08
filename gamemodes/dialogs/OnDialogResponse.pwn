@@ -181,7 +181,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new reason[64];
 			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
-			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}Powód warna: {B7EB34}%s{FFFFFF}?\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid), reason);		
+			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}Powód warna: {B7EB34}%s{FFFFFF}\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid), reason);		
 			ShowPlayerDialogEx(playerid, 9523, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Warn", "Warn + Kick");
 		}
 		return 1;

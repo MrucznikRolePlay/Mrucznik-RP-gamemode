@@ -410,16 +410,9 @@ GivePWarnForPlayer(player[], adminid, result[])
 {
 	new nickDoWarna[MAX_PLAYER_NAME];
 	strcat(nickDoWarna, player); 
-	new string[256];
-	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zwarnowane przez %s, Powod: %s", nickDoWarna, GetNickEx(adminid), Odpolszcz(result));
-	SendMessageToAdmin(string, COLOR_RED); 
-	Log(punishmentLog, INFO, "Admin %s ukara³ offline %s kar¹ warna, powód: %s", 
-						GetPlayerLogName(adminid),
-						player,
-						result);
+	new string[256], str[256];
 	MruMySQL_SetAccInt("Warnings", nickDoWarna, MruMySQL_GetAccInt("Warnings", nickDoWarna)+1);
 	if(strfind(result, "/q") != -1 || strfind(result, "ucieczka") != -1 || strfind(result, "q podczas akcji") != -1) MruMySQL_SetAccInt("Jailed", nickDoWarna, 0);
-
 	SetTimerEx("AntySpamTimer",5000,0,"d",adminid);
 	AntySpam[adminid] = 1;
 	if(GetPlayerAdminDutyStatus(adminid) == 1)
@@ -430,6 +423,30 @@ GivePWarnForPlayer(player[], adminid, result[])
 	{
 		iloscPozaDuty[adminid]++; 
 	}
+	Log(punishmentLog, INFO, "Admin %s ukara³ offline %s kar¹ warna, powód: %s", 
+		GetPlayerLogName(adminid),
+		player,
+		result
+	);
+
+	new warny = MruMySQL_GetAccInt("Warnings", nickDoWarna);
+	if(warny >= 3)
+	{
+		format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zbanowane przez %s, Powod: %s (3 warny)", nickDoWarna, GetNickEx(adminid), Odpolszcz(result));
+		SendMessageToAdmin(string, COLOR_RED); 
+		if(GetPlayerAdminDutyStatus(adminid) == 1)
+		{
+			iloscBan[adminid]++; 
+		}
+		//adminowe logi
+		format(str, sizeof(str), "Admini/%s.ini", GetNickEx(adminid));
+		dini_IntSet(str, "Ilosc_Warnow", dini_Int(str, "Ilosc_Warnow")+1 );
+		MruMySQL_BanujOffline(nickDoWarna, result, adminid);
+		return 1;	
+	}
+
+	format(string, sizeof(string), "AdmCmd: Konto gracza OFFLINE %s zostalo zwarnowane przez %s, Powod: %s", nickDoWarna, GetNickEx(adminid), Odpolszcz(result));
+	SendMessageToAdmin(string, COLOR_RED); 
 	return 1;
 }
 GiveWarnForPlayer(playerid, adminid, result[], nokick = 1)
