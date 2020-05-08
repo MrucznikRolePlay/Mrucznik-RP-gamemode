@@ -134,8 +134,6 @@ new lastMsg[MAX_PLAYERS];
 //Actor
 new PaniJanina;
 
-//PAèDZIOCH
-new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];
 
@@ -802,10 +800,14 @@ new rexl;
 new addtimer = 60000;
 new Float:stareVHP[MAX_PLAYERS];//zapis uszkodzen
 new SANradio = 0;
+new KLUBOWEradio = 0;
+new Text3D:KLUBOWE3d;
 new Text3D:SAN3d;
 new Text3D:NapislotLS1, Text3D:NapislotLS2, Text3D:NapislotLV1, Text3D:NapislotSF1;
 new SANrepertuar[128];
+new KLUBOWErepertuar[128];
 new Float:SANzasieg, Float:SANx, Float:SANy, Float:SANz;
+new Float:KLUBOWEzasieg, Float:KLUBOWEx, Float:KLUBOWEy, Float:KLUBOWEz;
 //kubi
 new RadioSANUno[128];
 new RadioSANDos[128];
@@ -911,7 +913,7 @@ new BramaZuz;
 new BramaZuzS = 1;
 //koniec garazpd
 //inne
-new PlayerHasWeapon[MAX_PLAYERS];
+new MyWeapon[MAX_PLAYERS];
 new ZapisSkinu[MAX_PLAYERS];
 new PDGPS = -1;//gps
 //koniec przedmioty
@@ -1008,7 +1010,11 @@ new Worek_Uzyty[MAX_PLAYERS];
 new Worek_MamWorek[MAX_PLAYERS];
 new Worek_KtoZalozyl[MAX_PLAYERS];
 new Worek_KomuZalozylem[MAX_PLAYERS];
-
+//cmd obrazenia
+new ObrazeniaIndex[MAX_PLAYERS];
+new ObrazeniaZadaneIndex[MAX_PLAYERS];
+new Obrazenia[MAX_PLAYERS][20][eOBRAZENIA];
+new ObrazeniaZadane[MAX_PLAYERS][20][eOBRAZENIAZADANE];
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
@@ -1097,8 +1103,9 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	DeletePVar(playerid, "DostalAJkomunikat");
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
-
+	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
 	organizacje_clearCache(playerid);
@@ -1107,7 +1114,6 @@ ZerujZmienne(playerid)
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
 
     PlayerInfo[playerid][pDescLabel] = tmp_label;
-
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//Øuøel
@@ -1316,12 +1322,14 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
+	KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
-
+	MyWeapon[playerid] = 0;
+	
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;
@@ -1366,7 +1374,8 @@ ZerujZmienne(playerid)
 
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
-	
+	ObrazeniaIndex[playerid] = 0;
+	for(new i = 0; i<10; i++) Obrazenia[playerid][i][DAMAGE] = 0.0;
 	if(tworzenietrasy[playerid] != 666)
 	{
 	    format(Wyscig[tworzenietrasy[playerid]][wOpis], 50, "");
@@ -1416,7 +1425,6 @@ ZerujZmienne(playerid)
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
-
 	new nick[32];
 	if(GetPVarString(playerid, "maska_nick", nick, 24))
 	{

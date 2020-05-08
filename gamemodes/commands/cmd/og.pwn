@@ -30,7 +30,7 @@
 
 YCMD:og(playerid, params[], help)
 {
-    new string[256];
+    new string[256], admstring[256];
     if(IsPlayerConnected(playerid))
     {
         if(gPlayerLogged[playerid] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
@@ -60,8 +60,25 @@ YCMD:og(playerid, params[], help)
 				return SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			}
 			ZabierzKase(playerid, payout);
-			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d", params, GetNick(playerid), PlayerInfo[playerid][pPnumber]);
-			OOCNews(TEAM_GROVE_COLOR,string);
+			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d", params, PlayerInfo[playerid][pPnumber]);
+			format(admstring, sizeof(admstring), "Og³oszenie: %s, Kontakt: %s Tel: %d", params, GetNick(playerid), PlayerInfo[playerid][pPnumber]);
+			foreach(new i : Player)
+			{
+				if(IsPlayerConnected(i))
+				{
+					if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)
+					{
+						if(GetPlayerAdminDutyStatus(playerid) == 1)
+						{
+							SendClientMessage(i, TEAM_GROVE_COLOR, admstring);
+						}
+						else
+						{
+							SendClientMessage(i, TEAM_GROVE_COLOR, string);
+						}
+					}
+				}
+			}
 			Log(chatLog, INFO, "%s og³oszenie: %s", GetPlayerLogName(playerid), params);
 			format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
 			GameTextForPlayer(playerid, string, 5000, 5);

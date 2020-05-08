@@ -71,6 +71,7 @@ YCMD:wplac(playerid, params[], help)
 				bankomat_fee = floatround(((cashdeposit/100) * 6), floatround_round);
 			}
 
+			new oldaccount = PlayerInfo[playerid][pAccount];
 			ZabierzKase(playerid, cashdeposit);
             PlayerInfo[playerid][pAccount] += (cashdeposit - bankomat_fee);
 
@@ -81,7 +82,7 @@ YCMD:wplac(playerid, params[], help)
                 SendClientMessage(playerid, COLOR_YELLOW, string);
             } else {
                 SendClientMessage(playerid, COLOR_WHITE, "|___ STAN KONTA ___|");
-                format(string, sizeof(string), "  Poprzedni stan: $%d", PlayerInfo[playerid][pAccount]);
+                format(string, sizeof(string), "  Poprzedni stan: $%d", oldaccount);
                 SendClientMessage(playerid, COLOR_GRAD2, string);
                 format(string, sizeof(string), "  Depozyt: $%d", cashdeposit);
                 SendClientMessage(playerid, COLOR_GRAD4, string);

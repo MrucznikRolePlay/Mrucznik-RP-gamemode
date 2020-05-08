@@ -131,7 +131,8 @@ YCMD:dzwon(playerid, params[], help)
 	{
 		if(GUIExit[playerid] == 0)
 		{
-			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nStra¿ Po¿arna\nMedyk\nSheriff", "Wybierz", "Roz³¹cz siê");
+			//ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nStra¿ Po¿arna\nMedyk\nSheriff", "Wybierz", "Roz³¹cz siê");
+			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nSzpital\nStra¿ Po¿arna", "Wybierz", "Roz³¹cz siê");
 		}
 		else
 		{

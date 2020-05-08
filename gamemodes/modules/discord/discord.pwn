@@ -27,32 +27,34 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
+LoadDiscordChannels()
+{
+    new query[512], type, org_id, channel_id[64];
+    mysql_query("SELECT `type`, `org_id`, `channel_id` FROM `mru_discord` ORDER BY `id` ASC");
+    mysql_store_result();
+
+    while(mysql_fetch_row_format(query, "|"))
+    {
+        sscanf(query, "p<|>dds[64]", type, org_id, channel_id);
+        if(type == 1) //frakcja
+        {
+			g_FracChannel[org_id] = DCC_FindChannelById(channel_id);
+        }
+        else //rodzina
+        {
+            g_OrgChannel[org_id] = DCC_FindChannelById(channel_id);
+        }
+    }
+    mysql_free_result();
+    print("Wczytano kana³y discord");
+}
 DiscordConnectInit()
 {
-	g_SanNewsChannelId=DCC_FindChannelById("538403089263362098"); //ig-san-news
-	g_AdminChannelId=DCC_FindChannelById("538403269077106725"); //ig-admin
-	g_ReportChannelId=DCC_FindChannelById("538403303550091264"); //ig-report
+	g_SanNewsChannelId=DCC_FindChannelById("696491963582513272"); //ig-san-news
+	g_AdminChannelId=DCC_FindChannelById("696501357208797214"); //ig-admin
+	g_ReportChannelId=DCC_FindChannelById("697009695495422012"); //ig-report
 
-	g_FracChannel[1]=DCC_FindChannelById("545045344652886056");
-	g_FracChannel[2]=DCC_FindChannelById("545620322423144459");
-	g_FracChannel[3]=DCC_FindChannelById("574930724973576207");
-	g_FracChannel[4]=DCC_FindChannelById("545619975151288321");
-	g_FracChannel[5]=DCC_FindChannelById("545625556578992128");
-	g_FracChannel[6]=DCC_FindChannelById("574930782007853066");
-	g_FracChannel[7]=DCC_FindChannelById("545626921950511104");
-	g_FracChannel[8]=DCC_FindChannelById("574930925209780228");
-	g_FracChannel[9]=DCC_FindChannelById("545621434098253824");
-	g_FracChannel[10]=DCC_FindChannelById("545622580246347776");
-	g_FracChannel[11]=DCC_FindChannelById("545622546939117569");
-	g_FracChannel[12]=DCC_FindChannelById("545642957106053123");
-	g_FracChannel[13]=DCC_FindChannelById("557567568198631441");
-	g_FracChannel[14]=DCC_FindChannelById("574931026888097802");
-	g_FracChannel[15]=DCC_FindChannelById("545643012437311491");
-	g_FracChannel[16]=DCC_FindChannelById("545643300736991235");
-	g_FracChannel[17]=DCC_FindChannelById("545619305832775700");
-	g_OrgChannel[1]=DCC_FindChannelById("545643431112867841");
-
-
+	LoadDiscordChannels();
 	return 1;
 }
 SendDiscordMessage(channel, message[])

@@ -189,7 +189,23 @@ enum eScenaNeon {
     bool:SCNeonSliderRefresh,
     SCNeonZderzacz
 };
-
+//obrazenia
+enum eOBRAZENIA {
+	HOURS,
+	MINUTES,
+	SECONDS,
+	ATTACKER[MAX_PLAYER_NAME],
+	WEAPONID,
+	Float:DAMAGE
+}
+enum eOBRAZENIAZADANE {
+	HOURS,
+	MINUTES,
+	SECONDS,
+	DEFENDER[MAX_PLAYER_NAME],
+	WEAPONID,
+	Float:DAMAGE
+}
 //25.07 system stref gangów
 new Float:Zone_Data[MAX_ZONES][4] = {
     {1983.0, -1027.0, 2266.0, -933.0},
@@ -487,9 +503,9 @@ new FractionNames[][40] = {
     "Korporacja Transportowa",
     "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
-    "Crackville Boyz",
+    "CRIMINAL CONNECTION",
     "Hillside Nortenos 14",
-    "Nightmare of Adrenalin",
+    "89 Border Society",
     "IV Saint Reich",
     "Brak",
     "Brak",
@@ -755,7 +771,7 @@ new BlinkOffset[][eBO] = {
 };
 
 new GunNames[47][] = {
-	"Brak",//0
+	"Piêœci",//0
 	"Kastet",//1
 	"Kij golfowy",//2
 	"Pa³ka policyjna",//3
@@ -1081,29 +1097,8 @@ new PobijText[31][31] ={
 "WYGRALES"//31
 };
 
+//respawn count
 new Count = 20;
-new CountText[20][20] ={
-"respawn za ~g~1",
-"respawn za ~g~2",
-"respawn za ~g~3",
-"respawn za ~g~4",
-"respawn za ~g~5",
-"respawn za ~g~6",
-"respawn za ~g~7",
-"respawn za ~g~8",
-"respawn za ~g~9",
-"respawn za ~g~10",
-"respawn za ~g~11",
-"respawn za ~g~12",
-"respawn za ~g~13",
-"respawn za ~g~14",
-"respawn za ~g~15",
-"respawn za ~g~16",
-"respawn za ~g~17",
-"respawn za ~g~18",
-"respawn za ~g~19",
-"respawn za ~g~20"
-};
 
 new Float:gCopPlayerSpawns[2][3] = {
 {1578.2158,-1633.9244,13.3991},
@@ -1362,7 +1357,7 @@ enum pInfo
     pCarSlots,
     pHat,
 	pBlokadaPisaniaFrakcjaCzas,
-    Text3D:pDescLabel,
+    Text3D:pDescLabel[128],
     pDesc[128],
 	pStrong,
 	pCard,
@@ -1779,7 +1774,7 @@ new const Przebierz[][] = {
 	{195},{194},{193},{185},{184},{183},
 	{182},{181},{180},{179},{178},{176},{172},{170},{168},{167},{162},
 	{161},{160},{159},{158},{157},{156},{155},{154},{153},{152},{151},
-	{146},{145},{144},{143},{142},{140},{139},{138},{137},{136},{135},
+	{146},{145},{144},{143}, {142},{140},{139},{138},{137},{136},{135},
 	{134},{264},{132},{131},{130},{129},{128},{254},{99},{97},{96},{95},{94},
 	{92},{90},{89},{88},{87},{85},{84},{83},{82},{81},{80},{79},{78},{77},{76},
 	{75},{73},{72},{69},{68},{67},{66},{64},{63},{62},{58},{56},{55},

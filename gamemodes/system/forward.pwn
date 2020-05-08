@@ -54,7 +54,6 @@ forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
 forward PoscigTimer(playerid);
 forward AntySpamTimer(playerid);
-forward AntySpamLowienie(playerid);
 forward AntyBusCzit(playerid);
 forward spamujebronia(playerid);
 forward odpalanie(playerid);
@@ -79,7 +78,7 @@ forward AutodbzesRH(playerid);
 forward Dopalaj(playerid); // Dopalacz auta
 forward StopMusic();
 forward PlayerFixRadio2();
-forward CountDown();
+forward CountDownVehsRespawn();
 forward ZestawNaprawczy_CountDown(playerid, vehicleid);
 forward EditObj(playerid, obj); //Timer do edycji obiektów
 forward PaintballEnded();
@@ -151,5 +150,5 @@ forward closeGate(i, j, playerid);
 forward DamagedHP(playerid);
 forward CuffedAction(playerid, cuffedid);
 //forward UnCuffedAction(cop, cuffedid); to do
-forward DeathAdminWarning(playerid, killerid, reason) ;
+forward DeathAdminWarning(playerid, killerid, reason);
 //EOF

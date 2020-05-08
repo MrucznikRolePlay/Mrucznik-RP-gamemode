@@ -361,9 +361,11 @@ public BlackoutEffect(playerid, disease, value)
 }
 public DeathEffect(playerid, disease, value)
 {
-	ChatMe(playerid, "umar³ na skutek choroby.");
+	/*ChatMe(playerid, "umar³ na skutek choroby.");
 	NadajBW(playerid, INJURY_TIME_DISEASES);
-	ZespawnujGraczaSzpitalBW(playerid);
+	ZespawnujGraczaSzpitalBW(playerid);*/
+	ChatMe(playerid, "straci³ przytomnoœæ na skutek choroby");
+	NadajRanny(playerid, INJURY_TIME_DISEASES);
 	return 1;
 }
 
@@ -386,9 +388,8 @@ timer LoweringHP[500](playerid, uid, hpLoss, bool:death, bool:freeze)
 	{
 		if(death)
 		{
-			ChatMe(playerid, "umar³ na skutek choroby");
-			NadajBW(playerid, INJURY_TIME_DISEASES);
-			ZespawnujGraczaSzpitalBW(playerid);
+			ChatMe(playerid, "straci³ przytomnoœæ na skutek choroby");
+			NadajRanny(playerid, INJURY_TIME_DISEASES);
 		}
 		return;
 	}

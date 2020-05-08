@@ -54,22 +54,21 @@ YCMD:ban(playerid, params[], help)
 	        {
 	            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-				new str[128];
 	            if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid))
 	            {
 					if(IsPlayerAdmin(giveplayerid) || Uprawnienia(giveplayerid, ACCESS_OWNER))
 					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Head Admina !");
+						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Head Admina !");
 						return 1;
 					}
 					if( (PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || PlayerInfo[giveplayerid][pZG] >= 4) && PlayerInfo[playerid][pZG] >= 4)
 					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina, P@ i ZG!");
+						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Admina, P@ i ZG!");
 						return 1;
 					}
 					if(PlayerInfo[giveplayerid][pLevel] > 1 && PlayerInfo[playerid][pZG] >= 4 && PlayerInfo[playerid][pZG] < 6)
 					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ gracza z levelem wiekszym niz 1!");
+						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ gracza z levelem wiekszym niz 1!");
 						return 1;
 					}
                     if(gPlayerLogged[giveplayerid] == 0)
@@ -77,47 +76,12 @@ YCMD:ban(playerid, params[], help)
                         sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany, u¿yj kicka.");
 						return 1;
                     }
-					SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
-					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ bana, powód: %s", 
-						GetPlayerLogName(playerid),
-						GetPlayerLogName(giveplayerid),
-						result);
-					if(GetPlayerAdminDutyStatus(playerid) == 1)
-					{
-						iloscBan[playerid]++;
-					}
-					else if(GetPlayerAdminDutyStatus(playerid) == 0)
-					{
-						iloscPozaDuty[playerid]++; 
-					}
-					if(kary_TXD_Status == 0)
-					{
-						format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayer, result);
-						SendPunishMessage(string, giveplayerid);
-					}
-					if(kary_TXD_Status == 1)
-					{
-						BanPlayerTXD(giveplayerid, playerid, result);
-					}
-					//adminowe logi
-			        format(str, sizeof(str), "Admini/%s.ini", GetNickEx(playerid));
-			        dini_IntSet(str, "Ilosc_Banow", dini_Int(str, "Ilosc_Banow")+1 );
-					format(str,sizeof(str),"~y~Ban Info:~n~~r~Osoba zbanowana: ~w~%s~n~~r~Powod: ~w~%s~n~~r~Nalozyl: ~w~%s", giveplayer ,result, GetNickEx(playerid));
-					MruMySQL_Banuj(giveplayerid, result, playerid);
-					KickEx(giveplayerid);
-					if(PlayerInfo[giveplayerid][pAdmin] >= 1)
-					{
-					    MruMySQL_Banuj(playerid, result, giveplayerid);
-						Log(punishmentLog, INFO, "Admin %s zosta³ zbanowany za zbanowanie admina %s", 
-							GetPlayerLogName(playerid),
-							GetPlayerLogName(giveplayerid));
-					    KickEx(playerid);
-					}
-					else
-					{
-					    SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-					    AntySpam[playerid] = 1;
-					}
+					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+					AntySpam[playerid] = 1;
+					SetPVarInt(playerid, "PunishBanPlayer", giveplayerid);
+					SetPVarString(playerid, "PunishBanPlayer_Reason", result);
+					format(string, sizeof string, "{FFFFFF}Czy podj¹³eœ dialog z graczem {B7EB34}%s{FFFFFF}?\nJe¿eli to mo¿liwe, mo¿esz ukaraæ gracza l¿ejsz¹ kar¹.", GetNick(giveplayerid));
+					ShowPlayerDialogEx(playerid, 9522, DIALOG_STYLE_MSGBOX, "Nadawanie bana", string, "Ban :(", "Anuluj karê");
 					return 1;
 			  	}
 				else
@@ -126,12 +90,12 @@ YCMD:ban(playerid, params[], help)
 				    {
                         if(IsPlayerAdmin(giveplayerid) || Uprawnienia(giveplayerid, ACCESS_OWNER))
     					{
-    						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Head Admina !");
+    						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Head Admina !");
     						return 1;
     					}
 						if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 						{
-							sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina !");
+							sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Admina !");
 							return 1;
 						}
                         if(gPlayerLogged[giveplayerid] == 0)
@@ -139,14 +103,27 @@ YCMD:ban(playerid, params[], help)
                             sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany, u¿yj kicka.");
 							return 1;
                         }
-						SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
+						SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+						AntySpam[playerid] = 1;
+						if(GetPlayerAdminDutyStatus(playerid) == 1)
+						{
+							iloscBan[playerid]++;
+						}
+						else if(GetPlayerAdminDutyStatus(playerid) == 0)
+						{
+							iloscPozaDuty[playerid]++; 
+						}
 						format(string, sizeof(string), "AdmCmd: Pó³Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayer, (result));
                         SendPunishMessage(string, giveplayerid);
+						if(kary_TXD_Status == 1)
+						{
+							BanPlayerTXD(giveplayerid, playerid, result);
+						}
+						SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
 						Log(punishmentLog, INFO, "Pó³Admin %s ukara³ %s kar¹ bana, powód: %s", 
 							GetPlayerLogName(playerid),
 							GetPlayerLogName(giveplayerid),
 							result);
-						format(str,sizeof(str),"~y~Ban Info:~n~~r~Osoba zbanowana: ~w~%s~n~~r~Powod: ~w~%s~n~~r~Nalozyl: ~w~%s", giveplayer ,(result), sendername);
 						MruMySQL_Banuj(giveplayerid, result, playerid);
 						KickEx(giveplayerid);
 						return 1;

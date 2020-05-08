@@ -54,12 +54,12 @@ YCMD:przeszukaj(playerid, params[], help)
 					    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz przeszukaæ samego siebie!"); return 1; }
 					    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-					    new text1[20], text2[20], text3[20], text4[20], text5[20];
-					    if(PlayerInfo[giveplayerid][pDrugs] > 0) { text1 = "| Narkotyki."; } else { text1 = "| Pusta kieszeñ."; }
-					    if(PlayerInfo[giveplayerid][pMats] > 0) { text2 = "| Materia³y."; } else { text2 = "| Pusta kieszeñ."; }
-					    if(PlayerHasFishes(giveplayerid)) { text3 = "| Ryby."; } else { text3 = "| Pusta kieszeñ."; }
-					    if(PlayerInfo[giveplayerid][pPhoneBook] > 0) { text4 = "| Ksi¹¿ka tel."; } else { text4 = "| Pusta kieszeñ."; }
-					    if(PlayerInfo[giveplayerid][pCDPlayer] > 0) { text5 = "| MP3."; } else { text5 = "| Pusta kieszeñ."; }
+					    new text1[60], text2[60], text3[60], text4[60], text5[60];
+					    if(PlayerInfo[giveplayerid][pDrugs] > 0) { format(text1, sizeof(text1), "| Narkotyki (%d gram)", PlayerInfo[giveplayerid][pDrugs]); } else { text1 = "| Pusta kieszeñ"; }
+					    if(PlayerInfo[giveplayerid][pMats] > 0) { format(text2, sizeof(text2), "| Materia³y (%d czêœci)", PlayerInfo[giveplayerid][pMats]); } else { text2 = "| Pusta kieszeñ"; }
+					    if(PlayerHasFishes(giveplayerid)) { text3 = "| Ryby"; } else { text3 = "| Pusta kieszeñ"; }
+					    if(PlayerInfo[giveplayerid][pPhoneBook] > 0) { text4 = "| Ksi¹¿ka tel"; } else { text4 = "| Pusta kieszeñ"; }
+					    if(PlayerInfo[giveplayerid][pCDPlayer] > 0) { text5 = "| MP3"; } else { text5 = "| Pusta kieszeñ"; }
 					    format(string, sizeof(string), "|__________ Wynik przeszukania %s __________|", giveplayer);
 				        SendClientMessage(playerid, COLOR_WHITE, string);
 				        format(string, sizeof(string), "%s.", text1);

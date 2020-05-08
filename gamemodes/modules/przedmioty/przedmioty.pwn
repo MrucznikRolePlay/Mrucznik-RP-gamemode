@@ -30,7 +30,7 @@
 /*PlayerChangeWeapon(playerid)
 {
 	//SendClientMessageToAll(COLOR_GRAD2, "#5: PlayerChangeWeaponOnInjury");
-	//SetPlayerArmedWeapon(playerid, PlayerHasWeapon[playerid]);
+	//SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 	PokazDialogPrzedmioty(playerid);
 	return 1;
 }
@@ -42,8 +42,8 @@ stock GetWeaponChangeDelay(currentWeapon, changedWeapon)
 
 public PlayerChangeWeapon(playerid, newweaponid)
 {
-	PlayerHasWeapon[playerid] = newweaponid;
-	SetPlayerArmedWeapon(playerid, PlayerHasWeapon[playerid]);
+	MyWeapon[playerid] = newweaponid;
+	SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 	AntySpam[playerid] = 0;
 	return 1;
 }
@@ -64,19 +64,19 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 	
 	if(weaponid > 1)
 	{
-		if(PlayerHasWeapon[playerid] == 24 && MaTazer[playerid] == 1)
+		if(MyWeapon[playerid] == 24 && MaTazer[playerid] == 1)
 		{
 			format(gname, sizeof(gname), "Paralizator");
 		}
 		else
 		{
-			format(gname, sizeof(gname), "%s", GunNames[PlayerHasWeapon[playerid]]);
+			format(gname, sizeof(gname), "%s", GunNames[MyWeapon[playerid]]);
 		}
-		if(weaponid == PlayerHasWeapon[playerid])
+		if(weaponid == MyWeapon[playerid])
 		{
 			weaponid = PlayerInfo[playerid][pGun0];
 		}
-		else if(PlayerHasWeapon[playerid] > 1)
+		else if(MyWeapon[playerid] > 1)
 		{
 			format(specNAME, sizeof(specNAME), "%s chowa %s i", specNAME, gname);
 		}
@@ -342,15 +342,16 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 	}
 
 	AntySpam[playerid] = 1;
-	SetTimerEx("PlayerChangeWeapon", GetWeaponChangeDelay(PlayerHasWeapon[playerid], weaponid), false, "dd", playerid, weaponid);
-	//PlayerHasWeapon[playerid] = weaponid;
-	//SetPlayerArmedWeapon(playerid, PlayerHasWeapon[playerid]);
+	new timerid = SetTimerEx("PlayerChangeWeapon", GetWeaponChangeDelay(MyWeapon[playerid], weaponid), false, "dd", playerid, weaponid);
+	SetPVarInt(playerid, "Timer_OnChangingWeapon", timerid);
+	//MyWeapon[playerid] = weaponid;
+	//SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 	return 1;
 }
 PokazDialogBronie(playerid)
 {
-	if(AntySpam[playerid] == 1) return SetPlayerArmedWeapon(playerid, PlayerHasWeapon[playerid]);
-	if(GUIExit[playerid] != 0) return SetPlayerArmedWeapon(playerid, PlayerHasWeapon[playerid]);
+	if(AntySpam[playerid] == 1) return SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
+	if(GUIExit[playerid] != 0) return SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 	GUIExit[playerid] = 1;
 	new wps[13][2], dialogstring[2048], weaponexist = 0;
     for(new i = 0; i < 13; i++)
@@ -365,10 +366,10 @@ PokazDialogBronie(playerid)
 	if(weaponexist)
 	{
 		DynamicGui_Init(playerid);
-		SetPlayerArmedWeapon(playerid, PlayerHasWeapon[playerid]);
+		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 		new active[144];
 		DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun0], PlayerInfo[playerid][pGun0]);
-		if(PlayerInfo[playerid][pGun0] == PlayerHasWeapon[playerid])
+		if(PlayerInfo[playerid][pGun0] == MyWeapon[playerid])
 		{
 			format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 		}
@@ -381,7 +382,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun1], PlayerInfo[playerid][pGun1]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun1] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun1] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -395,7 +396,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun2], PlayerInfo[playerid][pGun2]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun2] == PlayerHasWeapon[playerid] && MaTazer[playerid] != 1)
+			if(PlayerInfo[playerid][pGun2] == MyWeapon[playerid] && MaTazer[playerid] != 1)
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -409,7 +410,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun3], PlayerInfo[playerid][pGun3]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun3] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun3] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -423,7 +424,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun4], PlayerInfo[playerid][pGun4]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun4] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun4] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -437,7 +438,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun5], PlayerInfo[playerid][pGun5]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun5] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun5] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -451,7 +452,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun6], PlayerInfo[playerid][pGun6]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun6] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun6] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -465,7 +466,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun7], PlayerInfo[playerid][pGun7]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun7] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun7] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -479,7 +480,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun8], PlayerInfo[playerid][pGun8]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun8] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun8] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -493,7 +494,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun9], PlayerInfo[playerid][pGun9]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun9] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun9] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -507,7 +508,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun10], PlayerInfo[playerid][pGun10]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun10] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun10] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -521,7 +522,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun11], PlayerInfo[playerid][pGun11]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun11] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun11] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -535,7 +536,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, PlayerInfo[playerid][pGun12], PlayerInfo[playerid][pGun12]);
 			weaponexist = 1;
-			if(PlayerInfo[playerid][pGun12] == PlayerHasWeapon[playerid])
+			if(PlayerInfo[playerid][pGun12] == MyWeapon[playerid])
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -545,7 +546,7 @@ PokazDialogBronie(playerid)
 			}
 			format(dialogstring, sizeof(dialogstring), "%s\n%s%s", dialogstring, active, GunNames[PlayerInfo[playerid][pGun12]]);
 		}
-		if(PlayerHasWeapon[playerid] == 39 && PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
+		if(MyWeapon[playerid] == 39 && PlayerInfo[playerid][pGun8] >= 2 && PlayerInfo[playerid][pAmmo8] >= 1)
 		{
 			DynamicGui_AddRow(playerid, 40); //detonator
 			weaponexist = 1;
@@ -563,7 +564,7 @@ PokazDialogBronie(playerid)
 		{
 			DynamicGui_AddRow(playerid, 24, 1); //paralizator
 			weaponexist = 1;
-			if(24 == PlayerHasWeapon[playerid] && MaTazer[playerid] == 1)
+			if(24 == MyWeapon[playerid] && MaTazer[playerid] == 1)
 			{
 				format(active, sizeof(active), "{FAD82D}» {FAD82D}");
 			}
@@ -577,7 +578,7 @@ PokazDialogBronie(playerid)
 	else
 	{
 		SetPlayerArmedWeapon(playerid, 0);
-		PlayerHasWeapon[playerid] = 0;
+		MyWeapon[playerid] = 0;
 	}
 
 	if(!weaponexist)

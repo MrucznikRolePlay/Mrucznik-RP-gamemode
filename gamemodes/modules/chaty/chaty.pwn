@@ -84,6 +84,35 @@ CorrectICForm(const text[])
 	format(correctForm, sizeof(correctForm), "%s", CheckEmoji(CheckStars(text)));
 	return correctForm;
 }
+
+ReColor(text[])
+{
+    new
+        pos = -1;
+    while ((pos = strfind(text, "(", false, pos + 1)) != -1)
+    {
+        new
+            c = pos + 1,
+            n = 0,
+            ch;
+        // Note that the order of these is important!
+        while ((ch = text[c]) && n != 6)
+        {
+            if (!('a' <= ch <= 'f' || 'A' <= ch <= 'F' || '0' <= ch <= '9'))
+            {
+                break;
+            }
+            ++c;
+            ++n;
+        }
+        if (n == 6 && ch == ')')
+        {
+            text[pos] = '{';
+            text[c] = '}';
+        }
+    }
+}
+
 sprawdzReklame(text[], playerid)
 {
 	new valueAdd;
@@ -92,15 +121,16 @@ sprawdzReklame(text[], playerid)
 	|| strfind(text , ".pl" , true)>=0 
 	|| strfind(text , "serw" , true)>=0  
 	|| strfind(text , "serv" , true)>=0 
-	|| strfind(text , ":7" , true)>=0 
-	|| strfind(text , ":2" , true)>=0 
-	|| strfind(text , ":3" , true)>=0 
-	|| strfind(text , ":4" , true)>=0 
-	|| strfind(text , ":5" , true)>=0 
-	|| strfind(text , ":6" , true)>=0 
-	|| strfind(text , ":8" , true)>=0
+	|| strfind(text , ":7777" , true)>=0 
+	|| strfind(text , ":2000" , true)>=0 
+	|| strfind(text , ":3000" , true)>=0 
+	|| strfind(text , ":4000" , true)>=0 
+	|| strfind(text , ":5000" , true)>=0 
+	|| strfind(text , ":6000" , true)>=0 
+	|| strfind(text , ":8000" , true)>=0
 	|| strfind(text, "lsrp", true)>=0
 	|| strfind(text, "ls-rp", true)>=0
+	|| strfind(text, "stories", true)>=0
 	|| strfind(text, "n4g", true)>=0
 	|| strfind(text, "fox", true)>=0)
 	{
@@ -128,23 +158,15 @@ sprawdzReklame(text[], playerid)
 sprawdzWulgaryzmy(text[], playerid)
 {
 	new valueWulgaryzmy;
-	new stringReturn[256];
-
+	
 	if(CheckVulgarityString(text) != 0)
 	{
 		if(playerid != 666)
 		{
-		
 			SendClientMessage(playerid, COLOR_GRAD2, "Zosta³eœ ukarany grzywn¹ za wulgaryzmy! Kara: (20.000$)");
-			format(stringReturn, sizeof(stringReturn), "AdmWarning: [%d] %s u¿ycie wulgaryzmów (kara -20 000$): %s.",playerid,GetNick(playerid),text);
 			ZabierzKase(playerid, 20000);
 			Log(punishmentLog, INFO, "Gracz %s zosta³ ukarany kar¹ 20000$ za przeklinanie.", GetPlayerLogName(playerid));
 		}
-		else
-		{
-			format(stringReturn, sizeof(stringReturn), "AdmWarning: %s - pojawi³y siê wulgaryzmy");
-		}
-		ABroadCast(COLOR_LIGHTRED,stringReturn,1000);
 		Log(warningLog, INFO, "%s przeklina: %s", GetPlayerLogName(playerid), text);
 		valueWulgaryzmy = 1;
 	}
@@ -512,9 +534,9 @@ stock ChatDo(playerid, text[], Float:zasieg=ME_RANGE)
 {
     new string[256];
 	format(string, sizeof(string), "** %s **", text);
-	SetPlayerChatBubble(playerid,string, COLOR_PURPLE, zasieg, CHATBUBBLE_TIME);
+	SetPlayerChatBubble(playerid,string, COLOR_DO, zasieg, CHATBUBBLE_TIME);
     format(string, sizeof(string), "* %s ((%s))", text, GetNick(playerid));
-    RangeMessageColor(playerid, string, zasieg, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
+    RangeMessageColor(playerid, string, zasieg, COLOR_DO, COLOR_DO, COLOR_DO, COLOR_DO, COLOR_DO);
 	format(string, sizeof(string), "--/do:-- %s", text);
 	Log(chatLog, INFO, "Chat do: %s", text);
 	return 1;

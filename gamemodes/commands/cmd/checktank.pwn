@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ dajdowozu ]-----------------------------------------------//
+//-----------------------------------------------[ checktank ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: Creative
+// Data utworzenia: 07.04.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -27,21 +29,31 @@
 /*
 	
 */
-
-YCMD:dajdowozu(playerid, params[], help)
+YCMD:checktank(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))
-	{
-	    new giveplayerid, level;
-		if( sscanf(params, "k<fix>d", giveplayerid, level))
+    if(IsPlayerConnected(playerid))
+    {
+		new giveid;
+		if( sscanf(params, "k<fix>", giveid))
 		{
-			sendTipMessage(playerid, "U¿yj /dajdowozu [id gracza] [id wozu]");
+			sendTipMessage(playerid, "U¿yj /checktank [id gracza/czêœæ nicku]");
 			return 1;
 		}
 
-		SetAntyCheatForPlayer(giveplayerid, 2001); 
-		PutPlayerInVehicleEx(giveplayerid, level, 0);
-		Log(adminLog, INFO, "Admin %s u¿y³ /dajdowozu na graczu %s id wozu %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), level);
-	}
-	return 1;
+        if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+        {
+            new carid = GetPlayerVehicleID(giveid);
+            if(!carid) return sendErrorMessage(playerid, sprintf("%s [%d] musi znajdowaæ siê w pojeŸdzie!", GetNick(giveid), giveid));
+            
+            new Float:vhealth;
+            GetVehicleHealth(carid, vhealth);
+            SetVehicleHealth(carid, vhealth - 15);
+            SetTimerEx("CheckTankMode", 100, false, "iiif", playerid, giveid, carid, vhealth);
+        }
+        else
+        {
+            noAccessMessage(playerid);
+        }
+    }
+    return 1;
 }

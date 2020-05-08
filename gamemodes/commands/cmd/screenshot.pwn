@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------[ blokujsprzedarz ]--------------------------------------------//
+//-----------------------------------------------[ screenshot ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,10 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: werem
+// Data utworzenia: 20.04.2020
 
 // Opis:
 /*
-	
+
 */
 
 
@@ -27,46 +29,24 @@
 /*
 	
 */
-
-YCMD:blokujsprzedarz(playerid, params[], help)
+YCMD:screenshot(playerid, params[], help)
 {
-	new string[64];
-
-    if(gPlayerLogged[playerid] == 1)
+    if(IsPlayerConnected(playerid))
     {
-	    if(IsPlayerConnected(playerid))
-	    {
-	        if(PlayerInfo[playerid][pAdmin] >= 5000)
-			{
-			    new dom;
-				if( sscanf(params, "d", dom))
-				{
-					sendTipMessage(playerid, "U¿yj /blokujdom [id domu]");
-					return 1;
-				}
-
-				format(string, sizeof(string), "Domy/Dom%d.ini", dom);
-				if(dini_Exists(string))
-				{
-				    if(Dom[dom][hBlokada] == 0)
-				    {
-					    Dom[dom][hBlokada] = 1;
-						ZapiszDom(dom);
-						SendClientMessage(playerid, COLOR_RED, "Dom zablokowany");
-					}
-					else if(Dom[dom][hBlokada] == 1)
-					{
-                        Dom[dom][hBlokada] = 0;
-						ZapiszDom(dom);
-						SendClientMessage(playerid, COLOR_GREEN, "Dom odblokowany");
-					}
-				}
-				else
-				{
-				    SendClientMessage(playerid, COLOR_GRAD2, "Dom nie istnieje");
-				}
-			}
-		}
-	}
-	return 1;
+        if(!Worek_MamWorek[playerid])
+        {
+            if(!GetPVarInt(playerid, "HasScreenFilter"))
+            {
+                Have_Worek(playerid);
+                SetPVarInt(playerid, "HasScreenFilter", 1);
+            }
+            else
+            {
+                UnHave_Worek(playerid);
+                DeletePVar(playerid, "HasScreenFilter");
+            }
+        }
+        else sendErrorMessage(playerid, "Masz na sobie za³o¿ony worek!");
+    }
+    return 1;
 }

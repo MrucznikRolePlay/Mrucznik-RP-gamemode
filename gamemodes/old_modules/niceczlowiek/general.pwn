@@ -3,9 +3,9 @@ new Text3D:FabrykaMats_ActorLabel;
 
 new Float:FabrykaMats_ActorPos[][] =
 {
-	{2239.1765,-2258.2468,14.7647,208.8479},
-	{2201.0283,-2198.6238,13.5547,170.1143},
-	{2129.9502,-2276.1985,14.7836,145.9646}
+	{2239.1765,-2258.2468,14.7647,209.8479},
+	{2201.0283,-2198.6238,13.5547,171.1143},
+	{2129.9502,-2276.1985,14.7836,146.9646}
 };
 
 new FabrykaMats_ActorSkins[] =
@@ -163,10 +163,6 @@ Player_CanUseCar(playerid, vehicleid)
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
 			return 0;
 		}
-	}
-	if (GetVehicleModel(vehicleid) == 525)
-	{
-		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
 	}
 
 	if(VehicleUID[vehicleid][vUID] != 0)

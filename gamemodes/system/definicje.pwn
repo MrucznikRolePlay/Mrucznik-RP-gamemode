@@ -20,7 +20,7 @@
 //                              PVARS
 //------------------------------------------------------------------------------
 #define PVAR_PRZELEW_ID "przelej_id"
-
+#define petla(%2,%1) for(new %2 = 0; %2 < %1; %2++)
 
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
@@ -87,11 +87,6 @@
 #define AJ_POSY -1790.2204589844
 #define AJ_POSZ 156.7875213623
 #define AJ_MAXRANGE 5.0
-//PADZIOCH
-#define ROPELENGTH 100 //D³ugoœæ maksymalna liny (ingame metr)
-
-#define OFFSETZ 12
-#define DUR 250
 
 //sn
 #define COST_SN_SMS_0 0
@@ -326,6 +321,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_AUTO_RESPRAY_OWN      37
 #define D_AUTO_RESPRAY_OWN2     38
 #define D_AUTO_DESTROY          303
+#define D_AUTO_ACTION_TUNING    304
 
 #define D_INFO      712
 #define D_PERM      713

@@ -50,7 +50,8 @@ YCMD:dajklucze(playerid, params[], help)
 		{
 		    if(playa != INVALID_PLAYER_ID)
 		    {
-				if(playa == playerid) return sendErrorMessage(playerid, "Sam sobie chcesz daæ klucze, pijany jesteœ? :D");
+				if(playa == playerid) return sendErrorMessage(playerid, "Sam sobie chcesz daæ klucze, pijany jesteœ?");
+				if(GetDistanceBetweenPlayers(playerid,playa) > 5) return sendErrorMessage(playerid, "Ten gracz jest za daleko!");
 		        if(PlayerInfo[playa][pKluczeAuta] == 0)
 		        {
                     if(PlayerInfo[playerid][pCars][numerp] == 0) return sendErrorMessage(playerid, "Nie masz wozu pod tym numerem");

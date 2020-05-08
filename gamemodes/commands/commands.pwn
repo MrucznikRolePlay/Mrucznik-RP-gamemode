@@ -37,7 +37,6 @@
 #include "cmd/app.pwn"
 #include "cmd/apteczka.pwn"
 #include "cmd/aresztuj.pwn"
-#include "cmd/armia.pwn"
 #include "cmd/armor.pwn"
 #include "cmd/atakuj.pwn"
 #include "cmd/autorzy.pwn"
@@ -57,7 +56,7 @@
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
 #include "cmd/blokujnoba.pwn"
-#include "cmd/blokujsprzedarz.pwn"
+#include "cmd/blokujsprzedaz.pwn"
 #include "cmd/boxstats.pwn"
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
@@ -78,6 +77,7 @@
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
+#include "cmd/checktank.pwn"
 #include "cmd/clearwlall.pwn"
 #include "cmd/clearzone.pwn"
 #include "cmd/cmdinfo.pwn"
@@ -250,7 +250,6 @@
 #include "cmd/laptop.pwn"
 #include "cmd/licencje.pwn"
 #include "cmd/liderpomoc.pwn"
-#include "cmd/lina.pwn"
 #include "cmd/linie.pwn"
 #include "cmd/loadconfig.pwn"
 #include "cmd/loadinfo.pwn"
@@ -296,6 +295,7 @@
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
 #include "cmd/o.pwn"
+#include "cmd/obrazenia.pwn"
 #include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
@@ -394,6 +394,7 @@
 #include "cmd/scena.pwn"
 #include "cmd/scenaallow.pwn"
 #include "cmd/scenadisallow.pwn"
+#include "cmd/screenshot.pwn"
 #include "cmd/sejffrakcja.pwn"
 #include "cmd/sejfpomoc.pwn"
 #include "cmd/sejfrodzina.pwn"
@@ -688,6 +689,10 @@ static Aliases()
 	Command_AddAltNamed("cbradio", "cb");
 	Command_AddAltNamed("cbradio", "cb_radio");
 
+	//checktank
+	Command_AddAltNamed("checktank", "checktankmode");
+	Command_AddAltNamed("checktank", "checktankmod");
+	
 	//cp_usun
 	Command_AddAltNamed("cp_usun", "czekpoint_usun");
 	Command_AddAltNamed("cp_usun", "checkpoint_usun");
@@ -768,6 +773,12 @@ static Aliases()
 	//giveroom
 	Command_AddAltNamed("giveroom", "dajpokoj");
 	Command_AddAltNamed("giveroom", "dajwynajem");
+
+	//goto
+	Command_AddAltNamed("goto", "to");
+
+	//gethere
+	Command_AddAltNamed("gethere", "tm");
 
 	//glosnik
 	Command_AddAltNamed("glosnik", "sanradio");
@@ -1104,6 +1115,9 @@ static Aliases()
 	//sb
 	Command_AddAltNamed("sb", "sprawdzbron");
 	Command_AddAltNamed("sb", "szukajbroni");
+
+	//screenshot
+	Command_AddAltNamed("screenshot", "ss");
 
 	//sejffrakcja
 	Command_AddAltNamed("sejffrakcja", "sejff");
@@ -1445,6 +1459,10 @@ static Aliases()
 
 	//zaufanyggracz
 	Command_AddAltNamed("zaufanyggracz", "zg");
+
+	//zdejmijbpk
+	Command_AddAltNamed("zdejmijbpk", "zdejmijbp");
+	Command_AddAltNamed("zdejmijbpk", "unbp");
 
 	//wyloguj
 	Command_AddAltNamed("wyloguj", "logout");

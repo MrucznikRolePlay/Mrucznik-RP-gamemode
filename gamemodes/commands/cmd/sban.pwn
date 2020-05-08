@@ -54,7 +54,7 @@ YCMD:sban(playerid, params[], help)
 		        {
 					if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zabanowaæ Admina!");
+						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Admina!");
 						return 1;
 					}
 					
