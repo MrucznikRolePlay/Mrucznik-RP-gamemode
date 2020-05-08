@@ -175,15 +175,57 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	else if(dialogid == 9521) //kara warn
 	{
 		new giveplayerid = GetPVarInt(playerid, "PunishWarnPlayer");
+		new string[256];
 		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary warna dla %s.", GetNick(giveplayerid)));
 		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		{
+			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}Powód warna: {B7EB34}%s{FFFFFF}?\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid));		
+			ShowPlayerDialogEx(playerid, 9523, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Warn", "Warn + Kick");
+		}
+		return 1;
+	}
+	else if(dialogid == 9522) //kara ban
+	{
+		new giveplayerid = GetPVarInt(playerid, "PunishBanPlayer");
+		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary bana dla %s.", GetNick(giveplayerid)));
+		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid)))
+		{
+			new reason[64], string[256];
+			GetPVarString(playerid, "PunishBanPlayer_Reason", reason, sizeof(reason));
+			GiveBanForPlayer(giveplayerid, playerid, reason);
+			DeletePVar(playerid, "PunishBanPlayer");
+			DeletePVar(playerid, "PunishBanPlayer_Reason");
+
+			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			{
+				iloscBan[playerid]++;
+			}
+			else if(GetPlayerAdminDutyStatus(playerid) == 0)
+			{
+				iloscPozaDuty[playerid]++; 
+			}
+			if(kary_TXD_Status == 1)
+			{
+				BanPlayerTXD(giveplayerid, playerid, reason); 
+			}
+			else if(kary_TXD_Status == 0)
+			{
+				format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayerid, reason);
+				SendPunishMessage(string, playerid); 
+			}		
+		}
+		return 1;
+	}
+	else if(dialogid == 9523) //kara warn - typ warna
+	{
+		new giveplayerid = GetPVarInt(playerid, "PunishWarnPlayer");
+		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 		{
 			new reason[64], string[256];
 			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
 			GiveWarnForPlayer(giveplayerid, playerid, reason);
 			DeletePVar(playerid, "PunishWarnPlayer");
 			DeletePVar(playerid, "PunishWarnPlayer_Reason");
-			
 
 			if(GetPlayerAdminDutyStatus(playerid) == 1)
 			{
@@ -225,38 +267,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				SendPunishMessage(string, playerid); 
 			}
-		}
-		return 1;
-	}
-	else if(dialogid == 9522) //kara ban
-	{
-		new giveplayerid = GetPVarInt(playerid, "PunishBanPlayer");
-		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary bana dla %s.", GetNick(giveplayerid)));
-		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid)))
-		{
-			new reason[64], string[256];
-			GetPVarString(playerid, "PunishBanPlayer_Reason", reason, sizeof(reason));
-			GiveBanForPlayer(giveplayerid, playerid, reason);
-			DeletePVar(playerid, "PunishBanPlayer");
-			DeletePVar(playerid, "PunishBanPlayer_Reason");
-
-			if(GetPlayerAdminDutyStatus(playerid) == 1)
-			{
-				iloscBan[playerid]++;
-			}
-			else if(GetPlayerAdminDutyStatus(playerid) == 0)
-			{
-				iloscPozaDuty[playerid]++; 
-			}
-			if(kary_TXD_Status == 1)
-			{
-				BanPlayerTXD(giveplayerid, playerid, reason); 
-			}
-			else if(kary_TXD_Status == 0)
-			{
-				format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayerid, reason);
-				SendPunishMessage(string, playerid); 
-			}		
+			if(!response) KickEx(giveplayerid);
 		}
 		return 1;
 	}
@@ -2334,27 +2345,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				Mobile[playerid] = POLICE_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
-                case 1:
-                {
-                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze stra¿¹ po¿arn¹, prosze czekaæ...");
-    				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaæ krótki opis zdarzenia.");	
-    				Mobile[playerid] = LSMC_NUMBER;
-					Callin[playerid] = CALL_EMERGENCY;
-                }
-                case 2:
+				case 1:
                 {
     			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze szpitalem, prosze czekaæ...");
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Szpital: Witam, prosze podaæ krótki opis zdarzenia.");
     				Mobile[playerid] = LSMC_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
+                case 2:
+                {
+                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze stra¿¹ po¿arn¹, prosze czekaæ...");
+    				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaæ krótki opis zdarzenia.");	
+    				Mobile[playerid] = LSMC_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
+                }
+				/*
                 case 3:
                 {
     			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z dyspozytorem, prosze czekaæ...");
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "SheriffDep: Witam, prosze podaæ krótki opis przestêpstwa.");
     				Mobile[playerid] = LSFD_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
-                }
+                }*/
 			}
 	    }
         else if(dialogid== WINDA_SAN)

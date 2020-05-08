@@ -67,7 +67,7 @@ YCMD:sprzedajbron(playerid, params[], help)
             }
             if (IsPlayerConnected(giveplayerid))
             {
-                if(PlayerInfo[playerid][pConnectTime] >= 3)
+                if(PlayerInfo[playerid][pConnectTime] >= 9)
                 {
                     if(PlayerInfo[giveplayerid][pGunLic] == 1 || IsAPrzestepca(giveplayerid) || IsAPolicja(giveplayerid) || IsABOR(giveplayerid) || strcmp(x_weapon,"pistolety",true) == 0)
                     {
@@ -592,8 +592,8 @@ YCMD:sprzedajbron(playerid, params[], help)
                 }
                 else
                 {
-                    SendClientMessage(playerid, COLOR_GRAD1, "* Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 3. godzinami online !");
-                    SendClientMessage(giveplayerid, COLOR_GRAD1, "* Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 3. godzinami online !");
+                    SendClientMessage(playerid, COLOR_GRAD1, "* Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 9. godzinami online !");
+                    SendClientMessage(giveplayerid, COLOR_GRAD1, "* Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 9. godzinami online !");
                     return 1;
                 }
             }

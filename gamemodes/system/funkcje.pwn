@@ -7416,6 +7416,7 @@ WyscigMessage(color, string[])
 
 SendFamilyMessage(family, color, string[], onduty = false)
 {
+	#pragma unused onduty
 	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
@@ -7424,14 +7425,14 @@ SendFamilyMessage(family, color, string[], onduty = false)
 		    {
                 if(!gFam[i])
                 {
-					if(onduty) 
+					/*if(onduty) 
 					{
 						if(OnDuty[i] == 1 || OnDutyCD[i] == 1) SendClientMessage(i, color, string);
 					}
 					else
-					{
+					{*/
 						SendClientMessage(i, color, string);
-					}
+					//}
 				}
 			}
 		}

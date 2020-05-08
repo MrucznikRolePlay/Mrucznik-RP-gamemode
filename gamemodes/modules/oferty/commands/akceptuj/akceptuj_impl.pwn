@@ -1364,25 +1364,34 @@ command_akceptuj_Impl(playerid, x_job[32])
             {
                 if (ProxDetectorS(10.0, playerid, DomOffer[playerid]))
                 {
-                    GetPlayerName(DomOffer[playerid], giveplayer, sizeof(giveplayer));
-                    GetPlayerName(playerid, sendername, sizeof(sendername));
-                    format(string, sizeof(string), "Sprzeda³eœ dom graczowi %s za %d$.", sendername, DomCena[playerid]);
-                    SendClientMessage(DomOffer[playerid], COLOR_NEWS, string);
-                    format(string, sizeof(string), "Kupi³eœ dom od %s za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom", giveplayer, DomCena[playerid]);
-                    SendClientMessage(playerid, COLOR_NEWS, string);
-                    SendClientMessage(playerid, COLOR_PANICRED, "UWAGA! Pamiêtaj aby zmieniæ kod do sejfu !!!!!!");
-                    Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = GetNickEx(playerid);
-                    PlayerInfo[playerid][pDom] = PlayerInfo[DomOffer[playerid]][pDom];
-                    PlayerInfo[DomOffer[playerid]][pDom] = 0;
-                    ZabierzKase(playerid, DomCena[playerid]);
-                    DajKase(DomOffer[playerid], DomCena[playerid]);
-                    ZapiszDom(PlayerInfo[playerid][pDom]);
-                    Log(payLog, INFO, "%s kupi³ od %s dom %s za %d$. ", \
-                        GetPlayerLogName(playerid), \
-                        GetPlayerLogName(DomOffer[playerid]), \
-                        GetHouseLogName(PlayerInfo[playerid][pDom]), \
-                        DomCena[playerid] \
-                    );
+                    if(PlayerInfo[DomOffer[playerid]][pDom] != 0 && PlayerInfo[DomOffer[playerid]][pDom] == GetPVarInt(DomOffer[playerid], "DomOfferID"))
+                    {
+                        GetPlayerName(DomOffer[playerid], giveplayer, sizeof(giveplayer));
+                        GetPlayerName(playerid, sendername, sizeof(sendername));
+                        format(string, sizeof(string), "Sprzeda³eœ dom graczowi %s za %d$.", sendername, DomCena[playerid]);
+                        SendClientMessage(DomOffer[playerid], COLOR_NEWS, string);
+                        format(string, sizeof(string), "Kupi³eœ dom od %s za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom", giveplayer, DomCena[playerid]);
+                        SendClientMessage(playerid, COLOR_NEWS, string);
+                        SendClientMessage(playerid, COLOR_PANICRED, "UWAGA! Pamiêtaj aby zmieniæ kod do sejfu !!!!!!");
+                        Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = GetNickEx(playerid);
+                        PlayerInfo[playerid][pDom] = PlayerInfo[DomOffer[playerid]][pDom];
+                        PlayerInfo[DomOffer[playerid]][pDom] = 0;
+                        ZabierzKase(playerid, DomCena[playerid]);
+                        DajKase(DomOffer[playerid], DomCena[playerid]);
+                        ZapiszDom(PlayerInfo[playerid][pDom]);
+                        Log(payLog, INFO, "%s kupi³ od %s dom %s za %d$. ", \
+                            GetPlayerLogName(playerid), \
+                            GetPlayerLogName(DomOffer[playerid]), \
+                            GetHouseLogName(PlayerInfo[playerid][pDom]), \
+                            DomCena[playerid] \
+                        );
+                    }
+                    else
+                    {
+                        format(string, sizeof(string), "Napotkano b³¹d. Dom zosta³ kupiony przez kogoœ innego.");
+                        SendClientMessage(playerid, COLOR_NEWS, string);
+                    }
+                    DeletePVar(DomOffer[playerid], "DomOfferID");
                     DomCena[playerid] = 0;
                     DomOffer[playerid] = 999;
                     return 1;

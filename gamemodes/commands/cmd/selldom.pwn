@@ -93,6 +93,7 @@ YCMD:selldom(playerid, params[], help)
 									SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 									DomOffer[giveplayerid] = playerid;
 									DomCena[giveplayerid] = money;
+									SetPVarInt(playerid, "DomOfferID", PlayerInfo[playerid][pDom]);
 								}
 								else
 								{
