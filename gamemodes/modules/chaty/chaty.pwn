@@ -84,6 +84,7 @@ CorrectICForm(const text[])
 	format(correctForm, sizeof(correctForm), "%s", CheckEmoji(CheckStars(text)));
 	return correctForm;
 }
+
 ReColor(text[])
 {
     new
@@ -111,6 +112,7 @@ ReColor(text[])
         }
     }
 }
+
 sprawdzReklame(text[], playerid)
 {
 	new valueAdd;
