@@ -2228,7 +2228,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	else if(dialogid == iddialog[playerid]) //TODO: WTF
 	{
-		if(dialogid == 1) SPAWNTUTAJ
+		if(dialogid == 1)
 	    {
 	        if(response)
 	        {
