@@ -82,10 +82,10 @@ command_opis_Impl(playerid, params[])
 			db_free_result(db_query(db_handle, sprintf("INSERT INTO `mru_opisy` (`uid`,`text`, `owner`, `last_used`) VALUES (null, '%s', '%d', '%d')", opis, PlayerInfo[playerid][pUID], gettime())));
 		}
 
+		PlayerInfo[playerid][pDesc] = opis;
 		ReColor(opis);
 		Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
 		Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, wordwrapEx(opis));
-		PlayerInfo[playerid][pDesc] = opis;
 		sendTipMessage(playerid, "Ustawiono nowy opis:");
 		new stropis[126];
 		format(stropis, sizeof(stropis), "%s", opis);

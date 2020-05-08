@@ -1157,7 +1157,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                         
                         if(Condom[playerid] < 1)
                         {
-                            new Float:health, Float:hp;
+                            new Float:health, Float:Ahealth, Float:hp;
                             new level = PlayerInfo[SexOffer[playerid]][pSexSkill];
                             if(level >= 0 && level <= 50) hp = 20;
                             else if(level >= 51 && level <= 100) hp = 40;
@@ -1171,13 +1171,14 @@ command_akceptuj_Impl(playerid, x_job[32])
                                 return 1;
                             }
                             GetPlayerHealth(playerid, health);
+                            GetPlayerArmour(playerid, Ahealth);
                             if((health + hp) < 100) 
                             {
                                 SetPlayerHealth(playerid, health + hp); 
                             }
                             else
                             {
-                                SetPlayerArmour(playerid, hp);  
+                                SetPlayerArmour(playerid, Ahealth + hp);  
                             }
                             SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP z powodu sexu.", hp));
                             if(random(20) == 1)//5% szans na zara¿enie
