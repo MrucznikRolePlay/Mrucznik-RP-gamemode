@@ -172,7 +172,6 @@
 		> makemember - nadaje stopieñ [0] graczowi o ID we frakcji X
 		> zabierzlideraorg - zabiera lidera organizacji (rodziny) dla gracza o ID
 		> makeleader - daje graczowi o ID lidera frakcji o ID X
-		> makewomanleader- daje graczowi o ID ¿eñskiego lidera frakcji o ID X
 		> setteam - ustala "team" graczowi (raczej ju¿ nie u¿ywane) - s¹ dwa cop, civilian. 
 		> gotopos - teleportuje nas do pozycji X,Y,Z
 		> gotols - teleportuje pod komisariat LS
@@ -327,7 +326,7 @@ AJPlayerTXD(playerid, adminid, reason[], timeVal)
 BPPlayerTXD(playerid, adminid, timeVal, reason[])
 {
 	new str[256];
-    format(str, sizeof(str), "~r~BP [%d godzin]~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s",timeVal, GetNick(playerid), GetNickEx(adminid),Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Blokada pisania & opisu [%d godzin]~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s",timeVal, GetNick(playerid), GetNickEx(adminid),Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -659,7 +658,7 @@ GiveBPForPlayer(playerid, adminid, timeVal, result[])
 		result);
 	//opis
 	//Opis_Usun(giveplayerid);
-	Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+	Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
 	PlayerInfo[playerid][pDesc][0] = EOS;
 	if(GetPlayerAdminDutyStatus(adminid) == 0)
 	{
