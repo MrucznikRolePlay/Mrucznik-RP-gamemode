@@ -111,7 +111,7 @@ command_opis_Impl(playerid, params[])
 	{
 		format(string, sizeof(string), "Nie masz ustawionego opisu...");
 		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
-		format(string, sizeof(string), "%s{888888}##\n{ff0000}Dodaj opis postaci (/opis [tekst]])\n", string);
+		format(string, sizeof(string), "%s{888888}\n{ff0000}Dodaj opis postaci (/opis [tekst])\n", string);
 		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
 	}
 

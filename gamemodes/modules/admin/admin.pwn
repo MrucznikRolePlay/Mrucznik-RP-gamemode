@@ -432,7 +432,7 @@ GivePWarnForPlayer(player[], adminid, result[])
 	}
 	return 1;
 }
-GiveWarnForPlayer(playerid, adminid, result[])
+GiveWarnForPlayer(playerid, adminid, result[], kick = 0)
 {
 	new str[256];
 	new string[256];
@@ -469,6 +469,11 @@ GiveWarnForPlayer(playerid, adminid, result[])
 		GetPlayerLogName(playerid),
 		result
 	);
+	if(kick)
+	{
+		SendClientMessage(playerid, COLOR_LIGHTRED, "Lepiej ¿ebyœ och³on¹³. Dostajesz warn & kick - wróæ jak tylko przemyœlisz swoje postêpowanie.");
+		KickEx(playerid);
+	}
 	return 1;
 }
 GiveBanForPlayer(playerid, adminid, result[])

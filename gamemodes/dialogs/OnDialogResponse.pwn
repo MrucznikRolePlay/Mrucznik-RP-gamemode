@@ -179,7 +179,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary warna dla %s.", GetNick(giveplayerid)));
 		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
 		{
-			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}Powód warna: {B7EB34}%s{FFFFFF}?\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid));		
+			new reason[64];
+			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
+			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}Powód warna: {B7EB34}%s{FFFFFF}?\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid), reason);		
 			ShowPlayerDialogEx(playerid, 9523, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Warn", "Warn + Kick");
 		}
 		return 1;
@@ -223,7 +225,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new reason[64], string[256];
 			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
-			GiveWarnForPlayer(giveplayerid, playerid, reason);
+			GiveWarnForPlayer(giveplayerid, playerid, reason, response);
 			DeletePVar(playerid, "PunishWarnPlayer");
 			DeletePVar(playerid, "PunishWarnPlayer_Reason");
 
@@ -267,7 +269,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				SendPunishMessage(string, playerid); 
 			}
-			if(!response) KickEx(giveplayerid);
 		}
 		return 1;
 	}
