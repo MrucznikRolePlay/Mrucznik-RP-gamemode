@@ -1,0 +1,16 @@
+{
+    "properties":{
+       "mc":{
+          "type":"integer"
+       },
+       "item_id":{
+          "type":"integer"
+       },
+       "skin_id":{
+          "type":"integer"
+       },
+       "phone_nr":{
+          "type":"integer"
+       }
+    }
+ }

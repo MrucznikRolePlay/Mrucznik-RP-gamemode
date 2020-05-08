@@ -33,7 +33,15 @@ YCMD:wyjdz(playerid, params[], help)
     if(IsPlayerConnected(playerid))
 	{
 		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
-	//	PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
+		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
+
+		if(AntySpam[playerid] == 1)
+        {
+            sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
+            return 1;
+        }
+        SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+        AntySpam[playerid] = 1;
 	
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
 		if(isNaked[playerid] == 1)
@@ -232,12 +240,13 @@ YCMD:wyjdz(playerid, params[], help)
 			SetPlayerVirtualWorld(playerid,0);
 		}
 		//vinyl
-		else if(IsPlayerInRangeOfPoint(playerid, 1.5, 817.0987,-1375.1685,23.6475))
+		else if(IsPlayerInRangeOfPoint(playerid, 1.5, 816.50, -1413.75, -22.58))
 		{
-			SetPlayerPos(playerid, 814.4426,-1378.2600,23.6475);
+			Wchodzenie(playerid);
+			SetPlayerVirtualWorld(playerid, 72);
+			SetPlayerPos(playerid, 816.5667, -1415.4117, -22.5834);
 			GameTextForPlayer(playerid, "~w~Impreza dalej trwa~n~~r~bez ciebie", 5000, 1);
 			SetPLocal(playerid, PLOCAL_DEFAULT); 
-            Wchodzenie(playerid);
 			return 1;
 		}
         //IBIZA

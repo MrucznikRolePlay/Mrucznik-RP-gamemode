@@ -134,8 +134,6 @@ new lastMsg[MAX_PLAYERS];
 //Actor
 new PaniJanina;
 
-//PAèDZIOCH
-new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];
 
@@ -1014,7 +1012,9 @@ new Worek_KtoZalozyl[MAX_PLAYERS];
 new Worek_KomuZalozylem[MAX_PLAYERS];
 //cmd obrazenia
 new ObrazeniaIndex[MAX_PLAYERS];
-new Obrazenia[MAX_PLAYERS][10][eOBRAZENIA];
+new ObrazeniaZadaneIndex[MAX_PLAYERS];
+new Obrazenia[MAX_PLAYERS][20][eOBRAZENIA];
+new ObrazeniaZadane[MAX_PLAYERS][20][eOBRAZENIAZADANE];
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
@@ -1322,12 +1322,14 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
+	KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
-
+	MyWeapon[playerid] = 0;
+	
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;
@@ -1423,7 +1425,6 @@ ZerujZmienne(playerid)
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
-	DeletePVar(playerid, "OnSpecChanging");
 	new nick[32];
 	if(GetPVarString(playerid, "maska_nick", nick, 24))
 	{

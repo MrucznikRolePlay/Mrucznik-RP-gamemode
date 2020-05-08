@@ -203,10 +203,6 @@ KupPojazdPremium(playerid, id)
 	}
 	if(MRP_ShopPurchaseCar(playerid, PojazdyPremium[id][Model], PojazdyPremium[id][Cena]))
 	{
-		Log(premiumLog, INFO, "%s kupil pojazd premium %s za %dMC",
-			GetPlayerLogName(playerid), 
-			VehicleNames[PojazdyPremium[id][Model]-400], 
-			PojazdyPremium[id][Cena]);
 		premium_printMcBalance(playerid);
 	}
 	DialogMenuDotacje(playerid);

@@ -45,7 +45,7 @@ YCMD:alkomat(playerid, params[], help)
 		}
 		if(IsPlayerConnected(giveplayerid))
 		{
-			if(CrimInRange(10.0,giveplayerid,playerid))
+			if(GetDistanceBetweenPlayers(giveplayerid,playerid) < 10)
 			{
 				new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 				GetPlayerName(giveplayerid,giveplayer, sizeof(giveplayer));

@@ -16,7 +16,7 @@ quit
 END_SFTP
 
 ssh -o "StrictHostKeyChecking no" -p $PORT $USER@$HOST <<END_SSH
-cd /home/samp/samp03
+cd /home/samp/serverfiles
 ./stop
 ./start
 END_SSH

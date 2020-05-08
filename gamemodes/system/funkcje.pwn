@@ -761,6 +761,14 @@ public PlayerFixRadio2()
 		}
 	}
 }
+
+forward func_SetPVarInt(playerid, key[], value);
+public func_SetPVarInt(playerid, key[], value)
+{
+	SetPVarInt(playerid, key, value);
+	return 1;
+}
+
 public ZestawNaprawczy_CountDown(playerid, vehicleid)
 {
 	new Float:pos[3];
@@ -817,17 +825,20 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	}
 }
 
-public CountDown()
+public CountDownVehsRespawn()
 {
 	if (Count > 0)
 	{
-		GameTextForAll( CountText[Count-1], 2500, 1);
+		new text[56];
+		format(text, sizeof text, "respawn za ~g~%d", Count-1);
+		GameTextForAll(text, 2500, 1);
+		if(Count % 5 == 0) SoundForAll(1056);
 		Count--;
-		SoundForAll(1056);
-		SetTimer("CountDown", 1000, 0);
+		SetTimer("CountDownVehsRespawn", 1000, 0);
 	}
 	else
-	{
+	{	
+		SoundForAll(1057);
 		GameTextForAll("~g~Respawn", 2500, 1);
 		SendClientMessageToAll(COLOR_PANICRED, "|___Nast¹pi³ respawn nieu¿ywanych pojazdów___|");
 		Count = 20;
@@ -852,7 +863,6 @@ public CountDown()
 			}
 		}
 	}
-	SoundForAll(1057);
 }
 
 public Odmroz(playerid)
@@ -1310,6 +1320,10 @@ public nieudalo3(playerid){
     	RemovePlayerFromVehicleEx(playerid);
     	KradniecieWozu[playerid] = 0;
     	NieSpamujKradnij[playerid] = 0;
+		new pZone[MAX_ZONE_NAME];
+		GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
+		format(komunikat, sizeof(komunikat), "HQ: Zg³oszono próbê kradzie¿y %s na %s.", VehicleNames[GetVehicleModel(vehi)-400], pZone);
+		SendFamilyMessage(FRAC_LSPD, COLOR_LIGHTRED, komunikat, true);
     }
     else
     {
@@ -2241,11 +2255,11 @@ IsAMafia(playerid)
 	{
 	    new leader = PlayerInfo[playerid][pLider];
 	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==16)
+	    if(member==5 || member==6 || member==16 || member==13)
 		{
 		    return 1;
 		}
-		else if(leader==5 || leader==6 || member==16)
+		else if(leader==5 || leader==6 || member==16 || member==13)
 		{
 		    return 1;
 		}
@@ -2624,7 +2638,7 @@ DajBronieFrakcyjne(playerid)
 	        playerWeapons[playerid][weaponLegal10] = 1;
 	    }
 	}
-	if(PlayerInfo[playerid][pMember] == 2)
+	else if(PlayerInfo[playerid][pMember] == 2)
 	{
 	    if(PlayerInfo[playerid][pGun1] == 0)
 	    {
@@ -2729,40 +2743,6 @@ DajBronieFrakcyjne(playerid)
     	    }
         }
 	}
-	else if(PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][pLider] == 5)
-	{
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pLider] == 6)
-	{
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 8; PlayerInfo[playerid][pAmmo1] = 1;
-	    }
-     	if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	        playerWeapons[playerid][weaponLegal6] = 0;
-	    }
-	}
 	else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7)
 	{
 	    if(PlayerInfo[playerid][pGun1] == 0)
@@ -2829,131 +2809,6 @@ DajBronieFrakcyjne(playerid)
 			PlayerInfo[playerid][pGun1] = 2; PlayerInfo[playerid][pAmmo1] = 1;
 			playerWeapons[playerid][weaponLegal1] = 1;
 		}
-	}
-	else if(PlayerInfo[playerid][pMember] == 12 || PlayerInfo[playerid][pLider] == 12)
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0  || PlayerInfo[playerid][pGun2] == 22 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 22; PlayerInfo[playerid][pAmmo2] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 32 && PlayerInfo[playerid][pAmmo4] < 25 || PlayerInfo[playerid][pAmmo4] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun4] = 32; PlayerInfo[playerid][pAmmo4] = 150;
-	        playerWeapons[playerid][weaponLegal5] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 2;
-	        playerWeapons[playerid][weaponLegal2] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 50 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 1000;
-	        playerWeapons[playerid][weaponLegal10] = 0;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 13 || PlayerInfo[playerid][pLider] == 13)
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0  || PlayerInfo[playerid][pGun2] == 22 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 22; PlayerInfo[playerid][pAmmo2] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 32 && PlayerInfo[playerid][pAmmo4] < 25 || PlayerInfo[playerid][pAmmo4] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun4] = 32; PlayerInfo[playerid][pAmmo4] = 150;
-	        playerWeapons[playerid][weaponLegal5] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 2;
-	        playerWeapons[playerid][weaponLegal2] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 50 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 1000;
-	        playerWeapons[playerid][weaponLegal10] = 0;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 14 || PlayerInfo[playerid][pLider] == 14)
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0  || PlayerInfo[playerid][pGun2] == 22 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 22; PlayerInfo[playerid][pAmmo2] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 32 && PlayerInfo[playerid][pAmmo4] < 25 || PlayerInfo[playerid][pAmmo4] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun4] = 32; PlayerInfo[playerid][pAmmo4] = 150;
-	        playerWeapons[playerid][weaponLegal5] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 2;
-	        playerWeapons[playerid][weaponLegal2] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 50 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 1000;
-	        playerWeapons[playerid][weaponLegal10] = 0;
-	    }
-	}
-	else if(PlayerInfo[playerid][pMember] == 15 || PlayerInfo[playerid][pLider] == 15)//NoA
-	{
-	    if(PlayerInfo[playerid][pGun2] == 0  || PlayerInfo[playerid][pGun2] == 22 && PlayerInfo[playerid][pAmmo2] < 50 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 22; PlayerInfo[playerid][pAmmo2] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun4] == 0 || PlayerInfo[playerid][pGun4] == 32 && PlayerInfo[playerid][pAmmo4] < 25 || PlayerInfo[playerid][pAmmo4] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun4] = 32; PlayerInfo[playerid][pAmmo4] = 150;
-	        playerWeapons[playerid][weaponLegal5] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun1] == 0)
-	    {
-	        PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 2;
-	        playerWeapons[playerid][weaponLegal2] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 41 && PlayerInfo[playerid][pAmmo9] < 50 || PlayerInfo[playerid][pAmmo9] <= 30)
-	    {
-	        PlayerInfo[playerid][pGun9] = 41; PlayerInfo[playerid][pAmmo9] = 1000;
-	        playerWeapons[playerid][weaponLegal10] = 0;
-	    }
-	}
- 	else if(PlayerInfo[playerid][pMember] == 16 || PlayerInfo[playerid][pLider] == 16)
-	{
-     	if(PlayerInfo[playerid][pGun0] == 0)
-	    {
-	        PlayerInfo[playerid][pGun0] = 1; PlayerInfo[playerid][pAmmo0] = 1;
-	    }
-	    if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
 	}
 	return 1;
 }
@@ -7561,6 +7416,7 @@ WyscigMessage(color, string[])
 
 SendFamilyMessage(family, color, string[], onduty = false)
 {
+	#pragma unused onduty
 	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
@@ -7569,14 +7425,14 @@ SendFamilyMessage(family, color, string[], onduty = false)
 		    {
                 if(!gFam[i])
                 {
-					if(onduty) 
+					/*if(onduty) 
 					{
 						if(OnDuty[i] == 1 || OnDutyCD[i] == 1) SendClientMessage(i, color, string);
 					}
 					else
-					{
+					{*/
 						SendClientMessage(i, color, string);
-					}
+					//}
 				}
 			}
 		}
@@ -7972,25 +7828,6 @@ ProxDetector(Float:radi, playerid, string[],col1,col2,col3,col4,col5)
 		}
 	}//not connected
 	return 1;
-}
-
-CrimInRange(Float:radi, playerid,copid)
-{
-	if(IsPlayerConnected(playerid)&&IsPlayerConnected(copid))
-	{
-		new Float:posx, Float:posy, Float:posz;
-		new Float:oldposx, Float:oldposy, Float:oldposz;
-		new Float:tempposx, Float:tempposy;
-		GetPlayerPos(playerid, oldposx, oldposy, oldposz);
-		GetPlayerPos(copid, posx, posy, posz);
-		tempposx = (oldposx -posx);
-		tempposy = (oldposy -posy);
-		if (((tempposx < radi) && (tempposx > -radi)) && ((tempposy < radi) && (tempposy > -radi)))
-		{
-			return 1;
-		}
-	}
-	return 0;
 }
 
 PolicjantWStrefie(Float:radi, playerid)
@@ -8691,6 +8528,39 @@ WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
     return 1;
 }
 
+stock wordwrapEx(givenString[128])
+{
+	new temporalString[ 128 ];
+	memcpy(temporalString, givenString, 0, 128 * 4);
+
+	new comaPosition = strfind(temporalString, ",", true, 0),
+		dotPosition  = strfind(temporalString, ".", true, 0);
+	while(comaPosition != -1)
+	{
+		if(temporalString[comaPosition+1] != ' ') strins(temporalString, " ", comaPosition + 1);
+		comaPosition = strfind(temporalString, ",", true, comaPosition + 1);
+	}
+	while(dotPosition != -1)
+	{
+		if(temporalString[dotPosition+1] != ' ') strins(temporalString, " ", dotPosition + 1);
+		dotPosition = strfind(temporalString, ",", true, dotPosition + 1);
+	}
+
+	new spaceCounter = 0,
+		spacePosition = strfind(temporalString, " ", true, 0);
+
+	while(spacePosition != -1)
+	{
+		spaceCounter++;
+		if(spaceCounter % 4 == 0 && spaceCounter != 0)
+		{
+			strins(temporalString, "\n", spacePosition + 1);
+		}
+		spacePosition = strfind(temporalString, " ", true, spacePosition + 1);
+	}
+	return temporalString;
+}
+
 //Sjefy
 Sejf_Add(frakcja, kasa)
 {
@@ -8740,12 +8610,31 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z][a-z]+([ _][A-Z][a-z]+([A-HJ-Z][a-z]+)?){1,2}$") >= 0)
+	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
 	{
 		return 1;
 	}
 	return 0;
 }
+
+/*NickCensoreCorrect(nick[])
+{
+    if(strfind(nick,"Sandra_Rabucha",true) != -1) return 0; //Rozalka
+    else if(strfind(nick,"rabuc",true) != -1) return 0;
+    else if(strfind(nick,"rebuc",true) != -1) return 0;
+	else if(strfind(nick,"Damian_Szymanski",true) != -1) return 0; //Creative
+	else if(strfind(nick,"szymanski",true) != -1) return 0;
+	else if(strfind(nick,"szymansky",true) != -1) return 0;
+	else if(strfind(nick,"szymanczak",true) != -1) return 0;
+	else if(strfind(nick,"Szymon_Gajda",true) != -1) return 0; //Mrucznik
+	else if(strfind(nick,"gajda",true) != -1) return 0;
+	else if(strfind(nick,"Kalisiewicz",true) != -1) return 0; //Telehama
+	else if(strfind(nick,"kalisie",true) != -1) return 0;
+	else if(strfind(nick,"kalisio",true) != -1) return 0;
+	else if(strfind(nick,"kalisia",true) != -1) return 0;
+	return 1;
+}
+*/
 
 CheckAlfaNumeric(password[])
 {
@@ -10600,9 +10489,6 @@ Scena_CreateAt(Float:x, Float:y, Float:z)
     CreateDynamicObject(18766, 7.14500, 3.60040, 3.81240,   0.00000, 90.00000, 90.00000);
     objend = CreateDynamicObject(18766, 7.13720, 6.41620, 3.81240,   0.00000, 90.00000, 90.00000);
     for(new i=objstart;i<=objend;i++) SetDynamicObjectMaterial(i, 0, -1, "none", "none", 0xFF000000);
-    //
-    CreateDynamicObject(18761, -2.64870, 0.00000, 3.81240,   0.00000, 0.00000, 90.00000);
-
     CreateDynamicObject(16089, 6.62030, 0.00000, 0.52010,   0.00000, 0.00000, 0.00000);
     //Blinkery
     CreateDynamicObject(19150, 5.89259, 5.30542, 7.19990,   0.00000, 0.00000, 90.00000);
@@ -11545,7 +11431,7 @@ TJD_TryPickup(playerid, veh)
                 TJDBoxUsed[idx] = true;
                 TJDVehBox[veh] = idx+1;
                 TJDBoxOwner[idx] = playerid;
-                AttachDynamicObjectToVehicle(TJDBoxes[idx], veh, 0.0, 0.6, 0.43, 0.0, 0.0, 0.0);
+                // AttachDynamicObjectToVehicle(TJDBoxes[idx], veh, 0.0, 0.6, 0.43, 0.0, 0.0, 0.0);
 
                 new rand = random(2);
                 switch(rand)
@@ -11595,69 +11481,69 @@ public TJD_LoadTime(playerid, count, maxcount)
     }
     else
     {
-        if(!IsPlayerInAnyVehicle(playerid))
-        {
-            for(new i=0;i<12;i++)
-            {
-                if(TransObjects[playerid][i] != 0)
-                {
-                    if(IsValidDynamicObject(TransObjects[playerid][i]))
-                    {
-                        DestroyDynamicObject(TransObjects[playerid][i]);
-                        TransObjects[playerid][i] = 0;
-                    }
-                }
-            }
-            return;
-        }
+        // if(!IsPlayerInAnyVehicle(playerid))
+        // {
+        //     for(new i=0;i<12;i++)
+        //     {
+        //         if(TransObjects[playerid][i] != 0)
+        //         {
+        //             if(IsValidDynamicObject(TransObjects[playerid][i]))
+        //             {
+        //                 DestroyDynamicObject(TransObjects[playerid][i]);
+        //                 TransObjects[playerid][i] = 0;
+        //             }
+        //         }
+        //     }
+        //     return;
+        // }
 
-        TransObjects[playerid][count] = CreateDynamicObject(TransportJobData[idx][eTJDModel], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+        // TransObjects[playerid][count] = CreateDynamicObject(TransportJobData[idx][eTJDModel], 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 
-        new Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz;
+        // new Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz;
 
-        new Float:step = floatdiv(floatsub(TJD_PLACE_MAX_Y, TJD_PLACE_MIN_Y),(maxcount));
+        // new Float:step = floatdiv(floatsub(TJD_PLACE_MAX_Y, TJD_PLACE_MIN_Y),(maxcount));
 
-        if(maxcount > 5)
-        {
-            if(count%2==0)
-            {
-                x = -TJD_PLACE_X;
-                y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*(count-(maxcount/2)));
-            }
-            else
-            {
-                x = TJD_PLACE_X;
-                y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*((count-1)-(maxcount/2)));
-            }
-        }
-        else y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*(count-(maxcount/2)));
-        z = TJD_PLACE_Z;
+        // if(maxcount > 5)
+        // {
+        //     if(count%2==0)
+        //     {
+        //         x = -TJD_PLACE_X;
+        //         y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*(count-(maxcount/2)));
+        //     }
+        //     else
+        //     {
+        //         x = TJD_PLACE_X;
+        //         y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*((count-1)-(maxcount/2)));
+        //     }
+        // }
+        // else y = ((TJD_PLACE_MIN_Y+TJD_PLACE_MAX_Y)/2) - (step*(count-(maxcount/2)));
+        // z = TJD_PLACE_Z;
 
 
-        if(TransportJobData[idx][eTJDModel] == 1454) rx = 90.0, z-=0.1;
-        else if(TransportJobData[idx][eTJDModel] == 1217) z -= 0.3;
-        else if(TransportJobData[idx][eTJDModel] == 1271)
-        {
-            SetDynamicObjectMaterial(TransObjects[playerid][count], 0, 3630, "compthotrans_la", "sjmlawarplt3");
-            z -= 0.4;
-            if(count%2==0) x = -(TJD_PLACE_X/2);
-            else x = TJD_PLACE_X/2;
-        }
-        else if(TransportJobData[idx][eTJDModel] == 3035)
-        {
-            rz = 90.0;
-        }
-        else if(TransportJobData[idx][eTJDModel] == 944 && maxcount == 5)
-        {
-            y+=0.6;
-        }
+        // if(TransportJobData[idx][eTJDModel] == 1454) rx = 90.0, z-=0.1;
+        // else if(TransportJobData[idx][eTJDModel] == 1217) z -= 0.3;
+        // else if(TransportJobData[idx][eTJDModel] == 1271)
+        // {
+        //     SetDynamicObjectMaterial(TransObjects[playerid][count], 0, 3630, "compthotrans_la", "sjmlawarplt3");
+        //     z -= 0.4;
+        //     if(count%2==0) x = -(TJD_PLACE_X/2);
+        //     else x = TJD_PLACE_X/2;
+        // }
+        // else if(TransportJobData[idx][eTJDModel] == 3035)
+        // {
+        //     rz = 90.0;
+        // }
+        // else if(TransportJobData[idx][eTJDModel] == 944 && maxcount == 5)
+        // {
+        //     y+=0.6;
+        // }
 
-        AttachDynamicObjectToVehicle(TransObjects[playerid][count], GetPlayerVehicleID(playerid), x,y,z, rx, ry, rz);
+        // AttachDynamicObjectToVehicle(TransObjects[playerid][count], GetPlayerVehicleID(playerid), x,y,z, rx, ry, rz);
 
         TJDTransporter[GetPlayerVehicleID(playerid)] = playerid+1;
 
         count++;
-        Streamer_Update(playerid);
+        // Streamer_Update(playerid);
         SetTimerEx("TJD_LoadTime", TJD_LOADUNLOAD_TIME, 0, "iii", playerid, count, maxcount);
     }
 }
@@ -11693,8 +11579,8 @@ public TJD_UnloadTime(playerid, count, maxcount)
     }
     else
     {
-        DestroyDynamicObject(TransObjects[playerid][count]);
-        TransObjects[playerid][count] = 0;
+        // DestroyDynamicObject(TransObjects[playerid][count]);
+        // TransObjects[playerid][count] = 0;
         count++;
         SetTimerEx("TJD_UnloadTime", TJD_LOADUNLOAD_TIME, 0, "iii", playerid, count, maxcount);
     }
@@ -12543,7 +12429,26 @@ SavePlayerDamaged(playerid, attackerid, Float:damage, weapon)
 	Obrazenia[playerid][idx][HOURS] = hour;
 	Obrazenia[playerid][idx][MINUTES] = minute;
 	Obrazenia[playerid][idx][SECONDS] = second;
-	ObrazeniaIndex[playerid] = (idx+1) % 10;
+	ObrazeniaIndex[playerid] = (idx+1) % 20;
+}
+
+SavePlayerDamage(playerid, defenderid, Float:damage, weapon)
+{
+	new hour, minute, second;
+	new sec = gettime() + 7200;
+	new day;
+    day = floatround(sec / 86400);
+    hour = floatround((sec - (day * 86400)) / 3600);
+    minute = floatround((sec - (day * 86400) - (hour * 3600)) / 60);
+    second = sec % 60;
+	new idx = ObrazeniaZadaneIndex[playerid];
+	format(ObrazeniaZadane[playerid][idx][DEFENDER], MAX_PLAYER_NAME, "%s", GetNick(defenderid));
+	ObrazeniaZadane[playerid][idx][DAMAGE] = damage;
+	ObrazeniaZadane[playerid][idx][WEAPONID] = weapon;
+	ObrazeniaZadane[playerid][idx][HOURS] = hour;
+	ObrazeniaZadane[playerid][idx][MINUTES] = minute;
+	ObrazeniaZadane[playerid][idx][SECONDS] = second;
+	ObrazeniaZadaneIndex[playerid] = (idx+1) % 20;
 }
 
 ShowPlayerDamaged(playerid, forplayerid)
@@ -12574,7 +12479,7 @@ ShowPlayerDamaged(playerid, forplayerid)
 			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
 		}
 	}
-	for(new i= 9; i >= index; i--) 
+	for(new i= 19; i >= index; i--) 
 	{
 		hp = Obrazenia[playerid][i][DAMAGE];
 		if(hp <= 0.1) continue;
@@ -12593,6 +12498,55 @@ ShowPlayerDamaged(playerid, forplayerid)
 	}
 	return 1;
 }
+
+ShowPlayerDamage(playerid, forplayerid)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Damagelog gracza %s: ---", GetNick(playerid)));
+	new index = ObrazeniaZadaneIndex[playerid];
+	new string[72];
+	new weapon_decoded[24];
+	new godzina,minuta,sekunda,Float:hp;
+	new broniacy[MAX_PLAYER_NAME];
+	if(index != 0) 
+	{
+		for(new i = index-1; i>=0; i--)
+		{
+			hp = ObrazeniaZadane[playerid][i][DAMAGE];
+			if(hp <= 0.1) continue;
+			switch(ObrazeniaZadane[playerid][i][WEAPONID])
+			{
+				case 0..42: format(weapon_decoded, sizeof(weapon_decoded), "%s", GunNames[ObrazeniaZadane[playerid][i][WEAPONID]]);
+				default: format(weapon_decoded, sizeof(weapon_decoded), "[WeaponID %d]", ObrazeniaZadane[playerid][i][WEAPONID]);
+			}
+			godzina = ObrazeniaZadane[playerid][i][HOURS];
+			minuta = ObrazeniaZadane[playerid][i][MINUTES];
+			sekunda = ObrazeniaZadane[playerid][i][SECONDS];
+			hp = hp / 2;
+			format(broniacy, sizeof(broniacy), "%s", ObrazeniaZadane[playerid][i][DEFENDER]);
+			format(string, sizeof(string), "%d:%d:%d | zada³ %0.1fHP graczowi %s z %s[%d]", godzina, minuta, sekunda, hp, broniacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
+			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
+		}
+	}
+	for(new i= 19; i >= index; i--) 
+	{
+		hp = ObrazeniaZadane[playerid][i][DAMAGE];
+		if(hp <= 0.1) continue;
+		switch(ObrazeniaZadane[playerid][i][WEAPONID])
+		{
+			case 0..42: format(weapon_decoded, sizeof(weapon_decoded), "%s", GunNames[ObrazeniaZadane[playerid][i][WEAPONID]]);
+			default: format(weapon_decoded, sizeof(weapon_decoded), "[WeaponID %d]", ObrazeniaZadane[playerid][i][WEAPONID]);
+		}
+		godzina = ObrazeniaZadane[playerid][i][HOURS];
+		minuta = ObrazeniaZadane[playerid][i][MINUTES];
+		sekunda = ObrazeniaZadane[playerid][i][SECONDS];
+		hp = hp / 2;
+		format(broniacy, sizeof(broniacy), "%s", ObrazeniaZadane[playerid][i][DEFENDER]);
+		format(string, sizeof(string), "%d:%d:%d | zada³ %0.1fHP graczowi %s z %s[%d]", godzina, minuta, sekunda, hp, broniacy, weapon_decoded, Obrazenia[playerid][i][WEAPONID]);
+		SendClientMessage(forplayerid, COLOR_LIGHTGREEN, string);
+	}
+	return 1;
+}
+
 
 ShowPlayerSentMessages(playerid, forplayerid)
 {
@@ -12642,13 +12596,10 @@ PursuitMode(playerid, giveplayerid)
 
 public DeathAdminWarning(playerid, killerid, reason)
 {
-	new playername[MAX_PLAYER_NAME];
 	new killername[MAX_PLAYER_NAME];
 	new string[144];
 
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
-
-	GetPlayerName(playerid, playername, sizeof(playername));
 	if(killerid != INVALID_PLAYER_ID)
 	{
 		GetPlayerName(killerid, killername, sizeof(killername));
@@ -12669,12 +12620,12 @@ public DeathAdminWarning(playerid, killerid, reason)
 			SendClientMessage(killerid, COLOR_YELLOW, "DriveBy jest zakazane, robi¹c DriveBy mo¿esz zostaæ ukarany przez admina!");
 			if(PlayerInfo[killerid][pLevel] > 1)
 			{
-				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [GunID %d]!", killername, killerid, playername, bwreason, playerid, reason);
+				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] bêd¹ w aucie (mo¿liwe DB/CK2) [GunID %d]!", killername, killerid, bwreason, GetNick(playerid), playerid, reason);
 				SendMessageToAdmin(string, COLOR_YELLOW);
 			}
 			else
 			{
-				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z DB, dosta³ kicka !", killername, killerid, bwreason, playername, playerid);
+				format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z DB, dosta³ kicka !", killername, killerid, bwreason, GetNick(playerid), playerid);
 				SendMessageToAdmin(string, COLOR_YELLOW);
 				Log(punishmentLog, INFO, "Gracz %s dosta³ kicka od systemu za Drive-By", GetPlayerLogName(killerid));
 				SendClientMessage(killerid, COLOR_PANICRED, "Dosta³eœ kicka za Drive-By do ludzi.");
@@ -12699,21 +12650,21 @@ public DeathAdminWarning(playerid, killerid, reason)
 					}
 					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
 					{
-						format(string, sizeof(string), "AdmWarning: [%d]%s %s gracza %s z miniguna, podejrzane !", killerid, killername, bwreason, playername);
+						format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z miniguna, podejrzane !", killername, killerid, bwreason, GetNick(playerid), playerid);
 						SendMessageToAdmin(string, COLOR_YELLOW);
 						Log(warningLog, INFO, "%s zabi³ gracza %s u¿ywaj¹c miniguna", GetPlayerLogName(killerid), GetPlayerLogName(playerid));
 						SendMessageToAdminEx(string, COLOR_P@, 2);
 					}
 					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) == 425)
 					{
-						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] %s %s [%d] z Huntera", killername, killerid, bwreason, playername, playerid);
+						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s[%d] %s %s[%d] z Huntera",  killername, killerid, bwreason, GetNick(playerid), playerid);
 						SendMessageToAdminEx(string, COLOR_P@, 2);
 					}
 				}
 				case 41:
 				{
 					//-------<[  Logi  ]>---------
-					format(string, sizeof(string), "AdmWarning: [%d]%s %s gracza %s ze spreya !", killerid, killername, bwreason, playername);
+					format(string, sizeof(string), "AdmWarning: [%d]%s %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
 					SendMessageToAdmin(string, COLOR_YELLOW);
 					Log(warningLog, INFO, "%s %s gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
 					SendMessageToAdminEx(string, COLOR_P@, 2);
@@ -12722,7 +12673,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				{
 					if(reason <= 54 && reason > 0)
 					{
-						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s [%d] %s %s [%d] z %s", killername, killerid, bwreason, playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+						format(string, sizeof(string), "{FF66CC}DeathWarning: {FFFFFF}%s[%d] %s %s[%d] z %s", killername, killerid, bwreason, GetNick(playerid), playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
 						SendMessageToAdminEx(string, COLOR_P@, 2);
 					}	
 					if(GetPVarInt(playerid, "skip_bw")  == 0)
@@ -12731,7 +12682,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 						{
 							if(lowcaz[killerid] == playerid && lowcap[playerid] != killerid && poddaje[playerid] != 1)
 							{
-								format(string, sizeof(string), "AdmWarning: £owca Nagród [%d]%s %s gracza %s bez oferty /poddajsie !", killerid, killername, bwreason, playername);
+								format(string, sizeof(string), "AdmWarning: £owca Nagród %s[%d] %s %s[%d] bez oferty /poddajsie !", killername, killerid, bwreason, GetNick(playerid), playerid);
 								SendMessageToAdmin(string, COLOR_YELLOW);
 								Log(warningLog, INFO, "£owca nagród %s %s gracza %s bez oferty /poddajsie", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
 							}
@@ -12746,7 +12697,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 	{
 		if(reason <= 54 && reason > 0)
 		{
-			format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", playername, playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
+			format(string, sizeof(string), "{FF66CC}DeathWarning: %s [%d] umar³ (%s)", GetNick(playerid), playerid, (reason <= 46) ? GunNames[reason] : DeathNames[reason-46]);
 			SendMessageToAdminEx(string, COLOR_P@, 2);
 		}
 	}

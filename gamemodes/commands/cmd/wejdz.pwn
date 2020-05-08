@@ -34,6 +34,14 @@ YCMD:wejdz(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
 		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
+
+        if(AntySpam[playerid] == 1)
+        {
+            sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
+            return 1;
+        }
+        SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+        AntySpam[playerid] = 1;
 //======================================================================
 //=================[Przeniesione - na nowy system]======================
 //======================================================================
@@ -113,7 +121,7 @@ YCMD:wejdz(playerid, params[], help)
             || IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674)//Sale przes³uchaniowe
 		)
 		{
-			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5] Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe\n[Poziom 8]Sale przes³uchañ \n [Poziom X] Dach","Jedz","Anuluj");
+			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1] Parking podziemny \n[Poziom 0] Parking\n[Poziom 0.5] Areszt federalny\n[Poziom 1] Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4] Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6] CID/ERT\n[Poziom 7] Sale Treningowe\n[Poziom 8] Sale przes³uchañ \nDach","Jedz","Anuluj");
         }
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1271.0920,-1667.8794,19.7344)) // strzelnica wejœcie
         {

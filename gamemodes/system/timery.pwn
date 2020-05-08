@@ -914,16 +914,6 @@ public PlayerAFK(playerid, afktime, breaktime)
 	return 1;
 }
 
-//PADZIOCH
-forward syncanim(playerid);
-public syncanim(playerid)
-{
-	if(GetPVarInt(playerid,"roped") == 0) return 0;
- 	SetTimerEx("syncanim",DUR,0,"i",playerid);
-  	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
-   	return 1;
-}
-
 forward CheckChangeWeapon();
 public CheckChangeWeapon()
 {
@@ -2322,7 +2312,8 @@ public JednaSekundaTimer()
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
-					if(GetPVarInt(i, "DostalDM2") == 1)
+					if((GetPVarInt(i, "DostalDM2") == 1) || strfind((PlayerInfo[i][pAJreason]), "DM2", true) > 0
+					&& strfind((PlayerInfo[i][pAJreason]), "Death Match 2", true) > 0)
 					{
 						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [Odsiedzia³ karê za DM2]", GetNick(i));
 						SendAdminMessage(COLOR_PANICRED, string);

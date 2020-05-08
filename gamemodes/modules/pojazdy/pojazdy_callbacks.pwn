@@ -158,7 +158,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 
 		new string[2048];
-		format(string, sizeof(string), "Spawnuj\nRespawnuj\nUnspawnuj\nZnajdü\nPokaø parking\nPrzemaluj\nZ≥omuj\nUsuÒ tuning\n{E2BA1B}Tablica rejestracyjna (KP){FFFFFF}");
+		format(string, sizeof(string), "{FFFFFF}Spawnuj\nRespawnuj\nUnspawnuj\nZnajdü\nPokaø parking\nPrzemaluj\nZ≥omuj\nUsuwanie tuningu\n{E2BA1B}Tablica rejestracyjna (KP){FFFFFF}");
 		ShowPlayerDialogEx(playerid, D_AUTO_ACTION, DIALOG_STYLE_LIST, "Panel pojazdu", string, "Wybierz", "Wyjdü");
 		IloscAut[playerid] = lUID;
 		return 1;
@@ -227,21 +227,62 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ShowPlayerDialogEx(playerid, D_AUTO_DESTROY, DIALOG_STYLE_MSGBOX, "Z≥omowanie wozu", "Czy na pewno chcesz zez≥omowaÊ ten wÛz? Zarobisz na tym tylko 5000$!", "Z£OMUJ", "WYJDè");
 				}
 			}
-			case 7://UsuÒ tuning/PrzywrÛc parking
+			case 7://UsuÒ tuning
 			{
-				CarData[lUID][c_Nitro] = 0;
-				CarData[lUID][c_bHydraulika] = false;
-				CarData[lUID][c_Felgi] = 0;
-				CarData[lUID][c_Malunek] = 3;
-				CarData[lUID][c_Spoiler] = 0;
-				CarData[lUID][c_Bumper][0] = 0;
-				CarData[lUID][c_Bumper][1] = 0;
-				SendClientMessage(playerid, 0xFFC0CB, "Tuning zostanie usuniÍty przy najbliøszym respawnie.");
+				new string[2048];
+				format(string, sizeof(string), "UsuÒ tuning - NITRO\nUsuÒ tuning - HYDRAULIKA\nUsuÒ tuning - FELGI\nUsuÒ tuning - MALUNEK\nUsuÒ tuning - SPOJLER\nUsuÒ tuning - ZDERZAKI");
+				ShowPlayerDialogEx(playerid, D_AUTO_ACTION_TUNING, DIALOG_STYLE_LIST, "Panel pojazdu", string, "Wybierz", "Wyjdü");
 			}
 			case 8://rejestracja (NumberPlate)
 			{
 				if(!IsPlayerPremiumOld(playerid)) return sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.");
 				ShowPlayerDialogEx(playerid, D_AUTO_REJESTRACJA, DIALOG_STYLE_INPUT, "Rejestracja", "Wprowadü nowy numer/tekst na swojej tablicy rejestracyjnej\n(do 9 znakÛw):", "Ustaw", "WrÛÊ");
+			}
+		}
+		return 1;
+	}
+	if(dialogid == D_AUTO_ACTION_TUNING)
+	{
+		if(!response)
+		{
+			new string[2048];
+			format(string, sizeof(string), "{FFFFFF}Spawnuj\nRespawnuj\nUnspawnuj\nZnajdü\nPokaø parking\nPrzemaluj\nZ≥omuj\nUsuwanie tuningu\n{E2BA1B}Tablica rejestracyjna (KP){FFFFFF}");
+			ShowPlayerDialogEx(playerid, D_AUTO_ACTION, DIALOG_STYLE_LIST, "Panel pojazdu", string, "Wybierz", "Wyjdü");
+			return 1;
+		}
+		new lUID = IloscAut[playerid];
+		switch(listitem)
+		{
+			case 0://UsuÒ tuning
+			{
+				CarData[lUID][c_Nitro] = 0;
+				SendClientMessage(playerid, 0xFFC0CB, "Tuning (NITRO) zostanie usuniÍty przy najbliøszym respawnie.");
+			}
+			case 1://UsuÒ tuning
+			{
+				CarData[lUID][c_bHydraulika] = false;
+				SendClientMessage(playerid, 0xFFC0CB, "Tuning (HYDRAULIKA) zostanie usuniÍty przy najbliøszym respawnie.");
+			}
+			case 2://UsuÒ tuning
+			{
+				CarData[lUID][c_Felgi] = 0;
+				SendClientMessage(playerid, 0xFFC0CB, "Tuning (FELGI) zostanie usuniÍty przy najbliøszym respawnie.");
+			}
+			case 3://UsuÒ tuning
+			{
+				CarData[lUID][c_Malunek] = 3;
+				SendClientMessage(playerid, 0xFFC0CB, "Tuning (MALUNEK) zostanie usuniÍty przy najbliøszym respawnie.");
+			}
+			case 4://UsuÒ tuning
+			{
+				CarData[lUID][c_Spoiler] = 0;
+				SendClientMessage(playerid, 0xFFC0CB, "Tuning (SPOJLER) zostanie usuniÍty przy najbliøszym respawnie.");
+			}
+			case 5://UsuÒ tuning
+			{
+				CarData[lUID][c_Bumper][0] = 0;
+				CarData[lUID][c_Bumper][1] = 0;
+				SendClientMessage(playerid, 0xFFC0CB, "Tuning (ZDERZAKI) zostanie usuniÍty przy najbliøszym respawnie.");
 			}
 		}
 		return 1;

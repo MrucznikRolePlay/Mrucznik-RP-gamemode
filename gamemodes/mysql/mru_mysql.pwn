@@ -710,6 +710,9 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 
+		MyWeapon[playerid] = PlayerInfo[playerid][pGun0];
+		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
+
         lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
@@ -1055,20 +1058,27 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
 MruMySQL_Unblock(nick[]="Brak", admin)
 {
 	if(!MYSQL_ON) return 0;
-	new query[256];
-    mysql_real_escape_string(nick, query);
-    format(nick, 32, "%s", query);
+	new query[358];
+    mysql_real_escape_string(nick, nick);
+    format(nick, 32, "%s", nick);
 
     new admnick[32];
     GetPlayerName(admin, admnick, 32);
 
-    format(query, 128, "UPDATE `mru_konta` SET `Block`=0, `CK`=0 WHERE `Nick`='%s'", nick);
-    mysql_query(query);
-    query="\0";
+	format(query, sizeof(query), "SELECT `Nick` FROM `mru_konta` WHERE `Nick`='%s'", nick);
+	mysql_query(query);
+	mysql_store_result();
 
-	if(strcmp(nick, "Brak", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", nick, PlayerInfo[admin][pUID], admnick,WARN_UNBLOCK);
-    if(strlen(query) < 30) return 0;
-    if(!mysql_query(query)) return 0;
+	if (mysql_num_rows())
+	{
+		mysql_free_result();
+		format(query, sizeof query, "UPDATE `mru_konta` SET `Block`=0, `CK`=0 WHERE `Nick`='%s'", nick);
+		if(!mysql_query(query)) return 0;
+	}
+	else
+	{
+		return 2;
+	}
 	return 1;
 }
 

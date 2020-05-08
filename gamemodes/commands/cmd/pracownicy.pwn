@@ -32,7 +32,7 @@ YCMD:pracownicy(playerid, params[], help)
 {
     new frac = GetPlayerFraction(playerid);
 	new string[64];
-	if(frac > 0 && PlayerInfo[playerid][pRank] >= 1)
+	if(frac != 0 && PlayerInfo[playerid][pRank] >= 1)
 	{
 	    SendClientMessage(playerid, COLOR_GREEN, "Pracownicy Online:");
 		foreach(new i : Player)
@@ -46,7 +46,7 @@ YCMD:pracownicy(playerid, params[], help)
 	}
 	else
 	{
-	    sendErrorMessage(playerid, "Nie jesteœ liderem lub osob¹ z 4 rang¹!");
+	    sendErrorMessage(playerid, "Nie jesteœ liderem lub osob¹ z 1 rang¹!");
 	}
 	return 1;
 }

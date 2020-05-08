@@ -41,9 +41,9 @@ YCMD:spec(playerid, params[], help)
             GetPlayerName(playerid, sendername, sizeof(sendername));
             new pid;
 			if(sscanf(params, "k<fix>", pid)) return sendTipMessage(playerid, "U¿yj /spec [Nick lub ID gracza] - Aby wy³¹czyæ - Klawisz skoku");
-            if(pid == INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Cel nie jest osiagalny.");
-            if(pid == playerid) return sendErrorMessage(playerid, "Cel nie jest osiagalny.");
-			if(PlayerInfo[pid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] < 1000) return sendErrorMessage(playerid, "Nie mo¿esz specowaæ tego admina!"); 
+            else if(pid == INVALID_PLAYER_ID) return sendErrorMessage(playerid, "Cel nie jest osiagalny.");
+            else if(pid == playerid) return sendErrorMessage(playerid, "Nie mo¿esz podgl¹daæ siebie samego.");
+			else if(PlayerInfo[pid][pAdmin] >= 1 && PlayerInfo[playerid][pAdmin] < 1000) return sendErrorMessage(playerid, "Nie mo¿esz specowaæ tego admina!"); 
 	        /*if(SpectateTime[playerid] >= 1)
 	        {
 				new Float:spectime = (SpectateTime[playerid]*2)/60;
@@ -113,7 +113,8 @@ YCMD:spec(playerid, params[], help)
 				pid); 
 				SendClientMessage(playerTargetSpec[playerid], COLOR_RED, string); 
 			}
-			SetTimerEx("SetPVarInt", 250, false, "dsd", playerid, "OnSpecChanging", 0);
+			DeletePVar(playerid, "func_SetPVarInt");
+			//SetTimerEx("func_SetPVarInt", 250, false, "dsd", playerid, "OnSpecChanging", 0);
         }
 	}
 	return 1;
