@@ -3377,24 +3377,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~r~-$25", 5000, 1);
 						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego hamburgera.");
 					}
-					case 19: //mro¿ony nietoperze z Wuhan
-					{
-						if(kaska[playerid] < 1500) 
-						{
-							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿onego nietoperza z Wuhan!");
-							return 1;
-						}
-						if(Groceries[playerid][pWuhanBat] != 0)
-						{
-							sendErrorMessage(playerid, "Masz ju¿ mro¿onego nietoperza z Wuhan.");
-							return 1;
-						}
-						Groceries[playerid][pWuhanBat] = random(650)+100;
-						ZabierzKase(playerid, 1500);
-						GameTextForPlayer(playerid, "~r~-$1500", 5000, 1);
-						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego nietoperza z Wuhan.");
-					}
-					case 20: //maseczka ochronna
+					case 19: //maseczka ochronna
 					{
 						if(kaska[playerid] < 15000) 
 						{

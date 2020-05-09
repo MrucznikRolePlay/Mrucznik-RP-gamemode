@@ -40,11 +40,6 @@ EatCookedMeal(playerid, name[], weight, type)
 		PoziomPoszukiwania[playerid] += 1;
 		SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
 	}
-	else if(type == 33 && random(2) == 1)
-	{//wuhan bat
-		InfectPlayer(playerid, KORONAWIRUS);
-		SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
-	}
 	if(type < sizeof(FishNames))
 	{
 		if(PlayerImmunity[playerid] < 5)

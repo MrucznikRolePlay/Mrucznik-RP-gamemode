@@ -54,7 +54,6 @@ ugotuj_OnDialogResponse(playerid, listitem)
             case 30: Groceries[playerid][pChicken] = 0;
             case 31: Groceries[playerid][pPizza] = 0;
             case 32: Groceries[playerid][pHamburger] = 0;
-            case 33: Groceries[playerid][pWuhanBat] = 0;
         }
     }
 
@@ -97,7 +96,6 @@ command_ugotuj_Impl(playerid)
     if(Groceries[playerid][pChicken] != 0) AddCookingRow(playerid, string, 30, Groceries[playerid][pChicken]);
     if(Groceries[playerid][pPizza] != 0) AddCookingRow(playerid, string, 31, Groceries[playerid][pPizza]);
     if(Groceries[playerid][pHamburger] != 0) AddCookingRow(playerid, string, 32, Groceries[playerid][pHamburger]);
-    if(Groceries[playerid][pWuhanBat] != 0) AddCookingRow(playerid, string, 33, Groceries[playerid][pWuhanBat]);
 
     if(strlen(string) < 2) 
     {
