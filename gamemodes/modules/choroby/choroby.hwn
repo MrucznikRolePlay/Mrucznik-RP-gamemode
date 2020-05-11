@@ -62,14 +62,6 @@ enum eDiseaseData {
     Float:ContagiousRatio, // ratio of effect chance to infect other players
     bool:SpreadingOnContact,
     Vector:VEffects //inicjalizacja w choroby_InitEffects()
-    //TODO: najlepiej by byï¿½o, jakby efekty funkcjami zwracajï¿½cymi funkcjï¿½ a tutaj zapisywaï¿½y by siï¿½ te funckje, ale nie wiem jak to zrobiï¿½ w pawn
-    // potrzebowaï¿½bym moï¿½liwoï¿½ci zwrï¿½cenia funkcji o sygnaturze Callback(playerid, disease, effect) i wtedy mï¿½gï¿½bym robiï¿½ coï¿½ takiego jak np w js:
-    // func CreateFeelingBadEffect(message)
-    // {
-    //     return (playerid, disease, effect) => {
-    //         ChatMe(playerid, message);
-    //     }
-    // }
 };
 
 //-----------------<[ Zmienne: ]>-------------------
@@ -96,7 +88,7 @@ new DiseaseData[eDiseases][eDiseaseData] = {
     {"PTSD", "PTSD", 150000, 60, 40, 0.0, false, VECTOR_NULL}
 };
 
-//TODO: wiï¿½cej tikï¿½w
+//TODO: wiêcej tików
 new TourettWords[][] = {
     " kurwa",
     " jeb",
