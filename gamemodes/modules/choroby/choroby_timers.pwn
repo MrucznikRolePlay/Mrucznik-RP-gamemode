@@ -121,7 +121,9 @@ task ChorobyMinutaTimer[60000]()
 			Grypa[i]++;
 			if(Grypa[i] == 60)
 			{
-				InfectPlayer(i, GRYPA);
+				if(InfectOrDecreaseImmunity(i, GRYPA)) {
+					SendClientMessage(i, COLOR_LIGHTBLUE, "Twoja postaæ by³a zbyt d³ugo os³abiona (niskie HP) i zarazi³a siê gryp¹!");
+				}
 				Grypa[i] = 0;
 			}
 		}

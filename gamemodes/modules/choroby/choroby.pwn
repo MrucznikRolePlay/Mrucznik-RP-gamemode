@@ -189,6 +189,15 @@ CallEffectDesactivateCallback(playerid, eDiseases:disease, effect[eEffectData])
 }
 
 // ------- Infecting -------
+InfectOrDecreaseImmunity(playerid, eDiseases:disease, immunityDecrease=5)
+{
+	if(GetPlayerImmunity(playerid) < immunityDecrease) {
+		return InfectPlayer(playerid, disease);
+	}
+	DecreasePlayerImmunity(playerid, immunityDecrease);
+	return 0;
+}
+
 InfectPlayer(playerid, eDiseases:disease)
 {
 	if(IsPlayerSick(playerid, disease))

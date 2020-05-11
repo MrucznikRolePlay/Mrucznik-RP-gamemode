@@ -79,6 +79,12 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 					if(IsPlayerSick(playerid, disease)) 
 						return 1;
 					
+					if(GetPlayerImmunity(playerid) > 0)
+					{
+						DecreasePlayerImmunity(playerid, 0.1);
+						return 1;
+					}
+
 					//0.5% chance to get infected
 					if(RandomizeSouldBeInfected(0.5, DiseaseData[disease][ContagiousRatio])) 
 						return 1;
@@ -101,14 +107,14 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		{
 			if(random(200) == 0)
 			{
-				InfectPlayer(playerid, PADACZKA);
+				InfectOrDecreaseImmunity(playerid, PADACZKA);
 			}
 		}
 		else if(bodypart == BODY_PART_LEFT_ARM || bodypart == BODY_PART_RIGHT_ARM)
 		{
 			if(random(1000) == 0)//0.1% szans
 			{
-				InfectPlayer(playerid, PARKINSON);
+				InfectOrDecreaseImmunity(playerid, PARKINSON);
 			}
 		}
 	}
@@ -122,7 +128,7 @@ hook OnPlayerText(playerid, text[])
 		Tourett[playerid]++;
 		if(Tourett[playerid] >= 30)
 		{
-			InfectPlayer(playerid, TOURETT);
+			InfectOrDecreaseImmunity(playerid, TOURETT);
 			Tourett[playerid] = 0;
 		}
 	}
@@ -135,13 +141,13 @@ hook OnPlayerDeath(playerid, killerid, reason)
 	{
 		if(random(2) == 0)//50%
 		{
-			InfectPlayer(playerid, ASTMA);
+			InfectOrDecreaseImmunity(playerid, ASTMA);
 		}
 	}
 
 	if(random(20) == 0)//5%
 	{
-		InfectPlayer(playerid, URAZ);
+		InfectOrDecreaseImmunity(playerid, URAZ);
 	}
 
 	if(IsPlayerConnected(killerid))
@@ -151,7 +157,7 @@ hook OnPlayerDeath(playerid, killerid, reason)
 		{
 			if(random(5) == 0) //20%
 			{
-				InfectPlayer(killerid, PTSD);
+				InfectOrDecreaseImmunity(killerid, PTSD);
 			}
 		}
 	}
@@ -161,7 +167,7 @@ hook OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
 	if(random(10000) == 0) //0.01% szans
 	{
-		InfectPlayer(playerid, ASTYGMATYZM);
+		InfectOrDecreaseImmunity(playerid, ASTYGMATYZM);
 	}
 }
 

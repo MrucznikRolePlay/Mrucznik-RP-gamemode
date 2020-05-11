@@ -77,7 +77,7 @@ public CouchingEffect(playerid, disease, value)
 
 	if(random(20) == 1)//5% szans
 	{
-		InfectPlayer(playerid, ZAPALENIE_PLUC);
+		InfectOrDecreaseImmunity(playerid, ZAPALENIE_PLUC);
 	}
 	return 1;
 }
@@ -291,7 +291,7 @@ public GetGangreneEffect(playerid, disease, value)
 {
 	if(random(20) == 1) //5% szans
 	{
-		InfectPlayer(playerid, GANGRENA);
+		InfectOrDecreaseImmunity(playerid, GANGRENA);
 	}
 	return 1;
 }
