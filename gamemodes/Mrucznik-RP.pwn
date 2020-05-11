@@ -86,6 +86,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_MAX_CONNECTS_FROM_IP		3
 #include <nex-ac>
 #include <md5>
+#include <progress2>
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
