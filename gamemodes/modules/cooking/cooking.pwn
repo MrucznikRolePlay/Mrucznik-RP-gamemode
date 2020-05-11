@@ -44,8 +44,8 @@ EatCookedMeal(playerid, name[], weight, type)
 	{
 		IncreasePlayerImmunity(playerid, 1);
 	}
-	if(random(20) == 0 && InfectOrDecreaseImmunity(playerid, ZATRUCIE)) 
-	{//5% szans na zatrucie
+	if(random(100) == 0 && InfectOrDecreaseImmunity(playerid, ZATRUCIE, 25)) 
+	{//1% szans na zatrucie
 		SendClientMessage(playerid, COLOR_RED, "To co zjad³eœ, chyba Ci zaszkodzi³o!");
 	}
 }
