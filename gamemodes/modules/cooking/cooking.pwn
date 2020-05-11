@@ -42,8 +42,7 @@ EatCookedMeal(playerid, name[], weight, type)
 	}
 	if(type < sizeof(FishNames))
 	{
-		if(PlayerImmunity[playerid] < 5)
-			PlayerImmunity[playerid] ++;
+		IncreasePlayerImmunity(playerid, 1);
 	}
 	if(random(20) == 0) 
 	{//5% szans na zatrucie

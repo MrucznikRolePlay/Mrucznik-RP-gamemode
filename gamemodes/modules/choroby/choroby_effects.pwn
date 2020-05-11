@@ -221,8 +221,7 @@ public ZombieTalkEffect(playerid, disease, value)
 public ReducedImmunityEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "czuje, ¿e jego organizm ma obni¿on¹ odpornoœæ");
-	PlayerImmunity[playerid] = 1;
-	DecreaseImmunity(playerid);
+	DecreasePlayerImmunity(playerid, MAX_PLAYER_IMMUNITY);
 	return 1;
 }
 public RandomInfectionEffect(playerid, disease, value)
@@ -395,8 +394,7 @@ timer LoweringHP[500](playerid, uid, hpLoss, bool:death, bool:freeze)
 	}
 	SetPlayerHealth(playerid, hp-1);
 
-	if(PlayerImmunity[playerid] <= 0)
-		defer LoweringHP(playerid, uid, hpLoss-1, death, freeze);
+	defer LoweringHP(playerid, uid, hpLoss-1, death, freeze);
 }
 
 timer HallucinationsOff[60000](playerid)

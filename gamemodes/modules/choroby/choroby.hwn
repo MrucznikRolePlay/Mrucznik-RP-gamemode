@@ -109,7 +109,7 @@ new TourettWords[][] = {
     " sram"
 };
 
-new PlayerImmunity[MAX_PLAYERS];
+new PlayerBar:PlayerImmunityBar[MAX_PLAYERS];
 new Grypa[MAX_PLAYERS];
 new Tourett[MAX_PLAYERS];
 new TourettActive[MAX_PLAYERS];

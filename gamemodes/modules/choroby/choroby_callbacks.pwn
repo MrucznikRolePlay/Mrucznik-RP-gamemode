@@ -42,18 +42,26 @@ hook OnGameModeInit()
 
 hook OnPlayerConnect(playerid)
 {
-	PlayerImmunity[playerid] = 2;
+	SetPlayerImmunity(playerid, INITIAL_PLAYER_IMMUNITY);
+	PlayerImmunityBar[playerid] = CreatePlayerProgressBar(playerid, 548.000000, 34.000000, 62.500000, 5.500000, -293409025, INITIAL_PLAYER_IMMUNITY, 0);
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], INITIAL_PLAYER_IMMUNITY);
 	return 1;
 }
 
 hook OnPlayerDisconnect(playerid, reason)
 {
+	DestroyPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 	VECTOR_clear(VPlayerDiseases[playerid]);
 	Grypa[playerid] = 0;
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
 	return 1;
+}
+
+hook OnPlayerSpawn(playerid)
+{
+	ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 }
 
 hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
@@ -84,7 +92,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	}
 	else if(weaponid == 42) //gaœnica
 	{
-		PlayerImmunity[playerid] = 2;
+		IncreasePlayerImmunity(playerid, 0.5, 15);
 	}
 	else 
 	{

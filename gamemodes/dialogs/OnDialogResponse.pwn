@@ -3390,7 +3390,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 						ZabierzKase(playerid, 15000);
-						PlayerImmunity[playerid] = 10;
+						SetPlayerImmunity(playerid, MAX_PLAYER_IMMUNITY);
 						SetPVarInt(playerid, "maseczka", 1);
 						EditAttachedObject(playerid, AttachPlayerItem(playerid, 18919, 2, -0.07, 0.0, 0.0, 85.0, 170.0, 86.0, 1.000000, 1.000000, 1.000000 ));
 					}

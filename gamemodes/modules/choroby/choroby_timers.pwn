@@ -47,14 +47,14 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 			return 1;
 		}
 
-		if(PlayerImmunity[playerid] <= 0) //nie wywo³uj efektów, gdy gracz ma odpornoœæ
+		if(GetPlayerImmunity(playerid) <= EFFECT_ACTIVATION_IMMUNITY_BOUNDARY) //nie wywo³uj efektów, gdy gracz ma odpornoœæ
 		{
 			CallEffectActivateCallback(playerid, disease, effect);
 			DoInfecting(playerid, disease, effect);
 		}
 		else
 		{
-			DecreaseImmunity(playerid);
+			DecreasePlayerImmunity(playerid);
 		}
 	}
 	return 1;
