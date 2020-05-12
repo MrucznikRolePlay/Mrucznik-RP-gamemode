@@ -248,7 +248,11 @@ UpdatePotentialCheatersTxd()
 // ----- Nex-AC modifications ------
 NexACSaveCode(code, eNexACAdditionalSettings:type)
 {
-	if(type != OFF)
+	if(type == OFF)
+	{
+        EnableAntiCheat(code, false);
+	}
+	else 
 	{
         EnableAntiCheat(code, true);
 	}
@@ -314,7 +318,7 @@ timer ClearACWarningDelay[1000](playerid)
 
 GetNexACAdditionalSettingName(type)
 {
-	new name[10];
+	new name[22];
 	switch(type)
 	{
 		case OFF: 
