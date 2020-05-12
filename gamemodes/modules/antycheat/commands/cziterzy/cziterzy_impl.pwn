@@ -30,12 +30,12 @@ command_cziterzy_Impl(playerid)
         if(IsPotentialCheatersTxdVisible[playerid])
         {
             SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wy³¹czy³eœ listê potencjalnych cziterów.");
-            ShowPotentialCheatersTxd(playerid);
+            HidePotentialCheatersTxd(playerid);
         }
         else
         {
             SendClientMessage(playerid, COLOR_LIGHTBLUE, "W³¹czy³eœ listê potencjalnych cziterów.");
-            HidePotentialCheatersTxd(playerid);
+            ShowPotentialCheatersTxd(playerid);
         }
         IsPotentialCheatersTxdVisible[playerid] = !IsPotentialCheatersTxdVisible[playerid];
     }

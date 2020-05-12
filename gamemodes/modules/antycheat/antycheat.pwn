@@ -221,17 +221,20 @@ UpdatePotentialCheatersTxd()
 	}
 	
 	forPlayerArray (top_cheaters => playerid) {
-		PotentialCheatersID[i] = playerid;
-		TextDrawSetString(PotentialCheatersTxd[i], sprintf("%s [%d] - %d", GetNickEx(playerid), playerid, PotentialCheaters[playerid]));
-		if(GetPVarInt(playerid, "AC_oznaczony")) {
-			TextDrawColor(PotentialCheatersTxd[i], COLOR_PANICRED);
-		} else if(PotentialCheaters[playerid] >= 10) {
-			TextDrawColor(PotentialCheatersTxd[i], COLOR_RED);
-		} else {
-			TextDrawColor(PotentialCheatersTxd[i], COLOR_GREY);
-		}
+		if(PotentialCheaters[playerid] > 0)
+		{
+			PotentialCheatersID[i] = playerid;
+			TextDrawSetString(PotentialCheatersTxd[i], sprintf("%s [%d] - %d", GetNickEx(playerid), playerid, PotentialCheaters[playerid]));
+			if(GetPVarInt(playerid, "AC_oznaczony")) {
+				TextDrawColor(PotentialCheatersTxd[i], COLOR_PANICRED);
+			} else if(PotentialCheaters[playerid] >= 10) {
+				TextDrawColor(PotentialCheatersTxd[i], COLOR_RED);
+			} else {
+				TextDrawColor(PotentialCheatersTxd[i], COLOR_GREY);
+			}
 
-		i++;
+			i++;
+		}
 	}
 }
 

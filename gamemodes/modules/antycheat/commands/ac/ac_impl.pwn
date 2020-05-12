@@ -38,7 +38,7 @@ ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 strcat(string, GetNexACAdditionalSettingName(i));
                 strcat(string, "\n");
             }
-            ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL, DIALOG_STYLE_MSGBOX, "Panel Anty-Cheat'a", 
+            ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL, DIALOG_STYLE_INPUT, "Panel Anty-Cheat'a", 
                 string,
                 "Ustaw", "Wyjdü");
         }
@@ -70,7 +70,7 @@ ac_ShowDialog(playerid)
             strcat(string, sprintf("{FF0000}%s[%d] - OFF{FFFFFF\n", nexac_ac_names[i], i));
         }
     }
-    ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL, DIALOG_STYLE_MSGBOX, "Panel Anty-Cheat'a", string, "ZmieÒ", "Wyjdü");
+    ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL, DIALOG_STYLE_INPUT, "Panel Anty-Cheat'a", string, "ZmieÒ", "Wyjdü");
 }
 
 command_ac_Impl(playerid)

@@ -232,7 +232,7 @@ AC_OnPlayerLogin(playerid)
 {
 	if(PlayerInfo[playerid][pConnectTime] == 0)
 	{
-		MarkPotentialCheater(playerid, 0);
+		MarkPotentialCheater(playerid);
 	}
 }
 
