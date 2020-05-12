@@ -50,16 +50,12 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1;
 		}
 
-		if(IsProblematicCode(code) && PlayerInfo[playerid][pLevel] > 1)
-		{
-			//disable problematic codes for trusted players
-			return 1;
-		}
 		if(GetPVarInt(playerid, "CodeACDisable") > 0) 
 		{
 			//disable if player call to cmd "wjedz" 
 			return 1;
 		}
+		
 		if(GetPVarInt(playerid, "AntyCheatOff") > 0 )
 		{
 			timerAC[playerid] = SetTimerEx("AntyCheatON", 2500, true, "i", playerid);

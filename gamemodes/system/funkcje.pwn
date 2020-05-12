@@ -11972,36 +11972,6 @@ SetPlayerInteriorEx(playerid, int)
 	return 1;
 }
 
-IsProblematicCode(code)
-{
-	if(code == 0 //0 Anti-AirBreak (onfoot)
-	|| code == 2 //2 Anti-teleport hack (onfoot)
-	|| code == 5 //5 Anti-teleport hack (vehicle to player)
-	|| code == 6 //6 Anti-teleport hack (pickups)
-	|| code == 8 //8 Anti-FlyHack (in vehicle)
-	|| code == 9 // 9 Anti-Slapper/FlyHack
-	|| code == 11 //11 Anti-Health hack (in vehicle)
-	|| code == 15 //15 Anti-Weapon hack
-	|| code == 18 //18 Anti-Special actions hack
-	|| code == 21 //21 Anti-Invisible hack
-	|| code == 26 //26 Anti-Rapid fire
-	|| code == 27 //27 Anti-FakeSpawn
-	|| code == 30 //30 Anti-CJ run
-	|| code == 33 //33 Anti-UnFreeze
-	|| code == 40 //40 Protection from the sandbox
-	|| code == 49 //49 Anti-flood callback functions
-	|| code == 50 //50 Anti-flood change seat
-	|| code == 52 //52 Anti-NOP's
-	)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
 WeaponAC(playerid)
 {	
 	new weapons[13][2];
