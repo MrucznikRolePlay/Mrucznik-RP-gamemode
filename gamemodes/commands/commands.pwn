@@ -398,7 +398,6 @@
 #include "cmd/sejfpomoc.pwn"
 #include "cmd/sejfrodzina.pwn"
 #include "cmd/selldom.pwn"
-#include "cmd/setac.pwn"
 #include "cmd/setarmor.pwn"
 #include "cmd/setcarhp.pwn"
 #include "cmd/setcarint.pwn"

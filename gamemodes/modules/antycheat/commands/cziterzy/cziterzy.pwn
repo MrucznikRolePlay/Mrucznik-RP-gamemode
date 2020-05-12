@@ -37,6 +37,7 @@ command_cziterzy()
 
     //aliases
     Command_AddAlt(command, "cheaters");
+    Command_AddAlt(command, "czity");
     
 
     //permissions

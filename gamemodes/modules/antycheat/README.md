@@ -7,6 +7,7 @@ GUI dla Nex-AC pozwalające ustalić, co się dzieje, gdy dany kod zostanie wykr
 - Kick
 - Admin warning
 - Oznaczenie gracza jako potencjalnego czitera
+- Wyłączony
 
 ## Lista potencjalnych cziterów
 Gracz może zostać oznaczony jako potencjalny cziter.

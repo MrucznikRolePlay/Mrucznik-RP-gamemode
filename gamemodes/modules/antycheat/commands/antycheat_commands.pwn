@@ -31,7 +31,6 @@
 
 //-------<[ include ]>-------
 #include "cziterzy\cziterzy.pwn"
-#include "nexac\nexac.pwn"
 #include "ac\ac.pwn"
 
 
@@ -39,7 +38,6 @@
 hook OnGameModeInit()
 {
     command_cziterzy();
-    command_nexac();
     command_ac();
     
 }
