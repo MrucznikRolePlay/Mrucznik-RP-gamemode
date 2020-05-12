@@ -68,7 +68,7 @@ YCMD:og(playerid, params[], help)
 				{
 					if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)
 					{
-						if(GetPlayerAdminDutyStatus(playerid) == 1)
+						if(GetPlayerAdminDutyStatus(i) == 1)
 						{
 							SendClientMessage(i, TEAM_GROVE_COLOR, admstring);
 						}
