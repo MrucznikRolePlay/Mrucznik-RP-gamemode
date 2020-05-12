@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   nexac                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "cziterzy\cziterzy.pwn"
-#include "nexac\nexac.pwn"
-#include "ac\ac.pwn"
-
+#include "nexac_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_nexac()
 {
-    command_cziterzy();
-    command_nexac();
-    command_ac();
+    new command = Command_GetID("nexac");
+
+    //aliases
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:nexac(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Konfiguracja Nex-AC.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_nexac_Impl(playerid);
 }

@@ -1,0 +1,11 @@
+{
+    "name": "nexac",
+    "description": "Konfiguracja Nex-AC.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "12.05.2020"
+}
