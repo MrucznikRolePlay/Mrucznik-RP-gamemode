@@ -38,8 +38,6 @@ hook OnGameModeInit()
 forward OnCheatDetected(playerid, ip_address[], type, code);
 public OnCheatDetected(playerid, ip_address[], type, code)
 {
-	new plrIP[16];
-    GetPlayerIp(playerid, plrIP, sizeof(plrIP));
 	if(type == 0) //Type of cheating (when 0 it returns the ID, when 1 - IP)
 	{
 		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNickEx(playerid), playerid, ip_address);
@@ -93,32 +91,60 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			}
 			case KICK:
 			{
-				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", 
-					GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), NexACDecodeCode(code), code), 
-					0x9ACD32AA);
-				SendClientMessage(playerid, 0x9ACD32AA, sprintf("Anti-Cheat: Dosta³eœ kicka. | %s [%d]", NexACDecodeCode(code), code));
-				SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
-				Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
 				SetPVarInt(playerid, "CheatDetected", 1);
+				ACKickMessage(playerid, code);
 				KickEx(playerid);
 			}
 			case INSTAKICK: //code == 50 || code == 28 || code == 27 || code == 5
 			{
-				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", 
-					GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), NexACDecodeCode(code), code), 
-					0x9ACD32AA);
-				Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
+				ACKickMessage(playerid, code);
 				Kick(playerid);
+			}
+			case LVL1KICK:
+			{
+				if(PlayerInfo[playerid][pLevel] <= 1)
+				{
+					SetPVarInt(playerid, "CheatDetected", 1);
+					ACKickMessage(playerid, code);
+					KickEx(playerid);
+				}
+				else
+				{
+					MarkPotentialCheater(playerid);
+					ACWarningDelay(playerid, code);
+				} 
+			}
+			case LVL1INSTAKICK:
+			{
+				if(PlayerInfo[playerid][pLevel] <= 1)
+				{
+					ACKickMessage(playerid, code);
+					Kick(playerid);
+					KickEx(playerid);
+				}
+				else
+				{
+					MarkPotentialCheater(playerid);
+					ACWarningDelay(playerid, code);
+				} 
 			}
 			case ADMIN_WARNING:
 			{
 				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | %s [%d]", 
-					GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), NexACDecodeCode(code), code), 
+					GetNickEx(playerid), playerid, GetIP(playerid), NexACDecodeCode(code), code), 
 					0x9ACD32AA);
 				ACWarningDelay(playerid, code);
 			}
 			case MARK_AS_CHEATER:
 			{
+				MarkPotentialCheater(playerid);
+				ACWarningDelay(playerid, code);
+			}
+			case MARK_AND_WARNING:
+			{
+				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | %s [%d]", 
+					GetNickEx(playerid), playerid, GetIP(playerid), NexACDecodeCode(code), code), 
+					0x9ACD32AA);
 				MarkPotentialCheater(playerid);
 				ACWarningDelay(playerid, code);
 			}

@@ -319,6 +319,14 @@ GetNexACAdditionalSettingName(type)
 		{
 			strcat(name, "INSTAKICK");
 		}
+		case LVL1KICK:
+		{
+			strcat(name, "KICK 1LVL/OZNACZ");
+		}
+		case LVL1INSTAKICK:
+		{
+			strcat(name, "INSTAKICK 1LVL/OZNACZ");
+		}
 		case ADMIN_WARNING:
 		{
 			strcat(name, "WARNING");
@@ -327,8 +335,24 @@ GetNexACAdditionalSettingName(type)
 		{
 			strcat(name, "OZNACZ");
 		}
+		case MARK_AND_WARNING:
+		{
+			strcat(name, "OZNACZ + WARNING");
+		}
 	}
 	return name;
+}
+
+ACKickMessage(playerid, code)
+{
+	SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", 
+		GetNickEx(playerid), playerid, GetIP(playerid), NexACDecodeCode(code), code), 
+		0x9ACD32AA);
+	SendClientMessage(playerid, 0x9ACD32AA, sprintf("Anti-Cheat: Dosta³eœ kicka. | %s [%d]", NexACDecodeCode(code), code));
+	SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
+	Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
+	SetPVarInt(playerid, "CheatDetected", 1);
+	KickEx(playerid);
 }
 
 //end
