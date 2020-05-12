@@ -109,7 +109,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SetPlayerSkinEx(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			SetPVarInt(playerid, "CheatDetected", 0);
 		}
 		else
 		{
@@ -17458,6 +17457,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			Log(payLog, INFO, "%s kupi³ skina %d za %d$", GetPlayerLogName(playerid), ShopSkins[listitem][SKIN_ID], ShopSkins[listitem][SKIN_PRICE]);
 			return 1;
 		}
+	}
+	else if(ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
 	}
 	return 0;
 }
