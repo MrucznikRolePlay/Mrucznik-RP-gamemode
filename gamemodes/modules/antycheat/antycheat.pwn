@@ -276,6 +276,20 @@ NexACSaveAdditionalConfig()
 	}
 }
 
+bool:CheckACWarningDelay(playerid, code)
+{
+	return GetPVarInt(playerid, "LastDetectedCode")-1 == code;
+}
 
+ACWarningDelay(playerid, code)
+{
+	SetPVarInt(playerid, "LastDetectedCode", code+1);
+	defer ClearACWarningDelay(playerid);
+}
+
+timer ClearACWarningDelay[1000](playerid)
+{
+	SetPVarInt(playerid, "LastDetectedCode", 0);
+}
 
 //end
