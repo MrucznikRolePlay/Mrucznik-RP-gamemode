@@ -5112,13 +5112,16 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
                 // Skurwysyn kieruje bez prawka lub autem frakcji xD (Xd)
 				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
 				{
-					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
-					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
+					MruDialog(playerid, "ACv2: Kod #2001", "Dosta³eœ klapsa za kierowanie samochodem bez wymaganych uprawnieñ");
+					format(string, sizeof string, "ACv2 [#2001]: %s dosta³ klapsa za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
 					SendCommandLogMessage(string);
 					Log(warningLog, INFO, string);
 					Log(punishmentLog, INFO, string);
-					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
-					KickEx(playerid);
+					RemovePlayerFromVehicleEx(playerid);
+					new Float:slx, Float:sly, Float:slz;
+					GetPlayerPos(playa, slx, sly, slz);
+					SetPlayerPos(playa, slx, sly, slz+5);
+					PlayerPlaySound(playa, 1130, slx, sly, slz+5);
 				}
             }
 			//AC END CODE
