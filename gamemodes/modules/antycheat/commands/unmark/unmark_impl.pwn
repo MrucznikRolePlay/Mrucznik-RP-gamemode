@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ac                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   unmark                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,49 +16,23 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 12.05.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "ac_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_ac()
+//------------------<[ Implementacja: ]>-------------------
+command_unmark_Impl(playerid, giveplayerid)
 {
-    new command = Command_GetID("ac");
-
-    //aliases
-    Command_AddAlt(command, "antycheat");
-    Command_AddAlt(command, "antyczit");
-    Command_AddAlt(command, "nexac");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:ac(playerid, params[], help)
-{
-    if (help)
+    if(PlayerInfo[playerid][pAdmin] >= 1)
     {
-        sendTipMessage(playerid, "Panel anty-cheata");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_ac_Impl(playerid);
+        UnmarkPotentialCheater(giveplayerid);
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Usun¹³eœ gracza %s z listy potencjalnych cziterów", GetNickEx(giveplayerid)));
+        Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z listy potencjalnych cziterów.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
+    } 
+    else noAccessMessage(playerid);
+    return 1;
 }
+
+//end

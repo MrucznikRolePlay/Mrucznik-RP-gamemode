@@ -30,12 +30,16 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "unmark\unmark.pwn"
+#include "cziterzy\cziterzy.pwn"
 #include "ac\ac.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_unmark();
+    command_cziterzy();
     command_ac();
     
 }
