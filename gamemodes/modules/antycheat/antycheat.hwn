@@ -22,7 +22,66 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+//------------------<[ Tablice: ]>--------------------
+new nexac_ac_names[53][] = {
+	"Anti-AirBreak (onfoot)",
+	"Anti-AirBreak (in vehicle)",
+	"Anti-teleport hack (onfoot)",
+	"Anti-teleport hack (in vehicle)",
+	"Anti-teleport hack (into/between vehicles)",
+	"Anti-teleport hack (vehicle to player)",
+	"Anti-teleport hack (pickups)",
+	"Anti-FlyHack (onfoot)",
+	"Anti-FlyHack (in vehicle)",
+	"Anti-SpeedHack (onfoot)",
+	"Anti-SpeedHack (in vehicle)",
+	"Anti-Health hack (in vehicle)",
+	"Anti-Health hack (onfoot)",
+	"Anti-Armour hack",
+	"Anti-Money hack",
+	"Anti-Weapon hack",
+	"Anti-Ammo hack (add)",
+	"Anti-Ammo hack (infinite)",
+	"Anti-Special actions hack",
+	"Anti-GodMode from bullets (onfoot)",
+	"Anti-GodMode from bullets (in vehicle)",
+	"Anti-Invisible hack",
+	"Anti-lagcomp-spoof",
+	"Anti-Tuning hack",
+	"Anti-Parkour mod",
+	"Anti-Quick turn",
+	"Anti-Rapid fire",
+	"Anti-FakeSpawn",
+	"Anti-FakeKill",
+	"Anti-Pro Aim",
+	"Anti-CJ run",
+	"Anti-CarShot",
+	"Anti-CarJack",
+	"Anti-UnFreeze",
+	"Anti-AFK Ghost",
+	"Anti-Full Aiming",
+	"Anti-Fake NPC",
+	"Anti-Reconnect",
+	"Anti-High ping",
+	"Anti-Dialog hack",
+	"Protection from the sandbox",
+	"Protection against an invalid version",
+	"Anti-Rcon hack",
+	"Anti-Tuning crasher",
+	"Anti-Invalid seat crasher",
+	"Anti-Dialog crasher",
+	"Anti-Attached object crasher",
+	"Anti-Weapon Crasher",
+	"Flood protection connects to one slot",
+	"Anti-flood callback functions",
+	"Anti-flood change seat",
+	"Anti-Ddos",
+	"Anti-NOP's"
+};
+
 //-----------------<[ Zmienne: ]>-------------------
+new PotentialCheater[MAX_PLAYERS];
+
 //------------------<[ Forwardy: ]>--------------------
 
 //end

@@ -146,4 +146,10 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 	return 1;
 }
 
+hook OnPlayerDisconnect(playerid, reason)
+{
+	PotentialCheater[playerid] = 0;
+	return 1;
+}
+
 //end

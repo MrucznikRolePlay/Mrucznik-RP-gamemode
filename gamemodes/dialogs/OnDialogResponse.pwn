@@ -17459,6 +17459,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
+	else if(ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
 	return 0;
 }
 //ondialogresponse koniec
