@@ -138,11 +138,9 @@ YCMD:wiadomosc(playerid, params[], help)
         {
             format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
             SendClientMessage(playerid, COLOR_YELLOW, string);
-            SavePlayerSentMessage(playerid, string);
             
             format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid), playerid, text);
             SendClientMessage(giveplayerid, COLOR_NEWS, string);
-            SavePlayerSentMessage(giveplayerid, string);
             if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
             {
                 iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
@@ -168,11 +166,9 @@ YCMD:wiadomosc(playerid, params[], help)
 
                 format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
                 SendClientMessage(playerid, COLOR_YELLOW, string);
-                SavePlayerSentMessage(playerid, string);
             
                 format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(playerid, COLOR_YELLOW, string); 
-                SavePlayerSentMessage(playerid, string);    
+                SendClientMessage(playerid, COLOR_YELLOW, string);
 
                 if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
                 {
@@ -184,11 +180,9 @@ YCMD:wiadomosc(playerid, params[], help)
                 
                 format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid), playerid, text);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
-                SavePlayerSentMessage(giveplayerid, string);
                 
                 format(string, sizeof(string), "[.] %s", text2);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
-                SavePlayerSentMessage(giveplayerid, string);
                 if(GetPlayerAdminDutyStatus(playerid) == 1)
                 {
                     iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
@@ -199,7 +193,9 @@ YCMD:wiadomosc(playerid, params[], help)
                 }
             }
         }
-	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), params);
+	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
+        SavePlayerSentMessage(playerid, sprintf("%s wys³a³ wiadomoœæ do %s: %s", GetNick(playerid), GetNick(giveplayerid), text));
+        SavePlayerSentMessage(playerid, sprintf("%s otrzyma³ wiadomoœæ od %s: %s", GetNick(giveplayerid), GetNick(playerid), text));
         //dŸwiêki
         PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
         PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);

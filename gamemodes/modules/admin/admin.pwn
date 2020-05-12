@@ -474,11 +474,7 @@ GiveWarnForPlayer(playerid, adminid, result[], nokick = 1)
 		KickEx(playerid);
 		return 1;	
 	}
-
-	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ warna, powód: %s", 
-			GetPlayerLogName(adminid),
-			GetPlayerLogName(playerid),
-			result);
+	
 	format(str, sizeof(str), "Dosta³eœ warna od %s, powód: %s", GetNickEx(adminid), (result));
 	SendClientMessage(playerid, COLOR_LIGHTRED, str);
 	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ warna, powód: %s", 

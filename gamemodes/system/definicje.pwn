@@ -44,7 +44,7 @@
     ((newkeys & (%0)) == (%0))
 
 //podgl¹d PW
-#define MAX_SENT_MESSAGES 10
+#define MAX_SENT_MESSAGES 25
 
 //salt
 #define MAX_SERVER_SECRET_LENGTH 16
