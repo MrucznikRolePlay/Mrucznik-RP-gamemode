@@ -79,6 +79,7 @@ new nexac_ac_names[53][] = {
 	"Anti-NOP's"
 };
 
+
 //-----------------<[ Zmienne: ]>-------------------
 new PotentialCheater[MAX_PLAYERS];
 

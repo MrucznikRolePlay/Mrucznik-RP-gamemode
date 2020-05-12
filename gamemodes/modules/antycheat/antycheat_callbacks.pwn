@@ -152,4 +152,12 @@ hook OnPlayerDisconnect(playerid, reason)
 	return 1;
 }
 
+AC_OnPlayerLogin(playerid)
+{
+	if(PlayerInfo[playerid][pConnectTime] == 0)
+	{
+		PotentialCheater[playerid] = 1;
+	}
+}
+
 //end
