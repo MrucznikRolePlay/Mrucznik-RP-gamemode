@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_cziterzy_Impl(playerid)
+command_cziterzy_Impl(tplayerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) 
     {
@@ -37,7 +37,6 @@ command_cziterzy_Impl(playerid)
             SendClientMessage(playerid, COLOR_LIGHTBLUE, "W³¹czy³eœ listê potencjalnych cziterów.");
             ShowPotentialCheatersTxd(playerid);
         }
-        IsPotentialCheatersTxdVisible[playerid] = !IsPotentialCheatersTxdVisible[playerid];
     }
     return 1;
 }
