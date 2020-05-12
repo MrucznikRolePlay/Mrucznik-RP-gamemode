@@ -25,6 +25,12 @@
 //------------------<[ Implementacja: ]>-------------------
 command_unmark_Impl(playerid, giveplayerid)
 {
+    if(IsPlayerAdmin(playerid))
+    {
+        UnmarkPotentialCheater(giveplayerid);
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Usun¹³eœ gracza %s z listy potencjalnych cziterów", GetNickEx(giveplayerid)));
+        Log(adminLog, INFO, "Admin %s usun¹³ gracza %s z listy potencjalnych cziterów.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
+    }
     return 1;
 }
 
