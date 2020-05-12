@@ -1627,11 +1627,6 @@ stock IsVehicleInRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
     return 0;
 } 
 
-SetAntyCheatForPlayer(playerid, valueCode)
-{
-	SetPVarInt(playerid, "AntyCheatOff", valueCode);
-	return 1;
-}
 stock GetNickEx(playerid, withmask = false)
 {
 	new nick[MAX_PLAYER_NAME];
