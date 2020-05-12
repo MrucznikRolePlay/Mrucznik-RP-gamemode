@@ -1,0 +1,13 @@
+{
+    "name": "cziterzy",
+    "description": "Wyœwietla listê potencjalnych cziterów.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "cheaters"
+    ],
+    "parameters": [],
+    "date": "12.05.2020"
+}

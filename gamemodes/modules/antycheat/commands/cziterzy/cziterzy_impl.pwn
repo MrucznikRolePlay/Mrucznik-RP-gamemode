@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  cziterzy                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,28 +16,34 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 12.05.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "cziterzy\cziterzy.pwn"
-#include "ac\ac.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_cziterzy_Impl(playerid)
 {
-    command_cziterzy();
-    command_ac();
-    
+    new czity = 0;
+    new string[1500];
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) {
+        foreach(new i : Player) {
+            if(GetPVarInt(i, "AC-warn") > 1) {
+                format(string, sizeof(string), "%s[AC] %s (ID: %d)\n", string, GetNick(i), i);
+                czity++;
+            } else if(GetPVarInt(i, "AC_oznaczony") == 1) {
+                format(string, sizeof(string), "%s[S0BEIT] %s (ID: %d)\n", string, GetNick(i), i);
+                czity++;
+            } 
+        }
+    }
+
+    if(czity == 0) {
+        sendTipMessage(playerid, "Nie wykryto ¿adnych potencjalnych cziterów");
+    }
+    ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_LIST, "Lista Potencjalnych Cziterów", string, "Ok", "");
+    return 1;
 }
+
+//end
