@@ -235,4 +235,47 @@ UpdatePotentialCheatersTxd()
 	}
 }
 
+// ----- Nex-AC modifications ------
+NexACLoadAdditionalConfig()
+{
+	new i, string[415], File:cfgFile;
+	if(fexist(AC_ADDITIONAL_CONFIG_FILE))
+	{
+		if((cfgFile = fopen(AC_ADDITIONAL_CONFIG_FILE, io_read)))
+		{
+			new j;
+			while(fread(cfgFile, string) > 0)
+			{
+				sscanf(string, "i'//'i", j, i);
+				nexac_additional_settings[i] = eNexACAdditionalSettings:j;
+			}
+			fclose(cfgFile);
+		}
+		else return 0;
+	}
+	else
+	{
+		NexACSaveAdditionalConfig();
+	}
+	return 1;
+}
+
+NexACSaveAdditionalConfig()
+{
+	static strtmp[10];
+	new string[415], File:cfgFile;
+	if((cfgFile = fopen(AC_ADDITIONAL_CONFIG_FILE, io_write)))
+	{
+		for(new i; i < sizeof(nexac_additional_settings); ++i)
+		{
+			format(strtmp, sizeof strtmp, "%d //%d\r\n", nexac_additional_settings[i], i);
+			strcat(string, strtmp);
+		}
+		fwrite(cfgFile, string);
+		fclose(cfgFile);
+	}
+}
+
+
+
 //end

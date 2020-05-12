@@ -28,6 +28,19 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
+hook OnGameModeInit()
+{
+	CreatePotentialCheatersTxd();
+	NexACLoadAdditionalConfig();
+	return 1;
+}
+
+hook OnGameModeExit()
+{
+	NexACSaveAdditionalConfig();
+	return 1;
+}
+
 forward OnCheatDetected(playerid, ip_address[], type, code);
 public OnCheatDetected(playerid, ip_address[], type, code)
 {
@@ -65,6 +78,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//kod wy³¹czony, jeœli wykryto (zapobiega dublowaniu komunikatów o wykryciu kodu nim gracz zostanie skickowany).
 			return 1;
 		}
+
 		new code_decoded[32];
 		code_decoded = NexACDecodeCode(code);
 		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), code_decoded, code);
@@ -151,11 +165,6 @@ hook OnPlayerDisconnect(playerid, reason)
 	UnmarkPotentialCheater(playerid);
 	HidePotentialCheatersTxd(playerid);
 	return 1;
-}
-
-hook OnGameModeInit()
-{
-	CreatePotentialCheatersTxd();
 }
 
 hook OnPlayerClickTextDraw(playerid, Text:clickedid)

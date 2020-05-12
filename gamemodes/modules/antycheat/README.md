@@ -5,8 +5,9 @@ GUI dla Nex-AC pozwalające ustalić, co się dzieje, gdy dany kod zostanie wykr
 *Dostępne opcje:*
 - ~~Ban czasowy~~
 - Kick
-- ~~Admin warning~~
-- ~~Oznaczenie gracza jako potencjalnego czitera~~
+- Natychmiastowy kick
+- Admin warning
+- Oznaczenie gracza jako potencjalnego czitera
 - Wyłączony
 
 ## Lista potencjalnych cziterów - /cziterzy
