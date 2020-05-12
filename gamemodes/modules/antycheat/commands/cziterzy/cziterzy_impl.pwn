@@ -37,7 +37,6 @@ command_cziterzy_Impl(playerid)
             SendClientMessage(playerid, COLOR_LIGHTBLUE, "W³¹czy³eœ listê potencjalnych cziterów.");
             ShowPotentialCheatersTxd(playerid);
         }
-        IsPotentialCheatersTxdVisible[playerid] = !IsPotentialCheatersTxdVisible[playerid];
     }
     return 1;
 }
