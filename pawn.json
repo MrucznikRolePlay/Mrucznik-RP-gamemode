@@ -24,7 +24,8 @@
 		"BigETI/pawn-map",
 		"Y-Less/indirection",
 		"Zeex/amx_assembly",
-		"Mrucznik/samp-plugin-profiler:v2.15.4"
+		"Mrucznik/samp-plugin-profiler:v2.15.4",
+		"oscar-broman/samp-inline-sort"
 	],
 	"build": {
 		"name": "",

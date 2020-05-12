@@ -137,8 +137,101 @@ public OznaczCzitera(playerid)
 		SetPVarInt(playerid, "lastSobMsg", gettime() + 60);
 		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid), playerid);
 		SendAdminMessage(COLOR_PANICRED, string);
+		MarkPotentialCheater(playerid, 10);
 	}
 	return 1;
+}
+
+MarkPotentialCheater(playerid, value)
+{
+	PotentialCheaters[playerid] += value;
+	UpdatePotentialCheatersTxd();
+}
+
+UnmarkPotentialCheater(playerid)
+{
+	if(PotentialCheaters[playerid] > 0)
+	{
+		PotentialCheaters[playerid] = 0;
+		UpdatePotentialCheatersTxd();
+	}
+}
+
+//----- TextDrawy -----
+CreatePotentialCheatersTxd()
+{
+	PotentialCheatersTitleTxd = TextDrawCreate(519.000000, 102.000000, "Szkodnicy:");
+	TextDrawFont(PotentialCheatersTitleTxd, 1);
+	TextDrawLetterSize(PotentialCheatersTitleTxd, 0.191666, 0.900000);
+	TextDrawTextSize(PotentialCheatersTitleTxd, 400.000000, 17.000000);
+	TextDrawSetOutline(PotentialCheatersTitleTxd, 1);
+	TextDrawSetShadow(PotentialCheatersTitleTxd, 0);
+	TextDrawAlignment(PotentialCheatersTitleTxd, 2);
+	TextDrawColor(PotentialCheatersTitleTxd, -1);
+	TextDrawBackgroundColor(PotentialCheatersTitleTxd, 255);
+	TextDrawBoxColor(PotentialCheatersTitleTxd, 50);
+	TextDrawUseBox(PotentialCheatersTitleTxd, 0);
+	TextDrawSetProportional(PotentialCheatersTitleTxd, 1);
+	TextDrawSetSelectable(PotentialCheatersTitleTxd, 0);
+	TextDrawHideForAll(PotentialCheatersTitleTxd);
+
+	for(new i; i<sizeof(PotentialCheatersTxd); i++)
+	{
+		PotentialCheatersTxd[i] = TextDrawCreate(500.000000, 114.000000 + i*11, " ");
+		TextDrawFont(PotentialCheatersTxd[i], 1);
+		TextDrawLetterSize(PotentialCheatersTxd[i], 0.137500, 0.900000);
+		TextDrawTextSize(PotentialCheatersTxd[i], 607.500000, 17.000000);
+		TextDrawSetOutline(PotentialCheatersTxd[i], 1);
+		TextDrawSetShadow(PotentialCheatersTxd[i], 0);
+		TextDrawAlignment(PotentialCheatersTxd[i], 1);
+		TextDrawColor(PotentialCheatersTxd[i], COLOR_RED);
+		TextDrawBackgroundColor(PotentialCheatersTxd[i], 255);
+		TextDrawBoxColor(PotentialCheatersTxd[i], 50);
+		TextDrawUseBox(PotentialCheatersTxd[i], 1);
+		TextDrawSetProportional(PotentialCheatersTxd[i], 1);
+		TextDrawSetSelectable(PotentialCheatersTxd[i], 1);
+		TextDrawHideForAll(PotentialCheatersTxd[i]);
+	}
+}
+
+ShowPotentialCheatersTxd(playerid)
+{
+	TextDrawShowForPlayer(playerid, PotentialCheatersTitleTxd);
+	for(new i; i<sizeof(PotentialCheatersTxd); i++)
+		TextDrawShowForPlayer(playerid, PotentialCheatersTxd[i]);
+	IsPotentialCheatersTxdVisible[playerid] = true;
+}
+
+HidePotentialCheatersTxd(playerid)
+{
+	TextDrawHideForPlayer(playerid, PotentialCheatersTitleTxd);
+	for(new i; i<sizeof(PotentialCheatersTxd); i++)
+		TextDrawHideForPlayer(playerid, PotentialCheatersTxd[i]);
+	IsPotentialCheatersTxdVisible[playerid] = false;
+}
+
+UpdatePotentialCheatersTxd()
+{
+	new PlayerArray<top_cheaters>;
+	new i;
+
+	sortPlayersInline top_cheaters => (R = l > r) {
+		R = PotentialCheaters[l] > PotentialCheaters[r];
+	}
+	
+	forPlayerArray (top_cheaters => playerid) {
+		PotentialCheatersID[i] = playerid;
+		TextDrawSetString(PotentialCheatersTxd[i], sprintf("%s [%d] - %d", GetNickEx(playerid), playerid, PotentialCheaters[playerid]));
+		if(GetPVarInt(playerid, "AC_oznaczony")) {
+			TextDrawColor(PotentialCheatersTxd[i], COLOR_PANICRED);
+		} else if(PotentialCheaters[playerid] >= 10) {
+			TextDrawColor(PotentialCheatersTxd[i], COLOR_RED);
+		} else {
+			TextDrawColor(PotentialCheatersTxd[i], COLOR_GREY);
+		}
+
+		i++;
+	}
 }
 
 //end

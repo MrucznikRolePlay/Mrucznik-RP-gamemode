@@ -25,24 +25,20 @@
 //------------------<[ Implementacja: ]>-------------------
 command_cziterzy_Impl(playerid)
 {
-    new czity = 0;
-    new string[1500];
-    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) {
-        foreach(new i : Player) {
-            if(GetPVarInt(i, "AC-warn") > 1) {
-                format(string, sizeof(string), "%s[AC] %s (ID: %d)\n", string, GetNick(i), i);
-                czity++;
-            } else if(GetPVarInt(i, "AC_oznaczony") == 1) {
-                format(string, sizeof(string), "%s[S0BEIT] %s (ID: %d)\n", string, GetNick(i), i);
-                czity++;
-            } 
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) 
+    {
+        if(IsPotentialCheatersTxdVisible[playerid])
+        {
+            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wy³¹czy³eœ listê potencjalnych cziterów.");
+            ShowPotentialCheatersTxd(playerid);
         }
+        else
+        {
+            SendClientMessage(playerid, COLOR_LIGHTBLUE, "W³¹czy³eœ listê potencjalnych cziterów.");
+            HidePotentialCheatersTxd(playerid);
+        }
+        IsPotentialCheatersTxdVisible[playerid] = !IsPotentialCheatersTxdVisible[playerid];
     }
-
-    if(czity == 0) {
-        sendTipMessage(playerid, "Nie wykryto ¿adnych potencjalnych cziterów");
-    }
-    ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_LIST, "Lista Potencjalnych Cziterów", string, "Ok", "");
     return 1;
 }
 

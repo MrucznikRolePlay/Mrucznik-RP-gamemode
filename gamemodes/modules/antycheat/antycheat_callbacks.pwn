@@ -148,7 +148,26 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 
 hook OnPlayerDisconnect(playerid, reason)
 {
-	PotentialCheater[playerid] = 0;
+	UnmarkPotentialCheater(playerid);
+	HidePotentialCheatersTxd(playerid);
+	return 1;
+}
+
+hook OnGameModeInit()
+{
+	CreatePotentialCheatersTxd();
+}
+
+hook OnPlayerClickTextDraw(playerid, Text:clickedid)
+{
+	for(new i; i<sizeof(PotentialCheatersTxd); i++)
+	{
+		if(clickedid == PotentialCheatersTxd[i])
+		{
+			Command_ReProcess(playerid, sprintf("spec %d", PotentialCheatersID[i]), false);
+			return 1;
+		}
+	}
 	return 1;
 }
 
@@ -156,7 +175,7 @@ AC_OnPlayerLogin(playerid)
 {
 	if(PlayerInfo[playerid][pConnectTime] == 0)
 	{
-		PotentialCheater[playerid] = 1;
+		MarkPotentialCheater(playerid, 0);
 	}
 }
 

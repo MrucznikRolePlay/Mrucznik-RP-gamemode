@@ -81,7 +81,11 @@ new nexac_ac_names[53][] = {
 
 
 //-----------------<[ Zmienne: ]>-------------------
-new PotentialCheater[MAX_PLAYERS];
+new PotentialCheaters[MAX_PLAYERS];
+new PotentialCheatersID[MAX_POTENTIAL_CHEATERS];
+new Text:PotentialCheatersTitleTxd;
+new Text:PotentialCheatersTxd[MAX_POTENTIAL_CHEATERS];
+new bool:IsPotentialCheatersTxdVisible[MAX_PLAYERS];
 
 //------------------<[ Forwardy: ]>--------------------
 

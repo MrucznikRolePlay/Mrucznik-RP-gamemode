@@ -23,6 +23,8 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define MAX_POTENTIAL_CHEATERS 20
+
 #define DIALOG_AC_PANEL 43
 #define DIALOG_AC_PANEL_CHANGE 44
 

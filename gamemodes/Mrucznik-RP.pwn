@@ -83,6 +83,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_timers>
 #include <indirection>
 #include <amx_assembly\addressof>
+//redefinition from y_playerarray.inc
+#undef PlayerArray 
+#include <sort-inline>
 #define AC_MAX_CONNECTS_FROM_IP		3
 #include <nex-ac>
 #include <md5>
