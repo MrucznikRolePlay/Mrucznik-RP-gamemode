@@ -35,12 +35,6 @@ hook OnGameModeInit()
 	return 1;
 }
 
-hook OnGameModeExit()
-{
-	NexACSaveAdditionalConfig();
-	return 1;
-}
-
 forward OnCheatDetected(playerid, ip_address[], type, code);
 public OnCheatDetected(playerid, ip_address[], type, code)
 {

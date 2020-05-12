@@ -30,7 +30,25 @@ ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(response)
         {
-            EnableAntiCheat(listitem, !IsAntiCheatEnabled(listitem));
+            new string[256];
+            DynamicGui_SetDialogValue(playerid, listitem);
+
+            for(new eNexACAdditionalSettings:i; i<eNexACAdditionalSettings; i++)
+            {
+                strcat(string, GetNexACAdditionalSettingName(i));
+                strcat(string, "\n");
+            }
+            ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL, DIALOG_STYLE_MSGBOX, "Panel Anty-Cheat'a", 
+                string,
+                "Ustaw", "WyjdŸ");
+        }
+        return 1;
+    }
+    else if(dialogid == DIALOG_AC_PANEL_CHANGE)
+    {
+        if(response)
+        {
+            NexACSaveCode(DynamicGui_GetDialogValue(playerid), eNexACAdditionalSettings:listitem);
             ac_ShowDialog(playerid);
         }
         return 1;
@@ -45,7 +63,7 @@ ac_ShowDialog(playerid)
     {
         if(IsAntiCheatEnabled(i)) 
         {
-            strcat(string, sprintf("{00FF00}%s[%d] - ON{FFFFFF}\n", nexac_ac_names[i], i));
+            strcat(string, sprintf("{00FF00}%s[%d] - %s{FFFFFF}\n", nexac_ac_names[i], i, GetNexACAdditionalSettingName(nexac_additional_settings[i])));
         }
         else
         {

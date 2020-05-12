@@ -236,6 +236,16 @@ UpdatePotentialCheatersTxd()
 }
 
 // ----- Nex-AC modifications ------
+NexACSaveCode(code, eNexACAdditionalSettings:type)
+{
+	if(type != OFF)
+	{
+        EnableAntiCheat(code, true);
+	}
+	nexac_additional_settings[code] = type;
+	NexACSaveAdditionalConfig();
+}
+
 NexACLoadAdditionalConfig()
 {
 	new i, string[415], File:cfgFile;
@@ -290,6 +300,35 @@ ACWarningDelay(playerid, code)
 timer ClearACWarningDelay[1000](playerid)
 {
 	SetPVarInt(playerid, "LastDetectedCode", 0);
+}
+
+GetNexACAdditionalSettingName(type)
+{
+	new name[10];
+	switch(type)
+	{
+		case OFF: 
+		{
+			strcat(name, "OFF");
+		}
+		case KICK:
+		{
+			strcat(name, "KICK");
+		}
+		case INSTAKICK:
+		{
+			strcat(name, "INSTAKICK");
+		}
+		case ADMIN_WARNING:
+		{
+			strcat(name, "WARNING");
+		}
+		case MARK_AS_CHEATER:
+		{
+			strcat(name, "OZNACZ");
+		}
+	}
+	return name;
 }
 
 //end
