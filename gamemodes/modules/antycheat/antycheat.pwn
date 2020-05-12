@@ -232,9 +232,16 @@ UpdatePotentialCheatersTxd()
 			} else {
 				TextDrawColor(PotentialCheatersTxd[i], COLOR_GREY);
 			}
+			TextDrawBoxColor(PotentialCheatersTxd[i], 50);
 
 			i++;
 		}
+	}
+
+	for(; i<MAX_POTENTIAL_CHEATERS; i++)
+	{
+		TextDrawSetString(PotentialCheatersTxd[i], " ");
+		TextDrawBoxColor(PotentialCheatersTxd[i], 0x00000000);
 	}
 }
 
