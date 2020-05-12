@@ -41,7 +41,6 @@ YCMD:zmienskin(playerid, params[], help)
                     sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile");
                     return 1;
                 }
-                SetPVarInt(playerid, "CheatDetected", 1);
                 ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
             } 
             else if(IsAHA(playerid))
