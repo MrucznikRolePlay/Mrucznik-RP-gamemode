@@ -86,7 +86,14 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //redefinition from y_playerarray.inc
 #undef PlayerArray 
 #include <sort-inline>
+//nex-ac settings
 #define AC_MAX_CONNECTS_FROM_IP		3
+#define AUTOSAVE_SETTINGS_IN_CONFIG true
+#define AC_USE_TUNING_GARAGES false
+#define AC_USE_PICKUP_WEAPONS false
+#define AC_USE_AMMUNATIONS false
+#define AC_USE_RESTAURANTS false
+#define AC_USE_CASINOS false
 #include <nex-ac>
 #include <md5>
 #include <double-o-files2>
