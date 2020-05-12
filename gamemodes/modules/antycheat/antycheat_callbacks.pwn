@@ -55,14 +55,14 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			//disable if player call to cmd "wjedz" 
 			return 1;
 		}
-		
+
 		if(GetPVarInt(playerid, "AntyCheatOff") > 0 )
 		{
 			timerAC[playerid] = SetTimerEx("AntyCheatON", 2500, true, "i", playerid);
 			return 1; 
 		}
 		
-		if(GetPVarInt(playerid, "CheatDetected") == 1 || GetPVarInt(playerid, "CheatDetectedEx") == 1)
+		if(GetPVarInt(playerid, "CheatDetected") == 1)
 		{
 			//kod wy³¹czony, jeœli wykryto (zapobiega dublowaniu komunikatów o wykryciu kodu nim gracz zostanie skickowany).
 			return 1;
