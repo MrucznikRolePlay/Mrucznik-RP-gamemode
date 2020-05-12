@@ -111,6 +111,7 @@ public CheckCode2003(killerid, playerid)
 	else
 	{
 	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNickEx(killerid));
+		MarkPotentialCheater(playerid);
     	SendCommandLogMessage(string);
 		Log(warningLog, INFO, string);
 	}
@@ -137,12 +138,12 @@ public OznaczCzitera(playerid)
 		SetPVarInt(playerid, "lastSobMsg", gettime() + 60);
 		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid), playerid);
 		SendAdminMessage(COLOR_PANICRED, string);
-		MarkPotentialCheater(playerid, 10);
+		MarkPotentialCheater(playerid);
 	}
 	return 1;
 }
 
-MarkPotentialCheater(playerid, value)
+MarkPotentialCheater(playerid, value=1)
 {
 	PotentialCheaters[playerid] += value;
 	UpdatePotentialCheatersTxd();
