@@ -462,7 +462,6 @@
 #include "cmd/stworzdom.pwn"
 #include "cmd/stworzobiekty.pwn"
 #include "cmd/stworztrase.pwn"
-#include "cmd/supportduty.pwn"
 #include "cmd/swat.pwn"
 #include "cmd/swiadek.pwn"
 #include "cmd/szept.pwn"

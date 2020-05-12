@@ -6238,7 +6238,7 @@ OnPlayerLogin(playerid, password[])
             }
 			else if(PlayerInfo[playerid][pAdmin] > 0)
 			{
-				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/supportduty");
+				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/adminduty");
 			}
 
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)

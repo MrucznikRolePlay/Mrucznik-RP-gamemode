@@ -177,6 +177,7 @@ PlayerChangeWeaponOnInjury(playerid)
 }
 ZespawnujGraczaBW(playerid)
 {
+	Wchodzenie(playerid);
 	new string[256], type[144];
 	MedicBill[playerid] = 0;
 	MedicTime[playerid] = 0;

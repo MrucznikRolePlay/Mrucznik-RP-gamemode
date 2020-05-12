@@ -114,7 +114,6 @@
 		> addcar - dodaje pojazd na mapê o podanym ID
 		> removecar - usuwa pojazd z mapy o podanym ID
 		> setac - ustawia anty-cheat'a
-		> supportduty - s³u¿ba supportera
 		> ticket - teleportuje do /zapytaj
 		> ticketend - przywraca star¹ pozycjê
 		> stworz - tworzy organizacje, pojazd, rangê (wymaga uprawnieñ)
