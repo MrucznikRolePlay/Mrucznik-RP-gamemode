@@ -48,7 +48,11 @@ ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(response)
         {
-            NexACSaveCode(DynamicGui_GetDialogValue(playerid), eNexACAdditionalSettings:listitem);
+            new code = DynamicGui_GetDialogValue(playerid);
+            new eNexACAdditionalSettings:type = eNexACAdditionalSettings:listitem;
+            NexACSaveCode(code, type);
+            Log(adminLog, INFO, "Admin %s ustawi³ funkcjê anty-cheata %s[%d] na %s", 
+                GetPlayerLogName(playerid), NexACDecodeCode(code), code, GetNexACAdditionalSettingName(type));
             ac_ShowDialog(playerid);
         }
         return 1;
