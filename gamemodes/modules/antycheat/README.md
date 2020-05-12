@@ -19,5 +19,5 @@ Po kliknięciu na potencjalnego czitera, zaczynamy go specować.
 Gracze na liście sa posortowani w zależności od tego, ile razy zostali oznaczeni jako potencjalni cziterzy.
 Jeżeli system wykryje u gracza s0beita, zostanie on oznaczony na kolor jaskrawoczerwony.
 
-## Usuwanie gracza z listy potencjalnych cziterów - /unmar
+## Usuwanie gracza z listy potencjalnych cziterów - /unmark
 Możemy usunąć gracza z listy potencjalnych cziterów za pomocą komendy /unmark.
