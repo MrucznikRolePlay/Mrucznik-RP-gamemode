@@ -38,7 +38,7 @@ ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 strcat(string, GetNexACAdditionalSettingName(i));
                 strcat(string, "\n");
             }
-            ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL, DIALOG_STYLE_INPUT, "Panel Anty-Cheat'a", 
+            ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL_CHANGE, DIALOG_STYLE_INPUT, "Panel Anty-Cheat'a", 
                 string,
                 "Ustaw", "Wyjdü");
         }
