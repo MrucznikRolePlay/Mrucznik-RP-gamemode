@@ -395,6 +395,7 @@ public OnGameModeInit()
 		SetWorldTime(tmphour);
 		ServerTime = tmphour;
 	}
+	TimeUpdater();
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
@@ -1090,7 +1091,6 @@ public OnPlayerConnect(playerid)
 
 	LoadTextDraws(playerid);
     LoadingShow(playerid);
-    LoadingHide(playerid);
 	
 	Command_SetPlayerDisabled(playerid, true);
 	

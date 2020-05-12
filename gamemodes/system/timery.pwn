@@ -984,6 +984,7 @@ public MainTimer()
     {
 		PlayersCheckerMinute();
         SyncUp();
+		TimeUpdater();
     }
     if(TICKS_5Min == (60*5)-1)
     {

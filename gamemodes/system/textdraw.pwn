@@ -143,6 +143,9 @@ new PlayerText:TXDSTATS_ZnakWodny[MAX_PLAYERS];
 new Text:TXD_Worek;
 new blackmap;
 
+new Text:TimerTextdraw;
+new realtime_string[32];
+
 //Oil 16.09
 new Text:OilTXD_BG[2];
 new PlayerText:OilPTXD_Arrow[5][MAX_PLAYERS];
@@ -272,6 +275,17 @@ LoadTXD()
 	TextDrawSetOutline(TXD_Worek,1);
 	TextDrawSetProportional(TXD_Worek,1);
 	TextDrawSetShadow(TXD_Worek,1);
+
+	TimerTextdraw = TextDrawCreate(557.000000, 20.000000, "00:00");
+    TextDrawBackgroundColor(TimerTextdraw, 255);
+    TextDrawFont(TimerTextdraw, 1);
+    TextDrawLetterSize(TimerTextdraw, 0.549999, 3.199999);
+    TextDrawColor(TimerTextdraw, -1);
+    TextDrawSetOutline(TimerTextdraw, 1);
+    TextDrawSetProportional(TimerTextdraw, 0);
+    TextDrawUseBox(TimerTextdraw, 1);
+    TextDrawBoxColor(TimerTextdraw, 595);
+    TextDrawTextSize(TimerTextdraw, 618.000000, 4.000000);
 }
 
 LoadingShow(playerid)
