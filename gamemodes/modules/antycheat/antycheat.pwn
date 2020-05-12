@@ -359,8 +359,10 @@ GetNexACAdditionalSettingName(type)
 
 ACKickMessage(playerid, code)
 {
+	new ip[16];
+	GetPlayerIp(playerid, ip, sizeof(ip));
 	SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", 
-		GetNickEx(playerid), playerid, GetIP(playerid), NexACDecodeCode(code), code), 
+		GetNickEx(playerid), playerid, ip, NexACDecodeCode(code), code), 
 		0x9ACD32AA);
 	SendClientMessage(playerid, 0x9ACD32AA, sprintf("Anti-Cheat: Dosta³eœ kicka. | %s [%d]", NexACDecodeCode(code), code));
 	SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");

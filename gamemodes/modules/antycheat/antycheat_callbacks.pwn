@@ -38,6 +38,8 @@ hook OnGameModeInit()
 forward OnCheatDetected(playerid, ip_address[], type, code);
 public OnCheatDetected(playerid, ip_address[], type, code)
 {
+	new ip[16];
+	GetPlayerIp(playerid, ip, sizeof(ip));
 	if(type == 0) //Type of cheating (when 0 it returns the ID, when 1 - IP)
 	{
 		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNickEx(playerid), playerid, ip_address);
@@ -131,7 +133,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			case ADMIN_WARNING:
 			{
 				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | %s [%d]", 
-					GetNickEx(playerid), playerid, GetIP(playerid), NexACDecodeCode(code), code), 
+					GetNickEx(playerid), playerid, ip, NexACDecodeCode(code), code), 
 					0x9ACD32AA);
 				ACWarningDelay(playerid, code);
 			}
@@ -143,7 +145,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			case MARK_AND_WARNING:
 			{
 				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | %s [%d]", 
-					GetNickEx(playerid), playerid, GetIP(playerid), NexACDecodeCode(code), code), 
+					GetNickEx(playerid), playerid, ip, NexACDecodeCode(code), code), 
 					0x9ACD32AA);
 				MarkPotentialCheater(playerid);
 				ACWarningDelay(playerid, code);
