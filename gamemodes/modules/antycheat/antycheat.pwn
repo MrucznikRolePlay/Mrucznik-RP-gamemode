@@ -64,4 +64,18 @@ public AntyCheatON(playerid)
 	}
 }
 
+forward OznaczCzitera(playerid);
+public OznaczCzitera(playerid)
+{
+	new string[71+MAX_PLAYER_NAME];
+	SetPVarInt(playerid, "AC_oznaczony", 1);
+	if(gettime() > GetPVarInt(playerid, "lastSobMsg"))
+	{
+		SetPVarInt(playerid, "lastSobMsg", gettime() + 60);
+		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid), playerid);
+		SendAdminMessage(COLOR_PANICRED, string);
+	}
+	return 1;
+}
+
 //end

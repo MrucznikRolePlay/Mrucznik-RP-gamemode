@@ -325,19 +325,6 @@ PDTuneInfernus(vehicleid)
     AttachDynamicObjectToVehicle(hsiu_text, vehicleid, -1.1012001,0.0907000,-0.150000,0.0000000,0.0000000,271.5000000);
     AttachDynamicObjectToVehicle(hsiu_text2, vehicleid, 1.1013298,0.0907000,-0.150000,0.0000000,0.0000000,88.7496338);
 }
-forward OznaczCzitera(playerid);
-public OznaczCzitera(playerid)
-{
-	new string[71+MAX_PLAYER_NAME];
-	SetPVarInt(playerid, "AC_oznaczony", 1);
-	if(gettime() > GetPVarInt(playerid, "lastSobMsg"))
-	{
-		SetPVarInt(playerid, "lastSobMsg", gettime() + 60);
-		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid), playerid);
-		SendAdminMessage(COLOR_PANICRED, string);
-	}
-	return 1;
-}
 
 /*GetFreeVehicleSeat(vehicleid)
 {
