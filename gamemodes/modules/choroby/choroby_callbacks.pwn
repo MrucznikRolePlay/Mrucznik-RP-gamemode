@@ -42,8 +42,7 @@ hook OnGameModeInit()
 
 hook OnPlayerConnect(playerid)
 {
-	SetPlayerImmunity(playerid, INITIAL_PLAYER_IMMUNITY);
-	PlayerImmunityBar[playerid] = CreatePlayerProgressBar(playerid, 548.000000, 34.000000, 62.500000, 5.500000, -293409025, INITIAL_PLAYER_IMMUNITY, 0);
+	PlayerImmunityBar[playerid] = CreatePlayerProgressBar(playerid, 548.000000, 34.000000, 62.500000, 5.500000, -293409025, MAX_PLAYER_IMMUNITY, 0);
 	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], INITIAL_PLAYER_IMMUNITY);
 	return 1;
 }

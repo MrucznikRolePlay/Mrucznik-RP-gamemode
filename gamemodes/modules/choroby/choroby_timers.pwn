@@ -49,8 +49,8 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 
 		if(GetPlayerImmunity(playerid) <= EFFECT_ACTIVATION_IMMUNITY_BOUNDARY) //nie wywo³uj efektów, gdy gracz ma odpornoœæ
 		{
-			CallEffectActivateCallback(playerid, disease, effect);
 			DoInfecting(playerid, disease, effect);
+			CallEffectActivateCallback(playerid, disease, effect);
 		}
 		else
 		{
