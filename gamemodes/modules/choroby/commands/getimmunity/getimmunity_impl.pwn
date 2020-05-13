@@ -31,7 +31,7 @@ command_getimmunity_Impl(playerid, giveplayerid)
         return 1;
     }
 
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Odpornoœæ gracza %s to %d", GetNickEx(giveplayerid), GetPlayerImmunity(giveplayerid)));
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Odpornoœæ gracza %s to %f", GetNickEx(giveplayerid), GetPlayerImmunity(giveplayerid)));
     return 1;
 }
 
