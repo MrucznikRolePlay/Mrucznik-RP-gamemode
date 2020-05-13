@@ -79,7 +79,8 @@ YCMD:vopis(playerid, params[], help)
 
         new opis[128];
         format(opis, sizeof opis, "%s", CarDesc[vehicleid]);
-        reColor(opis);
+        
+        ReColor(opis);
         new lStr[256];
         strunpack(lStr, opis);
         format(lStr, 256, "%s\n» Ustaw opis\n» Zmieñ opis\n» {FF0000}Usuñ", lStr);

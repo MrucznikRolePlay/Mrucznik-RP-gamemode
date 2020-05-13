@@ -28,12 +28,21 @@ SSCANF:fix(string[])
 	return ret;
 }
 
-stock strToUpper(string[]) {
-    new i = 0;
-    while(EOS != string[i]) {
-        if('a' >= string[i] && string[i] <= 'z') string[i] -= 32; 
-        ++i;
+strToUpper(str[])
+{
+	for(new i = 0, n = strlen(str); i <n; i ++)
+    {
+        str[i] = toupper(str[i]);
     }
+    return 1;
+} 
+
+GenString( string[ ] , size = sizeof string )
+{
+    static const Data[ ] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//add more characters if they want to include in string
+    new i;
+    for(i = 0 ; i < size; ++i)
+        string[ i ] = Data[ random( sizeof Data ) ];
 }
 
 stock randomString(strDest[], strLen) // credits go to: RyDeR`

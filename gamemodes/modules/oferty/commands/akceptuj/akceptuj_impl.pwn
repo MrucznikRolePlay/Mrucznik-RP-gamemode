@@ -170,6 +170,21 @@ command_akceptuj_Impl(playerid, x_job[32])
                             SendClientMessage(playerid, COLOR_GREY, " Nie posiadasz wolnego slota.");
                             return 1;
                         }
+
+                        new lStr[256]; 
+                        format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `KluczykiDoAuta`='0' WHERE `KluczykiDoAuta`='%d'", IDAuta[playerid]);
+                        mysql_query(lStr);
+            
+                        foreach(new i : Player)
+                        {
+                            if(gPlayerLogged[i])
+                            {
+                                if(PlayerInfo[i][pKluczeAuta] == IDAuta[playerid])
+                                {
+                                    PlayerInfo[i][pKluczeAuta] = 0;
+                                }
+                            }
+                        }
                         Car_MakePlayerOwner(playerid, IDAuta[playerid]);
                         Car_RemovePlayerOwner(GraczDajacy[playerid], IDAuta[playerid]);
 
