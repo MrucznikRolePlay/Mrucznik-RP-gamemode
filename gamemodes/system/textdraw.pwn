@@ -236,7 +236,7 @@ LoadTXD()
     TextDrawFont(Loading_Title, 1);
     TextDrawSetProportional(Loading_Title, 1);
 
-    Loading_Info = TextDrawCreate(320.000000, 233.296279, "WCZYTYWANIE");
+    Loading_Info = TextDrawCreate(320.000000, 233.296279, "WCZYTYWANIE ...");
     TextDrawLetterSize(Loading_Info, 0.230000, 1.052444);
     TextDrawAlignment(Loading_Info, 2);
     TextDrawColor(Loading_Info, -1);
