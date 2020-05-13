@@ -12414,6 +12414,23 @@ SavePlayerSentMessage(playerid, message[], MessageType:type)
 	SentMessagesIndex[playerid] = (idx+1) % MAX_SENT_MESSAGES;
 }
 
+ShowPlayerSentMessages(playerid, forplayerid)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
+	new index = SentMessagesIndex[playerid];
+	for(new i = index; i < MAX_SENT_MESSAGES; i++) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
+		}
+	}
+
+	for(new i; i < index; i++) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
+		}
+	}
+}
+
 SavePlayerDamaged(playerid, attackerid, Float:damage, weapon)
 {
 	new hour, minute, second;
@@ -12548,25 +12565,6 @@ ShowPlayerDamage(playerid, forplayerid)
 	return 1;
 }
 
-
-ShowPlayerSentMessages(playerid, forplayerid)
-{
-	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
-	new index = SentMessagesIndex[playerid];
-	if(index != 0) {
-		for(new i = index-1; i >= 0; i--) {
-			if(strlen(SentMessages[playerid][i])) {
-				SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
-			}
-		}
-	}
-
-	for(new i= MAX_SENT_MESSAGES-1; i >= index; i--) {
-		if(strlen(SentMessages[playerid][i])) {
-			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
-		}
-	}
-}
 
 IsReasonAPursuitReason(result[])
 {
