@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                             destroyconvoyactor                                            //
+//                                                getimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,43 +16,22 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 31.10.2019
+// Autor: mrucznik
+// Data utworzenia: 13.05.2020
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_destroyconvoyactor_Impl(playerid, actor)
+command_getimmunity_Impl(playerid, giveplayerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 1) 
+    if(PlayerInfo[playerid][pAdmin] < 1000)
     {
         noAccessMessage(playerid);
         return 1;
     }
 
-    new actorid;
-    if(actor == -1)
-    {
-        actorid = GetNearestConvoyActor(playerid, 5.0);
-    }
-    else
-    {
-        actorid = actor;
-    }
-
-    if(actorid == -1)
-    {
-        sendErrorMessage(playerid, "Brak konwojowego aktora w pobli¿u.");
-        return 1;
-    }
-
-    new error = DestroyConvoyActor(actorid);
-    if(error == -1) {
-        sendErrorMessage(playerid, "Nie uda³o siê usun¹æ aktora");
-        return 1;
-    }
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Pomyœlnie zniszczy³eœ aktora o ID %d.", actorid));
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Odpornoœæ gracza %s to %f", GetNickEx(giveplayerid), GetPlayerImmunity(giveplayerid)));
     return 1;
 }
 

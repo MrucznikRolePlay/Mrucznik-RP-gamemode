@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                             destroyconvoyactor                                            //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                setimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,44 +16,57 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 31.10.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_destroyconvoyactor_Impl(playerid, actor)
+
+//-------<[ include ]>-------
+#include "setimmunity_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_setimmunity()
 {
-    if(PlayerInfo[playerid][pAdmin] < 1) 
-    {
-        noAccessMessage(playerid);
-        return 1;
-    }
+    new command = Command_GetID("setimmunity");
 
-    new actorid;
-    if(actor == -1)
-    {
-        actorid = GetNearestConvoyActor(playerid, 5.0);
-    }
-    else
-    {
-        actorid = actor;
-    }
+    //aliases
+    Command_AddAlt(command, "ustawodpornosc");
+    
 
-    if(actorid == -1)
-    {
-        sendErrorMessage(playerid, "Brak konwojowego aktora w pobli¿u.");
-        return 1;
-    }
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
 
-    new error = DestroyConvoyActor(actorid);
-    if(error == -1) {
-        sendErrorMessage(playerid, "Nie uda³o siê usun¹æ aktora");
-        return 1;
-    }
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Pomyœlnie zniszczy³eœ aktora o ID %d.", actorid));
-    return 1;
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:setimmunity(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Ustawia odpornoœæ gracza.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, immunity;
+    if(sscanf(params, "rd", giveplayerid, immunity))
+    {
+        sendTipMessage(playerid, "U¿yj /setimmunity [Nick/ID] [immunity] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_setimmunity_Impl(playerid, giveplayerid, immunity);
+}

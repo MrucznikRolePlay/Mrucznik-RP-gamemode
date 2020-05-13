@@ -96,6 +96,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_USE_CASINOS false
 #include <nex-ac>
 #include <md5>
+#include <progress2>
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>

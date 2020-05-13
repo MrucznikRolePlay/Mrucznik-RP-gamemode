@@ -25,6 +25,7 @@
 		"Y-Less/indirection",
 		"Zeex/amx_assembly",
 		"Mrucznik/samp-plugin-profiler:v2.15.4",
+		"Southclaws/progress2",
 		"oscar-broman/samp-inline-sort"
 	],
 	"build": {
