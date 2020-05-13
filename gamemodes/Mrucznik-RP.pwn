@@ -5118,7 +5118,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					Log(warningLog, INFO, string);
 					Log(punishmentLog, INFO, string);
 					RemovePlayerFromVehicleEx(playerid);
-					new Float:slx, Float:sly, Float:slz;
+					new playa, Float:slx, Float:sly, Float:slz;
 					GetPlayerPos(playa, slx, sly, slz);
 					SetPlayerPos(playa, slx, sly, slz+5);
 					PlayerPlaySound(playa, 1130, slx, sly, slz+5);

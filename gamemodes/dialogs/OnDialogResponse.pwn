@@ -2881,7 +2881,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
 								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
 							);
-							PlayerInfo[playerid][pPnumber] = randphone;
+							MRP_SetPlayerPhone(playerid, randphone);
 							return 1;
 						}
 					}

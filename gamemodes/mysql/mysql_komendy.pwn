@@ -8,17 +8,38 @@ MruMySQL_ClearZone(zoneid)
 
 MruMySQL_CzyjToNumer(playerid, number)
 {
-    new string[128];
-    format(string, sizeof(string), "SELECT `Nick` FROM mru_konta WHERE `PhoneNr`='%d'", number);
+    new string[128], string_two[144], connected_status, selectedplayer = INVALID_PLAYER_ID, playername2[MAX_PLAYER_NAME], nick[MAX_PLAYER_NAME];
+    format(string, sizeof(string), "SELECT `Nick`, `connected` FROM mru_konta WHERE `PhoneNr`='%d'", number);
     mysql_query(string);
     mysql_store_result();
     if(mysql_num_rows())
     {
         while(mysql_fetch_row_format(string, "|"))
         {
-            new nick[MAX_PLAYER_NAME];
-            sscanf(string, "p<|>s[24]", nick);
-            SendClientMessage(playerid, COLOR_WHITE, nick);
+            sscanf(string, "p<|>s[24]d", nick, connected_status);
+            if(connected_status)
+            {
+                foreach(new i : Player)
+                {
+                    if(gPlayerLogged[playerid] != 0)
+                    {
+                        GetPlayerName(i, playername2, sizeof(playername2));
+                        if(strcmp(playername2, nick, true, strlen(nick)) == 0)
+                        {
+                            selectedplayer = i;
+                        }
+                    }
+                }
+            }
+            format(string_two, sizeof(string_two), "{%s}(%s) {FFFFFF}%s%s", 
+                connected_status > 0 ? "00FF00" : "FF0000",
+                connected_status > 0 ? "Online" : "Offline",
+                nick,
+                selectedplayer != INVALID_PLAYER_ID ? sprintf(" [%d]", selectedplayer) : ""
+            );
+            //format(iptext, sizeof(iptext)," | IP - %s", specIP);
+            SendClientMessage(playerid, COLOR_WHITE, string_two);
+            selectedplayer = INVALID_PLAYER_ID;
         }
     }
     mysql_free_result();
