@@ -8192,9 +8192,6 @@ public NG_OpenGateWithKey(playerid)
 
 UnFrakcja(playerid, para1, bool:respawn = true)
 {
-
-	UnFrakcja(playerid, para1, false);
-
 	new string[64];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
