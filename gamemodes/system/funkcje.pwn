@@ -12414,19 +12414,22 @@ SavePlayerSentMessage(playerid, message[], MessageType:type)
 	SentMessagesIndex[playerid] = (idx+1) % MAX_SENT_MESSAGES;
 }
 
-ShowPlayerSentMessages(playerid, forplayerid)
+ShowPlayerSentMessages(playerid, forplayerid, max=MAX_SENT_MESSAGES)
 {
 	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
 	new index = SentMessagesIndex[playerid];
+	new count;
 	for(new i = index; i < MAX_SENT_MESSAGES; i++) {
 		if(strlen(SentMessages[playerid][i])) {
 			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
+			if(++count > max)  return;
 		}
 	}
 
 	for(new i; i < index; i++) {
 		if(strlen(SentMessages[playerid][i])) {
 			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
+			if(++count > max)  return;
 		}
 	}
 }
