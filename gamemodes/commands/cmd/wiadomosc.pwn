@@ -194,8 +194,8 @@ YCMD:wiadomosc(playerid, params[], help)
             }
         }
 	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
-        SavePlayerSentMessage(playerid, sprintf("%s wys³a³ wiadomoœæ do %s: %s", GetNick(playerid), GetNick(giveplayerid), text));
-        SavePlayerSentMessage(playerid, sprintf("%s otrzyma³ wiadomoœæ od %s: %s", GetNick(giveplayerid), GetNick(playerid), text));
+        SavePlayerSentMessage(playerid, sprintf("%s wys³a³ wiadomoœæ do %s: %s", GetNick(playerid), GetNick(giveplayerid), text), FROMME);
+        SavePlayerSentMessage(giveplayerid, sprintf("%s otrzyma³ wiadomoœæ od %s: %s", GetNick(giveplayerid), GetNick(playerid), text), TOME);
         //dŸwiêki
         PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
         PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);
