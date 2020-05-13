@@ -12,9 +12,8 @@ IsDialogProtected(dialogid)
 
 CheckDialogId(playerid, dialogid)
 {
-    if(dialogid < 0) return 0;
-	if(IsPlayerAdmin(playerid) && DEVELOPMENT) return 0;
-    if(dialogid != iddialog[playerid])
+    if(dialogid < 0 || (IsPlayerAdmin(playerid) && DEVELOPMENT)) return 0;
+	if(dialogid != iddialog[playerid])
     {
         if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;

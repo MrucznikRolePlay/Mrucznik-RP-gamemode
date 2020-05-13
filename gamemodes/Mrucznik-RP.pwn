@@ -1082,7 +1082,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 public OnPlayerConnect(playerid)
 {
-	TextDrawHideForPlayer(playerid, TimerTextdraw);
+	BottomBar(playerid, 0);
 	LoadingShow(playerid);
 
 	new GPCI[41];

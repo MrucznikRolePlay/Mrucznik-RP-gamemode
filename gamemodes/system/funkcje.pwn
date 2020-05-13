@@ -8113,8 +8113,8 @@ public OPCLogin(playerid)
 	SafeTime[playerid] = 60*3;//ogarniczenie 3 minuty na logowanie
 	SetPlayerColor(playerid,COLOR_GRAD2);
 
-	TextDrawShowForPlayer(playerid, TimerTextdraw);
 	LoadingHide(playerid);
+	BottomBar(playerid, 0);
     new result;
     result = MruMySQL_DoesAccountExist(nick);
 	//Sprawdzanie czy konto istnieje:
@@ -12709,7 +12709,7 @@ public TimeUpdater()
     new Hour, Minute;
 	gettime(Hour, Minute);
     format(realtime_string, 32, "%02d:%02d", Hour, Minute);
-    TextDrawSetString(TimerTextdraw, realtime_string);
+    TextDrawSetString(RealtimeTXD, realtime_string);
 }
 
 //--------------------------------------------------
