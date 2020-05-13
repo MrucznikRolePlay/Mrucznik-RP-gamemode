@@ -12666,7 +12666,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				case 41:
 				{
 					//-------<[  Logi  ]>---------
-					format(string, sizeof(string), "AdmWarning: [%d]%s %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
+					format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
 					SendMessageToAdmin(string, COLOR_YELLOW);
 					Log(warningLog, INFO, "%s %s gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
 					SendMessageToAdminEx(string, COLOR_P@, 2);

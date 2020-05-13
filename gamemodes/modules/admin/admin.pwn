@@ -98,7 +98,7 @@
 		> crimereport - report crime's
 		> respp - respawnuje gracza o ID
 		> respcar - respawnuje pojazd o ID
-		> zdejmijbpk - zdejmuje blokadê pisania na chaty frakcyjne dla gracza o ID
+		> unbp - zdejmuje blokadê pisania na chaty frakcyjne dla gracza o ID
 		> dpa - degraduje pó³ admina
 		> BP - nadaje blokadê pisania dla gracza o ID na czas X
 		> kickallex - kickuje wszystkich graczy
