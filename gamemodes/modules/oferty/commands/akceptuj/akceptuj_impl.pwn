@@ -1187,16 +1187,17 @@ command_akceptuj_Impl(playerid, x_job[32])
                             }
                             GetPlayerHealth(playerid, health);
                             GetPlayerArmour(playerid, Ahealth);
-                            new Float:floatHP = float(hp); 
-                            if((health + floatHP) < 100) 
+                            new actualhp = floatround(health, floatround_tozero);
+                            new actualap = floatround(Ahealth, floatround_tozero);
+                            if((actualhp + hp) < 100) 
                             {
-                                SetPlayerHealth(playerid, health + floatHP); 
+                                SetPlayerHealth(playerid, actualhp + hp); 
                             }
                             else
                             {
-                                SetPlayerArmour(playerid, Ahealth + floatHP);  
+                                SetPlayerArmour(playerid, actualap + hp);  
                             }
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %f HP/Pancerza z powodu sexu.", floatHP));
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP/Pancerza z powodu sexu.", hp));
                             if(random(20) == 1)//5% szans na zara¿enie
                             {
                                 InfectOrDecreaseImmunity(playerid, HIV);
