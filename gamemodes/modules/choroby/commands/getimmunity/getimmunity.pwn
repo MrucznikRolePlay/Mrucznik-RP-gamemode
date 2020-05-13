@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                getimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,31 +27,46 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "zastrzyk\zastrzyk.pwn"
-#include "maseczka\maseczka.pwn"
-#include "kuracja\kuracja.pwn"
-#include "diagnozuj\diagnozuj.pwn"
-#include "getimmunity\getimmunity.pwn"
-#include "uleczall\uleczall.pwn"
-#include "setimmunity\setimmunity.pwn"
-#include "ulecz\ulecz.pwn"
-#include "zaraz\zaraz.pwn"
-
+#include "getimmunity_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_getimmunity()
 {
-    command_zastrzyk();
-    command_maseczka();
-    command_kuracja();
-    command_diagnozuj();
-    command_getimmunity();
-    command_uleczall();
-    command_setimmunity();
-    command_ulecz();
-    command_zaraz();
+    new command = Command_GetID("getimmunity");
+
+    //aliases
+    Command_AddAlt(command, "sprawdzodpornosc");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:getimmunity(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "SprawdŸ odpornoœæ gracza.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /getimmunity [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_getimmunity_Impl(playerid, giveplayerid);
 }

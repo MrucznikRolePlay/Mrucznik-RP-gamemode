@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                setimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,31 +27,46 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "zastrzyk\zastrzyk.pwn"
-#include "maseczka\maseczka.pwn"
-#include "kuracja\kuracja.pwn"
-#include "diagnozuj\diagnozuj.pwn"
-#include "getimmunity\getimmunity.pwn"
-#include "uleczall\uleczall.pwn"
-#include "setimmunity\setimmunity.pwn"
-#include "ulecz\ulecz.pwn"
-#include "zaraz\zaraz.pwn"
-
+#include "setimmunity_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_setimmunity()
 {
-    command_zastrzyk();
-    command_maseczka();
-    command_kuracja();
-    command_diagnozuj();
-    command_getimmunity();
-    command_uleczall();
-    command_setimmunity();
-    command_ulecz();
-    command_zaraz();
+    new command = Command_GetID("setimmunity");
+
+    //aliases
+    Command_AddAlt(command, "ustawodpornosc");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:setimmunity(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Ustawia odpornoœæ gracza.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, immunity;
+    if(sscanf(params, "rd", giveplayerid, immunity))
+    {
+        sendTipMessage(playerid, "U¿yj /setimmunity [Nick/ID] [immunity] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_setimmunity_Impl(playerid, giveplayerid, immunity);
 }
