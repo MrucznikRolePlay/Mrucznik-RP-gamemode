@@ -25,6 +25,13 @@
 //------------------<[ Implementacja: ]>-------------------
 command_getimmunity_Impl(playerid, giveplayerid)
 {
+    if(PlayerInfo[playerid][pAdmin] < 1000)
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
+
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Odpornoœæ gracza %s to %d", GetNickEx(giveplayerid), GetPlayerImmunity(giveplayerid)));
     return 1;
 }
 
