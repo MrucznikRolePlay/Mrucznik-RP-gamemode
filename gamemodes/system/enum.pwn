@@ -2454,5 +2454,10 @@ new nexac_ac_names[53][] = {
 	"Anti-NOP's"
 };
 
+enum MessageType 
+{
+	TOME,
+	FROMME
+}
 
 //EOF
