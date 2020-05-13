@@ -89,7 +89,6 @@
 #include "cmd/cwarsztat.pwn"
 #include "cmd/cygaro.pwn"
 #include "cmd/czas.pwn"
-#include "cmd/cziterzy.pwn"
 #include "cmd/czyjtonumer.pwn"
 #include "cmd/czysc.pwn"
 #include "cmd/dajdowozu.pwn"
@@ -399,7 +398,6 @@
 #include "cmd/sejfpomoc.pwn"
 #include "cmd/sejfrodzina.pwn"
 #include "cmd/selldom.pwn"
-#include "cmd/setac.pwn"
 #include "cmd/setarmor.pwn"
 #include "cmd/setcarhp.pwn"
 #include "cmd/setcarint.pwn"
@@ -1448,9 +1446,6 @@ static Aliases()
 
 	//respawncar
 	Command_AddAltNamed("respawncar", "respcar");
-
-	//cziterzy
-	Command_AddAltNamed("cziterzy", "czity");
 
 	//ustawmistrz
 	Command_AddAltNamed("ustawmistrz", "setchamp");

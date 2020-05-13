@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ac                                                    //
+//                                                  cziterzy                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,17 +28,16 @@
 
 
 //-------<[ include ]>-------
-#include "ac_impl.pwn"
+#include "cziterzy_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_ac()
+command_cziterzy()
 {
-    new command = Command_GetID("ac");
+    new command = Command_GetID("cziterzy");
 
     //aliases
-    Command_AddAlt(command, "antycheat");
-    Command_AddAlt(command, "antyczit");
-    Command_AddAlt(command, "nexac");
+    Command_AddAlt(command, "cheaters");
+    Command_AddAlt(command, "czity");
     
 
     //permissions
@@ -50,15 +49,15 @@ command_ac()
 }
 
 //-------<[ command ]>-------
-YCMD:ac(playerid, params[], help)
+YCMD:cziterzy(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Panel anty-cheata");
+        sendTipMessage(playerid, "Wyœwietla listê potencjalnych cziterów.");
         return 1;
     }
     
     
     //command body
-    return command_ac_Impl(playerid);
+    return command_cziterzy_Impl(playerid);
 }

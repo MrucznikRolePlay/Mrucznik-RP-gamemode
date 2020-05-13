@@ -1,0 +1,19 @@
+{
+    "name": "getimmunity",
+    "description": "SprawdŸ odpornoœæ gracza.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "sprawdzodpornosc"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "13.05.2020"
+}

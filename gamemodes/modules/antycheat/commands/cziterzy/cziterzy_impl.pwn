@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ac                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  cziterzy                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,49 +16,29 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 12.05.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "ac_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_ac()
+//------------------<[ Implementacja: ]>-------------------
+command_cziterzy_Impl(playerid)
 {
-    new command = Command_GetID("ac");
-
-    //aliases
-    Command_AddAlt(command, "antycheat");
-    Command_AddAlt(command, "antyczit");
-    Command_AddAlt(command, "nexac");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:ac(playerid, params[], help)
-{
-    if (help)
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) 
     {
-        sendTipMessage(playerid, "Panel anty-cheata");
-        return 1;
+        if(IsPotentialCheatersTxdVisible[playerid])
+        {
+            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wy³¹czy³eœ listê potencjalnych cziterów.");
+            HidePotentialCheatersTxd(playerid);
+        }
+        else
+        {
+            SendClientMessage(playerid, COLOR_LIGHTBLUE, "W³¹czy³eœ listê potencjalnych cziterów.");
+            ShowPotentialCheatersTxd(playerid);
+        }
     }
-    
-    
-    //command body
-    return command_ac_Impl(playerid);
+    return 1;
 }
+
+//end

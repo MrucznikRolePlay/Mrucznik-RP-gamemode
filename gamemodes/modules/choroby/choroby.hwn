@@ -62,14 +62,6 @@ enum eDiseaseData {
     Float:ContagiousRatio, // ratio of effect chance to infect other players
     bool:SpreadingOnContact,
     Vector:VEffects //inicjalizacja w choroby_InitEffects()
-    //TODO: najlepiej by by³o, jakby efekty funkcjami zwracaj¹cymi funkcjê a tutaj zapisywa³y by siê te funckje, ale nie wiem jak to zrobiæ w pawn
-    // potrzebowa³bym mo¿liwoœci zwrócenia funkcji o sygnaturze Callback(playerid, disease, effect) i wtedy móg³bym robiæ coœ takiego jak np w js:
-    // func CreateFeelingBadEffect(message)
-    // {
-    //     return (playerid, disease, effect) => {
-    //         ChatMe(playerid, message);
-    //     }
-    // }
 };
 
 //-----------------<[ Zmienne: ]>-------------------
@@ -80,20 +72,20 @@ new DiseaseData[eDiseases][eDiseaseData] = {
     //nazwa, cena, czas, lekoodpornosc, zarazliwosc, zarazanie przy kontakcie
     {"", "", 0, 0, 0, 0.0, false, VECTOR_NULL},
     {"koronawirus", "Koronawirus", 1000, 20, 30, 1.0, true, VECTOR_NULL},
-    {"grypa", "Grypa", 25000, 120, 5, 1.0, false, VECTOR_NULL},
-    {"zapaleniepluc", "Zapalenie p³uc", 100000, 240, 15, 1.0, false, VECTOR_NULL},
+    {"grypa", "Grypa", 25000, 60, 5, 1.0, false, VECTOR_NULL},
+    {"zapaleniepluc", "Zapalenie pï¿½uc", 100000, 120, 15, 1.0, false, VECTOR_NULL},
     {"zatrucie", "Zatrucie", 10000, 30, 10, 1.0, false, VECTOR_NULL},
-    {"padaczka", "Padaczka", 200000, 600, 5, 0.0, false, VECTOR_NULL},
-    {"tourett", "Zespó³ Touretta", 100000, 300, 25, 0.0, false, VECTOR_NULL},
-    {"astma", "Astma", 25000, 60, 20, 0.0, false, VECTOR_NULL},
-    {"schizofrenia", "Schizofrenia Paranoidalna", 300000, 1200, 2, 0.0, false, VECTOR_NULL},
+    {"padaczka", "Padaczka", 200000, 150, 5, 0.0, false, VECTOR_NULL},
+    {"tourett", "Zespï¿½ Touretta", 100000, 150, 25, 0.0, false, VECTOR_NULL},
+    {"astma", "Astma", 25000, 30, 20, 0.0, false, VECTOR_NULL},
+    {"schizofrenia", "Schizofrenia Paranoidalna", 300000, 300, 2, 0.0, false, VECTOR_NULL},
     {"zombie", "Virus Zombie", 1000, 30, 10, 5.0, false, VECTOR_NULL},
-    {"HIV", "HIV", 100000, 300, 1, 0.3, true, VECTOR_NULL},
-    {"astygmatyzm", "Astygmatyzm", 100000, 7*60, 20, 0.0, false, VECTOR_NULL},
-    {"parkinson", "Parkinson", 150000, 600, 13, 0.0, false, VECTOR_NULL},
-    {"uraz", "Uraz", 10000, 60, 5, 0.0, false, VECTOR_NULL},
-    {"gangrena", "Gangrena", 75000, 120, 35, 0.1, true, VECTOR_NULL},
-    {"PTSD", "PTSD", 150000, 60, 40, 0.0, false, VECTOR_NULL}
+    {"HIV", "HIV", 100000, 150, 1, 0.3, true, VECTOR_NULL},
+    {"astygmatyzm", "Astygmatyzm", 100000, 180, 20, 0.0, false, VECTOR_NULL},
+    {"parkinson", "Parkinson", 150000, 300, 13, 0.0, false, VECTOR_NULL},
+    {"uraz", "Uraz", 10000, 30, 5, 0.0, false, VECTOR_NULL},
+    {"gangrena", "Gangrena", 75000, 60, 35, 0.1, true, VECTOR_NULL},
+    {"PTSD", "PTSD", 150000, 30, 40, 0.0, false, VECTOR_NULL}
 };
 
 //TODO: wiêcej tików
@@ -117,7 +109,7 @@ new TourettWords[][] = {
     " sram"
 };
 
-new PlayerImmunity[MAX_PLAYERS];
+new PlayerBar:PlayerImmunityBar[MAX_PLAYERS];
 new Grypa[MAX_PLAYERS];
 new Tourett[MAX_PLAYERS];
 new TourettActive[MAX_PLAYERS];
@@ -172,7 +164,7 @@ forward RandomInfectionEffect(playerid, disease, value);
 forward AstigmatismEffect(playerid, disease, value);
 forward AstigmatismEffect_Off(playerid, disease, value);
 
-//Parkinson/niedow³ad r¹k
+//Parkinson/niedowï¿½ad rï¿½k
 forward ShakingHandsEffect(playerid, disease, value);
 forward ShootingSkillEffect(playerid, disease, value);
 forward ShootingSkillEffect_Off(playerid, disease, value);

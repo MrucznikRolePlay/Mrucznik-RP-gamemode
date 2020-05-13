@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ac                                                    //
+//                                                setimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,17 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "ac_impl.pwn"
+#include "setimmunity_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_ac()
+command_setimmunity()
 {
-    new command = Command_GetID("ac");
+    new command = Command_GetID("setimmunity");
 
     //aliases
-    Command_AddAlt(command, "antycheat");
-    Command_AddAlt(command, "antyczit");
-    Command_AddAlt(command, "nexac");
+    Command_AddAlt(command, "ustawodpornosc");
     
 
     //permissions
@@ -50,15 +48,25 @@ command_ac()
 }
 
 //-------<[ command ]>-------
-YCMD:ac(playerid, params[], help)
+YCMD:setimmunity(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Panel anty-cheata");
+        sendTipMessage(playerid, "Ustawia odpornoœæ gracza.");
         return 1;
     }
-    
-    
+    //fetching params
+    new giveplayerid, immunity;
+    if(sscanf(params, "rd", giveplayerid, immunity))
+    {
+        sendTipMessage(playerid, "U¿yj /setimmunity [Nick/ID] [immunity] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
     //command body
-    return command_ac_Impl(playerid);
+    return command_setimmunity_Impl(playerid, giveplayerid, immunity);
 }

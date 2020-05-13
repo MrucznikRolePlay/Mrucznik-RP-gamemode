@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ac                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                setimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,49 +16,26 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 13.05.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "ac_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_ac()
+//------------------<[ Implementacja: ]>-------------------
+command_setimmunity_Impl(playerid, giveplayerid, immunity)
 {
-    new command = Command_GetID("ac");
-
-    //aliases
-    Command_AddAlt(command, "antycheat");
-    Command_AddAlt(command, "antyczit");
-    Command_AddAlt(command, "nexac");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:ac(playerid, params[], help)
-{
-    if (help)
+    if(PlayerInfo[playerid][pAdmin] < 1000)
     {
-        sendTipMessage(playerid, "Panel anty-cheata");
+        noAccessMessage(playerid);
         return 1;
     }
-    
-    
-    //command body
-    return command_ac_Impl(playerid);
+
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Ustawi³eœ odpornoœæ gracza %s na %d", GetNickEx(giveplayerid), immunity));
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Admin %s ustawi³ twoj¹ odpornoœæ na %d", GetNickEx(playerid), immunity));
+    Log(adminLog, INFO, "Admin %s ustawi³ odpornoœæ gracza %s na %d", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), immunity);
+    SetPlayerImmunity(giveplayerid, immunity);
+    return 1;
 }
+
+//end

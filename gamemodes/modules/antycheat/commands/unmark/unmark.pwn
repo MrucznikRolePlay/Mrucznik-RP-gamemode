@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ac                                                    //
+//                                                   unmark                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,17 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "ac_impl.pwn"
+#include "unmark_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_ac()
+command_unmark()
 {
-    new command = Command_GetID("ac");
+    new command = Command_GetID("unmark");
 
     //aliases
-    Command_AddAlt(command, "antycheat");
-    Command_AddAlt(command, "antyczit");
-    Command_AddAlt(command, "nexac");
+    Command_AddAlt(command, "odznacz");
     
 
     //permissions
@@ -50,15 +48,25 @@ command_ac()
 }
 
 //-------<[ command ]>-------
-YCMD:ac(playerid, params[], help)
+YCMD:unmark(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Panel anty-cheata");
+        sendTipMessage(playerid, "Usuwa gracza z listy osób oznaczonych jako czitera.");
         return 1;
     }
-    
-    
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /unmark [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
     //command body
-    return command_ac_Impl(playerid);
+    return command_unmark_Impl(playerid, giveplayerid);
 }

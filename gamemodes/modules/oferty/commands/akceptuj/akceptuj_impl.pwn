@@ -1198,7 +1198,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                             SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP z powodu sexu.", hp));
                             if(random(20) == 1)//5% szans na zara¿enie
                             {
-                                InfectPlayer(playerid, HIV);
+                                InfectOrDecreaseImmunity(playerid, HIV);
                             }
 
                             //TODO: przenoszenie chorób drog¹ p³ciow¹

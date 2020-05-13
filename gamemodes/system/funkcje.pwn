@@ -334,19 +334,6 @@ PDTuneInfernus(vehicleid)
     AttachDynamicObjectToVehicle(hsiu_text, vehicleid, -1.1012001,0.0907000,-0.150000,0.0000000,0.0000000,271.5000000);
     AttachDynamicObjectToVehicle(hsiu_text2, vehicleid, 1.1013298,0.0907000,-0.150000,0.0000000,0.0000000,88.7496338);
 }
-forward OznaczCzitera(playerid);
-public OznaczCzitera(playerid)
-{
-	new string[71+MAX_PLAYER_NAME];
-	SetPVarInt(playerid, "AC_oznaczony", 1);
-	if(gettime() > GetPVarInt(playerid, "lastSobMsg"))
-	{
-		SetPVarInt(playerid, "lastSobMsg", gettime() + 60);
-		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid), playerid);
-		SendAdminMessage(COLOR_PANICRED, string);
-	}
-	return 1;
-}
 
 /*GetFreeVehicleSeat(vehicleid)
 {
@@ -1636,11 +1623,6 @@ stock IsVehicleInRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
     return 0;
 } 
 
-SetAntyCheatForPlayer(playerid, valueCode)
-{
-	SetPVarInt(playerid, "AntyCheatOff", valueCode);
-	return 1;
-}
 stock GetNickEx(playerid, withmask = false)
 {
 	new nick[MAX_PLAYER_NAME];
@@ -12002,36 +11984,6 @@ SetPlayerInteriorEx(playerid, int)
 	return 1;
 }
 
-IsProblematicCode(code)
-{
-	if(code == 0 //0 Anti-AirBreak (onfoot)
-	|| code == 2 //2 Anti-teleport hack (onfoot)
-	|| code == 5 //5 Anti-teleport hack (vehicle to player)
-	|| code == 6 //6 Anti-teleport hack (pickups)
-	|| code == 8 //8 Anti-FlyHack (in vehicle)
-	|| code == 9 // 9 Anti-Slapper/FlyHack
-	|| code == 11 //11 Anti-Health hack (in vehicle)
-	|| code == 15 //15 Anti-Weapon hack
-	|| code == 18 //18 Anti-Special actions hack
-	|| code == 21 //21 Anti-Invisible hack
-	|| code == 26 //26 Anti-Rapid fire
-	|| code == 27 //27 Anti-FakeSpawn
-	|| code == 30 //30 Anti-CJ run
-	|| code == 33 //33 Anti-UnFreeze
-	|| code == 40 //40 Protection from the sandbox
-	|| code == 49 //49 Anti-flood callback functions
-	|| code == 50 //50 Anti-flood change seat
-	|| code == 52 //52 Anti-NOP's
-	)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
 WeaponAC(playerid)
 {	
 	new weapons[13][2];
@@ -12418,11 +12370,32 @@ stock GetDistanceToCar(playerid, carid)
 	return floatround(Dis);
 }
 
-SavePlayerSentMessage(playerid, message[])
+SavePlayerSentMessage(playerid, message[], MessageType:type)
 {
 	new idx = SentMessagesIndex[playerid];
 	format(SentMessages[playerid][idx], 144, "%s", message);
+	SentMessagesType[playerid][idx] = type;
 	SentMessagesIndex[playerid] = (idx+1) % MAX_SENT_MESSAGES;
+}
+
+ShowPlayerSentMessages(playerid, forplayerid, max=MAX_SENT_MESSAGES)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
+	new index = SentMessagesIndex[playerid];
+	new count;
+	for(new i = index; i < MAX_SENT_MESSAGES; i++) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
+			if(++count > max)  return;
+		}
+	}
+
+	for(new i; i < index; i++) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
+			if(++count > max)  return;
+		}
+	}
 }
 
 SavePlayerDamaged(playerid, attackerid, Float:damage, weapon)
@@ -12559,25 +12532,6 @@ ShowPlayerDamage(playerid, forplayerid)
 	return 1;
 }
 
-
-ShowPlayerSentMessages(playerid, forplayerid)
-{
-	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
-	new index = SentMessagesIndex[playerid];
-	if(index != 0) {
-		for(new i = index-1; i >= 0; i--) {
-			if(strlen(SentMessages[playerid][i])) {
-				SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
-			}
-		}
-	}
-
-	for(new i= MAX_SENT_MESSAGES-1; i >= index; i--) {
-		if(strlen(SentMessages[playerid][i])) {
-			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
-		}
-	}
-}
 
 IsReasonAPursuitReason(result[])
 {
