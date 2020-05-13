@@ -21,7 +21,7 @@ MruMySQL_CzyjToNumer(playerid, number)
             {
                 foreach(new i : Player)
                 {
-                    if(gPlayerLogged[playerid] != 0)
+                    if(gPlayerLogged[i] != 0)
                     {
                         GetPlayerName(i, playername2, sizeof(playername2));
                         if(strcmp(playername2, nick, true, strlen(nick)) == 0)
