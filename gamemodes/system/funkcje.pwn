@@ -5358,12 +5358,12 @@ ZaladujDomy()
 	            new message[128];
 	            new SEJF[20];
 				format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
-				if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
+				/*if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
 				{
 					new playernick[26];
     				strmid(playernick, MruMySQL_GetNameFromUID(dini_Int(string, "UID_Wlascicela")), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
 					format(GeT, sizeof(GeT), "%s", playernick);
-				}
+				}*/
     			Dom[i][hID] = i;
     			Dom[i][hDomNr] = dini_Int(string, "DomNr");
     			Dom[i][hZamek] = dini_Int(string, "Zamek");
@@ -8201,6 +8201,9 @@ public NG_OpenGateWithKey(playerid)
 
 UnFrakcja(playerid, para1, bool:respawn = true)
 {
+
+	UnFrakcja(playerid, para1, false);
+
 	new string[64];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
@@ -8221,8 +8224,6 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
 	PlayerInfo[para1][pJob] = 0;
-	SetTimerEx("AntySB", 5000, 0, "d", para1);
-	AntySpawnBroni[para1] = 5;
 	orgUnInvitePlayer(para1);
 	MedicBill[para1] = 0;
 	if(respawn)

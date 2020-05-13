@@ -2247,14 +2247,14 @@ public OnCheatDetected(playerid, ip_address[], type, code)
             case 52:    format(code_decoded, sizeof(code_decoded), "Anti-NOPs");
             default:    format(code_decoded, sizeof(code_decoded), "Inne");
         }
-		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] dosta³ kicka. | %s [%d]", GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), code_decoded, code);
+		format(string, sizeof(string), "Anti-Cheat: %s [ID: %d] [IP: %s] | %s [%d]", GetNickEx(playerid), playerid, (PlayerInfo[playerid][pNewAP] > 0 ? "(ukryte)" : plrIP), code_decoded, code);
 		SendMessageToAdmin(string, 0x9ACD32AA);
-		format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | %s [%d]", code_decoded, code);
-		SendClientMessage(playerid, 0x9ACD32AA, string);
-		SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
-        Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
 		if(code == 50 || code == 28 || code == 27 || code == 5)
 		{
+			format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | %s [%d]", code_decoded, code);
+			SendClientMessage(playerid, 0x9ACD32AA, string);
+			SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
+       		Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
 			Kick(playerid);
 			SetPVarInt(playerid, "CheatDetected", 1);
 		}
@@ -2262,8 +2262,20 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 		{
 			SetPVarInt(playerid, "ammohackdetect", 1);
 		}
+		else if(code == 32)
+		{
+			RemovePlayerFromVehicleEx(playerid);
+			new Float:slx, Float:sly, Float:slz;
+			GetPlayerPos(playerid, slx, sly, slz);
+			SetPlayerPos(playerid, slx, sly, slz+5);
+			PlayerPlaySound(playerid, 1130, slx, sly, slz+5);
+		}
 		else
 		{
+			format(string, sizeof(string), "Anti-Cheat: Dosta³eœ kicka. | %s [%d]", code_decoded, code);
+			SendClientMessage(playerid, 0x9ACD32AA, string);
+			SendClientMessage(playerid, 0x9ACD32AA, "Je¿eli uwa¿asz, ¿e antycheat zadzia³a³ nieprawid³owo, zg³oœ to administracji, podaj¹c kod z jakim otrzyma³eœ kicka.");
+        	Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
 			KickEx(playerid);
 			SetPVarInt(playerid, "CheatDetected", 1);
 		}

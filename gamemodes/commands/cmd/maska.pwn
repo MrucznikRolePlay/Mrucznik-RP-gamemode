@@ -90,7 +90,14 @@ YCMD:maska(playerid, params[], help)
 			new maskid[6];
 			randomString(maskid, sizeof(maskid));
 			strToUpper(maskid);
-			format(pName, sizeof(pName), "Zamaskowany_%d", maskid);
+			if(PlayerInfo[playerid][pSex] == 1)
+			{
+				format(pName, sizeof(pName), "Zamaskowany_%d", maskid);
+			}
+			else
+			{
+				format(pName, sizeof(pName), "Zamaskowana_%d", maskid);
+			}
 			if(SetPlayerName(playerid, pName))
 			{
 				SetPlayerColor(playerid, TEAM_HIT_COLOR);
