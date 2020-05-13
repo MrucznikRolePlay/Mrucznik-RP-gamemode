@@ -34,7 +34,7 @@ YCMD:clearwlall(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 150)
+		if(PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 			foreach(new i : Player)
 			{
