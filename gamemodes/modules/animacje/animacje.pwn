@@ -36,7 +36,7 @@ MRP_ShowAnim(playerid)
 	format(dialog, sizeof(dialog), "%s{53a142}@smierc[1-2]\n{53a142}@spij[1-4]\n{53a142}@spray[1-2]\n{53a142}@stack[1-11]\n", dialog);
 	format(dialog, sizeof(dialog), "%s{53a142}@strip[1-7]\n{53a142}@wygralem[1-2]\n{53a142}@yo[1-7]\n", dialog);
 	format(dialog, sizeof(dialog), "%s{ebc034}@bomba\n{ebc034}@box\n{ebc034}@celuj\n{ebc034}@celujkarabin\n{ebc034}@crack\n{ebc034}@czas\n{ebc034}@dodge\n{ebc034}@doping\n{ebc034}@drap\n{ebc034}@dzieki\n", dialog);
-	format(dialog, sizeof(dialog), "%s{ebc034}@fuck\n{ebc034}@greet\n{ebc034}@hitch\n{ebc034}@joint\n{ebc034}@karta\n{ebc034}@komputer\n{ebc034}@kozak\n{ebc034}@kungfu\n{ebc034}@machaj\n{ebc034}@maska\n", dialog);
+	format(dialog, sizeof(dialog), "%s{ebc034}@fuck\n{ebc034}@greet\n{ebc034}@hitch\n{ebc034}@joint\n{ebc034}@karta\n{ebc034}@komputer\n{ebc034}@kozak\n{ebc034}@taichi\n{ebc034}@machaj\n{ebc034}@maska\n", dialog);
 	format(dialog, sizeof(dialog), "%s{ebc034}@medyk\n{ebc034}@napad\n{ebc034}@nie\n{ebc034}@odbierz\n{ebc034}@odloz\n{ebc034}@oh\n{ebc034}@opieraj\n{ebc034}@pa\n{ebc034}@pij\n{ebc034}@placz\n", dialog);
 	format(dialog, sizeof(dialog), "%s{ebc034}@przeladuj\n{ebc034}@ramiona\n{ebc034}@rozciagaj\n{ebc034}@rozlacz\n{ebc034}@siad\n{ebc034}@sikaj\n{ebc034}@smiech\n{ebc034}@stoj\n{ebc034}@tak\n{ebc034}@waledochodze\n", dialog);
 	format(dialog, sizeof(dialog), "%s{ebc034}@walekonia\n{ebc034}@wolaj\n{ebc034}@wozszlug\n{ebc034}@wstan\n{ebc034}@wtf\n{ebc034}@wymiotuj\n{ebc034}@zarcie\n{ebc034}@zmeczony", dialog);
@@ -694,7 +694,7 @@ MRP_DoAnimation(playerid, arg1[])
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
-	else if(strcmp(arg1, "@kungfu", true) == 0)
+	else if(strcmp(arg1, "@kungfu", true) == 0 || strcmp(arg1, "@taichi", true) == 0)
 	{
 		ApplyAnimation(playerid, "PARK", "Tai_Chi_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);

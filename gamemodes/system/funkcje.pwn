@@ -12358,11 +12358,32 @@ stock GetDistanceToCar(playerid, carid)
 	return floatround(Dis);
 }
 
-SavePlayerSentMessage(playerid, message[])
+SavePlayerSentMessage(playerid, message[], MessageType:type)
 {
 	new idx = SentMessagesIndex[playerid];
 	format(SentMessages[playerid][idx], 144, "%s", message);
+	SentMessagesType[playerid][idx] = type;
 	SentMessagesIndex[playerid] = (idx+1) % MAX_SENT_MESSAGES;
+}
+
+ShowPlayerSentMessages(playerid, forplayerid, max=MAX_SENT_MESSAGES)
+{
+	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
+	new index = SentMessagesIndex[playerid];
+	new count;
+	for(new i = index; i < MAX_SENT_MESSAGES; i++) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
+			if(++count > max)  return;
+		}
+	}
+
+	for(new i; i < index; i++) {
+		if(strlen(SentMessages[playerid][i])) {
+			SendClientMessage(forplayerid, (SentMessagesType[playerid][i] == TOME ? COLOR_NEWS : COLOR_YELLOW), SentMessages[playerid][i]);
+			if(++count > max)  return;
+		}
+	}
 }
 
 SavePlayerDamaged(playerid, attackerid, Float:damage, weapon)
@@ -12499,25 +12520,6 @@ ShowPlayerDamage(playerid, forplayerid)
 	return 1;
 }
 
-
-ShowPlayerSentMessages(playerid, forplayerid)
-{
-	SendClientMessage(forplayerid, COLOR_WHITE, sprintf("--- Ostatnie wiadomoœci gracza %s: ---", GetNick(playerid)));
-	new index = SentMessagesIndex[playerid];
-	if(index != 0) {
-		for(new i = index-1; i >= 0; i--) {
-			if(strlen(SentMessages[playerid][i])) {
-				SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
-			}
-		}
-	}
-
-	for(new i= MAX_SENT_MESSAGES-1; i >= index; i--) {
-		if(strlen(SentMessages[playerid][i])) {
-			SendClientMessage(forplayerid, COLOR_LIGHTGREEN, SentMessages[playerid][i]);
-		}
-	}
-}
 
 IsReasonAPursuitReason(result[])
 {

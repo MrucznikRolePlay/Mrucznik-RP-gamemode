@@ -67,6 +67,11 @@ MruMySQL_CookedMealsDialog(playerid)
 			}
 			string[strlen(string)-1] = '\0';
 		}
+		else
+		{
+			sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
+			return 1;
+		}
 		mysql_free_result();
 	}
 

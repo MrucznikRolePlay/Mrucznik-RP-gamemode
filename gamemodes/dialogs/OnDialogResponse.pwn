@@ -14334,7 +14334,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    case 42: MRP_DoAnimation(playerid,"@karta");
 		    case 43: MRP_DoAnimation(playerid,"@komputer");
 		    case 44: MRP_DoAnimation(playerid,"@kozak");
-		    case 45: MRP_DoAnimation(playerid,"@kungfu");
+		    case 45: MRP_DoAnimation(playerid,"@taichi");
 			case 46: MRP_DoAnimation(playerid,"@machaj");
 			case 47: MRP_DoAnimation(playerid,"@maska");
 			case 48: MRP_DoAnimation(playerid,"@medyk");
