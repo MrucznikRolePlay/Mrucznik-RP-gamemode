@@ -44,6 +44,7 @@ YCMD:podglad(playerid, params[], help)
 		    if(IsPlayerConnected(giveplayerid))
 		    {
 				ShowPlayerSentMessages(giveplayerid, playerid);
+				SendClientMessage(giveplayerid, COLOR_PANICRED, "Admin %s sprawdzi³ historiê twoich wiadomoœci. Powód: %s", GetNickEx(playerid), reason);
 				Log(adminLog, INFO, "Admin %s podejrza³ wiadomoœci gracza %s, powód: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), reason);
 			}
 		}
