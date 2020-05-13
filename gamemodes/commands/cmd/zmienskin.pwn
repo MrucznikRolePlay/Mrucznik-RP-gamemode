@@ -38,7 +38,7 @@ YCMD:zmienskin(playerid, params[], help)
             {
                 if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
                 {
-                    sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile");
+                    sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile. Nie mo¿esz znajdowaæ siê w pojeŸdzie.");
                     return 1;
                 }
                 SetPVarInt(playerid, "CheatDetected", 1);

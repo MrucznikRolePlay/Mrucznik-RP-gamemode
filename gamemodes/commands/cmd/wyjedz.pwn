@@ -37,7 +37,7 @@ YCMD:wyjedz(playerid, params[], help)
 	}
 	if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
 	{
-		sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile"); 
+		sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile."); 
 		return 1;
 	}	
 	SetAntyCheatForPlayer(playerid, 4); 
