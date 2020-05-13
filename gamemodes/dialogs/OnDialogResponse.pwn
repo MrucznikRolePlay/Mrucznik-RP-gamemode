@@ -1063,10 +1063,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
                 new opis[128];
                 strunpack(opis, CarDesc[veh]);
-                new str[128];
-                WordWrap(opis, true, str);
 
-                CarOpis[veh] = CreateDynamic3DTextLabel(str, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
+				ReColor(opis);
+                CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
                 format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
                 SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis pojazdu, by go usun¹æ wpisz {CC3333}/vopis usuñ{CC3333}");
             }
@@ -1096,12 +1095,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d³ugosæ opisu.");
             return 1;
         }
-         else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
-		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.') || (inputtext[i] == '!') || (inputtext[i] == ':') || (inputtext[i] == '-') || (inputtext[i] == '{') || (inputtext[i] == '}') || (inputtext[i] == '[') || (inputtext[i] == ']'))
-				continue;
-            else if ((inputtext[i] == 'Ê') || (inputtext[i] == 'Ó') || (inputtext[i] == '¥') || (inputtext[i] == 'Œ') || (inputtext[i] == '£') || (inputtext[i] == '¯') || (inputtext[i] == '') || (inputtext[i] == 'Æ') || (inputtext[i] == 'Ñ') || (inputtext[i] == 'ê') || (inputtext[i] == 'ó') || (inputtext[i] == '¹') || (inputtext[i] == 'œ') || (inputtext[i] == '³') || (inputtext[i] == '¿') || (inputtext[i] == 'Ÿ') || (inputtext[i] == 'æ') || (inputtext[i] == 'ñ'))
-                continue;
-			else return SendClientMessage(playerid, COLOR_GRAD1, "Opis: U¿y³eœ nieodpowiednich znaków opisu.");
+		else
+		{
+			new givenString[128];
+			format(givenString, sizeof(givenString), "%s", inputtext);
+			if(strfind(givenString, "(FF0000)", true) != -1 || strfind(givenString, "(000000)", true) != -1)
+			{
+				SendClientMessage(playerid, COLOR_GRAD1, "Znaleziono niedozwolony kolor.");
+				return 1;
+			}
+			//todo: kolorowe opisy tylko dla KP
+			petla(i, strlen(givenString))
+			{
+				givenString[i] = tolower(givenString[i]);
+				if(givenString[i] == '{' || givenString[i] == '}' || (givenString[i] != 'q' && givenString[i] != 'w' && givenString[i] != 'e' && givenString[i] != 'r' && givenString[i] != 't' && givenString[i] != 'y' && givenString[i] != 'u'
+				&& givenString[i] != 'i' && givenString[i] != 'o' && givenString[i] != 'p' && givenString[i] != 'a' && givenString[i] != 's' && givenString[i] != 'd' && givenString[i] != 'f'
+				&& givenString[i] != 'g' && givenString[i] != 'h' && givenString[i] != 'j' && givenString[i] != 'k' && givenString[i] != 'l' && givenString[i] != 'z' && givenString[i] != 'x'
+				&& givenString[i] != 'c' && givenString[i] != 'v' && givenString[i] != 'b' && givenString[i] != 'n' && givenString[i] != 'm' && givenString[i] != ',' && givenString[i] != '.'
+				&& givenString[i] != '!' && givenString[i] != '?' && givenString[i] != 'ê' && givenString[i] != 'ó' && givenString[i] != '¹' && givenString[i] != 'œ' && givenString[i] != '³'
+				&& givenString[i] != '¿' && givenString[i] != 'Ÿ' && givenString[i] != 'æ' && givenString[i] != 'ñ' && givenString[i] != 'Ê' && givenString[i] != 'Ó' && givenString[i] != '¥'
+				&& givenString[i] != 'Œ' && givenString[i] != '£' && givenString[i] != '¯' && givenString[i] != '' && givenString[i] != 'Æ' && givenString[i] != 'Ñ' && givenString[i] != ' '
+				&& givenString[i] != '1' && givenString[i] != '2' && givenString[i] != '3' && givenString[i] != '4' && givenString[i] != '5' && givenString[i] != '6' && givenString[i] != '7'
+				&& givenString[i] != '8' && givenString[i] != '9' && givenString[i] != '-' && givenString[i] != '0' && givenString[i] != '|' && givenString[i] != '/' && givenString[i] != '@' 
+				&& givenString[i] != '(' && givenString[i] != ')' && givenString[i] != '[' && givenString[i] != ']' && givenString[i] != ':' && givenString[i] != ';'))
+				{
+					SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[i]));
+					return 1;
+				}
+			}
 		}
         new veh = GetPlayerVehicleID(playerid);
         strdel(CarDesc[veh], 0, 128 char);

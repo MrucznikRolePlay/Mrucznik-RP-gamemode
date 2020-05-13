@@ -77,8 +77,11 @@ YCMD:vopis(playerid, params[], help)
         if(vehicleid == 0) return 1;
         if(!IsCarOwner(playerid, vehicleid)) return SendClientMessage(playerid, COLOR_GRAD2, " Ten pojazd nie nale¿y do Ciebie.");
 
+        new opis[128];
+        format(opis, sizeof opis, "%s", CarDesc[vehicleid]);
+        reColor(opis);
         new lStr[256];
-        strunpack(lStr, CarDesc[vehicleid]);
+        strunpack(lStr, opis);
         format(lStr, 256, "%s\n» Ustaw opis\n» Zmieñ opis\n» {FF0000}Usuñ", lStr);
         ShowPlayerDialogEx(playerid, D_VEHOPIS, DIALOG_STYLE_LIST, "Opis pojazdu", lStr, "Wybierz", "WyjdŸ");
     }

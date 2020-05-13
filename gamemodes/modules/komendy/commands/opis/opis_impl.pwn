@@ -52,7 +52,8 @@ command_opis_Impl(playerid, params[])
 			&& givenString[i] != 'ø' && givenString[i] != 'ü' && givenString[i] != 'Ê' && givenString[i] != 'Ò' && givenString[i] != ' ' && givenString[i] != '”' && givenString[i] != '•'
 			&& givenString[i] != 'å' && givenString[i] != '£' && givenString[i] != 'Ø' && givenString[i] != 'è' && givenString[i] != '∆' && givenString[i] != '—' && givenString[i] != ' '
 			&& givenString[i] != '1' && givenString[i] != '2' && givenString[i] != '3' && givenString[i] != '4' && givenString[i] != '5' && givenString[i] != '6' && givenString[i] != '7'
-			&& givenString[i] != '8' && givenString[i] != '9' && givenString[i] != '-' && givenString[i] != '0' && givenString[i] != '|' && givenString[i] != '/' && givenString[i] != '@' && givenString[i] != '(' && givenString[i] != ')'))
+			&& givenString[i] != '8' && givenString[i] != '9' && givenString[i] != '-' && givenString[i] != '0' && givenString[i] != '|' && givenString[i] != '/' && givenString[i] != '@' 
+			&& givenString[i] != '(' && givenString[i] != ')' && givenString[i] != '[' && givenString[i] != ']' && givenString[i] != ':' && givenString[i] != ';'))
 			{
 				SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[i]));
 				return 1;
