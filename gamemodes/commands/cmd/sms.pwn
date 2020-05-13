@@ -63,6 +63,11 @@ YCMD:sms(playerid, params[], help)
 		SendClientMessage(playerid, -1, "S³ychaæ g³uchy ton");
 		return 1; 
 	}
+	if(strlen(messSMS) > 105)
+	{
+		sendErrorMessage(playerid, "Twoja wiadomoœæ by³a zbyt d³uga, skróæ j¹!"); 
+		return 1;
+	}
 	//Sprawdzanie czy to numer do SN
 	if(givePlayerNumber >= 100 && givePlayerNumber <= 150)
 	{
