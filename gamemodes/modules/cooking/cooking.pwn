@@ -32,7 +32,7 @@ EatCookedMeal(playerid, name[], weight, type)
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
 	ChatMe(playerid, sprintf("zjada %s.", name));
 	GetPlayerHealth(playerid, hp);
-	SetPlayerHealth(playerid, hp+weight/10);
+	SetPlayerHealth(playerid, (hp+weight/10) > 100 ? 100 : (hp+weight/10));
 
 	//handle food types
 	if(type == 16 || type == 18)
