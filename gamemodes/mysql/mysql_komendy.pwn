@@ -8,7 +8,7 @@ MruMySQL_ClearZone(zoneid)
 
 MruMySQL_CzyjToNumer(playerid, number)
 {
-    new string[128], string_two[144], connected_status, selectedplayer = INVALID_PLAYER_ID, playername2[MAX_PLAYER_NAME], nick[MAX_PLAYER_NAME];
+    new string[128], string_two[144], connected_status, selectedplayer = INVALID_PLAYER_ID, nick[MAX_PLAYER_NAME];
     format(string, sizeof(string), "SELECT `Nick`, `connected` FROM mru_konta WHERE `PhoneNr`='%d'", number);
     mysql_query(string);
     mysql_store_result();
@@ -23,8 +23,7 @@ MruMySQL_CzyjToNumer(playerid, number)
                 {
                     if(gPlayerLogged[i] != 0)
                     {
-                        GetPlayerName(i, playername2, sizeof(playername2));
-                        if(strcmp(playername2, nick, true, strlen(nick)) == 0)
+                        if(strcmp(GetNickEx(i), nick, true, strlen(nick)) == 0)
                         {
                             selectedplayer = i;
                         }
