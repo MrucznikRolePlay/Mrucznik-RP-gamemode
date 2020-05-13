@@ -170,6 +170,7 @@ DeactivateDiseaseEffects(playerid, eDiseases:disease)
 CallEffectTimer(playerid, eDiseases:disease, effect[eEffectData], effectID) 
 {
 	new effectTime = effect[MinTime] + random(effect[TimeRange]);
+	if(!IsAProductionServer()) effectTime /= 10; //10 razy szybsze wywo³ywanie efektów na serwerach developerskich
 	defer EffectTimer[effectTime](playerid, PlayerInfo[playerid][pUID], disease, effectID);
 	return 1;
 }
