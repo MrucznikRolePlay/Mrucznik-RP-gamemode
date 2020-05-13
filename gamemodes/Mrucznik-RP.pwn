@@ -1082,6 +1082,9 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 public OnPlayerConnect(playerid)
 {
+	TextDrawHideForPlayer(playerid, TimerTextdraw);
+	LoadingShow(playerid);
+
 	new GPCI[41];
 	gpci(playerid, GPCI, sizeof(GPCI));
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNickEx(playerid), playerid, GetIp(playerid), GPCI);
@@ -1099,14 +1102,10 @@ public OnPlayerConnect(playerid)
     Usun_Obiekty(playerid); //stare obiekty
     obiekty_OnPlayerConnect(playerid);//nowe obiekty
 	
-
 	LoadTextDraws(playerid);
-    LoadingShow(playerid);
 	
 	Command_SetPlayerDisabled(playerid, true);
-	
-	//Actors:
-	SetPVarInt(playerid, "pActorID", 666); 
+	 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
