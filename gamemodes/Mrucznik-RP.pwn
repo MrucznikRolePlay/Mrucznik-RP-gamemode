@@ -4965,23 +4965,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 			}
 			SetPVarInt(playerid, "IsAGetInTheCar", 0); 
 
-			//ACv2: Kicking players that are trying to drive the car without permission
-            if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
-			|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
-            {
-                // Skurwysyn kieruje bez prawka lub autem frakcji xD (Xd)
-				if(GetPVarInt(playerid, "AntyCheatOff") == 0)
-				{
-					MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
-					format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
-					SendCommandLogMessage(string);
-					Log(warningLog, INFO, string);
-					Log(punishmentLog, INFO, string);
-					SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
-					KickEx(playerid);
-				}
-            }
-			//AC END CODE
+			ACv2_DrivingWithoutPremissions(playerid, vehicleid);
 		}
         if(!ToggleSpeedo[playerid])
         {

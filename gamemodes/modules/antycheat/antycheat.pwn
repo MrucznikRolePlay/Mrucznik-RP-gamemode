@@ -369,4 +369,27 @@ ACKickMessage(playerid, code)
 	Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: kod %d", GetPlayerLogName(playerid), code);
 }
 
+ACv2_DrivingWithoutPremissions(playerid, vehicleid)
+{
+	new string[256];
+	//ACv2: Kicking players that are trying to drive the car without permission
+	if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
+	|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
+	{
+		// Skurwysyn kieruje bez prawka lub autem frakcji xD (Xd)
+		if(GetPVarInt(playerid, "AntyCheatOff") == 0)
+		{
+			MruDialog(playerid, "ACv2: Kod #2001", "Zosta³eœ wyrzucony za kierowanie samochodem bez wymaganych uprawnieñ");
+			format(string, sizeof string, "ACv2 [#2001]: %s zosta³ wyrzucony za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
+			SendCommandLogMessage(string);
+			Log(warningLog, INFO, string);
+			Log(punishmentLog, INFO, string);
+			SetPlayerVirtualWorld(playerid, playerid+AC_WORLD);
+			KickEx(playerid);
+			return 1;
+		}
+	}
+	return 0;
+}
+
 //end
