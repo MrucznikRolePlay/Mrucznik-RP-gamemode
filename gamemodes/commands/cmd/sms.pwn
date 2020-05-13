@@ -152,6 +152,8 @@ YCMD:sms(playerid, params[], help)
 		format(string, sizeof(string), "* %s wyjmuje telefon i wysy³a wiadomoœæ.", GetNick(playerid));
 		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	    Log(chatLog, INFO, "%s sms do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(checkNumberPlayer), messSMS);
+		SavePlayerSentMessage(playerid, sprintf("%s wys³a³ SMS do %s: %s", GetNick(playerid), GetNick(checkNumberPlayer), messSMS), FROMME);
+		SavePlayerSentMessage(checkNumberPlayer, sprintf("%s otrzyma³ SMS od %s: %s", GetNick(checkNumberPlayer), GetNick(playerid), messSMS), TOME);
 		if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[checkNumberPlayer][pPodPW] == 1) //podgl?d admina
         {
             format(string, sizeof(string), "AdmCmd -> %s(%d) /sms -> %s(%d): %s", GetNick(playerid), playerid, GetNick(checkNumberPlayer), checkNumberPlayer, messSMS);
@@ -167,7 +169,6 @@ YCMD:sms(playerid, params[], help)
 			format(string, sizeof(string), "Wys³ano SMS: %s, Odbiorca: %d.", messSMS, givePlayerNumber);
 		}
 		SendClientMessage(playerid, COLOR_YELLOW, string);
-		SavePlayerSentMessage(playerid, string);
 		//pobór op³at
 		PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 		format(string, sizeof(string), "~r~$-%d", smsCost);
