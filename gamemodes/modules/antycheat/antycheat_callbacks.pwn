@@ -128,7 +128,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			}
 			case ADMIN_WARNING:
 			{
-				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | %s [%d]", 
+				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] prawdopodobnie czituje. | %s [%d]", 
 					GetNickEx(playerid), playerid, ip, NexACDecodeCode(code), code), 
 					0x9ACD32AA);
 				ACWarningDelay(playerid, code);

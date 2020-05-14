@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ supportduty ]----------------------------------------------//
+//--------------------------------------------------[ unbp ]-------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,18 +28,36 @@
 	
 */
 
-YCMD:supportduty(playerid, params[], help)
+YCMD:unbp(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
-    if(GetPVarInt(playerid, "support_duty") == 0)
-    {
-        SetPVarInt(playerid, "support_duty", 1);
-        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jestes teraz na s³u¿bie pomocy nowym graczom.");
-    }
-    else
-    {
-        SetPVarInt(playerid, "support_duty", 0);
-        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Schodzisz ze s³u¿bie pomocy nowym graczom.");
-    }
-    return 1;
+	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+	{
+		new giveplayerid; 
+		if(sscanf(params, "k<fix>", giveplayerid))
+		{
+			sendTipMessage(playerid, "U¿yj /unbp [ID GRACZA]"); 
+			return 1;
+		}
+		if(!IsPlayerConnected(giveplayerid))
+		{
+			sendErrorMessage(playerid, "Nie ma takiego gracza"); 
+			return 1;
+		}
+		new string[128];
+		format(string, sizeof(string), "null");
+		SetPVarString(giveplayerid, "trescOgloszenia", string);			
+		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcjaCzas] = 0;
+		PlayerInfo[giveplayerid][pBP] = 0;
+		KillTimer(komunikatTime[giveplayerid]);
+		format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania.", GetNickEx(playerid));
+		sendTipMessageEx(giveplayerid, COLOR_P@, string);
+		format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s.", GetNickEx(playerid), GetNick(giveplayerid));
+		SendAdminMessage(COLOR_RED, string);
+		
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Brak uprawnieñ"); 
+	}
+	return 1;
 }

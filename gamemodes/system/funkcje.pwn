@@ -28,12 +28,21 @@ SSCANF:fix(string[])
 	return ret;
 }
 
-stock strToUpper(string[]) {
-    new i = 0;
-    while(EOS != string[i]) {
-        if('a' >= string[i] && string[i] <= 'z') string[i] -= 32; 
-        ++i;
+strToUpper(str[])
+{
+	for(new i = 0, n = strlen(str); i <n; i ++)
+    {
+        str[i] = toupper(str[i]);
     }
+    return 1;
+} 
+
+GenString( string[ ] , size = sizeof string )
+{
+    static const Data[ ] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//add more characters if they want to include in string
+    new i;
+    for(i = 0 ; i < size; ++i)
+        string[ i ] = Data[ random( sizeof Data ) ];
 }
 
 stock randomString(strDest[], strLen) // credits go to: RyDeR`
@@ -5340,12 +5349,12 @@ ZaladujDomy()
 	            new message[128];
 	            new SEJF[20];
 				format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
-				if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
+				/*if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
 				{
 					new playernick[26];
     				strmid(playernick, MruMySQL_GetNameFromUID(dini_Int(string, "UID_Wlascicela")), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
 					format(GeT, sizeof(GeT), "%s", playernick);
-				}
+				}*/
     			Dom[i][hID] = i;
     			Dom[i][hDomNr] = dini_Int(string, "DomNr");
     			Dom[i][hZamek] = dini_Int(string, "Zamek");
@@ -8104,6 +8113,8 @@ public OPCLogin(playerid)
 	SafeTime[playerid] = 60*3;//ogarniczenie 3 minuty na logowanie
 	SetPlayerColor(playerid,COLOR_GRAD2);
 
+	LoadingHide(playerid);
+	BottomBar(playerid, 1);
     new result;
     result = MruMySQL_DoesAccountExist(nick);
 	//Sprawdzanie czy konto istnieje:
@@ -8201,8 +8212,6 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
 	PlayerInfo[para1][pJob] = 0;
-	SetTimerEx("AntySB", 5000, 0, "d", para1);
-	AntySpawnBroni[para1] = 5;
 	orgUnInvitePlayer(para1);
 	MedicBill[para1] = 0;
 	if(respawn)
@@ -12618,7 +12627,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				case 41:
 				{
 					//-------<[  Logi  ]>---------
-					format(string, sizeof(string), "AdmWarning: [%d]%s %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
+					format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
 					SendMessageToAdmin(string, COLOR_YELLOW);
 					Log(warningLog, INFO, "%s %s gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
 					SendMessageToAdminEx(string, COLOR_P@, 2);
@@ -12660,7 +12669,6 @@ public DeathAdminWarning(playerid, killerid, reason)
 
 public CuffedAction(playerid, cuffedid)
 {
-	if(PlayerInfo[cuffedid][pInjury] > 0 || PlayerInfo[cuffedid][pBW] > 0) ZdejmijBW(cuffedid, 4000);
 	Kajdanki_JestemSkuty[cuffedid] = 1;
 	Kajdanki_Uzyte[playerid] = 1;
 	Kajdanki_PDkuje[cuffedid] = playerid;
@@ -12694,6 +12702,14 @@ public CuffedAction(playerid, cuffedid)
 	return 1;
 }  to do */
 
+forward TimeUpdater();
+public TimeUpdater()
+{
+    new Hour, Minute;
+	gettime(Hour, Minute);
+    format(realtime_string, 32, "%02d:%02d", Hour, Minute);
+    TextDrawSetString(RealtimeTXD, realtime_string);
+}
 
 //--------------------------------------------------
 

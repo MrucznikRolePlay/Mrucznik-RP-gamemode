@@ -13,7 +13,8 @@ IsDialogProtected(dialogid)
 CheckDialogId(playerid, dialogid)
 {
     if(dialogid < 0) return 0;
-    if(dialogid != iddialog[playerid])
+	if(DEVELOPMENT && IsPlayerAdmin(playerid)) return 1;
+	if(dialogid != iddialog[playerid])
     {
         if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
@@ -1061,11 +1062,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarOpis_Usun(playerid, veh);
 
                 new opis[128];
-                strunpack(opis, CarDesc[veh]);
-                new str[128];
-                WordWrap(opis, true, str);
-
-                CarOpis[veh] = CreateDynamic3DTextLabel(str, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
+                format(opis, sizeof opis, "%s", CarDesc[veh]);
+				ReColor(opis);
+                CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
                 format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
                 SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis pojazdu, by go usun¹æ wpisz {CC3333}/vopis usuñ{CC3333}");
             }
@@ -1095,18 +1094,35 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d³ugosæ opisu.");
             return 1;
         }
-         else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
-		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.') || (inputtext[i] == '!') || (inputtext[i] == ':') || (inputtext[i] == '-') || (inputtext[i] == '{') || (inputtext[i] == '}') || (inputtext[i] == '[') || (inputtext[i] == ']'))
-				continue;
-            else if ((inputtext[i] == 'Ê') || (inputtext[i] == 'Ó') || (inputtext[i] == '¥') || (inputtext[i] == 'Œ') || (inputtext[i] == '£') || (inputtext[i] == '¯') || (inputtext[i] == '') || (inputtext[i] == 'Æ') || (inputtext[i] == 'Ñ') || (inputtext[i] == 'ê') || (inputtext[i] == 'ó') || (inputtext[i] == '¹') || (inputtext[i] == 'œ') || (inputtext[i] == '³') || (inputtext[i] == '¿') || (inputtext[i] == 'Ÿ') || (inputtext[i] == 'æ') || (inputtext[i] == 'ñ'))
-                continue;
-			else return SendClientMessage(playerid, COLOR_GRAD1, "Opis: U¿y³eœ nieodpowiednich znaków opisu.");
+		else
+		{
+			new givenString[128];
+			format(givenString, sizeof(givenString), "%s", inputtext);
+			if(strfind(givenString, "(FF0000)", true) != -1 || strfind(givenString, "(000000)", true) != -1)
+			{
+				SendClientMessage(playerid, COLOR_GRAD1, "Znaleziono niedozwolony kolor.");
+				return 1;
+			}
+			//todo: kolorowe opisy tylko dla KP
+			new startpos, endpos;
+			if(regex_search(givenString, "[^a-zA-Z0-9¹æê³ñóœ¿Ÿ¥ÆÊ£ÑÓŒ¯ |\\/@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
+			{
+				SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[startpos]));
+				return 1;
+			}
 		}
         new veh = GetPlayerVehicleID(playerid);
         strdel(CarDesc[veh], 0, 128 char);
-        strpack(CarDesc[veh], inputtext);
+		strpack(CarDesc[veh], inputtext);
         MruMySQL_UpdateOpis(veh, CarData[VehicleUID[veh][vUID]][c_UID], 2);
-        RunCommand(playerid, "/vopis",  "");
+
+		CarOpis_Usun(playerid, veh);
+		new opis[128];
+		format(opis, sizeof opis, "%s", CarDesc[veh]);
+		ReColor(opis);
+		CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
+		format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
+		SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis pojazdu, by go usun¹æ wpisz {CC3333}/vopis usuñ{CC3333}");
         return 1;
     }
     else if(dialogid == D_PERM)
@@ -2880,7 +2896,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
 								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
 							);
-							PlayerInfo[playerid][pPnumber] = randphone;
+							MRP_SetPlayerPhone(playerid, randphone);
 							return 1;
 						}
 					}

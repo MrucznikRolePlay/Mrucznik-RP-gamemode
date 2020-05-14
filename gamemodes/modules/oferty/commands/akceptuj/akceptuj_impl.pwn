@@ -170,6 +170,14 @@ command_akceptuj_Impl(playerid, x_job[32])
                             SendClientMessage(playerid, COLOR_GREY, " Nie posiadasz wolnego slota.");
                             return 1;
                         }
+            
+                        foreach(new i : Player)
+                        {
+                           if(PlayerInfo[i][pKluczeAuta] == IDAuta[playerid])
+                            {
+                                PlayerInfo[i][pKluczeAuta] = 0;
+                            }
+                        }
                         Car_MakePlayerOwner(playerid, IDAuta[playerid]);
                         Car_RemovePlayerOwner(GraczDajacy[playerid], IDAuta[playerid]);
 
@@ -1172,15 +1180,17 @@ command_akceptuj_Impl(playerid, x_job[32])
                             }
                             GetPlayerHealth(playerid, health);
                             GetPlayerArmour(playerid, Ahealth);
-                            if((health + hp) < 100) 
+                            new actualhp = floatround(health, floatround_tozero);
+                            new actualap = floatround(Ahealth, floatround_tozero);
+                            if((actualhp + hp) < 100) 
                             {
-                                SetPlayerHealth(playerid, health + hp); 
+                                SetPlayerHealth(playerid, actualhp + hp); 
                             }
                             else
                             {
-                                SetPlayerArmour(playerid, Ahealth + hp);  
+                                SetPlayerArmour(playerid, actualap + hp);  
                             }
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP z powodu sexu.", hp));
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP/Pancerza z powodu sexu.", hp));
                             if(random(20) == 1)//5% szans na zara¿enie
                             {
                                 InfectOrDecreaseImmunity(playerid, HIV);

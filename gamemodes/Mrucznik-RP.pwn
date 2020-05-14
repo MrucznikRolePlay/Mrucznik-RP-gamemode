@@ -406,6 +406,7 @@ public OnGameModeInit()
 		SetWorldTime(tmphour);
 		ServerTime = tmphour;
 	}
+	TimeUpdater();
 	//timery
 	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
     SetTimer("MainTimer", 1000, true);
@@ -1081,6 +1082,9 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 public OnPlayerConnect(playerid)
 {
+	BottomBar(playerid, 0);
+	LoadingShow(playerid);
+
 	new GPCI[41];
 	gpci(playerid, GPCI, sizeof(GPCI));
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNickEx(playerid), playerid, GetIp(playerid), GPCI);
@@ -1098,15 +1102,10 @@ public OnPlayerConnect(playerid)
     Usun_Obiekty(playerid); //stare obiekty
     obiekty_OnPlayerConnect(playerid);//nowe obiekty
 	
-
 	LoadTextDraws(playerid);
-    LoadingShow(playerid);
-    LoadingHide(playerid);
 	
 	Command_SetPlayerDisabled(playerid, true);
-	
-	//Actors:
-	SetPVarInt(playerid, "pActorID", 666); 
+	 
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
@@ -2386,10 +2385,10 @@ SetPlayerSpawnPos(playerid)
 	    //Przywracanie do poprzedniego spawnu
 		if(GetPVarInt(playerid, "spawn") == 2)
 		{
+			Wchodzenie(playerid);
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
 			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
-			Wchodzenie(playerid);
 			if(GetPLocal(playerid) == PLOCAL_INNE_BANK || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
 	        {
 				sendTipMessage(playerid, "W banku nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
@@ -4964,7 +4963,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				}
 			}
 			SetPVarInt(playerid, "IsAGetInTheCar", 0); 
-
 			ACv2_DrivingWithoutPremissions(playerid, vehicleid);
 		}
         if(!ToggleSpeedo[playerid])
@@ -6069,7 +6067,7 @@ OnPlayerLogin(playerid, password[])
             }
 			else if(PlayerInfo[playerid][pAdmin] > 0)
 			{
-				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/supportduty");
+				SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Aby widzieæ zg³oszenia z /tickets wpisz {FF0000}/adminduty");
 			}
 
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)
@@ -6358,7 +6356,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		}
 		if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
 		{
-			sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile");
+			sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile.");
 			return 1;
 		}	
 		if(SprawdzWjazdy(playerid))

@@ -42,6 +42,7 @@ YCMD:do(playerid, params[], help)
 	}
     new string[256];
     
+    params[0] = toupper(params[0]);
     if(strlen(params) < 78)
     {
         //format(string, sizeof(string), "* %s %s", GetNick(playerid, true), params);

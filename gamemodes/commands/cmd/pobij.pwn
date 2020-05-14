@@ -45,7 +45,7 @@ YCMD:pobij(playerid, params[], help)
         if(IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969)) return SendClientMessage(playerid, COLOR_GRAD2, "Komenda nie dzia³a w kasynie!");
         if(pobilem[playerid] >= 1)
 		{
-			sendTipMessage(playerid, "Jesteœ ju¿ zmêczony po ostatniej walcê, odpocznij chwilê zanim zaczniesz znowu.", COLOR_GRAD1);
+			sendTipMessage(playerid, "Jesteœ ju¿ zmêczony po ostatniej walce, odpocznij chwilê zanim zaczniesz znowu.", COLOR_GRAD1);
   			pobilem[playerid] = 2;
   			return 1;
 		}

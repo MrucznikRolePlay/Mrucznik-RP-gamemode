@@ -98,7 +98,7 @@
 		> crimereport - report crime's
 		> respp - respawnuje gracza o ID
 		> respcar - respawnuje pojazd o ID
-		> zdejmijbpk - zdejmuje blokadê pisania na chaty frakcyjne dla gracza o ID
+		> unbp - zdejmuje blokadê pisania na chaty frakcyjne dla gracza o ID
 		> dpa - degraduje pó³ admina
 		> BP - nadaje blokadê pisania dla gracza o ID na czas X
 		> kickallex - kickuje wszystkich graczy
@@ -114,7 +114,6 @@
 		> addcar - dodaje pojazd na mapê o podanym ID
 		> removecar - usuwa pojazd z mapy o podanym ID
 		> setac - ustawia anty-cheat'a
-		> supportduty - s³u¿ba supportera
 		> ticket - teleportuje do /zapytaj
 		> ticketend - przywraca star¹ pozycjê
 		> stworz - tworzy organizacje, pojazd, rangê (wymaga uprawnieñ)
@@ -574,7 +573,7 @@ SetPlayerPAdminJail(player[], adminid, timeVal, result[])
 	new nickOdbieracza[MAX_PLAYER_NAME];
 	strcat(nickOdbieracza, player); 
 	new string[256];
-	format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nickOdbieracza, timeVal, GetNickEx(adminid), (result));
+	format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o AJ na %d min od %s, Powod: %s", nickOdbieracza, timeVal, GetNickEx(adminid), (result));
 	SendMessageToAdmin(string, COLOR_RED); 
 	
 	Log(punishmentLog, INFO, "Admin %s ukara³ offline %s kar¹ AJ %d minut, powód: %s", 
@@ -613,7 +612,7 @@ SetPlayerAdminJail(playerid, adminid, timeVal, result[])
 	PlayerInfo[playerid][pMuted] = 1;
 	SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
 	poscig[playerid] = 0;
-	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d powod: %s", GetNick(playerid), GetNickEx(adminid), timeVal, (result)); 
+	format(string, sizeof(string), "%s zostal uwieziony w AJ przez %s na %d min, powód: %s", GetNick(playerid), GetNickEx(adminid), timeVal, (result)); 
 	SendMessageToAdmin(string, COLOR_RED); 
 	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ AJ %d minut, powód: %s", 
 		GetPlayerLogName(adminid),
