@@ -83,10 +83,7 @@ YCMD:goto(playerid, params[], help)
 				else if(plocz > 530.0) //the highest land point in sa = 526.8
 				{
 					PlayerInfo[playerid][pInt] = 1;
-				}
-
-				sendTipMessage(playerid, "Teleportowa³eœ siê pomyœlnie!");
-				
+				}			
 			}
 			else
 			{

@@ -87,7 +87,6 @@ YCMD:gethere(playerid, params[], help)
 				}
 
 				sendTipMessageEx(plo, COLOR_GRAD1, "Zosta³eœ teleportowany");
-				sendTipMessage(playerid, "Teleportowales gracza do siebie!");
 				if(GetPlayerAdminDutyStatus(playerid) == 1)
 				{
 					iloscInne[playerid] = iloscInne[playerid]+1;
