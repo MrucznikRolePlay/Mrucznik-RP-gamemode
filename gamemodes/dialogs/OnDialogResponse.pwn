@@ -13,7 +13,6 @@ IsDialogProtected(dialogid)
 CheckDialogId(playerid, dialogid)
 {
     if(dialogid < 0) return 0;
-	if(DEVELOPMENT && IsPlayerAdmin(playerid)) return 1;
 	if(dialogid != iddialog[playerid])
     {
         if(dialogid > 10000 && dialogid < 10100) return 0;
