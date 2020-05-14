@@ -8114,7 +8114,7 @@ public OPCLogin(playerid)
 	SetPlayerColor(playerid,COLOR_GRAD2);
 
 	LoadingHide(playerid);
-	BottomBar(playerid, 0);
+	BottomBar(playerid, 1);
     new result;
     result = MruMySQL_DoesAccountExist(nick);
 	//Sprawdzanie czy konto istnieje:
