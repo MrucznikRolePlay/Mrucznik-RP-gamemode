@@ -12,7 +12,8 @@ IsDialogProtected(dialogid)
 
 CheckDialogId(playerid, dialogid)
 {
-    if(dialogid < 0 || (IsPlayerAdmin(playerid) && DEVELOPMENT)) return 0;
+    if(dialogid < 0) return 0;
+	if(DEVELOPMENT && IsPlayerAdmin(playerid)) return 1;
 	if(dialogid != iddialog[playerid])
     {
         if(dialogid > 10000 && dialogid < 10100) return 0;
@@ -1103,23 +1104,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 			//todo: kolorowe opisy tylko dla KP
-			petla(i, strlen(givenString))
+			new startpos, endpos;
+			if(regex_search(givenString, "[^a-zA-Z0-9¹æê³ñóœ¿Ÿ¥ÆÊ£ÑÓŒ¯ |\\/@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
 			{
-				givenString[i] = tolower(givenString[i]);
-				if(givenString[i] == '{' || givenString[i] == '}' || (givenString[i] != 'q' && givenString[i] != 'w' && givenString[i] != 'e' && givenString[i] != 'r' && givenString[i] != 't' && givenString[i] != 'y' && givenString[i] != 'u'
-				&& givenString[i] != 'i' && givenString[i] != 'o' && givenString[i] != 'p' && givenString[i] != 'a' && givenString[i] != 's' && givenString[i] != 'd' && givenString[i] != 'f'
-				&& givenString[i] != 'g' && givenString[i] != 'h' && givenString[i] != 'j' && givenString[i] != 'k' && givenString[i] != 'l' && givenString[i] != 'z' && givenString[i] != 'x'
-				&& givenString[i] != 'c' && givenString[i] != 'v' && givenString[i] != 'b' && givenString[i] != 'n' && givenString[i] != 'm' && givenString[i] != ',' && givenString[i] != '.'
-				&& givenString[i] != '!' && givenString[i] != '?' && givenString[i] != 'ê' && givenString[i] != 'ó' && givenString[i] != '¹' && givenString[i] != 'œ' && givenString[i] != '³'
-				&& givenString[i] != '¿' && givenString[i] != 'Ÿ' && givenString[i] != 'æ' && givenString[i] != 'ñ' && givenString[i] != 'Ê' && givenString[i] != 'Ó' && givenString[i] != '¥'
-				&& givenString[i] != 'Œ' && givenString[i] != '£' && givenString[i] != '¯' && givenString[i] != '' && givenString[i] != 'Æ' && givenString[i] != 'Ñ' && givenString[i] != ' '
-				&& givenString[i] != '1' && givenString[i] != '2' && givenString[i] != '3' && givenString[i] != '4' && givenString[i] != '5' && givenString[i] != '6' && givenString[i] != '7'
-				&& givenString[i] != '8' && givenString[i] != '9' && givenString[i] != '-' && givenString[i] != '0' && givenString[i] != '|' && givenString[i] != '/' && givenString[i] != '@' 
-				&& givenString[i] != '(' && givenString[i] != ')' && givenString[i] != '[' && givenString[i] != ']' && givenString[i] != ':' && givenString[i] != ';'))
-				{
-					SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[i]));
-					return 1;
-				}
+				SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[startpos]));
+				return 1;
 			}
 		}
         new veh = GetPlayerVehicleID(playerid);
@@ -2907,7 +2896,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
 								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
 							);
-							CallRemoteFunction("MRP_SetPlayerPhone", "dd", playerid, randphone);
+							MRP_SetPlayerPhone(playerid, randphone);
 							return 1;
 						}
 					}

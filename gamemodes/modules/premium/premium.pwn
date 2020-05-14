@@ -345,7 +345,7 @@ KupNumerTelefonu(playerid, string:_numer[])
 		}
 
 		ZabierzMC(playerid, cena);
-		CallRemoteFunction("MRP_SetPlayerPhone", "dd", playerid, numer);
+		MRP_SetPlayerPhone(playerid, numer);
 
 		_MruAdmin(playerid, sprintf("Twój nowy numer telefonu: %d.", numer));
 		Log(premiumLog, INFO, "%s kupil numer telefonu %d za %dMC.",
