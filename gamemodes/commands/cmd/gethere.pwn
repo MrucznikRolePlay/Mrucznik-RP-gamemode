@@ -40,39 +40,58 @@ YCMD:gethere(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /tm [playerid/CzêœæNicku]");
 			return 1;
 		}
-		new Float:X,Float:Y,Float:Z;
+		new Float:plocx,Float:plocy,Float:plocz;
 
 
 		if(plo != INVALID_PLAYER_ID)
 		{
 			if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 			{
-				GetPlayerPos(playerid, X, Y, Z);
+				GetPlayerPos(playerid, plocx, plocy, plocz);
 				if(IsPlayerInAnyVehicle(plo))
 				{
-					SetPlayerVirtualWorld(plo, GetPlayerVirtualWorld(playerid));
-					SetPlayerInterior(plo, GetPlayerInterior(playerid));
-					LinkVehicleToInterior(GetPlayerVehicleID(playerid), GetPlayerInterior(playerid));
-					SetPlayerPos(plo, X+1, Y+1, Z+1.3);
-					SetVehiclePos(GetPlayerVehicleID(plo), X+1, Y+1, Z+1.3);
-					PutPlayerInVehicle(plo, GetPlayerVehicleID(plo), GetPlayerVehicleSeat(plo));
+					if(PlayerInfo[playerid][pInt] == 0)
+					{
+						if(plocz > 930.0)
+						{
+							PlayerInfo[plo][pInt] = 1;
+							SetPlayerInterior(plo, 1);
+						}
+						else
+						{
+							SetPlayerInterior(plo,0);
+						}
+					}
+					if (GetPlayerState(plo) == 2)
+					{
+						new tmpcar = GetPlayerVehicleID(plo);
+						SetVehiclePos(tmpcar, plocx, plocy+4, plocz);
+					}
+					else
+					{
+						SetPlayerPos(plo,plocx,plocy+2, plocz);
+					}
 				}
 				else
 				{
-					SetPlayerVirtualWorld(plo, GetPlayerVirtualWorld(playerid));
-					SetPlayerInterior(plo, GetPlayerInterior(playerid));
-					SetPlayerPos(plo, X+1, Y+1, Z+1.3);
+					SetPlayerPos(plo, plocx+1, plocy+1, plocz+1.3);
 				}
+				SetPlayerVirtualWorld(plo, GetPlayerVirtualWorld(playerid));
+				SetPlayerInterior(plo, GetPlayerInterior(playerid));
+
 				if(PlayerInfo[playerid][pInt] > 0)
 				{
+					SetPlayerInterior(plo,PlayerInfo[playerid][pInt]);
 					PlayerInfo[plo][pInt] = PlayerInfo[playerid][pInt];
 					PlayerInfo[plo][pLocal] = PlayerInfo[playerid][pLocal];
 				}
-				sendTipMessage(playerid, "Teleportowales gracza do siebie!");
+
+				sendTipMessageEx(plo, COLOR_GRAD1, "Zosta³eœ teleportowany");
 				if(GetPlayerAdminDutyStatus(playerid) == 1)
 				{
 					iloscInne[playerid] = iloscInne[playerid]+1;
 				}
+
 			}
 			else
 			{

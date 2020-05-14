@@ -177,6 +177,7 @@ PlayerChangeWeaponOnInjury(playerid)
 }
 ZespawnujGraczaBW(playerid)
 {
+	Wchodzenie(playerid);
 	new string[256], type[144];
 	MedicBill[playerid] = 0;
 	MedicTime[playerid] = 0;
@@ -210,7 +211,7 @@ RannyTimer(playerid)
 	if(PlayerInfo[i][pInjury] > 0)
 	{
 		//SendClientMessageToAll(COLOR_GRAD2, "------Timer: RannyTimer");
-		ApplyAnimation(i, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+		if(GetPlayerState(i) != PLAYER_STATE_PASSENGER) ApplyAnimation(i, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 		PlayerInfo[i][pInjury]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Ranny: %d", PlayerInfo[i][pInjury]);
 		GameTextForPlayer(i, string, 2500, 3);
@@ -240,7 +241,7 @@ BWTimer(playerid)
 	if(PlayerInfo[playerid][pBW] > 0)
 	{
 		//SendClientMessageToAll(COLOR_GRAD2, "------Timer: BWTimer");
-		ApplyAnimation(i, "CRACK", "crckidle1", 4.0, 1, 0, 0, 1, 0, 1);
+		if(GetPlayerState(i) != PLAYER_STATE_PASSENGER) ApplyAnimation(i, "CRACK", "crckidle1", 4.0, 1, 0, 0, 1, 0, 1);
 		PlayerInfo[i][pBW]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Nieprzytomny: %d", PlayerInfo[i][pBW]);
 		GameTextForPlayer(i, string, 2500, 3);

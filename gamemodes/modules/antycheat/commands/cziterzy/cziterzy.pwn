@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ zdejmijbpk ]----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  cziterzy                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,48 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "cziterzy_impl.pwn"
 
-YCMD:zdejmijbpk(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_cziterzy()
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
-	{
-		new giveplayerid; 
-		if(sscanf(params, "k<fix>", giveplayerid))
-		{
-			sendTipMessage(playerid, "U¿yj /unbp [ID GRACZA]"); 
-			return 1;
-		}
-		if(!IsPlayerConnected(giveplayerid))
-		{
-			sendErrorMessage(playerid, "Nie ma takiego gracza"); 
-			return 1;
-		}
-		new string[128];
-		format(string, sizeof(string), "null");
-		SetPVarString(giveplayerid, "trescOgloszenia", string);			
-		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcjaCzas] = 0;
-		PlayerInfo[giveplayerid][pBP] = 0;
-		KillTimer(komunikatTime[giveplayerid]);
-		format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania.", GetNickEx(playerid));
-		sendTipMessageEx(giveplayerid, COLOR_P@, string);
-		format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s.", GetNickEx(playerid), GetNick(giveplayerid));
-		SendAdminMessage(COLOR_RED, string);
-		
-	}
-	else
-	{
-		sendErrorMessage(playerid, "Brak uprawnieñ"); 
-	}
-	return 1;
+    new command = Command_GetID("cziterzy");
+
+    //aliases
+    Command_AddAlt(command, "cheaters");
+    Command_AddAlt(command, "czity");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:cziterzy(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla listê potencjalnych cziterów.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_cziterzy_Impl(playerid);
 }

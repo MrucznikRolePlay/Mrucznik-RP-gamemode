@@ -49,8 +49,18 @@ YCMD:wezportfel(playerid, params[], help)
 			{
 				if(ProxDetectorS(8.0, playerid, giveplayerid))
 				{
+					if(Kajdanki_JestemSkuty[playerid] ||
+						PlayerTied[playerid] || 
+						PlayerInfo[playerid][pBW] ||
+						PlayerInfo[playerid][pInjury]
+					)
+					{
+						sendTipMessage(playerid, "Jesteœ zakuty, ranny lub pobity, nie mo¿esz okradaæ w tym stanie.");
+						return 1;
+					}
+
 					new pieniadze = 1000000;
-					if(giveplayerid == playerid) { sendErrorMessage(playerid, "Nie mo¿esz zwi¹zaæ sam siebie!"); return 1; }
+					if(giveplayerid == playerid) { sendErrorMessage(playerid, "Nie mo¿esz okraœæ sam siebie!"); return 1; }
 					if(okradziony[giveplayerid] == 0)
 					{
 						if(kaska[giveplayerid] >= 1)

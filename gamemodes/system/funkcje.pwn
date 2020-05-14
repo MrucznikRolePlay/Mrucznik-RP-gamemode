@@ -28,12 +28,21 @@ SSCANF:fix(string[])
 	return ret;
 }
 
-stock strToUpper(string[]) {
-    new i = 0;
-    while(EOS != string[i]) {
-        if('a' >= string[i] && string[i] <= 'z') string[i] -= 32; 
-        ++i;
+strToUpper(str[])
+{
+	for(new i = 0, n = strlen(str); i <n; i ++)
+    {
+        str[i] = toupper(str[i]);
     }
+    return 1;
+} 
+
+GenString( string[ ] , size = sizeof string )
+{
+    static const Data[ ] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//add more characters if they want to include in string
+    new i;
+    for(i = 0 ; i < size; ++i)
+        string[ i ] = Data[ random( sizeof Data ) ];
 }
 
 stock randomString(strDest[], strLen) // credits go to: RyDeR`
@@ -324,19 +333,6 @@ PDTuneInfernus(vehicleid)
     SetDynamicObjectMaterialText(hsiu_text2, 0, " SAPD", OBJECT_MATERIAL_SIZE_256x128, "Arial", 74, 1, 0xFFFFFFFF, 0, 1);
     AttachDynamicObjectToVehicle(hsiu_text, vehicleid, -1.1012001,0.0907000,-0.150000,0.0000000,0.0000000,271.5000000);
     AttachDynamicObjectToVehicle(hsiu_text2, vehicleid, 1.1013298,0.0907000,-0.150000,0.0000000,0.0000000,88.7496338);
-}
-forward OznaczCzitera(playerid);
-public OznaczCzitera(playerid)
-{
-	new string[71+MAX_PLAYER_NAME];
-	SetPVarInt(playerid, "AC_oznaczony", 1);
-	if(gettime() > GetPVarInt(playerid, "lastSobMsg"))
-	{
-		SetPVarInt(playerid, "lastSobMsg", gettime() + 60);
-		format(string, sizeof(string), "%s[%d] jest podejrzany o S0beita", GetNick(playerid), playerid);
-		SendAdminMessage(COLOR_PANICRED, string);
-	}
-	return 1;
 }
 
 /*GetFreeVehicleSeat(vehicleid)
@@ -1627,11 +1623,6 @@ stock IsVehicleInRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
     return 0;
 } 
 
-SetAntyCheatForPlayer(playerid, valueCode)
-{
-	SetPVarInt(playerid, "AntyCheatOff", valueCode);
-	return 1;
-}
 stock GetNickEx(playerid, withmask = false)
 {
 	new nick[MAX_PLAYER_NAME];
@@ -5358,12 +5349,12 @@ ZaladujDomy()
 	            new message[128];
 	            new SEJF[20];
 				format(GeT, sizeof(GeT), "%s", dini_Get(string, "Wlasciciel"));
-				if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
+				/*if(strfind(GeT, "Zamaskowany", true) != -1) //chwilowy fix, po u¿yciu na produkcji wyrzuciæ
 				{
 					new playernick[26];
     				strmid(playernick, MruMySQL_GetNameFromUID(dini_Int(string, "UID_Wlascicela")), 0, MAX_PLAYER_NAME, MAX_PLAYER_NAME);
 					format(GeT, sizeof(GeT), "%s", playernick);
-				}
+				}*/
     			Dom[i][hID] = i;
     			Dom[i][hDomNr] = dini_Int(string, "DomNr");
     			Dom[i][hZamek] = dini_Int(string, "Zamek");
@@ -8122,6 +8113,8 @@ public OPCLogin(playerid)
 	SafeTime[playerid] = 60*3;//ogarniczenie 3 minuty na logowanie
 	SetPlayerColor(playerid,COLOR_GRAD2);
 
+	LoadingHide(playerid);
+	BottomBar(playerid, 1);
     new result;
     result = MruMySQL_DoesAccountExist(nick);
 	//Sprawdzanie czy konto istnieje:
@@ -8204,9 +8197,8 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	new sendername[MAX_PLAYER_NAME];
 	if(PlayerInfo[para1][pLider] > 0 && PlayerInfo[para1][pLiderValue] == 1)
 	{
-		format(string, sizeof(string), "%s jest g³ównym liderem organizacji - czy chcesz zwolniæ\nWSZYSTKICH liderów z organizacji?\n(Zabierze VLD)", GetNick(para1));
 		SetPVarInt(playerid, "ID_LIDERA", para1);  
-		ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", string, "Tak", "Nie"); 
+		ShowPlayerDialogEx(playerid, DIALOG_UNFRAKCJA, DIALOG_STYLE_MSGBOX, "Mrucznik Role Play", sprintf("%s jest g³ównym liderem organizacji.\nCzy chcesz zwolniæ WSZYSTKICH liderów z organizacji?\n(Zabierze VLD)", GetNick(para1)), "Tak", "Nie"); 
 		return 1;
 	}
 	GetPlayerName(para1, giveplayer, sizeof(giveplayer));
@@ -8219,8 +8211,6 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
 	PlayerInfo[para1][pJob] = 0;
-	SetTimerEx("AntySB", 5000, 0, "d", para1);
-	AntySpawnBroni[para1] = 5;
 	orgUnInvitePlayer(para1);
 	MedicBill[para1] = 0;
 	if(respawn)
@@ -11990,36 +11980,6 @@ SetPlayerInteriorEx(playerid, int)
 	return 1;
 }
 
-IsProblematicCode(code)
-{
-	if(code == 0 //0 Anti-AirBreak (onfoot)
-	|| code == 2 //2 Anti-teleport hack (onfoot)
-	|| code == 5 //5 Anti-teleport hack (vehicle to player)
-	|| code == 6 //6 Anti-teleport hack (pickups)
-	|| code == 8 //8 Anti-FlyHack (in vehicle)
-	|| code == 9 // 9 Anti-Slapper/FlyHack
-	|| code == 11 //11 Anti-Health hack (in vehicle)
-	|| code == 15 //15 Anti-Weapon hack
-	|| code == 18 //18 Anti-Special actions hack
-	|| code == 21 //21 Anti-Invisible hack
-	|| code == 26 //26 Anti-Rapid fire
-	|| code == 27 //27 Anti-FakeSpawn
-	|| code == 30 //30 Anti-CJ run
-	|| code == 33 //33 Anti-UnFreeze
-	|| code == 40 //40 Protection from the sandbox
-	|| code == 49 //49 Anti-flood callback functions
-	|| code == 50 //50 Anti-flood change seat
-	|| code == 52 //52 Anti-NOP's
-	)
-	{
-		return 1;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
 WeaponAC(playerid)
 {	
 	new weapons[13][2];
@@ -12666,7 +12626,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 				case 41:
 				{
 					//-------<[  Logi  ]>---------
-					format(string, sizeof(string), "AdmWarning: [%d]%s %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
+					format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] ze spreya!", killername, killerid, bwreason, GetNick(playerid), playerid);
 					SendMessageToAdmin(string, COLOR_YELLOW);
 					Log(warningLog, INFO, "%s %s gracza %s u¿ywaj¹c spray'a", GetPlayerLogName(killerid), bwreason, GetPlayerLogName(playerid));
 					SendMessageToAdminEx(string, COLOR_P@, 2);
@@ -12708,7 +12668,6 @@ public DeathAdminWarning(playerid, killerid, reason)
 
 public CuffedAction(playerid, cuffedid)
 {
-	if(PlayerInfo[cuffedid][pInjury] > 0 || PlayerInfo[cuffedid][pBW] > 0) ZdejmijBW(cuffedid, 4000);
 	Kajdanki_JestemSkuty[cuffedid] = 1;
 	Kajdanki_Uzyte[playerid] = 1;
 	Kajdanki_PDkuje[cuffedid] = playerid;
@@ -12742,6 +12701,14 @@ public CuffedAction(playerid, cuffedid)
 	return 1;
 }  to do */
 
+forward TimeUpdater();
+public TimeUpdater()
+{
+    new Hour, Minute;
+	gettime(Hour, Minute);
+    format(realtime_string, 32, "%02d:%02d", Hour, Minute);
+    TextDrawSetString(RealtimeTXD, realtime_string);
+}
 
 //--------------------------------------------------
 

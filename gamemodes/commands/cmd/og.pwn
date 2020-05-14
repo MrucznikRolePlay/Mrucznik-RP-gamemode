@@ -46,6 +46,11 @@ YCMD:og(playerid, params[], help)
 			format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
 			return SendClientMessage(playerid, TEAM_CYAN_COLOR, string);
 		}
+		else if(PhoneOnline[playerid] == 1)
+		{
+			sendTipMessage(playerid, "Twój telefon jest wy³¹czony! W³¹cz go za pomoc¹ /togtel");
+			return 1;
+		}
 		else if ((!adds) && (!IsPlayerPremiumOld(playerid)) && PlayerInfo[playerid][pAdmin] < 10)
 		{
 			format(string, sizeof(string), "Spróbuj póŸniej, %d sekund miêdzy og³oszeniami !",  (addtimer/1000));
@@ -61,7 +66,7 @@ YCMD:og(playerid, params[], help)
 			}
 			ZabierzKase(playerid, payout);
 			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d", params, PlayerInfo[playerid][pPnumber]);
-			format(admstring, sizeof(admstring), "Og³oszenie: %s, Kontakt: %s Tel: %d", params, GetNick(playerid), PlayerInfo[playerid][pPnumber]);
+			format(admstring, sizeof(admstring), "Og³oszenie: %s, Kontakt: %d [%s]", params, PlayerInfo[playerid][pPnumber], GetNick(playerid));
 			foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))

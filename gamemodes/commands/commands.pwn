@@ -89,7 +89,6 @@
 #include "cmd/cwarsztat.pwn"
 #include "cmd/cygaro.pwn"
 #include "cmd/czas.pwn"
-#include "cmd/cziterzy.pwn"
 #include "cmd/czyjtonumer.pwn"
 #include "cmd/czysc.pwn"
 #include "cmd/dajdowozu.pwn"
@@ -399,7 +398,6 @@
 #include "cmd/sejfpomoc.pwn"
 #include "cmd/sejfrodzina.pwn"
 #include "cmd/selldom.pwn"
-#include "cmd/setac.pwn"
 #include "cmd/setarmor.pwn"
 #include "cmd/setcarhp.pwn"
 #include "cmd/setcarint.pwn"
@@ -462,7 +460,6 @@
 #include "cmd/stworzdom.pwn"
 #include "cmd/stworzobiekty.pwn"
 #include "cmd/stworztrase.pwn"
-#include "cmd/supportduty.pwn"
 #include "cmd/swat.pwn"
 #include "cmd/swiadek.pwn"
 #include "cmd/szept.pwn"
@@ -508,6 +505,7 @@
 #include "cmd/uid.pwn"
 #include "cmd/ulepsz.pwn"
 #include "cmd/unblock.pwn"
+#include "cmd/unbp.pwn"
 #include "cmd/unbw.pwn"
 #include "cmd/undemorgan.pwn"
 #include "cmd/unfrakcja.pwn"
@@ -609,7 +607,6 @@
 #include "cmd/zbijwl.pwn"
 #include "cmd/zbrojuj.pwn"
 #include "cmd/zd.pwn"
-#include "cmd/zdejmijbpk.pwn"
 #include "cmd/zdejmijkevlar.pwn"
 #include "cmd/zderzaki.pwn"
 #include "cmd/zdmv.pwn"
@@ -1450,9 +1447,6 @@ static Aliases()
 	//respawncar
 	Command_AddAltNamed("respawncar", "respcar");
 
-	//cziterzy
-	Command_AddAltNamed("cziterzy", "czity");
-
 	//ustawmistrz
 	Command_AddAltNamed("ustawmistrz", "setchamp");
 	Command_AddAltNamed("ustawmistrz", "setmistrz");
@@ -1460,9 +1454,8 @@ static Aliases()
 	//zaufanyggracz
 	Command_AddAltNamed("zaufanyggracz", "zg");
 
-	//zdejmijbpk
-	Command_AddAltNamed("zdejmijbpk", "zdejmijbp");
-	Command_AddAltNamed("zdejmijbpk", "unbp");
+	//unbp
+	Command_AddAltNamed("unbp", "zdejmijbp");
 
 	//wyloguj
 	Command_AddAltNamed("wyloguj", "logout");

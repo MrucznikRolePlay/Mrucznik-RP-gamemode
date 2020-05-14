@@ -36,7 +36,7 @@ YCMD:adminduty(playerid, params[], help)
 		{
 			if(OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1)
 			{
-				sendErrorMessage(playerid, "Nie w³¹czyæ s³u¿by gdy jesteœ na s³u¿bie IC!"); 
+				sendErrorMessage(playerid, "Jesteœ na s³u¿bie IC, graj IC!");  
 				return 1;
 			}
 
