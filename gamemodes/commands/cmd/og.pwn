@@ -66,7 +66,7 @@ YCMD:og(playerid, params[], help)
 			}
 			ZabierzKase(playerid, payout);
 			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d", params, PlayerInfo[playerid][pPnumber]);
-			format(admstring, sizeof(admstring), "Og³oszenie: %s, Kontakt: %s Tel: %d", params, GetNick(playerid), PlayerInfo[playerid][pPnumber]);
+			format(admstring, sizeof(admstring), "Og³oszenie: %s, Kontakt: %d [%s]", params, PlayerInfo[playerid][pPnumber], GetNick(playerid));
 			foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))

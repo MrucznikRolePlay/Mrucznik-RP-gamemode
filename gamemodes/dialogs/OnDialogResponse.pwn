@@ -1061,8 +1061,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarOpis_Usun(playerid, veh);
 
                 new opis[128];
-                strunpack(opis, CarDesc[veh]);
-
+                format(opis, sizeof opis, "%s", CarDesc[veh]);
 				ReColor(opis);
                 CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
                 format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
@@ -1125,9 +1124,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
         new veh = GetPlayerVehicleID(playerid);
         strdel(CarDesc[veh], 0, 128 char);
-        strpack(CarDesc[veh], inputtext);
+		strpack(CarDesc[veh], inputtext);
         MruMySQL_UpdateOpis(veh, CarData[VehicleUID[veh][vUID]][c_UID], 2);
-        RunCommand(playerid, "/vopis",  "");
+
+		CarOpis_Usun(playerid, veh);
+		new opis[128];
+		format(opis, sizeof opis, "%s", CarDesc[veh]);
+		ReColor(opis);
+		CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
+		format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
+		SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis pojazdu, by go usun¹æ wpisz {CC3333}/vopis usuñ{CC3333}");
         return 1;
     }
     else if(dialogid == D_PERM)

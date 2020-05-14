@@ -113,7 +113,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 	}
 	for(new i=0;i<MAX_ORG;i++)
     {
-		if(channel == g_FracChannel[i] && IsBot == false) 
+		if(channel == g_OrgChannel[i] && IsBot == false) 
 		{
 			new user_name[32 + 1],str[128],dest[128];
 			DCC_GetUserName(author, user_name);

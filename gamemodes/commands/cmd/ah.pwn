@@ -66,7 +66,7 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /check /pojazdygracza /sb /pokazcb /checktank");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /carjump /to /up /getcar /gethere");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogodaall");
-        SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis [ID] /respawnplayer /respawncar /unbw");
+        SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis /respawnplayer /respawncar /unbw");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setcarint /czyjtonumer /checkbw /diagnoza");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /unbp /tod /agraffiti /banip /uid /cziterzy /unmark");
 	}

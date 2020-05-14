@@ -35,13 +35,6 @@ YCMD:wejdz(playerid, params[], help)
         if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
 		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
 
-        if(AntySpam[playerid] == 1)
-        {
-            sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
-            return 1;
-        }
-        SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-        AntySpam[playerid] = 1;
 //======================================================================
 //=================[Przeniesione - na nowy system]======================
 //======================================================================

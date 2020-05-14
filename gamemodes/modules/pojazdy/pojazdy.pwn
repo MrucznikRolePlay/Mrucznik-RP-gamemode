@@ -217,6 +217,9 @@ Car_MakePlayerOwner(playerid, uid)
     CarData[uid][c_OwnerType] = CAR_OWNER_PLAYER;
     CarData[uid][c_Owner] = PlayerInfo[playerid][pUID];
     CarData[uid][c_Keys] = 0;
+    new lStr[256]; 
+    format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `KluczykiDoAuta`='0' WHERE `KluczykiDoAuta`='%d'", IDAuta[playerid]);
+    mysql_query(lStr);
     Car_Save(uid, CAR_SAVE_OWNER);
     return 1;
 }
