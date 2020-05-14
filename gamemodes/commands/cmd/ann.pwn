@@ -30,7 +30,7 @@
 
 YCMD:ann(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pAdmin] > 900 || IsAScripter(playerid))
+	if(PlayerInfo[playerid][pAdmin] > 5)
 	{
 		new string[128];
 		if(isnull(params))
