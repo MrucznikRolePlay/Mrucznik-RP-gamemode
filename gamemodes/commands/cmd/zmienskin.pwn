@@ -38,10 +38,9 @@ YCMD:zmienskin(playerid, params[], help)
             {
                 if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
                 {
-                    sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile");
+                    sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile. Nie mo¿esz znajdowaæ siê w pojeŸdzie.");
                     return 1;
                 }
-                SetPVarInt(playerid, "CheatDetected", 1);
                 ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
             } 
             else if(IsAHA(playerid))

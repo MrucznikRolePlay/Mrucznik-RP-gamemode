@@ -47,8 +47,8 @@ command_destroyconvoyactor_Impl(playerid, actor)
         return 1;
     }
 
-    new err = DestroyConvoyActor(actorid);
-    if(err == -1) {
+    new error = DestroyConvoyActor(actorid);
+    if(error == -1) {
         sendErrorMessage(playerid, "Nie uda³o siê usun¹æ aktora");
         return 1;
     }

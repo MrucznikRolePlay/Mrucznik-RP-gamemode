@@ -1,37 +1,6 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
-forward CheckCode2003(killerid, playerid);
-public CheckCode2003(killerid, playerid)
-{
-    new string[256];
-    if(IsPlayerConnected(playerid))
-	{
-    	MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNickEx(killerid));
-    	SendCommandLogMessage(string);
-    	KickEx(killerid);
-		Log(warningLog, INFO, string);
-		Log(punishmentLog, INFO, string);
-	}
-	else
-	{
-	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNickEx(killerid));
-    	SendCommandLogMessage(string);
-		Log(warningLog, INFO, string);
-	}
-}
-forward AntyCheatON(playerid);
-public AntyCheatON(playerid)
-{
-	timeAC[playerid]++; 
-	if(timeAC[playerid] >= 3)
-	{
-		SetAntyCheatForPlayer(playerid, 0);
-		timeAC[playerid] = 0; 
-		KillTimer(timerAC[playerid]); 
-	}
-}
 forward SpecToggle(playerid);
 public SpecToggle(playerid)
 {
@@ -984,6 +953,7 @@ public MainTimer()
     {
 		PlayersCheckerMinute();
         SyncUp();
+		TimeUpdater();
     }
     if(TICKS_5Min == (60*5)-1)
     {

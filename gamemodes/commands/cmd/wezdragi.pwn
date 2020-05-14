@@ -67,7 +67,7 @@ YCMD:wezdragi(playerid, params[], help)
 			//choroba
 			if(random(50) == 1)//2%
 			{
-				InfectPlayer(playerid, SCHIZOFRENIA);
+				InfectOrDecreaseImmunity(playerid, SCHIZOFRENIA);
 			}
 			
 			//System si³y

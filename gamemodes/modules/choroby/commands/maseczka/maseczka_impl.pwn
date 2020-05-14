@@ -69,7 +69,7 @@ maseczka_akceptuj(playerid)
     Log(payLog, INFO, "%s zap³aci³ %s $%d za maseczke", 
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), price
     );
-    PlayerImmunity[giveplayerid] = 15;
+    SetPlayerImmunity(giveplayerid, MAX_PLAYER_IMMUNITY);
     SetPVarInt(playerid, "maseczka", 1);
     new index = AttachPlayerItem(playerid, 18919, 2, -0.07, 0.0, 0.0, 85.0, 170.0, 86.0, 1.000000, 1.000000, 1.000000 );//bandana
     EditAttachedObject(playerid, index);

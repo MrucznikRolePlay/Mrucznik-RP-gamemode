@@ -32,10 +32,10 @@ YCMD:czyjtonumer(playerid, params[], help)
 {
 	if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
 	{
-		new number, offline, string[128];
-		if( sscanf(params, "dD(0)", number, offline))
+		new number, string[128];
+		if( sscanf(params, "dD(0)", number))
 		{
-			sendTipMessage(playerid, "U¿yj /czyjtonumer [numer] (0 - gracze online, 1 - wszystkie konta)");
+			sendTipMessage(playerid, "U¿yj /czyjtonumer [numer]");
 			sendTipMessage(playerid, "FUNKCJA: Pokazuje do kogo nale¿y numer telefonu.");
 			return 1;
 		}
@@ -54,23 +54,10 @@ YCMD:czyjtonumer(playerid, params[], help)
 			return 1;
 		}
 		
-		if(offline)
-		{
-			format(string, sizeof(string), "Osoby z numerem %d:", number);
-			SendClientMessage(playerid, COLOR_WHITE, string);
-			
-			MruMySQL_CzyjToNumer(playerid, number);
-		}
-		else
-		{
-			foreach(new i : Player)
-			{
-				if(PlayerInfo[i][pPnumber] == number)
-				{
-					SendClientMessage(playerid, COLOR_WHITE, GetNick(i));
-				}
-			}
-		}
+		format(string, sizeof(string), "Osoby z numerem %d:", number);
+		SendClientMessage(playerid, COLOR_WHITE, string);
+		
+		MruMySQL_CzyjToNumer(playerid, number);
 	}
 	else
 	{

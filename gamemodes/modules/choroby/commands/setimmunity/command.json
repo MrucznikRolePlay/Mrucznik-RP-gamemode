@@ -1,0 +1,24 @@
+{
+    "name": "setimmunity",
+    "description": "Ustawia odpornoœæ gracza.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "ustawodpornosc"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "immunity",
+            "description": "immunity"
+        }
+    ],
+    "date": "13.05.2020"
+}

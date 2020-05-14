@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ supportduty ]----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                getimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,57 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "getimmunity_impl.pwn"
 
-YCMD:supportduty(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_getimmunity()
 {
-    if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
-    if(GetPVarInt(playerid, "support_duty") == 0)
+    new command = Command_GetID("getimmunity");
+
+    //aliases
+    Command_AddAlt(command, "sprawdzodpornosc");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:getimmunity(playerid, params[], help)
+{
+    if (help)
     {
-        SetPVarInt(playerid, "support_duty", 1);
-        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jestes teraz na s³u¿bie pomocy nowym graczom.");
+        sendTipMessage(playerid, "SprawdŸ odpornoœæ gracza.");
+        return 1;
     }
-    else
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
     {
-        SetPVarInt(playerid, "support_duty", 0);
-        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Schodzisz ze s³u¿bie pomocy nowym graczom.");
+        sendTipMessage(playerid, "U¿yj /getimmunity [Nick/ID] ");
+        return 1;
     }
-    return 1;
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_getimmunity_Impl(playerid, giveplayerid);
 }

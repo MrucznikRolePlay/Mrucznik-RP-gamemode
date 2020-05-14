@@ -41,7 +41,7 @@ YCMD:radiostacja(playerid, params[], help)
 	}
 	else
 	{
-		sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w San News");
+		sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ w budynku San News");
 	}
 
 	return 1;

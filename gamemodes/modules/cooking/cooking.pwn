@@ -32,7 +32,7 @@ EatCookedMeal(playerid, name[], weight, type)
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
 	ChatMe(playerid, sprintf("zjada %s.", name));
 	GetPlayerHealth(playerid, hp);
-	SetPlayerHealth(playerid, hp+weight/10);
+	SetPlayerHealth(playerid, (hp+weight/10) > 100.0 ? 100.0 : (hp+weight/10));
 
 	//handle food types
 	if(type == 16 || type == 18)
@@ -40,19 +40,12 @@ EatCookedMeal(playerid, name[], weight, type)
 		PoziomPoszukiwania[playerid] += 1;
 		SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
 	}
-	else if(type == 33 && random(2) == 1)
-	{//wuhan bat
-		InfectPlayer(playerid, KORONAWIRUS);
-		SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
-	}
 	if(type < sizeof(FishNames))
 	{
-		if(PlayerImmunity[playerid] < 5)
-			PlayerImmunity[playerid] ++;
+		IncreasePlayerImmunity(playerid, 1);
 	}
-	if(random(20) == 0) 
-	{//5% szans na zatrucie
-		InfectPlayer(playerid, ZATRUCIE);
+	if(random(100) == 0 && InfectOrDecreaseImmunity(playerid, ZATRUCIE, 25)) 
+	{//1% szans na zatrucie
 		SendClientMessage(playerid, COLOR_RED, "To co zjad³eœ, chyba Ci zaszkodzi³o!");
 	}
 }

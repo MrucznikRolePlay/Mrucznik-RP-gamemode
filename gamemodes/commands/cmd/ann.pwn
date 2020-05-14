@@ -38,6 +38,9 @@ YCMD:ann(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /ann [cnn textformat ~n~=nowa linia ~r~=czerwony ~g~=zielony ~b~=niebieski ~w~=bia³y ~y~=¿ó³ty]");
 			return 1;
 		}
+		else if(GetPlayerAdminDutyStatus(playerid) == 0) return sendErrorMessage(playerid, "Musisz byæ na s³u¿bie Administratora!"); 
+		else if(OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1) return sendErrorMessage(playerid, "Jesteœ na s³u¿bie IC, graj IC!"); 
+
 		format(string, sizeof(string), "  ~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~                         %s",params);
         if(!issafefortextdraw(string)) return sendErrorMessage(playerid, "Niekompletny tekst (tyldy etc)");
         GameTextForAll(string, 3000, 3);

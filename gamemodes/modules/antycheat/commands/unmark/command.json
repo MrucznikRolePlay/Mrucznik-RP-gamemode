@@ -1,0 +1,19 @@
+{
+    "name": "unmark",
+    "description": "Usuwa gracza z listy osób oznaczonych jako czitera.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "odznacz"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "12.05.2020"
+}
