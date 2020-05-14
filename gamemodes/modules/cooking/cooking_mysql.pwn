@@ -65,13 +65,13 @@ MruMySQL_CookedMealsDialog(playerid)
 			strcat(string, sprintf("%i\t%s~n~~g~~h~%dg\n", model, Odpolszcz(name), weight));
 			DynamicGui_AddRow(playerid, id);
 		}
+		cache_delete(result);
 		if(rows == 0)
 		{
 			sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
 			return 1;
 		}
 		string[strlen(string)-1] = '\0';
-		cache_delete(result);
 	}
 
     ShowPlayerDialogEx(playerid, DIALOG_EATING, DIALOG_STYLE_PREVIEW_MODEL, "Twoje potrawy", string, "Jedz", "Anuluj");

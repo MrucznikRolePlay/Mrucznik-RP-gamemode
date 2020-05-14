@@ -64,6 +64,8 @@ YCMD:sprzedajauto(playerid, params[], help)
 
 	    if(kaska[playa] == 0) return sendErrorMessage(playerid, "B³¹d");
 
+		if(playa == INVALID_PLAYER_ID || playerid == playa) return 1;
+		
 	    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 

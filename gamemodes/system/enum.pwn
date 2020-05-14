@@ -198,6 +198,14 @@ enum eOBRAZENIA {
 	WEAPONID,
 	Float:DAMAGE
 }
+enum eOBRAZENIAZADANE {
+	HOURS,
+	MINUTES,
+	SECONDS,
+	DEFENDER[MAX_PLAYER_NAME],
+	WEAPONID,
+	Float:DAMAGE
+}
 //25.07 system stref gangów
 new Float:Zone_Data[MAX_ZONES][4] = {
     {1983.0, -1027.0, 2266.0, -933.0},
@@ -495,7 +503,7 @@ new FractionNames[][40] = {
     "Korporacja Transportowa",
     "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
-    "Crackville Boyz",
+    "CRIMINAL CONNECTION",
     "Hillside Nortenos 14",
     "89 Border Society",
     "IV Saint Reich",
@@ -1089,29 +1097,8 @@ new PobijText[31][31] ={
 "WYGRALES"//31
 };
 
+//respawn count
 new Count = 20;
-new CountText[20][20] ={
-"respawn za ~g~1",
-"respawn za ~g~2",
-"respawn za ~g~3",
-"respawn za ~g~4",
-"respawn za ~g~5",
-"respawn za ~g~6",
-"respawn za ~g~7",
-"respawn za ~g~8",
-"respawn za ~g~9",
-"respawn za ~g~10",
-"respawn za ~g~11",
-"respawn za ~g~12",
-"respawn za ~g~13",
-"respawn za ~g~14",
-"respawn za ~g~15",
-"respawn za ~g~16",
-"respawn za ~g~17",
-"respawn za ~g~18",
-"respawn za ~g~19",
-"respawn za ~g~20"
-};
 
 new Float:gCopPlayerSpawns[2][3] = {
 {1578.2158,-1633.9244,13.3991},
@@ -1364,7 +1351,7 @@ enum pInfo
     pCarSlots,
     pHat,
 	pBlokadaPisaniaFrakcjaCzas,
-    Text3D:pDescLabel,
+    Text3D:pDescLabel[128],
     pDesc[128],
 	pStrong,
 	pCard,
@@ -1783,7 +1770,7 @@ new const Przebierz[][] = {
 	{195},{194},{193},{185},{184},{183},
 	{182},{181},{180},{179},{178},{176},{172},{170},{168},{167},{162},
 	{161},{160},{159},{158},{157},{156},{155},{154},{153},{152},{151},
-	{146},{145},{144},{143},{142},{140},{139},{138},{137},{136},{135},
+	{146},{145},{144},{143}, {142},{140},{139},{138},{137},{136},{135},
 	{134},{264},{132},{131},{130},{129},{128},{254},{99},{97},{96},{95},{94},
 	{92},{90},{89},{88},{87},{85},{84},{83},{82},{81},{80},{79},{78},{77},{76},
 	{75},{73},{72},{69},{68},{67},{66},{64},{63},{62},{58},{56},{55},
@@ -2407,61 +2394,10 @@ new VehicleColoursTableRGBA[256] = {
 0x561A28FF, 0x4E0E27FF, 0x706C67FF, 0x3B3E42FF, 0x2E2D33FF, 0x7B7E7DFF, 0x4A4442FF, 0x28344EFF
 };
 
-new nexac_ac_names[53][] = {
-	"Anti-AirBreak (onfoot)",
-	"Anti-AirBreak (in vehicle)",
-	"Anti-teleport hack (onfoot)",
-	"Anti-teleport hack (in vehicle)",
-	"Anti-teleport hack (into/between vehicles)",
-	"Anti-teleport hack (vehicle to player)",
-	"Anti-teleport hack (pickups)",
-	"Anti-FlyHack (onfoot)",
-	"Anti-FlyHack (in vehicle)",
-	"Anti-SpeedHack (onfoot)",
-	"Anti-SpeedHack (in vehicle)",
-	"Anti-Health hack (in vehicle)",
-	"Anti-Health hack (onfoot)",
-	"Anti-Armour hack",
-	"Anti-Money hack",
-	"Anti-Weapon hack",
-	"Anti-Ammo hack (add)",
-	"Anti-Ammo hack (infinite)",
-	"Anti-Special actions hack",
-	"Anti-GodMode from bullets (onfoot)",
-	"Anti-GodMode from bullets (in vehicle)",
-	"Anti-Invisible hack",
-	"Anti-lagcomp-spoof",
-	"Anti-Tuning hack",
-	"Anti-Parkour mod",
-	"Anti-Quick turn",
-	"Anti-Rapid fire",
-	"Anti-FakeSpawn",
-	"Anti-FakeKill",
-	"Anti-Pro Aim",
-	"Anti-CJ run",
-	"Anti-CarShot",
-	"Anti-CarJack",
-	"Anti-UnFreeze",
-	"Anti-AFK Ghost",
-	"Anti-Full Aiming",
-	"Anti-Fake NPC",
-	"Anti-Reconnect",
-	"Anti-High ping",
-	"Anti-Dialog hack",
-	"Protection from the sandbox",
-	"Protection against an invalid version",
-	"Anti-Rcon hack",
-	"Anti-Tuning crasher",
-	"Anti-Invalid seat crasher",
-	"Anti-Dialog crasher",
-	"Anti-Attached object crasher",
-	"Anti-Weapon Crasher",
-	"Flood protection connects to one slot",
-	"Anti-flood callback functions",
-	"Anti-flood change seat",
-	"Anti-Ddos",
-	"Anti-NOP's"
-};
-
+enum MessageType
+{
+	TOME,
+	FROMME
+}
 
 //EOF

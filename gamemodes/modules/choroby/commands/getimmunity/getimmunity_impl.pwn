@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ supportduty ]----------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                getimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,23 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: mrucznik
+// Data utworzenia: 13.05.2020
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:supportduty(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_getimmunity_Impl(playerid, giveplayerid)
 {
-    if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
-    if(GetPVarInt(playerid, "support_duty") == 0)
+    if(PlayerInfo[playerid][pAdmin] < 1000)
     {
-        SetPVarInt(playerid, "support_duty", 1);
-        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jestes teraz na s³u¿bie pomocy nowym graczom.");
+        noAccessMessage(playerid);
+        return 1;
     }
-    else
-    {
-        SetPVarInt(playerid, "support_duty", 0);
-        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Schodzisz ze s³u¿bie pomocy nowym graczom.");
-    }
+
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Odpornoœæ gracza %s to %f", GetNickEx(giveplayerid), GetPlayerImmunity(giveplayerid)));
     return 1;
 }
+
+//end

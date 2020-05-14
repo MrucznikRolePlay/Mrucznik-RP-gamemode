@@ -54,6 +54,11 @@ YCMD:mdc(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
+					if(AntySpam[playerid] == 1)
+					{
+						sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
+						return 1;
+					}
 					new nick[32];
 					if(GetPVarString(giveplayerid, "maska_nick", nick, 24)) return sendTipMessage(playerid, "Nie mo¿na namierzyæ osoby zamaskowanej.");
 
@@ -98,6 +103,8 @@ YCMD:mdc(playerid, params[], help)
   					}
     				PlayCrimeReportForPlayer(playerid,giveplayerid,16);
 					SendClientMessage(playerid, TEAM_BLUE_COLOR,"_______________________________________");
+					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
+					AntySpam[playerid] = 1;
 				}
 			}
 			else

@@ -47,14 +47,13 @@ AdminDutyPlayer(playerid, status)
 		format(string, sizeof(string), "Administrator %s wszed³ na s³u¿bê administratora!", GetNickEx(playerid));
 		SendAdminMessage(COLOR_RED, string); 
 		MSGBOX_Show(playerid, "Admin Duty ~g~ON", MSGBOX_ICON_TYPE_OK);	
-		SetPVarInt(playerid, "dutyadmin", 1);
 		SetPlayerColor(playerid, 0xFF0000FF);
 		firstDutyAdmin[playerid] = 1; 
+		SendClientMessage(playerid, COLOR_GREEN, "SUPPORT: {FFFFFF}Stawiasz siê na s³u¿bie nowym graczom. Aby sprawdziæ zg³oszenia wpisz {00FF00}/tickets");
 	}
 	else//Je¿eli ma zejœæ
 	{	
-		SetPVarInt(playerid, "dutyadmin", 0); 
-		SetPlayerColor(playerid,TEAM_HIT_COLOR);
+		SetPlayerColor(playerid, TEAM_HIT_COLOR);
 		//Komunikaty
 		format(string, sizeof(string), "@DUTY: Wykona³eœ ->  %d banów | %d warnów | %d kicków | %d innych akcji!", iloscBan[playerid],iloscWarn[playerid],iloscKick[playerid], (iloscInne[playerid]+iloscAJ[playerid])); 
 		sendErrorMessage(playerid, string); 
@@ -63,6 +62,8 @@ AdminDutyPlayer(playerid, status)
 		//Timer's kill
 		KillTimer(AdminDutyTimer[playerid]);
 	}
+	SetPVarInt(playerid, "dutyadmin", status); 
+	SetPVarInt(playerid, "support_duty", status);
 	return 1;
 }
 

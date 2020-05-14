@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ cziterzy ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                getimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,37 +16,57 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "getimmunity_impl.pwn"
 
-YCMD:cziterzy(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_getimmunity()
 {
-    new czity = 0;
-    new string[1500];
-    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) {
-        foreach(new i : Player) {
-            if(GetPVarInt(i, "AC-warn") > 1) {
-                format(string, sizeof(string), "%s[AC] %s (ID: %d)\n", string, GetNick(i), i);
-                czity++;
-            } else if(GetPVarInt(i, "AC_oznaczony") == 1) {
-                format(string, sizeof(string), "%s[S0BEIT] %s (ID: %d)\n", string, GetNick(i), i);
-                czity++;
-            } 
-        }
-    }
+    new command = Command_GetID("getimmunity");
 
-    if(czity == 0) {
-        sendTipMessage(playerid, "Nie wykryto ¿adnych potencjalnych cziterów");
+    //aliases
+    Command_AddAlt(command, "sprawdzodpornosc");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:getimmunity(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "SprawdŸ odpornoœæ gracza.");
+        return 1;
     }
-    ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_LIST, "Lista Potencjalnych Cziterów", string, "Ok", "");
-    return 1;
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /getimmunity [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_getimmunity_Impl(playerid, giveplayerid);
 }

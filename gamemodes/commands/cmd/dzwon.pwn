@@ -82,6 +82,12 @@ YCMD:dzwon(playerid, params[], help)
 		return 1;
 	}
 
+	if(PhoneOnline[playerid] == 1)
+	{
+		sendTipMessage(playerid, "Twój telefon jest wy³¹czony! W³¹cz go za pomoc¹ /togtel");
+		return 1;
+	}
+
 	if(GetPlayerAdminDutyStatus(playerid) == 1)
 	{
 		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas s³u¿by administratora!"); 
@@ -131,7 +137,8 @@ YCMD:dzwon(playerid, params[], help)
 	{
 		if(GUIExit[playerid] == 0)
 		{
-			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nStra¿ Po¿arna\nMedyk\nSheriff", "Wybierz", "Roz³¹cz siê");
+			//ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nStra¿ Po¿arna\nMedyk\nSheriff", "Wybierz", "Roz³¹cz siê");
+			ShowPlayerDialogEx(playerid, 112, DIALOG_STYLE_LIST, "Numer alarmowy", "Policja\nSzpital\nStra¿ Po¿arna", "Wybierz", "Roz³¹cz siê");
 		}
 		else
 		{

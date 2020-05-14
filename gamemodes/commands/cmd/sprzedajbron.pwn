@@ -38,6 +38,8 @@ YCMD:sprzedajbron(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pJob] == 9)
         {
+            if(GetPlayerOrg(playerid) == 21 && PlayerInfo[playerid][pRank] < 6) SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [6] w tej rodzinie."); //ammunation willowfield
+            else if(GetPlayerOrg(playerid) == 4 && PlayerInfo[playerid][pRank] < 4) SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [4] w tej rodzinie."); //turban family
             new umiejetnosc;
             new skillz;
             new x_weapon[16],weapon[MAX_PLAYERS],ammo[MAX_PLAYERS],price[MAX_PLAYERS];
@@ -65,7 +67,7 @@ YCMD:sprzedajbron(playerid, params[], help)
             }
             if (IsPlayerConnected(giveplayerid))
             {
-                if(PlayerInfo[giveplayerid][pLevel] >= 2)
+                if(PlayerInfo[playerid][pConnectTime] >= 5)
                 {
                     if(PlayerInfo[giveplayerid][pGunLic] == 1 || IsAPrzestepca(giveplayerid) || IsAPolicja(giveplayerid) || IsABOR(giveplayerid) || strcmp(x_weapon,"pistolety",true) == 0)
                     {
@@ -590,7 +592,8 @@ YCMD:sprzedajbron(playerid, params[], help)
                 }
                 else
                 {
-                    SendClientMessage(playerid, COLOR_GRAD1, "   Broñ mog¹ posiadaæ tylko gracze z minimum 2 lvl !");
+                    SendClientMessage(playerid, COLOR_GRAD1, "* Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 5. godzinami online !");
+                    SendClientMessage(giveplayerid, COLOR_GRAD1, "* Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 5. godzinami online !");
                     return 1;
                 }
             }

@@ -7,8 +7,8 @@ MruMySQL_ClearZone(zoneid)
 
 MruMySQL_CzyjToNumer(playerid, number)
 {
-    new query[128];
-    format(query, sizeof(query), "SELECT `Nick` FROM mru_konta WHERE `PhoneNr`='%d'", number);
+    new query[128], string_two[144], connected_status, selectedplayer = INVALID_PLAYER_ID, nick[MAX_PLAYER_NAME];
+    format(query, sizeof(query), "SELECT `Nick`, `connected` FROM mru_konta WHERE `PhoneNr`='%d", number);
     new Cache:result = mysql_query(mruMySQL_Connection, query, true);
     if(cache_is_valid(result))
     {
@@ -16,7 +16,29 @@ MruMySQL_CzyjToNumer(playerid, number)
         {
             new nick[MAX_PLAYER_NAME];
             cache_get_value_index(i, 0, nick);
-            SendClientMessage(playerid, COLOR_WHITE, nick);
+            cache_get_value_index_int(i, 1, connected_status);
+            if(connected_status)
+            {
+                foreach(new i : Player)
+                {
+                    if(gPlayerLogged[i] != 0)
+                    {
+                        if(strcmp(GetNickEx(i), nick, true, strlen(nick)) == 0)
+                        {
+                            selectedplayer = i;
+                        }
+                    }
+                }
+            }
+            format(string_two, sizeof(string_two), "{%s}(%s) {FFFFFF}%s%s", 
+                connected_status > 0 ? "00FF00" : "FF0000",
+                connected_status > 0 ? "Online" : "Offline",
+                nick,
+                selectedplayer != INVALID_PLAYER_ID ? sprintf(" [%d]", selectedplayer) : ""
+            );
+            
+            SendClientMessage(playerid, COLOR_WHITE, string_two);
+            selectedplayer = INVALID_PLAYER_ID;
         }
 		cache_delete(result);
     }

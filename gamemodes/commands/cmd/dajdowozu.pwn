@@ -30,7 +30,7 @@
 
 YCMD:dajdowozu(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))
 	{
 	    new giveplayerid, level;
 		if( sscanf(params, "k<fix>d", giveplayerid, level))

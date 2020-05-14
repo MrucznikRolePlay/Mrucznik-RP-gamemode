@@ -30,7 +30,7 @@
 
 YCMD:og(playerid, params[], help)
 {
-    new string[256];
+    new string[256], admstring[256];
     if(IsPlayerConnected(playerid))
     {
         if(gPlayerLogged[playerid] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
@@ -46,6 +46,11 @@ YCMD:og(playerid, params[], help)
 			format(string, sizeof(string), "Nie mo¿esz napisaæ na tym czacie, gdy¿ masz zakaz pisania na globalnych czatach! Minie on za %d godzin.", PlayerInfo[playerid][pBP]);
 			return SendClientMessage(playerid, TEAM_CYAN_COLOR, string);
 		}
+		else if(PhoneOnline[playerid] == 1)
+		{
+			sendTipMessage(playerid, "Twój telefon jest wy³¹czony! W³¹cz go za pomoc¹ /togtel");
+			return 1;
+		}
 		else if ((!adds) && (!IsPlayerPremiumOld(playerid)) && PlayerInfo[playerid][pAdmin] < 10)
 		{
 			format(string, sizeof(string), "Spróbuj póŸniej, %d sekund miêdzy og³oszeniami !",  (addtimer/1000));
@@ -60,8 +65,25 @@ YCMD:og(playerid, params[], help)
 				return SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			}
 			ZabierzKase(playerid, payout);
-			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %s Tel: %d", params, GetNick(playerid), PlayerInfo[playerid][pPnumber]);
-			OOCNews(TEAM_GROVE_COLOR,string);
+			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d", params, PlayerInfo[playerid][pPnumber]);
+			format(admstring, sizeof(admstring), "Og³oszenie: %s, Kontakt: %d [%s]", params, PlayerInfo[playerid][pPnumber], GetNick(playerid));
+			foreach(new i : Player)
+			{
+				if(IsPlayerConnected(i))
+				{
+					if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)
+					{
+						if(GetPlayerAdminDutyStatus(i) == 1)
+						{
+							SendClientMessage(i, TEAM_GROVE_COLOR, admstring);
+						}
+						else
+						{
+							SendClientMessage(i, TEAM_GROVE_COLOR, string);
+						}
+					}
+				}
+			}
 			Log(chatLog, INFO, "%s og³oszenie: %s", GetPlayerLogName(playerid), params);
 			format(string, sizeof(string), "~r~Zaplaciles $%d~n~~w~Za: %d Znakow", payout, strlen(params));
 			GameTextForPlayer(playerid, string, 5000, 5);

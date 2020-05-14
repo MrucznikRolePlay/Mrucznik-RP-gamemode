@@ -1,37 +1,6 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
-forward CheckCode2003(killerid, playerid);
-public CheckCode2003(killerid, playerid)
-{
-    new string[256];
-    if(IsPlayerConnected(playerid))
-	{
-    	MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNickEx(killerid));
-    	SendCommandLogMessage(string);
-    	KickEx(killerid);
-		Log(warningLog, INFO, string);
-		Log(punishmentLog, INFO, string);
-	}
-	else
-	{
-	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNickEx(killerid));
-    	SendCommandLogMessage(string);
-		Log(warningLog, INFO, string);
-	}
-}
-forward AntyCheatON(playerid);
-public AntyCheatON(playerid)
-{
-	timeAC[playerid]++; 
-	if(timeAC[playerid] >= 3)
-	{
-		SetAntyCheatForPlayer(playerid, 0);
-		timeAC[playerid] = 0; 
-		KillTimer(timerAC[playerid]); 
-	}
-}
 forward SpecToggle(playerid);
 public SpecToggle(playerid)
 {
@@ -914,16 +883,6 @@ public PlayerAFK(playerid, afktime, breaktime)
 	return 1;
 }
 
-//PADZIOCH
-forward syncanim(playerid);
-public syncanim(playerid)
-{
-	if(GetPVarInt(playerid,"roped") == 0) return 0;
- 	SetTimerEx("syncanim",DUR,0,"i",playerid);
-  	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
-   	return 1;
-}
-
 forward CheckChangeWeapon();
 public CheckChangeWeapon()
 {
@@ -993,6 +952,7 @@ public MainTimer()
     {
 		PlayersCheckerMinute();
         SyncUp();
+		TimeUpdater();
     }
     if(TICKS_5Min == (60*5)-1)
     {
@@ -2321,7 +2281,8 @@ public JednaSekundaTimer()
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
-					if(GetPVarInt(i, "DostalDM2") == 1)
+					if((GetPVarInt(i, "DostalDM2") == 1) || strfind((PlayerInfo[i][pAJreason]), "DM2", true) > 0
+					&& strfind((PlayerInfo[i][pAJreason]), "Death Match 2", true) > 0)
 					{
 						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [Odsiedzia³ karê za DM2]", GetNick(i));
 						SendAdminMessage(COLOR_PANICRED, string);

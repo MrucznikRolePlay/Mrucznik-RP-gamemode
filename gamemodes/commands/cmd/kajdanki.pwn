@@ -70,6 +70,12 @@ YCMD:kajdanki(playerid, params[], help)
                     {
                         if(Kajdanki_JestemSkuty[giveplayerid] == 0)
                         {
+                            if(AntySpam[playerid] == 1)
+                            {
+                                sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 10 sekund");
+                                return 1;
+                            }
+
                             new string[128];
                             if(PlayerInfo[giveplayerid][pBW] >= 1 || PlayerInfo[giveplayerid][pInjury] >= 1)
                             {
@@ -104,6 +110,8 @@ YCMD:kajdanki(playerid, params[], help)
                                 //Kajdanki_Uzyte[giveplayerid] = 1;
                                 SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
                             }
+                            SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
+					        AntySpam[playerid] = 1;
                         }
                         else
                         {

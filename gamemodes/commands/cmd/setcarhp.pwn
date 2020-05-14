@@ -46,10 +46,10 @@ YCMD:setcarhp(playerid, params[], help)
             {
                 new vuid = VehicleUID[vehicleid][vUID];
                 SetVehicleHealth(vehicleid, health);
-                CarData[vuid][c_HP] = health;
+                CarData[vuid][c_HP] = (health > 1000 ? 1000 : health);
                 Log(adminLog, INFO, "Admin %s ustawi³ hp auta %s na %d", GetPlayerLogName(playerid), GetVehicleLogName(vehicleid), health);
                 new string[128];
-                format(string, sizeof(string), "Admin %s ustawi³ hp auta [vID: %d] na %d", GetNickEx(playerid), vehicleid, health);
+                format(string, sizeof(string), "Admin %s ustawi³ hp auta [vID: %d] na %d", GetNickEx(playerid), vehicleid, Float:health);
                 SendMessageToAdmin(string, COLOR_P@);
             }
             else
