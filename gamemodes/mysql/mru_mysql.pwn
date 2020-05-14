@@ -483,6 +483,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Uniform`='%d', \
 	`CruiseController`='%d', \
 	`FixKit`='%d', \
+	`Immunity`='%d', \
 	`connected`='%d' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
@@ -500,6 +501,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pUniform],
 	PlayerInfo[playerid][pCruiseController],
 	PlayerInfo[playerid][pFixKit],
+	GetPlayerImmunity(playerid),
 	forcequit ? 0 : 2,
     PlayerInfo[playerid][pUID]);
 
@@ -713,7 +715,7 @@ public MruMySQL_LoadAccount(playerid)
 		MyWeapon[playerid] = PlayerInfo[playerid][pGun0];
 		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`, `Immunity`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
@@ -722,7 +724,8 @@ public MruMySQL_LoadAccount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddddddd",
+		new immunity;
+        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -752,7 +755,10 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pInjury],
 		PlayerInfo[playerid][pHealthPacks],
 		PlayerInfo[playerid][pCzystka],
-        PlayerInfo[playerid][pCarSlots]);
+        PlayerInfo[playerid][pCarSlots],
+		immunity);
+		
+		SetPlayerImmunity(playerid, immunity);
 
 		format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `connected`='1' WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
 		mysql_query(lStr);
