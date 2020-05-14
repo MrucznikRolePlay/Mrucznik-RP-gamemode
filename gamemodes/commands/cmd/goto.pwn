@@ -39,7 +39,7 @@ YCMD:goto(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /to [playerid/CzêœæNicku]");
 			return 1;
 		}
-		new Float:X,Float:Y,Float:Z;
+		new Float:plocx,Float:plocy,Float:plocz;
 
 		if(plo != INVALID_PLAYER_ID)
 		{
@@ -57,27 +57,34 @@ YCMD:goto(playerid, params[], help)
 					SetTimerEx("SpecEnd", 500, false, "d", playerid);
 				}
 
-				GetPlayerPos(plo, X, Y, Z);
-				if(IsPlayerInAnyVehicle(playerid))
+				GetPlayerPos(plo, plocx, plocy, plocz);
+				SetPlayerInterior(playerid, GetPlayerInterior(plo));
+				SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(plo));
+				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == 2)
 				{
-					SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(plo));
-					SetPlayerInterior(playerid, GetPlayerInterior(plo));
-					LinkVehicleToInterior(GetPlayerVehicleID(playerid), GetPlayerInterior(plo));
-					SetPlayerPos(playerid, X+1, Y+1, Z+1.3);
-					SetVehiclePos(GetPlayerVehicleID(playerid), X+1, Y+1, Z+1.3);
-					PutPlayerInVehicle(playerid, GetPlayerVehicleID(playerid), GetPlayerVehicleSeat(playerid));
+					if(plocz > 530.0 && PlayerInfo[plo][pInt] == 0) //the highest land point in sa = 526.8
+					{
+						PlayerInfo[playerid][pInt] = 1;
+					}
+
+					new tmpcar = GetPlayerVehicleID(playerid);
+					SetVehiclePos(tmpcar, plocx, plocy+4, plocz);
 				}
 				else
 				{
-					SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(plo));
-					SetPlayerInterior(playerid, GetPlayerInterior(plo));
-					SetPlayerPos(playerid, X+1, Y+1, Z+1.3);
+					SetPlayerPos(playerid, plocx+1, plocy+1, plocz+1.3);
 				}
+
 				if(PlayerInfo[plo][pInt] > 0)
 				{
 					PlayerInfo[playerid][pInt] = PlayerInfo[plo][pInt];
 					PlayerInfo[playerid][pLocal] = PlayerInfo[plo][pLocal];
 				}
+				else if(plocz > 530.0) //the highest land point in sa = 526.8
+				{
+					PlayerInfo[playerid][pInt] = 1;
+				}
+
 				sendTipMessage(playerid, "Teleportowa³eœ siê pomyœlnie!");
 				
 			}

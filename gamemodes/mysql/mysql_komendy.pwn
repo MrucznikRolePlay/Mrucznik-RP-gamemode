@@ -36,7 +36,7 @@ MruMySQL_CzyjToNumer(playerid, number)
                 nick,
                 selectedplayer != INVALID_PLAYER_ID ? sprintf(" [%d]", selectedplayer) : ""
             );
-            //format(iptext, sizeof(iptext)," | IP - %s", specIP);
+            
             SendClientMessage(playerid, COLOR_WHITE, string_two);
             selectedplayer = INVALID_PLAYER_ID;
         }

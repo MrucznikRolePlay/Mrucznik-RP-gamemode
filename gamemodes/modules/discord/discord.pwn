@@ -120,7 +120,7 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
 			utf8decode(dest, str);
 			strreplace(dest,"%","#");
-			SendFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
+			SendNewFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
 			return 1;
 		}
     }
