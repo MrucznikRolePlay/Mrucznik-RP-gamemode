@@ -41,10 +41,10 @@ command_opis_Impl(playerid, params[])
 			return 1;
 		}
 		//todo: kolorowe opisy tylko dla KP
-		new startpos, endpos;
-		if(regex_search(givenString, "[^a-zA-Z0-9πÊÍ≥ÒÛúøü•∆ £—”åØè |\\//@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
+		new RegexMatch:match, pos;
+		if(Regex_Search(givenString, OPIS_CHARACTERS_REGEXP, match, pos))
 		{
-			SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[startpos]));
+			SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[pos]));
 			return 1;
 		}
 
@@ -56,7 +56,7 @@ command_opis_Impl(playerid, params[])
 			return 1;
 		}
 
-		mysql_real_escape_string(opis, opis);
+		mysql_escape_string(opis, opis);
 		new DBResult:db_result;
 		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`= '%d' AND `text` = '%s'", PlayerInfo[playerid][pUID], opis));
 		new rows = db_num_rows(db_result);

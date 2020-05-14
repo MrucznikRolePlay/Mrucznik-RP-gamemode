@@ -29,23 +29,26 @@
 //-----------------<[ Funkcje: ]>-------------------
 LoadDiscordChannels()
 {
-    new query[512], type, org_id, channel_id[64];
-    mysql_query("SELECT `type`, `org_id`, `channel_id` FROM `mru_discord` ORDER BY `id` ASC");
-    mysql_store_result();
-
-    while(mysql_fetch_row_format(query, "|"))
-    {
-        sscanf(query, "p<|>dds[64]", type, org_id, channel_id);
-        if(type == 1) //frakcja
-        {
-			g_FracChannel[org_id] = DCC_FindChannelById(channel_id);
-        }
-        else //rodzina
-        {
-            g_OrgChannel[org_id] = DCC_FindChannelById(channel_id);
-        }
-    }
-    mysql_free_result();
+    new type, org_id, channel_id[64];
+	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT `type`, `org_id`, `channel_id` FROM `mru_discord` ORDER BY `id` ASC");
+    if(cache_is_valid(result))
+	{
+		for(new i; i < cache_num_rows(); i++)
+		{
+			cache_get_value_index_int(i, 0, type);
+			cache_get_value_index_int(i, 1, org_id);
+			cache_get_value_index(i, 2, channel_id);
+			if(type == 1) //frakcja
+			{
+				g_FracChannel[org_id] = DCC_FindChannelById(channel_id);
+			}
+			else //rodzina
+			{
+				g_OrgChannel[org_id] = DCC_FindChannelById(channel_id);
+			}
+		}
+		cache_delete(result);
+	}
     print("Wczytano kana³y discord");
 }
 DiscordConnectInit()
@@ -122,7 +125,7 @@ public DCC_OnMessageCreate(DCC_Message:message)
 		{
 			new user_name[32 + 1],str[128],dest[128];
 			DCC_GetUserName(author, user_name);
-			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
+			format(str,sizeof(str), "[DISCORD] %s: %s", user_name, messageText);
 			utf8decode(dest, str);
 			strreplace(dest,"%","#");
 			SendNewFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);

@@ -54,8 +54,14 @@ YCMD:opis(playerid, params[], help)
         sendTipMessage(playerid, "Komenda tworz¹ca opis postaci, który bêdzie widoczny dla innych graczy w formie tekstu 3D.");
         return 1;
     }
-    
+    //fetching params
+    new opis[32];
+    if(sscanf(params, "s[32]", opis))
+    {
+        sendTipMessage(playerid, "U¿yj /opis [opis] ");
+        return 1;
+    }
     
     //command body
-    return command_opis_Impl(playerid);
+    return command_opis_Impl(playerid, opis);
 }

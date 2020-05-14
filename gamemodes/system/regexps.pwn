@@ -1,6 +1,7 @@
 //regexps.pwn
 
 new Regex:NICK_REGEXP;
+new Regex:OPIS_CHARACTERS_REGEXP;
 
 //CheckEmoji
 new Regex:REGEX_LAUGH;
@@ -21,6 +22,8 @@ new Regex:REGEX_o_O;
 InitRegexps()
 {
 	NICK_REGEXP = Regex_New("^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$");
+
+	OPIS_CHARACTERS_REGEXP = Regex_New("([^a-zA-Z0-9πÊÍ≥ÒÛúøü•∆ £—”åØè |\\//@:;+?!,.&\\(\\)\\[\\]\\-])");
 
 	//CheckEmoji
 	REGEX_LAUGH = Regex_New(":[dD]+");

@@ -82,7 +82,7 @@ MruMySQL_PobierzStatystyki(playerid, nickoruid[])
     }
 
 
-    format(lStr, sizeof(lStr), "> %s {FFFFFF}(UID: %d)", pnickname, puid);
+    format(lStr, sizeof(lStr), "> %s {FFFFFF}(UID: %d)", nick_escaped, puid);
     SendClientMessage(playerid, COLOR_RED, lStr);
     format(lStr, sizeof(lStr), "Level: %d ¦ Kasa: %d ¦ Bank: %d ¦ Numer tel.: %d ¦ ZN: %d ¦ Dom: %d", plvl, pmoney, pbank, pnr, pzn, pdom);
     SendClientMessage(playerid, -1, lStr);

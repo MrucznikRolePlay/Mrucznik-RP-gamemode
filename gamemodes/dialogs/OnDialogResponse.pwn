@@ -1103,10 +1103,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 			//todo: kolorowe opisy tylko dla KP
-			new startpos, endpos;
-			if(regex_search(givenString, "[^a-zA-Z0-9πÊÍ≥ÒÛúøü•∆ £—”åØè |\\/@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
+			new RegexMatch:match, pos;
+			if(Regex_Search(givenString, OPIS_CHARACTERS_REGEXP, match, pos))
 			{
-				SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[startpos]));
+				SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[pos]));
 				return 1;
 			}
 		}
