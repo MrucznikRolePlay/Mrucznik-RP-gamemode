@@ -776,7 +776,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	}
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{
-		SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+		if(DEVELOPMENT) SendClientMessage(playerid, COLOR_PANICRED, "(2) Anulowano.");
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
 		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
@@ -800,7 +800,7 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		}
 		else
 		{
-			SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+			if(DEVELOPMENT) SendClientMessage(playerid, COLOR_PANICRED, "(1) Anulowano.");
 			ZestawNaprawczy_Timer[playerid] = 30;
 			ZestawNaprawczy_Warning[playerid] = 0;
 			KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));

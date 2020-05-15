@@ -79,7 +79,8 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(isnull(inputtext)) 
 			{
 				DeletePVar(playerid, "GraffitiEDIT");
-				return SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+				SendClientMessage(playerid, COLOR_PANICRED, "(8) Anulowano.");
+				return 1;
 			}
 			format(string, sizeof(string), "%s", inputtext);
 			Graffiti_Text[playerid] = string;
@@ -88,7 +89,8 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else 
 		{
 			DeletePVar(playerid, "GraffitiEDIT");
-			return SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+			SendClientMessage(playerid, COLOR_PANICRED, "(7) Anulowano.");
+			return 1;
 		}
 	}
 	else if(dialogid == GRAFFITI_DIALOG_EDIT_TEXT)
@@ -99,7 +101,8 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(isnull(inputtext)) 
 			{
 				DeletePVar(playerid, "GraffitiEDIT");
-				return SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+				SendClientMessage(playerid, COLOR_PANICRED, "(6) Anulowano.");
+				return 1;
 			}
 			if(strfind(inputtext, "\n") != -1) return GameTextForPlayer(playerid, "~r~Zakazane znaki!",2000, 5);
 			format(string, sizeof(string), "%s", inputtext);
@@ -109,7 +112,8 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else 
 		{
 			DeletePVar(playerid, "GraffitiEDIT");
-			return SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+			SendClientMessage(playerid, COLOR_PANICRED, "(5) Anulowano.");
+			return 1;
 		}
 	}
 	else if(dialogid == GRAFFITI_DIALOG_EDIT_COLOR)
@@ -147,7 +151,8 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			DeletePVar(playerid, "GraffitiEDIT");
-			return SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+			if(DEVELOPMENT) SendClientMessage(playerid, COLOR_PANICRED, "(4) Anulowano.");
+			return 1;
 		}
 	}
 	else if(dialogid == GRAFFITI_DIALOG_SELECT_COLOR)
@@ -180,7 +185,11 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
 			graffiti_CreateGraffiti(playerid);
 		}
-		else return SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+		else
+		{
+			if(DEVELOPMENT) SendClientMessage(playerid, COLOR_PANICRED, "(3) Anulowano.");
+			return 1;
+		}
 	}
 	else if(dialogid == GRAFFITI_DIALOG_LIST)
 	{
