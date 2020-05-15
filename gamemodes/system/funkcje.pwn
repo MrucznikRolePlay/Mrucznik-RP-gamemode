@@ -8422,13 +8422,13 @@ WczytajRangi()
 
 WczytajSkiny()
 {
-    new query[256], id, typ, skiny[128],skin[MAX_SKIN_SELECT];
+    new query[1124], id, typ, skiny[1024],skin[MAX_SKIN_SELECT];
     mysql_query("SELECT * FROM `mru_skins`");
     mysql_store_result();
 
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>dds[128]", typ, id, skiny);
+        sscanf(query, "p<|>dds[1024]", typ, id, skiny);
         sscanf(skiny, "p<,>A<d>(0)[22]", skin);
 
         if(typ == 1)
