@@ -42,7 +42,7 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 		{
 			return 1;
 		}
-		if(Spectate[playerid] != INVALID_PLAYER_ID)//nie wywo³uj efektów gdy specuje
+		if(Spectate[playerid] != INVALID_PLAYER_ID) //nie wywo³uj efektów gdy specuje
 		{
 			return 1;
 		}
