@@ -112,6 +112,14 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 					ACWarningDelay(playerid, code);
 				} 
 			}
+			case LVL1MARK:
+			{
+				if(PlayerInfo[playerid][pLevel] == 1)
+				{
+					MarkPotentialCheater(playerid);
+					ACWarningDelay(playerid, code);
+				}
+			}
 			case LVL1INSTAKICK:
 			{
 				if(PlayerInfo[playerid][pLevel] <= 1)

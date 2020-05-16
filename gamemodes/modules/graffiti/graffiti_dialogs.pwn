@@ -187,7 +187,7 @@ graffiti_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			if(DEVELOPMENT) SendClientMessage(playerid, COLOR_PANICRED, "(3) Anulowano.");
+			SendClientMessage(playerid, COLOR_PANICRED, "(3) Anulowano.");
 			return 1;
 		}
 	}

@@ -27,14 +27,6 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-/*PlayerChangeWeapon(playerid)
-{
-	//SendClientMessageToAll(COLOR_GRAD2, "#5: PlayerChangeWeaponOnInjury");
-	//SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
-	PokazDialogPrzedmioty(playerid);
-	return 1;
-}
-*/
 stock GetWeaponChangeDelay(currentWeapon, changedWeapon)
 {
 	return WeaponsDelay[currentWeapon]/4 + WeaponsDelay[changedWeapon];
@@ -342,8 +334,9 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 	}
 
 	AntySpam[playerid] = 1;
-	new timerid = SetTimerEx("PlayerChangeWeapon", GetWeaponChangeDelay(MyWeapon[playerid], weaponid), false, "dd", playerid, weaponid);
+	//new timerid = SetTimerEx("PlayerChangeWeapon", GetWeaponChangeDelay(MyWeapon[playerid], weaponid), false, "dd", playerid, weaponid);
 	SetPVarInt(playerid, "Timer_OnChangingWeapon", timerid);
+	PlayerChangeWeapon(playerid, weaponid);
 	//MyWeapon[playerid] = weaponid;
 	//SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 	return 1;
