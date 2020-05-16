@@ -1202,7 +1202,37 @@ if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 	GetPlayerName(playerid, nick, sizeof(nick));
 	format(komunikat, sizeof(komunikat),"* %s ³¹czy kabelki i wyjmuje œrubokrêt i odkrêca nastêpn¹ os³onkê.", nick);
 	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	SetTimerEx("udalo2",6000,0,"d",playerid);
+	new skillz;
+	if(PlayerInfo[playerid][pJackSkill] < 50)
+	{
+		skillz = 1;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
+	{
+		skillz = 2;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
+	{
+		skillz = 3;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
+	{
+		skillz = 4;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 400)
+	{
+		skillz = 5;
+	}
+	new kradnij = random(100);
+	new mnoznik = skillz*19;
+	if(kradnij <= mnoznik)
+	{
+		SetTimerEx("udalo2",6000,0,"d",playerid);
+	}
+	else
+	{
+		SetTimerEx("nieudalo2",6000,0,"d",playerid);
+	}
 }
 else
 {
@@ -1220,7 +1250,37 @@ public udalo2(playerid){
     	GetPlayerName(playerid, nick, sizeof(nick));
     	format(komunikat, sizeof(komunikat),"* %s wyjmuje 4 kolorowe kabelki.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    	SetTimerEx("udalo3",6000,0,"d",playerid);
+    	new skillz;
+		if(PlayerInfo[playerid][pJackSkill] < 50)
+		{
+			skillz = 1;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
+		{
+			skillz = 2;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
+		{
+			skillz = 3;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
+		{
+			skillz = 4;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 400)
+		{
+			skillz = 5;
+		}
+		new kradnij = random(100);
+		new mnoznik = skillz*19;
+		if(kradnij <= mnoznik)
+		{
+			SetTimerEx("udalo3",6000,0,"d",playerid);
+		}
+		else
+		{
+			SetTimerEx("nieudalo3",6000,0,"d",playerid);
+		}
     }
     else
     {
@@ -12668,6 +12728,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 
 public CuffedAction(playerid, cuffedid)
 {
+	if(!IsAPolicja(cuffedid)) ZdejmijBW(cuffedid, 4000);
 	Kajdanki_JestemSkuty[cuffedid] = 1;
 	Kajdanki_Uzyte[playerid] = 1;
 	Kajdanki_PDkuje[cuffedid] = playerid;

@@ -4939,7 +4939,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		if(GetPVarInt(playerid, "Timer_OnChangingWeapon"))
 		{
 			AntySpam[playerid] = 0;
-			KillTimer(GetPVarInt(playerid, "Timer_OnChangingWeapon"));
+			//KillTimer(GetPVarInt(playerid, "Timer_OnChangingWeapon"));
 			DeletePVar(playerid, "Timer_OnChangingWeapon");
 		}
 		if(newstate == PLAYER_STATE_DRIVER)
