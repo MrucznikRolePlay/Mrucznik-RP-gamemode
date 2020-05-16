@@ -12728,7 +12728,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 
 public CuffedAction(playerid, cuffedid)
 {
-	if(!IsAPolicja(cuffedid)) ZdejmijBW(cuffedid, 4000);
+	//if(!IsAPolicja(cuffedid)) ZdejmijBW(cuffedid, 4000);
 	Kajdanki_JestemSkuty[cuffedid] = 1;
 	Kajdanki_Uzyte[playerid] = 1;
 	Kajdanki_PDkuje[cuffedid] = playerid;
