@@ -1299,6 +1299,8 @@ public udalo3(playerid){
     	format(komunikat, sizeof(komunikat),"* %s ³¹czy odpowiednie kabelki i wy³¹czy³ alarm.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     	TogglePlayerControllable(playerid, 1);
+		new carid = GetPlayerVehicleID(playerid); 
+		if(Gas[carid] <= 10) Gas[carid] += 15;
     	NieSpamujKradnij[playerid] = 0;
     	SendClientMessage(playerid, COLOR_GRAD2, "Skill z³odzieja aut +1");
     	PlayerInfo[playerid][pJackSkill] ++;
