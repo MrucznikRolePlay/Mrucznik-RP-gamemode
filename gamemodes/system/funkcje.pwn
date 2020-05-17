@@ -776,11 +776,11 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	}
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{
-		if(DEVELOPMENT) SendClientMessage(playerid, COLOR_PANICRED, "(2) Anulowano.");
+		SendClientMessage(playerid, COLOR_PANICRED, "(2) Anulowano naprawê pojazdu.");
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
-		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
-		DeletePVar(playerid, "timer_ZestawNaprawczy");
+		DeletePVar(playerid, "Use_ZestawNaprawczy");
+		return 1;
 	}
 	if (ZestawNaprawczy_Timer[playerid] > 0)
 	{
@@ -788,28 +788,28 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		{
 			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Pozostalo %ds", ZestawNaprawczy_Timer[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
-			SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, 2500);
+			SetPlayerChatBubble(playerid, "** naprawia pojazd **", COLOR_PURPLE, 30.0, 2500);
 			ZestawNaprawczy_Timer[playerid]--;
 			ZestawNaprawczy_Warning[playerid] = 0;
+			SetTimerEx("ZestawNaprawczy_CountDown", 1000, false, "ii", playerid, vehicleid);
 		}
 		else if(IsPlayerInRangeOfPoint(playerid, 10.0, pos[0], pos[1], pos[2]))
 		{
 			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~r~Podejdz do auta! %ds", 8-ZestawNaprawczy_Warning[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
 			ZestawNaprawczy_Warning[playerid]++;
+			SetTimerEx("ZestawNaprawczy_CountDown", 1000, false, "ii", playerid, vehicleid);
 		}
 		else
 		{
-			if(DEVELOPMENT) SendClientMessage(playerid, COLOR_PANICRED, "(1) Anulowano.");
+			SendClientMessage(playerid, COLOR_PANICRED, "(1) Anulowano.");
 			ZestawNaprawczy_Timer[playerid] = 30;
 			ZestawNaprawczy_Warning[playerid] = 0;
-			KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
-			DeletePVar(playerid, "timer_ZestawNaprawczy");
+			DeletePVar(playerid, "Use_ZestawNaprawczy");
 		}
 	}
 	else
 	{
-		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
@@ -817,8 +817,9 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		RepairVehicle(vehicleid);
         SetVehicleHealth(vehicleid, 1000);
 		CarData[VehicleUID[vehicleid][vUID]][c_HP] = 1000.0;
-		DeletePVar(playerid, "timer_ZestawNaprawczy");
+		DeletePVar(playerid, "Use_ZestawNaprawczy");
 	}
+	return 1;
 }
 
 public CountDownVehsRespawn()
