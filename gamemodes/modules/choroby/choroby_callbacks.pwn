@@ -49,12 +49,12 @@ hook OnPlayerConnect(playerid)
 
 hook OnPlayerDisconnect(playerid, reason)
 {
-	DestroyPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 	VECTOR_clear(VPlayerDiseases[playerid]);
 	Grypa[playerid] = 0;
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
+	PlayerImmunity[playerid] = 0;
 	return 1;
 }
 
