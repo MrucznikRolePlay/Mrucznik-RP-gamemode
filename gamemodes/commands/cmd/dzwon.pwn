@@ -131,7 +131,7 @@ YCMD:dzwon(playerid, params[], help)
 	SendClientMessage(playerid, COLOR_WHITE, "Trwa ³¹czenie, proszê czekaæ...");
 	SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: U¿yj chatu IC aby rozmawiaæ przez telefon i /z aby sie roz³¹czyæ.");
 	PlayerPlaySound(playerid, 3600, 0.0, 0.0, 0.0);
-	SetPlayerSpecialAction(playerid,SPECIAL_ACTION_USECELLPHONE);
+	if(PlayerInfo[playerid][pInjury] == 0 && PlayerInfo[playerid][pBW] == 0) SetPlayerSpecialAction(playerid,SPECIAL_ACTION_USECELLPHONE);
 
 	if(numerTelefonuOdbiorcy == 911)
 	{

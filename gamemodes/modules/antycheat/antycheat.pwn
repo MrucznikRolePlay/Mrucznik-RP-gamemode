@@ -235,6 +235,8 @@ UpdatePotentialCheatersTxd()
 			TextDrawBoxColor(PotentialCheatersTxd[i], 50);
 
 			i++;
+			if(i == MAX_POTENTIAL_CHEATERS)
+				break;
 		}
 	}
 
@@ -336,6 +338,10 @@ GetNexACAdditionalSettingName(type)
 		case LVL1KICK:
 		{
 			strcat(name, "KICK 1LVL/OZNACZ");
+		}
+		case LVL1MARK:
+		{
+			strcat(name, "OZNACZ 1LVL");
 		}
 		case LVL1INSTAKICK:
 		{

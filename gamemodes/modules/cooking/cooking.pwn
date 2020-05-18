@@ -29,8 +29,6 @@
 EatCookedMeal(playerid, name[], weight, type)
 {
 	new Float:hp;
-	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
-	ChatMe(playerid, sprintf("zjada %s.", name));
 	GetPlayerHealth(playerid, hp);
 	SetPlayerHealth(playerid, (hp+weight/10) > 100.0 ? 100.0 : (hp+weight/10));
 
@@ -43,7 +41,15 @@ EatCookedMeal(playerid, name[], weight, type)
 	if(type < sizeof(FishNames))
 	{
 		IncreasePlayerImmunity(playerid, 1);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp i 1pkt odpornoœci.", name, weight, weight/10));
 	}
+	else
+	{
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
+	}
+
+	ChatMe(playerid, sprintf("zjada %s.", name));
+
 	if(random(100) == 0 && InfectOrDecreaseImmunity(playerid, ZATRUCIE, 25)) 
 	{//1% szans na zatrucie
 		SendClientMessage(playerid, COLOR_RED, "To co zjad³eœ, chyba Ci zaszkodzi³o!");

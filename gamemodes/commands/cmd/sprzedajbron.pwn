@@ -38,8 +38,17 @@ YCMD:sprzedajbron(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pJob] == 9)
         {
-            if(GetPlayerOrg(playerid) == 21 && PlayerInfo[playerid][pRank] < 6) SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [6] w tej rodzinie."); //ammunation willowfield
-            else if(GetPlayerOrg(playerid) == 4 && PlayerInfo[playerid][pRank] < 4) SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [4] w tej rodzinie."); //turban family
+            if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 4)
+            {
+                if(GetPlayerOrg(playerid) == 21 && PlayerInfo[playerid][pRank] < 6) //ammunation willowfield
+                {
+                    return SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [6] w tej rodzinie."); //ammunation willowfield
+                }
+                else if(GetPlayerOrg(playerid) == 4 && PlayerInfo[playerid][pRank] < 4) 
+                {
+                    return SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [4] w tej rodzinie."); //turban family
+                }
+            }
             new umiejetnosc;
             new skillz;
             new x_weapon[16],weapon[MAX_PLAYERS],ammo[MAX_PLAYERS],price[MAX_PLAYERS];
@@ -359,6 +368,12 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         if (ProxDetectorS(5.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
                         {
+                            if(PlayerInfo[giveplayerid][pConnectTime] < 5)
+                            {
+                                SendClientMessage(playerid, COLOR_GRAD1, "* Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 5. godzinami online !");
+                                SendClientMessage(giveplayerid, COLOR_GRAD1, "* Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 5. godzinami online !");
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMiserPerk] > 0)
                             {
                                 new skill = 2 * PlayerInfo[playerid][pMiserPerk];

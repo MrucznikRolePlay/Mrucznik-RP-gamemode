@@ -776,11 +776,11 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	}
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{
-		SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+		SendClientMessage(playerid, COLOR_PANICRED, "* [ZESTAW NAPRAWCZY] Anulowano naprawê pojazdu.");
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
-		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
-		DeletePVar(playerid, "timer_ZestawNaprawczy");
+		DeletePVar(playerid, "Use_ZestawNaprawczy");
+		return 1;
 	}
 	if (ZestawNaprawczy_Timer[playerid] > 0)
 	{
@@ -788,28 +788,28 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		{
 			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Pozostalo %ds", ZestawNaprawczy_Timer[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
-			SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, 2500);
+			SetPlayerChatBubble(playerid, "** naprawia pojazd **", COLOR_PURPLE, 30.0, 2500);
 			ZestawNaprawczy_Timer[playerid]--;
 			ZestawNaprawczy_Warning[playerid] = 0;
+			SetTimerEx("ZestawNaprawczy_CountDown", 1000, false, "ii", playerid, vehicleid);
 		}
 		else if(IsPlayerInRangeOfPoint(playerid, 10.0, pos[0], pos[1], pos[2]))
 		{
 			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~r~Podejdz do auta! %ds", 8-ZestawNaprawczy_Warning[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
 			ZestawNaprawczy_Warning[playerid]++;
+			SetTimerEx("ZestawNaprawczy_CountDown", 1000, false, "ii", playerid, vehicleid);
 		}
 		else
 		{
-			SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+			SendClientMessage(playerid, COLOR_PANICRED, "* [ZESTAW NAPRAWCZY] Anulowano naprawê pojazdu. Nie by³eœ w dostatecznie blisko pojazdu.");
 			ZestawNaprawczy_Timer[playerid] = 30;
 			ZestawNaprawczy_Warning[playerid] = 0;
-			KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
-			DeletePVar(playerid, "timer_ZestawNaprawczy");
+			DeletePVar(playerid, "Use_ZestawNaprawczy");
 		}
 	}
 	else
 	{
-		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
@@ -817,8 +817,9 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		RepairVehicle(vehicleid);
         SetVehicleHealth(vehicleid, 1000);
 		CarData[VehicleUID[vehicleid][vUID]][c_HP] = 1000.0;
-		DeletePVar(playerid, "timer_ZestawNaprawczy");
+		DeletePVar(playerid, "Use_ZestawNaprawczy");
 	}
+	return 1;
 }
 
 public CountDownVehsRespawn()
@@ -1202,7 +1203,37 @@ if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 	GetPlayerName(playerid, nick, sizeof(nick));
 	format(komunikat, sizeof(komunikat),"* %s ³¹czy kabelki i wyjmuje œrubokrêt i odkrêca nastêpn¹ os³onkê.", nick);
 	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	SetTimerEx("udalo2",6000,0,"d",playerid);
+	new skillz;
+	if(PlayerInfo[playerid][pJackSkill] < 50)
+	{
+		skillz = 1;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
+	{
+		skillz = 2;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
+	{
+		skillz = 3;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
+	{
+		skillz = 4;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 400)
+	{
+		skillz = 5;
+	}
+	new kradnij = random(100);
+	new mnoznik = skillz*19;
+	if(kradnij <= mnoznik)
+	{
+		SetTimerEx("udalo2",6000,0,"d",playerid);
+	}
+	else
+	{
+		SetTimerEx("nieudalo2",6000,0,"d",playerid);
+	}
 }
 else
 {
@@ -1220,7 +1251,37 @@ public udalo2(playerid){
     	GetPlayerName(playerid, nick, sizeof(nick));
     	format(komunikat, sizeof(komunikat),"* %s wyjmuje 4 kolorowe kabelki.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    	SetTimerEx("udalo3",6000,0,"d",playerid);
+    	new skillz;
+		if(PlayerInfo[playerid][pJackSkill] < 50)
+		{
+			skillz = 1;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
+		{
+			skillz = 2;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
+		{
+			skillz = 3;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
+		{
+			skillz = 4;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 400)
+		{
+			skillz = 5;
+		}
+		new kradnij = random(100);
+		new mnoznik = skillz*19;
+		if(kradnij <= mnoznik)
+		{
+			SetTimerEx("udalo3",6000,0,"d",playerid);
+		}
+		else
+		{
+			SetTimerEx("nieudalo3",6000,0,"d",playerid);
+		}
     }
     else
     {
@@ -1239,6 +1300,8 @@ public udalo3(playerid){
     	format(komunikat, sizeof(komunikat),"* %s ³¹czy odpowiednie kabelki i wy³¹czy³ alarm.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     	TogglePlayerControllable(playerid, 1);
+		new carid = GetPlayerVehicleID(playerid); 
+		if(Gas[carid] <= 10) Gas[carid] += 15;
     	NieSpamujKradnij[playerid] = 0;
     	SendClientMessage(playerid, COLOR_GRAD2, "Skill z³odzieja aut +1");
     	PlayerInfo[playerid][pJackSkill] ++;
@@ -8422,13 +8485,13 @@ WczytajRangi()
 
 WczytajSkiny()
 {
-    new query[256], id, typ, skiny[128],skin[MAX_SKIN_SELECT];
+    new query[1124], id, typ, skiny[1024],skin[MAX_SKIN_SELECT];
     mysql_query("SELECT * FROM `mru_skins`");
     mysql_store_result();
 
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>dds[128]", typ, id, skiny);
+        sscanf(query, "p<|>dds[1024]", typ, id, skiny);
         sscanf(skiny, "p<,>A<d>(0)[22]", skin);
 
         if(typ == 1)
@@ -11546,6 +11609,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
         SetPVarInt(playerid, "trans", 0);
         new str[64], Float:speed, ile;
         DisablePlayerCheckpoint(playerid);
+		if(idx == -1) return; //TODO: check
 
         if(TransportJobData[idx][eTJDStartX] == 0.0) speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[0][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[0][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[0][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         else speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[idx][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[idx][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[idx][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
@@ -12668,6 +12732,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 
 public CuffedAction(playerid, cuffedid)
 {
+	//if(!IsAPolicja(cuffedid)) ZdejmijBW(cuffedid, 4000);
 	Kajdanki_JestemSkuty[cuffedid] = 1;
 	Kajdanki_Uzyte[playerid] = 1;
 	Kajdanki_PDkuje[cuffedid] = playerid;
