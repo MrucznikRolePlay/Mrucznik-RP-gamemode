@@ -235,6 +235,8 @@ UpdatePotentialCheatersTxd()
 			TextDrawBoxColor(PotentialCheatersTxd[i], 50);
 
 			i++;
+			if(i == MAX_POTENTIAL_CHEATERS)
+				break;
 		}
 	}
 
