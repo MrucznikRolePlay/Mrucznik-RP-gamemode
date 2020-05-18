@@ -1032,7 +1032,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		SendClientMessage(playerid, COLOR_GRAD2, "Stra¿nik zauwa¿y³, ¿e coœ kombinujesz. Wracasz do celi.");
 		return JailDeMorgan(playerid);
 	}							
-	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) //inna animacja dla bw
+	if(!Kajdanki_JestemSkuty[playerid] && (PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0)) //inna animacja dla bw
 	{
 		PlayerEnterVehOnInjury(playerid);
 		return FreezePlayerOnInjury(playerid);
@@ -4930,7 +4930,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 {
 	new string[256];
 
-	if(PlayerInfo[playerid][pInjury] > 0 && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER))
+	if(!Kajdanki_JestemSkuty[playerid] && (PlayerInfo[playerid][pInjury] > 0 && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)))
 	{
 		return PlayerEnterVehOnInjury(playerid);
 	}
@@ -4939,7 +4939,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		if(GetPVarInt(playerid, "Timer_OnChangingWeapon"))
 		{
 			AntySpam[playerid] = 0;
-			KillTimer(GetPVarInt(playerid, "Timer_OnChangingWeapon"));
+			//KillTimer(GetPVarInt(playerid, "Timer_OnChangingWeapon"));
 			DeletePVar(playerid, "Timer_OnChangingWeapon");
 		}
 		if(newstate == PLAYER_STATE_DRIVER)
