@@ -127,7 +127,8 @@ YCMD:kajdanki(playerid, params[], help)
                 {
                     sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
                 }
-            } else
+            } 
+            else
             {
                 new str[32];
                 valstr(str, giveplayerid);

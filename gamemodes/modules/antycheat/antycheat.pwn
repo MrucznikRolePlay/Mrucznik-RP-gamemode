@@ -337,6 +337,10 @@ GetNexACAdditionalSettingName(type)
 		{
 			strcat(name, "KICK 1LVL/OZNACZ");
 		}
+		case LVL1MARK:
+		{
+			strcat(name, "OZNACZ 1LVL");
+		}
 		case LVL1INSTAKICK:
 		{
 			strcat(name, "INSTAKICK 1LVL/OZNACZ");
