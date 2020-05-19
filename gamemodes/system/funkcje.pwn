@@ -8485,13 +8485,13 @@ WczytajRangi()
 
 WczytajSkiny()
 {
-    new query[256], id, typ, skiny[128],skin[MAX_SKIN_SELECT];
+    new query[1124], id, typ, skiny[1024],skin[MAX_SKIN_SELECT];
     mysql_query("SELECT * FROM `mru_skins`");
     mysql_store_result();
 
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>dds[128]", typ, id, skiny);
+        sscanf(query, "p<|>dds[1024]", typ, id, skiny);
         sscanf(skiny, "p<,>A<d>(0)[22]", skin);
 
         if(typ == 1)
@@ -11609,6 +11609,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
         SetPVarInt(playerid, "trans", 0);
         new str[64], Float:speed, ile;
         DisablePlayerCheckpoint(playerid);
+		if(idx == -1) return; //TODO: check
 
         if(TransportJobData[idx][eTJDStartX] == 0.0) speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[0][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[0][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[0][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         else speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[idx][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[idx][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[idx][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
