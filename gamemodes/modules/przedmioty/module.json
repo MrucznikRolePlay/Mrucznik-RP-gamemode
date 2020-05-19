@@ -1,7 +1,7 @@
 {
     "name": "przedmioty",
-    "description": "Zawiera zal¹¿ek systemu przedmiotów.",
+    "description": "System przedmiotów.",
     "author": "Creative",
     "commands": false,
-    "date": "22.11.2019"
+    "date": "19.05.2020"
 }

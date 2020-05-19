@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                 przedmioty                                                //
+//                                               przedmioty.def                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,11 +17,71 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: Creative
-// Data utworzenia: 22.11.2019
+// Data utworzenia: 19.05.2020
 
 //
 
 //------------------<[ Makra: ]>-------------------
+#define MAX_ITEMS			500
+
+enum iItems
+{
+	iUID,
+	iType,
+	iOwner,
+	iValue1,
+	iValue2,
+	iName[32],
+	iOwnertype,
+	Float: iX,
+	Float: iY,
+	Float: iZ,
+	iDoor,
+	iUse,
+	Text3D:i3DText,
+	iCreate,
+	iTermin,
+ 	iObject,
+ 	iUrl[72],
+}
+new ItemCache[MAX_ITEMS][iItems];
 //------------------<[ Define: ]>-------------------
+
+//ItemCache - typy
+#define ITEM_WEAPON    	 	1
+#define ITEM_TIME      	 	2
+#define ITEM_CIGGY      	3
+#define ITEM_BEER       	4
+#define ITEM_DRINK      	5
+#define ITEM_YELLOWDOC  	6
+#define ITEM_GLOVES     	7
+#define ITEM_VEHICLE    	8
+#define ITEM_VEHICLE_GROUP  9
+#define ITEM_CANISTER       10
+#define ITEM_CLOTHES        11
+#define ITEM_TUNING         12
+#define ITEM_MASK           13
+#define ITEM_CARKEY         14
+#define ITEM_BAG            15
+#define ITEM_CAMERA         16
+#define ITEM_FOOD           17
+#define ITEM_DRUNK          18
+#define ITEM_PHONE      	19
+#define ITEM_DOORS          20
+#define ITEM_PANELS         21
+#define ITEM_LIGHTS         22
+#define ITEM_TIRES          23
+#define ITEM_DISCMAN        24
+#define ITEM_DISC           25
+#define ITEM_BOOMBOX        26
+#define ITEM_WYTRYCH        27
+#define ITEM_ZWLOKI			28
+#define ITEM_TABLET			29
+#define ITEM_LEK			30
+
+#define IN_NONE     1
+#define IN_CAR      2
+#define IN_DOOR     3
+#define IN_PLAYER   4
 
 //end
