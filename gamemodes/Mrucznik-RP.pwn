@@ -2622,16 +2622,21 @@ SetPlayerSpawnPos(playerid)
 						}
 						default: //Spawn cywila
 						{
-							
-							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-							SetPlayerFacingAngle(playerid, 0.94);
+							if(PlayerCanSpawnWihoutTutorial(playerid))
+							{
+								SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+								SetPlayerFacingAngle(playerid, 0.94);
+							}
 						}
 				    }
 				}
 				else //Spawn cywila
 				{
-		    		SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-					SetPlayerFacingAngle(playerid, 0.94);
+					if(PlayerCanSpawnWihoutTutorial(playerid))
+					{
+						SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+						SetPlayerFacingAngle(playerid, 0.94);
+					}
 				}
 		    }
 		    else if(PlayerInfo[playerid][pSpawn] == 1) //Spawn przed domem
@@ -5531,7 +5536,7 @@ PayDay()
 }
 
 public OnPlayerUpdate(playerid)
-{
+{			
 	if((PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) && IsPlayerAimingEx(playerid))
 	{
 		return FreezePlayerOnInjury(playerid);
