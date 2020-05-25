@@ -5537,6 +5537,15 @@ PayDay()
 
 public OnPlayerUpdate(playerid)
 {
+	if(DEVELOPMENT)
+	{
+		new Float:pAC_Pos[3],Float:VS ;
+		GetPlayerVelocity(playerid, pAC_Pos[0], pAC_Pos[1], pAC_Pos[2]);
+		VS = VectorSize(pAC_Pos[0], pAC_Pos[1], pAC_Pos[2])*136.6666;
+		SendClientMessageToAll(COLOR_YELLOW, sprintf("%s velocity: %f", GetNick(playerid), floatround(VS,floatround_round)));
+	}
+
+				
 	if((PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) && IsPlayerAimingEx(playerid))
 	{
 		return FreezePlayerOnInjury(playerid);
