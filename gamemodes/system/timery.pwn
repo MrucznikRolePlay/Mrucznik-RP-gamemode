@@ -2139,8 +2139,8 @@ public SlapperTimer()
 				{
 					new ip[16];
 					GetPlayerIp(i, ip, sizeof(ip));
-					SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] prawdopodobnie czituje. | Slapper", 
-					GetNickEx(i), i, ip), 
+					SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] prawdopodobnie czituje. | Slapper [%d/5]", 
+					GetNickEx(i), i, ip, PlayerSlapperWarning[i]), 
 					0xFF00FFFF);
 					PlayerSlapperWarning[i]++;
 				}
