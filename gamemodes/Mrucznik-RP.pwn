@@ -2630,6 +2630,12 @@ SetPlayerSpawnPos(playerid)
 				}
 				else //Spawn cywila
 				{
+					if(PlayerInfo[playerid][pSex] == 0 || PlayerInfo[playerid][pOrigin] == 0 || PlayerInfo[playerid][pAge] == 0) //anty sobeit spawn
+					{
+						sendErrorMessage(playerid, "Zespawnowa³eœ siê, a nie wybra³eœ p³ci/pochodzenia/wieku postaci! Zosta³eœ wyrzucony z serwera.");
+						KickEx(playerid);
+						return 0;
+					}
 		    		SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
 					SetPlayerFacingAngle(playerid, 0.94);
 				}
