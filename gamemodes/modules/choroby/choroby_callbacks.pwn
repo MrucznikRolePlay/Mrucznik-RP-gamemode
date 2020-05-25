@@ -65,6 +65,7 @@ hook OnPlayerSpawn(playerid)
 
 hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+	/*
 	//infecting on contact
 	if(weaponid >= 0 && weaponid <= 15) //melee weapons only
 	{
@@ -97,7 +98,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	}
 	else if(weaponid == 42) //gaœnica
 	{
-		IncreasePlayerImmunity(playerid, 0.5, 15);
+		IncreasePlayerImmunity(playerid, 0.5, PTSD);
 	}
 	else 
 	{
@@ -117,6 +118,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
+	*/
 	return 1;
 }
 
