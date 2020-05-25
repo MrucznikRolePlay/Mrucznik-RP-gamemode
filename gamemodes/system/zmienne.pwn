@@ -118,6 +118,7 @@ enum eLegalWpns {
 }
 new playerWeapons[MAX_PLAYERS][eLegalWpns];
 
+new PlayerSlapperWarning[MAX_PLAYERS] = 0;
 
 new Zgloszenie[OSTATNIE_ZGLOSZENIA][hqZgloszenia];
 new ilosczgloszen = 0;
@@ -1144,6 +1145,8 @@ ZerujZmienne(playerid)
 	
 	
     lastMsg[playerid] = 0;
+
+	PlayerSlapperWarning[playerid] = 0;
 
 	//z conecta
 	TogPodglad[playerid] = 0;

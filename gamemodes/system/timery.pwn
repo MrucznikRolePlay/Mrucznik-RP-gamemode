@@ -928,6 +928,7 @@ forward MainTimer();
 public MainTimer()
 {
     JednaSekundaTimer();
+	SlapperTimer();
     if(TICKS_Second)
     {
         Spectator();
@@ -2116,6 +2117,36 @@ public RPGTimer()
 		}
 	}
 	return 1;
+}
+public SlapperTimer()
+{
+	foreach(new i : Player)
+	{
+		if(GetPlayerState(i) == PLAYER_STATE_ONFOOT)
+		{
+			new Float:pAC_Pos[3],Float:VS ;
+			GetPlayerVelocity(i, pAC_Pos[0], pAC_Pos[1], pAC_Pos[2]);
+			VS = VectorSize(pAC_Pos[0], pAC_Pos[1], pAC_Pos[2])*136.6666;
+			if(floatround(VS,floatround_round) >= 350)
+			{
+				if(PlayerSlapperWarning[i] >= 5)
+				{
+					MruMySQL_Banuj(i, "Anti-Slapper");
+					Log(punishmentLog, INFO, "%s zosta³ zbanowany za podejrzenie slappera (%d speeda on-foot, %d ostrze¿eñ)", GetPlayerLogName(i), floatround(VS,floatround_round), PlayerSlapperWarning[i]);
+					KickEx(i);
+				}
+				else
+				{
+					new ip[16];
+					GetPlayerIp(i, ip, sizeof(ip));
+					SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] prawdopodobnie czituje. | Slapper", 
+					GetNickEx(i), i, ip), 
+					0xFF00FFFF);
+					PlayerSlapperWarning[i]++;
+				}
+			}
+		}
+	}
 }
 public JednaSekundaTimer()
 {

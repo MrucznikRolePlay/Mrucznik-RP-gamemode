@@ -408,10 +408,10 @@ ACv2_DrivingWithoutPremissions(playerid, vehicleid)
 			Log(warningLog, INFO, string);
 			Log(punishmentLog, INFO, string);
 			RemovePlayerFromVehicleEx(playerid);
-			new playa, Float:slx, Float:sly, Float:slz;
-			GetPlayerPos(playa, slx, sly, slz);
-			SetPlayerPos(playa, slx, sly, slz+5);
-			PlayerPlaySound(playa, 1130, slx, sly, slz+5);
+			new Float:slx, Float:sly, Float:slz;
+			GetPlayerPos(playerid, slx, sly, slz);
+			SetPlayerPos(playerid, slx, sly, slz+5);
+			PlayerPlaySound(playerid, 1130, slx, sly, slz+5);
 			return 1;
 		}
 	}
