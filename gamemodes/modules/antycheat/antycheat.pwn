@@ -95,6 +95,23 @@ SetAntyCheatForPlayer(playerid, valueCode)
 	return 1;
 }
 
+OnPlayerSpawnWihoutTutorial(playerid)
+{
+	if(PlayerInfo[playerid][pLevel] == 1 && (PlayerInfo[playerid][pSex] == 0 || PlayerInfo[playerid][pOrigin] == 0 || PlayerInfo[playerid][pAge] == 0)) //anty sobeit spawn
+	{
+		new ip[16];
+		GetPlayerIp(playerid, ip, sizeof(ip));
+		SendMessageToAdmin(
+			sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | Spawn pomijaj¹c tutorial", GetNickEx(playerid), playerid, ip), 
+			0xFF00FFFF
+		);
+		sendErrorMessage(playerid, "Zespawnowa³eœ siê bez wyboru p³ci/pochodzenia/wieku postaci! Zosta³eœ wyrzucony z serwera.");
+		KickEx(playerid);
+		return 0;
+	}
+	return 1;
+}
+
 forward CheckCode2003(killerid, playerid);
 public CheckCode2003(killerid, playerid)
 {

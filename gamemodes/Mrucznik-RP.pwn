@@ -2622,22 +2622,21 @@ SetPlayerSpawnPos(playerid)
 						}
 						default: //Spawn cywila
 						{
-							
-							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-							SetPlayerFacingAngle(playerid, 0.94);
+							if(OnPlayerSpawnWihoutTutorial(playerid))
+							{
+								SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+								SetPlayerFacingAngle(playerid, 0.94);
+							}
 						}
 				    }
 				}
 				else //Spawn cywila
 				{
-					if(PlayerInfo[playerid][pSex] == 0 || PlayerInfo[playerid][pOrigin] == 0 || PlayerInfo[playerid][pAge] == 0) //anty sobeit spawn
+					if(OnPlayerSpawnWihoutTutorial(playerid))
 					{
-						sendErrorMessage(playerid, "Zespawnowa³eœ siê, a nie wybra³eœ p³ci/pochodzenia/wieku postaci! Zosta³eœ wyrzucony z serwera.");
-						KickEx(playerid);
-						return 0;
+						SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+						SetPlayerFacingAngle(playerid, 0.94);
 					}
-		    		SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-					SetPlayerFacingAngle(playerid, 0.94);
 				}
 		    }
 		    else if(PlayerInfo[playerid][pSpawn] == 1) //Spawn przed domem
