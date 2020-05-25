@@ -95,7 +95,7 @@ SetAntyCheatForPlayer(playerid, valueCode)
 	return 1;
 }
 
-OnPlayerSpawnWihoutTutorial(playerid)
+PlayerCanSpawnWihoutTutorial(playerid)
 {
 	if(PlayerInfo[playerid][pLevel] == 1 && (PlayerInfo[playerid][pSex] == 0 || PlayerInfo[playerid][pOrigin] == 0 || PlayerInfo[playerid][pAge] == 0)) //anty sobeit spawn
 	{

@@ -2622,7 +2622,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						default: //Spawn cywila
 						{
-							if(OnPlayerSpawnWihoutTutorial(playerid))
+							if(PlayerCanSpawnWihoutTutorial(playerid))
 							{
 								SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
 								SetPlayerFacingAngle(playerid, 0.94);
@@ -2632,7 +2632,7 @@ SetPlayerSpawnPos(playerid)
 				}
 				else //Spawn cywila
 				{
-					if(OnPlayerSpawnWihoutTutorial(playerid))
+					if(PlayerCanSpawnWihoutTutorial(playerid))
 					{
 						SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
 						SetPlayerFacingAngle(playerid, 0.94);
