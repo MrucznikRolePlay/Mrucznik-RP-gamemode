@@ -99,7 +99,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 	*/
 	if(weaponid == 42) //gaœnica
 	{
-		IncreasePlayerImmunity(playerid, 0.5, PTSD);
+		IncreasePlayerImmunity(playerid, 0.5, 15);
 	}
 	/*
 	else 
