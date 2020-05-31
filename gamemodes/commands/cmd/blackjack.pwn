@@ -41,26 +41,31 @@ YCMD:blackjack(playerid, params[], help)
             GetPlayerName(playerid, sendername, sizeof(sendername));
             if(oczko >= 2 && oczko <= 10)
             {
+			    Log(payLog, INFO, "%s wyci¹gn¹³ kartê: %d", GetPlayerLogName(playerid), oczko);
                 format(string, sizeof(string), "* %s wyci¹ga kartê i jest to: %d", sendername, oczko);
 				ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
             }
             else if(oczko == 11)
             {
+			    Log(payLog, INFO, "%s wyci¹gn¹³ kartê: J", GetPlayerLogName(playerid));
                 format(string, sizeof(string), "* %s wyci¹ga kartê i jest to: J (walet)", sendername);
 				ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
             }
             else if(oczko == 12)
             {
+			    Log(payLog, INFO, "%s wyci¹gn¹³ kartê: Q", GetPlayerLogName(playerid));
                 format(string, sizeof(string), "* %s wyci¹ga kartê i jest to: Q (dama)", sendername);
 				ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
             }
             else if(oczko == 13)
             {
+			    Log(payLog, INFO, "%s wyci¹gn¹³ kartê: K", GetPlayerLogName(playerid));
                 format(string, sizeof(string), "* %s wyci¹ga kartê i jest to: K (król)", sendername);
 				ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
             }
             else if(oczko == 14 || oczko == 15)
             {
+			    Log(payLog, INFO, "%s wyci¹gn¹³ kartê: A", GetPlayerLogName(playerid));
                 format(string, sizeof(string), "* %s wyci¹ga kartê i jest to: A (as)", sendername);
 				ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
             }
