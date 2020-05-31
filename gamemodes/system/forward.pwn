@@ -14,6 +14,7 @@ forward PlayerFixRadio2();
 forward StopMusic();
 forward AddsOn();
 forward JednaSekundaTimer();//textdraw
+forward SlapperTimer();
 forward Spectator();
 forward SyncUp();
 forward SyncTime();
