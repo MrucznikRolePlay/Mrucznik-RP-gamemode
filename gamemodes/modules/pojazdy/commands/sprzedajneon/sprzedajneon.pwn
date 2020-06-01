@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                sprzedajneon                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,47 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "sprzedajneon\sprzedajneon.pwn"
-#include "spawnall\spawnall.pwn"
-
+#include "sprzedajneon_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_sprzedajneon()
 {
-    command_sprzedajneon();
-    command_spawnall();
+    new command = Command_GetID("sprzedajneon");
+
+    //aliases
+    Command_AddAlt(command, "sprzedajneony");
+    Command_AddAlt(command, "sellneon");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:sprzedajneon(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Oferuje kupno neonu wskazanemu graczowi.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, prowizja;
+    if(sscanf(params, "rd", giveplayerid, prowizja))
+    {
+        sendTipMessage(playerid, "U¿yj /sprzedajneon [Nick/ID] [prowizja] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_sprzedajneon_Impl(playerid, giveplayerid, prowizja);
 }
