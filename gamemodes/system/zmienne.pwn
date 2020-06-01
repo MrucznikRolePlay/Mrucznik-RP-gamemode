@@ -76,7 +76,7 @@ new DMV_ALARM = 0;
 new bramaAlarmu[4];
 
 //Basen Tsunami
-new poolStatus = 0;// 0 = zamkniêty; 1 = otwarty;
+new poolStatus = 1;// 0 = zamkniêty; 1 = otwarty;
 new onePoolPrice = 50000;
 new twoPoolPrice = 75000;
 new threePoolPrice = 100000;

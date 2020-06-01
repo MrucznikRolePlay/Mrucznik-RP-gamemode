@@ -88,6 +88,7 @@ YCMD:kajdanki(playerid, params[], help)
 
                                 //czynnoœci
                                 CuffedAction(playerid, giveplayerid);
+                                ZdejmijBW(playerid, 2000);
                             }
                             else if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
                             {

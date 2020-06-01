@@ -87,8 +87,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
+
+	//2.7.5 - nadal nie 3.0
+	if(dialogid == DIALOGID_UNIFORM_FRAKCJA)
+	{
+		if(response)
+		{
+			new string[64];
+			SetPlayerSkinEx(playerid, FRAC_SKINS[GetPlayerFraction(playerid)][listitem]);
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
+	else if(dialogid == DIALOGID_UNIFORM_FAMILY)
+	{
+		if(response)
+		{
+			new string[64];
+			SetPlayerSkinEx(playerid, FAM_SKINS[GetPlayerOrg(playerid)][listitem]);
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
 	//2.5.2
-	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
+	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)
 		{

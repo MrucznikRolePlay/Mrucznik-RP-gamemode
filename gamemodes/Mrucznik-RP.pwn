@@ -681,13 +681,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     		TextDrawHideForPlayer(playerid,NG_GateTD[7]);
             VAR_NGKeypad = false;
         }
-        if(GetPVarInt(playerid, "skin-select") == 1) // skin selector
-        {
-            SetPVarInt(playerid, "skin-select", 0);
-            CancelSelectTextDraw(playerid);
-            DestroySkinSelection(playerid);
-            TogglePlayerControllable(playerid, 1);
-        }
     }
     if(GetPVarInt(playerid, "ng-gatekey") == 1)
     {
@@ -742,43 +735,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		}
 
 	}
-    if(GetPVarInt(playerid, "skin-select") == 1) // skin selector
-    {
-        if(clickedid == SkinSelectionAccept)//zatiwerdz
-        {
-            if(!GetPVarInt(playerid, "skin-done"))
-            {
-                GameTextForPlayer(playerid, "~r~Wybierz ubranie", 1000, 5);
-                return 1;
-            }
-            SetPVarInt(playerid, "skin-select", 0);
-            CancelSelectTextDraw(playerid);
-            DestroySkinSelection(playerid);
-            TogglePlayerControllable(playerid, 1);
-
-            if(GetPVarInt(playerid, "skin-choosen") != 0)
-            {
-                SetPlayerSkinEx(playerid, GetPVarInt(playerid, "skin-choosen"));
-                PlayerInfo[playerid][pUniform] = GetPVarInt(playerid, "skin-choosen");
-            }
-        }
-        else if(clickedid == SkinSelectionDenied)//anuluj
-        {
-            SetPVarInt(playerid, "skin-select", 0);
-            CancelSelectTextDraw(playerid);
-            DestroySkinSelection(playerid);
-            TogglePlayerControllable(playerid, 1);
-        }
-        else if(clickedid == SkinSelectionMy)//moj cywil
-        {
-            SetPVarInt(playerid, "skin-select", 0);
-            CancelSelectTextDraw(playerid);
-            DestroySkinSelection(playerid);
-            TogglePlayerControllable(playerid, 1);
-            PlayerInfo[playerid][pUniform] = PlayerInfo[playerid][pSkin];
-            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
-        }
-    }
     //Strefy
     if(clickedid == ZoneTXD[3])
     {
@@ -966,24 +922,6 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
     		x++;
     	}
     }
-    if(SkinSelection[playerid][0] <= _:playertextid < SkinSelection[playerid][MAX_SKIN_SELECT])
-    {
-        new idx = _:playertextid-_:SkinSelection[playerid][0];
-        if(0 <= idx <= MAX_SKIN_SELECT)
-        {
-            new typ = GetPVarInt(playerid, "skin-typ");
-            new frac = GetPlayerFraction(playerid);
-            if(frac == 0) frac = GetPlayerOrg(playerid);
-            switch(typ) //switch na tablice ze skinami
-            {
-                case 1: PlayerTextDrawSetPreviewModel(playerid, PlayerText:SkinSelection[playerid][MAX_SKIN_SELECT], FRAC_SKINS[frac][idx]), SetPVarInt(playerid, "skin-choosen", FRAC_SKINS[frac][idx]);
-                case 2: PlayerTextDrawSetPreviewModel(playerid, PlayerText:SkinSelection[playerid][MAX_SKIN_SELECT], FAM_SKINS[frac][idx]), SetPVarInt(playerid, "skin-choosen", FAM_SKINS[frac][idx]);
-            }
-            PlayerTextDrawShow(playerid, PlayerText:SkinSelection[playerid][MAX_SKIN_SELECT]);
-            SetPVarInt(playerid, "skin-index", idx);
-            SetPVarInt(playerid, "skin-done", 1);
-        }
-    }
 	return 1;
 }
 
@@ -1151,7 +1089,7 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 9, 648.0233, -1357.3239, 13.5716, 60, 0); //San News
     SetPlayerMapIcon(playerid, 10, 725.6099, -1439.8906, 13.5318, 50, 0); //Jetty Lounge
     SetPlayerMapIcon(playerid, 11, 816.2141, -1386.5956, 13.6068, 48, 0); //Vinyl Club
-    SetPlayerMapIcon(playerid, 12, 815.2556, -1616.2010, 13.7077, 14, 0); //Kurczak Marina
+    SetPlayerMapIcon(playerid, 12, 815.2556, -1616.2010, 13.7077, 10, 0); //Burger Marina
     SetPlayerMapIcon(playerid, 13, 925.6270, -1353.1003, 13.3768, 14, 0); //Kurczak Market
     SetPlayerMapIcon(playerid, 14, 1038.1844, -1339.7595, 13.7266, 17, 0); //P¹czkarnia Allen
     SetPlayerMapIcon(playerid, 15, 1100.9039, -1235.4445, 15.5474, 27, 0); //FDU
@@ -1172,7 +1110,7 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 30, 1006.5273, -936.9426, 41.8934, 42, 0); //Stacja Benzynowa na Temple
     SetPlayerMapIcon(playerid, 31, 997.5923, -921.3640, 41.9068, 36, 0); //24/7 na Temple
     SetPlayerMapIcon(playerid, 32, 997.2347, -917.5255, 41.9068, 52, 0); //Bankomat na Temple
-    SetPlayerMapIcon(playerid, 33, 1199.9893, -923.6624, 42.7465, 14, 0); //Kurczak Temple
+    SetPlayerMapIcon(playerid, 33, 1199.9893, -923.6624, 42.7465, 10, 0); //Burger Temple
     SetPlayerMapIcon(playerid, 34, 1315.3838, -904.4830, 38.6174, 36, 0); //24/7 na Temple (2)
     SetPlayerMapIcon(playerid, 35, 1310.2568, -1370.4567, 13.3031, 34, 0); //S¹d
     SetPlayerMapIcon(playerid, 36, 1481.2053, -1768.3350, 18.5228, 34, 0); //Urz¹d
@@ -1572,9 +1510,6 @@ public OnPlayerDisconnect(playerid, reason)
         DestroyDynamicObject(noclipdata[playerid][fireobject]);
         noclipdata[playerid][fireobject] = 0;
     }
-
-    if(GetPVarInt(playerid, "skin-select") != 0)
-        DestroySkinSelection(playerid);
 
     //strefy
     if(ZonePlayerTimer[playerid] != 0) KillTimer(ZonePlayerTimer[playerid]);
