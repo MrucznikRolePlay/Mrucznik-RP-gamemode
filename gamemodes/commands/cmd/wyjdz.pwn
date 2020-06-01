@@ -55,7 +55,9 @@ YCMD:wyjdz(playerid, params[], help)
 		else if(IsPlayerInRangeOfPoint(playerid, 4, 1213.3364,-1807.0619,70.0682)) //basen œrodek 
 		{
 			SetPlayerPos(playerid, 1205.45874, -1765.66833, 13.54815); // basen tsunami
-            SetPlayerVirtualWorld(playerid,0);
+			SetPlayerVirtualWorld(playerid, 43);
+            Wchodzenie(playerid);
+			return 1;
 		}
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 566.5435,-2087.0046,2.7402))  //basen tsunami wejscie do hali
         {
