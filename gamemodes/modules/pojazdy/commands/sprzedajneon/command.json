@@ -20,7 +20,7 @@
         {
             "type": "integer",
             "name": "commission",
-            "description": "commission"
+            "description": "prowizja"
         }
     ],
     "date": "02.06.2020"

@@ -164,7 +164,7 @@ command_sprzedajneon_Impl(playerid, giveplayerid, commission)
     }
 
     new cost;
-    if(CarData[VehicleUID[pojazd][vUID]][c_Neon] != 0)
+    if(CarData[VehicleUID[pojazd][vUID]][c_Neon] == 0)
     {
         cost = 3000000 + commission; // nie ma neonu
     }
@@ -173,7 +173,7 @@ command_sprzedajneon_Impl(playerid, giveplayerid, commission)
         cost = 1000000 + commission; // ma neon
     }
 
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Oferujesz %s monta¿ neonu za $%d$ (commission %d$).", 
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Oferujesz %s monta¿ neonu za $%d$ (prowizja %d$).", 
         GetNick(giveplayerid), cost, commission
     ));
     SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, sprintf("* %s oferuje monta¿ neonu za %d$.", GetNick(playerid), cost));
