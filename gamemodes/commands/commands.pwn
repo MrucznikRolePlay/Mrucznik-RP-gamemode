@@ -509,7 +509,6 @@
 #include "cmd/unbw.pwn"
 #include "cmd/undemorgan.pwn"
 #include "cmd/unfrakcja.pwn"
-#include "cmd/uniform2.pwn"
 #include "cmd/unjail.pwn"
 #include "cmd/unrentroom.pwn"
 #include "cmd/unspec.pwn"

@@ -76,7 +76,7 @@ new DMV_ALARM = 0;
 new bramaAlarmu[4];
 
 //Basen Tsunami
-new poolStatus = 0;// 0 = zamkniêty; 1 = otwarty;
+new poolStatus = 1;// 0 = zamkniêty; 1 = otwarty;
 new onePoolPrice = 50000;
 new twoPoolPrice = 75000;
 new threePoolPrice = 100000;
@@ -118,6 +118,7 @@ enum eLegalWpns {
 }
 new playerWeapons[MAX_PLAYERS][eLegalWpns];
 
+new PlayerSlapperWarning[MAX_PLAYERS] = 0;
 
 new Zgloszenie[OSTATNIE_ZGLOSZENIA][hqZgloszenia];
 new ilosczgloszen = 0;
@@ -335,7 +336,6 @@ new bool:BarierState[MAX_FRAC][10];
 //13.07  system skinow frakcyjnych mysql
 new FRAC_SKINS[MAX_FRAC][MAX_SKIN_SELECT];
 new FAM_SKINS[MAX_ORG][MAX_SKIN_SELECT];
-new SkinSelection[MAX_PLAYERS][MAX_SKIN_SELECT+1];
 
 //frac
 new LeadersValue[LEADERS_TYPES][MAX_FRAC]; //a
@@ -1145,6 +1145,8 @@ ZerujZmienne(playerid)
 	
     lastMsg[playerid] = 0;
 
+	PlayerSlapperWarning[playerid] = 0;
+
 	//z conecta
 	TogPodglad[playerid] = 0;
 	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
@@ -1396,8 +1398,6 @@ ZerujZmienne(playerid)
     ToggleSpeedoGPS[playerid] = false;
 
     for(new i=0;i<MAX_ZONES;i++) bInZone[playerid][i] = false;
-
-    for(new i=0;i<MAX_SKIN_SELECT;i++) SkinSelection[playerid][i] = -1; //Czyszczenie
 
     Unspec[playerid][Coords][0] = 0.0;
     Unspec[playerid][Coords][1] = 0.0;

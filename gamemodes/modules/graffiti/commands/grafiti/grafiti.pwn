@@ -50,6 +50,7 @@ command_grafiti()
 //-------<[ command ]>-------
 YCMD:grafiti(playerid, params[], help)
 {
+    return sendTipMessage(playerid, "Komenda tymczasowo wy³¹czona.");
     if (help)
     {
         sendTipMessage(playerid, "System graffiti");
