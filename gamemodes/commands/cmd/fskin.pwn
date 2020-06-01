@@ -51,7 +51,6 @@ YCMD:fskin(playerid, params[], help)
             }
             else if(fam != 0)
             {
-
                 //FAM_SKINS
                 return SendClientMessage(playerid, COLOR_GRAD2, "Twoja rodzina nie ma w³asnych skinów.");
             }
