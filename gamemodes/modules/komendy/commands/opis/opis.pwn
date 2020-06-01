@@ -55,6 +55,7 @@ YCMD:opis(playerid, params[], help)
         return 1;
     }
     
+    
     //command body
-    return command_opis_Impl(playerid, params);
+    return command_opis_Impl(playerid);
 }
