@@ -282,6 +282,7 @@ DialogListaFrakcji()
 	}
 	safe_return frakcje;
 }
+
 DialogListaSkinow(frakcja)
 {
 	new skiny[512];
@@ -289,6 +290,18 @@ DialogListaSkinow(frakcja)
 	{
 		if(FRAC_SKINS[frakcja][i] == 0) break;
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[frakcja][i], i);
+	}
+	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	safe_return skiny;
+}
+
+DialogListaSkinowFamily(family)
+{
+	new skiny[512];
+	for(new i=0;i<MAX_SKIN_SELECT;i++)
+	{
+		if(FAM_SKINS[family][i] == 0) break;
+		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[family][i], i);
 	}
 	strdel(skiny, strlen(skiny)-2, strlen(skiny));
 	safe_return skiny;

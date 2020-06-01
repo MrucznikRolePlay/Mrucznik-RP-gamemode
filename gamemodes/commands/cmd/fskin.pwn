@@ -47,12 +47,21 @@ YCMD:fskin(playerid, params[], help)
             if(frac != 0)
             {
                 //FRAC_SKINS
-                return SendClientMessage(playerid, COLOR_GRAD2, "Twoja frakcja nie ma w³asnych skinów.");
+                if(FRAC_SKINS[frac][0] == 0)
+                {
+                    return SendClientMessage(playerid, COLOR_GRAD2, "Twoja frakcja nie ma w³asnych skinów.");
+                }
+                ShowPlayerDialogEx(playerid, DIALOGID_UNIFORM_FRAKCJA, DIALOG_STYLE_PREVMODEL_LIST, "Zmien skin frakcyjny", DialogListaSkinow(frac), "Zmien skin", "Anuluj"); //zmieñ dialogid
             }
             else if(fam != 0)
             {
                 //FAM_SKINS
-                return SendClientMessage(playerid, COLOR_GRAD2, "Twoja rodzina nie ma w³asnych skinów.");
+                if(FAM_SKINS[fam][0] == 0)
+                {
+                    return SendClientMessage(playerid, COLOR_GRAD2, "Twoja rodzina nie ma w³asnych skinów.");
+                }
+                ShowPlayerDialogEx(playerid, DIALOGID_UNIFORM_FAMILY, DIALOG_STYLE_PREVMODEL_LIST, "Zmien skin rodzinny", DialogListaSkinowFamily(fam), "Zmien skin", "Anuluj"); //zmieñ dialogid
+                
             }
             else return SendClientMessage(playerid, COLOR_GRAD2, "Nie mo¿esz tego u¿yæ.");
 		}
