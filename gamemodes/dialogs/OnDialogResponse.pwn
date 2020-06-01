@@ -94,7 +94,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[64];
-			SetPlayerSkinEx(playerid, FRAC_SKINS[GetPlayerFraction(playerid)][listitem]);
+			new skin = FRAC_SKINS[GetPlayerFraction(playerid)][listitem];
+			SetPlayerSkinEx(playerid, skin);
+			PlayerInfo[playerid][pUniform] = skin;
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
@@ -104,7 +106,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[64];
-			SetPlayerSkinEx(playerid, FAM_SKINS[GetPlayerOrg(playerid)][listitem]);
+			new skin = FAM_SKINS[GetPlayerOrg(playerid)][listitem];
+			SetPlayerSkinEx(playerid, skin);
+			PlayerInfo[playerid][pUniform] = skin;
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
