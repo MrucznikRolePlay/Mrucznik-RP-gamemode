@@ -30,7 +30,7 @@ command_spawnall_Impl(playerid)
 		new veh = PlayerInfo[playerid][pCars][i];
         if(veh != 0)
         {
-            if(CarData[veh][c_UID] == 0 || CarData[veh][c_ID] == 0) continue;
+            if(CarData[veh][c_ID] != 0) continue;
 
             Car_Spawn(veh);
             Log(serverLog, INFO, "Gracz %s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(veh));
