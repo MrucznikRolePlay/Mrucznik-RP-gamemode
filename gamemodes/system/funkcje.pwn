@@ -285,7 +285,7 @@ DialogListaFrakcji()
 
 DialogListaSkinow(frakcja)
 {
-	new skiny[512];
+	new skiny[1024];
 	for(new i=0;i<MAX_SKIN_SELECT;i++)
 	{
 		if(FRAC_SKINS[frakcja][i] == 0) break;
@@ -297,11 +297,11 @@ DialogListaSkinow(frakcja)
 
 DialogListaSkinowFamily(family)
 {
-	new skiny[512];
+	new skiny[1024];
 	for(new i=0;i<MAX_SKIN_SELECT;i++)
 	{
 		if(FAM_SKINS[family][i] == 0) break;
-		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[family][i], i);
+		format(skiny, sizeof(skiny), "%s%d\n", skiny, FAM_SKINS[family][i], i);
 	}
 	strdel(skiny, strlen(skiny)-2, strlen(skiny));
 	safe_return skiny;
@@ -8505,7 +8505,7 @@ WczytajSkiny()
     while(mysql_fetch_row_format(query, "|"))
     {
         sscanf(query, "p<|>dds[1024]", typ, id, skiny);
-        sscanf(skiny, "p<,>A<d>(0)[22]", skin);
+        sscanf(skiny, "p<,>A<d>(0)["#MAX_SKIN_SELECT"]", skin);
 
         if(typ == 1)
         {

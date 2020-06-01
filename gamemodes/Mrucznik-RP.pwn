@@ -106,6 +106,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <PreviewModelDialog>
 #include <vector>
 #include <map>
+#include <mapfix>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//

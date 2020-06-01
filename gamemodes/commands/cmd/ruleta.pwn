@@ -61,6 +61,7 @@ YCMD:ruleta(playerid, params[], help)
 			    format(string, sizeof(string), "* %s Krêci ruletk¹ i kulka zatrzymuje siê na czarnej %d", sendername, ruletka);
 				ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
 			}
+			Log(payLog, INFO, "%s zakrêci³ ruletk¹ i wypad³o: %d", GetPlayerLogName(playerid), ruletka);
 			ZabierzKase(playerid, 10000);
 			sendTipMessageEx(playerid, TEAM_AZTECAS_COLOR, "Kasyno pobiera op³atê za u¿ycie ruletki (10 000$)");
         }

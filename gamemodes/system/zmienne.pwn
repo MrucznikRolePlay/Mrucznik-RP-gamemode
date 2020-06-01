@@ -336,7 +336,6 @@ new bool:BarierState[MAX_FRAC][10];
 //13.07  system skinow frakcyjnych mysql
 new FRAC_SKINS[MAX_FRAC][MAX_SKIN_SELECT];
 new FAM_SKINS[MAX_ORG][MAX_SKIN_SELECT];
-new SkinSelection[MAX_PLAYERS][MAX_SKIN_SELECT+1];
 
 //frac
 new LeadersValue[LEADERS_TYPES][MAX_FRAC]; //a
@@ -1399,8 +1398,6 @@ ZerujZmienne(playerid)
     ToggleSpeedoGPS[playerid] = false;
 
     for(new i=0;i<MAX_ZONES;i++) bInZone[playerid][i] = false;
-
-    for(new i=0;i<MAX_SKIN_SELECT;i++) SkinSelection[playerid][i] = -1; //Czyszczenie
 
     Unspec[playerid][Coords][0] = 0.0;
     Unspec[playerid][Coords][1] = 0.0;
