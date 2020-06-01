@@ -42,18 +42,18 @@ YCMD:fskin(playerid, params[], help)
             IsPlayerInRangeOfPoint(playerid, 4.0, 1147.3623,-1314.4891,13.6743) || //duty ers
             IsPlayerInRangeOfPoint(playerid, 4.0, GetPVarFloat(playerid,"xposspawn"),GetPVarFloat(playerid,"yposspawn"),GetPVarFloat(playerid,"zposspawn")))
 		{
-            //W³¹czenie trybu skinów
-            if(GetPVarInt(playerid, "skin-select") != 0) return DestroySkinSelection(playerid);
-            SetPVarInt(playerid, "skin-select", 1);
             new frac = GetPlayerFraction(playerid);
             new fam = GetPlayerOrg(playerid);
             if(frac != 0)
             {
-                if(!ProceedSkinSelection(playerid,frac, 1)) return SendClientMessage(playerid, COLOR_GRAD2, "Twoja frakcja nie ma w³asnych skinów.");
+                //FRAC_SKINS
+                return SendClientMessage(playerid, COLOR_GRAD2, "Twoja frakcja nie ma w³asnych skinów.");
             }
             else if(fam != 0)
             {
-                if(!ProceedSkinSelection(playerid,fam, 2)) return SendClientMessage(playerid, COLOR_GRAD2, "Twoja rodzina nie ma w³asnych skinów.");
+
+                //FAM_SKINS
+                return SendClientMessage(playerid, COLOR_GRAD2, "Twoja rodzina nie ma w³asnych skinów.");
             }
             else return SendClientMessage(playerid, COLOR_GRAD2, "Nie mo¿esz tego u¿yæ.");
 		}

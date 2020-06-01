@@ -681,13 +681,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
     		TextDrawHideForPlayer(playerid,NG_GateTD[7]);
             VAR_NGKeypad = false;
         }
-        if(GetPVarInt(playerid, "skin-select") == 1) // skin selector
-        {
-            SetPVarInt(playerid, "skin-select", 0);
-            CancelSelectTextDraw(playerid);
-            DestroySkinSelection(playerid);
-            TogglePlayerControllable(playerid, 1);
-        }
     }
     if(GetPVarInt(playerid, "ng-gatekey") == 1)
     {
@@ -742,43 +735,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
 		}
 
 	}
-    if(GetPVarInt(playerid, "skin-select") == 1) // skin selector
-    {
-        if(clickedid == SkinSelectionAccept)//zatiwerdz
-        {
-            if(!GetPVarInt(playerid, "skin-done"))
-            {
-                GameTextForPlayer(playerid, "~r~Wybierz ubranie", 1000, 5);
-                return 1;
-            }
-            SetPVarInt(playerid, "skin-select", 0);
-            CancelSelectTextDraw(playerid);
-            DestroySkinSelection(playerid);
-            TogglePlayerControllable(playerid, 1);
-
-            if(GetPVarInt(playerid, "skin-choosen") != 0)
-            {
-                SetPlayerSkinEx(playerid, GetPVarInt(playerid, "skin-choosen"));
-                PlayerInfo[playerid][pUniform] = GetPVarInt(playerid, "skin-choosen");
-            }
-        }
-        else if(clickedid == SkinSelectionDenied)//anuluj
-        {
-            SetPVarInt(playerid, "skin-select", 0);
-            CancelSelectTextDraw(playerid);
-            DestroySkinSelection(playerid);
-            TogglePlayerControllable(playerid, 1);
-        }
-        else if(clickedid == SkinSelectionMy)//moj cywil
-        {
-            SetPVarInt(playerid, "skin-select", 0);
-            CancelSelectTextDraw(playerid);
-            DestroySkinSelection(playerid);
-            TogglePlayerControllable(playerid, 1);
-            PlayerInfo[playerid][pUniform] = PlayerInfo[playerid][pSkin];
-            SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
-        }
-    }
     //Strefy
     if(clickedid == ZoneTXD[3])
     {
@@ -965,24 +921,6 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
     		}
     		x++;
     	}
-    }
-    if(SkinSelection[playerid][0] <= _:playertextid < SkinSelection[playerid][MAX_SKIN_SELECT])
-    {
-        new idx = _:playertextid-_:SkinSelection[playerid][0];
-        if(0 <= idx <= MAX_SKIN_SELECT)
-        {
-            new typ = GetPVarInt(playerid, "skin-typ");
-            new frac = GetPlayerFraction(playerid);
-            if(frac == 0) frac = GetPlayerOrg(playerid);
-            switch(typ) //switch na tablice ze skinami
-            {
-                case 1: PlayerTextDrawSetPreviewModel(playerid, PlayerText:SkinSelection[playerid][MAX_SKIN_SELECT], FRAC_SKINS[frac][idx]), SetPVarInt(playerid, "skin-choosen", FRAC_SKINS[frac][idx]);
-                case 2: PlayerTextDrawSetPreviewModel(playerid, PlayerText:SkinSelection[playerid][MAX_SKIN_SELECT], FAM_SKINS[frac][idx]), SetPVarInt(playerid, "skin-choosen", FAM_SKINS[frac][idx]);
-            }
-            PlayerTextDrawShow(playerid, PlayerText:SkinSelection[playerid][MAX_SKIN_SELECT]);
-            SetPVarInt(playerid, "skin-index", idx);
-            SetPVarInt(playerid, "skin-done", 1);
-        }
     }
 	return 1;
 }
@@ -1572,9 +1510,6 @@ public OnPlayerDisconnect(playerid, reason)
         DestroyDynamicObject(noclipdata[playerid][fireobject]);
         noclipdata[playerid][fireobject] = 0;
     }
-
-    if(GetPVarInt(playerid, "skin-select") != 0)
-        DestroySkinSelection(playerid);
 
     //strefy
     if(ZonePlayerTimer[playerid] != 0) KillTimer(ZonePlayerTimer[playerid]);
