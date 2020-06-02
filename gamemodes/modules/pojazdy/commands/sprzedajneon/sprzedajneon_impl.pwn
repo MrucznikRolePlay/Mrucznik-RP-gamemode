@@ -81,7 +81,7 @@ sprzedajneon_akceptuj(playerid)
         return 1;
     }
 
-    if(IsABoat(veh) || IsAPlane(veh) || IsABike(veh))
+    if(IsABoat(pojazd) || IsAPlane(pojazd) || IsABike(pojazd))
     {
         sendErrorMessage(playerid, "W helikoptrze/samolocie/³odzi/motorze nie mo¿na zamontowaæ neonów.");
         return  1;
