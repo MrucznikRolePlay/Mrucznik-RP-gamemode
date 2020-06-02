@@ -57,6 +57,13 @@ YCMD:wyjdz(playerid, params[], help)
 			SetPlayerPos(playerid, 1205.45874, -1765.66833, 13.54815); // basen tsunami
             SetPlayerVirtualWorld(playerid,0);
 		}
+        else if (IsPlayerInRangeOfPoint(playerid, 3.0, 566.5435,-2087.0046,2.7402))  //basen tsunami wejscie do hali
+        {
+            SetPlayerPos(playerid, 1221.30774, -1790.77686, 71.70520);  //basen tsunami hala
+            TogglePlayerControllable(playerid, 0);
+            Wchodzenie(playerid);
+            return 1;
+        }
 		else if(IsPlayerInRangeOfPoint(playerid,4,1568.6449, -1689.6379, 6.1932) && IsAPolicja(playerid)//parking LSPD
 		|| IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
 		|| IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan
