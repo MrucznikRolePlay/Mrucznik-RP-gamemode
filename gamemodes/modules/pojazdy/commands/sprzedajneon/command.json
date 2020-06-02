@@ -7,7 +7,9 @@
     "author": "mrucznik",
     "aliases": [
         "sprzedajneony",
-        "sellneon"
+        "sellneon",
+        "zmienneon",
+        "zmienneony"
     ],
     "parameters": [
         {
@@ -17,8 +19,8 @@
         },
         {
             "type": "integer",
-            "name": "prowizja",
-            "description": "prowizja"
+            "name": "commission",
+            "description": "commission"
         }
     ],
     "date": "02.06.2020"

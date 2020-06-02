@@ -11792,55 +11792,48 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0://Bia³y
 		            {
-						format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18652;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 1://¯ó³ty
 		            {
-						format(string, sizeof(string), "¯ó³te neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "¯ó³te neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, 0xDAA520FF, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18650;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 2://Zielony
 		            {
-						format(string, sizeof(string), "Zielone neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Zielone neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18649;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 3://Niebieski
 		            {
 
-						format(string, sizeof(string), "Niebieskie neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Niebieskie neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18648;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
-
 		            }
 		            case 4://Czerwony
 		            {
 
-						format(string, sizeof(string), "Czerwone neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Czerwone neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_RED, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18647;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 
 		            }
 		            case 5://Ró¿owy
 		            {
-						format(string, sizeof(string), "Ró¿owe neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Ró¿owe neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_PURPLE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18651;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		        }
                 Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);

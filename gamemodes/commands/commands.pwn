@@ -239,7 +239,6 @@
 #include "cmd/kuphelikopter.pwn"
 #include "cmd/kupkredyty.pwn"
 #include "cmd/kuplodzie.pwn"
-#include "cmd/kupneony.pwn"
 #include "cmd/kupowaniedomu.pwn"
 #include "cmd/kuppojazd.pwn"
 #include "cmd/kuppozwolenie.pwn"
@@ -870,9 +869,6 @@ static Aliases()
 	Command_AddAltNamed("kuplodzie", "kuplodz");
 	Command_AddAltNamed("kuplodzie", "kupstatek");
 	Command_AddAltNamed("kuplodzie", "buyboat");
-
-	//kupneony
-	Command_AddAltNamed("kupneony", "kupneon");
 
 	//kupowaniedomu
 	Command_AddAltNamed("kupowaniedomu", "kupdom");

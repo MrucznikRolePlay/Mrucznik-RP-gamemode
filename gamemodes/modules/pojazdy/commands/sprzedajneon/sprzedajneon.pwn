@@ -38,6 +38,8 @@ command_sprzedajneon()
     //aliases
     Command_AddAlt(command, "sprzedajneony");
     Command_AddAlt(command, "sellneon");
+    Command_AddAlt(command, "zmienneon");
+    Command_AddAlt(command, "zmienneony");
     
 
     //permissions
@@ -57,10 +59,10 @@ YCMD:sprzedajneon(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new giveplayerid, prowizja;
-    if(sscanf(params, "rd", giveplayerid, prowizja))
+    new giveplayerid, commission;
+    if(sscanf(params, "rd", giveplayerid, commission))
     {
-        sendTipMessage(playerid, "U¿yj /sprzedajneon [Nick/ID] [prowizja] ");
+        sendTipMessage(playerid, "U¿yj /sprzedajneon [Nick/ID] [commission] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -69,5 +71,5 @@ YCMD:sprzedajneon(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_sprzedajneon_Impl(playerid, giveplayerid, prowizja);
+    return command_sprzedajneon_Impl(playerid, giveplayerid, commission);
 }

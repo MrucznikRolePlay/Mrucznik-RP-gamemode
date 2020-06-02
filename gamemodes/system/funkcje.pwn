@@ -2401,6 +2401,11 @@ IsPlayerInFraction(playerid, frac, adminlvl=-1)
 	return 0;
 }
 
+IsAMechazordWarsztatowy(playerid)
+{
+	return IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19;
+}
+
 IsAMedyk(playerid)
 {
 	if(IsPlayerConnected(playerid))
