@@ -1137,8 +1137,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
         new veh = GetPlayerVehicleID(playerid);
-        strdel(CarDesc[veh], 0, 128 char);
-		strpack(CarDesc[veh], inputtext);
+        strdel(CarDesc[veh], 0, 128);
+		strcat(CarDesc[veh], inputtext);
         MruMySQL_UpdateOpis(veh, CarData[VehicleUID[veh][vUID]][c_UID], 2);
 
 		CarOpis_Usun(playerid, veh);

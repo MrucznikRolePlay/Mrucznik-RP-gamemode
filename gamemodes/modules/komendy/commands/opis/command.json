@@ -6,6 +6,13 @@
     ],
     "author": "niceczlowiek",
     "aliases": [],
-    "parameters": [],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "text",
+            "description": "opis"
+        }
+    ],
     "date": "13.05.2019"
 }

@@ -869,7 +869,7 @@ MruMySQL_WczytajOpis(handle, uid, typ)
         else
         {
             mysql_fetch_row_format(lText, "|");
-            strpack(CarDesc[handle], lText);
+            strcat(CarDesc[handle], lText);
         }
     }
 	mysql_free_result();
