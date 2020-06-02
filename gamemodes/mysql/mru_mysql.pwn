@@ -483,7 +483,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Uniform`='%d', \
 	`CruiseController`='%d', \
 	`FixKit`='%d', \
-	`Immunity`='%d', \
+	`Immunity`='%.0f', \
 	`connected`='%d' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
