@@ -11851,14 +11851,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= onePoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", onePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 50;
+							Kredyty[playerid] += 100;
 							ZabierzKase(playerid, onePoolPrice);
 							SejfR_Add(43, onePoolPrice);
 							SejfR_Save(43);
 							poolCashStats = poolCashStats+onePoolPrice;
-							poolCreditStatus = poolCreditStatus+50;
+							poolCreditStatus = poolCreditStatus+100;
 						}
 						else
 						{
@@ -11870,13 +11870,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= twoPoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 200 kredytów za jedyne %d$.", twoPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 100;
+							Kredyty[playerid] += 200;
 							ZabierzKase(playerid, twoPoolPrice); 
 							SejfR_Add(43, twoPoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+100;
+							poolCreditStatus = poolCreditStatus+200;
 							poolCashStats = poolCashStats+twoPoolPrice;
 						}
 						else
@@ -11889,13 +11889,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= threePoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", threePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 250;
+							Kredyty[playerid] += 500;
 							ZabierzKase(playerid, threePoolPrice);
 							SejfR_Add(43, threePoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+250;
+							poolCreditStatus = poolCreditStatus+500;
 							poolCashStats = poolCashStats+threePoolPrice;
 						}
 						else
@@ -11908,13 +11908,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= fourPoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", fourPoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 1000 kredytów za jedyne %d$.", fourPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 500;
+							Kredyty[playerid] += 1000;
 							ZabierzKase(playerid, fourPoolPrice);
 							SejfR_Add(43, fourPoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+500;
+							poolCreditStatus = poolCreditStatus+1000;
 							poolCashStats = poolCashStats+fourPoolPrice;
 						}
 						else

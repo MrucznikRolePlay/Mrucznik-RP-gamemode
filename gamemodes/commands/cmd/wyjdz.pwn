@@ -52,6 +52,11 @@ YCMD:wyjdz(playerid, params[], help)
             TogglePlayerControllable(playerid,0);
             Wchodzenie(playerid);
         }
+		else if(IsPlayerInRangeOfPoint(playerid, 4, 1213.3364,-1807.0619,70.0682)) //basen œrodek 
+		{
+			SetPlayerPos(playerid, 1205.45874, -1765.66833, 13.54815); // basen tsunami
+            SetPlayerVirtualWorld(playerid,0);
+		}
 		else if(IsPlayerInRangeOfPoint(playerid,4,1568.6449, -1689.6379, 6.1932) && IsAPolicja(playerid)//parking LSPD
 		|| IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
 		|| IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan
