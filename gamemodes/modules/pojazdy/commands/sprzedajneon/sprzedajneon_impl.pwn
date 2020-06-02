@@ -116,6 +116,7 @@ sprzedajneon_akceptuj(playerid)
     }
 
     SetPVarInt(playerid, "neon-uid", 0);
+    return 1;
 }
 
 command_sprzedajneon_Impl(playerid, giveplayerid, commission)
