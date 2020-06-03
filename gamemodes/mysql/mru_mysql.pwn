@@ -879,8 +879,15 @@ MruMySQL_WczytajOpis(handle, uid, typ)
 MruMySQL_UpdateOpis(handle, uid, typ)
 {
     new lStr[256], packed[128], opis[128];
-    strunpack(packed, (typ == 1) ? (PlayerDesc[handle]) : (CarDesc[handle]));
-    mysql_real_escape_string(packed, opis);
+	if(typ == 1)
+	{
+		strunpack(packed, PlayerDesc[handle]);
+    	mysql_real_escape_string(packed, opis);
+	}
+	else
+	{
+    	mysql_real_escape_string(CarDesc[handle], opis);
+	}
     if(MruMySQL_CheckOpis(uid, typ))
         format(lStr, 256, "UPDATE `mru_opisy` SET `desc`='%s' WHERE `owner`='%d' AND `typ`=%d", opis, uid, typ);
     else
