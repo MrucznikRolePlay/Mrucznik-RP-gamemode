@@ -30,10 +30,11 @@ command_spawnall_Impl(playerid)
 		new veh = PlayerInfo[playerid][pCars][i];
         if(veh != 0)
         {
-            if(CarData[veh][c_ID] != 0) continue;
-
-            Car_Spawn(veh);
-            Log(serverLog, INFO, "Gracz %s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(veh));
+            new vehid = Car_Spawn(veh);
+            if(vehid)
+            {
+                Log(serverLog, INFO, "Gracz %s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(vehid));
+            }
         }
     }
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wszystkie pojazdy zespawnowane!");
