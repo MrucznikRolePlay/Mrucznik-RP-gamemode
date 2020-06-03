@@ -66,7 +66,7 @@ YCMD:zapytaj(playerid, params[], help)
 
         foreach(new i : Player)
             if(GetPVarInt(i, "support_duty") == 1)
-                SendClientMessage(i, COLOR_GREEN, "SUPPORT: {FFFFFF}Nowe zg³oszenie o pomoc.");
+                SendClientMessage(i, COLOR_GREEN, "SUPPORT: {FFFFFF}Nowe zg³oszenie o pomoc (/tickets).");
     }
     else
         sendTipMessageEx(playerid, COLOR_RED, "Nie mo¿na dodaæ zapytania, lista jest pe³na.");

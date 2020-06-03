@@ -68,7 +68,7 @@ YCMD:plac(playerid, params[], help)
 			}
 			if (IsPlayerConnected(giveplayerid))
 			{
-			    if(giveplayerid != INVALID_PLAYER_ID)
+			    if(giveplayerid != INVALID_PLAYER_ID && playerid != giveplayerid)
 			    {
 			        if(PlayerInfo[giveplayerid][pLocal] == 106)
 					{

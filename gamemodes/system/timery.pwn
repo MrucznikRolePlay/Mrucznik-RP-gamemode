@@ -1,37 +1,6 @@
 //timery.pwn
 
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
-forward CheckCode2003(killerid, playerid);
-public CheckCode2003(killerid, playerid)
-{
-    new string[256];
-    if(IsPlayerConnected(playerid))
-	{
-    	MruDialog(killerid, "ACv2: Kod #2003", "Zosta³eœ wyrzucony za weapon hack.");
-		format(string, sizeof string, "ACv2 [#2003]: %s zosta³ wyrzucony za weapon hack.", GetNickEx(killerid));
-    	SendCommandLogMessage(string);
-    	KickEx(killerid);
-		Log(warningLog, INFO, string);
-		Log(punishmentLog, INFO, string);
-	}
-	else
-	{
-	    format(string, sizeof string, "ACv2 [#2003] WARNING: Prawdopodobnie próba wymuszenia kodu na graczu %s.", GetNickEx(killerid));
-    	SendCommandLogMessage(string);
-		Log(warningLog, INFO, string);
-	}
-}
-forward AntyCheatON(playerid);
-public AntyCheatON(playerid)
-{
-	timeAC[playerid]++; 
-	if(timeAC[playerid] >= 3)
-	{
-		SetAntyCheatForPlayer(playerid, 0);
-		timeAC[playerid] = 0; 
-		KillTimer(timerAC[playerid]); 
-	}
-}
 forward SpecToggle(playerid);
 public SpecToggle(playerid)
 {
@@ -914,16 +883,6 @@ public PlayerAFK(playerid, afktime, breaktime)
 	return 1;
 }
 
-//PADZIOCH
-forward syncanim(playerid);
-public syncanim(playerid)
-{
-	if(GetPVarInt(playerid,"roped") == 0) return 0;
- 	SetTimerEx("syncanim",DUR,0,"i",playerid);
-  	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
-   	return 1;
-}
-
 forward CheckChangeWeapon();
 public CheckChangeWeapon()
 {
@@ -969,6 +928,7 @@ forward MainTimer();
 public MainTimer()
 {
     JednaSekundaTimer();
+	SlapperTimer();
     if(TICKS_Second)
     {
         Spectator();
@@ -993,6 +953,7 @@ public MainTimer()
     {
 		PlayersCheckerMinute();
         SyncUp();
+		TimeUpdater();
     }
     if(TICKS_5Min == (60*5)-1)
     {
@@ -2156,6 +2117,36 @@ public RPGTimer()
 	}
 	return 1;
 }
+public SlapperTimer()
+{
+	foreach(new i : Player)
+	{
+		if(GetPlayerState(i) == PLAYER_STATE_ONFOOT)
+		{
+			new Float:pAC_Pos[3],Float:VS ;
+			GetPlayerVelocity(i, pAC_Pos[0], pAC_Pos[1], pAC_Pos[2]);
+			VS = VectorSize(pAC_Pos[0], pAC_Pos[1], pAC_Pos[2])*136.6666;
+			if(floatround(VS,floatround_round) >= 350)
+			{
+				if(PlayerSlapperWarning[i] >= 5)
+				{
+					MruMySQL_Banuj(i, "Anti-Slapper");
+					Log(punishmentLog, INFO, "%s zosta³ zbanowany za podejrzenie slappera (%d speeda on-foot, %d ostrze¿eñ)", GetPlayerLogName(i), floatround(VS,floatround_round), PlayerSlapperWarning[i]);
+					KickEx(i);
+				}
+				else
+				{
+					new ip[16];
+					GetPlayerIp(i, ip, sizeof(ip));
+					SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] prawdopodobnie czituje. | Slapper [%d/5]", 
+					GetNickEx(i), i, ip, PlayerSlapperWarning[i]), 
+					0xFF00FFFF);
+					PlayerSlapperWarning[i]++;
+				}
+			}
+		}
+	}
+}
 public JednaSekundaTimer()
 {
     //25.06.2014
@@ -2321,7 +2312,8 @@ public JednaSekundaTimer()
 					SetPlayerHealth(i, 0.0);
 					PlayerPlaySound(i, 39000, 0.0, 0.0, 0.0);
 					StopAudioStreamForPlayer(i);
-					if(GetPVarInt(i, "DostalDM2") == 1)
+					if((GetPVarInt(i, "DostalDM2") == 1) || strfind((PlayerInfo[i][pAJreason]), "DM2", true) > 0
+					&& strfind((PlayerInfo[i][pAJreason]), "Death Match 2", true) > 0)
 					{
 						format(string, sizeof(string), "[Marcepan Marks] Zabra³em graczowi %s broñ [Odsiedzia³ karê za DM2]", GetNick(i));
 						SendAdminMessage(COLOR_PANICRED, string);

@@ -40,7 +40,7 @@ YCMD:setskin(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000)
+		if (PlayerInfo[playerid][pAdmin] >= 5000 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -68,11 +68,10 @@ YCMD:setskin(playerid, params[], help)
 				}
 			}
 		}
-		else if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
+		else if(PlayerInfo[playerid][pAdmin] >= 5)
 		{
 			if(para1 == playerid)
 			{
-				if((level == 20001 || level == 20002) && !IsAScripter(playerid)) return 1;
 				SetPlayerSkinEx(playerid, level); 
 			}
 			else

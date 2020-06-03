@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ zdejmijbpk ]----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   unmark                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,47 +16,57 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "unmark_impl.pwn"
 
-YCMD:zdejmijbpk(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_unmark()
 {
-	if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
-	{
-		new giveplayerid; 
-		if(sscanf(params, "k<fix>", giveplayerid))
-		{
-			sendTipMessage(playerid, "U¿yj /zdejmijbpk [ID GRACZA]"); 
-			return 1;
-		}
-		if(!IsPlayerConnected(giveplayerid))
-		{
-			sendErrorMessage(playerid, "Nie ma takiego gracza"); 
-			return 1;
-		}
-		new string[128];
-		format(string, sizeof(string), "null");
-		SetPVarString(giveplayerid, "trescOgloszenia", string);			
-		PlayerInfo[giveplayerid][pBlokadaPisaniaFrakcjaCzas] = 0;
-		KillTimer(komunikatTime[giveplayerid]);
-		format(string, sizeof(string), "Administrator %s zdj¹³ Ci blokadê pisania na komunikatach frakcyjnych", GetNickEx(playerid));
-		sendTipMessageEx(playerid, COLOR_P@, string);
-		format(string, sizeof(string), "Administrator %s zdj¹³ blokadê dla %s. Mo¿e on teraz swobodnie pisaæ komunikat frakcyjny", GetNickEx(playerid), GetNick(giveplayerid));
-		SendAdminMessage(COLOR_RED, string);
-		
-	}
-	else
-	{
-		sendErrorMessage(playerid, "Brak uprawnieñ"); 
-	}
-	return 1;
+    new command = Command_GetID("unmark");
+
+    //aliases
+    Command_AddAlt(command, "odznacz");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:unmark(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Usuwa gracza z listy osób oznaczonych jako czitera.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /unmark [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_unmark_Impl(playerid, giveplayerid);
 }

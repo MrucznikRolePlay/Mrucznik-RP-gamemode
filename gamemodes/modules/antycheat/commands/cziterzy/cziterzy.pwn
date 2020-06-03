@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ cziterzy ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  cziterzy                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,37 +16,48 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "cziterzy_impl.pwn"
 
+//-------<[ initialize ]>-------
+command_cziterzy()
+{
+    new command = Command_GetID("cziterzy");
+
+    //aliases
+    Command_AddAlt(command, "cheaters");
+    Command_AddAlt(command, "czity");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
 YCMD:cziterzy(playerid, params[], help)
 {
-    new czity = 0;
-    new string[1500];
-    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)) {
-        foreach(new i : Player) {
-            if(GetPVarInt(i, "AC-warn") > 1) {
-                format(string, sizeof(string), "%s[AC] %s (ID: %d)\n", string, GetNick(i), i);
-                czity++;
-            } else if(GetPVarInt(i, "AC_oznaczony") == 1) {
-                format(string, sizeof(string), "%s[S0BEIT] %s (ID: %d)\n", string, GetNick(i), i);
-                czity++;
-            } 
-        }
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietla listê potencjalnych cziterów.");
+        return 1;
     }
-
-    if(czity == 0) {
-        sendTipMessage(playerid, "Nie wykryto ¿adnych potencjalnych cziterów");
-    }
-    ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_LIST, "Lista Potencjalnych Cziterów", string, "Ok", "");
-    return 1;
+    
+    
+    //command body
+    return command_cziterzy_Impl(playerid);
 }

@@ -164,10 +164,6 @@ Player_CanUseCar(playerid, vehicleid)
 			return 0;
 		}
 	}
-	if (GetVehicleModel(vehicleid) == 525)
-	{
-		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
-	}
 
 	if(VehicleUID[vehicleid][vUID] != 0)
     {

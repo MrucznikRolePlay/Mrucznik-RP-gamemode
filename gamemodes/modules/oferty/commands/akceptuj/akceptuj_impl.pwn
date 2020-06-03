@@ -106,7 +106,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                 format(string, sizeof(string), "* %s akceptowa³ sprzeda¿ neonów, zarabiasz 25 000$.", sendername);
                                 SendClientMessage(dawacz, COLOR_LIGHTBLUE, string);
-                                Log(payLog, INFO, "%s kupi³ od %s neony do auta %s", GetPlayerLogName(playerid), GetPlayerLogName(dawacz), GetVehicleLogName(pojazd));
+                                Log(payLog, INFO, "%s kupi³ od %s neony do auta %s za 3000000$", GetPlayerLogName(playerid), GetPlayerLogName(dawacz), GetVehicleLogName(pojazd));
                                 ZabierzKase(playerid, 3000000);
                                 DajKase(dawacz, 75000);
                                 Sejf_Add(FRAC_NOA, 50000);//wplacanie kasy
@@ -169,6 +169,14 @@ command_akceptuj_Impl(playerid, x_job[32])
                             CenaDawanegoAuta[playerid] = 0;
                             SendClientMessage(playerid, COLOR_GREY, " Nie posiadasz wolnego slota.");
                             return 1;
+                        }
+            
+                        foreach(new i : Player)
+                        {
+                           if(PlayerInfo[i][pKluczeAuta] == IDAuta[playerid])
+                            {
+                                PlayerInfo[i][pKluczeAuta] = 0;
+                            }
                         }
                         Car_MakePlayerOwner(playerid, IDAuta[playerid]);
                         Car_RemovePlayerOwner(GraczDajacy[playerid], IDAuta[playerid]);
@@ -1157,28 +1165,35 @@ command_akceptuj_Impl(playerid, x_job[32])
                         
                         if(Condom[playerid] < 1)
                         {
-                            new Float:health, Float:hp;
+                            new Float:health, Float:Ahealth, Float:hp;
                             new level = PlayerInfo[SexOffer[playerid]][pSexSkill];
-                            if(level >= 0 && level <= 50) hp = 30;
-                            else if(level >= 51 && level <= 100) hp = 60;
-                            else if(level >= 101 && level <= 200) hp = 90;
-                            else if(level >= 201 && level <= 400) hp = 120;
+                            if(level >= 0 && level <= 50) hp = 20;
+                            else if(level >= 51 && level <= 100) hp = 40;
+                            else if(level >= 101 && level <= 200) hp = 60;
+                            else if(level >= 201 && level <= 400) hp = 80;
                             else if(level >= 401)
                             {
-                                hp = 150;
+                                hp = 100;
                                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Twoje umiejêtnoœci prostytutki s¹ tak wysokie ¿e dajesz wysokie HP i nie dajesz chorób.");
                                 SendClientMessage(SexOffer[playerid], COLOR_LIGHTBLUE, "* Umiejêtnoœæ dziwki s¹ tak wysokie ¿e dostajesz du¿e HP i zero chorób.");
                                 return 1;
                             }
                             GetPlayerHealth(playerid, health);
-                            if(health < 150) 
+                            GetPlayerArmour(playerid, Ahealth);
+                            new actualhp = floatround(health, floatround_tozero);
+                            new actualap = floatround(Ahealth, floatround_tozero);
+                            if((actualhp + hp) < 100) 
                             {
-                                SetPlayerHealth(playerid, health + hp); 
+                                SetPlayerHealth(playerid, actualhp + hp); 
                             }
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP z powodu sexu.", hp));
+                            else
+                            {
+                                SetPlayerArmour(playerid, actualap + hp);  
+                            }
+                            SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Dodano ci %d HP/Pancerza z powodu sexu.", hp));
                             if(random(20) == 1)//5% szans na zara¿enie
                             {
-                                InfectPlayer(playerid, HIV);
+                                InfectOrDecreaseImmunity(playerid, HIV);
                             }
 
                             //TODO: przenoszenie chorób drog¹ p³ciow¹
@@ -1360,25 +1375,34 @@ command_akceptuj_Impl(playerid, x_job[32])
             {
                 if (ProxDetectorS(10.0, playerid, DomOffer[playerid]))
                 {
-                    GetPlayerName(DomOffer[playerid], giveplayer, sizeof(giveplayer));
-                    GetPlayerName(playerid, sendername, sizeof(sendername));
-                    format(string, sizeof(string), "Sprzeda³eœ dom graczowi %s za %d$.", sendername, DomCena[playerid]);
-                    SendClientMessage(DomOffer[playerid], COLOR_NEWS, string);
-                    format(string, sizeof(string), "Kupi³eœ dom od %s za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom", giveplayer, DomCena[playerid]);
-                    SendClientMessage(playerid, COLOR_NEWS, string);
-                    SendClientMessage(playerid, COLOR_PANICRED, "UWAGA! Pamiêtaj aby zmieniæ kod do sejfu !!!!!!");
-                    Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = GetNickEx(playerid);
-                    PlayerInfo[playerid][pDom] = PlayerInfo[DomOffer[playerid]][pDom];
-                    PlayerInfo[DomOffer[playerid]][pDom] = 0;
-                    ZabierzKase(playerid, DomCena[playerid]);
-                    DajKase(DomOffer[playerid], DomCena[playerid]);
-                    ZapiszDom(PlayerInfo[playerid][pDom]);
-                    Log(payLog, INFO, "%s kupi³ od %s dom %s za %d$. ", \
-                        GetPlayerLogName(playerid), \
-                        GetPlayerLogName(DomOffer[playerid]), \
-                        GetHouseLogName(PlayerInfo[playerid][pDom]), \
-                        DomCena[playerid] \
-                    );
+                    if(PlayerInfo[DomOffer[playerid]][pDom] != 0 && PlayerInfo[DomOffer[playerid]][pDom] == GetPVarInt(DomOffer[playerid], "DomOfferID"))
+                    {
+                        GetPlayerName(DomOffer[playerid], giveplayer, sizeof(giveplayer));
+                        GetPlayerName(playerid, sendername, sizeof(sendername));
+                        format(string, sizeof(string), "Sprzeda³eœ dom graczowi %s za %d$.", sendername, DomCena[playerid]);
+                        SendClientMessage(DomOffer[playerid], COLOR_NEWS, string);
+                        format(string, sizeof(string), "Kupi³eœ dom od %s za %d$. Aby uzyskaæ wiêcej opcji i mo¿liwoœci wpisz /dom", giveplayer, DomCena[playerid]);
+                        SendClientMessage(playerid, COLOR_NEWS, string);
+                        SendClientMessage(playerid, COLOR_PANICRED, "UWAGA! Pamiêtaj aby zmieniæ kod do sejfu !!!!!!");
+                        Dom[PlayerInfo[DomOffer[playerid]][pDom]][hWlasciciel] = GetNickEx(playerid);
+                        PlayerInfo[playerid][pDom] = PlayerInfo[DomOffer[playerid]][pDom];
+                        PlayerInfo[DomOffer[playerid]][pDom] = 0;
+                        ZabierzKase(playerid, DomCena[playerid]);
+                        DajKase(DomOffer[playerid], DomCena[playerid]);
+                        ZapiszDom(PlayerInfo[playerid][pDom]);
+                        Log(payLog, INFO, "%s kupi³ od %s dom %s za %d$. ", \
+                            GetPlayerLogName(playerid), \
+                            GetPlayerLogName(DomOffer[playerid]), \
+                            GetHouseLogName(PlayerInfo[playerid][pDom]), \
+                            DomCena[playerid] \
+                        );
+                    }
+                    else
+                    {
+                        format(string, sizeof(string), "Napotkano b³¹d. Dom zosta³ kupiony przez kogoœ innego.");
+                        SendClientMessage(playerid, COLOR_NEWS, string);
+                    }
+                    DeletePVar(DomOffer[playerid], "DomOfferID");
                     DomCena[playerid] = 0;
                     DomOffer[playerid] = 999;
                     return 1;

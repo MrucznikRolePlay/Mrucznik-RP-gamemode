@@ -42,6 +42,8 @@ public DajKase(playerid, money)
 	{
 		Log(moneyLog, INFO, logstring);
 	}
+
+	ZabezpieczenieUjemnyHajs(playerid);
 	return 1;
 }
 
@@ -61,6 +63,7 @@ public ZabierzKase(playerid, money)
 	{
 		Log(moneyLog, INFO, logstring);
 	}
+	ZabezpieczenieUjemnyHajs(playerid);
 	return 1;
 }
 
@@ -81,6 +84,17 @@ public ResetujKase(playerid)
 {
 	kaska[playerid]=0;
 	ResetPlayerMoney(playerid);
+	return 1;
+}
+
+ZabezpieczenieUjemnyHajs(playerid)
+{
+	if(kaska[playerid] < -10000000)
+	{
+		MruMySQL_Banuj(playerid, "zbyt du¿e d³ugi");
+		Log(punishmentLog, INFO, "%s zosta³ zbanowany za -10.000.000$ na koncie", GetPlayerLogName(playerid));
+		KickEx(playerid);
+	}
 	return 1;
 }
 

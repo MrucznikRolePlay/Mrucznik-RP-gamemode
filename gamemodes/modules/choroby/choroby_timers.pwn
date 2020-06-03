@@ -42,19 +42,19 @@ timer EffectTimer[5000](playerid, uid, eDiseases:disease, effectID)
 		{
 			return 1;
 		}
-		if(Spectate[playerid] != INVALID_PLAYER_ID)//nie wywo³uj efektów gdy specuje
+		if(Spectate[playerid] != INVALID_PLAYER_ID) //nie wywo³uj efektów gdy specuje
 		{
 			return 1;
 		}
 
-		if(PlayerImmunity[playerid] <= 0) //nie wywo³uj efektów, gdy gracz ma odpornoœæ
+		if(GetPlayerImmunity(playerid) <= EFFECT_ACTIVATION_IMMUNITY_BOUNDARY) //nie wywo³uj efektów, gdy gracz ma odpornoœæ
 		{
-			CallEffectActivateCallback(playerid, disease, effect);
 			DoInfecting(playerid, disease, effect);
+			CallEffectActivateCallback(playerid, disease, effect);
 		}
 		else
 		{
-			DecreaseImmunity(playerid);
+			DecreasePlayerImmunity(playerid);
 		}
 	}
 	return 1;
@@ -121,7 +121,9 @@ task ChorobyMinutaTimer[60000]()
 			Grypa[i]++;
 			if(Grypa[i] == 60)
 			{
-				InfectPlayer(i, GRYPA);
+				if(InfectOrDecreaseImmunity(i, GRYPA)) {
+					SendClientMessage(i, COLOR_LIGHTBLUE, "Twoja postaæ by³a zbyt d³ugo os³abiona (niskie HP) i zarazi³a siê gryp¹!");
+				}
 				Grypa[i] = 0;
 			}
 		}

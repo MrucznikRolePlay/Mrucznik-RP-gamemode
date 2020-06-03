@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------[ blokujsprzedarz ]--------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                getimmunity                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,57 +16,57 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "getimmunity_impl.pwn"
 
-YCMD:blokujsprzedarz(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_getimmunity()
 {
-	new string[64];
+    new command = Command_GetID("getimmunity");
 
-    if(gPlayerLogged[playerid] == 1)
+    //aliases
+    Command_AddAlt(command, "sprawdzodpornosc");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:getimmunity(playerid, params[], help)
+{
+    if (help)
     {
-	    if(IsPlayerConnected(playerid))
-	    {
-	        if(PlayerInfo[playerid][pAdmin] >= 5000)
-			{
-			    new dom;
-				if( sscanf(params, "d", dom))
-				{
-					sendTipMessage(playerid, "U¿yj /blokujdom [id domu]");
-					return 1;
-				}
-
-				format(string, sizeof(string), "Domy/Dom%d.ini", dom);
-				if(dini_Exists(string))
-				{
-				    if(Dom[dom][hBlokada] == 0)
-				    {
-					    Dom[dom][hBlokada] = 1;
-						ZapiszDom(dom);
-						SendClientMessage(playerid, COLOR_RED, "Dom zablokowany");
-					}
-					else if(Dom[dom][hBlokada] == 1)
-					{
-                        Dom[dom][hBlokada] = 0;
-						ZapiszDom(dom);
-						SendClientMessage(playerid, COLOR_GREEN, "Dom odblokowany");
-					}
-				}
-				else
-				{
-				    SendClientMessage(playerid, COLOR_GRAD2, "Dom nie istnieje");
-				}
-			}
-		}
-	}
-	return 1;
+        sendTipMessage(playerid, "SprawdŸ odpornoœæ gracza.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /getimmunity [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_getimmunity_Impl(playerid, giveplayerid);
 }

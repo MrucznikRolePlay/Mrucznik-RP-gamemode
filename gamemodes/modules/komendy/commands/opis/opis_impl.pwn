@@ -16,37 +16,92 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: niceczlowiek
+// Autor: niceczlowiek | Creative
 // Data utworzenia: 13.05.2019
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_opis_Impl(playerid)
+command_opis_Impl(playerid, params[])
 {
 	if(PlayerInfo[playerid][pBP] != 0)
 	{
 		return SendClientMessage(playerid, COLOR_GRAD1, "Posiadasz blokadê pisania na czatach globalnych, nie mo¿esz utworzyæ opisu.");
 	}
+
+	new opis[128];
+	if(!sscanf(params, "s[128]", opis))
+	{
+		new givenString[128];
+		format(givenString, sizeof(givenString), "%s", opis);
+		if(strfind(givenString, "(FF0000)", true) != -1 || strfind(givenString, "(000000)", true) != -1)
+		{
+			SendClientMessage(playerid, COLOR_GRAD1, "Znaleziono niedozwolony kolor.");
+			return 1;
+		}
+		//todo: kolorowe opisy tylko dla KP
+		new RegexMatch:match, pos;
+		if(Regex_Search(givenString, OPIS_CHARACTERS_REGEXP, match, pos))
+		{
+			SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[pos]));
+			return 1;
+		}
+
+		if(!strcmp(opis, "usun", true) || !strcmp(opis, "usuñ", true))
+		{
+			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+			PlayerInfo[playerid][pDesc][0] = EOS;
+			sendTipMessage(playerid, "Opis zosta³ usuniêty.");
+			return 1;
+		}
+
+		mysql_escape_string(opis, opis);
+		new DBResult:db_result;
+		db_result = db_query(db_handle, sprintf("SELECT * FROM `mru_opisy` WHERE `owner`= '%d' AND `text` = '%s'", PlayerInfo[playerid][pUID], opis));
+		new rows = db_num_rows(db_result);
+
+		if(rows) //opis istnieje wiec update
+		{
+			new descUid = db_get_field_assoc_int(db_result, "uid");
+			db_result = db_query(db_handle, sprintf("UPDATE `mru_opisy` SET `last_used`=%d WHERE `uid`=%d", gettime(), descUid));
+		}
+		else
+		{
+			db_free_result(db_query(db_handle, sprintf("INSERT INTO `mru_opisy` (`uid`,`text`, `owner`, `last_used`) VALUES (null, '%s', '%d', '%d')", opis, PlayerInfo[playerid][pUID], gettime())));
+		}
+
+		PlayerInfo[playerid][pDesc] = opis;
+		ReColor(opis);
+		Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
+		Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, wordwrapEx(opis));
+		sendTipMessage(playerid, "Ustawiono nowy opis:");
+		new stropis[126];
+		format(stropis, sizeof(stropis), "%s", opis);
+		SendClientMessage(playerid, 0xBBACCFFF, stropis);
+		return 1;
+	}
+		
+
 	DynamicGui_Init(playerid);
 	new string[1400];
-		
 	if(!isnull(PlayerInfo[playerid][pDesc]))
 	{
 		new str[256];
-		strcopy(str, PlayerInfo[playerid][pDesc], 256);
-		strdel(str, 55, 256); // jednak pokazujemy ca³y opis :D
-		format(string, sizeof(string), "%s{f4f5fa}%s...\n", string, str);
+		strcopy(str, PlayerInfo[playerid][pDesc], sizeof str);
+		strdel(str, 55, sizeof str);
+		ReColor(str);
+		format(string, sizeof(string), "{f4f5fa}%s...", str);
 		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
-	
-		format(string, sizeof(string), "%s{888888}##\t{ff0000}Usuñ opis\n", string);
+		format(string, sizeof(string), "%s\n{ff0000}Usuñ (/opis usun)\n", string);
 		DynamicGui_AddRow(playerid, DG_DESC_DELETE);
 	}
 	else
 	{
-		format(string, sizeof(string), "%s{888888}##\t{00B33C}Ustaw opis\n", string);
-		DynamicGui_AddRow(playerid, DG_DESC_ADD);
+		format(string, sizeof(string), "Nie masz ustawionego opisu...");
+		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
+		format(string, sizeof(string), "%s{888888}\n{ff0000}Dodaj opis postaci (/opis [tekst])\n", string);
+		DynamicGui_AddRow(playerid, DLG_NO_ACTION);
 	}
 
 	format(string, sizeof(string), "%s\t\t\n", string);
@@ -66,7 +121,8 @@ command_opis_Impl(playerid)
 			new tmpText[256];
 			db_get_field(db_result, 1, tmpText, sizeof(tmpText));
 			strdel(tmpText, 55, 256);
-			format(string, sizeof(string), "%s(%d)\t%s...\n", string, row+1, tmpText);
+			ReColor(tmpText);
+			format(string, sizeof(string), "%s(%d)\t{FFFFFF}%s...\n", string, row+1, tmpText);
 			DynamicGui_AddRow(playerid, DG_DESC_USEOLD, db_get_field_assoc_int(db_result, "uid"));
 		}
 	}

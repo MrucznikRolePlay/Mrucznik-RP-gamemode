@@ -47,27 +47,20 @@ YCMD:namierz(playerid, params[], help)
 				return 1;
 			}
             if(givenumber <= 0) return sendTipMessage(playerid, "Niepoprawny numer telefonu!");
+			if(givenumber == PlayerInfo[playerid][pPnumber])
+			{
+				sendErrorMessage(playerid, "Nie mo¿esz namierzyæ sam siebie.");
+				return 1;
+			}
+
             foreach(new i : Player)
             {
-                if(PlayerInfo[i][pPnumber] == givenumber)
+                if(PlayerInfo[i][pPnumber] == givenumber && !PhoneOnline[i] && Spectate[i] == INVALID_PLAYER_ID)
                 {
                     giveplayerid = i;
                 }
             }
             if(giveplayerid == INVALID_PLAYER_ID) return sendTipMessage(playerid, "Nie uda³o siê namierzyæ numeru...");
-			//if(IsPlayerConnected(giveplayerid) && giveplayerid != INVALID_PLAYER_ID)
-			//{
-            // PhoneOnline jest 1 gdy wylaczony x~D
-            //if(PhoneOnline[giveplayerid]) return sendTipMessage(playerid, "Ten telefon jest wy³¹czony!");
-			if(giveplayerid == playerid)
-			{
-				sendErrorMessage(playerid, "Nie mo¿esz szukaæ samego siebie!"); return 1;
-			}
-			if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
-			{
-				sendErrorMessage(playerid, "Nie uda³o siê namierzyæ telefonu...");
-				return 1;
-			}
 			if(PlayerInfo[playerid][pJob] == 1 && lowcaz[playerid] != giveplayerid)
 			{
 				sendErrorMessage(playerid, "Nie masz zlecenia na tego gracza!");

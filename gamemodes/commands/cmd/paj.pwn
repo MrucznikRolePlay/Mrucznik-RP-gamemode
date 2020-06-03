@@ -68,7 +68,7 @@ YCMD:paj(playerid, params[], help)
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o aj na %d od %s, Powod: %s", nick, czas, GetNickEx(playerid), (result));
+				format(string, sizeof(string), "AdmCmd: Konto gracza offline %s dosta³o AJ na %d min od %s, Powod: %s", nick, czas, GetNickEx(playerid), (result));
 				SendPunishMessage(string, playerid);
 			}
 		}
