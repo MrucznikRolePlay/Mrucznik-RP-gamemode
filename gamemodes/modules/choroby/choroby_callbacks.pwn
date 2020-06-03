@@ -49,12 +49,12 @@ hook OnPlayerConnect(playerid)
 
 hook OnPlayerDisconnect(playerid, reason)
 {
-	DestroyPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 	VECTOR_clear(VPlayerDiseases[playerid]);
 	Grypa[playerid] = 0;
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
+	PlayerImmunity[playerid] = 0;
 	return 1;
 }
 
@@ -65,6 +65,7 @@ hook OnPlayerSpawn(playerid)
 
 hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+	/*
 	//infecting on contact
 	if(weaponid >= 0 && weaponid <= 15) //melee weapons only
 	{
@@ -95,10 +96,12 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
-	else if(weaponid == 42) //gaœnica
+	*/
+	if(weaponid == 42) //gaœnica
 	{
 		IncreasePlayerImmunity(playerid, 0.5, 15);
 	}
+	/*
 	else 
 	{
 		//padaczka
@@ -117,6 +120,7 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
+	*/
 	return 1;
 }
 

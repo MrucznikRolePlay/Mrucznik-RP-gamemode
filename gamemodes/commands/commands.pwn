@@ -509,7 +509,6 @@
 #include "cmd/unbw.pwn"
 #include "cmd/undemorgan.pwn"
 #include "cmd/unfrakcja.pwn"
-#include "cmd/uniform2.pwn"
 #include "cmd/unjail.pwn"
 #include "cmd/unrentroom.pwn"
 #include "cmd/unspec.pwn"
@@ -588,7 +587,6 @@
 #include "cmd/zablokujtel.pwn"
 #include "cmd/zablokujw.pwn"
 #include "cmd/zakoncztrase.pwn"
-#include "cmd/zakuj.pwn"
 #include "cmd/zaliczegz.pwn"
 #include "cmd/zamek.pwn"
 #include "cmd/zamknijlinie.pwn"
@@ -1361,10 +1359,6 @@ static Aliases()
 	Command_AddAltNamed("zablokujw", "togwhisper");
 	Command_AddAltNamed("zablokujw", "togw");
 
-	//zakuj
-	Command_AddAltNamed("zakuj", "cuff");
-	Command_AddAltNamed("zakuj", "skuj");
-
 	//zaparkuj
 	Command_AddAltNamed("zaparkuj", "parkuj");
 
@@ -1490,6 +1484,10 @@ static Aliases()
 
 	//kasa
 	Command_AddAltNamed("kasa", "money");
+
+	//kajdanki
+	Command_AddAltNamed("kajdanki", "cuff");
+	Command_AddAltNamed("kajdanki", "skuj");
 
 	//dajkase
 	Command_AddAltNamed("dajkase", "givemoney");

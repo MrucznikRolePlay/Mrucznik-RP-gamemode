@@ -282,13 +282,26 @@ DialogListaFrakcji()
 	}
 	safe_return frakcje;
 }
+
 DialogListaSkinow(frakcja)
 {
-	new skiny[512];
+	new skiny[1024];
 	for(new i=0;i<MAX_SKIN_SELECT;i++)
 	{
 		if(FRAC_SKINS[frakcja][i] == 0) break;
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[frakcja][i], i);
+	}
+	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	safe_return skiny;
+}
+
+DialogListaSkinowFamily(family)
+{
+	new skiny[1024];
+	for(new i=0;i<MAX_SKIN_SELECT;i++)
+	{
+		if(FAM_SKINS[family][i] == 0) break;
+		format(skiny, sizeof(skiny), "%s%d\n", skiny, FAM_SKINS[family][i], i);
 	}
 	strdel(skiny, strlen(skiny)-2, strlen(skiny));
 	safe_return skiny;
@@ -776,11 +789,11 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 	}
 	if(ZestawNaprawczy_Warning[playerid] == 8)
 	{
-		SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+		SendClientMessage(playerid, COLOR_PANICRED, "* [ZESTAW NAPRAWCZY] Anulowano naprawê pojazdu.");
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
-		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
-		DeletePVar(playerid, "timer_ZestawNaprawczy");
+		DeletePVar(playerid, "Use_ZestawNaprawczy");
+		return 1;
 	}
 	if (ZestawNaprawczy_Timer[playerid] > 0)
 	{
@@ -788,28 +801,28 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		{
 			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Pozostalo %ds", ZestawNaprawczy_Timer[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
-			SetPlayerChatBubble(playerid, "** Naprawia pojazd **", COLOR_PURPLE, 30.0, 2500);
+			SetPlayerChatBubble(playerid, "** naprawia pojazd **", COLOR_PURPLE, 30.0, 2500);
 			ZestawNaprawczy_Timer[playerid]--;
 			ZestawNaprawczy_Warning[playerid] = 0;
+			SetTimerEx("ZestawNaprawczy_CountDown", 1000, false, "ii", playerid, vehicleid);
 		}
 		else if(IsPlayerInRangeOfPoint(playerid, 10.0, pos[0], pos[1], pos[2]))
 		{
 			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~r~Podejdz do auta! %ds", 8-ZestawNaprawczy_Warning[playerid]);
 			GameTextForPlayer(playerid, string, 2500, 3);
 			ZestawNaprawczy_Warning[playerid]++;
+			SetTimerEx("ZestawNaprawczy_CountDown", 1000, false, "ii", playerid, vehicleid);
 		}
 		else
 		{
-			SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+			SendClientMessage(playerid, COLOR_PANICRED, "* [ZESTAW NAPRAWCZY] Anulowano naprawê pojazdu. Nie by³eœ w dostatecznie blisko pojazdu.");
 			ZestawNaprawczy_Timer[playerid] = 30;
 			ZestawNaprawczy_Warning[playerid] = 0;
-			KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
-			DeletePVar(playerid, "timer_ZestawNaprawczy");
+			DeletePVar(playerid, "Use_ZestawNaprawczy");
 		}
 	}
 	else
 	{
-		KillTimer(GetPVarInt(playerid, "timer_ZestawNaprawczy"));
 		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
 		ZestawNaprawczy_Timer[playerid] = 30;
 		ZestawNaprawczy_Warning[playerid] = 0;
@@ -817,8 +830,9 @@ public ZestawNaprawczy_CountDown(playerid, vehicleid)
 		RepairVehicle(vehicleid);
         SetVehicleHealth(vehicleid, 1000);
 		CarData[VehicleUID[vehicleid][vUID]][c_HP] = 1000.0;
-		DeletePVar(playerid, "timer_ZestawNaprawczy");
+		DeletePVar(playerid, "Use_ZestawNaprawczy");
 	}
+	return 1;
 }
 
 public CountDownVehsRespawn()
@@ -1202,7 +1216,37 @@ if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 	GetPlayerName(playerid, nick, sizeof(nick));
 	format(komunikat, sizeof(komunikat),"* %s ³¹czy kabelki i wyjmuje œrubokrêt i odkrêca nastêpn¹ os³onkê.", nick);
 	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	SetTimerEx("udalo2",6000,0,"d",playerid);
+	new skillz;
+	if(PlayerInfo[playerid][pJackSkill] < 50)
+	{
+		skillz = 1;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
+	{
+		skillz = 2;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
+	{
+		skillz = 3;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
+	{
+		skillz = 4;
+	}
+	else if(PlayerInfo[playerid][pJackSkill] >= 400)
+	{
+		skillz = 5;
+	}
+	new kradnij = random(100);
+	new mnoznik = skillz*19;
+	if(kradnij <= mnoznik)
+	{
+		SetTimerEx("udalo2",6000,0,"d",playerid);
+	}
+	else
+	{
+		SetTimerEx("nieudalo2",6000,0,"d",playerid);
+	}
 }
 else
 {
@@ -1220,7 +1264,37 @@ public udalo2(playerid){
     	GetPlayerName(playerid, nick, sizeof(nick));
     	format(komunikat, sizeof(komunikat),"* %s wyjmuje 4 kolorowe kabelki.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    	SetTimerEx("udalo3",6000,0,"d",playerid);
+    	new skillz;
+		if(PlayerInfo[playerid][pJackSkill] < 50)
+		{
+			skillz = 1;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
+		{
+			skillz = 2;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
+		{
+			skillz = 3;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
+		{
+			skillz = 4;
+		}
+		else if(PlayerInfo[playerid][pJackSkill] >= 400)
+		{
+			skillz = 5;
+		}
+		new kradnij = random(100);
+		new mnoznik = skillz*19;
+		if(kradnij <= mnoznik)
+		{
+			SetTimerEx("udalo3",6000,0,"d",playerid);
+		}
+		else
+		{
+			SetTimerEx("nieudalo3",6000,0,"d",playerid);
+		}
     }
     else
     {
@@ -1239,6 +1313,8 @@ public udalo3(playerid){
     	format(komunikat, sizeof(komunikat),"* %s ³¹czy odpowiednie kabelki i wy³¹czy³ alarm.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
     	TogglePlayerControllable(playerid, 1);
+		new carid = GetPlayerVehicleID(playerid); 
+		if(Gas[carid] <= 10) Gas[carid] += 15;
     	NieSpamujKradnij[playerid] = 0;
     	SendClientMessage(playerid, COLOR_GRAD2, "Skill z³odzieja aut +1");
     	PlayerInfo[playerid][pJackSkill] ++;
@@ -3673,7 +3749,7 @@ IsAtWarsztat(playerid)
 		{//warsztat dillmore
 		  	return 1;
 		}
-        else if(IsPlayerInRangeOfPoint(playerid, 20.0, 991.3269,-1347.3071,12.9392))
+        else if(IsPlayerInRangeOfPoint(playerid, 20.0, 1017.75, -1353.33, 13.3825))
 		{//warsztat przy p1czkarni
 		  	return 1;
 		}
@@ -8437,7 +8513,7 @@ WczytajRangi()
 
 WczytajSkiny()
 {
-    new id, typ, skiny[128], skin[MAX_SKIN_SELECT];
+    new id, typ, skiny[7*MAX_SKIN_SELECT], skin[MAX_SKIN_SELECT];
     new Cache:result = mysql_query(mruMySQL_Connection, "SELECT * FROM `mru_skins`", true);
 	if(cache_is_valid(result))
     {
@@ -8446,7 +8522,7 @@ WczytajSkiny()
 			cache_get_value_index_int(i, 0, typ);
 			cache_get_value_index_int(i, 1, id);
 			cache_get_value_index(i, 2, skiny);
-        	sscanf(skiny, "p<,>A<d>(0)[22]", skin);
+        	sscanf(skiny, "p<,>A<d>(0)["#MAX_SKIN_SELECT"]", skin);
 			if(typ == 1)
 			{
 				for(new j; j<MAX_SKIN_SELECT; j++)
@@ -8853,182 +8929,6 @@ public TRAIN_DoHorn(veh)
             SetPVarInt(i, "train-horn", 0);
         }
     }
-}
-
-
-//13.07 system skinow mysql
-DestroySkinSelection(playerid)
-{
-    for(new i=0;i<=MAX_SKIN_SELECT;i++)
-    {
-        if(SkinSelection[playerid][i] != -1)
-        {
-            PlayerTextDrawDestroy(playerid, PlayerText:SkinSelection[playerid][i]);
-            SkinSelection[playerid][i]=-1;
-        }
-    }
-    TextDrawHideForPlayer(playerid, SkinSelectionAccept);
-    TextDrawHideForPlayer(playerid, SkinSelectionDenied);
-    TextDrawHideForPlayer(playerid, SkinSelectionMy);
-    SetPVarInt(playerid, "skin-done", 0);
-    SetPVarInt(playerid, "skin-select", 0);
-    return 1;
-}
-
-PlayerText:CreateSkinSelectionTXD(playerid, modelindex, Float:Xpos, Float:Ypos, Float:width, Float:height)
-{
-    new PlayerText:txtPlayerSprite = CreatePlayerTextDraw(playerid, Xpos, Ypos, "");
-    PlayerTextDrawFont(playerid, txtPlayerSprite, TEXT_DRAW_FONT_MODEL_PREVIEW);
-    PlayerTextDrawColor(playerid, txtPlayerSprite, 0xFFFFFFFF);
-    PlayerTextDrawBackgroundColor(playerid, txtPlayerSprite, 0x00000066);
-    PlayerTextDrawTextSize(playerid, txtPlayerSprite, width, height);
-    PlayerTextDrawSetPreviewModel(playerid, txtPlayerSprite, modelindex);
-    PlayerTextDrawSetPreviewRot(playerid,txtPlayerSprite, 0.0, 0.0, 0.0);
-    PlayerTextDrawSetSelectable(playerid, txtPlayerSprite, 1);
-    PlayerTextDrawShow(playerid,txtPlayerSprite);
-    return txtPlayerSprite;
-}
-
-SkinSelection_GetNumber(typ, index)
-{
-    new ile=0;
-    switch(typ)
-    {
-        case 1:
-        {
-            for(new i=0;i<MAX_SKIN_SELECT;i++)
-            {
-                if(FRAC_SKINS[index][i] != 0) ile++;
-            }
-        }
-        case 2:
-        {
-            for(new i=0;i<MAX_SKIN_SELECT;i++)
-            {
-                if(FAM_SKINS[index][i] != 0) ile++;
-            }
-        }
-    }
-    return ile;
-}
-
-ProceedSkinSelection(playerid, index, typ)
-{
-    //W - szerokosc H - wysokosc
-    new Float:xstart=0.0, Float:ystart=300.0, Float:w=50.0, Float:h=60.0,Float:margin = 5.0, Float:x, Float:y;
-    //Odejmuje w*1.5 dla nieparzystych, dla parzystych odejmuje w.
-
-    new ilosc = SkinSelection_GetNumber(typ, index), Float:calibrate;
-    if(ilosc == 0) return 0;
-    TogglePlayerControllable(playerid, 0);
-    if(ilosc <= 11)
-    {
-        new docalc = 9-ilosc;
-        if(docalc != 0) calibrate = docalc*0.5;
-
-        xstart=640-floatmul(floatadd(w,margin),ilosc+calibrate)-(w*1.5); //Mno¿enie szerokosci i marginesu przez ilosc elementow w tablicy ze skinami
-
-        x=xstart+margin;
-        y=ystart+margin;
-
-        for(new i=0;i<11;i++)
-        {
-            switch(typ)
-            {
-                case 1:
-                {
-                    if(FRAC_SKINS[index][i] == 0) continue;
-                    SkinSelection[playerid][i]=_:CreateSkinSelectionTXD(playerid, FRAC_SKINS[index][i], x, y, w, h);
-
-                    x+=w+margin;
-                    if(x > 640-w-margin) x=xstart+margin, y+=h+margin;
-                }
-                case 2:
-                {
-                    if(FAM_SKINS[index][i] == 0) continue;
-                    SkinSelection[playerid][i]=_:CreateSkinSelectionTXD(playerid, FAM_SKINS[index][i], x, y, w, h);
-
-                    x+=w+margin;
-                    if(x > 640-w-margin) x=xstart+margin, y+=h+margin;
-                }
-            }
-        }
-    }
-    else
-    {
-        //Pierwsza linia
-        xstart=640-floatmul(floatadd(w,margin),10)-(w*1.5);
-
-        x=xstart+margin;
-        y=ystart+margin;
-
-        for(new i=0;i<11;i++)
-        {
-            switch(typ)
-            {
-                case 1:
-                {
-                    if(FRAC_SKINS[index][i] == 0) continue;
-                    SkinSelection[playerid][i]=_:CreateSkinSelectionTXD(playerid, FRAC_SKINS[index][i], x, y, w, h);
-
-                    x+=w+margin;
-                    if(x > 640-w-margin) x=xstart+margin, y+=h+margin;
-                }
-                case 2:
-                {
-                    if(FAM_SKINS[index][i] == 0) continue;
-                    SkinSelection[playerid][i]=_:CreateSkinSelectionTXD(playerid, FAM_SKINS[index][i], x, y, w, h);
-
-                    x+=w+margin;
-                    if(x > 640-w-margin) x=xstart+margin, y+=h+margin;
-                }
-            }
-        }
-        //Druga linia
-        ilosc-=11;
-        new docalc = 9-ilosc;
-        if(docalc != 0) calibrate = docalc*0.5;
-
-        xstart=640-floatmul(floatadd(w,margin),ilosc+calibrate)-(w*1.5);
-
-        x=xstart+margin;
-        y=ystart+margin+h+margin;
-
-        for(new i=11;i<MAX_SKIN_SELECT;i++)
-        {
-            switch(typ)
-            {
-                case 1:
-                {
-                    if(FRAC_SKINS[index][i] == 0) continue;
-                    SkinSelection[playerid][i]=_:CreateSkinSelectionTXD(playerid, FRAC_SKINS[index][i], x, y, w, h);
-
-                    x+=w+margin;
-                    if(x > 640-w-margin) x=xstart+margin, y+=h+margin;
-                }
-                case 2:
-                {
-                    if(FAM_SKINS[index][i] == 0) continue;
-                    SkinSelection[playerid][i]=_:CreateSkinSelectionTXD(playerid, FAM_SKINS[index][i], x, y, w, h);
-
-                    x+=w+margin;
-                    if(x > 640-w-margin) x=xstart+margin, y+=h+margin;
-                }
-            }
-        }
-    }
-
-    SetPVarInt(playerid, "skin-typ", typ);
-    SkinSelection[playerid][MAX_SKIN_SELECT]=_:CreateSkinSelectionTXD(playerid, 19300, 320.0-w, 240.0-h, w*2, h*2);//Main show
-    PlayerTextDrawSetSelectable(playerid, PlayerText:SkinSelection[playerid][MAX_SKIN_SELECT], 0);
-
-    TextDrawShowForPlayer(playerid, SkinSelectionAccept);
-    TextDrawShowForPlayer(playerid, SkinSelectionDenied);
-    if(GetPlayerOrg(playerid) != 0) TextDrawShowForPlayer(playerid, SkinSelectionMy);
-
-    SelectTextDraw(playerid, JOB_SKIN_HOVERCOLOR);
-
-    return 1;
 }
 
 //BLINK
@@ -11578,6 +11478,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
         SetPVarInt(playerid, "trans", 0);
         new str[64], Float:speed, ile;
         DisablePlayerCheckpoint(playerid);
+		if(idx == -1) return; //TODO: check
 
         if(TransportJobData[idx][eTJDStartX] == 0.0) speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[0][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[0][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[0][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         else speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[idx][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[idx][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[idx][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
@@ -12693,6 +12594,7 @@ public DeathAdminWarning(playerid, killerid, reason)
 
 public CuffedAction(playerid, cuffedid)
 {
+	//if(!IsAPolicja(cuffedid)) ZdejmijBW(cuffedid, 4000);
 	Kajdanki_JestemSkuty[cuffedid] = 1;
 	Kajdanki_Uzyte[playerid] = 1;
 	Kajdanki_PDkuje[cuffedid] = playerid;

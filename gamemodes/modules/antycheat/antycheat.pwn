@@ -95,6 +95,23 @@ SetAntyCheatForPlayer(playerid, valueCode)
 	return 1;
 }
 
+PlayerCanSpawnWihoutTutorial(playerid)
+{
+	if(PlayerInfo[playerid][pLevel] == 1 && (PlayerInfo[playerid][pSex] == 0 || PlayerInfo[playerid][pOrigin] == 0 || PlayerInfo[playerid][pAge] == 0)) //anty sobeit spawn
+	{
+		new ip[16];
+		GetPlayerIp(playerid, ip, sizeof(ip));
+		SendMessageToAdmin(
+			sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | Spawn pomijaj¹c tutorial", GetNickEx(playerid), playerid, ip), 
+			0xFF00FFFF
+		);
+		sendErrorMessage(playerid, "Zespawnowa³eœ siê bez wyboru p³ci/pochodzenia/wieku postaci! Zosta³eœ wyrzucony z serwera.");
+		KickEx(playerid);
+		return 0;
+	}
+	return 1;
+}
+
 forward CheckCode2003(killerid, playerid);
 public CheckCode2003(killerid, playerid)
 {
@@ -235,6 +252,8 @@ UpdatePotentialCheatersTxd()
 			TextDrawBoxColor(PotentialCheatersTxd[i], 50);
 
 			i++;
+			if(i == MAX_POTENTIAL_CHEATERS)
+				break;
 		}
 	}
 
@@ -337,6 +356,10 @@ GetNexACAdditionalSettingName(type)
 		{
 			strcat(name, "KICK 1LVL/OZNACZ");
 		}
+		case LVL1MARK:
+		{
+			strcat(name, "OZNACZ 1LVL");
+		}
 		case LVL1INSTAKICK:
 		{
 			strcat(name, "INSTAKICK 1LVL/OZNACZ");
@@ -385,10 +408,10 @@ ACv2_DrivingWithoutPremissions(playerid, vehicleid)
 			Log(warningLog, INFO, string);
 			Log(punishmentLog, INFO, string);
 			RemovePlayerFromVehicleEx(playerid);
-			new playa, Float:slx, Float:sly, Float:slz;
-			GetPlayerPos(playa, slx, sly, slz);
-			SetPlayerPos(playa, slx, sly, slz+5);
-			PlayerPlaySound(playa, 1130, slx, sly, slz+5);
+			new Float:slx, Float:sly, Float:slz;
+			GetPlayerPos(playerid, slx, sly, slz);
+			SetPlayerPos(playerid, slx, sly, slz+5);
+			PlayerPlaySound(playerid, 1130, slx, sly, slz+5);
 			return 1;
 		}
 	}

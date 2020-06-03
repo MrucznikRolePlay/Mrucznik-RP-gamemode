@@ -88,6 +88,7 @@ YCMD:kajdanki(playerid, params[], help)
 
                                 //czynnoœci
                                 CuffedAction(playerid, giveplayerid);
+                                ZdejmijBW(playerid, 2000);
                             }
                             else if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
                             {
@@ -127,7 +128,8 @@ YCMD:kajdanki(playerid, params[], help)
                 {
                     sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
                 }
-            } else
+            } 
+            else
             {
                 new str[32];
                 valstr(str, giveplayerid);

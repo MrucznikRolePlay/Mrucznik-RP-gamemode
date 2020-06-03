@@ -47,7 +47,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			SetPVarInt(playerid, "lastDialogCzitMsg", gettime() + 60);
 			new string[128];
-			format(string, sizeof(string), "AdmWarn: %s(ID: %i) <- ten gnoj czituje dialogi sprawdzcie co robi", GetNick(playerid), playerid);
+			format(string, sizeof(string), "AdmWarn: %s[%d] <- ten gnoj czituje dialogi sprawdzcie co robi (DialogID: [%d]) ", GetNick(playerid), playerid, dialogid);
 			SendAdminMessage(COLOR_YELLOW, string);	
 		}
 		return 1;
@@ -87,8 +87,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
+
+	//2.7.5 - nadal nie 3.0
+	if(dialogid == DIALOGID_UNIFORM_FRAKCJA)
+	{
+		if(response)
+		{
+			new string[64];
+			new skin = FRAC_SKINS[GetPlayerFraction(playerid)][listitem];
+			SetPlayerSkinEx(playerid, skin);
+			PlayerInfo[playerid][pUniform] = skin;
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
+	else if(dialogid == DIALOGID_UNIFORM_FAMILY)
+	{
+		if(response)
+		{
+			new string[64];
+			new skin = FAM_SKINS[GetPlayerOrg(playerid)][listitem];
+			SetPlayerSkinEx(playerid, skin);
+			PlayerInfo[playerid][pUniform] = skin;
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
 	//2.5.2
-	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
+	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)
 		{
@@ -6957,7 +6983,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 			else
 			{
-				SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+				SendClientMessage(playerid, COLOR_PANICRED, "(10) Anulowano.");
 			}
 		}
 		if(dialogid == 86)//system domów
@@ -6978,7 +7004,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+				SendClientMessage(playerid, COLOR_PANICRED, "(9) Anulowano.");
 			}
 		}
 		if(dialogid == 87)//system domów
