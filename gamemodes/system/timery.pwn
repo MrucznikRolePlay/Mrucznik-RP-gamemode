@@ -2670,6 +2670,12 @@ public JednaSekundaTimer()
 		}
 		if(TutTime[i] >= 1 && !IsPlayerNPC(i))
 		{
+			GetPlayerVelocity(i, x, y, z);
+			if( x > 0.1 || y > 0.1)
+			{
+				SendClientMessage(i, COLOR_LIGHTBLUE, "AC: Kick za ucieczkê z samouczka!");
+				KickEx(i);
+			}
 			TutTime[i] += 1;
 			if(TutTime[i] == 3)
 			{
