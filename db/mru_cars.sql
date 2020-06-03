@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `mru_cars` (
   `pdvehmod` int(11) NOT NULL DEFAULT '0',
   `Rejestracja` varchar(32) COLLATE utf8_polish_ci NOT NULL DEFAULT '',
   `mru_carscol` varchar(45) COLLATE utf8_polish_ci DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=63967 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 
 ALTER TABLE `mru_cars`
@@ -35,7 +35,7 @@ ALTER TABLE `mru_cars`
 
 
 ALTER TABLE `mru_cars`
-MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63967;
+MODIFY `UID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=0;
 
 INSERT INTO `mru_cars` (`UID`, `ownertype`, `owner`, `model`, `x`, `y`, `z`, `angle`, `hp`, `tires`, `color1`, `color2`, `nitro`, `hydraulika`, `felgi`, `malunek`, `spoiler`, `bumper1`, `bumper2`, `keys`, `neon`, `ranga`, `int`, `vw`, `oldid`, `pdvehmod`, `Rejestracja`, `mru_carscol`) VALUES
 (3, 1, 10, 420, 2470.83, -2141.02, 13.3365, 0, 1000, 0, 6, 6, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, '', '0'),
