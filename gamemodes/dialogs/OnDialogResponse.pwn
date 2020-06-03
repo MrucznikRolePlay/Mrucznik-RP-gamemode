@@ -11785,9 +11785,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
         else if(dialogid == 1401)
 		{
+			new string[256];
 		    if(response)
 		    {
-		        new string[256];
 		        switch(listitem)
 		        {
 		            case 0://Bia³y
@@ -11836,8 +11836,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
 		            }
 		        }
-                Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);
 		    }
+			else
+			{
+				format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+				SendClientMessage(playerid, COLOR_WHITE, string);
+				CarData[IloscAut[playerid]][c_Neon] = 18652;
+				PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
+			}
+			Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);
+			return 1;
 		}
 		else if(dialogid == 1403)
 		{
