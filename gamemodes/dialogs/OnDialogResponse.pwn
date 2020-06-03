@@ -3627,6 +3627,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            Kajdanki_JestemSkuty[playerid] = 2;
 		            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
+					
+					CuffedAction(Kajdanki_PDkuje[playerid], playerid);
+					TogglePlayerControllable(playerid, 1);
 				}
 				else if(cops == 2 || TazerAktywny[playerid] == 1 && cops < 2)
 				{
@@ -3649,6 +3652,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            Kajdanki_JestemSkuty[playerid] = 2;
 			            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
 			            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
+					
+						CuffedAction(Kajdanki_PDkuje[playerid], playerid);
+						TogglePlayerControllable(playerid, 1);
 				    }
 				}
 				else
