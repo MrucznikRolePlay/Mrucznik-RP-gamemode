@@ -237,7 +237,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayerid, reason);
+				format(string, sizeof(string), "AdmCmd: Admin zbanowa³ %s, powód: %s", giveplayerid, reason);
 				SendPunishMessage(string, playerid); 
 			}		
 		}

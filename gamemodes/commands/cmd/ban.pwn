@@ -113,7 +113,7 @@ YCMD:ban(playerid, params[], help)
 						{
 							iloscPozaDuty[playerid]++; 
 						}
-						format(string, sizeof(string), "AdmCmd: Pó³Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayer, (result));
+						format(string, sizeof(string), "AdmCmd: Administrator zbanowa³ %s, powód: %s", giveplayer, (result));
                         SendPunishMessage(string, giveplayerid);
 						if(kary_TXD_Status == 1)
 						{
