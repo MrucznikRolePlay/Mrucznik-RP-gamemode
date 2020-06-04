@@ -2791,6 +2791,8 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 125)
 			{
+				SetPVarInt(i, "AntyCheatOff", 1);
+
 				TutTime[i] = 0; PlayerInfo[i][pTut] = 1;
 				gOoc[i] = 0; gNews[i] = 0; gFam[i] = 0;
 				MedicBill[i] = 0;
