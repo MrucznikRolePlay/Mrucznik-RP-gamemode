@@ -106,11 +106,8 @@ sprzedajneon_akceptuj(playerid)
 
     IloscAut[playerid] = VehicleUID[pojazd][vUID];
     ChatMe(giveplayerid, sprintf("montuje neony w %s.", GetNick(playerid), VehicleNames[model-400]));
-    if(IsPlayerPremiumOld(playerid))
-    {
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kolorowe neony mo¿e w³¹czaæ tylko osoba z kontem premium! Bez konta premium, wszystkie neony bêd¹ koloru bia³ego.");
-        ShowPlayerDialogEx(playerid, 1401, DIALOG_STYLE_LIST, "Wybierz kolor neonu", "{FFFFFF}Bia³y\n{DAA520}¯ó³ty\n{9ACD32}Zielony\n{0000FF}Niebieski\n{FF0000}Czerwony\n{C2A2DA}Ró¿owy", "Wybierz", "");
-    }
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kolorowe neony mo¿e w³¹czaæ tylko osoba z kontem premium! Bez konta premium, wszystkie neony bêd¹ koloru bia³ego.");
+    ShowPlayerDialogEx(playerid, 1401, DIALOG_STYLE_LIST, "Wybierz kolor neonu", "{FFFFFF}Bia³y\n{DAA520}¯ó³ty\n{9ACD32}Zielony\n{0000FF}Niebieski\n{FF0000}Czerwony\n{C2A2DA}Ró¿owy", "Wybierz", "");
 
     SetPVarInt(playerid, "neon-uid", 0);
     return 1;
