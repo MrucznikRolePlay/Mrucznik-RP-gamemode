@@ -291,7 +291,7 @@ DialogListaSkinow(frakcja)
 		if(FRAC_SKINS[frakcja][i] == 0) break;
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[frakcja][i], i);
 	}
-	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	strdel(skiny, strlen(skiny)-1, strlen(skiny));
 	safe_return skiny;
 }
 
@@ -303,7 +303,7 @@ DialogListaSkinowFamily(family)
 		if(FAM_SKINS[family][i] == 0) break;
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FAM_SKINS[family][i], i);
 	}
-	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	strdel(skiny, strlen(skiny)-1, strlen(skiny));
 	safe_return skiny;
 }
 

@@ -117,7 +117,7 @@ YCMD:ban(playerid, params[], help)
                         SendPunishMessage(string, giveplayerid);
 						if(kary_TXD_Status == 1)
 						{
-							BanPlayerTXD(giveplayerid, playerid, result);
+							BanPlayerTXD(giveplayerid, result);
 						}
 						SendClientMessage(giveplayerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
 						Log(punishmentLog, INFO, "Pó³Admin %s ukara³ %s kar¹ bana, powód: %s", 

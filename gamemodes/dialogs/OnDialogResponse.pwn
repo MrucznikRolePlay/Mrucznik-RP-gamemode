@@ -233,11 +233,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(kary_TXD_Status == 1)
 			{
-				BanPlayerTXD(giveplayerid, playerid, reason); 
+				BanPlayerTXD(giveplayerid, reason); 
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "AdmCmd: Admin zbanowa³ %s, powód: %s", giveplayerid, reason);
+				format(string, sizeof(string), "AdmCmd: Admin zbanowa³ %s, powód: %s", GetNick(giveplayerid), reason);
 				SendPunishMessage(string, playerid); 
 			}		
 		}
@@ -275,7 +275,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(PlayerInfo[giveplayerid][pWarns] >= 3)
 				{
 					format(string, sizeof(string), "%s (3 warny)", reason);
-					BanPlayerTXD(giveplayerid, playerid, string); 
+					BanPlayerTXD(giveplayerid, string); 
 				}
 				else 
 				{
