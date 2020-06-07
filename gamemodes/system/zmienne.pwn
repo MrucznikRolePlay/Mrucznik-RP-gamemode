@@ -236,8 +236,6 @@ new gPlayerOrg[MAX_PLAYERS];
 new bool:gPlayerOrgLeader[MAX_PLAYERS];
 //03.10
 new bool:SafeLoaded=false;
-//01.10 server info
-new ServerInfo[2048];
 //30.09 vopis
 new Text3D:CarOpis[MAX_VEHICLES] = {Text3D:INVALID_3DTEXT_ID, ...};
 new CarOpisCaller[MAX_VEHICLES][MAX_PLAYER_NAME];

@@ -14497,12 +14497,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-    else if(dialogid == D_SERVERINFO)
-    {
-        if(response) return 1;
-        TextDrawHideForPlayer(playerid, TXD_Info);
-        return 1;
-    }
     else if(dialogid == D_ORGS)
     {
         if(!response) return 1;

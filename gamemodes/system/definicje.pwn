@@ -324,7 +324,6 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 #define D_INFO      712
 #define D_PERM      713
-#define D_SERVERINFO 715
 
 #define D_PANEL_ADMINA          1000
 #define D_PANEL_KAR             1100

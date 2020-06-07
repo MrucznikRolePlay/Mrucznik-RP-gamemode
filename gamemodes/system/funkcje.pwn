@@ -8422,37 +8422,6 @@ ChangeLSMCElevatorState()
     }
 }
 
-LoadServerInfo()
-{
-	//TODO: MySQL or remove
-    // ServerInfo="\0";
-    // mysql_query("SELECT `info` FROM `mru_serverinfo` WHERE `aktywne`=1 LIMIT 1");
-    // mysql_store_result();
-    // if(mysql_num_rows())
-    // {
-    //     mysql_fetch_row_format(ServerInfo, "|");
-    //     new lPos=0;
-    //     while((lPos = strfind(ServerInfo, "\\n", false, lPos)) != -1)
-    //     {
-    //         strdel(ServerInfo, lPos, lPos+2);
-    //         strins(ServerInfo, "\n", lPos);
-    //         lPos++;
-    //     }
-    //     lPos=0;
-    //     while((lPos = strfind(ServerInfo, "\\t", false, lPos)) != -1)
-    //     {
-    //         strdel(ServerInfo, lPos, lPos+2);
-    //         strins(ServerInfo, "\t", lPos);
-    //         lPos++;
-    //     }
-    //     foreach(new i : Player)
-    //     {
-    //         if(gPlayerLogged[i] == 1) TextDrawShowForPlayer(i, TXD_Info);
-    //     }
-    // }
-	// mysql_free_result();
-}
-
 LoadConfig()
 {
     new data[256];

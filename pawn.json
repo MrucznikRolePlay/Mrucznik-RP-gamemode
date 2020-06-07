@@ -27,7 +27,7 @@
 		"Zeex/amx_assembly",
 		"maddinat0r/samp-mysql-yinline-include",
 		"urShadow/Pawn.Regex:1.1.2",
-		"Mrucznik/samp-mruv-api-plugin",
+		"Mrucznik/samp-mruv-api-plugin:v0.1.1",
 		"Southclaws/progress2",
 		"oscar-broman/samp-inline-sort"
 	],

@@ -267,7 +267,7 @@ UpdatePotentialCheatersTxd()
 // ----- Nex-AC modifications ------
 NexACSaveCode(code, eNexACAdditionalSettings:type)
 {
-	if(type == OFF)
+	if(type == eNexACAdditionalSettings:OFF)
 	{
         EnableAntiCheat(code, false);
 	}
@@ -340,7 +340,7 @@ GetNexACAdditionalSettingName(type)
 	new name[22];
 	switch(type)
 	{
-		case OFF: 
+		case (eNexACAdditionalSettings:OFF): 
 		{
 			strcat(name, "OFF");
 		}

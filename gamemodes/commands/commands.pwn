@@ -250,7 +250,6 @@
 #include "cmd/liderpomoc.pwn"
 #include "cmd/linie.pwn"
 #include "cmd/loadconfig.pwn"
-#include "cmd/loadinfo.pwn"
 #include "cmd/lock.pwn"
 #include "cmd/lockint.pwn"
 #include "cmd/login.pwn"

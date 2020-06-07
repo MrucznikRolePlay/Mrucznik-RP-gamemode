@@ -84,7 +84,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 		switch(nexac_additional_settings[code])
 		{
-			case OFF: 
+			case (eNexACAdditionalSettings:OFF): 
 			{
 				//should never occur
 			}

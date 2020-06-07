@@ -60,7 +60,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <discord-connector>
 #include <memory>
 #include <profiler_plugin>
-//TODO: add plugins
+#include <samp-mruv-api-plugin>
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 // #include <colandreas>
@@ -226,6 +226,17 @@ public OnGameModeInit()
 		SendRconCommand("exit");
 		return 0;
 		#endif
+
+		new id;
+		new bool:result = mvss_RegisterServer(0, "Mrucznik Role Play - produkcja", "localhost", "7777", "SAMP", ServerStatus:OFF, 0, id);
+		if(result)
+		{
+			printf("Registered server in MruV API, id: %d", id);
+		}
+		else
+		{
+			printf("Unable to register server in MruV API.");
+		}
 	}
 	else
 	{
@@ -322,7 +333,6 @@ public OnGameModeInit()
 
     //Patrol Data
     Patrol_Init();
-    LoadServerInfo(); //Informacja dla graczy np. o wylaczeniu czegos
 
     //13.06
     LoadTXD();
@@ -832,10 +842,6 @@ public OnPlayerClickTextDraw(playerid, Text:clickedid)
                 break;
             }
         }
-    }
-    if(clickedid == TXD_Info) //Display server info
-    {
-        if(strlen(ServerInfo) > 1) ShowPlayerDialogEx(playerid, D_SERVERINFO, DIALOG_STYLE_MSGBOX, "Mrucznik-RP » Informacja", ServerInfo, "Schowaj", "Zamknij");
     }
    	return 1;
 }
@@ -5940,7 +5946,6 @@ public OnPlayerAccountLoaded(playerid)
 	SetPlayerVirtualWorld(playerid, 0);
 
     Zone_Sync(playerid);
-    if(strlen(ServerInfo) > 1) TextDrawShowForPlayer(playerid, TXD_Info); //Show info
 
     //Sync org
     if(GetPlayerOrg(playerid) == 255) PlayerInfo[playerid][pOrg] = 0;
