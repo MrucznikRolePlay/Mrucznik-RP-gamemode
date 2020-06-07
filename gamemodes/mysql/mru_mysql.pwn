@@ -192,6 +192,7 @@ MruMySQL_CreateKontaORM(playerid)
 	orm_addvar_int(orm, PlayerInfo[playerid][pConnected], "connected");
 	orm_addvar_int(orm, PlayerInfo[playerid][pInjury], "HealthPacks");
 	orm_addvar_int(orm, PlayerInfo[playerid][pHealthPacks], "Injury");
+	orm_addvar_int(orm, PlayerImmunity[playerid], "Immunity");
 
 	orm_setkey(orm, "UID");
 }
@@ -407,7 +408,7 @@ MruMySQL_WczytajOpis(handle, uid, typ)
 		}
 		else
 		{
-            strpack(CarDesc[handle], string);
+            strcat(CarDesc[handle], string);
 		}
 	}
 	cache_delete(result);
@@ -417,8 +418,15 @@ MruMySQL_WczytajOpis(handle, uid, typ)
 MruMySQL_UpdateOpis(handle, uid, typ)
 {
     new lStr[256], packed[128], opis[128];
-    strunpack(packed, (typ == 1) ? (PlayerDesc[handle]) : (CarDesc[handle]));
-    mysql_escape_string(packed, opis);
+	if(typ == 1)
+	{
+		strunpack(packed, PlayerDesc[handle]);
+    	mysql_escape_string(packed, opis);
+	}
+	else
+	{
+    	mysql_escape_string(CarDesc[handle], opis);
+	}
     if(MruMySQL_CheckOpis(uid, typ))
         format(lStr, 256, "UPDATE `mru_opisy` SET `desc`='%s' WHERE `owner`='%d' AND `typ`=%d", opis, uid, typ);
     else

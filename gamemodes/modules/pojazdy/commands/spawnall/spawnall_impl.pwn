@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  spawnall                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,29 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 02.06.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "ac\ac.pwn"
-#include "cziterzy\cziterzy.pwn"
-#include "unmark\unmark.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_spawnall_Impl(playerid)
 {
-    command_ac();
-    command_cziterzy();
-    command_unmark();
-    
+    for(new i=0;i<MAX_CAR_SLOT;i++)
+    {
+		new veh = PlayerInfo[playerid][pCars][i];
+        if(veh != 0)
+        {
+            new vehid = Car_Spawn(veh);
+            if(vehid)
+            {
+                Log(serverLog, INFO, "Gracz %s zespawnowa³ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(vehid));
+            }
+        }
+    }
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wszystkie pojazdy zespawnowane!");
+    return 1;
 }
+
+//end

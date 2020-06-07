@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  spawnall                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,37 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "ac\ac.pwn"
-#include "cziterzy\cziterzy.pwn"
-#include "unmark\unmark.pwn"
-
+#include "spawnall_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_spawnall()
 {
-    command_ac();
-    command_cziterzy();
-    command_unmark();
+    new command = Command_GetID("spawnall");
+
+    //aliases
+    Command_AddAlt(command, "spawnujpojazdy");
+    Command_AddAlt(command, "spawnujauta");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:spawnall(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Spawnuje wszystkie pojazdy.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_spawnall_Impl(playerid);
 }

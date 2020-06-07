@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                sprzedajneon                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,49 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "ac\ac.pwn"
-#include "cziterzy\cziterzy.pwn"
-#include "unmark\unmark.pwn"
-
+#include "sprzedajneon_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_sprzedajneon()
 {
-    command_ac();
-    command_cziterzy();
-    command_unmark();
+    new command = Command_GetID("sprzedajneon");
+
+    //aliases
+    Command_AddAlt(command, "sprzedajneony");
+    Command_AddAlt(command, "sellneon");
+    Command_AddAlt(command, "zmienneon");
+    Command_AddAlt(command, "zmienneony");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:sprzedajneon(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Oferuje kupno neonu wskazanemu graczowi.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, commission;
+    if(sscanf(params, "rd", giveplayerid, commission))
+    {
+        sendTipMessage(playerid, "U¿yj /sprzedajneon [Nick/ID] [prowizja] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_sprzedajneon_Impl(playerid, giveplayerid, commission);
 }

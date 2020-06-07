@@ -44,7 +44,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	Business[0][b_cost] = 100000000;
 	mysql_escape_string("Szmulowice Dolne", Business[0][b_Location]); 
 	mysql_escape_string("Brak - na sprzeda¿", Business[0][b_Name_Owner]);
-	BusinessLoaded=0;
+	BusinessLoaded=1;
 
 	new Cache:result = mysql_query(mruMySQL_Connection, "SELECT `ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket` \
 		FROM `mru_business`", true);

@@ -415,7 +415,7 @@ Car_Load()
             CarOpis[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i);
             format(CarOpisCaller[i], MAX_PLAYER_NAME, "SYSTEM");
 
-            strpack(CarDesc[i], ldesc);
+            strcat(CarDesc[i], ldesc);
 		}
 	}
 	

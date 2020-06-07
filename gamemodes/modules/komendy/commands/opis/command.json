@@ -9,8 +9,8 @@
     "parameters": [
         {
             "type": "string",
-            "size": "32",
-            "name": "opis",
+            "size": "256",
+            "name": "text",
             "description": "opis"
         }
     ],

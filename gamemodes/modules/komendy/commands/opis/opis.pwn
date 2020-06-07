@@ -55,13 +55,13 @@ YCMD:opis(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new opis[32];
-    if(sscanf(params, "s[32]", opis))
+    new text[256];
+    if(sscanf(params, "s[256]", text))
     {
         sendTipMessage(playerid, "U¿yj /opis [opis] ");
         return 1;
     }
     
     //command body
-    return command_opis_Impl(playerid, opis);
+    return command_opis_Impl(playerid, text);
 }

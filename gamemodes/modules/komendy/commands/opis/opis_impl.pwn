@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_opis_Impl(playerid, params[])
+command_opis_Impl(playerid, text[])
 {
 	if(PlayerInfo[playerid][pBP] != 0)
 	{
@@ -31,7 +31,7 @@ command_opis_Impl(playerid, params[])
 	}
 
 	new opis[128];
-	if(!sscanf(params, "s[128]", opis))
+	if(!sscanf(text, "s[128]", opis))
 	{
 		new givenString[128];
 		format(givenString, sizeof(givenString), "%s", opis);

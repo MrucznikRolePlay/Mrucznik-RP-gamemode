@@ -1429,6 +1429,10 @@ command_akceptuj_Impl(playerid, x_job[32])
     {
         maseczka_akceptuj(playerid);
     }
+    else if(strcmp(x_job,"neony",true) == 0 || strcmp(x_job,"neon",true) == 0)
+    {
+        sprzedajneon_akceptuj(playerid);
+    }
     return 1;
 }
 

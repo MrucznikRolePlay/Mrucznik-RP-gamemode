@@ -338,10 +338,10 @@ BPPlayerTXD(playerid, adminid, timeVal, reason[])
 	}
 	return 1;
 }
-BanPlayerTXD(playerid, adminid, reason[])
+BanPlayerTXD(playerid, reason[])
 {
 	new str[128];
-    format(str, sizeof(str), "~r~Banicja~n~~w~Dla: ~y~%s~n~~w~Admin: ~y~%s~n~~w~Powod: ~y~%s", GetNickEx(playerid), GetNickEx(adminid), Odpolszcz(reason));
+    format(str, sizeof(str), "~r~Banicja~n~~w~Dla: ~y~%s~n~~w~Powod: ~y~%s", GetNickEx(playerid), Odpolszcz(reason));
 	karaTimer = SetTimer("StopDraw", 15000, false);
 	foreach(new i : Player)
 	{
@@ -492,7 +492,7 @@ GiveBanForPlayer(playerid, adminid, result[])
 {
 	new str[256];
 	SendClientMessage(playerid, COLOR_NEWS, "Jeœli uwa¿asz ze ban jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i z³ó¿ prosbê o UN-BAN");
-	format(str, sizeof(str), "Dosta³eœ bana od %s, powód: %s", GetNickEx(adminid), (result));
+	format(str, sizeof(str), "Dosta³eœ bana, powód: %s", result);
 	SendClientMessage(playerid, COLOR_LIGHTRED, str);
 	Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ bana, powód: %s", 
 		GetPlayerLogName(adminid),

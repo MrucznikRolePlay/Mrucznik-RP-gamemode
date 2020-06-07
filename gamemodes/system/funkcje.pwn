@@ -291,7 +291,7 @@ DialogListaSkinow(frakcja)
 		if(FRAC_SKINS[frakcja][i] == 0) break;
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[frakcja][i], i);
 	}
-	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	strdel(skiny, strlen(skiny)-1, strlen(skiny));
 	safe_return skiny;
 }
 
@@ -303,7 +303,7 @@ DialogListaSkinowFamily(family)
 		if(FAM_SKINS[family][i] == 0) break;
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FAM_SKINS[family][i], i);
 	}
-	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	strdel(skiny, strlen(skiny)-1, strlen(skiny));
 	safe_return skiny;
 }
 
@@ -2399,6 +2399,11 @@ IsPlayerInFraction(playerid, frac, adminlvl=-1)
     if(member==frac || leader == frac) return 1;
     else if(adminlvl != -1 && PlayerInfo[playerid][pAdmin] >= adminlvl) return 1;
 	return 0;
+}
+
+IsAMechazordWarsztatowy(playerid)
+{
+	return IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19;
 }
 
 IsAMedyk(playerid)

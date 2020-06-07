@@ -43,6 +43,7 @@ hook OnGameModeInit()
 hook OnPlayerConnect(playerid)
 {
 	PlayerImmunityBar[playerid] = CreatePlayerProgressBar(playerid, 548.000000, 34.000000, 62.500000, 5.500000, -293409025, MAX_PLAYER_IMMUNITY, 0);
+	PlayerImmunity[playerid] = INITIAL_PLAYER_IMMUNITY;
 	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], INITIAL_PLAYER_IMMUNITY);
 	return 1;
 }
@@ -54,7 +55,6 @@ hook OnPlayerDisconnect(playerid, reason)
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
-	PlayerImmunity[playerid] = 0;
 	return 1;
 }
 

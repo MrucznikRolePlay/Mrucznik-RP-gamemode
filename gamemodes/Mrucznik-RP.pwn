@@ -552,8 +552,6 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 				PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
 				PlayerPlaySound(hitid, 6300, 0.0, 0.0, 0.0);
 				ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
-				ClearAnimations(hitid);
-				ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
 				TogglePlayerControllable(hitid, 0);
 				return 0;
 			}

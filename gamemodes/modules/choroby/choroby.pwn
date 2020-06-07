@@ -105,7 +105,14 @@ IncreasePlayerImmunity(playerid, Float:value=1.0, Float:max=MAX_PLAYER_IMMUNITY)
 	new Float:newValue = GetPlayerImmunity(playerid)+value;
 	if(newValue > max) 
 	{
-		newValue = max;
+		if(GetPlayerImmunity(playerid) > max) 
+		{
+			newValue = GetPlayerImmunity(playerid);
+		}
+		else
+		{
+			newValue = max;
+		}
 	}
 	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], newValue);
 	PlayerImmunity[playerid] = newValue;
