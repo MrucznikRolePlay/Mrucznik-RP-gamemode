@@ -12509,13 +12509,13 @@ public DeathAdminWarning(playerid, killerid, reason)
 				case 38:
 				{
 					//-------<[  Logi  ]>---------
-					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
-					{
-						format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
-						SendCommandLogMessage(string);
-						Log(warningLog, INFO, string);
-						SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
-					}
+					// if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
+					// {
+					// 	format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
+					// 	SendCommandLogMessage(string);
+					// 	Log(warningLog, INFO, string);
+					// 	SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
+					// }
 					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
 					{
 						format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z miniguna, podejrzane !", killername, killerid, bwreason, GetNick(playerid), playerid);
