@@ -12515,8 +12515,8 @@ public DeathAdminWarning(playerid, killerid, reason)
 					// 	SendCommandLogMessage(string);
 					// 	Log(warningLog, INFO, string);
 					// 	SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
-					// }
-					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
+					// } else
+					if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
 					{
 						format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z miniguna, podejrzane !", killername, killerid, bwreason, GetNick(playerid), playerid);
 						SendMessageToAdmin(string, COLOR_YELLOW);
