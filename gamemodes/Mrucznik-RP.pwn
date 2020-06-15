@@ -1791,6 +1791,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
 
+	if(AC_AntyFakeKill(playerid, killerid, reason)) return 1;
+
 	Log(damageLog, INFO, "%s zosta³ zabity przez %s, powód: %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(killerid) ? GetPlayerLogName(killerid) : sprintf("%d", killerid),
