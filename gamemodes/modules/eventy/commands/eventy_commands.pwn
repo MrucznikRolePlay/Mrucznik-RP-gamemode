@@ -30,24 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "diagnozuj\diagnozuj.pwn"
-#include "kuracja\kuracja.pwn"
-#include "maseczka\maseczka.pwn"
-#include "ulecz\ulecz.pwn"
-#include "uleczall\uleczall.pwn"
-#include "zaraz\zaraz.pwn"
-#include "zastrzyk\zastrzyk.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_diagnozuj();
-    command_kuracja();
-    command_maseczka();
-    command_ulecz();
-    command_uleczall();
-    command_zaraz();
-    command_zastrzyk();
     
 }

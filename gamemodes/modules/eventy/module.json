@@ -1,0 +1,11 @@
+{
+    "name": "eventy",
+    "description": "Skrypty eventów",
+    "author": "Sanda³",
+    "timers": false,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "25.04.2020"
+}

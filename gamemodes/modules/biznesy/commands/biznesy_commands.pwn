@@ -30,44 +30,44 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "bizinfo\bizinfo.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "stworzbiznes\stworzbiznes.pwn"
 #include "biz\biz.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "dajbiznes\dajbiznes.pwn"
+#include "bizinfo\bizinfo.pwn"
 #include "bizlock\bizlock.pwn"
-#include "obiz\obiz.pwn"
 #include "biznespomoc\biznespomoc.pwn"
 #include "bpracownicy\bpracownicy.pwn"
+#include "dajbiznes\dajbiznes.pwn"
+#include "edytujbiznes\edytujbiznes.pwn"
+#include "gotobiz\gotobiz.pwn"
+#include "kupbiznes\kupbiznes.pwn"
+#include "obiz\obiz.pwn"
+#include "panelbiznesu\panelbiznesu.pwn"
+#include "quitbusiness\quitbusiness.pwn"
+#include "sprzedajbiznes\sprzedajbiznes.pwn"
+#include "stworzbiznes\stworzbiznes.pwn"
+#include "usunbiznes\usunbiznes.pwn"
+#include "zabierzbiznes\zabierzbiznes.pwn"
+#include "zlomujbiznes\zlomujbiznes.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_bizinfo();
-    command_zabierzbiznes();
-    command_gotobiz();
-    command_usunbiznes();
-    command_quitbusiness();
-    command_kupbiznes();
-    command_panelbiznesu();
-    command_stworzbiznes();
     command_biz();
-    command_edytujbiznes();
-    command_zlomujbiznes();
-    command_sprzedajbiznes();
-    command_dajbiznes();
+    command_bizinfo();
     command_bizlock();
-    command_obiz();
     command_biznespomoc();
     command_bpracownicy();
+    command_dajbiznes();
+    command_edytujbiznes();
+    command_gotobiz();
+    command_kupbiznes();
+    command_obiz();
+    command_panelbiznesu();
+    command_quitbusiness();
+    command_sprzedajbiznes();
+    command_stworzbiznes();
+    command_usunbiznes();
+    command_zabierzbiznes();
+    command_zlomujbiznes();
     
 }
