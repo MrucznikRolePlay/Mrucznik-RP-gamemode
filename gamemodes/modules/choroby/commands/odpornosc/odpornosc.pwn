@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 odpornosc                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,33 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "diagnozuj\diagnozuj.pwn"
-#include "getimmunity\getimmunity.pwn"
-#include "kuracja\kuracja.pwn"
-#include "maseczka\maseczka.pwn"
-#include "odpornosc\odpornosc.pwn"
-#include "setimmunity\setimmunity.pwn"
-#include "ulecz\ulecz.pwn"
-#include "uleczall\uleczall.pwn"
-#include "zaraz\zaraz.pwn"
-#include "zastrzyk\zastrzyk.pwn"
-
+#include "odpornosc_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_odpornosc()
 {
-    command_diagnozuj();
-    command_getimmunity();
-    command_kuracja();
-    command_maseczka();
-    command_odpornosc();
-    command_setimmunity();
-    command_ulecz();
-    command_uleczall();
-    command_zaraz();
-    command_zastrzyk();
+    new command = Command_GetID("odpornosc");
+
+    //aliases
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:odpornosc(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "komenda na odpornosc gracza");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_odpornosc_Impl(playerid);
 }
