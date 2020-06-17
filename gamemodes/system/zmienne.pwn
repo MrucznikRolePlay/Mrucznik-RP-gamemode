@@ -1104,6 +1104,7 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	SetPVarInt(playerid, "zoneid", -1);
 	DeletePVar(playerid, "DostalAJkomunikat");
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 	SetPlayerDrunkLevel(playerid, 0);
