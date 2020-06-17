@@ -902,15 +902,15 @@ public CheckChangeWeapon()
 						{
 							return PlayerChangeWeaponOnInjury(i);
 						}
-						else
-						{
-							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, MyWeapon[i]);
-							if(PokazDialogBronie(i) == 0)
-							{
-								MyWeapon[i] = 0;
-								SetPlayerArmedWeapon(i, 0);
-							}
-						}
+						// else
+						// {
+						// 	if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, MyWeapon[i]);
+						// 	if(PokazDialogBronie(i) == 0)
+						// 	{
+						// 		MyWeapon[i] = 0;
+						// 		SetPlayerArmedWeapon(i, 0);
+						// 	}
+						// }
 					}
 				}
 			}
