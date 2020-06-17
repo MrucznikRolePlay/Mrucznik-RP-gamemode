@@ -26,7 +26,6 @@
 command_odpornosc_Impl(playerid)
 {
     new Float:odpornosc = GetPlayerImmunity(playerid);
-    new string[64];
     if(odpornosc < 1.0 && odpornosc > 0.5) SendClientMessage(playerid, COLOR_WHITE, "[==----------]");
     else if(odpornosc >= 1.0 && odpornosc < 5.0) SendClientMessage(playerid, COLOR_WHITE, "[====--------]");
     else if(odpornosc >= 5.0 && odpornosc < 10.0) SendClientMessage(playerid, COLOR_WHITE, "[======------]");
