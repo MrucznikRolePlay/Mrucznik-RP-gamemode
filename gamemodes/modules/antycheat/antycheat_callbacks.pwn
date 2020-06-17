@@ -35,12 +35,19 @@ hook OnGameModeInit()
 	return 1;
 }
 
+hook OnPlayerConnect(playerid)
+{
+	for(new i; i<MAX_TAKEN_DAMAGE_ISSUERS; i++)
+	{
+		TakenDamageIssuers[playerid][i] = INVALID_PLAYER_ID;
+	}
+	TakenDamageIndex[playerid] = 0;
+}
+
 forward OnCheatDetected(playerid, ip_address[], type, code);
 public OnCheatDetected(playerid, ip_address[], type, code)
 {
 	if(IsPlayerPaused(playerid)) return 1;
-	new ip[16];
-	GetPlayerIp(playerid, ip, sizeof(ip));
 	if(type == 0) //Type of cheating (when 0 it returns the ID, when 1 - IP)
 	{
 		printf("Cheats detected (code: %d) for player: %s[%d] ip: %s", code, GetNickEx(playerid), playerid, ip_address);
@@ -82,80 +89,7 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1;
 		}
 
-		switch(nexac_additional_settings[code])
-		{
-			case OFF: 
-			{
-				//should never occur
-			}
-			case KICK:
-			{
-				SetPVarInt(playerid, "CheatDetected", 1);
-				ACKickMessage(playerid, code);
-				KickEx(playerid);
-			}
-			case INSTAKICK: //code == 50 || code == 28 || code == 27 || code == 5
-			{
-				ACKickMessage(playerid, code);
-				Kick(playerid);
-			}
-			case LVL1KICK:
-			{
-				if(PlayerInfo[playerid][pLevel] <= 1)
-				{
-					SetPVarInt(playerid, "CheatDetected", 1);
-					ACKickMessage(playerid, code);
-					KickEx(playerid);
-				}
-				else
-				{
-					MarkPotentialCheater(playerid);
-					ACWarningDelay(playerid, code);
-				} 
-			}
-			case LVL1MARK:
-			{
-				if(PlayerInfo[playerid][pLevel] == 1)
-				{
-					MarkPotentialCheater(playerid);
-					ACWarningDelay(playerid, code);
-				}
-			}
-			case LVL1INSTAKICK:
-			{
-				if(PlayerInfo[playerid][pLevel] <= 1)
-				{
-					ACKickMessage(playerid, code);
-					Kick(playerid);
-					KickEx(playerid);
-				}
-				else
-				{
-					MarkPotentialCheater(playerid);
-					ACWarningDelay(playerid, code);
-				} 
-			}
-			case ADMIN_WARNING:
-			{
-				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] prawdopodobnie czituje. | %s [%d]", 
-					GetNickEx(playerid), playerid, ip, NexACDecodeCode(code), code), 
-					0xFF00FFFF);
-				ACWarningDelay(playerid, code);
-			}
-			case MARK_AS_CHEATER:
-			{
-				MarkPotentialCheater(playerid);
-				ACWarningDelay(playerid, code);
-			}
-			case MARK_AND_WARNING:
-			{
-				SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | %s [%d]", 
-					GetNickEx(playerid), playerid, ip, NexACDecodeCode(code), code), 
-					0xFF00FFFF);
-				MarkPotentialCheater(playerid);
-				ACWarningDelay(playerid, code);
-			}
-		}
+		ProcessACCode(playerid, code);
 	}
 	else //type with ip
 	{
@@ -233,6 +167,18 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 		}
 	}
 	return 1;
+}
+
+hook OnPlayerGiveDamage(playerid, damageid, Float:amount, weaponid, bodypart)
+{
+	// Oznaczanie graczy, którzy zadali obra¿enia graczowi wedle raportowania oprawcy
+	new idx = TakenDamageIndex[playerid];
+	new next_idx = (TakenDamageIndex[playerid] + 1) % MAX_TAKEN_DAMAGE_ISSUERS;
+	if(TakenDamageIssuers[playerid][idx] != damageid)
+	{
+		TakenDamageIndex[playerid] = next_idx;
+		TakenDamageIssuers[playerid][next_idx] = damageid;
+	}
 }
 
 AC_OnPlayerLogin(playerid)

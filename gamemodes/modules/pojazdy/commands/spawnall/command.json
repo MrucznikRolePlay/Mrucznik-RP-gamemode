@@ -1,0 +1,14 @@
+{
+    "name": "spawnall",
+    "description": "Spawnuje wszystkie pojazdy.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "spawnujpojazdy",
+        "spawnujauta"
+    ],
+    "parameters": [],
+    "date": "02.06.2020"
+}

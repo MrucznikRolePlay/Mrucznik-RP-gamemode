@@ -552,8 +552,6 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 				PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
 				PlayerPlaySound(hitid, 6300, 0.0, 0.0, 0.0);
 				ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
-				ClearAnimations(hitid);
-				ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
 				TogglePlayerControllable(hitid, 0);
 				return 0;
 			}
@@ -1792,6 +1790,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 	new string[144];
 
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
+
+	if(AC_AntyFakeKill(playerid, killerid, reason)) return 1;
 
 	Log(damageLog, INFO, "%s zosta³ zabity przez %s, powód: %d", 
 		GetPlayerLogName(playerid),

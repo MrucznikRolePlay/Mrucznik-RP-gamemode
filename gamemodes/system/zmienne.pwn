@@ -167,7 +167,7 @@ new GATE_ORGSAD[2];
 new bool:GATE_ORGSAD_S[2]={false, false};
 //04.12
 new PlayerDesc[MAX_PLAYERS][128 char];
-new CarDesc[MAX_VEHICLES][128 char];
+new CarDesc[MAX_VEHICLES][128];
 new MRP_PremiumHours[MAX_PLAYERS];
 new bool:InitMyItems[MAX_PLAYERS];
 //03.12

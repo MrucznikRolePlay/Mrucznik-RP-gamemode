@@ -483,7 +483,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Uniform`='%d', \
 	`CruiseController`='%d', \
 	`FixKit`='%d', \
-	`Immunity`='%d', \
+	`Immunity`='%.0f', \
 	`connected`='%d' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
@@ -869,7 +869,7 @@ MruMySQL_WczytajOpis(handle, uid, typ)
         else
         {
             mysql_fetch_row_format(lText, "|");
-            strpack(CarDesc[handle], lText);
+            strcat(CarDesc[handle], lText);
         }
     }
 	mysql_free_result();
@@ -879,8 +879,15 @@ MruMySQL_WczytajOpis(handle, uid, typ)
 MruMySQL_UpdateOpis(handle, uid, typ)
 {
     new lStr[256], packed[128], opis[128];
-    strunpack(packed, (typ == 1) ? (PlayerDesc[handle]) : (CarDesc[handle]));
-    mysql_real_escape_string(packed, opis);
+	if(typ == 1)
+	{
+		strunpack(packed, PlayerDesc[handle]);
+    	mysql_real_escape_string(packed, opis);
+	}
+	else
+	{
+    	mysql_real_escape_string(CarDesc[handle], opis);
+	}
     if(MruMySQL_CheckOpis(uid, typ))
         format(lStr, 256, "UPDATE `mru_opisy` SET `desc`='%s' WHERE `owner`='%d' AND `typ`=%d", opis, uid, typ);
     else
