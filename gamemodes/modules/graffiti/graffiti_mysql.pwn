@@ -28,7 +28,6 @@
 //------------------<[ MySQL: ]>--------------------
 stock graffiti_LoadMySQL(id = -1)
 {
-	return 0; //temporarity off
 	new query[1024];
 	new lStr[263]; 
 	new lStr2[64];
