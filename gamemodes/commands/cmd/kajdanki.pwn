@@ -63,7 +63,11 @@ YCMD:kajdanki(playerid, params[], help)
                     sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
                     return 1;
                 }
-
+                if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
+                {
+                    sendTipMessage(playerid, "Nie mo¿esz skuæ administratora!");
+                    return 1;
+                }
                 if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
                 {
                     if(GetPlayerState(playerid) == 1 && GetPlayerState(giveplayerid) == 1)
