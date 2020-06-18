@@ -47,12 +47,12 @@ public FabrykaActor_ReCreate()
 
 	if(FabrykaMats_Actor == INVALID_ACTOR_ID)
 	{
-		FabrykaMats_Actor = CreateActor(FabrykaMats_ActorSkins[random(sizeof(FabrykaMats_ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats_ActorPos[rand][3]);
+		FabrykaMats_Actor = CreateDynamicActor(FabrykaMats_ActorSkins[random(sizeof(FabrykaMats_ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats_ActorPos[rand][3]);
 	}
 	else
 	{
-		SetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
-		SetActorFacingAngle(FabrykaMats_Actor, FabrykaMats_ActorPos[rand][3]);
+		SetDynamicActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
+		SetDynamicActorFacingAngle(FabrykaMats_Actor, FabrykaMats_ActorPos[rand][3]);
 	}
 
 	if(FabrykaMats_ActorLabel != Text3D:INVALID_3DTEXT_ID)
