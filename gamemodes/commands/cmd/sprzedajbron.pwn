@@ -38,7 +38,7 @@ YCMD:sprzedajbron(playerid, params[], help)
     {
         if(PlayerInfo[playerid][pJob] == 9)
         {
-            if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 4)
+            if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 4 || GetPlayerOrg(playerid) == 23)
             {
                 if(GetPlayerOrg(playerid) == 21 && PlayerInfo[playerid][pRank] < 6) //ammunation willowfield
                 {
@@ -47,6 +47,10 @@ YCMD:sprzedajbron(playerid, params[], help)
                 else if(GetPlayerOrg(playerid) == 4 && PlayerInfo[playerid][pRank] < 4) 
                 {
                     return SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [4] w tej rodzinie."); //turban family
+                }
+                else if(GetPlayerOrg(playerid) == 23) // Ammunation Los Santos (remiza)
+                {
+                    if(PlayerInfo[playerid][pRank] < 3) return SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [3] w tej rodzinie.");
                 }
             }
             new umiejetnosc;
@@ -220,6 +224,11 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"uzi",true) == 0)//
                         {
+                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 4)
+                            {
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [4]!")
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMats] > 874 && (IsAGang(playerid) || IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 28;
@@ -252,6 +261,11 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"spas12",true) == 0)//
                         {
+                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 4)
+                            {
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [4]!")
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMats] > 1499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 27;
@@ -268,6 +282,11 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"ak47",true) == 0)
                         {
+                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 4)
+                            {
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [4]!")
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMats] > 324 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 30;
@@ -284,6 +303,11 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"m4",true) == 0)
                         {
+                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 4)
+                            {
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [4]!")
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMats] > 349 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 31;
@@ -316,6 +340,11 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"sniper",true) == 0)
                         {
+                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 4)
+                            {
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [4]!")
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMats] > 999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 34;
@@ -332,6 +361,11 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"c4",true) == 0)
                         {
+                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 4)
+                            {
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [4]!")
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMats] > 2499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 39;
@@ -348,6 +382,11 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"ogniomiotacz",true) == 0)
                         {
+                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 4)
+                            {
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [4]!")
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMats] > 9999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 37;
