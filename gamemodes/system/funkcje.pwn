@@ -8175,7 +8175,7 @@ public OPCLogin(playerid)
     SetPlayerInterior(playerid, 0);
 
     TourCamera(playerid, 0);
-
+	if(GetPVarInt(playerid, "IsDownloadingContent") == 1) DeletePVar(playerid, "IsDownloadingContent");
     //Strefy load
     ZonePTXD_Load(playerid);
     ZonePlayerTimer[playerid]=0;

@@ -5624,6 +5624,7 @@ OnPlayerRegister(playerid, password[])
 {
 	if(IsPlayerConnected(playerid))
 	{
+		if(GetPVarInt(playerid, "IsDownloadingContent") == 1) DeletePVar(playerid, "IsDownloadingContent");
 		MruMySQL_CreateAccount(playerid, password);
 		OnPlayerLogin(playerid, password);
 	}
@@ -7601,6 +7602,7 @@ public OnPlayerRequestDownload(playerid, type, crc)
 	if(foundfilename) {
 		format(fullurl,sizeof(fullurl), RESOURCES_LINK"%s", dlfilename);
 		RedirectDownload(playerid,fullurl);
+		if(!GetPVarInt(playerid, "IsDownloadingContent")) SetPVarInt(playerid, "IsDownloadingContent", 1);
 	}
 	return 0;
 }
