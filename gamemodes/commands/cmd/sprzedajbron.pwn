@@ -508,6 +508,21 @@ YCMD:sprzedajbron(playerid, params[], help)
                                 }
                                 GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
                                 GetPlayerName(playerid, sendername, sizeof(sendername));
+                                new stringdiscord[128], frakcja[8];
+                                switch(PlayerInfo[giveplayerid][pMember])
+                                {
+                                    case 1: format(frakcja, sizeof(frakcja), "LSPD");
+                                    case 2: format(frakcja, sizeof(frakcja), "FBI");
+                                    case 3: format(frakcja, sizeof(frakcja), "Armia");
+                                    case 4: format(frakcja, sizeof(frakcja), "ERS");
+                                    case 7: format(frakcja, sizeof(frakcja), "USSS");
+                                    case 11: format(frakcja, sizeof(frakcja), "DMV");
+                                    default: format(frakcja, sizeof(frakcja), "CYWIL");
+                                }
+                                format(stringdiscord, sizeof(stringdiscord), " Diler %s da³ graczowi %s *[%s]* %s.", sendername, giveplayer, frakcja, x_weapon);
+                                if(GetPlayerOrg(playerid) == 21) SendDiscordMessage(DISCORD_LOG_GSWF, stringdiscord);//wf
+                                else if(GetPlayerOrg(playerid) == 22) SendDiscordMessage(DISCORD_LOG_GSCM, stringdiscord);//cm
+                                else if(GetPlayerOrg(playerid) == 23) SendDiscordMessage(DISCORD_LOG_GSLS, stringdiscord);//ls
                                 format(string, sizeof(string), "   Da³eœ %s, %s z %d nabojami, z %d materia³ów.", giveplayer,x_weapon, ammo[playerid], price[playerid]);
                                 PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
                                 SendClientMessage(playerid, COLOR_GRAD1, string);
