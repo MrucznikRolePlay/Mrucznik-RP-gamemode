@@ -80,7 +80,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                 {
                     if(PlayerInfo[giveplayerid][pGunLic] == 1 || IsAPrzestepca(giveplayerid) || IsAPolicja(giveplayerid) || IsABOR(giveplayerid) || strcmp(x_weapon,"pistolety",true) == 0)
                     {
-                        if(IsPlayerInAnyVehicle(giveplayer)) return SendClientMessage(playerid, COLOR_GREY, "Klient nie mo¿e byæ w pojeŸdzie!");
+                        if(IsPlayerInAnyVehicle(giveplayerid)) return SendClientMessage(playerid, COLOR_GREY, "Klient nie mo¿e byæ w pojeŸdzie!");
                         if(giveplayerid != INVALID_PLAYER_ID)
                         {
                             if(!strlen(x_weapon))
