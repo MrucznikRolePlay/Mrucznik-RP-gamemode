@@ -31,7 +31,7 @@
 */
 YCMD:naprawpojazd(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pFixKit] == 0) return SendClientMessage(playerid, COLOR_RED, "Nie masz ¿adnych zestawów do naprawy aut. Zakupisz je u mechanika!");
+    if(PlayerInfo[playerid][pFixKit] <= 0) return SendClientMessage(playerid, COLOR_RED, "Nie masz ¿adnych zestawów do naprawy aut. Zakupisz je u mechanika!");
     new vehicleid = GetClosestCar(playerid, 4.0);
     new string[128];
     if(vehicleid == -1) return SendClientMessage(playerid, COLOR_RED, "Nie znaleziono aut w pobli¿u.");
