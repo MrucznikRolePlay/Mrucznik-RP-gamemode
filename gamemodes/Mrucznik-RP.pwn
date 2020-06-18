@@ -2157,6 +2157,31 @@ public OnPlayerSpawn(playerid)
         PlayerInfo[playerid][pPK] = 0;
         PlayerInfo[playerid][pCarLic] = gettime()+86400;
     }
+	
+	new dom = PlayerInfo[playerid][pWynajem];
+	if(dom != 0)
+	{
+		new Nick[MAX_PLAYER_NAME];
+		Nick = GetNick(playerid);
+		if(
+			strcmp(Dom[dom][hL1], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL2], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL3], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL4], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL5], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL6], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL7], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL8], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL9], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL10], Nick, true) != 0
+		)
+		{
+			format(string, sizeof(string), "* Zosta³eœ wykopany z wynajmowanego domu.");
+			SendClientMessage(playerid, COLOR_RED, string);
+			PlayerInfo[playerid][pWynajem] = 0;
+			PlayerInfo[playerid][pSpawn] = 0;
+		}
+	}
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 1000);
