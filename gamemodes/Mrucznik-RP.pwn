@@ -2163,15 +2163,15 @@ public OnPlayerSpawn(playerid)
 		new Nick[MAX_PLAYER_NAME];
 		Nick = GetNick(playerid);
 		if(
-			strcmp(Dom[dom][hL1], Nick, true) != 0 ||
-			strcmp(Dom[dom][hL2], Nick, true) != 0 ||
-			strcmp(Dom[dom][hL3], Nick, true) != 0 ||
-			strcmp(Dom[dom][hL4], Nick, true) != 0 ||
-			strcmp(Dom[dom][hL5], Nick, true) != 0 ||
-			strcmp(Dom[dom][hL6], Nick, true) != 0 ||
-			strcmp(Dom[dom][hL7], Nick, true) != 0 ||
-			strcmp(Dom[dom][hL8], Nick, true) != 0 ||
-			strcmp(Dom[dom][hL9], Nick, true) != 0 ||
+			strcmp(Dom[dom][hL1], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL2], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL3], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL4], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL5], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL6], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL7], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL8], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL9], Nick, true) != 0 &&
 			strcmp(Dom[dom][hL10], Nick, true) != 0
 		)
 		{
