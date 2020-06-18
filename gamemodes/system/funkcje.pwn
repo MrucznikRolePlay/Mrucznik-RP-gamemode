@@ -6205,6 +6205,11 @@ KupowanieDomu(playerid, dom, platnosc)
 	}
 	else
 	{
+		if(Dom[dom][hKupiony] == 1)
+		{
+			SendClientMessage(playerid, COLOR_RED, "Dom ju¿ jest kupiony!");
+			return 1;
+		}
 	    //new doplata = Dom[dom][hOplata];
 		//new interior = IntInfo[Dom[dom][hDomNr]][Cena];
 		//new mnoznik;
