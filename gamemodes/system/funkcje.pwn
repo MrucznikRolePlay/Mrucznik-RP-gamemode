@@ -3328,6 +3328,7 @@ PrzyczepKogut(playerid, veh)
 IsAtAmmunationLosSantos(playerid)
 {
 	if(GetPlayerVirtualWorld(playerid) == 5 && IsPlayerInRangeOfPoint(playerid, 100.0, 1799.7361,-1162.9795,1023.8218)) return 1;
+	return 0;
 }
 
 IsNearSecuricar(playerid)
@@ -3337,6 +3338,7 @@ IsNearSecuricar(playerid)
 	{
 		if(GetVehicleModel(vehicleid) == 428) return 1;
 	}
+	return 0;
 }
 
 IsAtTheDMVWindows(playerid)

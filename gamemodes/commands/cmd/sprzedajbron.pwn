@@ -227,7 +227,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         {
                             if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
                             {
-                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!")
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
                             }
                             if(PlayerInfo[playerid][pMats] > 874 && (IsAGang(playerid) || IsAMafia(playerid) || IsASklepZBronia(playerid)))
@@ -264,7 +264,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         {
                             if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
                             {
-                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!")
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
                             }
                             if(PlayerInfo[playerid][pMats] > 1499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
@@ -285,7 +285,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         {
                             if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
                             {
-                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!")
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
                             }
                             if(PlayerInfo[playerid][pMats] > 324 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
@@ -306,7 +306,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         {
                             if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
                             {
-                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!")
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
                             }
                             if(PlayerInfo[playerid][pMats] > 349 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
@@ -343,7 +343,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         {
                             if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
                             {
-                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!")
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
                             }
                             if(PlayerInfo[playerid][pMats] > 999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
@@ -364,7 +364,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         {
                             if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
                             {
-                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!")
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
                             }
                             if(PlayerInfo[playerid][pMats] > 2499 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
@@ -385,7 +385,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         {
                             if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
                             {
-                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!")
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
                             }
                             if(PlayerInfo[playerid][pMats] > 9999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
