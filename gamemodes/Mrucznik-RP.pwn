@@ -6307,7 +6307,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
+			
 		}
 	}
 	if((newkeys & KEY_SPRINT) && newkeys & KEY_WALK)
