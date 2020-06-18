@@ -50,17 +50,18 @@ YCMD:raport(playerid, params[], help)
                 SendClientMessage(playerid, 0x008000AA,"** Forma poprawnego zg³oszenia: {ADFF2F}/report 0 DM LUB /report 0 Cheater{FFFFFF} **");
 				return 1;
 			}
-            if(strfind(params, "@here", true) != -1 || strfind(params, "@everyone", true) != -1 || strfind(params, "<@", true) != -1) return 1;
-			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
-			SendMessageToAdminEx(string, COLOR_YELLOW, 1);
-			format(string, sizeof(string), "? Report od %s [%d]: %s", sendername, playerid, params);
-			SendDiscordMessage(DISCORD_REPORT, string);
             SendClientMessage(playerid, 0x008000AA, "Twój report zosta³ wys³any do administracji, oczekuj na reakcjê zanim napiszesz kolejny!");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "Je¿eli Administracja nie reaguje na Twój report, oznacza to, ¿e...");//By: Dawid
             SendClientMessage(playerid, COLOR_GRAD2, "...jest on Ÿle sformu³owany i Administracja nie rozpatrzy tego zg³oszenia.");//By: Dawid
 			//AntySpam[playerid] = 1;
 			//SetTimerEx("AntySpamTimer",15000,0,"d",playerid);
             SetPVarInt(playerid, "wyreportowany", 15);
+            if(strfind(params, "@here", true) != -1 || strfind(params, "@everyone", true) != -1 || strfind(params, "<@", true) != -1) return 1;
+			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
+			SendMessageToAdminEx(string, COLOR_YELLOW, 1);
+			format(string, sizeof(string), "? Report od %s [%d]: %s", sendername, playerid, params);
+			SendDiscordMessage(DISCORD_REPORT, string);
+            
 		}
     }
     return 1;
