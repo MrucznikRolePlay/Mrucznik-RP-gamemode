@@ -43,6 +43,11 @@ YCMD:wypusc(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /uwolnij [playerid/CzêœæNicku] [Kwota]");
 		return 1;
 	}
+	if(playerid == giveplayerid)
+	{
+		sendTipMessage(playerid, "Nie mo¿esz uwolniæ samego siebie!");
+		return 1;
+	}
 	if(money > 250000)
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Nie przesadzasz troszkê? Maksymalna kwota uwolnienia to 250.000$");
