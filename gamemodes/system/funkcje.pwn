@@ -3754,7 +3754,7 @@ IsAtWarsztat(playerid)
 		{//warsztat dillmore
 		  	return 1;
 		}
-        else if(IsPlayerInRangeOfPoint(playerid, 20.0, 1017.75, -1353.33, 13.3825))
+        else if(IsPlayerInRangeOfPoint(playerid, 30.0, 1017.75, -1353.33, 13.3825))
 		{//warsztat przy p1czkarni
 		  	return 1;
 		}
