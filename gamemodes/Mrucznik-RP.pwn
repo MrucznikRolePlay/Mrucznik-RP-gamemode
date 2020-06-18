@@ -2258,6 +2258,7 @@ SetPlayerSpawnPos(playerid)
 		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
 		SetPlayerInterior(playerid, 0);
 	    SetPlayerVirtualWorld(playerid, 1);
+		SetPLocal(playerid, PLOCAL_FRAC_LSPD);
 	    new losuj= random(sizeof(Cela));
 		SetPlayerPos(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Twój wyrok nie dobieg³ koñca, wracasz do wiêzienia.");
