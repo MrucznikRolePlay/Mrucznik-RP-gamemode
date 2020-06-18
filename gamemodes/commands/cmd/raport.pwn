@@ -50,6 +50,7 @@ YCMD:raport(playerid, params[], help)
                 SendClientMessage(playerid, 0x008000AA,"** Forma poprawnego zg³oszenia: {ADFF2F}/report 0 DM LUB /report 0 Cheater{FFFFFF} **");
 				return 1;
 			}
+            if(strfind(params, "@here", true) != -1 || strfind(params, "@everyone", true) != -1 || strfind(params, "<@", true) != -1) return 1;
 			format(string, sizeof(string), "» Report od %s [%d]: {FFFFFF}%s", sendername, playerid, params);
 			SendMessageToAdminEx(string, COLOR_YELLOW, 1);
 			format(string, sizeof(string), "? Report od %s [%d]: %s", sendername, playerid, params);
