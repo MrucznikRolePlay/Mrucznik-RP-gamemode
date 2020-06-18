@@ -816,6 +816,7 @@ new kosztbiletu;
 new osoby;
 new planeisstopped;
 new Wodliczanie;
+new Float:MatsPoint[3] = {2138.2078,-2290.4888,20.6646};
 
 //koniec wozy Ballas
 new lspdWjazdDolny;
@@ -1326,7 +1327,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
-
+	
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;

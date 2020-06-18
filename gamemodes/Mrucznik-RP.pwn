@@ -275,7 +275,6 @@ public OnGameModeInit()
 
 	//-------<[ modules ]>-------
     systempozarow_init();
-    FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	LoadBusiness(); 
 	LoadBusinessPickup(); 	
@@ -6311,10 +6310,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		else
 			RunCommand(playerid, "/odpal",  "");
 	}
-    if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_ONFOOT))
-    {
-        FabrykaMats_ActorTalk(playerid);
-    }
 	if((newkeys & KEY_HANDBRAKE) && (newkeys & KEY_CROUCH) && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
 	{
 		if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
