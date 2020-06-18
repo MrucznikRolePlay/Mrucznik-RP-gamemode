@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   otworz                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,43 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sanda³
+// Data utworzenia: 18.06.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "otworz\otworz.pwn"
-#include "sekta\sekta.pwn"
-#include "zamknij\zamknij.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_otworz_Impl(playerid)
 {
-    command_otworz();
-    command_sekta();
-    command_zamknij();
-    
+    if(GetPlayerOrg(playerid) != 23)
+    {
+        sendTipMessage(playerid, "Komenda dostêpna tylko dla Gunshop Los Santos.");
+        return 1;
+    }
+    if(IsPlayerInRangeOfPoint(playerid, 2.0, 1791.6248,-1164.4028,23.8281) || (IsPlayerInRangeOfPoint(playerid, 200.0, 1795.1212,-1158.1047,1023.8218) && GetPlayerVirtualWorld(playerid) == 5))
+    {
+        if(GunshopLSLock == 1)
+        {
+            GunshopLSLock = 0;
+            new string[128];
+            format(string, sizeof(string), "* %s przyk³ada kartê do drzwi i otwiera magnetyczne zamki.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+            format(string, sizeof(string), "* Unosz¹ siê stalowe rolety przy drzwiach i oknach...");
+			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+            return 1;
+        }
+        else
+        {
+            sendTipMessage(playerid, "Biznes jest ju¿ otwarty.");
+            return 1;
+        }
+    }
+    else
+    {
+        sendTipMessage(playerid, "Nie znajdujesz siê w œrodku/przy drzwiach wejœciowych!");
+        return 1;
+    }
 }
+
+//end

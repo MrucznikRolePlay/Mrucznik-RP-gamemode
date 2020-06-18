@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  zamknij                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "otworz\otworz.pwn"
-#include "sekta\sekta.pwn"
-#include "zamknij\zamknij.pwn"
-
+#include "zamknij_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_zamknij()
 {
-    command_otworz();
-    command_sekta();
-    command_zamknij();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zamknij(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zamyka GSLS");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zamknij_Impl(playerid);
 }

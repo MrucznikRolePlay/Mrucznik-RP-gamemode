@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   otworz                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "otworz\otworz.pwn"
-#include "sekta\sekta.pwn"
-#include "zamknij\zamknij.pwn"
-
+#include "otworz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_otworz()
 {
-    command_otworz();
-    command_sekta();
-    command_zamknij();
+    new command = Command_GetID("otworz");
+
+    //aliases
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:otworz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Otwiera GSLS");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_otworz_Impl(playerid);
 }
