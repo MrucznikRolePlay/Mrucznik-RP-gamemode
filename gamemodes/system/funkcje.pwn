@@ -3325,6 +3325,20 @@ PrzyczepKogut(playerid, veh)
     AttachDynamicObjectToVehicle(VehicleUID[veh][vSiren], veh, x,y,z, 0.0, 0.0, 0.0);
 	return 1;
 }
+IsAtAmmunationLosSantos(playerid)
+{
+	if(GetPlayerVirtualWorld(playerid) == 5 && IsPlayerInRangeOfPoint(playerid, 100.0, 1799.7361,-1162.9795,1023.8218)) return 1;
+}
+
+IsNearSecuricar(playerid)
+{
+	new vehicleid = GetClosestCar(playerid, 3.5);
+	if(vehicleid != -1) 
+	{
+		if(GetVehicleModel(vehicleid) == 428) return 1;
+	}
+}
+
 IsAtTheDMVWindows(playerid)
 {
 	if(IsPlayerInRangeOfPoint(playerid, 2.0, 1455.7228,-1792.1116,77.9502))//okienko 1
