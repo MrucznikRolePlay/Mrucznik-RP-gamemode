@@ -54,6 +54,7 @@ command_news_Impl(playerid, newsText[256])
         sendErrorMessage(playerid, "Twoja wiadomoœæ by³a zbyt d³uga, skróæ j¹!"); 
         return 1;
     }
+    if(strfind(newsText, "@here", true) != -1 || strfind(newsText, "@everyone", true) != -1 || strfind(newsText, "<@", true) != -1) return 1;
     TalkOnNews(playerid, newsText);
     return 1;
 }
