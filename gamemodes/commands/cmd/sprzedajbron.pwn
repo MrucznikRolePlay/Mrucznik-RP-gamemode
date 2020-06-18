@@ -49,7 +49,6 @@ YCMD:sprzedajbron(playerid, params[], help)
                     return SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [4] w tej rodzinie."); //turban family
                 }
             }
-            if(IsPlayerInAnyVehicle(giveplayerid)) return SendClientMessage(playerid, COLOR_GREY, "Klient nie mo¿e byæ w pojeŸdzie!");
             new umiejetnosc;
             new skillz;
             new x_weapon[16],weapon[MAX_PLAYERS],ammo[MAX_PLAYERS],price[MAX_PLAYERS];
@@ -81,6 +80,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                 {
                     if(PlayerInfo[giveplayerid][pGunLic] == 1 || IsAPrzestepca(giveplayerid) || IsAPolicja(giveplayerid) || IsABOR(giveplayerid) || strcmp(x_weapon,"pistolety",true) == 0)
                     {
+                        if(IsPlayerInAnyVehicle(giveplayer)) return SendClientMessage(playerid, COLOR_GREY, "Klient nie mo¿e byæ w pojeŸdzie!");
                         if(giveplayerid != INVALID_PLAYER_ID)
                         {
                             if(!strlen(x_weapon))
