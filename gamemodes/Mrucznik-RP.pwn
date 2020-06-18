@@ -2117,6 +2117,7 @@ public OnPlayerSpawn(playerid)
     PlayerInfo[playerid][pMuted] = 0;
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
+	if(PlayerInfo[playerid][pFixKit] < 0) PlayerInfo[playerid][pFixKit] = 0;
 	if(GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0)
 	{
     	SetPlayerWeatherEx(playerid, ServerWeather);//Pogoda
