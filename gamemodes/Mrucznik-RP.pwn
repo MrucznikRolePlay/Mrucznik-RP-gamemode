@@ -2126,7 +2126,7 @@ public OnPlayerSpawn(playerid)
     	SetPlayerWeatherEx(playerid, 3);//Pogoda
 	}
 	//Diler Broni
-	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
+	if(PlayerInfo[playerid][pJob] == 9 && (!IsADilerBroni(playerid) || PlayerInfo[playerid][pRank] == 0))
 	{
 	    PlayerInfo[playerid][pJob] = 0;
 	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
