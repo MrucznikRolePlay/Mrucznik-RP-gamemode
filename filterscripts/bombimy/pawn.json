@@ -1,0 +1,21 @@
+{
+	"user": "Mrucznik",
+	"repo": "bombimy",
+	"entry": "bombimy.pwn",
+	"output": "bombimy.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib",
+		"samp-incognito/samp-streamer-plugin",
+		"pawn-lang/YSI-Includes"
+	],
+	"runtime": {
+		"version": "0.3.7",
+		"mode": "server",
+		"echo": "-",
+		"rcon_password": "password",
+		"port": 7777,
+		"hostname": "SA-MP Server",
+		"maxplayers": 50,
+		"language": ""
+	}
+}
