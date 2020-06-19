@@ -1,0 +1,17 @@
+{
+	"user": "Mrucznik",
+	"repo": "bank_barierki",
+	"entry": "bank_barierki.pwn",
+	"output": "bank_barierki.amx",
+	"dependencies": [
+		"sampctl/samp-stdlib",
+		"samp-incognito/samp-streamer-plugin"
+	],
+	"runtime": {
+		"version": "0.3.7",
+		"mode": "server",
+		"echo": "-",
+		"rcon_password": "password",
+		"port": 7777
+	}
+}
