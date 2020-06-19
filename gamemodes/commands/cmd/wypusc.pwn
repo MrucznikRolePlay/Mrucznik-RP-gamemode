@@ -63,7 +63,11 @@ YCMD:wypusc(playerid, params[], help)
 		sendErrorMessage(playerid, "Nie masz pozwolenia prawniczego!"); 
 		return 1;
 	}
-	
+	if(PlayerInfo[playerid][pJailed] > 0)
+	{
+		sendErrorMessage(playerid, "Nie mo¿esz uwalniaæ bêdac w wiezieniu!");
+		return 1;
+	}
 	if(IsPlayerConnected(giveplayerid))
 	{
 		if(giveplayerid != INVALID_PLAYER_ID)
