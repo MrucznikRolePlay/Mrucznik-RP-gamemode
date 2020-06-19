@@ -161,6 +161,11 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"pila",true) == 0)//
                         {
+                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            {
+                                SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
+                                return 1;
+                            }
                             if(PlayerInfo[playerid][pMats] > 999 && (IsAMafia(playerid) || IsASklepZBronia(playerid)))
                             {
                                 weapon[playerid] = 9;
