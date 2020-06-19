@@ -153,6 +153,60 @@ YCMD:wez(playerid, params[], help)
 				return 1;
 			}
 		}
+		else if(strcmp(x_job,"mundur",true) == 0)
+		{
+			if (PlayerInfo[playerid][pMember] == 4)
+			{
+				new vehicleid = GetClosestCar(playerid, 3.5);
+				if(vehicleid != -1)
+    			{
+					if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && (GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544))// wszystkie auta frakcji
+					{
+						if(Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))
+						{
+							if(ERS_mundur[playerid] == 1)
+							{
+								format(string, sizeof(string), "*** %s zdejmuje z siebie specjalistyczny mundur ***", GetNick(playerid));
+								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								if(OnDuty[playerid]==0) SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+								else  SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
+								ERS_mundur[playerid] = 0;
+								return 1;
+							}
+							else
+							{
+								format(string, sizeof(string), "*** %s przebiera siê w specjalistyczny mundur ***", GetNick(playerid));
+								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+								SetPlayerSkinEx(playerid, 277);
+								ERS_mundur[playerid] = 1;
+								return 1;
+							}
+						}
+						else
+						{
+							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do ERS.");
+							return 1;
+						}
+					}
+					else
+					{
+						format(string, sizeof(string), "Ten pojazd nie jest wozem stra¿ackim ERS. (%s)", VehicleNames[GetVehicleModel(vehicleid)-400]);
+						sendTipMessage(playerid, string);
+						return 1;
+					}
+				}
+				else
+				{
+					sendTipMessage(playerid, "Brak aut w pobli¿u.");
+					return 1;
+				}
+			}
+			else
+			{
+				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla ERS.");
+				return 1;
+			}
+		}
 		else { return 1; }
 	}//not connected
 	return 1;

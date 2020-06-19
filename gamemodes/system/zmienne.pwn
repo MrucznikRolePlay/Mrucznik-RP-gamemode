@@ -312,6 +312,7 @@ new ZoneProtect[MAX_ZONES];
 new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
 new ZONE_DISABLED = 0;
 new ZONE_DEF_TIME = 900000;
+new ERS_mundur[MAX_PLAYERS] = 0;
 //21.07 PayDay fix
 /*new TRAIN_Checkpoints[6][3] = {
     {1770.9999, -1953.9802, 14.9781},
