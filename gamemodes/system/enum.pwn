@@ -494,7 +494,7 @@ new FractionNames[][40] = {
     "Los Santos Police Department",
     "Federal Bureau of Investigation",
     "National Guards San Andreas",
-    "Emergency Rescue Service",
+    "Los Santos Rescue Service",
     "SA Bahamas",
     "Yakuza",
     "United States Secret Service",
