@@ -51,7 +51,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                 else if(GetPlayerOrg(playerid) == 23) // Ammunation Los Santos (remiza)
                 {
                     if(PlayerInfo[playerid][pRank] < 3) return SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [3] w tej rodzinie.");
-                    if(!IsAtAmmunationLosSantos(playerid) || !IsNearSecuricar(playerid)) return SendClientMessage(playerid,COLOR_GREY,"* Broñ mo¿esz sprzedawaæ tylko w ammunation lub przy securicar.");
+                    if(!IsAtAmmunationLosSantos(playerid) && !IsNearSecuricar(playerid)) return SendClientMessage(playerid,COLOR_GREY,"* Broñ mo¿esz sprzedawaæ tylko w ammunation lub przy securicar.");
                 }
             }
             new umiejetnosc;
