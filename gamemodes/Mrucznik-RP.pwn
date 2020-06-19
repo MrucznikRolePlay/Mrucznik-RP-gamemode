@@ -7265,6 +7265,11 @@ public OnPlayerText(playerid, text[])
 		{//todo
 			if(strlen(text) < 78)
 			{
+				if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 
+				{
+					SendClientMessage(playerid, COLOR_WHITE, "Twój wywiad zawiera niedozwolone znaki! (@)");
+					return 1;
+				}
 				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
 				format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
@@ -7277,6 +7282,11 @@ public OnPlayerText(playerid, text[])
 				new pos = strfind(text, " ", true, strlen(text) / 2);
 				if(pos != -1)
 				{
+					if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 
+					{
+						SendClientMessage(playerid, COLOR_WHITE, "Twój wywiad zawiera niedozwolone znaki! (@)");
+						return 1;
+					}
 					new text2[64];
 
 					strmid(text2, text, pos + 1, strlen(text));
@@ -7301,6 +7311,11 @@ public OnPlayerText(playerid, text[])
 		{
 			if(strlen(text) < 78)
 			{
+				if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 
+				{
+					SendClientMessage(playerid, COLOR_WHITE, "Twój wywiad zawiera niedozwolone znaki! (@)");
+					return 1;
+				}
 				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
 				format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
@@ -7313,6 +7328,11 @@ public OnPlayerText(playerid, text[])
 				new pos = strfind(text, " ", true, strlen(text) / 2);
 				if(pos != -1)
 				{
+					if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 
+					{
+						SendClientMessage(playerid, COLOR_WHITE, "Twój wywiad zawiera niedozwolone znaki! (@)");
+						return 1;
+					}
 					new text2[64];
 
 					strmid(text2, text, pos + 1, strlen(text));
