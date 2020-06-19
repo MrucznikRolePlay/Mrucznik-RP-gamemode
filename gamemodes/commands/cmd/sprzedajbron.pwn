@@ -53,6 +53,10 @@ YCMD:sprzedajbron(playerid, params[], help)
                     if(PlayerInfo[playerid][pRank] < 3) return SendClientMessage(playerid,COLOR_GREY,"* U¿ycie komendy wymaga rangi [3] w tej rodzinie.");
                     if(!IsAtAmmunationLosSantos(playerid) && !IsNearSecuricar(playerid)) return SendClientMessage(playerid,COLOR_GREY,"* Broñ mo¿esz sprzedawaæ tylko w ammunation lub przy securicar.");
                 }
+                else if(GetPlayerOrg(playerid) == 22) //Ammunation Commerce
+                {
+                    if(PlayerInfo[playerid][pRank] < 4) return SendClientMessage(playerid, COLOR_GREY,"* U¿ycie komendy wymaga [4] w tej rodzinie.");
+                } 
             }
             new umiejetnosc;
             new skillz;
@@ -161,7 +165,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"pila",true) == 0)//
                         {
-                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            if((GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 22) && PlayerInfo[playerid][pRank] < 5)
                             {
                                 SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
@@ -230,7 +234,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"uzi",true) == 0)//
                         {
-                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            if((GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 22) && PlayerInfo[playerid][pRank] < 5)
                             {
                                 SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
@@ -267,7 +271,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"spas12",true) == 0)//
                         {
-                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            if((GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 22) && PlayerInfo[playerid][pRank] < 5)
                             {
                                 SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
@@ -288,7 +292,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"ak47",true) == 0)
                         {
-                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            if((GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 22) && PlayerInfo[playerid][pRank] < 5)
                             {
                                 SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
@@ -309,7 +313,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"m4",true) == 0)
                         {
-                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            if((GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 22) && PlayerInfo[playerid][pRank] < 5)
                             {
                                 SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
@@ -346,7 +350,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"sniper",true) == 0)
                         {
-                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            if((GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 22) && PlayerInfo[playerid][pRank] < 5)
                             {
                                 SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
@@ -367,7 +371,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"c4",true) == 0)
                         {
-                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            if((GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 22) && PlayerInfo[playerid][pRank] < 5)
                             {
                                 SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
@@ -388,7 +392,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                         }
                         else if(strcmp(x_weapon,"ogniomiotacz",true) == 0)
                         {
-                            if(GetPlayerOrg(playerid) == 23 && PlayerInfo[playerid][pRank] < 5)
+                            if((GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 22) && PlayerInfo[playerid][pRank] < 5)
                             {
                                 SendClientMessage(playerid,COLOR_GREY,"    Broñ ciê¿k¹ mo¿esz sprzedawaæ od [5]!");
                                 return 1;
