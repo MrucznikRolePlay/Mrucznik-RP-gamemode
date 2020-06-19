@@ -411,7 +411,7 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 20)
 	{
-		if(GetPlayerOrg(playerid) != 23 && GunshopLSLock == 1)
+		if(GunshopLSLock == 1)
 		{
 			sendTipMessage(playerid, "Drzwi s¹ zamkniête.");
 			noAccessCome[playerid] = 1;
