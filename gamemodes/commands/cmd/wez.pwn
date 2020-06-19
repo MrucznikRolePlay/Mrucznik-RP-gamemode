@@ -40,7 +40,7 @@ YCMD:wez(playerid, params[], help)
 		{
 			SendClientMessage(playerid, COLOR_WHITE, "|__________________ WeŸ __________________|");
 			SendClientMessage(playerid, COLOR_WHITE, "U¿yj /wez [nazwa]");
-	  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Dragi, Kanister, Gasnice");
+	  		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Dragi, Kanister, Gasnice, Mundur");
 			SendClientMessage(playerid, COLOR_GREEN, "|_________________________________________|");
 			return 1;
 		}
