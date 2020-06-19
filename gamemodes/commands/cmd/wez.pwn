@@ -168,7 +168,7 @@ YCMD:wez(playerid, params[], help)
 							{
 								format(string, sizeof(string), "*** %s zdejmuje z siebie specjalistyczny mundur ***", GetNick(playerid));
 								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								if(OnDuty[playerid]==0) SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+								if(JobDuty[playerid]==0) SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 								else  SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
 								ERS_mundur[playerid] = 0;
 								return 1;
