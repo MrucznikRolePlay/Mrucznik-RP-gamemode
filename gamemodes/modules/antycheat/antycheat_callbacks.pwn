@@ -171,14 +171,17 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 
 hook OnPlayerGiveDamage(playerid, damageid, Float:amount, weaponid, bodypart)
 {
+	if(damageid == INVALID_PLAYER_ID) return 1;
+
 	// Oznaczanie graczy, którzy zadali obra¿enia graczowi wedle raportowania oprawcy
-	new idx = TakenDamageIndex[playerid];
-	new next_idx = (TakenDamageIndex[playerid] + 1) % MAX_TAKEN_DAMAGE_ISSUERS;
-	if(TakenDamageIssuers[playerid][idx] != damageid)
+	new idx = TakenDamageIndex[damageid];
+	new next_idx = (TakenDamageIndex[damageid] + 1) % MAX_TAKEN_DAMAGE_ISSUERS;
+	if(TakenDamageIssuers[damageid][idx] != playerid)
 	{
-		TakenDamageIndex[playerid] = next_idx;
-		TakenDamageIssuers[playerid][next_idx] = damageid;
+		TakenDamageIndex[damageid] = next_idx;
+		TakenDamageIssuers[damageid][next_idx] = playerid;
 	}
+	return 1;
 }
 
 AC_OnPlayerLogin(playerid)
