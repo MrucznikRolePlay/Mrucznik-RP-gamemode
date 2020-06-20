@@ -374,8 +374,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_EDIT_RANG_SET     1318
 #define D_EDIT_RANG_NAME    1319
 #define D_EDIT_CAR_COLOR    1320
-#define D_ASK_DODATKI       1321
-
+#define D_ASK_DODATKMistrz zbrodni
 #define DIALOG_LIDER01 3001
 #define DIALOG_LIDER02 3002
 

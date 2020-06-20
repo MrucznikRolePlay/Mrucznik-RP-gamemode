@@ -233,11 +233,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(kary_TXD_Status == 1)
 			{
-				BanPlayerTXD(giveplayerid, playerid, reason); 
+				BanPlayerTXD(giveplayerid, reason); 
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "AdmCmd: Admin %s zbanowa³ %s, powód: %s",  GetNickEx(playerid), giveplayerid, reason);
+				format(string, sizeof(string), "AdmCmd: Admin zbanowa³ %s, powód: %s", GetNick(giveplayerid), reason);
 				SendPunishMessage(string, playerid); 
 			}		
 		}
@@ -275,7 +275,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(PlayerInfo[giveplayerid][pWarns] >= 3)
 				{
 					format(string, sizeof(string), "%s (3 warny)", reason);
-					BanPlayerTXD(giveplayerid, playerid, string); 
+					BanPlayerTXD(giveplayerid, string); 
 				}
 				else 
 				{
@@ -1137,8 +1137,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
         new veh = GetPlayerVehicleID(playerid);
-        strdel(CarDesc[veh], 0, 128 char);
-		strpack(CarDesc[veh], inputtext);
+        strdel(CarDesc[veh], 0, 128);
+		strcat(CarDesc[veh], inputtext);
         MruMySQL_UpdateOpis(veh, CarData[VehicleUID[veh][vUID]][c_UID], 2);
 
 		CarOpis_Usun(playerid, veh);
@@ -3627,6 +3627,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            Kajdanki_JestemSkuty[playerid] = 2;
 		            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
+					
+					CuffedAction(Kajdanki_PDkuje[playerid], playerid);
+					TogglePlayerControllable(playerid, 1);
 				}
 				else if(cops == 2 || TazerAktywny[playerid] == 1 && cops < 2)
 				{
@@ -3649,6 +3652,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            Kajdanki_JestemSkuty[playerid] = 2;
 			            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
 			            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
+					
+						CuffedAction(Kajdanki_PDkuje[playerid], playerid);
+						TogglePlayerControllable(playerid, 1);
 				    }
 				}
 				else
@@ -11785,66 +11791,67 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
         else if(dialogid == 1401)
 		{
+			new string[256];
 		    if(response)
 		    {
-		        new string[256];
 		        switch(listitem)
 		        {
 		            case 0://Bia³y
 		            {
-						format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18652;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 1://¯ó³ty
 		            {
-						format(string, sizeof(string), "¯ó³te neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "¯ó³te neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, 0xDAA520FF, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18650;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 2://Zielony
 		            {
-						format(string, sizeof(string), "Zielone neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Zielone neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18649;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 3://Niebieski
 		            {
 
-						format(string, sizeof(string), "Niebieskie neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Niebieskie neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18648;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
-
 		            }
 		            case 4://Czerwony
 		            {
 
-						format(string, sizeof(string), "Czerwone neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Czerwone neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_RED, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18647;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 
 		            }
 		            case 5://Ró¿owy
 		            {
-						format(string, sizeof(string), "Ró¿owe neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Ró¿owe neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_PURPLE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18651;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		        }
-                Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);
 		    }
+			else
+			{
+				format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+				SendClientMessage(playerid, COLOR_WHITE, string);
+				CarData[IloscAut[playerid]][c_Neon] = 18652;
+				PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
+			}
+			Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);
+			return 1;
 		}
 		else if(dialogid == 1403)
 		{
@@ -11858,14 +11865,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= onePoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", onePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 50;
+							Kredyty[playerid] += 100;
 							ZabierzKase(playerid, onePoolPrice);
 							SejfR_Add(43, onePoolPrice);
 							SejfR_Save(43);
 							poolCashStats = poolCashStats+onePoolPrice;
-							poolCreditStatus = poolCreditStatus+50;
+							poolCreditStatus = poolCreditStatus+100;
 						}
 						else
 						{
@@ -11877,13 +11884,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= twoPoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 200 kredytów za jedyne %d$.", twoPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 100;
+							Kredyty[playerid] += 200;
 							ZabierzKase(playerid, twoPoolPrice); 
 							SejfR_Add(43, twoPoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+100;
+							poolCreditStatus = poolCreditStatus+200;
 							poolCashStats = poolCashStats+twoPoolPrice;
 						}
 						else
@@ -11896,13 +11903,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= threePoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", threePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 250;
+							Kredyty[playerid] += 500;
 							ZabierzKase(playerid, threePoolPrice);
 							SejfR_Add(43, threePoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+250;
+							poolCreditStatus = poolCreditStatus+500;
 							poolCashStats = poolCashStats+threePoolPrice;
 						}
 						else
@@ -11915,13 +11922,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= fourPoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", fourPoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 1000 kredytów za jedyne %d$.", fourPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 500;
+							Kredyty[playerid] += 1000;
 							ZabierzKase(playerid, fourPoolPrice);
 							SejfR_Add(43, fourPoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+500;
+							poolCreditStatus = poolCreditStatus+1000;
 							poolCashStats = poolCashStats+fourPoolPrice;
 						}
 						else

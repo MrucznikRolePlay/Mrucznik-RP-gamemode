@@ -88,7 +88,8 @@ YCMD:kajdanki(playerid, params[], help)
 
                                 //czynnoœci
                                 CuffedAction(playerid, giveplayerid);
-                                ZdejmijBW(playerid, 2000);
+                                ZdejmijBW(giveplayerid, 2000);
+                                TogglePlayerControllable(giveplayerid, 1);
                             }
                             else if(GetPlayerSpecialAction(giveplayerid) == SPECIAL_ACTION_DUCK)
                             {
@@ -101,6 +102,7 @@ YCMD:kajdanki(playerid, params[], help)
 
                                 //czynnoœci
                                 CuffedAction(playerid, giveplayerid);
+                                TogglePlayerControllable(giveplayerid, 1);
                             }
                             else
                             {
