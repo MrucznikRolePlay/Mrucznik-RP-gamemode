@@ -68,7 +68,7 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 		StarScanhpTimer(playerid);
 	    GetVehicleHealth(vehicleid,oldhealth[playerid]);
 	    incar[playerid] = 1;
-//		return 1;
+		return 1;
 	}
 	if((oldstate == PLAYER_STATE_DRIVER && newstate == PLAYER_STATE_ONFOOT) || (oldstate == PLAYER_STATE_PASSENGER && newstate == PLAYER_STATE_ONFOOT))
 	{
