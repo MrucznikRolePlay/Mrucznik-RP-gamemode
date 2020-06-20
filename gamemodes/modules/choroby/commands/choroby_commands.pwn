@@ -34,6 +34,7 @@
 #include "getimmunity\getimmunity.pwn"
 #include "kuracja\kuracja.pwn"
 #include "maseczka\maseczka.pwn"
+#include "odpornosc\odpornosc.pwn"
 #include "setimmunity\setimmunity.pwn"
 #include "ulecz\ulecz.pwn"
 #include "uleczall\uleczall.pwn"
@@ -48,6 +49,7 @@ hook OnGameModeInit()
     command_getimmunity();
     command_kuracja();
     command_maseczka();
+    command_odpornosc();
     command_setimmunity();
     command_ulecz();
     command_uleczall();

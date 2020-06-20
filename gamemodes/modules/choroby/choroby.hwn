@@ -71,7 +71,7 @@ new Vector:VPlayerDiseases[MAX_PLAYERS];
 new DiseaseData[eDiseases][eDiseaseData] = {
     //nazwa, cena, czas, lekoodpornosc, zarazliwosc, zarazanie przy kontakcie
     {"", "", 0, 0, 0, 0.0, false, VECTOR_NULL},
-    {"koronawirus", "Koronawirus", 100, 20, 30, 1.0, true, VECTOR_NULL},
+    {"angina", "Angina", 100, 20, 30, 1.0, true, VECTOR_NULL}, //koronawirus
     {"grypa", "Grypa", 2500, 60, 5, 1.0, false, VECTOR_NULL},
     {"zapaleniepluc", "Zapalenie p³uc", 10000, 120, 15, 1.0, false, VECTOR_NULL},
     {"zatrucie", "Zatrucie", 1000, 30, 10, 1.0, false, VECTOR_NULL},
@@ -109,7 +109,6 @@ new TourettWords[][] = {
     " sram"
 };
 
-new PlayerBar:PlayerImmunityBar[MAX_PLAYERS];
 new Float:PlayerImmunity[MAX_PLAYERS];
 new Grypa[MAX_PLAYERS];
 new Tourett[MAX_PLAYERS];

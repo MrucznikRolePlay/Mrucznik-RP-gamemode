@@ -312,6 +312,7 @@ new ZoneProtect[MAX_ZONES];
 new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
 new ZONE_DISABLED = 0;
 new ZONE_DEF_TIME = 900000;
+new ERS_mundur[MAX_PLAYERS] = 0;
 //21.07 PayDay fix
 /*new TRAIN_Checkpoints[6][3] = {
     {1770.9999, -1953.9802, 14.9781},
@@ -816,6 +817,7 @@ new kosztbiletu;
 new osoby;
 new planeisstopped;
 new Wodliczanie;
+new Float:MatsPoint[3] = {2138.2078,-2290.4888,20.6646};
 
 //koniec wozy Ballas
 new lspdWjazdDolny;
@@ -1057,10 +1059,11 @@ new fixActorsTimer[MAX_PLAYERS];
 
 new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
-
+new GunshopLSLock = 1;
 new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_ReportChannelId; //discordconnect
 new DCC_Channel:g_FracChannel[MAX_FRAC];
 new DCC_Channel:g_OrgChannel[MAX_ORG];
+new DCC_Channel:g_GSLSLOGChannelId, DCC_Channel:g_GSCMLOGChannelId, DCC_Channel:g_GSWFLOGChannelId;
 /*
 new chpIDHunter[MAX_PLAYERS];
 new hunterSeeMe[MAX_PLAYERS]; 
@@ -1104,6 +1107,7 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	SetPVarInt(playerid, "zoneid", -1);
 	DeletePVar(playerid, "DostalAJkomunikat");
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
 	SetPlayerDrunkLevel(playerid, 0);
@@ -1325,7 +1329,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
-
+	
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
