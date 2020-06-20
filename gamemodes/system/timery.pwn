@@ -2291,6 +2291,7 @@ public JednaSekundaTimer()
 				PlayerInfo[i][pJailTime] = 0;
 				if(PlayerInfo[i][pJailed] == 1)
 				{
+					SetPlayerInterior(i, 0);
 					SetPlayerPos(i,-1681.1091,917.8300,-52.4141);
 				}
 				else if(PlayerInfo[i][pJailed] == 2)
