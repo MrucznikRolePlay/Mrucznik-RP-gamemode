@@ -40,6 +40,14 @@ hook OnGameModeInit()
 	TourettRegexp = regex_exbuild(".*[^a-zA-Z](kurwa|chuj|huj|cipa|fiut|zjeb|kurwy|jeb|pizda|pizdy|szmul|dzban|kutas|dupa|cipka|pierdol|pierdolony)[^a-zA-Z].*");
 }
 
+hook OnPlayerConnect(playerid)
+{
+	PlayerImmunityBar[playerid] = CreatePlayerProgressBar(playerid, 548.000000, 34.000000, 62.500000, 5.500000, -293409025, MAX_PLAYER_IMMUNITY, 0);
+	PlayerImmunity[playerid] = INITIAL_PLAYER_IMMUNITY;
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], INITIAL_PLAYER_IMMUNITY);
+	return 1;
+}
+
 hook OnPlayerDisconnect(playerid, reason)
 {
 	VECTOR_clear(VPlayerDiseases[playerid]);
@@ -48,6 +56,11 @@ hook OnPlayerDisconnect(playerid, reason)
 	TourettActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
 	return 1;
+}
+
+hook OnPlayerSpawn(playerid)
+{
+	ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 }
 
 hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)

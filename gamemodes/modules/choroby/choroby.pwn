@@ -90,6 +90,7 @@ IsPlayerSick(playerid, eDiseases:disease)
 // ----- Immunity ------
 SetPlayerImmunity(playerid, Float:value)
 {
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], value);
 	PlayerImmunity[playerid] = value;
 	return 1;
 }
@@ -113,6 +114,7 @@ IncreasePlayerImmunity(playerid, Float:value=1.0, Float:max=MAX_PLAYER_IMMUNITY)
 			newValue = max;
 		}
 	}
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], newValue);
 	PlayerImmunity[playerid] = newValue;
 	return 1;
 }
@@ -135,6 +137,7 @@ DecreasePlayerImmunity(playerid, Float:value=1.0, Float:min=0.0)
 	}
 
 	PlayerImmunity[playerid] = newValue;
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], newValue);
 	return 1;
 }
 
