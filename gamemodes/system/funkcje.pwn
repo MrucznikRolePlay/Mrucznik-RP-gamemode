@@ -3338,8 +3338,9 @@ IsNearSecuricar(playerid)
 {
 	new vehicleid = GetClosestCar(playerid, 3.5);
 	if(vehicleid != -1) 
-	{
-		if(GetVehicleModel(vehicleid) == 428) return 1;
+	{	
+		new lcarid = VehicleUID[vehicleid][vUID];
+		if(GetVehicleModel(vehicleid) == 428 && Car_GetOwnerType(vehicleid) == CAR_OWNER_FAMILY && CarData[lcarid][c_Owner] == GetPlayerOrg(playerid)) return 1;
 	}
 	return 0;
 }
