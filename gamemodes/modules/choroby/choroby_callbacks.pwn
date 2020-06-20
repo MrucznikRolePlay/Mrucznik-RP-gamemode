@@ -55,6 +55,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
+	Odpornosc_PlayerBarToggle[playerid] = 0;
 	return 1;
 }
 
