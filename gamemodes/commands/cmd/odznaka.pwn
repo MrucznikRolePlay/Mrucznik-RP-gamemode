@@ -161,7 +161,7 @@ YCMD:odznaka(playerid, params[], help)
 					}
 					if(GetPlayerFraction(playerid) == FRAC_ERS)
 					{
-						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|______________ Identyfikator ERS ______________|");
+						SendClientMessage(giveplayerid, COLOR_ALLDEPT, "|______________ Identyfikator LSRS ______________|");
 						format(string, sizeof(string), "Numer identyfikatora: %d%d%d%d%d", PlayerInfo[playerid][pMember], PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
 						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);

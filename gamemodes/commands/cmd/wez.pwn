@@ -130,13 +130,13 @@ YCMD:wez(playerid, params[], help)
 						}
 						else
 						{
-							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do ERS.");
+							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do LSRS.");
 							return 1;
 						}
 					}
 					else
 					{
-						format(string, sizeof(string), "Ten pojazd nie jest wozem stra¿ackim ERS. (%s)", VehicleNames[GetVehicleModel(vehicleid)-400]);
+						format(string, sizeof(string), "Ten pojazd nie jest wozem stra¿ackim LSRS. (%s)", VehicleNames[GetVehicleModel(vehicleid)-400]);
 						sendTipMessage(playerid, string);
 						return 1;
 					}
@@ -149,7 +149,7 @@ YCMD:wez(playerid, params[], help)
 			}
 			else
 			{
-				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla ERS.");
+				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla LSRS.");
 				return 1;
 			}
 		}
@@ -184,13 +184,13 @@ YCMD:wez(playerid, params[], help)
 						}
 						else
 						{
-							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do ERS.");
+							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do LSRS.");
 							return 1;
 						}
 					}
 					else
 					{
-						format(string, sizeof(string), "Ten pojazd nie jest wozem stra¿ackim ERS. (%s)", VehicleNames[GetVehicleModel(vehicleid)-400]);
+						format(string, sizeof(string), "Ten pojazd nie jest wozem stra¿ackim LSRS. (%s)", VehicleNames[GetVehicleModel(vehicleid)-400]);
 						sendTipMessage(playerid, string);
 						return 1;
 					}
@@ -203,7 +203,7 @@ YCMD:wez(playerid, params[], help)
 			}
 			else
 			{
-				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla ERS.");
+				SendClientMessage(playerid,COLOR_GREY, "Komenda dostêpna tylko dla LSRS.");
 				return 1;
 			}
 		}
