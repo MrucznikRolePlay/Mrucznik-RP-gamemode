@@ -60,7 +60,7 @@ hook OnPlayerDisconnect(playerid, reason)
 
 hook OnPlayerSpawn(playerid)
 {
-	ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
+	if(Odpornosc_PlayerBarToggle[playerid] == 1) ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 }
 
 hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)

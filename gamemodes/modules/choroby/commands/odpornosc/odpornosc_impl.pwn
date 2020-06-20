@@ -25,14 +25,16 @@
 //------------------<[ Implementacja: ]>-------------------
 command_odpornosc_Impl(playerid)
 {
-    new Float:odpornosc = GetPlayerImmunity(playerid);
-    if(odpornosc < 1.0 && odpornosc > 0.5) SendClientMessage(playerid, COLOR_WHITE, "[==----------]");
-    else if(odpornosc >= 1.0 && odpornosc < 5.0) SendClientMessage(playerid, COLOR_WHITE, "[====--------]");
-    else if(odpornosc >= 5.0 && odpornosc < 10.0) SendClientMessage(playerid, COLOR_WHITE, "[======------]");
-    else if(odpornosc >= 10.0 && odpornosc < 15.0) SendClientMessage(playerid, COLOR_WHITE, "[========----]");
-    else if(odpornosc >= 15.0 && odpornosc < 20.0) SendClientMessage(playerid, COLOR_WHITE, "[==========--]");
-    else if(odpornosc >= 20.0) SendClientMessage(playerid, COLOR_WHITE, "[============]");
-    else SendClientMessage(playerid, COLOR_WHITE, "[------------]");
+    if(Odpornosc_PlayerBarToggle[playerid] == 0)
+    {
+        ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
+        Odpornosc_PlayerBarToggle[playerid] = 1;
+    }
+    else
+    {
+        HidePlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
+        Odpornosc_PlayerBarToggle[playerid] = 0;
+    }
     return 1;
 }
 

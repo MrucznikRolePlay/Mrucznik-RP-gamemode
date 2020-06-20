@@ -118,6 +118,7 @@ new PTSDCounter[MAX_PLAYERS];
 new AbortCurration[MAX_PLAYERS];
 
 new TourettRegexp;
+new Odpornosc_PlayerBarToggle[MAX_PLAYERS] = 0;
 
 //------------------<[ Forwardy: ]>--------------------
 //Koronawirus
