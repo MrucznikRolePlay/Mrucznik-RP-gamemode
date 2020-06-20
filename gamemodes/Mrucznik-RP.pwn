@@ -260,7 +260,7 @@ public OnGameModeInit()
 	SSCANF_Option(OLD_DEFAULT_NAME, 1);
 
 	//-------<[ streamer ]>-------
-    Streamer_SetVisibleItems(0, 999);
+    Streamer_SetVisibleItems(0, 1050);
     Streamer_SetTickRate(50);
 
 	//-------<[ MySQL ]>-------
