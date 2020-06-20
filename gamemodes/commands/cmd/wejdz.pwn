@@ -580,6 +580,13 @@ YCMD:wejdz(playerid, params[], help)
             SetPlayerVirtualWorld(playerid, 43);
             Wchodzenie(playerid);
             return 1;
+        } 
+        else if (IsPlayerInRangeOfPoint(playerid, 3.0, 1221.30774, -1790.77686, 71.70520))  //basen tsunami wejscie do hali
+        {
+            SetPlayerPos(playerid, 566.5435,-2087.0046,2.7402);  //basen tsunami hala
+            TogglePlayerControllable(playerid, 0);
+            Wchodzenie(playerid);
+            return 1;
         }
 
         

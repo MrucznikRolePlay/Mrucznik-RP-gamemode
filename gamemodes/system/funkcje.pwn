@@ -291,7 +291,7 @@ DialogListaSkinow(frakcja)
 		if(FRAC_SKINS[frakcja][i] == 0) break;
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FRAC_SKINS[frakcja][i], i);
 	}
-	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	strdel(skiny, strlen(skiny)-1, strlen(skiny));
 	safe_return skiny;
 }
 
@@ -303,7 +303,7 @@ DialogListaSkinowFamily(family)
 		if(FAM_SKINS[family][i] == 0) break;
 		format(skiny, sizeof(skiny), "%s%d\n", skiny, FAM_SKINS[family][i], i);
 	}
-	strdel(skiny, strlen(skiny)-2, strlen(skiny));
+	strdel(skiny, strlen(skiny)-1, strlen(skiny));
 	safe_return skiny;
 }
 
@@ -2399,6 +2399,11 @@ IsPlayerInFraction(playerid, frac, adminlvl=-1)
     if(member==frac || leader == frac) return 1;
     else if(adminlvl != -1 && PlayerInfo[playerid][pAdmin] >= adminlvl) return 1;
 	return 0;
+}
+
+IsAMechazordWarsztatowy(playerid)
+{
+	return IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19;
 }
 
 IsAMedyk(playerid)
@@ -12504,14 +12509,14 @@ public DeathAdminWarning(playerid, killerid, reason)
 				case 38:
 				{
 					//-------<[  Logi  ]>---------
-					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
-					{
-						format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
-						SendCommandLogMessage(string);
-						Log(warningLog, INFO, string);
-						SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
-					}
-					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
+					// if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
+					// {
+					// 	format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
+					// 	SendCommandLogMessage(string);
+					// 	Log(warningLog, INFO, string);
+					// 	SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
+					// } else
+					if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
 					{
 						format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z miniguna, podejrzane !", killername, killerid, bwreason, GetNick(playerid), playerid);
 						SendMessageToAdmin(string, COLOR_YELLOW);

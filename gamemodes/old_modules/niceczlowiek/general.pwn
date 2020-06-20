@@ -1,4 +1,4 @@
-new FabrykaMats_Actor;
+new FabrykaMats_Actor = INVALID_ACTOR_ID;
 new Text3D:FabrykaMats_ActorLabel;
 
 new Float:FabrykaMats_ActorPos[][] =
@@ -21,13 +21,12 @@ forward FabrykaActor_ReCreate();
 FabrykaMats_LoadLogic()
 {
 	// Init Actors
-
 	FabrykaActor_ReCreate();
 
 	// Init 3Dtexts
 
 	CreateDynamic3DTextLabel("Wiedz¹ ju¿ o nas!\nBez obaw, nie poddamy siê tak ³atwo\nPoszukaj naszych dilerów materia³ami na terenie fabryki", 0xAA3333AA, 2139.1128,-2288.9380,20.6646, 10.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
-
+	
 	// Init Timers
 
 	SetTimer("FabrykaActor_ReCreate", 900000, true);
@@ -46,12 +45,15 @@ public FabrykaActor_ReCreate()
 	ActorY = FabrykaMats_ActorPos[rand][1];
 	ActorZ = FabrykaMats_ActorPos[rand][2];
 
-	if(FabrykaMats_Actor != INVALID_ACTOR_ID)
+	if(FabrykaMats_Actor == INVALID_ACTOR_ID)
 	{
-		DestroyActor(FabrykaMats_Actor);	
+		FabrykaMats_Actor = CreateActor(FabrykaMats_ActorSkins[random(sizeof(FabrykaMats_ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats_ActorPos[rand][3]);
 	}
-
-	FabrykaMats_Actor = CreateActor(FabrykaMats_ActorSkins[random(sizeof(FabrykaMats_ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats_ActorPos[rand][3]);
+	else
+	{
+		SetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
+		SetActorFacingAngle(FabrykaMats_Actor, FabrykaMats_ActorPos[rand][3]);
+	}
 
 	if(FabrykaMats_ActorLabel != Text3D:INVALID_3DTEXT_ID)
 	{
@@ -60,7 +62,7 @@ public FabrykaActor_ReCreate()
 
 	new Float:labelZ = ActorZ + 1;
 
-	FabrykaMats_ActorLabel = CreateDynamic3DTextLabel("Handlarz materia³ami\nNaciœnij 'Y' aby pogadaæ", COLOR_GRAD1,ActorX, ActorY, labelZ, 7.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
+	FabrykaMats_ActorLabel = CreateDynamic3DTextLabel("Handlarz materia³ami\nNaciœnij 'Y' aby pogadaæ", COLOR_GRAD1, ActorX, ActorY, labelZ, 7.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0);
 
 	return 1;
 }

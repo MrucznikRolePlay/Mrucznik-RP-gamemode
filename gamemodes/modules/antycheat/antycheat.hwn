@@ -36,7 +36,7 @@ enum eNexACAdditionalSettings {
 }
 
 //------------------<[ Tablice: ]>--------------------
-new nexac_ac_names[53][] = {
+new nexac_ac_names[54][] = {
 	"Anti-AirBreak (onfoot)",
 	"Anti-AirBreak (in vehicle)",
 	"Anti-teleport hack (onfoot)",
@@ -89,18 +89,22 @@ new nexac_ac_names[53][] = {
 	"Anti-flood callback functions",
 	"Anti-flood change seat",
 	"Anti-Ddos",
-	"Anti-NOP's"
+	"Anti-NOP's",
+	"MruAC Anti-FakeKill"
 };
 
 
 //-----------------<[ Zmienne: ]>-------------------
-new eNexACAdditionalSettings:nexac_additional_settings[53];
+new eNexACAdditionalSettings:nexac_additional_settings[54];
 
 new PotentialCheaters[MAX_PLAYERS];
 new PotentialCheatersID[MAX_POTENTIAL_CHEATERS];
 new Text:PotentialCheatersTitleTxd;
 new Text:PotentialCheatersTxd[MAX_POTENTIAL_CHEATERS];
 new bool:IsPotentialCheatersTxdVisible[MAX_PLAYERS];
+
+new TakenDamageIssuers[MAX_PLAYERS][MAX_TAKEN_DAMAGE_ISSUERS];
+new TakenDamageIndex[MAX_PLAYERS];
 
 //------------------<[ Forwardy: ]>--------------------
 

@@ -26,6 +26,86 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+ProcessACCode(playerid, code)
+{
+	new ip[16];
+	GetPlayerIp(playerid, ip, sizeof(ip));
+	switch(nexac_additional_settings[code])
+	{
+		case OFF: 
+		{
+			//should never occur
+		}
+		case KICK:
+		{
+			SetPVarInt(playerid, "CheatDetected", 1);
+			ACKickMessage(playerid, code);
+			KickEx(playerid);
+		}
+		case INSTAKICK: //code == 50 || code == 28 || code == 27 || code == 5
+		{
+			ACKickMessage(playerid, code);
+			Kick(playerid);
+		}
+		case LVL1KICK:
+		{
+			if(PlayerInfo[playerid][pLevel] <= 1)
+			{
+				SetPVarInt(playerid, "CheatDetected", 1);
+				ACKickMessage(playerid, code);
+				KickEx(playerid);
+			}
+			else
+			{
+				MarkPotentialCheater(playerid);
+				ACWarningDelay(playerid, code);
+			} 
+		}
+		case LVL1MARK:
+		{
+			if(PlayerInfo[playerid][pLevel] == 1)
+			{
+				MarkPotentialCheater(playerid);
+				ACWarningDelay(playerid, code);
+			}
+		}
+		case LVL1INSTAKICK:
+		{
+			if(PlayerInfo[playerid][pLevel] <= 1)
+			{
+				ACKickMessage(playerid, code);
+				Kick(playerid);
+				KickEx(playerid);
+			}
+			else
+			{
+				MarkPotentialCheater(playerid);
+				ACWarningDelay(playerid, code);
+			} 
+		}
+		case ADMIN_WARNING:
+		{
+			SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] prawdopodobnie czituje. | %s [%d]", 
+				GetNickEx(playerid), playerid, ip, NexACDecodeCode(code), code), 
+				0xFF00FFFF);
+			ACWarningDelay(playerid, code);
+		}
+		case MARK_AS_CHEATER:
+		{
+			MarkPotentialCheater(playerid);
+			ACWarningDelay(playerid, code);
+		}
+		case MARK_AND_WARNING:
+		{
+			SendMessageToAdmin(sprintf("Anti-Cheat: %s [ID: %d] [IP: %s] najprawdopodobniej czituje. | %s [%d]", 
+				GetNickEx(playerid), playerid, ip, NexACDecodeCode(code), code), 
+				0xFF00FFFF);
+			MarkPotentialCheater(playerid);
+			ACWarningDelay(playerid, code);
+		}
+	}
+}
+
 NexACDecodeCode(code)
 {
 	new code_decoded[32];
@@ -84,6 +164,7 @@ NexACDecodeCode(code)
 		case 50:  format(code_decoded, sizeof(code_decoded), "flood change seat");
 		case 51:    format(code_decoded, sizeof(code_decoded), "DDOS");
 		case 52:    format(code_decoded, sizeof(code_decoded), "Anti-NOPs");
+		case 53:    format(code_decoded, sizeof(code_decoded), "Anti-FakeKill");
 		default:    format(code_decoded, sizeof(code_decoded), "Inne");
 	}
 	return code_decoded;
@@ -244,6 +325,8 @@ UpdatePotentialCheatersTxd()
 			TextDrawSetString(PotentialCheatersTxd[i], sprintf("%s [%d] - %d", GetNickEx(playerid), playerid, PotentialCheaters[playerid]));
 			if(GetPVarInt(playerid, "AC_oznaczony")) {
 				TextDrawColor(PotentialCheatersTxd[i], COLOR_PANICRED);
+			} else if(PlayerInfo[playerid][pLevel] == 1) {
+				TextDrawColor(PotentialCheatersTxd[i], COLOR_NEWS);
 			} else if(PotentialCheaters[playerid] >= 10) {
 				TextDrawColor(PotentialCheatersTxd[i], COLOR_RED);
 			} else {
@@ -416,6 +499,23 @@ ACv2_DrivingWithoutPremissions(playerid, vehicleid)
 		}
 	}
 	return 0;
+}
+
+AC_AntyFakeKill(playerid, killerid, reason)
+{
+	#pragma unused reason // TODO: It could be enhanced with reason checking
+
+	// Check, if player has been damaged by killerid. If not, it is probably a fake kill.
+	// It could generate false positive on hunter/seasparrow (armed vehicles ect.) kill or a drive-by kill.
+	// If player has been damaged by killerid (and killer report it to the server) this method will return 0.
+	for(new i; i<MAX_TAKEN_DAMAGE_ISSUERS; i++)
+	{
+		if(TakenDamageIssuers[playerid][i] == INVALID_PLAYER_ID) continue;
+		if(TakenDamageIssuers[playerid][i] == killerid) return 0;
+	}
+
+	ProcessACCode(playerid, AC_CODE_FAKEKILL);
+	return 1;
 }
 
 //end

@@ -255,7 +255,7 @@ BusinessPayDay(playerid)
 GetNearestBusiness(playerid)
 {
 	new bizID=INVALID_BIZ_ID; 
-	for(new i; i<BusinessLoaded+1; i++)
+	for(new i; i<=BusinessLoaded; i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, 4.0, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]))
 		{
