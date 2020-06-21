@@ -30,7 +30,6 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response){
 			switch(listitem){
 				case 0:{
-					if() 
 					if(kaska[playerid] >= ibiza_priceNormal && ibiza_priceNormal != 0){
 						ZabierzKase(playerid, ibiza_priceNormal);
 						IbizaTicket[playerid] = IBIZA_NORMAL;
