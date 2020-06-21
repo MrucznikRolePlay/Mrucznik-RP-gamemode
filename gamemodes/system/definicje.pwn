@@ -251,6 +251,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 //=======[FRAKCJE]===========
 #define PLOCAL_FRAC_DMV 108
 #define PLOCAL_FRAC_FBI 212
+#define PLOCAL_FRAC_LSPD 254
 #define PLOCAL_FRAC_LSMC 253
 
 //======[RODZINNE]==========
