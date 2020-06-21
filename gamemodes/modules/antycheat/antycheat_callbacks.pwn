@@ -89,6 +89,11 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 			return 1;
 		}
 
+		if(code == 38 && GetPVarInt(playerid, "IsDownloadingContent")) 
+		{ //turn off kick for ping if player is downloading content
+			return 1;
+		}
+
 		ProcessACCode(playerid, code);
 	}
 	else //type with ip
