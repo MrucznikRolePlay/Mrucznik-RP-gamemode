@@ -90,10 +90,8 @@ YCMD:materialy(playerid, params[], help)
 		}
 		else if(strcmp(x_nr,"deliver",true) == 0 || strcmp(x_nr,"dostarcz",true) == 0)
 		{
-		    new Float:ActorX, Float:ActorY, Float:ActorZ;
-            GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
 
-            if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ)) 
+            if(IsPlayerInRangeOfPoint(playerid, 1.5, MatsPoint[0], MatsPoint[1], MatsPoint[2])) 
 		    {
 		        if(MatsHolding[playerid] > 0)
 		        {
@@ -130,7 +128,7 @@ YCMD:materialy(playerid, params[], help)
 		    }
 		    else
 		    {
-		        sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy handlarzu materia³ami!");
+		        sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ przy odbiorze paczek materia³ów!");
 		        return 1;
 		    }
 		}

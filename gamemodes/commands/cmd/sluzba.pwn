@@ -217,7 +217,7 @@ YCMD:sluzba(playerid, params[], help)
             {
                 if(JobDuty[playerid] == 1)
                 {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie ERS, nie bêdziesz widzia³ zg³oszeñ.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie LSRS, nie bêdziesz widzia³ zg³oszeñ.");
                     JobDuty[playerid] = 0;
                     Medics -= 1;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
@@ -225,7 +225,7 @@ YCMD:sluzba(playerid, params[], help)
                 }
                 else
                 {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie ERS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie LSRS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
                     JobDuty[playerid] = 1;
                     Medics += 1;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
