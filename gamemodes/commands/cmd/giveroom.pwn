@@ -63,7 +63,8 @@ YCMD:giveroom(playerid, params[], help)
 					        {
 					            if(IsPlayerInRangeOfPoint(giveplayerid, 10.0, Dom[PlayerInfo[playerid][pDom]][hWej_X], Dom[PlayerInfo[playerid][pDom]][hWej_Y], Dom[PlayerInfo[playerid][pDom]][hWej_Z]))
 	            				{
-	            				    if(Dom[playerid][hPDW] > 0)
+									new dom = PlayerInfo[playerid][pDom];
+	            				    if(Dom[dom][hPDW] > 0)
 									{
 							            GetPlayerName(playerid, sendername, sizeof(sendername));
 							            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ yo3 ]--------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  zamknij                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,58 +16,48 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Sanda³
+// Data utworzenia: 18.06.2020
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:yo3(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_zamknij_Impl(playerid)
 {
-    if(IsPlayerConnected(playerid))
+    if(GetPlayerOrg(playerid) != 23)
     {
-		new playa;
-		if( sscanf(params, "k<fix>", playa))
-		{
-			sendTipMessage(playerid, "U¿yj /yo3 [ID gracza]");
-			return 1;
-		}
-		if(dialAccess[playerid] == 1)
-		{
-			sendErrorMessage(playerid, "Musisz odczekaæ 15 sekund przed ponown¹ interakcj¹!"); 
-			return 1;
-		}
-		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
-		{
-		    if(IsPlayerConnected(playa))
-		    {
-		        if(playa != INVALID_PLAYER_ID)
-		        {
-                    new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
-                    GetPlayerName(playa, witany, sizeof(witany));
-                    GetPlayerName(playerid, nick, sizeof(nick));
-                    format(string, sizeof(string), "Witasz siê z %s", witany);
-                    SendClientMessage(playerid, COLOR_WHITE, string);
-                    format(string, sizeof(string), "Witasz siê z %s", nick);
-                    SendClientMessage(playa, COLOR_WHITE, string);
-					dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
-					dialAccess[playerid] = 1; 
-					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
-					ApplyAnimation(playerid,"GANGS","hndshkfa",4.1,0,1,1,1,1);//12
-					ApplyAnimation(playa,"GANGS","hndshkfa_swt",4.1,0,1,1,1,1);//13
-				}
-			}
-		}
-		else
-		{
-			sendErrorMessage(playerid, "Jesteœ za daleko!");
-		}
-	}
-	return 1;
+        sendTipMessage(playerid, "Komenda dostêpna tylko dla Gunshop Los Santos.");
+        return 1;
+    }
+    if(PlayerInfo[playerid][pRank] <= 3)
+    {
+        sendTipMessage(playerid, "Komenda dostêpna od [4].");
+        return 1;
+    }
+    if(IsPlayerInRangeOfPoint(playerid, 2.0, 1791.6248,-1164.4028,23.8281) || (IsPlayerInRangeOfPoint(playerid, 200.0, 1795.1212,-1158.1047,1023.8218) && GetPlayerVirtualWorld(playerid) == 5))
+    {
+        if(GunshopLSLock == 0)
+        {
+            GunshopLSLock = 1;
+            new string[128];
+            format(string, sizeof(string), "* %s przyk³ada kartê do drzwi i zamyka magnetyczne zamki.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+            format(string, sizeof(string), "* Stalowe rolety od okien i drzwi zaczynaj¹ opadaæ...");
+			ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+            return 1;
+        }
+        else
+        {
+            sendTipMessage(playerid, "Biznes jest ju¿ otwarty.");
+            return 1;
+        }
+    }
+    else
+    {
+        sendTipMessage(playerid, "Nie znajdujesz siê w œrodku/przy drzwiach wejœciowych!");
+        return 1;
+    }
 }
+
+//end

@@ -1,0 +1,11 @@
+{
+    "name": "otworz",
+    "description": "Otwiera GSLS",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sanda³",
+    "aliases": [],
+    "parameters": [],
+    "date": "18.06.2020"
+}
