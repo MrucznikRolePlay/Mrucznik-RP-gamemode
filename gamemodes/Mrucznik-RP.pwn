@@ -5616,7 +5616,6 @@ public OnPlayerUpdate(playerid)
         GetPlayerKeys(playerid, keys, ud, lr);
         if(ud == KEY_DOWN) CruiseControl_SetSpeed(playerid, 10, false);
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
-		return 1;
     }
 	if(Spectate[playerid] != INVALID_PLAYER_ID && !GetPVarInt(playerid, "OnSpecChanging"))
     {
