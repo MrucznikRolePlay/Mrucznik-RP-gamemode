@@ -52,11 +52,14 @@ YCMD:swat(playerid, params[], help)
 					format(string, sizeof(string), "* %s bierze mundur i tarczê SWAT.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	    		    SetPlayerSkin(playerid, 285);
-                    GivePlayerWeapon(playerid,31,550);
-                    SetPlayerAmmo(playerid, 31, 0);
-                    PlayerInfo[playerid][pGun5] = 31;
-                    PlayerInfo[playerid][pAmmo5] = 550;
-                    SetPlayerAmmo(playerid, 31, 550);
+					if ((PlayerInfo[playerid][pGun5] != 31 || PlayerInfo[playerid][pGun5] != 30) || PlayerInfo[playerid][pAmmo5] < 550)
+					{
+						GivePlayerWeapon(playerid,31,550);
+						SetPlayerAmmo(playerid, 31, 0);
+						PlayerInfo[playerid][pGun5] = 31;
+						PlayerInfo[playerid][pAmmo5] = 550;
+						SetPlayerAmmo(playerid, 31, 550);
+					}
 					SetPlayerColor(playerid, 0x000000FF); // czarny
                     SetPlayerArmour(playerid, 90);
 	    		    if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
