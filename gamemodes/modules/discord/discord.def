@@ -26,5 +26,8 @@
 #define DISCORD_SAN_NEWS	0
 #define DISCORD_ADMIN_CHAT	1
 #define DISCORD_REPORT	2
+#define DISCORD_LOG_GSLS 3
+#define DISCORD_LOG_GSCM 4
+#define DISCORD_LOG_GSWF 5
 
 //end

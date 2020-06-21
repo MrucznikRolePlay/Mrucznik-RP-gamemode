@@ -902,15 +902,15 @@ public CheckChangeWeapon()
 						{
 							return PlayerChangeWeaponOnInjury(i);
 						}
-						else
-						{
-							if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, MyWeapon[i]);
-							if(PokazDialogBronie(i) == 0)
-							{
-								MyWeapon[i] = 0;
-								SetPlayerArmedWeapon(i, 0);
-							}
-						}
+						// else
+						// {
+						// 	if(PlayerPersonalization[i][PERS_GUNSCROLL] == 1) return SetPlayerArmedWeapon(i, MyWeapon[i]);
+						// 	if(PokazDialogBronie(i) == 0)
+						// 	{
+						// 		MyWeapon[i] = 0;
+						// 		SetPlayerArmedWeapon(i, 0);
+						// 	}
+						// }
 					}
 				}
 			}
@@ -2291,6 +2291,7 @@ public JednaSekundaTimer()
 				PlayerInfo[i][pJailTime] = 0;
 				if(PlayerInfo[i][pJailed] == 1)
 				{
+					SetPlayerInterior(i, 0);
 					SetPlayerPos(i,-1681.1091,917.8300,-52.4141);
 				}
 				else if(PlayerInfo[i][pJailed] == 2)

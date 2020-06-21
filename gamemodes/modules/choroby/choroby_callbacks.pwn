@@ -55,12 +55,13 @@ hook OnPlayerDisconnect(playerid, reason)
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
+	Odpornosc_PlayerBarToggle[playerid] = 0;
 	return 1;
 }
 
 hook OnPlayerSpawn(playerid)
 {
-	ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
+	if(Odpornosc_PlayerBarToggle[playerid] == 1) ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 }
 
 hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)

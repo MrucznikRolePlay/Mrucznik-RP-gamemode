@@ -31,7 +31,7 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
     if(newstate == PLAYER_STATE_DRIVER)
     {
         new newcar = GetPlayerVehicleID(playerid);
-        if(PlayerInfo[playerid][pCarLic] == 0 && !IsARower(newcar))
+        if(PlayerInfo[playerid][pCarLic] != 1 && !IsARower(newcar))
 		{
 			CruiseControl_Static_TurnOn(playerid, 0);
 		}
