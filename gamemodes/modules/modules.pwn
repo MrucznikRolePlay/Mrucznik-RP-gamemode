@@ -188,7 +188,7 @@
 
 //-------<[ others ]>-------
 #include "resources.pwn"
-#include "choroby_effects.pwn"
+#include "choroby\choroby_effects.pwn"
 
 
 //-------<[ callbacks ]>-------
