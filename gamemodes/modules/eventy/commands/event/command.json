@@ -1,0 +1,22 @@
+{
+    "name": "event",
+    "description": "Zarz¹dza eventem",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sanda³",
+    "aliases": [
+        "ev",
+        "ewent"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "24",
+            "name": "opcja",
+            "description": "do dodania",
+            "defaultValue": "podnies"
+        }
+    ],
+    "date": "22.06.2020"
+}

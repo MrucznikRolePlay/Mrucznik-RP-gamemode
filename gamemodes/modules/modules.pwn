@@ -45,6 +45,7 @@
 #include "cooking\cooking.def"
 #include "debug\debug.def"
 #include "discord\discord.def"
+#include "eventy\eventy.def"
 #include "fishing\fishing.def"
 #include "frakcje\frakcje.def"
 #include "graffiti\graffiti.def"
@@ -86,6 +87,7 @@
 #include "cooking\cooking.hwn"
 #include "debug\debug.hwn"
 #include "discord\discord.hwn"
+#include "eventy\eventy.hwn"
 #include "fishing\fishing.hwn"
 #include "frakcje\frakcje.hwn"
 #include "graffiti\graffiti.hwn"
@@ -127,6 +129,7 @@
 #include "cooking\cooking.pwn"
 #include "debug\debug.pwn"
 #include "discord\discord.pwn"
+#include "eventy\eventy.pwn"
 #include "fishing\fishing.pwn"
 #include "frakcje\frakcje.pwn"
 #include "graffiti\graffiti.pwn"
@@ -155,6 +158,7 @@
 #include "antyspam\antyspam_timers.pwn"
 #include "choroby\choroby_timers.pwn"
 #include "convoy\convoy_timers.pwn"
+#include "eventy\eventy_timers.pwn"
 #include "graffiti\graffiti_timers.pwn"
 #include "money\money_timers.pwn"
 #include "organizacje\organizacje_timers.pwn"
@@ -171,6 +175,7 @@
 #include "biznesy\biznesy_mysql.pwn"
 #include "choroby\choroby_mysql.pwn"
 #include "cooking\cooking_mysql.pwn"
+#include "eventy\eventy_mysql.pwn"
 #include "fishing\fishing_mysql.pwn"
 #include "graffiti\graffiti_mysql.pwn"
 #include "organizacje\organizacje_mysql.pwn"
@@ -182,8 +187,8 @@
 
 
 //-------<[ others ]>-------
-#include "03DL\resources.pwn"
-#include "choroby\choroby_effects.pwn"
+#include "resources.pwn"
+#include "choroby_effects.pwn"
 
 
 //-------<[ callbacks ]>-------
@@ -193,6 +198,7 @@
 #include "choroby\choroby_callbacks.pwn"
 #include "convoy\convoy_callbacks.pwn"
 #include "cooking\cooking_callbacks.pwn"
+#include "eventy\eventy_callbacks.pwn"
 #include "fishing\fishing_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "money\money_callbacks.pwn"

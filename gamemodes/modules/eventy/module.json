@@ -1,0 +1,11 @@
+{
+    "name": "eventy",
+    "description": "Skrypty eventowe",
+    "author": "Sanda³",
+    "timers": true,
+    "callbacks": true,
+    "mysql": true,
+    "files": [],
+    "commands": false,
+    "date": "22.06.2020"
+}
