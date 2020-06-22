@@ -36,8 +36,6 @@ command_event()
     new command = Command_GetID("event");
 
     //aliases
-    Command_AddAlt(command, "ev");
-    Command_AddAlt(command, "ewent");
     
 
     //permissions
@@ -53,17 +51,17 @@ YCMD:event(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Zarz¹dza eventem");
+        sendTipMessage(playerid, "");
         return 1;
     }
     //fetching params
-    new opcja[24];
-    if(sscanf(params, "S(podnies)[24]", opcja))
+    new opcja1[24], opcja2[24];
+    if(sscanf(params, "S(info)[24]S(brak)[24]", opcja1, opcja2))
     {
-        sendTipMessage(playerid, "U¿yj /event [do dodania] ");
+        sendTipMessage(playerid, "U¿yj /event [] [] ");
         return 1;
     }
     
     //command body
-    return command_event_Impl(playerid, opcja);
+    return command_event_Impl(playerid, opcja1, opcja2);
 }

@@ -23,8 +23,16 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_event_Impl(playerid, opcja[24])
+command_event_Impl(playerid, opcja1[24], opcja2[24])
 {
+    if(Events_CanUseCommand(playerid))
+    {
+        if(strcmp(opcja1,"info",true) == 0)
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "U¿yj /event ....");
+        }
+    }
+    else SendClientMessage(playerid, COLOR_WHITE, "Nie jest uruchomiony ¿aden event aktualnie!");
     return 1;
 }
 

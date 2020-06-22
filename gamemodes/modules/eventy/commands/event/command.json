@@ -1,21 +1,25 @@
 {
     "name": "event",
-    "description": "Zarz¹dza eventem",
+    "description": "",
     "permissions": [
         "everyone"
     ],
     "author": "Sanda³",
-    "aliases": [
-        "ev",
-        "ewent"
-    ],
+    "aliases": [],
     "parameters": [
         {
             "type": "string",
             "size": "24",
-            "name": "opcja",
-            "description": "do dodania",
-            "defaultValue": "podnies"
+            "name": "opcja1",
+            "description": "",
+            "defaultValue": "info"
+        },
+        {
+            "type": "string",
+            "size": "24",
+            "name": "opcja2",
+            "description": "",
+            "defaultValue": "brak"
         }
     ],
     "date": "22.06.2020"

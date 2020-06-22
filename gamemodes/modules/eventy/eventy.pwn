@@ -26,54 +26,71 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-//---------FUNKCJE DOTYCZ¥CE ZARZ¥DZANIA KIEDY SKRYPT EVENTOWY JEST MO¯LIWY DO U¯YCIA
-Events_IsEnabledInTime()
+//FUNKCJE DOTYCZ¥CE KOMEND
+Events_CanUseManageCommand(playerid)
 {
-	return 1;
-}
-Events_ISEnabledByAdmin()
-{
-	return 1;
-}
-Events_IsEnabled()
-{
-	if(Events_IsEnabledInTime()) return 1;
-	else if(Events_ISEnabledByAdmin()) return 1;
+	if(DEVELOPMENT || PlayerInfo[playerid][pAdmin] >= 1000) return 1;
 	else return 0;
 }
-Events_IsStaticEvent(event_id)
+
+Events_CanUseCommand(playerid)
 {
-	return 0;
+	if(Events_Enabled()) return 1;
+	else return 0;
 }
-//---------FUNKCJE DOTYCZ¥CE DYNAMICZNYM WERYFIKACJOM
-Events_IsCommandArgAvailable(playerid, event_id, param[])
+//---------FUNKCJE DOTYCZ¥CE ZARZ¥DZANIA KIEDY SKRYPT EVENTOWY JEST MO¯LIWY DO U¯YCIA
+Events_Enabled()
 {
-	return 0;
+	if(EVENTS_enabled > 0)	return 1;
+	else return 0;
 }
-Events_IsEventParamEqual(playerid, event_id, param_id, param[])
+Events_IsEnabled(event_id)
 {
 	return 1;
 }
 //---------FUNKCJE DOTYCZ¥CE DYNAMICZNYM TWORZENIOM EVENTÓW
-Events_AddNewEvent(playerid, event_id)
+Events_IsStaticEvent(event_id)
 {
-	return 1;
+	if(event_id >= 1 && event_id <= 10) return 1;
+	else return 0;
 }
-Events_AddNewEventParam(playerid, event_id, param_id, param[])
+Events_DynamicEventExist(event_id)
 {
-	return 1;
+	if(event_id > 10) return 1; // plus dodac funkcje czy np. Event[event_id][createdBy] != 0
+	else return 0;
+}
+Events_EventExist(event_id)
+{
+	if(Events_IsStaticEvent(event_id) || Events_DynamicEventExist(event_id)) return 1;
+	else return 0;
+}
+Events_AddNewEvent(event_id, playerid)
+{
+	if(Events_EventExist(event_id)) return 0;
+	else return 1;
 }
 //---------FUNKCJE DOTYCZ¥CE OBIEKTÓW
-Events_CreatePickableObject(playerid)
+
+//tworzenie, modyfikowanie, usuwanie obiektu
+Events_CreatePickableObject(event_id, playerid)
 {
 	return 1; // ma zwracaæ id stworzonego obiektu
 }
-
-Events_PickupObject(playerid, objectid)
+Events_DeletePickableObject(event_id, playerid, objectid)
 {
 	return 1;
 }
-Events_PutdownObject(objectid)
+
+//powi¹zanie obiekty + gracz
+Events_Hasobject(event_id, playerid, objectid)
+{
+	return 1;
+}
+Events_PickupObject(event_id, playerid, objectid)
+{
+	return 1;
+}
+Events_PutdownObject(event_id, objectid)
 {
 	return 1;
 }
