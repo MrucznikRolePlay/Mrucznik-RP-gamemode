@@ -6,6 +6,6 @@
     "callbacks": true,
     "mysql": true,
     "files": [],
-    "commands": false,
+    "commands": true,
     "date": "22.06.2020"
 }
