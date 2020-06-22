@@ -188,7 +188,7 @@
 
 //-------<[ others ]>-------
 #include "resources.pwn"
-#include "choroby\choroby_effects.pwn"
+#include "choroby_effects.pwn"
 
 
 //-------<[ callbacks ]>-------
@@ -222,6 +222,7 @@
 #include "convoy\commands\convoy_commands.pwn"
 #include "cooking\commands\cooking_commands.pwn"
 #include "debug\commands\debug_commands.pwn"
+#include "eventy\commands\eventy_commands.pwn"
 #include "fishing\commands\fishing_commands.pwn"
 #include "frakcje\commands\frakcje_commands.pwn"
 #include "graffiti\commands\graffiti_commands.pwn"
