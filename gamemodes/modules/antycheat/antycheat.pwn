@@ -485,16 +485,12 @@ ACv2_DrivingWithoutPremissions(playerid, vehicleid)
 		// Skurwysyn kieruje bez prawka lub autem frakcji xD (Xd)
 		if(GetPVarInt(playerid, "AntyCheatOff") == 0)
 		{
-			MruDialog(playerid, "ACv2: Kod #2001", "Dosta³eœ klapsa za kierowanie samochodem bez wymaganych uprawnieñ");
-			format(string, sizeof string, "ACv2 [#2001]: %s dosta³ klapsa za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
+			MruDialog(playerid, "ACv2: Kod #2001", "Dosta³eœ kicka za kierowanie samochodem bez wymaganych uprawnieñ");
+			format(string, sizeof string, "ACv2 [#2001]: %s dosta³ kicka za jazdê bez uprawnieñ [Veh: %d]", GetNickEx(playerid), GetPlayerVehicleID(playerid));
 			SendCommandLogMessage(string);
 			Log(warningLog, INFO, string);
 			Log(punishmentLog, INFO, string);
-			RemovePlayerFromVehicleEx(playerid);
-			new Float:slx, Float:sly, Float:slz;
-			GetPlayerPos(playerid, slx, sly, slz);
-			SetPlayerPos(playerid, slx, sly, slz+5);
-			PlayerPlaySound(playerid, 1130, slx, sly, slz+5);
+			KickEx(playerid);
 			return 1;
 		}
 	}
