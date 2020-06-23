@@ -74,9 +74,19 @@ Events_LoadStaticEvent(playerid, event_id)
 	if(Events_EventExist(event_id) && Events_IsStaticEvent(event_id))
 	{
 		if(Events_LoadStaticEventObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Za³adowano obiekty.");
+		EVENTS_enabled = event_id;
 	}
 	else return 0;
+}
 
+Events_UnloadStaticEvent(playerid, event_id)
+{
+	if(EVENTS_enabled > 0)
+	{
+		if(Events_UnloadStaticEventObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Zniszczono obiekty.");
+		EVENTS_enabled = 0;
+	}
+	else return 0;
 }
 
 Events_UnloadObjectsForAll(event_id)
@@ -88,6 +98,17 @@ Events_UnloadObjectsForAll(event_id)
 			rahim1_Connect(i);
 		}
 	}
+}
+
+Events_UnloadStaticEventObjects(event_id)
+{
+	if(event_id == 1)
+	{
+		EVENTS_connect_object = 0;
+		rahim1_Unload();
+		return 1;
+	}
+	return 0;
 }
 
 Events_LoadStaticEventObjects(event_id)

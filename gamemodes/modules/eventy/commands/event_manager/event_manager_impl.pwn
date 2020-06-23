@@ -47,7 +47,7 @@ command_event_manager_Impl(playerid, opcja[24], eventid, opcjaparam[24], argopcj
         }
         else if(strcmp(opcja, "load", true) == 0)
         {
-            if(EVENTS_enabled >= 0)
+            if(EVENTS_enabled == 0)
             {
                 if(!Events_EventExist(eventid)) sendTipMessage(playerid, "[Event Manager] Nie znaleziono eventu.");
                 else Events_LoadStaticEvent(playerid, eventid);
@@ -55,6 +55,17 @@ command_event_manager_Impl(playerid, opcja[24], eventid, opcjaparam[24], argopcj
             else
             {
                 sendTipMessage(playerid, "[Event Manager] Eventy s¹ wy³¹czone.");
+            }
+        }
+        else if(strcmp(opcja, "unload", true) == 0)
+        {
+            if(EVENTS_enabled > 0)
+            {
+                Events_UnloadStaticEvent(playerid, eventid);
+            }
+            else
+            {
+                sendTipMessage(playerid, "[Event Manager] ¯aden event nie jest aktualnie za³adowany.");
             }
         }
     }
