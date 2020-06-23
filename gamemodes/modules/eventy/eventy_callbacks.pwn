@@ -28,5 +28,10 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
-
+hook OnPlayerConnect(playerid)
+{
+	if(EVENTS_connect_object == 1) {
+		rahim1_Connect(playerid);
+	}
+}
 //end

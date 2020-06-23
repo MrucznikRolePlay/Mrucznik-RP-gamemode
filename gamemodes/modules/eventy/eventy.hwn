@@ -23,7 +23,8 @@
 
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
-new EVENTS_enabled = 0;
+new EVENTS_enabled = -1;
+new EVENTS_connect_object = 0;
 //------------------<[ Forwardy: ]>--------------------
 
 //end

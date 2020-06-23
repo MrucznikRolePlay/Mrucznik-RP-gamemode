@@ -34,10 +34,28 @@ command_event_manager_Impl(playerid, opcja[24], eventid, opcjaparam[24], argopcj
         else if(strcmp(opcja, "enabled", true) == 0)
         {
             if(eventid == 0) 
-            SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Wy³¹czono eventy.");//wylaczenie
+            {
+                EVENTS_enabled = -1;
+                SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Wy³¹czono eventy.");//wylaczenie
+            }
             else if(eventid == 1)
-            SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Uruchomiono eventy.");  // wlaczenie
+            {
+                EVENTS_enabled = 0;
+                SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Uruchomiono eventy.");  // wlaczenie
+            }
             else SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Enabled 1/0");
+        }
+        else if(strcmp(opcja, "load", true) == 0)
+        {
+            if(EVENTS_enabled >= 0)
+            {
+                if(!Events_EventExist(eventid)) sendTipMessage(playerid, "[Event Manager] Nie znaleziono eventu.");
+                else Events_LoadStaticEvent(playerid, eventid);
+            }
+            else
+            {
+                sendTipMessage(playerid, "[Event Manager] Eventy s¹ wy³¹czone.");
+            }
         }
     }
     return 1;

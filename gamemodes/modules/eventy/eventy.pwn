@@ -51,7 +51,7 @@ Events_IsEnabled(event_id)
 //---------FUNKCJE DOTYCZ¥CE DYNAMICZNYM TWORZENIOM EVENTÓW
 Events_IsStaticEvent(event_id)
 {
-	if(event_id >= 1 && event_id <= 10) return 1;
+	if(event_id == 1) return 1; // na razie tylko 1 statyczny event
 	else return 0;
 }
 Events_DynamicEventExist(event_id)
@@ -61,13 +61,45 @@ Events_DynamicEventExist(event_id)
 }
 Events_EventExist(event_id)
 {
-	if(Events_IsStaticEvent(event_id) || Events_DynamicEventExist(event_id)) return 1;
+	if(Events_IsStaticEvent(event_id)) return 1;
 	else return 0;
 }
 Events_AddNewEvent(event_id, playerid)
 {
 	if(Events_EventExist(event_id)) return 0;
 	else return 1;
+}
+Events_LoadStaticEvent(playerid, event_id)
+{
+	if(Events_EventExist(event_id) && Events_IsStaticEvent(event_id))
+	{
+		if(Events_LoadStaticEventObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Za³adowano obiekty.");
+	}
+	else return 0;
+
+}
+
+Events_UnloadObjectsForAll(event_id)
+{
+	if(event_id == 1)
+	{
+		foreach(new i : Player)
+		{
+			rahim1_Connect(i);
+		}
+	}
+}
+
+Events_LoadStaticEventObjects(event_id)
+{
+	if(event_id == 1)
+	{
+		Events_UnloadObjectsForAll(event_id);
+		EVENTS_connect_object = event_id;
+		rahim1_Init();
+		return 1;
+	}
+	return 0;
 }
 //---------FUNKCJE DOTYCZ¥CE OBIEKTÓW
 
