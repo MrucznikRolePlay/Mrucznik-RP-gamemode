@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                               event_manager                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,28 +16,31 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sanda³
+// Data utworzenia: 23.06.2020
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "event\event.pwn"
-#include "event_manager\event_manager.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_event_manager_Impl(playerid, opcja[24], eventid, opcjaparam[24], argopcjaparam[24])
 {
-    command_event();
-    command_event_manager();
-    
+    if(Events_CanUseManageCommand(playerid))
+    {
+        if(strcmp(opcja, "info", true) == 0)
+        {
+            SendClientMessage(playerid, COLOR_WHITE, "tutaj info");
+        }
+        else if(strcmp(opcja, "enabled", true) == 0)
+        {
+            if(eventid == 0) 
+            SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Wy³¹czono eventy.");//wylaczenie
+            else if(eventid == 1)
+            SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Uruchomiono eventy.");  // wlaczenie
+            else SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Enabled 1/0");
+        }
+    }
+    return 1;
 }
+
+//end
