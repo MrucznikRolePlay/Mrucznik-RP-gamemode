@@ -105,7 +105,7 @@ Events_CreateActor(playerid, event_id, float:x, float:y, float:z, float:rotation
 	new id = Events_GetFreeActorID();
 	if(id != -1)
 	{
-		EVENTS_Actors[id][actor_id] = CreateActorEx(305, " ", x,y,z,rotation, 1, 100, vw, int, -1,  AGROUP_DEFAULT); 
+		EVENTS_Actors[id][actor_id] = CreateActor(269, x,y,z,rotation);
 		EVENTS_Actors[id][actor_x] = x;
 		EVENTS_Actors[id][actor_y] = y;
 		EVENTS_Actors[id][actor_z] = z;
