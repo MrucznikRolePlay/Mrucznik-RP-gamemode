@@ -34,7 +34,6 @@ YCMD:wezzlecenie(playerid, params[], help)
     {
         return sendErrorMessage(playerid, "Tymczasowo zablokowane.");
 
-
         new veh = GetPlayerVehicleID(playerid);
         if(veh == 0) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");
         if(Car_GetOwnerType(veh) != CAR_OWNER_JOB || Car_GetOwner(veh) != JOB_TRUCKER) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");

@@ -192,7 +192,7 @@ MruMySQL_CreateKontaORM(playerid)
 	orm_addvar_int(orm, PlayerInfo[playerid][pConnected], "connected");
 	orm_addvar_int(orm, PlayerInfo[playerid][pInjury], "HealthPacks");
 	orm_addvar_int(orm, PlayerInfo[playerid][pHealthPacks], "Injury");
-	orm_addvar_int(orm, PlayerImmunity[playerid], "Immunity");
+	orm_addvar_float(orm, PlayerImmunity[playerid], "Immunity"); //TODO: mysql column to float
 
 	orm_setkey(orm, "UID");
 }
@@ -609,7 +609,7 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
 MruMySQL_Unblock(nick[]="Brak", admin)
 {
 	new query[256];
-    mysql_escape_string(nick, nick);
+    mysql_escape_string(nick, nick, MAX_PLAYER_NAME);
 
     new admnick[32];
     GetPlayerName(admin, admnick, 32);

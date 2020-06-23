@@ -32,17 +32,17 @@ ProcessACCode(playerid, code)
 	GetPlayerIp(playerid, ip, sizeof(ip));
 	switch(nexac_additional_settings[code])
 	{
-		case OFF: 
+		case (eNexACAdditionalSettings:OFF): 
 		{
 			//should never occur
 		}
-		case KICK:
+		case (eNexACAdditionalSettings:KICK):
 		{
 			SetPVarInt(playerid, "CheatDetected", 1);
 			ACKickMessage(playerid, code);
 			KickEx(playerid);
 		}
-		case INSTAKICK: //code == 50 || code == 28 || code == 27 || code == 5
+		case (eNexACAdditionalSettings:INSTAKICK): //code == 50 || code == 28 || code == 27 || code == 5
 		{
 			ACKickMessage(playerid, code);
 			Kick(playerid);
