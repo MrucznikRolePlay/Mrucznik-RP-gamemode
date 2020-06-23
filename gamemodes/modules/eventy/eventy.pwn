@@ -33,7 +33,7 @@ Events_CanUseManageCommand(playerid)
 	else return 0;
 }
 
-Events_CanUseCommand(playerid)
+Events_CanUseCommand()
 {
 	if(Events_Enabled()) return 1;
 	else return 0;
@@ -73,10 +73,71 @@ Events_LoadStaticEvent(playerid, event_id)
 {
 	if(Events_EventExist(event_id) && Events_IsStaticEvent(event_id))
 	{
+		new Float:x, Float:y, Float:z;
+		GetPlayerPos(playerid, x, y, z);
 		if(Events_LoadStaticEventObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Za³adowano obiekty.");
+		if(Events_CreateActor(playerid, event_id, x, y, z, 180.0, 0, 0) != -1) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Stworzono aktora.");
 		EVENTS_enabled = event_id;
 	}
 	else return 0;
+}
+
+Events_IsNearActor(playerid, actor_id)
+{
+	return 1;
+}
+Events_ActorExist(actor_id)
+{
+	if(EVENTS_Actors[actor_id][actor_x] != 0.0) return 1;
+	else return 0;
+}
+Events_GetFreeActorID()
+{
+	for(new i=0; i<10; i++)
+	{
+		if(Events_ActorExist(i)) continue;
+		else return i;
+	}
+	return -1;
+}
+Events_CreateActor(playerid, event_id, float:x, float:y, float:z, float:rotation, vw, int)
+{
+	new id = Events_GetFreeActorID();
+	if(id != -1)
+	{
+		EVENTS_Actors[id][actor_id] = CreateActorEx(305, " ", x,y,z,rotation, 1, 100, vw, int, -1,  AGROUP_DEFAULT); 
+		EVENTS_Actors[id][actor_x] = x;
+		EVENTS_Actors[id][actor_y] = y;
+		EVENTS_Actors[id][actor_z] = z;
+		EVENTS_Actors[id][actor_vw] = vw;
+		EVENTS_Actors[id][actor_int] = int;
+		return id;
+	}
+	return -1;
+}
+Events_DestroyActor(actor_id)
+{
+	SetActorPos(EVENTS_Actors[actor_id][actor_id], 0.0, 0.0, 0.0);
+	DestroyActor(EVENTS_Actors[actor_id][actor_id]);
+	EVENTS_Actors[actor_id][actor_x] = 0.0;
+	EVENTS_Actors[actor_id[actor_vw] = 999;
+	return 1;
+}
+
+Events_DestroyActors()
+{
+	if(Events_GetFreeActorID() != 0)
+	{
+		for(new i=0; i<10; i++)
+		{
+			SetActorPos(EVENTS_Actors[i][actor_id], 0.0, 0.0, 0.0);
+			DestroyActor(EVENTS_Actors[i][actor_id]);
+			EVENTS_Actors[i][actor_x] = 0.0;
+			EVENTS_Actors[i][actor_vw] = 999;
+		}
+		return 1;
+	}
+	return 0;
 }
 
 Events_UnloadStaticEvent(playerid, event_id)
@@ -84,6 +145,7 @@ Events_UnloadStaticEvent(playerid, event_id)
 	if(EVENTS_enabled > 0)
 	{
 		if(Events_UnloadStaticEventObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Zniszczono obiekty.");
+		if(Events_DestroyActors()) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Usuniêto aktorów.");
 		EVENTS_enabled = 0;
 	}
 	else return 0;

@@ -22,9 +22,19 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum evActors
+{
+    Float:actor_x, 
+    Float:actor_y,
+    Float:actor_z,
+    actor_vw,
+    actor_int,
+    actor_id
+};
 //-----------------<[ Zmienne: ]>-------------------
 new EVENTS_enabled = -1;
 new EVENTS_connect_object = 0;
+new EVENTS_Actors[EVENTS_MAX_EVENTS][evActors];
 //------------------<[ Forwardy: ]>--------------------
 
 //end
