@@ -285,7 +285,6 @@ public OnGameModeInit()
 
 	//-------<[ modules ]>-------
     systempozarow_init();
-    FabrykaMats_LoadLogic();
     NowaWybieralka_Init();
 	LoadBusiness(); 
 	LoadBusinessPickup(); 	
@@ -1797,6 +1796,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) return 1;
 
+	if(AC_AntyFakeKill(playerid, killerid, reason)) return 1;
+
 	Log(damageLog, INFO, "%s zosta³ zabity przez %s, powód: %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(killerid) ? GetPlayerLogName(killerid) : sprintf("%d", killerid),
@@ -2121,6 +2122,7 @@ public OnPlayerSpawn(playerid)
     PlayerInfo[playerid][pMuted] = 0;
 	WnetrzeWozu[playerid] = 0;
 	spamwl[playerid] = 0;
+	if(PlayerInfo[playerid][pFixKit] < 0) PlayerInfo[playerid][pFixKit] = 0;
 	if(GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0)
 	{
     	SetPlayerWeatherEx(playerid, ServerWeather);//Pogoda
@@ -2130,7 +2132,7 @@ public OnPlayerSpawn(playerid)
     	SetPlayerWeatherEx(playerid, 3);//Pogoda
 	}
 	//Diler Broni
-	if(PlayerInfo[playerid][pJob] == 9 && !IsADilerBroni(playerid))
+	if(PlayerInfo[playerid][pJob] == 9 && (!IsADilerBroni(playerid) || PlayerInfo[playerid][pRank] == 0))
 	{
 	    PlayerInfo[playerid][pJob] = 0;
 	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
@@ -2160,6 +2162,31 @@ public OnPlayerSpawn(playerid)
         PlayerInfo[playerid][pPK] = 0;
         PlayerInfo[playerid][pCarLic] = gettime()+86400;
     }
+	
+	new dom = PlayerInfo[playerid][pWynajem];
+	if(dom != 0)
+	{
+		new Nick[MAX_PLAYER_NAME];
+		Nick = GetNick(playerid);
+		if(
+			strcmp(Dom[dom][hL1], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL2], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL3], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL4], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL5], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL6], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL7], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL8], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL9], Nick, true) != 0 &&
+			strcmp(Dom[dom][hL10], Nick, true) != 0
+		)
+		{
+			format(string, sizeof(string), "* Zosta³eœ wykopany z wynajmowanego domu.");
+			SendClientMessage(playerid, COLOR_RED, string);
+			PlayerInfo[playerid][pWynajem] = 0;
+			PlayerInfo[playerid][pSpawn] = 0;
+		}
+	}
 	//Skills'y broni
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 1);
 	SetPlayerSkillLevel(playerid, WEAPONSKILL_PISTOL_SILENCED, 1000);
@@ -5628,6 +5655,7 @@ OnPlayerRegister(playerid, password[])
 {
 	if(IsPlayerConnected(playerid))
 	{
+		if(GetPVarInt(playerid, "IsDownloadingContent") == 1) DeletePVar(playerid, "IsDownloadingContent");
 		MruMySQL_CreateAccount(playerid, password);
 		OnPlayerLogin(playerid, password);
 	}
@@ -6256,10 +6284,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		else
 			RunCommand(playerid, "/odpal",  "");
 	}
-    if(newkeys & KEY_YES && (GetPlayerState(playerid)==PLAYER_STATE_ONFOOT))
-    {
-        FabrykaMats_ActorTalk(playerid);
-    }
 	if((newkeys & KEY_HANDBRAKE) && (newkeys & KEY_CROUCH) && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
 	{
 		if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
@@ -6278,7 +6302,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jesteœ w obszarze, w którym mo¿na wjechaæ"); 
+			
 		}
 	}
 	if((newkeys & KEY_SPRINT) && newkeys & KEY_WALK)
@@ -7215,6 +7239,11 @@ public OnPlayerText(playerid, text[])
 		{//todo
 			if(strlen(text) < 78)
 			{
+				if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 
+				{
+					SendClientMessage(playerid, COLOR_WHITE, "Twój wywiad zawiera niedozwolone znaki! (@)");
+					return 1;
+				}
 				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
 				format(wywiad_string, sizeof(wywiad_string), "Reporter %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
@@ -7227,6 +7256,11 @@ public OnPlayerText(playerid, text[])
 				new pos = strfind(text, " ", true, strlen(text) / 2);
 				if(pos != -1)
 				{
+					if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 
+					{
+						SendClientMessage(playerid, COLOR_WHITE, "Twój wywiad zawiera niedozwolone znaki! (@)");
+						return 1;
+					}
 					new text2[64];
 
 					strmid(text2, text, pos + 1, strlen(text));
@@ -7251,6 +7285,11 @@ public OnPlayerText(playerid, text[])
 		{
 			if(strlen(text) < 78)
 			{
+				if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 
+				{
+					SendClientMessage(playerid, COLOR_WHITE, "Twój wywiad zawiera niedozwolone znaki! (@)");
+					return 1;
+				}
 				format(string, sizeof(string), "%s mówi: %s", SanNews_nick, text);
 				format(wywiad_string, sizeof(wywiad_string), "Goœæ wywiadu %s: %s", SanNews_nick, text);
 				ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
@@ -7263,6 +7302,11 @@ public OnPlayerText(playerid, text[])
 				new pos = strfind(text, " ", true, strlen(text) / 2);
 				if(pos != -1)
 				{
+					if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 
+					{
+						SendClientMessage(playerid, COLOR_WHITE, "Twój wywiad zawiera niedozwolone znaki! (@)");
+						return 1;
+					}
 					new text2[64];
 
 					strmid(text2, text, pos + 1, strlen(text));
@@ -7401,6 +7445,21 @@ public OnPlayerText(playerid, text[])
 			{
 				PlayerTalkIC(playerid, text, "mówi", 15.0);
 			}
+		}
+		else if(OKActive[playerid] && GetPlayerAdminDutyStatus(playerid) == 0)
+		{
+			//speak l33t
+			new newText[256];
+			strcat(newText, text);
+			strreplace(newText, "a", "4", true);
+			strreplace(newText, "o", "0", true);
+			strreplace(newText, "e", "3", true);
+			strreplace(newText, "g", "6", true);
+			strreplace(newText, "l", "1", true);
+			strreplace(newText, "s", "5", true);
+			strreplace(newText, "t", "7", true);
+			strreplace(newText, "z", "2", true);
+			PlayerTalkIC(playerid, newText, "mówi", 15.0);
 		}
 		else
 		{
@@ -7573,6 +7632,7 @@ public OnPlayerRequestDownload(playerid, type, crc)
 	if(foundfilename) {
 		format(fullurl,sizeof(fullurl), RESOURCES_LINK"%s", dlfilename);
 		RedirectDownload(playerid,fullurl);
+		if(!GetPVarInt(playerid, "IsDownloadingContent")) SetPVarInt(playerid, "IsDownloadingContent", 1);
 	}
 	return 0;
 }

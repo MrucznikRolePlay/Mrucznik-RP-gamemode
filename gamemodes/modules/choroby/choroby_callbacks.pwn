@@ -55,12 +55,13 @@ hook OnPlayerDisconnect(playerid, reason)
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
+	Odpornosc_PlayerBarToggle[playerid] = 0;
 	return 1;
 }
 
 hook OnPlayerSpawn(playerid)
 {
-	ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
+	if(Odpornosc_PlayerBarToggle[playerid] == 1) ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 }
 
 hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
@@ -133,6 +134,13 @@ hook OnPlayerText(playerid, text[])
 		{
 			InfectOrDecreaseImmunity(playerid, TOURETT);
 			Tourett[playerid] = 0;
+		}
+	}
+	if(strfind(text, "0k", true) == 0)
+	{
+		if(InfectPlayer(playerid, OK_DISEASE))
+		{
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Dopad³a Ciê 0k-zaraza!");
 		}
 	}
 	return 1;

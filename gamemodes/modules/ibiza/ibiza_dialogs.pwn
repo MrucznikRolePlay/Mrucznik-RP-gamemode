@@ -30,7 +30,7 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response){
 			switch(listitem){
 				case 0:{
-					if(kaska[playerid] >= ibiza_priceNormal){
+					if(kaska[playerid] >= ibiza_priceNormal && ibiza_priceNormal != 0){
 						ZabierzKase(playerid, ibiza_priceNormal);
 						IbizaTicket[playerid] = IBIZA_NORMAL;
 						SetPlayerWeather(playerid, 27);
@@ -38,11 +38,12 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SejfR_Add(FAMILY_IBIZA, ibiza_priceNormal);
 						Log(payLog, INFO, "%s kupi³ bilet normalny (Ibiza) za $ %d", GetPlayerLogName(playerid), ibiza_priceNormal);
 					}else{
-						SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy!");
+						if(ibiza_priceNormal == 0) SendClientMessage(playerid, -1, "Klub jest zamkniêty.");
+						else SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy!");
 					}
 				}
 				case 1:{
-					if(kaska[playerid] >= ibiza_priceVIP){
+					if(kaska[playerid] >= ibiza_priceVIP && ibiza_priceVIP != 0){
 						ZabierzKase(playerid, ibiza_priceVIP);
 						IbizaTicket[playerid] = IBIZA_VIP;
 						SetPlayerWeather(playerid, 27);
@@ -50,7 +51,8 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SejfR_Add(FAMILY_IBIZA, ibiza_priceVIP);
 						Log(payLog, INFO, "%s kupi³ bilet VIP (Ibiza) za $ %d", GetPlayerLogName(playerid), ibiza_priceNormal);
 					}else{
-						SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy!");
+						if(ibiza_priceVIP == 0) SendClientMessage(playerid, -1, "Klub jest zamkniêty.");
+						else SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy!");
 					}
 				}
 				

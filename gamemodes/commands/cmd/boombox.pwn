@@ -35,7 +35,7 @@ YCMD:boombox(playerid, params[], help)
 
     new frac = GetPlayerFraction(playerid);
     if(GetPlayerOrg(playerid) == 0 && (frac < FRAC_GROOVE && frac > FRAC_VAGOS) && frac != FRAC_WPS) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla gangów!");
-    if(frac == 0 && GetPlayerOrgType(playerid) != ORG_TYPE_GANG) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla organizacji typu gang!");
+    if(frac == 0 && GetPlayerOrgType(playerid) != ORG_TYPE_GANG && GetPlayerOrgType(playerid) != ORG_TYPE_CLUB && GetPlayerOrgType(playerid) != ORG_TYPE_BIZNES) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla organizacji typu gang/biznes/klub!");
     new owner;
 
     if(frac == 0) owner = 100+GetPlayerOrg(playerid);
@@ -56,9 +56,11 @@ YCMD:boombox(playerid, params[], help)
         {
             if(BoomBoxData[id][BBD_Carried]-1 == playerid)
             {
-                if(GetPVarInt(playerid, "zoneid") == -1) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
-                else if(ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
-
+                if(GetPlayerVirtualWorld(playerid) == 0)
+                {
+                    if(GetPVarInt(playerid, "zoneid") == -1) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
+                    else if(ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
+                }
                 BBD_Putdown(playerid, id);
             }
             else
@@ -104,10 +106,12 @@ YCMD:boombox(playerid, params[], help)
 
             if(!IsPlayerInRangeOfPoint(playerid, 1.4, BoomBoxData[id][BBD_x], BoomBoxData[id][BBD_y], BoomBoxData[id][BBD_z])) return sendTipMessageEx(playerid, COLOR_GRAD2, "Musisz byæ obok boomboxa.");
             if(GetPlayerSpecialAction(playerid) != SPECIAL_ACTION_DUCK) return sendTipMessageEx(playerid, COLOR_GRAD2, "Przykucnij do radia.");
-
-            if(GetPVarInt(playerid, "zoneid") == -1) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
-            else if(ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
-
+            
+            if(GetPlayerVirtualWorld(playerid) == 0)
+            {
+                if(GetPVarInt(playerid, "zoneid") == -1) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
+                else if(ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
+            }
             if(strcmp(sub, "off", true) == 0)
             {
                 BoomBoxData[id][BBD_Standby] = false;
@@ -136,8 +140,11 @@ YCMD:boombox(playerid, params[], help)
     }
     else
     {
-        if(GetPVarInt(playerid, "zoneid") == -1) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
-        else if(ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
+        if(GetPlayerVirtualWorld(playerid) == 0)
+        {
+            if(GetPVarInt(playerid, "zoneid") == -1) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
+            else if(ZoneControl[GetPVarInt(playerid, "zoneid")] != frac && ZoneControl[GetPVarInt(playerid, "zoneid")]-100 != GetPlayerOrg(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Komenda dostêpna tylko na strefie gangu.");
+        }
 
         id = BBD_GetID();
         if(id == -1) return sendTipMessageEx(playerid, COLOR_GRAD2, "Osi¹gniêto limit boomboxów (15).");

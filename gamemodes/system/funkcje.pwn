@@ -1216,37 +1216,7 @@ if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
 	GetPlayerName(playerid, nick, sizeof(nick));
 	format(komunikat, sizeof(komunikat),"* %s ³¹czy kabelki i wyjmuje œrubokrêt i odkrêca nastêpn¹ os³onkê.", nick);
 	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	new skillz;
-	if(PlayerInfo[playerid][pJackSkill] < 50)
-	{
-		skillz = 1;
-	}
-	else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
-	{
-		skillz = 2;
-	}
-	else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
-	{
-		skillz = 3;
-	}
-	else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
-	{
-		skillz = 4;
-	}
-	else if(PlayerInfo[playerid][pJackSkill] >= 400)
-	{
-		skillz = 5;
-	}
-	new kradnij = random(100);
-	new mnoznik = skillz*19;
-	if(kradnij <= mnoznik)
-	{
-		SetTimerEx("udalo2",6000,0,"d",playerid);
-	}
-	else
-	{
-		SetTimerEx("nieudalo2",6000,0,"d",playerid);
-	}
+	SetTimerEx("udalo2",6000,0,"d",playerid);
 }
 else
 {
@@ -1264,37 +1234,7 @@ public udalo2(playerid){
     	GetPlayerName(playerid, nick, sizeof(nick));
     	format(komunikat, sizeof(komunikat),"* %s wyjmuje 4 kolorowe kabelki.", nick);
     	ProxDetector(20.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-    	new skillz;
-		if(PlayerInfo[playerid][pJackSkill] < 50)
-		{
-			skillz = 1;
-		}
-		else if(PlayerInfo[playerid][pJackSkill] >= 50 && PlayerInfo[playerid][pJackSkill] <= 99)
-		{
-			skillz = 2;
-		}
-		else if(PlayerInfo[playerid][pJackSkill] >= 100 && PlayerInfo[playerid][pJackSkill] <= 199)
-		{
-			skillz = 3;
-		}
-		else if(PlayerInfo[playerid][pJackSkill] >= 200 && PlayerInfo[playerid][pJackSkill] <= 399)
-		{
-			skillz = 4;
-		}
-		else if(PlayerInfo[playerid][pJackSkill] >= 400)
-		{
-			skillz = 5;
-		}
-		new kradnij = random(100);
-		new mnoznik = skillz*19;
-		if(kradnij <= mnoznik)
-		{
-			SetTimerEx("udalo3",6000,0,"d",playerid);
-		}
-		else
-		{
-			SetTimerEx("nieudalo3",6000,0,"d",playerid);
-		}
+    	SetTimerEx("udalo3",6000,0,"d",playerid);
     }
     else
     {
@@ -2343,21 +2283,24 @@ IsADilerBroni(playerid)
 	{
 	    new leader = PlayerInfo[playerid][pLider];
 	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==12 || member==13 || member==14 || member==16)
+		if(PlayerInfo[playerid][pRank] > 0)
 		{
-		    return 1;
-		}
-		else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14 || leader==16)
-		{
-		    return 1;
-		}
-		else if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
-		{
-		    return 1;
-		}
-		else if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
-		{
-		    return 1;
+			if(member==5 || member==6 || member==12 || member==13 || member==14 || member==16)
+			{
+				return 1;
+			}
+			else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14 || leader==16)
+			{
+				return 1;
+			}
+			else if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+			{
+				return 1;
+			}
+			else if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
+			{
+				return 1;
+			}
 		}
 	}
 	return 0;
@@ -3385,6 +3328,23 @@ PrzyczepKogut(playerid, veh)
     AttachDynamicObjectToVehicle(VehicleUID[veh][vSiren], veh, x,y,z, 0.0, 0.0, 0.0);
 	return 1;
 }
+IsAtAmmunationLosSantos(playerid)
+{
+	if(GetPlayerVirtualWorld(playerid) == 5 && IsPlayerInRangeOfPoint(playerid, 100.0, 1799.7361,-1162.9795,1023.8218)) return 1;
+	return 0;
+}
+
+IsNearSecuricar(playerid)
+{
+	new vehicleid = GetClosestCar(playerid, 3.5);
+	if(vehicleid != -1) 
+	{	
+		new lcarid = VehicleUID[vehicleid][vUID];
+		if(GetVehicleModel(vehicleid) == 428 && Car_GetOwnerType(vehicleid) == CAR_OWNER_FAMILY && CarData[lcarid][c_Owner] == GetPlayerOrg(playerid)) return 1;
+	}
+	return 0;
+}
+
 IsAtTheDMVWindows(playerid)
 {
 	if(IsPlayerInRangeOfPoint(playerid, 2.0, 1455.7228,-1792.1116,77.9502))//okienko 1
@@ -3754,7 +3714,7 @@ IsAtWarsztat(playerid)
 		{//warsztat dillmore
 		  	return 1;
 		}
-        else if(IsPlayerInRangeOfPoint(playerid, 20.0, 1017.75, -1353.33, 13.3825))
+        else if(IsPlayerInRangeOfPoint(playerid, 30.0, 1017.75, -1353.33, 13.3825))
 		{//warsztat przy p1czkarni
 		  	return 1;
 		}
@@ -6280,6 +6240,11 @@ KupowanieDomu(playerid, dom, platnosc)
 	}
 	else
 	{
+		if(Dom[dom][hKupiony] == 1)
+		{
+			SendClientMessage(playerid, COLOR_RED, "Dom ju¿ jest kupiony!");
+			return 1;
+		}
 	    //new doplata = Dom[dom][hOplata];
 		//new interior = IntInfo[Dom[dom][hDomNr]][Cena];
 		//new mnoznik;
@@ -8190,7 +8155,7 @@ public OPCLogin(playerid)
     SetPlayerInterior(playerid, 0);
 
     TourCamera(playerid, 0);
-
+	if(GetPVarInt(playerid, "IsDownloadingContent") == 1) DeletePVar(playerid, "IsDownloadingContent");
     //Strefy load
     ZonePTXD_Load(playerid);
     ZonePlayerTimer[playerid]=0;
@@ -12503,14 +12468,14 @@ public DeathAdminWarning(playerid, killerid, reason)
 				case 38:
 				{
 					//-------<[  Logi  ]>---------
-					if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
-					{
-						format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
-						SendCommandLogMessage(string);
-						Log(warningLog, INFO, string);
-						SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
-					}
-					else if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
+					// if(PlayerInfo[killerid][pGun7] != reason && PlayerInfo[killerid][pAdmin] < 1)
+					// {
+					// 	format(string, sizeof string, "ACv2 [#2003]: Sprawdzanie kodu - rzekomy fakekillid %s (%d).", GetNickEx(playerid), playerid);
+					// 	SendCommandLogMessage(string);
+					// 	Log(warningLog, INFO, string);
+					// 	SetTimerEx("CheckCode2003", 250, false, "ii", killerid, playerid);
+					// } else
+					if(GetVehicleModel(GetPlayerVehicleID(killerid)) != 425)
 					{
 						format(string, sizeof(string), "AdmWarning: %s[%d] %s %s[%d] z miniguna, podejrzane !", killername, killerid, bwreason, GetNick(playerid), playerid);
 						SendMessageToAdmin(string, COLOR_YELLOW);

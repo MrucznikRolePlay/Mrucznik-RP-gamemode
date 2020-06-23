@@ -53,6 +53,9 @@ LoadDiscordChannels()
 }
 DiscordConnectInit()
 {
+	g_GSLSLOGChannelId=DCC_FindChannelById("723216208165601321"); // GS Los Santos log
+	g_GSCMLOGChannelId=DCC_FindChannelById("723216292081041408"); // GS Commerce log
+	g_GSWFLOGChannelId=DCC_FindChannelById("723216357835145376"); // GS Willowfield log
 	g_SanNewsChannelId=DCC_FindChannelById("696491963582513272"); //ig-san-news
 	g_AdminChannelId=DCC_FindChannelById("696501357208797214"); //ig-admin
 	g_ReportChannelId=DCC_FindChannelById("697009695495422012"); //ig-report
@@ -77,6 +80,18 @@ SendDiscordMessage(channel, message[])
 		case 2:
 		{
 			DCC_SendChannelMessage(g_ReportChannelId, dest); // #ig-report
+		}
+		case 3:
+		{
+			DCC_SendChannelMessage(g_GSLSLOGChannelId, dest); // #gunshop-los-santos
+		}
+		case 4:
+		{
+			DCC_SendChannelMessage(g_GSCMLOGChannelId, dest); // #gunshop-commerce
+		}
+		case 5:
+		{
+			DCC_SendChannelMessage(g_GSWFLOGChannelId, dest); // #gunshop-willowfield
 		}
 	}
 	return 1;

@@ -38,7 +38,8 @@ enum eDiseases {
     PARKINSON,
     URAZ,
     GANGRENA,
-    PTSD
+    PTSD,
+    OK_DISEASE
 };
 
 enum eEffectData {
@@ -71,21 +72,22 @@ new Vector:VPlayerDiseases[MAX_PLAYERS];
 new DiseaseData[eDiseases][eDiseaseData] = {
     //nazwa, cena, czas, lekoodpornosc, zarazliwosc, zarazanie przy kontakcie
     {"", "", 0, 0, 0, 0.0, false, VECTOR_NULL},
-    {"koronawirus", "Koronawirus", 1000, 20, 30, 1.0, true, VECTOR_NULL},
-    {"grypa", "Grypa", 25000, 60, 5, 1.0, false, VECTOR_NULL},
-    {"zapaleniepluc", "Zapalenie p³uc", 100000, 120, 15, 1.0, false, VECTOR_NULL},
-    {"zatrucie", "Zatrucie", 10000, 30, 10, 1.0, false, VECTOR_NULL},
-    {"padaczka", "Padaczka", 200000, 150, 5, 0.0, false, VECTOR_NULL},
-    {"tourett", "Zespó³½ Touretta", 100000, 150, 25, 0.0, false, VECTOR_NULL},
-    {"astma", "Astma", 25000, 30, 20, 0.0, false, VECTOR_NULL},
-    {"schizofrenia", "Schizofrenia Paranoidalna", 300000, 300, 2, 0.0, false, VECTOR_NULL},
-    {"zombie", "Virus Zombie", 1000, 30, 10, 5.0, false, VECTOR_NULL},
-    {"HIV", "HIV", 100000, 150, 1, 0.3, true, VECTOR_NULL},
-    {"astygmatyzm", "Astygmatyzm", 100000, 180, 20, 0.0, false, VECTOR_NULL},
-    {"parkinson", "Parkinson", 150000, 300, 13, 0.0, false, VECTOR_NULL},
-    {"uraz", "Uraz", 10000, 30, 5, 0.0, false, VECTOR_NULL},
-    {"gangrena", "Gangrena", 75000, 60, 35, 0.1, true, VECTOR_NULL},
-    {"PTSD", "PTSD", 150000, 30, 40, 0.0, false, VECTOR_NULL}
+    {"angina", "Angina", 100, 20, 30, 1.0, true, VECTOR_NULL}, //koronawirus
+    {"grypa", "Grypa", 2500, 60, 5, 1.0, false, VECTOR_NULL},
+    {"zapaleniepluc", "Zapalenie p³uc", 10000, 120, 15, 1.0, false, VECTOR_NULL},
+    {"zatrucie", "Zatrucie", 1000, 30, 10, 1.0, false, VECTOR_NULL},
+    {"padaczka", "Padaczka", 20000, 150, 5, 0.0, false, VECTOR_NULL},
+    {"tourett", "Zespó³½ Touretta", 10000, 150, 25, 0.0, false, VECTOR_NULL},
+    {"astma", "Astma", 2500, 30, 20, 0.0, false, VECTOR_NULL},
+    {"schizofrenia", "Schizofrenia Paranoidalna", 30000, 300, 2, 0.0, false, VECTOR_NULL},
+    {"zombie", "Virus Zombie", 100, 30, 10, 5.0, false, VECTOR_NULL},
+    {"HIV", "HIV", 10000, 150, 1, 0.3, true, VECTOR_NULL},
+    {"astygmatyzm", "Astygmatyzm", 10000, 180, 20, 0.0, false, VECTOR_NULL},
+    {"parkinson", "Parkinson", 15000, 300, 13, 0.0, false, VECTOR_NULL},
+    {"uraz", "Uraz", 1000, 30, 5, 0.0, false, VECTOR_NULL},
+    {"gangrena", "Gangrena", 7500, 60, 35, 0.1, true, VECTOR_NULL},
+    {"PTSD", "PTSD", 15000, 30, 40, 0.0, false, VECTOR_NULL},
+    {"0k", "0k", 10000, 150, 25, 0.0, false, VECTOR_NULL}
 };
 
 //TODO: wiêcej tików
@@ -114,10 +116,12 @@ new Float:PlayerImmunity[MAX_PLAYERS];
 new Grypa[MAX_PLAYERS];
 new Tourett[MAX_PLAYERS];
 new TourettActive[MAX_PLAYERS];
+new OKActive[MAX_PLAYERS];
 new PTSDCounter[MAX_PLAYERS];
 new AbortCurration[MAX_PLAYERS];
 
 new Regex:TourettRegexp;
+new Odpornosc_PlayerBarToggle[MAX_PLAYERS] = 0;
 
 //------------------<[ Forwardy: ]>--------------------
 //Koronawirus
@@ -190,6 +194,12 @@ forward HPLossToDeathEffect(playerid, disease, value);
 forward BlackoutEffect(playerid, disease, value);
 forward DeathEffect(playerid, disease, value);
 
+//0k-zaraza
+forward OKEffect(playerid, disease, value);
+forward OKPermanentEffect(playerid, disease, value);
+forward OKPermanentEffect_Off(playerid, disease, value);
+
+
 choroby_InitEffects()
 {
     //eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, pernament, contagiousRange, infectionChance, additionalValue)
@@ -216,33 +226,33 @@ choroby_InitEffects()
 
     AddEffect(GRYPA, "FeelingBadEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 3.0, 20, 
+        false, 3.0, 10, 
         0
     );
     AddEffect(GRYPA, "CouchingEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 15.0, 20, 
+        false, 10.0, 5, 
         0
     );
     AddEffect(GRYPA, "HPLossEffect", "", 
         RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 5.0, 50, 
+        false, 5.0, 15, 
         10
     );
 
     AddEffect(ZAPALENIE_PLUC, "FeelingBadEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 3.0, 20, 
+        false, 3.0, 5, 
         0
     );
     AddEffect(ZAPALENIE_PLUC, "CouchingEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 15.0, 30, 
+        false, 10.0, 10, 
         0
     );
     AddEffect(ZAPALENIE_PLUC, "HPLossEffect", "", 
         RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 5.0, 40, 
+        false, 5.0, 15, 
         20
     );
 
@@ -253,12 +263,12 @@ choroby_InitEffects()
     );
     AddEffect(ZATRUCIE, "DiarrheaEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 2.0, 25, 
+        false, 2.0, 5, 
         0
     );
     AddEffect(ZATRUCIE, "ShittingEffect", "", 
         REGULAR_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 3.0, 50, 
+        false, 3.0, 10, 
         0
     );
     AddEffect(ZATRUCIE, "AbdominalPainEffect", "", 
@@ -268,7 +278,7 @@ choroby_InitEffects()
     );
     AddEffect(ZATRUCIE, "VomitEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 3.0, 80, 
+        false, 3.0, 20, 
         0
     );
 
@@ -399,6 +409,17 @@ choroby_InitEffects()
     );
     AddEffect(PTSD, "FearEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
+        false, 0.0, 0, 
+        0
+    );
+
+    AddEffect(OK_DISEASE, "OKPermanentEffect", "OKPermanentEffect_Off", 
+        0, 0, 
+        true, 0.0, 0, 
+        0
+    );
+    AddEffect(OK_DISEASE, "OKEffect", "", 
+        ONE_MINUTE, ONE_MINUTE*5, 
         false, 0.0, 0, 
         0
     );

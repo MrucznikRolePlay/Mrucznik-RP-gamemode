@@ -16707,7 +16707,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				*/
 			}
-
+			Sejf_Add(FRAC_GOV, DmvLicenseCost[listitem]);
 			ZabierzKase(playerid, DmvLicenseCost[listitem]);
 		}
 	}

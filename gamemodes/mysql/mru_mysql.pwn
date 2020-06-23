@@ -593,8 +593,14 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
     }
 
 
-	if(strcmp(nick, "Brak", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`, `IP`) VALUES ('%s', '%d', '%s', '%d', '%s')", nick, PlayerInfo[admin][pUID], admnick,WARN_UNBAN, ip);
-    else if(strcmp(ip, "nieznane", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`IP`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", ip, PlayerInfo[admin][pUID], admnick,WARN_UNBAN);
+	if(strcmp(nick, "Brak", false) != 0) 
+	{
+		format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`, `IP`) VALUES ('%s', '%d', '%s', '%d', '%s')", nick, PlayerInfo[admin][pUID], admnick,WARN_UNBAN, ip);
+	}
+    else 
+	{
+		format(query, sizeof(query), "INSERT INTO `mru_bany` (`IP`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", ip, PlayerInfo[admin][pUID], admnick,WARN_UNBAN);
+	}
     if(strlen(query) < 30) return 0;
 	mysql_tquery(mruMySQL_Connection, query);
 	return 1;
@@ -603,8 +609,7 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
 MruMySQL_Unblock(nick[]="Brak", admin)
 {
 	new query[256];
-    mysql_escape_string(nick, query);
-    format(nick, 32, "%s", query);
+    mysql_escape_string(nick, nick);
 
     new admnick[32];
     GetPlayerName(admin, admnick, 32);
