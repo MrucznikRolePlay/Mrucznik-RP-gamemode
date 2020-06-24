@@ -105,7 +105,7 @@ Events_CreateActor(playerid, event_id, float:x, float:y, float:z, float:rotation
 	new id = Events_GetFreeActorID();
 	if(id != -1)
 	{
-		EVENTS_Actors[id][actor_id] = CreateActor(269, x,y,z,rotation);
+		EVENTS_Actors[id][actor_id] = CreateDynamicActor(20628, x, y, z, rotation, 1, 100.0, vw, int, -1);
 		EVENTS_Actors[id][actor_x] = x;
 		EVENTS_Actors[id][actor_y] = y;
 		EVENTS_Actors[id][actor_z] = z;
@@ -117,8 +117,7 @@ Events_CreateActor(playerid, event_id, float:x, float:y, float:z, float:rotation
 }
 Events_DestroyActor(actor_id)
 {
-	SetActorPos(EVENTS_Actors[actor_id][actor_id], 0.0, 0.0, 0.0);
-	DestroyActor(EVENTS_Actors[actor_id][actor_id]);
+	DestroyDynamicActor(EVENTS_Actors[actor_id][actor_id]);
 	EVENTS_Actors[actor_id][actor_x] = 0.0;
 	EVENTS_Actors[actor_id[actor_vw] = 999;
 	return 1;
