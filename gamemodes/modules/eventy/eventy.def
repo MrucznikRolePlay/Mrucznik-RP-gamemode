@@ -24,4 +24,5 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 #define EVENTS_MAX_EVENTS 10
+#define EVENTS_MAX_STATICOBJECTS 30 
 //end

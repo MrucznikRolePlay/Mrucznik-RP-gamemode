@@ -31,10 +31,21 @@ enum evActors
     actor_int,
     actor_id
 };
+
+enum evStaticObjects
+{
+    Float:sobject_x,
+    Float:sobject_y,
+    Float:sobject_z,
+    sobject_vw,
+    sobject_int,
+    sobject_id
+}
 //-----------------<[ Zmienne: ]>-------------------
 new EVENTS_enabled = -1;
 new EVENTS_connect_object = 0;
 new EVENTS_Actors[EVENTS_MAX_EVENTS][evActors];
+new EVENTS_StaticObjects[EVENTS_MAX_STATICOBJECTS][evStaticObjects];
 //------------------<[ Forwardy: ]>--------------------
 
 //end

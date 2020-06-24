@@ -77,6 +77,7 @@ Events_LoadStaticEvent(playerid, event_id)
 		GetPlayerPos(playerid, x, y, z);
 		if(Events_LoadStaticEventObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Za³adowano obiekty.");
 		if(Events_CreateActor(playerid, event_id, x, y, z, 180.0, 0, 0) != -1) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Stworzono aktora.");
+		if(Events_CreateStaticObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Za³adowano obiekty do podnoszenia.");
 		EVENTS_enabled = event_id;
 	}
 	else return 0;
@@ -141,6 +142,7 @@ Events_UnloadStaticEvent(playerid, event_id)
 	{
 		if(Events_UnloadStaticEventObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Zniszczono obiekty.");
 		if(Events_DestroyActors()) SendClientMessage(playerid, COLOR_YELLOW, "[Event Manager] Usuniêto aktorów.");
+		if(Events_DeleteStaticObjects(event_id)) SendClientMessage(playerid, COLOR_YELLOW, "[Event MAnager] Usuniêto obiekty do podnoszenia.");
 		EVENTS_enabled = 0;
 	}
 	else return 0;
@@ -180,19 +182,71 @@ Events_LoadStaticEventObjects(event_id)
 	return 0;
 }
 //---------FUNKCJE DOTYCZ¥CE OBIEKTÓW
+Events_ObjectExist(objectid)
+{
+	if(EVENTS_StaticObjects[objectid][sobject_x] != 0.0) return 1;
+	else return 0;
+}
+Events_GetFreeObjectID()
+{
+	for(new i=0; i<EVENTS_MAX_STATICOBJECTS; i++)
+	{
+		if(Events_ObjectExist(i)) continue;
+		else return i;
+	}
+	return -1;
+}
 
 //tworzenie, modyfikowanie, usuwanie obiektu
-Events_CreatePickableObject(event_id, playerid)
+Events_AddStaticObject(modelid, float:x, float:y, float:z, vw, int)
 {
-	return 1; // ma zwracaæ id stworzonego obiektu
-}
-Events_DeletePickableObject(event_id, playerid, objectid)
-{
-	return 1;
+	new objectid = Events_GetFreeObjectID();
+	if(objectid != -1)
+	{
+		EVENTS_StaticObjects[objectid][sobject_id] = CreateDynamicObject(modelid, x, y, z, 0.0, 0.0, 0.0, vw, int);
+		EVENTS_StaticObjects[objectid][sobject_x] = x;
+		EVENTS_StaticObjects[objectid][sobject_y] = y;
+		EVENTS_StaticObjects[objectid][sobject_z] = z;
+		EVENTS_StaticObjects[objectid][sobject_vw] = vw;
+		EVENTS_StaticObjects[objectid][sobject_int] = int;
+		return 1;
+	}
+	else return 0;
 }
 
+Events_CreateStaticObjects(event_id)
+{
+	if(event_id == 1)
+	{
+		Events_AddStaticObject(3046, 100.0, 12.0, 150.0, 0, 0);
+		return 1;
+	}
+	return 0;
+}
+Events_DeleteStaticObjects(event_id)
+{
+	if(event_id == 1)
+	{
+		for(new i=0; i<EVENTS_MAX_STATICOBJECTS; i++)
+		{
+			EVENTS_StaticObjects[i][sobject_x] = 0.0;
+			EVENTS_StaticObjects[i][sobject_vw] = 999;
+			DestroyDynamicObject(EVENTS_StaticObjects[i][sobject_id]);
+		}
+	}
+	return 1;
+}
+// Events_CreatePickableObject(event_id, playerid)
+// {
+// 	return 1; // ma zwracaæ id stworzonego obiektu
+// }
+// Events_DeletePickableObject(event_id, playerid, objectid)
+// {
+// 	return 1;
+// }
+
 //powi¹zanie obiekty + gracz
-Events_Hasobject(event_id, playerid, objectid)
+Events_Hasobject(event_id, playerid)
 {
 	return 1;
 }
@@ -200,8 +254,8 @@ Events_PickupObject(event_id, playerid, objectid)
 {
 	return 1;
 }
-Events_PutdownObject(event_id, objectid)
-{
-	return 1;
-}
+// Events_PutdownObject(event_id, objectid)
+// {
+// 	return 1;
+// }
 //end
