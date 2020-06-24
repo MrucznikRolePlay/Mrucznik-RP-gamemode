@@ -33,7 +33,7 @@ command_event_manager_Impl(playerid, opcja[24], eventid, opcjaparam[24], argopcj
         }
         else if(strcmp(opcja, "enabled", true) == 0)
         {
-            if(eventid == 0) 
+            if(eventid == 0 && EVENTS_enabled <= 0) 
             {
                 EVENTS_enabled = -1;
                 SendClientMessage(playerid, COLOR_WHITE, "[Event Manager] Wy³¹czono eventy.");//wylaczenie

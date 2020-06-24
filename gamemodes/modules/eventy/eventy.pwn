@@ -125,18 +125,14 @@ Events_DestroyActor(actor_id)
 
 Events_DestroyActors()
 {
-	if(Events_GetFreeActorID() != 0)
+	for(new i=0; i<10; i++)
 	{
-		for(new i=0; i<10; i++)
-		{
-			SetActorPos(EVENTS_Actors[i][actor_id], 0.0, 0.0, 0.0);
-			DestroyActor(EVENTS_Actors[i][actor_id]);
-			EVENTS_Actors[i][actor_x] = 0.0;
-			EVENTS_Actors[i][actor_vw] = 999;
-		}
-		return 1;
+		SetActorPos(EVENTS_Actors[i][actor_id], 0.0, 0.0, 0.0);
+		DestroyActor(EVENTS_Actors[i][actor_id]);
+		EVENTS_Actors[i][actor_x] = 0.0;
+		EVENTS_Actors[i][actor_vw] = 999;
 	}
-	return 0;
+	return 1;
 }
 
 Events_UnloadStaticEvent(playerid, event_id)
