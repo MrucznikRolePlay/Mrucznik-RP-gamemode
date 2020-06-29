@@ -164,8 +164,7 @@ native gpci (playerid, serial [], len);
 #include "system\timery.pwn"
 
 //-------<[ Obiekty ]>-------
-#include "obiekty\stare_obiekty.pwn"
-#include "obiekty\nowe_obiekty.pwn"
+#include "obiekty\obiekty.pwn"
 #include "obiekty\pickupy.pwn"
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
@@ -294,7 +293,6 @@ public OnGameModeInit()
     //
     BARIERKA_Init();
 
-    Stworz_Obiekty();
 	obiekty_OnGameModeInit();
 
     ZaladujDomy();
@@ -1035,7 +1033,6 @@ public OnPlayerConnect(playerid)
     ClearChat(playerid);
 
     // Wy³¹czone na testy
-    Usun_Obiekty(playerid); //stare obiekty
     obiekty_OnPlayerConnect(playerid);//nowe obiekty
 	
 	LoadTextDraws(playerid);
