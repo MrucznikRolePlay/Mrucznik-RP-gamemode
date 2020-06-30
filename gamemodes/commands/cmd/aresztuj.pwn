@@ -41,7 +41,8 @@ YCMD:aresztuj(playerid, params[], help)
    	        if(PlayerToPoint(10.0, playerid, 222.6395,114.3951,999.0156) //old komi
 			|| IsPlayerInRangeOfPoint(playerid, 10.0, 268.3546, 83.0229, 1001.0391)//dillimore
 			|| PlayerToPoint(10.0, playerid, -2614.1667,2264.6279,8.2109 ) //bayside
-			|| PlayerToPoint(5, playerid, -1681.1091,917.8300,-52.4141)//nowe komi by dywan
+			|| PlayerToPoint(5, playerid, 1560.0333,-1638.6797,28.4881)//nowe komi 1
+			|| PlayerToPoint(5, playerid, 1559.8517,-1646.9373,28.4881)//nowe komi 2
 			|| PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z)) // stanowe
 			{
 
