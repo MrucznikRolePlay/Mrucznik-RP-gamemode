@@ -106,7 +106,7 @@ Events_CreateActor(playerid, event_id, float:x, float:y, float:z, float:rotation
 	new id = Events_GetFreeActorID();
 	if(id != -1)
 	{
-		EVENTS_Actors[id][actor_id] = CreateDynamicActor(20628, x, y, z, rotation, 1, 100.0, vw, int, -1);
+		EVENTS_Actors[id][actor_eid] = CreateDynamicActor(20628, x, y, z, rotation, 1, 100.0, vw, int, -1);
 		EVENTS_Actors[id][actor_x] = x;
 		EVENTS_Actors[id][actor_y] = y;
 		EVENTS_Actors[id][actor_z] = z;
@@ -128,8 +128,8 @@ Events_DestroyActors()
 {
 	for(new i=0; i<10; i++)
 	{
-		SetActorPos(EVENTS_Actors[i][actor_id], 0.0, 0.0, 0.0);
-		DestroyActor(EVENTS_Actors[i][actor_id]);
+		SetActorPos(EVENTS_Actors[i][actor_eid], 0.0, 0.0, 0.0);
+		DestroyActor(EVENTS_Actors[i][actor_eid]);
 		EVENTS_Actors[i][actor_x] = 0.0;
 		EVENTS_Actors[i][actor_vw] = 999;
 	}

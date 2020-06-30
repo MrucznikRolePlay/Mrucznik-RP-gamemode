@@ -78,7 +78,7 @@ YCMD:wejdz(playerid, params[], help)
 		{
             ShowPlayerDialogEx(playerid, D_WINDA_LSFD, DIALOG_STYLE_LIST, "Winda", "Gara¿\nPierwsze piêtro\nDrugie piêtro\nDach", "Wybierz", "WyjdŸ");
 		}
-        else if((IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 0)//parking Dolny LSPD 1568.7660,-1691.4886,5.8906
+        else if((IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 2)//parking Dolny LSPD 1568.7660,-1691.4886,5.8906
             || (IsPlayerInRangeOfPoint(playerid,3,1585.8722,-1685.5045,62.2363) && GetPlayerVirtualWorld(playerid) == 25)//z glownego wejscia
             || (IsPlayerInRangeOfPoint(playerid,2.5,1585.8090,-1685.1177,65.8762) && GetPlayerVirtualWorld(playerid) == 25)//biuro komendanta
             || (IsPlayerInRangeOfPoint(playerid,4,1551.5720,-1701.7196,28.4807) && GetPlayerVirtualWorld(playerid) == 26)//biura LSPD

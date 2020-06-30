@@ -830,21 +830,6 @@ new DrzwiPDKomi3S = 1;
 new DrzwiPDKomi4;
 new DrzwiPDKomi4S = 1;
 //nowy komisariat
-new bramalspd1;
-new bramalspd2;
-new bramalspd3;
-new bramalspd4;
-new bramalspd5;
-new bramalspd6;
-new bramalspd7;
-new bramalspd8;
-new bramalspd9;
-new bramalspd10;
-new bramalspd11;
-new bramalspd12;
-new bramalspd13;
-new celalspd1;
-new celalspd2;
 new stolek[34];
 new kosmove;//zmienne bram konfesjona³ów
 new kos2move;//zmienne bram konfesjona³ów

@@ -29,7 +29,7 @@ enum evActors
     Float:actor_z,
     actor_vw,
     actor_int,
-    actor_id
+    actor_eid
 };
 
 enum evStaticObjects
