@@ -820,8 +820,6 @@ new Wodliczanie;
 new Float:MatsPoint[3] = {2138.2078,-2290.4888,20.6646};
 
 //koniec wozy Ballas
-new lspdWjazdDolny;
-new lspdWjazdDolnyState = 0; // 0 close 1 open
 //stary komisariat (old komi)
 new DrzwiPDKomi;
 new DrzwiPDKomi2;
@@ -845,21 +843,6 @@ new bramalspd10;
 new bramalspd11;
 new bramalspd12;
 new bramalspd13;
-new lspdmove1 = 0;
-new lspdmove2 = 0;
-new lspdmove3 = 0;
-new lspdmove4 = 0;
-new lspdmove5 = 0;
-new lspdmove6 = 0;
-new lspdmove7 = 0;
-new lspdmove8 = 0;
-new lspdmove9 = 0;
-new lspdmove10 = 0;
-new lspdmove11 = 0;
-new lspdmove12 = 0;
-new lspdmove13 = 0;
-new lspdmove14 = 0;
-new lspdmove15 = 0;
 new celalspd1;
 new celalspd2;
 new stolek[34];
