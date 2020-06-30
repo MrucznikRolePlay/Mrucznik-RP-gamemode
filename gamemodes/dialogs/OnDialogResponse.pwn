@@ -2535,7 +2535,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
                         }
-						//dodaæ dla prawników z licencjami teleportacje od razu do wiêzienia
+						else if(ApprovedLawyer[playerid] == 1)
+						{
+							SetPlayerPos(playerid,1556.7177,-1643.0455,28.4881);
+			                SetPlayerVirtualWorld(playerid,29);
+			                SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
 						else
 						{
 							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");

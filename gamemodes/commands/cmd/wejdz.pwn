@@ -90,12 +90,6 @@ YCMD:wejdz(playerid, params[], help)
         {
             ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -2]Wiêzienie\n[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Recepcja\n[Poziom 2]Biuro komendanta\n[Poziom 3]Biura\n[Poziom 4]Konferencyjne\n[Poziom 5]Sale przes³uchañ\n[Poziom 6]Dach","Jedz","");
         }
-        else if((IsPlayerInRangeOfPoint(playerid,4,1543.3915,-1643.2813,28.4881) || IsPlayerInRangeOfPoint(playerid,4,1555.1351,-1643.0166,28.4881)) && GetPlayerVirtualWorld(playerid) == 29 && !IsAPolicja(playerid) && PlayerInfo[playerid][pJailed] == 0) //miejsce do /wyjdz dla osób które nie s¹ wiêŸniami
-        {
-            Wchodzenie(playerid);
-            SetPlayerVirtualWorld(playerid, 25);
-            SetPlayerPos(playerid,1585.8722,-1685.5045,62.2363);
-        }
 		else if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
             || IsPlayerInRangeOfPoint(playerid, 3, 287.7476,-1609.9395,33.0723)//PARTER
             || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
