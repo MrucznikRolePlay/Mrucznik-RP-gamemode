@@ -78,17 +78,24 @@ YCMD:wejdz(playerid, params[], help)
 		{
             ShowPlayerDialogEx(playerid, D_WINDA_LSFD, DIALOG_STYLE_LIST, "Winda", "Gara¿\nPierwsze piêtro\nDrugie piêtro\nDach", "Wybierz", "WyjdŸ");
 		}
-        // else if((IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsAPolicja(playerid))//parking Dolny LSPD 1568.7660,-1691.4886,5.8906
-        //     || IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
-        //     || IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan
-        //     || IsPlayerInRangeOfPoint(playerid,4,-1745.1101, 824.0737, -48.0110)//biura LSPD
-        //     || IsPlayerInRangeOfPoint(playerid,4,-1695.1617, 1046.9861, -65.4119)//stolowka
-        //     || IsPlayerInRangeOfPoint(playerid,4,1568.1061, 2205.3196, -50.9522)//treningowe miejsca
-        //     || (IsPlayerInRangeOfPoint(playerid,4,1565.0798, -1665.6580, 28.4782) && IsAPolicja(playerid))//dach lspd
-        //     || (IsPlayerInRangeOfPoint(playerid,4,1570.9799,-1636.7758,13.5713) && IsAPolicja(playerid)))//gorny LSPD
-        // {
-        //     ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
-        // }
+        else if((IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 0)//parking Dolny LSPD 1568.7660,-1691.4886,5.8906
+            || (IsPlayerInRangeOfPoint(playerid,3,1585.8722,-1685.5045,62.2363) && GetPlayerVirtualWorld(playerid) == 25)//z glownego wejscia
+            || (IsPlayerInRangeOfPoint(playerid,2.5,1585.8090,-1685.1177,65.8762) && GetPlayerVirtualWorld(playerid) == 25)//biuro komendanta
+            || (IsPlayerInRangeOfPoint(playerid,4,1551.5720,-1701.7196,28.4807) && GetPlayerVirtualWorld(playerid) == 26)//biura LSPD
+            || (IsPlayerInRangeOfPoint(playerid,4,1562.7128,-1639.0281,28.5040) && GetPlayerVirtualWorld(playerid) == 27)//konferencyjna
+            || (IsPlayerInRangeOfPoint(playerid,4,1564.9027,-1665.8291,28.4815) && GetPlayerVirtualWorld(playerid) == 28)//Sala przes³uchañ
+            || (IsPlayerInRangeOfPoint(playerid,4,1543.3915,-1643.2813,28.4881) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 29)//wiêzienie
+            || (IsPlayerInRangeOfPoint(playerid,4,1565.0798, -1665.6580, 28.4782) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 0)//dach lspd
+            || (IsPlayerInRangeOfPoint(playerid,4,1570.9799,-1636.7758,13.5713) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 0))//gorny LSPD
+        {
+            ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -2]Wiêzienie\n[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Recepcja\n[Poziom 2]Biuro komendanta\n[Poziom 3]Biura\n[Poziom 4]Konferencyjne\n[Poziom 5]Sale przes³uchañ\n[Poziom 6]Dach","Jedz","");
+        }
+        else if((IsPlayerInRangeOfPoint(playerid,4,1543.3915,-1643.2813,28.4881) || IsPlayerInRangeOfPoint(playerid,4,1555.1351,-1643.0166,28.4881)) && GetPlayerVirtualWorld(playerid) == 29 && !IsAPolicja(playerid) && PlayerInfo[playerid][pJailed] == 0) //miejsce do /wyjdz dla osób które nie s¹ wiêŸniami
+        {
+            Wchodzenie(playerid);
+            SetPlayerVirtualWorld(playerid, 25);
+            SetPlayerPos(playerid,1585.8722,-1685.5045,62.2363);
+        }
 		else if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
             || IsPlayerInRangeOfPoint(playerid, 3, 287.7476,-1609.9395,33.0723)//PARTER
             || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda

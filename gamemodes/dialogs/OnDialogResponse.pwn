@@ -2524,7 +2524,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-		            case 0:
+					case 0:
+		            {
+		            	if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+			                SetPlayerPos(playerid,1543.3915,-1643.2813,28.4881);
+			                SetPlayerVirtualWorld(playerid,29);
+			                SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+                        }
+						//dodaæ dla prawników z licencjami teleportacje od razu do wiêzienia
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
+		            }
+		            case 1:
 		            {
 		            	if(IsAPolicja(playerid) || IsABOR(playerid))
            				{
@@ -2542,7 +2560,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 		            }
-		            case 1: {
+		            case 2: {
 		            	// parking gorny
 		            	if(IsAPolicja(playerid) || IsABOR(playerid))
            				{
@@ -2560,50 +2578,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 		            }
-		            case 2:
-		            {
-		                SetPlayerPos(playerid,-1645.1858, 883.1620, -45.4112);
-		                SetPlayerVirtualWorld(playerid,1);
-		                TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-		                GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Komisariat", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
-		            }
 		            case 3:
 		            {
-		                SetPlayerPos(playerid,-1621.7272, 834.5807, -26.1115);
-		                SetPlayerVirtualWorld(playerid,1);
+		                SetPlayerPos(playerid,1585.8722,-1685.5045,62.2363);
+		                SetPlayerVirtualWorld(playerid,25);
 		                TogglePlayerControllable(playerid,0);
+						SetPlayerInterior(playerid,0);
 						Wchodzenie(playerid);
-                 		GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Pokoje przesluchan", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
+		                GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Recepcja i glowny hol", 5000, 1);
+						PlayerInfo[playerid][pInt] = 0;
 		            }
 		            case 4:
 		            {
-		                SetPlayerPos(playerid,-1745.1101, 824.0737, -48.0110);
-		                SetPlayerVirtualWorld(playerid,1);
+		                SetPlayerPos(playerid,1585.8090,-1685.1177,65.8762);
+		                SetPlayerVirtualWorld(playerid,25);
 		                TogglePlayerControllable(playerid,0);
+						SetPlayerInterior(playerid,0);
 						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
+                 		GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Biuro komendanta", 5000, 1);
+						PlayerInfo[playerid][pInt] = 0;
 		            }
 		            case 5:
 		            {
-		                SetPlayerPos(playerid,1568.1061, 2205.3196, -50.9522);
-		                SetPlayerVirtualWorld(playerid,3);
+		                SetPlayerPos(playerid,1551.5720,-1701.7196,28.4807);
+		                SetPlayerVirtualWorld(playerid,26);
 		                TogglePlayerControllable(playerid,0);
+						SetPlayerInterior(playerid,0);
 						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale treningowe", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
+	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
+						PlayerInfo[playerid][pInt] = 0;
 		            }
 		            case 6:
+		            {
+		                SetPlayerPos(playerid,1562.7128,-1639.0281,28.5040);
+		                SetPlayerVirtualWorld(playerid,27);
+		                TogglePlayerControllable(playerid,0);
+						SetPlayerInterior(playerid,0);
+						Wchodzenie(playerid);
+	                	GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Konferencyjne", 5000, 1);
+						PlayerInfo[playerid][pInt] = 0;
+		            }
+					case 7:
+		            {
+		                SetPlayerPos(playerid,1564.9027,-1665.8291,28.4815);
+		                SetPlayerVirtualWorld(playerid,28);
+		                TogglePlayerControllable(playerid,0);
+						SetPlayerInterior(playerid,0);
+						Wchodzenie(playerid);
+	                	GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale przesluchan", 5000, 1);
+						PlayerInfo[playerid][pInt] = 0;
+		            }
+		            case 8:
 		            {
 						if(IsAPolicja(playerid) || IsABOR(playerid))
 						{
 							SetPlayerPos(playerid,1565.0798, -1665.6580, 28.4782);
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerInterior(playerid,0);
-							GameTextForPlayer(playerid, "~w~ [Poziom 5]~n~~b~Dach", 5000, 1);
+							GameTextForPlayer(playerid, "~w~ [Poziom 7]~n~~b~Dach", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
