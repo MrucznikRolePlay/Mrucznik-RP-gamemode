@@ -102,7 +102,7 @@ YCMD:aresztuj(playerid, params[], help)
 									RemovePlayerAttachedObject(playa, 0);
 									Kajdanki_PDkuje[playa] = 0;
 									Wchodzenie(playa);
-									SetPlayerVirtualWorld(playa, 1);
+									SetPlayerVirtualWorld(playa, 29);
 								    new losuj= random(sizeof(Cela));
 									SetPlayerPos(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 									TogglePlayerControllable(playa, 0);
