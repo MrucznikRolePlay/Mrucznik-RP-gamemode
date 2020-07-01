@@ -330,7 +330,7 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	}
 	else if(Check_ID == 21) //bar HA
 	{
-		GameTextForPlayer(playerid, "~w~Bar by ~p~~h~~h~Just Miko & ~l~skBarman", 5000, 1);
+		GameTextForPlayer(playerid, "~w~Bar by ~p~~h~Just Miko & skBarman", 5000, 1);
 		return 1;
 	}
 	return 0; 
