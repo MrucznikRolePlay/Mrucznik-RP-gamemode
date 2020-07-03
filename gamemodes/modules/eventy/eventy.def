@@ -25,4 +25,10 @@
 //------------------<[ Define: ]>-------------------
 #define EVENTS_MAX_EVENTS 10
 #define EVENTS_MAX_STATICOBJECTS 30 
+#define EVENT_GETBOX_X 0.00
+#define EVENT_GETBOX_Y 0.00
+#define EVENT_GETBOX_Z 15.00
+#define EVENT_GIVEBOX_X 2137.6311
+#define EVENT_GIVEBOX_Y -2300.5354
+#define EVENT_GIVEBOX_Z 14.6987
 //end

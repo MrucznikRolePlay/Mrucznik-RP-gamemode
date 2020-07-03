@@ -39,6 +39,11 @@ command_zjedz_Impl(playerid)
         sendErrorMessage(playerid, "Jesteœ tak najedzony, ¿e nie zmieœcisz ju¿ wiêcej (masz pe³ne hp).");
         return 1;
     }
+    if(GetPVarInt(playerid, "EatingBlock") == 1)
+    {
+        sendErrorMessage(playerid, "Musisz poczekaæ 6 sekund zanim ponownie coœ zjesz.");
+        return 1;
+    }
     MruMySQL_CookedMealsDialog(playerid);
     return 1;
 }
