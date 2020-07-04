@@ -73,9 +73,9 @@ YCMD:sluzba(playerid, params[], help)
             || PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609) //STARE DUTY
             || PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
             || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
-            || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
             || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
-			|| PlayerToPoint(3, playerid, 2522.8916,-2441.6270,13.6435))//nowe komi by dywan
+			|| PlayerToPoint(3, playerid, 2522.8916,-2441.6270,13.6435)
+            || (PlayerToPoint(4,playerid, 1562.0536,-1649.9120,28.5040) && GetPlayerVirtualWorld(playerid) == 27))//nowe komi by charlie)//nowe komi by dywan
 
             {
                 if(OnDuty[playerid]==0)
