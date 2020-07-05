@@ -31,7 +31,7 @@
 YCMD:autoranny(playerid, params[], help)
 {
 	new string[128];
-	ApplyAnimation(playerid,"PED","CAR_dead_LHS",4.1,0,1,1,1,1);
+	ApplyPlayerAnimation(playerid,"PED","CAR_dead_LHS",4.1,0,1,1,1,1);
 	format(string, sizeof(string), "*%s omdla³ za kierownic¹.", GetNick(playerid));
 	ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	return 1;

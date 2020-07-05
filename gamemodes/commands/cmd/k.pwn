@@ -57,8 +57,8 @@ YCMD:k(playerid, params[], help)
     }
     if(!IsPlayerInAnyVehicle(playerid))
     {
-        ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
-        ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+        ApplyPlayerAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
+        ApplyPlayerAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0);
     }
     return 1;
 }

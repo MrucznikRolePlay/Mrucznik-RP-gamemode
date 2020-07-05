@@ -61,8 +61,8 @@ YCMD:witaj(playerid, params[], help)
 					dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
 					dialAccess[playerid] = 1; 
 					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
-					ApplyAnimation(playerid, "DEALER", "DEALER_DEAL", 4.0, 0, 0, 0, 0, 0);
-					ApplyAnimation(playa, "DEALER", "DEALER_DEAL", 4.0, 0, 0, 0, 0, 0);
+					ApplyPlayerAnimation(playerid, "DEALER", "DEALER_DEAL", 4.0, 0, 0, 0, 0, 0);
+					ApplyPlayerAnimation(playa, "DEALER", "DEALER_DEAL", 4.0, 0, 0, 0, 0, 0);
 				}
 			}
 		}

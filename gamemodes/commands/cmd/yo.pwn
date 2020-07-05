@@ -61,8 +61,8 @@ YCMD:yo(playerid, params[], help)
 					dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
 					dialAccess[playerid] = 1; 
 					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê jak prawdziwy czarnuch.");
-					ApplyAnimation(playerid,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
-					ApplyAnimation(playa,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
+					ApplyPlayerAnimation(playerid,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
+					ApplyPlayerAnimation(playa,"GANGS","hndshkaa",4.1,0,1,1,1,1);//6
 				}
 			}
 		}

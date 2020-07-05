@@ -61,8 +61,8 @@ YCMD:elo2(playerid, params[], help)
 					dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
 					dialAccess[playerid] = 1; 
 					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
-					ApplyAnimation(playerid,"GANGS","hndshkca",4.1,0,1,1,1,1);//9
-					ApplyAnimation(playa,"GANGS","hndshkca",4.1,0,1,1,1,1);//9
+					ApplyPlayerAnimation(playerid,"GANGS","hndshkca",4.1,0,1,1,1,1);//9
+					ApplyPlayerAnimation(playa,"GANGS","hndshkca",4.1,0,1,1,1,1);//9
 				}
 			}
 		}
