@@ -1158,6 +1158,7 @@ public OnPlayerConnect(playerid)
 	
 	//biz
 	ResetBizOffer(playerid);
+	PreloadAnimLibs(playerid);
 	//system barierek by Kubi
 	gHeaderTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
     gBackgroundTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
