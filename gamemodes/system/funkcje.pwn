@@ -274,8 +274,8 @@ UnJailDeMorgan(playerid)
 
 stock ApplyPlayerAnimation(playerid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync = 0)
 {
-    ApplyPlayerAnimation(playerid, animlib, "null", fDelta, loop, lockx, locky, freeze, time, forcesync); // Pre-load animation library
-    return ApplyPlayerAnimation(playerid, animlib, animname, fDelta, loop, lockx, locky, freeze, time, forcesync);
+    ApplyAnimation(playerid, animlib, "null", fDelta, loop, lockx, locky, freeze, time, forcesync); // Pre-load animation library
+    return ApplyAnimation(playerid, animlib, animname, fDelta, loop, lockx, locky, freeze, time, forcesync);
 }
 
 DialogListaFrakcji()
