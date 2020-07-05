@@ -91,19 +91,19 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 0 || var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid, "RAPPING", "RAP_A_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "RAPPING", "RAP_A_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid, "RAPPING", "RAP_B_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "RAPPING", "RAP_B_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid, "RAPPING", "RAP_C_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "RAPPING", "RAP_C_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid, "GYMNASIUM", "gym_tread_celebrate", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "GYMNASIUM", "gym_tread_celebrate", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		if(var0 >= 0 && var0 <= 4)
 		{
@@ -117,13 +117,13 @@ MRP_DoAnimation(playerid, arg1[])
 	}
 	else if(strcmp(arg1, "@waledochodze", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PAULNMAC", "wank_out", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PAULNMAC", "wank_out", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@walekonia", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PAULNMAC", "wank_loop", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PAULNMAC", "wank_loop", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
@@ -133,31 +133,31 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 0 || var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid, "STRIP", "strip_A", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "STRIP", "strip_A", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid, "STRIP", "strip_B", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "STRIP", "strip_B", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid, "STRIP", "strip_C", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "STRIP", "strip_C", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid, "STRIP", "strip_D", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "STRIP", "strip_D", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 5)
 		{
-			ApplyPlayerAnimation(playerid, "STRIP", "strip_E", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "STRIP", "strip_E", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 6)
 		{
-			ApplyPlayerAnimation(playerid, "STRIP", "strip_F", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "STRIP", "strip_F", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 7)
 		{
-			ApplyPlayerAnimation(playerid, "STRIP", "strip_G", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "STRIP", "strip_G", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		if(var0 >= 0 && var0 <= 7)
 		{
@@ -175,51 +175,51 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 0 || var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKING_IDLEW", 4.0999, 0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKING_IDLEW", 4.0999, 0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKING_IDLEP", 4.0999, 0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKING_IDLEP", 4.0999, 0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKINGW", 4.0999, 1, 1, 1, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKINGW", 4.0999, 1, 1, 1, 1, 0, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKINGP", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKINGP", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 5)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKEDW", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKEDW", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 6)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKEDP", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKEDP", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 7)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKING_ApplyPlayerAnimationW", 4.0999, 0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKING_ENDW", 4.0999, 0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 8)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKING_ApplyPlayerAnimationP", 4.0999, 0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKING_ENDP", 4.0999, 0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 9)
 		{
-			ApplyPlayerAnimation(playerid, "SNM", "SPANKING_IDLEP", 4.0999, 0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "SNM", "SPANKING_IDLEP", 4.0999, 0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 10)
 		{
-			ApplyPlayerAnimation(playerid, "BLOWJOBZ", "BJ_COUCH_START_P", 4.0999, 0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "BLOWJOBZ", "BJ_COUCH_START_P", 4.0999, 0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 11)
 		{
-			ApplyPlayerAnimation(playerid, "BLOWJOBZ", "BJ_COUCH_LOOP_P", 4.0999, 0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "BLOWJOBZ", "BJ_COUCH_LOOP_P", 4.0999, 0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 12)
 		{
-			ApplyPlayerAnimation(playerid, "BLOWJOBZ", "BJ_COUCH_LOOP_W", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "BLOWJOBZ", "BJ_COUCH_LOOP_W", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		if(var0 >= 0 && var0 <= 12)
 		{
@@ -237,23 +237,23 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 0 || var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid, "PED", "WALK_gang1", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "PED", "WALK_gang1", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid, "PED", "WALK_gang2", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "PED", "WALK_gang2", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid, "ped", "WALK_player", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "ped", "WALK_player", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid, "ped", "WOMAN_walksexy", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "ped", "WOMAN_walksexy", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 5)
 		{
-			ApplyPlayerAnimation(playerid, "PED", "WALK_old", 4.0999, 1, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "PED", "WALK_old", 4.0999, 1, 0, 0, 1, 0, 1);
 		}
 		if(var0 >= 0 && var0 <= 5)
 		{
@@ -271,31 +271,31 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 0 || var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid, "CARRY", "crry_prtial", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CARRY", "crry_prtial", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid, "CARRY", "liftup", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CARRY", "liftup", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid, "CARRY", "liftup05", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CARRY", "liftup05", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid, "CARRY", "liftup105", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CARRY", "liftup105", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 5)
 		{
-			ApplyPlayerAnimation(playerid, "CARRY", "putdwn", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CARRY", "putdwn", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 6)
 		{
-			ApplyPlayerAnimation(playerid, "CARRY", "putdwn05", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CARRY", "putdwn05", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 7)
 		{
-			ApplyPlayerAnimation(playerid, "CARRY", "putdwn105", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CARRY", "putdwn105", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		if(var0 >= 0 && var0 <= 7)
 		{
@@ -321,7 +321,7 @@ MRP_DoAnimation(playerid, arg1[])
 	}
 	else if(strcmp(arg1, "@opieraj", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "leanIDLE", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "leanIDLE", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
@@ -333,771 +333,772 @@ MRP_DoAnimation(playerid, arg1[])
 	}
 	else if(strcmp(arg1, "@wolaj", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "WUZI", "Wuzi_follow", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "WUZI", "Wuzi_follow", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@greet", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "WUZI", "Wuzi_Greet_Wuzi", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "WUZI", "Wuzi_Greet_Wuzi", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stoj", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "WUZI", "Wuzi_stand_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "WUZI", "Wuzi_stand_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@ranny3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SWAT", "gnstwall_injurd", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SWAT", "gnstwall_injurd", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@hitch", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "MISC", "Hiker_Pose", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "MISC", "Hiker_Pose", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@rece2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"POLICE","crm_drgbst_01",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"POLICE","crm_drgbst_01",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@klepnij3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "MISC", "bitchslap", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "MISC", "bitchslap", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@medyk", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "MEDIC", "CPR", 4.0999, 0, 1, 1, 0, 0, 1);
+		ApplyAnimation(playerid, "MEDIC", "CPR", 4.0999, 0, 1, 1, 0, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack6", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign1", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign1", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack7", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign2", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign2", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack8", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign3", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign3", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack9", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign4", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign4", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack10", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign5", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign5", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@daj2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "KISSING", "gift_give", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "KISSING", "gift_give", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@krzeslo", true) == 0 || strcmp(arg1, "@krzeslo1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PED", "SEAT_idle", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PED", "SEAT_idle", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@ranny", true) == 0 || strcmp(arg1, "@ranny1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"CRACK","crckidle1",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"CRACK","crckidle1",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@ranny2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@ranny3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"CRACK","crckidle2",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"CRACK","crckidle2",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 
 	else if(strcmp(arg1, "@klepnij2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SWEET", "ho_ass_slapped", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SWEET", "ho_ass_slapped", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@klepnij", true) == 0 || strcmp(arg1, "@klepnij1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SWEET", "sweet_ass_slap", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SWEET", "sweet_ass_slap", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@pij", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PED", "WALK_DRUNK", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PED", "WALK_DRUNK", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@krzeslo3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "FOOD", "FF_Sit_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "FOOD", "FF_Sit_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@kozak", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "benchpress", "gym_bp_celebrate", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "benchpress", "gym_bp_celebrate", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@wygralem", true) == 0 || strcmp(arg1, "@wygralem1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "CASINO", "manwinb", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CASINO", "manwinb", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@wygralem2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "CASINO", "Slot_win_out", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CASINO", "Slot_win_out", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@diler2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "DEALER", "DRUGS_BUY", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "DEALER", "DRUGS_BUY", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@dzieki", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "FOOD", "SHP_Thank", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "FOOD", "SHP_Thank", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@tak", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "Invite_Yes", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "Invite_Yes", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@nie", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "Invite_No", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "Invite_No", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@komputer", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "INT_OFFICE", "OFF_Sit_Type_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "INT_OFFICE", "OFF_Sit_Type_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@drap", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "MISC", "Scratchballs_01", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "MISC", "Scratchballs_01", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@bomba", arg1, true) == 0)
 	{
 		ClearAnimations(playerid, 1);
-		ApplyPlayerAnimation(playerid, "BOMBER", "BOM_Plant", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BOMBER", "BOM_Plant", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@celuj", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"POLICE","COP_getoutcar_LHS",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"POLICE","COP_getoutcar_LHS",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@smiech", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "RAPPING", "Laugh_01", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "RAPPING", "Laugh_01", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@maska", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SHOP", "ROB_Shifty", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SHOP", "ROB_Shifty", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@napad", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SHOP", "ROB_Loop_Threat", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SHOP", "ROB_Loop_Threat", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@ramiona", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"COP_AMBIENT","Coplook_loop",4.0999,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"COP_AMBIENT","Coplook_loop",4.0999,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@diler3", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "DEALER", "DEALER_IDLE", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "DEALER", "DEALER_IDLE", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@pa", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PED", "ApplyPlayerAnimationchat_03", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "PED", "endchat_03", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@diler4", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "DEALER", "DEALER_IDLE_01", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "DEALER", "DEALER_IDLE_01", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@lez", arg1, true) == 0 || strcmp(arg1, "@lez1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BEACH", "bather", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@wymiotuj", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@zarcie", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "FOOD", "EAT_Burger", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@machaj", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "ON_LOOKERS", "wave_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "ON_LOOKERS", "wave_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@diler", arg1, true) == 0 || strcmp(arg1, "@diler1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "DEALER", "DEALER_DEAL", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "DEALER", "DEALER_DEAL", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@crack", arg1, true) == 0 || strcmp(arg1, "@cpun1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "CRACK", "crckdeth2", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@crack2", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"CRACK","crckdeth1",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"CRACK","crckdeth1",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@crack3", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"CRACK","crckdeth3",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"CRACK","crckdeth3",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@crack4", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"CRACK","crckdeth4",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"CRACK","crckdeth4",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@crack5", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"CRACK","crckidle3",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"CRACK","crckidle3",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("spray", arg1, true) == 0 || strcmp("spray1", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"SPRAYCAN","spraycan_fire",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"SPRAYCAN","spraycan_fire",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("spray2", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"SPRAYCAN","spraycan_full",4.1,0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"SPRAYCAN","spraycan_full",4.1,0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@papieros", arg1, true) == 0 || strcmp(arg1, "@papieros1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SMOKING", "M_smklean_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SMOKING", "M_smklean_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@papieros2", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SMOKING", "F_smklean_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SMOKING", "F_smklean_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@siad", arg1, true) == 0 || strcmp(arg1, "@siad1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BEACH", "ParkSit_M_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BEACH", "ParkSit_M_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@siad2", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BEACH", "ParkSit_W_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BEACH", "ParkSit_W_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@rolki", arg1, true) == 0)
 	{
-		/*ApplyPlayerAnimation(playerid, "SKATE", "skate_sprint", 4.0999, 1, 0, 0, 1, 0, 1);
+		/*ApplyAnimation(playerid, "SKATE", "skate_sprint", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);*/
+		SendClientMessage(playerid, -1, "Ta animacja zosta³a wy³¹czona na czas tworzenia systemu przedmiotów!");
 		return 1;
 	}
 	else if(strcmp("@siad4", arg1, true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "JST_BUISNESS", "girl_02", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "JST_BUISNESS", "girl_02", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack11", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PED", "IDLE_CHAT", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PED", "IDLE_CHAT", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@fuck", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PED", "fucku", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PED", "fucku", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@kungfu", true) == 0 || strcmp(arg1, "@taichi", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PARK", "Tai_Chi_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PARK", "Tai_Chi_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@krzeslo2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BAR", "dnk_stndF_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BAR", "dnk_stndF_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@lez3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BEACH", "Lay_Bac_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BEACH", "Lay_Bac_Loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@baseball", true) == 0 || strcmp(arg1, "@baseball1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BASEBALL", "Bat_IDLE", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BASEBALL", "Bat_IDLE", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@baseball2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BASEBALL", "Bat_M", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BASEBALL", "Bat_M", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@baseball3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BASEBALL", "BAT_PART", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BASEBALL", "BAT_PART", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@baseball4", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "CRACK", "Bbalbat_Idle_01", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CRACK", "Bbalbat_Idle_01", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@baseball5", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "CRACK", "Bbalbat_Idle_02", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CRACK", "Bbalbat_Idle_02", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@czas", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "COP_AMBIENT", "Coplook_nod", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "COP_AMBIENT", "Coplook_nod", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@yo", true) == 0 || strcmp(arg1, "@yo1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "hndshkaa", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "hndshkaa", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@yo2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "hndshkba", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "hndshkba", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@yo3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "hndshkca", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "hndshkca", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@yo4", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "hndshkcb", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "hndshkcb", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@yo5", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "hndshkda", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "hndshkda", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@yo6", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "hndshkea", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "hndshkea", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@yo7", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "hndshkfa", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GANGS", "hndshkfa", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@placz", true) == 0 || strcmp(arg1, "@placz1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GRAVEYARD", "mrnF_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GRAVEYARD", "mrnF_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@placz2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GRAVEYARD", "mrnM_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GRAVEYARD", "mrnM_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@placz3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid,"CASINO","cards_in",4.1, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid,"CASINO","cards_in",4.1, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
  	}
 	else if(strcmp(arg1, "@spij", true) == 0 || strcmp(arg1, "@spij1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "INT_HOUSE", "BED_In_L", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "INT_HOUSE", "BED_In_L", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@spij2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "INT_HOUSE", "BED_In_R", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "INT_HOUSE", "BED_In_R", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@spij3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "INT_HOUSE", "BED_Loop_L", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "INT_HOUSE", "BED_Loop_L", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@spij4", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "INT_HOUSE", "BED_Loop_R", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "INT_HOUSE", "BED_Loop_R", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@caluj2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BD_FIRE", "Grlfrd_Kiss_03", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BD_FIRE", "Grlfrd_Kiss_03", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@caluj3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "KISSING", "Grlfrd_Kiss_01", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "KISSING", "Grlfrd_Kiss_01", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@caluj4", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "KISSING", "Grlfrd_Kiss_02", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "KISSING", "Grlfrd_Kiss_02", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@caluj5", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "KISSING", "Grlfrd_Kiss_03", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "KISSING", "Grlfrd_Kiss_03", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@caluj6", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "KISSING", "Playa_Kiss_01", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "KISSING", "Playa_Kiss_01", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@caluj7", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@caluj8", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "KISSING", "Playa_Kiss_03", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "KISSING", "Playa_Kiss_03", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@lokiec", true) == 0 || strcmp(arg1, "@lokiec1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "CAR", "Tap_hand", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CAR", "Tap_hand", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@lokiec2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "LOWRIDER", "Sit_relaxed", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "LOWRIDER", "Sit_relaxed", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@rozciagaj", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PLAYIDLES", "stretch", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PLAYIDLES", "stretch", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@doping", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "RIOT", "RIOT_CHANT", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "RIOT", "RIOT_CHANT", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@wtf", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "RIOT", "RIOT_ANGRY", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "RIOT", "RIOT_ANGRY", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack", true) == 0 || strcmp(arg1, "@stack1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign1LH", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign1LH", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign2LH", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign2LH", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign3LH", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign3LH", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack4", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign4LH", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign4LH", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@stack5", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GHANDS", "gsign5LH", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "GHANDS", "gsign5LH", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@zmeczony", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "FAT", "IDLE_tired", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "FAT", "IDLE_tired", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@wozszlug", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PED", "Smoke_in_car", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PED", "Smoke_in_car", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@napad", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PED", "gang_gunstand", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PED", "gang_gunstand", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@wstan", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PED", "getup", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PED", "getup", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@kosz", true) == 0 || strcmp(arg1, "@kosz1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BSKTBALL", "BBALL_def_loop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BSKTBALL", "BBALL_def_loop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@kosz2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BSKTBALL", "BBALL_idleloop", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BSKTBALL", "BBALL_idleloop", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@kosz3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BSKTBALL", "BBALL_pickup", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BSKTBALL", "BBALL_pickup", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@kosz4", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BSKTBALL", "BBALL_Jump_Shot", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BSKTBALL", "BBALL_Jump_Shot", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@kosz5", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BSKTBALL", "BBALL_Dnk", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "BSKTBALL", "BBALL_Dnk", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@kosz6", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BSKTBALL", "BBALL_run", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BSKTBALL", "BBALL_run", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@walnij", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "FIGHT_E", "FightKick", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "FIGHT_E", "FightKick", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@box", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GYMNASIUM", "gym_shadowbox", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GYMNASIUM", "gym_shadowbox", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@przeladuj", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SILENCED", "Silence_reload", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "SILENCED", "Silence_reload", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@bar1", true) == 0 || strcmp(arg1, "@bar", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BAR", "Barcustom_get", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BAR", "Barcustom_get", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@bar2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BAR", "Barcustom_order", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BAR", "Barcustom_order", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@bar3", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BAR", "Barserve_give", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BAR", "Barserve_give", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@bar4", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BAR", "Barserve_glass", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BAR", "Barserve_glass", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp("@lez2", arg1, true, 6) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BEACH", "SitnWait_loop_W", 4.0999, 1, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BEACH", "SitnWait_loop_W", 4.0999, 1, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@podnies2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "CARRY", "liftup", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CARRY", "liftup", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@odloz", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "CARRY", "putdwn", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "CARRY", "putdwn", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@joint", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GANGS", "smkcig_prtl", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "GANGS", "smkcig_prtl", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@smierc", true) == 0 || strcmp(arg1, "@smierc1", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@oh", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "MISC", "plyr_shkhead", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "MISC", "plyr_shkhead", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@smierc2", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "PARACHUTE", "FALL_skyDive_DIE", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "PARACHUTE", "FALL_skyDive_DIE", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@celujkarabin", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "SHOP", "SHP_Gun_Aim", 4.0999, 0, 1, 1, 1, 1, 1);
+		ApplyAnimation(playerid, "SHOP", "SHP_Gun_Aim", 4.0999, 0, 1, 1, 1, 1, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@podnies", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "BAR", "Barserve_bottle", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "BAR", "Barserve_bottle", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@karta", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "GRAFFITI", "graffiti_Chkout", 4.0999, 0, 0, 0, 1, 0, 1);
+		ApplyAnimation(playerid, "GRAFFITI", "graffiti_Chkout", 4.0999, 0, 0, 0, 1, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
 	else if(strcmp(arg1, "@dodge", true) == 0)
 	{
-		ApplyPlayerAnimation(playerid, "DODGE", "Crush_Jump", 4.0999, 0, 1, 1, 0, 0, 1);
+		ApplyAnimation(playerid, "DODGE", "Crush_Jump", 4.0999, 0, 1, 1, 0, 0, 1);
 		SetPVarInt(playerid, "anim_do", 1);
 		return 1;
 	}
@@ -1107,31 +1108,31 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid, "COLT45", "2guns_crouchfire", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "COLT45", "2guns_crouchfire", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid, "COLT45", "colt45_crouchfire", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "COLT45", "colt45_crouchfire", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid, "COLT45", "colt45_crouchreload", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "COLT45", "colt45_crouchreload", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid, "COLT45", "colt45_fire", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "COLT45", "colt45_fire", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 5)
 		{
-			ApplyPlayerAnimation(playerid, "COLT45", "colt45_fire_2hands", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "COLT45", "colt45_fire_2hands", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 6)
 		{
-			ApplyPlayerAnimation(playerid, "COLT45", "colt45_reload", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "COLT45", "colt45_reload", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 7)
 		{
-			ApplyPlayerAnimation(playerid, "COLT45", "sawnoff_reload", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "COLT45", "sawnoff_reload", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		if(var0 > 0 && var0 < 8)
 		{
@@ -1149,23 +1150,23 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid,"LOWRIDER","lrgirl_idleloop",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"LOWRIDER","lrgirl_idleloop",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid,"LOWRIDER","lrgirl_idle_to_l0",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"LOWRIDER","lrgirl_idle_to_l0",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid,"LOWRIDER","lrgirl_l1_bnce",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"LOWRIDER","lrgirl_l1_bnce",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid,"LOWRIDER","lrgirl_l2_to_l3",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"LOWRIDER","lrgirl_l2_to_l3",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 5)
 		{
-			ApplyPlayerAnimation(playerid,"LOWRIDER","lrgirl_l5_bnce",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"LOWRIDER","lrgirl_l5_bnce",4.1,0, 0, 0, 1, 0, 1);
 		}
 		if(var0 > 0 && var0 < 6)
 		{
@@ -1183,35 +1184,35 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid,"INT_SHOP","shop_cashier",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"INT_SHOP","shop_cashier",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid,"INT_SHOP","shop_in",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"INT_SHOP","shop_in",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid,"INT_SHOP","shop_lookA",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"INT_SHOP","shop_lookA",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid,"INT_SHOP","shop_lookB",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"INT_SHOP","shop_lookB",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 5)
 		{
-			ApplyPlayerAnimation(playerid,"INT_SHOP","shop_loop",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"INT_SHOP","shop_loop",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 6)
 		{
-			ApplyPlayerAnimation(playerid,"INT_SHOP","shop_out",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"INT_SHOP","shop_out",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 7)
 		{
-			ApplyPlayerAnimation(playerid,"INT_SHOP","shop_pay",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"INT_SHOP","shop_pay",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 8)
 		{
-			ApplyPlayerAnimation(playerid,"INT_SHOP","shop_shelf",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"INT_SHOP","shop_shelf",4.1,0, 0, 0, 1, 0, 1);
 		}
 		if(var0 > 0 && var0 < 9)
 		{
@@ -1229,27 +1230,27 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid, "GANGS", "prtial_gngtlkA", 4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "GANGS", "prtial_gngtlkA", 4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid, "GANGS", "prtial_gngtlkB", 4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid, "GANGS", "prtial_gngtlkB", 4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid,"GANGS","prtial_gngtlkD",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"GANGS","prtial_gngtlkD",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid,"LOWRIDER","prtial_gngtlkD",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"LOWRIDER","prtial_gngtlkD",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 5)
 		{
-   			ApplyPlayerAnimation(playerid,"LOWRIDER","prtial_gngtlkH",4.1,0, 0, 0, 1, 0, 1);
+   			ApplyAnimation(playerid,"LOWRIDER","prtial_gngtlkH",4.1,0, 0, 0, 1, 0, 1);
 		}
 		else if(var0 == 6)
 		{
-			ApplyPlayerAnimation(playerid,"LOWRIDER","prtial_gngtlkE",4.1,0, 0, 0, 1, 0, 1);
+			ApplyAnimation(playerid,"LOWRIDER","prtial_gngtlkE",4.1,0, 0, 0, 1, 0, 1);
 		}
 		if(var0 > 0 && var0 < 7)
 		{
@@ -1267,47 +1268,47 @@ MRP_DoAnimation(playerid, arg1[])
 		var0 = strval(arg1);
 		if(var0 == 1)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Fixn_Car_Loop", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Fixn_Car_Loop", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 2)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Fixn_Car_Out", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Fixn_Car_Out", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 3)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "flag_drop", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "flag_drop", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 4)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Sit_relaxed", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Sit_relaxed", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 5)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Tap_hand", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Tap_hand", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 6)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Tyd2car_bump", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Tyd2car_bump", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 7)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Tyd2car_high", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Tyd2car_high", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 8)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Tyd2car_low", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Tyd2car_low", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 9)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Tyd2car_med", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Tyd2car_med", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 10)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Tyd2car_TurnL", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Tyd2car_TurnL", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		else if(var0 == 11)
 		{
-			ApplyPlayerAnimation(playerid, "CAR", "Tyd2car_TurnR", 4.0999, 0, 1, 1, 1, 1, 1);
+			ApplyAnimation(playerid, "CAR", "Tyd2car_TurnR", 4.0999, 0, 1, 1, 1, 1, 1);
 		}
 		if(var0 > 0 && var0 < 12)
 		{
@@ -1320,4 +1321,4 @@ MRP_DoAnimation(playerid, arg1[])
 	}
 	return 0;
 }
-//ApplyPlayerAnimation
+//end

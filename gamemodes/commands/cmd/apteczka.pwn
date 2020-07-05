@@ -83,7 +83,7 @@ YCMD:apteczka(playerid, params[], help)
 		format(string, sizeof string, "* Lekarz %s proponuje Ci wyleczenie ran i udzielenie pomocy medycznej.", GetNick(playerid));
 		SetPVarInt(playa, "HealthPackOffer", playerid);
 		ShowPlayerDialogEx(playa, D_UZYCIE_APTECZKI, DIALOG_STYLE_MSGBOX, "Pomoc medyczna", string, "Przyjmij", "Anuluj");
-		ApplyPlayerAnimation(playerid,"MEDIC","CPR",4.1,0,1,1,1,1);
+		ApplyAnimation(playerid,"MEDIC","CPR",4.1,0,1,1,1,1);
 	}
 	else
 	{
@@ -104,7 +104,7 @@ YCMD:apteczka(playerid, params[], help)
 		format(string, sizeof string, "* %s proponuje Ci wyleczenie ran i udzielenie pomocy medycznej.", GetNick(playerid));
 		SetPVarInt(playa, "HealthPackOffer", playerid);
 		ShowPlayerDialogEx(playa, D_UZYCIE_APTECZKI, DIALOG_STYLE_MSGBOX, "Pomoc medyczna", string, "Przyjmij", "Anuluj");
-		ApplyPlayerAnimation(playerid,"MEDIC","CPR",4.1,0,1,1,1,1);
+		ApplyAnimation(playerid,"MEDIC","CPR",4.1,0,1,1,1,1);
 	}
 	return 1;
 }

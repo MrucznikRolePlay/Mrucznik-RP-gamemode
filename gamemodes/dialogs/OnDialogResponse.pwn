@@ -2142,60 +2142,60 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     		{
 	                case 0:
 	                {
-	                	ApplyPlayerAnimation(playerid,"PED","WALK_DRUNK",4.0, 1, 1, 1, 1, 0);
+	                	ApplyAnimation(playerid,"PED","WALK_DRUNK",4.0, 1, 1, 1, 1, 0);
 					}
 	                case 1:
 	                {
-	                	ApplyPlayerAnimation(playerid,"PED","WALK_civi",4.0, 1, 1, 1, 1, 1, 0);
+	                	ApplyAnimation(playerid,"PED","WALK_civi",4.0, 1, 1, 1, 1, 1, 0);
 					}
 	                case 2:
 	                {
-	                	ApplyPlayerAnimation(playerid,"PED","WALK_fatold",4.0, 1, 1, 1, 1, 1, 0);
+	                	ApplyAnimation(playerid,"PED","WALK_fatold",4.0, 1, 1, 1, 1, 1, 0);
 	             	}
 	                case 3:
 	                {
-	                    ApplyPlayerAnimation(playerid,"PED","WALK_gang1",4.0, 1, 1, 1, 1, 1, 0);
+	                    ApplyAnimation(playerid,"PED","WALK_gang1",4.0, 1, 1, 1, 1, 1, 0);
 	                }
 	                case 4:
 	                {
-	                    ApplyPlayerAnimation(playerid,"PED","WALK_gang2",4.0, 1, 1, 1, 1, 1, 0);
+	                    ApplyAnimation(playerid,"PED","WALK_gang2",4.0, 1, 1, 1, 1, 1, 0);
 	                }
 					case 5:
 					{
-					    ApplyPlayerAnimation(playerid,"PED","WALK_old",4.0, 1, 1, 1, 1, 1, 0);
+					    ApplyAnimation(playerid,"PED","WALK_old",4.0, 1, 1, 1, 1, 1, 0);
 					}
 					case 6:
 					{
-                        ApplyPlayerAnimation(playerid,"PED","WALK_rocket",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WALK_rocket",4.0, 1, 1, 1, 1, 1, 0);
 					}
 					case 7:
 					{
-                        ApplyPlayerAnimation(playerid,"PED","WALK_player",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WALK_player",4.0, 1, 1, 1, 1, 1, 0);
 					}
 					case 8:
 					{
-                        ApplyPlayerAnimation(playerid,"PED","WOMAN_walkfatold",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WOMAN_walkfatold",4.0, 1, 1, 1, 1, 1, 0);
 					}
 					case 9:
 					{
-                        ApplyPlayerAnimation(playerid,"PED","WOMAN_walksexy",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WOMAN_walksexy",4.0, 1, 1, 1, 1, 1, 0);
 					}
 					case 10:
 					{
-                        ApplyPlayerAnimation(playerid,"FAT","FatWalk",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"FAT","FatWalk",4.0, 1, 1, 1, 1, 1, 0);
 					}
 					case 11:
 					{
-                        ApplyPlayerAnimation(playerid,"PED","WOMAN_Walkbusy",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WOMAN_Walkbusy",4.0, 1, 1, 1, 1, 1, 0);
 					}
 					case 12:
 					{
-                        ApplyPlayerAnimation(playerid,"PED","WOMAN_walkshop",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WOMAN_walkshop",4.0, 1, 1, 1, 1, 1, 0);
 					}
 					case 13:
 					{
-                        ApplyPlayerAnimation(playerid,"MUSCULAR","MuscleWalk",4.0, 1, 1, 1, 1, 1, 0);
-  					}
+                        ApplyAnimation(playerid,"MUSCULAR","MuscleWalk",4.0, 1, 1, 1, 1, 1, 0);
+  				}
 			}
 		}
 	}
@@ -3503,8 +3503,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ShowPlayerDialogEx(bijep[playerid], 90, DIALOG_STYLE_INPUT, "BITWA!!", string, "Wybierz", "WyjdŸ");
 		       			//
 				    	SendClientMessage(playerid, COLOR_WHITE, "CIOS ODBITY!");
-				    	ApplyPlayerAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-				    	ApplyPlayerAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
+				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
+				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
 				    	zdazylwpisac[playerid] = 1;
 				    	zdazylwpisac[bijep[playerid]] = 1;
 				    	new timerbicia = SetTimerEx("naczasbicie",9000,0,"d",bijep[playerid]);
@@ -3522,7 +3522,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
 						SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-						ApplyPlayerAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
+						ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
 						PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
 						PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
 						TogglePlayerControllable(playerid, 0);
@@ -3538,9 +3538,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerFixRadio(bijep[playerid]);
 						SetPlayerHealth(playerid, 30.0);
 						ClearAnimations(bijep[playerid]);
-						ApplyPlayerAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
+						ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
 						ClearAnimations(playerid);
-						ApplyPlayerAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
+						ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
 						//new
 				        podczasbicia[playerid] = 0;
 				        bijep[bijep[playerid]] = 0;
@@ -3559,7 +3559,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
 					SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-					ApplyPlayerAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
+					ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
 					PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
 					PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
 					TogglePlayerControllable(playerid, 0);
@@ -3576,9 +3576,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_WHITE, "Wpisa³eœ tekst za wolno i przegra³eœ!");
 					SetPlayerHealth(playerid, 30.0);
 					ClearAnimations(bijep[playerid]);
-					ApplyPlayerAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
+					ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
 					ClearAnimations(playerid);
-					ApplyPlayerAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
+					ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
 					//new
 			        podczasbicia[playerid] = 0;
 			        bijep[bijep[playerid]] = 0;
@@ -3597,7 +3597,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	   			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
 				SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-				ApplyPlayerAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
+				ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
 				PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
 				PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
 				TogglePlayerControllable(playerid, 0);
@@ -3613,9 +3613,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerFixRadio(bijep[playerid]);
 				SetPlayerHealth(playerid, 30.0);
 				ClearAnimations(bijep[playerid]);
-				ApplyPlayerAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
+				ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
 				ClearAnimations(playerid);
-				ApplyPlayerAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
+				ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
 				//new
 		        podczasbicia[playerid] = 0;
 		        bijep[bijep[playerid]] = 0;
@@ -16294,8 +16294,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
 				format(string, sizeof(string), "%s mówi: Ja ciebie te¿.", GetNick(playerid));
 				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-				ApplyPlayerAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
-				ApplyPlayerAnimation(kissPlayerOffer[playerid], "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
+				ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
+				ApplyAnimation(kissPlayerOffer[playerid], "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
 				
 				//zerowanie zmiennych:
 				kissPlayerOffer[playerid] = 0;

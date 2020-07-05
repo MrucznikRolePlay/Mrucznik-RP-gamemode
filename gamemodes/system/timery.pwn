@@ -132,7 +132,7 @@ public textVinylT(){
 forward FreezePlayer(playerid);
 public FreezePlayer(playerid){
 	TogglePlayerControllable(playerid, 1);
-	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) ApplyPlayerAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	return 1;
 }
 
@@ -2836,7 +2836,7 @@ public JednaSekundaTimer()
 				else
 				{
 					SetPlayerSpecialAction(i, SPECIAL_ACTION_DRINK_BEER);
-					ApplyPlayerAnimation(i,"PED", "WALK_DRUNK",4.0,0,1,0,0,0);
+					ApplyAnimation(i,"PED", "WALK_DRUNK",4.0,0,1,0,0,0);
 				}
 			}
 		}
@@ -3479,7 +3479,7 @@ public SlideRope(playerid)
 	    new Float:Y;
 	    new Float:Z;
 	    GetPlayerPos(playerid, X, Y, Z);
-  	 	ApplyPlayerAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
+  	 	ApplyAnimation(playerid,"ped","abseil",2.0,0,0,0,1,0);
 	    SetPlayerPos(playerid, X, Y, Z - 2.00);
 		SetPlayerVelocity(playerid,0,0,0);
 	    SetTimerEx("SlideRope", 1000, 0, "i", playerid);

@@ -30,12 +30,12 @@
 public WuhanCouching(playerid, disease, value)
 {
 	ChatMe(playerid, "zaczyna kaszleæ.");
-	ApplyPlayerAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0, 1);
+	ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0, 1);
 	return 1;
 }
 public DusznosciEffect(playerid, disease, value)
 {
-	ApplyPlayerAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
+	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "zaczyna siê dusiæ.");
 	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, false);
 	SetPlayerDrunkLevel(playerid, 5000);
@@ -58,7 +58,7 @@ public KoronawirusDeathEffect(playerid, disease, value)
 	ChatMe(playerid, "upada na ziemie i zaczyna umieraæ");
 	TogglePlayerControllable(playerid, 0);
 	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, true);
-	ApplyPlayerAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
+	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	return 1;
 }
 
@@ -66,14 +66,14 @@ public KoronawirusDeathEffect(playerid, disease, value)
 public FeelingBadEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "poczu³ siê Ÿle.");
-	ApplyPlayerAnimation(playerid, "FAT", "IDLE_tired", 4.0999, 0, 0, 0, 0, 0, 1);
+	ApplyAnimation(playerid, "FAT", "IDLE_tired", 4.0999, 0, 0, 0, 0, 0, 1);
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
 }
 public CouchingEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "zaczyna kaszleæ.");
-	ApplyPlayerAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0, 1);
+	ApplyAnimation(playerid, "ON_LOOKERS", "shout_01", 4.0, 0, 0, 0, 0, 0, 1);
 
 	if(random(20) == 1)//5% szans
 	{
@@ -138,14 +138,14 @@ public AbdominalPainEffect(playerid, disease, value)
 public VomitEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "zaczyna wymiotowaæ.");
-	ApplyPlayerAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 0, 0, 1);
+	ApplyAnimation(playerid, "FOOD", "EAT_Vomit_P", 4.0999, 0, 0, 0, 0, 0, 1);
 	return 1;
 }
 
 //Padaka
 public EpilepsyEffect(playerid, disease, value)
 {
-	ApplyPlayerAnimation(playerid, "CRACK", "crckdeth1", 4.1, 0, 1, 1, 1, 1, 1);
+	ApplyAnimation(playerid, "CRACK", "crckdeth1", 4.1, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "upada na ziemiê i zaczyna siê trz¹œæ oraz wykonywaæ niekontrolowane ruchy.");
 	TogglePlayerControllable(playerid, 0); //TODO: nie odmra¿aæ gdy gracz ju¿ by³ zamro¿ony
 	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, true);
@@ -181,7 +181,7 @@ public TourettPermanentEffect_Off(playerid, disease, value)
 //Astma
 public AnaphylacticShock(playerid, disease, value)
 {
-	ApplyPlayerAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
+	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "nie mo¿e oddychaæ i zaczyna siê dusiæ.");
 	TogglePlayerControllable(playerid, 0); //TODO: nie odmra¿aæ gdy gracz ju¿ by³ zamro¿ony
 	defer LoweringHP(playerid, PlayerInfo[playerid][pUID], value, true, true);
@@ -297,7 +297,7 @@ public GetGangreneEffect(playerid, disease, value)
 }
 public FaintEffect(playerid, disease, value)
 {
-	ApplyPlayerAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
+	ApplyAnimation(playerid, "KNIFE", "KILL_Knife_Ped_Die", 4.0999, 0, 1, 1, 1, 1, 1);
 	ChatMe(playerid, "omdla³.");
 	SetPlayerDrunkLevel(playerid, 5000);
 	return 1;
@@ -347,7 +347,7 @@ public ThrowAllWeaponsEffect(playerid, disease, value)
 public FearEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "zaczyna odczuwaæ irracjonalny strach.");
-	ApplyPlayerAnimation(playerid, "ped", "cower", 3.0, 1, 0, 0, 0, 0, 1);
+	ApplyAnimation(playerid, "ped", "cower", 3.0, 1, 0, 0, 0, 0, 1);
 	return 1;
 }
 

@@ -331,13 +331,13 @@ YCMD:brama(playerid, params[], help)
 				{
 					MoveDynamicObject(bramadom1, 2315.8184, -1217.8220, 25.6250, 2,  0.0000, 84.0000, 180.0000);
 					bramadom1State = 1;
-					ApplyPlayerAnimation(playerid,"PED","bomber",4.1,0,0,0,0,0);
+					ApplyAnimation(playerid,"PED","bomber",4.1,0,0,0,0,0);
 				}
 				else
 				{
 					MoveDynamicObject(bramadom1, 2313.5461, -1218.0405, 23.9090, 2,  0.00000, 00.00000, 180.00000);
 					bramadom1State  = 0;
-					ApplyPlayerAnimation(playerid,"PED","bomber",4.1,0,0,0,0,0);
+					ApplyAnimation(playerid,"PED","bomber",4.1,0,0,0,0,0);
 				}
 			}
 		}

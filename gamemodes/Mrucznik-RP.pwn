@@ -550,7 +550,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 				MaTazer[playerid] = 0;
 				PlayerPlaySound(playerid, 6300, 0.0, 0.0, 0.0);
 				PlayerPlaySound(hitid, 6300, 0.0, 0.0, 0.0);
-				ApplyPlayerAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
+				ApplyAnimation(hitid, "CRACK","crckdeth2",4.1,0,1,1,1,1,1);
 				TogglePlayerControllable(hitid, 0);
 				return 0;
 			}
@@ -1754,23 +1754,23 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		{
 			case BODY_PART_LEFT_LEG:
 			{
-				if(random(100) < 30) ApplyPlayerAnimation(playerid, "ped", "DAM_LegL_frmLT", 4.1, 0, 0, 0, 0, 0, 1);
+				if(random(100) < 30) ApplyAnimation(playerid, "ped", "DAM_LegL_frmLT", 4.1, 0, 0, 0, 0, 0, 1);
 			}
 			case BODY_PART_RIGHT_LEG:
 			{
-				if(random(100) < 30) ApplyPlayerAnimation(playerid, "ped", "DAM_LegR_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
+				if(random(100) < 30) ApplyAnimation(playerid, "ped", "DAM_LegR_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
 			}
 			case BODY_PART_LEFT_ARM:
 			{
-				if(random(100) < 10) ApplyPlayerAnimation(playerid, "ped", "DAM_armL_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
+				if(random(100) < 10) ApplyAnimation(playerid, "ped", "DAM_armL_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
 			}
 			case BODY_PART_RIGHT_ARM:
 			{
-				if(random(100) < 10) ApplyPlayerAnimation(playerid, "ped", "DAM_armR_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
+				if(random(100) < 10) ApplyAnimation(playerid, "ped", "DAM_armR_frmBK", 4.1, 0, 0, 0, 0, 0, 1);
 			}
 			case BODY_PART_HEAD:
 			{
-				if(random(100) < 60) ApplyPlayerAnimation(playerid,"PED","SHOT_partial", 4.1, 0, 0, 0, 0, 0, 1);
+				if(random(100) < 60) ApplyAnimation(playerid,"PED","SHOT_partial", 4.1, 0, 0, 0, 0, 0, 1);
 			}
 		}
 	}
@@ -1781,7 +1781,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 public StandUp(playerid)
 {
     SetPVarInt(playerid, "optd-hs", 0);
-    ApplyPlayerAnimation(playerid, "ped", "getup", 4.1, 0, 0, 0, 0, 0, 1);
+    ApplyAnimation(playerid, "ped", "getup", 4.1, 0, 0, 0, 0, 0, 1);
 }
 
 public OnPlayerDeath(playerid, killerid, reason)
@@ -6100,7 +6100,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
     {
         if(HOLDING(KEY_SPRINT))
         {
-			ApplyPlayerAnimation(playerid, "WUZI", "CS_Dead_Guy", 4.0, 0, 1, 1, 1, -1);
+			ApplyAnimation(playerid, "WUZI", "CS_Dead_Guy", 4.0, 0, 1, 1, 1, -1);
         }
     }
 
@@ -6355,7 +6355,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 						SetPlayerHealth(playerid, health+10);
 						ZabierzKase(playerid, 1000);
 						sendTipMessageEx(playerid, COLOR_RED, "Kupi³eœ jedzenie"); 
-						ApplyPlayerAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
+						ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
 						GameTextForPlayer(playerid, "Om nom om", 5000, 1);
 						//SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
 						TimerJedzenie[playerid] = 1;
@@ -6431,7 +6431,7 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 			    ModelID[Vehid] = GetVehicleModel(Vehid);
 			    if( ModelID[Vehid] == 520 || ModelID[Vehid] == 432 || ModelID[Vehid] == 425)
 			    {
-	    			ApplyPlayerAnimation(playerid,"PED","car_hookertalk ",4.1,1,1,1,1,1,1);
+	    			ApplyAnimation(playerid,"PED","car_hookertalk ",4.1,1,1,1,1,1,1);
 	    			TogglePlayerControllable(playerid,0);
 					TogglePlayerControllable(playerid,1);
 				}

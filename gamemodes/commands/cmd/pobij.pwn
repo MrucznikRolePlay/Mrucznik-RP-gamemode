@@ -122,10 +122,10 @@ YCMD:pobij(playerid, params[], help)
 										PlayerPlaySound(playa, 1097, 0.0, 0.0, 0.0);
 										TogglePlayerControllable(playerid, 0);
 										TogglePlayerControllable(playa, 0);
-										ApplyPlayerAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-			    						ApplyPlayerAnimation(playa, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-			    						ApplyPlayerAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-			    						ApplyPlayerAnimation(playa, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
+										ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
+			    						ApplyAnimation(playa, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
+			    						ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
+			    						ApplyAnimation(playa, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
 										bijep[playa] = playerid;
 										bijep[playerid] = playa;
 										podczasbicia[playa] = 1;
@@ -143,7 +143,7 @@ YCMD:pobij(playerid, params[], help)
 										SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 										format(string, sizeof(string), "%s chcia³ ciê pobiæ, lecz obroni³eœ siê i wygra³eœ walkê.", sendername);
 										SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-										ApplyPlayerAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
+										ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
 										PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
 										PlayerPlaySound(playa, 1130, 0.0, 0.0, 0.0);
 										TogglePlayerControllable(playerid, 0);

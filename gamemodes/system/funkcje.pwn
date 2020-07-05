@@ -272,12 +272,6 @@ UnJailDeMorgan(playerid)
 	PlayerInfo[playerid][pJailTime] = 0;
 }
 
-stock ApplyPlayerAnimation(playerid, animlib[], animname[], Float:fDelta, loop, lockx, locky, freeze, time, forcesync = 0)
-{
-    ApplyAnimation(playerid, animlib, "null", fDelta, loop, lockx, locky, freeze, time, forcesync); // Pre-load animation library
-    return ApplyAnimation(playerid, animlib, animname, fDelta, loop, lockx, locky, freeze, time, forcesync);
-}
-
 DialogListaFrakcji()
 {
 	new frakcje[512];
@@ -9666,7 +9660,7 @@ Car_Lock(playerid, veh)
 	if(IsABike(veh)) return sendErrorMessage(playerid, "Nie mo¿esz u¿yæ /lock na motocyklu");
     new engine, lights, alarm, doors, bonnet, boot, objective;
     GetVehicleParamsEx(veh, engine, lights, alarm, doors, bonnet, boot, objective);
-    if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT) ApplyPlayerAnimation(playerid, "INT_HOUSE", "wash_up",4.1, 0, 0, 0, 0, 0, 1);
+    if(GetPlayerState(playerid) == PLAYER_STATE_ONFOOT) ApplyAnimation(playerid, "INT_HOUSE", "wash_up",4.1, 0, 0, 0, 0, 0, 1);
     if(doors == 0)
     {
         doors=1;
@@ -10588,8 +10582,8 @@ Oil_LoadCleanProcedure(playerid)
     Oil_UpdateKeysSeq(playerid);
     TextDrawShowForPlayer(playerid, OilTXD_BG[0]);
     TextDrawShowForPlayer(playerid, OilTXD_BG[1]);
-    ApplyPlayerAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_In", 4.1, 0, 0, 0, 0, -1);
-    ApplyPlayerAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_In", 4.1, 0, 0, 0, 0, -1);
+    ApplyAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_In", 4.1, 0, 0, 0, 0, -1);
+    ApplyAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_In", 4.1, 0, 0, 0, 0, -1);
 }
 
 Oil_UpdateRandomKeys(playerid)
@@ -10634,7 +10628,7 @@ Oil_PressedOK(playerid)
     new Float:lPos[3];
     GetDynamicObjectPos(OilData[lID][oilObject], lPos[0], lPos[1], lPos[2]);
     if(OilData[lID][oilHP] < 0) Oil_Destroy(lID);
-    ApplyPlayerAnimation(playerid, "BOMBER", "BOM_Plant_Loop", 4.1, 1, 0, 0, 0, 0);
+    ApplyAnimation(playerid, "BOMBER", "BOM_Plant_Loop", 4.1, 1, 0, 0, 0, 0);
     new lStr[16];
     format(lStr, 16, "~g~%d", OilData[lID][oilHP]);
     GameTextForPlayer(playerid, lStr, 1000, 5);
@@ -10723,7 +10717,7 @@ Oil_Destroy(lID)
         TogglePlayerControllable(i, 1);
         TextDrawHideForPlayer(i, OilTXD_BG[0]);
         TextDrawHideForPlayer(i, OilTXD_BG[1]);
-        ApplyPlayerAnimation(i, "BOMBER", "BOM_Plant_Crouch_Out", 4.0, 0, 0, 0, 0, -1);
+        ApplyAnimation(i, "BOMBER", "BOM_Plant_Crouch_Out", 4.0, 0, 0, 0, 0, -1);
         SendClientMessage(i, COLOR_WHITE, "[ERS] Usun¹³eœ plamê oleju! Otrzymujesz 7 500$! [ERS]");
         DajKase(i, 7500);
         SendFamilyMessage(4, COLOR_GREEN, "[ERS] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 12 500$! [ERS]");
@@ -11557,7 +11551,7 @@ BBD_Pickup(playerid, id)
     BoomBoxData[id][BBD_Carried] = playerid+1;
     SetPVarInt(playerid, "boomboxid", id);
 
-    ApplyPlayerAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_Out", 4.1, 0, 1, 1, 0, 0);
+    ApplyAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_Out", 4.1, 0, 1, 1, 0, 0);
 
     SetPlayerAttachedObject(playerid, 9, 2226, 5, 0.42, 0.0, 0.0, 90.0, 270.0, 90.0);
 
@@ -11581,7 +11575,7 @@ BBD_Putdown(playerid, id)
 
     RemovePlayerAttachedObject(playerid, 9);
 
-    ApplyPlayerAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_In", 4.1, 0, 1, 1, 0, 0);
+    ApplyAnimation(playerid, "BOMBER", "BOM_Plant_Crouch_In", 4.1, 0, 1, 1, 0, 0);
 
     BoomBoxData[id][BBD_Obj] = CreateDynamicObject(2226, x, y, z-0.95, 0.0, 0.0, a+180.0);
 
