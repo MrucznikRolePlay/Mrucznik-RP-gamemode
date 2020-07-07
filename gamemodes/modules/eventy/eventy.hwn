@@ -45,6 +45,7 @@ enum evStaticObjects
 new EVENTS_enabled = -1;
 new EVENTS_connect_object = 0;
 // new EVENTS_Actors[EVENTS_MAX_EVENTS][evActors];
+new EVENTS_player_joined[MAX_PLAYERS] = 0;
 new EVENTS_StaticObjects[EVENTS_MAX_STATICOBJECTS][evStaticObjects];
 //------------------<[ Forwardy: ]>--------------------
 

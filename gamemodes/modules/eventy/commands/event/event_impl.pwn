@@ -32,15 +32,26 @@ command_event_Impl(playerid, opcja1[24], opcja2[24])
             new string[128];
             if(IsPlayerInRangeOfPoint(playerid, 4.0, EVENT_GETBOX_X, EVENT_GETBOX_Y, EVENT_GETBOX_Z))
             {
-                format(string, sizeof(string), "* %s zabiera paczkê z stosu skrzyñ.", GetNick(playerid));
-			    ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
-                SendClientMessage(playerid, COLOR_RED, "Dostarcz teraz paczkê do dilera na dokach!");
-                SendClientMessage(playerid, COLOR_GREY, "Masz 2 minuty na dostarczenie tej paczki, inaczej wybuchnie!");
+                if(EVENTS_player_joined[playerid] != 0)
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTRED, "Masz ju¿ przy sobie paczkê.");
+                    return 1;
+                }
+                else if(IsAPolicja(playerid))
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTRED, "Jako s³u¿ba porz¹dkowa masz obowi¹zek zabijaæ terrorystów!");
+                    return 1;
+                }
+                Events_PlayerJoined(playerid, 1);
             }
-            else if(IsPlayerInRangeOfPoint(playerid, 4.0, EVENT_GIVEBOX_X, EVENT_GIVEBOX_Y, EVENT_GIVEBOX_Z))
+            else if(IsPlayerInRangeOfPoint(playerid, 4.0, EVENT_GIVEBOX_X, EVENT_GIVEBOX_Y, EVENT_GIVEBOX_Z) && EVENTS_player_joined[playerid] != 0)
             {
-                format(string, sizeof(string), "* %s oddaje paczkê dilerowi.", GetNick(playerid));
-			    ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+                if(EVENTS_player_joined[playerid] == 0)
+                {
+                    SendClientMessage(playerid, COLOR_LIGHTRED, "Nie masz przy sobie paczki!");
+                    return 1; 
+                }
+                Events_PlayerLeft(playerid, 1, 1);
             }
             else SendClientMessage(playerid, COLOR_RED, "Nie jesteœ obok skrzynek!");
         }

@@ -34,4 +34,11 @@ hook OnPlayerConnect(playerid)
 		rahim1_Connect(playerid);
 	}
 }
+hook OnPlayerDisconnect(playerid, reason)
+{
+	if(EVENTS_player_joined[playerid] > 0)
+	{
+		Events_PlayerLeft(playerid, EVENTS_player_joined[playerid]);
+	}
+}
 //end

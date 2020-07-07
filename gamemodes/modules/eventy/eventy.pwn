@@ -195,6 +195,40 @@ Events_GetFreeObjectID()
 	return -1;
 }
 
+Events_PlayerJoined(playerid, event_id)
+{
+	EVENTS_player_joined[playerid] = event_id;
+	if(event_id == 1)
+	{
+		new string[128];
+		format(string, sizeof(string), "* %s zabiera paczkê z stosu skrzyñ.", GetNick(playerid));
+		ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+		SendClientMessage(playerid, COLOR_RED, "Dostarcz teraz paczkê do dilera na dokach!");
+		SetPlayerAttachedObject(playerid,2,1313,17,0.587000,-0.027000,0.028000,86.100051,79.499977,-69.599990,1.000000,1.000000,1.000000);
+	} 
+}
+Events_PlayerLeft(playerid, event_id, reason = 0)
+{
+	EVENTS_player_joined[playerid] = 0;
+	RemovePlayerAttachedObject(playerid, 2);
+	if(reason == 1 && event_id == 1)
+	{
+		new string[128];
+		format(string, sizeof(string), "* %s oddaje paczkê dilerowi.", GetNick(playerid));
+		ProxDetector(30.0, playerid, string, 0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA,0xC2A2DAAA);
+		new rand = random(30000);
+		rand = rand + 10000;
+		format(string, sizeof(string), "Zgarn¹³eœ %d$ za paczkê!", rand);
+		DajKase(playerid, rand);
+	}
+	if(event_id == 1 && reason == 2)
+	{
+		SendClientMessage(playerid, COLOR_LIGHTRED, "Zgin¹³eœ! Zosta³eœ przywrócony do spawna.");
+		SetPlayerSpawn(playerid);
+	}
+}
+
+
 //tworzenie, modyfikowanie, usuwanie obiektu
 Events_AddStaticObject(modelid, Float:x, Float:y, Float:z, vw, int)
 {
