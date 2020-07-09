@@ -1721,6 +1721,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		}
 	}
 	
+	SetPVarInt(playerid, "lastDamage", gettime());
 	Log(damageLog, INFO, "%s zosta³ zraniony przez %s o %fhp broni¹ %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(issuerid) ? GetPlayerLogName(issuerid) : sprintf("%d", issuerid),

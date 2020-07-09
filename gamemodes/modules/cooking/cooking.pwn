@@ -49,6 +49,7 @@ EatCookedMeal(playerid, name[], weight, type)
 	}
 
 	ChatMe(playerid, sprintf("zjada %s.", name));
+	ApplyAnimation(playerid, "FOOD", "EAT_Pizza", 4.1, 0, 1, 1, 0, 0, 1);
 
 	if(random(100) == 0 && InfectOrDecreaseImmunity(playerid, ZATRUCIE, 25)) 
 	{//1% szans na zatrucie

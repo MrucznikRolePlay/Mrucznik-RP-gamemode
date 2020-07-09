@@ -39,6 +39,13 @@ command_zjedz_Impl(playerid)
         sendErrorMessage(playerid, "Jesteœ tak najedzony, ¿e nie zmieœcisz ju¿ wiêcej (masz pe³ne hp).");
         return 1;
     }
+
+    if(gettime() - GetPVarInt(playerid, "lastDamage") < 60)
+    {
+        sendErrorMessage(playerid, "Nie mo¿esz jeœæ podczas walki!");
+        return 1;
+    }
+
     MruMySQL_CookedMealsDialog(playerid);
     return 1;
 }
