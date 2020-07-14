@@ -219,6 +219,7 @@ Events_PlayerLeft(playerid, event_id, reason = 0)
 		new rand = random(30000);
 		rand = rand + 10000;
 		format(string, sizeof(string), "Zgarn¹³eœ %d$ za paczkê!", rand);
+		SendClientMessage(playerid, COLOR_YELLOW, string);
 		DajKase(playerid, rand);
 	}
 	if(event_id == 1 && reason == 2)
