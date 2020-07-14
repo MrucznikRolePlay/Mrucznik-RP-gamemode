@@ -65,6 +65,11 @@ YCMD:kick(playerid, params[], help)
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
+					if(PlayerInfo[giveplayerid][pAdmin] > 0)
+					{
+						sendTipMessage(playerid, "Nie mo¿esz dawaæ /kick administratorowi!");
+						return 1;
+					}
                     if(PlayerInfo[giveplayerid][pAdmin] >= 1) return sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zkickowaæ Admina !");
   					if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 2 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
   					{
