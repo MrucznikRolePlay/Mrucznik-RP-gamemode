@@ -7472,6 +7472,21 @@ public OnPlayerText(playerid, text[])
 				PlayerTalkIC(playerid, text, "mówi", 15.0);
 			}
 		}
+		else if(OKActive[playerid] && GetPlayerAdminDutyStatus(playerid) == 0)
+		{
+			//speak l33t
+			new newText[256];
+			strcat(newText, text);
+			strreplace(newText, "a", "4", true);
+			strreplace(newText, "o", "0", true);
+			strreplace(newText, "e", "3", true);
+			strreplace(newText, "g", "6", true);
+			strreplace(newText, "l", "1", true);
+			strreplace(newText, "s", "5", true);
+			strreplace(newText, "t", "7", true);
+			strreplace(newText, "z", "2", true);
+			PlayerTalkIC(playerid, newText, "mówi", 15.0);
+		}
 		else
 		{
 			PlayerTalkIC(playerid, text, "mówi", 15.0);

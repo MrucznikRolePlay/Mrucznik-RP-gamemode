@@ -503,7 +503,7 @@ new FractionNames[][40] = {
     "Korporacja Transportowa",
     "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
-    "CRIMINAL CONNECTION",
+    "Uninvited guests",
     "Hillside Nortenos 14",
     "89 Border Society",
     "IV Saint Reich",
