@@ -48,6 +48,11 @@ YCMD:login(playerid, params[], help)
 			sendTipMessage(playerid, "Gracz nie jest zalogowany.");
 			return 1;
 		}
+		if(PlayerInfo[playerid][pAdmin] <1000 && playa != playerid)
+		{
+			sendTipMessage(playerid, "Mo¿esz u¿ywaæ tej komendy tylko na sobie.");
+			return 1;
+		}
 		new nick[24];
 		if(GetPVarString(playa, "maska_nick", nick, 24))
 		{

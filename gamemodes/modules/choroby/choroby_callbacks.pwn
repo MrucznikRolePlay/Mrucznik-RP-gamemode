@@ -54,6 +54,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	Grypa[playerid] = 0;
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
+	OKActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
 	Odpornosc_PlayerBarToggle[playerid] = 0;
 	OKActive[playerid] = 0;
