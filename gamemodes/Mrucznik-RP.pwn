@@ -617,13 +617,15 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 						{
 							if(AP < amount) SetPlayerArmour(hitid, 0); // tutaj ma zostaæ 0, bo wartosc armora poni¿ej 0 daje 100 armora (samp bug)
 							else SetPlayerArmour(hitid, AP-amount); //zabierz sampowe dmg kamizelce
+							OnPlayerTakeDamage(hitid, playerid, amount, weaponid, 3);
 							return 0;
 						}
-
+						
 						amount = amount / 2; //CUSTOMOWE DMG (dopiero po wydrenowaniu armora)
 
 						if(HP <= amount) return 1; //wyœlij nabój (zabij)
 						SetPlayerHealth(hitid, HP-amount); //lub zabierz mu customowe dmg
+						OnPlayerTakeDamage(hitid, playerid, amount, weaponid, 3);
 						return 0;
 					}
 					else
