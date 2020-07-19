@@ -286,7 +286,7 @@ NadajWLBW(killerid, victim, bool:bw)
 	new string[144];
 	new playerid = victim;
 	format(string, sizeof(string), (bw ? "Morderstwo" : "Okaleczenie"));
-	if(IsAPolicja(playerid))
+	if(IsAPolicja(playerid) && OnDutyCD[playerid] != 1 && OnDuty[playerid])
 	{
 		PoziomPoszukiwania[killerid] += 2;
 		strcat(string, " Policjanta");
