@@ -7194,53 +7194,53 @@ LadujInteriory()
     IntInfo[47][Pokoje] = 7;
     IntInfo[47][Cena] = 40000000;
 
-    IntInfo[48][Int_X] = 2149.0562;//Julia 1
+    IntInfo[48][Int_X] = 2149.0562;//Julia 1 - ³adny
     IntInfo[48][Int_Y] = -1322.0059;
     IntInfo[48][Int_Z] = 25.8396;
     IntInfo[48][Int] = 0;
-    IntInfo[48][Kategoria] = 5;
-    IntInfo[48][Pokoje] = 7;
-    IntInfo[48][Cena] = 40000000;
+    IntInfo[48][Kategoria] = 4;
+    IntInfo[48][Pokoje] = 2;
+    IntInfo[48][Cena] = 10000000;
 
-    IntInfo[49][Int_X] = 2150.1968;//Julia 2
+    IntInfo[49][Int_X] = 2150.1968;//Julia 2 - ³adny ma³y
     IntInfo[49][Int_Y] = -1283.3784;
     IntInfo[49][Int_Z] = 24.2428;
     IntInfo[49][Int] = 0;
-    IntInfo[49][Kategoria] = 5;
-    IntInfo[49][Pokoje] = 7;
-    IntInfo[49][Cena] = 40000000;
+    IntInfo[49][Kategoria] = 4;
+    IntInfo[49][Pokoje] = 2;
+    IntInfo[49][Cena] = 10000000;
 
-    IntInfo[50][Int_X] = 2126.7422;//Julia 3
+    IntInfo[50][Int_X] = 2126.7422;//Julia 3 - dwupiêtrowy
     IntInfo[50][Int_Y] = -1320.4714;
     IntInfo[50][Int_Z] = 26.6311;
     IntInfo[50][Int] = 0;
-    IntInfo[50][Kategoria] = 5;
-    IntInfo[50][Pokoje] = 7;
-    IntInfo[50][Cena] = 40000000;
+    IntInfo[50][Kategoria] = 4;
+    IntInfo[50][Pokoje] = 4;
+    IntInfo[50][Cena] = 20000000;
 
-    IntInfo[51][Int_X] = 2131.7869;//Julia 4
+    IntInfo[51][Int_X] = 2131.7869;//Julia 4 - ³adny
     IntInfo[51][Int_Y] = -1278.2720;
     IntInfo[51][Int_Z] = 26.0321;
     IntInfo[51][Int] = 0;
-    IntInfo[51][Kategoria] = 5;
-    IntInfo[51][Pokoje] = 7;
-    IntInfo[51][Cena] = 40000000;
+    IntInfo[51][Kategoria] = 4;
+    IntInfo[51][Pokoje] = 3;
+    IntInfo[51][Cena] = 10000000;
 
-    IntInfo[52][Int_X] = 2099.9829;//Julia 5
+    IntInfo[52][Int_X] = 2099.9829;//Julia 5 - czarny elegancki
     IntInfo[52][Int_Y] = -1324.0430;
     IntInfo[52][Int_Z] = 26.6471;
     IntInfo[52][Int] = 0;
-    IntInfo[52][Kategoria] = 5;
-    IntInfo[52][Pokoje] = 7;
-    IntInfo[52][Cena] = 40000000;
+    IntInfo[52][Kategoria] = 4;
+    IntInfo[52][Pokoje] = 1;
+    IntInfo[52][Cena] = 10000000;
 
-    IntInfo[53][Int_X] = 2091.5286;//Julia 6
+    IntInfo[53][Int_X] = 2091.5286;//Julia 6 - ³adny
     IntInfo[53][Int_Y] = -1276.3370;
     IntInfo[53][Int_Z] = 26.1449;
     IntInfo[53][Int] = 0;
-    IntInfo[53][Kategoria] = 5;
-    IntInfo[53][Pokoje] = 7;
-    IntInfo[53][Cena] = 40000000;
+    IntInfo[53][Kategoria] = 4;
+    IntInfo[53][Pokoje] = 2;
+    IntInfo[53][Cena] = 10000000;
     return 1;
 }
 
