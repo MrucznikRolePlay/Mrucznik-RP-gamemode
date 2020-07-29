@@ -59,6 +59,12 @@ YCMD:wyjdz(playerid, params[], help)
             Wchodzenie(playerid);
 			return 1;
 		}
+		else if((IsPlayerInRangeOfPoint(playerid,4,1543.3915,-1643.2813,28.4881) || IsPlayerInRangeOfPoint(playerid,4,1555.1351,-1643.0166,28.4881)) && GetPlayerVirtualWorld(playerid) == 29 && !IsAPolicja(playerid) && PlayerInfo[playerid][pJailed] == 0) //miejsce do /wyjdz dla osób które nie s¹ wiêŸniami
+        {
+            Wchodzenie(playerid);
+            SetPlayerVirtualWorld(playerid, 25);
+            SetPlayerPos(playerid,1585.8722,-1685.5045,62.2363);
+        }
         else if (IsPlayerInRangeOfPoint(playerid, 3.0, 566.5435,-2087.0046,2.7402))  //basen tsunami wejscie do hali
         {
             SetPlayerPos(playerid, 1221.30774, -1790.77686, 71.70520);  //basen tsunami hala

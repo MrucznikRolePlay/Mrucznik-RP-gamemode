@@ -820,8 +820,6 @@ new Wodliczanie;
 new Float:MatsPoint[3] = {2138.2078,-2290.4888,20.6646};
 
 //koniec wozy Ballas
-new lspdWjazdDolny;
-new lspdWjazdDolnyState = 0; // 0 close 1 open
 //stary komisariat (old komi)
 new DrzwiPDKomi;
 new DrzwiPDKomi2;
@@ -832,36 +830,6 @@ new DrzwiPDKomi3S = 1;
 new DrzwiPDKomi4;
 new DrzwiPDKomi4S = 1;
 //nowy komisariat
-new bramalspd1;
-new bramalspd2;
-new bramalspd3;
-new bramalspd4;
-new bramalspd5;
-new bramalspd6;
-new bramalspd7;
-new bramalspd8;
-new bramalspd9;
-new bramalspd10;
-new bramalspd11;
-new bramalspd12;
-new bramalspd13;
-new lspdmove1 = 0;
-new lspdmove2 = 0;
-new lspdmove3 = 0;
-new lspdmove4 = 0;
-new lspdmove5 = 0;
-new lspdmove6 = 0;
-new lspdmove7 = 0;
-new lspdmove8 = 0;
-new lspdmove9 = 0;
-new lspdmove10 = 0;
-new lspdmove11 = 0;
-new lspdmove12 = 0;
-new lspdmove13 = 0;
-new lspdmove14 = 0;
-new lspdmove15 = 0;
-new celalspd1;
-new celalspd2;
 new stolek[34];
 new kosmove;//zmienne bram konfesjona³ów
 new kos2move;//zmienne bram konfesjona³ów
@@ -878,6 +846,36 @@ new BrF[8];
 new BrFS[8];
 new TimerJedzenie[MAX_PLAYERS];
 new ZarcieCooldown[MAX_PLAYERS];
+
+new const AnimLibs[][] = {
+  "AIRPORT",      "ATTRACTORS",   "BAR",          "BASEBALL",     "BD_FIRE",
+  "BEACH",        "BENCHPRESS",   "BF_INJECTION", "BIKE_DBZ",     "BIKED",
+  "BIKEH",        "BIKELEAP",     "BIKES",        "BIKEV",        "BLOWJOBZ",
+  "BMX",          "BOMBER",       "BOX",          "BSKTBALL",     "BUDDY",
+  "BUS",          "CAMERA",       "CAR",          "CAR_CHAT",     "CARRY",
+  "CASINO",       "CHAINSAW",     "CHOPPA",       "CLOTHES",      "COACH",
+  "COLT45",       "COP_AMBIENT",  "COP_DVBYZ",    "CRACK",        "CRIB",
+  "DAM_JUMP",     "DANCING",      "DEALER",       "DILDO",        "DODGE",
+  "DOZER",        "DRIVEBYS",     "FAT",          "FIGHT_B",      "FIGHT_C",
+  "FIGHT_D",      "FIGHT_E",      "FINALE",       "FINALE2",      "FLAME",
+  "FLOWERS",      "FOOD",         "FREEWEIGHTS",  "GANGS",        "GFUNK",
+  "GHANDS",       "GHETTO_DB",    "GOGGLES",      "GRAFFITI",     "GRAVEYARD",
+  "GRENADE",      "GYMNASIUM",    "HAIRCUTS",     "HEIST9",       "INT_HOUSE",
+  "INT_OFFICE",   "INT_SHOP",     "JST_BUISNESS", "KART",         "KISSING",
+  "KNIFE",        "LAPDAN1",      "LAPDAN2",      "LAPDAN3",      "LOWRIDER",
+  "MD_CHASE",     "MD_END",       "MEDIC",        "MISC",         "MTB",
+  "MUSCULAR",     "NEVADA",       "ON_LOOKERS",   "OTB",          "PARACHUTE",
+  "PARK",         "PAULNMAC",     "PED",          "PLAYER_DVBYS", "PLAYIDLES",
+  "POLICE",       "POOL",         "POOR",         "PYTHON",       "QUAD",
+  "QUAD_DBZ",     "RAPPING",      "RIFLE",        "RIOT",         "ROB_BANK",
+  "ROCKET",       "RUNNINGMAN",   "RUSTLER",      "RYDER",        "SCRATCHING",
+  "SEX",          "SHAMAL",       "SHOP",         "SHOTGUN",      "SILENCED",
+  "SKATE",        "SMOKING",      "SNIPER",       "SNM",          "SPRAYCAN",
+  "STRIP",        "SUNBATHE",     "SWAT",         "SWEET",        "SWIM",
+  "SWORD",        "TANK",         "TATTOOS",      "TEC",          "TRAIN",
+  "TRUCK",        "UZI",          "VAN",          "VENDING",      "VORTEX",
+  "WAYFARER",     "WEAPONS",      "WOP",          "WUZI"
+};
 
 //zdrapki
 new PlayerGames[MAX_PLAYERS];

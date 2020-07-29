@@ -1157,6 +1157,7 @@ public OnPlayerConnect(playerid)
 	
 	//biz
 	ResetBizOffer(playerid);
+	PreloadAnimLibs(playerid);
 	//system barierek by Kubi
 	gHeaderTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
     gBackgroundTextDrawId[playerid] = PlayerText:INVALID_TEXT_DRAW;
@@ -1821,6 +1822,18 @@ public OnPlayerDeath(playerid, killerid, reason)
 		SetPVarInt(playerid, "skip_bw", 1);
 	}
 
+	/*if(IsAPolicja(killerid) && EVENTS_player_joined[playerid] != 0) 
+	{
+		SetPVarInt(playerid, "skip_bw", 1);
+		Events_PlayerLeft(playerid, EVENTS_enabled, 2);
+		SendClientMessage(killerid, COLOR_YELLOW, "Za zabicie terrorysty otrzymujesz od rz¹du 20000$!");
+		DajKase(killerid, 20000);
+	}
+	else if(EVENTS_player_joined[playerid] != 0 && !IsAPolicja(killerid))
+	{
+		SetPVarInt(playerid, "skip_bw", 1);
+		Events_PlayerLeft(playerid, EVENTS_enabled, 2);
+	}*/
 	DeathAdminWarning(playerid, killerid, reason);
 
 	if(IsPlayerConnected(playerid))
@@ -2257,7 +2270,7 @@ SetPlayerSpawnPos(playerid)
 	{
 		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
 		SetPlayerInterior(playerid, 0);
-	    SetPlayerVirtualWorld(playerid, 1);
+	    SetPlayerVirtualWorld(playerid, 29);
 	    new losuj= random(sizeof(Cela));
 		SetPlayerPos(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Twój wyrok nie dobieg³ koñca, wracasz do wiêzienia.");
@@ -5616,7 +5629,6 @@ public OnPlayerUpdate(playerid)
         GetPlayerKeys(playerid, keys, ud, lr);
         if(ud == KEY_DOWN) CruiseControl_SetSpeed(playerid, 10, false);
         else if(ud == KEY_UP) CruiseControl_SetSpeed(playerid, 10, true);
-		return 1;
     }
 	if(Spectate[playerid] != INVALID_PLAYER_ID && !GetPVarInt(playerid, "OnSpecChanging"))
     {

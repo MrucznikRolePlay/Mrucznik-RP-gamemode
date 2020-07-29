@@ -47,6 +47,11 @@ YCMD:wezportfel(playerid, params[], help)
 		{
 			if(PlayerTied[giveplayerid] > 0 || PlayerInfo[giveplayerid][pBW] > 0 || PlayerInfo[giveplayerid][pInjury] > 0)
 			{
+				if(PlayerTied[giveplayerid] != 1)
+				{
+					sendTipMessage(playerid, "Gracz musi byæ zwi¹zany.");
+					return 1;
+				}
 				if(ProxDetectorS(8.0, playerid, giveplayerid))
 				{
 					if(Kajdanki_JestemSkuty[playerid] ||
