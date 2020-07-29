@@ -328,6 +328,11 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 			return 1;
 		}
 	}
+	else if(Check_ID == 21) //bar HA
+	{
+		GameTextForPlayer(playerid, "~w~Bar by ~p~~h~Just Miko & skBarman", 5000, 1);
+		return 1;
+	}
 	return 0; 
 }
 Sprawdz_UID_Wychodzenie(playerid, Check_ID)

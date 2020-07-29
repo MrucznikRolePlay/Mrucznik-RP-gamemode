@@ -121,7 +121,7 @@
 #define CHECKPOINT_HOME 12
 #define MAX_3DTEXT 1024
 #define MAX_DOM 2000
-#define MAX_NrDOM 47
+#define MAX_NrDOM 53
 #define MAX_REMOVED_OBJECTS 100
 #define GasMax 100
 #define RunOutTime 15000

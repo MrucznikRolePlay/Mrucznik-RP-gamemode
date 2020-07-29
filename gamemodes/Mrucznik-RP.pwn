@@ -164,8 +164,7 @@ native gpci (playerid, serial [], len);
 #include "system\timery.pwn"
 
 //-------<[ Obiekty ]>-------
-#include "obiekty\stare_obiekty.pwn"
-#include "obiekty\nowe_obiekty.pwn"
+#include "obiekty\obiekty.pwn"
 #include "obiekty\pickupy.pwn"
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
@@ -294,7 +293,6 @@ public OnGameModeInit()
     //
     BARIERKA_Init();
 
-    Stworz_Obiekty();
 	obiekty_OnGameModeInit();
 
     ZaladujDomy();
@@ -619,13 +617,15 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 						{
 							if(AP < amount) SetPlayerArmour(hitid, 0); // tutaj ma zostaæ 0, bo wartosc armora poni¿ej 0 daje 100 armora (samp bug)
 							else SetPlayerArmour(hitid, AP-amount); //zabierz sampowe dmg kamizelce
+							OnPlayerTakeDamage(hitid, playerid, amount, weaponid, 3);
 							return 0;
 						}
-
+						
 						amount = amount / 2; //CUSTOMOWE DMG (dopiero po wydrenowaniu armora)
 
 						if(HP <= amount) return 1; //wyœlij nabój (zabij)
 						SetPlayerHealth(hitid, HP-amount); //lub zabierz mu customowe dmg
+						OnPlayerTakeDamage(hitid, playerid, amount, weaponid, 3);
 						return 0;
 					}
 					else
@@ -1035,7 +1035,6 @@ public OnPlayerConnect(playerid)
     ClearChat(playerid);
 
     // Wy³¹czone na testy
-    Usun_Obiekty(playerid); //stare obiekty
     obiekty_OnPlayerConnect(playerid);//nowe obiekty
 	
 	LoadTextDraws(playerid);
@@ -1725,6 +1724,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		}
 	}
 	
+	SetPVarInt(playerid, "lastDamage", gettime());
 	Log(damageLog, INFO, "%s zosta³ zraniony przez %s o %fhp broni¹ %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(issuerid) ? GetPlayerLogName(issuerid) : sprintf("%d", issuerid),
@@ -7483,6 +7483,21 @@ public OnPlayerText(playerid, text[])
 			{
 				PlayerTalkIC(playerid, text, "mówi", 15.0);
 			}
+		}
+		else if(OKActive[playerid] && GetPlayerAdminDutyStatus(playerid) == 0)
+		{
+			//speak l33t
+			new newText[256];
+			strcat(newText, text);
+			strreplace(newText, "a", "4", true);
+			strreplace(newText, "o", "0", true);
+			strreplace(newText, "e", "3", true);
+			strreplace(newText, "g", "6", true);
+			strreplace(newText, "l", "1", true);
+			strreplace(newText, "s", "5", true);
+			strreplace(newText, "t", "7", true);
+			strreplace(newText, "z", "2", true);
+			PlayerTalkIC(playerid, newText, "mówi", 15.0);
 		}
 		else
 		{

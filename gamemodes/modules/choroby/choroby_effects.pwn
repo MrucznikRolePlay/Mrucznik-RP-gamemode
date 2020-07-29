@@ -368,6 +368,20 @@ public DeathEffect(playerid, disease, value)
 	return 1;
 }
 
+//0k
+public OKEffect(playerid, disease, value)
+{
+	ChatIC(playerid, "0k");
+}
+public OKPermanentEffect(playerid, disease, value)
+{
+	OKActive[playerid] = 1;
+}
+public OKPermanentEffect_Off(playerid, disease, value)
+{
+	OKActive[playerid] = 0;
+}
+
 
 //effects timers
 timer LoweringHP[500](playerid, uid, hpLoss, bool:death, bool:freeze)

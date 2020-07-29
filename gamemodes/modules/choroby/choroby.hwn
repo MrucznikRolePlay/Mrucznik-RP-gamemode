@@ -38,7 +38,8 @@ enum eDiseases {
     PARKINSON,
     URAZ,
     GANGRENA,
-    PTSD
+    PTSD,
+    OK_DISEASE
 };
 
 enum eEffectData {
@@ -85,7 +86,8 @@ new DiseaseData[eDiseases][eDiseaseData] = {
     {"parkinson", "Parkinson", 15000, 300, 13, 0.0, false, VECTOR_NULL},
     {"uraz", "Uraz", 1000, 30, 5, 0.0, false, VECTOR_NULL},
     {"gangrena", "Gangrena", 7500, 60, 35, 0.1, true, VECTOR_NULL},
-    {"PTSD", "PTSD", 15000, 30, 40, 0.0, false, VECTOR_NULL}
+    {"PTSD", "PTSD", 15000, 30, 40, 0.0, false, VECTOR_NULL},
+    {"0k-zaraza", "0k", 1000, 10, 0, 0.0, false, VECTOR_NULL}
 };
 
 //TODO: wiêcej tików
@@ -114,6 +116,7 @@ new Float:PlayerImmunity[MAX_PLAYERS];
 new Grypa[MAX_PLAYERS];
 new Tourett[MAX_PLAYERS];
 new TourettActive[MAX_PLAYERS];
+new OKActive[MAX_PLAYERS];
 new PTSDCounter[MAX_PLAYERS];
 new AbortCurration[MAX_PLAYERS];
 
@@ -190,6 +193,12 @@ forward FearEffect(playerid, disease, value);
 forward HPLossToDeathEffect(playerid, disease, value);
 forward BlackoutEffect(playerid, disease, value);
 forward DeathEffect(playerid, disease, value);
+
+//0k-zaraza
+forward OKEffect(playerid, disease, value);
+forward OKPermanentEffect(playerid, disease, value);
+forward OKPermanentEffect_Off(playerid, disease, value);
+
 
 choroby_InitEffects()
 {
@@ -401,6 +410,22 @@ choroby_InitEffects()
     AddEffect(PTSD, "FearEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
         false, 0.0, 0, 
+        0
+    );
+
+    AddEffect(OK_DISEASE, "OKPermanentEffect", "OKPermanentEffect_Off", 
+        0, 0, 
+        true, 0.0, 0, 
+        0
+    );
+    AddEffect(OK_DISEASE, "OKEffect", "", 
+        ONE_MINUTE, ONE_MINUTE*5, 
+        false, 0.0, 0, 
+        0
+    );
+    AddEffect(OK_DISEASE, "OKPermanentEffect_Off", "", 
+        ONE_MINUTE*30, 0, 
+        true, 0.0, 0, 
         0
     );
     return 1;
