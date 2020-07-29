@@ -1822,7 +1822,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 		SetPVarInt(playerid, "skip_bw", 1);
 	}
 
-	if(IsAPolicja(killerid) && EVENTS_player_joined[playerid] != 0) 
+	/*if(IsAPolicja(killerid) && EVENTS_player_joined[playerid] != 0) 
 	{
 		SetPVarInt(playerid, "skip_bw", 1);
 		Events_PlayerLeft(playerid, EVENTS_enabled, 2);
@@ -1833,7 +1833,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	{
 		SetPVarInt(playerid, "skip_bw", 1);
 		Events_PlayerLeft(playerid, EVENTS_enabled, 2);
-	}
+	}*/
 	DeathAdminWarning(playerid, killerid, reason);
 
 	if(IsPlayerConnected(playerid))
