@@ -41,7 +41,7 @@ YCMD:setveh(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 2000)
+		if (PlayerInfo[playerid][pAdmin] >= 2000 || Uprawnienia(playerid, ACCESS_EDITCAR))
 		{
 		    if(IsPlayerConnected(para1))
 		    {

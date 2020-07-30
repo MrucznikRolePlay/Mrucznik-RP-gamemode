@@ -43,6 +43,11 @@ YCMD:newbie(playerid, params[], help)
 			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ zosta³eœ uciszony !");
 			return 1;
 		}
+		if(PlayerInfo[playerid][pConnectTime] == 0)
+		{
+			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Musisz przegraæ minimum 1h aby pisaæ na czacie newbie!");
+			return 1;
+		}
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj (/n)ewbie [tekst]");

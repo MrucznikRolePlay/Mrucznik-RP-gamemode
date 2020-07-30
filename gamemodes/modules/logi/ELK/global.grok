@@ -11,7 +11,7 @@ HOUSE \{House: %{INT:[house][id]:int}\}
 BUSINESS \{Business: %{DATA:[business][name]:string}\[%{INT:[business][id]:int}\]\}
 FRACTION \{Fraction: %{DATA:[fraction][name]:string}\[%{INT:[fraction][id]:int}\]\}
 
-GPCI [0-9A-F]{40}
+GPCI [0-9A-F]{30,40}
 
 LOG_PREAMBLE \[%{DATESTAMP:[@metadata][timestamp]}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}
 
