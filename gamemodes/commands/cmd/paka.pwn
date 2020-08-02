@@ -44,7 +44,9 @@ YCMD:paka(playerid, params[], help)
 			    return 1;
 			}
             //267.8893,86.0968,1001.0391,172.1598,0,0,0,0,0,0); // kajdlsajdsa
-	        if(!PlayerToPoint(10.0, playerid, 222.6395,114.3951,999.0156) && !IsPlayerInRangeOfPoint(playerid, 10.0, -1680.1337,920.8787,-52.4141))
+	        if(!PlayerToPoint(10.0, playerid, 222.6395,114.3951,999.0156)
+			&& !PlayerToPoint(5, playerid, 1560.0333,-1638.6797,28.4881)
+			&& !PlayerToPoint(5, playerid, 1559.8517,-1646.9373,28.4881))
 			{// Jail spot
 			    sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ przy celach aby kogoœ zaaresztowaæ !");
 			    return 1;
