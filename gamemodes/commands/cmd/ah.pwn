@@ -104,7 +104,7 @@ YCMD:ah(playerid, params[], help)
 	if (PlayerInfo[playerid][pAdmin] >= 100)
 	{
 		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /reloadbans /dajdzwiek /checkteam /bw /dajapteczke /zmienwiek");
-		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /dskill /dsus /setwl /zaraz /logoutpl /obrazenia");
+		SendClientMessage(playerid, COLOR_GRAD4,"*100* ADMIN *** /dskill /dsus /setwl /zaraz /obrazenia");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 150)
 	{
@@ -119,7 +119,7 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /weatherall /makeleader /dajdowozu /clearwlall");
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /sprzedaja /setarmor /antycheat");
 		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /unfrakcja /makemember /checkcars");
-		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /setimmunity /getimmunity /uleczall");
+		SendClientMessage(playerid, COLOR_GRAD5,"*** 1000 *** /setimmunity /getimmunity /uleczall /logoutpl");
 		SendClientMessage(playerid, COLOR_GRAD1, "{FF6A6A}* System @DUTY *** {C0C0C0}/checkadminstats [ID]");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 2000)

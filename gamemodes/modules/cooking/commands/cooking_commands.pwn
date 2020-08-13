@@ -30,14 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "ugotuj\ugotuj.pwn"
 #include "zjedz\zjedz.pwn"
+#include "ugotuj\ugotuj.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_ugotuj();
     command_zjedz();
+    command_ugotuj();
     
 }

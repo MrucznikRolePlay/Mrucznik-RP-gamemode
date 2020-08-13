@@ -57,6 +57,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	OKActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
 	Odpornosc_PlayerBarToggle[playerid] = 0;
+	OKActive[playerid] = 0;
 	return 1;
 }
 

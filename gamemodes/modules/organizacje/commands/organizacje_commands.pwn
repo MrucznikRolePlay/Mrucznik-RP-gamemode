@@ -30,16 +30,16 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "otworz\otworz.pwn"
 #include "sekta\sekta.pwn"
+#include "otworz\otworz.pwn"
 #include "zamknij\zamknij.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_otworz();
     command_sekta();
+    command_otworz();
     command_zamknij();
     
 }

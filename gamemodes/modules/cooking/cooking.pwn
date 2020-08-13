@@ -26,12 +26,16 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+public EatingUnblock(playerid) DeletePVar(playerid, "EatingBlock");
+
 EatCookedMeal(playerid, name[], weight, type)
 {
 	new Float:hp;
 	GetPlayerHealth(playerid, hp);
 	SetPlayerHealth(playerid, (hp+weight/10) > 100.0 ? 100.0 : (hp+weight/10));
-
+	ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
+	SetPVarInt(playerid, "EatingBlock", 1);
+	SetTimerEx("EatingUnblock",6000,0,"d", playerid);
 	//handle food types
 	if(type == 16 || type == 18)
 	{//Dolphin or Turtle
@@ -49,6 +53,7 @@ EatCookedMeal(playerid, name[], weight, type)
 	}
 
 	ChatMe(playerid, sprintf("zjada %s.", name));
+	ApplyAnimation(playerid, "FOOD", "EAT_Pizza", 4.1, 0, 1, 1, 0, 0, 1);
 
 	if(random(100) == 0 && InfectOrDecreaseImmunity(playerid, ZATRUCIE, 25)) 
 	{//1% szans na zatrucie

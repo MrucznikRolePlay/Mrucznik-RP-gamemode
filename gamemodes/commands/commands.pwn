@@ -457,7 +457,6 @@
 #include "cmd/studia.pwn"
 #include "cmd/stworz.pwn"
 #include "cmd/stworzdom.pwn"
-#include "cmd/stworzobiekty.pwn"
 #include "cmd/stworztrase.pwn"
 #include "cmd/swat.pwn"
 #include "cmd/swiadek.pwn"

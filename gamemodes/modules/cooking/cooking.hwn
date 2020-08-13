@@ -45,7 +45,6 @@ new MealModels[] = {
 
 //-----------------<[ Zmienne: ]>-------------------
 new Groceries[MAX_PLAYERS][pGroceries];
-
 //------------------<[ Forwardy: ]>--------------------
-
+forward EatingUnblock(playerid);
 //end
