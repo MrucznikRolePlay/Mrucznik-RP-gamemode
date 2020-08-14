@@ -2292,7 +2292,7 @@ public JednaSekundaTimer()
 				if(PlayerInfo[i][pJailed] == 1)
 				{
 					SetPlayerInterior(i, 0);
-					SetPlayerPos(i,1561.6958,-1642.3074,28.4881);
+					SetPlayerPos(i,1550.1117,-1643.1370,28.4881);
 				}
 				else if(PlayerInfo[i][pJailed] == 2)
 				{

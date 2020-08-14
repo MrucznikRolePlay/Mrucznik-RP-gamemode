@@ -2598,43 +2598,75 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 4:
 		            {
-		                SetPlayerPos(playerid,1585.8090,-1685.1177,65.8762);
-		                SetPlayerVirtualWorld(playerid,25);
-		                TogglePlayerControllable(playerid,0);
-						SetPlayerInterior(playerid,0);
-						Wchodzenie(playerid);
-                 		GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Biuro komendanta", 5000, 1);
-						PlayerInfo[playerid][pInt] = 0;
+						if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+							SetPlayerPos(playerid,1585.8090,-1685.1177,65.8762);
+							SetPlayerVirtualWorld(playerid,25);
+							TogglePlayerControllable(playerid,0);
+							SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+							GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Biuro komendanta", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
 		            }
 		            case 5:
 		            {
-		                SetPlayerPos(playerid,1551.5720,-1701.7196,28.4807);
-		                SetPlayerVirtualWorld(playerid,26);
-		                TogglePlayerControllable(playerid,0);
-						SetPlayerInterior(playerid,0);
-						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
-						PlayerInfo[playerid][pInt] = 0;
+						if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+							SetPlayerPos(playerid,1551.5720,-1701.7196,28.4807);
+							SetPlayerVirtualWorld(playerid,26);
+							TogglePlayerControllable(playerid,0);
+							SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+							GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
 		            }
 		            case 6:
 		            {
-		                SetPlayerPos(playerid,1562.7128,-1639.0281,28.5040);
-		                SetPlayerVirtualWorld(playerid,27);
-		                TogglePlayerControllable(playerid,0);
-						SetPlayerInterior(playerid,0);
-						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Konferencyjne", 5000, 1);
-						PlayerInfo[playerid][pInt] = 0;
+						if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+							SetPlayerPos(playerid,1562.7128,-1639.0281,28.5040);
+							SetPlayerVirtualWorld(playerid,27);
+							TogglePlayerControllable(playerid,0);
+							SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Konferencyjne", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
 		            }
 					case 7:
 		            {
-		                SetPlayerPos(playerid,1564.9027,-1665.8291,28.4815);
-		                SetPlayerVirtualWorld(playerid,28);
-		                TogglePlayerControllable(playerid,0);
-						SetPlayerInterior(playerid,0);
-						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale przesluchan", 5000, 1);
-						PlayerInfo[playerid][pInt] = 0;
+						if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+							SetPlayerPos(playerid,1564.9027,-1665.8291,28.4815);
+							SetPlayerVirtualWorld(playerid,28);
+							TogglePlayerControllable(playerid,0);
+							SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale przesluchan", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
 		            }
 		            case 8:
 		            {
