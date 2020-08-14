@@ -174,8 +174,7 @@ Player_CanUseCar(playerid, vehicleid)
 	    {
             if(CarData[lcarid][c_Owner] != GetPlayerFraction(playerid) && CarData[lcarid][c_Owner] != 11)
             {
-                format(string, sizeof(string), " Ten pojazd nale¿y do %s i nie mo¿esz nim kierowaæ.", FractionNames[CarData[lcarid][c_Owner]]);
-                sendTipMessageEx(playerid,COLOR_GREY,string);
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
                 return 0;
             }
             if(CarData[lcarid][c_Owner] == 11)
@@ -188,8 +187,7 @@ Player_CanUseCar(playerid, vehicleid)
 		        	return 0;
 	        	}
                 if(TakingLesson[playerid] == 1) return 1;
-                format(string, sizeof(string), " Ten pojazd nale¿y do %s i nie mo¿esz nim kierowaæ.", FractionNames[CarData[lcarid][c_Owner]]);
-                sendTipMessageEx(playerid,COLOR_GREY,string);
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
                 return 0;
             }
 	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
@@ -276,10 +274,7 @@ Player_CanUseCar(playerid, vehicleid)
             if(CarData[lcarid][c_Owner] != GetPlayerOrg(playerid))
             {
                 if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
-				//ERROR WUT
-                //format(string, sizeof(string), " Ten pojazd nale¿y do rodziny %s i nie mo¿esz nim kierowaæ.", OrgInfo[orgID(CarData[lcarid][c_Owner])][o_Name]);
-                format(string, sizeof(string), " Ten pojazd nale¿y do rodziny i nie mo¿esz nim kierowaæ.");
-                sendTipMessageEx(playerid,COLOR_GREY,string);
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
                 return 0;
             }
 	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
