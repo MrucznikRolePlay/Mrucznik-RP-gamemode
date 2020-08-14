@@ -2965,39 +2965,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 	            switch(listitem)
 	            {
-	                case 0:
-					{
-		                if (kaska[playerid] > 500)
-						{
-						    if(PlayerInfo[playerid][pTraderPerk] > 0)
-						    {
-								new skill = 500 / 100;
-								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = 500 - price;
-						        format(string, sizeof(string), "~r~-$%d", payout);
-								GameTextForPlayer(playerid, string, 5000, 1);
-								ZabierzKase(playerid, payout);
-						    }
-						    else
-						    {
-						        format(string, sizeof(string), "~r~-$%d", 500);
-								GameTextForPlayer(playerid, string, 5000, 1);
-								ZabierzKase(playerid, 500);
-						    }
-							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							new randphone = 10000 + random(89999);//minimum 1000  max 9999
-							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
-							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
-							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
-								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
-							);
-							MRP_SetPlayerPhone(playerid, randphone);
-							return 1;
-						}
-					}
-					case 1:
+					case 0:
 					{
 						if (kaska[playerid] > 50000)
 						{
@@ -3067,6 +3035,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								}
 								PlayerGames[playerid]++; 
 							}
+							return 1;
+						}
+					}
+					case 1:
+					{
+		                if (kaska[playerid] > 500)
+						{
+						    if(PlayerInfo[playerid][pTraderPerk] > 0)
+						    {
+								new skill = 500 / 100;
+								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
+								new payout = 500 - price;
+						        format(string, sizeof(string), "~r~-$%d", payout);
+								GameTextForPlayer(playerid, string, 5000, 1);
+								ZabierzKase(playerid, payout);
+						    }
+						    else
+						    {
+						        format(string, sizeof(string), "~r~-$%d", 500);
+								GameTextForPlayer(playerid, string, 5000, 1);
+								ZabierzKase(playerid, 500);
+						    }
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							new randphone = 10000 + random(89999);//minimum 1000  max 9999
+							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
+							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
+								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
+							);
+							MRP_SetPlayerPhone(playerid, randphone);
 							return 1;
 						}
 					}
