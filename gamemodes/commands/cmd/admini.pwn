@@ -61,6 +61,8 @@ YCMD:admini(playerid, params[], help)
 		}
 		if(!activeAdmins) 
 		{
+			SendClientMessage(playerid, -1, "--- Brak ---"); 
+			SendClientMessage(playerid, -1, "Lista administratorów na serwerze:"); 
 			foreach(new i : Player)
 			{
 				if(PlayerInfo[i][pAdmin] == 5000)
