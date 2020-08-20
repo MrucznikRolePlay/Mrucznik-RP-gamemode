@@ -285,7 +285,7 @@ LoadTXD()
 
 	new txd[58];
 	format(txd, sizeof(txd), "Mrucznik-RP %s", VERSION);
-	ServerVersionTXD = TextDrawCreate(34.000000, 436.000000, txd);
+	ServerVersionTXD = TextDrawCreate(36.000000, 436.000000, txd);
 	TextDrawFont(ServerVersionTXD, 2);
 	TextDrawLetterSize(ServerVersionTXD, 0.166666, 1.049999);
 	TextDrawTextSize(ServerVersionTXD, 413.000000, 76.500000);
