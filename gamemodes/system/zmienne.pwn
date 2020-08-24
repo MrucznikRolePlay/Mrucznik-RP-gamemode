@@ -367,8 +367,6 @@ new VINYL_Stream[128];
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
 //new FracLiderRang[MAX_FRAC][MAX_RANG_LEN];      //0.4kB
 new FamRang[MAX_ORG][MAX_RANG][MAX_RANG_LEN];   //4kB
-//21.06
-new GATE_ICC[3], bool:GATE_ICC_S[3] = {false, false, false};
 //18.06 uprawnienia
 new ACCESS[MAX_PLAYERS], OLD_ACCESS[MAX_PLAYERS];
 //15.06 system aut kradziezy
