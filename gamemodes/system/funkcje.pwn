@@ -3337,7 +3337,7 @@ PrzyczepKogut(playerid, veh)
 }
 IsAtAmmunationLosSantos(playerid)
 {
-	if(GetPlayerVirtualWorld(playerid) == 5 && IsPlayerInRangeOfPoint(playerid, 100.0, 1799.7361,-1162.9795,1023.8218)) return 1;
+	if(GetPlayerVirtualWorld(playerid) == 5 && IsPlayerInRangeOfPoint(playerid, 100.0, 1815.6812,-1172.1915,61.5103)) return 1;
 	return 0;
 }
 
