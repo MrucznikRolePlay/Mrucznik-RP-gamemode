@@ -13,8 +13,10 @@
 #define GetObjectPos(%0) ERROR_OBJECT
 #define GetObjectRot(%0) ERROR_OBJECT
 #define AttachObjectToPlayer(%0) ERROR_OBJECT
-//#define SetObjectMaterialText(%0) ERROR_OBJECT
-//#define SetObjectMaterial(%0) ERROR_OBJECT
+#undef  SetObjectMaterialText
+#define SetObjectMaterialText(%0) ERROR_OBJECT
+#undef  SetObjectMaterial
+#define SetObjectMaterial(%0) ERROR_OBJECT
 
 //------------------------------------------------------------------------------
 //                              PVARS

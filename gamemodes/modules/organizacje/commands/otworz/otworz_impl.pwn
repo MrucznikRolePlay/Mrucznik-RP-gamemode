@@ -35,7 +35,7 @@ command_otworz_Impl(playerid)
         sendTipMessage(playerid, "Komenda dostêpna od [4].");
         return 1;
     }
-    if(IsPlayerInRangeOfPoint(playerid, 2.0, 1791.6248,-1164.4028,23.8281) || (IsPlayerInRangeOfPoint(playerid, 200.0, 1795.1212,-1158.1047,1023.8218) && GetPlayerVirtualWorld(playerid) == 5))
+    if(IsPlayerInRangeOfPoint(playerid, 2.0, 1791.6248,-1164.4028,23.8281) || (IsPlayerInRangeOfPoint(playerid, 200.0, 1815.6812,-1172.1915,61.5103) && GetPlayerVirtualWorld(playerid) == 5))
     {
         if(GunshopLSLock == 1)
         {

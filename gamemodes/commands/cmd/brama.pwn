@@ -1837,48 +1837,6 @@ YCMD:brama(playerid, params[], help)
         		return 1;
         	}
         }
-        else if(IsPlayerInFraction(playerid, FRAC_LCN, 5000))
-        {
-            if (IsPlayerInRangeOfPoint(playerid,3.0,719.47821, -1469.03955, 22.69330))
-            {
-                if(GATE_ICC_S[0])
-                {
-                        MoveDynamicObject(GATE_ICC[0], 719.47821, -1469.03955, 22.69330, 3, 0.00000, 0.00000, 90.00000);
-                        GATE_ICC_S[0] = false;
-                }
-                else
-                {
-                        MoveDynamicObject(GATE_ICC[0], 719.47821, -1469.03955, 22.69330, 3, 0.00000, 0.00000, 0.00000);
-                        GATE_ICC_S[0] = true;
-                }
-            }
-            else if (IsPlayerInRangeOfPoint(playerid,2.0,738.15019, -1469.26731, 22.69330))
-            {
-                if(GATE_ICC_S[1])
-                {
-                        MoveDynamicObject(GATE_ICC[1], 738.15009, -1469.26721, 22.69330, 3, 0.00000, 0.00000, 90.00000);
-                        GATE_ICC_S[1] = false;
-                }
-                else
-                {
-                        MoveDynamicObject(GATE_ICC[1], 738.15009, -1469.26721, 22.69330, 3, 0.00000, 0.00000, 180.00000);
-                        GATE_ICC_S[1] = true;
-                }
-            }
-            else if (IsPlayerInRangeOfPoint(playerid,2.0,739.86668, -1469.26731, 22.69330))
-            {
-                if(GATE_ICC_S[2])
-                {
-                        MoveDynamicObject(GATE_ICC[2], 739.86658, -1469.26721, 22.69330, 3, 0.00000, 0.00000, 90.00000);
-                        GATE_ICC_S[2] = false;
-                }
-                else
-                {
-                        MoveDynamicObject(GATE_ICC[2], 739.86658, -1469.26721, 22.69330, 3, 0.00000, 0.00000, 0.00000);
-                        GATE_ICC_S[2] = true;
-                }
-            }
-        }
         if(GetPlayerOrg(playerid) == FAMILY_IBIZA)
         {
             if(IsPlayerInRangeOfPoint(playerid, 5.0, 1903.2273,-2466.0583,17.9950) && PlayerInfo[playerid][pRank] > 5 && GetPlayerVirtualWorld(playerid) == 1) //RANGA
