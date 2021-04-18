@@ -18,21 +18,19 @@ Aby ułatwić wam obczajanie co i jak, umieszczam tutorial krok po kroku, jak ur
 # Instalujemy dockera - potrzebny do uruchomienia bazy mysql i serwera jako kontener
 # https://docs.docker.com/docker-for-windows/install/
 
-
-# OK, masz już wszystkie zależności potrzebne do zbudowania projektu, zróbmy to.
+# OK, masz już wszystkie zależności potrzebne do zbudowania projektu, lecimy dalej.
 
 # Klonujemy projekt razem z submodułami
 git clone --recurse-submodules https://github.com/Mrucznik/Mrucznik-RP-2.5
 cd Mrucznik-RP-2.5
 
-# Pobieramy biblioteki mapy
-sampctl package ensure
-
-# Budujemy mapkę
-sampctl package build
-
-# OK, skrypt zbudowany, teraz możemy odpalić serwer
+# OK, repozytorium pobrane, teraz możemy odpalić serwer
 docker-compose up
+
+# Odpalana zostaje baza danych mysql, phpmyadmin oraz serwer
+# Serwer jest dostępny pod adresem localhost:7777
+# Możesz wejść na konto testowe Test_Test, hasło test
+# Adres phpmyadmina: http://localhost:8080/
 
 # Jeżeli chciałbyś edytować kod, polecam zapoznać się z plikiem IDE.md, 
 # który opisuje w jaki sposób skofigurować IDE takie jak Visual Studio Code, by pisać kod w Pawn.
