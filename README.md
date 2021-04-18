@@ -1,6 +1,44 @@
 # Mrucznik-RP-2.6
 
-Mapa serwera Mrucznik Role Play, kreowana od 2009 roku.
+Mapa serwera Mrucznik Role Play, jednego z największych polskich serwerów Role Play na modyfikacji San Andreas Multiplayer (SA:MP). 
+Serwer istniał od września 2009 roku do października 2020 roku. W tym czasie zapewnił graczom wielu niezapomnianych akcji, mnóstwo zabawy i zgromadził wokół siebie sporą społeczność graczy.
+
+## Od autora
+
+Cześć. Postanowiłem wrzucić skrypt mojego serwera jako dostępny publicznie. Mam nadzieję na to, że niektóre osoby zachęci to do nauki programowania, zaspokoi ciekawość, w jaki sposób wyglądał kod serwera i może zainspiruje do stworzenia czegoś swojego. Kod i tak nie zostanie przeze mnie użyty, ponieważ zakończyłem swoją karierę z tworzniem serwerów role play na SA:MP. Możesz używać kodu dowolnie, tworząc własne projekty bądź kopiować części skryptu do siebie. Projekt udostępniam na licencji pizza-ware. Nie zapewniam wsparcia w odpalaniu skryptu, ale jak napotkasz jakieś problemy, możesz stworzyć Issue na githubie, zapewne odpiszę w wolnej chwili ;) Jeśli masz jakieś pytania co do skryptu, najlepiej komunikować się ze mną poprzez [forum serwera](https://mrucznik-rp.pl/profile/1-mrucznik/).
+Chciałbym podziękować też wszystkim skrypterom, którzy dołożyli swoją cegiełkę do tej mapy, a było ich sporo, listę znajdziecie niżej. Dzięki!
+
+## Jak uruchomić serwer
+
+Aby ułatwić wam obczajanie co i jak, umieszczam tutorial krok po kroku, jak uruchomić serwer.
+```
+# Instalujemy git'a
+# https://git-scm.com/downloads
+
+# Instalujemy sampctl - potrzebne do kompilacji mapy
+# https://github.com/Southclaws/sampctl/wiki/Windows
+
+# Instalujemy dockera - potrzebny do uruchomienia bazy mysql
+# https://docs.docker.com/docker-for-windows/install/
+
+
+# OK, masz już wszystkie zależności potrzebne do zbudowania projektu, zróbmy to.
+
+# Klonujemy projekt razem z submodułami
+git clone --recurse-submodules git@github.com:Mrucznik/Mrucznik-RP-2.5
+
+# Pobieramy biblioteki mapy
+sampctl package ensure
+
+# Budujemy mapkę
+sampctl package build
+
+# OK, skrypt zbudowany, teraz możemy odpalić serwer
+
+
+# Jeżeli chciałbyś edytować kod, polecam zapoznać się z plikiem IDE.md, który opisuje w jaki sposób skofigurować IDE takie jak Visual Studio Code, by pisać kod w Pawn.
+```
+
 
 ## Ważne adnotacje odnośnie kodu
 
@@ -14,7 +52,7 @@ Mapa serwera Mrucznik Role Play, kreowana od 2009 roku.
 
 ## Twórcy
 
-- [Mrucznik] Twórca mapy i założyciel serwera Mrucznik Role Play,
+- [Mrucznik] Twórca modyfikacji mapy (mapa została napisana na podstawie skryptu The Godfather) i założyciel serwera Mrucznik Role Play,
 - [Simeone] Developer w latach 2018 - 2019
 - [Pecet] Developer w latach 2017-2019
 - [Akil] Developer (brak szczegółowych danych)
@@ -42,4 +80,6 @@ Aby skompilować gamemode z użyciem sampctl, należy [zainstalować sampctl](ht
 - `sampctl package ensure`
 - `sampctl package build`
 
-## Inne repozytoria
+## Subrepozytoria
+- https://github.com/Mrucznik/Mrucznik-RP-obiekty - obiekty serwera
+- https://github.com/Mrucznik/Mrucznik-RP-Includes/ - includy serwera
