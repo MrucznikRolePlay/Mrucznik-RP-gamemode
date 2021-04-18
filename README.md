@@ -15,17 +15,15 @@ Aby ułatwić wam obczajanie co i jak, umieszczam tutorial krok po kroku, jak ur
 # Instalujemy git'a
 # https://git-scm.com/downloads
 
-# Instalujemy sampctl - potrzebne do kompilacji mapy
-# https://github.com/Southclaws/sampctl/wiki/Windows
-
-# Instalujemy dockera - potrzebny do uruchomienia bazy mysql
+# Instalujemy dockera - potrzebny do uruchomienia bazy mysql i serwera jako kontener
 # https://docs.docker.com/docker-for-windows/install/
 
 
 # OK, masz już wszystkie zależności potrzebne do zbudowania projektu, zróbmy to.
 
 # Klonujemy projekt razem z submodułami
-git clone --recurse-submodules git@github.com:Mrucznik/Mrucznik-RP-2.5
+git clone --recurse-submodules https://github.com/Mrucznik/Mrucznik-RP-2.5
+cd Mrucznik-RP-2.5
 
 # Pobieramy biblioteki mapy
 sampctl package ensure
@@ -34,11 +32,17 @@ sampctl package ensure
 sampctl package build
 
 # OK, skrypt zbudowany, teraz możemy odpalić serwer
+docker-compose up
 
-
-# Jeżeli chciałbyś edytować kod, polecam zapoznać się z plikiem IDE.md, który opisuje w jaki sposób skofigurować IDE takie jak Visual Studio Code, by pisać kod w Pawn.
+# Jeżeli chciałbyś edytować kod, polecam zapoznać się z plikiem IDE.md, 
+# który opisuje w jaki sposób skofigurować IDE takie jak Visual Studio Code, by pisać kod w Pawn.
 ```
 
+## Nowsza wersja
+
+Mapa była w trakcie przenoszenia na nową wersję MySQL + refactor, ale prace nie zostały dokończone. Zmiany możesz zobaczyć w tym pull requeście: https://github.com/Mrucznik/Mrucznik-RP-2.5/pull/286
+
+Aby ją odpalić należy przełączyć się na brancha new_mysql: `git checkout new_mysql` a następnie odpalić kontenery: `docker-compose up`.
 
 ## Ważne adnotacje odnośnie kodu
 
