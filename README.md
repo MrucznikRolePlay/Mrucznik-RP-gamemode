@@ -64,6 +64,7 @@ Aby ją odpalić należy przełączyć się na brancha new_mysql: `git checkout 
 - [lukeSql] Developer w 2018
 - [Creative] Developer od 6 listopada 2019
 - [Sandał] Developer od 9 grudnia 2019
+- [skTom] autor modułu discordowego
 
 ## [Edytory do PAWN](IDE.md)
 
