@@ -58,7 +58,7 @@ Aby ją odpalić należy przełączyć się na brancha new_mysql: `git checkout 
 - [Simeone] Developer w latach 2018 - 2019
 - [Pecet] Developer w latach 2017-2019
 - [Akil] Developer (brak szczegółowych danych)
-- [Kubi] Developer do 2015 roku
+- [Kubi] Developer od 2013 (?) do 2015 roku
 - [Veroon] Developer (brak szczegółowych danych)
 - [niceCzlowiek] Developer w latach 2017-2018
 - [lukeSql] Developer w 2018
