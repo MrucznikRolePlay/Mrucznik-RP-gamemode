@@ -1,11 +1,11 @@
 # Mrucznik-RP-2.6
 
 Mapa serwera Mrucznik Role Play, jednego z największych polskich serwerów Role Play na modyfikacji San Andreas Multiplayer (SA:MP). 
-Serwer istniał od września 2009 roku do października 2020 roku. W tym czasie zapewnił graczom wielu niezapomnianych akcji, mnóstwo zabawy i zgromadził wokół siebie sporą społeczność graczy.
+Serwer istniał od września 2009 roku do października 2020 roku. W tym czasie zapewnił graczom wiele niezapomnianych akcji, mnóstwo zabawy i zgromadził wokół siebie sporą społeczność graczy.
 
 ## Od autora
 
-Cześć. Postanowiłem wrzucić skrypt mojego serwera jako dostępny publicznie. Mam nadzieję na to, że niektóre osoby zachęci to do nauki programowania, zaspokoi ciekawość, w jaki sposób wyglądał kod serwera i może zainspiruje do stworzenia czegoś swojego. Kod i tak nie zostanie przeze mnie użyty, ponieważ zakończyłem swoją karierę z tworzniem serwerów role play na SA:MP. Możesz używać kodu dowolnie, tworząc własne projekty bądź kopiować części skryptu do siebie. Projekt udostępniam na licencji pizza-ware. Nie zapewniam wsparcia w odpalaniu skryptu, ale jak napotkasz jakieś problemy, możesz stworzyć Issue na githubie, zapewne odpiszę w wolnej chwili ;) Jeśli masz jakieś pytania co do skryptu, najlepiej komunikować się ze mną poprzez [forum serwera](https://mrucznik-rp.pl/profile/1-mrucznik/).
+Cześć. Postanowiłem wrzucić skrypt mojego serwera jako dostępny publicznie. Mam nadzieję na to, że niektóre osoby zachęci to do nauki programowania, zaspokoi ciekawość, w jaki sposób wyglądał kod serwera i może zainspiruje do stworzenia czegoś swojego. Kod i tak nie zostanie przeze mnie użyty, ponieważ zakończyłem swoją karierę z tworzeniem serwerów role play na SA:MP. Możesz używać kodu dowolnie, tworząc własne projekty bądź kopiować części skryptu do siebie. Projekt udostępniam na licencji pizza-ware. Nie zapewniam wsparcia w odpalaniu skryptu, ale jak napotkasz jakieś problemy, możesz stworzyć Issue na githubie, zapewne odpiszę w wolnej chwili ;) Jeśli masz jakieś pytania co do skryptu, najlepiej komunikować się ze mną poprzez [forum serwera](https://mrucznik-rp.pl/profile/1-mrucznik/).
 Chciałbym podziękować też wszystkim skrypterom, którzy dołożyli swoją cegiełkę do tej mapy, a było ich sporo, listę znajdziecie niżej. Dzięki!
 
 ## Jak uruchomić serwer
@@ -54,6 +54,7 @@ Aby ją odpalić należy przełączyć się na brancha new_mysql: `git checkout 
 
 ## Twórcy
 
+- [Fear]? - Twórcy podstawy gamemodu - skryptu The Godfather
 - [Mrucznik] Twórca modyfikacji mapy (mapa została napisana na podstawie skryptu The Godfather) i założyciel serwera Mrucznik Role Play,
 - [Simeone] Developer w latach 2018 - 2019
 - [Pecet] Developer w latach 2017-2019
