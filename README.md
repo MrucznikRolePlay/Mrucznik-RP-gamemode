@@ -29,8 +29,9 @@ docker-compose up
 
 # Odpalana zostaje baza danych mysql, phpmyadmin oraz serwer
 # Serwer jest dostępny pod adresem localhost:7777
-# Możesz wejść na konto testowe Test_Test, hasło test
+# Możesz wejść na konto testowe Test_Test, hasło: test, weryfikacja admina: SiveMopY
 # Adres phpmyadmina: http://localhost:8080/
+# Użytkownik: samp, Hasło: funia
 
 # Jeżeli chciałbyś edytować kod, polecam zapoznać się z plikiem IDE.md, 
 # który opisuje w jaki sposób skofigurować IDE takie jak Visual Studio Code, by pisać kod w Pawn.

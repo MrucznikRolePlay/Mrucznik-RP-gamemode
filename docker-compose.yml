@@ -4,6 +4,7 @@ services:
   samp:
     image: mrucznik/mrucznik-rp:v2.6
     build: .
+    privileged: true 
     expose:
       - "7777/udp"
     ports:
