@@ -4,7 +4,14 @@ services:
   samp:
     image: mrucznik/mrucznik-rp:v2.6
     build: .
-    privileged: true 
+    privileged: true
+    # If you want to change server configuration, extract serverfiles: 
+    # tar -xvf serverfiles.tar.gz serverfiles
+    # and uncomment this lines:
+    #volumes:
+    #  - ./serverfiles/scriptfiles:/samp/serverfilesscriptfiles
+    #  - ./serverfiles/logs:/samp/serverfiles/logs
+    #  - ./serverfiles/server.cfg:/samp/serverfiles/server.cfg
     expose:
       - "7777/udp"
     ports:
