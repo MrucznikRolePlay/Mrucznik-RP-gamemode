@@ -7,7 +7,7 @@ import (
 )
 
 const PORT = 8100
-const HOST = "147.135.199.44"
+const HOST = "resource_server"
 
 func main() {
 	fs := http.FileServer(http.Dir("./models"))

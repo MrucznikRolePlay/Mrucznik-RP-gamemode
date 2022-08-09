@@ -4,3 +4,6 @@
 [submodule "include"]
 	path = include
 	url = https://github.com/Mrucznik/Mrucznik-RP-Includes.git
+[submodule "models"]
+	path = models
+	url = git@github.com:Mrucznik/Mrucznik-RP-models
