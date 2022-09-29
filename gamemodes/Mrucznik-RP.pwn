@@ -112,7 +112,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-                                                                                                         -//
 #include "VERSION.pwn"
 #define DEBUG_MODE 0 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
-#define RESOURCES_LINK "http://147.135.199.44:8100/"
+#define RESOURCES_LINK "http://resource_server:8100/"
 
 #if !defined gpci
 native gpci (playerid, serial [], len);
