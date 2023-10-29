@@ -4,7 +4,7 @@
 	"entry": "gamemodes/Mrucznik-RP.pwn",
 	"output": "gamemodes/Mrucznik-RP.amx",
 	"dependencies": [
-		"Zeex/samp-plugin-crashdetect",
+		"Zeex/samp-plugin-crashdetect:v4.20",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
 		"maddinat0r/samp-log:v0.4",
@@ -14,7 +14,7 @@
 		"Open-GTO/sa-mp-fixes",
 		"emmet-jones/New-SA-MP-callbacks",
 		"oscar-broman/strlib",
-		"pawn-lang/YSI-Includes@4.x",
+		"pawn-lang/YSI-Includes#495cda7ea41facddffae1265d383529a2acfff8f",
 		"Southclaws/samp-whirlpool",
 		"Wuzi/vending",
 		"BigETI/pawn-memory:v2.0.1",
@@ -23,7 +23,7 @@
 		"Pottus/ColAndreas:v1.4.0.3",
 		"BigETI/pawn-map",
 		"Y-Less/indirection",
-		"Zeex/amx_assembly",
+		"Zeex/amx_assembly#e5e8256b7f7f210645d548699b953a17c2d1699c",
 		"Mrucznik/samp-plugin-profiler:v2.15.4",
 		"Southclaws/progress2",
 		"oscar-broman/samp-inline-sort"
