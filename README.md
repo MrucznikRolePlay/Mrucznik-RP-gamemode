@@ -82,8 +82,14 @@ Aby ją odpalić należy przełączyć się na brancha new_mysql: `git checkout 
 Gamemod Mrucznika jest przystosowany do [sampctl](https://github.com/Southclaws/sampctl).
 Aby skompilować gamemode z użyciem sampctl, należy [zainstalować sampctl](https://github.com/Southclaws/sampctl/wiki/Windows) a następnie wpisać następujące polecenia:
 
-- `sampctl package ensure`
-- `sampctl package build`
+- `sampctl ensure`
+- `cd dependencies`
+- `rm -rf amx_assembly`
+- `git clone git@github.com/Mrucznik/amx_assembly`
+- `cd amx_assembly`
+- `git checkout v4.69`
+- `cd ../..`
+- `sampctl build`
 
 ## Subrepozytoria
 - https://github.com/Mrucznik/Mrucznik-RP-obiekty - obiekty serwera

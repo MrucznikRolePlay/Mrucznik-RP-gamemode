@@ -14,7 +14,7 @@
 		"Open-GTO/sa-mp-fixes",
 		"emmet-jones/New-SA-MP-callbacks",
 		"oscar-broman/strlib",
-		"pawn-lang/YSI-Includes#495cda7ea41facddffae1265d383529a2acfff8f",
+		"Mrucznik/YSI-Includes:v4.69",
 		"Southclaws/samp-whirlpool",
 		"Wuzi/vending",
 		"BigETI/pawn-memory:v2.0.1",
@@ -23,7 +23,7 @@
 		"Pottus/ColAndreas:v1.4.0.3",
 		"BigETI/pawn-map",
 		"Y-Less/indirection",
-		"Zeex/amx_assembly#e5e8256b7f7f210645d548699b953a17c2d1699c",
+		"Mrucznik/amx_assembly:v4.69",
 		"Mrucznik/samp-plugin-profiler:v2.15.4",
 		"Southclaws/progress2",
 		"oscar-broman/samp-inline-sort"
