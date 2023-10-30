@@ -18,6 +18,17 @@ RUN dpkg -i libssl1.0.0_1.0.2g-1ubuntu4.20_i386.deb
 RUN sampctl package ensure
 RUN sampctl package build
 
+# copy files
+RUN tar -xvf serverfiles.tar.gz
+RUN cp -r gamemodes/*.amx serverfiles/gamemodes/
+
+# re-create link for YSI lib
+RUN rm /samp/serverfiles/scriptfiles/DANGEROUS_SERVER_ROOT
+RUN ln -s /samp/serverfiles /samp/serverfiles/scriptfiles/DANGEROUS_SERVER_ROOT
+
+WORKDIR /samp/serverfiles
+ENTRYPOINT ["/samp/serverfiles/samp-svr"]
+
 WORKDIR /samp
 ENTRYPOINT ["stampctl"]
 CMD ["package", "build"]
