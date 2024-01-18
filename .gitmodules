@@ -1,21 +1,9 @@
 [submodule "gamemodes/obiekty"]
 	path = gamemodes/obiekty
-	url = https://github.com/gumbalowsky/Mrucznik-RP-obiekty-fork.git
+	url = https://github.com/Mrucznik/Mrucznik-RP-obiekty.git
 [submodule "include"]
 	path = include
 	url = https://github.com/Mrucznik/Mrucznik-RP-Includes.git
 [submodule "models"]
 	path = models
-	url = git@github.com:Mrucznik/Mrucznik-RP-models
-[submodule "Mrucznik-RP-Includes-fork"]
-	path = include
-	url = https://github.com/gumbalowsky/Mrucznik-RP-Includes-fork.git
-[submodule "Mrucznik-RP-Models-fork"]
-	path = models
-	url = https://github.com/gumbalowsky/Mrucznik-RP-Models-fork.git
-[submodule "gamemodes/Mrucznik-RP-obiekty-fork"]
-	path = gamemodes/obiekty/Mrucznik-RP-obiekty-fork
-	url = https://github.com/gumbalowsky/Mrucznik-RP-obiekty-fork.git
-[submodule "gamemodes/--force"]
-	path = gamemodes/--force
-	url = https://github.com/gumbalowsky/Mrucznik-RP-obiekty-fork.git
+	url = https://github.com/Mrucznik/Mrucznik-RP-models.git
