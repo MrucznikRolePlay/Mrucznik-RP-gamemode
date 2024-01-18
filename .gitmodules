@@ -7,3 +7,9 @@
 [submodule "models"]
 	path = models
 	url = git@github.com:Mrucznik/Mrucznik-RP-models
+[submodule "Mrucznik-RP-Includes-fork"]
+	path = includes
+	url = https://github.com/gumbalowsky/Mrucznik-RP-Includes-fork.git
+[submodule "Mrucznik-RP-Models-fork"]
+	path = models
+	url = https://github.com/gumbalowsky/Mrucznik-RP-Models-fork.git
