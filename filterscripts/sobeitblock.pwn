@@ -176,7 +176,7 @@ stock KickPlayerForSobeit(playerid)
 
     SendClientMessage(playerid, 0xFF000000, "Wykryto niedozwolone programy, zostajesz wyrzucony(-na).");
 
-    format(string, sizeof(string), "Gracz %s IP (%s) zosta³ wyrzucony przez AC. Powód: Sobeit", ReturnPlayerName(playerid), ReturnPlayerIp(playerid));
+    format(string, sizeof(string), "Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Sobeit", ReturnPlayerName(playerid), ReturnPlayerIp(playerid));
     AddPlayerToLog(string);
 
     SetTimerEx("KickPlayer", 1000, false, "d", playerid);

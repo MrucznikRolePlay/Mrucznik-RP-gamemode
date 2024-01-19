@@ -45,6 +45,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //-                                                                                                         -//
 #include <a_samp>
 #define FIX_ispacked 0 
+#define FIX_OnClientCheckResponse 0
 #include <fixes>
 
 //-------<[ Pluginy ]>-------
