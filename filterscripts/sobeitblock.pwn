@@ -52,18 +52,18 @@ public OnFilterScriptInit()
     format(string, sizeof(string), "sobeitlog/%d_%02d_%02d.txt", year, month, day);
     fSobeitLog = fopen(string, io_append);
 
-	print("\n--------------------------------------");
-	print(" Fliterscript -sobeitblock- zaladowany");
-	print("--------------------------------------\n");
-	return 1;
+    print("\n--------------------------------------");
+    print(" Fliterscript -sobeitblock- zaladowany");
+    print("--------------------------------------\n");
+    return 1;
 }
 
 public OnFilterScriptExit()
 {
-	print("\n--------------------------------------");
-	print(" Fliterscript -sobeitblock- wylaczony");
-	print("--------------------------------------\n");
-	return 1;
+    print("\n--------------------------------------");
+    print(" Fliterscript -sobeitblock- wylaczony");
+    print("--------------------------------------\n");
+    return 1;
 }
 
 public OnPlayerConnect(playerid)
@@ -121,7 +121,7 @@ public OnClientCheckResponse(playerid, actionid, memaddr, retndata)
 public OnPlayerDisconnect(playerid, reason)
 {
     pUpdateCount[playerid] = 0;
-	pClientCheck[playerid] = bool:{false, false};
+    pClientCheck[playerid] = bool:{false, false};
 
     return 1;
 }
@@ -140,7 +140,7 @@ OznaczCzitera(playerid)
 stock ReturnPlayerName(playerid)
 {
     new name[MAX_PLAYER_NAME + 1];
-    
+
     if (IsPlayerConnected(playerid))
     {
         if (GetPVarType(playerid, "maska_nick") != PLAYER_VARTYPE_NONE)
@@ -181,13 +181,12 @@ stock KickPlayerForSobeit(playerid)
 
 stock AddPlayerToLog(const str[])
 {
-    new
-        year, month, day,
+    new year, month, day,
         hour, minute, second;
 
-	getdate(year, month, day);
+    getdate(year, month, day);
     gettime(hour, minute, second);
 
-	format(string, sizeof(string), "%02d:%02d:%02d %s\r\n", hour, minute, second, str);
-	fwrite(fSobeitLog, string);
+    format(string, sizeof(string), "%02d:%02d:%02d %s\r\n", hour, minute, second, str);
+    fwrite(fSobeitLog, string);
 }
