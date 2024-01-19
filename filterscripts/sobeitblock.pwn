@@ -35,8 +35,6 @@
 #define MAX_UPDATE_COUNT 10
 
 //-----------------<[ Zmienne: ]>-------------------
-new string[256];
-new File:fSobeitLog;
 new pUpdateCount[MAX_PLAYERS];
 new bool:pSobeit[MAX_PLAYERS];
 new bool:pClientCheck[MAX_PLAYERS][2];
@@ -47,12 +45,6 @@ forward KickPlayer(playerid);
 //-----------------<[ Callback'i: ]>-------------------
 public OnFilterScriptInit()
 {
-    new year, month, day;
-    getdate(year, month, day);
-
-    format(string, sizeof(string), "sobeitlog/%d_%02d_%02d.txt", year, month, day);
-    fSobeitLog = fopen(string, io_append);
-
     print("\n--------------------------------------");
     print(" Filterscript -sobeitblock- zaladowany");
     print("--------------------------------------\n");
@@ -176,21 +168,8 @@ stock KickPlayerForSobeit(playerid)
 
     SendClientMessage(playerid, 0xFF000000, "Wykryto niedozwolone programy, zostajesz wyrzucony(-na).");
 
-    format(string, sizeof(string), "Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Sobeit", ReturnPlayerName(playerid), ReturnPlayerIp(playerid));
-    AddPlayerToLog(string);
+    printf("Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Sobeit", ReturnPlayerName(playerid), ReturnPlayerIp(playerid));
 
     SetTimerEx("KickPlayer", 1000, false, "d", playerid);
     return 1;
-}
-
-stock AddPlayerToLog(const str[])
-{
-    new year, month, day,
-        hour, minute, second;
-
-    getdate(year, month, day);
-    gettime(hour, minute, second);
-
-    format(string, sizeof(string), "%02d:%02d:%02d %s\r\n", hour, minute, second, str);
-    fwrite(fSobeitLog, string);
 }
