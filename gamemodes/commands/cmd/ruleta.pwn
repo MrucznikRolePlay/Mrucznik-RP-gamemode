@@ -178,6 +178,10 @@ YCMD:ruleta(playerid, params[], help)
 
             amount = 5;
         }
+        else
+        {
+            return sendRouletteTipMessage(playerid);
+        }
     }
     else
     {
