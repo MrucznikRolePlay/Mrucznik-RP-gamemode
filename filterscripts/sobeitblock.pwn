@@ -38,6 +38,7 @@
 new string[256];
 new File:fSobeitLog;
 new pUpdateCount[MAX_PLAYERS];
+new bool:pSobeit[MAX_PLAYERS];
 new bool:pClientCheck[MAX_PLAYERS][2];
 
 //------------------<[ Forwardy: ]>--------------------
@@ -121,6 +122,7 @@ public OnClientCheckResponse(playerid, actionid, memaddr, retndata)
 public OnPlayerDisconnect(playerid, reason)
 {
     pUpdateCount[playerid] = 0;
+    pSobeit[playerid] = false;
     pClientCheck[playerid] = bool:{false, false};
 
     return 1;
@@ -165,10 +167,12 @@ stock ReturnPlayerIp(playerid)
 
 stock KickPlayerForSobeit(playerid)
 {
-    if (!IsPlayerConnected(playerid))
+    if (!IsPlayerConnected(playerid) || pSobeit[playerid])
     {
         return 0;
     }
+
+    pSobeit[playerid] = true;
 
     SendClientMessage(playerid, 0xFF000000, "Wykryto niedozwolone programy, zostajesz wyrzucony(-na).");
 
