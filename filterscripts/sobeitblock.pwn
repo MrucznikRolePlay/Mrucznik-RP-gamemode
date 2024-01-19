@@ -53,7 +53,7 @@ public OnFilterScriptInit()
     fSobeitLog = fopen(string, io_append);
 
     print("\n--------------------------------------");
-    print(" Fliterscript -sobeitblock- zaladowany");
+    print(" Filterscript -sobeitblock- zaladowany");
     print("--------------------------------------\n");
     return 1;
 }
@@ -61,7 +61,7 @@ public OnFilterScriptInit()
 public OnFilterScriptExit()
 {
     print("\n--------------------------------------");
-    print(" Fliterscript -sobeitblock- wylaczony");
+    print(" Filterscript -sobeitblock- wylaczony");
     print("--------------------------------------\n");
     return 1;
 }
