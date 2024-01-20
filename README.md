@@ -83,12 +83,7 @@ Gamemod Mrucznika jest przystosowany do [sampctl](https://github.com/Southclaws/
 Aby skompilować gamemode z użyciem sampctl, należy [zainstalować sampctl](https://github.com/Southclaws/sampctl/wiki/Windows) a następnie wpisać następujące polecenia:
 
 - `sampctl ensure`
-- `cd dependencies`
-- `rm -rf amx_assembly`
-- `git clone git@github.com:Mrucznik/amx_assembly`
-- `cd amx_assembly`
-- `git checkout v4.69`
-- `cd ../..`
+- `./amx_fix.sh`
 - `sampctl build`
 
 ## Subrepozytoria
