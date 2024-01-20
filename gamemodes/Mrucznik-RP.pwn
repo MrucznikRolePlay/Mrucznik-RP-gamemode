@@ -1056,13 +1056,6 @@ public OnPlayerConnect(playerid)
 		KickEx(playerid);
 		return 1;
 	}
-	//Nick bez wulgaryzmów
-	if(CheckVulgarityString(nick) == 1)
-	{
-		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick zawiera wulgaryzmy/niedozwolone s³owa - zmieñ go!"); 
-		KickEx(playerid);
-		return 1;
-	}
 	SetRPName(playerid);
 	
 	//bany
