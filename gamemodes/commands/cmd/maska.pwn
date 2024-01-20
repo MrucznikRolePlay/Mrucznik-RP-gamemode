@@ -67,6 +67,14 @@ YCMD:maska(playerid, params[], help)
 		new nick[32];
 		if(GetPVarString(playerid, "maska_nick", nick, 24))
 		{
+			//fix bug maska
+			foreach(new i : Player){
+				if(IsPlayerConnected(i) && playerid != INVALID_PLAYER_ID && i != playerid){
+					if(!strcmp(GetNickEx(i), GetNickEx(playerid))){
+						return sendErrorMessage(playerid, "Wystapil blad!");
+					}
+				}
+			}
 			SetPlayerColor(playerid, TEAM_HIT_COLOR);
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			format(string, sizeof(string), "* %s sci¹ga maskê z twarzy.", sendername);

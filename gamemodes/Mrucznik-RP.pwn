@@ -5819,8 +5819,18 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 			return 1;
 		}
-		
 
+		//fix bug maska
+		foreach(new i : Player){
+			if(IsPlayerConnected(i) && playerid != INVALID_PLAYER_ID && i != playerid){
+				if(PlayerInfo[i][pUID] == PlayerInfo[playerid][pUID]){
+					SendClientMessage(playerid, COLOR_PANICRED, "Konto jest juz zalogowane!");
+					KickEx(playerid);
+					return 1;
+				}
+			}
+		}
+		
 		//Nadawanie pieniêdzy:
 		ResetujKase(playerid);
 		if(PlayerInfo[playerid][pCash] < 0)
