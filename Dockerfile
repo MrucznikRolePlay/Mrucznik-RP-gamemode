@@ -30,5 +30,5 @@ WORKDIR /samp/serverfiles
 ENTRYPOINT ["/samp/serverfiles/samp-svr"]
 
 WORKDIR /samp
-ENTRYPOINT ["stampctl"]
+ENTRYPOINT ["sampctl"]
 CMD ["package", "build"]
