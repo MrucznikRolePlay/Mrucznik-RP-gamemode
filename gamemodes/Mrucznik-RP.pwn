@@ -51,7 +51,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <crashdetect>
 #include <log-plugin>
 #include <sscanf2>
-#include <libRegEx>
+#include <pawn.regex>
 #include <streamer>
 #include <mysql_R5>
 //#include <a_mysql> TODO: replace R5 plugin
@@ -81,7 +81,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <YSI\y_timers>
-#include <indirection-fix>
 #include <indirection>
 #include <amx_assembly\addressof>
 //redefinition from y_playerarray.inc
