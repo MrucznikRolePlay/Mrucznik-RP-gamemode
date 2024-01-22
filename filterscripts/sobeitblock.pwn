@@ -1,206 +1,174 @@
+//-------------------------------------------<< Filterscript >>----------------------------------------------//
+//------------------------------------------[ ModuÂ³: sobeitblock.pwn ]---------------------------------------------//
+//Opis:
+/*
+*/
+//Adnotacje:
+/*
+*/
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+
+//
+
 #include <a_samp>
-#include <foreach>
 
-#define OznaczCzitera(%0) CallRemoteFunction("OznaczCzitera","i", %0)
- 
-native SendClientCheck(clientid, actionid, arg1= 0x00000000, arg2= 0x0000, bytes= 0x0004); // int32, int8, int32, int16, int16
-forward OnClientCheckResponse(clientid, actionid, checksum, crc);
- 
-new
-	bool: pPlayerSpawned[MAX_PLAYERS] = false, // blokada przed timerem CheckSobeitPlayers jeœli gracz siê nie zespawnowa³
-	bool: pHaveSobeit[MAX_PLAYERS] = false, // czy znalaz³o soba
-	bool: pAFKK[MAX_PLAYERS] = false;
 
-new pCountCheck[MAX_PLAYERS]; // maksymalna iloœæ sprawdzeñ soba (timer Check, max. 3 próby)
+//------------------<[ Define: ]>-------------------
+#undef MAX_PLAYERS
+#define MAX_PLAYERS 500
+#define MAX_UPDATE_COUNT 10
 
-new File:fSobeitLog;
-new fSobeitBuff;
-new string[256];
+//-----------------<[ Zmienne: ]>-------------------
+new pUpdateCount[MAX_PLAYERS];
+new bool:pSobeit[MAX_PLAYERS];
+new bool:pClientCheck[MAX_PLAYERS][2];
 
+//------------------<[ Forwardy: ]>--------------------
+forward KickPlayer(playerid);
+
+//-----------------<[ Callback'i: ]>-------------------
 public OnFilterScriptInit()
 {
-	new y, m, d;
-	getdate(y, m, d);
-	format(string, 64, "sobeitlog/%d_%d_%d.txt", y, m, d);
-	fSobeitLog = fopen(string, io_append);
-
-	SetTimer("CheckSobeitPlayers", 10000, true);
-	return 1;
+    print("\n--------------------------------------");
+    print(" Filterscript -sobeitblock- zaladowany");
+    print("--------------------------------------\n");
+    return 1;
 }
 
 public OnFilterScriptExit()
 {
-	return 1;
+    print("\n--------------------------------------");
+    print(" Filterscript -sobeitblock- wylaczony");
+    print("--------------------------------------\n");
+    return 1;
 }
 
 public OnPlayerConnect(playerid)
 {
-	SendClientCheck(playerid, 0x47);
-	return 1;
+    SendClientCheck(playerid, 5, 0x5E8606, 0, 2);
+    SendClientCheck(playerid, 69, 0x3A9ED, 0, 2); // 0.3.DL
+
+    return 1;
+}
+
+public OnPlayerUpdate(playerid)
+{
+    if (pUpdateCount[playerid] != -1 && ++ pUpdateCount[playerid] == MAX_UPDATE_COUNT)
+    {
+        pUpdateCount[playerid] = -1;
+
+        OznaczCzitera(playerid);
+        // KickPlayerForSobeit(playerid);
+    }
+
+    return 1;
+}
+
+public OnClientCheckResponse(playerid, actionid, memaddr, retndata)
+{
+    if (actionid == 5 && memaddr == 0x5E8606)
+    {
+        pClientCheck[playerid][0] = true;
+
+        if (retndata != 204)
+        {
+            OznaczCzitera(playerid);
+            // KickPlayerForSobeit(playerid);
+        }
+    }
+    else if (actionid == 69 && memaddr == 0x3A9ED)
+    {
+        pClientCheck[playerid][1] = true;
+
+        if (retndata != 136)
+        {
+            OznaczCzitera(playerid);
+            // KickPlayerForSobeit(playerid);
+        }
+    }
+
+    if (pClientCheck[playerid][0] && pClientCheck[playerid][1])
+    {
+        pUpdateCount[playerid] = -1;
+    }
+
+    return 1;
 }
 
 public OnPlayerDisconnect(playerid, reason)
 {
-	pHaveSobeit[playerid]    = false;
-	pPlayerSpawned[playerid] = false;
-	if(pAFKK[playerid]) pAFKK[playerid] = false;
-	return 1;
+    pUpdateCount[playerid] = 0;
+    pSobeit[playerid] = false;
+    pClientCheck[playerid] = bool:{false, false};
+
+    return 1;
 }
 
-public OnPlayerSpawn(playerid)
+public KickPlayer(playerid)
 {
-	/*
-	Tutaj trzeba wykonaæ ponowne sprawdzenie akcji, poniewa¿ po do³¹czniu do serwera i wy³¹czeniem
-	sobieta klawiszem F12 przed wykonaniem OnPlayerConnect i SendClientCheck w nim zawartym OnClientCheckResponse
-	omija sprawdzanie. Mo¿na go te¿ omin¹æ poprzez wykonywanie siê tego callbacka (o ile jest ktoœ kumaty i ma trochê wiedzy na tematy)*/
-
-	SendClientCheck(playerid, 0x47); // musi byæ ze wzglêdu, ¿e w timerze nie wy³apuje zazwyczaj w checksumie 30 i nie ³apie sobieta tylko w onplayerspawn (reszty nie sprawdza³em)
-	pPlayerSpawned[playerid] = true;
-	return 1;
+    return Kick(playerid);
 }
- 
-public OnClientCheckResponse(clientid, actionid, checksum, crc)
+
+//-----------------<[ Funkcje: ]>-------------------
+OznaczCzitera(playerid)
 {
-	switch(actionid)
-	{
-        case 0x47: SendClientCheck(clientid, 0x02);
-        case 0x02:
+    return CallRemoteFunction("OznaczCzitera", "i", playerid);
+}
+
+stock ReturnPlayerName(playerid)
+{
+    new name[MAX_PLAYER_NAME + 1];
+
+    if (IsPlayerConnected(playerid))
+    {
+        if (GetPVarType(playerid, "maska_nick") != PLAYER_VARTYPE_NONE)
         {
-			if(pAFKK[clientid]) pAFKK[clientid] = false;
-
-			if(checksum & 0x00ff0000 == 0x00300000)
-			{
-				pHaveSobeit[clientid] = true;
-				pCountCheck[clientid] = 0;
-				OznaczCzitera(clientid);
-				//kickPlayerForSobeit(clientid, 1);
-				
-			}
-			else if(checksum & 0x00ff0000 == 0x00CC0000)
-			{
-				pHaveSobeit[clientid] = true;
-				pCountCheck[clientid] = 0;
-				OznaczCzitera(clientid);
-				//kickPlayerForSobeit(clientid, 2);
-			}
-			else if(checksum & 0x00ff0000 == 0x00FC0000)
-			{
-				pCountCheck[clientid] = 0;
-				pAFKK[clientid] = true;
-			}
-			else
-			{
-				SetTimerEx("Check", 1000, false, "d", clientid);// timer jest dlatego, ¿e pierwsze wykonanie akcji za poœrednictwem onplayerconnect nie jest prawdziwe i bezu¿yteczne, dla pewnoœci robiê prawdziwe 3 próby
-			}
+            GetPVarString(playerid, "maska_nick", name, sizeof(name));
         }
-	}
+        else
+        {
+            GetPlayerName(playerid, name, sizeof(name));
+        }
+    }
 
-	//printf("clientid: %d, actionid: 0x%02x, checksum: 0x%08x, crc: %d", clientid,actionid,checksum,crc);    
+    return name;
 }
 
-forward Check(playerid);
-public Check(playerid)
+stock ReturnPlayerIp(playerid)
 {
-	if(!pHaveSobeit[playerid])
-	{
-			if(pCountCheck[playerid] < 3) // tak na prawdê wykonaj¹ siê 4 próby sprawdzenia, lecz pierwsza próba jest bezu¿yteczna i jej nie uwzglêdniam, kolejne wyniki s¹ prawid³owe                                                            
-			{
-				SendClientCheck(playerid, 0x02); // ponowne wywo³anie akcji 0x02 w celu ponownego sprawdzenia
-				pCountCheck[playerid] ++; // inkrementacja zmiennej (iloœci sprawdzeñ soba)
-			}
-			else pCountCheck[playerid] = 0;
-	}
-	return 1;
+    new ip[16];
+    GetPlayerIp(playerid, ip, sizeof(ip));
+    return ip;
 }
 
-forward CheckSobeitPlayers();
-public CheckSobeitPlayers()
+stock KickPlayerForSobeit(playerid)
 {
-	foreach(new i : Player)
-	{
-			pCountCheck[i] = 0;
-			SendClientCheck(i, 0x02);
-	}
-	return 1;
-}
+    if (!IsPlayerConnected(playerid) || pSobeit[playerid])
+    {
+        return 0;
+    }
 
-stock GetNick(playerid)
-{
-	new nick[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, nick, sizeof(nick));
-	return nick;
-}
+    pSobeit[playerid] = true;
 
-stock GetNickEx(playerid, withmask = false)
-{
-	new nick[MAX_PLAYER_NAME];
- 	GetPlayerName(playerid, nick, sizeof(nick));
-	if(withmask)
-	{
-		return nick;
-	}
-	else
-	{
-		new nick2[24];
-		if(GetPVarString(playerid, "maska_nick", nick2, 24))
-		{
-			return nick2;
-		}
-	}
-	return nick;
-}
+    SendClientMessage(playerid, 0xFF000000, "Wykryto niedozwolone programy, zostajesz wyrzucony(-na).");
 
-stock GetIp(playerid)
-{
-	new ip[16];
-	GetPlayerIp(playerid, ip, sizeof(ip));
-	return ip;
-}
+    printf("Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Sobeit", ReturnPlayerName(playerid), ReturnPlayerIp(playerid));
 
-stock kickPlayerForSobeit(playerid, reason)
-{
-	switch(reason)
-	{
-		case 1:
-		{
-			SendClientMessage(playerid, -1, "{FF0000} Wykryto niedozwolone programy, zostajesz wyrzucony.");
-
-			format(string, 256, "Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Sobeit", GetNickEx(playerid), GetIp(playerid));
-			AddPlayerToLog(string);
-		}
-		case 2:
-		{
-			SendClientMessage(playerid, -1, "{FF0000} Wykryto niedozwolone programy, zostajesz wyrzucony.");
-			
-			format(string, 256, "Gracz %s IP (%s) zostal wyrzucony przez AC. Powod: Health Hack", GetNickEx(playerid), GetIp(playerid));
-			AddPlayerToLog(string);
-		}
-	}
-
-	SetTimerEx("kickPlayer", 1000, false, "d", playerid);
-	return 1;
-}
-
-forward kickPlayer(playerid);
-public kickPlayer(playerid)
-{
-	Kick(playerid);
-	return 1;
-}
-
-stock AddPlayerToLog(str[])
-{
-	static datehours[6];
-	getdate(datehours[0], datehours[1], datehours[2]);
-	gettime(datehours[3], datehours[4], datehours[5]);
-
-	format(string, 256, "%02d:%02d:%02d %s\r\n", datehours[3], datehours[4], datehours[5], str);
-	fwrite(fSobeitLog, string);
-	if(++fSobeitBuff > 10)
-	{
-		fSobeitBuff = 0;
-		fclose(fSobeitLog);
-		format(string, 64, "sobeitlog/%d_%d_%d.txt", datehours[2], datehours[1], datehours[0]);
-		fSobeitLog = fopen(string, io_append);
-	}
+    SetTimerEx("KickPlayer", 1000, false, "d", playerid);
+    return 1;
 }
