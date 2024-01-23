@@ -507,21 +507,54 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 
     if(!mysql_query(query)) fault=false;
 
-	format(query, sizeof(query), "UPDATE `mru_personalization` SET \
-	`KontoBankowe` = '%d', \
-	`Ogloszenia` = '%d', \
-	`LicznikPojazdu` = '%d', \
-	`OgloszeniaFrakcji` = '%d', \
-	`OgloszeniaRodzin` = '%d', \
-	`OldNick` = '%d', \
-	`CBRadio` = '%d', \
-	`Report` = '%d', \
-	`DeathWarning` = '%d', \
-	`KaryTXD` = '%d', \
-	`NewNick` = '%d', \
-	`newbie` = '%d',	\
-	`BronieScroll` = '%d'	\
+	format(query, sizeof(query), "INSERT INTO mru_presonalization ( \
+		`UID` \
+		`KontoBankowe` \
+		`Ogloszenia` \
+		`LicznikPojazdu` \
+		`OgloszeniaFrakcji` \
+		`OgloszeniaRodzin` \
+		`OldNick` \
+		`CBRadio` \
+		`Report` \
+		`DeathWarning` \
+		`KaryTXD` \
+		`NewNick` \
+		`newbie` \
+		`BronieScroll`) \
+	VALUES ( \
+		'%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d' \
+	) \
+	ON DUPLICATE KEY UPDATE \
+		`KontoBankowe` = '%d', \
+		`Ogloszenia` = '%d', \
+		`LicznikPojazdu` = '%d', \
+		`OgloszeniaFrakcji` = '%d', \
+		`OgloszeniaRodzin` = '%d', \
+		`OldNick` = '%d', \
+		`CBRadio` = '%d', \
+		`Report` = '%d', \
+		`DeathWarning` = '%d', \
+		`KaryTXD` = '%d', \
+		`NewNick` = '%d', \
+		`newbie` = '%d',	\
+		`BronieScroll` = '%d'	\
 	WHERE `UID`= '%d'",
+	PlayerInfo[playerid][pUID],
+	PlayerPersonalization[playerid][PERS_KB],
+	PlayerPersonalization[playerid][PERS_AD],
+	PlayerPersonalization[playerid][PERS_LICZNIK],
+	PlayerPersonalization[playerid][PERS_FINFO],
+	PlayerPersonalization[playerid][PERS_FAMINFO],
+	PlayerPersonalization[playerid][PERS_NICKNAMES],
+	PlayerPersonalization[playerid][PERS_CB],
+	PlayerPersonalization[playerid][PERS_REPORT],
+	PlayerPersonalization[playerid][WARNDEATH],
+	PlayerPersonalization[playerid][PERS_KARYTXD],
+	PlayerPersonalization[playerid][PERS_NEWNICK],
+	PlayerPersonalization[playerid][PERS_NEWBIE],
+	PlayerPersonalization[playerid][PERS_GUNSCROLL],
+	// to update
 	PlayerPersonalization[playerid][PERS_KB],
 	PlayerPersonalization[playerid][PERS_AD],
 	PlayerPersonalization[playerid][PERS_LICZNIK],
