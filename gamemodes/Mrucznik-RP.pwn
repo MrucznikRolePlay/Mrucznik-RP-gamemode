@@ -51,7 +51,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <crashdetect>
 #include <log-plugin>
 #include <sscanf2>
-#include <pawn.regex>
+#include <libRegEx>
 #include <streamer>
 #include <mysql_R5>
 //#include <a_mysql> TODO: replace R5 plugin
