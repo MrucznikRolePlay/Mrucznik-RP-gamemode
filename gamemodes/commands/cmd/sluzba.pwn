@@ -109,39 +109,34 @@ YCMD:sluzba(playerid, params[], help)
         }
         else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
         {
-            if (PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736) //nowe FBI by Ubunteq
-            || PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
-            || PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ))//nowe domy /duty w domu
+            new vw = GetPlayerVirtualWorld(playerid);
+            if ((vw == 2 && PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736)) //nowe FBI by Ubunteq
+            || (vw == 2 && PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5))//nowe domy
+            || (vw == 2 && PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5))//nowe domy /duty w domu
+            || (vw == 0 && PlayerToPoint(2, playerid, 596.5255, -1489.2544, 15.3587))) // winda fbi
             {
-				if(GetPlayerVirtualWorld(playerid) == 2)
-				{
-					if(OnDuty[playerid]==0)
-					{
-						format(string, sizeof(string), "* Agent FBI %s bierze odznakê i broñ ze swojej szafki.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						DajBronieFrakcyjne(playerid);
-						SetPlayerArmour(playerid, 90);
-						SetPlayerHealth(playerid, 100);
-						OnDuty[playerid] = 1;
-						SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
-						SetPlayerToTeamColor(playerid);
-					}
-					else if(OnDuty[playerid]==1)
-					{
-						format(string, sizeof(string), "* Agent FBI %s odk³ada odznakê i broñ do swojej szafki.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						SetPlayerArmour(playerid, 0.0);
-						SetPlayerHealth(playerid, 100);
-						OnDuty[playerid] = 0;
-						PrzywrocBron(playerid);
-						SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-						SetPlayerToTeamColor(playerid);
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteœ w szatni!"); 
-				}
+                if(OnDuty[playerid]==0)
+                {
+                    format(string, sizeof(string), "* Agent FBI %s bierze odznakê i broñ ze swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    DajBronieFrakcyjne(playerid);
+                    SetPlayerArmour(playerid, 90);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 1;
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
+                    SetPlayerToTeamColor(playerid);
+                }
+                else if(OnDuty[playerid]==1)
+                {
+                    format(string, sizeof(string), "* Agent FBI %s odk³ada odznakê i broñ do swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 0.0);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 0;
+                    PrzywrocBron(playerid);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerToTeamColor(playerid);
+                }
             }
             else
             {
