@@ -11477,6 +11477,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
         else speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[idx][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[idx][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[idx][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         if(speed < 8.5) ile = TransportJobData[idx][eTJDMoney];
         else if(speed > 30) ile = TransportJobData[idx][eTJDMoney];
+		else ile = TransportJobData[idx][eTJDMoney] - ((speed - 7) * 100);
 
         format(str, 64, "Towar wy³adowany, zarabiasz %d$", ile);
         SendClientMessage(playerid, 0x00FF00FF, str);
