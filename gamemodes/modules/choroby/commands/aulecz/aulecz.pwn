@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  uleczall                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,35 +27,46 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "zastrzyk\zastrzyk.pwn"
-#include "maseczka\maseczka.pwn"
-#include "kuracja\kuracja.pwn"
-#include "odpornosc\odpornosc.pwn"
-#include "diagnozuj\diagnozuj.pwn"
-#include "getimmunity\getimmunity.pwn"
-#include "uleczall\uleczall.pwn"
-#include "setimmunity\setimmunity.pwn"
-#include "ulecz\ulecz.pwn"
-#include "zaraz\zaraz.pwn"
-#include "aulecz\aulecz.pwn"
-
+#include "aulecz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_aulecz()
 {
-    command_zastrzyk();
-    command_maseczka();
-    command_kuracja();
-    command_odpornosc();
-    command_diagnozuj();
-    command_getimmunity();
-    command_uleczall();
-    command_setimmunity();
-    command_ulecz();
-    command_zaraz();
-    command_aulecz();
+    new command = Command_GetID("aulecz");
+
+    //aliases
+    Command_AddAlt(command, "aheal");
     
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:aulecz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Leczy gracza z chorób.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /aulecz [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_aulecz_Impl(playerid, giveplayerid);
 }

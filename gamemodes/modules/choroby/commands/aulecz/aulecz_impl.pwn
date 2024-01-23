@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  uleczall                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,27 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sandal
+// Data utworzenia: 23.01.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "zastrzyk\zastrzyk.pwn"
-#include "maseczka\maseczka.pwn"
-#include "kuracja\kuracja.pwn"
-#include "odpornosc\odpornosc.pwn"
-#include "diagnozuj\diagnozuj.pwn"
-#include "getimmunity\getimmunity.pwn"
-#include "uleczall\uleczall.pwn"
-#include "setimmunity\setimmunity.pwn"
-#include "ulecz\ulecz.pwn"
-#include "zaraz\zaraz.pwn"
-#include "aulecz\aulecz.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_aulecz_Impl(playerid, giveplayerid)
 {
-    command_zastrzyk();
-    command_maseczka();
-    command_kuracja();
-    command_odpornosc();
-    command_diagnozuj();
-    command_getimmunity();
-    command_uleczall();
-    command_setimmunity();
-    command_ulecz();
-    command_zaraz();
-    command_aulecz();
-    
+    if(PlayerInfo[playerid][pAdmin] < 20 && !IsAScripter(playerid))
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
+
+    CureFromAllDiseases(giveplayerid);
+
+    Log(adminLog, INFO, "Admin %s wyleczy³ gracza %s z wszystkich chorób.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "Zosta³eœ uleczony z wszystkich chorób przez admina.");
+    SendClientMessage(playerid, COLOR_GRAYWHITE, sprintf("Uleczy³eœ %s z wszystkich chorób.", GetPlayerName(giveplayerid)))
+    return 1;
 }
+
+//end
