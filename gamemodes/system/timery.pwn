@@ -2379,8 +2379,8 @@ public JednaSekundaTimer()
 							cena_naprawy = floatround(float(cena_naprawy) * GovernmentServicesPriceMultiplier);
 						}
 
-				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", cena_naprawy);
-				        ZabierzKase(i, cena_naprawy);
+						sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", cena_naprawy);
+						ZabierzKase(i, cena_naprawy);
 						RepairVehicle(vehicleid);
 						naprawiony[i] = 1;
 						SetTimerEx("Naprawianie",10000,0,"d",i);
