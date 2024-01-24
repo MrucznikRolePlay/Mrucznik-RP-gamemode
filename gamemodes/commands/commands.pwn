@@ -643,6 +643,7 @@
 #include "cmd/wlsett.pwn"
 #include "cmd/inwigilacja.pwn"
 #include "cmd/togro.pwn"
+#include "cmd/paralizator.pwn"
 InitCommands()
 {
 	Aliases();
@@ -1496,6 +1497,11 @@ static Aliases()
 
 	//odmroz
 	Command_AddAltNamed("odmroz", "unfreeze");
+
+	//paralizator
+	Command_AddAltNamed("paralizator", "taser");
+	Command_AddAltNamed("paralizator", "tazer");
+
 
 	foreach (new command : Command())
 	{

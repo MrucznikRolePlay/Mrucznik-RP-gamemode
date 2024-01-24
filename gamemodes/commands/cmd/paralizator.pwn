@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ zatankuj ]-----------------------------------------------//
+//-----------------------------------------------[ paralizator ]---------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -25,41 +25,23 @@
 
 // Notatki skryptera:
 /*
-	
+    Szybkie wyci¹gniêcie paralizatora.
 */
 
-
-static zatankujPojazdGracza(playerid)
+YCMD:paralizator(playerid, params[], help)
 {
-	new engine, niewazne;
-	GetVehicleParamsEx(GetPlayerVehicleID(playerid), engine, niewazne, niewazne, niewazne, niewazne, niewazne, niewazne); 
-	if(engine == 1 || OdpalanieSpam[playerid] == 1) return SendClientMessage(playerid, COLOR_GREY, "Nie mo¿esz tankowaæ, gdy silnik jest odpalony!");
-	GameTextForPlayer(playerid,"~w~~n~~n~~n~~n~~n~~n~~n~~n~~n~Tankowanie pojazdu, prosze czekac",2000,3);
-	SetTimer("Fillup",RefuelWait,0);
-	Refueling[playerid] = 1;
-}
-
-
-YCMD:zatankuj(playerid, params[], help)
-{
-    if(IsPlayerConnected(playerid))
+    if(gPlayerLogged[playerid] == 1 && IsPlayerConnected(playerid))
     {
-		// zwyk³e stacje benzynowe
-		if(IsAtGasStation(playerid))
+		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) return 1;
+		new playerState = GetPlayerState(playerid);
+		if(playerState == 1)
 		{
-		    if(IsPlayerInAnyVehicle(playerid))
-		    {
-				zatankujPojazdGracza(playerid);
-			}
-		}
-		// stacje benzynowe frakcyjne
-		else if(IsAFractionGasStationValidUser(playerid) && IsPlayerInTheirFractionVehicle(playerid))
-		{
-			zatankujPojazdGracza(playerid);
-		}
-		else
-		{
-			sendTipMessageEx(playerid,COLOR_GREY,"Nie jesteœ na stacji benzynowej!");
+            new weaponid = 0, ammo = 0;
+            GetPlayerWeaponData(playerid, 2, weaponid, ammo);
+            if(ammo > 0 && weaponid == 24 && (IsAPolicja(playerid) || IsABOR(playerid)) && (OnDuty[playerid] == 1 || OnDutyCD[playerid] == 1))
+            {
+                PrzedmiotyZmienBron(playerid, 24, 1);
+            }
 		}
 	}
 	return 1;

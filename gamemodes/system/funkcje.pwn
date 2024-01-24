@@ -2453,6 +2453,11 @@ IsABOR(playerid)
 	return 0;
 }
 
+IsAPorzadkowy(playerid)
+{
+	return IsAPolicja(playerid) || IsAMedyk(playerid) || IsABOR(playerid);
+}
+
 /*
 MozePobic(playerid)
 {
@@ -3671,6 +3676,33 @@ IsAtGasStation(playerid)
 		}
 		else if(PlayerToPoint(10.0,playerid,2489.6565,-2101.3022,13.5620)) 
 		{//stacja w bazie KT
+			return 1;
+		}
+	}
+	return 0;
+}
+
+IsPlayerInTheirFractionVehicle(playerid)
+{
+	new vehicleid = GetPlayerVehicleID(playerid);
+	if(vehicleid != 0)
+	{
+		new lcarid = VehicleUID[vehicleid][vUID];
+		if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FRACTION && CarData[lcarid][c_Owner] == GetPlayerFraction(playerid))
+		{
+			return 1;
+		}
+	} 
+
+	return 0;
+}
+
+IsAFractionGasStationValidUser(playerid)
+{
+	if(IsPlayerConnected(playerid) && IsPlayerInTheirFractionVehicle(playerid))
+	{
+		if(GetPlayerFraction(playerid) == FRAC_LSPD && PlayerToPoint(12.0, playerid, 1530.2, -1673.4, 6.5))
+		{// tankowanie dla LSPD - parking dolny LSPD
 			return 1;
 		}
 	}
