@@ -48,7 +48,7 @@ YCMD:fbidrzwi(playerid, params[], help)
 		}
 		else
 		{
-			sendTipMessage(playerid, "Ta komenda jest dostêpna od rangi [3]")
+			sendTipMessage(playerid, "Ta komenda jest dostêpna od rangi [3]");
 		}
 	}
 	return 1;
