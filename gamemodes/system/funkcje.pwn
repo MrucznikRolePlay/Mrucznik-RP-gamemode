@@ -11130,7 +11130,7 @@ TJD_JobEnd(playerid, bool:quiter=false)
     SetVehicleHealth(veh, 1000.0);
     Gas[veh] = 100;
 
-    PlayerInfo[playerid][pTruckSkill]+=PlayerInfo[playerid][pTruckSkill]+floatround(ile/5, floatround_floor);
+    PlayerInfo[playerid][pTruckSkill] += floatround(ile/5, floatround_floor);
 }
 
 TJD_CallCheckpoint(playerid, veh)
