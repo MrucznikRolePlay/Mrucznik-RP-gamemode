@@ -99,7 +99,7 @@ command_lowienie_Impl(playerid)
         }
         if(PlayerInfo[playerid][pFishLic] < 1)
         {
-            if(PoziomPoszukiwania[playerid] == 0);
+            if(PoziomPoszukiwania[playerid] == 0)
                 PoziomPoszukiwania[playerid]++;
             SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Nielegalny po³ów ryb");
         }
