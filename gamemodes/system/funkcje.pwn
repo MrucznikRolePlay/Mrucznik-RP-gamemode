@@ -1707,7 +1707,6 @@ Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
         SetPVarInt(playerid, "kostka-player", 0);
     }
     Log(payLog, INFO, "%s wygra³ rzuty kostk¹ z %s na kwotê %d$ %s", GetPlayerLogName(playerid), GetPlayerLogName(loser), kasa, quit ? "(quit)" : "");
-    Sejf_Add(19, podatek);
 
 
     return 1;
