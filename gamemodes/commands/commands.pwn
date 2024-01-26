@@ -1499,8 +1499,8 @@ static Aliases()
 	Command_AddAltNamed("odmroz", "unfreeze");
 
 	//paralizator
-	Command_AddAltNamed("paralizator", "taser")
-	Command_AddAltNamed("paralizator", "tazer")
+	Command_AddAltNamed("paralizator", "taser");
+	Command_AddAltNamed("paralizator", "tazer");
 
 	foreach (new command : Command())
 	{
