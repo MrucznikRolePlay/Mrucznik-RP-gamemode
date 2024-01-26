@@ -49,19 +49,36 @@ YCMD:swat(playerid, params[], help)
 			{
 				if(OnDuty[playerid] == 1)
 				{
-					format(string, sizeof(string), "* %s bierze mundur i tarczê SWAT.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	    		    SetPlayerSkin(playerid, 285);
-					SetPlayerColor(playerid, 0x000000FF); // czarny
-                    SetPlayerArmour(playerid, 90);
-	    		    if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
-	    		    {
-	    		    	RemovePlayerAttachedObject(playerid, 2);
-	    		    }
-	    		    else
-	    		    {
-	    		        SetPlayerAttachedObject(playerid, 2, 18637, 13, 0.35, 0.0, 0.0, 0, 0, 180);
-	    		    }
+					// /swat od drugiej rangi
+					if(PlayerInfo[playerid][pRank] >= 2)
+					{
+						format(string, sizeof(string), "* %s bierze karabin szturmowy oraz mundur i tarczê SWAT.", sendername);
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						SetPlayerSkin(playerid, 285);
+						SetPlayerColor(playerid, 0x000000FF); // czarny
+						SetPlayerArmour(playerid, 90);
+
+						// M4 na /swat
+						if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 31 && PlayerInfo[playerid][pAmmo5] < 730 || PlayerInfo[playerid][pAmmo5] <= 30)
+						{
+							PlayerInfo[playerid][pGun5] = 31; PlayerInfo[playerid][pAmmo5] = 730;
+							playerWeapons[playerid][weaponLegal6] = 1;
+							PrzywrocBron(playerid);
+						}
+
+						if(IsPlayerAttachedObjectSlotUsed(playerid, 2))
+						{
+							RemovePlayerAttachedObject(playerid, 2);
+						}
+						else
+						{
+							SetPlayerAttachedObject(playerid, 2, 18637, 13, 0.35, 0.0, 0.0, 0, 0, 180);
+						}
+					}
+					else
+					{
+						sendTipMessage(playerid, "Potrzebujesz co najmniej 2 rangi, by skorzystaæ z komendy /swat !");
+					}
 				}
 				else
 				{
