@@ -2371,8 +2371,16 @@ public JednaSekundaTimer()
 					GetVehicleHealth(vehicleid, health);
 					if(health <= 999)
 					{
-				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", 7500);
-				        ZabierzKase(i, 7500);
+						new cena_naprawy = 7500;
+
+						if(IsAPorzadkowy(i) && IsPlayerInTheirFractionVehicle(i))
+						{// 25% (GovernmentServicesPriceMultiplier) ceny za naprawê w sprayu dla frakcji porz¹dkowych
+							new Float:GovernmentServicesPriceMultiplier = 0.25;
+							cena_naprawy = floatround(float(cena_naprawy) * GovernmentServicesPriceMultiplier);
+						}
+
+				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", cena_naprawy);
+				        ZabierzKase(i, cena_naprawy);
 						RepairVehicle(vehicleid);
 						naprawiony[i] = 1;
 						SetTimerEx("Naprawianie",10000,0,"d",i);
@@ -3252,21 +3260,28 @@ public Fillup()
 		else FillUp = 0;
 		if(Refueling[i] == 1)
 		{
-			if(kaska[i] >= FillUp+4)
+			new FillUpPrice = FillUp * 120;
+
+			if(IsAPorzadkowy(i) && IsPlayerInTheirFractionVehicle(i))
+			{// na zwyk³ych stacjach 25% (GovernmentServicesPriceMultiplier) ceny za paliwo dla frakcji porz¹dkowych
+				new Float:GovernmentServicesPriceMultiplier = 0.25;
+				FillUpPrice = floatround(GovernmentServicesPriceMultiplier * float(FillUpPrice));
+			}
+
+			if(kaska[i] >= FillUpPrice)
 			{
 				Gas[VID] += FillUp;
-				FillUp = FillUp * 120;
-				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUp);
+				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUpPrice);
 				SendClientMessage(i, COLOR_LIGHTBLUE,string);
-				ZabierzKase(i, FillUp);
-				Refueling[i] = 0;
+				ZabierzKase(i, FillUpPrice);
 			}
 			else
 			{
-				format(string,sizeof(string),"Nie posiadasz doœæ pieniêdzy ($%d) aby zatankowaæ ten pojazd.",FillUp);
+				format(string,sizeof(string),"Nie posiadasz doœæ pieniêdzy ($%d) aby zatankowaæ ten pojazd.", FillUpPrice);
 				sendErrorMessage(i,string);
-                Refueling[i] = 0;
 			}
+
+			Refueling[i] = 0;
 		}
 	}
 	return 1;
