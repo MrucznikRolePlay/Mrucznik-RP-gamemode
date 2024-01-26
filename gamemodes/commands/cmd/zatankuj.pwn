@@ -42,17 +42,20 @@ YCMD:zatankuj(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		// zwyk³e stacje benzynowe
 		if(IsAtGasStation(playerid))
-		{
+		{ // zwyk³e stacje benzynowe
 		    if(IsPlayerInAnyVehicle(playerid))
 		    {
                 zatankujPojazdGracza(playerid);
 			}
 		}
 		else if(IsAFractionGasStationValidUser(playerid) && IsPlayerInTheirFractionVehicle(playerid))
-		{
+		{ // stacje benzynowe frakcyjne
 			zatankujPojazdGracza(playerid);
+		}
+		else
+		{
+			sendTipMessageEx(playerid,COLOR_GREY,"Nie jesteœ na stacji benzynowej!");
 		}
 	}
 	return 1;
