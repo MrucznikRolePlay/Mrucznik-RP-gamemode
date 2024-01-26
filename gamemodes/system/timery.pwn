@@ -3252,21 +3252,27 @@ public Fillup()
 		else FillUp = 0;
 		if(Refueling[i] == 1)
 		{
-			if(kaska[i] >= FillUp+4)
+			new FillUpPrice = FillUp * 120;
+
+			if(IsAFractionGasStationValidUser(i))
+			{// na frakcyjnych stacjach tankowanie za darmo dla cz?onków frakcji
+				FillUpPrice = 0;
+			}
+
+			if(kaska[i] >= FillUpPrice)
 			{
 				Gas[VID] += FillUp;
-				FillUp = FillUp * 120;
-				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUp);
+				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUpPrice);
 				SendClientMessage(i, COLOR_LIGHTBLUE,string);
-				ZabierzKase(i, FillUp);
-				Refueling[i] = 0;
+				ZabierzKase(i, FillUpPrice);
 			}
 			else
 			{
-				format(string,sizeof(string),"Nie posiadasz doœæ pieniêdzy ($%d) aby zatankowaæ ten pojazd.",FillUp);
+				format(string,sizeof(string),"Nie posiadasz doœæ pieniêdzy ($%d) aby zatankowaæ ten pojazd.", FillUpPrice);
 				sendErrorMessage(i,string);
-                Refueling[i] = 0;
 			}
+
+			Refueling[i] = 0;
 		}
 	}
 	return 1;
