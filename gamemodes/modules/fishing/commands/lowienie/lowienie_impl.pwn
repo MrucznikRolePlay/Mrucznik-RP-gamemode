@@ -216,6 +216,7 @@ command_lowienie_Impl(playerid)
         { SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci rybaka wynosz¹ teraz 4, mo¿esz ³owiæ wiêksze ryby."); }
         else if(PlayerInfo[playerid][pFishSkill] == 400)
         { SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci rybaka wynosz¹ teraz 5, mo¿esz ³owiæ wiêksze ryby."); }
+        MruMySQL_UpdateFish(playerid, Fishes[playerid][pLastFish]);
     }
     else
     {

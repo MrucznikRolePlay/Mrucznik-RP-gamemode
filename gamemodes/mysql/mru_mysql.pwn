@@ -840,6 +840,36 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerPersonalization[playerid][PERS_GUNSCROLL]); 
 	}
 	mysql_free_result();
+
+	// fishes
+	format(lStr, 1024, "SELECT * FROM `mru_ryby` WHERE `Player`=%d", PlayerInfo[playerid][pUID]);
+	mysql_query(lStr);
+	mysql_store_result();
+	if(mysql_num_rows()) {
+		new uid;
+		mysql_fetch_row_format(lStr, "|");
+		sscanf(lStr, "p<|>is[20]s[20]s[20]s[20]s[20]dddddddddd",
+		uid,
+		Fishes[playerid][pFish1],
+		Fishes[playerid][pFish2],
+		Fishes[playerid][pFish3],
+		Fishes[playerid][pFish4],
+		Fishes[playerid][pFish5],
+		Fishes[playerid][pWeight1],
+		Fishes[playerid][pWeight2],
+		Fishes[playerid][pWeight3],
+		Fishes[playerid][pWeight4],
+		Fishes[playerid][pWeight5],
+		Fishes[playerid][pFid1],
+		Fishes[playerid][pFid2],
+		Fishes[playerid][pFid3],
+		Fishes[playerid][pFid4],
+		Fishes[playerid][pFid5]);
+	} else {
+		format(lStr, 1024, "INSERT INTO `mru_ryby` (`Player`) VALUES (%i)", PlayerInfo[playerid][pUID]);
+		mysql_query(lStr);
+	}
+	mysql_free_result();
 	
 	//legal
 	format(lStr, sizeof lStr, "SELECT * FROM `mru_legal` WHERE `pID`=%d", PlayerInfo[playerid][pUID]);
@@ -1341,6 +1371,45 @@ stock MruMySQL_DeletePhoneContact(uid)
 {
 	new string[128];
 	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);
+	mysql_query(string);
+	return 1;
+}
+
+stock MruMySQL_UpdateFish(playerid, fish) {
+	if(!IsPlayerConnected(playerid))
+		return 0;
+	new sql_fish[20], sql_weight, sql_fid;
+	switch(fish) {
+		case 1: {
+			format(sql_fish, 20, Fishes[playerid][pFish1]);
+			sql_weight = Fishes[playerid][pWeight1];
+			sql_fid = Fishes[playerid][pFid1];
+		}
+		case 2: {
+			format(sql_fish, 20, Fishes[playerid][pFish2]);
+			sql_weight = Fishes[playerid][pWeight2];
+			sql_fid = Fishes[playerid][pFid2];
+		}
+		case 3: {
+			format(sql_fish, 20, Fishes[playerid][pFish3]);
+			sql_weight = Fishes[playerid][pWeight3];
+			sql_fid = Fishes[playerid][pFid3];
+		}
+		case 4: {
+			format(sql_fish, 20, Fishes[playerid][pFish4]);
+			sql_weight = Fishes[playerid][pWeight4];
+			sql_fid = Fishes[playerid][pFid4];
+		}
+		case 5: {
+			format(sql_fish, 20, Fishes[playerid][pFish5]);
+			sql_weight = Fishes[playerid][pWeight5];
+			sql_fid = Fishes[playerid][pFid5];
+		}
+		default:
+			return 0;
+	}
+	new string[128];
+	format(string, sizeof(string), "UPDATE mru_ryby SET `Fish%i`='%s', `Weight%i`=%i, `Fid%i`=%i WHERE `Player`=%i", fish, sql_fish, fish, sql_weight, fish, sql_fid, PlayerInfo[playerid][pUID]);
 	mysql_query(string);
 	return 1;
 }
