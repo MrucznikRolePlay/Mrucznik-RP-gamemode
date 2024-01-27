@@ -4387,7 +4387,7 @@ ShowStats2(playerid)
 	format(plCzas, sizeof(plCzas), "%d:%d", hour, minute); 
 	format(plPKT, sizeof(plPKT), "Punkty Karne: %d", PlayerInfo[playerid][pPK]);
 	format(plWL, sizeof(plWL), "WantedLevel: %d", PlayerInfo[playerid][pWL]); 
-	format(plRyba, sizeof(plRyba), "Ryba: %d kg", PlayerInfo[playerid][pFishes]); 
+	format(plRyba, sizeof(plRyba), "Ryba: %d kg", PlayerInfo[playerid][pBiggestFish]); 
 	format(plWozKlucz, sizeof(plWozKlucz), "Klucze auta: %d", PlayerInfo[playerid][pKluczeAuta]);
 	format(plWantedD, sizeof(plWantedD), "Wanted-Death: %d", PlayerInfo[playerid][pWantedDeaths]);
 	format(plAresztCzas, sizeof(plAresztCzas), "Czas aresztu: %d", PlayerInfo[playerid][pArrested]);  
@@ -4659,7 +4659,7 @@ ShowStats(playerid,targetid)
 		new znick = PlayerInfo[targetid][pZmienilNick];
 		new lotto = PlayerInfo[targetid][pLottoNr];
 		new deaths = PlayerInfo[targetid][pDeaths];
-		new fishes = PlayerInfo[targetid][pFishes];
+		new fishes = CalculateFishes(playerid);
 		new bigfish = PlayerInfo[targetid][pBiggestFish];
 		new crimes = PlayerInfo[targetid][pCrimes];
 		new arrests = PlayerInfo[targetid][pArrested];

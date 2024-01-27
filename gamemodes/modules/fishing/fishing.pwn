@@ -100,6 +100,21 @@ PlayerHasFishes(playerid)
 	return Fishes[playerid][pWeight1] > 0 || Fishes[playerid][pWeight2] > 0 || Fishes[playerid][pWeight3] > 0 || Fishes[playerid][pWeight4] > 0 || Fishes[playerid][pWeight5] > 0;
 }
 
+CalculateFishes(playerid) {
+	new fishes = 0;
+	if(Fishes[playerid][pWeight1] > 0)
+		fishes++;
+	if(Fishes[playerid][pWeight2] > 0)
+		fishes++;
+	if(Fishes[playerid][pWeight3] > 0)
+		fishes++;
+	if(Fishes[playerid][pWeight4] > 0)
+		fishes++;
+	if(Fishes[playerid][pWeight5] > 0)
+		fishes++;
+	return fishes;
+}
+
 IsAtFishPlace(playerid)
 {
 	if(IsPlayerConnected(playerid))

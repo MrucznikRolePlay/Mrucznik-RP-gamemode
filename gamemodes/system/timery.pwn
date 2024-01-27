@@ -3278,18 +3278,6 @@ public PlayersCheckerMinute()
 	{
 		if(gPlayerLogged[j] > 0)
 		{
-			if(PlayerInfo[j][pFishes] >= 5) 
-			{ 
-				if(FishCount[j] >= 14) //15 minut
-				{
-					PlayerInfo[j][pFishes] = 0; 
-					FishCount[j] = 0;
-				} 
-				else 
-				{ 
-					FishCount[j]++; 
-				} 
-			}
 			if(GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
 			{
 				if(PlayerInfo[j][pSkin] > 0)
