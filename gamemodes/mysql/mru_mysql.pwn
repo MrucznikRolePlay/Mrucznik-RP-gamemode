@@ -180,11 +180,11 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 
     if(PlayerInfo[playerid][pLevel] == 0)
     {
-        Log(mysqlLog, ERROR, "MySQL:: %s - b³¹d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
+        Log(mysqlLog, ERROR, "MySQL:: %s - bï¿½ï¿½d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
         return 0;
     }
 
-	//wy³¹cz na chwilkê maskowanie nicku (pNick)
+	//wyï¿½ï¿½cz na chwilkï¿½ maskowanie nicku (pNick)
 	new maska_nick[24];
 	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
 	{
@@ -508,19 +508,19 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     if(!mysql_query(query)) fault=false;
 
 	format(query, sizeof(query), "INSERT INTO mru_presonalization ( \
-		`UID` \
-		`KontoBankowe` \
-		`Ogloszenia` \
-		`LicznikPojazdu` \
-		`OgloszeniaFrakcji` \
-		`OgloszeniaRodzin` \
-		`OldNick` \
-		`CBRadio` \
-		`Report` \
-		`DeathWarning` \
-		`KaryTXD` \
-		`NewNick` \
-		`newbie` \
+		`UID`, \
+		`KontoBankowe`, \
+		`Ogloszenia`, \
+		`LicznikPojazdu`, \
+		`OgloszeniaFrakcji`, \
+		`OgloszeniaRodzin`, \
+		`OldNick`, \
+		`CBRadio`, \
+		`Report`, \
+		`DeathWarning`, \
+		`KaryTXD`, \
+		`NewNick`, \
+		`newbie`, \
 		`BronieScroll`) \
 	VALUES ( \
 		'%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d' \
@@ -570,7 +570,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_GUNSCROLL],
 	PlayerInfo[playerid][pUID]); 
 
-	//przywróæ maskowanie nicku (pNick)
+	//przywrï¿½ï¿½ maskowanie nicku (pNick)
 	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
 	{
 		new playernickname[MAX_PLAYER_NAME];
@@ -801,7 +801,7 @@ public MruMySQL_LoadAccount(playerid)
 
 	loadKamiPos(playerid);
 
-	//Wczytaj liderów
+	//Wczytaj liderï¿½w
 	lStr = "`NICK`, `UID`, `FracID`, `LiderValue`";
 	format(lStr, 1024, "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", lStr, GetNickEx(playerid));
 	mysql_query(lStr);
@@ -1170,20 +1170,20 @@ bool:MruMySQL_SprawdzBany(playerid)
             else format(string, sizeof(string), "Twoje konto {FF8C00}%s{FFA500} (%d) jest zbanowane.", nick, pid);
 
     		SendClientMessage(playerid, COLOR_NEWS, string);
-    		format(string, sizeof(string), "{FFA500}Nadaj¹cy: %s ({FF8C00}%d{FFA500}) | Powód: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
+    		format(string, sizeof(string), "{FFA500}Nadajï¿½cy: %s ({FF8C00}%d{FFA500}) | Powï¿½d: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
     		SendClientMessage(playerid, COLOR_NEWS, string);
             return true;
         }
         else if(typ == WARN_BLOCK)
         {
-            SendClientMessage(playerid, COLOR_WHITE, "{FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
-			SendClientMessage(playerid, COLOR_WHITE, "Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
+            SendClientMessage(playerid, COLOR_WHITE, "{FF0000}To konto jest zablokowane, nie moï¿½esz na nim graï¿½.");
+			SendClientMessage(playerid, COLOR_WHITE, "Jeï¿½li uwaï¿½asz, ï¿½e konto zostaï¿½o zablokowane niesï¿½usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
 
-    		format(string, sizeof(string), "{FFA500}Nadaj¹cy: %s ({FF8C00}%d{FFA500}) | Powód: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
+    		format(string, sizeof(string), "{FFA500}Nadajï¿½cy: %s ({FF8C00}%d{FFA500}) | Powï¿½d: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
     		SendClientMessage(playerid, COLOR_NEWS, string);
             return true;
         }
-        else if(typ > 20) //Zwracanie KP, je¿eli ma
+        else if(typ > 20) //Zwracanie KP, jeï¿½eli ma
         {
             SetPVarInt(playerid, "kp_readd", 1);
             return false;
