@@ -5091,6 +5091,7 @@ orgSetSpawnAtPlayerPos(playerid, orgid)
     GetPlayerPos(playerid, OrgInfo[orgid][o_Spawn][0], OrgInfo[orgid][o_Spawn][1], OrgInfo[orgid][o_Spawn][2]);
     GetPlayerFacingAngle(playerid, OrgInfo[orgid][o_Spawn][3]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "ORG » Spawn zmieniony.");
+	orgSave(orgid, ORG_SAVE_TYPE_BASIC);
     return 1;
 }
 
