@@ -320,7 +320,7 @@
 #include "cmd/pban.pwn"
 #include "cmd/pblok.pwn"
 #include "cmd/piwo.pwn"
-//#include "cmd/pjtest.pwn"
+#include "cmd/pjtest.pwn"
 #include "cmd/pl.pwn"
 #include "cmd/plac.pwn"
 #include "cmd/placmedyk.pwn"
@@ -926,7 +926,7 @@ static Aliases()
 	Command_AddAltNamed("megafon", "megaphone");
 	Command_AddAltNamed("megafon", "m");
 
-	//skróty akceptowania
+	//skrÃ³ty akceptowania
 	Command_AddAltNamed("akceptujnaprawe", "an");
 	Command_AddAltNamed("akceptujtankowanie", "at");
 	//mi
@@ -1170,7 +1170,7 @@ static Aliases()
 	//staty
 	/*Command_AddAltNamed("staty", "stats");
 	Command_AddAltNamed("staty", "statystyki");
-	Command_AddAltNamed("staty2", "stats2"); */ //na razie zawieszamy stats do czasu dopracowania tego textdrawa. Zgodnie z decyzj¹ 0Verte.
+	Command_AddAltNamed("staty2", "stats2"); */ //na razie zawieszamy stats do czasu dopracowania tego textdrawa. Zgodnie z decyzjÂ¹ 0Verte.
 	Command_AddAltNamed("staty2", "stats");
 
 	//stopanim
