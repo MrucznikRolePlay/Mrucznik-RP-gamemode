@@ -40,7 +40,7 @@ mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL_CHANGE, DIALOG_STYLE_LIST, "Panel Anty-Cheat'a", 
                 string,
-                "Ustaw", "Wyjdï¿½");
+                "Ustaw", "WyjdŸ");
         }
         return 1;
     }
@@ -51,7 +51,7 @@ mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             new code = DynamicGui_GetDialogValue(playerid);
             new eNexACAdditionalSettings:type = eNexACAdditionalSettings:listitem;
             NexACSaveCode(code, type);
-            Log(adminLog, INFO, "Admin %s ustawiï¿½ funkcjï¿½ anty-cheata %s[%d] na %s", 
+            Log(adminLog, INFO, "Admin %s ustawi³ funkcjê anty-cheata %s[%d] na %s", 
                 GetPlayerLogName(playerid), NexACDecodeCode(code), code, GetNexACAdditionalSettingName(type));
             ac_ShowDialog(playerid);
         }
@@ -74,7 +74,7 @@ ac_ShowDialog(playerid)
             strcat(string, sprintf("{FF0000}%s[%d] - OFF{FFFFFF}\n", nexac_ac_names[i], i));
         }
     }
-    ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL, DIALOG_STYLE_LIST, "Panel Anty-Cheat'a", string, "Zmieï¿½", "Wyjdï¿½");
+    ShowPlayerDialogEx(playerid, DIALOG_AC_PANEL, DIALOG_STYLE_LIST, "Panel Anty-Cheat'a", string, "Zmieñ", "WyjdŸ");
 }
 
 command_ac_Impl(playerid)
