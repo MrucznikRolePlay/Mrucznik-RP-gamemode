@@ -17561,7 +17561,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
-	else if(ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	else if(mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
 	{
 		return 1;
 	}
