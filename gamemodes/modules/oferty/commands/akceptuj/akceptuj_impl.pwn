@@ -459,7 +459,9 @@ command_akceptuj_Impl(playerid, x_job[32])
                         SendClientMessage(TicketOffer[playerid], COLOR_LIGHTBLUE, string);
                         DajKase(TicketOffer[playerid], depo3);
                         new ktodal = TicketOffer[playerid];
-                        Sejf_Add(PlayerInfo[ktodal][pMember], depo2);
+                        new sejf = PlayerInfo[ktodal][pMember] ? PlayerInfo[ktodal][pMember] : PlayerInfo[ktodal][pLider];
+                        if(sejf)
+                            Sejf_Add(sejf, depo2);
                         TicketOffer[playerid] = 999;
                         TicketMoney[playerid] = 0;
                         return 1;
