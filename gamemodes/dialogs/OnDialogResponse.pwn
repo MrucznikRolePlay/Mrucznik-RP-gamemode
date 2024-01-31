@@ -17,14 +17,14 @@ CheckDialogId(playerid, dialogid)
     {
         if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
-        SendClientMessage(playerid, COLOR_RED, "B≥Ídne ID GUI.");
-        Log(serverLog, WARNING, "B≥Ídne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
+        SendClientMessage(playerid, COLOR_RED, "BÔøΩÔøΩdne ID GUI.");
+        Log(serverLog, WARNING, "BÔøΩÔøΩdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
         return 0;
     }
 	return 1;
 }
 
-//ID DIALOG”W 9900+ BIZNESY.
+//ID DIALOGÔøΩW 9900+ BIZNESY.
 public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
 	if(!CheckDialogId(playerid, dialogid)) return 1;
@@ -35,7 +35,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(inputtext[i] == '%')
 			{
-                SendClientMessage(playerid, COLOR_PANICRED, "Nie moøna posiadaÊ \"%\" w haúle");
+                SendClientMessage(playerid, COLOR_PANICRED, "Nie moÔøΩna posiadaÔøΩ \"%\" w haÔøΩle");
 				KickEx(playerid);
 				return 0;
             }
@@ -97,7 +97,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new skin = FRAC_SKINS[GetPlayerFraction(playerid)][listitem];
 			SetPlayerSkinEx(playerid, skin);
 			PlayerInfo[playerid][pUniform] = skin;
-			format(string, sizeof(string), "* %s zdejmuje ubrania i zak≥ada nowe.", GetNick(playerid));
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zakÔøΩada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
 	}
@@ -109,7 +109,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new skin = FAM_SKINS[GetPlayerOrg(playerid)][listitem];
 			SetPlayerSkinEx(playerid, skin);
 			PlayerInfo[playerid][pUniform] = skin;
-			format(string, sizeof(string), "* %s zdejmuje ubrania i zak≥ada nowe.", GetNick(playerid));
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zakÔøΩada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
 	}
@@ -120,7 +120,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(FRAC_SKINS[listitem+1][0] == 0)
 			{
-				sendErrorMessage(playerid, "Ta frakcja nie ma skinÛw");
+				sendErrorMessage(playerid, "Ta frakcja nie ma skinÔøΩw");
 				ShowPlayerDialogEx(playerid, DIALOG_HA_ZMIENSKIN(0), DIALOG_STYLE_LIST, "Zmiana ubrania", DialogListaFrakcji(), "Start", "Anuluj");
 				return 1;
 			}
@@ -133,7 +133,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new string[64];
 			SetPlayerSkinEx(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
-			format(string, sizeof(string), "* %s zdejmuje ubrania i zak≥ada nowe.", GetNick(playerid));
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zakÔøΩada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		}
 		else
@@ -154,28 +154,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SetPVarInt(playerid, "Mats-kasa", 0);
         	SetPVarInt(playerid, "Mats-id", 0);
         	SetPVarInt(playerid, "Mats-mats", 0);
-        	sendErrorMessage(playerid, "Sprzedaø zosta≥a anulowana!");
-        	sendErrorMessage(giveplayerid, "Sprzedaø zosta≥a anulowana!");
+        	sendErrorMessage(playerid, "SprzedaÔøΩ zostaÔøΩa anulowana!");
+        	sendErrorMessage(giveplayerid, "SprzedaÔøΩ zostaÔøΩa anulowana!");
 			return 1;
 		}
 		if(kaska[playerid] < kasa) return sendErrorMessage(playerid, "Nie masz tyle kasy!");
-		if(PlayerInfo[giveplayerid][pMats] < moneys) return sendErrorMessage(playerid, "Gracz nie ma tyle materia≥Ûw!");
-		if(GetPVarInt(playerid, "OKupMats") == 0) return sendErrorMessage(playerid, "Coú posz≥o nie tak! (kupno)");
-        //if(GetPVarInt(playerid, "OSprzedajMats") == 0) return sendErrorMessage(playerid, "Coú posz≥o nie tak! (sprzedaø)");
+		if(PlayerInfo[giveplayerid][pMats] < moneys) return sendErrorMessage(playerid, "Gracz nie ma tyle materiaÔøΩÔøΩw!");
+		if(GetPVarInt(playerid, "OKupMats") == 0) return sendErrorMessage(playerid, "CoÔøΩ poszÔøΩo nie tak! (kupno)");
+        //if(GetPVarInt(playerid, "OSprzedajMats") == 0) return sendErrorMessage(playerid, "CoÔøΩ poszÔøΩo nie tak! (sprzedaÔøΩ)");
 		if(GetPVarInt(giveplayerid, "OSprzedajMats") == 1)
 		{
-			format(string, sizeof(string), "   Dosta≥eú %d materia≥Ûw od gracza %s za %d $.", moneys, GetNick(giveplayerid), kasa);
+			format(string, sizeof(string), "   DostaÔøΩeÔøΩ %d materiaÔøΩÔøΩw od gracza %s za %d $.", moneys, GetNick(giveplayerid), kasa);
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-			format(string, sizeof(string), "   Da≥eú %d materia≥Ûw graczowi %s za %d $.", moneys, GetNick(playerid), kasa);
+			format(string, sizeof(string), "   DaÔøΩeÔøΩ %d materiaÔøΩÔøΩw graczowi %s za %d $.", moneys, GetNick(playerid), kasa);
 			SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-			format(string, sizeof(string),"%s da≥ %s torbÍ z materia≥ami.", GetNick(giveplayerid), GetNick(playerid));
+			format(string, sizeof(string),"%s daÔøΩ %s torbÔøΩ z materiaÔøΩami.", GetNick(giveplayerid), GetNick(playerid));
 			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			PlayerInfo[giveplayerid][pMats] -= moneys;
 			PlayerInfo[playerid][pMats] += moneys;
 			DajKase(giveplayerid, kasa);
 			ZabierzKase(playerid, kasa);
 			
-			Log(payLog, INFO, "%s kupi≥ od %s materia≥y w iloúci %d za %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), moneys, kasa);
+			Log(payLog, INFO, "%s kupiÔøΩ od %s materiaÔøΩy w iloÔøΩci %d za %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), moneys, kasa);
 			SetPVarInt(playerid, "OKupMats", 0);
 			SetPVarInt(giveplayerid, "OSprzedajMats", 0);
 			SetPVarInt(playerid, "Mats-kasa", 0);
@@ -185,7 +185,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-		    sendErrorMessage(playerid, "Coú posz≥o nie tak! (sprzedaø)");
+		    sendErrorMessage(playerid, "CoÔøΩ poszÔøΩo nie tak! (sprzedaÔøΩ)");
 		}
 	}
 	else if(dialogid == 9519)
@@ -195,7 +195,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		SetPlayerArmour(playerid, 90);
 		SetPlayerHealth(playerid, 100);
 		ZabierzKase(playerid, 30000);
-		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i øycie");
+		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i ÔøΩycie");
 	}	
 	else if(dialogid == 9521) //kara warn
 	{
@@ -206,7 +206,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new reason[64];
 			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
-			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}PowÛd warna: {B7EB34}%s{FFFFFF}\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid), reason);		
+			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}PowÔøΩd warna: {B7EB34}%s{FFFFFF}\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid), reason);		
 			ShowPlayerDialogEx(playerid, 9523, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Warn", "Warn + Kick");
 		}
 		return 1;
@@ -237,7 +237,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else if(kary_TXD_Status == 0)
 			{
-				format(string, sizeof(string), "AdmCmd: Admin zbanowa≥ %s, powÛd: %s", GetNick(giveplayerid), reason);
+				format(string, sizeof(string), "AdmCmd: Admin zbanowaÔøΩ %s, powÔøΩd: %s", GetNick(giveplayerid), reason);
 				SendPunishMessage(string, playerid); 
 			}		
 		}
@@ -286,11 +286,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(PlayerInfo[giveplayerid][pWarns] >= 3)
 				{
-					format(string, sizeof(string), "AdmCmd: %s zosta≥ zbanowany przez admina %s, powÛd: %s (3 warny)", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
+					format(string, sizeof(string), "AdmCmd: %s zostaÔøΩ zbanowany przez admina %s, powÔøΩd: %s (3 warny)", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
 				}
 				else
 				{
-					format(string, sizeof(string), "AdmCmd: %s zosta≥ zwarnowany przez admina %s, powÛd: %s", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
+					format(string, sizeof(string), "AdmCmd: %s zostaÔøΩ zwarnowany przez admina %s, powÔøΩd: %s", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
 				}
 				SendPunishMessage(string, playerid); 
 			}
@@ -309,32 +309,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(vinylStatus == 0)
 					{
 						vinylStatus = 1; 
-						sendTipMessage(playerid, "Otworzy≥eú/aú vinyl Club!");
+						sendTipMessage(playerid, "OtworzyÔøΩeÔøΩ/aÔøΩ vinyl Club!");
 					}
 					else if(vinylStatus == 1)
 					{
 						vinylStatus = 0; 
-						sendTipMessage(playerid, "Zamknπ≥eú/aú vinyl Club!"); 
+						sendTipMessage(playerid, "ZamknÔøΩÔøΩeÔøΩ/aÔøΩ vinyl Club!"); 
 					}
 				}
 				case 1:
 				{
-					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "Wprowadü poniøej kwotÍ, ktÛra ktoú bÍdzie musia≥ zap≥aciÊ za bilet Normalny", "Wybierz", "OdrzuÊ");
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadÔøΩ poniÔøΩej kwotÔøΩ, ktÔøΩra ktoÔøΩ bÔøΩdzie musiaÔøΩ zapÔøΩaciÔøΩ za bilet Normalny", "Wybierz", "OdrzuÔøΩ");
 					SetPVarInt(playerid, "b-wybor", 1);
 				}
 				case 2:
 				{
-					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "Wprowadü poniøej kwotÍ, ktÛra ktoú bÍdzie musia≥ zap≥aciÊ za bilet Normalny", "Wybierz", "OdrzuÊ");
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadÔøΩ poniÔøΩej kwotÔøΩ, ktÔøΩra ktoÔøΩ bÔøΩdzie musiaÔøΩ zapÔøΩaciÔøΩ za bilet Normalny", "Wybierz", "OdrzuÔøΩ");
 					SetPVarInt(playerid, "b-wybor", 2);
 				}
 				case 3:
 				{
-					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "Wprowadü poniøej numer napoju,\ndla ktÛrego chcesz zmieniÊ cenÍ", "Potwierdü", "Anuluj"); 
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadÔøΩ poniÔøΩej numer napoju,\ndla ktÔøΩrego chcesz zmieniÔøΩ cenÔøΩ", "PotwierdÔøΩ", "Anuluj"); 
 					SetPVarInt(playerid, "b-wybor", 3); 
 				}
 				case 4:
 				{
-					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "Wprowadü poniøej numer napoju,\ndla ktÛrego chcesz zmieniÊ nazwÍ", "Potwierdü", "Anuluj"); 
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadÔøΩ poniÔøΩej numer napoju,\ndla ktÔøΩrego chcesz zmieniÔøΩ nazwÔøΩ", "PotwierdÔøΩ", "Anuluj"); 
 					SetPVarInt(playerid, "b-wybor", 6); 
 				}
 			}
@@ -370,11 +370,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						strdel(drinkName4, 0, 32); 
 						strins(drinkName4, inputtext, 0); 
 					}
-					sendTipMessage(playerid, "Pomyúlnie zmieniono nazwÍ drinka!"); 
+					sendTipMessage(playerid, "PomyÔøΩlnie zmieniono nazwÔøΩ drinka!"); 
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Nieprawid≥owa d≥ugoúÊ nazwy napoju [MAX 33 znaki]");
+					sendErrorMessage(playerid, "NieprawidÔøΩowa dÔøΩugoÔøΩÔøΩ nazwy napoju [MAX 33 znaki]");
 				}
 				return 1;
 			}
@@ -385,31 +385,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[124]; 
 				if(drinkID > 4)
 				{
-					sendErrorMessage(playerid, "Nieprawid≥owe ID drinka"); 
+					sendErrorMessage(playerid, "NieprawidÔøΩowe ID drinka"); 
 					return 1;
 				}
 				if(drinkID < 1)
 				{
-					sendErrorMessage(playerid, "Nieprawid≥owe ID drinka"); 
+					sendErrorMessage(playerid, "NieprawidÔøΩowe ID drinka"); 
 					return 1;
 				}
 				if(drinkID == 1)
 				{
-					format(string, sizeof(string), "Wprowadü poniøej nowπ nazwÍ dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1);
+					format(string, sizeof(string), "WprowadÔøΩ poniÔøΩej nowÔøΩ nazwÔøΩ dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1);
 				}
 				else if(drinkID == 2)
 				{
-					format(string, sizeof(string), "Wprowadü poniøej nowπ nazwÍ dla napoju: %s, \nAktualna cena to: $%d", drinkName2, drinkCost2);
+					format(string, sizeof(string), "WprowadÔøΩ poniÔøΩej nowÔøΩ nazwÔøΩ dla napoju: %s, \nAktualna cena to: $%d", drinkName2, drinkCost2);
 				}
 				else if(drinkID == 3)
 				{
-					format(string, sizeof(string), "Wprowadü poniøej nowπ nazwÍ dla napoju: %s, \nAktualna cena to: $%d", drinkName3, drinkCost3);
+					format(string, sizeof(string), "WprowadÔøΩ poniÔøΩej nowÔøΩ nazwÔøΩ dla napoju: %s, \nAktualna cena to: $%d", drinkName3, drinkCost3);
 				}
 				else if(drinkID == 4)
 				{
-					format(string, sizeof(string), "Wprowadü poniøej nowπ nazwÍ dla napoju: %s, \nAktualna cena to: $%d", drinkName4, drinkCost4);
+					format(string, sizeof(string), "WprowadÔøΩ poniÔøΩej nowÔøΩ nazwÔøΩ dla napoju: %s, \nAktualna cena to: $%d", drinkName4, drinkCost4);
 				}
-				ShowPlayerDialogEx(playerid, DIALOG_STYLE_INPUT, 6998, "Panel lidera", string, "Akceptuj", "OdrzuÊ"); 
+				ShowPlayerDialogEx(playerid, DIALOG_STYLE_INPUT, 6998, "Panel lidera", string, "Akceptuj", "OdrzuÔøΩ"); 
 				SetPVarInt(playerid, "b-wybor", 7); 
 				return 1;
 			}
@@ -420,36 +420,36 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[124]; 
 				if(drinkCost > 100000 || drinkCost <= 1)
 				{
-					sendErrorMessage(playerid, "Nieprawid≥owa nowa cena drinka!"); 
+					sendErrorMessage(playerid, "NieprawidÔøΩowa nowa cena drinka!"); 
 					return 1;
 				}
 				if(drinkID == 1) 
 				{
 					drinkCost1 = drinkCost; 
-					format(string, sizeof(string), "Zmieni≥eú cenÍ napoju %s. Nowa cena to: %d", drinkName1, drinkCost1); 
+					format(string, sizeof(string), "ZmieniÔøΩeÔøΩ cenÔøΩ napoju %s. Nowa cena to: %d", drinkName1, drinkCost1); 
 					sendTipMessage(playerid, string); 
 				}
 				else if(drinkID == 2)
 				{
 					drinkCost2 = drinkCost; 
-					format(string, sizeof(string), "Zmieni≥eú cenÍ napoju %s. Nowa cena to: %d", drinkName2, drinkCost2); 
+					format(string, sizeof(string), "ZmieniÔøΩeÔøΩ cenÔøΩ napoju %s. Nowa cena to: %d", drinkName2, drinkCost2); 
 					sendTipMessage(playerid, string);
 				}
 				else if(drinkID == 3)
 				{
 					drinkCost3 = drinkCost; 
-					format(string, sizeof(string), "Zmieni≥eú cenÍ napoju %s. Nowa cena to: %d", drinkName3, drinkCost3); 
+					format(string, sizeof(string), "ZmieniÔøΩeÔøΩ cenÔøΩ napoju %s. Nowa cena to: %d", drinkName3, drinkCost3); 
 					sendTipMessage(playerid, string);
 				}
 				else if(drinkID == 4)
 				{
 					drinkCost4 = drinkCost; 
-					format(string, sizeof(string), "Zmieni≥eú cenÍ napoju %s. Nowa cena to: %d", drinkName4, drinkCost4); 
+					format(string, sizeof(string), "ZmieniÔøΩeÔøΩ cenÔøΩ napoju %s. Nowa cena to: %d", drinkName4, drinkCost4); 
 					sendTipMessage(playerid, string);
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Wystπpi≥ nieznany problem. Skontaktuj siÍ z Komisjπ ds. UlepszeÒ"); 
+					sendErrorMessage(playerid, "WystÔøΩpiÔøΩ nieznany problem. Skontaktuj siÔøΩ z KomisjÔøΩ ds. UlepszeÔøΩ"); 
 				}
 				return 1;
 			}
@@ -460,27 +460,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[124]; 
 				if(drinkID == 1)
 				{
-					format(string, sizeof(string), "Wprowadü poniøej nowπ cenÍ dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1); 
+					format(string, sizeof(string), "WprowadÔøΩ poniÔøΩej nowÔøΩ cenÔøΩ dla napoju: %s, \nAktualna cena to: $%d", drinkName1, drinkCost1); 
 				}
 				else if(drinkID == 2)
 				{
-					format(string, sizeof(string), "Wprowadü poniøej nowπ cenÍ dla napoju: %s\nAktualna cena to: $%d", drinkName2, drinkCost2); 
+					format(string, sizeof(string), "WprowadÔøΩ poniÔøΩej nowÔøΩ cenÔøΩ dla napoju: %s\nAktualna cena to: $%d", drinkName2, drinkCost2); 
 				}
 				else if(drinkID == 3)
 				{
-					format(string, sizeof(string), "Wprowadü poniøej nowπ cenÍ dla napoju: %s\nAktualna cena to: $%d", drinkName3, drinkCost3); 
+					format(string, sizeof(string), "WprowadÔøΩ poniÔøΩej nowÔøΩ cenÔøΩ dla napoju: %s\nAktualna cena to: $%d", drinkName3, drinkCost3); 
 				}
 				else if(drinkID == 4)
 				{
-					format(string, sizeof(string), "Wprowadü poniøej nowπ cenÍ dla napoju: %s\nAktualna cena to: $%d", drinkName4, drinkCost4); 
+					format(string, sizeof(string), "WprowadÔøΩ poniÔøΩej nowÔøΩ cenÔøΩ dla napoju: %s\nAktualna cena to: $%d", drinkName4, drinkCost4); 
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Nieprawid≥owy numer napoju"); 
+					sendErrorMessage(playerid, "NieprawidÔøΩowy numer napoju"); 
 					return 1;
 				}
 				SetPVarInt(playerid, "b-wybor", 5);
-				ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", string, "Dalej", "OdrzuÊ");
+				ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", string, "Dalej", "OdrzuÔøΩ");
 				return 1;
 			}
 			new cValue = FunkcjaK(inputtext);
@@ -490,7 +490,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(GetPVarInt(playerid, "b-wybor") == 1)
 				{
 					cenaNorm = cValue; 
-					format(string, sizeof(string), "Nowa cena biletu zwyk≥ego to: %d$", cenaNorm);
+					format(string, sizeof(string), "Nowa cena biletu zwykÔøΩego to: %d$", cenaNorm);
 					sendTipMessage(playerid, string); 
 					return 1;
 				}
@@ -513,7 +513,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 		{
-			sendTipMessage(playerid, "WymiÍkasz? Abstynent!");
+			sendTipMessage(playerid, "WymiÔøΩkasz? Abstynent!");
 			return 1;
 		}
 		if(response)
@@ -557,14 +557,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						ZabierzKase(playerid, cenaNorm); 
 						SetPVarInt(playerid, "Vinyl-bilet", 1);//2 = VIP
-						sendTipMessage(playerid, "Otrzyma≥eú bilet zwyk≥y do vinyl clubu");
+						sendTipMessage(playerid, "OtrzymaÔøΩeÔøΩ bilet zwykÔøΩy do vinyl clubu");
 						Sejf_Add(FRAC_SN, cenaNorm);
 						Sejf_Save(FRAC_SN);
 						kasjerkaWolna = 666; 
 					}
 					else 
 					{
-						sendErrorMessage(playerid, "Brak wystarczajπcej kwoty!");
+						sendErrorMessage(playerid, "Brak wystarczajÔøΩcej kwoty!");
 						kasjerkaWolna = 666; 
 						return 1;
 					}
@@ -575,14 +575,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						ZabierzKase(playerid, cenaVIP); 
 						SetPVarInt(playerid, "Vinyl-bilet", 2);//2 = VIP
-						sendTipMessage(playerid, "Otrzyma≥eú bilet VIP do vinyl clubu");
+						sendTipMessage(playerid, "OtrzymaÔøΩeÔøΩ bilet VIP do vinyl clubu");
 						Sejf_Add(FRAC_SN, cenaVIP);
 						Sejf_Save(FRAC_SN);
 						kasjerkaWolna = 666; 
 					}
 					else 
 					{
-						sendErrorMessage(playerid, "Brak wystarczajπcej kwoty!");
+						sendErrorMessage(playerid, "Brak wystarczajÔøΩcej kwoty!");
 						kasjerkaWolna = 666; 
 						return 1;
 					}
@@ -660,7 +660,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			case 8:
 			{
 				if(!response) return 1;
-				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W≥asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "WÔøΩasne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
 			case 9:
@@ -687,8 +687,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//}
 			//else
 			//{
-			//	SendClientMessage(playerid, COLOR_GREY, "Z≥y adres URL");
-			//	ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W≥asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
+			//	SendClientMessage(playerid, COLOR_GREY, "ZÔøΩy adres URL");
+			//	ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "WÔøΩasne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 			//}
 		}
 		return 1;
@@ -699,32 +699,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			case 0:
 			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(1), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÍ pod FBI.", "165\nAgent FBI (Bia≥y)\n166\nAgent FBI (Czarny)\n211\nAgentka FBI\n286\nAgent ICB\n295\nDyrektor FBI", "Podszyj", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(1), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÔøΩ pod FBI.", "165\nAgent FBI (BiaÔøΩy)\n166\nAgent FBI (Czarny)\n211\nAgentka FBI\n286\nAgent ICB\n295\nDyrektor FBI", "Podszyj", "Anuluj");
 				return 1;
 			}
 			case 1:
 			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(2), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÍ pod Grove.", "105\nCz≥onek Grove\n106\nCz≥onek Grove\n107\nCz≥onek Grove\n269\nCz≥onek Grove\n270\nCz≥onek Grove\n271\nCz≥onek Grove", "Podszyj", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(2), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÔøΩ pod Grove.", "105\nCzÔøΩonek Grove\n106\nCzÔøΩonek Grove\n107\nCzÔøΩonek Grove\n269\nCzÔøΩonek Grove\n270\nCzÔøΩonek Grove\n271\nCzÔøΩonek Grove", "Podszyj", "Anuluj");
 				return 1;
 			}
 			case 2:
 			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(3), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÍ pod Ballas.", "102\nCz≥onek Ballas\n103\nCz≥onek Ballas\n104\nCz≥onek Ballas", "Podszyj", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(3), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÔøΩ pod Ballas.", "102\nCzÔøΩonek Ballas\n103\nCzÔøΩonek Ballas\n104\nCzÔøΩonek Ballas", "Podszyj", "Anuluj");
 				return 1;
 			}
 			case 3:
 			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(4), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÍ pod ICC.", "124\nCz≥onek ICC\n125\nCz≥onek ICC\n126\nCz≥onek ICC\n111\nCz≥onek ICC\n113\nBoss ICC", "Podszyj", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(4), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÔøΩ pod ICC.", "124\nCzÔøΩonek ICC\n125\nCzÔøΩonek ICC\n126\nCzÔøΩonek ICC\n111\nCzÔøΩonek ICC\n113\nBoss ICC", "Podszyj", "Anuluj");
 				return 1;
 			}
 			case 4:
 			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(5), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÍ pod Yakuze.", "117\nCz≥onek Yakuzy\n118\nCz≥onek Yakuzy\n120\nBoss Yakuzy\n122\nCz≥onek Yakuzy\n123\nBoss Yakuzy", "Podszyj", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(5), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÔøΩ pod Yakuze.", "117\nCzÔøΩonek Yakuzy\n118\nCzÔøΩonek Yakuzy\n120\nBoss Yakuzy\n122\nCzÔøΩonek Yakuzy\n123\nBoss Yakuzy", "Podszyj", "Anuluj");
 				return 1;
 			}
 			case 5:
 			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(6), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÍ pod Latin Kings.", "108\nCz≥onek Latin Kings\n109\nCz≥onek Latin Kings\n110\nBoss Latin Kings", "Podszyj", "Anuluj");
+				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(6), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siÔøΩ pod Latin Kings.", "108\nCzÔøΩonek Latin Kings\n109\nCzÔøΩonek Latin Kings\n110\nBoss Latin Kings", "Podszyj", "Anuluj");
 				return 1;
 			}
 		}
@@ -740,7 +740,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod FBI.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod FBI.");
 				return 1;
 			}
 			case 1:
@@ -750,7 +750,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod FBI.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod FBI.");
 				return 1;
 			}
 			case 2:
@@ -760,7 +760,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod FBI.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod FBI.");
 				return 1;
 			}
 			case 3:
@@ -770,7 +770,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod FBI.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod FBI.");
 				return 1;
 			}
 			case 4:
@@ -780,7 +780,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 0;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod FBI.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod FBI.");
 				return 1;
 			}
 		}
@@ -797,7 +797,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Grove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -808,7 +808,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Grove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -819,7 +819,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Grove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -830,7 +830,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Grove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -841,7 +841,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Grove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -852,7 +852,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 1;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Grove.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Grove.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -870,7 +870,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Ballas.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Ballas.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -881,7 +881,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Ballas.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Ballas.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -892,7 +892,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 2;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Ballas.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Ballas.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -910,7 +910,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod ICC.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod ICC.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -921,7 +921,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod ICC.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod ICC.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -932,7 +932,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod ICC.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod ICC.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -943,7 +943,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod ICC.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod ICC.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -954,7 +954,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 3;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod ICC.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod ICC.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -973,7 +973,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Yakuze.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Yakuze.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -984,7 +984,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Yakuze.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Yakuze.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -995,7 +995,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Yakuze.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Yakuze.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -1006,7 +1006,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Yakuze.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Yakuze.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -1017,7 +1017,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 4;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Yakuze.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Yakuze.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -1036,7 +1036,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Latin Kings.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Latin Kings.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -1047,7 +1047,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Latin Kings.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Latin Kings.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -1058,7 +1058,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerInfo[playerid][pTajniak] = 5;
 				PlayerInfo[playerid][pTeam] = 2;//team
 				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy≥eú siÍ pod Latin Kings.");
+				SendClientMessage(playerid, COLOR_GRAD2, "PodszyÔøΩeÔøΩ siÔøΩ pod Latin Kings.");
 				SetPlayerArmour(playerid, 10);
 				return 1;
 			}
@@ -1069,9 +1069,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return 1;
         new id;
-        if(strcmp(inputtext, "ª Ustaw opis", false, 12) == 0) id = 1;
-        else if(strcmp(inputtext, "ª ZmieÒ opis", false, 12) == 0) id = 2;
-        else if(strcmp(inputtext, "ª UsuÒ", false, 6) == 0) id = 3;
+        if(strcmp(inputtext, "ÔøΩ Ustaw opis", false, 12) == 0) id = 1;
+        else if(strcmp(inputtext, "ÔøΩ ZmieÔøΩ opis", false, 12) == 0) id = 2;
+        else if(strcmp(inputtext, "ÔøΩ UsuÔøΩ", false, 6) == 0) id = 3;
 
         switch(id)
         {
@@ -1091,11 +1091,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ReColor(opis);
                 CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
                 format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
-                SendClientMessage(playerid, -1, "{99CC00}Ustawi≥es w≥asny opis pojazdu, by go usunπÊ wpisz {CC3333}/vopis usuÒ{CC3333}");
+                SendClientMessage(playerid, -1, "{99CC00}UstawiÔøΩes wÔøΩasny opis pojazdu, by go usunÔøΩÔøΩ wpisz {CC3333}/vopis usuÔøΩ{CC3333}");
             }
             case 2:
             {
-                ShowPlayerDialogEx(playerid, D_VEHOPIS_UPDATE, DIALOG_STYLE_INPUT, "Opis pojazdu", "Wprowadü niøej w≥asny opis pojazdu.", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_VEHOPIS_UPDATE, DIALOG_STYLE_INPUT, "Opis pojazdu", "WprowadÔøΩ niÔøΩej wÔøΩasny opis pojazdu.", "Ustaw", "WrÔøΩÔøΩ");
             }
             case 3:
             {
@@ -1116,7 +1116,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(strlen(inputtext) < 4 || strlen(inputtext) > 120)
         {
             RunCommand(playerid, "/vopis",  "");
-            SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d≥ugosÊ opisu.");
+            SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia dÔøΩugosÔøΩ opisu.");
             return 1;
         }
 		else
@@ -1130,7 +1130,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			//todo: kolorowe opisy tylko dla KP
 			new startpos, endpos;
-			if(regex_search(givenString, "[^a-zA-Z0-9πÊÍ≥ÒÛúøü•∆ £—”åØè |\\/@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
+			if(regex_search(givenString, "[^a-zA-Z0-9ÔøΩÔøΩÔøΩÔøΩÛúøüÔøΩÔøΩ £ÔøΩ”åÔøΩÔøΩ |\\/@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
 			{
 				SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[startpos]));
 				return 1;
@@ -1147,12 +1147,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		ReColor(opis);
 		CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
 		format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
-		SendClientMessage(playerid, -1, "{99CC00}Ustawi≥es w≥asny opis pojazdu, by go usunπÊ wpisz {CC3333}/vopis usuÒ{CC3333}");
+		SendClientMessage(playerid, -1, "{99CC00}UstawiÔøΩes wÔøΩasny opis pojazdu, by go usunÔøΩÔøΩ wpisz {CC3333}/vopis usuÔøΩ{CC3333}");
         return 1;
     }
     else if(dialogid == D_PERM)
     {
-        if(!(Uprawnienia(playerid, ACCESS_EDITPERM) && IsPlayerAdmin(playerid))) return SendClientMessage(playerid, -1, "(PERM) - Nie posiadasz pe≥nych praw.");
+        if(!(Uprawnienia(playerid, ACCESS_EDITPERM) && IsPlayerAdmin(playerid))) return SendClientMessage(playerid, -1, "(PERM) - Nie posiadasz peÔøΩnych praw.");
         new param[8];
         GetPVarString(playerid, "perm-id", param, 8);
         new id = strval(param);
@@ -1163,13 +1163,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(OLD_ACCESS[id] != ACCESS[id])
             {
                 OLD_ACCESS[id] = ACCESS[id];
-                format(str, 128, "(PERM) %s zapisa≥ Twoje nowe uprawnienia", GetNickEx(playerid));
+                format(str, 128, "(PERM) %s zapisaÔøΩ Twoje nowe uprawnienia", GetNickEx(playerid));
                 SendClientMessage(id, 0x05CA8CFF, str);
                 format(str, 128, "(PERM) Zapisales prawa %s", GetNick(id));
                 SendClientMessage(playerid, 0x05CA8CFF, str);
                 
 				MruMySQL_ZapiszUprawnienia(playerid);
-				Log(adminLog, INFO, "Admin %s zmieni≥ prawa %s na %b", GetPlayerLogName(playerid), GetPlayerLogName(id), ACCESS[id]);
+				Log(adminLog, INFO, "Admin %s zmieniÔøΩ prawa %s na %b", GetPlayerLogName(playerid), GetPlayerLogName(id), ACCESS[id]);
             }
             return 1;
         }
@@ -1190,7 +1190,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 13: ACCESS[id] ^= ACCESS_EDITPERM;
             case 14: ACCESS[id] ^= ACCESS_SKRYPTER;
         }
-        format(str, 128, "(PERM) %s edytowa≥ Twoje uprawnienia (/uprawnienia)", GetNickEx(playerid));
+        format(str, 128, "(PERM) %s edytowaÔøΩ Twoje uprawnienia (/uprawnienia)", GetNickEx(playerid));
         SendClientMessage(id, 0x05CA8CFF, str);
         RunCommand(playerid, "/edytujupr",  param);
     }
@@ -1213,14 +1213,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             PatrolInfo[pat][pattyp] = 1; //PlayerInfo[playerid][pFrac] 1 PD 2 FBI 3 NG
             PatrolInfo[pat][pattime] = gettime();
 
-            SendClientMessage(playerid, COLOR_BLUE, "Rozpoczynasz patrol samodzielny. Wybierz strefÍ do patrolowania.");
+            SendClientMessage(playerid, COLOR_BLUE, "Rozpoczynasz patrol samodzielny. Wybierz strefÔøΩ do patrolowania.");
             Patrol_ShowMap(playerid);
             SetPVarInt(playerid, "patrol-map", 1);
             SelectTextDraw(playerid, 0xD2691E55);
         }
         else
         {
-            ShowPlayerDialogEx(playerid, DIALOG_PATROL_PARTNER, DIALOG_STYLE_INPUT, "Konfiguracja patrolu ª Partner", "Wprowadü nazwÍ gracza lub ID, z ktÛrym bÍdziesz patrolowaÊ teren.", "Dodaj", "Anuluj");
+            ShowPlayerDialogEx(playerid, DIALOG_PATROL_PARTNER, DIALOG_STYLE_INPUT, "Konfiguracja patrolu ÔøΩ Partner", "WprowadÔøΩ nazwÔøΩ gracza lub ID, z ktÔøΩrym bÔøΩdziesz patrolowaÔøΩ teren.", "Dodaj", "Anuluj");
         }
     }
     else if(dialogid == DIALOG_PATROL_NAME)
@@ -1235,9 +1235,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             strcat(PatrolSq, inputtext);
             format(PatrolInfo[GetPVarInt(playerid, "patrol-id")][patname], 16, "%s" ,inputtext);
-            ShowPlayerDialogEx(playerid, DIALOG_PATROL, DIALOG_STYLE_LIST, "Konfiguracja patrolu ª Typ", "Patrol samodzielny\nPatrol z partnerem", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, DIALOG_PATROL, DIALOG_STYLE_LIST, "Konfiguracja patrolu ÔøΩ Typ", "Patrol samodzielny\nPatrol z partnerem", "Wybierz", "Anuluj");
         }
-        else ShowPlayerDialogEx(playerid, DIALOG_PATROL_NAME, DIALOG_STYLE_INPUT, "Konfiguracja patrolu ª Nazwa", "Ta nazwa jest zajÍta.\r\nWprowadü nazwÍ patrolu (kryptonim)", "Dalej", "Anuluj");
+        else ShowPlayerDialogEx(playerid, DIALOG_PATROL_NAME, DIALOG_STYLE_INPUT, "Konfiguracja patrolu ÔøΩ Nazwa", "Ta nazwa jest zajÔøΩta.\r\nWprowadÔøΩ nazwÔøΩ patrolu (kryptonim)", "Dalej", "Anuluj");
     }
     else if(dialogid == DIALOG_PATROL_PARTNER)
     {
@@ -1253,7 +1253,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         new id;
         sscanf(inputtext, "k<fix>", id);
-        if(id == INVALID_PLAYER_ID) return ShowPlayerDialogEx(playerid, DIALOG_PATROL_PARTNER, DIALOG_STYLE_INPUT, "Konfiguracja patrolu ª Partner", "Nie znaleziono gracza...\r\nWprowadü nazwÍ gracza lub ID, z ktÛrym bÍdziesz patrolowaÊ teren.", "Dodaj", "Anuluj");
+        if(id == INVALID_PLAYER_ID) return ShowPlayerDialogEx(playerid, DIALOG_PATROL_PARTNER, DIALOG_STYLE_INPUT, "Konfiguracja patrolu ÔøΩ Partner", "Nie znaleziono gracza...\r\nWprowadÔøΩ nazwÔøΩ gracza lub ID, z ktÔøΩrym bÔøΩdziesz patrolowaÔøΩ teren.", "Dodaj", "Anuluj");
         PatrolInfo[pat][patroluje][0] = playerid;
         PatrolInfo[pat][patroluje][1] = id;
         PatrolInfo[pat][patstrefa] = 0;
@@ -1262,7 +1262,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         PatrolInfo[pat][pattime] = gettime();
         new str[128], nick[MAX_PLAYER_NAME+1];
         GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-        format(str, 128, "PATROL ªª %s chce patrolowaÊ z Tobπ teren. Aby akceptowaÊ wpisz /patrol akceptuj", nick);
+        format(str, 128, "PATROL ÔøΩÔøΩ %s chce patrolowaÔøΩ z TobÔøΩ teren. Aby akceptowaÔøΩ wpisz /patrol akceptuj", nick);
         SetPVarInt(playerid, "patrol-parent", id);
         SetPVarInt(id, "patrol-parent", playerid);
         SetPVarInt(id, "patrol-dec", 1);
@@ -1270,7 +1270,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         SetPVarInt(playerid, "patrol-time", PatrolInfo[pat][pattime]);
         SetPVarInt(id, "patrol-time", PatrolInfo[pat][pattime]);
         SendClientMessage(id, COLOR_BLUE, str);
-        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wys≥ano zapytanie do gracza o pomoc w patrolowaniu.");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "WysÔøΩano zapytanie do gracza o pomoc w patrolowaniu.");
     }
     //PANEL ADMINA
     else if(dialogid == D_PANEL_ADMINA)
@@ -1281,11 +1281,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(!(upr & 0b10)) return 1;
             SetPVarInt(playerid, "panel-ok", 1);
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "Wyjdü");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "WyjdÔøΩ");
         }
         else if(listitem == 1)
         {
-            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ª Sprawdzanie statystyk gracza", "Wprowadü nick_gracza lub UID konta:                    ", "Sprawdü", "Wyjdü");
+            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ÔøΩ Sprawdzanie statystyk gracza", "WprowadÔøΩ nick_gracza lub UID konta:                    ", "SprawdÔøΩ", "WyjdÔøΩ");
         }
     }
     else if(dialogid == D_PANEL_CHECKPLAYER)
@@ -1293,8 +1293,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(!response) return RunCommand(playerid, "/panel",  "");
         if(strlen(inputtext) < 1 || strlen(inputtext) > MAX_PLAYER_NAME)
         {
-            SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc!");
-            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ª Sprawdzanie statystyk gracza", "Wprowadü nick_gracza lub UID konta:                    ", "Sprawdü", "Wyjdü");
+            SendClientMessage(playerid, COLOR_RED, "Niepoprawna dÔøΩugosc!");
+            ShowPlayerDialogEx(playerid, D_PANEL_CHECKPLAYER, DIALOG_STYLE_INPUT, "M-RP ÔøΩ Sprawdzanie statystyk gracza", "WprowadÔøΩ nick_gracza lub UID konta:                    ", "SprawdÔøΩ", "WyjdÔøΩ");
             return 0;
         }
 		MruMySQL_PobierzStatystyki(playerid, inputtext);
@@ -1309,15 +1309,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             case 0: //nadaj kare
             {
-                ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÔøΩÔøΩ");
             }
             case 1: //zdejmij kare
             {
-                ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÔøΩÔøΩ");
             }
             case 2: //wyszukiwarka
             {
-                ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Sprawdü dane po IP\nSprawdü dane po nicku", "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "SprawdÔøΩ dane po IP\nSprawdÔøΩ dane po nicku", "Wybierz", "WrÔøΩÔøΩ");
             }
         }
     }
@@ -1332,34 +1332,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 case 0:
                 {
-                    ShowPlayerDialogEx(playerid, D_PANEL_KAR_BANIP, DIALOG_STYLE_INPUT, "M-RP ª Panel zarzπdzania karami", "Wprowadü poniøej adres IP.", "Banuj", "WrÛÊ");
+                    ShowPlayerDialogEx(playerid, D_PANEL_KAR_BANIP, DIALOG_STYLE_INPUT, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "WprowadÔøΩ poniÔøΩej adres IP.", "Banuj", "WrÔøΩÔøΩ");
                 }
                 case 1:
                 {
-                    ShowPlayerDialogEx(playerid, D_PANEL_KAR_BANNICK, DIALOG_STYLE_INPUT, "M-RP ª Panel zarzπdzania karami", "Wprowadü poniøej nick gracza.", "Banuj", "WrÛÊ");
+                    ShowPlayerDialogEx(playerid, D_PANEL_KAR_BANNICK, DIALOG_STYLE_INPUT, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "WprowadÔøΩ poniÔøΩej nick gracza.", "Banuj", "WrÔøΩÔøΩ");
                 }
             }
         }
-        else return ShowPlayerDialogEx(playerid, D_PANEL_KARY_POWOD, DIALOG_STYLE_LIST, "M-RP ª PowÛd", "ProszÍ poniøej wpisaÊ powÛd.", "Dalej", "");
+        else return ShowPlayerDialogEx(playerid, D_PANEL_KARY_POWOD, DIALOG_STYLE_LIST, "M-RP ÔøΩ PowÔøΩd", "ProszÔøΩ poniÔøΩej wpisaÔøΩ powÔøΩd.", "Dalej", "");
     }
     else if(dialogid == D_PANEL_KAR_ZDEJMIJ)
     {
         if(!response) return RunCommand(playerid, "/panel",  "");
         if(!Uprawnienia(playerid, ACCESS_KARY_UNBAN))
         {
-            SendClientMessage(playerid, COLOR_RED, "Uprawnienia: Nie posiadasz wystarczajπcych uprawnieÒ.");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "Wyjdü");
+            SendClientMessage(playerid, COLOR_RED, "Uprawnienia: Nie posiadasz wystarczajÔøΩcych uprawnieÔøΩ.");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "WyjdÔøΩ");
             return 1;
         }
         switch(listitem)
         {
             case 0:
             {
-                ShowPlayerDialogEx(playerid, D_PANEL_KAR_UNBANIP, DIALOG_STYLE_INPUT, "M-RP ª Panel zarzπdzania karami", "Wprowadü poniøej adres IP.", "Odbanuj", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_PANEL_KAR_UNBANIP, DIALOG_STYLE_INPUT, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "WprowadÔøΩ poniÔøΩej adres IP.", "Odbanuj", "WrÔøΩÔøΩ");
             }
             case 1:
             {
-                ShowPlayerDialogEx(playerid, D_PANEL_KAR_UNBANNICK, DIALOG_STYLE_INPUT, "M-RP ª Panel zarzπdzania karami", "Wprowadü poniøej nick gracza.", "Odbanuj", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_PANEL_KAR_UNBANNICK, DIALOG_STYLE_INPUT, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "WprowadÔøΩ poniÔøΩej nick gracza.", "Odbanuj", "WrÔøΩÔøΩ");
             }
         }
     }
@@ -1368,22 +1368,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(!response) return RunCommand(playerid, "/panel",  "");
         if(!Uprawnienia(playerid, ACCESS_KARY_BAN))
         {
-            SendClientMessage(playerid, COLOR_RED, "Uprawnienia: Nie posiadasz wystarczajπcych uprawnieÒ.");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "Wyjdü");
+            SendClientMessage(playerid, COLOR_RED, "Uprawnienia: Nie posiadasz wystarczajÔøΩcych uprawnieÔøΩ.");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "WyjdÔøΩ");
             return 1;
         }
         SetPVarInt(playerid, "panel-list", listitem);
         DeletePVar(playerid, "panel-kary-continue");
         DeletePVar(playerid, "panel-powod");
-        if(GetPVarInt(playerid, "panel-kary-continue") == 0) return ShowPlayerDialogEx(playerid, D_PANEL_KARY_POWOD, DIALOG_STYLE_INPUT, "M-RP ª PowÛd", "ProszÍ poniøej wpisaÊ powÛd.", "Dalej", "");
+        if(GetPVarInt(playerid, "panel-kary-continue") == 0) return ShowPlayerDialogEx(playerid, D_PANEL_KARY_POWOD, DIALOG_STYLE_INPUT, "M-RP ÔøΩ PowÔøΩd", "ProszÔøΩ poniÔøΩej wpisaÔøΩ powÔøΩd.", "Dalej", "");
     }
     else if(dialogid == D_PANEL_KAR_BANIP)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÛÊ");
+        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÔøΩÔøΩ");
         if(strlen(inputtext) < 7 || strlen(inputtext) > 16)
         {
-            SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc IP!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÛÊ");
+            SendClientMessage(playerid, COLOR_RED, "Niepoprawna dÔøΩugosc IP!");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         new count, cpos;
@@ -1395,16 +1395,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(count != 3)
         {
             SendClientMessage(playerid, COLOR_RED, "Niepoprawny adres IP (dots)!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÛÊ");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         new str[128], powod[128];
         GetPVarString(playerid, "panel-powod", powod, 128);
         MruMySQL_BanujOffline("Brak", powod, playerid, inputtext);
 
-        format(str, 128, "ADM: %s - zablokowano IP: %s powÛd: %s", GetNickEx(playerid), inputtext, powod);
+        format(str, 128, "ADM: %s - zablokowano IP: %s powÔøΩd: %s", GetNickEx(playerid), inputtext, powod);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(punishmentLog, INFO, "Admin %s zablokowa≥ offline ip %s, powÛd: %s", 
+        Log(punishmentLog, INFO, "Admin %s zablokowaÔøΩ offline ip %s, powÔøΩd: %s", 
                 GetPlayerLogName(playerid),
                 inputtext,
                 powod);
@@ -1413,20 +1413,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_PANEL_KAR_BANNICK)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÛÊ");
+        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÔøΩÔøΩ");
         if(strlen(inputtext) < 1 || strlen(inputtext) > MAX_PLAYER_NAME)
         {
-            SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÛÊ");
+            SendClientMessage(playerid, COLOR_RED, "Niepoprawna dÔøΩugosc!");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_NADAJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Ban na IP\nBan na nick", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         new str[128], powod[128];
         GetPVarString(playerid, "panel-powod", powod, 128);
         MruMySQL_BanujOffline(inputtext, powod, playerid);
 
-        format(str, 128, "ADM: %s - zablokowano nick: %s powÛd: %s", GetNickEx(playerid), inputtext, powod);
+        format(str, 128, "ADM: %s - zablokowano nick: %s powÔøΩd: %s", GetNickEx(playerid), inputtext, powod);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(punishmentLog, INFO, "Admin %s zablokowa≥ offline %s, powÛd: %s", 
+        Log(punishmentLog, INFO, "Admin %s zablokowaÔøΩ offline %s, powÔøΩd: %s", 
                 GetPlayerLogName(playerid),
                 inputtext,
                 powod);
@@ -1435,11 +1435,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_PANEL_KAR_UNBANIP)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÛÊ");
+        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÔøΩÔøΩ");
         if(strlen(inputtext) < 7 || strlen(inputtext) > 16)
         {
-            SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc IP!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÛÊ");
+            SendClientMessage(playerid, COLOR_RED, "Niepoprawna dÔøΩugosc IP!");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         new count, cpos=0;
@@ -1451,66 +1451,66 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(count != 3)
         {
             SendClientMessage(playerid, COLOR_RED, "Niepoprawny adres IP (dots)!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÛÊ");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         new str[128];
         if(!MruMySQL_Odbanuj("Brak", inputtext, playerid))
         {
-            SendClientMessage(playerid, COLOR_RED, "Nie moøna by≥o wykonaÊ zapytania do bazy!");
+            SendClientMessage(playerid, COLOR_RED, "Nie moÔøΩna byÔøΩo wykonaÔøΩ zapytania do bazy!");
             return 1;
         }
 
         format(str, 128, "ADM: %s - odblokowano IP: %s", GetNickEx(playerid), inputtext);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(punishmentLog, INFO, "Admin %s odblokowa≥ ip %s", 
+        Log(punishmentLog, INFO, "Admin %s odblokowaÔøΩ ip %s", 
                 GetPlayerLogName(playerid),
                 inputtext);
     }
     else if(dialogid == D_PANEL_KAR_UNBANNICK)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÛÊ");
+        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÔøΩÔøΩ");
         if(strlen(inputtext) < 1 || strlen(inputtext) > MAX_PLAYER_NAME)
         {
-            SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÛÊ");
+            SendClientMessage(playerid, COLOR_RED, "Niepoprawna dÔøΩugosc!");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZDEJMIJ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "Unbanuj IP\nUnbanuj nick", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         new str[128];
         if(!MruMySQL_Odbanuj(inputtext, "nieznane", playerid))
         {
-            SendClientMessage(playerid, COLOR_RED, "Nie moøna by≥o wykonaÊ zapytania do bazy!");
+            SendClientMessage(playerid, COLOR_RED, "Nie moÔøΩna byÔøΩo wykonaÔøΩ zapytania do bazy!");
             return 1;
         }
 
         format(str, 128, "ADM: %s - odblokowano nick: %s", GetNickEx(playerid), inputtext);
         SendClientMessage(playerid, COLOR_LIGHTRED, str);
-        Log(punishmentLog, INFO, "Admin %s odblokowa≥ %s", 
+        Log(punishmentLog, INFO, "Admin %s odblokowaÔøΩ %s", 
                 GetPlayerLogName(playerid),
                 inputtext);
     }
-    else if(dialogid == D_PANEL_KAR_ZNAJDZ)  //Sprawdü dane po IP | Sprawdü dane po nicku
+    else if(dialogid == D_PANEL_KAR_ZNAJDZ)  //SprawdÔøΩ dane po IP | SprawdÔøΩ dane po nicku
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "Wyjdü");
+        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "WyjdÔøΩ");
         if(!Uprawnienia(playerid, ACCESS_KARY_ZNAJDZ))
         {
-            SendClientMessage(playerid, COLOR_RED, "Uprawnienia: Nie posiadasz wystarczajπcych uprawnieÒ.");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "Wyjdü");
+            SendClientMessage(playerid, COLOR_RED, "Uprawnienia: Nie posiadasz wystarczajÔøΩcych uprawnieÔøΩ.");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "WyjdÔøΩ");
             return 1;
         }
         switch(listitem)
         {
-            case 0: ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZIP, DIALOG_STYLE_INPUT, "M-RP ª Panel zarzπdzania karami", "Wprowadü poniøej IP do sprawdzenia.", "Sprawdü", "WrÛÊ");
-            case 1: ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZNICK, DIALOG_STYLE_INPUT, "M-RP ª Panel zarzπdzania karami", "Wprowadü poniøej NICK do sprawdzenia.", "Sprawdü", "WrÛÊ");
+            case 0: ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZIP, DIALOG_STYLE_INPUT, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "WprowadÔøΩ poniÔøΩej IP do sprawdzenia.", "SprawdÔøΩ", "WrÔøΩÔøΩ");
+            case 1: ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZNICK, DIALOG_STYLE_INPUT, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "WprowadÔøΩ poniÔøΩej NICK do sprawdzenia.", "SprawdÔøΩ", "WrÔøΩÔøΩ");
         }
     }
     else if(dialogid == D_PANEL_KAR_ZNAJDZIP)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "Wyjdü");
+        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "WyjdÔøΩ");
         if(strlen(inputtext) < 7 || strlen(inputtext) > 16)
         {
-            SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc IP!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Sprawdü dane po IP\nSprawdü dane po nicku", "Wybierz", "WrÛÊ");
+            SendClientMessage(playerid, COLOR_RED, "Niepoprawna dÔøΩugosc IP!");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "SprawdÔøΩ dane po IP\nSprawdÔøΩ dane po nicku", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         new count, cpos=0;
@@ -1522,7 +1522,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(count != 3)
         {
             SendClientMessage(playerid, COLOR_RED, "Niepoprawny adres IP (dots)!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Sprawdü dane po IP\nSprawdü dane po nicku", "Wybierz", "WrÛÊ");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "SprawdÔøΩ dane po IP\nSprawdÔøΩ dane po nicku", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         //OK
@@ -1530,11 +1530,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_PANEL_KAR_ZNAJDZNICK)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "Wyjdü");
+        if(!response) return ShowPlayerDialogEx(playerid, D_PANEL_KAR, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", TEXT_D_PANEL_KARY, "Wybierz", "WyjdÔøΩ");
         if(strlen(inputtext) < 1 || strlen(inputtext) > MAX_PLAYER_NAME)
         {
-            SendClientMessage(playerid, COLOR_RED, "Niepoprawna d≥ugosc nazwy!");
-            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Sprawdü dane po IP\nSprawdü dane po nicku", "Wybierz", "WrÛÊ");
+            SendClientMessage(playerid, COLOR_RED, "Niepoprawna dÔøΩugosc nazwy!");
+            ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "SprawdÔøΩ dane po IP\nSprawdÔøΩ dane po nicku", "Wybierz", "WrÔøΩÔøΩ");
             return 1;
         }
         //OK
@@ -1542,7 +1542,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_PANEL_KAR_ZNAJDZ_INFO)
     {
-        ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ª Panel zarzπdzania karami", "Sprawdü dane po IP\nSprawdü dane po nicku", "Wybierz", "WrÛÊ");
+        ShowPlayerDialogEx(playerid, D_PANEL_KAR_ZNAJDZ, DIALOG_STYLE_LIST, "M-RP ÔøΩ Panel zarzÔøΩdzania karami", "SprawdÔøΩ dane po IP\nSprawdÔøΩ dane po nicku", "Wybierz", "WrÔøΩÔøΩ");
         return 1;
     }
     //KONIEC PANELU ADMINA
@@ -1551,21 +1551,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
         if(CheckAlfaNumeric(inputtext))
         {
-            SendClientMessage(playerid,COLOR_P@,"Twoje has≥o posiada≥o nie-alfanumeryczne znak, podaj inne.");
-            ShowPlayerDialogEx(playerid, D_REGISTER, DIALOG_STYLE_INPUT, "Rejestracja konta", "Witaj. Aby zaczπÊ grÍ na serwerze musisz siÍ zarejestrowaÊ.\nAby to zrobiÊ wpisz w okienko poniøej has≥o ktÛre chcesz uøywaÊ w swoim koncie.\nZapamiÍtaj je gdyø bÍdziesz musia≥ go uøywaÊ za kaødym razem kiedy wejdziesz na serwer", "Rejestruj", "Wyjdü");
+            SendClientMessage(playerid,COLOR_P@,"Twoje hasÔøΩo posiadaÔøΩo nie-alfanumeryczne znak, podaj inne.");
+            ShowPlayerDialogEx(playerid, D_REGISTER, DIALOG_STYLE_INPUT, "Rejestracja konta", "Witaj. Aby zaczÔøΩÔøΩ grÔøΩ na serwerze musisz siÔøΩ zarejestrowaÔøΩ.\nAby to zrobiÔøΩ wpisz w okienko poniÔøΩej hasÔøΩo ktÔøΩre chcesz uÔøΩywaÔøΩ w swoim koncie.\nZapamiÔøΩtaj je gdyÔøΩ bÔøΩdziesz musiaÔøΩ go uÔøΩywaÔøΩ za kaÔøΩdym razem kiedy wejdziesz na serwer", "Rejestruj", "WyjdÔøΩ");
             return 1;
         }
-		SendClientMessage(playerid,COLOR_P@,"|_________________________Rada dnia: zmiana has≥a_________________________|");
-		SendClientMessage(playerid,COLOR_WHITE,"Zmieni≥eú has≥o to bardzo dobrze. ZwiÍkszy to bezpieczeÒstwo twojego konta na serwerze.");
-		SendClientMessage(playerid,COLOR_WHITE,"Jeøeli posiadasz konto na forum z identycznym has≥em, rownieø moøesz rozwaøyÊ jego zmianÍ.");
-		SendClientMessage(playerid,COLOR_WHITE,"Teraz najwaøniejsza sprawa {FFA500}KONIECZNIE ZAPAMI TAJ NOWE HAS£O.");
-		SendClientMessage(playerid,COLOR_WHITE,"Z naszych doúwiadczeÒ wynika, øe duøo osÛb zapomina nowo nadane na swojπ postaÊ has≥o.");
-		SendClientMessage(playerid,COLOR_WHITE,"Uniknij tej sytuacji w W TEJ CHWILII {CD5C5C}zapisz nowe has≥o na karteczce lub wykonaj screen komunikatu poniøej.");
-		SendClientMessage(playerid,COLOR_WHITE,"Jeøeli zapomnisz nowe has≥o do konta na jego odzyskanie bÍdziesz czeka≥ d≥ugie tygodnie!");
-		SendClientMessage(playerid,COLOR_WHITE,"Moøliwe, øe juø teraz zapomnia≥eú has≥a. Ale nic nie szkodzi. Poniøej prezentujemy twoje nowe has≥o ( < i > nie sπ jego czÍúciπ! )");
-		SendClientMessage(playerid,COLOR_P@,"|________________________>>> Zapisz nowe has≥o na kartce! <<<________________________|");
+		SendClientMessage(playerid,COLOR_P@,"|_________________________Rada dnia: zmiana hasÔøΩa_________________________|");
+		SendClientMessage(playerid,COLOR_WHITE,"ZmieniÔøΩeÔøΩ hasÔøΩo to bardzo dobrze. ZwiÔøΩkszy to bezpieczeÔøΩstwo twojego konta na serwerze.");
+		SendClientMessage(playerid,COLOR_WHITE,"JeÔøΩeli posiadasz konto na forum z identycznym hasÔøΩem, rownieÔøΩ moÔøΩesz rozwaÔøΩyÔøΩ jego zmianÔøΩ.");
+		SendClientMessage(playerid,COLOR_WHITE,"Teraz najwaÔøΩniejsza sprawa {FFA500}KONIECZNIE ZAPAMIÔøΩTAJ NOWE HASÔøΩO.");
+		SendClientMessage(playerid,COLOR_WHITE,"Z naszych doÔøΩwiadczeÔøΩ wynika, ÔøΩe duÔøΩo osÔøΩb zapomina nowo nadane na swojÔøΩ postaÔøΩ hasÔøΩo.");
+		SendClientMessage(playerid,COLOR_WHITE,"Uniknij tej sytuacji w W TEJ CHWILII {CD5C5C}zapisz nowe hasÔøΩo na karteczce lub wykonaj screen komunikatu poniÔøΩej.");
+		SendClientMessage(playerid,COLOR_WHITE,"JeÔøΩeli zapomnisz nowe hasÔøΩo do konta na jego odzyskanie bÔøΩdziesz czekaÔøΩ dÔøΩugie tygodnie!");
+		SendClientMessage(playerid,COLOR_WHITE,"MoÔøΩliwe, ÔøΩe juÔøΩ teraz zapomniaÔøΩeÔøΩ hasÔøΩa. Ale nic nie szkodzi. PoniÔøΩej prezentujemy twoje nowe hasÔøΩo ( < i > nie sÔøΩ jego czÔøΩciÔøΩ! )");
+		SendClientMessage(playerid,COLOR_P@,"|________________________>>> Zapisz nowe hasÔøΩo na kartce! <<<________________________|");
 		new string[128];
-		format(string, sizeof(string), "Twoje nowe has≥o to: >>>>>> %s <<<<< -> zapisz je!", inputtext);
+		format(string, sizeof(string), "Twoje nowe hasÔøΩo to: >>>>>> %s <<<<< -> zapisz je!", inputtext);
 
 		if(strcmp(PlayerInfo[playerid][pKey],inputtext, true ) != 0)
 		{
@@ -1577,7 +1577,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			ShowPlayerDialogEx(playerid, 128, DIALOG_STYLE_INPUT, "Konieczna zmiana hasla", "Uwaga! Konieczna jest zmiana has≥a!\nHas≥o na tym koncie juø wygas≥o. Koniecznie musisz je zmieniÊ.\nAby to zrobiÊ wpisz nowe has≥o poniøej.\n{FF0000}HAS£O NIE MOØE BY∆ TAKIE SAMO JAK POPRZEDNIE", "Zmien", "");
+			ShowPlayerDialogEx(playerid, 128, DIALOG_STYLE_INPUT, "Konieczna zmiana hasla", "Uwaga! Konieczna jest zmiana hasÔøΩa!\nHasÔøΩo na tym koncie juÔøΩ wygasÔøΩo. Koniecznie musisz je zmieniÔøΩ.\nAby to zrobiÔøΩ wpisz nowe hasÔøΩo poniÔøΩej.\n{FF0000}HASÔøΩO NIE MOÔøΩE BYÔøΩ TAKIE SAMO JAK POPRZEDNIE", "Zmien", "");
 			return 1;
 		}
 	}
@@ -1636,7 +1636,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(response)
         {
-            if(LSMCElevatorQueue) return SendClientMessage(playerid, -1, "ProszÍ poczekaÊ... Winda jest w uøyciu!");
+            if(LSMCElevatorQueue) return SendClientMessage(playerid, -1, "ProszÔøΩ poczekaÔøΩ... Winda jest w uÔøΩyciu!");
 			switch(listitem)
 			{
 			    case 0:
@@ -1732,7 +1732,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            new hajs = 0;
 	            if(!IsPlayerConnected(giveplayerid))
 	            {
-	                SendClientMessage(playerid, COLOR_PANICRED, "   Gracz na ktÛrego podpisywa≥eú zlecenie siÍ wylogowa≥!");
+	                SendClientMessage(playerid, COLOR_PANICRED, "   Gracz na ktÔøΩrego podpisywaÔøΩeÔøΩ zlecenie siÔøΩ wylogowaÔøΩ!");
 	                return 1;
 	            }
 				if(PlayerInfo[giveplayerid][pLider] > 0) { hajs += strval(inputtext)*150000; }
@@ -1742,18 +1742,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				else { hajs = strval(inputtext)*50000; }
 				haHajs[playerid] = hajs;
 				
-		        format(string, sizeof(string), "Cena za g≥owÍ %s wynosi %d$.\nAby podpisaÊ na niego kontrakt, kliknij \"Podpisz\"", GetNick(giveplayerid), hajs);
-		        ShowPlayerDialogEx(playerid, 7421, DIALOG_STYLE_MSGBOX, "Podpisywanie kontraktu", string, "Podpisz", "Wyjdü");
+		        format(string, sizeof(string), "Cena za gÔøΩowÔøΩ %s wynosi %d$.\nAby podpisaÔøΩ na niego kontrakt, kliknij \"Podpisz\"", GetNick(giveplayerid), hajs);
+		        ShowPlayerDialogEx(playerid, 7421, DIALOG_STYLE_MSGBOX, "Podpisywanie kontraktu", string, "Podpisz", "WyjdÔøΩ");
 	        }
 	        else
 	        {
-	            ShowPlayerDialogEx(playerid, 7420, DIALOG_STYLE_INPUT, "Podpisywanie kontraktu", "OOC: Musisz podaÊ, jak d≥ugo zabity gracz ma przebywaÊ w szpitalu w minutach.\nMinimum 5 minut a maksimum 100. (Cena zlecenia zaleøy od iloúci minut)", "Dalej", "Wyjdü");
+	            ShowPlayerDialogEx(playerid, 7420, DIALOG_STYLE_INPUT, "Podpisywanie kontraktu", "OOC: Musisz podaÔøΩ, jak dÔøΩugo zabity gracz ma przebywaÔøΩ w szpitalu w minutach.\nMinimum 5 minut a maksimum 100. (Cena zlecenia zaleÔøΩy od iloÔøΩci minut)", "Dalej", "WyjdÔøΩ");
                 SendClientMessage(playerid, COLOR_GREY, "    Min 5 Max 100 minut!");
 			}
 	    }
 	    else
 	    {
-	        SendClientMessage(playerid, COLOR_GREY, "Anulowa≥eú podpisywanie kontraktu.");
+	        SendClientMessage(playerid, COLOR_GREY, "AnulowaÔøΩeÔøΩ podpisywanie kontraktu.");
 	        dajeKontrakt[playerid] = 9999;
 	        return 1;
 	    }
@@ -1790,17 +1790,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case 1:
             {
-                ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN, DIALOG_STYLE_LIST, "Zarzπdzanie ekranem", "ZmieÒ napis g≥Ûwny\nUstaw efekt\nUstaw dodatkowy parametr", "Wybierz", "Wyjdz");
+                ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie ekranem", "ZmieÔøΩ napis gÔøΩÔøΩwny\nUstaw efekt\nUstaw dodatkowy parametr", "Wybierz", "Wyjdz");
             }
             case 2:
             {
-                ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEONY, DIALOG_STYLE_LIST, "Zarzπdzanie neonami", "Ustaw efekt\nUstaw powtarzalnoúÊ\nUstaw czÍstotliwoúÊ", "Wybierz", "Wyjdz");
+                ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEONY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie neonami", "Ustaw efekt\nUstaw powtarzalnoÔøΩÔøΩ\nUstaw czÔøΩstotliwoÔøΩÔøΩ", "Wybierz", "Wyjdz");
             }
             case 3:
             {
-                ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY, DIALOG_STYLE_LIST, "Zarzπdzanie dodatkami", "Ustaw efekt\nUstaw powtarzalnoúÊ\nUstaw czÍstotliwoúÊ", "Wybierz", "Wyjdz");
+                ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie dodatkami", "Ustaw efekt\nUstaw powtarzalnoÔøΩÔøΩ\nUstaw czÔøΩstotliwoÔøΩÔøΩ", "Wybierz", "Wyjdz");
             }
-            case 4: ShowPlayerDialogEx(playerid, SCENA_DIALOG_AUDIO, DIALOG_STYLE_INPUT, "Zarzπdzanie audio", "Wprowadü link", "Ustaw", "Wyjdz");
+            case 4: ShowPlayerDialogEx(playerid, SCENA_DIALOG_AUDIO, DIALOG_STYLE_INPUT, "ZarzÔøΩdzanie audio", "WprowadÔøΩ link", "Ustaw", "Wyjdz");
             case 5:
             {
                 if(ScenaSmokeMachine)
@@ -1828,13 +1828,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     else if(dialogid == SCENA_DIALOG_EFEKTY)
     {
         if(!response) return 1;
-        new str[1024] = "{000000}0\t{FFFFFF}UsuÒ\n{000000}18668\t{FFFFFF}Krew\n{000000}18670\t{FFFFFF}B≥yski\n{000000}18675\t{FFFFFF}Dymek\n{000000}18678\t{FFFFFF}Eksplozja\n{000000}18683\t{FFFFFF}Eksplozja medium\n{000000}18685\t{FFFFFF}Eksplozja ma≥a\n{000000}18692\t{FFFFFF}OgieÒ\n{000000}18702\t{FFFFFF}Niebieski p≥omieÒ\n{000000}18708\t{FFFFFF}Bπbelki\n{000000}18718\t{FFFFFF}Iskry\n{000000}18728\t{FFFFFF}Raca\n{000000}18740\t{FFFFFF}Woda\n";
-        strcat(str, "{000000}18680\t{FFFFFF}Dym + iskry\n{000000}18715\t{FFFFFF}Dym duøy\n{000000}18693\t{FFFFFF}OgieÒ #2\n{000000}18744\t{FFFFFF}Splash big\n{000000}18747\t{FFFFFF}Wodna piana");
+        new str[1024] = "{000000}0\t{FFFFFF}UsuÔøΩ\n{000000}18668\t{FFFFFF}Krew\n{000000}18670\t{FFFFFF}BÔøΩyski\n{000000}18675\t{FFFFFF}Dymek\n{000000}18678\t{FFFFFF}Eksplozja\n{000000}18683\t{FFFFFF}Eksplozja medium\n{000000}18685\t{FFFFFF}Eksplozja maÔøΩa\n{000000}18692\t{FFFFFF}OgieÔøΩ\n{000000}18702\t{FFFFFF}Niebieski pÔøΩomieÔøΩ\n{000000}18708\t{FFFFFF}BÔøΩbelki\n{000000}18718\t{FFFFFF}Iskry\n{000000}18728\t{FFFFFF}Raca\n{000000}18740\t{FFFFFF}Woda\n";
+        strcat(str, "{000000}18680\t{FFFFFF}Dym + iskry\n{000000}18715\t{FFFFFF}Dym duÔøΩy\n{000000}18693\t{FFFFFF}OgieÔøΩ #2\n{000000}18744\t{FFFFFF}Splash big\n{000000}18747\t{FFFFFF}Wodna piana");
         switch(listitem)
         {
-            case 0: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY_TYP, DIALOG_STYLE_LIST, "Zarzπdzanie dodatkami", str, "Wybierz", "Wyjdz");
-            case 1: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY_COUNT, DIALOG_STYLE_INPUT, "Zarzπdzanie dodatkami", "Podaj iloúÊ powtÛrzeÒ\t\tnp.\n-1 - dla nieskoÒczonej pÍtli\n0 - dla wy≥πczenia\nn - liczba", "Wybierz", "Wyjdz");
-            case 2: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY_DELAY, DIALOG_STYLE_INPUT, "Zarzπdzanie dodatkami", "Podaj odstÍp czasowy\t\tnp.\n0 - sta≥y efekt\nn [ms] - czas", "Wybierz", "Wyjdz");
+            case 0: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY_TYP, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie dodatkami", str, "Wybierz", "Wyjdz");
+            case 1: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY_COUNT, DIALOG_STYLE_INPUT, "ZarzÔøΩdzanie dodatkami", "Podaj iloÔøΩÔøΩ powtÔøΩrzeÔøΩ\t\tnp.\n-1 - dla nieskoÔøΩczonej pÔøΩtli\n0 - dla wyÔøΩÔøΩczenia\nn - liczba", "Wybierz", "Wyjdz");
+            case 2: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY_DELAY, DIALOG_STYLE_INPUT, "ZarzÔøΩdzanie dodatkami", "Podaj odstÔøΩp czasowy\t\tnp.\n0 - staÔøΩy efekt\nn [ms] - czas", "Wybierz", "Wyjdz");
         }
         return 1;
     }
@@ -1851,7 +1851,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             ScenaEffectData[SCEffectDelay] = 0;
         }
         else ScenaEffectData[SCEffectModel] = strval(inputtext);
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY, DIALOG_STYLE_LIST, "Zarzπdzanie dodatkami", "Ustaw efekt\nUstaw powtarzalnoúÊ\nUstaw czÍstotliwoúÊ", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie dodatkami", "Ustaw efekt\nUstaw powtarzalnoÔøΩÔøΩ\nUstaw czÔøΩstotliwoÔøΩÔøΩ", "Wybierz", "Wyjdz");
         Scena_GenerateEffect();
         return 1;
     }
@@ -1871,7 +1871,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(ScenaEffectData[SCEffectDelay] != 0) ScenaEffectData[SCEffectTimer] = SetTimer("Scena_GenerateEffect", ScenaEffectData[SCEffectDelay], 1);
         }
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY, DIALOG_STYLE_LIST, "Zarzπdzanie dodatkami", "Ustaw efekt\nUstaw powtarzalnoúÊ\nUstaw czÍstotliwoúÊ", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie dodatkami", "Ustaw efekt\nUstaw powtarzalnoÔøΩÔøΩ\nUstaw czÔøΩstotliwoÔøΩÔøΩ", "Wybierz", "Wyjdz");
         Scena_GenerateEffect();
         return 1;
     }
@@ -1891,19 +1891,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(ScenaEffectData[SCEffectDelay] != 0) ScenaEffectData[SCEffectTimer] = SetTimer("Scena_GenerateEffect", ScenaEffectData[SCEffectDelay], 1);
         }
 
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY, DIALOG_STYLE_LIST, "Zarzπdzanie dodatkami", "Ustaw efekt\nUstaw powtarzalnoúÊ\nUstaw czÍstotliwoúÊ", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EFEKTY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie dodatkami", "Ustaw efekt\nUstaw powtarzalnoÔøΩÔøΩ\nUstaw czÔøΩstotliwoÔøΩÔøΩ", "Wybierz", "Wyjdz");
         Scena_GenerateEffect();
         return 1;
     }
     else if(dialogid == SCENA_DIALOG_EKRAN)
     {
         if(!response) return 1;
-        new str[512] = "{000000}0\t{FFFFFF}UsuÒ\n{000000}1\t{FFFFFF}GÛra-dÛ≥";
+        new str[512] = "{000000}0\t{FFFFFF}UsuÔøΩ\n{000000}1\t{FFFFFF}GÔøΩra-dÔøΩ";
         switch(listitem)
         {
-            case 0: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN_TYP, DIALOG_STYLE_INPUT, "Zarzπdzanie ekranem", "Wprowadü napis", "Wybierz", "Wyjdz");
-            case 1: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN_EFEKT, DIALOG_STYLE_LIST, "Zarzπdzanie ekranem", str, "Wybierz", "Wyjdz");
-            case 2: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN_EXTRA, DIALOG_STYLE_INPUT, "Zarzπdzanie ekranem", "Dla efektu Wirnik:\t\tPrÍdkoúÊ (ca≥kowite wartoúci)", "Wybierz", "Wyjdz");
+            case 0: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN_TYP, DIALOG_STYLE_INPUT, "ZarzÔøΩdzanie ekranem", "WprowadÔøΩ napis", "Wybierz", "Wyjdz");
+            case 1: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN_EFEKT, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie ekranem", str, "Wybierz", "Wyjdz");
+            case 2: ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN_EXTRA, DIALOG_STYLE_INPUT, "ZarzÔøΩdzanie ekranem", "Dla efektu Wirnik:\t\tPrÔøΩdkoÔøΩÔøΩ (caÔøΩkowite wartoÔøΩci)", "Wybierz", "Wyjdz");
         }
         return 1;
     }
@@ -1915,7 +1915,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new size = 148-(floatround(floatsqroot(strlen(inputtext)*150))*2);
         if(size < 10) size = 10;
         SetDynamicObjectMaterialText(ScenaScreenObject, 0, inputtext, OBJECT_MATERIAL_SIZE_512x256, "Arial", size, 1, 0xFFFFFFFF, 0, 1);
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN, DIALOG_STYLE_LIST, "Zarzπdzanie ekranem", "ZmieÒ napis g≥Ûwny\nUstaw efekt\nUstaw dodatkowy parametr", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie ekranem", "ZmieÔøΩ napis gÔøΩÔøΩwny\nUstaw efekt\nUstaw dodatkowy parametr", "Wybierz", "Wyjdz");
         return 1;
     }
     else if(dialogid == SCENA_DIALOG_EKRAN_EFEKT)
@@ -1938,7 +1938,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 
         Scena_ScreenEffect();
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN, DIALOG_STYLE_LIST, "Zarzπdzanie ekranem", "ZmieÒ napis g≥Ûwny\nUstaw efekt\nUstaw dodatkowy parametr", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie ekranem", "ZmieÔøΩ napis gÔøΩÔøΩwny\nUstaw efekt\nUstaw dodatkowy parametr", "Wybierz", "Wyjdz");
         return 1;
     }
     else if(dialogid == SCENA_DIALOG_EKRAN_EXTRA)
@@ -1949,18 +1949,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         Scena_ScreenEffect();
 
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN, DIALOG_STYLE_LIST, "Zarzπdzanie ekranem", "ZmieÒ napis g≥Ûwny\nUstaw efekt\nUstaw dodatkowy parametr", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_EKRAN, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie ekranem", "ZmieÔøΩ napis gÔøΩÔøΩwny\nUstaw efekt\nUstaw dodatkowy parametr", "Wybierz", "Wyjdz");
         return 1;
     }
     else if(dialogid == SCENA_DIALOG_NEONY)
     {
         if(!response) return 1;
-        new str[512] = "{000000}0\t{FFFFFF}UsuÒ\n{000000}1\t{FFFFFF}Slider\n{000000}2\t{FFFFFF}Zderzacz";
+        new str[512] = "{000000}0\t{FFFFFF}UsuÔøΩ\n{000000}1\t{FFFFFF}Slider\n{000000}2\t{FFFFFF}Zderzacz";
         switch(listitem)
         {
-            case 0: ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEON_EFEKT, DIALOG_STYLE_LIST, "Zarzπdzanie neonami", str, "Wybierz", "Wyjdz");
-            case 1: ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEON_COUNT, DIALOG_STYLE_INPUT, "Zarzπdzanie neonami", "Aktualnie brak", "Wybierz", "Wyjdz");
-            case 2: ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEON_DELAY, DIALOG_STYLE_INPUT, "Zarzπdzanie neonami", "Dla efektu:\t\tPrÍdkoúÊ (ca≥kowite wartoúci)", "Wybierz", "Wyjdz");
+            case 0: ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEON_EFEKT, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie neonami", str, "Wybierz", "Wyjdz");
+            case 1: ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEON_COUNT, DIALOG_STYLE_INPUT, "ZarzÔøΩdzanie neonami", "Aktualnie brak", "Wybierz", "Wyjdz");
+            case 2: ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEON_DELAY, DIALOG_STYLE_INPUT, "ZarzÔøΩdzanie neonami", "Dla efektu:\t\tPrÔøΩdkoÔøΩÔøΩ (caÔøΩkowite wartoÔøΩci)", "Wybierz", "Wyjdz");
         }
         return 1;
     }
@@ -1973,8 +1973,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         ScenaNeonData[SCNeonTyp] = strval(inputtext);
         if(ScenaNeonData[SCNeonTyp] != 0)
         {
-            new str[256] = "{000000}18652\t\t{FFFFFF}Bia≥y neon\n{000000}18647\t\t{FFFFFF}Czerwony neon\n{000000}18648\t\t{FFFFFF}Niebieski neon\n{000000}18649\t\t{FFFFFF}Zielony neon\n{000000}18650\t\t{FFFFFF}ØÛ≥ty neon\n{000000}18651\t\t{FFFFFF}RÛøowy neon <3 :*";
-            ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEON_KOLORY, DIALOG_STYLE_LIST, "Zarzπdzanie neonami", str, "Wybierz", "Wyjdz");
+            new str[256] = "{000000}18652\t\t{FFFFFF}BiaÔøΩy neon\n{000000}18647\t\t{FFFFFF}Czerwony neon\n{000000}18648\t\t{FFFFFF}Niebieski neon\n{000000}18649\t\t{FFFFFF}Zielony neon\n{000000}18650\t\t{FFFFFF}ÔøΩÔøΩty neon\n{000000}18651\t\t{FFFFFF}RÔøΩowy neon <3 :*";
+            ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEON_KOLORY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie neonami", str, "Wybierz", "Wyjdz");
         }
         return 1;
     }
@@ -1986,7 +1986,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         Scena_NeonEffect();
 
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEONY, DIALOG_STYLE_LIST, "Zarzπdzanie neonami", "Ustaw efekt\nUstaw powtarzalnoúÊ\nUstaw czÍstotliwoúÊ", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEONY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie neonami", "Ustaw efekt\nUstaw powtarzalnoÔøΩÔøΩ\nUstaw czÔøΩstotliwoÔøΩÔøΩ", "Wybierz", "Wyjdz");
         return 1;
     }
     else if(dialogid == SCENA_DIALOG_NEON_DELAY)
@@ -1997,7 +1997,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         Scena_NeonEffect();
 
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEONY, DIALOG_STYLE_LIST, "Zarzπdzanie neonami", "Ustaw efekt\nUstaw powtarzalnoúÊ\nUstaw czÍstotliwoúÊ", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEONY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie neonami", "Ustaw efekt\nUstaw powtarzalnoÔøΩÔøΩ\nUstaw czÔøΩstotliwoÔøΩÔøΩ", "Wybierz", "Wyjdz");
         return 1;
     }
     else if(dialogid == SCENA_DIALOG_NEON_KOLORY)
@@ -2008,7 +2008,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
         Scena_NeonEffect();
 
-        ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEONY, DIALOG_STYLE_LIST, "Zarzπdzanie neonami", "Ustaw efekt\nUstaw powtarzalnoúÊ\nUstaw czÍstotliwoúÊ", "Wybierz", "Wyjdz");
+        ShowPlayerDialogEx(playerid, SCENA_DIALOG_NEONY, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie neonami", "Ustaw efekt\nUstaw powtarzalnoÔøΩÔøΩ\nUstaw czÔøΩstotliwoÔøΩÔøΩ", "Wybierz", "Wyjdz");
         return 1;
     }
     else if(dialogid == SCENA_DIALOG_AUDIO)
@@ -2037,14 +2037,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			Sejf_Add(FRAC_SN, 2000000); 
 			Sejf_Save(FRAC_SN); 
 			new string[124]; 
-			format(string, sizeof(string), "%s umieúci≥ w sejfie 2 miliony za scenÍ!"); 
+			format(string, sizeof(string), "%s umieÔøΩciÔøΩ w sejfie 2 miliony za scenÔøΩ!"); 
 			SendLeaderRadioMessage(FRAC_SN, COLOR_LIGHTGREEN, string); 
 			SN_ACCESS[playerid] = 1; 
-			sendTipMessageEx(playerid, COLOR_P@, "Umieúci≥eú op≥atÍ za scenÍ w sejfie SN"); 
+			sendTipMessageEx(playerid, COLOR_P@, "UmieÔøΩciÔøΩeÔøΩ opÔøΩatÔøΩ za scenÔøΩ w sejfie SN"); 
 		}
 		else
 		{
-			sendTipMessage(playerid, "Nie masz wystarczajπcej iloúci gotÛwki!"); 
+			sendTipMessage(playerid, "Nie masz wystarczajÔøΩcej iloÔøΩci gotÔøΩwki!"); 
 			return 1;
 		}
 	}
@@ -2057,7 +2057,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    new hajs = haHajs[playerid];
             if(!IsPlayerConnected(giveplayerid))
             {
-                SendClientMessage(playerid, COLOR_PANICRED, "   Gracz na ktÛrego podpisywa≥eú zlecenie siÍ wylogowa≥!");
+                SendClientMessage(playerid, COLOR_PANICRED, "   Gracz na ktÔøΩrego podpisywaÔøΩeÔøΩ zlecenie siÔøΩ wylogowaÔøΩ!");
                 return 1;
             }
 			
@@ -2065,11 +2065,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				ZabierzKase(playerid, hajs);
 				PlayerInfo[giveplayerid][pHeadValue]+=hajs;
-				format(string, sizeof(string), "%s podpisa≥ kontrakt na %s, nagroda za wykonanie $%d.",GetNick(playerid), GetNick(giveplayerid), hajs);
+				format(string, sizeof(string), "%s podpisaÔøΩ kontrakt na %s, nagroda za wykonanie $%d.",GetNick(playerid), GetNick(giveplayerid), hajs);
 				SendFamilyMessage(8, COLOR_YELLOW, string);
-				format(string, sizeof(string), "* Podpisa≥eú kontrakt na %s, za $%d.",GetNick(giveplayerid), hajs);
+				format(string, sizeof(string), "* PodpisaÔøΩeÔøΩ kontrakt na %s, za $%d.",GetNick(giveplayerid), hajs);
 				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-				format(string, sizeof(string), "* %s wk≥ada kopertÍ z pieniÍdzmi do skrzynki, po czym zamyka jπ.", GetNick(playerid));
+				format(string, sizeof(string), "* %s wkÔøΩada kopertÔøΩ z pieniÔøΩdzmi do skrzynki, po czym zamyka jÔøΩ.", GetNick(playerid));
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 				dajeKontrakt[playerid] = 9999;
@@ -2079,13 +2079,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-			    SendClientMessage(playerid, COLOR_PANICRED, "   Nie masz tylu pieniÍdzy!");
+			    SendClientMessage(playerid, COLOR_PANICRED, "   Nie masz tylu pieniÔøΩdzy!");
 			    return 1;
 			}
 		}
 		else
 		{
-		    SendClientMessage(playerid, COLOR_GREY, "Anulowa≥eú podpisywanie kontraktu.");
+		    SendClientMessage(playerid, COLOR_GREY, "AnulowaÔøΩeÔøΩ podpisywanie kontraktu.");
 	        dajeKontrakt[playerid] = 9999;
 	        haHajs[playerid] = 0;
 	        return 1;
@@ -2098,17 +2098,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(!response)
 		{
 			Remove_MySQL_Leader(id_Lidera); 
-			format(string, sizeof(string), "* Zosta≥eú wyrzucony z frakcji przez %s.", GetNick(playerid));
+			format(string, sizeof(string), "* ZostaÔøΩeÔøΩ wyrzucony z frakcji przez %s.", GetNick(playerid));
 			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, string);
-			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, "* Jesteú cywilem.");
-			Log(adminLog, INFO, "Admin %s usunπ≥ gracza %s z frakcji %s - pozostawiajπc VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), GetFractionLogName(PlayerInfo[id_Lidera][pMember]));
+			SendClientMessage(id_Lidera, COLOR_LIGHTBLUE, "* JesteÔøΩ cywilem.");
+			Log(adminLog, INFO, "Admin %s usunÔøΩÔøΩ gracza %s z frakcji %s - pozostawiajÔøΩc VLD.", GetPlayerLogName(playerid), GetPlayerLogName(id_Lidera), GetFractionLogName(PlayerInfo[id_Lidera][pMember]));
 			PlayerInfo[id_Lidera][pMember] = 0;
 			PlayerInfo[id_Lidera][pLider] = 0;
 			PlayerInfo[id_Lidera][pJob] = 0;
 			orgUnInvitePlayer(id_Lidera);
 			MedicBill[id_Lidera] = 0;
 			SetPlayerSpawn(id_Lidera);
-			format(string, sizeof(string), "  Wyrzuci≥es %s z frakcji.", GetNick(id_Lidera));
+			format(string, sizeof(string), "  WyrzuciÔøΩes %s z frakcji.", GetNick(id_Lidera));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 		}
 		else 
@@ -2130,9 +2130,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 5: lSkin = 122;
             case 6: lSkin = 270;
         }
-        if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return SendClientMessage(playerid, 0xFF8D00FF, "Musisz byÊ pieszo, øeby zmieniÊ skin.");
+        if(GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return SendClientMessage(playerid, 0xFF8D00FF, "Musisz byÔøΩ pieszo, ÔøΩeby zmieniÔøΩ skin.");
         SetPlayerSkinEx(playerid, lSkin);
-        SendClientMessage(playerid, 0xC0FF9CFF, "ª Zmieni≥eú swoje przebranie.");
+        SendClientMessage(playerid, 0xC0FF9CFF, "ÔøΩ ZmieniÔøΩeÔøΩ swoje przebranie.");
     }
 	else if(dialogid == 1213)
  	{
@@ -2270,9 +2270,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 12:
 				{
 					ClearDynamicActorAnimations(actorUID[actorpID]);
-					format(string, sizeof(string), "Wy≥πczy≥eú animacje dla %s [%d]", Actors[actorpID][a_Name], actorpID);
+					format(string, sizeof(string), "WyÔøΩÔøΩczyÔøΩeÔøΩ animacje dla %s [%d]", Actors[actorpID][a_Name], actorpID);
 					sendTipMessage(playerid, string); 
-					format(string, sizeof(string), "Admin %s wyczyúci≥ animacje dla actora %s [%d]", GetNickEx(playerid), Actors[actorpID], actorpID); 
+					format(string, sizeof(string), "Admin %s wyczyÔøΩciÔøΩ animacje dla actora %s [%d]", GetNickEx(playerid), Actors[actorpID], actorpID); 
 					SendMessageToAdmin(string, COLOR_RED);
 				}
 			}
@@ -2286,11 +2286,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	        {
 	    		if(PlayerInfo[playerid][pPos_x] == 2246.6 || PlayerInfo[playerid][pPos_y] == -1161.9 || PlayerInfo[playerid][pPos_z] == 1029.7 || PlayerInfo[playerid][pPos_x] == 0 || PlayerInfo[playerid][pPos_y] == 0)
 	      		{
-	                SendClientMessage(playerid, 0xFFFFFFFF, "Twoja pozycja zosta≥a b≥Ídnie zapisana, dlatego zespawnujesz siÍ na zwyk≥ym spawnie.");
+	                SendClientMessage(playerid, 0xFFFFFFFF, "Twoja pozycja zostaÔøΩa bÔøΩÔøΩdnie zapisana, dlatego zespawnujesz siÔøΩ na zwykÔøΩym spawnie.");
                 }
 				else
 				{
-					SendClientMessage(playerid, 0xFFFFFFFF, "Pozycja przywrÛcona");
+					SendClientMessage(playerid, 0xFFFFFFFF, "Pozycja przywrÔøΩcona");
 					SetPVarInt(playerid, "spawn", 2);
 					SetPlayerSpawnPos(playerid);
 				}
@@ -2321,54 +2321,54 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							
 							
-							format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty WÍdkarskie\n Egzaminy Praktyczne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+							format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty WÔøΩdkarskie\n Egzaminy Praktyczne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
 						else if(PlayerInfo[playerid][pRank] == 1)
 						{
 	
-							format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty WÍdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broÒ", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+							format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty WÔøΩdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broÔøΩ", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
 						else if(PlayerInfo[playerid][pRank] == 2)
 						{
-							format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty WÍdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broÒ\n Patenty Øeglarskie", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+							format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty WÔøΩdkarskie\n Egzaminy Praktyczne i Teoretyczne\n Pozwolenia na broÔøΩ\n Patenty ÔøΩeglarskie", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
 						else if(PlayerInfo[playerid][pRank] >= 3 || PlayerInfo[playerid][pLider] == 11)
 						{
-							format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Uniwersalne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+							format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Uniwersalne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);	
 						}
 			        }
 			        case 1:
 			        {
-						format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siÍ\n u tej samej osoby", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+						format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Praktyczne\n{008080}Zapis i egzamin odbywa siÔøΩ\n u tej samej osoby", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 2:
 			        {
-						format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Teoretyczne\n{008080}Kaøde kolejne podejúcie\n wymaga zachowania 1h odstÍpu", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+						format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Egzaminy Teoretyczne\n{008080}KaÔøΩde kolejne podejÔøΩcie\n wymaga zachowania 1h odstÔøΩpu", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 3:
 			        {
-						format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+						format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Kurs na prawo jazdy\n{008080}Zapisy", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 4:
 			        {
-						format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Rejestracja", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+						format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC} Rejestracja", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 5:
 			        {
-						format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {FA9C1A} Zaraz Wracam", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
+						format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {FA9C1A} Zaraz Wracam", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 			        	UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			        case 6:
 			        {
-						format(string, sizeof(string), "Urzπd Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Nieczynne", okienkoid+1);
+						format(string, sizeof(string), "UrzÔøΩd Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Nieczynne", okienkoid+1);
 						UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 			        }
 			    }
@@ -2381,30 +2381,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 case 0:
                 {
-    	            SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £πcze z policjπ, prosze czekaÊ...");
-    				SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Witam, prosze podaÊ krÛtki opis przestÍpstwa.");
+    	            SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: ÔøΩÔøΩcze z policjÔøΩ, prosze czekaÔøΩ...");
+    				SendClientMessage(playerid, COLOR_DBLUE, "Police HQ: Witam, prosze podaÔøΩ krÔøΩtki opis przestÔøΩpstwa.");
     				Mobile[playerid] = POLICE_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
 				case 1:
                 {
-    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £πcze ze szpitalem, prosze czekaÊ...");
-    				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Szpital: Witam, prosze podaÊ krÛtki opis zdarzenia.");
+    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: ÔøΩÔøΩcze ze szpitalem, prosze czekaÔøΩ...");
+    				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Szpital: Witam, prosze podaÔøΩ krÔøΩtki opis zdarzenia.");
     				Mobile[playerid] = LSMC_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
                 case 2:
                 {
-                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £πcze ze straøπ poøarnπ, prosze czekaÊ...");
-    				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaÊ krÛtki opis zdarzenia.");	
+                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: ÔøΩÔøΩcze ze straÔøΩÔøΩ poÔøΩarnÔøΩ, prosze czekaÔøΩ...");
+    				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaÔøΩ krÔøΩtki opis zdarzenia.");	
     				Mobile[playerid] = LSMC_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
 				/*
                 case 3:
                 {
-    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £πcze z dyspozytorem, prosze czekaÊ...");
-    				SendClientMessage(playerid, TEAM_CYAN_COLOR, "SheriffDep: Witam, prosze podaÊ krÛtki opis przestÍpstwa.");
+    			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: ÔøΩÔøΩcze z dyspozytorem, prosze czekaÔøΩ...");
+    				SendClientMessage(playerid, TEAM_CYAN_COLOR, "SheriffDep: Witam, prosze podaÔøΩ krÔøΩtki opis przestÔøΩpstwa.");
     				Mobile[playerid] = LSFD_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }*/
@@ -2546,7 +2546,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla s≥uøb porzπdkowych.");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla sÔøΩuÔøΩb porzÔøΩdkowych.");
 							return 1;
 						}
 		            }
@@ -2564,7 +2564,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         }
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla s≥uøb porzπdkowych.");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla sÔøΩuÔøΩb porzÔøΩdkowych.");
 							return 1;
 						}
 		            }
@@ -2582,7 +2582,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         }
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla s≥uøb porzπdkowych.");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla sÔøΩuÔøΩb porzÔøΩdkowych.");
 							return 1;
 						}
 		            }
@@ -2610,7 +2610,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla s≥uøb porzπdkowych.");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla sÔøΩuÔøΩb porzÔøΩdkowych.");
 							return 1;
 						}
 		            }
@@ -2628,7 +2628,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla s≥uøb porzπdkowych.");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla sÔøΩuÔøΩb porzÔøΩdkowych.");
 							return 1;
 						}
 		            }
@@ -2646,7 +2646,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla s≥uøb porzπdkowych.");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla sÔøΩuÔøΩb porzÔøΩdkowych.");
 							return 1;
 						}
 		            }
@@ -2664,7 +2664,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla s≥uøb porzπdkowych.");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla sÔøΩuÔøΩb porzÔøΩdkowych.");
 							return 1;
 						}
 		            }
@@ -2680,7 +2680,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla s≥uøb porzπdkowych.");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla sÔøΩuÔøΩb porzÔøΩdkowych.");
 							return 1;
 						}
 		            }
@@ -2717,7 +2717,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        SetPlayerVirtualWorld(playerid, 35);
 				        TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);*/
-						sendTipMessageEx(playerid, 0x800040FF, "Wyglπda na to, øe piÍtro jest czymú przyblokowane"); 
+						sendTipMessageEx(playerid, 0x800040FF, "WyglÔøΩda na to, ÔøΩe piÔøΩtro jest czymÔøΩ przyblokowane"); 
 	                }
 	            }
 	        }
@@ -2740,24 +2740,24 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeøony dla pracownikÛw UM");
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrzeÔøΩony dla pracownikÔøΩw UM");
 							return 1;
 						}
 			        }
 			        case 1:
 			        {
-				        SetPlayerPos(playerid,1450.6615,-1819.2279,77.9613);//g≥Ûwna sala urzÍdu
+				        SetPlayerPos(playerid,1450.6615,-1819.2279,77.9613);//gÔøΩÔøΩwna sala urzÔøΩdu
 				        SetPlayerVirtualWorld(playerid,50);
 				        SetPlayerInterior(playerid,0);
 	                    TogglePlayerControllable(playerid,0);
                         Wchodzenie(playerid);
-	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 9 - G≥Ûwna sala urzÍdu <<<<");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Okienka dla interesantÛw");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Wyjúcie na plac manewrowy");
-	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Toalety na kaødym skrzydle");
+	                    SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> Trwa jazda na Poziom 9 - GÔøΩÔøΩwna sala urzÔøΩdu <<<<");
+	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Okienka dla interesantÔøΩw");
+	                    SendClientMessage(playerid, COLOR_WHITE, "  --> WyjÔøΩcie na plac manewrowy");
+	                    SendClientMessage(playerid, COLOR_WHITE, "  --> Toalety na kaÔøΩdym skrzydle");
                      	SendClientMessage(playerid, COLOR_WHITE, "  --> Biura & Sale konferencyjne & Senat & Burmistrz & Akademia");
                      	SendClientMessage(playerid, COLOR_WHITE, "  --> Biuro ochrony - biuro kamer");
-                     	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ProszÍ czekaÊ, za chwilÍ otworzπ siÍ drzwi(10sek) <<<<");
+                     	SendClientMessage(playerid, COLOR_LIGHTGREEN, ">>>> ProszÔøΩ czekaÔøΩ, za chwilÔøΩ otworzÔøΩ siÔøΩ drzwi(10sek) <<<<");
                      	PlayerInfo[playerid][pLocal] = 108;
 			        }
 					case 2:
@@ -2933,7 +2933,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 8);
 						SetPlayerPos(playerid, 605.5609, -1462.2583, 88.1674);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Sale przes≥uchaÒ");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Sale przesÔøΩuchaÔøΩ");
 					}
 					case 11://dach
 					{
@@ -2971,11 +2971,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							if(PlayerGames[playerid] >= 4)
 							{
-								sendTipMessage(playerid, "Przepraszamy, zuøy≥eú wszystkie zdrapki na naszym magazynie!"); 
-								sendTipMessage(playerid, "SprÛbuj przyjúÊ za godzinÍ, moøe przyjdπ nowe."); 
+								sendTipMessage(playerid, "Przepraszamy, zuÔøΩyÔøΩeÔøΩ wszystkie zdrapki na naszym magazynie!"); 
+								sendTipMessage(playerid, "SprÔøΩbuj przyjÔøΩÔøΩ za godzinÔøΩ, moÔøΩe przyjdÔøΩ nowe."); 
 								return 1;
 							}
-							format(string, sizeof(string), "%s kupuje zdrapkÍ w sklepie i zaczyna jπ zdrapywaÊ", GetNick(playerid)); 
+							format(string, sizeof(string), "%s kupuje zdrapkÔøΩ w sklepie i zaczyna jÔøΩ zdrapywaÔøΩ", GetNick(playerid)); 
 							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
@@ -2985,25 +2985,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								if(playerValue > winValue && playerValue >= 85)
 								{
 									new bonus = (PlayerInfo[playerid][pTraderPerk]*10000);
-									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 200.000$! ((%s))", GetNick(playerid));
+									format(string, sizeof(string), "Po zdrapaniu widaÔøΩ wygranÔøΩ 200.000$! ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 									DajKase(playerid, 200000+bonus); 
 								}
 								else if(playerValue > winValue && playerValue < 85 && playerValue >= 50)
 								{
-									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 85.000$! ((%s))", GetNick(playerid));
+									format(string, sizeof(string), "Po zdrapaniu widaÔøΩ wygranÔøΩ 85.000$! ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 									DajKase(playerid, 85000); 
 								}
 								else if(playerValue < winValue && playerValue > 50)
 								{
-									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 35.000$! ((%s))", GetNick(playerid));
+									format(string, sizeof(string), "Po zdrapaniu widaÔøΩ wygranÔøΩ 35.000$! ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 									DajKase(playerid, 35000); 
 								}
 								else
 								{
-									format(string, sizeof(string), "Po zdrapaniu widaÊ napis ''Graj dalej'' ((%s))", GetNick(playerid));
+									format(string, sizeof(string), "Po zdrapaniu widaÔøΩ napis ''Graj dalej'' ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 								}
 								PlayerGames[playerid]++; 
@@ -3012,25 +3012,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							{
 								if(playerValue > winValue && playerValue >= 85)
 								{
-									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 100.000$! ((%s))", GetNick(playerid));
+									format(string, sizeof(string), "Po zdrapaniu widaÔøΩ wygranÔøΩ 100.000$! ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 									DajKase(playerid, 100000); 
 								}
 								else if(playerValue > winValue && playerValue < 85 && playerValue >= 50)
 								{
-									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 55.000$! ((%s))", GetNick(playerid));
+									format(string, sizeof(string), "Po zdrapaniu widaÔøΩ wygranÔøΩ 55.000$! ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 									DajKase(playerid, 55000); 
 								}
 								else if(playerValue < winValue && playerValue > 50)
 								{
-									format(string, sizeof(string), "Po zdrapaniu widaÊ wygranπ 15.000$! ((%s))", GetNick(playerid));
+									format(string, sizeof(string), "Po zdrapaniu widaÔøΩ wygranÔøΩ 15.000$! ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 									DajKase(playerid, 15000); 
 								}
 								else
 								{
-									format(string, sizeof(string), "Po zdrapaniu widaÊ napis ''Graj dalej'' ((%s))", GetNick(playerid));
+									format(string, sizeof(string), "Po zdrapaniu widaÔøΩ napis ''Graj dalej'' ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 								}
 								PlayerGames[playerid]++; 
@@ -3059,11 +3059,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    }
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							new randphone = 10000 + random(89999);//minimum 1000  max 9999
-							format(string, sizeof(string), "   Kupi≥eú telefon. TwÛj numer to: %d", randphone);
+							format(string, sizeof(string), "   KupiÔøΩeÔøΩ telefon. TwÔøΩj numer to: %d", randphone);
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_GRAD5, "Moøesz sprawdziÊ go w kaødej chwili wpisujπc /stats");
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /telefonpomoc aby zobaczyÊ komendy telefonu.");
-							Log(payLog, INFO, "Gracz %s kupi≥ telefon o numerze %d [Poprzedni: %d]", 
+							SendClientMessage(playerid, COLOR_GRAD5, "MoÔøΩesz sprawdziÔøΩ go w kaÔøΩdej chwili wpisujÔøΩc /stats");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /telefonpomoc aby zobaczyÔøΩ komendy telefonu.");
+							Log(payLog, INFO, "Gracz %s kupiÔøΩ telefon o numerze %d [Poprzedni: %d]", 
 								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
 							);
 							MRP_SetPlayerPhone(playerid, randphone);
@@ -3091,9 +3091,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 			                PlayerInfo[playerid][pPhoneBook] = 1;
-							format(string, sizeof(string), "   Ksiπøka telefoniczna zakupiona! Moøesz teraz sprawdzaÊ numery graczy !");
+							format(string, sizeof(string), "   KsiÔøΩÔøΩka telefoniczna zakupiona! MoÔøΩesz teraz sprawdzaÔøΩ numery graczy !");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /numer <id/nick>.");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /numer <id/nick>.");
 							return 1;
 						}
 					}
@@ -3118,7 +3118,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							gDice[playerid] = 1;
-							format(string, sizeof(string), "   Kostka zakupiona. Moøesz niπ rzucaÊ uøywajπc /kostka2");
+							format(string, sizeof(string), "   Kostka zakupiona. MoÔøΩesz niÔøΩ rzucaÔøΩ uÔøΩywajÔøΩc /kostka2");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
@@ -3132,7 +3132,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun9] = 43;
 							PlayerInfo[playerid][pAmmo9] += 100;
 						    GivePlayerWeapon(playerid, 43, 100);
-							SendClientMessage(playerid, COLOR_GRAD4, "Aparat zakupiony! Moøesz nim teraz robiÊ zdjÍcia!");
+							SendClientMessage(playerid, COLOR_GRAD4, "Aparat zakupiony! MoÔøΩesz nim teraz robiÔøΩ zdjÔøΩcia!");
 							return 1;
 						}
 					}
@@ -3163,9 +3163,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								GameTextForPlayer(playerid, string, 5000, 1);
 							}
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							format(string, sizeof(string), "PrÍdkoúciomierz zakupiony.");
+							format(string, sizeof(string), "PrÔøΩdkoÔøΩciomierz zakupiony.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /licznik ");*/
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /licznik ");*/
 							SendClientMessage(playerid, COLOR_WHITE, "   Brak Towaru!");
 							return 1;
 						}
@@ -3218,7 +3218,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Odtwarzacz MP3 Zakupiony.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /muzyka");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /muzyka");
 							PlayerInfo[playerid][pCDPlayer] = 1;
 							return 1;
 						}
@@ -3229,7 +3229,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pPiwo] >= 4)
 						    {
-						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za duøo Piw, nie udüwigniesz juø wiÍcej !");
+						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za duÔøΩo Piw, nie udÔøΩwigniesz juÔøΩ wiÔøΩcej !");
 						    }
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
@@ -3249,7 +3249,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Piwo 'Mruczny Gul; zakupione.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /piwo aby wypiÊ");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /piwo aby wypiÔøΩ");
 							format(string, sizeof(string), "~r~-$%d", 20);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerInfo[playerid][pPiwo] += 1;
@@ -3263,7 +3263,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pWino] >= 4)
 						    {
-						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za duøo Win, nie udüwigniesz juø wiÍcej !");
+						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za duÔøΩo Win, nie udÔøΩwigniesz juÔøΩ wiÔøΩcej !");
 						    }
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
@@ -3283,7 +3283,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Wino 'Komandos zakupione'.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /komandos aby wypiÊ");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /komandos aby wypiÔøΩ");
 							format(string, sizeof(string), "~r~-$%d", 25);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerInfo[playerid][pWino] += 1;
@@ -3297,7 +3297,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pSprunk] >= 5)
 						    {
-						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za duøo SprunkÛw, nie udüwigniesz juø wiÍcej !");
+						    	SendClientMessage(playerid, COLOR_GREY, "   Masz za duÔøΩo SprunkÔøΩw, nie udÔøΩwigniesz juÔøΩ wiÔøΩcej !");
 						    }
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
@@ -3317,7 +3317,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Sprunk zakupiony.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /sprunk aby wypiÊ sprunka");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /sprunk aby wypiÔøΩ sprunka");
 							SetPlayerSpecialAction(playerid, SPECIAL_ACTION_DRINK_SPRUNK);
 							PlayerInfo[playerid][pSprunk] += 1;
 							return 1;
@@ -3351,7 +3351,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "CB-RADIO Zakupione.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-	     					SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /cb w pojezdzie aby rozawiwac z innymi");
+	     					SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /cb w pojezdzie aby rozawiwac z innymi");
 							PlayerInfo[playerid][pCB] = 1;
 							return 1;
 						}
@@ -3362,7 +3362,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pCygaro] >= 1)
 						    {
-						    	SendClientMessage(playerid, COLOR_GREY, "   Masz juø cygara, po co ci nastÍpne?");
+						    	SendClientMessage(playerid, COLOR_GREY, "   Masz juÔøΩ cygara, po co ci nastÔøΩpne?");
 						    }
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
@@ -3382,14 +3382,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "Paczka 5 cygar zakupiona.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /cygaro aby zapaliÊ");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÔøΩWKA: Wpisz /cygaro aby zapaliÔøΩ");
 							PlayerInfo[playerid][pCygaro] = 5;
 							SetPlayerSpecialAction(playerid, SPECIAL_ACTION_SMOKE_CIGGY);
 							return 1;
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniÍdzy !");
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniÔøΩdzy !");
 						}
 					}
 					case 14:
@@ -3409,7 +3409,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniÍdzy !");
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniÔøΩdzy !");
 						}
 					}
 					case 15:
@@ -3418,7 +3418,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							if(PlayerInfo[playerid][pCruiseController] == 1)
 							{
-								format(string, sizeof(string), "Juø masz tempomat!");
+								format(string, sizeof(string), "JuÔøΩ masz tempomat!");
 								SendClientMessage(playerid, COLOR_GRAD4, string);
 								return 1;
 							}
@@ -3427,78 +3427,78 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							format(string, sizeof(string), "~r~-$%d", 35000);
 							GameTextForPlayer(playerid, string, 5000, 1);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							format(string, sizeof(string), "Kupi≥eú tempomat do auta. Wciúnij CTRL podczas jazdy, øeby aktywowaÊ.");
+							format(string, sizeof(string), "KupiÔøΩeÔøΩ tempomat do auta. WciÔøΩnij CTRL podczas jazdy, ÔøΩeby aktywowaÔøΩ.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-							format(string, sizeof(string), "Aby zwiÍkszyÊ prÍdkoúÊ auta wciúnij lewy alt, zmniejszanie spacja.");
+							format(string, sizeof(string), "Aby zwiÔøΩkszyÔøΩ prÔøΩdkoÔøΩÔøΩ auta wciÔøΩnij lewy alt, zmniejszanie spacja.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
 							return 1;
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniÍdzy !");
+							SendClientMessage(playerid, COLOR_WHITE, "   Nie masz na to pieniÔøΩdzy !");
 						}
 					}
 					case 16: //kurczak
 					{
 						if(kaska[playerid] < 15) 
 						{
-							sendErrorMessage(playerid, "Nie staÊ CiÍ na mroøonego kurczaka!");
+							sendErrorMessage(playerid, "Nie staÔøΩ CiÔøΩ na mroÔøΩonego kurczaka!");
 							return 1;
 						}
 						if(Groceries[playerid][pChicken] != 0)
 						{
-							sendErrorMessage(playerid, "Masz juø mroøonego kurczaka.");
+							sendErrorMessage(playerid, "Masz juÔøΩ mroÔøΩonego kurczaka.");
 							return 1;
 						}
 						Groceries[playerid][pChicken] = random(300)+110;
 						ZabierzKase(playerid, 15);
 						GameTextForPlayer(playerid, "~r~-$15", 5000, 1);
-						SendClientMessage(playerid, COLOR_GRAD4, "Kupi≥eú mroøonego kurczaka.");
+						SendClientMessage(playerid, COLOR_GRAD4, "KupiÔøΩeÔøΩ mroÔøΩonego kurczaka.");
 					}
 					case 17: //pizza
 					{
 						if(kaska[playerid] < 30) 
 						{
-							sendErrorMessage(playerid, "Nie staÊ CiÍ na mroøonπ pizze!");
+							sendErrorMessage(playerid, "Nie staÔøΩ CiÔøΩ na mroÔøΩonÔøΩ pizze!");
 							return 1;
 						}
 						if(Groceries[playerid][pPizza] != 0)
 						{
-							sendErrorMessage(playerid, "Masz juø mroøonπ pizze.");
+							sendErrorMessage(playerid, "Masz juÔøΩ mroÔøΩonÔøΩ pizze.");
 							return 1;
 						}
 						Groceries[playerid][pPizza] = random(300)+90;
 						ZabierzKase(playerid, 30);
 						GameTextForPlayer(playerid, "~r~-$30", 5000, 1);
-						SendClientMessage(playerid, COLOR_GRAD4, "Kupi≥eú mroøonπ pizzÍ.");
+						SendClientMessage(playerid, COLOR_GRAD4, "KupiÔøΩeÔøΩ mroÔøΩonÔøΩ pizzÔøΩ.");
 					}
 					case 18: //hamburger
 					{
 						if(kaska[playerid] < 25) 
 						{
-							sendErrorMessage(playerid, "Nie staÊ CiÍ na mroøonego hamburgera!");
+							sendErrorMessage(playerid, "Nie staÔøΩ CiÔøΩ na mroÔøΩonego hamburgera!");
 							return 1;
 						}
 						if(Groceries[playerid][pHamburger] != 0)
 						{
-							sendErrorMessage(playerid, "Masz juø mroøonego hamburgera.");
+							sendErrorMessage(playerid, "Masz juÔøΩ mroÔøΩonego hamburgera.");
 							return 1;
 						}
 						Groceries[playerid][pHamburger] = random(300)+100;
 						ZabierzKase(playerid, 25);
 						GameTextForPlayer(playerid, "~r~-$25", 5000, 1);
-						SendClientMessage(playerid, COLOR_GRAD4, "Kupi≥eú mroøonego hamburgera.");
+						SendClientMessage(playerid, COLOR_GRAD4, "KupiÔøΩeÔøΩ mroÔøΩonego hamburgera.");
 					}
 					case 19: //maseczka ochronna
 					{
 						if(kaska[playerid] < 15000) 
 						{
-							sendErrorMessage(playerid, "Nie staÊ CiÍ na maseczkÍ ochronnπ!");
+							sendErrorMessage(playerid, "Nie staÔøΩ CiÔøΩ na maseczkÔøΩ ochronnÔøΩ!");
 							return 1;
 						}
 						if(GetPVarInt(playerid, "maseczka") == 1)
 						{
-							sendErrorMessage(playerid, "Masz juø maseczkÍ ochronnπ!");
+							sendErrorMessage(playerid, "Masz juÔøΩ maseczkÔøΩ ochronnÔøΩ!");
 							return 1;
 						}
 						ZabierzKase(playerid, 15000);
@@ -3529,10 +3529,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    	new randbitwa = random(30);
 						//kodbitwy[playa] = (PobijText[randbitwa]);
 						strmid(kodbitwy, PobijText[randbitwa], 0, strlen(PobijText[randbitwa]), 256);
-						format(string, sizeof(string), "PrÛbujesz pobiÊ %s, za 10 sekund rostrzygnie siÍ bitwa!", giveplayer);
+						format(string, sizeof(string), "PrÔøΩbujesz pobiÔøΩ %s, za 10 sekund rostrzygnie siÔøΩ bitwa!", giveplayer);
 		    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		    			format(string, sizeof(string), "%s prÛbuje ciÍ pobiÊ! Wpisz ten kod aby siÍ obroniÊ:\n%s", sendername, kodbitwy);
-						ShowPlayerDialogEx(bijep[playerid], 90, DIALOG_STYLE_INPUT, "BITWA!!", string, "Wybierz", "Wyjdü");
+		    			format(string, sizeof(string), "%s prÔøΩbuje ciÔøΩ pobiÔøΩ! Wpisz ten kod aby siÔøΩ obroniÔøΩ:\n%s", sendername, kodbitwy);
+						ShowPlayerDialogEx(bijep[playerid], 90, DIALOG_STYLE_INPUT, "BITWA!!", string, "Wybierz", "WyjdÔøΩ");
 		       			//
 				    	SendClientMessage(playerid, COLOR_WHITE, "CIOS ODBITY!");
 				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
@@ -3548,11 +3548,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        new sendername[MAX_PLAYER_NAME];
 				        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));
-				        format(string, sizeof(string), "* %s wyprowadzi≥ cios i pobi≥ %s.", giveplayer, sendername);
+				        format(string, sizeof(string), "* %s wyprowadziÔøΩ cios i pobiÔøΩ %s.", giveplayer, sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		    			format(string, sizeof(string), "%s znokautowa≥ ciÍ bez wiÍkszego problemu.", giveplayer);
+		    			format(string, sizeof(string), "%s znokautowaÔøΩ ciÔøΩ bez wiÔøΩkszego problemu.", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "Pobi≥eú %s bez wiÍkszego trudu.", sendername);
+						format(string, sizeof(string), "PobiÔøΩeÔøΩ %s bez wiÔøΩkszego trudu.", sendername);
 						SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
 						ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
 						PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
@@ -3585,11 +3585,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	       			new sendername[MAX_PLAYER_NAME];
 			        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-			        format(string, sizeof(string), "* %s wyprowadzi≥ cios i pobi≥ %s.", giveplayer, sendername);
+			        format(string, sizeof(string), "* %s wyprowadziÔøΩ cios i pobiÔøΩ %s.", giveplayer, sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		   			format(string, sizeof(string), "%s znokautowa≥ ciÍ bez wiÍkszego problemu.", giveplayer);
+		   			format(string, sizeof(string), "%s znokautowaÔøΩ ciÔøΩ bez wiÔøΩkszego problemu.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "Pobi≥eú %s bez wiÍkszego trudu.", sendername);
+					format(string, sizeof(string), "PobiÔøΩeÔøΩ %s bez wiÔøΩkszego trudu.", sendername);
 					SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
 					ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
 					PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
@@ -3605,7 +3605,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					pobilem[bijep[playerid]] = 1;
 					PlayerFixRadio(playerid);
 					PlayerFixRadio(bijep[playerid]);
-					SendClientMessage(playerid, COLOR_WHITE, "Wpisa≥eú tekst za wolno i przegra≥eú!");
+					SendClientMessage(playerid, COLOR_WHITE, "WpisaÔøΩeÔøΩ tekst za wolno i przegraÔøΩeÔøΩ!");
 					SetPlayerHealth(playerid, 30.0);
 					ClearAnimations(bijep[playerid]);
 					ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
@@ -3623,11 +3623,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	   			new sendername[MAX_PLAYER_NAME];
 		        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-		        format(string, sizeof(string), "* %s wyprowadzi≥ cios i pobi≥ %s.", giveplayer, sendername);
+		        format(string, sizeof(string), "* %s wyprowadziÔøΩ cios i pobiÔøΩ %s.", giveplayer, sendername);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	   			format(string, sizeof(string), "%s znokautowa≥ ciÍ bez wiÍkszego problemu.", giveplayer);
+	   			format(string, sizeof(string), "%s znokautowaÔøΩ ciÔøΩ bez wiÔøΩkszego problemu.", giveplayer);
 	   			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-				format(string, sizeof(string), "Pobi≥eú %s bez wiÍkszego trudu.", sendername);
+				format(string, sizeof(string), "PobiÔøΩeÔøΩ %s bez wiÔøΩkszego trudu.", sendername);
 				SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
 				ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
 				PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
@@ -3665,9 +3665,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//
 		    if(response)
 		    {
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siÍ skuÊ %s.", sendername, giveplayer);
+		        format(string, sizeof(string), "* %s nie stawia oporu i daje siÔøΩ skuÔøΩ %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku≥eú %s.", sendername);
+		        format(string, sizeof(string), "SkuÔøΩeÔøΩ %s.", sendername);
 				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
 	            TogglePlayerControllable(playerid, 0);
 	            Kajdanki_JestemSkuty[playerid] = 2;
@@ -3691,9 +3691,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				if(cops >= 3 || TazerAktywny[playerid] == 1 && cops == 2)
 				{
-	                format(string, sizeof(string), "* %s wyrywa siÍ i ucieka lecz policjanci powstrzymujπ go i skuwajπ go si≥π.", sendername);
+	                format(string, sizeof(string), "* %s wyrywa siÔøΩ i ucieka lecz policjanci powstrzymujÔøΩ go i skuwajÔøΩ go siÔøΩÔøΩ.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			        format(string, sizeof(string), "Sku≥eú %s.", sendername);
+			        format(string, sizeof(string), "SkuÔøΩeÔøΩ %s.", sendername);
 					SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
 		            TogglePlayerControllable(playerid, 0);
 		            Kajdanki_JestemSkuty[playerid] = 2;
@@ -3708,7 +3708,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new rand = random(100);
 				    if(rand <= 50)
 				    {
-				        format(string, sizeof(string), "* %s wyrywa siÍ z ca≥ej si≥y i ucieka.", sendername);
+				        format(string, sizeof(string), "* %s wyrywa siÔøΩ z caÔøΩej siÔøΩy i ucieka.", sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						Kajdanki_PDkuje[playerid] = 0;
 						PoziomPoszukiwania[playerid] += 1;
@@ -3716,9 +3716,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    }
 				    else
 				    {
-				        format(string, sizeof(string), "* %s wyrywa siÍ i ucieka lecz policjanci powstrzymujπ go i skuwajπ go si≥π.", sendername);
+				        format(string, sizeof(string), "* %s wyrywa siÔøΩ i ucieka lecz policjanci powstrzymujÔøΩ go i skuwajÔøΩ go siÔøΩÔøΩ.", sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				        format(string, sizeof(string), "Sku≥eú %s.", sendername);
+				        format(string, sizeof(string), "SkuÔøΩeÔøΩ %s.", sendername);
 						SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
 			            TogglePlayerControllable(playerid, 0);
 			            Kajdanki_JestemSkuty[playerid] = 2;
@@ -3731,7 +3731,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				else
 				{
-				    format(string, sizeof(string), "* %s wyrywa siÍ z ca≥ej si≥y i ucieka.", sendername);
+				    format(string, sizeof(string), "* %s wyrywa siÔøΩ z caÔøΩej siÔøΩy i ucieka.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					Kajdanki_PDkuje[playerid] = 0;
 					PoziomPoszukiwania[playerid] += 1;
@@ -3750,9 +3750,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//
 		    if(response)
 		    {
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siÍ skuÊ %s.", sendername, giveplayer);
+		        format(string, sizeof(string), "* %s nie stawia oporu i daje siÔøΩ skuÔøΩ %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku≥eú %s.", sendername);
+		        format(string, sizeof(string), "SkuÔøΩeÔøΩ %s.", sendername);
 				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
 				
 				CuffedAction(Kajdanki_PDkuje[playerid], playerid);
@@ -3774,9 +3774,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				if(cops >= 3)
 				{
-	                format(string, sizeof(string), "* %s wyrywa siÍ i ucieka lecz policjanci powstrzymujπ go i skuwajπ go si≥π.", sendername);
+	                format(string, sizeof(string), "* %s wyrywa siÔøΩ i ucieka lecz policjanci powstrzymujÔøΩ go i skuwajÔøΩ go siÔøΩÔøΩ.", sendername);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			        format(string, sizeof(string), "Sku≥eú %s.", sendername);
+			        format(string, sizeof(string), "SkuÔøΩeÔøΩ %s.", sendername);
 					SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
 					
 					CuffedAction(Kajdanki_PDkuje[playerid], playerid);
@@ -3786,7 +3786,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new rand = random(100);
 				    if(rand <= 50)
 				    {
-				        format(string, sizeof(string), "* %s wyrywa siÍ z ca≥ej si≥y i ucieka.", sendername);
+				        format(string, sizeof(string), "* %s wyrywa siÔøΩ z caÔøΩej siÔøΩy i ucieka.", sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 						Kajdanki_PDkuje[playerid] = 0;
 						PoziomPoszukiwania[playerid] += 1;
@@ -3794,9 +3794,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    }
 				    else
 				    {
-				        format(string, sizeof(string), "* %s wyrywa siÍ i ucieka lecz policjanci powstrzymujπ go i skuwajπ go si≥π.", sendername);
+				        format(string, sizeof(string), "* %s wyrywa siÔøΩ i ucieka lecz policjanci powstrzymujÔøΩ go i skuwajÔøΩ go siÔøΩÔøΩ.", sendername);
 						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				        format(string, sizeof(string), "Sku≥eú %s.", sendername);
+				        format(string, sizeof(string), "SkuÔøΩeÔøΩ %s.", sendername);
 						SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
 						
 						CuffedAction(Kajdanki_PDkuje[playerid], playerid);
@@ -3804,7 +3804,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				else
 				{
-				    format(string, sizeof(string), "* %s wyrywa siÍ z ca≥ej si≥y i ucieka.", sendername);
+				    format(string, sizeof(string), "* %s wyrywa siÔøΩ z caÔøΩej siÔøΩy i ucieka.", sendername);
 				    TogglePlayerControllable(playerid, 1);
 					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 					Kajdanki_PDkuje[playerid] = 0;
@@ -3824,9 +3824,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    if(response)
 		    {
 				//todo
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siÍ skuÊ ≥owcy %s.", sendername, giveplayer);
+		        format(string, sizeof(string), "* %s nie stawia oporu i daje siÔøΩ skuÔøΩ ÔøΩowcy %s.", sendername, giveplayer);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku≥eú %s. Masz 2 minuty, by dostarczyÊ go do celi!", sendername);
+		        format(string, sizeof(string), "SkuÔøΩeÔøΩ %s. Masz 2 minuty, by dostarczyÔøΩ go do celi!", sendername);
 				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
 				Kajdanki_JestemSkuty[playerid] = 1;
 	            TogglePlayerControllable(playerid, 0);
@@ -3838,7 +3838,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-				format(string, sizeof(string), "* %s wyrywa siÍ i rzuca siÍ na ≥owcÍ!", sendername);
+				format(string, sizeof(string), "* %s wyrywa siÔøΩ i rzuca siÔøΩ na ÔøΩowcÔøΩ!", sendername);
 				TogglePlayerControllable(playerid, 1);
 				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				Kajdanki_PDkuje[playerid] = 0;
@@ -3848,7 +3848,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-		        ShowPlayerDialogEx(playerid, 161, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ komisariat?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 161, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ komisariat?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	         	taxitest[playerid] = 0;
 			}
 		}
@@ -3860,64 +3860,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					case 0:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 1:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 2:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 3:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 5:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 6:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 7:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 8:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 9:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 10:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 11:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 12:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				    case 13:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 					case 14:
 				    {
-				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 162, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ studio SAN?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 				    }
 				}
 	 	    }
@@ -3934,64 +3934,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 1:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 2:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 3:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 4:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 5:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 6:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 7:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 8:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 9:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 10:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 11:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 12:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 13:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 14:
 				    {
-				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				        ShowPlayerDialogEx(playerid, 163, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Fabryka Broni?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				}
 	 	    }
@@ -4008,64 +4008,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 1:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 2:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 3:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 5:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 6:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 7:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 8:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 9:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 10:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 11:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 12:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 13:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 14:
 				    {
-				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 164, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Salon Samochodowy?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				}
 	 	    }
@@ -4082,64 +4082,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 1:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 2:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 3:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 	                case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 5:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 6:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 7:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 8:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 9:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 10:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 11:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 12:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 13:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 14:
 				    {
-				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ KoúciÛ≥?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 165, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ KoÔøΩciÔøΩ?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				}
 	 	    }
@@ -4156,64 +4156,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 1:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 2:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 3:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 5:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 6:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 7:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 8:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 9:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 10:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 11:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 12:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 13:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 14:
 				    {
-				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 166, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznik Tower(biurowiec)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				}
 	 	    }
@@ -4230,64 +4230,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 1:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 2:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 3:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 5:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 6:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 7:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 8:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 9:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 10:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 11:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 12:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 13:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 14:
 				    {
-				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 167, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Mrucznikowy Gun Shop?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				}
 	 	    }
@@ -4304,64 +4304,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 1:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 2:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 3:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 5:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 6:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 7:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 8:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 9:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 10:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 11:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 12:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 13:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 14:
 				    {
-				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Agencja Ochrony (zk≥ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 168, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Agencja Ochrony (zkÔøΩ bukmaherski)?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				}
 	 	    }
@@ -4378,64 +4378,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 1:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 2:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 3:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 5:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 6:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 7:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 8:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 9:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 10:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 11:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 12:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 13:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 14:
 				    {
-				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 169, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Szpital?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				}
 	 	    }
@@ -4452,77 +4452,77 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 1:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 2:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 3:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 5:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 6:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 7:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 8:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 9:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 				    case 10:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 11:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 12:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 13:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 14:
 				    {
-				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 170, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Green Bar?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 				}
@@ -4540,64 +4540,64 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				    case 1:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 	                    taxitest[playerid] ++;
 					}
 					case 2:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 3:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 4:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 5:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 6:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 7:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 8:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 9:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 10:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 11:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 12:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 13:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 					case 14:
 				    {
-				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÍ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_LIST, "W jakiej dzielnicy znajduje siÔøΩ Bank?", "Rodeo\nGanton\nGlen Park\nDowntown\nPershing Square\nEl Corona\nIdlewood\nPlaya Del Seville\nOcean Docks\nVinewood\nMarket\nJefferson\nLos Flores\nEast Beach\nEast Los Santos", "Wybierz", "WyjdÔøΩ");
 					}
 				}
 	 	    }
@@ -4616,238 +4616,238 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 1:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 2:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 171, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 				    case 3:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 4:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 5:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 6:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 7:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 8:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 9:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 10:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 11:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 12:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 13:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 					case 14:
 				    {
 				        if(taxitest[playerid] >= 8)
 				        {
-							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, uda≥o ci siÍ wyrobiÊ licencje taksÛwkarskπ! Zostajesz taksÛwkarzem. åwietnie znasz miasto.", "OK", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Gratulacje, udaÔøΩo ci siÔøΩ wyrobiÔøΩ licencje taksÔøΩwkarskÔøΩ! Zostajesz taksÔøΩwkarzem. ÔøΩwietnie znasz miasto.", "OK", "WyjdÔøΩ");
 		                    taxitest[playerid] = 0;
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "PodpisaÔøΩeÔøΩ kontrakt z firmÔøΩ taksÔøΩwkarsÔøΩ na 2,5h, idÔøΩ po swojÔøΩ taryfÔøΩ! (Aby siÔøΩ zwolniÔøΩ wpisz /quitjob)");
 					    }
 					    else
 					    {
-					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÊ taksÛwkarzem. Pojeüdzij autobusami aby siÍ z nim zapoznaÊ.", "OK", "Wyjdü");
+					        ShowPlayerDialogEx(playerid, 172, DIALOG_STYLE_MSGBOX, "Wyniki", "Nie znasz miasta tak dobrze aby zostaÔøΩ taksÔøΩwkarzem. PojeÔøΩdzij autobusami aby siÔøΩ z nim zapoznaÔøΩ.", "OK", "WyjdÔøΩ");
 					    }
 					}
 				}
@@ -4861,7 +4861,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-	            SendClientMessage(playerid, 0xFFFFFFFF, "Bronie przywrÛcone");
+	            SendClientMessage(playerid, 0xFFFFFFFF, "Bronie przywrÔøΩcone");
 	            PrzywrocBron(playerid);
 				SetPlayerSkillLevel(playerid, WEAPONSKILL_MICRO_UZI, 10);
 				SetPlayerSkillLevel(playerid, WEAPONSKILL_SPAS12_SHOTGUN, 10);
@@ -4871,21 +4871,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WYJDè");
+				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÔøΩpne malunki wozÔøΩw","Uranus\n\n0- Niebiesko ÔøΩÔøΩty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z bÔøΩyskawicami\n3- WyczyÔøΩÔøΩ malunek\n\nJester\n\n0-ÔøΩÔøΩto pomaraÔøΩczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikÔøΩ po bokach\n2-Zielony przÔøΩd, ciemno zielony tyÔøΩ\n3- WyczyÔøΩÔøΩ malunek\n\nNaciÔøΩnij DALEJ","DALEJ","WYJDÔøΩ");
 	        }
 	    }
 	    else if(dialogid == 51)
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WYJDè");
+	            ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÔøΩpne malunki wozÔøΩw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowÔøΩ grafikÔøΩ\n2- X-flow (niebiesko szary kolor)\n3- WyczyÔøΩÔøΩ malunek\n\nStratum\n\n0- Fioletowy kolor z tÔøΩczowÔøΩ grafikÔøΩ\n1- Acces (czerowny z grafikÔøΩ)\n2- Sprunk\n3- WyczyÔøΩÔøΩ malunek\n\nElegy\n\n0- Niebieski kolor z pÔøΩomieniami\n1- Acces (pomaraÔøΩczowy z grafikÔøΩ)\n2- Fioletowy z grafikÔøΩ po bokach\n3- WyczyÔøΩÔøΩ malunek\n\nNaciÔøΩnij DALEJ","DALEJ","WYJDÔøΩ");
 	        }
 	    }
 	    else if(dialogid == 52)
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid,53,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Flash\n\n0- Czerwono øÛ≥ty z grafikπ\n1- Fioletowo czerwony z grafikπ\n2- Niebiesko fioletowy z grafikπ\n3- WyczyúÊ malunek\n\nBroadway\n\n0- ØÛ≥te p≥omienie na ca≥ym aucie\n1- Czerwone p≥omienie z przodu\n2 i 3- wyczyúÊ malunek\n\nCapmer\n\n0- Hipisowski malnuek\n1, 2 i 3 - wyszyúÊ malunek\n\n Tylko na wymienionych autach moøna namalowaÊ malunek.","WYJDè","WYJDè");
+	            ShowPlayerDialogEx(playerid,53,DIALOG_STYLE_MSGBOX,"DostÔøΩpne malunki wozÔøΩw","Flash\n\n0- Czerwono ÔøΩÔøΩty z grafikÔøΩ\n1- Fioletowo czerwony z grafikÔøΩ\n2- Niebiesko fioletowy z grafikÔøΩ\n3- WyczyÔøΩÔøΩ malunek\n\nBroadway\n\n0- ÔøΩÔøΩte pÔøΩomienie na caÔøΩym aucie\n1- Czerwone pÔøΩomienie z przodu\n2 i 3- wyczyÔøΩÔøΩ malunek\n\nCapmer\n\n0- Hipisowski malnuek\n1, 2 i 3 - wyszyÔøΩÔøΩ malunek\n\n Tylko na wymienionych autach moÔøΩna namalowaÔøΩ malunek.","WYJDÔøΩ","WYJDÔøΩ");
 	        }
 	    }
         else if(dialogid == 501)
@@ -4933,7 +4933,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						if(zderzakid == 0 || zderzakid2 == 0)
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "B£•D!");
+						    SendClientMessage(playerid, COLOR_WHITE, "BÔøΩÔøΩD!");
 						}
 						else
 						{
@@ -4943,13 +4943,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 		   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string), "* Zamontowa≥eú nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
+							format(string, sizeof(string), "* ZamontowaÔøΩeÔøΩ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 			    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		      				format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+		      				format(string, sizeof(string), "* Mechanik %s zamontowaÔøΩ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+							format(string, sizeof(string),"* Mechanik %s wyciÔøΩga narzÔøΩdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa≥ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "Gracz %s zamontowaÔøΩ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -5003,7 +5003,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						if(zderzakid == 0 || zderzakid2 == 0)
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "B£•D!");
+						    SendClientMessage(playerid, COLOR_WHITE, "BÔøΩÔøΩD!");
 						}
 						else
 						{
@@ -5013,13 +5013,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 		   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string), "* Zamontowa≥eú nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
+							format(string, sizeof(string), "* ZamontowaÔøΩeÔøΩ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 			    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		      				format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+		      				format(string, sizeof(string), "* Mechanik %s zamontowaÔøΩ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+							format(string, sizeof(string),"* Mechanik %s wyciÔøΩga narzÔøΩdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa≥ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "Gracz %s zamontowaÔøΩ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -5076,7 +5076,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						if(zderzakid == 0 || zderzakid2 == 0)
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "B£•D!");
+						    SendClientMessage(playerid, COLOR_WHITE, "BÔøΩÔøΩD!");
 						}
 						else
 						{
@@ -5085,13 +5085,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    new string[256];
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 		   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string), "* Zamontowa≥eú nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
+							format(string, sizeof(string), "* ZamontowaÔøΩeÔøΩ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 			    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		      				format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+		      				format(string, sizeof(string), "* Mechanik %s zamontowaÔøΩ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+							format(string, sizeof(string),"* Mechanik %s wyciÔøΩga narzÔøΩdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa≥ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "Gracz %s zamontowaÔøΩ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -5139,7 +5139,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						if(zderzakid == 0 || zderzakid2 == 0)
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "B£•D!");
+						    SendClientMessage(playerid, COLOR_WHITE, "BÔøΩÔøΩD!");
 						}
 						else
 						{
@@ -5148,13 +5148,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    new string[256];
 							GetPlayerName(playerid, sendername, sizeof(sendername));
 		   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							format(string, sizeof(string), "* Zamontowa≥eú nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
+							format(string, sizeof(string), "* ZamontowaÔøΩeÔøΩ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 			    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		      				format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+		      				format(string, sizeof(string), "* Mechanik %s zamontowaÔøΩ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+							format(string, sizeof(string),"* Mechanik %s wyciÔøΩga narzÔøΩdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							Log(payLog, INFO, "Gracz %s zamontowa≥ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							Log(payLog, INFO, "Gracz %s zamontowaÔøΩ %s zderzaki [%d, %d] na pojazd %s za %d$",
 								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
 							);
 							ZabierzKase(playerid, 10000);
@@ -5187,13 +5187,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 						GetPlayerName(playerid, sendername, sizeof(sendername));
 	   					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						format(string, sizeof(string), "* Zamontowa≥eú nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
+						format(string, sizeof(string), "* ZamontowaÔøΩeÔøΩ nowe zderzaki graczowi %s (koszt -10 000$)",giveplayer);
 		    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	      				format(string, sizeof(string), "* Mechanik %s zamontowa≥ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+	      				format(string, sizeof(string), "* Mechanik %s zamontowaÔøΩ ci w twoim %s nowe zderzaki",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string),"* Mechanik %s wyciπga narzÍdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
+						format(string, sizeof(string),"* Mechanik %s wyciÔøΩga narzÔøΩdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Log(payLog, INFO, "Gracz %s zamontowa≥ %s zderzaki [%d, %d] na pojazd %s za %d$",
+						Log(payLog, INFO, "Gracz %s zamontowaÔøΩ %s zderzaki [%d, %d] na pojazd %s za %d$",
 							GetPlayerLogName(playerid), GetPlayerLogName(playa), 1133, 1117, GetVehicleLogName(pojazd), 10000
 						);
 						ZabierzKase(playerid, 10000);
@@ -5220,105 +5220,105 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            if(PlayerInfo[playerid][pGun0] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 						PlayerInfo[playerid][pGun0] = 0;
 						PlayerInfo[playerid][pAmmo0] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÛj kastet zosta≥ usuniÍty");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÔøΩj kastet zostaÔøΩ usuniÔøΩty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-            			format(string, sizeof(string),"%s niszczy kastet i rzuca na ziemiÍ.", sendername);
+            			format(string, sizeof(string),"%s niszczy kastet i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
             			
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 1:
 			        {
 			            if(PlayerInfo[playerid][pGun1] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun1] = 0;
 						PlayerInfo[playerid][pAmmo1] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja broÒ bia≥a zosta≥a usniÍta");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja broÔøΩ biaÔøΩa zostaÔøΩa usniÔøΩta");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy broÒ bia≥π i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy broÔøΩ biaÔøΩÔøΩ i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 2:
 			        {
 			            if(PlayerInfo[playerid][pGun2] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun2] = 0;
 						PlayerInfo[playerid][pAmmo2] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÛj pistolet zosta≥ usuniÍty");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÔøΩj pistolet zostaÔøΩ usuniÔøΩty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy pistolet i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy pistolet i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 3:
 			        {
 			            if(PlayerInfo[playerid][pGun3] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 	                    PlayerInfo[playerid][pGun3] = 0;
 						PlayerInfo[playerid][pAmmo3] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja strzelba zosta≥a usuniÍta");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja strzelba zostaÔøΩa usuniÔøΩta");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy strzelbÍ i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy strzelbÔøΩ i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 4:
 			        {
 			            if(PlayerInfo[playerid][pGun4] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 	                    PlayerInfo[playerid][pGun4] = 0;
 						PlayerInfo[playerid][pAmmo4] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÛj pistolet maszynowy zosta≥ usuniÍty");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÔøΩj pistolet maszynowy zostaÔøΩ usuniÔøΩty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy pistolet maszynowy i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy pistolet maszynowy i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 5:
 			        {
 			            if(PlayerInfo[playerid][pGun5] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun5] = 0;
 						PlayerInfo[playerid][pAmmo5] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÛj karabin maszynowy zosta≥ usuniÍty");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÔøΩj karabin maszynowy zostaÔøΩ usuniÔøΩty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy karabin maszynowy i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy karabin maszynowy i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 6:
 			        {
 			            if(PlayerInfo[playerid][pGun6] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun6] = 0;
 						PlayerInfo[playerid][pAmmo6] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja snajperka zosta≥a usuniÍta");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja snajperka zostaÔøΩa usuniÔøΩta");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy snajperkÍ i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy snajperkÔøΩ i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 7:
 			        {
 			            if(PlayerInfo[playerid][pGun7] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun7] = 0;
 						PlayerInfo[playerid][pAmmo7] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÛj ogniomiotacz zosta≥ usuniÍty");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÔøΩj ogniomiotacz zostaÔøΩ usuniÔøΩty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy ogniomiotacz i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy ogniomiotacz i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 8:
 			        {
@@ -5327,65 +5327,65 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pAmmo8] = 0;
 						PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje C4 zosta≥o usuniÍte");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje C4 zostaÔøΩo usuniÔøΩte");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy C4 i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy C4 i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 9:
 			        {
 			            if(PlayerInfo[playerid][pGun9] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun9] = 0;
 						PlayerInfo[playerid][pAmmo9] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÛj sprej/aparat/gaúnica zosta≥ usuniÍty");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÔøΩj sprej/aparat/gaÔøΩnica zostaÔøΩ usuniÔøΩty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy spray/aparat/gaúnicÍ i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy spray/aparat/gaÔøΩnicÔøΩ i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 10:
 			        {
 			            if(PlayerInfo[playerid][pGun10] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun10] = 0;
 						PlayerInfo[playerid][pAmmo10] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje kwiaty/laska/dildo zosta≥o usuniÍte");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje kwiaty/laska/dildo zostaÔøΩo usuniÔøΩte");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy kwiaty/laskÍ/dildo i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy kwiaty/laskÔøΩ/dildo i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 11:
 			        {
 			            if(PlayerInfo[playerid][pGun11] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun11] = 0;
 						PlayerInfo[playerid][pAmmo11] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÛj spadochron zosta≥ usuniÍty");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÔøΩj spadochron zostaÔøΩ usuniÔøΩty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy spadochron i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy spadochron i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			        case 12:
 			        {
 			            if(PlayerInfo[playerid][pGun12] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÛj detonator zosta≥ usuniÍty");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "TwÔøΩj detonator zostaÔøΩ usuniÔøΩty");
 						ResetPlayerWeapons(playerid);
 						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
-						format(string, sizeof(string),"%s niszczy detonator i rzuca na ziemiÍ.", sendername);
+						format(string, sizeof(string),"%s niszczy detonator i rzuca na ziemiÔøΩ.", sendername);
             			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÒ bia≥a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÒ", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroÔøΩ biaÔøΩa\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "UsuÔøΩ", "WyjdÔøΩ");
 			        }
 			    }
 			}
@@ -5398,31 +5398,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		 	    {
 		 	        case 0:
 					{
-	        			ShowPlayerDialogEx(playerid, 800, DIALOG_STYLE_LIST, "Gun Shop - Pistolety", "Pistolety 9mm\t\t 2000$\nPistolet z t≥umikiem\t 1000$\nDesert Eagle\t\t 6000$", "Kup", "WrÛÊ");
+	        			ShowPlayerDialogEx(playerid, 800, DIALOG_STYLE_LIST, "Gun Shop - Pistolety", "Pistolety 9mm\t\t 2000$\nPistolet z tÔøΩumikiem\t 1000$\nDesert Eagle\t\t 6000$", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 1:
 					{
-					    ShowPlayerDialogEx(playerid, 801, DIALOG_STYLE_LIST, "Gun Shop - Strzelby", "Shotgun\t\t6000$", "Kup", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 801, DIALOG_STYLE_LIST, "Gun Shop - Strzelby", "Shotgun\t\t6000$", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 2:
 					{
-					    ShowPlayerDialogEx(playerid, 802, DIALOG_STYLE_LIST, "Gun Shop - Pistolety Maszynowe", "MP5\t\t\t5000$", "Kup", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 802, DIALOG_STYLE_LIST, "Gun Shop - Pistolety Maszynowe", "MP5\t\t\t5000$", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 3:
 					{
-					    ShowPlayerDialogEx(playerid, 803, DIALOG_STYLE_LIST, "Gun Shop - Karabiny", "M4\t\t\t10000$\nAK-47\t\t\t10000$", "Kup", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 803, DIALOG_STYLE_LIST, "Gun Shop - Karabiny", "M4\t\t\t10000$\nAK-47\t\t\t10000$", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 4:
 					{
-					    ShowPlayerDialogEx(playerid, 804, DIALOG_STYLE_LIST, "Gun Shop - Snajperki", "Rifle\t\t2000$", "Kup", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 804, DIALOG_STYLE_LIST, "Gun Shop - Snajperki", "Rifle\t\t2000$", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 5:
 					{
-					    ShowPlayerDialogEx(playerid, 805, DIALOG_STYLE_LIST, "Gun Shop - BroÒ bia≥a", "Kij golfowy\t\t400$\nPa≥ka PD\t\t300$\nBasseball\t\t700$\n£opata\t\t\t300$\nKij bilardowy\t\t100$\nKwiaty\t\t\t200$\nLaska\t\t\t600$\nKastet\t\t\t50$", "Kup", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 805, DIALOG_STYLE_LIST, "Gun Shop - BroÔøΩ biaÔøΩa", "Kij golfowy\t\t400$\nPaÔøΩka PD\t\t300$\nBasseball\t\t700$\nÔøΩopata\t\t\t300$\nKij bilardowy\t\t100$\nKwiaty\t\t\t200$\nLaska\t\t\t600$\nKastet\t\t\t50$", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 6:
 					{
-					    ShowPlayerDialogEx(playerid, 806, DIALOG_STYLE_LIST, "Gun Shop - Inne", "Spadochron\t\t500$", "Kup", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 806, DIALOG_STYLE_LIST, "Gun Shop - Inne", "Spadochron\t\t500$", "Kup", "WrÔøΩÔøΩ");
 					}
 					/*case 7:
 					{
@@ -5431,12 +5431,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    SetPlayerArmour(playerid, 90);
 							SetPlayerHealth(playerid, 100);
 							ZabierzKase(playerid, 5000);
-							SendClientMessage(playerid, COLOR_WHITE, " **Zaplaciles 5000$ za kamizelke i øycie");
+							SendClientMessage(playerid, COLOR_WHITE, " **Zaplaciles 5000$ za kamizelke i ÔøΩycie");
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_WHITE, "Nie masz na to pieniÍdzy !");
-						    ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÒ bia≥a\t\t>>\nInne\t\t\t>>\n", "Wybierz", "Wyjdü");
+						    SendClientMessage(playerid, COLOR_WHITE, "Nie masz na to pieniÔøΩdzy !");
+						    ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÔøΩ biaÔøΩa\t\t>>\nInne\t\t\t>>\n", "Wybierz", "WyjdÔøΩ");
 						}
 					}*/
 				}
@@ -5457,11 +5457,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pAmmo10] = 1;
 							ZabierzKase(playerid, 25000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú wibrator 'Purpurowy Big Jim' za 25 000$");
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ wibrator 'Purpurowy Big Jim' za 25 000$");
 						}
 		    			else
 					    {
-	    					SendClientMessage(playerid, COLOR_GREY, "Nie staÊ ciÍ na to!");
+	    					SendClientMessage(playerid, COLOR_GREY, "Nie staÔøΩ ciÔøΩ na to!");
 						}
 					}
 					case 1:
@@ -5473,11 +5473,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pAmmo10] = 1;
 							ZabierzKase(playerid, 7500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú wibrator 'Analny Penetrator' za 7500$");
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ wibrator 'Analny Penetrator' za 7500$");
 						}
 		    			else
 					    {
-	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÊ ciÍ na to!");
+	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÔøΩ ciÔøΩ na to!");
 						}
 					}
 					case 2:
@@ -5489,11 +5489,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pAmmo10] = 1;
 							ZabierzKase(playerid, 20000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú wibrator 'Bia≥y Intruz' za 20 000$");
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ wibrator 'BiaÔøΩy Intruz' za 20 000$");
 						}
 		    			else
 					    {
-	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÊ ciÍ na to!");
+	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÔøΩ ciÔøΩ na to!");
 						}
 					}
 					case 3:
@@ -5505,11 +5505,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pAmmo10] = 1;
 							ZabierzKase(playerid, 12000);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú wibrator 'Srebrny Masturbator' za 12 000$");
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ wibrator 'Srebrny Masturbator' za 12 000$");
 						}
 		    			else
 					    {
-	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÊ ciÍ na to!");
+	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÔøΩ ciÔøΩ na to!");
 						}
 					}
 					case 4:
@@ -5521,11 +5521,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pAmmo10] = 1;
 							ZabierzKase(playerid, 1500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "LaskÍ sado-maso za 1500$");
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "LaskÔøΩ sado-maso za 1500$");
 						}
 		    			else
 					    {
-	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÊ ciÍ na to!");
+	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÔøΩ ciÔøΩ na to!");
 						}
 					}
 					case 5:
@@ -5537,11 +5537,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pAmmo10] = 1;
 							ZabierzKase(playerid, 500);
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú kwiaty za 500$");
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ kwiaty za 500$");
 						}
 		    			else
 					    {
-	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÊ ciÍ na to!");
+	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÔøΩ ciÔøΩ na to!");
 						}
 					}
 					case 6:
@@ -5551,11 +5551,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							Condom[playerid] ++;
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							ZabierzKase(playerid, 50);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú paczkÍ prezerwatyw za 50$");
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ paczkÔøΩ prezerwatyw za 50$");
 						}
 						else
 		    			{
-	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÊ ciÍ na to!");
+	        				SendClientMessage(playerid, COLOR_GREY, "Nie staÔøΩ ciÔøΩ na to!");
 						}
 					}
 				}
@@ -5573,18 +5573,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAmmo5] = CenaBroni[playerid];
 					ZabierzKase(playerid, GunPrice[22][0]);
 					ZabierzKase(playerid, CenaBroni[playerid]*40);
-					format(komunikat, sizeof(komunikat), "Kupi≥eú AK-47 z %d nabojami , kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[22][0])+(CenaBroni[playerid]*40));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ AK-47 z %d nabojami , kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[22][0])+(CenaBroni[playerid]*40));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-	            ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+	            ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 800)
@@ -5595,21 +5595,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		                ShowPlayerDialogEx(playerid, 700, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet 9mm", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 700, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet 9mm", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 1:
 		            {
-		                ShowPlayerDialogEx(playerid, 701, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet z t≥umikiem", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 701, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet z tÔøΩumikiem", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 2:
 		            {
-		                ShowPlayerDialogEx(playerid, 702, DIALOG_STYLE_INPUT, "Gun Shop - Desert Eagle", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 702, DIALOG_STYLE_INPUT, "Gun Shop - Desert Eagle", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 					}
 				}
 			}
 			if(!response)
 			{
-				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÒ bia≥a\t\t>>\nInne\t\t\t>>\n", "Wybierz", "Wyjdü");
+				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÔøΩ biaÔøΩa\t\t>>\nInne\t\t\t>>\n", "Wybierz", "WyjdÔøΩ");
 			}
 		}
 		else if(dialogid == 801)
@@ -5620,13 +5620,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		                ShowPlayerDialogEx(playerid, 710, DIALOG_STYLE_INPUT, "Gun Shop - Shotgun", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 710, DIALOG_STYLE_INPUT, "Gun Shop - Shotgun", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 					}
 				}
 			}
 			if(!response)
 			{
-				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÒ bia≥a\t\t>>\nInne\t\t\t>>\n", "Wybierz", "Wyjdü");
+				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÔøΩ biaÔøΩa\t\t>>\nInne\t\t\t>>\n", "Wybierz", "WyjdÔøΩ");
 			}
 		}
 		else if(dialogid == 802)
@@ -5637,13 +5637,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		                ShowPlayerDialogEx(playerid, 720, DIALOG_STYLE_INPUT, "Gun Shop - MP5", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 720, DIALOG_STYLE_INPUT, "Gun Shop - MP5", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 					}
 				}
 			}
 			if(!response)
 			{
-				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÒ bia≥a\t\t>>\nInne\t\t\t>>\n", "Wybierz", "Wyjdü");
+				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÔøΩ biaÔøΩa\t\t>>\nInne\t\t\t>>\n", "Wybierz", "WyjdÔøΩ");
 			}
 		}
 		else if(dialogid == 803)
@@ -5654,17 +5654,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		                ShowPlayerDialogEx(playerid, 730, DIALOG_STYLE_INPUT, "Gun Shop - M4", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 730, DIALOG_STYLE_INPUT, "Gun Shop - M4", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 					}
 					case 1:
 		            {
-		                ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 					}
 				}
 			}
 			if(!response)
 			{
-				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÒ bia≥a\t\t>>\nInne\t\t\t>>\n", "Wybierz", "Wyjdü");
+				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÔøΩ biaÔøΩa\t\t>>\nInne\t\t\t>>\n", "Wybierz", "WyjdÔøΩ");
 			}
 		}
 		else if(dialogid == 804)
@@ -5675,13 +5675,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		                ShowPlayerDialogEx(playerid, 740, DIALOG_STYLE_INPUT, "Gun Shop - Rifle", "Wpisz iloúÊ naboi(1 nabÛj = 50$)", "Kup", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 740, DIALOG_STYLE_INPUT, "Gun Shop - Rifle", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 50$)", "Kup", "WrÔøΩÔøΩ");
 					}
 				}
 			}
 			if(!response)
 			{
-				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÒ bia≥a\t\t>>\nInne\t\t\t>>\n", "Wybierz", "Wyjdü");
+				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÔøΩ biaÔøΩa\t\t>>\nInne\t\t\t>>\n", "Wybierz", "WyjdÔøΩ");
 			}
 		}
 		else if(dialogid == 805)
@@ -5698,11 +5698,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun1] = 2;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
 	                     	ZabierzKase(playerid, 400);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú kij golfowy za 400$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ kij golfowy za 400$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 		            }
 		            case 1:
@@ -5713,11 +5713,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun1] = 3;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
 	                     	ZabierzKase(playerid, 300);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú pa≥kÍ PD za 300$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ paÔøΩkÔøΩ PD za 300$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 		            }
 		            case 2:
@@ -5728,11 +5728,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun1] = 5;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
 	                     	ZabierzKase(playerid, 700);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú kij baseballowy za 700$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ kij baseballowy za 700$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 		            }
 		            case 3:
@@ -5743,11 +5743,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun1] = 6;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
 	                     	ZabierzKase(playerid, 300);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú ≥opatÍ za 300$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ ÔøΩopatÔøΩ za 300$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 		            }
 		            case 4:
@@ -5758,11 +5758,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun1] = 7;
 	                     	PlayerInfo[playerid][pAmmo1] = 1;
 	                     	ZabierzKase(playerid, 100);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú kij bilardowy za 100$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ kij bilardowy za 100$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 		            }
 		            case 5:
@@ -5773,11 +5773,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun10] = 14;
 	                     	PlayerInfo[playerid][pAmmo10] = 1;
 	                     	ZabierzKase(playerid, 200);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú kwiaty za 200$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ kwiaty za 200$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 		            }
 		            case 6:
@@ -5788,11 +5788,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun10] = 15;
 	                     	PlayerInfo[playerid][pAmmo10] = 1;
 	                     	ZabierzKase(playerid, 600);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú laska za 600$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ laska za 600$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 		            }
 		            case 7:
@@ -5803,18 +5803,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun0] = 1;
 	                     	PlayerInfo[playerid][pAmmo0] = 1;
 	                     	ZabierzKase(playerid, 50);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú kastet za 50$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ kastet za 50$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 		            }
 		        }
 			}
 			if(!response)
 			{
-				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÒ bia≥a\t\t>>\nInne\t\t\t>>\n", "Wybierz", "Wyjdü");
+				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÔøΩ biaÔøΩa\t\t>>\nInne\t\t\t>>\n", "Wybierz", "WyjdÔøΩ");
 			}
 		}
 		else if(dialogid == 806)
@@ -5831,18 +5831,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                     	PlayerInfo[playerid][pGun11] = 46;
 	                     	PlayerInfo[playerid][pAmmo11] = 1;
 	                     	ZabierzKase(playerid, 500);
-		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kupi≥eú spadochron za 500$");
+		                	SendClientMessage(playerid, COLOR_LIGHTBLUE, "KupiÔøΩeÔøΩ spadochron za 500$");
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ!");
+		                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ!");
 		                }
 					}
 				}
 			}
 			if(!response)
 			{
-				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÒ bia≥a\t\t>>\nInne\t\t\t>>\n", "Wybierz", "Wyjdü");
+				ShowPlayerDialogEx(playerid, 80, DIALOG_STYLE_LIST, "Gun Shop", "Pistolety\t\t>>\nStrzelby\t\t>>\nPistolety Maszynowe\t>>\nKarabiny\t\t>>\nSnajperki\t\t>>\nBroÔøΩ biaÔøΩa\t\t>>\nInne\t\t\t>>\n", "Wybierz", "WyjdÔøΩ");
 			}
 		}
 		else if(dialogid == 700)
@@ -5855,8 +5855,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new naboje = strval(inputtext);
 				    new cena = (naboje*25)+(2000);
 				    CenaBroni[playerid] = naboje;
-				    format(komunikat, sizeof(komunikat), "Kupujesz Pistolety 9mm z %d nabojami\nBÍdzie ciÍ to kosztowaÊ %d$\n Czy chcesz dokonaÊ zakupu?", naboje, cena);
-			     	ShowPlayerDialogEx(playerid, 7070, DIALOG_STYLE_MSGBOX, "Kupowanie PistoletÛw 9mm", komunikat, "Tak", "Nie");
+				    format(komunikat, sizeof(komunikat), "Kupujesz Pistolety 9mm z %d nabojami\nBÔøΩdzie ciÔøΩ to kosztowaÔøΩ %d$\n Czy chcesz dokonaÔøΩ zakupu?", naboje, cena);
+			     	ShowPlayerDialogEx(playerid, 7070, DIALOG_STYLE_MSGBOX, "Kupowanie PistoletÔøΩw 9mm", komunikat, "Tak", "Nie");
 				}
 				else
 				{
@@ -5865,7 +5865,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 800, DIALOG_STYLE_LIST, "Gun Shop - Pistolety", "Pistolety 9mm\t\t 1000$\nPistolet z t≥umikiem\t 500$\nDesert Eagle\t\t 3000$", "Kup", "WrÛÊ");
+		        ShowPlayerDialogEx(playerid, 800, DIALOG_STYLE_LIST, "Gun Shop - Pistolety", "Pistolety 9mm\t\t 1000$\nPistolet z tÔøΩumikiem\t 500$\nDesert Eagle\t\t 3000$", "Kup", "WrÔøΩÔøΩ");
 		    }
 		}
 		else if(dialogid == 701)
@@ -5878,8 +5878,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new naboje = strval(inputtext);
 				    new cena = (naboje*25)+(1000);
 				    CenaBroni[playerid] = naboje;
-				    format(komunikat, sizeof(komunikat), "Kupujesz Pistolet z t≥umikiem z %d nabojami\nBÍdzie ciÍ to kosztowaÊ %d$\n Czy chcesz dokonaÊ zakupu?", naboje, cena);
-			     	ShowPlayerDialogEx(playerid, 7071, DIALOG_STYLE_MSGBOX, "Kupowanie Pistoletu z t≥umikiem", komunikat, "Tak", "Nie");
+				    format(komunikat, sizeof(komunikat), "Kupujesz Pistolet z tÔøΩumikiem z %d nabojami\nBÔøΩdzie ciÔøΩ to kosztowaÔøΩ %d$\n Czy chcesz dokonaÔøΩ zakupu?", naboje, cena);
+			     	ShowPlayerDialogEx(playerid, 7071, DIALOG_STYLE_MSGBOX, "Kupowanie Pistoletu z tÔøΩumikiem", komunikat, "Tak", "Nie");
 	            }
 				else
 				{
@@ -5888,7 +5888,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 800, DIALOG_STYLE_LIST, "Gun Shop - Pistolety", "Pistolety 9mm\t\t 1000$\nPistolet z t≥umikiem\t 500$\nDesert Eagle\t\t 3000$", "Kup", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 800, DIALOG_STYLE_LIST, "Gun Shop - Pistolety", "Pistolety 9mm\t\t 1000$\nPistolet z tÔøΩumikiem\t 500$\nDesert Eagle\t\t 3000$", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 702)
@@ -5901,7 +5901,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new naboje = strval(inputtext);
 				    new cena = (naboje*25)+(6000);
 				    CenaBroni[playerid] = naboje;
-				    format(komunikat, sizeof(komunikat), "Kupujesz Desert Eagle z %d nabojami\nBÍdzie ciÍ to kosztowaÊ %d$\n Czy chcesz dokonaÊ zakupu?", naboje, cena);
+				    format(komunikat, sizeof(komunikat), "Kupujesz Desert Eagle z %d nabojami\nBÔøΩdzie ciÔøΩ to kosztowaÔøΩ %d$\n Czy chcesz dokonaÔøΩ zakupu?", naboje, cena);
 			     	ShowPlayerDialogEx(playerid, 7072, DIALOG_STYLE_MSGBOX, "Kupowanie Desert Eagle", komunikat, "Tak", "Nie");
 	            }
 				else
@@ -5911,7 +5911,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 800, DIALOG_STYLE_LIST, "Gun Shop - Pistolety", "Pistolety 9mm\t\t 2000$\nPistolet z t≥umikiem\t 1000$\nDesert Eagle\t\t 6000$", "Kup", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 800, DIALOG_STYLE_LIST, "Gun Shop - Pistolety", "Pistolety 9mm\t\t 2000$\nPistolet z tÔøΩumikiem\t 1000$\nDesert Eagle\t\t 6000$", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 710)
@@ -5924,7 +5924,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new naboje = strval(inputtext);
 				    new cena = (naboje*40)+(3000);
 				    CenaBroni[playerid] = naboje;
-				    format(komunikat, sizeof(komunikat), "Kupujesz Shotgun z %d nabojami\nBÍdzie ciÍ to kosztowaÊ %d$\n Czy chcesz dokonaÊ zakupu?", naboje, cena);
+				    format(komunikat, sizeof(komunikat), "Kupujesz Shotgun z %d nabojami\nBÔøΩdzie ciÔøΩ to kosztowaÔøΩ %d$\n Czy chcesz dokonaÔøΩ zakupu?", naboje, cena);
 			     	ShowPlayerDialogEx(playerid, 7170, DIALOG_STYLE_MSGBOX, "Kupowanie Shotguna", komunikat, "Tak", "Nie");
 	            }
 				else
@@ -5934,7 +5934,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 801, DIALOG_STYLE_LIST, "Gun Shop - Strzelby", "Shotgun\t\t6000$", "Kup", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 801, DIALOG_STYLE_LIST, "Gun Shop - Strzelby", "Shotgun\t\t6000$", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 720)
@@ -5947,7 +5947,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new naboje = strval(inputtext);
 				    new cena = (naboje*25)+(5000);
 				    CenaBroni[playerid] = naboje;
-				    format(komunikat, sizeof(komunikat), "Kupujesz MP5 z %d nabojami\nBÍdzie ciÍ to kosztowaÊ %d$\n Czy chcesz dokonaÊ zakupu?", naboje, cena);
+				    format(komunikat, sizeof(komunikat), "Kupujesz MP5 z %d nabojami\nBÔøΩdzie ciÔøΩ to kosztowaÔøΩ %d$\n Czy chcesz dokonaÔøΩ zakupu?", naboje, cena);
 			     	ShowPlayerDialogEx(playerid, 7270, DIALOG_STYLE_MSGBOX, "Kupowanie MP5", komunikat, "Tak", "Nie");
 	            }
 				else
@@ -5957,7 +5957,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 802, DIALOG_STYLE_LIST, "Gun Shop - Pistolety Maszynowe", "MP5\t\t\t5000$", "Kup", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 802, DIALOG_STYLE_LIST, "Gun Shop - Pistolety Maszynowe", "MP5\t\t\t5000$", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 730)
@@ -5970,7 +5970,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new naboje = strval(inputtext);
 				    new cena = (naboje*40)+(10000);
 				    CenaBroni[playerid] = naboje;
-				    format(komunikat, sizeof(komunikat), "Kupujesz M4 z %d nabojami\nBÍdzie ciÍ to kosztowaÊ %d$\n Czy chcesz dokonaÊ zakupu?", naboje, cena);
+				    format(komunikat, sizeof(komunikat), "Kupujesz M4 z %d nabojami\nBÔøΩdzie ciÔøΩ to kosztowaÔøΩ %d$\n Czy chcesz dokonaÔøΩ zakupu?", naboje, cena);
 			     	ShowPlayerDialogEx(playerid, 7370, DIALOG_STYLE_MSGBOX, "Kupowanie M4", komunikat, "Tak", "Nie");
 	            }
 				else
@@ -5980,7 +5980,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 803, DIALOG_STYLE_LIST, "Gun Shop - Karabiny", "M4\t\t\t10000$\nAK-47\t\t\t10000$", "Kup", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 803, DIALOG_STYLE_LIST, "Gun Shop - Karabiny", "M4\t\t\t10000$\nAK-47\t\t\t10000$", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 731)
@@ -5993,7 +5993,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new naboje = strval(inputtext);
 				    new cena = (naboje*40)+(10000);
 				    CenaBroni[playerid] = naboje;
-				    format(komunikat, sizeof(komunikat), "Kupujesz AK-47 z %d nabojami\nBÍdzie ciÍ to kosztowaÊ %d$\n Czy chcesz dokonaÊ zakupu?", naboje, cena);
+				    format(komunikat, sizeof(komunikat), "Kupujesz AK-47 z %d nabojami\nBÔøΩdzie ciÔøΩ to kosztowaÔøΩ %d$\n Czy chcesz dokonaÔøΩ zakupu?", naboje, cena);
 			     	ShowPlayerDialogEx(playerid, 7371, DIALOG_STYLE_MSGBOX, "Kupowanie AK-47", komunikat, "Tak", "Nie");
 	            }
 				else
@@ -6003,7 +6003,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 803, DIALOG_STYLE_LIST, "Gun Shop - Karabiny", "M4\t\t\t10000$\nAK-47\t\t\t10000$", "Kup", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 803, DIALOG_STYLE_LIST, "Gun Shop - Karabiny", "M4\t\t\t10000$\nAK-47\t\t\t10000$", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 740)
@@ -6016,7 +6016,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new naboje = strval(inputtext);
 				    new cena = (naboje*50)+(2000);
 				    CenaBroni[playerid] = naboje;
-				    format(komunikat, sizeof(komunikat), "Kupujesz Rifle z %d nabojami\nBÍdzie ciÍ to kosztowaÊ %d$\n Czy chcesz dokonaÊ zakupu?", naboje, cena);
+				    format(komunikat, sizeof(komunikat), "Kupujesz Rifle z %d nabojami\nBÔøΩdzie ciÔøΩ to kosztowaÔøΩ %d$\n Czy chcesz dokonaÔøΩ zakupu?", naboje, cena);
 			     	ShowPlayerDialogEx(playerid, 7470, DIALOG_STYLE_MSGBOX, "Kupowanie Rifle", komunikat, "Tak", "Nie");
 	            }
 				else
@@ -6026,7 +6026,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 804, DIALOG_STYLE_LIST, "Gun Shop - Snajperki", "Rifle\t\t2000$", "Kup", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 804, DIALOG_STYLE_LIST, "Gun Shop - Snajperki", "Rifle\t\t2000$", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 7070)
@@ -6043,18 +6043,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					//DajKase(playerid, -cenabronia);
 					ZabierzKase(playerid, (GunPrice[13][0]));
 					ZabierzKase(playerid, (CenaBroni[playerid]*25));
-					format(komunikat, sizeof(komunikat), "Kupi≥eú Pistolety 9mm z %d nabojami, kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[13][0])+(CenaBroni[playerid]*25));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ Pistolety 9mm z %d nabojami, kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[13][0])+(CenaBroni[playerid]*25));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 700, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet 9mm", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 700, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet 9mm", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 700, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet 9mm", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 700, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet 9mm", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 7071)
@@ -6069,18 +6069,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAmmo2] = CenaBroni[playerid];
 	    			ZabierzKase(playerid, (GunPrice[14][0]));
 					ZabierzKase(playerid, (CenaBroni[playerid]*25));
-					format(komunikat, sizeof(komunikat), "Kupi≥eú Pistolet z t≥umikiem z %d nabojami , kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[14][0])+(CenaBroni[playerid]*25));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ Pistolet z tÔøΩumikiem z %d nabojami , kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[14][0])+(CenaBroni[playerid]*25));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 701, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet z t≥umikiem", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 701, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet z tÔøΩumikiem", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-	            ShowPlayerDialogEx(playerid, 701, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet z t≥umikiem", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+	            ShowPlayerDialogEx(playerid, 701, DIALOG_STYLE_INPUT, "Gun Shop - Pistolet z tÔøΩumikiem", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 7072)
@@ -6095,18 +6095,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAmmo2] = CenaBroni[playerid];
 	    			ZabierzKase(playerid, (GunPrice[15][0]));
 	    			ZabierzKase(playerid, (CenaBroni[playerid]*25));
-					format(komunikat, sizeof(komunikat), "Kupi≥eú Desert Eagle z %d nabojami , kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[15][0])+(CenaBroni[playerid]*25));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ Desert Eagle z %d nabojami , kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[15][0])+(CenaBroni[playerid]*25));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 702, DIALOG_STYLE_INPUT, "Gun Shop - Desert Eagle", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 702, DIALOG_STYLE_INPUT, "Gun Shop - Desert Eagle", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-	            ShowPlayerDialogEx(playerid, 702, DIALOG_STYLE_INPUT, "Gun Shop - Desert Eagle", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+	            ShowPlayerDialogEx(playerid, 702, DIALOG_STYLE_INPUT, "Gun Shop - Desert Eagle", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 7170)
@@ -6121,18 +6121,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAmmo3] = CenaBroni[playerid];
 					ZabierzKase(playerid, (GunPrice[19][0]));
 					ZabierzKase(playerid, (CenaBroni[playerid]*40));
-					format(komunikat, sizeof(komunikat), "Kupi≥eú Shotguna z %d nabojami , kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[19][0])+(CenaBroni[playerid]*40));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ Shotguna z %d nabojami , kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[19][0])+(CenaBroni[playerid]*40));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 710, DIALOG_STYLE_INPUT, "Gun Shop - Shotguna", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 710, DIALOG_STYLE_INPUT, "Gun Shop - Shotguna", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-	            ShowPlayerDialogEx(playerid, 710, DIALOG_STYLE_INPUT, "Gun Shop - Shotguna", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+	            ShowPlayerDialogEx(playerid, 710, DIALOG_STYLE_INPUT, "Gun Shop - Shotguna", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 7270)
@@ -6147,18 +6147,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAmmo4] = CenaBroni[playerid];
 					ZabierzKase(playerid, (GunPrice[18][0]));
 					ZabierzKase(playerid, (CenaBroni[playerid]*25));
-					format(komunikat, sizeof(komunikat), "Kupi≥eú MP5 z %d nabojami , kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[18][0])+(CenaBroni[playerid]*25));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ MP5 z %d nabojami , kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[18][0])+(CenaBroni[playerid]*25));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 720, DIALOG_STYLE_INPUT, "Gun Shop - MP5", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 720, DIALOG_STYLE_INPUT, "Gun Shop - MP5", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-	            ShowPlayerDialogEx(playerid, 720, DIALOG_STYLE_INPUT, "Gun Shop - MP5", "Wpisz iloúÊ naboi(1 nabÛj = 25$)", "Kup", "WrÛÊ");
+	            ShowPlayerDialogEx(playerid, 720, DIALOG_STYLE_INPUT, "Gun Shop - MP5", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 25$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 7370)
@@ -6173,18 +6173,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAmmo5] = CenaBroni[playerid];
 					ZabierzKase(playerid, (GunPrice[23][0]));
 					ZabierzKase(playerid, (CenaBroni[playerid]*40));
-					format(komunikat, sizeof(komunikat), "Kupi≥eú M4 z %d nabojami , kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[23][0])+(CenaBroni[playerid]*40));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ M4 z %d nabojami , kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[23][0])+(CenaBroni[playerid]*40));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 730, DIALOG_STYLE_INPUT, "Gun Shop - M4", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 730, DIALOG_STYLE_INPUT, "Gun Shop - M4", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-	            ShowPlayerDialogEx(playerid, 730, DIALOG_STYLE_INPUT, "Gun Shop - M4", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+	            ShowPlayerDialogEx(playerid, 730, DIALOG_STYLE_INPUT, "Gun Shop - M4", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 7371)
@@ -6199,18 +6199,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAmmo5] = CenaBroni[playerid];
 					ZabierzKase(playerid, (GunPrice[22][0]));
 					ZabierzKase(playerid, (CenaBroni[playerid]*40));
-					format(komunikat, sizeof(komunikat), "Kupi≥eú AK-47 z %d nabojami , kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[22][0])+(CenaBroni[playerid]*40));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ AK-47 z %d nabojami , kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[22][0])+(CenaBroni[playerid]*40));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-	            ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloúÊ naboi(1 nabÛj = 40$)", "Kup", "WrÛÊ");
+	            ShowPlayerDialogEx(playerid, 731, DIALOG_STYLE_INPUT, "Gun Shop - AK-47", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 40$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 		else if(dialogid == 7470)
@@ -6225,18 +6225,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAmmo6] = CenaBroni[playerid];
 					ZabierzKase(playerid, (GunPrice[24][0]));
 					ZabierzKase(playerid, (CenaBroni[playerid]*50));
-					format(komunikat, sizeof(komunikat), "Kupi≥eú Rifle z %d nabojami , kosztowa≥o ciÍ to %d", CenaBroni[playerid],(GunPrice[24][0])+(CenaBroni[playerid]*50));
+					format(komunikat, sizeof(komunikat), "KupiÔøΩeÔøΩ Rifle z %d nabojami , kosztowaÔøΩo ciÔøΩ to %d", CenaBroni[playerid],(GunPrice[24][0])+(CenaBroni[playerid]*50));
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, komunikat);
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÊ ciÍ na to!");
-			        ShowPlayerDialogEx(playerid, 740, DIALOG_STYLE_INPUT, "Gun Shop - Rifle", "Wpisz iloúÊ naboi(1 nabÛj = 50$)", "Kup", "WrÛÊ");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Nie staÔøΩ ciÔøΩ na to!");
+			        ShowPlayerDialogEx(playerid, 740, DIALOG_STYLE_INPUT, "Gun Shop - Rifle", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 50$)", "Kup", "WrÔøΩÔøΩ");
 			    }
 			}
 			if(!response)
 			{
-	            ShowPlayerDialogEx(playerid, 740, DIALOG_STYLE_INPUT, "Gun Shop - Rifle", "Wpisz iloúÊ naboi(1 nabÛj = 50$)", "Kup", "WrÛÊ");
+	            ShowPlayerDialogEx(playerid, 740, DIALOG_STYLE_INPUT, "Gun Shop - Rifle", "Wpisz iloÔøΩÔøΩ naboi(1 nabÔøΩj = 50$)", "Kup", "WrÔøΩÔøΩ");
 			}
 		}
 	    else if(dialogid == 5000)
@@ -6247,43 +6247,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 					{
-		        		ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 55","Przystanki koÒcowe:\nKoúciÛ≥ <==> Mrucznik Tower\n\nCzas przejazdu trasy: 9minut \n\nIloúÊ przystankÛw: 13\n\nSzczegÛ≥owy rozpis trasy:\n KoúciÛ≥\n Motel Jefferson\n Glen Park\n Skate Park\n Unity Station\n Urzπd Miasta\n Bank\n Kasyno\n Market Station\n Baza San News i Restauracja\n Siedziba FBI\n Molo WÍdkarskie\n Mrucznik Tower","WrÛÊ","Wyjdü");
-						//\n\nOpis:\n Wsiadajπc do tego autobusu na pewno odwiedzisz\n kaøde miejsce naprawdÍ warte twojej uwagi\n Jednak z powodu duøej liczby przystnakÛw\n czas podrÛøy znacznie siÍ wyd≥uøa.
+		        		ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 55","Przystanki koÔøΩcowe:\nKoÔøΩciÔøΩ <==> Mrucznik Tower\n\nCzas przejazdu trasy: 9minut \n\nIloÔøΩÔøΩ przystankÔøΩw: 13\n\nSzczegÔøΩowy rozpis trasy:\n KoÔøΩciÔøΩ\n Motel Jefferson\n Glen Park\n Skate Park\n Unity Station\n UrzÔøΩd Miasta\n Bank\n Kasyno\n Market Station\n Baza San News i Restauracja\n Siedziba FBI\n Molo WÔøΩdkarskie\n Mrucznik Tower","WrÔøΩÔøΩ","WyjdÔøΩ");
+						//\n\nOpis:\n WsiadajÔøΩc do tego autobusu na pewno odwiedzisz\n kaÔøΩde miejsce naprawdÔøΩ warte twojej uwagi\n Jednak z powodu duÔøΩej liczby przystnakÔøΩw\n czas podrÔøΩy znacznie siÔøΩ wydÔøΩuÔøΩa.
 					}
 					case 1:
 					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 72","Przystanki koÒcowe:\nBaza MechanikÛw <==> Mrucznik Tower\n\nCzas przejazdu trasy: 3min 50s\n\nIloúÊ przystankÛw: 9\n\nSzczegÛ≥owy rozpis trasy:\n Mrucznik Tower (praca prawnika i ≥owcy)\n Market Station\n Szpital\n AmmuNation (praca dilera broni)\n Bank)\n Urzπd Miasta (wyrÛb licencji)\n Stacja Benzynowa\n Si≥ownia (praca ochroniarza - sprzedaje pancerze i boksera)\n Willowfield\n Baza MechanikÛw","WrÛÊ","Wyjdü");
-						//\n\nOpis:\n Szybka linia zapewniajπca g≥Ûwnie cywilom szybki\n transport miÍdzy kluczowymi punktami w mieúcie\n Najwaøniejsza i najszybsza linia LSBD
+					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 72","Przystanki koÔøΩcowe:\nBaza MechanikÔøΩw <==> Mrucznik Tower\n\nCzas przejazdu trasy: 3min 50s\n\nIloÔøΩÔøΩ przystankÔøΩw: 9\n\nSzczegÔøΩowy rozpis trasy:\n Mrucznik Tower (praca prawnika i ÔøΩowcy)\n Market Station\n Szpital\n AmmuNation (praca dilera broni)\n Bank)\n UrzÔøΩd Miasta (wyrÔøΩb licencji)\n Stacja Benzynowa\n SiÔøΩownia (praca ochroniarza - sprzedaje pancerze i boksera)\n Willowfield\n Baza MechanikÔøΩw","WrÔøΩÔøΩ","WyjdÔøΩ");
+						//\n\nOpis:\n Szybka linia zapewniajÔøΩca gÔøΩÔøΩwnie cywilom szybki\n transport miÔøΩdzy kluczowymi punktami w mieÔøΩcie\n NajwaÔøΩniejsza i najszybsza linia LSBD
 					}
 					case 2:
 					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 82","Przystanki koÒcowe:\nZajezdnia Commerce <==> Bay Side LV\n\nCzas przejazdu trasy:  11 minut \n\nIloúÊ przystankÛw:  9\n\nSzczegÛ≥owy rozpis trasy:\n Zajezdnia Commerce / Basen 'tsunami'\n Urzπd Miasta\n Baza MechanikÛw\n Agencja Ochrony\n miasteczko Palomino Creek\n Hilltop Farm\n Dillimore\n Bluberry\n Bay Side","WrÛÊ","Wyjdü");
-						// \n Trasa po Red County jest bardzo malownicza\n zaú droga do bay side usypiajπca\n Najd≥uøsza trasa LSDB
+					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 82","Przystanki koÔøΩcowe:\nZajezdnia Commerce <==> Bay Side LV\n\nCzas przejazdu trasy:  11 minut \n\nIloÔøΩÔøΩ przystankÔøΩw:  9\n\nSzczegÔøΩowy rozpis trasy:\n Zajezdnia Commerce / Basen 'tsunami'\n UrzÔøΩd Miasta\n Baza MechanikÔøΩw\n Agencja Ochrony\n miasteczko Palomino Creek\n Hilltop Farm\n Dillimore\n Bluberry\n Bay Side","WrÔøΩÔøΩ","WyjdÔøΩ");
+						// \n Trasa po Red County jest bardzo malownicza\n zaÔøΩ droga do bay side usypiajÔøΩca\n NajdÔøΩuÔøΩsza trasa LSDB
 					}
 	    			case 3:
 					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 96","W Przystanki koÒcowe:\nBaza Wojskowa <==> Mrucznik Tower\n\nCzas przejazdu trasy:  ? \n\nIloúÊ przystankÛw:  12\n\nSzczegÛ≥owy rozpis trasy:\n Baza Wojskowa\n Fabryka (dostawa matsÛw)\n Pas Startowy \n Wiadukt\n Unity Station\n Verdant Bluffs (ty≥y UrzÍdu Miasta)\n Zajezdnia Commerce\n Galerie Handlowe\n Burger Shot Marina\n Baza FBI\n Wypoøyczalnia aut (odbiÛr matsÛw)\n Mrucznik Tower","WrÛÊ","Wyjdü");
-						 //\n\nOpis:\nKolejna trasa ze wschodu na zachÛd, jednak tym razem\n szlakiem mniej uczÍszczanych miejsc\n Ulubiona trasa poczπtkujπcych dilerÛw broni
+					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 96","W Przystanki koÔøΩcowe:\nBaza Wojskowa <==> Mrucznik Tower\n\nCzas przejazdu trasy:  ? \n\nIloÔøΩÔøΩ przystankÔøΩw:  12\n\nSzczegÔøΩowy rozpis trasy:\n Baza Wojskowa\n Fabryka (dostawa matsÔøΩw)\n Pas Startowy \n Wiadukt\n Unity Station\n Verdant Bluffs (tyÔøΩy UrzÔøΩdu Miasta)\n Zajezdnia Commerce\n Galerie Handlowe\n Burger Shot Marina\n Baza FBI\n WypoÔøΩyczalnia aut (odbiÔøΩr matsÔøΩw)\n Mrucznik Tower","WrÔøΩÔøΩ","WyjdÔøΩ");
+						 //\n\nOpis:\nKolejna trasa ze wschodu na zachÔøΩd, jednak tym razem\n szlakiem mniej uczÔøΩszczanych miejsc\n Ulubiona trasa poczÔøΩtkujÔøΩcych dilerÔøΩw broni
 					}
   					case 4:
 					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 85","Przystanki koÒcowe:\nWysypisko <==> Szpital\n\nCzas przejazdu trasy:  ? \n\nIloúÊ przystankÛw:  12\n\nSzczegÛ≥owy rozpis trasy:\n Wysypisko\n Clukin Bell Willofield\n Myjnia Samochodowa\n Baza MechanikÛw\n Agencja Ochrony\n Las Colinas \n Motel Jefferson\n Glen Park\n Mrucznikowy GS\n Bank\n Szpital\n\n Opis:\n Niebezpieczna trasa prowadzπce przez tereny prawie wszytkich gangÛw","WrÛÊ","Wyjdü");
+					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 85","Przystanki koÔøΩcowe:\nWysypisko <==> Szpital\n\nCzas przejazdu trasy:  ? \n\nIloÔøΩÔøΩ przystankÔøΩw:  12\n\nSzczegÔøΩowy rozpis trasy:\n Wysypisko\n Clukin Bell Willofield\n Myjnia Samochodowa\n Baza MechanikÔøΩw\n Agencja Ochrony\n Las Colinas \n Motel Jefferson\n Glen Park\n Mrucznikowy GS\n Bank\n Szpital\n\n Opis:\n Niebezpieczna trasa prowadzÔøΩce przez tereny prawie wszytkich gangÔøΩw","WrÔøΩÔøΩ","WyjdÔøΩ");
 					}
   					case 5:
 					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","W budowie","WrÛÊ","Wyjdü");
+					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","W budowie","WrÔøΩÔøΩ","WyjdÔøΩ");
 					}
   					case 6:
 					{
-        				 ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","Informacje o wycieczkach sπ zamieszczane na czatach g≥Ûwnych\n Oczywiúcie nie ma nic za darmo\n San News zarabia na reklamach zaú KT tradycyjnei na biletach\n pamiÍtaj øe na wycieczki nie bierzemy w≥asnego samochodu\n lecz korzystamy z podstawionych przez organizatora autobusÛw\n Wycieczka to úwietna zabawa i mnÛstwo konkursÛw z nagrodami, dlatego warto siÍ na nich pojawiaÊ.","WrÛÊ","Wyjdü");
+        				 ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","Informacje o wycieczkach sÔøΩ zamieszczane na czatach gÔøΩÔøΩwnych\n OczywiÔøΩcie nie ma nic za darmo\n San News zarabia na reklamach zaÔøΩ KT tradycyjnei na biletach\n pamiÔøΩtaj ÔøΩe na wycieczki nie bierzemy wÔøΩasnego samochodu\n lecz korzystamy z podstawionych przez organizatora autobusÔøΩw\n Wycieczka to ÔøΩwietna zabawa i mnÔøΩstwo konkursÔøΩw z nagrodami, dlatego warto siÔøΩ na nich pojawiaÔøΩ.","WrÔøΩÔøΩ","WyjdÔøΩ");
 					}
 					case 7:
 					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Informacje","Z autobusu najlepiej korzystaÊ wtedy gdy jesteú pewien øe dana linia jest w trasie\n\nPamiÍtaj, ze autobusy oznaczone numeremm linii poruszajπ siÍ zgodnie z okreúlonπ trasπ\n\nJak zostaÊ kierowcπ autobusu?\nNaleøy z≥oøyÊ podanie na forum do Korporacji Transportowej\nMozna rÛwnieø podjπÊ siÍ pracy kierowcy minibusa dostÍpnej przy basenie","WrÛÊ","Wyjdü");
+					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Informacje","Z autobusu najlepiej korzystaÔøΩ wtedy gdy jesteÔøΩ pewien ÔøΩe dana linia jest w trasie\n\nPamiÔøΩtaj, ze autobusy oznaczone numeremm linii poruszajÔøΩ siÔøΩ zgodnie z okreÔøΩlonÔøΩ trasÔøΩ\n\nJak zostaÔøΩ kierowcÔøΩ autobusu?\nNaleÔøΩy zÔøΩoÔøΩyÔøΩ podanie na forum do Korporacji Transportowej\nMozna rÔøΩwnieÔøΩ podjÔøΩÔøΩ siÔøΩ pracy kierowcy minibusa dostÔøΩpnej przy basenie","WrÔøΩÔøΩ","WyjdÔøΩ");
 					}
 					case 8:
 					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Komendy","Dla pasaøera:\n\n/businfo - wyúwietla informacje o autobusach\n/wezwij bus - pozwala wezwaÊ autobus ktory podwiezie ciÍ w dowolne miejsce\n/anuluj bus - kasuje wezwanie autobusu\n\n\nDla Kierowcy:\n/fare [cena] - pozwala wejúÊ na s≥uøbÍ i ustaliÊ cenÍ za bilet\n/trasa - rozpoczyna kurs wed≥ug wyznaczonej trasy\n/zakoncztrase - przerywa trasÍ\n/zd - zamyka drzwi i umoøliwia ruszenie z przystanku","WrÛÊ","Wyjdü");
+					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Komendy","Dla pasaÔøΩera:\n\n/businfo - wyÔøΩwietla informacje o autobusach\n/wezwij bus - pozwala wezwaÔøΩ autobus ktory podwiezie ciÔøΩ w dowolne miejsce\n/anuluj bus - kasuje wezwanie autobusu\n\n\nDla Kierowcy:\n/fare [cena] - pozwala wejÔøΩÔøΩ na sÔøΩuÔøΩbÔøΩ i ustaliÔøΩ cenÔøΩ za bilet\n/trasa - rozpoczyna kurs wedÔøΩug wyznaczonej trasy\n/zakoncztrase - przerywa trasÔøΩ\n/zd - zamyka drzwi i umoÔøΩliwia ruszenie z przystanku","WrÔøΩÔøΩ","WyjdÔøΩ");
 					}
 				}
 			}
@@ -6292,7 +6292,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesujπcπ ciÍ zagadnienie", "Linia 55\nLinia 72\nLinia 82\nLinia 96\nLinia 85\nWycieczki\nInformacje\nPomoc", "Wybierz", "Wyjdü");
+	            ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesujÔøΩcÔøΩ ciÔøΩ zagadnienie", "Linia 55\nLinia 72\nLinia 82\nLinia 96\nLinia 85\nWycieczki\nInformacje\nPomoc", "Wybierz", "WyjdÔøΩ");
 	        }
 	    }
 	 	if(dialogid == D_PJTEST)
@@ -6335,18 +6335,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
            		if(PlayerInfo[playerid][pPrawojazdydobreodp] == 3)
            		{
                 	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 1;
-               		ShowPlayerDialogEx(playerid, 2, DIALOG_STYLE_MSGBOX, "Zda≥eú!", "Gratulujemy!\r\nZda≥eú test na Prawo Jazdy.\r\nZg≥oú siÍ do UrzÍdnika w celu\r\nodebrania tych dokumentÛw!", "OK", "");
+               		ShowPlayerDialogEx(playerid, 2, DIALOG_STYLE_MSGBOX, "ZdaÔøΩeÔøΩ!", "Gratulujemy!\r\nZdaÔøΩeÔøΩ test na Prawo Jazdy.\r\nZgÔøΩoÔøΩ siÔøΩ do UrzÔøΩdnika w celu\r\nodebrania tych dokumentÔøΩw!", "OK", "");
                 	PlayerInfo[playerid][pCarLic] = 2;
             	}
            		else
            		{
                 	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 0;
-                	ShowPlayerDialogEx(playerid, 15, DIALOG_STYLE_MSGBOX, "Obla≥eú!", "Obla≥eú!\r\nNie zda≥eú poprawnie testu\r\nna prawo jazdy!\r\nZg≥oú siÍ za 1h", "OK", "");
+                	ShowPlayerDialogEx(playerid, 15, DIALOG_STYLE_MSGBOX, "OblaÔøΩeÔøΩ!", "OblaÔøΩeÔøΩ!\r\nNie zdaÔøΩeÔøΩ poprawnie testu\r\nna prawo jazdy!\r\nZgÔøΩoÔøΩ siÔøΩ za 1h", "OK", "");
            		}
 		   		new string [256];
            		new playername[MAX_PLAYER_NAME];
 		   		GetPlayerName(playerid, playername, sizeof(playername));
-		   		format(string, sizeof(string), "* %s odk≥ada d≥ugopis i przesuwa test w stronÍ urzÍdnika", playername);
+		   		format(string, sizeof(string), "* %s odkÔøΩada dÔøΩugopis i przesuwa test w stronÔøΩ urzÔøΩdnika", playername);
 		   		ProxDetector(40.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
            		PlayerInfo[playerid][pWtrakcietestprawa] = 0;
            		SetTimerEx("CleanPlayaPointsPJ", 30000, 0, "i", playerid);
@@ -6371,8 +6371,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else
 					{
-	        			SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany za niewpisanie has≥a!");
-			            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany z powodu bezpieczeÒstwa za wpisanie pustego has≥a. Zapraszamy ponownie.", "Wyjdü", "");
+	        			SendClientMessage(playerid, COLOR_PANICRED, "ZostaÔøΩeÔøΩ zkickowany za niewpisanie hasÔøΩa!");
+			            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "ZostaÔøΩeÔøΩ zkickowany z powodu bezpieczeÔøΩstwa za wpisanie pustego hasÔøΩa. Zapraszamy ponownie.", "WyjdÔøΩ", "");
 	                    GUIExit[playerid] = 0;
 	                    SetPlayerVirtualWorld(playerid, 0);
 						KickEx(playerid);
@@ -6381,8 +6381,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-				SendClientMessage(playerid, COLOR_PANICRED, "Wyszed≥eú z serwera, zosta≥eú roz≥πczony. Zapraszamy ponownie!");
-	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed≥eú z logowania, zosta≥eú roz≥πczony. Zapraszamy ponownie!", "Wyjdü", "");
+				SendClientMessage(playerid, COLOR_PANICRED, "WyszedÔøΩeÔøΩ z serwera, zostaÔøΩeÔøΩ rozÔøΩÔøΩczony. Zapraszamy ponownie!");
+	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "WyszedÔøΩeÔøΩ z logowania, zostaÔøΩeÔøΩ rozÔøΩÔøΩczony. Zapraszamy ponownie!", "WyjdÔøΩ", "");
 	            GUIExit[playerid] = 0;
 	            SetPlayerVirtualWorld(playerid, 0);
 				KickEx(playerid);
@@ -6403,8 +6403,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany za niewpisanie has≥a!");
-			            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany z powodu bezpieczeÒstwa za wpisanie pustego lub zbyt d≥ugiego has≥a. Zapraszamy ponownie.", "Wyjdü", "");
+					    SendClientMessage(playerid, COLOR_PANICRED, "ZostaÔøΩeÔøΩ zkickowany za niewpisanie hasÔøΩa!");
+			            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "ZostaÔøΩeÔøΩ zkickowany z powodu bezpieczeÔøΩstwa za wpisanie pustego lub zbyt dÔøΩugiego hasÔøΩa. Zapraszamy ponownie.", "WyjdÔøΩ", "");
 	                    GUIExit[playerid] = 0;
 	                    SetPlayerVirtualWorld(playerid, 0);
 						KickEx(playerid);
@@ -6414,8 +6414,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	   		}
 		    if(!response)
 		    {
-		        SendClientMessage(playerid, COLOR_PANICRED, "Wyszed≥eú z serwera, zosta≥eú roz≥πczony. Zapraszamy ponownie!");
-	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed≥eú z rejestracji, zosta≥eú roz≥πczony. Zapraszamy ponownie!", "Wyjdü", "");
+		        SendClientMessage(playerid, COLOR_PANICRED, "WyszedÔøΩeÔøΩ z serwera, zostaÔøΩeÔøΩ rozÔøΩÔøΩczony. Zapraszamy ponownie!");
+	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "WyszedÔøΩeÔøΩ z rejestracji, zostaÔøΩeÔøΩ rozÔøΩÔøΩczony. Zapraszamy ponownie!", "WyjdÔøΩ", "");
 				KickEx(playerid);
 		    }
 		}
@@ -6425,7 +6425,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(strlen(inputtext) >= 1 && strlen(inputtext) <= 64)
 			    {
-					if(strcmp(inputtext,"SiveMopY", false) == 0 || (DEVELOPMENT && strcmp(inputtext,"DevModeON", false) == 0) )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67 --> Has≥o administracyjne
+					if(strcmp(inputtext,"SiveMopY", false) == 0 || (DEVELOPMENT && strcmp(inputtext,"DevModeON", false) == 0) )//WiE772Min Zi3EeL$sKoXnUBy RaTMiiN67 --> HasÔøΩo administracyjne
 					{
 						weryfikacja[playerid] = 1;
 						if(PlayerInfo[playerid][pJailed] == 0)
@@ -6434,7 +6434,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerSpawn(playerid);
 							TogglePlayerSpectating(playerid, false);
 							lowcap[playerid] = 1;
-							ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siÍ teleportowaÊ do poprzedniej pozycji?", "TAK", "NIE");
+							ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siÔøΩ teleportowaÔøΩ do poprzedniej pozycji?", "TAK", "NIE");
 						}
 						else
 						{
@@ -6445,8 +6445,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else
 					{
-						SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany!");
-						ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
+						SendClientMessage(playerid, COLOR_PANICRED, "ZostaÔøΩeÔøΩ zkickowany!");
+						ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "ZostaÔøΩeÔøΩ zkickowany.", "WyjdÔøΩ", "");
 						GUIExit[playerid] = 0;
 						SetPlayerVirtualWorld(playerid, 50);
 						KickEx(playerid);
@@ -6454,8 +6454,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-					SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany za niewpisanie has≥a!");
-					ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany z powodu bezpieczeÒstwa za wpisanie pustego lub zbyt d≥ugiego has≥a. Zapraszamy ponownie.", "Wyjdü", "");
+					SendClientMessage(playerid, COLOR_PANICRED, "ZostaÔøΩeÔøΩ zkickowany za niewpisanie hasÔøΩa!");
+					ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "ZostaÔøΩeÔøΩ zkickowany z powodu bezpieczeÔøΩstwa za wpisanie pustego lub zbyt dÔøΩugiego hasÔøΩa. Zapraszamy ponownie.", "WyjdÔøΩ", "");
 					GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 50);
 					KickEx(playerid);
@@ -6463,8 +6463,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        SendClientMessage(playerid, COLOR_PANICRED, "Wyszed≥eú z weryfikacji, zosta≥eú roz≥πczony!");
-	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed≥eú z weryfikacji, zosta≥eú roz≥πczony!", "Wyjdü", "");
+		        SendClientMessage(playerid, COLOR_PANICRED, "WyszedÔøΩeÔøΩ z weryfikacji, zostaÔøΩeÔøΩ rozÔøΩÔøΩczony!");
+	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "WyszedÔøΩeÔøΩ z weryfikacji, zostaÔøΩeÔøΩ rozÔøΩÔøΩczony!", "WyjdÔøΩ", "");
 	            GUIExit[playerid] = 0;
 	            SetPlayerVirtualWorld(playerid, 50);
 				KickEx(playerid);
@@ -6494,8 +6494,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 			        else
 			        {
-			            SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany!");
-				        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
+			            SendClientMessage(playerid, COLOR_PANICRED, "ZostaÔøΩeÔøΩ zkickowany!");
+				        ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "ZostaÔøΩeÔøΩ zkickowany.", "WyjdÔøΩ", "");
 				        GUIExit[playerid] = 0;
 				        SetPlayerVirtualWorld(playerid, 0);
 						KickEx(playerid);
@@ -6503,8 +6503,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-			        SendClientMessage(playerid, COLOR_PANICRED, "Zosta≥eú zkickowany!");
-				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta≥eú zkickowany.", "Wyjdü", "");
+			        SendClientMessage(playerid, COLOR_PANICRED, "ZostaÔøΩeÔøΩ zkickowany!");
+				    ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "ZostaÔøΩeÔøΩ zkickowany.", "WyjdÔøΩ", "");
 				    GUIExit[playerid] = 0;
 				    SetPlayerVirtualWorld(playerid, 0);
 					KickEx(playerid);
@@ -6512,8 +6512,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        SendClientMessage(playerid, COLOR_PANICRED, "Wyszed≥eú z weryfikacji, zosta≥eú roz≥πczony!");
-	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed≥eú z weryfikacji, zosta≥eú roz≥πczony!", "Wyjdü", "");
+		        SendClientMessage(playerid, COLOR_PANICRED, "WyszedÔøΩeÔøΩ z weryfikacji, zostaÔøΩeÔøΩ rozÔøΩÔøΩczony!");
+	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "WyszedÔøΩeÔøΩ z weryfikacji, zostaÔøΩeÔøΩ rozÔøΩÔøΩczony!", "WyjdÔøΩ", "");
 	            GUIExit[playerid] = 0;
 	            SetPlayerVirtualWorld(playerid, 0);
 				KickEx(playerid);
@@ -6535,7 +6535,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        }
 				        else
 				        {
-				            SendClientMessage(playerid, COLOR_GREY, "Nie masz 10 kredytÛw.");
+				            SendClientMessage(playerid, COLOR_GREY, "Nie masz 10 kredytÔøΩw.");
 				        }
 	                }
 	                case 1:
@@ -6548,13 +6548,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    }
 				        else
 				        {
-				            SendClientMessage(playerid, COLOR_GREY, "Nie masz 20 kredytÛw.");
+				            SendClientMessage(playerid, COLOR_GREY, "Nie masz 20 kredytÔøΩw.");
 				        }
 	                }
 		        }
 		    }
 		}
-		if(dialogid == 324)//wybieralka wejúÊ FBI
+		if(dialogid == 324)//wybieralka wejÔøΩÔøΩ FBI
 		{
 		    if(response)
 		    {
@@ -6567,18 +6567,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerInterior(playerid, 0);
                         Wchodzenie(playerid);
 		                SetPlayerInterior(playerid, 8);
-		                ShowPlayerDialogEx(playerid, 999, DIALOG_STYLE_MSGBOX, "Strzelnica FBI", "Kryta strzelnica pozwalπca ÊwiczyÊ celnoúÊ z deagl'a mp5 i innych broni\n Zadanie polega na zestrzeleniu jak najwiÍkszej liczby manekinÛw w czasie ustalonym przez prowadzπcego trening\n Kaødy celny strza≥ to 1 punkt\n Obowiπzuje zasada: 1 niecelny strza≥ = 1 punkt mniej\n (( aby sprawdziÊ ile naboi ma agent uøyj /sb [ID]))", "Rozpocznij", "Wyjdü");//Strzelnica FBI úrodek
+		                ShowPlayerDialogEx(playerid, 999, DIALOG_STYLE_MSGBOX, "Strzelnica FBI", "Kryta strzelnica pozwalÔøΩca ÔøΩwiczyÔøΩ celnoÔøΩÔøΩ z deagl'a mp5 i innych broni\n Zadanie polega na zestrzeleniu jak najwiÔøΩkszej liczby manekinÔøΩw w czasie ustalonym przez prowadzÔøΩcego trening\n KaÔøΩdy celny strzaÔøΩ to 1 punkt\n ObowiÔøΩzuje zasada: 1 niecelny strzaÔøΩ = 1 punkt mniej\n (( aby sprawdziÔøΩ ile naboi ma agent uÔøΩyj /sb [ID]))", "Rozpocznij", "WyjdÔøΩ");//Strzelnica FBI ÔøΩrodek
 					}
 					case 1:
 					{
-					    new txt1[1024] = "DziÍki tej sprzelnicy na otwartym powietrzu moøna ÊwiczyÊ precyzyjne i dok≥adne strza≥y z m4,mp5 i rifle\n Cele sπ dwuczÍúciowe: sk≥adajπ siÍ z g≥owy i reszty cia≥a\n Zalecane sπ: 3 pkt za strza≥ w g≥owÍ i 1pkt za strza≥ w cel\n ";
-					    new txt2[512] = "W tym Êwiczeniu nie przewidziano ograniczeÒ czasowych\n, agent oddaje strza≥ tylko do jednego celu zuøywajπc max 3 naboje\n Zniszczenie budki w ktÛrej stoi cel skutkuje niezaliczeniem zadania";
+					    new txt1[1024] = "DziÔøΩki tej sprzelnicy na otwartym powietrzu moÔøΩna ÔøΩwiczyÔøΩ precyzyjne i dokÔøΩadne strzaÔøΩy z m4,mp5 i rifle\n Cele sÔøΩ dwuczÔøΩciowe: skÔøΩadajÔøΩ siÔøΩ z gÔøΩowy i reszty ciaÔøΩa\n Zalecane sÔøΩ: 3 pkt za strzaÔøΩ w gÔøΩowÔøΩ i 1pkt za strzaÔøΩ w cel\n ";
+					    new txt2[512] = "W tym ÔøΩwiczeniu nie przewidziano ograniczeÔøΩ czasowych\n, agent oddaje strzaÔøΩ tylko do jednego celu zuÔøΩywajÔøΩc max 3 naboje\n Zniszczenie budki w ktÔøΩrej stoi cel skutkuje niezaliczeniem zadania";
 					    strcat(txt1, txt2, sizeof(txt1));
 					    SetPlayerPos(playerid, 1703.9327392578,141.29598999023,30.903503417969);
 						TogglePlayerControllable(playerid, 0);
 						SetPlayerInterior(playerid, 0);
                         Wchodzenie(playerid);
-		                ShowPlayerDialogEx(playerid, 999, DIALOG_STYLE_MSGBOX, "Strzelnica terenowa FBI", txt1, "Rozpocznij", "Wyjdü");//sTRZELNICA TERENOWA
+		                ShowPlayerDialogEx(playerid, 999, DIALOG_STYLE_MSGBOX, "Strzelnica terenowa FBI", txt1, "Rozpocznij", "WyjdÔøΩ");//sTRZELNICA TERENOWA
 					}
 					case 2:
 					{
@@ -6587,23 +6587,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerInterior(playerid, 0);
 						GivePlayerWeapon(playerid, 46, 1);
                         Wchodzenie(playerid);
-		                ShowPlayerDialogEx(playerid, 999, DIALOG_STYLE_MSGBOX, "Wieøa spadochroniarska", "Naleøy odpowiednio przeprowadziÊ atak z powietrza\n Zadanie polega na wylπdowaniu na specjalnej tarczy, iloúc przyznawanych punktÛw jest zaleøna od precyzji lπdowania\n Dla zaawansowanych agentÛw przewidziano rÛwnieø trening p≥ywacki\n naleøy przep≥ynπÊ przez rurÍ znajdujπcπ sie pod wodπ i wyp≥ynπÊ na powierzchniÍ.", "Rozpocznij", "Wyjdü");//spadochrin wejúcie úrodek
+		                ShowPlayerDialogEx(playerid, 999, DIALOG_STYLE_MSGBOX, "WieÔøΩa spadochroniarska", "NaleÔøΩy odpowiednio przeprowadziÔøΩ atak z powietrza\n Zadanie polega na wylÔøΩdowaniu na specjalnej tarczy, iloÔøΩc przyznawanych punktÔøΩw jest zaleÔøΩna od precyzji lÔøΩdowania\n Dla zaawansowanych agentÔøΩw przewidziano rÔøΩwnieÔøΩ trening pÔøΩywacki\n naleÔøΩy przepÔøΩynÔøΩÔøΩ przez rurÔøΩ znajdujÔøΩcÔøΩ sie pod wodÔøΩ i wypÔøΩynÔøΩÔøΩ na powierzchniÔøΩ.", "Rozpocznij", "WyjdÔøΩ");//spadochrin wejÔøΩcie ÔøΩrodek
 					}
 					case 3:
 					{
-					    new txt1[1024] = "W opuszczonym domu przestÍpcy przetrzymujπ zak≥adnikÛw\n Zadanie polega na zlikwidowaniu wszytkich przestÍpcÛw (kobiety) bez øadnych strat w cywilach ( ludzie nieuzbrojeni i mÍøczyüni)\n Czas na wykonanie zadania to 1minuta\n Zuøycie naboi to max 40\n Prowadzπcy trening musi znajdowaÊ siÍ w pomieszczeniu aby po 1 minucie podliczyÊ wyniki agenta\n Na torze znajduje siÍ 17 zak≥adnikÛw i 17 bandytÛw";
-					    new txt2[512] = "\n Na torze znajdujπ sie rÛwnieø headshoty i zadanie na celnoúÊ\n Zaleca siÍ przyznawaÊ 1 pkt za przestÍpce -5pkt za zak≥adnika 2pkt za headshot oraz 5 pkt za manekina\n Czas powyøej 1:30sek oraz zuøycie wiÍcej niø 40 naboi skutkuje niezaliczeniem zadania";
+					    new txt1[1024] = "W opuszczonym domu przestÔøΩpcy przetrzymujÔøΩ zakÔøΩadnikÔøΩw\n Zadanie polega na zlikwidowaniu wszytkich przestÔøΩpcÔøΩw (kobiety) bez ÔøΩadnych strat w cywilach ( ludzie nieuzbrojeni i mÔøΩczyÔøΩni)\n Czas na wykonanie zadania to 1minuta\n ZuÔøΩycie naboi to max 40\n ProwadzÔøΩcy trening musi znajdowaÔøΩ siÔøΩ w pomieszczeniu aby po 1 minucie podliczyÔøΩ wyniki agenta\n Na torze znajduje siÔøΩ 17 zakÔøΩadnikÔøΩw i 17 bandytÔøΩw";
+					    new txt2[512] = "\n Na torze znajdujÔøΩ sie rÔøΩwnieÔøΩ headshoty i zadanie na celnoÔøΩÔøΩ\n Zaleca siÔøΩ przyznawaÔøΩ 1 pkt za przestÔøΩpce -5pkt za zakÔøΩadnika 2pkt za headshot oraz 5 pkt za manekina\n Czas powyÔøΩej 1:30sek oraz zuÔøΩycie wiÔøΩcej niÔøΩ 40 naboi skutkuje niezaliczeniem zadania";
 					    strcat(txt1, txt2, sizeof(txt1));
 					    SetPlayerPos(playerid, 2236.0786132813,-6891.2177734375,21.423152923584);
 						TogglePlayerControllable(playerid, 0);
 						SetPlayerInterior(playerid, 8);
                         Wchodzenie(playerid);
-		                ShowPlayerDialogEx(playerid, 999, DIALOG_STYLE_MSGBOX, "Szturm na dom", txt1, "Kontynuuj", "Wyjdü");
+		                ShowPlayerDialogEx(playerid, 999, DIALOG_STYLE_MSGBOX, "Szturm na dom", txt1, "Kontynuuj", "WyjdÔøΩ");
 					}
 				}
 		    }
 		}
-		if(dialogid == 60)//cofaczka zmian nickÛw
+		if(dialogid == 60)//cofaczka zmian nickÔøΩw
 		{
 		    if(response)
 		    {
@@ -6615,10 +6615,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if (kaska[playerid] >= 60000000)
 						{
 							PlayerInfo[playerid][pZmienilNick] ++;
-							format(string, sizeof(string), "%s[%d] cofnπ≥eú jednπ zmianÍ nicku. IloúÊ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid),PlayerInfo[playerid][pUID]);
+							format(string, sizeof(string), "%s[%d] cofnÔøΩÔøΩeÔøΩ jednÔøΩ zmianÔøΩ nicku. IloÔøΩÔøΩ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid),PlayerInfo[playerid][pUID]);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 60.000.000$");
-							Log(payLog, INFO, "%s cofnπ≥ sobie zmianÍ nicku za 60000000$", GetPlayerLogName(playerid));
+							Log(payLog, INFO, "%s cofnÔøΩÔøΩ sobie zmianÔøΩ nicku za 60000000$", GetPlayerLogName(playerid));
 							ZabierzKase(playerid, 60000000);
 						}
 						else
@@ -6630,10 +6630,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] >= 25000000 && PlayerInfo[playerid][pExp] >= 180)
 						{
-							format(string, sizeof(string), "%s cofnπ≥eú jednπ zmianÍ nicku. IloúÊ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
+							format(string, sizeof(string), "%s cofnÔøΩÔøΩeÔøΩ jednÔøΩ zmianÔøΩ nicku. IloÔøΩÔøΩ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktÛw respektu");
-							Log(payLog, INFO, "%s cofnπ≥ sobie zmianÍ nicku za 25000000$ i 180 punktÛw respektu", GetPlayerLogName(playerid));
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 25.000.000$ i 180 punktÔøΩw respektu");
+							Log(payLog, INFO, "%s cofnÔøΩÔøΩ sobie zmianÔøΩ nicku za 25000000$ i 180 punktÔøΩw respektu", GetPlayerLogName(playerid));
 							PlayerInfo[playerid][pZmienilNick] ++;
 							ZabierzKase(playerid, 25000000);
 							PlayerInfo[playerid][pExp] -=180;
@@ -6647,10 +6647,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    if (PlayerInfo[playerid][pExp] >= 340)
 						{
-							format(string, sizeof(string), "%s cofnπ≥eú jednπ zmianÍ nicku. IloúÊ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
+							format(string, sizeof(string), "%s cofnÔøΩÔøΩeÔøΩ jednÔøΩ zmianÔøΩ nicku. IloÔøΩÔøΩ wykorzystanych zmian zobaczysz w /stats.",GetNick(playerid));
 							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktÛw respektu");
-							Log(payLog, INFO, "%s cofnπ≥ sobie zmianÍ nicku za 340 punktÛw respektu", GetPlayerLogName(playerid));
+							SendClientMessage(playerid, COLOR_LIGHTBLUE, "Koszt: 340 punktÔøΩw respektu");
+							Log(payLog, INFO, "%s cofnÔøΩÔøΩ sobie zmianÔøΩ nicku za 340 punktÔøΩw respektu", GetPlayerLogName(playerid));
 							PlayerInfo[playerid][pZmienilNick] ++;
 							PlayerInfo[playerid][pExp] -=340;
 						}
@@ -6662,13 +6662,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					case 3:
 					{
 
-						SendClientMessage(playerid,COLOR_P@,"|_________________________OdjÍcie zmiany nicku_________________________|");
-						SendClientMessage(playerid,COLOR_WHITE,"Zmiana nicku to dobra rzecz. Jednak wszytko co dobre kiedyú siÍ koÒczy :c ");
-						SendClientMessage(playerid,COLOR_WHITE,"Dlatego umoøliwiliúmy wam zmiany nicku w dowolnym momencie po wykorzystaniu wszytkich 10 zmian");
-						SendClientMessage(playerid,COLOR_WHITE,"Kaøda z opcji jest odpowiednio wywaøona. Moøemy wybraÊ czy wolimy zyskaÊ zmianÍ czÍstπ grπ czy pieniÍdzmi.");
-						SendClientMessage(playerid,COLOR_WHITE,"Opcja jest dostÍpna tylko dla 3lvl KP poniewaø teorytycznie inni mogπ zwiÍkszyÊ limit zmian nickÛw.");
-						SendClientMessage(playerid,COLOR_WHITE,"Wybranie jednej z trzech opcji powoduje ODJ CIE jednej zmiany nicku.");
-						SendClientMessage(playerid,COLOR_WHITE,"Gdy zdobÍdziesz juø odjÍcie zmiany nie musisz od razu zmieniaÊ nicku od razu. Mozesz to zrobiÊ kiedy chcesz.");
+						SendClientMessage(playerid,COLOR_P@,"|_________________________OdjÔøΩcie zmiany nicku_________________________|");
+						SendClientMessage(playerid,COLOR_WHITE,"Zmiana nicku to dobra rzecz. Jednak wszytko co dobre kiedyÔøΩ siÔøΩ koÔøΩczy :c ");
+						SendClientMessage(playerid,COLOR_WHITE,"Dlatego umoÔøΩliwiliÔøΩmy wam zmiany nicku w dowolnym momencie po wykorzystaniu wszytkich 10 zmian");
+						SendClientMessage(playerid,COLOR_WHITE,"KaÔøΩda z opcji jest odpowiednio wywaÔøΩona. MoÔøΩemy wybraÔøΩ czy wolimy zyskaÔøΩ zmianÔøΩ czÔøΩstÔøΩ grÔøΩ czy pieniÔøΩdzmi.");
+						SendClientMessage(playerid,COLOR_WHITE,"Opcja jest dostÔøΩpna tylko dla 3lvl KP poniewaÔøΩ teorytycznie inni mogÔøΩ zwiÔøΩkszyÔøΩ limit zmian nickÔøΩw.");
+						SendClientMessage(playerid,COLOR_WHITE,"Wybranie jednej z trzech opcji powoduje ODJÔøΩCIE jednej zmiany nicku.");
+						SendClientMessage(playerid,COLOR_WHITE,"Gdy zdobÔøΩdziesz juÔøΩ odjÔøΩcie zmiany nie musisz od razu zmieniaÔøΩ nicku od razu. Mozesz to zrobiÔøΩ kiedy chcesz.");
 						SendClientMessage(playerid,COLOR_P@,"|________________________>>> Pomoc <<<________________________|");
 					}
 				}
@@ -6682,44 +6682,44 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0:
 					{
-						ShowPlayerDialogEx(playerid,61,DIALOG_STYLE_LIST,"Wykroczenia przeciwko porzπdkowi i bezpieczeÒstwu publicznemu","Art. 1. Uøywanie wulgaryzmÛw do: 5SD\nArt. 2. Namawianie do pope≥niania przestÍpstwa do: 10SD\nArt. 3. Ekshibicjonizm do 15SD\nArt. 4. Czynnoúci o char. seks. w miejscu pub.: do 20SD\nArt. 5. Nieuzasadnionie mierzenie z broni do ludzi: do 30SD + konfiskata broni\nArt. 6. Podszywanie siÍ pod s≥uøby porzπdkowe: od 25SD do 50SD","Cofnij","");
+						ShowPlayerDialogEx(playerid,61,DIALOG_STYLE_LIST,"Wykroczenia przeciwko porzÔøΩdkowi i bezpieczeÔøΩstwu publicznemu","Art. 1. UÔøΩywanie wulgaryzmÔøΩw do: 5SD\nArt. 2. Namawianie do popeÔøΩniania przestÔøΩpstwa do: 10SD\nArt. 3. Ekshibicjonizm do 15SD\nArt. 4. CzynnoÔøΩci o char. seks. w miejscu pub.: do 20SD\nArt. 5. Nieuzasadnionie mierzenie z broni do ludzi: do 30SD + konfiskata broni\nArt. 6. Podszywanie siÔøΩ pod sÔøΩuÔøΩby porzÔøΩdkowe: od 25SD do 50SD","Cofnij","");
 					}
 					case 1:
 					{
-						ShowPlayerDialogEx(playerid,62,DIALOG_STYLE_LIST,"Posiadanie nielegalnych przedmiotÛw","Art. 7. Posiadanie narkotykÛw: do 40SD + konfiskata narkotykÛw\nArt. 8. BroÒ bez licencji: 40SD + konfiskata broni\nAkt o BC BroÒ ciÍøka: od 30 do 50SD + konfiskata broni i licencji na broÒ\nKK Posiadanie materia≥Ûw: +1WL + konfiskata materia≥Ûw","Cofnij","");
+						ShowPlayerDialogEx(playerid,62,DIALOG_STYLE_LIST,"Posiadanie nielegalnych przedmiotÔøΩw","Art. 7. Posiadanie narkotykÔøΩw: do 40SD + konfiskata narkotykÔøΩw\nArt. 8. BroÔøΩ bez licencji: 40SD + konfiskata broni\nAkt o BC BroÔøΩ ciÔøΩka: od 30 do 50SD + konfiskata broni i licencji na broÔøΩ\nKK Posiadanie materiaÔøΩÔøΩw: +1WL + konfiskata materiaÔøΩÔøΩw","Cofnij","");
 					}
 					case 2:
 					{
-						ShowPlayerDialogEx(playerid,63,DIALOG_STYLE_LIST,"Wykroczenia przeciwko mieniu i zdrowiu","Art. 9. Udzia≥ w bÛjce: do 10SD\nArt. 10. Kradzieø pojazdu mechanicznego: do 15SD\nArt. 11. Niszczenie cudzego mienia: do 25SD\nArt. 12. Pobicie: od 10 SD do 30 SD","Cofnij","");
+						ShowPlayerDialogEx(playerid,63,DIALOG_STYLE_LIST,"Wykroczenia przeciwko mieniu i zdrowiu","Art. 9. UdziaÔøΩ w bÔøΩjce: do 10SD\nArt. 10. KradzieÔøΩ pojazdu mechanicznego: do 15SD\nArt. 11. Niszczenie cudzego mienia: do 25SD\nArt. 12. Pobicie: od 10 SD do 30 SD","Cofnij","");
 					}
 					case 3:
 					{
-						ShowPlayerDialogEx(playerid,64,DIALOG_STYLE_LIST,"Wykroczenia przeciwko godnoúci osobistej","Art. 13. Zniewaøenie osÛb trzecich: do 5SD\nArt. 14. Groüby karalne: do 10SD\nArt. 15. Obraza policjanta: do 15SD\nArt. 16. Hate crime: do 20SD","Cofnij","");
+						ShowPlayerDialogEx(playerid,64,DIALOG_STYLE_LIST,"Wykroczenia przeciwko godnoÔøΩci osobistej","Art. 13. ZniewaÔøΩenie osÔøΩb trzecich: do 5SD\nArt. 14. GroÔøΩby karalne: do 10SD\nArt. 15. Obraza policjanta: do 15SD\nArt. 16. Hate crime: do 20SD","Cofnij","");
 					}
 					case 4:
 					{
-						ShowPlayerDialogEx(playerid,65,DIALOG_STYLE_LIST,"Utrudnianie dzia≥aÒ policji","Art. 17. Brak dowodu osobistego lub licencji: 5SD za kaødy dokument\nArt. 18. Nieumyúlne utrudnienie poúcigu policyjnego: do 20SD\nArt. 19. Bierny opÛr (nie reagowanie na polecenia policjanta): do 35SD","Cofnij","");
+						ShowPlayerDialogEx(playerid,65,DIALOG_STYLE_LIST,"Utrudnianie dziaÔøΩaÔøΩ policji","Art. 17. Brak dowodu osobistego lub licencji: 5SD za kaÔøΩdy dokument\nArt. 18. NieumyÔøΩlne utrudnienie poÔøΩcigu policyjnego: do 20SD\nArt. 19. Bierny opÔøΩr (nie reagowanie na polecenia policjanta): do 35SD","Cofnij","");
 					}
 					case 5:
 					{
-						ShowPlayerDialogEx(playerid,66,DIALOG_STYLE_LIST,"Wykroczenia przeciwko bezpieczeÒstwu w ruchu drogowym","Art. 20. Brak w≥πczonych úwiate≥ w nocy: 5SD\nArt. 21. Jazda po chodniku: do 10SD\nArt. 22. PostÛj w miejscu do tego nieprzeznaczonym: do 10SD\nArt. 23. Spowodowanie innego zagroøenia w ruchu drogowym: do 20SD\nArt. 24. Spowodowanie wypadku: od 10SD do 20SD\nArt. 25. Prowadzenie pod wp≥ywem úrodkÛw odurzajπcych: 50SD\n\t\t + konfiskata prawa jazdy","Cofnij","");
+						ShowPlayerDialogEx(playerid,66,DIALOG_STYLE_LIST,"Wykroczenia przeciwko bezpieczeÔøΩstwu w ruchu drogowym","Art. 20. Brak wÔøΩÔøΩczonych ÔøΩwiateÔøΩ w nocy: 5SD\nArt. 21. Jazda po chodniku: do 10SD\nArt. 22. PostÔøΩj w miejscu do tego nieprzeznaczonym: do 10SD\nArt. 23. Spowodowanie innego zagroÔøΩenia w ruchu drogowym: do 20SD\nArt. 24. Spowodowanie wypadku: od 10SD do 20SD\nArt. 25. Prowadzenie pod wpÔøΩywem ÔøΩrodkÔøΩw odurzajÔøΩcych: 50SD\n\t\t + konfiskata prawa jazdy","Cofnij","");
 					}
 					case 6:
 					{
-						ShowPlayerDialogEx(playerid,67,DIALOG_STYLE_LIST,"Niew≥aúciwe korzystanie z drogi","Art. 26. Nieuzasadnione, d≥ugotrwa≥e przebywanie pieszego na drodze: do 5SD\nArt. 27. Z≥e parkowanie: od 5SD do 10SD\nArt. 28. Lπdowanie w miejscu do tego nieprzeznaczonym: 15SD\n\tArt. 28 par. 1. Powodujπce zagroøenie w ruchu drogowym: \n\t\tod 15SD do 30SD + konfiskata licencji pilota\nArt. 29. Posiadanie przyciemnionych szyb: 40SD + demontaø szyb","Cofnij","");
+						ShowPlayerDialogEx(playerid,67,DIALOG_STYLE_LIST,"NiewÔøΩaÔøΩciwe korzystanie z drogi","Art. 26. Nieuzasadnione, dÔøΩugotrwaÔøΩe przebywanie pieszego na drodze: do 5SD\nArt. 27. ZÔøΩe parkowanie: od 5SD do 10SD\nArt. 28. LÔøΩdowanie w miejscu do tego nieprzeznaczonym: 15SD\n\tArt. 28 par. 1. PowodujÔøΩce zagroÔøΩenie w ruchu drogowym: \n\t\tod 15SD do 30SD + konfiskata licencji pilota\nArt. 29. Posiadanie przyciemnionych szyb: 40SD + demontaÔøΩ szyb","Cofnij","");
 					}
 					case 7:
 					{
 						SendClientMessage(playerid,COLOR_P@,"|_________________________Pomoc prawna_________________________|");
-						SendClientMessage(playerid,COLOR_WHITE,"Stawka Dzienna (SD) - 10%% nadchodzπcej wyp≥atyStawka Dzienna (SD) - 10%% nadchodzπcej wyp≥aty. ");
-						SendClientMessage(playerid,COLOR_WHITE,"W niejszym zbiorze zamieszczono wszytkie przewinienia za ktÛre prawo przewiduje wrÍczenie mandatu.");
-						SendClientMessage(playerid,COLOR_WHITE,"Kary zosta≥y pogrupowane na VII dzia≥Ûw aby je zobaczyÊ naleøy kliknπc na wybrany dzia≥.");
-						SendClientMessage(playerid,COLOR_WHITE,"{3CB371}Wykr. przec. bezp. i porz. pub.{FFFFFF} - zawierπ g≥Ûwnie kary za ≥amanie zasad kultury i dobrego zachowania");
-						SendClientMessage(playerid,COLOR_WHITE,"{3CB371}Wykr. przec. bezp. w ruchu drogowym {FFFFFF}- znajdziecie tutaj kary za ciÍøkie przewinienia zwiπzane z kierowaniem pojazdami");
-						SendClientMessage(playerid,COLOR_WHITE,"{3CB371}Niew≥. korzystanie z drogi{FFFFFF} - tutaj znajdujπ kary lekkie przewinienia w RD oraz niedozwolone modyfikacje pojazdÛw.");
+						SendClientMessage(playerid,COLOR_WHITE,"Stawka Dzienna (SD) - 10%% nadchodzÔøΩcej wypÔøΩatyStawka Dzienna (SD) - 10%% nadchodzÔøΩcej wypÔøΩaty. ");
+						SendClientMessage(playerid,COLOR_WHITE,"W niejszym zbiorze zamieszczono wszytkie przewinienia za ktÔøΩre prawo przewiduje wrÔøΩczenie mandatu.");
+						SendClientMessage(playerid,COLOR_WHITE,"Kary zostaÔøΩy pogrupowane na VII dziaÔøΩÔøΩw aby je zobaczyÔøΩ naleÔøΩy kliknÔøΩc na wybrany dziaÔøΩ.");
+						SendClientMessage(playerid,COLOR_WHITE,"{3CB371}Wykr. przec. bezp. i porz. pub.{FFFFFF} - zawierÔøΩ gÔøΩÔøΩwnie kary za ÔøΩamanie zasad kultury i dobrego zachowania");
+						SendClientMessage(playerid,COLOR_WHITE,"{3CB371}Wykr. przec. bezp. w ruchu drogowym {FFFFFF}- znajdziecie tutaj kary za ciÔøΩkie przewinienia zwiÔøΩzane z kierowaniem pojazdami");
+						SendClientMessage(playerid,COLOR_WHITE,"{3CB371}NiewÔøΩ. korzystanie z drogi{FFFFFF} - tutaj znajdujÔøΩ kary lekkie przewinienia w RD oraz niedozwolone modyfikacje pojazdÔøΩw.");
 						SendClientMessage(playerid,COLOR_WHITE,"");
-						SendClientMessage(playerid,COLOR_WHITE,"{3CB371}PODPOWIEDè:{FFFFFF}  Zamiast podawaÊ pe≥nπ nazwÍ wykroczenia moøesz podaÊ numer artyku≥u");
-						SendClientMessage(playerid,COLOR_WHITE,"Przyk≥adowo: moøesz w powodzie napisaÊ: {CD5C5C}'art. 26KW'{FFFFFF} ZAMIAST 'nieuzasadnione, d≥ugotrwa≥e przebywanie pieszego na drodze'");
+						SendClientMessage(playerid,COLOR_WHITE,"{3CB371}PODPOWIEDÔøΩ:{FFFFFF}  Zamiast podawaÔøΩ peÔøΩnÔøΩ nazwÔøΩ wykroczenia moÔøΩesz podaÔøΩ numer artykuÔøΩu");
+						SendClientMessage(playerid,COLOR_WHITE,"PrzykÔøΩadowo: moÔøΩesz w powodzie napisaÔøΩ: {CD5C5C}'art. 26KW'{FFFFFF} ZAMIAST 'nieuzasadnione, dÔøΩugotrwaÔøΩe przebywanie pieszego na drodze'");
 						SendClientMessage(playerid,COLOR_P@,"|________________________>>> Kancelaria M&M <<<________________________|");
 					}
 				}
@@ -6729,10 +6729,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-				ShowPlayerDialogEx(playerid,68,DIALOG_STYLE_LIST,"Kodeks wykroczeÒ: wybierz dzia≥","Wykroczenia przeciwko porzπdkowi i bezpieczeÒstwu publicznemu\nPosiadanie nielegalnych przedmiotÛw\nWykroczenia przeciwko mieniu i zdrowiu\nWykroczenia przeciwko godnoúci osobistej\nUtrudnianie dzia≥aÒ policji\nWykroczenia przeciwko bezpieczeÒstwu w ruchu drogowym\nNiew≥aúciwe korzystanie z drogi\nInformacje","Wybierz","Wyjdü");
+				ShowPlayerDialogEx(playerid,68,DIALOG_STYLE_LIST,"Kodeks wykroczeÔøΩ: wybierz dziaÔøΩ","Wykroczenia przeciwko porzÔøΩdkowi i bezpieczeÔøΩstwu publicznemu\nPosiadanie nielegalnych przedmiotÔøΩw\nWykroczenia przeciwko mieniu i zdrowiu\nWykroczenia przeciwko godnoÔøΩci osobistej\nUtrudnianie dziaÔøΩaÔøΩ policji\nWykroczenia przeciwko bezpieczeÔøΩstwu w ruchu drogowym\nNiewÔøΩaÔøΩciwe korzystanie z drogi\nInformacje","Wybierz","WyjdÔøΩ");
 			}
 		}
-		if(dialogid == 323)//wybieralka wejúÊ SAN
+		if(dialogid == 323)//wybieralka wejÔøΩÔøΩ SAN
 		{
 		    if(response)
 		    {
@@ -6750,7 +6750,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Drukarnia jest zamkniÍta i biura SAN sπ zamkniÍte");
+			                SendClientMessage(playerid, COLOR_NEWS, "Drukarnia jest zamkniÔøΩta i biura SAN sÔøΩ zamkniÔøΩte");
 			            }
 					}
 					case 1:
@@ -6766,7 +6766,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Studio Victim jest zamkniÍte");
+			                SendClientMessage(playerid, COLOR_NEWS, "Studio Victim jest zamkniÔøΩte");
 			            }
 					}
 					case 2:
@@ -6783,7 +6783,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Studio G≥Ûwne jest zamkniÍte");
+			                SendClientMessage(playerid, COLOR_NEWS, "Studio GÔøΩÔøΩwne jest zamkniÔøΩte");
 			            }
 					}
 					case 3:
@@ -6799,7 +6799,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Studio NagraÒ jest zamkniÍte");
+			                SendClientMessage(playerid, COLOR_NEWS, "Studio NagraÔøΩ jest zamkniÔøΩte");
 			            }
 					}
 					case 4:
@@ -6814,7 +6814,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gabinet dyrektora jest zamkniÍty");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gabinet dyrektora jest zamkniÔøΩty");
 			            }
   					}
 					case 5:
@@ -6830,7 +6830,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 		    }
 		}
-		if(dialogid == 322)//zamykanie studiÛw SAN
+		if(dialogid == 322)//zamykanie studiÔøΩw SAN
 		{
 		    if(response)
 		    {
@@ -6841,7 +6841,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        if(drukarnia == 0)
 				        {
 				            drukarnia = 1;
-				            SendClientMessage(playerid, COLOR_NEWS, "Drukarnia zamkniÍta");
+				            SendClientMessage(playerid, COLOR_NEWS, "Drukarnia zamkniÔøΩta");
 				        }
 				        else
 				        {
@@ -6854,7 +6854,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        if(studiovic == 0)
 				        {
 				            studiovic = 1;
-				            SendClientMessage(playerid, COLOR_NEWS, "Studio Victim zamkniÍte");
+				            SendClientMessage(playerid, COLOR_NEWS, "Studio Victim zamkniÔøΩte");
 				        }
 				        else
 				        {
@@ -6867,12 +6867,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        if(studiog == 0)
 				        {
 				            studiog = 1;
-				            SendClientMessage(playerid, COLOR_NEWS, "Studio g≥Ûwne zamkniÍte");
+				            SendClientMessage(playerid, COLOR_NEWS, "Studio gÔøΩÔøΩwne zamkniÔøΩte");
 				        }
 				        else
 				        {
 				            studiog = 0;
-				            SendClientMessage(playerid, COLOR_NEWS, "Studio g≥Ûwne otwarte");
+				            SendClientMessage(playerid, COLOR_NEWS, "Studio gÔøΩÔøΩwne otwarte");
 				        }
 				    }
 				    case 3:
@@ -6880,12 +6880,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        if(studion == 0)
 				        {
 				            studion = 1;
-				            SendClientMessage(playerid, COLOR_NEWS, "Studio nagraÒ zamkniÍte");
+				            SendClientMessage(playerid, COLOR_NEWS, "Studio nagraÔøΩ zamkniÔøΩte");
 				        }
 				        else
 				        {
 				            studion = 0;
-				            SendClientMessage(playerid, COLOR_NEWS, "Studio nagraÒ otwarte");
+				            SendClientMessage(playerid, COLOR_NEWS, "Studio nagraÔøΩ otwarte");
 				        }
 				    }
 				    case 4:
@@ -6893,7 +6893,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        if(biurosan == 0)
 				        {
 				            biurosan = 1;
-				            SendClientMessage(playerid, COLOR_NEWS, "Gabinet red. naczelnego zamkniÍty");
+				            SendClientMessage(playerid, COLOR_NEWS, "Gabinet red. naczelnego zamkniÔøΩty");
 				        }
 				        else
 				        {
@@ -6908,11 +6908,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-		        ShowPlayerDialogEx(playerid, 71, DIALOG_STYLE_LIST, "Wybierz p≥eÊ", "MÍøczyzna\nKobieta", "Dalej", "Wstecz");
+		        ShowPlayerDialogEx(playerid, 71, DIALOG_STYLE_LIST, "Wybierz pÔøΩeÔøΩ", "MÔøΩczyzna\nKobieta", "Dalej", "Wstecz");
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 71, DIALOG_STYLE_LIST, "Wybierz p≥eÊ", "MÍøczyzna\nKobieta", "Dalej", "Wstecz");
+		        ShowPlayerDialogEx(playerid, 71, DIALOG_STYLE_LIST, "Wybierz pÔøΩeÔøΩ", "MÔøΩczyzna\nKobieta", "Dalej", "Wstecz");
 		    }
 		}
 		if(dialogid == 71)
@@ -6923,21 +6923,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    case 0://men
 				    {
-				        ShowPlayerDialogEx(playerid, 72, DIALOG_STYLE_LIST, "Wybierz pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");//Ameryka PÛ≥nocna\nAmeryka årodkowa\nAmeryka Po≥udniowa\nAfryka\nAustralia\nEuropa Wschodnia\nEuropa Zachodnia\nAzja
+				        ShowPlayerDialogEx(playerid, 72, DIALOG_STYLE_LIST, "Wybierz pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");//Ameryka PÔøΩnocna\nAmeryka ÔøΩrodkowa\nAmeryka PoÔøΩudniowa\nAfryka\nAustralia\nEuropa Wschodnia\nEuropa Zachodnia\nAzja
 	                    PlayerInfo[playerid][pSex] = 1;
-	                    SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÊ jest mÍøczyznπ.");
+	                    SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÔøΩ jest mÔøΩczyznÔøΩ.");
 					}
 				    case 1://baba
 				    {
-				        ShowPlayerDialogEx(playerid, 72, DIALOG_STYLE_LIST, "Wybierz pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");//Ameryka PÛ≥nocna\nAmeryka årodkowa\nAmeryka Po≥udniowa\nAfryka\nAustralia\nEuropa Wschodnia\nEuropa Zachodnia\nAzja
+				        ShowPlayerDialogEx(playerid, 72, DIALOG_STYLE_LIST, "Wybierz pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");//Ameryka PÔøΩnocna\nAmeryka ÔøΩrodkowa\nAmeryka PoÔøΩudniowa\nAfryka\nAustralia\nEuropa Wschodnia\nEuropa Zachodnia\nAzja
 	                    PlayerInfo[playerid][pSex] = 2;
-	                    SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÊ jest kobietπ.");
+	                    SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÔøΩ jest kobietÔøΩ.");
 					}
 				}
 			}
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeúli jesteú tu nowy, to przygotowaliúmy dla ciebie 2 poradniki\nZa chwilÍ bÍdziesz mÛg≥ je obejrzeÊ, lecz najpierw musisz opisaÊ postaÊ ktÛrπ bÍdziesz gra≥\nØyczymy mi≥ej gry.", "Dalej", "");
+		        ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeÔøΩli jesteÔøΩ tu nowy, to przygotowaliÔøΩmy dla ciebie 2 poradniki\nZa chwilÔøΩ bÔøΩdziesz mÔøΩgÔøΩ je obejrzeÔøΩ, lecz najpierw musisz opisaÔøΩ postaÔøΩ ktÔøΩrÔøΩ bÔøΩdziesz graÔøΩ\nÔøΩyczymy miÔøΩej gry.", "Dalej", "");
 		    }
 		}
 		if(dialogid == 72)
@@ -6949,16 +6949,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    case 0://usa
 				    {
 				        PlayerInfo[playerid][pOrigin] = 1;
-				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÊ jest teraz obywatelem USA.");
+				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÔøΩ jest teraz obywatelem USA.");
 				    }
 				    case 1://europa
 				    {
 				        PlayerInfo[playerid][pOrigin] = 2;
-				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÊ jest teraz Europejskim imigrantem.");
+				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÔøΩ jest teraz Europejskim imigrantem.");
 				    }
 				    case 2://azja
 				    {
-				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÊ jest teraz Azjatyckim imigrantem.");
+				        SendClientMessage(playerid, COLOR_NEWS, "Twoja postaÔøΩ jest teraz Azjatyckim imigrantem.");
 				        PlayerInfo[playerid][pOrigin] = 3;
 				    }
 				}
@@ -6966,7 +6966,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 71, DIALOG_STYLE_LIST, "P≥eÊ", "MÍøczyzna\nKobieta", "Dalej", "Wstecz");
+			    ShowPlayerDialogEx(playerid, 71, DIALOG_STYLE_LIST, "PÔøΩeÔøΩ", "MÔøΩczyzna\nKobieta", "Dalej", "Wstecz");
 			}
 		}
 		if(dialogid == 73)
@@ -6978,7 +6978,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                if(strval(inputtext) >= 16 && strval(inputtext) <= 140)
 	                {
 	                    PlayerInfo[playerid][pAge] = strval(inputtext);
-						ShowPlayerDialogEx(playerid, 74, DIALOG_STYLE_MSGBOX, "Samouczek", "To juø wszystkie dane jakie musia≥eú podaÊ. Teraz musisz przejúÊ samouczek.\nAby go rozpoczπÊ wciúnij 'dalej'", "Dalej", "Wstecz");
+						ShowPlayerDialogEx(playerid, 74, DIALOG_STYLE_MSGBOX, "Samouczek", "To juÔøΩ wszystkie dane jakie musiaÔøΩeÔøΩ podaÔøΩ. Teraz musisz przejÔøΩÔøΩ samouczek.\nAby go rozpoczÔøΩÔøΩ wciÔøΩnij 'dalej'", "Dalej", "Wstecz");
 	                }
 	                else
 	                {
@@ -6992,7 +6992,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 72, DIALOG_STYLE_LIST, "Pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");//Ameryka PÛ≥nocna\nAmeryka årodkowa\nAmeryka Po≥udniowa\nAfryka\nAustralia\nEuropa Wschodnia\nEuropa Zachodnia\nAzja
+		        ShowPlayerDialogEx(playerid, 72, DIALOG_STYLE_LIST, "Pochodzenie", "USA\nEuropa\nAzja", "Dalej", "Wstecz");//Ameryka PÔøΩnocna\nAmeryka ÔøΩrodkowa\nAmeryka PoÔøΩudniowa\nAfryka\nAustralia\nEuropa Wschodnia\nEuropa Zachodnia\nAzja
 		    }
 		}
 		if(dialogid == 74)
@@ -7005,13 +7005,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPlayerVirtualWorld(playerid, 0);
 				GUIExit[playerid] = 0;
 		   		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play serwer.");
-				SendClientMessage(playerid, COLOR_WHITE, "Nie jest to serwer Full-RP ale obowiπzujπ tu podstawowe zasady RP.");
-				SendClientMessage(playerid, COLOR_WHITE, "Jeúli ich nie znasz przybliøe ci najwaøniejszπ zasade.");
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Obowiπzuje absolutny zakaz DeathMatch`u(DM)");
+				SendClientMessage(playerid, COLOR_WHITE, "Nie jest to serwer Full-RP ale obowiÔøΩzujÔøΩ tu podstawowe zasady RP.");
+				SendClientMessage(playerid, COLOR_WHITE, "JeÔøΩli ich nie znasz przybliÔøΩe ci najwaÔøΩniejszÔøΩ zasade.");
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, "ObowiÔøΩzuje absolutny zakaz DeathMatch`u(DM)");
 				SendClientMessage(playerid, COLOR_WHITE, "Co to jest DM? To zabijanie graczy na serwerze bez konkretnego powodu.");
-				SendClientMessage(playerid, COLOR_WHITE, "Chodzi o to, øe w prawdziwym øyciu, nie zabija≥byú wszystkich dooko≥a.");
-				SendClientMessage(playerid, COLOR_WHITE, "WiÍc jeúli chcesz kogoú zabiÊ, musisz mieÊ waøny powÛd.");
-				SendClientMessage(playerid, COLOR_WHITE, "OK, znasz juø najwaøniejszπ zasadÍ, resztÍ poznasz pÛüniej.");
+				SendClientMessage(playerid, COLOR_WHITE, "Chodzi o to, ÔøΩe w prawdziwym ÔøΩyciu, nie zabijaÔøΩbyÔøΩ wszystkich dookoÔøΩa.");
+				SendClientMessage(playerid, COLOR_WHITE, "WiÔøΩc jeÔøΩli chcesz kogoÔøΩ zabiÔøΩ, musisz mieÔøΩ waÔøΩny powÔøΩd.");
+				SendClientMessage(playerid, COLOR_WHITE, "OK, znasz juÔøΩ najwaÔøΩniejszÔøΩ zasadÔøΩ, resztÔøΩ poznasz pÔøΩniej.");
 	   			TutTime[playerid] = 1;
 		    }
 		    if(!response)
@@ -7042,29 +7042,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 							else
 							{
-							    SendClientMessage(playerid,COLOR_GREY, "Ten dom jest kupiony, nie moøesz go oglπdaÊ, skontaktuj siÍ z w≥aúcicielem.");
+							    SendClientMessage(playerid,COLOR_GREY, "Ten dom jest kupiony, nie moÔøΩesz go oglÔøΩdaÔøΩ, skontaktuj siÔøΩ z wÔøΩaÔøΩcicielem.");
 							}
 						}
 					}
 				}
 				else
 				{
-				    SendClientMessage(playerid,COLOR_GREY, "Musisz odczekaÊ 3 minuty aby jeszcze raz obejrzeÊ dom.");
+				    SendClientMessage(playerid,COLOR_GREY, "Musisz odczekaÔøΩ 3 minuty aby jeszcze raz obejrzeÔøΩ dom.");
 				}
 		    }
 		}
-		if(dialogid == 85)//system domÛw
+		if(dialogid == 85)//system domÔøΩw
 		{
 		    if(response)
 		    {
-				ShowPlayerDialogEx(playerid, 86, DIALOG_STYLE_LIST, "Kupowanie domu - p≥atnoúÊ", "Zap≥aÊ gotÛwkπ\nZap≥aÊ przelewem z banku", "Wybierz", "Anuluj");
+				ShowPlayerDialogEx(playerid, 86, DIALOG_STYLE_LIST, "Kupowanie domu - pÔøΩatnoÔøΩÔøΩ", "ZapÔøΩaÔøΩ gotÔøΩwkÔøΩ\nZapÔøΩaÔøΩ przelewem z banku", "Wybierz", "Anuluj");
 		    }
 			else
 			{
 				SendClientMessage(playerid, COLOR_PANICRED, "(10) Anulowano.");
 			}
 		}
-		if(dialogid == 86)//system domÛw
+		if(dialogid == 86)//system domÔøΩw
 		{
 		    if(response)
 		    {
@@ -7085,7 +7085,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_PANICRED, "(9) Anulowano.");
 			}
 		}
-		if(dialogid == 87)//system domÛw
+		if(dialogid == 87)//system domÔøΩw
 		{
 		   	if(response)
 		    {
@@ -7093,7 +7093,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    else
 		    {
-		        SendClientMessage(playerid, COLOR_NEWS, "Anulowa≥eú z≥omowanie");
+		        SendClientMessage(playerid, COLOR_NEWS, "AnulowaÔøΩeÔøΩ zÔøΩomowanie");
 		    }
 		}
 		if(dialogid == 810)
@@ -7118,57 +7118,57 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new drzwi[30];
 						if(Dom[dom][hZamek] == 0)
 						{
-	                        drzwi = "ZamkniÍte";
+	                        drzwi = "ZamkniÔøΩte";
 						}
 						else
 						{
 	                        drzwi = "Otwarte";
 						}
-		                format(string2, sizeof(string2), "ID domu:\t%d\nID wnÍtrza:\t%d\nCena domu:\t%d$\nWynajem:\t%s\nIlosc pokoi:\t%d\nPokoi wynajmowanych\t%d\nCena wynajmu:\t%d$\nOúwietlenie:\t%d\nDrzwi:\t%s", dom, Dom[dom][hDomNr], Dom[dom][hCena], wynajem, Dom[dom][hPokoje], Dom[dom][hPW], Dom[dom][hCenaWynajmu], Dom[dom][hSwiatlo], drzwi);
-		                ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "G≥Ûwne informacje domu", string2, "WrÛÊ", "Wyjdü");
+		                format(string2, sizeof(string2), "ID domu:\t%d\nID wnÔøΩtrza:\t%d\nCena domu:\t%d$\nWynajem:\t%s\nIlosc pokoi:\t%d\nPokoi wynajmowanych\t%d\nCena wynajmu:\t%d$\nOÔøΩwietlenie:\t%d\nDrzwi:\t%s", dom, Dom[dom][hDomNr], Dom[dom][hCena], wynajem, Dom[dom][hPokoje], Dom[dom][hPW], Dom[dom][hCenaWynajmu], Dom[dom][hSwiatlo], drzwi);
+		                ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "GÔøΩÔøΩwne informacje domu", string2, "WrÔøΩÔøΩ", "WyjdÔøΩ");
 		            }
 		            case 1://Zamykanie domu
 		            {
 		                if(Dom[dom][hZamek] == 1 && AntySpam[playerid] == 1)
 		                {
-							ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Odczekaj 10 sekund zanim zamkniesz dom ponownie.", "WrÛÊ", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Odczekaj 10 sekund zanim zamkniesz dom ponownie.", "WrÔøΩÔøΩ", "WyjdÔøΩ");
 						}
 						else if(Dom[dom][hZamek] == 1)
 		                {
 		                    SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 	    					AntySpam[playerid] = 1;
 							Dom[dom][hZamek] = 0;
-							ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Dom zosta≥ zamkniÍty pomyúlnie", "WrÛÊ", "Wyjdü");
+							ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Dom zostaÔøΩ zamkniÔøΩty pomyÔøΩlnie", "WrÔøΩÔøΩ", "WyjdÔøΩ");
 						}
 						else if(Dom[dom][hZamek] == 0)
 						{
 						    Dom[dom][hZamek] = 1;
-		                	ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Otwieranie domu", "Dom zosta≥ otworzony pomyúlnie", "WrÛÊ", "Wyjdü");
+		                	ShowPlayerDialogEx(playerid, 811, DIALOG_STYLE_MSGBOX, "Otwieranie domu", "Dom zostaÔøΩ otworzony pomyÔøΩlnie", "WrÔøΩÔøΩ", "WyjdÔøΩ");
 						}
 					}
 		            case 2://Panel wynajmu
 		            {
-	                    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+	                    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 		            }
-		            case 3://Panel dodatkÛw
+		            case 3://Panel dodatkÔøΩw
 		            {
-		                ShowPlayerDialogEx(playerid, 1230, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 1230, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            }
-	             	case 4://Oúwietlenie
+	             	case 4://OÔøΩwietlenie
 		            {
-		                ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oúwietlenie", "Zachodzπce s≥oÒce (21:00)\nMrok (0:00)\nDzieÒ (12:00)\nW≥asny tryb (godzina)", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oÔøΩwietlenie", "ZachodzÔøΩce sÔøΩoÔøΩce (21:00)\nMrok (0:00)\nDzieÔøΩ (12:00)\nWÔøΩasny tryb (godzina)", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 5://Spawn
 		            {
-		                ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÔøΩÔøΩ");
 		            }
-		            case 6://Kupowanie dodatkÛw
+		            case 6://Kupowanie dodatkÔøΩw
 		            {
 						KupowanieDodatkow(playerid, dom);
 		            }
 		            case 7://Pomoc domu
 		            {
-		                ShowPlayerDialogEx(playerid, 1230, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 1230, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		        }
 		    }
@@ -7179,11 +7179,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 		    	{
-					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 				else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 				{
-	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 		    }
 		}
@@ -7193,11 +7193,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 		    	{
-					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 				else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 				{
-	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 		    }
 		}
@@ -7211,75 +7211,75 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-		            case 0:// Jasne ze swiat≥ami (21:00)
+		            case 0:// Jasne ze swiatÔøΩami (21:00)
 		            {
 		                Dom[PlayerInfo[playerid][pDom]][hSwiatlo] = 21;
 		                ZapiszDom(PlayerInfo[playerid][pDom]);
-		                SendClientMessage(playerid, COLOR_NEWS, "Oúwietlenie w domu zosta≥o zmienione");
+		                SendClientMessage(playerid, COLOR_NEWS, "OÔøΩwietlenie w domu zostaÔøΩo zmienione");
 		                if(IsPlayerInRangeOfPoint(playerid, 50.0, Dom[PlayerInfo[playerid][pDom]][hInt_X], Dom[PlayerInfo[playerid][pDom]][hInt_Y], Dom[PlayerInfo[playerid][pDom]][hInt_Z]))
 		                {
-		                	ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oúwietlenie", "Zachodzπce s≥oÒce (21:00)\nMrok (0:00)\nDzieÒ (12:00)\nW≥asny tryb (godzina)", "Wybierz", "WrÛÊ");
+		                	ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oÔøΩwietlenie", "ZachodzÔøΩce sÔøΩoÔøΩce (21:00)\nMrok (0:00)\nDzieÔøΩ (12:00)\nWÔøΩasny tryb (godzina)", "Wybierz", "WrÔøΩÔøΩ");
 		                	SetPlayerTime(playerid, 21, 0);
 		                }
 		                else
 		                {
 		                    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 						    {
-								ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+								ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 							}
 							else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 							{
-							    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 							}
 		                }
 		            }
-		            case 1:// åwiat≥a w≥πczone (0:00)
+		            case 1:// ÔøΩwiatÔøΩa wÔøΩÔøΩczone (0:00)
 		            {
 		                Dom[PlayerInfo[playerid][pDom]][hSwiatlo] = 0;
 		                ZapiszDom(PlayerInfo[playerid][pDom]);
-	                    SendClientMessage(playerid, COLOR_NEWS, "Oúwietlenie w domu zosta≥o zmienione");
+	                    SendClientMessage(playerid, COLOR_NEWS, "OÔøΩwietlenie w domu zostaÔøΩo zmienione");
 		                if(IsPlayerInRangeOfPoint(playerid, 50.0, Dom[PlayerInfo[playerid][pDom]][hInt_X], Dom[PlayerInfo[playerid][pDom]][hInt_Y], Dom[PlayerInfo[playerid][pDom]][hInt_Z]))
 		                {
-		                	ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oúwietlenie", "Zachodzπce s≥oÒce (21:00)\nMrok (0:00)\nDzieÒ (12:00)\nW≥asny tryb (godzina)", "Wybierz", "WrÛÊ");
+		                	ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oÔøΩwietlenie", "ZachodzÔøΩce sÔøΩoÔøΩce (21:00)\nMrok (0:00)\nDzieÔøΩ (12:00)\nWÔøΩasny tryb (godzina)", "Wybierz", "WrÔøΩÔøΩ");
 		                	SetPlayerTime(playerid, 0, 0);
 		                }
 		                else
 		                {
 		                    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 						    {
-								ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+								ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 							}
 							else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 							{
-							    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 							}
 		                }
 		            }
-		            case 2:// Wy≥πczone úwiat≥o, jasno (12:00)
+		            case 2:// WyÔøΩÔøΩczone ÔøΩwiatÔøΩo, jasno (12:00)
 		            {
 		                Dom[PlayerInfo[playerid][pDom]][hSwiatlo] = 12;
 		                ZapiszDom(PlayerInfo[playerid][pDom]);
-		                SendClientMessage(playerid, COLOR_NEWS, "Oúwietlenie w domu zosta≥o zmienione");
+		                SendClientMessage(playerid, COLOR_NEWS, "OÔøΩwietlenie w domu zostaÔøΩo zmienione");
 		                if(IsPlayerInRangeOfPoint(playerid, 50.0, Dom[PlayerInfo[playerid][pDom]][hInt_X], Dom[PlayerInfo[playerid][pDom]][hInt_Y], Dom[PlayerInfo[playerid][pDom]][hInt_Z]))
 		                {
-		                	ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oúwietlenie", "Zachodzπce s≥oÒce (21:00)\nMrok (0:00)\nDzieÒ (12:00)\nW≥asny tryb (godzina)", "Wybierz", "WrÛÊ");
+		                	ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oÔøΩwietlenie", "ZachodzÔøΩce sÔøΩoÔøΩce (21:00)\nMrok (0:00)\nDzieÔøΩ (12:00)\nWÔøΩasny tryb (godzina)", "Wybierz", "WrÔøΩÔøΩ");
 		                	SetPlayerTime(playerid, 12, 0);
 		                }
 		                else
 		                {
 		                    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 						    {
-								ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+								ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 							}
 							else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 							{
-							    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 							}
 		                }
 	             	}
-		            case 3: // W≥asna godzina
+		            case 3: // WÔøΩasna godzina
 		            {
-						ShowPlayerDialogEx(playerid, 813, DIALOG_STYLE_INPUT, "Oúwietlenie domu", "Wpisz na godzinÍ ma siÍ zmieniaÊ czas po wejsciu do domu.\nGodziny od 7-19 sπ jasne a od 20 do 6 ciemne ze úwiat≥ami", "Wpisz", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 813, DIALOG_STYLE_INPUT, "OÔøΩwietlenie domu", "Wpisz na godzinÔøΩ ma siÔøΩ zmieniaÔøΩ czas po wejsciu do domu.\nGodziny od 7-19 sÔøΩ jasne a od 20 do 6 ciemne ze ÔøΩwiatÔøΩami", "Wpisz", "WrÔøΩÔøΩ");
 		            }
 		        }
 		    }
@@ -7287,11 +7287,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 		    	{
-					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 				else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 				{
-	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 		    }
 		}
@@ -7303,36 +7303,36 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        new string[256];
 		        if(godz >= 0 && godz <= 24 || PlayerInfo[playerid][pAdmin] >= 100)
 		        {
-					format(string, sizeof(string), "Oúwietlenie domu zmienione na %d godzinÍ", godz);
+					format(string, sizeof(string), "OÔøΩwietlenie domu zmienione na %d godzinÔøΩ", godz);
 					SendClientMessage(playerid, COLOR_NEWS, string);
 					Dom[PlayerInfo[playerid][pDom]][hSwiatlo] = godz;
 		   			ZapiszDom(PlayerInfo[playerid][pDom]);
 		      		if(IsPlayerInRangeOfPoint(playerid, 50.0, Dom[PlayerInfo[playerid][pDom]][hInt_X], Dom[PlayerInfo[playerid][pDom]][hInt_Y], Dom[PlayerInfo[playerid][pDom]][hInt_Z]))
 		        	{
-		        		ShowPlayerDialogEx(playerid, 813, DIALOG_STYLE_INPUT, "Oúwietlenie domu", "Wpisz na godzinÍ ma siÍ zmieniaÊ czas po wejsciu do domu.\nGodziny od 7-19 sπ jasne a od 20 do 6 ciemne ze úwiat≥ami", "Wpisz", "WrÛÊ");
+		        		ShowPlayerDialogEx(playerid, 813, DIALOG_STYLE_INPUT, "OÔøΩwietlenie domu", "Wpisz na godzinÔøΩ ma siÔøΩ zmieniaÔøΩ czas po wejsciu do domu.\nGodziny od 7-19 sÔøΩ jasne a od 20 do 6 ciemne ze ÔøΩwiatÔøΩami", "Wpisz", "WrÔøΩÔøΩ");
 		         		SetPlayerTime(playerid, godz, 0);
 		          	}
 		           	else
 		            {
 		            	if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 				    	{
-							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
 						else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 						{
-		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
 		           	}
 				}
 				else
 				{
-	   				ShowPlayerDialogEx(playerid, 813, DIALOG_STYLE_INPUT, "Oúwietlenie domu", "Wpisz na godzinÍ ma siÍ zmieniaÊ czas po wejsciu do domu.\nGodziny od 7-19 sπ jasne a od 20 do 6 ciemne ze úwiat≥ami", "Wpisz", "WrÛÊ");
-	     			SendClientMessage(playerid, COLOR_NEWS, "Godzina oúwietlenia od 0 do 24");
+	   				ShowPlayerDialogEx(playerid, 813, DIALOG_STYLE_INPUT, "OÔøΩwietlenie domu", "Wpisz na godzinÔøΩ ma siÔøΩ zmieniaÔøΩ czas po wejsciu do domu.\nGodziny od 7-19 sÔøΩ jasne a od 20 do 6 ciemne ze ÔøΩwiatÔøΩami", "Wpisz", "WrÔøΩÔøΩ");
+	     			SendClientMessage(playerid, COLOR_NEWS, "Godzina oÔøΩwietlenia od 0 do 24");
 	      		}
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oúwietlenie", "Zachodzπce s≥oÒce (21:00)\nMrok (0:00)\nDzieÒ (12:00)\nW≥asny tryb (godzina)", "Wybierz", "WrÛÊ");
+		        ShowPlayerDialogEx(playerid, 812, DIALOG_STYLE_LIST, "Wybierz oÔøΩwietlenie", "ZachodzÔøΩce sÔøΩoÔøΩce (21:00)\nMrok (0:00)\nDzieÔøΩ (12:00)\nWÔøΩasny tryb (godzina)", "Wybierz", "WrÔøΩÔøΩ");
 		    }
 		}
 		if(dialogid == 814)
@@ -7344,44 +7344,44 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 0:// Normalny spawn
 		            {
 		                PlayerInfo[playerid][pSpawn] = 0;
-		                SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ na swoim normalnym spawnie");
+		                SendClientMessage(playerid, COLOR_NEWS, "BÔøΩdziesz siÔøΩ teraz spawnowaÔøΩ na swoim normalnym spawnie");
 		                if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	 					{
-							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
 						else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 						{
-						    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+						    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-		                //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
+		                //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 1:// Spawn przed domem
 		            {
 		                PlayerInfo[playerid][pSpawn] = 1;
-		                SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ przed domem");
+		                SendClientMessage(playerid, COLOR_NEWS, "BÔøΩdziesz siÔøΩ teraz spawnowaÔøΩ przed domem");
 		                if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 		    			{
-							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
 						else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 						{
-		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-		                //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
+		                //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 2:// Spawn w domu
 		            {
 	                    PlayerInfo[playerid][pSpawn] = 2;
-	                    SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ wewnπtrz domu");
+	                    SendClientMessage(playerid, COLOR_NEWS, "BÔøΩdziesz siÔøΩ teraz spawnowaÔøΩ wewnÔøΩtrz domu");
 	                    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	 					{
-							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
 						else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 						{
-		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-	                    //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
+	                    //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 				}
 			}
@@ -7389,11 +7389,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	   			{
-					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 				else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 				{
-	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 			}
 		}
@@ -7405,7 +7405,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        new string[256];
 		        switch(listitem)
 		        {
-		            case 0:// Informacje ogÛlne
+		            case 0:// Informacje ogÔøΩlne
 		            {
 	                    new wynajem[50];
 						if(Dom[dom][hWynajem] == 0)
@@ -7418,7 +7418,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else if(Dom[dom][hWynajem] == 2)
 						{
-	                        wynajem = "dla wybranych osÛb";
+	                        wynajem = "dla wybranych osÔøΩb";
 						}
 						else if(Dom[dom][hWynajem] == 3)
 						{
@@ -7439,27 +7439,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                            wynajem = "z warunkiem (konto premium)";
 	                        }
 						}
-		                format(string, sizeof(string), "Wynajem:\t%s\nCena wynajmu:\t%d$\nIloúÊ pokoi:\t%d\nPokoje wynajmowane:\t%d\nPokoi do wynajÍcia:\t%d", wynajem, Dom[dom][hCenaWynajmu], Dom[dom][hPokoje], Dom[dom][hPW], Dom[dom][hPDW]);
-		                ShowPlayerDialogEx(playerid, 816, DIALOG_STYLE_MSGBOX, "OgÛlne informacje o wynajmie", string, "WrÛÊ", "Wyjdü");
+		                format(string, sizeof(string), "Wynajem:\t%s\nCena wynajmu:\t%d$\nIloÔøΩÔøΩ pokoi:\t%d\nPokoje wynajmowane:\t%d\nPokoi do wynajÔøΩcia:\t%d", wynajem, Dom[dom][hCenaWynajmu], Dom[dom][hPokoje], Dom[dom][hPW], Dom[dom][hPDW]);
+		                ShowPlayerDialogEx(playerid, 816, DIALOG_STYLE_MSGBOX, "OgÔøΩlne informacje o wynajmie", string, "WrÔøΩÔøΩ", "WyjdÔøΩ");
 		            }
-		            case 1:// Zarzπdzaj lokatorami
+		            case 1:// ZarzÔøΩdzaj lokatorami
 		            {
 		                format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		                ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		            }
 		            case 2:// Tryb wynajmu
 		            {
-		                ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 3:// Cena wynajmu
 		            {
-		                ShowPlayerDialogEx(playerid, 824, DIALOG_STYLE_INPUT, "Cena wynajmu", "Wpisz, za ile grcze mogπ wynajπÊ u ciebie dom.\n(Cena do ustalenia tylko w przypadku wynajmowania dla wszystkich i wynajmu z warunkiem)", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 824, DIALOG_STYLE_INPUT, "Cena wynajmu", "Wpisz, za ile grcze mogÔøΩ wynajÔøΩÔøΩ u ciebie dom.\n(Cena do ustalenia tylko w przypadku wynajmowania dla wszystkich i wynajmu z warunkiem)", "Wybierz", "WrÔøΩÔøΩ");
 		            }
-		            case 4:// WiadomoúÊ dla wynajmujπcych
+		            case 4:// WiadomoÔøΩÔøΩ dla wynajmujÔøΩcych
 		            {
-		                ShowPlayerDialogEx(playerid, 825, DIALOG_STYLE_INPUT, "WiadomoúÊ dla lokatorÛw", "Tu moøesz ustaliÊ co bÍdzie siÍ wyúwietlaÊ osobπ ktÛre wynajmujπ twÛj dom.", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 825, DIALOG_STYLE_INPUT, "WiadomoÔøΩÔøΩ dla lokatorÔøΩw", "Tu moÔøΩesz ustaliÔøΩ co bÔøΩdzie siÔøΩ wyÔøΩwietlaÔøΩ osobÔøΩ ktÔøΩre wynajmujÔøΩ twÔøΩj dom.", "Wybierz", "WrÔøΩÔøΩ");
 		            }
-		            case 5:// Uprawnienia lokatorÛw
+		            case 5:// Uprawnienia lokatorÔøΩw
 		            {
 		                new taknie_z[10];
 		                new taknie_d[10];
@@ -7479,8 +7479,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                {
 		                    taknie_d = "nie";
 		                }
-		                format(string, sizeof(string), "Zamykanie i otwieranie drzwi:\t %s\nKorzystanie z dodatkÛw:\t %s", taknie_z, taknie_d);
-	                    ShowPlayerDialogEx(playerid, 8800, DIALOG_STYLE_LIST, "Uprawnienia lokatorÛw", string, "ZmieÒ", "WrÛÊ");
+		                format(string, sizeof(string), "Zamykanie i otwieranie drzwi:\t %s\nKorzystanie z dodatkÔøΩw:\t %s", taknie_z, taknie_d);
+	                    ShowPlayerDialogEx(playerid, 8800, DIALOG_STYLE_LIST, "Uprawnienia lokatorÔøΩw", string, "ZmieÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		            /*case 6:// Informacja o wynajmie
 		            {
@@ -7492,11 +7492,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	   			{
-					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 				else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 				{
-	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 			}
 		}
@@ -7506,11 +7506,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 	            if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	   			{
-					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 				else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 				{
-	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 			}
 		}
@@ -7526,119 +7526,119 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    {
 					case 0:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL1]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL1]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL1] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 1:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL2]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL2]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL2] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 2:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL3]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL3]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL3] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 3:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL4]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL4]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL4] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 4:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL5]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL5]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL5] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 5:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL6]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL6]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL6] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 6:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL7]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL7]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL7] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 7:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL8]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL8]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL8] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 8:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL9]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL9]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL9] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 					case 9:
 					{
-					    format(string, sizeof(string), "Gracz %d zosta≥ wyeksmitowany", Dom[dom][hL10]);
+					    format(string, sizeof(string), "Gracz %d zostaÔøΩ wyeksmitowany", Dom[dom][hL10]);
 					    SendClientMessage(playerid, 0xFFC0CB, string);
 					    new GeT[MAX_PLAYER_NAME];
 	           			format(GeT, sizeof(GeT), "Brak");
 						Dom[dom][hL10] = GeT;
 					    format(string, sizeof(string), "Lokator 1:\t%s\nLokator 2:\t%s\nLokator 3:\t%s\nLokator 4:\t%s\nLokator 5:\t%s\nLokator 6:\t%s\nLokator 7:\t%s\nLokator 8:\t%s\nLokator 9:\t%s\nLokator 10:\t%s\n", Dom[dom][hL1], Dom[dom][hL2], Dom[dom][hL3], Dom[dom][hL4], Dom[dom][hL5], Dom[dom][hL6], Dom[dom][hL7], Dom[dom][hL8], Dom[dom][hL9], Dom[dom][hL10]);
-		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "Zarzπdzanie lokatorami", string, "Eksmituj", "WrÛÊ");
+		       			ShowPlayerDialogEx(playerid, 817, DIALOG_STYLE_LIST, "ZarzÔøΩdzanie lokatorami", string, "Eksmituj", "WrÔøΩÔøΩ");
 		       			ZapiszDom(dom);
 					}
 				}
 			}
 		    if(!response)
 			{
-	  			ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+	  			ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			}
 		}
 		if(dialogid == 818)
@@ -7662,34 +7662,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Dom[dom][hL8] = GeT;
 						Dom[dom][hL9] = GeT;
 						Dom[dom][hL10] = GeT;
-					    SendClientMessage(playerid, COLOR_P@, "Nie wynajmujesz domu. Wszyscy wynajmujπcy zostali wyeksmitowani.");
+					    SendClientMessage(playerid, COLOR_P@, "Nie wynajmujesz domu. Wszyscy wynajmujÔøΩcy zostali wyeksmitowani.");
 					    Dom[dom][hWynajem] = 0;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÔøΩÔøΩ");
 		            }
-		            case 1:// Wynajem dla kaødego
+		            case 1:// Wynajem dla kaÔøΩdego
 		            {
-	                    SendClientMessage(playerid, COLOR_P@, "Teraz kaødy moøe wynajπÊ twÛj dom po wpisaniu komendy /wynajmuj pod drzwiami.");
+	                    SendClientMessage(playerid, COLOR_P@, "Teraz kaÔøΩdy moÔøΩe wynajÔøΩÔøΩ twÔøΩj dom po wpisaniu komendy /wynajmuj pod drzwiami.");
 					    Dom[dom][hWynajem] = 1;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÔøΩÔøΩ");
 		            }
-		            case 2:// LokatorÛw ustala w≥aúciciel
+		            case 2:// LokatorÔøΩw ustala wÔøΩaÔøΩciciel
 		            {
-					    SendClientMessage(playerid, COLOR_P@, "Teraz ty ustalasz kto ma wynajmowaÊ pokÛj komendπ /dajpokoj [id].");
+					    SendClientMessage(playerid, COLOR_P@, "Teraz ty ustalasz kto ma wynajmowaÔøΩ pokÔøΩj komendÔøΩ /dajpokoj [id].");
 					    Dom[dom][hWynajem] = 2;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÔøΩÔøΩ");
 		            }
-		            case 3:// Wynajem tylko jeøeli ktoú spe≥nia dany warunek
+		            case 3:// Wynajem tylko jeÔøΩeli ktoÔøΩ speÔøΩnia dany warunek
 		            {
-	                    ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+	                    ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "WyjdÔøΩ");
 		            }
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 819)
@@ -7701,25 +7701,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:// Warunek wynajmu: odpowiednia frakcja
 		            {
-		                ShowPlayerDialogEx(playerid, 820, DIALOG_STYLE_LIST, "Warunek wynajmu - frakcja", "Policja\nFBI\nWojsko\nSAM-ERS\nLa Cosa Nostra\nYakuza\nHitman Agency\nSA News\nTaxi Corporation\nUrzÍdnicy\nGrove Street\nPurpz\nLatin Kings", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 820, DIALOG_STYLE_LIST, "Warunek wynajmu - frakcja", "Policja\nFBI\nWojsko\nSAM-ERS\nLa Cosa Nostra\nYakuza\nHitman Agency\nSA News\nTaxi Corporation\nUrzÔøΩdnicy\nGrove Street\nPurpz\nLatin Kings", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 1:// Warunek wynajmu: odpowiednia rodzina
 		            {
-		                ShowPlayerDialogEx(playerid, 821, DIALOG_STYLE_LIST, "Warunek wynajmu - rodzina", "Rodzina 1\nRodzina 2\nRodzina 3\nRodzina 4\nRodzina 5\nRodzina 6\nRodzina 7\nRodzina 8\nRodzina 9\nRodzina 10\nRodzina 11\nRodzina 12\nRodzina 13\nRodzina 14\nRodzina 15\nRodzina 16\nRodzina 17\nRodzina 18\nRodzina 19\nRodzina 20\n", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 821, DIALOG_STYLE_LIST, "Warunek wynajmu - rodzina", "Rodzina 1\nRodzina 2\nRodzina 3\nRodzina 4\nRodzina 5\nRodzina 6\nRodzina 7\nRodzina 8\nRodzina 9\nRodzina 10\nRodzina 11\nRodzina 12\nRodzina 13\nRodzina 14\nRodzina 15\nRodzina 16\nRodzina 17\nRodzina 18\nRodzina 19\nRodzina 20\n", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 2:// Warunek wynajmu: odpowiednio wysoki level
 		            {
-		                ShowPlayerDialogEx(playerid, 822, DIALOG_STYLE_INPUT, "Warunek wynajmu - level", "Wpisz od jakiego levelu bÍdzie moøna wynajπÊ twÛj dom", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 822, DIALOG_STYLE_INPUT, "Warunek wynajmu - level", "Wpisz od jakiego levelu bÔøΩdzie moÔøΩna wynajÔøΩÔøΩ twÔøΩj dom", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 3:// Warunek wynajmu: odpowiednio wysoki level konta premium
 		            {
-		                ShowPlayerDialogEx(playerid, 823, DIALOG_STYLE_INPUT, "Warunek wynajmu - KP", "Wpisz od jakiego levelu Konta Premium bÍdzie moøna wynajπÊ twÛj dom", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 823, DIALOG_STYLE_INPUT, "Warunek wynajmu - KP", "Wpisz od jakiego levelu Konta Premium bÔøΩdzie moÔøΩna wynajÔøΩÔøΩ twÔøΩj dom", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+		        ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÔøΩÔøΩ");
 		    }
 		}
 		if(dialogid == 820)//warunek - frakcja
@@ -7731,126 +7731,126 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 			        case 0:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji LSPD bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji LSPD bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 1;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 1:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji FBI bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji FBI bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 2;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 2:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji NG bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji NG bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 3;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 3:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji SAM-ERS bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji SAM-ERS bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 4;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 4:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji LCN bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji LCN bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 5;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 5:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji YKZ bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji YKZ bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 6;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 6:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji HA bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji HA bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 8;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 7:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji SAN bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji SAN bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 9;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 8:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Taxi bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Taxi bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 10;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 9:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji DMV bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji DMV bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 11;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 10:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Grove bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Grove bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 12;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 11:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Purpz bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Purpz bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 13;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 12:
 			        {
-			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Latin Kings bÍdπ mogli wynajmowaÊ u ciebie dom.");
+			            SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z frakcji Latin Kings bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 1;
 			    		Dom[dom][hTWW] = 14;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 				}
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 821)//warunek - rodzina
@@ -7863,189 +7863,189 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 1 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 1 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 0;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 1:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 2 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 2 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 1;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 2:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 3 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 3 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 2;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 3:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 4 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 4 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 3;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 4:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 5 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 5 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 4;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 5:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 6 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 6 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 5;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 6:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 7 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 7 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 6;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 7:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 8 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 8 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 7;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 8:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 9 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 9 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 8;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 9:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 10 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 10 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 9;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 10:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 11 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 11 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 10;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 11:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 12 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 12 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 11;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 12:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 13 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 13 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 12;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 13:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 14 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 14 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 13;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 14:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 15 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 15 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 14;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 15:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 16 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 16 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 15;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 16:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 17 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 17 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 16;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 17:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 18 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 18 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 17;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 18:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 19 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 19 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 18;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 			        case 19:
 		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 20 bÍdπ mogli wynajmowaÊ u ciebie dom.");
+		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 20 bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.");
 			    		Dom[dom][hWynajem] = 3;
 			    		Dom[dom][hWW] = 2;
 			    		Dom[dom][hTWW] = 19;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 			        }
 		        }
 			}
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 822)
@@ -8056,23 +8056,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(strval(inputtext) >= 1 && strval(inputtext) <= 100)
 				{
 				    new string[256];
-				    format(string, sizeof(string), "Teraz tylko ludzie z levelem wiÍkszym lub rÛwnym %d bÍdπ mogli wynajmowaÊ u ciebie dom.", strval(inputtext));
+				    format(string, sizeof(string), "Teraz tylko ludzie z levelem wiÔøΩkszym lub rÔøΩwnym %d bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.", strval(inputtext));
 				    SendClientMessage(playerid, COLOR_P@, string);
 		    		Dom[dom][hWynajem] = 3;
 		    		Dom[dom][hWW] = 3;
 		    		Dom[dom][hTWW] = strval(inputtext);
 				    ZapiszDom(dom);
-				    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+				    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 				}
 				else
 				{
 				    SendClientMessage(playerid, COLOR_P@, "Level od 1 do 100.");
-				    ShowPlayerDialogEx(playerid, 822, DIALOG_STYLE_INPUT, "Warunek wynajmu - level", "Wpisz od jakiego levelu bÍdzie moøna wynajπÊ twÛj dom", "Wybierz", "WrÛÊ");
+				    ShowPlayerDialogEx(playerid, 822, DIALOG_STYLE_INPUT, "Warunek wynajmu - level", "Wpisz od jakiego levelu bÔøΩdzie moÔøΩna wynajÔøΩÔøΩ twÔøΩj dom", "Wybierz", "WrÔøΩÔøΩ");
 				}
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 	    if(dialogid == 823)
@@ -8083,23 +8083,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        new dom = PlayerInfo[playerid][pDom];
 				if(strval(inputtext) == 1 || strval(inputtext) == 2 || strval(inputtext) == 3)
 				{
-				    format(string, sizeof(string), "Teraz tylko ludzie z Kontem Premium wiÍkszym lub rÛwnym %d bÍdπ mogli wynajmowaÊ u ciebie dom.", strval(inputtext));
+				    format(string, sizeof(string), "Teraz tylko ludzie z Kontem Premium wiÔøΩkszym lub rÔøΩwnym %d bÔøΩdÔøΩ mogli wynajmowaÔøΩ u ciebie dom.", strval(inputtext));
 				    SendClientMessage(playerid, COLOR_P@, string);
 		    		Dom[dom][hWynajem] = 3;
 		    		Dom[dom][hWW] = 4;
 		    		Dom[dom][hTWW] = strval(inputtext);
 				    ZapiszDom(dom);
-				    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+				    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 				}
 				else
 				{
 				    SendClientMessage(playerid, COLOR_P@, "Level KP od 1 do 3.");
-				    ShowPlayerDialogEx(playerid, 823, DIALOG_STYLE_INPUT, "Warunek wynajmu - KP", "Wpisz od jakiego levelu Konta Premium bÍdzie moøna wynajπÊ twÛj dom", "Wybierz", "WrÛÊ");
+				    ShowPlayerDialogEx(playerid, 823, DIALOG_STYLE_INPUT, "Warunek wynajmu - KP", "Wpisz od jakiego levelu Konta Premium bÔøΩdzie moÔøΩna wynajÔøΩÔøΩ twÔøΩj dom", "Wybierz", "WrÔøΩÔøΩ");
 				}
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 824)
@@ -8114,18 +8114,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    ZapiszDom(dom);
 				    format(string, sizeof(string), "Cena wynajmu ustalona na %d$", strval(inputtext));
 				    SendClientMessage(playerid, COLOR_P@, string);
-				    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+				    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 				}
 				else
 				{
 				    format(string, sizeof(string), "Cena wynajmu od %d$ do 1000000$", (2500*IntInfo[Dom[dom][hDomNr]][Kategoria]));
 				    SendClientMessage(playerid, COLOR_P@, string);
-				    ShowPlayerDialogEx(playerid, 824, DIALOG_STYLE_INPUT, "Cena wynajmu", "Wpisz, za ile grcze mogπ wynajπÊ u ciebie dom.\n(Cena do ustalenia tylko w przypadku wynajmowania dla wszystkich i wynajmu z warunkiem)", "Wybierz", "WrÛÊ");
+				    ShowPlayerDialogEx(playerid, 824, DIALOG_STYLE_INPUT, "Cena wynajmu", "Wpisz, za ile grcze mogÔøΩ wynajÔøΩÔøΩ u ciebie dom.\n(Cena do ustalenia tylko w przypadku wynajmowania dla wszystkich i wynajmu z warunkiem)", "Wybierz", "WrÔøΩÔøΩ");
 				}
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 825)
@@ -8142,17 +8142,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    ZapiszDom(dom);
 				    SendClientMessage(playerid, COLOR_P@, "Komunikat wynajmu to teraz:");
 				    SendClientMessage(playerid, COLOR_WHITE, inputtext);
-		            ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+		            ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 		        }
 		        else
 		        {
-		            SendClientMessage(playerid, COLOR_P@, "WiadomoúÊ moøe zawieraÊ od 1 do 1000 znakÛw.");
-		            ShowPlayerDialogEx(playerid, 825, DIALOG_STYLE_LIST, "WiadomoúÊ dla lokatorÛw", "Tu moøesz ustaliÊ co bÍdzie siÍ wyúwietlaÊ osobπ ktÛre wynajmujπ twÛj dom.", "Wybierz", "WrÛÊ");
+		            SendClientMessage(playerid, COLOR_P@, "WiadomoÔøΩÔøΩ moÔøΩe zawieraÔøΩ od 1 do 1000 znakÔøΩw.");
+		            ShowPlayerDialogEx(playerid, 825, DIALOG_STYLE_LIST, "WiadomoÔøΩÔøΩ dla lokatorÔøΩw", "Tu moÔøΩesz ustaliÔøΩ co bÔøΩdzie siÔøΩ wyÔøΩwietlaÔøΩ osobÔøΩ ktÔøΩre wynajmujÔøΩ twÔøΩj dom.", "Wybierz", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 826)
@@ -8173,39 +8173,39 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        k = 100000*(Dom[dom][hSejf]+1);
 					        m = 5000*(Dom[dom][hSejf]+1);
 					        d = 2*(Dom[dom][hSejf]+1);
-					    	format(string, sizeof(string), "Sejf - pozwala przechowywaÊ gotÛwkÍ, materia≥y, marihuanÍ i heroinÍ w domu.\nKaødy nastÍpny poziom sejfu pozwala przechowywaÊ o 100 000$, 10 000 materia≥Ûw i 10 dragÛw obu typÛw wiÍcej\nKiedy sejf osiπgnie 10 poziom kaødy nastÍpny bÍdzie mia≥ moøliwoúÊ przechowywania o 1 000 000$, 100 000 materia≥Ûw i 20 dragÛw wiÍcej\n\nAby kupiÊ ten sejf musisz posiadaÊ %d$, %d materia≥Ûw, %dg Marihuany i %dg Heroiny", k, m, d, d);
+					    	format(string, sizeof(string), "Sejf - pozwala przechowywaÔøΩ gotÔøΩwkÔøΩ, materiaÔøΩy, marihuanÔøΩ i heroinÔøΩ w domu.\nKaÔøΩdy nastÔøΩpny poziom sejfu pozwala przechowywaÔøΩ o 100 000$, 10 000 materiaÔøΩÔøΩw i 10 dragÔøΩw obu typÔøΩw wiÔøΩcej\nKiedy sejf osiÔøΩgnie 10 poziom kaÔøΩdy nastÔøΩpny bÔøΩdzie miaÔøΩ moÔøΩliwoÔøΩÔøΩ przechowywania o 1 000 000$, 100 000 materiaÔøΩÔøΩw i 20 dragÔøΩw wiÔøΩcej\n\nAby kupiÔøΩ ten sejf musisz posiadaÔøΩ %d$, %d materiaÔøΩÔøΩw, %dg Marihuany i %dg Heroiny", k, m, d, d);
 						}
 						else
 						{
 						    k = 1000000*(Dom[dom][hSejf]+1);
 					        m = 5000*(Dom[dom][hSejf]+1);
 					        d = 2*(Dom[dom][hSejf]+1);
-							format(string, sizeof(string), "Sejf - pozwala przechowywaÊ gotÛwkÍ, materia≥y, marihuanÍ i heroinÍ w domu.\nKaødy nastÍpny poziom sejfu pozwala przechowywaÊ o 100 000$, 10 000 materia≥Ûw i 10 dragÛw obu typÛw wiÍcej\nKiedy sejf osiπgnie 10 poziom kaødy nastÍpny bÍdzie mia≥ moøliwoúÊ przechowywania o 1 000 000$, 100 000 materia≥Ûw i 20 dragÛw wiÍcej\n\nAby kupiÊ ten sejf musisz posiadaÊ %d$, %d materia≥Ûw, %dg Marihuany i %dg Heroiny", k, m, d, d);
+							format(string, sizeof(string), "Sejf - pozwala przechowywaÔøΩ gotÔøΩwkÔøΩ, materiaÔøΩy, marihuanÔøΩ i heroinÔøΩ w domu.\nKaÔøΩdy nastÔøΩpny poziom sejfu pozwala przechowywaÔøΩ o 100 000$, 10 000 materiaÔøΩÔøΩw i 10 dragÔøΩw obu typÔøΩw wiÔøΩcej\nKiedy sejf osiÔøΩgnie 10 poziom kaÔøΩdy nastÔøΩpny bÔøΩdzie miaÔøΩ moÔøΩliwoÔøΩÔøΩ przechowywania o 1 000 000$, 100 000 materiaÔøΩÔøΩw i 20 dragÔøΩw wiÔøΩcej\n\nAby kupiÔøΩ ten sejf musisz posiadaÔøΩ %d$, %d materiaÔøΩÔøΩw, %dg Marihuany i %dg Heroiny", k, m, d, d);
 						}
 						ShowPlayerDialogEx(playerid, 827, DIALOG_STYLE_MSGBOX, "Kupowanie sejfu", string, "KUP!", "Cofnij");
 					}
 					case 1://Zbrojownia
 					{
-					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					    /*if(Dom[dom][hZbrojownia] == 0)
 					    {
-					    	ShowPlayerDialogEx(playerid, 8281, DIALOG_STYLE_MSGBOX, "Kupowanie Zbrojowni", "Zbrojownia - pozwala przechowywaÊ broÒ w domu.\nNa poczπtku kupujesz pomnieszczenie zbrojowni, potem moøesz przystosowaÊ jπ do przechowywania rÛønych rodzajÛw broni, na co bÍdziesz musia≥ wydaÊ dodakowe pieniπdze.\nKoszt pomieszczenia zbrojowni to 1 000 000$, wymagane jest posiadanie licencji na broÒ. Po kupieniu bÍdziesz mÛg≥ przystosowywaÊ jπ do swoich potrzeb.", "KUP!", "Cofnij");
+					    	ShowPlayerDialogEx(playerid, 8281, DIALOG_STYLE_MSGBOX, "Kupowanie Zbrojowni", "Zbrojownia - pozwala przechowywaÔøΩ broÔøΩ w domu.\nNa poczÔøΩtku kupujesz pomnieszczenie zbrojowni, potem moÔøΩesz przystosowaÔøΩ jÔøΩ do przechowywania rÔøΩnych rodzajÔøΩw broni, na co bÔøΩdziesz musiaÔøΩ wydaÔøΩ dodakowe pieniÔøΩdze.\nKoszt pomieszczenia zbrojowni to 1 000 000$, wymagane jest posiadanie licencji na broÔøΩ. Po kupieniu bÔøΩdziesz mÔøΩgÔøΩ przystosowywaÔøΩ jÔøΩ do swoich potrzeb.", "KUP!", "Cofnij");
 						}
 						else if(Dom[dom][hZbrojownia] == 1)
 						{
 						    DialogZbrojowni(playerid);
 						}*/
 					}
-					case 2://Garaø
+					case 2://GaraÔøΩ
 					{
-                        ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest obecnie przebudowywana.\nPrzepraszamy za utrudnienia.", "WrÛÊ", "WrÛÊ");
-					    //ShowPlayerDialogEx(playerid, 829, DIALOG_STYLE_MSGBOX, "Kupowanie garaøu", "Garaø - dodajÍ nowy slot dziÍki ktÛremu moøesz posiadaÊ o 1 auto wiÍcej.\nAuto ze slotu garaøowego moøesz prakowaÊ tylko 20 metrÛw od domu, kaødy nastÍpny poziom kosztuje 500 000$ i zwiÍksza odleg≥oúÊ parkowania o 20 metrÛw.\nAby go kupiÊ potrzebujesz turbowÛzek.", "KUP!", "Cofnij");
+                        ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest obecnie przebudowywana.\nPrzepraszamy za utrudnienia.", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
+					    //ShowPlayerDialogEx(playerid, 829, DIALOG_STYLE_MSGBOX, "Kupowanie garaÔøΩu", "GaraÔøΩ - dodajÔøΩ nowy slot dziÔøΩki ktÔøΩremu moÔøΩesz posiadaÔøΩ o 1 auto wiÔøΩcej.\nAuto ze slotu garaÔøΩowego moÔøΩesz prakowaÔøΩ tylko 20 metrÔøΩw od domu, kaÔøΩdy nastÔøΩpny poziom kosztuje 500 000$ i zwiÔøΩksza odlegÔøΩoÔøΩÔøΩ parkowania o 20 metrÔøΩw.\nAby go kupiÔøΩ potrzebujesz turbowÔøΩzek.", "KUP!", "Cofnij");
 					}
 					case 3://Apteczka
 					{
 					    if(Dom[dom][hApteczka] == 0)
 					    {
-	       					format(string, sizeof(string), "Apteczka - pozwala leczyÊ siÍ w domu (przywraca 100 procent HP).\n\nAby jπ kupiÊ potrzebujesz 100 000$, piwo, 10g heroiny i 10g marihuany.");
+	       					format(string, sizeof(string), "Apteczka - pozwala leczyÔøΩ siÔøΩ w domu (przywraca 100 procent HP).\n\nAby jÔøΩ kupiÔøΩ potrzebujesz 100 000$, piwo, 10g heroiny i 10g marihuany.");
 	                        ShowPlayerDialogEx(playerid, 830, DIALOG_STYLE_MSGBOX, "Kupowanie Apteczki", string, "KUP!", "Cofnij");
 						}
 						else
@@ -8218,7 +8218,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 					    if(Dom[dom][hKami] < 9)
 					    {
-					        format(string, sizeof(string), "Pancerz - pozwala on za≥oøyÊ kamizelkÍ kuloodpornπ w domu.\nPierwszy poziom daje 10 procent pancerza a kaødy nastÍpny dodaje o 10 procent wiÍcej.\n\nAby go kupiÊ potrzebujesz %d$, wino Komandos, ApteczkÍ, 50 procent pancerza i M4.", 100000*(Dom[dom][hKami]+1));
+					        format(string, sizeof(string), "Pancerz - pozwala on zaÔøΩoÔøΩyÔøΩ kamizelkÔøΩ kuloodpornÔøΩ w domu.\nPierwszy poziom daje 10 procent pancerza a kaÔøΩdy nastÔøΩpny dodaje o 10 procent wiÔøΩcej.\n\nAby go kupiÔøΩ potrzebujesz %d$, wino Komandos, ApteczkÔøΩ, 50 procent pancerza i M4.", 100000*(Dom[dom][hKami]+1));
 	                        ShowPlayerDialogEx(playerid, 830, DIALOG_STYLE_MSGBOX, "Kupowanie Pancerza", string, "KUP!", "Cofnij");
 						}
 						else
@@ -8227,39 +8227,39 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        			KupowanieDodatkow(playerid, dom);
 						}
 					}
-					case 5://Lπdowisko
+					case 5://LÔøΩdowisko
 					{
-					    ShowPlayerDialogEx(playerid, 832, DIALOG_STYLE_MSGBOX, "Kupowanie lπdowiska", "Lπdowisko - pozwala parkowaÊ pojazd latajπcy nie tylko na lotnisku ale takøe przy swoim domu.\nPrzy 1 poziomie lπdowiska, ktÛry kosztuje 10 mln, pojazd latajπcy moøesz parkowaÊ 20 metrÛw od domu. Kaødy nastÍpny poziom kosztuje 1 000 000$ i zwiÍksza tπ wartoúÊ o kolejne 20 metrÛw.", "KUP!", "Cofnij");
+					    ShowPlayerDialogEx(playerid, 832, DIALOG_STYLE_MSGBOX, "Kupowanie lÔøΩdowiska", "LÔøΩdowisko - pozwala parkowaÔøΩ pojazd latajÔøΩcy nie tylko na lotnisku ale takÔøΩe przy swoim domu.\nPrzy 1 poziomie lÔøΩdowiska, ktÔøΩry kosztuje 10 mln, pojazd latajÔøΩcy moÔøΩesz parkowaÔøΩ 20 metrÔøΩw od domu. KaÔøΩdy nastÔøΩpny poziom kosztuje 1 000 000$ i zwiÔøΩksza tÔøΩ wartoÔøΩÔøΩ o kolejne 20 metrÔøΩw.", "KUP!", "Cofnij");
 					}
 					case 6://Alarm
 					{
-					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 					case 7://Zamek
 					{
-					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 					case 8://Komputer
 					{
-					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
-					case 9://SprzÍt RTV
+					case 9://SprzÔøΩt RTV
 					{
-					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 					case 10://Zestaw hazardzisty
 					{
 					    /*if(Dom[dom][hHazard] < 3)
 					    {
-					        //format(string, sizeof(string), "Zestaw hazardzisty - pozwala graÊ w rÛøne gry hazardowe niewychodzπc z domu.\nPierwszy poziom daje moøliwoúÊ grania w ko≥o fortuny, drugi w ruletkÍ a trzeci w oczko. Zuøywa on OMGXXXXWTF produktÛw domu.\n\nAby go kupiÊ potrzebujesz %d$", 100000*(Dom[dom][hKami]+1));
+					        //format(string, sizeof(string), "Zestaw hazardzisty - pozwala graÔøΩ w rÔøΩne gry hazardowe niewychodzÔøΩc z domu.\nPierwszy poziom daje moÔøΩliwoÔøΩÔøΩ grania w koÔøΩo fortuny, drugi w ruletkÔøΩ a trzeci w oczko. ZuÔøΩywa on OMGXXXXWTF produktÔøΩw domu.\n\nAby go kupiÔøΩ potrzebujesz %d$", 100000*(Dom[dom][hKami]+1));
 	                        //ShowPlayerDialogEx(playerid, 830, DIALOG_STYLE_MSGBOX, "Kupowanie Zestawu Hazardzisty", string, "KUP!", "Cofnij");
 					    }
 					    else
 					    {
-					        SendClientMessage(playerid, COLOR_P@, "Posiadasz wszystkie dodatki hazardowe (ko≥o fortuny, ruletka i blackjack)");
+					        SendClientMessage(playerid, COLOR_P@, "Posiadasz wszystkie dodatki hazardowe (koÔøΩo fortuny, ruletka i blackjack)");
 		        			KupowanieDodatkow(playerid, dom);
 					    }*/
-					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 					case 11://Szafa
 					{
@@ -8271,11 +8271,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					        SendClientMessage(playerid, COLOR_P@, "Posiadasz maksymalny level szafy (1)");
 		        			KupowanieDodatkow(playerid, dom);
 					    }*/
-					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 					case 12://Tajemnicze dodatki
 					{
-					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÛÊ", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 1231, DIALOG_STYLE_MSGBOX, "Zablokowane", "Ta opcja jest na razie w fazie produkcji", "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 		        }
 		    }
@@ -8283,11 +8283,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 		    	{
-					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÔøΩrz\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 				else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
 				{
-	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+	   				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÔøΩw\nOÔøΩwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 				}
 		    }
 		}
@@ -8314,13 +8314,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							//PlayerInfo[playerid][pZiolo] -= dragdrag;
 							PlayerInfo[playerid][pDrugs] -= dragdrag;
 							ZabierzKase(playerid, dmdm);
-							format(str3, sizeof(str3), "Kupi≥eú %d level Sejfu za %d$, %d dragÛw oraz %d matsÛw. Aby go uøyÊ wpisz /sejf.", Dom[dom][hSejf], dmdm, 4*Dom[dom][hSejf], matsmats);
+							format(str3, sizeof(str3), "KupiÔøΩeÔøΩ %d level Sejfu za %d$, %d dragÔøΩw oraz %d matsÔøΩw. Aby go uÔøΩyÔøΩ wpisz /sejf.", Dom[dom][hSejf], dmdm, 4*Dom[dom][hSejf], matsmats);
 							SendClientMessage(playerid, COLOR_P@, str3);
-							format(str3, sizeof(str3), "PojemnoúÊ sejfu: Kasa: %d$, Materia≥y: %d, Marihuana: %d, Heroina: %d", dmdm, matsmats*2, dragdrag*5, dragdrag*5);
+							format(str3, sizeof(str3), "PojemnoÔøΩÔøΩ sejfu: Kasa: %d$, MateriaÔøΩy: %d, Marihuana: %d, Heroina: %d", dmdm, matsmats*2, dragdrag*5, dragdrag*5);
 							SendClientMessage(playerid, COLOR_P@, str3);
 							Dom[dom][hSejf] ++;
 							KupowanieDodatkow(playerid, dom);
-							Log(payLog, INFO, "%s kupi≥ do domu %s sejf poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hSejf], dmdm);
+							Log(payLog, INFO, "%s kupiÔøΩ do domu %s sejf poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hSejf], dmdm);
 	       				}
 	       				else
 	       				{
@@ -8331,7 +8331,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else
 					{
-		  				format(str3, sizeof(str3), "Aby kupiÊ sejf o levelu %d musisz mieÊ %d materia≥Ûw, %dg Marihuany i %dg Heroiny", Dom[dom][hSejf]+1, 5000*(Dom[dom][hSejf]+1), 2*(Dom[dom][hSejf]+1), 2*(Dom[dom][hSejf]+1));
+		  				format(str3, sizeof(str3), "Aby kupiÔøΩ sejf o levelu %d musisz mieÔøΩ %d materiaÔøΩÔøΩw, %dg Marihuany i %dg Heroiny", Dom[dom][hSejf]+1, 5000*(Dom[dom][hSejf]+1), 2*(Dom[dom][hSejf]+1), 2*(Dom[dom][hSejf]+1));
 						SendClientMessage(playerid, COLOR_P@, str3);
 						KupowanieDodatkow(playerid, dom);
 					}
@@ -8349,13 +8349,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							//PlayerInfo[playerid][pZiolo] -= dragdrag;
 							PlayerInfo[playerid][pDrugs] -= dragdrag;
 							ZabierzKase(playerid, dmdm);
-							format(str3, sizeof(str3), "Kupi≥eú %d level Sejfu za %d$, %d dragÛw oraz %d matsÛw. Aby go uøyÊ wpisz /sejf.", Dom[dom][hSejf], 1000000*(Dom[dom][hSejf]-10), 4*Dom[dom][hSejf], 5000*Dom[dom][hSejf]);
+							format(str3, sizeof(str3), "KupiÔøΩeÔøΩ %d level Sejfu za %d$, %d dragÔøΩw oraz %d matsÔøΩw. Aby go uÔøΩyÔøΩ wpisz /sejf.", Dom[dom][hSejf], 1000000*(Dom[dom][hSejf]-10), 4*Dom[dom][hSejf], 5000*Dom[dom][hSejf]);
 							SendClientMessage(playerid, COLOR_P@, str3);
-							format(str3, sizeof(str3), "PojemnoúÊ sejfu: Kasa: %d$, Materia≥y: %d, Marihuana: %d, Heroina: %d", dmdm, 100000*((Dom[dom][hSejf]-10)+1), dragdrag*10, dragdrag*10);
+							format(str3, sizeof(str3), "PojemnoÔøΩÔøΩ sejfu: Kasa: %d$, MateriaÔøΩy: %d, Marihuana: %d, Heroina: %d", dmdm, 100000*((Dom[dom][hSejf]-10)+1), dragdrag*10, dragdrag*10);
 							SendClientMessage(playerid, COLOR_P@, str3);
 							Dom[dom][hSejf] ++;
 							KupowanieDodatkow(playerid, dom);
-							Log(payLog, INFO, "%s kupi≥ do domu %s sejf poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hSejf], dmdm);
+							Log(payLog, INFO, "%s kupiÔøΩ do domu %s sejf poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hSejf], dmdm);
 				        }
 				        else
 				        {
@@ -8366,7 +8366,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    			}
 					else
 					{
-			  			format(str3, sizeof(str3), "Aby kupiÊ sejf o levelu %d musisz mieÊ %d materia≥Ûw, %dg Marihuany i %dg Heroiny oraz %d LEVEL", Dom[dom][hSejf]+1, 5000*(Dom[dom][hSejf]+1), 2*(Dom[dom][hSejf]+1), 2*(Dom[dom][hSejf]+1), (Dom[dom][hSejf]+1));
+			  			format(str3, sizeof(str3), "Aby kupiÔøΩ sejf o levelu %d musisz mieÔøΩ %d materiaÔøΩÔøΩw, %dg Marihuany i %dg Heroiny oraz %d LEVEL", Dom[dom][hSejf]+1, 5000*(Dom[dom][hSejf]+1), 2*(Dom[dom][hSejf]+1), 2*(Dom[dom][hSejf]+1), (Dom[dom][hSejf]+1));
 						SendClientMessage(playerid, COLOR_P@, str3);
 						KupowanieDodatkow(playerid, dom);
 					}
@@ -8388,9 +8388,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
 			            Dom[dom][hZbrojownia] = 1;
 			            ZabierzKase(playerid, 1000000);
-			            SendClientMessage(playerid, COLOR_P@, "Gratulacje, kupi≥eú zbrojownie za 1 000 000$, skonfiguruj teraz co chcesz w niej przechowywaÊ! Aby jej uøyÊ wpisz /zbrojownia we wnÍtrzu swojego domu");
+			            SendClientMessage(playerid, COLOR_P@, "Gratulacje, kupiÔøΩeÔøΩ zbrojownie za 1 000 000$, skonfiguruj teraz co chcesz w niej przechowywaÔøΩ! Aby jej uÔøΩyÔøΩ wpisz /zbrojownia we wnÔøΩtrzu swojego domu");
 						DialogZbrojowni(playerid);
-						Log(payLog, INFO, "%s kupi≥ do domu %s zbrojownie za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom));
+						Log(payLog, INFO, "%s kupiÔøΩ do domu %s zbrojownie za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom));
 			        }
 			        else
 					{
@@ -8399,7 +8399,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				else
 				{
-				    SendClientMessage(playerid, COLOR_P@, "Aby kupiÊ zbrojownie musisz mieÊ pozowlenie na broÒ!");
+				    SendClientMessage(playerid, COLOR_P@, "Aby kupiÔøΩ zbrojownie musisz mieÔøΩ pozowlenie na broÔøΩ!");
 				}
 		    }
 		    if(!response)
@@ -8407,7 +8407,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            KupowanieDodatkow(playerid, dom);
 		    }
 		}
-		if(dialogid == 8282)//kupowanie ulepszeÒ zbrojowni
+		if(dialogid == 8282)//kupowanie ulepszeÔøΩ zbrojowni
 		{
 		    new dom = PlayerInfo[playerid][pDom];
 		    if(response)
@@ -8416,51 +8416,51 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0://Kastet ( 0 )
 		            {
-		            	ShowPlayerDialogEx(playerid, 8220, DIALOG_STYLE_MSGBOX, "Przystosowanie - Kastet", "Ten dodatek pozwala przechowywaÊ kastet w zbrojowni.\nCena przystosowania zbrojowni do przechowywania kastetu: 1 000$", "KUP!", "Cofnij");
+		            	ShowPlayerDialogEx(playerid, 8220, DIALOG_STYLE_MSGBOX, "Przystosowanie - Kastet", "Ten dodatek pozwala przechowywaÔøΩ kastet w zbrojowni.\nCena przystosowania zbrojowni do przechowywania kastetu: 1 000$", "KUP!", "Cofnij");
 		            }
 		            case 1://Spadochron ( 11 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8221, DIALOG_STYLE_MSGBOX, "Przystosowanie - Spadochron", "Ten dodatek pozwala przechowywaÊ spadochron w zbrojowni.\nCena przystosowania zbrojowni do przechowywania spadochronu: 5 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8221, DIALOG_STYLE_MSGBOX, "Przystosowanie - Spadochron", "Ten dodatek pozwala przechowywaÔøΩ spadochron w zbrojowni.\nCena przystosowania zbrojowni do przechowywania spadochronu: 5 000$", "KUP!", "Cofnij");
 		            }
-		            case 2://Sprej gaúnica i aparat ( 9 )
+		            case 2://Sprej gaÔøΩnica i aparat ( 9 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8222, DIALOG_STYLE_MSGBOX, "Przystosowanie - Sprej gaúnica i aparat", "Ten dodatek pozwala przechowywaÊ sprej gaúnicÍ i aparat w zbrojowni.\nCena przystosowania zbrojowni do przechowywania spreju gaúnicy i aparatu: 40 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8222, DIALOG_STYLE_MSGBOX, "Przystosowanie - Sprej gaÔøΩnica i aparat", "Ten dodatek pozwala przechowywaÔøΩ sprej gaÔøΩnicÔøΩ i aparat w zbrojowni.\nCena przystosowania zbrojowni do przechowywania spreju gaÔøΩnicy i aparatu: 40 000$", "KUP!", "Cofnij");
 		            }
 		            case 3://Wibratory kwiaty i laska ( 10 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8223, DIALOG_STYLE_MSGBOX, "Przystosowanie - Wibratory kwiaty i laska", "Ten dodatek pozwala przechowywaÊ wibratory kwiaty i laskÍ w zbrojowni.\nCena przystosowania zbrojowni do przechowywania wibratorÛw kwiatÛw i laski: 50 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8223, DIALOG_STYLE_MSGBOX, "Przystosowanie - Wibratory kwiaty i laska", "Ten dodatek pozwala przechowywaÔøΩ wibratory kwiaty i laskÔøΩ w zbrojowni.\nCena przystosowania zbrojowni do przechowywania wibratorÔøΩw kwiatÔøΩw i laski: 50 000$", "KUP!", "Cofnij");
 		            }
-		            case 4://BroÒ bia≥a ( 1 )
+		            case 4://BroÔøΩ biaÔøΩa ( 1 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8224, DIALOG_STYLE_MSGBOX, "Przystosowanie - BroÒ bia≥a", "Ten dodatek pozwala przechowywaÊ broÒ bia≥π w zbrojowni.\nCena przystosowania zbrojowni do przechowywania broni bia≥ej: 75 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8224, DIALOG_STYLE_MSGBOX, "Przystosowanie - BroÔøΩ biaÔøΩa", "Ten dodatek pozwala przechowywaÔøΩ broÔøΩ biaÔøΩÔøΩ w zbrojowni.\nCena przystosowania zbrojowni do przechowywania broni biaÔøΩej: 75 000$", "KUP!", "Cofnij");
 		            }
 		            case 5://Pistolety ( 2 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8225, DIALOG_STYLE_MSGBOX, "Przystosowanie - Pistolety", "Ten dodatek pozwala przechowywaÊ pistolety w zbrojowni.\nCena przystosowania zbrojowni do przechowywania pistoletÛw: 250 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8225, DIALOG_STYLE_MSGBOX, "Przystosowanie - Pistolety", "Ten dodatek pozwala przechowywaÔøΩ pistolety w zbrojowni.\nCena przystosowania zbrojowni do przechowywania pistoletÔøΩw: 250 000$", "KUP!", "Cofnij");
 		            }
 		            case 6://Strzelby ( 3 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8226, DIALOG_STYLE_MSGBOX, "Przystosowanie - Strzelby", "Ten dodatek pozwala przechowywaÊ strzelby w zbrojowni.\nCena przystosowania zbrojowni do przechowywania strzelb: 450 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8226, DIALOG_STYLE_MSGBOX, "Przystosowanie - Strzelby", "Ten dodatek pozwala przechowywaÔøΩ strzelby w zbrojowni.\nCena przystosowania zbrojowni do przechowywania strzelb: 450 000$", "KUP!", "Cofnij");
 		            }
 		            case 7://Pistolety maszynowe ( 4 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8227, DIALOG_STYLE_MSGBOX, "Przystosowanie - Pistolety maszynowe", "Ten dodatek pozwala przechowywaÊ pistolety maszynowe w zbrojowni.\nCena przystosowania zbrojowni do przechowywania pistoletÛw maszynowych: 550 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8227, DIALOG_STYLE_MSGBOX, "Przystosowanie - Pistolety maszynowe", "Ten dodatek pozwala przechowywaÔøΩ pistolety maszynowe w zbrojowni.\nCena przystosowania zbrojowni do przechowywania pistoletÔøΩw maszynowych: 550 000$", "KUP!", "Cofnij");
 		            }
 		            case 8://Karabiny szturmowe ( 5 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8228, DIALOG_STYLE_MSGBOX, "Przystosowanie - Karabiny szturmowe", "Ten dodatek pozwala przechowywaÊ Karabiny szturmowe w zbrojowni.\nCena przystosowania zbrojowni do przechowywania karabinÛw szturmowych: 850 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8228, DIALOG_STYLE_MSGBOX, "Przystosowanie - Karabiny szturmowe", "Ten dodatek pozwala przechowywaÔøΩ Karabiny szturmowe w zbrojowni.\nCena przystosowania zbrojowni do przechowywania karabinÔøΩw szturmowych: 850 000$", "KUP!", "Cofnij");
 		            }
 		            case 9://Snajperki ( 6 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8229, DIALOG_STYLE_MSGBOX, "Przystosowanie - Snajperki", "Ten dodatek pozwala przechowywaÊ snajperki w zbrojowni.\nCena przystosowania zbrojowni do przechowywania snajperek: 700 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8229, DIALOG_STYLE_MSGBOX, "Przystosowanie - Snajperki", "Ten dodatek pozwala przechowywaÔøΩ snajperki w zbrojowni.\nCena przystosowania zbrojowni do przechowywania snajperek: 700 000$", "KUP!", "Cofnij");
 		            }
-		            case 10://BroÒ ciÍøka ( 7 )
+		            case 10://BroÔøΩ ciÔøΩka ( 7 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8230, DIALOG_STYLE_MSGBOX, "Przystosowanie - BroÒ ciÍøka", "Ten dodatek pozwala przechowywaÊ BroÒ ciÍøkπ w zbrojowni.\nCena przystosowania zbrojowni do przechowywania broni ciÍøkiej: 2 000 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8230, DIALOG_STYLE_MSGBOX, "Przystosowanie - BroÔøΩ ciÔøΩka", "Ten dodatek pozwala przechowywaÔøΩ BroÔøΩ ciÔøΩkÔøΩ w zbrojowni.\nCena przystosowania zbrojowni do przechowywania broni ciÔøΩkiej: 2 000 000$", "KUP!", "Cofnij");
 		            }
-		            case 11://£adunki wybuchowe ( 8 )
+		            case 11://ÔøΩadunki wybuchowe ( 8 )
 		            {
-		                ShowPlayerDialogEx(playerid, 8231, DIALOG_STYLE_MSGBOX, "Przystosowanie - £adunki wybuchowe", "Ten dodatek pozwala przechowywaÊ ≥adunki wybuchowe w zbrojowni.\nCena przystosowania zbrojowni do przechowywania ≥adunkÛw wybuchowych: 4 000 000$", "KUP!", "Cofnij");
+		                ShowPlayerDialogEx(playerid, 8231, DIALOG_STYLE_MSGBOX, "Przystosowanie - ÔøΩadunki wybuchowe", "Ten dodatek pozwala przechowywaÔøΩ ÔøΩadunki wybuchowe w zbrojowni.\nCena przystosowania zbrojowni do przechowywania ÔøΩadunkÔøΩw wybuchowych: 4 000 000$", "KUP!", "Cofnij");
 		            }
 		        }
 		    }
@@ -8486,9 +8486,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pDrugs] -= 10;
 						PlayerInfo[playerid][pPiwo] --;
 						//Dom[dom][hMagazyn] --;
-						SendClientMessage(playerid, COLOR_P@, "Kupi≥eú ApteczkÍ za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej uøyÊ wpisz /apteczka");
+						SendClientMessage(playerid, COLOR_P@, "KupiÔøΩeÔøΩ ApteczkÔøΩ za 100 000$, piwo oraz 10g marihuany i heroiny. Aby jej uÔøΩyÔøΩ wpisz /apteczka");
 						KupowanieDodatkow(playerid, dom);
-						Log(payLog, INFO, "%s kupi≥ do domu %s apteczkÍ poziomu %d za 100000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hApteczka]);
+						Log(payLog, INFO, "%s kupiÔøΩ do domu %s apteczkÔøΩ poziomu %d za 100000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hApteczka]);
 					}
 					else
 					{
@@ -8498,7 +8498,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-					SendClientMessage(playerid, COLOR_P@, "Aby kupiÊ apteczkÍ potrzebujesz: 10g marihuany, 10g herioiny, Mrucznego Gula, brak choroby i 100 HP");
+					SendClientMessage(playerid, COLOR_P@, "Aby kupiÔøΩ apteczkÔøΩ potrzebujesz: 10g marihuany, 10g herioiny, Mrucznego Gula, brak choroby i 100 HP");
 			        KupowanieDodatkow(playerid, dom);
 			    }
 		    }
@@ -8524,10 +8524,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						Dom[dom][hKami] ++;
 						PlayerInfo[playerid][pWino] --;
 						//Dom[dom][hMagazyn] --;
-				    	format(str3, sizeof(str3), "Kupi≥eú %d level Pancerza za %d$ i wino. Aby jej uøyÊ wpisz /pancerz", Dom[dom][hKami], 100000*(Dom[dom][hKami]+1));
+				    	format(str3, sizeof(str3), "KupiÔøΩeÔøΩ %d level Pancerza za %d$ i wino. Aby jej uÔøΩyÔøΩ wpisz /pancerz", Dom[dom][hKami], 100000*(Dom[dom][hKami]+1));
 						SendClientMessage(playerid, COLOR_P@, str3);
 						KupowanieDodatkow(playerid, dom);
-						Log(payLog, INFO, "%s kupi≥ do domu %s pancerz poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hKami], dmdm);
+						Log(payLog, INFO, "%s kupiÔøΩ do domu %s pancerz poziomu %d za %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hKami], dmdm);
 					}
 					else
 					{
@@ -8539,7 +8539,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    }
 			    else
 			    {
-			      	SendClientMessage(playerid, COLOR_P@, "Aby kupiÊ pancerz potrzebujesz: Wino Komandos, 50 procent pancerza, ApteczkÍ, 3 skill ≥owcy nagrÛd i M4");
+			      	SendClientMessage(playerid, COLOR_P@, "Aby kupiÔøΩ pancerz potrzebujesz: Wino Komandos, 50 procent pancerza, ApteczkÔøΩ, 3 skill ÔøΩowcy nagrÔøΩd i M4");
 			      	KupowanieDodatkow(playerid, dom);
 			    }
 		    }
@@ -8548,7 +8548,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            KupowanieDodatkow(playerid, dom);
 		    }
 		}
-	    if(dialogid == 832)//kupowanie lπdowiska
+	    if(dialogid == 832)//kupowanie lÔøΩdowiska
 		{
 		    new dom = PlayerInfo[playerid][pDom];
 		    if(response)
@@ -8559,13 +8559,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 	{
                 	    ZabierzKase(playerid, 10000000);
 						Dom[dom][hLadowisko] = 20;
-						SendClientMessage(playerid, COLOR_P@, "Kupi≥eú Lπdowisko za 10 000 000$. Moøesz teraz parkowaÊ swÛj pojazd latajπcy 20 metrÛw od domu");
+						SendClientMessage(playerid, COLOR_P@, "KupiÔøΩeÔøΩ LÔøΩdowisko za 10 000 000$. MoÔøΩesz teraz parkowaÔøΩ swÔøΩj pojazd latajÔøΩcy 20 metrÔøΩw od domu");
 						KupowanieDodatkow(playerid, dom);
-						Log(payLog, INFO, "%s kupi≥ do domu %s lπdowisko poziomu %d za 10000000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hLadowisko]);
+						Log(payLog, INFO, "%s kupiÔøΩ do domu %s lÔøΩdowisko poziomu %d za 10000000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hLadowisko]);
                 	}
                 	else
                 	{
-                	    SendClientMessage(playerid, COLOR_P@, "Garaø kosztuje 10 000 000$ a ty tyle nie masz!");
+                	    SendClientMessage(playerid, COLOR_P@, "GaraÔøΩ kosztuje 10 000 000$ a ty tyle nie masz!");
 			       		KupowanieDodatkow(playerid, dom);
                 	}
                 }
@@ -8575,13 +8575,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 	{
                 	    ZabierzKase(playerid, 1000000);
 						Dom[dom][hLadowisko] += 20;
-						SendClientMessage(playerid, COLOR_P@, "Kupi≥eú ulepszenie lπdowiska za 1 000 000$. Moøesz teraz parkowaÊ swÛj pojazd latajπcy o 20 metrÛw wiÍcej niø poprzednio.");
+						SendClientMessage(playerid, COLOR_P@, "KupiÔøΩeÔøΩ ulepszenie lÔøΩdowiska za 1 000 000$. MoÔøΩesz teraz parkowaÔøΩ swÔøΩj pojazd latajÔøΩcy o 20 metrÔøΩw wiÔøΩcej niÔøΩ poprzednio.");
 						KupowanieDodatkow(playerid, dom);
-						Log(payLog, INFO, "%s kupi≥ do domu %s lπdowisko poziomu %d za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hLadowisko]);
+						Log(payLog, INFO, "%s kupiÔøΩ do domu %s lÔøΩdowisko poziomu %d za 1000000$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hLadowisko]);
                 	}
                 	else
                 	{
-                	    SendClientMessage(playerid, COLOR_P@, "Garaø kosztuje 1 000 000$ a ty tyle nie masz!");
+                	    SendClientMessage(playerid, COLOR_P@, "GaraÔøΩ kosztuje 1 000 000$ a ty tyle nie masz!");
 			       		KupowanieDodatkow(playerid, dom);
                 	}
                 }
@@ -8597,31 +8597,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-		            case 0://ZawartoúÊ sejfu
+		            case 0://ZawartoÔøΩÔøΩ sejfu
 		            {
 		                new zawartosc[256];
 	                 	new dom = PlayerInfo[playerid][pDomWKJ];
-		                format(zawartosc, sizeof(zawartosc), "ZawartoúÊ sejfu:\n\nGotÛwka:\t%d$\nMateria≥y:\t%d kg\nMarihuana:\t%d gram\nHeroina:\t%d gram", Dom[dom][hS_kasa], Dom[dom][hS_mats], Dom[dom][hS_ziolo], Dom[dom][hS_drugs]);
-		            	ShowPlayerDialogEx(playerid, 8001, DIALOG_STYLE_MSGBOX, "Sejf - zawartoúÊ", zawartosc, "Cofnij", "Wyjdü");
+		                format(zawartosc, sizeof(zawartosc), "ZawartoÔøΩÔøΩ sejfu:\n\nGotÔøΩwka:\t%d$\nMateriaÔøΩy:\t%d kg\nMarihuana:\t%d gram\nHeroina:\t%d gram", Dom[dom][hS_kasa], Dom[dom][hS_mats], Dom[dom][hS_ziolo], Dom[dom][hS_drugs]);
+		            	ShowPlayerDialogEx(playerid, 8001, DIALOG_STYLE_MSGBOX, "Sejf - zawartoÔøΩÔøΩ", zawartosc, "Cofnij", "WyjdÔøΩ");
 		            }
-		            case 1://W≥Ûø do sejfu
+		            case 1://WÔøΩÔøΩ do sejfu
 		            {
-	            		ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w≥Ûø", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
+	            		ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - wÔøΩÔøΩ", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 2://wyjmij z sejfu
 		            {
-		                ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 3://kod do sejfu
 		            {
 		                if(PlayerInfo[playerid][pDom] == PlayerInfo[playerid][pDomWKJ])
 		                {
-		                	ShowPlayerDialogEx(playerid, 8004, DIALOG_STYLE_INPUT, "Sejf - ustalanie kodu", "Wpisz kod do sejfu w okienko poniøej", "OK", "WrÛÊ");
+		                	ShowPlayerDialogEx(playerid, 8004, DIALOG_STYLE_INPUT, "Sejf - ustalanie kodu", "Wpisz kod do sejfu w okienko poniÔøΩej", "OK", "WrÔøΩÔøΩ");
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_P@, "Tylko dla w≥aúciciela");
-						    ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+						    SendClientMessage(playerid, COLOR_P@, "Tylko dla wÔøΩaÔøΩciciela");
+						    ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 						}
 					}
 		        }
@@ -8631,10 +8631,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
-		if(dialogid == 8002)//wk≥adanie
+		if(dialogid == 8002)//wkÔøΩadanie
 		{
 		    if(response)
 		    {
@@ -8642,26 +8642,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0://kasa
 		            {
-		                ShowPlayerDialogEx(playerid, 8005, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ gotÛwki chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8005, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ gotÔøΩwki chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		            case 1://matsy
 		            {
-		                ShowPlayerDialogEx(playerid, 8006, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ materia≥Ûw chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8006, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ materiaÔøΩÔøΩw chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		            case 2://marycha
 		            {
-		                ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ heroiny chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
-		                //ShowPlayerDialogEx(playerid, 8007, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ marihuany chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
+		                //ShowPlayerDialogEx(playerid, 8007, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ marihuany chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		            case 3://heroina
 		            {
-		                ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ heroiny chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8003)//wyjmowanie
@@ -8672,26 +8672,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            case 0://kasa
 		            {
-		                ShowPlayerDialogEx(playerid, 8009, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ gotÛwki chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8009, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ gotÔøΩwki chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		            }
 		            case 1://matsy
 		            {
-		                ShowPlayerDialogEx(playerid, 8010, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ materia≥Ûw chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8010, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ materiaÔøΩÔøΩw chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		            }
 		            case 2://marycha
 		            {
-		                ShowPlayerDialogEx(playerid, 8012, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ heroiny chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
-		                //ShowPlayerDialogEx(playerid, 8011, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ marihuany chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8012, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
+		                //ShowPlayerDialogEx(playerid, 8011, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ marihuany chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		            }
 		            case 3://heroina
 		            {
-		                ShowPlayerDialogEx(playerid, 8012, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ heroiny chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8012, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 					}
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8004)//kod do sejfu
@@ -8707,18 +8707,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					Dom[PlayerInfo[playerid][pDom]][hKodSejf] = kodplik;
 					ZapiszDom(PlayerInfo[playerid][pDom]);
 					format(kod, sizeof(kod), "Kod do sejfu to teraz: %s", inputtext);
-					ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 					ZapiszDom(PlayerInfo[playerid][pDom]);
 				}
 		        else
 		        {
-		            SendClientMessage(playerid, COLOR_P@, "Kod do sejfu od 4 do 10 znakÛw");
-		            ShowPlayerDialogEx(playerid, 8004, DIALOG_STYLE_INPUT, "Sejf - ustalanie kodu", "Kod twojego sejfu nie jest ustalony - musisz go ustaliÊ.\nAby to zrobiÊ wpisz nowy kod do okienka poniøej. (MIN 4 MAX 10 znakÛw)", "OK", "");
+		            SendClientMessage(playerid, COLOR_P@, "Kod do sejfu od 4 do 10 znakÔøΩw");
+		            ShowPlayerDialogEx(playerid, 8004, DIALOG_STYLE_INPUT, "Sejf - ustalanie kodu", "Kod twojego sejfu nie jest ustalony - musisz go ustaliÔøΩ.\nAby to zrobiÔøΩ wpisz nowy kod do okienka poniÔøΩej. (MIN 4 MAX 10 znakÔøΩw)", "OK", "");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8005)
@@ -8727,7 +8727,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(!strlen(inputtext))
 		        {
-	                ShowPlayerDialogEx(playerid, 8005, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ gotÛwki chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+	                ShowPlayerDialogEx(playerid, 8005, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ gotÔøΩwki chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            return 1;
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
@@ -8752,28 +8752,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						after = Dom[dom][hS_kasa];
 						dini_IntSet(string, "S_kasa", Dom[dom][hS_kasa]);
 			            ZabierzKase(playerid, strval(inputtext));
-			            format(string, sizeof(string), "W≥oøy≥eú do sejfu %d$, znajduje siÍ w nim teraz: %d$.", strval(inputtext), Dom[dom][hS_kasa]);
+			            format(string, sizeof(string), "WÔøΩoÔøΩyÔøΩeÔøΩ do sejfu %d$, znajduje siÔøΩ w nim teraz: %d$.", strval(inputtext), Dom[dom][hS_kasa]);
 			            SendClientMessage(playerid, COLOR_P@, string);
-			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w≥Ûø", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
+			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - wÔøΩÔøΩ", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w≥oøy≥ do sejfu w domu %s kwotÍ %d$. W sejfie przed: %d$, po: %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
+						Log(payLog, INFO, "%s wÔøΩoÔøΩyÔøΩ do sejfu w domu %s kwotÔøΩ %d$. W sejfie przed: %d$, po: %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext), before, after);
 					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_P@, "Nie staÊ ciÍ aby w≥oøyÊ tyle do sejfu");
-		            	ShowPlayerDialogEx(playerid, 8005, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ gotÛwki chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+					    SendClientMessage(playerid, COLOR_P@, "Nie staÔøΩ ciÔøΩ aby wÔøΩoÔøΩyÔøΩ tyle do sejfu");
+		            	ShowPlayerDialogEx(playerid, 8005, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ gotÔøΩwki chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 				}
 		        else
 		        {
-		            format(string, sizeof(string), "PojemnoúÊ sejfu to %d$. Nie moøesz w≥oøyÊ do niego %d$ gdyø jest juø w nim %d$. Maksymalna stawka jakπ moøesz teraz do niego w≥oøyÊ to %d$", maxwloz, strval(inputtext), Dom[dom][hS_kasa], wkladanie);
+		            format(string, sizeof(string), "PojemnoÔøΩÔøΩ sejfu to %d$. Nie moÔøΩesz wÔøΩoÔøΩyÔøΩ do niego %d$ gdyÔøΩ jest juÔøΩ w nim %d$. Maksymalna stawka jakÔøΩ moÔøΩesz teraz do niego wÔøΩoÔøΩyÔøΩ to %d$", maxwloz, strval(inputtext), Dom[dom][hS_kasa], wkladanie);
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8005, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ gotÛwki chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8005, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ gotÔøΩwki chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8006)
@@ -8782,7 +8782,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(!strlen(inputtext))
 		        {
-	                ShowPlayerDialogEx(playerid, 8006, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ materia≥Ûw chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+	                ShowPlayerDialogEx(playerid, 8006, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ materiaÔøΩÔøΩw chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            return 1;
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
@@ -8804,28 +8804,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            Dom[dom][hS_mats] += strval(inputtext);
 						dini_IntSet(string, "S_mats", Dom[dom][hS_mats]);
 			            PlayerInfo[playerid][pMats] -= strval(inputtext);
-			            format(string, sizeof(string), "W≥oøy≥eú do sejfu %d matsÛw, znajduje siÍ w nim teraz: %d matsÛw.", strval(inputtext), Dom[dom][hS_mats]);
+			            format(string, sizeof(string), "WÔøΩoÔøΩyÔøΩeÔøΩ do sejfu %d matsÔøΩw, znajduje siÔøΩ w nim teraz: %d matsÔøΩw.", strval(inputtext), Dom[dom][hS_mats]);
 			            SendClientMessage(playerid, COLOR_P@, string);
-			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w≥Ûø", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
+			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - wÔøΩÔøΩ", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w≥oøy≥ do sejfu w domu %s paczkÍ %d materia≥Ûw", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+						Log(payLog, INFO, "%s wÔøΩoÔøΩyÔøΩ do sejfu w domu %s paczkÔøΩ %d materiaÔøΩÔøΩw", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_P@, "Nie staÊ ciÍ aby w≥oøyÊ tyle do sejfu");
-		            	ShowPlayerDialogEx(playerid, 8006, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ materia≥Ûw chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+					    SendClientMessage(playerid, COLOR_P@, "Nie staÔøΩ ciÔøΩ aby wÔøΩoÔøΩyÔøΩ tyle do sejfu");
+		            	ShowPlayerDialogEx(playerid, 8006, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ materiaÔøΩÔøΩw chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 				}
 		        else
 		        {
-		            format(string, sizeof(string), "PojemnoúÊ sejfu to %d matsÛw. Nie moøesz w≥oøyÊ do niego %d matsÛw gdyø jest juø w nim %d matsÛw. Maksymalna iloúÊ jakπ moøesz teraz do niego w≥oøyÊ to %d matsÛw", maxwloz, strval(inputtext), Dom[dom][hS_mats], wkladanie);
+		            format(string, sizeof(string), "PojemnoÔøΩÔøΩ sejfu to %d matsÔøΩw. Nie moÔøΩesz wÔøΩoÔøΩyÔøΩ do niego %d matsÔøΩw gdyÔøΩ jest juÔøΩ w nim %d matsÔøΩw. Maksymalna iloÔøΩÔøΩ jakÔøΩ moÔøΩesz teraz do niego wÔøΩoÔøΩyÔøΩ to %d matsÔøΩw", maxwloz, strval(inputtext), Dom[dom][hS_mats], wkladanie);
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8006, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ materia≥Ûw chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8006, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ materiaÔøΩÔøΩw chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8008)
@@ -8834,7 +8834,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(!strlen(inputtext))
 		        {
-	                ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ heroiny chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+	                ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            return 1;
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
@@ -8855,28 +8855,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 			            Dom[dom][hS_drugs] += strval(inputtext);
 			            PlayerInfo[playerid][pDrugs] -= strval(inputtext);
-			            format(string, sizeof(string), "W≥oøy≥eú do sejfu %d dragÛw, znajduje siÍ w nim teraz: %d dragÛw.", strval(inputtext), Dom[dom][hS_drugs]);
+			            format(string, sizeof(string), "WÔøΩoÔøΩyÔøΩeÔøΩ do sejfu %d dragÔøΩw, znajduje siÔøΩ w nim teraz: %d dragÔøΩw.", strval(inputtext), Dom[dom][hS_drugs]);
 			            SendClientMessage(playerid, COLOR_P@, string);
-			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - w≥Ûø", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
+			            ShowPlayerDialogEx(playerid, 8002, DIALOG_STYLE_LIST, "Sejf - wÔøΩÔøΩ", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
 			            ZapiszDom(PlayerInfo[playerid][pDom]);
-						Log(payLog, INFO, "%s w≥oøy≥ do sejfu w domu %s paczkÍ %d narkotykÛw ", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+						Log(payLog, INFO, "%s wÔøΩoÔøΩyÔøΩ do sejfu w domu %s paczkÔøΩ %d narkotykÔøΩw ", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_P@, "Nie staÊ ciÍ aby w≥oøyÊ tyle do sejfu");
-		            	ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ heroiny chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+					    SendClientMessage(playerid, COLOR_P@, "Nie staÔøΩ ciÔøΩ aby wÔøΩoÔøΩyÔøΩ tyle do sejfu");
+		            	ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 					}
 				}
 		        else
 		        {
-		            format(string, sizeof(string), "PojemnoúÊ sejfu to %d dragÛw. Nie moøesz w≥oøyÊ do niego %d dragÛw gdyø jest juø w nim %d dragÛw. Maksymalna iloúÊ jakπ moøesz teraz do niego w≥oøyÊ to %d dragÛw", maxwloz, strval(inputtext), Dom[dom][hS_drugs], wkladanie);
+		            format(string, sizeof(string), "PojemnoÔøΩÔøΩ sejfu to %d dragÔøΩw. Nie moÔøΩesz wÔøΩoÔøΩyÔøΩ do niego %d dragÔøΩw gdyÔøΩ jest juÔøΩ w nim %d dragÔøΩw. Maksymalna iloÔøΩÔøΩ jakÔøΩ moÔøΩesz teraz do niego wÔøΩoÔøΩyÔøΩ to %d dragÔøΩw", maxwloz, strval(inputtext), Dom[dom][hS_drugs], wkladanie);
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wk≥adanie", "Wpisz jakπ iloúÊ heroiny chcesz w≥oøyÊ do sejfu", "W≥Ûø", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8008, DIALOG_STYLE_INPUT, "Sejf - wkÔøΩadanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wÔøΩoÔøΩyÔøΩ do sejfu", "WÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8009)
@@ -8885,7 +8885,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(!strlen(inputtext))
 		        {
-	                ShowPlayerDialogEx(playerid, 8009, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ gotÛwki chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+	                ShowPlayerDialogEx(playerid, 8009, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ gotÔøΩwki chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		            return 1;
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
@@ -8895,22 +8895,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            Dom[dom][hS_kasa] -= strval(inputtext);
 					dini_IntSet(string, "S_kasa", Dom[dom][hS_kasa]);
 		            DajKase(playerid, strval(inputtext));
-		            format(string, sizeof(string), "Wyjπ≥eú z sejfu %d$. Jest w nim teraz %d$.", strval(inputtext), Dom[dom][hS_kasa]);
+		            format(string, sizeof(string), "WyjÔøΩÔøΩeÔøΩ z sejfu %d$. Jest w nim teraz %d$.", strval(inputtext), Dom[dom][hS_kasa]);
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
-					Log(payLog, INFO, "%s wyjπ≥ z sejfu w domu %s kwotÍ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
+					Log(payLog, INFO, "%s wyjÔøΩÔøΩ z sejfu w domu %s kwotÔøΩ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 		        }
 		        else
 		        {
-		            format(string, sizeof(string), "Masz w sejfie %d$. Nie moøesz wyjπÊ z niego %d$.", Dom[dom][hS_kasa], strval(inputtext));
+		            format(string, sizeof(string), "Masz w sejfie %d$. Nie moÔøΩesz wyjÔøΩÔøΩ z niego %d$.", Dom[dom][hS_kasa], strval(inputtext));
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8009, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ gotÛwki chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8009, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ gotÔøΩwki chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		            ZapiszDom(PlayerInfo[playerid][pDom]);
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8010)
@@ -8919,7 +8919,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(!strlen(inputtext))
 		        {
-	                ShowPlayerDialogEx(playerid, 8010, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ materia≥Ûw chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+	                ShowPlayerDialogEx(playerid, 8010, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ materiaÔøΩÔøΩw chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		            return 1;
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
@@ -8929,22 +8929,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            Dom[dom][hS_mats] -= strval(inputtext);
 					dini_IntSet(string, "S_mats", Dom[dom][hS_mats]);
 		            PlayerInfo[playerid][pMats] += strval(inputtext);
-		            format(string, sizeof(string), "Wyjπ≥eú z sejfu %d materia≥Ûw. Jest w nim teraz %d materia≥Ûw.", strval(inputtext), Dom[dom][hS_mats]);
+		            format(string, sizeof(string), "WyjÔøΩÔøΩeÔøΩ z sejfu %d materiaÔøΩÔøΩw. Jest w nim teraz %d materiaÔøΩÔøΩw.", strval(inputtext), Dom[dom][hS_mats]);
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
 		            ZapiszDom(PlayerInfo[playerid][pDom]);
-					Log(payLog, INFO, "%s wyjπ≥ z sejfu w domu %s paczkÍ %d materia≥Ûw", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+					Log(payLog, INFO, "%s wyjÔøΩÔøΩ z sejfu w domu %s paczkÔøΩ %d materiaÔøΩÔøΩw", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 		        }
 		        else
 		        {
-		            format(string, sizeof(string), "Masz w sejfie %d materia≥Ûw. Nie moøesz wyjπÊ z niego %d materia≥Ûw.", Dom[dom][hS_mats], strval(inputtext));
+		            format(string, sizeof(string), "Masz w sejfie %d materiaÔøΩÔøΩw. Nie moÔøΩesz wyjÔøΩÔøΩ z niego %d materiaÔøΩÔøΩw.", Dom[dom][hS_mats], strval(inputtext));
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8010, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ materia≥Ûw chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8010, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ materiaÔøΩÔøΩw chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		/*if(dialogid == 8011)
@@ -8953,7 +8953,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(!strlen(inputtext))
 		        {
-	                ShowPlayerDialogEx(playerid, 8011, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ marihuany chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+	                ShowPlayerDialogEx(playerid, 8011, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ marihuany chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		            return 1;
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
@@ -8962,20 +8962,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            Dom[dom][hS_ziolo] -= strval(inputtext);
 		            PlayerInfo[playerid][pZiolo] += strval(inputtext);
-		            format(string, sizeof(string), "Wyjπ≥eú z sejfu %d zio≥a. Jest w nim teraz %d zio≥a.", strval(inputtext), Dom[dom][hS_ziolo]);
+		            format(string, sizeof(string), "WyjÔøΩÔøΩeÔøΩ z sejfu %d zioÔøΩa. Jest w nim teraz %d zioÔøΩa.", strval(inputtext), Dom[dom][hS_ziolo]);
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
 		        }
 		        else
 		        {
-		            format(string, sizeof(string), "Masz w sejfie %d zio≥a. Nie moøesz wyjπÊ z niego %d zio≥a.", Dom[dom][hS_ziolo], strval(inputtext));
+		            format(string, sizeof(string), "Masz w sejfie %d zioÔøΩa. Nie moÔøΩesz wyjÔøΩÔøΩ z niego %d zioÔøΩa.", Dom[dom][hS_ziolo], strval(inputtext));
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8011, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ marihuany chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8011, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ marihuany chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}*/
 		if(dialogid == 8012)
@@ -8984,7 +8984,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(!strlen(inputtext))
 		        {
-	                ShowPlayerDialogEx(playerid, 8012, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ heroiny chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+	                ShowPlayerDialogEx(playerid, 8012, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		            return 1;
 				}
 		        new dom = PlayerInfo[playerid][pDomWKJ];
@@ -8994,22 +8994,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            Dom[dom][hS_drugs] -= strval(inputtext);
 					dini_IntSet(string, "S_drugs", Dom[dom][hS_drugs]);
 		            PlayerInfo[playerid][pDrugs] += strval(inputtext);
-		            format(string, sizeof(string), "Wyjπ≥eú z sejfu %d dragÛw. Jest w nim teraz %d dragÛw.", strval(inputtext), Dom[dom][hS_drugs]);
+		            format(string, sizeof(string), "WyjÔøΩÔøΩeÔøΩ z sejfu %d dragÔøΩw. Jest w nim teraz %d dragÔøΩw.", strval(inputtext), Dom[dom][hS_drugs]);
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÛwkÍ\nMateria≥y\nMarihuane\nHeroine", "Wybierz", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8003, DIALOG_STYLE_LIST, "Sejf - wyjmij", "GotÔøΩwkÔøΩ\nMateriaÔøΩy\nMarihuane\nHeroine", "Wybierz", "WrÔøΩÔøΩ");
 		            ZapiszDom(PlayerInfo[playerid][pDom]);
-					Log(payLog, INFO, "%s wyjπ≥ z sejfu w domu %s paczkÍ %d narkotykÛw", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
+					Log(payLog, INFO, "%s wyjÔøΩÔøΩ z sejfu w domu %s paczkÔøΩ %d narkotykÔøΩw", GetPlayerLogName(playerid), GetHouseLogName(dom), strval(inputtext));
 		        }
 		        else
 		        {
-		            format(string, sizeof(string), "Masz w sejfie %d heroiny. Nie moøesz wyjπÊ z niego %d heroiny.", Dom[dom][hS_drugs], strval(inputtext));
+		            format(string, sizeof(string), "Masz w sejfie %d heroiny. Nie moÔøΩesz wyjÔøΩÔøΩ z niego %d heroiny.", Dom[dom][hS_drugs], strval(inputtext));
 		            SendClientMessage(playerid, COLOR_P@, string);
-		            ShowPlayerDialogEx(playerid, 8012, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakπ iloúÊ heroiny chcesz wyjπÊ z sejfu", "Wyjmij", "WrÛÊ");
+		            ShowPlayerDialogEx(playerid, 8012, DIALOG_STYLE_INPUT, "Sejf - wyjmowanie", "Wpisz jakÔøΩ iloÔøΩÔøΩ heroiny chcesz wyjÔøΩÔøΩ z sejfu", "Wyjmij", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu\nUstal kod sejfu", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8015)
@@ -9018,7 +9018,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(!strlen(inputtext))
 		        {
-	         		ShowPlayerDialogEx(playerid, 8015, DIALOG_STYLE_INPUT, "Sejf - wpisz kod", "Ten sejf jest zabezpieczony kodem. Aby siÍ do niego dostaÊ wpisz poprawny kod w okienko poniøej", "Zatwierdü", "Wyjdü");
+	         		ShowPlayerDialogEx(playerid, 8015, DIALOG_STYLE_INPUT, "Sejf - wpisz kod", "Ten sejf jest zabezpieczony kodem. Aby siÔøΩ do niego dostaÔøΩ wpisz poprawny kod w okienko poniÔøΩej", "ZatwierdÔøΩ", "WyjdÔøΩ");
 					return 1;
 				}
 				
@@ -9028,20 +9028,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(strcmp(kod, inputtext, true ) == 0)
 				{
 	                SendClientMessage(playerid, COLOR_GREEN, "KOD POPRAWNY!");
-	                ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoúÊ sejfu\nW≥Ûø do sejfu\nWyjmij z sejfu", "Wybierz", "Anuluj");
+	                ShowPlayerDialogEx(playerid, 8000, DIALOG_STYLE_LIST, "Sejf", "ZawartoÔøΩÔøΩ sejfu\nWÔøΩÔøΩ do sejfu\nWyjmij z sejfu", "Wybierz", "Anuluj");
 				}
 				else
 				{
-				    SendClientMessage(playerid, COLOR_PANICRED, "Z£Y KOD!");
+				    SendClientMessage(playerid, COLOR_PANICRED, "ZÔøΩY KOD!");
 				    AntyWlamSejf[playerid] ++;
 				    if(AntyWlamSejf[playerid] < 5)
 				    {
-				    	ShowPlayerDialogEx(playerid, 8015, DIALOG_STYLE_INPUT, "Sejf - wpisz kod", "Ten sejf jest zabezpieczony kodem. Aby siÍ do niego dostaÊ wpisz poprawny kod w okienko poniøej", "Zatwierdü", "Wyjdü");
+				    	ShowPlayerDialogEx(playerid, 8015, DIALOG_STYLE_INPUT, "Sejf - wpisz kod", "Ten sejf jest zabezpieczony kodem. Aby siÔøΩ do niego dostaÔøΩ wpisz poprawny kod w okienko poniÔøΩej", "ZatwierdÔøΩ", "WyjdÔøΩ");
 					}
 					else
 					{
 					    SetTimerEx("ZlyKodUn",300000,0,"d",playerid);
-					    SendClientMessage(playerid, COLOR_PANICRED, "Zbyt duøo nieudanych prÛb, sprÛbuj jeszcze raz za 5 minut!");
+					    SendClientMessage(playerid, COLOR_PANICRED, "Zbyt duÔøΩo nieudanych prÔøΩb, sprÔøΩbuj jeszcze raz za 5 minut!");
 					    return 1;
 					}
 				}
@@ -9058,12 +9058,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(Dom[dom][hUL_Z] == 1)
 		                {
-		                    SendClientMessage(playerid, COLOR_P@, "Teraz tylko ty bÍdziesz mÛg≥ otwieraÊ i zamykaÊ dom");
+		                    SendClientMessage(playerid, COLOR_P@, "Teraz tylko ty bÔøΩdziesz mÔøΩgÔøΩ otwieraÔøΩ i zamykaÔøΩ dom");
 		                    Dom[dom][hUL_Z] = 0;
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_P@, "Teraz wszyscy lokatorzy bÍdπ mogli otwieraÊ i zamykaÊ dom");
+		                    SendClientMessage(playerid, COLOR_P@, "Teraz wszyscy lokatorzy bÔøΩdÔøΩ mogli otwieraÔøΩ i zamykaÔøΩ dom");
 		                    Dom[dom][hUL_Z] = 1;
 		                }
 		                new string[256];
@@ -9085,19 +9085,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                {
 		                    taknie_d = "nie";
 		                }
-		                format(string, sizeof(string), "Zamykanie i otwieranie drzwi:\t %s\nKorzystanie z dodatkÛw:\t %s", taknie_z, taknie_d);
-	                    ShowPlayerDialogEx(playerid, 8800, DIALOG_STYLE_LIST, "Uprawnienia lokatorÛw", string, "ZmieÒ", "WrÛÊ");
+		                format(string, sizeof(string), "Zamykanie i otwieranie drzwi:\t %s\nKorzystanie z dodatkÔøΩw:\t %s", taknie_z, taknie_d);
+	                    ShowPlayerDialogEx(playerid, 8800, DIALOG_STYLE_LIST, "Uprawnienia lokatorÔøΩw", string, "ZmieÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		            case 1:
 		            {
 		                if(Dom[dom][hUL_D] == 1)
 		                {
-		                    SendClientMessage(playerid, COLOR_P@, "Teraz tylko ty bÍdziesz mÛg≥ korzystaÊ z dodatkÛw");
+		                    SendClientMessage(playerid, COLOR_P@, "Teraz tylko ty bÔøΩdziesz mÔøΩgÔøΩ korzystaÔøΩ z dodatkÔøΩw");
 		                    Dom[dom][hUL_D] = 0;
 		                }
 		                else
 		                {
-		                    SendClientMessage(playerid, COLOR_P@, "Teraz wszyscy lokatorzy bÍdπ mogli korzystaÊ z dodatkÛw");
+		                    SendClientMessage(playerid, COLOR_P@, "Teraz wszyscy lokatorzy bÔøΩdÔøΩ mogli korzystaÔøΩ z dodatkÔøΩw");
 		                    Dom[dom][hUL_D] = 1;
 		                }
 		                new string[256];
@@ -9119,14 +9119,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                {
 		                    taknie_d = "nie";
 		                }
-		                format(string, sizeof(string), "Zamykanie i otwieranie drzwi:\t %s\nKorzystanie z dodatkÛw:\t %s", taknie_z, taknie_d);
-	                    ShowPlayerDialogEx(playerid, 8800, DIALOG_STYLE_LIST, "Uprawnienia lokatorÛw", string, "ZmieÒ", "WrÛÊ");
+		                format(string, sizeof(string), "Zamykanie i otwieranie drzwi:\t %s\nKorzystanie z dodatkÔøΩw:\t %s", taknie_z, taknie_d);
+	                    ShowPlayerDialogEx(playerid, 8800, DIALOG_STYLE_LIST, "Uprawnienia lokatorÔøΩw", string, "ZmieÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÔøΩlne\nZarzÔøΩdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÔøΩw\nUprawnienia lokatorÔøΩw", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 8810)
@@ -9151,33 +9151,33 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new drzwi[30];
 						if(Dom[dom][hZamek] == 0)
 						{
-	                        drzwi = "ZamkniÍte";
+	                        drzwi = "ZamkniÔøΩte";
 						}
 						else
 						{
 	                        drzwi = "Otwarte";
 						}
-		                format(string2, sizeof(string2), "ID domu:\t%d\nID wnÍtrza:\t%d\nCena domu:\t%d$\nWynajem:\t%s\nIlosc pokoi:\t%d\nPokoi wynajmowanych\t%d\nCena wynajmu:\t%d$\nOúwietlenie:\t%d\nDrzwi:\t%s", dom, Dom[dom][hDomNr], Dom[dom][hCena], wynajem, Dom[dom][hPokoje], Dom[dom][hPW], Dom[dom][hCenaWynajmu], Dom[dom][hSwiatlo], drzwi);
-		                ShowPlayerDialogEx(playerid, 8811, DIALOG_STYLE_MSGBOX, "G≥Ûwne informacje domu", string2, "WrÛÊ", "Wyjdü");
+		                format(string2, sizeof(string2), "ID domu:\t%d\nID wnÔøΩtrza:\t%d\nCena domu:\t%d$\nWynajem:\t%s\nIlosc pokoi:\t%d\nPokoi wynajmowanych\t%d\nCena wynajmu:\t%d$\nOÔøΩwietlenie:\t%d\nDrzwi:\t%s", dom, Dom[dom][hDomNr], Dom[dom][hCena], wynajem, Dom[dom][hPokoje], Dom[dom][hPW], Dom[dom][hCenaWynajmu], Dom[dom][hSwiatlo], drzwi);
+		                ShowPlayerDialogEx(playerid, 8811, DIALOG_STYLE_MSGBOX, "GÔøΩÔøΩwne informacje domu", string2, "WrÔøΩÔøΩ", "WyjdÔøΩ");
 		            }
-		            case 1://Zamknij/OtwÛrz
+		            case 1://Zamknij/OtwÔøΩrz
 		            {
 		                if(Dom[dom][hUL_Z] == 1)
 		                {
 			                if(Dom[dom][hZamek] == 1)
 			                {
 								Dom[dom][hZamek] = 0;
-								ShowPlayerDialogEx(playerid, 8811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Dom zosta≥ zamkniÍty pomyúlnie", "WrÛÊ", "Wyjdü");
+								ShowPlayerDialogEx(playerid, 8811, DIALOG_STYLE_MSGBOX, "Zamykanie domu", "Dom zostaÔøΩ zamkniÔøΩty pomyÔøΩlnie", "WrÔøΩÔøΩ", "WyjdÔøΩ");
 							}
 							else if(Dom[dom][hZamek] == 0)
 							{
 							    Dom[dom][hZamek] = 1;
-			                	ShowPlayerDialogEx(playerid, 8811, DIALOG_STYLE_MSGBOX, "Otwieranie domu", "Dom zosta≥ otworzony pomyúlnie", "WrÛÊ", "Wyjdü");
+			                	ShowPlayerDialogEx(playerid, 8811, DIALOG_STYLE_MSGBOX, "Otwieranie domu", "Dom zostaÔøΩ otworzony pomyÔøΩlnie", "WrÔøΩÔøΩ", "WyjdÔøΩ");
 							}
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_P@, "W≥aúcicel domu ustali≥, øe nie moøesz zamykaÊ ani otwieraÊ domu.");
+						    SendClientMessage(playerid, COLOR_P@, "WÔøΩaÔøΩcicel domu ustaliÔøΩ, ÔøΩe nie moÔøΩesz zamykaÔøΩ ani otwieraÔøΩ domu.");
 		                	if(Dom[PlayerInfo[playerid][pWynajem]][hZamek] == 0)
 					    	{
 								ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nZamknij\nSpawn\nPomoc", "Wybierz", "Anuluj");
@@ -9190,11 +9190,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 2://Spawn
 		            {
-		                ShowPlayerDialogEx(playerid, 8812, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 8812, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÔøΩÔøΩ");
 		            }
 		            case 3://Pomoc
 		            {
-		                SendClientMessage(playerid, COLOR_P@, "Juø wkrÛtce");
+		                SendClientMessage(playerid, COLOR_P@, "JuÔøΩ wkrÔøΩtce");
 		                if(Dom[PlayerInfo[playerid][pWynajem]][hZamek] == 0)
 				    	{
 							ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nZamknij\nSpawn\nPomoc", "Wybierz", "Anuluj");
@@ -9230,7 +9230,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 0:// Normalny spawn
 		            {
 		                PlayerInfo[playerid][pSpawn] = 0;
-		                SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ na swoim normalnym spawnie");
+		                SendClientMessage(playerid, COLOR_NEWS, "BÔøΩdziesz siÔøΩ teraz spawnowaÔøΩ na swoim normalnym spawnie");
 		                if(Dom[PlayerInfo[playerid][pWynajem]][hZamek] == 0)
 				    	{
 							ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nZamknij\nSpawn\nPomoc", "Wybierz", "Anuluj");
@@ -9243,7 +9243,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 1:// Spawn przed domem
 		            {
 		                PlayerInfo[playerid][pSpawn] = 1;
-		                SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ przed domem");
+		                SendClientMessage(playerid, COLOR_NEWS, "BÔøΩdziesz siÔøΩ teraz spawnowaÔøΩ przed domem");
 		                if(Dom[PlayerInfo[playerid][pWynajem]][hZamek] == 0)
 				    	{
 							ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nZamknij\nSpawn\nPomoc", "Wybierz", "Anuluj");
@@ -9256,7 +9256,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 2:// Spawn w domu
 		            {
 	                    PlayerInfo[playerid][pSpawn] = 2;
-	                    SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ wewnπtrz domu");
+	                    SendClientMessage(playerid, COLOR_NEWS, "BÔøΩdziesz siÔøΩ teraz spawnowaÔøΩ wewnÔøΩtrz domu");
 	                    if(Dom[PlayerInfo[playerid][pWynajem]][hZamek] == 0)
 				    	{
 							ShowPlayerDialogEx(playerid, 8810, DIALOG_STYLE_LIST, "Panel Lokatora", "Informacje o domu\nZamknij\nSpawn\nPomoc", "Wybierz", "Anuluj");
@@ -9280,20 +9280,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 1000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania kastetu za 1 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania kastetu za 1 000$!");
 							ZabierzKase(playerid, 1000);
 							Dom[dom][hS_PG0] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania kastetu!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania kastetu!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9303,20 +9303,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 	                    if(kaska[playerid] >= 1 && kaska[playerid] >= 5000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania spadochronu za 5 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania spadochronu za 5 000$!");
 							ZabierzKase(playerid, 5000);
 							Dom[dom][hS_PG11] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania spadochronu!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania spadochronu!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9326,20 +9326,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 50000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania sperju, gaúnicy i kamery za 50 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania sperju, gaÔøΩnicy i kamery za 50 000$!");
 							ZabierzKase(playerid, 50000);
 							Dom[dom][hS_PG9] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania sperju, gaúnicy i kamery!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania sperju, gaÔøΩnicy i kamery!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9349,20 +9349,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 60000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania wibratorÛw, laski i kwiatÛw za 60 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania wibratorÔøΩw, laski i kwiatÔøΩw za 60 000$!");
 							ZabierzKase(playerid, 60000);
 							Dom[dom][hS_PG10] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania wibratorÛw, laski i kwiatÛw!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania wibratorÔøΩw, laski i kwiatÔøΩw!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9372,20 +9372,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 75000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania broni bia≥ej za 75 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania broni biaÔøΩej za 75 000$!");
 							ZabierzKase(playerid, 75000);
 							Dom[dom][hS_PG1] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania broni bia≥ej!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania broni biaÔøΩej!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9395,20 +9395,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 250000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania pistoletÛw za 250 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania pistoletÔøΩw za 250 000$!");
 							ZabierzKase(playerid, 250000);
 							Dom[dom][hS_PG2] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania pistoletÛw!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania pistoletÔøΩw!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9418,20 +9418,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 450000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania strzelb za 450 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania strzelb za 450 000$!");
 							ZabierzKase(playerid, 450000);
 							Dom[dom][hS_PG3] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania strzelb!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania strzelb!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9441,20 +9441,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 550000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania pistoletÛw maszynowych za 550 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania pistoletÔøΩw maszynowych za 550 000$!");
 							ZabierzKase(playerid, 550000);
 							Dom[dom][hS_PG4] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania pistoletÛw maszynowych!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania pistoletÔøΩw maszynowych!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9464,20 +9464,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 	                    if(kaska[playerid] >= 1 && kaska[playerid] >= 850000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania karabinÛw szturmowych za 850 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania karabinÔøΩw szturmowych za 850 000$!");
 							ZabierzKase(playerid, 850000);
 							Dom[dom][hS_PG5] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania karabinÛw szturmowych!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania karabinÔøΩw szturmowych!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9487,20 +9487,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 700000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania snajperek za 700 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania snajperek za 700 000$!");
 							ZabierzKase(playerid, 700000);
 							Dom[dom][hS_PG6] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania snajperek!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania snajperek!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9510,20 +9510,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 2000000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania broni ciÍzkiej za 2 000 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania broni ciÔøΩzkiej za 2 000 000$!");
 							ZabierzKase(playerid, 2000000);
 							Dom[dom][hS_PG7] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania broni ciÍzkiej!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania broni ciÔøΩzkiej!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9533,20 +9533,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                if(kaska[playerid] >= 1 && kaska[playerid] >= 4000000)
 		                {
-			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowa≥eú swojπ zbrojownie do przechowywania ≥adunkÛw wybuchowych za 4 000 000$!");
+			                SendClientMessage(playerid, COLOR_NEWS, "Gratulacje, przystosowaÔøΩeÔøΩ swojÔøΩ zbrojownie do przechowywania ÔøΩadunkÔøΩw wybuchowych za 4 000 000$!");
 							ZabierzKase(playerid, 4000000);
 							Dom[dom][hS_PG8] = 1;
 							DialogZbrojowni(playerid);
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÊ ciÍ!");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Nie staÔøΩ ciÔøΩ!");
 		                	DialogZbrojowni(playerid);
 						}
 		            }
 		            else
 		            {
-		                SendClientMessage(playerid, COLOR_GRAD3, "Przystosowa≥eú juø swojπ zbrojownie do przechowywania ≥adunkÛw wybuchowych!");
+		                SendClientMessage(playerid, COLOR_GRAD3, "PrzystosowaÔøΩeÔøΩ juÔøΩ swojÔøΩ zbrojownie do przechowywania ÔøΩadunkÔøΩw wybuchowych!");
 		                DialogZbrojowni(playerid);
 		            }
 		        }
@@ -9562,15 +9562,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-		            case 0://Wyjmij broÒ
+		            case 0://Wyjmij broÔøΩ
 		            {
 		                WyjmijBron(playerid);
 		            }
-		            case 1://Schowaj broÒ
+		            case 1://Schowaj broÔøΩ
 		            {
 		                SchowajBron(playerid);
 		            }
-		            case 2://ZawartoúÊ zbrojowni
+		            case 2://ZawartoÔøΩÔøΩ zbrojowni
 		            {
 		                ListaBroni(playerid);
 		            }
@@ -9591,7 +9591,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(BronieF[0][0] != 0)
 						{
 						    IDBroniZbrojownia[playerid] = 0;
-						    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", "Posiadasz juø broÒ typu kastet, czy chcesz jπ zamieniÊ na kastet ze zbrojowni?", "ZamieÒ", "WrÛÊ");
+						    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", "Posiadasz juÔøΩ broÔøΩ typu kastet, czy chcesz jÔøΩ zamieniÔøΩ na kastet ze zbrojowni?", "ZamieÔøΩ", "WrÔøΩÔøΩ");
 						}
 						else
 						{
@@ -9599,7 +9599,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun0] = Dom[dom][hS_G0];
 							PlayerInfo[playerid][pAmmo0] = 1;
 							GivePlayerWeapon(playerid, 1, 1);
-						    SendClientMessage(playerid, COLOR_NEWS, "Wyjπ≥eú kastet ze zbrojowni.");
+						    SendClientMessage(playerid, COLOR_NEWS, "WyjÔøΩÔøΩeÔøΩ kastet ze zbrojowni.");
 	                        WyjmijBron(playerid);
 						}
 		            }
@@ -9610,8 +9610,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(BronieF[1][0] != 0)
 						{
 						    IDBroniZbrojownia[playerid] = 1;
-						    format(brondef, sizeof(brondef), "Posiadasz juø broÒ bia≥π (%s), chcesz jπ zamieniÊ na %s?", GunNames[BronieF[1][0]], GunNames[Dom[dom][hS_G1]]);
-						    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+						    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ broÔøΩ biaÔøΩÔøΩ (%s), chcesz jÔøΩ zamieniÔøΩ na %s?", GunNames[BronieF[1][0]], GunNames[Dom[dom][hS_G1]]);
+						    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 						}
 						else
 						{
@@ -9620,7 +9620,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun1] = Dom[dom][hS_G1];
 							PlayerInfo[playerid][pAmmo1] = 1;
 							GivePlayerWeapon(playerid, Dom[dom][hS_G1], 1);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G1]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G1]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9633,14 +9633,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pGun2] == Dom[dom][hS_G2])
 		                    {
-	                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
+	                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
 		                		ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 		                    }
 		                    else
 		                    {
 							    IDBroniZbrojownia[playerid] = 2;
-							    format(brondef, sizeof(brondef), "Posiadasz juø pistolet (%s), chcesz go zamieniÊ na %s?\n(W przypadku gdy broÒ jest taka sama, do obecnej broni bÍdziesz mÛg≥ dodaÊ amunicje)", GunNames[BronieF[2][0]], GunNames[Dom[dom][hS_G2]]);
-							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ pistolet (%s), chcesz go zamieniÔøΩ na %s?\n(W przypadku gdy broÔøΩ jest taka sama, do obecnej broni bÔøΩdziesz mÔøΩgÔøΩ dodaÔøΩ amunicje)", GunNames[BronieF[2][0]], GunNames[Dom[dom][hS_G2]]);
+							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 							}
 						}
 						else
@@ -9650,7 +9650,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun2] = Dom[dom][hS_G2];
 							PlayerInfo[playerid][pAmmo2] = Dom[dom][hS_A2];
 							GivePlayerWeapon(playerid, Dom[dom][hS_G2], Dom[dom][hS_A2]);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G2]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G2]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9663,14 +9663,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pGun3] == Dom[dom][hS_G3])
 		                    {
-	                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
+	                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
 		                		ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 		                    }
 		                    else
 		                    {
 							    IDBroniZbrojownia[playerid] = 3;
-							    format(brondef, sizeof(brondef), "Posiadasz juø strzelbÍ (%s), chcesz go zamieniÊ na %s?\n(W przypadku gdy broÒ jest taka sama, do obecnej broni bÍdziesz mÛg≥ dodaÊ amunicje)", GunNames[BronieF[3][0]], GunNames[Dom[dom][hS_G3]]);
-							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ strzelbÔøΩ (%s), chcesz go zamieniÔøΩ na %s?\n(W przypadku gdy broÔøΩ jest taka sama, do obecnej broni bÔøΩdziesz mÔøΩgÔøΩ dodaÔøΩ amunicje)", GunNames[BronieF[3][0]], GunNames[Dom[dom][hS_G3]]);
+							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 							}
 						}
 						else
@@ -9680,7 +9680,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                        PlayerInfo[playerid][pGun3] = Dom[dom][hS_G3];
 							PlayerInfo[playerid][pAmmo3] = Dom[dom][hS_A3];
 							GivePlayerWeapon(playerid, Dom[dom][hS_G3], Dom[dom][hS_A3]);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G3]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G3]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9693,14 +9693,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pGun4] == Dom[dom][hS_G4])
 		                    {
-	                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
+	                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
 		                		ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 		                    }
 		                    else
 		                    {
 							    IDBroniZbrojownia[playerid] = 4;
-							    format(brondef, sizeof(brondef), "Posiadasz juø pistolet maszynowy (%s), chcesz go zamieniÊ na %s?\n(W przypadku gdy broÒ jest taka sama, do obecnej broni bÍdziesz mÛg≥ dodaÊ amunicje)", GunNames[BronieF[4][0]], GunNames[Dom[dom][hS_G4]]);
-							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ pistolet maszynowy (%s), chcesz go zamieniÔøΩ na %s?\n(W przypadku gdy broÔøΩ jest taka sama, do obecnej broni bÔøΩdziesz mÔøΩgÔøΩ dodaÔøΩ amunicje)", GunNames[BronieF[4][0]], GunNames[Dom[dom][hS_G4]]);
+							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 							}
 						}
 						else
@@ -9710,7 +9710,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun4] = Dom[dom][hS_G4];
 							PlayerInfo[playerid][pAmmo4] = Dom[dom][hS_A4];
 							GivePlayerWeapon(playerid, Dom[dom][hS_G4], Dom[dom][hS_A4]);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G4]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G4]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9723,14 +9723,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pGun5] == Dom[dom][hS_G5])
 		                    {
-	                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
+	                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
 		                		ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 		                    }
 		                    else
 		                    {
 							    IDBroniZbrojownia[playerid] = 5;
-							    format(brondef, sizeof(brondef), "Posiadasz juø karabin szturmowy (%s), chcesz go zamieniÊ na %s?\n(W przypadku gdy broÒ jest taka sama, do obecnej broni bÍdziesz mÛg≥ dodaÊ amunicje)", GunNames[BronieF[5][0]], GunNames[Dom[dom][hS_G5]]);
-							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ karabin szturmowy (%s), chcesz go zamieniÔøΩ na %s?\n(W przypadku gdy broÔøΩ jest taka sama, do obecnej broni bÔøΩdziesz mÔøΩgÔøΩ dodaÔøΩ amunicje)", GunNames[BronieF[5][0]], GunNames[Dom[dom][hS_G5]]);
+							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 							}
 						}
 						else
@@ -9740,7 +9740,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun5] = Dom[dom][hS_G5];
 							PlayerInfo[playerid][pAmmo5] = Dom[dom][hS_A5];
 							GivePlayerWeapon(playerid, Dom[dom][hS_G5], Dom[dom][hS_A5]);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G5]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G5]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9753,14 +9753,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pGun6] == Dom[dom][hS_G6])
 		                    {
-	                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
+	                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
 		                		ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 		                    }
 		                    else
 		                    {
 							    IDBroniZbrojownia[playerid] = 6;
-							    format(brondef, sizeof(brondef), "Posiadasz juø snajperkÍ (%s), chcesz jπ zamieniÊ na %s?\n(W przypadku gdy broÒ jest taka sama, do obecnej broni bÍdziesz mÛg≥ dodaÊ amunicje)", GunNames[BronieF[6][0]], GunNames[Dom[dom][hS_G6]]);
-							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ snajperkÔøΩ (%s), chcesz jÔøΩ zamieniÔøΩ na %s?\n(W przypadku gdy broÔøΩ jest taka sama, do obecnej broni bÔøΩdziesz mÔøΩgÔøΩ dodaÔøΩ amunicje)", GunNames[BronieF[6][0]], GunNames[Dom[dom][hS_G6]]);
+							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 							}
 						}
 						else
@@ -9770,7 +9770,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun6] = Dom[dom][hS_G6];
 							PlayerInfo[playerid][pAmmo6] = Dom[dom][hS_A6];
 							GivePlayerWeapon(playerid, Dom[dom][hS_G6], Dom[dom][hS_A6]);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G6]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G6]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9783,14 +9783,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pGun7] == Dom[dom][hS_G7])
 		                    {
-	                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
+	                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
 		                		ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 		                    }
 		                    else
 		                    {
 							    IDBroniZbrojownia[playerid] = 7;
-							    format(brondef, sizeof(brondef), "Posiadasz juø broÒ ciÍøkπ (%s), chcesz jπ zamieniÊ na %s?\n(W przypadku gdy broÒ jest taka sama, do obecnej broni bÍdziesz mÛg≥ dodaÊ amunicje)", GunNames[BronieF[7][0]], GunNames[Dom[dom][hS_G7]]);
-							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ broÔøΩ ciÔøΩkÔøΩ (%s), chcesz jÔøΩ zamieniÔøΩ na %s?\n(W przypadku gdy broÔøΩ jest taka sama, do obecnej broni bÔøΩdziesz mÔøΩgÔøΩ dodaÔøΩ amunicje)", GunNames[BronieF[7][0]], GunNames[Dom[dom][hS_G7]]);
+							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 							}
 						}
 						else
@@ -9800,7 +9800,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun7] = Dom[dom][hS_G7];
 							PlayerInfo[playerid][pAmmo7] = Dom[dom][hS_A7];
 							GivePlayerWeapon(playerid, Dom[dom][hS_G7], Dom[dom][hS_A7]);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G7]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G7]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9813,14 +9813,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pGun8] == Dom[dom][hS_G8])
 		                    {
-	                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
+	                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
 		                		ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 		                    }
 		                    else
 		                    {
 							    IDBroniZbrojownia[playerid] = 8;
-							    format(brondef, sizeof(brondef), "Posiadasz juø ≥adnuek wybuchowy (%s), chcesz go zamieniÊ na %s?\n(W przypadku gdy broÒ jest taka sama, do obecnej broni bÍdziesz mÛg≥ dodaÊ amunicje)", GunNames[BronieF[8][0]], GunNames[Dom[dom][hS_G8]]);
-							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ ÔøΩadnuek wybuchowy (%s), chcesz go zamieniÔøΩ na %s?\n(W przypadku gdy broÔøΩ jest taka sama, do obecnej broni bÔøΩdziesz mÔøΩgÔøΩ dodaÔøΩ amunicje)", GunNames[BronieF[8][0]], GunNames[Dom[dom][hS_G8]]);
+							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 							}
 						}
 						else
@@ -9830,7 +9830,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun8] = Dom[dom][hS_G8];
 							PlayerInfo[playerid][pAmmo8] = Dom[dom][hS_A8];
 							GivePlayerWeapon(playerid, Dom[dom][hS_G8], Dom[dom][hS_A8]);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G8]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G8]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9843,14 +9843,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    if(PlayerInfo[playerid][pGun9] == Dom[dom][hS_G9])
 		                    {
-	                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
+	                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
 		                		ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 		                    }
 		                    else
 		                    {
 							    IDBroniZbrojownia[playerid] = 9;
-							    format(brondef, sizeof(brondef), "Posiadasz juø %s, chcesz go zamieniÊ na %s?\n(W przypadku gdy broÒ jest taka sama, do obecnej broni bÍdziesz mÛg≥ dodaÊ amunicje)", GunNames[BronieF[9][0]], GunNames[Dom[dom][hS_G9]]);
-							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ %s, chcesz go zamieniÔøΩ na %s?\n(W przypadku gdy broÔøΩ jest taka sama, do obecnej broni bÔøΩdziesz mÔøΩgÔøΩ dodaÔøΩ amunicje)", GunNames[BronieF[9][0]], GunNames[Dom[dom][hS_G9]]);
+							    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 							}
 						}
 						else
@@ -9860,7 +9860,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun9] = Dom[dom][hS_G9];
 							PlayerInfo[playerid][pAmmo9] = Dom[dom][hS_A9];
 							GivePlayerWeapon(playerid, Dom[dom][hS_G9], Dom[dom][hS_A9]);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G9]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G9]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9872,8 +9872,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(BronieF[10][0] != 0)
 						{
 						    IDBroniZbrojownia[playerid] = 10;
-						    format(brondef, sizeof(brondef), "Posiadasz juø %s, chcesz go zamieniÊ na %s?", GunNames[BronieF[10][0]], GunNames[Dom[dom][hS_G10]]);
-						    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+						    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ %s, chcesz go zamieniÔøΩ na %s?", GunNames[BronieF[10][0]], GunNames[Dom[dom][hS_G10]]);
+						    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 						}
 						else
 						{
@@ -9882,7 +9882,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun10] = Dom[dom][hS_G10];
 							PlayerInfo[playerid][pAmmo10] = 1;
 							GivePlayerWeapon(playerid, Dom[dom][hS_G10], 1);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G10]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G10]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9894,8 +9894,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                if(BronieF[11][0] != 0)
 						{
 						    IDBroniZbrojownia[playerid] = 11;
-						    format(brondef, sizeof(brondef), "Posiadasz juø %s, chcesz go zamieniÊ na %s?", GunNames[BronieF[11][0]], GunNames[Dom[dom][hS_G11]]);
-						    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+						    format(brondef, sizeof(brondef), "Posiadasz juÔøΩ %s, chcesz go zamieniÔøΩ na %s?", GunNames[BronieF[11][0]], GunNames[Dom[dom][hS_G11]]);
+						    ShowPlayerDialogEx(playerid, 8244, DIALOG_STYLE_MSGBOX, "Wyjmowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 						}
 						else
 						{
@@ -9904,7 +9904,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerInfo[playerid][pGun11] = Dom[dom][hS_G11];
 							PlayerInfo[playerid][pAmmo11] = 1;
 							GivePlayerWeapon(playerid, Dom[dom][hS_G11], 1);
-							format(brondef, sizeof(brondef), "Wyjπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G11]]);
+							format(brondef, sizeof(brondef), "WyjÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G11]]);
 						    SendClientMessage(playerid, COLOR_NEWS, brondef);
 	                        WyjmijBron(playerid);
 						}
@@ -9913,7 +9913,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8240, DIALOG_STYLE_LIST, "Zbrojownia", "Wyjmij broÒ\nSchowaj broÒ\nZawartoúÊ zbrojowni", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8240, DIALOG_STYLE_LIST, "Zbrojownia", "Wyjmij broÔøΩ\nSchowaj broÔøΩ\nZawartoÔøΩÔøΩ zbrojowni", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8242)//chowanie broni
@@ -9931,12 +9931,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                if(Dom[dom][hS_G0] == 1)
 			                {
 			                    IDBroniZbrojownia[playerid] = 0;
-							    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[1], GunNames[1]);
-							    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[1], GunNames[1]);
+							    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 			                }
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun0]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun0]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G0] = 1;
 								PlayerInfo[playerid][pGun0] = 0;
@@ -9959,12 +9959,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    if(Dom[dom][hS_G1] >= 1)
 			                {
 			                    IDBroniZbrojownia[playerid] = 1;
-							    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G1]], GunNames[PlayerInfo[playerid][pGun1]]);
-							    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G1]], GunNames[PlayerInfo[playerid][pGun1]]);
+							    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 			                }
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun1]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun1]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G1] = PlayerInfo[playerid][pGun1];
 				    			Dom[dom][hS_A1] = 1;
@@ -9977,7 +9977,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania broni bia≥ej.");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania broni biaÔøΩej.");
 						    SchowajBron(playerid);
 						}
 		            }
@@ -9989,19 +9989,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                {
 			                    if(PlayerInfo[playerid][pGun2] == Dom[dom][hS_G2])
 			                    {
-		                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], PlayerInfo[playerid][pGun2]);
+		                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], PlayerInfo[playerid][pGun2]);
 			                		ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			                    }
 			                    else
 			                    {
 				                    IDBroniZbrojownia[playerid] = 2;
-								    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G2]], GunNames[PlayerInfo[playerid][pGun2]]);
-								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+								    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G2]], GunNames[PlayerInfo[playerid][pGun2]]);
+								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 								}
 							}
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun2]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun2]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G2] = PlayerInfo[playerid][pGun2];
 				    			Dom[dom][hS_A2] = PlayerInfo[playerid][pAmmo2];
@@ -10014,7 +10014,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania pistoletÛw.");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania pistoletÔøΩw.");
 						    SchowajBron(playerid);
 						}
 		            }
@@ -10026,19 +10026,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                {
 			                    if(PlayerInfo[playerid][pGun3] == Dom[dom][hS_G3])
 			                    {
-		                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], PlayerInfo[playerid][pGun3]);
+		                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], PlayerInfo[playerid][pGun3]);
 			                		ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			                    }
 			                    else
 			                    {
 				                    IDBroniZbrojownia[playerid] = 3;
-								    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G3]], GunNames[PlayerInfo[playerid][pGun3]]);
-								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+								    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G3]], GunNames[PlayerInfo[playerid][pGun3]]);
+								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 								}
 							}
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun3]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun3]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G3] = PlayerInfo[playerid][pGun3];
 				    			Dom[dom][hS_A3] = PlayerInfo[playerid][pAmmo3];
@@ -10063,19 +10063,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                {
 			                    if(PlayerInfo[playerid][pGun4] == Dom[dom][hS_G4])
 			                    {
-		                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], PlayerInfo[playerid][pGun4]);
+		                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], PlayerInfo[playerid][pGun4]);
 			                		ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			                    }
 			                    else
 			                    {
 				                    IDBroniZbrojownia[playerid] = 4;
-								    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G4]], GunNames[PlayerInfo[playerid][pGun4]]);
-								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+								    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G4]], GunNames[PlayerInfo[playerid][pGun4]]);
+								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 								}
 							}
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun4]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun4]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G4] = PlayerInfo[playerid][pGun4];
 				    			Dom[dom][hS_A4] = PlayerInfo[playerid][pAmmo4];
@@ -10088,7 +10088,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania pistoletÛw maszynowych.");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania pistoletÔøΩw maszynowych.");
 						    SchowajBron(playerid);
 						}
 		            }
@@ -10100,19 +10100,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                {
 			                    if(PlayerInfo[playerid][pGun5] == Dom[dom][hS_G5])
 			                    {
-		                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], PlayerInfo[playerid][pGun5]);
+		                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], PlayerInfo[playerid][pGun5]);
 			                		ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			                    }
 			                    else
 			                    {
 				                    IDBroniZbrojownia[playerid] = 5;
-								    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G5]], GunNames[PlayerInfo[playerid][pGun5]]);
-								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+								    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G5]], GunNames[PlayerInfo[playerid][pGun5]]);
+								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 								}
 							}
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun5]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun5]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G5] = PlayerInfo[playerid][pGun5];
 				    			Dom[dom][hS_A5] = PlayerInfo[playerid][pAmmo5];
@@ -10125,7 +10125,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania karabinÛw maszynowych.");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania karabinÔøΩw maszynowych.");
 						    SchowajBron(playerid);
 						}
 		            }
@@ -10137,19 +10137,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                {
 			                    if(PlayerInfo[playerid][pGun6] == Dom[dom][hS_G6])
 			                    {
-		                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], PlayerInfo[playerid][pGun6]);
+		                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], PlayerInfo[playerid][pGun6]);
 			                		ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			                    }
 			                    else
 			                    {
 				                    IDBroniZbrojownia[playerid] = 6;
-								    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G6]], GunNames[PlayerInfo[playerid][pGun6]]);
-								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+								    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G6]], GunNames[PlayerInfo[playerid][pGun6]]);
+								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 								}
 							}
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun6]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun6]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G6] = PlayerInfo[playerid][pGun6];
 				    			Dom[dom][hS_A6] = PlayerInfo[playerid][pAmmo6];
@@ -10174,19 +10174,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                {
 			                    if(PlayerInfo[playerid][pGun7] == Dom[dom][hS_G7])
 			                    {
-		                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], PlayerInfo[playerid][pGun7]);
+		                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], PlayerInfo[playerid][pGun7]);
 			                		ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			                    }
 			                    else
 			                    {
 				                    IDBroniZbrojownia[playerid] = 7;
-								    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G7]], GunNames[PlayerInfo[playerid][pGun7]]);
-								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+								    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G7]], GunNames[PlayerInfo[playerid][pGun7]]);
+								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 								}
 							}
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun7]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun7]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G7] = PlayerInfo[playerid][pGun7];
 				    			Dom[dom][hS_A7] = PlayerInfo[playerid][pAmmo7];
@@ -10199,7 +10199,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania broni ciÍøkiej.");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania broni ciÔøΩkiej.");
 						    SchowajBron(playerid);
 						}
 		            }
@@ -10211,19 +10211,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                {
 			                    if(PlayerInfo[playerid][pGun8] == Dom[dom][hS_G8])
 			                    {
-		                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], PlayerInfo[playerid][pGun8]);
+		                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], PlayerInfo[playerid][pGun8]);
 			                		ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			                    }
 			                    else
 			                    {
 				                    IDBroniZbrojownia[playerid] = 8;
-								    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G8]], GunNames[PlayerInfo[playerid][pGun8]]);
-								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+								    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G8]], GunNames[PlayerInfo[playerid][pGun8]]);
+								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 								}
 							}
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun8]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun8]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G8] = PlayerInfo[playerid][pGun8];
 				    			Dom[dom][hS_A8] = PlayerInfo[playerid][pAmmo8];
@@ -10236,7 +10236,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania ≥adunkÛw wybuchowych.");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania ÔøΩadunkÔøΩw wybuchowych.");
 						    SchowajBron(playerid);
 						}
 		            }
@@ -10248,19 +10248,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                {
 			                    if(PlayerInfo[playerid][pGun9] == Dom[dom][hS_G9])
 			                    {
-		                            format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], PlayerInfo[playerid][pGun9]);
+		                            format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], PlayerInfo[playerid][pGun9]);
 			                		ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			                    }
 			                    else
 			                    {
 				                    IDBroniZbrojownia[playerid] = 9;
-								    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G9]], GunNames[PlayerInfo[playerid][pGun9]]);
-								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+								    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G9]], GunNames[PlayerInfo[playerid][pGun9]]);
+								    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 								}
 							}
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun9]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun9]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G9] = PlayerInfo[playerid][pGun9];
 				    			Dom[dom][hS_A9] = PlayerInfo[playerid][pAmmo9];
@@ -10273,7 +10273,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania spreju/gaúnicy/aparatu.");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania spreju/gaÔøΩnicy/aparatu.");
 						    SchowajBron(playerid);
 						}
 		            }
@@ -10284,12 +10284,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                if(Dom[dom][hS_G10] >= 1)
 			                {
 			                    IDBroniZbrojownia[playerid] = 10;
-							    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G10]], GunNames[PlayerInfo[playerid][pGun10]]);
-							    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G10]], GunNames[PlayerInfo[playerid][pGun10]]);
+							    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 			                }
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun10]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun10]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G10] = PlayerInfo[playerid][pGun10];
 				    			Dom[dom][hS_A10] = 1;
@@ -10302,7 +10302,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania kwiatÛw/lasek/wibratorÛw.");
+						    SendClientMessage(playerid, COLOR_GRAD3, "Twoja zbrojownia nie jest przystosowana do przechowywania kwiatÔøΩw/lasek/wibratorÔøΩw.");
 						    SchowajBron(playerid);
 						}
 		            }
@@ -10313,12 +10313,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                if(Dom[dom][hS_G11] >= 1)
 			                {
 			                    IDBroniZbrojownia[playerid] = 11;
-							    format(brondef, sizeof(brondef), "W zbrojowni jest juø %s, chcesz zamieniÊ zawartoúÊ na %s?", GunNames[Dom[dom][hS_G11]], GunNames[PlayerInfo[playerid][pGun11]]);
-							    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÒ", "WrÛÊ");
+							    format(brondef, sizeof(brondef), "W zbrojowni jest juÔøΩ %s, chcesz zamieniÔøΩ zawartoÔøΩÔøΩ na %s?", GunNames[Dom[dom][hS_G11]], GunNames[PlayerInfo[playerid][pGun11]]);
+							    ShowPlayerDialogEx(playerid, 8246, DIALOG_STYLE_MSGBOX, "Chowanie broni", brondef, "ZamieÔøΩ", "WrÔøΩÔøΩ");
 			                }
 			                else
 			                {
-				                format(brondef, sizeof(brondef), "Schowa≥eú %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun11]]);
+				                format(brondef, sizeof(brondef), "SchowaÔøΩeÔøΩ %s do zbrojowni", GunNames[PlayerInfo[playerid][pGun11]]);
 				    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 				    			Dom[dom][hS_G11] = PlayerInfo[playerid][pGun11];
 				    			Dom[dom][hS_A11] = 1;
@@ -10339,7 +10339,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8240, DIALOG_STYLE_LIST, "Zbrojownia", "Wyjmij broÒ\nSchowaj broÒ\nZawartoúÊ zbrojowni", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8240, DIALOG_STYLE_LIST, "Zbrojownia", "Wyjmij broÔøΩ\nSchowaj broÔøΩ\nZawartoÔøΩÔøΩ zbrojowni", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8243)//lista/usuwanie broni
@@ -10353,7 +10353,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                new brondef[256];
 		                Dom[dom][hS_G0] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G0]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G0]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10362,7 +10362,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G1] = 0;
 		                Dom[dom][hS_A1] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G1]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G1]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10371,7 +10371,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G2] = 0;
 		                Dom[dom][hS_A2] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G2]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G2]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10380,7 +10380,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G3] = 0;
 		                Dom[dom][hS_A3] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G3]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G3]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10389,7 +10389,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G4] = 0;
 		                Dom[dom][hS_A4] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G4]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G4]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10398,7 +10398,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G5] = 0;
 		                Dom[dom][hS_A5] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G5]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G5]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10407,7 +10407,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G6] = 0;
 		                Dom[dom][hS_A6] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G6]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G6]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10416,7 +10416,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G7] = 0;
 		                Dom[dom][hS_A7] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G7]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G7]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10425,7 +10425,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G8] = 0;
 		                Dom[dom][hS_A8] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G8]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G8]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10434,7 +10434,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G9] = 0;
 		                Dom[dom][hS_A9] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G9]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G9]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10443,7 +10443,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G10] = 0;
 		                Dom[dom][hS_A10] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G10]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G10]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10452,7 +10452,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                new brondef[256];
 		                Dom[dom][hS_G11] = 0;
 		                Dom[dom][hS_A11] = 0;
-						format(brondef, sizeof(brondef), "Usunπ≥eú %s ze zbrojowni", GunNames[Dom[dom][hS_G11]]);
+						format(brondef, sizeof(brondef), "UsunÔøΩÔøΩeÔøΩ %s ze zbrojowni", GunNames[Dom[dom][hS_G11]]);
 		    			SendClientMessage(playerid, COLOR_NEWS, brondef);
 	        			ListaBroni(playerid);
 		            }
@@ -10460,7 +10460,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 8240, DIALOG_STYLE_LIST, "Zbrojownia", "Wyjmij broÒ\nSchowaj broÒ\nZawartoúÊ zbrojowni", "Wybierz", "Anuluj");
+		        ShowPlayerDialogEx(playerid, 8240, DIALOG_STYLE_LIST, "Zbrojownia", "Wyjmij broÔøΩ\nSchowaj broÔøΩ\nZawartoÔøΩÔøΩ zbrojowni", "Wybierz", "Anuluj");
 		    }
 		}
 		if(dialogid == 8244)
@@ -10470,13 +10470,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        new dom = PlayerInfo[playerid][pDom];
 		        if(IDBroniZbrojownia[playerid] == 0)
 		        {
-		            SendClientMessage(playerid, COLOR_NEWS, "Wymieni≥eú kastet na kastet");
+		            SendClientMessage(playerid, COLOR_NEWS, "WymieniÔøΩeÔøΩ kastet na kastet");
 		            Dom[dom][hS_G0] = 0;
 		        }
 		        if(IDBroniZbrojownia[playerid] == 1)
 		        {
 	       			new brondef[256];
-	          		format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun1]], GunNames[Dom[dom][hS_G1]]);
+	          		format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun1]], GunNames[Dom[dom][hS_G1]]);
 	            	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun1] = Dom[dom][hS_G1];
 	                PlayerInfo[playerid][pAmmo1] = Dom[dom][hS_A1];
@@ -10486,7 +10486,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 2)
 		        {
 	 				new brondef[256];
-	          		format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun2]], GunNames[Dom[dom][hS_G2]]);
+	          		format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun2]], GunNames[Dom[dom][hS_G2]]);
 	            	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun2] = Dom[dom][hS_G2];
 	                PlayerInfo[playerid][pAmmo2] = Dom[dom][hS_A2];
@@ -10496,7 +10496,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 3)
 		        {
 	      			new brondef[256];
-		       		format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun3]], GunNames[Dom[dom][hS_G3]]);
+		       		format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun3]], GunNames[Dom[dom][hS_G3]]);
 		        	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun3] = Dom[dom][hS_G3];
 	    			PlayerInfo[playerid][pAmmo3] = Dom[dom][hS_A3];
@@ -10506,7 +10506,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 4)
 		        {
 	      			new brondef[256];
-		       		format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun4]], GunNames[Dom[dom][hS_G4]]);
+		       		format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun4]], GunNames[Dom[dom][hS_G4]]);
 		        	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun4] = Dom[dom][hS_G4];
 	    			PlayerInfo[playerid][pAmmo4] = Dom[dom][hS_A4];
@@ -10516,7 +10516,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 5)
 		        {
 	      			new brondef[256];
-	       			format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun5]], GunNames[Dom[dom][hS_G5]]);
+	       			format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun5]], GunNames[Dom[dom][hS_G5]]);
 	         		SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun5] = Dom[dom][hS_G5];
 	    			PlayerInfo[playerid][pAmmo5] = Dom[dom][hS_A5];
@@ -10526,7 +10526,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 6)
 		        {
 	      			new brondef[256];
-	     			format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun6]], GunNames[Dom[dom][hS_G6]]);
+	     			format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun6]], GunNames[Dom[dom][hS_G6]]);
 		           	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun6] = Dom[dom][hS_G6];
 					PlayerInfo[playerid][pAmmo6] = Dom[dom][hS_A6];
@@ -10536,7 +10536,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 7)
 		        {
 	      			new brondef[256];
-		       		format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun7]], GunNames[Dom[dom][hS_G7]]);
+		       		format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun7]], GunNames[Dom[dom][hS_G7]]);
 		        	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun7] = Dom[dom][hS_G7];
 				    PlayerInfo[playerid][pAmmo7] = Dom[dom][hS_A7];
@@ -10546,7 +10546,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 8)
 		        {
 		       		new brondef[256];
-	       			format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun8]], GunNames[Dom[dom][hS_G8]]);
+	       			format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun8]], GunNames[Dom[dom][hS_G8]]);
 		           	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun8] = Dom[dom][hS_G8];
 	    			PlayerInfo[playerid][pAmmo8] = Dom[dom][hS_A8];
@@ -10556,7 +10556,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 9)
 		        {
 	      			new brondef[256];
-	       			format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun9]], GunNames[Dom[dom][hS_G9]]);
+	       			format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun9]], GunNames[Dom[dom][hS_G9]]);
 	         		SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun9] = Dom[dom][hS_G9];
 	    			PlayerInfo[playerid][pAmmo9] = Dom[dom][hS_A9];
@@ -10566,7 +10566,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 10)
 		        {
 	       			new brondef[256];
-	          		format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun10]], GunNames[Dom[dom][hS_G10]]);
+	          		format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun10]], GunNames[Dom[dom][hS_G10]]);
 	            	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun10] = Dom[dom][hS_G10];
 	                PlayerInfo[playerid][pAmmo10] = Dom[dom][hS_A10];
@@ -10576,7 +10576,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        if(IDBroniZbrojownia[playerid] == 11)
 		        {
 	       			new brondef[256];
-	          		format(brondef, sizeof(brondef), "Wymieni≥eú %s na %s", GunNames[PlayerInfo[playerid][pGun11]], GunNames[Dom[dom][hS_G11]]);
+	          		format(brondef, sizeof(brondef), "WymieniÔøΩeÔøΩ %s na %s", GunNames[PlayerInfo[playerid][pGun11]], GunNames[Dom[dom][hS_G11]]);
 	            	SendClientMessage(playerid, COLOR_NEWS, brondef);
 					PlayerInfo[playerid][pGun11] = Dom[dom][hS_G11];
 	                PlayerInfo[playerid][pAmmo11] = Dom[dom][hS_A11];
@@ -10691,8 +10691,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÛbujesz wziπúÊ wszystkie. Aby wziπúc wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÔøΩbujesz wziÔøΩÔøΩÔøΩ wszystkie. Aby wziÔøΩÔøΩc wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
 			                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -10709,8 +10709,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÛbujesz wziπúÊ wszystkie. Aby wziπúc wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÔøΩbujesz wziÔøΩÔøΩÔøΩ wszystkie. Aby wziÔøΩÔøΩc wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
 			                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -10727,8 +10727,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÛbujesz wziπúÊ wszystkie. Aby wziπúc wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÔøΩbujesz wziÔøΩÔøΩÔøΩ wszystkie. Aby wziÔøΩÔøΩc wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
 			                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -10745,8 +10745,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÛbujesz wziπúÊ wszystkie. Aby wziπúc wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÔøΩbujesz wziÔøΩÔøΩÔøΩ wszystkie. Aby wziÔøΩÔøΩc wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
 			                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -10763,8 +10763,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÛbujesz wziπúÊ wszystkie. Aby wziπúc wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÔøΩbujesz wziÔøΩÔøΩÔøΩ wszystkie. Aby wziÔøΩÔøΩc wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
 			                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -10781,8 +10781,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÛbujesz wziπúÊ wszystkie. Aby wziπúc wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÔøΩbujesz wziÔøΩÔøΩÔøΩ wszystkie. Aby wziÔøΩÔøΩc wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
 			                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -10799,8 +10799,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÛbujesz wziπúÊ wszystkie. Aby wziπúc wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÔøΩbujesz wziÔøΩÔøΩÔøΩ wszystkie. Aby wziÔøΩÔøΩc wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
 			                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -10817,8 +10817,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÛbujesz wziπúÊ wszystkie. Aby wziπúc wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz tyle naboi w zbrojowni lub prÔøΩbujesz wziÔøΩÔøΩÔøΩ wszystkie. Aby wziÔøΩÔøΩc wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
 			                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -10827,60 +10827,60 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        }
 		        else
 		        {
-		            SendClientMessage(playerid, COLOR_NEWS, "IloúÊ naboi od 1 do 100 000");
+		            SendClientMessage(playerid, COLOR_NEWS, "IloÔøΩÔøΩ naboi od 1 do 100 000");
 		         	if(IDBroniZbrojownia[playerid] == 2)
 			        {
 		                new info[512];
-						format(info, sizeof(info), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
+						format(info, sizeof(info), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
 		                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", info, "Wszystko", "Naboje");
 		            	return 1;
 		            }
 			        if(IDBroniZbrojownia[playerid] == 3)
 			        {
 		                new info[512];
-						format(info, sizeof(info), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
+						format(info, sizeof(info), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
 		                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", info, "Wszystko", "Naboje");
 		            	return 1;
 		        	}
 			        if(IDBroniZbrojownia[playerid] == 4)
 			        {
 		                new info[512];
-						format(info, sizeof(info), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
+						format(info, sizeof(info), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
 		                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", info, "Wszystko", "Naboje");
 		            	return 1;
 			        }
 			        if(IDBroniZbrojownia[playerid] == 5)
 			        {
 		                new info[512];
-						format(info, sizeof(info), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
+						format(info, sizeof(info), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
 		                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", info, "Wszystko", "Naboje");
 		            	return 1;
 			        }
 			        if(IDBroniZbrojownia[playerid] == 6)
 			        {
 		                new info[512];
-						format(info, sizeof(info), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
+						format(info, sizeof(info), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
 		                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", info, "Wszystko", "Naboje");
 		            	return 1;
 			        }
 			        if(IDBroniZbrojownia[playerid] == 7)
 			        {
 		                new info[512];
-						format(info, sizeof(info), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
+						format(info, sizeof(info), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
 		                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", info, "Wszystko", "Naboje");
 		            	return 1;
 			        }
 			        if(IDBroniZbrojownia[playerid] == 8)
 		        	{
 		                new info[512];
-						format(info, sizeof(info), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
+						format(info, sizeof(info), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
 		                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", info, "Wszystko", "Naboje");
 		            	return 1;
 			        }
 			        if(IDBroniZbrojownia[playerid] == 9)
 			        {
 		                new info[512];
-						format(info, sizeof(info), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz wyjπÊ ca≥π broÒ z nabojami lub wyjπÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz wyjπÊ naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
+						format(info, sizeof(info), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz wyjÔøΩÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub wyjÔøΩÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz wyjÔøΩÔøΩ naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
 		                ShowPlayerDialogEx(playerid, 8245, DIALOG_STYLE_INPUT, "Wyjmowanie amunicji", info, "Wszystko", "Naboje");
 						return 1;
 					}
@@ -10898,7 +10898,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            Dom[dom][hS_G0] = 1;
 	          		PlayerInfo[playerid][pGun0] = 0;
 	    			PlayerInfo[playerid][pAmmo0] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s", GunNames[1]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s", GunNames[1]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 				}
 				if(IDBroniZbrojownia[playerid] == 1)
@@ -10907,7 +10907,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A1] = 1;
 	          		PlayerInfo[playerid][pGun1] = 0;
 	    			PlayerInfo[playerid][pAmmo1] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s", GunNames[Dom[dom][hS_G1]]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s", GunNames[Dom[dom][hS_G1]]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 				}
 		        if(IDBroniZbrojownia[playerid] == 2)
@@ -10916,7 +10916,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A2] = PlayerInfo[playerid][pAmmo2];
 	          		PlayerInfo[playerid][pGun2] = 0;
 	    			PlayerInfo[playerid][pAmmo2] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
 				}
 				if(IDBroniZbrojownia[playerid] == 3)
 		        {
@@ -10924,7 +10924,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A3] = PlayerInfo[playerid][pAmmo3];
 	          		PlayerInfo[playerid][pGun3] = 0;
 	    			PlayerInfo[playerid][pAmmo3] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
 				}
 				if(IDBroniZbrojownia[playerid] == 4)
 		        {
@@ -10932,7 +10932,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A4] = PlayerInfo[playerid][pAmmo4];
 	          		PlayerInfo[playerid][pGun4] = 0;
 	    			PlayerInfo[playerid][pAmmo4] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
 				}
 				if(IDBroniZbrojownia[playerid] == 5)
 		        {
@@ -10940,7 +10940,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A5] = PlayerInfo[playerid][pAmmo5];
 	          		PlayerInfo[playerid][pGun5] = 0;
 	    			PlayerInfo[playerid][pAmmo5] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
 				}
 				if(IDBroniZbrojownia[playerid] == 6)
 		        {
@@ -10948,7 +10948,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A6] = PlayerInfo[playerid][pAmmo6];
 	          		PlayerInfo[playerid][pGun6] = 0;
 	    			PlayerInfo[playerid][pAmmo6] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
 				}
 				if(IDBroniZbrojownia[playerid] == 7)
 		        {
@@ -10956,7 +10956,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A7] = PlayerInfo[playerid][pAmmo7];
 	          		PlayerInfo[playerid][pGun7] = 0;
 	    			PlayerInfo[playerid][pAmmo7] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
 				}
 				if(IDBroniZbrojownia[playerid] == 8)
 		        {
@@ -10964,7 +10964,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A8] = PlayerInfo[playerid][pAmmo8];
 	          		PlayerInfo[playerid][pGun8] = 0;
 	    			PlayerInfo[playerid][pAmmo8] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
 				}
 				if(IDBroniZbrojownia[playerid] == 9)
 		        {
@@ -10972,7 +10972,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A9] = PlayerInfo[playerid][pAmmo9];
 	          		PlayerInfo[playerid][pGun9] = 0;
 	    			PlayerInfo[playerid][pAmmo9] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
 				}
 				if(IDBroniZbrojownia[playerid] == 10)
 		        {
@@ -10980,7 +10980,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A10] = 1;
 	          		PlayerInfo[playerid][pGun10] = 0;
 	    			PlayerInfo[playerid][pAmmo10] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s", GunNames[Dom[dom][hS_G10]]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s", GunNames[Dom[dom][hS_G10]]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 				}
 				if(IDBroniZbrojownia[playerid] == 11)
@@ -10989,7 +10989,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A11] = 1;
 	          		PlayerInfo[playerid][pGun11] = 0;
 	    			PlayerInfo[playerid][pAmmo11] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s", GunNames[Dom[dom][hS_G11]]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s", GunNames[Dom[dom][hS_G11]]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 				}
 				ResetPlayerWeapons(playerid);
@@ -11012,7 +11012,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A2] += PlayerInfo[playerid][pAmmo2];
 	          		PlayerInfo[playerid][pGun2] = 0;
 	    			PlayerInfo[playerid][pAmmo2] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G2]], Dom[dom][hS_A2]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 		        }
 		        if(IDBroniZbrojownia[playerid] == 3)
@@ -11020,7 +11020,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A3] += PlayerInfo[playerid][pAmmo3];
 	          		PlayerInfo[playerid][pGun3] = 0;
 	    			PlayerInfo[playerid][pAmmo3] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G3]], Dom[dom][hS_A3]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 		        }
 		        if(IDBroniZbrojownia[playerid] == 4)
@@ -11028,7 +11028,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A4] += PlayerInfo[playerid][pAmmo4];
 	          		PlayerInfo[playerid][pGun4] = 0;
 	    			PlayerInfo[playerid][pAmmo4] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G4]], Dom[dom][hS_A4]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 		        }
 		        if(IDBroniZbrojownia[playerid] == 5)
@@ -11036,7 +11036,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A5] += PlayerInfo[playerid][pAmmo5];
 	          		PlayerInfo[playerid][pGun5] = 0;
 	    			PlayerInfo[playerid][pAmmo5] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G5]], Dom[dom][hS_A5]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 		        }
 		        if(IDBroniZbrojownia[playerid] == 6)
@@ -11044,7 +11044,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A6] += PlayerInfo[playerid][pAmmo6];
 	          		PlayerInfo[playerid][pGun6] = 0;
 	    			PlayerInfo[playerid][pAmmo6] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G6]], Dom[dom][hS_A6]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 		        }
 		        if(IDBroniZbrojownia[playerid] == 7)
@@ -11052,7 +11052,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A7] += PlayerInfo[playerid][pAmmo7];
 	          		PlayerInfo[playerid][pGun7] = 0;
 	    			PlayerInfo[playerid][pAmmo7] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G7]], Dom[dom][hS_A7]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 		        }
 		        if(IDBroniZbrojownia[playerid] == 8)
@@ -11060,7 +11060,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A8] += PlayerInfo[playerid][pAmmo8];
 	          		PlayerInfo[playerid][pGun8] = 0;
 	    			PlayerInfo[playerid][pAmmo8] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G8]], Dom[dom][hS_A8]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 		        }
 		        if(IDBroniZbrojownia[playerid] == 9)
@@ -11068,7 +11068,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	          		Dom[dom][hS_A9] += PlayerInfo[playerid][pAmmo9];
 	          		PlayerInfo[playerid][pGun9] = 0;
 	    			PlayerInfo[playerid][pAmmo9] = 0;
-			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
+			       	format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %s z %d nabojami", GunNames[Dom[dom][hS_G9]], Dom[dom][hS_A9]);
 					SendClientMessage(playerid, COLOR_NEWS, brondef);
 		        }
 		        ResetPlayerWeapons(playerid);
@@ -11087,13 +11087,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            {
 			                PlayerInfo[playerid][pAmmo2] -= strval(inputtext);
 			                Dom[dom][hS_A2] += strval(inputtext);
-			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %d naboi do %s", Dom[dom][hS_A2], GunNames[Dom[dom][hS_G2]]);
+			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %d naboi do %s", Dom[dom][hS_A2], GunNames[Dom[dom][hS_G2]]);
 	            			SendClientMessage(playerid, COLOR_NEWS, brondef);
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÛbujesz schowaÊ wszystkie. Aby schowaÊ wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], PlayerInfo[playerid][pGun2]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÔøΩbujesz schowaÔøΩ wszystkie. Aby schowaÔøΩ wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], PlayerInfo[playerid][pGun2]);
 	   						ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -11104,13 +11104,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            {
 			                PlayerInfo[playerid][pAmmo3] -= strval(inputtext);
 			                Dom[dom][hS_A3] += strval(inputtext);
-			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %d naboi do %s", Dom[dom][hS_A3], GunNames[Dom[dom][hS_G3]]);
+			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %d naboi do %s", Dom[dom][hS_A3], GunNames[Dom[dom][hS_G3]]);
 	            			SendClientMessage(playerid, COLOR_NEWS, brondef);
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÛbujesz schowaÊ wszystkie. Aby schowaÊ wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], PlayerInfo[playerid][pGun3]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÔøΩbujesz schowaÔøΩ wszystkie. Aby schowaÔøΩ wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], PlayerInfo[playerid][pGun3]);
 	   						ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -11121,13 +11121,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            {
 			                PlayerInfo[playerid][pAmmo4] -= strval(inputtext);
 			                Dom[dom][hS_A4] += strval(inputtext);
-			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %d naboi do %s", Dom[dom][hS_A4], GunNames[Dom[dom][hS_G4]]);
+			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %d naboi do %s", Dom[dom][hS_A4], GunNames[Dom[dom][hS_G4]]);
 	            			SendClientMessage(playerid, COLOR_NEWS, brondef);
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÛbujesz schowaÊ wszystkie. Aby schowaÊ wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], PlayerInfo[playerid][pGun4]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÔøΩbujesz schowaÔøΩ wszystkie. Aby schowaÔøΩ wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], PlayerInfo[playerid][pGun4]);
 	   						ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -11138,13 +11138,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            {
 			                PlayerInfo[playerid][pAmmo5] -= strval(inputtext);
 			                Dom[dom][hS_A5] += strval(inputtext);
-			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %d naboi do %s", Dom[dom][hS_A5], GunNames[Dom[dom][hS_G5]]);
+			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %d naboi do %s", Dom[dom][hS_A5], GunNames[Dom[dom][hS_G5]]);
 	            			SendClientMessage(playerid, COLOR_NEWS, brondef);
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÛbujesz schowaÊ wszystkie. Aby schowaÊ wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], PlayerInfo[playerid][pGun5]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÔøΩbujesz schowaÔøΩ wszystkie. Aby schowaÔøΩ wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], PlayerInfo[playerid][pGun5]);
 	   						ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -11155,13 +11155,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            {
 			                PlayerInfo[playerid][pAmmo6] -= strval(inputtext);
 			                Dom[dom][hS_A6] += strval(inputtext);
-			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %d naboi do %s", Dom[dom][hS_A6], GunNames[Dom[dom][hS_G6]]);
+			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %d naboi do %s", Dom[dom][hS_A6], GunNames[Dom[dom][hS_G6]]);
 	            			SendClientMessage(playerid, COLOR_NEWS, brondef);
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÛbujesz schowaÊ wszystkie. Aby schowaÊ wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], PlayerInfo[playerid][pGun6]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÔøΩbujesz schowaÔøΩ wszystkie. Aby schowaÔøΩ wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], PlayerInfo[playerid][pGun6]);
 	   						ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -11172,13 +11172,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            {
 			                PlayerInfo[playerid][pAmmo7] -= strval(inputtext);
 			                Dom[dom][hS_A7] += strval(inputtext);
-			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %d naboi do %s", Dom[dom][hS_A7], GunNames[Dom[dom][hS_G7]]);
+			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %d naboi do %s", Dom[dom][hS_A7], GunNames[Dom[dom][hS_G7]]);
 	            			SendClientMessage(playerid, COLOR_NEWS, brondef);
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÛbujesz schowaÊ wszystkie. Aby schowaÊ wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], PlayerInfo[playerid][pGun7]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÔøΩbujesz schowaÔøΩ wszystkie. Aby schowaÔøΩ wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], PlayerInfo[playerid][pGun7]);
 	   						ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -11189,13 +11189,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            {
 			                PlayerInfo[playerid][pAmmo8] -= strval(inputtext);
 			                Dom[dom][hS_A8] += strval(inputtext);
-			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %d naboi do %s", Dom[dom][hS_A8], GunNames[Dom[dom][hS_G8]]);
+			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %d naboi do %s", Dom[dom][hS_A8], GunNames[Dom[dom][hS_G8]]);
 	            			SendClientMessage(playerid, COLOR_NEWS, brondef);
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÛbujesz schowaÊ wszystkie. Aby schowaÊ wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], PlayerInfo[playerid][pGun8]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÔøΩbujesz schowaÔøΩ wszystkie. Aby schowaÔøΩ wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], PlayerInfo[playerid][pGun8]);
 	   						ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -11206,13 +11206,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            {
 			                PlayerInfo[playerid][pAmmo9] -= strval(inputtext);
 			                Dom[dom][hS_A9] += strval(inputtext);
-			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÍ teraz %d naboi do %s", Dom[dom][hS_A9], GunNames[Dom[dom][hS_G9]]);
+			                format(brondef, sizeof(brondef), "W zbrojowni znajduje siÔøΩ teraz %d naboi do %s", Dom[dom][hS_A9], GunNames[Dom[dom][hS_G9]]);
 	            			SendClientMessage(playerid, COLOR_NEWS, brondef);
 			            }
 			            else
 			            {
-			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÛbujesz schowaÊ wszystkie. Aby schowaÊ wszystkie naboje kliknij 'Wszystko'");
-							format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], PlayerInfo[playerid][pGun9]);
+			                SendClientMessage(playerid, COLOR_NEWS, "Nie masz przy sobie tyle naboi lub prÔøΩbujesz schowaÔøΩ wszystkie. Aby schowaÔøΩ wszystkie naboje kliknij 'Wszystko'");
+							format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], PlayerInfo[playerid][pGun9]);
 	   						ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
 			            	return 1;
 			            }
@@ -11226,38 +11226,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    new brondef[512];
 				    if(IDBroniZbrojownia[playerid] == 2)
 				    {
-				    	format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], PlayerInfo[playerid][pGun2]);
+				    	format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G2]], PlayerInfo[playerid][pGun2]);
 				    }
 				    if(IDBroniZbrojownia[playerid] == 3)
 				    {
-				    	format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], PlayerInfo[playerid][pGun3]);
+				    	format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G3]], PlayerInfo[playerid][pGun3]);
 				    }
 				    if(IDBroniZbrojownia[playerid] == 4)
 				    {
-				    	format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], PlayerInfo[playerid][pGun4]);
+				    	format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G4]], PlayerInfo[playerid][pGun4]);
 				    }
 				    if(IDBroniZbrojownia[playerid] == 5)
 				    {
-				    	format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], PlayerInfo[playerid][pGun5]);
+				    	format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G5]], PlayerInfo[playerid][pGun5]);
 				    }
 				    if(IDBroniZbrojownia[playerid] == 6)
 				    {
-				    	format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], PlayerInfo[playerid][pGun6]);
+				    	format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G6]], PlayerInfo[playerid][pGun6]);
 				    }
 				    if(IDBroniZbrojownia[playerid] == 7)
 				    {
-				    	format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], PlayerInfo[playerid][pGun7]);
+				    	format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G7]], PlayerInfo[playerid][pGun7]);
 				    }
 				    if(IDBroniZbrojownia[playerid] == 8)
 				    {
-				    	format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], PlayerInfo[playerid][pGun8]);
+				    	format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G8]], PlayerInfo[playerid][pGun8]);
 				    }
 				    if(IDBroniZbrojownia[playerid] == 9)
 				    {
-				    	format(brondef, sizeof(brondef), "Masz tπ samπ broÒ przy sobie i w zbrojowni.\nMoøesz schowaÊ ca≥π broÒ z nabojami lub schowaÊ okreúlonπ iloúÊ naboi.\nJeøeli chcesz schowaÊ tylko naboje, wpisz iloúÊ poniøej i kliknij 'Naboje'\n\n\nBroÒ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], PlayerInfo[playerid][pGun9]);
+				    	format(brondef, sizeof(brondef), "Masz tÔøΩ samÔøΩ broÔøΩ przy sobie i w zbrojowni.\nMoÔøΩesz schowaÔøΩ caÔøΩÔøΩ broÔøΩ z nabojami lub schowaÔøΩ okreÔøΩlonÔøΩ iloÔøΩÔøΩ naboi.\nJeÔøΩeli chcesz schowaÔøΩ tylko naboje, wpisz iloÔøΩÔøΩ poniÔøΩej i kliknij 'Naboje'\n\n\nBroÔøΩ: %s\t\tAmunicja: %d", GunNames[Dom[dom][hS_G9]], PlayerInfo[playerid][pGun9]);
 				    }
 					ShowPlayerDialogEx(playerid, 8247, DIALOG_STYLE_INPUT, "Chowanie amunicji", brondef, "Wszystko", "Naboje");
-				    SendClientMessage(playerid, COLOR_NEWS, "IloúÊ naboi od 1 do 100 000");
+				    SendClientMessage(playerid, COLOR_NEWS, "IloÔøΩÔøΩ naboi od 1 do 100 000");
 				}
 			}
 		}
@@ -11272,19 +11272,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
                         new stan[128];
                         format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
-		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_LIST, "Sejf rodzinny - stan", stan, "WrÛÊ", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_LIST, "Sejf rodzinny - stan", stan, "WrÔøΩÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		            case 1:
 		            {
 		                new stan[128];
 		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
-						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp≥acanie", stan, "Wyp≥aÊ", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wypÔøΩacanie", stan, "WypÔøΩaÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		            case 2:
 		            {
 		                new stan[128];
 		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
-						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp≥acanie", stan, "Wp≥aÊ", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wpÔøΩacanie", stan, "WpÔøΩaÔøΩ", "WrÔøΩÔøΩ");
 		            }
 		        }
 		    }
@@ -11293,7 +11293,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response || !response)
 		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp≥aÊ\nWp≥aÊ", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWypÔøΩaÔøΩ\nWpÔøΩaÔøΩ", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 497)
@@ -11303,7 +11303,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(!IsNumeric(inputtext))
                 {
                     SendClientMessage(playerid, -1, "To nie jest liczba!");
-                    ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp≥aÊ\nWp≥aÊ", "Wybierz", "Wyjdü");
+                    ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWypÔøΩaÔøΩ\nWpÔøΩaÔøΩ", "Wybierz", "WyjdÔøΩ");
                     return 1;
                 }
                 new kasa = strval(inputtext);
@@ -11319,34 +11319,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pAccount] += kasa;
 
 			            new komunikat[256];
-			            format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp≥acone pieniπdze sπ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
+			            format(komunikat, sizeof(komunikat), "WypÔøΩaciÔøΩeÔøΩ %d$ z sejfu rodzinnego. Jest w nim teraz %d$. WypÔøΩacone pieniÔøΩdze sÔøΩ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
 			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            Log(payLog, INFO, "%s wyp≥aci≥ z sejfu rodziny %d kwotÍ %d$. Nowy stan: %d$", 
+			            Log(payLog, INFO, "%s wypÔøΩaciÔøΩ z sejfu rodziny %d kwotÔøΩ %d$. Nowy stan: %d$", 
 							GetPlayerLogName(playerid),
 							lider,
 							kasa,
 							Sejf_Rodziny[lider]);
                         SejfR_Save(lider);
-						ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp≥aÊ\nWp≥aÊ", "Wybierz", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWypÔøΩaÔøΩ\nWpÔøΩaÔøΩ", "Wybierz", "WyjdÔøΩ");
 					}
 					else
 					{
-	    				SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siÍ aø tyle");
+	    				SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siÔøΩ aÔøΩ tyle");
 					    new stan[256];
 		             	format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp≥acanie", stan, "Wyp≥aÊ", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wypÔøΩacanie", stan, "WypÔøΩaÔøΩ", "WrÔøΩÔøΩ");
 					}
 				}
 		        else
 		        {
 		            new stan[256];
 	             	format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-					ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp≥acanie", stan, "Wyp≥aÊ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wypÔøΩacanie", stan, "WypÔøΩaÔøΩ", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp≥aÊ\nWp≥aÊ", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWypÔøΩaÔøΩ\nWpÔøΩaÔøΩ", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
 		if(dialogid == 498)
@@ -11356,7 +11356,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(!IsNumeric(inputtext))
                 {
                     SendClientMessage(playerid, -1, "To nie jest liczba!");
-                    ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp≥aÊ\nWp≥aÊ", "Wybierz", "Wyjdü");
+                    ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWypÔøΩaÔøΩ\nWpÔøΩaÔøΩ", "Wybierz", "WyjdÔøΩ");
                     return 1;
                 }
                 new kasa = strval(inputtext);
@@ -11367,7 +11367,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
                         if(Sejf_Rodziny[lider] + kasa > 1_000_000_000)
                         {
-                            SendClientMessage(playerid, -1, "Sejf siÍ przepe≥ni!");
+                            SendClientMessage(playerid, -1, "Sejf siÔøΩ przepeÔøΩni!");
                             return 1;
                         }
 		                new nick[MAX_PLAYER_NAME];
@@ -11377,34 +11377,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         SejfR_Add(lider, kasa);
 
 			            new komunikat[256];
-			            format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
+			            format(komunikat, sizeof(komunikat), "WpÔøΩaciÔøΩeÔøΩ %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
 			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            Log(payLog, INFO, "%s wp≥aci≥ do sejfu rodziny %d kwotÍ %d$. Nowy stan: %d$", 
+			            Log(payLog, INFO, "%s wpÔøΩaciÔøΩ do sejfu rodziny %d kwotÔøΩ %d$. Nowy stan: %d$", 
 							GetPlayerLogName(playerid),
 							lider,
 							kasa,
 							Sejf_Rodziny[lider]);
                         SejfR_Save(lider);
-			            ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp≥aÊ\nWp≥aÊ", "Wybierz", "Wyjdü");
+			            ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWypÔøΩaÔøΩ\nWpÔøΩaÔøΩ", "Wybierz", "WyjdÔøΩ");
 					}
 					else
 					{
-					    SendClientMessage(playerid, COLOR_P@, "Nie masz aø tyle przy sobie !");
+					    SendClientMessage(playerid, COLOR_P@, "Nie masz aÔøΩ tyle przy sobie !");
 					    new stan[256];
 		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp≥acanie", stan, "Wp≥aÊ", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wpÔøΩacanie", stan, "WpÔøΩaÔøΩ", "WrÔøΩÔøΩ");
 					}
 				}
 		        else
 		        {
 		            new stan[256];
 	                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-					ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp≥acanie", stan, "Wp≥aÊ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wpÔøΩacanie", stan, "WpÔøΩaÔøΩ", "WrÔøΩÔøΩ");
 		        }
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp≥aÊ\nWp≥aÊ", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWypÔøΩaÔøΩ\nWpÔøΩaÔøΩ", "Wybierz", "WyjdÔøΩ");
 		    }
 		}
         if(dialogid == 666)
@@ -11418,7 +11418,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 		        new komunikat[256];
 
-                if(strfind(inputtext, "åwiat≥a") != -1)
+                if(strfind(inputtext, "ÔøΩwiatÔøΩa") != -1)
                 {
                     if(lights == VEHICLE_PARAMS_ON)
 					{
@@ -11440,7 +11440,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetVehicleParamsEx(veh,engine,lights,alarm,doors,VEHICLE_PARAMS_ON,boot,objective);
 					}
                 }
-                else if(strfind(inputtext, "Bagaønik") != -1)
+                else if(strfind(inputtext, "BagaÔøΩnik") != -1)
                 {
                     if(boot == VEHICLE_PARAMS_ON)
 			 		{
@@ -11456,12 +11456,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     if(!cbradijo[playerid])
                 	{
                 		cbradijo[playerid] = 1;
-                		SendClientMessage(playerid, COLOR_WHITE, "   CB-radio wy≥πczone !");
+                		SendClientMessage(playerid, COLOR_WHITE, "   CB-radio wyÔøΩÔøΩczone !");
                 	}
                 	else
                 	{
                 		cbradijo[playerid] = 0;
-                		SendClientMessage(playerid,0xff00ff, "   CB-radio w≥πczone !");
+                		SendClientMessage(playerid,0xff00ff, "   CB-radio wÔøΩÔøΩczone !");
                 	}
                 }
                 else if(strfind(inputtext, "Neony") != -1)
@@ -11493,7 +11493,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                             AttachDynamicObjectToVehicle(VehicleUID[veh][vNeonObject][1], veh, 0.8, 0.0, -0.5, 0.0, 0.0, 0.0);
 						}
                         VehicleUID[veh][vNeon] = true;
-                        format(komunikat, sizeof(komunikat), "* %s naciska przycisk i w≥πcza neony.", sendername);
+                        format(komunikat, sizeof(komunikat), "* %s naciska przycisk i wÔøΩÔøΩcza neony.", sendername);
 						ProxDetector(30.0, playerid, komunikat, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				    }
                 }
@@ -11570,10 +11570,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     if(!response) return 1;
                     dont_override = true;
                     if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
-                    	ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "W≥asny stream", "Wklej poniøej link do streama", "Start", "WrÛÊ");
+                    	ShowPlayerDialogEx(playerid, 670, DIALOG_STYLE_INPUT, "WÔøΩasny stream", "Wklej poniÔøΩej link do streama", "Start", "WrÔøΩÔøΩ");
                     }
                 }
-                else if(strfind(inputtext, "Wy≥πcz radio") != -1)
+                else if(strfind(inputtext, "WyÔøΩÔøΩcz radio") != -1)
                 {
                     if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
                     {
@@ -11592,30 +11592,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    new taknieBON[64];
 			    new taknieBOT[64];
 			    GetVehicleParamsEx(veh,engine,lights,alarm,doors,bonnet,boot,objective);
-                if(lights == 1) format(taknieL, sizeof(taknieL), "Wy≥πcz");
-				else format(taknieL, sizeof(taknieL), "W≥πcz");
+                if(lights == 1) format(taknieL, sizeof(taknieL), "WyÔøΩÔøΩcz");
+				else format(taknieL, sizeof(taknieL), "WÔøΩÔøΩcz");
 				if(bonnet == 1) format(taknieBON, sizeof(taknieBON), "Zamknij");
-				else format(taknieBON, sizeof(taknieBON), "OtwÛrz");
+				else format(taknieBON, sizeof(taknieBON), "OtwÔøΩrz");
 				if(boot == 1) format(taknieBOT, sizeof(taknieBOT), "Zamknij");
-				else format(taknieBOT, sizeof(taknieBOT), "OtwÛrz");
+				else format(taknieBOT, sizeof(taknieBOT), "OtwÔøΩrz");
                 //
-                format(komunikat, sizeof(komunikat), "åwiat≥a (%s)\nMaska (%s)\nBagaønik (%s)", taknieL, taknieBON, taknieBOT);
+                format(komunikat, sizeof(komunikat), "ÔøΩwiatÔøΩa (%s)\nMaska (%s)\nBagaÔøΩnik (%s)", taknieL, taknieBON, taknieBOT);
                 //
                 if(PlayerInfo[playerid][pCB])
                 {
                     new cbr[16];
-                    if(cbradijo[playerid]) format(cbr, 16, "W≥πcz");
-                    else format(cbr, 16, "Wy≥πcz");
+                    if(cbradijo[playerid]) format(cbr, 16, "WÔøΩÔøΩcz");
+                    else format(cbr, 16, "WyÔøΩÔøΩcz");
                     format(komunikat, sizeof(komunikat), "%s\nCB-Radio (%s)", komunikat, cbr);
                 }
                 if(CarData[VehicleUID[veh][vUID]][c_Neon] != 0 || veh >= 475 && veh <= 483)
 				{
 				    new taknieNeo[16];
-					if(VehicleUID[veh][vNeon]) format(taknieNeo, sizeof(taknieNeo), "Wy≥πcz");
-					else format(taknieNeo, sizeof(taknieNeo), "W≥πcz");
+					if(VehicleUID[veh][vNeon]) format(taknieNeo, sizeof(taknieNeo), "WyÔøΩÔøΩcz");
+					else format(taknieNeo, sizeof(taknieNeo), "WÔøΩÔøΩcz");
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
-                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy≥πcz radio", komunikat); //+ 35char
+                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWyÔøΩÔøΩcz radio", komunikat); //+ 35char
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
 		}
@@ -11642,7 +11642,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(!response) return 1;
             SetPVarInt(playerid, "sanradio", listitem);
-            ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykÍ", "Mrucznik Radio\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nW≥asna", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, 669, DIALOG_STYLE_LIST, "Wybierz muzykÔøΩ", "Mrucznik Radio\nDisco polo\nDance100\nPrzeboje\nHip hop\nParty\nWÔøΩasna", "Wybierz", "Anuluj");
 
         }
         else if(dialogid == 669)
@@ -11658,7 +11658,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     case 3: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_mnt.pls");
                     case 4: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_hiphop.pls");
                     case 5: format(RadioSANUno, sizeof(RadioSANUno), "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "ProszÍ wprowadziÊ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
+                    case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "ProszÔøΩ wprowadziÔøΩ adres URL muzyki dla stacji SAN 01", "Wybierz", "Anuluj");
                 }
                 foreach(new i : Player)
                 {
@@ -11681,7 +11681,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     case 3: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_mnt.pls");
                     case 4: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_hiphop.pls");
                     case 5: format(RadioSANDos, sizeof(RadioSANDos), "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "ProszÍ wprowadziÊ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
+                    case 6: return ShowPlayerDialogEx(playerid, 668, DIALOG_STYLE_INPUT, "Podaj adres URL", "ProszÔøΩ wprowadziÔøΩ adres URL muzyki dla stacji SAN 02", "Wybierz", "Anuluj");
                 }
                 foreach(new i : Player)
                 {
@@ -11694,7 +11694,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     }
                 }
             }
-            SendClientMessage(playerid, COLOR_GRAD2, " Zmieni≥eú nadawanπ stacjÍ.");
+            SendClientMessage(playerid, COLOR_GRAD2, " ZmieniÔøΩeÔøΩ nadawanÔøΩ stacjÔøΩ.");
         }
         if(dialogid == 668)
         {
@@ -11729,7 +11729,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     }
                 }
             }
-            SendClientMessage(playerid, COLOR_GRAD2, " Zmieni≥eú nadawanπ stacjÍ.");
+            SendClientMessage(playerid, COLOR_GRAD2, " ZmieniÔøΩeÔøΩ nadawanÔøΩ stacjÔøΩ.");
         }
 		if(dialogid == 765)
 		{
@@ -11744,9 +11744,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     case 4: format(SANrepertuar, sizeof(SANrepertuar), "http://www.polskastacja.pl/play/aac_mnt.pls");
                     case 5: format(SANrepertuar, sizeof(SANrepertuar), "http://www.polskastacja.pl/play/aac_hiphop.pls");
                     case 6: format(SANrepertuar, sizeof(SANrepertuar), "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 7: return ShowPlayerDialogEx(playerid, 767, DIALOG_STYLE_INPUT, "Podaj adres URL", "ProszÍ wprowadziÊ adres URL do wybranego utworu", "Wybierz", "Anuluj");
+                    case 7: return ShowPlayerDialogEx(playerid, 767, DIALOG_STYLE_INPUT, "Podaj adres URL", "ProszÔøΩ wprowadziÔøΩ adres URL do wybranego utworu", "Wybierz", "Anuluj");
 		        }
-                ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiÍg", "Bardzo ma≥y zasiÍg\nMa≥y zasiÍg\nåredni zasiÍg\nDuøy zasiÍg", "Wybierz", "Anuluj");
+                ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiÔøΩg", "Bardzo maÔøΩy zasiÔøΩg\nMaÔøΩy zasiÔøΩg\nÔøΩredni zasiÔøΩg\nDuÔøΩy zasiÔøΩg", "Wybierz", "Anuluj");
 		    }
 		}
         if(dialogid == 766)
@@ -11768,10 +11768,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SANx = x1;
 				SANy = y1;
 				SANz = z1;
-                SAN3d = CreateDynamic3DTextLabel("G≥oúnik SAN", COLOR_NEWS, x1, y1, z1+0.5, 10.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
-				format(string, sizeof(string), "* %s stawia g≥oúnik na ziemi i w≥πcza.", nick);
+                SAN3d = CreateDynamic3DTextLabel("GÔøΩoÔøΩnik SAN", COLOR_NEWS, x1, y1, z1+0.5, 10.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
+				format(string, sizeof(string), "* %s stawia gÔøΩoÔøΩnik na ziemi i wÔøΩÔøΩcza.", nick);
 				ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				SendClientMessage(playerid, COLOR_NEWS, "Ustawi≥eú g≥oúnik SAN. Aby go wy≥πczyÊ wpisz /glosnik");
+				SendClientMessage(playerid, COLOR_NEWS, "UstawiÔøΩeÔøΩ gÔøΩoÔøΩnik SAN. Aby go wyÔøΩÔøΩczyÔøΩ wpisz /glosnik");
                 //
                 foreach(new i : Player)
                 {
@@ -11794,7 +11794,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             if(!response) return 1;
             format(SANrepertuar, 128, inputtext);
-            ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiÍg", "Bardzo ma≥y zasiÍg\nMa≥y zasiÍg\nåredni zasiÍg\nDuøy zasiÍg", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiÔøΩg", "Bardzo maÔøΩy zasiÔøΩg\nMaÔøΩy zasiÔøΩg\nÔøΩredni zasiÔøΩg\nDuÔøΩy zasiÔøΩg", "Wybierz", "Anuluj");
         }
 		else if(dialogid == 768)
 		{
@@ -11809,16 +11809,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     case 4: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_mnt.pls");
                     case 5: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_hiphop.pls");
                     case 6: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_party.pls");
-                    case 7: return ShowPlayerDialogEx(playerid, 770, DIALOG_STYLE_INPUT, "Podaj adres URL", "ProszÍ wprowadziÊ adres URL do wybranego utworu", "Wybierz", "Anuluj");
+                    case 7: return ShowPlayerDialogEx(playerid, 770, DIALOG_STYLE_INPUT, "Podaj adres URL", "ProszÔøΩ wprowadziÔøΩ adres URL do wybranego utworu", "Wybierz", "Anuluj");
 		        }
-                ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiÍg", "Bardzo ma≥y zasiÍg\nMa≥y zasiÍg\nåredni zasiÍg\nDuøy zasiÍg", "Wybierz", "Anuluj");
+                ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiÔøΩg", "Bardzo maÔøΩy zasiÔøΩg\nMaÔøΩy zasiÔøΩg\nÔøΩredni zasiÔøΩg\nDuÔøΩy zasiÔøΩg", "Wybierz", "Anuluj");
 		    }
 		}
 		else if(dialogid == 770)
         {
             if(!response) return 1;
             format(KLUBOWErepertuar, 128, inputtext);
-            ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiÍg", "Bardzo ma≥y zasiÍg\nMa≥y zasiÍg\nåredni zasiÍg\nDuøy zasiÍg", "Wybierz", "Anuluj");
+            ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiÔøΩg", "Bardzo maÔøΩy zasiÔøΩg\nMaÔøΩy zasiÔøΩg\nÔøΩredni zasiÔøΩg\nDuÔøΩy zasiÔøΩg", "Wybierz", "Anuluj");
         }
 		if(dialogid == 769)
 		{
@@ -11839,10 +11839,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				KLUBOWEx = x1;
 				KLUBOWEy = y1;
 				KLUBOWEz = z1;
-                KLUBOWE3d = CreateDynamic3DTextLabel("G≥oúnik Klubowy", COLOR_NEWS, x1, y1, z1+0.5, 10.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
-				format(string, sizeof(string), "* %s stawia g≥oúnik na ziemi i w≥πcza.", nick);
+                KLUBOWE3d = CreateDynamic3DTextLabel("GÔøΩoÔøΩnik Klubowy", COLOR_NEWS, x1, y1, z1+0.5, 10.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
+				format(string, sizeof(string), "* %s stawia gÔøΩoÔøΩnik na ziemi i wÔøΩÔøΩcza.", nick);
 				ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				SendClientMessage(playerid, COLOR_NEWS, "Ustawi≥eú g≥oúnik klubowy. Aby go wy≥πczyÊ wpisz /glosnik");
+				SendClientMessage(playerid, COLOR_NEWS, "UstawiÔøΩeÔøΩ gÔøΩoÔøΩnik klubowy. Aby go wyÔøΩÔøΩczyÔøΩ wpisz /glosnik");
                 //
                 foreach(new i : Player)
                 {
@@ -11868,23 +11868,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-		            case 0://Bia≥y
+		            case 0://BiaÔøΩy
 		            {
-						format(string, sizeof(string), "Bia≥e neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "BiaÔøΩe neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18652;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
 		            }
-		            case 1://ØÛ≥ty
+		            case 1://ÔøΩÔøΩty
 		            {
-						format(string, sizeof(string), "ØÛ≥te neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "ÔøΩÔøΩte neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, 0xDAA520FF, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18650;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
 		            }
 		            case 2://Zielony
 		            {
-						format(string, sizeof(string), "Zielone neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Zielone neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18649;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
@@ -11892,7 +11892,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 3://Niebieski
 		            {
 
-						format(string, sizeof(string), "Niebieskie neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Niebieskie neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18648;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
@@ -11900,15 +11900,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 4://Czerwony
 		            {
 
-						format(string, sizeof(string), "Czerwone neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Czerwone neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_RED, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18647;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
 
 		            }
-		            case 5://RÛøowy
+		            case 5://RÔøΩowy
 		            {
-						format(string, sizeof(string), "RÛøowe neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "RÔøΩowe neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_PURPLE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18651;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
@@ -11917,7 +11917,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 			else
 			{
-				format(string, sizeof(string), "Bia≥e neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+				format(string, sizeof(string), "BiaÔøΩe neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
 				CarData[IloscAut[playerid]][c_Neon] = 18652;
 				PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
@@ -11937,7 +11937,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= onePoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mÛwi: Oto pakiet 100 kredytÛw za jedyne %d$.", onePoolPrice);
+							format(string, sizeof(string), "Pani Janina mÔøΩwi: Oto pakiet 100 kredytÔøΩw za jedyne %d$.", onePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 100;
 							ZabierzKase(playerid, onePoolPrice);
@@ -11948,7 +11948,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci gotÛwki!"); 
+							sendErrorMessage(playerid, "Nie masz wystarczajÔøΩcej iloÔøΩci gotÔøΩwki!"); 
 							return 1;
 						}
 		            }
@@ -11956,7 +11956,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= twoPoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mÛwi: Oto pakiet 200 kredytÛw za jedyne %d$.", twoPoolPrice);
+							format(string, sizeof(string), "Pani Janina mÔøΩwi: Oto pakiet 200 kredytÔøΩw za jedyne %d$.", twoPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 200;
 							ZabierzKase(playerid, twoPoolPrice); 
@@ -11967,7 +11967,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci gotÛwki!"); 
+							sendErrorMessage(playerid, "Nie masz wystarczajÔøΩcej iloÔøΩci gotÔøΩwki!"); 
 							return 1;
 						}
 		            }
@@ -11975,7 +11975,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= threePoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mÛwi: Oto pakiet 500 kredytÛw za jedyne %d$.", threePoolPrice);
+							format(string, sizeof(string), "Pani Janina mÔøΩwi: Oto pakiet 500 kredytÔøΩw za jedyne %d$.", threePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 500;
 							ZabierzKase(playerid, threePoolPrice);
@@ -11986,7 +11986,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci gotÛwki!"); 
+							sendErrorMessage(playerid, "Nie masz wystarczajÔøΩcej iloÔøΩci gotÔøΩwki!"); 
 							return 1;
 						}
 		            }
@@ -11994,7 +11994,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= fourPoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mÛwi: Oto pakiet 1000 kredytÛw za jedyne %d$.", fourPoolPrice);
+							format(string, sizeof(string), "Pani Janina mÔøΩwi: Oto pakiet 1000 kredytÔøΩw za jedyne %d$.", fourPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
 							Kredyty[playerid] += 1000;
 							ZabierzKase(playerid, fourPoolPrice);
@@ -12005,7 +12005,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci gotÛwki!"); 
+							sendErrorMessage(playerid, "Nie masz wystarczajÔøΩcej iloÔøΩci gotÔøΩwki!"); 
 							return 1;
 						}
 		            }
@@ -12020,38 +12020,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[128];
 				switch(listitem)
 				{
-					case 0://OtwÛrz/zamknij basen
+					case 0://OtwÔøΩrz/zamknij basen
 					{
 						if(poolStatus == 0)
 						{
 							poolStatus = 1;
-							sendTipMessage(playerid, "Otworzy≥eú basen Tsunami");
-							format(string, sizeof(string), "%s otworzy≥ basen.", GetNick(playerid));
+							sendTipMessage(playerid, "OtworzyÔøΩeÔøΩ basen Tsunami");
+							format(string, sizeof(string), "%s otworzyÔøΩ basen.", GetNick(playerid));
 							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
 						}
 						else
 						{
 							poolStatus = 0;
-							sendTipMessage(playerid, "Zamknπ≥eú basen Tsunami");
-							format(string, sizeof(string), "%s zamknπ≥ basen - Koniec p≥ywania!", GetNick(playerid));
+							sendTipMessage(playerid, "ZamknÔøΩÔøΩeÔøΩ basen Tsunami");
+							format(string, sizeof(string), "%s zamknÔøΩÔøΩ basen - Koniec pÔøΩywania!", GetNick(playerid));
 							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
 						
 						}
 					}
-					case 1://ZmieÒ cenÍ kredytu
+					case 1://ZmieÔøΩ cenÔøΩ kredytu
 					{
-						ShowPlayerDialogEx(playerid, 1096, DIALOG_STYLE_LIST, "Mrucznik Role Play - Basen Tsunami", "1. DzieciÍcy\n2. Podstawowy\n3.Zaawansowany\n4.Premium", "Akceptuj", "WrÛÊ"); 
+						ShowPlayerDialogEx(playerid, 1096, DIALOG_STYLE_LIST, "Mrucznik Role Play - Basen Tsunami", "1. DzieciÔøΩcy\n2. Podstawowy\n3.Zaawansowany\n4.Premium", "Akceptuj", "WrÔøΩÔøΩ"); 
 					}
-					case 2://Ustal muzykÍ
+					case 2://Ustal muzykÔøΩ
 					{
-						sendTipMessage(playerid, "Juø nied≥ugo!"); 
+						sendTipMessage(playerid, "JuÔøΩ niedÔøΩugo!"); 
 					}
-					case 3://Wyúlij wiadomoúÊ
+					case 3://WyÔøΩlij wiadomoÔøΩÔøΩ
 					{
-						format(string, sizeof(string), "%s uøy≥ komunikatu basenu", GetNickEx(playerid));
-						SendAdminMessage(COLOR_RED, string); //WiadomoúÊ dla @
+						format(string, sizeof(string), "%s uÔøΩyÔøΩ komunikatu basenu", GetNickEx(playerid));
+						SendAdminMessage(COLOR_RED, string); //WiadomoÔøΩÔøΩ dla @
 						SendClientMessageToAll(COLOR_WHITE, "|___________ Basen Tsunami ___________|");
-						format(string, sizeof(string), "Plusk Plusk - Basen Tsunami otwarty! Zapraszamy do najlepszego obiektu rekreacyjnego w mieúcie!");
+						format(string, sizeof(string), "Plusk Plusk - Basen Tsunami otwarty! Zapraszamy do najlepszego obiektu rekreacyjnego w mieÔøΩcie!");
 						SendClientMessageToAll(COLOR_BLUE, string);
 					}
 				}
@@ -12062,7 +12062,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				sendTipMessage(playerid, "Nie za dobrze wyglπdajπ te statystki! Popraw je!");
+				sendTipMessage(playerid, "Nie za dobrze wyglÔøΩdajÔøΩ te statystki! Popraw je!");
 				return 1;
 			}
 		}
@@ -12075,27 +12075,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					case 0:
 					{
-						format(string, sizeof(string), "{C0C0C0}Wpisz poniøej nowπ kwotÍ dla pakietu {00FFFF}dzieciÍcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", onePoolPrice);
-						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "OdrzuÊ"); 
+						format(string, sizeof(string), "{C0C0C0}Wpisz poniÔøΩej nowÔøΩ kwotÔøΩ dla pakietu {00FFFF}dzieciÔøΩcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", onePoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "OdrzuÔøΩ"); 
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 1);
 					}
 					case 1:
 					{	
-						format(string, sizeof(string), "{C0C0C0}Wpisz poniøej nowπ kwotÍ dla pakietu {00FFFF}dzieciÍcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", twoPoolPrice);
-						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "OdrzuÊ"); 
+						format(string, sizeof(string), "{C0C0C0}Wpisz poniÔøΩej nowÔøΩ kwotÔøΩ dla pakietu {00FFFF}dzieciÔøΩcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", twoPoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "OdrzuÔøΩ"); 
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 2);
 					}
 					case 2:
 					{
-						format(string, sizeof(string), "{C0C0C0}Wpisz poniøej nowπ kwotÍ dla pakietu {00FFFF}dzieciÍcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", threePoolPrice);
-						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "OdrzuÊ"); 
+						format(string, sizeof(string), "{C0C0C0}Wpisz poniÔøΩej nowÔøΩ kwotÔøΩ dla pakietu {00FFFF}dzieciÔøΩcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", threePoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "OdrzuÔøΩ"); 
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 3);
 					}
 					case 3:
 					{
 						
-						format(string, sizeof(string), "{C0C0C0}Wpisz poniøej nowπ kwotÍ dla pakietu {00FFFF}dzieciÍcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", fourPoolPrice);
-						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "OdrzuÊ"); 
+						format(string, sizeof(string), "{C0C0C0}Wpisz poniÔøΩej nowÔøΩ kwotÔøΩ dla pakietu {00FFFF}dzieciÔøΩcego\n{C0C0C0}Aktualna cena to: {37AC45}%d$", fourPoolPrice);
+						ShowPlayerDialogEx(playerid, 1097, DIALOG_STYLE_INPUT, "Mrucznik Role Play - Basen Tsunami", string, "Akceptuj", "OdrzuÔøΩ"); 
 						SetPVarInt(playerid, "wyborPoziomuKredytow", 4);
 					}
 				}
@@ -12114,17 +12114,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(pricePool > 1)
 						{
 							onePoolPrice = pricePool;
-							sendTipMessage(playerid, "Ustali≥eú nowπ cenÍ!");
+							sendTipMessage(playerid, "UstaliÔøΩeÔøΩ nowÔøΩ cenÔøΩ!");
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Cena musi byÊ wiÍksza niø 1 dolar!"); 
+							sendErrorMessage(playerid, "Cena musi byÔøΩ wiÔøΩksza niÔøΩ 1 dolar!"); 
 							return 1;
 						}
 					}
 					else
 					{
-						sendErrorMessage(playerid, "Przekroczy≥eú maksymalnπ kwotÍ!"); 
+						sendErrorMessage(playerid, "PrzekroczyÔøΩeÔøΩ maksymalnÔøΩ kwotÔøΩ!"); 
 					}
 					return 1;
 				
@@ -12136,17 +12136,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(pricePool > 1)
 						{
 							twoPoolPrice = pricePool;
-							sendTipMessage(playerid, "Ustali≥eú nowπ cenÍ!");
+							sendTipMessage(playerid, "UstaliÔøΩeÔøΩ nowÔøΩ cenÔøΩ!");
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Kwota musi byÊ wiÍksza niø 1 dolar!");
+							sendErrorMessage(playerid, "Kwota musi byÔøΩ wiÔøΩksza niÔøΩ 1 dolar!");
 							return 1;
 						}
 					}
 					else
 					{
-						sendErrorMessage(playerid, "Przekroczy≥eú maksymalnπ kwotÍ!"); 
+						sendErrorMessage(playerid, "PrzekroczyÔøΩeÔøΩ maksymalnÔøΩ kwotÔøΩ!"); 
 					}
 					return 1;
 				}
@@ -12157,17 +12157,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(pricePool > 1)
 						{
 							threePoolPrice = pricePool;
-							sendTipMessage(playerid, "Ustali≥eú nowπ cenÍ!");
+							sendTipMessage(playerid, "UstaliÔøΩeÔøΩ nowÔøΩ cenÔøΩ!");
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Kwota musi byÊ wiÍksza niø 1 dolar!"); 
+							sendErrorMessage(playerid, "Kwota musi byÔøΩ wiÔøΩksza niÔøΩ 1 dolar!"); 
 							return 1;
 						}
 					}
 					else
 					{
-						sendErrorMessage(playerid, "Przekroczy≥eú maksymalnπ kwotÍ!"); 
+						sendErrorMessage(playerid, "PrzekroczyÔøΩeÔøΩ maksymalnÔøΩ kwotÔøΩ!"); 
 					}		
 					return 1;
 				}
@@ -12178,17 +12178,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						if(pricePool > 1)
 						{
 							fourPoolPrice = pricePool;
-							sendTipMessage(playerid, "Ustali≥eú nowπ cenÍ!");
+							sendTipMessage(playerid, "UstaliÔøΩeÔøΩ nowÔøΩ cenÔøΩ!");
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Kwota musi byÊ wiÍksza niø 1 dolar!"); 
+							sendErrorMessage(playerid, "Kwota musi byÔøΩ wiÔøΩksza niÔøΩ 1 dolar!"); 
 							return 1;
 						}
 					}
 					else
 					{
-						sendErrorMessage(playerid, "Przekroczy≥es maksymalnπ kwotÍ!"); 
+						sendErrorMessage(playerid, "PrzekroczyÔøΩes maksymalnÔøΩ kwotÔøΩ!"); 
 					}
 					return 1;
 				}
@@ -12202,23 +12202,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        new string[256];
 		        switch(listitem)
 		        {
-		            case 0://Bia≥y
+		            case 0://BiaÔøΩy
 		            {
-						format(string, sizeof(string), "Bia≥e neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "BiaÔøΩe neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18652;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
 		            }
-		            case 1://ØÛ≥ty
+		            case 1://ÔøΩÔøΩty
 		            {
-						format(string, sizeof(string), "ØÛ≥te neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "ÔøΩÔøΩte neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, 0xDAA520FF, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18650;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
 		            }
 		            case 2://Zielony
 		            {
-						format(string, sizeof(string), "Zielone neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Zielone neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18649;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
@@ -12226,7 +12226,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 3://Niebieski
 		            {
 
-						format(string, sizeof(string), "Niebieskie neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Niebieskie neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18648;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
@@ -12234,14 +12234,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 4://Czerwony
 		            {
 
-						format(string, sizeof(string), "Czerwone neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Czerwone neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_RED, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18647;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
 		            }
-		            case 5://RÛøowy
+		            case 5://RÔøΩowy
 		            {
-						format(string, sizeof(string), "RÛøowe neony zosta≥y zamontowane w twoim %s. Aby je w≥πczyÊ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "RÔøΩowe neony zostaÔøΩy zamontowane w twoim %s. Aby je wÔøΩÔøΩczyÔøΩ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_PURPLE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18651;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
@@ -12257,70 +12257,70 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[256];
 		        switch(listitem)
 				{
-				    case 0://Pokaø trasy
+				    case 0://PokaÔøΩ trasy
 				    {
-						ShowPlayerDialogEx(playerid, 1411, DIALOG_STYLE_LIST, "Wszystkie trasy:", ListaWyscigow(), "WiÍcej", "Wyjdü");
+						ShowPlayerDialogEx(playerid, 1411, DIALOG_STYLE_LIST, "Wszystkie trasy:", ListaWyscigow(), "WiÔøΩcej", "WyjdÔøΩ");
 				    }
-				    case 1://Zorganizuj wyúcig
+				    case 1://Zorganizuj wyÔøΩcig
 				    {
 						new ow = IsAWyscigOrganizowany();
 						if(ow == -1)
 						{
 							if(Scigamy == 666)
 							{
-								ShowPlayerDialogEx(playerid, 1412, DIALOG_STYLE_LIST, "Organizowanie wyúcigu. DostÍpne trasy:", ListaWyscigow(), "Zorganizuj", "WrÛÊ");
+								ShowPlayerDialogEx(playerid, 1412, DIALOG_STYLE_LIST, "Organizowanie wyÔøΩcigu. DostÔøΩpne trasy:", ListaWyscigow(), "Zorganizuj", "WrÔøΩÔøΩ");
 							}
 							else
 							{
-								format(string, sizeof(string), "Obecnie wyúcig %s jest zorganizowany. Poczekaj aø siÍ skoÒczy.", Wyscig[Scigamy][wNazwa]);
+								format(string, sizeof(string), "Obecnie wyÔøΩcig %s jest zorganizowany. Poczekaj aÔøΩ siÔøΩ skoÔøΩczy.", Wyscig[Scigamy][wNazwa]);
 								SendClientMessage(playerid, COLOR_GREY, string);
 							}
 						}
 						else
 						{
-							format(string, sizeof(string), "Gracz %s organizuje wyúcig. Poczekaj aø skoÒczy.", GetNick(ow));
+							format(string, sizeof(string), "Gracz %s organizuje wyÔøΩcig. Poczekaj aÔøΩ skoÔøΩczy.", GetNick(ow));
 							SendClientMessage(playerid, COLOR_GREY, string);
 						}
 				    }
-				    case 2://Edytuj trasÍ
+				    case 2://Edytuj trasÔøΩ
 				    {
 						new ow = IsAWyscigOrganizowany();
 						if(ow == -1)
 						{
 							if(Scigamy == 666)
 							{
-								ShowPlayerDialogEx(playerid, 1413, DIALOG_STYLE_LIST, "Edytowanie. DostÍpne trasy:", ListaWyscigow(), "Edytuj", "WrÛÊ");
+								ShowPlayerDialogEx(playerid, 1413, DIALOG_STYLE_LIST, "Edytowanie. DostÔøΩpne trasy:", ListaWyscigow(), "Edytuj", "WrÔøΩÔøΩ");
 							}
 							else
 							{
-								format(string, sizeof(string), "Obecnie wyúcig %s jest zorganizowany. Poczekaj aø siÍ skoÒczy.", Wyscig[Scigamy][wNazwa]);
+								format(string, sizeof(string), "Obecnie wyÔøΩcig %s jest zorganizowany. Poczekaj aÔøΩ siÔøΩ skoÔøΩczy.", Wyscig[Scigamy][wNazwa]);
 								SendClientMessage(playerid, COLOR_GREY, string);
 							}
 						}
 						else
 						{
-							format(string, sizeof(string), "Gracz %s organizuje wyúcig. Poczekaj aø skoÒczy.", GetNick(ow));
+							format(string, sizeof(string), "Gracz %s organizuje wyÔøΩcig. Poczekaj aÔøΩ skoÔøΩczy.", GetNick(ow));
 							SendClientMessage(playerid, COLOR_GREY, string);
 						}
 				    }
-				    case 3://UsuÒ trasÍ
+				    case 3://UsuÔøΩ trasÔøΩ
 				    {
 						new ow = IsAWyscigOrganizowany();
 						if(ow == -1)
 						{
 							if(Scigamy == 666)
 							{
-								ShowPlayerDialogEx(playerid, 1414, DIALOG_STYLE_LIST, "Usuwanie. DostÍpne trasy:", ListaWyscigow(), "UsuÒ", "WrÛÊ");
+								ShowPlayerDialogEx(playerid, 1414, DIALOG_STYLE_LIST, "Usuwanie. DostÔøΩpne trasy:", ListaWyscigow(), "UsuÔøΩ", "WrÔøΩÔøΩ");
 							}
 							else
 							{
-								format(string, sizeof(string), "Obecnie wyúcig %s jest zorganizowany. Poczekaj aø siÍ skoÒczy.", Wyscig[Scigamy][wNazwa]);
+								format(string, sizeof(string), "Obecnie wyÔøΩcig %s jest zorganizowany. Poczekaj aÔøΩ siÔøΩ skoÔøΩczy.", Wyscig[Scigamy][wNazwa]);
 								SendClientMessage(playerid, COLOR_GREY, string);
 							}
 						}
 						else
 						{
-							format(string, sizeof(string), "Gracz %s organizuje wyúcig. Poczekaj aø skoÒczy.", GetNick(ow));
+							format(string, sizeof(string), "Gracz %s organizuje wyÔøΩcig. Poczekaj aÔøΩ skoÔøΩczy.", GetNick(ow));
 							SendClientMessage(playerid, COLOR_GREY, string);
 						}
 				    }
@@ -12328,7 +12328,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 		    }
 		}
-		if(dialogid == 1411)//Pokaø trasy. WiÍcej informacji
+		if(dialogid == 1411)//PokaÔøΩ trasy. WiÔøΩcej informacji
 		{
 			if(response)
 			{
@@ -12338,39 +12338,39 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new wklej[256];
 					if(Wyscig[listitem][wTypCH] == 0)
 					{
-						strcat(wklej, "{7CFC00}Typ checkpointÛw:{FFFFFF} Normalne\n");
+						strcat(wklej, "{7CFC00}Typ checkpointÔøΩw:{FFFFFF} Normalne\n");
 					}
 					else
 					{
-	    				strcat(wklej, "{7CFC00}Typ checkpointÛw:{FFFFFF} Ko≥a\n");
+	    				strcat(wklej, "{7CFC00}Typ checkpointÔøΩw:{FFFFFF} KoÔøΩa\n");
 					}
 					if(Wyscig[listitem][wRozmiarCH] == 10.0)
 					{
-						strcat(wklej, "{7CFC00}Rozmiar checkpointÛw:{FFFFFF} Ogromne\n");
+						strcat(wklej, "{7CFC00}Rozmiar checkpointÔøΩw:{FFFFFF} Ogromne\n");
 					}
 					else if(Wyscig[listitem][wRozmiarCH] == 7.5)
 					{
-						strcat(wklej, "{7CFC00}Rozmiar checkpointÛw:{FFFFFF} Duøe\n");
+						strcat(wklej, "{7CFC00}Rozmiar checkpointÔøΩw:{FFFFFF} DuÔøΩe\n");
 					}
 					else if(Wyscig[listitem][wRozmiarCH] == 5)
 					{
-	    				strcat(wklej, "{7CFC00}Rozmiar checkpointÛw:{FFFFFF} årednie\n");
+	    				strcat(wklej, "{7CFC00}Rozmiar checkpointÔøΩw:{FFFFFF} ÔøΩrednie\n");
 					}
 					else if(Wyscig[listitem][wRozmiarCH] == 2.5)
 					{
-						strcat(wklej, "{7CFC00}Rozmiar checkpointÛw:{FFFFFF} Ma≥e\n");
+						strcat(wklej, "{7CFC00}Rozmiar checkpointÔøΩw:{FFFFFF} MaÔøΩe\n");
 					}
 					else if(Wyscig[listitem][wRozmiarCH] == 1)
 					{
-	    				strcat(wklej, "{7CFC00}Rozmiar checkpointÛw:{FFFFFF} Mini\n");
+	    				strcat(wklej, "{7CFC00}Rozmiar checkpointÔøΩw:{FFFFFF} Mini\n");
 					}
-	   				format(komunikat, sizeof(komunikat), "{7CFC00}Nazwa:{FFFFFF} %s\n{7CFC00}Opis:{FFFFFF} %s\n{7CFC00}Nagroda:{FFFFFF} %d$\n%s\n{7CFC00}IloúÊ checkpointÛw:{FFFFFF} %d\n{7CFC00}Rekord toru:{FFFFFF} %s - %d:%d", Wyscig[listitem][wNazwa], Wyscig[listitem][wOpis], Wyscig[listitem][wNagroda], wklej, Wyscig[listitem][wCheckpointy]+1, Wyscig[listitem][wRekordNick], Wyscig[listitem][wRekordCzas]);
-	    			ShowPlayerDialogEx(playerid, 1415, DIALOG_STYLE_MSGBOX, "{7CFC00}Informacje o wyúcigu{FFFFFF}", komunikat, "WrÛÊ", "");
+	   				format(komunikat, sizeof(komunikat), "{7CFC00}Nazwa:{FFFFFF} %s\n{7CFC00}Opis:{FFFFFF} %s\n{7CFC00}Nagroda:{FFFFFF} %d$\n%s\n{7CFC00}IloÔøΩÔøΩ checkpointÔøΩw:{FFFFFF} %d\n{7CFC00}Rekord toru:{FFFFFF} %s - %d:%d", Wyscig[listitem][wNazwa], Wyscig[listitem][wOpis], Wyscig[listitem][wNagroda], wklej, Wyscig[listitem][wCheckpointy]+1, Wyscig[listitem][wRekordNick], Wyscig[listitem][wRekordCzas]);
+	    			ShowPlayerDialogEx(playerid, 1415, DIALOG_STYLE_MSGBOX, "{7CFC00}Informacje o wyÔøΩcigu{FFFFFF}", komunikat, "WrÔøΩÔøΩ", "");
 	    		}
 	    		else
 	    		{
-					SendClientMessage(playerid, COLOR_GREY, "Ta trasa nie zosta≥a jeszcze stworzona!");
-					ShowPlayerDialogEx(playerid, 1411, DIALOG_STYLE_LIST, "Wszystkie trasy:", ListaWyscigow(), "WiÍcej", "Wyjdü");
+					SendClientMessage(playerid, COLOR_GREY, "Ta trasa nie zostaÔøΩa jeszcze stworzona!");
+					ShowPlayerDialogEx(playerid, 1411, DIALOG_STYLE_LIST, "Wszystkie trasy:", ListaWyscigow(), "WiÔøΩcej", "WyjdÔøΩ");
 	    		}
 				return 1;
 			}
@@ -12380,33 +12380,33 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
-						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig\nEdytuj trasÍ\nUsuÒ trasÍ", "Wybierz", "Anuluj");
+						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig\nEdytuj trasÔøΩ\nUsuÔøΩ trasÔøΩ", "Wybierz", "Anuluj");
 					}
 					else
 					{
-					    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig", "Wybierz", "Anuluj");
+					    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig", "Wybierz", "Anuluj");
 					}
  				}
 				return 1;
 			}
 		}
-		if(dialogid == 1412)//organizuj wyúcig
+		if(dialogid == 1412)//organizuj wyÔøΩcig
 		{
 		    if(response)
 		    {
 		        if(Wyscig[listitem][wStworzony] == 1)
 			    {
 			        new naglowek[64];
-					format(naglowek, sizeof(naglowek), "Organizacja wyúcigu '%s'", Wyscig[listitem][wNazwa]);
+					format(naglowek, sizeof(naglowek), "Organizacja wyÔøΩcigu '%s'", Wyscig[listitem][wNazwa]);
 		       		new komunikat[256];
-		       		format(komunikat, sizeof(komunikat), "Aby zorganizowaÊ ten wyscig musisz ponieúÊ koszty:\nNagroda dla wygranego: {FF0000}%d${B0C4DE}\nKoszt postawienia checkpointÛw: {FF0000}%d${B0C4DE}\nRazem: {FF0000}%d${B0C4DE}\nJeøeli chcesz kontynuowaÊ, wciúnij \"Dalej\"", Wyscig[listitem][wNagroda], (Wyscig[listitem][wCheckpointy]+1)*2000, Wyscig[listitem][wNagroda]+((Wyscig[listitem][wCheckpointy]+1)*2000));
-			        ShowPlayerDialogEx(playerid, 1416, DIALOG_STYLE_MSGBOX, naglowek, komunikat, "Dalej", "WrÛÊ");
+		       		format(komunikat, sizeof(komunikat), "Aby zorganizowaÔøΩ ten wyscig musisz ponieÔøΩÔøΩ koszty:\nNagroda dla wygranego: {FF0000}%d${B0C4DE}\nKoszt postawienia checkpointÔøΩw: {FF0000}%d${B0C4DE}\nRazem: {FF0000}%d${B0C4DE}\nJeÔøΩeli chcesz kontynuowaÔøΩ, wciÔøΩnij \"Dalej\"", Wyscig[listitem][wNagroda], (Wyscig[listitem][wCheckpointy]+1)*2000, Wyscig[listitem][wNagroda]+((Wyscig[listitem][wCheckpointy]+1)*2000));
+			        ShowPlayerDialogEx(playerid, 1416, DIALOG_STYLE_MSGBOX, naglowek, komunikat, "Dalej", "WrÔøΩÔøΩ");
 			        tworzenietrasy[playerid] = listitem;
 				}
 				else
 				{
-				    SendClientMessage(playerid, COLOR_GREY, "Ta trasa nie zosta≥a jeszcze stworzona!");
-					ShowPlayerDialogEx(playerid, 1412, DIALOG_STYLE_LIST, "Organizowanie wyúcigu. DostÍpne trasy:", ListaWyscigow(), "Zorganizuj", "WrÛÊ");
+				    SendClientMessage(playerid, COLOR_GREY, "Ta trasa nie zostaÔøΩa jeszcze stworzona!");
+					ShowPlayerDialogEx(playerid, 1412, DIALOG_STYLE_LIST, "Organizowanie wyÔøΩcigu. DostÔøΩpne trasy:", ListaWyscigow(), "Zorganizuj", "WrÔøΩÔøΩ");
 				}
 				return 1;
 		    }
@@ -12416,11 +12416,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
-						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig\nEdytuj trasÍ\nUsuÒ trasÍ", "Wybierz", "Anuluj");
+						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig\nEdytuj trasÔøΩ\nUsuÔøΩ trasÔøΩ", "Wybierz", "Anuluj");
 					}
 					else
 					{
-					    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig", "Wybierz", "Anuluj");
+					    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig", "Wybierz", "Anuluj");
 					}
  				}
 				return 1;
@@ -12432,13 +12432,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        if(Wyscig[listitem][wStworzony] == 1)
 			    {
-			        ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
+			        ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
 			        tworzenietrasy[playerid] = listitem;
                 }
 				else
 				{
-				    SendClientMessage(playerid, COLOR_GREY, "Ta trasa nie zosta≥a jeszcze stworzona!");
-					ShowPlayerDialogEx(playerid, 1413, DIALOG_STYLE_LIST, "Edytowanie. DostÍpne trasy:", ListaWyscigow(), "Edytuj", "WrÛÊ");
+				    SendClientMessage(playerid, COLOR_GREY, "Ta trasa nie zostaÔøΩa jeszcze stworzona!");
+					ShowPlayerDialogEx(playerid, 1413, DIALOG_STYLE_LIST, "Edytowanie. DostÔøΩpne trasy:", ListaWyscigow(), "Edytuj", "WrÔøΩÔøΩ");
 				}
 				return 1;
 			}
@@ -12448,31 +12448,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
-						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig\nEdytuj trasÍ\nUsuÒ trasÍ", "Wybierz", "Anuluj");
+						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig\nEdytuj trasÔøΩ\nUsuÔøΩ trasÔøΩ", "Wybierz", "Anuluj");
 					}
 					else
 					{
-					    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig", "Wybierz", "Anuluj");
+					    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig", "Wybierz", "Anuluj");
 					}
  				}
 				return 1;
 			}
 		}
-		if(dialogid == 1414)//usuÒ trase
+		if(dialogid == 1414)//usuÔøΩ trase
 		{
 		    if(response)
 		    {
 		        if(Wyscig[listitem][wStworzony] == 1)
 			    {
 			        new naglowek[64];
-					format(naglowek, sizeof(naglowek), "Usuwanie wyúcigu '%s'", Wyscig[listitem][wNazwa]);
-			        ShowPlayerDialogEx(playerid, 1417, DIALOG_STYLE_MSGBOX, naglowek, "{FF0000}UWAGA!{B0C4DE} Na pewno chcesz usunπÊ ten wyúcig?\nZostanie on bezpowrotnie zlikwidowany!\nNa pewno chcesz kontynuowaÊ?", "UsuÒ", "WrÛÊ");
+					format(naglowek, sizeof(naglowek), "Usuwanie wyÔøΩcigu '%s'", Wyscig[listitem][wNazwa]);
+			        ShowPlayerDialogEx(playerid, 1417, DIALOG_STYLE_MSGBOX, naglowek, "{FF0000}UWAGA!{B0C4DE} Na pewno chcesz usunÔøΩÔøΩ ten wyÔøΩcig?\nZostanie on bezpowrotnie zlikwidowany!\nNa pewno chcesz kontynuowaÔøΩ?", "UsuÔøΩ", "WrÔøΩÔøΩ");
 			        tworzenietrasy[playerid] = listitem;
                 }
 				else
 				{
-				    SendClientMessage(playerid, COLOR_GREY, "Ta trasa nie zosta≥a jeszcze stworzona!");
-					ShowPlayerDialogEx(playerid, 1414, DIALOG_STYLE_LIST, "Usuwanie. DostÍpne trasy:", ListaWyscigow(), "UsuÒ", "WrÛÊ");
+				    SendClientMessage(playerid, COLOR_GREY, "Ta trasa nie zostaÔøΩa jeszcze stworzona!");
+					ShowPlayerDialogEx(playerid, 1414, DIALOG_STYLE_LIST, "Usuwanie. DostÔøΩpne trasy:", ListaWyscigow(), "UsuÔøΩ", "WrÔøΩÔøΩ");
 				}
 				return 1;
 		    }
@@ -12482,21 +12482,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
-						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig\nEdytuj trasÍ\nUsuÒ trasÍ", "Wybierz", "Anuluj");
+						ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig\nEdytuj trasÔøΩ\nUsuÔøΩ trasÔøΩ", "Wybierz", "Anuluj");
 					}
 					else
 					{
-					    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig", "Wybierz", "Anuluj");
+					    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig", "Wybierz", "Anuluj");
 					}
  				}
 				return 1;
 		    }
 		}
-		if(dialogid == 1415)//informacje o wyúcigu
+		if(dialogid == 1415)//informacje o wyÔøΩcigu
 		{
 		    if(response || !response)
 		    {
-				ShowPlayerDialogEx(playerid, 1411, DIALOG_STYLE_LIST, "Wszystkie trasy:", ListaWyscigow(), "WiÍcej", "Wyjdü");
+				ShowPlayerDialogEx(playerid, 1411, DIALOG_STYLE_LIST, "Wszystkie trasy:", ListaWyscigow(), "WiÔøΩcej", "WyjdÔøΩ");
 				return 1;
 		    }
 		}
@@ -12509,43 +12509,43 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new sendername[MAX_PLAYER_NAME];
 					new komunikat[128];
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(komunikat, sizeof(komunikat), "Komunikat frakcyjny: {FFFFFF}%s zorganizowa≥ wyúcig %s", sendername, Wyscig[tworzenietrasy[playerid]][wNazwa]);
+					format(komunikat, sizeof(komunikat), "Komunikat frakcyjny: {FFFFFF}%s zorganizowaÔøΩ wyÔøΩcig %s", sendername, Wyscig[tworzenietrasy[playerid]][wNazwa]);
 					SendFamilyMessage(15, COLOR_YELLOW, komunikat);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wyúcig zorganizowany! Udaj siÍ na start i zaproú osoby do wyscigu komendπ /wyscig [id].");
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, "WyÔøΩcig zorganizowany! Udaj siÔøΩ na start i zaproÔøΩ osoby do wyscigu komendÔøΩ /wyscig [id].");
 					SetPlayerRaceCheckpoint(playerid,1,wCheckpoint[tworzenietrasy[playerid]][0][0], wCheckpoint[tworzenietrasy[playerid]][0][1], wCheckpoint[tworzenietrasy[playerid]][0][2],wCheckpoint[tworzenietrasy[playerid]][1][0], wCheckpoint[tworzenietrasy[playerid]][1][1], wCheckpoint[tworzenietrasy[playerid]][1][2], 10);
 					ZabierzKase(playerid, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					Sejf_Add(FRAC_NOA, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					ZabierzKase(playerid, Wyscig[tworzenietrasy[playerid]][wNagroda]);
 					
-					Log(payLog, INFO, "%s zorganizowa≥ wyúcig %s. Koszt organizacji: %d$, nagroda: %d$",
+					Log(payLog, INFO, "%s zorganizowaÔøΩ wyÔøΩcig %s. Koszt organizacji: %d$, nagroda: %d$",
 						GetPlayerLogName(playerid),
 						Wyscig[tworzenietrasy[playerid]][wNazwa], 
 						(Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000, 
 						Wyscig[tworzenietrasy[playerid]][wNagroda]);
 
 					owyscig[playerid] = tworzenietrasy[playerid];
-					//tworzenietrasy[playerid] = 666; - po co pytam sie zmieniac po wybraniu trasy zmiennπ jakoby TWORZYMY TRASE, PO CO?
+					//tworzenietrasy[playerid] = 666; - po co pytam sie zmieniac po wybraniu trasy zmiennÔøΩ jakoby TWORZYMY TRASE, PO CO?
 					
 				}
 				else
 				{
-					SendClientMessage(playerid, COLOR_PANICRED, "Nie staÊ ciÍ na zorganizowanie tego wyúcigu!!");
+					SendClientMessage(playerid, COLOR_PANICRED, "Nie staÔøΩ ciÔøΩ na zorganizowanie tego wyÔøΩcigu!!");
 					tworzenietrasy[playerid] = 666;
-					ShowPlayerDialogEx(playerid, 1412, DIALOG_STYLE_LIST, "Organizowanie wyúcigu. DostÍpne trasy:", ListaWyscigow(), "Zorganizuj", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, 1412, DIALOG_STYLE_LIST, "Organizowanie wyÔøΩcigu. DostÔøΩpne trasy:", ListaWyscigow(), "Zorganizuj", "WrÔøΩÔøΩ");
 				}
 			}
 		    if(!response)
 		    {
 				tworzenietrasy[playerid] = 666;
-				ShowPlayerDialogEx(playerid, 1412, DIALOG_STYLE_LIST, "Organizowanie wyúcigu. DostÍpne trasy:", ListaWyscigow(), "Zorganizuj", "WrÛÊ");
+				ShowPlayerDialogEx(playerid, 1412, DIALOG_STYLE_LIST, "Organizowanie wyÔøΩcigu. DostÔøΩpne trasy:", ListaWyscigow(), "Zorganizuj", "WrÔøΩÔøΩ");
 		    }
 			return 1;
 		}
-		if(dialogid == 1417)//usuÒ trase
+		if(dialogid == 1417)//usuÔøΩ trase
 		{
 		    if(response)
 			{
-				Log(serverLog, INFO, "%s zlikwidowa≥ trasÍ wyúcigowπ %s[%d]", GetPlayerLogName(playerid), Wyscig[tworzenietrasy[playerid]][wNazwa], tworzenietrasy[playerid]);
+				Log(serverLog, INFO, "%s zlikwidowaÔøΩ trasÔøΩ wyÔøΩcigowÔøΩ %s[%d]", GetPlayerLogName(playerid), Wyscig[tworzenietrasy[playerid]][wNazwa], tworzenietrasy[playerid]);
 
 			    Wyscig[tworzenietrasy[playerid]][wStworzony] = 0;
 				strcat(Wyscig[tworzenietrasy[playerid]][wNazwa], "Wolne", 20);
@@ -12560,22 +12560,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			  		wCheckpoint[tworzenietrasy[playerid]][ii][1] = 0;
 			    	wCheckpoint[tworzenietrasy[playerid]][ii][2] = 0;
 			    }
-				SendClientMessage(playerid, COLOR_RED, "Trasa pomyúlnie zlikwidowana!");
+				SendClientMessage(playerid, COLOR_RED, "Trasa pomyÔøΩlnie zlikwidowana!");
 				tworzenietrasy[playerid] = 666;
 			    if(PlayerInfo[playerid][pRank] >= 4)
  			    {
-					ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig\nEdytuj trasÍ\nUsuÒ trasÍ", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig\nEdytuj trasÔøΩ\nUsuÔøΩ trasÔøΩ", "Wybierz", "Anuluj");
 				}
 				else
 				{
-				    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig", "Wybierz", "Anuluj");
+				    ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig", "Wybierz", "Anuluj");
 				}
 				return 1;
 			}
 			if(!response)
 			{
 				tworzenietrasy[playerid] = 666;
-				ShowPlayerDialogEx(playerid, 1414, DIALOG_STYLE_LIST, "Usuwanie. DostÍpne trasy:", ListaWyscigow(), "UsuÒ", "WrÛÊ");
+				ShowPlayerDialogEx(playerid, 1414, DIALOG_STYLE_LIST, "Usuwanie. DostÔøΩpne trasy:", ListaWyscigow(), "UsuÔøΩ", "WrÔøΩÔøΩ");
 				return 1;
 			}
 		}
@@ -12585,17 +12585,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-		            case 0://NazwÍ
+		            case 0://NazwÔøΩ
 		            {
-		                ShowPlayerDialogEx(playerid, 1431, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Nazwa", "Wpisz nazwÍ wyúcigu. Maksymalnie 20 znakÛw", "Edytuj", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 1431, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Nazwa", "Wpisz nazwÔøΩ wyÔøΩcigu. Maksymalnie 20 znakÔøΩw", "Edytuj", "WrÔøΩÔøΩ");
 		            }
 		            case 1://Opis
 		            {
-		                ShowPlayerDialogEx(playerid, 1432, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Opis", "Wpisz opis trasy. Maksymalnie 50 znakÛw", "Edytuj", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 1432, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Opis", "Wpisz opis trasy. Maksymalnie 50 znakÔøΩw", "Edytuj", "WrÔøΩÔøΩ");
 		            }
 		            case 2://Nagrode
 		            {
-		                ShowPlayerDialogEx(playerid, 1433, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Nagroda", "Wpisz nagrodÍ jakπ dostanie zwyciÍzca wyúcigu.\nMinimalna stawka to 10 000$ a maksymalna to 10 000 000$", "Edytuj", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 1433, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Nagroda", "Wpisz nagrodÔøΩ jakÔøΩ dostanie zwyciÔøΩzca wyÔøΩcigu.\nMinimalna stawka to 10 000$ a maksymalna to 10 000 000$", "Edytuj", "WrÔøΩÔøΩ");
 		            }
 		        }
 				return 1;
@@ -12603,7 +12603,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    if(!response)
 		    {
 				tworzenietrasy[playerid] = 666;
-				ShowPlayerDialogEx(playerid, 1413, DIALOG_STYLE_LIST, "Edytowanie. DostÍpne trasy:", ListaWyscigow(), "Edytuj", "WrÛÊ");
+				ShowPlayerDialogEx(playerid, 1413, DIALOG_STYLE_LIST, "Edytowanie. DostÔøΩpne trasy:", ListaWyscigow(), "Edytuj", "WrÔøΩÔøΩ");
 				return 1;
 			}
 		}
@@ -12617,27 +12617,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						format(Wyscig[tworzenietrasy[playerid]][wNazwa], 20, "%s", inputtext);
 						new string[128];
-						format(string, sizeof(string), "Nazwa wyúcigu pomyúlnie zmieniona na: {FFFFFF}%s", inputtext);
+						format(string, sizeof(string), "Nazwa wyÔøΩcigu pomyÔøΩlnie zmieniona na: {FFFFFF}%s", inputtext);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						ZapiszTrase(tworzenietrasy[playerid]);
-						ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
+						ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
 					}
 					else
 					{
-						SendClientMessage(playerid, COLOR_GREY, "Nazwa nie moøe byÊ pusta/zbyt duøo znakÛw!");
-						ShowPlayerDialogEx(playerid, 1431, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Nazwa", "Wpisz nazwÍ wyúcigu. Maksymalnie 20 znakÛw", "Edytuj", "WrÛÊ");
+						SendClientMessage(playerid, COLOR_GREY, "Nazwa nie moÔøΩe byÔøΩ pusta/zbyt duÔøΩo znakÔøΩw!");
+						ShowPlayerDialogEx(playerid, 1431, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Nazwa", "Wpisz nazwÔøΩ wyÔøΩcigu. Maksymalnie 20 znakÔøΩw", "Edytuj", "WrÔøΩÔøΩ");
 					}
 				}
 				else
 				{
-					ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
-					SendClientMessage(playerid, COLOR_PANICRED, "Trwa wyúcig, nie moøna edytowaÊ!");
+					ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
+					SendClientMessage(playerid, COLOR_PANICRED, "Trwa wyÔøΩcig, nie moÔøΩna edytowaÔøΩ!");
 				}
 				return 1;
 		    }
 		    if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
+			    ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
 				return 1;
 			}
 		}
@@ -12651,27 +12651,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						format(Wyscig[tworzenietrasy[playerid]][wOpis], 50, "%s", inputtext);
 						new string[128];
-						format(string, sizeof(string), "Opis wyúcigu pomyúlnie zmieniony na: {FFFFFF}%s", inputtext);
+						format(string, sizeof(string), "Opis wyÔøΩcigu pomyÔøΩlnie zmieniony na: {FFFFFF}%s", inputtext);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						ZapiszTrase(tworzenietrasy[playerid]);
-						ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
+						ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
 					}
 					else
 					{
-						SendClientMessage(playerid, COLOR_GREY, "Nazwa nie moøe byÊ pusta/zbyt duøo znakÛw!");
-						ShowPlayerDialogEx(playerid, 1432, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Opis", "Wpisz opis trasy. Maksymalnie 50 znakÛw", "Edytuj", "WrÛÊ");
+						SendClientMessage(playerid, COLOR_GREY, "Nazwa nie moÔøΩe byÔøΩ pusta/zbyt duÔøΩo znakÔøΩw!");
+						ShowPlayerDialogEx(playerid, 1432, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Opis", "Wpisz opis trasy. Maksymalnie 50 znakÔøΩw", "Edytuj", "WrÔøΩÔøΩ");
 					}
 				}
 				else
 				{
-					ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
-					SendClientMessage(playerid, COLOR_PANICRED, "Trwa wyúcig, nie moøna edytowaÊ!");
+					ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
+					SendClientMessage(playerid, COLOR_PANICRED, "Trwa wyÔøΩcig, nie moÔøΩna edytowaÔøΩ!");
 				}
 				return 1;
     		}
 		    if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
+			    ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
 				return 1;
 			}
 		}
@@ -12685,37 +12685,37 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						Wyscig[tworzenietrasy[playerid]][wNagroda] = strval(inputtext);
 						new string[128];
-						format(string, sizeof(string), "Nagroda wyúcigu pomyúlnie zmieniona na: {FFFFFF}%d$", strval(inputtext));
+						format(string, sizeof(string), "Nagroda wyÔøΩcigu pomyÔøΩlnie zmieniona na: {FFFFFF}%d$", strval(inputtext));
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						ZapiszTrase(tworzenietrasy[playerid]);
-						ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
+						ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
 					}
 					else
 					{
-						ShowPlayerDialogEx(playerid, 1433, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Nagroda", "Wpisz nagrodÍ jakπ dostanie zwyciÍzca wyúcigu.\nMinimalna stawka to 10 000$ a maksymalna to 10 000 000$", "Edytuj", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 1433, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Nagroda", "Wpisz nagrodÔøΩ jakÔøΩ dostanie zwyciÔøΩzca wyÔøΩcigu.\nMinimalna stawka to 10 000$ a maksymalna to 10 000 000$", "Edytuj", "WrÔøΩÔøΩ");
 					}
 				}
 				else
 				{
-					ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
-					SendClientMessage(playerid, COLOR_PANICRED, "Trwa wyúcig, nie moøna edytowaÊ!");
+					ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
+					SendClientMessage(playerid, COLOR_PANICRED, "Trwa wyÔøΩcig, nie moÔøΩna edytowaÔøΩ!");
 				}
 				return 1;
 		    }
 		    if(!response)
 			{
-			    ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÊ", "NazwÍ\nOpis\nNagrodÍ", "Wybierz", "Anuluj");
+			    ShowPlayerDialogEx(playerid, 1430, DIALOG_STYLE_LIST, "Edycja trasy: Wybierz co chcesz edytowaÔøΩ", "NazwÔøΩ\nOpis\nNagrodÔøΩ", "Wybierz", "Anuluj");
 				return 1;
 			}
 		}
-		if(dialogid == 1420)//Tworzenie wyúcigu. Wybieranie slotu
+		if(dialogid == 1420)//Tworzenie wyÔøΩcigu. Wybieranie slotu
 		{
 			if(response)
 			{
 				if(Wyscig[listitem][wStworzony] == 0)
 				{
 				    tworzenietrasy[playerid] = listitem;
-				    ShowPlayerDialogEx(playerid, 1421, DIALOG_STYLE_LIST, "Kreator wyúcigÛw: Wybierz typ checkpointÛw", "Normalne\nKo≥a", "Wybierz", "Cofnij");
+				    ShowPlayerDialogEx(playerid, 1421, DIALOG_STYLE_LIST, "Kreator wyÔøΩcigÔøΩw: Wybierz typ checkpointÔøΩw", "Normalne\nKoÔøΩa", "Wybierz", "Cofnij");
 				}
 				else
 				{
@@ -12731,18 +12731,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    strcat(string, "Wolny\n");
 						}
 					}
-     				ShowPlayerDialogEx(playerid, 1420, DIALOG_STYLE_LIST, "Kreator wyúcigÛw: Wybierz slot", string, "Wybierz", "Anuluj");
-     				SendClientMessage(playerid, COLOR_GREY, "Slot zajÍty!");
+     				ShowPlayerDialogEx(playerid, 1420, DIALOG_STYLE_LIST, "Kreator wyÔøΩcigÔøΩw: Wybierz slot", string, "Wybierz", "Anuluj");
+     				SendClientMessage(playerid, COLOR_GREY, "Slot zajÔøΩty!");
 				}
 				return 1;
 			}
 			if(!response)
 			{
-				ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyúcigÛw: Wybierz opcjÍ", "Pokaø trasy\nZorganizuj wyúcig\nEdytuj trasÍ\nUsuÒ trasÍ", "Wybierz", "Anuluj");
+				ShowPlayerDialogEx(playerid, 1410, DIALOG_STYLE_LIST, "Panel wyÔøΩcigÔøΩw: Wybierz opcjÔøΩ", "PokaÔøΩ trasy\nZorganizuj wyÔøΩcig\nEdytuj trasÔøΩ\nUsuÔøΩ trasÔøΩ", "Wybierz", "Anuluj");
 				return 1;
 			}
 		}
-		if(dialogid == 1421)//Tworzenie wyúcigu. Wybieranie typu checkpointu
+		if(dialogid == 1421)//Tworzenie wyÔøΩcigu. Wybieranie typu checkpointu
 		{
 			if(response)
 			{
@@ -12754,7 +12754,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				    Wyscig[tworzenietrasy[playerid]][wTypCH] = 0;
 				}
-			    ShowPlayerDialogEx(playerid, 1422, DIALOG_STYLE_LIST, "Kreator wyúcigÛw: Wybierz rozmiar checkpointÛw", "Ogromne\nDuøe\nårednie\nMa≥e\nMini", "Wybierz", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 1422, DIALOG_STYLE_LIST, "Kreator wyÔøΩcigÔøΩw: Wybierz rozmiar checkpointÔøΩw", "Ogromne\nDuÔøΩe\nÔøΩrednie\nMaÔøΩe\nMini", "Wybierz", "WrÔøΩÔøΩ");
 				return 1;
 			}
 			if(!response)
@@ -12772,11 +12772,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						strcat(string, "Wolny\n");
 					}
 				}
-     			ShowPlayerDialogEx(playerid, 1420, DIALOG_STYLE_LIST, "Kreator wyúcigÛw: Wybierz slot", string, "Wybierz", "Anuluj");
+     			ShowPlayerDialogEx(playerid, 1420, DIALOG_STYLE_LIST, "Kreator wyÔøΩcigÔøΩw: Wybierz slot", string, "Wybierz", "Anuluj");
 				return 1;
 			}
 		}
-		if(dialogid == 1422)//Tworzenie wyúcigu. Wybieranie wielkoúci checkpointu
+		if(dialogid == 1422)//Tworzenie wyÔøΩcigu. Wybieranie wielkoÔøΩci checkpointu
 		{
 			if(response)
 			{
@@ -12786,15 +12786,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				    {
 				        Wyscig[tworzenietrasy[playerid]][wRozmiarCH] = 10.0;//rupxnup
 				    }
-				    case 1://Duøe
+				    case 1://DuÔøΩe
 				    {
 				        Wyscig[tworzenietrasy[playerid]][wRozmiarCH] = 7.5;
 				    }
-				    case 2://årednie
+				    case 2://ÔøΩrednie
 				    {
 				        Wyscig[tworzenietrasy[playerid]][wRozmiarCH] = 5.0;
 				    }
-				    case 3://Ma≥e
+				    case 3://MaÔøΩe
 				    {
 				        Wyscig[tworzenietrasy[playerid]][wRozmiarCH] = 2.5;
 				    }
@@ -12803,59 +12803,59 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				        Wyscig[tworzenietrasy[playerid]][wRozmiarCH] = 1.0;
 				    }
 				}
-				ShowPlayerDialogEx(playerid, 1423, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Nazwa", "Wpisz nazwÍ wyúcigu. Maksymalnie 20 znakÛw", "Dalej", "");
+				ShowPlayerDialogEx(playerid, 1423, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Nazwa", "Wpisz nazwÔøΩ wyÔøΩcigu. Maksymalnie 20 znakÔøΩw", "Dalej", "");
 				return 1;
    			}
 			if(!response)
 			{
 			    Wyscig[tworzenietrasy[playerid]][wTypCH] = 0;
-			    ShowPlayerDialogEx(playerid, 1421, DIALOG_STYLE_LIST, "Kreator wyúcigÛw: Wybierz typ checkpointÛw", "Normalne\nKo≥a", "Wybierz", "WrÛÊ");
+			    ShowPlayerDialogEx(playerid, 1421, DIALOG_STYLE_LIST, "Kreator wyÔøΩcigÔøΩw: Wybierz typ checkpointÔøΩw", "Normalne\nKoÔøΩa", "Wybierz", "WrÔøΩÔøΩ");
 			}
 		}
-		if(dialogid == 1423)//Tworzenie wyúcigu. Wypisywanie nazwy
+		if(dialogid == 1423)//Tworzenie wyÔøΩcigu. Wypisywanie nazwy
 		{
 		    if(strlen(inputtext) > 1 && strlen(inputtext) <= 20)
 			{
 			    format(Wyscig[tworzenietrasy[playerid]][wNazwa], 20, "%s", inputtext);
-			    ShowPlayerDialogEx(playerid, 1424, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Opis", "Wpisz opis trasy. Maksymalnie 50 znakÛw", "Dalej", "");
+			    ShowPlayerDialogEx(playerid, 1424, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Opis", "Wpisz opis trasy. Maksymalnie 50 znakÔøΩw", "Dalej", "");
 			}
 		    else
 			{
-			    SendClientMessage(playerid, COLOR_GREY, "Nazwa nie moøe byÊ pusta/zbyt duøo znakÛw!");
-			    ShowPlayerDialogEx(playerid, 1423, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Nazwa", "Wpisz nazwÍ wyúcigu. Maksymalnie 20 znakÛw", "Dalej", "");
+			    SendClientMessage(playerid, COLOR_GREY, "Nazwa nie moÔøΩe byÔøΩ pusta/zbyt duÔøΩo znakÔøΩw!");
+			    ShowPlayerDialogEx(playerid, 1423, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Nazwa", "Wpisz nazwÔøΩ wyÔøΩcigu. Maksymalnie 20 znakÔøΩw", "Dalej", "");
 			}
 		}
-		if(dialogid == 1424)//Tworzenie wyúcigu. Wpisywanie opisu
+		if(dialogid == 1424)//Tworzenie wyÔøΩcigu. Wpisywanie opisu
 		{
 		    if(strlen(inputtext) > 1 && strlen(inputtext) <= 50)
 			{
 			    format(Wyscig[tworzenietrasy[playerid]][wOpis], 50, "%s", inputtext);
-			    ShowPlayerDialogEx(playerid, 1425, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Nagroda", "Wpisz nagrodÍ jakπ dostanie zwyciÍzca wyúcigu.\nMinimalna stawka to 10 000$ a maksymalna to 10 000 000$", "Dalej", "");
+			    ShowPlayerDialogEx(playerid, 1425, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Nagroda", "Wpisz nagrodÔøΩ jakÔøΩ dostanie zwyciÔøΩzca wyÔøΩcigu.\nMinimalna stawka to 10 000$ a maksymalna to 10 000 000$", "Dalej", "");
 			}
 		    else
 			{
-				SendClientMessage(playerid, COLOR_GREY, "Opis nie moøe byÊ pusty/zbyt duøo znakÛw!");
-			    ShowPlayerDialogEx(playerid, 1424, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Opis", "Wpisz opis trasy. Maksymalnie 50 znakÛw", "Dalej", "");
+				SendClientMessage(playerid, COLOR_GREY, "Opis nie moÔøΩe byÔøΩ pusty/zbyt duÔøΩo znakÔøΩw!");
+			    ShowPlayerDialogEx(playerid, 1424, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Opis", "Wpisz opis trasy. Maksymalnie 50 znakÔøΩw", "Dalej", "");
 			}
 		}
-		if(dialogid == 1425)//Tworzenie wyúcigu. Nagroda
+		if(dialogid == 1425)//Tworzenie wyÔøΩcigu. Nagroda
 		{
 			if(strval(inputtext) >= 10000 && strval(inputtext) <= 10000000)
 			{
 			    Wyscig[tworzenietrasy[playerid]][wNagroda] = strval(inputtext);
-			    ShowPlayerDialogEx(playerid, 1426, DIALOG_STYLE_MSGBOX, "Kreator wyúcigÛw: Tworzenie trasy", "Poda≥eú juø wszystkie wymagane informacje.\nMoøesz przejúÊ do tworzenia trasy lub anulowaÊ proces tworzenia.\nAby postawiÊ czekpoint wpisz /checkpoint\nAby postawiÊ mete i zakoÒczyc tworzenie trasy, wpisz /meta\nAby przejúÊ dalej, naciúnnij \"Dalej\"", "Dalej", "UsuÒ");
+			    ShowPlayerDialogEx(playerid, 1426, DIALOG_STYLE_MSGBOX, "Kreator wyÔøΩcigÔøΩw: Tworzenie trasy", "PodaÔøΩeÔøΩ juÔøΩ wszystkie wymagane informacje.\nMoÔøΩesz przejÔøΩÔøΩ do tworzenia trasy lub anulowaÔøΩ proces tworzenia.\nAby postawiÔøΩ czekpoint wpisz /checkpoint\nAby postawiÔøΩ mete i zakoÔøΩczyc tworzenie trasy, wpisz /meta\nAby przejÔøΩÔøΩ dalej, naciÔøΩnnij \"Dalej\"", "Dalej", "UsuÔøΩ");
 			}
 			else
 			{
-			    ShowPlayerDialogEx(playerid, 1425, DIALOG_STYLE_INPUT, "Kreator wyúcigÛw: Nagroda", "Wpisz nagrodÍ jakπ dostanie zwyciÍzca wyúcigu.\nMinimalna stawka to 10 000$ a maksymalna to 10 000 000$", "Dalej", "");
+			    ShowPlayerDialogEx(playerid, 1425, DIALOG_STYLE_INPUT, "Kreator wyÔøΩcigÔøΩw: Nagroda", "Wpisz nagrodÔøΩ jakÔøΩ dostanie zwyciÔøΩzca wyÔøΩcigu.\nMinimalna stawka to 10 000$ a maksymalna to 10 000 000$", "Dalej", "");
 			}
 		}
-		if(dialogid == 1426)//Tworzenie wyúcigu. Przejúcie do tworzenia trasy
+		if(dialogid == 1426)//Tworzenie wyÔøΩcigu. PrzejÔøΩcie do tworzenia trasy
 		{
 		    if(response)
 		    {
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Aby stworzyÊ checkpoint wpisz /checkpoint. Aby usunπÊ ostatnio postawiony checkpoint wpisz /checkpoint-usun. Aby zakoÒczyÊ tworzenie i postawiÊ finisz, wpisz /meta");
-		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Maksymalna iloúÊ checkpointÛw to 50.");
+		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Aby stworzyÔøΩ checkpoint wpisz /checkpoint. Aby usunÔøΩÔøΩ ostatnio postawiony checkpoint wpisz /checkpoint-usun. Aby zakoÔøΩczyÔøΩ tworzenie i postawiÔøΩ finisz, wpisz /meta");
+		        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Maksymalna iloÔøΩÔøΩ checkpointÔøΩw to 50.");
 		    }
 		    if(!response)
 		    {
@@ -12866,15 +12866,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        tworzenietrasy[playerid] = 666;
 		    }
 		}
-		if(dialogid == 1427)//Tworzenie wyúcigu. Koniec tworzenia trasy
+		if(dialogid == 1427)//Tworzenie wyÔøΩcigu. Koniec tworzenia trasy
 		{
 		    if(response)
 		    {
-		        //testowanie wyúcigu
+		        //testowanie wyÔøΩcigu
 		    }
 		}
         /*
-		if(dialogid == 7004)//wybiera≥ka GUI
+		if(dialogid == 7004)//wybieraÔøΩka GUI
 	   	{
 		   	if(response == 1)
 		    {
@@ -12898,7 +12898,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	SetPlayerSkinEx(playerid, 274);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 274");
 					}
-					case 3://Sanitariusz Bia≥y
+					case 3://Sanitariusz BiaÔøΩy
 					{
 						PlayerInfo[playerid][pSkin] = 276;
 					   	SetPlayerSkinEx(playerid, 276);
@@ -12910,19 +12910,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	SetPlayerSkinEx(playerid, 219);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 219");
 					}
-					case 5://PielÍgniarka Latynoska
+					case 5://PielÔøΩgniarka Latynoska
 					{
 						PlayerInfo[playerid][pSkin] = 69;
 					   	SetPlayerSkinEx(playerid, 69);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 69");
 					}
-					case 6://PielÍgniarka Murzynka
+					case 6://PielÔøΩgniarka Murzynka
 					{
 						PlayerInfo[playerid][pSkin] = 148;
 					   	SetPlayerSkinEx(playerid, 148);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 148");
 					}
-					case 7://PielÍgniarka Bia≥a
+					case 7://PielÔøΩgniarka BiaÔøΩa
 					{
 						PlayerInfo[playerid][pSkin] = 216;
 					   	SetPlayerSkinEx(playerid, 216);
@@ -12932,46 +12932,46 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
    			}
   		}
   		//	--------------------------------------------------------------
- 		if(dialogid == 7001)//wybiera≥ka GUI
+ 		if(dialogid == 7001)//wybieraÔøΩka GUI
 	   	{
 		   	if(response == 1)
 		    {
 			   	switch(listitem)
 			   	{
-				   	case 0://Policjant bia≥y(Pulaski)
+				   	case 0://Policjant biaÔøΩy(Pulaski)
 				   	{
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 93 : 266;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "ZmieniÔøΩeÔøΩ swÔøΩj uniform.");
 					}
 					case 1://Policjant tempeny
 					{
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 211 : 265;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "ZmieniÔøΩeÔøΩ swÔøΩj uniform.");
 					}
 					case 2://Policjant Latynos
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 192 : 267;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "ZmieniÔøΩeÔøΩ swÔøΩj uniform.");
 					}
-					case 3://Policjant bia≥y
+					case 3://Policjant biaÔøΩy
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 148 : 280;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "ZmieniÔøΩeÔøΩ swÔøΩj uniform.");
 					}
-					case 4://Policjant bia≥y(z wπsem)
+					case 4://Policjant biaÔøΩy(z wÔøΩsem)
 					{	
 						new skin = (PlayerInfo[playerid][pSex] == 2) ? 141 : 281;
 						PlayerInfo[playerid][pSkin] = skin;
 						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "ZmieniÔøΩeÔøΩ swÔøΩj uniform.");
 					}
 					case 5://Policjant z Las Venturas
 					{
@@ -13007,7 +13007,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
    			}
   		}
   		//	--------------------------------------------------------------
- 		if(dialogid == 7003)//wybiera≥ka GUI
+ 		if(dialogid == 7003)//wybieraÔøΩka GUI
 	   	{
 		   	if(response == 1)
 		    {
@@ -13043,13 +13043,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
 					}
-					case 5://PU£KOWNIK
+					case 5://PUÔøΩKOWNIK
 					{
 						PlayerInfo[playerid][pSkin] = 287;
 					   	SetPlayerSkinEx(playerid, 287);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 287");
 					}
-					case 6://GERA£
+					case 6://GERAÔøΩ
 					{
 						PlayerInfo[playerid][pSkin] = 287;
 					   	SetPlayerSkinEx(playerid, 287);
@@ -13071,7 +13071,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
    			}
   		}
   			//	--------------------------------------------------------------
- 		if(dialogid == 7002)//wybiera≥ka GUI
+ 		if(dialogid == 7002)//wybieraÔøΩka GUI
 	   	{
 		   	if(response == 1)
 		    {
@@ -13089,13 +13089,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	SetPlayerSkinEx(playerid, 165);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 165");
 					}
-					case 2://Agent åledczy
+					case 2://Agent ÔøΩledczy
 					{
 						PlayerInfo[playerid][pSkin] = 166;
 					   	SetPlayerSkinEx(playerid, 166);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 166");
 					}
-					case 3://Koordynator åledczy
+					case 3://Koordynator ÔøΩledczy
 					{
 						PlayerInfo[playerid][pSkin] = 165;
 					   	SetPlayerSkinEx(playerid, 165);
@@ -13123,7 +13123,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
    			}
   		}
   			//	--------------------------------------------------------------
- 		if(dialogid == 7006)//wybiera≥ka GUI (Yakuza to rangi 5/6) Z£E SKINY
+ 		if(dialogid == 7006)//wybieraÔøΩka GUI (Yakuza to rangi 5/6) ZÔøΩE SKINY
 	   	{
 		   	if(response == 1)
 		    {
@@ -13163,7 +13163,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	}
 		   				else
 					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 2 rangÍ aby wybraÊ ten skin!");
+						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÔøΩ minimum 2 rangÔøΩ aby wybraÔøΩ ten skin!");
 					   	}
 					}
 					case 5://Gosho
@@ -13176,7 +13176,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					 	}
 		   				else
 					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 2 rangÍ aby wybraÊ ten skin!");
+						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÔøΩ minimum 2 rangÔøΩ aby wybraÔøΩ ten skin!");
 					   	}
 					}
 					case 6://Taka Hosho
@@ -13189,7 +13189,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	}
 		   				else
 					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 2 rangÍ aby wybraÊ ten skin!");
+						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÔøΩ minimum 2 rangÔøΩ aby wybraÔøΩ ten skin!");
 					   	}
 					}
     				case 7://Daimao
@@ -13202,7 +13202,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	}
 		   				else
 					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 5 rangÍ aby wybraÊ ten skin!");
+						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÔøΩ minimum 5 rangÔøΩ aby wybraÔøΩ ten skin!");
 					   	}
 					}
 					case 8://Oyabun
@@ -13215,7 +13215,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	}
 		   				else
 					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 5 rangÍ aby wybraÊ ten skin!");
+						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÔøΩ minimum 5 rangÔøΩ aby wybraÔøΩ ten skin!");
 					   	}
 					}
 				}
@@ -13223,19 +13223,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
   		}
 //Ykz Koniec
 	//	--------------------------------------------------------------
- 		if(dialogid == 7011)//wybiera≥ka GUI DMV
+ 		if(dialogid == 7011)//wybieraÔøΩka GUI DMV
 	   	{
 		   	if(response == 1)
 		    {
 			   	switch(listitem)
 			   	{
-				   	case 0://Staøysta
+				   	case 0://StaÔøΩysta
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 76;
 					   	SetPlayerSkinEx(playerid, 76);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 76 jest teraz twoim nowym skinem frakcyjnym.");
 					}
-					case 1://Staøysta1
+					case 1://StaÔøΩysta1
 					{
 						PlayerInfo[playerid][pSkin] = 60;
 					   	SetPlayerSkinEx(playerid, 60);
@@ -13265,13 +13265,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	SetPlayerSkinEx(playerid, 59);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 59");
 					}
-					case 6://UrzÍdnik
+					case 6://UrzÔøΩdnik
 					{
 						PlayerInfo[playerid][pSkin] = 240;
 					   	SetPlayerSkinEx(playerid, 240);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 240");
 					}
-					case 7://UrzÍdnik1
+					case 7://UrzÔøΩdnik1
 					{
 						PlayerInfo[playerid][pSkin] = 150;
 					   	SetPlayerSkinEx(playerid, 150);
@@ -13311,19 +13311,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
    			}
   		}
 //----------------------------------
- 		if(dialogid == 7016)//wybiera≥ka GUI WPS
+ 		if(dialogid == 7016)//wybieraÔøΩka GUI WPS
 	   	{
 		   	if(response == 1)
 		    {
 			   	switch(listitem)
 			   	{
-				   	case 0://£ysy
+				   	case 0://ÔøΩysy
 				   	{
 					   	PlayerInfo[playerid][pSkin] = 112;
 					   	SetPlayerSkinEx(playerid, 112);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 112 jest teraz twoim nowym skinem frakcyjnym.");
 					}
-					case 1://skoúnooki skin
+					case 1://skoÔøΩnooki skin
 					{
 						PlayerInfo[playerid][pSkin] = 121;
 					   	SetPlayerSkinEx(playerid, 121);
@@ -13347,13 +13347,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					   	SetPlayerSkinEx(playerid, 133);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 133");
 					}
-					case 5://∆pun
+					case 5://ÔøΩpun
 					{
 						PlayerInfo[playerid][pSkin] = 291;
 					   	SetPlayerSkinEx(playerid, 291);
 					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 291");
 					}
-					case 6://SkinÛwa
+					case 6://SkinÔøΩwa
 					{
 						PlayerInfo[playerid][pSkin] = 191;
 					   	SetPlayerSkinEx(playerid, 191);
@@ -13367,7 +13367,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(PlayerInfo[playerid][pFMember] != FAMILY_RSC) return 1;
             new skin = strval(inputtext);
 		   	SetPlayerSkinEx(playerid, skin);
-		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Przebra≥es siÍ na chwile.");
+		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "PrzebraÔøΩes siÔøΩ na chwile.");
         }
         if(7007 <= dialogid <= 7010 || 7012 <= dialogid <= 7015 || dialogid == 7017)
         {
@@ -13375,7 +13375,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             new skin = strval(inputtext);
             PlayerInfo[playerid][pSkin] = skin;
 		   	SetPlayerSkinEx(playerid, skin);
-		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
+		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "ZmieniÔøΩeÔøΩ swÔøΩj uniform.");
         }
         if(dialogid == D_UNIFORM_LCN)
         {
@@ -13396,10 +13396,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             PlayerInfo[playerid][pSkin] = skin;
 		   	SetPlayerSkinEx(playerid, skin);
-		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
+		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "ZmieniÔøΩeÔøΩ swÔøΩj uniform.");
 
         }  */
-	   	if(dialogid == 8155)//SYstem autobusÛw - tablice
+	   	if(dialogid == 8155)//SYstem autobusÔøΩw - tablice
 	   	{
 		   	if(response == 1)
 		    {
@@ -13412,22 +13412,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						    if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 50) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia55]=1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS.");
-								SetPlayerCheckpoint(playerid, 2215.8428,-1436.8223,23.4033, 4); // Ustawiamy poczπtkowy CP
+								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonÔøΩ trasÔøΩ. PodÔøΩÔøΩaj za sygnaÔøΩem GPS.");
+								SetPlayerCheckpoint(playerid, 2215.8428,-1436.8223,23.4033, 4); // Ustawiamy poczÔøΩtkowy CP
 								CP[playerid] = 551; //Przypisek CP do dalszych
 								PlayerInfo[playerid][pNatrasiejest] = 1; //Kierowca jest w trasie
-	   							Przystanek(playerid, COLOR_BLUE, "Linia nr. 55\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
+	   							Przystanek(playerid, COLOR_BLUE, "Linia nr. 55\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ÔøΩÔøΩDANIE (N/ÔøΩ)");
 	   							SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
 	   							BusCzit[playerid] = 1;
 							}
 							else
 							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 2skill aby rozpoczπÊ tπ trasÍ");
+							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 2skill aby rozpoczÔøΩÔøΩ tÔøΩ trasÔøΩ");
 							}
    						}
 				    	else
 						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
+							SendClientMessage(playerid, COLOR_GREY, " JesteÔøΩ juÔøΩ w trasie !");
 						}
 				   	}
 				   	case 1:
@@ -13435,17 +13435,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				   		if(PlayerInfo[playerid][pNatrasiejest] == 0)
 						{
 							    PlayerInfo[playerid][pLinia72]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS.");
+								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonÔøΩ trasÔøΩ. PodÔøΩÔøΩaj za sygnaÔøΩem GPS.");
 								SetPlayerCheckpoint(playerid, 2818.4243,-1576.9399,10.9287, 4);
 								CP[playerid] = 721;
 								PlayerInfo[playerid][pNatrasiejest] = 1;
-					   			Przystanek(playerid, COLOR_NEWS, "Linia nr. 72 (dojazd)\n{808080}Kierunek: BAZA MECHANIK”W (pÍtla) \nWszytkie przystanki NA Ø•DANIE (N/Ø)");
+					   			Przystanek(playerid, COLOR_NEWS, "Linia nr. 72 (dojazd)\n{808080}Kierunek: BAZA MECHANIKÔøΩW (pÔøΩtla) \nWszytkie przystanki NA ÔøΩÔøΩDANIE (N/ÔøΩ)");
 					   			SetTimerEx("AntyBusCzit", 60000*5, 0, "d", playerid);
 	   							BusCzit[playerid] = 1;
 	   					}
 				   		else
 						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
+							SendClientMessage(playerid, COLOR_GREY, " JesteÔøΩ juÔøΩ w trasie !");
 						}
 				   	}
 				   	case 2:
@@ -13455,22 +13455,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						 	if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 200) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia96]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
+								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonÔøΩ trasÔøΩ. PodÔøΩÔøΩaj za sygnaÔøΩem GPS");
 								SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
 								CP[playerid] = 961;
 								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid, COLOR_GREEN, "Linia nr. 96\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
+								Przystanek(playerid, COLOR_GREEN, "Linia nr. 96\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ÔøΩÔøΩDANIE (N/ÔøΩ)");
 								SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
 	   							BusCzit[playerid] = 1;
  							}
 							else
 							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 4skill aby rozpoczπÊ tπ trasÍ");
+							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 4skill aby rozpoczÔøΩÔøΩ tÔøΩ trasÔøΩ");
 							}
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
+							SendClientMessage(playerid, COLOR_GREY, " JesteÔøΩ juÔøΩ w trasie !");
 						}
 					}
 					case 3:
@@ -13480,22 +13480,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia82]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
+								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonÔøΩ trasÔøΩ. PodÔøΩÔøΩaj za sygnaÔøΩem GPS");
 								SetPlayerCheckpoint(playerid, 1173.1520,-1825.2843,13.1789, 4);
 								CP[playerid] = 821;
 								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid,COLOR_YELLOW, "Linia nr. 82\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
+								Przystanek(playerid,COLOR_YELLOW, "Linia nr. 82\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ÔøΩÔøΩDANIE (N/ÔøΩ)");
 								SetTimerEx("AntyBusCzit", 60000*8, 0, "d", playerid);
 	   							BusCzit[playerid] = 1;
                             }
 							else
 							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 5skill aby rozpoczπÊ tπ trasÍ");
+							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 5skill aby rozpoczÔøΩÔøΩ tÔøΩ trasÔøΩ");
 							}
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
+							SendClientMessage(playerid, COLOR_GREY, " JesteÔøΩ juÔøΩ w trasie !");
 						}
 					}
 					case 4:
@@ -13505,22 +13505,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
 							    PlayerInfo[playerid][pLinia96]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
+								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonÔøΩ trasÔøΩ. PodÔøΩÔøΩaj za sygnaÔøΩem GPS");
 								SetPlayerCheckpoint(playerid, 2119.7363,-1896.8149,13.1345, 4);
 								CP[playerid] = 501;
 								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid, COLOR_GREEN, "Linia nr. 85\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
+								Przystanek(playerid, COLOR_GREEN, "Linia nr. 85\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ÔøΩÔøΩDANIE (N/ÔøΩ)");
 								SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
 	   							BusCzit[playerid] = 1;
  							}
 							else
 							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 3skill aby rozpoczπÊ tπ trasÍ");
+							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 3skill aby rozpoczÔøΩÔøΩ tÔøΩ trasÔøΩ");
 							}
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
+							SendClientMessage(playerid, COLOR_GREY, " JesteÔøΩ juÔøΩ w trasie !");
 						}
 					}
 					case 5:
@@ -13529,20 +13529,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
 						    {
-								Przystanek(playerid, COLOR_BLUE, "Wycieczka\nKoszt: 7500$\n WiÍcej informacji u kierowcy.");
+								Przystanek(playerid, COLOR_BLUE, "Wycieczka\nKoszt: 7500$\n WiÔøΩcej informacji u kierowcy.");
 				    			/*BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= 15000;
 							    GetPlayerName(playerid,sendername,sizeof(sendername));
-			    				format(string, sizeof(string), "Przewodnik %s zaprasza wszytkich na wycieczkÍ autobusowπ, koszt: $15000", sendername, TransportValue[playerid]);
+			    				format(string, sizeof(string), "Przewodnik %s zaprasza wszytkich na wycieczkÔøΩ autobusowÔøΩ, koszt: $15000", sendername, TransportValue[playerid]);
 			    				OOCNews(TEAM_GROVE_COLOR,string);*/
  							}
 							else
 							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 5skill lub 4 rangi aby organizowaÊ wycieczki.");
+							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 5skill lub 4 rangi aby organizowaÔøΩ wycieczki.");
 							}
 						}
 						else
 						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
+							SendClientMessage(playerid, COLOR_GREY, " JesteÔøΩ juÔøΩ w trasie !");
 						}
 					}
 					case 6:
@@ -13556,9 +13556,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								PlayerInfo[playerid][pLinia82] = 0;
 								PlayerInfo[playerid][pLinia96] = 0;
 								PlayerInfo[playerid][pNatrasiejest] = 0;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje jπ sygna≥ GPS. ");
-				       			Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Commerce\n {808080}Zatrzymuje siÍ na przystankach");
-				       			SendClientMessage(playerid, COLOR_ALLDEPT, " KT przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczÍúliwy autobus :) ");
+								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje jÔøΩ sygnaÔøΩ GPS. ");
+				       			Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Commerce\n {808080}Zatrzymuje siÔøΩ na przystankach");
+				       			SendClientMessage(playerid, COLOR_ALLDEPT, " KT przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczÔøΩliwy autobus :) ");
 							}
 							else if (PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 							{
@@ -13569,22 +13569,22 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								PlayerInfo[playerid][pLinia82] = 0;
 								PlayerInfo[playerid][pLinia96] = 0;
 								PlayerInfo[playerid][pNatrasiejest] = 0;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje jπ sygna≥ GPS. ");
-				       			Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Ocean Docks\n {808080}Zatrzymuje siÍ na przystankach");
-				       			SendClientMessage(playerid, COLOR_ALLDEPT, " LSBD przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczÍúliwy autobus :) ");
+								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje jÔøΩ sygnaÔøΩ GPS. ");
+				       			Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Ocean Docks\n {808080}Zatrzymuje siÔøΩ na przystankach");
+				       			SendClientMessage(playerid, COLOR_ALLDEPT, " LSBD przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczÔøΩliwy autobus :) ");
 							}
 				   	}
 				   	case 7:
 				   	{
-						SendClientMessage(playerid, COLOR_YELLOW, "|_____________Objaúnienia_____________|");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}50$/p {FFFFF0}- okreúla premiÍ za kaødy przystanek");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}5min{FFFFF0} - orientacyjny czas przejazdy ca≥ej trasy (dwa okrπøenia)");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}13p{FFFFF0} - liczba przystankÛw na trasie");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/businfo{FFFFF0} - wyúwietla informacje o systemie autobusÛw (w budowie)");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/zakoncztrase{FFFFF0} - przerywa wykonywanπ trasÍ i zmienia tablicÍ na domyúlnπ");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/zd{FFFFF0} - zamyka drzwi w autobusie i umoøliwa dalszπ jazdÍ");
-						SendClientMessage(playerid, COLOR_GREEN, "Wyp≥atÍ za przejechane przystanki otrzymuje siÍ DOPIERO po przejechaniu ca≥ej trasy!");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}Podpowiedü:{FFFFF0} najszybsze zarobki gwarantuje linia 72");
+						SendClientMessage(playerid, COLOR_YELLOW, "|_____________ObjaÔøΩnienia_____________|");
+						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}50$/p {FFFFF0}- okreÔøΩla premiÔøΩ za kaÔøΩdy przystanek");
+						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}5min{FFFFF0} - orientacyjny czas przejazdy caÔøΩej trasy (dwa okrÔøΩÔøΩenia)");
+						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}13p{FFFFF0} - liczba przystankÔøΩw na trasie");
+						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/businfo{FFFFF0} - wyÔøΩwietla informacje o systemie autobusÔøΩw (w budowie)");
+						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/zakoncztrase{FFFFF0} - przerywa wykonywanÔøΩ trasÔøΩ i zmienia tablicÔøΩ na domyÔøΩlnÔøΩ");
+						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/zd{FFFFF0} - zamyka drzwi w autobusie i umoÔøΩliwa dalszÔøΩ jazdÔøΩ");
+						SendClientMessage(playerid, COLOR_GREEN, "WypÔøΩatÔøΩ za przejechane przystanki otrzymuje siÔøΩ DOPIERO po przejechaniu caÔøΩej trasy!");
+						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}PodpowiedÔøΩ:{FFFFF0} najszybsze zarobki gwarantuje linia 72");
 						SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD<<_____________|");
 					}
 			   	}
@@ -13603,7 +13603,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     			new i = dini_Int("Admini/weryfikacje.ini", "ilosc");
  		    	format(gf, sizeof(gf), "Nick_%d", i);
    				dini_Set("Admini/weryfikacje.ini", gf, inputtext);
-	        	ShowPlayerDialogEx(playerid, 1889, DIALOG_STYLE_INPUT, "Tworzenie weryfikacji", "Wpisz weryfikacje", "StwÛrz", "");
+	        	ShowPlayerDialogEx(playerid, 1889, DIALOG_STYLE_INPUT, "Tworzenie weryfikacji", "Wpisz weryfikacje", "StwÔøΩrz", "");
 			}
 	    }
 	}
@@ -13616,7 +13616,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
      	    format(gf, sizeof(gf), "Weryfikacja_%d", i);
      	    format(gf2, sizeof(gf2), "Nick_%d", i);
      	    dini_Set("Admini/weryfikacje.ini", gf, inputtext);
-     	    format(gf, sizeof(gf), "Weryfikacja utworzona pomyúlnie.\nNick: %s\nWeryfikacja: %s", dini_Get("Admini/weryfikacje.ini", gf2), dini_Get("Admini/weryfikacje.ini", gf));
+     	    format(gf, sizeof(gf), "Weryfikacja utworzona pomyÔøΩlnie.\nNick: %s\nWeryfikacja: %s", dini_Get("Admini/weryfikacje.ini", gf2), dini_Get("Admini/weryfikacje.ini", gf));
             ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_INPUT, "Tworzenie weryfikacji", gf, "OK", "");
       	}
 	}
@@ -13631,7 +13631,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0: //sejf
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "Wpisz /sejfr", "WrÛÊ", "");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "Wpisz /sejfr", "WrÔøΩÔøΩ", "");
 					return 1;
 				}
 				case 1: //drzwi
@@ -13639,17 +13639,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(IbizaZamek)
 					{
 						IbizaZamek=false;
-						SendClientMessage(playerid, 0x00FF00FF, "Otworzy≥eú klub!");
+						SendClientMessage(playerid, 0x00FF00FF, "OtworzyÔøΩeÔøΩ klub!");
 					}
 					else
 					{
 						IbizaZamek=true;
-						SendClientMessage(playerid, 0xFF0000FF, "Zamknπ≥eú klub!");
+						SendClientMessage(playerid, 0xFF0000FF, "ZamknÔøΩÔøΩeÔøΩ klub!");
 					}
 				}
 				case 2: //cena biletu
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_BILET_CENA, DIALOG_STYLE_INPUT, "Zmiana ceny biletu", "Wpisz poniøej nowπ cenÍ biletu dla Ibiza Club", "ZmieÒ", "Anuluj");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_BILET_CENA, DIALOG_STYLE_INPUT, "Zmiana ceny biletu", "Wpisz poniÔøΩej nowÔøΩ cenÔøΩ biletu dla Ibiza Club", "ZmieÔøΩ", "Anuluj");
 					return 1;
 				}
 				case 3: //ceny na barze
@@ -13659,7 +13659,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						format(string, sizeof string, "%s%d. %s - $%d\n", string, i+1, IbizaDrinkiNazwy[i], IbizaDrinkiCeny[i]);
 					}
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN, DIALOG_STYLE_LIST, "Cennik drinkÛw", string, "ZmieÒ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN, DIALOG_STYLE_LIST, "Cennik drinkÔøΩw", string, "ZmieÔøΩ", "WrÔøΩÔøΩ");
 					return 1;
 				}
 				case 4: //barierki
@@ -13686,7 +13686,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 6:
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PARKIET, DIALOG_STYLE_LIST, "Zmiana parkietu", "Piasek\nDrewniane panele\nKolorowe kafelki", "ZmieÒ", "Anuluj");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PARKIET, DIALOG_STYLE_LIST, "Zmiana parkietu", "Piasek\nDrewniane panele\nKolorowe kafelki", "ZmieÔøΩ", "Anuluj");
 					return 1;
 				}
 				case 7:
@@ -13694,12 +13694,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(IbizaBiuro) //otwarte
 					{
 						IbizaBiuro=false;
-						SendClientMessage(playerid, 0xFF0000FF, "Zamknπ≥eú biuro");
+						SendClientMessage(playerid, 0xFF0000FF, "ZamknÔøΩÔøΩeÔøΩ biuro");
 					}
 					else //zamkniete
 					{
 						IbizaBiuro= true;
-						SendClientMessage(playerid, 0x00FF00FF, "Otworzy≥eú biuro");
+						SendClientMessage(playerid, 0x00FF00FF, "OtworzyÔøΩeÔøΩ biuro");
 					}
 				}
 				case 8:
@@ -13707,12 +13707,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(IbizaDach) //otwarte
 					{
 						IbizaDach=false;
-						SendClientMessage(playerid, 0xFF0000FF, "Zamknπ≥eú wyjúcie na dach");
+						SendClientMessage(playerid, 0xFF0000FF, "ZamknÔøΩÔøΩeÔøΩ wyjÔøΩcie na dach");
 					}
 					else //zamkniete
 					{
 						IbizaDach= true;
-						SendClientMessage(playerid, 0x00FF00FF, "Otworzy≥eú wyjúcie na dach");
+						SendClientMessage(playerid, 0x00FF00FF, "OtworzyÔøΩeÔøΩ wyjÔøΩcie na dach");
 					}
 
 				}
@@ -13726,7 +13726,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(listitem==IbizaParkiet) {SendClientMessage(playerid, -1, "Ten parkiet jest obiecnie ustawiony"); return  ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PARKIET, DIALOG_STYLE_LIST, "Zmiana parkietu", "Piasek\nDrewniane panele\nKolorowe kafelki", "ZmieÒ", "Anuluj"); }
+			if(listitem==IbizaParkiet) {SendClientMessage(playerid, -1, "Ten parkiet jest obiecnie ustawiony"); return  ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PARKIET, DIALOG_STYLE_LIST, "Zmiana parkietu", "Piasek\nDrewniane panele\nKolorowe kafelki", "ZmieÔøΩ", "Anuluj"); }
 			//niszczenie obiektu
 			switch(IbizaParkiet)
 			{
@@ -13781,7 +13781,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             if(cena < 0 || cena > 1000000) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota (od 0 do 1kk)");
 			IbizaBilet = cena;
 			new string[128];
-			format(string, sizeof string, "Zmieni≥eú cenÍ biletu do Ibizy na %d$", cena);
+			format(string, sizeof string, "ZmieniÔøΩeÔøΩ cenÔøΩ biletu do Ibizy na %d$", cena);
 			SendClientMessage(playerid, 0x00FF00FF, string);
 		}
 		return PrezesDialog(playerid);
@@ -13791,8 +13791,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[128];
-			format(string, sizeof string, "Wpisz nowπ cenÍ dla drinka %s", IbizaDrinkiNazwy[listitem]);
-			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN_2, DIALOG_STYLE_INPUT, "Cennik drinkÛw", string, "ZmieÒ", "Anuluj");
+			format(string, sizeof string, "Wpisz nowÔøΩ cenÔøΩ dla drinka %s", IbizaDrinkiNazwy[listitem]);
+			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN_2, DIALOG_STYLE_INPUT, "Cennik drinkÔøΩw", string, "ZmieÔøΩ", "Anuluj");
 			SetPVarInt(playerid, "CenaDrinka", listitem);
 		}
 		else PrezesDialog(playerid);
@@ -13809,7 +13809,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			IbizaDrinkiCeny[index] = hajsy;
 			DeletePVar(playerid, "CenaDrinka");
 			new string[128];
-			format(string, sizeof string, "Zmieni≥eú cenÍ drinka %s na %d$", IbizaDrinkiNazwy[index], IbizaDrinkiCeny[index]);
+			format(string, sizeof string, "ZmieniÔøΩeÔøΩ cenÔøΩ drinka %s na %d$", IbizaDrinkiNazwy[index], IbizaDrinkiCeny[index]);
 			SendClientMessage(playerid, -1, string);
 		}
 		new string[300];
@@ -13817,7 +13817,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			format(string, sizeof string, "%s%d. %s - $%d\n", string, i+1, IbizaDrinkiNazwy[i], IbizaDrinkiCeny[i]);
 		}
-		ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN, DIALOG_STYLE_LIST, "Cennik drinkÛw", string, "ZmieÒ", "WrÛÊ");
+		ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN, DIALOG_STYLE_LIST, "Cennik drinkÔøΩw", string, "ZmieÔøΩ", "WrÔøΩÔøΩ");
 	}
 	*/
 	/*if(dialogid==DIALOG_IBIZA_SEJF)
@@ -13826,20 +13826,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			switch(listitem)
 			{
-				case 0: //zawartoúÊ
+				case 0: //zawartoÔøΩÔøΩ
 				{
 					new hajs, string[128];
 					hajs = IbizaZawartoscSejfu();
 					format(string, sizeof string, "W sejfie jest %d$", hajs);
 					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_INFO, DIALOG_STYLE_MSGBOX, "Ibiza Sejf", string, "Ok", "");
 				}
-				case 1: //Wp≥ata
+				case 1: //WpÔøΩata
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_WPLATA, DIALOG_STYLE_INPUT, "Wp≥ata do sejfu", "Wpisz poniøej kwotÍ jakπ chcia≥byú wp≥aciÊ do sejfu", "Wp≥aÊ", "Anuluj");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_WPLATA, DIALOG_STYLE_INPUT, "WpÔøΩata do sejfu", "Wpisz poniÔøΩej kwotÔøΩ jakÔøΩ chciaÔøΩbyÔøΩ wpÔøΩaciÔøΩ do sejfu", "WpÔøΩaÔøΩ", "Anuluj");
 				}
-				case 2: //Wyp≥ata
+				case 2: //WypÔøΩata
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_WYPLATA, DIALOG_STYLE_INPUT, "Wyp≥ata pieniÍdzy z sejfu", "Wpisz poniøej kwotÍ jakπ chcia≥byú wyp≥aciÊ z sejfu", "Wyp≥aÊ", "Anuluj");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_WYPLATA, DIALOG_STYLE_INPUT, "WypÔøΩata pieniÔøΩdzy z sejfu", "Wpisz poniÔøΩej kwotÔøΩ jakÔøΩ chciaÔøΩbyÔøΩ wypÔøΩaciÔøΩ z sejfu", "WypÔøΩaÔøΩ", "Anuluj");
 				}
 			}
 		}
@@ -13853,16 +13853,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new hajs = strval(inputtext);
 			if(hajs <=0) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota");
 			new sejf = IbizaZawartoscSejfu();
-			if(hajs > sejf) return SendClientMessage(playerid, -1, "W sejfie nie ma tyle pieniÍdzy");
-			DajKase(playerid, hajs); //HAJS  dodaÊ dodawanie pieniÍdzy graczowi do struktury
+			if(hajs > sejf) return SendClientMessage(playerid, -1, "W sejfie nie ma tyle pieniÔøΩdzy");
+			DajKase(playerid, hajs); //HAJS  dodaÔøΩ dodawanie pieniÔøΩdzy graczowi do struktury
 			IbizaWplac(-hajs);
 			new string[128];
-			format(string, sizeof string, "Wyp≥aci≥eú %d$ z sejfu Ibizy", hajs);
+			format(string, sizeof string, "WypÔøΩaciÔøΩeÔøΩ %d$ z sejfu Ibizy", hajs);
 			SendClientMessage(playerid, -1, string);
-            format(string, sizeof string, "Lider %s wyp≥aci≥ %d$ z Ibizy", GetNick(playerid), hajs);
+            format(string, sizeof string, "Lider %s wypÔøΩaciÔøΩ %d$ z Ibizy", GetNick(playerid), hajs);
             Log(payLog, INFO, string);
 		}
-		return ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "ZawartoúÊ\nWp≥ata\nWyp≥ata", "Wybierz", "WrÛÊ");
+		return ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "ZawartoÔøΩÔøΩ\nWpÔøΩata\nWypÔøΩata", "Wybierz", "WrÔøΩÔøΩ");
 	}
 	if(dialogid==DIALOG_IBIZA_WPLATA)
 	{
@@ -13871,15 +13871,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new hajs = strval(inputtext);
 			if(hajs<=0) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota");
 			if(hajs > kaska[playerid]) return SendClientMessage(playerid, -1, "Nie masz tyle hajsu");
-			DajKase(playerid, -hajs); //HAJS zabraÊ pieniπdze ze struktury
+			DajKase(playerid, -hajs); //HAJS zabraÔøΩ pieniÔøΩdze ze struktury
 			IbizaWplac(hajs);
 			new string[128];
-			format(string, sizeof string, "Wp≥aci≥eú %d$ do sejfu Ibizy", hajs);
+			format(string, sizeof string, "WpÔøΩaciÔøΩeÔøΩ %d$ do sejfu Ibizy", hajs);
 			SendClientMessage(playerid, -1, string);
-            format(string, sizeof string, "Lider %s wp≥aci≥ %d$ do Ibizy", GetNick(playerid), hajs);
+            format(string, sizeof string, "Lider %s wpÔøΩaciÔøΩ %d$ do Ibizy", GetNick(playerid), hajs);
             Log(payLog, INFO, string);
 		}
-		return ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "ZawartoúÊ\nWp≥ata\nWyp≥ata", "Wybierz", "WrÛÊ");
+		return ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "ZawartoÔøΩÔøΩ\nWpÔøΩata\nWypÔøΩata", "Wybierz", "WrÔøΩÔøΩ");
 	}*/
 	if(dialogid==DIALOG_IBIZA_MIKSER)
 	{
@@ -13889,15 +13889,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0: //stream
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_STREAM, DIALOG_STYLE_LIST, "WybÛr streama", "W≥asny link\nClub Party\nEnergy Sound", "Wybierz", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_STREAM, DIALOG_STYLE_LIST, "WybÔøΩr streama", "WÔøΩasny link\nClub Party\nEnergy Sound", "Wybierz", "WrÔøΩÔøΩ");
 					return 1;
 				}
 				case 1: //telebim
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÒ tekst\nZmieÒ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÔøΩ tekst\nZmieÔøΩ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÔøΩÔøΩ");
 					return 1;
 				}
-				case 2: //úwiat≥a
+				case 2: //ÔøΩwiatÔøΩa
 				{
 					if(IbizaSwiatla)
 					{
@@ -13912,7 +13912,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3: //strobo
 				{
-					if(!IbizaStrobo)	 //w≥πcz
+					if(!IbizaStrobo)	 //wÔøΩÔøΩcz
 					{
 
 						IbizaStroboObiekty[0] = CreateDynamicObject(354,1930.5400000,-2494.5100000,21.3700000,0.0000000,0.0000000,-5.6400000,1, 0, -1);
@@ -13972,7 +13972,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						IbizaDym = true;
 						IbizaOdswiezObiekty();
 					}
-					else //wy≥πcz
+					else //wyÔøΩÔøΩcz
 					{
 						for(new i=0; i<10; i++)
 						{
@@ -13983,7 +13983,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 5: //rury
 				{
-					if(!IbizaRury) //wysuÒ
+					if(!IbizaRury) //wysuÔøΩ
 					{
 						MoveDynamicObject(IbizaRuryObiekty[0], 1936.6000, -2482.1799, 13.8000, 2.0);
 						MoveDynamicObject(IbizaRuryObiekty[1], 1953.6300, -2482.1299, 13.8000, 2.0);
@@ -14021,7 +14021,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(listitem==0)
 			{
-				ShowPlayerDialogEx(playerid, DIALOG_IBIZA_STREAM_WLASNY, DIALOG_STYLE_INPUT, "W≥asny stream", "Wklej poniøej link do streama", "Wybierz", "WrÛÊ");
+				ShowPlayerDialogEx(playerid, DIALOG_IBIZA_STREAM_WLASNY, DIALOG_STYLE_INPUT, "WÔøΩasny stream", "Wklej poniÔøΩej link do streama", "Wybierz", "WrÔøΩÔøΩ");
 				return 1;
 			}
 			else
@@ -14036,14 +14036,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(strlen(inputtext) > 128) return SendClientMessage(playerid, -1, "Podany link jest zbyt d≥ugi");
+			if(strlen(inputtext) > 128) return SendClientMessage(playerid, -1, "Podany link jest zbyt dÔøΩugi");
 			format(IbizaStream[0], 128, "%s", inputtext);
 			IbizaStreamID = 0;
 			WlaczStream(0);
 		}
 		else
 		{
-			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_STREAM, DIALOG_STYLE_LIST, "WybÛr streama", "W≥asny link\nClub Party\nEnergy Sound", "Wybierz", "WrÛÊ");
+			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_STREAM, DIALOG_STYLE_LIST, "WybÔøΩr streama", "WÔøΩasny link\nClub Party\nEnergy Sound", "Wybierz", "WrÔøΩÔøΩ");
 
 		}
 		return MikserDialog(playerid);
@@ -14057,20 +14057,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0: //tekst
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TEKST, DIALOG_STYLE_INPUT, "Zmiana tekstu", "Wpisz poniøej takst jaki ma byÊ\nwyúwietlony na telebimie (MAX 18 znakÛw)", "ZmieÒ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TEKST, DIALOG_STYLE_INPUT, "Zmiana tekstu", "Wpisz poniÔøΩej takst jaki ma byÔøΩ\nwyÔøΩwietlony na telebimie (MAX 18 znakÔøΩw)", "ZmieÔøΩ", "WrÔøΩÔøΩ");
 				}
 				case 1: //kolor
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_KOLOR, DIALOG_STYLE_LIST, "Zmiana koloru", "Bia≥y\nPomaraÒczowy\nNiebieski\nZielony\nØÛ≥ty", "ZmieÒ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_KOLOR, DIALOG_STYLE_LIST, "Zmiana koloru", "BiaÔøΩy\nPomaraÔøΩczowy\nNiebieski\nZielony\nÔøΩÔøΩty", "ZmieÔøΩ", "WrÔøΩÔøΩ");
 
 				}
 				case 2: //animacja
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_ANIM, DIALOG_STYLE_LIST, "Opcje animacji", "W≥πcz\nWy≥πcz", "ZmieÒ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_ANIM, DIALOG_STYLE_LIST, "Opcje animacji", "WÔøΩÔøΩcz\nWyÔøΩÔøΩcz", "ZmieÔøΩ", "WrÔøΩÔøΩ");
 				}
 				case 3: //czcionka
 				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CZCIONKA, DIALOG_STYLE_LIST, "WybÛr czcionki", "Arial\nVerdana\nCourier New\nComic Sans MS\nTahoma", "ZmieÒ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CZCIONKA, DIALOG_STYLE_LIST, "WybÔøΩr czcionki", "Arial\nVerdana\nCourier New\nComic Sans MS\nTahoma", "ZmieÔøΩ", "WrÔøΩÔøΩ");
 				}
 
 			}
@@ -14087,8 +14087,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(listitem == 0)
 			{
-				if(Telebim[tRuchomy]) return SendClientMessage(playerid, -1, "Animacja jest juø w≥aczona!");
-				if(Telebim[tWRuchu] ) return SendClientMessage(playerid, -1, "Poczekaj aø animacja skoÒczy swÛj cykl!!!");
+				if(Telebim[tRuchomy]) return SendClientMessage(playerid, -1, "Animacja jest juÔøΩ wÔøΩaczona!");
+				if(Telebim[tWRuchu] ) return SendClientMessage(playerid, -1, "Poczekaj aÔøΩ animacja skoÔøΩczy swÔøΩj cykl!!!");
 				new dl = strlen(Telebim[tTekst]);
 				format(Telebim[tTekstAnim], sizeof Telebim[tTekstAnim], "");
 				for(new i; i<38+(2*dl); i++)
@@ -14100,19 +14100,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				Telebim[tRuchomy] = 1;
 				Telebim[tWRuchu] = 1;
 				SetTimerEx("TelebimAnim", Telebim[tSzybkosc], false, "d", strlen(Telebim[tTekstAnim]));
-				SendClientMessage(playerid, -1, "W≥πczy≥eú animacje");
+				SendClientMessage(playerid, -1, "WÔøΩÔøΩczyÔøΩeÔøΩ animacje");
 			}
 			else
 			{
-				if(!Telebim[tRuchomy]) return SendClientMessage(playerid, -1, "Animacje jest juø wy≥πczona!");
+				if(!Telebim[tRuchomy]) return SendClientMessage(playerid, -1, "Animacje jest juÔøΩ wyÔøΩÔøΩczona!");
 				Telebim[tRuchomy] = 0;
-				SendClientMessage(playerid, -1, "Wy≥πczy≥eú animacje");
+				SendClientMessage(playerid, -1, "WyÔøΩÔøΩczyÔøΩeÔøΩ animacje");
 			}
 			MikserDialog(playerid);
 		}
 		else
 		{
-			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÒ tekst\nZmieÒ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÛÊ");
+			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÔøΩ tekst\nZmieÔøΩ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÔøΩÔøΩ");
 		}
 		return 1;
 
@@ -14123,12 +14123,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			format(Telebim[tCzcionka], sizeof Telebim[tCzcionka], "%s", IbizaCzcionkiTelebim[listitem]);
 			SetDynamicObjectMaterialText(Telebim[tID], 0 , Telebim[tTekst],  Telebim[tSize], Telebim[tCzcionka], Telebim[tFSize], Telebim[tBold], Telebim[tCzcionkaKolor], Telebim[tBackg], Telebim[tAli]);
-			SendClientMessage(playerid, -1, "Zmieni≥eú czcionkÍ");
+			SendClientMessage(playerid, -1, "ZmieniÔøΩeÔøΩ czcionkÔøΩ");
 			MikserDialog(playerid);
 		}
 		else
 		{
-			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÒ tekst\nZmieÒ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÛÊ");
+			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÔøΩ tekst\nZmieÔøΩ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÔøΩÔøΩ");
 		}
 		return 1;
 
@@ -14139,12 +14139,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			Telebim[tCzcionkaKolor] = IbizaKoloryTelebim[listitem];
 			SetDynamicObjectMaterialText(Telebim[tID], 0 , Telebim[tTekst],  Telebim[tSize], Telebim[tCzcionka], Telebim[tFSize], Telebim[tBold], Telebim[tCzcionkaKolor], Telebim[tBackg], Telebim[tAli]);
-			SendClientMessage(playerid, -1, "Zmieni≥eú kolor napisu");
+			SendClientMessage(playerid, -1, "ZmieniÔøΩeÔøΩ kolor napisu");
 			MikserDialog(playerid);
 		}
 		else
 		{
-			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÒ tekst\nZmieÒ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÛÊ");
+			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÔøΩ tekst\nZmieÔøΩ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÔøΩÔøΩ");
 		}
 		return 1;
 	}
@@ -14154,15 +14154,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if( strlen(inputtext) > DLUGOSC_TELEBIMA-1 )
 			{
-				SendClientMessage(playerid, 0xFF0000FF, "Podany tekst jest za d≥ugi");
-				ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TEKST, DIALOG_STYLE_INPUT, "Zmiana tekstu", "Wpisz poniøej takst jaki ma byÊ\nwyúwietlony na telebimie (MAX 18 znakÛw)", "Ustaw", "Anuluj");
+				SendClientMessage(playerid, 0xFF0000FF, "Podany tekst jest za dÔøΩugi");
+				ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TEKST, DIALOG_STYLE_INPUT, "Zmiana tekstu", "Wpisz poniÔøΩej takst jaki ma byÔøΩ\nwyÔøΩwietlony na telebimie (MAX 18 znakÔøΩw)", "Ustaw", "Anuluj");
 			}
 			else
 			{
-				if(Telebim[tRuchomy] || Telebim[tWRuchu] ) return SendClientMessage(playerid, -1, "Nie moøesz zmieniÊ tekstu podczas dzia≥ania animacji, najpierw jπ zatrzymaj!");
+				if(Telebim[tRuchomy] || Telebim[tWRuchu] ) return SendClientMessage(playerid, -1, "Nie moÔøΩesz zmieniÔøΩ tekstu podczas dziaÔøΩania animacji, najpierw jÔøΩ zatrzymaj!");
 				format(Telebim[tTekst], sizeof Telebim[tTekst], "%s", inputtext);
 				SetDynamicObjectMaterialText(Telebim[tID], 0 , Telebim[tTekst],  Telebim[tSize], Telebim[tCzcionka], Telebim[tFSize], Telebim[tBold], Telebim[tCzcionkaKolor], Telebim[tBackg], Telebim[tAli]);
-				SendClientMessage(playerid, 0x00FF00FF, "Zmieni≥eú napis na telebimie");
+				SendClientMessage(playerid, 0x00FF00FF, "ZmieniÔøΩeÔøΩ napis na telebimie");
 				MikserDialog(playerid);
 
 			}
@@ -14170,7 +14170,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÒ tekst\nZmieÒ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÛÊ");
+			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_TELEBIM, DIALOG_STYLE_LIST, "Telebim opcje", "ZmieÔøΩ tekst\nZmieÔøΩ kolor\nAnimacja\nCzcionka", "Wybierz", "WrÔøΩÔøΩ");
 			return 1;
 		}
 	}
@@ -14181,28 +14181,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new id = GetPVarInt(playerid, "IbizaBiletSell");
 		if(response)
 		{
-			//if(PlayerInfo[playerid][pCash] < IbizaBilet) return SendClientMessage(playerid, -1, "Nie masz wystarczajπcej iloúci pieniÍdzy");
+			//if(PlayerInfo[playerid][pCash] < IbizaBilet) return SendClientMessage(playerid, -1, "Nie masz wystarczajÔøΩcej iloÔøΩci pieniÔøΩdzy");
 			new hajs = kaska[playerid];
 			if(hajs < IbizaBilet)
 			{
 				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
-				return SendClientMessage(playerid, -1, "Nie masz wystarczajπcej iloúci pieniÍdzy");
+				return SendClientMessage(playerid, -1, "Nie masz wystarczajÔøΩcej iloÔøΩci pieniÔøΩdzy");
 			}
 			else
 			{
 				//PlayerInfo[playerid][pCash]-=IbizaBilet;
-				ZabierzKase(playerid, IbizaBilet); //HAJS coú takiego jak wyøej, nwm dok≥adnie jak macie
+				ZabierzKase(playerid, IbizaBilet); //HAJS coÔøΩ takiego jak wyÔøΩej, nwm dokÔøΩadnie jak macie
 				SejfR_Add(FAMILY_IBIZA, IbizaBilet);
 				SetPVarInt(playerid, "IbizaBilet", 1);
-				format(string, sizeof string, "%s kupi≥Ç od Ciebie bilet", PlayerName(playerid));
+				format(string, sizeof string, "%s kupiÔøΩÔøΩ od Ciebie bilet", PlayerName(playerid));
 				SendClientMessage(id, 0x0080D0FF, string);
-				format(string, sizeof string, "Kupi≥eú bilet do Ibiza Club za %d$", IbizaBilet);
+				format(string, sizeof string, "KupiÔøΩeÔøΩ bilet do Ibiza Club za %d$", IbizaBilet);
 				SendClientMessage(playerid, 0x00FF00FF, string);
 			}
 		}
 		else
 		{
-			format(string, sizeof string, "Gracz %s nie zgodzi≥Ç siÍ na kupno biletu", PlayerName(playerid));
+			format(string, sizeof string, "Gracz %s nie zgodziÔøΩÔøΩ siÔøΩ na kupno biletu", PlayerName(playerid));
 			SendClientMessage(id, 0xFF0030FF, string);
 
 		}
@@ -14216,11 +14216,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 
-			new hajs = kaska[playerid]; //HAJS zmieniÊ na pobieranie ze struktury
+			new hajs = kaska[playerid]; //HAJS zmieniÔøΩ na pobieranie ze struktury
 			new drink = GetPVarInt(playerid, "IbizaDrink");
 			if(hajs >=IbizaDrinkiCeny[drink]) //if(PlayerInfo[playerid][pCash] >= IbizaDrinkiCeny[drink] )
 			{
-				ZabierzKase(playerid, IbizaDrinkiCeny[drink]); //HAJS zabranie pieniÍdzy ze struktury
+				ZabierzKase(playerid, IbizaDrinkiCeny[drink]); //HAJS zabranie pieniÔøΩdzy ze struktury
 				SejfR_Add(FAMILY_IBIZA, IbizaDrinkiCeny[drink]);
 				SetPlayerSpecialAction(playerid, 22);
 				//DO   **Marcepan_Marks kupuje w barze [nazwa drinka]**
@@ -14228,8 +14228,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				SendClientMessage(playerid, -1, "Nie masz wystarczajπcej iloúci pieniÍdzy");
-				format(string, sizeof string, "Klient %s nie ma tyle pieniÍdzy", PlayerName(playerid));
+				SendClientMessage(playerid, -1, "Nie masz wystarczajÔøΩcej iloÔøΩci pieniÔøΩdzy");
+				format(string, sizeof string, "Klient %s nie ma tyle pieniÔøΩdzy", PlayerName(playerid));
 				SendClientMessage(id, 0xB52E2BFF, string);
 			}
 
@@ -14237,7 +14237,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			format(string, sizeof string, "Gracz %s nie zgodzi≥Ç siÍ na kupno drinka", PlayerName(playerid));
+			format(string, sizeof string, "Gracz %s nie zgodziÔøΩÔøΩ siÔøΩ na kupno drinka", PlayerName(playerid));
 			SendClientMessage(id, 0xB52E2BFF, string);
 		}
 		DeletePVar(playerid, "IbizaBar");
@@ -14254,15 +14254,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(hajs < (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR))
 			{
 				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
-				return SendClientMessage(playerid, -1, "Nie masz wystarczajπcej iloúci pieniÍdzy");
+				return SendClientMessage(playerid, -1, "Nie masz wystarczajÔøΩcej iloÔøΩci pieniÔøΩdzy");
 			}
 			else
 			{
-				format(string, sizeof string, "%s kupi≥ od Ciebie apteczkÍ. Otrzymujesz %d$ prowizji.", PlayerName(playerid), HEALTH_PACK_AMOUNTDOCTOR);
+				format(string, sizeof string, "%s kupiÔøΩ od Ciebie apteczkÔøΩ. Otrzymujesz %d$ prowizji.", PlayerName(playerid), HEALTH_PACK_AMOUNTDOCTOR);
 				SendClientMessage(id, 0x0080D0FF, string);
-				format(string, sizeof string, "Kupi≥eú apteczkÍ od Lekarza za %d$", (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
+				format(string, sizeof string, "KupiÔøΩeÔøΩ apteczkÔøΩ od Lekarza za %d$", (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
 				SendClientMessage(playerid, 0x00FF00FF, string);
-				format(string, sizeof string, "[ERS] Lekarz %s sprzeda≥ apteczkÍ! Na konto frakcji wp≥ywa %d$", PlayerName(id), HEALTH_PACK_PRICE);
+				format(string, sizeof string, "[ERS] Lekarz %s sprzedaÔøΩ apteczkÔøΩ! Na konto frakcji wpÔøΩywa %d$", PlayerName(id), HEALTH_PACK_PRICE);
         		SendFamilyMessage(4, COLOR_GREEN, string);
 				ZabierzKase(playerid, (HEALTH_PACK_PRICE + HEALTH_PACK_AMOUNTDOCTOR));
 				DajKase(id, HEALTH_PACK_AMOUNTDOCTOR);
@@ -14272,7 +14272,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			format(string, sizeof string, "Gracz %s nie zgodzi≥ siÍ na kupno apteczki.", PlayerName(playerid));
+			format(string, sizeof string, "Gracz %s nie zgodziÔøΩ siÔøΩ na kupno apteczki.", PlayerName(playerid));
 			SendClientMessage(id, 0xFF0030FF, string);
 		}
 		DeletePVar(playerid, "HealthPackOffer");
@@ -14287,29 +14287,29 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(kaska[playerid] < 15000)
 			{
 				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
-				return SendClientMessage(playerid, -1, "Nie masz wystarczajπcej iloúci pieniÍdzy");
+				return SendClientMessage(playerid, -1, "Nie masz wystarczajÔøΩcej iloÔøΩci pieniÔøΩdzy");
 			}
 			else
 			{
-				SendClientMessage(id, 0x0080D0FF, sprintf("%s kupi≥ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", GetNick(playerid)));
-				SendClientMessage(playerid, 0x00FF00FF, sprintf("Kupi≥eú zestaw od mechanika %s za 15000$", GetNick(id)));
+				SendClientMessage(id, 0x0080D0FF, sprintf("%s kupiÔøΩ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", GetNick(playerid)));
+				SendClientMessage(playerid, 0x00FF00FF, sprintf("KupiÔøΩeÔøΩ zestaw od mechanika %s za 15000$", GetNick(id)));
 				ZabierzKase(playerid, 15000);
 				DajKase(id, 15000);
 				PlayerInfo[playerid][pFixKit]++;
 				PlayerInfo[id][pMechSkill]++;
                 if(PlayerInfo[id][pMechSkill] == 50)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejÍtnoúci Mechanika wynoszπ 2, Moøesz teraz tankowaÊ graczom wiÍcej paliwa za jednym razem."); }
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejÔøΩtnoÔøΩci Mechanika wynoszÔøΩ 2, MoÔøΩesz teraz tankowaÔøΩ graczom wiÔøΩcej paliwa za jednym razem."); }
                 else if(PlayerInfo[id][pMechSkill] == 100)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejÍtnoúci Mechanika wynoszπ 3, Moøesz teraz tankowaÊ graczom wiÍcej paliwa za jednym razem."); }
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejÔøΩtnoÔøΩci Mechanika wynoszÔøΩ 3, MoÔøΩesz teraz tankowaÔøΩ graczom wiÔøΩcej paliwa za jednym razem."); }
                 else if(PlayerInfo[id][pMechSkill] == 200)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejÍtnoúci Mechanika wynoszπ 4, Moøesz teraz tankowaÊ graczom wiÍcej paliwa za jednym razem."); }
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejÔøΩtnoÔøΩci Mechanika wynoszÔøΩ 4, MoÔøΩesz teraz tankowaÔøΩ graczom wiÔøΩcej paliwa za jednym razem."); }
                 else if(PlayerInfo[id][pMechSkill] == 400)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejÍtnoúci Mechanika wynoszπ 5, Moøesz teraz tankowaÊ graczom wiÍcej paliwa za jednym razem."); }
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejÔøΩtnoÔøΩci Mechanika wynoszÔøΩ 5, MoÔøΩesz teraz tankowaÔøΩ graczom wiÔøΩcej paliwa za jednym razem."); }
 			}
 		}
 		else
 		{
-			SendClientMessage(id, 0xFF0030FF, sprintf("Gracz %s nie zgodzi≥ siÍ na kupno zestawu.", GetNick(playerid)));
+			SendClientMessage(id, 0xFF0030FF, sprintf("Gracz %s nie zgodziÔøΩ siÔøΩ na kupno zestawu.", GetNick(playerid)));
 		}
 		DeletePVar(playerid, "FixKitOffer");
 		return 1;
@@ -14321,14 +14321,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new id = GetPVarInt(playerid, "HealthPackOffer");
 		if(response)
 		{
-			if(GetDistanceBetweenPlayers(playerid,id) > 5) return SendClientMessage(playerid, 0xFF0030FF, "Udzielajπcy pomocy jest zbyt daleko");
+			if(GetDistanceBetweenPlayers(playerid,id) > 5) return SendClientMessage(playerid, 0xFF0030FF, "UdzielajÔøΩcy pomocy jest zbyt daleko");
 			
 			if(GetPlayerFraction(id) == FRAC_ERS)
 			{
-				SendClientMessage(playerid, COLOR_WHITE, "Zosta≥eú uzdrowiony przez Lekarza");
-				format(string, sizeof(string),"* Lekarz %s wyciπga apteczkÍ, bandaøuje rany oraz podaje leki %s.", GetNick(id), GetNick(playerid));
+				SendClientMessage(playerid, COLOR_WHITE, "ZostaÔøΩeÔøΩ uzdrowiony przez Lekarza");
+				format(string, sizeof(string),"* Lekarz %s wyciÔøΩga apteczkÔøΩ, bandaÔøΩuje rany oraz podaje leki %s.", GetNick(id), GetNick(playerid));
 				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				format(string, sizeof(string), "%s czuje siÍ lepiej dziÍki interwencji lekarza.", GetNick(playerid));
+				format(string, sizeof(string), "%s czuje siÔøΩ lepiej dziÔøΩki interwencji lekarza.", GetNick(playerid));
 				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				pobity[playerid] = 0;
 				ZdejmijBW(playerid, 3500);
@@ -14336,11 +14336,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				if(PlayerInfo[id][pHealthPacks] < 1) return SendClientMessage(id, 0xFF0030FF, "Gracz nie posiada juø apteczek by udzieliÊ Ci pomocy.");
-				if(PlayerInfo[playerid][pBW] > 0) return SendClientMessage(playerid, 0xFF0030FF, "Jesteú ciÍøko ranny, takie obraøenia moøe opatrzyÊ tylko lekarz! (/wezwij medyk)");
+				if(PlayerInfo[id][pHealthPacks] < 1) return SendClientMessage(id, 0xFF0030FF, "Gracz nie posiada juÔøΩ apteczek by udzieliÔøΩ Ci pomocy.");
+				if(PlayerInfo[playerid][pBW] > 0) return SendClientMessage(playerid, 0xFF0030FF, "JesteÔøΩ ciÔøΩko ranny, takie obraÔøΩenia moÔøΩe opatrzyÔøΩ tylko lekarz! (/wezwij medyk)");
 				format(string, sizeof(string),"* Udzielono pomocy medycznej %s i opatrzono rany.", GetNick(playerid));
 				SendClientMessage(id, COLOR_WHITE, string);
-				format(string, sizeof(string),"* %s wyciπga apteczkÍ, bandaøuje obraøenia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
+				format(string, sizeof(string),"* %s wyciÔøΩga apteczkÔøΩ, bandaÔøΩuje obraÔøΩenia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				PlayerInfo[id][pHealthPacks]--;
 				pobity[playerid] = 0;
@@ -14350,7 +14350,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		else
 		{
-			format(string, sizeof string, "Gracz %s nie zgodzi≥ siÍ na udzielenie pomocy medycznej.", PlayerName(playerid));
+			format(string, sizeof string, "Gracz %s nie zgodziÔøΩ siÔøΩ na udzielenie pomocy medycznej.", PlayerName(playerid));
 			SendClientMessage(id, 0xFF0030FF, string);
 		}
 		DeletePVar(playerid, "HealthPackOffer");
@@ -14368,7 +14368,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				weaponid = PlayerInfo[playerid][pGun0];
 			}
 			/*new string[144];
-			format(string, sizeof(string), "* %s wybra≥ broÒ w GUI (opcja %d) ID broni: %d [%s]", GetNick(playerid), listitem, weaponid, GunNames[weaponid]);
+			format(string, sizeof(string), "* %s wybraÔøΩ broÔøΩ w GUI (opcja %d) ID broni: %d [%s]", GetNick(playerid), listitem, weaponid, GunNames[weaponid]);
 			SendClientMessageToAll(COLOR_WHITE, string);*/
 			return PrzedmiotyZmienBron(playerid, weaponid, weapondata);
 		}
@@ -14484,7 +14484,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				 	if(SadWinda[0] == 1)
 					{
-						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta≥ zablokowany przez pracownikÛw sπdu!"); 
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zostaÔøΩ zablokowany przez pracownikÔøΩw sÔøΩdu!"); 
 						return 1;
 					}
     	            SetPlayerVirtualWorld(playerid,10);
@@ -14498,7 +14498,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     			{
 					if(SadWinda[1] == 1)
 					{
-						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta≥ zablokowany przez pracownikÛw sπdu!"); 
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zostaÔøΩ zablokowany przez pracownikÔøΩw sÔøΩdu!"); 
 						return 1;
 					}
     	            SetPlayerVirtualWorld(playerid,11);
@@ -14512,7 +14512,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 				  	if(SadWinda[2] == 1)
 					{
-						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta≥ zablokowany przez pracownikÛw sπdu!"); 
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zostaÔøΩ zablokowany przez pracownikÔøΩw sÔøΩdu!"); 
 						return 1;
 					}
     	            SetPlayerVirtualWorld(playerid,12);
@@ -14526,7 +14526,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(SadWinda[3] == 1)
 					{
-						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta≥ zablokowany przez pracownikÛw sπdu!"); 
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zostaÔøΩ zablokowany przez pracownikÔøΩw sÔøΩdu!"); 
 						return 1;
 					}
     	            SetPlayerVirtualWorld(playerid,13);
@@ -14540,7 +14540,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(SadWinda[4] == 1)
 					{
-						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta≥ zablokowany przez pracownikÛw sπdu!"); 
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zostaÔøΩ zablokowany przez pracownikÔøΩw sÔøΩdu!"); 
 						return 1;
 					}
     	            SetPlayerVirtualWorld(playerid,14);
@@ -14555,7 +14555,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(SadWinda[5] == 1)
 					{
-						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zosta≥ zablokowany przez pracownikÛw sπdu!"); 
+						sendTipMessageEx(playerid, COLOR_RED, "Ten poziom zostaÔøΩ zablokowany przez pracownikÔøΩw sÔøΩdu!"); 
 						return 1;
 					}
     	            SetPlayerVirtualWorld(playerid,0);
@@ -14589,7 +14589,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         if(strlen(lStr) > 3)
         {
-            ShowPlayerDialogEx(playerid, D_ORGS_SELECT, DIALOG_STYLE_LIST, "Lista organizacji", lStr, "Cz≥onkowie", "WrÛÊ");
+            ShowPlayerDialogEx(playerid, D_ORGS_SELECT, DIALOG_STYLE_LIST, "Lista organizacji", lStr, "CzÔøΩonkowie", "WrÔøΩÔøΩ");
         }
         return 1;
     }
@@ -14610,12 +14610,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             case 1:
             {
-                if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
+                if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÔøΩ");
                 for(new i=0;i<sizeof(OrgTypes);i++)
                 {
                     format(lStr, 256, "%s%d.\t%s\n", lStr, i+1, OrgTypes[i]);
                 }
-                ShowPlayerDialogEx(playerid, D_CREATE_ORG, DIALOG_STYLE_LIST, "Tworzenie organizacji", lStr, "Dalej", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_CREATE_ORG, DIALOG_STYLE_LIST, "Tworzenie organizacji", lStr, "Dalej", "WrÔøΩÔøΩ");
             }
         }
         return 1;
@@ -14628,17 +14628,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             case 1:
             {
-                if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
+                if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÔøΩ");
                 for(new i=0;i<MAX_ORG;i++)
                 {
                     if(!orgIsValid(i)) continue;
                     format(lStr, 1024, "%s%d.\t%s\n", lStr, i, OrgInfo[i][o_Name]);
                 }
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG, DIALOG_STYLE_LIST, "Edycja organizacji", lStr, "Dalej", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_ORG, DIALOG_STYLE_LIST, "Edycja organizacji", lStr, "Dalej", "WrÔøΩÔøΩ");
             }
             case 2:
             {
-                if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
+                if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÔøΩ");
                 new Float:x, Float:y, Float:z;
                 GetPlayerPos(playerid, x ,y ,z);
                 for(new i=0;i<MAX_VEHICLES;i++)
@@ -14646,17 +14646,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     if(VehicleUID[i][vUID] == 0) continue;
                     if(GetVehicleDistanceFromPoint(i, x, y, z) < 15.0)
                     {
-                        format(lStr, 1024, "%s%d ª %s (%d)\n", lStr, CarData[VehicleUID[i][vUID]][c_UID], VehicleNames[GetVehicleModel(i)-400], i);
+                        format(lStr, 1024, "%s%d ÔøΩ %s (%d)\n", lStr, CarData[VehicleUID[i][vUID]][c_UID], VehicleNames[GetVehicleModel(i)-400], i);
                     }
                 }
-                strcat(lStr, "Wprowadü UID pojazdu, ktÛry chcesz edytowaÊ:");
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", lStr, "Dalej", "WrÛÊ");
+                strcat(lStr, "WprowadÔøΩ UID pojazdu, ktÔøΩry chcesz edytowaÔøΩ:");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", lStr, "Dalej", "WrÔøΩÔøΩ");
             }
             case 3:
             {
-                if(!Uprawnienia(playerid, ACCESS_EDITRANG)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
+                if(!Uprawnienia(playerid, ACCESS_EDITRANG)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÔøΩ");
 
-                ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÔøΩÔøΩ");
             }
         }
         return 1;
@@ -14666,13 +14666,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return RunCommand(playerid, "/stworz",  "");
         SetPVarInt(playerid, "create_org_typ", listitem);
-        ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÍ rodziny:", "Dalej", "WrÛÊ");
+        ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÔøΩ rodziny:", "Dalej", "WrÔøΩÔøΩ");
         return 1;
     }
     else if(dialogid == D_CREATE_ORG_NAME)
     {
         if(!response) return RunCommand(playerid, "/stworz",  "");
-        if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÍ rodziny:", "Dalej", "WrÛÊ");
+        if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÔøΩ rodziny:", "Dalej", "WrÔøΩÔøΩ");
         SetPVarString(playerid, "create_org_name", inputtext);
         new lStr[256] = "Wybierz wolny slot (ID)\n";
         new lTab[MAX_ORG];
@@ -14691,18 +14691,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
             if(lFree) format(lStr, 256, "%s%d\n", lStr, i);
         }
-        ShowPlayerDialogEx(playerid, D_CREATE_ORG_UID, DIALOG_STYLE_LIST, "Tworzenie organizacji", lStr, "Dalej", "WrÛÊ");
+        ShowPlayerDialogEx(playerid, D_CREATE_ORG_UID, DIALOG_STYLE_LIST, "Tworzenie organizacji", lStr, "Dalej", "WrÔøΩÔøΩ");
         return 1;
     }
     else if(dialogid == D_CREATE_ORG_UID)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÍ rodziny:", "Dalej", "WrÛÊ");
+        if(!response) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÔøΩ rodziny:", "Dalej", "WrÔøΩÔøΩ");
         new id = strval(inputtext);
         if(orgIsValid(orgID(id))) return SendClientMessage(playerid, -1, "Kolizja UID?");
         new lStr[128];
         GetPVarString(playerid, "create_org_name", lStr, 32);
         orgAdd(GetPVarInt(playerid, "create_org_typ"),lStr, id, orgGetFreeSlot());
-        format(lStr, 128, "Stworzono organizacjÍ typu %s o nazwie %s UID %d", OrgTypes[GetPVarInt(playerid, "create_org_typ")], lStr, id);
+        format(lStr, 128, "Stworzono organizacjÔøΩ typu %s o nazwie %s UID %d", OrgTypes[GetPVarInt(playerid, "create_org_typ")], lStr, id);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
         return 1;
     }
@@ -14711,7 +14711,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return RunCommand(playerid, "/edytuj",  "");
         SetPVarInt(playerid, "edit_org", strval(inputtext));
-        ShowPlayerDialogEx(playerid, D_EDIT_ORG_LIST, DIALOG_STYLE_LIST, "Edycja organizacji", "ZmieÒ typ\nZmieÒ nazwÍ\nUsuÒ lidera(Ûw)\nUsuÒ organizacje", "Wybierz", "WrÛÊ");
+        ShowPlayerDialogEx(playerid, D_EDIT_ORG_LIST, DIALOG_STYLE_LIST, "Edycja organizacji", "ZmieÔøΩ typ\nZmieÔøΩ nazwÔøΩ\nUsuÔøΩ lidera(ÔøΩw)\nUsuÔøΩ organizacje", "Wybierz", "WrÔøΩÔøΩ");
         return 1;
     }
     else if(dialogid == D_EDIT_ORG_LIST)
@@ -14725,12 +14725,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 for(new i=0;i<sizeof(OrgTypes);i++)
                 {
                     format(lStr, 256, "%s%d.\t%s\n", lStr, i+1, OrgTypes[i]);
-                    ShowPlayerDialogEx(playerid, D_EDIT_ORG_TYP, DIALOG_STYLE_LIST, "Edycja", lStr, "ZmieÒ", "WrÛÊ");
+                    ShowPlayerDialogEx(playerid, D_EDIT_ORG_TYP, DIALOG_STYLE_LIST, "Edycja", lStr, "ZmieÔøΩ", "WrÔøΩÔøΩ");
                 }
             }
             case 1:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "Wprowadü nowπ nazwÍ", "ZmieÒ", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "WprowadÔøΩ nowÔøΩ nazwÔøΩ", "ZmieÔøΩ", "WrÔøΩÔøΩ");
             }
             case 2:
             {
@@ -14738,8 +14738,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case 3:
             {
-                if(!Uprawnienia(playerid, ACCESS_DELETEORG)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG_DELETE, DIALOG_STYLE_MSGBOX, "Potwierdzenie", "Czy na pewno chcesz usunπÊ organizacjÍ?", "UsuÒ", "WrÛÊ");
+                if(!Uprawnienia(playerid, ACCESS_DELETEORG)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÔøΩ");
+                ShowPlayerDialogEx(playerid, D_EDIT_ORG_DELETE, DIALOG_STYLE_MSGBOX, "Potwierdzenie", "Czy na pewno chcesz usunÔøΩÔøΩ organizacjÔøΩ?", "UsuÔøΩ", "WrÔøΩÔøΩ");
             }
         }
         return 1;
@@ -14759,8 +14759,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return RunCommand(playerid, "/edytuj",  "");
         new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "Wprowadü nowπ nazwÍ", "ZmieÒ", "WrÛÊ");
-        format(lStr, 128, "Zmieniono nazwÍ organizacji %s na %s", OrgInfo[id][o_Name], inputtext);
+        if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "WprowadÔøΩ nowÔøΩ nazwÔøΩ", "ZmieÔøΩ", "WrÔøΩÔøΩ");
+        format(lStr, 128, "Zmieniono nazwÔøΩ organizacji %s na %s", OrgInfo[id][o_Name], inputtext);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
         orgSetName(id, inputtext);
 
@@ -14771,9 +14771,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return RunCommand(playerid, "/edytuj",  "");
         new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        format(lStr, sizeof(lStr), "UsuniÍto organizacjÍ %s.", OrgInfo[id][o_Name]);
+        format(lStr, sizeof(lStr), "UsuniÔøΩto organizacjÔøΩ %s.", OrgInfo[id][o_Name]);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
-        format(lStr, sizeof(lStr), "Organizacja usuniÍta przez %s.", GetNickEx(playerid));
+        format(lStr, sizeof(lStr), "Organizacja usuniÔøΩta przez %s.", GetNickEx(playerid));
         foreach(new i : Player)
         {
             if(GetPlayerOrg(i) == OrgInfo[id][o_UID])
@@ -14799,7 +14799,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         strdel(OrgInfo[id][o_Motd], 0, 128);
         return 1;
     }
-    //EDYCJA POJAZD”W
+    //EDYCJA POJAZDÔøΩW
     else if(dialogid == D_EDIT_CAR)
     {
         if(!response) return RunCommand(playerid, "/edytuj",  "");
@@ -14813,17 +14813,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(VehicleUID[i][vUID] == 0) continue;
                 if(GetVehicleDistanceFromPoint(i, x, y, z) < 15.0)
                 {
-                    format(lStr, 1024, "%s%d ª %s (%d)\n", lStr, CarData[VehicleUID[i][vUID]][c_UID], VehicleNames[GetVehicleModel(i)-400], i);
+                    format(lStr, 1024, "%s%d ÔøΩ %s (%d)\n", lStr, CarData[VehicleUID[i][vUID]][c_UID], VehicleNames[GetVehicleModel(i)-400], i);
                 }
             }
-            strcat(lStr, "Wprowadü UID pojazdu, ktÛry chcesz edytowaÊ:");
-            ShowPlayerDialogEx(playerid, D_EDIT_CAR, DIALOG_STYLE_INPUT, "Edycja pojazdÛw", lStr, "Dalej", "WrÛÊ");
+            strcat(lStr, "WprowadÔøΩ UID pojazdu, ktÔøΩry chcesz edytowaÔøΩ:");
+            ShowPlayerDialogEx(playerid, D_EDIT_CAR, DIALOG_STYLE_INPUT, "Edycja pojazdÔøΩw", lStr, "Dalej", "WrÔøΩÔøΩ");
             return 1;
         }
         new lID = Car_GetIDXFromUID(strval(inputtext));
         if(lID == -1)
         {
-            SendClientMessage(playerid, COLOR_GRAD2, "Pojazd nie by≥ wczytany do systemu, inicjalizacja ...");
+            SendClientMessage(playerid, COLOR_GRAD2, "Pojazd nie byÔøΩ wczytany do systemu, inicjalizacja ...");
             lID = Car_LoadEx(strval(inputtext));
             if(lID == -1) return SendClientMessage(playerid, COLOR_GRAD2, "... brak pojazdu w bazie.");
         }
@@ -14841,19 +14841,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             case 0:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_MODEL, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Wprowadü model pojazdu:", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_MODEL, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "WprowadÔøΩ model pojazdu:", "Ustaw", "WrÔøΩÔøΩ");
             }
             case 1:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Brak\nFrakcja\nOrganizacja\nGracz\nPraca\nSpecjalny\nPubliczny", "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "Brak\nFrakcja\nOrganizacja\nGracz\nPraca\nSpecjalny\nPubliczny", "Wybierz", "WrÔøΩÔøΩ");
             }
             case 2:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_RANG, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Wprowadü rangÍ (dla frakcji/org) lub skill dla pracy:", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_RANG, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "WprowadÔøΩ rangÔøΩ (dla frakcji/org) lub skill dla pracy:", "Ustaw", "WrÔøΩÔøΩ");
             }
 			case 3:
 			{
-				ShowPlayerDialogEx(playerid, 1089, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}opisu", "Wprowadü nowy opis dla pojazdu:", "Ustaw", "WrÛÊ");
+				ShowPlayerDialogEx(playerid, 1089, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}opisu", "WprowadÔøΩ nowy opis dla pojazdu:", "Ustaw", "WrÔøΩÔøΩ");
 			}
             case 4:
             {
@@ -14882,7 +14882,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 new string[128];
 				format(string, 128, "Zmieniono parking dla pojazdu %s [ID: %d] [UID: %d] [VW: %d]", VehicleNames[GetVehicleModel(veh)-400], veh, CarData[car][c_UID], CarData[car][c_VW]);
 				SendClientMessage(playerid, 0xFFC0CB, string);
-				Log(serverLog, INFO, "Gracz %s zaparkowa≥ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(veh));
+				Log(serverLog, INFO, "Gracz %s zaparkowaÔøΩ pojazd %s", GetPlayerLogName(playerid), GetVehicleLogName(veh));
             }
             case 6:
             {
@@ -14892,12 +14892,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             case 7:
             {
                 SetPVarInt(playerid, "car_edit_color", 1);
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_COLOR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj nowy kolor (od 0 do 255).", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_COLOR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "Podaj nowy kolor (od 0 do 255).", "Ustaw", "WrÔøΩÔøΩ");
             }
             case 8:
             {
                 SetPVarInt(playerid, "car_edit_color", 2);
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_COLOR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj nowy kolor (od 0 do 255).", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_COLOR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "Podaj nowy kolor (od 0 do 255).", "Ustaw", "WrÔøΩÔøΩ");
             }
         }
         return 1;
@@ -14907,8 +14907,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(!response) return KickEx(playerid); 
 		if(response)
 		{
-			sendTipMessage(playerid, "Zmieniasz has≥o:");
-			ShowPlayerDialogEx(playerid, D_HASLO_ZMIEN, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "Wprowadü poniøej nowe has≥o, ktÛrego bÍdziesz uøywa≥\ndo gry na naszym serwisie!", "Zatwierdü", "OdrzuÊ"); 
+			sendTipMessage(playerid, "Zmieniasz hasÔøΩo:");
+			ShowPlayerDialogEx(playerid, D_HASLO_ZMIEN, DIALOG_STYLE_INPUT, "Mrucznik Role Play", "WprowadÔøΩ poniÔøΩej nowe hasÔøΩo, ktÔøΩrego bÔøΩdziesz uÔøΩywaÔøΩ\ndo gry na naszym serwisie!", "ZatwierdÔøΩ", "OdrzuÔøΩ"); 
 		}
 		return 1;
 	}
@@ -14919,27 +14919,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(strlen(inputtext) < 4)
 			{
-				sendErrorMessage(playerid, "Has≥o musi posiadaÊ +3 znaki!"); 
+				sendErrorMessage(playerid, "HasÔøΩo musi posiadaÔøΩ +3 znaki!"); 
 				return 1;
 			}
 			if(strfind(inputtext, "%") != -1)
 			{
-				sendErrorMessage(playerid, "Has≥o nie moøe zawieraÊ znaku procenta!");
+				sendErrorMessage(playerid, "HasÔøΩo nie moÔøΩe zawieraÔøΩ znaku procenta!");
 				return 1;
 			}
-			sendErrorMessage(playerid, "Twoje has≥o do konta w grze zosta≥o zmienione!!!!");
-			sendErrorMessage(playerid, "Jeúli nie jesteú pewien  nowego has≥a - nie wychodü z serwera i zmieÒ je za pomocπ /zmienhaslo");
-			sendErrorMessage(playerid, "Nowe has≥o:");
+			sendErrorMessage(playerid, "Twoje hasÔøΩo do konta w grze zostaÔøΩo zmienione!!!!");
+			sendErrorMessage(playerid, "JeÔøΩli nie jesteÔøΩ pewien  nowego hasÔøΩa - nie wychodÔøΩ z serwera i zmieÔøΩ je za pomocÔøΩ /zmienhaslo");
+			sendErrorMessage(playerid, "Nowe hasÔøΩo:");
 			SendClientMessage(playerid, COLOR_PANICRED, inputtext);
 
-			Log(serverLog, INFO, "Gracz %s zmieni≥ sobie has≥o.", GetPlayerLogName(playerid));
+			Log(serverLog, INFO, "Gracz %s zmieniÔøΩ sobie hasÔøΩo.", GetPlayerLogName(playerid));
 			MruMySQL_ChangePassword(GetNick(playerid), inputtext);
 
 			if(GetPVarInt(playerid, "ChangingPassword")) //password changing
 			{
 				if(PlayerInfo[playerid][pAdmin] > 0 || PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || IsAScripter(playerid))
 				{
-					ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siÍ jako cz≥onek administracji. Zostajesz poproszony o wpisanie w\nponiøsze pole has≥a weryfikacyjnego. PamiÍtaj, aby nie podawaÊ go nikomu!", "Weryfikuj", "Wyjdü");
+					ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siÔøΩ jako czÔøΩonek administracji. Zostajesz poproszony o wpisanie w\nponiÔøΩsze pole hasÔøΩa weryfikacyjnego. PamiÔøΩtaj, aby nie podawaÔøΩ go nikomu!", "Weryfikuj", "WyjdÔøΩ");
 				}
 
 				if(PlayerInfo[playerid][pJailed] == 0)
@@ -14948,7 +14948,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SetPVarInt(playerid, "spawn", 1);
 					SetPlayerSpawn(playerid);
 					TogglePlayerSpectating(playerid, false);
-					ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siÍ teleportowaÊ do poprzedniej pozycji?", "TAK", "NIE");
+					ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siÔøΩ teleportowaÔøΩ do poprzedniej pozycji?", "TAK", "NIE");
 				}
 			}
 		}
@@ -14957,7 +14957,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	else if(dialogid == 1089)
 	{
 		if(!response) return ShowCarEditDialog(playerid);
-		sendTipMessage(playerid, "Trwajπ prace!"); 
+		sendTipMessage(playerid, "TrwajÔøΩ prace!"); 
 	
 		return 1;
 	}
@@ -14966,7 +14966,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(!response) return ShowCarEditDialog(playerid);
         if(strval(inputtext) < 400 || strval(inputtext) > 611)
         {
-            SendClientMessage(playerid, COLOR_GRAD2, "Nieprawid≥owy model pojazdu.");
+            SendClientMessage(playerid, COLOR_GRAD2, "NieprawidÔøΩowy model pojazdu.");
             return ShowCarEditDialog(playerid);
         }
         new car = GetPVarInt(playerid, "edit-car");
@@ -14989,7 +14989,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 		
 		//logi
-		Log(adminLog, INFO, "Admin %s zmieni≥ model pojazdu %d z %s[%d] na %s[%d]", \
+		Log(adminLog, INFO, "Admin %s zmieniÔøΩ model pojazdu %d z %s[%d] na %s[%d]", \
 			GetPlayerLogName(playerid), \
 			CarData[car][c_UID], \
 			VehicleNames[oldmodel-400], oldmodel, \
@@ -15002,7 +15002,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(!response) return ShowCarEditDialog(playerid);
         if(strval(inputtext) < 0)
         {
-            SendClientMessage(playerid, COLOR_GRAD2, "Nieprawid≥owa ranga.");
+            SendClientMessage(playerid, COLOR_GRAD2, "NieprawidÔøΩowa ranga.");
             return ShowCarEditDialog(playerid);
         }
         new car = GetPVarInt(playerid, "edit-car");
@@ -15042,10 +15042,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									}
 								}
 
-								format(string, sizeof(string), " UsuniÍto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								format(string, sizeof(string), " UsuniÔøΩto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 								
-                   				Log(adminLog, INFO, "Admin %s usunπ≥ %s pojazd %s ze slotu %d", 
+                   				Log(adminLog, INFO, "Admin %s usunÔøΩÔøΩ %s pojazd %s ze slotu %d", 
 									GetPlayerLogName(playerid), 
 									GetPlayerLogName(i),
 									GetCarDataLogName(car),
@@ -15058,7 +15058,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_OwnerType] = 0;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
-				Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na 0", GetPlayerLogName(playerid), GetCarDataLogName(car));
+				Log(adminLog, INFO, "Admin %s zmieniÔøΩ w %s typ pojazdu na 0", GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
             case 1:
             {
@@ -15066,27 +15066,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     format(string, 512, "%s%d\t%s\n", string, i, FractionNames[i]);
                 }
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", string, "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", string, "Ustaw", "WrÔøΩÔøΩ");
                 return 1;
             }
             case 2:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj UID organizacji:", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "Podaj UID organizacji:", "Ustaw", "WrÔøΩÔøΩ");
                 return 1;
             }
             case 3:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj UID gracza:", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "Podaj UID gracza:", "Ustaw", "WrÔøΩÔøΩ");
                 return 1;
             }
             case 4:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj ID pracy:", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "Podaj ID pracy:", "Ustaw", "WrÔøΩÔøΩ");
                 return 1;
             }
             case 5:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj typ pojazdu specjalnego:\n\n1. Wypoøyczalnia\n2. GoKart\n3. Øuøel", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÔøΩw", "Podaj typ pojazdu specjalnego:\n\n1. WypoÔøΩyczalnia\n2. GoKart\n3. ÔøΩuÔøΩel", "Ustaw", "WrÔøΩÔøΩ");
                 return 1;
             }
             case 6:
@@ -15111,9 +15111,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									}
 								}
 
-								format(string, sizeof(string), " UsuniÍto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								format(string, sizeof(string), " UsuniÔøΩto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-								Log(adminLog, INFO, "Admin %s usunπ≥ %s pojazd %s ze slotu %d", 
+								Log(adminLog, INFO, "Admin %s usunÔøΩÔøΩ %s pojazd %s ze slotu %d", 
 									GetPlayerLogName(playerid), 
 									GetPlayerLogName(i),
 									GetCarDataLogName(car),
@@ -15126,7 +15126,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarData[car][c_OwnerType] = 6;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
-				Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na 6",  GetPlayerLogName(playerid), GetCarDataLogName(car));
+				Log(adminLog, INFO, "Admin %s zmieniÔøΩ w %s typ pojazdu na 6",  GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
         }
         ShowCarEditDialog(playerid);
@@ -15159,9 +15159,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 						}
 
-						format(string, sizeof(string), " UsuniÍto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+						format(string, sizeof(string), " UsuniÔøΩto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						Log(adminLog, INFO, "Admin %s usunπ≥ %s pojazd %s ze slotu %d", 
+						Log(adminLog, INFO, "Admin %s usunÔøΩÔøΩ %s pojazd %s ze slotu %d", 
 									GetPlayerLogName(playerid), 
 									GetPlayerLogName(i),
 									GetCarDataLogName(car),
@@ -15186,7 +15186,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		CarData[car][c_OwnerType] = typ;
 		CarData[car][c_Owner] = strval(inputtext);
 		
-		Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na %d", GetPlayerLogName(playerid), GetCarDataLogName(car), typ);
+		Log(adminLog, INFO, "Admin %s zmieniÔøΩ w %s typ pojazdu na %d", GetPlayerLogName(playerid), GetCarDataLogName(car), typ);
 		Car_Save(car, CAR_SAVE_OWNER);
 		
         ShowCarEditDialog(playerid);
@@ -15197,7 +15197,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(!response) return ShowCarEditDialog(playerid);
         if(strval(inputtext) < 0 || strval(inputtext) > 255)
         {
-            SendClientMessage(playerid, COLOR_GRAD2, "Nieprawid≥owy kolor.");
+            SendClientMessage(playerid, COLOR_GRAD2, "NieprawidÔøΩowy kolor.");
             return ShowCarEditDialog(playerid);
         }
         new car = GetPVarInt(playerid, "edit-car");
@@ -15228,28 +15228,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
                 format(string, 512, "%s%d\t%s\n", string, i, FractionNames[i]);
             }
-            format(string, 512, "%s\n\nWprowadü UID frakcji:", string);
-            ShowPlayerDialogEx(playerid, D_EDIT_RANG_2, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", string, "Wybierz", "WrÛÊ");
+            format(string, 512, "%s\n\nWprowadÔøΩ UID frakcji:", string);
+            ShowPlayerDialogEx(playerid, D_EDIT_RANG_2, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", string, "Wybierz", "WrÔøΩÔøΩ");
         }
         else
         {
-            ShowPlayerDialogEx(playerid, D_EDIT_RANG_2, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Wprowadü UID organizacji (/rodziny UID):", "Wybierz", "WrÛÊ");
+            ShowPlayerDialogEx(playerid, D_EDIT_RANG_2, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "WprowadÔøΩ UID organizacji (/rodziny UID):", "Wybierz", "WrÔøΩÔøΩ");
         }
         return 1;
     }
     else if(dialogid == D_EDIT_RANG_2)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÛÊ");
+        if(!response) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÔøΩÔøΩ");
         new typ = GetPVarInt(playerid, "edit_rang_typ");
         new id = strval(inputtext);
         if(typ == 0)
         {
-            if(id < 1 || id > 17) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÛÊ");
+            if(id < 1 || id > 17) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÔøΩÔøΩ");
         }
         else
         {
             new uid = orgID(id);
-            if(!orgIsValid(uid)) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÛÊ");
+            if(!orgIsValid(uid)) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÔøΩÔøΩ");
         }
         SetPVarInt(playerid, "edit_rang_id", id);
         EDIT_ShowRangNames(playerid, typ, id, true);
@@ -15257,9 +15257,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
     else if(dialogid == D_EDIT_RANG_SET)
     {
-        if(!response) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÛÊ");
+        if(!response) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÔøΩÔøΩ");
         SetPVarInt(playerid, "edit_rang_index", listitem);
-        ShowPlayerDialogEx(playerid, D_EDIT_RANG_NAME, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Podaj nowπ nazwÍ dla rangi.\n{FF0000}Jeøeli chcesz usunπÊ rangÍ, wpisz minus (-)", "Ustaw", "WrÛÊ");
+        ShowPlayerDialogEx(playerid, D_EDIT_RANG_NAME, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Podaj nowÔøΩ nazwÔøΩ dla rangi.\n{FF0000}JeÔøΩeli chcesz usunÔøΩÔøΩ rangÔøΩ, wpisz minus (-)", "Ustaw", "WrÔøΩÔøΩ");
         return 1;
     }
     else if(dialogid == D_EDIT_RANG_NAME)
@@ -15268,8 +15268,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new idx = GetPVarInt(playerid, "edit_rang_index");
         if(strlen(inputtext) < 1 || strlen(inputtext) > 24)
         {
-            SendClientMessage(playerid, COLOR_GRAD2, "D≥ugosc od 1 do 24");
-            ShowPlayerDialogEx(playerid, D_EDIT_RANG_NAME, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Podaj nowπ nazwÍ dla rangi.\n{FF0000}Jeøeli chcesz usunπÊ rangÍ, wpisz minus (-)", "Ustaw", "WrÛÊ");
+            SendClientMessage(playerid, COLOR_GRAD2, "DÔøΩugosc od 1 do 24");
+            ShowPlayerDialogEx(playerid, D_EDIT_RANG_NAME, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Podaj nowÔøΩ nazwÔøΩ dla rangi.\n{FF0000}JeÔøΩeli chcesz usunÔøΩÔøΩ rangÔøΩ, wpisz minus (-)", "Ustaw", "WrÔøΩÔøΩ");
             return 1;
         }
         new typ = GetPVarInt(playerid, "edit_rang_typ");
@@ -15309,7 +15309,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             case 0:
             {
-                if(PlayerInfo[playerid][pTruckSkill] < 200) return SendClientMessage(playerid, COLOR_GRAD2, " Szybkie zlecenia dostÍpne od 4 poziomu umiejÍtnoúci!");
+                if(PlayerInfo[playerid][pTruckSkill] < 200) return SendClientMessage(playerid, COLOR_GRAD2, " Szybkie zlecenia dostÔøΩpne od 4 poziomu umiejÔøΩtnoÔøΩci!");
                 for(new i=0;i<sizeof(TransportJobData);i++)
                 {
                     if(TransportJobData[i][eTJDStartX] != 0 && TransportJobData[i][eTJDEndX] != 0)
@@ -15318,7 +15318,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         format(lStr, 256, "%s%d\t%s\n", lStr, i, TransportJobData[i][eTJDName]);
                     }
                 }
-                ShowPlayerDialogEx(playerid, D_TRANSPORT_LIST, DIALOG_STYLE_LIST, "Szybkie zlecenie", lStr, "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_TRANSPORT_LIST, DIALOG_STYLE_LIST, "Szybkie zlecenie", lStr, "Wybierz", "WrÔøΩÔøΩ");
                 return 0;
             }
             case 1:
@@ -15326,7 +15326,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(!IsPlayerInRangeOfPoint(playerid, 10.0, TransportJobData[0][eTJDStartX], TransportJobData[0][eTJDStartY], TransportJobData[0][eTJDStartZ]))
                 {
                     SetPlayerCheckpoint(playerid, TransportJobData[0][eTJDStartX], TransportJobData[0][eTJDStartY], TransportJobData[0][eTJDStartZ], 5.0);
-                    SendClientMessage(playerid, COLOR_GRAD2, "Zlecenie moøesz wybraÊ w swoim centrum pracy.");
+                    SendClientMessage(playerid, COLOR_GRAD2, "Zlecenie moÔøΩesz wybraÔøΩ w swoim centrum pracy.");
                     return 0;
                 }
 
@@ -15341,7 +15341,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                         format(lStr, 256, "%s%d\t%s\n", lStr, i, TransportJobData[i][eTJDName]);
                     }
                 }
-                ShowPlayerDialogEx(playerid, D_TRANSPORT_LIST, DIALOG_STYLE_LIST, "Planowane zlecenie", lStr, "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_TRANSPORT_LIST, DIALOG_STYLE_LIST, "Planowane zlecenie", lStr, "Wybierz", "WrÔøΩÔøΩ");
             }
         }
     }
@@ -15351,7 +15351,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new idx = strval(inputtext);
         SetPVarInt(playerid, "trans_idx", idx);
         new lStr[256];
-        format(lStr, 256, "TOWAR PRZEWOØONY:\t%s\nMAX. DOCH”D:\t$%d\nILOå∆ TOWARU:\t%d\nPOTRZEBNE MATERIA£Y: %d\n\nCzy chcesz przyjπÊ zlecenie?", TransportJobData[idx][eTJDName],TransportJobData[idx][eTJDMoney], TransportJobData[idx][eTJDMaxItems], TransportJobData[idx][eTJDMats]);
+        format(lStr, 256, "TOWAR PRZEWOÔøΩONY:\t%s\nMAX. DOCHÔøΩD:\t$%d\nILOÔøΩÔøΩ TOWARU:\t%d\nPOTRZEBNE MATERIAÔøΩY: %d\n\nCzy chcesz przyjÔøΩÔøΩ zlecenie?", TransportJobData[idx][eTJDName],TransportJobData[idx][eTJDMoney], TransportJobData[idx][eTJDMaxItems], TransportJobData[idx][eTJDMats]);
 
         ShowPlayerDialogEx(playerid, D_TRANSPORT_ACCEPT, DIALOG_STYLE_MSGBOX, "Akceptacja", lStr, "Gotowe!", "Anuluj");
     }
@@ -15362,13 +15362,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new lStr[128];
         if(TransportJobData[idx][eTJDMats] > TJD_Materials)
         {
-            SendClientMessage(playerid, COLOR_GRAD2, "W magazynie na ma tylu materia≥Ûw. Wsiπdü w wÛzek wid≥owy i do≥aduj magazyn!");
+            SendClientMessage(playerid, COLOR_GRAD2, "W magazynie na ma tylu materiaÔøΩÔøΩw. WsiÔøΩdÔøΩ w wÔøΩzek widÔøΩowy i doÔøΩaduj magazyn!");
             return 0;
         }
         TJD_Materials -= TransportJobData[idx][eTJDMats];
         TJD_UpdateLabel();
 
-        format(lStr, 128, "PrzyjÍto zlecenie. Twoim zadaniem jest transport %s. Udaj siÍ do punktu.", TransportJobData[idx][eTJDName]);
+        format(lStr, 128, "PrzyjÔøΩto zlecenie. Twoim zadaniem jest transport %s. Udaj siÔøΩ do punktu.", TransportJobData[idx][eTJDName]);
         SendClientMessage(playerid, COLOR_YELLOW, lStr);
 
         SetPVarInt(playerid, "trans", ((idx)*2)+1);
@@ -15443,7 +15443,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new str[128];
         format(str, 64, "SUPPORT: %s oferuje Ci pomoc, skorzystaj z tego!", GetNick(playerid));
         SendClientMessage(pid, COLOR_YELLOW, str);
-        format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wrÛciÊ do poprzedniej pozycji wpisz /ticketend", GetNick(pid));
+        format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wrÔøΩciÔøΩ do poprzedniej pozycji wpisz /ticketend", GetNick(pid));
         SendClientMessage(playerid, COLOR_YELLOW, str);
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
@@ -15454,12 +15454,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     }
 //====================[KONTO BANKOWE]========================================
 //By Simeone 25-12-2018
-	//==================[G£”WNE OKNO DIALOGOWE]=======================================
+	//==================[GÔøΩÔøΩWNE OKNO DIALOGOWE]=======================================
 	else if(dialogid == 1067)
 	{
 		if(response)
         {
-			//Zmienne uøyte do dzia≥ania dialogu
+			//Zmienne uÔøΩyte do dziaÔøΩania dialogu
 			new string[128];
 			new giveplayer[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
@@ -15469,28 +15469,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             {
 				
 				
-				//dzia≥anie dialogu
+				//dziaÔøΩanie dialogu
                 case 0://Stan konta
 				{
 					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nObecny stan konta: {80FF00}%d$", giveplayer, PlayerInfo[playerid][pAccount]);
 					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
-                case 1://Wp≥aÊ
+                case 1://WpÔøΩaÔøΩ
 				{
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
-					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, string, "Wpisz poniøej kwotÍ, ktÛrπ chcesz wp≥aciÊ", "Wykonaj", "OdrzuÊ");
+					ShowPlayerDialogEx(playerid, 1068, DIALOG_STYLE_INPUT, string, "Wpisz poniÔøΩej kwotÔøΩ, ktÔøΩrÔøΩ chcesz wpÔøΩaciÔøΩ", "Wykonaj", "OdrzuÔøΩ");
 				}
-                case 2://Wyp≥aÊ
+                case 2://WypÔøΩaÔøΩ
 				{
 					
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
-					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poniøej kwotÍ, ktÛrπ chcesz wyp≥aciÊ", "Wykonaj", "OdrzuÊ");
+					ShowPlayerDialogEx(playerid, 1071, DIALOG_STYLE_INPUT, string, "Wpisz poniÔøΩej kwotÔøΩ, ktÔøΩrÔøΩ chcesz wypÔøΩaciÔøΩ", "Wykonaj", "OdrzuÔøΩ");
 				}
                 case 3://Przelew do osoby
 				{
 					
 					format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", giveplayer);
-					ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poniøej ID odbiorcy", "Wykonaj", "OdrzuÊ");
+					ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poniÔøΩej ID odbiorcy", "Wykonaj", "OdrzuÔøΩ");
 				}
 				case 4://>>Konto frakcji
 				{
@@ -15501,31 +15501,31 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							if(PlayerInfo[playerid][pLiderValue] < 3)
 							{
 								format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
-								ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp≥aÊ\nWyp≥aÊ\n<< Twoje konto", "Wybierz", "Wyjdü");
+								ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWpÔøΩaÔøΩ\nWypÔøΩaÔøΩ\n<< Twoje konto", "Wybierz", "WyjdÔøΩ");
 							}
 							else 
 							{
-								sendErrorMessage(playerid, "Nie moøesz zarzπdzaÊ kontem twojej frakcji!"); 
+								sendErrorMessage(playerid, "Nie moÔøΩesz zarzÔøΩdzaÔøΩ kontem twojej frakcji!"); 
 								return 1;
 							}
 
 						}
 						else
 						{
-							sendErrorMessage(playerid, "Nie jesteú liderem frakcji!"); 
+							sendErrorMessage(playerid, "Nie jesteÔøΩ liderem frakcji!"); 
 							return 1;
 						}
 					}	
 					else
 					{
-						sendErrorMessage(playerid, "Nie jesteú we frakcji!");
+						sendErrorMessage(playerid, "Nie jesteÔøΩ we frakcji!");
 						return 1;
 					}
 					
 				}
 				case 5://Konto rodziny
 				{
-					sendErrorMessage(playerid, "Juø wkrÛtce!"); 
+					sendErrorMessage(playerid, "JuÔøΩ wkrÔøΩtce!"); 
 				}
 				
             }
@@ -15533,7 +15533,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 	
 	}
-	//===============[WP£ATA NA SWOJE KONTO]=========================
+	//===============[WPÔøΩATA NA SWOJE KONTO]=========================
 	else if(dialogid == 1068)
 	{
 		if(response)
@@ -15542,15 +15542,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new string[128];
 				new money = strval(inputtext);
-				money = FunkcjaK(inputtext);//--Funkcja wp≥acania na k
+				money = FunkcjaK(inputtext);//--Funkcja wpÔøΩacania na k
 				if (money > kaska[playerid] || money < 1)
 				{
-					sendTipMessage(playerid, "Nie masz tyle \\ B≥Ídna kwota!");
+					sendTipMessage(playerid, "Nie masz tyle \\ BÔøΩÔøΩdna kwota!");
 					return 1;
 				}
 				if(PlayerInfo[playerid][pAccount] + money > 2_000_000_000)
 				{
-					sendTipMessage(playerid, "Konto bankowe przepe≥nione, moøemy przechowywaÊ nie wiÍcej niø 2 miliardy!");
+					sendTipMessage(playerid, "Konto bankowe przepeÔøΩnione, moÔøΩemy przechowywaÔøΩ nie wiÔøΩcej niÔøΩ 2 miliardy!");
 					return 1;
 				}
 				ZabierzKase(playerid, money);
@@ -15565,7 +15565,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
 				
-				Log(payLog, INFO, "%s wp≥aci≥ na swoje konto %d$. Nowy stan: %d$",
+				Log(payLog, INFO, "%s wpÔøΩaciÔøΩ na swoje konto %d$. Nowy stan: %d$",
 					GetPlayerLogName(playerid),
 					money, 
 					PlayerInfo[playerid][pAccount]);
@@ -15584,54 +15584,54 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[256];
 			new StanSejfuFrac[128];//drugi string specjalnie do stanu konta frakcji
 			new stan = Sejf_Frakcji[GetPlayerFraction(playerid)];//Stan sejfu frakcji
-			new giveplayer[MAX_PLAYER_NAME];//Gracz odbierajπcy
+			new giveplayer[MAX_PLAYER_NAME];//Gracz odbierajÔøΩcy
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
             switch(listitem)
             {
 				
 				
-				//Case'y i dzia≥anie kodu
+				//Case'y i dziaÔøΩanie kodu
 				
-				case 0://=======================>>Sprawdü stan konta organizacji
+				case 0://=======================>>SprawdÔøΩ stan konta organizacji
 				{	
-					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyúlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$", giveplayer, FractionNames[FracGracza],Sejf_Frakcji[GetPlayerFraction(playerid)]);
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyÔøΩlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$", giveplayer, FractionNames[FracGracza],Sejf_Frakcji[GetPlayerFraction(playerid)]);
 					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
 				case 1://=======================>>Przelew z konta frakcji na konto gracza
 				{
 					
 					format(string, sizeof(string), ">> %s", FractionNames[FracGracza]);
-					ShowPlayerDialogEx(playerid, 1075, DIALOG_STYLE_INPUT, string, "Wpisz poniøej ID odbiorcy", "Wykonaj", "OdrzuÊ");
+					ShowPlayerDialogEx(playerid, 1075, DIALOG_STYLE_INPUT, string, "Wpisz poniÔøΩej ID odbiorcy", "Wykonaj", "OdrzuÔøΩ");
 				}
 				case 2://=======================>>Przelew z konta frakcji na konto frakcji 
 				{
 					if(IsAPrzestepca(playerid))
 					{
-						sendTipMessage(playerid, "Organizacje przestÍpcze muszπ znaleüÊ lepszy (cichszy) sposÛb na przelew"); 
+						sendTipMessage(playerid, "Organizacje przestÔøΩpcze muszÔøΩ znaleÔøΩÔøΩ lepszy (cichszy) sposÔøΩb na przelew"); 
 						return 1;
 					}
 					format(string, sizeof(string), ">> %s", FractionNames[FracGracza]);
-					ShowPlayerDialogEx(playerid, 1098, DIALOG_STYLE_LIST, string, "LSPD\nFBI\nLSFD\nLSMC\nDMV\nUSSS\nSN\nKT\nNOA", "Dalej", "PowrÛt"); 
+					ShowPlayerDialogEx(playerid, 1098, DIALOG_STYLE_LIST, string, "LSPD\nFBI\nLSFD\nLSMC\nDMV\nUSSS\nSN\nKT\nNOA", "Dalej", "PowrÔøΩt"); 
 				
 				}
-				case 3://=======================>>Wp≥aÊ na konto frakcji
+				case 3://=======================>>WpÔøΩaÔøΩ na konto frakcji
 				{
 					format(string, sizeof(string), "%s", FractionNames[FracGracza]); 
-					ShowPlayerDialogEx(playerid, 1077, DIALOG_STYLE_INPUT, string, "Wpisz poniøej kwotÍ, jakπ chcesz wp≥aciÊ", "Wykonaj", "OdrzuÊ"); 
+					ShowPlayerDialogEx(playerid, 1077, DIALOG_STYLE_INPUT, string, "Wpisz poniÔøΩej kwotÔøΩ, jakÔøΩ chcesz wpÔøΩaciÔøΩ", "Wykonaj", "OdrzuÔøΩ"); 
 				}
-				case 4://=======================>>Wyp≥aÊ z konta frakcji
+				case 4://=======================>>WypÔøΩaÔøΩ z konta frakcji
 				{
 					
 					
 					format(string, sizeof(string), "%s", FractionNames[FracGracza]);
-					format(StanSejfuFrac, sizeof(StanSejfuFrac), "Stan konta: {80FF00}%d\n{C0C0C0}Wpisz poniøej kwotÍ jakπ chcesz wyp≥aciÊ", stan);
-					ShowPlayerDialogEx(playerid, 1078, DIALOG_STYLE_INPUT, string, StanSejfuFrac, "Wykonaj", "OdrzuÊ"); 
+					format(StanSejfuFrac, sizeof(StanSejfuFrac), "Stan konta: {80FF00}%d\n{C0C0C0}Wpisz poniÔøΩej kwotÔøΩ jakÔøΩ chcesz wypÔøΩaciÔøΩ", stan);
+					ShowPlayerDialogEx(playerid, 1078, DIALOG_STYLE_INPUT, string, StanSejfuFrac, "Wykonaj", "OdrzuÔøΩ"); 
 				}
-				case 5://=======================>>PowrÛt do g≥Ûwnego panelu
+				case 5://=======================>>PowrÔøΩt do gÔøΩÔøΩwnego panelu
 				{	
 					
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
-					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne\n>>Rodzinne", "Wybierz", "Wyjdü");
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWpÔøΩaÔøΩ\nWypÔøΩaÔøΩ\n>>Frakcyjne\n>>Rodzinne", "Wybierz", "WyjdÔøΩ");
 				
 				}
 			
@@ -15641,7 +15641,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		
 	}
-	//============[DIALOG - WYBIERZ DO KOGO PRZELA∆ KASE]===================
+	//============[DIALOG - WYBIERZ DO KOGO PRZELAÔøΩ KASE]===================
 	//LSPD\nFBI\nLSFD\nLSMC\nDMV\nUSSS\nSN\nKT\nNOA
 	else if(dialogid == 1098)
 	{
@@ -15653,56 +15653,56 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 0:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 1);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: LSPD");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSPD", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: LSPD");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSPD", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 				case 1:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 2);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: FBI");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do FBI", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: FBI");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do FBI", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 				case 2:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 17);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: LSFD");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSFD", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: LSFD");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSFD", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 				case 3:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 4);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: LSMC");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSMC", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: LSMC");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do LSMC", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 				case 4:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 11);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: DMV");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do DMV", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: DMV");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do DMV", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 				case 5:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 7);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: USSS");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do USSS", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: USSS");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do USSS", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 				case 6:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 9);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: SN");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do SN", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: SN");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do SN", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 				case 7:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 10);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: KT");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do KT", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: KT");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do KT", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 				case 8:
 				{
 					SetPVarInt(playerid, "PrzelewFrakcjaFrakcja", 15);
-					format(string, sizeof(string), "Wpisz w poniøszym polu kwotÍ,\nktÛrπ masz zamiar przelaÊ.\n\nWykonujesz przelew do frakcji: NOA");
-					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do NOA", string, "Wykonaj", "OdrzuÊ"); 
+					format(string, sizeof(string), "Wpisz w poniÔøΩszym polu kwotÔøΩ,\nktÔøΩrÔøΩ masz zamiar przelaÔøΩ.\n\nWykonujesz przelew do frakcji: NOA");
+					ShowPlayerDialogEx(playerid, 1099, DIALOG_STYLE_INPUT, "Przelew do NOA", string, "Wykonaj", "OdrzuÔøΩ"); 
 				}
 			
 			}
@@ -15722,32 +15722,32 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(frac == frakcja)
 				{
-					sendErrorMessage(playerid, "Nie moøesz przelaÊ gotÛwki do w≥asnej frakcji!"); 
+					sendErrorMessage(playerid, "Nie moÔøΩesz przelaÔøΩ gotÔøΩwki do wÔøΩasnej frakcji!"); 
 					return 1;
 				}
 				if(Sejf_Frakcji[frakcja] < money)
 				{
-					sendErrorMessage(playerid, "W sejfie twojej frakcji nie ma aø takiej iloúci gotÛwki!"); 
+					sendErrorMessage(playerid, "W sejfie twojej frakcji nie ma aÔøΩ takiej iloÔøΩci gotÔøΩwki!"); 
 					return 1;
 				}
 				if(Sejf_Frakcji[frac] >= 1_500_000_000)
 				{
-					format(string, sizeof(string), "Sejf %s wylewa siÍ! Kwota 1,5kkk przekroczona", FractionNames[frac]);
+					format(string, sizeof(string), "Sejf %s wylewa siÔøΩ! Kwota 1,5kkk przekroczona", FractionNames[frac]);
 					sendErrorMessage(playerid, string);
 					return 1;
 				}
 				//KOMUNIKATY:
-				format(string, sizeof(string), "Dokona≥eú przelewu na konto frakcji %s w wysokoúci %d", FractionNames[frac], money);
+				format(string, sizeof(string), "DokonaÔøΩeÔøΩ przelewu na konto frakcji %s w wysokoÔøΩci %d", FractionNames[frac], money);
 				sendTipMessage(playerid, string);
 				
 				
-				format(bigstring, sizeof(bigstring), "%s dokona≥ przelewu na konto %s z konta %s w wysokoúci %d",
+				format(bigstring, sizeof(bigstring), "%s dokonaÔøΩ przelewu na konto %s z konta %s w wysokoÔøΩci %d",
 				GetNickEx(playerid),
 				FractionNames[frac], 
 				FractionNames[frakcja], money);
 				SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, bigstring);
 				
-				format(bigstring, sizeof(bigstring), "Twoja frakcja otrzyma≥a przelew od lidera %s [%s] w wysokoúci %d", 
+				format(bigstring, sizeof(bigstring), "Twoja frakcja otrzymaÔøΩa przelew od lidera %s [%s] w wysokoÔøΩci %d", 
 				FractionNames[frakcja],
 				GetNickEx(playerid), money);
 				
@@ -15756,17 +15756,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendLeaderRadioMessage(frac, COLOR_RED, "==================================="); 
 				
 				//LOG
-				Log(payLog, INFO, "%s przela≥ do sejfu frakcji %s kwotÍ %d$. Nowy stan: %d$",
+				Log(payLog, INFO, "%s przelaÔøΩ do sejfu frakcji %s kwotÔøΩ %d$. Nowy stan: %d$",
 					GetPlayerLogName(playerid),
 					GetFractionLogName(frakcja),
 					money,
 					Sejf_Frakcji[frakcja]);
 				
-				//Powiadomienie dla adminÛw
+				//Powiadomienie dla adminÔøΩw
 				if(money >= 2_500_000)
 				{
 					SendAdminMessage(COLOR_GREEN, "============[ADM-LOG]===========");
-					format(string, sizeof(string), "Przelewajπcy: %s [%d]", GetNickEx(playerid), playerid);
+					format(string, sizeof(string), "PrzelewajÔøΩcy: %s [%d]", GetNickEx(playerid), playerid);
 					SendAdminMessage(COLOR_WHITE, string);
 					format(string, sizeof(string), "Z konta: %s", FractionNames[frakcja]);
 					SendAdminMessage(COLOR_WHITE, string);
@@ -15776,7 +15776,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendAdminMessage(COLOR_WHITE, string);
 					SendAdminMessage(COLOR_GREEN, "================================");
 				}
-				//czynnoúci
+				//czynnoÔøΩci
 				Sejf_Add(frac, money);
 				Sejf_Add(frakcja, -money);
 				Sejf_Save(frac);
@@ -15784,12 +15784,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				sendTipMessage(playerid, "B≥Ídna kwota");
+				sendTipMessage(playerid, "BÔøΩÔøΩdna kwota");
 			}
 		}
 		else
 		{
-			sendTipMessage(playerid, "Odrzucono akcjÍ przelewu"); 
+			sendTipMessage(playerid, "Odrzucono akcjÔøΩ przelewu"); 
 			return 1;
 		}
 	
@@ -15799,12 +15799,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
         {
-            SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mÛwi: Do zobaczenia!");
+            SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mÔøΩwi: Do zobaczenia!");
 			return 1;
         }
 		else
 		{
-			SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mÛwi: Do zobaczenia! Zapraszamy ponownie do Verte Bank");
+			SendClientMessage(playerid, COLOR_WHITE, "Marcepan Marks mÔøΩwi: Do zobaczenia! Zapraszamy ponownie do Verte Bank");
 			return 1;
 		}
        
@@ -15829,7 +15829,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							}
 							else
 							{
-								sendErrorMessage(playerid, "Taki nick jest juø uøywany!"); 
+								sendErrorMessage(playerid, "Taki nick jest juÔøΩ uÔøΩywany!"); 
 								return 1;
 							}
 						}
@@ -15842,20 +15842,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					else
 					{
-						sendErrorMessage(playerid, "Uøy≥eú nieodpowiednich znakÛw!"); 
+						sendErrorMessage(playerid, "UÔøΩyÔøΩeÔøΩ nieodpowiednich znakÔøΩw!"); 
 						return 1;
 					}
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Zbyt krÛtka/d≥uga liczba znakÛw w nicku"); 
+					sendErrorMessage(playerid, "Zbyt krÔøΩtka/dÔøΩuga liczba znakÔøΩw w nicku"); 
 					return 1;
 				}
 			}
 		}
 		return 1;
 	}*/ 
-	else if(dialogid == 1071)//wyp≥ata z swojego konta
+	else if(dialogid == 1071)//wypÔøΩata z swojego konta
 	{
 		if(response)
 	    {
@@ -15863,11 +15863,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				new string[128];
 				new money = strval(inputtext);
-				money = FunkcjaK(inputtext);//--Funkcja wp≥acania na k
+				money = FunkcjaK(inputtext);//--Funkcja wpÔøΩacania na k
 				
 				if (money > PlayerInfo[playerid][pAccount] || money < 1)//Zabezpieczenie
 				{
-					sendTipMessage(playerid, "Nie masz tyle \\ B≥Ídna kwota");
+					sendTipMessage(playerid, "Nie masz tyle \\ BÔøΩÔøΩdna kwota");
 					return 1;
 				}
 				
@@ -15878,7 +15878,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GRAD2, string);
 				format(string, sizeof(string), "  Depozyt: {80FF00}$-%d", money);
 				SendClientMessage(playerid, COLOR_GRAD4, string);
-				//Czynnoúci:
+				//CzynnoÔøΩci:
 				DajKase(playerid, money);
 				PlayerInfo[playerid][pAccount] -= money;
 				//Komunikaty:
@@ -15886,7 +15886,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string), "  Nowy stan: {80FF00}$%d", PlayerInfo[playerid][pAccount]);
 				SendClientMessage(playerid, COLOR_WHITE, string);
 				
-				Log(payLog, INFO, "%s wyp≥aci≥ ze swojego konta %d$. Nowu stan: %d$", 
+				Log(payLog, INFO, "%s wypÔøΩaciÔøΩ ze swojego konta %d$. Nowu stan: %d$", 
 					GetPlayerLogName(playerid), 
 					money, 
 					PlayerInfo[playerid][pAccount]);
@@ -15899,7 +15899,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 		{
-			sendTipMessage(playerid, "Wy≥πczono system actorÛw"); 
+			sendTipMessage(playerid, "WyÔøΩÔøΩczono system actorÔøΩw"); 
 			return 1;
 		}
 		if(response)
@@ -15908,23 +15908,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0:
 				{
-					sendTipMessage(playerid, "DostÍpne juø wkrÛtce"); 
+					sendTipMessage(playerid, "DostÔøΩpne juÔøΩ wkrÔøΩtce"); 
 				}
 				case 1:
 				{
-					sendTipMessage(playerid, "DostÍpne juø wkrÛtce");
+					sendTipMessage(playerid, "DostÔøΩpne juÔøΩ wkrÔøΩtce");
 				}
 				case 2:
 				{
-					sendTipMessage(playerid, "Ta opcja zostanie dodana juø niebawem!");
+					sendTipMessage(playerid, "Ta opcja zostanie dodana juÔøΩ niebawem!");
 				}
 				case 3:
 				{
-					sendTipMessage(playerid, "Ta opcja zostanie dodana juø niebawem!");
+					sendTipMessage(playerid, "Ta opcja zostanie dodana juÔøΩ niebawem!");
 				}
 				case 4:
 				{
-					sendTipMessage(playerid, "Ta opcja zostanie dodana juø niebawem!");
+					sendTipMessage(playerid, "Ta opcja zostanie dodana juÔøΩ niebawem!");
 				}
 			}
 		}
@@ -15947,7 +15947,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 			sendErrorMessage(playerid, "Odrzucono akcje przelewu!");
 		}
-		else//Jeúli przejdzie dalej
+		else//JeÔøΩli przejdzie dalej
 		{
 			new string[128];
 			new giveplayerid = strval(inputtext);
@@ -15961,12 +15961,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(giveplayerid != playerid)
 				{
 					SetPVarInt(playerid, PVAR_PRZELEW_ID, giveplayerid);
-					format(string, sizeof(string), "Wpisz poniøej sumÍ, ktorπ chcesz przelaÊ do %s", GetNick(giveplayerid));
-					ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "OdrzuÊ");
+					format(string, sizeof(string), "Wpisz poniÔøΩej sumÔøΩ, ktorÔøΩ chcesz przelaÔøΩ do %s", GetNick(giveplayerid));
+					ShowPlayerDialogEx(playerid, 1073, DIALOG_STYLE_INPUT, ">>Przelew >> 1  >> 2 ", string, "Wykonaj", "OdrzuÔøΩ");
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Nie moøesz przelaÊ gotÛwki samemu sobie!");
+					sendErrorMessage(playerid, "Nie moÔøΩesz przelaÔøΩ gotÔøΩwki samemu sobie!");
 					return 1;
 				}
 			}
@@ -15980,14 +15980,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	
 	
 	}
-	//================[PRZELEWY DO GRACZA OD GRACZA = Czynnoúci + Kwota przelewu]========================
+	//================[PRZELEWY DO GRACZA OD GRACZA = CzynnoÔøΩci + Kwota przelewu]========================
 	else if(dialogid == 1073)
 	{
 		if(!response)
 	    {
 			sendErrorMessage(playerid, "Odrzucono akcje przelewu!"); 
 		}
-		else//Jeúli kliknie "TAK"
+		else//JeÔøΩli kliknie "TAK"
 		{
 			new string[256];
 			new sendername[MAX_PLAYER_NAME];
@@ -16001,40 +16001,40 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(PlayerInfo[giveplayerid][pAccount]+money > MAX_MONEY_IN_BANK)
 				{
-					sendErrorMessage(playerid, "Gracz do ktÛrego prÛbowa≥eú przelaÊ gotÛwkÍ - ma zbyt duøo pieniÍdzy na koncie."); 
+					sendErrorMessage(playerid, "Gracz do ktÔøΩrego prÔøΩbowaÔøΩeÔøΩ przelaÔøΩ gotÔøΩwkÔøΩ - ma zbyt duÔøΩo pieniÔøΩdzy na koncie."); 
 					return 1;
 				}
 				if(!IsPlayerConnected(giveplayerid))
 				{
-					sendErrorMessage(playerid, "Gracz, do ktÛrego prÛbowa≥eú przelaÊ gotÛwkÍ wyszed≥ z serwera!"); 
+					sendErrorMessage(playerid, "Gracz, do ktÔøΩrego prÔøΩbowaÔøΩeÔøΩ przelaÔøΩ gotÔøΩwkÔøΩ wyszedÔøΩ z serwera!"); 
 					return 1;
 				}
-				//Czynnoúci:
+				//CzynnoÔøΩci:
 				PlayerInfo[playerid][pAccount] -= money;
 				PlayerInfo[giveplayerid][pAccount] += money;
 				
 				//komunikaty:
-				format(string, sizeof(string), "Otrzyma≥eú przelew w wysokoúci %d$ od %s . Pieniπdze znajdujπ siÍ na twoim koncie.", money, sendername);
+				format(string, sizeof(string), "OtrzymaÔøΩeÔøΩ przelew w wysokoÔøΩci %d$ od %s . PieniÔøΩdze znajdujÔøΩ siÔøΩ na twoim koncie.", money, sendername);
 				SendClientMessage(giveplayerid, COLOR_RED, string);
 				
-				format(string, sizeof(string), "Wys≥a≥eú przelew dla %s w wysokoúci %d$. Pieniπdze zosta≥y pobrane z twojego konta bankowego", giveplayer, money);
+				format(string, sizeof(string), "WysÔøΩaÔøΩeÔøΩ przelew dla %s w wysokoÔøΩci %d$. PieniÔøΩdze zostaÔøΩy pobrane z twojego konta bankowego", giveplayer, money);
 				SendClientMessage(playerid, COLOR_RED, string); 
 				
-				Log(payLog, INFO, "%s przela≥ %s kwotÍ %d$", 
+				Log(payLog, INFO, "%s przelaÔøΩ %s kwotÔøΩ %d$", 
 					GetPlayerLogName(playerid),
 					GetPlayerLogName(giveplayerid),
 					money);
 				
 				if(money >= 5_000_000)//Wiadomosc dla adminow
 				{
-					format(string, sizeof(string), "Gracz %s wys≥a≥ przelew do %s w wysokoúci %d$", GetNick(playerid), GetNick(giveplayerid), money); 
+					format(string, sizeof(string), "Gracz %s wysÔøΩaÔøΩ przelew do %s w wysokoÔøΩci %d$", GetNick(playerid), GetNick(giveplayerid), money); 
 					SendAdminMessage(COLOR_YELLOW, string);
 					return 1;
 				}
 			}
-			else//Jeúli prÛbuje oszukaÊ (brak gotÛwki, b≥Ídnie wpisana kwota)
+			else//JeÔøΩli prÔøΩbuje oszukaÔøΩ (brak gotÔøΩwki, bÔøΩÔøΩdnie wpisana kwota)
 			{
-				sendErrorMessage(playerid, "B≥Ídna kwota || Nie masz takiej iloúci gotÛwki na swoim koncie!"); 
+				sendErrorMessage(playerid, "BÔøΩÔøΩdna kwota || Nie masz takiej iloÔøΩci gotÔøΩwki na swoim koncie!"); 
 				return 1;
 			}
 			return 1;
@@ -16053,7 +16053,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 			new frakcja = PlayerInfo[playerid][pLider];
 			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[frakcja]);
-			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp≥aÊ\nWyp≥aÊ\n<< Twoje konto", "Wybierz", "Wyjdü");
+			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWpÔøΩaÔøΩ\nWypÔøΩaÔøΩ\n<< Twoje konto", "Wybierz", "WyjdÔøΩ");
 			return 1;
 		}
 
@@ -16062,7 +16062,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 	    {
-			sendErrorMessage(playerid, "Nie uzupe≥ni≥eú ID odbiorcy!"); 
+			sendErrorMessage(playerid, "Nie uzupeÔøΩniÔøΩeÔøΩ ID odbiorcy!"); 
 		}
 		else
 		{
@@ -16072,8 +16072,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			if(IsPlayerConnected(giveplayerid) && gPlayerLogged[giveplayerid])
 			{
 				SetPVarInt(playerid, PVAR_PRZELEW_ID, giveplayerid);
-				format(string, sizeof(string), "Odbiorca: %s\nWysy≥ajπcy: %s\nWpisz poniøej kwotÍ, ktÛra ma zostaÊ przelana na jego konto.", GetNick(giveplayerid), FractionNames[frakcja]); 
-				ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, "Przelewy frakcji >> ID >> Kwota", string, "Wykonaj", "OdrzuÊ"); 
+				format(string, sizeof(string), "Odbiorca: %s\nWysyÔøΩajÔøΩcy: %s\nWpisz poniÔøΩej kwotÔøΩ, ktÔøΩra ma zostaÔøΩ przelana na jego konto.", GetNick(giveplayerid), FractionNames[frakcja]); 
+				ShowPlayerDialogEx(playerid, 1076, DIALOG_STYLE_INPUT, "Przelewy frakcji >> ID >> Kwota", string, "Wykonaj", "OdrzuÔøΩ"); 
 				
 			}
 			else
@@ -16084,12 +16084,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
-	else if(dialogid == 1076)//Wpisywanie kwoty i ca≥oúÊ funkcji - przelew z konta organizacji na gracza
+	else if(dialogid == 1076)//Wpisywanie kwoty i caÔøΩoÔøΩÔøΩ funkcji - przelew z konta organizacji na gracza
 	{
 		if(!response)
 		{
 		
-			sendErrorMessage(playerid, "Odrzucono akcjÍ przelewu"); 
+			sendErrorMessage(playerid, "Odrzucono akcjÔøΩ przelewu"); 
 			return 1;
 		}
 		else
@@ -16106,17 +16106,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			
 			if(money <= 0 || money > Sejf_Frakcji[frakcja])
 			{
-				sendErrorMessage(playerid, "Nieprawid≥owa kwota przelewu!"); 
+				sendErrorMessage(playerid, "NieprawidÔøΩowa kwota przelewu!"); 
 				return 1;
 			}
 			if(!IsPlayerConnected(giveplayerid))
 			{
-				sendErrorMessage(playerid, "Gracz, do ktÛrego prÛbowa≥eú przelaÊ gotÛwkÍ wyszed≥ z serwera!"); 
+				sendErrorMessage(playerid, "Gracz, do ktÔøΩrego prÔøΩbowaÔøΩeÔøΩ przelaÔøΩ gotÔøΩwkÔøΩ wyszedÔøΩ z serwera!"); 
 				return 1;
 			}
 			if(PlayerInfo[giveplayerid][pAccount]+money > MAX_MONEY_IN_BANK)
 			{
-				sendErrorMessage(playerid, "Gracz do ktÛrego prÛbowa≥eú przelaÊ gotÛwkÍ - ma zbyt duøo pieniÍdzy na koncie."); 
+				sendErrorMessage(playerid, "Gracz do ktÔøΩrego prÔøΩbowaÔøΩeÔøΩ przelaÔøΩ gotÔøΩwkÔøΩ - ma zbyt duÔøΩo pieniÔøΩdzy na koncie."); 
 				return 1;
 			}
 			
@@ -16124,26 +16124,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			Sejf_Add(frakcja, -money);
 			Sejf_Save(frakcja);
 			
-			format(string, sizeof(string), ">>>Otrzyma≥eú przelew w wysokoúci %d$, od lidera %s -> %s", money, FractionNames[frakcja], sendername); 
+			format(string, sizeof(string), ">>>OtrzymaÔøΩeÔøΩ przelew w wysokoÔøΩci %d$, od lidera %s -> %s", money, FractionNames[frakcja], sendername); 
 			SendClientMessage(giveplayerid, COLOR_RED, string);
 			
-			format(string, sizeof(string), ">>>Wys≥a≥eú przelew w wysokoúci %d$, na konto %s, z konta %s", money, giveplayer, FractionNames[frakcja]); 
+			format(string, sizeof(string), ">>>WysÔøΩaÔøΩeÔøΩ przelew w wysokoÔøΩci %d$, na konto %s, z konta %s", money, giveplayer, FractionNames[frakcja]); 
 			SendClientMessage(playerid, COLOR_RED, string);
 			
-			format(string, sizeof(string), ">>>Lider %s[%d] wys≥a≥ %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid);
+			format(string, sizeof(string), ">>>Lider %s[%d] wysÔøΩaÔøΩ %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid);
 			SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string);
 			
-			Log(payLog, INFO, "%s przela≥ z sejfu frakcji %s na konto gracza %s kwotÍ %d$. Nowy stan: %d$",
+			Log(payLog, INFO, "%s przelaÔøΩ z sejfu frakcji %s na konto gracza %s kwotÔøΩ %d$. Nowy stan: %d$",
 				GetPlayerLogName(playerid),
 				GetFractionLogName(frakcja),
 				GetPlayerLogName(giveplayerid),
 				money,
 				Sejf_Frakcji[frakcja]);
 				
-			if(money >= 2500000)//Warning dla adminÛw, gdy gracz przekroczy 2.5kk 
+			if(money >= 2500000)//Warning dla adminÔøΩw, gdy gracz przekroczy 2.5kk 
 			{
 				SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|"); 
-				format(string, sizeof(string), "%s[%d] wykona≥ przelew %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid); 
+				format(string, sizeof(string), "%s[%d] wykonaÔøΩ przelew %d$ na konto %s[%d]", sendername, playerid, money, giveplayer, giveplayerid); 
 				SendAdminMessage(COLOR_WHITE, string); 
 				format(string, sizeof(string), "Frakcja gracza(z sejfu): %s", FractionNames[frakcja]);
 				SendAdminMessage(COLOR_WHITE, string);
@@ -16152,13 +16152,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
-	//=================[WP£ATA NA KONTO ORGANIZACJI]=================
+	//=================[WPÔøΩATA NA KONTO ORGANIZACJI]=================
 	else if(dialogid == 1077)
 	{
 		if(!response)
 		{
 		
-			sendErrorMessage(playerid, "Odrzucono akcjÍ wp≥aty"); 
+			sendErrorMessage(playerid, "Odrzucono akcjÔøΩ wpÔøΩaty"); 
 			return 1;
 		}
 		else
@@ -16175,10 +16175,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					Sejf_Add(frakcja, money);
 					Sejf_Save(frakcja);
 					ZabierzKase(playerid, money); 
-					format(string, sizeof(string), "Lider %s wp≥aci≥ %d$ na konto organizacji", sendername, money); 
+					format(string, sizeof(string), "Lider %s wpÔøΩaciÔøΩ %d$ na konto organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wp≥aci≥ na konto frakcji %d kwotÍ %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wpÔøΩaciÔøΩ na konto frakcji %d kwotÔøΩ %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
 						frakcja,
 						money,
@@ -16193,7 +16193,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				sendErrorMessage(playerid, "B≥Ídna kwota transakcji");
+				sendErrorMessage(playerid, "BÔøΩÔøΩdna kwota transakcji");
 				return 1;
 			}
 		
@@ -16202,12 +16202,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	
 	
 	}
-	//=================[WyP£ATA Z KONTA ORGANIZACJI]=================
+	//=================[WyPÔøΩATA Z KONTA ORGANIZACJI]=================
 	else if(dialogid == 1078)
 	{
 		if(!response)
 		{
-			sendErrorMessage(playerid, "Odrzucono akcjÍ wyp≥aty"); 
+			sendErrorMessage(playerid, "Odrzucono akcjÔøΩ wypÔøΩaty"); 
 			return 1;
 		}
 		else
@@ -16224,10 +16224,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					Sejf_Add(frakcja, -money);
 					Sejf_Save(frakcja);
 					DajKase(playerid, money); 
-					format(string, sizeof(string), "Lider %s wyp≥aci≥ %d$ z konta organizacji", sendername, money); 
+					format(string, sizeof(string), "Lider %s wypÔøΩaciÔøΩ %d$ z konta organizacji", sendername, money); 
 					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
 					
-					Log(payLog, INFO, "%s wyp≥aci≥ z konta frakcji %d kwotÍ %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wypÔøΩaciÔøΩ z konta frakcji %d kwotÔøΩ %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
 						frakcja,
 						money,
@@ -16252,7 +16252,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				sendErrorMessage(playerid, "B≥Ídna kwota transakcji!");
+				sendErrorMessage(playerid, "BÔøΩÔøΩdna kwota transakcji!");
 				return 1;
 			}
 		
@@ -16262,12 +16262,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	
 	}
 //=================[KONIEC]========================
-	else if(dialogid == 1090)//Dialog do kupna biletÛw KT --> Pociπg
+	else if(dialogid == 1090)//Dialog do kupna biletÔøΩw KT --> PociÔøΩg
 	{
 		if(!response)
         {
 			new string[128];
-            format(string, sizeof(string), "* %s jest strasznie rozstargniony i zdecydowa≥ odejúÊ od maszyny bez biletu.", GetNick(playerid));//Ciekawostka - niezdecydowany
+            format(string, sizeof(string), "* %s jest strasznie rozstargniony i zdecydowaÔøΩ odejÔøΩÔøΩ od maszyny bez biletu.", GetNick(playerid));//Ciekawostka - niezdecydowany
 			ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 			return 1;
         }
@@ -16280,26 +16280,26 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(kaska[playerid] >= CenaBiletuPociag)				        
 				{
 					ZabierzKase(playerid, CenaBiletuPociag);
-					Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnÍtrzne Sejf_Save
+					Sejf_Add(FRAC_KT, TransportValue[playerid]);//Posiada wewnÔøΩtrzne Sejf_Save
 					PlayerInfo[playerid][pBiletpociag] = 1;
 					new string[128]; 
-					format(string, sizeof(string), "Zakupi≥eú bilet za %d$", CenaBiletuPociag); 
+					format(string, sizeof(string), "ZakupiÔøΩeÔøΩ bilet za %d$", CenaBiletuPociag); 
 					sendTipMessage(playerid, string);
-					format(string, sizeof(string), "%s[ID: %d] zakupi≥ bilet za %d$", sendername, playerid, CenaBiletuPociag); 
+					format(string, sizeof(string), "%s[ID: %d] zakupiÔøΩ bilet za %d$", sendername, playerid, CenaBiletuPociag); 
 					SendLeaderRadioMessage(FRAC_KT, COLOR_LIGHTGREEN, string);
 						
-					format(string, sizeof(string), "* %s zakupi≥ bilet do pociπgu za %d$, schowa≥ go do kieszeni.", GetNick(playerid), CenaBiletuPociag);
+					format(string, sizeof(string), "* %s zakupiÔøΩ bilet do pociÔøΩgu za %d$, schowaÔøΩ go do kieszeni.", GetNick(playerid), CenaBiletuPociag);
 					ProxDetector(10.0, playerid, string, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE, COLOR_PURPLE);
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Nie masz wystarczajπcej iloúci gotÛwki!"); 
+					sendErrorMessage(playerid, "Nie masz wystarczajÔøΩcej iloÔøΩci gotÔøΩwki!"); 
 					return 1;
 				}
 			}
 			else
 			{
-				sendErrorMessage(playerid, "Nie jesteú przy maszynie do kupna biletÛw!"); 
+				sendErrorMessage(playerid, "Nie jesteÔøΩ przy maszynie do kupna biletÔøΩw!"); 
 				return 1;
 			}
 		}
@@ -16308,23 +16308,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
         {
-			sendErrorMessage(playerid, "Aby zejúÊ ze s≥uøby wpisz /adminduty"); 
+			sendErrorMessage(playerid, "Aby zejÔøΩÔøΩ ze sÔøΩuÔøΩby wpisz /adminduty"); 
 			return 1;
         }
 	
 	}
-	else if(dialogid == 1092)//Ca≥uj - komenda - potwierdzenie
+	else if(dialogid == 1092)//CaÔøΩuj - komenda - potwierdzenie
 	{
 		if(response)
 		{
 			if(ProxDetectorS(5.5, playerid, kissPlayerOffer[playerid]))
 			{
 				new string[128];
-				format(string, sizeof(string),"* %s kocha %s wiÍc ca≥ujπ siÍ.", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
+				format(string, sizeof(string),"* %s kocha %s wiÔøΩc caÔøΩujÔøΩ siÔøΩ.", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				format(string, sizeof(string), "%s mÛwi: Kocham ciÍ.", GetNick(kissPlayerOffer[playerid]));
+				format(string, sizeof(string), "%s mÔøΩwi: Kocham ciÔøΩ.", GetNick(kissPlayerOffer[playerid]));
 				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-				format(string, sizeof(string), "%s mÛwi: Ja ciebie teø.", GetNick(playerid));
+				format(string, sizeof(string), "%s mÔøΩwi: Ja ciebie teÔøΩ.", GetNick(playerid));
 				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
 				ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
 				ApplyAnimation(kissPlayerOffer[playerid], "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
@@ -16334,7 +16334,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				sendTipMessage(playerid, "Mi≥oúÊ Ci uciek≥a!"); 
+				sendTipMessage(playerid, "MiÔøΩoÔøΩÔøΩ Ci uciekÔøΩa!"); 
 				return 1;
 			}
 		}
@@ -16342,7 +16342,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			
 			new string[128];
-			format(string, sizeof(string), "* %s spojrza≥(a) na %s i stwierdzi≥(a), øe nie chce siÍ ca≥owaÊ!", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
+			format(string, sizeof(string), "* %s spojrzaÔøΩ(a) na %s i stwierdziÔøΩ(a), ÔøΩe nie chce siÔøΩ caÔøΩowaÔøΩ!", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
 			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 		
 			return 1;
@@ -16364,7 +16364,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     		if(veh == 0) return 1;
     		if(Car_GetOwner(veh) != RENT_CAR || Car_GetOwnerType(veh) != CAR_OWNER_SPECIAL)
 			{
-				sendTipMessageEx(playerid, COLOR_GRAD2, "Tego pojazdu nie moøna wypoøyczyÊ.");
+				sendTipMessageEx(playerid, COLOR_GRAD2, "Tego pojazdu nie moÔøΩna wypoÔøΩyczyÔøΩ.");
 				TogglePlayerControllable(playerid, 1);
 				RemovePlayerFromVehicleEx(playerid);
 				HireCar[playerid] = 0;
@@ -16372,7 +16372,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
     		if(CarData[VehicleUID[veh][vUID]][c_Rang] != 0)
 			{
-			    sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd jest aktualnie wypoøyczony przez innπ osobÍ.");
+			    sendTipMessageEx(playerid, COLOR_GRAD2, "Ten pojazd jest aktualnie wypoÔøΩyczony przez innÔøΩ osobÔøΩ.");
 			    TogglePlayerControllable(playerid, 1);
 				RemovePlayerFromVehicleEx(playerid);
 				HireCar[playerid] = 0;
@@ -16380,7 +16380,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
    			if(GetPVarInt(playerid, "rentTimer") != 0)
    			{
-   				sendTipMessageEx(playerid, COLOR_GRAD2, "Aktualnie wypoøyczasz pewien pojazd.");
+   				sendTipMessageEx(playerid, COLOR_GRAD2, "Aktualnie wypoÔøΩyczasz pewien pojazd.");
    				TogglePlayerControllable(playerid, 1);
 				RemovePlayerFromVehicleEx(playerid);
 				HireCar[playerid] = 0;
@@ -16402,7 +16402,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(!response)
 		{
-			sendTipMessageEx(playerid, COLOR_GRAD2, "Odrzuci≥eú propozycjÍ wypoøyczenia pojazdu.");
+			sendTipMessageEx(playerid, COLOR_GRAD2, "OdrzuciÔøΩeÔøΩ propozycjÔøΩ wypoÔøΩyczenia pojazdu.");
 			TogglePlayerControllable(playerid, 1);
 			RemovePlayerFromVehicleEx(playerid);
 			HireCar[playerid] = 0;
@@ -16412,7 +16412,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 		{
-			sendTipMessage(playerid, "Wy≥πczy≥eú dialog tras"); 
+			sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ dialog tras"); 
 			return 1;
 		}
 		if(response)
@@ -16422,28 +16422,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 0:
 				{
 					SetPlayerCheckpoint(playerid, 2005.9244,-1442.3917,13.5631, 3);
-					sendTipMessage(playerid, "Trasa rozpoczyna siÍ spod szpitala, udaj siÍ tam!");
-					sendTipMessage(playerid, "Aby anulowaÊ wpisz /stopbieg"); 
+					sendTipMessage(playerid, "Trasa rozpoczyna siÔøΩ spod szpitala, udaj siÔøΩ tam!");
+					sendTipMessage(playerid, "Aby anulowaÔøΩ wpisz /stopbieg"); 
 					SetPVarInt(playerid, "RozpoczalBieg", 1);
 				}
 				case 1:
 				{
 					SetPlayerCheckpoint(playerid, 806.4952,-1334.9512,13.5469, 3);
-					sendTipMessage(playerid, "Trasa rozpoczyna siÍ spod metra udaj siÍ tam!");
-					sendTipMessage(playerid, "Aby anulowaÊ wpisz /stopbieg"); 
+					sendTipMessage(playerid, "Trasa rozpoczyna siÔøΩ spod metra udaj siÔøΩ tam!");
+					sendTipMessage(playerid, "Aby anulowaÔøΩ wpisz /stopbieg"); 
 					SetPVarInt(playerid, "RozpoczalBieg", 1);
 				}
 				case 3:
 				{
-					sendTipMessage(playerid, "Aktualnie trwajπ prace nad tπ trasπ!"); 
+					sendTipMessage(playerid, "Aktualnie trwajÔøΩ prace nad tÔøΩ trasÔøΩ!"); 
 				}
 				case 4:
 				{
-					sendTipMessage(playerid, "Aktualnie trwajπ prace nad tπ trasπ!"); 
+					sendTipMessage(playerid, "Aktualnie trwajÔøΩ prace nad tÔøΩ trasÔøΩ!"); 
 				}
 				case 5:
 				{
-					sendTipMessage(playerid, "Aktualnie trwajπ prace nad tπ trasπ!"); 
+					sendTipMessage(playerid, "Aktualnie trwajÔøΩ prace nad tÔøΩ trasÔøΩ!"); 
 				}
 			}
 			return 1;
@@ -16453,14 +16453,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			sendTipMessage(playerid, "Zag≥osowa≥eú na TAK!"); 
+			sendTipMessage(playerid, "ZagÔøΩosowaÔøΩeÔøΩ na TAK!"); 
 			glosowanie_admina_tak++;
 			SetPVarInt(playerid, "glosowal_w_ankiecie", 1);
 			return 1;
 		}
 		if(!response)
 		{
-			sendTipMessage(playerid, "Zag≥osowa≥eú na NIE!"); 
+			sendTipMessage(playerid, "ZagÔøΩosowaÔøΩeÔøΩ na NIE!"); 
 			glosowanie_admina_nie++;
 			SetPVarInt(playerid, "glosowal_w_ankiecie", 1); 
 			return 1;
@@ -16480,7 +16480,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			SetPVarInt(playerid, "kontakty-dialog-slot", PobierzIdKontaktuZDialogu(playerid, listitem));
-			ShowPlayerDialogEx(playerid, D_KONTAKTY_SMS_WIADOMOSC, DIALOG_STYLE_INPUT, "Kontakty - SMS", "Wprowadü wiadomoúÊ:", "Wyúlj SMS", "Zamknij");
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_SMS_WIADOMOSC, DIALOG_STYLE_INPUT, "Kontakty - SMS", "WprowadÔøΩ wiadomoÔøΩÔøΩ:", "WyÔøΩlj SMS", "Zamknij");
 		}
 	}
 	else if(dialogid == D_KONTAKTY_SMS_WIADOMOSC)
@@ -16497,7 +16497,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			SetPVarInt(playerid, "kontakty-dialog-slot", PobierzIdKontaktuZDialogu(playerid, listitem));
-			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "Wprowadü nowπ nazwÍ kontaktu.\nMaksymalnie "#MAX_KONTAKT_NAME" znaki", "ZmieÒ", "Anuluj");
+			ShowPlayerDialogEx(playerid, D_KONTAKTY_EDYTUJ_NOWA_NAZWA, DIALOG_STYLE_INPUT, "Kontakty - edytuj", "WprowadÔøΩ nowÔøΩ nazwÔøΩ kontaktu.\nMaksymalnie "#MAX_KONTAKT_NAME" znaki", "ZmieÔøΩ", "Anuluj");
 		}
 	}
 	else if(dialogid == D_KONTAKTY_EDYTUJ_NOWA_NAZWA)
@@ -16513,7 +16513,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			UsunKontakt(playerid, PobierzIdKontaktuZDialogu(playerid, listitem));
-			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt usuniÍty.");
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Kontakt usuniÔøΩty.");
 		}
 	}
 	else if(dialogid == D_KONTAKTY_LISTA)
@@ -16527,7 +16527,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 		{
-			sendTipMessage(playerid, "Wyszed≥eú z personalizacji - ustawienia zapisane"); 
+			sendTipMessage(playerid, "WyszedÔøΩeÔøΩ z personalizacji - ustawienia zapisane"); 
 			return 1;
 		}
 		else if(response)
@@ -16546,7 +16546,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(PlayerInfo[playerid][pAdmin] == 0 && PlayerInfo[playerid][pNewAP] == 0)
 					{
-						sendTipMessage(playerid, "Nie jesteú administratorem"); 
+						sendTipMessage(playerid, "Nie jesteÔøΩ administratorem"); 
 						return 1;
 					}
 					ShowPersonalization(playerid, 3); 
@@ -16575,13 +16575,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						PlayerPersonalization[playerid][PERS_LICZNIK] = 1; 
 						ToggleSpeedo[playerid] = true;
-						sendTipMessage(playerid, "Wy≥πczy≥eú wyúwietlanie licznika!"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ wyÔøΩwietlanie licznika!"); 
 					}
 					else
 					{
 						PlayerPersonalization[playerid][PERS_LICZNIK] = 0;
 						ToggleSpeedo[playerid] = false;
-						sendTipMessage(playerid, "W≥πczy≥eú wyúwietlanie licznika w wozie!");
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ wyÔøΩwietlanie licznika w wozie!");
 					}
 				}
 				case 1:
@@ -16589,12 +16589,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][PERS_CB] == 0)
 					{
 						PlayerPersonalization[playerid][PERS_CB] = 1;
-						sendTipMessage(playerid, "Wy≥πczy≥eú CB-RADIO"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ CB-RADIO"); 
 					}
 					else
 					{
 						PlayerPersonalization[playerid][PERS_CB] = 0;
-						sendTipMessage(playerid, "W≥πczy≥eú CB-RADIO!"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ CB-RADIO!"); 
 					}
 				}
 			}
@@ -16604,7 +16604,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!response)
 		{
-			ProxDetector(15.0, playerid, "UrzÍdnik mÛwi: DziÍkujemy i zapraszamy ponownie!", COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
+			ProxDetector(15.0, playerid, "UrzÔøΩdnik mÔøΩwi: DziÔøΩkujemy i zapraszamy ponownie!", COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
 			return 1;
 		}
 		if(response)
@@ -16615,18 +16615,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			if(kaska[playerid] < DmvLicenseCost[listitem])
 			{
-				sendErrorMessage(playerid, sprintf("Ta us≥uga kosztuje %d$, a Ty tyle nie masz!", DmvLicenseCost[listitem]));
+				sendErrorMessage(playerid, sprintf("Ta usÔøΩuga kosztuje %d$, a Ty tyle nie masz!", DmvLicenseCost[listitem]));
 				return 1;
 			}
 
 			switch(listitem)
 			{
-				case 0: //DowÛd osobisty
+				case 0: //DowÔøΩd osobisty
 				{
 					PlayerInfo[playerid][pDowod] = 1;
-					format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje dowÛd osobisty", GetNick(playerid)); 
+					format(string, sizeof(string), "UrzÔøΩdnik wprowadza dane %s do komputera, drukuje laminuje i podaje dowÔøΩd osobisty", GetNick(playerid)); 
 					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					Log(payLog, INFO, "%s kupi≥ dowÛd osobisty za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+					Log(payLog, INFO, "%s kupiÔøΩ dowÔøΩd osobisty za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 1:
 				{
@@ -16637,14 +16637,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					if(PlayerInfo[playerid][pFishLic] == 1)
 					{
-						sendErrorMessage(playerid, "Masz juø kartÍ wÍdkarskπ!"); 
+						sendErrorMessage(playerid, "Masz juÔøΩ kartÔøΩ wÔøΩdkarskÔøΩ!"); 
 						return 1;
 					}
 
 					PlayerInfo[playerid][pFishLic] = 1;
-					format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje kartÍ wÍdkarskπ", GetNick(playerid)); 
+					format(string, sizeof(string), "UrzÔøΩdnik wprowadza dane %s do komputera, drukuje laminuje i podaje kartÔøΩ wÔøΩdkarskÔøΩ", GetNick(playerid)); 
 					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					Log(payLog, INFO, "%s kupi≥ kartÍ wÍdkarskπ za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+					Log(payLog, INFO, "%s kupiÔøΩ kartÔøΩ wÔøΩdkarskÔøΩ za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 2:
 				{
@@ -16655,9 +16655,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 
 					PlayerInfo[playerid][pGunLic] = 1;
-					format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje pozwolenie na broÒ", GetNick(playerid)); 
+					format(string, sizeof(string), "UrzÔøΩdnik wprowadza dane %s do komputera, drukuje laminuje i podaje pozwolenie na broÔøΩ", GetNick(playerid)); 
 					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					Log(payLog, INFO, "%s kupi≥ pozwolenie na broÒ za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+					Log(payLog, INFO, "%s kupiÔøΩ pozwolenie na broÔøΩ za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 3:
 				{
@@ -16668,9 +16668,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 					
 					PlayerInfo[playerid][pBoatLic] = 1;
-					format(string, sizeof(string), "UrzÍdnik wprowadza dane %s do komputera, drukuje laminuje i podaje patent øeglarski", GetNick(playerid)); 
+					format(string, sizeof(string), "UrzÔøΩdnik wprowadza dane %s do komputera, drukuje laminuje i podaje patent ÔøΩeglarski", GetNick(playerid)); 
 					ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					Log(payLog, INFO, "%s kupi≥ patent øeglarski za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+					Log(payLog, INFO, "%s kupiÔøΩ patent ÔøΩeglarski za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 4:
 				{
@@ -16680,18 +16680,18 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						new hh, mm;
 						hh = floatround(floatround(floatdiv(lTime, 3600), floatround_floor)%24,floatround_floor);
 						mm = floatround(floatround(floatdiv(lTime, 60), floatround_floor)%60,floatround_floor);
-						format(string, 128, "Zosta≥o Ci odebrane prawo jazdy! Blokada mija za %d h i %d min", hh, mm);
+						format(string, 128, "ZostaÔøΩo Ci odebrane prawo jazdy! Blokada mija za %d h i %d min", hh, mm);
 						SendClientMessage(playerid, COLOR_GRAD2, string);
 						return 1;
 					}
 					if(PlayerInfo[playerid][pCarLic] == 2)
 					{
-						sendErrorMessage(playerid, "Zaliczy≥eú juø egzamin teoretyczny!"); 
+						sendErrorMessage(playerid, "ZaliczyÔøΩeÔøΩ juÔøΩ egzamin teoretyczny!"); 
 						return 1;
 					}
 					if(PlayerInfo[playerid][pCarLic] == 1)
 					{
-						sendErrorMessage(playerid, "Masz juø prawo do jazdy!"); 
+						sendErrorMessage(playerid, "Masz juÔøΩ prawo do jazdy!"); 
 						return 1;
 					}
 					if(PlayerInfo[playerid][pDowod] < 1)
@@ -16705,15 +16705,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pPrawojazdyzleodp] = 0;
 					PlayerInfo[playerid][pMinalczasnazdpr] = 0;
 					PlayerInfo[playerid][pWtrakcietestprawa] = 1;
-					format(string, sizeof(string), "* UrzÍdnik wyciπga test oraz d≥ugopis i podaje %s", GetNick(playerid));
+					format(string, sizeof(string), "* UrzÔøΩdnik wyciÔøΩga test oraz dÔøΩugopis i podaje %s", GetNick(playerid));
 					ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					ShowPlayerDialogEx(playerid, D_PJTEST, DIALOG_STYLE_MSGBOX, "Prawo jazdy - Test", "{7FFF00}Witaj!\n{FFFFFF}Rozpoczynasz test na prawo jazdy.\nW teúcie {FF0000}NIE UØYWAJ{FFFFFF} polskich znakÛw!\n\nØyczymy powodzenia!", "Rozpocznij", "");
+					ShowPlayerDialogEx(playerid, D_PJTEST, DIALOG_STYLE_MSGBOX, "Prawo jazdy - Test", "{7FFF00}Witaj!\n{FFFFFF}Rozpoczynasz test na prawo jazdy.\nW teÔøΩcie {FF0000}NIE UÔøΩYWAJ{FFFFFF} polskich znakÔøΩw!\n\nÔøΩyczymy powodzenia!", "Rozpocznij", "");
 				}
 				case 5:
 				{
 					if(PlayerInfo[playerid][pCarLic] != 2)
 					{
-						sendErrorMessage(playerid, "Najpierw podejdü do egzaminu teoretycznego!"); 
+						sendErrorMessage(playerid, "Najpierw podejdÔøΩ do egzaminu teoretycznego!"); 
 						return 1;
 					}
 					if(PlayerInfo[playerid][pDowod] < 1)
@@ -16722,8 +16722,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						return 1;
 					}
 
-					sendTipMessage(playerid, "Egzaminy praktyczne zostanπ dodane juø wkrÛtce!"); 
-					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Gratulacje! Zda≥eú egzamin praktyczny!"); 
+					sendTipMessage(playerid, "Egzaminy praktyczne zostanÔøΩ dodane juÔøΩ wkrÔøΩtce!"); 
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Gratulacje! ZdaÔøΩeÔøΩ egzamin praktyczny!"); 
 					TakingLesson[playerid] = 0;
 					PlayerInfo[playerid][pCarLic] = 3;
 				}
@@ -16731,12 +16731,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(PlayerInfo[playerid][pCarLic] < 3)
 					{
-						sendErrorMessage(playerid, "Najpierw podejdü do egzaminu teoretycznego/praktycznego!"); 
+						sendErrorMessage(playerid, "Najpierw podejdÔøΩ do egzaminu teoretycznego/praktycznego!"); 
 						return 1;
 					}
 					if(PlayerInfo[playerid][pCarLic] == 1)
 					{
-						sendErrorMessage(playerid, "Masz juø prawo jazdy!"); 
+						sendErrorMessage(playerid, "Masz juÔøΩ prawo jazdy!"); 
 						return 1;
 					}
 					if(PlayerInfo[playerid][pDowod] < 1)
@@ -16745,14 +16745,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						return 1;
 					}
 					PlayerInfo[playerid][pCarLic] = 1;
-					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra≥eú prawo do jazdy."); 
-					Log(payLog, INFO, "%s kupi≥ licencje na pojazdy za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "OdebraÔøΩeÔøΩ prawo do jazdy."); 
+					Log(payLog, INFO, "%s kupiÔøΩ licencje na pojazdy za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
 				case 7:
 				{
 					if(PlayerInfo[playerid][pFlyLic] == 1)
 					{
-						sendErrorMessage(playerid, "Masz juø licencje na latanie!"); 
+						sendErrorMessage(playerid, "Masz juÔøΩ licencje na latanie!"); 
 						return 1;
 					}
 					if(PlayerInfo[playerid][pDowod] < 1)
@@ -16762,20 +16762,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 
 					PlayerInfo[playerid][pFlyLic] = 1;
-					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra≥eú licencje na latanie!"); 
-					Log(payLog, INFO, "%s kupi≥ licencje na latanie za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "OdebraÔøΩeÔøΩ licencje na latanie!"); 
+					Log(payLog, INFO, "%s kupiÔøΩ licencje na latanie za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
-				/* na pÛüniej
+				/* na pÔøΩniej
 				case 8: //rejestracja pojazdu
 				{
-					sendTipMessage(playerid, "Ta opcja bÍdzie dostÍpna juø niebawem!"); 
+					sendTipMessage(playerid, "Ta opcja bÔøΩdzie dostÔøΩpna juÔøΩ niebawem!"); 
 					return 1;
 				}
-				case 9: // w≥asna tablica rejestracyjna
+				case 9: // wÔøΩasna tablica rejestracyjna
 				{
 					if(IsPlayerPremiumOld(playerid))
 					{
-						sendTipMessage(playerid, "Ta opcja bÍdzie dostÍpna juø niebawem!"); 
+						sendTipMessage(playerid, "Ta opcja bÔøΩdzie dostÔøΩpna juÔøΩ niebawem!"); 
 					}
 					else
 					{
@@ -16805,12 +16805,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][PERS_AD] == 0)
 					{
 						PlayerPersonalization[playerid][PERS_AD] = 1;
-						sendTipMessage(playerid, "Wy≥πczy≥eú wyúwietlanie og≥oszeÒ graczy!"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ wyÔøΩwietlanie ogÔøΩoszeÔøΩ graczy!"); 
 					}
 					else
 					{
 						PlayerPersonalization[playerid][PERS_AD] = 0;
-						sendTipMessage(playerid, "W≥πczy≥eú widocznoúÊ og≥oszeÒ graczy!"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ widocznoÔøΩÔøΩ ogÔøΩoszeÔøΩ graczy!"); 
 					}
 				}
 				case 1:
@@ -16818,12 +16818,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][PERS_NEWBIE] == 0)
 					{
 						PlayerPersonalization[playerid][PERS_NEWBIE] =1;
-						sendTipMessage(playerid, "Wy≥πczy≥eú chat newbie!"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ chat newbie!"); 
 					}
 					else
 					{
 						PlayerPersonalization[playerid][PERS_NEWBIE] =0;
-						sendTipMessage(playerid, "W≥πczy≥eú chat newbie!"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ chat newbie!"); 
 					}
 				}
 				case 2:
@@ -16831,12 +16831,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][PERS_FINFO] == 0)
 					{
 						PlayerPersonalization[playerid][PERS_FINFO] = 1;
-						sendTipMessage(playerid, "Wy≥πczy≥eú komunikaty od frakcji"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ komunikaty od frakcji"); 
 					}
 					else 
 					{
 						PlayerPersonalization[playerid][PERS_FINFO] = 0;
-						sendTipMessage(playerid, "W≥πczy≥eú komunikaty od frakcji"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ komunikaty od frakcji"); 
 					}
 				}
 				case 3:
@@ -16844,12 +16844,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
 					{
 						PlayerPersonalization[playerid][PERS_FAMINFO] = 1;
-						sendTipMessage(playerid, "Wy≥πczy≥eú komunikaty od rodzin!"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ komunikaty od rodzin!"); 
 					}
 					else
 					{
 						PlayerPersonalization[playerid][PERS_FAMINFO] = 0;
-						sendTipMessage(playerid, "W≥πczy≥eú komunikaty od rodzin!"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ komunikaty od rodzin!"); 
 					}
 				}
 			}
@@ -16871,12 +16871,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][PERS_REPORT] == 0)
 					{
 						PlayerPersonalization[playerid][PERS_REPORT] = 1;
-						sendTipMessage(playerid, "Wy≥πczy≥eú widocznoúÊ zg≥oszeÒ graczy"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ widocznoÔøΩÔøΩ zgÔøΩoszeÔøΩ graczy"); 
 					}
 					else if(PlayerPersonalization[playerid][PERS_REPORT] == 1)
 					{
 						PlayerPersonalization[playerid][PERS_REPORT] = 0;
-						sendTipMessage(playerid, "W≥πczy≥eú widocznoúÊ zg≥oszeÒ graczy"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ widocznoÔøΩÔøΩ zgÔøΩoszeÔøΩ graczy"); 
 					}
 				}
 				case 1:
@@ -16884,12 +16884,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][WARNDEATH] == 0)
 					{
 						PlayerPersonalization[playerid][WARNDEATH] = 1;
-						sendTipMessage(playerid, "Wy≥πczy≥eú podglπd widocznoúci úmierci graczy"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ podglÔøΩd widocznoÔøΩci ÔøΩmierci graczy"); 
 					}
 					else if(PlayerPersonalization[playerid][WARNDEATH] == 1)
 					{
 						PlayerPersonalization[playerid][WARNDEATH] =0;
-						sendTipMessage(playerid, "W≥πczy≥eú podglπd widocznoúci úmierci graczy!"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ podglÔøΩd widocznoÔøΩci ÔøΩmierci graczy!"); 
 					}
 				}
 			}
@@ -16911,12 +16911,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][PERS_KB] == 0)
 					{
 						PlayerPersonalization[playerid][PERS_KB]=1; 
-						sendTipMessage(playerid, "Wy≥πczy≥eú przelew za pomocπ /kb"); 
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ przelew za pomocÔøΩ /kb"); 
 					}
 					else if(PlayerPersonalization[playerid][PERS_KB] == 1)
 					{
 						PlayerPersonalization[playerid][PERS_KB] =0; 
-						sendTipMessage(playerid, "W≥πczy≥eú przelew za pomocπ /kb"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ przelew za pomocÔøΩ /kb"); 
 					}
 				}
 				case 1://NickNames
@@ -16924,7 +16924,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 0)
 					{
 						PlayerPersonalization[playerid][PERS_NICKNAMES] =1; 
-						sendTipMessage(playerid, "Wy≥πczy≥eú wyúwietlanie nickÛw nad g≥owπ!");
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ wyÔøΩwietlanie nickÔøΩw nad gÔøΩowÔøΩ!");
 						SetPVarInt(playerid, "tognick", 1);
       					foreach(new i : Player)
 						{
@@ -16934,7 +16934,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					else if(PlayerPersonalization[playerid][PERS_NICKNAMES] == 1)
 					{
 						PlayerPersonalization[playerid][PERS_NICKNAMES] = 0; 
-						sendTipMessage(playerid, "W≥πczy≥eú wyúwietlanie nickÛw nad g≥owπ"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ wyÔøΩwietlanie nickÔøΩw nad gÔøΩowÔøΩ"); 
 						SetPVarInt(playerid, "tognick", 1);
       					foreach(new i : Player)
 						{
@@ -16948,13 +16948,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					if(togADMTXD[playerid] == 0)
 					{
 						togADMTXD[playerid] =1; 
-						sendTipMessage(playerid, "Wy≥πczy≥eú textdrawy kar");
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ textdrawy kar");
 						PlayerPersonalization[playerid][PERS_KARYTXD] =1;
 					}
 					else if(togADMTXD[playerid] == 1)
 					{
 						togADMTXD[playerid] =0; 
-						sendTipMessage(playerid, "W≥πczy≥eú textdrawy kar"); 
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ textdrawy kar"); 
 						PlayerPersonalization[playerid][PERS_KARYTXD]=0;
 					}
 				}
@@ -16962,12 +16962,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 0)
 					{
-						sendTipMessage(playerid, "Wy≥πczy≥eú auto-gui po zmianie broni");
+						sendTipMessage(playerid, "WyÔøΩÔøΩczyÔøΩeÔøΩ auto-gui po zmianie broni");
 						PlayerPersonalization[playerid][PERS_GUNSCROLL] = 1;
 					}
 					else if(PlayerPersonalization[playerid][PERS_GUNSCROLL] == 1)
 					{
-						sendTipMessage(playerid, "W≥πczy≥eú auto-gui po zmianie broni");
+						sendTipMessage(playerid, "WÔøΩÔøΩczyÔøΩeÔøΩ auto-gui po zmianie broni");
 						PlayerPersonalization[playerid][PERS_GUNSCROLL] = 0;
 					}
 				}
@@ -16983,9 +16983,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new txt_klub[256], txt_biuro[256], txt_dym[128], txt_eq[128], txt_txt[128];
 			// KLUB
 			if(lightsVinyl == false){
-				format(txt_light, 128, "{FFFFFF}Oúwietlenie: \t{FF0000}Wy≥πczone");
+				format(txt_light, 128, "{FFFFFF}OÔøΩwietlenie: \t{FF0000}WyÔøΩÔøΩczone");
 			}else{
-				format(txt_light, 128, "{FFFFFF}Oúwietlenie: \t{00FF00}W≥πczone");
+				format(txt_light, 128, "{FFFFFF}OÔøΩwietlenie: \t{00FF00}WÔøΩÔøΩczone");
 			}
 			if(neonVinyl == 0){
 				format(txt_neon, 128, "{FFFFFF}\nNeony: \tBrak");
@@ -17006,41 +17006,41 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{1CFF27}Zielony");
 			}
 			if(neonVinyl == 6){
-				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{F3FA30}ØÛ≥ty");
+				format(txt_neon, 128, "{FFFFFF}\nNeony: \t{F3FA30}ÔøΩÔøΩty");
 			}
 			if(sphereVinyl == false){
-				format(txt_sphere, 128, "{FFFFFF}\nKula: \t{FF0000}Wy≥πczone");
+				format(txt_sphere, 128, "{FFFFFF}\nKula: \t{FF0000}WyÔøΩÔøΩczone");
 			}else{
-				format(txt_sphere, 128, "{FFFFFF}\nKula: \t{00FF00}W≥πczone");
+				format(txt_sphere, 128, "{FFFFFF}\nKula: \t{00FF00}WÔøΩÔøΩczone");
 			}
 			if(podestVinyl == false){
-				format(txt_podest, 128, "{FFFFFF}\nPodest: \t{FF0000}Wy≥πczone");
+				format(txt_podest, 128, "{FFFFFF}\nPodest: \t{FF0000}WyÔøΩÔøΩczone");
 			}else{
-				format(txt_podest, 128, "{FFFFFF}\nPodest: \t{00FF00}W≥πczone");
+				format(txt_podest, 128, "{FFFFFF}\nPodest: \t{00FF00}WÔøΩÔøΩczone");
 			}
 			if(dymVinyl == false){
-				format(txt_dym, 128, "{FFFFFF}\nDym: \t{FF0000}Wy≥πczone");
+				format(txt_dym, 128, "{FFFFFF}\nDym: \t{FF0000}WyÔøΩÔøΩczone");
 			}else{
-				format(txt_dym, 128, "{FFFFFF}\nDym: \t{00FF00}W≥πczone");
+				format(txt_dym, 128, "{FFFFFF}\nDym: \t{00FF00}WÔøΩÔøΩczone");
 			}
 			if(eqVinyl == false){
-				format(txt_eq, 128, "{FFFFFF}\nEqualizator: \t{FF0000}Wy≥πczone");
+				format(txt_eq, 128, "{FFFFFF}\nEqualizator: \t{FF0000}WyÔøΩÔøΩczone");
 			}else{
-				format(txt_eq, 128, "{FFFFFF}\nEqualizator: \t{00FF00}W≥πczone");
+				format(txt_eq, 128, "{FFFFFF}\nEqualizator: \t{00FF00}WÔøΩÔøΩczone");
 			}
 			if(textVinyl == false){
-				format(txt_txt, 128, "{FFFFFF}\nTekst: \t{FF0000}Wy≥πczone");
+				format(txt_txt, 128, "{FFFFFF}\nTekst: \t{FF0000}WyÔøΩÔøΩczone");
 			}else{
-				format(txt_txt, 128, "{FFFFFF}\nTekst: \t{00FF00}W≥πczone");
+				format(txt_txt, 128, "{FFFFFF}\nTekst: \t{00FF00}WÔøΩÔøΩczone");
 			}
 			format(txt_klub, 256, "%s %s %s %s %s %s %s", txt_light, txt_neon, txt_sphere, txt_podest, txt_dym, txt_eq, txt_txt);
 			// BIURO
 			if((moveZaluzja1 == false) && (moveZaluzja2 == false)){
-				format(txt_zaluzja, 128, "{FFFFFF}Øaluzje: \t{00FF00}W≥πczone");
+				format(txt_zaluzja, 128, "{FFFFFF}ÔøΩaluzje: \t{00FF00}WÔøΩÔøΩczone");
 			}else{
-				format(txt_zaluzja, 128, "{FFFFFF}Øaluzje: \t{FF0000}Wy≥πczone");
+				format(txt_zaluzja, 128, "{FFFFFF}ÔøΩaluzje: \t{FF0000}WyÔøΩÔøΩczone");
 			}
-			format(txt_biuro, 256, "%s \n{FFFFFF}Kamery: \tOglπdaj", txt_zaluzja);
+			format(txt_biuro, 256, "%s \n{FFFFFF}Kamery: \tOglÔøΩdaj", txt_zaluzja);
 			switch(listitem)
 			{
 				case 0:
@@ -17072,7 +17072,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						led1 = CreateDynamicObject(18653, 822.621154, -1387.984619, -19.836418, 0.000000, -11.000000, 70.000000, 71, 0, -1, 300.00, 300.00); 
 						led2 = CreateDynamicObject(18653, 811.361022, -1387.984619, -19.836418, 0.000000, -11.000000, 110.000000, 71, 0, -1, 300.00, 300.00); 
 						led3 = CreateDynamicObject(18102, 820.466613, -1402.050292, -20.383949, 31.300003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
-						sendTipMessageEx(playerid, COLOR_P@, "Pomyúlnie wy≥πczono oúwietlenie"); 
+						sendTipMessageEx(playerid, COLOR_P@, "PomyÔøΩlnie wyÔøΩÔøΩczono oÔøΩwietlenie"); 
 						lightsVinyl = true;
 					}
 					else
@@ -17081,12 +17081,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						DestroyDynamicObject(led2);
 						DestroyDynamicObject(led3);
 						lightsVinyl = false;
-						sendTipMessageEx(playerid, COLOR_P@, "Pomyúlnie wy≥πczono oúwietlenie!"); 
+						sendTipMessageEx(playerid, COLOR_P@, "PomyÔøΩlnie wyÔøΩÔøΩczono oÔøΩwietlenie!"); 
 					}
 				}
 				case 1:
 				{
-					ShowPlayerDialogEx(playerid, D_VINYL_NEON, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Klub >> Neony", "Brak \nMieszane \n{1E2BFE}Niebieski \n{C71E09}Czerwony \n{CD17F9}Fioletowy \n{1CFF27}Zielony \n{F3FA30}ØÛ≥ty", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, D_VINYL_NEON, DIALOG_STYLE_LIST, "{00FFFF}VinylClub{FFFFFF} | Klub >> Neony", "Brak \nMieszane \n{1E2BFE}Niebieski \n{C71E09}Czerwony \n{CD17F9}Fioletowy \n{1CFF27}Zielony \n{F3FA30}ÔøΩÔøΩty", "Wybierz", "Anuluj");
 				}
 				case 2:
 				{
@@ -17113,12 +17113,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						MoveDynamicObject(podest1, 816.637390, -1403.019653, -24.998998, 1);
 						MoveDynamicObject(podest2, 816.607849, -1402.989624, -22.408988, 1);
 						podestVinyl = true;
-						sendTipMessage(playerid, "Podest zosta≥ wysuniÍy!");
+						sendTipMessage(playerid, "Podest zostaÔøΩ wysuniÔøΩy!");
 					}else{
 						MoveDynamicObject(podest1, 816.637390, -1403.019653, -26.998998, 1);
 						MoveDynamicObject(podest2, 816.607849, -1402.989624, -24.408988, 1);
 						podestVinyl = false;
-						sendTipMessage(playerid, "Podest zosta≥ schowany!"); 
+						sendTipMessage(playerid, "Podest zostaÔøΩ schowany!"); 
 					}
 				}
 				case 4:{
@@ -17130,7 +17130,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						dym4 = CreateDynamicObject(18728, 812.184020, -1386.922851, -22.539764, 22.800003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
 						dym5 = CreateDynamicObject(18728, 821.514099, -1386.922851, -22.539764, 22.800003, 0.000000, 0.000000, 71, 0, -1, 300.00, 300.00); 
 						dymVinyl = true;
-						sendTipMessage(playerid, "Dym w sali vinyl Club zosta≥ w≥πczony!"); 
+						sendTipMessage(playerid, "Dym w sali vinyl Club zostaÔøΩ wÔøΩÔøΩczony!"); 
 					}else{
 						DestroyDynamicObject(dym1);
 						DestroyDynamicObject(dym2);
@@ -17138,7 +17138,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						DestroyDynamicObject(dym4);
 						DestroyDynamicObject(dym5);
 						dymVinyl = false;
-						sendTipMessage(playerid, "Dym w sali Vinyl Club zosta≥ wy≥πczony!"); 
+						sendTipMessage(playerid, "Dym w sali Vinyl Club zostaÔøΩ wyÔøΩÔøΩczony!"); 
 					}
 				}
 				case 5:{
@@ -17497,7 +17497,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 				case 1:{
-					ShowPlayerDialogEx(playerid, D_VINYL_CAM, DIALOG_STYLE_LIST, "PANEL: {00FFFF}VinylClub >> Kamery", "Brak \nHol \nObok baru \nPrzy ≥azienkach \nParkiet", "Wybierz", "Anuluj");
+					ShowPlayerDialogEx(playerid, D_VINYL_CAM, DIALOG_STYLE_LIST, "PANEL: {00FFFF}VinylClub >> Kamery", "Brak \nHol \nObok baru \nPrzy ÔøΩazienkach \nParkiet", "Wybierz", "Anuluj");
 				}
 			}
 			
@@ -17517,7 +17517,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerCameraLookAt(playerid, 688.3051,-1395.4424,-22.6093, 1);
 					}
 					case 2:{
-						//PRZY WEJåCIU VIPA
+						//PRZY WEJÔøΩCIU VIPA
 						SetPlayerCameraPos(playerid, 804.162, -1414.056, -20.379);
 						SetPlayerCameraLookAt(playerid, 801.9684,-1389.1116,-22.6193, 1);
 					}
@@ -17533,7 +17533,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					}
 				}
 			}else{
-				SendClientMessage(playerid, -1, "Nie znajdujesz siÍ przy monitoringu");
+				SendClientMessage(playerid, -1, "Nie znajdujesz siÔøΩ przy monitoringu");
 			}
 		}
 	}
@@ -17548,7 +17548,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(kaska[playerid] < ShopSkins[listitem][SKIN_PRICE])
 			{
-				sendErrorMessage(playerid, "Nie posiadasz wystarczajπcej iloúci gotÛwki, na tego skina");
+				sendErrorMessage(playerid, "Nie posiadasz wystarczajÔøΩcej iloÔøΩci gotÔøΩwki, na tego skina");
 				DialogKupSkin(playerid);
 				return 1;
 			}
@@ -17556,12 +17556,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			ZabierzKase(playerid, ShopSkins[listitem][SKIN_PRICE]);
 			PlayerInfo[playerid][pSkin] = ShopSkins[listitem][SKIN_ID]; 
 			
-			sendTipMessage(playerid, sprintf("Kupi≥eú skina za %d$", ShopSkins[listitem][SKIN_PRICE])); 
-			Log(payLog, INFO, "%s kupi≥ skina %d za %d$", GetPlayerLogName(playerid), ShopSkins[listitem][SKIN_ID], ShopSkins[listitem][SKIN_PRICE]);
+			sendTipMessage(playerid, sprintf("KupiÔøΩeÔøΩ skina za %d$", ShopSkins[listitem][SKIN_PRICE])); 
+			Log(payLog, INFO, "%s kupiÔøΩ skina %d za %d$", GetPlayerLogName(playerid), ShopSkins[listitem][SKIN_ID], ShopSkins[listitem][SKIN_PRICE]);
 			return 1;
 		}
 	}
-	else if(ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	else if(mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
 	{
 		return 1;
 	}
