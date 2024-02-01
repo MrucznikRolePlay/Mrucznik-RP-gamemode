@@ -16,12 +16,12 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Kod wygenerowany automatycznie narzÃªdziem Mrucznik CTL
 
 // ================= UWAGA! =================
 //
 // WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// ZOSTANÂ¥ NADPISANE PO WYWOÂ£ANIU KOMENDY
 // > mrucznikctl build
 //
 // ================= UWAGA! =================
@@ -45,7 +45,6 @@
 #include "vehicle_attachments\vehicle_attachments.def"
 #include "names\names.def"
 #include "budki\budki.def"
-#include "choroby\choroby.def"
 #include "komendy\komendy.def"
 #include "przedmioty\przedmioty.def"
 #include "player_attachments\player_attachments.def"
@@ -86,7 +85,6 @@
 #include "vehicle_attachments\vehicle_attachments.hwn"
 #include "names\names.hwn"
 #include "budki\budki.hwn"
-#include "choroby\choroby.hwn"
 #include "komendy\komendy.hwn"
 #include "przedmioty\przedmioty.hwn"
 #include "player_attachments\player_attachments.hwn"
@@ -127,7 +125,6 @@
 #include "vehicle_attachments\vehicle_attachments.pwn"
 #include "names\names.pwn"
 #include "budki\budki.pwn"
-#include "choroby\choroby.pwn"
 #include "komendy\komendy.pwn"
 #include "przedmioty\przedmioty.pwn"
 #include "player_attachments\player_attachments.pwn"
@@ -160,7 +157,6 @@
 #include "wypadek\wypadek_timers.pwn"
 #include "admin\admin_timers.pwn"
 #include "sannews\sannews_timers.pwn"
-#include "choroby\choroby_timers.pwn"
 #include "urzadls\urzadls_timers.pwn"
 #include "pojazdy\pojazdy_timers.pwn"
 #include "money\money_timers.pwn"
@@ -174,7 +170,6 @@
 #include "admin\admin_mysql.pwn"
 #include "fishing\fishing_mysql.pwn"
 #include "vehicle_attachments\vehicle_attachments_mysql.pwn"
-#include "choroby\choroby_mysql.pwn"
 #include "player_attachments\player_attachments_mysql.pwn"
 #include "pojazdy\pojazdy_mysql.pwn"
 #include "biznesy\biznesy_mysql.pwn"
@@ -183,7 +178,6 @@
 
 //-------<[ others ]>-------
 #include "03DL\resources.pwn"
-#include "choroby\choroby_effects.pwn"
 
 
 //-------<[ callbacks ]>-------
@@ -195,7 +189,6 @@
 #include "admin\admin_callbacks.pwn"
 #include "fishing\fishing_callbacks.pwn"
 #include "vehicle_attachments\vehicle_attachments_callbacks.pwn"
-#include "choroby\choroby_callbacks.pwn"
 #include "player_attachments\player_attachments_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "pojazdy\pojazdy_callbacks.pwn"
@@ -218,7 +211,6 @@
 #include "animacje\commands\animacje_commands.pwn"
 #include "fishing\commands\fishing_commands.pwn"
 #include "vehicle_attachments\commands\vehicle_attachments_commands.pwn"
-#include "choroby\commands\choroby_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "player_attachments\commands\player_attachments_commands.pwn"
 #include "frakcje\commands\frakcje_commands.pwn"
