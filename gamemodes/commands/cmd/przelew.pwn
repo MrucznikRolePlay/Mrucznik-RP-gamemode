@@ -36,20 +36,15 @@ YCMD:przelew(playerid, params[], help)
 	{
 		if(GetPLocal(playerid) != PLOCAL_INNE_BANK)
 		{
-			sendErrorMessage(playerid, "Nie znajdujesz siÍ w banku lub nie posiadasz smartfona!"); 
+			sendErrorMessage(playerid, "Nie znajdujesz siƒô w banku lub nie posiadasz smartfona!"); 
 			return 1;
 		}
 		if(PlayerPersonalization[playerid][PERS_KB] == 0)
-		{
-			format(string, sizeof(string), "Konto Bankowe >> %s >> Przelew", GetNick(playerid));
-			ShowPlayerDialogEx(playerid, 1072, DIALOG_STYLE_INPUT, string, "Wpisz poniøej ID odbiorcy", "Wykonaj", "OdrzuÊ");
-		}
-		else
-		{
+
 			new giveplayerid, value;
 			if( sscanf(params, "k<fix>d", giveplayerid, value))
 			{
-				sendTipMessage(playerid, "Uøyj /przelew [ID_GRACZA] [KWOTA]");
+				sendTipMessage(playerid, "U≈ºyj /przelew [ID_GRACZA] [KWOTA]");
 				return 1;
 			}
 			if(IsPlayerConnected(giveplayerid))
@@ -68,40 +63,40 @@ YCMD:przelew(playerid, params[], help)
 					}
 					if(value <= 0)
 					{
-						sendErrorMessage(playerid, "Nie moøesz wykonywaÊ przelewÛw na minus / zero.");
+						sendErrorMessage(playerid, "Nie mo≈ºesz wykonywaƒá przelew√≥w na minus / zero.");
 						return 1;
 					}
 					if(PlayerInfo[giveplayerid][pAccount]+value > MAX_MONEY_IN_BANK)
 					{
-						sendErrorMessage(playerid, "Gracz do ktÛrego prÛbowa≥eú przelaÊ gotÛwkÍ - ma zbyt duøo pieniÍdzy na koncie."); 
+						sendErrorMessage(playerid, "Gracz do kt√≥rego pr√≥bowa≈Çe≈õ przelaƒá got√≥wkƒô - ma zbyt du≈ºo pieniƒôdzy na koncie."); 
 						return 1;
 					}
-					//Czynnoúci:
+					//Czynno≈õci:
 					PlayerInfo[playerid][pAccount] -= value;
 					PlayerInfo[giveplayerid][pAccount] += value;
 				
 					//komunikaty:
-					format(string, sizeof(string), "Otrzyma≥eú przelew w wysokoúci %d$ od %s . Pieniπdze znajdujπ siÍ na twoim koncie.", value, GetNick(playerid));
+					format(string, sizeof(string), "Otrzyma≈Çe≈õ przelew w wysoko≈õci %d$ od %s . PieniƒÖdze znajdujƒÖ siƒô na twoim koncie.", value, GetNick(playerid));
 					SendClientMessage(giveplayerid, COLOR_RED, string);
 				
-					format(string, sizeof(string), "Wys≥a≥eú przelew dla %s w wysokoúci %d$. Pieniπdze zosta≥y pobrane z twojego konta bankowego", GetNick(giveplayerid), value);
+					format(string, sizeof(string), "Wys≈Ça≈Çe≈õ przelew dla %s w wysoko≈õci %d$. PieniƒÖdze zosta≈Çy pobrane z twojego konta bankowego", GetNick(giveplayerid), value);
 					SendClientMessage(playerid, COLOR_RED, string); 
 				
-					Log(payLog, INFO, "%s przela≥ %s kwotÍ %d$", 
+					Log(payLog, INFO, "%s przela≈Ç %s kwotƒô %d$", 
 					GetPlayerLogName(playerid),
 					GetPlayerLogName(giveplayerid),
 					value);
 				
 					if(value >= 5_000_000)//Wiadomosc dla adminow
 					{
-						format(string, sizeof(string), "Gracz %s wys≥a≥ przelew do %s w wysokoúci %d$", GetNick(playerid), GetNick(giveplayerid), value);
+						format(string, sizeof(string), "Gracz %s wys≈Ça≈Ç przelew do %s w wysoko≈õci %d$", GetNick(playerid), GetNick(giveplayerid), value);
 						SendAdminMessage(COLOR_YELLOW, string);
 						return 1;
 					}
 				}
 				else
 				{
-					sendErrorMessage(playerid, "Nie moøesz przelaÊ gotÛwki samemu sobie!");
+					sendErrorMessage(playerid, "Nie mo≈ºesz przelaƒá got√≥wki samemu sobie!");
 					return 1;
 				}
 			}
