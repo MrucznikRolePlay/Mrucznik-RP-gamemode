@@ -74,7 +74,7 @@ YCMD:spec(playerid, params[], help)
 			SetPlayerInterior(playerid, GetPlayerInterior(pid));
 			SetPlayerVirtualWorld(playerid, GetPlayerVirtualWorld(pid));
 			new specIP[32], iptext[64], jailWiadomosc[64];
-			format(jailWiadomosc, sizeof(jailWiadomosc), " | Jail/AJ - %ds ", PlayerInfo[pid][pJailTime]);
+			format(jailWiadomosc, sizeof(jailWiadomosc), " | Jail/AJ[%d] - %ds ", PlayerInfo[pid][pJailed], PlayerInfo[pid][pJailTime]);
 			GetPlayerIp(pid, specIP, sizeof(specIP));
 			if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 			{

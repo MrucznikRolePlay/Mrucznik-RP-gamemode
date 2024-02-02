@@ -2264,7 +2264,7 @@ public JednaSekundaTimer()
 		else if(level >= 19 && level <= 20) { PlayerInfo[i][pPayCheck] += 10; }
 		else if(level >= 21) { PlayerInfo[i][pPayCheck] += 11; }
         //JAIL
-		if(PlayerInfo[i][pJailed] > 0)
+		if(PlayerInfo[i][pJailed] > 0 && PlayerInfo[i][pJailed] != 10)
 		{
 			if(PlayerInfo[i][pJailTime] > 0 && WantLawyer[i] == 0 && gPlayerSpawned[i] == 1)
 			{
