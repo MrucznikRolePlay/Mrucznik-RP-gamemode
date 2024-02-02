@@ -34,7 +34,7 @@ YCMD:rozkuj(playerid, params[], help)
     {
 		new string[128];
 
-		if(gTeam[playerid] == 2 || IsAPolicja(playerid) || IsABOR(playerid))
+		if(gTeam[playerid] == 2 || IsAPolicja(playerid) || IsABOR(playerid) || PlayerInfo[playerid][pAdmin] >= 1)
 		{
 		    new giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))
@@ -48,7 +48,7 @@ YCMD:rozkuj(playerid, params[], help)
 				{
 				    if (ProxDetectorS(8.0, playerid, giveplayerid))
 					{
-					    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz odkuæ samego siebie!"); return 1; }
+					    if(giveplayerid == playerid && !PlayerInfo[playerid][pAdmin] >= 1) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz odkuæ samego siebie!"); return 1; }
 						if(PlayerCuffed[giveplayerid] == 2 || Kajdanki_JestemSkuty[giveplayerid] >= 1)
 						{
 						    format(string, sizeof(string), "* Zosta³eœ rozkuty przez %s.", GetNick(playerid));
