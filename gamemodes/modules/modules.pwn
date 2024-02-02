@@ -66,6 +66,7 @@
 #include "antycheat\antycheat.def"
 #include "chaty\chaty.def"
 #include "ibiza\ibiza.def"
+#include "weryfikacje\weryfikacje.def"
 
 
 //-------<[ .hwn ]>-------
@@ -107,7 +108,7 @@
 #include "antycheat\antycheat.hwn"
 #include "chaty\chaty.hwn"
 #include "ibiza\ibiza.hwn"
-
+#include "weryfikacje\weryfikacje.hwn"
 
 //-------<[ .pwn ]>-------
 #include "organizacje\organizacje.pwn"
@@ -148,6 +149,7 @@
 #include "antycheat\antycheat.pwn"
 #include "chaty\chaty.pwn"
 #include "ibiza\ibiza.pwn"
+#include "weryfikacje\weryfikacje.pwn"
 
 
 //-------<[ timers ]>-------
@@ -203,6 +205,7 @@
 #include "money\money_callbacks.pwn"
 #include "cooking\cooking_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
+#include "weryfikacje\weryfikacje_callbacks.pwn"
 
 
 //-------<[ commands ]>-------
@@ -233,3 +236,4 @@
 #include "antycheat\commands\antycheat_commands.pwn"
 #include "chaty\commands\chaty_commands.pwn"
 #include "ibiza\commands\ibiza_commands.pwn"
+#include "weryfikacje\commands\weryfikacje_commands.pwn"

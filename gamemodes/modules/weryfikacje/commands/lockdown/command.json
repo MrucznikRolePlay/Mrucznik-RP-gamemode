@@ -1,0 +1,11 @@
+{
+    "name": "lockdown",
+    "description": "System lockdown",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sandal",
+    "aliases": [],
+    "parameters": [],
+    "date": "01.02.2024"
+}

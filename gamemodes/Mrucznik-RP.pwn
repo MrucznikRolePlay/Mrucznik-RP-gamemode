@@ -6056,7 +6056,7 @@ OnPlayerLogin(playerid, password[])
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)
 				ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
         }
-        else if(PlayerInfo[playerid][pJailed] == 0)
+        else if(PlayerInfo[playerid][pJailed] == 0 && ALockdown_Check(playerid) == false)
         {
     		lowcap[playerid] = 1;
 			if(GetPVarInt(playerid, "ChangingPassword") != 1){
@@ -6082,6 +6082,7 @@ OnPlayerLogin(playerid, password[])
 		SendClientMessage(playerid, COLOR_WHITE, "Aby zacz¹æ grê musisz przejœæ procedury rejestracji.");
 		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeœli jesteœ tu nowy, to przygotowaliœmy dla ciebie poradnik\nZa chwilê bêdziesz móg³ go obejrzeæ, lecz najpierw bêdziesz musia³ opisaæ postaæ któr¹ bêdziesz sterowa³\nAby przejœæ dalej wciœnij przycisk 'dalej'", "Dalej", "");
     }
+	ALockdown_OnPlayerLogin(playerid);
 	return 1;
 }
 
