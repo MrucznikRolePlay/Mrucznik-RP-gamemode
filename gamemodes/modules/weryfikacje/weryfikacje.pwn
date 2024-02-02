@@ -120,6 +120,7 @@ ALockdown_ExcludeFromPlaying(playerid)
 {
 	Lockdown_assignedVW[playerid] = random(500) + 101;
 	SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+	SetPVarInt(playerid, "Lockdown-izolacja", 1);
 	ALockdown_Notify(playerid, LOCKDOWN_MSG_JOINEDSERVER);
 	Lockdown_Timer[playerid] = SetTimerEx("ALockdown_Timer",700,true,"d",playerid);
 }
@@ -129,6 +130,7 @@ ALockdown_Verified(playerid, admin)
 	VLockdown[Vlockdown_counter] = PlayerInfo[playerid][pUID];
 	Vlockdown_counter++;
 	ALockdown_DestroyData(playerid);
+	SetPVarInt(playerid, "Lockdown-izolacja", 0);
 	SetPlayerVirtualWorld(playerid, 0);
 	ALockdown_Notify(admin, LOCKDOWN_MSG_VERIFIED, playerid);
 }

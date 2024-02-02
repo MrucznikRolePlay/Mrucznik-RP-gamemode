@@ -49,7 +49,7 @@ YCMD:wejdz(playerid, params[], help)
 //=================[Wczytanie - nowego systemu]=====================
 //======================================================================
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
-        
+        if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
         if(SprawdzWejscia(playerid))
         {
             SetInteriorTimeAndWeather(playerid); 
