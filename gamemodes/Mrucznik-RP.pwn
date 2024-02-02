@@ -2322,8 +2322,7 @@ SetPlayerSpawnPos(playerid)
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
 			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
-			format(string, sizeof(string), "Da³eœ /q podczas akcji, ale wróci³eœ w ci¹gu 3 minut. Odgrywaj dalej - mo¿esz daæ /q dopiero po 10 minutach.");
-			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Da³eœ /q podczas akcji, ale wróci³eœ w ci¹gu 3 minut. Odgrywaj dalej - mo¿esz daæ /q dopiero po 10 minutach.");
 		}
 		else
 		{
