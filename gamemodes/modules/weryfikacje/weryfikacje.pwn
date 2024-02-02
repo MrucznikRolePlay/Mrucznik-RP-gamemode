@@ -38,9 +38,9 @@ ALockdown_SearchTable(playerid)
 
 ALockdown_Check(playerid)
 {
-	if(IsPlayerConnected(playerid) && Lockdown_Mode > 0)
+	if(IsPlayerConnected(playerid) && PlayerInfo[playerid][pConnectTime] <= 2)
 	{
-		if(!ALockdown_SearchTable(playerid))
+		if(Lockdown_Mode > 0 && !ALockdown_SearchTable(playerid))
 		{
 			if(PlayerInfo[playerid][pConnectTime] == 0 && Lockdown_Mode == LOCKDOWN_MODE_NEWACCOUNTS)
 				return 1;
@@ -79,7 +79,7 @@ ALockdown_Notify(playerid, type, user = -1)
 		}
 		case LOCKDOWN_MODE_YOUNGACCOUNTS:
 		{
-			Log(adminLog, INFO, "%s w³¹czy³ system lockdown dla kont poni¿ej 2h.", GetPlayerLogName(playerid));
+			Log(adminLog, INFO, "%s w³¹czy³ system lockdown dla kont poni¿ej 3h.", GetPlayerLogName(playerid));
 			format(string, sizeof(string), "[Lockdown]%s w³¹czy³ system lockdown dla kont poni¿ej 3h.", GetNickEx(playerid));
 			SendAdminMessage(0xFF9900, string);
 		}

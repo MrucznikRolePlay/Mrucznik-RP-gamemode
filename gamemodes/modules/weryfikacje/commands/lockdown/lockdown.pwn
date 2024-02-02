@@ -53,7 +53,7 @@ YCMD:lockdown(playerid, params[], help)
     {
         sendTipMessage(playerid, "U¿yj /lockdown [typ]");
         if(PlayerInfo[playerid][pAdmin] >= 1) {
-            sendTipMessage(playerid, "[0] Wy³¹czenie [1] W³¹czenie dla kont z 0h [2] W³¹czenie dla kont z mniej ni¿ 2h");
+            sendTipMessage(playerid, "[0] Wy³¹czenie [1] W³¹czenie dla kont z 0h [2] W³¹czenie dla kont z mniej ni¿ 3h");
             sendTipMessage(playerid, "Ka¿de konto po /weryfikacja bêdzie mia³o 'przepustke' do czasu restartu serwera.");
             new string[128];
             format(string, sizeof(string), "Aktualny tryb lockdown: [%d]", Lockdown_Mode);
