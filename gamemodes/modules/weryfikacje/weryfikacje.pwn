@@ -144,7 +144,7 @@ public ALockdown_Timer(playerid)
 {
 	if(ALockdown_Check(playerid) == true)
 	{
-		if(GetPlayerVirtualWorld(playerid) != Lockdown_assignedVW[playerid])
+		if(GetPlayerVirtualWorld(playerid) != Lockdown_assignedVW[playerid] && PlayerInfo[playerid][pTut] == 1)
 		{
 			Lockdown_Warning_Counter[playerid]++;
 			if(Lockdown_Warning_Counter[playerid] >= 4)
