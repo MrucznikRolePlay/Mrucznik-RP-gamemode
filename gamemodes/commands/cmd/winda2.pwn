@@ -32,6 +32,7 @@ YCMD:winda2(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
+		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
 		if(PlayerInfo[playerid][pLider] == 6 || PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
 			if(PlayerToPoint(10.0, playerid, 2809.38671875, -1088.9912109375, 42.11808013916) || PlayerToPoint(10.0, playerid, 2809.38671875, -1088.9912109375, 93.018135070801))
