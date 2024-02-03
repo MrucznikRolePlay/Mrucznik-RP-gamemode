@@ -2116,7 +2116,12 @@ public OnPlayerSpawn(playerid)
 	}
 	else
 	{
-		SetPlayerVirtualWorld(playerid, 0);
+		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0)
+		{
+			SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+		}
+		else
+			SetPlayerVirtualWorld(playerid, 0);
 	}
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
@@ -2356,7 +2361,8 @@ SetPlayerSpawnPos(playerid)
 			Wchodzenie(playerid);
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
-			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
+			if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+			else SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			if(GetPLocal(playerid) == PLOCAL_INNE_BANK || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
 	        {
 				sendTipMessage(playerid, "W banku nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
@@ -2372,7 +2378,8 @@ SetPlayerSpawnPos(playerid)
 		    {
 		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
-				SetPlayerVirtualWorld(playerid, 0); 
+				if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+				else SetPlayerVirtualWorld(playerid, 0); 
 				if(GetPlayerFraction(playerid) > 0) //Spawn Frakcji
 				{
 				    switch(GetPlayerFraction(playerid))
