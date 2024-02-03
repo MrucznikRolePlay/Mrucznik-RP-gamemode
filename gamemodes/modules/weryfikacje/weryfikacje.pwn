@@ -125,6 +125,11 @@ ALockdown_ExcludeFromPlaying(playerid)
 	Lockdown_Timer[playerid] = SetTimerEx("ALockdown_Timer",700,true,"d",playerid);
 }
 
+ALockdown_SetLockdownVW(playerid)
+{
+	SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+}
+
 ALockdown_Verified(playerid, admin)
 {
 	VLockdown[Vlockdown_counter] = PlayerInfo[playerid][pUID];
