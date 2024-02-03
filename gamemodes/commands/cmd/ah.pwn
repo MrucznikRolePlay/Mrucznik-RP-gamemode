@@ -69,6 +69,10 @@ YCMD:ah(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /usunopis /respawnplayer /respawncar /unbw");
         SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setcarint /czyjtonumer /checkbw /diagnoza");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /unbp /tod /agraffiti /banip /uid /cziterzy /unmark");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /gotoadmin /getposp /gotopos /gotols /gotoszpital /gotolv");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /flip /rapidfly /unaj /undemorgan /obrazenia /rozwiaz");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /sethp /dmvon /dmvoff /gotosf /inwigilacja /rozkuj");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /lockdown /zweryfikuj");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{

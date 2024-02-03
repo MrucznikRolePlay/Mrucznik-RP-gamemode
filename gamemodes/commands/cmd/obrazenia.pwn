@@ -40,7 +40,7 @@ YCMD:obrazenia(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 100)
+		if (PlayerInfo[playerid][pAdmin] >= 1)
 		{
 		    if(IsPlayerConnected(giveplayerid))
 		    {

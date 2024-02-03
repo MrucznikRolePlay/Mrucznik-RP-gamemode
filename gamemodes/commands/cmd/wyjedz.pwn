@@ -30,6 +30,7 @@
 
 YCMD:wyjedz(playerid, params[], help)
 {
+	if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
 	if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
 	{
 		sendTipMessage(playerid, "Jesteœ podczas wje¿d¿ania!"); 

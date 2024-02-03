@@ -2116,7 +2116,12 @@ public OnPlayerSpawn(playerid)
 	}
 	else
 	{
-		SetPlayerVirtualWorld(playerid, 0);
+		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0)
+		{
+			SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+		}
+		else
+			SetPlayerVirtualWorld(playerid, 0);
 	}
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
@@ -2356,7 +2361,8 @@ SetPlayerSpawnPos(playerid)
 			Wchodzenie(playerid);
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
-			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
+			if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+			else SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			if(GetPLocal(playerid) == PLOCAL_INNE_BANK || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
 	        {
 				sendTipMessage(playerid, "W banku nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
@@ -2372,7 +2378,8 @@ SetPlayerSpawnPos(playerid)
 		    {
 		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
-				SetPlayerVirtualWorld(playerid, 0); 
+				if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+				else SetPlayerVirtualWorld(playerid, 0); 
 				if(GetPlayerFraction(playerid) > 0) //Spawn Frakcji
 				{
 				    switch(GetPlayerFraction(playerid))
@@ -6056,7 +6063,7 @@ OnPlayerLogin(playerid, password[])
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)
 				ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
         }
-        else if(PlayerInfo[playerid][pJailed] == 0)
+        else if(PlayerInfo[playerid][pJailed] == 0 && ALockdown_Check(playerid) == false)
         {
     		lowcap[playerid] = 1;
 			if(GetPVarInt(playerid, "ChangingPassword") != 1){
@@ -6082,6 +6089,7 @@ OnPlayerLogin(playerid, password[])
 		SendClientMessage(playerid, COLOR_WHITE, "Aby zacz¹æ grê musisz przejœæ procedury rejestracji.");
 		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeœli jesteœ tu nowy, to przygotowaliœmy dla ciebie poradnik\nZa chwilê bêdziesz móg³ go obejrzeæ, lecz najpierw bêdziesz musia³ opisaæ postaæ któr¹ bêdziesz sterowa³\nAby przejœæ dalej wciœnij przycisk 'dalej'", "Dalej", "");
     }
+	ALockdown_OnPlayerLogin(playerid);
 	return 1;
 }
 

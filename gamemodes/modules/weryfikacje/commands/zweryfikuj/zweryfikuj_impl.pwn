@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ winda2 ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    anim                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,41 +16,26 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Mrucznik
+// Data utworzenia: 11.06.2019
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:winda2(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_zweryfikuj_Impl(playerid, giveplayerid)
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
-		if(PlayerInfo[playerid][pLider] == 6 || PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pAdmin] >= 1000)
-		{
-			if(PlayerToPoint(10.0, playerid, 2809.38671875, -1088.9912109375, 42.11808013916) || PlayerToPoint(10.0, playerid, 2809.38671875, -1088.9912109375, 93.018135070801))
-			{
-				if(WindaYKZKratas == 1)
-				{
-					MoveDynamicObject(WindaYKZKrata, 2809.38671875, -1088.9912109375, 42.11808013916, 2.5);
-					SetDynamicObjectRot(WindaYKZKrata, 0, 90, 0);
-					WindaYKZKratas = 0;
-				}
-				else
-				{
-					MoveDynamicObject(WindaYKZKrata, 2809.38671875, -1088.9912109375, 93.018135070801, 2.5);
-					SetDynamicObjectRot(WindaYKZKrata, 0, 90, 0);
-					WindaYKZKratas = 1;
-				}
-			}
-		}
-	}
-	return 1;
+    if(PlayerInfo[playerid][pAdmin] >= 1)
+    {
+        if(ALockdown_SearchTable(giveplayerid))
+            return sendTipMessage(playerid, "Ten gracz otrzyma³ ju¿ weryfikacje!");
+            
+        if(Lockdown_assignedVW[giveplayerid] == 0)
+            return sendTipMessage(playerid, "Ten gracz nie jest zablokowany w weryfikacji. (z³e id?)");
+        
+        ALockdown_Verified(giveplayerid, playerid);
+    }
+    return 1;
 }
+
+//end

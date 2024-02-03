@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ winda2 ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    anim                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,41 +16,39 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Mrucznik
+// Data utworzenia: 11.06.2019
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:winda2(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_lockdown_Impl(playerid, typLock)
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
-		if(PlayerInfo[playerid][pLider] == 6 || PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pAdmin] >= 1000)
-		{
-			if(PlayerToPoint(10.0, playerid, 2809.38671875, -1088.9912109375, 42.11808013916) || PlayerToPoint(10.0, playerid, 2809.38671875, -1088.9912109375, 93.018135070801))
-			{
-				if(WindaYKZKratas == 1)
-				{
-					MoveDynamicObject(WindaYKZKrata, 2809.38671875, -1088.9912109375, 42.11808013916, 2.5);
-					SetDynamicObjectRot(WindaYKZKrata, 0, 90, 0);
-					WindaYKZKratas = 0;
-				}
-				else
-				{
-					MoveDynamicObject(WindaYKZKrata, 2809.38671875, -1088.9912109375, 93.018135070801, 2.5);
-					SetDynamicObjectRot(WindaYKZKrata, 0, 90, 0);
-					WindaYKZKratas = 1;
-				}
-			}
-		}
-	}
-	return 1;
+    if( IsPlayerConnected(playerid) && PlayerInfo[playerid][pAdmin] >= 1 && (typLock >= 0 && typLock <= 2) )
+    {
+        switch(typLock)
+        {
+            case 0:
+            {
+                Lockdown_Mode = LOCKDOWN_MODE_OFFLINE;
+                ALockdown_Notify(playerid, LOCKDOWN_MODE_OFFLINE);
+            }
+            case 1:
+            {
+                Lockdown_Mode = LOCKDOWN_MODE_NEWACCOUNTS;
+                ALockdown_Notify(playerid, LOCKDOWN_MODE_NEWACCOUNTS);
+            }
+            case 2:
+            {
+                Lockdown_Mode = LOCKDOWN_MODE_YOUNGACCOUNTS;
+                ALockdown_Notify(playerid, LOCKDOWN_MODE_YOUNGACCOUNTS);
+            }
+            default:
+                Lockdown_Mode = LOCKDOWN_MODE_OFFLINE;
+        }
+    }
+    return 1;
 }
+
+//end

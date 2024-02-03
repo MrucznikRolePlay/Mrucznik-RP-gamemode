@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dmvoff_Impl(playerid)
 {
-    if((IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 4))
+    if( (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid)) || (IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 4) )
     {
         new string[124];
         DestroyActorsInDMV(playerid);

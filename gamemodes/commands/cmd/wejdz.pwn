@@ -33,6 +33,7 @@ YCMD:wejdz(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
+        if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
 		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
 
 //======================================================================
@@ -49,7 +50,6 @@ YCMD:wejdz(playerid, params[], help)
 //=================[Wczytanie - nowego systemu]=====================
 //======================================================================
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
-        
         if(SprawdzWejscia(playerid))
         {
             SetInteriorTimeAndWeather(playerid); 
