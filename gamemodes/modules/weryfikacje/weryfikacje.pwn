@@ -86,7 +86,7 @@ ALockdown_Notify(playerid, type, user = -1)
 		case LOCKDOWN_MSG_JOINEDSERVER:
 		{
 			Log(adminLog, INFO, "%s zosta³ objêty systemem lockdown z powodu nowego konta.", GetPlayerLogName(playerid));
-			format(string, sizeof(string), "[Lockdown]%s zosta³ objêty lockdown. Ilosc godzin:[%d]", GetNickEx(playerid), PlayerInfo[playerid][pConnectTime]);
+			format(string, sizeof(string), "[Lockdown]%s (%d) zosta³ objêty lockdown. Ilosc godzin:[%d]", GetNickEx(playerid), playerid, PlayerInfo[playerid][pConnectTime]);
 			SendAdminMessage(0xCBCBCB, string);
 			format(string, sizeof(string), "Poczekaj na weryfikacje nowego konta przez administracje.");
 			SendClientMessage(playerid, COLOR_RED, string);
@@ -106,6 +106,8 @@ ALockdown_Notify(playerid, type, user = -1)
 			format(string, sizeof(string), "[Lockdown]%s zweryfikowa³ gracza %s", GetNickEx(playerid), GetNickEx(user));
 			SendAdminMessage(0xF6B26B, string);
 			Log(adminLog, INFO, "%s zweryfikowa³ gracza %s dla systemu lockdown.", GetPlayerLogName(playerid), GetPlayerLogName(user));
+			format(string, sizeof(string), "Zosta³eœ pomyœlnie zweryfikowany.");
+			SendClientMessage(user, COLOR_WHITE, string);
 		}
 		case LOCKDOWN_MSG_RULEBREAK:
 		{
@@ -122,7 +124,7 @@ ALockdown_ExcludeFromPlaying(playerid)
 	SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
 	SetPVarInt(playerid, "Lockdown-izolacja", 1);
 	ALockdown_Notify(playerid, LOCKDOWN_MSG_JOINEDSERVER);
-	Lockdown_Timer[playerid] = SetTimerEx("ALockdown_Timer",700,true,"d",playerid);
+	Lockdown_Timer[playerid] = SetTimerEx("ALockdown_Timer",550,true,"d",playerid);
 }
 
 ALockdown_Verified(playerid, admin)
@@ -146,10 +148,10 @@ public ALockdown_Timer(playerid)
 {
 	if(ALockdown_Check(playerid) == true)
 	{
-		if(GetPlayerVirtualWorld(playerid) != Lockdown_assignedVW[playerid] && PlayerInfo[playerid][pTut] == 1)
+		if(GetPlayerVirtualWorld(playerid) != Lockdown_assignedVW[playerid])
 		{
 			Lockdown_Warning_Counter[playerid]++;
-			if(Lockdown_Warning_Counter[playerid] >= 4)
+			if(Lockdown_Warning_Counter[playerid] >= 5)
 			{
 				ALockdown_Notify(playerid, LOCKDOWN_MSG_RULEBREAK);
 				KickEx(playerid);
