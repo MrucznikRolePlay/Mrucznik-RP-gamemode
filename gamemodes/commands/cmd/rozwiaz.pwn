@@ -36,7 +36,7 @@ YCMD:rozwiaz(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsAPrzestepca(playerid))
+		if(IsAPrzestepca(playerid) || PlayerInfo[playerid][pAdmin] >= 1)
 		{
 		    if(PlayerInfo[playerid][pRank] < 2 && !PlayerInfo[playerid][pAdmin] >= 1)
 		    {
