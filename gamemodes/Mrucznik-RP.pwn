@@ -2119,7 +2119,7 @@ public OnPlayerSpawn(playerid)
 	{
 		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0)
 		{
-			SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+			ALockdown_SetLockdownVW(playerid);
 		}
 		else
 			SetPlayerVirtualWorld(playerid, 0);
@@ -2362,7 +2362,7 @@ SetPlayerSpawnPos(playerid)
 			Wchodzenie(playerid);
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
-			if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+			if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
 			else SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			if(GetPLocal(playerid) == PLOCAL_INNE_BANK || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
 	        {
@@ -2379,7 +2379,7 @@ SetPlayerSpawnPos(playerid)
 		    {
 		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
-				if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) SetPlayerVirtualWorld(playerid, Lockdown_assignedVW[playerid]);
+				if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
 				else SetPlayerVirtualWorld(playerid, 0); 
 				if(GetPlayerFraction(playerid) > 0) //Spawn Frakcji
 				{
