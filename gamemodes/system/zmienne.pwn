@@ -1121,7 +1121,7 @@ ZerujZmienne(playerid)
 	//z disconecta
 
 	timeFakeVehRespawn[playerid] = 0;
-	countFakeVehRespawn[playerid] = 0
+	countFakeVehRespawn[playerid] = 0;
 
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
 

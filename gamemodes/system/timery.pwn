@@ -938,7 +938,7 @@ public MainTimer()
     }
     if(TICKS_3Sec == 2)
     {
-    	AC_AntyVehSpamLag()
+    	AC_AntyVehSpamLag();
         VehicleUpdate();
         CustomPickups();
         GangZone_ShowInfoToParticipants();
