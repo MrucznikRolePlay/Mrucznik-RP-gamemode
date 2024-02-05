@@ -26,7 +26,8 @@
 		"Mrucznik/amx_assembly:v4.69",
 		"Mrucznik/samp-plugin-profiler:v2.15.4",
 		"Southclaws/progress2",
-		"oscar-broman/samp-inline-sort"
+		"oscar-broman/samp-inline-sort",
+		"katursis/Pawn.RakNet:1.6.0"
 	],
 	"build": {
 		"name": "",
