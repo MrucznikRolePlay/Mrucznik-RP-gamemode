@@ -514,4 +514,185 @@ AC_AntyFakeKill(playerid, killerid, reason)
 	return 1;
 }
 
+public AC_AntyVehFakeRespawnTimer(vehicleid, killerid)
+{
+	if(IsPlayerConnected(killerid))
+	{
+		new Float:veh_health;
+		GetVehicleHealth(vehicleid, veh_health);
+
+		// Ponowne upewnienie siê, ¿e auto nie wybuch³o - bez tego system czasem fa³szywie wykrywa czita
+		if(veh_health >= 260.0)
+		{
+			new string[128];
+			SendClientMessage(killerid, COLOR_PANICRED, "AC: Dosta³eœ kicka za próbê wymuszenia respawnu pojazdu!");
+			format(string, sizeof string, "AC: %s dosta³ kicka za próbê wymuszenia respawnu pojazdu [Veh: %d].", GetNickEx(killerid), vehicleid);
+			SendCommandLogMessage(string);
+			Log(warningLog, INFO, string);
+			Log(punishmentLog, INFO, string);
+			KickEx(killerid);
+		}
+	}
+}
+
+// Spam OnVehicleDeath
+AC_AntyVehFakeRespawn(vehicleid, killerid)
+{
+	new Float:veh_health, Float:veh_pos[3];
+	GetVehicleHealth(vehicleid, veh_health);
+	GetVehiclePos(vehicleid, veh_pos[0], veh_pos[1], veh_pos[2]);
+
+	// Auto ani nie eksplodowa³o - ma wiêcej ni¿ 250 HP (margines b³êdu 10, czyli 260 HP), ani nie jest potencjalnie pod wod¹ - ma Z-pos wiêkszy ni¿ 0.0 (z marginesem b³êdu 5.0)
+	if(veh_health >= 260.0 && veh_pos[2] > 5.0 && GetPVarInt(killerid, "AntyCheatOff") == 0)
+	{
+		SetTimerEx("AC_AntyVehFakeRespawnTimer", 5000, 0, "ii", vehicleid, killerid); // Ponowne upewnienie siê, ¿e auto nie wybuch³o - bez tego system czasem fa³szywie wykrywa czita
+	}
+
+	// cziter nadal mo¿e sobie waln¹æ wóz poni¿ej 5.0 w osi Z i wtedy daæ respawna
+	// jak ktoœ topi  auta (albo "topi", a w rzeczywistoœci oszukuje) czêœciej ni¿ 2 razy na 20 minut, to wyœlij warninga adminom
+	if(veh_pos[2] <= 5.0)
+	{
+		new currentTick = GetTickCount();
+		if(currentTick - timeFakeVehRespawn[killerid] < 1200000)
+		{
+			countFakeVehRespawn[killerid]++;
+			if(countFakeVehRespawn[killerid] > 2)
+			{
+				new string[128];
+				format(string, sizeof string, "AC: %s [%d] czêsto zg³asza utopienie pojazdów, mo¿e wymuszaæ respawn pojazdu [Veh: %d].", GetNickEx(killerid), killerid, vehicleid);
+				SendCommandLogMessage(string);
+				Log(warningLog, INFO, string);
+			}
+		}
+		else
+		{
+			countFakeVehRespawn[killerid] = 1;
+			timeFakeVehRespawn[killerid] = currentTick;
+		}
+	}
+}
+
+// Spam UnoccupiedSync i przenoszenie aut w kupê - lagi
+AC_AntyVehSpamLag()
+{
+	if(!performUnoccupiedVehCheckAC)
+	{
+		return;
+	}
+
+	static Float:v_distance;
+	static v_close_count;
+	static string[128];
+	static v_pos[MAX_VEHICLES][3];
+
+	// Zapisujemy pozycje wszystkich pojazdów na serwerze
+	foreach(new v : Vehicle)
+	{
+		GetVehiclePos(v, v_pos[v][0], v_pos[v][1], v_pos[v][2]);
+	}
+
+	foreach(new v : Vehicle)
+	{
+		// Czy pojazd zosta³ przesuniêty przez synchronizacjê auta bez kierowcy?
+		if(unoccupiedVehToCheckAC[v])
+		{
+			v_close_count = 0;
+			new v_to_respawn[MAX_VEHICLES] = {false, ...}, p_sus_syncs[MAX_PLAYERS] = {0, ...};
+
+			// Zliczanie ile innych pojazdów znajduje siê w b. bliskiej odleg³oœci od auta przesuniêtego przez UnoccupiedSync
+			foreach(new v_other : Vehicle)
+			{
+				if(v != v_other)
+				{
+					v_distance = GetDistanceBetweenPoints(v_pos[v][0], v_pos[v][1], v_pos[v][2], 
+						v_pos[v_other][0], v_pos[v_other][1], v_pos[v_other][2]);
+
+					if(v_distance <= 2.0)
+					{
+						v_close_count++;
+						v_to_respawn[v_other] = true;
+					}
+				}
+			}
+
+			// Je¿eli pojazdów zbitych w zwarte k³êbowisko jest nie mniej ni¿ 3, to podejmij odpowiednie dzia³ania
+			if(v_close_count >= 3)
+			{
+				v_to_respawn[v] = true;
+
+				new blockUnoccupiedThreshold = floatround(1.0 / 3.0 * float(v_close_count));
+				new sendAdminWarningThreshold = floatround(0.9 * float(v_close_count));
+
+				foreach(new v_respawn : Vehicle)
+				{
+					if(v_to_respawn[v_respawn])
+					{
+						// Sprawdzamy którzy gracze zsynchronizowali zmianê pozycji pojazdu bêd¹cego czêœci¹ k³êbowiska
+						foreach(new p : Player)
+						{
+							if(p_sus_syncs[p] != -1 && unoccupiedVehToCheckPlayersAC[v_respawn][p])
+							{
+								p_sus_syncs[p]++; // Zliczamy dla ilu pojazdów z k³êbowiska zmiana pozycji zosta³a zsynchronizowana przez danego gracza
+
+								// Je¿eli gracz zsynchronizowa³ zmiany pozycji dla wystarczaj¹cej liczby pojazdów z k³êbowiska, podejmujemy odpowiednie dzia³ania
+								if(p_sus_syncs[p] == blockUnoccupiedThreshold)
+								{
+									unoccupiedVehBlockAC[p] = true;
+									format(string, sizeof string, "AC: %s [%d] dosta³ blokadê na synchronizacjê pojazdów bez kierowcy.", GetNickEx(p), p);
+									SendCommandLogMessage(string);
+								}
+								if(p_sus_syncs[p] == sendAdminWarningThreshold)
+								{
+									format(string, sizeof string, "AC: %s [%d] BYÆ MO¯E próbuje lagowaæ pojazdami.", GetNickEx(p), p);
+									SendCommandLogMessage(string);
+									Log(warningLog, INFO, string);
+									p_sus_syncs[p] = -1; // oznaczenie, ¿e gracz przekroczy³ ju¿ najwy¿szy próg i nie trzeba go sprawdzaæ dla kolejnych pojazdów w k³êbowisku
+								}
+							}
+						}
+					}
+				}
+			}
+
+			// Po rozprawieniu siê z potencjalnymi winowajcami, zrespawnuj auta w k³êbowisku
+			foreach(new v_respawn : Vehicle)
+			{
+				if(v_to_respawn[v_respawn])
+				{
+					unoccupiedVehToCheckAC[v_respawn] = false; // Nie ma sensu po raz kolejny sprawdzaæ tych aut, bo zosta³y one ju¿ zrespawnowane
+					RespawnVehicleEx(v_respawn);
+				}
+			}
+
+			foreach(new p : Player)
+			{
+				unoccupiedVehToCheckPlayersAC[v][p] = false;
+			}
+		}
+	}
+
+	performUnoccupiedVehCheckAC = false;
+}
+
+
+hook OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
+{
+	// Sprawdzenie czy na gracza zosta³a na³o¿ona blokada na synchronizacje pojazdów bez kierowcy
+	if(unoccupiedVehBlockAC[playerid])
+	{
+		return 0;
+	}
+
+	new Float:old_x, Float:old_y, Float:old_z;
+	GetVehiclePos(vehicleid, old_x, old_y, old_z);
+	if(old_x != new_x || old_y != new_y || old_z != new_z)
+	{
+		unoccupiedVehToCheckAC[vehicleid] = true;
+		unoccupiedVehToCheckPlayersAC[vehicleid][playerid] = true;
+		performUnoccupiedVehCheckAC = true;
+	}
+
+	return 1;
+}
+
 //end

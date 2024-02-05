@@ -6528,6 +6528,8 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 
 public OnVehicleDeath(vehicleid, killerid)
 {
+	AC_AntyVehFakeRespawn(vehicleid, killerid);
+
 	if(GetVehicleModel(vehicleid) == 577)
 	{
         foreach(new i : Player)
