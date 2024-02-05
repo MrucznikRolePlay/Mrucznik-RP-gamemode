@@ -49,7 +49,7 @@ YCMD:aresztuj(playerid, params[], help)
 		   	    new playa;
 				if( sscanf(params, "k<fix>", playa))
 				{
-					sendTipMessage(playerid, "U¿yj /aresztuj [playerid/CzêœæNicku]");
+					sendTipMessage(playerid, "UÂ¿yj /aresztuj [playerid/CzÃªÅ“Ã¦Nicku]");
 					return 1;
 				}
 
@@ -68,9 +68,9 @@ YCMD:aresztuj(playerid, params[], help)
 								}
 						        else if(PoziomPoszukiwania[playa] >= 1 && PoziomPoszukiwania[playa] <= 5)
 						        {
-						            new price = PoziomPoszukiwania[playa]*4000;
-						            new price2 = PoziomPoszukiwania[playa]*1000;
-						            new bail = PoziomPoszukiwania[playa]*16000;
+						            new price = PoziomPoszukiwania[playa]*10000;
+						            new price2 = PoziomPoszukiwania[playa]*5000;
+						            new bail = PoziomPoszukiwania[playa]*32000;
 						            new jt = PoziomPoszukiwania[playa]*200;
 						            //DajKase(playerid, price);
 								    ZabierzKase(playa, price2);
@@ -82,13 +82,13 @@ YCMD:aresztuj(playerid, params[], help)
 									SetPlayerWantedLevel(playa, 0);
                                     DajKase(playerid, depo3);
                                     Sejf_Add(PlayerInfo[playerid][pMember], depo2);
-								    format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, price, depo3);
-                                   // format(string, sizeof(string), "* Uwiêzi³eœ %s w Wiêzieniu, nagroda za przestêpcê: %d", giveplayer, price);
+								    format(string, sizeof(string), "UwiÃªziÂ³eÅ“ %s, nagroda za przestÃªpcÃª: %d. Otrzymujesz $%d", giveplayer, price, depo3);
+                                   // format(string, sizeof(string), "* UwiÃªziÂ³eÅ“ %s w WiÃªzieniu, nagroda za przestÃªpcÃª: %d", giveplayer, price);
                                     //DajKase(playerid, price);
 									SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 									PlayerInfo[playa][pJailed] = 1;
 								    PlayerInfo[playa][pJailTime] = jt;
-								    format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i otrzyma³eœ grzywnê w wysokoœci $%d, kaucja to: %d$.", PlayerInfo[playa][pJailTime], price,bail);
+								    format(string, sizeof(string), "* JesteÅ“ w wiÃªzieniu na %d Sekund i otrzymaÂ³eÅ“ grzywnÃª w wysokoÅ“ci $%d, kaucja to: %d$.", PlayerInfo[playa][pJailTime], price,bail);
 								    SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     poscig[playa] = 0;
 									WantLawyer[playa] = 1;
@@ -114,12 +114,12 @@ YCMD:aresztuj(playerid, params[], help)
 									SetPlayerSpawnWeapon(playa);
 									if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
 									{
-										format(string, sizeof(string), "<< Policjant %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
+										format(string, sizeof(string), "<< Policjant %s aresztowaÂ³ podejrzanego %s >>", sendername, giveplayer);
 										OOCNews(COLOR_LIGHTRED, string);
 									}
 									else if(PlayerInfo[playerid][pMember]==2||PlayerInfo[playerid][pLider]==2)
 									{
-										format(string, sizeof(string), "<< Agent FBI %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
+										format(string, sizeof(string), "<< Agent FBI %s aresztowaÂ³ podejrzanego %s >>", sendername, giveplayer);
 										OOCNews(COLOR_LIGHTRED, string);
 									}
 								}
@@ -127,7 +127,7 @@ YCMD:aresztuj(playerid, params[], help)
 								{
 									if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))
 									{
-								    	sendTipMessageEx(playerid, COLOR_GRAD3, "Ten gracz ma za du¿y WL alby wsadziæ go do zwyk³ej celi. WsadŸcie go do stanowego.");
+								    	sendTipMessageEx(playerid, COLOR_GRAD3, "Ten gracz ma za duÂ¿y WL alby wsadziÃ¦ go do zwykÂ³ej celi. WsadÅ¸cie go do stanowego.");
 									}
 									else
 									{
@@ -137,9 +137,9 @@ YCMD:aresztuj(playerid, params[], help)
 											new pricestan = PoziomPoszukiwania[giveplayerid]*2000;
 											GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 											GetPlayerName(playerid, sendername, sizeof(sendername));
-											format(string, sizeof(string), "* Uwiêzi³eœ %s w Wiêzieniu stanowym.", giveplayer);
+											format(string, sizeof(string), "* UwiÃªziÂ³eÅ“ %s w WiÃªzieniu stanowym.", giveplayer);
 											SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-											format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
+											format(string, sizeof(string), "* %s UwiÃªziÂ³ ciÃª w WiÃªzieniu Stanowym i daÂ³ grzywnÃª %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
 											SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
 											Kajdanki_JestemSkuty[playa] = 0;//Kajdany
 											Kajdanki_Uzyte[playa] = 0;
@@ -190,12 +190,12 @@ YCMD:aresztuj(playerid, params[], help)
 											SetPlayerWantedLevel(giveplayerid, 0);
 											if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
 											{
-												format(string, sizeof(string), "<< Policjant %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
+												format(string, sizeof(string), "<< Policjant %s aresztowaÂ³ podejrzanego %s >>", sendername, giveplayer);
 												OOCNews(COLOR_LIGHTRED, string);
 											}
 											else if(PlayerInfo[playerid][pMember]==2||PlayerInfo[playerid][pLider]==2)
 											{
-												format(string, sizeof(string), "<< Agent FBI %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
+												format(string, sizeof(string), "<< Agent FBI %s aresztowaÂ³ podejrzanego %s >>", sendername, giveplayer);
 												OOCNews(COLOR_LIGHTRED, string);
 											}
 										}
@@ -208,7 +208,7 @@ YCMD:aresztuj(playerid, params[], help)
 							}
 							else
 							{
-								sendTipMessageEx(playerid, COLOR_GRAD3, "Nie mo¿esz wsadziæ samego siebie do celi.");
+								sendTipMessageEx(playerid, COLOR_GRAD3, "Nie moÂ¿esz wsadziÃ¦ samego siebie do celi.");
 							}
 						}
 						else
@@ -228,13 +228,13 @@ YCMD:aresztuj(playerid, params[], help)
 			}
 			else
 			{
-			    sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ przy celach/stanowym aby kogoœ zaaresztowaæ!");
+			    sendTipMessageEx(playerid, COLOR_GREY, "Musisz byÃ¦ przy celach/stanowym aby kogoÅ“ zaaresztowaÃ¦!");
 			    return 1;
 			}
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie jesteœ z Policji.");
+			sendErrorMessage(playerid, "Nie jesteÅ“ z Policji.");
 		}
 	}
 	return 1;
