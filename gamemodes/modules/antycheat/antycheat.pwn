@@ -556,7 +556,7 @@ AC_AntyVehFakeRespawn(vehicleid, killerid)
 		if(currentTick - timeFakeVehRespawn[killerid] < 1200000)
 		{
 			countFakeVehRespawn[killerid]++;
-			if(countFakeVehRespawn[killerid] > 2)
+			if(countFakeVehRespawn[killerid] == 2 || (countFakeVehRespawn[killerid] > 2 && countFakeVehRespawn[killerid] % 30 == 0))
 			{
 				new string[128];
 				format(string, sizeof string, "AC: %s [%d] czêsto zg³asza utopienie pojazdów, mo¿e wymuszaæ respawn pojazdu [Veh: %d].", GetNickEx(killerid), killerid, vehicleid);
