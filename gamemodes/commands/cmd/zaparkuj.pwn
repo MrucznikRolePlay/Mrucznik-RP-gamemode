@@ -31,43 +31,33 @@
 YCMD:zaparkuj(playerid, params[], help)
 {
 	new string[256];
-	new VW = GetPlayerVirtualWorld(playerid); 
 	if(IsPlayerInAnyVehicle(playerid))
 	{
-        new lVeh = GetPlayerVehicleID(playerid);
-		new vID = VehicleUID[lVeh][vUID];
+        new vehicleID = GetPlayerVehicleID(playerid);
+		new vehicleUID = VehicleUID[vehicleID][vUID];
 		new lider = PlayerInfo[playerid][pLider];
         new org = gPlayerOrg[playerid];
 
-		new liderOwner = CarData[vID][c_OwnerType] == CAR_OWNER_FRACTION && \
-			lider == CarData[vID][c_Owner] && 
+		new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
+			lider == CarData[vehicleUID][c_Owner] && 
 			lider > 0;
-		new orgOwner = CarData[vID][c_OwnerType] == CAR_OWNER_FAMILY && \
-			gPlayerOrgLeader[playerid] == CarData[vID][c_Owner] && \
+		new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
+			gPlayerOrgLeader[playerid] == CarData[vehicleUID][c_Owner] && \
 			org > 0;
-		if(!IsCarOwner(playerid, lVeh) && !liderOwner && !orgOwner)
+		if(!IsCarOwner(playerid, vehicleID) && !liderOwner && !orgOwner)
 		{ 
 			return sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Ciebie!");
 		}
-		if(IsAPlane(lVeh))
+		if(IsAPlane(vehicleID))
 		{
    			new pZone[MAX_ZONE_NAME];
 			GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
 			if((IsPlayerInRangeOfPoint(playerid, Dom[PlayerInfo[playerid][pDom]][hLadowisko], Dom[PlayerInfo[playerid][pDom]][hWej_X], Dom[PlayerInfo[playerid][pDom]][hWej_Y],  Dom[PlayerInfo[playerid][pDom]][hWej_Z]) && PlayerInfo[playerid][pDom] != 0) || strcmp(pZone, "Las Venturas Airport", true) == 0 || strcmp(pZone, "Lotnisko", true) == 0 || strcmp(pZone, "Easter Bay Airport", true) == 0 || strcmp(pZone, "Verdant Meadows", true) == 0 || liderOwner || orgOwner)
 			{
-                new Float:X, Float:Y, Float:Z;
-				new Float:A;
-				GetVehicleZAngle(lVeh, A);
-				GetPlayerPos(playerid, X,Y,Z);
+				new doRespawn = liderOwner || orgOwner;
+				saveCar(playerid, vehicleID, vehicleUID, doRespawn);
 
-                CarData[vID][c_Pos][0] = X;
-                CarData[vID][c_Pos][1] = Y;
-                CarData[vID][c_Pos][2] = Z;
-				CarData[vID][c_VW] = VW; 
-                CarData[vID][c_Rot] = A;
-                Car_Save(vID, CAR_SAVE_STATE);
-
-				format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(lVeh)-400]);
+				format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(vehicleID)-400]);
 				sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
 			}
 			else
@@ -85,19 +75,10 @@ YCMD:zaparkuj(playerid, params[], help)
 		}
         else //NORM
         {
-            new Float:X, Float:Y, Float:Z;
-			new Float:A;
-			GetVehicleZAngle(lVeh, A);
-			GetPlayerPos(playerid, X,Y,Z);
+			new doRespawn = liderOwner || orgOwner;
+			saveCar(playerid, vehicleID, vehicleUID, doRespawn);
 
-            CarData[vID][c_Pos][0] = X;
-            CarData[vID][c_Pos][1] = Y;
-            CarData[vID][c_Pos][2] = Z;
-            CarData[vID][c_Rot] = A;
-			CarData[vID][c_VW] = VW; 
-            Car_Save(vID, CAR_SAVE_STATE);
-
-			format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(lVeh)-400]);
+			format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(vehicleID)-400]);
 			sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
         }
 	}
@@ -106,4 +87,25 @@ YCMD:zaparkuj(playerid, params[], help)
 	    sendErrorMessage(playerid, "Nie jesteœ w wozie.");
 	}
 	return 1;
+}
+
+saveCar(playerid, vehicleID, vehicleUID, respawn)
+{
+	new Float:X, Float:Y, Float:Z;
+	new Float:A;
+	new VW = GetPlayerVirtualWorld(playerid); 
+	GetVehicleZAngle(vehicleID, A);
+	GetPlayerPos(playerid, X,Y,Z);
+
+	CarData[vehicleUID][c_Pos][0] = X;
+	CarData[vehicleUID][c_Pos][1] = Y;
+	CarData[vehicleUID][c_Pos][2] = Z;
+	CarData[vehicleUID][c_VW] = VW; 
+	CarData[vehicleUID][c_Rot] = A;
+	Car_Save(vehicleUID, CAR_SAVE_STATE);
+	if (respawn) 
+	{
+		Car_Unspawn(vehicleID);
+		Car_Spawn(vehicleUID);
+	}
 }
