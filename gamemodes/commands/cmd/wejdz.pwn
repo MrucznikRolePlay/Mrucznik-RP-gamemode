@@ -33,6 +33,7 @@ YCMD:wejdz(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
+        if(PlayerInfo[playerid][pJailed] == 1 || PlayerInfo[playerid][pJailed] == 3) return 1;
         if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
 		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
 
@@ -101,7 +102,7 @@ YCMD:wejdz(playerid, params[], help)
             ShowPlayerDialogEx(playerid,WINDA_SAN,DIALOG_STYLE_LIST,"Winda - San News","[Pietro - 0] Parking\n[Pietro 1] Wejscie do budynku\n[Pietro - 2] Recepcja\n[Pietro - 3] Studia\n[Pietro - 4] Akademia\n[Pietro - 5]Biura San News\n[Pietro - 6]Dach","Jedz","Anuluj");
         }
         //winda FBI
-		else if(IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
+		else if((IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
             || IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
             || IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
             || IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
@@ -112,11 +113,26 @@ YCMD:wejdz(playerid, params[], help)
             || IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
             || IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
             || IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732)//Sale Treningowe
-            || IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674)//Sale przes³uchaniowe
+            || IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674))//Sale przes³uchaniowe
+            && (doorFBIStatus == 1 || GetPlayerFraction(playerid) == FRAC_FBI)
 		)
 		{
 			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1] Parking podziemny \n[Poziom 0] Parking\n[Poziom 0.5] Areszt federalny\n[Poziom 1] Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4] Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6] CID/ERT\n[Poziom 7] Sale Treningowe\n[Poziom 8] Sale przes³uchañ \nDach","Jedz","Anuluj");
         }
+        else if((IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
+            || IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
+            || IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
+            || IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
+            || IsPlayerInRangeOfPoint(playerid,2,589.23029, -1479.66357, 91.74274)//Dyrektorat
+            || IsPlayerInRangeOfPoint(playerid,2,613.4404,-1471.9745,73.8816)//DACH
+            || IsPlayerInRangeOfPoint(playerid,2,596.5255, -1489.2544, 15.3587)//Parking
+            || IsPlayerInRangeOfPoint(playerid,2,1093.0625,1530.8715,6.6905)//Parking podziemny
+            || IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
+            || IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
+            || IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732)//Sale Treningowe
+            || IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674))//Sale przes³uchaniowe
+            && (doorFBIStatus == 0 && !GetPlayerFraction(playerid) == FRAC_FBI))
+                sendTipMessage(playerid, "Ta winda jest zamkniêta.");
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1271.0920,-1667.8794,19.7344)) // strzelnica wejœcie
         {
             if(GUIExit[playerid] == 0)

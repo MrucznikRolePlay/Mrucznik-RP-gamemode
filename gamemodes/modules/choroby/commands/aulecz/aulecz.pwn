@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ fbidrzwi ]-----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  uleczall                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,40 +16,57 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "aulecz_impl.pwn"
 
-YCMD:fbidrzwi(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_aulecz()
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerFraction(playerid) == FRAC_FBI && PlayerInfo[playerid][pRank] >= 3)
-		{
-			if(doorFBIStatus == 0)
-			{
-				doorFBIStatus = 1;
-				sendTipMessage(playerid, "Otworzy³eœ biurowiec FBI."); 
-			}
-			else
-			{
-				doorFBIStatus = 0; 
-				sendTipMessage(playerid, "Zamykasz biurowiec FBI dla ka¿dego prócz FBI."); 
-			}
-		
-		}
-		else
-		{
-			sendTipMessage(playerid, "Ta komenda jest dostêpna od rangi [3]");
-		}
-	}
-	return 1;
+    new command = Command_GetID("aulecz");
+
+    //aliases
+    Command_AddAlt(command, "aheal");
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:aulecz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Leczy gracza z chorób.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /aulecz [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_aulecz_Impl(playerid, giveplayerid);
 }

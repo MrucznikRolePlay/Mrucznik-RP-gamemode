@@ -40,6 +40,7 @@
 #include "setimmunity\setimmunity.pwn"
 #include "ulecz\ulecz.pwn"
 #include "zaraz\zaraz.pwn"
+#include "aulecz\aulecz.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -55,5 +56,6 @@ hook OnGameModeInit()
     command_setimmunity();
     command_ulecz();
     command_zaraz();
+    command_aulecz();
     
 }

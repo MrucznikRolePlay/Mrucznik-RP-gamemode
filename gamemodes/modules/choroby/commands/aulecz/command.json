@@ -1,0 +1,17 @@
+{
+    "name": "aulecz",
+    "description": "Leczy gracza z chorób.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "Sandal",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "23.01.2024"
+}

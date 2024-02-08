@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ fbidrzwi ]-----------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  uleczall                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,40 +16,27 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: Sandal
+// Data utworzenia: 23.01.2024
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:fbidrzwi(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_aulecz_Impl(playerid, giveplayerid)
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerFraction(playerid) == FRAC_FBI && PlayerInfo[playerid][pRank] >= 3)
-		{
-			if(doorFBIStatus == 0)
-			{
-				doorFBIStatus = 1;
-				sendTipMessage(playerid, "Otworzy³eœ biurowiec FBI."); 
-			}
-			else
-			{
-				doorFBIStatus = 0; 
-				sendTipMessage(playerid, "Zamykasz biurowiec FBI dla ka¿dego prócz FBI."); 
-			}
-		
-		}
-		else
-		{
-			sendTipMessage(playerid, "Ta komenda jest dostêpna od rangi [3]");
-		}
-	}
-	return 1;
+    if(PlayerInfo[playerid][pAdmin] < 20 && !IsAScripter(playerid))
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
+
+    CureFromAllDiseases(giveplayerid);
+
+    Log(adminLog, INFO, "Admin %s wyleczy³ gracza %s z wszystkich chorób.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
+    SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, "Zosta³eœ uleczony z wszystkich chorób przez admina.");
+    SendClientMessage(playerid, COLOR_WHITE, sprintf("Uleczy³eœ %s z wszystkich chorób.", GetNick(giveplayerid)));
+    return 1;
 }
+
+//end
