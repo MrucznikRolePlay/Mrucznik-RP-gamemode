@@ -1884,7 +1884,7 @@ CREATE TABLE IF NOT EXISTS `mru_konta` (
   `WantedDeaths` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `Phonebook` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `LottoNr` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
-  `Fishes` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `Fishes` int(11) NOT NULL DEFAULT '0',
   `BiggestFish` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `Job` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `Paycheck` int(11) NOT NULL DEFAULT '0',
@@ -2644,6 +2644,31 @@ CREATE TABLE IF NOT EXISTS `mru_uprawnienia` (
 INSERT INTO `mru_uprawnienia` (`UID`, `FLAGS`) VALUES
 (1, b'0111111111111111'),
 (2, b'0111111111111111');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mru_ryby`
+--
+
+CREATE TABLE `mru_ryby` (
+  `Player` int(11) NOT NULL,
+  `Fish1` varchar(20) NOT NULL DEFAULT 'None',
+  `Fish2` varchar(20) NOT NULL DEFAULT 'None',
+  `Fish3` varchar(20) NOT NULL DEFAULT 'None',
+  `Fish4` varchar(20) NOT NULL DEFAULT 'None',
+  `Fish5` varchar(20) NOT NULL DEFAULT 'None',
+  `Weight1` int(11) NOT NULL DEFAULT 0,
+  `Weight2` int(11) NOT NULL DEFAULT 0,
+  `Weight3` int(11) NOT NULL DEFAULT 0,
+  `Weight4` int(11) NOT NULL DEFAULT 0,
+  `Weight5` int(11) NOT NULL DEFAULT 0,
+  `Fid1` int(11) NOT NULL DEFAULT 0,
+  `Fid2` int(11) NOT NULL DEFAULT 0,
+  `Fid3` int(11) NOT NULL DEFAULT 0,
+  `Fid4` int(11) NOT NULL DEFAULT 0,
+  `Fid5` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_bin;
 
 -- --------------------------------------------------------
 

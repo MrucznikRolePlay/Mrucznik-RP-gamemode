@@ -26,10 +26,13 @@
 command_lowienie_Impl(playerid)
 {
     new string[128];
-    if(PlayerInfo[playerid][pFishes] >= 5)
+    if(PlayerInfo[playerid][pFishes] > 5)
     {
-        sendTipMessageEx(playerid, COLOR_GREY, sprintf("Odczekaj ~%d minut zanim znowu zaczniesz ³owiæ!", (15 - FishCount[playerid])));
-        return 1;
+        if (PlayerInfo[playerid][pFishes] > gettime()) {
+            sendTipMessageEx(playerid, COLOR_GREY, sprintf("Odczekaj ~%d minut zanim znowu zaczniesz ³owiæ!", floatround(floatdiv(PlayerInfo[playerid][pFishes] - gettime(), 60), floatround_ceil)));
+            return 1;
+        }
+        PlayerInfo[playerid][pFishes] = 0;
     }
     if(Fishes[playerid][pWeight1] > 0 && Fishes[playerid][pWeight2] > 0 && Fishes[playerid][pWeight3] > 0 && Fishes[playerid][pWeight4] > 0 && Fishes[playerid][pWeight5] > 0)
     {
@@ -99,7 +102,9 @@ command_lowienie_Impl(playerid)
         }
         if(PlayerInfo[playerid][pFishLic] < 1)
         {
-            SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Nielegany po³ów ryb");
+            if(PoziomPoszukiwania[playerid] == 0)
+                PoziomPoszukiwania[playerid]++;
+            SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Nielegalny po³ów ryb");
         }
         if(Fishes[playerid][pWeight1] == 0)
         {
@@ -214,6 +219,9 @@ command_lowienie_Impl(playerid)
         { SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci rybaka wynosz¹ teraz 4, mo¿esz ³owiæ wiêksze ryby."); }
         else if(PlayerInfo[playerid][pFishSkill] == 400)
         { SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci rybaka wynosz¹ teraz 5, mo¿esz ³owiæ wiêksze ryby."); }
+        if (PlayerInfo[playerid][pFishes] == 5)
+            PlayerInfo[playerid][pFishes] = gettime() + 900; // 15 minutes
+        MruMySQL_UpdateFish(playerid, Fishes[playerid][pLastFish]);
     }
     else
     {

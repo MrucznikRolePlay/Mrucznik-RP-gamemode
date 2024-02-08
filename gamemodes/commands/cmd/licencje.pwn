@@ -63,7 +63,7 @@ YCMD:licencje(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GREY, string);
 		format(string, sizeof(string), "** P³ywanie ³odziami: %s.", text2);
 		SendClientMessage(playerid, COLOR_GREY, string);
-		format(string, sizeof(string), "** Karta wêdkarskia: %s.", text3);
+		format(string, sizeof(string), "** Karta wêdkarska: %s.", text3);
 		SendClientMessage(playerid, COLOR_GREY, string);
 		format(string, sizeof(string), "** Licencja na broñ: %s.", text5);
 		SendClientMessage(playerid, COLOR_GREY, string);
