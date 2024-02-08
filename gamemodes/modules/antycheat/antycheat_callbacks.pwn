@@ -211,21 +211,4 @@ hook OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x,
 	return 1;
 }
 
-forward OnVehicleRequestDeath(vehicleid, killerid);
-public OnVehicleRequestDeath(vehicleid, killerid)
-{
-    new Float:health, Float:depth, Float:vehicledepth;
-
-    GetVehicleHealth(vehicleid, health);
-
-    if (health >= 250.0 &&
-        !CA_IsVehicleInWater(vehicleid, depth, vehicledepth) &&
-        !IsVehicleUpsideDown(vehicleid)
-    ) {
-        return 0;
-    }
-
-    return 1;
-}
-
 //end

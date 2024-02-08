@@ -84,7 +84,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <indirection>
 #include <amx_assembly\addressof>
 //redefinition from y_playerarray.inc
-#undef PlayerArray 
+#undef PlayerArray
 
 #include <colandreas>
 #include <colandreas_streamer_integrate>
@@ -6542,8 +6542,6 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 
 public OnVehicleDeath(vehicleid, killerid)
 {
-	AC_AntyVehFakeRespawn(vehicleid, killerid);
-
 	if(GetVehicleModel(vehicleid) == 577)
 	{
         foreach(new i : Player)

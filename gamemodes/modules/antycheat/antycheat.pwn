@@ -533,7 +533,7 @@ AC_AntyVehSpamLag()
 	static Float:v_distance;
 	static v_close_count;
 	static string[128];
-	static v_pos[MAX_VEHICLES][3];
+	static Float:v_pos[MAX_VEHICLES][3];
 
 	// Zapisujemy pozycje wszystkich pojazdów na serwerze
 	foreach(new v : Vehicle)
@@ -631,6 +631,8 @@ IPacket:UNOCCUPIED_SYNC(playerid, BitStream:bs)
 	{
 		return 0;
 	}
+
+	return 1;
 }
 
 // ----------------<[ AntiVehicleSpawn (https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn) ]>-----------------------
@@ -646,7 +648,18 @@ IRPC:VEHICLE_DESTROYED(playerid, BitStream:bs)
         return 0;
     }
 
-    return OnVehicleRequestDeath(vehicleid, playerid);
+	new Float:health, Float:depth, Float:vehicledepth;
+
+    GetVehicleHealth(vehicleid, health);
+
+    if (health >= 250.0 &&
+        !CA_IsVehicleInWater(vehicleid, depth, vehicledepth) &&
+        !IsVehicleUpsideDown(vehicleid)
+    ) {
+        return 0;
+    }
+
+    return 1;
 }
 
 //end
