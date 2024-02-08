@@ -65,7 +65,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 // #include <requests>
-// #include <colandreas>
 
 //-------<[ Include ]>-------
 #include <a_http>
@@ -86,6 +85,10 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <amx_assembly\addressof>
 //redefinition from y_playerarray.inc
 #undef PlayerArray 
+
+#include <colandreas>
+#include <colandreas_streamer_integrate>
+
 #include <sort-inline>
 //nex-ac settings
 #define AC_MAX_CONNECTS_FROM_IP		3
@@ -95,9 +98,10 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_USE_AMMUNATIONS false
 #define AC_USE_RESTAURANTS false
 #define AC_USE_CASINOS false
+#include <progress2>
+#include <Pawn.RakNet>
 #include <nex-ac>
 #include <md5>
-#include <progress2>
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
@@ -108,6 +112,16 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <vector>
 #include <map>
 #include <mapfix>
+
+#if defined _colandreas_included
+	#include "obiekty\colandreas_removebuildings.pwn"
+	hook OnGameModeInit()
+	{
+		printf("ColAndreas - usuwanie budynków i inicjalizacja mapy.");
+		ColAndreas_UsunBudynki();
+		CA_Init();
+	}
+#endif
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
@@ -266,7 +280,7 @@ public OnGameModeInit()
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
 	MruMySQL_IloscLiderowLoad();
-
+	
 	
 	DefaultItems_LicenseCost();
 
