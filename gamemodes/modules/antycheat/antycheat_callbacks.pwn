@@ -197,4 +197,35 @@ AC_OnPlayerLogin(playerid)
 	}
 }
 
+hook OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
+{
+	new Float:old_x, Float:old_y, Float:old_z;
+	GetVehiclePos(vehicleid, old_x, old_y, old_z);
+	if(old_x != new_x || old_y != new_y || old_z != new_z)
+	{
+		unoccupiedVehToCheckAC[vehicleid] = true;
+		unoccupiedVehToCheckPlayersAC[vehicleid][playerid] = true;
+		performUnoccupiedVehCheckAC = true;
+	}
+
+	return 1;
+}
+
+forward OnVehicleRequestDeath(vehicleid, killerid);
+public OnVehicleRequestDeath(vehicleid, killerid)
+{
+    new Float:health, Float:depth, Float:vehicledepth;
+
+    GetVehicleHealth(vehicleid, health);
+
+    if (health >= 250.0 &&
+        !CA_IsVehicleInWater(vehicleid, depth, vehicledepth) &&
+        !IsVehicleUpsideDown(vehicleid)
+    ) {
+        return 0;
+    }
+
+    return 1;
+}
+
 //end

@@ -25,6 +25,13 @@
 
 //
 
+#include <YSI\y_hooks>
+
+//------------<[ Sta³e dla Pawn.RakNet ]>------------
+
+static const VEHICLE_DESTROYED = 136;
+static const UNOCCUPIED_SYNC = 209;
+
 //-----------------<[ Funkcje: ]>-------------------
 ProcessACCode(playerid, code)
 {
@@ -514,65 +521,8 @@ AC_AntyFakeKill(playerid, killerid, reason)
 	return 1;
 }
 
-public AC_AntyVehFakeRespawnTimer(vehicleid, killerid)
-{
-	if(IsPlayerConnected(killerid))
-	{
-		new Float:veh_health;
-		GetVehicleHealth(vehicleid, veh_health);
+//----------------<[ Spam UnoccupiedSync i piêtrzenie aut - lagi ]>-----------------------
 
-		// Ponowne upewnienie siê, ¿e auto nie wybuch³o - bez tego system czasem fa³szywie wykrywa czita
-		if(veh_health >= 260.0)
-		{
-			new string[128];
-			SendClientMessage(killerid, COLOR_PANICRED, "AC: Dosta³eœ kicka za próbê wymuszenia respawnu pojazdu!");
-			format(string, sizeof string, "AC: %s dosta³ kicka za próbê wymuszenia respawnu pojazdu [Veh: %d].", GetNickEx(killerid), vehicleid);
-			SendCommandLogMessage(string);
-			Log(warningLog, INFO, string);
-			Log(punishmentLog, INFO, string);
-			KickEx(killerid);
-		}
-	}
-}
-
-// Spam OnVehicleDeath
-AC_AntyVehFakeRespawn(vehicleid, killerid)
-{
-	new Float:veh_health, Float:veh_pos[3];
-	GetVehicleHealth(vehicleid, veh_health);
-	GetVehiclePos(vehicleid, veh_pos[0], veh_pos[1], veh_pos[2]);
-
-	// Auto ani nie eksplodowa³o - ma wiêcej ni¿ 250 HP (margines b³êdu 10, czyli 260 HP), ani nie jest potencjalnie pod wod¹ - ma Z-pos wiêkszy ni¿ 0.0 (z marginesem b³êdu 5.0)
-	if(veh_health >= 260.0 && veh_pos[2] > 5.0 && GetPVarInt(killerid, "AntyCheatOff") == 0)
-	{
-		SetTimerEx("AC_AntyVehFakeRespawnTimer", 5000, 0, "ii", vehicleid, killerid); // Ponowne upewnienie siê, ¿e auto nie wybuch³o - bez tego system czasem fa³szywie wykrywa czita
-	}
-
-	// cziter nadal mo¿e sobie waln¹æ wóz poni¿ej 5.0 w osi Z i wtedy daæ respawna
-	// jak ktoœ topi  auta (albo "topi", a w rzeczywistoœci oszukuje) czêœciej ni¿ 2 razy na 20 minut, to wyœlij warninga adminom
-	if(veh_pos[2] <= 5.0)
-	{
-		new currentTick = GetTickCount();
-		if(currentTick - timeFakeVehRespawn[killerid] < 1200000)
-		{
-			countFakeVehRespawn[killerid]++;
-			if(countFakeVehRespawn[killerid] == 2 || (countFakeVehRespawn[killerid] > 2 && countFakeVehRespawn[killerid] % 30 == 0))
-			{
-				new string[128];
-				format(string, sizeof string, "AC: %s [%d] czêsto zg³asza utopienie pojazdów, mo¿e wymuszaæ respawn pojazdu [Veh: %d].", GetNickEx(killerid), killerid, vehicleid);
-				SendCommandLogMessage(string);
-				Log(warningLog, INFO, string);
-			}
-		}
-		else
-		{
-			countFakeVehRespawn[killerid] = 1;
-			timeFakeVehRespawn[killerid] = currentTick;
-		}
-	}
-}
-
-// Spam UnoccupiedSync i przenoszenie aut w kupê - lagi
 AC_AntyVehSpamLag()
 {
 	if(!performUnoccupiedVehCheckAC)
@@ -674,25 +624,29 @@ AC_AntyVehSpamLag()
 	performUnoccupiedVehCheckAC = false;
 }
 
-
-hook OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
+IPacket:UNOCCUPIED_SYNC(playerid, BitStream:bs)
 {
-	// Sprawdzenie czy na gracza zosta³a na³o¿ona blokada na synchronizacje pojazdów bez kierowcy
+    // Sprawdzenie czy na gracza zosta³a na³o¿ona blokada na synchronizacje pojazdów bez kierowcy
 	if(unoccupiedVehBlockAC[playerid])
 	{
 		return 0;
 	}
+}
 
-	new Float:old_x, Float:old_y, Float:old_z;
-	GetVehiclePos(vehicleid, old_x, old_y, old_z);
-	if(old_x != new_x || old_y != new_y || old_z != new_z)
-	{
-		unoccupiedVehToCheckAC[vehicleid] = true;
-		unoccupiedVehToCheckPlayersAC[vehicleid][playerid] = true;
-		performUnoccupiedVehCheckAC = true;
-	}
+// ----------------<[ AntiVehicleSpawn (https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn) ]>-----------------------
 
-	return 1;
+IRPC:VEHICLE_DESTROYED(playerid, BitStream:bs)
+{
+    new vehicleid;
+
+    BS_ReadUint16(bs, vehicleid);
+
+    if (GetVehicleModel(vehicleid) < 400)
+    {
+        return 0;
+    }
+
+    return OnVehicleRequestDeath(vehicleid, playerid);
 }
 
 //end

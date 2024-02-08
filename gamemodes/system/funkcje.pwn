@@ -12486,6 +12486,20 @@ PursuitMode(playerid, giveplayerid)
 	}
 }
 
+// https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn
+stock IsVehicleUpsideDown(vehicleid)
+{
+    new Float:quat_w, Float:quat_x, Float:quat_y, Float:quat_z;
+    GetVehicleRotationQuat(vehicleid, quat_w, quat_x, quat_y, quat_z);
+    return (
+        floatabs(
+            atan2(2 * (quat_y * quat_z + quat_w * quat_x),
+                quat_w * quat_w - quat_x * quat_x - quat_y * quat_y + quat_z * quat_z
+            )
+        ) > 90.0
+    );
+}
+
 public DeathAdminWarning(playerid, killerid, reason)
 {
 	new killername[MAX_PLAYER_NAME];
