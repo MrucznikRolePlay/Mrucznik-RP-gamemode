@@ -25,12 +25,12 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dmvon_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) || (IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 4))
     {
         new string[124];
         CreateActorsInDMV(playerid);
         sendTipMessage(playerid, "W³¹czy³eœ boty w urzêdzie miasta LS!");
-        format(string, sizeof(string), "Administrator %s w³¹czy³ zautomatyzowany Urz¹d miasta na godzinê!", GetNickEx(playerid)); 
+        format(string, sizeof(string), "Urzêdnik %s w³¹czy³ zautomatyzowany Urz¹d miasta na godzinê!", GetNickEx(playerid)); 
         SendMessageToAdminEx(string, COLOR_P@, 2);     
     }
     else
