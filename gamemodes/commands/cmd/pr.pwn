@@ -60,6 +60,7 @@ YCMD:pr(playerid, params[], help)
 				}
                 mysql_real_escape_string(name, name);
                 if(orgSetName(org, name)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ nazwê swojej rodziny.");
+				orgSave(org, ORG_SAVE_TYPE_DESC);
 			}
 			else if(strcmp(x_nr,"motd",true) == 0)
 			{
@@ -71,6 +72,7 @@ YCMD:pr(playerid, params[], help)
 				}
                 mysql_real_escape_string(lStr, lStr);
 			    if(orgSetMotd(org, lStr)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ MOTD rodziny.");
+				orgSave(org, ORG_SAVE_TYPE_DESC);
 			}
 			else if(strcmp(x_nr,"color",true) == 0 || strcmp(x_nr,"kolor",true) == 0)
 			{
@@ -88,6 +90,7 @@ YCMD:pr(playerid, params[], help)
                 hexa = (hexa << 8);
                 OrgInfo[org][o_Color] = hexa;
 			    sendTipMessageEx(playerid, hexa, "Zmieni³eœ kolor rodziny.");
+				orgSave(org, ORG_SAVE_TYPE_BASIC);
 			}
 			else if(strcmp(x_nr,"spawn",true) == 0)
 			{
