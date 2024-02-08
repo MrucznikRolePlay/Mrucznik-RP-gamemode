@@ -6,4 +6,4 @@
 	url = https://github.com/Mrucznik/Mrucznik-RP-Includes.git
 [submodule "models"]
 	path = models
-	url = git@github.com:Mrucznik/Mrucznik-RP-models
+	url = https://github.com/Mrucznik/Mrucznik-RP-models.git
