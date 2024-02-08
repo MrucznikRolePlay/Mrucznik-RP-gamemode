@@ -140,7 +140,7 @@ SprawdzBramy(playerid)
 {
 	for(new i; i<iloscbram; i++)
 	{	
-		if(GetPlayerVirtualWorld(playerid) == bramy[i][b_vw])
+		if(GetPlayerVirtualWorld(playerid) == bramy[i][b_vw] || bramy[i][b_vw] == -1)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x1], bramy[i][duo_y1], bramy[i][duo_z1]) || IsPlayerInRangeOfPoint(playerid, bramy[i][b_range], bramy[i][duo_x2], bramy[i][duo_y2], bramy[i][duo_z2]))
 			{
