@@ -3,8 +3,8 @@
     "description": "System administracji.",
     "author": "2.5",
     "commands": true,
-    "mysql": true,
-    "timers": true,
-    "callbacks": true,
+    "mysql": false,
+    "timers": false,
+    "callbacks": false,
     "date": "04.05.2019"
 }

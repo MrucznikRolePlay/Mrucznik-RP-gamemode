@@ -154,7 +154,6 @@
 
 
 //-------<[ timers ]>-------
-#include "admin\admin_timers.pwn"
 #include "pojazdy\pojazdy_timers.pwn"
 #include "prace\prace_timers.pwn"
 #include "wypadek\wypadek_timers.pwn"
@@ -171,13 +170,11 @@
 
 
 //-------<[ mysql ]>-------
-#include "admin\admin_mysql.pwn"
 #include "pojazdy\pojazdy_mysql.pwn"
 #include "biznesy\biznesy_mysql.pwn"
 #include "fishing\fishing_mysql.pwn"
 #include "prace\prace_mysql.pwn"
 #include "graffiti\graffiti_mysql.pwn"
-#include "weryfikacje\weryfikacje_mysql.pwn"
 #include "player_attachments\player_attachments_mysql.pwn"
 #include "cooking\cooking_mysql.pwn"
 #include "vehicle_attachments\vehicle_attachments_mysql.pwn"
@@ -192,7 +189,6 @@
 
 
 //-------<[ callbacks ]>-------
-#include "admin\admin_callbacks.pwn"
 #include "pojazdy\pojazdy_callbacks.pwn"
 #include "biznesy\biznesy_callbacks.pwn"
 #include "fishing\fishing_callbacks.pwn"
@@ -200,6 +196,7 @@
 #include "wypadek\wypadek_callbacks.pwn"
 #include "convoy\convoy_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
+#include "weryfikacje\weryfikacje_callbacks.pwn"
 #include "player_attachments\player_attachments_callbacks.pwn"
 #include "cooking\cooking_callbacks.pwn"
 #include "vehicle_attachments\vehicle_attachments_callbacks.pwn"

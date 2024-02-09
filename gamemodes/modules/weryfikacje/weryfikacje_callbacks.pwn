@@ -25,12 +25,14 @@
 
 //
 #include <YSI\y_hooks>
+
 //-----------------<[ Funkcje: ]>-------------------
 hook OnPlayerDisconnect(playerid, reason)
 {
 	if(Lockdown_assignedVW[playerid] > 0)
 		ALockdown_DestroyData(playerid);
 }
+
 ALockdown_OnPlayerLogin(playerid)
 {
 	if(PlayerInfo[playerid][pConnectTime] <= 2 && Lockdown_Mode > 0)
