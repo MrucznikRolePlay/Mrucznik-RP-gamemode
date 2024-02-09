@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                    anim                                                   //
+//                                                  lockdown                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -35,8 +35,15 @@ command_lockdown()
 {
     new command = Command_GetID("lockdown");
 
+    //aliases
+    
+
     //permissions
     Group_SetCommand(Group_GetID("admini"), command, true);
+    
+
+    //prefix
+    
 }
 
 //-------<[ command ]>-------
@@ -44,28 +51,17 @@ YCMD:lockdown(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Komenda steruj¹ca weryfikacjami administracyjnymi.");
+        sendTipMessage(playerid, "W³¹cza przetrzymywanie nowo zarejestrowanych kont w innym virtual wordzie do czasu /zweryfikuj od admina.");
         return 1;
     }
     //fetching params
-    new typLock;
-    if(sscanf(params, "d", typLock))
+    new typ;
+    if(sscanf(params, "D(-1)", typ))
     {
-        sendTipMessage(playerid, "U¿yj /lockdown [typ]");
-        if(PlayerInfo[playerid][pAdmin] >= 1) {
-            sendTipMessage(playerid, "[0] Wy³¹czenie [1] W³¹czenie dla kont z 0h [2] W³¹czenie dla kont z mniej ni¿ 3h");
-            sendTipMessage(playerid, "Ka¿de konto po /weryfikacja bêdzie mia³o 'przepustke' do czasu restartu serwera.");
-            new string[128];
-            format(string, sizeof(string), "Aktualny tryb lockdown: [%d]", Lockdown_Mode);
-            sendTipMessage(playerid, string);
-        }
+        sendTipMessage(playerid, "U¿yj /lockdown [0 = Wy³¹czenie, 1 = W³¹czenie dla kont z 0h, 2 = W³¹czenie dla kont z mniej ni¿ 3h] ");
         return 1;
     }
-    if(typLock < 0 || typLock > 2)
-    {
-        sendErrorMessage(playerid, "Nie znaleziono typu lockdown przypisanego do tego numeru.");
-        return 1;
-    }
+    
     //command body
-    return command_lockdown_Impl(playerid, typLock);
+    return command_lockdown_Impl(playerid, typ);
 }

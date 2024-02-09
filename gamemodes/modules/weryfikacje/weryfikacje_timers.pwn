@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                 zweryfikuj                                                //
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                weryfikacje                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,56 +16,15 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Sandal
+// Data utworzenia: 01.02.2024
+//Opis:
+/*
+	System lockdown dla administracji
+*/
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//-----------------<[ Timery: ]>-------------------
 
-//-------<[ include ]>-------
-#include "zweryfikuj_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_zweryfikuj()
-{
-    new command = Command_GetID("zweryfikuj");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetCommand(Group_GetID("admini"), command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:zweryfikuj(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Komenda steruj¹ca weryfikacjami administracyjnymi.");
-        return 1;
-    }
-    //fetching params
-    new giveplayerid;
-    if(sscanf(params, "r", giveplayerid))
-    {
-        sendTipMessage(playerid, "U¿yj /zweryfikuj [Nick/ID] ");
-        return 1;
-    }
-    if(!IsPlayerConnected(giveplayerid))
-    {
-        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
-        return 1;
-    }
-    //command body
-    return command_zweryfikuj_Impl(playerid, giveplayerid);
-}
+//end

@@ -1,11 +1,17 @@
 {
-    "name": "lockdown",
-    "description": "System lockdown",
+    "name": "zweryfikuj",
+    "description": "Komenda steruj¹ca weryfikacjami administracyjnymi.",
     "permissions": [
-        "everyone"
+        "admini"
     ],
     "author": "Sandal",
     "aliases": [],
-    "parameters": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
     "date": "01.02.2024"
 }

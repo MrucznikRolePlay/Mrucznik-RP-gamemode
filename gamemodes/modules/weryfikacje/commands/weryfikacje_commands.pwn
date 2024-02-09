@@ -33,9 +33,11 @@
 #include "lockdown\lockdown.pwn"
 #include "zweryfikuj\zweryfikuj.pwn"
 
+
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_lockdown();
     command_zweryfikuj();
+    
 }
