@@ -40,6 +40,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //const correctness off - how to fix: https://github.com/pawn-lang/YSI-Includes/commit/ab75ea38987e6a7935aa3100eba5284cb3d706e1
 #pragma warning disable 239
 #pragma warning disable 214
+#pragma warning disable 213 // disable required bool: prefix for booleans
 
 //-------------------------------------------<[ Biblioteki ]>------------------------------------------------//
 //-                                                                                                         -//
