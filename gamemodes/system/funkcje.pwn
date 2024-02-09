@@ -28,7 +28,7 @@ SSCANF:fix(string[])
 	return ret;
 }
 
-strToUpper(str[])
+stock strToUpper(str[])
 {
 	for(new i = 0, n = strlen(str); i <n; i ++)
     {
@@ -37,7 +37,7 @@ strToUpper(str[])
     return 1;
 } 
 
-GenString( string[ ] , size = sizeof string )
+stock GenString( string[ ] , size = sizeof string )
 {
     static const Data[ ] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//add more characters if they want to include in string
     new i;
