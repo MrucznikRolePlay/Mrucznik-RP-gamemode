@@ -5,7 +5,7 @@
         "everyone"
     ],
     "author": "Sandal",
-    "aliases": [],
+    "aliases": ["aheal"],
     "parameters": [
         {
             "type": "player",
