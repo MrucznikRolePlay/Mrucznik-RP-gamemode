@@ -3254,11 +3254,6 @@ public Fillup()
 		{
 			new FillUpPrice = FillUp * 120;
 
-			if(IsAFractionGasStationValidUser(i))
-			{// na frakcyjnych stacjach tankowanie za darmo dla cz?onków frakcji
-				FillUpPrice = 0;
-			}
-
 			if(kaska[i] >= FillUpPrice)
 			{
 				Gas[VID] += FillUp;
