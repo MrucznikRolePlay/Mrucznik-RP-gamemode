@@ -40,7 +40,7 @@ command_liderranga_Impl(playerid, rank, rawRankName[32])
     }
 
     // validate parameters
-    if(rank < 0 || rank > 10) {
+    if(rank < 0 || rank > 9) {
         sendErrorMessage(playerid, "Numer rangi od 0 do 9!");
         return 1;
     }
