@@ -546,8 +546,12 @@ AC_AntyVehSpamLag()
 		// Czy pojazd zosta³ przesuniêty przez synchronizacjê auta bez kierowcy?
 		if(unoccupiedVehToCheckAC[v])
 		{
+			printf("Unoccupied Vehicle id:%d for check start - x:%f, y:%f, z:%f", v, v_pos[v][0], v_pos[v][1], v_pos[v][2]);
+
 			v_close_count = 0;
 			new v_to_respawn[MAX_VEHICLES] = {false, ...}, p_sus_syncs[MAX_PLAYERS] = {0, ...};
+
+			printf("v_close_count: %d", v_close_count);
 
 			// Zliczanie ile innych pojazdów znajduje siê w b. bliskiej odleg³oœci od auta przesuniêtego przez UnoccupiedSync
 			foreach(new v_other : Vehicle)
@@ -561,11 +565,14 @@ AC_AntyVehSpamLag()
 					{
 						v_close_count++;
 						v_to_respawn[v_other] = true;
+
+						printf("other vehicle close enough - id:%d - dist:%f - x:%f - y:%f - z:%f - v_close_count: %d", 
+							v_other, v_distance, v_pos[v_other][0], v_pos[v_other][1], v_pos[v_other][2], v_close_count);
 					}
 				}
 			}
 
-			// Je¿eli pojazdów zbitych w zwarte k³êbowisko jest nie mniej ni¿ 3, to podejmij odpowiednie dzia³ania
+			// Je¿eli pojazdów zbitych w zwarte k³êbowisko jest nie mniej ni¿ 4 (g³ówny pojazd 'v' i 3 inne), to podejmij odpowiednie dzia³ania
 			if(v_close_count >= 3)
 			{
 				v_to_respawn[v] = true;
@@ -602,15 +609,17 @@ AC_AntyVehSpamLag()
 						}
 					}
 				}
-			}
 
-			// Po rozprawieniu siê z potencjalnymi winowajcami, zrespawnuj auta w k³êbowisku
-			foreach(new v_respawn : Vehicle)
-			{
-				if(v_to_respawn[v_respawn])
+				// Po rozprawieniu siê z potencjalnymi winowajcami, zrespawnuj auta w k³êbowisku
+				foreach(new v_respawn : Vehicle)
 				{
-					unoccupiedVehToCheckAC[v_respawn] = false; // Nie ma sensu po raz kolejny sprawdzaæ tych aut, bo zosta³y one ju¿ zrespawnowane
-					RespawnVehicleEx(v_respawn);
+					if(v_to_respawn[v_respawn])
+					{
+						printf("respawning veh id:%d", v_respawn);
+
+						unoccupiedVehToCheckAC[v_respawn] = false; // Nie ma sensu po raz kolejny sprawdzaæ tych aut, bo zosta³y one ju¿ zrespawnowane
+						RespawnVehicleEx(v_respawn);
+					}
 				}
 			}
 
@@ -618,6 +627,8 @@ AC_AntyVehSpamLag()
 			{
 				unoccupiedVehToCheckPlayersAC[v][p] = false;
 			}
+
+			unoccupiedVehToCheckAC[v] = false;
 		}
 	}
 
