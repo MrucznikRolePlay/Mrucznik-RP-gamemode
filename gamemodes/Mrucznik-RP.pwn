@@ -876,7 +876,7 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
         if(kolid != -1 && OilData[kolid][oilHP] > 0)
         {
             OnPlayerEnterOilSpot(playerid);
-            return;
+            return 1;
         }
         kolid = -1;
         for(new i=0;i<MAX_KOLCZATEK;i++)
@@ -890,9 +890,10 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
         if(kolid != -1)
         {
             OnPlayerEnterSpikes(playerid);
-            return;
+            return 1;
         }
     }
+	return 1;
 }
 
 public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
