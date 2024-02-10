@@ -36,6 +36,7 @@ static zatankujPojazdGracza(playerid)
 	GameTextForPlayer(playerid,"~w~~n~~n~~n~~n~~n~~n~~n~~n~~n~Tankowanie pojazdu, prosze czekac",2000,3);
 	SetTimer("Fillup",RefuelWait,0);
 	Refueling[playerid] = 1;
+	return 1;
 }
 
 YCMD:zatankuj(playerid, params[], help)
