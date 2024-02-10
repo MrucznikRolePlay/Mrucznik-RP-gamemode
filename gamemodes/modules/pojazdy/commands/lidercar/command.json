@@ -13,7 +13,7 @@
             "type": "string",
             "size": "8",
             "name": "akcja",
-            "description": "parkuj/przemaluj/ranga/opis"
+            "description": "parkuj/przemaluj/ranga"
         },
         {
             "type": "string",
