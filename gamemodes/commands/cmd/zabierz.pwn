@@ -67,6 +67,11 @@ YCMD:zabierz(playerid, params[], help)
 				return 1;
 			}
 
+			if(!Kajdanki_JestemSkuty[giveplayerid])
+			{
+				sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest skuty!");
+				return 1;
+			}
 			GetPlayerName(playerid, sendername, sizeof(sendername));
 			GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 

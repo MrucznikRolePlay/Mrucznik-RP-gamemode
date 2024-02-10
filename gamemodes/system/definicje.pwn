@@ -5,6 +5,7 @@
 //wy³¹czenie sampowych metod obiektów
 #define CreateObject(%0) ERROR_CREATE_OBJECT(%0)
 #define DestroyObject(%0) ERROR_OBJECT
+#undef IsValidObject
 #define IsValidObject(%0) ERROR_OBJECT
 #define MoveObject(%0) ERROR_OBJECT
 #define StopObject(%0) ERROR_OBJECT
@@ -376,7 +377,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_EDIT_RANG_SET     1318
 #define D_EDIT_RANG_NAME    1319
 #define D_EDIT_CAR_COLOR    1320
-#define D_ASK_DODATKMistrz zbrodni
+#define D_ASK_DODATKI       1321
 #define DIALOG_LIDER01 3001
 #define DIALOG_LIDER02 3002
 

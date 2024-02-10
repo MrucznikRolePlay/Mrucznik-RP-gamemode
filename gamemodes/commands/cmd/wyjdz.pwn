@@ -36,6 +36,8 @@ YCMD:wyjdz(playerid, params[], help)
 		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
 	
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
+		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
+		
 		if(isNaked[playerid] == 1)
 		{
 			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 

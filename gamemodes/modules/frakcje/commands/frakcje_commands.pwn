@@ -30,10 +30,12 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "liderranga\liderranga.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_liderranga();
     
 }

@@ -30,14 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "grafiti\grafiti.pwn"
 #include "agraffiti\agraffiti.pwn"
+#include "grafiti\grafiti.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_grafiti();
     command_agraffiti();
+    command_grafiti();
     
 }

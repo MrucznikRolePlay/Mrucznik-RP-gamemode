@@ -1,0 +1,27 @@
+{
+    "name": "lidercar",
+    "description": "Komenda dla liderów frakcji i organizacji pozwalaj¹ca zarz¹dzaæ ich pojazdem.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "liderveh",
+        "leadercar",
+        "leaderveh"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "16",
+            "name": "akcja",
+            "description": "parkuj/przemaluj/ranga/opis"
+        },
+        {
+            "type": "string",
+            "size": "256",
+            "name": "opcje",
+            "description": "opcje specyficzne dla wybranej akcji",
+            "defaultValue": ""
+        }
+    ],
+    "date": "10.02.2024"
+}

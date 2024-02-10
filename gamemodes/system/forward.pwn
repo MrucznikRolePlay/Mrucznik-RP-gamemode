@@ -36,6 +36,7 @@ forward ServerStuffSave();
 
 //  09.06.2014
 //Przeniesione z funkcji
+forward Float:GetDistanceBetweenPoints(Float:x1, Float:y1, Float:z1, Float:x2, Float:y2, Float:z2);
 forward Wchodzenie(playerid);
 forward freezuj(playerid);
 forward ZamykanieDrzwi(playerid);

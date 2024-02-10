@@ -32,7 +32,7 @@ YCMD:gotopos(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 		    new Float:x, Float:y, Float:z;
 			if( !sscanf(params, "p<,>fff", x,y,z) || !sscanf(params, "p< >fff", x,y,z))

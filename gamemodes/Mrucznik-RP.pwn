@@ -40,11 +40,13 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //const correctness off - how to fix: https://github.com/pawn-lang/YSI-Includes/commit/ab75ea38987e6a7935aa3100eba5284cb3d706e1
 #pragma warning disable 239
 #pragma warning disable 214
+#pragma warning disable 213 // disable required bool: prefix for booleans
 
 //-------------------------------------------<[ Biblioteki ]>------------------------------------------------//
 //-                                                                                                         -//
 #include <a_samp>
 #define FIX_ispacked 0 
+#define FIX_OnClientCheckResponse 0
 #include <fixes>
 
 //-------<[ Pluginy ]>-------
@@ -64,7 +66,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 // #include <requests>
-// #include <colandreas>
 
 //-------<[ Include ]>-------
 #include <a_http>
@@ -84,7 +85,11 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <indirection>
 #include <amx_assembly\addressof>
 //redefinition from y_playerarray.inc
-#undef PlayerArray 
+#undef PlayerArray
+
+#include <colandreas>
+#include <colandreas_streamer_integrate>
+
 #include <sort-inline>
 //nex-ac settings
 #define AC_MAX_CONNECTS_FROM_IP		3
@@ -94,9 +99,10 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_USE_AMMUNATIONS false
 #define AC_USE_RESTAURANTS false
 #define AC_USE_CASINOS false
+#include <progress2>
+#include <Pawn.RakNet>
 #include <nex-ac>
 #include <md5>
-#include <progress2>
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
@@ -108,11 +114,21 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <map>
 #include <mapfix>
 
+#if defined _colandreas_included
+	#include "obiekty\colandreas_removebuildings.pwn"
+	hook OnGameModeInit()
+	{
+		printf("ColAndreas - usuwanie budynków i inicjalizacja mapy.");
+		ColAndreas_UsunBudynki();
+		CA_Init();
+	}
+#endif
+
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
 #include "VERSION.pwn"
 #define DEBUG_MODE 0 //1- DEBUG_MODE ON | 0- DEBUG_MODE OFF
-#define RESOURCES_LINK "http://147.135.199.44:8100/"
+#define RESOURCES_LINK "http://217.182.79.83:8100/"
 
 #if !defined gpci
 native gpci (playerid, serial [], len);
@@ -265,7 +281,7 @@ public OnGameModeInit()
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
 	MruMySQL_IloscLiderowLoad();
-
+	
 	
 	DefaultItems_LicenseCost();
 
@@ -860,7 +876,7 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
         if(kolid != -1 && OilData[kolid][oilHP] > 0)
         {
             OnPlayerEnterOilSpot(playerid);
-            return;
+            return 1;
         }
         kolid = -1;
         for(new i=0;i<MAX_KOLCZATEK;i++)
@@ -874,9 +890,10 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
         if(kolid != -1)
         {
             OnPlayerEnterSpikes(playerid);
-            return;
+            return 1;
         }
     }
+	return 1;
 }
 
 public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
@@ -1050,16 +1067,9 @@ public OnPlayerConnect(playerid)
 		KickEx(playerid);
 		return 1;
     }*/
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
+	if(regex_match(nick, "^(Le)?[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
-		KickEx(playerid);
-		return 1;
-	}
-	//Nick bez wulgaryzmów
-	if(CheckVulgarityString(nick) == 1)
-	{
-		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick zawiera wulgaryzmy/niedozwolone s³owa - zmieñ go!"); 
 		KickEx(playerid);
 		return 1;
 	}
@@ -2122,7 +2132,12 @@ public OnPlayerSpawn(playerid)
 	}
 	else
 	{
-		SetPlayerVirtualWorld(playerid, 0);
+		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0)
+		{
+			ALockdown_SetLockdownVW(playerid);
+		}
+		else
+			SetPlayerVirtualWorld(playerid, 0);
 	}
 	DeletePVar(playerid, "Vinyl-bilet");
     DeletePVar(playerid, "Vinyl-VIP");
@@ -2362,7 +2377,8 @@ SetPlayerSpawnPos(playerid)
 			Wchodzenie(playerid);
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
-			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
+			if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
+			else SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
 			if(GetPLocal(playerid) == PLOCAL_INNE_BANK || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
 	        {
 				sendTipMessage(playerid, "W banku nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
@@ -2378,7 +2394,8 @@ SetPlayerSpawnPos(playerid)
 		    {
 		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
-				SetPlayerVirtualWorld(playerid, 0); 
+				if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
+				else SetPlayerVirtualWorld(playerid, 0); 
 				if(GetPlayerFraction(playerid) > 0) //Spawn Frakcji
 				{
 				    switch(GetPlayerFraction(playerid))
@@ -5819,8 +5836,18 @@ OnPlayerLogin(playerid, password[])
 			KickEx(playerid);
 			return 1;
 		}
-		
 
+		//fix bug maska
+		foreach(new i : Player){
+			if(IsPlayerConnected(i) && playerid != INVALID_PLAYER_ID && i != playerid){
+				if(PlayerInfo[i][pUID] == PlayerInfo[playerid][pUID]){
+					SendClientMessage(playerid, COLOR_PANICRED, "Konto jest juz zalogowane!");
+					KickEx(playerid);
+					return 1;
+				}
+			}
+		}
+		
 		//Nadawanie pieniêdzy:
 		ResetujKase(playerid);
 		if(PlayerInfo[playerid][pCash] < 0)
@@ -6052,7 +6079,7 @@ OnPlayerLogin(playerid, password[])
 			if(GetPVarInt(playerid, "ChangingPassword") != 1)
 				ShowPlayerDialogEx(playerid, 235, DIALOG_STYLE_INPUT, "Weryfikacja", "Logujesz siê jako cz³onek administracji. Zostajesz poproszony o wpisanie w\nponi¿sze pole has³a weryfikacyjnego. Pamiêtaj, aby nie podawaæ go nikomu!", "Weryfikuj", "WyjdŸ");
         }
-        else if(PlayerInfo[playerid][pJailed] == 0)
+        else if(PlayerInfo[playerid][pJailed] == 0 && ALockdown_Check(playerid) == false)
         {
     		lowcap[playerid] = 1;
 			if(GetPVarInt(playerid, "ChangingPassword") != 1){
@@ -6078,6 +6105,7 @@ OnPlayerLogin(playerid, password[])
 		SendClientMessage(playerid, COLOR_WHITE, "Aby zacz¹æ grê musisz przejœæ procedury rejestracji.");
 		ShowPlayerDialogEx(playerid, 70, DIALOG_STYLE_MSGBOX, "Witaj na Mrucznik Role Play", "Witaj na serwerze Mrucznik Role Play\nJeœli jesteœ tu nowy, to przygotowaliœmy dla ciebie poradnik\nZa chwilê bêdziesz móg³ go obejrzeæ, lecz najpierw bêdziesz musia³ opisaæ postaæ któr¹ bêdziesz sterowa³\nAby przejœæ dalej wciœnij przycisk 'dalej'", "Dalej", "");
     }
+	ALockdown_OnPlayerLogin(playerid);
 	return 1;
 }
 

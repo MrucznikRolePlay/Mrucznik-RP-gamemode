@@ -31,15 +31,15 @@
 
 //-------<[ include ]>-------
 #include "kask\kask.pwn"
-#include "op\op.pwn"
 #include "zp\zp.pwn"
+#include "op\op.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_kask();
-    command_op();
     command_zp();
+    command_op();
     
 }

@@ -2967,7 +2967,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            {
 					case 0:
 					{
-						if (kaska[playerid] > 50000)
+						if (kaska[playerid] > 56500)
 						{
 							if(PlayerGames[playerid] >= 4)
 							{
@@ -2979,7 +2979,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
-							ZabierzKase(playerid, 50000);
+							ZabierzKase(playerid, 56500);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    { 
 								if(playerValue > winValue && playerValue >= 85)
@@ -17561,7 +17561,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
-	else if(ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	else if(mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
 	{
 		return 1;
 	}

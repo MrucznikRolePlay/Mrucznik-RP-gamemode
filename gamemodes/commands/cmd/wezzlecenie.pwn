@@ -32,18 +32,18 @@ YCMD:wezzlecenie(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pJob] == JOB_TRUCKER)
     {
-        return sendErrorMessage(playerid, "Tymczasowo zablokowane.");
-        // new veh = GetPlayerVehicleID(playerid);
-        // if(veh == 0) return sendTipMessage(playerid, "Musisz byÊ w pojeüdzie firmowym.");
-        // if(Car_GetOwnerType(veh) != CAR_OWNER_JOB || Car_GetOwner(veh) != JOB_TRUCKER) return sendTipMessage(playerid, "Musisz byÊ w pojeüdzie firmowym.");
-        // if(GetVehicleModel(veh) != 578) return sendErrorMessage(playerid, " Tym pojazdem nie weümiesz zlecenia.");
+        //return sendErrorMessage(playerid, "Tymczasowo zablokowane.");
+         new veh = GetPlayerVehicleID(playerid);
+         if(veh == 0) return sendTipMessage(playerid, "Musisz byÊ w pojeüdzie firmowym.");
+         if(Car_GetOwnerType(veh) != CAR_OWNER_JOB || Car_GetOwner(veh) != JOB_TRUCKER) return sendTipMessage(playerid, "Musisz byÊ w pojeüdzie firmowym.");
+         if(GetVehicleModel(veh) != 578) return sendErrorMessage(playerid, " Tym pojazdem nie weümiesz zlecenia.");
 
-        // if(GetPVarInt(playerid, "trans") == 0)
-        // {
-        //     ShowPlayerDialogEx(playerid, D_TRANSPORT, DIALOG_STYLE_LIST, "Rodzaj zlecenia", "Szybkie zlecenie\nCentrum transportu", "Wybierz", "Wyjdü");
-        // }
-        // else return sendErrorMessage(playerid, "Masz juø zlecenie.");
-        // return 1;
+         if(GetPVarInt(playerid, "trans") == 0)
+         {
+             ShowPlayerDialogEx(playerid, D_TRANSPORT, DIALOG_STYLE_LIST, "Rodzaj zlecenia", "Szybkie zlecenie\nCentrum transportu", "Wybierz", "Wyjdü");
+         }
+         else return sendErrorMessage(playerid, "Masz juø zlecenie.");
+         return 1;
     }
 
 	new string[128];

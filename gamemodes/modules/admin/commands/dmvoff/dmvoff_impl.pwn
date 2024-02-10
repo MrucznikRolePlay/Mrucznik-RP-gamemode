@@ -25,12 +25,12 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dmvoff_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
+    if( (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid)) || (IsAnInstructor(playerid) && PlayerInfo[playerid][pRank] >= 4) )
     {
         new string[124];
         DestroyActorsInDMV(playerid);
-        sendTipMessage(playerid, "Wy³¹czy³eœ boty w urzêdzie miasta LS!"); 
-        format(string, sizeof(string), "Administrator %s wy³¹czy³ zautomatyzowany Urz¹d miasta!", GetNickEx(playerid)); 
+        sendTipMessage(playerid, "Wy³¹czy³ boty w urzêdzie miasta LS!"); 
+        format(string, sizeof(string), "Urzêdnik %s wy³¹czy³ zautomatyzowany Urz¹d miasta!", GetNickEx(playerid)); 
         SendMessageToAdminEx(string, COLOR_P@, 2);
     }
     else

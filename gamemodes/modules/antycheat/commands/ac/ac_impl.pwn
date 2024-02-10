@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
     #pragma unused inputtext
     if(dialogid == DIALOG_AC_PANEL)
