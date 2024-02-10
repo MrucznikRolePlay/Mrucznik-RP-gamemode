@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 liderranga                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,15 +27,45 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "liderranga\liderranga.pwn"
-
+#include "liderranga_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_liderranga()
 {
-    command_liderranga();
+    new command = Command_GetID("liderranga");
+
+    //aliases
+    Command_AddAlt(command, "liderrank");
+    Command_AddAlt(command, "liderrangi");
+    Command_AddAlt(command, "leaderranga");
+    Command_AddAlt(command, "leaderrank");
+    Command_AddAlt(command, "leaderrangi");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:liderranga(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Edycja rang frakcji.");
+        return 1;
+    }
+    //fetching params
+    new rank, rankName[32];
+    if(sscanf(params, "dS()[32]", rank, rankName))
+    {
+        sendTipMessage(playerid, "U¿yj /liderranga [numer rangi] [nazwa rangi (wpisz - aby usun¹æ, lub nic aby podejrzeæ)] ");
+        return 1;
+    }
+    
+    //command body
+    return command_liderranga_Impl(playerid, rank, rankName);
 }
