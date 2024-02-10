@@ -109,6 +109,12 @@ command_lidercar_ranga(playerid, vehicleUID, opcje[256])
         return 1;
     }
 
+    if(rank < 0 || rank > 9) 
+    {
+        sendErrorMessage(playerid, "Ranga od 0 do 9!");
+        return 1;
+    }
+
     // save rank
     CarData[vehicleUID][c_Rang] = rank;
     Car_Save(vehicleUID, CAR_SAVE_OWNER);
