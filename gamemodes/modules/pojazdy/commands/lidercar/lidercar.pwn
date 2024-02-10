@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  lidercar                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,43 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "lidercar\lidercar.pwn"
-#include "spawnall\spawnall.pwn"
-#include "sprzedajneon\sprzedajneon.pwn"
-
+#include "lidercar_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_lidercar()
 {
-    command_lidercar();
-    command_spawnall();
-    command_sprzedajneon();
+    new command = Command_GetID("lidercar");
+
+    //aliases
+    Command_AddAlt(command, "liderveh");
+    Command_AddAlt(command, "leadercar");
+    Command_AddAlt(command, "leaderveh");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:lidercar(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komenda dla liderów frakcji i organizacji pozwalaj¹ca zarz¹dzaæ ich pojazdem.");
+        return 1;
+    }
+    //fetching params
+    new akcja[8], opcje[256];
+    if(sscanf(params, "s[8]S()[256]", akcja, opcje))
+    {
+        sendTipMessage(playerid, "U¿yj /lidercar [parkuj/przemaluj/ranga/opis] [opcje specyficzne dla wybranej akcji] ");
+        return 1;
+    }
+    
+    //command body
+    return command_lidercar_Impl(playerid, akcja, opcje);
 }
