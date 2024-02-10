@@ -534,11 +534,13 @@ AC_AntyVehSpamLag()
 	static v_close_count;
 	static string[128];
 	static Float:v_pos[MAX_VEHICLES][3];
+	static Float:v_bbox[MAX_VEHICLES][8][3];
 
 	// Zapisujemy pozycje wszystkich pojazdów na serwerze
 	foreach(new v : Vehicle)
 	{
 		GetVehiclePos(v, v_pos[v][0], v_pos[v][1], v_pos[v][2]);
+		GetVehicleBoundingBox(v, v_bbox[v]);
 	}
 
 	foreach(new v : Vehicle)
@@ -557,7 +559,7 @@ AC_AntyVehSpamLag()
 					v_distance = GetDistanceBetweenPoints(v_pos[v][0], v_pos[v][1], v_pos[v][2], 
 						v_pos[v_other][0], v_pos[v_other][1], v_pos[v_other][2]);
 
-					if(v_distance <= 2.0)
+					if(CheckIfCuboidsIntersect(v_bbox[v], v_bbox[v_other]))
 					{
 						v_close_count++;
 						v_to_respawn[v_other] = true;
