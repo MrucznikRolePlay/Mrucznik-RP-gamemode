@@ -66,6 +66,7 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
         command_lidercar_opis(playerid, vehicleID, vehicleUID, lider, org, opcje);
     }*/ else {
         sendErrorMessage(playerid, "Niepoprawna opcja!");
+        StaryCzas[playerid] -= 200;
         Command_ReProcess(playerid, "lidercar", true);
     }
 
@@ -74,6 +75,7 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
 
 command_lidercar_parkuj(playerid)
 {
+    StaryCzas[playerid] -= 200;
     Command_ReProcess(playerid, "zaparkuj", false);
     return 1;
 }
