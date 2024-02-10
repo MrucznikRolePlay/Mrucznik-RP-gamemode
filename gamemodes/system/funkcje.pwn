@@ -1,6 +1,10 @@
 //funkcje.pwn
 //FUNKCJE DLA CA£EGO SERWERA
 
+stock Float:GetDistanceBetweenPoints(Float:x1, Float:y1, Float:z1, Float:x2, Float:y2, Float:z2)
+{
+    return VectorSize(x1-x2, y1-y2, z1-z2);
+}
 
 /* SSCANF FIX */
 SSCANF:fix(string[])
@@ -12481,6 +12485,20 @@ PursuitMode(playerid, giveplayerid)
 	{
 		sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
 	}
+}
+
+// https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn
+stock IsVehicleUpsideDown(vehicleid)
+{
+    new Float:quat_w, Float:quat_x, Float:quat_y, Float:quat_z;
+    GetVehicleRotationQuat(vehicleid, quat_w, quat_x, quat_y, quat_z);
+    return (
+        floatabs(
+            atan2(2 * (quat_y * quat_z + quat_w * quat_x),
+                quat_w * quat_w - quat_x * quat_x - quat_y * quat_y + quat_z * quat_z
+            )
+        ) > 90.0
+    );
 }
 
 public DeathAdminWarning(playerid, killerid, reason)

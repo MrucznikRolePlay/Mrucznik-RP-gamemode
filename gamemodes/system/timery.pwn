@@ -1,5 +1,7 @@
 //timery.pwn
 
+forward AC_AntyVehSpamLag();
+
 //25.06.2014 Aktualizacja timerów (wszystkich) - optymalizacja Kubi
 forward SpecToggle(playerid);
 public SpecToggle(playerid)
@@ -936,7 +938,7 @@ public MainTimer()
     }
     if(TICKS_3Sec == 2)
     {
-    	
+    	AC_AntyVehSpamLag();
         VehicleUpdate();
         CustomPickups();
         GangZone_ShowInfoToParticipants();

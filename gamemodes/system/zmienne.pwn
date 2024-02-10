@@ -25,7 +25,15 @@ new Float:czitY;
 new Float:czitZ;
 
 new timerAC[MAX_PLAYERS];
-new timeAC[MAX_PLAYERS]; 
+new timeAC[MAX_PLAYERS];
+
+new timeFakeVehRespawn[MAX_PLAYERS] = {0, ...}; // czas (tick) kiedy gracz ostatnio utopi³ pojazd (albo udawa³, ¿e go utopi³, by je zrespawnowaæ)
+new countFakeVehRespawn[MAX_PLAYERS] = {0, ...}; // ile razy w ci¹gu ostatnich 20 minut gracz utopi³ pojazd (albo udawa³, ¿e go utopi³, by je zrespawnowaæ)
+new unoccupiedVehToCheckAC[MAX_VEHICLES] = {false, ...}; // true je¿eli w przeci¹gu ostatnich 3 sekund pozycja danego pojazdu zosta³a zmieniona przez synchronizacjê pojazdu bez kierowcy (UnoccupiedSync)
+new unoccupiedVehToCheckPlayersAC[MAX_VEHICLES][MAX_PLAYERS] = {{false, ...}, ...}; // true dla danego pojazdu v i dla danego gracza p, jezeli to gracz p dokona³ synchronizacji pojazdu v (UnoccupiedSync)
+new unoccupiedVehBlockAC[MAX_PLAYERS] = {false, ...}; // true je¿eli na gracza zosta³a za³o¿ona blokada synchronizacji pojazdów bez kierowcy
+new performUnoccupiedVehCheckAC = false; // true je¿eli pozycja któregokolwiek pojazdu zosta³a zmieniona w przeci¹gu ostatnich 3 sekund przez synchronizacjê typu UnoccupiedSync
+
 //doors
 new noAccessCome[MAX_PLAYERS]; 
 
@@ -1112,6 +1120,9 @@ ZerujZmienne(playerid)
 	organizacje_clearCache(playerid);
 	//z disconecta
 
+	timeFakeVehRespawn[playerid] = 0;
+	countFakeVehRespawn[playerid] = 0;
+
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
 
     PlayerInfo[playerid][pDescLabel] = tmp_label;
@@ -1439,6 +1450,13 @@ ZerujZmienne(playerid)
 
     strdel(PlayerDesc[playerid], 0, 128 char);
     strpack(PlayerDesc[playerid], "BRAK");
+
+	foreach(new v : Vehicle) 
+	{
+		unoccupiedVehToCheckPlayersAC[v][playerid] = false;
+	}
+	unoccupiedVehBlockAC[playerid] = false;
+
 	return 1;
 }
 //EOF
