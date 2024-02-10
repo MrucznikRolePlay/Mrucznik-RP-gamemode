@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_lidercar_Impl(playerid, akcja[8], opcje[256])
+command_lidercar_Impl(playerid, akcja[16], opcje[256])
 {
     if(!orgIsLeader(playerid) && PlayerInfo[playerid][pLider] == 0)
     {

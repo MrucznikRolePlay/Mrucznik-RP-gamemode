@@ -11,7 +11,7 @@
     "parameters": [
         {
             "type": "string",
-            "size": "8",
+            "size": "16",
             "name": "akcja",
             "description": "parkuj/przemaluj/ranga"
         },
