@@ -3700,21 +3700,6 @@ IsPlayerInTheirFractionVehicle(playerid)
 	return 0;
 }
 
-IsPlayerInTheirFractionVehicle(playerid)
-{
-	new vehicleid = GetPlayerVehicleID(playerid);
-	if(vehicleid != 0)
-	{
-		new lcarid = VehicleUID[vehicleid][vUID];
-		if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FRACTION && CarData[lcarid][c_Owner] == GetPlayerFraction(playerid))
-		{
-			return 1;
-		}
-	} 
-
-	return 0;
-}
-
 IsAFractionGasStationValidUser(playerid)
 {
 	if(IsPlayerConnected(playerid) && IsPlayerInTheirFractionVehicle(playerid))
