@@ -2374,9 +2374,15 @@ public JednaSekundaTimer()
 						new cena_naprawy = 7500;
 
 						if(IsAPorzadkowy(i) && IsPlayerInTheirFractionVehicle(i))
-						{// 25% (GovernmentServicesPriceMultiplier) ceny za naprawê w sprayu dla frakcji porz¹dkowych
-							new Float:GovernmentServicesPriceMultiplier = 0.25;
-							cena_naprawy = floatround(float(cena_naprawy) * GovernmentServicesPriceMultiplier);
+						{// dla pojazdów frakcji porz¹dkowych 50% nale¿noœci idzie z sejfu
+							new player_frac = GetPlayerFraction(i);
+							new price_half = floatround(0.5 * float(cena_naprawy));
+							if(Sejf_Frakcji[player_frac] >= price_half)
+							{
+								Sejf_Add(player_frac, -price_half);
+								cena_naprawy = price_half;
+								SendClientMessage(i, COLOR_LIGHTBLUE,"Po³owa kosztów naprawy zosta³a op³acona ze œrodków frakcji.");
+							}
 						}
 
 				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", cena_naprawy);
@@ -3263,9 +3269,15 @@ public Fillup()
 			new FillUpPrice = FillUp * 120;
 
 			if(IsAPorzadkowy(i) && IsPlayerInTheirFractionVehicle(i))
-			{// na zwyk³ych stacjach 25% (GovernmentServicesPriceMultiplier) ceny za paliwo dla frakcji porz¹dkowych
-				new Float:GovernmentServicesPriceMultiplier = 0.25;
-				FillUpPrice = floatround(GovernmentServicesPriceMultiplier * float(FillUpPrice));
+			{// dla pojazdów frakcji porz¹dkowych 50% nale¿noœci idzie z sejfu
+				new player_frac = GetPlayerFraction(i);
+				new price_half = floatround(0.5 * float(FillUpPrice));
+				if(Sejf_Frakcji[player_frac] >= price_half)
+				{
+					Sejf_Add(player_frac, -price_half);
+					FillUpPrice = price_half;
+					SendClientMessage(i, COLOR_LIGHTBLUE,"Po³owa kosztów tankowania zosta³a op³acona ze œrodków frakcji.");
+				}
 			}
 
 			if(kaska[i] >= FillUpPrice)
