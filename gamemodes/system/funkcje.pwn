@@ -12486,6 +12486,114 @@ PursuitMode(playerid, giveplayerid)
 	}
 }
 
+CalculateDotProduct(Float:a[], Float:b[])
+{
+	return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+CheckIfCuboidsIntersect(Float:c[][], Float:c2[][])
+{
+	new i = {c[1][0] - c[0][0], c[1][1] - c[0][1], c[1][2] - c[0][2]};
+	new j = {c[3][0] - c[0][0], c[3][1] - c[0][1], c[3][2] - c[0][2]};
+	new k = {c[4][0] - c[0][0], c[4][1] - c[0][1], c[4][2] - c[0][2]};
+
+	new ii = CalculateDotProduct(i, i);
+	new jj = CalculateDotProduct(j, j);
+	new kk = CalculateDotProduct(k, k);
+
+	for(new i = 0; i < 8; i++)
+	{
+		new v = {c2[i][0] - c[0][0], c2[i][1] - c[0][1], c2[i][2] - c[0][2]};
+		new vi = CalculateDotProduct(v, i);
+		new vj = CalculateDotProduct(v, j);
+		new vk = CalculateDotProduct(v, k);
+
+		if(0 < vi && vi < ii &&
+			0 < vj && vj < jj &&
+			0 < vk && vk < kk)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+CalculateQuatRotatedPoint(Float:x, Float:y, Float:z, &Float:xr, &Float:yr, &Float:zr, Float:rm[][])
+{
+	xr = rm[0][0] * x + 
+		rm[0][1] * y + 
+		rm[0][2] * z;
+	yr = rm[1][0] * x + 
+		rm[1][1] * y + 
+		rm[1][2] * z;
+	zr = rm[2][0] * x + 
+		rm[2][1] * y + 
+		rm[2][2] * z;
+}
+
+CalculateRotationMatrixFromQuat(Float:d, Float:a, Float:b, Float:c, Float:rm[][])
+{
+	rm[0][0] = (1 - 2 * (c*c + d*d));
+	rm[0][1] = (2 * (b * c - a * d));
+	rm[0][2] = (2 * (b * d + a * c));
+	rm[1][0] = (2 * (b * c + a * d));
+	rm[1][1] = (1 - 2 * (b * b + d * d));
+	rm[1][2] = (2 * (c * d - a * b));
+	rm[2][0] = (2 * (b * d - a * c)); 
+	rm[2][1] = (2 * (c * d + a * b)); 
+	rm[2][2] = (1 - 2 * (b * b + c * c));
+}
+
+AreTwoVehiclesColliding(vehicleid1, vehicleid2)
+{
+	new Float:x1, Float:y1, Float:z1, Float:x2, Float:y2, Float:z2;
+	GetVehiclePos(vehicleid1, x1, y1, z1);
+	GetVehiclePos(vehicleid2, x2, y2, z2);
+
+	new vm1 = GetVehicleModel(vehicleid1);
+	new vm2 = GetVehicleModel(vehicleid1);
+
+	new Float:wx1, Float:wy1, Float:wz1, Float:wx2, Float:wy2, Float:wz2;
+	GetVehicleModelInfo(vm1, VEHICLE_MODEL_INFO_SIZE, wx1, wy1, wz1);
+	GetVehicleModelInfo(vm2, VEHICLE_MODEL_INFO_SIZE, wx2, wy2, wz2);
+
+	new Float:a1, Float:b1, Float:c1, Float:d1, Float:a2, Float:b2, Float:c2, Float:d2;
+	GetVehicleRotationQuat(vehicleid1, d1, a1, b1, c1);
+	GetVehicleRotationQuat(vehicleid2, d2, a2, b2, c2);
+
+	new Float:cp1_nr[8][3] = {{x1 - wx1, y1 - wy1, z1 - wz1},
+						{x1 - wx1, y1 + wy1, z1 - wz1},
+						{x1 + wx1, y1 + wy1, z1 - wz1},
+						{x1 + wx1, y1 - wy1, z1 - wz1},
+						{x1 - wx1, y1 - wy1, z1 + wz1},
+						{x1 - wx1, y1 + wy1, z1 + wz1},
+						{x1 + wx1, y1 + wy1, z1 + wz1},
+						{x1 + wx1, y1 - wy1, z1 + wz1}};
+
+	new Float:cp2_nr[8][3] = {{x2 - wx2, y2 - wy2, z2 - wz2},
+						{x2 - wx2, y2 + wy2, z2 - wz2},
+						{x2 + wx2, y2 + wy2, z2 - wz2},
+						{x2 + wx2, y2 - wy2, z2 - wz2},
+						{x2 - wx2, y2 - wy2, z2 + wz2},
+						{x2 - wx2, y2 + wy2, z2 + wz2},
+						{x2 + wx2, y2 + wy2, z2 + wz2},
+						{x2 + wx2, y2 - wy2, z2 + wz2}};
+
+	new Float:cp1[8][3], Float:cp1[8][3]; // corners positions of both cars after rotation
+	new Float:rm1[3][3], Float:rm2[3][3]; // rotation matrices
+	CalculateRotationMatrixFromQuat(d1, a1, b1, c1, rm1);
+	CalculateRotationMatrixFromQuat(d2, a2, b2, c2, rm2);
+
+	for(new i = 0; i < 8; i++)
+	{
+		CalculateQuatRotatedPoint(cp1_nr[i][0], cp1_nr[i][1], cp1_nr[i][2], cp1[i][0], cp1[i][1], cp1[i][2], rm1);
+		CalculateQuatRotatedPoint(cp2_nr[i][0], cp2_nr[i][1], cp2_nr[i][2], cp2[i][0], cp2[i][1], cp2[i][2], rm2);
+	}
+
+	CheckIfCuboidsIntersect(cp1, cp2);
+}
+
 // https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn
 stock IsVehicleUpsideDown(vehicleid)
 {
