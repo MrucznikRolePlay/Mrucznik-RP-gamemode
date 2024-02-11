@@ -3,8 +3,8 @@
     "description": "System lockdown dla administracji",
     "author": "Sandal",
     "timers": true,
-    "callbacks": false,
-    "mysql": true,
+    "callbacks": true,
+    "mysql": false,
     "files": [],
     "commands": true,
     "date": "01.02.2024"

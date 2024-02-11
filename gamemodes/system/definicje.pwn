@@ -5,6 +5,7 @@
 //wy³¹czenie sampowych metod obiektów
 #define CreateObject(%0) ERROR_CREATE_OBJECT(%0)
 #define DestroyObject(%0) ERROR_OBJECT
+#undef IsValidObject
 #define IsValidObject(%0) ERROR_OBJECT
 #define MoveObject(%0) ERROR_OBJECT
 #define StopObject(%0) ERROR_OBJECT

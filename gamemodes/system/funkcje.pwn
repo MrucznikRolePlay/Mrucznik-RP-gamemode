@@ -1,6 +1,10 @@
 //funkcje.pwn
 //FUNKCJE DLA CA£EGO SERWERA
 
+stock Float:GetDistanceBetweenPoints(Float:x1, Float:y1, Float:z1, Float:x2, Float:y2, Float:z2)
+{
+    return VectorSize(x1-x2, y1-y2, z1-z2);
+}
 
 /* SSCANF FIX */
 SSCANF:fix(string[])
@@ -28,7 +32,7 @@ SSCANF:fix(string[])
 	return ret;
 }
 
-strToUpper(str[])
+stock strToUpper(str[])
 {
 	for(new i = 0, n = strlen(str); i <n; i ++)
     {
@@ -37,7 +41,7 @@ strToUpper(str[])
     return 1;
 } 
 
-GenString( string[ ] , size = sizeof string )
+stock GenString( string[ ] , size = sizeof string )
 {
     static const Data[ ] = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";//add more characters if they want to include in string
     new i;
@@ -1707,7 +1711,6 @@ Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
         SetPVarInt(playerid, "kostka-player", 0);
     }
     Log(payLog, INFO, "%s wygra³ rzuty kostk¹ z %s na kwotê %d$ %s", GetPlayerLogName(playerid), GetPlayerLogName(loser), kasa, quit ? "(quit)" : "");
-    Sejf_Add(19, podatek);
 
 
     return 1;
@@ -2451,6 +2454,11 @@ IsABOR(playerid)
 		}
 	}
 	return 0;
+}
+
+IsAPorzadkowy(playerid)
+{
+	return IsAPolicja(playerid) || IsAMedyk(playerid) || IsABOR(playerid);
 }
 
 /*
@@ -3677,6 +3685,33 @@ IsAtGasStation(playerid)
 	return 0;
 }
 
+IsPlayerInTheirFractionVehicle(playerid)
+{
+	new vehicleid = GetPlayerVehicleID(playerid);
+	if(vehicleid != 0)
+	{
+		new lcarid = VehicleUID[vehicleid][vUID];
+		if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FRACTION && CarData[lcarid][c_Owner] == GetPlayerFraction(playerid))
+		{
+			return 1;
+		}
+	} 
+
+	return 0;
+}
+
+IsAFractionGasStationValidUser(playerid)
+{
+	if(IsPlayerConnected(playerid) && IsPlayerInTheirFractionVehicle(playerid))
+	{
+		if(GetPlayerFraction(playerid) == FRAC_LSPD && PlayerToPoint(12.0, playerid, 1530.2, -1673.4, 6.5))
+		{// tankowanie dla LSPD - parking dolny LSPD
+			return 1;
+		}
+	}
+	return 0;
+}
+
 IsAtBar(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -3709,7 +3744,7 @@ IsAtWarsztat(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 5.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 5.0, 1805.4418,-1713.5634,13.5176))
+		if(IsPlayerInRangeOfPoint(playerid, 18.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 18.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 18.0, 1805.4418,-1713.5634,13.5176))
 		{//Warsztat czerwony
 		    return 1;
 		}
@@ -5091,6 +5126,7 @@ orgSetSpawnAtPlayerPos(playerid, orgid)
     GetPlayerPos(playerid, OrgInfo[orgid][o_Spawn][0], OrgInfo[orgid][o_Spawn][1], OrgInfo[orgid][o_Spawn][2]);
     GetPlayerFacingAngle(playerid, OrgInfo[orgid][o_Spawn][3]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, "ORG » Spawn zmieniony.");
+	orgSave(orgid, ORG_SAVE_TYPE_BASIC);
     return 1;
 }
 
@@ -11130,7 +11166,7 @@ TJD_JobEnd(playerid, bool:quiter=false)
     SetVehicleHealth(veh, 1000.0);
     Gas[veh] = 100;
 
-    PlayerInfo[playerid][pTruckSkill]+=PlayerInfo[playerid][pTruckSkill]+floatround(ile/5, floatround_floor);
+    PlayerInfo[playerid][pTruckSkill] += floatround(ile/5, floatround_floor);
 }
 
 TJD_CallCheckpoint(playerid, veh)
@@ -11476,7 +11512,8 @@ public TJD_UnloadTime(playerid, count, maxcount)
         if(TransportJobData[idx][eTJDStartX] == 0.0) speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[0][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[0][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[0][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         else speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[idx][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[idx][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[idx][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         if(speed < 8.5) ile = TransportJobData[idx][eTJDMoney];
-        else if(speed > 30) ile = TransportJobData[idx][eTJDMoney];
+        else if(speed > 30) ile = -TransportJobData[idx][eTJDMoney];
+		else ile = floatround(TransportJobData[idx][eTJDMoney] - ((speed - 8.5) * 100));
 
         format(str, 64, "Towar wy³adowany, zarabiasz %d$", ile);
         SendClientMessage(playerid, 0x00FF00FF, str);
@@ -12480,6 +12517,20 @@ PursuitMode(playerid, giveplayerid)
 	{
 		sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
 	}
+}
+
+// https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn
+stock IsVehicleUpsideDown(vehicleid)
+{
+    new Float:quat_w, Float:quat_x, Float:quat_y, Float:quat_z;
+    GetVehicleRotationQuat(vehicleid, quat_w, quat_x, quat_y, quat_z);
+    return (
+        floatabs(
+            atan2(2 * (quat_y * quat_z + quat_w * quat_x),
+                quat_w * quat_w - quat_x * quat_x - quat_y * quat_y + quat_z * quat_z
+            )
+        ) > 90.0
+    );
 }
 
 public DeathAdminWarning(playerid, killerid, reason)

@@ -33,8 +33,8 @@
 #include "dajbilet\dajbilet.pwn"
 #include "kupbilet\kupbilet.pwn"
 #include "zabierzbilet\zabierzbilet.pwn"
-#include "wywalibiza\wywalibiza.pwn"
 #include "panelibizy\panelibizy.pwn"
+#include "wywalibiza\wywalibiza.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -43,7 +43,7 @@ hook OnGameModeInit()
     command_dajbilet();
     command_kupbilet();
     command_zabierzbilet();
-    command_wywalibiza();
     command_panelibizy();
+    command_wywalibiza();
     
 }

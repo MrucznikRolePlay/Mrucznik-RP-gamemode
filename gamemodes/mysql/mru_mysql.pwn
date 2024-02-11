@@ -507,7 +507,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 
     if(!mysql_query(query)) fault=false;
 
-	format(query, sizeof(query), "INSERT INTO mru_presonalization ( \
+	format(query, sizeof(query), "INSERT INTO mru_personalization ( \
 		`UID`, \
 		`KontoBankowe`, \
 		`Ogloszenia`, \
@@ -523,23 +523,22 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 		`newbie`, \
 		`BronieScroll`) \
 	VALUES ( \
-		'%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d', '%d' \
+		%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d \
 	) \
 	ON DUPLICATE KEY UPDATE \
-		`KontoBankowe` = '%d', \
-		`Ogloszenia` = '%d', \
-		`LicznikPojazdu` = '%d', \
-		`OgloszeniaFrakcji` = '%d', \
-		`OgloszeniaRodzin` = '%d', \
-		`OldNick` = '%d', \
-		`CBRadio` = '%d', \
-		`Report` = '%d', \
-		`DeathWarning` = '%d', \
-		`KaryTXD` = '%d', \
-		`NewNick` = '%d', \
-		`newbie` = '%d',	\
-		`BronieScroll` = '%d'	\
-	WHERE `UID`= '%d'",
+		`KontoBankowe` = %d, \
+		`Ogloszenia` = %d, \
+		`LicznikPojazdu` = %d, \
+		`OgloszeniaFrakcji` = %d, \
+		`OgloszeniaRodzin` = %d, \
+		`OldNick` = %d, \
+		`CBRadio` = %d, \
+		`Report` = %d, \
+		`DeathWarning` = %d, \
+		`KaryTXD` = %d, \
+		`NewNick` = %d, \
+		`newbie` = %d,	\
+		`BronieScroll` = %d",
 	PlayerInfo[playerid][pUID],
 	PlayerPersonalization[playerid][PERS_KB],
 	PlayerPersonalization[playerid][PERS_AD],
@@ -567,8 +566,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_KARYTXD],
 	PlayerPersonalization[playerid][PERS_NEWNICK],
 	PlayerPersonalization[playerid][PERS_NEWBIE],
-	PlayerPersonalization[playerid][PERS_GUNSCROLL],
-	PlayerInfo[playerid][pUID]); 
+	PlayerPersonalization[playerid][PERS_GUNSCROLL]); 
 
 	//przywr�� maskowanie nicku (pNick)
 	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))

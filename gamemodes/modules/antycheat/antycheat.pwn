@@ -25,6 +25,13 @@
 
 //
 
+#include <YSI\y_hooks>
+
+//------------<[ Sta³e dla Pawn.RakNet ]>------------
+
+static const VEHICLE_DESTROYED = 136;
+static const UNOCCUPIED_SYNC = 209;
+
 //-----------------<[ Funkcje: ]>-------------------
 ProcessACCode(playerid, code)
 {
@@ -512,6 +519,149 @@ AC_AntyFakeKill(playerid, killerid, reason)
 
 	ProcessACCode(playerid, AC_CODE_FAKEKILL);
 	return 1;
+}
+
+//----------------<[ Spam UnoccupiedSync i piêtrzenie aut - lagi ]>-----------------------
+
+AC_AntyVehSpamLag()
+{
+	if(!performUnoccupiedVehCheckAC)
+	{
+		return;
+	}
+
+	static Float:v_distance;
+	static v_close_count;
+	static string[128];
+	static Float:v_pos[MAX_VEHICLES][3];
+
+	// Zapisujemy pozycje wszystkich pojazdów na serwerze
+	foreach(new v : Vehicle)
+	{
+		GetVehiclePos(v, v_pos[v][0], v_pos[v][1], v_pos[v][2]);
+	}
+
+	foreach(new v : Vehicle)
+	{
+		// Czy pojazd zosta³ przesuniêty przez synchronizacjê auta bez kierowcy?
+		if(unoccupiedVehToCheckAC[v])
+		{
+			v_close_count = 0;
+			new v_to_respawn[MAX_VEHICLES] = {false, ...}, p_sus_syncs[MAX_PLAYERS] = {0, ...};
+
+			// Zliczanie ile innych pojazdów znajduje siê w b. bliskiej odleg³oœci od auta przesuniêtego przez UnoccupiedSync
+			foreach(new v_other : Vehicle)
+			{
+				if(v != v_other)
+				{
+					v_distance = GetDistanceBetweenPoints(v_pos[v][0], v_pos[v][1], v_pos[v][2], 
+						v_pos[v_other][0], v_pos[v_other][1], v_pos[v_other][2]);
+
+					if(v_distance <= 2.0)
+					{
+						v_close_count++;
+						v_to_respawn[v_other] = true;
+					}
+				}
+			}
+
+			// Je¿eli pojazdów zbitych w zwarte k³êbowisko jest nie mniej ni¿ 4 (g³ówny pojazd 'v' i 3 inne), to podejmij odpowiednie dzia³ania
+			if(v_close_count >= 3)
+			{
+				v_to_respawn[v] = true;
+
+				new blockUnoccupiedThreshold = floatround(1.0 / 3.0 * float(v_close_count));
+				new sendAdminWarningThreshold = floatround(0.9 * float(v_close_count));
+
+				foreach(new v_respawn : Vehicle)
+				{
+					if(v_to_respawn[v_respawn])
+					{
+						// Sprawdzamy którzy gracze zsynchronizowali zmianê pozycji pojazdu bêd¹cego czêœci¹ k³êbowiska
+						foreach(new p : Player)
+						{
+							if(p_sus_syncs[p] != -1 && unoccupiedVehToCheckPlayersAC[v_respawn][p])
+							{
+								p_sus_syncs[p]++; // Zliczamy dla ilu pojazdów z k³êbowiska zmiana pozycji zosta³a zsynchronizowana przez danego gracza
+
+								// Je¿eli gracz zsynchronizowa³ zmiany pozycji dla wystarczaj¹cej liczby pojazdów z k³êbowiska, podejmujemy odpowiednie dzia³ania
+								if(p_sus_syncs[p] == blockUnoccupiedThreshold)
+								{
+									unoccupiedVehBlockAC[p] = true;
+									format(string, sizeof string, "AC: %s [%d] dosta³ blokadê na synchronizacjê pojazdów bez kierowcy.", GetNickEx(p), p);
+									SendCommandLogMessage(string);
+								}
+								if(p_sus_syncs[p] == sendAdminWarningThreshold)
+								{
+									format(string, sizeof string, "AC: %s [%d] BYÆ MO¯E próbuje lagowaæ pojazdami.", GetNickEx(p), p);
+									SendCommandLogMessage(string);
+									Log(warningLog, INFO, string);
+									p_sus_syncs[p] = -1; // oznaczenie, ¿e gracz przekroczy³ ju¿ najwy¿szy próg i nie trzeba go sprawdzaæ dla kolejnych pojazdów w k³êbowisku
+								}
+							}
+						}
+					}
+				}
+
+				// Po rozprawieniu siê z potencjalnymi winowajcami, zrespawnuj auta w k³êbowisku
+				foreach(new v_respawn : Vehicle)
+				{
+					if(v_to_respawn[v_respawn])
+					{
+						unoccupiedVehToCheckAC[v_respawn] = false; // Nie ma sensu po raz kolejny sprawdzaæ tych aut, bo zosta³y one ju¿ zrespawnowane
+						RespawnVehicleEx(v_respawn);
+					}
+				}
+			}
+
+			foreach(new p : Player)
+			{
+				unoccupiedVehToCheckPlayersAC[v][p] = false;
+			}
+
+			unoccupiedVehToCheckAC[v] = false;
+		}
+	}
+
+	performUnoccupiedVehCheckAC = false;
+}
+
+IPacket:UNOCCUPIED_SYNC(playerid, BitStream:bs)
+{
+    // Sprawdzenie czy na gracza zosta³a na³o¿ona blokada na synchronizacje pojazdów bez kierowcy
+	if(unoccupiedVehBlockAC[playerid])
+	{
+		return 0;
+	}
+
+	return 1;
+}
+
+// ----------------<[ AntiVehicleSpawn (https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn) ]>-----------------------
+
+IRPC:VEHICLE_DESTROYED(playerid, BitStream:bs)
+{
+    new vehicleid;
+
+    BS_ReadUint16(bs, vehicleid);
+
+    if (GetVehicleModel(vehicleid) < 400)
+    {
+        return 0;
+    }
+
+	new Float:health, Float:depth, Float:vehicledepth;
+
+    GetVehicleHealth(vehicleid, health);
+
+    if (health >= 250.0 &&
+        !CA_IsVehicleInWater(vehicleid, depth, vehicledepth) &&
+        !IsVehicleUpsideDown(vehicleid)
+    ) {
+        return 0;
+    }
+
+    return 1;
 }
 
 //end

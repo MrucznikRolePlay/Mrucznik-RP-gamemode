@@ -40,6 +40,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //const correctness off - how to fix: https://github.com/pawn-lang/YSI-Includes/commit/ab75ea38987e6a7935aa3100eba5284cb3d706e1
 #pragma warning disable 239
 #pragma warning disable 214
+#pragma warning disable 213 // disable required bool: prefix for booleans
 
 //-------------------------------------------<[ Biblioteki ]>------------------------------------------------//
 //-                                                                                                         -//
@@ -65,7 +66,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 // #include <requests>
-// #include <colandreas>
 
 //-------<[ Include ]>-------
 #include <a_http>
@@ -85,7 +85,11 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <indirection>
 #include <amx_assembly\addressof>
 //redefinition from y_playerarray.inc
-#undef PlayerArray 
+#undef PlayerArray
+
+#include <colandreas>
+#include <colandreas_streamer_integrate>
+
 #include <sort-inline>
 //nex-ac settings
 #define AC_MAX_CONNECTS_FROM_IP		3
@@ -95,9 +99,10 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define AC_USE_AMMUNATIONS false
 #define AC_USE_RESTAURANTS false
 #define AC_USE_CASINOS false
+#include <progress2>
+#include <Pawn.RakNet>
 #include <nex-ac>
 #include <md5>
-#include <progress2>
 #include <double-o-files2>
 #include <dialogs>
 #include <fadescreen>
@@ -109,6 +114,16 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <map>
 #include <mapfix>
 #include <getvehiclerotationquat_fix>
+
+#if defined _colandreas_included
+	#include "obiekty\colandreas_removebuildings.pwn"
+	hook OnGameModeInit()
+	{
+		printf("ColAndreas - usuwanie budynków i inicjalizacja mapy.");
+		ColAndreas_UsunBudynki();
+		CA_Init();
+	}
+#endif
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
@@ -267,7 +282,7 @@ public OnGameModeInit()
 	//-------<[ MySQL ]>-------
 	MruMySQL_Connect();//mysql
 	MruMySQL_IloscLiderowLoad();
-
+	
 	
 	DefaultItems_LicenseCost();
 
@@ -862,7 +877,7 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
         if(kolid != -1 && OilData[kolid][oilHP] > 0)
         {
             OnPlayerEnterOilSpot(playerid);
-            return;
+            return 1;
         }
         kolid = -1;
         for(new i=0;i<MAX_KOLCZATEK;i++)
@@ -876,9 +891,10 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
         if(kolid != -1)
         {
             OnPlayerEnterSpikes(playerid);
-            return;
+            return 1;
         }
     }
+	return 1;
 }
 
 public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
@@ -1052,7 +1068,7 @@ public OnPlayerConnect(playerid)
 		KickEx(playerid);
 		return 1;
     }*/
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
+	if(regex_match(nick, "^(Le)?[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
 		KickEx(playerid);

@@ -31,5 +31,5 @@ new Lockdown_assignedVW[MAX_PLAYERS];
 new Lockdown_Warning_Counter[MAX_PLAYERS];
 new Lockdown_Timer[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
-forward ALockdown_Timer(playerid);
+
 //end

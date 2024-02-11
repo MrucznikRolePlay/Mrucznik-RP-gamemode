@@ -31,21 +31,21 @@
 
 //-------<[ include ]>-------
 #include "profiler\profiler.pwn"
-#include "dmvon\dmvon.pwn"
 #include "setvregistration\setvregistration.pwn"
-#include "zmienwiek\zmienwiek.pwn"
-#include "dmvoff\dmvoff.pwn"
 #include "specshow\specshow.pwn"
+#include "dmvoff\dmvoff.pwn"
+#include "zmienwiek\zmienwiek.pwn"
+#include "dmvon\dmvon.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_profiler();
-    command_dmvon();
     command_setvregistration();
-    command_zmienwiek();
-    command_dmvoff();
     command_specshow();
+    command_dmvoff();
+    command_zmienwiek();
+    command_dmvon();
     
 }

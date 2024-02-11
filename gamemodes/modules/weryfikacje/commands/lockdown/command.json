@@ -1,11 +1,18 @@
 {
     "name": "lockdown",
-    "description": "System lockdown",
+    "description": "W³¹cza przetrzymywanie nowo zarejestrowanych kont w innym virtual wordzie do czasu /zweryfikuj od admina.",
     "permissions": [
-        "everyone"
+        "admini"
     ],
     "author": "Sandal",
     "aliases": [],
-    "parameters": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "typ",
+            "description": "0 = Wy³¹czenie, 1 = W³¹czenie dla kont z 0h, 2 = W³¹czenie dla kont z mniej ni¿ 3h",
+            "defaultValue": "-1"
+        }
+    ],
     "date": "01.02.2024"
 }

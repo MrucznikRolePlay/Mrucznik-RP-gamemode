@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                    anim                                                   //
+//                                                 zweryfikuj                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -35,6 +35,9 @@ command_zweryfikuj()
 {
     new command = Command_GetID("zweryfikuj");
 
+    //aliases
+    
+
     //permissions
     Group_SetCommand(Group_GetID("admini"), command, true);
     
@@ -55,7 +58,7 @@ YCMD:zweryfikuj(playerid, params[], help)
     new giveplayerid;
     if(sscanf(params, "r", giveplayerid))
     {
-        sendTipMessage(playerid, "U¿yj /zweryfikuj [Nick/ID]");
+        sendTipMessage(playerid, "U¿yj /zweryfikuj [Nick/ID] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))

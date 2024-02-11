@@ -2667,7 +2667,8 @@ CREATE TABLE `mru_ryby` (
   `Fid2` int(11) NOT NULL DEFAULT 0,
   `Fid3` int(11) NOT NULL DEFAULT 0,
   `Fid4` int(11) NOT NULL DEFAULT 0,
-  `Fid5` int(11) NOT NULL DEFAULT 0
+  `Fid5` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`Player`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_bin;
 
 -- --------------------------------------------------------

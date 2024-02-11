@@ -36,7 +36,7 @@ YCMD:paka(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
    	{
-		if(IsAPolicja(playerid) && PlayerInfo[playerid][pRank] >= 3)
+		if(IsAPolicja(playerid) && PlayerInfo[playerid][pRank] >= 2)
 		{
 			if(OnDuty[playerid] != 1 && IsAPolicja(playerid))
 			{

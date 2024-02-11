@@ -138,13 +138,13 @@ hook OnPlayerText(playerid, text[])
 			Tourett[playerid] = 0;
 		}
 	}
-	if(strfind(text, "0k", true) == 0)
+	/*if(strfind(text, "0k", true) == 0)
 	{
 		if(InfectPlayer(playerid, OK_DISEASE))
 		{
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Dopad³a Ciê 0k-zaraza!");
 		}
-	}
+	}*/
 	return 1;
 }
 
