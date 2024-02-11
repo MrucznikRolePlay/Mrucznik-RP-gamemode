@@ -112,7 +112,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <vector>
 #include <map>
 #include <mapfix>
-#include <getvehiclerotationquat_fix>
 
 #if defined _colandreas_included
 	#include "obiekty\colandreas_removebuildings.pwn"
