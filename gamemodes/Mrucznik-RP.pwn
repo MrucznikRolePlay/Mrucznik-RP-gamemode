@@ -1011,6 +1011,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!Player_CanUseCar(playerid, vehicleid))
         	return Player_RemoveFromVeh(playerid);
     }
+	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_BUSDRIVER) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpocz¹æ pracê");
 	// -- customowe parametry dla poszczególnych pojazdów
 	if(IsARower(vehicleid))
 	{
