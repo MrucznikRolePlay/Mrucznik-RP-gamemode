@@ -87,8 +87,8 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //redefinition from y_playerarray.inc
 #undef PlayerArray
 
-#include <colandreas>
-#include <colandreas_streamer_integrate>
+//#include <colandreas>
+//#include <colandreas_streamer_integrate>
 
 #include <sort-inline>
 //nex-ac settings

@@ -654,12 +654,14 @@ IRPC:VEHICLE_DESTROYED(playerid, BitStream:bs)
 
     GetVehicleHealth(vehicleid, health);
 
-    if (health >= 250.0 &&
-        !CA_IsVehicleInWater(vehicleid, depth, vehicledepth) &&
-        !IsVehicleUpsideDown(vehicleid)
-    ) {
-        return 0;
-    }
+	#if defined _colandreas_included
+		if (health >= 250.0 &&
+			!CA_IsVehicleInWater(vehicleid, depth, vehicledepth) &&
+			!IsVehicleUpsideDown(vehicleid)
+		) {
+			return 0;
+		}
+	#endif
 
     return 1;
 }
