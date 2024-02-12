@@ -6,7 +6,7 @@
 	"dependencies": [
 		"MrucznikRolePlay/amx_assembly:v4.69",
 		"MrucznikRolePlay/samp-log:v0.4",
-		"Zeex/samp-plugin-crashdetect:v4.20",
+		"Zeex/samp-plugin-crashdetect:v4.21",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
 		"MrucznikRolePlay/indirection",

@@ -4,6 +4,7 @@ FROM mrucznikpre as build
 
 WORKDIR /samp
 COPY . /samp
+COPY ./serverfiles/config.json /root/.config/sampctl/
 
 # build gm
 #RUN sampctl package ensure
