@@ -310,7 +310,7 @@ public OnGameModeInit()
     //
     BARIERKA_Init();
 
-	obiekty_OnGameModeInit();
+	//obiekty_OnGameModeInit();
 
     ZaladujDomy();
     orgLoad();
