@@ -1,4 +1,3 @@
-
 #!/bin/bash
 cd dependencies
 rm -rf amx_assembly
