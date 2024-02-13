@@ -12,6 +12,8 @@ RUN wget http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g
 RUN dpkg -i libssl1.0.0_1.0.2g-1ubuntu4.20_i386.deb
 RUN apt-get install libmysqlclient-dev -y
 
+RUN ln -s /samp /samp/scriptfiles/DANGEROUS_SERVER_ROOT
+
 RUN sampctl package ensure
 ENTRYPOINT ["sampctl"]
 CMD ["package", "run"]
