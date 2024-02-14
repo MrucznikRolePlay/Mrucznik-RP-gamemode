@@ -7012,7 +7012,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_WHITE, "Chodzi o to, ¿e w prawdziwym ¿yciu, nie zabija³byœ wszystkich dooko³a.");
 				SendClientMessage(playerid, COLOR_WHITE, "Wiêc jeœli chcesz kogoœ zabiæ, musisz mieæ wa¿ny powód.");
 				SendClientMessage(playerid, COLOR_WHITE, "OK, znasz ju¿ najwa¿niejsz¹ zasadê, resztê poznasz póŸniej.");
-	   			TutTime[playerid] = 1;
+	   			TutTime[playerid] = 111;
 		    }
 		    if(!response)
 		    {
