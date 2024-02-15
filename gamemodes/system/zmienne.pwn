@@ -1026,10 +1026,9 @@ new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
 new DomOgladany[MAX_PLAYERS];//SYSTEM DOMÓW BY MRUCZNIK
-new carselect[15];
+new carselect;
 new cbjstore[128];
 new motd[256];
-new rccounter = 0;
 new ghour = 0;
 new gminute = 0;
 new gsecond = 0;
@@ -1045,10 +1044,6 @@ new shifthour;
 
 new intrate = 1;
 new levelexp = 4;
-new SELLCAR1[] = { 1000, 1124, 1245, 1349, 1475, 1574, 1636, 1762, 1895, 1946, 2000 };
-new SELLCAR2[] = { 2099, 2135, 2255, 2378, 2457, 2563, 2614, 2721, 2878, 2988, 3000 };
-new SELLCAR3[] = { 3058, 3175, 3212, 3377, 3454, 3555, 3678, 3751, 3865, 3964, 4000 };
-new SELLCAR4[] = { 4077, 4123, 4275, 4378, 4422, 4565, 4613, 4752, 4897, 4911, 5000 };
 //new Float:ChangePos[MAX_PLAYERS][3];
 new ChangePos2[MAX_PLAYERS][2];
 new Float:PlayerPos[MAX_PLAYERS][6];

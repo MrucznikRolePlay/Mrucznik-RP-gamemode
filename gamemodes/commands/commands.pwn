@@ -499,7 +499,6 @@
 #include "cmd/trasybiegu.pwn"
 #include "cmd/ubranie.pwn"
 #include "cmd/ucisz.pwn"
-#include "cmd/ukradnij.pwn"
 #include "cmd/uid.pwn"
 #include "cmd/ulepsz.pwn"
 #include "cmd/unblock.pwn"

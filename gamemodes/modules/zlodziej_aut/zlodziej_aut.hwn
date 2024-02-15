@@ -1,0 +1,47 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                zlodziej_aut                                               //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: NikodemBanan
+// Data utworzenia: 13.02.2024
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+//-----------------<[ Zmienne: ]>-------------------
+new deluxe_cars_for_stealing_ids[] = {-1, -1, -1}; // ID pojazdów "deluxe" do kradzie¿y
+new stole_a_car[MAX_PLAYERS]; // 1 je¿eli gracz u¿y³ /ukradnij w pojeŸdzie, w którym siê obecnie znajduje; 0 w przeciwnym wypadku [PRACA Z£ODZIEJA AUT - Banan]
+new stole_a_car_lspd_bonus[MAX_PLAYERS]; // 1 je¿eli gracz zosta³ zauwa¿ony przez kamery - bonus do ceny za sprzeda¿; 0 w przeciwnym wypadku [PRACA Z£ODZIEJA AUT - Banan]
+new stole_a_car_timers_ids[MAX_PLAYERS][2]; // je¿eli gracz posiada GPSa z powodu kradzie¿y pojazdu, to tutaj przechowywane s¹ timery, pod [0] jest timer do aktualizacji pozycji gpsa na mapie, pod [1] jest timer do zatrzymania gpsa po up³ywie zadanego czasu, je¿eli timery nie istniej¹, to obie wartoœci s¹ ustawiane na -1 [PRACA Z£ODZIEJA AUT - Banan]
+new stole_a_car_seconds_to_find_cp[MAX_PLAYERS];
+new stole_a_car_lspd_map_icon[MAX_PLAYERS]; // je¿eli gracz posiada GPSa z powodu kradzie¿y pojazdu, to tutaj przechowywane jest ID ikony na mapie (CreateDynamicMapIcon) tego GPSa, w przeciwnym wypadku jest to -1 [PRACA Z£ODZIEJA AUT - Banan]
+new stole_a_car_checkpoint[MAX_PLAYERS][3]; // je¿eli gracz ma aktywne zlecenie z³odzieja pojazdów, to tutaj przechowywane jest: [0] - ID ikony na mapie (CreateDynamicMapIcon), [1] - ID obszaru (CreateDynamicCircle); w przeciwnym razie -1, [3] - ID timera sprawdzaj¹cego, czy gracz jest na mecie [PRACA Z£ODZIEJA AUT - Banan]
+new stole_a_car_anti_tp[MAX_PLAYERS];
+
+new const SELLCAR1[] = { 3000, 3124, 3245, 3349, 3475, 3574, 3636, 3762, 3895, 3946, 4000 };
+new const SELLCAR2[] = { 4099, 4135, 4255, 4378, 4457, 4563, 4614, 4721, 4878, 4988, 5000 };
+new const SELLCAR3[] = { 5058, 5175, 5212, 5377, 5454, 5555, 5678, 5751, 5865, 5964, 6000 };
+new const SELLCAR4[] = { 6077, 6123, 6275, 6378, 6422, 6565, 6613, 6752, 6897, 6911, 7000 };
+new const SELLCAR5[] = { 7100, 7200, 7300, 7400, 7500};
+
+//------------------<[ Forwardy: ]>--------------------
+forward FinishLSPDCarThiefTracking(playerid);
+forward UpdateCarThiefLSPDMapIcon(playerid);
+forward AntiTeleportCarThief(playerid);
+forward CarThiefMissionGoalTimer(playerid);
+
+//end

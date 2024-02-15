@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ czas ]-------------------------------------------------//
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                zlodziej_aut                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,63 +16,32 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: NikodemBanan
+// Data utworzenia: 13.02.2024
 
-// Opis:
-/*
-	
-*/
+//
 
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+#define _ZLODZIEJ_AUT
+#define ZA_DAMAGES_PENALTY_CALC_CONST 1.64										//1 + 0.8^2
+#define ZA_DAMAGES_PENALTY_CALC_EXP_CONST 0.65959498911480940622032627544671	// 4/3 * ln(ZA_DAMAGES_PENALTY_CALC_CONST)
+#define ZA_EULER_NUMBER 2.7182818284590452353602874713527
 
-// Notatki skryptera:
-/*
-	
-*/
+#define ZA_REWARD_MODEL_DIVISOR 100
+#define ZA_HOT_STUFF_BONUS 2
+#define ZA_VERY_HOT_STUFF_BONUS 3
+#define ZA_LSPD_UPDATE_PERIOD_MS 5000
+#define ZA_LSPD_GPS_DURATION_SHORT_MS 30000 
+#define ZA_LSPD_GPS_DURATION_LONG_MS 180000 
+#define ZA_LSPD_GPS_DURATION_DELUXE_MS 540000 
+#define ZA_LSPD_GPS_CHANCE 15
+#define ZA_LSPD_LONG_GPS_CHANCE 3
+#define ZA_DELUXE_CAR_REWARD 48000
+#define ZA_COOLDOWN_1_S 600
+#define ZA_COOLDOWN_2_S 540
+#define ZA_COOLDOWN_3_S 480
+#define ZA_COOLDOWN_4_S 420
+#define ZA_COOLDOWN_5_S 360
 
-YCMD:czas(playerid, params[], help)
-{
-	new string[256];
-
-    if(IsPlayerConnected(playerid))
-	{
-	    new mtext[20];
-		new year, month,day;
-		getdate(year, month, day);
-		if(month == 1) { mtext = "Styczen"; }
-		else if(month == 2) { mtext = "Luty"; }
-		else if(month == 3) { mtext = "Marzec"; }
-		else if(month == 4) { mtext = "Kwiecien"; }
-		else if(month == 5) { mtext = "Maj"; }
-		else if(month == 6) { mtext = "Czerwiec"; }
-		else if(month == 7) { mtext = "Lipiec"; }
-		else if(month == 8) { mtext = "Sierpien"; }
-		else if(month == 9) { mtext = "Wrzesien"; }
-		else if(month == 10) { mtext = "Pazdziernik"; }
-		else if(month == 11) { mtext = "Listopad"; }
-		else if(month == 12) { mtext = "Grudzien"; }
-	    new hour,minuite,second;
-		gettime(hour,minuite,second);
-		FixHour(hour);
-		hour = shifthour;
-		if (minuite < 10)
-		{
-			format(string, sizeof(string), "~y~%d %s %d ~n~~g~|~w~%d:0%d~g~|", day, mtext, year, hour, minuite);
-		}
-		else
-		{
-			format(string, sizeof(string), "~y~%d %s %d~n~~g~|~w~%d:%d~g~|", day, mtext, year, hour, minuite);
-		}
-
-		if (PlayerInfo[playerid][pJailTime] > 0)
-		{
-			format(string, sizeof(string), "%s~n~~w~Czas Aresztu: %d sec", string, PlayerInfo[playerid][pJailTime]-10);
-		}
-
-		if (stole_a_car_seconds_to_find_cp[playerid] > 0)
-		{
-			format(string, sizeof(string), "%s~n~~w~Czas do znalezienia dziupli: %d sec", string, stole_a_car_seconds_to_find_cp[playerid]);
-		}
-		
-		GameTextForPlayer(playerid, string, 5000, 1);
-	}
-	return 1;
-}
+//end

@@ -872,17 +872,30 @@ public CountDownVehsRespawn()
 				used[veh] = true;
 			}
 		}
-		for(new v; v < MAX_VEHICLES; v++)
+		for(new v = 1; v < MAX_VEHICLES; v++)
 		{
 			if(!used[v])
 			{
-			    RespawnVehicleEx(v);
+				if(v <= CAR_End)
+				{
+					DestroyVehicle(v);
+					carselect = GetRandomVehicleForStealingModel();
+					AddCar(v - 1);
+					SetVehicleNumberPlate(v, "{1F9F06}M-RP");
+				}
+				else
+				{
+			    	RespawnVehicleEx(v);
+				}
+
 			    if(Car_GetOwnerType(v) == CAR_OWNER_PLAYER)
 			    {
                     Car_Unspawn(v);
 	            }
 			}
 		}
+
+		ReloadDeluxeCarsForStealing();
 	}
 }
 
@@ -7895,12 +7908,7 @@ AddCar(car)
 {
 	new randcol = random(126);
 	new randcol2 = 1;
-	if (rccounter == 14)
-	{
-		rccounter = 0;
-	}
-	new id = AddStaticVehicleEx(carselect[rccounter], CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], randcol, randcol2, -1);
-	rccounter++;
+	new id = AddStaticVehicleEx(RandCars[carselect][0], CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], randcol, randcol2, -1);
 	return id;
 }
 
@@ -11827,30 +11835,42 @@ public TourCamera(playerid, step)
 }
 //--------------------------------------------------
 
+GetRandomVehicleForStealingModel()
+{
+	new randa = random(53);
+	new model;
 
-ZaladujSamochody()
+	if(randa == 0)
+	{
+		model = randa;
+	}
+	else if(randa <= 8)
+	{
+		model = floatround(float(randa) / 2.0, floatround_ceil);
+	}
+	else if(randa <= 32)
+	{
+		model = floatround(float(randa) / 3.0, floatround_floor) + 2;
+	}
+	else
+	{
+		model = floatround(float(randa) / 4.0, floatround_ceil) + 4;
+	}
+
+	return model;
+}
+
+
+ZaladujSamochodyDoKradziezy()
 {
     new id;
-    new randa = random(sizeof(RandCars));
-	randa = random(sizeof(RandCars));carselect[0] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[1] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[2] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[3] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[4] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[5] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[6] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[7] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[8] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[9] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[10] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[11] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[12] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[13] = RandCars[randa][0];
 
     for(new i = 0; i < 165; i++)
 	{
+		carselect = GetRandomVehicleForStealingModel();
         id = AddCar(i);
     }
+
     CAR_End = id;
     printf("Wczytano %d aut do kradzie¿y", CAR_End);
 	return 1;
