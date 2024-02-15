@@ -1644,12 +1644,12 @@ new RandCars[18][1] =
 	{492},//Greenwood     // 27, 28, 29 -> [11]
 	{466},//Glendale      // 30, 31, 32 -> [12]
 	// szansa na spawn = 4/53
-	{422},//Bobcat        // 45, 46, 47, 48 -> [16]
-	{543},//Sadler        // 49, 50, 51, 52 -> [17]
-	
 	{401},//Bravura       // 33, 34, 35, 36 -> [13]
 	{436},//Previon       // 37, 38, 39, 40 -> [14]
 	{518}//Buccaneer     // 41, 42, 43, 44 -> [15]
+
+	{422},//Bobcat        // 45, 46, 47, 48 -> [16]
+	{543},//Sadler        // 49, 50, 51, 52 -> [17]
 };
 
 new GunPrice[30][1] = {
@@ -2547,8 +2547,8 @@ new const veh_prices[][VEH_PRICES_ENUM] =
 	{542, 45000}, // Clover
 	{549, 40000}, // Tampa
 	{404, 60000}, // Perennial
-	{604, 28000}, // Glendale
-	{605, 25000}, // Sadler
+	{604, 28000}, // Glendale Shit
+	{605, 25000}, // Sadler Shit
 	{572, 7500}, // Turbowozek
 	{462, 17000}, // Faggio
 	{522, 11500000}, // NRG-500

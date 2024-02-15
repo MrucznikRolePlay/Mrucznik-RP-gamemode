@@ -50,7 +50,7 @@ ZerujZmienne_Zlodziej_Aut(playerid)
 
 LoadDeluxeCarsForStealing()
 {
-	new deluxe_models[] = {402, 587, 562}; //Buffalo, Euros, Elegy
+	new deluxe_models[] = {402, 480, 562}; //Buffalo, Euros, Elegy
 
 	new bool:used[CAR_AMOUNT] = {false, ... };
 	foreach(new p : Player)
@@ -102,9 +102,7 @@ RemoveDeluxeCarForStealing(veh_id)
 		if(deluxe_cars_for_stealing_ids[i] == veh_id)
 		{
 			deluxe_cars_for_stealing_ids[i] = -1;
-			DestroyVehicle(veh_id);
-			AddCar(veh_id - 1);
-			SetVehicleNumberPlate(veh_id, "{1F9F06}M-RP");
+			ReloadCarForStealing(veh_id);
 			break;
 		}
 	}
@@ -135,6 +133,13 @@ ReloadDeluxeCarsForStealing()
 }
 
 //------------------------------------------------------------------------
+
+ReloadCarForStealing(veh_id)
+{
+	DestroyVehicle(veh_id);
+	AddCar(veh_id - 1);
+	SetVehicleNumberPlate(veh_id, "{1F9F06}M-RP");
+}
 
 GetLspdDetectThresholds(vehicleid, &short, &long)
 {
@@ -450,6 +455,10 @@ CarThiefMissionGoal(playerid)
 
 	new veh_id = GetPlayerVehicleID(playerid);
 	new veh_model_bonus_reward = GetBonusRewardFromCarModel(veh_id);
+	if(PlayerInfo[playerid][pJackSkill] >= 200)
+	{
+		veh_model_bonus_reward *= 2;
+	}
 
 	if(veh_model_bonus_reward == -1){
 		SendClientMessage(playerid, COLOR_GREY, "Nie jestes w pojeŸdzie nadaj¹cym siê do sprzeda¿y w dziupli!");
@@ -545,7 +554,7 @@ CarThiefMissionGoal(playerid)
 	}
 	else
 	{
-		RespawnVehicleEx(veh_id);
+		ReloadCarForStealing(veh_id);
 	}
 
 	EndCarThiefMission(playerid);
