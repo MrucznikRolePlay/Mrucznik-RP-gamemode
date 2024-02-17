@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_aulecz_Impl(playerid, giveplayerid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 20 && !IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] < 1 && !IsAScripter(playerid))
     {
         noAccessMessage(playerid);
         return 1;
