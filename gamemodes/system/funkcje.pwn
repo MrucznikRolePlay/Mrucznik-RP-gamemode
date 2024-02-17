@@ -12519,6 +12519,168 @@ PursuitMode(playerid, giveplayerid)
 	}
 }
 
+// iloczyn skalarny
+Float:CalculateDotProduct(Float:a[3], Float:b[3])
+{
+	return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+// metoda oparta na separating axis theorem w 3D
+CheckIfCuboidsIntersect(Float:c[8][3], Float:c2[8][3])
+{
+    static Float:axes[15][3];
+    
+    for (new i = 0; i < 3; i++) 
+    {
+        axes[i][0] = c[1][i] - c[0][i];
+        axes[i + 3][0] = c[2][i] - c[0][i];
+        axes[i + 6][0] = c[4][i] - c[0][i];
+        axes[i + 9][0] = c[0][i];
+        
+        axes[i][1] = c[3][i] - c[0][i];
+        axes[i + 3][1] = c[5][i] - c[0][i];
+        axes[i + 6][1] = c[6][i] - c[0][i];
+        axes[i + 9][1] = c[1][i];
+        
+        axes[i][2] = c[2][i] - c[1][i];
+        axes[i + 3][2] = c[5][i] - c[1][i];
+        axes[i + 6][2] = c[7][i] - c[1][i];
+        axes[i + 9][2] = c[3][i] - c[1][i];
+    }
+
+    for (new i = 0; i < 3; i++) 
+    {
+        axes[i + 12][0] = c2[0][i];
+        axes[i + 12][1] = c2[1][i] - c2[0][i];
+        axes[i + 12][2] = c2[3][i] - c2[0][i];
+    }
+    
+    for (new i = 0; i < 15; i++) 
+    {
+        new Float:axis[3];
+        for (new j = 0; j < 3; j++) 
+        {
+            axis[j] = axes[i][j];
+        }
+
+        new Float:min1, Float:max1, Float:min2, Float:max2;
+        for (new j = 0; j < 8; j++) 
+        {
+            new Float:dot = CalculateDotProduct(axis, c[j]);
+            if (j == 0 || dot < min1) min1 = dot;
+            if (j == 0 || dot > max1) max1 = dot;
+        }
+        for (new j = 0; j < 8; j++) 
+        {
+            new Float:dot = CalculateDotProduct(axis, c2[j]);
+            if (j == 0 || dot < min2) min2 = dot;
+            if (j == 0 || dot > max2) max2 = dot;
+        }
+
+        if (!(max1 >= min2 && min1 <= max2)) 
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// obracanie punktu korzystaj¹c z macierzy rotacji
+RotatePointWithRMatrix(Float:x, Float:y, Float:z, &Float:xr, &Float:yr, &Float:zr, Float:rm[][])
+{
+	xr = rm[0][0] * x + 
+		rm[0][1] * y + 
+		rm[0][2] * z;
+	yr = rm[1][0] * x + 
+		rm[1][1] * y + 
+		rm[1][2] * z;
+	zr = rm[2][0] * x + 
+		rm[2][1] * y + 
+		rm[2][2] * z;
+}
+
+// obliczanie macierzy rotacji z kwaternionów
+CalculateRotationMatrixFromQuat(Float:a, Float:b, Float:c, Float:d, Float:rm[][])
+{
+	rm[0][0] = (1 - 2 * (c*c + d*d));
+	rm[0][1] = (2 * (b * c - a * d));
+	rm[0][2] = (2 * (b * d + a * c));
+	rm[1][0] = (2 * (b * c + a * d));
+	rm[1][1] = (1 - 2 * (b * b + d * d));
+	rm[1][2] = (2 * (c * d - a * b));
+	rm[2][0] = (2 * (b * d - a * c)); 
+	rm[2][1] = (2 * (c * d + a * b)); 
+	rm[2][2] = (1 - 2 * (b * b + c * c));
+}
+
+// wyznaczenie wierzcho³ków prostopad³oœcianu, który wyznacza granice pojazdu
+GetVehicleBoundingBox(vehicleid, Float:bbox[][])
+{
+	static const Float:scale = 0.8;
+
+	new Float:x, Float:y, Float:z;
+	GetVehiclePos(vehicleid, x, y, z);
+
+	new vm = GetVehicleModel(vehicleid);
+
+	new Float:wx, Float:wy, Float:wz;
+	GetVehicleModelInfo(vm, VEHICLE_MODEL_INFO_SIZE, wx, wy, wz);
+
+	new Float:a, Float:b, Float:c, Float:d;
+	GetVehicleRotationQuat(vehicleid, a, b, c, d);
+
+	if(a == 0.5 && b == 0.5 && c == 0.5 && d == 0.5) // rotacja nie zainicjowana w macierzy pojazdów serwera
+	{
+		return 0;
+	}
+
+	new Float:rm[3][3];
+	CalculateRotationMatrixFromQuat(a, -b, -c, -d, rm);
+
+	new Float:cp_nr[8][3];
+	cp_nr[0][0] = (-wx); cp_nr[0][1] = (-wy); cp_nr[0][2] = (-wz);
+	cp_nr[1][0] = (-wx); cp_nr[1][1] = ( wy); cp_nr[1][2] = (-wz);
+	cp_nr[2][0] = ( wx); cp_nr[2][1] = ( wy); cp_nr[2][2] = (-wz);
+	cp_nr[3][0] = ( wx); cp_nr[3][1] = (-wy); cp_nr[3][2] = (-wz);
+	cp_nr[4][0] = (-wx); cp_nr[4][1] = (-wy); cp_nr[4][2] = ( wz);
+	cp_nr[5][0] = (-wx); cp_nr[5][1] = ( wy); cp_nr[5][2] = ( wz);
+	cp_nr[6][0] = ( wx); cp_nr[6][1] = ( wy); cp_nr[6][2] = ( wz);
+	cp_nr[7][0] = ( wx); cp_nr[7][1] = (-wy); cp_nr[7][2] = ( wz);
+
+	for(new i = 0; i < 8; i++)
+	{
+		for(new j = 0; j < 3; j++)
+		{
+			cp_nr[i][j] /= 2.0;
+		}
+	}
+
+	for(new i = 0; i < 8; i++)
+	{
+		RotatePointWithRMatrix(cp_nr[i][0], cp_nr[i][1], cp_nr[i][2], bbox[i][0], bbox[i][1], bbox[i][2], rm);
+
+		bbox[i][0] *= scale;
+		bbox[i][1] *= scale;
+		bbox[i][2] *= scale;
+
+		bbox[i][0] += x;
+		bbox[i][1] += y;
+		bbox[i][2] += z;
+	}
+
+	return 1;
+}
+
+// wyznaczanie d³ugoœci nad³u¿szej przek¹tnej prostopad³oœcianu wyznaczaj¹cego granice pojazdu
+Flaot:GetVehicleBoundingBoxDiagonal(vehicleid)
+{
+	new vm = GetVehicleModel(vehicleid);
+	new Float:wx, Float:wy, Float:wz;
+	GetVehicleModelInfo(vm, VEHICLE_MODEL_INFO_SIZE, wx, wy, wz);
+	return floatsqroot(wx*wx + wy*wy + wz*wz);
+}
+
 // https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn
 stock IsVehicleUpsideDown(vehicleid)
 {
