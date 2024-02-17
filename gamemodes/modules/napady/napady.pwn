@@ -276,7 +276,7 @@ Heist_StartAttack()
 		}
 	}
 	Heist_Steal_Countdown = HEIST_STEAL_TIME;
-	Heist_Timers = SetTimer("Heist_Timer",5000,true);
+	Heist_Timers = SetTimer("Heist_Timer",3000,true);
 	SetTimer("Heist_UnlockCooldown", 1000 * 60 * HEIST_COOLDOWNS, false);
 	Heist_BlockHeisting = 1;
 }
