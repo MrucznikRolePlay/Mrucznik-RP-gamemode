@@ -1109,6 +1109,7 @@ ZerujZmienne(playerid)
 	SetPVarInt(playerid, "zoneid", -1);
 	DeletePVar(playerid, "DostalAJkomunikat");
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
+	SetPVarInt(playerid, "FixKitOffer", -1);
 	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
