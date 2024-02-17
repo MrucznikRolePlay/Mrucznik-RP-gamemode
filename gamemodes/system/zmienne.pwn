@@ -1043,7 +1043,6 @@ new realchat = 1;
 new timeshift = -1;
 new shifthour;
 
-new intrate = 1;
 new levelexp = 4;
 new SELLCAR1[] = { 1000, 1124, 1245, 1349, 1475, 1574, 1636, 1762, 1895, 1946, 2000 };
 new SELLCAR2[] = { 2099, 2135, 2255, 2378, 2457, 2563, 2614, 2721, 2878, 2988, 3000 };

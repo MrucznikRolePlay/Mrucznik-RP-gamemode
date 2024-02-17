@@ -107,8 +107,10 @@ YCMD:szukani(playerid, params[], help)
 						{
 							if(PoziomPoszukiwania[i] == 2 || PoziomPoszukiwania[i] == 10)
 					    	{
+								new deadReward = PoziomPoszukiwania[i] * 5000;
+								new liveReward = PoziomPoszukiwania[i] * 10000;
 					    	    GetPlayerName(i, giveplayer, sizeof(giveplayer));
-								format(string, sizeof(string), "%s%s, Nagroda: %d000$", string,giveplayer,PoziomPoszukiwania[i]);
+								format(string, sizeof(string), "%s%s, Nagroda: 퓓wy - %d$, martwy - %d$", string,giveplayer, liveReward, deadReward);
 								x++;
 								if(x > 3)
 								{
@@ -141,8 +143,10 @@ YCMD:szukani(playerid, params[], help)
 						{
 							if(PoziomPoszukiwania[i] >= 2 && PoziomPoszukiwania[i] <= 3 || PoziomPoszukiwania[i] == 10)
 					    	{
+								new deadReward = PoziomPoszukiwania[i] * 5000;
+								new liveReward = PoziomPoszukiwania[i] * 10000;
 					    	    GetPlayerName(i, giveplayer, sizeof(giveplayer));
-								format(string, sizeof(string), "%s%s, Nagroda: %d000$", string,giveplayer,PoziomPoszukiwania[i]);
+								format(string, sizeof(string), "%s%s, Nagroda: 퓓wy - %d$, martwy - %d$", string,giveplayer, liveReward, deadReward);
 								x++;
 								if(x > 3)
 								{
@@ -175,8 +179,10 @@ YCMD:szukani(playerid, params[], help)
 						{
 							if(PoziomPoszukiwania[i] >= 2 && PoziomPoszukiwania[i] <= 4 || PoziomPoszukiwania[i] == 10)
 					    	{
+								new deadReward = PoziomPoszukiwania[i] * 5000;
+								new liveReward = PoziomPoszukiwania[i] * 10000;
 					    	    GetPlayerName(i, giveplayer, sizeof(giveplayer));
-								format(string, sizeof(string), "%s%s, Nagroda: %d000$", string,giveplayer,PoziomPoszukiwania[i]);
+								format(string, sizeof(string), "%s%s, Nagroda: 퓓wy - %d$, martwy - %d$", string,giveplayer, liveReward, deadReward);
 								x++;
 								if(x > 3)
 								{
@@ -209,8 +215,10 @@ YCMD:szukani(playerid, params[], help)
 						{
 							if(PoziomPoszukiwania[i] >= 2 && PoziomPoszukiwania[i] <= 5 || PoziomPoszukiwania[i] == 10)
 					    	{
+								new deadReward = PoziomPoszukiwania[i] * 5000;
+								new liveReward = PoziomPoszukiwania[i] * 10000;
 					    	    GetPlayerName(i, giveplayer, sizeof(giveplayer));
-								format(string, sizeof(string), "%s%s, Nagroda: %d000$", string,giveplayer,PoziomPoszukiwania[i]);
+								format(string, sizeof(string), "%s%s, Nagroda: 퓓wy - %d$, martwy - %d$", string,giveplayer, liveReward, deadReward);
 								x++;
 								if(x > 3)
 								{
@@ -243,8 +251,10 @@ YCMD:szukani(playerid, params[], help)
 						{
 							if(PoziomPoszukiwania[i] >= 2 && PoziomPoszukiwania[i] <= 7 || PoziomPoszukiwania[i] == 10)
 					    	{
+								new deadReward = PoziomPoszukiwania[i] * 5000;
+								new liveReward = PoziomPoszukiwania[i] * 10000;
 					    	    GetPlayerName(i, giveplayer, sizeof(giveplayer));
-								format(string, sizeof(string), "%s%s, Nagroda: %d000$", string,giveplayer,PoziomPoszukiwania[i]);
+								format(string, sizeof(string), "%s%s, Nagroda: 퓓wy - %d$, martwy - %d$", string,giveplayer, liveReward, deadReward);
 								x++;
 								if(x > 3)
 								{

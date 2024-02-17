@@ -1638,57 +1638,57 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0://Ponton
 				{
-					ShowPlayerDialogEx(playerid, 402, DIALOG_STYLE_MSGBOX, "Kupowanie Pontonu", "Ponton\n\nCena: 2.250.000$\nPrêdkoœæ Maksymalna: 120km/h\nWielkosc: Ma³y\nOpis: Ma³y, zwrotny oraz szybki ponton. Idealny do emocjonalnego p³ywania po morzu. Jego cena jest przyjazna dla pocz¹tkuj¹cych ¿eglarzy. W 2 kolorach.", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 402, DIALOG_STYLE_MSGBOX, "Kupowanie Pontonu", "Ponton\n\nCena: 500.000$\nPrêdkoœæ Maksymalna: 120km/h\nWielkosc: Ma³y\nOpis: Ma³y, zwrotny oraz szybki ponton. Idealny do emocjonalnego p³ywania po morzu. Jego cena jest przyjazna dla pocz¹tkuj¹cych ¿eglarzy. W 2 kolorach.", "Kup!", "Wróæ");
 					pojazdid[playerid] = 473;
-					CenaPojazdu[playerid] = 2250000;
+					CenaPojazdu[playerid] = 500_000;
 				}
 				case 1://Kuter
 				{
-					ShowPlayerDialogEx(playerid, 401, DIALOG_STYLE_MSGBOX, "Kupowanie Kutra", "Kuter\n\nCena: 3.700.000$\nPrêdkoœæ Maksymalna: 70km/h\nWielkosc: Spory\nOpis: Jest to wolna oraz ma³o zwrotna ³ódŸ. Idealnie nadaje siê do ³owienia ryb. Pok³ad czêœciowo zadaszony, reszta otwarta. Dostêpny w 1 kolorze.", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 401, DIALOG_STYLE_MSGBOX, "Kupowanie Kutra", "Kuter\n\nCena: 370.000$\nPrêdkoœæ Maksymalna: 70km/h\nWielkosc: Spory\nOpis: Jest to wolna oraz ma³o zwrotna ³ódŸ. Idealnie nadaje siê do ³owienia ryb. Pok³ad czêœciowo zadaszony, reszta otwarta. Dostêpny w 1 kolorze.", "Kup!", "Wróæ");
 					pojazdid[playerid] = 453;
-					CenaPojazdu[playerid] = 3700000;
+					CenaPojazdu[playerid] = 370_000;
 				}
 				case 2://Coastguard
 				{
-					ShowPlayerDialogEx(playerid, 403, DIALOG_STYLE_MSGBOX, "Kupowanie Coastguarda", "Coastguard\n\nCena: 8.500.000$\nPrêdkoœæ Maksymalna: 160km/h\nWielkosc: Œredni\nOpis: Dosyæ szybkki oraz zwrotny statek. Nie jest zadaszony, pok³ad jest pod³u¿ny. U¿ywany przez ratowników. Malowany na 2 kolory.", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 403, DIALOG_STYLE_MSGBOX, "Kupowanie Coastguarda", "Coastguard\n\nCena: 850.000$\nPrêdkoœæ Maksymalna: 160km/h\nWielkosc: Œredni\nOpis: Dosyæ szybkki oraz zwrotny statek. Nie jest zadaszony, pok³ad jest pod³u¿ny. U¿ywany przez ratowników. Malowany na 2 kolory.", "Kup!", "Wróæ");
 					pojazdid[playerid] = 472;
-					CenaPojazdu[playerid] = 8500000;
+					CenaPojazdu[playerid] = 850_000;
 				}
 				case 3://Launch
 				{
-					ShowPlayerDialogEx(playerid, 404, DIALOG_STYLE_MSGBOX, "Kupowanie Launcha", "Launch\n\nCena: 11.000.000$\nPrêdkoœæ Maksymalna: 150km/h\nWielkosc: Œredni\nOpis: £ódŸ bojowa, u¿ywana przez wojsko, ma pod³u¿ny kad³ub. Dostêpna jest wersja cywilna z atrap¹ karabinu. Nie jest zbyt zwrotna i szybka, ale ma walory bojowe. Zadaszona przednia czêœæ. Malowana w 1 kolorze.", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 404, DIALOG_STYLE_MSGBOX, "Kupowanie Launcha", "Launch\n\nCena: 1.100.000$\nPrêdkoœæ Maksymalna: 150km/h\nWielkosc: Œredni\nOpis: £ódŸ bojowa, u¿ywana przez wojsko, ma pod³u¿ny kad³ub. Dostêpna jest wersja cywilna z atrap¹ karabinu. Nie jest zbyt zwrotna i szybka, ale ma walory bojowe. Zadaszona przednia czêœæ. Malowana w 1 kolorze.", "Kup!", "Wróæ");
 					pojazdid[playerid] = 595;
-					CenaPojazdu[playerid] = 11000000;
+					CenaPojazdu[playerid] = 1_100_000;
 				}
 				case 4://Speeder
 				{
-					ShowPlayerDialogEx(playerid, 405, DIALOG_STYLE_MSGBOX, "Kupowanie Speedera", "Speeder\n\nCena: 13.500.000$\nPrêdkoœæ Maksymalna: 220km/h\nWielkosc: Œredni\nOpis: Typowa motorówka: smuk³a, du¿e przyspieszenie i prêdkoœæ. Jej zwrotnoœæ nie jest zachwycaj¹ca ale powinna zadowoliæ wiêkszoœæ u¿ytkowników. Malowana w 1 kolorze.", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 405, DIALOG_STYLE_MSGBOX, "Kupowanie Speedera", "Speeder\n\nCena: 1.350.000$\nPrêdkoœæ Maksymalna: 220km/h\nWielkosc: Œredni\nOpis: Typowa motorówka: smuk³a, du¿e przyspieszenie i prêdkoœæ. Jej zwrotnoœæ nie jest zachwycaj¹ca ale powinna zadowoliæ wiêkszoœæ u¿ytkowników. Malowana w 1 kolorze.", "Kup!", "Wróæ");
 					pojazdid[playerid] = 452;
-					CenaPojazdu[playerid] = 13500000;
+					CenaPojazdu[playerid] = 1_350_000;
 				}
 				case 5://Jetmax
 				{
-					ShowPlayerDialogEx(playerid, 407, DIALOG_STYLE_MSGBOX, "Kupowanie Jetmaxa", "Jetmax\n\nCena: 20.000.000$\nPrêdkoœæ Maksymalna: 220km/h\nWielkosc: Spory\nOpis: Motorówka wyœcigowa, stworzona do du¿ych prêdkoœci. Jej cecha charakterystyczna to ogromny silnik wystaj¹cy z ty³u ³odzi. Malowana w 2 kolorach.", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 407, DIALOG_STYLE_MSGBOX, "Kupowanie Jetmaxa", "Jetmax\n\nCena: 2.000.000$\nPrêdkoœæ Maksymalna: 220km/h\nWielkosc: Spory\nOpis: Motorówka wyœcigowa, stworzona do du¿ych prêdkoœci. Jej cecha charakterystyczna to ogromny silnik wystaj¹cy z ty³u ³odzi. Malowana w 2 kolorach.", "Kup!", "Wróæ");
 					pojazdid[playerid] = 493;
-					CenaPojazdu[playerid] = 20000000;
+					CenaPojazdu[playerid] = 2_000_000;
 				}
 				case 6://Tropic
 				{
-					ShowPlayerDialogEx(playerid, 406, DIALOG_STYLE_MSGBOX, "Kupowanie Tropica", "Speeder\n\nCena: 25.000.000$\nPrêdkoœæ Maksymalna: 160km/h\nWielkosc: Du¿y\nOpis: Luksusowy jacht wycieczkowy. Posiada dwa piêtra, miejsce mieszkalne i dach. Nie jest zwrotny ale szybki. Idealny dla bogaczy.", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 406, DIALOG_STYLE_MSGBOX, "Kupowanie Tropica", "Speeder\n\nCena: 2.500.000$\nPrêdkoœæ Maksymalna: 160km/h\nWielkosc: Du¿y\nOpis: Luksusowy jacht wycieczkowy. Posiada dwa piêtra, miejsce mieszkalne i dach. Nie jest zwrotny ale szybki. Idealny dla bogaczy.", "Kup!", "Wróæ");
 					pojazdid[playerid] = 454;
-					CenaPojazdu[playerid] = 25000000;
+					CenaPojazdu[playerid] = 2_500_000;
 				}
 				case 7://Squallo
 				{
-					ShowPlayerDialogEx(playerid, 408, DIALOG_STYLE_MSGBOX, "Kupowanie Squallo", "Squallo\n\nCena: 25.000.000$\nPrêdkoœæ Maksymalna: 260km/h\nWielkosc: Spory\nOpis: Motorówka luksusowo wyœcigowa. Jej prêdkoœæ jest nieprzyzwoicie du¿a a wygl¹d i luksus sprawi¹ ¿e bêdzie siê czu³ jak prawdziwy bogacz. Malowana w 2 kolorach.", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 408, DIALOG_STYLE_MSGBOX, "Kupowanie Squallo", "Squallo\n\nCena: 2.500.000$\nPrêdkoœæ Maksymalna: 260km/h\nWielkosc: Spory\nOpis: Motorówka luksusowo wyœcigowa. Jej prêdkoœæ jest nieprzyzwoicie du¿a a wygl¹d i luksus sprawi¹ ¿e bêdzie siê czu³ jak prawdziwy bogacz. Malowana w 2 kolorach.", "Kup!", "Wróæ");
 					pojazdid[playerid] = 446;
-					CenaPojazdu[playerid] = 25000000;
+					CenaPojazdu[playerid] = 2_500_000;
 				}
 				case 8://Jacht
 				{
-					ShowPlayerDialogEx(playerid, 409, DIALOG_STYLE_MSGBOX, "Kupowanie Jachtu", "Jacht\n\nCena: 40.000.000$\nPrêdkoœæ Maksymalna: 80km/h\nWielkosc: Wielki\nOpis: Jacht to statek dla ludzi którzy wyprawiaj¹ siê w miêdzykontynentaln¹ przeprawê oraz pragn¹ luksusu. Mo¿na w nim spaæ i normalnie gdy¿ posiada spore wnêtrze. Malowany w 2 kolorach.\n((UWAGA! Pojazd posiada wnêtrze do którego mo¿na wchodziæ komend¹ /wejdzw))", "Kup!", "Wróæ");
+					ShowPlayerDialogEx(playerid, 409, DIALOG_STYLE_MSGBOX, "Kupowanie Jachtu", "Jacht\n\nCena: 4.000.000$\nPrêdkoœæ Maksymalna: 80km/h\nWielkosc: Wielki\nOpis: Jacht to statek dla ludzi którzy wyprawiaj¹ siê w miêdzykontynentaln¹ przeprawê oraz pragn¹ luksusu. Mo¿na w nim spaæ, gdy¿ posiada spore wnêtrze. Malowany w 2 kolorach.\n((UWAGA! Pojazd posiada wnêtrze do którego mo¿na wchodziæ komend¹ /wejdzw))", "Kup!", "Wróæ");
 					pojazdid[playerid] = 484;
-					CenaPojazdu[playerid] = 40000000;
+					CenaPojazdu[playerid] = 4_000_000;
 				}
 			}
 		}
@@ -1798,7 +1798,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(!response)
 		{
-			ShowPlayerDialogEx(playerid, 400, DIALOG_STYLE_LIST, "Kupowanie ³odzi", "Ponton\t\t2 250 000$\nKuter\t\t3 700 000$\nCoastguard\t8 500 000$\nLaunch\t\t11 000 000$\nSpeeder\t13 500 000$\nJetmax\t\t20 000 000$\nTropic\t\t25 000 000$\nSquallo\t\t25 000 000$\nJacht\t\t40 000 000$", "Wybierz", "WyjdŸ");
+			ShowPlayerDialogEx(playerid, 400, DIALOG_STYLE_LIST, "Kupowanie ³odzi", "Ponton\t\t500 000$\nKuter\t\t370 000$\nCoastguard\t850 000$\nLaunch\t\t1 100 000$\nSpeeder\t1 350 000$\nJetmax\t\t2 000 000$\nTropic\t\t2 500 000$\nSquallo\t\t2 500 000$\nJacht\t\t4 000 000$", "Wybierz", "WyjdŸ");
 			pojazdid[playerid] = 0;
 			CenaPojazdu[playerid] = 0;
 		}

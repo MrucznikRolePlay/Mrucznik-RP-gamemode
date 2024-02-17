@@ -41,7 +41,7 @@ YCMD:kuplodzie(playerid, params[], help)
 	    {
 	        if(GUIExit[playerid] == 0)
 	    	{
-		        ShowPlayerDialogEx(playerid, 400, DIALOG_STYLE_LIST, "Kupowanie ≥odzi", "Ponton\t\t2 250 000$\nKuter\t\t3 700 000$\nCoastguard\t8 500 000$\nLaunch\t\t11 000 000$\nSpeeder\t13 500 000$\nJetmax\t\t20 000 000$\nTropic\t\t25 000 000$\nSquallo\t\t25 000 000$\nJacht\t\t40 000 000$", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 400, DIALOG_STYLE_LIST, "Kupowanie ≥odzi", "Ponton\t\t500 000$\nKuter\t\t370 000$\nCoastguard\t850 000$\nLaunch\t\t1 100 000$\nSpeeder\t1 350 000$\nJetmax\t\t2 000 000$\nTropic\t\t2 500 000$\nSquallo\t\t2 500 000$\nJacht\t\t4 000 000$", "Wybierz", "Wyjdü");
             }
 	    }
 	    else

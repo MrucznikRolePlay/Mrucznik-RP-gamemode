@@ -1972,7 +1972,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					if(PoziomPoszukiwania[playerid] >= 1)
 					{
-						new price2 = PoziomPoszukiwania[playerid] * 1000;
+						new reward = PoziomPoszukiwania[playerid] * 5000;
 						new count, i = killerid;
 						if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
 						{
@@ -2023,11 +2023,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 									}
 								}
 
-								format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+								format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", reward);
 								GameTextForPlayer(i, string, 5000, 1);
 								PoziomPoszukiwania[i] = 0;
 								ClearCrime(i);
-								DajKase(i, price2);//moneycheat
+								DajKase(i, reward);//moneycheat
 								PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 								PlayerInfo[i][pDetSkill] += 2;
 								SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
@@ -5330,10 +5330,26 @@ public OnPlayerRequestClass(playerid, classid)
 	return 0;
 }
 
+// TODO: move this to the system or wherever
+Float:CalculateInterestRate(playerid) 
+{
+	new money = PlayerInfo[playerid][pAccount];
+	new Float:interestRate = 1.3 - 0.067 * floatlog(money);
+
+	new Float:interestRateMultiplier = 0.5;
+	if (PlayerInfo[playerid][pDom] != 0) {
+		interestRateMultiplier = 1;
+	}
+	if (IsPlayerPremiumOld(playerid) || IsPlayerPremium(playerid)) {
+		interestRateMultiplier *= 2;
+	}
+
+	return interestRate * interestRateMultiplier;
+}
+
 PayDay()
 {
-	new string[128], account,interest,playername2[MAX_PLAYER_NAME],
-        tmpintrate, checks, ebill;
+	new string[128], account,playername2[MAX_PLAYER_NAME], checks, ebill;
 
 	foreach(new i : Player)
 	{
@@ -5350,16 +5366,6 @@ PayDay()
 				GetPlayerName(i, playername2, sizeof(playername2));
 				account = PlayerInfo[i][pAccount];
 
-				if (PlayerInfo[i][pDom] != 0)
-				{
-				    if(IsPlayerPremiumOld(i)) { tmpintrate = intrate+4; }
-					else { tmpintrate = intrate+2; }//HouseInfo[key][hLevel]
-				}
-				else
-				{
-				    if(IsPlayerPremiumOld(i)) { tmpintrate = 3; }
-					else { tmpintrate = 1; }
-				}
 				if(PlayerInfo[i][pPayDay] >= 5)
 				{
 				    if(PlayerInfo[i][pAdmin] >= 1)
@@ -5385,12 +5391,13 @@ PayDay()
 					{
 					    ebill = 0;
 					}
-					interest = (PlayerInfo[i][pAccount]/1000)*(tmpintrate);
+					new Float:interestRate = CalculateInterestRate(i);
+					new interest = floatround(PlayerInfo[i][pAccount] * interestRate, floatround_ceil);
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						PlayerInfo[i][pAccount] = account+interest;
+						PlayerInfo[i][pAccount] = account + interest;
 					}
 					SendClientMessage(i, COLOR_WHITE, "|___ STAN KONTA ___|");
 					format(string, sizeof(string), "  Wyp³ata: $%d   Podatek: -$%d", checks, TaxValue);
@@ -5404,7 +5411,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odsetki: 0.%d procent",tmpintrate);
+						format(string, sizeof(string), "  Odsetki: %f procent", interestRate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);
