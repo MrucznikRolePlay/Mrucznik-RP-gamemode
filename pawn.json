@@ -9,7 +9,7 @@
 		"Zeex/samp-plugin-crashdetect:v4.20",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
-    "gumbalowsky/mysql-R5:v2",
+    	"gumbalowsky/mysql-R5:v1",
 		"MrucznikRolePlay/samp-log:v0.4",
 		"maddinat0r/samp-discord-connector:v0.2.4",
 		"Open-GTO/sa-mp-fixes",
@@ -26,7 +26,7 @@
 		"Southclaws/progress2",
 		"oscar-broman/samp-inline-sort",
 		"katursis/Pawn.RakNet:1.6.0",
-		"gumbalowsky/Regular-Expressions-Plugin-sampctl:v0.2.3"
+		"MrucznikRolePlay/Regular-Expressions-Plugin-sampctl:v0.2.4"
 	],
 	"build": {
 		"name": "",
