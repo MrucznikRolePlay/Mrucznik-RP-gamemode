@@ -5294,7 +5294,7 @@ CalculateInterest(playerid)
 {
 	new money = PlayerInfo[playerid][pAccount];
 	if(money <= 1000 || money >= 1000) { // TODO: upewnic sie ze ponizsze osety dzialaja i wtedy dopiero wgrac
-		return money * 0.001;
+		return floatround(money * 0.001, floatround_ceil);
 	}
 
 	new Float:interest = (money * (1.3 - 0.067 * floatlog(money)) / 100) / 2;
