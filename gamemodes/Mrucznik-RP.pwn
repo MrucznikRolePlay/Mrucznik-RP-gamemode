@@ -5294,7 +5294,7 @@ CalculateInterest(playerid)
 {
 	new money = PlayerInfo[playerid][pAccount];
 	if(money <= 1000) {
-		return money * 0.1;
+		return money * 0.001;
 	}
 
 	new Float:interest = (money * (1.3 - 0.067 * floatlog(money)) / 100) / 2;
@@ -5321,7 +5321,7 @@ PayDay()
 		    {
 			    if(MoneyMessage[i]==1)
 				{
-				    SendClientMessage(i, COLOR_LIGHTRED, "Nie sp³aci³eœ d³ugu, wierzyciele nas³ali na ciebie Policjê !");
+				    SendClientMessage(i, COLOR_LIGHTRED, "Nie sp³aci³eœ d³ugu, wierzyciele nas³ali na ciebie Policjê!");
 					PoziomPoszukiwania[i] += 2;
 					SetPlayerCriminal(i,INVALID_PLAYER_ID, "Niesp³acanie d³ugu");
 				}
@@ -5354,7 +5354,10 @@ PayDay()
 					    ebill = 0;
 					}
 					new interest = CalculateInterest(i);
-					new Float:interestRate = interest/PlayerInfo[i][pAccount];
+					new Float:interestRate;
+					if(PlayerInfo[i][pAccount] != 0) {
+						interestRate = interest/PlayerInfo[i][pAccount];
+					}
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
 					if(PlayerInfo[i][pAccount] <= 100000000)

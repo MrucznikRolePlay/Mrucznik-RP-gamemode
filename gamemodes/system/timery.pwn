@@ -1757,7 +1757,6 @@ public SyncTime()
 	{
 		format(string, sizeof(string), "Jest teraz godzina {0073FF}%d:00",tmphour);
 		BroadCast(COLOR_WHITE,string);
-		PayDay();
         GLOB_LastHour=tmphour;
 		if (realtime)
 		{
@@ -1766,6 +1765,7 @@ public SyncTime()
 			SetWorldTime(ltime == 0 ? tmphour : ltime);
 			ServerTime = tmphour;
 		}
+		PayDay();
 	}
 	return 1;
 }
