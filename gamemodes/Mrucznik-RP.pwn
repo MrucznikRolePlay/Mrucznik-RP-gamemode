@@ -5356,7 +5356,7 @@ PayDay()
 					new interest = CalculateInterest(i);
 					new Float:interestRate;
 					if(PlayerInfo[i][pAccount] != 0) {
-						interestRate = interest/PlayerInfo[i][pAccount];
+						interestRate = (interest/PlayerInfo[i][pAccount]) * 100;
 					}
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
@@ -5376,7 +5376,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odsetki: %f procent", interestRate);
+						format(string, sizeof(string), "  Odsetki: %.2f procent", interestRate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);
