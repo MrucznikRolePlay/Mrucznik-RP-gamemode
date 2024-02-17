@@ -5294,11 +5294,11 @@ public OnPlayerRequestClass(playerid, classid)
 Float:CalculateInterestRate(playerid) 
 {
 	new money = PlayerInfo[playerid][pAccount];
-	new Float:interestRate = 1.3 - 0.067 * floatlog(money);
-
-	new Float:interestRateMultiplier = 0.5;
+	// new Float:interestRate = 1.3 - 0.067 * floatlog(1000 + money);
+	new Float:interestRate = 0.1;
+	new Float:interestRateMultiplier = 1;
 	if (PlayerInfo[playerid][pDom] != 0) {
-		interestRateMultiplier = 1;
+		interestRateMultiplier = 2;
 	}
 	if (IsPlayerPremiumOld(playerid) || IsPlayerPremium(playerid)) {
 		interestRateMultiplier *= 2;
