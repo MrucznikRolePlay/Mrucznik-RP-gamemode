@@ -471,12 +471,6 @@ public UpuscRybe(playerid, disease, value)
 	defer DestroyRyba(CreateDynamicObject(FishModels[fish], x, y, z-0.5, 0.0, 0.0, 0.0, vw, int));
 }
 
-public SkinWedkarza(playerid, disease, value)
-{
-	//TODO: add skin redneck
-	ChatMe(playerid, "sta³ siê fanatykiem wêdkarstwa.");
-}
-
 timer DestroyRyba[600000](rybaid)
 {
 	DestroyDynamicObject(rybaid);

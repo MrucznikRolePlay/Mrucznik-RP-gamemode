@@ -207,7 +207,6 @@ forward RzucMeZPasty(playerid, disease, value);
 forward PrzyczepWedke(playerid, disease, value);
 forward Ryboglowy(playerid, disease, value);
 forward UpuscRybe(playerid, disease, value);
-forward SkinWedkarza(playerid, disease, value);
 
 
 choroby_InitEffects()
