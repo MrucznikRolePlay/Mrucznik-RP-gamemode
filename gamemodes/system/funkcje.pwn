@@ -268,7 +268,8 @@ JailDeMorgan(playerid)
 UnJailDeMorgan(playerid)
 {
 	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPos(playerid, 593.1899,-1494.0863,82.1648);
+	SetPlayerPos(playerid, -499.12, 2592.85, 53.56);
+	SetPlayerFacingAngle(playerid, 270.0);
 	Wchodzenie(playerid);
 	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;
