@@ -106,7 +106,7 @@ YCMD:skill(playerid, params[], help)
 		if(level >= 0 && level <= 50) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Wêdkowania s¹ na poziomie = 1."); format(string, sizeof(string), "Musisz z³owiæ %d ryb aby zwiêkszyæ skill.", 50 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
 		else if(level >= 51 && level <= 100) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Wêdkowania s¹ na poziomie = 2."); format(string, sizeof(string), "Musisz z³owiæ %d ryb aby zwiêkszyæ skill.", 100 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
 		else if(level >= 101 && level <= 200) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Wêdkowania s¹ na poziomie = 3."); format(string, sizeof(string), "Musisz z³owiæ %d ryb aby zwiêkszyæ skill.", 200 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Wêdkowania s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz z³owiæ %d ryb aby zwiêkszyæ skill.", 500 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Wêdkowania s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz z³owiæ %d ryb aby zwiêkszyæ skill.", 400 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
 		else if(level >= 401) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Wêdkowania s¹ na poziomie = 5."); }
 	}
 	else if (level == 7)//Car Mechanic

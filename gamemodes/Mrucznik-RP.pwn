@@ -1012,6 +1012,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!Player_CanUseCar(playerid, vehicleid))
         	return Player_RemoveFromVeh(playerid);
     }
+	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_BUSDRIVER) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpocz¹æ pracê");
 	// -- customowe parametry dla poszczególnych pojazdów
 	if(IsARower(vehicleid))
 	{
@@ -3921,33 +3922,33 @@ public OnPlayerEnterCheckpoint(playerid)
 		{
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 2335.9858,-2355.0427,13.3828, 4);
-			CP[playerid]=1202;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Baza Wosjkowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Fabryka", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==982)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2495.6113,-2408.0415,13.5445, 4);
 			CP[playerid]=983;
 			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Baza Wosjkowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Fabryka", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+310$");
 		}
 		else if(CP[playerid]==983)
 		{
 			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
+			SetPlayerCheckpoint(playerid, 2495.6113,-2408.0415,13.5445, 4);
 			CP[playerid]=984;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: WIÊZIENIE STANOWE");
+			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Baza Wosjkowa");
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+310$");
 		}
 		else if(CP[playerid]==984)
+		{
+			DisablePlayerCheckpoint(playerid);
+			SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
+			CP[playerid]=985;
+			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: WIÊZIENIE STANOWE");
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+			SendClientMessage(playerid, COLOR_GREEN, "+310$");
+		}
+		else if(CP[playerid]==985)
 		{
 		    if(BusCzit[playerid] == 1)
 			{

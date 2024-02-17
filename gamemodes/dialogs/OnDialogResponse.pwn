@@ -13504,7 +13504,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
-							    PlayerInfo[playerid][pLinia96]= 1;
+							    PlayerInfo[playerid][pLinia85]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
 								SetPlayerCheckpoint(playerid, 2119.7363,-1896.8149,13.1345, 4);
 								CP[playerid] = 501;

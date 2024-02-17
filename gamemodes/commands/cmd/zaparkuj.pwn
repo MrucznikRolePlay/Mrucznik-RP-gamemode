@@ -36,15 +36,15 @@ YCMD:zaparkuj(playerid, params[], help)
         new vehicleID = GetPlayerVehicleID(playerid);
 		new vehicleUID = VehicleUID[vehicleID][vUID];
 		new lider = PlayerInfo[playerid][pLider];
-        new org = gPlayerOrg[playerid];
+        new org = GetPlayerOrg(playerid);
 
-		new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
-			lider == CarData[vehicleUID][c_Owner] && 
-			lider > 0;
-		new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
-			gPlayerOrgLeader[playerid] == CarData[vehicleUID][c_Owner] && \
-			org > 0;
-		if(!IsCarOwner(playerid, vehicleID) && !liderOwner && !orgOwner)
+    	new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
+        lider == CarData[vehicleUID][c_Owner] && 
+        lider > 0;
+    	new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
+        org == CarData[vehicleUID][c_Owner];
+		
+		if( !IsCarOwner(playerid, vehicleID) && !liderOwner && (!orgOwner && !orgIsLeader(playerid)) ) 
 		{ 
 			return sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Ciebie!");
 		}
