@@ -1446,6 +1446,7 @@ command_akceptuj_Impl(playerid, x_job[32])
         }
         if(!IsPlayerConnected(id))
         {
+            SetPVarInt(playerid, "FixKitOffer", -1);
             SendClientMessage(playerid, -1, "Gracz, który oferowa³ ci zestaw naprawczy wyszed³ z serwera!");
             return 1;
         }
