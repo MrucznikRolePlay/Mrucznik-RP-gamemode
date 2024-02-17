@@ -1076,6 +1076,7 @@ new playerSeeSpec[MAX_PLAYERS];
 //SANDAL
 new gRO[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS];
+new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1452,6 +1453,7 @@ ZerujZmienne(playerid)
 	}
 	unoccupiedVehBlockAC[playerid] = false;
 
+	VECTOR_clear(VMembersOrg[playerid]);
 	return 1;
 }
 //EOF

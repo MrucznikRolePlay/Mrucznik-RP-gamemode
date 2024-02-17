@@ -17561,6 +17561,90 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
+	else if (dialogid == D_ORGMEMBER) {
+		if (!gPlayerOrgLeader[playerid]) {
+			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
+			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
+			DeletePVar(playerid, "prpanel_uid");
+			return 1;
+		}
+		if (response) {
+			switch(listitem) {
+				case 3: { // zwolnij
+					new uid = GetPVarInt(playerid, "prpanel_uid");
+					new nick[MAX_PLAYER_NAME];
+					strcat(nick, MruMySQL_GetNameFromUID(uid));
+					new rodzina = MruMySQL_GetAccInt("FMember", nick);
+					if(rodzina != GetPlayerOrg(playerid)) {
+						Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
+						sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!)");
+						DeletePVar(playerid, "prpanel_uid");
+						return 1;
+					}
+					new msg[1024];
+					format(msg, sizeof(msg), "UPDATE `mru_konta` SET `FMember`=0, `Rank`=99, `Member`=99, `Uniform`=0, `Team`=3 WHERE `UID`=%i AND `Rank`<1000", uid);
+					mysql_query(msg);
+					format(msg, sizeof(msg), "* Wyrzuci³eœ %s ze swojej rodziny.", nick);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
+					DeletePVar(playerid, "prpanel_uid");
+				}
+				case 4: { // ranga
+					new org = GetPlayerOrg(playerid);
+					new str[512];
+					for(new i=0;i<10;i++)
+					{
+						if(strlen(FamRang[org][i]) < 2)
+							format(str, 512, "%s[%d] -\n", str, i);
+						else
+							format(str, 512, "%s[%d] %s\n", str, i, FamRang[org][i]);
+					}
+
+					return ShowPlayerDialogEx(playerid, D_ORGMEMBER_RANK, DIALOG_STYLE_LIST, "Wybierz rangê, któr¹ chcesz nadaæ graczowi", str, "Nadaj", "Anuluj");
+				}
+				default:
+					Command_ReProcess(playerid, "pr pracownicy", false);
+			}
+		} else {
+			DeletePVar(playerid, "prpanel_uid");
+			Command_ReProcess(playerid, "pr pracownicy", false);
+		}
+		return 1;
+	}
+	else if (dialogid == D_ORGMEMBER_RANK) {
+		if (!gPlayerOrgLeader[playerid]) {
+			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
+			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
+			DeletePVar(playerid, "prpanel_uid");
+			return 1;
+		}
+		if (response) {
+			new org = GetPlayerOrg(playerid);
+			if(listitem >= MAX_RANG || listitem < 0 || strlen(FamRang[org][listitem]) < 1) {
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
+				DeletePVar(playerid, "prpanel_uid");
+				Command_ReProcess(playerid, "pr pracownicy", false);
+				return 1;
+			}
+			new uid = GetPVarInt(playerid, "prpanel_uid");
+			new nick[MAX_PLAYER_NAME];
+			strcat(nick, MruMySQL_GetNameFromUID(uid));
+			new rodzina = MruMySQL_GetAccInt("FMember", nick);
+			if(rodzina != GetPlayerOrg(playerid)) {
+				Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
+				sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
+				DeletePVar(playerid, "prpanel_uid");
+				return 1;
+			}
+			new msg[1024];
+			format(msg, sizeof(msg), "UPDATE `mru_konta` SET `Rank`=%i WHERE `UID`=%i AND `Rank`<1000", listitem, uid);
+			mysql_query(msg);
+			format(msg, sizeof(msg), "Da³es %d rangê graczowi %s", listitem, nick);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
+		}
+		DeletePVar(playerid, "fpanel_uid");
+		Command_ReProcess(playerid, "pr pracownicy", false);
+		return 1;
+	}
 	else if(mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
 	{
 		return 1;

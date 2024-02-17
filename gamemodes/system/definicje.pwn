@@ -470,6 +470,9 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 #define D_MECH_SPRZEDAZ_FIXKIT          10110
 
+#define D_ORGMEMBER                     10111
+#define D_ORGMEMBER_RANK                10112
+
 
 //------------------------------------------------------------------------------
 //                              INNE

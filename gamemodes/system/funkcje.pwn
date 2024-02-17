@@ -5097,6 +5097,7 @@ orgInvitePlayer(playerid, orguid)
     new lStr[64];
     format(lStr, 64, "ORG » Zosta³eœ przyjêty do organizacji %s.", OrgInfo[orgid][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
+	MruMySQL_SavePlayerFamily(playerid);
     return 1;
 }
 
@@ -5104,6 +5105,7 @@ orgUnInvitePlayer(playerid)
 {
     new orgid = gPlayerOrg[playerid];
     PlayerInfo[playerid][pOrg] = 0;
+	PlayerInfo[playerid][pRank] = 0;
     PlayerInfo[playerid][pUniform] = 0;
     gPlayerOrg[playerid] = 0xFFFF;
     PlayerInfo[playerid][pTeam] = 3;
@@ -5113,6 +5115,7 @@ orgUnInvitePlayer(playerid)
     format(lStr, 64, "ORG » Zosta³eœ wyproszony z organizacji %s.", OrgInfo[orgid][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
     gPlayerOrgLeader[playerid] = false;
+	MruMySQL_SavePlayerFamily(playerid);
     return 1;
 }
 
@@ -5151,6 +5154,7 @@ orgGivePlayerRank(playerid, callerid, rankid)
     format(lStr, 128, "ORG » Otrzyma³eœ %d rangê (%s) w organizacji %s. Nada³: %s.", rankid, (strlen(FamRang[PlayerInfo[playerid][pOrg]][rankid]) > 1) ? (FamRang[PlayerInfo[playerid][pOrg]][rankid]) : (FamRang[0][rankid]), OrgInfo[orgid][o_Name], (callerid == INVALID_PLAYER_ID) ? ("SYSTEM") : (GetNick(callerid)));
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
     PlayerInfo[playerid][pRank] = rankid;
+	MruMySQL_SetAccInt("Rank", GetNickEx(playerid), rankid);
     return 1;
 }
 
