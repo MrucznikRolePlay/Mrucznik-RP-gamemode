@@ -5290,21 +5290,23 @@ public OnPlayerRequestClass(playerid, classid)
 	return 0;
 }
 
-// TODO: move this to the system or wherever
-Float:CalculateInterestRate(playerid) 
+CalculateInterest(playerid) 
 {
 	new money = PlayerInfo[playerid][pAccount];
-	// new Float:interestRate = 1.3 - 0.067 * floatlog(1000 + money);
-	new Float:interestRate = 0.1;
-	new Float:interestRateMultiplier = 1;
-	if (PlayerInfo[playerid][pDom] != 0) {
-		interestRateMultiplier = 2;
-	}
-	if (IsPlayerPremiumOld(playerid) || IsPlayerPremium(playerid)) {
-		interestRateMultiplier *= 2;
+	if(money <= 1000) {
+		return money * 0.1;
 	}
 
-	return (interestRate * interestRateMultiplier) / 100;
+	new Float:interest = (money * (1.3 - 0.067 * floatlog(money)) / 100) / 2;
+	new Float:interestMultiplier = 1;
+	if (PlayerInfo[playerid][pDom] != 0) {
+		interestMultiplier = 2;
+	}
+	if (IsPlayerPremiumOld(playerid) || IsPlayerPremium(playerid)) {
+		interestMultiplier *= 2;
+	}
+
+	return floatround(interest * interestMultiplier, floatround_ceil);
 }
 
 PayDay()
@@ -5351,8 +5353,8 @@ PayDay()
 					{
 					    ebill = 0;
 					}
-					new Float:interestRate = CalculateInterestRate(i);
-					new interest = floatround(PlayerInfo[i][pAccount] * interestRate, floatround_ceil);
+					new interest = CalculateInterest(i);
+					new Float:interestRate = interest/PlayerInfo[i][pAccount];
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
 					if(PlayerInfo[i][pAccount] <= 100000000)
