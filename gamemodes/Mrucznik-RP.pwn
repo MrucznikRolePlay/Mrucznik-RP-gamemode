@@ -5304,7 +5304,7 @@ Float:CalculateInterestRate(playerid)
 		interestRateMultiplier *= 2;
 	}
 
-	return interestRate * interestRateMultiplier;
+	return (interestRate * interestRateMultiplier) / 100;
 }
 
 PayDay()
