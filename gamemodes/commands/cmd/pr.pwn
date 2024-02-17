@@ -232,6 +232,7 @@ YCMD:pr(playerid, params[], help)
 					}
 					ShowPlayerDialogPages(playerid, "RodzinaPracownicy", DIALOG_STYLE_TABLIST, sprintf("Cz³onkowie %s", OrgInfo[org][o_Name]), "OK", "Zamknij", 15, "{888888}Nastêpna strona >>>", "{888888}<<< Poprzednia strona");
 				}
+				mysql_free_result();
 			}
 			else
 			{
