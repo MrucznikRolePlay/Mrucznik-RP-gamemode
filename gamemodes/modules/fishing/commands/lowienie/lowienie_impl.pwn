@@ -106,10 +106,6 @@ command_lowienie_Impl(playerid)
                 PoziomPoszukiwania[playerid]++;
             SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Nielegalny po³ów ryb");
         }
-        if(random(5) == 0)
-        {
-            InfectPlayer(playerid, FANATYK_WEDKARSTWA);
-        }
         if(Fishes[playerid][pWeight1] == 0)
         {
             PlayerInfo[playerid][pFishes] += 1;
