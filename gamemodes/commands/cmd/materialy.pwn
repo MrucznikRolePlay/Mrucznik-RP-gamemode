@@ -65,7 +65,7 @@ YCMD:materialy(playerid, params[], help)
 				}
 
 				if(moneys < 1 || moneys > 10) { sendTipMessageEx(playerid, COLOR_GREY, "Iloœæ paczek od 1 do 10 !"); return 1; }
-				new price = moneys * 500;
+				new price = moneys * 1200;
 				if(kaska[playerid] > price)
 				{
 				    format(string, sizeof(string), "* Kupi³eœ %d paczek materia³ów za $%d jedŸ do fabryki materia³ów. Dok³adn¹ lokalizacjê musisz ustaliæ sam.", moneys, price);

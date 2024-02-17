@@ -134,7 +134,7 @@ YCMD:sms(playerid, params[], help)
 	//Normal SMS
 	if(givePlayerNumber != 555) 
 	{
-		smsCost = 450; //Przypisanie watoœci koszta sms
+		smsCost = 50; //Przypisanie watoœci koszta sms
 		new checkNumberPlayer = FindPlayerByNumber(givePlayerNumber);
 		
 		if(checkNumberPlayer == INVALID_PLAYER_ID)

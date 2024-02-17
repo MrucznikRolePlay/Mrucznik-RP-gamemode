@@ -93,6 +93,14 @@ SprzedajeRybe(playerid, fishid = 0)
 	Fishes[playerid][pLastFish] = 0;
 	Fishes[playerid][pFishID] = 0;
 	FishGood[playerid] = 0;
+
+	if(IsPlayerSick(playerid, FANATYK_WEDKARSTWA))
+	{
+		if(random(100) <= 5)
+		{
+			CurePlayer(playerid, FANATYK_WEDKARSTWA);
+		}
+	}
 	return 1;
 }
 

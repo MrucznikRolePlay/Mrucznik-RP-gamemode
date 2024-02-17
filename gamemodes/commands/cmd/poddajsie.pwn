@@ -59,12 +59,15 @@ YCMD:poddajsie(playerid, params[], help)
 					        {
 					            if(lowcaz[playerid] == playa)
 					            {
-									//ShowPlayerDialogEx(playerid, 113, DIALOG_STYLE_MSGBOX, "Stój w imieniu prawa!", "Lorem ipsum", "Poddaj siê", "Uciekaj");
+									new reward = PoziomPoszukiwania[playa] * 10000;
+									new punishment = PoziomPoszukiwania[playa] * 1000;
+									new bail = PoziomPoszukiwania[playa] * 16000;
+
 							        GetPlayerName(playerid, sendername, sizeof(sendername));
 				        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							        format(string, sizeof(string), "* £owca Nagród %s proponuje ci poddanie siê i trafienie do wiêzienia z ma³¹ kar¹, aby siê zgodziæ wpisz /poddajesie",sendername);
+							        format(string, sizeof(string), "* £owca Nagród %s proponuje ci poddanie siê i trafienie do wiêzienia z kar¹ %d$ i kaucj¹ %d$, aby siê zgodziæ wpisz /poddajesie", sendername, punishment, bail);
 							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-							        format(string, sizeof(string), "* Zaproponowa³eœ %s poddanie siê, jeœli zostanie ono akceptowane zarobisz %d$",giveplayer, PoziomPoszukiwania[playa]*2500);
+							        format(string, sizeof(string), "* Zaproponowa³eœ %s poddanie siê, jeœli zostanie ono akceptowane zarobisz %d$",giveplayer, reward);
 							        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							        poddaje[playa] = 1;
 									lowcap[playa] = playerid;

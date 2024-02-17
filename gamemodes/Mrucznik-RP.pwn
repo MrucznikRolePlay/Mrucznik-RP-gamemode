@@ -1428,37 +1428,54 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
+
+	if(PlayerInfo[playerid][pJailed] == 10) // uniknal marcepana bo wbil przed uplywem 3 minut
+	{
+		if(gettime() - PlayerInfo[playerid][pJailTime] > 600)
+		{
+			// nie marcepanuj po 10 minutach od poprzedniego marcepana
+			PlayerInfo[playerid][pJailed] = 0;
+			PlayerInfo[playerid][pJailTime] = 0;
+		}
+		else
+		{
+			// kolejne /q, 1 minuta na powrót
+			PlayerInfo[playerid][pJailTime] = gettime() + 120;
+		}
+	}
+
     //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || Kajdanki_JestemSkuty[playerid] >= 1 || poscig[playerid] == 1)
     if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || Kajdanki_JestemSkuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
-        PlayerInfo[playerid][pJailed] = 10;
-        new string[130];
-        new powod[36];
-        if(PlayerTied[playerid] >= 1)
-        {
-            strcat(powod, "bycie zwiazanym, ");
-        }
-        if(PlayerCuffed[playerid] >= 1)
-        {
-            strcat(powod, "kajdanki w aucie, ");
-        }
-        if(Kajdanki_JestemSkuty[playerid] >= 1)
-        {
-            strcat(powod, "kajdanki pieszo, ");
-        }
-        if(poscig[playerid] >= 1)
-        {
-            strcat(powod, "poœcig, ");
-        }
-        new codal[16];
-        switch(reason)
-        {
-            case 0: codal = "timeout";
-            case 1: codal = "/q";
-            case 2: codal = "kick/ban";
-        }
-        format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNickEx(playerid), powod, codal);
-        SendAdminMessage(COLOR_P@, string);
+		PlayerInfo[playerid][pJailed] = 10;
+		PlayerInfo[playerid][pJailTime] = gettime();
+		new string[130];
+		new powod[36];
+		if(PlayerTied[playerid] >= 1)
+		{
+			strcat(powod, "bycie zwiazanym, ");
+		}
+		if(PlayerCuffed[playerid] >= 1)
+		{
+			strcat(powod, "kajdanki w aucie, ");
+		}
+		if(Kajdanki_JestemSkuty[playerid] >= 1)
+		{
+			strcat(powod, "kajdanki pieszo, ");
+		}
+		if(poscig[playerid] >= 1)
+		{
+			strcat(powod, "poœcig, ");
+		}
+		new codal[16];
+		switch(reason)
+		{
+			case 0: codal = "timeout";
+			case 1: codal = "/q";
+			case 2: codal = "kick/ban";
+		}
+		format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNickEx(playerid), powod, codal);
+		SendAdminMessage(COLOR_P@, string);
 	}
 
 	if(PoziomPoszukiwania[playerid] >= 1)
@@ -1957,7 +1974,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					if(PoziomPoszukiwania[playerid] >= 1)
 					{
-						new price2 = PoziomPoszukiwania[playerid] * 1000;
+						new reward = PoziomPoszukiwania[playerid] * 5000;
 						new count, i = killerid;
 						if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
 						{
@@ -2008,11 +2025,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 									}
 								}
 
-								format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+								format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", reward);
 								GameTextForPlayer(i, string, 5000, 1);
 								PoziomPoszukiwania[i] = 0;
 								ClearCrime(i);
-								DajKase(i, price2);//moneycheat
+								DajKase(i, reward);//moneycheat
 								PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 								PlayerInfo[i][pDetSkill] += 2;
 								SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
@@ -2322,29 +2339,41 @@ SetPlayerSpawnPos(playerid)
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
 	{
-	    new string[256];
-	    new kaseczka = (kaska[playerid] > 0) ? (kaska[playerid]/2) : 1;
-	    new sendername[MAX_PLAYER_NAME];
-	    GetPlayerName(playerid, sendername, sizeof(sendername));
-		format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
-		SendClientMessage(playerid, COLOR_LIGHTRED, string);
-		ResetPlayerWeapons(playerid);
-		UsunBron(playerid);
-		PlayerInfo[playerid][pJailed] = 3;
-		PlayerInfo[playerid][pJailTime] = 15*60;
-		format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
-        SetPlayerVirtualWorld(playerid, 1000+playerid);
-		PlayerInfo[playerid][pMuted] = 1;
-		SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
-		format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po³owê kasy i broñ", sendername);
-		SendClientMessageToAll(COLOR_LIGHTRED, string);
-		format(string, sizeof(string), "Dodatkowo zabrano z twojego portfela %d$ i wyzerowano twoje bronie oraz zabrano po³owê matsów", kaseczka);
-        SendClientMessage(playerid, COLOR_LIGHTRED, string);
-        Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc zabrano mu %d$, %d materia³ów oraz broñ.", GetPlayerLogName(playerid), kaseczka, PlayerInfo[playerid][pMats]/2);
-        ZabierzKase(playerid, kaseczka);
-        PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
+		new currTime = gettime();
+		new quitTime = PlayerInfo[playerid][pJailTime];
+		if(currTime - quitTime > 180) // gracz wbi³ po 3 minutach
+		{
+			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
+			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Da³eœ /q podczas akcji, ale wróci³eœ w ci¹gu 3 minut. Odgrywaj dalej - mo¿esz daæ /q dopiero po 10 minutach.");
+		}
+		else
+		{
+			new string[256];
+			new kaseczka = (kaska[playerid] > 0) ? (kaska[playerid]/2) : 1;
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
+			SendClientMessage(playerid, COLOR_LIGHTRED, string);
+			ResetPlayerWeapons(playerid);
+			UsunBron(playerid);
+			PlayerInfo[playerid][pJailed] = 3;
+			PlayerInfo[playerid][pJailTime] = 15*60;
+			format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
+			SetPlayerVirtualWorld(playerid, 1000+playerid);
+			PlayerInfo[playerid][pMuted] = 1;
+			SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
+			format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po³owê kasy i broñ", sendername);
+			SendClientMessageToAll(COLOR_LIGHTRED, string);
+			format(string, sizeof(string), "Dodatkowo zabrano z twojego portfela %d$ i wyzerowano twoje bronie oraz zabrano po³owê matsów", kaseczka);
+			SendClientMessage(playerid, COLOR_LIGHTRED, string);
+			Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc zabrano mu %d$, %d materia³ów oraz broñ.", GetPlayerLogName(playerid), kaseczka, PlayerInfo[playerid][pMats]/2);
+			ZabierzKase(playerid, kaseczka);
+			PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
+		}
 	}
 	//Paintball
     else if(PlayerPaintballing[playerid] != 0)
@@ -5261,10 +5290,26 @@ public OnPlayerRequestClass(playerid, classid)
 	return 0;
 }
 
+// TODO: move this to the system or wherever
+Float:CalculateInterestRate(playerid) 
+{
+	new money = PlayerInfo[playerid][pAccount];
+	new Float:interestRate = 1.3 - 0.067 * floatlog(money);
+
+	new Float:interestRateMultiplier = 0.5;
+	if (PlayerInfo[playerid][pDom] != 0) {
+		interestRateMultiplier = 1;
+	}
+	if (IsPlayerPremiumOld(playerid) || IsPlayerPremium(playerid)) {
+		interestRateMultiplier *= 2;
+	}
+
+	return interestRate * interestRateMultiplier;
+}
+
 PayDay()
 {
-	new string[128], account,interest,playername2[MAX_PLAYER_NAME],
-        tmpintrate, checks, ebill;
+	new string[128], account,playername2[MAX_PLAYER_NAME], checks, ebill;
 
 	foreach(new i : Player)
 	{
@@ -5281,16 +5326,6 @@ PayDay()
 				GetPlayerName(i, playername2, sizeof(playername2));
 				account = PlayerInfo[i][pAccount];
 
-				if (PlayerInfo[i][pDom] != 0)
-				{
-				    if(IsPlayerPremiumOld(i)) { tmpintrate = intrate+4; }
-					else { tmpintrate = intrate+2; }//HouseInfo[key][hLevel]
-				}
-				else
-				{
-				    if(IsPlayerPremiumOld(i)) { tmpintrate = 3; }
-					else { tmpintrate = 1; }
-				}
 				if(PlayerInfo[i][pPayDay] >= 5)
 				{
 				    if(PlayerInfo[i][pAdmin] >= 1)
@@ -5316,12 +5351,13 @@ PayDay()
 					{
 					    ebill = 0;
 					}
-					interest = (PlayerInfo[i][pAccount]/1000)*(tmpintrate);
+					new Float:interestRate = CalculateInterestRate(i);
+					new interest = floatround(PlayerInfo[i][pAccount] * interestRate, floatround_ceil);
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						PlayerInfo[i][pAccount] = account+interest;
+						PlayerInfo[i][pAccount] = account + interest;
 					}
 					SendClientMessage(i, COLOR_WHITE, "|___ STAN KONTA ___|");
 					format(string, sizeof(string), "  Wyp³ata: $%d   Podatek: -$%d", checks, TaxValue);
@@ -5335,7 +5371,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odsetki: 0.%d procent",tmpintrate);
+						format(string, sizeof(string), "  Odsetki: %f procent", interestRate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);

@@ -1042,7 +1042,6 @@ new realchat = 1;
 new timeshift = -1;
 new shifthour;
 
-new intrate = 1;
 new levelexp = 4;
 //new Float:ChangePos[MAX_PLAYERS][3];
 new ChangePos2[MAX_PLAYERS][2];

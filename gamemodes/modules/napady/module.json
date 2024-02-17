@@ -1,0 +1,11 @@
+{
+    "name": "napady",
+    "description": "System napadu",
+    "author": "Sandal",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "15.02.2024"
+}
