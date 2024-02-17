@@ -70,6 +70,7 @@ YCMD:adminajail(playerid, params[], help)
 					{
 					    OnDuty[playa] = 0;
 					    OnDutyCD[playa] = 0;
+						RmvLSPDMemberFromThiefMapIcons(playa);
 					}
 					//Wykonanie:
 					if(strfind((result), "DM2", true) == -1

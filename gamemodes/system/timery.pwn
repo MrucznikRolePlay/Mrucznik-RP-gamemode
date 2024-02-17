@@ -3215,7 +3215,15 @@ public JednaSekundaTimer()
 				PlayerCuffedTime[i] -= 1;
 			}
 		}
+
+		#if defined _ZLODZIEJ_AUT
+			if(stole_a_car_seconds_to_find_cp[i] > 0)
+			{
+				stole_a_car_seconds_to_find_cp[i]--;
+			}
+		#endif
 	}
+
 	return 1;
 }
 

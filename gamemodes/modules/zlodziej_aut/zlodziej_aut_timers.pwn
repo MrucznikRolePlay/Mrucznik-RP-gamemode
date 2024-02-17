@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ czas ]-------------------------------------------------//
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                zlodziej_aut                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,63 +16,55 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: NikodemBanan
+// Data utworzenia: 13.02.2024
+//Opis:
 /*
-	
+	Nowa praca z³odzieja aut. TODO: dodaæ szczegó³owy opis
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
+//-----------------<[ Timery: ]>-------------------
 
-YCMD:czas(playerid, params[], help)
+public FinishLSPDCarThiefTracking(playerid)
 {
-	new string[256];
+	EnableCarThiefCheckpoint(playerid);
+	DestroyCarThiefLSPDMapIcon(playerid);
+}
 
-    if(IsPlayerConnected(playerid))
+public UpdateCarThiefLSPDMapIcon(playerid)
+{
+	new icon_id = stole_a_car_lspd_map_icon[playerid];
+
+	if(IsValidDynamicMapIcon(icon_id))
 	{
-	    new mtext[20];
-		new year, month,day;
-		getdate(year, month, day);
-		if(month == 1) { mtext = "Styczen"; }
-		else if(month == 2) { mtext = "Luty"; }
-		else if(month == 3) { mtext = "Marzec"; }
-		else if(month == 4) { mtext = "Kwiecien"; }
-		else if(month == 5) { mtext = "Maj"; }
-		else if(month == 6) { mtext = "Czerwiec"; }
-		else if(month == 7) { mtext = "Lipiec"; }
-		else if(month == 8) { mtext = "Sierpien"; }
-		else if(month == 9) { mtext = "Wrzesien"; }
-		else if(month == 10) { mtext = "Pazdziernik"; }
-		else if(month == 11) { mtext = "Listopad"; }
-		else if(month == 12) { mtext = "Grudzien"; }
-	    new hour,minuite,second;
-		gettime(hour,minuite,second);
-		FixHour(hour);
-		hour = shifthour;
-		if (minuite < 10)
+		if(IsPlayerConnected(playerid) && stole_a_car[playerid])
 		{
-			format(string, sizeof(string), "~y~%d %s %d ~n~~g~|~w~%d:0%d~g~|", day, mtext, year, hour, minuite);
+			new Float:thief_pos_x, Float:thief_pos_y, Float:thief_pos_z;
+			GetPlayerPos(playerid, thief_pos_x, thief_pos_y, thief_pos_z);
+			Streamer_SetItemPos(STREAMER_TYPE_MAP_ICON, icon_id, thief_pos_x, thief_pos_y, thief_pos_z);
 		}
 		else
 		{
-			format(string, sizeof(string), "~y~%d %s %d~n~~g~|~w~%d:%d~g~|", day, mtext, year, hour, minuite);
+			DestroyCarThiefLSPDMapIcon(playerid);
 		}
+	} 
 
-		if (PlayerInfo[playerid][pJailTime] > 0)
-		{
-			format(string, sizeof(string), "%s~n~~w~Czas Aresztu: %d sec", string, PlayerInfo[playerid][pJailTime]-10);
-		}
-
-		if (stole_a_car_seconds_to_find_cp[playerid] > 0)
-		{
-			format(string, sizeof(string), "%s~n~~w~Czas do znalezienia dziupli: %d sec", string, stole_a_car_seconds_to_find_cp[playerid]);
-		}
-		
-		GameTextForPlayer(playerid, string, 5000, 1);
-	}
 	return 1;
 }
+
+public AntiTeleportCarThief(playerid)
+{
+	stole_a_car_anti_tp[playerid] = 0;
+}
+
+public CarThiefMissionGoalTimer(playerid)
+{
+	if(stole_a_car_checkpoint[playerid][1] != -1 && IsPlayerInDynamicArea(playerid, stole_a_car_checkpoint[playerid][1], 0))
+	{
+		CarThiefMissionGoal(playerid);
+	}
+}
+
+//end

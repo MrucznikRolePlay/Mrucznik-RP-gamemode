@@ -318,7 +318,8 @@ public OnGameModeInit()
 
     ZaladujTrasy(); //System wyœcigów
 	ZaladujPickupy();
-	ZaladujSamochody(); //Auta do kradziezy
+	ZaladujSamochodyDoKradziezy(); //Auta do kradziezy
+	LoadDeluxeCarsForStealing(); //Auta deluxe do kradziezy
 	Zaladuj3DTexty();
 	ZaladujIkony();
 
@@ -4263,70 +4264,6 @@ public OnPlayerEnterCheckpoint(playerid)
 		}
 	}
 //koniec linii 85 i system autobusów
-	else if(CP[playerid]==1)
-	{
-	    if(IsPlayerInAnyVehicle(playerid))
-	    {
-		    PlayerInfo[playerid][pJackSkill] ++;
-			if(PlayerInfo[playerid][pJackSkill] == 50)
-			{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 2, bêdziesz wiêcej zarabiaæ oraz szybciej ukraœæ nowe auto."); }
-			else if(PlayerInfo[playerid][pJackSkill] == 100)
-			{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 3, bêdziesz wiêcej zarabiaæ oraz szybciej ukraœæ nowe auto."); }
-			else if(PlayerInfo[playerid][pJackSkill] == 200)
-			{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 4, bêdziesz wiêcej zarabiaæ oraz szybciej ukraœæ nowe auto."); }
-			else if(PlayerInfo[playerid][pJackSkill] == 400)
-			{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 5, bêdziesz najwiêcej zarabiaæ oraz najszybciej kraœæ auta."); }
-			new level = PlayerInfo[playerid][pJackSkill];
-			if(level >= 0 && level <= 50)
-			{
-			    new rand = random(sizeof(SELLCAR1));
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 20 minut.", SELLCAR1[rand]);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, SELLCAR1[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 600;
-			}
-			else if(level >= 51 && level <= 100)
-			{
-			    new rand = random(sizeof(SELLCAR2));
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 18 minut.", SELLCAR2[rand]);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, SELLCAR2[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 540;
-			}
-			else if(level >= 101 && level <= 200)
-			{
-			    new rand = random(sizeof(SELLCAR3));
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 16 minut.", SELLCAR3[rand]);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, SELLCAR3[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 480;
-			}
-			else if(level >= 201 && level <= 400)
-			{
-			    new rand = random(sizeof(SELLCAR4));
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 14 minut.", SELLCAR4[rand]);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, SELLCAR4[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 420;
-			}
-			else if(level >= 401)
-			{
-			    new money = 6000;
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 12 minut.", money);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, money);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 360;
-			}
-			GameTextForPlayer(playerid, "~y~Sprzedales pojazd", 2500, 1);
-			CP[playerid] = 0;
-		    DisablePlayerCheckpoint(playerid);
-		    RespawnVehicleEx(GetPlayerVehicleID(playerid));
-		}
-		else
-		{
-		    GameTextForPlayer(playerid, "Nie jestes w wozie", 5000, 1);
-		}
-	}
 	else if(CP[playerid] == 5)
 	{
 	    GameTextForPlayer(playerid, "~y~W punkcie misji", 2500, 1);
@@ -5120,7 +5057,32 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         //NOWY SYSTEM AUT FRAKCYJNYCH I PUBLICZNYCH
         if(newcar <= CAR_End) //do kradziezy
         {
-            if(KradniecieWozu[playerid] != newcar)
+			new is_veh_deluxe = false, steal_impossible = false;
+
+			for(new i = 0; i < sizeof(deluxe_cars_for_stealing_ids); i++)
+			{
+				if(deluxe_cars_for_stealing_ids[i] == newcar)
+				{
+					is_veh_deluxe = true;
+					break;
+				}
+			}
+
+			if(is_veh_deluxe)
+			{
+				if(PlayerInfo[playerid][pJob] != JOB_CARTHIEF || PlayerInfo[playerid][pJackSkill] < 400)
+				{
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Potrzebujesz pracy z³odzieja aut i 5 skilla, by ukraœæ ten wóz.");
+					RemovePlayerFromVehicleEx(playerid);
+					steal_impossible = true;
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_YELLOW, "Kradzie¿ tego wozu bardzo ci siê op³aci, jednak czujesz, ¿e coœ z nim jest nie tak...");
+				}
+			}
+
+            if(KradniecieWozu[playerid] != newcar && !steal_impossible)
 		    {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij aby spróbowaæ to zrobiæ.");
 				new engine, lights, alarm, doors, bonnet, boot, objective;
@@ -5129,9 +5091,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 			}
         }
 		gLastCar[playerid] = newcar;
-
-		
-
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{
