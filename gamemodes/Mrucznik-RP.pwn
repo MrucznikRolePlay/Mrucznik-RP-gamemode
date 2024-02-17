@@ -5293,7 +5293,7 @@ public OnPlayerRequestClass(playerid, classid)
 CalculateInterest(playerid) 
 {
 	new money = PlayerInfo[playerid][pAccount];
-	if(money <= 1000) {
+	if(money <= 1000 || money >= 1000) { // TODO: upewnic sie ze ponizsze osety dzialaja i wtedy dopiero wgrac
 		return money * 0.001;
 	}
 
