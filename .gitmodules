@@ -1,9 +1,9 @@
 [submodule "gamemodes/obiekty"]
 	path = gamemodes/obiekty
-	url = https://github.com/Mrucznik/Mrucznik-RP-obiekty.git
+	url = https://github.com/MrucznikRolePlay/Mrucznik-RP-obiekty.git
 [submodule "include"]
 	path = include
-	url = https://github.com/Mrucznik/Mrucznik-RP-Includes.git
+	url = https://github.com/MrucznikRolePlay/Mrucznik-RP-Includes.git
 [submodule "models"]
 	path = models
-	url = https://github.com/Mrucznik/Mrucznik-RP-models.git
+	url = https://github.com/MrucznikRolePlay/Mrucznik-RP-models.git

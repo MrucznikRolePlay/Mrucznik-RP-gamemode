@@ -21,8 +21,8 @@ Aby ułatwić wam obczajanie co i jak, umieszczam tutorial krok po kroku, jak ur
 # OK, masz już wszystkie zależności potrzebne do zbudowania projektu, lecimy dalej.
 
 # Klonujemy projekt razem z submodułami
-git clone --recurse-submodules https://github.com/Mrucznik/Mrucznik-RP-2.5
-cd Mrucznik-RP-2.5
+git clone --recurse-submodules https://github.com/MrucznikRolePlay/Mrucznik-RP-gamemode
+cd Mrucznik-RP-gamemode
 
 # OK, repozytorium pobrane, teraz możemy odpalić serwer
 docker-compose up
@@ -39,7 +39,7 @@ docker-compose up
 
 ## Nowsza wersja
 
-Mapa była w trakcie przenoszenia na nową wersję MySQL + refactor, ale prace nie zostały dokończone. Zmiany możesz zobaczyć w tym pull requeście: https://github.com/Mrucznik/Mrucznik-RP-2.5/pull/286
+Mapa była w trakcie przenoszenia na nową wersję MySQL + refactor, ale prace nie zostały dokończone. Zmiany możesz zobaczyć w tym pull requeście: https://github.com/MrucznikRolePlay/Mrucznik-RP-gamemode/pull/286
 
 Aby ją odpalić należy przełączyć się na brancha new_mysql: `git checkout new_mysql` a następnie odpalić kontenery: `docker-compose up`.
 
@@ -72,7 +72,7 @@ Aby ją odpalić należy przełączyć się na brancha new_mysql: `git checkout 
 
 ## Konfiguracja repozytorium
 
-- `git clone  https://github.com/Mrucznik/Mrucznik-RP-2.5`
+- `git clone  https://github.com/MrucznikRolePlay/Mrucznik-RP-gamemode`
 - `cd Mrucznik-RP-2.5`
 - `git submodule init`
 - `git submodule update` - w razie problemów z uprawnieniami edytuj plik .git/config podmieniając ścieżki submodułów z protokołu git na https
@@ -87,5 +87,5 @@ Aby skompilować gamemode z użyciem sampctl, należy [zainstalować sampctl](ht
 - `sampctl build`
 
 ## Subrepozytoria
-- https://github.com/Mrucznik/Mrucznik-RP-obiekty - obiekty serwera
-- https://github.com/Mrucznik/Mrucznik-RP-Includes/ - includy serwera
+- https://github.com/MrucznikRolePlay/Mrucznik-RP-obiekty - obiekty serwera
+- https://github.com/MrucznikRolePlay/Mrucznik-RP-Includes/ - includy serwera

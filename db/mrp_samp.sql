@@ -163,7 +163,7 @@ BEGIN
 DECLARE message VARCHAR(256);
 
 # action
-UPDATE mru_konta SET FMember=family, Rank=1009 WHERE Nick LIKE player;
+UPDATE mru_konta SET FMember=family, `Rank`=1009 WHERE Nick LIKE player;
 
 # log
 SET message = CONCAT('Nadano lidera rodziny ', family, ' graczowi ', player);
@@ -260,7 +260,7 @@ BEGIN
 DECLARE message VARCHAR(256);
 
 # action
-UPDATE mru_konta SET FMember=0, Rank=0 WHERE Nick LIKE player;
+UPDATE mru_konta SET FMember=0, `Rank`=0 WHERE Nick LIKE player;
 
 # log
 SET message = CONCAT('Usunieto lidera frakcji graczowi ', player);
@@ -618,7 +618,7 @@ END$$
 --
 -- Functions
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `CAR_NAME` (`carid` INTEGER) RETURNS VARCHAR(32) CHARSET latin1 BEGIN
+CREATE DEFINER=`root`@`localhost` FUNCTION `CAR_NAME` (`carid` INTEGER) RETURNS VARCHAR(32) CHARSET latin1 DETERMINISTIC BEGIN
     CASE carid
         WHEN 400 THEN RETURN 'Landstalker';
         WHEN 401 THEN RETURN 'Bravura';
