@@ -66,11 +66,14 @@ YCMD:wiadomosc(playerid, params[], help)
             sendErrorMessage(playerid, "Odczekaj 3 sekundy zanim wyœlesz kolejn¹ wiadomoœæ!"); 
             return 1;
         }
-        if(PlayerInfo[playerid][pInjury] > 0 && GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0)
+        if(PlayerInfo[playerid][pInjury] > 0 && !PlayerInfo[playerid][pAdmin] && !PlayerInfo[playerid][pNewAP] && !PlayerInfo[playerid][pZG] && !IsAScripter(playerid))
         {
-            if(!PlayerInfo[playerid][pAdmin] && !PlayerInfo[playerid][pNewAP] && !PlayerInfo[playerid][pZG] && !IsAScripter(playerid)) 
+            if(GetDistanceBetweenPlayers(playerid, giveplayerid) > 50.0)
             {
-                return sendErrorMessage(playerid, "Gdy jesteœ nieprzytomny mo¿esz wysy³aæ wiadomoœci jedynie na ma³¹ odleg³oœæ");
+                if(!PlayerInfo[giveplayerid][pAdmin] && !PlayerInfo[giveplayerid][pNewAP] && !PlayerInfo[giveplayerid][pZG] && !IsAScripter(giveplayerid)) 
+                {
+                    return sendErrorMessage(playerid, "Gdy jesteœ ranny mo¿esz wysy³aæ wiadomoœci jedynie na ma³¹ odleg³oœæ.");
+                }
             }
         }
         
@@ -85,27 +88,59 @@ YCMD:wiadomosc(playerid, params[], help)
         if (AntyReklama(text) != 0)
         {
             SendClientMessage(playerid, COLOR_GRAD2, "NIE CHCEMY REKLAM!");
-            format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.", playerid, GetNick(playerid), text);
-            SendMessageToAdmin(string, COLOR_LIGHTRED);
+            if(strlen(params) < 78)
+            {   
+                format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s.", playerid, GetNick(playerid), text);
+                SendMessageToAdmin(string, COLOR_LIGHTRED);
+            }
+            else
+            {
+                new pos = strfind(params, " ", true, strlen(params) / 2);
+                if(pos != -1)
+                {
+                    new text2[64];
+                    strmid(text2, text, pos, strlen(text));
+                    strdel(text, pos, strlen(text));
+                    format(string, sizeof(string), "AdmWarning: [%d] %s REKLAMA: %s [.]", playerid, GetNick(playerid), text);
+                    SendMessageToAdmin(string, COLOR_LIGHTRED);
+                    format(string, sizeof(string), "[.] %s", text2);
+                    SendMessageToAdmin(string, COLOR_LIGHTRED); 
+                }
+            }
 			Log(warningLog, INFO, "%s reklamuje na PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
             return 1;
         }
         if (AntyCzitText(text))
         {
-            format(string, sizeof(string), "AdmWarning: [%d] %s mówi coœ o cheat'ach do [%s]: %s", playerid, GetNick(playerid), GetNick(giveplayerid), text);
-            SendMessageToAdmin(string, COLOR_LIGHTRED); 
-			Log(warningLog, INFO, "%s mówi coœ o czitach na PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
+            if(strlen(params) < 90)
+            {   
+                format(string, sizeof(string), "AdmWarning: [%d] %s mówi coœ o cheat'ach do [%s]: %s", playerid, GetNick(playerid), GetNick(giveplayerid), text);
+                SendMessageToAdmin(string, COLOR_LIGHTRED); 
+            }
+            else
+            {
+                new pos = strfind(params, " ", true, strlen(params) / 2);
+                if(pos != -1)
+                {
+                    new text2[80];
+                    strmid(text2, text, pos, strlen(text));
+                    strdel(text, pos, strlen(text));
+                    format(string, sizeof(string), "AdmWarning: [%d] %s mówi coœ o cheat'ach do [%s]: %s [.]", playerid, GetNick(playerid), GetNick(giveplayerid), text);
+                    SendMessageToAdmin(string, COLOR_LIGHTRED); 
+                    format(string, sizeof(string), "[.] %s", text2);
+                    SendMessageToAdmin(string, COLOR_LIGHTRED); 
+                }
+            }
+            Log(warningLog, INFO, "%s mówi coœ o czitach na PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
         }
         //======================================[WYKONANIE - WYS£ANIE WIADOMOŒCI]==================
         if(strlen(params) < 78)
         {
             format(string, sizeof(string), "«« %s (%d%s): %s", GetNick(giveplayerid), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
             SendClientMessage(playerid, COLOR_YELLOW, string);
-            SavePlayerSentMessage(playerid, string);
             
             format(string, sizeof(string), "»» %s (%d): %s", GetNick(playerid), playerid, text);
             SendClientMessage(giveplayerid, COLOR_NEWS, string);
-            SavePlayerSentMessage(giveplayerid, string);
             if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
             {
                 iloscInWiadomosci[giveplayerid] = iloscInWiadomosci[giveplayerid]+1;
@@ -116,7 +151,7 @@ YCMD:wiadomosc(playerid, params[], help)
             }
             if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
             {
-                format(string, sizeof(string), "AdmCmd -> %s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                format(string, sizeof(string), "%s(%d) /w -> %s(%d): %s", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
                 ABroadCast(COLOR_LIGHTGREEN,string,1,1);
             }
         }
@@ -131,19 +166,23 @@ YCMD:wiadomosc(playerid, params[], help)
 
                 format(string, sizeof(string), "«« %s (%d%s): %s [.]", GetNick(giveplayerid), giveplayerid, (!IsPlayerPaused(giveplayerid)) ? (""): (", AFK"), text);
                 SendClientMessage(playerid, COLOR_YELLOW, string);
-                SavePlayerSentMessage(playerid, string);
             
                 format(string, sizeof(string), "[.] %s", text2);
-                SendClientMessage(playerid, COLOR_YELLOW, string); 
-                SavePlayerSentMessage(playerid, string);          
+                SendClientMessage(playerid, COLOR_YELLOW, string);
+
+                if(PlayerInfo[playerid][pPodPW] == 1 || PlayerInfo[giveplayerid][pPodPW] == 1)
+                {
+                    format(string, sizeof(string), "%s(%d) /w -> %s(%d): %s [.]", GetNick(playerid), playerid, GetNick(giveplayerid), giveplayerid, text);
+                    ABroadCast(COLOR_LIGHTGREEN,string,1,1);
+                    format(string, sizeof(string), "[.] %s", text2);
+                    ABroadCast(COLOR_LIGHTGREEN,string,1,1);
+                }      
                 
                 format(string, sizeof(string), "«« %s (%d): %s [.]", GetNick(playerid), playerid, text);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
-                SavePlayerSentMessage(giveplayerid, string);
                 
                 format(string, sizeof(string), "[.] %s", text2);
                 SendClientMessage(giveplayerid, COLOR_NEWS, string);
-                SavePlayerSentMessage(giveplayerid, string);
                 if(GetPlayerAdminDutyStatus(playerid) == 1)
                 {
                     iloscOutWiadomosci[playerid] = iloscOutWiadomosci[playerid]+1;
@@ -154,7 +193,9 @@ YCMD:wiadomosc(playerid, params[], help)
                 }
             }
         }
-	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), params);
+	    Log(chatLog, INFO, "%s PW do %s: %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), text);
+        SavePlayerSentMessage(playerid, sprintf("%s wys³a³ wiadomoœæ do %s: %s", GetNick(playerid), GetNick(giveplayerid), text), FROMME);
+        SavePlayerSentMessage(giveplayerid, sprintf("%s otrzyma³ wiadomoœæ od %s: %s", GetNick(giveplayerid), GetNick(playerid), text), TOME);
         //dŸwiêki
         PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
         PlayerPlaySound(giveplayerid, 1057, 0.0, 0.0, 0.0);

@@ -180,11 +180,11 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 
     if(PlayerInfo[playerid][pLevel] == 0)
     {
-        Log(mysqlLog, ERROR, "MySQL:: %s - b³¹d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
+        Log(mysqlLog, ERROR, "MySQL:: %s - bï¿½ï¿½d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
         return 0;
     }
 
-	//wy³¹cz na chwilkê maskowanie nicku (pNick)
+	//wyï¿½ï¿½cz na chwilkï¿½ maskowanie nicku (pNick)
 	new maska_nick[24];
 	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
 	{
@@ -483,6 +483,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`Uniform`='%d', \
 	`CruiseController`='%d', \
 	`FixKit`='%d', \
+	`Immunity`='%.0f', \
 	`connected`='%d' \
 	WHERE `UID`='%d'", query,
     PlayerInfo[playerid][pCB],
@@ -500,26 +501,45 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pUniform],
 	PlayerInfo[playerid][pCruiseController],
 	PlayerInfo[playerid][pFixKit],
+	GetPlayerImmunity(playerid),
 	forcequit ? 0 : 2,
     PlayerInfo[playerid][pUID]);
 
     if(!mysql_query(query)) fault=false;
 
-	format(query, sizeof(query), "UPDATE `mru_personalization` SET \
-	`KontoBankowe` = '%d', \
-	`Ogloszenia` = '%d', \
-	`LicznikPojazdu` = '%d', \
-	`OgloszeniaFrakcji` = '%d', \
-	`OgloszeniaRodzin` = '%d', \
-	`OldNick` = '%d', \
-	`CBRadio` = '%d', \
-	`Report` = '%d', \
-	`DeathWarning` = '%d', \
-	`KaryTXD` = '%d', \
-	`NewNick` = '%d', \
-	`newbie` = '%d',	\
-	`BronieScroll` = '%d'	\
-	WHERE `UID`= '%d'",
+	format(query, sizeof(query), "INSERT INTO mru_personalization ( \
+		`UID`, \
+		`KontoBankowe`, \
+		`Ogloszenia`, \
+		`LicznikPojazdu`, \
+		`OgloszeniaFrakcji`, \
+		`OgloszeniaRodzin`, \
+		`OldNick`, \
+		`CBRadio`, \
+		`Report`, \
+		`DeathWarning`, \
+		`KaryTXD`, \
+		`NewNick`, \
+		`newbie`, \
+		`BronieScroll`) \
+	VALUES ( \
+		%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d \
+	) \
+	ON DUPLICATE KEY UPDATE \
+		`KontoBankowe` = %d, \
+		`Ogloszenia` = %d, \
+		`LicznikPojazdu` = %d, \
+		`OgloszeniaFrakcji` = %d, \
+		`OgloszeniaRodzin` = %d, \
+		`OldNick` = %d, \
+		`CBRadio` = %d, \
+		`Report` = %d, \
+		`DeathWarning` = %d, \
+		`KaryTXD` = %d, \
+		`NewNick` = %d, \
+		`newbie` = %d,	\
+		`BronieScroll` = %d",
+	PlayerInfo[playerid][pUID],
 	PlayerPersonalization[playerid][PERS_KB],
 	PlayerPersonalization[playerid][PERS_AD],
 	PlayerPersonalization[playerid][PERS_LICZNIK],
@@ -533,9 +553,22 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_NEWNICK],
 	PlayerPersonalization[playerid][PERS_NEWBIE],
 	PlayerPersonalization[playerid][PERS_GUNSCROLL],
-	PlayerInfo[playerid][pUID]); 
+	// to update
+	PlayerPersonalization[playerid][PERS_KB],
+	PlayerPersonalization[playerid][PERS_AD],
+	PlayerPersonalization[playerid][PERS_LICZNIK],
+	PlayerPersonalization[playerid][PERS_FINFO],
+	PlayerPersonalization[playerid][PERS_FAMINFO],
+	PlayerPersonalization[playerid][PERS_NICKNAMES],
+	PlayerPersonalization[playerid][PERS_CB],
+	PlayerPersonalization[playerid][PERS_REPORT],
+	PlayerPersonalization[playerid][WARNDEATH],
+	PlayerPersonalization[playerid][PERS_KARYTXD],
+	PlayerPersonalization[playerid][PERS_NEWNICK],
+	PlayerPersonalization[playerid][PERS_NEWBIE],
+	PlayerPersonalization[playerid][PERS_GUNSCROLL]); 
 
-	//przywróæ maskowanie nicku (pNick)
+	//przywrï¿½ï¿½ maskowanie nicku (pNick)
 	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
 	{
 		new playernickname[MAX_PLAYER_NAME];
@@ -710,7 +743,10 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pFuel], 
 		PlayerInfo[playerid][pMarried]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`";
+		MyWeapon[playerid] = PlayerInfo[playerid][pGun0];
+		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
+
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`, `Immunity`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
@@ -719,7 +755,8 @@ public MruMySQL_LoadAccount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddddddd",
+		new immunity;
+        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -749,7 +786,10 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pInjury],
 		PlayerInfo[playerid][pHealthPacks],
 		PlayerInfo[playerid][pCzystka],
-        PlayerInfo[playerid][pCarSlots]);
+        PlayerInfo[playerid][pCarSlots],
+		immunity);
+		
+		SetPlayerImmunity(playerid, immunity);
 
 		format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `connected`='1' WHERE `UID`='%d'", PlayerInfo[playerid][pUID]);
 		mysql_query(lStr);
@@ -759,7 +799,7 @@ public MruMySQL_LoadAccount(playerid)
 
 	loadKamiPos(playerid);
 
-	//Wczytaj liderów
+	//Wczytaj liderï¿½w
 	lStr = "`NICK`, `UID`, `FracID`, `LiderValue`";
 	format(lStr, 1024, "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", lStr, GetNickEx(playerid));
 	mysql_query(lStr);
@@ -796,6 +836,36 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerPersonalization[playerid][PERS_NEWNICK],
 		PlayerPersonalization[playerid][PERS_NEWBIE],
 		PlayerPersonalization[playerid][PERS_GUNSCROLL]); 
+	}
+	mysql_free_result();
+
+	// fishes
+	format(lStr, 1024, "SELECT * FROM `mru_ryby` WHERE `Player`=%d", PlayerInfo[playerid][pUID]);
+	mysql_query(lStr);
+	mysql_store_result();
+	if(mysql_num_rows()) {
+		new uid;
+		mysql_fetch_row_format(lStr, "|");
+		sscanf(lStr, "p<|>is[20]s[20]s[20]s[20]s[20]dddddddddd",
+		uid,
+		Fishes[playerid][pFish1],
+		Fishes[playerid][pFish2],
+		Fishes[playerid][pFish3],
+		Fishes[playerid][pFish4],
+		Fishes[playerid][pFish5],
+		Fishes[playerid][pWeight1],
+		Fishes[playerid][pWeight2],
+		Fishes[playerid][pWeight3],
+		Fishes[playerid][pWeight4],
+		Fishes[playerid][pWeight5],
+		Fishes[playerid][pFid1],
+		Fishes[playerid][pFid2],
+		Fishes[playerid][pFid3],
+		Fishes[playerid][pFid4],
+		Fishes[playerid][pFid5]);
+	} else {
+		format(lStr, 1024, "INSERT INTO `mru_ryby` (`Player`) VALUES (%i)", PlayerInfo[playerid][pUID]);
+		mysql_query(lStr);
 	}
 	mysql_free_result();
 	
@@ -860,7 +930,7 @@ MruMySQL_WczytajOpis(handle, uid, typ)
         else
         {
             mysql_fetch_row_format(lText, "|");
-            strpack(CarDesc[handle], lText);
+            strcat(CarDesc[handle], lText);
         }
     }
 	mysql_free_result();
@@ -870,8 +940,15 @@ MruMySQL_WczytajOpis(handle, uid, typ)
 MruMySQL_UpdateOpis(handle, uid, typ)
 {
     new lStr[256], packed[128], opis[128];
-    strunpack(packed, (typ == 1) ? (PlayerDesc[handle]) : (CarDesc[handle]));
-    mysql_real_escape_string(packed, opis);
+	if(typ == 1)
+	{
+		strunpack(packed, PlayerDesc[handle]);
+    	mysql_real_escape_string(packed, opis);
+	}
+	else
+	{
+    	mysql_real_escape_string(CarDesc[handle], opis);
+	}
     if(MruMySQL_CheckOpis(uid, typ))
         format(lStr, 256, "UPDATE `mru_opisy` SET `desc`='%s' WHERE `owner`='%d' AND `typ`=%d", opis, uid, typ);
     else
@@ -1045,8 +1122,14 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
     }
 
 
-	if(strcmp(nick, "Brak", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`, `IP`) VALUES ('%s', '%d', '%s', '%d', '%s')", nick, PlayerInfo[admin][pUID], admnick,WARN_UNBAN, ip);
-    else if(strcmp(ip, "nieznane", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`IP`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", ip, PlayerInfo[admin][pUID], admnick,WARN_UNBAN);
+	if(strcmp(nick, "Brak", false) != 0) 
+	{
+		format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`, `IP`) VALUES ('%s', '%d', '%s', '%d', '%s')", nick, PlayerInfo[admin][pUID], admnick,WARN_UNBAN, ip);
+	}
+    else 
+	{
+		format(query, sizeof(query), "INSERT INTO `mru_bany` (`IP`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", ip, PlayerInfo[admin][pUID], admnick,WARN_UNBAN);
+	}
     if(strlen(query) < 30) return 0;
     if(!mysql_query(query)) return 0;
 	return 1;
@@ -1055,20 +1138,17 @@ MruMySQL_Odbanuj(nick[]="Brak", ip[]="nieznane", admin)
 MruMySQL_Unblock(nick[]="Brak", admin)
 {
 	if(!MYSQL_ON) return 0;
-	new query[256];
+	new query[358];
     mysql_real_escape_string(nick, query);
     format(nick, 32, "%s", query);
-
     new admnick[32];
     GetPlayerName(admin, admnick, 32);
-
-    format(query, 128, "UPDATE `mru_konta` SET `Block`=0, `CK`=0 WHERE `Nick`='%s'", nick);
+	format(query, 128, "UPDATE `mru_konta` SET `Block`=0, `CK`=0 WHERE `Nick`='%s'", nick);
     mysql_query(query);
     query="\0";
-
 	if(strcmp(nick, "Brak", false) != 0) format(query, sizeof(query), "INSERT INTO `mru_bany` (`dostal`, `nadal_uid`, `nadal`, `typ`) VALUES ('%s', '%d', '%s', '%d')", nick, PlayerInfo[admin][pUID], admnick,WARN_UNBLOCK);
-    if(strlen(query) < 30) return 0;
-    if(!mysql_query(query)) return 0;
+	if(strlen(query) < 30) return 0;
+	if(!mysql_query(query)) return 0;
 	return 1;
 }
 
@@ -1118,20 +1198,20 @@ bool:MruMySQL_SprawdzBany(playerid)
             else format(string, sizeof(string), "Twoje konto {FF8C00}%s{FFA500} (%d) jest zbanowane.", nick, pid);
 
     		SendClientMessage(playerid, COLOR_NEWS, string);
-    		format(string, sizeof(string), "{FFA500}Nadaj¹cy: %s ({FF8C00}%d{FFA500}) | Powód: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
+    		format(string, sizeof(string), "{FFA500}Nadajï¿½cy: %s ({FF8C00}%d{FFA500}) | Powï¿½d: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
     		SendClientMessage(playerid, COLOR_NEWS, string);
             return true;
         }
         else if(typ == WARN_BLOCK)
         {
-            SendClientMessage(playerid, COLOR_WHITE, "{FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
-			SendClientMessage(playerid, COLOR_WHITE, "Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
+            SendClientMessage(playerid, COLOR_WHITE, "{FF0000}To konto jest zablokowane, nie moï¿½esz na nim graï¿½.");
+			SendClientMessage(playerid, COLOR_WHITE, "Jeï¿½li uwaï¿½asz, ï¿½e konto zostaï¿½o zablokowane niesï¿½usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
 
-    		format(string, sizeof(string), "{FFA500}Nadaj¹cy: %s ({FF8C00}%d{FFA500}) | Powód: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
+    		format(string, sizeof(string), "{FFA500}Nadajï¿½cy: %s ({FF8C00}%d{FFA500}) | Powï¿½d: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
     		SendClientMessage(playerid, COLOR_NEWS, string);
             return true;
         }
-        else if(typ > 20) //Zwracanie KP, je¿eli ma
+        else if(typ > 20) //Zwracanie KP, jeï¿½eli ma
         {
             SetPVarInt(playerid, "kp_readd", 1);
             return false;
@@ -1289,6 +1369,45 @@ stock MruMySQL_DeletePhoneContact(uid)
 {
 	new string[128];
 	format(string, sizeof(string), "DELETE FROM mru_kontakty WHERE UID='%d'", uid);
+	mysql_query(string);
+	return 1;
+}
+
+stock MruMySQL_UpdateFish(playerid, fish) {
+	if(!IsPlayerConnected(playerid))
+		return 0;
+	new sql_fish[20], sql_weight, sql_fid;
+	switch(fish) {
+		case 1: {
+			format(sql_fish, 20, Fishes[playerid][pFish1]);
+			sql_weight = Fishes[playerid][pWeight1];
+			sql_fid = Fishes[playerid][pFid1];
+		}
+		case 2: {
+			format(sql_fish, 20, Fishes[playerid][pFish2]);
+			sql_weight = Fishes[playerid][pWeight2];
+			sql_fid = Fishes[playerid][pFid2];
+		}
+		case 3: {
+			format(sql_fish, 20, Fishes[playerid][pFish3]);
+			sql_weight = Fishes[playerid][pWeight3];
+			sql_fid = Fishes[playerid][pFid3];
+		}
+		case 4: {
+			format(sql_fish, 20, Fishes[playerid][pFish4]);
+			sql_weight = Fishes[playerid][pWeight4];
+			sql_fid = Fishes[playerid][pFid4];
+		}
+		case 5: {
+			format(sql_fish, 20, Fishes[playerid][pFish5]);
+			sql_weight = Fishes[playerid][pWeight5];
+			sql_fid = Fishes[playerid][pFid5];
+		}
+		default:
+			return 0;
+	}
+	new string[128];
+	format(string, sizeof(string), "UPDATE mru_ryby SET `Fish%i`='%s', `Weight%i`=%i, `Fid%i`=%i WHERE `Player`=%i", fish, sql_fish, fish, sql_weight, fish, sql_fid, PlayerInfo[playerid][pUID]);
 	mysql_query(string);
 	return 1;
 }

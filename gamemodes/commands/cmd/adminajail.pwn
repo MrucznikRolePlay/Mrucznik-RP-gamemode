@@ -61,6 +61,11 @@ YCMD:adminajail(playerid, params[], help)
 						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 17 minut AJ!");
 						return 1;
 					}
+					if(PlayerInfo[playa][pAdmin] > 0 || PlayerInfo[playa][pNewAP] > 0)
+					{
+						sendTipMessage(playerid, "Nie mo¿esz dawaæ /aj administratorowi!");
+						return 1;
+					}
 					if(OnDuty[playa] == 1 || OnDutyCD[playa] == 1)
 					{
 					    OnDuty[playa] = 0;

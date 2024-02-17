@@ -61,7 +61,7 @@ YCMD:sluzba(playerid, params[], help)
 
         if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
         {
-            sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile");
+            sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile. Nie mo¿esz znajdowaæ siê w pojeŸdzie.");
             return 1;
         }
 
@@ -73,9 +73,9 @@ YCMD:sluzba(playerid, params[], help)
             || PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609) //STARE DUTY
             || PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
             || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
-            || PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
             || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
-			|| PlayerToPoint(3, playerid, 2522.8916,-2441.6270,13.6435))//nowe komi by dywan
+			|| PlayerToPoint(3, playerid, 2522.8916,-2441.6270,13.6435)
+            || (PlayerToPoint(4,playerid, 1562.0536,-1649.9120,28.5040) && GetPlayerVirtualWorld(playerid) == 27))//nowe komi by charlie)//nowe komi by dywan
 
             {
                 if(OnDuty[playerid]==0)
@@ -109,39 +109,34 @@ YCMD:sluzba(playerid, params[], help)
         }
         else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
         {
-            if (PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736) //nowe FBI by Ubunteq
-            || PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)//nowe domy
-            || PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 ))//nowe domy /duty w domu
+            new vw = GetPlayerVirtualWorld(playerid);
+            if ((vw == 2 && PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736)) //nowe FBI by Ubunteq
+            || (vw == 2 && PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5))//nowe domy
+            || (vw == 2 && PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5))//nowe domy /duty w domu
+            || (vw == 0 && PlayerToPoint(2, playerid, 596.5255, -1489.2544, 15.3587))) // winda fbi
             {
-				if(GetPlayerVirtualWorld(playerid) == 2)
-				{
-					if(OnDuty[playerid]==0)
-					{
-						format(string, sizeof(string), "* Agent FBI %s bierze odznakê i broñ ze swojej szafki.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						DajBronieFrakcyjne(playerid);
-						SetPlayerArmour(playerid, 90);
-						SetPlayerHealth(playerid, 100);
-						OnDuty[playerid] = 1;
-						SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
-						SetPlayerToTeamColor(playerid);
-					}
-					else if(OnDuty[playerid]==1)
-					{
-						format(string, sizeof(string), "* Agent FBI %s odk³ada odznakê i broñ do swojej szafki.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						SetPlayerArmour(playerid, 0.0);
-						SetPlayerHealth(playerid, 100);
-						OnDuty[playerid] = 0;
-						PrzywrocBron(playerid);
-						SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-						SetPlayerToTeamColor(playerid);
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteœ w szatni!"); 
-				}
+                if(OnDuty[playerid]==0)
+                {
+                    format(string, sizeof(string), "* Agent FBI %s bierze odznakê i broñ ze swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    DajBronieFrakcyjne(playerid);
+                    SetPlayerArmour(playerid, 90);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 1;
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
+                    SetPlayerToTeamColor(playerid);
+                }
+                else if(OnDuty[playerid]==1)
+                {
+                    format(string, sizeof(string), "* Agent FBI %s odk³ada odznakê i broñ do swojej szafki.", sendername);
+                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                    SetPlayerArmour(playerid, 0.0);
+                    SetPlayerHealth(playerid, 100);
+                    OnDuty[playerid] = 0;
+                    PrzywrocBron(playerid);
+                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+                    SetPlayerToTeamColor(playerid);
+                }
             }
             else
             {
@@ -217,7 +212,7 @@ YCMD:sluzba(playerid, params[], help)
             {
                 if(JobDuty[playerid] == 1)
                 {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie ERS, nie bêdziesz widzia³ zg³oszeñ.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie LSRS, nie bêdziesz widzia³ zg³oszeñ.");
                     JobDuty[playerid] = 0;
                     Medics -= 1;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
@@ -225,7 +220,7 @@ YCMD:sluzba(playerid, params[], help)
                 }
                 else
                 {
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie ERS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie LSRS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
                     JobDuty[playerid] = 1;
                     Medics += 1;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);

@@ -46,7 +46,17 @@ command_news_Impl(playerid, newsText[256])
     }
     if(strlen(newsText) < 3)
     {
-        sendTipMessage(playerid, "/news [Text +3 znaki]");
+        sendTipMessage(playerid, "/news [Tekst]");
+        return 1;
+    }
+    if(strlen(newsText) > 105)
+    {
+        sendErrorMessage(playerid, "Twoja wiadomoœæ by³a zbyt d³uga, skróæ j¹!"); 
+        return 1;
+    }
+    if(strfind(newsText, "@here", true) != -1 || strfind(newsText, "@everyone", true) != -1 || strfind(newsText, "<@", true) != -1) 
+    {
+        SendClientMessage(playerid, COLOR_WHITE, "Twój news zawiera niedozwolone znaki! (@)");
         return 1;
     }
     TalkOnNews(playerid, newsText);

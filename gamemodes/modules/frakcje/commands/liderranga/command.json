@@ -1,0 +1,28 @@
+{
+    "name": "liderranga",
+    "description": "Edycja rang frakcji.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "liderrank",
+        "liderrangi",
+        "leaderranga",
+        "leaderrank",
+        "leaderrangi"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "rank",
+            "description": "numer rangi"
+        },
+        {
+            "type": "string",
+            "size": "32",
+            "name": "rankName",
+            "description": "nazwa rangi (wpisz - aby usun¹æ, lub nic aby podejrzeæ)",
+            "defaultValue": ""
+        }
+    ],
+    "date": "10.02.2024"
+}

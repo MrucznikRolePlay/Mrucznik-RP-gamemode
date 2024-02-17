@@ -66,7 +66,7 @@ Aby dodać nowy efekt należy stworzyć publiczną funkcję o sygnaturze NazwaEf
 ## Choroby
 | Nazwa | Koszt kuracji | Czas kuracji | Lekoodporność | Zaraźliwość | Zarażanie przy kontakcie | Efekty | Sposób zarażenia |
 | :-----: |:-----:|:-----:| :-----:| :-----:| :-----:| :-----:| :-----:|
-| Koronawirus | 1000$ | 20 sekund | 60% | 1.0 | tak | [efekty](#efekty-koronawirusa) | Komenda /zjedz nietoperza i do ugotowania |
+| Koronawirus | 1000$ | 20 sekund | 60% | 1.0 | tak | [efekty](#efekty-koronawirusa) | tylko przez admina |
 | Grypa | 25.000$ | 2 minuty | 0% | 1.0 | nie | [efekty](#efekty-grypy) | Jeżeli gracz przez godzinę będzie pozostawał z HP mniejszym niż 20 |
 | Zapalenie płuc | 100.000$ | 4 minuty | 30% | 1.0 | nie | [efekty](#efekty-zapalenia-płuc) | Przy efektach grypy (kaszel) 5% |
 | Zatrucie | 10.000$ | 30 sekund | 20% | 1.0 | nie | [efekty](#efekty-zatrucia) | 5% szans na zarażenie przy /zjedz

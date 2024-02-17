@@ -32,8 +32,11 @@ YCMD:wejdz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
+        if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
+        if(PlayerInfo[playerid][pJailed] == 1 || PlayerInfo[playerid][pJailed] == 3) return 1;
+        if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
 		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
-		
+
 //======================================================================
 //=================[Przeniesione - na nowy system]======================
 //======================================================================
@@ -48,9 +51,9 @@ YCMD:wejdz(playerid, params[], help)
 //=================[Wczytanie - nowego systemu]=====================
 //======================================================================
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
-        
         if(SprawdzWejscia(playerid))
         {
+            SetInteriorTimeAndWeather(playerid); 
             return 1;
         }
         
@@ -76,16 +79,17 @@ YCMD:wejdz(playerid, params[], help)
 		{
             ShowPlayerDialogEx(playerid, D_WINDA_LSFD, DIALOG_STYLE_LIST, "Winda", "Gara¿\nPierwsze piêtro\nDrugie piêtro\nDach", "Wybierz", "WyjdŸ");
 		}
-        else if((IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsAPolicja(playerid))//parking Dolny LSPD 1568.7660,-1691.4886,5.8906
-            || IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
-            || IsPlayerInRangeOfPoint(playerid,4,-1621.7272, 834.5807, -26.1115)//sale przesluchan
-            || IsPlayerInRangeOfPoint(playerid,4,-1745.1101, 824.0737, -48.0110)//biura LSPD
-            || IsPlayerInRangeOfPoint(playerid,4,-1695.1617, 1046.9861, -65.4119)//stolowka
-            || IsPlayerInRangeOfPoint(playerid,4,1568.1061, 2205.3196, -50.9522)//treningowe miejsca
-            || (IsPlayerInRangeOfPoint(playerid,4,1565.0798, -1665.6580, 28.4782) && IsAPolicja(playerid))//dach lspd
-            || (IsPlayerInRangeOfPoint(playerid,4,1570.9799,-1636.7758,13.5713) && IsAPolicja(playerid)))//gorny LSPD
+        else if((IsPlayerInRangeOfPoint(playerid,4,1568.7660,-1691.4886,5.8906) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 2)//parking Dolny LSPD 1568.7660,-1691.4886,5.8906
+            || (IsPlayerInRangeOfPoint(playerid,3,1585.8722,-1685.5045,62.2363) && GetPlayerVirtualWorld(playerid) == 25)//z glownego wejscia
+            || (IsPlayerInRangeOfPoint(playerid,2.5,1585.8090,-1685.1177,65.8762) && GetPlayerVirtualWorld(playerid) == 25)//biuro komendanta
+            || (IsPlayerInRangeOfPoint(playerid,4,1551.5720,-1701.7196,28.4807) && GetPlayerVirtualWorld(playerid) == 26)//biura LSPD
+            || (IsPlayerInRangeOfPoint(playerid,4,1562.7128,-1639.0281,28.5040) && GetPlayerVirtualWorld(playerid) == 27)//konferencyjna
+            || (IsPlayerInRangeOfPoint(playerid,4,1564.9027,-1665.8291,28.4815) && GetPlayerVirtualWorld(playerid) == 28)//Sala przes³uchañ
+            || (IsPlayerInRangeOfPoint(playerid,4,1543.3915,-1643.2813,28.4881) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 29)//wiêzienie
+            || (IsPlayerInRangeOfPoint(playerid,4,1565.0798, -1665.6580, 28.4782) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 0)//dach lspd
+            || (IsPlayerInRangeOfPoint(playerid,4,1570.9799,-1636.7758,13.5713) && IsAPolicja(playerid) && GetPlayerVirtualWorld(playerid) == 0))//gorny LSPD
         {
-            ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Komisariat\n[Poziom 2]Pokoje Przes³uchañ\n[Poziom 3]Biura\n[Poziom 4]Sale Treningowe\n[Poziom 5]Dach","Jedz","");
+            ShowPlayerDialogEx(playerid,WINDA_LSPD,DIALOG_STYLE_LIST,"Winda","[Poziom -2]Wiêzienie\n[Poziom -1]Parking Dolny\n[Poziom 0] Parking Górny\n[Poziom 1]Recepcja\n[Poziom 2]Biuro komendanta\n[Poziom 3]Biura\n[Poziom 4]Konferencyjne\n[Poziom 5]Sale przes³uchañ\n[Poziom 6]Dach","Jedz","");
         }
 		else if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
             || IsPlayerInRangeOfPoint(playerid, 3, 287.7476,-1609.9395,33.0723)//PARTER
@@ -98,7 +102,7 @@ YCMD:wejdz(playerid, params[], help)
             ShowPlayerDialogEx(playerid,WINDA_SAN,DIALOG_STYLE_LIST,"Winda - San News","[Pietro - 0] Parking\n[Pietro 1] Wejscie do budynku\n[Pietro - 2] Recepcja\n[Pietro - 3] Studia\n[Pietro - 4] Akademia\n[Pietro - 5]Biura San News\n[Pietro - 6]Dach","Jedz","Anuluj");
         }
         //winda FBI
-		else if(IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
+		else if((IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
             || IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
             || IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
             || IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
@@ -109,11 +113,26 @@ YCMD:wejdz(playerid, params[], help)
             || IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
             || IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
             || IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732)//Sale Treningowe
-            || IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674)//Sale przes³uchaniowe
+            || IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674))//Sale przes³uchaniowe
+            && (doorFBIStatus == 1 || GetPlayerFraction(playerid) == FRAC_FBI)
 		)
 		{
-			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5] Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe\n[Poziom 8]Sale przes³uchañ \n [Poziom X] Dach","Jedz","Anuluj");
+			ShowPlayerDialogEx(playerid,19,DIALOG_STYLE_LIST,"Winda FBI","[Poziom -1] Parking podziemny \n[Poziom 0] Parking\n[Poziom 0.5] Areszt federalny\n[Poziom 1] Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4] Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6] CID/ERT\n[Poziom 7] Sale Treningowe\n[Poziom 8] Sale przes³uchañ \nDach","Jedz","Anuluj");
         }
+        else if((IsPlayerInRangeOfPoint(playerid,2,586.83704, -1473.89270, 89.30576)//przy recepcji
+            || IsPlayerInRangeOfPoint(playerid,2,592.65466, -1486.76575, 82.10487)//szatnia
+            || IsPlayerInRangeOfPoint(playerid,2,591.37579, -1482.26672, 80.43560)//zbrojownia
+            || IsPlayerInRangeOfPoint(playerid,2,596.21857, -1477.92395, 84.06664)//biura federalne
+            || IsPlayerInRangeOfPoint(playerid,2,589.23029, -1479.66357, 91.74274)//Dyrektorat
+            || IsPlayerInRangeOfPoint(playerid,2,613.4404,-1471.9745,73.8816)//DACH
+            || IsPlayerInRangeOfPoint(playerid,2,596.5255, -1489.2544, 15.3587)//Parking
+            || IsPlayerInRangeOfPoint(playerid,2,1093.0625,1530.8715,6.6905)//Parking podziemny
+            || IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
+            || IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
+            || IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732)//Sale Treningowe
+            || IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674))//Sale przes³uchaniowe
+            && (doorFBIStatus == 0 && !GetPlayerFraction(playerid) == FRAC_FBI))
+                sendTipMessage(playerid, "Ta winda jest zamkniêta.");
 		else if (IsPlayerInRangeOfPoint(playerid, 5.0, 1271.0920,-1667.8794,19.7344)) // strzelnica wejœcie
         {
             if(GUIExit[playerid] == 0)
@@ -576,6 +595,13 @@ YCMD:wejdz(playerid, params[], help)
             SetPlayerPos(playerid, 1193.2720,-1774.8802,13.7282); // recepcja
             TogglePlayerControllable(playerid, 0);
             SetPlayerVirtualWorld(playerid, 43);
+            Wchodzenie(playerid);
+            return 1;
+        } 
+        else if (IsPlayerInRangeOfPoint(playerid, 3.0, 1221.30774, -1790.77686, 71.70520))  //basen tsunami wejscie do hali
+        {
+            SetPlayerPos(playerid, 566.5435,-2087.0046,2.7402);  //basen tsunami hala
+            TogglePlayerControllable(playerid, 0);
             Wchodzenie(playerid);
             return 1;
         }

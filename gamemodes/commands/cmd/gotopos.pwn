@@ -32,27 +32,27 @@ YCMD:gotopos(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
+		if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 		    new Float:x, Float:y, Float:z;
-			if( sscanf(params, "fff", x,y,z))
+			if( !sscanf(params, "p<,>fff", x,y,z) || !sscanf(params, "p< >fff", x,y,z))
+			{
+				if (GetPlayerState(playerid) == 2)
+				{
+					new tmpcar = GetPlayerVehicleID(playerid);
+					SetVehiclePos(tmpcar, x, y, z);
+				}
+				else
+				{
+					SetPlayerPos(playerid, x, y, z);
+				}
+				_MruAdmin(playerid, "Zosta³eœ teleportowany");
+			}
+			else
 			{
 				sendTipMessage(playerid, "U¿yj /gotopos [x] [y] [z]");
 				return 1;
 			}
-
-			if (GetPlayerState(playerid) == 2)
-			{
-				new tmpcar = GetPlayerVehicleID(playerid);
-				SetVehiclePos(tmpcar, x, y, z);
-			}
-			else
-			{
-				SetPlayerPos(playerid, x, y, z);
-			}
-			_MruAdmin(playerid, "Zosta³eœ teleportowany");
-			//SetPlayerInterior(playerid,0);
-			//PlayerInfo[playerid][pInt] = 0;
 		}
 		else
 		{

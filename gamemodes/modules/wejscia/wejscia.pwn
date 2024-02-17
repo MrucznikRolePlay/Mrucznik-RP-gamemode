@@ -319,6 +319,20 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 	{
 		PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
 	}
+	else if(Check_ID == 20)
+	{
+		if(GunshopLSLock == 1)
+		{
+			sendTipMessage(playerid, "Drzwi s¹ zamkniête.");
+			noAccessCome[playerid] = 1;
+			return 1;
+		}
+	}
+	else if(Check_ID == 21) //bar HA
+	{
+		GameTextForPlayer(playerid, "~w~Bar by ~p~~h~Just Miko & skBarman", 5000, 1);
+		return 1;
+	}
 	return 0; 
 }
 Sprawdz_UID_Wychodzenie(playerid, Check_ID)
@@ -400,7 +414,15 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 	{
 		StopAudioStreamForPlayer(playerid); 
 	}
-
+	else if(Check_ID == 20)
+	{
+		if(GunshopLSLock == 1)
+		{
+			sendTipMessage(playerid, "Drzwi s¹ zamkniête.");
+			noAccessCome[playerid] = 1;
+			return 1;
+		}
+	}
 	return 0; 
 }
 SprawdzWejscia(playerid)

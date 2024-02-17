@@ -23,5 +23,15 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define AC_ADDITIONAL_CONFIG_FILE "nex-ac_additional_settings.cfg"
+
+#define MAX_POTENTIAL_CHEATERS 20
+
+#define DIALOG_AC_PANEL 43
+#define DIALOG_AC_PANEL_CHANGE 44
+
+#define MAX_TAKEN_DAMAGE_ISSUERS 20
+
+#define AC_CODE_FAKEKILL 53
 
 //end

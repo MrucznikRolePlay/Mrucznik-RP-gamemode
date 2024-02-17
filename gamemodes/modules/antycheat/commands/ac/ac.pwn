@@ -38,6 +38,7 @@ command_ac()
     //aliases
     Command_AddAlt(command, "antycheat");
     Command_AddAlt(command, "antyczit");
+    Command_AddAlt(command, "nexac");
     
 
     //permissions

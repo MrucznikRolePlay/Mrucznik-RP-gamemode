@@ -42,7 +42,9 @@ hook OnGameModeInit()
 
 hook OnPlayerConnect(playerid)
 {
-	PlayerImmunity[playerid] = 2;
+	PlayerImmunityBar[playerid] = CreatePlayerProgressBar(playerid, 548.000000, 34.000000, 62.500000, 5.500000, -293409025, MAX_PLAYER_IMMUNITY, 0);
+	PlayerImmunity[playerid] = INITIAL_PLAYER_IMMUNITY;
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], INITIAL_PLAYER_IMMUNITY);
 	return 1;
 }
 
@@ -52,12 +54,21 @@ hook OnPlayerDisconnect(playerid, reason)
 	Grypa[playerid] = 0;
 	Tourett[playerid] = 0;
 	TourettActive[playerid] = 0;
+	OKActive[playerid] = 0;
 	PTSDCounter[playerid] = 0;
+	Odpornosc_PlayerBarToggle[playerid] = 0;
+	OKActive[playerid] = 0;
 	return 1;
+}
+
+hook OnPlayerSpawn(playerid)
+{
+	if(Odpornosc_PlayerBarToggle[playerid] == 1) ShowPlayerProgressBar(playerid, PlayerImmunityBar[playerid]);
 }
 
 hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 {
+	/*
 	//infecting on contact
 	if(weaponid >= 0 && weaponid <= 15) //melee weapons only
 	{
@@ -70,6 +81,12 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 				{
 					if(IsPlayerSick(playerid, disease)) 
 						return 1;
+					
+					if(GetPlayerImmunity(playerid) > 0)
+					{
+						DecreasePlayerImmunity(playerid, 0.1);
+						return 1;
+					}
 
 					//0.5% chance to get infected
 					if(RandomizeSouldBeInfected(0.5, DiseaseData[disease][ContagiousRatio])) 
@@ -82,10 +99,12 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 			}
 		}
 	}
-	else if(weaponid == 42) //gaœnica
+	*/
+	if(weaponid == 42) //gaœnica
 	{
-		PlayerImmunity[playerid] = 2;
+		IncreasePlayerImmunity(playerid, 0.5, 15);
 	}
+	/*
 	else 
 	{
 		//padaczka
@@ -93,17 +112,18 @@ hook OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 		{
 			if(random(200) == 0)
 			{
-				InfectPlayer(playerid, PADACZKA);
+				InfectOrDecreaseImmunity(playerid, PADACZKA);
 			}
 		}
 		else if(bodypart == BODY_PART_LEFT_ARM || bodypart == BODY_PART_RIGHT_ARM)
 		{
 			if(random(1000) == 0)//0.1% szans
 			{
-				InfectPlayer(playerid, PARKINSON);
+				InfectOrDecreaseImmunity(playerid, PARKINSON);
 			}
 		}
 	}
+	*/
 	return 1;
 }
 
@@ -114,10 +134,17 @@ hook OnPlayerText(playerid, text[])
 		Tourett[playerid]++;
 		if(Tourett[playerid] >= 30)
 		{
-			InfectPlayer(playerid, TOURETT);
+			InfectOrDecreaseImmunity(playerid, TOURETT);
 			Tourett[playerid] = 0;
 		}
 	}
+	/*if(strfind(text, "0k", true) == 0)
+	{
+		if(InfectPlayer(playerid, OK_DISEASE))
+		{
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Dopad³a Ciê 0k-zaraza!");
+		}
+	}*/
 	return 1;
 }
 
@@ -127,13 +154,13 @@ hook OnPlayerDeath(playerid, killerid, reason)
 	{
 		if(random(2) == 0)//50%
 		{
-			InfectPlayer(playerid, ASTMA);
+			InfectOrDecreaseImmunity(playerid, ASTMA);
 		}
 	}
 
 	if(random(20) == 0)//5%
 	{
-		InfectPlayer(playerid, URAZ);
+		InfectOrDecreaseImmunity(playerid, URAZ);
 	}
 
 	if(IsPlayerConnected(killerid))
@@ -143,7 +170,7 @@ hook OnPlayerDeath(playerid, killerid, reason)
 		{
 			if(random(5) == 0) //20%
 			{
-				InfectPlayer(killerid, PTSD);
+				InfectOrDecreaseImmunity(killerid, PTSD);
 			}
 		}
 	}
@@ -153,7 +180,7 @@ hook OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
 	if(random(10000) == 0) //0.01% szans
 	{
-		InfectPlayer(playerid, ASTYGMATYZM);
+		InfectOrDecreaseImmunity(playerid, ASTYGMATYZM);
 	}
 }
 

@@ -189,7 +189,23 @@ enum eScenaNeon {
     bool:SCNeonSliderRefresh,
     SCNeonZderzacz
 };
-
+//obrazenia
+enum eOBRAZENIA {
+	HOURS,
+	MINUTES,
+	SECONDS,
+	ATTACKER[MAX_PLAYER_NAME],
+	WEAPONID,
+	Float:DAMAGE	
+}
+enum eOBRAZENIAZADANE {
+	HOURS,
+	MINUTES,
+	SECONDS,
+	DEFENDER[MAX_PLAYER_NAME],
+	WEAPONID,
+	Float:DAMAGE
+}
 //25.07 system stref gangów
 new Float:Zone_Data[MAX_ZONES][4] = {
     {1983.0, -1027.0, 2266.0, -933.0},
@@ -478,7 +494,7 @@ new FractionNames[][40] = {
     "Los Santos Police Department",
     "Federal Bureau of Investigation",
     "National Guards San Andreas",
-    "Emergency Rescue Service",
+    "Los Santos Rescue Service",
     "SA Bahamas",
     "Yakuza",
     "United States Secret Service",
@@ -487,9 +503,9 @@ new FractionNames[][40] = {
     "Korporacja Transportowa",
     "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
-    "Crackville Boyz",
+    "Uninvited guests",
     "Hillside Nortenos 14",
-    "Nightmare of Adrenalin",
+    "89 Border Society",
     "IV Saint Reich",
     "Brak",
     "Brak",
@@ -755,7 +771,7 @@ new BlinkOffset[][eBO] = {
 };
 
 new GunNames[47][] = {
-	"Brak",//0
+	"Piêœci",//0
 	"Kastet",//1
 	"Kij golfowy",//2
 	"Pa³ka policyjna",//3
@@ -867,15 +883,23 @@ new Float:PaintballSpawns[7][3] = {
 {-445.3718,2222.5481,42.4297}
 };
 
-new Float:Cela[4][3] = {
+new Float:Cela[8][3] = {
 /*{215.8725,110.4934,999.0156},
 {218.4825,110.1900,999.0156},
 {223.1496,110.0053,999.0156},
 {227.0232,109.7559,999.0156} old komi*/
-{-1686.1089,920.1902,-52.4141},
+/*{-1686.1089,920.1902,-52.4141},
 {-1685.2073,916.9084,-52.4141},
 {-1685.2789,913.7077,-52.4141},
-{-1685.2998,910.5078,-52.4141}
+{-1685.2998,910.5078,-52.4141} new komi by dywan*/
+{1557.1688,-1636.8484,28.4881},
+{1557.3066,-1640.1306,28.4881},
+{1557.2548,-1646.0397,28.4881},
+{1557.0842,-1649.1653,28.4881},
+{1562.5618,-1649.2319,28.4881},
+{1562.6492,-1645.9365,28.4881},
+{1562.7338,-1639.8497,28.4881},
+{1562.7771,-1636.6851,28.4881}
 };
 
 new Float:SpawnStanowe[3][3] = {
@@ -1081,29 +1105,8 @@ new PobijText[31][31] ={
 "WYGRALES"//31
 };
 
+//respawn count
 new Count = 20;
-new CountText[20][20] ={
-"respawn za ~g~1",
-"respawn za ~g~2",
-"respawn za ~g~3",
-"respawn za ~g~4",
-"respawn za ~g~5",
-"respawn za ~g~6",
-"respawn za ~g~7",
-"respawn za ~g~8",
-"respawn za ~g~9",
-"respawn za ~g~10",
-"respawn za ~g~11",
-"respawn za ~g~12",
-"respawn za ~g~13",
-"respawn za ~g~14",
-"respawn za ~g~15",
-"respawn za ~g~16",
-"respawn za ~g~17",
-"respawn za ~g~18",
-"respawn za ~g~19",
-"respawn za ~g~20"
-};
 
 new Float:gCopPlayerSpawns[2][3] = {
 {1578.2158,-1633.9244,13.3991},
@@ -1362,7 +1365,7 @@ enum pInfo
     pCarSlots,
     pHat,
 	pBlokadaPisaniaFrakcjaCzas,
-    Text3D:pDescLabel,
+    Text3D:pDescLabel[128],
     pDesc[128],
 	pStrong,
 	pCard,
@@ -1779,7 +1782,7 @@ new const Przebierz[][] = {
 	{195},{194},{193},{185},{184},{183},
 	{182},{181},{180},{179},{178},{176},{172},{170},{168},{167},{162},
 	{161},{160},{159},{158},{157},{156},{155},{154},{153},{152},{151},
-	{146},{145},{144},{143},{142},{140},{139},{138},{137},{136},{135},
+	{146},{145},{144},{143}, {142},{140},{139},{138},{137},{136},{135},
 	{134},{264},{132},{131},{130},{129},{128},{254},{99},{97},{96},{95},{94},
 	{92},{90},{89},{88},{87},{85},{84},{83},{82},{81},{80},{79},{78},{77},{76},
 	{75},{73},{72},{69},{68},{67},{66},{64},{63},{62},{58},{56},{55},
@@ -1884,7 +1887,7 @@ new CarSpawns[][eCars] = {
 	{492,492.6386,-1555.3513,17.1462,213.1128},//DERBY
 	{507,2684.6,-2019.0,13.3 ,0.8777},
 	{545,1096.1,-1379.9,13.3,270.1909},//178
-	{540,-2743.6772,-303.1675,7.1422,49.0919},//179 DERBY
+	{540,-2226.9065,292.2472,35.1172,357.9835},//179 DERBY
 	{482,1182.2568,-1219.2407,18.4163,0.5578},
 	{547,1260.9978,-1187.1921,23.3559,183.3606},
 	{550,1331.9304,-1081.3899,24.9941,90.4092},
@@ -1920,15 +1923,15 @@ new CarSpawns[][eCars] = {
 	{551,1435.0645,-1325.6835,13.2580,270.9400},
 	{560,1513.9486,-1272.5691,14.2685,181.0697},
 	{566,1583.7561,-1338.7435,16.1896,359.8619},
-	{405,-2760.5156,-312.1838,7.1557,3.8747},//DERBY
-	{554,-2766.6875,-281.2887,7.1613,180.1256},//DERBY
+	{405,-2790.1169,-75.3305,7.1875,88.5025},//DERBY
+	{554,-2676.5522,-55.2749,4.3359,3.3685},//DERBY
 	{426,1430.2316,-1054.8555,22.8693,359.3625},
 	{445,1574.1168,-1036.7643,23.6151,145.6786},
 	//{492,1617.6676,-1009.8663,23.6052,356.8697},
 	{507,1645.3188,-1036.5238,23.6027,0.7258},
 	{545,485.9422,-1467.4543,18.3154,157.6833},//DERBY
 	{540,1770.4874,-1060.9886,23.6658,179.2750},
-	{482,-2781.4741,-281.6054,7.1515,181.0279},//DERBY
+	{482,-2212.8013,415.9465,35.1719,85.5162},//DERBY
 	{547,1653.1766,-1134.8994,23.6110,178.6835},
 	{550,1617.3746,-1132.8293,23.6117,91.7300},
 	{551,1790.0190,-1292.9065,13.2653,267.2964},
@@ -2403,61 +2406,10 @@ new VehicleColoursTableRGBA[256] = {
 0x561A28FF, 0x4E0E27FF, 0x706C67FF, 0x3B3E42FF, 0x2E2D33FF, 0x7B7E7DFF, 0x4A4442FF, 0x28344EFF
 };
 
-new nexac_ac_names[53][] = {
-	"Anti-AirBreak (onfoot)",
-	"Anti-AirBreak (in vehicle)",
-	"Anti-teleport hack (onfoot)",
-	"Anti-teleport hack (in vehicle)",
-	"Anti-teleport hack (into/between vehicles)",
-	"Anti-teleport hack (vehicle to player)",
-	"Anti-teleport hack (pickups)",
-	"Anti-FlyHack (onfoot)",
-	"Anti-FlyHack (in vehicle)",
-	"Anti-SpeedHack (onfoot)",
-	"Anti-SpeedHack (in vehicle)",
-	"Anti-Health hack (in vehicle)",
-	"Anti-Health hack (onfoot)",
-	"Anti-Armour hack",
-	"Anti-Money hack",
-	"Anti-Weapon hack",
-	"Anti-Ammo hack (add)",
-	"Anti-Ammo hack (infinite)",
-	"Anti-Special actions hack",
-	"Anti-GodMode from bullets (onfoot)",
-	"Anti-GodMode from bullets (in vehicle)",
-	"Anti-Invisible hack",
-	"Anti-lagcomp-spoof",
-	"Anti-Tuning hack",
-	"Anti-Parkour mod",
-	"Anti-Quick turn",
-	"Anti-Rapid fire",
-	"Anti-FakeSpawn",
-	"Anti-FakeKill",
-	"Anti-Pro Aim",
-	"Anti-CJ run",
-	"Anti-CarShot",
-	"Anti-CarJack",
-	"Anti-UnFreeze",
-	"Anti-AFK Ghost",
-	"Anti-Full Aiming",
-	"Anti-Fake NPC",
-	"Anti-Reconnect",
-	"Anti-High ping",
-	"Anti-Dialog hack",
-	"Protection from the sandbox",
-	"Protection against an invalid version",
-	"Anti-Rcon hack",
-	"Anti-Tuning crasher",
-	"Anti-Invalid seat crasher",
-	"Anti-Dialog crasher",
-	"Anti-Attached object crasher",
-	"Anti-Weapon Crasher",
-	"Flood protection connects to one slot",
-	"Anti-flood callback functions",
-	"Anti-flood change seat",
-	"Anti-Ddos",
-	"Anti-NOP's"
-};
-
+enum MessageType
+{
+	TOME,
+	FROMME
+}
 
 //EOF

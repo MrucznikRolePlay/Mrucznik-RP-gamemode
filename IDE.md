@@ -15,7 +15,7 @@ Visual Studio Code to kompleksowy edytor tekstu przeznaczony dla programistów.
 ## Wady
 
 - dłużej się włącza
-- mniej przejżysty
+- mniej przejrzysty
 
 ## Instalacja
 

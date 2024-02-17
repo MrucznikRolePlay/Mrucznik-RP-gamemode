@@ -41,6 +41,12 @@ ClearFishes(playerid)
 		strmid(Fishes[playerid][pFish3], string, 0, strlen(string), 255);
 		strmid(Fishes[playerid][pFish4], string, 0, strlen(string), 255);
 		strmid(Fishes[playerid][pFish5], string, 0, strlen(string), 255);
+		if(gPlayerLogged[playerid]) {
+			new lStr[256];
+			format(lStr, 256, "UPDATE `mru_ryby` SET Fish1='None', Fish2='None', Fish3='None', Fish4='None', Fish5='None', Weight1=0, Weight2=0, Weight3=0, Weight4=0, Weight5=0, Fid1=0, Fid2=0, Fid3=0, Fid4=0, Fid5=0 WHERE Player=%i",
+			PlayerInfo[playerid][pUID]);
+			mysql_query(lStr);
+		}
 	}
 	return 1;
 }
@@ -84,6 +90,7 @@ ClearFishID(playerid, fish)
 		        Fishes[playerid][pFid5] = 0;
 		    }
 		}
+		MruMySQL_UpdateFish(playerid, fish);
 	}
 	return 1;
 }
@@ -91,6 +98,21 @@ ClearFishID(playerid, fish)
 PlayerHasFishes(playerid)
 {
 	return Fishes[playerid][pWeight1] > 0 || Fishes[playerid][pWeight2] > 0 || Fishes[playerid][pWeight3] > 0 || Fishes[playerid][pWeight4] > 0 || Fishes[playerid][pWeight5] > 0;
+}
+
+CalculateFishes(playerid) {
+	new fishes = 0;
+	if(Fishes[playerid][pWeight1] > 0)
+		fishes++;
+	if(Fishes[playerid][pWeight2] > 0)
+		fishes++;
+	if(Fishes[playerid][pWeight3] > 0)
+		fishes++;
+	if(Fishes[playerid][pWeight4] > 0)
+		fishes++;
+	if(Fishes[playerid][pWeight5] > 0)
+		fishes++;
+	return fishes;
 }
 
 IsAtFishPlace(playerid)

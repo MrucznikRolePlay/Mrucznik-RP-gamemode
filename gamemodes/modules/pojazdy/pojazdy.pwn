@@ -31,7 +31,7 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
     if(newstate == PLAYER_STATE_DRIVER)
     {
         new newcar = GetPlayerVehicleID(playerid);
-        if(PlayerInfo[playerid][pCarLic] == 0 && !IsARower(newcar))
+        if(PlayerInfo[playerid][pCarLic] != 1 && !IsARower(newcar))
 		{
 			CruiseControl_Static_TurnOn(playerid, 0);
 		}
@@ -217,6 +217,9 @@ Car_MakePlayerOwner(playerid, uid)
     CarData[uid][c_OwnerType] = CAR_OWNER_PLAYER;
     CarData[uid][c_Owner] = PlayerInfo[playerid][pUID];
     CarData[uid][c_Keys] = 0;
+    new lStr[256]; 
+    format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `KluczykiDoAuta`='0' WHERE `KluczykiDoAuta`='%d'", IDAuta[playerid]);
+    mysql_query(lStr);
     Car_Save(uid, CAR_SAVE_OWNER);
     return 1;
 }
@@ -405,7 +408,7 @@ Car_Load()
 				CarOpis[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i);
 				format(CarOpisCaller[i], MAX_PLAYER_NAME, "SYSTEM");
 
-				strpack(CarDesc[i], ldesc);
+				strcat(CarDesc[i], ldesc);
 			}
 		}
 	}

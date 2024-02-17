@@ -255,7 +255,7 @@ BusinessPayDay(playerid)
 GetNearestBusiness(playerid)
 {
 	new bizID=INVALID_BIZ_ID; 
-	for(new i; i<BusinessLoaded+1; i++)
+	for(new i; i<=BusinessLoaded; i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, 4.0, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]))
 		{
@@ -351,7 +351,7 @@ stock LoadBusinessPickup()
 {
 	for(new i; i<MAX_BIZNES; i++)
 	{
-		if(strlen(Business[i][b_Name]) >= 3)
+		if(strlen(Business[i][b_Name]) >= 3 && Business[i][b_enX] != 0.0 && Business[i][b_enY] != 0.0)
 		{	
 			BizPickUp[i] = CreateDynamicPickup(1272, 1, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 0, 0 -1);
 			Biz3DText[i] = CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.6, 20.0);

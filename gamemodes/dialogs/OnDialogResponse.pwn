@@ -13,7 +13,7 @@ IsDialogProtected(dialogid)
 CheckDialogId(playerid, dialogid)
 {
     if(dialogid < 0) return 0;
-    if(dialogid != iddialog[playerid])
+	if(dialogid != iddialog[playerid])
     {
         if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
@@ -47,7 +47,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			SetPVarInt(playerid, "lastDialogCzitMsg", gettime() + 60);
 			new string[128];
-			format(string, sizeof(string), "AdmWarn: %s(ID: %i) <- ten gnoj czituje dialogi sprawdzcie co robi", GetNick(playerid), playerid);
+			format(string, sizeof(string), "AdmWarn: %s[%d] <- ten gnoj czituje dialogi sprawdzcie co robi (DialogID: [%d]) ", GetNick(playerid), playerid, dialogid);
 			SendAdminMessage(COLOR_YELLOW, string);	
 		}
 		return 1;
@@ -87,8 +87,34 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
+
+	//2.7.5 - nadal nie 3.0
+	if(dialogid == DIALOGID_UNIFORM_FRAKCJA)
+	{
+		if(response)
+		{
+			new string[64];
+			new skin = FRAC_SKINS[GetPlayerFraction(playerid)][listitem];
+			SetPlayerSkinEx(playerid, skin);
+			PlayerInfo[playerid][pUniform] = skin;
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
+	else if(dialogid == DIALOGID_UNIFORM_FAMILY)
+	{
+		if(response)
+		{
+			new string[64];
+			new skin = FAM_SKINS[GetPlayerOrg(playerid)][listitem];
+			SetPlayerSkinEx(playerid, skin);
+			PlayerInfo[playerid][pUniform] = skin;
+			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
+			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+	}
 	//2.5.2
-	if(dialogid == DIALOG_HA_ZMIENSKIN(0))
+	else if(dialogid == DIALOG_HA_ZMIENSKIN(0))
 	{
 		if(response)
 		{
@@ -109,7 +135,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SetPlayerSkinEx(playerid, FRAC_SKINS[dialogid-DIALOG_HA_ZMIENSKIN(0)][listitem]);
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
 			ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			SetPVarInt(playerid, "CheatDetected", 0);
 		}
 		else
 		{
@@ -172,6 +197,106 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		ZabierzKase(playerid, 30000);
 		sendTipMessage(playerid, "Zaplaciles $30000 za kamizelke i ¿ycie");
 	}	
+	else if(dialogid == 9521) //kara warn
+	{
+		new giveplayerid = GetPVarInt(playerid, "PunishWarnPlayer");
+		new string[256];
+		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary warna dla %s.", GetNick(giveplayerid)));
+		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid)))
+		{
+			new reason[64];
+			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
+			format(string, sizeof string, "{FFFFFF}Gracz: {B7EB34}%s\n{FFFFFF}Powód warna: {B7EB34}%s{FFFFFF}\n\nWybierz typ kary - WARN czy WARN + KICK", GetNick(giveplayerid), reason);		
+			ShowPlayerDialogEx(playerid, 9523, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Warn", "Warn + Kick");
+		}
+		return 1;
+	}
+	else if(dialogid == 9522) //kara ban
+	{
+		new giveplayerid = GetPVarInt(playerid, "PunishBanPlayer");
+		if(!response) return sendTipMessage(playerid, sprintf("* Anulowano nadawanie kary bana dla %s.", GetNick(giveplayerid)));
+		if(response && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid)))
+		{
+			new reason[64], string[256];
+			GetPVarString(playerid, "PunishBanPlayer_Reason", reason, sizeof(reason));
+			GiveBanForPlayer(giveplayerid, playerid, reason);
+			DeletePVar(playerid, "PunishBanPlayer");
+			DeletePVar(playerid, "PunishBanPlayer_Reason");
+
+			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			{
+				iloscBan[playerid]++;
+			}
+			else if(GetPlayerAdminDutyStatus(playerid) == 0)
+			{
+				iloscPozaDuty[playerid]++; 
+			}
+			if(kary_TXD_Status == 1)
+			{
+				BanPlayerTXD(giveplayerid, reason); 
+			}
+			else if(kary_TXD_Status == 0)
+			{
+				format(string, sizeof(string), "AdmCmd: Admin zbanowa³ %s, powód: %s", GetNick(giveplayerid), reason);
+				SendPunishMessage(string, playerid); 
+			}		
+		}
+		return 1;
+	}
+	else if(dialogid == 9523) //kara warn - typ warna
+	{
+		new giveplayerid = GetPVarInt(playerid, "PunishWarnPlayer");
+		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || IsAScripter(playerid))
+		{
+			new reason[64], string[256];
+			GetPVarString(playerid, "PunishWarnPlayer_Reason", reason, sizeof(reason));
+			GiveWarnForPlayer(giveplayerid, playerid, reason, response);
+			DeletePVar(playerid, "PunishWarnPlayer");
+			DeletePVar(playerid, "PunishWarnPlayer_Reason");
+
+			if(GetPlayerAdminDutyStatus(playerid) == 1)
+			{
+				if(PlayerInfo[giveplayerid][pWarns] >= 3)
+				{
+					iloscBan[playerid]++;
+				}
+				else
+				{
+					iloscWarn[playerid] = iloscWarn[playerid]+1;
+				}
+			}
+			else
+			{
+				iloscPozaDuty[playerid]++; 
+			}
+
+			if(kary_TXD_Status == 1)
+			{
+				if(PlayerInfo[giveplayerid][pWarns] >= 3)
+				{
+					format(string, sizeof(string), "%s (3 warny)", reason);
+					BanPlayerTXD(giveplayerid, string); 
+				}
+				else 
+				{
+					WarnPlayerTXD(giveplayerid, playerid, reason);
+				}
+			}
+			else if(kary_TXD_Status == 0)
+			{
+				if(PlayerInfo[giveplayerid][pWarns] >= 3)
+				{
+					format(string, sizeof(string), "AdmCmd: %s zosta³ zbanowany przez admina %s, powód: %s (3 warny)", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
+				}
+				else
+				{
+					format(string, sizeof(string), "AdmCmd: %s zosta³ zwarnowany przez admina %s, powód: %s", GetNickEx(giveplayerid), GetNickEx(playerid), reason); 
+				}
+				SendPunishMessage(string, playerid); 
+			}
+		}
+		return 1;
+	}
 	else if(dialogid == 6999)//vinyl panel
 	{
 		if(!response) return 1;
@@ -465,7 +590,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-	//PADZIOCH
 	else if(dialogid == DIALOGID_MUZYKA) 
 	{
 		switch(listitem)
@@ -475,6 +599,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18434");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 1:
@@ -482,6 +607,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANUno);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 2:
@@ -489,6 +615,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANDos);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 3:
@@ -496,6 +623,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://zet-net-01.cdn.eurozet.pl:8400/listen.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 4:
@@ -503,6 +631,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmffm.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 5:
@@ -510,6 +639,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://www.miastomuzyki.pl/n/rmfmaxxx.pls");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 6:
@@ -517,6 +647,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "https://waw01-03.ic.smcdn.pl/t092-1.mp3");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
 			case 7:
@@ -524,6 +655,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18802/");
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			}
 			case 8:
 			{
@@ -538,6 +670,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				PlayerFixRadio(playerid);
 				StopAudioStreamForPlayer(playerid);
 				SetPVarInt(playerid, "SluchaBasenu", 0);
+				DeletePVar(playerid, "HaveAMp3Stream");
 				return 1;
 			}
 		}
@@ -550,6 +683,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//{
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, inputtext);
+				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			//}
 			//else
 			//{
@@ -953,11 +1087,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 CarOpis_Usun(playerid, veh);
 
                 new opis[128];
-                strunpack(opis, CarDesc[veh]);
-                new str[128];
-                WordWrap(opis, true, str);
-
-                CarOpis[veh] = CreateDynamic3DTextLabel(str, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
+                format(opis, sizeof opis, "%s", CarDesc[veh]);
+				ReColor(opis);
+                CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
                 format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
                 SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis pojazdu, by go usun¹æ wpisz {CC3333}/vopis usuñ{CC3333}");
             }
@@ -987,18 +1119,35 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             SendClientMessage(playerid, COLOR_GRAD1, "Opis: Nieodpowiednia d³ugosæ opisu.");
             return 1;
         }
-         else for (new i = 0, len = strlen(inputtext); i != len; i ++) {
-		    if ((inputtext[i] >= 'A' && inputtext[i] <= 'Z') || (inputtext[i] >= 'a' && inputtext[i] <= 'z') || (inputtext[i] >= '0' && inputtext[i] <= '9') || (inputtext[i] == ' ') || (inputtext[i] == ',') || (inputtext[i] == '.') || (inputtext[i] == '!') || (inputtext[i] == ':') || (inputtext[i] == '-') || (inputtext[i] == '{') || (inputtext[i] == '}') || (inputtext[i] == '[') || (inputtext[i] == ']'))
-				continue;
-            else if ((inputtext[i] == 'Ê') || (inputtext[i] == 'Ó') || (inputtext[i] == '¥') || (inputtext[i] == 'Œ') || (inputtext[i] == '£') || (inputtext[i] == '¯') || (inputtext[i] == '') || (inputtext[i] == 'Æ') || (inputtext[i] == 'Ñ') || (inputtext[i] == 'ê') || (inputtext[i] == 'ó') || (inputtext[i] == '¹') || (inputtext[i] == 'œ') || (inputtext[i] == '³') || (inputtext[i] == '¿') || (inputtext[i] == 'Ÿ') || (inputtext[i] == 'æ') || (inputtext[i] == 'ñ'))
-                continue;
-			else return SendClientMessage(playerid, COLOR_GRAD1, "Opis: U¿y³eœ nieodpowiednich znaków opisu.");
+		else
+		{
+			new givenString[128];
+			format(givenString, sizeof(givenString), "%s", inputtext);
+			if(strfind(givenString, "(FF0000)", true) != -1 || strfind(givenString, "(000000)", true) != -1)
+			{
+				SendClientMessage(playerid, COLOR_GRAD1, "Znaleziono niedozwolony kolor.");
+				return 1;
+			}
+			//todo: kolorowe opisy tylko dla KP
+			new startpos, endpos;
+			if(regex_search(givenString, "[^a-zA-Z0-9¹æê³ñóœ¿Ÿ¥ÆÊ£ÑÓŒ¯ |\\/@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
+			{
+				SendClientMessage(playerid, COLOR_GRAD1, sprintf("Znaleziono niedozwolony znak: %s", givenString[startpos]));
+				return 1;
+			}
 		}
         new veh = GetPlayerVehicleID(playerid);
-        strdel(CarDesc[veh], 0, 128 char);
-        strpack(CarDesc[veh], inputtext);
+        strdel(CarDesc[veh], 0, 128);
+		strcat(CarDesc[veh], inputtext);
         MruMySQL_UpdateOpis(veh, CarData[VehicleUID[veh][vUID]][c_UID], 2);
-        RunCommand(playerid, "/vopis",  "");
+
+		CarOpis_Usun(playerid, veh);
+		new opis[128];
+		format(opis, sizeof opis, "%s", CarDesc[veh]);
+		ReColor(opis);
+		CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
+		format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
+		SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis pojazdu, by go usun¹æ wpisz {CC3333}/vopis usuñ{CC3333}");
         return 1;
     }
     else if(dialogid == D_PERM)
@@ -1497,6 +1646,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
+					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
 					ElevatorTravel(playerid,1144.4740, -1333.2556, 13.8348, 0,90.0);//parking
 					PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 				}
@@ -1507,6 +1661,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
+					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
 					ElevatorTravel(playerid,1183.3129,-1333.5684,88.1627,90,90.0);//p2
 					PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
 				}
@@ -1537,6 +1696,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
                 case 9:
 				{
+					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != 4)
+					{
+						SendClientMessage(playerid, -1, "Poziom zablokowany.");
+						return 1;
+					}
             		ElevatorTravel(playerid,1161.8228, -1337.0521, 31.6112,0,180.0);//dach
 					PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 				}
@@ -1978,59 +2142,59 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     		{
 	                case 0:
 	                {
-	                	ApplyAnimation(playerid,"PED","WALK_DRUNK",4.0, 1, 1, 1, 1, 0);
+	                	ApplyAnimation(playerid,"PED","WALK_DRUNK",4.0, 1, 1, 1, 1, 0, 1);
 					}
 	                case 1:
 	                {
-	                	ApplyAnimation(playerid,"PED","WALK_civi",4.0, 1, 1, 1, 1, 1, 0);
+	                	ApplyAnimation(playerid,"PED","WALK_civi",4.0, 1, 1, 1, 1, 1, 1);
 					}
 	                case 2:
 	                {
-	                	ApplyAnimation(playerid,"PED","WALK_fatold",4.0, 1, 1, 1, 1, 1, 0);
+	                	ApplyAnimation(playerid,"PED","WALK_fatold",4.0, 1, 1, 1, 1, 1, 1);
 	             	}
 	                case 3:
 	                {
-	                    ApplyAnimation(playerid,"PED","WALK_gang1",4.0, 1, 1, 1, 1, 1, 0);
+	                    ApplyAnimation(playerid,"PED","WALK_gang1",4.0, 1, 1, 1, 1, 1, 1);
 	                }
 	                case 4:
 	                {
-	                    ApplyAnimation(playerid,"PED","WALK_gang2",4.0, 1, 1, 1, 1, 1, 0);
+	                    ApplyAnimation(playerid,"PED","WALK_gang2",4.0, 1, 1, 1, 1, 1, 1);
 	                }
 					case 5:
 					{
-					    ApplyAnimation(playerid,"PED","WALK_old",4.0, 1, 1, 1, 1, 1, 0);
+					    ApplyAnimation(playerid,"PED","WALK_old",4.0, 1, 1, 1, 1, 1, 1);
 					}
 					case 6:
 					{
-                        ApplyAnimation(playerid,"PED","WALK_rocket",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WALK_rocket",4.0, 1, 1, 1, 1, 1, 1);
 					}
 					case 7:
 					{
-                        ApplyAnimation(playerid,"PED","WALK_player",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WALK_player",4.0, 1, 1, 1, 1, 1, 1);
 					}
 					case 8:
 					{
-                        ApplyAnimation(playerid,"PED","WOMAN_walkfatold",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WOMAN_walkfatold",4.0, 1, 1, 1, 1, 1, 1);
 					}
 					case 9:
 					{
-                        ApplyAnimation(playerid,"PED","WOMAN_walksexy",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WOMAN_walksexy",4.0, 1, 1, 1, 1, 1, 1);
 					}
 					case 10:
 					{
-                        ApplyAnimation(playerid,"FAT","FatWalk",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"FAT","FatWalk",4.0, 1, 1, 1, 1, 1, 1);
 					}
 					case 11:
 					{
-                        ApplyAnimation(playerid,"PED","WOMAN_Walkbusy",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WOMAN_Walkbusy",4.0, 1, 1, 1, 1, 1, 1);
 					}
 					case 12:
 					{
-                        ApplyAnimation(playerid,"PED","WOMAN_walkshop",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"PED","WOMAN_walkshop",4.0, 1, 1, 1, 1, 1, 1);
 					}
 					case 13:
 					{
-                        ApplyAnimation(playerid,"MUSCULAR","MuscleWalk",4.0, 1, 1, 1, 1, 1, 0);
+                        ApplyAnimation(playerid,"MUSCULAR","MuscleWalk",4.0, 1, 1, 1, 1, 1, 1);
   				}
 			}
 		}
@@ -2120,27 +2284,24 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-	            GUIExit[playerid] = 0;
-	      		SendClientMessage(playerid, 0xFFFFFFFF, "Pozycja przywrócona");
-	      		lowcap[playerid] = 0;
-
-                SetPVarInt(playerid, "spawn", 2);
-                if(PlayerInfo[playerid][pPos_x] == 2246.6 || PlayerInfo[playerid][pPos_y] == -1161.9 || PlayerInfo[playerid][pPos_z] == 1029.7 || PlayerInfo[playerid][pPos_x] == 0 || PlayerInfo[playerid][pPos_y] == 0)
+	    		if(PlayerInfo[playerid][pPos_x] == 2246.6 || PlayerInfo[playerid][pPos_y] == -1161.9 || PlayerInfo[playerid][pPos_z] == 1029.7 || PlayerInfo[playerid][pPos_x] == 0 || PlayerInfo[playerid][pPos_y] == 0)
 	      		{
 	                SendClientMessage(playerid, 0xFFFFFFFF, "Twoja pozycja zosta³a b³êdnie zapisana, dlatego zespawnujesz siê na zwyk³ym spawnie.");
-                    SetPVarInt(playerid, "spawn", 1);
                 }
-				TogglePlayerSpectating(playerid, false);
-		        return 1;
+				else
+				{
+					SendClientMessage(playerid, 0xFFFFFFFF, "Pozycja przywrócona");
+					SetPVarInt(playerid, "spawn", 2);
+					SetPlayerSpawnPos(playerid);
+				}
 			}
-			if(!response)
+			else if(!response)
 			{
-                SetPVarInt(playerid, "spawn", 1);
-			    GUIExit[playerid] = 0;
-				TogglePlayerSpectating(playerid, false);
-			    lowcap[playerid] = 0;
 				PlayerInfo[playerid][pLocal] = 255;
 			}
+			GUIExit[playerid] = 0;
+			lowcap[playerid] = 0;
+			return 1;
 	    }
 	    //OnDialogResposne OKNA DMV
 		if(dialogid == 99)
@@ -2225,27 +2386,28 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				Mobile[playerid] = POLICE_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
-                case 1:
-                {
-                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze stra¿¹ po¿arn¹, prosze czekaæ...");
-    				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaæ krótki opis zdarzenia.");	
-    				Mobile[playerid] = SHERIFF_NUMBER;
-					Callin[playerid] = CALL_EMERGENCY;
-                }
-                case 2:
+				case 1:
                 {
     			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze szpitalem, prosze czekaæ...");
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "Szpital: Witam, prosze podaæ krótki opis zdarzenia.");
     				Mobile[playerid] = LSMC_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
                 }
+                case 2:
+                {
+                	SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze ze stra¿¹ po¿arn¹, prosze czekaæ...");
+    				SendClientMessage(playerid, COLOR_DBLUE, "LSFD HQ: Witam, prosze podaæ krótki opis zdarzenia.");	
+    				Mobile[playerid] = LSMC_NUMBER;
+					Callin[playerid] = CALL_EMERGENCY;
+                }
+				/*
                 case 3:
                 {
     			    SendClientMessage(playerid, COLOR_ALLDEPT, "Centrala: £¹cze z dyspozytorem, prosze czekaæ...");
     				SendClientMessage(playerid, TEAM_CYAN_COLOR, "SheriffDep: Witam, prosze podaæ krótki opis przestêpstwa.");
     				Mobile[playerid] = LSFD_NUMBER;
 					Callin[playerid] = CALL_EMERGENCY;
-                }
+                }*/
 			}
 	    }
         else if(dialogid== WINDA_SAN)
@@ -2362,7 +2524,33 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        switch(listitem)
 		        {
-		            case 0:
+					case 0:
+		            {
+		            	if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+			                SetPlayerPos(playerid,1543.3915,-1643.2813,28.4881);
+			                SetPlayerVirtualWorld(playerid,29);
+			                SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+                        }
+						else if(ApprovedLawyer[playerid] == 1)
+						{
+							SetPlayerPos(playerid,1556.7177,-1643.0455,28.4881);
+			                SetPlayerVirtualWorld(playerid,29);
+			                SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
+		            }
+		            case 1:
 		            {
 		            	if(IsAPolicja(playerid) || IsABOR(playerid))
            				{
@@ -2380,7 +2568,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 		            }
-		            case 1: {
+		            case 2: {
 		            	// parking gorny
 		            	if(IsAPolicja(playerid) || IsABOR(playerid))
            				{
@@ -2398,50 +2586,96 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 		            }
-		            case 2:
-		            {
-		                SetPlayerPos(playerid,-1645.1858, 883.1620, -45.4112);
-		                SetPlayerVirtualWorld(playerid,1);
-		                TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-		                GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Komisariat", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
-		            }
 		            case 3:
 		            {
-		                SetPlayerPos(playerid,-1621.7272, 834.5807, -26.1115);
-		                SetPlayerVirtualWorld(playerid,1);
+		                SetPlayerPos(playerid,1585.8722,-1685.5045,62.2363);
+		                SetPlayerVirtualWorld(playerid,25);
 		                TogglePlayerControllable(playerid,0);
+						SetPlayerInterior(playerid,0);
 						Wchodzenie(playerid);
-                 		GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Pokoje przesluchan", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
+		                GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Recepcja i glowny hol", 5000, 1);
+						PlayerInfo[playerid][pInt] = 0;
 		            }
 		            case 4:
 		            {
-		                SetPlayerPos(playerid,-1745.1101, 824.0737, -48.0110);
-		                SetPlayerVirtualWorld(playerid,1);
-		                TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
+						if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+							SetPlayerPos(playerid,1585.8090,-1685.1177,65.8762);
+							SetPlayerVirtualWorld(playerid,25);
+							TogglePlayerControllable(playerid,0);
+							SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+							GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Biuro komendanta", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
 		            }
 		            case 5:
 		            {
-		                SetPlayerPos(playerid,1568.1061, 2205.3196, -50.9522);
-		                SetPlayerVirtualWorld(playerid,3);
-		                TogglePlayerControllable(playerid,0);
-						Wchodzenie(playerid);
-	                	GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale treningowe", 5000, 1);
-						PlayerInfo[playerid][pInt] = 10;
+						if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+							SetPlayerPos(playerid,1551.5720,-1701.7196,28.4807);
+							SetPlayerVirtualWorld(playerid,26);
+							TogglePlayerControllable(playerid,0);
+							SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+							GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
 		            }
 		            case 6:
+		            {
+						if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+							SetPlayerPos(playerid,1562.7128,-1639.0281,28.5040);
+							SetPlayerVirtualWorld(playerid,27);
+							TogglePlayerControllable(playerid,0);
+							SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Konferencyjne", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
+		            }
+					case 7:
+		            {
+						if(IsAPolicja(playerid) || IsABOR(playerid))
+           				{
+							SetPlayerPos(playerid,1564.9027,-1665.8291,28.4815);
+							SetPlayerVirtualWorld(playerid,28);
+							TogglePlayerControllable(playerid,0);
+							SetPlayerInterior(playerid,0);
+							Wchodzenie(playerid);
+							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale przesluchan", 5000, 1);
+							PlayerInfo[playerid][pInt] = 0;
+						}
+						else
+						{
+							SendClientMessage(playerid, COLOR_GRAD2, "Poziom zastrze¿ony dla s³u¿b porz¹dkowych.");
+							return 1;
+						}
+		            }
+		            case 8:
 		            {
 						if(IsAPolicja(playerid) || IsABOR(playerid))
 						{
 							SetPlayerPos(playerid,1565.0798, -1665.6580, 28.4782);
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerInterior(playerid,0);
-							GameTextForPlayer(playerid, "~w~ [Poziom 5]~n~~b~Dach", 5000, 1);
+							GameTextForPlayer(playerid, "~w~ [Poziom 7]~n~~b~Dach", 5000, 1);
 							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
@@ -2544,7 +2778,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(response)
 			{
-				switch(listitem)//Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Stanowe\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
+				switch(listitem)//Winda FBI","[Poziom -1]Parking podziemny \n[Poziom 0]Parking\n[Poziom 0.5]\n Areszt federalny\n[Poziom 1]Recepcja\n[Poziom 2] Szatnia\n[Poziom 3] Zbrojownia \n[Poziom 4]Biura federalne \n[Poziom 5] Dyrektorat\n[Poziom 6]CID/ERT\n[Poziom 7]Sale Treningowe \n [Poziom X] Dach","Jedz","Anuluj");
 				{
 					case 0://parking podziemny
 					{
@@ -2553,12 +2787,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,2);
 						SetPlayerPos(playerid,1093.0625,1530.8715,6.6905);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom -1, Parking podziemny FBI");
 						PlayerInfo[playerid][pLocal] = 255;
 						GameTextForPlayer(playerid, "~p~by Simeone ~r~Cat", 5000, 1);
-						Wchodzenie(playerid);
 					}
 					case 1://parking
 					{
@@ -2567,25 +2801,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,0);
 						SetPlayerPos(playerid,596.5255, -1489.2544, 15.3587);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 0, Parking FBI");
 						GameTextForPlayer(playerid, "~p~by UbunteQ", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
-						Wchodzenie(playerid);
 					}
-					case 2://stanowe
+					case 2://areszt federalny
 					{
 						if(levelLock[FRAC_FBI][2] == 1 && PlayerInfo[playerid][pMember] != FRAC_FBI)
 						{
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 1);
 						SetPlayerPos(playerid, 594.05334, -1476.27490, 81.82840+0.5);
-						GameTextForPlayer(playerid, "~p~Wiezienie Stanowe", 5000, 1);
+						GameTextForPlayer(playerid, "~p~Areszt federalny", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
-						Wchodzenie(playerid);
 					}
 					case 3://recepcja
 					{
@@ -2594,7 +2828,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,1);
 						SetPlayerPos(playerid,586.83704, -1473.89270, 89.30576);
@@ -2610,8 +2843,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,2);
 						SetPlayerPos(playerid,592.65466, -1486.76575, 82.10487);
@@ -2629,7 +2860,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,3);
 						SetPlayerPos(playerid,591.37579, -1482.26672, 80.43560);
@@ -2637,7 +2867,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 						GameTextForPlayer(playerid, "~p~by UbunteQ & Iwan", 5000, 1);
 						PlayerInfo[playerid][pLocal] = 255;
-						Wchodzenie(playerid);
 
 					}
 					case 6://Biura federalne
@@ -2647,7 +2876,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,4);
 						SetPlayerPos(playerid,596.21857, -1477.92395, 84.06664);
@@ -2663,7 +2891,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,5);
 						SetPlayerPos(playerid,589.23029, -1479.66357, 91.74274);
@@ -2678,13 +2905,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPos(playerid,585.70782, -1479.54211, 99.01273);
-						TogglePlayerControllable(playerid,0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,6);
+						SetPlayerPos(playerid,585.70782, -1479.54211, 99.01273);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 6, CID/ERT");
 						PlayerInfo[playerid][pLocal] = 212;
-						Wchodzenie(playerid);
 					}
 					case 9://sale treningowe
 					{
@@ -2693,12 +2918,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPos(playerid, 590.42767, -1447.62939, 80.95732);
-						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 7);
+						SetPlayerPos(playerid, 590.42767, -1447.62939, 80.95732);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 7, Sale Treningowe");
-						Wchodzenie(playerid);
 					}
 					case 10:
 					{
@@ -2707,12 +2930,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
-						SetPlayerPos(playerid, 605.5609, -1462.2583, 88.1674);
-						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid, 8);
+						SetPlayerPos(playerid, 605.5609, -1462.2583, 88.1674);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Sale przes³uchañ");
-						Wchodzenie(playerid);
 					}
 					case 11://dach
 					{
@@ -2721,11 +2942,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							sendTipMessageEx(playerid, COLOR_RED, "Ten poziom jest zablokowany!"); 
 							return 1;
 						}
+						Wchodzenie(playerid);
 						SetPlayerVirtualWorld(playerid,0);
 						SetPlayerPos(playerid,613.4404,-1471.9745,73.8816);
-						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Poziom 8, Dach");
+						SendClientMessage(playerid, COLOR_LIGHTGREEN, "Dach");
 						PlayerInfo[playerid][pLocal] = 255;
-						Wchodzenie(playerid);
 					}
 				}
 			}
@@ -2744,39 +2965,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 	            switch(listitem)
 	            {
-	                case 0:
+					case 0:
 					{
-		                if (kaska[playerid] > 500)
-						{
-						    if(PlayerInfo[playerid][pTraderPerk] > 0)
-						    {
-								new skill = 500 / 100;
-								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
-								new payout = 500 - price;
-						        format(string, sizeof(string), "~r~-$%d", payout);
-								GameTextForPlayer(playerid, string, 5000, 1);
-								ZabierzKase(playerid, payout);
-						    }
-						    else
-						    {
-						        format(string, sizeof(string), "~r~-$%d", 500);
-								GameTextForPlayer(playerid, string, 5000, 1);
-								ZabierzKase(playerid, 500);
-						    }
-							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
-							new randphone = 10000 + random(89999);//minimum 1000  max 9999
-							PlayerInfo[playerid][pPnumber] = randphone;
-							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
-							SendClientMessage(playerid, COLOR_GRAD4, string);
-							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
-							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
-							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d", GetPlayerLogName(playerid), randphone);
-							return 1;
-						}
-					}
-					case 1:
-					{
-						if (kaska[playerid] > 50000)
+						if (kaska[playerid] > 56500)
 						{
 							if(PlayerGames[playerid] >= 4)
 							{
@@ -2788,7 +2979,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
-							ZabierzKase(playerid, 50000);
+							ZabierzKase(playerid, 56500);
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    { 
 								if(playerValue > winValue && playerValue >= 85)
@@ -2844,6 +3035,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 								}
 								PlayerGames[playerid]++; 
 							}
+							return 1;
+						}
+					}
+					case 1:
+					{
+		                if (kaska[playerid] > 500)
+						{
+						    if(PlayerInfo[playerid][pTraderPerk] > 0)
+						    {
+								new skill = 500 / 100;
+								new price = (skill)*(PlayerInfo[playerid][pTraderPerk]);
+								new payout = 500 - price;
+						        format(string, sizeof(string), "~r~-$%d", payout);
+								GameTextForPlayer(playerid, string, 5000, 1);
+								ZabierzKase(playerid, payout);
+						    }
+						    else
+						    {
+						        format(string, sizeof(string), "~r~-$%d", 500);
+								GameTextForPlayer(playerid, string, 5000, 1);
+								ZabierzKase(playerid, 500);
+						    }
+							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
+							new randphone = 10000 + random(89999);//minimum 1000  max 9999
+							format(string, sizeof(string), "   Kupi³eœ telefon. Twój numer to: %d", randphone);
+							SendClientMessage(playerid, COLOR_GRAD4, string);
+							SendClientMessage(playerid, COLOR_GRAD5, "Mo¿esz sprawdziæ go w ka¿dej chwili wpisuj¹c /stats");
+							SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /telefonpomoc aby zobaczyæ komendy telefonu.");
+							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
+								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
+							);
+							MRP_SetPlayerPhone(playerid, randphone);
 							return 1;
 						}
 					}
@@ -3104,6 +3327,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] > 2500)
 						{
+							if(PlayerInfo[playerid][pLevel] < 2)
+							{
+								sendErrorMessage(playerid, "CB Radio tylko od 2 lvl!");
+								return 1;
+							}
+
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 					    	{
 								new skill = 2500 / 100;
@@ -3260,24 +3489,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						GameTextForPlayer(playerid, "~r~-$25", 5000, 1);
 						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego hamburgera.");
 					}
-					case 19: //mro¿ony nietoperze z Wuhan
-					{
-						if(kaska[playerid] < 1500) 
-						{
-							sendErrorMessage(playerid, "Nie staæ Ciê na mro¿onego nietoperza z Wuhan!");
-							return 1;
-						}
-						if(Groceries[playerid][pWuhanBat] != 0)
-						{
-							sendErrorMessage(playerid, "Masz ju¿ mro¿onego nietoperza z Wuhan.");
-							return 1;
-						}
-						Groceries[playerid][pWuhanBat] = random(650)+100;
-						ZabierzKase(playerid, 1500);
-						GameTextForPlayer(playerid, "~r~-$1500", 5000, 1);
-						SendClientMessage(playerid, COLOR_GRAD4, "Kupi³eœ mro¿onego nietoperza z Wuhan.");
-					}
-					case 20: //maseczka ochronna
+					case 19: //maseczka ochronna
 					{
 						if(kaska[playerid] < 15000) 
 						{
@@ -3290,7 +3502,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							return 1;
 						}
 						ZabierzKase(playerid, 15000);
-						PlayerImmunity[playerid] = 10;
+						SetPlayerImmunity(playerid, MAX_PLAYER_IMMUNITY);
 						SetPVarInt(playerid, "maseczka", 1);
 						EditAttachedObject(playerid, AttachPlayerItem(playerid, 18919, 2, -0.07, 0.0, 0.0, 85.0, 170.0, 86.0, 1.000000, 1.000000, 1.000000 ));
 					}
@@ -3487,6 +3699,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            Kajdanki_JestemSkuty[playerid] = 2;
 		            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
+					
+					CuffedAction(Kajdanki_PDkuje[playerid], playerid);
+					TogglePlayerControllable(playerid, 1);
 				}
 				else if(cops == 2 || TazerAktywny[playerid] == 1 && cops < 2)
 				{
@@ -3509,6 +3724,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            Kajdanki_JestemSkuty[playerid] = 2;
 			            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
 			            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
+					
+						CuffedAction(Kajdanki_PDkuje[playerid], playerid);
+						TogglePlayerControllable(playerid, 1);
 				    }
 				}
 				else
@@ -4731,6 +4949,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
+							);
 							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
@@ -4798,6 +5019,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
+							);
 							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
@@ -4867,6 +5091,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
+							);
 							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
@@ -4927,6 +5154,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 							format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 							ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+								GetPlayerLogName(playerid), GetPlayerLogName(playa), zderzakid, zderzakid2, GetVehicleLogName(pojazd), 10000
+							);
 							ZabierzKase(playerid, 10000);
 							format(string, sizeof(string), "~r~-$%d", 10000);
 							GameTextForPlayer(playerid, string, 5000, 1);
@@ -4963,6 +5193,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playa, COLOR_LIGHTBLUE, string);
 						format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe zderzaki w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
 						ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						Log(payLog, INFO, "Gracz %s zamontowa³ %s zderzaki [%d, %d] na pojazd %s za %d$",
+							GetPlayerLogName(playerid), GetPlayerLogName(playa), 1133, 1117, GetVehicleLogName(pojazd), 10000
+						);
 						ZabierzKase(playerid, 10000);
 						format(string, sizeof(string), "~r~-$%d", 10000);
 						GameTextForPlayer(playerid, string, 5000, 1);
@@ -6197,14 +6430,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						weryfikacja[playerid] = 1;
 						if(PlayerInfo[playerid][pJailed] == 0)
 						{
+							SetPVarInt(playerid, "spawn", 1);
+							SetPlayerSpawn(playerid);
+							TogglePlayerSpectating(playerid, false);
 							lowcap[playerid] = 1;
 							ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
 						}
 						else
 						{
 							SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
-							TogglePlayerSpectating(playerid, false);
 							SetPlayerSpawn(playerid);
+							TogglePlayerSpectating(playerid, false);
 						}
 					}
 					else
@@ -6212,7 +6448,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany!");
 						ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany.", "WyjdŸ", "");
 						GUIExit[playerid] = 0;
-						SetPlayerVirtualWorld(playerid, 0);
+						SetPlayerVirtualWorld(playerid, 50);
 						KickEx(playerid);
 					}
 			    }
@@ -6221,7 +6457,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_PANICRED, "Zosta³eœ zkickowany za niewpisanie has³a!");
 					ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Zosta³eœ zkickowany z powodu bezpieczeñstwa za wpisanie pustego lub zbyt d³ugiego has³a. Zapraszamy ponownie.", "WyjdŸ", "");
 					GUIExit[playerid] = 0;
-				    SetPlayerVirtualWorld(playerid, 0);
+				    SetPlayerVirtualWorld(playerid, 50);
 					KickEx(playerid);
 			    }
 		    }
@@ -6230,7 +6466,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        SendClientMessage(playerid, COLOR_PANICRED, "Wyszed³eœ z weryfikacji, zosta³eœ roz³¹czony!");
 	            ShowPlayerDialogEx(playerid, 239, DIALOG_STYLE_MSGBOX, "Kick", "Wyszed³eœ z weryfikacji, zosta³eœ roz³¹czony!", "WyjdŸ", "");
 	            GUIExit[playerid] = 0;
-	            SetPlayerVirtualWorld(playerid, 0);
+	            SetPlayerVirtualWorld(playerid, 50);
 				KickEx(playerid);
 		    }
 		}
@@ -6825,7 +7061,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 			else
 			{
-				SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+				SendClientMessage(playerid, COLOR_PANICRED, "(10) Anulowano.");
 			}
 		}
 		if(dialogid == 86)//system domów
@@ -6846,7 +7082,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				SendClientMessage(playerid, COLOR_PANICRED, "Anulowano.");
+				SendClientMessage(playerid, COLOR_PANICRED, "(9) Anulowano.");
 			}
 		}
 		if(dialogid == 87)//system domów
@@ -11541,7 +11777,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 {
                     if(IsPlayerConnected(i))
                     {
-                        if(!GetPVarInt(i, "sanaudio"))
+                        if(!GetPVarInt(i, "sanaudio") && !GetPVarInt(i, "HaveAMp3Stream"))
                         {
                             if(PlayerToPoint(SANzasieg, i, SANx, SANy, SANz))
                             {
@@ -11560,68 +11796,134 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             format(SANrepertuar, 128, inputtext);
             ShowPlayerDialogEx(playerid, 766, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
         }
-        else if(dialogid == 1401)
+		else if(dialogid == 768)
+		{
+			if(response)
+		    {
+		        switch(listitem)
+		        {
+                    case 0: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://s1.slotex.pl:7170");
+                    case 1: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://4stream.pl:18240");
+		            case 2: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_discopolo.pls");
+                    case 3: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_dance100.pls");
+                    case 4: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_mnt.pls");
+                    case 5: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_hiphop.pls");
+                    case 6: format(KLUBOWErepertuar, sizeof(KLUBOWErepertuar), "http://www.polskastacja.pl/play/aac_party.pls");
+                    case 7: return ShowPlayerDialogEx(playerid, 770, DIALOG_STYLE_INPUT, "Podaj adres URL", "Proszê wprowadziæ adres URL do wybranego utworu", "Wybierz", "Anuluj");
+		        }
+                ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
+		    }
+		}
+		else if(dialogid == 770)
+        {
+            if(!response) return 1;
+            format(KLUBOWErepertuar, 128, inputtext);
+            ShowPlayerDialogEx(playerid, 769, DIALOG_STYLE_LIST, "Wybierz zasiêg", "Bardzo ma³y zasiêg\nMa³y zasiêg\nŒredni zasiêg\nDu¿y zasiêg", "Wybierz", "Anuluj");
+        }
+		if(dialogid == 769)
 		{
 		    if(response)
 		    {
-		        new string[256];
+		        switch(listitem)
+		        {
+		            case 0: KLUBOWEzasieg = 10.0;
+                    case 1: KLUBOWEzasieg = 20.0;
+                    case 2: KLUBOWEzasieg = 35.0;
+                    case 3: KLUBOWEzasieg = 50.0;
+				}
+                new Float:x1,Float:y1,Float:z1, Float:a1, nick[MAX_PLAYER_NAME], string[256];
+				GetPlayerPos(playerid,x1,y1,z1);
+				GetPlayerFacingAngle(playerid, a1);
+				GetPlayerName(playerid, nick, sizeof(nick));
+				KLUBOWEradio = CreateDynamicObject(2232, x1, y1, z1-0.3, 0, 0, a1-180);
+				KLUBOWEx = x1;
+				KLUBOWEy = y1;
+				KLUBOWEz = z1;
+                KLUBOWE3d = CreateDynamic3DTextLabel("G³oœnik Klubowy", COLOR_NEWS, x1, y1, z1+0.5, 10.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
+				format(string, sizeof(string), "* %s stawia g³oœnik na ziemi i w³¹cza.", nick);
+				ProxDetector(10.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+				SendClientMessage(playerid, COLOR_NEWS, "Ustawi³eœ g³oœnik klubowy. Aby go wy³¹czyæ wpisz /glosnik");
+                //
+                foreach(new i : Player)
+                {
+                    if(IsPlayerConnected(i))
+                    {
+                        if(!GetPVarInt(i, "kluboweaudio") && !GetPVarInt(i, "HaveAMp3Stream"))
+                        {
+                            if(PlayerToPoint(KLUBOWEzasieg, i, KLUBOWEx, KLUBOWEy, KLUBOWEz))
+                            {
+                                PlayAudioStreamForPlayer(i, KLUBOWErepertuar, KLUBOWEx, KLUBOWEy, KLUBOWEz, KLUBOWEzasieg, 1);
+                                SetPVarInt(i, "kluboweaudio", 1);
+                            }
+                        }
+                    }
+                }
+                //
+			}
+		}
+        else if(dialogid == 1401)
+		{
+			new string[256];
+		    if(response)
+		    {
 		        switch(listitem)
 		        {
 		            case 0://Bia³y
 		            {
-						format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_WHITE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18652;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 1://¯ó³ty
 		            {
-						format(string, sizeof(string), "¯ó³te neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "¯ó³te neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, 0xDAA520FF, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18650;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 2://Zielony
 		            {
-						format(string, sizeof(string), "Zielone neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Zielone neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTGREEN, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18649;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		            case 3://Niebieski
 		            {
 
-						format(string, sizeof(string), "Niebieskie neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Niebieskie neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18648;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
-
 		            }
 		            case 4://Czerwony
 		            {
 
-						format(string, sizeof(string), "Czerwone neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Czerwone neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_RED, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18647;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 
 		            }
 		            case 5://Ró¿owy
 		            {
-						format(string, sizeof(string), "Ró¿owe neony zosta³y zamontowane w twoim %s. Koszt: 3 500 000$. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+						format(string, sizeof(string), "Ró¿owe neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
 						SendClientMessage(playerid, COLOR_PURPLE, string);
                         CarData[IloscAut[playerid]][c_Neon] = 18651;
                         PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
-                        ZabierzKase(playerid, 3500000);
 		            }
 		        }
-                Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);
 		    }
+			else
+			{
+				format(string, sizeof(string), "Bia³e neony zosta³y zamontowane w twoim %s. Aby je w³¹czyæ wpisz /dr", VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400]);
+				SendClientMessage(playerid, COLOR_WHITE, string);
+				CarData[IloscAut[playerid]][c_Neon] = 18652;
+				PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
+			}
+			Car_Save(IloscAut[playerid], CAR_SAVE_TUNE);
+			return 1;
 		}
 		else if(dialogid == 1403)
 		{
@@ -11635,14 +11937,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= onePoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 50 kredytów za jedyne %d$.", onePoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", onePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 50;
+							Kredyty[playerid] += 100;
 							ZabierzKase(playerid, onePoolPrice);
 							SejfR_Add(43, onePoolPrice);
 							SejfR_Save(43);
 							poolCashStats = poolCashStats+onePoolPrice;
-							poolCreditStatus = poolCreditStatus+50;
+							poolCreditStatus = poolCreditStatus+100;
 						}
 						else
 						{
@@ -11654,13 +11956,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= twoPoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 100 kredytów za jedyne %d$.", twoPoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 200 kredytów za jedyne %d$.", twoPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 100;
+							Kredyty[playerid] += 200;
 							ZabierzKase(playerid, twoPoolPrice); 
 							SejfR_Add(43, twoPoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+100;
+							poolCreditStatus = poolCreditStatus+200;
 							poolCashStats = poolCashStats+twoPoolPrice;
 						}
 						else
@@ -11673,13 +11975,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= threePoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 250 kredytów za jedyne %d$.", threePoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", threePoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 250;
+							Kredyty[playerid] += 500;
 							ZabierzKase(playerid, threePoolPrice);
 							SejfR_Add(43, threePoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+250;
+							poolCreditStatus = poolCreditStatus+500;
 							poolCashStats = poolCashStats+threePoolPrice;
 						}
 						else
@@ -11692,13 +11994,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 						if(kaska[playerid] >= fourPoolPrice)
 						{
-							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 500 kredytów za jedyne %d$.", fourPoolPrice);
+							format(string, sizeof(string), "Pani Janina mówi: Oto pakiet 1000 kredytów za jedyne %d$.", fourPoolPrice);
 							SendClientMessage(playerid, COLOR_WHITE, string);
-							Kredyty[playerid] += 500;
+							Kredyty[playerid] += 1000;
 							ZabierzKase(playerid, fourPoolPrice);
 							SejfR_Add(43, fourPoolPrice);
 							SejfR_Save(43);
-							poolCreditStatus = poolCreditStatus+500;
+							poolCreditStatus = poolCreditStatus+1000;
 							poolCashStats = poolCashStats+fourPoolPrice;
 						}
 						else
@@ -13994,6 +14296,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ZabierzKase(playerid, 15000);
 				DajKase(id, 15000);
 				PlayerInfo[playerid][pFixKit]++;
+				PlayerInfo[id][pMechSkill]++;
+                if(PlayerInfo[id][pMechSkill] == 50)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 100)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 200)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+                else if(PlayerInfo[id][pMechSkill] == 400)
+                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
 			}
 		}
 		else
@@ -14052,7 +14363,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GUIExit[playerid] = 0;
 			new weaponid = DynamicGui_GetValue(playerid, listitem);
 			new weapondata = DynamicGui_GetDataInt(playerid, listitem);
-			if(weaponid == PlayerHasWeapon[playerid])
+			if(weaponid == MyWeapon[playerid])
 			{
 				weaponid = PlayerInfo[playerid][pGun0];
 			}
@@ -14126,7 +14437,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    case 42: MRP_DoAnimation(playerid,"@karta");
 		    case 43: MRP_DoAnimation(playerid,"@komputer");
 		    case 44: MRP_DoAnimation(playerid,"@kozak");
-		    case 45: MRP_DoAnimation(playerid,"@kungfu");
+		    case 45: MRP_DoAnimation(playerid,"@taichi");
 			case 46: MRP_DoAnimation(playerid,"@machaj");
 			case 47: MRP_DoAnimation(playerid,"@maska");
 			case 48: MRP_DoAnimation(playerid,"@medyk");
@@ -14632,8 +14943,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 
 				if(PlayerInfo[playerid][pJailed] == 0)
-				{
-					lowcap[playerid] = 1;
+				{ 
+    				lowcap[playerid] = 1;
+					SetPVarInt(playerid, "spawn", 1);
+					SetPlayerSpawn(playerid);
+					TogglePlayerSpectating(playerid, false);
 					ShowPlayerDialogEx(playerid, 1, DIALOG_STYLE_MSGBOX, "Serwer", "Czy chcesz siê teleportowaæ do poprzedniej pozycji?", "TAK", "NIE");
 				}
 			}
@@ -16471,7 +16785,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				*/
 			}
-
+			Sejf_Add(FRAC_GOV, DmvLicenseCost[listitem]);
 			ZabierzKase(playerid, DmvLicenseCost[listitem]);
 		}
 	}
@@ -17246,6 +17560,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			Log(payLog, INFO, "%s kupi³ skina %d za %d$", GetPlayerLogName(playerid), ShopSkins[listitem][SKIN_ID], ShopSkins[listitem][SKIN_PRICE]);
 			return 1;
 		}
+	}
+	else if(mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
 	}
 	return 0;
 }

@@ -3,6 +3,7 @@ new DEVELOPMENT = false;
 
 new SentMessagesIndex[MAX_PLAYERS] = 0;
 new SentMessages[MAX_PLAYERS][MAX_SENT_MESSAGES][144];
+new MessageType:SentMessagesType[MAX_PLAYERS][MAX_SENT_MESSAGES];
 
 new ServerSecret[MAX_SERVER_SECRET_LENGTH];
 
@@ -24,7 +25,15 @@ new Float:czitY;
 new Float:czitZ;
 
 new timerAC[MAX_PLAYERS];
-new timeAC[MAX_PLAYERS]; 
+new timeAC[MAX_PLAYERS];
+
+new timeFakeVehRespawn[MAX_PLAYERS] = {0, ...}; // czas (tick) kiedy gracz ostatnio utopi≥ pojazd (albo udawa≥, øe go utopi≥, by je zrespawnowaÊ)
+new countFakeVehRespawn[MAX_PLAYERS] = {0, ...}; // ile razy w ciπgu ostatnich 20 minut gracz utopi≥ pojazd (albo udawa≥, øe go utopi≥, by je zrespawnowaÊ)
+new unoccupiedVehToCheckAC[MAX_VEHICLES] = {false, ...}; // true jeøeli w przeciπgu ostatnich 3 sekund pozycja danego pojazdu zosta≥a zmieniona przez synchronizacjÍ pojazdu bez kierowcy (UnoccupiedSync)
+new unoccupiedVehToCheckPlayersAC[MAX_VEHICLES][MAX_PLAYERS] = {{false, ...}, ...}; // true dla danego pojazdu v i dla danego gracza p, jezeli to gracz p dokona≥ synchronizacji pojazdu v (UnoccupiedSync)
+new unoccupiedVehBlockAC[MAX_PLAYERS] = {false, ...}; // true jeøeli na gracza zosta≥a za≥oøona blokada synchronizacji pojazdÛw bez kierowcy
+new performUnoccupiedVehCheckAC = false; // true jeøeli pozycja ktÛregokolwiek pojazdu zosta≥a zmieniona w przeciπgu ostatnich 3 sekund przez synchronizacjÍ typu UnoccupiedSync
+
 //doors
 new noAccessCome[MAX_PLAYERS]; 
 
@@ -75,7 +84,7 @@ new DMV_ALARM = 0;
 new bramaAlarmu[4];
 
 //Basen Tsunami
-new poolStatus = 0;// 0 = zamkniÍty; 1 = otwarty;
+new poolStatus = 1;// 0 = zamkniÍty; 1 = otwarty;
 new onePoolPrice = 50000;
 new twoPoolPrice = 75000;
 new threePoolPrice = 100000;
@@ -117,6 +126,7 @@ enum eLegalWpns {
 }
 new playerWeapons[MAX_PLAYERS][eLegalWpns];
 
+new PlayerSlapperWarning[MAX_PLAYERS] = 0;
 
 new Zgloszenie[OSTATNIE_ZGLOSZENIA][hqZgloszenia];
 new ilosczgloszen = 0;
@@ -134,8 +144,6 @@ new lastMsg[MAX_PLAYERS];
 //Actor
 new PaniJanina;
 
-//PAèDZIOCH
-new Float:pl_pos[MAX_PLAYERS][5];
 //Podglad
 new TogPodglad[MAX_PLAYERS];
 
@@ -167,7 +175,7 @@ new GATE_ORGSAD[2];
 new bool:GATE_ORGSAD_S[2]={false, false};
 //04.12
 new PlayerDesc[MAX_PLAYERS][128 char];
-new CarDesc[MAX_VEHICLES][128 char];
+new CarDesc[MAX_VEHICLES][128];
 new MRP_PremiumHours[MAX_PLAYERS];
 new bool:InitMyItems[MAX_PLAYERS];
 //03.12
@@ -312,6 +320,7 @@ new ZoneProtect[MAX_ZONES];
 new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
 new ZONE_DISABLED = 0;
 new ZONE_DEF_TIME = 900000;
+new ERS_mundur[MAX_PLAYERS] = 0;
 //21.07 PayDay fix
 /*new TRAIN_Checkpoints[6][3] = {
     {1770.9999, -1953.9802, 14.9781},
@@ -336,7 +345,6 @@ new bool:BarierState[MAX_FRAC][10];
 //13.07  system skinow frakcyjnych mysql
 new FRAC_SKINS[MAX_FRAC][MAX_SKIN_SELECT];
 new FAM_SKINS[MAX_ORG][MAX_SKIN_SELECT];
-new SkinSelection[MAX_PLAYERS][MAX_SKIN_SELECT+1];
 
 //frac
 new LeadersValue[LEADERS_TYPES][MAX_FRAC]; //a
@@ -367,8 +375,6 @@ new VINYL_Stream[128];
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
 //new FracLiderRang[MAX_FRAC][MAX_RANG_LEN];      //0.4kB
 new FamRang[MAX_ORG][MAX_RANG][MAX_RANG_LEN];   //4kB
-//21.06
-new GATE_ICC[3], bool:GATE_ICC_S[3] = {false, false, false};
 //18.06 uprawnienia
 new ACCESS[MAX_PLAYERS], OLD_ACCESS[MAX_PLAYERS];
 //15.06 system aut kradziezy
@@ -802,10 +808,14 @@ new rexl;
 new addtimer = 60000;
 new Float:stareVHP[MAX_PLAYERS];//zapis uszkodzen
 new SANradio = 0;
+new KLUBOWEradio = 0;
+new Text3D:KLUBOWE3d;
 new Text3D:SAN3d;
 new Text3D:NapislotLS1, Text3D:NapislotLS2, Text3D:NapislotLV1, Text3D:NapislotSF1;
 new SANrepertuar[128];
+new KLUBOWErepertuar[128];
 new Float:SANzasieg, Float:SANx, Float:SANy, Float:SANz;
+new Float:KLUBOWEzasieg, Float:KLUBOWEx, Float:KLUBOWEy, Float:KLUBOWEz;
 //kubi
 new RadioSANUno[128];
 new RadioSANDos[128];
@@ -813,10 +823,9 @@ new kosztbiletu;
 new osoby;
 new planeisstopped;
 new Wodliczanie;
+new Float:MatsPoint[3] = {2138.2078,-2290.4888,20.6646};
 
 //koniec wozy Ballas
-new lspdWjazdDolny;
-new lspdWjazdDolnyState = 0; // 0 close 1 open
 //stary komisariat (old komi)
 new DrzwiPDKomi;
 new DrzwiPDKomi2;
@@ -827,36 +836,6 @@ new DrzwiPDKomi3S = 1;
 new DrzwiPDKomi4;
 new DrzwiPDKomi4S = 1;
 //nowy komisariat
-new bramalspd1;
-new bramalspd2;
-new bramalspd3;
-new bramalspd4;
-new bramalspd5;
-new bramalspd6;
-new bramalspd7;
-new bramalspd8;
-new bramalspd9;
-new bramalspd10;
-new bramalspd11;
-new bramalspd12;
-new bramalspd13;
-new lspdmove1 = 0;
-new lspdmove2 = 0;
-new lspdmove3 = 0;
-new lspdmove4 = 0;
-new lspdmove5 = 0;
-new lspdmove6 = 0;
-new lspdmove7 = 0;
-new lspdmove8 = 0;
-new lspdmove9 = 0;
-new lspdmove10 = 0;
-new lspdmove11 = 0;
-new lspdmove12 = 0;
-new lspdmove13 = 0;
-new lspdmove14 = 0;
-new lspdmove15 = 0;
-new celalspd1;
-new celalspd2;
 new stolek[34];
 new kosmove;//zmienne bram konfesjona≥Ûw
 new kos2move;//zmienne bram konfesjona≥Ûw
@@ -873,6 +852,36 @@ new BrF[8];
 new BrFS[8];
 new TimerJedzenie[MAX_PLAYERS];
 new ZarcieCooldown[MAX_PLAYERS];
+
+new const AnimLibs[][] = {
+  "AIRPORT",      "ATTRACTORS",   "BAR",          "BASEBALL",     "BD_FIRE",
+  "BEACH",        "BENCHPRESS",   "BF_INJECTION", "BIKE_DBZ",     "BIKED",
+  "BIKEH",        "BIKELEAP",     "BIKES",        "BIKEV",        "BLOWJOBZ",
+  "BMX",          "BOMBER",       "BOX",          "BSKTBALL",     "BUDDY",
+  "BUS",          "CAMERA",       "CAR",          "CAR_CHAT",     "CARRY",
+  "CASINO",       "CHAINSAW",     "CHOPPA",       "CLOTHES",      "COACH",
+  "COLT45",       "COP_AMBIENT",  "COP_DVBYZ",    "CRACK",        "CRIB",
+  "DAM_JUMP",     "DANCING",      "DEALER",       "DILDO",        "DODGE",
+  "DOZER",        "DRIVEBYS",     "FAT",          "FIGHT_B",      "FIGHT_C",
+  "FIGHT_D",      "FIGHT_E",      "FINALE",       "FINALE2",      "FLAME",
+  "FLOWERS",      "FOOD",         "FREEWEIGHTS",  "GANGS",        "GFUNK",
+  "GHANDS",       "GHETTO_DB",    "GOGGLES",      "GRAFFITI",     "GRAVEYARD",
+  "GRENADE",      "GYMNASIUM",    "HAIRCUTS",     "HEIST9",       "INT_HOUSE",
+  "INT_OFFICE",   "INT_SHOP",     "JST_BUISNESS", "KART",         "KISSING",
+  "KNIFE",        "LAPDAN1",      "LAPDAN2",      "LAPDAN3",      "LOWRIDER",
+  "MD_CHASE",     "MD_END",       "MEDIC",        "MISC",         "MTB",
+  "MUSCULAR",     "NEVADA",       "ON_LOOKERS",   "OTB",          "PARACHUTE",
+  "PARK",         "PAULNMAC",     "PED",          "PLAYER_DVBYS", "PLAYIDLES",
+  "POLICE",       "POOL",         "POOR",         "PYTHON",       "QUAD",
+  "QUAD_DBZ",     "RAPPING",      "RIFLE",        "RIOT",         "ROB_BANK",
+  "ROCKET",       "RUNNINGMAN",   "RUSTLER",      "RYDER",        "SCRATCHING",
+  "SEX",          "SHAMAL",       "SHOP",         "SHOTGUN",      "SILENCED",
+  "SKATE",        "SMOKING",      "SNIPER",       "SNM",          "SPRAYCAN",
+  "STRIP",        "SUNBATHE",     "SWAT",         "SWEET",        "SWIM",
+  "SWORD",        "TANK",         "TATTOOS",      "TEC",          "TRAIN",
+  "TRUCK",        "UZI",          "VAN",          "VENDING",      "VORTEX",
+  "WAYFARER",     "WEAPONS",      "WOP",          "WUZI"
+};
 
 //zdrapki
 new PlayerGames[MAX_PLAYERS];
@@ -911,7 +920,7 @@ new BramaZuz;
 new BramaZuzS = 1;
 //koniec garazpd
 //inne
-new PlayerHasWeapon[MAX_PLAYERS];
+new MyWeapon[MAX_PLAYERS];
 new ZapisSkinu[MAX_PLAYERS];
 new PDGPS = -1;//gps
 //koniec przedmioty
@@ -1008,7 +1017,11 @@ new Worek_Uzyty[MAX_PLAYERS];
 new Worek_MamWorek[MAX_PLAYERS];
 new Worek_KtoZalozyl[MAX_PLAYERS];
 new Worek_KomuZalozylem[MAX_PLAYERS];
-
+//cmd obrazenia
+new ObrazeniaIndex[MAX_PLAYERS];
+new ObrazeniaZadaneIndex[MAX_PLAYERS];
+new Obrazenia[MAX_PLAYERS][20][eOBRAZENIA];
+new ObrazeniaZadane[MAX_PLAYERS][20][eOBRAZENIAZADANE];
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
@@ -1050,10 +1063,11 @@ new fixActorsTimer[MAX_PLAYERS];
 
 new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
-
-new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId, DCC_Channel:g_ReportChannelId; //discordconnect
+new GunshopLSLock = 1;
+new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId[17], DCC_Channel:g_AdminChannelIdDefault, DCC_Channel:g_ReportChannelId; //discordconnect
 new DCC_Channel:g_FracChannel[MAX_FRAC];
 new DCC_Channel:g_OrgChannel[MAX_ORG];
+new DCC_Channel:g_GSLSLOGChannelId, DCC_Channel:g_GSCMLOGChannelId, DCC_Channel:g_GSWFLOGChannelId;
 /*
 new chpIDHunter[MAX_PLAYERS];
 new hunterSeeMe[MAX_PLAYERS]; 
@@ -1097,17 +1111,21 @@ ZerujZmienne(playerid)
     SetPVarInt(playerid, "budka-used", 999);
     SetPVarInt(playerid, "prawnik-oferuje", 999);
     SetPVarInt(playerid, "wizytowka", -1);
+	SetPVarInt(playerid, "zoneid", -1);
+	DeletePVar(playerid, "DostalAJkomunikat");
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
-
+	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
 	organizacje_clearCache(playerid);
 	//z disconecta
 
+	timeFakeVehRespawn[playerid] = 0;
+	countFakeVehRespawn[playerid] = 0;
+
     new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
 
     PlayerInfo[playerid][pDescLabel] = tmp_label;
-
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//Øuøel
@@ -1137,6 +1155,8 @@ ZerujZmienne(playerid)
 	
 	
     lastMsg[playerid] = 0;
+
+	PlayerSlapperWarning[playerid] = 0;
 
 	//z conecta
 	TogPodglad[playerid] = 0;
@@ -1316,12 +1336,14 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pTurnedOnCarWithoutCarLic] = 0;
 	ZestawNaprawczy_Timer[playerid] = 30;
 	ZestawNaprawczy_Warning[playerid] = 0;
-
+	
+	
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
 	PlayerRequestMedic[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
-
+	MyWeapon[playerid] = 0;
+	
 	PlayerInfo[playerid][pCzystka] = 0;
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;
@@ -1366,7 +1388,8 @@ ZerujZmienne(playerid)
 
     grajacy[playerid]=0;
     for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
-	
+	ObrazeniaIndex[playerid] = 0;
+	for(new i = 0; i<10; i++) Obrazenia[playerid][i][DAMAGE] = 0.0;
 	if(tworzenietrasy[playerid] != 666)
 	{
 	    format(Wyscig[tworzenietrasy[playerid]][wOpis], 50, "");
@@ -1387,8 +1410,6 @@ ZerujZmienne(playerid)
     ToggleSpeedoGPS[playerid] = false;
 
     for(new i=0;i<MAX_ZONES;i++) bInZone[playerid][i] = false;
-
-    for(new i=0;i<MAX_SKIN_SELECT;i++) SkinSelection[playerid][i] = -1; //Czyszczenie
 
     Unspec[playerid][Coords][0] = 0.0;
     Unspec[playerid][Coords][1] = 0.0;
@@ -1416,7 +1437,6 @@ ZerujZmienne(playerid)
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
-
 	new nick[32];
 	if(GetPVarString(playerid, "maska_nick", nick, 24))
 	{
@@ -1430,6 +1450,13 @@ ZerujZmienne(playerid)
 
     strdel(PlayerDesc[playerid], 0, 128 char);
     strpack(PlayerDesc[playerid], "BRAK");
+
+	foreach(new v : Vehicle) 
+	{
+		unoccupiedVehToCheckPlayersAC[v][playerid] = false;
+	}
+	unoccupiedVehBlockAC[playerid] = false;
+
 	return 1;
 }
 //EOF

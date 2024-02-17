@@ -39,7 +39,11 @@ YCMD:elo(playerid, params[], help)
 			return 1;
 		}
 
-
+		if(dialAccess[playerid] == 1)
+		{
+			sendErrorMessage(playerid, "Musisz odczekaæ 15 sekund przed ponown¹ interakcj¹!"); 
+			return 1;
+		}
 
 		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
 		{
@@ -59,6 +63,8 @@ YCMD:elo(playerid, params[], help)
                     SendClientMessage(playerid, COLOR_WHITE, string);
                     format(string, sizeof(string), "Witasz siê z %s", nick);
                     SendClientMessage(playa, COLOR_WHITE, string);
+					dialTimer[playerid] = SetTimerEx("timerDialogs", 5000, true, "i", playerid);
+					dialAccess[playerid] = 1; 
 					//SendClientMessage(playa, COLOR_WHITE, "Witasz siê");
 					ApplyAnimation(playerid,"GANGS","hndshkcb",4.1,0,1,1,1,1);//8
 					ApplyAnimation(playa,"GANGS","hndshkcb",4.1,0,1,1,1,1);//8

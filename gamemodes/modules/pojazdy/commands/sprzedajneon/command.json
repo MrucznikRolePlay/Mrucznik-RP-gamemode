@@ -1,0 +1,27 @@
+{
+    "name": "sprzedajneon",
+    "description": "Oferuje kupno neonu wskazanemu graczowi.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "sprzedajneony",
+        "sellneon",
+        "zmienneon",
+        "zmienneony"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "commission",
+            "description": "prowizja"
+        }
+    ],
+    "date": "02.06.2020"
+}

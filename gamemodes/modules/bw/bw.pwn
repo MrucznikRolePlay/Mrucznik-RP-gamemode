@@ -172,11 +172,12 @@ PlayerEnterVehOnInjury(playerid)
 PlayerChangeWeaponOnInjury(playerid)
 {
 	//SendClientMessageToAll(COLOR_GRAD2, "#5: PlayerChangeWeaponOnInjury");
-	SetPlayerArmedWeapon(playerid, PlayerHasWeapon[playerid]);
+	SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 	return 1;
 }
 ZespawnujGraczaBW(playerid)
 {
+	Wchodzenie(playerid);
 	new string[256], type[144];
 	MedicBill[playerid] = 0;
 	MedicTime[playerid] = 0;
@@ -210,7 +211,7 @@ RannyTimer(playerid)
 	if(PlayerInfo[i][pInjury] > 0)
 	{
 		//SendClientMessageToAll(COLOR_GRAD2, "------Timer: RannyTimer");
-		ApplyAnimation(i, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+		if(GetPlayerState(i) != PLAYER_STATE_PASSENGER) ApplyAnimation(i, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 		PlayerInfo[i][pInjury]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Ranny: %d", PlayerInfo[i][pInjury]);
 		GameTextForPlayer(i, string, 2500, 3);
@@ -240,7 +241,7 @@ BWTimer(playerid)
 	if(PlayerInfo[playerid][pBW] > 0)
 	{
 		//SendClientMessageToAll(COLOR_GRAD2, "------Timer: BWTimer");
-		ApplyAnimation(i, "CRACK", "crckidle1", 4.0, 1, 0, 0, 1, 0, 1);
+		if(GetPlayerState(i) != PLAYER_STATE_PASSENGER) ApplyAnimation(i, "CRACK", "crckidle1", 4.0, 1, 0, 0, 1, 0, 1);
 		PlayerInfo[i][pBW]-=2;
 		format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Nieprzytomny: %d", PlayerInfo[i][pBW]);
 		GameTextForPlayer(i, string, 2500, 3);
@@ -280,11 +281,12 @@ ZespawnujGraczaSzpitalBW(playerid)
 
 NadajWLBW(killerid, victim, bool:bw)
 {
+	if(GetPlayerVirtualWorld(killerid) == 5000) return 1;
 	//SendClientMessageToAll(COLOR_GRAD2, "#10: NadajWLBW");
 	new string[144];
 	new playerid = victim;
 	format(string, sizeof(string), (bw ? "Morderstwo" : "Okaleczenie"));
-	if(IsAPolicja(playerid))
+	if(IsAPolicja(playerid) && OnDutyCD[playerid] != 1 && OnDuty[playerid])
 	{
 		PoziomPoszukiwania[killerid] += 2;
 		strcat(string, " Policjanta");
@@ -302,6 +304,7 @@ NadajWLBW(killerid, victim, bool:bw)
 		sendTipMessageEx(killerid, COLOR_LIGHTRED, "Masz ju¿ 10 listów goñczych!");
 		sendTipMessage(killerid, "Zaczynasz stawaæ siê coraz bardziej smakowity dla ³owców! Pilnuj siê!"); 
 	}
+	return 1;
 }
 
 ZdejmijBW(playerid, drunklvl = 7000)
@@ -324,6 +327,7 @@ ZdejmijBW(playerid, drunklvl = 7000)
 	SetPlayerChatBubble(playerid, "** Og³uszony **", COLOR_PANICRED, 70.0, (120 * 1000));
 	// SetPlayerChatBubble(playerid, " ", 0xFF0000FF, 100.0, 1000); - lub usuwamy napis nad g³ow¹
 	SetPlayerDrunkLevel(playerid, drunklvl);
+	return 1;
 }
 //------------------<[ MySQL: ]>--------------------
 //-----------------<[ Komendy: ]>-------------------

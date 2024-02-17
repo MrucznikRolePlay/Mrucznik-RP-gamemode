@@ -36,7 +36,7 @@ YCMD:nos(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        if(IsAMechazordWarsztatowy(playerid))//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
         {
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa;
@@ -154,6 +154,9 @@ YCMD:nos(playerid, params[], help)
                                     }
                                     CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
                                 }
+                                Log(payLog, INFO, "Gracz %s zamontowa³ %s nitro na pojazd %s za %d$",
+                                    GetPlayerLogName(playerid), GetPlayerLogName(playa), GetVehicleLogName(pojazd), 5000
+                                );
                             }
                             else
                             {

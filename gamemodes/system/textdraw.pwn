@@ -85,7 +85,6 @@ new Text:PatrolGammaSq;
 new Text:PatrolDeltaSq;
 new Text:PatrolLabel;
 new Text:PatrolMarker[MAX_PATROLS];
-new Text:SkinSelectionAccept,Text:SkinSelectionDenied, Text:SkinSelectionMy;
 
 new PlayerText:Kary[MAX_PLAYERS];
 new PlayerText:SN_MESS[MAX_PLAYERS];
@@ -143,6 +142,11 @@ new PlayerText:TXDSTATS_ZnakWodny[MAX_PLAYERS];
 new Text:TXD_Worek;
 new blackmap;
 
+new Text:RealtimeTXD;
+new Text:ServerVersionTXD;
+new Text:BottomBarTXD;
+new realtime_string[32];
+
 //Oil 16.09
 new Text:OilTXD_BG[2];
 new PlayerText:OilPTXD_Arrow[5][MAX_PLAYERS];
@@ -188,28 +192,6 @@ LoadTXD()
     TextDrawSetPreviewRot(TAXI_BG[1], 0.000000, 0.000000, 90.000000, 1.000000);
     TextDrawSetSelectable(TAXI_BG[1], 0);
 
-    //13.07 skin selector
-    SkinSelectionAccept = TextDrawCreate(200.0, 240.0, "WYBIERZ");
-    TextDrawFont(SkinSelectionAccept, 2);
-    TextDrawColor(SkinSelectionAccept, 0x00FF00FF);
-    TextDrawAlignment(SkinSelectionAccept, 2);
-    TextDrawTextSize(SkinSelectionAccept, 11.0, 75.0);
-    TextDrawSetSelectable(SkinSelectionAccept, 1);
-
-    SkinSelectionDenied = TextDrawCreate(440.0, 240.0, "ANULUJ");
-    TextDrawFont(SkinSelectionDenied, 2);
-    TextDrawColor(SkinSelectionDenied, 0xFF0000FF);
-    TextDrawAlignment(SkinSelectionDenied, 2);
-    TextDrawTextSize(SkinSelectionDenied, 11.0, 75.0);
-    TextDrawSetSelectable(SkinSelectionDenied, 1);
-
-    SkinSelectionMy = TextDrawCreate(320.0, 160.0, "CYWIL");
-    TextDrawFont(SkinSelectionMy, 2);
-    TextDrawColor(SkinSelectionMy, 0xFFFFFFFF);
-    TextDrawAlignment(SkinSelectionMy, 2);
-    TextDrawTextSize(SkinSelectionMy, 11.0, 70.0);
-    TextDrawSetSelectable(SkinSelectionMy, 1);
-
     ZoneTXD_Load();
 
     Loading_Box = TextDrawCreate(641.666687, 1.500000, "usebox");
@@ -233,7 +215,7 @@ LoadTXD()
     TextDrawFont(Loading_Title, 1);
     TextDrawSetProportional(Loading_Title, 1);
 
-    Loading_Info = TextDrawCreate(320.000000, 233.296279, "WCZYTYWANIE");
+    Loading_Info = TextDrawCreate(320.000000, 233.296279, "WCZYTYWANIE ...");
     TextDrawLetterSize(Loading_Info, 0.230000, 1.052444);
     TextDrawAlignment(Loading_Info, 2);
     TextDrawColor(Loading_Info, -1);
@@ -272,6 +254,66 @@ LoadTXD()
 	TextDrawSetOutline(TXD_Worek,1);
 	TextDrawSetProportional(TXD_Worek,1);
 	TextDrawSetShadow(TXD_Worek,1);
+
+	BottomBarTXD = TextDrawCreate(1.000000, 450.000000, "BottomBarTXD");
+	TextDrawFont(BottomBarTXD, 2);
+	TextDrawLetterSize(BottomBarTXD, -0.024999, -1.900000);
+	TextDrawTextSize(BottomBarTXD, 655.000000, 54.500000);
+	TextDrawSetOutline(BottomBarTXD, 0);
+	TextDrawSetShadow(BottomBarTXD, 0);
+	TextDrawAlignment(BottomBarTXD, 1);
+	TextDrawColor(BottomBarTXD, -256);
+	TextDrawBackgroundColor(BottomBarTXD, 0);
+	TextDrawBoxColor(BottomBarTXD, 60);
+	TextDrawUseBox(BottomBarTXD, 1);
+	TextDrawSetProportional(BottomBarTXD, 0);
+	TextDrawSetSelectable(BottomBarTXD, 0);
+
+	RealtimeTXD = TextDrawCreate(626.000000, 436.000000, "00:00");
+	TextDrawFont(RealtimeTXD, 1);
+	TextDrawLetterSize(RealtimeTXD, 0.187499, 1.100000);
+	TextDrawTextSize(RealtimeTXD, 396.500000, 29.500000);
+	TextDrawSetOutline(RealtimeTXD, 1);
+	TextDrawSetShadow(RealtimeTXD, 0);
+	TextDrawAlignment(RealtimeTXD, 2);
+	TextDrawColor(RealtimeTXD, -21);
+	TextDrawBackgroundColor(RealtimeTXD, 100);
+	TextDrawBoxColor(RealtimeTXD, 50);
+	TextDrawUseBox(RealtimeTXD, 0);
+	TextDrawSetProportional(RealtimeTXD, 1);
+	TextDrawSetSelectable(RealtimeTXD, 0);
+
+	new txd[58];
+	format(txd, sizeof(txd), "Mrucznik-RP %s", VERSION);
+	ServerVersionTXD = TextDrawCreate(36.000000, 436.000000, txd);
+	TextDrawFont(ServerVersionTXD, 2);
+	TextDrawLetterSize(ServerVersionTXD, 0.166666, 1.049999);
+	TextDrawTextSize(ServerVersionTXD, 413.000000, 76.500000);
+	TextDrawSetOutline(ServerVersionTXD, 0);
+	TextDrawSetShadow(ServerVersionTXD, 0);
+	TextDrawAlignment(ServerVersionTXD, 2);
+	TextDrawColor(ServerVersionTXD, -2686761);
+	TextDrawBackgroundColor(ServerVersionTXD, 0);
+	TextDrawBoxColor(ServerVersionTXD, 213);
+	TextDrawUseBox(ServerVersionTXD, 0);
+	TextDrawSetProportional(ServerVersionTXD, 1);
+	TextDrawSetSelectable(ServerVersionTXD, 0);
+
+}
+
+BottomBar(playerid, show = 1)
+{
+	if(!show)
+	{
+		TextDrawHideForPlayer(playerid, BottomBarTXD);
+    	TextDrawHideForPlayer(playerid, ServerVersionTXD);
+    	TextDrawHideForPlayer(playerid, RealtimeTXD);
+		return 1;
+	}
+    TextDrawShowForPlayer(playerid, BottomBarTXD);
+    TextDrawShowForPlayer(playerid, ServerVersionTXD);
+    TextDrawShowForPlayer(playerid, RealtimeTXD);
+	return 1;
 }
 
 LoadingShow(playerid)
@@ -296,10 +338,6 @@ UnloadTXD()
     //----------------------------------------
     for(new i=0;i<2;i++) TextDrawDestroy(TAXI_BG[i]);
     for(new i=0;i<8;i++) TextDrawDestroy(NG_GateTD[i]);
-
-    TextDrawDestroy(SkinSelectionAccept);
-    TextDrawDestroy(SkinSelectionDenied);
-    TextDrawDestroy(SkinSelectionMy);
 
     TextDrawDestroy(Loading_Box);
     TextDrawDestroy(Loading_Title);

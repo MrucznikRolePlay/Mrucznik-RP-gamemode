@@ -14,6 +14,7 @@ forward PlayerFixRadio2();
 forward StopMusic();
 forward AddsOn();
 forward JednaSekundaTimer();//textdraw
+forward SlapperTimer();
 forward Spectator();
 forward SyncUp();
 forward SyncTime();
@@ -35,6 +36,7 @@ forward ServerStuffSave();
 
 //  09.06.2014
 //Przeniesione z funkcji
+forward Float:GetDistanceBetweenPoints(Float:x1, Float:y1, Float:z1, Float:x2, Float:y2, Float:z2);
 forward Wchodzenie(playerid);
 forward freezuj(playerid);
 forward ZamykanieDrzwi(playerid);
@@ -54,7 +56,6 @@ forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
 forward PoscigTimer(playerid);
 forward AntySpamTimer(playerid);
-forward AntySpamLowienie(playerid);
 forward AntyBusCzit(playerid);
 forward spamujebronia(playerid);
 forward odpalanie(playerid);
@@ -79,7 +80,7 @@ forward AutodbzesRH(playerid);
 forward Dopalaj(playerid); // Dopalacz auta
 forward StopMusic();
 forward PlayerFixRadio2();
-forward CountDown();
+forward CountDownVehsRespawn();
 forward ZestawNaprawczy_CountDown(playerid, vehicleid);
 forward EditObj(playerid, obj); //Timer do edycji obiektów
 forward PaintballEnded();
@@ -151,5 +152,5 @@ forward closeGate(i, j, playerid);
 forward DamagedHP(playerid);
 forward CuffedAction(playerid, cuffedid);
 //forward UnCuffedAction(cop, cuffedid); to do
-forward DeathAdminWarning(playerid, killerid, reason) ;
+forward DeathAdminWarning(playerid, killerid, reason);
 //EOF

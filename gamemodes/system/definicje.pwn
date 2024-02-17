@@ -5,6 +5,7 @@
 //wy³¹czenie sampowych metod obiektów
 #define CreateObject(%0) ERROR_CREATE_OBJECT(%0)
 #define DestroyObject(%0) ERROR_OBJECT
+#undef IsValidObject
 #define IsValidObject(%0) ERROR_OBJECT
 #define MoveObject(%0) ERROR_OBJECT
 #define StopObject(%0) ERROR_OBJECT
@@ -13,14 +14,15 @@
 #define GetObjectPos(%0) ERROR_OBJECT
 #define GetObjectRot(%0) ERROR_OBJECT
 #define AttachObjectToPlayer(%0) ERROR_OBJECT
-//#define SetObjectMaterialText(%0) ERROR_OBJECT
-//#define SetObjectMaterial(%0) ERROR_OBJECT
+#undef  SetObjectMaterialText
+#define SetObjectMaterialText(%0) ERROR_OBJECT
+#undef  SetObjectMaterial
+#define SetObjectMaterial(%0) ERROR_OBJECT
 
 //------------------------------------------------------------------------------
 //                              PVARS
 //------------------------------------------------------------------------------
 #define PVAR_PRZELEW_ID "przelej_id"
-
 
 #define chrtoupper(%1) \
         (((%1) > 0x60 && (%1) <= 0x7A) ? ((%1) ^ 0x20) : (%1))
@@ -44,7 +46,7 @@
     ((newkeys & (%0)) == (%0))
 
 //podgl¹d PW
-#define MAX_SENT_MESSAGES 10
+#define MAX_SENT_MESSAGES 25
 
 //salt
 #define MAX_SERVER_SECRET_LENGTH 16
@@ -87,11 +89,6 @@
 #define AJ_POSY -1790.2204589844
 #define AJ_POSZ 156.7875213623
 #define AJ_MAXRANGE 5.0
-//PADZIOCH
-#define ROPELENGTH 100 //D³ugoœæ maksymalna liny (ingame metr)
-
-#define OFFSETZ 12
-#define DUR 250
 
 //sn
 #define COST_SN_SMS_0 0
@@ -127,7 +124,7 @@
 #define CHECKPOINT_HOME 12
 #define MAX_3DTEXT 1024
 #define MAX_DOM 2000
-#define MAX_NrDOM 47
+#define MAX_NrDOM 53
 #define MAX_REMOVED_OBJECTS 100
 #define GasMax 100
 #define RunOutTime 15000
@@ -257,7 +254,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 //=======[FRAKCJE]===========
 #define PLOCAL_FRAC_DMV 108
 #define PLOCAL_FRAC_FBI 212
-#define PLOCAL_FRAC_LSPD 210
+#define PLOCAL_FRAC_LSPD 254
 #define PLOCAL_FRAC_LSMC 253
 
 //======[RODZINNE]==========
@@ -326,6 +323,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_AUTO_RESPRAY_OWN      37
 #define D_AUTO_RESPRAY_OWN2     38
 #define D_AUTO_DESTROY          303
+#define D_AUTO_ACTION_TUNING    304
 
 #define D_INFO      712
 #define D_PERM      713
@@ -380,7 +378,6 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_EDIT_RANG_NAME    1319
 #define D_EDIT_CAR_COLOR    1320
 #define D_ASK_DODATKI       1321
-
 #define DIALOG_LIDER01 3001
 #define DIALOG_LIDER02 3002
 
@@ -390,7 +387,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define DIALOGID_MUZYKA_URL	3241
 
 #define DIALOG_HA_ZMIENSKIN(%0)			3345+%0
-#define DIALOGID_UNIFORM 3445
+#define DIALOGID_UNIFORM_FRAKCJA        3445
+#define DIALOGID_UNIFORM_FAMILY         3446
 
 #define D_F_PANEL			5000+1
 
@@ -493,7 +491,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define MAX_RANG_LEN    25
 
 //13.07
-#define MAX_SKIN_SELECT     22
+#define MAX_SKIN_SELECT     100
 #define JOB_SKIN_HOVERCOLOR 0x07B5EBFF    //Kolor zaznaczenia skinów
 //22.07
 

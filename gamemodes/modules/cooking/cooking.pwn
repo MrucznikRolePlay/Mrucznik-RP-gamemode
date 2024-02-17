@@ -26,33 +26,37 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+public EatingUnblock(playerid) DeletePVar(playerid, "EatingBlock");
+
 EatCookedMeal(playerid, name[], weight, type)
 {
 	new Float:hp;
-	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
-	ChatMe(playerid, sprintf("zjada %s.", name));
 	GetPlayerHealth(playerid, hp);
-	SetPlayerHealth(playerid, hp+weight/10);
-
+	SetPlayerHealth(playerid, (hp+weight/10) > 100.0 ? 100.0 : (hp+weight/10));
+	ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
+	SetPVarInt(playerid, "EatingBlock", 1);
+	SetTimerEx("EatingUnblock",6000,0,"d", playerid);
 	//handle food types
 	if(type == 16 || type == 18)
 	{//Dolphin or Turtle
 		PoziomPoszukiwania[playerid] += 1;
 		SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Spo¿ywanie zagro¿onych gatunków");
 	}
-	else if(type == 33 && random(2) == 1)
-	{//wuhan bat
-		InfectPlayer(playerid, KORONAWIRUS);
-		SendClientMessage(playerid, COLOR_RED, "Zarazi³eœ siê coronawirusem! Lepiej idŸ do lekarza.");
-	}
 	if(type < sizeof(FishNames))
 	{
-		if(PlayerImmunity[playerid] < 5)
-			PlayerImmunity[playerid] ++;
+		IncreasePlayerImmunity(playerid, 1);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp i 1pkt odpornoœci.", name, weight, weight/10));
 	}
-	if(random(20) == 0) 
-	{//5% szans na zatrucie
-		InfectPlayer(playerid, ZATRUCIE);
+	else
+	{
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp.", name, weight, weight/10));
+	}
+
+	ChatMe(playerid, sprintf("zjada %s.", name));
+	ApplyAnimation(playerid, "FOOD", "EAT_Pizza", 4.1, 0, 1, 1, 0, 0, 1);
+
+	if(random(100) == 0 && InfectOrDecreaseImmunity(playerid, ZATRUCIE, 25)) 
+	{//1% szans na zatrucie
 		SendClientMessage(playerid, COLOR_RED, "To co zjad³eœ, chyba Ci zaszkodzi³o!");
 	}
 }
@@ -87,6 +91,14 @@ IsAtCookPlace(playerid)
 		else if(IsPlayerInRangeOfPoint(playerid, 6.0, 2127.2664,-1800.8334,-54.9897))
 		{//Nowa Pizzeria
 			return 1;
+		}
+		else if(PlayerInfo[playerid][pDomWKJ] == PlayerInfo[playerid][pDom] || PlayerInfo[playerid][pDomWKJ] == PlayerInfo[playerid][pWynajem] && Dom[PlayerInfo[playerid][pDom]][hUL_D] != 0)
+		{
+			new dom = PlayerInfo[playerid][pDom];
+			if(IsPlayerInRangeOfPoint(playerid, 50.0, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]))
+			{
+				return 1;
+			}
 		}
 	}
 	return 0;

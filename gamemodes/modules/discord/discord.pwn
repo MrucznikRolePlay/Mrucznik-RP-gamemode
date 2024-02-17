@@ -27,32 +27,54 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
+LoadDiscordChannels()
+{
+    new query[512], type, org_id, channel_id[64];
+    mysql_query("SELECT `type`, `org_id`, `channel_id` FROM `mru_discord` ORDER BY `id` ASC");
+    mysql_store_result();
+
+    while(mysql_fetch_row_format(query, "|"))
+    {
+        sscanf(query, "p<|>dds[64]", type, org_id, channel_id);
+        if(type == 1) //frakcja
+        {
+			g_FracChannel[org_id] = DCC_FindChannelById(channel_id);
+        }
+        else //rodzina
+        {
+            g_OrgChannel[org_id] = DCC_FindChannelById(channel_id);
+        }
+    }
+    mysql_free_result();
+    print("Wczytano kana³y discord");
+}
 DiscordConnectInit()
 {
-	g_SanNewsChannelId=DCC_FindChannelById("538403089263362098"); //ig-san-news
-	g_AdminChannelId=DCC_FindChannelById("538403269077106725"); //ig-admin
-	g_ReportChannelId=DCC_FindChannelById("538403303550091264"); //ig-report
+	g_GSLSLOGChannelId=DCC_FindChannelById("723216208165601321"); // GS Los Santos log
+	g_GSCMLOGChannelId=DCC_FindChannelById("723216292081041408"); // GS Commerce log
+	g_GSWFLOGChannelId=DCC_FindChannelById("723216357835145376"); // GS Willowfield log
+	g_SanNewsChannelId=DCC_FindChannelById("696491963582513272"); //ig-san-news
+	g_AdminChannelIdDefault = DCC_FindChannelById("696501357208797214");
+	g_AdminChannelId[0]=DCC_FindChannelById("721817402131742790"); //ig-admin
+	g_AdminChannelId[1]=DCC_FindChannelById("721817372008120370"); //ig-admin
+	g_AdminChannelId[2]=DCC_FindChannelById("721817343629721640"); //ig-admin
+	g_AdminChannelId[3]=DCC_FindChannelById("721817226667229264"); //ig-admin
+	g_AdminChannelId[4]=DCC_FindChannelById("721817199156920340"); //ig-admin
+	g_AdminChannelId[5]=DCC_FindChannelById("721817165417676963"); //ig-admin
+	g_AdminChannelId[6]=DCC_FindChannelById("721817080856444938"); //ig-admin
+	g_AdminChannelId[7]=DCC_FindChannelById("721817054059036794"); //ig-admin
+	g_AdminChannelId[8]=DCC_FindChannelById("721817029211979806"); //ig-admin
+	g_AdminChannelId[9]=DCC_FindChannelById("721817002410377326"); //ig-admin
+	g_AdminChannelId[10]=DCC_FindChannelById("721816976300965909"); //ig-admin
+	g_AdminChannelId[11]=DCC_FindChannelById("721816940020236289"); //ig-admin
+	g_AdminChannelId[12]=DCC_FindChannelById("721816915441352815"); //ig-admin
+	g_AdminChannelId[13]=DCC_FindChannelById("721816882734432397"); //ig-admin
+	g_AdminChannelId[14]=DCC_FindChannelById("721816850471846089"); //ig-admin
+	g_AdminChannelId[15]=DCC_FindChannelById("721816814094647418"); //ig-admin
+	g_AdminChannelId[16]=DCC_FindChannelById("721816785631838208"); //ig-admin
+	g_ReportChannelId=DCC_FindChannelById("697009695495422012"); //ig-report
 
-	g_FracChannel[1]=DCC_FindChannelById("545045344652886056");
-	g_FracChannel[2]=DCC_FindChannelById("545620322423144459");
-	g_FracChannel[3]=DCC_FindChannelById("574930724973576207");
-	g_FracChannel[4]=DCC_FindChannelById("545619975151288321");
-	g_FracChannel[5]=DCC_FindChannelById("545625556578992128");
-	g_FracChannel[6]=DCC_FindChannelById("574930782007853066");
-	g_FracChannel[7]=DCC_FindChannelById("545626921950511104");
-	g_FracChannel[8]=DCC_FindChannelById("574930925209780228");
-	g_FracChannel[9]=DCC_FindChannelById("545621434098253824");
-	g_FracChannel[10]=DCC_FindChannelById("545622580246347776");
-	g_FracChannel[11]=DCC_FindChannelById("545622546939117569");
-	g_FracChannel[12]=DCC_FindChannelById("545642957106053123");
-	g_FracChannel[13]=DCC_FindChannelById("557567568198631441");
-	g_FracChannel[14]=DCC_FindChannelById("574931026888097802");
-	g_FracChannel[15]=DCC_FindChannelById("545643012437311491");
-	g_FracChannel[16]=DCC_FindChannelById("545643300736991235");
-	g_FracChannel[17]=DCC_FindChannelById("545619305832775700");
-	g_OrgChannel[1]=DCC_FindChannelById("545643431112867841");
-
-
+	LoadDiscordChannels();
 	return 1;
 }
 SendDiscordMessage(channel, message[])
@@ -67,11 +89,25 @@ SendDiscordMessage(channel, message[])
 		}
 		case 1:
 		{
-			DCC_SendChannelMessage(g_AdminChannelId, dest); // #ig-admin-chat
+			DCC_SendChannelMessage(g_AdminChannelIdDefault, dest);
+			for(new i; i<17; i++)
+				DCC_SendChannelMessage(g_AdminChannelId[i], dest); // #ig-admin-chat
 		}
 		case 2:
 		{
 			DCC_SendChannelMessage(g_ReportChannelId, dest); // #ig-report
+		}
+		case 3:
+		{
+			DCC_SendChannelMessage(g_GSLSLOGChannelId, dest); // #gunshop-los-santos
+		}
+		case 4:
+		{
+			DCC_SendChannelMessage(g_GSCMLOGChannelId, dest); // #gunshop-commerce
+		}
+		case 5:
+		{
+			DCC_SendChannelMessage(g_GSWFLOGChannelId, dest); // #gunshop-willowfield
 		}
 	}
 	return 1;
@@ -99,7 +135,20 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 {
 	new bool:IsBot;
 	DCC_IsUserBot(author, IsBot);
-	if(channel == g_AdminChannelId && IsBot == false)
+	for(new i; i<17; i++)
+	{
+		if(channel == g_AdminChannelId[i] && IsBot == false)
+		{
+			new user_name[32 + 1],str[128], dest[128];
+			DCC_GetUserName(author, user_name);
+			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
+			utf8decode(dest, str);
+			strreplace(dest,"%","#");
+			SendAdminMessage(0xFFC0CB, dest);
+			return 1;
+		}
+	}
+	if(channel == g_AdminChannelIdDefault && IsBot == false)
 	{
 		new user_name[32 + 1],str[128], dest[128];
 		DCC_GetUserName(author, user_name);
@@ -107,19 +156,22 @@ public DCC_OnChannelMessage(DCC_Channel:channel, DCC_User:author, const message[
 		utf8decode(dest, str);
 		strreplace(dest,"%","#");
 		SendAdminMessage(0xFFC0CB, dest);
-
 		return 1;
 	}
-	else if(channel == g_OrgChannel[1] && IsBot == false)
-	{
-		new user_name[32 + 1],str[128], dest[128];
-		DCC_GetUserName(author, user_name);
-		format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
-		utf8decode(dest, str);
-		strreplace(dest,"%","#");
-		SendNewFamilyMessage(1, TEAM_AZTECAS_COLOR, dest);
-		return 1;
-	}
+	
+	for(new i=0;i<MAX_ORG;i++)
+    {
+		if(channel == g_OrgChannel[i] && IsBot == false) 
+		{
+			new user_name[32 + 1],str[128],dest[128];
+			DCC_GetUserName(author, user_name);
+			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, message);
+			utf8decode(dest, str);
+			strreplace(dest,"%","#");
+			SendNewFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
+			return 1;
+		}
+    }
 	for(new i=0;i<MAX_FRAC;i++)
 	{
 		if(channel == g_FracChannel[i] && IsBot == false) 

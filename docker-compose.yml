@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+  samp:
+    image: mrucznik/mrucznik-rp:v2.7
+    build: .
+    privileged: true
+    # If you want to change server configuration, extract serverfiles: 
+    # tar -xvf serverfiles.tar.gz serverfiles
+    # and uncomment this lines:
+    volumes:
+    #  - ./serverfiles/scriptfiles:/samp/serverfiles/scriptfiles
+     - ./serverfiles/logs:/samp/serverfiles/logs
+    #  - ./serverfiles/server.cfg:/samp/serverfiles/server.cfg
+    expose:
+      - "7777/udp"
+    ports:
+      - "7777:7777/udp"
+    networks:
+      - intranet
+    depends_on:
+      - mysqld
+
+  mysqld:
+    image: mysql:8.0
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: samp
+    expose:
+      - "3306"
+    networks:
+      intranet:
+        aliases:
+          - mysqld
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+    networks:
+      - intranet
+    depends_on:
+      - mysqld
+
+  resource_server:
+    image: golang:1.19.0
+    ports:
+      - 8100:8100
+    networks:
+      - intranet
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: go run resource_server.go
+
+networks:
+  intranet:
+    driver: bridge
+
+volumes:
+  my-datavolume:
+  data:

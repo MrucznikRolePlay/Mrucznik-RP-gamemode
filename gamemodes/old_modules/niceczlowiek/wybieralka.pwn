@@ -132,7 +132,8 @@ NowaWybieralka_ClickedTxd(playerid, Text:clickedid)
 			SetPlayerSpawn(playerid);
 			SetPlayerSpawnPos(playerid);
 			SetPlayerInterior(playerid, 0);
-			SetPlayerVirtualWorld(playerid, 0);
+			if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
+			else SetPlayerVirtualWorld(playerid, 0);
 		}
 		else
 		{

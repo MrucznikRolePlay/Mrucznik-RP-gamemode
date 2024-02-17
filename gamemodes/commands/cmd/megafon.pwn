@@ -144,7 +144,6 @@ YCMD:megafon(playerid, params[], help)
 		    format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
-		//PADZIOCH
 		else if(PlayerInfo[playerid][pMember] == FRAC_SN || PlayerInfo[playerid][pLider] == FRAC_SN)
 		{
 			format(string, sizeof(string), "[%s:o< %s]", sendername, params);

@@ -26,29 +26,25 @@ enum pGroceries
 {
 	pChicken,
 	pHamburger,
-	pPizza,
-	pWuhanBat
+	pPizza
 };
 
 
 new MealNames[][MAX_COOKED_NAME] = {
 	"Kurczak",
 	"Pizza",
-	"Hamburger",
-	"Nietoperz"
+	"Hamburger"
 };
 
 
 new MealModels[] = {
 	2769,
 	19580,
-	2703,
-	2804
+	2703
 };
 
 //-----------------<[ Zmienne: ]>-------------------
 new Groceries[MAX_PLAYERS][pGroceries];
-
 //------------------<[ Forwardy: ]>--------------------
-
+forward EatingUnblock(playerid);
 //end

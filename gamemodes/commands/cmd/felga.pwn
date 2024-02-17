@@ -36,7 +36,7 @@ YCMD:felga(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        if(IsAMechazordWarsztatowy(playerid))//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
         {
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa, idfelgi;
@@ -74,6 +74,9 @@ YCMD:felga(playerid, params[], help)
                                         SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe felgi w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                         ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                        Log(payLog, INFO, "Gracz %s zamontowa³ %s felgi %d na pojazd %s za %d$",
+                                            GetPlayerLogName(playerid), GetPlayerLogName(playa), felga, GetVehicleLogName(pojazd), 15000
+                                        );
                                         ZabierzKase(playerid, 15000);
                                         format(string, sizeof(string), "~r~-$%d", 15000);
                                         GameTextForPlayer(playerid, string, 5000, 1);

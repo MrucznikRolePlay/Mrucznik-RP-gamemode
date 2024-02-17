@@ -77,7 +77,7 @@ public CouchingEffect(playerid, disease, value)
 
 	if(random(20) == 1)//5% szans
 	{
-		InfectPlayer(playerid, ZAPALENIE_PLUC);
+		InfectOrDecreaseImmunity(playerid, ZAPALENIE_PLUC);
 	}
 	return 1;
 }
@@ -221,8 +221,7 @@ public ZombieTalkEffect(playerid, disease, value)
 public ReducedImmunityEffect(playerid, disease, value)
 {
 	ChatMe(playerid, "czuje, ¿e jego organizm ma obni¿on¹ odpornoœæ");
-	PlayerImmunity[playerid] = 1;
-	DecreaseImmunity(playerid);
+	DecreasePlayerImmunity(playerid, MAX_PLAYER_IMMUNITY);
 	return 1;
 }
 public RandomInfectionEffect(playerid, disease, value)
@@ -292,7 +291,7 @@ public GetGangreneEffect(playerid, disease, value)
 {
 	if(random(20) == 1) //5% szans
 	{
-		InfectPlayer(playerid, GANGRENA);
+		InfectOrDecreaseImmunity(playerid, GANGRENA);
 	}
 	return 1;
 }
@@ -361,10 +360,26 @@ public BlackoutEffect(playerid, disease, value)
 }
 public DeathEffect(playerid, disease, value)
 {
-	ChatMe(playerid, "umar³ na skutek choroby.");
+	/*ChatMe(playerid, "umar³ na skutek choroby.");
 	NadajBW(playerid, INJURY_TIME_DISEASES);
-	ZespawnujGraczaSzpitalBW(playerid);
+	ZespawnujGraczaSzpitalBW(playerid);*/
+	ChatMe(playerid, "straci³ przytomnoœæ na skutek choroby");
+	NadajRanny(playerid, INJURY_TIME_DISEASES);
 	return 1;
+}
+
+//0k
+public OKEffect(playerid, disease, value)
+{
+	ChatIC(playerid, "0k");
+}
+public OKPermanentEffect(playerid, disease, value)
+{
+	OKActive[playerid] = 1;
+}
+public OKPermanentEffect_Off(playerid, disease, value)
+{
+	OKActive[playerid] = 0;
 }
 
 
@@ -386,16 +401,14 @@ timer LoweringHP[500](playerid, uid, hpLoss, bool:death, bool:freeze)
 	{
 		if(death)
 		{
-			ChatMe(playerid, "umar³ na skutek choroby");
-			NadajBW(playerid, INJURY_TIME_DISEASES);
-			ZespawnujGraczaSzpitalBW(playerid);
+			ChatMe(playerid, "straci³ przytomnoœæ na skutek choroby");
+			NadajRanny(playerid, INJURY_TIME_DISEASES);
 		}
 		return;
 	}
 	SetPlayerHealth(playerid, hp-1);
 
-	if(PlayerImmunity[playerid] <= 0)
-		defer LoweringHP(playerid, uid, hpLoss-1, death, freeze);
+	defer LoweringHP(playerid, uid, hpLoss-1, death, freeze);
 }
 
 timer HallucinationsOff[60000](playerid)

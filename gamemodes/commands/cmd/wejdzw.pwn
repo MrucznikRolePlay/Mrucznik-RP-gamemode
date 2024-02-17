@@ -32,8 +32,10 @@ YCMD:wejdzw(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
 	{
+		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
-
+		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
+		
 		if(WnetrzeWozu[playerid] != 0)
 	    {
 	        Z_WnetrzaWozu(playerid, WnetrzeWozu[playerid]);

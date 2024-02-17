@@ -32,17 +32,18 @@ YCMD:wezzlecenie(playerid, params[], help)
 {
     if(PlayerInfo[playerid][pJob] == JOB_TRUCKER)
     {
-        new veh = GetPlayerVehicleID(playerid);
-        if(veh == 0) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");
-        if(Car_GetOwnerType(veh) != CAR_OWNER_JOB || Car_GetOwner(veh) != JOB_TRUCKER) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");
-        if(GetVehicleModel(veh) != 578) return sendErrorMessage(playerid, " Tym pojazdem nie weŸmiesz zlecenia.");
+        return sendErrorMessage(playerid, "Tymczasowo zablokowane.");
+        //  new veh = GetPlayerVehicleID(playerid);
+        //  if(veh == 0) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");
+        //  if(Car_GetOwnerType(veh) != CAR_OWNER_JOB || Car_GetOwner(veh) != JOB_TRUCKER) return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie firmowym.");
+        //  if(GetVehicleModel(veh) != 578) return sendErrorMessage(playerid, " Tym pojazdem nie weŸmiesz zlecenia.");
 
-        if(GetPVarInt(playerid, "trans") == 0)
-        {
-            ShowPlayerDialogEx(playerid, D_TRANSPORT, DIALOG_STYLE_LIST, "Rodzaj zlecenia", "Szybkie zlecenie\nCentrum transportu", "Wybierz", "WyjdŸ");
-        }
-        else return sendErrorMessage(playerid, "Masz ju¿ zlecenie.");
-        return 1;
+        //  if(GetPVarInt(playerid, "trans") == 0)
+        //  {
+        //      ShowPlayerDialogEx(playerid, D_TRANSPORT, DIALOG_STYLE_LIST, "Rodzaj zlecenia", "Szybkie zlecenie\nCentrum transportu", "Wybierz", "WyjdŸ");
+        //  }
+        //  else return sendErrorMessage(playerid, "Masz ju¿ zlecenie.");
+        //  return 1;
     }
 
 	new string[128];
@@ -132,7 +133,7 @@ YCMD:wezzlecenie(playerid, params[], help)
 						    		}
 						    		else if(PlayerInfo[playerid][pDetSkill] >= 400)
 						    		{
-                                        if(PoziomPoszukiwania[playa] >= 2 && PoziomPoszukiwania[playa] <= 7 || PoziomPoszukiwania[playa] == 10)
+                                        if(PoziomPoszukiwania[playa] >= 2 && PoziomPoszukiwania[playa] <= 10)
 						    			{
 						    			    lowcaz[playerid] = playa;
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));

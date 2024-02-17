@@ -39,14 +39,13 @@ YCMD:bw(playerid, params[], help)
 			return 1;
 		}
 		if(!IsPlayerConnected(giveplayerid)) return sendErrorMessage(playerid, "Nie ma takiego gracza.");
-		if(czas > BW_TIME_CRIMINAL)
+		new maxtime = BW_TIME_CRIMINAL + INJURY_TIME + INJURY_TIME_EXCEPTION + INJURY_TIME_DISEASES;
+		if(czas > maxtime)
 		{
-			format(string, sizeof(string), "Tip: Maksymalny czas BW to [%d] sekund", BW_TIME_CRIMINAL);
+			format(string, sizeof(string), "Tip: Maksymalny czas BW to [%d] sekund", maxtime);
 			return sendTipMessage(playerid, string);
 		}
 		NadajBW(giveplayerid, czas, false);
-		format(string, sizeof(string), "Administrator %s nada³ Ci BW na %d sekund", GetNickEx(playerid), czas); 
-		sendTipMessageEx(giveplayerid, COLOR_P@, string); 
 		SendClientMessage(playerid, COLOR_GRAD2, "Nadano BW");
 	}
     return 1;

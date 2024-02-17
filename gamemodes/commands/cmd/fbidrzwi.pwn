@@ -32,19 +32,23 @@ YCMD:fbidrzwi(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(GetPlayerFraction(playerid) == FRAC_FBI)
+		if(GetPlayerFraction(playerid) == FRAC_FBI && PlayerInfo[playerid][pRank] >= 3)
 		{
 			if(doorFBIStatus == 0)
 			{
 				doorFBIStatus = 1;
-				sendTipMessage(playerid, "Otworzy³eœ biurowiec FBI"); 
+				sendTipMessage(playerid, "Otworzy³eœ biurowiec FBI."); 
 			}
 			else
 			{
 				doorFBIStatus = 0; 
-				sendTipMessage(playerid, "Zamykasz biurowiec FBI"); 
+				sendTipMessage(playerid, "Zamykasz biurowiec FBI dla ka¿dego prócz FBI."); 
 			}
 		
+		}
+		else
+		{
+			sendTipMessage(playerid, "Ta komenda jest dostêpna od rangi [3]");
 		}
 	}
 	return 1;

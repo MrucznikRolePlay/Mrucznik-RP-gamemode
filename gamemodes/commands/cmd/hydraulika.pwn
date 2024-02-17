@@ -36,7 +36,7 @@ YCMD:hydraulika(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        if(IsAMechazordWarsztatowy(playerid))//if(PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
         {
             if(!IsAtWarsztat(playerid)) { return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning"); }
             new playa;
@@ -74,6 +74,9 @@ YCMD:hydraulika(playerid, params[], help)
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje hydraulike w %s.", sendername, VehicleNames[GetVehicleModel(pojazd) - 400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     ZabierzKase(playerid, 10000);
+                                    Log(payLog, INFO, "Gracz %s zamontowa³ %s hydraulikê na pojazd %s za %d$",
+                                        GetPlayerLogName(playerid), GetPlayerLogName(playa), GetVehicleLogName(pojazd), 10000
+                                    );
                                     format(string, sizeof(string), "~r~-$%d", 10000);
                                     GameTextForPlayer(playerid, string, 5000, 1);
                                     PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);

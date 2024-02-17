@@ -46,7 +46,7 @@ YCMD:napraw(playerid, params[], help)
             }
             money = FunkcjaK(string);
 
-            if(money < 1600 || money > 4000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 1600$ do 4000$!"); return 1; }
+            if(money < 800 || money > 4000) { sendTipMessageEx(playerid, COLOR_GREY, "Cena od 800$ do 4000$!"); return 1; }
             if(IsPlayerConnected(playa))
             {
                 if(playa != INVALID_PLAYER_ID)

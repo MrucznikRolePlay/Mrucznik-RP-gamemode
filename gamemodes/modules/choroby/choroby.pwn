@@ -38,42 +38,6 @@ eDiseases:GetDiseaseID(diseaseName[])
 	return eDiseases:NONE;
 }
 
-CureFromAllDiseases(playerid)
-{
-	VECTOR_foreach(i : VPlayerDiseases[playerid])
-	{
-		DeactivateDiseaseEffects(playerid, eDiseases:MEM_get_val(i));
-	}
-	VECTOR_clear(VPlayerDiseases[playerid]);
-	MruMySQL_RemoveAllDiseases(playerid);
-}
-
-CurePlayer(playerid, eDiseases:disease)
-{
-	VECTOR_remove_val(VPlayerDiseases[playerid], disease);
-	MruMySQL_RemoveDisease(playerid, disease);
-	DeactivateDiseaseEffects(playerid, disease);
-}
-
-InfectPlayer(playerid, eDiseases:disease)
-{
-	if(IsPlayerSick(playerid, disease))
-	{
-		return 0;
-	}
-
-	MruMySQL_AddDisease(playerid, disease);
-	InfectPlayerWithoutSaving(playerid, disease);
-	return 1;
-}
-
-InfectPlayerWithoutSaving(playerid, eDiseases:disease)
-{
-	VECTOR_push_back_val(VPlayerDiseases[playerid], disease);
-	ActivateDiseaseEffect(playerid, disease);
-	return 1;
-}
-
 DiagnosePlayer(playerid, diagnoserid)
 {
     SendClientMessage(diagnoserid, COLOR_WHITE, sprintf("|__________ Wynik diagnozy %s __________|", GetNick(playerid)));
@@ -94,6 +58,25 @@ DiagnosePlayer(playerid, diagnoserid)
 	return 1;
 }
 
+ShowDiseaseList(playerid)
+{
+	SendClientMessage(playerid, COLOR_WHITE, "|__________________ Choroby __________________|");
+	new string[144];
+	for(new i; i<_:eDiseases; i++) 
+	{
+		if(i%5 == 0) 
+		{
+			if(i != 0) SendClientMessage(playerid, COLOR_GREY, string);
+			format(string, sizeof(string), "Dostêpne nazwy: ");
+		}
+		strcat(string, DiseaseData[eDiseases:i][ShortName]);
+		strcat(string, " ");
+	}
+	SendClientMessage(playerid, COLOR_GREY, string);
+	SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
+	return 1;
+}
+
 IsPlayerHealthy(playerid)
 {
 	return VECTOR_size(VPlayerDiseases[playerid]) == 0;
@@ -104,8 +87,64 @@ IsPlayerSick(playerid, eDiseases:disease)
 	return VECTOR_find_val(VPlayerDiseases[playerid], disease) != INVALID_VECTOR_INDEX;
 }
 
+// ----- Immunity ------
+SetPlayerImmunity(playerid, Float:value)
+{
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], value);
+	PlayerImmunity[playerid] = value;
+	return 1;
+}
+
+Float:GetPlayerImmunity(playerid)
+{
+	return PlayerImmunity[playerid];
+}
+
+IncreasePlayerImmunity(playerid, Float:value=1.0, Float:max=MAX_PLAYER_IMMUNITY)
+{
+	new Float:newValue = GetPlayerImmunity(playerid)+value;
+	if(newValue > max) 
+	{
+		if(GetPlayerImmunity(playerid) > max) 
+		{
+			newValue = GetPlayerImmunity(playerid);
+		}
+		else
+		{
+			newValue = max;
+		}
+	}
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], newValue);
+	PlayerImmunity[playerid] = newValue;
+	return 1;
+}
+
+DecreasePlayerImmunity(playerid, Float:value=1.0, Float:min=0.0)
+{
+	if(GetPlayerAdminDutyStatus(playerid) == 1) return 0;
+
+	new Float:newValue = GetPlayerImmunity(playerid)-value;
+	
+	if(newValue < min)
+	{
+		newValue = min;
+		if(GetPVarInt(playerid, "maseczka") > 0)
+		{
+			SendClientMessage(playerid, COLOR_RED, "Twoja maseczka ju¿ nie spe³nia swojej roli ochronnej!");
+			DetachPlayerItem(playerid, GetPVarInt(playerid, "maseczka")-1);
+			SetPVarInt(playerid, "maseczka", 0);
+		}
+	}
+
+	PlayerImmunity[playerid] = newValue;
+	SetPlayerProgressBarValue(playerid, PlayerImmunityBar[playerid], newValue);
+	return 1;
+}
+
+// ------ Effects -------
 ActivateDiseaseEffect(playerid, eDiseases:disease)
 {
+	if(GetPlayerAdminDutyStatus(playerid) == 1) return 1;
 	new effectID = 0;
 	VECTOR_foreach(v : DiseaseData[disease][VEffects])
 	{
@@ -141,6 +180,7 @@ DeactivateDiseaseEffects(playerid, eDiseases:disease)
 CallEffectTimer(playerid, eDiseases:disease, effect[eEffectData], effectID) 
 {
 	new effectTime = effect[MinTime] + random(effect[TimeRange]);
+	if(!IsAProductionServer()) effectTime /= 10; //10 razy szybsze wywo³ywanie efektów na serwerach developerskich
 	defer EffectTimer[effectTime](playerid, PlayerInfo[playerid][pUID], disease, effectID);
 	return 1;
 }
@@ -159,6 +199,35 @@ CallEffectDesactivateCallback(playerid, eDiseases:disease, effect[eEffectData])
 	return 1;
 }
 
+// ------- Infecting -------
+InfectOrDecreaseImmunity(playerid, eDiseases:disease, immunityDecrease=5)
+{
+	if(GetPlayerImmunity(playerid) < immunityDecrease) {
+		return InfectPlayer(playerid, disease);
+	}
+	DecreasePlayerImmunity(playerid, immunityDecrease);
+	return 0;
+}
+
+InfectPlayer(playerid, eDiseases:disease)
+{
+	if(IsPlayerSick(playerid, disease))
+	{
+		return 0;
+	}
+	if(GetPlayerAdminDutyStatus(playerid) == 1) return 0;
+	MruMySQL_AddDisease(playerid, disease);
+	InfectPlayerWithoutSaving(playerid, disease);
+	return 1;
+}
+
+InfectPlayerWithoutSaving(playerid, eDiseases:disease)
+{
+	VECTOR_push_back_val(VPlayerDiseases[playerid], disease);
+	ActivateDiseaseEffect(playerid, disease);
+	return 1;
+}
+
 DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 {
 	if(PlayerInfo[playerid][pBW] != 0 && GetPlayerAdminDutyStatus(playerid) != 0)
@@ -172,19 +241,19 @@ DoInfecting(playerid, eDiseases:disease, effect[eEffectData])
 		{
 			if(PlayerInfo[i][pBW] == 0 && GetPlayerAdminDutyStatus(i) == 0 && IsPlayerInRangeOfPoint(i, effect[ContagiousRange], x, y, z))
 			{
-				if(PlayerImmunity[i] <= 0) 
+				if(RandomizeSouldBeInfected(effect[InfectionChance], DiseaseData[disease][ContagiousRatio])) // do infection
 				{
-					if(RandomizeSouldBeInfected(effect[InfectionChance], DiseaseData[disease][ContagiousRatio])) // do infection
+					if(GetPlayerImmunity(i) <= 0) 
 					{
 						if(IsPlayerSick(i, disease)) return 1;
 						InfectPlayer(i, disease);
 						new messageTime = random(60000);//minuta
 						defer InfectedEffectMessage[messageTime](i);
 					}
-				}
-				else
-				{
-					DecreaseImmunity(i);
+					else //obni¿a odpornoœæ gracza, je¿eli ten móg³ zostaæ zara¿ony
+					{
+						DecreasePlayerImmunity(i);
+					}
 				}
 			}
 		}
@@ -199,25 +268,7 @@ RandomizeSouldBeInfected(Float:chance, Float:ratio=1.0)
 	return infectionRand < infectionChance;
 }
 
-ShowDiseaseList(playerid)
-{
-	SendClientMessage(playerid, COLOR_WHITE, "|__________________ Choroby __________________|");
-	new string[144];
-	for(new i; i<_:eDiseases; i++) 
-	{
-		if(i%5 == 0) 
-		{
-			if(i != 0) SendClientMessage(playerid, COLOR_GREY, string);
-			format(string, sizeof(string), "Dostêpne nazwy: ");
-		}
-		strcat(string, DiseaseData[eDiseases:i][ShortName]);
-		strcat(string, " ");
-	}
-	SendClientMessage(playerid, COLOR_GREY, string);
-	SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
-	return 1;
-}
-
+// ------- Treatment --------
 StartPlayerTreatment(playerid, doctorid, eDiseases:disease)
 {
 	new time = DiseaseData[disease][CureTime];
@@ -250,7 +301,7 @@ EndPlayerTreatment(playerid, doctorid)
 		CurePlayer(playerid, disease);
 		GameTextForPlayer(playerid, "~g~Wyleczony!", 5000, 1);
 		GameTextForPlayer(doctorid, sprintf("~g~Pacjent %s wyleczony!", GetNick(playerid)), 5000, 1);
-		PlayerImmunity[playerid] = 5;
+		SetPlayerImmunity(playerid, INITIAL_PLAYER_IMMUNITY);
 	}
 }
 
@@ -259,20 +310,21 @@ IsPlayerTreated(playerid)
 	return GetPVarInt(playerid, "disease-treatement") != 0;
 }
 
-DecreaseImmunity(playerid)
+CureFromAllDiseases(playerid)
 {
-	PlayerImmunity[playerid]--;
-	if(PlayerImmunity[playerid] <= 0)
+	VECTOR_foreach(i : VPlayerDiseases[playerid])
 	{
-		if(GetPVarInt(playerid, "maseczka") > 0)
-		{
-			SendClientMessage(playerid, COLOR_RED, "Twoja maseczka ju¿ nie spe³nia swojej roli ochronnej!");
-			DetachPlayerItem(playerid, GetPVarInt(playerid, "maseczka")-1);
-			SetPVarInt(playerid, "maseczka", 0);
-		}
-		return 0;
+		DeactivateDiseaseEffects(playerid, eDiseases:MEM_get_val(i));
 	}
-	return PlayerImmunity[playerid];
+	VECTOR_clear(VPlayerDiseases[playerid]);
+	MruMySQL_RemoveAllDiseases(playerid);
+}
+
+CurePlayer(playerid, eDiseases:disease)
+{
+	VECTOR_remove_val(VPlayerDiseases[playerid], disease);
+	MruMySQL_RemoveDisease(playerid, disease);
+	DeactivateDiseaseEffects(playerid, disease);
 }
 
 //-----------------<[ Disease effects: ]>-------------------

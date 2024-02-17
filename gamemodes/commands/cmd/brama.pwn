@@ -496,25 +496,6 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}*/
-        // nowe bramy dla PD
-        if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
-        {
-            if(PlayerToPoint(25.5, playerid, 1588.4932, -1638.2795, 12.3959))
-            {
-                if(lspdWjazdDolnyState == 0) // otworz
-                {
-                    MoveDynamicObject(lspdWjazdDolny, 1588.4932, -1638.2795, 12.3959, 2.5);
-                    //MoveDynamicObject(STREAMER_TAG_OBJECT objectid, Float:x, Float:y, Float:z, Float:speed, Float:rx = -1000.0, Float:ry = -1000.0, Float:rz = -1000.0)
-                    lspdWjazdDolnyState = 1;
-                }
-                else // zamknij
-                {
-                    MoveDynamicObject(lspdWjazdDolny, 1588.4932, -1638.2795, 17.0965, 2.5);
-                    lspdWjazdDolnyState = 0;
-                }
-            }
-        }
-        // end nowe bramy dla PD
 		//stary komisariat (old komi)
 		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pAdmin] >= 1000)
 		{
@@ -581,250 +562,250 @@ YCMD:brama(playerid, params[], help)
 			}
 		}
 		//nowe komi bramy
-		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pAdmin] >= 5000)
-		{
-			if(IsPlayerInRangeOfPoint(playerid,3,-1670.9452,915.7548,-52.4141))
-			{
-				if(lspdmove13 == 0)
-				{
-					MoveDynamicObject(bramalspd13,-1671.5000, 922.4590, -49.8000,3,0,0,90);
-					lspdmove13 = 1;
-				}
-				else
-				{
-					MoveDynamicObject(bramalspd13, -1671.50, 918.00, -49.80,3,0,0,90);
-					lspdmove13 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,2.0,-1673.90, 876.96, -49.90))
-			{
-				if(lspdmove1 == 0)
-				{
-					new Float:xy,Float:yy;
-					SetDynamicObjectRot(bramalspd1,xy,yy,0);
-					lspdmove1 = 1;
-				}
-				else
-				{
-				new Float:xy,Float:yy;
-				SetDynamicObjectRot(bramalspd1,xy,yy,90);
-				lspdmove1 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,2,-1673.90, 902.57, -49.90))
-			{
-				if(lspdmove2 == 0)
-				{
-					new Float:xy,Float:yy;
+		// if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1 || PlayerInfo[playerid][pAdmin] >= 5000)
+		// {
+		// 	if(IsPlayerInRangeOfPoint(playerid,3,-1670.9452,915.7548,-52.4141))
+		// 	{
+		// 		if(lspdmove13 == 0)
+		// 		{
+		// 			MoveDynamicObject(bramalspd13,-1671.5000, 922.4590, -49.8000,3,0,0,90);
+		// 			lspdmove13 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			MoveDynamicObject(bramalspd13, -1671.50, 918.00, -49.80,3,0,0,90);
+		// 			lspdmove13 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,2.0,-1673.90, 876.96, -49.90))
+		// 	{
+		// 		if(lspdmove1 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd1,xy,yy,0);
+		// 			lspdmove1 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 		new Float:xy,Float:yy;
+		// 		SetDynamicObjectRot(bramalspd1,xy,yy,90);
+		// 		lspdmove1 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,2,-1673.90, 902.57, -49.90))
+		// 	{
+		// 		if(lspdmove2 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd2,xy,yy,0);
-					lspdmove2 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd2,xy,yy,0);
+		// 			lspdmove2 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd2,xy,yy,90);
-					lspdmove2 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,2,-1670.67, 904.90, -49.90))
-			{
-				if(lspdmove3 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd2,xy,yy,90);
+		// 			lspdmove2 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,2,-1670.67, 904.90, -49.90))
+		// 	{
+		// 		if(lspdmove3 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd3,xy,yy,90);
-					lspdmove3 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd3,xy,yy,90);
+		// 			lspdmove3 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd3,xy,yy,0);
-					lspdmove3 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,2,-1670.57, 876.07, -49.90))
-			{
-				if(lspdmove4 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd3,xy,yy,0);
+		// 			lspdmove3 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,2,-1670.57, 876.07, -49.90))
+		// 	{
+		// 		if(lspdmove4 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd4,xy,yy,90);
-					lspdmove4 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd4,xy,yy,90);
+		// 			lspdmove4 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd4,xy,yy,0);
-					lspdmove4 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1673.90, 891.26, -48.60))
-			{
-				if(lspdmove5 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd4,xy,yy,0);
+		// 			lspdmove4 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,3,-1673.90, 891.26, -48.60))
+		// 	{
+		// 		if(lspdmove5 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd5,xy,yy,0);
-					lspdmove5 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd5,xy,yy,0);
+		// 			lspdmove5 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd5,xy,yy,270);
-					lspdmove5 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1616.80, 829.67, -25.80))
-			{
-				if(lspdmove6 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd5,xy,yy,270);
+		// 			lspdmove5 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,3,-1616.80, 829.67, -25.80))
+		// 	{
+		// 		if(lspdmove6 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd6,xy,yy,0);
-					lspdmove6 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd6,xy,yy,0);
+		// 			lspdmove6 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd6,xy,yy,90);
-					lspdmove6 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1626.40, 829.67, -25.80))
-			{
-				if(lspdmove7 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd6,xy,yy,90);
+		// 			lspdmove6 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,3,-1626.40, 829.67, -25.80))
+		// 	{
+		// 		if(lspdmove7 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd7,xy,yy,0);
-					lspdmove7 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd7,xy,yy,0);
+		// 			lspdmove7 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd7,xy,yy,90);
-					lspdmove7 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1626.40, 823.28, -25.80))
-			{
-				if(lspdmove8 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd7,xy,yy,90);
+		// 			lspdmove7 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,3,-1626.40, 823.28, -25.80))
+		// 	{
+		// 		if(lspdmove8 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd8,xy,yy,0);
-					lspdmove8 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd8,xy,yy,0);
+		// 			lspdmove8 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd8,xy,yy,90);
-					lspdmove8 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1616.80, 823.28, -25.80))
-			{
-				if(lspdmove9 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd8,xy,yy,90);
+		// 			lspdmove8 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,3,-1616.80, 823.28, -25.80))
+		// 	{
+		// 		if(lspdmove9 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd9,xy,yy,0);
-					lspdmove9 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd9,xy,yy,0);
+		// 			lspdmove9 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd9,xy,yy,90);
-					lspdmove9 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1745.86, 784.40, -44.20))
-			{
-				if(lspdmove10 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd9,xy,yy,90);
+		// 			lspdmove9 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,3,-1745.86, 784.40, -44.20))
+		// 	{
+		// 		if(lspdmove10 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd10,xy,yy,90);
-					lspdmove10 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd10,xy,yy,90);
+		// 			lspdmove10 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd10,xy,yy,0);
-					lspdmove10 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3,-1606.47, 817.80, -30.50))
-			{
-				if(lspdmove11 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd10,xy,yy,0);
+		// 			lspdmove10 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,3,-1606.47, 817.80, -30.50))
+		// 	{
+		// 		if(lspdmove11 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd11,xy,yy,90);
-					lspdmove11 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd11,xy,yy,90);
+		// 			lspdmove11 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd11,xy,yy,0);
-					lspdmove11 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,3, -1745.87, 805.20, -45.50))
-			{
-				if(lspdmove12 == 0)
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd11,xy,yy,0);
+		// 			lspdmove11 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,3, -1745.87, 805.20, -45.50))
+		// 	{
+		// 		if(lspdmove12 == 0)
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd12,xy,yy,90);
-					lspdmove12 = 1;
-				}
-				else
-				{
-					new Float:xy,Float:yy;
+		// 			SetDynamicObjectRot(bramalspd12,xy,yy,90);
+		// 			lspdmove12 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			new Float:xy,Float:yy;
 
-					SetDynamicObjectRot(bramalspd12,xy,yy,0);
-					lspdmove12 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,2,-1682.7000, 923.1000, -52.2000))
-			{
-				if(lspdmove14 == 0)
-				{
-					MoveDynamicObject(celalspd1,-1682.7000, 921.5530, -52.2000,3,0,0,90);
-					lspdmove14 = 1;
-				}
-				else
-				{
-					MoveDynamicObject(celalspd1,-1682.7000, 923.1000, -52.2000,3,0,0,90);
-					lspdmove14 = 0;
-				}
-			}
-			if(IsPlayerInRangeOfPoint(playerid,2,-1682.7000, 926.3000, -52.2000))
-			{
-				if(lspdmove15 == 0)
-				{
-					MoveDynamicObject(celalspd2,-1682.7000, 924.7530, -52.2000,3,0,0,90);
-					lspdmove15 = 1;
-				}
-				else
-				{
-					MoveDynamicObject(celalspd2,-1682.7000, 926.3000, -52.2000,3,0,0,90);
-					lspdmove15 = 0;
-				}
-			}
-		}
+		// 			SetDynamicObjectRot(bramalspd12,xy,yy,0);
+		// 			lspdmove12 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,2,-1682.7000, 923.1000, -52.2000))
+		// 	{
+		// 		if(lspdmove14 == 0)
+		// 		{
+		// 			MoveDynamicObject(celalspd1,-1682.7000, 921.5530, -52.2000,3,0,0,90);
+		// 			lspdmove14 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			MoveDynamicObject(celalspd1,-1682.7000, 923.1000, -52.2000,3,0,0,90);
+		// 			lspdmove14 = 0;
+		// 		}
+		// 	}
+		// 	if(IsPlayerInRangeOfPoint(playerid,2,-1682.7000, 926.3000, -52.2000))
+		// 	{
+		// 		if(lspdmove15 == 0)
+		// 		{
+		// 			MoveDynamicObject(celalspd2,-1682.7000, 924.7530, -52.2000,3,0,0,90);
+		// 			lspdmove15 = 1;
+		// 		}
+		// 		else
+		// 		{
+		// 			MoveDynamicObject(celalspd2,-1682.7000, 926.3000, -52.2000,3,0,0,90);
+		// 			lspdmove15 = 0;
+		// 		}
+		// 	}
+		// }
 		//nowe komi bray koniec
 		//==========================[NOWE BRAMY URZÊDU MIASTA!]=============================
 		//[23-12-2018] Dual Gate DMV
@@ -1855,48 +1836,6 @@ YCMD:brama(playerid, params[], help)
         		}
         		return 1;
         	}
-        }
-        else if(IsPlayerInFraction(playerid, FRAC_LCN, 5000))
-        {
-            if (IsPlayerInRangeOfPoint(playerid,3.0,719.47821, -1469.03955, 22.69330))
-            {
-                if(GATE_ICC_S[0])
-                {
-                        MoveDynamicObject(GATE_ICC[0], 719.47821, -1469.03955, 22.69330, 3, 0.00000, 0.00000, 90.00000);
-                        GATE_ICC_S[0] = false;
-                }
-                else
-                {
-                        MoveDynamicObject(GATE_ICC[0], 719.47821, -1469.03955, 22.69330, 3, 0.00000, 0.00000, 0.00000);
-                        GATE_ICC_S[0] = true;
-                }
-            }
-            else if (IsPlayerInRangeOfPoint(playerid,2.0,738.15019, -1469.26731, 22.69330))
-            {
-                if(GATE_ICC_S[1])
-                {
-                        MoveDynamicObject(GATE_ICC[1], 738.15009, -1469.26721, 22.69330, 3, 0.00000, 0.00000, 90.00000);
-                        GATE_ICC_S[1] = false;
-                }
-                else
-                {
-                        MoveDynamicObject(GATE_ICC[1], 738.15009, -1469.26721, 22.69330, 3, 0.00000, 0.00000, 180.00000);
-                        GATE_ICC_S[1] = true;
-                }
-            }
-            else if (IsPlayerInRangeOfPoint(playerid,2.0,739.86668, -1469.26731, 22.69330))
-            {
-                if(GATE_ICC_S[2])
-                {
-                        MoveDynamicObject(GATE_ICC[2], 739.86658, -1469.26721, 22.69330, 3, 0.00000, 0.00000, 90.00000);
-                        GATE_ICC_S[2] = false;
-                }
-                else
-                {
-                        MoveDynamicObject(GATE_ICC[2], 739.86658, -1469.26721, 22.69330, 3, 0.00000, 0.00000, 0.00000);
-                        GATE_ICC_S[2] = true;
-                }
-            }
         }
         if(GetPlayerOrg(playerid) == FAMILY_IBIZA)
         {

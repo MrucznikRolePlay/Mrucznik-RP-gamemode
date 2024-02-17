@@ -36,7 +36,7 @@ YCMD:malunek(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19)//PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        if(IsAMechazordWarsztatowy(playerid))//PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
         {
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa, malunek;
@@ -76,6 +76,9 @@ YCMD:malunek(playerid, params[], help)
                                             SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                             format(string, sizeof(string),"* Mechanik %s wyci¹ga sprey i tworzy malunek na %s.", sendername, VehicleNames[model-400]);
                                             ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+                                            Log(payLog, INFO, "Gracz %s zamontowa³ %s malunek %d na pojazd %s za %d$",
+                                                GetPlayerLogName(playerid), GetPlayerLogName(playa), malunek, GetVehicleLogName(pojazd), 20000
+                                            );
                                             ZabierzKase(playerid, 20000);
                                             format(string, sizeof(string), "~r~-$%d", 20000);
                                             GameTextForPlayer(playerid, string, 5000, 1);

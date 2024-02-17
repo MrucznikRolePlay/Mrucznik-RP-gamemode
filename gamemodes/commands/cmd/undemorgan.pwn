@@ -36,7 +36,7 @@ YCMD:undemorgan(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 35 || IsAScripter(playerid))
+        if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
         {
             
         

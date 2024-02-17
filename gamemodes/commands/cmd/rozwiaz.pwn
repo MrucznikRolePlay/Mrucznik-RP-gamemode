@@ -36,9 +36,9 @@ YCMD:rozwiaz(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(IsAPrzestepca(playerid))
+		if(IsAPrzestepca(playerid) || PlayerInfo[playerid][pAdmin] >= 1)
 		{
-		    if(PlayerInfo[playerid][pRank] < 2)
+		    if(PlayerInfo[playerid][pRank] < 2 && !PlayerInfo[playerid][pAdmin] >= 1)
 		    {
 		        sendTipMessageEx(playerid, COLOR_GREY, "Musisz mieæ 2 lub wy¿sz¹ rangê, aby kogoœ rozwi¹zaæ !");
 		        return 1;
@@ -56,7 +56,7 @@ YCMD:rozwiaz(playerid, params[], help)
 				{
 				    if (ProxDetectorS(8.0, playerid, giveplayerid))
 					{
-					    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz rozwi¹zaæ sam siebie!"); return 1; }
+					    if(giveplayerid == playerid && !PlayerInfo[playerid][pAdmin] >= 1) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz rozwi¹zaæ sam siebie!"); return 1; }
 						if(PlayerTied[giveplayerid])
 						{
 						    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));

@@ -48,7 +48,7 @@ YCMD:poddajesie(playerid, params[], help)
 				PlayerInfo[playerid][pJailed] = 1;
 			    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(200);
 			    new lowcak = PoziomPoszukiwania[playerid] * 2500;
-				SetPlayerVirtualWorld(playerid, 1);
+				SetPlayerVirtualWorld(playerid, 29);
 				JailPrice[playerid] = PoziomPoszukiwania[lowcap[playerid]]*16000;
 				WantLawyer[playerid] = 1;
 				new losuj= random(sizeof(Cela));

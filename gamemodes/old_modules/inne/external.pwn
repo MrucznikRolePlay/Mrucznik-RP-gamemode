@@ -18,6 +18,7 @@ forward MRP_SetPlayerNickChanges(playerid, val);
 forward MRP_SetPlayerAge(playerid, val);
 forward MRP_ShopPurchaseCar(playerid, model, cena);
 forward MRP_ForceDialog(playerid, dialogid);
+forward MRP_SetPlayerKluczykiDoAuta(playerid, val);
 
 //CALLBACKS
 //GET
@@ -48,6 +49,10 @@ public MRP_SetPlayerPhone(playerid, val)  {
 }
 public MRP_SetPlayerNickChanges(playerid, val)  PlayerInfo[playerid][pZmienilNick] = val;
 public MRP_SetPlayerAge(playerid, val)  PlayerInfo[playerid][pAge] = val;
+public MRP_SetPlayerKluczykiDoAuta(playerid, val)  {
+    PlayerInfo[playerid][pKluczeAuta] = val;
+    MruMySQL_SetAccInt("KluczykiDoAuta", GetNickEx(playerid), val);
+}
 
 forward MRPWeryfikacja(index, response_code, data[]);
 public MRPWeryfikacja(index, response_code, data[])

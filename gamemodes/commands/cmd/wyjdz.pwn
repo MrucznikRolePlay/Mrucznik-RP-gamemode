@@ -32,9 +32,12 @@ YCMD:wyjdz(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
 	{
-	//	PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
+		if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0 ) return 1;
+		PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
 	
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
+		if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
+		
 		if(isNaked[playerid] == 1)
 		{
 			SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]); 
@@ -50,6 +53,26 @@ YCMD:wyjdz(playerid, params[], help)
             SetPlayerVirtualWorld(playerid,0);
             TogglePlayerControllable(playerid,0);
             Wchodzenie(playerid);
+        }
+		else if(IsPlayerInRangeOfPoint(playerid, 4, 1213.3364,-1807.0619,70.0682)) //basen œrodek 
+		{
+			SetPlayerPos(playerid, 1205.45874, -1765.66833, 13.54815); // basen tsunami
+			SetPlayerVirtualWorld(playerid, 43);
+            Wchodzenie(playerid);
+			return 1;
+		}
+		else if((IsPlayerInRangeOfPoint(playerid,4,1543.3915,-1643.2813,28.4881) || IsPlayerInRangeOfPoint(playerid,4,1555.1351,-1643.0166,28.4881)) && GetPlayerVirtualWorld(playerid) == 29 && !IsAPolicja(playerid) && PlayerInfo[playerid][pJailed] == 0) //miejsce do /wyjdz dla osób które nie s¹ wiêŸniami
+        {
+            Wchodzenie(playerid);
+            SetPlayerVirtualWorld(playerid, 25);
+            SetPlayerPos(playerid,1585.8722,-1685.5045,62.2363);
+        }
+        else if (IsPlayerInRangeOfPoint(playerid, 3.0, 566.5435,-2087.0046,2.7402))  //basen tsunami wejscie do hali
+        {
+            SetPlayerPos(playerid, 1221.30774, -1790.77686, 71.70520);  //basen tsunami hala
+            TogglePlayerControllable(playerid, 0);
+            Wchodzenie(playerid);
+            return 1;
         }
 		else if(IsPlayerInRangeOfPoint(playerid,4,1568.6449, -1689.6379, 6.1932) && IsAPolicja(playerid)//parking LSPD
 		|| IsPlayerInRangeOfPoint(playerid,4,-1645.1858, 883.1620, -45.4112)//z glownego wejscia
@@ -231,12 +254,13 @@ YCMD:wyjdz(playerid, params[], help)
 			SetPlayerVirtualWorld(playerid,0);
 		}
 		//vinyl
-		else if(IsPlayerInRangeOfPoint(playerid, 1.5, 817.0987,-1375.1685,23.6475))
+		else if(IsPlayerInRangeOfPoint(playerid, 1.5, 816.50, -1413.75, -22.58))
 		{
-			SetPlayerPos(playerid, 814.4426,-1378.2600,23.6475);
+			Wchodzenie(playerid);
+			SetPlayerVirtualWorld(playerid, 72);
+			SetPlayerPos(playerid, 816.5667, -1415.4117, -22.5834);
 			GameTextForPlayer(playerid, "~w~Impreza dalej trwa~n~~r~bez ciebie", 5000, 1);
 			SetPLocal(playerid, PLOCAL_DEFAULT); 
-            Wchodzenie(playerid);
 			return 1;
 		}
         //IBIZA

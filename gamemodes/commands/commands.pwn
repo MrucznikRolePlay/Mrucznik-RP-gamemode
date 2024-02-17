@@ -37,7 +37,6 @@
 #include "cmd/app.pwn"
 #include "cmd/apteczka.pwn"
 #include "cmd/aresztuj.pwn"
-#include "cmd/armia.pwn"
 #include "cmd/armor.pwn"
 #include "cmd/atakuj.pwn"
 #include "cmd/autorzy.pwn"
@@ -57,7 +56,7 @@
 #include "cmd/blackjack.pwn"
 #include "cmd/blok.pwn"
 #include "cmd/blokujnoba.pwn"
-#include "cmd/blokujsprzedarz.pwn"
+#include "cmd/blokujsprzedaz.pwn"
 #include "cmd/boxstats.pwn"
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
@@ -78,6 +77,7 @@
 #include "cmd/checkadminstats.pwn"
 #include "cmd/checkcar.pwn"
 #include "cmd/checkcars.pwn"
+#include "cmd/checktank.pwn"
 #include "cmd/clearwlall.pwn"
 #include "cmd/clearzone.pwn"
 #include "cmd/cmdinfo.pwn"
@@ -89,7 +89,6 @@
 #include "cmd/cwarsztat.pwn"
 #include "cmd/cygaro.pwn"
 #include "cmd/czas.pwn"
-#include "cmd/cziterzy.pwn"
 #include "cmd/czyjtonumer.pwn"
 #include "cmd/czysc.pwn"
 #include "cmd/dajdowozu.pwn"
@@ -240,7 +239,6 @@
 #include "cmd/kuphelikopter.pwn"
 #include "cmd/kupkredyty.pwn"
 #include "cmd/kuplodzie.pwn"
-#include "cmd/kupneony.pwn"
 #include "cmd/kupowaniedomu.pwn"
 #include "cmd/kuppojazd.pwn"
 #include "cmd/kuppozwolenie.pwn"
@@ -250,7 +248,6 @@
 #include "cmd/laptop.pwn"
 #include "cmd/licencje.pwn"
 #include "cmd/liderpomoc.pwn"
-#include "cmd/lina.pwn"
 #include "cmd/linie.pwn"
 #include "cmd/loadconfig.pwn"
 #include "cmd/loadinfo.pwn"
@@ -296,6 +293,7 @@
 #include "cmd/noooc.pwn"
 #include "cmd/nos.pwn"
 #include "cmd/o.pwn"
+#include "cmd/obrazenia.pwn"
 #include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
@@ -322,7 +320,7 @@
 #include "cmd/pban.pwn"
 #include "cmd/pblok.pwn"
 #include "cmd/piwo.pwn"
-//#include "cmd/pjtest.pwn"
+#include "cmd/pjtest.pwn"
 #include "cmd/pl.pwn"
 #include "cmd/plac.pwn"
 #include "cmd/placmedyk.pwn"
@@ -394,11 +392,11 @@
 #include "cmd/scena.pwn"
 #include "cmd/scenaallow.pwn"
 #include "cmd/scenadisallow.pwn"
+#include "cmd/screenshot.pwn"
 #include "cmd/sejffrakcja.pwn"
 #include "cmd/sejfpomoc.pwn"
 #include "cmd/sejfrodzina.pwn"
 #include "cmd/selldom.pwn"
-#include "cmd/setac.pwn"
 #include "cmd/setarmor.pwn"
 #include "cmd/setcarhp.pwn"
 #include "cmd/setcarint.pwn"
@@ -459,9 +457,7 @@
 #include "cmd/studia.pwn"
 #include "cmd/stworz.pwn"
 #include "cmd/stworzdom.pwn"
-#include "cmd/stworzobiekty.pwn"
 #include "cmd/stworztrase.pwn"
-#include "cmd/supportduty.pwn"
 #include "cmd/swat.pwn"
 #include "cmd/swiadek.pwn"
 #include "cmd/szept.pwn"
@@ -507,10 +503,10 @@
 #include "cmd/uid.pwn"
 #include "cmd/ulepsz.pwn"
 #include "cmd/unblock.pwn"
+#include "cmd/unbp.pwn"
 #include "cmd/unbw.pwn"
 #include "cmd/undemorgan.pwn"
 #include "cmd/unfrakcja.pwn"
-#include "cmd/uniform2.pwn"
 #include "cmd/unjail.pwn"
 #include "cmd/unrentroom.pwn"
 #include "cmd/unspec.pwn"
@@ -589,7 +585,6 @@
 #include "cmd/zablokujtel.pwn"
 #include "cmd/zablokujw.pwn"
 #include "cmd/zakoncztrase.pwn"
-#include "cmd/zakuj.pwn"
 #include "cmd/zaliczegz.pwn"
 #include "cmd/zamek.pwn"
 #include "cmd/zamknijlinie.pwn"
@@ -608,7 +603,6 @@
 #include "cmd/zbijwl.pwn"
 #include "cmd/zbrojuj.pwn"
 #include "cmd/zd.pwn"
-#include "cmd/zdejmijbpk.pwn"
 #include "cmd/zdejmijkevlar.pwn"
 #include "cmd/zderzaki.pwn"
 #include "cmd/zdmv.pwn"
@@ -649,6 +643,7 @@
 #include "cmd/wlsett.pwn"
 #include "cmd/inwigilacja.pwn"
 #include "cmd/togro.pwn"
+#include "cmd/paralizator.pwn"
 InitCommands()
 {
 	Aliases();
@@ -688,6 +683,10 @@ static Aliases()
 	Command_AddAltNamed("cbradio", "cb");
 	Command_AddAltNamed("cbradio", "cb_radio");
 
+	//checktank
+	Command_AddAltNamed("checktank", "checktankmode");
+	Command_AddAltNamed("checktank", "checktankmod");
+	
 	//cp_usun
 	Command_AddAltNamed("cp_usun", "czekpoint_usun");
 	Command_AddAltNamed("cp_usun", "checkpoint_usun");
@@ -768,6 +767,12 @@ static Aliases()
 	//giveroom
 	Command_AddAltNamed("giveroom", "dajpokoj");
 	Command_AddAltNamed("giveroom", "dajwynajem");
+
+	//goto
+	Command_AddAltNamed("goto", "to");
+
+	//gethere
+	Command_AddAltNamed("gethere", "tm");
 
 	//glosnik
 	Command_AddAltNamed("glosnik", "sanradio");
@@ -864,9 +869,6 @@ static Aliases()
 	Command_AddAltNamed("kuplodzie", "kuplodz");
 	Command_AddAltNamed("kuplodzie", "kupstatek");
 	Command_AddAltNamed("kuplodzie", "buyboat");
-
-	//kupneony
-	Command_AddAltNamed("kupneony", "kupneon");
 
 	//kupowaniedomu
 	Command_AddAltNamed("kupowaniedomu", "kupdom");
@@ -1104,6 +1106,9 @@ static Aliases()
 	//sb
 	Command_AddAltNamed("sb", "sprawdzbron");
 	Command_AddAltNamed("sb", "szukajbroni");
+
+	//screenshot
+	Command_AddAltNamed("screenshot", "ss");
 
 	//sejffrakcja
 	Command_AddAltNamed("sejffrakcja", "sejff");
@@ -1350,10 +1355,6 @@ static Aliases()
 	Command_AddAltNamed("zablokujw", "togwhisper");
 	Command_AddAltNamed("zablokujw", "togw");
 
-	//zakuj
-	Command_AddAltNamed("zakuj", "cuff");
-	Command_AddAltNamed("zakuj", "skuj");
-
 	//zaparkuj
 	Command_AddAltNamed("zaparkuj", "parkuj");
 
@@ -1436,15 +1437,15 @@ static Aliases()
 	//respawncar
 	Command_AddAltNamed("respawncar", "respcar");
 
-	//cziterzy
-	Command_AddAltNamed("cziterzy", "czity");
-
 	//ustawmistrz
 	Command_AddAltNamed("ustawmistrz", "setchamp");
 	Command_AddAltNamed("ustawmistrz", "setmistrz");
 
 	//zaufanyggracz
 	Command_AddAltNamed("zaufanyggracz", "zg");
+
+	//unbp
+	Command_AddAltNamed("unbp", "zdejmijbp");
 
 	//wyloguj
 	Command_AddAltNamed("wyloguj", "logout");
@@ -1480,6 +1481,10 @@ static Aliases()
 	//kasa
 	Command_AddAltNamed("kasa", "money");
 
+	//kajdanki
+	Command_AddAltNamed("kajdanki", "cuff");
+	Command_AddAltNamed("kajdanki", "skuj");
+
 	//dajkase
 	Command_AddAltNamed("dajkase", "givemoney");
 
@@ -1492,6 +1497,10 @@ static Aliases()
 
 	//odmroz
 	Command_AddAltNamed("odmroz", "unfreeze");
+
+	//paralizator
+	Command_AddAltNamed("paralizator", "taser");
+	Command_AddAltNamed("paralizator", "tazer");
 
 	foreach (new command : Command())
 	{

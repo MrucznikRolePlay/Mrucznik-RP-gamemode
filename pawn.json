@@ -1,30 +1,34 @@
 {
-	"user": "Mrucznik",
-	"repo": "Mrucznik-RP-2.5",
+	"user": "MrucznikRolePlay",
+	"repo": "Mrucznik-RP-gamemode",
 	"entry": "gamemodes/Mrucznik-RP.pwn",
 	"output": "gamemodes/Mrucznik-RP.amx",
 	"dependencies": [
-		"zeex/samp-plugin-crashdetect:v4.19.4",
+		"Zeex/samp-plugin-crashdetect:v4.20",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
-		"maddinat0r/samp-log:v0.4",
+		"MrucznikRolePlay/samp-log:v0.4",
 		"maddinat0r/samp-discord-connector:v0.2.4",
-		"pBlueG/SA-MP-MySQL:R41-4",
+		"MrucznikRolePlay/mysql-R5:v1",
 		"Southclaws/pawn-requests:0.8.7",
 		"Open-GTO/sa-mp-fixes",
 		"emmet-jones/New-SA-MP-callbacks",
 		"oscar-broman/strlib",
-		"pawn-lang/YSI-Includes@4.x",
+		"MrucznikRolePlay/YSI-Includes:v4.69",
 		"Southclaws/samp-whirlpool",
 		"Wuzi/vending",
-		"BigETI/pawn-memory:v2.0.1",
+		"BigETI/pawn-memory:2.0.1",
 		"BigETI/pawn-vector",
 		"IllidanS4/PawnPlus:v1.1",
-		"Pottus/ColAndreas:v1.4.0.3",
+		"Pottus/ColAndreas#7e0dada038adbf23089c334bba5acad31cc567d0",
 		"BigETI/pawn-map",
-		"Y-Less/indirection",
-		"Zeex/amx_assembly",
-		"Mrucznik/samp-plugin-profiler:v2.15.4"
+		"MrucznikRolePlay/indirection",
+		"MrucznikRolePlay/amx_assembly:v4.69",
+		"MrucznikRolePlay/samp-plugin-profiler:v2.15.4",
+		"Southclaws/progress2",
+		"oscar-broman/samp-inline-sort",
+		"katursis/Pawn.RakNet:1.6.0",
+		"MrucznikRolePlay/Regular-Expressions-Plugin-sampctl:v0.2.4"
 	],
 	"build": {
 		"name": "",
@@ -40,7 +44,7 @@
 		]
 	},
 	"runtime": {
-		"version": "0.3.7",
+		"version": "0.3.DL-R1",
 		"mode": "server",
 		"echo": "-",
 		"rcon_password": "funiol",
@@ -76,6 +80,9 @@
 		"db_log_queries": false,
 		"conncookies": true,
 		"cookielogging": false,
-		"output": true
+		"output": true,
+		"extra": {
+			"discord_bot_token": "123"
+		}
 	}
 }

@@ -1,82 +1,84 @@
-new FabrykaMats_Actor;
-new Text3D:FabrykaMats_ActorLabel;
+// new FabrykaMats_Actor = INVALID_ACTOR_ID;
+// new Text3D:FabrykaMats_ActorLabel;
 
-new Float:FabrykaMats_ActorPos[][] =
-{
-	{2239.1765,-2258.2468,14.7647,208.8479},
-	{2201.0283,-2198.6238,13.5547,170.1143},
-	{2129.9502,-2276.1985,14.7836,145.9646}
-};
+// new Float:FabrykaMats_ActorPos[][] =
+// {
+// 	{2239.1765,-2258.2468,14.7647,209.8479},
+// 	{2201.0283,-2198.6238,13.5547,171.1143},
+// 	{2129.9502,-2276.1985,14.7836,146.9646}
+// };
 
-new FabrykaMats_ActorSkins[] =
-{
-	6,
-	22,
-	23,
-	47
-};
+// new FabrykaMats_ActorSkins[] =
+// {
+// 	6,
+// 	22,
+// 	23,
+// 	47
+// };
 
-forward FabrykaActor_ReCreate();
+// forward FabrykaActor_ReCreate();
 
-FabrykaMats_LoadLogic()
-{
-	// Init Actors
+// FabrykaMats_LoadLogic()
+// {
+// 	// Init Actors
+// 	FabrykaActor_ReCreate();
 
-	FabrykaActor_ReCreate();
+// 	// Init 3Dtexts
 
-	// Init 3Dtexts
+// 	CreateDynamic3DTextLabel("Wiedz¹ ju¿ o nas!\nBez obaw, nie poddamy siê tak ³atwo\nPoszukaj naszych dilerów materia³ami na terenie fabryki", 0xAA3333AA, 2139.1128,-2288.9380,20.6646, 10.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
+	
+// 	// Init Timers
 
-	CreateDynamic3DTextLabel("Wiedz¹ ju¿ o nas!\nBez obaw, nie poddamy siê tak ³atwo\nPoszukaj naszych dilerów materia³ami na terenie fabryki", 0xAA3333AA, 2139.1128,-2288.9380,20.6646, 10.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
-
-	// Init Timers
-
-	SetTimer("FabrykaActor_ReCreate", 900000, true);
-	return 1;
-}
+// 	SetTimer("FabrykaActor_ReCreate", 900000, true);
+// 	return 1;
+// }
 
 
-public FabrykaActor_ReCreate()
-{
+// public FabrykaActor_ReCreate()
+// {
 
-	new Float:ActorX, Float:ActorY, Float:ActorZ;
+// 	new Float:ActorX, Float:ActorY, Float:ActorZ;
 
-	new rand = random(sizeof(FabrykaMats_ActorPos));
+// 	new rand = random(sizeof(FabrykaMats_ActorPos));
 
-	ActorX = FabrykaMats_ActorPos[rand][0];
-	ActorY = FabrykaMats_ActorPos[rand][1];
-	ActorZ = FabrykaMats_ActorPos[rand][2];
+// 	ActorX = FabrykaMats_ActorPos[rand][0];
+// 	ActorY = FabrykaMats_ActorPos[rand][1];
+// 	ActorZ = FabrykaMats_ActorPos[rand][2];
 
-	if(FabrykaMats_Actor != INVALID_ACTOR_ID)
-	{
-		DestroyActor(FabrykaMats_Actor);	
-	}
+// 	if(FabrykaMats_Actor == INVALID_ACTOR_ID)
+// 	{
+// 		FabrykaMats_Actor = CreateDynamicActor(FabrykaMats_ActorSkins[random(sizeof(FabrykaMats_ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats_ActorPos[rand][3]);
+// 	}
+// 	else
+// 	{
+// 		SetDynamicActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
+// 		SetDynamicActorFacingAngle(FabrykaMats_Actor, FabrykaMats_ActorPos[rand][3]);
+// 	}
 
-	FabrykaMats_Actor = CreateActor(FabrykaMats_ActorSkins[random(sizeof(FabrykaMats_ActorSkins))], ActorX, ActorY, ActorZ, FabrykaMats_ActorPos[rand][3]);
+// 	if(FabrykaMats_ActorLabel != Text3D:INVALID_3DTEXT_ID)
+// 	{
+// 		Delete3DTextLabel(FabrykaMats_ActorLabel);
+// 	}
 
-	if(FabrykaMats_ActorLabel != Text3D:INVALID_3DTEXT_ID)
-	{
-		Delete3DTextLabel(FabrykaMats_ActorLabel);
-	}
+// 	new Float:labelZ = ActorZ + 1;
 
-	new Float:labelZ = ActorZ + 1;
+// 	FabrykaMats_ActorLabel = CreateDynamic3DTextLabel("Handlarz materia³ami\nNaciœnij 'Y' aby pogadaæ", COLOR_GRAD1, ActorX, ActorY, labelZ, 7.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0);
 
-	FabrykaMats_ActorLabel = CreateDynamic3DTextLabel("Handlarz materia³ami\nNaciœnij 'Y' aby pogadaæ", COLOR_GRAD1,ActorX, ActorY, labelZ, 7.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 1);
+// 	return 1;
+// }
 
-	return 1;
-}
+// // FabrykaMats_ActorTalk(playerid)
+// // {
+// // 	new Float:ActorX, Float:ActorY, Float:ActorZ;
+// // 	GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
 
-FabrykaMats_ActorTalk(playerid)
-{
-	new Float:ActorX, Float:ActorY, Float:ActorZ;
-	GetActorPos(FabrykaMats_Actor, ActorX, ActorY, ActorZ);
+// // 	if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ))
+// // 	{
+// // 		return RunCommand(playerid, "/materialy",  "dostarcz");
+// // 	}
 
-	if(IsPlayerInRangeOfPoint(playerid, 2, ActorX, ActorY, ActorZ))
-	{
-		return RunCommand(playerid, "/materialy",  "dostarcz");
-	}
-
-	return 1;
-}
+// // 	return 1;
+// // }
 
 public OnPlayerEditAttachedObject(playerid, response, index, modelid, boneid, Float:fOffsetX, Float:fOffsetY, Float:fOffsetZ, Float:fRotX, Float:fRotY, Float:fRotZ, Float:fScaleX, Float:fScaleY, Float:fScaleZ)
 {
@@ -164,10 +166,6 @@ Player_CanUseCar(playerid, vehicleid)
 			return 0;
 		}
 	}
-	if (GetVehicleModel(vehicleid) == 525)
-	{
-		sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
-	}
 
 	if(VehicleUID[vehicleid][vUID] != 0)
     {
@@ -176,8 +174,7 @@ Player_CanUseCar(playerid, vehicleid)
 	    {
             if(CarData[lcarid][c_Owner] != GetPlayerFraction(playerid) && CarData[lcarid][c_Owner] != 11)
             {
-                format(string, sizeof(string), " Ten pojazd nale¿y do %s i nie mo¿esz nim kierowaæ.", FractionNames[CarData[lcarid][c_Owner]]);
-                sendTipMessageEx(playerid,COLOR_GREY,string);
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
                 return 0;
             }
             if(CarData[lcarid][c_Owner] == 11)
@@ -190,8 +187,7 @@ Player_CanUseCar(playerid, vehicleid)
 		        	return 0;
 	        	}
                 if(TakingLesson[playerid] == 1) return 1;
-                format(string, sizeof(string), " Ten pojazd nale¿y do %s i nie mo¿esz nim kierowaæ.", FractionNames[CarData[lcarid][c_Owner]]);
-                sendTipMessageEx(playerid,COLOR_GREY,string);
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
                 return 0;
             }
 	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
@@ -278,10 +274,7 @@ Player_CanUseCar(playerid, vehicleid)
             if(CarData[lcarid][c_Owner] != GetPlayerOrg(playerid))
             {
                 if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
-				//ERROR WUT
-                //format(string, sizeof(string), " Ten pojazd nale¿y do rodziny %s i nie mo¿esz nim kierowaæ.", OrgInfo[orgID(CarData[lcarid][c_Owner])][o_Name]);
-                format(string, sizeof(string), " Ten pojazd nale¿y do rodziny i nie mo¿esz nim kierowaæ.");
-                sendTipMessageEx(playerid,COLOR_GREY,string);
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
                 return 0;
             }
 	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])

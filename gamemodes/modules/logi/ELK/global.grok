@@ -11,7 +11,7 @@ HOUSE \{House: %{INT:[house][id]:int}\}
 BUSINESS \{Business: %{DATA:[business][name]:string}\[%{INT:[business][id]:int}\]\}
 FRACTION \{Fraction: %{DATA:[fraction][name]:string}\[%{INT:[fraction][id]:int}\]\}
 
-GPCI [0-9A-F]{40}
+GPCI [0-9A-F]{30,40}
 
 LOG_PREAMBLE \[%{DATESTAMP:[@metadata][timestamp]}\] \[%{LOGLEVEL:loglevel}\] %{GREEDYDATA:message}
 
@@ -37,3 +37,11 @@ SEJF_LOG SEJF %{DATA:sejf_type:string} \[%{INT:id:int}\] \+ \[%{INT:income:int}\
 NICK_LOG %{PLAYER_NAME} zmienił nick na: %{NICKNAME:new_name:string}
 NICK_LOG_ADMIN Admin %{PLAYER_ADMIN} zmienił %{PLAYER_NAME} nick na %{NICKNAME:new_name:string}
 NICK_LOG_MASKA Gracz %{PLAYER_NAME} założył maskę %{NICKNAME:new_name:string}
+
+MRUCZNIK_COINS %{INT:mc:int}MC
+PREMIUM_PRZEDMIOT %{PLAYER_NAME} kupił unikatowy przedmiot %{INT:item_id:int} za %{MRUCZNIK_COINS}
+PREMIUM_SLOT %{PLAYER_NAME} kupił slot wozu za %{MRUCZNIK_COINS}
+PREMIUM_ZMIANA %{PLAYER_NAME} kupil zmiane nicku za %{MRUCZNIK_COINS}
+PREMIUM_SKIN %{PLAYER_NAME} kupił unikatowy skin %{INT:skin_id:int} za %{MRUCZNIK_COINS}
+PREMIUM_NR_TEL %{PLAYER_NAME} kupil numer telefonu %{INT:phone_nr:int} za %{MRUCZNIK_COINS}
+PREMIUM_POJAZD %{PLAYER_NAME} kupił unikatowy pojazd %{VEHICLE} za %{MRUCZNIK_COINS}

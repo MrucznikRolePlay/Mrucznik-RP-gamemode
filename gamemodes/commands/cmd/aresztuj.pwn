@@ -41,8 +41,10 @@ YCMD:aresztuj(playerid, params[], help)
    	        if(PlayerToPoint(10.0, playerid, 222.6395,114.3951,999.0156) //old komi
 			|| IsPlayerInRangeOfPoint(playerid, 10.0, 268.3546, 83.0229, 1001.0391)//dillimore
 			|| PlayerToPoint(10.0, playerid, -2614.1667,2264.6279,8.2109 ) //bayside
-			|| PlayerToPoint(5, playerid, -1681.1091,917.8300,-52.4141)//nowe komi by dywan
-			|| PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z)) // stanowe
+			|| PlayerToPoint(5, playerid, 1560.0333,-1638.6797,28.4881)//nowe komi 1
+			|| PlayerToPoint(5, playerid, 1559.8517,-1646.9373,28.4881)//nowe komi 2
+			|| PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z) // stanowe
+			|| PlayerToPoint(20.0,playerid,599.1960,-1489.5380,82.1648)) // areszt fbi
 			{
 
 		   	    new playa;
@@ -80,7 +82,9 @@ YCMD:aresztuj(playerid, params[], help)
                                     PoziomPoszukiwania[playa] = 0;
 									SetPlayerWantedLevel(playa, 0);
                                     DajKase(playerid, depo3);
-                                    Sejf_Add(PlayerInfo[playerid][pMember], depo2);
+                                    new sejf = PlayerInfo[playerid][pMember] ? PlayerInfo[playerid][pMember] : PlayerInfo[playerid][pLider];
+                                    if(sejf)
+                                        Sejf_Add(sejf, depo2);
 								    format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, price, depo3);
                                    // format(string, sizeof(string), "* Uwiêzi³eœ %s w Wiêzieniu, nagroda za przestêpcê: %d", giveplayer, price);
                                     //DajKase(playerid, price);
@@ -102,7 +106,7 @@ YCMD:aresztuj(playerid, params[], help)
 									RemovePlayerAttachedObject(playa, 0);
 									Kajdanki_PDkuje[playa] = 0;
 									Wchodzenie(playa);
-									SetPlayerVirtualWorld(playa, 1);
+									SetPlayerVirtualWorld(playa, 29);
 								    new losuj= random(sizeof(Cela));
 									SetPlayerPos(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 									TogglePlayerControllable(playa, 0);
@@ -124,7 +128,9 @@ YCMD:aresztuj(playerid, params[], help)
 								}
 								else if(PoziomPoszukiwania[playa] >= 6) //wsadzanie do stanowca
 								{
-									if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z))
+									new Float:z;
+									GetPlayerPos(playerid, z, z, z); // zeby nie wsadzali z recepcji
+									if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z) && !(PlayerToPoint(20.0,playerid,599.1960,-1489.5380,82.1648) && z < 84))
 									{
 								    	sendTipMessageEx(playerid, COLOR_GRAD3, "Ten gracz ma za du¿y WL alby wsadziæ go do zwyk³ej celi. WsadŸcie go do stanowego.");
 									}
