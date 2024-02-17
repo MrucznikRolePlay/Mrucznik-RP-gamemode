@@ -565,7 +565,7 @@ AC_AntyVehSpamLag()
 				}
 			}
 
-			// Je¿eli pojazdów zbitych w zwarte k³êbowisko jest nie mniej ni¿ 3, to podejmij odpowiednie dzia³ania
+			// Je¿eli pojazdów zbitych w zwarte k³êbowisko jest nie mniej ni¿ 4 (g³ówny pojazd 'v' i 3 inne), to podejmij odpowiednie dzia³ania
 			if(v_close_count >= 3)
 			{
 				v_to_respawn[v] = true;
@@ -602,15 +602,15 @@ AC_AntyVehSpamLag()
 						}
 					}
 				}
-			}
 
-			// Po rozprawieniu siê z potencjalnymi winowajcami, zrespawnuj auta w k³êbowisku
-			foreach(new v_respawn : Vehicle)
-			{
-				if(v_to_respawn[v_respawn])
+				// Po rozprawieniu siê z potencjalnymi winowajcami, zrespawnuj auta w k³êbowisku
+				foreach(new v_respawn : Vehicle)
 				{
-					unoccupiedVehToCheckAC[v_respawn] = false; // Nie ma sensu po raz kolejny sprawdzaæ tych aut, bo zosta³y one ju¿ zrespawnowane
-					RespawnVehicleEx(v_respawn);
+					if(v_to_respawn[v_respawn])
+					{
+						unoccupiedVehToCheckAC[v_respawn] = false; // Nie ma sensu po raz kolejny sprawdzaæ tych aut, bo zosta³y one ju¿ zrespawnowane
+						RespawnVehicleEx(v_respawn);
+					}
 				}
 			}
 
@@ -618,6 +618,8 @@ AC_AntyVehSpamLag()
 			{
 				unoccupiedVehToCheckPlayersAC[v][p] = false;
 			}
+
+			unoccupiedVehToCheckAC[v] = false;
 		}
 	}
 
