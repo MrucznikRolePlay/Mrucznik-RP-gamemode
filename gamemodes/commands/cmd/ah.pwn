@@ -72,7 +72,7 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /gotoadmin /getposp /gotopos /gotols /gotoszpital /gotolv");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /flip /rapidfly /unaj /undemorgan /obrazenia /rozwiaz");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /sethp /dmvon /dmvoff /gotosf /inwigilacja /rozkuj");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /lockdown /zweryfikuj");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /lockdown /zweryfikuj /napadoff /napadon /aulecz");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 5)
 	{
@@ -95,7 +95,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 20)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*20* ADMIN *** /noooc /demorgan /jail /gotoint /aulecz");
+		SendClientMessage(playerid, COLOR_GRAD4,"*20* ADMIN *** /noooc /demorgan /jail /gotoint");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 25)
 	{

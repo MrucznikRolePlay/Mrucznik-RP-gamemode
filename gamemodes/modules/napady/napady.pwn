@@ -104,7 +104,7 @@ Heist_UpdateMapIcon()
 			}
 			else
 			{
-				Heist_Icons[i] = CreateDynamicMapIcon(x, y, z, 0, 0x4284F5FF, -1, -1, i, -1, MAPICON_GLOBAL);
+				Heist_Icons[i] = CreateDynamicMapIcon(x, y, z, 0, 0xECF542FF, -1, -1, i, -1, MAPICON_GLOBAL);
 			}
 		}
 	}
