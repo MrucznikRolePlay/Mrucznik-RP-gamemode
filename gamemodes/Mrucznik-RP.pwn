@@ -1972,7 +1972,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					if(PoziomPoszukiwania[playerid] >= 1)
 					{
-						new price2 = PoziomPoszukiwania[playerid] * 1000;
+						new reward = PoziomPoszukiwania[playerid] * 5000;
 						new count, i = killerid;
 						if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
 						{
@@ -2023,11 +2023,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 									}
 								}
 
-								format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+								format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", reward);
 								GameTextForPlayer(i, string, 5000, 1);
 								PoziomPoszukiwania[i] = 0;
 								ClearCrime(i);
-								DajKase(i, price2);//moneycheat
+								DajKase(i, reward);//moneycheat
 								PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 								PlayerInfo[i][pDetSkill] += 2;
 								SendClientMessage(i, COLOR_GRAD2, "Skill + 2");

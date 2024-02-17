@@ -73,6 +73,8 @@ YCMD:wezzlecenie(playerid, params[], help)
 					    {
 					        if(playa != playerid)
 					        {
+								new deadReward = PoziomPoszukiwania[playa] * 5000;
+								new liveReward = PoziomPoszukiwania[playa] * 10000;
 					            if(PlayerToPoint(5.0,playerid,325.0463,306.9240,999.1484))
 					            {
 						    		if(PlayerInfo[playerid][pDetSkill] <= 50)
@@ -81,7 +83,7 @@ YCMD:wezzlecenie(playerid, params[], help)
 						    			{
 											lowcaz[playerid] = playa;
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Aby namierzyæ jego pozycje wpisz /znajdz. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
+									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Aby namierzyæ jego pozycje wpisz /znajdz. Za martwego otrzymasz: %d$ Za ¿ywego: %d$",giveplayer, deadReward, liveReward);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						    			}
 						    			else
@@ -95,7 +97,7 @@ YCMD:wezzlecenie(playerid, params[], help)
 							    		{
                                             lowcaz[playerid] = playa;
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
+									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d$ Za ¿ywego: %d$",giveplayer, deadReward, liveReward);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							    		}
 							    		else
@@ -109,7 +111,7 @@ YCMD:wezzlecenie(playerid, params[], help)
 						    			{
 						    			    lowcaz[playerid] = playa;
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
+									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d$ Za ¿ywego: %d$",giveplayer, deadReward, liveReward);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						    			}
 						    			else
@@ -123,7 +125,7 @@ YCMD:wezzlecenie(playerid, params[], help)
 						    			{
 						    			    lowcaz[playerid] = playa;
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
+									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d$ Za ¿ywego: %d$",giveplayer, deadReward, liveReward);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						    			}
 						    			else
@@ -137,7 +139,7 @@ YCMD:wezzlecenie(playerid, params[], help)
 						    			{
 						    			    lowcaz[playerid] = playa;
 						        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d000$ Za ¿ywego: %d$",giveplayer, PoziomPoszukiwania[playa], PoziomPoszukiwania[playa]*2500);
+									        format(string, sizeof(string), "Wzi¹³eœ zlecenie na %s. Za martwego otrzymasz: %d$ Za ¿ywego: %d$",giveplayer, deadReward, liveReward);
 									        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 										}
 										else
