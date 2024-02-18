@@ -8712,11 +8712,25 @@ SejfR_Add(frakcja, kasa)
     Log(sejfLog, INFO, "SEJF RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
 }
 
+Sejf_AddMats(frakcja, mats)
+{
+    Frakcja_Mats[frakcja]+=mats;
+    Sejf_Save(frakcja);
+	Log(sejfLog, INFO, "SEJF MATS FRAKCJA [%d] + [%d] - poprzednio [%d]", frakcja, mats, Frakcja_Mats[frakcja]);
+}
+
+SejfR_AddMats(frakcja, mats)
+{
+    Rodzina_Mats[frakcja]+=mats;
+    SejfR_Save(frakcja);
+    Log(sejfLog, INFO, "SEJF MATS RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, mats, Rodzina_Mats[frakcja]);
+}
+
 Sejf_Save(frakcja)
 {
     if(!SafeLoaded) return;
     new query[128];
-    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d WHERE `ID`=%d AND `typ`=1", Sejf_Frakcji[frakcja], frakcja);
+    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d WHERE `ID`=%d AND `typ`=1", Sejf_Frakcji[frakcja], Frakcja_Mats[frakcja], frakcja);
     if(MYSQL_SAVING) mysql_query(query);
 }
 
@@ -8724,20 +8738,24 @@ SejfR_Save(frakcja)
 {
     if(!SafeLoaded) return;
     new query[128];
-    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d WHERE `ID`=%d AND `typ`=2", Sejf_Rodziny[frakcja], frakcja);
+    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d WHERE `ID`=%d AND `typ`=2", Sejf_Rodziny[frakcja], Rodzina_Mats[frakcja], frakcja);
     if(MYSQL_SAVING) mysql_query(query);
+}
+
+SejfR_Show(playerid) {
+	ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ\nWyp³aæ materia³y\nWp³aæ materia³y", "Wybierz", "WyjdŸ");
 }
 
 Sejf_Load()
 {
-    new query[128], id, typ, kasa, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
+    new query[128], id, typ, kasa, mats, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
     mysql_query("SELECT * FROM `mru_sejfy`");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>ddd", id, typ, kasa);
-        if(typ == 1) Sejf_Frakcji[id] = kasa, validF[id] = true;
-        else if(typ == 2) Sejf_Rodziny[id] = kasa, validR[id] = true;
+        sscanf(query, "p<|>dddd", id, typ, kasa, mats);
+        if(typ == 1) Sejf_Frakcji[id] = kasa, Frakcja_Mats[id] = mats, validF[id] = true;
+        else if(typ == 2) Sejf_Rodziny[id] = kasa, Rodzina_Mats[id] = mats, validR[id] = true;
         SafeLoaded = true;
     }
     mysql_free_result();

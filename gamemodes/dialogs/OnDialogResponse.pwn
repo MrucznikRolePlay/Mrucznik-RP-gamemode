@@ -11266,145 +11266,189 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    if(response)
 		    {
                 new lider = GetPlayerOrg(playerid);
+				new stan[256];
+				format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
+				new stanmats[128];
+				format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
 		        switch(listitem)
 		        {
 		            case 0:
 		            {
-                        new stan[128];
-                        format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
-		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_LIST, "Sejf rodzinny - stan", stan, "Wróæ", "Wróæ");
+						format(stan, sizeof(stan), "%s\n%s", stan, stanmats);
+		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_TABLIST, "Sejf rodzinny - stan", stan, "Wróæ", "Wróæ");
 		            }
 		            case 1:
-		            {
-		                new stan[128];
-		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
 						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-		            }
 		            case 2:
-		            {
-		                new stan[128];
-		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
 						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp³acanie", stan, "Wp³aæ", "Wróæ");
-		            }
+					case 3:
+						ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wyp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+					case 4: {
+						format(stan, sizeof(stan), "%s\nIloœæ materia³ów które posiadasz:\t\t{008080}%d", stanmats, PlayerInfo[playerid][pMats]);
+						ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wp³acanie", stan, "Wp³aæ", "Wróæ");
+					}
 		        }
 		    }
 		}
 		if(dialogid == 496)
 		{
-		    if(response || !response)
-		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-		    }
+			SejfR_Show(playerid);
 		}
 		if(dialogid == 497)
 		{
 		    if(response)
 		    {
-                if(!IsNumeric(inputtext))
-                {
-                    SendClientMessage(playerid, -1, "To nie jest liczba!");
-                    ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-                    return 1;
-                }
-                new kasa = strval(inputtext);
+                new kasa = FunkcjaK(inputtext);
                 new lider = GetPlayerOrg(playerid);
-		        if((strlen(inputtext) >= 1 && strlen(inputtext) <= 9) && kasa > 0 )
-		        {
-		            if(kasa <= Sejf_Rodziny[lider])
-		            {
-		                new nick[MAX_PLAYER_NAME];
-		                GetPlayerName(playerid, nick, sizeof(nick));
+				if(kasa > 0 && kasa <= Sejf_Rodziny[lider])
+				{
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
 
-                        SejfR_Add(lider, -kasa);
-						PlayerInfo[playerid][pAccount] += kasa;
+					SejfR_Add(lider, -kasa);
+					PlayerInfo[playerid][pAccount] += kasa;
 
-			            new komunikat[256];
-			            format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
-			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            Log(payLog, INFO, "%s wyp³aci³ z sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
-							GetPlayerLogName(playerid),
-							lider,
-							kasa,
-							Sejf_Rodziny[lider]);
-                        SejfR_Save(lider);
-						ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-					}
-					else
-					{
-	    				SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
-					    new stan[256];
-		             	format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-					}
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wyp³aci³ z sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
+						GetPlayerLogName(playerid),
+						lider,
+						kasa,
+						Sejf_Rodziny[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
 				}
-		        else
-		        {
-		            new stan[256];
-	             	format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
+				else
+				{
+					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
+					new stan[256];
+					format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
 					ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-		        }
+				}
 		    }
-		    if(!response)
+		    else
 		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
+		        SejfR_Show(playerid);
 		    }
 		}
 		if(dialogid == 498)
 		{
 		    if(response)
 		    {
-                if(!IsNumeric(inputtext))
-                {
-                    SendClientMessage(playerid, -1, "To nie jest liczba!");
-                    ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-                    return 1;
-                }
-                new kasa = strval(inputtext);
+                new kasa = FunkcjaK(inputtext);
                 new lider = GetPlayerOrg(playerid);
-		        if((strlen(inputtext) >= 1 && strlen(inputtext) <= 9) && kasa > 0 )
-		        {
-		            if(kaska[playerid] >= kasa)
-		            {
-                        if(Sejf_Rodziny[lider] + kasa > 1_000_000_000)
-                        {
-                            SendClientMessage(playerid, -1, "Sejf siê przepe³ni!");
-                            return 1;
-                        }
-		                new nick[MAX_PLAYER_NAME];
-		                GetPlayerName(playerid, nick, sizeof(nick));
-
-		                ZabierzKase(playerid, kasa);
-                        SejfR_Add(lider, kasa);
-
-			            new komunikat[256];
-			            format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
-			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            Log(payLog, INFO, "%s wp³aci³ do sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
-							GetPlayerLogName(playerid),
-							lider,
-							kasa,
-							Sejf_Rodziny[lider]);
-                        SejfR_Save(lider);
-			            ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-					}
-					else
+				if(kasa > 0 && kaska[playerid] >= kasa)
+				{
+					if(Sejf_Rodziny[lider] + kasa > 1_000_000_000)
 					{
-					    SendClientMessage(playerid, COLOR_P@, "Nie masz a¿ tyle przy sobie !");
-					    new stan[256];
-		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp³acanie", stan, "Wp³aæ", "Wróæ");
+						SendClientMessage(playerid, -1, "Sejf siê przepe³ni!");
+						return 1;
 					}
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
+
+					ZabierzKase(playerid, kasa);
+					SejfR_Add(lider, kasa);
+
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wp³aci³ do sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
+						GetPlayerLogName(playerid),
+						lider,
+						kasa,
+						Sejf_Rodziny[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
 				}
 		        else
 		        {
+					SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloœæ!");
 		            new stan[256];
 	                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
 					ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp³acanie", stan, "Wp³aæ", "Wróæ");
 		        }
 		    }
-		    if(!response)
+		    else
 		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
+		        SejfR_Show(playerid);
+		    }
+		}
+		if(dialogid == 5430)
+		{
+		    if(response)
+		    {
+                new mats = FunkcjaK(inputtext);
+                new lider = GetPlayerOrg(playerid);
+				if(mats > 0 && mats <= Rodzina_Mats[lider])
+				{
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
+
+					SejfR_AddMats(lider, -mats);
+					PlayerInfo[playerid][pMats] += mats;
+
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d matsów z sejfu rodzinnego. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wyp³aci³ z sejfu rodziny %d %d mats. Nowy stan: %d", 
+						GetPlayerLogName(playerid),
+						lider,
+						mats,
+						Rodzina_Mats[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
+					new stanmats[128];
+					format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
+					ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wyp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+				}
+		    }
+		    else
+		    {
+		        SejfR_Show(playerid);
+		    }
+		}
+		if(dialogid == 5431)
+		{
+		    if(response)
+		    {
+                new mats = FunkcjaK(inputtext);
+                new lider = GetPlayerOrg(playerid);
+				if(mats > 0 && PlayerInfo[playerid][pMats] >= mats)
+				{
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
+
+					PlayerInfo[playerid][pMats] -= mats;
+					SejfR_AddMats(lider, mats);
+
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d mats do sejfu rodzinnego. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wp³aci³ do sejfu rodziny %d %d mats. Nowy stan: %d", 
+						GetPlayerLogName(playerid),
+						lider,
+						mats,
+						Rodzina_Mats[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
+				}
+		        else
+		        {
+		            SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloœæ!");
+					new stanmats[256];
+					format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d\nIloœæ materia³ów które posiadasz:\t\t{008080}%d", Rodzina_Mats[lider], PlayerInfo[playerid][pMats]);
+					ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+		        }
+		    }
+		    else
+		    {
+		        SejfR_Show(playerid);
 		    }
 		}
         if(dialogid == 666)
