@@ -5562,6 +5562,7 @@ ZaladujDomy()
 				Dom[i][hS_A9] = dini_Int(string, "S_A9");
 				Dom[i][hS_A10] = dini_Int(string, "S_A10");
 				Dom[i][hS_A11] = dini_Int(string, "S_A11");
+				Dom[i][hIkonka] = -1;
 				if(Dom[i][hKupiony] == 0)
 				{
 				    Dom[i][hPickup] = CreateDynamicPickup(1273, 1, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], -1, -1, -1, 125.0);
@@ -5943,7 +5944,8 @@ StworzDom(playerid, interior, oplata)
 		Dom[dld][hS_A10] = 0;
 		Dom[dld][hS_A11] = 0;
 	    Dom[dld][hPickup] = CreateDynamicPickup(1273, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    Dom[dld][hIkonka] = -1
+	    //Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
 		dini_IntSet("Domy/NRD.ini", "NrDomow", dld);
 		new intcena = IntInfo[Dom[dld][hDomNr]][Cena];
 		new Float:koxX = mnoznik/10;
@@ -6002,9 +6004,9 @@ Dom_ChangeInt(playerid, dld, interior)
 	Dom[dld][hCena] = floatround(cenadomu, floatround_ceil);
 
     DestroyDynamicPickup(Dom[dld][hPickup]);
-	if(Dom[dld][hIkonka] != 0) DestroyDynamicMapIcon(Dom[dld][hIkonka]);
+	if(Dom[dld][hIkonka] != -1) DestroyDynamicMapIcon(Dom[dld][hIkonka]);
     Dom[dld][hPickup] = CreateDynamicPickup(1239, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
-    Dom[dld][hIkonka] = 0;
+    Dom[dld][hIkonka] = -1;
 
 	format(string, sizeof(string), "Zmiana Interioru - OK. || Dom %d || NrDom %d || Interior: %d || Cena %d", dld, Dom[dld][hDomNr], interior, Dom[dld][hCena]);
 	SendClientMessage(playerid, COLOR_NEWS, string);
@@ -6255,7 +6257,8 @@ L_StworzDom(playerid, kategoria, oplata)
 		Dom[dld][hS_A10] = 0;
 		Dom[dld][hS_A11] = 0;
 		Dom[dld][hPickup] = CreateDynamicPickup(1273, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    //Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    Dom[dld][hIkonka] = -1;
 		dini_IntSet("Domy/NRD.ini", "NrDomow", dld);
 		new intcena = IntInfo[Dom[dld][hDomNr]][Cena];
 		new Float:koxX = mnoznik/10;
@@ -6333,9 +6336,9 @@ KupowanieDomu(playerid, dom, platnosc)
 		Dom[dom][hKupiony] = 1;
 		Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
 		DestroyDynamicPickup(Dom[dom][hPickup]);
-		DestroyDynamicMapIcon(Dom[dom][hIkonka]);
+		if(Dom[dom][hIkonka] != -1) DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1239, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dom][hIkonka] = 0;
+	    Dom[dom][hIkonka] = -1;
 	    SetPlayerPos(playerid, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]);
 	    SetPlayerInterior(playerid, Dom[dom][hInterior]);
 	    SetPlayerVirtualWorld(playerid, Dom[dom][hVW]);
@@ -6444,9 +6447,9 @@ ZlomowanieDomu(playerid, dom)
 		Dom[dom][hS_A11] = 0;
 		Dom[dom][hZbrojownia] = 0;
 		DestroyDynamicPickup(Dom[dom][hPickup]);
-		DestroyDynamicMapIcon(Dom[dom][hIkonka]);
+		if(Dom[dom][hIkonka] != -1) DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1273, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dom][hIkonka] = CreateDynamicMapIcon(Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    Dom[dom][hIkonka] = -1;
 		ZapiszDom(dom);
 		//
 		if(playerid != 9999)

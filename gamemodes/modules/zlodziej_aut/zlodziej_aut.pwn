@@ -548,14 +548,9 @@ CarThiefMissionGoal(playerid)
 	PlayerInfo[playerid][pCarTime] = cooldown;
 
 	RemovePlayerFromVehicleEx(playerid);
-	if(stole_a_car_lspd_bonus[playerid] == 3)
-	{
-		RemoveDeluxeCarForStealing(veh_id);
-	}
-	else
-	{
-		ReloadCarForStealing(veh_id);
-	}
+	SetVehicleParamsEx(veh_id, 0, 0, 0, 1, 0, 0, 0);
+	new is_deluxe = (stole_a_car_lspd_bonus[playerid] == 3);
+	SetTimerEx("CarThiefUnspawnStolenCar", 5000, false, "db", veh_id, is_deluxe);
 
 	EndCarThiefMission(playerid);
 

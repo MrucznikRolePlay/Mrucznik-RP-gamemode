@@ -5451,12 +5451,7 @@ PayDay()
 	}
     printf("-> Updating GangZones");
     Zone_GangUpdate(true);
-    printf("-> Removing Houses MapIcons");
 
-	for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
-	{
-		DestroyDynamicMapIcon(Dom[i][hIkonka]);
-	}
 	new hour,minuite,second;
 	new rand = random(80);
 	gettime(hour,minuite,second);
