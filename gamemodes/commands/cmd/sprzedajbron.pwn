@@ -433,6 +433,23 @@ YCMD:sprzedajbron(playerid, params[], help)
                                     SendClientMessage(playerid, COLOR_RED, "Ten gracz nie posiada licencji na broñ, mo¿esz sprzedaæ mu tylko bronie dla 1 skillu !");
                                     return 1;
                                 }
+                                new cenacraftu = 0;
+                                if(IsASklepZBronia(playerid)) {
+                                    new gsid = GetPlayerOrg(playerid)-21;
+                                    cenacraftu = GS_BronCena[gsid][weapon[playerid]];
+                                    if(cenacraftu > 0) {
+                                        new str[128];
+                                        if(kaska[playerid] < cenacraftu) {
+                                            format(str, 128, "Stworzenie tej broni kosztuje $%d. Nie staæ cie na to!", cenacraftu);
+                                            SendClientMessage(playerid, COLOR_GRAD1, str);
+                                            return 1;
+                                        }
+                                        ZabierzKase(playerid, cenacraftu);
+                                        SejfR_Add(gsid+21, cenacraftu);
+                                        format(str, 128, "Pobrano od ciebie $%d za stworzenie broni. Kwota trafi³a do sejfu organizacji", cenacraftu);
+                                        SendClientMessage(playerid, COLOR_BLUE, str);
+                                    }
+                                }
                                 if(weapon[playerid] == 39)
                                 {
                                     GivePlayerWeapon(giveplayerid, 40, 1);
@@ -524,7 +541,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                                     case 11: format(frakcja, sizeof(frakcja), "DMV");
                                     default: format(frakcja, sizeof(frakcja), "CYWIL");
                                 }
-                                format(stringdiscord, sizeof(stringdiscord), " Diler %s da³ graczowi %s *[%s]* %s.", sendername, giveplayer, frakcja, x_weapon);
+                                format(stringdiscord, sizeof(stringdiscord), " Diler %s da³ graczowi %s *[%s]* %s. Do sejfu trafi³o $%i", sendername, giveplayer, frakcja, x_weapon, cenacraftu);
                                 if(GetPlayerOrg(playerid) == 21) SendDiscordMessage(DISCORD_LOG_GSWF, stringdiscord);//wf
                                 else if(GetPlayerOrg(playerid) == 22) SendDiscordMessage(DISCORD_LOG_GSCM, stringdiscord);//cm
                                 else if(GetPlayerOrg(playerid) == 23) SendDiscordMessage(DISCORD_LOG_GSLS, stringdiscord);//ls
