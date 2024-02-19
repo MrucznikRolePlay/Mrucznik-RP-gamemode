@@ -5944,7 +5944,7 @@ StworzDom(playerid, interior, oplata)
 		Dom[dld][hS_A10] = 0;
 		Dom[dld][hS_A11] = 0;
 	    Dom[dld][hPickup] = CreateDynamicPickup(1273, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dld][hIkonka] = -1
+	    Dom[dld][hIkonka] = -1;
 	    //Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
 		dini_IntSet("Domy/NRD.ini", "NrDomow", dld);
 		new intcena = IntInfo[Dom[dld][hDomNr]][Cena];
