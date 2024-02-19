@@ -25,6 +25,9 @@
 //------------------<[ Implementacja: ]>-------------------
 command_gspanel_Impl(playerid)
 {
+    if(!IsASklepZBronia(playerid) || !orgIsLeader(playerid))
+        return noAccessMessage(playerid);
+    dgspanel(playerid);
     return 1;
 }
 

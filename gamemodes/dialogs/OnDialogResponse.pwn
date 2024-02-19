@@ -87,6 +87,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
+	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
 	//2.7.5 - nadal nie 3.0
 	if(dialogid == DIALOGID_UNIFORM_FRAKCJA)

@@ -23,5 +23,8 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define D_GSPANEL 20123
+#define D_GSPANEL_BRONIE 20124
+#define D_GSPANEL_BRONIE_SET 20125
 
 //end

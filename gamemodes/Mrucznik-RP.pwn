@@ -353,6 +353,8 @@ public OnGameModeInit()
 	//discordconnect
 	DiscordConnectInit();
 
+	LoadGsPanelPrices();
+
 
 	//AFK timer
 	for(new i; i<MAX_PLAYERS; i++)
