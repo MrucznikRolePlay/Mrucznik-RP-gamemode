@@ -43,6 +43,7 @@ LoadGsPanelPrices() {
 		}
 	}
 	mysql_free_result();
+	LoadMats3DText();
 }
 SaveGsPanelPrice(gsid, gunid) {
 	new str[256];

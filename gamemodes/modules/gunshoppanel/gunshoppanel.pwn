@@ -26,8 +26,26 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+stock LoadMats3DText() {
+    for(new i=0; i<3; i++) {
+        GS_Text[i] = CreateDynamic3DTextLabel("/sprzedajmatsbot", COLOR_BLUE, GS_MatsBot[i][0], GS_MatsBot[i][1], GS_MatsBot[i][2], 6.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, GS_MatsBotVw[i]);
+        UpdateMats3DText(i);
+    }
+}
+stock UpdateMats3DText(gsid) {
+    new cena = GS_MatsCena[gsid];
+    new str[128];
+    if(cena)
+        format(str, 128, "/sprzedajmatsbot\nCena za 5000 mats: {00FFFF}$%i", cena*5000);
+    else
+        strcat(str, "/sprzedajmatsbot\n{FF0000}Sprzeda¿ wy³¹czona!");
+    UpdateDynamic3DTextLabelText(GS_Text[gsid], COLOR_BLUE, str);
+}
+
 stock dgspanel(playerid) {
-    ShowPlayerDialogEx(playerid, D_GSPANEL, DIALOG_STYLE_LIST, "Panel gunshopu", "Ustaw ceny broni\nUstaw ceny mats u bota", "Wybierz", "Anuluj");
+    new caption[64];
+    format(caption, 64, "Panel gunshopu - %s", OrgInfo[GetPlayerOrg(playerid)][o_Name]);
+    ShowPlayerDialogEx(playerid, D_GSPANEL, DIALOG_STYLE_LIST, caption, "Ustaw ceny broni\nUstaw ceny mats u bota", "Wybierz", "Anuluj");
 }
 stock dgspanel_bronie(playerid) {
 	new gsid = GetPlayerOrg(playerid)-21;
