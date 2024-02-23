@@ -124,7 +124,7 @@ ReloadDeluxeCarsForStealing()
 	for(new i = 0; i < sizeof(deluxe_cars_for_stealing_ids); i++)
 	{
 		new deluxe_veh_id = deluxe_cars_for_stealing_ids[i];
-		if(!used[deluxe_veh_id])
+		if(deluxe_veh_id != -1 && !used[deluxe_veh_id])
 		{
 			RemoveDeluxeCarForStealing(deluxe_veh_id);
 		}
@@ -139,6 +139,7 @@ ReloadCarForStealing(veh_id)
 	DestroyVehicle(veh_id);
 	AddCar(veh_id - 1);
 	SetVehicleNumberPlate(veh_id, "{1F9F06}M-RP");
+	Gas[veh_id] = GasMax;
 }
 
 GetLspdDetectThresholds(vehicleid, &short, &long)
@@ -362,6 +363,14 @@ UkradnijVerify(playerid, veh_id)
 	if(stole_a_car[playerid])
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "U¿y³eœ ju¿ /ukradnij w tym pojeŸdzie!");
+		return 0;
+	}
+
+	new Float:x, Float:y, Float:z;
+	GetPlayerPos(playerid, x, y, z);
+	if(x < 0.0 || y > -790)
+	{
+		sendTipMessageEx(playerid, COLOR_GREY, "U¿yj /ukradnij w Los Santos!");
 		return 0;
 	}
 

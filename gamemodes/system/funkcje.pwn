@@ -879,10 +879,7 @@ public CountDownVehsRespawn()
 			{
 				if(v <= CAR_End)
 				{
-					DestroyVehicle(v);
-					carselect = GetRandomVehicleForStealingModel();
-					AddCar(v - 1);
-					SetVehicleNumberPlate(v, "{1F9F06}M-RP");
+					ReloadCarForStealing(v);
 				}
 				else
 				{
@@ -7912,6 +7909,7 @@ AddCar(car)
 {
 	new randcol = random(126);
 	new randcol2 = 1;
+	new carselect = GetRandomVehicleForStealingModel();
 	new id = AddStaticVehicleEx(RandCars[carselect][0], CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], randcol, randcol2, -1);
 	return id;
 }
@@ -11841,7 +11839,7 @@ public TourCamera(playerid, step)
 
 GetRandomVehicleForStealingModel()
 {
-	new randa = random(53);
+	new randa = true_random(53);
 	new model;
 
 	if(randa == 0)
@@ -11871,7 +11869,6 @@ ZaladujSamochodyDoKradziezy()
 
     for(new i = 0; i < 165; i++)
 	{
-		carselect = GetRandomVehicleForStealingModel();
         id = AddCar(i);
     }
 

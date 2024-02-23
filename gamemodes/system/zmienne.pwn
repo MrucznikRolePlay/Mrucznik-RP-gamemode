@@ -1026,7 +1026,6 @@ new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
 new DomOgladany[MAX_PLAYERS];//SYSTEM DOMÓW BY MRUCZNIK
-new carselect;
 new cbjstore[128];
 new motd[256];
 new ghour = 0;
