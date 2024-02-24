@@ -39,20 +39,7 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
 
     new vehicleID = GetPlayerVehicleID(playerid);
     new vehicleUID = VehicleUID[vehicleID][vUID];
-    new lider = PlayerInfo[playerid][pLider];
-    new org = GetPlayerOrg(playerid);
-    new string[512];
-    new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
-        lider == CarData[vehicleUID][c_Owner] && 
-        lider > 0;
-    new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
-        org == CarData[vehicleUID][c_Owner];
-
-    format(string, sizeof(string), "OWNER_FAMILY %d ORGLEADER %d c_Owner veh %d orgOwner %d", CAR_OWNER_FAMILY, orgIsLeader(playerid), CarData[vehicleUID][c_Owner], orgOwner);
-    sendTipMessage(playerid, string);
-    format(string, sizeof(string), "Player Org %d, Player Org %d", gPlayerOrg[playerid], GetPlayerOrg(playerid));
-    sendTipMessage(playerid, string);
-	if(!liderOwner && !orgOwner)
+	if(!IsPlayerOwnFractionCar(playerid, vehicleID))
 	{
         sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Twojej organizacji!");
         return 1;
@@ -65,8 +52,6 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
         command_lidercar_przemaluj(playerid, vehicleID, opcje);
     } else if(strcmp(akcja, "ranga", true) == 0) {
         command_lidercar_ranga(playerid, vehicleUID, opcje);
-    } else if(strcmp(akcja, "opis", true) == 0) {
-        command_lidercar_opis(playerid, vehicleID, vehicleUID, opcje);
     } else {
         sendErrorMessage(playerid, "Niepoprawna opcja!");
         StaryCzas[playerid] -= 200;
@@ -127,26 +112,6 @@ command_lidercar_ranga(playerid, vehicleUID, opcje[256])
     format(string, sizeof(string), "Od teraz tylko osoby z %d rang¹ bêd¹ mog³y u¿ywaæ tego pojazdu.", rank);
     SendClientMessage(playerid, COLOR_PINK, string);
     return 1;
-}
-
-command_lidercar_opis(playerid, vehicleID, vehicleUID, opcje[256])
-{
-    sendTipMessage(playerid, "Opcja bêdzie dostêpna w nastêpnej aktualizacji (v2.7.12)");
-    return 1;
-
-    new description[256];
-    if(sscanf(opcje, "s[256]", description))
-    {
-        sendTipMessage(playerid, "U¿yj /lidercar opis [opis pojazdu]");
-        return 1;
-    }
-
-    // change description
-
-    // send message
-    new string[256];
-    format(string, sizeof(string), "Nowy opis pojazdu: %s", description);
-    SendClientMessage(playerid, COLOR_PINK, string);
 }
 
 //end
