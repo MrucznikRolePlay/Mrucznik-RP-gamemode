@@ -27,9 +27,9 @@
 #define HEIST_MINIMUMLSPD       4 // onDuty
 #define HEIST_PAYOUT            55000 // gwarantowana dzia³ka
 #define HEIST_RANDPAYOUT        25000 // dodatek do wygranej, losowa liczba
-#define HEIST_STEAL_TIME        3 * 60 // etap stacjonarny w sekundach
-#define HEIST_ESCAPE_TIME       10 * 49 // iloœæ sekund do wygrania etapu ucieczki i gwarancji otrzymiania pieniêdzy
-#define HEIST_COOLDOWNS         28 // iloœæ minut do kolejnego napadu, globalna blokada
+#define HEIST_STEAL_TIME        3 * 80 // etap stacjonarny w sekundach
+#define HEIST_ESCAPE_TIME       10 * 35 // iloœæ sekund do wygrania etapu wolnej ucieczki, przed 30 sekundowym(3 potwierdzenia x 10s) checkiem czy LSPD jest w poblizu
+#define HEIST_COOLDOWNS         35 // iloœæ minut do kolejnego napadu, globalna blokada
 #define HEIST_MSG_STEAL         1
 #define HEIST_MSG_ESCAPE        2
 #define HEIST_MSG_GPSUPDATE     3
