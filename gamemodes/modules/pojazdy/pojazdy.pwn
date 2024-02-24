@@ -592,6 +592,20 @@ IsCarOwner(playerid, vehicle, bool:kluczyki=false)
     return 0;
 }
 
+IsPlayerOwnFractionCar(playerid, vehicleID)
+{
+    new vehicleUID = VehicleUID[vehicleID][vUID];
+    new lider = PlayerInfo[playerid][pLider];
+    new org = GetPlayerOrg(playerid);
+    new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
+        lider == CarData[vehicleUID][c_Owner] && 
+        lider > 0;
+    new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
+        org == CarData[vehicleUID][c_Owner];
+
+    return liderOwner || orgOwner
+}
+
 Car_IsValid(vehicleid)
 {
     if(VehicleUID[vehicleid][vUID] == 0) return 0;

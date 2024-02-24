@@ -38,21 +38,7 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
     }
 
     new vehicleID = GetPlayerVehicleID(playerid);
-    new vehicleUID = VehicleUID[vehicleID][vUID];
-    new lider = PlayerInfo[playerid][pLider];
-    new org = GetPlayerOrg(playerid);
-    new string[512];
-    new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
-        lider == CarData[vehicleUID][c_Owner] && 
-        lider > 0;
-    new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
-        org == CarData[vehicleUID][c_Owner];
-
-    format(string, sizeof(string), "OWNER_FAMILY %d ORGLEADER %d c_Owner veh %d orgOwner %d", CAR_OWNER_FAMILY, orgIsLeader(playerid), CarData[vehicleUID][c_Owner], orgOwner);
-    sendTipMessage(playerid, string);
-    format(string, sizeof(string), "Player Org %d, Player Org %d", gPlayerOrg[playerid], GetPlayerOrg(playerid));
-    sendTipMessage(playerid, string);
-	if(!liderOwner && !orgOwner)
+	if(!IsPlayerOwnFractionCar(playerid, vehicleID))
 	{
         sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Twojej organizacji!");
         return 1;
