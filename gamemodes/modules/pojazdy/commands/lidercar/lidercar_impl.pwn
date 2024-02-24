@@ -38,6 +38,7 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
     }
 
     new vehicleID = GetPlayerVehicleID(playerid);
+    new vehicleUID = VehicleUID[vehicleID][vUID];
 	if(!IsPlayerOwnFractionCar(playerid, vehicleID))
 	{
         sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Twojej organizacji!");

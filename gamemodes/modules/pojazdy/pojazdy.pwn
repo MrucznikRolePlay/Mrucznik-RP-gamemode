@@ -603,7 +603,7 @@ IsPlayerOwnFractionCar(playerid, vehicleID)
     new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
         org == CarData[vehicleUID][c_Owner];
 
-    return liderOwner || orgOwner
+    return liderOwner || orgOwner;
 }
 
 Car_IsValid(vehicleid)

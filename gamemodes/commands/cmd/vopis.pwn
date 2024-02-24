@@ -41,8 +41,8 @@ YCMD:vopis(playerid, params[], help)
 		sendTipMessage(playerid, "Musisz byæ w pojeŸdzie aby u¿yæ /vopis.");
     }
 
-    new vehicleid = GetPlayerVehicleID(playerid);
-    new isCarOwner = IsCarOwner(playerid, vehicleid) || IsPlayerOwnFractionCar(playerid, vehicleID);
+    new vehicleID = GetPlayerVehicleID(playerid);
+    new isCarOwner = IsCarOwner(playerid, vehicleID) || IsPlayerOwnFractionCar(playerid, vehicleID);
 
     if(strlen(var) == 4 && (strcmp(var, "usuñ", true) == 0 || strcmp(var, "usun", true) == 0))
     {
@@ -68,21 +68,20 @@ YCMD:vopis(playerid, params[], help)
         }
         else
         {
-            if(vehicleid == 0) return 1;
+            if(vehicleID == 0) return 1;
             if(!isCarOwner) return SendClientMessage(playerid, COLOR_GRAD2, " Ten pojazd nie nale¿y do Ciebie.");
-            if(!CarOpis_Usun(playerid, vehicleid, true)) return SendClientMessage(playerid, -1, "Opis: Pojazd nie posiada opisu.");
+            if(!CarOpis_Usun(playerid, vehicleID, true)) return SendClientMessage(playerid, -1, "Opis: Pojazd nie posiada opisu.");
         }
         return 1;
     }
 
     if(PlayerInfo[playerid][pBP] == 0)
     {
-        new vehicleid = GetPlayerVehicleID(playerid);
-        if(vehicleid == 0) return 1;
+        if(vehicleID == 0) return 1;
         if(!isCarOwner) return SendClientMessage(playerid, COLOR_GRAD2, " Ten pojazd nie nale¿y do Ciebie.");
 
         new opis[128];
-        format(opis, sizeof opis, "%s", CarDesc[vehicleid]);
+        format(opis, sizeof opis, "%s", CarDesc[vehicleID]);
         ReColor(opis);
         
         new lStr[256];
