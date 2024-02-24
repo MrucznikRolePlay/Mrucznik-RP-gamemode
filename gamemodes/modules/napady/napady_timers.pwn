@@ -124,7 +124,7 @@ public Heist_Escape()
 	{
 		Heist_Lost();
 	}
-	if(Heist_MapIconCounter == 2)
+	if(Heist_MapIconCounter == 2) //10s
 	{
 		Heist_UpdateMapIcon();
 		Heist_MapIconCounter = 0;
@@ -183,12 +183,14 @@ public Heist_LosePursuit()
 	{
 		Heist_Lost();
 	}
-	if(Heist_MapIconCounter == 5)
+	if(Heist_MapIconCounter == 3) //30s
 	{
 		Heist_UpdateMapIcon();
 		Heist_MapIconCounter = 0;
 	}
-
+	else
+		Heist_MapIconCounter++;
+	
 	new warning[48];
 	new time;
 	for(new i = 0; i < Heist_AttackersCount; i++)

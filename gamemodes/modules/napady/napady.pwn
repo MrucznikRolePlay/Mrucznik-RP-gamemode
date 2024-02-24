@@ -45,6 +45,8 @@ Heist_EligibleToContinue(attackerid)
 		return 0;
 	if(Kajdanki_JestemSkuty[playerid] > 0)
 		return 0;
+	if(!IsPlayerConnected(playerid))
+		return 0;
 	
 	return 1;
 }
@@ -124,7 +126,7 @@ Heist_UpdateMapIcon()
 	GetVehiclePos(Heist_CurrentVehicleid, x, y, z);
 	foreach(new i : Player)
 	{
-		if(IsPlayerConnected(i) && OnDuty[i] && (PlayerInfo[i][pLider] == FRAC_LSPD || PlayerInfo[i][pMember] == FRAC_LSPD || leader == FRAC_FBI || member == FRAC_FBI))
+		if(IsPlayerConnected(i) && OnDuty[i] && (PlayerInfo[i][pLider] == FRAC_LSPD || PlayerInfo[i][pMember] == FRAC_LSPD || PlayerInfo[i][pMember] == FRAC_FBI || PlayerInfo[i][pLider] == FRAC_FBI))
 		{
 			if(IsValidDynamicMapIcon(Heist_Icons[i]))
 			{
@@ -328,6 +330,21 @@ Heist_ProcessEscape()
 	Heist_Notify(HEIST_MSG_GPSUPDATE);
 }
 
-
+Heist_ProcessLosePursuit()
+{
+	new playerid;
+	for(new i = 0; i < Heist_AttackersCount; i++)
+	{
+		playerid = Heist_Attackers[i];
+		if(playerid != -1)
+		{
+			SendClientMessage(playerid, COLOR_RED, ">> Ucieknij jak najdalej od LSPD by zakoñczyæ napad!");
+			PlayerPlaySound(playerid, 1149, 0.0, 0.0, 0.0);
+		}
+	}
+	KillTimer(Heist_Timers);
+	Heist_Timers = SetTimer("Heist_LosePursuit",10000,true);
+	Heist_UpdateMapIcon();
+}
 //end
 
