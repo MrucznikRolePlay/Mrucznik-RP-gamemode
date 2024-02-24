@@ -14279,42 +14279,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		return 1;
 	}
 
-	if(dialogid == D_MECH_SPRZEDAZ_FIXKIT)
-	{
-		new id = GetPVarInt(playerid, "FixKitOffer");
-		if(response)
-		{
-			if(kaska[playerid] < 15000)
-			{
-				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
-				return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
-			}
-			else
-			{
-				SendClientMessage(id, 0x0080D0FF, sprintf("%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", GetNick(playerid)));
-				SendClientMessage(playerid, 0x00FF00FF, sprintf("Kupi³eœ zestaw od mechanika %s za 15000$", GetNick(id)));
-				ZabierzKase(playerid, 15000);
-				DajKase(id, 15000);
-				PlayerInfo[playerid][pFixKit]++;
-				PlayerInfo[id][pMechSkill]++;
-                if(PlayerInfo[id][pMechSkill] == 50)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                else if(PlayerInfo[id][pMechSkill] == 100)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                else if(PlayerInfo[id][pMechSkill] == 200)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                else if(PlayerInfo[id][pMechSkill] == 400)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-			}
-		}
-		else
-		{
-			SendClientMessage(id, 0xFF0030FF, sprintf("Gracz %s nie zgodzi³ siê na kupno zestawu.", GetNick(playerid)));
-		}
-		DeletePVar(playerid, "FixKitOffer");
-		return 1;
-	}
-
 	if(dialogid == D_UZYCIE_APTECZKI)
 	{
 		new string[144];
