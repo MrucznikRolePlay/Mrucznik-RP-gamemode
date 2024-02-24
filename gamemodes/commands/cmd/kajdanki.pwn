@@ -68,6 +68,16 @@ YCMD:kajdanki(playerid, params[], help)
                     sendTipMessage(playerid, "Nie mo¿esz skuæ administratora!");
                     return 1;
                 }
+                if(PlayerInfo[playerid][pMember] != FRAC_FBI && (PlayerInfo[giveplayerid][pMember] == 1 && OnDuty[giveplayerid]))
+                {
+                    sendTipMessage(playerid, "Tylko FBI mo¿e skuæ policjanta na s³u¿bie.");
+                    return 1;
+                }
+                if(PlayerInfo[playerid][pMember] == FRAC_FBI && PlayerInfo[giveplayerid][pMember] == FRAC_FBI)
+                {
+                    sendTipMessage(playerid, "Nie mo¿esz skuwaæ agentów!");
+                    return 1;
+                }
                 if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
                 {
                     if(GetPlayerState(playerid) == 1 && GetPlayerState(giveplayerid) == 1)

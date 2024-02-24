@@ -415,3 +415,66 @@ timer HallucinationsOff[60000](playerid)
 {
 	SetPlayerWeather(playerid, ServerWeather);
 }
+
+// FANATYK WÊDKARSTWA
+public RzucTekstemZPasty(playerid, disease, value)
+{
+	static texty[][] = {
+		"SZCZUPAK TO JEST KRÓL WODY JAK LEW JEST KRÓL D¯UNGLI!",
+		"WIDZIA£EŒ TY KIEDYŒ JAKIE SZCZUPAK MA ZÊBY? CHAPS I RÊKA UJEBANA!",
+		"Synek, na wodzie to siê prawdziwe okazy ³apie! tam jest ¿ywio³!",
+		"Synek, trzeba w lesie pierdzieæ, bo inaczej ryby s³ysz¹ i czuj¹.",
+		"Nie kupuj pan tej zanêty bo jest chujowa i szkoda na ni¹ kasy.",
+		"Grube ludzie siê poc¹ i smierdz¹, a to p³oszy ryby."
+	};
+	new rand = random(sizeof(texty));
+	ChatIC(playerid, texty[rand]);
+}
+
+public RzucMeZPasty(playerid, disease, value)
+{
+	static texty[][] = {
+		"zaczyna nerwowo przegl¹daæ czasopismo 'Super Karp'.",
+		"z jego kieszeni wysypuj¹ siê haczyki wêdkarskie.",
+		"œmierdzi ryb¹."
+	};
+	new rand = random(sizeof(texty));
+	ChatMe(playerid, texty[rand]);
+}
+
+public PrzyczepWedke(playerid, disease, value)
+{
+	ChatMe(playerid, "wyci¹ga wêdkê.");
+	new bone = random(18)+1;
+	AttachPlayerItem(playerid, 18632, bone, 0.0, 0.0, 0.0, random(360), random(360), random(360), 1.000000, 1.000000, 1.000000);
+}
+
+public Ryboglowy(playerid, disease, value)
+{
+	ChatMe(playerid, "wyci¹ga rybê.");
+	new bone = random(18)+1;
+	new fish = random(sizeof(FishNames));
+	if(FishModels[fish] == 0) fish = 5;
+	AttachPlayerItem(playerid, 18632, bone, 0.0, 0.0, 0.0, random(360), random(360), random(360), 1.000000, 1.000000, 1.000000);
+	//TODO: daæ rybê na g³owê?
+}
+
+public UpuscRybe(playerid, disease, value)
+{
+	new Float:x, Float:y, Float:z, vw, int;
+	vw = GetPlayerVirtualWorld(playerid);
+	int = GetPlayerInterior(playerid);
+	GetPlayerPos(playerid, x, y, z);
+	new fish = random(sizeof(FishNames));
+	if(FishModels[fish] == 0) fish = 5;
+	ChatMe(playerid, sprintf("upuszcza %s.", FishNames[fish]));
+	defer DestroyRyba(CreateDynamicObject(FishModels[fish], x, y, z-0.5, 0.0, 0.0, 0.0, vw, int));
+}
+
+timer DestroyRyba[600000](rybaid)
+{
+	DestroyDynamicObject(rybaid);
+}
+
+
+

@@ -1757,7 +1757,6 @@ public SyncTime()
 	{
 		format(string, sizeof(string), "Jest teraz godzina {0073FF}%d:00",tmphour);
 		BroadCast(COLOR_WHITE,string);
-		PayDay();
         GLOB_LastHour=tmphour;
 		if (realtime)
 		{
@@ -1766,6 +1765,7 @@ public SyncTime()
 			SetWorldTime(ltime == 0 ? tmphour : ltime);
 			ServerTime = tmphour;
 		}
+		PayDay();
 	}
 	return 1;
 }
@@ -2266,7 +2266,7 @@ public JednaSekundaTimer()
 		else if(level >= 19 && level <= 20) { PlayerInfo[i][pPayCheck] += 10; }
 		else if(level >= 21) { PlayerInfo[i][pPayCheck] += 11; }
         //JAIL
-		if(PlayerInfo[i][pJailed] > 0)
+		if(PlayerInfo[i][pJailed] > 0 && PlayerInfo[i][pJailed] != 10)
 		{
 			if(PlayerInfo[i][pJailTime] > 0 && WantLawyer[i] == 0 && gPlayerSpawned[i] == 1)
 			{
@@ -3215,7 +3215,15 @@ public JednaSekundaTimer()
 				PlayerCuffedTime[i] -= 1;
 			}
 		}
+
+		#if defined _ZLODZIEJ_AUT
+			if(stole_a_car_seconds_to_find_cp[i] > 0)
+			{
+				stole_a_car_seconds_to_find_cp[i]--;
+			}
+		#endif
 	}
+
 	return 1;
 }
 

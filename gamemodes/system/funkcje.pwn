@@ -268,7 +268,8 @@ JailDeMorgan(playerid)
 UnJailDeMorgan(playerid)
 {
 	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPos(playerid, 593.1899,-1494.0863,82.1648);
+	SetPlayerPos(playerid, -499.12, 2592.85, 53.56);
+	SetPlayerFacingAngle(playerid, 270.0);
 	Wchodzenie(playerid);
 	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;
@@ -872,17 +873,30 @@ public CountDownVehsRespawn()
 				used[veh] = true;
 			}
 		}
-		for(new v; v < MAX_VEHICLES; v++)
+		for(new v = 1; v < MAX_VEHICLES; v++)
 		{
 			if(!used[v])
 			{
-			    RespawnVehicleEx(v);
+				if(v <= CAR_End)
+				{
+					DestroyVehicle(v);
+					carselect = GetRandomVehicleForStealingModel();
+					AddCar(v - 1);
+					SetVehicleNumberPlate(v, "{1F9F06}M-RP");
+				}
+				else
+				{
+			    	RespawnVehicleEx(v);
+				}
+
 			    if(Car_GetOwnerType(v) == CAR_OWNER_PLAYER)
 			    {
                     Car_Unspawn(v);
 	            }
 			}
 		}
+
+		ReloadDeluxeCarsForStealing();
 	}
 }
 
@@ -1056,7 +1070,7 @@ public togczastimer(playerid)
 		hour = shifthour;
 		if (minuite < 10)
 		{
-			if (PlayerInfo[playerid][pJailTime] > 0)
+			if (PlayerInfo[playerid][pJailed] > 0 && PlayerInfo[playerid][pJailTime] > 0)
 			{
 				format(string, sizeof(string), "~y~%d %s~n~~g~|~w~%d:0%d~g~|~n~~w~Czas Aresztu: %d sek", day, mtext, hour, minuite, PlayerInfo[playerid][pJailTime]-10);
 			}
@@ -1067,7 +1081,7 @@ public togczastimer(playerid)
 		}
 		else
 		{
-			if (PlayerInfo[playerid][pJailTime] > 0)
+			if (PlayerInfo[playerid][pJailed] > 0 && PlayerInfo[playerid][pJailTime] > 0)
 			{
 				format(string, sizeof(string), "~y~%d %s~n~~g~|~w~%d:%d~g~|~n~~w~Czas Aresztu: %d sec", day, mtext, hour, minuite, PlayerInfo[playerid][pJailTime]-10);
 			}
@@ -7895,12 +7909,7 @@ AddCar(car)
 {
 	new randcol = random(126);
 	new randcol2 = 1;
-	if (rccounter == 14)
-	{
-		rccounter = 0;
-	}
-	new id = AddStaticVehicleEx(carselect[rccounter], CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], randcol, randcol2, -1);
-	rccounter++;
+	new id = AddStaticVehicleEx(RandCars[carselect][0], CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], randcol, randcol2, -1);
 	return id;
 }
 
@@ -11827,30 +11836,42 @@ public TourCamera(playerid, step)
 }
 //--------------------------------------------------
 
+GetRandomVehicleForStealingModel()
+{
+	new randa = random(53);
+	new model;
 
-ZaladujSamochody()
+	if(randa == 0)
+	{
+		model = randa;
+	}
+	else if(randa <= 8)
+	{
+		model = floatround(float(randa) / 2.0, floatround_ceil);
+	}
+	else if(randa <= 32)
+	{
+		model = floatround(float(randa) / 3.0, floatround_floor) + 2;
+	}
+	else
+	{
+		model = floatround(float(randa) / 4.0, floatround_ceil) + 4;
+	}
+
+	return model;
+}
+
+
+ZaladujSamochodyDoKradziezy()
 {
     new id;
-    new randa = random(sizeof(RandCars));
-	randa = random(sizeof(RandCars));carselect[0] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[1] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[2] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[3] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[4] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[5] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[6] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[7] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[8] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[9] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[10] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[11] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[12] = RandCars[randa][0];
-	randa = random(sizeof(RandCars));carselect[13] = RandCars[randa][0];
 
     for(new i = 0; i < 165; i++)
 	{
+		carselect = GetRandomVehicleForStealingModel();
         id = AddCar(i);
     }
+
     CAR_End = id;
     printf("Wczytano %d aut do kradzie¿y", CAR_End);
 	return 1;
@@ -12517,6 +12538,168 @@ PursuitMode(playerid, giveplayerid)
 	{
 		sendErrorMessage(playerid, "Gracz jest za daleko by nadaæ mu tryb poœcigu.");
 	}
+}
+
+// iloczyn skalarny
+Float:CalculateDotProduct(Float:a[3], Float:b[3])
+{
+	return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+// metoda oparta na separating axis theorem w 3D
+CheckIfCuboidsIntersect(Float:c[8][3], Float:c2[8][3])
+{
+    static Float:axes[15][3];
+    
+    for (new i = 0; i < 3; i++) 
+    {
+        axes[i][0] = c[1][i] - c[0][i];
+        axes[i + 3][0] = c[2][i] - c[0][i];
+        axes[i + 6][0] = c[4][i] - c[0][i];
+        axes[i + 9][0] = c[0][i];
+        
+        axes[i][1] = c[3][i] - c[0][i];
+        axes[i + 3][1] = c[5][i] - c[0][i];
+        axes[i + 6][1] = c[6][i] - c[0][i];
+        axes[i + 9][1] = c[1][i];
+        
+        axes[i][2] = c[2][i] - c[1][i];
+        axes[i + 3][2] = c[5][i] - c[1][i];
+        axes[i + 6][2] = c[7][i] - c[1][i];
+        axes[i + 9][2] = c[3][i] - c[1][i];
+    }
+
+    for (new i = 0; i < 3; i++) 
+    {
+        axes[i + 12][0] = c2[0][i];
+        axes[i + 12][1] = c2[1][i] - c2[0][i];
+        axes[i + 12][2] = c2[3][i] - c2[0][i];
+    }
+    
+    for (new i = 0; i < 15; i++) 
+    {
+        new Float:axis[3];
+        for (new j = 0; j < 3; j++) 
+        {
+            axis[j] = axes[i][j];
+        }
+
+        new Float:min1, Float:max1, Float:min2, Float:max2;
+        for (new j = 0; j < 8; j++) 
+        {
+            new Float:dot = CalculateDotProduct(axis, c[j]);
+            if (j == 0 || dot < min1) min1 = dot;
+            if (j == 0 || dot > max1) max1 = dot;
+        }
+        for (new j = 0; j < 8; j++) 
+        {
+            new Float:dot = CalculateDotProduct(axis, c2[j]);
+            if (j == 0 || dot < min2) min2 = dot;
+            if (j == 0 || dot > max2) max2 = dot;
+        }
+
+        if (!(max1 >= min2 && min1 <= max2)) 
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+// obracanie punktu korzystaj¹c z macierzy rotacji
+RotatePointWithRMatrix(Float:x, Float:y, Float:z, &Float:xr, &Float:yr, &Float:zr, Float:rm[][])
+{
+	xr = rm[0][0] * x + 
+		rm[0][1] * y + 
+		rm[0][2] * z;
+	yr = rm[1][0] * x + 
+		rm[1][1] * y + 
+		rm[1][2] * z;
+	zr = rm[2][0] * x + 
+		rm[2][1] * y + 
+		rm[2][2] * z;
+}
+
+// obliczanie macierzy rotacji z kwaternionów
+CalculateRotationMatrixFromQuat(Float:a, Float:b, Float:c, Float:d, Float:rm[][])
+{
+	rm[0][0] = (1 - 2 * (c*c + d*d));
+	rm[0][1] = (2 * (b * c - a * d));
+	rm[0][2] = (2 * (b * d + a * c));
+	rm[1][0] = (2 * (b * c + a * d));
+	rm[1][1] = (1 - 2 * (b * b + d * d));
+	rm[1][2] = (2 * (c * d - a * b));
+	rm[2][0] = (2 * (b * d - a * c)); 
+	rm[2][1] = (2 * (c * d + a * b)); 
+	rm[2][2] = (1 - 2 * (b * b + c * c));
+}
+
+// wyznaczenie wierzcho³ków prostopad³oœcianu, który wyznacza granice pojazdu
+GetVehicleBoundingBox(vehicleid, Float:bbox[][])
+{
+	static const Float:scale = 0.8;
+
+	new Float:x, Float:y, Float:z;
+	GetVehiclePos(vehicleid, x, y, z);
+
+	new vm = GetVehicleModel(vehicleid);
+
+	new Float:wx, Float:wy, Float:wz;
+	GetVehicleModelInfo(vm, VEHICLE_MODEL_INFO_SIZE, wx, wy, wz);
+
+	new Float:a, Float:b, Float:c, Float:d;
+	GetVehicleRotationQuat(vehicleid, a, b, c, d);
+
+	if(a == 0.5 && b == 0.5 && c == 0.5 && d == 0.5) // rotacja nie zainicjowana w macierzy pojazdów serwera
+	{
+		return 0;
+	}
+
+	new Float:rm[3][3];
+	CalculateRotationMatrixFromQuat(a, -b, -c, -d, rm);
+
+	new Float:cp_nr[8][3];
+	cp_nr[0][0] = (-wx); cp_nr[0][1] = (-wy); cp_nr[0][2] = (-wz);
+	cp_nr[1][0] = (-wx); cp_nr[1][1] = ( wy); cp_nr[1][2] = (-wz);
+	cp_nr[2][0] = ( wx); cp_nr[2][1] = ( wy); cp_nr[2][2] = (-wz);
+	cp_nr[3][0] = ( wx); cp_nr[3][1] = (-wy); cp_nr[3][2] = (-wz);
+	cp_nr[4][0] = (-wx); cp_nr[4][1] = (-wy); cp_nr[4][2] = ( wz);
+	cp_nr[5][0] = (-wx); cp_nr[5][1] = ( wy); cp_nr[5][2] = ( wz);
+	cp_nr[6][0] = ( wx); cp_nr[6][1] = ( wy); cp_nr[6][2] = ( wz);
+	cp_nr[7][0] = ( wx); cp_nr[7][1] = (-wy); cp_nr[7][2] = ( wz);
+
+	for(new i = 0; i < 8; i++)
+	{
+		for(new j = 0; j < 3; j++)
+		{
+			cp_nr[i][j] /= 2.0;
+		}
+	}
+
+	for(new i = 0; i < 8; i++)
+	{
+		RotatePointWithRMatrix(cp_nr[i][0], cp_nr[i][1], cp_nr[i][2], bbox[i][0], bbox[i][1], bbox[i][2], rm);
+
+		bbox[i][0] *= scale;
+		bbox[i][1] *= scale;
+		bbox[i][2] *= scale;
+
+		bbox[i][0] += x;
+		bbox[i][1] += y;
+		bbox[i][2] += z;
+	}
+
+	return 1;
+}
+
+// wyznaczanie d³ugoœci nad³u¿szej przek¹tnej prostopad³oœcianu wyznaczaj¹cego granice pojazdu
+Flaot:GetVehicleBoundingBoxDiagonal(vehicleid)
+{
+	new vm = GetVehicleModel(vehicleid);
+	new Float:wx, Float:wy, Float:wz;
+	GetVehicleModelInfo(vm, VEHICLE_MODEL_INFO_SIZE, wx, wy, wz);
+	return floatsqroot(wx*wx + wy*wy + wz*wz);
 }
 
 // https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn

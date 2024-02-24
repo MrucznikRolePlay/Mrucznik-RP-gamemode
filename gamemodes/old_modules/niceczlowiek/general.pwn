@@ -267,7 +267,6 @@ Player_CanUseCar(playerid, vehicleid)
                 sendTipMessageEx(playerid,COLOR_GREY,string);
 				return 0;
             }
-            if(CarData[lcarid][c_Owner] == JOB_BUSDRIVER) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpocz¹æ pracê");
         }
         else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FAMILY)// wszystkie auta RODZIN
 	    {

@@ -654,7 +654,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
-				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18802/");
+				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18148/LepaStation/");
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			}
 			case 8:
@@ -11558,7 +11558,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                             {
                                 if(IsPlayerInVehicle(i, veh))
                                 {
-                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18802/");
+                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18148/LepaStation/");
                                     SetPVarInt(i, "sanlisten", 2);
                                 }
                             }
@@ -13504,7 +13504,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 						    {
-							    PlayerInfo[playerid][pLinia96]= 1;
+							    PlayerInfo[playerid][pLinia85]= 1;
 								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
 								SetPlayerCheckpoint(playerid, 2119.7363,-1896.8149,13.1345, 4);
 								CP[playerid] = 501;

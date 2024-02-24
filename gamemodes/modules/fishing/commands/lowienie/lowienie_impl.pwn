@@ -48,12 +48,56 @@ command_lowienie_Impl(playerid)
         new fstring[MAX_PLAYER_NAME];
         new Level = PlayerInfo[playerid][pFishSkill];
         new Float:health;
+
         if(Level >= 0 && Level <= 50) { Caught = random(200)-70; }
         else if(Level >= 51 && Level <= 100) { Caught = random(500)-200; }
         else if(Level >= 101 && Level <= 200) { Caught = random(1000)-500; }
         else if(Level >= 201 && Level <= 400) { Caught = random(1600)-600; }
         else if(Level >= 401) { Caught = random(1800)-700; }
         rand = random(sizeof(FishNames));
+
+        new vehicleID = GetPlayerVehicleID(playerid);
+        new isBoatOwner = IsABoat(vehicleID) && IsCarOwner(playerid, vehicleID);
+        if(!isBoatOwner) 
+        {
+            rand /= 3;
+        } 
+        else 
+        {
+            new Float:x, Float:y, Float:z;
+            GetPlayerPos(playerid, x, y, z);
+            CA_FindZ_For2DCoord(x, y, z);
+            new Float:depthBonus = 2 - z*(1/-60);
+            if(depthBonus < 1) 
+            {
+                depthBonus = 1;
+            }
+            else if(depthBonus > 2) 
+            {
+                depthBonus = 2;
+            }
+
+            rand = floatround(rand/depthBonus, floatround_ceil);
+        }
+
+        if(GetWeather() == 8) 
+        {
+            rand = floatround(rand * 1.5, floatround_ceil);
+        }
+
+        if(IsPlayerSick(playerid, FANATYK_WEDKARSTWA)) 
+        {
+            rand = floatround(rand * 1.5, floatround_ceil);
+        }
+        else
+        {
+            if(random(1000) == 1)
+            {
+                InfectPlayer(playerid, FANATYK_WEDKARSTWA);
+                ChatMe(playerid, "sta³ siê fanatykiem wêdkarstwa.");
+                SendClientMessage(playerid, COLOR_PANICRED, "twoja postaæ sta³a siê fanatykiem wêdkarstwa. £owisz wiêksze ryby, ale idzie te¿ za tym pewien koszt...");
+            }
+        }
         
         SetTimerEx("Lowienie", 30000 ,0,"d",playerid);
         FishGood[playerid] = 1;

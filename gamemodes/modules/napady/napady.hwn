@@ -1,0 +1,55 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                  napady                                                   //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: Sanda³
+// Data utworzenia: 17.02.2024
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+//-----------------<[ Zmienne: ]>-------------------
+new Heist_Attackers[4] = {-1, -1, -1, -1};
+new Heist_AttackerWarnCount[4];
+new Heist_Icons[MAX_PLAYERS];
+new Heist_Timers;
+new Heist_BlockHeisting = 0;
+new Heist_CurrentZoneid = -1;
+new Heist_CurrentVehicleid = -1;
+new Heist_MapIconCounter = 0; // 100s update map icon
+new Heist_NotifyPoliceCooldown = 10; // 10 = 30s cooldown
+new Heist_AttackersCount = 0; 
+new Heist_AttackersCounter = 0;
+new Heist_Steal_Countdown = 0;
+new Heist_HeistOFF = 0; // Globalna blokada, mozliwosc nalozenia przez administracje
+enum eHeistZones
+{
+	Float:Heist_x,
+	Float:Heist_y,
+	Float:Heist_z,
+    Float:HeistEscape_x,
+    Float:HeistEscape_y,
+    Float:HeistEscape_z
+};
+
+new const HeistZone[HEIST_ZONESCOUNT][eHeistZones] = 
+{
+	{2749.05, -1102.37, 69.57, 166.31, -137.37, 1.42}
+};
+//------------------<[ Forwardy: ]>--------------------
+
+//end

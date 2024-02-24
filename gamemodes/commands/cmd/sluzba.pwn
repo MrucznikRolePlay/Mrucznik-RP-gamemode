@@ -88,6 +88,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
                     OnDuty[playerid] = 1;
                     SetPlayerToTeamColor(playerid);
+                    AddLSPDMemberToThiefMapIcons(playerid);
                 }
                 else if(OnDuty[playerid]==1)
                 {
@@ -99,6 +100,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     PrzywrocBron(playerid);
                     SetPlayerToTeamColor(playerid);
+                    RmvLSPDMemberFromThiefMapIcons(playerid);
                 }
             }
             else

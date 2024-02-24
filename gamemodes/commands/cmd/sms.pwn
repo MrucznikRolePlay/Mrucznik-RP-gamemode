@@ -107,7 +107,7 @@ YCMD:sms(playerid, params[], help)
 			return 1;
 		}
 		//All its okay, continue code:
-		new giveMoneyForWorker = smsCost/SanWorkers; 
+		new giveMoneyForWorker = (smsCost/2)/SanWorkers; 
 		Sejf_Add(FRAC_SN, (smsCost/2)); 
 		Sejf_Save(FRAC_SN); 
 		ZabierzKase(playerid, smsCost); 
@@ -123,7 +123,7 @@ YCMD:sms(playerid, params[], help)
 				if(SanDuty[i] == 1)
 				{
 					SendSMSMessage(PlayerInfo[playerid][pPnumber], i, messSMS);
-					format(string, sizeof(string), "P³atny SMS wygenerowa³: %d$, czyli %d$ dla ka¿dego", smsCost, giveMoneyForWorker);
+					format(string, sizeof(string), "P³atny SMS wygenerowa³: %d$, czyli %d$ dla ka¿dego i %d$ do sejfu", smsCost, giveMoneyForWorker, (smsCost/2));
 					SendClientMessage(i, COLOR_YELLOW, string);
 					DajKase(i, giveMoneyForWorker);
 				}
@@ -134,7 +134,7 @@ YCMD:sms(playerid, params[], help)
 	//Normal SMS
 	if(givePlayerNumber != 555) 
 	{
-		smsCost = 450; //Przypisanie watoœci koszta sms
+		smsCost = 50; //Przypisanie watoœci koszta sms
 		new checkNumberPlayer = FindPlayerByNumber(givePlayerNumber);
 		
 		if(checkNumberPlayer == INVALID_PLAYER_ID)

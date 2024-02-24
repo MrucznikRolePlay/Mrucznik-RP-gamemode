@@ -69,6 +69,7 @@ YCMD:zwolnij(playerid, params[], help)
 							PlayerInfo[para1][pTajniak] = 0;
 							JobDuty[para1] = 0;
 							OnDuty[para1] = 0;
+							RmvLSPDMemberFromThiefMapIcons(para1);
 							SanDuty[para1] = 0;
 							SetTimerEx("AntySB", 5000, 0, "d", para1);
 							AntySpawnBroni[para1] = 5;

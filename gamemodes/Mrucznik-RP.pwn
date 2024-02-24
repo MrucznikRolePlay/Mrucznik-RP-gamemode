@@ -318,7 +318,8 @@ public OnGameModeInit()
 
     ZaladujTrasy(); //System wyœcigów
 	ZaladujPickupy();
-	ZaladujSamochody(); //Auta do kradziezy
+	ZaladujSamochodyDoKradziezy(); //Auta do kradziezy
+	LoadDeluxeCarsForStealing(); //Auta deluxe do kradziezy
 	Zaladuj3DTexty();
 	ZaladujIkony();
 
@@ -1012,6 +1013,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!Player_CanUseCar(playerid, vehicleid))
         	return Player_RemoveFromVeh(playerid);
     }
+	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_BUSDRIVER) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpocz¹æ pracê");
 	// -- customowe parametry dla poszczególnych pojazdów
 	if(IsARower(vehicleid))
 	{
@@ -1426,37 +1428,54 @@ public OnPlayerDisconnect(playerid, reason)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
+
+	if(PlayerInfo[playerid][pJailed] == 10) // uniknal marcepana bo wbil przed uplywem 3 minut
+	{
+		if(gettime() - PlayerInfo[playerid][pJailTime] > 600)
+		{
+			// nie marcepanuj po 10 minutach od poprzedniego marcepana
+			PlayerInfo[playerid][pJailed] = 0;
+			PlayerInfo[playerid][pJailTime] = 0;
+		}
+		else
+		{
+			// kolejne /q, 1 minuta na powrót
+			PlayerInfo[playerid][pJailTime] = gettime() + 120;
+		}
+	}
+
     //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || Kajdanki_JestemSkuty[playerid] >= 1 || poscig[playerid] == 1)
     if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || Kajdanki_JestemSkuty[playerid] >= 1 || poscig[playerid] == 1)
 	{
-        PlayerInfo[playerid][pJailed] = 10;
-        new string[130];
-        new powod[36];
-        if(PlayerTied[playerid] >= 1)
-        {
-            strcat(powod, "bycie zwiazanym, ");
-        }
-        if(PlayerCuffed[playerid] >= 1)
-        {
-            strcat(powod, "kajdanki w aucie, ");
-        }
-        if(Kajdanki_JestemSkuty[playerid] >= 1)
-        {
-            strcat(powod, "kajdanki pieszo, ");
-        }
-        if(poscig[playerid] >= 1)
-        {
-            strcat(powod, "poœcig, ");
-        }
-        new codal[16];
-        switch(reason)
-        {
-            case 0: codal = "timeout";
-            case 1: codal = "/q";
-            case 2: codal = "kick/ban";
-        }
-        format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNickEx(playerid), powod, codal);
-        SendAdminMessage(COLOR_P@, string);
+		PlayerInfo[playerid][pJailed] = 10;
+		PlayerInfo[playerid][pJailTime] = gettime();
+		new string[130];
+		new powod[36];
+		if(PlayerTied[playerid] >= 1)
+		{
+			strcat(powod, "bycie zwiazanym, ");
+		}
+		if(PlayerCuffed[playerid] >= 1)
+		{
+			strcat(powod, "kajdanki w aucie, ");
+		}
+		if(Kajdanki_JestemSkuty[playerid] >= 1)
+		{
+			strcat(powod, "kajdanki pieszo, ");
+		}
+		if(poscig[playerid] >= 1)
+		{
+			strcat(powod, "poœcig, ");
+		}
+		new codal[16];
+		switch(reason)
+		{
+			case 0: codal = "timeout";
+			case 1: codal = "/q";
+			case 2: codal = "kick/ban";
+		}
+		format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNickEx(playerid), powod, codal);
+		SendAdminMessage(COLOR_P@, string);
 	}
 
 	if(PoziomPoszukiwania[playerid] >= 1)
@@ -1955,7 +1974,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 					}
 					if(PoziomPoszukiwania[playerid] >= 1)
 					{
-						new price2 = PoziomPoszukiwania[playerid] * 1000;
+						new reward = PoziomPoszukiwania[playerid] * 5000;
 						new count, i = killerid;
 						if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
 						{
@@ -2006,11 +2025,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 									}
 								}
 
-								format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", price2);
+								format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", reward);
 								GameTextForPlayer(i, string, 5000, 1);
 								PoziomPoszukiwania[i] = 0;
 								ClearCrime(i);
-								DajKase(i, price2);//moneycheat
+								DajKase(i, reward);//moneycheat
 								PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
 								PlayerInfo[i][pDetSkill] += 2;
 								SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
@@ -2320,29 +2339,41 @@ SetPlayerSpawnPos(playerid)
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
 	{
-	    new string[256];
-	    new kaseczka = (kaska[playerid] > 0) ? (kaska[playerid]/2) : 1;
-	    new sendername[MAX_PLAYER_NAME];
-	    GetPlayerName(playerid, sendername, sizeof(sendername));
-		format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
-		SendClientMessage(playerid, COLOR_LIGHTRED, string);
-		ResetPlayerWeapons(playerid);
-		UsunBron(playerid);
-		PlayerInfo[playerid][pJailed] = 3;
-		PlayerInfo[playerid][pJailTime] = 15*60;
-		format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
-        SetPlayerVirtualWorld(playerid, 1000+playerid);
-		PlayerInfo[playerid][pMuted] = 1;
-		SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
-		format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po³owê kasy i broñ", sendername);
-		SendClientMessageToAll(COLOR_LIGHTRED, string);
-		format(string, sizeof(string), "Dodatkowo zabrano z twojego portfela %d$ i wyzerowano twoje bronie oraz zabrano po³owê matsów", kaseczka);
-        SendClientMessage(playerid, COLOR_LIGHTRED, string);
-        Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc zabrano mu %d$, %d materia³ów oraz broñ.", GetPlayerLogName(playerid), kaseczka, PlayerInfo[playerid][pMats]/2);
-        ZabierzKase(playerid, kaseczka);
-        PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
+		new currTime = gettime();
+		new quitTime = PlayerInfo[playerid][pJailTime];
+		if(currTime - quitTime > 180) // gracz wbi³ po 3 minutach
+		{
+			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
+			SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Da³eœ /q podczas akcji, ale wróci³eœ w ci¹gu 3 minut. Odgrywaj dalej - mo¿esz daæ /q dopiero po 10 minutach.");
+		}
+		else
+		{
+			new string[256];
+			new kaseczka = (kaska[playerid] > 0) ? (kaska[playerid]/2) : 1;
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			format(string, sizeof(string), "* Zosta³eœ uwieziony w Admin Jailu przez Admina Marcepan_Marks. Powod: /q podczas akcji");
+			SendClientMessage(playerid, COLOR_LIGHTRED, string);
+			ResetPlayerWeapons(playerid);
+			UsunBron(playerid);
+			PlayerInfo[playerid][pJailed] = 3;
+			PlayerInfo[playerid][pJailTime] = 15*60;
+			format(PlayerInfo[playerid][pAJreason], MAX_AJ_REASON, "/q podczas akcji (Marcepan)");
+			SetPlayerVirtualWorld(playerid, 1000+playerid);
+			PlayerInfo[playerid][pMuted] = 1;
+			SetPlayerPos(playerid, 1481.1666259766,-1790.2204589844,156.7875213623);
+			format(string, sizeof(string), "Zosta³eœ ukarany na 15 minut. Powod: /q podczas akcji");
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+			format(string, sizeof(string), "AdmCmd: %s zostal uwieziony w 'AJ' przez Admina Marcepan_Marks. Powod: /q podczas akcji + zabieram po³owê kasy i broñ", sendername);
+			SendClientMessageToAll(COLOR_LIGHTRED, string);
+			format(string, sizeof(string), "Dodatkowo zabrano z twojego portfela %d$ i wyzerowano twoje bronie oraz zabrano po³owê matsów", kaseczka);
+			SendClientMessage(playerid, COLOR_LIGHTRED, string);
+			Log(punishmentLog, INFO, "%s da³ /q podczas akcji wiêc zabrano mu %d$, %d materia³ów oraz broñ.", GetPlayerLogName(playerid), kaseczka, PlayerInfo[playerid][pMats]/2);
+			ZabierzKase(playerid, kaseczka);
+			PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
+		}
 	}
 	//Paintball
     else if(PlayerPaintballing[playerid] != 0)
@@ -3921,33 +3952,33 @@ public OnPlayerEnterCheckpoint(playerid)
 		{
 			DisablePlayerCheckpoint(playerid);
 			SetPlayerCheckpoint(playerid, 2335.9858,-2355.0427,13.3828, 4);
-			CP[playerid]=1202;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Baza Wosjkowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Fabryka", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==982)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2495.6113,-2408.0415,13.5445, 4);
 			CP[playerid]=983;
 			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Baza Wosjkowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Fabryka", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+310$");
 		}
 		else if(CP[playerid]==983)
 		{
 			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
+			SetPlayerCheckpoint(playerid, 2495.6113,-2408.0415,13.5445, 4);
 			CP[playerid]=984;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: WIÊZIENIE STANOWE");
+			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Baza Wosjkowa");
 			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 			SendClientMessage(playerid, COLOR_GREEN, "+310$");
 		}
 		else if(CP[playerid]==984)
+		{
+			DisablePlayerCheckpoint(playerid);
+			SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
+			CP[playerid]=985;
+			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: WIÊZIENIE STANOWE");
+			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
+			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+			SendClientMessage(playerid, COLOR_GREEN, "+310$");
+		}
+		else if(CP[playerid]==985)
 		{
 		    if(BusCzit[playerid] == 1)
 			{
@@ -4262,70 +4293,6 @@ public OnPlayerEnterCheckpoint(playerid)
 		}
 	}
 //koniec linii 85 i system autobusów
-	else if(CP[playerid]==1)
-	{
-	    if(IsPlayerInAnyVehicle(playerid))
-	    {
-		    PlayerInfo[playerid][pJackSkill] ++;
-			if(PlayerInfo[playerid][pJackSkill] == 50)
-			{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 2, bêdziesz wiêcej zarabiaæ oraz szybciej ukraœæ nowe auto."); }
-			else if(PlayerInfo[playerid][pJackSkill] == 100)
-			{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 3, bêdziesz wiêcej zarabiaæ oraz szybciej ukraœæ nowe auto."); }
-			else if(PlayerInfo[playerid][pJackSkill] == 200)
-			{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 4, bêdziesz wiêcej zarabiaæ oraz szybciej ukraœæ nowe auto."); }
-			else if(PlayerInfo[playerid][pJackSkill] == 400)
-			{ SendClientMessage(playerid, COLOR_YELLOW, "* Twój skill z³odzieja samochodów wynosi teraz 5, bêdziesz najwiêcej zarabiaæ oraz najszybciej kraœæ auta."); }
-			new level = PlayerInfo[playerid][pJackSkill];
-			if(level >= 0 && level <= 50)
-			{
-			    new rand = random(sizeof(SELLCAR1));
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 20 minut.", SELLCAR1[rand]);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, SELLCAR1[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 600;
-			}
-			else if(level >= 51 && level <= 100)
-			{
-			    new rand = random(sizeof(SELLCAR2));
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 18 minut.", SELLCAR2[rand]);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, SELLCAR2[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 540;
-			}
-			else if(level >= 101 && level <= 200)
-			{
-			    new rand = random(sizeof(SELLCAR3));
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 16 minut.", SELLCAR3[rand]);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, SELLCAR3[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 480;
-			}
-			else if(level >= 201 && level <= 400)
-			{
-			    new rand = random(sizeof(SELLCAR4));
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 14 minut.", SELLCAR4[rand]);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, SELLCAR4[rand]);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 420;
-			}
-			else if(level >= 401)
-			{
-			    new money = 6000;
-			    format(string, sizeof(string), "Sprzeda³eœ pojazd za $%d, nastêpny pojazd mo¿esz ukraœæ za 12 minut.", money);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	  			DajKase(playerid, money);//moneycheat
-			    PlayerInfo[playerid][pCarTime] = 360;
-			}
-			GameTextForPlayer(playerid, "~y~Sprzedales pojazd", 2500, 1);
-			CP[playerid] = 0;
-		    DisablePlayerCheckpoint(playerid);
-		    RespawnVehicleEx(GetPlayerVehicleID(playerid));
-		}
-		else
-		{
-		    GameTextForPlayer(playerid, "Nie jestes w wozie", 5000, 1);
-		}
-	}
 	else if(CP[playerid] == 5)
 	{
 	    GameTextForPlayer(playerid, "~y~W punkcie misji", 2500, 1);
@@ -5119,7 +5086,32 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
         //NOWY SYSTEM AUT FRAKCYJNYCH I PUBLICZNYCH
         if(newcar <= CAR_End) //do kradziezy
         {
-            if(KradniecieWozu[playerid] != newcar)
+			new is_veh_deluxe = false, steal_impossible = false;
+
+			for(new i = 0; i < sizeof(deluxe_cars_for_stealing_ids); i++)
+			{
+				if(deluxe_cars_for_stealing_ids[i] == newcar)
+				{
+					is_veh_deluxe = true;
+					break;
+				}
+			}
+
+			if(is_veh_deluxe)
+			{
+				if(PlayerInfo[playerid][pJob] != JOB_CARTHIEF || PlayerInfo[playerid][pJackSkill] < 400)
+				{
+					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Potrzebujesz pracy z³odzieja aut i 5 skilla, by ukraœæ ten wóz.");
+					RemovePlayerFromVehicleEx(playerid);
+					steal_impossible = true;
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_YELLOW, "Kradzie¿ tego wozu bardzo ci siê op³aci, jednak czujesz, ¿e coœ z nim jest nie tak...");
+				}
+			}
+
+            if(KradniecieWozu[playerid] != newcar && !steal_impossible)
 		    {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Mo¿esz ukraœæ ten wóz, wpisz /kradnij aby spróbowaæ to zrobiæ.");
 				new engine, lights, alarm, doors, bonnet, boot, objective;
@@ -5128,9 +5120,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 			}
         }
 		gLastCar[playerid] = newcar;
-
-		
-
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{
@@ -5301,10 +5290,28 @@ public OnPlayerRequestClass(playerid, classid)
 	return 0;
 }
 
+CalculateInterest(playerid) 
+{
+	new money = PlayerInfo[playerid][pAccount];
+	if(money <= 1000 || money >= 1000) { // TODO: upewnic sie ze ponizsze osety dzialaja i wtedy dopiero wgrac
+		return floatround(money * 0.001, floatround_ceil);
+	}
+
+	new Float:interest = (money * (1.3 - 0.067 * floatlog(money)) / 100) / 2;
+	new Float:interestMultiplier = 1;
+	if (PlayerInfo[playerid][pDom] != 0) {
+		interestMultiplier = 2;
+	}
+	if (IsPlayerPremiumOld(playerid) || IsPlayerPremium(playerid)) {
+		interestMultiplier *= 2;
+	}
+
+	return floatround(interest * interestMultiplier, floatround_ceil);
+}
+
 PayDay()
 {
-	new string[128], account,interest,playername2[MAX_PLAYER_NAME],
-        tmpintrate, checks, ebill;
+	new string[128], account,playername2[MAX_PLAYER_NAME], checks, ebill;
 
 	foreach(new i : Player)
 	{
@@ -5314,23 +5321,13 @@ PayDay()
 		    {
 			    if(MoneyMessage[i]==1)
 				{
-				    SendClientMessage(i, COLOR_LIGHTRED, "Nie sp³aci³eœ d³ugu, wierzyciele nas³ali na ciebie Policjê !");
+				    SendClientMessage(i, COLOR_LIGHTRED, "Nie sp³aci³eœ d³ugu, wierzyciele nas³ali na ciebie Policjê!");
 					PoziomPoszukiwania[i] += 2;
 					SetPlayerCriminal(i,INVALID_PLAYER_ID, "Niesp³acanie d³ugu");
 				}
 				GetPlayerName(i, playername2, sizeof(playername2));
 				account = PlayerInfo[i][pAccount];
 
-				if (PlayerInfo[i][pDom] != 0)
-				{
-				    if(IsPlayerPremiumOld(i)) { tmpintrate = intrate+4; }
-					else { tmpintrate = intrate+2; }//HouseInfo[key][hLevel]
-				}
-				else
-				{
-				    if(IsPlayerPremiumOld(i)) { tmpintrate = 3; }
-					else { tmpintrate = 1; }
-				}
 				if(PlayerInfo[i][pPayDay] >= 5)
 				{
 				    if(PlayerInfo[i][pAdmin] >= 1)
@@ -5356,12 +5353,16 @@ PayDay()
 					{
 					    ebill = 0;
 					}
-					interest = (PlayerInfo[i][pAccount]/1000)*(tmpintrate);
+					new interest = CalculateInterest(i);
+					new Float:interestRate;
+					if(PlayerInfo[i][pAccount] != 0) {
+						interestRate = (interest/PlayerInfo[i][pAccount]) * 100;
+					}
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						PlayerInfo[i][pAccount] = account+interest;
+						PlayerInfo[i][pAccount] = account + interest;
 					}
 					SendClientMessage(i, COLOR_WHITE, "|___ STAN KONTA ___|");
 					format(string, sizeof(string), "  Wyp³ata: $%d   Podatek: -$%d", checks, TaxValue);
@@ -5375,7 +5376,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odsetki: 0.%d procent",tmpintrate);
+						format(string, sizeof(string), "  Odsetki: %.2f procent", interestRate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);

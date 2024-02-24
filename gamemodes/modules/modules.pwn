@@ -67,6 +67,8 @@
 #include "antycheat\antycheat.def"
 #include "komendy\komendy.def"
 #include "choroby\choroby.def"
+#include "zlodziej_aut\zlodziej_aut.def"
+#include "napady\napady.def"
 
 
 //-------<[ .hwn ]>-------
@@ -109,6 +111,8 @@
 #include "antycheat\antycheat.hwn"
 #include "komendy\komendy.hwn"
 #include "choroby\choroby.hwn"
+#include "zlodziej_aut\zlodziej_aut.hwn"
+#include "napady\napady.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -151,6 +155,8 @@
 #include "antycheat\antycheat.pwn"
 #include "komendy\komendy.pwn"
 #include "choroby\choroby.pwn"
+#include "zlodziej_aut\zlodziej_aut.pwn"
+#include "napady\napady.pwn"
 
 
 //-------<[ timers ]>-------
@@ -167,6 +173,8 @@
 #include "premium\premium_timers.pwn"
 #include "urzadls\urzadls_timers.pwn"
 #include "choroby\choroby_timers.pwn"
+#include "zlodziej_aut\zlodziej_aut_timers.pwn"
+#include "napady\napady_timers.pwn"
 
 
 //-------<[ mysql ]>-------
@@ -205,7 +213,8 @@
 #include "premium\premium_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
-
+#include "zlodziej_aut\zlodziej_aut_callbacks.pwn"
+#include "napady\napady_callbacks.pwn"
 
 //-------<[ commands ]>-------
 #include "frakcje\commands\frakcje_commands.pwn"
@@ -236,3 +245,5 @@
 #include "antycheat\commands\antycheat_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "choroby\commands\choroby_commands.pwn"
+#include "zlodziej_aut\commands\zlodziej_aut_commands.pwn"
+#include "napady\commands\napady_commands.pwn"

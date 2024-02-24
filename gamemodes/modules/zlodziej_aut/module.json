@@ -1,0 +1,11 @@
+{
+    "name": "zlodziej_aut",
+    "description": "Nowa praca z³odzieja aut. TODO: dodaæ szczegó³owy opis",
+    "author": "NikodemBanan",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "13.02.2024"
+}

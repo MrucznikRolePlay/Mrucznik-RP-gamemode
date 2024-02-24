@@ -22,7 +22,7 @@ services:
       - mysqld
 
   mysqld:
-    image: mysql:8.0
+    image: mysql:5.7
     volumes:
       - ./db:/docker-entrypoint-initdb.d
     environment:

@@ -30,7 +30,7 @@
 
 YCMD:czas(playerid, params[], help)
 {
-	new string[128];
+	new string[256];
 
     if(IsPlayerConnected(playerid))
 	{
@@ -55,26 +55,23 @@ YCMD:czas(playerid, params[], help)
 		hour = shifthour;
 		if (minuite < 10)
 		{
-			if (PlayerInfo[playerid][pJailTime] > 0)
-			{
-				format(string, sizeof(string), "~y~%d %s %d ~n~~g~|~w~%d:0%d~g~|~n~~w~Czas Aresztu: %d sek", day, mtext, year, hour, minuite, PlayerInfo[playerid][pJailTime]-10);
-			}
-			else
-			{
-				format(string, sizeof(string), "~y~%d %s %d ~n~~g~|~w~%d:0%d~g~|", day, mtext, year, hour, minuite);
-			}
+			format(string, sizeof(string), "~y~%d %s %d ~n~~g~|~w~%d:0%d~g~|", day, mtext, year, hour, minuite);
 		}
 		else
 		{
-			if (PlayerInfo[playerid][pJailTime] > 0)
-			{
-				format(string, sizeof(string), "~y~%d %s %d~n~~g~|~w~%d:%d~g~|~n~~w~Czas Aresztu: %d sec", day, mtext, year, hour, minuite, PlayerInfo[playerid][pJailTime]-10);
-			}
-			else
-			{
-				format(string, sizeof(string), "~y~%d %s %d~n~~g~|~w~%d:%d~g~|", day, mtext, year, hour, minuite);
-			}
+			format(string, sizeof(string), "~y~%d %s %d~n~~g~|~w~%d:%d~g~|", day, mtext, year, hour, minuite);
 		}
+
+		if (PlayerInfo[playerid][pJailTime] > 0 && PlayerInfo[playerid][pJailed] != 10)
+		{
+			format(string, sizeof(string), "%s~n~~w~Czas Aresztu: %d sec", string, PlayerInfo[playerid][pJailTime]-10);
+		}
+
+		if (stole_a_car_seconds_to_find_cp[playerid] > 0)
+		{
+			format(string, sizeof(string), "%s~n~~w~Czas do znalezienia dziupli: %d sec", string, stole_a_car_seconds_to_find_cp[playerid]);
+		}
+		
 		GameTextForPlayer(playerid, string, 5000, 1);
 	}
 	return 1;
