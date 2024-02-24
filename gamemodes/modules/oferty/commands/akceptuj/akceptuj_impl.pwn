@@ -1167,7 +1167,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                         
                         if(Condom[playerid] < 1)
                         {
-                            new Float:health, Float:Ahealth
+                            new Float:health, Float:Ahealth;
                             new hp = 0;
                             new level = PlayerInfo[SexOffer[playerid]][pSexSkill];
                             if(level >= 0 && level <= 50) hp = 20;
