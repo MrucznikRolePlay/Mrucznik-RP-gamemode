@@ -32,8 +32,18 @@ YCMD:icons(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        new icon_type;
+        new turn_on = 1;
+        for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
+        {
+            // Szukamy, czy gracz ma jak¹kolwiek ikonkê domu na mapie - je¿eli tak, to przyjmujemy, ¿e chce on wy³¹czyæ wszystkie ikony.
+            if(Dom[i][hIkonka] != -1 && Streamer_IsInArrayData(STREAMER_TYPE_MAP_ICON, Dom[i][hIkonka], E_STREAMER_PLAYER_ID, playerid))
+            {
+                turn_on = 0;
+                break;
+            }
+        }
 
+        new icon_type;
         for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
         {
             if(Dom[i][hKupiony] == 0)
@@ -49,16 +59,31 @@ YCMD:icons(playerid, params[], help)
                 continue;
             }
 
-            if(Dom[i][hIkonka] == -1)
+            if(turn_on)
             {
-                Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], icon_type, 1, -1, -1, playerid, 125.0);
+                if(Dom[i][hIkonka] == -1)
+                {
+                    Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], icon_type, 1, -1, -1, playerid, 125.0);
+                }
+                else if(!Streamer_IsInArrayData(STREAMER_TYPE_MAP_ICON, Dom[i][hIkonka], E_STREAMER_PLAYER_ID, playerid))
+                {
+                    Streamer_AppendArrayData(STREAMER_TYPE_MAP_ICON, Dom[i][hIkonka], E_STREAMER_PLAYER_ID, playerid);
+                }
             }
-            else if(!Streamer_IsInArrayData(STREAMER_TYPE_MAP_ICON, Dom[i][hIkonka], E_STREAMER_PLAYER_ID, playerid))
+            else if(Dom[i][hIkonka] != -1 && Streamer_IsInArrayData(STREAMER_TYPE_MAP_ICON, Dom[i][hIkonka], E_STREAMER_PLAYER_ID, playerid))
             {
-                Streamer_AppendArrayData(STREAMER_TYPE_MAP_ICON, Dom[i][hIkonka], E_STREAMER_PLAYER_ID, playerid);
+                Streamer_RemoveArrayData(STREAMER_TYPE_MAP_ICON, Dom[i][hIkonka], E_STREAMER_PLAYER_ID, playerid);
             }
         }
-        MSGBOX_Show(playerid, "Ikony wlaczone!", MSGBOX_ICON_TYPE_OK);
+
+        if(turn_on)
+        {
+            MSGBOX_Show(playerid, "Ikony domow ~g~wlaczone!", MSGBOX_ICON_TYPE_OK);
+        }
+        else
+        {
+            MSGBOX_Show(playerid, "Ikony domow ~r~wylaczone!", MSGBOX_ICON_TYPE_OK);
+        }
     }
     return 1;
 }
