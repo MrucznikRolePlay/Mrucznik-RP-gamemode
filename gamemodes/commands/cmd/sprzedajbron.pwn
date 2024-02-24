@@ -412,7 +412,7 @@ YCMD:sprzedajbron(playerid, params[], help)
                             SendClientMessage(playerid,COLOR_GREY,"   Z³a nazwa broni!");
                             return 1;
                         }
-                        if (ProxDetectorS(5.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+                        if (ProxDetectorS(5.0, playerid, giveplayerid))
                         {
                             if(PlayerInfo[giveplayerid][pConnectTime] < 5)
                             {

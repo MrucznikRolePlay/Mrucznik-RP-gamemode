@@ -45,7 +45,7 @@ YCMD:yo4(playerid, params[], help)
 			return 1;
 		}
 
-		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
+		if (ProxDetectorS(5.0, playerid, playa))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

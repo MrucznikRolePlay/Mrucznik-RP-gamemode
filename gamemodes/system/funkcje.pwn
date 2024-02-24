@@ -2052,6 +2052,10 @@ Float:GetDistanceBetweenPlayers(p1,p2)
 	{
 		return -1.00;
 	}
+	if(Spectate[p1] != INVALID_PLAYER_ID || Spectate[p2] != INVALID_PLAYER_ID)
+	{
+		return 50000; // admini na spec nie s¹ blisko
+	}
 	GetPlayerPos(p1,x1,y1,z1);
 	GetPlayerPos(p2,x2,y2,z2);
 	return floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
@@ -7994,8 +7998,13 @@ PolicjantWStrefie(Float:radi, playerid)
 
 ProxDetectorS(Float:radi, playerid, targetid)
 {
-    if(IsPlayerConnected(playerid)&&IsPlayerConnected(targetid))
+    if(IsPlayerConnected(playerid) && IsPlayerConnected(targetid))
 	{
+		if(Spectate[targetid] != INVALID_PLAYER_ID || Spectate[playerid] != INVALID_PLAYER_ID)
+		{
+			return 0; // admini na spec nie s¹ blisko
+		}
+
 		new Float:posx, Float:posy, Float:posz;
 		new Float:oldposx, Float:oldposy, Float:oldposz;
 		new Float:tempposx, Float:tempposy, Float:tempposz;

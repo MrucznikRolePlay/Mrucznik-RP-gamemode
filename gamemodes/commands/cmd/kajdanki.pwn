@@ -58,11 +58,6 @@ YCMD:kajdanki(playerid, params[], help)
                     }
                 }
 
-                if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
-                {
-                    sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
-                    return 1;
-                }
                 if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
                 {
                     sendTipMessage(playerid, "Nie mo¿esz skuæ administratora!");

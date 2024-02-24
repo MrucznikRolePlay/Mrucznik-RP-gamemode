@@ -52,7 +52,7 @@ YCMD:pokazdowod(playerid, params[], help)
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-			    if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+			    if (ProxDetectorS(8.0, playerid, giveplayerid))
 				{
 
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));

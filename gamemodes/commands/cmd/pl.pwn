@@ -47,7 +47,7 @@ YCMD:pl(playerid, params[], help)
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-			    if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+			    if (ProxDetectorS(8.0, playerid, giveplayerid))
 				{
 				    if(giveplayerid == playerid) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz pokazaæ licencji samemu sobie, u¿yj /licencje!"); return 1; }
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
