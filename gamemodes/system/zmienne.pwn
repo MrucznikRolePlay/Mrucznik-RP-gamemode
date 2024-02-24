@@ -364,6 +364,8 @@ new bool:TOWER_Blocked[MAX_PLAYERS] = {false, ...};
 //02.07 sejfy wprowadzenie
 new Sejf_Frakcji[MAX_FRAC];
 new Sejf_Rodziny[MAX_ORG];
+new Frakcja_Mats[MAX_FRAC];
+new Rodzina_Mats[MAX_ORG];
 //23.06 fina³
 new KTAir_Start, KTAir_End, Float:KTAir_Offsets[3]; //Dla At400 nie ruszaæ.
 new bool:VAR_MySQLREGISTER=true; //W³¹czyæ rejestracje?

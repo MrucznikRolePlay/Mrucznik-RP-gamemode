@@ -32,7 +32,7 @@ YCMD:sejfrodzina(playerid, params[], help)
 {
 	if(orgIsLeader(playerid))
     {
-		ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
+		SejfR_Show(playerid);
     }
 	else return noAccessMessage(playerid);
 	return 1;
