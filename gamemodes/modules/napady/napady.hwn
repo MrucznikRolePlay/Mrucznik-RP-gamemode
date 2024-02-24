@@ -35,6 +35,7 @@ new Heist_NotifyPoliceCooldown = 10; // 10 = 30s cooldown
 new Heist_AttackersCount = 0; 
 new Heist_AttackersCounter = 0;
 new Heist_Steal_Countdown = 0;
+new Heist_PursuitCounter = 0;
 new Heist_HeistOFF = 0; // Globalna blokada, mozliwosc nalozenia przez administracje
 enum eHeistZones
 {

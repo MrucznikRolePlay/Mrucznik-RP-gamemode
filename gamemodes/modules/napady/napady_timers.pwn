@@ -45,6 +45,7 @@ public Heist_ClearData(attackerid)
 	{
 		Heist_AttackersCount = 0;
 		Heist_AttackersCounter = 0;
+		Heist_PursuitCounter = 0;
 		for(new i = 0; i < 4; i++)
 		{
 			Heist_Attackers[i] = -1;
@@ -123,7 +124,7 @@ public Heist_Escape()
 	{
 		Heist_Lost();
 	}
-	if(Heist_MapIconCounter == 10)
+	if(Heist_MapIconCounter == 2)
 	{
 		Heist_UpdateMapIcon();
 		Heist_MapIconCounter = 0;
@@ -164,6 +165,67 @@ public Heist_Escape()
 	if(Heist_Steal_Countdown > 0)
 		Heist_Steal_Countdown -= 10;
 	else
+	{
+		Heist_ProcessLosePursuit();
+	}
+}
+
+forward Heist_LosePursuit();
+public Heist_LosePursuit()
+{
+	if(Heist_AttackersCounter < 1)
+	{
+		Heist_Lost();
+	}
+	new Float:vehHP;
+	GetVehicleHealth(Heist_CurrentVehicleid, vehHP);
+	if(vehHP <= 251.0)
+	{
+		Heist_Lost();
+	}
+	if(Heist_MapIconCounter == 5)
+	{
+		Heist_UpdateMapIcon();
+		Heist_MapIconCounter = 0;
+	}
+
+	new warning[48];
+	new time;
+	for(new i = 0; i < Heist_AttackersCount; i++)
+	{
+		if(Heist_Attackers[i] == -1) continue;
+		if(!Heist_EligibleToContinue(i))
+		{
+			Heist_Remove(i);
+			continue;
+		}
+
+		if(!IsPlayerInVehicle(Heist_Attackers[i], Heist_CurrentVehicleid))
+		{
+			if(Heist_AttackerWarnCount[i] < 4)
+			{
+				time = 5 * (4 - Heist_AttackerWarnCount[i]);
+				Heist_AttackerWarnCount[i]++;
+				format(warning, sizeof(warning), "Wróc do swojego auta! Masz na to %d sekund!", time);
+				SendClientMessage(Heist_Attackers[i], COLOR_LIGHTRED, warning);
+			}
+			else
+				Heist_Remove(i);
+			continue;
+		}
+		else if(Heist_AttackerWarnCount[i] > 0)
+			Heist_AttackerWarnCount[i] = 0;
+		SetPlayerChatBubble(Heist_Attackers[i], "** Niesie torbê wypchan¹ pieniêdzmi **", COLOR_DO, 60.0, 6500);
+	}
+	if(Heist_CheckEscape() == true)
+	{
+		Heist_PursuitCounter = 0;
+	}
+	else
+	{
+		Heist_PursuitCounter++;
+	}
+	if(Heist_PursuitCounter >= 3)
 	{
 		Heist_Win();
 	}

@@ -65,13 +65,16 @@ Heist_Notify(type)
 	{
 		format(wanted, sizeof(wanted), "Centrala: Otrzymano zg³oszenie o napadzie na sklep Las Collinas:");
 		SendFamilyMessage(FRAC_LSPD, COLOR_LIGHTGREEN, wanted, true);
+		SendFamilyMessage(FRAC_FBI, COLOR_LIGHTGREEN, wanted, true);
 		format(wanted, sizeof(wanted), "Centrala: Podejrzani odje¿dzaj¹ pojazdem marki %s spod sklepu.", VehicleNames[GetVehicleModel(Heist_CurrentVehicleid)-400]);
 		SendFamilyMessage(FRAC_LSPD, COLOR_ALLDEPT, wanted, true);
+		SendFamilyMessage(FRAC_FBI, COLOR_LIGHTGREEN, wanted, true);
 	}
 	else if(type == HEIST_MSG_GPSUPDATE)
 	{
 		format(wanted, sizeof(wanted), "Centrala: W systemie nawigacyjnym zaaktualizowano przybli¿on¹ lokacjê podejrzanych o napad.");
 		SendFamilyMessage(FRAC_LSPD, COLOR_LIGHTGREEN, wanted, true);
+		SendFamilyMessage(FRAC_FBI, COLOR_LIGHTGREEN, wanted, true);
 	}
 	return 1;
 }
@@ -89,14 +92,39 @@ Heist_CountLSPD()
 	}
 	return counted_duties;
 }
+Heist_CheckEscape()
+{
+	new leader, member;
+	new x, y, z;
+	new found = false;
+	GetVehiclePos(Heist_CurrentVehicleid, x, y, z);
+	foreach(new i : Player)
+	{
+		leader = PlayerInfo[i][pLider];
+	    member = PlayerInfo[i][pMember];
+		if(!found && OnDuty[i] && (leader == FRAC_LSPD || member == FRAC_LSPD || leader == FRAC_FBI || member == FRAC_FBI))
+		{
+			if(IsPlayerInRangeOfPoint(i, 150.0, x, y, z))
+			{
+				found = true;
+			}
+		}
+		if(found == true)
+			break;
+	}
 
+	if(found)
+		return true;
+	else
+		return false;
+}
 Heist_UpdateMapIcon()
 {
 	new Float:x, Float:y, Float:z;
 	GetVehiclePos(Heist_CurrentVehicleid, x, y, z);
 	foreach(new i : Player)
 	{
-		if(IsPlayerConnected(i) && OnDuty[i] && (PlayerInfo[i][pLider] == 1 || PlayerInfo[i][pMember] == 1))
+		if(IsPlayerConnected(i) && OnDuty[i] && (PlayerInfo[i][pLider] == FRAC_LSPD || PlayerInfo[i][pMember] == FRAC_LSPD || leader == FRAC_FBI || member == FRAC_FBI))
 		{
 			if(IsValidDynamicMapIcon(Heist_Icons[i]))
 			{
@@ -108,7 +136,6 @@ Heist_UpdateMapIcon()
 			}
 		}
 	}
-	Heist_Notify(HEIST_MSG_GPSUPDATE);
 }
 
 Heist_DestroyMapIcon(id = -1)
@@ -206,19 +233,19 @@ Heist_ProcessAttack(playerid)
 
 	new zoneid = Heist_GetAttackZoneid(playerid);
 	new vehicleid = GetPlayerVehicleID(playerid);
-
+	new modelid = GetVehicleModel(vehicleid);
 	if(zoneid == -1)
 	{
 		SendClientMessage(playerid, COLOR_LIGHTGREEN, "Nie jesteœ w pobli¿u sklepu do napadania.");
 		return 0;
 	}
 	if(vehicleid != 0){
-		if(IsAHeliModel(vehicleid))
+		if(IsAHeliModel(modelid))
 		{
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, "Nie mo¿esz rozpocz¹c napadu w helikopterze.");
 			return 0;
 		}
-		if(IsAPlane(vehicleid))
+		if(IsAPlane(modelid))
 		{
 			SendClientMessage(playerid, COLOR_LIGHTGREEN, "Nie mo¿esz rozpocz¹c napadu w samolocie.");
 			return 0;
@@ -297,6 +324,8 @@ Heist_ProcessEscape()
 	Heist_Steal_Countdown = HEIST_ESCAPE_TIME;
 	Heist_Timers = SetTimer("Heist_Escape",5000,true);
 	Heist_Notify(HEIST_MSG_ESCAPE);
+	Heist_UpdateMapIcon();
+	Heist_Notify(HEIST_MSG_GPSUPDATE);
 }
 
 
