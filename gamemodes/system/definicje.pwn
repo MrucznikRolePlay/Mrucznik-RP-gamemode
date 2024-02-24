@@ -468,6 +468,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_UZYCIE_APTECZKI			    10108
 #define D_PRZEDMIOTY_BRONIE			    10109
 
+#define D_ORGMEMBER                     10111
+#define D_ORGMEMBER_RANK                10112
 
 //------------------------------------------------------------------------------
 //                              INNE
