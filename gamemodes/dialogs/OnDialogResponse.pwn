@@ -15443,12 +15443,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new str[128];
         format(str, 64, "SUPPORT: %s oferuje Ci pomoc, skorzystaj z tego!", GetNick(playerid));
         SendClientMessage(pid, COLOR_YELLOW, str);
-        format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wróciæ do poprzedniej pozycji wpisz /ticketend", GetNick(pid));
+        format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wróciæ do poprzedniej pozycji wpisz /ticketend.", GetNick(pid));
         SendClientMessage(playerid, COLOR_YELLOW, str);
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			iloscZapytaj[playerid] = iloscZapytaj[playerid]+1;
 		}
+
+		SendClientMessage(playerid, COLOR_YELLOW, "Pe³na treœæ pytania:");
+		format(str, sizeof(str), "%s", TICKET[id][suppDesc]);
+		SendClientMessage(playerid, COLOR_YELLOW, str);
 
         return 1;
     }

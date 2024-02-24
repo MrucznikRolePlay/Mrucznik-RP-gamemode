@@ -11897,8 +11897,8 @@ Support_Add(caller, sub[], desc[])
     strdel(TICKET[id][suppSub], 0, 16);
     strins(TICKET[id][suppSub], sub, 0, 16);
 
-    strdel(TICKET[id][suppDesc], 0, 32);
-    strins(TICKET[id][suppDesc], desc, 0, 32);
+    strdel(TICKET[id][suppDesc], 0, 86);
+    strins(TICKET[id][suppDesc], desc, 0, 86);
     return id;
 }
 
