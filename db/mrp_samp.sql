@@ -2674,6 +2674,19 @@ CREATE TABLE `mru_ryby` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mru_gspanel`
+--
+
+CREATE TABLE `mru_gspanel` (
+  `orgid` int(11) NOT NULL,
+  `gun` int(11) NOT NULL,
+  `cena` int(11) NOT NULL,
+  PRIMARY KEY (`orgid`,`gun`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `view_admini`
 -- (See below for the actual view)
 --

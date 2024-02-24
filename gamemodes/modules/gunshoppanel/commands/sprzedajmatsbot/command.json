@@ -1,0 +1,15 @@
+{
+    "name": "sprzedajmatsbot",
+    "description": "Sprzedaj materialy botowi w GS",
+    "permissions": [],
+    "author": "wiger",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "mats",
+            "description": "ilosc"
+        }
+    ],
+    "date": "18.02.2024"
+}
