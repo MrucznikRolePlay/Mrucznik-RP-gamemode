@@ -1411,6 +1411,19 @@ stock MruMySQL_UpdateFish(playerid, fish) {
 	mysql_query(string);
 	return 1;
 }
+stock MruMySQL_SavePlayerFamily(playerid) {
+	if(!IsPlayerConnected(playerid))
+		return 0;
+	new string[256];
+	format(string, sizeof(string), "UPDATE `mru_konta` SET `FMember`=%i, `Rank`=%i, `Uniform`=%i, `Team`=%i WHERE `UID`=%i",
+		PlayerInfo[playerid][pOrg],
+		(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]),
+		PlayerInfo[playerid][pUniform],
+		PlayerInfo[playerid][pTeam],
+		PlayerInfo[playerid][pUID]);
+	mysql_query(string);
+	return 1;
+}
 
 new bool:MySQL_timeout=false;
 public MySQL_Refresh()
