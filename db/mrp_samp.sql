@@ -2681,7 +2681,7 @@ CREATE TABLE `mru_gspanel` (
   `orgid` int(11) NOT NULL,
   `gun` int(11) NOT NULL,
   `cena` int(11) NOT NULL,
-  UNIQUE KEY `orgid` (`orgid`,`gun`)
+  PRIMARY KEY (`orgid`,`gun`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
