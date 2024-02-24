@@ -35,6 +35,7 @@
 #include "fpanel\fpanel.pwn"
 #include "opis\opis.pwn"
 #include "usunopis\usunopis.pwn"
+#include "togopis\togopis.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -45,5 +46,6 @@ hook OnGameModeInit()
     command_fpanel();
     command_opis();
     command_usunopis();
-    
+    command_togopis();
+
 }

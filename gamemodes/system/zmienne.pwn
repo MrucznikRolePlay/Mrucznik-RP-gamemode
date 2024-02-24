@@ -1117,9 +1117,6 @@ ZerujZmienne(playerid)
 	timeFakeVehRespawn[playerid] = 0;
 	countFakeVehRespawn[playerid] = 0;
 
-    new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
-
-    PlayerInfo[playerid][pDescLabel] = tmp_label;
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
@@ -1450,6 +1447,11 @@ ZerujZmienne(playerid)
 		unoccupiedVehToCheckPlayersAC[v][playerid] = false;
 	}
 	unoccupiedVehBlockAC[playerid] = false;
+
+	foreach(new p : Player)
+	{
+		Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[p][pDescLabel], E_STREAMER_PLAYER_ID, playerid);
+	}
 
 	return 1;
 }
