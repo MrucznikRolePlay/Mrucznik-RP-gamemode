@@ -442,8 +442,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ZWROC_HAJS` (IN `name` VARCHAR(21),
 BEGIN
 DECLARE message VARCHAR(256);
 DECLARE playerConnected INT;
+DECLARE player_uid INTEGER;
 
 SELECT connected INTO playerConnected FROM mru_konta WHERE `Nick`=name;
+SELECT `UID` INTO player_uid FROM mru_konta WHERE Nick LIKE name;
 
 IF playerConnected = 0 THEN
     # log
@@ -451,7 +453,7 @@ IF playerConnected = 0 THEN
     INSERT INTO actions (Data, Caller, Action) VALUES (NOW(), USER(), message);
     
     # action
-    UPDATE mru_konta SET `Money`=`Money`+hajs WHERE `Nick`=name;
+    UPDATE mru_konta SET `Money`=`Money`+hajs WHERE `UID`=player_uid;
     
     # feedback
     SELECT message AS komunikat;
