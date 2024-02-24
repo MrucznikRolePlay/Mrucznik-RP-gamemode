@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  lockdown                                                 //
+//                                                  napadoff                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -33,7 +33,7 @@
 //-------<[ initialize ]>-------
 command_napadoff()
 {
-    Command_GetID("napadoff");
+    
 
     //aliases
     
@@ -50,9 +50,11 @@ YCMD:napadoff(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "System napadu.");
+        sendTipMessage(playerid, "System Napadów");
         return 1;
     }
+    
+    
     //command body
     return command_napadoff_Impl(playerid);
 }
