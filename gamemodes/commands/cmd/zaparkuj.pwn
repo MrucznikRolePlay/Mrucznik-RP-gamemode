@@ -35,16 +35,10 @@ YCMD:zaparkuj(playerid, params[], help)
 	{
         new vehicleID = GetPlayerVehicleID(playerid);
 		new vehicleUID = VehicleUID[vehicleID][vUID];
-		new lider = PlayerInfo[playerid][pLider];
-        new org = GetPlayerOrg(playerid);
 
-    	new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
-        lider == CarData[vehicleUID][c_Owner] && 
-        lider > 0;
-    	new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
-        org == CarData[vehicleUID][c_Owner];
-		
-		if( !IsCarOwner(playerid, vehicleID) && !liderOwner && (!orgOwner && !orgIsLeader(playerid)) ) 
+		new ownerOfFractionCar = IsPlayerOwnFractionCar(playerid, vehicleID);
+
+		if( !IsCarOwner(playerid, vehicleID) && !ownerOfFractionCar) 
 		{ 
 			return sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Ciebie!");
 		}
@@ -52,10 +46,9 @@ YCMD:zaparkuj(playerid, params[], help)
 		{
    			new pZone[MAX_ZONE_NAME];
 			GetPlayer2DZone(playerid, pZone, MAX_ZONE_NAME);
-			if((IsPlayerInRangeOfPoint(playerid, Dom[PlayerInfo[playerid][pDom]][hLadowisko], Dom[PlayerInfo[playerid][pDom]][hWej_X], Dom[PlayerInfo[playerid][pDom]][hWej_Y],  Dom[PlayerInfo[playerid][pDom]][hWej_Z]) && PlayerInfo[playerid][pDom] != 0) || strcmp(pZone, "Las Venturas Airport", true) == 0 || strcmp(pZone, "Lotnisko", true) == 0 || strcmp(pZone, "Easter Bay Airport", true) == 0 || strcmp(pZone, "Verdant Meadows", true) == 0 || liderOwner || orgOwner)
+			if((IsPlayerInRangeOfPoint(playerid, Dom[PlayerInfo[playerid][pDom]][hLadowisko], Dom[PlayerInfo[playerid][pDom]][hWej_X], Dom[PlayerInfo[playerid][pDom]][hWej_Y],  Dom[PlayerInfo[playerid][pDom]][hWej_Z]) && PlayerInfo[playerid][pDom] != 0) || strcmp(pZone, "Las Venturas Airport", true) == 0 || strcmp(pZone, "Lotnisko", true) == 0 || strcmp(pZone, "Easter Bay Airport", true) == 0 || strcmp(pZone, "Verdant Meadows", true) == 0 || ownerOfFractionCar)
 			{
-				new doRespawn = liderOwner || orgOwner;
-				saveCar(playerid, vehicleID, vehicleUID, doRespawn);
+				saveCar(playerid, vehicleID, vehicleUID, ownerOfFractionCar);
 
 				format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(vehicleID)-400]);
 				sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
@@ -75,8 +68,7 @@ YCMD:zaparkuj(playerid, params[], help)
 		}
         else //NORM
         {
-			new doRespawn = liderOwner || orgOwner;
-			saveCar(playerid, vehicleID, vehicleUID, doRespawn);
+			saveCar(playerid, vehicleID, vehicleUID, ownerOfFractionCar);
 
 			format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(vehicleID)-400]);
 			sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
