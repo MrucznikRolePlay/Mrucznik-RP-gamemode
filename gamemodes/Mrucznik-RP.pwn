@@ -2571,8 +2571,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_BALLAS: //13
 						{
-						    SetPlayerPos(playerid,173.6043,-150.9147,1.5781);
-                            SetPlayerFacingAngle(playerid, 319.2664);
+						    SetPlayerPos(playerid,2254.6958,-1411.2048,24.0000);
+                            SetPlayerFacingAngle(playerid, 180.6268);
 						}
 						case FRAC_VAGOS: //14
 						{
