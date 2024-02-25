@@ -60,7 +60,7 @@ command_lowienie_Impl(playerid)
         new isBoatOwner = IsABoat(vehicleID) && IsCarOwner(playerid, vehicleID);
         if(!isBoatOwner) 
         {
-            rand /= 3;
+            Caught /= 3;
         } 
         else 
         {
@@ -77,17 +77,17 @@ command_lowienie_Impl(playerid)
                 depthBonus = 2;
             }
 
-            rand = floatround(rand/depthBonus, floatround_ceil);
+            Caught = floatround(Caught/depthBonus, floatround_ceil);
         }
 
         if(GetWeather() == 8) 
         {
-            rand = floatround(rand * 1.5, floatround_ceil);
+            Caught = floatround(Caught * 1.5, floatround_ceil);
         }
 
         if(IsPlayerSick(playerid, FANATYK_WEDKARSTWA)) 
         {
-            rand = floatround(rand * 1.5, floatround_ceil);
+            Caught = floatround(Caught * 1.5, floatround_ceil);
         }
         else
         {
