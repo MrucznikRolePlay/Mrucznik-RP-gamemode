@@ -320,6 +320,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     `TruckSkill`='%d', \
 	`pSHealth`='%f', \
 	`pHealth`='%f', \
+	`VW`='%d', \
 	`Int`='%d'", PlayerInfo[playerid][pDetSkill],
 	PlayerInfo[playerid][pSexSkill],
 	PlayerInfo[playerid][pBoxSkill],
@@ -335,6 +336,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     PlayerInfo[playerid][pTruckSkill],
 	PlayerInfo[playerid][pSHealth],
 	PlayerInfo[playerid][pHealth],
+	PlayerInfo[playerid][pVW],
 	PlayerInfo[playerid][pInt]);
 
     format(query, sizeof(query), "%s, \
@@ -646,7 +648,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pSkin], 
 		PlayerInfo[playerid][pContractTime]);
 
-        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
+        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `VW`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
@@ -654,7 +656,7 @@ public MruMySQL_LoadAccount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>dddddddddddddffdddddddddfffddddd",
+        sscanf(lStr, "p<|>dddddddddddddffddddddddddfffddddd",
         PlayerInfo[playerid][pDetSkill],
 		PlayerInfo[playerid][pSexSkill],
 		PlayerInfo[playerid][pBoxSkill],
@@ -670,6 +672,7 @@ public MruMySQL_LoadAccount(playerid)
         PlayerInfo[playerid][pTruckSkill],
 		PlayerInfo[playerid][pSHealth],
 		PlayerInfo[playerid][pHealth],
+		PlayerInfo[playerid][pVW],
 		PlayerInfo[playerid][pInt],
 		PlayerInfo[playerid][pLocal],
 		PlayerInfo[playerid][pTeam],
