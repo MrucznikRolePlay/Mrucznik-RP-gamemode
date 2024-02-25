@@ -36,7 +36,7 @@
 #include "opis\opis.pwn"
 #include "usunopis\usunopis.pwn"
 #include "togopis\togopis.pwn"
-#include "togopis\togvopis.pwn"
+#include "togvopis\togvopis.pwn"
 
 
 //-------<[ initialize ]>-------
