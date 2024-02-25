@@ -595,6 +595,11 @@ IsCarOwner(playerid, vehicle, bool:kluczyki=false)
 IsPlayerOwnFractionCar(playerid, vehicleID)
 {
     new vehicleUID = VehicleUID[vehicleID][vUID];
+    if(vehicleUID == 0)
+    {
+        return 0;
+    }
+    
     new lider = PlayerInfo[playerid][pLider];
     new org = GetPlayerOrg(playerid);
     new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
