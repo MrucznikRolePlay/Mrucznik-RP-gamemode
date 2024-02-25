@@ -5298,10 +5298,10 @@ CalculateInterest(playerid)
 	new money = PlayerInfo[playerid][pAccount];
 	if(money <= 1000) {
 		// 0.1% odsetek przy d³ugach
-		return floatround(money * 0.001, floatround_ceil);
+		return floatround(float(money) * 0.001, floatround_ceil);
 	}
 
-	new Float:interest = (money * (1.3 - 0.067 * floatlog(money)) / 1000);
+	new Float:interest = (float(money) * (1.3 - 0.067 * floatlog(float(money))) / 1000);
 	new Float:interestMultiplier = 1;
 	if (PlayerInfo[playerid][pDom] != 0) {
 		interestMultiplier = 2;
