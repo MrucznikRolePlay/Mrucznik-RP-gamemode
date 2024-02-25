@@ -1920,6 +1920,7 @@ CREATE TABLE IF NOT EXISTS `mru_konta` (
   `TruckSkill` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `pSHealth` float NOT NULL DEFAULT '0',
   `pHealth` float NOT NULL DEFAULT '0',
+  `VW` int(11) NOT NULL DEFAULT '0',
   `Int` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `Local` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `Team` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
