@@ -67,4 +67,17 @@ public CarThiefMissionGoalTimer(playerid)
 	}
 }
 
+public CarThiefUnspawnStolenCar(veh_id, is_deluxe)
+{
+	SetVehicleParamsEx(veh_id, 0, 0, 0, 0, 0, 0, 0);
+	if(is_deluxe)
+	{
+		RemoveDeluxeCarForStealing(veh_id);
+	}
+	else
+	{
+		ReloadCarForStealing(veh_id);
+	}
+}
+
 //end

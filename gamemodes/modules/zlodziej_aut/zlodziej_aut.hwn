@@ -43,5 +43,6 @@ forward FinishLSPDCarThiefTracking(playerid);
 forward UpdateCarThiefLSPDMapIcon(playerid);
 forward AntiTeleportCarThief(playerid);
 forward CarThiefMissionGoalTimer(playerid);
+forward CarThiefUnspawnStolenCar(veh_id, is_deluxe);
 
 //end

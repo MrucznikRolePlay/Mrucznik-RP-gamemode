@@ -364,6 +364,8 @@ new bool:TOWER_Blocked[MAX_PLAYERS] = {false, ...};
 //02.07 sejfy wprowadzenie
 new Sejf_Frakcji[MAX_FRAC];
 new Sejf_Rodziny[MAX_ORG];
+new Frakcja_Mats[MAX_FRAC];
+new Rodzina_Mats[MAX_ORG];
 //23.06 fina³
 new KTAir_Start, KTAir_End, Float:KTAir_Offsets[3]; //Dla At400 nie ruszaæ.
 new bool:VAR_MySQLREGISTER=true; //W³¹czyæ rejestracje?
@@ -1026,7 +1028,6 @@ new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
 new DomOgladany[MAX_PLAYERS];//SYSTEM DOMÓW BY MRUCZNIK
-new carselect;
 new cbjstore[128];
 new motd[256];
 new ghour = 0;
@@ -1075,6 +1076,7 @@ new playerSeeSpec[MAX_PLAYERS];
 //SANDAL
 new gRO[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS];
+new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1108,6 +1110,7 @@ ZerujZmienne(playerid)
 	SetPVarInt(playerid, "zoneid", -1);
 	DeletePVar(playerid, "DostalAJkomunikat");
 	SetPVarString(playerid, "trescOgloszenia", "null"); 
+	SetPVarInt(playerid, "FixKitOffer", -1);
 	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
@@ -1451,6 +1454,7 @@ ZerujZmienne(playerid)
 	}
 	unoccupiedVehBlockAC[playerid] = false;
 
+	VECTOR_clear(VMembersOrg[playerid]);
 	return 1;
 }
 //EOF

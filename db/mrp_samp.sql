@@ -442,8 +442,10 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `ZWROC_HAJS` (IN `name` VARCHAR(21),
 BEGIN
 DECLARE message VARCHAR(256);
 DECLARE playerConnected INT;
+DECLARE player_uid INTEGER;
 
 SELECT connected INTO playerConnected FROM mru_konta WHERE `Nick`=name;
+SELECT `UID` INTO player_uid FROM mru_konta WHERE Nick LIKE name;
 
 IF playerConnected = 0 THEN
     # log
@@ -451,7 +453,7 @@ IF playerConnected = 0 THEN
     INSERT INTO actions (Data, Caller, Action) VALUES (NOW(), USER(), message);
     
     # action
-    UPDATE mru_konta SET `Money`=`Money`+hajs WHERE `Nick`=name;
+    UPDATE mru_konta SET `Money`=`Money`+hajs WHERE `UID`=player_uid;
     
     # feedback
     SELECT message AS komunikat;
@@ -1918,6 +1920,7 @@ CREATE TABLE IF NOT EXISTS `mru_konta` (
   `TruckSkill` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `pSHealth` float NOT NULL DEFAULT '0',
   `pHealth` float NOT NULL DEFAULT '0',
+  `VW` int(11) NOT NULL DEFAULT '0',
   `Int` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `Local` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `Team` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
@@ -2338,6 +2341,7 @@ CREATE TABLE IF NOT EXISTS `mru_sejfy` (
   `ID` int(11) NOT NULL,
   `typ` int(11) NOT NULL,
   `kasa` int(11) NOT NULL,
+  `mats` int(11) NOT NULL,
   PRIMARY KEY (`ID`,`typ`),
   KEY `ID` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
@@ -2346,75 +2350,75 @@ CREATE TABLE IF NOT EXISTS `mru_sejfy` (
 -- Dumping data for table `mru_sejfy`
 --
 
-INSERT INTO `mru_sejfy` (`ID`, `typ`, `kasa`) VALUES
-(1, 1, 0),
-(1, 2, 0),
-(2, 1, 0),
-(2, 2, 0),
-(3, 1, 0),
-(3, 2, 0),
-(4, 1, 0),
-(4, 2, 0),
-(5, 1, 0),
-(5, 2, 0),
-(6, 1, 0),
-(6, 2, 0),
-(7, 1, 0),
-(7, 2, 0),
-(8, 1, 0),
-(8, 2, 0),
-(9, 1, 0),
-(9, 2, 0),
-(10, 1, 0),
-(10, 2, 0),
-(11, 1, 0),
-(11, 2, 0),
-(12, 1, 0),
-(12, 2, 0),
-(13, 1, 0),
-(13, 2, 0),
-(14, 1, 0),
-(14, 2, 0),
-(15, 1, 0),
-(15, 2, 0),
-(16, 1, 0),
-(16, 2, 0),
-(17, 1, 0),
-(17, 2, 0),
-(18, 1, 0),
-(18, 2, 0),
-(19, 1, 0),
-(19, 2, 0),
-(20, 2, 0),
-(21, 2, 0),
-(22, 2, 0),
-(23, 2, 0),
-(24, 2, 0),
-(25, 2, 0),
-(26, 2, 0),
-(27, 2, 0),
-(28, 2, 0),
-(29, 2, 0),
-(30, 2, 0),
-(31, 2, 0),
-(32, 2, 0),
-(33, 2, 0),
-(34, 2, 0),
-(35, 2, 0),
-(36, 2, 0),
-(37, 2, 0),
-(38, 2, 0),
-(39, 2, 0),
-(40, 2, 0),
-(41, 2, 0),
-(42, 2, 0),
-(43, 2, 0),
-(44, 2, 0),
-(45, 2, 0),
-(46, 2, 0),
-(47, 2, 0),
-(48, 2, 0),
-(49, 2, 0);
+INSERT INTO `mru_sejfy` (`ID`, `typ`, `kasa`, `mats`) VALUES
+(1, 1, 0, 0),
+(1, 2, 0, 0),
+(2, 1, 0, 0),
+(2, 2, 0, 0),
+(3, 1, 0, 0),
+(3, 2, 0, 0),
+(4, 1, 0, 0),
+(4, 2, 0, 0),
+(5, 1, 0, 0),
+(5, 2, 0, 0),
+(6, 1, 0, 0),
+(6, 2, 0, 0),
+(7, 1, 0, 0),
+(7, 2, 0, 0),
+(8, 1, 0, 0),
+(8, 2, 0, 0),
+(9, 1, 0, 0),
+(9, 2, 0, 0),
+(10, 1, 0, 0),
+(10, 2, 0, 0),
+(11, 1, 0, 0),
+(11, 2, 0, 0),
+(12, 1, 0, 0),
+(12, 2, 0, 0),
+(13, 1, 0, 0),
+(13, 2, 0, 0),
+(14, 1, 0, 0),
+(14, 2, 0, 0),
+(15, 1, 0, 0),
+(15, 2, 0, 0),
+(16, 1, 0, 0),
+(16, 2, 0, 0),
+(17, 1, 0, 0),
+(17, 2, 0, 0),
+(18, 1, 0, 0),
+(18, 2, 0, 0),
+(19, 1, 0, 0),
+(19, 2, 0, 0),
+(20, 2, 0, 0),
+(21, 2, 0, 0),
+(22, 2, 0, 0),
+(23, 2, 0, 0),
+(24, 2, 0, 0),
+(25, 2, 0, 0),
+(26, 2, 0, 0),
+(27, 2, 0, 0),
+(28, 2, 0, 0),
+(29, 2, 0, 0),
+(30, 2, 0, 0),
+(31, 2, 0, 0),
+(32, 2, 0, 0),
+(33, 2, 0, 0),
+(34, 2, 0, 0),
+(35, 2, 0, 0),
+(36, 2, 0, 0),
+(37, 2, 0, 0),
+(38, 2, 0, 0),
+(39, 2, 0, 0),
+(40, 2, 0, 0),
+(41, 2, 0, 0),
+(42, 2, 0, 0),
+(43, 2, 0, 0),
+(44, 2, 0, 0),
+(45, 2, 0, 0),
+(46, 2, 0, 0),
+(47, 2, 0, 0),
+(48, 2, 0, 0),
+(49, 2, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2670,6 +2674,19 @@ CREATE TABLE `mru_ryby` (
   `Fid5` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`Player`)
 ) ENGINE=InnoDB DEFAULT CHARSET=cp1250 COLLATE=cp1250_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mru_gspanel`
+--
+
+CREATE TABLE `mru_gspanel` (
+  `orgid` int(11) NOT NULL,
+  `gun` int(11) NOT NULL,
+  `cena` int(11) NOT NULL,
+  PRIMARY KEY (`orgid`,`gun`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 

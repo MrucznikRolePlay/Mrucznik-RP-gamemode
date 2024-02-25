@@ -76,7 +76,7 @@ YCMD:teczka(playerid, params[], help)
 						sendErrorMessage(playerid, "Komenda nie dzia³a w tym miejscuu");
 						return 1;
 					}
-					if (ProxDetectorS(5.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+					if (ProxDetectorS(5.0, playerid, giveplayerid))
 					{
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));

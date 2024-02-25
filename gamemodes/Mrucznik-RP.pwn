@@ -114,6 +114,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <map>
 #include <mapfix>
 #include <getvehiclerotationquat_fix>
+#include <ndialog-pages>
 
 #if defined _colandreas_included
 	#include "obiekty\colandreas_removebuildings.pwn"
@@ -352,6 +353,8 @@ public OnGameModeInit()
 	graffiti_LoadMySQL();
 	//discordconnect
 	DiscordConnectInit();
+
+	LoadGsPanelPrices();
 
 
 	//AFK timer
@@ -2568,8 +2571,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_BALLAS: //13
 						{
-						    SetPlayerPos(playerid,173.6043,-150.9147,1.5781);
-                            SetPlayerFacingAngle(playerid, 319.2664);
+						    SetPlayerPos(playerid,2254.6958,-1411.2048,24.0000);
+                            SetPlayerFacingAngle(playerid, 180.6268);
 						}
 						case FRAC_VAGOS: //14
 						{
@@ -5293,11 +5296,12 @@ public OnPlayerRequestClass(playerid, classid)
 CalculateInterest(playerid) 
 {
 	new money = PlayerInfo[playerid][pAccount];
-	if(money <= 1000 || money >= 1000) { // TODO: upewnic sie ze ponizsze osety dzialaja i wtedy dopiero wgrac
-		return floatround(money * 0.001, floatround_ceil);
+	if(money <= 1000 || money > 100000000) {
+		// 0.1% odsetek przy d³ugach
+		return floatround(float(money) * 0.001, floatround_ceil);
 	}
 
-	new Float:interest = (money * (1.3 - 0.067 * floatlog(money)) / 100) / 2;
+	new Float:interest = (float(money) * (1.3 - 0.067 * floatlog(float(money))) / 1000);
 	new Float:interestMultiplier = 1;
 	if (PlayerInfo[playerid][pDom] != 0) {
 		interestMultiplier = 2;
@@ -5356,7 +5360,7 @@ PayDay()
 					new interest = CalculateInterest(i);
 					new Float:interestRate;
 					if(PlayerInfo[i][pAccount] != 0) {
-						interestRate = (interest/PlayerInfo[i][pAccount]) * 100;
+						interestRate = float((float(interest)/float(PlayerInfo[i][pAccount])) * 100.0);
 					}
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
@@ -5376,7 +5380,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odsetki: %.2f procent", interestRate);
+						format(string, sizeof(string), "  Odsetki: %.3f procent", interestRate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);
@@ -5451,12 +5455,7 @@ PayDay()
 	}
     printf("-> Updating GangZones");
     Zone_GangUpdate(true);
-    printf("-> Removing Houses MapIcons");
 
-	for(new i; i<=dini_Int("Domy/NRD.ini", "NrDomow"); i++)
-	{
-		DestroyDynamicMapIcon(Dom[i][hIkonka]);
-	}
 	new hour,minuite,second;
 	new rand = random(80);
 	gettime(hour,minuite,second);

@@ -75,11 +75,6 @@ YCMD:plac(playerid, params[], help)
 						sendTipMessage(playerid, "Komenda nie dzia³a w tym miejscu.");
 						return 1;
 					}
-			        if(Spectate[giveplayerid] != INVALID_PLAYER_ID)
-					{
-						sendErrorMessage(playerid, "Jesteœ za daleko od gracza.");
-						return 1;
-					}
 					if (ProxDetectorS(5.0, playerid, giveplayerid))
 					{
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
