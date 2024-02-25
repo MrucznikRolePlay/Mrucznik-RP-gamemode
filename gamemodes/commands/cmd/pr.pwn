@@ -212,7 +212,7 @@ YCMD:pr(playerid, params[], help)
 			{
 				VECTOR_clear(VMembersOrg[playerid]);
 				new query[512];
-				format(query, sizeof(query), "SELECT `UID`, `Nick`, `Rank`, `connected` FROM `mru_konta` WHERE `FMember`=%i ORDER BY connected DESC, Rank DESC", PlayerInfo[playerid][pOrg]);
+				format(query, sizeof(query), "SELECT `UID`, `Nick`, `Rank`, `connected` FROM `mru_konta` WHERE `FMember`=%i ORDER BY `connected` DESC, `Rank` DESC", PlayerInfo[playerid][pOrg]);
 				mysql_query(query);
 				mysql_store_result();
 				if(mysql_num_rows()) {
