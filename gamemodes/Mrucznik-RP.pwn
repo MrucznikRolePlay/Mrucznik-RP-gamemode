@@ -5296,7 +5296,7 @@ public OnPlayerRequestClass(playerid, classid)
 CalculateInterest(playerid) 
 {
 	new money = PlayerInfo[playerid][pAccount];
-	if(money <= 1000) {
+	if(money <= 1000 || money > 100000000) {
 		// 0.1% odsetek przy d³ugach
 		return floatround(float(money) * 0.001, floatround_ceil);
 	}
