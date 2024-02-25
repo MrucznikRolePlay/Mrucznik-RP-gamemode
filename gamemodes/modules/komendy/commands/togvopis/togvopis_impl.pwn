@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  togvopis                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: NikodemBanan
+// Data utworzenia: 25.02.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "hq\hq.pwn"
-#include "lkiz\lkiz.pwn"
-#include "fpanel\fpanel.pwn"
-#include "opis\opis.pwn"
-#include "usunopis\usunopis.pwn"
-#include "togopis\togopis.pwn"
-#include "togopis\togvopis.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_togvopis_Impl(playerid)
 {
-    command_hq();
-    command_lkiz();
-    command_fpanel();
-    command_opis();
-    command_usunopis();
-    command_togopis();
-    command_togvopis();
+    areVehicleDescTurnedOn[playerid] = !areVehicleDescTurnedOn[playerid];
 
+    foreach(new v : Vehicle)
+    {
+        if(Car3dTextDesc[v] == Text3D:INVALID_3DTEXT_ID)
+        {
+            continue;
+        }
+
+        if(areVehicleDescTurnedOn[playerid])
+        {
+            Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, Car3dTextDesc[v], E_STREAMER_PLAYER_ID, playerid);
+        }
+        else
+        {
+            Streamer_RemoveArrayData(STREAMER_TYPE_3D_TEXT_LABEL, Car3dTextDesc[v], E_STREAMER_PLAYER_ID, playerid);
+        }
+    }
+
+    if(areVehicleDescTurnedOn[playerid])
+    {
+        MSGBOX_Show(playerid, "Opisy pojazdow ~g~wlaczone!", MSGBOX_ICON_TYPE_OK);
+    }
+    else
+    {
+        MSGBOX_Show(playerid, "Opisy pojazdow ~r~wylaczone!", MSGBOX_ICON_TYPE_ERROR);
+    }
+
+    Streamer_Update(playerid);
+
+    return 1;
 }
+
+//end

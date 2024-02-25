@@ -1075,6 +1075,8 @@ new playerSeeSpec[MAX_PLAYERS];
 //SANDAL
 new gRO[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS];
+
+new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1452,6 +1454,16 @@ ZerujZmienne(playerid)
 	{
 		Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[p][pDescLabel], E_STREAMER_PLAYER_ID, playerid);
 	}
+	foreach(new v : Vehicle)
+    {
+        if(Car3dTextDesc[v] == Text3D:INVALID_3DTEXT_ID)
+        {
+            continue;
+        }
+		Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, Car3dTextDesc[v], E_STREAMER_PLAYER_ID, playerid);
+    }
+
+	areVehicleDescTurnedOn[playerid] = true;
 
 	return 1;
 }

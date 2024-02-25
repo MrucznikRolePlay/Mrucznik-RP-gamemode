@@ -356,7 +356,7 @@ Car_Load()
         //Opis dla pojazdów z wypo¿yczalni
         if(CarData[i][c_OwnerType] == CAR_OWNER_SPECIAL && CarData[i][c_Owner] == RENT_CAR)
         {
-            Car3dTextDesc[CarData[i][c_ID]] = CreateDynamic3DTextLabel("Wypo¿yczalnia pojazdów\nGROTTI", COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
+            Car3dTextDesc[CarData[i][c_ID]] = CreateDynamic3DTextLabel("Wypo¿yczalnia pojazdów\nGROTTI", COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, CarData[i][c_ID], 1, -1, -1, -1, 10.0);
         }
         //Obiekty na dachach taxówek
         if(CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_KT)
@@ -405,7 +405,7 @@ Car_Load()
 				
 				WordWrap(ldesc, true, lText);
 
-				Car3dTextDesc[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i);
+				Car3dTextDesc[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i, 1, -1, -1, -1, 10.0);
 				format(CarOpisCaller[i], MAX_PLAYER_NAME, "SYSTEM");
 
 				strcat(CarDesc[i], ldesc);

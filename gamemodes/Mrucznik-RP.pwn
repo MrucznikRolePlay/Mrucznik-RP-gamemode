@@ -465,7 +465,7 @@ public OnGameModeInit()
 
     for(new i;i<MAX_PLAYERS;i++)
     {
-        PlayerInfo[i][pDescLabel] = CreateDynamic3DTextLabel(" ", 0xBBACCFFF, 0.0, 0.0, -0.7, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1);
+        PlayerInfo[i][pDescLabel] = CreateDynamic3DTextLabel(" ", 0xBBACCFFF, 0.0, 0.0, -0.7, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, -1, -1, -1, 10.0);
     }
 
     pusteZgloszenia();
