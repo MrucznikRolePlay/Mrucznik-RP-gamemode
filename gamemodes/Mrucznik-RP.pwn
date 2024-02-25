@@ -5296,7 +5296,8 @@ public OnPlayerRequestClass(playerid, classid)
 CalculateInterest(playerid) 
 {
 	new money = PlayerInfo[playerid][pAccount];
-	if(money <= 1000 || money >= 1000) { // TODO: upewnic sie ze ponizsze osety dzialaja i wtedy dopiero wgrac
+	if(money <= 1000) {
+		// 0.1% odsetek przy d³ugach
 		return floatround(money * 0.001, floatround_ceil);
 	}
 
@@ -5379,7 +5380,7 @@ PayDay()
 					SendClientMessage(i, COLOR_GRAD1, string);
 					if(PlayerInfo[i][pAccount] <= 100000000)
 					{
-						format(string, sizeof(string), "  Odsetki: %.2f procent", interestRate);
+						format(string, sizeof(string), "  Odsetki: %.3f procent", interestRate);
 						SendClientMessage(i, COLOR_GRAD2, string);
 						format(string, sizeof(string), "  Zysk z odsetek $%d", interest);
 						SendClientMessage(i, COLOR_GRAD3, string);
