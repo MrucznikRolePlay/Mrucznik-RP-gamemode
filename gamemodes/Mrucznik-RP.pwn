@@ -5360,7 +5360,7 @@ PayDay()
 					new interest = CalculateInterest(i);
 					new Float:interestRate;
 					if(PlayerInfo[i][pAccount] != 0) {
-						interestRate = (interest/PlayerInfo[i][pAccount]) * 100;
+						interestRate = float((float(interest)/float(PlayerInfo[i][pAccount])) * 100);
 					}
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
