@@ -5301,7 +5301,7 @@ CalculateInterest(playerid)
 		return floatround(money * 0.001, floatround_ceil);
 	}
 
-	new Float:interest = (money * (1.3 - 0.067 * floatlog(money)) / 100) / 2;
+	new Float:interest = (money * (1.3 - 0.067 * floatlog(money)) / 1000);
 	new Float:interestMultiplier = 1;
 	if (PlayerInfo[playerid][pDom] != 0) {
 		interestMultiplier = 2;
