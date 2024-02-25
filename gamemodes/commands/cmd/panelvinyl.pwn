@@ -35,7 +35,7 @@ YCMD:panelvinyl(playerid, params[], help)
         if(GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pRank] >= 6)
         {
             sendTipMessage(playerid, "Witamy w panelu zarz¹dzania Vinyl-Club");
-            ShowPlayerDialogEx(playerid, 6999, DIALOG_STYLE_TABLIST, "Laptop Lidera", "Open/Close\nUstal cene Norm.\nUstal cene VIP\nUstal cene napoi\nUstal nazwe napoi", "Wybierz", "Odrzuæ");
+            ShowPlayerDialogEx(playerid, 6999, DIALOG_STYLE_TABLIST, "Laptop Lidera", "Open/Close\nUstal cenê Norm.\nUstal cenê VIP\nUstal cenê napojów\nUstal nazwê napojów", "Wybierz", "Odrzuæ");
         }
         else
         {

@@ -324,7 +324,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadŸ poni¿ej kwotê, która ktoœ bêdzie musia³ zap³aciæ za bilet Normalny", "Wybierz", "Odrzuæ");
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadŸ poni¿ej kwotê, która ktoœ bêdzie musia³ zap³aciæ za bilet VIP", "Wybierz", "Odrzuæ");
 					SetPVarInt(playerid, "b-wybor", 2);
 				}
 				case 3:
@@ -409,7 +409,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName4, drinkCost4);
 				}
-				ShowPlayerDialogEx(playerid, DIALOG_STYLE_INPUT, 6998, "Panel lidera", string, "Akceptuj", "Odrzuæ"); 
+				ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Panel lidera", string, "Akceptuj", "Odrzuæ"); 
 				SetPVarInt(playerid, "b-wybor", 7); 
 				return 1;
 			}
