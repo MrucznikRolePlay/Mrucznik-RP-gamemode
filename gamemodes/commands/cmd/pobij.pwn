@@ -61,7 +61,7 @@ YCMD:pobij(playerid, params[], help)
 		{
 			if(playa != INVALID_PLAYER_ID && playa != playerid)
 			{
-	    		if(GetDistanceBetweenPlayers(playerid,playa) < 5 && Spectate[playa] == INVALID_PLAYER_ID)
+	    		if(GetDistanceBetweenPlayers(playerid,playa) < 5)
  				{
  				    if(GetPlayerState(playerid) == 1)
  				    {

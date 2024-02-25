@@ -50,7 +50,7 @@ YCMD:sprzedajalkohol(playerid, params[], help)
 			
 			if(IsPlayerConnected(giveplayerid) || giveplayerid != INVALID_PLAYER_ID)
 			{
-				if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5 && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+				if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
 				{
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));

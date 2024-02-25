@@ -1167,7 +1167,8 @@ command_akceptuj_Impl(playerid, x_job[32])
                         
                         if(Condom[playerid] < 1)
                         {
-                            new Float:health, Float:Ahealth, Float:hp;
+                            new Float:health, Float:Ahealth;
+                            new hp = 0;
                             new level = PlayerInfo[SexOffer[playerid]][pSexSkill];
                             if(level >= 0 && level <= 50) hp = 20;
                             else if(level >= 51 && level <= 100) hp = 40;
@@ -1434,6 +1435,50 @@ command_akceptuj_Impl(playerid, x_job[32])
     else if(strcmp(x_job,"neony",true) == 0 || strcmp(x_job,"neon",true) == 0)
     {
         sprzedajneon_akceptuj(playerid);
+    }
+    else if(strcmp(x_job, "zestaw", true) == 0 || strcmp(x_job, "zestawnaprawczy", true) == 0)
+    {
+        new id = GetPVarInt(playerid, "FixKitOffer");
+        
+        if(id == -1)
+        {
+            SendClientMessage(playerid, -1, "Nikt nie oferowa³ ci zestawu naprawczego!");
+            return 1;
+        }
+        if(!IsPlayerConnected(id))
+        {
+            SetPVarInt(playerid, "FixKitOffer", -1);
+            SendClientMessage(playerid, -1, "Gracz, który oferowa³ ci zestaw naprawczy wyszed³ z serwera!");
+            return 1;
+        }
+        if(kaska[playerid] < 15000)
+        {
+            SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
+            SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
+            return 1;
+        }
+        if(!ProxDetectorS(10.5, playerid, id))
+        {
+            SendClientMessage(playerid, -1, "Jesteœ za daleko od mechanika, który oferowa³ ci zestaw.");
+            return 1;
+        }
+
+        SendClientMessage(id, 0x0080D0FF, sprintf("%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", GetNick(playerid)));
+        SendClientMessage(playerid, 0x00FF00FF, sprintf("Kupi³eœ zestaw od mechanika %s za 15000$", GetNick(id)));
+        ZabierzKase(playerid, 15000);
+        DajKase(id, 15000);
+        PlayerInfo[playerid][pFixKit]++;
+        PlayerInfo[id][pMechSkill]++;
+        if(PlayerInfo[id][pMechSkill] == 50)
+        { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+        else if(PlayerInfo[id][pMechSkill] == 100)
+        { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+        else if(PlayerInfo[id][pMechSkill] == 200)
+        { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+        else if(PlayerInfo[id][pMechSkill] == 400)
+        { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
+        
+        SetPVarInt(playerid, "FixKitOffer", -1);
     }
     return 1;
 }

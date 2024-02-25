@@ -43,7 +43,7 @@ YCMD:witaj(playerid, params[], help)
 			sendErrorMessage(playerid, "Musisz odczekaæ 15 sekund przed ponown¹ interakcj¹!"); 
 			return 1;
 		}
-		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
+		if (ProxDetectorS(5.0, playerid, playa))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

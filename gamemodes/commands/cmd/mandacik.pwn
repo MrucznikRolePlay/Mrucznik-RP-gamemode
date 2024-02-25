@@ -73,7 +73,7 @@ YCMD:mandacik(playerid, params[], help)
 					SendClientMessage(playerid, COLOR_LIGHTRED, "Nie mo¿esz daæ samemu sobie mandat.");
 					return 1;
 				}
-		        if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+		        if (ProxDetectorS(8.0, playerid, giveplayerid))
 				{
 					new stawki = moneys;
 					moneys = (PlayerInfo[giveplayerid][pLevel] > 21) ? (stawki*3080) : (stawki*(PlayerInfo[giveplayerid][pLevel]*180));

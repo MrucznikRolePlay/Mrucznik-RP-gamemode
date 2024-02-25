@@ -41,4 +41,5 @@ hook OnGameModeInit()
     command_napad();
     command_napadon();
     command_napadoff();
+    
 }

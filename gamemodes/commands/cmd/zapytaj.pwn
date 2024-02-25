@@ -31,8 +31,8 @@
 YCMD:zapytaj(playerid, params[], help)
 {
     if(GetPVarInt(playerid, "active_ticket") != 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Twoje wczesniejsze zg³oszenie nadal jest aktywne. Poczekaj na odpowiedŸ!");
-    new desc[64];
-    if(sscanf(params, "s[64]", desc))
+    new desc[128];
+    if(sscanf(params, "s[128]", desc))
     {
         SendClientMessage(playerid, COLOR_YELLOW, "Potrzebujesz pomocy na temat gry IC? U¿yj zapytania do supportu!");
         SendClientMessage(playerid, COLOR_GRAD2, "Wpisz ogólny temat w nawiasach kwadratowych [TEMAT] oraz dalsz¹ tresc.");
@@ -46,16 +46,21 @@ YCMD:zapytaj(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD2, "Przyk³ad u¿ycia: {FFFFFF}/zapytaj [Pojazd] Gdzie kupiê swój pierwszy pojazd?");
         return 1;
     }
-    new sub[16], str[32];
+    new sub[17], str[87];
     strmid(sub, desc, pos+1, pos2);
     while(desc[pos2+1] == ' ')
     {
         strdel(desc, pos2, pos2+1);
     }
-    strmid(str, desc, pos2+1, strlen(desc), 32);
+    strmid(str, desc, pos2+1, strlen(desc));
     if(strlen(sub) < 2 || strlen(desc) < 10)
     {
         sendTipMessageEx(playerid, COLOR_GRAD2, "Poda³es za krótki opis lub temat.");
+        return 1;
+    }
+    if(strlen(sub) > 15 || strlen(str) > 85)
+    {
+        sendTipMessageEx(playerid, COLOR_GRAD2, "Maksymalna d³ugoœæ tematu to 15 znaków, a opisu - 85 znaków.");
         return 1;
     }
     new id;

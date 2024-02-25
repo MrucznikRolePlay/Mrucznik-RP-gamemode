@@ -45,17 +45,12 @@ YCMD:elo(playerid, params[], help)
 			return 1;
 		}
 
-		if (ProxDetectorS(5.0, playerid, playa) && Spectate[playa] == INVALID_PLAYER_ID)
+		if (ProxDetectorS(5.0, playerid, playa))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
 		        if(playa != INVALID_PLAYER_ID)
 		        {
-		            if(Spectate[playa] != INVALID_PLAYER_ID)
-					{
-						sendErrorMessage(playerid, "Ten gracz jest za daleko.");
-						return 1;
-					}
                     new string[128], nick[MAX_PLAYER_NAME], witany[MAX_PLAYER_NAME];
                     GetPlayerName(playa, witany, sizeof(witany));
                     GetPlayerName(playerid, nick, sizeof(nick));

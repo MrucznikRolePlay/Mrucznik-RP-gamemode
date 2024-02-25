@@ -41,11 +41,6 @@ YCMD:zaufanygracz(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /zg [admin chat]");
 			return 1;
 		}
-		if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1)
-		{
-			sendTipMessage(playerid, "Zaufani nie istniej¹! PogódŸ siê z tym."); 
-			return 1;
-		}
 		switch (PlayerInfo[playerid][pZG]) {
 			case 1: format(string, sizeof(string), "*%d Opiekun IC %s: %s",PlayerInfo[playerid][pZG], sendername, params);
 			case 2: format(string, sizeof(string), "*%d Prawie ZG %s: %s",PlayerInfo[playerid][pZG], sendername, params);
@@ -56,7 +51,7 @@ YCMD:zaufanygracz(playerid, params[], help)
 			case 7: format(string, sizeof(string), "*%d Bardzo Dobry ZG %s: %s",PlayerInfo[playerid][pZG], sendername, params);
 			case 8: format(string, sizeof(string), "*%d Œwietny ZG %s: %s",PlayerInfo[playerid][pZG], sendername, params);
 			case 9: format(string, sizeof(string), "*%d Znakomity ZG %s: %s",PlayerInfo[playerid][pZG], sendername, params);
-			case 10: format(string, sizeof(string), "*%d Æwieræ admin %s: %s",PlayerInfo[playerid][pZG], sendername, params);
+			case 10: format(string, sizeof(string), "*%d Zas³u¿ony %s: %s",PlayerInfo[playerid][pZG], sendername, params);
 		}
 		
 		SendZGMessage(0x7AA1C9FF/*COLOR_BROWN*/, string);

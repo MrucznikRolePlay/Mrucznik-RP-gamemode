@@ -49,7 +49,7 @@ YCMD:deletedom(playerid, params[], help)
 			{
 				dini_Remove(string);
 				DestroyDynamicPickup(Dom[kategoria][hPickup]);
-				DestroyDynamicMapIcon(Dom[kategoria][hIkonka]);
+				if(Dom[kategoria][hIkonka] != -1) DestroyDynamicMapIcon(Dom[kategoria][hIkonka]);
                 Dom[kategoria][hID] = 0;
 				Dom[kategoria][hDomNr] = 0;
 				Dom[kategoria][hZamek] = 0;
@@ -72,7 +72,7 @@ YCMD:deletedom(playerid, params[], help)
 				//Dom[kategoria][h3D_txt] = 0;
 				Dom[kategoria][hK_3D] = 0;
 				Dom[kategoria][hPickup] = 0;
-				Dom[kategoria][hIkonka] = 0;
+				Dom[kategoria][hIkonka] = -1;
 				Dom[kategoria][hPokoje] = 0;
 				Dom[kategoria][hPDW] = 0;
 				Dom[kategoria][hPW] = 0;

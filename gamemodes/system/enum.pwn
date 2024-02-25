@@ -58,7 +58,7 @@ enum eSupportData {
     bool:suppValid,
     suppCaller,
     suppSub[16],
-    suppDesc[32]
+    suppDesc[86]
 }
 //14.11
 enum eMySQLCar { //1+1+1+1+3+1+1+1+2+1+1+1+1+1+2+32+1+1+1 = 54 B
@@ -503,7 +503,7 @@ new FractionNames[][40] = {
     "Korporacja Transportowa",
     "Urz¹d Stanu San Andreas",//11
     "Grove Street Families",
-    "Uninvited guests",
+    "Thirty deep mafia ballas",
     "Hillside Nortenos 14",
     "89 Border Society",
     "IV Saint Reich",

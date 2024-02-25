@@ -49,7 +49,7 @@ YCMD:tankowanie(playerid, params[], help)
 			{
 			    if(playa != INVALID_PLAYER_ID)
 			    {
-			        if(ProxDetectorS(8.0, playerid, playa) && IsPlayerInAnyVehicle(playa) && Spectate[playa] == INVALID_PLAYER_ID)
+			        if(ProxDetectorS(8.0, playerid, playa) && IsPlayerInAnyVehicle(playa))
 					{
 					    if(SpamujeMechanik[playerid] == 0)
 					    {

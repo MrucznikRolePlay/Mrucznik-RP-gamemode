@@ -42,7 +42,7 @@ YCMD:odznaka(playerid, params[], help)
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-				if (ProxDetectorS(5.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+				if (ProxDetectorS(5.0, playerid, giveplayerid))
 				{
 					new string[64], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
