@@ -60,7 +60,7 @@ YCMD:zg(playerid, params[], help)
 			format(string, sizeof(string), "* Skrypter %s - %s", sendername, params);
 		}
 		
-		SendZGMessage(0x7AA1C9FF, string);
+		SendZGMessage(COLOR_BROWN, string);
 		Log(chatLog, INFO, "%s zaufani gracze chat: %s", GetPlayerLogName(playerid), params);
 	}
 	return 1;
