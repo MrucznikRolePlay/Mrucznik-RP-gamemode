@@ -36,19 +36,19 @@ YCMD:warn(playerid, params[], help)
     	new giveplayerid, result[64];
 		if( sscanf(params, "k<fix>s[64]", giveplayerid, result))
 		{
-			sendTipMessage(playerid, "U¿yj /warn [playerid/CzêœæNicku] [reason]");
+			sendTipMessage(playerid, "Uï¿½yj /warn [playerid/Czï¿½ï¿½Nicku] [reason]");
 			return 1;
 		}
 		if(giveplayerid == 65535)
 		{
 			if(sscanf(params, "ds[64]", giveplayerid, result)) 
 			{
-				sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz ma zbugowane ID. Wpisz jego ID zamiast nicku aby go zbanowaæ.");
+				sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz ma zbugowane ID. Wpisz jego ID zamiast nicku aby go zbanowaï¿½.");
 				return 1;
 			}
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] == 10 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Zaufany(playerid) || IsAScripter(playerid))
 		{
             if(AntySpam[playerid] == 1)
 		    {
@@ -61,12 +61,12 @@ YCMD:warn(playerid, params[], help)
 		        {
 		            if(PlayerInfo[giveplayerid][pAdmin] >= 1)
 		            {
-		                sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zwarnowaæ Admina !");
+		                sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zwarnowaï¿½ Admina !");
 		                return 1;
 		            }
                     if(gPlayerLogged[giveplayerid] == 0)
                     {
-                        sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany, u¿yj kicka.");
+                        sendTipMessageEx(playerid, COLOR_WHITE, " Gracz nie jest zalogowany, uï¿½yj kicka.");
 						return 1;
                     }
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
@@ -75,21 +75,21 @@ YCMD:warn(playerid, params[], help)
 					{
 						SetPVarInt(playerid, "PunishWarnPlayer", giveplayerid);
 						SetPVarString(playerid, "PunishWarnPlayer_Reason", result);
-						format(string, sizeof string, "{FFFFFF}Gracz {B7EB34}%s {FFFFFF}ma ju¿ 2 warny, otrzymanie kolejnego jest równoznaczne z {FFA217}BANEM{FFFFFF}.\n{f0d71f}Czy potwierdzasz nadanie bana graczowi?\n{FFFFFF}Je¿eli to mo¿liwe, mo¿esz ukaraæ gracza l¿ejsz¹ kar¹.", GetNick(giveplayerid));
-						ShowPlayerDialogEx(playerid, 9521, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Nadaj warna", "Anuluj karê");
+						format(string, sizeof string, "{FFFFFF}Gracz {B7EB34}%s {FFFFFF}ma juï¿½ 2 warny, otrzymanie kolejnego jest rï¿½wnoznaczne z {FFA217}BANEM{FFFFFF}.\n{f0d71f}Czy potwierdzasz nadanie bana graczowi?\n{FFFFFF}Jeï¿½eli to moï¿½liwe, moï¿½esz ukaraï¿½ gracza lï¿½ejszï¿½ karï¿½.", GetNick(giveplayerid));
+						ShowPlayerDialogEx(playerid, 9521, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Nadaj warna", "Anuluj karï¿½");
 					}
 					else
 					{
 						SetPVarInt(playerid, "PunishWarnPlayer", giveplayerid);
 						SetPVarString(playerid, "PunishWarnPlayer_Reason", result);
-						format(string, sizeof string, "{FFFFFF}Czy podj¹³eœ dialog z graczem {B7EB34}%s{FFFFFF}?\nJe¿eli to mo¿liwe, mo¿esz ukaraæ gracza l¿ejsz¹ kar¹.", GetNick(giveplayerid));
-						ShowPlayerDialogEx(playerid, 9521, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Nadaj warna", "Anuluj karê");
+						format(string, sizeof string, "{FFFFFF}Czy podjï¿½ï¿½eï¿½ dialog z graczem {B7EB34}%s{FFFFFF}?\nJeï¿½eli to moï¿½liwe, moï¿½esz ukaraï¿½ gracza lï¿½ejszï¿½ karï¿½.", GetNick(giveplayerid));
+						ShowPlayerDialogEx(playerid, 9521, DIALOG_STYLE_MSGBOX, "Nadawanie warna", string, "Nadaj warna", "Anuluj karï¿½");
 					}
 				}
 			}//not connected
             else
             {
-                format(string, sizeof(string), "Gracz o ID %d nie jest po³aczony.", giveplayerid);
+                format(string, sizeof(string), "Gracz o ID %d nie jest poï¿½aczony.", giveplayerid);
 			    sendErrorMessage(playerid, string);
             }
 		}

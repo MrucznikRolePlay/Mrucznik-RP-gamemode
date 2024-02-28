@@ -30,7 +30,7 @@
 
 YCMD:tickets(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pZG] == 0 && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
+    if(!Zaufany(playerid) && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return 1;
     Support_ShowTickets(playerid);
     return 1;
 }

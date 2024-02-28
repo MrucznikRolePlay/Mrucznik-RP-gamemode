@@ -482,6 +482,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`PodgladWiadomosci`='%d', \
 	`StylWalki`='%d', \
 	`PAdmin`='%d', \
+	`ZaufanyGracz`='%d', \
 	`Uniform`='%d', \
 	`CruiseController`='%d', \
 	`FixKit`='%d', \
@@ -500,6 +501,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
+	PlayerInfo[playerid][pZG],
 	PlayerInfo[playerid][pUniform],
 	PlayerInfo[playerid][pCruiseController],
 	PlayerInfo[playerid][pFixKit],
@@ -749,7 +751,7 @@ public MruMySQL_LoadAccount(playerid)
 		MyWeapon[playerid] = PlayerInfo[playerid][pGun0];
 		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`, `Immunity`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `ZaufanyGracz`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`, `Immunity`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
@@ -759,7 +761,7 @@ public MruMySQL_LoadAccount(playerid)
         mysql_free_result();
 
 		new immunity;
-        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -773,6 +775,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pPodPW],
 		PlayerInfo[playerid][pStylWalki],
 		PlayerInfo[playerid][pNewAP],
+		PlayerInfo[playerid][pZG],
 		PlayerInfo[playerid][pUniform],
 		PlayerInfo[playerid][pCruiseController],
 		PlayerInfo[playerid][pFixKit],

@@ -54,7 +54,7 @@ YCMD:ban(playerid, params[], help)
 	        {
 	            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid, sendername, sizeof(sendername));
-	            if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || IsAScripter(playerid))
+	            if(PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid) || IsAScripter(playerid))
 	            {
 					if(IsPlayerAdmin(giveplayerid) || Uprawnienia(giveplayerid, ACCESS_OWNER))
 					{
@@ -64,11 +64,6 @@ YCMD:ban(playerid, params[], help)
 					if( (PlayerInfo[giveplayerid][pAdmin] >= 1 || PlayerInfo[giveplayerid][pNewAP] >= 1 || PlayerInfo[giveplayerid][pZG] >= 4) && PlayerInfo[playerid][pZG] >= 4)
 					{
 						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Admina, P@ i ZG!");
-						return 1;
-					}
-					if(PlayerInfo[giveplayerid][pLevel] > 1 && PlayerInfo[playerid][pZG] >= 4 && PlayerInfo[playerid][pZG] < 6)
-					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ gracza z levelem wiekszym niz 1!");
 						return 1;
 					}
                     if(gPlayerLogged[giveplayerid] == 0)

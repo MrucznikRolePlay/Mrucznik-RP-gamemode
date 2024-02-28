@@ -38,11 +38,11 @@ YCMD:unjail(playerid, params[], help)
 		new playa;
 		if( sscanf(params, "k<fix>", playa))
 		{
-			sendTipMessage(playerid, "U¿yj /unaj [ID gracza]");
+			sendTipMessage(playerid, "Uï¿½yj /unaj [ID gracza]");
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] == 10 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid) || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {
@@ -51,13 +51,13 @@ YCMD:unjail(playerid, params[], help)
 		            if(PlayerInfo[playa][pJailed] == 3)
 		            {
 				        GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-						format(string, sizeof(string), "* Uwolni³eœ %s.", giveplayer);
+						format(string, sizeof(string), "* Uwolniï¿½eï¿½ %s.", giveplayer);
 						_MruAdmin(playerid, string);
-						format(string, sizeof(string), "* Zosta³eœ uwolniony przez %s.", GetNickEx(playerid));
+						format(string, sizeof(string), "* Zostaï¿½eï¿½ uwolniony przez %s.", GetNickEx(playerid));
 						_MruAdmin(playa, string);
-						format(string, sizeof(string), "ADMCMD: Administrator %s uwolni³ %s z AJ", GetNickEx(playerid), giveplayer);
+						format(string, sizeof(string), "ADMCMD: Administrator %s uwolniï¿½ %s z AJ", GetNickEx(playerid), giveplayer);
 						SendMessageToAdmin(string, COLOR_RED);
-                        Log(punishmentLog, INFO, "Admin %s uwolni³ %s z AJ (typ: %d, czas: %ds)", 
+                        Log(punishmentLog, INFO, "Admin %s uwolniï¿½ %s z AJ (typ: %d, czas: %ds)", 
 							GetPlayerLogName(playerid), 
 							GetPlayerLogName(playa), 
 							PlayerInfo[playa][pJailed], 
@@ -65,7 +65,7 @@ YCMD:unjail(playerid, params[], help)
 
 						if(GetPVarInt(playa, "DostalDM2") != 0)
 						{
-							format(string, sizeof(string), "Info: %s nie zostanie zabrana broñ bo dosta³ UnJail", GetNick(playa));
+							format(string, sizeof(string), "Info: %s nie zostanie zabrana broï¿½ bo dostaï¿½ UnJail", GetNick(playa));
 							sendTipMessage(playerid, string); 
 						}
 						PlayerInfo[playa][pJailed] = 0;

@@ -36,14 +36,14 @@ YCMD:goto(playerid, params[], help)
 		new plo;
 		if( sscanf(params, "k<fix>", plo))
 		{
-			sendTipMessage(playerid, "U¿yj /to [playerid/CzêœæNicku]");
+			sendTipMessage(playerid, "Uï¿½yj /to [playerid/Czï¿½ï¿½Nicku]");
 			return 1;
 		}
 		new Float:plocx,Float:plocy,Float:plocz;
 
 		if(plo != INVALID_PLAYER_ID)
 		{
-			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
+			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Zaufany(playerid) || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 			{
 				if(Spectate[playerid] != INVALID_PLAYER_ID)
 				{

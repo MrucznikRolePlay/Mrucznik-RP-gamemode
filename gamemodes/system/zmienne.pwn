@@ -27,12 +27,12 @@ new Float:czitZ;
 new timerAC[MAX_PLAYERS];
 new timeAC[MAX_PLAYERS];
 
-new timeFakeVehRespawn[MAX_PLAYERS] = {0, ...}; // czas (tick) kiedy gracz ostatnio utopi³ pojazd (albo udawa³, ¿e go utopi³, by je zrespawnowaæ)
-new countFakeVehRespawn[MAX_PLAYERS] = {0, ...}; // ile razy w ci¹gu ostatnich 20 minut gracz utopi³ pojazd (albo udawa³, ¿e go utopi³, by je zrespawnowaæ)
-new unoccupiedVehToCheckAC[MAX_VEHICLES] = {false, ...}; // true je¿eli w przeci¹gu ostatnich 3 sekund pozycja danego pojazdu zosta³a zmieniona przez synchronizacjê pojazdu bez kierowcy (UnoccupiedSync)
-new unoccupiedVehToCheckPlayersAC[MAX_VEHICLES][MAX_PLAYERS] = {{false, ...}, ...}; // true dla danego pojazdu v i dla danego gracza p, jezeli to gracz p dokona³ synchronizacji pojazdu v (UnoccupiedSync)
-new unoccupiedVehBlockAC[MAX_PLAYERS] = {false, ...}; // true je¿eli na gracza zosta³a za³o¿ona blokada synchronizacji pojazdów bez kierowcy
-new performUnoccupiedVehCheckAC = false; // true je¿eli pozycja któregokolwiek pojazdu zosta³a zmieniona w przeci¹gu ostatnich 3 sekund przez synchronizacjê typu UnoccupiedSync
+new timeFakeVehRespawn[MAX_PLAYERS] = {0, ...}; // czas (tick) kiedy gracz ostatnio utopiï¿½ pojazd (albo udawaï¿½, ï¿½e go utopiï¿½, by je zrespawnowaï¿½)
+new countFakeVehRespawn[MAX_PLAYERS] = {0, ...}; // ile razy w ciï¿½gu ostatnich 20 minut gracz utopiï¿½ pojazd (albo udawaï¿½, ï¿½e go utopiï¿½, by je zrespawnowaï¿½)
+new unoccupiedVehToCheckAC[MAX_VEHICLES] = {false, ...}; // true jeï¿½eli w przeciï¿½gu ostatnich 3 sekund pozycja danego pojazdu zostaï¿½a zmieniona przez synchronizacjï¿½ pojazdu bez kierowcy (UnoccupiedSync)
+new unoccupiedVehToCheckPlayersAC[MAX_VEHICLES][MAX_PLAYERS] = {{false, ...}, ...}; // true dla danego pojazdu v i dla danego gracza p, jezeli to gracz p dokonaï¿½ synchronizacji pojazdu v (UnoccupiedSync)
+new unoccupiedVehBlockAC[MAX_PLAYERS] = {false, ...}; // true jeï¿½eli na gracza zostaï¿½a zaï¿½oï¿½ona blokada synchronizacji pojazdï¿½w bez kierowcy
+new performUnoccupiedVehCheckAC = false; // true jeï¿½eli pozycja ktï¿½regokolwiek pojazdu zostaï¿½a zmieniona w przeciï¿½gu ostatnich 3 sekund przez synchronizacjï¿½ typu UnoccupiedSync
 
 //doors
 new noAccessCome[MAX_PLAYERS]; 
@@ -84,7 +84,7 @@ new DMV_ALARM = 0;
 new bramaAlarmu[4];
 
 //Basen Tsunami
-new poolStatus = 1;// 0 = zamkniêty; 1 = otwarty;
+new poolStatus = 1;// 0 = zamkniï¿½ty; 1 = otwarty;
 new onePoolPrice = 50000;
 new twoPoolPrice = 75000;
 new threePoolPrice = 100000;
@@ -201,7 +201,7 @@ new PlayerText:TXD_TJDCounter[MAX_PLAYERS];
 new TransObjects[MAX_PLAYERS][12];
 
 new TransportJobData[][eTransportJobData] = {
-    {"Centrum za³adunku", 1769.1692, -2022.8007, 13.1291, 0.0, 0.0, 0.0, 0, 0, 0, 0},
+    {"Centrum zaï¿½adunku", 1769.1692, -2022.8007, 13.1291, 0.0, 0.0, 0.0, 0, 0, 0, 0},
     {"Kostka brukowa", 653.1826, 809.6608, -42.7370, 1900.0842,-1302.5868,14.1575, 6000, 1685, 8, 0},
     {"Beczki z olejem", 251.1756, 1420.7592, 10.2012, 2501.0537, -2211.7014, 12.5464, 5000, 1217, 10, 0},
     {"Odpady komunalne", 2149.8274, -1987.9075, 12.5455, -134.0966, 2243.4724, 32.0858, 5000, 3035, 8, 0},
@@ -209,13 +209,13 @@ new TransportJobData[][eTransportJobData] = {
     {"Wrak pojazdu", 2149.8274, -1987.9075, 12.5455, -1589.3971, 78.3077, 2.5491, 5000, 3594, 1, 0},
     {"Puste skrzynie", 0.0, 0.0, 0.0, 1194.2673, -887.1570, 42.0945, 2000, 944, 4, 25},
     {"Puste skrzynie", 0.0, 0.0, 0.0, 1900.0842,-1302.5868,14.1575, 2000, 944, 4, 25},
-    {"Artyku³y papiernicze", 0.0, 0.0, 0.0, 1480.9487, -1838.1323, 12.5413, 2000, 944, 4, 25},
-    {"Artyku³y papiernicze", 0.0, 0.0, 0.0, 1279.8621, -1297.9243, 12.3369, 2000, 944, 4, 25},
+    {"Artykuï¿½y papiernicze", 0.0, 0.0, 0.0, 1480.9487, -1838.1323, 12.5413, 2000, 944, 4, 25},
+    {"Artykuï¿½y papiernicze", 0.0, 0.0, 0.0, 1279.8621, -1297.9243, 12.3369, 2000, 944, 4, 25},
     {"Alkohol", 0.0, 0.0, 0.0, 2449.9604, -1764.1433, 12.5697, 2500, 944, 4, 50},
-    {"Czêsci samochodowe", 0.0, 0.0, 0.0, 2780.9678, -1618.3486, 9.9151, 2500, 944, 2, 75},
-    {"Jedzenie dla zwierz¹t", 0.0, 0.0, 0.0, 2567.8562, -972.7701, 81.1139, 3000, 1454, 10, 100},
-    {"Kawa³ki stali", 0.0, 0.0, 0.0, 595.9616, -1296.7166, 13.8559, 2500, 944, 4, 75},
-    {"Broñ", 0.0, 0.0, 0.0, 2153.3264, -2289.0762, 12.3670, 1500, 944, 5, 50}
+    {"Czï¿½sci samochodowe", 0.0, 0.0, 0.0, 2780.9678, -1618.3486, 9.9151, 2500, 944, 2, 75},
+    {"Jedzenie dla zwierzï¿½t", 0.0, 0.0, 0.0, 2567.8562, -972.7701, 81.1139, 3000, 1454, 10, 100},
+    {"Kawaï¿½ki stali", 0.0, 0.0, 0.0, 595.9616, -1296.7166, 13.8559, 2500, 944, 4, 75},
+    {"Broï¿½", 0.0, 0.0, 0.0, 2153.3264, -2289.0762, 12.3670, 1500, 944, 5, 50}
 };
 
 new TJDBoxes[7] = {0, ...};
@@ -283,7 +283,7 @@ new KolID[MAX_KOLCZATEK] = {-1, ...},
     KolArea[MAX_KOLCZATEK],
     bool:KolDelay[MAX_VEHICLES] = {false, ...},
     KolVehicle[MAX_KOLCZATEK];
-//18.08 poprawki crashy, obiektów, rebuild, admin island, kolejka, loading screen
+//18.08 poprawki crashy, obiektï¿½w, rebuild, admin island, kolejka, loading screen
 new AUDIO_LoginTotal;
 new AUDIO_LoginData[20][16];
 new AI_SIGN[3],
@@ -291,7 +291,7 @@ new AI_SIGN[3],
     AI_MOVABLE[2],
     AI_PROTECT[11];
 new bool:VAR_Kolejka=false;
-//13.08  s¹d int, drobne zmiany errorów, fly mode dla 1000+ @
+//13.08  sï¿½d int, drobne zmiany errorï¿½w, fly mode dla 1000+ @
 
 new Brama_HA;
 new Brama_HA1;
@@ -303,7 +303,7 @@ new bool:GATE_SAD_ALARM = false;
 //01.08 speedometer
 new bool:ToggleSpeedo[MAX_PLAYERS],
     bool:ToggleSpeedoGPS[MAX_PLAYERS];
-//25.07 strefy gangów
+//25.07 strefy gangï¿½w
 new Zone_Points[2];
 new Float:Zone_Area[81];
 new ZoneControl[MAX_ZONES];
@@ -364,9 +364,9 @@ new Sejf_Frakcji[MAX_FRAC];
 new Sejf_Rodziny[MAX_ORG];
 new Frakcja_Mats[MAX_FRAC];
 new Rodzina_Mats[MAX_ORG];
-//23.06 fina³
-new KTAir_Start, KTAir_End, Float:KTAir_Offsets[3]; //Dla At400 nie ruszaæ.
-new bool:VAR_MySQLREGISTER=true; //W³¹czyæ rejestracje?
+//23.06 finaï¿½
+new KTAir_Start, KTAir_End, Float:KTAir_Offsets[3]; //Dla At400 nie ruszaï¿½.
+new bool:VAR_MySQLREGISTER=true; //Wï¿½ï¿½czyï¿½ rejestracje?
 new GATE_VINYL, bool:GATE_VINYL_S=false,
     GATE_VINYL_IN[4], bool:GATE_VINYL_IN_S[4] = {false, ...};
 new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,71.0};  //pos[3] dist, vw
@@ -590,11 +590,11 @@ new SafeTime[MAX_PLAYERS];
 new bool:openwarsztat = false;//Warsztat owarty/nie
 new tworzenietrasy[MAX_PLAYERS] = 666;//Ustawia ID trasy podczas tworzenia
 new owyscig[MAX_PLAYERS] = 666;//Ustawia ID trasy podczas organizowania
-new ScigaSie[MAX_PLAYERS] = 666;//Czy gracz siê œciga i na jakiej trasie
-new IloscCH[MAX_PLAYERS];//Iloœæ czekpointów
-new Float:wCheckpoint[20][MAX_CHECKPOINTS+1][3];//Pozycje Checkpointów
-new Scigamy = 666;//Jaki wyœcig jest w³¹czony
-new IloscZawodnikow;//Iloœæ zawodników w wyœcigu
+new ScigaSie[MAX_PLAYERS] = 666;//Czy gracz siï¿½ ï¿½ciga i na jakiej trasie
+new IloscCH[MAX_PLAYERS];//Iloï¿½ï¿½ czekpointï¿½w
+new Float:wCheckpoint[20][MAX_CHECKPOINTS+1][3];//Pozycje Checkpointï¿½w
+new Scigamy = 666;//Jaki wyï¿½cig jest wï¿½ï¿½czony
+new IloscZawodnikow;//Iloï¿½ï¿½ zawodnikï¿½w w wyï¿½cigu
 new Ukonczyl = 1;
 
 new dajeKontrakt[MAX_PLAYERS];
@@ -837,10 +837,10 @@ new DrzwiPDKomi4;
 new DrzwiPDKomi4S = 1;
 //nowy komisariat
 new stolek[34];
-new kosmove;//zmienne bram konfesjona³ów
-new kos2move;//zmienne bram konfesjona³ów
-new kos;//zmienne bram konfesjona³ów
-new kos2;//zmienne bram konfesjona³ów
+new kosmove;//zmienne bram konfesjonaï¿½ï¿½w
+new kos2move;//zmienne bram konfesjonaï¿½ï¿½w
+new kos;//zmienne bram konfesjonaï¿½ï¿½w
+new kos2;//zmienne bram konfesjonaï¿½ï¿½w
 //koniec nowego komi
 new Izba;
 new IzbaState = 1;
@@ -900,7 +900,7 @@ new WjedzTimer[MAX_PLAYERS];
 new timeSecWjedz[MAX_PLAYERS];
 
 //koniecfbi
-//brama baysie by micha³
+//brama baysie by michaï¿½
 new BramaBaySide;
 new BramaBaySideS = 1;
 //new BramaAlhambra;
@@ -915,7 +915,7 @@ new movegate[3];
 new SkinBrama[3];
 new SkinBramaMove[3];
 
-//brama ¿u¿el by micha³
+//brama ï¿½uï¿½el by michaï¿½
 new BramaZuz;
 new BramaZuzS = 1;
 //koniec garazpd
@@ -957,18 +957,18 @@ new pobity[MAX_PLAYERS];//pobity
 new pobilem[MAX_PLAYERS];
 new podczasbicia[MAX_PLAYERS];
 new spamwl[MAX_PLAYERS];
-new poddaje[MAX_PLAYERS];//poddaje siê
-new lowcap[MAX_PLAYERS];//³owca nagród który proponowa³ poddanie siê
-new lowcaz[MAX_PLAYERS];//³owca nagród dostaje zlecenie
-new bijep[MAX_PLAYERS];//kozak który proponowa³ pobicie siê
+new poddaje[MAX_PLAYERS];//poddaje siï¿½
+new lowcap[MAX_PLAYERS];//ï¿½owca nagrï¿½d ktï¿½ry proponowaï¿½ poddanie siï¿½
+new lowcaz[MAX_PLAYERS];//ï¿½owca nagrï¿½d dostaje zlecenie
+new bijep[MAX_PLAYERS];//kozak ktï¿½ry proponowaï¿½ pobicie siï¿½
 new okradziony[MAX_PLAYERS];//zabierzportfel
 new zmatsowany[MAX_PLAYERS];//diler brono
 new BusCzit[MAX_PLAYERS];
-new IDDomu[MAX_PLAYERS];//SYSTEM DOMÓW
+new IDDomu[MAX_PLAYERS];//SYSTEM DOMï¿½W
 new MatsGood[MAX_PLAYERS];
 new KradniecieWozu[MAX_PLAYERS];
 new AntyBH = 1;//Anty BH
-new antyczolg[MAX_PLAYERS];//Anty Czo³g
+new antyczolg[MAX_PLAYERS];//Anty Czoï¿½g
 new NieSpamujKradnij[MAX_PLAYERS];//Anty BH
 new pojazdid[MAX_PLAYERS];//SYSTEM AUT
 new CenaPojazdu[MAX_PLAYERS];//SYSTEM AUT
@@ -1000,12 +1000,12 @@ new mechanikid[MAX_PLAYERS];//Mechanik w GUI
 new naprawiony[MAX_PLAYERS];//Napr
 
 
-new zawodnik[MAX_PLAYERS];//¯u¿el
-new wyscigz;//¿u¿el
-new iloscwygranych;//¿u¿el
-new komentator[MAX_PLAYERS];//¯u¿el
-new okrazenia[MAX_PLAYERS];//¯u¿el
-new okregi[MAX_PLAYERS];//¯u¿el
+new zawodnik[MAX_PLAYERS];//ï¿½uï¿½el
+new wyscigz;//ï¿½uï¿½el
+new iloscwygranych;//ï¿½uï¿½el
+new komentator[MAX_PLAYERS];//ï¿½uï¿½el
+new okrazenia[MAX_PLAYERS];//ï¿½uï¿½el
+new okregi[MAX_PLAYERS];//ï¿½uï¿½el
 new kodbitwy[256];//Bitwa
 new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
 new Kajdanki_Uzyte[MAX_PLAYERS];//Kajdany
@@ -1025,7 +1025,7 @@ new ObrazeniaZadane[MAX_PLAYERS][20][eOBRAZENIAZADANE];
 new SpamujeMechanik[MAX_PLAYERS];//mechanik
 new AntySpam[MAX_PLAYERS];
 new OdpalanieSpam[MAX_PLAYERS];//OdpalanieSpam
-new DomOgladany[MAX_PLAYERS];//SYSTEM DOMÓW BY MRUCZNIK
+new DomOgladany[MAX_PLAYERS];//SYSTEM DOMï¿½W BY MRUCZNIK
 new cbjstore[128];
 new motd[256];
 new ghour = 0;
@@ -1076,13 +1076,14 @@ new gRO[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS];
 new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
 new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
+new ZaufaniON = true;
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
 ClearVariableConnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
-	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
+	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do pociï¿½gu
 	fixActorsTimer[playerid] = 0; 
 /*	chpIDHunter[playerid] =0;
 	hunterSeeMe[playerid]=0;
@@ -1096,7 +1097,7 @@ ClearVariableConnect(playerid)
 ClearVariableDisconnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
-	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
+	SN_ACCESS[playerid] = 0;//Pozwolenie na scenï¿½ (pobï¿½r opï¿½at - 2kk)
 	PlayerGames[playerid] = 0;//Zdrapki 
 	return 1;
 }
@@ -1121,10 +1122,10 @@ ZerujZmienne(playerid)
 
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
-	zawodnik[playerid] = 0;//¯u¿el
-	komentator[playerid] = 0;//¯u¿el
-	okrazenia[playerid] = 0;//¯u¿el
-	okregi[playerid] = 0;//¯u¿el
+	zawodnik[playerid] = 0;//ï¿½uï¿½el
+	komentator[playerid] = 0;//ï¿½uï¿½el
+	okrazenia[playerid] = 0;//ï¿½uï¿½el
+	okregi[playerid] = 0;//ï¿½uï¿½el
 	SpamujeMechanik[playerid] = 0;//mechanik
 	AntySpam[playerid] = 0;
 	CenaDawanegoAuta[playerid] = 0;
@@ -1265,17 +1266,17 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pBoatLic] = 0;
 	PlayerInfo[playerid][pFishLic] = 0;
 	PlayerInfo[playerid][pGunLic] = 0;
-	PlayerInfo[playerid][pGun0] = 0;//Piêœæ lub kastet
-	PlayerInfo[playerid][pGun1] = 0;//Broñ bia³a
+	PlayerInfo[playerid][pGun0] = 0;//Piï¿½ï¿½ lub kastet
+	PlayerInfo[playerid][pGun1] = 0;//Broï¿½ biaï¿½a
 	PlayerInfo[playerid][pGun2] = 0;//Pistolety
 	PlayerInfo[playerid][pGun3] = 0;//Shotguny
-	PlayerInfo[playerid][pGun4] = 0;//Broñ maszynowa
+	PlayerInfo[playerid][pGun4] = 0;//Broï¿½ maszynowa
 	PlayerInfo[playerid][pGun5] = 0;//Karabiny
 	PlayerInfo[playerid][pGun6] = 0;//Snajperki
-	PlayerInfo[playerid][pGun7] = 0;//Ciê¿ka broñ
-	PlayerInfo[playerid][pGun8] = 0;//Broñ wybuchowa
+	PlayerInfo[playerid][pGun7] = 0;//Ciï¿½ka broï¿½
+	PlayerInfo[playerid][pGun8] = 0;//Broï¿½ wybuchowa
 	PlayerInfo[playerid][pGun9] = 0;//Sprej/Gasnica/Aparat
-	PlayerInfo[playerid][pGun10] = 0;//Nietypowa broñ bia³a
+	PlayerInfo[playerid][pGun10] = 0;//Nietypowa broï¿½ biaï¿½a
 	PlayerInfo[playerid][pGun11] = 0;//Spadochron
 	PlayerInfo[playerid][pGun12] = 0;//Detonator
 	PlayerInfo[playerid][pAmmo0] = 0;
@@ -1370,7 +1371,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pLodz] = 0;
 	PlayerInfo[playerid][pSamolot] = 0;
 	PlayerInfo[playerid][pGaraz] = 0;
-	//Bilet poci¹gu
+	//Bilet pociï¿½gu
 	timerTime[playerid] = 0; 
 
 	PlayerInfo[playerid][pKluczeAuta] = 0;
