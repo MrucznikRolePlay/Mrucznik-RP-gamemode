@@ -41,7 +41,7 @@ YCMD:sblok(playerid, params[], help)
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 4)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 4)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
