@@ -31,7 +31,7 @@
 YCMD:resms(playerid, params[], help)
 {
 	new string[256];
-	if(Kajdanki_JestemSkuty[playerid] == 1)
+	if(isPlayerCuffed[playerid] == 1)
 	{
 		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas bycia skutym!");
 		return 1;

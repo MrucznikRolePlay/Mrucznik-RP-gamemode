@@ -34,61 +34,60 @@ YCMD:wrzuc(playerid, params[], help)
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
     new frac = GetPlayerFraction(playerid), fam = GetPlayerOrgType(playerid);
-    if(frac == FRAC_LCN || frac == FRAC_YKZ || frac == FRAC_HA || (frac >= 12 && frac <= 16) || fam == ORG_TYPE_GANG || fam == ORG_TYPE_MAFIA)
+
+    if(!(frac == FRAC_LCN || frac == FRAC_YKZ || frac == FRAC_HA || (frac >= 12 && frac <= 16) || fam == ORG_TYPE_GANG || fam == ORG_TYPE_MAFIA))
     {
-    	new person, seat4;
-    	if( sscanf(params, "k<fix>d", person, seat4))
-    	return sendTipMessage(playerid, "U¿yj /wepchnij [ID Gracza] [miejsce 2-4]");
+        return sendErrorMessage(playerid, "Nie mo¿esz tego zrobiæ!");
+	}
+	
+	new person, seat4;
+	if(sscanf(params, "k<fix>d", person, seat4))
+	{
+		return sendTipMessage(playerid, "U¿yj /wepchnij [ID Gracza] [miejsce 2-4]");
+	}
 
-		if(!IsPlayerConnected(person))
-		{
-			sendErrorMessage(playerid, "Nie ma takiego gracza.");
-			return 1;
-		}
+	if(!IsPlayerConnected(person))
+	{
+		return sendErrorMessage(playerid, "Nie ma takiego gracza.");
+	}
+	if (GetPlayerState(playerid)!=PLAYER_STATE_DRIVER)
+	{
+		return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie.");
+	}
+	if (IsPlayerInAnyVehicle(person))
+	{
+		return sendTipMessage(playerid, "Gracz nie mo¿e znajdowaæ siê w pojeŸdzie.");
+	}
+	if (!ProxDetectorS(5.0, playerid, person))
+	{
+		return sendErrorMessage(playerid, "Gracz nie jest w pobli¿u.");
+	}
+	if(pobity[person] == 0 && PlayerInfo[person][pBW] == 0 && PlayerInfo[person][pInjury] == 0)
+	{
+		return sendTipMessage(playerid, "Gracz nie jest pobity!");
+	}
 
-    	if (GetPlayerState(playerid)!=PLAYER_STATE_DRIVER)
-    	return sendTipMessage(playerid, "Musisz byæ w pojeŸdzie.");
+	GetPlayerName(person, giveplayer, sizeof(giveplayer));
+	GetPlayerName(playerid, sendername, sizeof(sendername));
 
-    	if (IsPlayerInAnyVehicle(person))
-    	return sendTipMessage(playerid, "Gracz nie mo¿e znajdowaæ siê w pojeŸdzie.");
+	format(string, sizeof(string), "* Zosta³eœ wrzucony do pojazdu przez %s.", sendername);
+	SendClientMessage(person, COLOR_LIGHTBLUE, string);
+	format(string, sizeof(string), "* Wrzuci³eœ do pojazdu %s.", giveplayer);
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+	format(string, sizeof(string), "* %s zwi¹za³ i wrzuci³ do pojazdu %s.", sendername ,giveplayer);
+	ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+	sendTipMessage(playerid, "Po trzech minutach osoba zostanie rozwi¹zana!");
+	sendTipMessage(person, "Po trzech minutach zostaniesz rozwi¹zany!");
+	SetPlayerChatBubble(person, " ", 0xFF0000FF, 70.0, 1000);
+	GameTextForPlayer(person, "~r~Wrzucony do wozu", 2500, 3);
 
-    	if(pobity[person] >= 1 || PlayerInfo[person][pBW] > 0 || PlayerInfo[person][pInjury] > 0)
-        {
-    		if (GetDistanceBetweenPlayers(playerid,person) > 5) return sendErrorMessage(playerid, "Gracz nie jest w pobli¿u.");
-			ZdejmijBW(person);
-            TogglePlayerControllable(person, 1);
-    		new Float:pos[6];
-    		GetPlayerPos(playerid, pos[0], pos[1], pos[2]);
-    		GetPlayerPos(playerid, pos[3], pos[4], pos[5]);
-    		if (floatcmp(floatabs(floatsub(pos[0], pos[3])), 10.0) != -1 &&
-    		floatcmp(floatabs(floatsub(pos[1], pos[4])), 10.0) != -1 &&
-    		floatcmp(floatabs(floatsub(pos[2], pos[5])), 10.0) != -1) return false;
-            PutPlayerInVehicleEx(person, GetPlayerVehicleID(playerid), seat4);
-    		TogglePlayerControllable(person, 0);
-    		PlayerCuffed[person] = 2;
-    		PlayerCuffedTime[person] = 180;
-    		GameTextForPlayer(person, "~r~Wrzucony do wozu", 2500, 3);
-    		pobity[person] = 0;
-    		GetPlayerName(person, giveplayer, sizeof(giveplayer));
-    		GetPlayerName(playerid, sendername, sizeof(sendername));
-    		format(string, sizeof(string), "* Zosta³eœ wrzucony do pojazdu przez %s.", sendername);
-    		SendClientMessage(person, COLOR_LIGHTBLUE, string);
-    		format(string, sizeof(string), "* Wrzuci³eœ do pojazdu %s.", giveplayer);
-    		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-    		format(string, sizeof(string), "* %s wrzuci³ do pojazdu i unieruchomi³ %s.", sendername ,giveplayer);
-    		ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-            sendTipMessage(playerid, "Po trzech minutach osoba zostanie rozwi¹zana!");
-            sendTipMessage(person, "Po trzech minutach zostaniesz rozwi¹zany!");
-			SetPlayerChatBubble(person, " ", 0xFF0000FF, 70.0, 1000);
-    		return 1;
-    	}
-    	else
-    	{
-    	    sendTipMessage(playerid, "Gracz nie jest pobity!");
-    	}
-    } else {
-        sendErrorMessage(playerid, "Nie mo¿esz tego zrobiæ!");
-        return 1;
-    }
-    return 1;
+	ZdejmijBW(person);
+	TogglePlayerControllable(person, 1);
+	PutPlayerInVehicleEx(person, GetPlayerVehicleID(playerid), seat4);
+	TogglePlayerControllable(person, 0);
+	PlayerTied[person] = true;
+	PlayerTiedTime[person] = 180;
+	pobity[person] = 0;
+	
+	return 1;
 }

@@ -87,8 +87,7 @@ YCMD:pobij(playerid, params[], help)
 					       			    return 1;
     							    }
 	     				    	    if(pobity[playa] == 1 || pobity[playerid] == 1 ||
-									 Kajdanki_JestemSkuty[playa] >= 1 || Kajdanki_JestemSkuty[playerid] >= 1 ||
-									 PlayerCuffed[playa] == 1|| PlayerCuffed[playerid] == 1 || 
+									 isPlayerCuffed[playa] >= 1 || isPlayerCuffed[playerid] >= 1 ||
 									 PlayerInfo[playa][pBW] != 0 || PlayerInfo[playerid][pBW] != 0 ||
 									 PlayerInfo[playa][pInjury] != 0 || PlayerInfo[playerid][pInjury] != 0)
 					       			{
@@ -147,11 +146,9 @@ YCMD:pobij(playerid, params[], help)
 										PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
 										PlayerPlaySound(playa, 1130, 0.0, 0.0, 0.0);
 										TogglePlayerControllable(playerid, 0);
-										PlayerCuffed[playerid] = 2;
-										PlayerCuffedTime[playerid] = 45;
 										pobity[playerid] = 1;
 										SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
-										SetTimerEx("pobito",000,0,"d",playerid);
+										SetTimerEx("pobito",45000,0,"d",playerid);
 										pobilem[playerid] = 1;
 									}
 								}

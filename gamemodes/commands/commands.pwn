@@ -269,7 +269,6 @@
 #include "cmd/malunek.pwn"
 #include "cmd/malunki.pwn"
 #include "cmd/mandacik.pwn"
-#include "cmd/marcepan.pwn"
 #include "cmd/mark.pwn"
 #include "cmd/maska.pwn"
 #include "cmd/materialy.pwn"

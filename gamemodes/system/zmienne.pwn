@@ -714,8 +714,7 @@ new MedicTime[MAX_PLAYERS];
 new NeedMedicTime[MAX_PLAYERS];
 new MedicBill[MAX_PLAYERS];
 new PlayerTied[MAX_PLAYERS];
-new PlayerCuffed[MAX_PLAYERS];
-new PlayerCuffedTime[MAX_PLAYERS];
+new PlayerTiedTime[MAX_PLAYERS];
 new LiveOffer[MAX_PLAYERS];
 new TalkingLive[MAX_PLAYERS];
 new SelectChar[MAX_PLAYERS];
@@ -1008,10 +1007,11 @@ new okrazenia[MAX_PLAYERS];//¯u¿el
 new okregi[MAX_PLAYERS];//¯u¿el
 new kodbitwy[256];//Bitwa
 new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
-new Kajdanki_Uzyte[MAX_PLAYERS];//Kajdany
-new Kajdanki_JestemSkuty[MAX_PLAYERS];//Kajdany
-new Kajdanki_PDkuje[MAX_PLAYERS];//Kajdany
-new Kajdanki_SkutyGracz[MAX_PLAYERS];//Kajdany
+
+new isPlayerUsingCuffs[MAX_PLAYERS];
+new isPlayerCuffed[MAX_PLAYERS];
+new whoIsCuffing[MAX_PLAYERS];
+new whoIsCuffedBy[MAX_PLAYERS];
 // worek
 new Worek_Uzyty[MAX_PLAYERS];
 new Worek_MamWorek[MAX_PLAYERS];
@@ -1139,13 +1139,14 @@ ZerujZmienne(playerid)
  	PlayerInfo[playerid] [pMozeskakacAT] = 0;
  	PlayerInfo[playerid] [pRockHotelLiAc] = 0;
  	PlayerInfo[playerid] [pRockHotelPuAc] = 0;
-	Kajdanki_JestemSkuty[playerid] = 0;//Kajdany
-	Kajdanki_Uzyte[playerid] = 0;//Kajdany
-	pobity[playerid] = 0;//pobity
+	isPlayerCuffed[playerid] = 0;
+	isPlayerUsingCuffs[playerid] = 0;
+	pobity[playerid] = 0;
 	pobilem[playerid] = 0;
 	podczasbicia[playerid] = 0;
-	PlayerTied[playerid] = 0;//antyq
-	PlayerCuffed[playerid] = 0;//anty /q
+	PlayerTied[playerid] = false;
+	PlayerTiedTime[playerid] = 0;
+	
 	gRO[playerid] = 0;
 	
 	
@@ -1158,7 +1159,7 @@ ZerujZmienne(playerid)
 	TazerAktywny[playerid] = 0; MaTazer[playerid] = 0; DodatkiPD[playerid] = 0;
 	cbradijo[playerid] = 0; adminpodgladcb[playerid] = 0; matogczas[playerid] = 0;
 	dajeKontrakt[playerid] = 9999;
-	SelectChar[playerid] = 0; HidePM[playerid] = 0; PhoneOnline[playerid] = 0; LastSMSNumber[playerid] = 0; spamwl[playerid] = 0; okradziony[playerid] = 0;
+	SelectChar[playerid] = 0; HidePM[playerid] = 0; PhoneOnline[playerid] = 0; LastSMSNumber[playerid] = 0; spamwl[playerid] = 0; okradziony[playerid] = false;
 	SelectCharID[playerid] = 0; SelectCharPlace[playerid] = 0; ChosenSkin[playerid] = 0;
 	GettingJob[playerid] = 0; GuardOffer[playerid] = 999; GuardPrice[playerid] = 0;
     ApprovedLawyer[playerid] = 0; CallLawyer[playerid] = 0; WantLawyer[playerid] = 0; UsedFind[playerid] = 0;
@@ -1169,14 +1170,14 @@ ZerujZmienne(playerid)
 	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; WynajemOffer[playerid] = 999; DomOffer[playerid] = 999; DomCena[playerid] = 0;
 	TalkingLive[playerid] = INVALID_PLAYER_ID; LiveOffer[playerid] = 999; TakingLesson[playerid] = 0; CenaDawanegoSamolot[playerid] = 999;
 	RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; MapIconsShown[playerid] = 0; CenaDawanegoAuta[playerid] = 999; AntySpam[playerid] = 0; poscig[playerid] = 0;
-	DrugOffer[playerid] = 999; PlayerCuffed[playerid] = 0; PlayerCuffedTime[playerid] = 0; CenaDawanegoLodz[playerid] = 999;
+	DrugOffer[playerid] = 999; CenaDawanegoLodz[playerid] = 999;
 	DrugPrice[playerid] = 0; OnCK[playerid] = 999; GettingCK[playerid] = 999; OdpalanieSpam[playerid] = 0;
 	DrugGram[playerid] = 0; ConnectedToPC[playerid] = 0; OrderReady[playerid] = 0;
 	JailPrice[playerid] = 0; MedicTime[playerid] = 0; NeedMedicTime[playerid] = 0; MedicBill[playerid] = 0; GotHit[playerid] = 0;
 	GoChase[playerid] = 999; GetChased[playerid] = 999;
 	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; PoziomPoszukiwania[playerid] = 0;
 	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; ChangePos2[playerid][1] = 0; iddialog[playerid] = -1;
-	TransportDuty[playerid] = 0; PlayerTied[playerid] = 0; weryfikacja[playerid] = 0;
+	TransportDuty[playerid] = 0; weryfikacja[playerid] = 0;
 	BusCallTime[playerid] = 0; TaxiCallTime[playerid] = 0; MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;
 	FindTimePoints[playerid] = 0; FindTime[playerid] = 0; JobDuty[playerid] = 0; SanDuty[playerid] = 0; WarningDuty[playerid] = 175; NJDuty[playerid] = 0; DeathWarning[playerid] = 1;
 	Mobile[playerid] = INVALID_PLAYER_ID; Callin[playerid] = CALL_NONE; CellTime[playerid] = 0; Music[playerid] = 0; BoxOffer[playerid] = 999; PlayerBoxing[playerid] = 0;

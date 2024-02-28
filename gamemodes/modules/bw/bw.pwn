@@ -218,6 +218,7 @@ RannyTimer(playerid)
 		SetPlayerChatBubble(playerid, "** Ranny **", COLOR_PANICRED, 30.0, (PlayerInfo[i][pInjury] * 1000));
 		if(PlayerInfo[i][pInjury] <= 0)
 		{
+			PlayerInfo[i][pInjury] = 0;
 			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê! {FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
 			//ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", string); 
 			SendClientMessage(playerid, COLOR_NEWS, string);
@@ -248,6 +249,7 @@ BWTimer(playerid)
 		SetPlayerChatBubble(playerid, "** Nieprzytomny **", COLOR_PANICRED, 30.0, (PlayerInfo[i][pBW] * 1000));
 		if(PlayerInfo[i][pBW] <= 0)
 		{
+			PlayerInfo[i][pBW] = 0;
 			format(string, sizeof(string), "* Otrzyma³eœ rachunek w wysokoœci %d$ za hospitalizacjê.", HOSPITALIZATION_COST);
 			SendClientMessage(i, COLOR_LIGHTBLUE, string);
 			ZabierzKase(i, HOSPITALIZATION_COST);

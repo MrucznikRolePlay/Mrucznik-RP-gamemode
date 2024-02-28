@@ -2401,9 +2401,9 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if(Kajdanki_JestemSkuty[i] == 1)
+		if(isPlayerCuffed[i] == 1)
 		{
-			cop = Kajdanki_PDkuje[i];
+			cop = whoIsCuffing[i];
 			if(IsPlayerConnected(cop))
 			{
 				if(IsAPolicja(cop) || IsABOR(cop))
@@ -3181,35 +3181,18 @@ public JednaSekundaTimer()
 				RobbedTime[i] -= 1;
 			}
 		}
-		if(PlayerCuffed[i] == 1)
+		if(PlayerTied[i])
 		{
-			if(PlayerCuffedTime[i] <= 0)
-			{
-				TogglePlayerControllable(i, 1);
-				PlayerCuffed[i] = 0;
-				PlayerCuffedTime[i] = 0;
-				PlayerTazeTime[i] = 1;
-				PlayerTied[i] = 0;
-				pobity[i] = 0;
-			}
-			else
-			{
-				PlayerCuffedTime[i] -= 1;
-			}
-		}
-		if(PlayerCuffed[i] == 2 || PlayerCuffed[i] == 3 || PlayerTied[i] == 1)
-		{
-			if(PlayerCuffedTime[i] <= 0)
+			if(PlayerTiedTime[i] <= 0)
 			{
                 GetPlayerName(i, winner, sizeof(winner));
 				format(string, sizeof(string), "* %s po wielu próbach poluzowa³ sznur i jest wolny.", winner);
 				ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				GameTextForPlayer(i, "~r~Jestes wolny!", 2500, 3);
-				PlayerCuffed[i] = 0;
-				PlayerCuffedTime[i] = 0;
+				PlayerTiedTime[i] = 0;
 				pobity[i] = 0;
 				PlayerInfo[i][pMuted] = 0;
-				PlayerTied[i] = 0;
+				PlayerTied[i] = false;
                 PlayerInfo[i][pBW]=0;
                 TogglePlayerControllable(i, 1);
                 SetPVarInt(i, "bw-sync", 0);
@@ -3217,7 +3200,7 @@ public JednaSekundaTimer()
 			}
 			else
 			{
-				PlayerCuffedTime[i] -= 1;
+				PlayerTiedTime[i] -= 1;
 			}
 		}
 
