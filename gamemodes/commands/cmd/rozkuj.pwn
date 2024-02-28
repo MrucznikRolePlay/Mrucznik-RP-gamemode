@@ -34,7 +34,7 @@ YCMD:rozkuj(playerid, params[], help)
     {
 		new string[128];
 
-		if(gTeam[playerid] == 2 || IsAPolicja(playerid) || IsABOR(playerid) || PlayerInfo[playerid][pAdmin] >= 1)
+		if(IsAPolicja(playerid) || IsABOR(playerid) || PlayerInfo[playerid][pAdmin] >= 1)
 		{
 		    new giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))

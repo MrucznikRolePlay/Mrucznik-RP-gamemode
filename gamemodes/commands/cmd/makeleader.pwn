@@ -117,7 +117,6 @@ YCMD:makeleader(playerid, params[], help)
 		else if(level == 17) { PlayerInfo[para1][pUniform] = 279; } //LSFD
 		if(level != 0)
 		{
-			gTeam[para1] = 11;
 			PlayerInfo[para1][pTeam] = 11;
 			PlayerInfo[para1][pRank] = 6;
 		}

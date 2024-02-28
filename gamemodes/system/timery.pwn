@@ -2333,7 +2333,6 @@ public JednaSekundaTimer()
 				SendClientMessage(i, COLOR_GRAD1,"   Wolnoœæ! Odsiedzia³eœ karê, mamy nadzieje ¿e to ciê czegoœ nauczy³o.");
 				format(string, sizeof(string), "~g~Wolnosc!~n~~w~Staraj sie byc lepszym obywatelem");
 				GameTextForPlayer(i, string, 5000, 1);
-				if(gTeam[i] == 4) { gTeam[i] = 3; }
 				ClearCrime(i);
 				SetPlayerToTeamColor(i);
 				StopAudioStreamForPlayer(i);

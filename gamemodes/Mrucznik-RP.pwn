@@ -2183,7 +2183,6 @@ public OnPlayerSpawn(playerid)
     if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
         PlayerInfo[playerid][pRank] = 0;
         PlayerInfo[playerid][pMember] = 0;
-        gTeam[playerid] = 3;
         PlayerInfo[playerid][pTeam] = 3;
         PlayerInfo[playerid][pMember] = 0;
         PlayerInfo[playerid][pRank] = 0;

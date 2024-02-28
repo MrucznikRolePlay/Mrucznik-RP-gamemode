@@ -331,7 +331,6 @@
 #include "cmd/poddajsie.pwn"
 #include "cmd/poddajsie2.pwn"
 #include "cmd/podglad.pwn"
-#include "cmd/podszyjsie.pwn"
 #include "cmd/setpogoda.pwn"
 #include "cmd/pogodaall.pwn"
 #include "cmd/pojazdygracza.pwn"

@@ -5094,7 +5094,6 @@ orgInvitePlayer(playerid, orguid)
 	}
     PlayerInfo[playerid][pTeam] = 5;
     gPlayerOrgLeader[playerid] = false;
-    gTeam[playerid] = 5;
     new lStr[64];
     format(lStr, 64, "ORG » Zosta³eœ przyjêty do organizacji %s.", OrgInfo[orgid][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
@@ -5108,7 +5107,6 @@ orgUnInvitePlayer(playerid)
     PlayerInfo[playerid][pUniform] = 0;
     gPlayerOrg[playerid] = 0xFFFF;
     PlayerInfo[playerid][pTeam] = 3;
-    gTeam[playerid] = 3;
     new lStr[64];
     if(!orgIsValid(orgid)) return 0;
     format(lStr, 64, "ORG » Zosta³eœ wyproszony z organizacji %s.", OrgInfo[orgid][o_Name]);

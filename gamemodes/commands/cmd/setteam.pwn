@@ -50,7 +50,6 @@ YCMD:setteam(playerid, params[], help)
 		        {
 					GetPlayerName(para1, giveplayer, sizeof(giveplayer));
 					PlayerInfo[para1][pTeam] = level;
-					gTeam[para1] = level;
 					//SetPlayerWeapons(para1);
 					SetPlayerSpawn(para1);
         			Log(adminLog, INFO, "Admin %s zmieni³ %s dru¿ynê na %d", GetPlayerLogName(playerid), GetPlayerLogName(para1), level);
