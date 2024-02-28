@@ -33,7 +33,7 @@ YCMD:setdrunk(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         new string[144];
-		if (PlayerInfo[playerid][pAdmin] >= 35 || IsAScripter(playerid) )
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid) )
 		{
 			new giveplayerid, level;
 			if(sscanf(params, "dd", giveplayerid, level))

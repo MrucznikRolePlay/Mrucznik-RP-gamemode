@@ -30,7 +30,7 @@
 
 YCMD:snn(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] < 25)
+    if(PlayerInfo[playerid][pAdmin] < 1)
 	{
 	    noAccessMessage(playerid);
 	    return 1;

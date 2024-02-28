@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_gotobiz_Impl(playerid, businessID)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 5)
+    if(PlayerInfo[playerid][pAdmin] >= 1)
     {
         if(businessID > BusinessLoaded || businessID < 0)
         {

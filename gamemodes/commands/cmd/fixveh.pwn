@@ -32,7 +32,7 @@ YCMD:fixveh(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pAdmin] >= 7 || IsAScripter(playerid))
+        if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
