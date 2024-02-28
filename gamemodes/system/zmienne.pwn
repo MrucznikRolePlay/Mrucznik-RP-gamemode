@@ -135,8 +135,6 @@ new ZgloszenieSasp[OSTATNIE_ZGLOSZENIASASP][hqZgloszeniaSasp];
 
 new pFindZone[MAX_PLAYERS];
 
-
-new gTeam[MAX_PLAYERS];
 new odczekajTimer[MAX_PLAYERS];
 
 new lastMsg[MAX_PLAYERS];
