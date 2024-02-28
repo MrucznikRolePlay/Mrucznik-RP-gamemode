@@ -29,7 +29,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 stock SetPlayerSkinEx(playerid, value)
 {
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], value, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
+	SetSpawnInfo(playerid, 0, value, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 	SetPlayerSkin(playerid, value); 
 	return 1;
 }

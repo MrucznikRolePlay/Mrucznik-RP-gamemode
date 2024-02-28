@@ -56,23 +56,23 @@ YCMD:przyjmij(playerid, params[], help)
 				            sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz przyj¹æ tego gracza, gdy¿ posiada ju¿ pracê!");
 				            return 1;
 				        }
-                        if(PlayerInfo[playerid][pLider] == 1) { PlayerInfo[para1][pTeam] = 2; PlayerInfo[para1][pUniform] = 280; }
-				        else if(PlayerInfo[playerid][pLider] == 2) { PlayerInfo[para1][pTeam] = 2; PlayerInfo[para1][pUniform] = 286;  }
-				        else if(PlayerInfo[playerid][pLider] == 3) { PlayerInfo[para1][pTeam] = 2; PlayerInfo[para1][pUniform] = 71; }
-				        else if(PlayerInfo[playerid][pLider] == 4) { PlayerInfo[para1][pTeam] = 1; PlayerInfo[para1][pUniform] = 70; }
-				        else if(PlayerInfo[playerid][pLider] == 5) { PlayerInfo[para1][pTeam] = 5; PlayerInfo[para1][pUniform] = 258; }
-				        else if(PlayerInfo[playerid][pLider] == 6) { PlayerInfo[para1][pTeam] = 5; PlayerInfo[para1][pUniform] = 117; }
-				        else if(PlayerInfo[playerid][pLider] == 7) { PlayerInfo[para1][pTeam] = 12; PlayerInfo[para1][pUniform] = 59; }
-				        else if(PlayerInfo[playerid][pLider] == 8) { PlayerInfo[para1][pTeam] = 10; PlayerInfo[para1][pUniform] = 127; }
-				        else if(PlayerInfo[playerid][pLider] == 9) { PlayerInfo[para1][pTeam] = 12; PlayerInfo[para1][pUniform] = 148; }
-				        else if(PlayerInfo[playerid][pLider] == 10) { PlayerInfo[para1][pTeam] = 12; PlayerInfo[para1][pUniform] = 253; }
-				        else if(PlayerInfo[playerid][pLider] == 11) { PlayerInfo[para1][pTeam] = 12; PlayerInfo[para1][pUniform] = 60; }
-				        else if(PlayerInfo[playerid][pLider] == 12) { PlayerInfo[para1][pTeam] = 5; PlayerInfo[para1][pUniform] = 270; }
-				        else if(PlayerInfo[playerid][pLider] == 13) { PlayerInfo[para1][pTeam] = 5; PlayerInfo[para1][pUniform] = 103; }
-				        else if(PlayerInfo[playerid][pLider] == 14) { PlayerInfo[para1][pTeam] = 5; PlayerInfo[para1][pUniform] = 108; }
-                        else if(PlayerInfo[playerid][pLider] == 15) { PlayerInfo[para1][pTeam] = 5; PlayerInfo[para1][pUniform] = 8; }
-                        else if(PlayerInfo[playerid][pLider] == 16) { PlayerInfo[para1][pTeam] = 5; PlayerInfo[para1][pUniform] = 206; }
-                        else if(PlayerInfo[playerid][pLider] == 17) { PlayerInfo[para1][pTeam] = 1; PlayerInfo[para1][pUniform] = 278;}
+                        if(PlayerInfo[playerid][pLider] == 1) { PlayerInfo[para1][pUniform] = 280; }
+				        else if(PlayerInfo[playerid][pLider] == 2) { PlayerInfo[para1][pUniform] = 286;  }
+				        else if(PlayerInfo[playerid][pLider] == 3) { PlayerInfo[para1][pUniform] = 71; }
+				        else if(PlayerInfo[playerid][pLider] == 4) { PlayerInfo[para1][pUniform] = 70; }
+				        else if(PlayerInfo[playerid][pLider] == 5) { PlayerInfo[para1][pUniform] = 258; }
+				        else if(PlayerInfo[playerid][pLider] == 6) { PlayerInfo[para1][pUniform] = 117; }
+				        else if(PlayerInfo[playerid][pLider] == 7) { PlayerInfo[para1][pUniform] = 59; }
+				        else if(PlayerInfo[playerid][pLider] == 8) { PlayerInfo[para1][pUniform] = 127; }
+				        else if(PlayerInfo[playerid][pLider] == 9) { PlayerInfo[para1][pUniform] = 148; }
+				        else if(PlayerInfo[playerid][pLider] == 10) { PlayerInfo[para1][pUniform] = 253; }
+				        else if(PlayerInfo[playerid][pLider] == 11) { PlayerInfo[para1][pUniform] = 60; }
+				        else if(PlayerInfo[playerid][pLider] == 12) { PlayerInfo[para1][pUniform] = 270; }
+				        else if(PlayerInfo[playerid][pLider] == 13) { PlayerInfo[para1][pUniform] = 103; }
+				        else if(PlayerInfo[playerid][pLider] == 14) { PlayerInfo[para1][pUniform] = 108; }
+                        else if(PlayerInfo[playerid][pLider] == 15) { PlayerInfo[para1][pUniform] = 8; }
+                        else if(PlayerInfo[playerid][pLider] == 16) { PlayerInfo[para1][pUniform] = 206; }
+                        else if(PlayerInfo[playerid][pLider] == 17) { PlayerInfo[para1][pUniform] = 278;}
 						else return 1;
                         new ftextid = PlayerInfo[playerid][pLider];
 						GetPlayerName(para1, giveplayer, sizeof(giveplayer));

@@ -6066,7 +6066,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+							SetSpawnInfo(playerid, 0, PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 							SetPlayerSpawn(playerid);
 							TogglePlayerSpectating(playerid, false);
 						}

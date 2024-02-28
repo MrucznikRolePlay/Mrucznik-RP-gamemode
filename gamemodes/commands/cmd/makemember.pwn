@@ -85,7 +85,6 @@ YCMD:makemember(playerid, params[], help)
 					else if(level == 14) { PlayerInfo[para1][pUniform] = 108; } //Vagos
 					else if(level == 15) { PlayerInfo[para1][pUniform] = 8; } //NoA
                     else if(level == 17) PlayerInfo[para1][pUniform] = 277; //NoA
-				    PlayerInfo[para1][pTeam] = 19;
 
                     MruMySQL_SetAccInt("Member", giveplayer, level);
                     MruMySQL_SetAccInt("Rank", giveplayer, 0);
