@@ -43,7 +43,7 @@ YCMD:makemember(playerid, params[], help)
 		}
 
 		if(level > 17 || level < 0) { SendClientMessage(playerid, COLOR_GREY, "Od 0 do 17 !"); return 1; }
-		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {

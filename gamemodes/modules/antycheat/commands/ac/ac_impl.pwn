@@ -79,7 +79,7 @@ ac_ShowDialog(playerid)
 
 command_ac_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1000 || IsAScripter(playerid))
+    if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
         ac_ShowDialog(playerid);
 	}

@@ -30,7 +30,7 @@
 
 YCMD:scena(playerid, params[], help)
 {
-    if(GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pAdmin] < 200)
+    if(GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pAdmin] < 1)
     {
         if(GetPVarInt(playerid, "scena-allow") != 1)
         {

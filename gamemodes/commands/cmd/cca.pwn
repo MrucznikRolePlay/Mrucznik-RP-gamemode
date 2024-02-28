@@ -32,7 +32,7 @@ YCMD:cca(playerid, params[], help)
 {
 	new string[64];
 
-	if(PlayerInfo[playerid][pAdmin] >= 5 || IsAScripter(playerid))
+	if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 		for(new i = 0; i<200; i++)
 			SendClientMessageToAll(COLOR_GREY," ");

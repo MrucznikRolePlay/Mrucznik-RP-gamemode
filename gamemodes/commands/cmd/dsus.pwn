@@ -30,7 +30,7 @@
 
 YCMD:dsus(playerid, params[], help)
 {
-    if(PlayerInfo[playerid][pAdmin] >=100)
+    if(PlayerInfo[playerid][pAdmin] >= 1)
 	{
 	    new giveplayerid, przestepca;
 		if( sscanf(params, "k<fix>d", giveplayerid, przestepca))

@@ -32,7 +32,7 @@ YCMD:zuzel_stop(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0)
 		{
 		    wyscigz = 0;
 		    iloscwygranych = 0;

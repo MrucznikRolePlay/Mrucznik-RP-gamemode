@@ -32,7 +32,7 @@
 
 YCMD:fly(playerid, params[], help)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7)
+	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
 		new Float:px, Float:py, Float:pz, Float:pa;
 		GetPlayerFacingAngle(playerid,pa);
