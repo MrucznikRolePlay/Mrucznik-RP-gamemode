@@ -408,7 +408,6 @@
 #include "cmd/setslot.pwn"
 #include "cmd/setstat.pwn"
 #include "cmd/setstrong.pwn"
-#include "cmd/setteam.pwn"
 #include "cmd/setveh.pwn"
 #include "cmd/setvw.pwn"
 #include "cmd/setzonecontrol.pwn"
@@ -435,7 +434,6 @@
 #include "cmd/sprawdzkase.pwn"
 #include "cmd/sprawdzkredyty.pwn"
 #include "cmd/sprawdzneon.pwn"
-#include "cmd/sprawdzteam.pwn"
 #include "cmd/sprawdztest.pwn"
 #include "cmd/sprobuj.pwn"
 #include "cmd/sprunk.pwn"
@@ -1137,9 +1135,6 @@ static Aliases()
 
 	//sprawdzdom
 	Command_AddAltNamed("sprawdzdom", "checkdom");
-
-	//sprawdzteam
-	Command_AddAltNamed("sprawdzteam", "checkteam");
 
 	//sprzedajalkohol
 	Command_AddAltNamed("sprzedajalkohol", "sprzedaja");
