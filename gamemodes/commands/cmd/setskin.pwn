@@ -68,7 +68,7 @@ YCMD:setskin(playerid, params[], help)
 				}
 			}
 		}
-		else if(PlayerInfo[playerid][pAdmin] >= 5)
+		else if(PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			if(para1 == playerid)
 			{

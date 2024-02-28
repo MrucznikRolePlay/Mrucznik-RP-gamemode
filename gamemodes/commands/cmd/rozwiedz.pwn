@@ -42,7 +42,7 @@ YCMD:rozwiedz(playerid, params[], help)
 		}
 
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {

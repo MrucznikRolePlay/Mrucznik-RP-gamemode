@@ -45,7 +45,7 @@ YCMD:dajkm(playerid, params[], help)
 
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(sendername,"Gonzalo_DiNorscio", false) == 0)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(sendername,"Gonzalo_DiNorscio", false) == 0)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
