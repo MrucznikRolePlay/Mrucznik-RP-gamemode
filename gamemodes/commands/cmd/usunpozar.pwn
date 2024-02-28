@@ -30,7 +30,7 @@
 
 YCMD:usunpozar(playerid, params[], help)
 {
-	if (PlayerInfo[playerid][pAdmin] >= 15 || PlayerInfo[playerid][pAdmin] == 7 || IsAScripter(playerid))
+	if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{
 	    DeleteAllFire();
 	    sendTipMessage(playerid, "Usun¹³eœ aktywne po¿ary!");
