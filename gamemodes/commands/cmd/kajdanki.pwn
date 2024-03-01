@@ -41,49 +41,52 @@ YCMD:kajdanki(playerid, params[], help)
                 return 1;
             }
 
-            if(!IsPlayerConnected(giveplayerid))
-            {
-                sendTipMessage(playerid, "Nie ma takiego gracza");
-                return 1;
-            }
-
-            if(Kajdanki_Uzyte[playerid] != 1)
-            {
-                if(IsAPolicja(playerid))
-                {
-                    if(OnDuty[playerid] == 0)
-                    {
-                        sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie!");
-                        return 1;
-                    }
-                }
-
-                if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
-                {
-                    sendTipMessage(playerid, "Nie mo¿esz skuæ administratora!");
-                    return 1;
-                }
-                if(PlayerInfo[playerid][pMember] != FRAC_FBI && (PlayerInfo[giveplayerid][pMember] == 1 && OnDuty[giveplayerid]))
-                {
-                    sendTipMessage(playerid, "Tylko FBI mo¿e skuæ policjanta na s³u¿bie.");
-                    return 1;
-                }
-                if(PlayerInfo[playerid][pMember] == FRAC_FBI && PlayerInfo[giveplayerid][pMember] == FRAC_FBI)
-                {
-                    sendTipMessage(playerid, "Nie mo¿esz skuwaæ agentów!");
-                    return 1;
-                }
-                if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
-                {
-                    if(GetPlayerState(playerid) == 1 && GetPlayerState(giveplayerid) == 1)
-                    {
-                        if(Kajdanki_JestemSkuty[giveplayerid] == 0)
-                        {
-                            if(AntySpam[playerid] == 1)
-                            {
-                                sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 10 sekund");
-                                return 1;
-                            }
+        if(!IsPlayerConnected(giveplayerid))
+        {
+            sendTipMessage(playerid, "Nie ma takiego gracza");
+            return 1;
+        }
+        if(IsAPolicja(playerid) && OnDuty[playerid] == 0)
+        {
+            sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie!");
+            return 1;
+        }
+        if(!ProxDetectorS(8.0, playerid, giveplayerid) || Spectate[giveplayerid] != INVALID_PLAYER_ID)
+        {
+            sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
+            return 1;
+        }
+        if(isPlayerUsingCuffs[playerid] || isPlayerCuffed[giveplayerid])
+        {
+            new str[32];
+            valstr(str, giveplayerid);
+            RunCommand(playerid, "/rozkuj",  str);
+        }
+        if(GetPlayerAdminDutyStatus(giveplayerid) == 1)
+        {
+            sendTipMessage(playerid, "Nie mo¿esz skuæ administratora!");
+            return 1;
+        }
+        if(PlayerInfo[playerid][pMember] != FRAC_FBI && (PlayerInfo[giveplayerid][pMember] == FRAC_LSPD && OnDuty[giveplayerid]))
+        {
+            sendTipMessage(playerid, "Tylko FBI mo¿e skuæ policjanta na s³u¿bie.");
+            return 1;
+        }
+        if(PlayerInfo[playerid][pMember] == FRAC_FBI && PlayerInfo[giveplayerid][pMember] == FRAC_FBI)
+        {
+            sendTipMessage(playerid, "Nie mo¿esz skuwaæ agentów!");
+            return 1;
+        }
+        if(GetPlayerState(playerid) != 1 || GetPlayerState(giveplayerid) != 1)
+        {
+            sendErrorMessage(playerid, "¯aden z was nie mo¿e byæ w wozie!");
+            return 1;
+        }
+        if(AntySpam[playerid] == 1)
+        {
+            sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 10 sekund");
+            return 1;
+        }
 
                             new string[128];
                             if(PlayerInfo[giveplayerid][pBW] >= 1 || PlayerInfo[giveplayerid][pInjury] >= 1)
