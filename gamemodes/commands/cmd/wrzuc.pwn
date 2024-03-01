@@ -41,9 +41,9 @@ YCMD:wrzuc(playerid, params[], help)
 	}
 	
 	new person, seat4;
-	if(sscanf(params, "k<fix>d", person, seat4))
+	if(sscanf(params, "k<fix>d", person, seat4) || seat4 < 1 || seat4 > 3)
 	{
-		return sendTipMessage(playerid, "U¿yj /wepchnij [ID Gracza] [miejsce 2-4]");
+		return sendTipMessage(playerid, "U¿yj /wepchnij [ID Gracza] [miejsce 1-3]");
 	}
 
 	if(!IsPlayerConnected(person))
@@ -62,9 +62,9 @@ YCMD:wrzuc(playerid, params[], help)
 	{
 		return sendErrorMessage(playerid, "Gracz nie jest w pobli¿u.");
 	}
-	if(pobity[person] == 0 && PlayerInfo[person][pBW] == 0 && PlayerInfo[person][pInjury] == 0)
+	if(!isBeatenUp[person] && PlayerInfo[person][pBW] == 0 && PlayerInfo[person][pInjury] == 0)
 	{
-		return sendTipMessage(playerid, "Gracz nie jest pobity!");
+		return sendTipMessage(playerid, "Gracz nie jest pobity ani ranny!");
 	}
 
 	GetPlayerName(person, giveplayer, sizeof(giveplayer));
@@ -87,7 +87,7 @@ YCMD:wrzuc(playerid, params[], help)
 	TogglePlayerControllable(person, 0);
 	PlayerTied[person] = true;
 	PlayerTiedTime[person] = 180;
-	pobity[person] = 0;
+	isBeatenUp[person] = false;
 	
 	return 1;
 }

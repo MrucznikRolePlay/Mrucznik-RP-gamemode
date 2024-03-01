@@ -90,7 +90,7 @@ YCMD:worek(playerid, params[], help)
 			sendTipMessageEx(playerid, COLOR_GREY, "Masz tylko jeden worek, zdejmij go poprzedniej osobie !");
 			return 1;
 		}
-		if(PlayerInfo[giveplayerid][pInjury] == 0 && !PlayerTied[giveplayerid] && pobity[giveplayerid] == 0)
+		if(PlayerInfo[giveplayerid][pInjury] == 0 && !PlayerTied[giveplayerid] && !isBeatenUp[giveplayerid])
 		{
 			sendErrorMessage(playerid, "Mo¿esz za³o¿yæ worek na g³owê tylko graczowi, który jest pobity/zwi¹zany lub ranny.");
 			return 1;

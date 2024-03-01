@@ -1,0 +1,68 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                  bijatyki                                                 //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: NikodemBanan
+// Data utworzenia: 01.03.2024
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+new const BATTLE_CODE_RETYPE_TEXTS[31][31] ={
+"vKrntUAW",//1
+"dupencja",//2
+"vvaLcz22",//3
+"rnucznik",//4
+"batm0biL",//5
+"2LH7YA3K",//6
+"P0C0BiJ3Sz",//7
+"YX8tWtQS",//8
+"XkAtSO10",//9
+"HGvCj9yG",//10
+"nS1ALyw7",//11
+"Kgwdm6BU",//12
+"Mrucznik",//13
+"FuniaXDD",//14
+"KiuJL0Yz",//15
+"c2KA9Gtu",//16
+"7jGS3DgH",//17
+"TRAKTORR",//18
+"AEZAKMiw",//19
+"LiLoRiKa",//20
+"QLcQ5TER",//21
+"6QkBLHbb",//22
+"zZZzzZzZ",//23
+"OMGWTF22",//24
+"UWRdOOSA",//25
+"MAMAmija",//26
+"FiUOWhew",//27
+"Simeone",//28
+"QWERTYUi",//29
+"ABCDEFGH",//30
+"WYGRALES"//31
+};
+//-----------------<[ Zmienne: ]>-------------------
+new isBeatenUp[MAX_PLAYERS];
+new wasRecentlyFighting[MAX_PLAYERS];
+new isFightingNow[MAX_PLAYERS];
+new fightingOpponentOf[MAX_PLAYERS] = {INVALID_PLAYER_ID, ...};
+new battleCodeToRetype[MAX_PLAYERS][32];
+new battleIsTooLate[MAX_PLAYERS] = {false, ...};
+//------------------<[ Forwardy: ]>--------------------
+forward WakeUpAfterFight(beatenPlayer, beatingPlayer);
+forward BattleTimeIsUp(defenderid, attackerid);
+//end

@@ -96,15 +96,14 @@ YCMD:aresztuj(playerid, params[], help)
                                     poscig[playa] = 0;
 									WantLawyer[playa] = 1;
 									PlayerInfo[playa][pArrested] += 1;
-									/*kajdanki*/
-									isPlayerCuffed[playa] = 0;//Kajdany
-                                    isPlayerUsingCuffs[playa] = 0;
-                                    whoIsCuffing[playerid] = 0;
-                                    isPlayerUsingCuffs[playerid] = 0;
+
+									// kajdanki - pomijalna redundancja, by unikn¹æ bugów
+									UncuffPlayer(playa);
+									UncuffPlayerCuffedBy(playerid);
+
 									ClearAnimations(playa);
 									SetPlayerSpecialAction(playa,SPECIAL_ACTION_NONE);
 									RemovePlayerAttachedObject(playa, 0);
-									whoIsCuffing[playa] = 0;
 									Wchodzenie(playa);
 									SetPlayerVirtualWorld(playa, 29);
 								    new losuj= random(sizeof(Cela));
@@ -113,7 +112,7 @@ YCMD:aresztuj(playerid, params[], help)
                                     Wchodzenie(playa);
 									JailPrice[playa] = bail;
                                     SetPVarInt(playa, "kaucja-dlaKogo", PlayerInfo[playerid][pMember]);
-									UsunBron(playa);//usun bron
+									RemovePlayerWeaponsTemporarity(playa);//usun bron
 									SetPlayerSpawnWeapon(playa);
 									if(PlayerInfo[playerid][pMember]==1||PlayerInfo[playerid][pLider]==1)
 									{
@@ -146,13 +145,13 @@ YCMD:aresztuj(playerid, params[], help)
 											SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 											format(string, sizeof(string), "* %s Uwiêzi³ ciê w Wiêzieniu Stanowym i da³ grzywnê %d$, kaucji brak", sendername, pricestan/*PoziomPoszukiwania[giveplayerid]*50000*/);
 											SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-											isPlayerCuffed[playa] = 0;//Kajdany
-											isPlayerUsingCuffs[playa] = 0;
-											whoIsCuffing[playerid] = 0;
-											isPlayerUsingCuffs[playerid] = 0;
-											whoIsCuffedBy[playa] = 0;
+											
+											// kajdanki - pomijalna redundancja, by unikn¹æ bugów
+											UncuffPlayer(playa);
+											UncuffPlayerCuffedBy(playerid);
+											
 											JailDeMorgan(giveplayerid);
-											UsunBron(playa);//usun bron
+											RemovePlayerWeaponsTemporarity(playa);//usun bron
 											SetPlayerSpawnWeapon(playa);
 											if(PoziomPoszukiwania[giveplayerid] == 5)
 											{

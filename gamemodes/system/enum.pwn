@@ -1071,40 +1071,6 @@ new Float:gInviteSpawns[10][4] = {
 {317.6252,311.8465,999.1484}
 };*/
 
-new PobijText[31][31] ={
-"vKrntUAW",//1
-"dupencja",//2
-"vvaLcz22",//3
-"rnucznik",//4
-"batm0biL",//5
-"2LH7YA3K",//6
-"P0C0BiJ3Sz",//7
-"YX8tWtQS",//8
-"XkAtSO10",//9
-"HGvCj9yG",//10
-"nS1ALyw7",//11
-"Kgwdm6BU",//12
-"Mrucznik",//13
-"FuniaXDD",//14
-"KiuJL0Yz",//15
-"c2KA9Gtu",//16
-"7jGS3DgH",//17
-"TRAKTORR",//18
-"AEZAKMiw",//19
-"LiLoRiKa",//20
-"QLcQ5TER",//21
-"6QkBLHbb",//22
-"zZZzzZzZ",//23
-"OMGWTF22",//24
-"UWRdOOSA",//25
-"MAMAmija",//26
-"FiUOWhew",//27
-"Simeone",//28
-"QWERTYUi",//29
-"ABCDEFGH",//30
-"WYGRALES"//31
-};
-
 //respawn count
 new Count = 20;
 

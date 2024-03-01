@@ -90,7 +90,10 @@ YCMD:rozwiaz(playerid, params[], help)
 	GameTextForPlayer(giveplayerid, "~g~Wolnosc", 2500, 3);
 	
 	TogglePlayerControllable(giveplayerid, 1);
+
 	PlayerTied[giveplayerid] = false;
-	pobity[giveplayerid] = 0;
+	isBeatenUp[giveplayerid] = false;
 	PlayerTiedTime[giveplayerid] = 0;
+
+	return 1;
 }

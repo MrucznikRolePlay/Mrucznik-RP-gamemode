@@ -952,14 +952,10 @@ new dudmv4;
 new BramaKomiCela;  //stary komisariat (old komi)
 new BramaKomiCelaS = 1;
 //koniec ruchome obiekty
-new pobity[MAX_PLAYERS];//pobity
-new pobilem[MAX_PLAYERS];
-new podczasbicia[MAX_PLAYERS];
 new spamwl[MAX_PLAYERS];
 new poddaje[MAX_PLAYERS];//poddaje siê
 new lowcap[MAX_PLAYERS];//³owca nagród który proponowa³ poddanie siê
 new lowcaz[MAX_PLAYERS];//³owca nagród dostaje zlecenie
-new bijep[MAX_PLAYERS];//kozak który proponowa³ pobicie siê
 new okradziony[MAX_PLAYERS];//zabierzportfel
 new zmatsowany[MAX_PLAYERS];//diler brono
 new BusCzit[MAX_PLAYERS];
@@ -1005,13 +1001,6 @@ new iloscwygranych;//¿u¿el
 new komentator[MAX_PLAYERS];//¯u¿el
 new okrazenia[MAX_PLAYERS];//¯u¿el
 new okregi[MAX_PLAYERS];//¯u¿el
-new kodbitwy[256];//Bitwa
-new zdazylwpisac[MAX_PLAYERS] = 1;//Bitwa
-
-new isPlayerUsingCuffs[MAX_PLAYERS];
-new isPlayerCuffed[MAX_PLAYERS];
-new whoIsCuffing[MAX_PLAYERS];
-new whoIsCuffedBy[MAX_PLAYERS];
 // worek
 new Worek_Uzyty[MAX_PLAYERS];
 new Worek_MamWorek[MAX_PLAYERS];
@@ -1139,11 +1128,6 @@ ZerujZmienne(playerid)
  	PlayerInfo[playerid] [pMozeskakacAT] = 0;
  	PlayerInfo[playerid] [pRockHotelLiAc] = 0;
  	PlayerInfo[playerid] [pRockHotelPuAc] = 0;
-	isPlayerCuffed[playerid] = 0;
-	isPlayerUsingCuffs[playerid] = 0;
-	pobity[playerid] = 0;
-	pobilem[playerid] = 0;
-	podczasbicia[playerid] = 0;
 	PlayerTied[playerid] = false;
 	PlayerTiedTime[playerid] = 0;
 	

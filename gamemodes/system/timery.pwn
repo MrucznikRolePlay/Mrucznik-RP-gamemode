@@ -137,10 +137,14 @@ public textVinylT(){
 	}
 	return 1;
 }
+
 forward FreezePlayer(playerid);
 public FreezePlayer(playerid){
 	TogglePlayerControllable(playerid, 1);
-	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0)
+	{
+		ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+	}
 	return 1;
 }
 
@@ -2161,7 +2165,7 @@ public JednaSekundaTimer()
     //25.06.2014
     new State, Float:pancerzyy,string[128],vehicleid,VehicleModel,
         Float:x, Float:y, Float:z, Float:health, Float:Dis,
-        pZone[MAX_ZONE_NAME], cop, ammo, weaponID, weaponState, taxidriver, Float:vel[3];
+        pZone[MAX_ZONE_NAME], ammo, weaponID, weaponState, taxidriver, Float:vel[3];
 
     new plname[MAX_PLAYER_NAME],level, Float:angle,Lost = 0, trigger = 0,winner[MAX_PLAYER_NAME], loser[MAX_PLAYER_NAME],titel[MAX_PLAYER_NAME];
 
@@ -2189,6 +2193,8 @@ public JednaSekundaTimer()
         GetPlayerPos(i, x, y, z);
 		GetPlayerArmour(i, pancerzyy);
         vehicleid = GetPlayerVehicleID(i);
+
+		JednaSekundaTimer_Kajdanki(i);
 		
 		//dzwonek telefonu
 		if(RingTone[i] > 0 && Mobile[i] >= 0)
@@ -2401,44 +2407,6 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if(isPlayerCuffed[i] == 1)
-		{
-			cop = whoIsCuffing[i];
-			if(IsPlayerConnected(cop))
-			{
-				if(IsAPolicja(cop) || IsABOR(cop))
-				{
-					if(GetPlayerState(cop) == 1)
-					{
-						if(!ProxDetectorS(3.5, cop, i))
-						{
-							SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
-							SetPlayerInterior(i, GetPlayerInterior(cop));
-							GetPlayerPos(cop, x, y, z);
-							SetPlayerPos(i, x-0.5, y-0.5, z);
-							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
-							TogglePlayerControllable(i, 0);
-							if(PlayerInfo[i][pBW] == 0) SetTimerEx("FreezePlayer", 2000, false, "i", i);
-						}
-					}
-					else
-					{
-						new veh = GetPlayerVehicleID(cop);
-                        new veh_zakuty = GetPlayerVehicleID(i);
-                        if(veh != veh_zakuty) 
-                        {
-                            new seat = GetFreeVehicleSeatForArrestant(veh);
-                            if(seat != -1)
-                            {
-                                PutPlayerInVehicleEx(i, veh, seat);
-                                TogglePlayerControllable(i, 0);
-                            }
-                        }
-					}
-				}
-			}
-		}
-
 
         if(SafeTime[i] > 0)//3minuty na zalogowanie
 		{
@@ -3190,7 +3158,7 @@ public JednaSekundaTimer()
 				ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				GameTextForPlayer(i, "~r~Jestes wolny!", 2500, 3);
 				PlayerTiedTime[i] = 0;
-				pobity[i] = 0;
+				isBeatenUp[i] = false;
 				PlayerInfo[i][pMuted] = 0;
 				PlayerTied[i] = false;
                 PlayerInfo[i][pBW]=0;

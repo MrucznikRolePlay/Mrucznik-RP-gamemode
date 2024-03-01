@@ -97,7 +97,7 @@ YCMD:zwiaz(playerid, params[], help)
 	TogglePlayerControllable(giveplayerid, 0);
 	PlayerTied[giveplayerid] = true;
 	PlayerTiedTime[giveplayerid] = 5*60;
-	pobity[giveplayerid] = 0;
+	isBeatenUp[giveplayerid] = false;
 
 	return 1;
 }

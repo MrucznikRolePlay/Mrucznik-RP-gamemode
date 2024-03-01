@@ -1,0 +1,24 @@
+{
+    "name": "rozkuj",
+    "description": "Rozkucie kajdanek.",
+    "permissions": [
+        "admini",
+        "frakcja_LSPD",
+        "frakcja_FBI",
+        "frakcja_SASP",
+        "frakcja_USSS"
+    ],
+    "author": "NikodemBanan",
+    "aliases": [
+        "uncuff",
+        "odkuj"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "uncuffedplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "01.03.2024"
+}
