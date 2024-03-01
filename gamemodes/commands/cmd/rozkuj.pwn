@@ -61,7 +61,7 @@ YCMD:rozkuj(playerid, params[], help)
 		return 1; 
 	}
 
-	if(isPlayerCuffed[giveplayerid] == 0 && !PlayerTied[giveplayerid])
+	if(!isPlayerCuffed[giveplayerid] && !PlayerTied[giveplayerid])
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest skuty !");
 		return 1;

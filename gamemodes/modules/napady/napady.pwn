@@ -43,7 +43,7 @@ Heist_EligibleToContinue(attackerid)
 		return 0;
 	if(PlayerInfo[playerid][pBW] > 0)
 		return 0;
-	if(isPlayerCuffed[playerid] > 0)
+	if(isPlayerCuffed[playerid])
 		return 0;
 	if(!IsPlayerConnected(playerid))
 		return 0;

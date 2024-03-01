@@ -156,7 +156,6 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 }
 FreezePlayerOnInjury(playerid)
 {
-	//SendClientMessageToAll(COLOR_GRAD2, "#3: FreezePlayerOnInjury");
 	TogglePlayerControllable(playerid, 0);
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
@@ -164,7 +163,6 @@ FreezePlayerOnInjury(playerid)
 }
 PlayerEnterVehOnInjury(playerid)
 {
-	//SendClientMessageToAll(COLOR_GRAD2, "#4: PlayerEnterVehOnInjury");
 	Player_RemoveFromVeh(playerid);
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
 	return 1;

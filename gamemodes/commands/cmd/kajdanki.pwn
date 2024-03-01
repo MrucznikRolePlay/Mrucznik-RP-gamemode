@@ -60,7 +60,7 @@ YCMD:kajdanki(playerid, params[], help)
             sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
             return 1;
         }
-        if(isPlayerUsingCuffs[playerid] == 1 || isPlayerCuffed[giveplayerid] != 0)
+        if(isPlayerUsingCuffs[playerid] || isPlayerCuffed[giveplayerid])
         {
             new str[32];
             valstr(str, giveplayerid);
