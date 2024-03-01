@@ -55,37 +55,35 @@ YCMD:worek(playerid, params[], help)
 					return 1;
 				}
 
-				if(Worek_MamWorek[giveplayerid])
-				{
-					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "* %s œci¹gn¹³ Ci worek z g³owy, odzyska³eœ orientacjê w terenie.", sendername);
-					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "* Œci¹gn¹³eœ %s worek z g³owy.", giveplayer);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "* %s œci¹ga %s worek z g³owy.", sendername ,giveplayer);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					
-					Worek_MamWorek[giveplayerid] = 0;
-					Worek_KomuZalozylem[Worek_KtoZalozyl[giveplayerid]] = INVALID_PLAYER_ID;
-					Worek_Uzyty[Worek_KtoZalozyl[giveplayerid]] = 0;
-					Worek_KtoZalozyl[giveplayerid] = INVALID_PLAYER_ID;
-					UnHave_Worek(giveplayerid);
-				}
-				else
-				{	
-					if(Worek_Uzyty[playerid])
-					{
-						sendTipMessageEx(playerid, COLOR_GREY, "Masz tylko jeden worek, zdejmij go poprzedniej osobie !");
-						return 1;
-					}
-					else
-					{
-						if(PlayerInfo[giveplayerid][pInjury] == 0 && PlayerTied[giveplayerid] == 0 && pobity[giveplayerid] == 0)
-						{
-							sendErrorMessage(playerid, "Mo¿esz za³o¿yæ worek na g³owê tylko graczowi, który jest pobity/zwi¹zany lub ranny.");
-							return 1;
-						}
+	if(Worek_MamWorek[giveplayerid])
+	{
+		GetPlayerName(giveplayerid, giveplayername, sizeof(giveplayername));
+		GetPlayerName(playerid, sendername, sizeof(sendername));
+		format(string, sizeof(string), "* %s œci¹gn¹³ Ci worek z g³owy, odzyska³eœ orientacjê w terenie.", sendername);
+		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string), "* Œci¹gn¹³eœ %s worek z g³owy.", giveplayername);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+		format(string, sizeof(string), "* %s œci¹ga %s worek z g³owy.", sendername ,giveplayername);
+		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		
+		Worek_MamWorek[giveplayerid] = 0;
+		Worek_KomuZalozylem[Worek_KtoZalozyl[giveplayerid]] = INVALID_PLAYER_ID;
+		Worek_Uzyty[Worek_KtoZalozyl[giveplayerid]] = 0;
+		Worek_KtoZalozyl[giveplayerid] = INVALID_PLAYER_ID;
+		UnHave_Worek(giveplayerid);
+	}
+	else
+	{	
+		if(Worek_Uzyty[playerid])
+		{
+			sendTipMessageEx(playerid, COLOR_GREY, "Masz tylko jeden worek, zdejmij go poprzedniej osobie !");
+			return 1;
+		}
+		if(PlayerInfo[giveplayerid][pInjury] == 0 && !PlayerTied[giveplayerid] && !isBeatenUp[giveplayerid])
+		{
+			sendErrorMessage(playerid, "Mo¿esz za³o¿yæ worek na g³owê tylko graczowi, który jest pobity/zwi¹zany lub ranny.");
+			return 1;
+		}
 
 						GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						GetPlayerName(playerid, sendername, sizeof(sendername));

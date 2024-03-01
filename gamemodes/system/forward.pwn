@@ -48,10 +48,7 @@ forward Banicja(playerid);
 forward KickExTimer(playerid);
 forward BanExTimer(playerid);
 forward Matsowanie(playerid);
-forward pobito(playerid);
 forward togczastimer(playerid);
-forward naczasbicie(playerid, playerid_atak);
-forward UzyteKajdany(playerid);
 forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
 forward PoscigTimer(playerid);
@@ -150,7 +147,6 @@ forward SlideRope(playerid);
 forward closeGate(i, j, playerid);
 
 forward DamagedHP(playerid);
-forward CuffedAction(playerid, cuffedid);
-//forward UnCuffedAction(cop, cuffedid); to do
+
 forward DeathAdminWarning(playerid, killerid, reason);
 //EOF

@@ -70,6 +70,8 @@
 #include "antycheat\antycheat.def"
 #include "komendy\komendy.def"
 #include "choroby\choroby.def"
+#include "bijatyki\bijatyki.def"
+#include "kajdanki\kajdanki.def"
 
 
 //-------<[ .hwn ]>-------
@@ -115,6 +117,8 @@
 #include "antycheat\antycheat.hwn"
 #include "komendy\komendy.hwn"
 #include "choroby\choroby.hwn"
+#include "bijatyki\bijatyki.hwn"
+#include "kajdanki\kajdanki.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -160,6 +164,8 @@
 #include "antycheat\antycheat.pwn"
 #include "komendy\komendy.pwn"
 #include "choroby\choroby.pwn"
+#include "bijatyki\bijatyki.pwn"
+#include "kajdanki\kajdanki.pwn"
 
 
 //-------<[ timers ]>-------
@@ -177,6 +183,9 @@
 #include "premium\premium_timers.pwn"
 #include "urzadls\urzadls_timers.pwn"
 #include "zlodziej_aut\zlodziej_aut_timers.pwn"
+#include "napady\napady_timers.pwn"
+#include "bijatyki\bijatyki_timers.pwn"
+#include "kajdanki\kajdanki_timers.pwn"
 #include "choroby\choroby_timers.pwn"
 
 
@@ -220,7 +229,8 @@
 #include "zlodziej_aut\zlodziej_aut_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
-
+#include "bijatyki\bijatyki_callbacks.pwn"
+#include "kajdanki\kajdanki_callbacks.pwn"
 
 //-------<[ commands ]>-------
 #include "frakcje\commands\frakcje_commands.pwn"
@@ -254,3 +264,5 @@
 #include "antycheat\commands\antycheat_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "choroby\commands\choroby_commands.pwn"
+#include "bijatyki\commands\bijatyki_commands.pwn"
+#include "kajdanki\commands\kajdanki_commands.pwn"

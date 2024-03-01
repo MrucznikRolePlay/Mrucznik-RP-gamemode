@@ -50,51 +50,41 @@ YCMD:rozwiaz(playerid, params[], help)
 				return 1;
 			}
 
-			if(IsPlayerConnected(giveplayerid))
-			{
-				if(giveplayerid != INVALID_PLAYER_ID)
-				{
-				    if (ProxDetectorS(8.0, playerid, giveplayerid))
-					{
-					    if(giveplayerid == playerid && !PlayerInfo[playerid][pAdmin] >= 1) { sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz rozwi¹zaæ sam siebie!"); return 1; }
-						if(PlayerTied[giveplayerid])
-						{
-						    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-							GetPlayerName(playerid, sendername, sizeof(sendername));
-						    format(string, sizeof(string), "* Zosta³eœ odwi¹zany przez %s.", sendername);
-							SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-							format(string, sizeof(string), "* Odwi¹za³eœ %s.", giveplayer);
-							SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-							GameTextForPlayer(giveplayerid, "~g~Wolnosc", 2500, 3);
-							TogglePlayerControllable(giveplayerid, 1);
-							PlayerTied[giveplayerid] = 0;
-							pobity[giveplayerid] = 0;
-							PlayerCuffedTime[giveplayerid] = 0;
-							PlayerCuffed[giveplayerid] = 0;
-						}
-						else
-						{
-						    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest zwi¹zany !");
-						    return 1;
-						}
-					}
-					else
-					{
-					    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
-					    return 1;
-					}
-				}
-			}
-			else
-			{
-			    sendErrorMessage(playerid, "Nie ma takiego gracza !");
-			    return 1;
-			}
-		}
-		else
-		{
-			noAccessMessage(playerid);
-		}
-	}//not connected
+	if(giveplayerid == INVALID_PLAYER_ID || !IsPlayerConnected(giveplayerid))
+	{
+		sendErrorMessage(playerid, "Nie ma takiego gracza !");
+		return 1;
+	}
+	if (!ProxDetectorS(8.0, playerid, giveplayerid))
+	{
+		sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
+		return 1;
+	}
+	if(!PlayerTied[giveplayerid])
+	{
+		sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest zwi¹zany !");
+		return 1;
+	}
+	if(giveplayerid == playerid && !PlayerInfo[playerid][pAdmin] >= 1) 
+	{ 
+		sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz rozwi¹zaæ sam siebie!"); 
+		return 1; 
+	}
+
+	GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
+	GetPlayerName(playerid, sendername, sizeof(sendername));
+
+	format(string, sizeof(string), "* Zosta³eœ odwi¹zany przez %s.", sendername);
+	SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+	format(string, sizeof(string), "* Odwi¹za³eœ %s.", giveplayer);
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+	GameTextForPlayer(giveplayerid, "~g~Wolnosc", 2500, 3);
+	
+	TogglePlayerControllable(giveplayerid, 1);
+
+	PlayerTied[giveplayerid] = false;
+	isBeatenUp[giveplayerid] = false;
+	PlayerTiedTime[giveplayerid] = 0;
+
 	return 1;
 }
