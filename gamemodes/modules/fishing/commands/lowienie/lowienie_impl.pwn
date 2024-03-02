@@ -62,8 +62,14 @@ command_lowienie_Impl(playerid)
         {
             Caught *= 0.8;
         } 
-        else if(CA_IsVehicleNearWater(vehicleID))
+        else 
         {
+            if(!CA_IsVehicleNearWater(vehicleID))
+            {
+                sendErrorMessage(playerid, "Twoja ≥Ûdü nie jest w wodzie!");
+                return 1;
+            }
+
             new Float:x, Float:y, Float:z;
             GetPlayerPos(playerid, x, y, z);
             CA_FindZ_For2DCoord(x, y, z);
