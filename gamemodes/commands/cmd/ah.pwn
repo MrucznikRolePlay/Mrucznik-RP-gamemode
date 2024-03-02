@@ -87,7 +87,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 10)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*10* ADMIN *** /fdaj /ksam /rozwiedz /setteam /entercar /sethp /setcarhp /dmvon /dmvoff");
+		SendClientMessage(playerid, COLOR_GRAD4,"*10* ADMIN *** /fdaj /ksam /rozwiedz /entercar /sethp /setcarhp /dmvon /dmvoff");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 15)
 	{

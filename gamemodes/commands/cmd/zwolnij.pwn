@@ -61,8 +61,6 @@ YCMD:zwolnij(playerid, params[], help)
 							Log(serverLog, INFO, "%s wyrzuci³ %s z frakcji %s", GetPlayerLogName(playerid), GetPlayerLogName(para1), GetFractionLogName(liderid));
 							format(string, sizeof(string), "Zostales wyrzucony z frakcji %s przez %s.", FractionNames[liderid],sendername);
 							sendTipMessageEx(para1, COLOR_LIGHTBLUE, string);
-							gTeam[para1] = 3;
-							PlayerInfo[para1][pTeam] = 3;
 							PlayerInfo[para1][pMember] = 0;
 							PlayerInfo[para1][pRank] = 0;
 							PlayerInfo[para1][pUniform] = 0;
@@ -75,7 +73,7 @@ YCMD:zwolnij(playerid, params[], help)
 							AntySpawnBroni[para1] = 5;
 							UsunBron(para1);
 							SetPlayerColor(para1,TEAM_HIT_COLOR);
-							SetSpawnInfo(para1, gTeam[para1], PlayerInfo[para1][pSkin],0.0,0.0,0.0,0,0,0,0,0,0,0);
+							SetSpawnInfo(para1, 0, PlayerInfo[para1][pSkin],0.0,0.0,0.0,0,0,0,0,0,0,0);
 							MedicBill[para1] = 0;
 							SetPlayerSpawn(para1);
                             MruMySQL_SetAccInt("Rank", giveplayer, 0);

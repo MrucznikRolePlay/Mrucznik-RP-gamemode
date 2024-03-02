@@ -171,7 +171,6 @@
 		> makemember - nadaje stopieñ [0] graczowi o ID we frakcji X
 		> zabierzlideraorg - zabiera lidera organizacji (rodziny) dla gracza o ID
 		> makeleader - daje graczowi o ID lidera frakcji o ID X
-		> setteam - ustala "team" graczowi (raczej ju¿ nie u¿ywane) - s¹ dwa cop, civilian. 
 		> gotopos - teleportuje nas do pozycji X,Y,Z
 		> gotols - teleportuje pod komisariat LS
 		> gotolv - teleportuje pod lotnisko LV

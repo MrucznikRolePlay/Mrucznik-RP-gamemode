@@ -36,7 +36,7 @@ YCMD:zabierz(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(gTeam[playerid] == 2 || IsAPolicja(playerid))
+        if(IsAPolicja(playerid))
         {
             if(PlayerInfo[playerid][pRank] < 1)
             {

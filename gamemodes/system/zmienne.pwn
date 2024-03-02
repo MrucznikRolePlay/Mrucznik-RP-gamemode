@@ -135,8 +135,6 @@ new ZgloszenieSasp[OSTATNIE_ZGLOSZENIASASP][hqZgloszeniaSasp];
 
 new pFindZone[MAX_PLAYERS];
 
-
-new gTeam[MAX_PLAYERS];
 new odczekajTimer[MAX_PLAYERS];
 
 new lastMsg[MAX_PLAYERS];
@@ -1256,7 +1254,6 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pPos_z] = 1029.7;
 	PlayerInfo[playerid][pInt] = 0;
 	PlayerInfo[playerid][pLocal] = 255;
-	PlayerInfo[playerid][pTeam] = 3;
 	PlayerInfo[playerid][pSkin] = 136;
 	//new randphone = 10000 + random(89999);//minimum 1000  max 9999 //giving one at the start
 	PlayerInfo[playerid][pPnumber] = 0;
