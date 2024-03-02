@@ -60,9 +60,9 @@ command_lowienie_Impl(playerid)
         new isBoatOwner = IsABoat(vehicleID) && IsCarOwner(playerid, vehicleID);
         if(!isBoatOwner) 
         {
-            Caught /= 3;
+            Caught *= 0.8;
         } 
-        else 
+        else if(CA_IsVehicleNearWater(vehicleID))
         {
             new Float:x, Float:y, Float:z;
             GetPlayerPos(playerid, x, y, z);
@@ -72,9 +72,9 @@ command_lowienie_Impl(playerid)
             {
                 depthBonus = 1;
             }
-            else if(depthBonus > 2) 
+            else if(depthBonus > 1.5) 
             {
-                depthBonus = 2;
+                depthBonus = 1.5;
             }
 
             Caught = floatround(Caught/depthBonus, floatround_ceil);
@@ -87,7 +87,7 @@ command_lowienie_Impl(playerid)
 
         if(IsPlayerSick(playerid, FANATYK_WEDKARSTWA)) 
         {
-            Caught = floatround(Caught * 1.5, floatround_ceil);
+            Caught = floatround(Caught * 1.2, floatround_ceil);
         }
         else
         {
