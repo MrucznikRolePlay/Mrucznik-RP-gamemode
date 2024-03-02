@@ -58,11 +58,7 @@ command_lowienie_Impl(playerid)
 
         new vehicleID = GetPlayerVehicleID(playerid);
         new isBoatOwner = IsABoat(vehicleID) && IsCarOwner(playerid, vehicleID);
-        if(!isBoatOwner) 
-        {
-            Caught *= 0.8;
-        } 
-        else 
+        if(isBoatOwner) 
         {
             if(!CA_IsVehicleNearWater(vehicleID))
             {
@@ -78,9 +74,9 @@ command_lowienie_Impl(playerid)
             {
                 depthBonus = 1;
             }
-            else if(depthBonus > 1.5) 
+            else if(depthBonus > 1.2) 
             {
-                depthBonus = 1.5;
+                depthBonus = 1.2;
             }
 
             Caught = floatround(Caught/depthBonus, floatround_ceil);
