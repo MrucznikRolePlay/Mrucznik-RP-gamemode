@@ -2186,8 +2186,6 @@ public OnPlayerSpawn(playerid)
     if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
         PlayerInfo[playerid][pRank] = 0;
         PlayerInfo[playerid][pMember] = 0;
-        gTeam[playerid] = 3;
-        PlayerInfo[playerid][pTeam] = 3;
         PlayerInfo[playerid][pMember] = 0;
         PlayerInfo[playerid][pRank] = 0;
         PlayerInfo[playerid][pUniform] = 0;
@@ -5215,7 +5213,7 @@ public OnPlayerRequestSpawn(playerid)
 }
 public OnPlayerRequestClass(playerid, classid)
 {
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
+	SetSpawnInfo(playerid, 0, PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 
 	if(gPlayerLogged[playerid] != 1)
 	{
@@ -6092,14 +6090,14 @@ OnPlayerLogin(playerid, password[])
         }
         else
         {
-            SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+            SetSpawnInfo(playerid, 0, PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
             SetPlayerSpawn(playerid);
 			TogglePlayerSpectating(playerid, false);
         }
 	}
     else
     {
-        SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+        SetSpawnInfo(playerid, 0, PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 		gOoc[playerid] = 1; gNews[playerid] = 1; gFam[playerid] = 1;
 		PlayerInfo[playerid][pMuted] = 1;
 		SendClientMessage(playerid, COLOR_YELLOW, "Witaj na Mrucznik Role Play!");
