@@ -589,10 +589,10 @@ GetPlayerFraction(playerid)
 CarOpis_Usun(playerid, vehicleid, message=false)
 {
     if(vehicleid >= MAX_VEHICLES) return 0;
-    if(CarOpis[vehicleid] != Text3D:INVALID_3DTEXT_ID)
+    if(Car3dTextDesc[vehicleid] != Text3D:INVALID_3DTEXT_ID)
     {
-        DestroyDynamic3DTextLabel(Text3D:CarOpis[vehicleid]);
-        CarOpis[vehicleid] = Text3D:INVALID_3DTEXT_ID;
+        DestroyDynamic3DTextLabel(Text3D:Car3dTextDesc[vehicleid]);
+        Car3dTextDesc[vehicleid] = Text3D:INVALID_3DTEXT_ID;
 		
 		if(CarData[VehicleUID[vehicleid][vUID]][c_UID] > 0)
 		{

@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  togopis                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,27 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "hq\hq.pwn"
-#include "lkiz\lkiz.pwn"
-#include "fpanel\fpanel.pwn"
-#include "opis\opis.pwn"
-#include "usunopis\usunopis.pwn"
-#include "togopis\togopis.pwn"
-#include "togvopis\togvopis.pwn"
-
+#include "togopis_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_togopis()
 {
-    command_hq();
-    command_lkiz();
-    command_fpanel();
-    command_opis();
-    command_usunopis();
-    command_togopis();
-    command_togvopis();
+    
 
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:togopis(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "W³¹czenie/wy³¹czenie wyœwietlania opisów graczy.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_togopis_Impl(playerid);
 }
