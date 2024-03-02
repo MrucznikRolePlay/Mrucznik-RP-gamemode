@@ -468,7 +468,7 @@ public OnGameModeInit()
 
     for(new i;i<MAX_PLAYERS;i++)
     {
-        PlayerInfo[i][pDescLabel] = Create3DTextLabel(" ", 0xBBACCFFF, 0.0, 0.0, 0.0, 5.0, 0, 1);
+        PlayerInfo[i][pDescLabel] = CreateDynamic3DTextLabel(" ", 0xBBACCFFF, 0.0, 0.0, -0.7, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, -1, -1, -1, 10.0);
     }
 
     pusteZgloszenia();
@@ -1257,7 +1257,7 @@ public OnPlayerDisconnect(playerid, reason)
         PlayerInfo[playerid][pInt] = GetPVarInt(playerid, "kolejka-int");
     }
 
-    Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
+    UpdateDynamic3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
 
 	//AFK timer
 	if(afk_timer[playerid] != -1)

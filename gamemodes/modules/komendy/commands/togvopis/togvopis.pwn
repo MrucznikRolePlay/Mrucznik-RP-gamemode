@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  togvopis                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,27 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "hq\hq.pwn"
-#include "lkiz\lkiz.pwn"
-#include "fpanel\fpanel.pwn"
-#include "opis\opis.pwn"
-#include "usunopis\usunopis.pwn"
-#include "togopis\togopis.pwn"
-#include "togvopis\togvopis.pwn"
-
+#include "togvopis_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_togvopis()
 {
-    command_hq();
-    command_lkiz();
-    command_fpanel();
-    command_opis();
-    command_usunopis();
-    command_togopis();
-    command_togvopis();
+    
 
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:togvopis(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "W³¹czenie/wy³¹czenie wyœwietlania opisów pojazdów.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_togvopis_Impl(playerid);
 }

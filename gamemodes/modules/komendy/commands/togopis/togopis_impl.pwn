@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  togopis                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: NikodemBanan
+// Data utworzenia: 25.02.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "hq\hq.pwn"
-#include "lkiz\lkiz.pwn"
-#include "fpanel\fpanel.pwn"
-#include "opis\opis.pwn"
-#include "usunopis\usunopis.pwn"
-#include "togopis\togopis.pwn"
-#include "togvopis\togvopis.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_togopis_Impl(playerid)
 {
-    command_hq();
-    command_lkiz();
-    command_fpanel();
-    command_opis();
-    command_usunopis();
-    command_togopis();
-    command_togvopis();
+    new new_description_visibility = false;
 
+    // Gracz ma wy³¹czone opisy
+    if(!Streamer_IsInArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[0][pDescLabel], E_STREAMER_PLAYER_ID, playerid))
+    {
+        new_description_visibility = true;
+    }
+
+    foreach(new p : Player)
+    {
+        if(new_description_visibility == true)
+        {
+            Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[p][pDescLabel], E_STREAMER_PLAYER_ID, playerid);
+        }
+        else
+        {
+            Streamer_RemoveArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[p][pDescLabel], E_STREAMER_PLAYER_ID, playerid);
+        }
+    }
+
+    if(new_description_visibility == true)
+    {
+        MSGBOX_Show(playerid, "Opisy graczy ~g~wlaczone!", MSGBOX_ICON_TYPE_OK);
+    }
+    else
+    {
+        MSGBOX_Show(playerid, "Opisy graczy ~r~wylaczone!", MSGBOX_ICON_TYPE_ERROR);
+    }
+
+    Streamer_Update(playerid);
+
+    return 1;
 }
+
+//end

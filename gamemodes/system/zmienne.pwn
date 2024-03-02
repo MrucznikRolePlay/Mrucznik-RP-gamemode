@@ -245,7 +245,7 @@ new bool:SafeLoaded=false;
 //01.10 server info
 new ServerInfo[2048];
 //30.09 vopis
-new Text3D:CarOpis[MAX_VEHICLES] = {Text3D:INVALID_3DTEXT_ID, ...};
+new Text3D:Car3dTextDesc[MAX_VEHICLES] = {Text3D:INVALID_3DTEXT_ID, ...};
 new CarOpisCaller[MAX_VEHICLES][MAX_PLAYER_NAME];
 //20.09
 new STANOWE_GATE_KEY = 5231;
@@ -1077,6 +1077,7 @@ new playerSeeSpec[MAX_PLAYERS];
 new gRO[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS];
 new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
+new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1120,9 +1121,6 @@ ZerujZmienne(playerid)
 	timeFakeVehRespawn[playerid] = 0;
 	countFakeVehRespawn[playerid] = 0;
 
-    new Text3D:tmp_label = PlayerInfo[playerid][pDescLabel];
-
-    PlayerInfo[playerid][pDescLabel] = tmp_label;
     PlayerInfo[playerid][pDesc][0] = EOS;
 	StaryCzas[playerid] = GetTickCount();
 	zawodnik[playerid] = 0;//¯u¿el
@@ -1454,7 +1452,38 @@ ZerujZmienne(playerid)
 	}
 	unoccupiedVehBlockAC[playerid] = false;
 
+	foreach(new p : Player)
+	{
+		Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[p][pDescLabel], E_STREAMER_PLAYER_ID, playerid);
+	}
+	foreach(new v : Vehicle)
+    {
+        if(Car3dTextDesc[v] == Text3D:INVALID_3DTEXT_ID)
+        {
+            continue;
+        }
+		Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, Car3dTextDesc[v], E_STREAMER_PLAYER_ID, playerid);
+    }
+
+	areVehicleDescTurnedOn[playerid] = true;
+
+	foreach(new p : Player)
+	{
+		Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[p][pDescLabel], E_STREAMER_PLAYER_ID, playerid);
+	}
+	foreach(new v : Vehicle)
+    {
+        if(Car3dTextDesc[v] == Text3D:INVALID_3DTEXT_ID)
+        {
+            continue;
+        }
+		Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, Car3dTextDesc[v], E_STREAMER_PLAYER_ID, playerid);
+    }
+
+	areVehicleDescTurnedOn[playerid] = true;
+
 	VECTOR_clear(VMembersOrg[playerid]);
+	
 	return 1;
 }
 //EOF

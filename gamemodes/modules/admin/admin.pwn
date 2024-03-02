@@ -675,7 +675,7 @@ GiveBPForPlayer(playerid, adminid, timeVal, result[])
 		result);
 	//opis
 	//Opis_Usun(giveplayerid);
-	Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
+	UpdateDynamic3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
 	PlayerInfo[playerid][pDesc][0] = EOS;
 	if(GetPlayerAdminDutyStatus(adminid) == 0)
 	{

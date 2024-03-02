@@ -50,7 +50,7 @@ command_opis_Impl(playerid, text[])
 
 		if(!strcmp(opis, "usun", true) || !strcmp(opis, "usuñ", true))
 		{
-			Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
+			UpdateDynamic3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, "");
 			PlayerInfo[playerid][pDesc][0] = EOS;
 			sendTipMessage(playerid, "Opis zosta³ usuniêty.");
 			return 1;
@@ -73,8 +73,8 @@ command_opis_Impl(playerid, text[])
 
 		PlayerInfo[playerid][pDesc] = opis;
 		ReColor(opis);
-		Attach3DTextLabelToPlayer(PlayerInfo[playerid][pDescLabel], playerid, 0.0, 0.0, -0.7);
-		Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, wordwrapEx(opis));
+		Streamer_SetIntData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[playerid][pDescLabel], E_STREAMER_ATTACHED_PLAYER, playerid);
+		UpdateDynamic3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, wordwrapEx(opis));
 		sendTipMessage(playerid, "Ustawiono nowy opis:");
 		new stropis[126];
 		format(stropis, sizeof(stropis), "%s", opis);
