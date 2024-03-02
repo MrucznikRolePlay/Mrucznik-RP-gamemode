@@ -44,7 +44,8 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
         sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Twojej organizacji!");
         return 1;
     }
-
+    if(strcmp(akcja, "", true) != 0)
+        Log(serverLog, INFO, "Lider %s u¿y³ /lidercar, akcja: %s", GetNick(playerid), akcja);
     // choose command action
 	if(strcmp(akcja, "parkuj", true) == 0) {
         command_lidercar_parkuj(playerid);
