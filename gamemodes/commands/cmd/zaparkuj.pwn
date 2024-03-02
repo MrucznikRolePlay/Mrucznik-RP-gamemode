@@ -73,6 +73,12 @@ YCMD:zaparkuj(playerid, params[], help)
 			format(string, sizeof(string), "Twój %s zosta³ zaparkowany w tym miejscu!", VehicleNames[GetVehicleModel(vehicleID)-400]);
 			sendTipMessage(playerid, string, COLOR_LIGHTBLUE);
         }
+		
+		new modelid = GetVehicleModel(vehicleID);
+		new Float:x, Float:y, Float:z;
+		GetVehiclePos(vehicleID, x,y,z);
+		if(ownerOfFractionCar)
+			Log(serverLog, INFO, "Lider %s u¿y³ /zaparkuj na vuid %d: [%d]%s; %f, %f, %f", GetNick(playerid),vehicleUID, modelid, VehicleNames[modelid-400], x, y, z);
 	}
 	else
 	{
