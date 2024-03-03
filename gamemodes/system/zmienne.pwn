@@ -1077,6 +1077,7 @@ new gRO[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS];
 
 new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
+new arePlayerDescTurnedOn[MAX_PLAYERS] = {true, ...};
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1464,6 +1465,7 @@ ZerujZmienne(playerid)
     }
 
 	areVehicleDescTurnedOn[playerid] = true;
+	arePlayerDescTurnedOn[playerid] = true;
 
 	return 1;
 }
