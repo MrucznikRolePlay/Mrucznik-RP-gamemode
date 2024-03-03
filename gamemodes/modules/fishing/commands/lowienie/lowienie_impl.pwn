@@ -69,7 +69,7 @@ command_lowienie_Impl(playerid)
             new Float:x, Float:y, Float:z;
             GetPlayerPos(playerid, x, y, z);
             CA_FindZ_For2DCoord(x, y, z);
-            new Float:depthBonus = 2 - z*(1/-60);
+            new Float:depthBonus = 1 + (-z) * 0.1;
             if(depthBonus < 1) 
             {
                 depthBonus = 1;
@@ -79,7 +79,7 @@ command_lowienie_Impl(playerid)
                 depthBonus = 1.2;
             }
 
-            Caught = floatround(Caught/depthBonus, floatround_ceil);
+            Caught = floatround(Caught*depthBonus, floatround_ceil);
         }
 
         if(GetWeather() == 8) 
