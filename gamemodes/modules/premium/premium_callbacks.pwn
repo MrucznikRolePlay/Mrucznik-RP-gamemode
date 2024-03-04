@@ -31,7 +31,7 @@
 
 hook OnGameModeInit() 
 {
-	PremiumRequestClient = RequestsClient("http://mrucznik-rp.pl/applications/nexus/interface/licenses/");
+	PremiumRequestClient = RequestsClient("https://mrucznik-rp.pl/applications/nexus/interface/licenses/");
 }
 
 
