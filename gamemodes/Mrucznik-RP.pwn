@@ -59,7 +59,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //#include <a_mysql> TODO: replace R5 plugin
 #include <whirlpool>
 #include <timestamptodate>
-#include <discord-connector>
+// #include <discord-connector>
 #include <memory>
 #include <profiler_plugin>
 //TODO: add plugins
