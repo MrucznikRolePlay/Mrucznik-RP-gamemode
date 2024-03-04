@@ -40,6 +40,12 @@ public SprzedajMatsTimer(playerid,giveplayerid)
 	return 1;
 }
 
+forward StopPlayerSound(playerid);
+public StopPlayerSound(playerid)
+{
+	PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
+}
+
 //PizzaJob
 public PizzaJobTimer01(playerid)
 {

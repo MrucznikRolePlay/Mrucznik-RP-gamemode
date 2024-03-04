@@ -65,7 +65,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //TODO: add plugins
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
-// #include <requests>
+#include <requests>
 
 //-------<[ Include ]>-------
 #include <a_http>

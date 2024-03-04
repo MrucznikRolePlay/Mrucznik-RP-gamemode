@@ -175,6 +175,64 @@ ZabierzMC(playerid, mc)
 	return 1;
 }
 
+SprawdzAktywacjeMC(playerid, email[], kod[])
+{
+	// send request, response handler: OnMCInfoCompleted
+	new query[1024];
+	format(query, sizeof(query), "?info&key=%s&identifier=%s", kod, email);
+	new Request:id = RequestJSON(PremiumRequestClient, query, HTTP_METHOD_POST, "OnMCInfoCompleted", JsonObject(), .headers = RequestHeaders());
+
+	// pass playerid to request handling
+	MAP_insert_val_val(PremiumRequestToPlayerID, _:id, playerid);
+	SetPVarInt(playerid, "mc_request", _:id);
+}
+
+AktywujMC(playerid, email[], kod[], mc)
+{
+	// send request, response handler: OnMCActivationCompleted
+	new query[1024];
+	format(query, sizeof(query), "?activate&key=%s&identifier=%s&setIdentifier=0&extra={\"UID\":%d,\"Nick\":\"%s\"}",
+		kod, email, PlayerInfo[playerid][pUID], GetNick(playerid));
+	new Request:id = RequestJSON(PremiumRequestClient, query, HTTP_METHOD_POST, "OnMCActivationCompleted", JsonObject(), .headers = RequestHeaders());
+
+	// pass playerid & mc to request handling
+	MAP_insert_val_val(PremiumRequestToPlayerID, _:id, playerid);
+	SetPVarInt(playerid, "mc_request", _:id);
+	SetPVarInt(playerid, "mc_request_amount", mc);
+}
+
+PobierzMcPaczki(pack_id)
+{
+	switch(pack_id)
+	{
+		case 2: // paczka 500 MC
+		{
+			return 500;
+		}
+		case 3: // paczka 800 MC
+		{
+			return 800;
+		}
+		case 4: // paczka 1500 MC
+		{
+			return 1500;
+		}
+		case 5: // paczka 3500 MC
+		{
+			return 3500;
+		}
+		case 6: // paczka 7500 MC
+		{
+			return 7500;
+		}
+		case 7: // paczka 16000 MC
+		{
+			return 16000;
+		}
+	}
+	return -1;
+}
+
 KupKP(playerid)
 {
 	ZabierzMC(playerid, MIESIAC_KP_CENA);
