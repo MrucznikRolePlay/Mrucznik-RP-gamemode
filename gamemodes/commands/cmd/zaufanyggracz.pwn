@@ -38,13 +38,13 @@ YCMD:zg(playerid, params[], help)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))
 		{
-			sendTipMessage(playerid, "Uï¿½yj /zg [admin chat]");
+			sendTipMessage(playerid, "U¿yj /zg [admin chat]");
 			return 1;
 		}
 		if(PlayerInfo[playerid][pZG] > 0) 
 		{
 			switch (PlayerInfo[playerid][pZG]) {
-				case 10: format(string, sizeof(string), "* Zasï¿½uï¿½ony %s: %s",PlayerInfo[playerid][pZG], sendername, params);
+				case 10: format(string, sizeof(string), "* Zas³u¿ony %s: %s",PlayerInfo[playerid][pZG], sendername, params);
 			}
 		}
 		else if(PlayerInfo[playerid][pAdmin] >= 5000) 
@@ -59,7 +59,6 @@ YCMD:zg(playerid, params[], help)
 		{
 			format(string, sizeof(string), "* Skrypter %s - %s", sendername, params);
 		}
-		*/
 		
 		SendZGMessage(COLOR_BROWN, string);
 		Log(chatLog, INFO, "%s zaufani gracze chat: %s", GetPlayerLogName(playerid), params);
