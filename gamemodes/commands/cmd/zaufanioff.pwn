@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ tickets ]------------------------------------------------//
+//-----------------------------------------------[ zaufanioff ]----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,9 +28,18 @@
 	
 */
 
-YCMD:tickets(playerid, params[], help)
-{
-    if(!Zaufany(playerid) && PlayerInfo[playerid][pNewAP] == 0 && PlayerInfo[playerid][pAdmin] == 0) return noAccessMessage(playerid);
-    Support_ShowTickets(playerid);
+YCMD:zaufanioff(playerid, params[], help) {
+    if(PlayerInfo[playerid][pAdmin] < 1) {
+        noAccessMessage(playerid);
+        return 1;
+    }
+    if(!GetPlayerAdminDutyStatus(playerid)) {
+        sendTipMessage(playerid, "Musisz byæ na s³u¿bie administratora ¿eby wy³¹czyæ uprawnienia zas³u¿onych!");
+        return 1;
+    }
+    new string[128];
+    format(string, 128, "Admin %s wy³¹czy³ uprawnienia zaufanym graczom", GetNickEx(playerid));
+    ABroadCast(COLOR_LIGHTRED, string, 1);
+    ZaufaniON = false;
     return 1;
 }
