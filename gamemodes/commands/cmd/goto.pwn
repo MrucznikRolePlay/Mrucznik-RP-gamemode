@@ -36,7 +36,7 @@ YCMD:goto(playerid, params[], help)
 		new plo;
 		if( sscanf(params, "k<fix>", plo))
 		{
-			sendTipMessage(playerid, "Uï¿½yj /to [playerid/Czï¿½ï¿½Nicku]");
+			sendTipMessage(playerid, "U¿yj /to [playerid/CzêœæNicku]");
 			return 1;
 		}
 		new Float:plocx,Float:plocy,Float:plocz;
