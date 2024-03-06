@@ -749,7 +749,7 @@ public MruMySQL_LoadAccount(playerid)
 		MyWeapon[playerid] = PlayerInfo[playerid][pGun0];
 		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`, `Immunity`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`, `Immunity`, `ZaufanyGracz`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
@@ -759,7 +759,7 @@ public MruMySQL_LoadAccount(playerid)
         mysql_free_result();
 
 		new immunity;
-        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -789,8 +789,9 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pInjury],
 		PlayerInfo[playerid][pHealthPacks],
 		PlayerInfo[playerid][pCzystka],
-        PlayerInfo[playerid][pCarSlots],
-		immunity);
+        PlayerInfo[playerid][pCarSlots]
+		immunity,
+		PlayerInfo[playerid][pZG]);
 		
 		SetPlayerImmunity(playerid, immunity);
 
