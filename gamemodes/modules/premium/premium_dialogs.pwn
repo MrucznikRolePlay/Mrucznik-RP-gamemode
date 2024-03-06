@@ -132,8 +132,9 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new kod[64];
 			strcopy(kod, inputtext, sizeof(kod));
-			regex_replace(kod, "[^a-zA-Z0-9-]", ""); // usun biale znaki z kodu, by przy kopiowaniu z forum wszystko bylo ok
-
+			regex_replace(kod, "[^a-zA-Z0-9-]", " "); // usun biale znaki z kodu, by przy kopiowaniu z forum wszystko bylo ok
+			strtrim(kod);
+			
 			SetPVarString(playerid, "mc_kod", kod);
 			new email[256];
 			GetPVarString(playerid, "mc_email", email, 256);
