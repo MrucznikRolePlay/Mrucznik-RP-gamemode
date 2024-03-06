@@ -130,12 +130,16 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			SetPVarString(playerid, "mc_kod", inputtext);
+			new kod[64];
+			strcopy(kod, inputtext, sizeof(kod));
+			regex_replace(kod, "[^a-zA-Z0-9-]", ""); // usun biale znaki z kodu, by przy kopiowaniu z forum wszystko bylo ok
+
+			SetPVarString(playerid, "mc_kod", kod);
 			new email[256];
 			GetPVarString(playerid, "mc_email", email, 256);
 
 			_MruGracz(playerid, "Trwa aktywacja Mrucznik Coinów...");
-			SprawdzAktywacjeMC(playerid, email, inputtext);
+			SprawdzAktywacjeMC(playerid, email, kod);
 		}
 		else
 		{
@@ -360,9 +364,9 @@ DialogAktywujMC_Kod(playerid)
 DialogAktywujMC_Fail(playerid, error[])
 {
 	new string[512];
-	format(string, sizeof(string), "Niestety, nie uda³o siê aktywowaæ paczki Mrucznik Coinów.\n" \
-		"B³¹d: %s\n" \
-		"SprawdŸ wprowadzone dane i spróbuj jeszcze raz.\n" \
+	format(string, sizeof(string), "Niestety, nie uda³o siê aktywowaæ paczki Mrucznik Coinów.\n\n" \
+		INCOLOR_LIGHTRED"B³¹d: %s\n\n" \
+		INCOLOR_DIALOG"SprawdŸ wprowadzone dane i spróbuj jeszcze raz.\n" \
 		"W razie dalszych problemów, skontaktuj siê z administracj¹.", error);
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(AKTYWACJA_MC_FAIL), DIALOG_STYLE_MSGBOX, "Premium - b³¹d", 
 		string,
@@ -372,7 +376,7 @@ DialogAktywujMC_Fail(playerid, error[])
 DialogAktywujMC_Success(playerid, mc)
 {
 	new string[256];
-	format(string, sizeof(string), "Twoje %d Mrucznik Coinów zosta³o aktywowane!\nDziêkujemy za wspieranie serwera :)", mc);
+	format(string, sizeof(string), "Twoje "INCOLOR_GOLD"%d Mrucznik Coinów"INCOLOR_DIALOG" zosta³o aktywowane!\nDziêkujemy za wspieranie serwera :)", mc);
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(AKTYWACJA_MC_SUKCES), DIALOG_STYLE_MSGBOX, "Premium - MC aktywowane!", 
 		 string,
 	"WyjdŸ", "");
