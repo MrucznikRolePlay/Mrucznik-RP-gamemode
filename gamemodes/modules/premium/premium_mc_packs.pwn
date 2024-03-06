@@ -2,7 +2,7 @@
 
 SprawdzAktywacjeMC(playerid, email[], kod[])
 {
-	if(regex_match(email, "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$") <= 0)
+	if(regex_match(email, "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$") <= 0)
     {
         DialogAktywujMC_Fail(playerid, "Niepoprawny format adresu e-mail.");
         return;
