@@ -789,7 +789,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pInjury],
 		PlayerInfo[playerid][pHealthPacks],
 		PlayerInfo[playerid][pCzystka],
-        PlayerInfo[playerid][pCarSlots]
+        PlayerInfo[playerid][pCarSlots],
 		immunity,
 		PlayerInfo[playerid][pZG]);
 		
