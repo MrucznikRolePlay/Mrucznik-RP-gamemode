@@ -44,7 +44,7 @@ public OnMCInfoCompleted(Request:id, E_HTTP_STATUS:status, Node:node)
     if(status == HTTP_STATUS_OK) 
 	{
 		new playerRequestID = GetPVarInt(playerid, "mc_request");
-		if(playerRequestID != id)
+		if(playerRequestID != _:id)
 		{
 			DialogAktywujMC_Fail(playerid, "Brak spójnoœci ID.");
 			return;
@@ -90,7 +90,7 @@ public OnMCActivationCompleted(Request:id, E_HTTP_STATUS:status, Node:node)
     if(status == HTTP_STATUS_OK) 
 	{
 		new playerRequestID = GetPVarInt(playerid, "mc_request");
-		if(playerRequestID != id)
+		if(playerRequestID != _:id)
 		{
 			DialogAktywujMC_Fail(playerid, "Brak spójnoœci ID.");
 			return;
@@ -114,10 +114,12 @@ public OnMCActivationCompleted(Request:id, E_HTTP_STATUS:status, Node:node)
 		if(mc <= 0)
 		{
 			DialogAktywujMC_Fail(playerid, "System aktywacji paczki nie otrzyma³ poprawnej iloœci Mrucznik Coinów.");
+			return;
 		}
 
 		// nadaj MC
 		DajMC(playerid, mc);
+		Log(premiumLog, INFO, "%s aktywowa³ paczkê z %d Mrucznik Coinami", GetPlayerLogName(playerid), mc);
 
 		// komunikat
 		new string[64];
@@ -127,12 +129,19 @@ public OnMCActivationCompleted(Request:id, E_HTTP_STATUS:status, Node:node)
 
 		// muzyka mission passed
 		PlayerPlaySound(playerid, 183, 0.0, 0.0, 0.0);
-		SetTimerEx("StopPlayerSound", 9000, false, "%d", playerid);
+		SetTimerEx("StopPlayerSound", 8200, false, "%d", playerid);
     }
 	else if(status == HTTP_STATUS_BAD_REQUEST)
 	{
-		new bool:ok;
-		JsonGetBool(node, "ok", ok);
+		new errorCode[64];
+		JsonGetString(node, "errorCode", errorCode, sizeof(errorCode));
+
+		if(strcmp(errorCode, "MAX_USES", true) == 0)
+		{
+			DialogAktywujMC_Fail(playerid, "Ten kod by³ ju¿ aktywowany wczeœniej.");
+			return;
+		}
+		
 		DialogAktywujMC_Fail(playerid, "Niepoprawna odpowiedŸ systemu aktywacji paczki.");
 	}
 	else

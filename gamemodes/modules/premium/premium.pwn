@@ -180,6 +180,7 @@ SprawdzAktywacjeMC(playerid, email[], kod[])
 	// send request, response handler: OnMCInfoCompleted
 	new query[1024];
 	format(query, sizeof(query), "?info&key=%s&identifier=%s", kod, email);
+	print(query);
 	new Request:id = RequestJSON(PremiumRequestClient, query, HTTP_METHOD_POST, "OnMCInfoCompleted", JsonObject(), .headers = RequestHeaders());
 
 	// pass playerid to request handling
@@ -191,8 +192,9 @@ AktywujMC(playerid, email[], kod[], mc)
 {
 	// send request, response handler: OnMCActivationCompleted
 	new query[1024];
-	format(query, sizeof(query), "?activate&key=%s&identifier=%s&setIdentifier=0&extra={\"UID\":%d,\"Nick\":\"%s\"}",
+	format(query, sizeof(query), "?activate&key=%s&identifier=%s&setIdentifier=0&extra=%%7B%%22UID%%22%%3A%d%%2C%%22Nick%%22%%3A%%22%s%%22%%7D",
 		kod, email, PlayerInfo[playerid][pUID], GetNick(playerid));
+	print(query);
 	new Request:id = RequestJSON(PremiumRequestClient, query, HTTP_METHOD_POST, "OnMCActivationCompleted", JsonObject(), .headers = RequestHeaders());
 
 	// pass playerid & mc to request handling
