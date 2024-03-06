@@ -43,9 +43,7 @@ YCMD:zg(playerid, params[], help)
 		}
 		if(PlayerInfo[playerid][pZG] > 0) 
 		{
-			switch (PlayerInfo[playerid][pZG]) {
-				case 10: format(string, sizeof(string), "* Zas³u¿ony %s: %s",PlayerInfo[playerid][pZG], sendername, params);
-			}
+			format(string, sizeof(string), "* Zas³u¿ony %s: %s", sendername, params);
 		}
 		else if(PlayerInfo[playerid][pAdmin] >= 5000) 
 		{
