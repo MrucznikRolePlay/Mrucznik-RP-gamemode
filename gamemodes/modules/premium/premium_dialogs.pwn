@@ -139,7 +139,6 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new email[256];
 			GetPVarString(playerid, "mc_email", email, 256);
 
-			_MruGracz(playerid, "Trwa aktywacja Mrucznik Coinów...");
 			SprawdzAktywacjeMC(playerid, email, kod);
 		}
 		else

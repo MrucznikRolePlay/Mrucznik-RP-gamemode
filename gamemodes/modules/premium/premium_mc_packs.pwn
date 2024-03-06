@@ -14,6 +14,8 @@ SprawdzAktywacjeMC(playerid, email[], kod[])
         return;
     }
 
+	_MruGracz(playerid, "Trwa aktywacja Mrucznik Coinów...");
+
 	// send request, response handler: OnMCInfoCompleted
 	new query[1024];
 	format(query, sizeof(query), "?info&key=%s&identifier=%s", kod, email);
@@ -28,6 +30,8 @@ SprawdzAktywacjeMC(playerid, email[], kod[])
 
 AktywujMC(playerid, email[], kod[], mc)
 {
+	_MruGracz(playerid, "Znaleziono Paczkê MC, trwa aktywacja...");
+
 	// send request, response handler: OnMCActivationCompleted
 	new query[1024];
 	format(query, sizeof(query), "?activate&key=%s&identifier=%s&setIdentifier=0&extra=%%7B%%22UID%%22%%3A%d%%2C%%22Nick%%22%%3A%%22%s%%22%%7D",
@@ -70,8 +74,6 @@ public OnMCInfoCompleted(Request:id, E_HTTP_STATUS:status, Node:node)
 			DialogAktywujMC_Fail(playerid, "Ten klucz licencyjny nie aktywuje paczki Mrucznik Coinów.");
 			return;
 		}
-
-		_MruGracz(playerid, "Znaleziono Paczkê MC, trwa aktywacja...");
 
 		new email[256], kod[64];
 		GetPVarString(playerid, "mc_email", email, 256);
