@@ -1076,6 +1076,7 @@ new gRO[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS];
 new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
 new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
+new arePlayerDescTurnedOn[MAX_PLAYERS] = {true, ...};
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1463,6 +1464,7 @@ ZerujZmienne(playerid)
     }
 
 	areVehicleDescTurnedOn[playerid] = true;
+	arePlayerDescTurnedOn[playerid] = true;
 
 	foreach(new p : Player)
 	{
