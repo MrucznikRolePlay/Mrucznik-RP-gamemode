@@ -51,7 +51,7 @@ YCMD:kajdanki(playerid, params[], help)
             sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie!");
             return 1;
         }
-        if(!ProxDetectorS(8.0, playerid, giveplayerid) || Spectate[giveplayerid] != INVALID_PLAYER_ID)
+        if(!ProxDetectorS(8.0, playerid, giveplayerid))
         {
             sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
             return 1;
