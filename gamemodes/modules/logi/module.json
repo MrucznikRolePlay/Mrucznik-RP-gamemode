@@ -2,7 +2,7 @@
     "name": "logi",
     "description": "Narzêdzia do obs³ugi logów.",
     "author": "Mrucznik",
-    "commands": true,
+    "commands": false,
     "callbacks": true,
     "date": "04.05.2019"
 }

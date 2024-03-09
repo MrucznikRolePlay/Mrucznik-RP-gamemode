@@ -25,6 +25,7 @@
 //
 
 //-----------------<[ Include: ]>-------------------
+#include "premium_mc_packs.pwn"
 #include "premium_dialogs.pwn"
 
 //-----------------<[ Funkcje: ]>-------------------
@@ -173,6 +174,38 @@ ZabierzMC(playerid, mc)
 	PremiumInfo[playerid][pMC] -= mc;
 	MruMySQL_SaveMc(playerid);
 	return 1;
+}
+
+PobierzMcPaczki(pack_id)
+{
+	switch(pack_id)
+	{
+		case 2: // paczka 500 MC
+		{
+			return 500;
+		}
+		case 3: // paczka 800 MC
+		{
+			return 800;
+		}
+		case 4: // paczka 1500 MC
+		{
+			return 1500;
+		}
+		case 5: // paczka 3500 MC
+		{
+			return 3500;
+		}
+		case 6: // paczka 7500 MC
+		{
+			return 7500;
+		}
+		case 7: // paczka 16000 MC
+		{
+			return 16000;
+		}
+	}
+	return -1;
 }
 
 KupKP(playerid)
