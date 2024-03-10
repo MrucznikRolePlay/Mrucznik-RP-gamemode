@@ -34,7 +34,7 @@ YCMD:worek(playerid, params[], help)
 	new giveplayername[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
-    if(IsPlayerConnected(playerid))
+    if(!IsPlayerConnected(playerid))
     {
 		return 1;
 	}
