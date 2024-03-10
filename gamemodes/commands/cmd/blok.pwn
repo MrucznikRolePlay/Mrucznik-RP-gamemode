@@ -40,7 +40,7 @@ YCMD:blok(playerid, params[], help)
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 4 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid) || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -56,14 +56,9 @@ YCMD:blok(playerid, params[], help)
 		                sendErrorMessage(playerid, "Nie mozesz zablokowaæ Admina !");
 		                return 1;
 		            }
-		            if(PlayerInfo[giveplayerid][pNewAP] >= 1 && PlayerInfo[playerid][pZG] >= 4)
+		            if((PlayerInfo[giveplayerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG] == 10) && PlayerInfo[playerid][pZG] >= 4)
 		            {
-		                sendErrorMessage(playerid, "Nie mozesz zablokowaæ P@!");
-		                return 1;
-		            }
-		            if(PlayerInfo[playerid][pZG] >= 4 && PlayerInfo[playerid][pZG] < 8 && PlayerInfo[giveplayerid][pLevel] > 1)
-		            {
-		                sendErrorMessage(playerid, "Nie mozesz zablokowaæ gracza z lvl wiekszym niz 1!");
+		                sendErrorMessage(playerid, "Nie mozesz zablokowaæ P@ ani ZG!");
 		                return 1;
 		            }
 					GiveBlockForPlayer(giveplayerid, playerid, (result));

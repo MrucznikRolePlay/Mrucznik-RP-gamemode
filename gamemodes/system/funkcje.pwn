@@ -10956,7 +10956,6 @@ ChangePlayerName(playerid, name[])
 	}
 	PlayerInfo[playerid][pJob] = 0;
 	PlayerInfo[playerid][pRank] = 0;
-	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
 	SetPlayerName(playerid, name);
 	SetRPName(playerid);
@@ -12741,6 +12740,10 @@ stock IsVehicleUpsideDown(vehicleid)
             )
         ) > 90.0
     );
+}
+
+stock Zaufany(playerid) {
+	return ZaufaniON && PlayerInfo[playerid][pZG] == 10;
 }
 
 public DeathAdminWarning(playerid, killerid, reason)

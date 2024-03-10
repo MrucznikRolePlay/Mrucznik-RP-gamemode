@@ -219,7 +219,7 @@ YCMD:pr(playerid, params[], help)
 					while(mysql_fetch_row_format(query, "|")) {
 						new uid, nick[MAX_PLAYER_NAME], rank, isconnected;
 						sscanf(query, "p<|>is[24]ii", uid, nick, rank, isconnected);
-						new lider = rank > 1000;
+						new lider = rank >= 1000;
 						new str_rank[64];
 						if(lider) {
 							rank -= 1000;

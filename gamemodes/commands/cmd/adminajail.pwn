@@ -44,8 +44,9 @@ YCMD:adminajail(playerid, params[], help)
 		{
 			if (PlayerInfo[playa][pJailed] == 0)
 			{
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] >= 6 || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid) || (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3) || IsAScripter(playerid))
 				{
+					/*
 					if (PlayerInfo[playerid][pZG] >= 6 && PlayerInfo[playerid][pZG] < 8 && money > 7)
 					{
 						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 7 minut AJ!");
@@ -61,6 +62,7 @@ YCMD:adminajail(playerid, params[], help)
 						sendTipMessageEx(playerid, COLOR_GRAD2, "Mozesz dac tylko do 17 minut AJ!");
 						return 1;
 					}
+					*/
 					if(PlayerInfo[playa][pAdmin] > 0 || PlayerInfo[playa][pNewAP] > 0)
 					{
 						sendTipMessage(playerid, "Nie mo¿esz dawaæ /aj administratorowi!");

@@ -42,7 +42,7 @@ YCMD:unjail(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] == 10 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Zaufany(playerid) || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(playa))
 		    {

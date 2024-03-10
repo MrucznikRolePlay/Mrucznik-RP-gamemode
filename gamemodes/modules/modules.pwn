@@ -235,7 +235,6 @@
 #include "animacje\commands\animacje_commands.pwn"
 #include "wypadek\commands\wypadek_commands.pwn"
 #include "convoy\commands\convoy_commands.pwn"
-#include "logi\commands\logi_commands.pwn"
 #include "graffiti\commands\graffiti_commands.pwn"
 #include "weryfikacje\commands\weryfikacje_commands.pwn"
 #include "oferty\commands\oferty_commands.pwn"
