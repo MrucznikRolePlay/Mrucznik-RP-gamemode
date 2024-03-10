@@ -137,7 +137,7 @@ IsPobijInvalid(playerid, opponentid)
 		sendErrorMessage(playerid, "Nie mo¿esz pobiæ samego siebie!");
 		return 1;
 	}
-	if(!ProxDetectorS(5.0, playerid, opponentid) || Spectate[opponentid] != INVALID_PLAYER_ID)
+	if(!ProxDetectorS(5.0, playerid, opponentid))
 	{
 		sendErrorMessage(playerid, "Ten gracz jest za daleko!");
 		return 1;

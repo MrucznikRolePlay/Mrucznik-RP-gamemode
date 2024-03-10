@@ -215,7 +215,7 @@ IsKajdankiInvalid(playerid, cuffedplayerid)
         sendErrorMessage(playerid, "Nie jesteœ na s³u¿bie!");
         return 1;
     }
-    if(!ProxDetectorS(8.0, playerid, cuffedplayerid) || Spectate[cuffedplayerid] != INVALID_PLAYER_ID)
+    if(!ProxDetectorS(8.0, playerid, cuffedplayerid))
     {
         sendTipMessage(playerid, "Jesteœ zbyt daleko od gracza");
         return 1;
