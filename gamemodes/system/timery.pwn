@@ -2803,6 +2803,9 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 124)
 			{
+				SendClientMessage(i, COLOR_WHITE, "Jeœli chcesz szybko zarobiæ trochê pieniêdzy - podobno wêdkarstwo jest teraz op³acalne...");
+				SendClientMessage(i, COLOR_WHITE, "Udaj siê na molo z ko³em, z³ap parê ryb (/fish) a nastêpnie sprzedaj w 24/7!");
+
 				SetPVarInt(i, "AntyCheatOff", 1);
 
 				TogglePlayerSpectating(i, false);
