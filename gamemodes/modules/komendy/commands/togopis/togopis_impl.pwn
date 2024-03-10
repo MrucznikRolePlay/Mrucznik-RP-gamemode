@@ -25,17 +25,11 @@
 //------------------<[ Implementacja: ]>-------------------
 command_togopis_Impl(playerid)
 {
-    new new_description_visibility = false;
-
-    // Gracz ma wy³¹czone opisy
-    if(!Streamer_IsInArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[0][pDescLabel], E_STREAMER_PLAYER_ID, playerid))
-    {
-        new_description_visibility = true;
-    }
+    arePlayerDescTurnedOn[playerid] = !arePlayerDescTurnedOn[playerid];
 
     foreach(new p : Player)
     {
-        if(new_description_visibility == true)
+        if(arePlayerDescTurnedOn[playerid])
         {
             Streamer_AppendArrayData(STREAMER_TYPE_3D_TEXT_LABEL, PlayerInfo[p][pDescLabel], E_STREAMER_PLAYER_ID, playerid);
         }
@@ -45,7 +39,7 @@ command_togopis_Impl(playerid)
         }
     }
 
-    if(new_description_visibility == true)
+    if(arePlayerDescTurnedOn[playerid])
     {
         MSGBOX_Show(playerid, "Opisy graczy ~g~wlaczone!", MSGBOX_ICON_TYPE_OK);
     }

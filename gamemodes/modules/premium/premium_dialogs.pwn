@@ -102,9 +102,56 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			DialogMenuDotacje(playerid);
 		}
 	}
+	//------------------ AKTYWACJA MC ------------------
 	else if(dialogid == PREMIUM_DIALOG(DOTACJE))
 	{
-		DialogMenuDotacje(playerid);
+		if(response)
+		{
+			DialogAktywujMC_Mail(playerid);
+		}
+		else
+		{
+			DialogMenuDotacje(playerid);
+		}
+	}
+	else if(dialogid == PREMIUM_DIALOG(AKTYWACJA_MC_EMAIL))
+	{
+		if(response)
+		{
+			SetPVarString(playerid, "mc_email", inputtext);
+			DialogAktywujMC_Kod(playerid);
+		}
+		else
+		{
+			DialogMenuDotacje(playerid);
+		}
+	}
+	else if(dialogid == PREMIUM_DIALOG(AKTYWACJA_MC_KOD))
+	{
+		if(response)
+		{
+			new kod[64];
+			strcopy(kod, inputtext, sizeof(kod));
+			regex_replace(kod, "[^a-zA-Z0-9-]", " "); // usun biale znaki z kodu, by przy kopiowaniu z forum wszystko bylo ok
+			strtrim(kod);
+			
+			SetPVarString(playerid, "mc_kod", kod);
+			new email[256];
+			GetPVarString(playerid, "mc_email", email, 256);
+
+			SprawdzAktywacjeMC(playerid, email, kod);
+		}
+		else
+		{
+			DialogAktywujMC_Mail(playerid);
+		}
+	}
+	else if(dialogid == PREMIUM_DIALOG(AKTYWACJA_MC_FAIL))
+	{
+		if(response)
+		{
+			DialogAktywujMC_Mail(playerid);
+		}
 	}
 	//------------------ DIALOG US£UGI PREMIUM ------------------
 	else if(dialogid == PREMIUM_DIALOG(LICYTACJE))
@@ -247,7 +294,7 @@ DialogMenuDotacje(playerid)
 
 
 	format(string, sizeof(string), ""#HQ_COLOR_TEKST"Iloœæ MruCoins: \t\t"#PREMIUM_EMBED2"%d MC\n" \
-		"    "HQ_COLOR_TEKST2"Kup MruCoins\n"\
+		"    "HQ_COLOR_TEKST2"Otwórz paczkê MruCoinsów\n"\
 		""#HQ_COLOR_TEKST"Konto Premium %s\n"\
 		"    "HQ_COLOR_TEKST2"%s konto premium\n"\
 		""#HQ_COLOR_TEKST"Numer Telefonu: \t"#PREMIUM_EMBED2"%d\n"\
@@ -294,8 +341,45 @@ static DialogDotacje(playerid)
 	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(DOTACJE), DIALOG_STYLE_MSGBOX, "Premium - Dotacje", 
 		"Je¿eli wspomo¿esz nasz serwer dotacj¹ o okreœlonej wysokoœci, otrzymasz od nas okreœlon¹ iloœæ Mrucznik Coinsów.\n" \
 		"Informacje o tym, w jaki sposób mo¿esz wesprzeæ nasz serwer, znajdziesz na naszym forum\n" \
-		INCOLOR_WHITE"www.mrucznik-rp.pl", 
-	"Wróæ", "");
+		INCOLOR_WHITE"mrucznik-rp.pl/store\n\n" \
+		INCOLOR_DIALOG"Jesli posiadasz ju¿ klucz do aktywacji Mrucznik Coinów, kliknij dalej.", 
+	"Dalej", "Wróæ");
+}
+
+//------- AKTYWACJA MC'KÓW ------------------
+DialogAktywujMC_Mail(playerid)
+{
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(AKTYWACJA_MC_EMAIL), DIALOG_STYLE_INPUT, "Premium - e-mail", 
+		"Podaj e-mail konta forum, z którego zosta³y zakupione Mrucznik Coiny", 
+	"Dalej", "Wróæ");
+}
+
+DialogAktywujMC_Kod(playerid)
+{
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(AKTYWACJA_MC_KOD), DIALOG_STYLE_INPUT, "Premium - kod", 
+		"Podaj klucz licencyjny paczki Mrucznik Coinów", 
+	"Dalej", "Wróæ");
+}
+
+DialogAktywujMC_Fail(playerid, error[])
+{
+	new string[512];
+	format(string, sizeof(string), "Niestety, nie uda³o siê aktywowaæ paczki Mrucznik Coinów.\n\n" \
+		INCOLOR_LIGHTRED"B³¹d: %s\n\n" \
+		INCOLOR_DIALOG"SprawdŸ wprowadzone dane i spróbuj jeszcze raz.\n" \
+		"W razie dalszych problemów, skontaktuj siê z administracj¹.", error);
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(AKTYWACJA_MC_FAIL), DIALOG_STYLE_MSGBOX, "Premium - b³¹d", 
+		string,
+	"Ponów", "WyjdŸ");
+}
+
+DialogAktywujMC_Success(playerid, mc)
+{
+	new string[256];
+	format(string, sizeof(string), "Twoje "INCOLOR_GOLD"%d Mrucznik Coinów"INCOLOR_DIALOG" zosta³o aktywowane!\nDziêkujemy za wspieranie serwera :)", mc);
+	ShowPlayerDialogEx(playerid, PREMIUM_DIALOG(AKTYWACJA_MC_SUKCES), DIALOG_STYLE_MSGBOX, "Premium - MC aktywowane!", 
+		 string,
+	"WyjdŸ", "");
 }
 
 //------- US£UGI PREMIUM ------------------

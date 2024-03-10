@@ -9,9 +9,9 @@
 		"Zeex/samp-plugin-crashdetect:v4.20",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
-    	"gumbalowsky/mysql-R5:v1",
-		"MrucznikRolePlay/samp-log:v0.4",
-		"maddinat0r/samp-discord-connector:v0.2.4",
+		"gumbalowsky/mysql-R5:v1",
+		"maddinat0r/samp-log:v0.5",
+		"maddinat0r/samp-discord-connector:v0.3.5",
 		"Open-GTO/sa-mp-fixes",
 		"emmet-jones/New-SA-MP-callbacks",
 		"oscar-broman/strlib",
@@ -26,21 +26,9 @@
 		"Southclaws/progress2",
 		"oscar-broman/samp-inline-sort",
 		"katursis/Pawn.RakNet:1.6.0",
-		"MrucznikRolePlay/Regular-Expressions-Plugin-sampctl:v0.2.4"
+		"MrucznikRolePlay/Regular-Expressions-Plugin-sampctl:v0.2.4",
+		"Southclaws/pawn-requests:0.10.0"
 	],
-	"build": {
-		"name": "",
-		"version": "3.10.9",
-		"args": [
-			"-d3",
-			"-;+",
-			"-(+",
-			"-Z+"
-		],
-		"includes": [
-			"./include"
-		]
-	},
 	"runtime": {
 		"version": "0.3.DL-R1",
 		"mode": "server",
@@ -82,5 +70,19 @@
 		"extra": {
 			"discord_bot_token": "123"
 		}
+	},
+	"build": {
+		"name": "",
+		"version": "3.10.9",
+		"args": [
+			"-d3",
+			"-;+",
+			"-(+",
+			"-Z+"
+		],
+		"includes": [
+			"./include"
+		],
+		"compiler": {}
 	}
 }
