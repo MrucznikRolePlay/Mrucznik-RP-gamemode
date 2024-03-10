@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                setloglevel                                                //
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//-----------------------------------------------[ zaufanion ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,52 +16,26 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// ================= UWAGA! =================
-//
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
+// Opis:
+/*
+	
+*/
 
 
-//-------<[ include ]>-------
-#include "setloglevel_impl.pwn"
+// Notatki skryptera:
+/*
+	
+*/
 
-//-------<[ initialize ]>-------
-command_setloglevel()
-{
-    new command = Command_GetID("setloglevel");
-
-    //aliases
-    
-
-    //permissions
-    Group_SetCommand(Group_GetID("admini"), command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:setloglevel(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "Ustawia poziom gadatliwoœci logów.");
+YCMD:zaufanion(playerid, params[], help) {
+    if(PlayerInfo[playerid][pAdmin] < 1) {
+        noAccessMessage(playerid);
         return 1;
     }
-    //fetching params
-    new logname[32], loglevel;
-    if(sscanf(params, "s[32]d", logname, loglevel))
-    {
-        sendTipMessage(playerid, "U¿yj /setloglevel [log (admin, pay, premium, punishment, warning, nick, sejf, server, command, chat, damage, connect, money, adminduty)] [level (0-none | 1-debug | 2-info | 4-warning | 8 - ERROR | 15 - all)] ");
-        return 1;
-    }
-    
-    //command body
-    return command_setloglevel_Impl(playerid, logname, loglevel);
+    new string[128];
+    format(string, 128, "Admin %s w³¹czy³ uprawnienia zaufanym graczom", GetNickEx(playerid));
+    ABroadCast(COLOR_LIGHTRED, string, 1);
+    ZaufaniON = true;
+    return 1;
 }

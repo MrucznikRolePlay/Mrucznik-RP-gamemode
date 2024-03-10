@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Komenda >>-----------------------------------------------//
+//------------------------------------------------[ zaufani ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,26 +16,34 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// ================= UWAGA! =================
-//
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
+// Opis:
+/*
+	
+*/
 
 
-#include <YSI\y_hooks>
+// Notatki skryptera:
+/*
+	przywrocone z b16cc89
+*/
 
-//-------<[ include ]>-------
-#include "setloglevel\setloglevel.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+YCMD:zaufani(playerid, params[], help)
 {
-    command_setloglevel();
-    
+	new string[64];
+	new sendername[MAX_PLAYER_NAME];
+	SendClientMessage(playerid, COLOR_GRAD1, "Lista ZG:");
+	foreach(new i : Player)
+	{
+		if(IsPlayerConnected(i))
+		{
+			if(PlayerInfo[i][pZG] == 10)
+			{
+				GetPlayerName(i, sendername, sizeof(sendername));
+				format(string, sizeof(string), "Zas³u¿ony: %s ID: %d", sendername, i);
+				SendClientMessage(playerid, COLOR_GRAD2, string);
+			}
+		}
+	}
+	return 1;
 }

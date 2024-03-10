@@ -38,7 +38,12 @@ enum ePremiumDialog
 	ZMIANY_NICKU,
 	SKINY,
 	TELEFON,
-	ZMIENSKIN
+	ZMIENSKIN,
+	//---AKTYWACJA MC---
+	AKTYWACJA_MC_EMAIL,
+	AKTYWACJA_MC_KOD,
+	AKTYWACJA_MC_FAIL,
+	AKTYWACJA_MC_SUKCES
 };
 
 enum ePremiumInfo
@@ -73,6 +78,9 @@ enum ePrzedmiotyPremium
 new Vector:VPremiumSkins[MAX_PLAYERS]; //TODO: Maybe zamieniæ na bintree, bo w sumie wiecej szukania niz wkladania.
 
 new PremiumInfo[MAX_PLAYERS][ePremiumInfo];
+
+new Map:PremiumRequestToPlayerID;
+new RequestsClient:PremiumRequestClient;
 
 //-----------------<[ Sta³e: ]>-------------------
 new const PojazdyPremium[MAX_PREMIUM_VEHICLES][ePojazdyPremium] =

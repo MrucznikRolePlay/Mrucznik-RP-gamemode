@@ -1057,10 +1057,10 @@ new fixActorsTimer[MAX_PLAYERS];
 new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
 new GunshopLSLock = 1;
-new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId[17], DCC_Channel:g_AdminChannelIdDefault, DCC_Channel:g_ReportChannelId; //discordconnect
-new DCC_Channel:g_FracChannel[MAX_FRAC];
-new DCC_Channel:g_OrgChannel[MAX_ORG];
-new DCC_Channel:g_GSLSLOGChannelId, DCC_Channel:g_GSCMLOGChannelId, DCC_Channel:g_GSWFLOGChannelId;
+// new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId[17], DCC_Channel:g_AdminChannelIdDefault, DCC_Channel:g_ReportChannelId; //discordconnect
+// new DCC_Channel:g_FracChannel[MAX_FRAC];
+// new DCC_Channel:g_OrgChannel[MAX_ORG];
+// new DCC_Channel:g_GSLSLOGChannelId, DCC_Channel:g_GSCMLOGChannelId, DCC_Channel:g_GSWFLOGChannelId;
 /*
 new chpIDHunter[MAX_PLAYERS];
 new hunterSeeMe[MAX_PLAYERS]; 
@@ -1076,6 +1076,8 @@ new gRO[MAX_PLAYERS];
 new isNaked[MAX_PLAYERS];
 new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
 new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
+new arePlayerDescTurnedOn[MAX_PLAYERS] = {true, ...};
+new ZaufaniON = true;
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1463,6 +1465,7 @@ ZerujZmienne(playerid)
     }
 
 	areVehicleDescTurnedOn[playerid] = true;
+	arePlayerDescTurnedOn[playerid] = true;
 
 	foreach(new p : Player)
 	{

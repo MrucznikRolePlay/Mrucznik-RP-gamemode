@@ -104,6 +104,10 @@
 #include "cmd/dajrange.pwn"
 #include "cmd/dajskryptera.pwn"
 #include "cmd/dajzaufanego.pwn"
+#include "cmd/usunzaufanego.pwn"
+#include "cmd/zaufani.pwn"
+#include "cmd/zaufanion.pwn"
+#include "cmd/zaufanioff.pwn"
 #include "cmd/datek.pwn"
 #include "cmd/degraduj.pwn"
 #include "cmd/delete3dtext.pwn"
@@ -1434,8 +1438,8 @@ static Aliases()
 	Command_AddAltNamed("ustawmistrz", "setchamp");
 	Command_AddAltNamed("ustawmistrz", "setmistrz");
 
-	//zaufanyggracz
-	Command_AddAltNamed("zaufanyggracz", "zg");
+	//zaufanygracz
+	Command_AddAltNamed("zaufanygracz", "zg");
 
 	//unbp
 	Command_AddAltNamed("unbp", "zdejmijbp");

@@ -59,13 +59,13 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //#include <a_mysql> TODO: replace R5 plugin
 #include <whirlpool>
 #include <timestamptodate>
-#include <discord-connector>
+// #include <discord-connector>
 #include <memory>
 #include <profiler_plugin>
 //TODO: add plugins
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
-// #include <requests>
+#include <requests>
 
 //-------<[ Include ]>-------
 #include <a_http>
@@ -75,7 +75,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define YSI_NO_MASTER
 #include <YSI_Data\y_iterate>
 #define Y_COMMANDS_USE_CHARS
-#define MAX_COMMANDS 1200
+#define MAX_COMMANDS 1500
 #include <YSI\y_commands>
 #include <YSI\y_groups>
 #include <YSI\y_hooks>
@@ -1388,6 +1388,10 @@ public OnPlayerDisconnect(playerid, reason)
 			); //Create LOG
 			iloscPozaDuty[playerid] = 0; 
 		}
+	}
+	if(GetPlayerAdminDutyStatus(playerid)) {
+		SetPVarInt(playerid, "dutyadmin", 0);
+		EnableZGIfNoAdmins();
 	}
 	//kajdanki
 	if(Kajdanki_JestemSkuty[playerid] != 0) // gdy skuty da /q
