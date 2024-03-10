@@ -51,25 +51,8 @@ YCMD:tp(playerid, params[], help)
 				GetPlayerName(plo1, giveplayer01, sizeof(giveplayer01));
 				GetPlayerName(plo, giveplayer02, sizeof(giveplayer02));
 				
-				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
+				if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 				{
-					new bool:liczydelko=false;
-					foreach(new i : Player)
-					{
-						if(IsPlayerConnected(i))
-						{
-							if(PlayerInfo[i][pAdmin] >= 1 || (PlayerInfo[i][pNewAP] >= 1 && PlayerInfo[i][pNewAP] < 5))
-							{
-								liczydelko=true;
-								break;
-							}
-						}
-					}
-					if(liczydelko==true && PlayerInfo[playerid][pZG]==10)
-					{
-						sendTipMessageEx(playerid, COLOR_GRAD1, "Na serwerze s¹ admini, nie mo¿esz u¿yæ tej komendy");
-						return 1;
-					}
 					if(Spectate[playerid] != INVALID_PLAYER_ID)
 					{
 						Spectate[playerid] = INVALID_PLAYER_ID;
