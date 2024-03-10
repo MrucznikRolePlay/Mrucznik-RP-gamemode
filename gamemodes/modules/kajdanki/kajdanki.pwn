@@ -273,6 +273,7 @@ IsRozkujInvalid(playerid, uncuffedplayerid)
 	if(!(IsAPolicja(playerid) || IsABOR(playerid) || PlayerInfo[playerid][pAdmin] >= 1))
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Nie posiadasz kluczy do kajdanek!");
+        return 1;
 	}
 	if(uncuffedplayerid == INVALID_PLAYER_ID || !IsPlayerConnected(uncuffedplayerid))
 	{
@@ -282,6 +283,7 @@ IsRozkujInvalid(playerid, uncuffedplayerid)
 	if(!ProxDetectorS(8.0, playerid, uncuffedplayerid))
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie!");
+        return 1;
 	}
 	if(uncuffedplayerid == playerid && !PlayerInfo[playerid][pAdmin] >= 1) 
 	{ 
@@ -307,8 +309,8 @@ FixBuggedCuffs(playerid, cuffedid)
 {
     UncuffPlayer(cuffedid);
     UncuffPlayerCuffedBy(cuffedid);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Naprawiono ci zbugowane kajdanki.");
-    SendClientMessage(cuffedid, COLOR_LIGHTBLUE, "Naprawiono ci zbugowane kajdanki.");
+    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Naprawiono ci zbugowane kajdanki (zg³oœ to do administracji).");
+    SendClientMessage(cuffedid, COLOR_LIGHTBLUE, "Naprawiono ci zbugowane kajdanki (zg³oœ to do administracji).");
 }
 
 
