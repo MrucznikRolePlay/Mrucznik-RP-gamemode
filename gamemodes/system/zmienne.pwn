@@ -1077,6 +1077,7 @@ new isNaked[MAX_PLAYERS];
 new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
 new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
 new arePlayerDescTurnedOn[MAX_PLAYERS] = {true, ...};
+new ZaufaniON = true;
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------

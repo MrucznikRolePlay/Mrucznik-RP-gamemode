@@ -40,6 +40,8 @@ GetPlayerAdminDutyStatus(playerid)
 }
 AdminDutyPlayer(playerid, status)
 {
+	SetPVarInt(playerid, "dutyadmin", status); 
+	SetPVarInt(playerid, "support_duty", status);
 	new string[128];	
 	if(status == 1)//Je¿eli ma wejœæ
 	{
@@ -61,12 +63,29 @@ AdminDutyPlayer(playerid, status)
 		sendTipMessage(playerid, "Dziêkujemy za sumienn¹ s³u¿bê, administratorze!"); 	
 		//Timer's kill
 		KillTimer(AdminDutyTimer[playerid]);
+		if(EnableZGIfNoAdmins())
+			SendClientMessage(playerid, COLOR_LIGHTRED, "Poniewa¿ by³eœ ostatnim administratorem na s³u¿bie, zaufani gracze dostaj¹ uprawnienia");
 	}
-	SetPVarInt(playerid, "dutyadmin", status); 
-	SetPVarInt(playerid, "support_duty", status);
 	return 1;
 }
-
+EnableZGIfNoAdmins() {
+	new admin_count = 0;
+	foreach(new i: Player) {
+		if(GetPlayerAdminDutyStatus(i))
+			admin_count++;
+	}
+	if (admin_count == 0) {
+		if(!ZaufaniON) {
+			ZaufaniON = true;
+			foreach(new i: Player) {
+				if(PlayerInfo[i][pZG])
+					SendClientMessage(i, COLOR_BROWN, "¯adnego administratora nie ma na s³u¿bie. Uprawnienia ZG w³¹czone.");
+			}
+			return 1;
+		}
+	}
+	return 0;
+}
 
 //-----------------<[ Timery: ]>-------------------
 forward AdminDutyCzas(playerid);
