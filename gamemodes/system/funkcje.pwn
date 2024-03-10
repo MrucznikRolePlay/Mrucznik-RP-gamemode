@@ -11994,7 +11994,7 @@ WeaponAC(playerid)
 {	
 	new weapons[13][2];
  
-	for (new i = 0; i <= 12; i++)
+	for (new i = 1; i <= 12; i++)
 	{
 		GetPlayerWeaponData(playerid, i, weapons[i][0], weapons[i][1]);
 		if(weapons[i][0] != 0 && CheckWeaponAC(playerid, i, weapons[i][0]))

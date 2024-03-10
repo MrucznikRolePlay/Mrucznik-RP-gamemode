@@ -4857,6 +4857,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			    new string[64] = {0, ...};
 				new sendername[MAX_PLAYER_NAME];
             	GetPlayerName(playerid, sendername, sizeof(sendername));
+				ResetPlayerWeapons(playerid);
 			    switch(listitem)
 			    {
 			        case 0:
@@ -4978,9 +4979,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						
 						format(string, sizeof(string),"%s niszczy detonator i rzuca na ziemiê.", sendername);
 			        }
-			    }
+				}
 
-				ResetPlayerWeapons(playerid);
 				SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 				ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
