@@ -775,7 +775,6 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pPodPW],
 		PlayerInfo[playerid][pStylWalki],
 		PlayerInfo[playerid][pNewAP],
-		PlayerInfo[playerid][pZG],
 		PlayerInfo[playerid][pUniform],
 		PlayerInfo[playerid][pCruiseController],
 		PlayerInfo[playerid][pFixKit],
