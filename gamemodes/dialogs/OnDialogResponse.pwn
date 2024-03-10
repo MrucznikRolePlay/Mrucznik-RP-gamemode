@@ -4854,7 +4854,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 			if(response)
 			{
-			    new string[64], sendername[MAX_PLAYER_NAME];
+			    new string[64] = {0, ...};
+				new sendername[MAX_PLAYER_NAME];
             	GetPlayerName(playerid, sendername, sizeof(sendername));
 			    switch(listitem)
 			    {
@@ -4864,26 +4865,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pGun0] = 0;
 						PlayerInfo[playerid][pAmmo0] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój kastet zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
             			format(string, sizeof(string),"%s niszczy kastet i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-            			
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
-			        }
+					}
 			        case 1:
 			        {
 			            if(PlayerInfo[playerid][pGun1] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun1] = 0;
 						PlayerInfo[playerid][pAmmo1] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja broñ bia³a zosta³a usniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy broñ bia³¹ i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 2:
 			        {
@@ -4891,12 +4883,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun2] = 0;
 						PlayerInfo[playerid][pAmmo2] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy pistolet i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 3:
 			        {
@@ -4904,12 +4892,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    PlayerInfo[playerid][pGun3] = 0;
 						PlayerInfo[playerid][pAmmo3] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja strzelba zosta³a usuniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy strzelbê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 4:
 			        {
@@ -4917,12 +4901,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    PlayerInfo[playerid][pGun4] = 0;
 						PlayerInfo[playerid][pAmmo4] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet maszynowy zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy pistolet maszynowy i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 5:
 			        {
@@ -4930,12 +4910,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun5] = 0;
 						PlayerInfo[playerid][pAmmo5] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój karabin maszynowy zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy karabin maszynowy i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 6:
 			        {
@@ -4943,12 +4919,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun6] = 0;
 						PlayerInfo[playerid][pAmmo6] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja snajperka zosta³a usuniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy snajperkê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 7:
 			        {
@@ -4956,12 +4928,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun7] = 0;
 						PlayerInfo[playerid][pAmmo7] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój ogniomiotacz zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy ogniomiotacz i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 8:
 			        {
@@ -4971,12 +4939,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje C4 zosta³o usuniête");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy C4 i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 9:
 			        {
@@ -4984,12 +4948,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun9] = 0;
 						PlayerInfo[playerid][pAmmo9] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój sprej/aparat/gaœnica zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy spray/aparat/gaœnicê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 10:
 			        {
@@ -4997,12 +4957,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun10] = 0;
 						PlayerInfo[playerid][pAmmo10] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje kwiaty/laska/dildo zosta³o usuniête");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy kwiaty/laskê/dildo i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 11:
 			        {
@@ -5010,12 +4966,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun11] = 0;
 						PlayerInfo[playerid][pAmmo11] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój spadochron zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy spadochron i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 12:
 			        {
@@ -5023,14 +4975,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój detonator zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy detonator i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			    }
+
+				ResetPlayerWeapons(playerid);
+				SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+				ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			}
 	    }
 	    else if(dialogid == 80)
