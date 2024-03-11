@@ -735,6 +735,7 @@ new MoneyMessage[MAX_PLAYERS];
 new Condom[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
+new pSessionStart[MAX_PLAYERS] = {0, ...}; // czas wbicia gracza na serwer
 //BW
 new PlayerRequestMedic[MAX_PLAYERS];
 
@@ -1483,6 +1484,8 @@ ZerujZmienne(playerid)
 	areVehicleDescTurnedOn[playerid] = true;
 
 	VECTOR_clear(VMembersOrg[playerid]);
+
+	pSessionStart[playerid] = 0;
 	
 	return 1;
 }
