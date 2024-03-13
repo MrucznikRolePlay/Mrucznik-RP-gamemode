@@ -588,6 +588,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 //AJ powód
 #define MAX_AJ_REASON 64
 
+#define NICK_REGEX "^(Le)?[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$"
+
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);
 public _SafeReturnCode_(dest[], src[], bytes)

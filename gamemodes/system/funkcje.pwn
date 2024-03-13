@@ -8774,7 +8774,7 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+	if(regex_match(nick, NICK_REGEX) >= 0)
 	{
 		return 1;
 	}
