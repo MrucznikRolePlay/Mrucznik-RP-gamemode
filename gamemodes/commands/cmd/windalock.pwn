@@ -38,11 +38,12 @@ YCMD:windalock(playerid, params[], help)
 		new level;
 		if( sscanf(params, "d", level))
 		{
-			sendTipMessage(playerid, "U¿yj: /windalock [nr poziomu]");
+			sendTipMessage(playerid, "UÂ¿yj: /windalock [nr poziomu]");
 			return 1;
 		}
 
 		if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
+	|| IsPlayerInRangeOfPoint(playerid,3,287.7476,-1609.9395,33.0723)//wejscie glowne san news
         || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
         || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
         || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
@@ -51,17 +52,12 @@ YCMD:windalock(playerid, params[], help)
 		{
 			if(PlayerInfo[playerid][pLider] != FRAC_SN && PlayerInfo[playerid][pMember] != FRAC_SN)
 			{
-				sendErrorMessage(playerid, "Nie masz uprawnieñ - nie jesteœ z San News"); 
+				sendErrorMessage(playerid, "Nie masz uprawnieÃ± - nie jesteÅ“ z San News"); 
 				return 1;
 			}
 			if(level > 7 || level < 0)
 			{
 				sendErrorMessage(playerid, "Poziom od 0 do 7");
-				return 1;
-			}
-			if(level == 5 && PlayerInfo[playerid][pLider] != FRAC_SN)
-			{
-				sendErrorMessage(playerid, "Nie masz wystarczaj¹cych uprawnieñ aby otwieraæ to piêtro!"); 
 				return 1;
 			}
 			if(levelLock[FRAC_SN][level] == 1)
@@ -88,12 +84,12 @@ YCMD:windalock(playerid, params[], help)
 			|| IsPlayerInRangeOfPoint(playerid,2,585.70782, -1479.54211, 99.01273)//CID/ERT
 			|| IsPlayerInRangeOfPoint(playerid,2,594.05334, -1476.27490, 81.82840)//stanowe
 			|| IsPlayerInRangeOfPoint(playerid,2,590.42767, -1447.62939, 80.95732)//Sale Treningowe
-			|| IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674)//Sale przes³uchaniowe
+			|| IsPlayerInRangeOfPoint(playerid,2,605.5609, -1462.2583, 88.1674)//Sale przesÂ³uchaniowe
 		)
 		{
 			if(PlayerInfo[playerid][pLider] != FRAC_FBI && PlayerInfo[playerid][pMember] != FRAC_FBI)
 			{
-				sendErrorMessage(playerid, "Nie masz uprawnieñ do otwierania/zamykania windy!"); 
+				sendErrorMessage(playerid, "Nie masz uprawnieÃ± do otwierania/zamykania windy!"); 
 				return 1;
 			}
 			if(level > 11 || level < 0)
@@ -154,7 +150,7 @@ YCMD:windalock(playerid, params[], help)
             if(level == 0 && LSMCWindap0 == 0)//level 00
 		    {
 		    	LSMCWindap0 = 1;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [0]!");
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "ZamknÂ¹Â³eÅ“ poziom nr [0]!");
 				GetPlayerName(playerid, nick, sizeof(nick));
 				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [0].", nick);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -162,7 +158,7 @@ YCMD:windalock(playerid, params[], help)
 			else if(level == 0 && LSMCWindap0 == 1)//level 00
 		    {
 		    	LSMCWindap0 = 0;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [0]!");
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "OtworzyÂ³eÅ“ poziom nr [0]!");
 				GetPlayerName(playerid, nick, sizeof(nick));
 				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [0].", nick);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -170,7 +166,7 @@ YCMD:windalock(playerid, params[], help)
 			else if(level == 2 && LSMCWindap2 == 0)//level 02
 		    {
 		    	LSMCWindap2 = 1;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [2]!");
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "ZamknÂ¹Â³eÅ“ poziom nr [2]!");
 				GetPlayerName(playerid, nick, sizeof(nick));
 				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [2].", nick);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -178,7 +174,7 @@ YCMD:windalock(playerid, params[], help)
 			else if(level == 2 && LSMCWindap2 == 1)//level 02
 		    {
 		    	LSMCWindap2 = 0;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [2]!");
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "OtworzyÂ³eÅ“ poziom nr [2]!");
 				GetPlayerName(playerid, nick, sizeof(nick));
 				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [2].", nick);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -186,7 +182,7 @@ YCMD:windalock(playerid, params[], help)
 			else if(level == 8 && LSMCWindap8 == 0)//level 08
 		    {
 		    	LSMCWindap8 = 1;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zamkn¹³eœ poziom nr [8]!");
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "ZamknÂ¹Â³eÅ“ poziom nr [8]!");
 				GetPlayerName(playerid, nick, sizeof(nick));
 				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i blokuje poziom [8].", nick);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
@@ -194,19 +190,19 @@ YCMD:windalock(playerid, params[], help)
 			else if(level == 8 && LSMCWindap8 == 1)//level 08
 		    {
 		    	LSMCWindap8 = 0;
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Otworzy³eœ poziom nr [8]!");
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "OtworzyÂ³eÅ“ poziom nr [8]!");
 				GetPlayerName(playerid, nick, sizeof(nick));
 				format(string, sizeof(string),"* %s wstukuje kod na panelu windy i otwiera poziom [8].", nick);
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			}
 			else
 		    {
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "B³¹d! Mo¿esz zarz¹dzaæ tylko poziomami [0], [2], [8]!");
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "BÂ³Â¹d! MoÂ¿esz zarzÂ¹dzaÃ¦ tylko poziomami [0], [2], [8]!");
 			}
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie znajdujesz siê obok windy, któr¹ mo¿esz zarz¹dzaæ!");
+			sendErrorMessage(playerid, "Nie znajdujesz siÃª obok windy, ktÃ³rÂ¹ moÂ¿esz zarzÂ¹dzaÃ¦!");
 		}
 	}
 	return 1;
