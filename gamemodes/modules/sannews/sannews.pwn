@@ -20,7 +20,7 @@
 // Data utworzenia: 13.09.2019
 //Opis:
 /*
-	Komendy, funkcje i wykorzystania frakcji San News i powi¹zanych z nimi podfrakcji (telewizja, kluby)
+	Komendy, funkcje i wykorzystania frakcji San News i powiÂ¹zanych z nimi podfrakcji (telewizja, kluby)
 */
 
 //
@@ -59,12 +59,12 @@ stock PlayerConditionToNews(playerid)
 {
 	if(PlayerInfo[playerid][pMuted] == 1)
     {
-        sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ poniewa¿ zosta³eœ wyciszony");
+        sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie moÂ¿esz mÃ³wiÃ¦ poniewaÂ¿ zostaÂ³eÅ“ wyciszony");
         return false;
     }
     if(GetPlayerAdminDutyStatus(playerid) == 1)
     {
-        sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ /news podczas s³u¿by administratora!"); 
+        sendErrorMessage(playerid, "Nie moÂ¿esz uÂ¿ywaÃ¦ /news podczas sÂ³uÂ¿by administratora!"); 
         return false;
     }
 	if(InTheFractionCar(playerid, FRAC_SN))
@@ -81,12 +81,12 @@ stock PlayerConditionToNews(playerid)
 TalkOnNews(playerid, const text[])
 {
 	new string[256]; 
-	format(string, sizeof(string), "NR %s: %s", GetNick(playerid), text); 
+	format(string, sizeof(string), "Reporter %s: %s", GetNick(playerid), text); 
 	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)//TODO: Zmieniæ po stworzeniu modu³u TOGOWANIA
+		    if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)//TODO: ZmieniÃ¦ po stworzeniu moduÂ³u TOGOWANIA
 		    {
 				SendClientMessage(i, COLOR_NEWS, string);
 			}
@@ -95,7 +95,7 @@ TalkOnNews(playerid, const text[])
 	//Anty Spam
 	SetTimerEx("AntySpamTimer",3000,0,"d",playerid);
 	AntySpam[playerid] = 1;
-	//Wiadomoœæ na discorda MRP
+	//WiadomoÅ“Ã¦ na discorda MRP
 	SendDiscordMessage(DISCORD_SAN_NEWS, string);
 	return 1;
 }
