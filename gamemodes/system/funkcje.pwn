@@ -1538,37 +1538,6 @@ DisablePlayerCheckpoint(playerid);
 return 1;
 }
 
-public TablicaWynikow(playerid)
-{
-	foreach(new i : Player)
-	{
-		if(IsPlayerInRangeOfPoint(i, 500, -1106.9854, -966.4719, 129.1807))
-		{
-			SendClientMessage(i, COLOR_LIGHTGREEN, "Tabela wyników:");
-            foreach(new di : Player)
-			{
-			    if(zawodnik[di] == 1)
-			    {
-			        if(okregi[di] >= 1)
-			        {
-			            new iplayer[MAX_PLAYER_NAME];
-			            new string[256];
-				        GetPlayerName(di, iplayer, sizeof(iplayer));
-				        format(string, sizeof(string), "%s - %d okr¹¿eñ", iplayer, okregi[di]);
-						SendClientMessage(i, COLOR_WHITE, string);
-					}
-			    }
-			}
-		}
-	}
-	if(wyscigz == 1)
-	{
-		SetTimerEx("TablicaWynikow",30000,0,"d",playerid);
-	}
-//}
-//return 1;
-}
-
 //Osobno
 public AutodbzesRH(playerid)
 {
