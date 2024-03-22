@@ -185,7 +185,6 @@
 #include "cmd/gotostad.pwn"
 #include "cmd/gotoszpital.pwn"
 #include "cmd/gps.pwn"
-#include "cmd/graj.pwn"
 #include "cmd/house.pwn"
 #include "cmd/houseinfo.pwn"
 #include "cmd/houseowner.pwn"
