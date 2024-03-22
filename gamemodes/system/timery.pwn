@@ -3287,10 +3287,10 @@ public Fillup()
 			new FillUpPrice = FillUp * 120;
 			new discount = false;
 
+			new player_frac = GetPlayerFraction(i);
+			new price_half = floatround(0.5 * float(FillUpPrice));
 			if(IsAPorzadkowy(i) && IsPlayerInTheirFractionVehicle(i))
 			{// dla pojazdów frakcji porz¹dkowych 50% nale¿noœci idzie z sejfu
-				new player_frac = GetPlayerFraction(i);
-				new price_half = floatround(0.5 * float(FillUpPrice));
 				if(Sejf_Frakcji[player_frac] >= price_half)
 				{
 					FillUpPrice = price_half;
