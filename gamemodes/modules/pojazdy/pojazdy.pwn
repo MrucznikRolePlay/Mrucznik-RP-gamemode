@@ -493,6 +493,13 @@ Car_LoadForPlayer(playerid)
         format(lsSearch, 8, "%d|", lsID);
         if(strfind(lList, lsSearch) == -1)
         {
+            new idx = Car_GetIDXFromUID(lsID);
+            if(idx != -1)
+            {
+                PlayerInfo[playerid][pCars][lUsed++] = idx;
+                continue;
+            }
+
             sscanf(lStr, "p<|>ddddfffffddddlddddddddddds[32]",
             CarData[lVehID][c_UID],
             CarData[lVehID][c_OwnerType],
