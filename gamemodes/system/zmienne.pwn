@@ -734,6 +734,7 @@ new MoneyMessage[MAX_PLAYERS];
 new Condom[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
+new pSessionStart[MAX_PLAYERS] = {0, ...}; // czas wbicia gracza na serwer
 //BW
 new PlayerRequestMedic[MAX_PLAYERS];
 
@@ -1471,6 +1472,8 @@ ZerujZmienne(playerid)
 
 	//caluj
 	kissPlayerOffer[playerid] = INVALID_PLAYER_ID;
+
+	pSessionStart[playerid] = 0;
 	
 	return 1;
 }

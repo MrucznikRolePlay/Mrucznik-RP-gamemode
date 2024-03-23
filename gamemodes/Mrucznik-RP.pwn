@@ -1186,6 +1186,9 @@ public OnPlayerConnect(playerid)
         gSelectionItems[playerid][x] = PlayerText:INVALID_TEXT_DRAW;
 	}
 	gItemAt[playerid] = 0;
+
+	pSessionStart[playerid] = GetTickCount();
+
 	return 1;
 }
 public OnPlayerPause(playerid)
