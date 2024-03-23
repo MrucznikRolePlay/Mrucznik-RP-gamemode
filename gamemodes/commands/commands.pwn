@@ -213,7 +213,7 @@
 #include "cmd/kb.pwn"
 #include "cmd/kick.pwn"
 #include "cmd/kickall.pwn"
-#include "cmd/kill.pwn"
+#include "cmd/adminkill.pwn"
 #include "cmd/killall.pwn"
 #include "cmd/kod.pwn"
 #include "cmd/kogut.pwn"

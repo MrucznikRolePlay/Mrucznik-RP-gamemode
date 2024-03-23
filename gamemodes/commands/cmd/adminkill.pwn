@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:kill(playerid, params[], help)
+YCMD:adminkill(playerid, params[], help)
 {
 	new giveplayer[MAX_PLAYER_NAME];
 	
@@ -38,7 +38,7 @@ YCMD:kill(playerid, params[], help)
 		new playa;
 		if( sscanf(params, "k<fix>", playa))
 		{
-			sendTipMessage(playerid, "U¿yj /kill [ID/Imie_Nazwisko]");
+			sendTipMessage(playerid, "U¿yj /adminkill [ID/Imie_Nazwisko]");
 			return 1;
 		}
 
@@ -51,12 +51,12 @@ YCMD:kill(playerid, params[], help)
 					SetPVarInt(playerid, "skip_bw", 1);
 					GetPlayerName(playa, giveplayer, sizeof(giveplayer));
 					SetPlayerHealth(playa, 0);
-					Log(adminLog, INFO, "Admin %s zabi³ %s komend¹ /kill", GetPlayerLogName(playerid), GetPlayerLogName(playa));
+					Log(adminLog, INFO, "Admin %s zabi³ %s komend¹ /adminkill", GetPlayerLogName(playerid), GetPlayerLogName(playa));
 
 					_MruAdmin(playerid, sprintf("Zabi³eœ gracza %s [%d] za pomoc¹ komendy", GetNick(playa), playa));
 					if(playerid != playa) _MruAdmin(playa, sprintf("Zosta³eœ zabity przez admina %s [%d]", GetNick(playerid), playerid));
 
-					SendCommandLogMessage(sprintf("Admin %s [%d] da³ /kill graczowi %s [%d]", GetNickEx(playerid), playerid, GetNick(playa), playa));
+					SendCommandLogMessage(sprintf("Admin %s [%d] da³ /adminkill graczowi %s [%d]", GetNickEx(playerid), playerid, GetNick(playa), playa));
 					
 				}
 			}
