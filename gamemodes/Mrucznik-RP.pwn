@@ -1724,6 +1724,11 @@ public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 		weaponid);
 	SavePlayerDamaged(damagedid, playerid, amount, weaponid);
 	SavePlayerDamage(playerid, damagedid, amount, weaponid);
+
+	if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
+	{
+		SetPVarInt(damagedid, "damaged_by_cop", gettime());
+	}
 	return 1;
 }
 

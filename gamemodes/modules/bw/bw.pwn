@@ -144,13 +144,13 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		// œmieræ przestêpcy
 		if(PoziomPoszukiwania[playerid] >= 1)
 		{
-			new reward = PoziomPoszukiwania[playerid] * 5000;
-
 			// œmieræ z r¹k ³owcy nagród
+			new bool:killedByBountyHunter = false;
 			if(PlayerInfo[killerid][pJob] == 1)
 			{
 				if(lowcaz[killerid] == playerid)
 				{
+					new reward = PoziomPoszukiwania[playerid] * 5000;
 					lowcaz[killerid] = 501;
 					format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", reward);
 					GameTextForPlayer(killerid, string, 5000, 1);
@@ -160,39 +160,47 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 					PlayerPlaySound(killerid, 1058, 0.0, 0.0, 0.0);
 					PlayerInfo[killerid][pDetSkill] += 2;
 					SendClientMessage(killerid, COLOR_GRAD2, "Skill + 2");
+					killedByBountyHunter = true;
 				}
 			}
 
-
-			// typ celi w jakim przestêpca bêdzie siedzieæ
-			new jailType, jailName[16];
-			if(PoziomPoszukiwania[playerid] < 6)
+			// jeœli gracz otrzyma³ obrazenia od porz¹dkowych - wsadŸ do paki
+			new damagedTimestamp = GetPVarInt(playerid, "damaged_by_cop");
+			new threshold = 600;
+			new now = gettime();
+			new bool:damagedByCop = now - damagedTimestamp >= threshold;
+			if(damagedByCop || killedByBountyHunter)
 			{
-				jailType = 1; // zwyk³a cela
-				WantLawyer[playerid] = 1;
-				strcat(jailName, "wiêzieniu");
-			}
-			else
-			{
-				jailType = 2; // demorgan
-				strcat(jailName, "DeMorgan");
-			}
+				// typ celi w jakim przestêpca bêdzie siedzieæ
+				new jailType, jailName[16];
+				if(PoziomPoszukiwania[playerid] < 6)
+				{
+					jailType = 1; // zwyk³a cela
+					WantLawyer[playerid] = 1;
+					strcat(jailName, "wiêzieniu");
+				}
+				else
+				{
+					jailType = 2; // demorgan
+					strcat(jailName, "DeMorgan");
+				}
 
-			// co siê dzieje z przestêpc¹ po œmierci
-			new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
-			ZabierzKase(playerid, CenaZabicia);//moneycheat
-			PlayerInfo[playerid][pWantedDeaths] += 1;
-			PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-			PoziomPoszukiwania[playerid] = 0;
-			SetPlayerWantedLevel(playerid, 0);
-			poscig[playerid] = 0;
-			UsunBron(playerid);
+				// co siê dzieje z przestêpc¹ po œmierci
+				new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
+				ZabierzKase(playerid, CenaZabicia);//moneycheat
+				PlayerInfo[playerid][pWantedDeaths] += 1;
+				PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
+				PoziomPoszukiwania[playerid] = 0;
+				SetPlayerWantedLevel(playerid, 0);
+				poscig[playerid] = 0;
+				UsunBron(playerid);
 
-			PlayerInfo[playerid][pJailed] = jailType;
-			format(string, sizeof(string), "* Jesteœ w %s na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", jailName, PlayerInfo[playerid][pJailTime], CenaZabicia);
-			SendClientMessage(playerid, COLOR_LIGHTRED, string);
-			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
-			return 1; //zrespawnuj gracza w wiêzieniu
+				PlayerInfo[playerid][pJailed] = jailType;
+				format(string, sizeof(string), "* Jesteœ w %s na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", jailName, PlayerInfo[playerid][pJailTime], CenaZabicia);
+				SendClientMessage(playerid, COLOR_LIGHTRED, string);
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
+				return 1; //zrespawnuj gracza w wiêzieniu
+			}
 		}
 
 		// œmieræ z r¹k przestêpcy

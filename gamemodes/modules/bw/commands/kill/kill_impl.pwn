@@ -30,7 +30,8 @@ command_kill_Impl(playerid)
         return 1;
     }
 
-    
+    ChatMe(playerid, "umiera na wskutek odniesionych obra¿eñ ((MemoryKill))");
+    SetPlayerHealth(playerid, 0.0);
     return 1;
 }
 
