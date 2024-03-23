@@ -1822,8 +1822,6 @@ public StandUp(playerid)
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-	new string[144];
-
 	// do nothing if player is not logged in / connected
 	if((!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) || (IsPlayerConnected(killerid) && !gPlayerLogged[killerid])) 
 	{
