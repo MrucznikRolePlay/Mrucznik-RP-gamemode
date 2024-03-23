@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ zuzel_stop ]----------------------------------------------//
+//------------------------------------------------[ kmwyniki ]-----------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,16 +28,39 @@
 	
 */
 
-YCMD:zuzel_stop(playerid, params[], help)
+YCMD:kmwyniki(playerid, params[], help)
 {
-    if(IsPlayerConnected(playerid))
+	new string[128];
+    new kmName[MAX_PLAYER_NAME];
+    new pName[MAX_PLAYER_NAME];
+
+    if(!IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0)
-		{
-		    wyscigz = 0;
-		    iloscwygranych = 0;
-			ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, "Wyœcig ¿u¿lowy zakoñczony!");
-		}
-	}
+        return 1;
+    }
+
+    if(!komentator[playerid])
+    {
+        sendErrorMessage(playerid, "Nie jesteœ komentatorem!");
+        return 1;
+    }
+
+    GetPlayerName(playerid, kmName, sizeof(kmName));
+
+    format(string, sizeof(string), "Komentator %s: Podajê wyniki!", kmName);
+    ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_P@, string);
+
+    foreach(new p : Player)
+    {
+        if(zawodnik[p]) // je¿eli gracz jest zawodnikiem
+        {
+            GetPlayerName(playerid, pName);
+            strreplace(pName, "_", " ", true);
+
+            format(string, sizeof(string), "Komentator %s: Zawodnik %s - %d okr¹¿eñ.", kmName, pName, okregi[p]);
+            ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_P@, string);
+        }
+    }
+	
 	return 1;
 }

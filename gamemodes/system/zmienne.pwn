@@ -78,7 +78,7 @@ new OfferPrice[MAX_PLAYERS];
 
 new vinylStatus; 
 //Caluj - oferta
-new kissPlayerOffer[MAX_PLAYERS];
+new kissPlayerOffer[MAX_PLAYERS] = {INVALID_PLAYER_ID, ...};
 //ALARM DMV:
 new DMV_ALARM = 0;
 new bramaAlarmu[4];
@@ -1467,6 +1467,9 @@ ZerujZmienne(playerid)
 	areVehicleDescTurnedOn[playerid] = true;
 
 	VECTOR_clear(VMembersOrg[playerid]);
+
+	//caluj
+	kissPlayerOffer[playerid] = INVALID_PLAYER_ID;
 	
 	return 1;
 }
