@@ -44,7 +44,7 @@ YCMD:komentuj(playerid, params[], help)
 				return 1;
 			}
 			format(string, sizeof(string), "Komentator %s: %s", sendername, params);
-			ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_P@, string);
+			ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_P@, string);
         }
         else
         {

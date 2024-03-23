@@ -1289,8 +1289,6 @@ public OnPlayerDisconnect(playerid, reason)
 	OfferPrice[playerid] = 0;
 	LawyerOffer[playerid] = 0;
 	ClearVariableDisconnect(playerid); 
-	//caluj
-	kissPlayerOffer[playerid] = 0;
 	//komunikaty frakcyjne
 	komunikatMinutyZerowanie[playerid]=0;
 
@@ -4456,42 +4454,39 @@ public OnPlayerEnterCheckpoint(playerid)
 			    new sendername[MAX_PLAYER_NAME];
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
 				format(string, sizeof(string), "Wygra³ %s - ukoñczy³ wyœcig zajmuj¹c 1 miejsce !!!.", sendername);
-				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
+				ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 				DisablePlayerCheckpoint(playerid);
 		        DisablePlayerCheckpoint(playerid);
 		        zawodnik[playerid] = 0;
 		        okrazenia[playerid] = 0;
 	   			okregi[playerid] = 0;
 				iloscwygranych ++;
-				SetTimerEx("TablicaWynikow",1000,0,"d",playerid);
 			}
 			else if(iloscwygranych == 1)
 			{
 			    new sendername[MAX_PLAYER_NAME];
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
 				format(string, sizeof(string), "%s ukoñczy³ wyœcig zajmuj¹c 2 miejsce !!.", sendername);
-				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
+				ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 				DisablePlayerCheckpoint(playerid);
 		        DisablePlayerCheckpoint(playerid);
 		        zawodnik[playerid] = 0;
 		        okrazenia[playerid] = 0;
 	   			okregi[playerid] = 0;
 				iloscwygranych ++;
-				SetTimerEx("TablicaWynikow",1000,0,"d",playerid);
 			}
 			else if(iloscwygranych == 2)
 			{
 			    new sendername[MAX_PLAYER_NAME];
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
 				format(string, sizeof(string), "%s ukoñczy³ wyœcig zajmuj¹c 3 miejsce !.", sendername);
-				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
+				ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 				DisablePlayerCheckpoint(playerid);
 		        DisablePlayerCheckpoint(playerid);
 		        zawodnik[playerid] = 0;
 		        okrazenia[playerid] = 0;
 	   			okregi[playerid] = 0;
 				iloscwygranych ++;
-				SetTimerEx("TablicaWynikow",1000,0,"d",playerid);
 			}
 			else
 			{
@@ -4499,13 +4494,12 @@ public OnPlayerEnterCheckpoint(playerid)
 			    new sendername[MAX_PLAYER_NAME];
 			    GetPlayerName(playerid, sendername, sizeof(sendername));
 				format(string, sizeof(string), "%s ukoñczy³ wyœcig zajmuj¹c %d miejsce !.", sendername, iloscwygranych);
-				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
+				ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 				DisablePlayerCheckpoint(playerid);
 		        DisablePlayerCheckpoint(playerid);
 		        zawodnik[playerid] = 0;
 		        okrazenia[playerid] = 0;
 	   			okregi[playerid] = 0;
-	   			SetTimerEx("TablicaWynikow",1000,0,"d",playerid);
 			}
 	   	}
   		else if(okrazenia[playerid] == 0)

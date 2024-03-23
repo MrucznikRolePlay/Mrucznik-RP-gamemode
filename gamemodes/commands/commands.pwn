@@ -214,6 +214,7 @@
 #include "cmd/kickall.pwn"
 #include "cmd/adminkill.pwn"
 #include "cmd/killall.pwn"
+#include "cmd/kmwyniki.pwn"
 #include "cmd/kod.pwn"
 #include "cmd/kogut.pwn"
 #include "cmd/kolejka.pwn"
