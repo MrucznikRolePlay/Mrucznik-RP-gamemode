@@ -48,9 +48,6 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				case 0://spawnuj kluczyki - tu jest bug?
 				{
-					sendTipMessage(playerid, "Opcja tymczasowo wy³¹czona do czasu naprawy b³êdu na podwójny spawn.");
-					return 1;
-
 					if(CarData[idx][c_ID] != 0)
 					{
 						SendClientMessage(playerid, 0xFFC0CB, "Pojazd do którego masz kluczyki jest ju¿ zespawnowany");
