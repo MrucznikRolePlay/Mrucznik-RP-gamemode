@@ -39,6 +39,7 @@
 #include "fishing\fishing.def"
 #include "prace\prace.def"
 #include "bramy\bramy.def"
+#include "kajdanki\kajdanki.def"
 #include "animacje\animacje.def"
 #include "bw\bw.def"
 #include "wypadek\wypadek.def"
@@ -48,6 +49,7 @@
 #include "graffiti\graffiti.def"
 #include "weryfikacje\weryfikacje.def"
 #include "adminduty\adminduty.def"
+#include "moneypickup\moneypickup.def"
 #include "oferty\oferty.def"
 #include "gunshoppanel\gunshoppanel.def"
 #include "player_attachments\player_attachments.def"
@@ -55,6 +57,7 @@
 #include "wejscia\wejscia.def"
 #include "sannews\sannews.def"
 #include "antyspam\antyspam.def"
+#include "bijatyki\bijatyki.def"
 #include "cooking\cooking.def"
 #include "03DL\03DL.def"
 #include "vehicle_attachments\vehicle_attachments.def"
@@ -70,8 +73,6 @@
 #include "antycheat\antycheat.def"
 #include "komendy\komendy.def"
 #include "choroby\choroby.def"
-#include "bijatyki\bijatyki.def"
-#include "kajdanki\kajdanki.def"
 
 
 //-------<[ .hwn ]>-------
@@ -86,6 +87,7 @@
 #include "fishing\fishing.hwn"
 #include "prace\prace.hwn"
 #include "bramy\bramy.hwn"
+#include "kajdanki\kajdanki.hwn"
 #include "animacje\animacje.hwn"
 #include "bw\bw.hwn"
 #include "wypadek\wypadek.hwn"
@@ -95,6 +97,7 @@
 #include "graffiti\graffiti.hwn"
 #include "weryfikacje\weryfikacje.hwn"
 #include "adminduty\adminduty.hwn"
+#include "moneypickup\moneypickup.hwn"
 #include "oferty\oferty.hwn"
 #include "gunshoppanel\gunshoppanel.hwn"
 #include "player_attachments\player_attachments.hwn"
@@ -102,6 +105,7 @@
 #include "wejscia\wejscia.hwn"
 #include "sannews\sannews.hwn"
 #include "antyspam\antyspam.hwn"
+#include "bijatyki\bijatyki.hwn"
 #include "cooking\cooking.hwn"
 #include "03DL\03DL.hwn"
 #include "vehicle_attachments\vehicle_attachments.hwn"
@@ -117,8 +121,6 @@
 #include "antycheat\antycheat.hwn"
 #include "komendy\komendy.hwn"
 #include "choroby\choroby.hwn"
-#include "bijatyki\bijatyki.hwn"
-#include "kajdanki\kajdanki.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -133,6 +135,7 @@
 #include "fishing\fishing.pwn"
 #include "prace\prace.pwn"
 #include "bramy\bramy.pwn"
+#include "kajdanki\kajdanki.pwn"
 #include "animacje\animacje.pwn"
 #include "bw\bw.pwn"
 #include "wypadek\wypadek.pwn"
@@ -142,6 +145,7 @@
 #include "graffiti\graffiti.pwn"
 #include "weryfikacje\weryfikacje.pwn"
 #include "adminduty\adminduty.pwn"
+#include "moneypickup\moneypickup.pwn"
 #include "oferty\oferty.pwn"
 #include "gunshoppanel\gunshoppanel.pwn"
 #include "player_attachments\player_attachments.pwn"
@@ -149,6 +153,7 @@
 #include "wejscia\wejscia.pwn"
 #include "sannews\sannews.pwn"
 #include "antyspam\antyspam.pwn"
+#include "bijatyki\bijatyki.pwn"
 #include "cooking\cooking.pwn"
 #include "03DL\03DL.pwn"
 #include "vehicle_attachments\vehicle_attachments.pwn"
@@ -164,13 +169,12 @@
 #include "antycheat\antycheat.pwn"
 #include "komendy\komendy.pwn"
 #include "choroby\choroby.pwn"
-#include "bijatyki\bijatyki.pwn"
-#include "kajdanki\kajdanki.pwn"
 
 
 //-------<[ timers ]>-------
 #include "pojazdy\pojazdy_timers.pwn"
 #include "prace\prace_timers.pwn"
+#include "kajdanki\kajdanki_timers.pwn"
 #include "wypadek\wypadek_timers.pwn"
 #include "convoy\convoy_timers.pwn"
 #include "graffiti\graffiti_timers.pwn"
@@ -178,14 +182,13 @@
 #include "napady\napady_timers.pwn"
 #include "sannews\sannews_timers.pwn"
 #include "antyspam\antyspam_timers.pwn"
+#include "bijatyki\bijatyki_timers.pwn"
 #include "money\money_timers.pwn"
 #include "organizacje\organizacje_timers.pwn"
 #include "premium\premium_timers.pwn"
 #include "urzadls\urzadls_timers.pwn"
 #include "zlodziej_aut\zlodziej_aut_timers.pwn"
 #include "choroby\choroby_timers.pwn"
-#include "bijatyki\bijatyki_timers.pwn"
-#include "kajdanki\kajdanki_timers.pwn"
 
 
 //-------<[ mysql ]>-------
@@ -213,13 +216,16 @@
 #include "biznesy\biznesy_callbacks.pwn"
 #include "fishing\fishing_callbacks.pwn"
 #include "prace\prace_callbacks.pwn"
+#include "kajdanki\kajdanki_callbacks.pwn"
 #include "wypadek\wypadek_callbacks.pwn"
 #include "convoy\convoy_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "weryfikacje\weryfikacje_callbacks.pwn"
+#include "moneypickup\moneypickup_callbacks.pwn"
 #include "gunshoppanel\gunshoppanel_callbacks.pwn"
 #include "player_attachments\player_attachments_callbacks.pwn"
 #include "napady\napady_callbacks.pwn"
+#include "bijatyki\bijatyki_callbacks.pwn"
 #include "cooking\cooking_callbacks.pwn"
 #include "vehicle_attachments\vehicle_attachments_callbacks.pwn"
 #include "money\money_callbacks.pwn"
@@ -229,8 +235,6 @@
 #include "antycheat\antycheat_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
 
-#include "bijatyki\bijatyki_callbacks.pwn"
-#include "kajdanki\kajdanki_callbacks.pwn"
 
 //-------<[ commands ]>-------
 #include "frakcje\commands\frakcje_commands.pwn"
@@ -242,6 +246,7 @@
 #include "fishing\commands\fishing_commands.pwn"
 #include "prace\commands\prace_commands.pwn"
 #include "bramy\commands\bramy_commands.pwn"
+#include "kajdanki\commands\kajdanki_commands.pwn"
 #include "animacje\commands\animacje_commands.pwn"
 #include "bw\commands\bw_commands.pwn"
 #include "wypadek\commands\wypadek_commands.pwn"
@@ -253,6 +258,7 @@
 #include "player_attachments\commands\player_attachments_commands.pwn"
 #include "napady\commands\napady_commands.pwn"
 #include "sannews\commands\sannews_commands.pwn"
+#include "bijatyki\commands\bijatyki_commands.pwn"
 #include "cooking\commands\cooking_commands.pwn"
 #include "vehicle_attachments\commands\vehicle_attachments_commands.pwn"
 #include "sila\commands\sila_commands.pwn"
@@ -264,5 +270,3 @@
 #include "antycheat\commands\antycheat_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "choroby\commands\choroby_commands.pwn"
-#include "bijatyki\commands\bijatyki_commands.pwn"
-#include "kajdanki\commands\kajdanki_commands.pwn"
