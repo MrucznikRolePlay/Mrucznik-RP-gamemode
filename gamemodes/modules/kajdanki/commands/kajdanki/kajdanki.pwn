@@ -31,7 +31,7 @@
 #include "kajdanki_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_cuff()
+command_kajdanki()
 {
     new command = Command_GetID("kajdanki");
 

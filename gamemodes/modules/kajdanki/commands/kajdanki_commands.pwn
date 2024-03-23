@@ -31,13 +31,13 @@
 
 //-------<[ include ]>-------
 #include "rozkuj\rozkuj.pwn"
-#include "cuff\cuff.pwn"
+#include "kajdanki\kajdanki.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_cuff();
-    command_rozkuj();   
-
+    command_rozkuj();
+    command_kajdanki();
+    
 }
