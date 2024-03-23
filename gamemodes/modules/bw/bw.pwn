@@ -103,6 +103,8 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 	if(IsPlayerConnected(killerid))
 	{
 		PlayerInfo[killerid][pKills] ++;
+
+		// daj wanted level mordercy
 		if(giveWL)
 		{
 			if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
@@ -211,50 +213,47 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 BW_OnPlayerInjured(playerid, killerid, reason)
 {
 	new string[MAX_MESSAGE_LENGTH];
+
+	// przywróæ BW jeœli gracz zgin¹³ podczas BW
 	if(PlayerInfo[playerid][pBW] > 0)
 	{
 		return NadajBW(playerid, PlayerInfo[playerid][pBW], false);
 	}
-	else
+
+	// odkuj skutego gdy skuwaj¹cy dostanie rannego
+	if(isPlayerUsingCuffs[playerid])
 	{
-		//kajdanki
-		if(isPlayerUsingCuffs[playerid]) //gdy skuwaj¹cy dostanie rannego
+		UncuffPlayerCuffedBy(playerid);
+	}
+
+	if(IsPlayerConnected(killerid))
+	{
+		if(giveWL)
 		{
-			UncuffPlayerCuffedBy(playerid);
+			if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid)
+			{
+				NadajWLBW(killerid, playerid, false);
+			}
 		}
 
-		if(IsPlayerConnected(killerid))
+		if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
 		{
-			if(giveWL)
+			if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
 			{
-				if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
+				if(GoChase[killerid] == playerid)
 				{
-					NadajWLBW(killerid, playerid, false);
+					format(string, sizeof(string), "* Dobij %s, ¿eby wype³niæ kontrakt *", GetNick(playerid));
+					SendClientMessage(killerid, COLOR_LIGHTRED, string);
 				}
-			}
-
-			if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
-			{
-				if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
-				{
-					if(GoChase[killerid] == playerid)
-					{
-						format(string, sizeof(string), "* Dobij %s, ¿eby wype³niæ kontrakt *", GetNick(playerid));
-						SendClientMessage(killerid, COLOR_LIGHTRED, string);
-					}
-				}
-			}
-
-			SetPVarInt(playerid, "bw-reason", reason);
-			if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
-			{
-				return NadajRanny(playerid, 0, true);
-			}
-			else
-			{
-				return NadajRanny(playerid, INJURY_TIME_EXCEPTION, true);
 			}
 		}
+
+		SetPVarInt(playerid, "bw-reason", reason);
+		if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
+		{
+			return NadajRanny(playerid, 0, true);
+		}
+		return NadajRanny(playerid, INJURY_TIME_EXCEPTION, true);
 	}
 	return 1;
 }
