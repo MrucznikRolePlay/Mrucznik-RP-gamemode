@@ -360,27 +360,7 @@ PDTuneInfernus(vehicleid)
     AttachDynamicObjectToVehicle(hsiu_text2, vehicleid, 1.1013298,0.0907000,-0.150000,0.0000000,0.0000000,88.7496338);
 }
 
-/*GetFreeVehicleSeat(vehicleid)
-{
-	new bool:Seat[4];
-	foreach(new i : Player)
-	{
-		if(IsPlayerInVehicle(i,vehicleid))
-		{
-			if(GetPlayerVehicleSeat(i) == 0) Seat[0] = true;
-			else if(GetPlayerVehicleSeat(i) == 1) Seat[1] = true;
-			else if(GetPlayerVehicleSeat(i) == 2) Seat[2] = true;
-			else if(GetPlayerVehicleSeat(i) == 3) Seat[3] = true;
-		}
-	}
-	if(Seat[0] == false) return 0;
-	else if(Seat[1] == false) return 1;
-	else if(Seat[2] == false) return 2;
-	else if(Seat[3] == false) return 3;
-	else return -1;
-}*/
-
-GetFreeVehicleSeatForArrestant(vehicleid)
+GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
 	foreach(new i : Player)
@@ -1025,12 +1005,6 @@ MatsGood[playerid] = 0;
 return 1;
 }
 
-public pobito(playerid){
-pobilem[playerid] = 0;
-PlayerInfo[playerid][pMuted] = 0;
-return 1;
-}
-
 /*forward zabezpieczeniewoz(playerid);
 public zabezpieczeniewoz(playerid)
 {
@@ -1090,57 +1064,6 @@ public togczastimer(playerid)
 		GameTextForPlayer(playerid, string, 5000, 1);
 	}
 	return 1;
-}
-
-public naczasbicie(playerid, playerid_atak){
-	zdazylwpisac[playerid] = 0;
-	TogglePlayerControllable(playerid_atak, 1);
-	ClearAnimations(playerid_atak);
-	SendClientMessage(playerid_atak, COLOR_NEWS, "Wygra³eœ bitwê poniewa¿ broni¹cy za d³ugo wpisywa³ znaki!");
-	KillTimer(GetPVarInt(playerid, "timerBicia"));
-	return 1;
-}
-
-/*public UzyteKajdany(playerid,giveplayerid)
-{
-	if(Kajdanki_PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
-	{
-		//Kajdanki_Uzyte[playerid] = 0;
-		format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(giveplayerid));
-		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
- 		format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", GetNick(playerid));
-		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-		Kajdanki_JestemSkuty[playerid] = 1;
- 		TogglePlayerControllable(playerid, 0);
-  		Kajdanki_Uzyte[giveplayerid] = 1;
-   		Kajdanki_SkutyGracz[Kajdanki_PDkuje[playerid]] = playerid;
-		ClearAnimations(playerid);
- 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-  		SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
-	}
-	return 1;
-}*/
-public UzyteKajdany(playerid){
-Kajdanki_Uzyte[playerid] = 0;
-return 1;
-}
-
-OdkujKajdanki(playerid)
-{
-	if(Kajdanki_PDkuje[playerid] != INVALID_PLAYER_ID)
-	{
-		new giveplayerid = Kajdanki_PDkuje[playerid]; //id policjanta
-		Kajdanki_PDkuje[giveplayerid] = INVALID_PLAYER_ID;
-		Kajdanki_Uzyte[giveplayerid] = 0;
-		Kajdanki_SkutyGracz[giveplayerid] = INVALID_PLAYER_ID;
-		Kajdanki_JestemSkuty[giveplayerid] = 0;
-	}
-	Kajdanki_PDkuje[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_Uzyte[playerid] = 0;
-	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_JestemSkuty[playerid] = 0;
-	ClearAnimations(playerid);
-	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 }
 
 public spamujewl(playerid){
@@ -12855,42 +12778,6 @@ public DeathAdminWarning(playerid, killerid, reason)
 	}
 	return 1;
 }
-
-public CuffedAction(playerid, cuffedid)
-{
-	//if(!IsAPolicja(cuffedid)) ZdejmijBW(cuffedid, 4000);
-	Kajdanki_JestemSkuty[cuffedid] = 1;
-	Kajdanki_Uzyte[playerid] = 1;
-	Kajdanki_PDkuje[cuffedid] = playerid;
-	Kajdanki_SkutyGracz[playerid] = cuffedid;
-	ClearAnimations(cuffedid);
-	SetPlayerSpecialAction(cuffedid, SPECIAL_ACTION_CUFFED);
-	SetPlayerAttachedObject(cuffedid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
-	SetTimerEx("UzyteKajdany",30000,0,"d",cuffedid);
-	SetTimerEx("Kajdanki_debug", 1000, 0, "d", cuffedid);
-	return 1;
-}
-
-/*public UnCuffedAction(cop, cuffedid)
-{
-	new playerid = cop;
-	new string[144];
-	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	GameTextForPlayer(cuffedid, "~g~Rozkuty", 2500, 3);
-
-	//czynnosci
-	TogglePlayerControllable(cuffedid, 1);
-	PlayerCuffed[cuffedid] = 0;
-	Kajdanki_JestemSkuty[cuffedid] = 0;
-	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_PDkuje[cuffedid] = INVALID_PLAYER_ID;
-	Kajdanki_Uzyte[playerid] = 0;
-	PlayerInfo[cuffedid][pMuted] = 0;
-	ClearAnimations(cuffedid);
-	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
-	RemovePlayerAttachedObject(cuffedid, 5);
-	return 1;
-}  to do */
 
 forward TimeUpdater();
 public TimeUpdater()

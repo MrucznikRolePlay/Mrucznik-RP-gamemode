@@ -486,8 +486,7 @@ ACv2_DrivingWithoutPremissions(playerid, vehicleid)
 {
 	new string[256];
 	//ACv2: Kicking players that are trying to drive the car without permission
-	if(!Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && PlayerInfo[playerid][pAdmin] < 1
-	|| !Player_CanUseCar(playerid, vehicleid) && PlayerCuffed[playerid] < 1 && !IsAScripter(playerid))
+	if(!Player_CanUseCar(playerid, vehicleid) && (PlayerInfo[playerid][pAdmin] < 1 || !IsAScripter(playerid)))
 	{
 		// Skurwysyn kieruje bez prawka lub autem frakcji xD (Xd)
 		if(GetPVarInt(playerid, "AntyCheatOff") == 0)

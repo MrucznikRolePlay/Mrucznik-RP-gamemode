@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ resms ]-------------------------------------------------//
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                  kajdanki                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,31 +16,63 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: NikodemBanan
+// Data utworzenia: 01.03.2024
+//Opis:
 /*
-	
+	Uporz¹dkowany system kajdanek.
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
+#include <YSI\y_hooks>
 
-YCMD:resms(playerid, params[], help)
+//-----------------<[ Callbacki: ]>-----------------
+
+hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
-	new string[256];
-	if(LastSMSNumber[playerid] == 0)
+	if(dialogid == CUFFING_DIALOG_ID)
 	{
-		sendErrorMessage(playerid, "Nikt nie wys³a³ Ci smsa");
+		new proxMessage[256];
+		new copplayerid = whoIsCuffing[playerid];
+		new cuffingCopsCount = 0;
+		
+		if(response)
+		{
+			format(proxMessage, sizeof(proxMessage), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(copplayerid));
+			CuffedAction(copplayerid, playerid);
+		}
+		else
+		{
+			foreach(new p : Player)
+			{
+				if((IsAPolicja(p) || IsABOR(p)) && ProxDetectorS(8.0, p, playerid))
+				{
+					cuffingCopsCount++;
+				}
+			}
+
+			if(cuffingCopsCount >= 3 || (cuffingCopsCount == 2 && random(100) < 50))
+			{
+				format(proxMessage, sizeof(proxMessage), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", GetNick(playerid));
+				CuffedAction(copplayerid, playerid);
+			}
+			else
+			{
+				format(proxMessage, sizeof(proxMessage), "* %s wyrywa siê z ca³ej si³y i ucieka.", GetNick(playerid));
+				TogglePlayerControllable(playerid, 1);
+				
+				whoIsCuffing[playerid] = INVALID_PLAYER_ID;
+			}
+			
+			PoziomPoszukiwania[playerid] += 1;
+			SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
+		}
+
+		ProxDetector(30.0, playerid, proxMessage, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 	}
-	
-	if(isnull(params))
-	{
-		sendTipMessage(playerid, "U¿yj /res [wiadomoœæ]");
-	}
-	
-	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
-	return RunCommand(playerid, "/sms",  string);
+
+	return Y_HOOKS_CONTINUE_RETURN_0;
 }
+
+//end

@@ -989,8 +989,9 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		Player_RemoveFromVeh(playerid);
 		SendClientMessage(playerid, COLOR_GRAD2, "Stra¿nik zauwa¿y³, ¿e coœ kombinujesz. Wracasz do celi.");
 		return JailDeMorgan(playerid);
-	}							
-	if(!Kajdanki_JestemSkuty[playerid] && (PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0)) //inna animacja dla bw
+	}
+	// Zapobieganie wsiadania do pojazdu podczas BW:							
+	if(!isPlayerCuffed[playerid] && (PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0)) //TODO: inna animacja dla bw
 	{
 		PlayerEnterVehOnInjury(playerid);
 		return FreezePlayerOnInjury(playerid);
@@ -1393,17 +1394,6 @@ public OnPlayerDisconnect(playerid, reason)
 		SetPVarInt(playerid, "dutyadmin", 0);
 		EnableZGIfNoAdmins();
 	}
-	//kajdanki
-	if(Kajdanki_JestemSkuty[playerid] != 0) // gdy skuty da /q
-	{
-		OdkujKajdanki(playerid);
-	}
-	else if(Kajdanki_Uzyte[playerid] != 0) //gdy skuwaj¹cy da /q
-	{
-		new aresztant = Kajdanki_SkutyGracz[playerid];
-		OdkujKajdanki(aresztant);
-	}
-
 	if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem da /q
 	{
 		Worek_MamWorek[playerid] = 0;
@@ -1451,24 +1441,19 @@ public OnPlayerDisconnect(playerid, reason)
 		}
 	}
 
-    //if(PlayerTied[playerid] >= 1 || PlayerCuffed[playerid] >= 1 || Kajdanki_JestemSkuty[playerid] >= 1 || poscig[playerid] == 1)
-    if(PlayerTied[playerid] >= 1 || (PlayerCuffed[playerid] >= 1 && pobity[playerid] == 0 && PlayerCuffed[playerid] < 3) || Kajdanki_JestemSkuty[playerid] >= 1 || poscig[playerid] == 1)
+    if(PlayerTied[playerid] || isPlayerCuffed[playerid] || poscig[playerid] == 1)
 	{
 		PlayerInfo[playerid][pJailed] = 10;
 		PlayerInfo[playerid][pJailTime] = gettime();
 		new string[130];
 		new powod[36];
-		if(PlayerTied[playerid] >= 1)
+		if(PlayerTied[playerid])
 		{
 			strcat(powod, "bycie zwiazanym, ");
 		}
-		if(PlayerCuffed[playerid] >= 1)
+		if(isPlayerCuffed[playerid])
 		{
-			strcat(powod, "kajdanki w aucie, ");
-		}
-		if(Kajdanki_JestemSkuty[playerid] >= 1)
-		{
-			strcat(powod, "kajdanki pieszo, ");
+			strcat(powod, "kajdanki, ");
 		}
 		if(poscig[playerid] >= 1)
 		{
@@ -1484,6 +1469,19 @@ public OnPlayerDisconnect(playerid, reason)
 		format(string, 130, "%s dostanie Marcepana za mo¿liwe: %s (%s)", GetNickEx(playerid), powod, codal);
 		SendAdminMessage(COLOR_P@, string);
 	}
+
+	// -----------
+	// Kajdanki:
+	// -----------
+	if(isPlayerCuffed[playerid]) // gdy skuty da /q
+	{
+		UncuffPlayer(playerid);
+	}
+	else if(isPlayerUsingCuffs[playerid]) //gdy skuwaj¹cy da /q
+	{
+		UncuffPlayerCuffedBy(playerid);
+	}
+	// -----------
 
 	if(PoziomPoszukiwania[playerid] >= 1)
 	{
@@ -1712,7 +1710,7 @@ public OnPlayerEnterDynamicCP(playerid, checkpointid)
 
 public OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 {
-	if(Kajdanki_JestemSkuty[playerid] > 0)
+	if(isPlayerCuffed[playerid])
 	{
 		TogglePlayerControllable(playerid, 0);
 		GameTextForPlayer(playerid, "~r~Nie atakuj", 3500, 1);
@@ -1738,7 +1736,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
 
 	if(issuerid != INVALID_PLAYER_ID) // PvP
     {
-		if(Kajdanki_JestemSkuty[issuerid] > 0)
+		if(isPlayerCuffed[issuerid])
 		{
 			new Float:hp, Float:armor;
 			GetPlayerHealth(playerid, hp);
@@ -1966,11 +1964,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 							if(GoChase[killerid] == playerid)
 							{
 								//jeœli zabity mia³ kajdanki
-								if(Kajdanki_JestemSkuty[playerid] != 0) // gdy skuty da /q
+								if(isPlayerCuffed[playerid])
 								{
 									format(string, sizeof(string), "* Wiêzieñ %s zosta³ zastrzelony przez Hitmana (MK). Nastêpnym razem zadbaj o bezpieczeñstwo swojego wiêŸnia *", GetNick(playerid));
-									SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTRED, string);
-									OdkujKajdanki(playerid);
+									SendClientMessage(whoIsCuffing[playerid], COLOR_LIGHTRED, string);
+									UncuffPlayer(playerid);
 								}
 
 								SetPVarInt(playerid, "bw-hitmankiller",  1);
@@ -2098,9 +2096,9 @@ public OnPlayerDeath(playerid, killerid, reason)
 				else
 				{
 					//kajdanki
-					if(Kajdanki_Uzyte[playerid] != 0) //gdy skuwaj¹cy dostanie rannego
+					if(isPlayerUsingCuffs[playerid]) //gdy skuwaj¹cy dostanie rannego
 					{
-						OdkujKajdanki(Kajdanki_SkutyGracz[playerid]);
+						UncuffPlayerCuffedBy(playerid);
 					}
 
 					if(IsPlayerConnected(killerid))
@@ -4899,7 +4897,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 {
 	new string[256];
 
-	if(!Kajdanki_JestemSkuty[playerid] && (PlayerInfo[playerid][pInjury] > 0 && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)))
+	// Zapobieganie wsiadania do pojazdu podczas BW:	
+	if(!isPlayerCuffed[playerid] && (PlayerInfo[playerid][pInjury] > 0 && (newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)))
 	{
 		return PlayerEnterVehOnInjury(playerid);
 	}

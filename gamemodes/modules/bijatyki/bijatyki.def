@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ resms ]-------------------------------------------------//
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                  bijatyki                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,31 +16,15 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: NikodemBanan
+// Data utworzenia: 01.03.2024
 
-// Opis:
-/*
-	
-*/
+//
 
-
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:resms(playerid, params[], help)
-{
-	new string[256];
-	if(LastSMSNumber[playerid] == 0)
-	{
-		sendErrorMessage(playerid, "Nikt nie wys³a³ Ci smsa");
-	}
-	
-	if(isnull(params))
-	{
-		sendTipMessage(playerid, "U¿yj /res [wiadomoœæ]");
-	}
-	
-	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
-	return RunCommand(playerid, "/sms",  string);
-}
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+#define BATTLE_LEN_FIRST_SEC 15
+#define BATTLE_LEN_NEXT_SEC 10
+#define BATTLE_WAKE_UP_SEC 45
+#define BATTLE_FIGHT_DIALOG 90
+//end

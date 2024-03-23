@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ resms ]-------------------------------------------------//
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                  bijatyki                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,31 +16,51 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: NikodemBanan
+// Data utworzenia: 01.03.2024
+//Opis:
 /*
-	
+	Uporz¹dkowany system /pobij.
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
+#include <YSI\y_hooks>
 
-YCMD:resms(playerid, params[], help)
+//-----------------<[ Callbacki: ]>-----------------
+
+hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
-	new string[256];
-	if(LastSMSNumber[playerid] == 0)
+	if(dialogid == BATTLE_FIGHT_DIALOG)
 	{
-		sendErrorMessage(playerid, "Nikt nie wys³a³ Ci smsa");
+		if(battleIsTooLate[playerid])
+		{
+			return Y_HOOKS_CONTINUE_RETURN_0;
+		}
+
+		new battleTimer = GetPVarInt(playerid, "battleTimer");
+		KillTimer(battleTimer);
+
+		new opponentid = fightingOpponentOf[playerid];
+		if(response)
+		{
+			if(strcmp(battleCodeToRetype[opponentid], inputtext, true ) == 0 && strlen(inputtext) == 8)
+			{
+				SendClientMessage(playerid, COLOR_WHITE, "CIOS ODBITY!");
+				BattlePhaseStart(playerid, opponentid, BATTLE_LEN_NEXT_SEC);
+			}
+			else
+			{
+				LoseBattle(playerid, opponentid);
+			}
+		}
+		else
+		{
+			LoseBattle(playerid, opponentid);
+		}
 	}
-	
-	if(isnull(params))
-	{
-		sendTipMessage(playerid, "U¿yj /res [wiadomoœæ]");
-	}
-	
-	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
-	return RunCommand(playerid, "/sms",  string);
+
+	return Y_HOOKS_CONTINUE_RETURN_0;
 }
+
+//end

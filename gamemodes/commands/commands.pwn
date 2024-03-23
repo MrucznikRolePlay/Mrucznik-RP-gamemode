@@ -202,7 +202,6 @@
 #include "cmd/jail.pwn"
 #include "cmd/jump.pwn"
 #include "cmd/k.pwn"
-#include "cmd/kajdanki.pwn"
 #include "cmd/kamera.pwn"
 #include "cmd/kamerau.pwn"
 #include "cmd/kamera_wiezienie.pwn"
@@ -268,7 +267,6 @@
 #include "cmd/malunek.pwn"
 #include "cmd/malunki.pwn"
 #include "cmd/mandacik.pwn"
-#include "cmd/marcepan.pwn"
 #include "cmd/mark.pwn"
 #include "cmd/maska.pwn"
 #include "cmd/materialy.pwn"
@@ -328,7 +326,6 @@
 #include "cmd/plac.pwn"
 #include "cmd/placmedyk.pwn"
 #include "cmd/po.pwn"
-#include "cmd/pobij.pwn"
 #include "cmd/podatek.pwn"
 #include "cmd/poddajesie.pwn"
 #include "cmd/poddajsie.pwn"
@@ -381,7 +378,6 @@
 #include "cmd/roleta.pwn"
 #include "cmd/rooc.pwn"
 #include "cmd/rozbierz.pwn"
-#include "cmd/rozkuj.pwn"
 #include "cmd/rozwiaz.pwn"
 #include "cmd/rozwiedz.pwn"
 #include "cmd/rozwod.pwn"
@@ -1087,10 +1083,6 @@ static Aliases()
 	Command_AddAltNamed("rooc", "radioooc");
 	Command_AddAltNamed("rooc", "ro");
 
-	//rozkuj
-	Command_AddAltNamed("rozkuj", "uncuff");
-	Command_AddAltNamed("rozkuj", "odkuj");
-
 	//rozwiaz
 	Command_AddAltNamed("rozwiaz", "untie");
 	Command_AddAltNamed("rozwiaz", "odwiaz");
@@ -1476,10 +1468,6 @@ static Aliases()
 
 	//kasa
 	Command_AddAltNamed("kasa", "money");
-
-	//kajdanki
-	Command_AddAltNamed("kajdanki", "cuff");
-	Command_AddAltNamed("kajdanki", "skuj");
 
 	//dajkase
 	Command_AddAltNamed("dajkase", "givemoney");
