@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ resms ]-------------------------------------------------//
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                  kajdanki                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,31 +16,17 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: NikodemBanan
+// Data utworzenia: 01.03.2024
 
-// Opis:
-/*
-	
-*/
+//
 
-
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:resms(playerid, params[], help)
-{
-	new string[256];
-	if(LastSMSNumber[playerid] == 0)
-	{
-		sendErrorMessage(playerid, "Nikt nie wys³a³ Ci smsa");
-	}
-	
-	if(isnull(params))
-	{
-		sendTipMessage(playerid, "U¿yj /res [wiadomoœæ]");
-	}
-	
-	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
-	return RunCommand(playerid, "/sms",  string);
-}
+//------------------<[ Enumy: ]>--------------------
+//-----------------<[ Zmienne: ]>-------------------
+new isPlayerUsingCuffs[MAX_PLAYERS] = {false, ...};
+new isPlayerCuffed[MAX_PLAYERS] = {false, ...};
+new whoIsCuffing[MAX_PLAYERS] = {INVALID_PLAYER_ID, ...};
+new whoIsCuffedBy[MAX_PLAYERS] = {INVALID_PLAYER_ID, ...};
+//------------------<[ Forwardy: ]>--------------------
+forward CuffedAction(playerid, cuffedid);
+//end

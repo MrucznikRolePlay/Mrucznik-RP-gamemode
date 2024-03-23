@@ -36,7 +36,7 @@ YCMD:poddajsie2(playerid, params[], help)
 	{
 		if(PlayerInfo[playerid][pJob] == 1)
 		{
-			if(Kajdanki_Uzyte[playerid] != 1)
+			if(isPlayerUsingCuffs[playerid] != 1)
 			{
 				new giveplayerid;
 				if(sscanf(params, "k<fix>", giveplayerid))
@@ -52,9 +52,9 @@ YCMD:poddajsie2(playerid, params[], help)
 						{
 							if(GetPlayerState(playerid) == 1 && GetPlayerState(giveplayerid) == 1)
 							{
-								if(Kajdanki_JestemSkuty[giveplayerid] == 0)
+								if(isPlayerCuffed[giveplayerid] == 0)
 								{
-									if(Kajdanki_Uzyte[giveplayerid] == 0)
+									if(isPlayerUsingCuffs[giveplayerid] == 0)
 									{
 										if(GUIExit[playerid] == 0 && GUIExit[giveplayerid] == 0)
 										{
@@ -74,8 +74,8 @@ YCMD:poddajsie2(playerid, params[], help)
 											format(string, sizeof(string), "*£owca nagród %s wyci¹ga kajdanki i próbuje je za³o¿yæ %s.", sendername ,giveplayer);
 											ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 											ShowPlayerDialogEx(giveplayerid, 7080, DIALOG_STYLE_MSGBOX, "Pddaj siê!", "Poddaj siê!\n£owca nagród z³o¿y³ propozycjê poddania siê!\nMo¿esz j¹ przyj¹æ i trafiæ do wiêzienia na krótszy czas\nlub spróbowaæ pokonaæ ³owcê w walce!", "Poddaj siê", "Wyrwij siê");
-											Kajdanki_PDkuje[giveplayerid] = playerid;
-											Kajdanki_Uzyte[giveplayerid] = 1;
+											whoIsCuffing[giveplayerid] = playerid;
+											isPlayerUsingCuffs[giveplayerid] = 1;
 											//SetTimerEx("UzyteKajdany",30000,0,"dd",giveplayerid,playerid);
 											SetTimerEx("UzyteKajdany",30000,0,"d",giveplayerid);
 											poddaje[giveplayerid] = 1;

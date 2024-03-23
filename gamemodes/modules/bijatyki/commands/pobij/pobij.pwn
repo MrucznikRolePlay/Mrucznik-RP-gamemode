@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ resms ]-------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   pobij                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,31 +16,55 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "pobij_impl.pwn"
 
-YCMD:resms(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_pobij()
 {
-	new string[256];
-	if(LastSMSNumber[playerid] == 0)
-	{
-		sendErrorMessage(playerid, "Nikt nie wys³a³ Ci smsa");
-	}
-	
-	if(isnull(params))
-	{
-		sendTipMessage(playerid, "U¿yj /res [wiadomoœæ]");
-	}
-	
-	format(string, sizeof(string), "%d %s", LastSMSNumber[playerid], params);
-	return RunCommand(playerid, "/sms",  string);
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:pobij(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Spróbuj pobiæ gracza. Konkurencja polegaj¹ca na szybkim i dok³adnym przepisywaniu tekstu.");
+        return 1;
+    }
+    //fetching params
+    new opponentid;
+    if(sscanf(params, "r", opponentid))
+    {
+        sendTipMessage(playerid, "U¿yj /pobij [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(opponentid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_pobij_Impl(playerid, opponentid);
 }

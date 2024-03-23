@@ -1,0 +1,15 @@
+{
+    "name": "pobij",
+    "description": "Spróbuj pobiæ gracza. Konkurencja polegaj¹ca na szybkim i dok³adnym przepisywaniu tekstu.",
+    "permissions": [],
+    "author": "NikodemBanan",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "opponentid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "01.03.2024"
+}
