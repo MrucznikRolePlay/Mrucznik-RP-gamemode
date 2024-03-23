@@ -30,8 +30,10 @@ command_kill_Impl(playerid)
         return 1;
     }
 
-    ChatMe(playerid, "umiera na wskutek odniesionych obra¿eñ ((MemoryKill))");
-    SetPlayerHealth(playerid, 0.0);
+    new message[128];
+    new moneyLost = floatround(kaska[playerid] * 0.02, floatround_ceil);
+    format(message, sizeof(message), "Czy na pewno chcesz uœmierciæ (memory kill) swoj¹ postaæ?\nStracisz %d$ ze swojego portfela.", moneyLost);
+    ShowPlayerDialogEx(playerid, DIALOG_ID_KILL, DIALOG_STYLE_MSGBOX, "Uœmiercenie postaci", message, "Akceptuj", "Anuluj");
     return 1;
 }
 

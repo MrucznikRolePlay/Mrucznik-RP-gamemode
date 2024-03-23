@@ -30,14 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "skuj\skuj.pwn"
-#include "rozkuj\rozkuj.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_skuj();
-    command_rozkuj();
     
 }

@@ -26,6 +26,29 @@
 //
 
 //-----------------<[ Callbacki: ]>-------------------
+BW_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	#pragma unused listitem, inputtext
+	if(dialogid == DIALOG_ID_KILL)
+	{
+		if(response) 
+		{
+    		new moneyLost = floatround(kaska[playerid] * 0.02, floatround_ceil);
+			ZabierzKase(playerid, moneyLost);
+			Log(payLog, INFO, "%s upuœci³ %d$ na skutek œmierci", GetPlayerLogName(playerid), moneyLost);
+			ChatMe(playerid, "umiera na wskutek odniesionych obra¿eñ ((MemoryKill))");
+			SetPlayerHealth(playerid, 0.0);
+
+			new Float:x, Float:y, Float:z;
+			GetPlayerPos(playerid, x, y, z);
+
+			new wl = moneyLost / 200000;
+			CreateMoneyPickup(x, y, z, GetPlayerInterior(playerid), GetPlayerVirtualWorld(playerid), moneyLost, wl);
+		}
+	}
+	return Y_HOOKS_CONTINUE_RETURN_0;
+}
+
 BW_OnPlayerDeath(playerid, killerid, reason)
 {
 	#pragma unused reason

@@ -4619,6 +4619,8 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
         SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
         SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
     }
+
+	CollectMoneyPickup(playerid, pickupid);
 	return 1;
 }
 
