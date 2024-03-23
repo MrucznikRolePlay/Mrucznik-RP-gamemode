@@ -1026,15 +1026,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	else if (GetVehicleModel(vehicleid) == 525 && !ispassenger) sendTipMessageEx(playerid, COLOR_BROWN, "Wsiad³eœ do holownika, naciœnij CTRL alby podholowaæ wóz.");
     if(!ispassenger && !engine)
 	{
-		if(GetPlayerVehicleID(playerid) >= CAR_End) //do kradziezy
-		{
-			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
-		}
-		else
-		{
-			MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
-		}
-		
+		MSGBOX_Show(playerid, "~k~~CONVERSATION_YES~ - odpala pojazd", MSGBOX_ICON_TYPE_OK);
     }
 	return 1;
 }
