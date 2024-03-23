@@ -233,6 +233,7 @@
 #include "prace\commands\prace_commands.pwn"
 #include "bramy\commands\bramy_commands.pwn"
 #include "animacje\commands\animacje_commands.pwn"
+#include "bw\commands\bw_commands.pwn"
 #include "wypadek\commands\wypadek_commands.pwn"
 #include "convoy\commands\convoy_commands.pwn"
 #include "graffiti\commands\graffiti_commands.pwn"
