@@ -81,7 +81,7 @@ stock PlayerConditionToNews(playerid)
 TalkOnNews(playerid, const text[])
 {
 	new string[256]; 
-	format(string, sizeof(string), "NR %s: %s", GetNick(playerid), text); 
+	format(string, sizeof(string), "Reporter %s: %s", GetNick(playerid), text); 
 	foreach(new i : Player)
 	{
 		if(IsPlayerConnected(i))
