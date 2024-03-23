@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                    kill                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,15 +27,36 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "kill\kill.pwn"
-
+#include "kill_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_kill()
 {
-    command_kill();
+    new command = Command_GetID("kill");
+
+    //aliases
+    Command_AddAlt(command, "smierc");
+    Command_AddAlt(command, "szpital");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:kill(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Przenosi Twoj¹ rann¹ postaæ do szpitala.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_kill_Impl(playerid);
 }

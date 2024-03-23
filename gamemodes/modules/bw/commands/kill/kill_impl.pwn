@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    kill                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,26 +16,22 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 23.03.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "kill\kill.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_kill_Impl(playerid)
 {
-    command_kill();
+    if(PlayerInfo[playerid][pInjury] == 0) {
+        sendTipMessage(playerid, "Twoja postaæ nie jest ranna, nie mo¿esz u¿yæ tej komendy.");
+        return 1;
+    }
+
     
+    return 1;
 }
+
+//end
