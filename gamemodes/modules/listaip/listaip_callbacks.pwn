@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------------[ ip ]--------------------------------------------------//
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                  listaip                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: NikodemBanan
+// Data utworzenia: 20.03.2024
+//Opis:
 /*
+	Wyœwietlanie 5 ostatnich adresów IP, na których gra³ gracz pod danym nickiem.
+*/
 
- */
+//
 
+#include <YSI\y_hooks>
 
-// Notatki skryptera:
-/*
+//-----------------<[ Callbacki: ]>-----------------
 
- */
-
-YCMD:ip(playerid, params[], help)
+hook OnGameModeInit()
 {
-    new string[128];
-    new giveplayer[MAX_PLAYER_NAME];
-
-    if (PlayerInfo[playerid][pAdmin] >= 1)
-    {
-        new giveplayerid;
-        if( sscanf(params, "k<fix>", giveplayerid))
-        {
-            sendTipMessage(playerid, "U¿yj /ip [playerid]");
-            sendTipMessage(playerid, "FUNKCJA: Pokazuje IP wybranego gracza.");
-            return 1;
-        }
-        if(IsPlayerConnected(giveplayerid))
-        {
-            new ip[32];
-            GetPlayerIp(giveplayerid,ip,32);
-            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-            format(string, sizeof(string), "-| %s IP: %s |-", giveplayer,ip);
-            SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            Log(adminLog, INFO, "Admin %s u¿y³ /ip na graczu %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
-        } else
-        {
-            format(string, sizeof(string), "Nie znaleziono gracza o nicku/id %s", params);
-            sendErrorMessage(playerid, string);
-        }
-    } else
-    {
-        noAccessMessage(playerid);
-    }
-    return 1;
+	HashMap_Init(ip_5_hashmap, ip_5_list, E_IP5_HASH_DATA);
+	IP5AddTestFakeAddresses();
+	return Y_HOOKS_CONTINUE_RETURN_1;
 }
+
+hook OnPlayerConnect(playerid)
+{
+	new ip[32];
+	GetPlayerIp(playerid, ip, sizeof(ip));
+
+	new idx = HashMap_Get(ip_5_hashmap, GetNick(playerid));
+	if(idx != -1)
+	{
+		new numberOfIPs = ip_5_list[idx][IP_LIST_NUMBER_OF_IP];
+		for(new i = 0; i < numberOfIPs; i++)
+		{
+			if(strcmp(ip, ip_5_list[idx][IP_LIST_IP5][i][0]) == 0)
+			{
+				return Y_HOOKS_CONTINUE_RETURN_1;
+			}
+		}
+	}
+
+	IP5AddIPToList(GetNick(playerid), ip);
+
+	return Y_HOOKS_CONTINUE_RETURN_1;
+}
+
+//end
