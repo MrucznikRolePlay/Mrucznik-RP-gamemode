@@ -4312,19 +4312,6 @@ public OnPlayerEnterCheckpoint(playerid)
 	        okregi[playerid] ++;
 	    }
 	}
-	else
-	{
-		switch (gPlayerCheckpointStatus[playerid])
-		{
-			case CHECKPOINT_HOME:
-		    {
-				PlayerPlaySound(playerid, 1058, 0.0, 0.0, 0.0);
-				DisablePlayerCheckpoint(playerid);
-				gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
-				GameTextForPlayer(playerid, "~w~Tu jest twoj~n~~y~Dom", 5000, 1);
-		    }
-		}
-	}
 	return 1;
 }
 

@@ -28,19 +28,18 @@
 //-----------------<[ Callbacki: ]>-------------------
 BW_OnPlayerDeath(playerid, killerid, reason)
 {
+	#pragma unused reason
 	new string[MAX_MESSAGE_LENGTH];
-	if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
-	{
-		DisablePlayerCheckpoint(playerid);
-		gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
-	}
+
+	// koniec wywiadu
 	if(TalkingLive[playerid] != INVALID_PLAYER_ID)
 	{
-		SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca przerwa³ wywiad.");
+		SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca zosta³ ciê¿ko ranny i przewieziony do szpitala!");
 		new talker = TalkingLive[playerid];
 		TalkingLive[playerid] = INVALID_PLAYER_ID;
 		TalkingLive[talker] = INVALID_PLAYER_ID;
 	}
+
 	//koniec rozmowy telefonicznej
 	if(Mobile[playerid] != INVALID_PLAYER_ID)
 	{
