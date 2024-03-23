@@ -84,39 +84,4 @@ stock IP5ShowIPListStr(playerid, playerNick[])
 	}
 }
 
-stock IP5AddTestFakeAddresses()
-{
-	new fakeNick[] = "AAAAAAAAAA";
-	new ipString[32];
-
-	for(new i = 0; i < IP_5_LIST_SIZE; i++)
-	{
-		format(ipString, sizeof(ipString), "%d.%d.%d.%d", random(256), random(256), random(256), random(256));
-		IP5AddIPToList(fakeNick, ipString);
-
-		fakeNick[0]++;
-
-		new fakeNickIdx = 0;
-		while(true)
-		{
-			if(fakeNickIdx == sizeof(fakeNick))
-			{
-				i = IP_5_LIST_SIZE;
-				break;
-			}
-
-			if(fakeNick[fakeNickIdx] == 'Z')
-			{
-				fakeNick[fakeNickIdx] = 'A';
-				fakeNick[fakeNickIdx + 1]++;
-				fakeNickIdx++;
-			}
-			else
-			{
-				break;
-			}
-		}
-	}
-}
-
 //end

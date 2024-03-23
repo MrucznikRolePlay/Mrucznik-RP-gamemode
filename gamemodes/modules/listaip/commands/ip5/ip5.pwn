@@ -74,23 +74,5 @@ YCMD:ip5(playerid, params[], help)
     return command_ip5_Impl(playerid, giveplayer, offline);
 }
 
-YCMD:ip5addfake(playerid, params[], help)
-{
-    if(isnull(params))
-    {
-        sendTipMessage(playerid, "U¿yj /ip5addfake [Nick/ID]");
-        return 1;
-    }
-
-    new ipString[32];
-    new string[128];
-    format(ipString, sizeof(ipString), "%d.%d.%d.%d", random(256), random(256), random(256), random(256));
-    IP5AddIPToList(params, ipString);
-    format(string, sizeof(string), "Dodano adres %s pod nick %s.", ipString, params);
-    SendClientMessage(playerid, COLOR_LIGHTRED, string);
-
-    return 1;
-}
-
 /*
 */

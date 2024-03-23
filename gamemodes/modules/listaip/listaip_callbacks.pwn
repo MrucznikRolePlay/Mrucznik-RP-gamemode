@@ -32,7 +32,6 @@
 hook OnGameModeInit()
 {
 	HashMap_Init(ip_5_hashmap, ip_5_list, E_IP5_HASH_DATA);
-	IP5AddTestFakeAddresses();
 	return Y_HOOKS_CONTINUE_RETURN_1;
 }
 
