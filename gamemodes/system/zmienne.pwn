@@ -756,7 +756,6 @@ new poscig[MAX_PLAYERS];
 new PoziomPoszukiwania[MAX_PLAYERS];
 new OnDuty[MAX_PLAYERS];
 new OnDutyCD[MAX_PLAYERS];
-new gPlayerCheckpointStatus[MAX_PLAYERS];
 new gPlayerLogged[MAX_PLAYERS];
 new gPlayerLogTries[MAX_PLAYERS];
 new gPlayerSpawned[MAX_PLAYERS];

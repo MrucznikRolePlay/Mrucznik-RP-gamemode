@@ -4042,47 +4042,7 @@ Lotto(number)
 			
 	}
 }
-/*========[STARA NIE U¯YWANA FUNKCJA]========
-SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
-{
-	foreach(new i : Player)
-	{
-		SetPlayerCheckpoint(i,allx,ally,allz, radi);
-		if (num != 255)
-		{
-			gPlayerCheckpointStatus[i] = num;
-		}
-	}
 
-}
-
-SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
-{
-	foreach(new i : Player)
-	{
-		if(gTeam[i] == 2)
-		{
-			SetPlayerCheckpoint(i,allx,ally,allz, radi);
-		}
-	}
-	return 1;
-}
-LockCar(carid)
-{
-	foreach(new i : Player)
-	{
-		SetVehicleParamsForPlayer(carid,i,0,1);
-	}
-}
-
-UnLockCar(carid)
-{
-	foreach(new i : Player)
-	{
-		SetVehicleParamsForPlayer(carid,i,0,0);
-	}
-}
-*/
 SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {
 	if(IsPlayerConnected(playerid))

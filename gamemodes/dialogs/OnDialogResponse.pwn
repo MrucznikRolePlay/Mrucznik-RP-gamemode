@@ -17046,6 +17046,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		return 1;
 	}
+	else if(BW_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
 	return 0;
 }
 //ondialogresponse koniec

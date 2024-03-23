@@ -30,12 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "kill\kill.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_kill();
     
 }
