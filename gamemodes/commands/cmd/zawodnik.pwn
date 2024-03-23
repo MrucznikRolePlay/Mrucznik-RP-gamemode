@@ -59,8 +59,8 @@ YCMD:zawodnik(playerid, params[], help)
 						format(string, sizeof(string), "   Gracz %s jest teraz zawodnikiem ¿u¿lowym.", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						zawodnik[para1] = 1;
-						format(string, sizeof(string), "Mamy nowego zawodnika ¿u¿lowego - %s !!.", giveplayer);
-						ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
+						format(string, sizeof(string), "Mamy nowego zawodnika ¿u¿lowego - %s!!.", giveplayer);
+						ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 					}
 					else
 					{
@@ -72,7 +72,7 @@ YCMD:zawodnik(playerid, params[], help)
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						zawodnik[para1] = 0;
 						format(string, sizeof(string), "Zawodnik ¿u¿lowy %s odpad³ podczas wyœcigu.", giveplayer);
-						ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
+						ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 					}
 				}
 			}

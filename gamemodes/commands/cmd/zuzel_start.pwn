@@ -38,8 +38,8 @@ YCMD:zuzel_start(playerid, params[], help)
 		    {
 		    	StartZuzling();
 		    	wyscigz = 1;
-				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, "Wyœcig ¿u¿lowy rozpoczêty!");
-				SetTimerEx("TablicaWynikow",30000,0,"d",playerid);
+				ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, "Wyœcig ¿u¿lowy rozpoczêty!");
+				
 				SendClientMessage(playerid, COLOR_GRAD2, "Zuzel start");
 			}
 			else
