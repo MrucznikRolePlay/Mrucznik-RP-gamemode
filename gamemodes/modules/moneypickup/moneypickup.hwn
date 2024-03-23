@@ -24,7 +24,8 @@
 //------------------<[ Enumy: ]>--------------------
 enum eMoneyPickup {
     MONEY_PICKUP_CASH,
-    MONEY_PICKUP_WANTED_LEVEL
+    MONEY_PICKUP_WANTED_LEVEL,
+    MONEY_PICKUP_BLOCKED_PLAYER
 }
 //-----------------<[ Zmienne: ]>-------------------
 new Map:MoneyPickupsMap;

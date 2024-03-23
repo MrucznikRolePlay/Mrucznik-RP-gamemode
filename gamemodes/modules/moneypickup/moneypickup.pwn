@@ -27,15 +27,16 @@
 
 //-----------------<[ Funkcje: ]>-------------------
 
-CreateMoneyPickup(Float:x, Float:y, Float:z, int, vw, money, wantedLevel)
+CreateMoneyPickup(Float:x, Float:y, Float:z, int, vw, money, wantedLevel, blockedPlayer = -1)
 {
 	new pickupID = CreateDynamicPickup(1212, 19, x, y, z, vw, int);
 
 	new moneyPickupData[eMoneyPickup];
 	moneyPickupData[MONEY_PICKUP_CASH] = money;
 	moneyPickupData[MONEY_PICKUP_WANTED_LEVEL] = wantedLevel;
+	moneyPickupData[MONEY_PICKUP_BLOCKED_PLAYER] = blockedPlayer;
 	MAP_insert_val_arr(MoneyPickupsMap, pickupID, moneyPickupData, sizeof(moneyPickupData));
-	return 1;
+	return;
 }
 
 CollectMoneyPickup(playerid, pickupID)
@@ -49,6 +50,11 @@ CollectMoneyPickup(playerid, pickupID)
 	MAP_get_val_arr(MoneyPickupsMap, pickupID, moneyPickupData);
 	DestroyDynamicPickup(pickupID);
 	MAP_remove_val(MoneyPickupsMap, pickupID);
+
+	if(moneyPickupData[MONEY_PICKUP_BLOCKED_PLAYER] == PlayerInfo[playerid][pUID])
+	{
+		return;
+	}
 
 	new money =  moneyPickupData[MONEY_PICKUP_CASH];
 	DajKase(playerid, money);

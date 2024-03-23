@@ -43,7 +43,9 @@ BW_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GetPlayerPos(playerid, x, y, z);
 
 			new wl = moneyLost / 200000;
-			CreateMoneyPickup(x, y, z, GetPlayerInterior(playerid), GetPlayerVirtualWorld(playerid), moneyLost, wl);
+			new int =  GetPlayerInterior(playerid);
+			new vw = GetPlayerVirtualWorld(playerid);
+			CreateMoneyPickup(x, y, z, int, vw, moneyLost, wl, PlayerInfo[playerid][pUID]);
 		}
 	}
 	return Y_HOOKS_CONTINUE_RETURN_0;
