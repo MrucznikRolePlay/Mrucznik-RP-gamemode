@@ -1288,8 +1288,6 @@ public OnPlayerDisconnect(playerid, reason)
 	OfferPrice[playerid] = 0;
 	LawyerOffer[playerid] = 0;
 	ClearVariableDisconnect(playerid); 
-	//caluj
-	kissPlayerOffer[playerid] = 0;
 	//komunikaty frakcyjne
 	komunikatMinutyZerowanie[playerid]=0;
 

@@ -16128,42 +16128,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 	
 	}
-	else if(dialogid == 1092)//Ca³uj - komenda - potwierdzenie
-	{
-		if(response)
-		{
-			if(ProxDetectorS(5.5, playerid, kissPlayerOffer[playerid]))
-			{
-				new string[128];
-				format(string, sizeof(string),"* %s kocha %s wiêc ca³uj¹ siê.", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				format(string, sizeof(string), "%s mówi: Kocham ciê.", GetNick(kissPlayerOffer[playerid]));
-				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-				format(string, sizeof(string), "%s mówi: Ja ciebie te¿.", GetNick(playerid));
-				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-				ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
-				ApplyAnimation(kissPlayerOffer[playerid], "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
-				
-				//zerowanie zmiennych:
-				kissPlayerOffer[playerid] = 0;
-			}
-			else
-			{
-				sendTipMessage(playerid, "Mi³oœæ Ci uciek³a!"); 
-				return 1;
-			}
-		}
-		if(!response)
-		{
-			
-			new string[128];
-			format(string, sizeof(string), "* %s spojrza³(a) na %s i stwierdzi³(a), ¿e nie chce siê ca³owaæ!", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
-			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		
-			return 1;
-		}
-	
-	}
     else if(dialogid == 7079)
 	{
 		if(response)

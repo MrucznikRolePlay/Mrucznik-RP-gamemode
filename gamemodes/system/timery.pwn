@@ -3534,4 +3534,28 @@ public DamagedHP(playerid)
 	return 1;
 }
 
+forward KissRejectTimer(kissingid, kissedid);
+public KissRejectTimer(kissingid, kissedid)
+{
+	new string[128];
+
+	if(kissPlayerOffer[kissedid] == kissingid)
+	{
+		if (ProxDetectorS(10.0, kissedid, kissingid))
+		{
+			format(string, sizeof(string), "* %s spojrza³(a) na %s i stwierdzi³(a), ¿e nie chce siê ca³owaæ!", GetNick(kissedid), GetNick(kissingid));
+			ProxDetector(20.0, kissedid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+		else
+		{
+			format(string, sizeof(string), "* mimo prób %s, nie mog³o dojœæ do poca³unku miêdzy nim/ni¹ a %s, poniewa¿ s¹ od siebie za daleko!", GetNick(kissingid), GetNick(kissedid));
+			ProxDetector(20.0, kissingid, string, COLOR_DO,COLOR_DO,COLOR_DO,COLOR_DO,COLOR_DO);
+		}
+
+		kissPlayerOffer[kissedid] = INVALID_PLAYER_ID;
+	}
+
+	return 1;
+}
+
 //EOF
