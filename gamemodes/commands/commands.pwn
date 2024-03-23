@@ -386,7 +386,7 @@
 #include "cmd/say.pwn"
 #include "cmd/sb.pwn"
 #include "cmd/sban.pwn"
-#include "cmd/sblok.pwn"
+#include "cmd/sblock.pwn"
 #include "cmd/scena.pwn"
 #include "cmd/scenaallow.pwn"
 #include "cmd/scenadisallow.pwn"
