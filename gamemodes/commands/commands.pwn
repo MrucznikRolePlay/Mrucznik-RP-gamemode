@@ -640,6 +640,7 @@
 #include "cmd/inwigilacja.pwn"
 #include "cmd/togro.pwn"
 #include "cmd/paralizator.pwn"
+#include "cmd/sprawdzczasgry.pwn"
 InitCommands()
 {
 	Aliases();
@@ -1486,6 +1487,9 @@ static Aliases()
 	//paralizator
 	Command_AddAltNamed("paralizator", "taser");
 	Command_AddAltNamed("paralizator", "tazer");
+
+	//sprawdzczasgry
+	Command_AddAltNamed("sprawdzczasgry", "getplaytime");
 
 	foreach (new command : Command())
 	{
