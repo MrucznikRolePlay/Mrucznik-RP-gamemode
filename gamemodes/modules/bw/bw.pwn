@@ -26,6 +26,265 @@
 //
 
 //-----------------<[ Callbacki: ]>-------------------
+BW_OnPlayerDeath(playerid, killerid, reason)
+{
+	new string[MAX_MESSAGE_LENGTH];
+	if (gPlayerCheckpointStatus[playerid] > 4 && gPlayerCheckpointStatus[playerid] < 11)
+	{
+		DisablePlayerCheckpoint(playerid);
+		gPlayerCheckpointStatus[playerid] = CHECKPOINT_NONE;
+	}
+	if(TalkingLive[playerid] != INVALID_PLAYER_ID)
+	{
+		SendPlayerMessageToAll(COLOR_NEWS, "NEWS: Wywiad zakoñczony - nasz rozmówca przerwa³ wywiad.");
+		new talker = TalkingLive[playerid];
+		TalkingLive[playerid] = INVALID_PLAYER_ID;
+		TalkingLive[talker] = INVALID_PLAYER_ID;
+	}
+	//koniec rozmowy telefonicznej
+	if(Mobile[playerid] != INVALID_PLAYER_ID)
+	{
+		SendClientMessage(playerid, COLOR_YELLOW, "Jesteœ ranny - po³¹czenie zakoñczone.");
+		if(Mobile[playerid] >= 0)
+		{
+			SendClientMessage(Mobile[playerid], COLOR_YELLOW, "S³ychaæ nag³y trzask i po³¹czenie zostaje zakoñczone.");
+		}
+		StopACall(playerid);
+	}
+
+	if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
+	{
+		format(string, sizeof(string), "Wyœcig: {FFFFFF}%s zgin¹³ jak prawdziwy œcigant [*]", GetNickEx(playerid));
+		WyscigMessage(COLOR_YELLOW, string);
+		IloscZawodnikow --;
+		if(IloscZawodnikow <= Ukonczyl)
+		{
+			KoniecWyscigu(-1);
+		}
+	}
+	if(lowcaz[playerid] == killerid)
+	{
+		lowcaz[playerid] = 501;
+		SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta³o anulowane - nie mo¿esz wzi¹æ teraz zlecenia na tego samego gracza!");
+	}
+	if(GetPVarInt(playerid, "ZjadlDragi") == 1)
+	{
+		new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
+		SetPVarInt(playerid, "ZjadlDragi", 0);
+		sendTipMessage(playerid, "Z powodu œmierci twój boost (dragów) zosta³ wy³¹czony, za¿yj kolejn¹ dawkê!"); 
+		KillTimer(TimerEfektNarkotyku[playerid]);
+		SetStrong(playerid, FirstValue);
+	}
+
+	if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem trafi do szpitala
+	{
+		Worek_MamWorek[playerid] = 0;
+		Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
+		Worek_Uzyty[Worek_KtoZalozyl[playerid]] = 0;
+		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
+		UnHave_Worek(playerid);
+	}
+	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
+	{
+		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
+		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
+		UnHave_Worek(Worek_KomuZalozylem[playerid]);
+		Worek_Uzyty[playerid] = 0;
+		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
+	}
+
+	if(IsPlayerConnected(killerid))
+	{
+		PlayerInfo[killerid][pKills] ++;
+		if(giveWL)
+		{
+			if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
+			{
+				NadajWLBW(killerid, playerid, true);
+			}
+		}
+		if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
+		{
+			if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+			{
+				if(GoChase[killerid] == playerid)
+				{
+					//jeœli zabity mia³ kajdanki
+					if(isPlayerCuffed[playerid])
+					{
+						format(string, sizeof(string), "* Wiêzieñ %s zosta³ zastrzelony przez Hitmana (MK). Nastêpnym razem zadbaj o bezpieczeñstwo swojego wiêŸnia *", GetNick(playerid));
+						SendClientMessage(whoIsCuffing[playerid], COLOR_LIGHTRED, string);
+						UncuffPlayer(playerid);
+					}
+
+					SetPVarInt(playerid, "bw-hitmankiller",  1);
+					SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
+					return NadajBW(playerid, BW_TIME_CRIMINAL);
+				}
+			}
+		}
+		if(PoziomPoszukiwania[playerid] >= 1)
+		{
+			new reward = PoziomPoszukiwania[playerid] * 5000;
+			new count, i = killerid;
+			if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
+			{
+				PoziomPoszukiwania[playerid] = 0;
+			}
+			else if(PlayerInfo[killerid][pJob] == 1)
+			{
+				if(lowcaz[i] == playerid)
+				{
+					if(PlayerInfo[i][pDetSkill] <= 50)
+					{
+						if(PoziomPoszukiwania[playerid] == 2 || PoziomPoszukiwania[playerid] == 10)
+						{
+							count = 11;
+							lowcaz[i] = 501;
+						}
+					}
+					else if(PlayerInfo[i][pDetSkill] >= 51 && PlayerInfo[i][pDetSkill] < 100)
+					{
+						if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 3 || PoziomPoszukiwania[playerid] == 10)
+						{
+							count = 22;
+							lowcaz[i] = 501;
+						}
+					}
+					else if(PlayerInfo[i][pDetSkill] >= 101 && PlayerInfo[i][pDetSkill] < 200)
+					{
+						if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 4 || PoziomPoszukiwania[playerid] == 10)
+						{
+							count = 33;
+							lowcaz[i] = 501;
+						}
+					}
+					else if(PlayerInfo[i][pDetSkill] >= 201 && PlayerInfo[i][pDetSkill] < 400)
+					{
+						if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 5 || PoziomPoszukiwania[playerid] == 10)
+						{
+							count = 44;
+							lowcaz[i] = 501;
+						}
+					}
+					else if(PlayerInfo[i][pDetSkill] >= 400)
+					{
+						if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 7 || PoziomPoszukiwania[playerid] == 10)
+						{
+							count = 55;
+							lowcaz[i] = 501;
+						}
+					}
+
+					format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", reward);
+					GameTextForPlayer(i, string, 5000, 1);
+					PoziomPoszukiwania[i] = 0;
+					ClearCrime(i);
+					DajKase(i, reward);//moneycheat
+					PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
+					PlayerInfo[i][pDetSkill] += 2;
+					SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+				}
+			}
+			if(poscig[playerid] == 1)
+			{
+				if(PoziomPoszukiwania[playerid] >= 6)
+				{
+					count = 2;
+				}
+				else
+				{
+					count = 1;
+				}
+			}
+			if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55 || count == 2)
+			{
+				if(!(IsAPolicja(playerid) && OnDuty[playerid] == 1))
+				{
+					new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
+					ZabierzKase(playerid, CenaZabicia);//moneycheat
+					PlayerInfo[playerid][pWantedDeaths] += 1;
+					PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
+					PoziomPoszukiwania[playerid] = 0;
+					SetPlayerWantedLevel(playerid, 0);
+					poscig[playerid] = 0;
+					UsunBron(playerid);
+					if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55)
+					{
+						PlayerInfo[playerid][pJailed] = 1;
+						format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
+						SendClientMessage(playerid, COLOR_LIGHTRED, string);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
+						WantLawyer[playerid] = 1;
+					}
+					else if(count == 2)
+					{
+						PlayerInfo[playerid][pJailed] = 2;
+						format(string, sizeof(string), "* Jesteœ w DeMorgan na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
+						SendClientMessage(playerid, COLOR_LIGHTRED, string);
+						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
+					}
+					return 1; //zrespawnuj gracza w wiêzieniu
+				}
+			}
+		}
+		if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
+		if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPolicja(killerid) && OnDuty[killerid] == 1)) return NadajBW(playerid);
+	}
+	return 1;
+}
+
+BW_OnPlayerInjured(playerid, killerid, reason)
+{
+	new string[MAX_MESSAGE_LENGTH];
+	if(PlayerInfo[playerid][pBW] > 0)
+	{
+		return NadajBW(playerid, PlayerInfo[playerid][pBW], false);
+	}
+	else
+	{
+		//kajdanki
+		if(isPlayerUsingCuffs[playerid]) //gdy skuwaj¹cy dostanie rannego
+		{
+			UncuffPlayerCuffedBy(playerid);
+		}
+
+		if(IsPlayerConnected(killerid))
+		{
+			if(giveWL)
+			{
+				if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid )
+				{
+					NadajWLBW(killerid, playerid, false);
+				}
+			}
+
+			if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
+			{
+				if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
+				{
+					if(GoChase[killerid] == playerid)
+					{
+						format(string, sizeof(string), "* Dobij %s, ¿eby wype³niæ kontrakt *", GetNick(playerid));
+						SendClientMessage(killerid, COLOR_LIGHTRED, string);
+					}
+				}
+			}
+
+			SetPVarInt(playerid, "bw-reason", reason);
+			if(PlayerInfo[killerid][pLevel] >= 3 || IsAPrzestepca(killerid) || (IsAPolicja(killerid) && OnDuty[killerid] == 1))
+			{
+				return NadajRanny(playerid, 0, true);
+			}
+			else
+			{
+				return NadajRanny(playerid, INJURY_TIME_EXCEPTION, true);
+			}
+		}
+	}
+	return 1;
+}
+
 //-----------------<[ Funkcje: ]>-------------------
 stock IsPlayerAimingEx(playerid)
 {
