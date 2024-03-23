@@ -2390,7 +2390,7 @@ public JednaSekundaTimer()
 						{// dla pojazdów frakcji porz¹dkowych 50% nale¿noœci idzie z sejfu
 							new player_frac = GetPlayerFraction(i);
 							new price_half = floatround(0.5 * float(cena_naprawy));
-							if(Sejf_Frakcji[player_frac] >= price_half)
+							if(Sejf_Frakcji[player_frac] >= price_half && kaska[i] >= price_half)
 							{
 								Sejf_Add(player_frac, -price_half);
 								cena_naprawy = price_half;
@@ -3236,16 +3236,16 @@ public Fillup()
 		if(Refueling[i] == 1)
 		{
 			new FillUpPrice = FillUp * 120;
+			new discount = false;
 
+			new player_frac = GetPlayerFraction(i);
+			new price_half = floatround(0.5 * float(FillUpPrice));
 			if(IsAPorzadkowy(i) && IsPlayerInTheirFractionVehicle(i))
 			{// dla pojazdów frakcji porz¹dkowych 50% nale¿noœci idzie z sejfu
-				new player_frac = GetPlayerFraction(i);
-				new price_half = floatround(0.5 * float(FillUpPrice));
 				if(Sejf_Frakcji[player_frac] >= price_half)
 				{
-					Sejf_Add(player_frac, -price_half);
 					FillUpPrice = price_half;
-					SendClientMessage(i, COLOR_LIGHTBLUE,"Po³owa kosztów tankowania zosta³a op³acona ze œrodków frakcji.");
+					discount = true;
 				}
 			}
 
@@ -3255,6 +3255,12 @@ public Fillup()
 				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUpPrice);
 				SendClientMessage(i, COLOR_LIGHTBLUE,string);
 				ZabierzKase(i, FillUpPrice);
+
+				if(discount)
+				{
+					Sejf_Add(player_frac, -price_half);
+					SendClientMessage(i, COLOR_LIGHTBLUE,"Po³owa kosztów tankowania zosta³a op³acona ze œrodków frakcji.");
+				}
 			}
 			else
 			{
