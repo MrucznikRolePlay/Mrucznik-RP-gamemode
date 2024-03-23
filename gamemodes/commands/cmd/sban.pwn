@@ -58,10 +58,12 @@ YCMD:sban(playerid, params[], help)
 						return 1;
 					}
 					
-					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ cichego bana, powód: %s", 
+					format(string, sizeof(string), "Admin %s ukara³ %s kar¹ cichego bana, powód: %s", 
 						GetPlayerLogName(playerid),
 						GetPlayerLogName(giveplayerid),
 						result);
+					Log(punishmentLog, INFO, string);
+					SendAdminMessage(COLOR_PANICRED, string);
 				    MruMySQL_Banuj(giveplayerid, result, playerid);
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
