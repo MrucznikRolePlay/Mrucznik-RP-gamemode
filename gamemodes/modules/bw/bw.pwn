@@ -40,7 +40,7 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		TalkingLive[talker] = INVALID_PLAYER_ID;
 	}
 
-	//koniec rozmowy telefonicznej
+	// koniec rozmowy telefonicznej
 	if(Mobile[playerid] != INVALID_PLAYER_ID)
 	{
 		SendClientMessage(playerid, COLOR_YELLOW, "Jesteœ ranny - po³¹czenie zakoñczone.");
@@ -51,6 +51,7 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		StopACall(playerid);
 	}
 
+	// œmieræ podczas wyœcigu
 	if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0)
 	{
 		format(string, sizeof(string), "Wyœcig: {FFFFFF}%s zgin¹³ jak prawdziwy œcigant [*]", GetNickEx(playerid));
@@ -61,11 +62,15 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 			KoniecWyscigu(-1);
 		}
 	}
+
+	// gracz obroni³ siê przed ³owc¹ nagród
 	if(lowcaz[playerid] == killerid)
 	{
 		lowcaz[playerid] = 501;
 		SendClientMessage(playerid, COLOR_YELLOW, "Zlecenie zosta³o anulowane - nie mo¿esz wzi¹æ teraz zlecenia na tego samego gracza!");
 	}
+
+	// boost narkotykowy
 	if(GetPVarInt(playerid, "ZjadlDragi") == 1)
 	{
 		new FirstValue = GetPVarInt(playerid, "FirstValueStrong");
@@ -75,7 +80,8 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		SetStrong(playerid, FirstValue);
 	}
 
-	if(Worek_MamWorek[playerid] != 0) // gdy osoba z workiem trafi do szpitala
+	// gdy osoba z workiem trafi do szpitala
+	if(Worek_MamWorek[playerid] != 0) 
 	{
 		Worek_MamWorek[playerid] = 0;
 		Worek_KomuZalozylem[Worek_KtoZalozyl[playerid]] = INVALID_PLAYER_ID;
@@ -83,7 +89,9 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		Worek_KtoZalozyl[playerid] = INVALID_PLAYER_ID;
 		UnHave_Worek(playerid);
 	}
-	else if(Worek_Uzyty[playerid] != 0) // gdy osoba nadajaca worek trafi do szpitala
+	
+	// gdy osoba nadajaca worek trafi do szpitala
+	if(Worek_Uzyty[playerid] != 0)
 	{
 		Worek_MamWorek[Worek_KomuZalozylem[playerid]] = 0;
 		Worek_KtoZalozyl[Worek_KomuZalozylem[playerid]] = INVALID_PLAYER_ID;
@@ -102,7 +110,9 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 				NadajWLBW(killerid, playerid, true);
 			}
 		}
-		if(PlayerInfo[playerid][pHeadValue] > 0) //hitmani musz¹ dobiæ, ¿eby zaliczy³o kontrakt
+
+		// œmieræ z kontraktem
+		if(PlayerInfo[playerid][pHeadValue] > 0)
 		{
 			if(PlayerInfo[killerid][pMember] == 8 || PlayerInfo[killerid][pLider] == 8)
 			{
@@ -122,113 +132,78 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 				}
 			}
 		}
+
+		// zeruj WL dla frakcji porz¹dkowych
+		if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
+		{
+			PoziomPoszukiwania[playerid] = 0;
+		}
+
+		// œmieræ przestêpcy
 		if(PoziomPoszukiwania[playerid] >= 1)
 		{
 			new reward = PoziomPoszukiwania[playerid] * 5000;
-			new count, i = killerid;
-			if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
-			{
-				PoziomPoszukiwania[playerid] = 0;
-			}
-			else if(PlayerInfo[killerid][pJob] == 1)
-			{
-				if(lowcaz[i] == playerid)
-				{
-					if(PlayerInfo[i][pDetSkill] <= 50)
-					{
-						if(PoziomPoszukiwania[playerid] == 2 || PoziomPoszukiwania[playerid] == 10)
-						{
-							count = 11;
-							lowcaz[i] = 501;
-						}
-					}
-					else if(PlayerInfo[i][pDetSkill] >= 51 && PlayerInfo[i][pDetSkill] < 100)
-					{
-						if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 3 || PoziomPoszukiwania[playerid] == 10)
-						{
-							count = 22;
-							lowcaz[i] = 501;
-						}
-					}
-					else if(PlayerInfo[i][pDetSkill] >= 101 && PlayerInfo[i][pDetSkill] < 200)
-					{
-						if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 4 || PoziomPoszukiwania[playerid] == 10)
-						{
-							count = 33;
-							lowcaz[i] = 501;
-						}
-					}
-					else if(PlayerInfo[i][pDetSkill] >= 201 && PlayerInfo[i][pDetSkill] < 400)
-					{
-						if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 5 || PoziomPoszukiwania[playerid] == 10)
-						{
-							count = 44;
-							lowcaz[i] = 501;
-						}
-					}
-					else if(PlayerInfo[i][pDetSkill] >= 400)
-					{
-						if(PoziomPoszukiwania[playerid] >= 2 || PoziomPoszukiwania[playerid] <= 7 || PoziomPoszukiwania[playerid] == 10)
-						{
-							count = 55;
-							lowcaz[i] = 501;
-						}
-					}
 
+			// œmieræ z r¹k ³owcy nagród
+			if(PlayerInfo[killerid][pJob] == 1)
+			{
+				if(lowcaz[killerid] == playerid)
+				{
+					lowcaz[killerid] = 501;
 					format(string, sizeof(string), "~w~Zlecenie na przestepce~r~Wykonane~n~Nagroda~g~$%d", reward);
-					GameTextForPlayer(i, string, 5000, 1);
-					PoziomPoszukiwania[i] = 0;
-					ClearCrime(i);
-					DajKase(i, reward);//moneycheat
-					PlayerPlaySound(i, 1058, 0.0, 0.0, 0.0);
-					PlayerInfo[i][pDetSkill] += 2;
-					SendClientMessage(i, COLOR_GRAD2, "Skill + 2");
+					GameTextForPlayer(killerid, string, 5000, 1);
+					PoziomPoszukiwania[killerid] = 0;
+					ClearCrime(killerid);
+					DajKase(killerid, reward);
+					PlayerPlaySound(killerid, 1058, 0.0, 0.0, 0.0);
+					PlayerInfo[killerid][pDetSkill] += 2;
+					SendClientMessage(killerid, COLOR_GRAD2, "Skill + 2");
 				}
 			}
-			if(poscig[playerid] == 1)
+
+
+			// typ celi w jakim przestêpca bêdzie siedzieæ
+			new jailType, jailName[16];
+			if(PoziomPoszukiwania[playerid] < 6)
 			{
-				if(PoziomPoszukiwania[playerid] >= 6)
-				{
-					count = 2;
-				}
-				else
-				{
-					count = 1;
-				}
+				jailType = 1; // zwyk³a cela
+				WantLawyer[playerid] = 1;
+				strcat(jailName, "wiêzieniu");
 			}
-			if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55 || count == 2)
+			else
 			{
-				if(!(IsAPolicja(playerid) && OnDuty[playerid] == 1))
-				{
-					new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
-					ZabierzKase(playerid, CenaZabicia);//moneycheat
-					PlayerInfo[playerid][pWantedDeaths] += 1;
-					PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-					PoziomPoszukiwania[playerid] = 0;
-					SetPlayerWantedLevel(playerid, 0);
-					poscig[playerid] = 0;
-					UsunBron(playerid);
-					if(count == 1 || count == 11 || count == 22 || count == 33 || count == 44 || count == 55)
-					{
-						PlayerInfo[playerid][pJailed] = 1;
-						format(string, sizeof(string), "* Jesteœ w wiêzieniu na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", PlayerInfo[playerid][pJailTime], CenaZabicia);
-						SendClientMessage(playerid, COLOR_LIGHTRED, string);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
-						WantLawyer[playerid] = 1;
-					}
-					else if(count == 2)
-					{
-						PlayerInfo[playerid][pJailed] = 2;
-						format(string, sizeof(string), "* Jesteœ w DeMorgan na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji", PlayerInfo[playerid][pJailTime], CenaZabicia);
-						SendClientMessage(playerid, COLOR_LIGHTRED, string);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
-					}
-					return 1; //zrespawnuj gracza w wiêzieniu
-				}
+				jailType = 2; // demorgan
+				strcat(jailName, "DeMorgan");
 			}
+
+			// co siê dzieje z przestêpc¹ po œmierci
+			new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
+			ZabierzKase(playerid, CenaZabicia);//moneycheat
+			PlayerInfo[playerid][pWantedDeaths] += 1;
+			PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
+			PoziomPoszukiwania[playerid] = 0;
+			SetPlayerWantedLevel(playerid, 0);
+			poscig[playerid] = 0;
+			UsunBron(playerid);
+
+			PlayerInfo[playerid][pJailed] = jailType;
+			format(string, sizeof(string), "* Jesteœ w %s na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", jailName, PlayerInfo[playerid][pJailTime], CenaZabicia);
+			SendClientMessage(playerid, COLOR_LIGHTRED, string);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
+			return 1; //zrespawnuj gracza w wiêzieniu
 		}
-		if(IsAPrzestepca(killerid)) return NadajBW(playerid, BW_TIME_CRIMINAL);
-		if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPolicja(killerid) && OnDuty[killerid] == 1)) return NadajBW(playerid);
+
+		// œmieræ z r¹k przestêpcy
+		if(IsAPrzestepca(killerid)) 
+		{
+			return NadajBW(playerid, BW_TIME_CRIMINAL);
+		}
+
+		// œmieræ z r¹k gracza
+		if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPolicja(killerid) && OnDuty[killerid] == 1)) 
+		{
+			return NadajBW(playerid);
+		}
 	}
 	return 1;
 }
