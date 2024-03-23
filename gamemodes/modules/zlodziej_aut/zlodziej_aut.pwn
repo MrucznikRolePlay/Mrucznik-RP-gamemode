@@ -139,7 +139,7 @@ ReloadCarForStealing(veh_id)
 	DestroyVehicle(veh_id);
 	if(veh_id >= 166) // Faggio dla z³odziejów aut w dziuplach - zawsze ma byæ okreœlony model
 	{
-		AddCar(veh_id - 1, 462, 3, 3);
+		AddCar(veh_id - 1, 462, 3, 3, 180);
 	}
 	else
 	{
