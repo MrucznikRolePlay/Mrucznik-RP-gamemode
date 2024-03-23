@@ -43,6 +43,7 @@ YCMD:windalock(playerid, params[], help)
 		}
 
 		if(IsPlayerInRangeOfPoint(playerid,5,288.0914,-1609.7465,17.9994)//parking SAN News
+		|| IsPlayerInRangeOfPoint(playerid,3,287.7476,-1609.9395,33.0723)//wejscie glowne san news
         || IsPlayerInRangeOfPoint(playerid,3,292.0818,-1610.0715,124.7512)//recepcja Winda
         || IsPlayerInRangeOfPoint(playerid,3,296.9033,-1598.3610,117.0619)/* Studia */
         || IsPlayerInRangeOfPoint(playerid,3,295.1328,-1609.4705,115.6818)/*Akademia */
@@ -57,11 +58,6 @@ YCMD:windalock(playerid, params[], help)
 			if(level > 7 || level < 0)
 			{
 				sendErrorMessage(playerid, "Poziom od 0 do 7");
-				return 1;
-			}
-			if(level == 5 && PlayerInfo[playerid][pLider] != FRAC_SN)
-			{
-				sendErrorMessage(playerid, "Nie masz wystarczaj¹cych uprawnieñ aby otwieraæ to piêtro!"); 
 				return 1;
 			}
 			if(levelLock[FRAC_SN][level] == 1)
