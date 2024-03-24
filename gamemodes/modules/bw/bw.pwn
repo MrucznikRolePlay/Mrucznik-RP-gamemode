@@ -33,19 +33,7 @@ BW_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response) 
 		{
-    		new moneyLost = floatround(kaska[playerid] * 0.02, floatround_ceil);
-			ZabierzKase(playerid, moneyLost);
-			Log(payLog, INFO, "%s upuœci³ %d$ na skutek œmierci", GetPlayerLogName(playerid), moneyLost);
-			ChatMe(playerid, "umiera na wskutek odniesionych obra¿eñ ((MemoryKill))");
-			SetPlayerHealth(playerid, 0.0);
-
-			new Float:x, Float:y, Float:z;
-			GetPlayerPos(playerid, x, y, z);
-
-			new wl = moneyLost / 200000;
-			new int =  GetPlayerInterior(playerid);
-			new vw = GetPlayerVirtualWorld(playerid);
-			CreateMoneyPickup(x, y, z, int, vw, moneyLost, wl, PlayerInfo[playerid][pUID]);
+			command_kill_accept(playerid);
 		}
 	}
 	return Y_HOOKS_CONTINUE_RETURN_0;
@@ -125,8 +113,19 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		Worek_KomuZalozylem[playerid] = INVALID_PLAYER_ID;
 	}
 
+	if(GetPVarInt(playerid, "kill-bw") == 1)
+	{
+		DeletePVar(playerid, "kill-bw");
+		if(!IsPlayerConnected(killerid))
+		{
+			killerid = GetPVarInt(playerid, "bw-killerid");
+		}
+		return NadajBW(playerid, BW_TIME_KILL);
+	}
+
 	if(IsPlayerConnected(killerid))
 	{
+		SetPVarInt(playerid, "bw-killerid",  killerid);
 		PlayerInfo[killerid][pKills] ++;
 
 		// daj wanted level mordercy
@@ -154,7 +153,6 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 					}
 
 					SetPVarInt(playerid, "bw-hitmankiller",  1);
-					SetPVarInt(playerid, "bw-hitmankillerid",  killerid);
 					return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
 			}
@@ -190,40 +188,9 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 			}
 
 			// jeœli gracz otrzyma³ obrazenia od porz¹dkowych - wsadŸ do paki
-			new damagedTimestamp = GetPVarInt(playerid, "damaged_by_cop");
-			new threshold = 600;
-			new now = gettime();
-			new bool:damagedByCop = now - damagedTimestamp >= threshold;
-			if(damagedByCop || killedByBountyHunter)
+			if(IsPlayerDamagedByCop(playerid) || killedByBountyHunter)
 			{
-				// typ celi w jakim przestêpca bêdzie siedzieæ
-				new jailType, jailName[16];
-				if(PoziomPoszukiwania[playerid] < 6)
-				{
-					jailType = 1; // zwyk³a cela
-					WantLawyer[playerid] = 1;
-					strcat(jailName, "wiêzieniu");
-				}
-				else
-				{
-					jailType = 2; // demorgan
-					strcat(jailName, "DeMorgan");
-				}
-
-				// co siê dzieje z przestêpc¹ po œmierci
-				new CenaZabicia = (4000)*(PoziomPoszukiwania[playerid]);
-				ZabierzKase(playerid, CenaZabicia);//moneycheat
-				PlayerInfo[playerid][pWantedDeaths] += 1;
-				PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
-				PoziomPoszukiwania[playerid] = 0;
-				SetPlayerWantedLevel(playerid, 0);
-				poscig[playerid] = 0;
-				UsunBron(playerid);
-
-				PlayerInfo[playerid][pJailed] = jailType;
-				format(string, sizeof(string), "* Jesteœ w %s na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", jailName, PlayerInfo[playerid][pJailTime], CenaZabicia);
-				SendClientMessage(playerid, COLOR_LIGHTRED, string);
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
+				PutDeadPlayerInJail(playerid);
 				return 1; //zrespawnuj gracza w wiêzieniu
 			}
 		}
@@ -238,6 +205,15 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		if(PlayerInfo[killerid][pLevel] >= 3 || (IsAPolicja(killerid) && OnDuty[killerid] == 1)) 
 		{
 			return NadajBW(playerid);
+		}
+	}
+	else // œmieræ z niczyjej rêki
+	{
+		// jeœli gracz otrzyma³ obrazenia od porz¹dkowych - wsadŸ do paki
+		if(PoziomPoszukiwania[playerid] >= 1 && IsPlayerDamagedByCop(playerid))
+		{
+			PutDeadPlayerInJail(playerid);
+			return 1; //zrespawnuj gracza w wiêzieniu
 		}
 	}
 	return 1;
@@ -291,6 +267,39 @@ BW_OnPlayerInjured(playerid, killerid, reason)
 	return 1;
 }
 
+PutDeadPlayerInJail(playerid)
+{
+	new string[MAX_MESSAGE_LENGTH];
+	// typ celi w jakim przestêpca bêdzie siedzieæ
+	new jailType, jailName[16];
+	if(PoziomPoszukiwania[playerid] < 6)
+	{
+		jailType = 1; // zwyk³a cela
+		WantLawyer[playerid] = 1;
+		strcat(jailName, "wiêzieniu");
+	}
+	else
+	{
+		jailType = 2; // demorgan
+		strcat(jailName, "DeMorgan");
+	}
+
+	// co siê dzieje z przestêpc¹ po œmierci
+	new jailFine = (4000)*(PoziomPoszukiwania[playerid]);
+	ZabierzKase(playerid, jailFine);//moneycheat
+	PlayerInfo[playerid][pWantedDeaths] += 1;
+	PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(400);
+	PoziomPoszukiwania[playerid] = 0;
+	SetPlayerWantedLevel(playerid, 0);
+	poscig[playerid] = 0;
+	UsunBron(playerid);
+
+	PlayerInfo[playerid][pJailed] = jailType;
+	format(string, sizeof(string), "* Jesteœ w %s na %d Sekund i straci³eœ $%d gdy¿ ucieka³eœ lub strzela³eœ do funkcjonariusza policji.", jailName, PlayerInfo[playerid][pJailTime], jailFine);
+	SendClientMessage(playerid, COLOR_LIGHTRED, string);
+	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Je¿eli nie chcesz aby taka sytuacja powtórzy³a siê w przysz³oœci, skorzystaj z us³ug prawnika który zbije twój WL.");
+}
+
 //-----------------<[ Funkcje: ]>-------------------
 stock IsPlayerAimingEx(playerid)
 {
@@ -298,6 +307,15 @@ stock IsPlayerAimingEx(playerid)
     if (((anim >= 1160) && (anim <= 1163)) || (anim == 1167) || (anim == 1365) ||
     (anim == 1643) || (anim == 1453) || (anim == 220)) return 1;
     return 0;
+}
+
+stock IsPlayerDamagedByCop(playerid)
+{
+	new damagedTimestamp = GetPVarInt(playerid, "damaged_by_cop");
+	new threshold = 600;
+	new now = gettime();
+	new damagedByCop = now - damagedTimestamp >= threshold;
+	return damagedByCop;
 }
 
 InfoMedicsInjury(injureplayer, bool:injury, bool:bw)
@@ -375,7 +393,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	new string[144];
 	if(GetPVarInt(playerid, "bw-hitmankiller") == 1)
 	{
-		new killerid = GetPVarInt(playerid, "bw-hitmankillerid");
+		new killerid = GetPVarInt(playerid, "bw-killerid");
 		if(IsPlayerConnected(killerid))
 		{
 			DajKase(killerid, PlayerInfo[playerid][pHeadValue]);
@@ -389,7 +407,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 			GetChased[playerid] = 999;
 			GoChase[killerid] = 999;
 			DeletePVar(playerid, "bw-hitmankiller");
-			DeletePVar(playerid, "bw-hitmankillerid");
+			DeletePVar(playerid, "bw-killerid");
 			customtime = BW_TIME_CRIMINAL;
 
 			new redisKey[40];
