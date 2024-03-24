@@ -57,11 +57,12 @@ YCMD:sblock(playerid, params[], help)
 		                sendErrorMessage(playerid, "Nie mozesz zablokowaæ Admina !");
 		                return 1;
 		            }
-					format(string, sizeof(string), "Admin %s ukara³ %s kar¹ cichego blocka, powód: %s", 
+	                Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ cichego blocka, powód: %s", 
 						GetPlayerLogName(playerid),
 						GetPlayerLogName(giveplayerid),
 						result);
-	                Log(punishmentLog, INFO, string);
+					format(string, sizeof(string), "Admin %s ukara³ %s kar¹ cichego blocka, powód: %s", 
+						GetNick(playerid), GetNick(giveplayerid), result);
 					SendAdminMessage(COLOR_PANICRED, string);
 		            PlayerInfo[giveplayerid][pBlock] = 1;
 					SendClientMessage(giveplayerid, COLOR_NEWS, "Twoje konto zosta³o zablokowane. Jeœli block jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i napiœ proœbê o UN BLOCK");
