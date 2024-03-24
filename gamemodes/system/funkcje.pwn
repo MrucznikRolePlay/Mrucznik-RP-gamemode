@@ -12707,7 +12707,7 @@ public TimeUpdater()
     new hour, minute;
 	getdate(year, month, day);
 	gettime(hour, minute);
-    format(realtime_string, 32, "%04d/%02d/%02d %02d:%02d", year, month, day, hour, minute);
+    format(realtime_string, 32, "%04d/%02d/%02d_%02d:%02d", year, month, day, hour, minute);
     TextDrawSetString(RealtimeTXD, realtime_string);
 }
 
