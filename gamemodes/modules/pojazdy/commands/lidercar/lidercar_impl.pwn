@@ -37,22 +37,39 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
         return 1;
     }
 
+    new bool:opcjaParkuj = strcmp(akcja, "parkuj", true) == 0;
+    new bool:opcjaPrzemaluj = strcmp(akcja, "przemaluj", true) == 0;
+    new bool:opcjaRanga = strcmp(akcja, "ranga", true) == 0;
+    new bool:opcjaPrzejmij = strcmp(akcja, "przejmij", true) == 0;
+    new bool:checkFractionOwnership = opcjaParkuj || opcjaPrzemaluj || opcjaRanga;
+    new bool:checkPlayerOwnership = opcjaPrzejmij;
+
     new vehicleID = GetPlayerVehicleID(playerid);
     new vehicleUID = VehicleUID[vehicleID][vUID];
-	if(!IsPlayerOwnFractionCar(playerid, vehicleID))
+	if(checkFractionOwnership && !IsPlayerOwnFractionCar(playerid, vehicleID))
 	{
         sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Twojej organizacji!");
         return 1;
     }
+
+    if(checkPlayerOwnership && !IsCarOwner(playerid, vehicleID))
+    {
+        sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Ciebie!");
+        return 1;
+    }
+
     if(strcmp(akcja, "", true) != 0)
         Log(serverLog, INFO, "Lider %s u¿y³ /lidercar, akcja: %s", GetNick(playerid), akcja);
+
     // choose command action
-	if(strcmp(akcja, "parkuj", true) == 0) {
+	if(opcjaParkuj) {
         command_lidercar_parkuj(playerid);
-    } else if(strcmp(akcja, "przemaluj", true) == 0) {
+    } else if(opcjaPrzemaluj) {
         command_lidercar_przemaluj(playerid, vehicleID, opcje);
-    } else if(strcmp(akcja, "ranga", true) == 0) {
+    } else if(opcjaRanga) {
         command_lidercar_ranga(playerid, vehicleUID, opcje);
+    } else if(opcjaPrzejmij) {
+        command_lidercar_przejmij(playerid, vehicleUID);
     } else {
         sendErrorMessage(playerid, "Niepoprawna opcja!");
         StaryCzas[playerid] -= 200;
@@ -111,6 +128,31 @@ command_lidercar_ranga(playerid, vehicleUID, opcje[256])
     // send message
     new string[128];
     format(string, sizeof(string), "Od teraz tylko osoby z %d rang¹ bêd¹ mog³y u¿ywaæ tego pojazdu.", rank);
+    SendClientMessage(playerid, COLOR_PINK, string);
+    return 1;
+}
+
+command_lidercar_przejmij(playerid, vehicleUID)
+{
+    if(!orgIsLeader(playerid))
+    {
+        CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FAMILY;
+        CarData[vehicleUID][c_Owner] = gPlayerOrg[playerid];
+    }
+    else if(PlayerInfo[playerid][pLider] == 0)
+    {
+        CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FRACTION;
+        CarData[vehicleUID][c_Owner] = PlayerInfo[playerid][pLider];
+    }
+    else
+    {
+        return 1;
+    }
+    Car_Save(vehicleUID, CAR_SAVE_OWNER);
+
+    // send message
+    new string[128];
+    format(string, sizeof(string), "Od teraz Twoja frakcja jest w³aœcicielem tego pojazdu.");
     SendClientMessage(playerid, COLOR_PINK, string);
     return 1;
 }
