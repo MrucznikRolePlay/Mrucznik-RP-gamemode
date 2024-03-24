@@ -36,6 +36,6 @@
 #define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki
 #define HOSPITALIZATION_COST 2000 //ile $$ zabiera� od gracza po odczekaniu BW za hospitalizacje
 
-#define DIALOG_ID_KILL 55800
+#define DIALOG_ID_KILL 5888
 
 //end
