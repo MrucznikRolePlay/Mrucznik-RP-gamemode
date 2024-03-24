@@ -50,16 +50,16 @@ CollectMoneyPickup(playerid, pickupID)
 		return;
 	}
 
+	if(moneyPickupData[MONEY_PICKUP_BLOCKED_PLAYER] == PlayerInfo[playerid][pUID])
+	{
+		return;
+	}
+
 	new moneyPickupData[eMoneyPickup];
 	MAP_get_val_arr(MoneyPickupsMap, pickupID, moneyPickupData);
 	DestroyDynamicPickup(pickupID);
 	DestroyDynamic3DTextLabel(moneyPickupData[MONEY_PICKUP_3D_TEXT]);
 	MAP_remove_val(MoneyPickupsMap, pickupID);
-
-	if(moneyPickupData[MONEY_PICKUP_BLOCKED_PLAYER] == PlayerInfo[playerid][pUID])
-	{
-		return;
-	}
 
 	new money =  moneyPickupData[MONEY_PICKUP_CASH];
 	DajKase(playerid, money);
