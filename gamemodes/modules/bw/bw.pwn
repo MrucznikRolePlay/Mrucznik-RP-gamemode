@@ -119,8 +119,8 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		{
 			killerid = GetPVarInt(playerid, "bw-killerid");
 		}
-		ZespawnujGraczaSzpitalBW(playerid);
 	}
+	ZespawnujGraczaSzpitalBW(playerid);
 
 	if(IsPlayerConnected(killerid))
 	{
