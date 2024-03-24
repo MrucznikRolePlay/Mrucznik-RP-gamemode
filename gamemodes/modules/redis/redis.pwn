@@ -39,4 +39,12 @@ Redis_IncrBy(const key[], value)
 	Redis_Command(RedisClient, string);
 }
 
+// Expires key, default ttl = 1 month.
+Redis_Expire(const key[], ttl=2629800)
+{
+	new string[64];
+	format(string, sizeof(string), "EXPIRE %s %d", key, value);
+	Redis_Command(RedisClient, string);
+}
+
 //end

@@ -2029,8 +2029,13 @@ public CustomPickups()
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 				}
+
 				OrderReady[i] = 0;
-				Redis_IncrBy("player:contracts-done", -1);
+
+				new redisKey[40];
+				format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[i][pUID]);
+				Redis_IncrBy(redisKey, -1);
+				Redis_Expire(redisKey);
 			}
 		}
 
