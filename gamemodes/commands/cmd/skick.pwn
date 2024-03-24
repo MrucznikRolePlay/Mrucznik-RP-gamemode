@@ -60,6 +60,8 @@ YCMD:skick(playerid, params[], help)
 					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ cichego kicka", 
 						GetPlayerLogName(playerid),
 						GetPlayerLogName(giveplayerid));
+					format(string, sizeof(string), "Admin %s ukara³ %s kar¹ cichego kicka", GetNick(playerid), GetNick(giveplayerid));
+					SendAdminMessage(COLOR_PANICRED, string);
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 					AntySpam[playerid] = 1;

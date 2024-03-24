@@ -474,13 +474,6 @@ YCMD:wejdz(playerid, params[], help)
             SetPlayerInterior(playerid, 1);
             return 1;
         }
-        else if(IsPlayerInRangeOfPoint(playerid,5,648.4412, -1357.3232, 13.8579))//recepcja wejscie glowne
-        {
-            SetPlayerPos(playerid,648.9127, -1367.4266, 29.2878);
-            SetPlayerVirtualWorld(playerid,20);
-            TogglePlayerControllable(playerid,0);
-            Wchodzenie(playerid);
-        }
         else if (PlayerToPoint(5.0, playerid,2420.9360,112.8245,29.0433)) //taras PD w PC
         {
             SetPlayerPos(playerid,214.9873,121.0619,999.0156); //Komisariat piwnice

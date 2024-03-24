@@ -543,7 +543,7 @@ YCMD:wyjdz(playerid, params[], help)
                 }
 			}
 		}
-		if(HireCar[playerid] >= 1 && IsPlayerInAnyVehicle(playerid) && PlayerCuffed[playerid] == 0)
+		if(HireCar[playerid] >= 1 && IsPlayerInAnyVehicle(playerid))
 		{
 			TogglePlayerControllable(playerid, 1);
 			RemovePlayerFromVehicleEx(playerid);

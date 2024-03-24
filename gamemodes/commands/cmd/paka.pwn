@@ -83,6 +83,7 @@ YCMD:paka(playerid, params[], help)
                     format(string, sizeof(string), "Uwiêzi³eœ %s, nagroda za przestêpcê: %d. Otrzymujesz $%d", giveplayer, moneys, depo3);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 					ZabierzKase(suspect, moneys);
+					RemovePlayerWeaponsTemporarity(suspect);
                     poscig[suspect] = 0;
 					format(string, sizeof(string), "Aresztowany przez %s ~n~    grzywna $%d", sendername, moneys);
 					GameTextForPlayer(suspect, string, 5000, 5);
@@ -102,14 +103,14 @@ YCMD:paka(playerid, params[], help)
 						format(string, sizeof(string), "<< Funkcjonariusz %s aresztowa³ podejrzanego %s >>", sendername, giveplayer);
 						OOCNews(COLOR_LIGHTRED, string);
 					}
-					Kajdanki_JestemSkuty[suspect] = 0;//Kajdany
-					Kajdanki_Uzyte[suspect] = 0;
-					Kajdanki_PDkuje[playerid] = 0;
-					Kajdanki_Uzyte[playerid] = 0;
+
+					// kajdanki - pomijalna redundancja, by unikn¹æ bugów
+					UncuffPlayer(suspect);
+					UncuffPlayerCuffedBy(playerid);
+					
 					ClearAnimations(suspect);
 					SetPlayerSpecialAction(suspect,SPECIAL_ACTION_NONE);
 					RemovePlayerAttachedObject(suspect, 0);
-					Kajdanki_PDkuje[suspect] = 0;
 									
 					SetPlayerInterior(suspect, 10);
 				    new losuj= random(sizeof(Cela));

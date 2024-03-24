@@ -202,7 +202,6 @@
 #include "cmd/jail.pwn"
 #include "cmd/jump.pwn"
 #include "cmd/k.pwn"
-#include "cmd/kajdanki.pwn"
 #include "cmd/kamera.pwn"
 #include "cmd/kamerau.pwn"
 #include "cmd/kamera_wiezienie.pwn"
@@ -213,8 +212,9 @@
 #include "cmd/kb.pwn"
 #include "cmd/kick.pwn"
 #include "cmd/kickall.pwn"
-#include "cmd/kill.pwn"
+#include "cmd/adminkill.pwn"
 #include "cmd/killall.pwn"
+#include "cmd/kmwyniki.pwn"
 #include "cmd/kod.pwn"
 #include "cmd/kogut.pwn"
 #include "cmd/kolejka.pwn"
@@ -268,7 +268,6 @@
 #include "cmd/malunek.pwn"
 #include "cmd/malunki.pwn"
 #include "cmd/mandacik.pwn"
-#include "cmd/marcepan.pwn"
 #include "cmd/mark.pwn"
 #include "cmd/maska.pwn"
 #include "cmd/materialy.pwn"
@@ -328,7 +327,6 @@
 #include "cmd/plac.pwn"
 #include "cmd/placmedyk.pwn"
 #include "cmd/po.pwn"
-#include "cmd/pobij.pwn"
 #include "cmd/podatek.pwn"
 #include "cmd/poddajesie.pwn"
 #include "cmd/poddajsie.pwn"
@@ -381,7 +379,6 @@
 #include "cmd/roleta.pwn"
 #include "cmd/rooc.pwn"
 #include "cmd/rozbierz.pwn"
-#include "cmd/rozkuj.pwn"
 #include "cmd/rozwiaz.pwn"
 #include "cmd/rozwiedz.pwn"
 #include "cmd/rozwod.pwn"
@@ -390,7 +387,7 @@
 #include "cmd/say.pwn"
 #include "cmd/sb.pwn"
 #include "cmd/sban.pwn"
-#include "cmd/sblok.pwn"
+#include "cmd/sblock.pwn"
 #include "cmd/scena.pwn"
 #include "cmd/scenaallow.pwn"
 #include "cmd/scenadisallow.pwn"
@@ -643,6 +640,7 @@
 #include "cmd/inwigilacja.pwn"
 #include "cmd/togro.pwn"
 #include "cmd/paralizator.pwn"
+#include "cmd/sprawdzczasgry.pwn"
 InitCommands()
 {
 	Aliases();
@@ -1087,10 +1085,6 @@ static Aliases()
 	Command_AddAltNamed("rooc", "radioooc");
 	Command_AddAltNamed("rooc", "ro");
 
-	//rozkuj
-	Command_AddAltNamed("rozkuj", "uncuff");
-	Command_AddAltNamed("rozkuj", "odkuj");
-
 	//rozwiaz
 	Command_AddAltNamed("rozwiaz", "untie");
 	Command_AddAltNamed("rozwiaz", "odwiaz");
@@ -1477,10 +1471,6 @@ static Aliases()
 	//kasa
 	Command_AddAltNamed("kasa", "money");
 
-	//kajdanki
-	Command_AddAltNamed("kajdanki", "cuff");
-	Command_AddAltNamed("kajdanki", "skuj");
-
 	//dajkase
 	Command_AddAltNamed("dajkase", "givemoney");
 
@@ -1497,6 +1487,9 @@ static Aliases()
 	//paralizator
 	Command_AddAltNamed("paralizator", "taser");
 	Command_AddAltNamed("paralizator", "tazer");
+
+	//sprawdzczasgry
+	Command_AddAltNamed("sprawdzczasgry", "getplaytime");
 
 	foreach (new command : Command())
 	{

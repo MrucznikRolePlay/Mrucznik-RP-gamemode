@@ -24,16 +24,19 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 #define INJURY_TIME 182 //czas trybu rannego = 3 min
-#define INJURY_TIME_EXCEPTION 62 //czas trybu rannego dla wyjï¿½tku = 1 min
+#define INJURY_TIME_EXCEPTION 62 //czas trybu rannego dla wyj¹tku = 1 min
 #define INJURY_TIME_DISEASES 62 //czas trybu rannego/bw dla choroby = 60 sec
 #define INJURY_HP 30 //hp nadawane na tryb ranny i bw
 #define BW_TIME 62 //czas jak zostanie dobity = 1 min
-#define BW_TIME_CRIMINAL 62 // czas jak zostanie dobity przez przestï¿½pce / hitmana = 1 min
+#define BW_TIME_CRIMINAL 62 // czas jak zostanie dobity przez przestêpce / hitmana = 1 min
+#define BW_TIME_KILL 242 // czas jak wpisze /kill = 4min
 #define MAX_HOSPITAL_BEDS 10
 #define MAX_HEALTH_PACKS 3 //maksymalna ilosc apteczek posiadanych przez gracza
-#define HEALTH_PACK_PRICE 40000 //cena apteczki (ï¿½ï¿½cznie 50k z prowizjï¿½)
+#define HEALTH_PACK_PRICE 40000 //cena apteczki (³¹cznie 50k z prowizj¹)
 #define HEALTH_PACK_AMOUNTDOCTOR 10000 //prowizja dla lekarza
 #define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki
-#define HOSPITALIZATION_COST 2000 //ile $$ zabieraï¿½ od gracza po odczekaniu BW za hospitalizacje
+#define HOSPITALIZATION_COST 2000 //ile $$ zabieraæ od gracza po odczekaniu BW za hospitalizacje
+
+#define DIALOG_ID_KILL 5888
 
 //end

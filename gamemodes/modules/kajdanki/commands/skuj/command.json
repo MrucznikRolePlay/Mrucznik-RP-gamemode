@@ -1,0 +1,23 @@
+{
+    "name": "skuj",
+    "description": "Zak³adanie kajdanek.",
+    "permissions": [
+        "frakcja_LSPD",
+        "frakcja_FBI",
+        "frakcja_SASP",
+        "frakcja_USSS"
+    ],
+    "author": "NikodemBanan",
+    "aliases": [
+        "cuff",
+        "kajdanki"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "cuffedplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "01.03.2024"
+}

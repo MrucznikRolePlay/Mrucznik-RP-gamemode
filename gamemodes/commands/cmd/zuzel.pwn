@@ -32,7 +32,7 @@ YCMD:zuzel(playerid, params[], help)
 {
     if(GUIExit[playerid] == 0)
     {
-    	ShowPlayerDialogEx(playerid, 1234, DIALOG_STYLE_LIST, "Komendy øuølowe", "/zawodnik\t\tAdmin\n/zawodnicy\n/dajkm\t\t\tAdmin\n/wyniki\n/km\t\t\tKomentator\n/zuzel_start\t\tAdmin", "Wyjdü", "");
+    	ShowPlayerDialogEx(playerid, 1234, DIALOG_STYLE_LIST, "Komendy øuølowe", "/zawodnik\t\tAdmin\n/zawodnicy\n/dajkm\t\t\tAdmin\n/wyniki\n/km\t\t\tKomentator\n/kmwyniki\t\t\tKomentator\n/zuzel_start\t\tAdmin", "Wyjdü", "");
 	}
 	return 1;
 }

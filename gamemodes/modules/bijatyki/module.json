@@ -1,0 +1,11 @@
+{
+    "name": "bijatyki",
+    "description": "Uporz¹dkowany system /pobij.",
+    "author": "NikodemBanan",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "01.03.2024"
+}

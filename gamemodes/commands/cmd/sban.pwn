@@ -62,6 +62,9 @@ YCMD:sban(playerid, params[], help)
 						GetPlayerLogName(playerid),
 						GetPlayerLogName(giveplayerid),
 						result);
+					format(string, sizeof(string), "Admin %s ukara³ %s kar¹ cichego bana, powód: %s", 
+						GetNick(playerid), GetNick(giveplayerid), result);
+					SendAdminMessage(COLOR_PANICRED, string);
 				    MruMySQL_Banuj(giveplayerid, result, playerid);
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);

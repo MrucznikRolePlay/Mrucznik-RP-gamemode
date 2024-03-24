@@ -36,7 +36,7 @@ YCMD:zuzel_stop(playerid, params[], help)
 		{
 		    wyscigz = 0;
 		    iloscwygranych = 0;
-			ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, "Wyœcig ¿u¿lowy zakoñczony!");
+			ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, "Wyœcig ¿u¿lowy zakoñczony!");
 		}
 	}
 	return 1;

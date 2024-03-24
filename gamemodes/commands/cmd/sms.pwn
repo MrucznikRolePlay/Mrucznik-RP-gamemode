@@ -43,7 +43,7 @@ YCMD:sms(playerid, params[], help)
 		sendErrorMessage(playerid, "Nie posiadasz telefonu w wiêzieniu!"); 
 		return 1;
 	}
-	if(Kajdanki_JestemSkuty[playerid] == 1)
+	if(isPlayerCuffed[playerid])
 	{
 		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas bycia skutym!");
 		return 1;
