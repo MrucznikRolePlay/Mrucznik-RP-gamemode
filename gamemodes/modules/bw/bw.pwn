@@ -391,6 +391,11 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 			DeletePVar(playerid, "bw-hitmankiller");
 			DeletePVar(playerid, "bw-hitmankillerid");
 			customtime = BW_TIME_CRIMINAL;
+
+			new redisKey[40];
+			format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[killerid][pUID]);
+			Redis_IncrBy(redisKey, 1);
+			Redis_Expire(redisKey);
 		}
 	}
 	new Float:faceangle, interior, vw;

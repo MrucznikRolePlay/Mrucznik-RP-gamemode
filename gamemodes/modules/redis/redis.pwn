@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ sban ]-------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   redis                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,68 +16,35 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
+// Autor: mrucznik
+// Data utworzenia: 24.03.2024
+//Opis:
 /*
-	
+	Baza danych key-value redis
 */
 
+//
 
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:sban(playerid, params[], help)
+//-----------------<[ Funkcje: ]>-------------------
+ConnectToRedis()
 {
-	new string[256];
-
-    if(IsPlayerConnected(playerid))
-    {
-    	new giveplayerid, result[128];
-		if( sscanf(params, "k<fix>s[128]", giveplayerid, result))
-		{
-			sendTipMessage(playerid, "U¿yj /sban [playerid/CzêœæNicku] [reason]");
-			return 1;
-		}
-
-		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 4)
-		{
-		    if(AntySpam[playerid] == 1)
-		    {
-		        sendTipMessageEx(playerid, COLOR_GREY, "Odczekaj 5 sekund");
-		        return 1;
-		    }
-		    if(IsPlayerConnected(giveplayerid))
-		    {
-		        if(giveplayerid != INVALID_PLAYER_ID)
-		        {
-					if(PlayerInfo[giveplayerid][pAdmin] >= 1)
-					{
-						sendTipMessageEx(playerid, COLOR_WHITE, "Nie mozesz zbanowaæ Admina!");
-						return 1;
-					}
-					
-					Log(punishmentLog, INFO, "Admin %s ukara³ %s kar¹ cichego bana, powód: %s", 
-						GetPlayerLogName(playerid),
-						GetPlayerLogName(giveplayerid),
-						result);
-					format(string, sizeof(string), "Admin %s ukara³ %s kar¹ cichego bana, powód: %s", 
-						GetNick(playerid), GetNick(giveplayerid), result);
-					SendAdminMessage(COLOR_PANICRED, string);
-				    MruMySQL_Banuj(giveplayerid, result, playerid);
-					KickEx(giveplayerid);
-					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
-					AntySpam[playerid] = 1;
-					return 1;
-				}
-			}//not connected
-		}
-		else
-		{
-			format(string, sizeof(string), "   Gracz o ID %d nie istnieje.", giveplayerid);
-			sendErrorMessage(playerid, string);
-		}
-	}
-	return 1;
+	RedisClient = Redis_Connect("127.0.0.1", 6379);
+	return;
 }
+
+Redis_IncrBy(const key[], value)
+{
+	new string[128];
+	format(string, sizeof(string), "INCRBY %s %d", key, value);
+	Redis_Command(RedisClient, string);
+}
+
+// Expires key, default ttl = 1 month.
+Redis_Expire(const key[], ttl=2629800)
+{
+	new string[128];
+	format(string, sizeof(string), "EXPIRE %s %d", key, ttl);
+	Redis_Command(RedisClient, string);
+}
+
+//end

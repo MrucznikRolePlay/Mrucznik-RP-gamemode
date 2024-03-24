@@ -66,6 +66,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 #include <requests>
+#include <samp-redis>
 
 //-------<[ Include ]>-------
 #include <a_http>
@@ -286,6 +287,9 @@ public OnGameModeInit()
 	
 	
 	DefaultItems_LicenseCost();
+
+	//-------<[ Redis ]>-------
+	ConnectToRedis();
 
 	//-------<[ commands ]>-------
 	InitCommands();
@@ -6823,13 +6827,26 @@ public OnPlayerText(playerid, text[])
 		        SendClientMessage(playerid, COLOR_GREY, "Zamówi³eœ ju¿ paczki z broni¹, idŸ do swojej bazy aby je odebraæ !");
 		        return 0;
 		    }
+
+			new contractsDone;
+			new redisKey[40];
+			format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[playerid][pUID]);
+			Redis_GetInt(RedisClient, redisKey, contractsDone);
+			if(contractsDone <= 0)
+			{
+		        SendClientMessage(playerid, COLOR_GREY, "Nie wykona³eœ ¿adnego kontraktu! Aby dostaæ paczkê z broni¹, musisz zas³u¿yæ siê dla Hitman Agency i wykonaæ kontrakt.");
+		        return 0;
+			}
+			format(string, sizeof(string), "Mo¿esz zamówiæ jeszcze %d paczek, zanim bêdziesz musia³ wykonaæ kontrakt by zwiêkszyæ swój limit.", contractsDone);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+
 		    tmp = strtok(text, idx);
 		    if ((strcmp("1", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("1")))
 			{
 			    //if(PlayerInfo[playerid][pRank] < 0) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 2499)
+			    if(kaska[playerid] >= 25_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczkê numer 1 ($2500), zostanie dostarczona do drzwi Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczkê numer 1 ($25 000), zostanie dostarczona do drzwi Agencji.");
 			        OrderReady[playerid] = 1;
 			        return 0;
 			    }
@@ -6842,9 +6859,9 @@ public OnPlayerText(playerid, text[])
 		    else if ((strcmp("2", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("2")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 1) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 4999)
+			    if(kaska[playerid] > 40_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczkê numer 2 ($5000), zostanie dostarczona do drzwi Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczkê numer 2 ($40 000), zostanie dostarczona do drzwi Agencji.");
 			        OrderReady[playerid] = 2;
 			        return 0;
 			    }
@@ -6857,9 +6874,9 @@ public OnPlayerText(playerid, text[])
 			else if ((strcmp("3", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("3")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 5999)
+			    if(kaska[playerid] > 60_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 3 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 3 ($60 000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 3;
 			        return 0;
 			    }
@@ -6872,9 +6889,9 @@ public OnPlayerText(playerid, text[])
 			else if ((strcmp("4", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("4")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 2) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 5999)
+			    if(kaska[playerid] > 55_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 4 ($6000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 4 ($55 000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 4;
 			        return 0;
 			    }
@@ -6887,9 +6904,9 @@ public OnPlayerText(playerid, text[])
 			else if ((strcmp("5", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("5")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 7999)
+			    if(kaska[playerid] > 80_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 5 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 5 ($80 000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 5;
 			        return 0;
 			    }
@@ -6902,9 +6919,9 @@ public OnPlayerText(playerid, text[])
 			else if ((strcmp("6", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("6")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 3) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 7999)
+			    if(kaska[playerid] > 75_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 6 ($8000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 6 ($75 000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 6;
 			        return 0;
 			    }
@@ -6917,9 +6934,9 @@ public OnPlayerText(playerid, text[])
 			else if ((strcmp("7", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("7")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 8499)
+			    if(kaska[playerid] > 85_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 7 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 7 ($85 000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 7;
 			        return 0;
 			    }
@@ -6932,9 +6949,9 @@ public OnPlayerText(playerid, text[])
 			else if ((strcmp("8", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("8")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 4) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 8499)
+			    if(kaska[playerid] > 80_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 8 ($8500), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 8 ($80 000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 8;
 			        return 0;
 			    }
@@ -6947,9 +6964,9 @@ public OnPlayerText(playerid, text[])
 			else if ((strcmp("9", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("9")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 9999)
+			    if(kaska[playerid] > 100_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 9 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 9 ($100 000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 9;
 			        return 0;
 			    }
@@ -6962,9 +6979,9 @@ public OnPlayerText(playerid, text[])
 			else if ((strcmp("10", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("10")))
 			{
 			    if(PlayerInfo[playerid][pRank] < 5) { SendClientMessage(playerid, COLOR_GREY, "Masz zbyt nisk¹ rangê aby zamówiæ tê paczke !"); return 0; }
-			    if(kaska[playerid] > 9999)
+			    if(kaska[playerid] > 950_000)
 			    {
-			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 10 ($10000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
+			        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zamówi³eœ paczke numer 10 ($95 000), Zostanie dostarczona do drzwi frontowych bazy Agencji.");
 			        OrderReady[playerid] = 10;
 			        return 0;
 			    }
@@ -6977,16 +6994,16 @@ public OnPlayerText(playerid, text[])
 			else
 			{
 			    SendClientMessage(playerid, COLOR_WHITE, "|__________________ Dostêpne paczki __________________|");
-			    if(PlayerInfo[playerid][pRank] >= 0) { SendClientMessage(playerid, COLOR_GREY, "|(1) ($2500) Ranga 0: Nó¿, Desert Eagle, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 1) { SendClientMessage(playerid, COLOR_GREY, "|(2) ($5000) Ranga 1: Nó¿, Desert Eagle, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(3) ($6000) Ranga 2: Nó¿, Desert Eagle, M4, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(4) ($6000) Ranga 2: Nó¿, Desert Eagle, AK47, MP5, Shotgun, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(5) ($8000) Ranga 3: Nó¿, Desert Eagle, M4, MP5, Shotgun, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(6) ($8000) Ranga 3: Nó¿, Desert Eagle, AK47, MP5, Shotgun, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(7) ($8500) Ranga 4: Nó¿, Desert Eagle, M4, MP5, Spas12, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(8) ($8500) Ranga 4: Nó¿, Desert Eagle, AK47, MP5, Spas12, Snajperka, Pancerz"); }
-			    if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(9) ($10000) Ranga 5-9: Nó¿, Desert Eagle, M4, UZI, Spas12, Snajperka, Pancerz"); }
-                if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(10) ($10000) Ranga 5-9: Nó¿, Desert Eagle, AK47, UZI, Spas12, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 0) { SendClientMessage(playerid, COLOR_GREY, "|(1) ($25 000) Ranga 0: Nó¿, Desert Eagle, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 1) { SendClientMessage(playerid, COLOR_GREY, "|(2) ($40 000) Ranga 1: Nó¿, Desert Eagle, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(3) ($60 000) Ranga 2: Nó¿, Desert Eagle, M4, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 2) { SendClientMessage(playerid, COLOR_GREY, "|(4) ($55 000) Ranga 2: Nó¿, Desert Eagle, AK47, MP5, Shotgun, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(5) ($80 000) Ranga 3: Nó¿, Desert Eagle, M4, MP5, Shotgun, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 3) { SendClientMessage(playerid, COLOR_GREY, "|(6) ($75 000) Ranga 3: Nó¿, Desert Eagle, AK47, MP5, Shotgun, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(7) ($85 000) Ranga 4: Nó¿, Desert Eagle, M4, MP5, Spas12, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 4) { SendClientMessage(playerid, COLOR_GREY, "|(8) ($80 000) Ranga 4: Nó¿, Desert Eagle, AK47, MP5, Spas12, Snajperka, Pancerz"); }
+			    if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(9) ($100 000) Ranga 5-9: Nó¿, Desert Eagle, M4, UZI, Spas12, Snajperka, Pancerz"); }
+                if(PlayerInfo[playerid][pRank] >= 5) { SendClientMessage(playerid, COLOR_GREY, "|(10) ($95 000) Ranga 5-9: Nó¿, Desert Eagle, AK47, UZI, Spas12, Snajperka, Pancerz"); }
 				SendClientMessage(playerid, COLOR_WHITE, "|________________________________________________________|");
 			    return 0;
 			}
