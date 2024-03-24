@@ -56,7 +56,7 @@ command_kill_accept(playerid)
     GetPlayerPos(playerid, x, y, z);
     new int =  GetPlayerInterior(playerid);
     new vw = GetPlayerVirtualWorld(playerid);
-    SetTimerEx("DropDeathMoneyTimer", 5000, false, "ddfffdd", playerid, moneyLost, x, y, z, int, vw);
+    SetTimerEx("DropDeathMoneyTimer", 5000, false, "ddfffdd", playerid, moneyLost, x, y, z - 0.4, int, vw);
 
     SetPVarInt(playerid, "kill-bw", 1);
     SetPlayerHealth(playerid, 0.0);
