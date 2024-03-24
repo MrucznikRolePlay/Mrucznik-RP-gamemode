@@ -6167,6 +6167,7 @@ KupowanieDomu(playerid, dom, platnosc)
 		Dom[dom][hWlasciciel] = GetNickEx(playerid);
 		Dom[dom][hKupiony] = 1;
 		Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
+		Dom[dld][hData_DD] = 0;
 		DestroyDynamicPickup(Dom[dom][hPickup]);
 		if(Dom[dom][hIkonka] != -1) DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1239, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
