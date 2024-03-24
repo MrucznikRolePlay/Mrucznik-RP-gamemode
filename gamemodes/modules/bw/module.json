@@ -2,6 +2,6 @@
     "name": "bw",
     "description": "Zawiera system rannego i BW.",
     "author": "Creative",
-    "commands": false,
+    "commands": true,
     "date": "19.11.2019"
 }

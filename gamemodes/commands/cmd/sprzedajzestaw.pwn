@@ -49,11 +49,11 @@ YCMD:sprzedajzestaw(playerid, params[], help)
 				GetPlayerPos(id, x, y, z);
 				if(!IsPlayerInRangeOfPoint(playerid, 3.0, x, y, z)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz nie jest ko³o ciebie");
 				if(PlayerInfo[id][pFixKit] >= 3) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz posiada maksymaln¹ iloœæ zestawów");
-				format(tmp, sizeof tmp, "Proponujesz %s kupno zestawu za 15000$", GetNick(id));
-				SendClientMessage(playerid, -1, tmp);
-				format(tmp, sizeof tmp, "Mechanik %s proponuje Ci kupno zestawu za 15000$", GetNick(playerid));
+				format(tmp, sizeof tmp, "Zaproponowano %s kupno zestawu za 15000$.", GetNick(id));
+				SendClientMessage(playerid, COLOR_LIGHTBLUE, tmp);
+				format(tmp, sizeof tmp, "Mechanik %s proponuje Ci kupno zestawu za 15000$. Wpisz /akceptuj zestaw, by zaakceptowaæ.", GetNick(playerid));
+				SendClientMessage(id, COLOR_LIGHTBLUE, tmp);
 				SetPVarInt(id, "FixKitOffer", playerid);
-				ShowPlayerDialogEx(id, D_MECH_SPRZEDAZ_FIXKIT, DIALOG_STYLE_MSGBOX, "Mechanik", tmp, "Kup", "Anuluj");
 				SetTimerEx("AntySpamTimer",15000,0,"d",playerid);
        			AntySpam[playerid] = 1;
 			}

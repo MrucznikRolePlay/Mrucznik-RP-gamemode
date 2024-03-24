@@ -65,8 +65,9 @@ YCMD:poddajsie(playerid, params[], help)
 
 							        GetPlayerName(playerid, sendername, sizeof(sendername));
 				        			GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-							        format(string, sizeof(string), "* £owca Nagród %s proponuje ci poddanie siê i trafienie do wiêzienia z kar¹ %d$ i kaucj¹ %d$, aby siê zgodziæ wpisz /poddajesie", sendername, punishment, bail);
+							        format(string, sizeof(string), "* £owca Nagród %s proponuje ci poddanie siê i trafienie do wiêzienia z kar¹ %d$ i kaucj¹ %d$. ", sendername, punishment, bail);
 							        SendClientMessage(playa, COLOR_LIGHTBLUE, string);
+									SendClientMessage(playa, COLOR_LIGHTBLUE, "Aby siê zgodziæ wpisz /poddajesie.");
 							        format(string, sizeof(string), "* Zaproponowa³eœ %s poddanie siê, jeœli zostanie ono akceptowane zarobisz %d$",giveplayer, reward);
 							        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 							        poddaje[playa] = 1;

@@ -39,7 +39,7 @@ YCMD:entercar(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 10 || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 		{
 			PutPlayerInVehicleEx(playerid, testcar, 1);
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");

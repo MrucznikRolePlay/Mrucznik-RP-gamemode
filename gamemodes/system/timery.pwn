@@ -40,6 +40,12 @@ public SprzedajMatsTimer(playerid,giveplayerid)
 	return 1;
 }
 
+forward StopPlayerSound(playerid);
+public StopPlayerSound(playerid)
+{
+	PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
+}
+
 //PizzaJob
 public PizzaJobTimer01(playerid)
 {
@@ -131,10 +137,14 @@ public textVinylT(){
 	}
 	return 1;
 }
+
 forward FreezePlayer(playerid);
 public FreezePlayer(playerid){
 	TogglePlayerControllable(playerid, 1);
-	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+	if(PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0)
+	{
+		ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
+	}
 	return 1;
 }
 
@@ -1888,7 +1898,7 @@ public CustomPickups()
 				    case 1:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 2500);
+						ZabierzKase(i, 25_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
@@ -1899,7 +1909,7 @@ public CustomPickups()
 					case 2:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 5000);
+						ZabierzKase(i, 40_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -1911,7 +1921,7 @@ public CustomPickups()
 					case 3:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 6000);
+						ZabierzKase(i, 60_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -1924,7 +1934,7 @@ public CustomPickups()
 					case 4:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 6000);
+						ZabierzKase(i, 55_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -1937,7 +1947,7 @@ public CustomPickups()
 					case 5:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						ZabierzKase(i, 8000);
+						ZabierzKase(i, 80_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -1951,7 +1961,7 @@ public CustomPickups()
 					case 6:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						ZabierzKase(i, 8000);
+						ZabierzKase(i, 75_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -1965,7 +1975,7 @@ public CustomPickups()
 					case 7:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						ZabierzKase(i, 8500);
+						ZabierzKase(i, 85_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -1979,7 +1989,7 @@ public CustomPickups()
 					case 8:
 					{
 						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						ZabierzKase(i, 8500);
+						ZabierzKase(i, 80_00);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
 						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
@@ -1993,7 +2003,7 @@ public CustomPickups()
 					case 9:
 					{
 						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
-						ZabierzKase(i, 10000);
+						ZabierzKase(i, 100_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
 						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
@@ -2007,7 +2017,7 @@ public CustomPickups()
 					case 10:
 					{
 						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
-						ZabierzKase(i, 10000);
+						ZabierzKase(i, 95_000);
 						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
 						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
 						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
@@ -2019,7 +2029,13 @@ public CustomPickups()
 						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
 					}
 				}
+
 				OrderReady[i] = 0;
+
+				new redisKey[40];
+				format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[i][pUID]);
+				Redis_IncrBy(redisKey, -1);
+				Redis_Expire(redisKey);
 			}
 		}
 
@@ -2155,7 +2171,7 @@ public JednaSekundaTimer()
     //25.06.2014
     new State, Float:pancerzyy,string[128],vehicleid,VehicleModel,
         Float:x, Float:y, Float:z, Float:health, Float:Dis,
-        pZone[MAX_ZONE_NAME], cop, ammo, weaponID, weaponState, taxidriver, Float:vel[3];
+        pZone[MAX_ZONE_NAME], ammo, weaponID, weaponState, taxidriver, Float:vel[3];
 
     new plname[MAX_PLAYER_NAME],level, Float:angle,Lost = 0, trigger = 0,winner[MAX_PLAYER_NAME], loser[MAX_PLAYER_NAME],titel[MAX_PLAYER_NAME];
 
@@ -2183,6 +2199,8 @@ public JednaSekundaTimer()
         GetPlayerPos(i, x, y, z);
 		GetPlayerArmour(i, pancerzyy);
         vehicleid = GetPlayerVehicleID(i);
+
+		JednaSekundaTimer_Kajdanki(i);
 		
 		//dzwonek telefonu
 		if(RingTone[i] > 0 && Mobile[i] >= 0)
@@ -2333,7 +2351,6 @@ public JednaSekundaTimer()
 				SendClientMessage(i, COLOR_GRAD1,"   Wolnoœæ! Odsiedzia³eœ karê, mamy nadzieje ¿e to ciê czegoœ nauczy³o.");
 				format(string, sizeof(string), "~g~Wolnosc!~n~~w~Staraj sie byc lepszym obywatelem");
 				GameTextForPlayer(i, string, 5000, 1);
-				if(gTeam[i] == 4) { gTeam[i] = 3; }
 				ClearCrime(i);
 				SetPlayerToTeamColor(i);
 				StopAudioStreamForPlayer(i);
@@ -2379,7 +2396,7 @@ public JednaSekundaTimer()
 						{// dla pojazdów frakcji porz¹dkowych 50% nale¿noœci idzie z sejfu
 							new player_frac = GetPlayerFraction(i);
 							new price_half = floatround(0.5 * float(cena_naprawy));
-							if(Sejf_Frakcji[player_frac] >= price_half)
+							if(Sejf_Frakcji[player_frac] >= price_half && kaska[i] >= price_half)
 							{
 								Sejf_Add(player_frac, -price_half);
 								cena_naprawy = price_half;
@@ -2396,44 +2413,6 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if(Kajdanki_JestemSkuty[i] == 1)
-		{
-			cop = Kajdanki_PDkuje[i];
-			if(IsPlayerConnected(cop))
-			{
-				if(IsAPolicja(cop) || IsABOR(cop))
-				{
-					if(GetPlayerState(cop) == 1)
-					{
-						if(!ProxDetectorS(3.5, cop, i))
-						{
-							SetPlayerVirtualWorld(i, GetPlayerVirtualWorld(cop));
-							SetPlayerInterior(i, GetPlayerInterior(cop));
-							GetPlayerPos(cop, x, y, z);
-							SetPlayerPos(i, x-0.5, y-0.5, z);
-							SetPlayerSpecialAction(i, SPECIAL_ACTION_CUFFED);
-							TogglePlayerControllable(i, 0);
-							if(PlayerInfo[i][pBW] == 0) SetTimerEx("FreezePlayer", 2000, false, "i", i);
-						}
-					}
-					else
-					{
-						new veh = GetPlayerVehicleID(cop);
-                        new veh_zakuty = GetPlayerVehicleID(i);
-                        if(veh != veh_zakuty) 
-                        {
-                            new seat = GetFreeVehicleSeatForArrestant(veh);
-                            if(seat != -1)
-                            {
-                                PutPlayerInVehicleEx(i, veh, seat);
-                                TogglePlayerControllable(i, 0);
-                            }
-                        }
-					}
-				}
-			}
-		}
-
 
         if(SafeTime[i] > 0)//3minuty na zalogowanie
 		{
@@ -2798,6 +2777,9 @@ public JednaSekundaTimer()
 			}
 			else if(TutTime[i] == 124)
 			{
+				SendClientMessage(i, COLOR_WHITE, "Jeœli chcesz szybko zarobiæ trochê pieniêdzy - podobno wêdkarstwo jest teraz op³acalne...");
+				SendClientMessage(i, COLOR_WHITE, "Udaj siê na molo z ko³em, z³ap parê ryb (/fish) a nastêpnie sprzedaj w 24/7!");
+
 				SetPVarInt(i, "AntyCheatOff", 1);
 
 				TogglePlayerSpectating(i, false);
@@ -3176,35 +3158,18 @@ public JednaSekundaTimer()
 				RobbedTime[i] -= 1;
 			}
 		}
-		if(PlayerCuffed[i] == 1)
+		if(PlayerTied[i])
 		{
-			if(PlayerCuffedTime[i] <= 0)
-			{
-				TogglePlayerControllable(i, 1);
-				PlayerCuffed[i] = 0;
-				PlayerCuffedTime[i] = 0;
-				PlayerTazeTime[i] = 1;
-				PlayerTied[i] = 0;
-				pobity[i] = 0;
-			}
-			else
-			{
-				PlayerCuffedTime[i] -= 1;
-			}
-		}
-		if(PlayerCuffed[i] == 2 || PlayerCuffed[i] == 3 || PlayerTied[i] == 1)
-		{
-			if(PlayerCuffedTime[i] <= 0)
+			if(PlayerTiedTime[i] <= 0)
 			{
                 GetPlayerName(i, winner, sizeof(winner));
 				format(string, sizeof(string), "* %s po wielu próbach poluzowa³ sznur i jest wolny.", winner);
 				ProxDetector(30.0, i, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				GameTextForPlayer(i, "~r~Jestes wolny!", 2500, 3);
-				PlayerCuffed[i] = 0;
-				PlayerCuffedTime[i] = 0;
-				pobity[i] = 0;
+				PlayerTiedTime[i] = 0;
+				isBeatenUp[i] = false;
 				PlayerInfo[i][pMuted] = 0;
-				PlayerTied[i] = 0;
+				PlayerTied[i] = false;
                 PlayerInfo[i][pBW]=0;
                 TogglePlayerControllable(i, 1);
                 SetPVarInt(i, "bw-sync", 0);
@@ -3212,7 +3177,7 @@ public JednaSekundaTimer()
 			}
 			else
 			{
-				PlayerCuffedTime[i] -= 1;
+				PlayerTiedTime[i] -= 1;
 			}
 		}
 
@@ -3277,16 +3242,16 @@ public Fillup()
 		if(Refueling[i] == 1)
 		{
 			new FillUpPrice = FillUp * 120;
+			new discount = false;
 
+			new player_frac = GetPlayerFraction(i);
+			new price_half = floatround(0.5 * float(FillUpPrice));
 			if(IsAPorzadkowy(i) && IsPlayerInTheirFractionVehicle(i))
 			{// dla pojazdów frakcji porz¹dkowych 50% nale¿noœci idzie z sejfu
-				new player_frac = GetPlayerFraction(i);
-				new price_half = floatround(0.5 * float(FillUpPrice));
 				if(Sejf_Frakcji[player_frac] >= price_half)
 				{
-					Sejf_Add(player_frac, -price_half);
 					FillUpPrice = price_half;
-					SendClientMessage(i, COLOR_LIGHTBLUE,"Po³owa kosztów tankowania zosta³a op³acona ze œrodków frakcji.");
+					discount = true;
 				}
 			}
 
@@ -3296,6 +3261,12 @@ public Fillup()
 				format(string,sizeof(string),"Pojazd zatankowany za: $%d.",FillUpPrice);
 				SendClientMessage(i, COLOR_LIGHTBLUE,string);
 				ZabierzKase(i, FillUpPrice);
+
+				if(discount)
+				{
+					Sejf_Add(player_frac, -price_half);
+					SendClientMessage(i, COLOR_LIGHTBLUE,"Po³owa kosztów tankowania zosta³a op³acona ze œrodków frakcji.");
+				}
 			}
 			else
 			{
@@ -3514,7 +3485,7 @@ public SlideRope(playerid)
 
 public SpecEnd(playerid)
 {
-	SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], 299, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
+	SetSpawnInfo(playerid, 0, 299, Unspec[playerid][Coords][0], Unspec[playerid][Coords][1], Unspec[playerid][Coords][2], 10.0, -1, -1, -1, -1, -1, -1);
 	TogglePlayerSpectating(playerid, false);
 	SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
 	return 1;
@@ -3523,6 +3494,30 @@ public SpecEnd(playerid)
 public DamagedHP(playerid)
 {
 	RemovePlayerAttachedObject(playerid, 2);
+	return 1;
+}
+
+forward KissRejectTimer(kissingid, kissedid);
+public KissRejectTimer(kissingid, kissedid)
+{
+	new string[128];
+
+	if(kissPlayerOffer[kissedid] == kissingid)
+	{
+		if (ProxDetectorS(10.0, kissedid, kissingid))
+		{
+			format(string, sizeof(string), "* %s spojrza³(a) na %s i stwierdzi³(a), ¿e nie chce siê ca³owaæ!", GetNick(kissedid), GetNick(kissingid));
+			ProxDetector(20.0, kissedid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+		}
+		else
+		{
+			format(string, sizeof(string), "* mimo prób %s, nie mog³o dojœæ do poca³unku miêdzy nim/ni¹ a %s, poniewa¿ s¹ od siebie za daleko!", GetNick(kissingid), GetNick(kissedid));
+			ProxDetector(20.0, kissingid, string, COLOR_DO,COLOR_DO,COLOR_DO,COLOR_DO,COLOR_DO);
+		}
+
+		kissPlayerOffer[kissedid] = INVALID_PLAYER_ID;
+	}
+
 	return 1;
 }
 

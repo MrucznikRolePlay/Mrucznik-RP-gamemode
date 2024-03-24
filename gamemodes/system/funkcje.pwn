@@ -360,27 +360,7 @@ PDTuneInfernus(vehicleid)
     AttachDynamicObjectToVehicle(hsiu_text2, vehicleid, 1.1013298,0.0907000,-0.150000,0.0000000,0.0000000,88.7496338);
 }
 
-/*GetFreeVehicleSeat(vehicleid)
-{
-	new bool:Seat[4];
-	foreach(new i : Player)
-	{
-		if(IsPlayerInVehicle(i,vehicleid))
-		{
-			if(GetPlayerVehicleSeat(i) == 0) Seat[0] = true;
-			else if(GetPlayerVehicleSeat(i) == 1) Seat[1] = true;
-			else if(GetPlayerVehicleSeat(i) == 2) Seat[2] = true;
-			else if(GetPlayerVehicleSeat(i) == 3) Seat[3] = true;
-		}
-	}
-	if(Seat[0] == false) return 0;
-	else if(Seat[1] == false) return 1;
-	else if(Seat[2] == false) return 2;
-	else if(Seat[3] == false) return 3;
-	else return -1;
-}*/
-
-GetFreeVehicleSeatForArrestant(vehicleid)
+GetFreeVehicleSeat(vehicleid)
 {
 	new bool:Seat[4];
 	foreach(new i : Player)
@@ -589,10 +569,10 @@ GetPlayerFraction(playerid)
 CarOpis_Usun(playerid, vehicleid, message=false)
 {
     if(vehicleid >= MAX_VEHICLES) return 0;
-    if(CarOpis[vehicleid] != Text3D:INVALID_3DTEXT_ID)
+    if(Car3dTextDesc[vehicleid] != Text3D:INVALID_3DTEXT_ID)
     {
-        DestroyDynamic3DTextLabel(Text3D:CarOpis[vehicleid]);
-        CarOpis[vehicleid] = Text3D:INVALID_3DTEXT_ID;
+        DestroyDynamic3DTextLabel(Text3D:Car3dTextDesc[vehicleid]);
+        Car3dTextDesc[vehicleid] = Text3D:INVALID_3DTEXT_ID;
 		
 		if(CarData[VehicleUID[vehicleid][vUID]][c_UID] > 0)
 		{
@@ -879,10 +859,7 @@ public CountDownVehsRespawn()
 			{
 				if(v <= CAR_End)
 				{
-					DestroyVehicle(v);
-					carselect = GetRandomVehicleForStealingModel();
-					AddCar(v - 1);
-					SetVehicleNumberPlate(v, "{1F9F06}M-RP");
+					ReloadCarForStealing(v);
 				}
 				else
 				{
@@ -1028,12 +1005,6 @@ MatsGood[playerid] = 0;
 return 1;
 }
 
-public pobito(playerid){
-pobilem[playerid] = 0;
-PlayerInfo[playerid][pMuted] = 0;
-return 1;
-}
-
 /*forward zabezpieczeniewoz(playerid);
 public zabezpieczeniewoz(playerid)
 {
@@ -1093,57 +1064,6 @@ public togczastimer(playerid)
 		GameTextForPlayer(playerid, string, 5000, 1);
 	}
 	return 1;
-}
-
-public naczasbicie(playerid, playerid_atak){
-	zdazylwpisac[playerid] = 0;
-	TogglePlayerControllable(playerid_atak, 1);
-	ClearAnimations(playerid_atak);
-	SendClientMessage(playerid_atak, COLOR_NEWS, "Wygra³eœ bitwê poniewa¿ broni¹cy za d³ugo wpisywa³ znaki!");
-	KillTimer(GetPVarInt(playerid, "timerBicia"));
-	return 1;
-}
-
-/*public UzyteKajdany(playerid,giveplayerid)
-{
-	if(Kajdanki_PDkuje[playerid] > 0 && PlayerInfo[giveplayerid][pJob] == 1)
-	{
-		//Kajdanki_Uzyte[playerid] = 0;
-		format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", GetNick(playerid), GetNick(giveplayerid));
-		ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
- 		format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", GetNick(playerid));
-		SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-		Kajdanki_JestemSkuty[playerid] = 1;
- 		TogglePlayerControllable(playerid, 0);
-  		Kajdanki_Uzyte[giveplayerid] = 1;
-   		Kajdanki_SkutyGracz[Kajdanki_PDkuje[playerid]] = playerid;
-		ClearAnimations(playerid);
- 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-  		SetPlayerAttachedObject(playerid, 0, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
-	}
-	return 1;
-}*/
-public UzyteKajdany(playerid){
-Kajdanki_Uzyte[playerid] = 0;
-return 1;
-}
-
-OdkujKajdanki(playerid)
-{
-	if(Kajdanki_PDkuje[playerid] != INVALID_PLAYER_ID)
-	{
-		new giveplayerid = Kajdanki_PDkuje[playerid]; //id policjanta
-		Kajdanki_PDkuje[giveplayerid] = INVALID_PLAYER_ID;
-		Kajdanki_Uzyte[giveplayerid] = 0;
-		Kajdanki_SkutyGracz[giveplayerid] = INVALID_PLAYER_ID;
-		Kajdanki_JestemSkuty[giveplayerid] = 0;
-	}
-	Kajdanki_PDkuje[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_Uzyte[playerid] = 0;
-	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_JestemSkuty[playerid] = 0;
-	ClearAnimations(playerid);
-	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 }
 
 public spamujewl(playerid){
@@ -1539,37 +1459,6 @@ return 1;
 public SzukanieAuta(playerid){
 DisablePlayerCheckpoint(playerid);
 return 1;
-}
-
-public TablicaWynikow(playerid)
-{
-	foreach(new i : Player)
-	{
-		if(IsPlayerInRangeOfPoint(i, 500, -1106.9854, -966.4719, 129.1807))
-		{
-			SendClientMessage(i, COLOR_LIGHTGREEN, "Tabela wyników:");
-            foreach(new di : Player)
-			{
-			    if(zawodnik[di] == 1)
-			    {
-			        if(okregi[di] >= 1)
-			        {
-			            new iplayer[MAX_PLAYER_NAME];
-			            new string[256];
-				        GetPlayerName(di, iplayer, sizeof(iplayer));
-				        format(string, sizeof(string), "%s - %d okr¹¿eñ", iplayer, okregi[di]);
-						SendClientMessage(i, COLOR_WHITE, string);
-					}
-			    }
-			}
-		}
-	}
-	if(wyscigz == 1)
-	{
-		SetTimerEx("TablicaWynikow",30000,0,"d",playerid);
-	}
-//}
-//return 1;
 }
 
 //Osobno
@@ -2055,6 +1944,10 @@ Float:GetDistanceBetweenPlayers(p1,p2)
 	{
 		return -1.00;
 	}
+	if(Spectate[p1] != INVALID_PLAYER_ID || Spectate[p2] != INVALID_PLAYER_ID)
+	{
+		return 50000; // admini na spec nie s¹ blisko
+	}
 	GetPlayerPos(p1,x1,y1,z1);
 	GetPlayerPos(p2,x2,y2,z2);
 	return floatsqroot(floatpower(floatabs(floatsub(x2,x1)),2)+floatpower(floatabs(floatsub(y2,y1)),2)+floatpower(floatabs(floatsub(z2,z1)),2));
@@ -2212,27 +2105,6 @@ IsAPolicja(playerid)
 		else if(leader==1 || leader==2 || leader==3)
 		{
 		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsAFakeKonto(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new nick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Gniewomir_Wonsz", false) == 0 || strcmp(nick,"Filemon_Paprotka", false) == 0 || strcmp(nick,"Julia_Wisefield", false) == 0)
-		{
-		    return 1;
-		}
-	
-		new ip[32];
-		GetPlayerIp(playerid,ip,sizeof(ip));
-		if(strcmp(ip,"185.6.30.124", false) == 0)
-		{
-			return 1;
 		}
 	}
 	return 0;
@@ -4149,47 +4021,7 @@ Lotto(number)
 			
 	}
 }
-/*========[STARA NIE U¯YWANA FUNKCJA]========
-SetAllPlayerCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi, num)
-{
-	foreach(new i : Player)
-	{
-		SetPlayerCheckpoint(i,allx,ally,allz, radi);
-		if (num != 255)
-		{
-			gPlayerCheckpointStatus[i] = num;
-		}
-	}
 
-}
-
-SetAllCopCheckpoint(Float:allx, Float:ally, Float:allz, Float:radi)
-{
-	foreach(new i : Player)
-	{
-		if(gTeam[i] == 2)
-		{
-			SetPlayerCheckpoint(i,allx,ally,allz, radi);
-		}
-	}
-	return 1;
-}
-LockCar(carid)
-{
-	foreach(new i : Player)
-	{
-		SetVehicleParamsForPlayer(carid,i,0,1);
-	}
-}
-
-UnLockCar(carid)
-{
-	foreach(new i : Player)
-	{
-		SetVehicleParamsForPlayer(carid,i,0,0);
-	}
-}
-*/
 SetPlayerCriminal(playerid,declare,reason[], bool:sendmessage=true)
 {
 	if(IsPlayerConnected(playerid))
@@ -5092,12 +4924,11 @@ orgInvitePlayer(playerid, orguid)
 	{
 		PlayerInfo[playerid][pUniform] = FAM_SKINS[orguid][0];
 	}
-    PlayerInfo[playerid][pTeam] = 5;
     gPlayerOrgLeader[playerid] = false;
-    gTeam[playerid] = 5;
     new lStr[64];
     format(lStr, 64, "ORG » Zosta³eœ przyjêty do organizacji %s.", OrgInfo[orgid][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
+	MruMySQL_SavePlayerFamily(playerid);
     return 1;
 }
 
@@ -5105,15 +4936,15 @@ orgUnInvitePlayer(playerid)
 {
     new orgid = gPlayerOrg[playerid];
     PlayerInfo[playerid][pOrg] = 0;
+	PlayerInfo[playerid][pRank] = 0;
     PlayerInfo[playerid][pUniform] = 0;
     gPlayerOrg[playerid] = 0xFFFF;
-    PlayerInfo[playerid][pTeam] = 3;
-    gTeam[playerid] = 3;
     new lStr[64];
     if(!orgIsValid(orgid)) return 0;
     format(lStr, 64, "ORG » Zosta³eœ wyproszony z organizacji %s.", OrgInfo[orgid][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
     gPlayerOrgLeader[playerid] = false;
+	MruMySQL_SavePlayerFamily(playerid);
     return 1;
 }
 
@@ -5152,6 +4983,7 @@ orgGivePlayerRank(playerid, callerid, rankid)
     format(lStr, 128, "ORG » Otrzyma³eœ %d rangê (%s) w organizacji %s. Nada³: %s.", rankid, (strlen(FamRang[PlayerInfo[playerid][pOrg]][rankid]) > 1) ? (FamRang[PlayerInfo[playerid][pOrg]][rankid]) : (FamRang[0][rankid]), OrgInfo[orgid][o_Name], (callerid == INVALID_PLAYER_ID) ? ("SYSTEM") : (GetNick(callerid)));
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
     PlayerInfo[playerid][pRank] = rankid;
+	MruMySQL_SetAccInt("Rank", GetNickEx(playerid), rankid);
     return 1;
 }
 
@@ -5562,6 +5394,7 @@ ZaladujDomy()
 				Dom[i][hS_A9] = dini_Int(string, "S_A9");
 				Dom[i][hS_A10] = dini_Int(string, "S_A10");
 				Dom[i][hS_A11] = dini_Int(string, "S_A11");
+				Dom[i][hIkonka] = -1;
 				if(Dom[i][hKupiony] == 0)
 				{
 				    Dom[i][hPickup] = CreateDynamicPickup(1273, 1, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], -1, -1, -1, 125.0);
@@ -5943,7 +5776,8 @@ StworzDom(playerid, interior, oplata)
 		Dom[dld][hS_A10] = 0;
 		Dom[dld][hS_A11] = 0;
 	    Dom[dld][hPickup] = CreateDynamicPickup(1273, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    Dom[dld][hIkonka] = -1;
+	    //Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
 		dini_IntSet("Domy/NRD.ini", "NrDomow", dld);
 		new intcena = IntInfo[Dom[dld][hDomNr]][Cena];
 		new Float:koxX = mnoznik/10;
@@ -6002,9 +5836,9 @@ Dom_ChangeInt(playerid, dld, interior)
 	Dom[dld][hCena] = floatround(cenadomu, floatround_ceil);
 
     DestroyDynamicPickup(Dom[dld][hPickup]);
-	if(Dom[dld][hIkonka] != 0) DestroyDynamicMapIcon(Dom[dld][hIkonka]);
+	if(Dom[dld][hIkonka] != -1) DestroyDynamicMapIcon(Dom[dld][hIkonka]);
     Dom[dld][hPickup] = CreateDynamicPickup(1239, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
-    Dom[dld][hIkonka] = 0;
+    Dom[dld][hIkonka] = -1;
 
 	format(string, sizeof(string), "Zmiana Interioru - OK. || Dom %d || NrDom %d || Interior: %d || Cena %d", dld, Dom[dld][hDomNr], interior, Dom[dld][hCena]);
 	SendClientMessage(playerid, COLOR_NEWS, string);
@@ -6255,7 +6089,8 @@ L_StworzDom(playerid, kategoria, oplata)
 		Dom[dld][hS_A10] = 0;
 		Dom[dld][hS_A11] = 0;
 		Dom[dld][hPickup] = CreateDynamicPickup(1273, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    //Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    Dom[dld][hIkonka] = -1;
 		dini_IntSet("Domy/NRD.ini", "NrDomow", dld);
 		new intcena = IntInfo[Dom[dld][hDomNr]][Cena];
 		new Float:koxX = mnoznik/10;
@@ -6334,9 +6169,9 @@ KupowanieDomu(playerid, dom, platnosc)
 		Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
 		Dom[dld][hData_DD] = 0;
 		DestroyDynamicPickup(Dom[dom][hPickup]);
-		DestroyDynamicMapIcon(Dom[dom][hIkonka]);
+		if(Dom[dom][hIkonka] != -1) DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1239, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dom][hIkonka] = 0;
+	    Dom[dom][hIkonka] = -1;
 	    SetPlayerPos(playerid, Dom[dom][hInt_X], Dom[dom][hInt_Y], Dom[dom][hInt_Z]);
 	    SetPlayerInterior(playerid, Dom[dom][hInterior]);
 	    SetPlayerVirtualWorld(playerid, Dom[dom][hVW]);
@@ -6445,9 +6280,9 @@ ZlomowanieDomu(playerid, dom)
 		Dom[dom][hS_A11] = 0;
 		Dom[dom][hZbrojownia] = 0;
 		DestroyDynamicPickup(Dom[dom][hPickup]);
-		DestroyDynamicMapIcon(Dom[dom][hIkonka]);
+		if(Dom[dom][hIkonka] != -1) DestroyDynamicMapIcon(Dom[dom][hIkonka]);
 	    Dom[dom][hPickup] = CreateDynamicPickup(1273, 1, Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], -1, -1, -1, 125.0);
-	    Dom[dom][hIkonka] = CreateDynamicMapIcon(Dom[dom][hWej_X], Dom[dom][hWej_Y], Dom[dom][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    Dom[dom][hIkonka] = -1;
 		ZapiszDom(dom);
 		//
 		if(playerid != 9999)
@@ -7906,11 +7741,18 @@ SendZGMessage(color, string[])
 }
 
 //-----------------------[koniec chaty]------------------------------
-AddCar(car)
+AddCar(car, model = -1, col1 = -1, col2 = 1, respawnDelay = -1)
 {
-	new randcol = random(126);
-	new randcol2 = 1;
-	new id = AddStaticVehicleEx(RandCars[carselect][0], CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], randcol, randcol2, -1);
+	if(col1 == -1)
+	{
+		col1 = random(126);
+	}
+	if(model == -1)
+	{
+		new randomModelIdx = GetRandomVehicleForStealingModel();
+		model = RandCars[randomModelIdx][0];
+	}
+	new id = AddStaticVehicleEx(model, CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], col1, col2, respawnDelay);
 	return id;
 }
 
@@ -7990,8 +7832,13 @@ PolicjantWStrefie(Float:radi, playerid)
 
 ProxDetectorS(Float:radi, playerid, targetid)
 {
-    if(IsPlayerConnected(playerid)&&IsPlayerConnected(targetid))
+    if(IsPlayerConnected(playerid) && IsPlayerConnected(targetid))
 	{
+		if(Spectate[targetid] != INVALID_PLAYER_ID || Spectate[playerid] != INVALID_PLAYER_ID)
+		{
+			return 0; // admini na spec nie s¹ blisko
+		}
+
 		new Float:posx, Float:posy, Float:posz;
 		new Float:oldposx, Float:oldposy, Float:oldposz;
 		new Float:tempposx, Float:tempposy, Float:tempposz;
@@ -8713,11 +8560,25 @@ SejfR_Add(frakcja, kasa)
     Log(sejfLog, INFO, "SEJF RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, kasa, Sejf_Rodziny[frakcja]);
 }
 
+Sejf_AddMats(frakcja, mats)
+{
+    Frakcja_Mats[frakcja]+=mats;
+    Sejf_Save(frakcja);
+	Log(sejfLog, INFO, "SEJF MATS FRAKCJA [%d] + [%d] - poprzednio [%d]", frakcja, mats, Frakcja_Mats[frakcja]);
+}
+
+SejfR_AddMats(frakcja, mats)
+{
+    Rodzina_Mats[frakcja]+=mats;
+    SejfR_Save(frakcja);
+    Log(sejfLog, INFO, "SEJF MATS RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, mats, Rodzina_Mats[frakcja]);
+}
+
 Sejf_Save(frakcja)
 {
     if(!SafeLoaded) return;
     new query[128];
-    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d WHERE `ID`=%d AND `typ`=1", Sejf_Frakcji[frakcja], frakcja);
+    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d WHERE `ID`=%d AND `typ`=1", Sejf_Frakcji[frakcja], Frakcja_Mats[frakcja], frakcja);
     if(MYSQL_SAVING) mysql_query(query);
 }
 
@@ -8725,20 +8586,24 @@ SejfR_Save(frakcja)
 {
     if(!SafeLoaded) return;
     new query[128];
-    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d WHERE `ID`=%d AND `typ`=2", Sejf_Rodziny[frakcja], frakcja);
+    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d WHERE `ID`=%d AND `typ`=2", Sejf_Rodziny[frakcja], Rodzina_Mats[frakcja], frakcja);
     if(MYSQL_SAVING) mysql_query(query);
+}
+
+SejfR_Show(playerid) {
+	ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ\nWyp³aæ materia³y\nWp³aæ materia³y", "Wybierz", "WyjdŸ");
 }
 
 Sejf_Load()
 {
-    new query[128], id, typ, kasa, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
+    new query[128], id, typ, kasa, mats, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
     mysql_query("SELECT * FROM `mru_sejfy`");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>ddd", id, typ, kasa);
-        if(typ == 1) Sejf_Frakcji[id] = kasa, validF[id] = true;
-        else if(typ == 2) Sejf_Rodziny[id] = kasa, validR[id] = true;
+        sscanf(query, "p<|>dddd", id, typ, kasa, mats);
+        if(typ == 1) Sejf_Frakcji[id] = kasa, Frakcja_Mats[id] = mats, validF[id] = true;
+        else if(typ == 2) Sejf_Rodziny[id] = kasa, Rodzina_Mats[id] = mats, validR[id] = true;
         SafeLoaded = true;
     }
     mysql_free_result();
@@ -8747,7 +8612,7 @@ Sejf_Load()
 
 IsNickCorrect(nick[])
 {
-	if(regex_match(nick, "^[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$") >= 0)
+	if(regex_match(nick, NICK_REGEX) >= 0)
 	{
 		return 1;
 	}
@@ -10929,7 +10794,6 @@ ChangePlayerName(playerid, name[])
 	}
 	PlayerInfo[playerid][pJob] = 0;
 	PlayerInfo[playerid][pRank] = 0;
-	PlayerInfo[playerid][pZG] = 0;
 	PoziomPoszukiwania[playerid] = 0;
 	SetPlayerName(playerid, name);
 	SetRPName(playerid);
@@ -11839,7 +11703,7 @@ public TourCamera(playerid, step)
 
 GetRandomVehicleForStealingModel()
 {
-	new randa = random(53);
+	new randa = true_random(53);
 	new model;
 
 	if(randa == 0)
@@ -11867,10 +11731,16 @@ ZaladujSamochodyDoKradziezy()
 {
     new id;
 
-    for(new i = 0; i < 165; i++)
+    for(new i = 0; i < 183; i++)
 	{
-		carselect = GetRandomVehicleForStealingModel();
-        id = AddCar(i);
+		if(i >= 165) // Faggio dla z³odziejów aut w dziuplach - zawsze ma byæ okreœlony model
+		{
+			id = AddCar(i, 462, 3, 3, 180);
+		}
+		else
+		{
+        	id = AddCar(i);
+		}
     }
 
     CAR_End = id;
@@ -11898,8 +11768,8 @@ Support_Add(caller, sub[], desc[])
     strdel(TICKET[id][suppSub], 0, 16);
     strins(TICKET[id][suppSub], sub, 0, 16);
 
-    strdel(TICKET[id][suppDesc], 0, 32);
-    strins(TICKET[id][suppDesc], desc, 0, 32);
+    strdel(TICKET[id][suppDesc], 0, 86);
+    strins(TICKET[id][suppDesc], desc, 0, 86);
     return id;
 }
 
@@ -11969,7 +11839,7 @@ WeaponAC(playerid)
 {	
 	new weapons[13][2];
  
-	for (new i = 0; i <= 12; i++)
+	for (new i = 1; i <= 12; i++)
 	{
 		GetPlayerWeaponData(playerid, i, weapons[i][0], weapons[i][1]);
 		if(weapons[i][0] != 0 && CheckWeaponAC(playerid, i, weapons[i][0]))
@@ -12717,6 +12587,10 @@ stock IsVehicleUpsideDown(vehicleid)
     );
 }
 
+stock Zaufany(playerid) {
+	return ZaufaniON && PlayerInfo[playerid][pZG] == 10;
+}
+
 public DeathAdminWarning(playerid, killerid, reason)
 {
 	new killername[MAX_PLAYER_NAME];
@@ -12827,48 +12701,14 @@ public DeathAdminWarning(playerid, killerid, reason)
 	return 1;
 }
 
-public CuffedAction(playerid, cuffedid)
-{
-	//if(!IsAPolicja(cuffedid)) ZdejmijBW(cuffedid, 4000);
-	Kajdanki_JestemSkuty[cuffedid] = 1;
-	Kajdanki_Uzyte[playerid] = 1;
-	Kajdanki_PDkuje[cuffedid] = playerid;
-	Kajdanki_SkutyGracz[playerid] = cuffedid;
-	ClearAnimations(cuffedid);
-	SetPlayerSpecialAction(cuffedid, SPECIAL_ACTION_CUFFED);
-	SetPlayerAttachedObject(cuffedid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
-	SetTimerEx("UzyteKajdany",30000,0,"d",cuffedid);
-	SetTimerEx("Kajdanki_debug", 1000, 0, "d", cuffedid);
-	return 1;
-}
-
-/*public UnCuffedAction(cop, cuffedid)
-{
-	new playerid = cop;
-	new string[144];
-	SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-	GameTextForPlayer(cuffedid, "~g~Rozkuty", 2500, 3);
-
-	//czynnosci
-	TogglePlayerControllable(cuffedid, 1);
-	PlayerCuffed[cuffedid] = 0;
-	Kajdanki_JestemSkuty[cuffedid] = 0;
-	Kajdanki_SkutyGracz[playerid] = INVALID_PLAYER_ID;
-	Kajdanki_PDkuje[cuffedid] = INVALID_PLAYER_ID;
-	Kajdanki_Uzyte[playerid] = 0;
-	PlayerInfo[cuffedid][pMuted] = 0;
-	ClearAnimations(cuffedid);
-	SetPlayerSpecialAction(cuffedid,SPECIAL_ACTION_NONE);
-	RemovePlayerAttachedObject(cuffedid, 5);
-	return 1;
-}  to do */
-
 forward TimeUpdater();
 public TimeUpdater()
 {
-    new Hour, Minute;
-	gettime(Hour, Minute);
-    format(realtime_string, 32, "%02d:%02d", Hour, Minute);
+	new year, month, day;
+    new hour, minute;
+	getdate(year, month, day);
+	gettime(hour, minute);
+    format(realtime_string, 32, "%04d/%02d/%02d_%02d:%02d", year, month, day, hour, minute);
     TextDrawSetString(RealtimeTXD, realtime_string);
 }
 

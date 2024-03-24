@@ -37,36 +37,39 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
         return 1;
     }
 
+    new bool:opcjaParkuj = strcmp(akcja, "parkuj", true) == 0;
+    new bool:opcjaPrzemaluj = strcmp(akcja, "przemaluj", true) == 0;
+    new bool:opcjaRanga = strcmp(akcja, "ranga", true) == 0;
+    new bool:opcjaPrzejmij = strcmp(akcja, "przejmij", true) == 0;
+    new bool:checkFractionOwnership = opcjaParkuj || opcjaPrzemaluj || opcjaRanga;
+    new bool:checkPlayerOwnership = opcjaPrzejmij;
+
     new vehicleID = GetPlayerVehicleID(playerid);
     new vehicleUID = VehicleUID[vehicleID][vUID];
-    new lider = PlayerInfo[playerid][pLider];
-    new org = GetPlayerOrg(playerid);
-    new string[512];
-    new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
-        lider == CarData[vehicleUID][c_Owner] && 
-        lider > 0;
-    new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
-        org == CarData[vehicleUID][c_Owner];
-
-    format(string, sizeof(string), "OWNER_FAMILY %d ORGLEADER %d c_Owner veh %d orgOwner %d", CAR_OWNER_FAMILY, orgIsLeader(playerid), CarData[vehicleUID][c_Owner], orgOwner);
-    sendTipMessage(playerid, string);
-    format(string, sizeof(string), "Player Org %d, Player Org %d", gPlayerOrg[playerid], GetPlayerOrg(playerid));
-    sendTipMessage(playerid, string);
-	if(!liderOwner && !orgOwner)
+	if(checkFractionOwnership && !IsPlayerOwnFractionCar(playerid, vehicleID))
 	{
         sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Twojej organizacji!");
         return 1;
     }
 
+    if(checkPlayerOwnership && !IsCarOwner(playerid, vehicleID))
+    {
+        sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Ciebie!");
+        return 1;
+    }
+
+    if(strcmp(akcja, "", true) != 0)
+        Log(serverLog, INFO, "Lider %s u¿y³ /lidercar, akcja: %s", GetNick(playerid), akcja);
+
     // choose command action
-	if(strcmp(akcja, "parkuj", true) == 0) {
+	if(opcjaParkuj) {
         command_lidercar_parkuj(playerid);
-    } else if(strcmp(akcja, "przemaluj", true) == 0) {
+    } else if(opcjaPrzemaluj) {
         command_lidercar_przemaluj(playerid, vehicleID, opcje);
-    } else if(strcmp(akcja, "ranga", true) == 0) {
+    } else if(opcjaRanga) {
         command_lidercar_ranga(playerid, vehicleUID, opcje);
-    } else if(strcmp(akcja, "opis", true) == 0) {
-        command_lidercar_opis(playerid, vehicleID, vehicleUID, opcje);
+    } else if(opcjaPrzejmij) {
+        command_lidercar_przejmij(playerid, vehicleUID);
     } else {
         sendErrorMessage(playerid, "Niepoprawna opcja!");
         StaryCzas[playerid] -= 200;
@@ -129,24 +132,37 @@ command_lidercar_ranga(playerid, vehicleUID, opcje[256])
     return 1;
 }
 
-command_lidercar_opis(playerid, vehicleID, vehicleUID, opcje[256])
+command_lidercar_przejmij(playerid, vehicleUID)
 {
-    sendTipMessage(playerid, "Opcja bêdzie dostêpna w nastêpnej aktualizacji (v2.7.12)");
-    return 1;
-
-    new description[256];
-    if(sscanf(opcje, "s[256]", description))
+    if(!orgIsLeader(playerid))
     {
-        sendTipMessage(playerid, "U¿yj /lidercar opis [opis pojazdu]");
+        CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FAMILY;
+        CarData[vehicleUID][c_Owner] = gPlayerOrg[playerid];
+    }
+    else if(PlayerInfo[playerid][pLider] == 0)
+    {
+        CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FRACTION;
+        CarData[vehicleUID][c_Owner] = PlayerInfo[playerid][pLider];
+    }
+    else
+    {
         return 1;
     }
 
-    // change description
+    for(new i=0;i<MAX_CAR_SLOT;i++)
+    {
+        if(PlayerInfo[playerid][pCars][i] == vehicleUID)
+        {
+            PlayerInfo[playerid][pCars][i] = 0;
+        }
+    }
+    Car_Save(vehicleUID, CAR_SAVE_OWNER);
 
     // send message
-    new string[256];
-    format(string, sizeof(string), "Nowy opis pojazdu: %s", description);
+    new string[128];
+    format(string, sizeof(string), "Od teraz Twoja frakcja jest w³aœcicielem tego pojazdu.");
     SendClientMessage(playerid, COLOR_PINK, string);
+    return 1;
 }
 
 //end

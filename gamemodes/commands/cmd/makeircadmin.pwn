@@ -43,7 +43,7 @@ YCMD:makeircadmin(playerid, params[], help)
 		}
 
 		if(channel > 10 || channel < 0) { sendTipMessage(playerid, "Numer nie mo¿e wynosiæ 0, albo wiêcej ni¿ 10!"); return 1; }
-		if(IsAScripter(playerid) || Uprawnienia(playerid, ACCESS_MAKELEADER))
+		if(IsAScripter(playerid) || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsPlayerAdmin(playerid))
 		{
 		    if(IsPlayerConnected(giveplayerid))
 		    {

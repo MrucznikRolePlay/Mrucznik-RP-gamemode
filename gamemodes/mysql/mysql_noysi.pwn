@@ -5,7 +5,7 @@ showFactionWorkers(playerid, page=1)
 
 	new id = PlayerInfo[playerid][pLider];
 
-	format(query, sizeof(query), "SELECT COUNT(*) FROM `mru_konta` WHERE `Member`='%d' AND Rank < 90", id);
+	format(query, sizeof(query), "SELECT COUNT(*) FROM `mru_konta` WHERE `Member`='%d' AND `Rank` < 90", id);
 
 	mysql_query(query);
 	mysql_store_result();
@@ -28,7 +28,7 @@ showFactionWorkers(playerid, page=1)
 
 	new offset = (page - 1) * FPANEL_PER_PAGE;
 
-	format(query, sizeof(query), "SELECT UID,Nick,Rank,Lider FROM `mru_konta` WHERE `Member`='%d' AND Rank < 90 ORDER BY Rank Desc LIMIT %d,%d;", id, offset, FPANEL_PER_PAGE);
+	format(query, sizeof(query), "SELECT `UID`, `Nick`, `Rank`, `Lider` FROM `mru_konta` WHERE `Member`='%d' AND `Rank` < 90 ORDER BY `Rank` Desc LIMIT %d,%d;", id, offset, FPANEL_PER_PAGE);
 	mysql_query(query);
 	mysql_store_result();
 

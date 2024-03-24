@@ -167,7 +167,6 @@ YCMD:wezwij(playerid, params[], help)
 				   	}
 
 			   	}
-				PlayerRequestMedic[playerid] = 0;
 			   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po lekarza, czekaj na akceptacje.");
 			   	MedicCall = playerid;
 			   	AntySpam[playerid] = 1;

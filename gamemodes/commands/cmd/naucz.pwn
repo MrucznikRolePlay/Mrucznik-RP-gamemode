@@ -56,11 +56,6 @@ YCMD:naucz(playerid, params[], help)
                 }
                 if(IsPlayerConnected(playa))
                 {
-                    if(Spectate[playa] != INVALID_PLAYER_ID)
-                    {
-                        SendClientMessage(playerid, COLOR_GRAD1, "Ten gracz jest za daleko.");
-                        return 1;
-                    }
                     if(playa != INVALID_PLAYER_ID)
                     {
                         if(styl == 1)

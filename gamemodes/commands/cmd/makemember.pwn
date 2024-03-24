@@ -43,7 +43,7 @@ YCMD:makemember(playerid, params[], help)
 		}
 
 		if(level > 17 || level < 0) { SendClientMessage(playerid, COLOR_GREY, "Od 0 do 17 !"); return 1; }
-		if (PlayerInfo[playerid][pAdmin] >= 1000 || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsAScripter(playerid))
+		if (PlayerInfo[playerid][pAdmin] >= 1 || Uprawnienia(playerid, ACCESS_MAKELEADER) || IsAScripter(playerid))
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -85,8 +85,6 @@ YCMD:makemember(playerid, params[], help)
 					else if(level == 14) { PlayerInfo[para1][pUniform] = 108; } //Vagos
 					else if(level == 15) { PlayerInfo[para1][pUniform] = 8; } //NoA
                     else if(level == 17) PlayerInfo[para1][pUniform] = 277; //NoA
-				    gTeam[para1] = 19;
-				    PlayerInfo[para1][pTeam] = 19;
 
                     MruMySQL_SetAccInt("Member", giveplayer, level);
                     MruMySQL_SetAccInt("Rank", giveplayer, 0);

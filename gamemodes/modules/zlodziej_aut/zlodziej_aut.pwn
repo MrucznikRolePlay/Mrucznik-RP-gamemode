@@ -124,7 +124,7 @@ ReloadDeluxeCarsForStealing()
 	for(new i = 0; i < sizeof(deluxe_cars_for_stealing_ids); i++)
 	{
 		new deluxe_veh_id = deluxe_cars_for_stealing_ids[i];
-		if(!used[deluxe_veh_id])
+		if(deluxe_veh_id != -1 && !used[deluxe_veh_id])
 		{
 			RemoveDeluxeCarForStealing(deluxe_veh_id);
 		}
@@ -137,8 +137,55 @@ ReloadDeluxeCarsForStealing()
 ReloadCarForStealing(veh_id)
 {
 	DestroyVehicle(veh_id);
-	AddCar(veh_id - 1);
+	if(veh_id >= 166) // Faggio dla z³odziejów aut w dziuplach - zawsze ma byæ okreœlony model
+	{
+		AddCar(veh_id - 1, 462, 3, 3, 180);
+	}
+	else
+	{
+		AddCar(veh_id - 1);
+	}
 	SetVehicleNumberPlate(veh_id, "{1F9F06}M-RP");
+	Gas[veh_id] = GasMax;
+}
+
+Float:GetStealChanceMultiplier(vehicleid)
+{
+	new model = GetVehicleModel(vehicleid);
+	switch(model)
+	{
+		case 462, 572: // Faggio, Turbowózek
+		{
+			return 3.0;
+		}
+
+		case 549, 542, 404, 478: // Tampa, Clover, Perennial, Walton
+		{
+			return 1.6;
+		}
+
+		case 422, 543: // Bobcat, Sadler
+		{
+			return 1.5;
+		}
+
+		case 401, 436, 518: // Bravura, Previon, Buccaneer
+		{
+			return 1.4;
+		}
+
+		case 498, 585, 492, 466: // Boxville, Emperor, Greenwood, Glendale
+		{
+			return 1.2;
+		}
+
+		case 516, 566: // Nebula, Tahoma
+		{
+			return 1.1;
+		}
+	}
+
+	return 1.0; // Elegant
 }
 
 GetLspdDetectThresholds(vehicleid, &short, &long)
@@ -365,6 +412,14 @@ UkradnijVerify(playerid, veh_id)
 		return 0;
 	}
 
+	new Float:x, Float:y, Float:z;
+	GetPlayerPos(playerid, x, y, z);
+	if(x < 0.0 || y > -790)
+	{
+		sendTipMessageEx(playerid, COLOR_GREY, "U¿yj /ukradnij w Los Santos!");
+		return 0;
+	}
+
 	if(PlayerInfo[playerid][pCarTime] != 0)
 	{
 		new komunikat[128];
@@ -548,14 +603,9 @@ CarThiefMissionGoal(playerid)
 	PlayerInfo[playerid][pCarTime] = cooldown;
 
 	RemovePlayerFromVehicleEx(playerid);
-	if(stole_a_car_lspd_bonus[playerid] == 3)
-	{
-		RemoveDeluxeCarForStealing(veh_id);
-	}
-	else
-	{
-		ReloadCarForStealing(veh_id);
-	}
+	SetVehicleParamsEx(veh_id, 0, 0, 0, 1, 0, 0, 0);
+	new is_deluxe = (stole_a_car_lspd_bonus[playerid] == 3);
+	SetTimerEx("CarThiefUnspawnStolenCar", 5000, false, "db", veh_id, is_deluxe);
 
 	EndCarThiefMission(playerid);
 

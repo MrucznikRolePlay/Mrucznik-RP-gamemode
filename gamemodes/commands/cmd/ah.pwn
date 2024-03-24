@@ -33,9 +33,17 @@ YCMD:ah(playerid, params[], help)
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
     if(PlayerInfo[playerid][pNewAP] > 0 || PlayerInfo[playerid][pZG] > 0 || PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid))
 	{
-		SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /tickets /login");
-		SendClientMessage(playerid, COLOR_GRAD1, "{FF6A6A}* System @DUTY *** {C0C0C0}/adminduty [NICK OOC] || /adminstats");
-		
+		if(!PlayerInfo[playerid][pZG]) {
+			SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /tickets /login");
+			SendClientMessage(playerid, COLOR_GRAD1, "{FF6A6A}* System @DUTY *** {C0C0C0}/adminduty [NICK OOC] || /adminstats");
+		} else {
+			SendClientMessage(playerid, COLOR_GRAD1, "* WSZYSCY *** /tickets");
+		}
+	}
+	if(PlayerInfo[playerid][pZG] == 10) {
+		SendClientMessage(playerid, COLOR_GRAD1, "* ZAS£U¯ONY *** /spec /slap /kick /aj /unaj /ban /block /warn /kill");
+		SendClientMessage(playerid, COLOR_GRAD1, "* ZAS£U¯ONY *** /freeze /unfreeze");
+		SendClientMessage(playerid, COLOR_GRAD2, sprintf("* Uprawnienia Zas³u¿onych s¹ obecnie: %s", ZaufaniON ? ("w³¹czone") : ("wy³¹czone")));
 	}
 	if (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
 	{
@@ -60,9 +68,9 @@ YCMD:ah(playerid, params[], help)
 	if (PlayerInfo[playerid][pAdmin] >= 1)
 	{
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /slap /kick /aj /bp /warn /block /ban /pblock /pban /pwarn /paj");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /freeze /unfreeze /mute /kill /dpa /mark /gotomark");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setint /getint /setvw /getvw /wybieralka");
-		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /mordinfo /gotomechy /podglad /gotocar /ip");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /freeze /unfreeze /mute /adminkill /dpa /mark /gotomark");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /setint /getint /setvw /getvw /wybieralka /sprawdzczasgry");
+		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /mordinfo /gotomechy /podglad /gotocar /ip /ip5");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /check /pojazdygracza /sb /pokazcb /checktank");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /respawn /carjump /to /up /getcar /gethere");
 		SendClientMessage(playerid, COLOR_GRAD1, "*1* ADMIN *** /cnn /cc /spec /unblock /unwarn /forum /pogodaall");
@@ -87,7 +95,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 10)
 	{
-		SendClientMessage(playerid, COLOR_GRAD4,"*10* ADMIN *** /fdaj /ksam /rozwiedz /setteam /entercar /sethp /setcarhp /dmvon /dmvoff");
+		SendClientMessage(playerid, COLOR_GRAD4,"*10* ADMIN *** /fdaj /ksam /rozwiedz /entercar /sethp /setcarhp /dmvon /dmvoff");
 	}
 	if (PlayerInfo[playerid][pAdmin] >= 15)
 	{
@@ -148,7 +156,7 @@ YCMD:ah(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zmiendom /zmienprace /zniszczobiekt /setvregistration /dnobiekt");
 	}
     if(Uprawnienia(playerid, ACCESS_PANEL)) SendClientMessage(playerid, COLOR_GRAD1, "*** UPRAWNIENIA *** /stworz /edytuj /panel [unwarn]");
-    if(Uprawnienia(playerid, ACCESS_ZG)) SendClientMessage(playerid, COLOR_GRAD1, "*** UPRAWNIENIA *** /dajzaufanego");
+    if(Uprawnienia(playerid, ACCESS_ZG)) SendClientMessage(playerid, COLOR_GRAD1, "*** UPRAWNIENIA *** /dajzaufanego /usunzaufanego");
 	if(Uprawnienia(playerid, ACCESS_MAKELEADER)) SendClientMessage(playerid, COLOR_GRAD1, "*** UPRAWNIENIA *** /makeleader /dajlideraorg");
     if(Uprawnienia(playerid, ACCESS_MAKEFAMILY)) SendClientMessage(playerid, COLOR_GRAD1, "*** UPRAWNIENIA *** /edytuj /stworz /zabierzlideraorg");
 	SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");

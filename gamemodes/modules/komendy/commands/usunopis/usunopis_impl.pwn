@@ -34,7 +34,7 @@ command_usunopis_Impl(playerid, giveplayerid)
 	}
 	else
 	{
-		Update3DTextLabelText(PlayerInfo[giveplayerid][pDescLabel], 0xBBACCFFF, "");
+		UpdateDynamic3DTextLabelText(PlayerInfo[giveplayerid][pDescLabel], 0xBBACCFFF, "");
 		PlayerInfo[giveplayerid][pDesc][0] = EOS;
 		new msg[128];
 		format(msg, 128, "Administrator %s usun¹³ twój opis", GetNickEx(playerid));

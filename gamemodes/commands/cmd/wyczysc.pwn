@@ -75,11 +75,7 @@ YCMD:wyczysc(playerid, params[], help)
 						PoziomPoszukiwania[giveplayerid] = 0;
 						SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);
 						ClearCrime(giveplayerid);
-						if(gTeam[giveplayerid]==4)
-						{
-						    gTeam[giveplayerid] = 3;
-						    SetPlayerToTeamColor(giveplayerid);
-						}
+						SetPlayerToTeamColor(giveplayerid);
 					}
 				}
 				else

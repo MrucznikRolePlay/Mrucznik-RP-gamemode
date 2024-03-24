@@ -171,7 +171,6 @@
 		> makemember - nadaje stopieñ [0] graczowi o ID we frakcji X
 		> zabierzlideraorg - zabiera lidera organizacji (rodziny) dla gracza o ID
 		> makeleader - daje graczowi o ID lidera frakcji o ID X
-		> setteam - ustala "team" graczowi (raczej ju¿ nie u¿ywane) - s¹ dwa cop, civilian. 
 		> gotopos - teleportuje nas do pozycji X,Y,Z
 		> gotols - teleportuje pod komisariat LS
 		> gotolv - teleportuje pod lotnisko LV
@@ -265,7 +264,7 @@ SendMessageToAdminEx(text[], mColor, condition)//Wysy³a wiadomoœæ do administrat
 	new stradm[256];
 	foreach(new i : Player)
 	{
-		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pNewAP] > 0 || IsAScripter(i))
+		if(PlayerInfo[i][pAdmin] > 0 || PlayerInfo[i][pNewAP] > 0 || PlayerInfo[i][pZG] == 10 || IsAScripter(i))
 		{
 			if(condition == 1)//Warunek w³¹czonej widocznoœci reportów
 			{
@@ -675,7 +674,7 @@ GiveBPForPlayer(playerid, adminid, timeVal, result[])
 		result);
 	//opis
 	//Opis_Usun(giveplayerid);
-	Update3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
+	UpdateDynamic3DTextLabelText(PlayerInfo[playerid][pDescLabel], 0xBBACCFFF, " ");
 	PlayerInfo[playerid][pDesc][0] = EOS;
 	if(GetPlayerAdminDutyStatus(adminid) == 0)
 	{

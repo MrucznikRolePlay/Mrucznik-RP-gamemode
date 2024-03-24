@@ -36,7 +36,7 @@ YCMD:zabierz(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(gTeam[playerid] == 2 || IsAPolicja(playerid))
+        if(IsAPolicja(playerid))
         {
             if(PlayerInfo[playerid][pRank] < 1)
             {
@@ -67,7 +67,7 @@ YCMD:zabierz(playerid, params[], help)
 				return 1;
 			}
 
-			if(!Kajdanki_JestemSkuty[giveplayerid])
+			if(!isPlayerCuffed[giveplayerid])
 			{
 				sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest skuty!");
 				return 1;

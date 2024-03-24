@@ -320,6 +320,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     `TruckSkill`='%d', \
 	`pSHealth`='%f', \
 	`pHealth`='%f', \
+	`VW`='%d', \
 	`Int`='%d'", PlayerInfo[playerid][pDetSkill],
 	PlayerInfo[playerid][pSexSkill],
 	PlayerInfo[playerid][pBoxSkill],
@@ -335,6 +336,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
     PlayerInfo[playerid][pTruckSkill],
 	PlayerInfo[playerid][pSHealth],
 	PlayerInfo[playerid][pHealth],
+	PlayerInfo[playerid][pVW],
 	PlayerInfo[playerid][pInt]);
 
     format(query, sizeof(query), "%s, \
@@ -480,6 +482,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`PodgladWiadomosci`='%d', \
 	`StylWalki`='%d', \
 	`PAdmin`='%d', \
+	`ZaufanyGracz`='%d', \
 	`Uniform`='%d', \
 	`CruiseController`='%d', \
 	`FixKit`='%d', \
@@ -498,6 +501,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pPodPW],
 	PlayerInfo[playerid][pStylWalki],
 	PlayerInfo[playerid][pNewAP],
+	PlayerInfo[playerid][pZG],
 	PlayerInfo[playerid][pUniform],
 	PlayerInfo[playerid][pCruiseController],
 	PlayerInfo[playerid][pFixKit],
@@ -646,7 +650,7 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pSkin], 
 		PlayerInfo[playerid][pContractTime]);
 
-        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
+        lStr = "`DetSkill`, `SexSkill`, `BoxSkill`, `LawSkill`, `MechSkill`, `JackSkill`, `CarSkill`, `NewsSkill`, `DrugsSkill`, `CookSkill`, `FishSkill`, `GunSkill`, `TruckSkill`, `pSHealth`, `pHealth`, `VW`, `Int`, `Local`, `Team`, `JobSkin`, `PhoneNr`, `Dom`, `Bizz`, `BizzMember`, `Wynajem`, `Pos_x`, `Pos_y`, `Pos_z`, `CarLic`, `FlyLic`, `BoatLic`, `FishLic`, `GunLic`";
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
     	mysql_store_result();
@@ -654,7 +658,7 @@ public MruMySQL_LoadAccount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
 
-        sscanf(lStr, "p<|>dddddddddddddffdddddddddfffddddd",
+        sscanf(lStr, "p<|>dddddddddddddffddddddddddfffddddd",
         PlayerInfo[playerid][pDetSkill],
 		PlayerInfo[playerid][pSexSkill],
 		PlayerInfo[playerid][pBoxSkill],
@@ -670,6 +674,7 @@ public MruMySQL_LoadAccount(playerid)
         PlayerInfo[playerid][pTruckSkill],
 		PlayerInfo[playerid][pSHealth],
 		PlayerInfo[playerid][pHealth],
+		PlayerInfo[playerid][pVW],
 		PlayerInfo[playerid][pInt],
 		PlayerInfo[playerid][pLocal],
 		PlayerInfo[playerid][pTeam],
@@ -746,7 +751,7 @@ public MruMySQL_LoadAccount(playerid)
 		MyWeapon[playerid] = PlayerInfo[playerid][pGun0];
 		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 
-        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`, `Immunity`";
+        lStr = "`MarriedTo`, `CBRADIO`, `PoziomPoszukiwania`, `Dowod`, `PodszywanieSie`, `ZmienilNick`, `Wino`, `Piwo`, `Cygaro`, `Sprunk`, `PodgladWiadomosci`, `StylWalki`, `PAdmin`, `Uniform`, `CruiseController`, `FixKit`, `Auto1`, `Auto2`, `Auto3`, `Auto4`, `Lodz`, `Samolot`, `Garaz`, `KluczykiDoAuta`, `Spawn`, `BW`, `Injury`, `HealthPacks`, `Czystka`, `CarSlots`, `Immunity`, `ZaufanyGracz`";
 
         format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
     	mysql_query(lStr);
@@ -756,7 +761,7 @@ public MruMySQL_LoadAccount(playerid)
         mysql_free_result();
 
 		new immunity;
-        sscanf(lStr, "p<|>s[24]dddddddddddddddddddddddddddddd",
+        sscanf(lStr, "p<|>s[24]ddddddddddddddddddddddddddddddd",
         PlayerInfo[playerid][pMarriedTo],
 		PlayerInfo[playerid][pCB],
 		PlayerInfo[playerid][pWL],
@@ -787,7 +792,8 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pHealthPacks],
 		PlayerInfo[playerid][pCzystka],
         PlayerInfo[playerid][pCarSlots],
-		immunity);
+		immunity,
+		PlayerInfo[playerid][pZG]);
 		
 		SetPlayerImmunity(playerid, immunity);
 
@@ -1198,16 +1204,16 @@ bool:MruMySQL_SprawdzBany(playerid)
             else format(string, sizeof(string), "Twoje konto {FF8C00}%s{FFA500} (%d) jest zbanowane.", nick, pid);
 
     		SendClientMessage(playerid, COLOR_NEWS, string);
-    		format(string, sizeof(string), "{FFA500}Nadajï¿½cy: %s ({FF8C00}%d{FFA500}) | Powï¿½d: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
+    		format(string, sizeof(string), "{FFA500}Nadaj¹cy: %s ({FF8C00}%d{FFA500}) | Powód: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
     		SendClientMessage(playerid, COLOR_NEWS, string);
             return true;
         }
         else if(typ == WARN_BLOCK)
         {
-            SendClientMessage(playerid, COLOR_WHITE, "{FF0000}To konto jest zablokowane, nie moï¿½esz na nim graï¿½.");
-			SendClientMessage(playerid, COLOR_WHITE, "Jeï¿½li uwaï¿½asz, ï¿½e konto zostaï¿½o zablokowane niesï¿½usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
+            SendClientMessage(playerid, COLOR_WHITE, "{FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
+			SendClientMessage(playerid, COLOR_WHITE, "Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
 
-    		format(string, sizeof(string), "{FFA500}Nadajï¿½cy: %s ({FF8C00}%d{FFA500}) | Powï¿½d: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
+    		format(string, sizeof(string), "{FFA500}Nadaj¹cy: %s ({FF8C00}%d{FFA500}) | Powód: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
     		SendClientMessage(playerid, COLOR_NEWS, string);
             return true;
         }
@@ -1408,6 +1414,19 @@ stock MruMySQL_UpdateFish(playerid, fish) {
 	}
 	new string[128];
 	format(string, sizeof(string), "UPDATE mru_ryby SET `Fish%i`='%s', `Weight%i`=%i, `Fid%i`=%i WHERE `Player`=%i", fish, sql_fish, fish, sql_weight, fish, sql_fid, PlayerInfo[playerid][pUID]);
+	mysql_query(string);
+	return 1;
+}
+stock MruMySQL_SavePlayerFamily(playerid) {
+	if(!IsPlayerConnected(playerid))
+		return 0;
+	new string[256];
+	format(string, sizeof(string), "UPDATE `mru_konta` SET `FMember`=%i, `Rank`=%i, `Uniform`=%i, `Team`=%i WHERE `UID`=%i",
+		PlayerInfo[playerid][pOrg],
+		(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]),
+		PlayerInfo[playerid][pUniform],
+		PlayerInfo[playerid][pTeam],
+		PlayerInfo[playerid][pUID]);
 	mysql_query(string);
 	return 1;
 }

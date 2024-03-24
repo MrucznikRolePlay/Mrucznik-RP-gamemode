@@ -29,4 +29,10 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 
+hook OnGameModeInit() 
+{
+	PremiumRequestClient = RequestsClient("https://mrucznik-rp.pl/applications/nexus/interface/licenses/");
+}
+
+
 //end

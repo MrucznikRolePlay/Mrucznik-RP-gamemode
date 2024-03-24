@@ -45,7 +45,7 @@ YCMD:marcepan(playerid, params[], help)
         SendClientMessage(playerid, COLOR_YELLOW, string);
         format(string, 128, "Skuty w aucie = %s", (PlayerCuffed[id] > 0) ? ("Tak") : ("Nie"));
         SendClientMessage(playerid, COLOR_YELLOW, string);
-        format(string, 128, "Skuty pieszo = %s", (Kajdanki_JestemSkuty[id] > 0) ? ("Tak") : ("Nie"));
+        format(string, 128, "Skuty pieszo = %s", (isPlayerCuffed[id] > 0) ? ("Tak") : ("Nie"));
         SendClientMessage(playerid, COLOR_YELLOW, string);
         format(string, 128, "Poœcig = %s", (poscig[id] > 0) ? ("Tak") : ("Nie"));
         SendClientMessage(playerid, COLOR_YELLOW, string);
@@ -53,7 +53,7 @@ YCMD:marcepan(playerid, params[], help)
         SendClientMessage(playerid, COLOR_YELLOW, string);
         SendClientMessage(playerid, COLOR_PAPAYAWHIP, "");
         new bool:wyrok=false;
-        if(PlayerTied[id] >= 1 || (PlayerCuffed[id] > 0 && pobity[id] == 0 && PlayerCuffed[id] < 3) || Kajdanki_JestemSkuty[id] >= 1 || poscig[id] == 1)
+        if(PlayerTied[id] >= 1 || (PlayerCuffed[id] > 0 && pobity[id] == 0 && PlayerCuffed[id] < 3) || isPlayerCuffed[id] >= 1 || poscig[id] == 1)
         {
             wyrok = true;
         }

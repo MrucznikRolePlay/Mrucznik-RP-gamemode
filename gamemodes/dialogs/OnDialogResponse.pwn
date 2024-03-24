@@ -87,6 +87,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
+	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
 	//2.7.5 - nadal nie 3.0
 	if(dialogid == DIALOGID_UNIFORM_FRAKCJA)
@@ -324,7 +325,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 2:
 				{
-					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadŸ poni¿ej kwotê, która ktoœ bêdzie musia³ zap³aciæ za bilet Normalny", "Wybierz", "Odrzuæ");
+					ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Laptop Lidera", "WprowadŸ poni¿ej kwotê, która ktoœ bêdzie musia³ zap³aciæ za bilet VIP", "Wybierz", "Odrzuæ");
 					SetPVarInt(playerid, "b-wybor", 2);
 				}
 				case 3:
@@ -409,7 +410,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					format(string, sizeof(string), "WprowadŸ poni¿ej now¹ nazwê dla napoju: %s, \nAktualna cena to: $%d", drinkName4, drinkCost4);
 				}
-				ShowPlayerDialogEx(playerid, DIALOG_STYLE_INPUT, 6998, "Panel lidera", string, "Akceptuj", "Odrzuæ"); 
+				ShowPlayerDialogEx(playerid, 6998, DIALOG_STYLE_INPUT, "Panel lidera", string, "Akceptuj", "Odrzuæ"); 
 				SetPVarInt(playerid, "b-wybor", 7); 
 				return 1;
 			}
@@ -693,378 +694,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		return 1;
 	}
-	else if(dialogid == DIALOGID_PODSZYJ)
-	{
-		switch(listitem)
-		{
-			case 0:
-			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(1), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod FBI.", "165\nAgent FBI (Bia³y)\n166\nAgent FBI (Czarny)\n211\nAgentka FBI\n286\nAgent ICB\n295\nDyrektor FBI", "Podszyj", "Anuluj");
-				return 1;
-			}
-			case 1:
-			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(2), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod Grove.", "105\nCz³onek Grove\n106\nCz³onek Grove\n107\nCz³onek Grove\n269\nCz³onek Grove\n270\nCz³onek Grove\n271\nCz³onek Grove", "Podszyj", "Anuluj");
-				return 1;
-			}
-			case 2:
-			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(3), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod Ballas.", "102\nCz³onek Ballas\n103\nCz³onek Ballas\n104\nCz³onek Ballas", "Podszyj", "Anuluj");
-				return 1;
-			}
-			case 3:
-			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(4), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod ICC.", "124\nCz³onek ICC\n125\nCz³onek ICC\n126\nCz³onek ICC\n111\nCz³onek ICC\n113\nBoss ICC", "Podszyj", "Anuluj");
-				return 1;
-			}
-			case 4:
-			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(5), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod Yakuze.", "117\nCz³onek Yakuzy\n118\nCz³onek Yakuzy\n120\nBoss Yakuzy\n122\nCz³onek Yakuzy\n123\nBoss Yakuzy", "Podszyj", "Anuluj");
-				return 1;
-			}
-			case 5:
-			{
-				ShowPlayerDialogEx(playerid, DIALOGID_PODSZYJ_ZMIENID(6), DIALOG_STYLE_PREVMODEL_LIST, "Podszywasz siê pod Latin Kings.", "108\nCz³onek Latin Kings\n109\nCz³onek Latin Kings\n110\nBoss Latin Kings", "Podszyj", "Anuluj");
-				return 1;
-			}
-		}
-	}
-	else if(dialogid == DIALOGID_PODSZYJ_ZMIENID(1))
-	{
-		switch(listitem)
-		{
-			case 0:
-			{
-				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkinEx(playerid, 165);
-				PlayerInfo[playerid][pTajniak] = 0;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod FBI.");
-				return 1;
-			}
-			case 1:
-			{
-				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkinEx(playerid, 166);
-				PlayerInfo[playerid][pTajniak] = 0;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod FBI.");
-				return 1;
-			}
-			case 2:
-			{
-				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkinEx(playerid, 211);
-				PlayerInfo[playerid][pTajniak] = 0;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod FBI.");
-				return 1;
-			}
-			case 3:
-			{
-				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkinEx(playerid, 286);
-				PlayerInfo[playerid][pTajniak] = 0;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod FBI.");
-				return 1;
-			}
-			case 4:
-			{
-				SetPlayerColor(playerid, COLOR_FBI);//kolor
-				SetPlayerSkinEx(playerid, 295);
-				PlayerInfo[playerid][pTajniak] = 0;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod FBI.");
-				return 1;
-			}
-		}
-	}
-
-	else if(dialogid == DIALOGID_PODSZYJ_ZMIENID(2))
-	{
-		switch(listitem)
-		{
-			case 0:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 105);
-				PlayerInfo[playerid][pTajniak] = 1;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 1:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 106);
-				PlayerInfo[playerid][pTajniak] = 1;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 2:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 107);
-				PlayerInfo[playerid][pTajniak] = 1;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 3:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 269);
-				PlayerInfo[playerid][pTajniak] = 1;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 4:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 270);
-				PlayerInfo[playerid][pTajniak] = 1;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 5:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 271);
-				PlayerInfo[playerid][pTajniak] = 1;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Grove.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-		}
-	}
-
-	else if(dialogid == DIALOGID_PODSZYJ_ZMIENID(3))
-	{
-		switch(listitem)
-		{
-			case 0:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 102);
-				PlayerInfo[playerid][pTajniak] = 2;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Ballas.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 1:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 103);
-				PlayerInfo[playerid][pTajniak] = 2;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Ballas.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 2:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 104);
-				PlayerInfo[playerid][pTajniak] = 2;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Ballas.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-		}
-	}
-
-	else if(dialogid == DIALOGID_PODSZYJ_ZMIENID(4))
-	{
-		switch(listitem)
-		{
-			case 0:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 124);
-				PlayerInfo[playerid][pTajniak] = 3;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod ICC.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 1:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 125);
-				PlayerInfo[playerid][pTajniak] = 3;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod ICC.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 2:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 126);
-				PlayerInfo[playerid][pTajniak] = 3;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod ICC.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 3:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 111);
-				PlayerInfo[playerid][pTajniak] = 3;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod ICC.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 4:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 113);
-				PlayerInfo[playerid][pTajniak] = 3;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod ICC.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-		}
-		return 1;
-	}
-
-	else if(dialogid == DIALOGID_PODSZYJ_ZMIENID(5))
-	{
-		switch(listitem)
-		{
-			case 0:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 117);
-				PlayerInfo[playerid][pTajniak] = 4;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Yakuze.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 1:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 118);
-				PlayerInfo[playerid][pTajniak] = 4;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Yakuze.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 2:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 120);
-				PlayerInfo[playerid][pTajniak] = 4;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Yakuze.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 3:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 122);
-				PlayerInfo[playerid][pTajniak] = 4;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Yakuze.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 4:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 123);
-				PlayerInfo[playerid][pTajniak] = 4;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Yakuze.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-		}
-		return 1;
-	}
-
-	else if(dialogid == DIALOGID_PODSZYJ_ZMIENID(6))
-	{
-		switch(listitem)
-		{
-			case 0:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 108);
-				PlayerInfo[playerid][pTajniak] = 5;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Latin Kings.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 1:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 109);
-				PlayerInfo[playerid][pTajniak] = 5;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Latin Kings.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-			case 2:
-			{
-				SetPlayerColor(playerid, TEAM_HIT_COLOR);//kolor
-				SetPlayerSkinEx(playerid, 110);
-				PlayerInfo[playerid][pTajniak] = 5;
-				PlayerInfo[playerid][pTeam] = 2;//team
-				gTeam[playerid] = 2;//team
-				SendClientMessage(playerid, COLOR_GRAD2, "Podszy³eœ siê pod Latin Kings.");
-				SetPlayerArmour(playerid, 10);
-				return 1;
-			}
-		}
-		return 1;
-	}
     else if(dialogid == D_VEHOPIS)
     {
         if(!response) return 1;
@@ -1089,8 +718,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 new opis[128];
                 format(opis, sizeof opis, "%s", CarDesc[veh]);
 				ReColor(opis);
-                CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
-                format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
+                Car3dTextDesc[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh, 1, -1, -1, -1, 10.0);
+                foreach(new p : Player)
+				{
+					if(!areVehicleDescTurnedOn[p])
+					{
+						Streamer_RemoveArrayData(STREAMER_TYPE_3D_TEXT_LABEL, Car3dTextDesc[veh], E_STREAMER_PLAYER_ID, p);
+					}
+				}
+				format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
                 SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis pojazdu, by go usun¹æ wpisz {CC3333}/vopis usuñ{CC3333}");
             }
             case 2:
@@ -1145,7 +781,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new opis[128];
 		format(opis, sizeof opis, "%s", CarDesc[veh]);
 		ReColor(opis);
-		CarOpis[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh);
+		Car3dTextDesc[veh] = CreateDynamic3DTextLabel(wordwrapEx(opis), COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, veh, 1, -1, -1, -1, 10.0);
+		foreach(new p : Player)
+		{
+			if(!areVehicleDescTurnedOn[p])
+			{
+				Streamer_RemoveArrayData(STREAMER_TYPE_3D_TEXT_LABEL, Car3dTextDesc[veh], E_STREAMER_PLAYER_ID, p);
+			}
+		}
 		format(CarOpisCaller[veh], MAX_PLAYER_NAME, "%s", GetNick(playerid));
 		SendClientMessage(playerid, -1, "{99CC00}Ustawi³es w³asny opis pojazdu, by go usun¹æ wpisz {CC3333}/vopis usuñ{CC3333}");
         return 1;
@@ -3509,341 +3152,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-		else if(dialogid == 90)
-		{
-		    new string[256];
-		    if(response)
-			{
-			    if(zdazylwpisac[playerid] == 1)
-			    {
-				    if(strcmp(kodbitwy, inputtext, true ) == 0 && strlen(inputtext) == 8)
-				    {
-				        new giveplayer[MAX_PLAYER_NAME];
-				        new sendername[MAX_PLAYER_NAME];
-				        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						//
-				    	podczasbicia[bijep[playerid]] = 1;
-				    	podczasbicia[playerid] = 0;
-				    	//
-				    	new randbitwa = random(30);
-						//kodbitwy[playa] = (PobijText[randbitwa]);
-						strmid(kodbitwy, PobijText[randbitwa], 0, strlen(PobijText[randbitwa]), 256);
-						format(string, sizeof(string), "Próbujesz pobiæ %s, za 10 sekund rostrzygnie siê bitwa!", giveplayer);
-		    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		    			format(string, sizeof(string), "%s próbuje ciê pobiæ! Wpisz ten kod aby siê obroniæ:\n%s", sendername, kodbitwy);
-						ShowPlayerDialogEx(bijep[playerid], 90, DIALOG_STYLE_INPUT, "BITWA!!", string, "Wybierz", "WyjdŸ");
-		       			//
-				    	SendClientMessage(playerid, COLOR_WHITE, "CIOS ODBITY!");
-				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-				    	zdazylwpisac[playerid] = 1;
-				    	zdazylwpisac[bijep[playerid]] = 1;
-				    	new timerbicia = SetTimerEx("naczasbicie",9000,0,"d",bijep[playerid]);
-						SetPVarInt(bijep[playerid], "timerBicia", timerbicia);
-				    }
-				    else
-				    {
-				        new giveplayer[MAX_PLAYER_NAME];
-				        new sendername[MAX_PLAYER_NAME];
-				        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-				        format(string, sizeof(string), "* %s wyprowadzi³ cios i pobi³ %s.", giveplayer, sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		    			format(string, sizeof(string), "%s znokautowa³ ciê bez wiêkszego problemu.", giveplayer);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
-						SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-						ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
-						PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
-						PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
-						TogglePlayerControllable(playerid, 0);
-						TogglePlayerControllable(bijep[playerid], 1);
-						PlayerCuffed[playerid] = 3;
-						PlayerCuffedTime[playerid] = 45;
-						pobity[playerid] = 1;
-						PlayerInfo[playerid][pMuted] = 1;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
-						SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
-						pobilem[bijep[playerid]] = 1;
-						PlayerFixRadio(playerid);
-						PlayerFixRadio(bijep[playerid]);
-						SetPlayerHealth(playerid, 30.0);
-						ClearAnimations(bijep[playerid]);
-						ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-						ClearAnimations(playerid);
-						ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-						//new
-				        podczasbicia[playerid] = 0;
-				        bijep[bijep[playerid]] = 0;
-				        bijep[playerid] = 0;
-				    }
-				}
-				else
-				{
-				    new giveplayer[MAX_PLAYER_NAME];
-	       			new sendername[MAX_PLAYER_NAME];
-			        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-			        format(string, sizeof(string), "* %s wyprowadzi³ cios i pobi³ %s.", giveplayer, sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		   			format(string, sizeof(string), "%s znokautowa³ ciê bez wiêkszego problemu.", giveplayer);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
-					SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-					ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
-					PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
-					PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
-					TogglePlayerControllable(playerid, 0);
-					TogglePlayerControllable(bijep[playerid], 1);
-					PlayerCuffed[playerid] = 3;
-					PlayerCuffedTime[playerid] = 45;
-					pobity[playerid] = 1;
-					PlayerInfo[playerid][pMuted] = 1;
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
-					SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
-					pobilem[bijep[playerid]] = 1;
-					PlayerFixRadio(playerid);
-					PlayerFixRadio(bijep[playerid]);
-					SendClientMessage(playerid, COLOR_WHITE, "Wpisa³eœ tekst za wolno i przegra³eœ!");
-					SetPlayerHealth(playerid, 30.0);
-					ClearAnimations(bijep[playerid]);
-					ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-					ClearAnimations(playerid);
-					ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-					//new
-			        podczasbicia[playerid] = 0;
-			        bijep[bijep[playerid]] = 0;
-			        bijep[playerid] = 0;
-				}
-			}
-			if(!response)
-			{
-			    new giveplayer[MAX_PLAYER_NAME];
-	   			new sendername[MAX_PLAYER_NAME];
-		        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-		        format(string, sizeof(string), "* %s wyprowadzi³ cios i pobi³ %s.", giveplayer, sendername);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	   			format(string, sizeof(string), "%s znokautowa³ ciê bez wiêkszego problemu.", giveplayer);
-	   			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-				format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
-				SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-				ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
-				PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
-				PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
-				TogglePlayerControllable(playerid, 0);
-				TogglePlayerControllable(bijep[playerid], 1);
-				PlayerCuffed[playerid] = 3;
-				PlayerCuffedTime[playerid] = 45;
-				pobity[playerid] = 1;
-				PlayerInfo[playerid][pMuted] = 1;
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
-				SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
-				pobilem[bijep[playerid]] = 1;
-				PlayerFixRadio(playerid);
-				PlayerFixRadio(bijep[playerid]);
-				SetPlayerHealth(playerid, 30.0);
-				ClearAnimations(bijep[playerid]);
-				ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-				ClearAnimations(playerid);
-				ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-				//new
-		        podczasbicia[playerid] = 0;
-		        bijep[bijep[playerid]] = 0;
-		        bijep[playerid] = 0;
-			}
-		}
-		else if(dialogid == 97)
-		{
-		    new string[256];
-		    new giveplayer[MAX_PLAYER_NAME];
-			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(Kajdanki_PDkuje[playerid], giveplayer, sizeof(giveplayer));
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			new cops;
-			//
-		    if(response)
-		    {
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", sendername, giveplayer);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-	            TogglePlayerControllable(playerid, 0);
-	            Kajdanki_JestemSkuty[playerid] = 2;
-                SetTimerEx("Odmroz",10*60000,0,"d",playerid);
-	            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
-		    }
-		    if(!response)
-		    {
-		        foreach(new i : Player)
-				{
-				    if(IsPlayerConnected(i))
-				    {
-				        if(IsAPolicja(i))
-						{
-						    if(GetDistanceBetweenPlayers(playerid,i) < 5)
-	     					{
-	     					    cops ++;
-	     					}
-						}
-					}
-				}
-				if(cops >= 3 || TazerAktywny[playerid] == 1 && cops == 2)
-				{
-	                format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-					SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-		            TogglePlayerControllable(playerid, 0);
-		            Kajdanki_JestemSkuty[playerid] = 2;
-		            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
-					
-					CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-					TogglePlayerControllable(playerid, 1);
-				}
-				else if(cops == 2 || TazerAktywny[playerid] == 1 && cops < 2)
-				{
-				    new rand = random(100);
-				    if(rand <= 50)
-				    {
-				        format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Kajdanki_PDkuje[playerid] = 0;
-						PoziomPoszukiwania[playerid] += 1;
-						SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
-				    }
-				    else
-				    {
-				        format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-						SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-			            TogglePlayerControllable(playerid, 0);
-			            Kajdanki_JestemSkuty[playerid] = 2;
-			            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
-			            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
-					
-						CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-						TogglePlayerControllable(playerid, 1);
-				    }
-				}
-				else
-				{
-				    format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					Kajdanki_PDkuje[playerid] = 0;
-					PoziomPoszukiwania[playerid] += 1;
-					SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
-				}
-		    }
-		}
-		else if(dialogid == 98)
-		{
-		    new string[256];
-		    new giveplayer[MAX_PLAYER_NAME];
-			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(Kajdanki_PDkuje[playerid], giveplayer, sizeof(giveplayer));
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			new cops;
-			//
-		    if(response)
-		    {
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", sendername, giveplayer);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-				
-				CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-		    }
-		    else
-		    {
-		        foreach(new i : Player)
-				{
-				    if(IsPlayerConnected(i))
-				    {
-				        if(IsAPolicja(i) || IsABOR(i))
-						{
-						    if(GetDistanceBetweenPlayers(playerid,i) < 5)
-	     					{
-	     					    cops ++;
-	     					}
-						}
-					}
-				}
-				if(cops >= 3)
-				{
-	                format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-					SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-					
-					CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-				}
-				else if(cops == 2)
-				{
-				    new rand = random(100);
-				    if(rand <= 50)
-				    {
-				        format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Kajdanki_PDkuje[playerid] = 0;
-						PoziomPoszukiwania[playerid] += 1;
-						SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
-				    }
-				    else
-				    {
-				        format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-						SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-						
-						CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-				    }
-				}
-				else
-				{
-				    format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
-				    TogglePlayerControllable(playerid, 1);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					Kajdanki_PDkuje[playerid] = 0;
-					PoziomPoszukiwania[playerid] += 1;
-					SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
-				}
-		    }
-		}
-		else if(dialogid == 7080)
-		{
-		    new string[256];
-		    new giveplayer[MAX_PLAYER_NAME];
-			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(Kajdanki_PDkuje[playerid], giveplayer, sizeof(giveplayer));
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			//
-		    if(response)
-		    {
-				//todo
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ ³owcy %s.", sendername, giveplayer);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", sendername);
-				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-				Kajdanki_JestemSkuty[playerid] = 1;
-	            TogglePlayerControllable(playerid, 0);
-	            Kajdanki_Uzyte[Kajdanki_PDkuje[playerid]] = 1;
-	            Kajdanki_SkutyGracz[Kajdanki_PDkuje[playerid]] = playerid;
-				ClearAnimations(playerid);
-                SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
-		    }
-		    if(!response)
-		    {
-				format(string, sizeof(string), "* %s wyrywa siê i rzuca siê na ³owcê!", sendername);
-				TogglePlayerControllable(playerid, 1);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				Kajdanki_PDkuje[playerid] = 0;
-		    }
-		}
 		else if(dialogid == 160)
 		{
 		    if(response)
@@ -5211,8 +4519,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 			if(response)
 			{
-			    new string[64], sendername[MAX_PLAYER_NAME];
+			    new string[64] = {0, ...};
+				new sendername[MAX_PLAYER_NAME];
             	GetPlayerName(playerid, sendername, sizeof(sendername));
+				ResetPlayerWeapons(playerid);
 			    switch(listitem)
 			    {
 			        case 0:
@@ -5221,26 +4531,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pGun0] = 0;
 						PlayerInfo[playerid][pAmmo0] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój kastet zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
             			format(string, sizeof(string),"%s niszczy kastet i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-            			
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
-			        }
+					}
 			        case 1:
 			        {
 			            if(PlayerInfo[playerid][pGun1] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun1] = 0;
 						PlayerInfo[playerid][pAmmo1] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja broñ bia³a zosta³a usniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy broñ bia³¹ i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 2:
 			        {
@@ -5248,12 +4549,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun2] = 0;
 						PlayerInfo[playerid][pAmmo2] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy pistolet i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 3:
 			        {
@@ -5261,12 +4558,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    PlayerInfo[playerid][pGun3] = 0;
 						PlayerInfo[playerid][pAmmo3] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja strzelba zosta³a usuniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy strzelbê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 4:
 			        {
@@ -5274,12 +4567,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    PlayerInfo[playerid][pGun4] = 0;
 						PlayerInfo[playerid][pAmmo4] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet maszynowy zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy pistolet maszynowy i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 5:
 			        {
@@ -5287,12 +4576,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun5] = 0;
 						PlayerInfo[playerid][pAmmo5] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój karabin maszynowy zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy karabin maszynowy i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 6:
 			        {
@@ -5300,12 +4585,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun6] = 0;
 						PlayerInfo[playerid][pAmmo6] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja snajperka zosta³a usuniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy snajperkê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 7:
 			        {
@@ -5313,12 +4594,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun7] = 0;
 						PlayerInfo[playerid][pAmmo7] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój ogniomiotacz zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy ogniomiotacz i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 8:
 			        {
@@ -5328,12 +4605,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje C4 zosta³o usuniête");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy C4 i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 9:
 			        {
@@ -5341,12 +4614,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun9] = 0;
 						PlayerInfo[playerid][pAmmo9] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój sprej/aparat/gaœnica zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy spray/aparat/gaœnicê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 10:
 			        {
@@ -5354,12 +4623,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun10] = 0;
 						PlayerInfo[playerid][pAmmo10] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje kwiaty/laska/dildo zosta³o usuniête");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy kwiaty/laskê/dildo i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 11:
 			        {
@@ -5367,12 +4632,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun11] = 0;
 						PlayerInfo[playerid][pAmmo11] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój spadochron zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy spadochron i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 12:
 			        {
@@ -5380,14 +4641,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój detonator zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy detonator i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
-			    }
+				}
+
+				SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+				ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			}
 	    }
 	    else if(dialogid == 80)
@@ -6438,7 +5699,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 						else
 						{
-							SetSpawnInfo(playerid, PlayerInfo[playerid][pTeam], PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
+							SetSpawnInfo(playerid, 0, PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 1.0, -1, -1, -1, -1, -1, -1);
 							SetPlayerSpawn(playerid);
 							TogglePlayerSpectating(playerid, false);
 						}
@@ -11266,145 +10527,189 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    if(response)
 		    {
                 new lider = GetPlayerOrg(playerid);
+				new stan[256];
+				format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
+				new stanmats[128];
+				format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
 		        switch(listitem)
 		        {
 		            case 0:
 		            {
-                        new stan[128];
-                        format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
-		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_LIST, "Sejf rodzinny - stan", stan, "Wróæ", "Wróæ");
+						format(stan, sizeof(stan), "%s\n%s", stan, stanmats);
+		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_TABLIST, "Sejf rodzinny - stan", stan, "Wróæ", "Wróæ");
 		            }
 		            case 1:
-		            {
-		                new stan[128];
-		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
 						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-		            }
 		            case 2:
-		            {
-		                new stan[128];
-		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
 						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp³acanie", stan, "Wp³aæ", "Wróæ");
-		            }
+					case 3:
+						ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wyp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+					case 4: {
+						format(stan, sizeof(stan), "%s\n{F8F8FF}Iloœæ materia³ów które posiadasz:\t\t{008080}%d", stanmats, PlayerInfo[playerid][pMats]);
+						ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wp³acanie", stan, "Wp³aæ", "Wróæ");
+					}
 		        }
 		    }
 		}
 		if(dialogid == 496)
 		{
-		    if(response || !response)
-		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-		    }
+			SejfR_Show(playerid);
 		}
 		if(dialogid == 497)
 		{
 		    if(response)
 		    {
-                if(!IsNumeric(inputtext))
-                {
-                    SendClientMessage(playerid, -1, "To nie jest liczba!");
-                    ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-                    return 1;
-                }
-                new kasa = strval(inputtext);
+                new kasa = FunkcjaK(inputtext);
                 new lider = GetPlayerOrg(playerid);
-		        if((strlen(inputtext) >= 1 && strlen(inputtext) <= 9) && kasa > 0 )
-		        {
-		            if(kasa <= Sejf_Rodziny[lider])
-		            {
-		                new nick[MAX_PLAYER_NAME];
-		                GetPlayerName(playerid, nick, sizeof(nick));
+				if(kasa > 0 && kasa <= Sejf_Rodziny[lider])
+				{
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
 
-                        SejfR_Add(lider, -kasa);
-						PlayerInfo[playerid][pAccount] += kasa;
+					SejfR_Add(lider, -kasa);
+					PlayerInfo[playerid][pAccount] += kasa;
 
-			            new komunikat[256];
-			            format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
-			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            Log(payLog, INFO, "%s wyp³aci³ z sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
-							GetPlayerLogName(playerid),
-							lider,
-							kasa,
-							Sejf_Rodziny[lider]);
-                        SejfR_Save(lider);
-						ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-					}
-					else
-					{
-	    				SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
-					    new stan[256];
-		             	format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-					}
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp³acone pieni¹dze s¹ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wyp³aci³ z sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
+						GetPlayerLogName(playerid),
+						lider,
+						kasa,
+						Sejf_Rodziny[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
 				}
-		        else
-		        {
-		            new stan[256];
-	             	format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
+				else
+				{
+					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
+					new stan[256];
+					format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
 					ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
-		        }
+				}
 		    }
-		    if(!response)
+		    else
 		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
+		        SejfR_Show(playerid);
 		    }
 		}
 		if(dialogid == 498)
 		{
 		    if(response)
 		    {
-                if(!IsNumeric(inputtext))
-                {
-                    SendClientMessage(playerid, -1, "To nie jest liczba!");
-                    ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-                    return 1;
-                }
-                new kasa = strval(inputtext);
+                new kasa = FunkcjaK(inputtext);
                 new lider = GetPlayerOrg(playerid);
-		        if((strlen(inputtext) >= 1 && strlen(inputtext) <= 9) && kasa > 0 )
-		        {
-		            if(kaska[playerid] >= kasa)
-		            {
-                        if(Sejf_Rodziny[lider] + kasa > 1_000_000_000)
-                        {
-                            SendClientMessage(playerid, -1, "Sejf siê przepe³ni!");
-                            return 1;
-                        }
-		                new nick[MAX_PLAYER_NAME];
-		                GetPlayerName(playerid, nick, sizeof(nick));
-
-		                ZabierzKase(playerid, kasa);
-                        SejfR_Add(lider, kasa);
-
-			            new komunikat[256];
-			            format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
-			            SendClientMessage(playerid, COLOR_P@, komunikat);
-			            Log(payLog, INFO, "%s wp³aci³ do sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
-							GetPlayerLogName(playerid),
-							lider,
-							kasa,
-							Sejf_Rodziny[lider]);
-                        SejfR_Save(lider);
-			            ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
-					}
-					else
+				if(kasa > 0 && kaska[playerid] >= kasa)
+				{
+					if(Sejf_Rodziny[lider] + kasa > 1_000_000_000)
 					{
-					    SendClientMessage(playerid, COLOR_P@, "Nie masz a¿ tyle przy sobie !");
-					    new stan[256];
-		                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp³acanie", stan, "Wp³aæ", "Wróæ");
+						SendClientMessage(playerid, -1, "Sejf siê przepe³ni!");
+						return 1;
 					}
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
+
+					ZabierzKase(playerid, kasa);
+					SejfR_Add(lider, kasa);
+
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wp³aci³ do sejfu rodziny %d kwotê %d$. Nowy stan: %d$", 
+						GetPlayerLogName(playerid),
+						lider,
+						kasa,
+						Sejf_Rodziny[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
 				}
 		        else
 		        {
+					SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloœæ!");
 		            new stan[256];
 	                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
 					ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp³acanie", stan, "Wp³aæ", "Wróæ");
 		        }
 		    }
-		    if(!response)
+		    else
 		    {
-		        ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ", "Wybierz", "WyjdŸ");
+		        SejfR_Show(playerid);
+		    }
+		}
+		if(dialogid == 5430)
+		{
+		    if(response)
+		    {
+                new mats = FunkcjaK(inputtext);
+                new lider = GetPlayerOrg(playerid);
+				if(mats > 0 && mats <= Rodzina_Mats[lider])
+				{
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
+
+					SejfR_AddMats(lider, -mats);
+					PlayerInfo[playerid][pMats] += mats;
+
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wyp³aci³eœ %d matsów z sejfu rodzinnego. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wyp³aci³ z sejfu rodziny %d %d mats. Nowy stan: %d", 
+						GetPlayerLogName(playerid),
+						lider,
+						mats,
+						Rodzina_Mats[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
+					new stanmats[128];
+					format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
+					ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wyp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+				}
+		    }
+		    else
+		    {
+		        SejfR_Show(playerid);
+		    }
+		}
+		if(dialogid == 5431)
+		{
+		    if(response)
+		    {
+                new mats = FunkcjaK(inputtext);
+                new lider = GetPlayerOrg(playerid);
+				if(mats > 0 && PlayerInfo[playerid][pMats] >= mats)
+				{
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
+
+					PlayerInfo[playerid][pMats] -= mats;
+					SejfR_AddMats(lider, mats);
+
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wp³aci³eœ %d mats do sejfu rodzinnego. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wp³aci³ do sejfu rodziny %d %d mats. Nowy stan: %d", 
+						GetPlayerLogName(playerid),
+						lider,
+						mats,
+						Rodzina_Mats[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
+				}
+		        else
+		        {
+		            SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloœæ!");
+					new stanmats[256];
+					format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d\n{F8F8FF}Iloœæ materia³ów które posiadasz:\t\t{008080}%d", Rodzina_Mats[lider], PlayerInfo[playerid][pMats]);
+					ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+		        }
+		    }
+		    else
+		    {
+		        SejfR_Show(playerid);
 		    }
 		}
         if(dialogid == 666)
@@ -14279,42 +13584,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		return 1;
 	}
 
-	if(dialogid == D_MECH_SPRZEDAZ_FIXKIT)
-	{
-		new id = GetPVarInt(playerid, "FixKitOffer");
-		if(response)
-		{
-			if(kaska[playerid] < 15000)
-			{
-				SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
-				return SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
-			}
-			else
-			{
-				SendClientMessage(id, 0x0080D0FF, sprintf("%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", GetNick(playerid)));
-				SendClientMessage(playerid, 0x00FF00FF, sprintf("Kupi³eœ zestaw od mechanika %s za 15000$", GetNick(id)));
-				ZabierzKase(playerid, 15000);
-				DajKase(id, 15000);
-				PlayerInfo[playerid][pFixKit]++;
-				PlayerInfo[id][pMechSkill]++;
-                if(PlayerInfo[id][pMechSkill] == 50)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                else if(PlayerInfo[id][pMechSkill] == 100)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                else if(PlayerInfo[id][pMechSkill] == 200)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                else if(PlayerInfo[id][pMechSkill] == 400)
-                { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-			}
-		}
-		else
-		{
-			SendClientMessage(id, 0xFF0030FF, sprintf("Gracz %s nie zgodzi³ siê na kupno zestawu.", GetNick(playerid)));
-		}
-		DeletePVar(playerid, "FixKitOffer");
-		return 1;
-	}
-
 	if(dialogid == D_UZYCIE_APTECZKI)
 	{
 		new string[144];
@@ -14330,7 +13599,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", GetNick(playerid));
 				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				pobity[playerid] = 0;
+				isBeatenUp[playerid] = false;
 				ZdejmijBW(playerid, 3500);
 				SetPlayerHealth(playerid, 90.0);
 			}
@@ -14343,7 +13612,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string),"* %s wyci¹ga apteczkê, banda¿uje obra¿enia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				PlayerInfo[id][pHealthPacks]--;
-				pobity[playerid] = 0;
+				isBeatenUp[playerid] = false;
 				ZdejmijBW(playerid, 6000);
 				SetPlayerHealth(playerid, HEALTH_PACK_HP);
 			}
@@ -15443,12 +14712,16 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new str[128];
         format(str, 64, "SUPPORT: %s oferuje Ci pomoc, skorzystaj z tego!", GetNick(playerid));
         SendClientMessage(pid, COLOR_YELLOW, str);
-        format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wróciæ do poprzedniej pozycji wpisz /ticketend", GetNick(pid));
+        format(str, 128, "SUPPORT: Pomagasz teraz %s. Aby wróciæ do poprzedniej pozycji wpisz /ticketend.", GetNick(pid));
         SendClientMessage(playerid, COLOR_YELLOW, str);
 		if(GetPVarInt(playerid, "dutyadmin") == 1)
 		{
 			iloscZapytaj[playerid] = iloscZapytaj[playerid]+1;
 		}
+
+		SendClientMessage(playerid, COLOR_YELLOW, "Pe³na treœæ pytania:");
+		format(str, sizeof(str), "%s", TICKET[id][suppDesc]);
+		SendClientMessage(playerid, COLOR_YELLOW, str);
 
         return 1;
     }
@@ -15501,7 +14774,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							if(PlayerInfo[playerid][pLiderValue] < 3)
 							{
 								format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[FracGracza]);
-								ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
+								ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\nWp³aæ materia³y\nWyp³aæ materia³y\n<< Twoje konto", "Wybierz", "WyjdŸ");
 							}
 							else 
 							{
@@ -15525,7 +14798,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 5://Konto rodziny
 				{
-					sendErrorMessage(playerid, "Ju¿ wkrótce!"); 
+					sendTipMessage(playerid, "U¿yj /sejfr!"); 
 				}
 				
             }
@@ -15584,6 +14857,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new string[256];
 			new StanSejfuFrac[128];//drugi string specjalnie do stanu konta frakcji
 			new stan = Sejf_Frakcji[GetPlayerFraction(playerid)];//Stan sejfu frakcji
+			new stanmats = Frakcja_Mats[GetPlayerFraction(playerid)];
 			new giveplayer[MAX_PLAYER_NAME];//Gracz odbieraj¹cy
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
             switch(listitem)
@@ -15594,7 +14868,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				case 0://=======================>>SprawdŸ stan konta organizacji
 				{	
-					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyœlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$", giveplayer, FractionNames[FracGracza],Sejf_Frakcji[GetPlayerFraction(playerid)]);
+					format(string, sizeof(string), "{C0C0C0}Witaj {800080}%s{C0C0C0},\nPomyœlnie zalogowano na:{80FF00}%s\n{C0C0C0}Obecny stan konta: {80FF00}%d$\n{C0C0C0}Obecny stan materia³ów: {80FFFF}%d", giveplayer, FractionNames[FracGracza], stan, stanmats);
 					ShowPlayerDialogEx(playerid, 1080, DIALOG_STYLE_MSGBOX, "Stan Konta", string, "Okej", "");
 				}
 				case 1://=======================>>Przelew z konta frakcji na konto gracza
@@ -15627,7 +14901,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					format(StanSejfuFrac, sizeof(StanSejfuFrac), "Stan konta: {80FF00}%d\n{C0C0C0}Wpisz poni¿ej kwotê jak¹ chcesz wyp³aciæ", stan);
 					ShowPlayerDialogEx(playerid, 1078, DIALOG_STYLE_INPUT, string, StanSejfuFrac, "Wykonaj", "Odrzuæ"); 
 				}
-				case 5://=======================>>Powrót do g³ównego panelu
+				case 5: { // wplac mats
+					format(string, sizeof(string), "Wpisz poni¿ej iloœæ materia³ów, jak¹ chcesz wp³aciæ\nIloœæ materia³ów które posiadasz: {80FFFF}%d", PlayerInfo[playerid][pMats]);
+					ShowPlayerDialogEx(playerid, 1577, DIALOG_STYLE_INPUT, FractionNames[FracGracza], string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 6: { // wyplac mats
+					format(string, sizeof(string), "Iloœæ materia³ów na koncie: {80FFFF}%d\n{C0C0C0}Wpisz poni¿ej iloœæ jak¹ chcesz wyp³aciæ", stanmats);
+					ShowPlayerDialogEx(playerid, 1578, DIALOG_STYLE_INPUT, FractionNames[FracGracza], string, "Wykonaj", "Odrzuæ"); 
+				}
+				case 7://=======================>>Powrót do g³ównego panelu
 				{	
 					
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
@@ -16053,7 +15335,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 			new frakcja = PlayerInfo[playerid][pLider];
 			format(string, sizeof(string), ">> %s >> %s", giveplayer, FractionNames[frakcja]);
-			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\n<< Twoje konto", "Wybierz", "WyjdŸ");
+			ShowPlayerDialogEx(playerid, 1069, DIALOG_STYLE_LIST, string, "Stan Konta\nPrzelew do osoby\nPrzelew do frakcji\nWp³aæ\nWyp³aæ\nWp³aæ materia³y\nWyp³aæ materia³y\n<< Twoje konto", "Wybierz", "WyjdŸ");
 			return 1;
 		}
 
@@ -16202,6 +15484,103 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	
 	
 	}
+	else if(dialogid == 1077)
+	{
+		if(!response)
+		{
+		
+			sendErrorMessage(playerid, "Odrzucono akcjê wp³aty"); 
+			return 1;
+		}
+		else
+		{
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid);
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(money >= 1)
+			{
+				if(money <= kaska[playerid])
+				{
+					new string[128];
+					Sejf_Add(frakcja, money);
+					Sejf_Save(frakcja);
+					ZabierzKase(playerid, money); 
+					format(string, sizeof(string), "Lider %s wp³aci³ %d$ na konto organizacji", sendername, money); 
+					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
+					
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d kwotê %d$. Nowy stan: %d$", 
+						GetPlayerLogName(playerid),
+						frakcja,
+						money,
+						Sejf_Frakcji[frakcja]);
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie masz tyle!"); 
+					return 1;
+				}
+			
+			}
+			else
+			{
+				sendErrorMessage(playerid, "B³êdna kwota transakcji");
+				return 1;
+			}
+		
+			return 1;
+		}
+	
+	
+	}
+	else if(dialogid == 1577) // wplata matsow
+	{
+		if(!response)
+		{
+			sendErrorMessage(playerid, "Odrzucono akcjê wp³aty"); 
+			return 1;
+		}
+		else
+		{
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid);
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(money >= 1)
+			{
+				if(money <= PlayerInfo[playerid][pMats])
+				{
+					new string[128];
+					Sejf_AddMats(frakcja, money);
+					Sejf_Save(frakcja);
+					PlayerInfo[playerid][pMats] -= money; 
+					format(string, sizeof(string), "Lider %s wp³aci³ %d matsów na konto organizacji", sendername, money); 
+					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
+					
+					Log(payLog, INFO, "%s wp³aci³ na konto frakcji %d %d mats. Nowy stan: %d", 
+						GetPlayerLogName(playerid),
+						frakcja,
+						money,
+						Frakcja_Mats[frakcja]);
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Nie masz tyle materia³ów!"); 
+					return 1;
+				}
+			
+			}
+			else
+			{
+				sendErrorMessage(playerid, "B³êdna kwota transakcji");
+				return 1;
+			}
+		
+			return 1;
+		}
+	
+	
+	}
 	//=================[WyP£ATA Z KONTA ORGANIZACJI]=================
 	else if(dialogid == 1078)
 	{
@@ -16258,8 +15637,62 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		
 			return 1;
 		}
-	
-	
+	}
+	else if(dialogid == 1578) // wyplata mats
+	{
+		if(!response)
+		{
+			sendErrorMessage(playerid, "Odrzucono akcjê wyp³aty"); 
+			return 1;
+		}
+		else
+		{
+			new money = FunkcjaK(inputtext);
+			new frakcja = GetPlayerFraction(playerid); 
+			new sendername[MAX_PLAYER_NAME];
+			GetPlayerName(playerid, sendername, sizeof(sendername));
+			if(money >= 1)
+			{
+				if(money <= Frakcja_Mats[frakcja])
+				{
+					new string[128];
+					Sejf_AddMats(frakcja, -money);
+					Sejf_Save(frakcja);
+					PlayerInfo[playerid][pMats] += money; 
+					format(string, sizeof(string), "Lider %s wyp³aci³ %d mats z konta organizacji", sendername, money); 
+					SendLeaderRadioMessage(frakcja, COLOR_LIGHTGREEN, string); 
+					
+					Log(payLog, INFO, "%s wyp³aci³ z konta frakcji %d %d mats. Nowy stan: %d", 
+						GetPlayerLogName(playerid),
+						frakcja,
+						money,
+						Frakcja_Mats[frakcja]);
+					
+					if(money >= 2000000)
+					{
+						
+						SendAdminMessage(COLOR_YELLOW, "|======[ADM-WARNING]======|");
+						SendAdminMessage(COLOR_WHITE, string);
+						SendAdminMessage(COLOR_YELLOW, "|=========================|");
+						
+					
+					}
+				}
+				else
+				{
+					sendErrorMessage(playerid, "W sejfie twojej organizacji nie ma tylu materia³ów!"); 
+					return 1;
+				}
+			
+			}
+			else
+			{
+				sendErrorMessage(playerid, "B³êdna kwota transakcji!");
+				return 1;
+			}
+		
+			return 1;
+		}
 	}
 //=================[KONIEC]========================
 	else if(dialogid == 1090)//Dialog do kupna biletów KT --> Poci¹g
@@ -16311,42 +15744,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			sendErrorMessage(playerid, "Aby zejœæ ze s³u¿by wpisz /adminduty"); 
 			return 1;
         }
-	
-	}
-	else if(dialogid == 1092)//Ca³uj - komenda - potwierdzenie
-	{
-		if(response)
-		{
-			if(ProxDetectorS(5.5, playerid, kissPlayerOffer[playerid]))
-			{
-				new string[128];
-				format(string, sizeof(string),"* %s kocha %s wiêc ca³uj¹ siê.", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				format(string, sizeof(string), "%s mówi: Kocham ciê.", GetNick(kissPlayerOffer[playerid]));
-				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-				format(string, sizeof(string), "%s mówi: Ja ciebie te¿.", GetNick(playerid));
-				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-				ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
-				ApplyAnimation(kissPlayerOffer[playerid], "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
-				
-				//zerowanie zmiennych:
-				kissPlayerOffer[playerid] = 0;
-			}
-			else
-			{
-				sendTipMessage(playerid, "Mi³oœæ Ci uciek³a!"); 
-				return 1;
-			}
-		}
-		if(!response)
-		{
-			
-			new string[128];
-			format(string, sizeof(string), "* %s spojrza³(a) na %s i stwierdzi³(a), ¿e nie chce siê ca³owaæ!", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
-			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		
-			return 1;
-		}
 	
 	}
     else if(dialogid == 7079)
@@ -17561,7 +16958,95 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
+	else if (dialogid == D_ORGMEMBER) {
+		if (!gPlayerOrgLeader[playerid]) {
+			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
+			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
+			DeletePVar(playerid, "prpanel_uid");
+			return 1;
+		}
+		if (response) {
+			switch(listitem) {
+				case 3: { // zwolnij
+					new uid = GetPVarInt(playerid, "prpanel_uid");
+					new nick[MAX_PLAYER_NAME];
+					strcat(nick, MruMySQL_GetNameFromUID(uid));
+					new rodzina = MruMySQL_GetAccInt("FMember", nick);
+					if(rodzina != GetPlayerOrg(playerid)) {
+						Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
+						sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!)");
+						DeletePVar(playerid, "prpanel_uid");
+						return 1;
+					}
+					new msg[1024];
+					format(msg, sizeof(msg), "UPDATE `mru_konta` SET `FMember`=0, `Rank`=99, `Member`=99, `Uniform`=0, `Team`=3 WHERE `UID`=%i AND `Rank`<1000", uid);
+					mysql_query(msg);
+					format(msg, sizeof(msg), "* Wyrzuci³eœ %s ze swojej rodziny.", nick);
+					SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
+					DeletePVar(playerid, "prpanel_uid");
+				}
+				case 4: { // ranga
+					new org = GetPlayerOrg(playerid);
+					new str[512];
+					for(new i=0;i<10;i++)
+					{
+						if(strlen(FamRang[org][i]) < 2)
+							format(str, 512, "%s[%d] -\n", str, i);
+						else
+							format(str, 512, "%s[%d] %s\n", str, i, FamRang[org][i]);
+					}
+
+					return ShowPlayerDialogEx(playerid, D_ORGMEMBER_RANK, DIALOG_STYLE_LIST, "Wybierz rangê, któr¹ chcesz nadaæ graczowi", str, "Nadaj", "Anuluj");
+				}
+				default:
+					Command_ReProcess(playerid, "pr pracownicy", false);
+			}
+		} else {
+			DeletePVar(playerid, "prpanel_uid");
+			Command_ReProcess(playerid, "pr pracownicy", false);
+		}
+		return 1;
+	}
+	else if (dialogid == D_ORGMEMBER_RANK) {
+		if (!gPlayerOrgLeader[playerid]) {
+			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
+			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
+			DeletePVar(playerid, "prpanel_uid");
+			return 1;
+		}
+		if (response) {
+			new org = GetPlayerOrg(playerid);
+			if(listitem >= MAX_RANG || listitem < 0 || strlen(FamRang[org][listitem]) < 1) {
+				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
+				DeletePVar(playerid, "prpanel_uid");
+				Command_ReProcess(playerid, "pr pracownicy", false);
+				return 1;
+			}
+			new uid = GetPVarInt(playerid, "prpanel_uid");
+			new nick[MAX_PLAYER_NAME];
+			strcat(nick, MruMySQL_GetNameFromUID(uid));
+			new rodzina = MruMySQL_GetAccInt("FMember", nick);
+			if(rodzina != GetPlayerOrg(playerid)) {
+				Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
+				sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
+				DeletePVar(playerid, "prpanel_uid");
+				return 1;
+			}
+			new msg[1024];
+			format(msg, sizeof(msg), "UPDATE `mru_konta` SET `Rank`=%i WHERE `UID`=%i AND `Rank`<1000", listitem, uid);
+			mysql_query(msg);
+			format(msg, sizeof(msg), "Da³es %d rangê graczowi %s", listitem, nick);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
+		}
+		DeletePVar(playerid, "fpanel_uid");
+		Command_ReProcess(playerid, "pr pracownicy", false);
+		return 1;
+	}
 	else if(mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	else if(BW_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
 	{
 		return 1;
 	}

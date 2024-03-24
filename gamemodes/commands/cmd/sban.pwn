@@ -41,7 +41,7 @@ YCMD:sban(playerid, params[], help)
 			return 1;
 		}
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 4 || PlayerInfo[playerid][pAdmin] == 7)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 4)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -62,6 +62,9 @@ YCMD:sban(playerid, params[], help)
 						GetPlayerLogName(playerid),
 						GetPlayerLogName(giveplayerid),
 						result);
+					format(string, sizeof(string), "Admin %s ukara³ %s kar¹ cichego bana, powód: %s", 
+						GetNick(playerid), GetNick(giveplayerid), result);
+					SendAdminMessage(COLOR_PANICRED, string);
 				    MruMySQL_Banuj(giveplayerid, result, playerid);
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);

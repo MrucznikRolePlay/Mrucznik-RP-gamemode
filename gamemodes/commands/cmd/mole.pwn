@@ -33,7 +33,7 @@ YCMD:mole(playerid, params[], help)
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
 
-    if(PlayerInfo[playerid][pAdmin] >= 100)
+    if(PlayerInfo[playerid][pAdmin] >= 1)
     {
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(isnull(params))

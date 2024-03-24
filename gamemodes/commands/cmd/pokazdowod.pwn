@@ -52,7 +52,7 @@ YCMD:pokazdowod(playerid, params[], help)
 		{
 			if(giveplayerid != INVALID_PLAYER_ID)
 			{
-			    if (ProxDetectorS(8.0, playerid, giveplayerid) && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+			    if (ProxDetectorS(8.0, playerid, giveplayerid))
 				{
 
 				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
@@ -69,7 +69,6 @@ YCMD:pokazdowod(playerid, params[], help)
 	                else if(PlayerInfo[playerid][pOrigin] == 3) { otext = "LV"; }*/
 	                //
 	                new ttext[20];
-					if(gTeam[playerid] == 3 || gTeam[playerid] == 4) { ttext = "Cywil"; }
 					if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1) { ttext = "Komisariat LSPD"; }
 					else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2) { ttext = "Biuro FBI"; }
 					else if(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3) { ttext = "NG"; }
@@ -86,6 +85,7 @@ YCMD:pokazdowod(playerid, params[], help)
 					else if(PlayerInfo[playerid][pMember] == 14 || PlayerInfo[playerid][pLider] == 14) { ttext = "Salon tatua¿u"; }
 					else if(PlayerInfo[playerid][pMember] == 15 || PlayerInfo[playerid][pLider] == 15) { ttext = "Warsztat tuningu"; }//NoA
 					else if(PlayerInfo[playerid][pMember] == 16 || PlayerInfo[playerid][pLider] == 16) { ttext = "Bonehead Club"; }//WPS
+					else { ttext = "Cywil"; }
 	                // 1 usa 2 europa 3 azja
                     new pochodzenie = PlayerInfo[playerid][pOrigin];
                     switch(pochodzenie) {

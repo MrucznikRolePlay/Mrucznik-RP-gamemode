@@ -54,9 +54,6 @@ YCMD:dajlideraorg(playerid, params[], help)
 			
 			//logi
             Log(adminLog, INFO, "Admin %s da³ graczowi %s lidera rodziny %d", GetPlayerLogName(playerid), GetPlayerLogName(id), family);
-			
-			PlayerInfo[id][pTeam] = 5;
-			gTeam[id] = 5;
 		}
 		else
 		{

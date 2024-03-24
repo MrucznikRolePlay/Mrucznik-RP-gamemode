@@ -41,7 +41,7 @@ YCMD:sblok(playerid, params[], help)
             return 1;
         }
 
-		if (PlayerInfo[playerid][pAdmin] >= 5000 || PlayerInfo[playerid][pNewAP] == 4)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] == 4)
 		{
 		    if(AntySpam[playerid] == 1)
 		    {
@@ -61,8 +61,8 @@ YCMD:sblok(playerid, params[], help)
 						GetPlayerLogName(playerid),
 						GetPlayerLogName(giveplayerid),
 						result);
-		            PlayerInfo[playerid][pBlock] = 1;
-					SendClientMessage(giveplayerid, COLOR_NEWS, "Twoje konto zosta³o zablokowane za z³y nick. Jeœli block jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i napiœ proœbê o UN BLOCK");
+		            PlayerInfo[giveplayerid][pBlock] = 1;
+					SendClientMessage(giveplayerid, COLOR_NEWS, "Twoje konto zosta³o zablokowane. Jeœli block jest nies³uszny wejdŸ na www.Mrucznik-RP.pl i napiœ proœbê o UN BLOCK");
 					KickEx(giveplayerid);
 					SetTimerEx("AntySpamTimer",5000,0,"d",playerid);
 	    			AntySpam[playerid] = 1;

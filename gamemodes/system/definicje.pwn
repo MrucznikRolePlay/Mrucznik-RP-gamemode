@@ -120,8 +120,6 @@
 #define MAX_ORG     50
 #define MAX_STRING2 255
 //#define MAX_CHATBUBBLE_LENGTH 144
-#define CHECKPOINT_NONE 0
-#define CHECKPOINT_HOME 12
 #define MAX_3DTEXT 1024
 #define MAX_DOM 2000
 #define MAX_NrDOM 53
@@ -381,8 +379,6 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define DIALOG_LIDER01 3001
 #define DIALOG_LIDER02 3002
 
-#define DIALOGID_PODSZYJ				3245
-#define DIALOGID_PODSZYJ_ZMIENID(%0)	3245+%0
 #define DIALOGID_MUZYKA		3240
 #define DIALOGID_MUZYKA_URL	3241
 
@@ -468,8 +464,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_UZYCIE_APTECZKI			    10108
 #define D_PRZEDMIOTY_BRONIE			    10109
 
-#define D_MECH_SPRZEDAZ_FIXKIT          10110
-
+#define D_ORGMEMBER                     10111
+#define D_ORGMEMBER_RANK                10112
 
 //------------------------------------------------------------------------------
 //                              INNE
@@ -589,6 +585,8 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 //AJ powód
 #define MAX_AJ_REASON 64
+
+#define NICK_REGEX "^(Le)?[A-Z]{1}[a-z]{1,}(_[A-Z]{1}[a-z]{1,}([A-HJ-Z]{1}[a-z]{1,})?){1,2}$"
 
 // Y_SAFERETURN ! ! !
 forward _SafeReturnCode_(dest[], src[], bytes);

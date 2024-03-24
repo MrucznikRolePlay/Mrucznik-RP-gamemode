@@ -58,36 +58,38 @@ command_lowienie_Impl(playerid)
 
         new vehicleID = GetPlayerVehicleID(playerid);
         new isBoatOwner = IsABoat(vehicleID) && IsCarOwner(playerid, vehicleID);
-        if(!isBoatOwner) 
+        if(isBoatOwner) 
         {
-            rand /= 3;
-        } 
-        else 
-        {
+            if(!CA_IsVehicleNearWater(vehicleID))
+            {
+                sendErrorMessage(playerid, "Twoja ≥Ûdü nie jest w wodzie!");
+                return 1;
+            }
+
             new Float:x, Float:y, Float:z;
             GetPlayerPos(playerid, x, y, z);
             CA_FindZ_For2DCoord(x, y, z);
-            new Float:depthBonus = 2 - z*(1/-60);
+            new Float:depthBonus = 1 + (-z) * 0.1;
             if(depthBonus < 1) 
             {
                 depthBonus = 1;
             }
-            else if(depthBonus > 2) 
+            else if(depthBonus > 1.2) 
             {
-                depthBonus = 2;
+                depthBonus = 1.2;
             }
 
-            rand = floatround(rand/depthBonus, floatround_ceil);
+            Caught = floatround(Caught*depthBonus, floatround_ceil);
         }
 
         if(GetWeather() == 8) 
         {
-            rand = floatround(rand * 1.5, floatround_ceil);
+            Caught = floatround(Caught * 1.5, floatround_ceil);
         }
 
         if(IsPlayerSick(playerid, FANATYK_WEDKARSTWA)) 
         {
-            rand = floatround(rand * 1.5, floatround_ceil);
+            Caught = floatround(Caught * 1.2, floatround_ceil);
         }
         else
         {

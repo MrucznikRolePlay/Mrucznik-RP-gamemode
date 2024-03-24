@@ -36,7 +36,7 @@ YCMD:sprzedajalkohol(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAPrzestepca(playerid) || PlayerInfo[playerid][pAdmin] >= 1000 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == FAMILY_IBIZA)
+        if(IsAPrzestepca(playerid) || PlayerInfo[playerid][pAdmin] >= 1 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == FAMILY_IBIZA)
         {
 			
      		new x_nr[16];
@@ -50,7 +50,7 @@ YCMD:sprzedajalkohol(playerid, params[], help)
 			
 			if(IsPlayerConnected(giveplayerid) || giveplayerid != INVALID_PLAYER_ID)
 			{
-				if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5 && Spectate[giveplayerid] == INVALID_PLAYER_ID)
+				if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
 				{
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));

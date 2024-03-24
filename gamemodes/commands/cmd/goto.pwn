@@ -43,7 +43,7 @@ YCMD:goto(playerid, params[], help)
 
 		if(plo != INVALID_PLAYER_ID)
 		{
-			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || PlayerInfo[playerid][pZG]==10 || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
+			if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pNewAP] >= 1 || Zaufany(playerid) || Uprawnienia(playerid, ACCESS_PANEL) || IsAScripter(playerid))
 			{
 				if(Spectate[playerid] != INVALID_PLAYER_ID)
 				{

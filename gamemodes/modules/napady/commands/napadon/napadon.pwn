@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  lockdown                                                 //
+//                                                  napadon                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -33,7 +33,7 @@
 //-------<[ initialize ]>-------
 command_napadon()
 {
-    Command_GetID("napadon");
+    
 
     //aliases
     
@@ -50,9 +50,11 @@ YCMD:napadon(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "System napadu.");
+        sendTipMessage(playerid, "System Napadów");
         return 1;
     }
+    
+    
     //command body
     return command_napadon_Impl(playerid);
 }

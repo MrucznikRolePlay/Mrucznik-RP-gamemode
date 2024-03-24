@@ -356,7 +356,7 @@ Car_Load()
         //Opis dla pojazdów z wypo¿yczalni
         if(CarData[i][c_OwnerType] == CAR_OWNER_SPECIAL && CarData[i][c_Owner] == RENT_CAR)
         {
-            CarOpis[CarData[i][c_ID]] = CreateDynamic3DTextLabel("Wypo¿yczalnia pojazdów\nGROTTI", COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
+            Car3dTextDesc[CarData[i][c_ID]] = CreateDynamic3DTextLabel("Wypo¿yczalnia pojazdów\nGROTTI", COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, CarData[i][c_ID], 1, -1, -1, -1, 10.0);
         }
         //Obiekty na dachach taxówek
         if(CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_KT)
@@ -405,7 +405,7 @@ Car_Load()
 				
 				WordWrap(ldesc, true, lText);
 
-				CarOpis[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i);
+				Car3dTextDesc[i] = CreateDynamic3DTextLabel(lText, COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, i, 1, -1, -1, -1, 10.0);
 				format(CarOpisCaller[i], MAX_PLAYER_NAME, "SYSTEM");
 
 				strcat(CarDesc[i], ldesc);
@@ -493,6 +493,13 @@ Car_LoadForPlayer(playerid)
         format(lsSearch, 8, "%d|", lsID);
         if(strfind(lList, lsSearch) == -1)
         {
+            new idx = Car_GetIDXFromUID(lsID);
+            if(idx != -1)
+            {
+                PlayerInfo[playerid][pCars][lUsed++] = idx;
+                continue;
+            }
+
             sscanf(lStr, "p<|>ddddfffffddddlddddddddddds[32]",
             CarData[lVehID][c_UID],
             CarData[lVehID][c_OwnerType],
@@ -590,6 +597,26 @@ IsCarOwner(playerid, vehicle, bool:kluczyki=false)
         }
     }
     return 0;
+}
+
+IsPlayerOwnFractionCar(playerid, vehicleID)
+{
+    new vehicleUID = VehicleUID[vehicleID][vUID];
+    if(vehicleUID == 0)
+    {
+        return 0;
+    }
+    
+    new lider = PlayerInfo[playerid][pLider];
+    new org = GetPlayerOrg(playerid);
+    new liderOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FRACTION && \
+        lider == CarData[vehicleUID][c_Owner] && 
+        lider > 0;
+    new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
+        org == CarData[vehicleUID][c_Owner] && \
+        orgIsLeader(playerid);
+
+    return liderOwner || orgOwner;
 }
 
 Car_IsValid(vehicleid)

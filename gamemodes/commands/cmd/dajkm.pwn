@@ -45,7 +45,7 @@ YCMD:dajkm(playerid, params[], help)
 
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(sendername,"Gonzalo_DiNorscio", false) == 0)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(sendername,"Gonzalo_DiNorscio", false) == 0)
 		{
 		    if(IsPlayerConnected(para1))
 		    {
@@ -59,8 +59,8 @@ YCMD:dajkm(playerid, params[], help)
 						format(string, sizeof(string), "   Gracz %s jest teraz komentator ¿u¿lowym.", giveplayer);
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 						komentator[para1] = 1;
-						format(string, sizeof(string), "Komentator: Witam! Tu %s ! Bêdê komentowa³ ten wyœcig.", giveplayer);
-						ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
+						format(string, sizeof(string), "Komentator: Witam! Tu %s! Bêdê komentowa³ ten wyœcig.", giveplayer);
+						ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, string);
 					}
 					else
 					{

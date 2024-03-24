@@ -32,14 +32,14 @@ YCMD:zuzel_start(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if (PlayerInfo[playerid][pAdmin] >= 5 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0)
+		if (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 2 || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0)
 		{
 		    if(wyscigz == 0)
 		    {
 		    	StartZuzling();
 		    	wyscigz = 1;
-				ProxDetectorW(500, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, "Wyœcig ¿u¿lowy rozpoczêty!");
-				SetTimerEx("TablicaWynikow",30000,0,"d",playerid);
+				ProxDetectorW(300, -1106.9854, -966.4719, 129.1807, COLOR_WHITE, "Wyœcig ¿u¿lowy rozpoczêty!");
+				
 				SendClientMessage(playerid, COLOR_GRAD2, "Zuzel start");
 			}
 			else
