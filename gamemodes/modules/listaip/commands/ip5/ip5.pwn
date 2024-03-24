@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------------[ ip ]--------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                ip5                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,63 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
- */
 
+//-------<[ include ]>-------
+#include "ip5_impl.pwn"
 
-// Notatki skryptera:
-/*
-
- */
-
-YCMD:ip(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_ip5()
 {
-    new string[128];
-    new giveplayer[MAX_PLAYER_NAME];
+    
 
-    if (PlayerInfo[playerid][pAdmin] >= 1)
-    {
-        new giveplayerid;
-        if( sscanf(params, "k<fix>", giveplayerid))
-        {
-            sendTipMessage(playerid, "U¿yj /ip [playerid]");
-            sendTipMessage(playerid, "FUNKCJA: Pokazuje IP wybranego gracza.");
-            return 1;
-        }
-        if(IsPlayerConnected(giveplayerid))
-        {
-            new ip[32];
-            GetPlayerIp(giveplayerid,ip,32);
-            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-            format(string, sizeof(string), "-| %s IP: %s |-", giveplayer,ip);
-            SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            Log(adminLog, INFO, "Admin %s u¿y³ /ip na graczu %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
-        } else
-        {
-            format(string, sizeof(string), "Nie znaleziono gracza o nicku/id %s", params);
-            sendErrorMessage(playerid, string);
-        }
-    } else
-    {
-        noAccessMessage(playerid);
-    }
-    return 1;
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
 }
+
+//-------<[ command ]>-------
+YCMD:ip5(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Wyœwietlanie 5 ostatnich adresów IP, na których gra³ gracz pod danym nickiem.");
+        return 1;
+    }
+    //fetching params
+
+    if(isnull(params))
+    {
+        sendTipMessage(playerid, "U¿yj /ip5 [Nick/ID] ");
+        return 1;
+    }
+
+    new offline = false;
+    new giveplayer[MAX_PLAYER_NAME];
+    if(sscanf(params, "r", giveplayer) || !IsPlayerConnected(giveplayer[0]))
+    {
+        new formatString[8];
+        format(formatString, sizeof(formatString), "s[%d]", MAX_PLAYER_NAME);
+        sscanf(params, formatString, giveplayer);
+        offline = true;
+    }
+    //command body
+    return command_ip5_Impl(playerid, giveplayer, offline);
+}
+
+/*
+*/

@@ -2110,27 +2110,6 @@ IsAPolicja(playerid)
 	return 0;
 }
 
-IsAFakeKonto(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new nick[MAX_PLAYER_NAME];
-		GetPlayerName(playerid, nick, sizeof(nick));
-		if(strcmp(nick,"Gniewomir_Wonsz", false) == 0 || strcmp(nick,"Filemon_Paprotka", false) == 0 || strcmp(nick,"Julia_Wisefield", false) == 0)
-		{
-		    return 1;
-		}
-	
-		new ip[32];
-		GetPlayerIp(playerid,ip,sizeof(ip));
-		if(strcmp(ip,"185.6.30.124", false) == 0)
-		{
-			return 1;
-		}
-	}
-	return 0;
-}
-
 IsAPrzestepca(playerid)
 {
 	if(IsPlayerConnected(playerid))

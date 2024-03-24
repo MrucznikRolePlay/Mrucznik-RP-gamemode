@@ -74,6 +74,7 @@
 #include "antycheat\antycheat.def"
 #include "komendy\komendy.def"
 #include "choroby\choroby.def"
+#include "listaip\listaip.def"
 
 
 //-------<[ .hwn ]>-------
@@ -123,6 +124,7 @@
 #include "antycheat\antycheat.hwn"
 #include "komendy\komendy.hwn"
 #include "choroby\choroby.hwn"
+#include "listaip\listaip.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -172,6 +174,7 @@
 #include "antycheat\antycheat.pwn"
 #include "komendy\komendy.pwn"
 #include "choroby\choroby.pwn"
+#include "listaip\listaip.pwn"
 
 
 //-------<[ timers ]>-------
@@ -237,7 +240,7 @@
 #include "zlodziej_aut\zlodziej_aut_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
-
+#include "listaip\listaip_callbacks.pwn"
 
 //-------<[ commands ]>-------
 #include "frakcje\commands\frakcje_commands.pwn"
@@ -274,3 +277,4 @@
 #include "antycheat\commands\antycheat_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "choroby\commands\choroby_commands.pwn"
+#include "listaip\commands\listaip_commands.pwn"
