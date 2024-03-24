@@ -7909,15 +7909,11 @@ SendZGMessage(color, string[])
 }
 
 //-----------------------[koniec chaty]------------------------------
-AddCar(car, model = -1, col1 = -1, col2 = -1, respawnDelay = -1)
+AddCar(car, model = -1, col1 = -1, col2 = 1, respawnDelay = -1)
 {
 	if(col1 == -1)
 	{
 		col1 = random(126);
-	}
-	if(col2 == -1)
-	{
-		col2 = 1;
 	}
 	if(model == -1)
 	{
