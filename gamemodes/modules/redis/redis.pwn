@@ -28,7 +28,28 @@
 //-----------------<[ Funkcje: ]>-------------------
 ConnectToRedis()
 {
-	RedisClient = Redis_Connect("127.0.0.1", 6379);
+
+	new file[64];
+	new host[32], password[128], port;
+	format(file, sizeof(file), "redis.ini");
+	if(dini_Exists(file)) 
+	{
+		strcat(host, dini_Get(file, "host"));
+		port = dini_Int(file, "port");
+		strcat(password, dini_Get(file, "password"));
+	}
+
+	Redis_Connect(host, port, password, RedisClient);
+
+	new mrucznikRedis;
+	Redis_GetInt(RedisClient, "server:mrucznik-redis", mrucznikRedis);
+	if(mrucznikRedis != 1)
+	{
+		printf("cannot connect to redis or redis key server:mrucznik-redis is not 1");
+		SendRconCommand("exit");
+		return;
+	}
+	printf("REDIS: Po³¹czono siê z baz¹ redis");
 	return;
 }
 
