@@ -2030,6 +2030,7 @@ public CustomPickups()
 					}
 				}
 				OrderReady[i] = 0;
+				Redis_IncrBy("player:contracts-done", -1);
 			}
 		}
 

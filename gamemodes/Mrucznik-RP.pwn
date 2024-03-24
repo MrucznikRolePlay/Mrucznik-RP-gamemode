@@ -66,6 +66,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 // actors https://github.com/Dayrion/actor_plus
 // #include <PawnPlus>
 #include <requests>
+#include <samp-redis>
 
 //-------<[ Include ]>-------
 #include <a_http>
@@ -286,6 +287,9 @@ public OnGameModeInit()
 	
 	
 	DefaultItems_LicenseCost();
+
+	//-------<[ Redis ]>-------
+	ConnectToRedis();
 
 	//-------<[ commands ]>-------
 	InitCommands();
@@ -6831,6 +6835,17 @@ public OnPlayerText(playerid, text[])
 		        SendClientMessage(playerid, COLOR_GREY, "Zamówi³eœ ju¿ paczki z broni¹, idŸ do swojej bazy aby je odebraæ !");
 		        return 0;
 		    }
+
+			new contractsDone;
+			Redis_GetInt(RedisClient, "player:contracts-done", contractsDone);
+			if(contractsDone <= 0)
+			{
+		        SendClientMessage(playerid, COLOR_GREY, "Nie wykona³eœ ¿adnego kontraktu! Aby dostaæ paczkê z broni¹, musisz zas³u¿yæ siê dla Hitman Agency i wykonaæ kontrakt.");
+		        return 0;
+			}
+			format(string, sizeof(string), "Mo¿esz zamówiæ jeszcze %d paczek, zanim bêdziesz musia³ wykonaæ kontrakt by zwiêkszyæ swój limit.", contractsDone);
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+
 		    tmp = strtok(text, idx);
 		    if ((strcmp("1", tmp, true, strlen(tmp)) == 0) && (strlen(tmp) == strlen("1")))
 			{

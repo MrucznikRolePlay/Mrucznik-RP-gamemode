@@ -27,7 +27,8 @@
 		"oscar-broman/samp-inline-sort",
 		"katursis/Pawn.RakNet:1.6.0",
 		"MrucznikRolePlay/Regular-Expressions-Plugin-sampctl:v0.2.4",
-		"Southclaws/pawn-requests:0.10.0"
+		"Southclaws/pawn-requests:0.10.0",
+		"Southclaws/pawn-redis:v0.1.0"
 	],
 	"runtime": {
 		"version": "0.3.DL-R1",
