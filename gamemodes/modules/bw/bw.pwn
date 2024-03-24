@@ -313,6 +313,10 @@ stock IsPlayerAimingEx(playerid)
 stock IsPlayerDamagedByCop(playerid)
 {
 	new damagedTimestamp = GetPVarInt(playerid, "damaged_by_cop");
+	if(damagedTimestamp == 0)
+	{
+		return false;
+	}
 	new threshold = 600;
 	new now = gettime();
 	new damagedByCop = now - damagedTimestamp >= threshold;

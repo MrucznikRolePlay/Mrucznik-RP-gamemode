@@ -2143,7 +2143,7 @@ SetPlayerSpawnPos(playerid)
 		SetCameraBehindPlayer(playerid);
 	}
 	//BW:
-	else if(PlayerInfo[playerid][pBW] > 0)
+	else if(PlayerInfo[playerid][pBW] > 0 || GetPVarInt(playerid, "kill-bw") == 1)
 	{
 		ZespawnujGraczaSzpitalBW(playerid);
 	}
