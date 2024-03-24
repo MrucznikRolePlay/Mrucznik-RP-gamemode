@@ -549,6 +549,7 @@ BWTimer(playerid)
 			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê! {FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
 			SendClientMessage(i, COLOR_NEWS, string);
 		}
+		SetCameraBehindPlayer(playerid);
 	}
 	return 1;
 }
