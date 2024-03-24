@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                zlodziej_aut                                               //
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                   redis                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,17 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: NikodemBanan
-// Data utworzenia: 13.02.2024
+// Autor: mrucznik
+// Data utworzenia: 24.03.2024
+//Opis:
+/*
+	Baza danych key-value redis
+*/
 
 //
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define _ZLODZIEJ_AUT
-#define ZA_DAMAGES_PENALTY_CALC_CONST 1.64										//1 + 0.8^2
-#define ZA_DAMAGES_PENALTY_CALC_EXP_CONST 0.65959498911480940622032627544671	// 4/3 * ln(ZA_DAMAGES_PENALTY_CALC_CONST)
-#define ZA_EULER_NUMBER 2.7182818284590452353602874713527
+#include <YSI\y_hooks>
 
-#define ZA_REWARD_MODEL_DIVISOR 60
-#define ZA_HOT_STUFF_BONUS 2
-#define ZA_VERY_HOT_STUFF_BONUS 3
-#define ZA_LSPD_UPDATE_PERIOD_MS 5000
-#define ZA_LSPD_GPS_DURATION_SHORT_MS 45000 
-#define ZA_LSPD_GPS_DURATION_LONG_MS 180000 
-#define ZA_LSPD_GPS_DURATION_DELUXE_MS 360000 
-#define ZA_LSPD_GPS_CHANCE 15
-#define ZA_LSPD_LONG_GPS_CHANCE 3
-#define ZA_DELUXE_CAR_REWARD 150000
-#define ZA_COOLDOWN_1_S 600
-#define ZA_COOLDOWN_2_S 540
-#define ZA_COOLDOWN_3_S 480
-#define ZA_COOLDOWN_4_S 420
-#define ZA_COOLDOWN_5_S 360
+//-----------------<[ Callbacki: ]>-----------------
 
 //end
