@@ -735,8 +735,6 @@ new Condom[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
 new SexPrice[MAX_PLAYERS];
 new pSessionStart[MAX_PLAYERS] = {0, ...}; // czas wbicia gracza na serwer
-//BW
-new PlayerRequestMedic[MAX_PLAYERS];
 
 //---------------
 new RepairOffer[MAX_PLAYERS];
@@ -1319,7 +1317,6 @@ ZerujZmienne(playerid)
 	
 	//Creative
 	PlayerInfo[playerid][pInjury] = 0;
-	PlayerRequestMedic[playerid] = 0;
 	PlayerInfo[playerid][pHealthPacks] = 0;
 	MyWeapon[playerid] = 0;
 	

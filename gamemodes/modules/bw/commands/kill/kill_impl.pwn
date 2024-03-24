@@ -53,7 +53,6 @@ command_kill_accept(playerid)
     ChatMe(playerid, string);
 
     SetPVarInt(playerid, "kill-bw", 1);
-    PlayerRequestMedic[playerid] = 1;
     SetPlayerHealth(playerid, 0.0);
 
     new Float:x, Float:y, Float:z;

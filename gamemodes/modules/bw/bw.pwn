@@ -602,7 +602,6 @@ ZdejmijBW(playerid, drunklvl = 7000)
 	PlayerInfo[i][pBW]=0;
 	PlayerInfo[i][pInjury]=0;
 	PlayerInfo[i][pMuted] = 0;
-	PlayerRequestMedic[playerid] = 0;
 	TogglePlayerControllable(i, 1);
 	if(GetPVarInt(playerid, "timer_DamagedHP"))
 	{

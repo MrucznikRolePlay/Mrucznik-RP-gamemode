@@ -2145,14 +2145,7 @@ SetPlayerSpawnPos(playerid)
 	//BW:
 	else if(PlayerInfo[playerid][pBW] > 0)
 	{
-		if(PlayerRequestMedic[playerid] == 1)
-		{
-			ZespawnujGraczaBW(playerid);
-		}
-		else
-		{
-			ZespawnujGraczaSzpitalBW(playerid);
-		}
+		ZespawnujGraczaSzpitalBW(playerid);
 	}
 	else if(PlayerInfo[playerid][pInjury] > 0)
 	{
@@ -7203,7 +7196,6 @@ public OnPlayerText(playerid, text[])
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
 			format(wanted, sizeof(wanted), "Centrala: Nadawca: %s, lokalizacja zg³oszenia: %s", turner, pZone);
 			SendFamilyMessage(org, COLOR_ALLDEPT, wanted, true);
-			if(org == 4 && (PlayerInfo[playerid][pBW] > 0 || PlayerInfo[playerid][pInjury] > 0)) PlayerRequestMedic[playerid] = 1;
 
 			SendClientMessage(playerid, COLOR_GRAD2, "Rozmowa zakoñczona...");
 			StopACall(playerid);
