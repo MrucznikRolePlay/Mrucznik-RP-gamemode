@@ -269,7 +269,7 @@ LoadTXD()
 	TextDrawSetProportional(BottomBarTXD, 0);
 	TextDrawSetSelectable(BottomBarTXD, 0);
 
-	RealtimeTXD = TextDrawCreate(606.000000, 436.000000, "0000/00/00 00:00");
+	RealtimeTXD = TextDrawCreate(606.000000, 436.000000, "0000/00/00_00:00");
 	TextDrawFont(RealtimeTXD, 1);
 	TextDrawLetterSize(RealtimeTXD, 0.187499, 1.100000);
 	TextDrawTextSize(RealtimeTXD, 396.500000, 29.500000);
