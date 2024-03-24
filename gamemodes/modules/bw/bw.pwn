@@ -115,17 +115,15 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 
 	if(GetPVarInt(playerid, "kill-bw") == 1)
 	{
-		DeletePVar(playerid, "kill-bw");
 		if(!IsPlayerConnected(killerid))
 		{
 			killerid = GetPVarInt(playerid, "bw-killerid");
 		}
-		return NadajBW(playerid, BW_TIME_KILL);
+		ZespawnujGraczaSzpitalBW(playerid);
 	}
 
 	if(IsPlayerConnected(killerid))
 	{
-		SetPVarInt(playerid, "bw-killerid",  killerid);
 		PlayerInfo[killerid][pKills] ++;
 
 		// daj wanted level mordercy
@@ -153,6 +151,7 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 					}
 
 					SetPVarInt(playerid, "bw-hitmankiller",  1);
+					SetPVarInt(playerid, "bw-killerid",  killerid);
 					return NadajBW(playerid, BW_TIME_CRIMINAL);
 				}
 			}
@@ -237,6 +236,8 @@ BW_OnPlayerInjured(playerid, killerid, reason)
 
 	if(IsPlayerConnected(killerid))
 	{
+		SetPVarInt(playerid, "bw-killerid",  killerid);
+
 		if(giveWL)
 		{
 			if(!IsAPolicja(killerid) && lowcaz[killerid] != playerid)

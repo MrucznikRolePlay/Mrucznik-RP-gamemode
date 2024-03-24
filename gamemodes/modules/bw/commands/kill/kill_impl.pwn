@@ -52,14 +52,14 @@ command_kill_accept(playerid)
     format(string, sizeof(string), "umiera na wskutek odniesionych obra¿eñ i upuszcza %d$ ((MemoryKill))", moneyLost);
     ChatMe(playerid, string);
 
-    SetPVarInt(playerid, "kill-bw", 1);
-    SetPlayerHealth(playerid, 0.0);
-
     new Float:x, Float:y, Float:z;
     GetPlayerPos(playerid, x, y, z);
     new int =  GetPlayerInterior(playerid);
     new vw = GetPlayerVirtualWorld(playerid);
     SetTimerEx("DropDeathMoneyTimer", 5000, false, "ddfffdd", playerid, moneyLost, x, y, z, int, vw);
+
+    SetPVarInt(playerid, "kill-bw", 1);
+    SetPlayerHealth(playerid, 0.0);
 }
 
 forward DropDeathMoneyTimer(playerid, moneyLost, Float:x, Float:y, Float:z, int, vw);
@@ -67,6 +67,7 @@ public DropDeathMoneyTimer(playerid, moneyLost, Float:x, Float:y, Float:z, int, 
 {
     new wl = moneyLost / 200000;
     CreateMoneyPickup(x, y, z, int, vw, moneyLost, wl, PlayerInfo[playerid][pUID]);
+    DeletePVar(playerid, "kill-bw");
 }
 
 //end
