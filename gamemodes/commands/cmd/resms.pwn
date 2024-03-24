@@ -31,11 +31,6 @@
 YCMD:resms(playerid, params[], help)
 {
 	new string[256];
-	if(Kajdanki_JestemSkuty[playerid] == 1)
-	{
-		sendErrorMessage(playerid, "Nie mo¿esz u¿ywaæ telefonu podczas bycia skutym!");
-		return 1;
-	}
 	if(LastSMSNumber[playerid] == 0)
 	{
 		sendErrorMessage(playerid, "Nikt nie wys³a³ Ci smsa");

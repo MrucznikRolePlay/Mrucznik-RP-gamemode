@@ -34,8 +34,8 @@
 #include "lkiz\lkiz.pwn"
 #include "fpanel\fpanel.pwn"
 #include "opis\opis.pwn"
-#include "usunopis\usunopis.pwn"
 #include "togopis\togopis.pwn"
+#include "usunopis\usunopis.pwn"
 #include "togvopis\togvopis.pwn"
 
 
@@ -46,8 +46,8 @@ hook OnGameModeInit()
     command_lkiz();
     command_fpanel();
     command_opis();
-    command_usunopis();
     command_togopis();
+    command_usunopis();
     command_togvopis();
-
+    
 }

@@ -865,7 +865,7 @@ YCMD:brama(playerid, params[], help)
 		}*/ 
 		//==============================[KONIEC]====================================================
 		//..
-		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] > 1/*PlayerInfo[playerid][pJob] == 14*/)
+		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9  || strcmp(GetNick(playerid),"Gonzalo_DiNorscio", false) == 0 || PlayerInfo[playerid][pAdmin] >= 1)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 10.0, -1113.25769043,-1008.68634033,128.90229797))
 			{

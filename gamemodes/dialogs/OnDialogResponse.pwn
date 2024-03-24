@@ -3152,341 +3152,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 			}
 		}
-		else if(dialogid == 90)
-		{
-		    new string[256];
-		    if(response)
-			{
-			    if(zdazylwpisac[playerid] == 1)
-			    {
-				    if(strcmp(kodbitwy, inputtext, true ) == 0 && strlen(inputtext) == 8)
-				    {
-				        new giveplayer[MAX_PLAYER_NAME];
-				        new sendername[MAX_PLAYER_NAME];
-				        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						//
-				    	podczasbicia[bijep[playerid]] = 1;
-				    	podczasbicia[playerid] = 0;
-				    	//
-				    	new randbitwa = random(30);
-						//kodbitwy[playa] = (PobijText[randbitwa]);
-						strmid(kodbitwy, PobijText[randbitwa], 0, strlen(PobijText[randbitwa]), 256);
-						format(string, sizeof(string), "Próbujesz pobiæ %s, za 10 sekund rostrzygnie siê bitwa!", giveplayer);
-		    			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-		    			format(string, sizeof(string), "%s próbuje ciê pobiæ! Wpisz ten kod aby siê obroniæ:\n%s", sendername, kodbitwy);
-						ShowPlayerDialogEx(bijep[playerid], 90, DIALOG_STYLE_INPUT, "BITWA!!", string, "Wybierz", "WyjdŸ");
-		       			//
-				    	SendClientMessage(playerid, COLOR_WHITE, "CIOS ODBITY!");
-				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-				    	ApplyAnimation(playerid, "GYMNASIUM", "GYMshadowbox", 4.0, 1, 0, 0, 1, 0);
-				    	zdazylwpisac[playerid] = 1;
-				    	zdazylwpisac[bijep[playerid]] = 1;
-				    	new timerbicia = SetTimerEx("naczasbicie",9000,0,"d",bijep[playerid]);
-						SetPVarInt(bijep[playerid], "timerBicia", timerbicia);
-				    }
-				    else
-				    {
-				        new giveplayer[MAX_PLAYER_NAME];
-				        new sendername[MAX_PLAYER_NAME];
-				        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-				        format(string, sizeof(string), "* %s wyprowadzi³ cios i pobi³ %s.", giveplayer, sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		    			format(string, sizeof(string), "%s znokautowa³ ciê bez wiêkszego problemu.", giveplayer);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
-						SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-						ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
-						PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
-						PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
-						TogglePlayerControllable(playerid, 0);
-						TogglePlayerControllable(bijep[playerid], 1);
-						PlayerCuffed[playerid] = 3;
-						PlayerCuffedTime[playerid] = 45;
-						pobity[playerid] = 1;
-						PlayerInfo[playerid][pMuted] = 1;
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
-						SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
-						pobilem[bijep[playerid]] = 1;
-						PlayerFixRadio(playerid);
-						PlayerFixRadio(bijep[playerid]);
-						SetPlayerHealth(playerid, 30.0);
-						ClearAnimations(bijep[playerid]);
-						ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-						ClearAnimations(playerid);
-						ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-						//new
-				        podczasbicia[playerid] = 0;
-				        bijep[bijep[playerid]] = 0;
-				        bijep[playerid] = 0;
-				    }
-				}
-				else
-				{
-				    new giveplayer[MAX_PLAYER_NAME];
-	       			new sendername[MAX_PLAYER_NAME];
-			        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-			        format(string, sizeof(string), "* %s wyprowadzi³ cios i pobi³ %s.", giveplayer, sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		   			format(string, sizeof(string), "%s znokautowa³ ciê bez wiêkszego problemu.", giveplayer);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
-					SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-					ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
-					PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
-					PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
-					TogglePlayerControllable(playerid, 0);
-					TogglePlayerControllable(bijep[playerid], 1);
-					PlayerCuffed[playerid] = 3;
-					PlayerCuffedTime[playerid] = 45;
-					pobity[playerid] = 1;
-					PlayerInfo[playerid][pMuted] = 1;
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
-					SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
-					pobilem[bijep[playerid]] = 1;
-					PlayerFixRadio(playerid);
-					PlayerFixRadio(bijep[playerid]);
-					SendClientMessage(playerid, COLOR_WHITE, "Wpisa³eœ tekst za wolno i przegra³eœ!");
-					SetPlayerHealth(playerid, 30.0);
-					ClearAnimations(bijep[playerid]);
-					ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-					ClearAnimations(playerid);
-					ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-					//new
-			        podczasbicia[playerid] = 0;
-			        bijep[bijep[playerid]] = 0;
-			        bijep[playerid] = 0;
-				}
-			}
-			if(!response)
-			{
-			    new giveplayer[MAX_PLAYER_NAME];
-	   			new sendername[MAX_PLAYER_NAME];
-		        GetPlayerName(bijep[playerid], giveplayer, sizeof(giveplayer));
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-		        format(string, sizeof(string), "* %s wyprowadzi³ cios i pobi³ %s.", giveplayer, sendername);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	   			format(string, sizeof(string), "%s znokautowa³ ciê bez wiêkszego problemu.", giveplayer);
-	   			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-				format(string, sizeof(string), "Pobi³eœ %s bez wiêkszego trudu.", sendername);
-				SendClientMessage(bijep[playerid], COLOR_LIGHTBLUE, string);
-				ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.0, 0, 0, 0, 0, 0); // Dieing of Crack
-				PlayerPlaySound(playerid, 1130, 0.0, 0.0, 0.0);
-				PlayerPlaySound(bijep[playerid], 1130, 0.0, 0.0, 0.0);
-				TogglePlayerControllable(playerid, 0);
-				TogglePlayerControllable(bijep[playerid], 1);
-				PlayerCuffed[playerid] = 3;
-				PlayerCuffedTime[playerid] = 45;
-				pobity[playerid] = 1;
-				PlayerInfo[playerid][pMuted] = 1;
-				SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odczekaj 45 sekund");
-				SetTimerEx("pobito",45000,0,"d",bijep[playerid]);
-				pobilem[bijep[playerid]] = 1;
-				PlayerFixRadio(playerid);
-				PlayerFixRadio(bijep[playerid]);
-				SetPlayerHealth(playerid, 30.0);
-				ClearAnimations(bijep[playerid]);
-				ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-				ClearAnimations(playerid);
-				ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0);
-				//new
-		        podczasbicia[playerid] = 0;
-		        bijep[bijep[playerid]] = 0;
-		        bijep[playerid] = 0;
-			}
-		}
-		else if(dialogid == 97)
-		{
-		    new string[256];
-		    new giveplayer[MAX_PLAYER_NAME];
-			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(Kajdanki_PDkuje[playerid], giveplayer, sizeof(giveplayer));
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			new cops;
-			//
-		    if(response)
-		    {
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", sendername, giveplayer);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-	            TogglePlayerControllable(playerid, 0);
-	            Kajdanki_JestemSkuty[playerid] = 2;
-                SetTimerEx("Odmroz",10*60000,0,"d",playerid);
-	            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
-		    }
-		    if(!response)
-		    {
-		        foreach(new i : Player)
-				{
-				    if(IsPlayerConnected(i))
-				    {
-				        if(IsAPolicja(i))
-						{
-						    if(GetDistanceBetweenPlayers(playerid,i) < 5)
-	     					{
-	     					    cops ++;
-	     					}
-						}
-					}
-				}
-				if(cops >= 3 || TazerAktywny[playerid] == 1 && cops == 2)
-				{
-	                format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-					SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-		            TogglePlayerControllable(playerid, 0);
-		            Kajdanki_JestemSkuty[playerid] = 2;
-		            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
-					
-					CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-					TogglePlayerControllable(playerid, 1);
-				}
-				else if(cops == 2 || TazerAktywny[playerid] == 1 && cops < 2)
-				{
-				    new rand = random(100);
-				    if(rand <= 50)
-				    {
-				        format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Kajdanki_PDkuje[playerid] = 0;
-						PoziomPoszukiwania[playerid] += 1;
-						SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
-				    }
-				    else
-				    {
-				        format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-						SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-			            TogglePlayerControllable(playerid, 0);
-			            Kajdanki_JestemSkuty[playerid] = 2;
-			            SetTimerEx("Odmroz",10*60000,0,"d",playerid);
-			            SendClientMessage(playerid, COLOR_LIGHTBLUE, "Odkujesz sie za 10 minut");
-					
-						CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-						TogglePlayerControllable(playerid, 1);
-				    }
-				}
-				else
-				{
-				    format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					Kajdanki_PDkuje[playerid] = 0;
-					PoziomPoszukiwania[playerid] += 1;
-					SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
-				}
-		    }
-		}
-		else if(dialogid == 98)
-		{
-		    new string[256];
-		    new giveplayer[MAX_PLAYER_NAME];
-			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(Kajdanki_PDkuje[playerid], giveplayer, sizeof(giveplayer));
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			new cops;
-			//
-		    if(response)
-		    {
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ %s.", sendername, giveplayer);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-				
-				CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-		    }
-		    else
-		    {
-		        foreach(new i : Player)
-				{
-				    if(IsPlayerConnected(i))
-				    {
-				        if(IsAPolicja(i) || IsABOR(i))
-						{
-						    if(GetDistanceBetweenPlayers(playerid,i) < 5)
-	     					{
-	     					    cops ++;
-	     					}
-						}
-					}
-				}
-				if(cops >= 3)
-				{
-	                format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-			        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-					SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-					
-					CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-				}
-				else if(cops == 2)
-				{
-				    new rand = random(100);
-				    if(rand <= 50)
-				    {
-				        format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						Kajdanki_PDkuje[playerid] = 0;
-						PoziomPoszukiwania[playerid] += 1;
-						SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
-				    }
-				    else
-				    {
-				        format(string, sizeof(string), "* %s wyrywa siê i ucieka lecz policjanci powstrzymuj¹ go i skuwaj¹ go si³¹.", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				        format(string, sizeof(string), "Sku³eœ %s.", sendername);
-						SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-						
-						CuffedAction(Kajdanki_PDkuje[playerid], playerid);
-				    }
-				}
-				else
-				{
-				    format(string, sizeof(string), "* %s wyrywa siê z ca³ej si³y i ucieka.", sendername);
-				    TogglePlayerControllable(playerid, 1);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					Kajdanki_PDkuje[playerid] = 0;
-					PoziomPoszukiwania[playerid] += 1;
-					SetPlayerCriminal(playerid, 255, "Stawianie oporu podczas aresztowania");
-				}
-		    }
-		}
-		else if(dialogid == 7080)
-		{
-		    new string[256];
-		    new giveplayer[MAX_PLAYER_NAME];
-			new sendername[MAX_PLAYER_NAME];
-			GetPlayerName(Kajdanki_PDkuje[playerid], giveplayer, sizeof(giveplayer));
-			GetPlayerName(playerid, sendername, sizeof(sendername));
-			//
-		    if(response)
-		    {
-				//todo
-		        format(string, sizeof(string), "* %s nie stawia oporu i daje siê skuæ ³owcy %s.", sendername, giveplayer);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		        format(string, sizeof(string), "Sku³eœ %s. Masz 2 minuty, by dostarczyæ go do celi!", sendername);
-				SendClientMessage(Kajdanki_PDkuje[playerid], COLOR_LIGHTBLUE, string);
-				Kajdanki_JestemSkuty[playerid] = 1;
-	            TogglePlayerControllable(playerid, 0);
-	            Kajdanki_Uzyte[Kajdanki_PDkuje[playerid]] = 1;
-	            Kajdanki_SkutyGracz[Kajdanki_PDkuje[playerid]] = playerid;
-				ClearAnimations(playerid);
-                SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CUFFED);
-                SetPlayerAttachedObject(playerid, 5, 19418, 6, -0.011000, 0.028000, -0.022000, -15.600012, -33.699977,-81.700035, 0.891999, 1.000000, 1.168000);
-		    }
-		    if(!response)
-		    {
-				format(string, sizeof(string), "* %s wyrywa siê i rzuca siê na ³owcê!", sendername);
-				TogglePlayerControllable(playerid, 1);
-				ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				Kajdanki_PDkuje[playerid] = 0;
-		    }
-		}
 		else if(dialogid == 160)
 		{
 		    if(response)
@@ -4854,8 +4519,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 			if(response)
 			{
-			    new string[64], sendername[MAX_PLAYER_NAME];
+			    new string[64] = {0, ...};
+				new sendername[MAX_PLAYER_NAME];
             	GetPlayerName(playerid, sendername, sizeof(sendername));
+				ResetPlayerWeapons(playerid);
 			    switch(listitem)
 			    {
 			        case 0:
@@ -4864,26 +4531,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pGun0] = 0;
 						PlayerInfo[playerid][pAmmo0] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój kastet zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
             			format(string, sizeof(string),"%s niszczy kastet i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-            			
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
-			        }
+					}
 			        case 1:
 			        {
 			            if(PlayerInfo[playerid][pGun1] == 0) return sendErrorMessage(playerid, "Nie masz broni pod tym slotem!");
 			            PlayerInfo[playerid][pGun1] = 0;
 						PlayerInfo[playerid][pAmmo1] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja broñ bia³a zosta³a usniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy broñ bia³¹ i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 2:
 			        {
@@ -4891,12 +4549,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun2] = 0;
 						PlayerInfo[playerid][pAmmo2] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy pistolet i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 3:
 			        {
@@ -4904,12 +4558,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    PlayerInfo[playerid][pGun3] = 0;
 						PlayerInfo[playerid][pAmmo3] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja strzelba zosta³a usuniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy strzelbê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 4:
 			        {
@@ -4917,12 +4567,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                    PlayerInfo[playerid][pGun4] = 0;
 						PlayerInfo[playerid][pAmmo4] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój pistolet maszynowy zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy pistolet maszynowy i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 5:
 			        {
@@ -4930,12 +4576,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun5] = 0;
 						PlayerInfo[playerid][pAmmo5] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój karabin maszynowy zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy karabin maszynowy i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 6:
 			        {
@@ -4943,12 +4585,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun6] = 0;
 						PlayerInfo[playerid][pAmmo6] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoja snajperka zosta³a usuniêta");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy snajperkê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 7:
 			        {
@@ -4956,12 +4594,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun7] = 0;
 						PlayerInfo[playerid][pAmmo7] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój ogniomiotacz zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy ogniomiotacz i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 8:
 			        {
@@ -4971,12 +4605,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje C4 zosta³o usuniête");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy C4 i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 9:
 			        {
@@ -4984,12 +4614,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun9] = 0;
 						PlayerInfo[playerid][pAmmo9] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój sprej/aparat/gaœnica zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy spray/aparat/gaœnicê i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 10:
 			        {
@@ -4997,12 +4623,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun10] = 0;
 						PlayerInfo[playerid][pAmmo10] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twoje kwiaty/laska/dildo zosta³o usuniête");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy kwiaty/laskê/dildo i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 11:
 			        {
@@ -5010,12 +4632,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun11] = 0;
 						PlayerInfo[playerid][pAmmo11] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój spadochron zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy spadochron i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
 			        case 12:
 			        {
@@ -5023,14 +4641,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			            PlayerInfo[playerid][pGun12] = 0;
 						PlayerInfo[playerid][pAmmo12] = 0;
 						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Twój detonator zosta³ usuniêty");
-						ResetPlayerWeapons(playerid);
-						SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
 						
 						format(string, sizeof(string),"%s niszczy detonator i rzuca na ziemiê.", sendername);
-            			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
 			        }
-			    }
+				}
+
+				SetTimerEx("UsuwanieBroniReset", 1000, 0, "d", playerid);
+				ShowPlayerDialogEx(playerid, 876, DIALOG_STYLE_LIST, "Usuwanie broni", "Kastet\nBroñ bia³a\nPistolet\nStrzelba\nPistolet maszynowy\nKarabin\nSnajperka\nOgniomiotacz\nC4\nAparat/Sprej\nKwiaty/Laska/Dildo\nSpadochron\nDetonator", "Usuñ", "WyjdŸ");
+				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 			}
 	    }
 	    else if(dialogid == 80)
@@ -13981,7 +13599,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				format(string, sizeof(string), "%s czuje siê lepiej dziêki interwencji lekarza.", GetNick(playerid));
 				ProxDetector(20.0, id, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				pobity[playerid] = 0;
+				isBeatenUp[playerid] = false;
 				ZdejmijBW(playerid, 3500);
 				SetPlayerHealth(playerid, 90.0);
 			}
@@ -13994,7 +13612,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				format(string, sizeof(string),"* %s wyci¹ga apteczkê, banda¿uje obra¿enia %s oraz podaje mu leki.", GetNick(id), GetNick(playerid));
 				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 				PlayerInfo[id][pHealthPacks]--;
-				pobity[playerid] = 0;
+				isBeatenUp[playerid] = false;
 				ZdejmijBW(playerid, 6000);
 				SetPlayerHealth(playerid, HEALTH_PACK_HP);
 			}
@@ -16128,42 +15746,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
 	
 	}
-	else if(dialogid == 1092)//Ca³uj - komenda - potwierdzenie
-	{
-		if(response)
-		{
-			if(ProxDetectorS(5.5, playerid, kissPlayerOffer[playerid]))
-			{
-				new string[128];
-				format(string, sizeof(string),"* %s kocha %s wiêc ca³uj¹ siê.", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
-				ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-				format(string, sizeof(string), "%s mówi: Kocham ciê.", GetNick(kissPlayerOffer[playerid]));
-				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-				format(string, sizeof(string), "%s mówi: Ja ciebie te¿.", GetNick(playerid));
-				ProxDetector(20.0, playerid, string, COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE,COLOR_WHITE);
-				ApplyAnimation(playerid, "KISSING", "Playa_Kiss_02", 4.0, 0, 0, 0, 0, 0);
-				ApplyAnimation(kissPlayerOffer[playerid], "KISSING", "Playa_Kiss_01", 4.0, 0, 0, 0, 0, 0);
-				
-				//zerowanie zmiennych:
-				kissPlayerOffer[playerid] = 0;
-			}
-			else
-			{
-				sendTipMessage(playerid, "Mi³oœæ Ci uciek³a!"); 
-				return 1;
-			}
-		}
-		if(!response)
-		{
-			
-			new string[128];
-			format(string, sizeof(string), "* %s spojrza³(a) na %s i stwierdzi³(a), ¿e nie chce siê ca³owaæ!", GetNick(playerid), GetNick(kissPlayerOffer[playerid]));
-			ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-		
-			return 1;
-		}
-	
-	}
     else if(dialogid == 7079)
 	{
 		if(response)
@@ -17461,6 +17043,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		return 1;
 	}
 	else if(mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
+		return 1;
+	}
+	else if(BW_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
 	{
 		return 1;
 	}

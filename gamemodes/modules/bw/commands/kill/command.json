@@ -1,0 +1,12 @@
+{
+    "name": "kill",
+    "description": "Przenosi Twoj¹ rann¹ postaæ do szpitala.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "smierc",
+        "szpital"
+    ],
+    "parameters": [],
+    "date": "23.03.2024"
+}

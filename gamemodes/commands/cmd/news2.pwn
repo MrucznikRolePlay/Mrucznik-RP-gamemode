@@ -42,7 +42,7 @@ YCMD:news2(playerid, params[], help)
 			}
 			format(string, sizeof(string), "Ustawi³eœ nowy komunikat na blok informacyjny"); 
 			sendTipMessageEx(playerid, COLOR_P@, string); 
-			format(string, sizeof(string), "~y~NR %s:~w~%s", GetNick(playerid), Odpolszcz(text)); 
+			format(string, sizeof(string), "~y~Reporter %s:~w~%s", GetNick(playerid), Odpolszcz(text)); 
 			SendNews_2(string); 
 		}
 		else{

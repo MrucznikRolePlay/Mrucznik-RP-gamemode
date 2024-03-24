@@ -44,12 +44,6 @@ YCMD:ip(playerid, params[], help)
         }
         if(IsPlayerConnected(giveplayerid))
         {
-            if(IsAFakeKonto(giveplayerid))
-            {
-                format(string, sizeof(string), "-| %s IP: 62.87.184.91 |-", GetNick(giveplayerid));
-                SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-                return 1;
-            }
             new ip[32];
             GetPlayerIp(giveplayerid,ip,32);
             GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));

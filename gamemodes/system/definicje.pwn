@@ -120,8 +120,6 @@
 #define MAX_ORG     50
 #define MAX_STRING2 255
 //#define MAX_CHATBUBBLE_LENGTH 144
-#define CHECKPOINT_NONE 0
-#define CHECKPOINT_HOME 12
 #define MAX_3DTEXT 1024
 #define MAX_DOM 2000
 #define MAX_NrDOM 53

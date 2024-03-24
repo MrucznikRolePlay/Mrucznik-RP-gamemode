@@ -1204,16 +1204,16 @@ bool:MruMySQL_SprawdzBany(playerid)
             else format(string, sizeof(string), "Twoje konto {FF8C00}%s{FFA500} (%d) jest zbanowane.", nick, pid);
 
     		SendClientMessage(playerid, COLOR_NEWS, string);
-    		format(string, sizeof(string), "{FFA500}Nadajï¿½cy: %s ({FF8C00}%d{FFA500}) | Powï¿½d: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
+    		format(string, sizeof(string), "{FFA500}Nadaj¹cy: %s ({FF8C00}%d{FFA500}) | Powód: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
     		SendClientMessage(playerid, COLOR_NEWS, string);
             return true;
         }
         else if(typ == WARN_BLOCK)
         {
-            SendClientMessage(playerid, COLOR_WHITE, "{FF0000}To konto jest zablokowane, nie moï¿½esz na nim graï¿½.");
-			SendClientMessage(playerid, COLOR_WHITE, "Jeï¿½li uwaï¿½asz, ï¿½e konto zostaï¿½o zablokowane niesï¿½usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
+            SendClientMessage(playerid, COLOR_WHITE, "{FF0000}To konto jest zablokowane, nie mo¿esz na nim graæ.");
+			SendClientMessage(playerid, COLOR_WHITE, "Jeœli uwa¿asz, ¿e konto zosta³o zablokowane nies³usznie napisz apelacje na: {33CCFF}www.Mrucznik-RP.pl");
 
-    		format(string, sizeof(string), "{FFA500}Nadajï¿½cy: %s ({FF8C00}%d{FFA500}) | Powï¿½d: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
+    		format(string, sizeof(string), "{FFA500}Nadaj¹cy: %s ({FF8C00}%d{FFA500}) | Powód: {FF8C00}%s{FFA500} | Data: %s", admin,id, powod,czas);
     		SendClientMessage(playerid, COLOR_NEWS, string);
             return true;
         }
