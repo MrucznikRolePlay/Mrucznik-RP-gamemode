@@ -12703,9 +12703,11 @@ public DeathAdminWarning(playerid, killerid, reason)
 forward TimeUpdater();
 public TimeUpdater()
 {
-    new Hour, Minute;
-	gettime(Hour, Minute);
-    format(realtime_string, 32, "%02d:%02d", Hour, Minute);
+	new year, month, day;
+    new hour, minute;
+	getdate(year, month, day);
+	gettime(hour, minute);
+    format(realtime_string, 32, "%04d/%02d/%02d %02d:%02d", year, month, day, hour, minute);
     TextDrawSetString(RealtimeTXD, realtime_string);
 }
 
