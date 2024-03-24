@@ -36,7 +36,7 @@ BW_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			ChatMe(playerid, "umiera na wskutek odniesionych obra¿eñ ((MemoryKill))");
 			SetPlayerHealth(playerid, 0.0);
 
-    		new moneyLost = floatround(kaska[playerid] * 0.02, floatround_ceil);
+			new moneyLost = floatround(kaska[playerid] * 0.02, floatround_ceil);
 			if (moneyLost < 0) {
 				return Y_HOOKS_CONTINUE_RETURN_0;
 			}
