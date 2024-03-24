@@ -134,15 +134,15 @@ command_lidercar_ranga(playerid, vehicleUID, opcje[256])
 
 command_lidercar_przejmij(playerid, vehicleUID)
 {
-    if(PlayerInfo[playerid][pLider] == 0 )
-    {
-        CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FAMILY;
-        CarData[vehicleUID][c_Owner] = gPlayerOrg[playerid];
-    }
-    else if(!orgIsLeader(playerid))
+    if(PlayerInfo[playerid][pLider] != 0 )
     {
         CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FRACTION;
         CarData[vehicleUID][c_Owner] = PlayerInfo[playerid][pLider];
+    }
+    else if(orgIsLeader(playerid))
+    {
+        CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FAMILY;
+        CarData[vehicleUID][c_Owner] = gPlayerOrg[playerid];
     }
     else
     {
