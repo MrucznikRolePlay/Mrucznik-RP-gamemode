@@ -7761,12 +7761,18 @@ SendZGMessage(color, string[])
 }
 
 //-----------------------[koniec chaty]------------------------------
-AddCar(car)
+AddCar(car, model = -1, col1 = -1, col2 = 1, respawnDelay = -1)
 {
-	new randcol = random(126);
-	new randcol2 = 1;
-	new carselect = GetRandomVehicleForStealingModel();
-	new id = AddStaticVehicleEx(RandCars[carselect][0], CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], randcol, randcol2, -1);
+	if(col1 == -1)
+	{
+		col1 = random(126);
+	}
+	if(model == -1)
+	{
+		new randomModelIdx = GetRandomVehicleForStealingModel();
+		model = RandCars[randomModelIdx][0];
+	}
+	new id = AddStaticVehicleEx(model, CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], col1, col2, respawnDelay);
 	return id;
 }
 
@@ -11745,9 +11751,16 @@ ZaladujSamochodyDoKradziezy()
 {
     new id;
 
-    for(new i = 0; i < 165; i++)
+    for(new i = 0; i < 183; i++)
 	{
-        id = AddCar(i);
+		if(i >= 165) // Faggio dla z³odziejów aut w dziuplach - zawsze ma byæ okreœlony model
+		{
+			id = AddCar(i, 462, 3, 3, 180);
+		}
+		else
+		{
+        	id = AddCar(i);
+		}
     }
 
     CAR_End = id;
