@@ -6837,7 +6837,7 @@ public OnPlayerText(playerid, text[])
 		        SendClientMessage(playerid, COLOR_GREY, "Nie wykona³eœ ¿adnego kontraktu! Aby dostaæ paczkê z broni¹, musisz zas³u¿yæ siê dla Hitman Agency i wykonaæ kontrakt.");
 		        return 0;
 			}
-			format(string, sizeof(string), "Mo¿esz zamówiæ jeszcze %d paczek, zanim bêdziesz musia³ wykonaæ kontrakt by zwiêkszyæ swój limit.", contractsDone);
+			format(string, sizeof(string), "Mo¿esz zamówiæ jeszcze %d paczek, zanim bêdziesz musia³ wykonaæ kontrakt by zwiêkszyæ swój limit.", contractsDone-1);
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 
 		    tmp = strtok(text, idx);
