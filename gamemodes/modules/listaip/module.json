@@ -1,0 +1,11 @@
+{
+    "name": "listaip",
+    "description": "Wyœwietlanie 5 ostatnich adresów IP, na których gra³ gracz pod danym nickiem.",
+    "author": "NikodemBanan",
+    "timers": false,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "20.03.2024"
+}

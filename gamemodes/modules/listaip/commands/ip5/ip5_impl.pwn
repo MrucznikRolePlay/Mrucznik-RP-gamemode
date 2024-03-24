@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------------[ ip ]--------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                ip5                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,44 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-
- */
+// Autor: NikodemBanan
+// Data utworzenia: 20.03.2024
 
 
-// Notatki skryptera:
-/*
+//
 
- */
-
-YCMD:ip(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_ip5_Impl(playerid, giveplayer[], offline)
 {
-    new string[128];
-    new giveplayer[MAX_PLAYER_NAME];
+    new giveplayername[MAX_PLAYER_NAME];
 
-    if (PlayerInfo[playerid][pAdmin] >= 1)
-    {
-        new giveplayerid;
-        if( sscanf(params, "k<fix>", giveplayerid))
-        {
-            sendTipMessage(playerid, "U¿yj /ip [playerid]");
-            sendTipMessage(playerid, "FUNKCJA: Pokazuje IP wybranego gracza.");
-            return 1;
-        }
-        if(IsPlayerConnected(giveplayerid))
-        {
-            new ip[32];
-            GetPlayerIp(giveplayerid,ip,32);
-            GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-            format(string, sizeof(string), "-| %s IP: %s |-", giveplayer,ip);
-            SendClientMessage(playerid,COLOR_LIGHTBLUE, string);
-            Log(adminLog, INFO, "Admin %s u¿y³ /ip na graczu %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid));
-        } else
-        {
-            format(string, sizeof(string), "Nie znaleziono gracza o nicku/id %s", params);
-            sendErrorMessage(playerid, string);
-        }
-    } else
+    if (PlayerInfo[playerid][pAdmin] <= 0)
     {
         noAccessMessage(playerid);
+        return 1;
     }
+
+    if(!offline)
+    {
+        new giveplayerid = giveplayer[0];
+
+        if(!IsPlayerConnected(giveplayerid))
+        {
+            sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+            return 1;
+        }
+
+        GetPlayerName(giveplayerid, giveplayername, sizeof(giveplayername));
+    }
+    else
+    {
+        format(giveplayername, sizeof(giveplayername), "%s", giveplayer);
+    }
+
+    IP5ShowIPListStr(playerid, giveplayername);
+    Log(adminLog, INFO, "Admin %s u¿y³ /ip5 na graczu %s", GetPlayerLogName(playerid), giveplayername);
+
     return 1;
 }
+
+//end
