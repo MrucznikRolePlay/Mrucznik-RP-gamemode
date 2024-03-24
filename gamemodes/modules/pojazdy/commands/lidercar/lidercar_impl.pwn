@@ -148,6 +148,14 @@ command_lidercar_przejmij(playerid, vehicleUID)
     {
         return 1;
     }
+
+    for(new i=0;i<MAX_CAR_SLOT;i++)
+    {
+        if(PlayerInfo[playerid][pCars][i] == vehicleUID)
+        {
+            PlayerInfo[playerid][pCars][i] = 0;
+        }
+    }
     Car_Save(vehicleUID, CAR_SAVE_OWNER);
 
     // send message
