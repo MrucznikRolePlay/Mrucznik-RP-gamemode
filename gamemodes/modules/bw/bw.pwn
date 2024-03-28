@@ -187,7 +187,7 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 			}
 
 			// jeœli gracz otrzyma³ obrazenia od porz¹dkowych - wsadŸ do paki
-			if(IsPlayerDamagedByCop(playerid) || killedByBountyHunter)
+			if(IsPlayerDamagedByCop(playerid) || killedByBountyHunter || GetPVarInt(playerid, "kill-bw") == 1)
 			{
 				PutDeadPlayerInJail(playerid);
 				return 1; //zrespawnuj gracza w wiêzieniu
