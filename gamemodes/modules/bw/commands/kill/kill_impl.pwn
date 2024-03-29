@@ -30,18 +30,18 @@ command_kill_Impl(playerid)
         return 1;
     }
 
-    new message[256];
+    new string[256];
     new moneyLost = 1 + kaska[playerid] / 50;
     if(moneyLost < 1) 
     {
         sendTipMessage(playerid, "Jesteœ tak biedny, ¿e nie Ciê nawet na œmieræ.");
         return 1;
     }
-    format(message, sizeof(message), "Czy na pewno chcesz uœmierciæ (memory kill) swoj¹ postaæ?\nStracisz "INCOLOR_PANICRED"%d$"INCOLOR_DIALOG" ze swojego portfela.", moneyLost);
+    format(string, sizeof(string), "Czy na pewno chcesz uœmierciæ (memory kill) swoj¹ postaæ?\nStracisz "INCOLOR_PANICRED"%d$"INCOLOR_DIALOG" ze swojego portfela.", moneyLost);
     if(PoziomPoszukiwania[playerid] > 1) {
         strcat(string, "\nJesteœ te¿ poszukiwany, wiêc po œmierci trafisz do wiêzienia.");
     }
-    ShowPlayerDialogEx(playerid, DIALOG_ID_KILL, DIALOG_STYLE_MSGBOX, "Uœmiercenie postaci", message, "Akceptuj", "Anuluj");
+    ShowPlayerDialogEx(playerid, DIALOG_ID_KILL, DIALOG_STYLE_MSGBOX, "Uœmiercenie postaci", string, "Akceptuj", "Anuluj");
     return 1;
 }
 
