@@ -302,7 +302,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				continue;
 			else return SendClientMessage(playerid, COLOR_GRAD1, "U¿y³eœ nieodpowiednich znaków rejestracji (tylko litery i cyfry).");
 		}
-		CarData[lUID][c_Rejestracja] = strval(inputtext);
+		strcat(CarData[lUID][c_Rejestracja], inputtext);
 		SendClientMessage(playerid, 0xFFC0CB, "Tablica zostanie zmieniona po respawnie.");
 		return 1;
 	}

@@ -35,6 +35,7 @@ command_setvregistration_Impl(playerid, registerText[32])
             format(string, sizeof(string), "Administrator %s ustawi³ tablicê dla pojazdu %d - nowy text [%s]", GetNickEx(playerid), vehID, registerText);
             SendMessageToAdminEx(string, COLOR_P@, 2);
             CarData[VehicleUID[vehID][vUID]][c_Rejestracja] = registerText; 
+            Car_Save(VehicleUID[vehID][vUID], CAR_SAVE_TUNE);
             sendTipMessage(playerid, "Teraz nale¿y zrespawnowaæ pojazd!"); 
         }
         else
