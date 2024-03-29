@@ -40,6 +40,10 @@ YCMD:adminajail(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /aj [id/nick] [czas(w minutach)] [powod]");
 			return 1;
 		}
+		if (czas < 0) {
+			sendErrorMessage(playerid, "Czas nie mo¿e byæ ujemny!");
+			return 1;
+		}
 		if(IsPlayerConnected(playa) && playa != INVALID_PLAYER_ID)
 		{
 			if (PlayerInfo[playa][pJailed] == 0)
