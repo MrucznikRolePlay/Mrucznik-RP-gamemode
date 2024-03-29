@@ -453,6 +453,8 @@ Car_LoadEx(lUID)
         CarData[lVehID][c_Rang],
         CarData[lVehID][c_Int],
         CarData[lVehID][c_VW],
+        unused,
+        CarData[lVehID][c_Siren],
         CarData[lVehID][c_Rejestracja],
         unused);
 
@@ -525,6 +527,8 @@ Car_LoadForPlayer(playerid)
             CarData[lVehID][c_Rang],
             CarData[lVehID][c_Int],
             CarData[lVehID][c_VW],
+            unused,
+            CarData[lVehID][c_Siren],
             CarData[lVehID][c_Rejestracja],
             unused);
 
