@@ -290,12 +290,14 @@ Car_Create(model, Float:x, Float:y, Float:z, Float:angle, color1, color2)
 
 Car_Load()
 {
-    new lStr[512], lLoad=gCars, unused;
-    mysql_query("SELECT * FROM `mru_cars` WHERE `ownertype` != 3 AND `ownertype` != 0");
+    new lStr[512], lLoad=gCars;
+    mysql_query("SELECT `UID`, `ownertype`, `owner`, `model`, `x`, `y`, `z`, `angle`, `hp`, `tires`, `color1`, `color2`, \
+     `nitro`, `hydraulika`, `felgi`, `malunek`, `spoiler`, `bumper1`, `bumper2`, `keys`, `neon`, `ranga`, `int`, `vw`, \
+     `pdvehmod`, `Rejestracja` FROM `mru_cars` WHERE `ownertype` != 3 AND `ownertype` != 0");
     mysql_store_result();
     while(mysql_fetch_row_format(lStr, "|"))
     {
-        sscanf(lStr, "p<|>ddddfffffddddldddddddddddds[32]",
+        sscanf(lStr, "p<|>ddddfffffddddlddddddddddds[32]",
         CarData[gCars][c_UID],
         CarData[gCars][c_OwnerType],
         CarData[gCars][c_Owner],
@@ -320,7 +322,6 @@ Car_Load()
         CarData[gCars][c_Rang],
         CarData[gCars][c_Int],
         CarData[gCars][c_VW],
-		unused,
 		CarData[gCars][c_Siren],
 		CarData[gCars][c_Rejestracja]);
 
@@ -420,9 +421,11 @@ Car_Load()
 Car_LoadEx(lUID)
 {
     new lStr[256];
-    new lVehID = Car_GetFromQueue(), bool:doadd=false, unused;
+    new lVehID = Car_GetFromQueue(), bool:doadd=false;
     if(lVehID == -1) lVehID = gCars, doadd=true;
-    format(lStr, 256, "SELECT * FROM `mru_cars` WHERE `UID`='%d'", lUID);
+    format(lStr, 256, "SELECT `UID`, `ownertype`, `owner`, `model`, `x`, `y`, `z`, `angle`, `hp`, `tires`, `color1`, `color2`, \
+     `nitro`, `hydraulika`, `felgi`, `malunek`, `spoiler`, `bumper1`, `bumper2`, `keys`, `neon`, `ranga`, `int`, `vw`, \
+     `pdvehmod`, `Rejestracja` FROM `mru_cars` WHERE `UID`='%d'", lUID);
     mysql_query(lStr);
     mysql_store_result();
     if(mysql_num_rows())
@@ -453,10 +456,8 @@ Car_LoadEx(lUID)
         CarData[lVehID][c_Rang],
         CarData[lVehID][c_Int],
         CarData[lVehID][c_VW],
-        unused,
         CarData[lVehID][c_Siren],
-        CarData[lVehID][c_Rejestracja],
-        unused);
+        CarData[lVehID][c_Rejestracja]);
 
         if(doadd) gCars++;
 
@@ -468,7 +469,7 @@ Car_LoadEx(lUID)
 
 Car_LoadForPlayer(playerid)
 {
-    new lStr[256], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8], unused;
+    new lStr[256], lUsed = 0, lPUID = PlayerInfo[playerid][pUID], lList[64], lsID, lsSearch[8];
 
     for(new i=0;i<MAX_VEHICLES;i++)
     {
@@ -486,7 +487,9 @@ Car_LoadForPlayer(playerid)
     new lVehID = Car_GetFromQueue();
     if(lVehID == -1) lVehID = gCars;
 
-    format(lStr, 128, "SELECT * FROM `mru_cars` WHERE `ownertype`='%d' AND `owner`='%d'", CAR_OWNER_PLAYER, lPUID);
+    format(lStr, 128, "SELECT `UID`, `ownertype`, `owner`, `model`, `x`, `y`, `z`, `angle`, `hp`, `tires`, `color1`, `color2`, \
+     `nitro`, `hydraulika`, `felgi`, `malunek`, `spoiler`, `bumper1`, `bumper2`, `keys`, `neon`, `ranga`, `int`, `vw`, \
+     `pdvehmod`, `Rejestracja` FROM `mru_cars` WHERE `ownertype`='%d' AND `owner`='%d'", CAR_OWNER_PLAYER, lPUID);
     mysql_query(lStr);
     mysql_store_result();
     while(mysql_fetch_row_format(lStr, "|"))
@@ -527,10 +530,8 @@ Car_LoadForPlayer(playerid)
             CarData[lVehID][c_Rang],
             CarData[lVehID][c_Int],
             CarData[lVehID][c_VW],
-            unused,
             CarData[lVehID][c_Siren],
-            CarData[lVehID][c_Rejestracja],
-            unused);
+            CarData[lVehID][c_Rejestracja]);
 
             PlayerInfo[playerid][pCars][lUsed++] = lVehID;
 
@@ -779,22 +780,25 @@ Car_Destroy(lV)
 
 Car_Save(lUID, lType)
 {
-    new lStr[256];
+    new lStr[512];
     switch(lType)
     {
         case CAR_SAVE_OWNER:
         {
-            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `owner`='%d', `ownertype`='%d', `keys`='%d', `ranga`='%d' WHERE `UID`='%d'", CarData[lUID][c_Owner], CarData[lUID][c_OwnerType], CarData[lUID][c_Keys], CarData[lUID][c_Rang], CarData[lUID][c_UID]);
+            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `owner`='%d', `ownertype`='%d', `keys`='%d', `ranga`='%d' WHERE `UID`='%d'", 
+                CarData[lUID][c_Owner], CarData[lUID][c_OwnerType], CarData[lUID][c_Keys], CarData[lUID][c_Rang], CarData[lUID][c_UID]);
             mysql_query(lStr);
         }
         case CAR_SAVE_STATE:
         {
-            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `model`='%d', `x`='%f', `y`='%f', `z`='%f', `angle`='%.1f', `hp`='%.1f', `tires`='%d', `int`='%d', `vw`='%d' WHERE `UID`='%d'", CarData[lUID][c_Model], CarData[lUID][c_Pos][0], CarData[lUID][c_Pos][1], CarData[lUID][c_Pos][2], CarData[lUID][c_Rot], CarData[lUID][c_HP], CarData[lUID][c_Tires], CarData[lUID][c_Int], CarData[lUID][c_VW], CarData[lUID][c_UID]);
+            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `model`='%d', `x`='%f', `y`='%f', `z`='%f', `angle`='%.1f', `hp`='%.1f', `tires`='%d', `int`='%d', `vw`='%d' WHERE `UID`='%d'", 
+                CarData[lUID][c_Model], CarData[lUID][c_Pos][0], CarData[lUID][c_Pos][1], CarData[lUID][c_Pos][2], CarData[lUID][c_Rot], CarData[lUID][c_HP], CarData[lUID][c_Tires], CarData[lUID][c_Int], CarData[lUID][c_VW], CarData[lUID][c_UID]);
             mysql_query(lStr);
         }
         case CAR_SAVE_TUNE:
         {
-            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `color1`='%d', `color2`='%d', `nitro`='%d', `hydraulika`='%d', `felgi`='%d', `malunek`='%d', `spoiler`='%d', `bumper1`='%d', `bumper2`='%d', `neon`='%d' WHERE `UID`='%d'", CarData[lUID][c_Color][0],CarData[lUID][c_Color][1],CarData[lUID][c_Nitro],CarData[lUID][c_bHydraulika],CarData[lUID][c_Felgi],CarData[lUID][c_Malunek],CarData[lUID][c_Spoiler], CarData[lUID][c_Bumper][0], CarData[lUID][c_Bumper][1], CarData[lUID][c_Neon], CarData[lUID][c_UID]);
+            format(lStr, sizeof(lStr), "UPDATE `mru_cars` SET `color1`='%d', `color2`='%d', `nitro`='%d', `hydraulika`='%d', `felgi`='%d', `malunek`='%d', `spoiler`='%d', `bumper1`='%d', `bumper2`='%d', `neon`='%d', `Rejestracja`='%s' WHERE `UID`='%d'", 
+                CarData[lUID][c_Color][0],CarData[lUID][c_Color][1],CarData[lUID][c_Nitro],CarData[lUID][c_bHydraulika],CarData[lUID][c_Felgi],CarData[lUID][c_Malunek],CarData[lUID][c_Spoiler], CarData[lUID][c_Bumper][0], CarData[lUID][c_Bumper][1], CarData[lUID][c_Neon], CarData[lUID][c_Rejestracja], CarData[lUID][c_UID]);
             mysql_query(lStr);
         }
         default:
