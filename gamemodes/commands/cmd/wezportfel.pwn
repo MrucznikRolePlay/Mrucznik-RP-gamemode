@@ -73,8 +73,7 @@ YCMD:wezportfel(playerid, params[], help)
 		sendTipMessage(playerid, "Jesteœ zakuty, ranny lub pobity, nie mo¿esz okradaæ w tym stanie.");
 		return 1;
 	}
-	if(PlayerInfo[giveplayerid][pMember] == 0 && PlayerInfo[giveplayerid][pLider] == 0 && (GetPlayerOrg(giveplayerid) == 0
-		|| GetPlayerOrgType(giveplayerid) == ORG_TYPE_CLUB || GetPlayerOrgType(giveplayerid) == ORG_TYPE_BIZNES))
+	if(!IsAPrzestepca(giveplayerid))
 	{
 		sendTipMessage(playerid, "Nie mo¿esz okradaæ cywili.");
 		return 1;
