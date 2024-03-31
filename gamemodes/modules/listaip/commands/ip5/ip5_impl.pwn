@@ -23,10 +23,10 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_ip5_Impl(playerid, giveplayerRaw[32], offline)
+command_ip5_Impl(playerid, giveplayerRaw[32])
 {
-    new offline = false;
     new giveplayer[MAX_PLAYER_NAME];
+    new offline = false;
     if(sscanf(giveplayerRaw, "r", giveplayer) || !IsPlayerConnected(giveplayer[0]))
     {
         new formatString[8];

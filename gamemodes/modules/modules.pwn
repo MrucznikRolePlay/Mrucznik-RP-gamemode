@@ -49,7 +49,6 @@
 #include "graffiti\graffiti.def"
 #include "weryfikacje\weryfikacje.def"
 #include "adminduty\adminduty.def"
-#include "moneypickup\moneypickup.def"
 #include "oferty\oferty.def"
 #include "redis\redis.def"
 #include "gunshoppanel\gunshoppanel.def"
@@ -99,7 +98,6 @@
 #include "graffiti\graffiti.hwn"
 #include "weryfikacje\weryfikacje.hwn"
 #include "adminduty\adminduty.hwn"
-#include "moneypickup\moneypickup.hwn"
 #include "oferty\oferty.hwn"
 #include "redis\redis.hwn"
 #include "gunshoppanel\gunshoppanel.hwn"
@@ -149,7 +147,6 @@
 #include "graffiti\graffiti.pwn"
 #include "weryfikacje\weryfikacje.pwn"
 #include "adminduty\adminduty.pwn"
-#include "moneypickup\moneypickup.pwn"
 #include "oferty\oferty.pwn"
 #include "redis\redis.pwn"
 #include "gunshoppanel\gunshoppanel.pwn"
@@ -242,6 +239,7 @@
 #include "choroby\choroby_callbacks.pwn"
 #include "listaip\listaip_callbacks.pwn"
 
+
 //-------<[ commands ]>-------
 #include "frakcje\commands\frakcje_commands.pwn"
 #include "admin\commands\admin_commands.pwn"
@@ -259,7 +257,6 @@
 #include "convoy\commands\convoy_commands.pwn"
 #include "graffiti\commands\graffiti_commands.pwn"
 #include "weryfikacje\commands\weryfikacje_commands.pwn"
-#include "moneypickup\commands\moneypickup_commands.pwn"
 #include "oferty\commands\oferty_commands.pwn"
 #include "gunshoppanel\commands\gunshoppanel_commands.pwn"
 #include "player_attachments\commands\player_attachments_commands.pwn"
@@ -268,6 +265,7 @@
 #include "bijatyki\commands\bijatyki_commands.pwn"
 #include "cooking\commands\cooking_commands.pwn"
 #include "vehicle_attachments\commands\vehicle_attachments_commands.pwn"
+#include "money\commands\money_commands.pwn"
 #include "sila\commands\sila_commands.pwn"
 #include "organizacje\commands\organizacje_commands.pwn"
 #include "premium\commands\premium_commands.pwn"

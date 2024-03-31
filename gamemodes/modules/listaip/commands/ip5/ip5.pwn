@@ -54,13 +54,13 @@ YCMD:ip5(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new giveplayer[32], isOffline;
-    if(sscanf(params, "s[32]d", giveplayer, isOffline))
+    new giveplayer[32];
+    if(sscanf(params, "s[32]", giveplayer))
     {
-        sendTipMessage(playerid, "U¿yj /ip5 [Nick/ID] [Czy gracz offline] ");
+        sendTipMessage(playerid, "U¿yj /ip5 [Nick/ID] ");
         return 1;
     }
     
     //command body
-    return command_ip5_Impl(playerid, giveplayer, isOffline);
+    return command_ip5_Impl(playerid, giveplayer);
 }

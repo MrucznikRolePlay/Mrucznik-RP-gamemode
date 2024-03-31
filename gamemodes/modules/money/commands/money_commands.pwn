@@ -30,10 +30,12 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "upusc\upusc.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_upusc();
     
 }

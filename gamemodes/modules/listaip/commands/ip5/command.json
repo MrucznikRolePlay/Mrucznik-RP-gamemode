@@ -10,11 +10,6 @@
             "size": "32",
             "name": "giveplayer",
             "description": "Nick/ID"
-        },
-        {
-            "type": "integer",
-            "name": "isOffline",
-            "description": "Czy gracz offline"
         }
     ],
     "date": "20.03.2024"

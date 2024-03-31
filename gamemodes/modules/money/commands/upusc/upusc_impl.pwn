@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                moneypickup                                                //
+//                                                   upusc                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,67 +17,51 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: mrucznik
-// Data utworzenia: 23.03.2024
-//Opis:
-/*
-	Pickupy z hajsem
-*/
+// Data utworzenia: 31.03.2024
+
 
 //
 
-//-----------------<[ Funkcje: ]>-------------------
-
-CreateMoneyPickup(Float:x, Float:y, Float:z, int, vw, money, wantedLevel, blockedPlayer = -1)
+//------------------<[ Implementacja: ]>-------------------
+command_upusc_Impl(playerid, money)
 {
-	new pickupID = CreateDynamicPickup(1212, 19, x, y, z, vw, int);
-	new string[16];
-	format(string, sizeof(string), "%d$", money);
-	new STREAMER_TAG_3D_TEXT_LABEL:text3d = CreateDynamic3DTextLabel(string, COLOR_LIGHTGREEN, x, y, z, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, vw);
+    if(money < 1 || money > 100001)
+    {
+        sendTipMessage(playerid, "Kwota musi wynosiæ mniej ni¿ 100 000$ .");
+        return 1;
+    }
+    if(money > 12500 && PlayerInfo[playerid][pLevel] < 2 && PlayerInfo[playerid][pLocal] != 108)
+    {
+        sendTipMessage(playerid, "Nie mo¿esz upuœciæ wiêcej niz $12 500.");
+        return 1;
+    }
+    if(PlayerInfo[playerid][pConnectTime] == 0)
+    {
+        sendTipMessage(playerid, "Zanim bêdziesz móg³ upuœciæ pieni¹dze, musisz graæ przez 1 godzinê!");
+        return 1;
+    }
+    if(AntySpam[playerid] == 1)
+    {
+        sendTipMessage(playerid, "Odczekaj 15 sekund - poœwiêæ ten czas na wykonanie akcji RP.");
+        return 1;
+    }
 
-	new moneyPickupData[eMoneyPickup];
-	moneyPickupData[MONEY_PICKUP_CASH] = money;
-	moneyPickupData[MONEY_PICKUP_WANTED_LEVEL] = wantedLevel;
-	moneyPickupData[MONEY_PICKUP_BLOCKED_PLAYER] = blockedPlayer;
-	moneyPickupData[MONEY_PICKUP_3D_TEXT] = text3d;
-	MAP_insert_val_arr(MoneyPickupsMap, pickupID, moneyPickupData, sizeof(moneyPickupData));
-	return;
-}
+    new string[64];
+    format(string, sizeof(string), "upuszcza %d$ na ziemiê.");
+    ChatMe(playerid, string);
 
-CollectMoneyPickup(playerid, pickupID)
-{
-	if(!MAP_contains_val(MoneyPickupsMap, pickupID))
-	{
-		return;
-	}
-	
-	new moneyPickupData[eMoneyPickup];
-	MAP_get_val_arr(MoneyPickupsMap, pickupID, moneyPickupData);
+    ZabierzKase(playerid, money);
+	Log(payLog, INFO, "%s upuszcza %d$ na ziemiê (money pickup)", GetPlayerLogName(playerid), money);
 
-	if(moneyPickupData[MONEY_PICKUP_BLOCKED_PLAYER] == PlayerInfo[playerid][pUID])
-	{
-		return;
-	}
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+    new int =  GetPlayerInterior(playerid);
+    new vw = GetPlayerVirtualWorld(playerid);
+    GetXYInFrontOfPlayer(playerid, x, y, 1.0);
+    CreateMoneyPickup(x, y, z - 0.4, int, vw, money, 0, PlayerInfo[playerid][pUID]);
 
-	DestroyDynamicPickup(pickupID);
-	DestroyDynamic3DTextLabel(moneyPickupData[MONEY_PICKUP_3D_TEXT]);
-	MAP_remove_val(MoneyPickupsMap, pickupID);
-
-	new money =  moneyPickupData[MONEY_PICKUP_CASH];
-	DajKase(playerid, money);
-	Log(payLog, INFO, "%s podnosi %d$ z money pickupa", GetPlayerLogName(playerid), money);
-
-	new string[64];
-	new addWL = moneyPickupData[MONEY_PICKUP_WANTED_LEVEL];
-	if(addWL > 0)
-	{
-		PoziomPoszukiwania[playerid] += addWL;
-		format(string, sizeof(string), "kradzie¿ %d$", money);
-		SetPlayerCriminal(playerid, INVALID_PLAYER_ID, string);
-	}
-
-	format(string, sizeof(string), "podnosi %d$", money);
-	ChatMe(playerid, string);
-	return;
+    AntySpam[playerid] = 1;
+    return 1;
 }
 
 //end

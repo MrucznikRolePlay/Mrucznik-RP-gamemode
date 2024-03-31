@@ -6,6 +6,24 @@ stock Float:GetDistanceBetweenPoints(Float:x1, Float:y1, Float:z1, Float:x2, Flo
     return VectorSize(x1-x2, y1-y2, z1-z2);
 }
 
+stock GetXYInFrontOfPlayer(playerid, &Float:x, &Float:y, Float:distance)
+{
+	// Created by Y_Less
+
+	new Float:a;
+
+	GetPlayerPos(playerid, x, y, a);
+	GetPlayerFacingAngle(playerid, a);
+
+	if (GetPlayerVehicleID(playerid)) {
+	    GetVehicleZAngle(GetPlayerVehicleID(playerid), a);
+	}
+
+	x += (distance * floatsin(-a, degrees));
+	y += (distance * floatcos(-a, degrees));
+}
+
+
 /* SSCANF FIX */
 SSCANF:fix(string[])
 {
