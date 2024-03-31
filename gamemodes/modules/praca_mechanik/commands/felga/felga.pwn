@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   felga                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,29 +27,44 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "nos\nos.pwn"
-#include "zderzaki\zderzaki.pwn"
-#include "malunek\malunek.pwn"
-#include "carcolors\carcolors.pwn"
-#include "felgi\felgi.pwn"
-#include "hydraulika\hydraulika.pwn"
-#include "felga\felga.pwn"
-#include "malunki\malunki.pwn"
-
+#include "felga_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_felga()
 {
-    command_nos();
-    command_zderzaki();
-    command_malunek();
-    command_carcolors();
-    command_felgi();
-    command_hydraulika();
-    command_felga();
-    command_malunki();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:felga(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Montowanie innej felgi w samochodzie.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, felga;
+    if(sscanf(params, "rd", giveplayerid, felga))
+    {
+        sendTipMessage(playerid, "U¿yj /felga [Nick/ID] [felga] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_felga_Impl(playerid, giveplayerid, felga);
 }

@@ -140,7 +140,6 @@
 #include "cmd/fbidrzwi.pwn"
 #include "cmd/fdaj.pwn"
 #include "cmd/federalne.pwn"
-#include "cmd/felga.pwn"
 #include "cmd/finfo.pwn"
 #include "cmd/finisz.pwn"
 #include "cmd/fixallveh.pwn"
@@ -738,9 +737,6 @@ static Aliases()
 
 	//federalne
 	Command_AddAltNamed("federalne", "fed");
-
-	//felga
-	Command_AddAltNamed("felga", "zmienfelge");
 
 	//finisz
 	Command_AddAltNamed("finisz", "meta");

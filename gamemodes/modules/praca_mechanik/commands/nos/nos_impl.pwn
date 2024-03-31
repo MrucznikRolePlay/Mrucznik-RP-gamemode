@@ -88,9 +88,8 @@ command_nos_Impl(playerid, giveplayerid)
     MruMessageInfoF(playerid, "Zamontowa³eœ graczowi %s nitro(pojemnoœæ: %d) w jego samochodzie [-%d$] (wiêkszy skill = wiêksza pojemnoœæ)", GetNick(giveplayerid), nitroSize, cost);
     MruMessageGoodInfoF(giveplayerid, "Mechanik %s zamontowa³ nitro o pojemnoœci %d w twoim samochodzie", GetNick(playerid), nitroSize);
 
-    ChatMePrefixed(playerid, "Mechanik",
-        sprintf("%s wyci¹ga narzêdzia i montuje nitro w %s.", 
-        GetNick(playerid), VehicleNames[GetVehicleModel(vehicleID)-400]
+    ChatMePrefixed(playerid, "Mechanik", sprintf(
+        "wyci¹ga narzêdzia i montuje nitro w %s.", VehicleNames[GetVehicleModel(vehicleID)-400]
     ));
 
     GameTextForPlayer(playerid, sprintf("~r~-$%d", cost), 5000, 1);

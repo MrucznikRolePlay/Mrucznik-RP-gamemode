@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                 hydraulika                                                //
+//                                                   felga                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,15 +17,15 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: mrucznik
-// Data utworzenia: 31.03.2024
+// Data utworzenia: 01.04.2024
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_hydraulika_Impl(playerid, giveplayerid)
+command_felga_Impl(playerid, giveplayerid, felga)
 {
-    new cost = 10_000;
+    new cost = 15_000;
     if(IsAMechazordWarsztatowy(playerid))
     {
         cost /= 2;
@@ -37,40 +37,50 @@ command_hydraulika_Impl(playerid, giveplayerid)
         return 1;
     }
 
-    if(GetPlayerJobSkill(playerid, JOB_MECHANIC) < 2)
+    if(GetPlayerJobSkill(playerid, JOB_MECHANIC) < 3)
     {
-        MruMessageFail(playerid, "Musisz mieæ 2 skill mechanika aby montowaæ hydraulike.");
+        MruMessageFail(playerid, "Musisz mieæ 3 skill mechanika aby montowaæ felgi.");
         return 1;
     }
 
     // helper variables
     new vehicleID = GetPlayerVehicleID(giveplayerid);
     new vehicleUID = VehicleUID[vehicleID][vUID];
+    new componentID = felga + 1072;
+    if(componentID >= 1086 && componentID <= 1088)
+    {
+        componentID += 10;
+    }
+    else if(felga == 17)
+    {
+        componentID = 1025;
+    }
 
     // functionality
+    AddVehicleComponent(vehicleID, componentID); //felga1079
+    CarData[vehicleUID][c_Felgi] = componentID;
     ZabierzKase(playerid, cost);
-    AddVehicleComponent(vehicleID, 1087); //hydraulika
-    CarData[vehicleUID][c_bHydraulika] = true;
 
     // messages
-    Log(payLog, INFO, "%s zamontowa³ %s hydraulikê na pojazd %s za %d$",
-        GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetVehicleLogName(vehicleID), cost
+    Log(payLog, INFO, "%s zamontowa³ %s felgi %d na pojazd %s za %d$",
+        GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), felga, GetVehicleLogName(vehicleID), cost
     );
 
-    MruMessageInfoF(playerid, "Zamontowa³eœ graczowi %s hydraulike (-%d$)", GetNick(giveplayerid), cost);
-    MruMessageGoodInfoF(giveplayerid, "Mechanik %s zamontowa³ hydraulike w twoim samochodzie", GetNick(playerid));
+    MruMessageInfoF(playerid, "Zamontowa³eœ nowe felgi graczowi %s (koszt -%d$)", GetNick(giveplayerid), cost);
+    MruMessageGoodInfoF(giveplayerid, "Mechanik %s zamontowa³ ci w twoim %s nowe felgi", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleID)-400]);
 
     ChatMePrefixed(playerid, "Mechanik", sprintf(
-        "wyci¹ga narzêdzia i montuje hydraulike w %s.", VehicleNames[GetVehicleModel(vehicleID) - 400]
+        "wyci¹ga narzêdzia i montuje nowe felgi w %s.", VehicleNames[GetVehicleModel(vehicleID)-400]
     ));
-
+    
     GameTextForPlayer(playerid, sprintf("~r~-$%d", cost), 5000, 1);
-    PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
+    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+   
     if(giveplayerid != playerid)
     {
         IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
         SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-        PlayerPlaySound(giveplayerid, 1141, 0.0, 0.0, 0.0);
+        PlayerPlaySound(giveplayerid, 1133, 0.0, 0.0, 0.0);
     }
     return 1;
 }

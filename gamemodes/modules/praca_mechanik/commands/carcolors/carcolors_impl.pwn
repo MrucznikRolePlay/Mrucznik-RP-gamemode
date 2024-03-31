@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   kolory                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 carcolors                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,45 +16,20 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 01.04.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "kolory_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_kolory()
+//------------------<[ Implementacja: ]>-------------------
+command_carcolors_Impl(playerid)
 {
-    
-
-    //aliases
-    
-
-    //permissions
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:kolory(playerid, params[], help)
-{
-    if (help)
+    if(GUIExit[playerid] == 0)
     {
-        sendTipMessage(playerid, "Lista kolorów dla aut.");
-        return 1;
+        ShowPlayerDialogEx(playerid,55,DIALOG_STYLE_MSGBOX,"Podstawowe kolory:","0- czarny\n1-bia³y\n2- ciemnoniebieski\n3- czerowny\n5- ciemno-ró¿owy\n6- ¿ó³ty\n7- niebieski\n11- szary\n16- zielony\n65- jasno zielony\n86- zielony jasny\n125 - ró¿owy\n","WYJD¯","");
     }
-    
-    
-    //command body
-    return command_kolory_Impl(playerid);
+    return 1;
 }
+
+//end

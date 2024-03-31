@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   kolory                                                  //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 carcolors                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,20 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 01.04.2024
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_kolory_Impl(playerid)
+
+//-------<[ include ]>-------
+#include "carcolors_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_carcolors()
 {
-    if(GUIExit[playerid] == 0)
-    {
-        ShowPlayerDialogEx(playerid,55,DIALOG_STYLE_MSGBOX,"Podstawowe kolory:","0- czarny\n1-bia³y\n2- ciemnoniebieski\n3- czerowny\n5- ciemno-ró¿owy\n6- ¿ó³ty\n7- niebieski\n11- szary\n16- zielony\n65- jasno zielony\n86- zielony jasny\n125 - ró¿owy\n","WYJD¯","");
-    }
-    return 1;
+    new command = Command_GetID("carcolors");
+
+    //aliases
+    Command_AddAlt(command, "kolory");
+    
+
+    //permissions
+    
+
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:carcolors(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Lista kolorów dla aut.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_carcolors_Impl(playerid);
+}

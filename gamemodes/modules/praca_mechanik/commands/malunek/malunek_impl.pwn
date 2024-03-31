@@ -72,7 +72,7 @@ command_malunek_Impl(playerid, giveplayerid, paintjob)
     MruMessageGoodInfoF(giveplayerid, "Mechanik %s zrobi³ malunek na twoim %s", GetNick(playerid), VehicleNames[model-400]);
 
     ChatMePrefixed(playerid, "Mechanik", sprintf(
-        "%s wyci¹ga sprey i tworzy malunek na %s.", GetNick(playerid), VehicleNames[model-400]
+        "wyci¹ga sprey i tworzy malunek na %s.", VehicleNames[model-400]
     ));
     
     GameTextForPlayer(playerid, sprintf("~r~-$%d", cost), 5000, 1);
