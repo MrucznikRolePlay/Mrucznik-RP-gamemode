@@ -149,4 +149,6 @@ forward closeGate(i, j, playerid);
 forward DamagedHP(playerid);
 
 forward DeathAdminWarning(playerid, killerid, reason);
+
+forward Float:GetVehicleBoundingBoxDiagonal(vehicleid);
 //EOF
