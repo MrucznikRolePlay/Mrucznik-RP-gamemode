@@ -30,16 +30,24 @@
 
 YCMD:zderzaki(playerid, params[], help)
 {
+    new string[MAX_MESSAGE_LENGTH];
     if(IsPlayerConnected(playerid))
     {
         if(IsAMechazordWarsztatowy(playerid) || PlayerInfo[playerid][pJob] == 7)
         {
+            new cost = 10000;
+            if(IsAMechazordWarsztatowy(playerid))
+            {
+                cost /= 2;
+            }
+
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa;
             if( sscanf(params, "k<fix>", playa))
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /zderzak [Nick/ID]");
-                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt tuningu to: 10 000$");
+                format(string, sizeof(string), "INFORMACJA: Koszt tuningu to: %d$", cost);
+                SendClientMessage(playerid, COLOR_GRAD3, string);
                 return 1;
             }
 
@@ -52,7 +60,7 @@ YCMD:zderzaki(playerid, params[], help)
                     {
                         if(IsPlayerInAnyVehicle(playa))
                         {
-                            if(kaska[playerid] > 10000)
+                            if(kaska[playerid] > cost)
                             {
                                 if(PlayerInfo[playerid][pMechSkill] >= 200)
                                 {
@@ -85,7 +93,8 @@ YCMD:zderzaki(playerid, params[], help)
                             }
                             else
                             {
-                                SendClientMessage(playerid, COLOR_GREY, "Nie masz wystarczaj¹cej iloœci pieniêdzy (10 000$)");
+                                format(string, sizeof(string), "Nie masz wystarczaj¹cej iloœci pieniêdzy (%d$)", cost);
+                                SendClientMessage(playerid, COLOR_GREY, string);
                             }
                         }
                         else

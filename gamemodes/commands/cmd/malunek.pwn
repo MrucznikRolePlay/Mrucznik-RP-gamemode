@@ -38,12 +38,19 @@ YCMD:malunek(playerid, params[], help)
     {
         if(IsAMechazordWarsztatowy(playerid) || PlayerInfo[playerid][pJob] == 7)
         {
+            new cost = 20000;
+            if(IsAMechazordWarsztatowy(playerid))
+            {
+                cost /= 2;
+            }
+
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa, malunek;
             if( sscanf(params, "k<fix>d", playa, malunek))
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /malunek [Nick/ID] [id malunku]");
-                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt namalowania to: 20 000$ , aby zobaczyæ liste malunków wpisz /malunki");
+                format(string, sizeof(string), "INFORMACJA: Koszt namalowania to: %d$ , aby zobaczyæ liste malunków wpisz /malunki", cost);
+                SendClientMessage(playerid, COLOR_GRAD3, string);
                 return 1;
             }
 
@@ -55,7 +62,7 @@ YCMD:malunek(playerid, params[], help)
                     {
                         if(IsPlayerInAnyVehicle(playa))
                         {
-                            if(kaska[playerid] > 20000)
+                            if(kaska[playerid] > cost)
                             {
                                 if(PlayerInfo[playerid][pMechSkill] >= 100)
                                 {
@@ -70,17 +77,17 @@ YCMD:malunek(playerid, params[], help)
                                         {
                                             GetPlayerName(playerid, sendername, sizeof(sendername));
                                             GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                                            format(string, sizeof(string), "* Zrobi³eœ graczowi %s malunek samochodu (-20 000$)",giveplayer);
+                                            format(string, sizeof(string), "* Zrobi³eœ graczowi %s malunek samochodu (-%d$)",giveplayer, cost);
                                             SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                             format(string, sizeof(string), "* Mechanik %s zrobi³ malunek na twoim %s",sendername, VehicleNames[model-400]);
                                             SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                             format(string, sizeof(string),"* Mechanik %s wyci¹ga sprey i tworzy malunek na %s.", sendername, VehicleNames[model-400]);
                                             ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                             Log(payLog, INFO, "Gracz %s zamontowa³ %s malunek %d na pojazd %s za %d$",
-                                                GetPlayerLogName(playerid), GetPlayerLogName(playa), malunek, GetVehicleLogName(pojazd), 20000
+                                                GetPlayerLogName(playerid), GetPlayerLogName(playa), malunek, GetVehicleLogName(pojazd), cost
                                             );
-                                            ZabierzKase(playerid, 20000);
-                                            format(string, sizeof(string), "~r~-$%d", 20000);
+                                            ZabierzKase(playerid, cost);
+                                            format(string, sizeof(string), "~r~-$%d", cost);
                                             GameTextForPlayer(playerid, string, 5000, 1);
                                             ChangeVehiclePaintjob(pojazd,malunek);
                                             PlayerPlaySound(playerid, 1134, 0.0, 0.0, 0.0);
@@ -110,7 +117,8 @@ YCMD:malunek(playerid, params[], help)
                             }
                             else
                             {
-                                SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (20 000$)");
+                                format(string, sizeof(string), "Nie masz wystarczaj¹cej iloœci pieniêdzy (%d$)", cost);
+                                SendClientMessage(playerid, COLOR_WHITE, string);
                             }
                         }
                         else

@@ -38,12 +38,19 @@ YCMD:spoiler(playerid, params[], help)
     {
         if(IsAMechazordWarsztatowy(playerid) || PlayerInfo[playerid][pJob] == 7)
         {
+            new cost = 25000;
+            if(IsAMechazordWarsztatowy(playerid))
+            {
+                cost /= 2;
+            }
+
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa, spojlerid;
             if( sscanf(params, "k<fix>d", playa, spojlerid))
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /spojler [Nick/ID] [id spojlera]");
-                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt spojera to: 25 000$ , aby zobaczyæ listê spojlerów wpisz /spojlery");
+                format(string, sizeof(string), "INFORMACJA: Koszt spojera to: %d$ , aby zobaczyæ listê spojlerów wpisz /spojlery", cost);
+                SendClientMessage(playerid, COLOR_GRAD3, string);
                 return 1;
             }
 
@@ -55,7 +62,7 @@ YCMD:spoiler(playerid, params[], help)
                     {
                         if(IsPlayerInAnyVehicle(playa))
                         {
-                            if(kaska[playerid] > 25000)
+                            if(kaska[playerid] > cost)
                             {
                                 if(PlayerInfo[playerid][pMechSkill] >= 200)
                                 {
@@ -75,8 +82,8 @@ YCMD:spoiler(playerid, params[], help)
                                                 SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                 format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                 ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                ZabierzKase(playerid, 25000);
-                                                format(string, sizeof(string), "~r~-$%d", 25000);
+                                                ZabierzKase(playerid, cost);
+                                                format(string, sizeof(string), "~r~-$%d", cost);
                                                 GameTextForPlayer(playerid, string, 5000, 1);
                                                 PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                                 AddVehicleComponent(pojazd,spojler);//spojler
@@ -97,8 +104,8 @@ YCMD:spoiler(playerid, params[], help)
                                                 SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                 format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                 ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                ZabierzKase(playerid, 25000);
-                                                format(string, sizeof(string), "~r~-$%d", 25000);
+                                                ZabierzKase(playerid, cost);
+                                                format(string, sizeof(string), "~r~-$%d", cost);
                                                 GameTextForPlayer(playerid, string, 5000, 1);
                                                 PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                                 AddVehicleComponent(pojazd,spojler);//spojler
@@ -119,8 +126,8 @@ YCMD:spoiler(playerid, params[], help)
                                                 SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                 format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                 ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                ZabierzKase(playerid, 25000);
-                                                format(string, sizeof(string), "~r~-$%d", 25000);
+                                                ZabierzKase(playerid, cost);
+                                                format(string, sizeof(string), "~r~-$%d", cost);
                                                 GameTextForPlayer(playerid, string, 5000, 1);
                                                 PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                                 AddVehicleComponent(pojazd,spojler);//spojler
@@ -143,8 +150,8 @@ YCMD:spoiler(playerid, params[], help)
                                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                    ZabierzKase(playerid, 25000);
-                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    ZabierzKase(playerid, cost);
+                                                    format(string, sizeof(string), "~r~-$%d", cost);
                                                     GameTextForPlayer(playerid, string, 5000, 1);
                                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                                     AddVehicleComponent(pojazd,spojler);//spojler
@@ -173,8 +180,8 @@ YCMD:spoiler(playerid, params[], help)
                                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                    ZabierzKase(playerid, 25000);
-                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    ZabierzKase(playerid, cost);
+                                                    format(string, sizeof(string), "~r~-$%d", cost);
                                                     GameTextForPlayer(playerid, string, 5000, 1);
                                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                                     AddVehicleComponent(pojazd,spojler);//spojler
@@ -197,13 +204,13 @@ YCMD:spoiler(playerid, params[], help)
                                                     {
                                                         spojler = 1139;
                                                     }
-                                                    format(string, sizeof(string), "* Zamontowa³eœ nowy spojler graczowi %s (koszt -25000$)", giveplayer);
+                                                    format(string, sizeof(string), "* Zamontowa³eœ nowy spojler graczowi %s (koszt -%d$)", giveplayer, cost);
                                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                    ZabierzKase(playerid, 25000);
+                                                    ZabierzKase(playerid, cost);
                                                     format(string, sizeof(string), "~r~-$%d", 2500);
                                                     GameTextForPlayer(playerid, string, 5000, 1);
                                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
@@ -227,14 +234,14 @@ YCMD:spoiler(playerid, params[], help)
                                                     {
                                                         spojler = 1060;
                                                     }
-                                                    format(string, sizeof(string), "* Zamontowa³eœ nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                    format(string, sizeof(string), "* Zamontowa³eœ nowy spojler graczowi %s (koszt -%d$)", giveplayer, cost);
                                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                    ZabierzKase(playerid, 25000);
-                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    ZabierzKase(playerid, cost);
+                                                    format(string, sizeof(string), "~r~-$%d", cost);
                                                     GameTextForPlayer(playerid, string, 5000, 1);
                                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                                     AddVehicleComponent(pojazd,spojler);//spojler
@@ -257,14 +264,14 @@ YCMD:spoiler(playerid, params[], help)
                                                     {
                                                         spojler = 1147;
                                                     }
-                                                    format(string, sizeof(string), "* Zamontowa³eœ nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                    format(string, sizeof(string), "* Zamontowa³eœ nowy spojler graczowi %s (koszt -%d$)", giveplayer, cost);
                                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                    ZabierzKase(playerid, 25000);
-                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    ZabierzKase(playerid, cost);
+                                                    format(string, sizeof(string), "~r~-$%d", cost);
                                                     GameTextForPlayer(playerid, string, 5000, 1);
                                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                                     AddVehicleComponent(pojazd,spojler);//spojler
@@ -287,14 +294,14 @@ YCMD:spoiler(playerid, params[], help)
                                                     {
                                                         spojler = 1050;
                                                     }
-                                                    format(string, sizeof(string), "* Zamontowa³eœ nowy spojler graczowi %s (koszt -25 000$)", giveplayer);
+                                                    format(string, sizeof(string), "* Zamontowa³eœ nowy spojler graczowi %s (koszt -%d$)", giveplayer, cost);
                                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowy spojler", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje spojler w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                                    ZabierzKase(playerid, 25000);
-                                                    format(string, sizeof(string), "~r~-$%d", 25000);
+                                                    ZabierzKase(playerid, cost);
+                                                    format(string, sizeof(string), "~r~-$%d", cost);
                                                     GameTextForPlayer(playerid, string, 5000, 1);
                                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                                     AddVehicleComponent(pojazd,spojler);//spojler
@@ -313,7 +320,7 @@ YCMD:spoiler(playerid, params[], help)
                                                 }
                                             }
                                             Log(payLog, INFO, "Gracz %s zamontowa³ %s spoiler %d na pojazd %s za %d$",
-                                                GetPlayerLogName(playerid), GetPlayerLogName(playa), spojlerid, GetVehicleLogName(pojazd), 25000
+                                                GetPlayerLogName(playerid), GetPlayerLogName(playa), spojlerid, GetVehicleLogName(pojazd), cost
                                             );
                                         }
                                         else

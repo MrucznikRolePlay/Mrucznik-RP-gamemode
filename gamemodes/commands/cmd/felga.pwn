@@ -38,12 +38,19 @@ YCMD:felga(playerid, params[], help)
     {
         if(IsAMechazordWarsztatowy(playerid) || PlayerInfo[playerid][pJob] == 7)
         {
+            new cost = 15000;
+            if(IsAMechazordWarsztatowy(playerid))
+            {
+                cost /= 2;
+            }
+
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa, idfelgi;
             if( sscanf(params, "k<fix>d", playa, idfelgi))
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /felga [Nick/ID] [id felgi]");
-                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt tuningu to: 15 000$ , aby zobaczyæ liste felg wpisz /felgi");
+                format(string, sizeof(string), "INFORMACJA: Koszt tuningu to: %d$ , aby zobaczyæ liste felg wpisz /felgi", cost);
+                SendClientMessage(playerid, COLOR_GRAD3, string);
                 return 1;
             }
 
@@ -55,7 +62,7 @@ YCMD:felga(playerid, params[], help)
                     {
                         if(IsPlayerInAnyVehicle(playa))
                         {
-                            if(kaska[playerid] > 15000)
+                            if(kaska[playerid] > cost)
                             {
                                 if(idfelgi >= 1 && idfelgi <= 17)
                                 {
@@ -68,17 +75,17 @@ YCMD:felga(playerid, params[], help)
                                         new felga = idfelgi+1072;
                                         GetPlayerName(playerid, sendername, sizeof(sendername));
                                         GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                                        format(string, sizeof(string), "* Zamontowa³eœ nowe felgi graczowi %s (koszt -15 000$)",giveplayer);
+                                        format(string, sizeof(string), "* Zamontowa³eœ nowe felgi graczowi %s (koszt -%d$)",giveplayer, cost);
                                         SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string), "* Mechanik %s zamontowa³ ci w twoim %s nowe felgi",sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                         SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                         format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nowe felgi w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                         ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                         Log(payLog, INFO, "Gracz %s zamontowa³ %s felgi %d na pojazd %s za %d$",
-                                            GetPlayerLogName(playerid), GetPlayerLogName(playa), felga, GetVehicleLogName(pojazd), 15000
+                                            GetPlayerLogName(playerid), GetPlayerLogName(playa), felga, GetVehicleLogName(pojazd), cost
                                         );
-                                        ZabierzKase(playerid, 15000);
-                                        format(string, sizeof(string), "~r~-$%d", 15000);
+                                        ZabierzKase(playerid, cost);
+                                        format(string, sizeof(string), "~r~-$%d", cost);
                                         GameTextForPlayer(playerid, string, 5000, 1);
                                         PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                         if(felga >= 173 && felga <= 1085)
@@ -111,7 +118,8 @@ YCMD:felga(playerid, params[], help)
                             }
                             else
                             {
-                                SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (15000$)");
+                                format(string, sizeof(string), "Nie masz wystarczaj¹cej iloœci pieniêdzy (%d$)", cost);
+                                SendClientMessage(playerid, COLOR_WHITE, string);
                             }
                         }
                         else

@@ -38,12 +38,19 @@ YCMD:hydraulika(playerid, params[], help)
     {
         if(IsAMechazordWarsztatowy(playerid) || PlayerInfo[playerid][pJob] == 7)
         {
+            new cost = 10000;
+            if(IsAMechazordWarsztatowy(playerid))
+            {
+                cost /= 2;
+            }
+
             if(!IsAtWarsztat(playerid)) { return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning"); }
             new playa;
             if( sscanf(params, "k<fix>", playa))
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /hydraulika [Nick/ID]");
-                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt zamontowania to: 10 000$");
+                format(string, sizeof(string), "INFORMACJA: Koszt zamontowania to: %d$", cost);
+                SendClientMessage(playerid, COLOR_GRAD3, string);
                 return 1;
             }
 
@@ -55,7 +62,7 @@ YCMD:hydraulika(playerid, params[], help)
                     {
                         if(IsPlayerInAnyVehicle(playa))
                         {
-                            if(kaska[playerid] > 10000)
+                            if(kaska[playerid] > cost)
                             {
                                 if(PlayerInfo[playerid][pMechSkill] >= 50)
                                 {
@@ -67,17 +74,17 @@ YCMD:hydraulika(playerid, params[], help)
                                     AddVehicleComponent(pojazd,1087);//hydraulika
                                     GetPlayerName(playerid, sendername, sizeof(sendername));
                                     GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s hydraulike (-10 000$)",giveplayer);
+                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s hydraulike (-%d$)",giveplayer, cost);
                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ hydraulike w twoim samochodzie",sendername);
                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje hydraulike w %s.", sendername, VehicleNames[GetVehicleModel(pojazd) - 400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                                    ZabierzKase(playerid, 10000);
+                                    ZabierzKase(playerid, cost);
                                     Log(payLog, INFO, "Gracz %s zamontowa³ %s hydraulikê na pojazd %s za %d$",
-                                        GetPlayerLogName(playerid), GetPlayerLogName(playa), GetVehicleLogName(pojazd), 10000
+                                        GetPlayerLogName(playerid), GetPlayerLogName(playa), GetVehicleLogName(pojazd), cost
                                     );
-                                    format(string, sizeof(string), "~r~-$%d", 10000);
+                                    format(string, sizeof(string), "~r~-$%d", cost);
                                     GameTextForPlayer(playerid, string, 5000, 1);
                                     PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
                                     if(playa != playerid)
@@ -93,7 +100,8 @@ YCMD:hydraulika(playerid, params[], help)
                                 }
                             } else
                             {
-                                SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (10 000$)");
+                                format(string, sizeof(string), "Nie masz wystarczaj¹cej iloœci pieniêdzy (%d$)", cost);
+                                SendClientMessage(playerid, COLOR_WHITE, string);
                             }
                         } else
                         {

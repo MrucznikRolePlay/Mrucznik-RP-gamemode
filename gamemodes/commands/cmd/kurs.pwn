@@ -63,13 +63,11 @@ YCMD:kurs(playerid, params[], help)
                 }
                 else if(GetVehicleModel(vehicleid) == 431 || GetVehicleModel(vehicleid) == 437)
                 {
-					return sendTipMessageEx(playerid,COLOR_GREY,"W tym pojeŸdzie nie mo¿esz wejœæ na s³u¿bê !"); 
-					// na proœbê lidera blokada busów
-                    /*if(moneys < 25 || moneys > 2500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena biletu od $25 do $2500 !"); return 1; }
+                    if(moneys < 25 || moneys > 2500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena biletu od $25 do $2500 !"); return 1; }
 					BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= moneys;
 					GetPlayerName(playerid,sendername,sizeof(sendername));
 					format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: $%d.", sendername, TransportValue[playerid]);
-					OOCNews(TEAM_GROVE_COLOR,string);*/
+					OOCNews(TEAM_GROVE_COLOR,string);
                 }
                 else if(IsATrain(vehicleid))
                 {
@@ -171,7 +169,7 @@ YCMD:kurs(playerid, params[], help)
 	}
 	else
 	{
-		sendErrorMessage(playerid,"Nie jesteœ taksówkarzem / busiarzem !");
+		sendErrorMessage(playerid,"Nie jesteœ kierowc¹ / pracownikiem Korporacji Transportowej !");
 		return 1;
 	}
 	return 1;

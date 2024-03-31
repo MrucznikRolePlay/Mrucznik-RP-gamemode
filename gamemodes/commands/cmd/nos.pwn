@@ -38,12 +38,19 @@ YCMD:nos(playerid, params[], help)
     {
         if(IsAMechazordWarsztatowy(playerid) || PlayerInfo[playerid][pJob] == 7)
         {
+            new cost = 5000;
+            if(IsAMechazordWarsztatowy(playerid))
+            {
+                cost /= 2;
+            }
+
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa;
             if( sscanf(params, "k<fix>", playa))
             {
                 SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /nitro [Nick/ID]");
-                SendClientMessage(playerid, COLOR_GRAD3, "INFORMACJA: Koszt zamontowania to: 5000$");
+                format(string, sizeof(string), "INFORMACJA: Koszt zamontowania to: %d$", cost);
+                SendClientMessage(playerid, COLOR_GRAD3, string);
                 return 1;
             }
 
@@ -56,7 +63,7 @@ YCMD:nos(playerid, params[], help)
                     {
                         if(IsPlayerInAnyVehicle(playa))
                         {
-                            if(kaska[playerid] > 5000)
+                            if(kaska[playerid] > cost)
                             {
                                 new pojazd = GetPlayerVehicleID(playa);
                                 if(!IsCarOwner(playa, pojazd))
@@ -66,16 +73,16 @@ YCMD:nos(playerid, params[], help)
                                 {
                                     GetPlayerName(playerid, sendername, sizeof(sendername));
                                     GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 2) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
+                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 2) w jego samochodzie [-%d$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer, cost);
                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 2 w twoim samochodzie",sendername);
                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     AddVehicleComponent(pojazd, 1009);
-                                    ZabierzKase(playerid, 5000);
-                                    format(string, sizeof(string), "~r~-$%d", 5000);
-                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    ZabierzKase(playerid, cost);
+                                    format(string, sizeof(string), "~r~-$%d", cost);
+                                    GameTextForPlayer(playerid, string, cost, 1);
                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                     if(playa != playerid)
                                     {
@@ -89,16 +96,16 @@ YCMD:nos(playerid, params[], help)
                                 {
                                     GetPlayerName(playerid, sendername, sizeof(sendername));
                                     GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 5) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
+                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 5) w jego samochodzie [-%d$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer,cost);
                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 5 w twoim samochodzie",sendername);
                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     AddVehicleComponent(pojazd, 1008);
-                                    ZabierzKase(playerid, 5000);
-                                    format(string, sizeof(string), "~r~-$%d", 5000);
-                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    ZabierzKase(playerid, cost);
+                                    format(string, sizeof(string), "~r~-$%d", cost);
+                                    GameTextForPlayer(playerid, string, cost, 1);
                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                     if(playa != playerid)
                                     {
@@ -112,16 +119,16 @@ YCMD:nos(playerid, params[], help)
                                 {
                                     GetPlayerName(playerid, sendername, sizeof(sendername));
                                     GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 10) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
+                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 10) w jego samochodzie [-%d$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer,cost);
                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci: 10 w twoim samochodzie",sendername);
                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     AddVehicleComponent(pojazd, 1010);
-                                    ZabierzKase(playerid, 5000);
-                                    format(string, sizeof(string), "~r~-$%d", 5000);
-                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    ZabierzKase(playerid, cost);
+                                    format(string, sizeof(string), "~r~-$%d", cost);
+                                    GameTextForPlayer(playerid, string, cost, 1);
                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                     if(playa != playerid)
                                     {
@@ -135,16 +142,16 @@ YCMD:nos(playerid, params[], help)
                                 {
                                     GetPlayerName(playerid, sendername, sizeof(sendername));
                                     GetPlayerName(playa, giveplayer, sizeof(giveplayer));
-                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 2) w jego samochodzie [-5000$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer);
+                                    format(string, sizeof(string), "* Zamontowa³eœ graczowi %s nitro(pojemnoœæ: 2) w jego samochodzie [-%d$](wiêkszy skill-wiêksza pojemnoœæ)",giveplayer,cost);
                                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string), "* Mechanik %s zamontowa³ nitro o pojemnoœci 2 w twoim samochodzie",sendername);
                                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
                                     format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia i montuje nitro w %s.", sendername, VehicleNames[GetVehicleModel(pojazd)-400]);
                                     ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                                     AddVehicleComponent(pojazd, 1009);
-                                    ZabierzKase(playerid, 5000);
-                                    format(string, sizeof(string), "~r~-$%d", 5000);
-                                    GameTextForPlayer(playerid, string, 5000, 1);
+                                    ZabierzKase(playerid, cost);
+                                    format(string, sizeof(string), "~r~-$%d", cost);
+                                    GameTextForPlayer(playerid, string, cost, 1);
                                     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
                                     if(playa != playerid)
                                     {
@@ -155,12 +162,13 @@ YCMD:nos(playerid, params[], help)
                                     CarData[VehicleUID[pojazd][vUID]][c_Nitro] = 1009;
                                 }
                                 Log(payLog, INFO, "Gracz %s zamontowa³ %s nitro na pojazd %s za %d$",
-                                    GetPlayerLogName(playerid), GetPlayerLogName(playa), GetVehicleLogName(pojazd), 5000
+                                    GetPlayerLogName(playerid), GetPlayerLogName(playa), GetVehicleLogName(pojazd), cost
                                 );
                             }
                             else
                             {
-                                SendClientMessage(playerid, COLOR_WHITE, "Nie masz wystarczaj¹cej iloœci pieniêdzy (5000$)");
+                                format(string, sizeof(string), "Nie masz wystarczaj¹cej iloœci pieniêdzy (%d$)", cost);
+                                SendClientMessage(playerid, COLOR_WHITE, string);
                             }
                         }
                         else
