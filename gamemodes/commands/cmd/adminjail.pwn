@@ -28,7 +28,7 @@
 	
 */
 
-YCMD:adminajail(playerid, params[], help)
+YCMD:adminjail(playerid, params[], help)
 {
 	new string[128];
 
@@ -40,7 +40,7 @@ YCMD:adminajail(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj /aj [id/nick] [czas(w minutach)] [powod]");
 			return 1;
 		}
-		if (czas < 0) {
+		if (money < 0) {
 			sendErrorMessage(playerid, "Czas nie mo¿e byæ ujemny!");
 			return 1;
 		}
