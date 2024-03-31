@@ -47,6 +47,10 @@ YCMD:paj(playerid, params[], help)
                 sendTipMessage(playerid, "U¿yj /paj [NICK GRACZA OFFLINE] [czas] [powod]"); //
                 return 1;
             }
+			if (czas <= 0) {
+				sendErrorMessage(playerid, "Czas musi byæ wiêkszy ni¿ 0!");
+				return 1;
+			}
             new giveplayerid;
 			sscanf(nick, "k<fix>", giveplayerid);
             if(IsPlayerConnected(giveplayerid))
