@@ -6,12 +6,13 @@
     "aliases": [],
     "parameters": [
         {
-            "type": "player",
+            "type": "string",
+            "size": "32",
             "name": "giveplayer",
             "description": "Nick/ID"
         },
         {
-            "type": "bool",
+            "type": "integer",
             "name": "isOffline",
             "description": "Czy gracz offline"
         }

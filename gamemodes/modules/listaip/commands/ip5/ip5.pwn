@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                ip5                                                //
+//                                                    ip5                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -54,25 +54,13 @@ YCMD:ip5(playerid, params[], help)
         return 1;
     }
     //fetching params
-
-    if(isnull(params))
+    new giveplayer[32], isOffline;
+    if(sscanf(params, "s[32]d", giveplayer, isOffline))
     {
-        sendTipMessage(playerid, "U¿yj /ip5 [Nick/ID] ");
+        sendTipMessage(playerid, "U¿yj /ip5 [Nick/ID] [Czy gracz offline] ");
         return 1;
     }
-
-    new offline = false;
-    new giveplayer[MAX_PLAYER_NAME];
-    if(sscanf(params, "r", giveplayer) || !IsPlayerConnected(giveplayer[0]))
-    {
-        new formatString[8];
-        format(formatString, sizeof(formatString), "s[%d]", MAX_PLAYER_NAME);
-        sscanf(params, formatString, giveplayer);
-        offline = true;
-    }
+    
     //command body
-    return command_ip5_Impl(playerid, giveplayer, offline);
+    return command_ip5_Impl(playerid, giveplayer, isOffline);
 }
-
-/*
-*/
