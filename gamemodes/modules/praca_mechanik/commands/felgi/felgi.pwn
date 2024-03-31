@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   felgi                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,27 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "nos\nos.pwn"
-#include "zderzaki\zderzaki.pwn"
-#include "malunek\malunek.pwn"
-#include "felgi\felgi.pwn"
-#include "kolory\kolory.pwn"
-#include "hydraulika\hydraulika.pwn"
-#include "malunki\malunki.pwn"
-
+#include "felgi_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_felgi()
 {
-    command_nos();
-    command_zderzaki();
-    command_malunek();
-    command_felgi();
-    command_kolory();
-    command_hydraulika();
-    command_malunki();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:felgi(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Lista dostêpnych felg do tuningu.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_felgi_Impl(playerid);
 }

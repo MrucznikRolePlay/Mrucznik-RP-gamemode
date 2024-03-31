@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ felgi ]-------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   kolory                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,26 +16,20 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: mrucznik
+// Data utworzenia: 01.04.2024
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:felgi(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_kolory_Impl(playerid)
 {
-    if(IsPlayerConnected(playerid))
+    if(GUIExit[playerid] == 0)
     {
-        if(GUIExit[playerid] == 0)
-    	{
-			ShowPlayerDialogEx(playerid,55,DIALOG_STYLE_MSGBOX,"DostÍpne numery felg:","1- Shadow\n2- Mega\n3- Metalik\n4- ZakrÍcone\n5- Klasyczne\n6- Twist\n7- Przecinak\n8- Switch\n9- Grove\n10- Importowane\n11- Dolar\n12- Odlot\n13- Atomowe\n14- Ahab\n15- Virtualne\n16- Access\n17- Terenowe", "WYJDØ","WYJDè");
-		}
-	}
-	return 1;
+        ShowPlayerDialogEx(playerid,55,DIALOG_STYLE_MSGBOX,"Podstawowe kolory:","0- czarny\n1-bia≥y\n2- ciemnoniebieski\n3- czerowny\n5- ciemno-rÛøowy\n6- øÛ≥ty\n7- niebieski\n11- szary\n16- zielony\n65- jasno zielony\n86- zielony jasny\n125 - rÛøowy\n","WYJDØ","");
+    }
+    return 1;
 }
+
+//end

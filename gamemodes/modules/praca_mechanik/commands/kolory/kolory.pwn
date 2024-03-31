@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ kolory ]------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   kolory                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,26 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzÍdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN• NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "kolory_impl.pwn"
 
+//-------<[ initialize ]>-------
+command_kolory()
+{
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
 YCMD:kolory(playerid, params[], help)
 {
-    if(IsPlayerConnected(playerid))
+    if (help)
     {
-        if(GUIExit[playerid] == 0)
-    	{
-			ShowPlayerDialogEx(playerid,55,DIALOG_STYLE_MSGBOX,"Podstawowe kolory:","0- czarny\n1-bia≥y\n2- ciemnoniebieski\n3- czerowny\n5- ciemno-rÛøowy\n6- øÛ≥ty\n7- niebieski\n11- szary\n16- zielony\n65- jasno zielony\n86- zielony jasny\n125 - rÛøowy\n","WYJDØ","WYJDè");
-		}
-	}
-	return 1;
+        sendTipMessage(playerid, "Lista kolorÛw dla aut.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_kolory_Impl(playerid);
 }

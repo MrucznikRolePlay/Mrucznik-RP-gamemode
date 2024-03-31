@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   felgi                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,20 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzÍdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 01.04.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN• NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "nos\nos.pwn"
-#include "zderzaki\zderzaki.pwn"
-#include "malunek\malunek.pwn"
-#include "felgi\felgi.pwn"
-#include "kolory\kolory.pwn"
-#include "hydraulika\hydraulika.pwn"
-#include "malunki\malunki.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_felgi_Impl(playerid)
 {
-    command_nos();
-    command_zderzaki();
-    command_malunek();
-    command_felgi();
-    command_kolory();
-    command_hydraulika();
-    command_malunki();
-    
+    if(GUIExit[playerid] == 0)
+    {
+        ShowPlayerDialogEx(playerid,55,DIALOG_STYLE_MSGBOX,"DostÍpne numery felg:","1- Shadow\n2- Mega\n3- Metalik\n4- ZakrÍcone\n5- Klasyczne\n6- Twist\n7- Przecinak\n8- Switch\n9- Grove\n10- Importowane\n11- Dolar\n12- Odlot\n13- Atomowe\n14- Ahab\n15- Virtualne\n16- Access\n17- Terenowe", "WYJDè","");
+    }
+    return 1;
 }
+
+//end
