@@ -114,7 +114,6 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 
 IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 {
-	new skill;
 	switch(jobid)
 	{
 		case JOB_LOWCA:
