@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                  malunek                                                  //
+//                                                  zderzaki                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,15 +17,15 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: mrucznik
-// Data utworzenia: 31.03.2024
+// Data utworzenia: 01.04.2024
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_malunek_Impl(playerid, giveplayerid, paintjob)
+command_zderzaki_Impl(playerid, giveplayerid)
 {
-    new cost = 20_000;
+    new cost = 10_000;
     if(IsAMechazordWarsztatowy(playerid))
     {
         cost /= 2;
@@ -37,52 +37,36 @@ command_malunek_Impl(playerid, giveplayerid, paintjob)
         return 1;
     }
 
-    if(GetPlayerJobSkill(playerid, JOB_MECHANIC) < 3)
+    if(GetPlayerJobSkill(playerid, JOB_MECHANIC) < 4)
     {
-        MruMessageFail(playerid, "Musisz mieæ 3 skill mechanika aby nak³adaæ malunki na pojazdy.");
+        MruMessageFail(playerid, "Musisz mieæ 4 skill mechanika aby montowaæ zderzaki.");
         return 1;
     }
 
-    new vehicleID = GetPlayerVehicleID(giveplayerid);
-    new model = GetVehicleModel(vehicleID);
-    if(!(model == 412 || model >= 534 && model <= 536 || model >= 558 && model <= 562 || model >= 565 && model <= 567 || model == 575 || model == 576 || model == 483))
+    if(GUIExit[playerid] != 0)
     {
-        MruMessageFail(playerid, "Na ten pojazd nie mo¿na na³o¿yæ malunku.");
-        return 1; 
-    }
-
-    if(paintjob >= 0 && paintjob <= 3)
-    {
-        MruMessageFail(playerid, "ID malunku od 0 do 3 (wpisz /malunki aby zobaczyæ dostêpne malunki).");
         return 1;
     }
 
-    // functionality
-    new vehicleUID = VehicleUID[vehicleID][vUID];
-    ChangeVehiclePaintjob(vehicleID, paintjob);
-    CarData[vehicleUID][c_Malunek] = paintjob;
-    ZabierzKase(playerid, cost);
-
-    // messages
-    Log(payLog, INFO, "%s zamontowa³ %s malunek %d na pojazd %s za %d$",
-        GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), paintjob, GetVehicleLogName(vehicleID), cost
-    );
-
-    MruMessageInfoF(playerid, "Zrobi³eœ graczowi %s malunek samochodu (-%d$)", GetNick(giveplayerid), cost);
-    MruMessageGoodInfoF(giveplayerid, "Mechanik %s zrobi³ malunek na twoim %s", GetNick(playerid), VehicleNames[model-400]);
-
-    ChatMePrefixed(playerid, "Mechanik", sprintf(
-        "%s wyci¹ga sprey i tworzy malunek na %s.", GetNick(playerid), VehicleNames[model-400]
-    ));
-    
-    GameTextForPlayer(playerid, sprintf("~r~-$%d", cost), 5000, 1);
-    PlayerPlaySound(playerid, 1134, 0.0, 0.0, 0.0);
-    if(giveplayerid != playerid)
+    mechanikid[playerid] = giveplayerid;
+    new model = GetVehicleModel(GetPlayerVehicleID(giveplayerid));
+    if(model >= 558 && model <= 562 || model == 565)//alien i x-flow
     {
-        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
-        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
-        PlayerPlaySound(giveplayerid, 1134, 0.0, 0.0, 0.0);
+        ShowPlayerDialogEx(playerid, 501, DIALOG_STYLE_LIST, "Wybierz zderzaki", "X-Flow\nAlien", "Montuj", "WyjdŸ");
     }
+    else if(model == 575 || model == 534 || model == 536 || model == 567 || model == 576)//lowrider
+    {
+        ShowPlayerDialogEx(playerid, 502, DIALOG_STYLE_LIST, "Wybierz zderzaki", "Chromowe\nMasywne", "Montuj", "WyjdŸ");
+    }
+    else if(model == 535)//slamvan
+    {
+        ShowPlayerDialogEx(playerid, 503, DIALOG_STYLE_LIST, "Wybierz zderzaki", "Masywne", "Montuj", "WyjdŸ");
+    }
+    else
+    {
+        MruMessageFail(playerid, "W tym wozie nie mo¿na zamontowac zderzaków");
+    }
+
     return 1;
 }
 

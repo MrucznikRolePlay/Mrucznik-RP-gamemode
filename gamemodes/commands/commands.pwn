@@ -596,7 +596,6 @@
 #include "cmd/zbrojuj.pwn"
 #include "cmd/zd.pwn"
 #include "cmd/zdejmijkevlar.pwn"
-#include "cmd/zderzaki.pwn"
 #include "cmd/zdmv.pwn"
 #include "cmd/zgas.pwn"
 #include "cmd/zk.pwn"
@@ -905,9 +904,6 @@ static Aliases()
 	Command_AddAltNamed("losowostworzdom", "lpostawdom");
 	Command_AddAltNamed("losowostworzdom", "ltworzdom");
 
-	//malunek
-	Command_AddAltNamed("malunek", "maluj");
-
 	//mandacik
 	Command_AddAltNamed("mandacik", "ticket");
 	Command_AddAltNamed("mandacik", "mandat");
@@ -955,8 +951,6 @@ static Aliases()
 	//newbie
 	Command_AddAltNamed("newbie", "n");
 
-	//nos
-	Command_AddAltNamed("nos", "nitro");
 
 	//o
 	Command_AddAltNamed("o", "ooc");
@@ -1358,8 +1352,6 @@ static Aliases()
 	Command_AddAltNamed("zdejmijkevlar", "wyrzuckami");
 	Command_AddAltNamed("zdejmijkevlar", "zdejmijkami");
 
-	//zderzaki
-	Command_AddAltNamed("zderzaki", "zderzak");
 
 	//zdmv
 	Command_AddAltNamed("zdmv", "cdmv");

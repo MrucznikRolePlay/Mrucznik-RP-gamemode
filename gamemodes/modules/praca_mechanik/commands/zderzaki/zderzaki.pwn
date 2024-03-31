@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  zderzaki                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,23 +27,45 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "nos\nos.pwn"
-#include "zderzaki\zderzaki.pwn"
-#include "malunek\malunek.pwn"
-#include "hydraulika\hydraulika.pwn"
-#include "malunki\malunki.pwn"
-
+#include "zderzaki_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_zderzaki()
 {
-    command_nos();
-    command_zderzaki();
-    command_malunek();
-    command_hydraulika();
-    command_malunki();
+    new command = Command_GetID("zderzaki");
+
+    //aliases
+    Command_AddAlt(command, "zderzak");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zderzaki(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Montowanie zderzaków na samochodzie.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /zderzaki [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_zderzaki_Impl(playerid, giveplayerid);
 }
