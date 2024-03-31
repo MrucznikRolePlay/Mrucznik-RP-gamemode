@@ -871,6 +871,8 @@ public OnDynamicActorStreamIn(actorid, forplayerid)
 
 public OnPlayerEnterDynamicArea(playerid, areaid)
 {
+	ZA_OnPlayerEnterDynamicArea(playerid, areaid); // z³odziej aut
+
     if(IsPlayerInAnyVehicle(playerid))
     {
         new kolid=-1;

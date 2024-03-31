@@ -29,7 +29,7 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 
-hook OnPlayerEnterDynamicArea(playerid, areaid)
+ZA_OnPlayerEnterDynamicArea(playerid, areaid)
 {
 	if(stole_a_car_checkpoint[playerid][1] == areaid)
 	{
