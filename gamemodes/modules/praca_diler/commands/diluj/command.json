@@ -1,0 +1,15 @@
+{
+    "name": "diluj",
+    "description": "Rozpoczyna dilerkê narkotyków.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "31.03.2024"
+}
