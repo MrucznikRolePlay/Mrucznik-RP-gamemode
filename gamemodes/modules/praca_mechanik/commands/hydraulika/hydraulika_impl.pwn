@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                    nos                                                    //
+//                                                 hydraulika                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -23,9 +23,9 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_nos_Impl(playerid, giveplayerid)
+command_hydraulika_Impl(playerid, giveplayerid)
 {
-    new cost = 5000;
+    new cost = 10_000;
     if(IsAMechazordWarsztatowy(playerid))
     {
         cost /= 2;
@@ -37,69 +37,43 @@ command_nos_Impl(playerid, giveplayerid)
         return 1;
     }
 
+    if(GetPlayerJobSkill(playerid, JOB_MECHANIC) < 2)
+    {
+        MruMessageFail(playerid, "Musisz mieæ 2 skill mechanika aby montowaæ hydraulike.");
+        return 1;
+    }
+
     // helper variables
     new vehicleID = GetPlayerVehicleID(giveplayerid);
-    new nitroSize, nitroComponentID;
-    switch(GetPlayerJobSkill(playerid, JOB_MECHANIC))
-    {
-        case 1:
-        {
-            nitroComponentID = 1009;
-            nitroSize = 2;
-        }
-        case 2:
-        {
-            nitroComponentID = 1008;
-            nitroSize = 5;
-        }
-        case 3:
-        {
-            nitroComponentID = 1010;
-            nitroSize = 10;
-        }
-        case 4:
-        {
-            nitroComponentID = 1010;
-            nitroSize = 10;
-        }
-        case 5:
-        {
-            nitroComponentID = 1010;
-            nitroSize = 10;
-        }
-        default:
-        {
-            nitroComponentID = 1009;
-            nitroSize = 2;
-        }
+    new vehicleUID = VehicleUID[vehicleID][vUID];
+    if(!IsCarOwner(giveplayerid, vehicleID)) {
+        return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
     }
-    
+
     // functionality
     ZabierzKase(playerid, cost);
-    AddVehicleComponent(vehicleID, nitroComponentID);
-    new vehicleUID = VehicleUID[vehicleID][vUID];
-    CarData[vehicleUID][c_Nitro] = nitroComponentID;
+    AddVehicleComponent(vehicleID, 1087); //hydraulika
+    CarData[vehicleUID][c_bHydraulika] = true;
 
     // messages
-    Log(payLog, INFO, "Gracz %s zamontowa³ %s nitro na pojazd %s za %d$",
+    Log(payLog, INFO, "Gracz %s zamontowa³ %s hydraulikê na pojazd %s za %d$",
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetVehicleLogName(vehicleID), cost
     );
 
-    MruMessageInfoF(playerid, "Zamontowa³eœ graczowi %s nitro(pojemnoœæ: %d) w jego samochodzie [-%d$] (wiêkszy skill = wiêksza pojemnoœæ)", GetNick(giveplayerid), nitroSize, cost);
-    MruMessageGoodInfoF(giveplayerid, "Mechanik %s zamontowa³ nitro o pojemnoœci %d w twoim samochodzie", GetNick(playerid), nitroSize);
+    MruMessageInfoF(playerid, "Zamontowa³eœ graczowi %s hydraulike (-%d$)", GetNick(giveplayerid), cost);
+    MruMessageGoodInfoF(giveplayerid, "Mechanik %s zamontowa³ hydraulike w twoim samochodzie", GetNick(playerid));
 
-    ChatMePrefixed(playerid, "Mechanik",
-        sprintf("%s wyci¹ga narzêdzia i montuje nitro w %s.", 
-        GetNick(playerid), VehicleNames[GetVehicleModel(vehicleID)-400]
+    ChatMePrefixed(playerid, "Mechanik", sprintf("%s wyci¹ga narzêdzia i montuje hydraulike w %s.", 
+        GetNick(playerid), VehicleNames[GetVehicleModel(vehicleID) - 400]
     ));
 
     GameTextForPlayer(playerid, sprintf("~r~-$%d", cost), 5000, 1);
-    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+    PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
     if(giveplayerid != playerid)
     {
         IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
-        MruMessageSkillInfo(playerid, "Skill +1");
-        PlayerPlaySound(giveplayerid, 1133, 0.0, 0.0, 0.0);
+        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+        PlayerPlaySound(giveplayerid, 1141, 0.0, 0.0, 0.0);
     }
     return 1;
 }

@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//------------------------------------------------[ malunki ]------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 hydraulika                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,26 +16,55 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzÍdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN• NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "hydraulika_impl.pwn"
 
-YCMD:malunki(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_hydraulika()
 {
-    if(IsPlayerConnected(playerid))
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:hydraulika(playerid, params[], help)
+{
+    if (help)
     {
-        if(GUIExit[playerid] == 0)
-    	{
-			ShowPlayerDialogEx(playerid,50,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","LovRider`s:\n(Savanna,Tornado,Blade)\n0- ØÛ≥te p≥omienie\n1- Czerwono øÛ≥te paski\n2- Czerwone p≥omienie z przodu\n3- WyczyúÊ malunek\n\nRemington\n\n0- Brπzowe hieroglify\n1- Czerwono øÛ≥te p≥omienie\n2- Niebieskie p≥omienie\n3- WyczyúÊ malunek\n\nSlamvan \n\n0- Czarny z rÛøowymi paskami\n1- Kolorowe p≥omyczki\n2- ØÛ≥te p≥omienie\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ aby zobaczyÊ dalszπ listÍ","DALEJ","WYJDè");
-		}
-	}
-	return 1;
+        sendTipMessage(playerid, "Montowanie hydrauliki w pojeüdzie.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "Uøyj /hydraulika [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_hydraulika_Impl(playerid, giveplayerid);
 }

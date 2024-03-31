@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  malunki                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "nos\nos.pwn"
-#include "hydraulika\hydraulika.pwn"
-#include "malunki\malunki.pwn"
-
+#include "malunki_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_malunki()
 {
-    command_nos();
-    command_hydraulika();
-    command_malunki();
+    new command = Command_GetID("malunki");
+
+    //aliases
+    Command_AddAlt(command, "paintjobs");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:malunki(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Lista dostêpnych painjobów dla samochodów.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_malunki_Impl(playerid);
 }
