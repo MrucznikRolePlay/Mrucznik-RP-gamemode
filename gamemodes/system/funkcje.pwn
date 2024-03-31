@@ -7780,7 +7780,7 @@ AddCar(car, model = -1, col1 = -1, col2 = 1, respawnDelay = -1)
 	}
 	if(model == -1)
 	{
-		new randomModelIdx = GetRandomVehicleForStealingModel();
+		new randomModelIdx = GetRandomStealableVehModel();
 		model = RandCars[randomModelIdx][0];
 	}
 	new id = AddStaticVehicleEx(model, CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], col1, col2, respawnDelay);
@@ -11679,7 +11679,7 @@ public TourCamera(playerid, step)
 }
 //--------------------------------------------------
 
-GetRandomVehicleForStealingModel()
+GetRandomStealableVehModel()
 {
 	new randa = true_random(53);
 	new model;

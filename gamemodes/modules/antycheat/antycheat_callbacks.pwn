@@ -199,6 +199,8 @@ AC_OnPlayerLogin(playerid)
 
 AC_OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
+	#pragma unused vel_z, vel_y, vel_x, passenger_seat
+
 	new Float:old_x, Float:old_y, Float:old_z;
 	GetVehiclePos(vehicleid, old_x, old_y, old_z);
 	if(old_x != new_x || old_y != new_y || old_z != new_z)
