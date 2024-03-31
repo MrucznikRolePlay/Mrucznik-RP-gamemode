@@ -356,7 +356,7 @@ public OnGameModeInit()
 	
 	graffiti_LoadMySQL();
 	//discordconnect
-	DiscordConnectInit();
+	//DiscordConnectInit();
 
 	LoadGsPanelPrices();
 

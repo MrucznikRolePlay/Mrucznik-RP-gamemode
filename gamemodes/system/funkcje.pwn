@@ -12542,15 +12542,6 @@ GetVehicleBoundingBox(vehicleid, Float:bbox[][])
 	return 1;
 }
 
-// wyznaczanie d³ugoœci nad³u¿szej przek¹tnej prostopad³oœcianu wyznaczaj¹cego granice pojazdu
-Flaot:GetVehicleBoundingBoxDiagonal(vehicleid)
-{
-	new vm = GetVehicleModel(vehicleid);
-	new Float:wx, Float:wy, Float:wz;
-	GetVehicleModelInfo(vm, VEHICLE_MODEL_INFO_SIZE, wx, wy, wz);
-	return floatsqroot(wx*wx + wy*wy + wz*wz);
-}
-
 // https://github.com/katursis/Pawn.RakNet/wiki/AntiVehicleSpawn
 stock IsVehicleUpsideDown(vehicleid)
 {
