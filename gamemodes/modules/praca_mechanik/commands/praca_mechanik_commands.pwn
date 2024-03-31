@@ -31,6 +31,7 @@
 
 //-------<[ include ]>-------
 #include "nos\nos.pwn"
+#include "malunek\malunek.pwn"
 #include "hydraulika\hydraulika.pwn"
 #include "malunki\malunki.pwn"
 
@@ -39,6 +40,7 @@
 hook OnGameModeInit()
 {
     command_nos();
+    command_malunek();
     command_hydraulika();
     command_malunki();
     

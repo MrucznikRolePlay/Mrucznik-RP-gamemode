@@ -1,0 +1,22 @@
+{
+    "name": "malunek",
+    "description": "Malowanie painjoba na aucie.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "maluj"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "paintjob",
+            "description": "id malunku"
+        }
+    ],
+    "date": "31.03.2024"
+}

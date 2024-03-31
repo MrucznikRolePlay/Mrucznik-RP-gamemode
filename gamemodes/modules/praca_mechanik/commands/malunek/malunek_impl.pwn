@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                    nos                                                    //
+//                                                  malunek                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -23,9 +23,9 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_nos_Impl(playerid, giveplayerid)
+command_malunek_Impl(playerid, giveplayerid, paintjob)
 {
-    new cost = 5000;
+    new cost = 20_000;
     if(IsAMechazordWarsztatowy(playerid))
     {
         cost /= 2;
@@ -37,69 +37,51 @@ command_nos_Impl(playerid, giveplayerid)
         return 1;
     }
 
-    // helper variables
-    new vehicleID = GetPlayerVehicleID(giveplayerid);
-    new nitroSize, nitroComponentID;
-    switch(GetPlayerJobSkill(playerid, JOB_MECHANIC))
+    if(GetPlayerJobSkill(playerid, JOB_MECHANIC) < 3)
     {
-        case 1:
-        {
-            nitroComponentID = 1009;
-            nitroSize = 2;
-        }
-        case 2:
-        {
-            nitroComponentID = 1008;
-            nitroSize = 5;
-        }
-        case 3:
-        {
-            nitroComponentID = 1010;
-            nitroSize = 10;
-        }
-        case 4:
-        {
-            nitroComponentID = 1010;
-            nitroSize = 10;
-        }
-        case 5:
-        {
-            nitroComponentID = 1010;
-            nitroSize = 10;
-        }
-        default:
-        {
-            nitroComponentID = 1009;
-            nitroSize = 2;
-        }
+        MruMessageFail(playerid, "Musisz mieæ 3 skill mechanika aby nak³adaæ malunki na pojazdy.");
+        return 1;
     }
-    
+
+    new vehicleID = GetPlayerVehicleID(giveplayerid);
+    new model = GetVehicleModel(vehicleID);
+    if(!(model == 412 || model >= 534 && model <= 536 || model >= 558 && model <= 562 || model >= 565 && model <= 567 || model == 575 || model == 576 || model == 483))
+    {
+        MruMessageFail(playerid, "Na ten pojazd nie mo¿na na³o¿yæ malunku.");
+        return 1; 
+    }
+
+    if(paintjob >= 0 && paintjob <= 3)
+    {
+        MruMessageFail(playerid, "ID malunku od 0 do 3 (wpisz /malunki aby zobaczyæ dostêpne malunki).");
+        return 1;
+    }
+
     // functionality
-    ZabierzKase(playerid, cost);
-    AddVehicleComponent(vehicleID, nitroComponentID);
     new vehicleUID = VehicleUID[vehicleID][vUID];
-    CarData[vehicleUID][c_Nitro] = nitroComponentID;
+    ChangeVehiclePaintjob(vehicleID, paintjob);
+    CarData[vehicleUID][c_Malunek] = paintjob;
+    ZabierzKase(playerid, cost);
 
     // messages
-    Log(payLog, INFO, "%s zamontowa³ %s nitro na pojazd %s za %d$",
-        GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetVehicleLogName(vehicleID), cost
+    Log(payLog, INFO, "Gracz %s zamontowa³ %s malunek %d na pojazd %s za %d$",
+        GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), paintjob, GetVehicleLogName(vehicleID), cost
     );
 
-    MruMessageInfoF(playerid, "Zamontowa³eœ graczowi %s nitro(pojemnoœæ: %d) w jego samochodzie [-%d$] (wiêkszy skill = wiêksza pojemnoœæ)", GetNick(giveplayerid), nitroSize, cost);
-    MruMessageGoodInfoF(giveplayerid, "Mechanik %s zamontowa³ nitro o pojemnoœci %d w twoim samochodzie", GetNick(playerid), nitroSize);
+    MruMessageInfoF(playerid, "Zrobi³eœ graczowi %s malunek samochodu (-%d$)", GetNick(giveplayerid), cost);
+    MruMessageGoodInfoF(giveplayerid, "Mechanik %s zrobi³ malunek na twoim %s", GetNick(playerid), VehicleNames[model-400]);
 
-    ChatMePrefixed(playerid, "Mechanik",
-        sprintf("%s wyci¹ga narzêdzia i montuje nitro w %s.", 
-        GetNick(playerid), VehicleNames[GetVehicleModel(vehicleID)-400]
+    ChatMePrefixed(playerid, "Mechanik", sprintf(
+        "%s wyci¹ga sprey i tworzy malunek na %s.", GetNick(playerid), VehicleNames[model-400]
     ));
-
+    
     GameTextForPlayer(playerid, sprintf("~r~-$%d", cost), 5000, 1);
-    PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
+    PlayerPlaySound(playerid, 1134, 0.0, 0.0, 0.0);
     if(giveplayerid != playerid)
     {
         IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
-        MruMessageSkillInfo(playerid, "Skill +1");
-        PlayerPlaySound(giveplayerid, 1133, 0.0, 0.0, 0.0);
+        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+        PlayerPlaySound(giveplayerid, 1134, 0.0, 0.0, 0.0);
     }
     return 1;
 }

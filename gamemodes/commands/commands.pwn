@@ -264,7 +264,6 @@
 #include "cmd/makeircadmin.pwn"
 #include "cmd/makeleader.pwn"
 #include "cmd/makemember.pwn"
-#include "cmd/malunek.pwn"
 #include "cmd/mandacik.pwn"
 #include "cmd/mark.pwn"
 #include "cmd/maska.pwn"

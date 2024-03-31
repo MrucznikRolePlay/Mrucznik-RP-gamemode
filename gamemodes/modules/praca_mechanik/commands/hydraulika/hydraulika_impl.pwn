@@ -46,9 +46,6 @@ command_hydraulika_Impl(playerid, giveplayerid)
     // helper variables
     new vehicleID = GetPlayerVehicleID(giveplayerid);
     new vehicleUID = VehicleUID[vehicleID][vUID];
-    if(!IsCarOwner(giveplayerid, vehicleID)) {
-        return SendClientMessage(playerid, COLOR_GRAD2, "Ten pojazd nie nale¿y do tego gracza.");
-    }
 
     // functionality
     ZabierzKase(playerid, cost);
@@ -56,7 +53,7 @@ command_hydraulika_Impl(playerid, giveplayerid)
     CarData[vehicleUID][c_bHydraulika] = true;
 
     // messages
-    Log(payLog, INFO, "Gracz %s zamontowa³ %s hydraulikê na pojazd %s za %d$",
+    Log(payLog, INFO, "%s zamontowa³ %s hydraulikê na pojazd %s za %d$",
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetVehicleLogName(vehicleID), cost
     );
 

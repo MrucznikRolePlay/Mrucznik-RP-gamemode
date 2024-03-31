@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                               praca_mechanik                                              //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  malunek                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,55 +16,56 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 31.03.2024
-//Opis:
-/*
-	Praca Mechanika.
-*/
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//-----------------<[ Funkcje: ]>-------------------
-TuneCommands_CheckRequirements(playerid, giveplayerid, cost)
+
+//-------<[ include ]>-------
+#include "malunek_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_malunek()
 {
-	if(!IsAMechazordWarsztatowy(playerid) && PlayerInfo[playerid][pJob] != 7)
-    {
-        MruMessageFail(playerid, "Nie jesteœ mechanikiem lub pracownikiem warsztatu.");
-        return 0;
-    }
+    new command = Command_GetID("malunek");
 
-    if(!IsAtWarsztat(playerid)) 
-    {
-        MruMessageFail(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning.");
-        return 0;
-    }
+    //aliases
+    Command_AddAlt(command, "maluj");
+    
 
-    if(GetDistanceBetweenPlayers(playerid, giveplayerid) > 10)
-    {
-        MruMessageFail(playerid, "Gracz jest za daleko.");
-        return 0;
-    }
+    //permissions
+    
 
-    if(!IsPlayerInAnyVehicle(giveplayerid))
-    {
-        MruMessageFail(playerid, "Gracz nie jest w samochodzie.");
-        return 0;
-    }
-
-    new vehicleID = GetPlayerVehicleID(giveplayerid);
-    if(!IsCarOwner(giveplayerid, vehicleID))
-    {
-        MruMessageFail(playerid, "Ten pojazd nie nale¿y do tego gracza.");
-        return 0;
-    }
-
-    if(kaska[playerid] < cost)
-    {
-        MruMessageFailF(playerid, "Nie masz wystarczaj¹cej iloœci pieniêdzy (%d$)", cost);
-        return 0;
-    }
-	return 1;
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:malunek(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Malowanie painjoba na aucie.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, paintjob;
+    if(sscanf(params, "rd", giveplayerid, paintjob))
+    {
+        sendTipMessage(playerid, "U¿yj /malunek [Nick/ID] [id malunku] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_malunek_Impl(playerid, giveplayerid, paintjob);
+}
