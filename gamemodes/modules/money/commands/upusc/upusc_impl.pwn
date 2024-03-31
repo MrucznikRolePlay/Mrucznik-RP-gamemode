@@ -30,11 +30,6 @@ command_upusc_Impl(playerid, money)
         sendTipMessage(playerid, "Kwota musi wynosiæ mniej ni¿ 100 000$ .");
         return 1;
     }
-    if(money > 12500 && PlayerInfo[playerid][pLevel] < 2 && PlayerInfo[playerid][pLocal] != 108)
-    {
-        sendTipMessage(playerid, "Nie mo¿esz upuœciæ wiêcej niz $12 500.");
-        return 1;
-    }
     if(PlayerInfo[playerid][pConnectTime] == 0)
     {
         sendTipMessage(playerid, "Zanim bêdziesz móg³ upuœciæ pieni¹dze, musisz graæ przez 1 godzinê!");
