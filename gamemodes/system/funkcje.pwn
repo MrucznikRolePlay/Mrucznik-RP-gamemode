@@ -3648,24 +3648,28 @@ IsAtWarsztat(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
+		if(IsPlayerInRangeOfPoint(playerid, 50.0, 2778.0833,-1612.0159,10.9219)) //TODO: pozycja do poprawy
+		{//Warsztat w bazie mechaników
+			return 1;
+		}
 		if(IsPlayerInRangeOfPoint(playerid, 18.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 18.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 18.0, 1805.4418,-1713.5634,13.5176))
 		{//Warsztat czerwony
 		    return 1;
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 40.0, 2333.7273,-1241.2806,22.0628))
+		if(IsPlayerInRangeOfPoint(playerid, 40.0, 2333.7273,-1241.2806,22.0628))
 		{//warsztat niebieski
 		    return 1;
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 20.0, 644.3516,-503.4102,15.8941))
+		if(IsPlayerInRangeOfPoint(playerid, 20.0, 644.3516,-503.4102,15.8941))
 		{//warsztat dillmore
 		  	return 1;
 		}
-        else if(IsPlayerInRangeOfPoint(playerid, 30.0, 1017.75, -1353.33, 13.3825))
+        if(IsPlayerInRangeOfPoint(playerid, 30.0, 1017.75, -1353.33, 13.3825))
 		{//warsztat przy p1czkarni
 		  	return 1;
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 50.0, 1099.7108,-1240.7935,15.8203)) {
-			// WARSZTAT NA MARKET XD
+		if(IsPlayerInRangeOfPoint(playerid, 50.0, 1099.7108,-1240.7935,15.8203)) 
+		{ // WARSZTAT NA MARKET XD
 			return 1;
 		}
 	}

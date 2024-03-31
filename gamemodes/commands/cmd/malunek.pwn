@@ -36,7 +36,7 @@ YCMD:malunek(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAMechazordWarsztatowy(playerid))//PlayerInfo[playerid][pJob] == 7 || IsANoA(playerid))
+        if(IsAMechazordWarsztatowy(playerid) || PlayerInfo[playerid][pJob] == 7)
         {
             if(!IsAtWarsztat(playerid)) return sendErrorMessage(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning");
             new playa, malunek;
