@@ -11205,40 +11205,6 @@ TJD_CheckForUsedBox(vehicleid)
     }
 }
 
-// AddSkillJob(playerid, quant)
-// {
-// pDetSkill,
-// 	pSexSkill,
-// 	pBoxSkill,
-// 	pLawSkill,
-// 	pMechSkill,
-// 	pJackSkill,
-// 	pCarSkill,
-// 	pNewsSkill,
-// 	pDrugsSkill,
-// 	pCookSkill,
-// 	pFishSkill,
-// 	pGunSkill,
-//     pTruckSkill,
-// 	switch(PlayerInfo[playerid][pJob])
-// 	{
-// 		case JOB_LOWCA: PlayerInfo[playerid][pDetSkill] + quant;
-// 		case JOB_LAWYER: PlayerInfo[playerid][pLawSkill] + quant;
-// 		case JOB_PROSTITUTE: PlayerInfo[playerid][pSexSkill] + quant;
-// 		case JOB_DRAGDEALER: PlayerInfo[playerid][pDrugsSkill] + quant;
-// 		case JOB_CARTHIEF: PlayerInfo[playerid][pJackSkill] + quant;
-// 		case JOB_REPORTER: PlayerInfo[playerid][pNewsSkill] + quant;
-// 		case JOB_MECHANIC: PlayerInfo[playerid][pMechSkill] + quant;
-// 		case JOB_BODYGUARD: PlayerInfo[playerid][
-// 		case JOB_GUNDEALER: PlayerInfo[playerid][pGunSkill] + quant;
-// 		case JOB_BUDSRIVER: PlayerInfo[playerid][
-// 		case JOB_PIZZA: PlayerInfo[playerid][
-// 		case JOB_BOXER: PlayerInfo[playerid][
-// 		case JOB_PAPERMAN: PlayerInfo[playerid][
-// 		case JOB_TRUCKER: PlayerInfo[playerid][
-// 	}
-// }
-
 TJD_TryPickup(playerid, veh)
 {
     if(TJDVehBox[veh] == 0)

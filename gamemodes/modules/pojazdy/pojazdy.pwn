@@ -911,6 +911,199 @@ stock GetVehicleSpeed(carid)
     return final_speed;
 }
 
+Player_RemoveFromVeh(playerid)
+{
+	new Float:slx, Float:sly, Float:slz;
+	GetPlayerPos(playerid, slx, sly, slz);
+	SetPlayerPos(playerid, slx, sly, slz+1);
+	ClearAnimations(playerid);	
+
+	return true;
+}
+
+
+Player_CanUseCar(playerid, vehicleid)
+{
+	if(IsAScripter(playerid) || IsAHeadAdmin(playerid)) return 1;
+	
+	new string[128];
+	if(GetVehicleModel(vehicleid) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
+    {
+		return 0;
+	}
+	if (IsAnAmbulance(vehicleid))
+	{
+		if(!IsAMedyk(playerid))
+		{
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
+			return 0;
+		}
+	}
+
+	if(VehicleUID[vehicleid][vUID] != 0)
+    {
+        new lcarid = VehicleUID[vehicleid][vUID];
+	    if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FRACTION)// wszystkie auta frakcji
+	    {
+            if(CarData[lcarid][c_Owner] != GetPlayerFraction(playerid) && CarData[lcarid][c_Owner] != 11)
+            {
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
+                return 0;
+            }
+            if(CarData[lcarid][c_Owner] == 11)
+            {
+                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][pRank] >= CarData[lcarid][c_Rang]) return 1;
+                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+	        	{
+                	format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
+		        	sendTipMessageEx(playerid,COLOR_GREY,string);
+		        	return 0;
+	        	}
+                if(TakingLesson[playerid] == 1) return 1;
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
+                return 0;
+            }
+	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+	        {
+                format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
+		        sendTipMessageEx(playerid,COLOR_GREY,string);
+		        return 0;
+	        }
+	    }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL) //specjalne
+        {
+            if(CarData[lcarid][c_Owner] == CAR_ZUZEL)
+            {
+                if(zawodnik[playerid] != 1)
+    		    {
+    				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Nie jesteœ zawodnikiem ¿u¿lowym, zg³oœ siê do administracji jeœli chcesz nim zostaæ.");
+    				return 0;
+    			}
+            }
+        }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_JOB) //reszta do pracy
+        {
+            if(CarData[lcarid][c_Owner] == PlayerInfo[playerid][pJob])
+            {
+                new bool:wywal;
+                switch(PlayerInfo[playerid][pJob])
+                {
+                    case JOB_LOWCA: if(PlayerInfo[playerid][pDetSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_LAWYER: if(PlayerInfo[playerid][pLawSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_MECHANIC: if(PlayerInfo[playerid][pMechSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_BUSDRIVER: if(PlayerInfo[playerid][pCarSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_TRUCKER: if(PlayerInfo[playerid][pTruckSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    default: wywal=false;
+                }
+                if(wywal)
+                {
+					new skill = 0;
+					switch(PlayerInfo[playerid][pJob])
+					{
+						case JOB_LOWCA: skill = PlayerInfo[playerid][pDetSkill];
+						case JOB_LAWYER: skill = PlayerInfo[playerid][pLawSkill];
+						case JOB_MECHANIC: skill = PlayerInfo[playerid][pMechSkill];
+						case JOB_BUSDRIVER: skill = PlayerInfo[playerid][pCarSkill];
+						case JOB_TRUCKER: skill = PlayerInfo[playerid][pTruckSkill];
+						default: wywal=false;
+					}
+                    sendTipMessageEx(playerid,COLOR_GREY,sprintf("Aby prowadziæ ten pojazd potrzebujesz %d skilla w zawodzie %s.", CarData[lcarid][c_Rang], JobNames[CarData[lcarid][c_Owner]]));
+					sendTipMessageEx(playerid,COLOR_GREY,sprintf("Twoje punkty skilla w zawodzie %s wynosz¹: %d pkt", JobNames[CarData[lcarid][c_Owner]], skill));
+                    return 0;
+                }
+				if(GetVehicleModel(vehicleid) == 578 && PlayerInfo[playerid][pLevel] == 1)
+				{
+					format(string, sizeof(string), "Musisz mieæ 2 level aby prowadziæ tym pojazdem.");
+                    sendTipMessageEx(playerid,COLOR_GREY,string);
+					return 0;
+				}
+            }
+            else
+            {
+                if(CarData[lcarid][c_Owner] == JOB_BUSDRIVER)
+                {
+                    if(GetPlayerFraction(playerid) == FRAC_KT) return 1;
+                }
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+                format(string, sizeof(string), "Aby prowadziæ ten pojazd musisz byæ w zawodzie %s.", JobNames[CarData[lcarid][c_Owner]]);
+                sendTipMessageEx(playerid,COLOR_GREY,string);
+				return 0;
+            }
+        }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FAMILY)// wszystkie auta RODZIN
+	    {
+            if(CarData[lcarid][c_Owner] != GetPlayerOrg(playerid))
+            {
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
+                return 0;
+            }
+	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+	        {
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+                format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
+		        sendTipMessageEx(playerid,COLOR_GREY,string);
+		        return 0;
+	        }
+	    }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_PLAYER) //Pojazdy graczy
+        {
+            if(IsCarOwner(playerid, vehicleid, true))
+	        {
+                if(CarData[lcarid][c_Keys] != 0 && CarData[lcarid][c_Owner] != PlayerInfo[playerid][pUID])
+                {
+                    if(CarData[lcarid][c_Keys] != PlayerInfo[playerid][pUID])
+    	       	    {
+                        sendTipMessageEx(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta³y zabrane przez w³aœciciela.");
+                        PlayerInfo[playerid][pKluczeAuta] = 0;
+    				   	return 0;
+    	       	    }
+                }
+	       	}
+	       	else
+	       	{
+	       	    sendTipMessageEx(playerid, COLOR_NEWS, "Nie masz kluczy do tego pojazdu, a zabezpieczenia s¹ zbyt dobre abyœ móg³ go ukraœæ.");
+	       		return 0;
+	       	}
+        }
+    }
+	if(IsACopCar(vehicleid))
+	{
+	    if(IsAPolicja(playerid))
+	    {
+	        if(OnDuty[playerid] == 0)
+	        {
+	            if(GetVehicleModel(vehicleid) != 445)
+	            {
+	            	sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ na s³u¿bie aby jeŸdziæ autem policyjnym !");
+                    return 0;
+	            }
+	        }
+	    }
+	}
+
+	if(IsABoat(vehicleid))
+	{
+	    if(PlayerInfo[playerid][pBoatLic] < 1)
+		{
+		    sendTipMessageEx(playerid, COLOR_GREY, "Nie wiesz w jaki sposób p³ywaæ ³odzi¹, wiêc decydujesz siê j¹ opuœciæ !");
+		    return 0;
+		}
+	}
+	else if(IsAPlane(vehicleid))
+	{
+	    antyczolg[playerid] ++;
+	    if(PlayerInfo[playerid][pFlyLic] < 1)
+		{
+			sendTipMessageEx(playerid, COLOR_GREY, "Nie wiesz w jaki sposób lataæ samolotem, wiêc decydujesz siê go opuœciæ !");
+			return 0;
+		}
+	}
+
+	return 1;
+}
+
+
 
 //-----------------<[ Timery: ]>--------------------
 /*

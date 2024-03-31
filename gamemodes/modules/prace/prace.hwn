@@ -22,6 +22,25 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum Jobs {
+    UNEMPLOYED,     // 0
+    JOB_LOWCA,      // 1
+    JOB_LAWYER,     // 2
+    JOB_PROSTITUTE, // 3
+    JOB_DRAGDEALER, // 4 
+    JOB_CARTHIEF,   // 5
+    JOB_REPORTER,   // 6
+    JOB_MECHANIC,   // 7
+    JOB_BODYGUARD,  // 8
+    JOB_GUNDEALER,  // 9
+    JOB_BUSDRIVER,  // 10
+    JOB_PIZZA,      // 11 pizza, kiedys medyk, nieaktywne
+    JOB_BOXER,      // 12
+    JOB_RESERVED_1, // 13 nie wiadomo
+    JOB_RESERVED_2, // 14 taxi, nieaktywne
+    JOB_RESERVED_3, // 15 gazeciarz, nieaktywne
+    JOB_TRUCKER     // 16 kurier - wylaczone
+}
 //-----------------<[ Zmienne: ]>-------------------
 //------------------<[ Forwardy: ]>--------------------
 

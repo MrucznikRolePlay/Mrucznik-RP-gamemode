@@ -530,6 +530,18 @@ stock ChatMe(playerid, text[], Float:zasieg=ME_RANGE)
 	return 1;
 }
 
+stock ChatMePrefixed(playerid, prefix[], text[], Float:zasieg=ME_RANGE)
+{
+    new string[256];
+	format(string, sizeof(string), "* %s %s *", prefix, text);
+	SetPlayerChatBubble(playerid,string, COLOR_PURPLE, zasieg, CHATBUBBLE_TIME);
+    format(string, sizeof(string), "* %s %s %s", prefix, GetNick(playerid), text);
+    RangeMessage(playerid, COLOR_PURPLE, string, zasieg);
+	format(string, sizeof(string), "--/me:-- %s", text);
+	Log(chatLog, INFO, "Chat me: %s", text);
+	return 1;
+}
+
 stock ChatDo(playerid, text[], Float:zasieg=ME_RANGE)
 {
     new string[256];
