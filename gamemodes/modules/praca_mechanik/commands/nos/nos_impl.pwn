@@ -70,7 +70,7 @@ command_nos_Impl(playerid, giveplayerid)
 
     // helper variables
     new nitroSize, nitroComponentID;
-    switch(GetPlayerSkill(playerid, JOB_MECHANIC))
+    switch(GetPlayerJobSkill(playerid, JOB_MECHANIC))
     {
         case 1:
         {
@@ -127,7 +127,7 @@ command_nos_Impl(playerid, giveplayerid)
     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
     if(giveplayerid != playerid)
     {
-        PlayerInfo[playerid][pMechSkill] ++;
+        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
         MruMessageSkillInfo(playerid, "Skill +1");
         PlayerPlaySound(giveplayerid, 1133, 0.0, 0.0, 0.0);
     }
