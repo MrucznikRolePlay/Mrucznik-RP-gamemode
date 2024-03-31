@@ -8637,25 +8637,6 @@ IsNickCorrect(nick[])
 	return 0;
 }
 
-/*NickCensoreCorrect(nick[])
-{
-    if(strfind(nick,"Sandra_Rabucha",true) != -1) return 0; //Rozalka
-    else if(strfind(nick,"rabuc",true) != -1) return 0;
-    else if(strfind(nick,"rebuc",true) != -1) return 0;
-	else if(strfind(nick,"Damian_Szymanski",true) != -1) return 0; //Creative
-	else if(strfind(nick,"szymanski",true) != -1) return 0;
-	else if(strfind(nick,"szymansky",true) != -1) return 0;
-	else if(strfind(nick,"szymanczak",true) != -1) return 0;
-	else if(strfind(nick,"Szymon_Gajda",true) != -1) return 0; //Mrucznik
-	else if(strfind(nick,"gajda",true) != -1) return 0;
-	else if(strfind(nick,"Kalisiewicz",true) != -1) return 0; //Telehama
-	else if(strfind(nick,"kalisie",true) != -1) return 0;
-	else if(strfind(nick,"kalisio",true) != -1) return 0;
-	else if(strfind(nick,"kalisia",true) != -1) return 0;
-	return 1;
-}
-*/
-
 CheckAlfaNumeric(password[])
 {
     new charsets[46] = "0123456789a¹bcædeêfghijkl³mnñoóprsœtuvwyz¿Ÿxq";
