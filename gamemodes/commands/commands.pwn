@@ -21,7 +21,7 @@
 #include "cmd/addcar.pwn"
 #include "cmd/adds.pwn"
 #include "cmd/addshelp.pwn"
-#include "cmd/adminajail.pwn"
+#include "cmd/adminjail.pwn"
 #include "cmd/adminduty.pwn"
 #include "cmd/admini.pwn"
 #include "cmd/adminstats.pwn"
@@ -1452,8 +1452,8 @@ static Aliases()
 	//unjail
 	Command_AddAltNamed("unjail", "unaj");
 
-	//adminajail
-	Command_AddAltNamed("adminajail", "aj");
+	//adminjail
+	Command_AddAltNamed("adminjail", "aj");
 
 	//tankveh
 	Command_AddAltNamed("tankveh", "fuelcar");
