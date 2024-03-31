@@ -3648,7 +3648,7 @@ IsAtWarsztat(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 50.0, 2778.0833,-1612.0159,10.9219)) //TODO: pozycja do poprawy
+		if(IsPlayerInRangeOfPoint(playerid, 50.0, 2806.7097,-1562.5802,10.9219))
 		{//Warsztat w bazie mechaników
 			return 1;
 		}
