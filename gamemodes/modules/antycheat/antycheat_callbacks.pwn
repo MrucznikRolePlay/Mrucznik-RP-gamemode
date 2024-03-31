@@ -197,7 +197,7 @@ AC_OnPlayerLogin(playerid)
 	}
 }
 
-hook OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
+AC_OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
 	new Float:old_x, Float:old_y, Float:old_z;
 	GetVehiclePos(vehicleid, old_x, old_y, old_z);
