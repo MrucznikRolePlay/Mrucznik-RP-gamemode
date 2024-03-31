@@ -59,7 +59,7 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
     }
 
     if(strcmp(akcja, "", true) != 0)
-        Log(serverLog, INFO, "Lider %s u¿y³ /lidercar, akcja: %s", GetNick(playerid), akcja);
+        Log(serverLog, INFO, "Lider %s u¿y³ /lidercar, akcja: %s, pojazd %s", GetPlayerLogName(playerid), akcja, GetVehicleLogName(vehicleID));
 
     // choose command action
 	if(opcjaParkuj) {
