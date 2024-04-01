@@ -566,6 +566,15 @@ GetPlayerFraction(playerid)
     else return PlayerInfo[playerid][pMember];
 }
 
+FracGetsUniformOnDuty(fracid) {
+    switch(fracid) {
+        case 1, 2, 3, 4, 7, 9, 10, 11:
+            return 1;
+    }
+    return 0;
+}
+
+
 CarOpis_Usun(playerid, vehicleid, message=false)
 {
     if(vehicleid >= MAX_VEHICLES) return 0;
