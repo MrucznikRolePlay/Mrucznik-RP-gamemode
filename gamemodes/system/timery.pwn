@@ -1858,10 +1858,6 @@ public CustomPickups()
 			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
 			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Truckerem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1381.0413,-1088.8511,27.3906))
-		{
-			GameTextForPlayer(i, "~g~Witamy,~n~~y~Wpisz /misje aby zobaczyc dostepne misje", 5000, 3);
-		}
 		else if (IsPlayerInRangeOfPoint(i, 2.0, 327.5762,-1546.8887,13.8364))
 		{
 			GameTextForPlayer(i, "~g~Wpisz ~w~/kamera-w ~g~aby ogladac kamere", 5000, 3);
