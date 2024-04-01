@@ -276,7 +276,6 @@
 #include "cmd/msgbox.pwn"
 #include "cmd/muzyczka.pwn"
 #include "cmd/namierz.pwn"
-#include "cmd/napraw.pwn"
 #include "cmd/naprawpojazd.pwn"
 #include "cmd/nastepnylevel.pwn"
 #include "cmd/naucz.pwn"
@@ -454,7 +453,6 @@
 #include "cmd/szturmowy.pwn"
 #include "cmd/szukani.pwn"
 #include "cmd/tablet.pwn"
-#include "cmd/tankowanie.pwn"
 #include "cmd/tankujauta.pwn"
 #include "cmd/tankveh.pwn"
 #include "cmd/taryfikator.pwn"
@@ -930,9 +928,6 @@ static Aliases()
 	Command_AddAltNamed("namierz", "znajdz");
 	Command_AddAltNamed("namierz", "szukaj");
 
-	//napraw
-	Command_AddAltNamed("napraw", "repair");
-
 	//nastepnylevel
 	Command_AddAltNamed("nastepnylevel", "buylevel");
 	Command_AddAltNamed("nastepnylevel", "kuplevel");
@@ -1167,9 +1162,6 @@ static Aliases()
 	//szukani
 	Command_AddAltNamed("szukani", "wanted");
 	Command_AddAltNamed("szukani", "poszukiwani");
-
-	//tankowanie
-	Command_AddAltNamed("tankowanie", "refill");
 
 	//telefonpomoc
 	Command_AddAltNamed("telefonpomoc", "cellphonehelp");

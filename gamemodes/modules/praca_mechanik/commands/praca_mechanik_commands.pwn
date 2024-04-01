@@ -30,8 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "tankowanie\tankowanie.pwn"
 #include "nos\nos.pwn"
 #include "zderzaki\zderzaki.pwn"
+#include "napraw\napraw.pwn"
 #include "malunek\malunek.pwn"
 #include "carcolors\carcolors.pwn"
 #include "felgi\felgi.pwn"
@@ -43,8 +45,10 @@
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_tankowanie();
     command_nos();
     command_zderzaki();
+    command_napraw();
     command_malunek();
     command_carcolors();
     command_felgi();
