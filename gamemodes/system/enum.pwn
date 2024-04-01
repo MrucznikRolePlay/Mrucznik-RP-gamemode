@@ -95,7 +95,8 @@ new CarOwnerNames[][] = {
     "Gracz",
     "Praca",
     "Specjalny",
-    "Publiczny"
+    "Publiczny",
+	"Do kradniêcia"
 };
 
 //30.10
