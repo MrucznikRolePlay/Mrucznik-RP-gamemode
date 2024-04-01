@@ -388,7 +388,7 @@ UkradnijVerify(playerid, veh_id)
 		return 0;
 	}
 
-	if(veh_id > CAR_End)
+	if(!Car_IsStealable(veh_id))
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Pojazd, w którym siê znajdujesz ma za dobre zabezpieczenia, by zostaæ przyjêtym w dziupli!");
 		return 0;
@@ -496,13 +496,13 @@ GetBonusRewardFromCarModel(veh_id)
 
 CarThiefMissionGoal(playerid)
 {
-	if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER || GetPlayerVehicleID(playerid) > CAR_End)
+	new veh_id = GetPlayerVehicleID(playerid);
+	if(GetPlayerState(playerid) != PLAYER_STATE_DRIVER || !Car_IsStealable(veh_id))
 	{
 		SendClientMessage(playerid, COLOR_GREY, "Nie jestes w pojeŸdzie nadaj¹cym siê do sprzeda¿y w dziupli!");
 		return 1;
 	}
 
-	new veh_id = GetPlayerVehicleID(playerid);
 	new veh_model_bonus_reward = GetBonusRewardFromCarModel(veh_id);
 	if(PlayerInfo[playerid][pJackSkill] >= 200)
 	{

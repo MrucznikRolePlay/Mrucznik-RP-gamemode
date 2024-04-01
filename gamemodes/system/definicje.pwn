@@ -526,6 +526,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define CAR_OWNER_JOB       4
 #define CAR_OWNER_SPECIAL   5
 #define CAR_OWNER_PUBLIC    6
+#define CAR_OWNER_STEAL     7
 
 //Czêœci cia³a
 #define BONE_HEAD 2

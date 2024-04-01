@@ -3225,7 +3225,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	{// 38 / 49 / 56 = SS
 		new newcar = GetPlayerVehicleID(playerid);
         //NOWY SYSTEM AUT FRAKCYJNYCH I PUBLICZNYCH
-        if(newcar <= CAR_End) //do kradziezy
+        if(Car_IsStealable(newcar)) //do kradziezy
         {
 			new is_veh_deluxe = false, steal_impossible = false;
 

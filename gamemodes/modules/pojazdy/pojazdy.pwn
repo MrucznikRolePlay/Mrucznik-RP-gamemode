@@ -630,6 +630,19 @@ Car_IsValid(vehicleid)
     return 1;
 }
 
+Car_IsStealable(vehicleid)
+{
+    if(vehicleid <= CAR_End)
+    {
+        return 1;
+    }
+    if(Car_GetOwnerType(vehicleid) == CAR_OWNER_STEAL)
+    {
+        return 1;
+    }
+    return 0;
+}
+
 Car_GetOwnerType(vehicleid)
 {
     if(VehicleUID[vehicleid][vUID] == 0) return 0;

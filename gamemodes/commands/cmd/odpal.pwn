@@ -48,7 +48,7 @@ YCMD:odpal(playerid, params[], help)
             sendTipMessage(playerid, "Odpalasz ju¿ wóz!");
             return 1;
         }
-		if(GetPlayerVehicleID(playerid) <= CAR_End) //do kradziezy
+		if(Car_IsStealable(GetPlayerVehicleID(playerid))) //do kradziezy
         {
             if(KradniecieWozu[playerid] != GetPlayerVehicleID(playerid))
 		    {
