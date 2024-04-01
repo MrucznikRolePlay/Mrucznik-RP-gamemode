@@ -4001,7 +4001,7 @@ OnPlayerLogin(playerid, password[])
 				PlayerInfo[playerid][pWL] = 10; 
 				sendTipMessage(playerid, "Masz ju¿ 10 poziom poszukiwania! Czêœæ jest spowodowana d³ugami! Zrób coœ z tym!"); 
 			}
-			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
+			ZabierzKase(playerid, PlayerInfo[playerid][pCash]);
 		}
 		else if(PlayerInfo[playerid][pCash] >= 0)
 		{

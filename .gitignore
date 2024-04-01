@@ -103,3 +103,6 @@ __pycache__/
 
 # serverfiles
 serverfiles/
+
+# intellij idea
+.idea/
