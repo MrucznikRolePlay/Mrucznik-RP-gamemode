@@ -46,25 +46,6 @@ public StopPlayerSound(playerid)
 	PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
 }
 
-//PizzaJob
-public PizzaJobTimer01(playerid)
-{
-	if(PizzaJob[playerid] == 1)
-	{
-		new napiwek = random(1000);
-		new string[256];
-		DestroyActor(Actor01);
-		DajKase(playerid, 1000);
-   		DajKase(playerid, napiwek);
-	 	format(string, sizeof(string), "Dostarczy³eœ pizzê! Otrzyma³eœ $1000 za przewiezienie pizzy pod wskazany adres i $%d napiwku!.", napiwek);
-		SendClientMessage(playerid, COLOR_GREEN, string);
-		SendClientMessage(playerid, COLOR_WHITE, "Klient Janusz_Mechanik mówi: Trzymaj napiwek! Pizza jeszcze cieplutka i pachn¹ca!");
-		DisablePlayerCheckpoint(playerid);
-		PizzaJob[playerid] = 0;
-		TogglePlayerControllable(playerid,1);
-	}
-	return 1;
-}
 forward ActorsFix(playerid);
 public ActorsFix(playerid)
 {

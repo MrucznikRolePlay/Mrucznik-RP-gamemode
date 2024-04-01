@@ -239,11 +239,13 @@
 #include "cooking\cooking_callbacks.pwn"
 #include "vehicle_attachments\vehicle_attachments_callbacks.pwn"
 #include "money\money_callbacks.pwn"
+#include "sila\sila_callbacks.pwn"
 #include "organizacje\organizacje_callbacks.pwn"
 #include "premium\premium_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
 #include "listaip\listaip_callbacks.pwn"
+#include "praca_kierowca\praca_kierowca_callbacks.pwn"
 
 
 //-------<[ commands ]>-------

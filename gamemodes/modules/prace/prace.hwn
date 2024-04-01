@@ -34,7 +34,7 @@ enum Jobs {
     JOB_BODYGUARD,  // 8
     JOB_GUNDEALER,  // 9
     JOB_BUSDRIVER,  // 10
-    JOB_PIZZA,      // 11 pizza, kiedys medyk, nieaktywne
+    JOB_RESERVED_4,      // 11 pizza, kiedys medyk, nieaktywne
     JOB_BOXER,      // 12
     JOB_RESERVED_1, // 13 nie wiadomo
     JOB_RESERVED_2, // 14 taxi, nieaktywne

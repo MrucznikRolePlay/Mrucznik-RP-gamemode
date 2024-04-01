@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  biegnij                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,15 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "biegnij\biegnij.pwn"
-
+#include "biegnij_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_biegnij()
 {
-    command_biegnij();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:biegnij(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Rozpoczyna bieg.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_biegnij_Impl(playerid);
 }

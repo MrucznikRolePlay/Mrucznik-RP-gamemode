@@ -52,9 +52,6 @@ new kasjerkaWolna = 666;
 
 //sn
 new SN_ACCESS[MAX_PLAYERS]; 
-//PizzaJob
-new PizzaJob[MAX_PLAYERS];
-new Actor01;
 //FishGood
 new FishGood[MAX_PLAYERS];
 //Sad

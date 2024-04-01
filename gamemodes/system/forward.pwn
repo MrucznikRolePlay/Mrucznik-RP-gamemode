@@ -2,7 +2,6 @@
 
 forward KomunikatTimer();
 forward SprzedajMatsTimer(playerid,giveplayerid);
-forward PizzaJobTimer01(playerid);
 forward Naprawa(playerid);//
 forward Lowienie(playerid);
 
