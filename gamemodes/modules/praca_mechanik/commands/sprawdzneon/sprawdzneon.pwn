@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                sprawdzneon                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,37 +27,44 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "tankowanie\tankowanie.pwn"
-#include "nos\nos.pwn"
-#include "zderzaki\zderzaki.pwn"
-#include "napraw\napraw.pwn"
-#include "malunek\malunek.pwn"
-#include "carcolors\carcolors.pwn"
-#include "felgi\felgi.pwn"
-#include "sprzedajzestaw\sprzedajzestaw.pwn"
-#include "sprawdzneon\sprawdzneon.pwn"
-#include "hydraulika\hydraulika.pwn"
-#include "felga\felga.pwn"
-#include "malunki\malunki.pwn"
-
+#include "sprawdzneon_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_sprawdzneon()
 {
-    command_tankowanie();
-    command_nos();
-    command_zderzaki();
-    command_napraw();
-    command_malunek();
-    command_carcolors();
-    command_felgi();
-    command_sprzedajzestaw();
-    command_sprawdzneon();
-    command_hydraulika();
-    command_felga();
-    command_malunki();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:sprawdzneon(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Sprawdza, jaki neon jest zamontowany w pojeüdzie gracza.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "Uøyj /sprawdzneon [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_sprawdzneon_Impl(playerid, giveplayerid);
 }

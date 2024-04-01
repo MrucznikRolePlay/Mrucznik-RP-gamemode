@@ -96,8 +96,7 @@ command_nos_Impl(playerid, giveplayerid)
     PlayerPlaySound(playerid, 1133, 0.0, 0.0, 0.0);
     if(giveplayerid != playerid)
     {
-        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
-        MruMessageSkillInfo(playerid, "Skill +1");
+        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 2);
         PlayerPlaySound(giveplayerid, 1133, 0.0, 0.0, 0.0);
     }
     return 1;

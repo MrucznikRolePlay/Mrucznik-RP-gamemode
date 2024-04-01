@@ -68,8 +68,7 @@ command_hydraulika_Impl(playerid, giveplayerid)
     PlayerPlaySound(playerid, 1141, 0.0, 0.0, 0.0);
     if(giveplayerid != playerid)
     {
-        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
-        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 2);
         PlayerPlaySound(giveplayerid, 1141, 0.0, 0.0, 0.0);
     }
     return 1;

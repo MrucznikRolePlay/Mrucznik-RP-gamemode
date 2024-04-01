@@ -31,7 +31,7 @@
 #define MruMessageBadInfo(%0,%1) 		MruMessage(%0,COLOR_BINFO,"   "%1)
 #define MruMessageOffer(%0,%1) 		    MruMessage(%0,COLOR_OFERTA," **"%1)
 #define MruMessagePunishment(%0,%1) 	MruMessage(%0,COLOR_KARA,"AdmCmd: "%1)
-#define MruMessageSkillInfo(%0,%1) 			MruMessage(%0,COLOR_SKILL_INFO,"   "%1)
+#define MruMessageSkillInfo(%0,%1) 		MruMessage(%0,COLOR_SKILL_INFO,"   "%1)
 #define CMDHelp(%0,%1) 				    SendClientMessage(%0,COLOR_CMDHELP,"[POMOC] "%1)
 #define CMDInfo(%0,%1) 				    SendClientMessage(%0,COLOR_CMDHELP,%1)
 //Wiadomoœci serwerowe za pomoc¹ zmiennej:
@@ -43,7 +43,7 @@
 #define MruMessageBadInfoV(%0,%1) 		MruMessageF(%0,COLOR_BINFO,"   %s",%1)
 #define MruMessageOfferV(%0,%1) 		MruMessageF(%0,COLOR_OFERTA," **%s",%1)
 #define MruMessagePunishmentV(%0,%1) 	MruMessageF(%0,COLOR_KARA,"AdmCmd: %s",%1)
-#define MruMessageSkillInfoV(%0,%1) 		MruMessageF(%0,COLOR_SKILL_INFO,"   %s",%1)
+#define MruMessageSkillInfoV(%0,%1) 	MruMessageF(%0,COLOR_SKILL_INFO,"   %s",%1)
 //Wiadomoœci serwerowe sformatowane:
 #define MruMessageErrorF(%0,%1,%2) 		MruMessageF(%0,COLOR_WHITE,"[ERROR] {C00010}"%1,%2)
 #define MruMessageFailF(%0,%1,%2) 		MruMessageF(%0,COLOR_FAIL,"  *"%1,%2)
@@ -53,7 +53,7 @@
 #define MruMessageBadInfoF(%0,%1,%2) 	MruMessageF(%0,COLOR_BINFO,"   "%1,%2)
 #define MruMessageOfferF(%0,%1,%2) 	    MruMessageF(%0,COLOR_OFERTA," **"%1,%2)
 #define MruMessagePunishmentF(%0,%1,%2) MruMessageF(%0,COLOR_KARA,"AdmCmd: "%1,%2)
-#define MruMessageSkillInfoF(%0,%1) 		MruMessageF(%0,COLOR_SKILL_INFO,"   "%1,%2)
+#define MruMessageSkillInfoF(%0,%1,%2) 	MruMessageF(%0,COLOR_SKILL_INFO,"   "%1,%2)
 
 //------------------<[ Define: ]>-------------------
 #define CHAT_RANGE 20.0

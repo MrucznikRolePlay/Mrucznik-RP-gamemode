@@ -27,6 +27,31 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
+stock GetJobName(Jobs:jobid)
+{
+	new jobName[32];
+	switch(jobid)
+	{
+		case JOB_LOWCA: { strcat(jobName, "£owca nagród"); }
+		case JOB_LAWYER: { strcat(jobName, "Prawnik"); }
+		case JOB_PROSTITUTE: { strcat(jobName, "Prostytutka"); }
+		case JOB_DRAGDEALER: { strcat(jobName, "Diler narkotyków"); }
+		case JOB_CARTHIEF: { strcat(jobName, "Z³odziej aut"); }
+		case JOB_REPORTER: { strcat(jobName, "Reporter"); }
+		case JOB_MECHANIC: { strcat(jobName, "Mechanik"); }
+		case JOB_BODYGUARD: { strcat(jobName, "Ochroniarz"); }
+		case JOB_GUNDEALER: { strcat(jobName, "Diler broni"); }
+		case JOB_BUSDRIVER: { strcat(jobName, "Kierowca autobusu"); }
+		case JOB_PIZZA: { strcat(jobName, "Pizzarz"); }
+		case JOB_BOXER: { strcat(jobName, "Bokser"); }
+		// case JOB_RESERVED_1: { strcat(jobName, ""); }
+		// case JOB_RESERVED_2: { strcat(jobName, ""); }
+		// case JOB_RESERVED_3: { strcat(jobName, ""); }
+		case JOB_TRUCKER: { strcat(jobName, "Trucker"); }
+	}
+	return jobName;
+}
+
 GetPlayerJobSkill(playerid, Jobs:jobid)
 {
 	new skill = GetPlayerJobSkillPoints(playerid, jobid);
@@ -99,6 +124,10 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 		{
 			return 1; // no skill
 		}
+		case JOB_RESERVED_3:
+		{
+			return 1; // no skill
+		}
 		case JOB_TRUCKER:
 		{
 			skill = PlayerInfo[playerid][pTruckSkill];
@@ -114,6 +143,7 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 
 IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 {
+	new oldSkill = GetPlayerJobSkillPoints(playerid, jobid);
 	switch(jobid)
 	{
 		case JOB_LOWCA:
@@ -180,6 +210,13 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 		{
 			PlayerInfo[playerid][pTruckSkill] += value;
 		}
+	}
+	new newSkill = GetPlayerJobSkillPoints(playerid, jobid);
+	MruMessageSkillInfoF(playerid, "Skill +%d", value);
+
+	if(oldSkill != newSkill)
+	{
+		MruMessageGoodInfoF(playerid, "Twoje umiejêtnoœci pracy %s wynosz¹ teraz %d! Masz teraz dostêp do nowych funkcjonalnoœci swojej pracy.", GetJobName(jobid), newSkill);
 	}
 	return 1;
 }

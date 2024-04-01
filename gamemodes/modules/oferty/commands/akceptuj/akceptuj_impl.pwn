@@ -838,72 +838,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job,"refill",true) == 0 || strcmp(x_job,"tankowanie",true) == 0)
     {
-        if(RefillOffer[playerid] < 999)
-        {
-            if(IsPlayerConnected(RefillOffer[playerid]) && IsPlayerInAnyVehicle(playerid))
-            {
-                if(kaska[playerid] > RefillPrice[playerid] && RefillPrice[playerid] > 0)
-                {
-                    GetPlayerName(RefillOffer[playerid], giveplayer, sizeof(giveplayer));
-                    GetPlayerName(playerid, sendername, sizeof(sendername));
-                    new fuel;
-                    new vehicleid = GetPlayerVehicleID(playerid);
-                    if(RefillOffer[playerid] != playerid)
-                    {
-                        PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
-                        PlayerPlaySound(RefillOffer[playerid], 1085, 0.0, 0.0, 0.0);
-                        PlayerInfo[RefillOffer[playerid]][pMechSkill] ++;
-                        SendClientMessage(RefillOffer[playerid], COLOR_GREY, "Skill +1");
-                        if(PlayerInfo[RefillOffer[playerid]][pMechSkill] == 50)
-                        { SendClientMessage(RefillOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                        else if(PlayerInfo[RefillOffer[playerid]][pMechSkill] == 100)
-                        { SendClientMessage(RefillOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                        else if(PlayerInfo[RefillOffer[playerid]][pMechSkill] == 200)
-                        { SendClientMessage(RefillOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                        else if(PlayerInfo[RefillOffer[playerid]][pMechSkill] == 400)
-                        { SendClientMessage(RefillOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                    }
-                    new level = PlayerInfo[RefillOffer[playerid]][pMechSkill];
-                    if(level >= 0 && level <= 50)
-                    { fuel = 15; }
-                    else if(level >= 51 && level <= 100)
-                    { fuel = 40; }
-                    else if(level >= 101 && level <= 200)
-                    { fuel = 60; }
-                    else if(level >= 201 && level <= 400)
-                    { fuel = 80; }
-                    else if(level >= 401)
-                    { fuel = 100; }
-                    format(string, sizeof(string), "* Twój pojazd zosta³ dotankowany o %d% przez mechanika %s, koszt $%d.",fuel,giveplayer,RefillPrice[playerid]);
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                    format(string, sizeof(string), "* Zatankowa³eœ pojazd %s o %d% paliwa, doliczono ci $%d do wyp³aty.",sendername,fuel,RefillPrice[playerid]);
-                    SendClientMessage(RefillOffer[playerid], COLOR_LIGHTBLUE, string);
-                    format(string, sizeof(string),"* Mechanik %s wyci¹ga kanister i dotankowuje auto %s.",giveplayer,VehicleNames[GetVehicleModel(vehicleid)-400]);
-                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    format(string, sizeof(string), "* Bak nape³niony o %d jednostek paliwa (( %s ))", fuel, giveplayer);
-                    ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    ZabierzKase(playerid, RefillPrice[playerid]);
-                    DajKase(RefillOffer[playerid], RefillPrice[playerid]);
-                    if(Gas[vehicleid] < 110)
-                    {
-                        Gas[vehicleid] += fuel;
-                    }
-                    RefillOffer[playerid] = 999;
-                    RefillPrice[playerid] = 0;
-                    return 1;
-                }
-                else
-                {
-                    SendClientMessage(playerid, COLOR_GREY, "   Nie mo¿esz akceptowaæ tankowania !");
-                    return 1;
-                }
-            }
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie oferowa³ ci tankowania !");
-            return 1;
-        }
+        command_tankowanie_accept(playerid);
     }
     else if(strcmp(x_job,"live",true) == 0 || strcmp(x_job,"wywiad",true) == 0)
     {
@@ -1232,71 +1167,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job,"naprawe",true) == 0 || strcmp(x_job,"naprawa",true) == 0)
     {
-        if(RepairOffer[playerid] < 999)
-        {
-            if(kaska[playerid] > RepairPrice[playerid] && RepairPrice[playerid] > 0)
-            {
-                if(IsPlayerInAnyVehicle(playerid))
-                {
-                    if(IsPlayerConnected(RepairOffer[playerid]))
-                    {
-                        if(ProxDetectorS(10.5, playerid, RepairOffer[playerid]))
-                        {
-                            GetPlayerName(RepairOffer[playerid], giveplayer, sizeof(giveplayer));
-                            GetPlayerName(playerid, sendername, sizeof(sendername));
-                            RepairCar[playerid] = GetPlayerVehicleID(playerid);
-                            SetVehicleHealth(RepairCar[playerid], 1000.0);
-                            RepairVehicle(RepairCar[playerid]);
-
-                            CarData[VehicleUID[RepairCar[playerid]][vUID]][c_Tires] = 0;
-                            CarData[VehicleUID[RepairCar[playerid]][vUID]][c_HP] = 1000.0;
-
-                            PlayerPlaySound(RepairCar[playerid], 1140, 0.0, 0.0, 0.0);
-                            PlayerPlaySound(playerid, 1140, 0.0, 0.0, 0.0);
-                            format(string, sizeof(string), "* Twój samochód zosta³ naprawiony za $%d przez mechanika %s.",RepairPrice[playerid],giveplayer);
-                            SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string), "* Naprawi³eœ pojazd %s, $%d zostanie dodane do twojej wyp³aty.",giveplayer,RepairPrice[playerid]);
-                            SendClientMessage(RepairOffer[playerid], COLOR_LIGHTBLUE, string);
-                            format(string, sizeof(string),"* Mechanik %s wyci¹ga narzêdzia oraz naprawia %s.",giveplayer,VehicleNames[GetVehicleModel(RepairCar[playerid])-400]);
-                            ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                            format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
-                            ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                            PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
-                            if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 50)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 100)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 200)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            else if(PlayerInfo[RepairOffer[playerid]][pMechSkill] == 400)
-                            { SendClientMessage(RepairOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                            ZabierzKase(playerid, RepairPrice[playerid]);
-                            DajKase(RepairOffer[playerid], RepairPrice[playerid]);
-                            RepairOffer[playerid] = 999;
-                            RepairPrice[playerid] = 0;
-                        }
-                        else
-                        {
-                            sendErrorMessage(playerid, "Mechanik musi byæ obok Ciebie!");
-                            return 1;
-                        }
-                        return 1;
-                    }
-                    return 1;
-                }
-                return 1;
-            }
-            else
-            {
-                SendClientMessage(playerid, COLOR_GREY, "   Nie staæ ciê na naprawe !");
-                return 1;
-            }
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie oferowa³ ci naprawy !");
-            return 1;
-        }
+        command_napraw_accept(playerid);
     }
     else if(strcmp(x_job,"wynajem",true) == 0 || strcmp(x_job,"wynajmij",true) == 0)
     {
@@ -1438,47 +1309,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job, "zestaw", true) == 0 || strcmp(x_job, "zestawnaprawczy", true) == 0)
     {
-        new id = GetPVarInt(playerid, "FixKitOffer");
-        
-        if(id == -1)
-        {
-            SendClientMessage(playerid, -1, "Nikt nie oferowa³ ci zestawu naprawczego!");
-            return 1;
-        }
-        if(!IsPlayerConnected(id))
-        {
-            SetPVarInt(playerid, "FixKitOffer", -1);
-            SendClientMessage(playerid, -1, "Gracz, który oferowa³ ci zestaw naprawczy wyszed³ z serwera!");
-            return 1;
-        }
-        if(kaska[playerid] < 15000)
-        {
-            SendClientMessage(id, -1, "Ten gracz nie ma tyle kasy");
-            SendClientMessage(playerid, -1, "Nie masz wystarczaj¹cej iloœci pieniêdzy");
-            return 1;
-        }
-        if(!ProxDetectorS(10.5, playerid, id))
-        {
-            SendClientMessage(playerid, -1, "Jesteœ za daleko od mechanika, który oferowa³ ci zestaw.");
-            return 1;
-        }
-
-        SendClientMessage(id, 0x0080D0FF, sprintf("%s kupi³ od Ciebie zestaw naprawczy. Otrzymujesz 15000$", GetNick(playerid)));
-        SendClientMessage(playerid, 0x00FF00FF, sprintf("Kupi³eœ zestaw od mechanika %s za 15000$", GetNick(id)));
-        ZabierzKase(playerid, 15000);
-        DajKase(id, 15000);
-        PlayerInfo[playerid][pFixKit]++;
-        PlayerInfo[id][pMechSkill]++;
-        if(PlayerInfo[id][pMechSkill] == 50)
-        { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-        else if(PlayerInfo[id][pMechSkill] == 100)
-        { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-        else if(PlayerInfo[id][pMechSkill] == 200)
-        { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-        else if(PlayerInfo[id][pMechSkill] == 400)
-        { SendClientMessage(id, COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-        
-        SetPVarInt(playerid, "FixKitOffer", -1);
+        command_sprzedajzestaw_accept(playerid);
     }
     return 1;
 }

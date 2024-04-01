@@ -1,0 +1,15 @@
+{
+    "name": "sprawdzneon",
+    "description": "Sprawdza, jaki neon jest zamontowany w pojeüdzie gracza.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "01.04.2024"
+}

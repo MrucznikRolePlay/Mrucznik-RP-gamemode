@@ -78,8 +78,7 @@ command_felga_Impl(playerid, giveplayerid, felga)
    
     if(giveplayerid != playerid)
     {
-        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
-        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 3);
         PlayerPlaySound(giveplayerid, 1133, 0.0, 0.0, 0.0);
     }
     return 1;

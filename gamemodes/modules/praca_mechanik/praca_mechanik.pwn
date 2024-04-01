@@ -48,7 +48,7 @@ TuneCommands_CheckRequirements(playerid, giveplayerid, cost)
 
     if(!IsPlayerInAnyVehicle(giveplayerid))
     {
-        MruMessageFail(playerid, "Gracz nie jest w samochodzie.");
+        MruMessageFail(playerid, "Gracz nie jest w pojeüdzie.");
         return 0;
     }
 

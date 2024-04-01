@@ -79,8 +79,7 @@ command_malunek_Impl(playerid, giveplayerid, paintjob)
     PlayerPlaySound(playerid, 1134, 0.0, 0.0, 0.0);
     if(giveplayerid != playerid)
     {
-        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
-        SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
+        IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 3);
         PlayerPlaySound(giveplayerid, 1134, 0.0, 0.0, 0.0);
     }
     return 1;
