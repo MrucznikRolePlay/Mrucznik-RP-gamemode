@@ -574,6 +574,49 @@ FracGetsUniformOnDuty(fracid) {
     return 0;
 }
 
+SetDefaultUniform(playerid) {
+	new frac = GetPlayerFraction(playerid);
+	if (PlayerInfo[playerid][pLider]) {
+		if(frac == 0) { PlayerInfo[playerid][pUniform] = 0; }
+		else if(frac == 1) { PlayerInfo[playerid][pUniform] = 288; }
+		else if(frac == 2) { PlayerInfo[playerid][pUniform] = 295; }
+		else if(frac == 3) { PlayerInfo[playerid][pUniform] = 287; }
+		else if(frac == 4) { PlayerInfo[playerid][pUniform] = 228; }
+		else if(frac == 5) { PlayerInfo[playerid][pUniform] = 113; }
+		else if(frac == 6) { PlayerInfo[playerid][pUniform] = 208; }
+		else if(frac == 7) { PlayerInfo[playerid][pUniform] = 57; }
+		else if(frac == 8) { PlayerInfo[playerid][pUniform] = 294; }
+		else if(frac == 9) { PlayerInfo[playerid][pUniform] = 227; }
+		else if(frac == 10) { PlayerInfo[playerid][pUniform] = 61; }
+		else if(frac == 11) { PlayerInfo[playerid][pUniform] = 147; }
+		else if(frac == 12) { PlayerInfo[playerid][pUniform] = 270; }
+		else if(frac == 13) { PlayerInfo[playerid][pUniform] = 103; }
+		else if(frac == 14) { PlayerInfo[playerid][pUniform] = 109; }
+		else if(frac == 15) { PlayerInfo[playerid][pUniform] = 60; }
+		else if(frac == 16) { PlayerInfo[playerid][pUniform] = 112; }
+		else if(frac == 17) { PlayerInfo[playerid][pUniform] = 279; }
+	} else {
+		if(frac == 0) { PlayerInfo[playerid][pUniform] = 0; }
+		else if(frac == 1) { PlayerInfo[playerid][pUniform] = 280; }
+		else if(frac == 2) { PlayerInfo[playerid][pUniform] = 286; }
+		else if(frac == 3) { PlayerInfo[playerid][pUniform] = 71; }
+		else if(frac == 4) { PlayerInfo[playerid][pUniform] = 70; }
+		else if(frac == 5) { PlayerInfo[playerid][pUniform] = 258; }
+		else if(frac == 6) { PlayerInfo[playerid][pUniform] = 117; }
+		else if(frac == 7) { PlayerInfo[playerid][pUniform] = 59; }
+		else if(frac == 8) { PlayerInfo[playerid][pUniform] = 127; }
+		else if(frac == 9) { PlayerInfo[playerid][pUniform] = 148; }
+		else if(frac == 10) { PlayerInfo[playerid][pUniform] = 253; }
+		else if(frac == 11) { PlayerInfo[playerid][pUniform] = 60; }
+		else if(frac == 12) { PlayerInfo[playerid][pUniform] = 270; }
+		else if(frac == 13) { PlayerInfo[playerid][pUniform] = 103; }
+		else if(frac == 14) { PlayerInfo[playerid][pUniform] = 108; }
+		else if(frac == 15) { PlayerInfo[playerid][pUniform] = 8; }
+		else if(frac == 16) { PlayerInfo[playerid][pUniform] = 206; }
+		else if(frac == 17) { PlayerInfo[playerid][pUniform] = 278;}
+	}
+}
+
 
 CarOpis_Usun(playerid, vehicleid, message=false)
 {
