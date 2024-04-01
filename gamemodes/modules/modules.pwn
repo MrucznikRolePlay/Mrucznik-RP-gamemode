@@ -197,6 +197,7 @@
 #include "organizacje\organizacje_timers.pwn"
 #include "premium\premium_timers.pwn"
 #include "urzadls\urzadls_timers.pwn"
+#include "praca_mechanik\praca_mechanik_timers.pwn"
 #include "choroby\choroby_timers.pwn"
 
 

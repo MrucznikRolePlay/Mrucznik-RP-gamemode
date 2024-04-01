@@ -40,6 +40,7 @@
 #include "sprzedajzestaw\sprzedajzestaw.pwn"
 #include "sprawdzneon\sprawdzneon.pwn"
 #include "hydraulika\hydraulika.pwn"
+#include "naprawpojazd\naprawpojazd.pwn"
 #include "felga\felga.pwn"
 #include "malunki\malunki.pwn"
 
@@ -57,6 +58,7 @@ hook OnGameModeInit()
     command_sprzedajzestaw();
     command_sprawdzneon();
     command_hydraulika();
+    command_naprawpojazd();
     command_felga();
     command_malunki();
     

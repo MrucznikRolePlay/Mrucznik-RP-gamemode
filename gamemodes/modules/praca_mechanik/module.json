@@ -2,7 +2,7 @@
     "name": "praca_mechanik",
     "description": "Praca Mechanika.",
     "author": "mrucznik",
-    "timers": false,
+    "timers": true,
     "callbacks": false,
     "mysql": false,
     "files": [],
