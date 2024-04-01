@@ -88,6 +88,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //redefinition from y_playerarray.inc
 #undef PlayerArray
 
+#define MAX_CA_OBJECTS 50000
 #include <colandreas>
 #include <colandreas_streamer_integrate>
 
