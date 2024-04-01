@@ -9,7 +9,7 @@
     "parameters": [
         {
             "type": "integer",
-            "name": "cena",
+            "name": "price",
             "description": "cena"
         }
     ],

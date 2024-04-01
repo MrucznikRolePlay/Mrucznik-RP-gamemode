@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//--------------------------------------------------[ kurs ]-------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                    kurs                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,21 +16,16 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: mrucznik
+// Data utworzenia: 31.03.2024
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:kurs(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_kurs_Impl(playerid, price)
 {
-	if(PlayerInfo[playerid][pJob] == 10 || PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
+    if(PlayerInfo[playerid][pJob] == 10 || PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
 	{
 		if(GetPlayerState(playerid) == 2)
 		{
@@ -41,7 +36,8 @@ YCMD:kurs(playerid, params[], help)
 			}
 
 			new vehicleid = GetPlayerVehicleID(playerid);
-			new string[128], moneys, sendername[MAX_PLAYER_NAME];
+			new string[128], sendername[MAX_PLAYER_NAME];
+            new moneys;
 
 			//stare:
 			if(TransportDuty[playerid] > 0)
@@ -52,7 +48,7 @@ YCMD:kurs(playerid, params[], help)
 			if(IsATaxiCar(vehicleid))
 			{
                 if(JobDuty[playerid] == 0) return sendTipMessageEx(playerid, COLOR_GREY, "Nie jestes na s³u¿bie!");
-				sscanf(params, "D(0)", moneys);
+				moneys = price;
                 if(IsAMiniBus(vehicleid))
 		  	    {
                     if(moneys < 25 || moneys > 1500) { sendTipMessageEx(playerid, COLOR_GREY, "Cena biletu od $25 do $1500 !"); return 1; }
@@ -97,11 +93,6 @@ YCMD:kurs(playerid, params[], help)
 			{
 				if(PlayerInfo[playerid][pJob] == 10)
 				{
-					if( sscanf(params, "d", moneys))
-					{
-						sendTipMessage(playerid, "U¿yj /fare [cena]");
-						return 1;
-					}
 					if(PlayerInfo[playerid][pCarSkill] >= 51 && PlayerInfo[playerid][pCarSkill] <= 101)
 					{
 						if(moneys < 25 || moneys > 300) { sendTipMessageEx(playerid, COLOR_GREY, "Cena kursu od $25 do $300 !"); return 1; }
@@ -172,5 +163,7 @@ YCMD:kurs(playerid, params[], help)
 		sendErrorMessage(playerid,"Nie jesteœ kierowc¹ / pracownikiem Korporacji Transportowej !");
 		return 1;
 	}
-	return 1;
+    return 1;
 }
+
+//end

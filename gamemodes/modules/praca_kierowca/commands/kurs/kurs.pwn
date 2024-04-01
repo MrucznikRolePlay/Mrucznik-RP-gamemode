@@ -1,4 +1,4 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
 //                                                    kurs                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
@@ -16,16 +16,52 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 31.03.2024
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_kurs_Impl(playerid, cena)
+
+//-------<[ include ]>-------
+#include "kurs_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_kurs()
 {
-    return 1;
+    new command = Command_GetID("kurs");
+
+    //aliases
+    Command_AddAlt(command, "fare");
+    
+
+    //permissions
+    
+
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:kurs(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Ustaw stawkê za kilometr na swoim taksometrze.");
+        return 1;
+    }
+    //fetching params
+    new price;
+    if(sscanf(params, "d", price))
+    {
+        sendTipMessage(playerid, "U¿yj /kurs [cena] ");
+        return 1;
+    }
+    
+    //command body
+    return command_kurs_Impl(playerid, price);
+}

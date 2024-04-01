@@ -75,6 +75,7 @@
 #include "praca_mechanik\praca_mechanik.def"
 #include "choroby\choroby.def"
 #include "listaip\listaip.def"
+#include "praca_kierowca\praca_kierowca.def"
 
 
 //-------<[ .hwn ]>-------
@@ -125,6 +126,7 @@
 #include "praca_mechanik\praca_mechanik.hwn"
 #include "choroby\choroby.hwn"
 #include "listaip\listaip.hwn"
+#include "praca_kierowca\praca_kierowca.hwn"
 
 
 //-------<[ .pwn ]>-------
@@ -175,6 +177,7 @@
 #include "praca_mechanik\praca_mechanik.pwn"
 #include "choroby\choroby.pwn"
 #include "listaip\listaip.pwn"
+#include "praca_kierowca\praca_kierowca.pwn"
 
 
 //-------<[ timers ]>-------
@@ -280,3 +283,4 @@
 #include "praca_mechanik\commands\praca_mechanik_commands.pwn"
 #include "choroby\commands\choroby_commands.pwn"
 #include "listaip\commands\listaip_commands.pwn"
+#include "praca_kierowca\commands\praca_kierowca_commands.pwn"

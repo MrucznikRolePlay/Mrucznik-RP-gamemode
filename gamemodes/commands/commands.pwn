@@ -243,7 +243,6 @@
 #include "cmd/kuppozwolenie.pwn"
 #include "cmd/kupsamoloty.pwn"
 #include "cmd/kupskin.pwn"
-#include "cmd/kurs.pwn"
 #include "cmd/laptop.pwn"
 #include "cmd/licencje.pwn"
 #include "cmd/liderpomoc.pwn"
@@ -868,9 +867,6 @@ static Aliases()
 
 	//kupskin
 	Command_AddAltNamed("kupskin", "wybierzskin");
-
-	//kurs
-	Command_AddAltNamed("kurs", "fare");
 
 	//laptop
 	Command_AddAltNamed("laptop", "portable");
