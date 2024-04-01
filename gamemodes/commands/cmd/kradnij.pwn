@@ -38,7 +38,7 @@ YCMD:kradnij(playerid, params[], help)
    	    if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
    	    {
 			new vehicleid = GetPlayerVehicleID(playerid);
-            if(Car_IsValid(vehicleid))
+            if(Car_IsValid(vehicleid) && !Car_IsStealable(vehicleid))
             {
                 return sendTipMessageEx(playerid, COLOR_GRAD2, "Tego pojazdu nie da siê ukraœæ, poniewa¿ jest z wypo¿yczalni!");
             }
