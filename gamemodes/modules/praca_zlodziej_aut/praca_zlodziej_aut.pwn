@@ -400,12 +400,6 @@ UkradnijVerify(playerid, veh_id)
 		return 0;		
 	}
 
-	if(PlayerOnMission[playerid] > 0)
-	{
-		sendTipMessageEx(playerid, COLOR_GREY, "Jesteœ na misji, nie mo¿esz tego u¿yæ!");
-		return 0;
-	}
-
 	if(stole_a_car[playerid])
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "U¿y³eœ ju¿ /ukradnij w tym pojeŸdzie!");

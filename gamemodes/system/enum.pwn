@@ -1538,46 +1538,6 @@ enum pCrime
 
 new PlayerCrime[MAX_PLAYERS][pCrime];
 
-enum kInfo
-{
-    kTitle[128],
-    kMaker[MAX_PLAYER_NAME],
-    kText1[128],
-    kText2[128],
-    kText3[128],
-    kText4[128],
-    kText5[128],
-    kText6[128],
-    kText7[128],
-    kText8[128],
-    kText9[128],
-    kText10[128],
-    kText11[128],
-    kText12[128],
-    kText13[128],
-    kText14[128],
-    kText15[128],
-    kText16[128],
-    kText17[128],
-    kText18[128],
-    kGText1[128],
-    kGText2[128],
-    kGText3[128],
-    kGText4[128],
-    kGText5[128],
-    kGText6[128],
-	Float:kCP1[3],
-	Float:kCP2[3],
-	Float:kCP3[3],
-	Float:kCP4[3],
-	Float:kCP5[3],
-	Float:kCP6[3],
-	kNumber,
-	kReward,
-	kToggle,
-};
-new PlayMission[kInfo];
-
 enum iInfo
 {
 	iAdmin[128],

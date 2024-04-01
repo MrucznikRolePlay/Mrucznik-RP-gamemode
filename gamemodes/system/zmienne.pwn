@@ -672,9 +672,6 @@ new SchoolSpawn[MAX_PLAYERS];
 new TakingLesson[MAX_PLAYERS];
 new UsedFind[MAX_PLAYERS];
 new PlayersChannel[MAX_PLAYERS];
-new PlayerOnMission[MAX_PLAYERS];
-new MissionCheckpoint[MAX_PLAYERS];
-new WatchingTV[MAX_PLAYERS];
 new MatsHolding[MAX_PLAYERS];
 new DivorceOffer[MAX_PLAYERS];
 new MarriageCeremoney[MAX_PLAYERS];
@@ -1178,8 +1175,8 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pCash] = dollah; Respawn[playerid] = 0;//Respawn
 	HireCar[playerid] = 0; PlayersChannel[playerid] = 999;
 	TransportValue[playerid] = 0; TransportMoney[playerid] = 0; TransportCost[playerid] = 0; TransportDriver[playerid] = 999;
-	Locator[playerid] = 0; PlayerOnMission[playerid] = 0; MissionCheckpoint[playerid] = 0;
-	WatchingTV[playerid] = 0; PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
+	Locator[playerid] = 0;
+	PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
 	BiletAlhambra[playerid] = 0;
 	PlayerInfo[playerid][pLevel] = 0;

@@ -578,11 +578,6 @@ command_akceptuj_Impl(playerid, x_job[32])
             SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
             return 1;
         }
-        if(PlayerOnMission[playerid] > 0)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Jesteœ na misji, nie mo¿esz u¿ywaæ tej komendy !");
-            return 1;
-        }
         if(TaxiCall < 999)
         {
             if(IsPlayerConnected(TaxiCall))
@@ -624,11 +619,6 @@ command_akceptuj_Impl(playerid, x_job[32])
             SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
             return 1;
         }
-        if(PlayerOnMission[playerid] > 0)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Jesteœ na misji, nie mo¿esz u¿ywaæ tej komendy !");
-            return 1;
-        }
         if(HeliCall < 999)
         {
             if(IsPlayerConnected(HeliCall))
@@ -662,11 +652,6 @@ command_akceptuj_Impl(playerid, x_job[32])
         if(BusCallTime[playerid] > 0)
         {
             SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
-            return 1;
-        }
-        if(PlayerOnMission[playerid] > 0)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Jesteœ na misji, nie mo¿esz u¿ywaæ tej komendy !");
             return 1;
         }
         if(PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] < 400)
@@ -707,11 +692,6 @@ command_akceptuj_Impl(playerid, x_job[32])
             if(MedicCallTime[playerid] > 0)
             {
                 SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
-                return 1;
-            }
-            if(PlayerOnMission[playerid] > 0)
-            {
-                SendClientMessage(playerid, COLOR_GREY, "   Jesteœ na misji, nie mo¿esz u¿ywaæ tej koemndy !");
                 return 1;
             }
             if(MedicCall < 999)
@@ -756,11 +736,6 @@ command_akceptuj_Impl(playerid, x_job[32])
         if(MechanicCallTime[playerid] > 0)
         {
             SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
-            return 1;
-        }
-        if(PlayerOnMission[playerid] > 0)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Jesteœ na misji, nie mo¿esz u¿ywaæ tej komendy !");
             return 1;
         }
         if(MechanicCall < 999)
