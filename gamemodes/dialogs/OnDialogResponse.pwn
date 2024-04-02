@@ -14114,7 +14114,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case 1:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdów", "Brak\nFrakcja\nOrganizacja\nGracz\nPraca\nSpecjalny\nPubliczny", "Wybierz", "Wróæ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdów", "Brak\nFrakcja\nOrganizacja\nGracz\nPraca\nSpecjalny\nPubliczny\nDo kradniêcia", "Wybierz", "Wróæ");
             }
             case 2:
             {
@@ -14289,7 +14289,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new string[512];
         switch(listitem)
         {
-            case 0:
+            case INVALID_CAR_OWNER:
             {
                 new lSlot;
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
@@ -14329,7 +14329,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na 0", GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
-            case 1:
+            case CAR_OWNER_FRACTION:
             {
                 for(new i=0;i<sizeof(FractionNames);i++)
                 {
@@ -14338,27 +14338,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", string, "Ustaw", "Wróæ");
                 return 1;
             }
-            case 2:
+            case CAR_OWNER_FAMILY:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj UID organizacji:", "Ustaw", "Wróæ");
                 return 1;
             }
-            case 3:
+            case CAR_OWNER_PLAYER:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj UID gracza:", "Ustaw", "Wróæ");
                 return 1;
             }
-            case 4:
+            case CAR_OWNER_JOB:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj ID pracy:", "Ustaw", "Wróæ");
                 return 1;
             }
-            case 5:
+            case CAR_OWNER_SPECIAL:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj typ pojazdu specjalnego:\n\n1. Wypo¿yczalnia\n2. GoKart\n3. ¯u¿el", "Ustaw", "Wróæ");
                 return 1;
             }
-            case 6:
+            case CAR_OWNER_PUBLIC:
             {
                 new lSlot;
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
@@ -14392,10 +14392,49 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
                 }
-                CarData[car][c_OwnerType] = 6;
+                CarData[car][c_OwnerType] = CAR_OWNER_PUBLIC;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
 				Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na 6",  GetPlayerLogName(playerid), GetCarDataLogName(car));
+            }
+			case CAR_OWNER_STEAL:
+            {
+                new lSlot;
+                if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
+                {
+                    new lUID = Car_GetOwner(car);
+					if(lUID != 0)
+					{
+						foreach(new i : Player)
+						{
+							if(PlayerInfo[i][pUID] == lUID)
+							{
+								for(new j=0;j<MAX_CAR_SLOT;j++)
+								{
+									if(PlayerInfo[i][pCars][j] == car)
+									{
+										PlayerInfo[i][pCars][j] = 0;
+										lSlot = j+1;
+										break;
+									}
+								}
+
+								format(string, sizeof(string), " Usuniêto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								Log(adminLog, INFO, "Admin %s usun¹³ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
+								break;
+							}
+						}
+					}
+                }
+                CarData[car][c_OwnerType] = CAR_OWNER_STEAL;
+                Car_Save(car, CAR_SAVE_OWNER);
+				
+				Log(adminLog, INFO, "Admin %s zmieni³ w %s typ pojazdu na 7",  GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
         }
         ShowCarEditDialog(playerid);
