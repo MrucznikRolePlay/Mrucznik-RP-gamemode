@@ -41,15 +41,21 @@ stock GetJobName(Jobs:jobid)
 		case JOB_MECHANIC: { strcat(jobName, "Mechanik"); }
 		case JOB_BODYGUARD: { strcat(jobName, "Ochroniarz"); }
 		case JOB_GUNDEALER: { strcat(jobName, "Diler broni"); }
-		case JOB_BUSDRIVER: { strcat(jobName, "Kierowca autobusu"); }
+		case JOB_DRIVER: { strcat(jobName, "Kierowca autobusu"); }
 		// case JOB_RESERVED_4: { strcat(jobName, ""); }
 		case JOB_BOXER: { strcat(jobName, "Bokser"); }
 		// case JOB_RESERVED_1: { strcat(jobName, ""); }
 		// case JOB_RESERVED_2: { strcat(jobName, ""); }
 		// case JOB_RESERVED_3: { strcat(jobName, ""); }
 		case JOB_TRUCKER: { strcat(jobName, "Trucker"); }
+		default: { strcat(jobName, "Brak"); }
 	}
 	return jobName;
+}
+
+Jobs:GetPlayerJob(playerid)
+{
+	return PlayerInfo[playerid][pJob];
 }
 
 GetPlayerJobSkill(playerid, Jobs:jobid)
@@ -104,7 +110,7 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 		{
 			skill = PlayerInfo[playerid][pGunSkill];
 		}
-		case JOB_BUSDRIVER:
+		case JOB_DRIVER:
 		{
 			skill = PlayerInfo[playerid][pCarSkill];
 		}
@@ -182,7 +188,7 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 		{
 			PlayerInfo[playerid][pGunSkill] += value;
 		}
-		case JOB_BUSDRIVER:
+		case JOB_DRIVER:
 		{
 			PlayerInfo[playerid][pCarSkill] += value;
 		}

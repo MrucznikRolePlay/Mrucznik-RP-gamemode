@@ -28,6 +28,107 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
+Driver_OnPlayerDisconnect(playerid)
+{
+    if(TransportDist[playerid] > 0.0 && TransportDriver[playerid] < 999)
+	{
+        Taxi_Pay(playerid);
+	}
+
+    if(TransportDuty[playerid] == 1)
+	{
+		TaxiDrivers -= 1;
+	}
+    else if(TransportDuty[playerid] == 2)
+	{
+		BusDrivers -= 1;
+	}
+
+
+	foreach(new i : Player)
+	{
+	    if(IsPlayerConnected(i) && i != playerid)
+	    {
+	        if(TaxiAccepted[i] < 500)
+	        {
+		        if(TaxiAccepted[i] == playerid)
+		        {
+		            TaxiAccepted[i] = 999;
+		            GameTextForPlayer(i, "~w~Klient Taxi~n~~r~Wyszedl z gry", 5000, 1);
+		            TaxiCallTime[i] = 0;
+		            DisablePlayerCheckpoint(i);
+		        }
+	        }
+	        else if(BusAccepted[i] < 500)
+	        {
+		        if(BusAccepted[i] == playerid)
+		        {
+		            BusAccepted[i] = 999;
+		            GameTextForPlayer(i, "~w~Klient autobusu~n~~r~Wyszedl z gry", 5000, 1);
+		            BusCallTime[i] = 0;
+		            DisablePlayerCheckpoint(i);
+		        }
+	        }
+	    }
+	}
+}
+
+Driver_OnPassengerExitVehicle(playerid)
+{
+	if(TransportDist[playerid] > 0.0 && TransportDriver[playerid] < 999) //Taxi client pay
+	{
+		Taxi_Pay(playerid);
+	}
+}
+
+Driver_OnPassengerEnterVeh(driverid, passengerid)
+{
+	new string[MAX_MESSAGE_LENGTH];
+	if(kaska[passengerid] < TransportValue[driverid])
+	{
+		format(string, sizeof(string), "* Potrzebujesz $%d aby wejœæ.", TransportValue[driverid]);
+		SendClientMessage(passengerid, COLOR_LIGHTBLUE, string);
+		RemovePlayerFromVehicleEx(passengerid);
+	}
+	else
+	{
+		if(TransportDuty[driverid] == 1)
+		{
+			format(string, sizeof(string), "* Stawka wynosi $%d za kilometr.", TransportValue[driverid]);
+			SendClientMessage(passengerid, COLOR_LIGHTBLUE, string);
+			format(string, sizeof(string), "* Klient %s wszed³ do Twojej taryfy.", GetNick(passengerid));
+			SendClientMessage(driverid, COLOR_LIGHTBLUE, string);
+			if(PlayerInfo[passengerid][pLevel] < 3)
+			{
+				ZabierzKase(passengerid, floatround(TransportValue[driverid]/4));//moneycheat
+				sendTipMessageEx(passengerid, COLOR_LIGHTBLUE, "Jesteœ nowym graczem, obowi¹zuje Cie rabat 75 procent na taksówkê.");
+			}
+			else
+			{
+				ZabierzKase(passengerid, floatround(TransportValue[driverid]));//moneycheat
+			}
+			TransportMoney[driverid] += TransportValue[driverid];
+			SetPVarInt(passengerid, "taxi-slot", GetPlayerVehicleSeat(passengerid)-1);
+			TransportDist[driverid] = 0.0;
+			TransportDist[passengerid] = 0.0;
+			TransportDriver[passengerid] = driverid;
+			TransportClient[driverid][GetPVarInt(passengerid, "taxi-slot")] = passengerid;
+			Taxi_ShowHUD(passengerid);
+			Taxi_ShowHUD(driverid);
+		}
+		else if(TransportDuty[driverid] == 2)
+		{
+			format(string, sizeof(string), "* Zap³aci³eœ $%d Za bilet.", TransportValue[driverid]);
+			SendClientMessage(passengerid, COLOR_LIGHTBLUE, string);
+			format(string, sizeof(string), "* Klient %s wszed³ do autobusu i skasowa³ bilet.", GetNick(passengerid));
+			SendClientMessage(driverid, COLOR_LIGHTBLUE, string);
+			ZabierzKase(passengerid, TransportValue[driverid]);//moneycheat
+			TransportMoney[driverid] += TransportValue[driverid];
+		}
+	}
+	return 1;
+}
+
 Driver_OnPlayerEnterCheckpoint(playerid)
 {
 	if(TaxiCallTime[playerid] > 0 && TaxiAccepted[playerid] < 999)

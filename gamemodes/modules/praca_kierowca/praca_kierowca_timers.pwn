@@ -1,4 +1,4 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
+//-----------------------------------------------<< Timers >>------------------------------------------------//
 //                                               praca_kierowca                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
@@ -18,47 +18,66 @@
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: mrucznik
 // Data utworzenia: 31.03.2024
+//Opis:
+/*
+	Praca kierowcy.
+*/
 
 //
 
-//------------------<[ Enumy: ]>--------------------
-//-----------------<[ Zmienne: ]>-------------------
-new TaxiDrivers = 0;
-new HeliDrivers = 0;
-new TaxiCall = 999;
-new HeliCall = 999;
-new BusDrivers = 0;
-new BusCall = 999;
-
-new TransportDuty[MAX_PLAYERS];
-new TransportValue[MAX_PLAYERS];
-new TransportMoney[MAX_PLAYERS];
-new TransportCost[MAX_PLAYERS];
-new TransportDriver[MAX_PLAYERS];
-new TransportClient[MAX_PLAYERS][4];
-new Float:TransportDist[MAX_PLAYERS];
-
-new BusCallTime[MAX_PLAYERS];
-new BusAccepted[MAX_PLAYERS];
-new TaxiCallTime[MAX_PLAYERS];
-new TaxiAccepted[MAX_PLAYERS];
-//------------------<[ Forwardy: ]>--------------------
-
-//-----------------<[ Zerowanie: ]>-------------------
-Driver_ZerujZmienne(playerid)
+//-----------------<[ Timery: ]>-------------------
+Driver_JednaSekundaTimer(playerid)
 {
-	TransportDuty[playerid] = 0;
-	TransportValue[playerid] = 0;
-	TransportMoney[playerid] = 0;
-    TransportDist[playerid] = 0.0;
-	TransportDriver[playerid] = 999;
-	TransportCost[playerid] = 0;
-    for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
+	new string[MAX_MESSAGE_LENGTH];
+	new taxidriver = TransportDriver[playerid];
+	new Float:x, Float:y, Float:z;
+	GetPlayerPos(playerid, x, y, z);
 
-    BusCallTime[playerid] = 0;
-	BusAccepted[playerid] = 999;
-    TaxiCallTime[playerid] = 0;
-	TaxiAccepted[playerid] = 999;
+	if(taxidriver != 999) //Taxi
+	{
+		new Float:distanceGain = (VectorSize(SavePlayerPos[playerid][LastX] - x, SavePlayerPos[playerid][LastY] - y, SavePlayerPos[playerid][LastZ]-z)/1000)*3;
+		if(distanceGain > 0.1) // próg 360km/h (100m/s) ?
+		{
+			distanceGain = 0.1;
+		}
+		TransportDist[playerid] += distanceGain;
+		format(string, sizeof(string), "%.1fKM", TransportDist[playerid]);
+		PlayerTextDrawSetString(playerid, TAXI_DIST[playerid], string);
+		PlayerTextDrawSetString(taxidriver, TAXI_DIST[taxidriver], string);
+
+		PlayerTextDrawShow(playerid, TAXI_DIST[playerid]);
+		PlayerTextDrawShow(taxidriver, TAXI_DIST[taxidriver]);
+
+		format(string, sizeof(string), "$%d", floatround((TransportDist[playerid] * TransportValue[taxidriver])+TransportValue[taxidriver]));
+		PlayerTextDrawSetString(playerid, TAXI_COST[playerid], string);
+		PlayerTextDrawSetString(taxidriver, TAXI_COST[taxidriver], string);
+
+		PlayerTextDrawShow(playerid, TAXI_COST[playerid]);
+		PlayerTextDrawShow(taxidriver, TAXI_COST[taxidriver]);
+	}
+
+	if(TaxiCallTime[playerid] > 0)
+	{
+		if(TaxiAccepted[playerid] < 999)
+		{
+			if(IsPlayerConnected(TaxiAccepted[playerid]))
+			{
+				GetPlayerPos(TaxiAccepted[playerid], x, y, z);
+				SetPlayerCheckpoint(playerid, x, y, z, 5);
+			}
+		}
+	}
+	if(BusCallTime[playerid] > 0)
+	{
+		if(BusAccepted[playerid] < 999)
+		{
+			if(IsPlayerConnected(BusAccepted[playerid]))
+			{
+				GetPlayerPos(BusAccepted[playerid], x, y, z);
+				SetPlayerCheckpoint(playerid, x, y, z, 5);
+			}
+		}
+	}
 }
 
 //end

@@ -45,7 +45,7 @@ command_kurs_Impl(playerid, price)
                 Taxi_FareEnd(playerid);
 				return 1;
 			}
-			if(IsATaxiCar(vehicleid))
+			if(IsATaxi(vehicleid))
 			{
                 if(JobDuty[playerid] == 0) return sendTipMessageEx(playerid, COLOR_GREY, "Nie jestes na s³u¿bie!");
 				moneys = price;

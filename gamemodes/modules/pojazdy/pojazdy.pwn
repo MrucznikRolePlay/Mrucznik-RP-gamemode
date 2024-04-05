@@ -342,30 +342,32 @@ Car_Load()
 			else if(CarData[i][c_Model] == 560)
 				PDTuneSultan(vid);
 		}
-
-        //Komunikacja miejska napis nad pojazdem
-        if((CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_KT && (CarData[i][c_Model] == 431 || CarData[i][c_Model] == 437 || CarData[i][c_Model] == 418)) || (CarData[i][c_OwnerType] == CAR_OWNER_JOB && CarData[i][c_Owner] == JOB_BUSDRIVER))
-        {
-            if(gKMCounter < sizeof(Busnapisn))
-            {
-                KomunikacjaMiejsca[CarData[i][c_ID]] = gKMCounter;
-                if(CarData[i][c_Model] == 431 || CarData[i][c_Model] == 437) Busnapisn[gKMCounter] = CreateDynamic3DTextLabel("° Komunikacja miejska °", COLOR_BLUE, 0.0,0.0,3.5, 30.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
-                else Busnapisn[gKMCounter] = CreateDynamic3DTextLabel("° Komunikacja miejska °", COLOR_BLUE, 0.0,0.0,1.5, 30.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
-                gKMCounter++;
-            }
-        }
         //Opis dla pojazdów z wypo¿yczalni
         if(CarData[i][c_OwnerType] == CAR_OWNER_SPECIAL && CarData[i][c_Owner] == RENT_CAR)
         {
             Car3dTextDesc[CarData[i][c_ID]] = CreateDynamic3DTextLabel("Wypo¿yczalnia pojazdów\nGROTTI", COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, CarData[i][c_ID], 1, -1, -1, -1, 10.0);
         }
+
+        //Komunikacja miejska napis nad pojazdem
+        if(IsAPublicTransport(vid))
+        {
+            if(gKMCounter < sizeof(Busnapisn))
+            {
+                KomunikacjaMiejsca[CarData[i][c_ID]] = gKMCounter;
+                new Float:height = 1.5;
+                if(CarData[i][c_Model] == 431 || CarData[i][c_Model] == 437) height = 3.5;
+                Busnapisn[gKMCounter] = CreateDynamic3DTextLabel("° Komunikacja miejska °", COLOR_BLUE, 0.0, 0.0, height, 30.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
+                gKMCounter++;
+            }
+        }
         //Obiekty na dachach taxówek
-        if(CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_KT)
+        if(IsCarOwnedByKT(vid) || IsCarOwnedByDriverJob(vid))
         {
             if(CarData[i][c_Model] == 560) AttachDynamicObjectToVehicle(CreateDynamicObject(19310, 0, 0, 0, 0, 0, 0), CarData[i][c_ID], 0.000000, -0.424999, 0.919999, 0.000000, 0.000000, 0.000000); //sultan
             else if(CarData[i][c_Model] == 409) AttachDynamicObjectToVehicle(CreateDynamicObject(19310, 0, 0, 0, 0, 0, 0), CarData[i][c_ID], 0.000000, 0.349999, 0.929999, 0.000000, 0.000000, 0.000000); //lima
             else if(CarData[i][c_Model] == 487) AttachDynamicObjectToVehicle(CreateDynamicObject(19311, 0, 0, 0, 0, 0, 0), CarData[i][c_ID], 0.000000, 1.284999, 1.629998, 0.000000, -0.000001, 90.449951); //heli
         }
+
         //Obiekty na dachach pojazdów DMV
         if(CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_GOV)
         {
@@ -883,7 +885,7 @@ Car_PrintOwner(car)
         }
         case CAR_OWNER_JOB:
         {
-            format(string, sizeof(string), "%s", JobNames[CarData[car][c_Owner]]);
+            format(string, sizeof(string), "%s", GetJobName(CarData[car][c_Owner]));
         }
         case CAR_OWNER_SPECIAL:
         {
@@ -1004,7 +1006,7 @@ Player_CanUseCar(playerid, vehicleid)
                     case JOB_LOWCA: if(PlayerInfo[playerid][pDetSkill] < CarData[lcarid][c_Rang]) wywal=true;
                     case JOB_LAWYER: if(PlayerInfo[playerid][pLawSkill] < CarData[lcarid][c_Rang]) wywal=true;
                     case JOB_MECHANIC: if(PlayerInfo[playerid][pMechSkill] < CarData[lcarid][c_Rang]) wywal=true;
-                    case JOB_BUSDRIVER: if(PlayerInfo[playerid][pCarSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_DRIVER: if(PlayerInfo[playerid][pCarSkill] < CarData[lcarid][c_Rang]) wywal=true;
                     case JOB_TRUCKER: if(PlayerInfo[playerid][pTruckSkill] < CarData[lcarid][c_Rang]) wywal=true;
                     default: wywal=false;
                 }
@@ -1016,12 +1018,12 @@ Player_CanUseCar(playerid, vehicleid)
 						case JOB_LOWCA: skill = PlayerInfo[playerid][pDetSkill];
 						case JOB_LAWYER: skill = PlayerInfo[playerid][pLawSkill];
 						case JOB_MECHANIC: skill = PlayerInfo[playerid][pMechSkill];
-						case JOB_BUSDRIVER: skill = PlayerInfo[playerid][pCarSkill];
+						case JOB_DRIVER: skill = PlayerInfo[playerid][pCarSkill];
 						case JOB_TRUCKER: skill = PlayerInfo[playerid][pTruckSkill];
 						default: wywal=false;
 					}
-                    sendTipMessageEx(playerid,COLOR_GREY,sprintf("Aby prowadziæ ten pojazd potrzebujesz %d skilla w zawodzie %s.", CarData[lcarid][c_Rang], JobNames[CarData[lcarid][c_Owner]]));
-					sendTipMessageEx(playerid,COLOR_GREY,sprintf("Twoje punkty skilla w zawodzie %s wynosz¹: %d pkt", JobNames[CarData[lcarid][c_Owner]], skill));
+                    sendTipMessageEx(playerid,COLOR_GREY,sprintf("Aby prowadziæ ten pojazd potrzebujesz %d skilla w zawodzie %s.", CarData[lcarid][c_Rang], GetJobName(CarData[lcarid][c_Owner])));
+					sendTipMessageEx(playerid,COLOR_GREY,sprintf("Twoje punkty skilla w zawodzie %s wynosz¹: %d pkt", GetJobName(CarData[lcarid][c_Owner]), skill));
                     return 0;
                 }
 				if(GetVehicleModel(vehicleid) == 578 && PlayerInfo[playerid][pLevel] == 1)
@@ -1033,12 +1035,12 @@ Player_CanUseCar(playerid, vehicleid)
             }
             else
             {
-                if(CarData[lcarid][c_Owner] == JOB_BUSDRIVER)
+                if(CarData[lcarid][c_Owner] == JOB_DRIVER)
                 {
                     if(GetPlayerFraction(playerid) == FRAC_KT) return 1;
                 }
                 if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
-                format(string, sizeof(string), "Aby prowadziæ ten pojazd musisz byæ w zawodzie %s.", JobNames[CarData[lcarid][c_Owner]]);
+                format(string, sizeof(string), "Aby prowadziæ ten pojazd musisz byæ w zawodzie %s.", GetJobName(CarData[lcarid][c_Owner]));
                 sendTipMessageEx(playerid,COLOR_GREY,string);
 				return 0;
             }

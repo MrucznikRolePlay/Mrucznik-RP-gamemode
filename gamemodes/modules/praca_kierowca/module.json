@@ -2,7 +2,7 @@
     "name": "praca_kierowca",
     "description": "Praca kierowcy.",
     "author": "mrucznik",
-    "timers": false,
+    "timers": true,
     "callbacks": true,
     "mysql": false,
     "files": [],

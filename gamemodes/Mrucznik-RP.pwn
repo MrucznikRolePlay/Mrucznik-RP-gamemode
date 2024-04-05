@@ -1025,7 +1025,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!Player_CanUseCar(playerid, vehicleid))
         	return Player_RemoveFromVeh(playerid);
     }
-	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_BUSDRIVER && !ispassenger) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpocz¹æ pracê");
+	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_DRIVER && !ispassenger) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpocz¹æ pracê");
 	// -- customowe parametry dla poszczególnych pojazdów
 	if(IsARower(vehicleid))
 	{
@@ -1485,10 +1485,7 @@ public OnPlayerDisconnect(playerid, reason)
 		SetPlayerWantedLevel(playerid, 0);
 	}
 
-    if(TransportDist[playerid] > 0.0 && TransportDriver[playerid] < 999)
-	{
-        Taxi_Pay(playerid);
-	}
+	Driver_OnPlayerDisconnect(playerid);
 
     //System aut
     Car_UnloadForPlayer(playerid);
@@ -1596,33 +1593,6 @@ public OnPlayerDisconnect(playerid, reason)
 
     TextDrawHideForPlayer(playerid, TXD_Info);
 
-	//Komunikaty dla graczy na serwerze:
-	foreach(new i : Player)
-	{
-	    if(IsPlayerConnected(i) && i != playerid)
-	    {
-	        if(TaxiAccepted[i] < 500)
-	        {
-		        if(TaxiAccepted[i] == playerid)
-		        {
-		            TaxiAccepted[i] = 999;
-		            GameTextForPlayer(i, "~w~Klient Taxi~n~~r~Wyszedl z gry", 5000, 1);
-		            TaxiCallTime[i] = 0;
-		            DisablePlayerCheckpoint(i);
-		        }
-	        }
-	        else if(BusAccepted[i] < 500)
-	        {
-		        if(BusAccepted[i] == playerid)
-		        {
-		            BusAccepted[i] = 999;
-		            GameTextForPlayer(i, "~w~Klient autobusu~n~~r~Wyszedl z gry", 5000, 1);
-		            BusCallTime[i] = 0;
-		            DisablePlayerCheckpoint(i);
-		        }
-	        }
-	    }
-	}
 	if(GotHit[playerid] > 0)
 	{
 	    if(GetChased[playerid] < 500)
@@ -1673,14 +1643,6 @@ public OnPlayerDisconnect(playerid, reason)
 		Boxer1 = 255;
 		Boxer2 = 255;
 		TBoxer = 255;
-	}
-    if(TransportDuty[playerid] == 1)
-	{
-		TaxiDrivers -= 1;
-	}
-    else if(TransportDuty[playerid] == 2)
-	{
-		BusDrivers -= 1;
 	}
 	if(PlayerInfo[playerid][pJob] == 11)
 	{
@@ -2384,7 +2346,7 @@ SetPlayerSpawnPos(playerid)
 						    SetPlayerPos(playerid, 1751.4445, -2054.9761, 13.0593);
 		    				SetPlayerFacingAngle(playerid, 180.0);
 						}
-						case JOB_BUSDRIVER:
+						case JOB_DRIVER:
 						{
 						    SetPlayerPos(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
 						}
@@ -3134,10 +3096,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     }
     if(oldstate == PLAYER_STATE_PASSENGER)
     {
-		if(TransportDist[playerid] > 0.0 && TransportDriver[playerid] < 999) //Taxi client pay
-		{
-            Taxi_Pay(playerid);
-		}
+		Driver_OnPassengerExitVehicle(playerid);
+
 		PlayerTextDrawHide(playerid, Licznik[playerid]);
     }
 	if(newstate == PLAYER_STATE_ONFOOT)
@@ -3167,57 +3127,16 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             if(RadioSANDos[0] != EOF)
 				PlayAudioStreamForPlayer(playerid, RadioSANDos);
         }
-	    new name[MAX_PLAYER_NAME];
-	    GetPlayerName(playerid, name, sizeof(name));
+
 	    new vehicleid = GetPlayerVehicleID(playerid);
 	    foreach(new i : Player)
-	    {
-			if(IsPlayerInVehicle(i, vehicleid) && GetPlayerState(i) == 2 && TransportDuty[i] > 0)
+		{
+			if(IsPlayerInVehicle(i, vehicleid) && GetPlayerState(i) == 2)
 			{
-				if(kaska[playerid] < TransportValue[i])
-				{
-					format(string, sizeof(string), "* Potrzebujesz $%d aby wejœæ.", TransportValue[i]);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					RemovePlayerFromVehicleEx(playerid);
-				}
-				else
-				{
-					if(TransportDuty[i] == 1)
-					{
-						format(string, sizeof(string), "* Stawka wynosi $%d za kilometr.", TransportValue[i]);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Klient %s wszed³ do Twojej taryfy.", name);
-						SendClientMessage(i, COLOR_LIGHTBLUE, string);
-                        if(PlayerInfo[playerid][pLevel] < 3)
-                        {
-                            ZabierzKase(playerid, floatround(TransportValue[i]/4));//moneycheat
-                            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jesteœ nowym graczem, obowi¹zuje Cie rabat 75 procent na taksówkê.");
-                        }
-                        else
-                        {
-                            ZabierzKase(playerid, floatround(TransportValue[i]));//moneycheat
-                        }
-                        TransportMoney[i] += TransportValue[i];
-                        SetPVarInt(playerid, "taxi-slot", GetPlayerVehicleSeat(playerid)-1);
-						TransportDist[i] = 0.0;
-						TransportDist[playerid] = 0.0;
-						TransportDriver[playerid] = i;
-                        TransportClient[i][GetPVarInt(playerid, "taxi-slot")] = playerid;
-                        Taxi_ShowHUD(playerid);
-                        Taxi_ShowHUD(i);
-					}
-					else if(TransportDuty[i] == 2)
-					{
-						format(string, sizeof(string), "* Zap³aci³eœ $%d Za bilet.", TransportValue[i]);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Klient %s wszed³ do autobusu i skasowa³ bilet.", name);
-						SendClientMessage(i, COLOR_LIGHTBLUE, string);
-                        ZabierzKase(playerid, TransportValue[i]);//moneycheat
-					    TransportMoney[i] += TransportValue[i];
-					}
-				}
+				Driver_OnPassengerEnterVeh(i, playerid);
+				break;
 			}
-	    }
+		}
 	}
 	if(newstate == PLAYER_STATE_WASTED)
 	{

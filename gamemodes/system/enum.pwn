@@ -513,30 +513,6 @@ new FractionNames[][40] = {
     "Brak"
 };
 
-new JobNames[][20] = {
-    "Brak",
-    "£owca nagród",
-    "Prawnik",
-    "Prostytutka",
-    "Diler zio³a",
-    "Z³odziej aut",
-    "Reporter",
-    "Mechanik",
-    "Ochroniarz",
-    "Diler broni",
-    "Kierowca autobusu",
-    "Rozwoziciel pizzy",//11
-    "Bokser",
-    "Brak",
-    "Taksówkarz",//14
-    "Gazeciarz",
-    "Kurier",
-    "Brak",
-    "Brak",
-    "Brak",
-    "Brak"
-};
-
 //-----------------------------------------------------------------------------------------------------------------------------//
 
 enum SavePlayerPosEnum

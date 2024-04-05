@@ -568,122 +568,15 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job,"taxi",true) == 0)
     {
-        if(TransportDuty[playerid] != 1)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nie jesteœ taksówkrzem !");
-            return 1;
-        }
-        if(TaxiCallTime[playerid] > 0)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
-            return 1;
-        }
-        if(TaxiCall < 999)
-        {
-            if(IsPlayerConnected(TaxiCall))
-            {
-                GetPlayerName(playerid, sendername, sizeof(sendername));
-                GetPlayerName(TaxiCall, giveplayer, sizeof(giveplayer));
-                format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, jedŸ do czerwonego markera.",giveplayer);
-                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                format(string, sizeof(string), "* Taksówkarz %s akceptowa³ twoje zlecenie, czekaj na niego i nie ruszaj siê z miejsca.",sendername);
-                SendClientMessage(TaxiCall, COLOR_LIGHTBLUE, string);
-                GameTextForPlayer(playerid, "~w~Jedz do~n~~r~czerwonego punktu", 5000, 1);
-                TaxiCallTime[playerid] = 1;
-                TaxiAccepted[playerid] = TaxiCall;
-                TaxiCall = 999;
-                return 1;
-            }
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie zamawia³ taksówki !");
-            return 1;
-        }
+        akceptuj_taxi(playerid);
     }
     else if(strcmp(x_job,"heli",true) == 0)
     {
-        if(TransportDuty[playerid] != 1)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nie jesteœ pilotem !");
-            return 1;
-        }
-        new newcar = GetPlayerVehicleID(playerid);
-        if(!IsAPlane(newcar))
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nie pilotujesz helikoptera !");
-            return 1;
-        }
-        if(TaxiCallTime[playerid] > 0)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
-            return 1;
-        }
-        if(HeliCall < 999)
-        {
-            if(IsPlayerConnected(HeliCall))
-            {
-                GetPlayerName(playerid, sendername, sizeof(sendername));
-                GetPlayerName(HeliCall, giveplayer, sizeof(giveplayer));
-                format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, leæ do czerwonego markera.",giveplayer);
-                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                format(string, sizeof(string), "* Pilot %s akceptowa³ twoje zlecenie, czekaj na niego i nie ruszaj siê z miejsca.",sendername);
-                SendClientMessage(HeliCall, COLOR_LIGHTBLUE, string);
-                GameTextForPlayer(playerid, "~w~Lec do~n~~r~czerwonego punktu", 5000, 1);
-                TaxiCallTime[playerid] = 1;
-                TaxiAccepted[playerid] = HeliCall;
-                HeliCall = 999;
-                return 1;
-            }
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie zamawia³ helikoptera !");
-            return 1;
-        }
+        akceptuj_heli(playerid);
     }
     else if(strcmp(x_job,"bus",true) == 0)
     {
-        if(TransportDuty[playerid] != 2)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nie jesteœ kierowc¹ autobusu na s³u¿bie !");
-            return 1;
-        }
-        if(BusCallTime[playerid] > 0)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Masz ju¿ zlecenie !");
-            return 1;
-        }
-        if(PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] < 400)
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Potrzebujesz 5 skilla kierowcy autobusu aby móc odbieraæ wezwania !");
-            return 1;
-        }
-        if(BusCall < 999)
-        {
-            if(IsPlayerConnected(BusCall))
-            {
-                GetPlayerName(playerid, sendername, sizeof(sendername));
-                GetPlayerName(BusCall, giveplayer, sizeof(giveplayer));
-                format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, jedŸ do czerwonego markera.",giveplayer);
-                SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                format(string, sizeof(string), "* Kierowca Autobusu %s akceptowa³ twoje wezwanie, czekaj na niego i nie ruszaj siê z miejsca.",sendername);
-                SendClientMessage(BusCall, COLOR_LIGHTBLUE, string);
-                new Float:X,Float:Y,Float:Z;
-                GetPlayerPos(BusCall, X, Y, Z);
-                SetPlayerCheckpoint(playerid, X, Y, Z, 5);
-                GameTextForPlayer(playerid, "~w~Jedz do~n~~r~czerwonego punktu", 5000, 1);
-                BusCallTime[playerid] = 1;
-                BusAccepted[playerid] = BusCall;
-                BusCall = 999;
-                return 1;
-            }
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie dzwoni³ po autobus !");
-            return 1;
-        }
+        akceptuj_bus(playerid);
     }
     else if(strcmp(x_job,"medic",true) == 0 || strcmp(x_job,"medyk",true) == 0)
     {

@@ -639,23 +639,6 @@ new MedicCallTime[MAX_PLAYERS];
 new Mechanics = 0;
 new MechanicCall = 999;
 new MechanicCallTime[MAX_PLAYERS];
-new TaxiDrivers = 0;
-new HeliDrivers = 0;
-new TaxiCall = 999;
-new HeliCall = 999;
-new TaxiCallTime[MAX_PLAYERS];
-new TaxiAccepted[MAX_PLAYERS];
-new BusDrivers = 0;
-new BusCall = 999;
-new BusCallTime[MAX_PLAYERS];
-new BusAccepted[MAX_PLAYERS];
-new TransportDuty[MAX_PLAYERS];
-new TransportValue[MAX_PLAYERS];
-new TransportMoney[MAX_PLAYERS];
-new TransportClient[MAX_PLAYERS][4];
-new Float:TransportDist[MAX_PLAYERS];
-new TransportCost[MAX_PLAYERS];
-new TransportDriver[MAX_PLAYERS];
 new JobDuty[MAX_PLAYERS];
 new SanDuty[MAX_PLAYERS];
 new sanwyjdz[MAX_PLAYERS];
@@ -1153,8 +1136,8 @@ ZerujZmienne(playerid)
 	GoChase[playerid] = 999; GetChased[playerid] = 999;
 	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; PoziomPoszukiwania[playerid] = 0;
 	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; ChangePos2[playerid][1] = 0; iddialog[playerid] = -1;
-	TransportDuty[playerid] = 0; weryfikacja[playerid] = 0;
-	BusCallTime[playerid] = 0; TaxiCallTime[playerid] = 0; MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;
+	weryfikacja[playerid] = 0;
+	MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;
 	FindTimePoints[playerid] = 0; FindTime[playerid] = 0; JobDuty[playerid] = 0; SanDuty[playerid] = 0; WarningDuty[playerid] = 175; NJDuty[playerid] = 0; DeathWarning[playerid] = 1;
 	Mobile[playerid] = INVALID_PLAYER_ID; Callin[playerid] = CALL_NONE; CellTime[playerid] = 0; Music[playerid] = 0; BoxOffer[playerid] = 999; PlayerBoxing[playerid] = 0;
 	Spectate[playerid] = INVALID_PLAYER_ID; PlayerDrunk[playerid] = 0; PlayerDrunkTime[playerid] = 0; WnetrzeWozu[playerid] = 0;
@@ -1168,13 +1151,12 @@ ZerujZmienne(playerid)
 	PlayerTazeTime[playerid] = 0; PlayerStoned[playerid] = 0; PlayerStonedStop[playerid] = 0;
 	StartTime[playerid] = 0; TicketOffer[playerid] = 999; TicketMoney[playerid] = 0;
 	MatsHolding[playerid] = 0; TutTime[playerid] = 0; stareVHP[playerid] = 0;
-	gPlayerMission[playerid] = 0; TaxiAccepted[playerid] = 999; BusAccepted[playerid] = 999; vKickEx[playerid] = 0;
+	gPlayerMission[playerid] = 0; vKickEx[playerid] = 0;
 	//BusTime[playerid] = 0; BusTime2[playerid] = 0; BusTime3[playerid] = 0; BusTime4[playerid] = 0; BusTime5[playerid] = 0;//bustime
 	//BusTime6[playerid] = 0; BusTime7[playerid] = 0; BusTime8[playerid] = 0; BusTime9[playerid] = 0; BusTime10[playerid] = 0; BusTime11[playerid] = 0; BusTime12[playerid] = 0; BusTime13[playerid] = 0;//bustime
 	//BusTime14[playerid] = 0; BusTime15[playerid] = 0; BusTime16[playerid] = 0; BusTime17[playerid] = 0; BusTime18[playerid] = 0; BusTime19[playerid] = 0; BusTime20[playerid] = 0;//bustime
 	PlayerInfo[playerid][pCash] = dollah; Respawn[playerid] = 0;//Respawn
 	HireCar[playerid] = 0; PlayersChannel[playerid] = 999;
-	TransportValue[playerid] = 0; TransportMoney[playerid] = 0; TransportCost[playerid] = 0; TransportDriver[playerid] = 999;
 	Locator[playerid] = 0;
 	PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
@@ -1355,9 +1337,10 @@ ZerujZmienne(playerid)
 	ClearFishes(playerid);
 	ClearMarriage(playerid);
 
+	Driver_ZerujZmienne(playerid);
+
 
     grajacy[playerid]=0;
-    for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
 	ObrazeniaIndex[playerid] = 0;
 	for(new i = 0; i<10; i++) Obrazenia[playerid][i][DAMAGE] = 0.0;
 	if(tworzenietrasy[playerid] != 666)

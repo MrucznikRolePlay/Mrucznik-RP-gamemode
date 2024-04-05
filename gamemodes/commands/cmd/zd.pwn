@@ -40,7 +40,7 @@ YCMD:zd(playerid, params[], help)
 		{
 			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pJob] == 10)
 			{
-				if(IS_KomunikacjaMiejsca(Veh))
+				if(IsAPublicTransport(Veh))
 				{
 				    if(PlayerInfo[playerid][pDrzwibusazamkniete]==0)
 				    {

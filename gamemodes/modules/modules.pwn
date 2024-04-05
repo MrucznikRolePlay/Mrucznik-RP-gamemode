@@ -199,6 +199,7 @@
 #include "urzadls\urzadls_timers.pwn"
 #include "praca_mechanik\praca_mechanik_timers.pwn"
 #include "choroby\choroby_timers.pwn"
+#include "praca_kierowca\praca_kierowca_timers.pwn"
 
 
 //-------<[ mysql ]>-------

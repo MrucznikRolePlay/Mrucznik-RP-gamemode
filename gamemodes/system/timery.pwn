@@ -2148,7 +2148,7 @@ public JednaSekundaTimer()
     //25.06.2014
     new State, Float:pancerzyy,string[128],vehicleid,VehicleModel,
         Float:x, Float:y, Float:z, Float:health, Float:Dis,
-        pZone[MAX_ZONE_NAME], ammo, weaponID, weaponState, taxidriver, Float:vel[3];
+        pZone[MAX_ZONE_NAME], ammo, weaponID, weaponState, Float:vel[3];
 
     new plname[MAX_PLAYER_NAME],level, Float:angle,Lost = 0, trigger = 0,winner[MAX_PLAYER_NAME], loser[MAX_PLAYER_NAME],titel[MAX_PLAYER_NAME];
 
@@ -2405,23 +2405,9 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if((taxidriver = TransportDriver[i]) != 999) //Taxi
-		{
-            TransportDist[i]+=(VectorSize(SavePlayerPos[i][LastX] - x, SavePlayerPos[i][LastY] - y, SavePlayerPos[i][LastZ]-z)/1000)*3;
-            format(string, 128, "%.1fKM", TransportDist[i]);
-            PlayerTextDrawSetString(i, TAXI_DIST[i], string);
-            PlayerTextDrawSetString(taxidriver, TAXI_DIST[taxidriver], string);
 
-            PlayerTextDrawShow(i, TAXI_DIST[i]);
-            PlayerTextDrawShow(taxidriver, TAXI_DIST[taxidriver]);
+		Driver_JednaSekundaTimer(i);
 
-            format(string, 128, "$%d", floatround((TransportDist[i]*TransportValue[taxidriver])+TransportValue[taxidriver]));
-            PlayerTextDrawSetString(i, TAXI_COST[i], string);
-            PlayerTextDrawSetString(taxidriver, TAXI_COST[taxidriver], string);
-
-            PlayerTextDrawShow(i, TAXI_COST[i]);
-            PlayerTextDrawShow(taxidriver, TAXI_COST[taxidriver]);
-		}
 		if(PoziomPoszukiwania[i] >= 1)
 		{
 		    PlayerInfo[i][pWL] = PoziomPoszukiwania[i];
@@ -3079,28 +3065,6 @@ public JednaSekundaTimer()
 				FindTime[i] += 1;
 				GetPlayerPos(TaxiAccepted[i], x, y, z);
 				SetPlayerCheckpoint(i, x, y, z, 5);
-			}
-		}
-		if(TaxiCallTime[i] > 0)
-		{
-			if(TaxiAccepted[i] < 999)
-			{
-				if(IsPlayerConnected(TaxiAccepted[i]))
-				{
-					GetPlayerPos(TaxiAccepted[i], x, y, z);
-					SetPlayerCheckpoint(i, x, y, z, 5);
-				}
-			}
-		}
-		if(BusCallTime[i] > 0)
-		{
-			if(BusAccepted[i] < 999)
-			{
-				if(IsPlayerConnected(BusAccepted[i]))
-				{
-					GetPlayerPos(BusAccepted[i], x, y, z);
-					SetPlayerCheckpoint(i, x, y, z, 5);
-				}
 			}
 		}
 		if(MedicCallTime[i] > 0)

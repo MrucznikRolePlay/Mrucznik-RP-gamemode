@@ -80,75 +80,15 @@ YCMD:wezwij(playerid, params[], help)
 			}
 		    else if(strcmp(x_nr,"taxi",true) == 0)
 			{
-			    if(TaxiDrivers < 0)
-		        {
-		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma taksówkarzy, spróbuj póŸniej !");
-		        }
-		        if(TransportDuty[playerid] > 0)
-		        {
-		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnych taksówkarzy !");
-		        }
-				GetPlayerName(playerid, sendername, sizeof(sendername));
-				if(PlayerInfo[playerid][pLevel] <= 3)
-				{
-					format(string, sizeof(string), "**[NEW_PLAYER] %s potrzebuje transportu. (wpisz /akceptuj taxi aby zaaceptowaæ zg³oszenie)", sendername);
-					SendFamilyMessage(10, 0xE88A2DFF, string);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po taksówkê, czekaj na akceptacje.");
-					TaxiCall = playerid;
-					AntySpam[playerid] = 1;
-					SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
-				}
-				else
-				{
-					format(string, sizeof(string), "** %s potrzebuje transportu. (wpisz /akceptuj taxi aby zaaceptowaæ zg³oszenie)", sendername);
-					SendFamilyMessage(10, 0xE88A2DFF, string);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po taksówkê, czekaj na akceptacje.");
-					TaxiCall = playerid;
-					AntySpam[playerid] = 1;
-					SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
-				}
-		    	return 1;
+			    wezwij_taxi(playerid);
 			}
 			else if(strcmp(x_nr,"heli",true) == 0)
 			{
-			    if(HeliDrivers < 0)
-		        {
-		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma pilota, spróbuj póŸniej !");
-		        }
-		        if(TransportDuty[playerid] > 0)
-		        {
-		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnego pilota !");
-		        }
-		        GetPlayerName(playerid, sendername, sizeof(sendername));
-			    format(string, sizeof(string), "** %s potrzebuje transportu. (wpisz /akceptuj heli aby zaaceptowaæ zg³oszenie)", sendername);
-		    	SendFamilyMessage(10, 0xE88A2DFF, string);
-		    	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wezwa³eœ helikopter, czekaj na miejscu.");
-		    	HeliCall = playerid;
-		    	AntySpam[playerid] = 1;
-				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
-		    	return 1;
+				wezwij_heli(playerid);
 			}
 			else if(strcmp(x_nr,"bus",true) == 0)
 			{
-			    if(BusDrivers < 1)
-		        {
-		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma kierowców autobusu, spróbuj póŸniej !");
-		            return 1;
-		        }
-		        if(TransportDuty[playerid] > 0)
-		        {
-		            sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnych autobusów !");
-		            return 1;
-		        }
-		        GetPlayerName(playerid, sendername, sizeof(sendername));
-			    format(string, sizeof(string), "** %s potrzebuje autobusu. (wpisz /akceptuj bus aby zaakceptowaæ zlecenie)", sendername);
-		    	SendFamilyMessage(10, 0xE88A2DFF, string);
-		    	SendJobMessage(10, 0xE88A2DFF, string);
-		    	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po autobus, czekaj na akceptacje.");
-		    	BusCall = playerid;
-		    	AntySpam[playerid] = 1;
-				SetTimerEx("AntySpamTimer",30000,0,"d",playerid);
-		    	return 1;
+			    wezwij_bus(playerid);
 			}
 			else if(strcmp(x_nr,"medyk",true) == 0)
 			{
