@@ -1145,7 +1145,7 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 57, 2166.2034, -1675.3135, 15.0859, 56, 0); //Diler Dragów
     SetPlayerMapIcon(playerid, 58, 1787.4432, -1866.6737, 13.5711, 52, 0); //Bankomat obok Dworca G³ównego
     SetPlayerMapIcon(playerid, 59, 1833.0537, -1842.6494, 13.5781, 36, 0); //24/7 na Idlewood
-    SetPlayerMapIcon(playerid, 60, 2226.0696, -1718.3290, 13.5182, 56, 0); //Ochroniarz (Praca)
+    SetPlayerMapIcon(playerid, 60, 2226.0696, -1718.3290, 13.5182, 56, 0); //Przemytnik (Praca)
     SetPlayerMapIcon(playerid, 61, 2103.4141, -1798.7494, 13.6504, 56, 0); //Pizzerman (Praca)
     SetPlayerMapIcon(playerid, 62, 382.8541, -2079.4890, 7.5630, 9, 0); //Miejsce do wêdkowania
     SetPlayerMapIcon(playerid, 63, 342.0005, -1518.7524, 33.2482, 52, 0); //Bankomat obok Mrucznik Tower
