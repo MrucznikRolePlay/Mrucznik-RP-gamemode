@@ -25,6 +25,8 @@
 
 //
 
+#include "command_akceptuj_job.pwn"
+
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
 stock GetJobName(Jobs:jobid)

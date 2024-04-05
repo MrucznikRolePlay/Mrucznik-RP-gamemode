@@ -1,14 +1,14 @@
 {
     "name": "diluj",
-    "description": "Rozpoczyna dilerkê narkotyków.",
+    "description": "Rozpoczyna dilerkê narkotyków w pojeŸdzie do dilowania.",
     "permissions": [],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [
         {
-            "type": "player",
-            "name": "giveplayerid",
-            "description": "Nick/ID"
+            "type": "integer",
+            "name": "price",
+            "description": "stawka za 1 gram"
         }
     ],
     "date": "31.03.2024"

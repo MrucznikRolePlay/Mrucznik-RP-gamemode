@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   diluj                                                   //
+//-----------------------------------------------<< MySQL >>-------------------------------------------------//
+//                                                   prace                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,51 +16,55 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Mrucznik
+// Data utworzenia: 15.05.2019
+//Opis:
+/*
+	System prac.
+*/
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "diluj_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_diluj()
+//------------------<[ obs³uga komendy /akceptuj: ]>--------------------
+command_akceptuj_job(playerid)
 {
-    
-
-    //aliases
-    
-
-    //permissions
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:diluj(playerid, params[], help)
-{
-    if (help)
+    new job = GettingJob[playerid];
+    new bool:canTakeJob = true;
+    if(job > 0)
     {
-        sendTipMessage(playerid, "Rozpoczyna dilerkê narkotyków w pojeŸdzie do dilowania.");
+        if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || PlayerInfo[playerid][pOrg] != 0)
+        {
+            if(IsAPrzestepca(playerid))
+            {
+                if(job != JOB_DRAGDEALER && job != JOB_CARTHIEF && job != JOB_GUNDEALER)
+                {
+                    canTakeJob = false;
+                }
+            }
+            else
+            {
+                if(job != JOB_DRIVER)
+                {
+                    canTakeJob = false;
+                }
+            }
+        }
+
+        if(!canTakeJob)
+        {
+            SendClientMessage(playerid, COLOR_GREY, "   Nie mo¿esz wzi¹æ tej pracy, jesteœ we frakcji!");
+            return 1;
+        }
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Podpisa³eœ umowe na 2,5 godziny, zaczynasz now¹ pracê.");
+        SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Gratulujemy nowej pracy, wpisz /pomoc aby zobaczyæ nowe komendy.");
+        PlayerInfo[playerid][pJob] = GettingJob[playerid];
+        Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pJob]);
+        GettingJob[playerid] = 0;
         return 1;
     }
-    //fetching params
-    new price;
-    if(sscanf(params, "d", price))
+    else
     {
-        sendTipMessage(playerid, "U¿yj /diluj [stawka za 1 gram] ");
+        SendClientMessage(playerid, COLOR_GREY, "   W tym miejscu nie mo¿na wzi¹æ pracy!");
         return 1;
     }
-    
-    //command body
-    return command_diluj_Impl(playerid, price);
 }

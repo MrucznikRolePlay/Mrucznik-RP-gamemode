@@ -23,8 +23,9 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_diluj_Impl(playerid, giveplayerid)
+command_diluj_Impl(playerid, price)
 {
+
     return 1;
 }
 

@@ -659,50 +659,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job,"job",true) == 0 || strcmp(x_job,"praca",true) == 0)//prace dorywcze
     {
-        if(GettingJob[playerid] > 0)
-        {
-            if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || PlayerInfo[playerid][pOrg] != 0)
-            {
-                if(GettingJob[playerid] == 4 || GettingJob[playerid] == 5 || GettingJob[playerid] == 9)
-                {//Allow the 3 jobs for Family Members
-                }
-                else
-                {
-                    SendClientMessage(playerid, COLOR_GREY, "   Nie mo¿esz wzi¹æ pracy, jesteœ we frakcji !");
-                    return 1;
-                }
-            }
-            SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Podpisa³eœ umowe na 2,5 godziny, zaczynasz now¹ pracê.");
-            SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Gratulujemy nowej pracy, wpisz /pomoc aby zobaczyæ nowe komendy.");
-            PlayerInfo[playerid][pJob] = GettingJob[playerid];
-            Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pJob]);
-            if(GettingJob[playerid] == 14)
-            {
-                PlayerInfo[playerid][pRank] = 0;
-
-                SetPlayerInterior(playerid,0);
-                new rand = random(sizeof(gInviteSpawns));
-                SetPlayerPos(playerid, gInviteSpawns[rand][0], gInviteSpawns[rand][1], gInviteSpawns[rand][2]); // Warp the player
-                SetPlayerFacingAngle(playerid, gInviteSpawns[rand][3]);
-                SetPlayerCameraPos(playerid,gInviteSpawns[rand][0] + 3, gInviteSpawns[rand][1], gInviteSpawns[rand][2]);
-                SetPlayerCameraLookAt(playerid,gInviteSpawns[rand][0], gInviteSpawns[rand][1], gInviteSpawns[rand][2]);
-                TogglePlayerControllable(playerid, 0);
-                SelectChar[playerid] = 255;
-                SelectCharID[playerid] = PlayerInfo[playerid][pMember];
-                SelectCharPlace[playerid] = 1;
-                PlayerInfo[playerid][pSkin] = ChosenSkin[playerid];
-                SendClientMessage(playerid, COLOR_LIGHTRED, "* U¿yj 'next' aby zobaczyæ nastêpny skin.");
-                SendClientMessage(playerid, COLOR_LIGHTRED, "* Jeœli zdecydowa³eœ siê na konkretny skin wpisz 'gotowe'.");
-                SendClientMessage(playerid, COLOR_LIGHTRED, "* Je¿eli nie ma tu wszytkich skinów twojej frakcji u¿yj /uniform w sklepie z ciuchami.");
-            }
-            GettingJob[playerid] = 0;
-            return 1;
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   W tym miejscu nie mo¿na wzi¹æ pracy!");
-            return 1;
-        }
+        command_akceptuj_job(playerid);
     }
     else if(strcmp(x_job,"refill",true) == 0 || strcmp(x_job,"tankowanie",true) == 0)
     {
