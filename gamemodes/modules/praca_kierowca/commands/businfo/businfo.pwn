@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  akceptuj                                                 //
+//                                                  businfo                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,18 +28,18 @@
 
 
 //-------<[ include ]>-------
-#include "akceptuj_impl.pwn"
+#include "businfo_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_akceptuj()
+command_businfo()
 {
-    new command = Command_GetID("akceptuj");
+    new command = Command_GetID("businfo");
 
     //aliases
+    Command_AddAlt(command, "bus");
     
 
     //permissions
-    Group_SetGlobalCommand(command, true);
     
 
     //prefix
@@ -47,26 +47,15 @@ command_akceptuj()
 }
 
 //-------<[ command ]>-------
-YCMD:akceptuj(playerid, params[], help)
+YCMD:businfo(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Akceptuje ofertê od gracza.");
-        return 1;
-    }
-    //fetching params
-    new nazwa[32];
-    if(sscanf(params, "s[32]", nazwa))
-    {
-        SendClientMessage(playerid, COLOR_WHITE, "|__________________ Accept __________________|");
-        SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
-        SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Praca, Wywiad, Tankowanie");
-        SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Auto, Taxi, Bus, Heli, Boks, Medyk, Mechanik, Mandat, kuracje");
-        SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Rozwod, Swiadek, Slub, Pojazd, Wynajem, Wizytowka, Uwolnienie, biznes");
-        SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
+        sendTipMessage(playerid, "Informacje o trasach autobusowych.");
         return 1;
     }
     
+    
     //command body
-    return command_akceptuj_Impl(playerid, nazwa);
+    return command_businfo_Impl(playerid);
 }

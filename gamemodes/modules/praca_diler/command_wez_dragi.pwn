@@ -2,6 +2,7 @@
 
 diler_wez_dragi(playerid, weight)
 {
+    new string[MAX_MESSAGE_LENGTH];
     if(weight == 0)
     {
         sendTipMessage(playerid, "U¿yj /wez dragi [ilosc]");
@@ -47,4 +48,5 @@ diler_wez_dragi(playerid, weight)
         sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ Dilerem Dragów albo nie jesteœ w melinie !");
         return 1;
     }
+    return 1;
 }

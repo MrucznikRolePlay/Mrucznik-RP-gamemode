@@ -32,6 +32,7 @@
 //-------<[ include ]>-------
 #include "zakoncztrase\zakoncztrase.pwn"
 #include "trasa\trasa.pwn"
+#include "businfo\businfo.pwn"
 #include "zd\zd.pwn"
 #include "kurs\kurs.pwn"
 
@@ -41,6 +42,7 @@ hook OnGameModeInit()
 {
     command_zakoncztrase();
     command_trasa();
+    command_businfo();
     command_zd();
     command_kurs();
     

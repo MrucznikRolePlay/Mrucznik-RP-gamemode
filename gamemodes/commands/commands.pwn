@@ -60,7 +60,6 @@
 #include "cmd/boombox.pwn"
 #include "cmd/bp.pwn"
 #include "cmd/brama.pwn"
-#include "cmd/bus.pwn"
 #include "cmd/bw.pwn"
 #include "cmd/c.pwn"
 #include "cmd/caluj.pwn"
