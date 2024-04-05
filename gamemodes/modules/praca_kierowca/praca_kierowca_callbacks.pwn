@@ -464,7 +464,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 				CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(GetPlayerJob(playerid) == JOB_DRIVER)
 				{
 				Przystanek(playerid, COLOR_BLUE, "Linia ZAJ\nLinia 55 do zajezdni Commerce\n{778899}Trasa: Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
 				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -714,7 +714,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 				CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(GetPlayerJob(playerid) == JOB_DRIVER)
 				{
 				Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia ZAJ\nLinia 72 do zajezdni Commerce\n{778899}Trasa: Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
 				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -955,7 +955,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 				CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(GetPlayerJob(playerid) == JOB_DRIVER)
 				{
 				Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia ZAJ\nLinia 82 do zajezdni Commerce\n{778899}Trasa: Commerce\n{808080}Zatrzymuje siê na przystankach");
 				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -1262,7 +1262,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 					SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 					CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(GetPlayerJob(playerid) == JOB_DRIVER)
 				{
 					Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia ZAJ\nLinia 96 do zajezdni Commerce\n{778899}Trasa: Ocean Docks - Lotnisko - El Corona - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
 					SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
@@ -1539,7 +1539,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 					SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
 					CP[playerid]=1200;
 				}
-				else if(PlayerInfo[playerid][pJob] == 10)
+				else if(GetPlayerJob(playerid) == JOB_DRIVER)
 				{
 					Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia ZAJ\nLinia 85 do zajezdni Commerce\n{778899}Trasa: Willowfield - Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
 					SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);

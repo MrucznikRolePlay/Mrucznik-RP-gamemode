@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                     zd                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,50 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 06.04.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "zakoncztrase\zakoncztrase.pwn"
-#include "trasa\trasa.pwn"
-#include "zd\zd.pwn"
-#include "kurs\kurs.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_zd_Impl(playerid)
 {
-    command_zakoncztrase();
-    command_trasa();
-    command_zd();
-    command_kurs();
-    
+	new string[128];
+	new sendername[MAX_PLAYER_NAME];
+
+    new Veh = GetPlayerVehicleID(playerid);
+	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || GetPlayerJob(playerid) == JOB_DRIVER)
+	{
+		if(IsPlayerConnected(playerid))
+		{
+			if(IsAPublicTransport(Veh))
+			{
+				if(PlayerInfo[playerid][pDrzwibusazamkniete]==0)
+				{
+					GetPlayerName(playerid, sendername, sizeof(sendername));
+					format(string, sizeof(string), "* %s naciska guzik i powoli zamyka drzwi", sendername);
+					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+					SetTimerEx("ZamykanieDrzwi",4000,0,"d",playerid);
+					GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Trwa zamykanie drzwi...", 4000, 3);
+				}
+				else
+				{
+					sendErrorMessage(playerid, "Drzwi autobusu s¹ ju¿ zamkniête !");
+				}
+			}
+			else
+			{
+				sendErrorMessage(playerid, "Nie jesteœ w autobusie Korporacji !");
+			}
+			return 1;
+		}
+	}
+	else
+	{
+		sendErrorMessage(playerid, "Nie jesteœ z Korporacji Transportowej !");
+	}
+    return 1;
 }
+
+//end

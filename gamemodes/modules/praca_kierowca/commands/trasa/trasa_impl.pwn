@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//---------------------------------------------------[ zd ]--------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   trasa                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,60 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: mrucznik
+// Data utworzenia: 06.04.2024
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:zd(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_trasa_Impl(playerid)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-
-    new Veh = GetPlayerVehicleID(playerid);
-	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][pJob] == 10)
+	new Veh = GetPlayerVehicleID(playerid);
+	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || GetPlayerJob(playerid) == JOB_DRIVER)
 	{
 		if(IsPlayerConnected(playerid))
 		{
-			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pJob] == 10)
+			if(IsAPublicTransport(Veh))
 			{
-				if(IsAPublicTransport(Veh))
-				{
-				    if(PlayerInfo[playerid][pDrzwibusazamkniete]==0)
-				    {
-						GetPlayerName(playerid, sendername, sizeof(sendername));
-						format(string, sizeof(string), "* %s naciska guzik i powoli zamyka drzwi", sendername);
-						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-						SetTimerEx("ZamykanieDrzwi",4000,0,"d",playerid);
-						GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Trwa zamykanie drzwi...", 4000, 3);
-					}
-					else
-					{
-						sendErrorMessage(playerid, "Drzwi autobusu s¹ ju¿ zamkniête !");
-					}
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Nie jesteœ w autobusie Korporacji !");
-				}
+				ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz swój kurs:", "Linia 55 - niebieska(230$/p , 9min, 21p, +2)\nLinia 72 - pomarañczowa (200$/p, 6min, 15p, +1)\nLinia 96 - zielona 4s (310$/p, 8min, 24p, +1)\nLinia 82 ¿ó³ta 5s (510$/p , 11min, 18p, +3)\nLinia 85 3s (270$/p , ? min, 24p, +2)\nWycieczka 5s\nPowrót do bazy\nPomoc", "Wybierz", "Wyjdz");
 			}
 			else
 			{
-				sendErrorMessage(playerid, "Nie posiadasz 2 rangi !");
+				sendTipMessage(playerid, "Nie jesteœ w autobusie!");
 			}
 			return 1;
 		}
 	}
 	else
 	{
-	sendErrorMessage(playerid, "Nie jesteœ z Korporacji Transportowej !");
+		sendErrorMessage(playerid, "Nie jesteœ z Korporacji Transportowej!");
 	}
-	return 1;
+    return 1;
 }
+
+//end

@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                zakoncztrase                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,36 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 06.04.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "zakoncztrase\zakoncztrase.pwn"
-#include "trasa\trasa.pwn"
-#include "zd\zd.pwn"
-#include "kurs\kurs.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_zakoncztrase_Impl(playerid)
 {
-    command_zakoncztrase();
-    command_trasa();
-    command_zd();
-    command_kurs();
-    
+	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || GetPlayerJob(playerid) == JOB_DRIVER)
+	{
+		if(IsPlayerConnected(playerid))
+		{
+			DisablePlayerCheckpoint(playerid);
+			CP[playerid] = 0;
+			PlayerInfo[playerid][pLinia55] = 0;
+			PlayerInfo[playerid][pLinia72] = 0;
+			PlayerInfo[playerid][pLinia82] = 0;
+			PlayerInfo[playerid][pLinia96] = 0;
+			PlayerInfo[playerid][pNatrasiejest] = 0;
+			Przystanek(playerid, COLOR_PURPLE, "Los Santos Bus Departament\nKomunikacja miejska");
+			sendTipMessage(playerid, "Zakoñczy³eœ trasê i wygasi³eœ tablice");
+			return 1;
+		}
+	}
+	else
+	{
+	    sendErrorMessage(playerid, "Nie jesteœ z Korporacji Transportowej!");
+	}
+    return 1;
 }
+
+//end

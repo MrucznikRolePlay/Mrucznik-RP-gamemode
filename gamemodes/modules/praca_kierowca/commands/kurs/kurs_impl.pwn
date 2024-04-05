@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kurs_Impl(playerid, price)
 {
-    if(PlayerInfo[playerid][pJob] == 10 || PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
+    if(GetPlayerJob(playerid) == JOB_DRIVER || PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
 	{
 		if(GetPlayerState(playerid) == 2)
 		{
@@ -93,7 +93,7 @@ command_kurs_Impl(playerid, price)
 			}
 			else if(IsAMiniBus(vehicleid))
 			{
-				if(PlayerInfo[playerid][pJob] == 10)
+				if(GetPlayerJob(playerid) == JOB_DRIVER)
 				{
 					if(PlayerInfo[playerid][pCarSkill] >= 51 && PlayerInfo[playerid][pCarSkill] <= 101)
 					{

@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                     zd                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,21 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "zakoncztrase\zakoncztrase.pwn"
-#include "trasa\trasa.pwn"
-#include "zd\zd.pwn"
-#include "kurs\kurs.pwn"
-
+#include "zd_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_zd()
 {
-    command_zakoncztrase();
-    command_trasa();
-    command_zd();
-    command_kurs();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zd(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zamyka drzwi autobusu.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zd_Impl(playerid);
 }

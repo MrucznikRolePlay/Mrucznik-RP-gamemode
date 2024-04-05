@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ zakoncztrase ]---------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                zakoncztrase                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,46 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "zakoncztrase_impl.pwn"
 
+//-------<[ initialize ]>-------
+command_zakoncztrase()
+{
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
 YCMD:zakoncztrase(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][pJob] == 10)
-	{
-		if(IsPlayerConnected(playerid))
-		{
-			if(PlayerInfo[playerid][pRank] >= 1 || PlayerInfo[playerid][pJob] == 10)
-			{
-				DisablePlayerCheckpoint(playerid);
-				CP[playerid] = 0;
-				PlayerInfo[playerid][pLinia55] = 0;
-				PlayerInfo[playerid][pLinia72] = 0;
-				PlayerInfo[playerid][pLinia82] = 0;
-				PlayerInfo[playerid][pLinia96] = 0;
-				PlayerInfo[playerid][pNatrasiejest] = 0;
-				Przystanek(playerid, COLOR_PURPLE, "Los Santos Bus Departament\nKomunikacja miejska");
-				sendTipMessage(playerid, "Zakoñczy³eœ trasê i wygasi³eœ tablice");
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Nie posiadasz 2 rangi!");
-			}
-			return 1;
-		}
-	}
-	else
-	{
-	sendErrorMessage(playerid, "Nie jesteœ z Korporacji Transportowej!");
-	}
-	return 1;
+    if (help)
+    {
+        sendTipMessage(playerid, "Koñczy trasê autobusow¹.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zakoncztrase_Impl(playerid);
 }
