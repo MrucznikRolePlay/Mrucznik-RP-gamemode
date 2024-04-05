@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------[ sprzedajnarkotyki ]-------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 selldrugs                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,19 +16,14 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-
-// Opis:
-/*
-	
-*/
+// Autor: mrucznik
+// Data utworzenia: 06.04.2024
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//
 
-YCMD:sprzedajnarkotyki(playerid, params[], help)
+//------------------<[ Implementacja: ]>-------------------
+command_selldrugs_Impl(playerid, giveplayerid, weight, price)
 {
 	new string[128];
 	new sendername[MAX_PLAYER_NAME];
@@ -41,36 +36,30 @@ YCMD:sprzedajnarkotyki(playerid, params[], help)
 			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ Dilerem Dragów!");
 			return 1;
 	    }
-		new playa, needed, money;
-		if( sscanf(params, "k<fix>dd", playa, needed, money))
-		{
-			sendTipMessage(playerid, "U¿yj /sprzedajdragi [playerid/CzêœæNicku] [iloœæ] [cena]");
-			return 1;
-		}
         if(GetPVarInt(playerid, "wydragowany") > 0) return sendErrorMessage(playerid, "Dragi mo¿esz sprzedawaæ raz na minutê!");
-		if(needed < 1 || needed > 99) { SendClientMessage(playerid, COLOR_GREY, "   Iloœæ gram od 1 do 60!"); return 1; }
-		if(money < 1 || money > 9999) { SendClientMessage(playerid, COLOR_GREY, "   Cena od 1 do 9999!"); return 1; }
-		if(needed > PlayerInfo[playerid][pDrugs]) { SendClientMessage(playerid, COLOR_GREY, "   Nie masz a¿ tylu narkotyków przy sobie !"); return 1; }
-		if(IsPlayerConnected(playa))
+		if(weight < 1 || weight > 99) { SendClientMessage(playerid, COLOR_GREY, "   Iloœæ gram od 1 do 60!"); return 1; }
+		if(price < 1 || price > 9999) { SendClientMessage(playerid, COLOR_GREY, "   Cena od 1 do 9999!"); return 1; }
+		if(weight > PlayerInfo[playerid][pDrugs]) { SendClientMessage(playerid, COLOR_GREY, "   Nie masz a¿ tylu narkotyków przy sobie !"); return 1; }
+		if(IsPlayerConnected(giveplayerid))
 		{
-		    if(playa != INVALID_PLAYER_ID)
+		    if(giveplayerid != INVALID_PLAYER_ID)
 		    {
-				if (ProxDetectorS(8.0, playerid, playa))
+				if (ProxDetectorS(8.0, playerid, giveplayerid))
 				{
-				    if(playa == playerid)
+				    if(giveplayerid == playerid)
 				    {
 				        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz sprzedaæ dragów samemu sobie!");
 				        return 1;
 				    }
-				    GetPlayerName(playa, giveplayer, sizeof(giveplayer));
+				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));
-				    format(string, sizeof(string), "* Oferujesz %s sprzeda¿ %d gram za $%d .", giveplayer, needed, money);
+				    format(string, sizeof(string), "* Oferujesz %s sprzeda¿ %d gram za $%d .", giveplayer, weight, price);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "* Diler Dragów %s oferuje sprzeda¿ %d gram narkotyków za $%d, (wpisz /akceptuj dragi) aby kupiæ.", sendername, needed, money);
-					SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-					DrugOffer[playa] = playerid;
-					DrugPrice[playa] = money;
-					DrugGram[playa] = needed;
+					format(string, sizeof(string), "* Diler Dragów %s oferuje sprzeda¿ %d gram narkotyków za $%d, (wpisz /akceptuj dragi) aby kupiæ.", sendername, weight, price);
+					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
+					DrugOffer[giveplayerid] = playerid;
+					DrugPrice[giveplayerid] = price;
+					DrugGram[giveplayerid] = weight;
 				}
 				else
 				{
@@ -85,3 +74,5 @@ YCMD:sprzedajnarkotyki(playerid, params[], help)
 	}
 	return 1;
 }
+
+//end

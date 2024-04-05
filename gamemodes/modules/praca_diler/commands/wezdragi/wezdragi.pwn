@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                praca_diler                                                //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  wezdragi                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,15 +16,47 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 31.03.2024
-//Opis:
-/*
-	Praca Dilera Narkotyków.
-*/
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//-----------------<[ Funkcje: ]>-------------------
 
-//end
+//-------<[ include ]>-------
+#include "wezdragi_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_wezdragi()
+{
+    new command = Command_GetID("wezdragi");
+
+    //aliases
+    Command_AddAlt(command, "usedrugs");
+    Command_AddAlt(command, "weznarkotyki");
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:wezdragi(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Za¿yj narkotyki.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_wezdragi_Impl(playerid);
+}
