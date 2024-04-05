@@ -2618,7 +2618,7 @@ DajBroniePracy(playerid)
 				playerWeapons[playerid][weaponLegal2] = 1;
 			}
 		}
-		case JOB_DRAGDEALER:
+		case JOB_DRUG_DEALER:
 		{
 			if(PlayerInfo[playerid][pGun1] == 0)
 			{

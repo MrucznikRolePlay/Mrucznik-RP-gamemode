@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Header >>------------------------------------------------//
-//                                                   prace                                                   //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  ochrona                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,59 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 15.05.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Enumy: ]>--------------------
-enum Jobs {
-    UNEMPLOYED,     // 0
-    JOB_LOWCA,      // 1
-    JOB_LAWYER,     // 2
-    JOB_PROSTITUTE, // 3
-    JOB_DRUG_DEALER, // 4 
-    JOB_CARTHIEF,   // 5
-    JOB_REPORTER,   // 6
-    JOB_MECHANIC,   // 7
-    JOB_SMUGGLER,  // 8
-    JOB_GUNDEALER,  // 9
-    JOB_DRIVER,  // 10
-    JOB_RESERVED_4,      // 11 pizza, kiedys medyk, nieaktywne
-    JOB_BOXER,      // 12
-    JOB_RESERVED_1, // 13 nie wiadomo
-    JOB_RESERVED_2, // 14 taxi, nieaktywne
-    JOB_RESERVED_3, // 15 gazeciarz, nieaktywne
-    JOB_TRUCKER     // 16 kurier - wylaczone
+
+//-------<[ include ]>-------
+#include "ochrona_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_ochrona()
+{
+    new command = Command_GetID("ochrona");
+
+    //aliases
+    Command_AddAlt(command, "pancerz");
+    Command_AddAlt(command, "sprzedajkamizelke");
+    Command_AddAlt(command, "sprzedajpancerz");
+    Command_AddAlt(command, "sellarmor");
+    
+
+    //permissions
+    
+
+    //prefix
+    
 }
-//-----------------<[ Zmienne: ]>-------------------
-//------------------<[ Forwardy: ]>--------------------
 
-//end
+//-------<[ command ]>-------
+YCMD:ochrona(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Oferuje graczowi kamizelkê kuloodporn¹.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, price;
+    if(sscanf(params, "rd", giveplayerid, price))
+    {
+        sendTipMessage(playerid, "U¿yj /ochrona [Nick/ID] [cena] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_ochrona_Impl(playerid, giveplayerid, price);
+}

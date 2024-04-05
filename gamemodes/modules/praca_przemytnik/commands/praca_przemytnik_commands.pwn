@@ -30,12 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "ochrona\ochrona.pwn"
 #include "przemyt\przemyt.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_ochrona();
     command_przemyt();
     
 }

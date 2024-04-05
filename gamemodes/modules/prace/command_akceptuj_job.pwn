@@ -36,7 +36,7 @@ command_akceptuj_job(playerid)
         {
             if(IsAPrzestepca(playerid))
             {
-                if(job != JOB_DRAGDEALER && job != JOB_CARTHIEF && job != JOB_GUNDEALER)
+                if(job != JOB_DRUG_DEALER && job != JOB_CARTHIEF && job != JOB_GUNDEALER && job != JOB_SMUGGLER)
                 {
                     canTakeJob = false;
                 }

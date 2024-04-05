@@ -284,7 +284,6 @@
 #include "cmd/noooc.pwn"
 #include "cmd/o.pwn"
 #include "cmd/obrazenia.pwn"
-#include "cmd/ochrona.pwn"
 #include "cmd/oczyscmdc.pwn"
 #include "cmd/od.pwn"
 #include "cmd/odmroz.pwn"
@@ -929,10 +928,6 @@ static Aliases()
 	//o
 	Command_AddAltNamed("o", "ooc");
 
-	//ochrona
-	Command_AddAltNamed("ochrona", "guard");
-	Command_AddAltNamed("ochrona", "sellkami");
-	Command_AddAltNamed("ochrona", "sellkamizelke");
 
 	//od
 	Command_AddAltNamed("od", "odbierz");

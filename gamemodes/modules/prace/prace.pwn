@@ -37,11 +37,11 @@ stock GetJobName(Jobs:jobid)
 		case JOB_LOWCA: { strcat(jobName, "£owca nagród"); }
 		case JOB_LAWYER: { strcat(jobName, "Prawnik"); }
 		case JOB_PROSTITUTE: { strcat(jobName, "Prostytutka"); }
-		case JOB_DRAGDEALER: { strcat(jobName, "Diler narkotyków"); }
+		case JOB_DRUG_DEALER: { strcat(jobName, "Diler narkotyków"); }
 		case JOB_CARTHIEF: { strcat(jobName, "Z³odziej aut"); }
 		case JOB_REPORTER: { strcat(jobName, "Reporter"); }
 		case JOB_MECHANIC: { strcat(jobName, "Mechanik"); }
-		case JOB_BODYGUARD: { strcat(jobName, "Ochroniarz"); }
+		case JOB_SMUGGLER: { strcat(jobName, "Przemytnik"); }
 		case JOB_GUNDEALER: { strcat(jobName, "Diler broni"); }
 		case JOB_DRIVER: { strcat(jobName, "Kierowca autobusu"); }
 		// case JOB_RESERVED_4: { strcat(jobName, ""); }
@@ -88,7 +88,7 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 		{
 			skill = PlayerInfo[playerid][pSexSkill];
 		}
-		case JOB_DRAGDEALER:
+		case JOB_DRUG_DEALER:
 		{
 			skill = PlayerInfo[playerid][pDrugsSkill];
 		}
@@ -104,7 +104,7 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 		{
 			skill = PlayerInfo[playerid][pMechSkill];
 		}
-		case JOB_BODYGUARD:
+		case JOB_SMUGGLER:
 		{
 			return 1; // no skill
 		}
@@ -166,7 +166,7 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 		{
 			PlayerInfo[playerid][pSexSkill] += value;
 		}
-		case JOB_DRAGDEALER:
+		case JOB_DRUG_DEALER:
 		{
 			PlayerInfo[playerid][pDrugsSkill] += value;
 		}
@@ -182,7 +182,7 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 		{
 			PlayerInfo[playerid][pMechSkill] += value;
 		}
-		case JOB_BODYGUARD:
+		case JOB_SMUGGLER:
 		{
 			return 1; // no skill
 		}

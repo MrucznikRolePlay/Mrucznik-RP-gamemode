@@ -2350,7 +2350,7 @@ SetPlayerSpawnPos(playerid)
 						{
 						    SetPlayerPos(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
 						}
-						case JOB_BODYGUARD:
+						case JOB_SMUGGLER:
 						{
 						    SetPlayerPos(playerid, 2207.4038,-1725.1147,13.4060);
 						}

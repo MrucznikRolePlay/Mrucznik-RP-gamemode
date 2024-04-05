@@ -44,7 +44,7 @@ YCMD:pomoc2(playerid, params[], help)
         case JOB_LOWCA: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /namierz /wanted /poddajsie /zlecenie (/m)egafon"); }
         case JOB_LAWYER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /uwolnij /oczyscmdc /zbijwl /wanted /kuppozwolenie"); }
 		case JOB_PROSTITUTE: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sex"); }
-		case JOB_DRAGDEALER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sprzedajdragi /get drugs /wezdragi /diluj"); }
+		case JOB_DRUG_DEALER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sprzedajdragi /get drugs /wezdragi /diluj"); }
 		case JOB_CARTHIEF: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ukradnij"); }
 		// case JOB_REPORTER: { }
 		case JOB_MECHANIC: 
@@ -52,7 +52,7 @@ YCMD:pomoc2(playerid, params[], help)
             SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw");
             SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /nitro /hydraulika /maluj /felga /zderzak /kolory /malunki /felgi");
         }
-		case JOB_BODYGUARD: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ochrona"); }
+		case JOB_SMUGGLER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /pancerz"); }
 		case JOB_GUNDEALER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
 		case JOB_DRIVER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /kurs /duty /businfo /trasa /zakoncztrase /zd "); }
 		// case JOB_RESERVED_4: { }

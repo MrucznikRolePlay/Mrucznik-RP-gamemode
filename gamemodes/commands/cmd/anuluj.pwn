@@ -35,7 +35,7 @@ YCMD:anuluj(playerid, params[], help)
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "|__________________ Cancel __________________|");
 		SendClientMessage(playerid, COLOR_WHITE, "U¯YJ: /anuluj [nazwa]");
-		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Wywiad, Tankowanie, Auto, Boks, Kontrakt");
+		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Pancerz, Wywiad, Tankowanie, Auto, Boks, Kontrakt");
 		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Taxi, Bus, Medyk, Mechanik, Mandat, Swiadek, Slub, Rozwod, taxicall");
 		SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
 		return 1;
@@ -44,7 +44,7 @@ YCMD:anuluj(playerid, params[], help)
 	else if(strcmp(x_job,"dragi",true) == 0) { DrugOffer[playerid] = 999; DrugPrice[playerid] = 0; DrugGram[playerid] = 0; }
 	else if(strcmp(x_job,"naprawa",true) == 0) {	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; }
 	else if(strcmp(x_job,"prawnik",true) == 0) { WantLawyer[playerid] = 0; CallLawyer[playerid] = 0; }
-	else if(strcmp(x_job,"ochrona",true) == 0) { GuardOffer[playerid] = 999; GuardPrice[playerid] = 0; }
+	else if(strcmp(x_job,"ochrona",true) == 0 || strcmp(x_job,"pancerz",true) == 0) { GuardOffer[playerid] = 999; GuardPrice[playerid] = 0; }
 	else if(strcmp(x_job,"wywiad",true) == 0) { LiveOffer[playerid] = 999; }
 	else if(strcmp(x_job,"tankowanie",true) == 0) { RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; }
 	else if(strcmp(x_job,"auto",true) == 0) { CarOffer[playerid] = 999; CarPrice[playerid] = 0; CarID[playerid] = 0; }

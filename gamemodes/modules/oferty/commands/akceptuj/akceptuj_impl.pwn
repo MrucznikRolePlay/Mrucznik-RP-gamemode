@@ -795,44 +795,11 @@ command_akceptuj_Impl(playerid, x_job[32])
         }
         
     }
-    else if(strcmp(x_job,"bodyguard",true) == 0 || strcmp(x_job,"ochrona",true) == 0)
+    else if(strcmp(x_job,"pancerz",true) == 0 ||strcmp(x_job,"ochrona",true) == 0)
     {
-        if(GuardOffer[playerid] < 999)
-        {
-            if(kaska[playerid] > GuardPrice[playerid] && GuardPrice[playerid] > 0)
-            {
-                if(IsPlayerConnected(GuardOffer[playerid]))
-                {
-                    GetPlayerName(GuardOffer[playerid], giveplayer, sizeof(giveplayer));
-                    GetPlayerName(playerid, sendername, sizeof(sendername));
-                    format(string, sizeof(string), "* Akceptowa³eœ ochronê, zap³aci³eœ $%d ochroniarzowi %s.",GuardPrice[playerid],giveplayer);
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                    format(string, sizeof(string), "* %s akceptowa³ twoj¹ oferte ochrony, $%d zostanie doliczone do twojej wyp³aty.",sendername,GuardPrice[playerid]);
-                    SendClientMessage(GuardOffer[playerid], COLOR_LIGHTBLUE, string);
-                    PlayerInfo[GuardOffer[playerid]][pPayCheck] += GuardPrice[playerid];
-                    ZabierzKase(playerid, GuardPrice[playerid]);
-                    SetPlayerArmour(playerid, 90);
-                    sendTipMessage(playerid, "Dosta³eœ kamizelkê kuloodporn¹ od ochroniarza.");
-                    Log(payLog, INFO, "%s kupi³ kamizelkê od %s za $%d", GetPlayerLogName(playerid), GetPlayerLogName(GuardOffer[playerid]), GuardPrice[playerid]);
-                    GuardOffer[playerid] = 999;
-                    GuardPrice[playerid] = 0;
-                    return 1;
-                }
-                return 1;
-            }
-            else
-            {
-                SendClientMessage(playerid, COLOR_GREY, "   Nie mo¿esz zaakceptowaæ ochrony !");
-                return 1;
-            }
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_GREY, "   Nikt nie zaoferowa³ ci ochrony !");
-            return 1;
-        }
+        command_akceptuj_pancerz(playerid);
     }
-    else if(strcmp(x_job,"drugs",true) == 0 || strcmp(x_job,"dragi",true) == 0)
+    else if(strcmp(x_job,"drugs",true) == 0 || strcmp(x_job,"dragi",true) == 0 || strcmp(x_job,"narkotyki",true) == 0)
     {
         if(DrugOffer[playerid] < 999)
         {
