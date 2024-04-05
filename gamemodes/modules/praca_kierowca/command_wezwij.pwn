@@ -29,7 +29,7 @@
 wezwij_taxi(playerid)
 {
     new string[MAX_MESSAGE_LENGTH];
-	if(TaxiDrivers < 0)
+	if(TaxiDrivers <= 0)
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma taksówkarzy, spróbuj póŸniej !");
 		return 1;
@@ -52,7 +52,7 @@ wezwij_taxi(playerid)
 wezwij_heli(playerid)
 {
     new string[MAX_MESSAGE_LENGTH];
-	if(HeliDrivers < 0)
+	if(HeliDrivers <= 0)
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma pilota, spróbuj póŸniej !");
 		return 1;
@@ -75,7 +75,7 @@ wezwij_heli(playerid)
 wezwij_bus(playerid)
 {
     new string[MAX_MESSAGE_LENGTH];
-	if(BusDrivers < 1)
+	if(BusDrivers <= 1)
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma kierowców autobusu, spróbuj póŸniej !");
 		return 1;

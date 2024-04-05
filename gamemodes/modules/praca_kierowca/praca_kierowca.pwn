@@ -148,6 +148,8 @@ Taxi_FareEnd(playerid)
 		Log(payLog, INFO, "%s zarobil $%d dla KT na s³u¿bie taksówkarza.", GetPlayerLogName(playerid), TransportMoney[playerid]);
     }
 	TransportValue[playerid] = 0; TransportMoney[playerid] = 0;
+	
+	SetPlayerToTeamColor(playerid);
 }
 
 Taxi_Pay(playerid)

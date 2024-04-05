@@ -47,7 +47,7 @@ command_kurs_Impl(playerid, price)
 			}
 			if(IsATaxi(vehicleid))
 			{
-                if(JobDuty[playerid] == 0) return sendTipMessageEx(playerid, COLOR_GREY, "Nie jestes na s³u¿bie!");
+                if(JobDuty[playerid] == 0 && IsPlayerInFraction(playerid, FRAC_KT)) return sendTipMessageEx(playerid, COLOR_GREY, "Nie jestes na s³u¿bie!");
 				moneys = price;
                 if(IsAMiniBus(vehicleid))
 		  	    {
@@ -88,6 +88,8 @@ command_kurs_Impl(playerid, price)
     				format(string, sizeof(string), "Taksówkarz %s jest na s³u¿bie wpisz /wezwij taxi aby skorzystaæ z jego us³ug, koszt %d$", sendername, TransportValue[playerid]);
     				OOCNews(COLOR_YELLOW,string);
                 }
+
+		    	SetPlayerColor(playerid, COLOR_YELLOW);
 			}
 			else if(IsAMiniBus(vehicleid))
 			{
