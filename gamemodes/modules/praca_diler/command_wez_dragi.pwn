@@ -31,7 +31,7 @@ diler_wez_dragi(playerid, weight)
         // no return on purpose
     }
 
-    if (!IsPlayerInDrugsTakingPoint(playerid))
+    if(!IsPlayerInDrugsTakingPoint(playerid))
     {
         MruMessageFail(playerid, "Nie jesteœ w miejscu, gdzie mo¿na braæ narkotyki!");
         return 1;

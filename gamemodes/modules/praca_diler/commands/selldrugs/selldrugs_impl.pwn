@@ -25,59 +25,59 @@
 //------------------<[ Implementacja: ]>-------------------
 command_selldrugs_Impl(playerid, giveplayerid, weight, price)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
-
-    if(IsPlayerConnected(playerid))
-    {
-	    if(PlayerInfo[playerid][pJob] != 4)
-	    {
-			sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ Dilerem Dragów!");
-			return 1;
-	    }
-        if(GetPVarInt(playerid, "wydragowany") > 0) return sendErrorMessage(playerid, "Dragi mo¿esz sprzedawaæ raz na minutê!");
-		if(weight < 1 || weight > 60) { SendClientMessage(playerid, COLOR_GREY, "   Iloœæ gram od 1 do 60!"); return 1; }
-		if(price < 1000 || price > 20000) { SendClientMessage(playerid, COLOR_GREY, "   Cena od 1000 do 20000!"); return 1; }
-		if(weight > PlayerInfo[playerid][pDrugs]) { SendClientMessage(playerid, COLOR_GREY, "   Nie masz a¿ tylu narkotyków przy sobie !"); return 1; }
-		if(IsPlayerConnected(giveplayerid))
-		{
-		    if(giveplayerid != INVALID_PLAYER_ID)
-		    {
-				if (ProxDetectorS(8.0, playerid, giveplayerid))
-				{
-				    if(giveplayerid == playerid)
-				    {
-				        sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz sprzedaæ dragów samemu sobie!");
-				        return 1;
-				    }
-				    GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-				    format(string, sizeof(string), "* Oferujesz %s sprzeda¿ %d gram za $%d .", giveplayer, weight, price);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "* Diler Dragów %s oferuje sprzeda¿ %d gram narkotyków za $%d, (wpisz /akceptuj dragi) aby kupiæ.", sendername, weight, price);
-					SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-					DrugOffer[giveplayerid] = playerid;
-					DrugPrice[giveplayerid] = price;
-					DrugGram[giveplayerid] = weight;
-				}
-				else
-				{
-				    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest przy tobie !");
-				}
-			}
-		}
-		else
-		{
-		    sendErrorMessage(playerid, "   Nie ma takiego gracza.");
-		}
+	if(GetPlayerJob(playerid) != JOB_DRUG_DEALER)
+	{
+		MruMessageFail(playerid, "Nie jesteœ dilerem narkotyków!");
+		return 1;
 	}
+
+	if(GetPVarInt(playerid, "wydragowany") > 0) 
+	{
+		MruMessageFail(playerid, "Narkotyki mo¿esz sprzedawaæ raz na 10 sekund!");
+		return 1;
+	}
+
+	if(weight < 1 || weight > 60) 
+	{ 
+		MruMessageFail(playerid, "Liczba gram od 1 do 60!"); 
+		return 1; 
+	}
+
+	if(price < 1000 || price > 20000) 
+	{ 
+		MruMessageFail(playerid, "Cena od 1000 do 20000!"); 
+		return 1; 
+	}
+
+	if(weight > PlayerInfo[playerid][pDrugs]) 
+	{ 
+		MruMessageFailF(playerid, "Masz przy sobie tylko %d narkotyków!", PlayerInfo[playerid][pDrugs]); 
+		return 1; 
+	}
+
+	if(!IsPlayerNear(playerid, giveplayerid))
+	{
+		MruMessageFail(playerid, "Ten gracz nie jest przy tobie !");
+		return 1;
+	}
+
+	if(giveplayerid == playerid)
+	{
+		MruMessageFail(playerid, "Nie mo¿esz sprzedaæ dragów samemu sobie!");
+		return 1;
+	}
+
+	DrugOffer[giveplayerid] = playerid;
+	DrugPrice[giveplayerid] = price;
+	DrugGram[giveplayerid] = weight;
+
+	MruMessageGoodInfoF(playerid, "* Oferujesz %s sprzeda¿ %d gram za $%d .", GetNick(giveplayerid), weight, price);
+	MruMessageGoodInfoF(giveplayerid, "* Diler Dragów %s oferuje sprzeda¿ %d gram narkotyków za $%d, (wpisz /akceptuj dragi) aby kupiæ.", GetNick(playerid), weight, price);
 	return 1;
 }
 
 command_akceptuj_drugs(playerid)
 {
-	new string[MAX_MESSAGE_LENGTH];
 	if(DrugOffer[playerid] < 999)
 	{
 		if(kaska[playerid] > DrugPrice[playerid] && DrugPrice[playerid] > 0)
@@ -91,17 +91,10 @@ command_akceptuj_drugs(playerid)
 						DrugGram[playerid] = 10 - PlayerInfo[playerid][pDrugs];
 					}
 
-					new sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
-					GetPlayerName(DrugOffer[playerid], giveplayer, sizeof(giveplayer));
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "* Kupi³eœ %d gram za $%d od Dilera Dragów %s. Aby je wzi¹æ wpisz /wezdragi.",DrugGram[playerid],DrugPrice[playerid],giveplayer);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					format(string, sizeof(string), "* %s kupi³ od ciebie %d gram, $%d zostanie dodane do twojej wyp³aty.",sendername,DrugGram[playerid],DrugPrice[playerid]);
-					SetPVarInt(DrugOffer[playerid], "wydragowany", 60);
-					SendClientMessage(DrugOffer[playerid], COLOR_LIGHTBLUE, string);
-					//
-					format(string, sizeof(string), "%s kupi³ dragi za $%d od %s", sendername, DrugPrice[playerid], giveplayer);
-					ABroadCast(COLOR_YELLOW,string,1);
+					MruMessageGoodInfoF(playerid, "* Kupi³eœ %d gram za $%d od Dilera Dragów %s. Aby je wzi¹æ wpisz /wezdragi.",DrugGram[playerid],DrugPrice[playerid], GetNick(DrugOffer[playerid]));
+					MruMessageGoodInfoF(DrugOffer[playerid], "* %s kupi³ od ciebie %d gram, $%d zostanie dodane do twojej wyp³aty.",GetNick(playerid),DrugGram[playerid],DrugPrice[playerid]);
+					SetPVarInt(DrugOffer[playerid], "wydragowany", 10);
+					
 					Log(payLog, INFO, "%s kupi³ od %s paczkê %d narkotyków za %d$", GetPlayerLogName(playerid), GetPlayerLogName(DrugOffer[playerid]), DrugGram[playerid], DrugPrice[playerid]);
 					//
 					PlayerInfo[DrugOffer[playerid]][pPayCheck] += DrugPrice[playerid];
