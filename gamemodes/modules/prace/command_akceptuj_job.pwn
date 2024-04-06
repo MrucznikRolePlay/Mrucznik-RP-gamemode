@@ -26,7 +26,7 @@
 //
 
 //------------------<[ obs³uga komendy /akceptuj: ]>--------------------
-command_akceptuj_job(playerid)
+command_akceptuj_praca(playerid)
 {
     new job = GettingJob[playerid];
     new bool:canTakeJob = true;
@@ -41,12 +41,9 @@ command_akceptuj_job(playerid)
                     canTakeJob = false;
                 }
             }
-            else
+            if(job != JOB_DRIVER)
             {
-                if(job != JOB_DRIVER)
-                {
-                    canTakeJob = false;
-                }
+                canTakeJob = false;
             }
         }
 

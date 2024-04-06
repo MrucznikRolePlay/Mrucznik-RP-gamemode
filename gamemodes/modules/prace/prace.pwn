@@ -25,7 +25,7 @@
 
 //
 
-#include "command_akceptuj_job.pwn"
+#include "command_akceptuj_praca.pwn"
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------

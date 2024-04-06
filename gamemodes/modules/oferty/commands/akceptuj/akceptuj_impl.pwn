@@ -659,7 +659,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job,"job",true) == 0 || strcmp(x_job,"praca",true) == 0)//prace dorywcze
     {
-        command_akceptuj_job(playerid);
+        command_akceptuj_praca(playerid);
     }
     else if(strcmp(x_job,"refill",true) == 0 || strcmp(x_job,"tankowanie",true) == 0)
     {
