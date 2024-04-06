@@ -48,7 +48,7 @@ GetClosestDrugDealer(playerid)
     new Float:distance;
     foreach(new i : Player)
     {
-        if(GetPlayerJob(i) == JOB_DRUG_DEALER && GetPVarInt(playerid, PVAR_DEALER_PRICE) != 0 && 
+        if(GetPlayerJob(i) == JOB_DRUG_DEALER && GetPVarInt(i, PVAR_DEALER_PRICE) != 0 && 
 			IsPlayerInAnyVehicle(i) && IsPlayerInDrugCar(i) && IsPlayerNear(playerid, i))
         {
 			new newDistance = GetDistanceBetweenPlayers(playerid,i);
