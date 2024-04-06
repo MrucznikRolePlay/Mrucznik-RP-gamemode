@@ -48,6 +48,11 @@ YCMD:zwiaz(playerid, params[], help)
 		sendTipMessageEx(playerid, COLOR_GREY, "Potrzebujesz 2 rangi aby zwi¹zywaæ ludzi !");
 		return 1;
 	}
+	if(GetPlayerJob(playerid) == JOB_DRIVER && TransportDuty[playerid] == 1)
+	{
+		MruMessageFail(playerid, "Nie mo¿esz zwi¹zywaæ ludzi bêd¹c taksówkarzem!");
+		return 1;
+	}
 
 	new giveplayerid;
 	if( sscanf(params, "k<fix>", giveplayerid))
