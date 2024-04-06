@@ -68,7 +68,7 @@ command_malunek_Impl(playerid, giveplayerid, paintjob)
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), paintjob, GetVehicleLogName(vehicleID), cost
     );
 
-    MruMessageInfoF(playerid, "Zrobi³eœ graczowi %s malunek samochodu (-%d$)", GetNick(giveplayerid), cost);
+    MruMessageGoodInfoF(playerid, "Zrobi³eœ graczowi %s malunek samochodu (-%d$)", GetNick(giveplayerid), cost);
     MruMessageGoodInfoF(giveplayerid, "Mechanik %s zrobi³ malunek na twoim %s", GetNick(playerid), VehicleNames[model-400]);
 
     ChatMePrefixed(playerid, "Mechanik", sprintf(

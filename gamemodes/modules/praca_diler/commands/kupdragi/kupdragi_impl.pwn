@@ -54,7 +54,7 @@ command_kupdragi_Impl(playerid, weight)
 
     // functionality
     ZabierzKase(playerid, price);
-    DajKase(dealerid, price);
+    DajKase(dealerid, price - DRUG_SELL_PRICE);
 
     IncreasePlayerJobSkill(dealerid, JOB_DRUG_DEALER, 1);
 
@@ -65,7 +65,7 @@ command_kupdragi_Impl(playerid, weight)
         GetPlayerLogName(playerid), GetPlayerLogName(dealerid), weight, price);
 
     MruMessageGoodInfoF(dealerid, "%s kupi³ od ciebie %d gram narkotyku za %d$.", GetNick(playerid), weight, price);
-    MruMessageInfoF(playerid, "Kupi³eœ od dilera %s %d gram narkotyku za %d$.", GetNick(dealerid), weight, price);
+    MruMessageGoodInfoF(playerid, "Kupi³eœ od dilera %s %d gram narkotyku za %d$.", GetNick(dealerid), weight, price);
     ChatMe(playerid, sprintf("odbiera zupe³nie niepodejrzanego loda od lodziarza %s", GetNick(playerid)));
 
     // zdemaskowanie

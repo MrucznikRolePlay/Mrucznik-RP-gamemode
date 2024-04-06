@@ -49,12 +49,18 @@ command_tankowanie_Impl(playerid, giveplayerid, price)
         return 1;
     }
 
+    if(price < 300 || price > 2500) 
+    {
+        MruMessageFail(playerid, "Cena od 300$ do 2500$!"); 
+        return 1;
+    }
+
     // offer
     RefillOffer[giveplayerid] = playerid;
     RefillPrice[giveplayerid] = price;
 
     // message
-    MruMessageInfoF(playerid, "Oferujesz %s zatankowanie jego auta za $%d .", GetNick(giveplayerid), price);
+    MruMessageGoodInfoF(playerid, "Oferujesz %s zatankowanie jego auta za $%d .", GetNick(giveplayerid), price);
     MruMessageGoodInfoF(giveplayerid, "Mechanik %s proponuje ci dotankowanie twojego auta za $%d, (wpisz /akceptuj tankowanie) aby akceptowaæ.", GetNick(playerid), price);
 
     // anty-spam

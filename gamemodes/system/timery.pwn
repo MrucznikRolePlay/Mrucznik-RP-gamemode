@@ -1797,7 +1797,7 @@ public CustomPickups()
         mystate = GetPlayerState(i);
 		if (IsPlayerInRangeOfPoint(i, 2.0, 323.0342,1118.5804,1083.8828))
 		{//Buyable Drugs for Drug Dealers
-			GameTextForPlayer(i, "~w~Wpisz /get dragi aby wziasc ~r~Dragi~y~~n~Dostosowane do twojego skillu", 5000, 3);
+			GameTextForPlayer(i, "~w~Wpisz /get dragi aby wziac ~r~Dragi~y~ na sprzedaz~n~Dostosowane do twojego skillu", 5000, 3);
 		}
 		else if (IsPlayerInRangeOfPoint(i, 3, 1481.1531,-1770.0277,18.7958))
 		{

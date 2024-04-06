@@ -66,7 +66,7 @@ command_felga_Impl(playerid, giveplayerid, felga)
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), felga, GetVehicleLogName(vehicleID), cost
     );
 
-    MruMessageInfoF(playerid, "Zamontowa³eœ nowe felgi graczowi %s (koszt -%d$)", GetNick(giveplayerid), cost);
+    MruMessageGoodInfoF(playerid, "Zamontowa³eœ nowe felgi graczowi %s (koszt -%d$)", GetNick(giveplayerid), cost);
     MruMessageGoodInfoF(giveplayerid, "Mechanik %s zamontowa³ ci w twoim %s nowe felgi", GetNick(playerid), VehicleNames[GetVehicleModel(vehicleID)-400]);
 
     ChatMePrefixed(playerid, "Mechanik", sprintf(

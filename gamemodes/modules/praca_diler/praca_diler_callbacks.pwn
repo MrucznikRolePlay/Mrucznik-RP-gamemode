@@ -33,6 +33,7 @@ DrugDealer_OnPlayerExitVehicle(playerid, vehicleid)
 	if(GetPVarInt(playerid, PVAR_DEALER_PRICE) != 0)
 	{
 		DisableDrugDealing(playerid, vehicleid);
+		MruMessageBadInfo(playerid, "Przesta³eœ sprzedawaæ narkotyki.");
 	}
 	return 1;
 }

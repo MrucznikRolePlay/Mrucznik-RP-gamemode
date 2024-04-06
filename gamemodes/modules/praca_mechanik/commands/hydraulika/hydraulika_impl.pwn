@@ -57,7 +57,7 @@ command_hydraulika_Impl(playerid, giveplayerid)
         GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetVehicleLogName(vehicleID), cost
     );
 
-    MruMessageInfoF(playerid, "Zamontowa³eœ graczowi %s hydraulike (-%d$)", GetNick(giveplayerid), cost);
+    MruMessageGoodInfoF(playerid, "Zamontowa³eœ graczowi %s hydraulike (-%d$)", GetNick(giveplayerid), cost);
     MruMessageGoodInfoF(giveplayerid, "Mechanik %s zamontowa³ hydraulike w twoim samochodzie", GetNick(playerid));
 
     ChatMePrefixed(playerid, "Mechanik", sprintf(

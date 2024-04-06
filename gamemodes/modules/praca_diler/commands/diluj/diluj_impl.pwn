@@ -37,14 +37,16 @@ command_diluj_Impl(playerid, price)
         return 1;
     }
 
-    if(price < 100 || price > 20000) 
+    if(price < DRUG_SELL_PRICE || price > DRUG_SELL_MAX_PRICE) 
     {
-        MruMessageFail(playerid, "Stawka za gram narkotyku musi byæ od 100$ do 20 000$.");
+        MruMessageFail(playerid, "Stawka za gram narkotyku musi byæ od "DRUG_SELL_PRICE"$ do "DRUG_SELL_MAX_PRICE"$.");
         return 1;
     }
 
     new vehicleid = GetPlayerVehicleID(playerid);
     EnableDrugDealing(playerid, vehicleid, price);
+
+	MruMessageGoodInfoF(playerid, "Aktywowa³eœ sprzeda¿ narkotyków za %d$ per gram. Za ka¿dy sprzedany gram ponosisz koszt "DRUG_SELL_PRICE"$", price);
     return 1;
 }
 

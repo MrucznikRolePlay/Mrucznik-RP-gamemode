@@ -48,6 +48,9 @@ command_zderzaki_Impl(playerid, giveplayerid)
         return 1;
     }
 
+    MruMessageGoodInfoF(playerid, "Proponujesz graczowi %s zamontowanie zderzaków.", GetNick(giveplayerid));
+    MruMessageGoodInfoF(giveplayerid, "Mechanik %s proponuje Tobie zamontowanie zderzaków.", GetNick(playerid));
+
     mechanikid[playerid] = giveplayerid;
     new model = GetVehicleModel(GetPlayerVehicleID(giveplayerid));
     if(model >= 558 && model <= 562 || model == 565)//alien i x-flow

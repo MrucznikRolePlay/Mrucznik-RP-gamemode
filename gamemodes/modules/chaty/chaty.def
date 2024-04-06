@@ -24,12 +24,12 @@
 //------------------<[ Makra: ]>-------------------
 //Wiadomoœci serwerowe:
 #define MruMessageError(%0,%1) 			MruMessage(%0,COLOR_WHITE,"[ERROR] {C00010}"%1)
-#define MruMessageFail(%0,%1) 			MruMessage(%0,COLOR_FAIL,"  *"%1)
-#define MruMessageWarning(%0,%1) 		MruMessage(%0,COLOR_WARN," **"%1)
-#define MruMessageInfo(%0,%1) 			MruMessage(%0,COLOR_INFO,"   "%1)
-#define MruMessageGoodInfo(%0,%1) 		MruMessage(%0,COLOR_GINFO,"   "%1)
-#define MruMessageBadInfo(%0,%1) 		MruMessage(%0,COLOR_BINFO,"   "%1)
-#define MruMessageOffer(%0,%1) 		    MruMessage(%0,COLOR_OFERTA," **"%1)
+#define MruMessageFail(%0,%1) 			MruMessage(%0,COLOR_FAIL," * "%1)
+#define MruMessageWarning(%0,%1) 		MruMessage(%0,COLOR_WHITE,"[WARNING] {F09040}"%1)
+#define MruMessageInfo(%0,%1) 			MruMessage(%0,COLOR_INFO," * "%1)
+#define MruMessageGoodInfo(%0,%1) 		MruMessage(%0,COLOR_GINFO," * "%1)
+#define MruMessageBadInfo(%0,%1) 		MruMessage(%0,COLOR_BINFO," * "%1)
+#define MruMessageOffer(%0,%1) 		    MruMessage(%0,COLOR_OFERTA," ** "%1)
 #define MruMessagePunishment(%0,%1) 	MruMessage(%0,COLOR_KARA,"AdmCmd: "%1)
 #define MruMessageSkillInfo(%0,%1) 		MruMessage(%0,COLOR_SKILL_INFO,"   "%1)
 #define CMDHelp(%0,%1) 				    SendClientMessage(%0,COLOR_CMDHELP,"[POMOC] "%1)
@@ -67,7 +67,7 @@
 #define COLOR_ERROR		0xC00010FF	//Ciemny Czerwony
 #define COLOR_FAIL		0xCBCCCEFF	//Szary (GRAD3)
 #define COLOR_WARN		0xF09040FF	//Pomarañczowy
-#define COLOR_INFO		0xB4B5B7FF	//Szary (GRAD1)
+#define COLOR_INFO		0xFFFFFFAA	//Bia³y
 #define COLOR_GINFO		0x33CCFFAA	//Jasnoniebieski
 #define COLOR_BINFO		0xFF6347AA	//Jasnoczerwony
 #define COLOR_OFERTA	0xDDA0DDFF	//Miêtowy

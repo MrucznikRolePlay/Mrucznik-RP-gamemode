@@ -484,7 +484,7 @@ choroby_InitEffects()
 
     // Pod wp³ywem narkotyku
     AddEffect(DRUG_GOOD, "NarkotycznyBuff", "",
-        30, 15, // co 15-45s
+        30_000, 15_000, // co 15-45s
         false, 0.0, 0, 
         0
     );

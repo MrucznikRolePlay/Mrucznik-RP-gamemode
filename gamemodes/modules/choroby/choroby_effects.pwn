@@ -466,8 +466,8 @@ timer AddingArmor[500](playerid, uid, armorBuff)
 		return;
 	}
 
-	SetPlayerHealth(playerid, armor+1);
-	defer AddingHP(playerid, uid, armorBuff-1);
+	SetPlayerArmour(playerid, armor+1);
+	defer AddingArmor(playerid, uid, armorBuff-1);
 }
 
 timer HallucinationsOff[60000](playerid)
@@ -557,6 +557,7 @@ public NarkotycznyBuff(playerid, disease, value)
 		return;
 	
 	PlayerPlaySound(playerid, 5202, 0.0, 0.0, 0.0);
+	ChatMe(playerid, "regeneruje siê dziêki narkotykom zawartym w jego organizmie.");
 
 	new buff = 10;
 	if(IsPlayerSick(playerid, DRUG_ADDICT))

@@ -57,7 +57,7 @@ command_sprzedajzestaw_Impl(playerid, giveplayerid)
 
     SetPVarInt(giveplayerid, "FixKitOffer", playerid);
 
-    MruMessageInfoF(playerid, "Proponujesz %s kupno zestawu za 15000$.", GetNick(giveplayerid));
+    MruMessageGoodInfoF(playerid, "Proponujesz %s kupno zestawu za 15000$.", GetNick(giveplayerid));
     MruMessageGoodInfoF(giveplayerid, "Mechanik %s proponuje Ci kupno zestawu za 15000$. Wpisz /akceptuj zestaw, by zaakceptowaæ.", GetNick(playerid));
     
     SetTimerEx("AntySpamTimer",10000,0,"d",playerid);

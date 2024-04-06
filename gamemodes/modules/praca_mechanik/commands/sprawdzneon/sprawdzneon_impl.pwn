@@ -96,7 +96,8 @@ command_sprawdzneon_Impl(playerid, giveplayerid)
     }
     ProxDetector(10.0, playerid, string, COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 
-    MruMessageInfoF(playerid, "Pomog³eœ %s w sprawdzeniu neonów!", GetNick(giveplayerid));
+    MruMessageGoodInfoF(playerid, "Pomog³eœ %s w sprawdzeniu neonów!", GetNick(giveplayerid));
+    MruMessageGoodInfoF(giveplayerid, "%s pomóg³ Ci w sprawdzeniu neonów!", GetNick(playerid));
    
     IncreasePlayerJobSkill(playerid, JOB_MECHANIC, 1);
     

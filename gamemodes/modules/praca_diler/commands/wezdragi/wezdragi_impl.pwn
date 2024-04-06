@@ -39,12 +39,12 @@ command_wezdragi_Impl(playerid)
 
     if(gettime() - GetPVarInt(playerid, "lastDamage") < 60)
     {
-        sendErrorMessage(playerid, "Nie mo¿esz braæ narkotyków podczas walki!");
+        MruMessageFail(playerid, "Nie mo¿esz braæ narkotyków podczas walki (60 sekund po otrzymaniu obra¿eñ)!");
         return 1;
     }
 
-	new Float:hpBuff = 10.0 * (PlayerInfo[playerid][pDrugPerk] + 1);
-	new Float:armorBuff = 10.0 * (PlayerInfo[playerid][pDrugPerk] + 1);
+	new Float:hpBuff = 10.0 + 10 * (PlayerInfo[playerid][pDrugPerk] + 1);
+	new Float:armorBuff = 10.0 + 10 * (PlayerInfo[playerid][pDrugPerk] + 1);
 
 	new Float:hp, Float:armor;
 	GetPlayerHealth(playerid, hp);
@@ -52,8 +52,16 @@ command_wezdragi_Impl(playerid)
 
 	new Float:newHp = hp + hpBuff;
 	new Float:newArmor = armor + armorBuff;
-	if(newHp > 100.0) newHp = 100.0;
-	if(newArmor > 100.0) newArmor = 100.0;
+	if(newHp > 100.0) 
+	{
+		hpBuff = 100.0 - hp;
+		newHp = 100.0;
+	}
+	if(newArmor > 100.0)
+	{
+		armorBuff = 100.0 - armor;
+		newArmor = 100.0;
+	}
 
 	SetPlayerHealth(playerid, newHp);
 	SetPlayerArmour(playerid, newArmor);
@@ -61,7 +69,7 @@ command_wezdragi_Impl(playerid)
 
 	PlayerInfo[playerid][pDrugs] -= 1;
 
-	MruMessageGoodInfoF(playerid, "Za¿y³eœ 1 gram narkotyków, dostajesz %.0f HP i %.0f pancerza.", hpBuff, armorBuff);
+	MruMessageGoodInfoF(playerid, "Za¿y³eœ 1 gram narkotyków, dostajesz %.0f HP i %.0f pancerza. (aby przestaæ paliæ, naciœnij enter)", hpBuff, armorBuff);
 	ChatMe(playerid, "za¿ywa narkotyk.");
 
 	// efekty

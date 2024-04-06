@@ -55,10 +55,16 @@ command_napraw_Impl(playerid, giveplayerid, price)
         return 1; 
     }
 
+    if(price < 800 || price > 4000) 
+    {
+        MruMessageFail(playerid, "Cena od 800$ do 4000$!"); 
+        return 1;
+    }
+
     RepairOffer[giveplayerid] = playerid;
     RepairPrice[giveplayerid] = price;
 
-    MruMessageInfoF(playerid, "Oferujesz %s naprawê wozu za $%d .", GetNick(giveplayerid), price);
+    MruMessageGoodInfoF(playerid, "Oferujesz %s naprawê wozu za $%d .", GetNick(giveplayerid), price);
     MruMessageGoodInfoF(giveplayerid, "* Mechanik %s proponuje naprawê twojego wozu za $%d, (wpisz /akceptuj naprawe) aby akceptowaæ.", GetNick(playerid), price);
     
     SpamujeMechanik[playerid] = 1;
