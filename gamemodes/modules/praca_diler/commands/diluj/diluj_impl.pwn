@@ -39,7 +39,7 @@ command_diluj_Impl(playerid, price)
 
     if(price < DRUG_SELL_PRICE || price > DRUG_SELL_MAX_PRICE) 
     {
-        MruMessageFailF(playerid, "Stawka za gram narkotyku musi byæ od %d$ do %d$.", DRUG_SELL_PRICE, DRUG_SELL_MAX_PRICE);
+        MruMessageFailV(playerid, "Stawka za gram narkotyku musi byæ od %d$ do %d$.", DRUG_SELL_PRICE, DRUG_SELL_MAX_PRICE);
         return 1;
     }
 

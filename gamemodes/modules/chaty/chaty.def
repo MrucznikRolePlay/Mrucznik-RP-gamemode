@@ -24,34 +24,37 @@
 //------------------<[ Makra: ]>-------------------
 //Wiadomoœci serwerowe:
 #define MruMessageError(%0,%1) 			MruMessage(%0,COLOR_WHITE,"[ERROR] {C00010}"%1)
-#define MruMessageFail(%0,%1) 			MruMessage(%0,COLOR_FAIL," * "%1)
 #define MruMessageWarning(%0,%1) 		MruMessage(%0,COLOR_WHITE,"[WARNING] {F09040}"%1)
-#define MruMessageInfo(%0,%1) 			MruMessage(%0,COLOR_INFO," * "%1)
-#define MruMessageGoodInfo(%0,%1) 		MruMessage(%0,COLOR_GINFO," * "%1)
-#define MruMessageBadInfo(%0,%1) 		MruMessage(%0,COLOR_BINFO," * "%1)
-#define MruMessageOffer(%0,%1) 		    MruMessage(%0,COLOR_OFERTA," ** "%1)
+#define MruMessageFail(%0,%1) 			MruMessage(%0,COLOR_FAIL,"»» "%1)
+#define MruMessageTip(%0,%1) 			MruMessage(%0,COLOR_TIP,"»» "%1)
+#define MruMessageInfo(%0,%1) 			MruMessage(%0,COLOR_INFO,"»» "%1)
+#define MruMessageGoodInfo(%0,%1) 		MruMessage(%0,COLOR_GINFO,"»» "%1)
+#define MruMessageBadInfo(%0,%1) 		MruMessage(%0,COLOR_BINFO,"»» "%1)
+#define MruMessageOffer(%0,%1) 		    MruMessage(%0,COLOR_OFERTA,"** "%1)
 #define MruMessagePunishment(%0,%1) 	MruMessage(%0,COLOR_KARA,"AdmCmd: "%1)
 #define MruMessageSkillInfo(%0,%1) 		MruMessage(%0,COLOR_SKILL_INFO,"   "%1)
 #define CMDHelp(%0,%1) 				    SendClientMessage(%0,COLOR_CMDHELP,"[POMOC] "%1)
 #define CMDInfo(%0,%1) 				    SendClientMessage(%0,COLOR_CMDHELP,%1)
 //Wiadomoœci serwerowe za pomoc¹ zmiennej:
 #define MruMessageErrorV(%0,%1) 		MruMessageF(%0,COLOR_WHITE,"[ERROR] {C00010}%s",%1)
-#define MruMessageFailV(%0,%1) 			MruMessageF(%0,COLOR_FAIL,"  *%s",%1)
-#define MruMessageWarningV(%0,%1) 		MruMessageF(%0,COLOR_WARN," **%s",%1)
-#define MruMessageInfoV(%0,%1) 			MruMessageF(%0,COLOR_INFO,"   %s",%1)
-#define MruMessageGoodInfoV(%0,%1) 		MruMessageF(%0,COLOR_GINFO,"   %s",%1)
-#define MruMessageBadInfoV(%0,%1) 		MruMessageF(%0,COLOR_BINFO,"   %s",%1)
-#define MruMessageOfferV(%0,%1) 		MruMessageF(%0,COLOR_OFERTA," **%s",%1)
+#define MruMessageWarningV(%0,%1) 		MruMessageF(%0,COLOR_WHITE,"[WARNING] {F09040}%s",%1)
+#define MruMessageFailV(%0,%1) 			MruMessageF(%0,COLOR_FAIL,"»» %s",%1)
+#define MruMessageTipV(%0,%1) 			MruMessageF(%0,COLOR_TIP,"»» %s",%1)
+#define MruMessageInfoV(%0,%1) 			MruMessageF(%0,COLOR_INFO,"»» %s",%1)
+#define MruMessageGoodInfoV(%0,%1) 		MruMessageF(%0,COLOR_GINFO,"»» %s",%1)
+#define MruMessageBadInfoV(%0,%1) 		MruMessageF(%0,COLOR_BINFO,"»» %s",%1)
+#define MruMessageOfferV(%0,%1) 		MruMessageF(%0,COLOR_OFERTA,"** %s",%1)
 #define MruMessagePunishmentV(%0,%1) 	MruMessageF(%0,COLOR_KARA,"AdmCmd: %s",%1)
 #define MruMessageSkillInfoV(%0,%1) 	MruMessageF(%0,COLOR_SKILL_INFO,"   %s",%1)
 //Wiadomoœci serwerowe sformatowane:
 #define MruMessageErrorF(%0,%1,%2) 		MruMessageF(%0,COLOR_WHITE,"[ERROR] {C00010}"%1,%2)
-#define MruMessageFailF(%0,%1,%2) 		MruMessageF(%0,COLOR_FAIL,"  *"%1,%2)
-#define MruMessageWarningF(%0,%1,%2) 	MruMessageF(%0,COLOR_WARN," **"%1,%2)
-#define MruMessageInfoF(%0,%1,%2) 		MruMessageF(%0,COLOR_INFO,"   "%1,%2)
-#define MruMessageGoodInfoF(%0,%1,%2) 	MruMessageF(%0,COLOR_GINFO,"   "%1,%2)
-#define MruMessageBadInfoF(%0,%1,%2) 	MruMessageF(%0,COLOR_BINFO,"   "%1,%2)
-#define MruMessageOfferF(%0,%1,%2) 	    MruMessageF(%0,COLOR_OFERTA," **"%1,%2)
+#define MruMessageWarningF(%0,%1,%2) 	MruMessageF(%0,COLOR_WHITE,"[WARNING] {F09040}"%1,%2)
+#define MruMessageFailF(%0,%1,%2) 		MruMessageF(%0,COLOR_FAIL,"»» "%1,%2)
+#define MruMessageTipF(%0,%1,%2) 		MruMessageF(%0,COLOR_TIP,"»» "%1,%2)
+#define MruMessageInfoF(%0,%1,%2) 		MruMessageF(%0,COLOR_INFO,"»» "%1,%2)
+#define MruMessageGoodInfoF(%0,%1,%2) 	MruMessageF(%0,COLOR_GINFO,"»» "%1,%2)
+#define MruMessageBadInfoF(%0,%1,%2) 	MruMessageF(%0,COLOR_BINFO,"»» "%1,%2)
+#define MruMessageOfferF(%0,%1,%2) 	    MruMessageF(%0,COLOR_OFERTA,"** "%1,%2)
 #define MruMessagePunishmentF(%0,%1,%2) MruMessageF(%0,COLOR_KARA,"AdmCmd: "%1,%2)
 #define MruMessageSkillInfoF(%0,%1,%2) 	MruMessageF(%0,COLOR_SKILL_INFO,"   "%1,%2)
 
@@ -65,7 +68,8 @@
 #define MAX_MESSAGE_LENGHT 			144 		//maksymalna liczba znaków jaka mo¿e zostaæ wyœwietlona na ekranie
 
 #define COLOR_ERROR		0xC00010FF	//Ciemny Czerwony
-#define COLOR_FAIL		0xCBCCCEFF	//Szary (GRAD3)
+#define COLOR_FAIL		0xFF6347AA	//Jasnoczerwony (COLOR_LIGHTRED)
+#define COLOR_TIP		0xCBCCCEFF	//Szary (GRAD3)
 #define COLOR_WARN		0xF09040FF	//Pomarañczowy
 #define COLOR_INFO		0xFFFFFFAA	//Bia³y
 #define COLOR_GINFO		0x33CCFFAA	//Jasnoniebieski

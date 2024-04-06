@@ -44,9 +44,9 @@ IsPlayerInDrugCar(playerid)
 
 IsPlayerInDrugsTakingPoint(playerid)
 {
-	for(new i; i<sizeof(DrugsTakingPoints); i++)
+	for(new i=0; i<sizeof(DrugsTakingPoints); i++)
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, DrugsTakingPoints[i][0], DrugsTakingPoints[i][1], DrugsTakingPoints[i][2]))
+		if(IsPlayerInRangeOfPoint(playerid, 7.0, DrugsTakingPoints[i][0], DrugsTakingPoints[i][1], DrugsTakingPoints[i][2]))
 		{
 			return 1;
 		}
@@ -57,7 +57,7 @@ IsPlayerInDrugsTakingPoint(playerid)
 GetClosestDrugDealer(playerid)
 {
     new dealerid = INVALID_PLAYER_ID;
-    new Float:distance;
+    new Float:distance = 99999.0;
     foreach(new i : Player)
     {
         if(GetPlayerJob(i) == JOB_DRUG_DEALER && GetPVarInt(i, PVAR_DEALER_PRICE) != 0 && 
@@ -82,7 +82,7 @@ EnableDrugDealing(playerid, vehicleid, price)
 
 	SetPVarInt(playerid, PVAR_DEALER_PRICE, price);
 
-	new text3d = CreateDynamic3DTextLabel(sprintf("Cennik lodów:\n1 ga³ka - %d$\n\n((wpisz /kupdragi aby kupiæ narkotyki))", price), 
+	new STREAMER_TAG_3D_TEXT_LABEL:text3d = CreateDynamic3DTextLabel(sprintf("Cennik lodów:\n1 ga³ka - %d$\n\n((wpisz /kupdragi aby kupiæ narkotyki))", price), 
 		COLOR_VIOLET, 0.0, 0.0, 0.3, 10.0, INVALID_PLAYER_ID, vehicleid);
 	MAP_insert_val_val(VehicleDrugInfo, _:vehicleid, text3d);
 
@@ -92,7 +92,7 @@ EnableDrugDealing(playerid, vehicleid, price)
 
 DisableDrugDealing(playerid, vehicleid)
 {
-	new text3d = MAP_get_val_val(PremiumRequestToPlayerID, _:vehicleid);
+	new text3d = MAP_get_val_val(VehicleDrugInfo, _:vehicleid);
 	MAP_remove_val(VehicleDrugInfo, _:vehicleid);
 	DestroyDynamic3DTextLabel(text3d);
 

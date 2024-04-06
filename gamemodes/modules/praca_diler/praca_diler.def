@@ -23,8 +23,6 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define DRUG_SELL_PRICE 1000
-#define DRUG_SELL_MAX_PRICE 20000
 #define PVAR_DEALER_PRICE "dealer_price"
 
 //end

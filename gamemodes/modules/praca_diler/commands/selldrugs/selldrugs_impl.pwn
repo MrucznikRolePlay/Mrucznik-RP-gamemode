@@ -37,8 +37,8 @@ command_selldrugs_Impl(playerid, giveplayerid, weight, price)
 			return 1;
 	    }
         if(GetPVarInt(playerid, "wydragowany") > 0) return sendErrorMessage(playerid, "Dragi mo¿esz sprzedawaæ raz na minutê!");
-		if(weight < 1 || weight > 99) { SendClientMessage(playerid, COLOR_GREY, "   Iloœæ gram od 1 do 60!"); return 1; }
-		if(price < 1 || price > 9999) { SendClientMessage(playerid, COLOR_GREY, "   Cena od 1 do 9999!"); return 1; }
+		if(weight < 1 || weight > 60) { SendClientMessage(playerid, COLOR_GREY, "   Iloœæ gram od 1 do 60!"); return 1; }
+		if(price < 1000 || price > 20000) { SendClientMessage(playerid, COLOR_GREY, "   Cena od 1000 do 20000!"); return 1; }
 		if(weight > PlayerInfo[playerid][pDrugs]) { SendClientMessage(playerid, COLOR_GREY, "   Nie masz a¿ tylu narkotyków przy sobie !"); return 1; }
 		if(IsPlayerConnected(giveplayerid))
 		{

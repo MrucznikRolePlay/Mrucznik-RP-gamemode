@@ -43,7 +43,6 @@ diler_wez_dragi(playerid, weight)
         MruMessageFailF(playerid, "Potrzebujesz %d$ aby kupiæ tak¹ iloœæ narkotyków!", price);
         return 1;
     }
-    
 
     MruMessageGoodInfoF(playerid, "Kupi³eœ %d gram dragów za $%d.", weight, price);
     ZabierzKase(playerid, price);

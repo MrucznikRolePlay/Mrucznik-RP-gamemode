@@ -33,7 +33,7 @@ command_wezdragi_Impl(playerid)
 
 	if(PlayerInfo[playerid][pDrugs] <= 0)
 	{
-		MruMessageFail(playerid, "Nie masz ju¿ wiêcej narkotyków.");
+		MruMessageFail(playerid, "Nie masz przy sobie narkotyków.");
 		return 1;
 	}
 
