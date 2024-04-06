@@ -42,6 +42,18 @@ IsPlayerInDrugCar(playerid)
 	return 0;
 }
 
+IsPlayerInDrugsTakingPoint(playerid)
+{
+	for(new i; i<sizeof(); i++)
+	{
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, DrugsTakingPoints[i][0], DrugsTakingPoints[i][1], DrugsTakingPoints[i][2]))
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
+
 GetClosestDrugDealer(playerid)
 {
     new dealerid = INVALID_PLAYER_ID;
