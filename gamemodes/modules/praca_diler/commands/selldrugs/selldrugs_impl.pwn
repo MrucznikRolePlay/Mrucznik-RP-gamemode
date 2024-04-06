@@ -82,10 +82,15 @@ command_akceptuj_drugs(playerid)
 	{
 		if(kaska[playerid] > DrugPrice[playerid] && DrugPrice[playerid] > 0)
 		{
-			if(PlayerInfo[playerid][pDrugs] < 7)
+			if(PlayerInfo[playerid][pDrugs] < 10)
 			{
 				if(IsPlayerConnected(DrugOffer[playerid]))
 				{
+					if(PlayerInfo[playerid][pDrugs] + DrugGram[playerid] > 10)
+					{
+						DrugGram[playerid] = 10 - PlayerInfo[playerid][pDrugs];
+					}
+
 					new sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 					GetPlayerName(DrugOffer[playerid], giveplayer, sizeof(giveplayer));
 					GetPlayerName(playerid, sendername, sizeof(sendername));

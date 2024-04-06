@@ -665,8 +665,6 @@ new MarryWitness[MAX_PLAYERS];
 new MarryWitnessOffer[MAX_PLAYERS];
 new TicketOffer[MAX_PLAYERS];
 new TicketMoney[MAX_PLAYERS];
-new PlayerStoned[MAX_PLAYERS];
-new PlayerStonedStop[MAX_PLAYERS];
 new AntySpawnBroni[MAX_PLAYERS];
 new AntyWlamSejf[MAX_PLAYERS];
 new FishCount[MAX_PLAYERS];
@@ -1148,7 +1146,7 @@ ZerujZmienne(playerid)
  	gGas[playerid] = 0; GUIExit[playerid] = 0; gMuteDepo[playerid] = 0;
 	gPlayerLogged[playerid] = 0; gPlayerLogTries[playerid] = 0; gPlayerAccount[playerid] = 0;
 	gPlayerSpawned[playerid] = 0; PlayerKarting[playerid] = 0; PlayerInKart[playerid] = 0;
-	PlayerTazeTime[playerid] = 0; PlayerStoned[playerid] = 0; PlayerStonedStop[playerid] = 0;
+	PlayerTazeTime[playerid] = 0;
 	StartTime[playerid] = 0; TicketOffer[playerid] = 999; TicketMoney[playerid] = 0;
 	MatsHolding[playerid] = 0; TutTime[playerid] = 0; stareVHP[playerid] = 0;
 	gPlayerMission[playerid] = 0; vKickEx[playerid] = 0;

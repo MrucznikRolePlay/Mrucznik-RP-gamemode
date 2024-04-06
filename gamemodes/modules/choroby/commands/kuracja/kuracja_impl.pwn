@@ -107,6 +107,12 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
         ShowDiseaseList(playerid);
         return 1;
     }
+
+    if(DiseaseData[diseaseID][CureCost] == 0)
+    {
+        sendErrorMessage(playerid, "Tej choroby nie da siê wyleczyæ.");
+        return 1;
+    }
     
     if(!IsPlayerNear(playerid, giveplayerid))
     {

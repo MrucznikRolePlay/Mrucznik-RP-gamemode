@@ -2796,25 +2796,6 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-		if(PlayerStoned[i] >= 2)
-		{
-			PlayerStoned[i] += 1;
-			if(PlayerStoned[i] == 20)
-			{
-				if(PlayerStonedStop[i] >= 600)
-				{
-					PlayerStoned[i] = 1;
-					PlayerStonedStop[i] = 0;
-				}
-				else
-				{
-					PlayerStoned[i] = 2;
-					PlayerStonedStop[i] ++;
-				}
-				SetPlayerDrunkLevel(i, GetPlayerDrunkLevel(i)+2000);
-				SetPlayerSpecialAction(i, SPECIAL_ACTION_SMOKE_CIGGY);
-			}
-		}
 		if(PlayerInfo[i][pCarTime] > 0)
 		{
 			if(PlayerInfo[i][pCarTime] <= 0)

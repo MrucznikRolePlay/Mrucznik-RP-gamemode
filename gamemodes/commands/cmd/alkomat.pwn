@@ -50,14 +50,9 @@ YCMD:alkomat(playerid, params[], help)
 				new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 				GetPlayerName(giveplayerid,giveplayer, sizeof(giveplayer));
 				GetPlayerName(playerid,sendername, sizeof(sendername));
-				if(PlayerStoned[giveplayerid] >= 1 && PlayerStoned[giveplayerid] <= 2)
+				if(IsPlayerSick(playerid, DRUG_GOOD))
 				{
-					format(string, sizeof(string), "Gracz %s jest pod wp造wem narkotyk闚 (ma這).", giveplayer);
-					SendClientMessage(playerid, COLOR_LIGHTRED, string);
-				}
-				else if(PlayerStoned[giveplayerid] >= 3)
-				{
-					format(string, sizeof(string), "Gracz %s jest pod wp造wem narkotyk闚 (du穎).", giveplayer);
+					format(string, sizeof(string), "Gracz %s jest pod wp造wem narkotyk闚.", giveplayer);
 					SendClientMessage(playerid, COLOR_LIGHTRED, string);
 				}
 				else
