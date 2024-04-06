@@ -24,17 +24,17 @@ diler_wez_dragi(playerid, weight)
         return 1;
     }
 
-    if(currentDrugs + weight > maxDrugs)
-    {
-        weight = maxDrugs - currentDrugs;
-        MruMessageFailF(playerid, "Jako diler narkotyków skillu %d, mo¿esz mieæ przy sobie tylko %d narkotyków, wiêc bierzesz %d gram.", skill, maxDrugs, weight);
-        // no return on purpose
-    }
-
     if(!IsPlayerInDrugsTakingPoint(playerid))
     {
         MruMessageFail(playerid, "Nie jesteœ w miejscu, gdzie mo¿na braæ narkotyki!");
         return 1;
+    }
+
+    if(currentDrugs + weight > maxDrugs)
+    {
+        weight = maxDrugs - currentDrugs;
+        MruMessageTipF(playerid, "Jako diler narkotyków skillu %d, mo¿esz mieæ przy sobie tylko %d narkotyków, wiêc bierzesz %d gram.", skill, maxDrugs, weight);
+        // no return on purpose
     }
     
     new price = weight * DRUG_SELL_PRICE;
