@@ -103,6 +103,8 @@
 #define KOLOR_BEZOWY 0xFFFFA6FF
 #define KOLOR_BORDOWY 0x800000FF
 #define COLOR_GOLD 0xFCAD43FF
+#define COLOR_VIOLET 0x9955DEEE
+
 #define ADMIN 				"{FF6A6A}"
 #define MAPA 				"{88FFFF}"
 #define AC 					"{FF80C0}"

@@ -1106,11 +1106,6 @@ static Aliases()
 	//sprzedajmaterialy
 	Command_AddAltNamed("sprzedajmaterialy", "sprzedajmats");
 
-	//sprzedajnarkotyki
-	Command_AddAltNamed("sprzedajnarkotyki", "selldrugs");
-	Command_AddAltNamed("sprzedajnarkotyki", "sprzedajdragi");
-	Command_AddAltNamed("sprzedajnarkotyki", "selldragi");
-
 	//startujlekcje
 	Command_AddAltNamed("startujlekcje", "startlesson");
 	Command_AddAltNamed("startujlekcje", "zacznijlekcje");

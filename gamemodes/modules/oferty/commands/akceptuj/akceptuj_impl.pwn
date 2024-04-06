@@ -801,63 +801,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job,"drugs",true) == 0 || strcmp(x_job,"dragi",true) == 0 || strcmp(x_job,"narkotyki",true) == 0)
     {
-        if(DrugOffer[playerid] < 999)
-        {
-            if(kaska[playerid] > DrugPrice[playerid] && DrugPrice[playerid] > 0)
-            {
-                if(PlayerInfo[playerid][pDrugs] < 7)
-                {
-                    if(IsPlayerConnected(DrugOffer[playerid]))
-                    {
-                        GetPlayerName(DrugOffer[playerid], giveplayer, sizeof(giveplayer));
-                        GetPlayerName(playerid, sendername, sizeof(sendername));
-                        format(string, sizeof(string), "* Kupi³eœ %d gram za $%d od Dilera Dragów %s. Aby je wzi¹æ wpisz /wezdragi.",DrugGram[playerid],DrugPrice[playerid],giveplayer);
-                        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                        format(string, sizeof(string), "* %s kupi³ od ciebie %d gram, $%d zostanie dodane do twojej wyp³aty.",sendername,DrugGram[playerid],DrugPrice[playerid]);
-                        SetPVarInt(DrugOffer[playerid], "wydragowany", 60);
-                        SendClientMessage(DrugOffer[playerid], COLOR_LIGHTBLUE, string);
-                        //
-                        format(string, sizeof(string), "%s kupi³ dragi za $%d od %s", sendername, DrugPrice[playerid], giveplayer);
-                        ABroadCast(COLOR_YELLOW,string,1);
-                        Log(payLog, INFO, "%s kupi³ od %s paczkê %d narkotyków za %d$", GetPlayerLogName(playerid), GetPlayerLogName(DrugOffer[playerid]), DrugGram[playerid], DrugPrice[playerid]);
-                        //
-                        PlayerInfo[DrugOffer[playerid]][pPayCheck] += DrugPrice[playerid];
-                        PlayerInfo[DrugOffer[playerid]][pDrugsSkill] ++;
-                        ZabierzKase(playerid, DrugPrice[playerid]);
-                        PlayerInfo[playerid][pDrugs] += DrugGram[playerid];
-                        PlayerInfo[DrugOffer[playerid]][pDrugs] -= DrugGram[playerid];
-                        if(PlayerInfo[DrugOffer[playerid]][pDrugsSkill] == 50)
-                        { SendClientMessage(DrugOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci dilera dragów wynosz¹ teraz 2, mo¿esz kupowac wiêcej dragów w melinie."); }
-                        else if(PlayerInfo[DrugOffer[playerid]][pDrugsSkill] == 100)
-                        { SendClientMessage(DrugOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci dilera dragów wynosz¹ teraz 3, mo¿esz kupowac wiêcej dragów w melinie."); }
-                        else if(PlayerInfo[DrugOffer[playerid]][pDrugsSkill] == 200)
-                        { SendClientMessage(DrugOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci dilera dragów wynosz¹ teraz 4, mo¿esz kupowac wiêcej dragów w melinie."); }
-                        else if(PlayerInfo[DrugOffer[playerid]][pDrugsSkill] == 400)
-                        { SendClientMessage(DrugOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci dilera dragów wynosz¹ teraz 5, mo¿esz kupowac wiêcej dragów w melinie."); }
-                        DrugOffer[playerid] = 999;
-                        DrugPrice[playerid] = 0;
-                        DrugGram[playerid] = 0;
-                        return 1;
-                    }
-                    return 1;
-                }
-                else
-                {
-                    sendTipMessageEx(playerid, COLOR_GREY, "Masz ju¿ za du¿o narkotyków, u¿yj ich najpierw !");
-                    return 1;
-                }
-            }
-            else
-            {
-                sendTipMessageEx(playerid, COLOR_GREY, "Nie mo¿esz zakupiæ narkotyków !");
-                return 1;
-            }
-        }
-        else
-        {
-            sendTipMessageEx(playerid, COLOR_GREY, "Nikt nie oferowa³ ci sprzeda¿y narkotyków !");
-            return 1;
-        }
+        command_akceptuj_drugs(playerid);
     }
     else if(strcmp(x_job,"sex",true) == 0)
     {

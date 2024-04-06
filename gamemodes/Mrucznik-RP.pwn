@@ -1206,6 +1206,9 @@ public OnPlayerDisconnect(playerid, reason)
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
 	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //l
 
+	// modules:
+	DrugDealer_OnPlayerDiconnect(playerid);
+
 	new reString[128];
     new DisconnectReason[4][] =
     {
@@ -3212,6 +3215,7 @@ public OnPlayerExitVehicle(playerid, vehicleid)
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Invalid seat");
         return 0;
     }
+	DrugDealer_OnPlayerExitVehicle(playerid, vehicleid);
 	/*if(IsVehicleInCarPark(vehicleid))
 	{
 		new float:vPosX, float:vPosY, float:vPosZ; 

@@ -32,6 +32,7 @@
 //-------<[ include ]>-------
 #include "wezdragi\wezdragi.pwn"
 #include "diluj\diluj.pwn"
+#include "kupdragi\kupdragi.pwn"
 #include "selldrugs\selldrugs.pwn"
 
 
@@ -40,6 +41,7 @@ hook OnGameModeInit()
 {
     command_wezdragi();
     command_diluj();
+    command_kupdragi();
     command_selldrugs();
     
 }
