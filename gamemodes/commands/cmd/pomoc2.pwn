@@ -49,7 +49,7 @@ YCMD:pomoc2(playerid, params[], help)
 		// case JOB_REPORTER: { }
 		case JOB_MECHANIC: 
         { 
-            SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw");
+            SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw /sprzedajneon");
             SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /nitro /hydraulika /maluj /felga /zderzak /kolory /malunki /felgi");
         }
 		case JOB_SMUGGLER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /pancerz"); }

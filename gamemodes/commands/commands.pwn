@@ -96,7 +96,6 @@
 #include "cmd/dajklucze.pwn"
 #include "cmd/dajkm.pwn"
 #include "cmd/dajlideraorg.pwn"
-#include "cmd/dajneony.pwn"
 #include "cmd/dajpodatek.pwn"
 #include "cmd/dajpomocnika.pwn"
 #include "cmd/dajrange.pwn"
@@ -680,11 +679,6 @@ static Aliases()
 	//dajklucze
 	Command_AddAltNamed("dajklucze", "kluczyki");
 	Command_AddAltNamed("dajklucze", "dajkluczyki");
-
-	//dajneony
-	Command_AddAltNamed("dajneony", "sprzedajneon");
-	Command_AddAltNamed("dajneony", "dajneon");
-	Command_AddAltNamed("dajneony", "sprzedajneony");
 
 	//dajpodatek
 	Command_AddAltNamed("dajpodatek", "givetax");
