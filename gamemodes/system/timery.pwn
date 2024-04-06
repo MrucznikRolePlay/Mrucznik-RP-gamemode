@@ -1836,7 +1836,7 @@ public CustomPickups()
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2226.1716,-1718.1792,13.5165))
 		{
 			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Ochroniarzem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
+			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Przemytnikiem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1366.4325,-1275.2096,13.5469))
 		{

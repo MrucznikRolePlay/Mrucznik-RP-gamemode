@@ -44,7 +44,7 @@ IsPlayerInDrugCar(playerid)
 
 IsPlayerInDrugsTakingPoint(playerid)
 {
-	for(new i; i<sizeof(); i++)
+	for(new i; i<sizeof(DrugsTakingPoints); i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, 5.0, DrugsTakingPoints[i][0], DrugsTakingPoints[i][1], DrugsTakingPoints[i][2]))
 		{
@@ -85,6 +85,8 @@ EnableDrugDealing(playerid, vehicleid, price)
 	new text3d = CreateDynamic3DTextLabel(sprintf("Cennik lodów:\n1 ga³ka - %d$\n\n((wpisz /kupdragi aby kupiæ narkotyki))", price), 
 		COLOR_VIOLET, 0.0, 0.0, 0.3, 10.0, INVALID_PLAYER_ID, vehicleid);
 	MAP_insert_val_val(VehicleDrugInfo, _:vehicleid, text3d);
+
+	SetVehicleAsObjective(vehicleid, true);
 	return 1;
 }
 
@@ -95,6 +97,8 @@ DisableDrugDealing(playerid, vehicleid)
 	DestroyDynamic3DTextLabel(text3d);
 
 	DeletePVar(playerid, PVAR_DEALER_PRICE);
+
+	SetVehicleAsObjective(vehicleid, false);
 	return 1;
 }
 

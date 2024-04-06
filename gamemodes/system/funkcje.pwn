@@ -9391,6 +9391,14 @@ Car_Lock(playerid, veh)
 }
 
 
+SetVehicleAsObjective(vehicleid, bool:objective)
+{
+	new bool:engine, bool:lights, bool:alarm, bool:doors, bool:bonnet, bool:boot, bool:unused;
+
+	GetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, unused);
+	SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
+}
+
 //13.08
 //--------------------------------------------------
 
