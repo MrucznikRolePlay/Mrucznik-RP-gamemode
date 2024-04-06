@@ -25,6 +25,12 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kupdragi_Impl(playerid, weight)
 {
+    if(GetPVarInt(playerid, PVAR_DEALER_PRICE) != 0)
+    {
+        MruMessageFail(playerid, "Nie mo¿esz kupiæ narkotyków, gdy sam nimi dilujesz.");
+        return 1;
+    }
+
     new dealerid = GetClosestDrugDealer(playerid);
     if(dealerid == INVALID_PLAYER_ID)
     {
@@ -43,6 +49,7 @@ command_kupdragi_Impl(playerid, weight)
     if(kaska[playerid] < price)
     {
         MruMessageFailF(playerid, "Nie staæ ciê! U tego dilera %d gram narkotyku kosztuje %d$.", weight, price);
+        return 1;
     }
 
     // functionality

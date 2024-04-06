@@ -37,6 +37,12 @@ command_wezdragi_Impl(playerid)
 		return 1;
 	}
 
+    if(gettime() - GetPVarInt(playerid, "lastDamage") < 60)
+    {
+        sendErrorMessage(playerid, "Nie mo¿esz braæ narkotyków podczas walki!");
+        return 1;
+    }
+
 	new Float:hpBuff = 10.0 * (PlayerInfo[playerid][pDrugPerk] + 1);
 	new Float:armorBuff = 10.0 * (PlayerInfo[playerid][pDrugPerk] + 1);
 

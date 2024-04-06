@@ -63,11 +63,18 @@ GetClosestDrugDealer(playerid)
 
 EnableDrugDealing(playerid, vehicleid, price)
 {
+	if(GetPVarInt(playerid, PVAR_DEALER_PRICE) != 0)
+	{
+		DisableDrugDealing(playerid, vehicleid);
+	}
+
 	SetPVarInt(playerid, PVAR_DEALER_PRICE, price);
 
 	new text3d = CreateDynamic3DTextLabel(sprintf("Cennik lodów:\n1 ga³ka - %d$\n\n((wpisz /kupdragi aby kupiæ narkotyki))", price), 
 		COLOR_VIOLET, 0.0, 0.0, 0.3, 10.0, INVALID_PLAYER_ID, vehicleid);
 	MAP_insert_val_val(VehicleDrugInfo, _:vehicleid, text3d);
+
+	MruMessageInfo(playerid, "Aktywowa³eœ sprzeda¿ narkotyków.");
 	return 1;
 }
 
@@ -78,6 +85,8 @@ DisableDrugDealing(playerid, vehicleid)
 	DestroyDynamic3DTextLabel(text3d);
 
 	DeletePVar(playerid, PVAR_DEALER_PRICE);
+
+	MruMessageInfo(playerid, "Przesta³eœ sprzedawaæ narkotyki.");
 	return 1;
 }
 

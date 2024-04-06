@@ -65,7 +65,7 @@
 #define MAX_MESSAGE_LENGHT 			144 		//maksymalna liczba znaków jaka mo¿e zostaæ wyœwietlona na ekranie
 
 #define COLOR_ERROR		0xC00010FF	//Ciemny Czerwony
-#define COLOR_FAIL		0xB0B0FFFF	//Lekko Fioletowo-Niebieski (jak dialogi)
+#define COLOR_FAIL		0xCBCCCEFF	//Szary (GRAD3)
 #define COLOR_WARN		0xF09040FF	//Pomarañczowy
 #define COLOR_INFO		0xB4B5B7FF	//Szary (GRAD1)
 #define COLOR_GINFO		0x33CCFFAA	//Jasnoniebieski
