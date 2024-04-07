@@ -80,11 +80,13 @@ command_kupdragi_Impl(playerid, weight)
 
         new reward = 75_000;
         DajKase(playerid, reward);
+        Log(payLog, INFO, "%s z³apa³ dilera %s na gor¹cym uczynku i dosta³ 75000$", GetPlayerLogName(playerid), GetPlayerLogName(dealerid));
 
         MruMessageBadInfoF(dealerid, "Tajny agent %s nakry³ Ciê na sprzeda¿y narkotyków! Masz teraz %d Poziom Poszukiwania.", GetNick(playerid), PoziomPoszukiwania[dealerid]);
         MruMessageGoodInfoF(playerid, "Nakry³eœ %s na sprzeda¿y narkotyków! Dostajesz %d$ za wykonywanie swojej pracy.", GetNick(dealerid), reward);
 
         SetTimerEx("spamujewl",300_000,0,"d",dealerid); //5min anty-wl
+        spamwl[dealerid] = 1;
     }
     return 1;
 }
