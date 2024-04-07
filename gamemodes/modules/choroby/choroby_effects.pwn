@@ -575,6 +575,11 @@ public NarkotycznyDebuff(playerid, disease, value)
 	if(IsPlayerSick(playerid, DRUG_ADDICT))
 	{
 		cureChance = 5 + 2 * PlayerInfo[playerid][pDrugPerk];
+		
+		if(random(5) == 0)
+		{
+			ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.1, 0, 1, 1, 1, 1, 1);
+		}
 	}
 
 	if(random(100) < cureChance)
