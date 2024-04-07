@@ -141,12 +141,7 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 			skill = PlayerInfo[playerid][pTruckSkill];
 		}
 	}
-	
-	if(skill < 50) { return 1; }
-	if(skill < 100) { return 2; }
-	if(skill < 200) { return 3; }
-	if(skill < 400) { return 4; }
-	return 5;
+	return skill;
 }
 
 IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
