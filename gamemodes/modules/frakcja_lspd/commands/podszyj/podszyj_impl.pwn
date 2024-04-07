@@ -31,7 +31,7 @@ command_podszyj_Impl(playerid)
         return 1;
     }
 
-    if(OnDuty[playerid] == 1)
+    if(OnDuty[playerid] != 1)
     {
         MruMessageFail(playerid, "Musisz byæ na s³u¿bie (/duty) by u¿yæ tej komendy.");
         return 1;
