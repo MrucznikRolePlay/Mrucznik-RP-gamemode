@@ -2154,42 +2154,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_FBI: //2
 						{
-						    if(PlayerInfo[playerid][pTajniak] == 0)
-						    {
-                                SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
-								SetPlayerFacingAngle(playerid, 270.0);
-		  					}
-		  					else if(PlayerInfo[playerid][pTajniak] == 1)
-		  					{
-		  					    SetPlayerPos(playerid, 2495.2163,-1687.2322,13.5150);
-		  					}
-		  					else if(PlayerInfo[playerid][pTajniak] == 2)
-		  					{
-		  					    SetPlayerPos(playerid, 1939.1940,-1116.3353,27.0151);
-		  					}
-		  					else if(PlayerInfo[playerid][pTajniak] == 3)
-		  					{
-                                SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
-		  					}
-         					else if(PlayerInfo[playerid][pTajniak] == 4)
-		  					{
-                                SetPlayerPos(playerid, 2801.0273,-1089.4576,30.7188);
-		  					}
-		  					else if(PlayerInfo[playerid][pTajniak] == 5)
-		  					{
-		  					    SetPlayerPos(playerid, 2467.5117,-1278.2054,29.9264);
-							}
-		  					else if(PlayerInfo[playerid][pTajniak] == 6)
-		  					{
-								new rand = random(sizeof(gTajniakSpawn));
-								SetPlayerPos(playerid, gTajniakSpawn[rand][0], gTajniakSpawn[rand][1], gTajniakSpawn[rand][2]); // Warp the player
-								SetPlayerFacingAngle(playerid, 270.0);
-		  					}
-		  					else
-		  					{
-                                SetPlayerPos(playerid, 2467.5117,-1278.2054,29.9264);
-		  					}
-
+							SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
+							SetPlayerFacingAngle(playerid, 270.0);
 						}
 						case FRAC_NG: //3
 						{
@@ -2442,7 +2408,7 @@ SetPlayerSpawnWeapon(playerid)
     //HP:
 	if(PlayerInfo[playerid][pInjury] == 0 && PlayerInfo[playerid][pBW] == 0)
 	{
-		if(IsAPolicja(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
+		if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
 		{
 			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
 			//f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)

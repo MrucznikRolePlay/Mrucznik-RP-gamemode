@@ -1,0 +1,11 @@
+{
+    "name": "frakcja_lspd",
+    "description": "Modu³ frakcji LSPD",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "07.04.2024"
+}

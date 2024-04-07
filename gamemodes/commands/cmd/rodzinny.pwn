@@ -49,50 +49,14 @@ YCMD:rodzinny(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj (/f)amily [tekst]");
 			return 1;
 		}
-        if (GetPlayerOrg(playerid) != 0 || MozeMowicNaFamily(playerid) || PlayerInfo[playerid][pTajniak] >= 1)
+        if (GetPlayerOrg(playerid) != 0 || MozeMowicNaFamily(playerid))
 		{
             new member = GetPlayerFraction(playerid);
-		    if(member>0 && PlayerInfo[playerid][pTajniak] == 0)
+		    if(member>0)
 		    {
                 format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
     			SendFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
-
-                //Tajniacy
-                if(member == 5) SendTajniakMessage(3, TEAM_AZTECAS_COLOR, string);
-                else if(member == 6) SendTajniakMessage(4, TEAM_AZTECAS_COLOR, string);
-                else if(member == 12) SendTajniakMessage(1, TEAM_AZTECAS_COLOR, string);
-                else if(13 <= member <= 14) SendTajniakMessage(2, TEAM_AZTECAS_COLOR, string);
             }
-            else if(PlayerInfo[playerid][pTajniak] == 1)
-			{
-                format(string, sizeof(string), "** %s %s: %s **", FracRang[FRAC_GROOVE][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
-                SendFamilyMessage(FRAC_GROOVE, TEAM_AZTECAS_COLOR, string);
-                SendTajniakMessage(1, TEAM_AZTECAS_COLOR, string);
-			}
-			else if(PlayerInfo[playerid][pTajniak] == 2)
-			{
-                format(string, sizeof(string), "** %s %s: %s **", FracRang[FRAC_BALLAS][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
-                SendFamilyMessage(FRAC_BALLAS, TEAM_AZTECAS_COLOR, string);
-                SendTajniakMessage(2, TEAM_AZTECAS_COLOR, string);
-			}
-			else if(PlayerInfo[playerid][pTajniak] == 3)
-			{
-                format(string, sizeof(string), "** %s %s: %s **", FracRang[FRAC_LCN][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
-                SendFamilyMessage(FRAC_LCN, TEAM_AZTECAS_COLOR, string);
-				SendTajniakMessage(3, TEAM_AZTECAS_COLOR, string);
-			}
-			else if(PlayerInfo[playerid][pTajniak] == 4)
-			{
-                format(string, sizeof(string), "** %s %s: %s **", FracRang[FRAC_YKZ][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
-                SendFamilyMessage(FRAC_YKZ, TEAM_AZTECAS_COLOR, string);
-				SendTajniakMessage(4, TEAM_AZTECAS_COLOR, string);
-			}
-			else if(PlayerInfo[playerid][pTajniak] == 5)
-			{
-                format(string, sizeof(string), "** %s %s: %s **", FracRang[FRAC_VAGOS][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
-                SendFamilyMessage(FRAC_VAGOS, TEAM_AZTECAS_COLOR, string);
-				SendTajniakMessage(5, TEAM_AZTECAS_COLOR, string);
-			}
 			else if(GetPlayerOrg(playerid) != 0)
 		    {
                 member = GetPlayerOrg(playerid);
