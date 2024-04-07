@@ -60,7 +60,7 @@ YCMD:akceptuj(playerid, params[], help)
     {
         SendClientMessage(playerid, COLOR_WHITE, "|__________________ Accept __________________|");
         SendClientMessage(playerid, COLOR_WHITE, "U¿YJ: /akceptuj [nazwa]");
-        SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: sex, dragi, naprawa, prawnik, pancerz, praca, wywiad, tankowanie");
+        SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: sex, dragi, naprawe, prawnik, pancerz, praca, wywiad, tankowanie");
         SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: auto, taxi, bus, heli, boks, medyk, mechanik, mandat, kuracje");
         SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: rozwod, swiadek, slub, pojazd, wynajem, wizytowka, uwolnienie, biznes");
         SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
