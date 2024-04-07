@@ -593,9 +593,9 @@ command_akceptuj_Impl(playerid, x_job[32])
                 {
                     GetPlayerName(playerid, sendername, sizeof(sendername));
                     GetPlayerName(MedicCall, giveplayer, sizeof(giveplayer));
-                    format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, masz 30 sekund na dojechanie tam.",giveplayer);
+                    format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, masz 120 sekund na dojechanie tam.",giveplayer);
                     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Po 30 sekundach marker zniknie.");
+                    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Po 120 sekundach marker zniknie.");
                     format(string, sizeof(string), "* Medyk %s akceptowa³ twoje zlecenie, NIE RUSZAJ SIÊ z miejsca.",sendername);
                     SendClientMessage(MedicCall, COLOR_LIGHTBLUE, string);
                     new Float:X,Float:Y,Float:Z;
@@ -637,9 +637,9 @@ command_akceptuj_Impl(playerid, x_job[32])
             {
                 GetPlayerName(playerid, sendername, sizeof(sendername));
                 GetPlayerName(MechanicCall, giveplayer, sizeof(giveplayer));
-                format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, masz 60 sekund aby tam dojechaæ.",giveplayer);
+                format(string, sizeof(string), "* Akceptowa³eœ zlecenie od %s, masz 120 sekund aby tam dojechaæ.",giveplayer);
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Po 60 sekundach marker zniknie.");
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Po 120 sekundach marker zniknie.");
                 format(string, sizeof(string), "* Mechanik %s akceptowa³ twoje zlecenie, czekaj i nie ruszaj siê z miejsca.",sendername);
                 SendClientMessage(MechanicCall, COLOR_LIGHTBLUE, string);
                 new Float:X,Float:Y,Float:Z;

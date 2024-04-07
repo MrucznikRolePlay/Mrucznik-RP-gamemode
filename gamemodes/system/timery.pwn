@@ -3045,34 +3045,22 @@ public JednaSekundaTimer()
 		}
 		if(MedicCallTime[i] > 0)
 		{
-			if(MedicCallTime[i] == 60) { MedicCallTime[i] = 0; DisablePlayerCheckpoint(i); PlayerPlaySound(i, 1056, 0.0, 0.0, 0.0); GameTextForPlayer(i, "~r~Czerwony Marker ulegl destrukcji", 2500, 1); }
+			if(MedicCallTime[i] == 120) { MedicCallTime[i] = 0; DisablePlayerCheckpoint(i); PlayerPlaySound(i, 1056, 0.0, 0.0, 0.0); GameTextForPlayer(i, "~r~Czerwony Marker ulegl destrukcji", 2500, 1); }
 			else
 			{
-				format(string, sizeof(string), "%d", 60 - MedicCallTime[i]);
+				format(string, sizeof(string), "%d", 120 - MedicCallTime[i]);
 				GameTextForPlayer(i, string, 1500, 6);
 				MedicCallTime[i] += 1;
 			}
 		}
 		if(MechanicCallTime[i] > 0)
 		{
-			if(MechanicCallTime[i] == 60) { MechanicCallTime[i] = 0; DisablePlayerCheckpoint(i); PlayerPlaySound(i, 1056, 0.0, 0.0, 0.0); GameTextForPlayer(i, "~r~Czerwony Marker ulegl destrukcji", 2500, 1); }
+			if(MechanicCallTime[i] == 120) { MechanicCallTime[i] = 0; DisablePlayerCheckpoint(i); PlayerPlaySound(i, 1056, 0.0, 0.0, 0.0); GameTextForPlayer(i, "~r~Czerwony Marker ulegl destrukcji", 2500, 1); }
 			else
 			{
-				format(string, sizeof(string), "%d", 60 - MechanicCallTime[i]);
+				format(string, sizeof(string), "%d", 120 - MechanicCallTime[i]);
 				GameTextForPlayer(i, string, 1500, 6);
 				MechanicCallTime[i] += 1;
-			}
-		}
-		if(Robbed[i] == 1)
-		{
-			if(RobbedTime[i] <= 0)
-			{
-				RobbedTime[i] = 0;
-				Robbed[i] = 0;
-			}
-			else
-			{
-				RobbedTime[i] -= 1;
 			}
 		}
 		if(PlayerTied[i])

@@ -35,7 +35,7 @@ IsAtWarsztat(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 50.0, 2806.7097,-1562.5802,10.9219))
+		if(IsPlayerInRangeOfPoint(playerid, 150.0, 2806.7097,-1562.5802,10.9219))
 		{//Warsztat w bazie mechaników
 			return 1;
 		}

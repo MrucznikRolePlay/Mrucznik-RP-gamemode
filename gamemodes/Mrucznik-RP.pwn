@@ -2498,10 +2498,23 @@ public OnPlayerEnterCheckpoint(playerid)
 		return 1;
 	}
 
-    DisablePlayerCheckpoint(playerid);
-
-
     TJD_CallCheckpoint(playerid, GetPlayerVehicleID(playerid));
+
+	// medic checkpoints
+	if(MedicCallTime[playerid] > 0)
+	{
+		MedicCallTime[playerid] = 0;
+	    DisablePlayerCheckpoint(playerid);
+		return 1;
+	}
+
+	// mechanic checkpoints
+	if(MechanicCallTime[playerid] > 0)
+	{
+		MechanicCallTime[playerid] = 0;
+	    DisablePlayerCheckpoint(playerid);
+		return 1;
+	}
 
 	if(CP[playerid] == 5)
 	{
