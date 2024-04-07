@@ -50,7 +50,7 @@ YCMD:pomoc2(playerid, params[], help)
 		case JOB_MECHANIC: 
         { 
             SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw /sprzedajneon");
-            SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /nitro /hydraulika /maluj /felga /zderzak /kolory /malunki /felgi");
+            SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /nitro /hydraulika /maluj /felga /zderzaki /kolory /malunki /felgi");
         }
 		case JOB_SMUGGLER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /pancerz"); }
 		case JOB_GUNDEALER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
@@ -77,7 +77,7 @@ YCMD:pomoc2(playerid, params[], help)
     if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7){
     SendClientMessage(playerid,COLOR_GRAD5,"*** GSA *** /wywalzdmv /radio /family"); }
     if(PlayerInfo[playerid][pMember] == 15||PlayerInfo[playerid][pLider] == 15){
-    SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /sprzedajneon /napraw /tankowanie /nitro /hydraulika /maluj /felga /zderzak");
+    SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /sprzedajneon /napraw /tankowanie /nitro /hydraulika /maluj /felga /zderzaki");
     SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /kolory /malunki /felgi /sluzba");
     SendClientMessage(playerid,COLOR_GRAD5,"*** WYSCIGI *** /stworzwyscig /wyscigi /wyscig /wyscig_start /wyscig_stop /cp /cp-usun /meta");         }
     if(IsAPrzestepca(playerid)){
