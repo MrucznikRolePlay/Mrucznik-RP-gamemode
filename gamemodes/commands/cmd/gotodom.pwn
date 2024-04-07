@@ -32,7 +32,7 @@ YCMD:gotodom(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
-		if(IsAScripter(playerid) || IsPlayerAdmin(playerid))
+		if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] >= 1 )
 		{
 		    new domid;
 			if( sscanf(params, "d", domid))
