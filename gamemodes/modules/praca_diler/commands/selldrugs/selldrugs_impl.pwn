@@ -71,8 +71,8 @@ command_selldrugs_Impl(playerid, giveplayerid, weight, price)
 	DrugPrice[giveplayerid] = price;
 	DrugGram[giveplayerid] = weight;
 
-	MruMessageGoodInfoF(playerid, "* Oferujesz %s sprzeda¿ %d gram za $%d .", GetNick(giveplayerid), weight, price);
-	MruMessageGoodInfoF(giveplayerid, "* Diler Dragów %s oferuje sprzeda¿ %d gram narkotyków za $%d, (wpisz /akceptuj dragi) aby kupiæ.", GetNick(playerid), weight, price);
+	MruMessageGoodInfoF(playerid, "Oferujesz %s sprzeda¿ %d gram za $%d.", GetNick(giveplayerid), weight, price);
+	MruMessageGoodInfoF(giveplayerid, "Diler Dragów %s oferuje sprzeda¿ %d gram narkotyków za $%d, (wpisz /akceptuj dragi) aby kupiæ.", GetNick(playerid), weight, price);
 	return 1;
 }
 
@@ -91,8 +91,8 @@ command_akceptuj_drugs(playerid)
 						DrugGram[playerid] = 10 - PlayerInfo[playerid][pDrugs];
 					}
 
-					MruMessageGoodInfoF(playerid, "* Kupi³eœ %d gram za $%d od Dilera Dragów %s. Aby je wzi¹æ wpisz /wezdragi.",DrugGram[playerid],DrugPrice[playerid], GetNick(DrugOffer[playerid]));
-					MruMessageGoodInfoF(DrugOffer[playerid], "* %s kupi³ od ciebie %d gram, $%d zostanie dodane do twojej wyp³aty.",GetNick(playerid),DrugGram[playerid],DrugPrice[playerid]);
+					MruMessageGoodInfoF(playerid, "Kupi³eœ %d gram za $%d od Dilera Dragów %s. Aby je wzi¹æ wpisz /wezdragi.",DrugGram[playerid],DrugPrice[playerid], GetNick(DrugOffer[playerid]));
+					MruMessageGoodInfoF(DrugOffer[playerid], "%s kupi³ od ciebie %d gram, $%d zostanie dodane do twojej wyp³aty.",GetNick(playerid),DrugGram[playerid],DrugPrice[playerid]);
 					SetPVarInt(DrugOffer[playerid], "wydragowany", 10);
 					
 					Log(payLog, INFO, "%s kupi³ od %s paczkê %d narkotyków za %d$", GetPlayerLogName(playerid), GetPlayerLogName(DrugOffer[playerid]), DrugGram[playerid], DrugPrice[playerid]);

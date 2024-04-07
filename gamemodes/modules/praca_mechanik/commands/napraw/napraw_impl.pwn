@@ -64,8 +64,8 @@ command_napraw_Impl(playerid, giveplayerid, price)
     RepairOffer[giveplayerid] = playerid;
     RepairPrice[giveplayerid] = price;
 
-    MruMessageGoodInfoF(playerid, "Oferujesz %s naprawê wozu za $%d .", GetNick(giveplayerid), price);
-    MruMessageGoodInfoF(giveplayerid, "* Mechanik %s proponuje naprawê twojego wozu za $%d, (wpisz /akceptuj naprawe) aby akceptowaæ.", GetNick(playerid), price);
+    MruMessageGoodInfoF(playerid, "Oferujesz %s naprawê wozu za $%d.", GetNick(giveplayerid), price);
+    MruMessageGoodInfoF(giveplayerid, "Mechanik %s proponuje naprawê twojego wozu za $%d, (wpisz /akceptuj naprawe) aby akceptowaæ.", GetNick(playerid), price);
     
     SpamujeMechanik[playerid] = 1;
     SetTimerEx("AntySpamMechanik",10000,0,"d", playerid);
