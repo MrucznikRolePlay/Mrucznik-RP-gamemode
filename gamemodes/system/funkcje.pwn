@@ -7184,23 +7184,6 @@ SendFamilyMessage(family, color, string[], onduty = false)
 	}
 }
 
-SendTajniakMessage(family, color, string[])
-{
-	foreach(new i : Player)
-	{
-		if(IsPlayerConnected(i))
-		{
-		    if(PlayerInfo[i][pTajniak] == family)
-		    {
-                if(!gFam[i])
-                {
-					SendClientMessage(i, color, string);
-				}
-			}
-		}
-	}
-}
-
 SendIRCMessage(channel, color, string[])
 {
 	foreach(new i : Player)
