@@ -34,7 +34,7 @@ YCMD:anuluj(playerid, params[], help)
 	if( sscanf(params, "s[16]", x_job))
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "|__________________ Cancel __________________|");
-		SendClientMessage(playerid, COLOR_WHITE, "U¯YJ: /anuluj [nazwa]");
+		SendClientMessage(playerid, COLOR_WHITE, "U¿yj: /anuluj [nazwa]");
 		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: sex, dragi, naprawa, prawnik, pancerz, wywiad, tankowanie, auto, boks, kontrakt");
 		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: taxi, bus, medyk, mechanik, mandat, swiadek, slub, rozwod, taxicall");
 		SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
