@@ -25,6 +25,12 @@
 //------------------<[ Implementacja: ]>-------------------
 command_diluj_Impl(playerid, price)
 {
+    if(GetPlayerJob(playerid) != JOB_DRUG_DEALER)
+    {
+        MruMessageFail(playerid, "Nie jesteœ dilerem narkotyków.");
+        return 1;
+    }
+
     if(!IsPlayerInDrugCar(playerid))
     {
         MruMessageFail(playerid, "Aby dilowaæ narkotykami, musisz znajdowaæ w lodziarni.");

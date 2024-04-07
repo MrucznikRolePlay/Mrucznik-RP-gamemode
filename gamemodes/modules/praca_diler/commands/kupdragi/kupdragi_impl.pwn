@@ -66,7 +66,7 @@ command_kupdragi_Impl(playerid, weight)
 
     MruMessageGoodInfoF(dealerid, "%s kupi³ od ciebie %d gram narkotyku za %d$.", GetNick(playerid), weight, price);
     MruMessageGoodInfoF(playerid, "Kupi³eœ od dilera %s %d gram narkotyku za %d$.", GetNick(dealerid), weight, price);
-    ChatMe(playerid, sprintf("odbiera zupe³nie niepodejrzanego loda od lodziarza %s", GetNick(playerid)));
+    ChatMe(playerid, sprintf("odbiera zupe³nie niepodejrzanego loda od lodziarza %s", GetNick(dealerid)));
 
     // zdemaskowanie
     if(PlayerInfo[playerid][pTajniak] > 0 && spamwl[dealerid] == 0)

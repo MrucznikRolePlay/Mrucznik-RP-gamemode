@@ -106,11 +106,18 @@ command_napraw_accept(playerid)
                         ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                         format(string, sizeof(string), "* Silnik pojazdu znów dzia³a jak nale¿y (( %s ))", giveplayer);
                         ProxDetector(20.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+
                         PlayerInfo[RepairOffer[playerid]][pMechSkill] ++;
                         ZabierzKase(playerid, RepairPrice[playerid]);
                         DajKase(RepairOffer[playerid], RepairPrice[playerid]);
                         RepairOffer[playerid] = 999;
                         RepairPrice[playerid] = 0;
+                        if(RepairPrice[playerid] != playerid)
+                        {
+                            PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
+                            PlayerPlaySound(RepairPrice[playerid], 1085, 0.0, 0.0, 0.0);
+                            IncreasePlayerJobSkill(RepairPrice[playerid], JOB_MECHANIC, 1);
+                        }
                     }
                     else
                     {

@@ -84,21 +84,7 @@ command_tankowanie_accept(playerid)
                 GetPlayerName(playerid, sendername, sizeof(sendername));
                 new fuel;
                 new vehicleid = GetPlayerVehicleID(playerid);
-                if(RefillOffer[playerid] != playerid)
-                {
-                    PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
-                    PlayerPlaySound(RefillOffer[playerid], 1085, 0.0, 0.0, 0.0);
-                    PlayerInfo[RefillOffer[playerid]][pMechSkill] ++;
-                    SendClientMessage(RefillOffer[playerid], COLOR_GREY, "Skill +1");
-                    if(PlayerInfo[RefillOffer[playerid]][pMechSkill] == 50)
-                    { SendClientMessage(RefillOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 2, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                    else if(PlayerInfo[RefillOffer[playerid]][pMechSkill] == 100)
-                    { SendClientMessage(RefillOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 3, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                    else if(PlayerInfo[RefillOffer[playerid]][pMechSkill] == 200)
-                    { SendClientMessage(RefillOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 4, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                    else if(PlayerInfo[RefillOffer[playerid]][pMechSkill] == 400)
-                    { SendClientMessage(RefillOffer[playerid], COLOR_YELLOW, "* Twoje umiejêtnoœci Mechanika wynosz¹ 5, Mo¿esz teraz tankowaæ graczom wiêcej paliwa za jednym razem."); }
-                }
+
                 new level = PlayerInfo[RefillOffer[playerid]][pMechSkill];
                 if(level >= 0 && level <= 50)
                 { fuel = 15; }
@@ -123,6 +109,12 @@ command_tankowanie_accept(playerid)
                 if(Gas[vehicleid] < 110)
                 {
                     Gas[vehicleid] += fuel;
+                }
+                if(RefillOffer[playerid] != playerid)
+                {
+                    PlayerPlaySound(playerid, 1085, 0.0, 0.0, 0.0);
+                    PlayerPlaySound(RefillOffer[playerid], 1085, 0.0, 0.0, 0.0);
+                    IncreasePlayerJobSkill(RefillOffer[playerid], JOB_MECHANIC, 1);
                 }
                 RefillOffer[playerid] = 999;
                 RefillPrice[playerid] = 0;
