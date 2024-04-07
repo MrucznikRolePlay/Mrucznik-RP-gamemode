@@ -44,7 +44,7 @@ IsPlayerInDrugCar(playerid)
 
 IsPlayerInDrugsTakingPoint(playerid)
 {
-	for(new i=0; i<sizeof(DrugsTakingPoints); i++)
+	for(new i = 0; i < sizeof(DrugsTakingPoints); i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, 7.0, DrugsTakingPoints[i][0], DrugsTakingPoints[i][1], DrugsTakingPoints[i][2]))
 		{
