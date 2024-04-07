@@ -40,10 +40,10 @@ IsAtDutyPlace(playerid)
 		return 1; // duty PD	
 	}
 
-	if((vw == 2 && PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736)) //nowe FBI by Ubunteq
-            || (vw == 2 && PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5))//nowe domy
-            || (vw == 2 && PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5))//nowe domy /duty w domu
-            || (vw == 0 && PlayerToPoint(2, playerid, 596.5255, -1489.2544, 15.3587)))// winda fbi
+	if((GetPlayerVirtualWorld(playerid) == 2 && PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736)) //nowe FBI by Ubunteq
+            || (GetPlayerVirtualWorld(playerid) == 2 && PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5))//nowe domy
+            || (GetPlayerVirtualWorld(playerid) == 2 && PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5))//nowe domy /duty w domu
+            || (GetPlayerVirtualWorld(playerid) == 0 && PlayerToPoint(2, playerid, 596.5255, -1489.2544, 15.3587)))// winda fbi
 	{
 		return 1; // duty FBI
 	}

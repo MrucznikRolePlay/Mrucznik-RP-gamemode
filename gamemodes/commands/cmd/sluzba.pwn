@@ -103,7 +103,6 @@ YCMD:sluzba(playerid, params[], help)
         }
         else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
         {
-            new vw = GetPlayerVirtualWorld(playerid);
             if (IsAtDutyPlace(playerid))
             {
                 if(OnDuty[playerid]==0)
