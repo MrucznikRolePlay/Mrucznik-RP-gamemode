@@ -31,13 +31,13 @@
 
 //-------<[ include ]>-------
 #include "tankowanie\tankowanie.pwn"
-#include "nos\nos.pwn"
 #include "zderzaki\zderzaki.pwn"
 #include "napraw\napraw.pwn"
 #include "malunek\malunek.pwn"
 #include "carcolors\carcolors.pwn"
 #include "felgi\felgi.pwn"
 #include "sprzedajzestaw\sprzedajzestaw.pwn"
+#include "nitro\nitro.pwn"
 #include "sprawdzneon\sprawdzneon.pwn"
 #include "hydraulika\hydraulika.pwn"
 #include "naprawpojazd\naprawpojazd.pwn"
@@ -49,13 +49,13 @@
 hook OnGameModeInit()
 {
     command_tankowanie();
-    command_nos();
     command_zderzaki();
     command_napraw();
     command_malunek();
     command_carcolors();
     command_felgi();
     command_sprzedajzestaw();
+    command_nitro();
     command_sprawdzneon();
     command_hydraulika();
     command_naprawpojazd();

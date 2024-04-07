@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_nos_Impl(playerid, giveplayerid)
+command_nitro_Impl(playerid, giveplayerid)
 {
     new cost = 5000;
     if(IsAMechazordWarsztatowy(playerid))

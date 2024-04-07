@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                    nos                                                    //
+//                                                   nitro                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,15 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "nos_impl.pwn"
+#include "nitro_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_nos()
+command_nitro()
 {
-    new command = Command_GetID("nos");
+    new command = Command_GetID("nitro");
 
     //aliases
-    Command_AddAlt(command, "nitro");
+    Command_AddAlt(command, "nos");
     
 
     //permissions
@@ -47,7 +47,7 @@ command_nos()
 }
 
 //-------<[ command ]>-------
-YCMD:nos(playerid, params[], help)
+YCMD:nitro(playerid, params[], help)
 {
     if (help)
     {
@@ -58,7 +58,7 @@ YCMD:nos(playerid, params[], help)
     new giveplayerid;
     if(sscanf(params, "r", giveplayerid))
     {
-        sendTipMessage(playerid, "U¿yj /nos [Nick/ID] ");
+        sendTipMessage(playerid, "U¿yj /nitro [Nick/ID] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -67,5 +67,5 @@ YCMD:nos(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_nos_Impl(playerid, giveplayerid);
+    return command_nitro_Impl(playerid, giveplayerid);
 }

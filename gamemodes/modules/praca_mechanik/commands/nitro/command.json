@@ -1,10 +1,10 @@
 {
-    "name": "nos",
+    "name": "nitro",
     "description": "Zamontuj nitro w pojeüdzie.",
     "permissions": [],
     "author": "mrucznik",
     "aliases": [
-        "nitro"
+        "nos"
     ],
     "parameters": [
         {
