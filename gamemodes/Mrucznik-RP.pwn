@@ -3062,7 +3062,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             Taxi_FareEnd(playerid);
 		}
 
-		DrugDealer_OnPlayerExitVehicle(playerid, vehicleid);
+		DrugDealer_OnPlayerExitVehicle(playerid, -1);
 
         TJD_CallExitVeh(playerid);
 

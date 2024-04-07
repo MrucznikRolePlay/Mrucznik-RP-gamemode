@@ -30,6 +30,15 @@
 //-----------------<[ Callbacki: ]>-----------------
 DrugDealer_OnPlayerExitVehicle(playerid, vehicleid)
 {
+	if(vehicleid == INVALID_VEHICLE_ID)
+	{
+		vehicleid = GetPlayerVehicleID(playerid);
+		if(vehicleid == INVALID_VEHICLE_ID)
+		{
+			vehicleid = gLastCar[playerid];
+		}
+	}
+
 	if(GetPVarInt(playerid, PVAR_DEALER_PRICE) != 0)
 	{
 		DisableDrugDealing(playerid, vehicleid);
