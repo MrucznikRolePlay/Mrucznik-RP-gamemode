@@ -74,7 +74,7 @@ command_kupdragi_Impl(playerid, weight)
         PoziomPoszukiwania[dealerid] += 4;
         PlayCrimeReportForPlayer(playerid, dealerid, 14);
         SetPlayerCriminal(dealerid, playerid, "sprzeda¿ narkotyków");
-        SetPlayerWantedLevel(playerid, PoziomPoszukiwania[dealerid]);
+        SetPlayerWantedLevel(dealerid, PoziomPoszukiwania[dealerid]);
 
         PursuitMode(playerid, dealerid);
 
