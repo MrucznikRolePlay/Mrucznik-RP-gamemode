@@ -76,7 +76,7 @@ TuneCommands_CheckRequirements(playerid, giveplayerid, cost)
 
     if(!IsAtWarsztat(playerid)) 
     {
-        MruMessageFail(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning.");
+        MruMessageFail(playerid, "Nie jesteœ w warsztacie, w którym mo¿na prowadziæ tuning lub w bazie mechaników.");
         return 0;
     }
 
