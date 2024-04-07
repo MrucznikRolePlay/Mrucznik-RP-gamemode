@@ -3095,6 +3095,9 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		{
             Taxi_FareEnd(playerid);
 		}
+
+		DrugDealer_OnPlayerExitVehicle(playerid, vehicleid);
+
         TJD_CallExitVeh(playerid);
 
         if(NieSpamujKradnij[playerid] == 1 || HireCar[playerid] != 0)
