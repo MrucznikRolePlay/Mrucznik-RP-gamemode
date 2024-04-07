@@ -42,7 +42,7 @@ YCMD:ah(playerid, params[], help)
 	}
 	if(PlayerInfo[playerid][pZG] == 10) {
 		SendClientMessage(playerid, COLOR_GRAD1, "* ZAS£U¯ONY *** /spec /slap /kick /aj /unaj /ban /block /warn /kill");
-		SendClientMessage(playerid, COLOR_GRAD1, "* ZAS£U¯ONY *** /freeze /unfreeze");
+		SendClientMessage(playerid, COLOR_GRAD1, "* ZAS£U¯ONY *** /freeze /unfreeze /lockdown /zweryfikuj");
 		SendClientMessage(playerid, COLOR_GRAD2, sprintf("* Uprawnienia Zas³u¿onych s¹ obecnie: %s", ZaufaniON ? ("w³¹czone") : ("wy³¹czone")));
 	}
 	if (PlayerInfo[playerid][pNewAP] >= 1 && PlayerInfo[playerid][pNewAP] <= 3)
