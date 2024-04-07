@@ -4179,23 +4179,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WYJDè");
+				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
 	        }
 	    }
 	    else if(dialogid == 51)
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WYJDè");
+	            ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
 	        }
+			else
+			{
+				ShowPlayerDialogEx(playerid, 50, DIALOG_STYLE_MSGBOX, "DostÍpne malunki wozÛw","LovRider`s:\n(Savanna,Tornado,Blade)\n0- ØÛ≥te p≥omienie\n1- Czerwono øÛ≥te paski\n2- Czerwone p≥omienie z przodu\n3- WyczyúÊ malunek\n\nRemington\n\n0- Brπzowe hieroglify\n1- Czerwono øÛ≥te p≥omienie\n2- Niebieskie p≥omienie\n3- WyczyúÊ malunek\n\nSlamvan \n\n0- Czarny z rÛøowymi paskami\n1- Kolorowe p≥omyczki\n2- ØÛ≥te p≥omienie\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ aby zobaczyÊ dalszπ listÍ","DALEJ","WYJDè");
+			}
 	    }
 	    else if(dialogid == 52)
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid,53,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Flash\n\n0- Czerwono øÛ≥ty z grafikπ\n1- Fioletowo czerwony z grafikπ\n2- Niebiesko fioletowy z grafikπ\n3- WyczyúÊ malunek\n\nBroadway\n\n0- ØÛ≥te p≥omienie na ca≥ym aucie\n1- Czerwone p≥omienie z przodu\n2 i 3- wyczyúÊ malunek\n\nCapmer\n\n0- Hipisowski malnuek\n1, 2 i 3 - wyszyúÊ malunek\n\n Tylko na wymienionych autach moøna namalowaÊ malunek.","WYJDè","WYJDè");
+	            ShowPlayerDialogEx(playerid,53,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Flash\n\n0- Czerwono øÛ≥ty z grafikπ\n1- Fioletowo czerwony z grafikπ\n2- Niebiesko fioletowy z grafikπ\n3- WyczyúÊ malunek\n\nBroadway\n\n0- ØÛ≥te p≥omienie na ca≥ym aucie\n1- Czerwone p≥omienie z przodu\n2 i 3- wyczyúÊ malunek\n\nCapmer\n\n0- Hipisowski malnuek\n1, 2 i 3 - wyszyúÊ malunek\n\n Tylko na wymienionych autach moøna namalowaÊ malunek.","WYJDè","WSTECZ");
 	        }
+			else
+			{
+				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
+			}
 	    }
+		else if(dialogid == 53)
+		{
+			if(!response)
+			{
+				ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","WYJDè","WSTECZ");
+			}
+		}
         else if(dialogid == 501)
 	    {
 	        if(response)
