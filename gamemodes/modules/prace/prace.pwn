@@ -146,7 +146,6 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 
 IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 {
-	new oldSkill = GetPlayerJobSkillPoints(playerid, jobid);
 	switch(jobid)
 	{
 		case JOB_LOWCA:
@@ -214,9 +213,10 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 			PlayerInfo[playerid][pTruckSkill] += value;
 		}
 	}
-	new newSkill = GetPlayerJobSkillPoints(playerid, jobid);
 	MruMessageSkillInfoF(playerid, "Skill +%d", value);
 
+	new newSkill = GetPlayerJobSkill(playerid, jobid);
+	new oldSkill = GetPlayerJobSkill(playerid, jobid);
 	if(oldSkill != newSkill)
 	{
 		MruMessageGoodInfoF(playerid, "Twoje umiejêtnoœci pracy %s wynosz¹ teraz %d! Masz teraz dostêp do nowych funkcjonalnoœci swojej pracy.", GetJobName(jobid), newSkill);
