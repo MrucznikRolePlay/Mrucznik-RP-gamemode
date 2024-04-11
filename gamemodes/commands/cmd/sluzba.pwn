@@ -51,7 +51,8 @@ YCMD:sluzba(playerid, params[], help)
 			return 1;
 		}
 
-        if((IsAPolicja(playerid) || IsAMedyk(playerid) || GetPlayerFraction(playerid) == FRAC_BOR) && PlayerInfo[playerid][pUniform] == 0)
+        new frac = GetPlayerFraction(playerid);
+        if((FracGetsUniformOnDuty(frac) || GetPlayerOrg(playerid) == 12) && PlayerInfo[playerid][pUniform] == 0)
         {
             sendTipMessage(playerid, "Nie masz skina frakcyjnego, u¿yj /fskin !");
             return 1;
@@ -66,7 +67,7 @@ YCMD:sluzba(playerid, params[], help)
         }
 
         GetPlayerName(playerid, sendername, sizeof(sendername));
-        if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
+        if(frac == 1)
         {
             if (PlayerToPoint(3, playerid,255.3,77.4,1003.6)
             || PlayerToPoint(5, playerid, 266.7904,118.9303,1004.6172)
@@ -109,7 +110,7 @@ YCMD:sluzba(playerid, params[], help)
                 return 1;
             }
         }
-        else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2)
+        else if(frac == 2)
         {
             new vw = GetPlayerVirtualWorld(playerid);
             if ((vw == 2 && PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736)) //nowe FBI by Ubunteq
@@ -146,7 +147,7 @@ YCMD:sluzba(playerid, params[], help)
                 return 1;
             }
         }
-        else if(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
+        else if(frac == 3)
         {
             if ( IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) || IsPlayerInRangeOfPoint(playerid, 5.0, 609.0364,-555.1090,19.4573) ) //PlayerToPoint(3, playerid,255.3,77.4,1003.6) || PlayerToPoint(3,playerid,266.7904,118.9303,1004.6172) || PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
             {
@@ -208,7 +209,7 @@ YCMD:sluzba(playerid, params[], help)
                 }
 			}
 		}
-        else if(GetPlayerFraction(playerid) == FRAC_ERS)
+        else if(frac == 4)
         {
             if (PlayerToPoint(4, playerid,1147.3623,-1314.4891,13.6743))
             {
@@ -235,7 +236,7 @@ YCMD:sluzba(playerid, params[], help)
                 return 1;
             }
         }
-        else if(PlayerInfo[playerid][pMember] == 11||PlayerInfo[playerid][pLider] == 11)
+        else if(frac == 11)
         {
             if(JobDuty[playerid] == 1)
             {
@@ -253,7 +254,7 @@ YCMD:sluzba(playerid, params[], help)
                 SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
             }
         }
-        else if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7)
+        else if(frac == 7)
         {
             if (PlayerToPoint(5, playerid, 1521.8843,-1479.6427,22.9377))
             {
@@ -281,7 +282,7 @@ YCMD:sluzba(playerid, params[], help)
                 }
             }
         }
-        else if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
+        else if(frac == 10)
         {
 			if(JobDuty[playerid] == 1)
             {
@@ -322,7 +323,7 @@ YCMD:sluzba(playerid, params[], help)
                 SendClientMessage(playerid, COLOR_GREY, "Odczekaj 10 sekund");
             }
         }
-        else if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
+        else if(frac == 9)
         {
             if(SanDuty[playerid] == 1)
             {
