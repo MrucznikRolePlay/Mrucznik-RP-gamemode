@@ -1289,7 +1289,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
@@ -1304,7 +1304,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
@@ -1339,7 +1339,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
                 case 9:
 				{
-					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;

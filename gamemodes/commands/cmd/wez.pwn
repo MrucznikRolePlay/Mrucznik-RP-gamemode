@@ -68,27 +68,19 @@ YCMD:wez(playerid, params[], help)
 		}
 		else if(strcmp(x_job,"gasnice",true) == 0 || strcmp(x_job,"gasnica",true) == 0)
 		{
-			if (PlayerInfo[playerid][pMember] == 4)
+			if (PlayerInfo[playerid][pMember] == FRAC_ERS || GetPlayerJob(playerid) == JOB_MEDIC)
 			{
 				new vehicleid = GetClosestCar(playerid, 3.5);
 				if(vehicleid != -1)
     			{
-					if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && (GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544))// wszystkie auta frakcji
+					if(GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544)
 					{
-						if(Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))
-						{
-							format(string, sizeof(string), "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***", GetNick(playerid));
-							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							GivePlayerWeapon(playerid, 42, 9999);
-	                     	PlayerInfo[playerid][pGun9] = 42;
-	                     	PlayerInfo[playerid][pAmmo9] = 9999;
-							return 1;
-						}
-						else
-						{
-							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do LSRS.");
-							return 1;
-						}
+						format(string, sizeof(string), "*** %s chwyta za now¹ gaœnicê z wozu stra¿ackiego. ***", GetNick(playerid));
+						ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+						GivePlayerWeapon(playerid, 42, 9999);
+						PlayerInfo[playerid][pGun9] = 42;
+						PlayerInfo[playerid][pAmmo9] = 9999;
+						return 1;
 					}
 					else
 					{
@@ -111,36 +103,28 @@ YCMD:wez(playerid, params[], help)
 		}
 		else if(strcmp(x_job,"mundur",true) == 0)
 		{
-			if (PlayerInfo[playerid][pMember] == 4)
+			if (PlayerInfo[playerid][pMember] == FRAC_ERS || GetPlayerJob(playerid) == JOB_MEDIC)
 			{
 				new vehicleid = GetClosestCar(playerid, 3.5);
 				if(vehicleid != -1)
     			{
-					if(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && (GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544))// wszystkie auta frakcji
+					if(GetVehicleModel(vehicleid) == 407 || GetVehicleModel(vehicleid) == 544)
 					{
-						if(Car_GetOwner(vehicleid) == GetPlayerFraction(playerid))
+						if(ERS_mundur[playerid] == 1)
 						{
-							if(ERS_mundur[playerid] == 1)
-							{
-								format(string, sizeof(string), "*** %s zdejmuje z siebie specjalistyczny mundur ***", GetNick(playerid));
-								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								if(JobDuty[playerid]==0) SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-								else  SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
-								ERS_mundur[playerid] = 0;
-								return 1;
-							}
-							else
-							{
-								format(string, sizeof(string), "*** %s przebiera siê w specjalistyczny mundur ***", GetNick(playerid));
-								ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-								SetPlayerSkinEx(playerid, 277);
-								ERS_mundur[playerid] = 1;
-								return 1;
-							}
+							format(string, sizeof(string), "*** %s zdejmuje z siebie specjalistyczny mundur ***", GetNick(playerid));
+							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							if(JobDuty[playerid]==0) SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
+							else  SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
+							ERS_mundur[playerid] = 0;
+							return 1;
 						}
 						else
 						{
-							sendTipMessage(playerid, "Ten wóz stra¿acki nie nale¿y do LSRS.");
+							format(string, sizeof(string), "*** %s przebiera siê w specjalistyczny mundur ***", GetNick(playerid));
+							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
+							SetPlayerSkinEx(playerid, 277);
+							ERS_mundur[playerid] = 1;
 							return 1;
 						}
 					}

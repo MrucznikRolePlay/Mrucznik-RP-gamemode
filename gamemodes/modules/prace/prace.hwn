@@ -27,14 +27,14 @@ enum Jobs {
     JOB_LOWCA,      // 1
     JOB_LAWYER,     // 2
     JOB_PROSTITUTE, // 3
-    JOB_DRUG_DEALER, // 4 
+    JOB_DRUG_DEALER,// 4 
     JOB_CARTHIEF,   // 5
     JOB_REPORTER,   // 6
     JOB_MECHANIC,   // 7
-    JOB_SMUGGLER,  // 8
+    JOB_SMUGGLER,   // 8
     JOB_GUNDEALER,  // 9
-    JOB_DRIVER,  // 10
-    JOB_RESERVED_4,      // 11 pizza, kiedys medyk, nieaktywne
+    JOB_DRIVER,     // 10
+    JOB_MEDIC,      // 11 medyk
     JOB_BOXER,      // 12
     JOB_RESERVED_1, // 13 nie wiadomo
     JOB_RESERVED_2, // 14 taxi, nieaktywne

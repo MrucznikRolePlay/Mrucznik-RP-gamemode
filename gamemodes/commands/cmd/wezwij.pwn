@@ -99,7 +99,7 @@ YCMD:wezwij(playerid, params[], help)
 		        }
 		        foreach(new i : Player)
 				{
-				    if(JobDuty[i] >= 1 && IsAMedyk(i))
+				    if(JobDuty[i] >= 1 && (IsAMedyk(i)))
 				    {
 				    	GetPlayerName(playerid, sendername, sizeof(sendername));
 				    	format(string, sizeof(string), "** %s potrzebuje pomocy. (wpisz /akceptuj medyk aby zaakceptowaæ zlecenie)", sendername);

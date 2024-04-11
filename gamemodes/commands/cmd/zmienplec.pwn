@@ -36,7 +36,7 @@ YCMD:zmienplec(playerid, params[], help)
 		sendTipMessage(playerid, "U¿yj /zmienplec [ID gracza]");
 		return 1;
 	}
-	if (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+	if (PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS || GetPlayerJob(playerid) == JOB_MEDIC)
 	{
 		new string[128], sendername[MAX_PLAYER_NAME], giveplayer[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, sendername, sizeof(sendername));
@@ -74,7 +74,7 @@ YCMD:zmienplec(playerid, params[], help)
 					}
 					else
 					{
-						sendErrorMessage(playerid, "Nie jesteœ w szpitalu!");
+						sendErrorMessage(playerid, "Nie jesteœ w szpitalu lub karetce (/wejdzw)!");
 					}
 				}
 			}

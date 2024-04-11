@@ -1159,7 +1159,7 @@ YCMD:brama(playerid, params[], help)
 			    }
 			}
 		} */
-		if(IsAMedyk(playerid) || PlayerInfo[playerid][pAdmin] >= 1000)//POCZ?TEK
+		if(GetPlayerFraction(playerid) == FRAC_ERS || PlayerInfo[playerid][pAdmin] >= 1000)//POCZ?TEK
 		{
             if(IsPlayerInRangeOfPoint(playerid,3,1158.82922, -1325.31738, 31.39840))
         	{

@@ -2094,10 +2094,13 @@ IsAMedyk(playerid)
 		{
 		    return 1;
 		}
+		if(GetPlayerJob(playerid) == JOB_MEDIC)
+		{
+			return 1;
+		}
 	}
 	return 0;
 }
-
 
 IsANoA(playerid)
 {
@@ -2470,7 +2473,7 @@ DajBronieFrakcyjne(playerid)
 	        playerWeapons[playerid][weaponLegal10] = 1;
 	    }
 	}
-	else if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+	else if(PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS)
 	{
 	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 42 && PlayerInfo[playerid][pAmmo9] < 500 || PlayerInfo[playerid][pAmmo9] <= 30 )
 	    {
@@ -3530,6 +3533,7 @@ IsAnAmbulance(carid)
     {
         if(CarData[lID][c_Owner] == FRAC_ERS) return 1;
     }
+	if(GetVehicleModel(carid) == 416) return 1;
 	return 0;
 }
 
@@ -4419,7 +4423,7 @@ SetPlayerToTeamColor(playerid)
 		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
 		    }
 		}
-		else if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+		else if(PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS || GetPlayerJob(playerid) == JOB_MEDIC)
 		{
 		    if(JobDuty[playerid])
 		    {
@@ -10423,10 +10427,10 @@ Oil_Destroy(lID)
         TextDrawHideForPlayer(i, OilTXD_BG[0]);
         TextDrawHideForPlayer(i, OilTXD_BG[1]);
         ApplyAnimation(i, "BOMBER", "BOM_Plant_Crouch_Out", 4.0, 0, 0, 0, 0, -1);
-        SendClientMessage(i, COLOR_WHITE, "[ERS] Usun¹³eœ plamê oleju! Otrzymujesz 7 500$! [ERS]");
-        DajKase(i, 7500);
-        SendFamilyMessage(4, COLOR_GREEN, "[ERS] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 12 500$! [ERS]");
-        Sejf_Add(FRAC_ERS, 12500);
+        SendClientMessage(i, COLOR_WHITE, "[ERS] Usun¹³eœ plamê oleju! Otrzymujesz 12 500$! [ERS]");
+        DajKase(i, 12500);
+        SendFamilyMessage(4, COLOR_GREEN, "[ERS] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 5 000$! [ERS]");
+        Sejf_Add(FRAC_ERS, 5000);
     }
 }
 

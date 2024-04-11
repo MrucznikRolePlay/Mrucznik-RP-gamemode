@@ -75,7 +75,7 @@ YCMD:apteczka(playerid, params[], help)
 		return SendClientMessage(playerid, COLOR_GRAD1, string);
 	}
 
-	if((PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4) && (OnDuty[playerid] == 1 || JobDuty[playerid] == 1))
+	if((PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS || GetPlayerJob(playerid) == JOB_MEDIC) && (OnDuty[playerid] == 1 || JobDuty[playerid] == 1))
 	{	
 		if(PlayerInfo[playa][pBW] == 0 && PlayerInfo[playa][pInjury] == 0) return sendTipMessage(playerid, "Gracz nie jest wystarczaj¹co ranny wiêc nie wymaga interwencji.");
 		format(string, sizeof string, "Proponujesz %s zastosowanie apteczki i wyleczenie mu ran.", GetNick(playa));

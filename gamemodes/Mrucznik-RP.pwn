@@ -433,7 +433,7 @@ public OnGameModeInit()
 	}
 	TimeUpdater();
 	//timery
-	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
+	SetTimer("AktywujPozar", 3600_000 * 1, true);//System Po¿arów v0.1 - po¿ar co godzinê
     SetTimer("MainTimer", 1000, true);
 	SetTimer("CheckChangeWeapon", 450, true);
     SetTimer("RPGTimer", 100, true);
@@ -1557,7 +1557,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		foreach(new i : Player)
 		{
-			if(IsAPolicja(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+			if(IsAPolicja(i) || GetPlayerFraction(i) == FRAC_ERS || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
 				DisablePlayerCheckpoint(i);
 		}
 	}

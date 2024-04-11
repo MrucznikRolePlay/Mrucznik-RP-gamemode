@@ -52,11 +52,14 @@ YCMD:pomoc2(playerid, params[], help)
             SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw /sprzedajneon");
             SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /nitro /hydraulika /maluj /felga /zderzaki /kolory /malunki /felgi");
         }
-		case JOB_SMUGGLER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /pancerz"); }
-		case JOB_GUNDEALER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
-		case JOB_DRIVER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /kurs /duty /businfo /trasa /zakoncztrase /zd "); }
-		// case JOB_RESERVED_4: { }
-		case JOB_BOXER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /walka /boxstats /naucz"); }
+		case JOB_SMUGGLER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /pancerz"); }
+		case JOB_GUNDEALER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
+		case JOB_DRIVER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /kurs /duty /businfo /trasa /zakoncztrase /zd "); }
+		case JOB_MEDIC: { 
+            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sluzba /sprzedajapteczke /czysc");
+            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sprzedajapteczke /ulecz /apteczka /zastrzyk /diagnoza /zmienplec /kuracja /maseczka"); 
+        }
+		case JOB_BOXER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /walka /boxstats /naucz"); }
 		// case JOB_RESERVED_1: { }
 		// case JOB_RESERVED_2: { }
 		// case JOB_RESERVED_3: { }
@@ -98,9 +101,9 @@ YCMD:pomoc2(playerid, params[], help)
     }
     if (PlayerInfo[playerid][pMember] == 17 || PlayerInfo[playerid][pLider] == 17)
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Stra¿ *** /straz /megafon /ro /r /duty /czysc");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Stra¿ *** /straz /megafon /ro /r /duty /czysc /wez gasnice /wez mundur");
     }
-    if (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+    if (PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS)
     {
         SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz *** (/r)adio (/d)epartment /sluzba /finfo /sprzedajapteczke /togbw /togdepo");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz ***/ulecz /apteczka /zastrzyk /diagnoza /zmienplec /kuracja /maseczka");

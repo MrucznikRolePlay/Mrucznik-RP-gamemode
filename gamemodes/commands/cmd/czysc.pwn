@@ -30,7 +30,7 @@
 
 YCMD:czysc(playerid, params[], help)
 {
-    if(GetPlayerFraction(playerid) != FRAC_ERS) return sendTipMessageEx(playerid, COLOR_GRAD2, "Dostêpne tylko dla frakcji stra¿aków.");
+    if(GetPlayerFraction(playerid) != FRAC_ERS && GetPlayerJob(playerid) != JOB_MEDIC) return sendTipMessageEx(playerid, COLOR_GRAD2, "Dostêpne tylko dla pracy stra¿aków.");
     if(JobDuty[playerid] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes na s³u¿bie.");
     new Float:lPos[3];
     GetPlayerPos(playerid, lPos[0], lPos[1], lPos[2]);

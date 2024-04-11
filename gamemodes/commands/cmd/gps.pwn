@@ -30,7 +30,7 @@
 
 YCMD:gps(playerid, params[], help)
 {
-	if(!IsAPolicja(playerid) && !IsAMedyk(playerid) && GetPlayerFraction(playerid) != FRAC_BOR)
+	if(!IsAPolicja(playerid) && !GetPlayerFraction(playerid) != FRAC_ERS && GetPlayerFraction(playerid) != FRAC_BOR)
 	{
 		return sendErrorMessage(playerid, "Nie jesteœ policjantem lub medykiem.");
 	}

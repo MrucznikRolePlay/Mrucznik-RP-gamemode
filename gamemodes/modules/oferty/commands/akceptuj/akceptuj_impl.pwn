@@ -580,7 +580,7 @@ command_akceptuj_Impl(playerid, x_job[32])
     }
     else if(strcmp(x_job,"medic",true) == 0 || strcmp(x_job,"medyk",true) == 0)
     {
-        if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+        if(PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS || GetPlayerJob(playerid) == JOB_MEDIC)
         {
             if(MedicCallTime[playerid] > 0)
             {

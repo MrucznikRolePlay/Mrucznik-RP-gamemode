@@ -223,6 +223,23 @@ YCMD:sluzba(playerid, params[], help)
                 return 1;
             }
         }
+        else if(GetPlayerJob(playerid) == JOB_MEDIC)
+        {
+            if(JobDuty[playerid] == 1)
+            {
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie LSRS, nie bêdziesz widzia³ zg³oszeñ.");
+                JobDuty[playerid] = 0;
+                Medics -= 1;
+                SetPlayerToTeamColor(playerid);
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie LSRS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
+                JobDuty[playerid] = 1;
+                Medics += 1;
+                SetPlayerToTeamColor(playerid);
+            }
+        }
         else if(PlayerInfo[playerid][pMember] == 11||PlayerInfo[playerid][pLider] == 11)
         {
             if(JobDuty[playerid] == 1)

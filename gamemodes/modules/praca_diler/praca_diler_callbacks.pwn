@@ -30,13 +30,10 @@
 //-----------------<[ Callbacki: ]>-----------------
 DrugDealer_OnPlayerExitVehicle(playerid)
 {
+	new vehicleid = GetPlayerVehicleID(playerid);
 	if(vehicleid == INVALID_VEHICLE_ID)
 	{
-		vehicleid = GetPlayerVehicleID(playerid);
-		if(vehicleid == INVALID_VEHICLE_ID)
-		{
-			vehicleid = gLastCar[playerid];
-		}
+		vehicleid = gLastCar[playerid];
 	}
 
 	if(GetPVarInt(playerid, PVAR_DEALER_PRICE) != 0)
