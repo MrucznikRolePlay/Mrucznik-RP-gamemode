@@ -90,6 +90,7 @@ YCMD:makevleader(playerid, params[], help)
 					PlayerInfo[giveplayerid][pLider] = Frac; 
 					PlayerInfo[giveplayerid][pLiderValue] = value; 
 					PlayerInfo[giveplayerid][pMember] = Frac; 
+					SetDefaultUniform(giveplayerid);
 					Create_MySQL_Leader(giveplayerid, Frac, value);//Tworzenie konta LD
 					Save_MySQL_Leader(giveplayerid);  
 					format(string, sizeof(string), "%s mianowa³ Ciê liderem [%d] organizacji %s [%d]", GetNickEx(playerid), value, FractionNames[Frac], Frac); 
