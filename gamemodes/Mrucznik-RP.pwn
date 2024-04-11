@@ -3062,7 +3062,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             Taxi_FareEnd(playerid);
 		}
 
-		DrugDealer_OnPlayerExitVehicle(playerid, -1);
+		DrugDealer_OnPlayerExitVehicle(playerid);
 
         TJD_CallExitVeh(playerid);
 
@@ -3197,7 +3197,6 @@ public OnPlayerExitVehicle(playerid, vehicleid)
         SendClientMessage(playerid, 0xA9C4E4FF, "Warning: Invalid seat");
         return 0;
     }
-	DrugDealer_OnPlayerExitVehicle(playerid, vehicleid);
 	/*if(IsVehicleInCarPark(vehicleid))
 	{
 		new float:vPosX, float:vPosY, float:vPosZ; 

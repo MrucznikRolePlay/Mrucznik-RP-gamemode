@@ -28,7 +28,7 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
-DrugDealer_OnPlayerExitVehicle(playerid, vehicleid)
+DrugDealer_OnPlayerExitVehicle(playerid)
 {
 	if(vehicleid == INVALID_VEHICLE_ID)
 	{

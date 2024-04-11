@@ -69,7 +69,7 @@ command_kupdragi_Impl(playerid, weight)
     ChatMe(playerid, sprintf("odbiera zupe³nie niepodejrzanego loda od lodziarza %s", GetNick(dealerid)));
 
     // zdemaskowanie
-    if(PlayerInfo[playerid][pTajniak] > 0 && spamwl[dealerid] == 0)
+    if(IsAPolicja(playerid) && PlayerInfo[playerid][pTajniak] > 0 && spamwl[dealerid] == 0)
     {
         PoziomPoszukiwania[dealerid] += 4;
         PlayCrimeReportForPlayer(playerid, dealerid, 14);
