@@ -68,23 +68,7 @@ YCMD:makemember(playerid, params[], help)
 						iloscInne[playerid] = iloscInne[playerid]+1;
 					}
 					
-					if(level == 0) { PlayerInfo[para1][pUniform] = 0; }
-					else if(level == 1) { PlayerInfo[para1][pUniform] = 280; } //Police Force
-					else if(level == 2) { PlayerInfo[para1][pUniform] = 285; } //FBI/ATF
-					else if(level == 3) { PlayerInfo[para1][pUniform] = 287; } //National Guard
-					else if(level == 4) { PlayerInfo[para1][pUniform] = 70; } //Fire/Ambulance
-					else if(level == 5) { PlayerInfo[para1][pUniform] = 258; } //La Cosa Nostra
-					else if(level == 6) { PlayerInfo[para1][pUniform] = 120; } //Yakuza
-					else if(level == 7) { PlayerInfo[para1][pUniform] = 240; } //Mayor
-					else if(level == 8) { PlayerInfo[para1][pUniform] = 127; } //Hitman Agency
-					else if(level == 9) { PlayerInfo[para1][pUniform] = 148; } //News Reporters
-					else if(level == 10) { PlayerInfo[para1][pUniform] = 255; } //Taxi Cab Company
-					else if(level == 11) { PlayerInfo[para1][pUniform] = 59; } //Driving/Flying School
-					else if(level == 12) { PlayerInfo[para1][pUniform] = 270; } //Grove Street
-					else if(level == 13) { PlayerInfo[para1][pUniform] = 103; } //Ballas
-					else if(level == 14) { PlayerInfo[para1][pUniform] = 108; } //Vagos
-					else if(level == 15) { PlayerInfo[para1][pUniform] = 8; } //NoA
-                    else if(level == 17) PlayerInfo[para1][pUniform] = 277; //NoA
+					SetDefaultUniform(para1);
 
                     MruMySQL_SetAccInt("Member", giveplayer, level);
                     MruMySQL_SetAccInt("Rank", giveplayer, 0);
