@@ -2305,6 +2305,10 @@ SetPlayerSpawnPos(playerid)
 						    SetPlayerPos(playerid,322.0553894043, 303.41961669922, 999.1484375);
 		    				SetPlayerInterior(playerid,5);
 						}
+						case JOB_DRUG_DEALER:
+						{
+							SetPlayerPos(playerid, 2166.2034, -1675.3135, 15.0859);
+						}
 						case JOB_BOXER:
 						{
 						    SetPlayerPos(playerid,766.0804,14.5133,1000.7004);
