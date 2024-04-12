@@ -31,7 +31,7 @@
 DrugDealer_OnPlayerExitVehicle(playerid)
 {
 	new vehicleid = GetPlayerVehicleID(playerid);
-	if(vehicleid == INVALID_VEHICLE_ID)
+	if(vehicleid <= 0)
 	{
 		vehicleid = gLastCar[playerid];
 	}
@@ -49,7 +49,7 @@ DrugDealer_OnPlayerDiconnect(playerid)
 	if(GetPVarInt(playerid, PVAR_DEALER_PRICE) != 0)
 	{
 		new vehicleid = GetPlayerVehicleID(playerid);
-		if(vehicleid == INVALID_VEHICLE_ID)
+		if(vehicleid <= 0)
 		{
 			vehicleid = gLastCar[playerid];
 		}

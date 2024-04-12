@@ -82,7 +82,7 @@ EnableDrugDealing(playerid, vehicleid, price)
 
 	SetPVarInt(playerid, PVAR_DEALER_PRICE, price);
 
-	new STREAMER_TAG_3D_TEXT_LABEL:text3d = CreateDynamic3DTextLabel(sprintf("Cennik lodów:\n1 ga³ka - %d$\n\n((wpisz /kupdragi aby kupiæ narkotyki))", price), 
+	new text3d = CreateDynamic3DTextLabel(sprintf("Cennik lodów:\n1 ga³ka - %d$\n\n((wpisz /kupdragi aby kupiæ narkotyki))", price), 
 		COLOR_VIOLET, 0.0, 0.0, 0.3, 10.0, INVALID_PLAYER_ID, vehicleid);
 	MAP_insert_val_val(VehicleDrugInfo, _:vehicleid, text3d);
 
