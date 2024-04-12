@@ -82,13 +82,17 @@ command_akceptuj_drugs(playerid)
 	{
 		if(kaska[playerid] > DrugPrice[playerid] && DrugPrice[playerid] > 0)
 		{
-			if(PlayerInfo[playerid][pDrugs] < 10)
+			if(PlayerInfo[playerid][pDrugs] < NORMAL_PLAYER_MAX_DRUGS)
 			{
 				if(IsPlayerConnected(DrugOffer[playerid]))
 				{
-					if(PlayerInfo[playerid][pDrugs] + DrugGram[playerid] > 10)
+					if(PlayerInfo[playerid][pDrugs] + DrugGram[playerid] > NORMAL_PLAYER_MAX_DRUGS)
 					{
-						DrugGram[playerid] = 10 - PlayerInfo[playerid][pDrugs];
+						new newDrugsGram = NORMAL_PLAYER_MAX_DRUGS - PlayerInfo[playerid][pDrugs];
+						MruMessageBadInfoF(playerid, "Nie masz miejsca na %d gram narkotyków, wiêc kupujesz tylko %d.", DrugGram[playerid], newDrugsGram);
+						MruMessageBadInfoF(DrugOffer[playerid], "Gracz nie  mia³ miejsca na %d narkotyków, wiêc kupi³ tylko %d.", DrugGram[playerid], newDrugsGram);
+
+						DrugGram[playerid] = newDrugsGram;
 					}
 
 					MruMessageGoodInfoF(playerid, "Kupi³eœ %d gram za $%d od Dilera Dragów %s. Aby je wzi¹æ wpisz /wezdragi.",DrugGram[playerid],DrugPrice[playerid], GetNick(DrugOffer[playerid]));
@@ -119,7 +123,7 @@ command_akceptuj_drugs(playerid)
 			}
 			else
 			{
-				sendTipMessageEx(playerid, COLOR_GREY, "Masz ju¿ za du¿o narkotyków, u¿yj ich najpierw !");
+				sendTipMessageEx(playerid, COLOR_GREY, "Mo¿esz posiadaæ maksymalnie 10 gram naroktyków!");
 				return 1;
 			}
 		}

@@ -24,5 +24,8 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 #define PVAR_DEALER_PRICE "dealer_price"
+#define BASE_DRUGS_CAPACITY 6
+#define SKILL_DRUGS_CAPACITY_MULTIPLIER 6
+#define NORMAL_PLAYER_MAX_DRUGS 10
 
 //end

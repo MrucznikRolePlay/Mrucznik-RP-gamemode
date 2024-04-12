@@ -16,7 +16,7 @@ diler_wez_dragi(playerid, weight)
 
     new skill = GetPlayerJobSkill(playerid, JOB_DRUG_DEALER);
     new currentDrugs = PlayerInfo[playerid][pDrugs];
-    new maxDrugs = 6 * skill;
+    new maxDrugs =  BASE_DRUGS_CAPACITY + SKILL_DRUGS_CAPACITY_MULTIPLIER * skill;
 
     if(PlayerInfo[playerid][pDrugs] >= maxDrugs)
     {

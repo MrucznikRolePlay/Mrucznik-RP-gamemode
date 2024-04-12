@@ -34,13 +34,19 @@ command_kupdragi_Impl(playerid, weight)
     new dealerid = GetClosestDrugDealer(playerid);
     if(dealerid == INVALID_PLAYER_ID)
     {
-        MruMessageFail(playerid, "Jesteœ zbyt daleko od dilera.");
+        MruMessageFail(playerid, "Nie ma w pobli¿u ¿adnego dilera lub jesteœ od niego zbyt daleko.");
         return 1;
     }
 
     if(weight < 0)
     {
         MruMessageFail(playerid, "Waga nie mo¿e byæ ujemna.");
+        return 1;
+    }
+
+    if(weight + PlayerInfo[playerid][pDrugs]  > NORMAL_PLAYER_MAX_DRUGS)
+    {
+        MruMessageFailF(playerid, "Mo¿esz mieæ maksymalnie %d gram narkotyków. Aktualnie masz %d.", NORMAL_PLAYER_MAX_DRUGS, PlayerInfo[playerid][pDrugs]);
         return 1;
     }
 
