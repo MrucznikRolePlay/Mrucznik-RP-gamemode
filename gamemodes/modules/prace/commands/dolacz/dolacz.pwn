@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   dolacz                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,15 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "dolacz\dolacz.pwn"
-
+#include "dolacz_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_dolacz()
 {
-    command_dolacz();
+    new command = Command_GetID("dolacz");
+
+    //aliases
+    Command_AddAlt(command, "join");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:dolacz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Do³¹cz do pracy dorywczej.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_dolacz_Impl(playerid);
 }
