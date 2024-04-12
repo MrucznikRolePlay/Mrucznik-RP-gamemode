@@ -191,7 +191,7 @@ YCMD:dolacz(playerid, params[], help)
 					    SendClientMessage(playerid, COLOR_WHITE, "   Za zgaszony po¿ar dostaniesz 80 000$, po¿ary pojawiaj¹ siê co godzinê.");
 					    SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz te¿ usuwaæ plamy oleju, za co dostajez 12 500$.");
 					    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
-					    GettingJob[playerid] = 10;
+					    GettingJob[playerid] = 11;
 				}
 		  		else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,766.0804,14.5133,1000.7004))
 		  		{

@@ -1757,7 +1757,12 @@ public CustomPickups()
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, -1932.3859,276.2117,41.0391) || mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2769.8376,-1610.7819,10.9219))
 		{
 			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Mechanikiem i Kierowca Wyscigowym~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
+			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Mechanikiem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
+		}
+		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0,2029.4490,-1404.7776,17.2507))
+		{
+			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
+			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Lekarzem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
 		}
 		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2226.1716,-1718.1792,13.5165))
 		{
