@@ -180,6 +180,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 			SetPlayerCheckpoint(playerid, 2248.4707,-1139.6617,25.7001, 4); //... ustawia nastepnego
 			CP[playerid]=552; //przypisuje id dla cp
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+			GiveMoneyForBusStop(playerid, 55);
 
 		}
 		else if(CP[playerid]==552)
@@ -200,6 +201,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 			CP[playerid]=554;
 			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - El Corona - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Skate Park");
 			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+			GiveMoneyForBusStop(playerid, 55);
 		}
 		else if(CP[playerid]==554)
 		{
