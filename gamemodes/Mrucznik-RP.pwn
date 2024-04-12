@@ -1557,7 +1557,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		foreach(new i : Player)
 		{
-			if(IsAPolicja(i) || GetPlayerFraction(i) == FRAC_ERS || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+			if(IsAPolicja(i) || GetPlayerFraction(i) == FRAC_ERS || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
 				DisablePlayerCheckpoint(i);
 		}
 	}
