@@ -13,7 +13,7 @@
             "type": "string",
             "size": "36",
             "name": "opcja",
-            "description": "Sprawdz, Reload, Goto, Lista"
+            "description": "Sprawdz, Reload, Goto, Lista, usun"
         },
         {
             "type": "integer",

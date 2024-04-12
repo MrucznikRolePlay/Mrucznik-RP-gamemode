@@ -156,6 +156,25 @@ command_agraffiti_Impl(playerid, opcja[36], id)
             }
         }
     }
+    else if(strcmp(opcja,"usun",true) == 0)
+    {
+        if(PlayerInfo[playerid][pAdmin] < GRAFFITI_ADMIN)
+        {
+            noAccessMessage(playerid);
+            return 1;
+        }
+        new i = graffiti_FindNearest(playerid);
+        if(i!=INVALID_GRAFID)
+        {
+            graffiti_DeleteMySQL(i);
+            graffiti_Zeruj(i);
+            GameTextForPlayer(playerid, "~r~Usunieto!",2000, 5);
+        }
+        else
+        {
+            sendTipMessage(playerid, "Nie znaleziono graffiti w pobli¿u. (podejdŸ bli¿ej)");
+        }
+    }
     return 1;
 }
 
