@@ -243,53 +243,62 @@ Taxi_ShowHUD(playerid)
 
 
 
-StartBusRoute()
+StartBusRoute(playerid, listitem)
 {
-	PlayerInfo[playerid][pLinia55]=1;
+	new routeTime;
+	switch(listitem)
+	{
+		case 0: // Linia 55
+		{
+			PlayerInfo[playerid][pLinia55] = 1;
+			CP[playerid] = 551;
+			routeTime = 60000*6;
+
+			SetPlayerCheckpoint(playerid, 2215.8428,-1436.8223,23.4033, 4);
+			Przystanek(playerid, COLOR_BLUE, "Linia nr. 55\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
+		}
+		case 1: // linia 72
+		{
+			PlayerInfo[playerid][pLinia72] = 1;
+			CP[playerid] = 721;
+			routeTime = 60000*6;
+
+			SetPlayerCheckpoint(playerid, 2818.4243,-1576.9399,10.9287, 4);
+			Przystanek(playerid, COLOR_NEWS, "Linia nr. 72 (dojazd)\n{808080}Kierunek: BAZA MECHANIKÓW (pêtla) \nWszytkie przystanki NA ¯¥DANIE (N/¯)");
+		}
+		case 2: // linia 96
+		{
+			PlayerInfo[playerid][pLinia96] = 1;
+			CP[playerid] = 961;
+			routeTime = 60000*5;
+
+			SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
+			Przystanek(playerid, COLOR_GREEN, "Linia nr. 96\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
+
+		}
+		case 3: // linia 82
+		{
+			PlayerInfo[playerid][pLinia82] = 1;
+			CP[playerid] = 821;
+			routeTime = 60000*6;
+
+			SetPlayerCheckpoint(playerid, 1173.1520,-1825.2843,13.1789, 4);
+			Przystanek(playerid,COLOR_YELLOW, "Linia nr. 82\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
+		}
+		case 4: // linia 85
+		{
+			PlayerInfo[playerid][pLinia85] = 1;
+			CP[playerid] = 501;
+			routeTime = 60000*8;
+
+			SetPlayerCheckpoint(playerid, 2119.7363,-1896.8149,13.1345, 4);
+			Przystanek(playerid, COLOR_GREEN, "Linia nr. 85\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
+		}
+	}
+
 	SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS.");
-	SetPlayerCheckpoint(playerid, 2215.8428,-1436.8223,23.4033, 4); // Ustawiamy pocz¹tkowy CP
-	CP[playerid] = 551; //Przypisek CP do dalszych
-	PlayerInfo[playerid][pNatrasiejest] = 1; //Kierowca jest w trasie
-	Przystanek(playerid, COLOR_BLUE, "Linia nr. 55\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-	SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
-	BusCzit[playerid] = 1;
-
-
-	PlayerInfo[playerid][pLinia72] = 1;
-	SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS.");
-	SetPlayerCheckpoint(playerid, 2818.4243,-1576.9399,10.9287, 4);
-	CP[playerid] = 721;
 	PlayerInfo[playerid][pNatrasiejest] = 1;
-	Przystanek(playerid, COLOR_NEWS, "Linia nr. 72 (dojazd)\n{808080}Kierunek: BAZA MECHANIKÓW (pêtla) \nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-	SetTimerEx("AntyBusCzit", 60000*5, 0, "d", playerid);
-	BusCzit[playerid] = 1;
-
-
-	PlayerInfo[playerid][pLinia96]= 1;
-	SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
-	SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
-	CP[playerid] = 961;
-	PlayerInfo[playerid][pNatrasiejest] = 1;
-	Przystanek(playerid, COLOR_GREEN, "Linia nr. 96\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-	SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
-	BusCzit[playerid] = 1;
-
-	PlayerInfo[playerid][pLinia82]= 1;
-	SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
-	SetPlayerCheckpoint(playerid, 1173.1520,-1825.2843,13.1789, 4);
-	CP[playerid] = 821;
-	PlayerInfo[playerid][pNatrasiejest] = 1;
-	Przystanek(playerid,COLOR_YELLOW, "Linia nr. 82\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-	SetTimerEx("AntyBusCzit", 60000*8, 0, "d", playerid);
-	BusCzit[playerid] = 1;
-
-	PlayerInfo[playerid][pLinia85]= 1;
-	SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS");
-	SetPlayerCheckpoint(playerid, 2119.7363,-1896.8149,13.1345, 4);
-	CP[playerid] = 501;
-	PlayerInfo[playerid][pNatrasiejest] = 1;
-	Przystanek(playerid, COLOR_GREEN, "Linia nr. 85\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-	SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
+	SetTimerEx("AntyBusCzit", routeTime, 0, "d", playerid);
 	BusCzit[playerid] = 1;
 }
 
