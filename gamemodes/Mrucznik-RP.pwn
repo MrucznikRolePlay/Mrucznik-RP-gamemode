@@ -3048,7 +3048,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		if(IsACopCar(GetPlayerVehicleID(playerid)) && IsAPolicja(playerid)) sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
         if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
-    else if(oldstate == PLAYER_STATE_DRIVER)
+    else if(oldstate == PLAYER_STATE_DRIVER || oldstate == PLAYER_STATE_EXIT_VEHICLE)
     {
 		DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
         new vehicleid = GetPVarInt(playerid, "car-id");
