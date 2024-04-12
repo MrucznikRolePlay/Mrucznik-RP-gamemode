@@ -41,7 +41,185 @@ enum Jobs {
     JOB_RESERVED_3, // 15 gazeciarz, nieaktywne
     JOB_TRUCKER     // 16 kurier - wylaczone
 }
+
+enum eJobData {
+    JOB_NAME[32],
+    bool:JOB_HAS_SKILL,
+}
+new JobInfo[Jobs][eJobData] = {
+    {"Brak", false},
+    {"υwca nagr鏚", true},
+    {"Prawnik", true},
+    {"Prostytutka", true},
+    {"Diler narkotyk闚", true},
+    {"Z這dziej aut", true},
+    {"Reporter", false},
+    {"Mechanik", true},
+    {"Przemytnik", true},
+    {"Diler broni", true},
+    {"Kierowca", true},
+    {"Lekarz", false},
+    {"Bokser", true},
+    {"Brak", false},
+    {"Brak", false},
+    {"Brak", false},
+    {"Trucker", true}
+};
+
+enum eJobSpawn {
+    JOB_SPAWN_NAME[32],
+    Float:JOB_SPAWN_X,
+    Float:JOB_SPAWN_Y,
+    Float:JOB_SPAWN_Z,
+    Float:JOB_SPAWN_A,
+    JOB_SPAWN_INT,
+    JOB_SPAWN_VW,
+    bool:JOB_SPAWN_ANTI_FALL
+}
+
+new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
+    // name, x, y, z, angle, interior id, virtual world id
+    { // empty job
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // υwca nagr鏚
+        {"υwca nagr鏚 - Los Santos", 322.0553894043, 303.41961669922, 999.1484375, 0.0, 5, 0, false},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Prawnik
+        {"Prawnik - Los Santos", 319.72470092773, -1548.3374023438, 14.555289230347, 230.0, 0, 0, true},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Prostytutka
+        {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Diler narkotyk闚
+        {"Diler narkotyk闚 - Los Santos", 2166.2034, -1675.3135, 15.0859, 0.0, false},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Z這dziej aut
+        {"Z這dziej aut - Los Santos", 0.0, 0.0, 0.0, 0.0},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Reporter
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Mechanik
+        {"Mechanik - Los Santos", 2794.5515,-1619.3689,10.9219, 80.0, 0, 0, false},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Przemytnik
+        {"Przemytnik - Los Santos", 2207.4038, -1725.1147, 13.4060, 0.0, 0, 0, false},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Diler broni
+        {"Diler broni - Los Santos", 0.0, 0.0, 0.0, 0.0},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Kierowca
+        {"Kierowca - Los Santos", 1108.1042, -1796.3079, 16.5938, 90.0, 0, 0, false},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Lekarz
+        {"Lekarz - Los Santos", 2025.4443, -1423.2101, 16.9922, 133.0, 0, 0, false},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Bokser
+        {"Bokser - Los Santos", 766.0804, 14.5133, 1000.7004, 0.0, 5, 0, false},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // reserved 1
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // reserved 2
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // reserved 3
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    },
+    { // Kurier
+        {"Kurier - Los Santos", 1751.4445, -2054.9761, 13.0593, 180.0, 0, 0, false},
+        {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
+    }
+};
+
+enum eJobJoinPosition {
+    JOB_JOIN_NAME[32],
+    JOB_JOIN_X,
+    JOB_JOIN_Y,
+    JOB_JOIN_Z,
+    JOB_JOIN_DRAW_DISTANCE
+}
+new JobJoinPositions[Jobs][MAX_JOB_SPAWNS][eJobJoinPosition] = {
+    { // empty job
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // υwca nagr鏚
+        {"Praca Kierowcy", 322.3034, 317.0233, 999.1484, 30.0}, // Los Santos, Mrucznik Tower
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Prawnik
+        {"Praca Prawnika", 310.3626, -1503.3282, 13.8096, 10.0}, // Los Santos, Mrucznik Tower
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Prostytutka
+        {"Praca Prostytutki", 2438.2761, -1221.3833, 25.1847, 15.0}, // Los Santos, Pig Pen
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Diler narkotyk闚
+        {"Praca Dilera Narkotyk闚", 2166.3772, -1675.3829, 15.0859, 30.0}, // Los Santos, Melina
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Z這dziej aut
+        {"Praca Z這dzieja Aut", 1109.3318, -1796.3042, 16.5938, 30.0}, // Los Santos, Basen Tsunami
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Reporter
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Mechanik
+        {"Praca Mechanika", 2769.8376, -1610.7819, 10.9219, 30.0}, // Los Santos, Baza mechanik闚
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Przemytnik
+        {"Praca Przemytnika", 2226.1716, -1718.1792, 13.5165, 30.0}, // Los Santos, Obok Si這wni Szamboa
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Diler broni
+        {"Praca Dilera Broni", 1366.4325, -1275.2096, 13.5469, 30.0}, // Los Santos, AmmuNation
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Kierowca
+        {"Praca Kierowcy", 1154.2208, -1770.8203, 16.5992, 30.0}, // Los Santos, Basen Tsunami
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Lekarz
+        {"Praca Lekarza", 2029.4490, -1404.7776, 17.2507, 30.0}, // Los Santos, Szpital obok skate parku
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Bokser
+        {"Praca Boksera", 766.0804, 14.5133, 1000.7004, 30.0}, // Los Santos, Si這wnia
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // reserved 1
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // reserved 2
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // reserved 3
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    },
+    { // Kurier
+        {"Praca kuriera", 1751.4445, -2054.9761, 14.5, 25.0}, // Los Santos, Unity Station
+        {"", 0.0, 0.0, 0.0, 0.0}, ...
+    }
+};
+
 //-----------------<[ Zmienne: ]>-------------------
+
+
 //------------------<[ Forwardy: ]>--------------------
 
 //end

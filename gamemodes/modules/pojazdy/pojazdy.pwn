@@ -356,7 +356,7 @@ Car_Load()
                 KomunikacjaMiejsca[CarData[i][c_ID]] = gKMCounter;
                 new Float:height = 1.5;
                 if(CarData[i][c_Model] == 431 || CarData[i][c_Model] == 437) height = 3.5;
-                Busnapisn[gKMCounter] = CreateDynamic3DTextLabel("° Komunikacja miejska °", COLOR_BLUE, 0.0, 0.0, height, 30.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
+                Busnapisn[gKMCounter] = CreateDynamic3DTextLabel("° Komunikacja miejska °", COLOR_YELLOW, 0.0, 0.0, height, 30.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
                 gKMCounter++;
             }
         }

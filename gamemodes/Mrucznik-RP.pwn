@@ -301,6 +301,8 @@ public OnGameModeInit()
     NowaWybieralka_Init();
 	LoadBusiness(); 
 	LoadBusinessPickup(); 	
+	InitializeJobs();
+
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
@@ -1086,6 +1088,8 @@ public OnPlayerConnect(playerid)
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
 
     //Ikony
+	InitializeJobIcons(playerid);
+
     SetPlayerMapIcon(playerid, 1, 1172.0771, -1323.3496, 15.4030, 22, 0); //Szpital
     SetPlayerMapIcon(playerid, 2, 1024.7610, -1025.5515, 38.2944, 63, 0); //Paint & Spray (Temple)
     SetPlayerMapIcon(playerid, 3, 544.3761, -1276.2046, 17.2482, 55, 0); //Grotti (wypo¿yczalnia aut)
@@ -1132,21 +1136,13 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 44, 2302.0964, -16.2240, 26.4844, 52, 0); //Bank w PC
     SetPlayerMapIcon(playerid, 45, 2112.7124, -1213.1012, 23.6923, 45, 0); //Suburban obok Salonu Aut
     SetPlayerMapIcon(playerid, 46, 2421.2805, -1223.2761, 24.9988, 21, 0); //Pig Pen
-    SetPlayerMapIcon(playerid, 47, 2770.6140, -1610.7180, 10.6489, 56, 0); //Mechanik (Praca)
     SetPlayerMapIcon(playerid, 48, 1961.5001, -2194.4309, 13.2740, 5, 0); //Lotnisko
     SetPlayerMapIcon(playerid, 49, 1941.3965, -2116.1799, 13.3525, 21, 0); //Dziki Tygrys
-    SetPlayerMapIcon(playerid, 50, 1765.1974, -2063.2681, 13.3357, 56, 0); //Praca na Las Colinas (nie pamiêtam nazwy)
     SetPlayerMapIcon(playerid, 51, 1352.4242, -1758.4613, 13.5078, 36, 0); //24/7 obok Urzêdu
-    SetPlayerMapIcon(playerid, 52, 1109.1722, -1796.2472, 16.5938, 56, 0); //Z³odziej Aut
-    SetPlayerMapIcon(playerid, 53, 1154.2104, -1770.6967, 16.5938, 56, 0); //Busiarz
     SetPlayerMapIcon(playerid, 54, 900.8502, -1101.3074, 23.5000, 12, 0); //Cmentarz
-    SetPlayerMapIcon(playerid, 55, 1365.9257, -1275.1326, 13.5469, 56, 0); //Diler Broni
     SetPlayerMapIcon(playerid, 56, 1790.5382,-1164.7021,23.8281, 18, 0); //GunShop obok Remizy
-    SetPlayerMapIcon(playerid, 57, 2166.2034, -1675.3135, 15.0859, 56, 0); //Diler Dragów
     SetPlayerMapIcon(playerid, 58, 1787.4432, -1866.6737, 13.5711, 52, 0); //Bankomat obok Dworca G³ównego
     SetPlayerMapIcon(playerid, 59, 1833.0537, -1842.6494, 13.5781, 36, 0); //24/7 na Idlewood
-    SetPlayerMapIcon(playerid, 60, 2226.0696, -1718.3290, 13.5182, 56, 0); //Przemytnik (Praca)
-    SetPlayerMapIcon(playerid, 61, 2103.4141, -1798.7494, 13.6504, 56, 0); //Pizzerman (Praca)
     SetPlayerMapIcon(playerid, 62, 382.8541, -2079.4890, 7.5630, 9, 0); //Miejsce do wêdkowania
     SetPlayerMapIcon(playerid, 63, 342.0005, -1518.7524, 33.2482, 52, 0); //Bankomat obok Mrucznik Tower
     SetPlayerMapIcon(playerid, 64, 660.0374, -575.8544, 16.3359, 52, 0); //Bankomat obok stacji w Dillimore
@@ -1155,7 +1151,6 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, 67, 1973.2526, 2162.1948, 10.8001, 63, 0); //Paint & Spray w LV
     SetPlayerMapIcon(playerid, 68, -1675.5817, 414.0347, 6.9068, 42, 0); //Stacja benzynowa w SF
     SetPlayerMapIcon(playerid, 69, -1904.4862, 281.9908, 40.774, 63, 0); //Paint & Spray w SF
-    SetPlayerMapIcon(playerid, 70, -1932.1078, 274.0641, 40.7720, 56, 0); //Mechanik SF (Praca)
     SetPlayerMapIcon(playerid, 71, -2029.1031, 157.1051, 28.5630, 42, 0); //Stacja benzynowa w SF V2
     SetPlayerMapIcon(playerid, 72, -2405.7351, 975.3979, 45.0239, 42, 0); //Stacja benzynowa w SF V3
     SetPlayerMapIcon(playerid, 73, -2425.5703, 1023.0456, 50.1247, 63, 0); //Paint & Spray w SF V2 (Juniper Hollow)
@@ -2287,60 +2282,36 @@ SetPlayerSpawnPos(playerid)
 				}
 				else if(PlayerInfo[playerid][pJob] > 0) //Spawn Prac
 				{
-				    switch(PlayerInfo[playerid][pJob])
-				    {
-						case JOB_MECHANIC:
+					new job = PlayerInfo[playerid][pJob];
+					new i = 0; // TODO: get this from player spawn options
+
+					if(job <= 0 || job >= sizeof(JobInfo) || isnull(JobSpawns[job][i][JOB_SPAWN_NAME]))
+					{
+						if(PlayerCanSpawnWihoutTutorial(playerid))
 						{
-						    SetPlayerPos(playerid,2794.5515,-1619.3689,10.9219);
-		    				SetPlayerFacingAngle(playerid, 80.0);
+							//Spawn cywila
+							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+							SetPlayerFacingAngle(playerid, 0.94);
 						}
-						case JOB_LAWYER:
+					}
+					else
+					{
+						SetPlayerPos(playerid, 
+							JobSpawns[job][i][JOB_SPAWN_X], 
+							JobSpawns[job][i][JOB_SPAWN_Y], 
+							JobSpawns[job][i][JOB_SPAWN_Z]);
+						SetPlayerFacingAngle(playerid,
+							JobSpawns[job][i][JOB_SPAWN_A]);
+						SetPlayerInterior(playerid,
+							JobSpawns[job][i][JOB_SPAWN_INT]);
+						SetPlayerVirtualWorld(playerid,
+							JobSpawns[job][i][JOB_SPAWN_VW]);
+
+						if(JobSpawns[job][i][JOB_SPAWN_ANTI_FALL])
 						{
 							Wchodzenie(playerid);
-						    SetPlayerPos(playerid,319.72470092773, -1548.3374023438, 14.555289230347);
-		    				SetPlayerFacingAngle(playerid, 230.0);
 						}
-						case JOB_LOWCA:
-						{
-						    SetPlayerPos(playerid,322.0553894043, 303.41961669922, 999.1484375);
-		    				SetPlayerInterior(playerid,5);
-						}
-						case JOB_DRUG_DEALER:
-						{
-							SetPlayerPos(playerid, 2166.2034, -1675.3135, 15.0859);
-						}
-						case JOB_MEDIC:
-						{
-							SetPlayerPos(playerid, 2025.4443,-1423.2101,16.9922);
-		    				SetPlayerFacingAngle(playerid, 133.7913);
-						}
-						case JOB_BOXER:
-						{
-						    SetPlayerPos(playerid,766.0804,14.5133,1000.7004);
-		    				SetPlayerInterior(playerid, 5);
-						}
-						case JOB_TRUCKER:
-						{
-						    SetPlayerPos(playerid, 1751.4445, -2054.9761, 13.0593);
-		    				SetPlayerFacingAngle(playerid, 180.0);
-						}
-						case JOB_DRIVER:
-						{
-						    SetPlayerPos(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
-						}
-						case JOB_SMUGGLER:
-						{
-						    SetPlayerPos(playerid, 2207.4038,-1725.1147,13.4060);
-						}
-						default: //Spawn cywila
-						{
-							if(PlayerCanSpawnWihoutTutorial(playerid))
-							{
-								SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-								SetPlayerFacingAngle(playerid, 0.94);
-							}
-						}
-				    }
+					}
 				}
 				else //Spawn cywila
 				{

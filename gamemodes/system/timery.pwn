@@ -1721,224 +1721,178 @@ public CustomPickups()
 	foreach(new i : Player)
 	{
         mystate = GetPlayerState(i);
-		if (IsPlayerInRangeOfPoint(i, 2.0, 323.0342,1118.5804,1083.8828))
-		{//Buyable Drugs for Drug Dealers
-			GameTextForPlayer(i, "~w~Wpisz /get dragi aby wziac ~r~Dragi~y~ na sprzedaz~n~Dostosowane do twojego skillu", 5000, 3);
-		}
-		else if (IsPlayerInRangeOfPoint(i, 3, 1481.1531,-1770.0277,18.7958))
+
+		if(ShowPlayerJobMessage(i, mystate))
 		{
-			GameTextForPlayer(i, "~y~Witamy przed ~r~Ratuszem~n~~w~Wpisz /wejdz aby wejsc", 5000, 5);
+			return 1;
 		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 322.3034,317.0233,999.1484))
+
+		if(mystate == 1)
 		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Lowca Nagrod~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 310.3626,-1503.3282,13.8096))
-		{
-			if(PlayerInfo[i][pJob] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Prawnikiem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1215.1304,-11.8431,1000.9219))
-		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Prostytutka~n~~w~Wpisz /dolacz jesli chcesz nia zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2166.3772,-1675.3829,15.0859))
-		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Dilerem Dragow~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1109.3318,-1796.3042,16.5938))
-		{
-			if(PlayerInfo[i][pJob] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Zlodziejem Aut~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, -1932.3859,276.2117,41.0391) || mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2769.8376,-1610.7819,10.9219))
-		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Mechanikiem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0,2029.4490,-1404.7776,17.2507))
-		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Lekarzem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 2226.1716,-1718.1792,13.5165))
-		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Przemytnikiem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 1366.4325,-1275.2096,13.5469))
-		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Dilerem Broni~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, 766.0804,14.5133,1000.7004))
-		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Bokserem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (mystate == 1 &&IsPlayerInRangeOfPoint(i, 2.0, -77.7288,-1136.3896,1.0781))
-		{
-			if(PlayerInfo[i][pJob] > 0 || PlayerInfo[i][pMember] > 0) {}
-			else { GameTextForPlayer(i, "~g~Witaj,~n~~y~mozesz tu zostac ~r~Truckerem~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 5000, 3); }
-		}
-		else if (IsPlayerInRangeOfPoint(i, 2.0, 327.5762,-1546.8887,13.8364))
-		{
-			GameTextForPlayer(i, "~g~Wpisz ~w~/kamera-w ~g~aby ogladac kamere", 5000, 3);
-		}
-		else if (mystate == 1 && GraczBankomat(i))
-		{
-			GameTextForPlayer(i, "~g~Uzyj ~w~/wplac ~g~lub ~w~/wyplac~n~ ~g~aby skorzystac z bankomatu", 5000, 3);
-		}
-		else if(IsPlayerInRangeOfPoint(i, 2.0,-50,-269,6.599999))
-		{
-			if(OrderReady[i] > 0)
+			if (IsPlayerInRangeOfPoint(i, 2.0, 323.0342,1118.5804,1083.8828))
+			{//Buyable Drugs for Drug Dealers
+				GameTextForPlayer(i, "~w~Wpisz /get dragi aby wziac ~r~Dragi~y~ na sprzedaz~n~Dostosowane do twojego skillu", 5000, 3);
+			}
+			else if (IsPlayerInRangeOfPoint(i, 3, 1481.1531,-1770.0277,18.7958))
 			{
-				switch (OrderReady[i])
+				GameTextForPlayer(i, "~y~Witamy przed ~r~Ratuszem~n~~w~Wpisz /wejdz aby wejsc", 5000, 5);
+			}
+			else if (IsPlayerInRangeOfPoint(i, 2.0, 327.5762,-1546.8887,13.8364))
+			{
+				GameTextForPlayer(i, "~g~Wpisz ~w~/kamera-w ~g~aby ogladac kamere", 5000, 3);
+			}
+			else if (GraczBankomat(i))
+			{
+				GameTextForPlayer(i, "~g~Uzyj ~w~/wplac ~g~lub ~w~/wyplac~n~ ~g~aby skorzystac z bankomatu", 5000, 3);
+			}
+			else if(IsPlayerInRangeOfPoint(i, 2.0,-50,-269,6.599999))
+			{
+				if(OrderReady[i] > 0)
 				{
-				    case 1:
+					switch (OrderReady[i])
 					{
-						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 25_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
-						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						case 1:
+						{
+							GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
+							ZabierzKase(i, 25_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+							PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 2:
+						{
+							GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
+							ZabierzKase(i, 40_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+							PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 3:
+						{
+							GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1);
+							ZabierzKase(i, 60_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+							PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
+							PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 4:
+						{
+							GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1);
+							ZabierzKase(i, 55_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+							PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
+							PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 5:
+						{
+							GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
+							ZabierzKase(i, 80_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+							PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
+							PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
+							PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 6:
+						{
+							GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
+							ZabierzKase(i, 75_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+							PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
+							PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
+							PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 7:
+						{
+							GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
+							ZabierzKase(i, 85_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+							PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 107;
+							PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
+							PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 8:
+						{
+							GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
+							ZabierzKase(i, 80_00);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
+							PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 107;
+							PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
+							PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 9:
+						{
+							GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
+							ZabierzKase(i, 100_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
+							PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 207;
+							PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
+							PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
+						case 10:
+						{
+							GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
+							ZabierzKase(i, 95_000);
+							PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
+							PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
+							PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
+							PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 207;
+							PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
+							PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
+							SetPlayerArmour(i, 90);
+							SetPlayerHealth(i, 100);
+							SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
+						}
 					}
-					case 2:
-					{
-						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 40_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
-						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
-					case 3:
-					{
-						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 60_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
-						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
-						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
-					case 4:
-					{
-						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1);
-						ZabierzKase(i, 55_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
-						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
-						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
-					case 5:
-					{
-						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						ZabierzKase(i, 80_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
-						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
-						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
-						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
-					case 6:
-					{
-						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 25, 100); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						ZabierzKase(i, 75_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
-						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 25; PlayerInfo[i][pAmmo3] = 100;
-						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
-						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
-					case 7:
-					{
-						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						ZabierzKase(i, 85_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
-						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 107;
-						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
-						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
-					case 8:
-					{
-						GivePlayerWeapon(i, 24, 107); GivePlayerWeapon(i, 29, 2030); GivePlayerWeapon(i, 27, 107); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 100);
-						ZabierzKase(i, 80_00);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 107;
-						PlayerInfo[i][pGun4] = 29; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 107;
-						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
-						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 100;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
-					case 9:
-					{
-						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 31, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
-						ZabierzKase(i, 100_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
-						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 207;
-						PlayerInfo[i][pGun5] = 31; PlayerInfo[i][pAmmo5] = 2050;
-						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
-					case 10:
-					{
-						GivePlayerWeapon(i, 24, 207); GivePlayerWeapon(i, 28, 2030); GivePlayerWeapon(i, 27, 207); GivePlayerWeapon(i, 30, 2050); GivePlayerWeapon(i, 4, 1); GivePlayerWeapon(i, 34, 200);
-						ZabierzKase(i, 95_000);
-						PlayerInfo[i][pGun1] = 4; PlayerInfo[i][pAmmo1] = 1;
-						PlayerInfo[i][pGun2] = 24; PlayerInfo[i][pAmmo2] = 207;
-						PlayerInfo[i][pGun4] = 28; PlayerInfo[i][pAmmo4] = 2030;
-						PlayerInfo[i][pGun3] = 27; PlayerInfo[i][pAmmo3] = 207;
-						PlayerInfo[i][pGun5] = 30; PlayerInfo[i][pAmmo5] = 2050;
-						PlayerInfo[i][pGun6] = 34; PlayerInfo[i][pAmmo6] = 200;
-						SetPlayerArmour(i, 90);
-						SetPlayerHealth(i, 100);
-						SendClientMessage(i, COLOR_LIGHTBLUE, "* Zabra³eœ zamówiony towar.");
-					}
+
+					OrderReady[i] = 0;
+
+					new redisKey[40];
+					format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[i][pUID]);
+					Redis_IncrBy(redisKey, -1);
+					Redis_Expire(redisKey);
 				}
-
-				OrderReady[i] = 0;
-
-				new redisKey[40];
-				format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[i][pUID]);
-				Redis_IncrBy(redisKey, -1);
-				Redis_Expire(redisKey);
 			}
 		}
 

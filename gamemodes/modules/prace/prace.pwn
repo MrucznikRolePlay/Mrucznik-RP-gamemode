@@ -27,31 +27,48 @@
 
 #include "command_akceptuj_praca.pwn"
 
-//-----------------<[ Callbacki: ]>-----------------
+//-----------------<[ Inicjalizacja: ]>-----------------
+InitializeJobs()
+{
+	for(new i = 1; i < sizeof(JobInfo); i++)
+	{
+		InitializeJob(i);
+	}
+}
+
+InitializeJob(Jobs:jobid)
+{
+	for(new i; i < MAX_JOB_JOINS; i++)
+	{
+		if(isnull(JobJoinPositions[jobid][i][JOB_JOIN_NAME]))
+		{
+			break;
+		}
+
+		CreateDynamic3DTextLabel(JobJoinPositions[jobid][i][JOB_JOIN_NAME], COLOR_NEWS, 
+			JobJoinPositions[jobid][i][JOB_JOIN_X], JobJoinPositions[jobid][i][JOB_JOIN_Y], JobJoinPositions[jobid][i][JOB_JOIN_Z],
+			JobJoinPositions[jobid][i][JOB_JOIN_DRAW_DISTANCE], INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
+	}
+}
+
+InitializeJobIcons(playerid)
+{
+	for(new jobid = 1; jobid < sizeof(JobInfo); jobid++)
+	{
+		for(new i; i < MAX_JOB_JOINS; i++)
+		{
+			SetPlayerMapIcon(playerid, 61, 
+				JobJoinPositions[jobid][i][JOB_JOIN_X], JobJoinPositions[jobid][i][JOB_JOIN_Y], JobJoinPositions[jobid][i][JOB_JOIN_Z], 
+				56, 0);
+		}
+	}
+}
+
 //-----------------<[ Funkcje: ]>-------------------
 stock GetJobName(Jobs:jobid)
 {
-	new jobName[32];
-	switch(jobid)
-	{
-		case JOB_LOWCA: { strcat(jobName, "£owca nagród"); }
-		case JOB_LAWYER: { strcat(jobName, "Prawnik"); }
-		case JOB_PROSTITUTE: { strcat(jobName, "Prostytutka"); }
-		case JOB_DRUG_DEALER: { strcat(jobName, "Diler narkotyków"); }
-		case JOB_CARTHIEF: { strcat(jobName, "Z³odziej aut"); }
-		case JOB_REPORTER: { strcat(jobName, "Reporter"); }
-		case JOB_MECHANIC: { strcat(jobName, "Mechanik"); }
-		case JOB_SMUGGLER: { strcat(jobName, "Przemytnik"); }
-		case JOB_GUNDEALER: { strcat(jobName, "Diler broni"); }
-		case JOB_DRIVER: { strcat(jobName, "Kierowca autobusu"); }
-		case JOB_MEDIC: { strcat(jobName, "Lekarz"); }
-		case JOB_BOXER: { strcat(jobName, "Bokser"); }
-		// case JOB_RESERVED_1: { strcat(jobName, ""); }
-		// case JOB_RESERVED_2: { strcat(jobName, ""); }
-		// case JOB_RESERVED_3: { strcat(jobName, ""); }
-		case JOB_TRUCKER: { strcat(jobName, "Trucker"); }
-		default: { strcat(jobName, "Brak"); }
-	}
+	new jobName[MAX_JOB_NAME];
+	strcat(jobName, JobInfo[jobid][JOB_NAME]);
 	return jobName;
 }
 
@@ -225,6 +242,35 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 }
 
 //-----------------<[ Timery: ]>-------------------
+
+ShowPlayerJobMessage(playerid, playerState)
+{
+	if(playerState != 1)
+	{
+		return 0; // wyswietlaj komunikaty tylko gdy gracz jest pieszo
+	}
+
+	for(new jobid = 1; jobid < sizeof(JobInfo); jobid++)
+	{
+		for(new i; i < MAX_JOB_JOINS; i++)
+		{
+			if(isnull(JobJoinPositions[jobid][i][JOB_JOIN_NAME]))
+			{
+				break;
+			}
+
+			if(IsPlayerInRangeOfPoint(playerid, 2.0, 
+				JobJoinPositions[jobid][i][JOB_JOIN_X], JobJoinPositions[jobid][i][JOB_JOIN_Y], JobJoinPositions[jobid][i][JOB_JOIN_Z]))
+			{
+				GameTextForPlayer(playerid, sprintf("~g~Witaj,~n~~y~mozesz tu dolaczyc do pracy: ~r~%s~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 
+					GetJobName(i)), 5000, 3); 
+				return 1;
+			}
+		}
+	}
+	return 0;
+}
+
 //------------------<[ MySQL: ]>--------------------
 
 //end

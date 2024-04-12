@@ -118,7 +118,6 @@
 #include "cmd/dn.pwn"
 #include "cmd/do.pwn"
 #include "cmd/dodajweryfikacje.pwn"
-#include "cmd/dolacz.pwn"
 #include "cmd/domint.pwn"
 #include "cmd/dopasuj.pwn"
 #include "cmd/dpa.pwn"
@@ -704,9 +703,6 @@ static Aliases()
 	Command_AddAltNamed("dl", "givelicense");
 	Command_AddAltNamed("dl", "dajlicencje");
 	Command_AddAltNamed("dl", "dajl");
-
-	//dolacz
-	Command_AddAltNamed("dolacz", "join");
 
 	//dutycd
 	Command_AddAltNamed("dutycd", "dutysbi");

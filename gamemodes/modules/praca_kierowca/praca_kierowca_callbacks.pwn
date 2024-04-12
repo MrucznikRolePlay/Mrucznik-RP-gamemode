@@ -159,7 +159,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 	if(CP[playerid]==1201)
 	{
 	    SendClientMessage(playerid, COLOR_GREY, "Dojecha³eœ do zajezdni i zakoñczy³eœ pracê.");
-		Przystanek(playerid, COLOR_YELLOW, "Los Santos Bus Department\n Komunikacja Miejska");
+		Przystanek(playerid, COLOR_YELLOW, "° Komunikacja miejska °");
 		DisablePlayerCheckpoint(playerid);
 		CP[playerid] = 0;
 	}

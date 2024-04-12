@@ -56,8 +56,8 @@ YCMD:pomoc2(playerid, params[], help)
 		case JOB_GUNDEALER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
 		case JOB_DRIVER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /kurs /duty /businfo /trasa /zakoncztrase /zd "); }
 		case JOB_MEDIC: { 
-            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sluzba /sprzedajapteczke /czysc");
-            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sprzedajapteczke /ulecz /apteczka /zastrzyk /diagnoza /zmienplec /kuracja /maseczka"); 
+            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sluzba /czysc /wez gasnice /wez mundur /rezonans /zmienplec");
+            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sprzedajapteczke /ulecz /apteczka /zastrzyk /diagnoza /kuracja /maseczka"); 
         }
 		case JOB_BOXER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /walka /boxstats /naucz"); }
 		// case JOB_RESERVED_1: { }
