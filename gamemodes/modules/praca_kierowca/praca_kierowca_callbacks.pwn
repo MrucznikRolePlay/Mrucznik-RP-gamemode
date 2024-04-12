@@ -448,7 +448,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
 				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				IncreasePlayerJobSkill(playerid, 9);
+				IncreasePlayerJobSkill(playerid, JOB_DRIVER, 9);
 				GiveMoneyForBusStop(playerid, 55, true);
 				CP[playerid] = 0;
 				PlayerInfo[playerid][pLinia55] = 0;
@@ -695,7 +695,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 				SendClientMessage(playerid, COLOR_GREEN, "Chc¹c powtórzyæ t¹ trasê zawróæ wykorzystuj¹c parking znajduj¹cy siê na skrzy¿owaniu w w lewo.");
 				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				IncreasePlayerJobSkill(playerid, 6);
+				IncreasePlayerJobSkill(playerid, JOB_DRIVER, 6);
 				GiveMoneyForBusStop(playerid, 72, true);
 				CP[playerid] = 0;
 				PlayerInfo[playerid][pLinia72] = 0;
@@ -933,7 +933,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
 				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				IncreasePlayerJobSkill(playerid, 11);
+				IncreasePlayerJobSkill(playerid, JOB_DRIVER, 11);
 				GiveMoneyForBusStop(playerid, 82, true);
 				if(GetPlayerFraction(playerid) == FRAC_KT) Sejf_Add(FRAC_KT, 8670);
 				else DajKase(playerid, 8670);
@@ -1239,7 +1239,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
 				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez sygan³ GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				IncreasePlayerJobSkill(playerid, 8);
+				IncreasePlayerJobSkill(playerid, JOB_DRIVER, 8);
 				GiveMoneyForBusStop(playerid, 96, true);
 				CP[playerid] = 0;
 				PlayerInfo[playerid][pLinia96] = 0;
@@ -1514,7 +1514,7 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
 				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez GPS).");
 				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				IncreasePlayerJobSkill(playerid, 85);
+				IncreasePlayerJobSkill(playerid, JOB_DRIVER, 85);
 				GiveMoneyForBusStop(playerid, 85, true);
 				CP[playerid] = 0;
 				PlayerInfo[playerid][pLinia96] = 0;
