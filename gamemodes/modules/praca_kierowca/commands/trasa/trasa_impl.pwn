@@ -63,7 +63,7 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 		{
 			switch(listitem)
 			{
-				case 0,1,2,3,4:
+				case 0,1: // trasa 55 i 72 1 skill
 				{
 					if(PlayerInfo[playerid][pNatrasiejest] != 0)
 					{
@@ -72,12 +72,24 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 						return 1;
 					}
 
-					if(GetPlayerJobSkill(playerid, JOB_DRIVER) < 2 && (listitem == 2 || listitem == 3 || listitem == 4)) // trasa 96, 82, 85 od 2 skilla
+					StartBusRoute(playerid, listitem);
+				}
+				case 2,3,4: // trasa 96, 82, 85 od 2 skilla
+				{
+					if(PlayerInfo[playerid][pNatrasiejest] != 0)
+					{
+						MruMessageFail(playerid, "Ju¿ jesteœ w trasie!");
+						comand_trasa_dialog_show(playerid);
+						return 1;
+					}
+
+					if(GetPlayerJobSkill(playerid, JOB_DRIVER) < 2) 
 					{
 						MruMessageFail(playerid, "T¹ trasê mo¿esz wzi¹æ, gdy zdobêdziesz 2 skill kierowcy.");
 						comand_trasa_dialog_show(playerid);
 						return 1;
 					}
+
 					StartBusRoute(playerid, listitem);
 				}
 				case 5:
