@@ -178,6 +178,20 @@ YCMD:dolacz(playerid, params[], help)
 					    sendTipMessageEx(playerid, COLOR_WHITE, "Do tej pracy wymagane jest prawo jazdy");
 					}
 		  		}
+				else if(GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,2029.4490,-1404.7776,17.2507))
+				{
+					    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }
+					    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Lekarzem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
+					    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
+	 				    SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
+					    SendClientMessage(playerid, COLOR_WHITE, "   Uzdrawiaj graczy, nieœ pomoc rannym, diagnozuj choroby i przeprowadzaj kuracje.");
+						SendClientMessage(playerid, COLOR_WHITE, "   Kuracje, diagnozy oraz leczenie sprzedajesz po stawce, któr¹ sk³onny jest zap³aciæ gracz");
+						SendClientMessage(playerid, COLOR_WHITE, "   Za ka¿d¹ sprzedan¹ apteczkê zarobisz 20k.");
+					    SendClientMessage(playerid, COLOR_WHITE, "   A jeœli to ciê znudzi - z³ap gaœnicê w d³oñ i gaœ po¿ary w Los Santos.");
+					    SendClientMessage(playerid, COLOR_WHITE, "   Za zgaszony po¿ar dostaniesz 80 000$, po¿ary pojawiaj¹ siê co godzinê.");
+					    SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
+					    GettingJob[playerid] = 10;
+				}
 		  		else if (GetPlayerState(playerid) == 1 && PlayerToPoint(3.0, playerid,766.0804,14.5133,1000.7004))
 		  		{
 		  		    if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || GetPlayerOrg(playerid) != 0) { sendTipMessageEx(playerid, COLOR_GREY, "Frakcje nie mog¹ braæ tej pracy !"); return 1; }

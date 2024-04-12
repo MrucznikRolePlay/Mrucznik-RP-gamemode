@@ -2309,6 +2309,11 @@ SetPlayerSpawnPos(playerid)
 						{
 							SetPlayerPos(playerid, 2166.2034, -1675.3135, 15.0859);
 						}
+						case JOB_MEDIC:
+						{
+							SetPlayerPos(playerid, 2025.4443,-1423.2101,16.9922);
+		    				SetPlayerFacingAngle(playerid, 133.7913);
+						}
 						case JOB_BOXER:
 						{
 						    SetPlayerPos(playerid,766.0804,14.5133,1000.7004);
