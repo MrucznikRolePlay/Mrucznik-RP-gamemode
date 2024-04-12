@@ -993,16 +993,6 @@ zmatsowany[playerid] = 0;
 return 1;
 }
 
-/*forward NextPrzystanek(playerid, msg[]);
-public Next(playerid, msg[])
-{
-	SendClientMessage(playerid, COLOR_WHITE, msg);
-    ProxDetector(15.0, playerid, msg, COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);//system autobusów
-    return 1;
-    printf("second has passed, also we have a message: %s", msg);
-    return 1;
-}*/
-
 public odpalanie(playerid)
 {
 	new engine, lights, alarm, doors, bonnet, boot, objective, Float:health, sendername[MAX_PLAYER_NAME], string[256];
@@ -6198,14 +6188,6 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 DialogZbrojowni(playerid)
 {
     ShowPlayerDialogEx(playerid, 8282, DIALOG_STYLE_LIST, "Kup przystosowanie do przechowywania:", "Kastetu\t\t\t\t\t1 000$\nSpadochronu\t\t\t\t5 000$\nSpreju, gaœnicy i aparatu\t\t40 000$\nWibratorów,kwiatów i laski\t\t50 000$\nBroni bia³ej\t\t\t\t750 000$\nPistoletów\t\t\t\t250 000$\nStrzelb\t\t\t\t\t450 000$\nPistoletów maszynowych\t\t550 000$\nKarabinów szturmowych\t\t850 000$\nSnajperek\t\t\t\t700 000$\nBroni ciê¿kiej\t\t\t\t2 000 000$\n£adunków wybuchowych\t\t4 000 000$", "Wybierz", "Cofnij");
-}
-
-Przystanek(playerid, color, tekst[])
-{
-    new car = GetPlayerVehicleID(playerid);
-    if(KomunikacjaMiejsca[car] == -1) return 0;
-	UpdateDynamic3DTextLabelText(Busnapisn[KomunikacjaMiejsca[car]], color, tekst);
-    return 1;
 }
 
 Mnoznik(zone[])

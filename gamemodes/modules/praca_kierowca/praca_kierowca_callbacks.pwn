@@ -168,7 +168,6 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 	{
 		if(CP[playerid]==551) //Sprawdza czy dojecha³ do nastepnego
 		{
-
 			DisablePlayerCheckpoint(playerid); //usuwa cp i...
 			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Przypomnienie_____________|");
 			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpocz¹æ s³u¿by!!!");
