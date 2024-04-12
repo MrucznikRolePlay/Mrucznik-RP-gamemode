@@ -3170,7 +3170,10 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				if(engine) SetVehicleParamsEx(newcar, 0, lights, alarm, doors, bonnet, boot, objective);
 			}
         }
-		gLastCar[playerid] = newcar;
+		if(newcar != INVALID_VEHICLE_ID) 
+		{
+			gLastCar[playerid] = newcar;
+		}
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{
