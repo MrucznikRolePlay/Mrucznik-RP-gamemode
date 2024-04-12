@@ -37,7 +37,7 @@ command_upusc_Impl(playerid, money)
     }
     if(AntySpam[playerid] == 1)
     {
-        sendTipMessage(playerid, "Odczekaj 15 sekund - poœwiêæ ten czas na wykonanie akcji RP.");
+        sendTipMessage(playerid, "Odczekaj 10 sekund - poœwiêæ ten czas na wykonanie akcji RP.");
         return 1;
     }
 
@@ -56,6 +56,7 @@ command_upusc_Impl(playerid, money)
     CreateMoneyPickup(x, y, z - 0.4, int, vw, money, 0, PlayerInfo[playerid][pUID]);
 
     AntySpam[playerid] = 1;
+    SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
     return 1;
 }
 

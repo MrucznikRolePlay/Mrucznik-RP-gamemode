@@ -62,8 +62,6 @@ command_kupdragi_Impl(playerid, weight)
     ZabierzKase(playerid, price);
     DajKase(dealerid, price - DRUG_SELL_PRICE);
 
-    IncreasePlayerJobSkill(dealerid, JOB_DRUG_DEALER, 1);
-
     PlayerInfo[playerid][pDrugs] += weight;
 
     // messages
@@ -93,6 +91,10 @@ command_kupdragi_Impl(playerid, weight)
 
         SetTimerEx("spamujewl",300_000,0,"d",dealerid); //5min anty-wl
         spamwl[dealerid] = 1;
+    }
+    else
+    {
+        IncreasePlayerJobSkill(dealerid, JOB_DRUG_DEALER, 1);
     }
     return 1;
 }

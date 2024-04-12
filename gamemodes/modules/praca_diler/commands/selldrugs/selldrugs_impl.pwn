@@ -102,7 +102,7 @@ command_akceptuj_drugs(playerid)
 					Log(payLog, INFO, "%s kupi³ od %s paczkê %d narkotyków za %d$", GetPlayerLogName(playerid), GetPlayerLogName(DrugOffer[playerid]), DrugGram[playerid], DrugPrice[playerid]);
 					//
 					PlayerInfo[DrugOffer[playerid]][pPayCheck] += DrugPrice[playerid];
-					PlayerInfo[DrugOffer[playerid]][pDrugsSkill] ++;
+        			IncreasePlayerJobSkill(DrugOffer[playerid], JOB_DRUG_DEALER, 1);
 					ZabierzKase(playerid, DrugPrice[playerid]);
 					PlayerInfo[playerid][pDrugs] += DrugGram[playerid];
 					PlayerInfo[DrugOffer[playerid]][pDrugs] -= DrugGram[playerid];
