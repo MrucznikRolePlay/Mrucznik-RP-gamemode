@@ -43,9 +43,9 @@ command_podszyj_Impl(playerid)
         return 1;
     }
 
-    if(PlayerInfo[playerid][pTajniak] > 0)
+    if(SecretAgent[playerid] > 0)
     {
-        PlayerInfo[playerid][pTajniak] = 0;
+        SecretAgent[playerid] = 0;
         SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
         SetPlayerToTeamColor(playerid);
         MruMessageGoodInfo(playerid, "Przesta³eœ siê podszywaæ.");
@@ -64,7 +64,7 @@ command_podszyj_Impl(playerid)
             skin = skins[random(sizeof(skins))];
         }
 
-        PlayerInfo[playerid][pTajniak] = 6;
+        SecretAgent[playerid] = 6;
         SetPlayerSkinEx(playerid, skin);
         SetPlayerColor(playerid,TEAM_HIT_COLOR);
         MruMessageGoodInfo(playerid, "Podszy³eœ siê pod ¿ula. Mo¿esz teraz inflitrowaæ dilerów narkotyków.");

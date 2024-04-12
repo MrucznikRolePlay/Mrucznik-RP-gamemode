@@ -84,6 +84,7 @@ YCMD:dutycd(playerid, params[], help)
 					
 	    		    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     OnDutyCD[playerid] = 0;
                     PrzywrocBron(playerid);
                     SetPlayerToTeamColor(playerid);
@@ -117,6 +118,7 @@ YCMD:dutycd(playerid, params[], help)
                     ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                     SetPlayerArmour(playerid, 0.0);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     OnDutyCD[playerid] = 0;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     PrzywrocBron(playerid);
@@ -150,6 +152,7 @@ YCMD:dutycd(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     OnDutyCD[playerid] = 0;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     PrzywrocBron(playerid);

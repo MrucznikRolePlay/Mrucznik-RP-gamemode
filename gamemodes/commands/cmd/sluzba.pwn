@@ -90,6 +90,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerHealth(playerid, 100);
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     SetPlayerArmour(playerid, 0.0);
                     PrzywrocBron(playerid);
                     SetPlayerToTeamColor(playerid);
@@ -124,6 +125,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     PrzywrocBron(playerid);
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
@@ -157,6 +159,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     SetPlayerToTeamColor(playerid);
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     PrzywrocBron(playerid);
@@ -192,6 +195,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     PrzywrocBron(playerid);
                 }
@@ -281,6 +285,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
                     PrzywrocBron(playerid);

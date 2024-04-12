@@ -1909,7 +1909,7 @@ public OnPlayerSpawn(playerid)
         PlayerInfo[playerid][pMember] = 0;
         PlayerInfo[playerid][pRank] = 0;
         PlayerInfo[playerid][pUniform] = 0;
-        PlayerInfo[playerid][pTajniak] = 0;
+        SecretAgent[playerid] = 0;
         MruMySQL_SetAccInt("Rank", GetNick(playerid), 0);
         MruMySQL_SetAccInt("Member", GetNick(playerid), 0);
         UsunBron(playerid);
