@@ -310,6 +310,28 @@ Przystanek(playerid, color, tekst[])
     return 1;
 }
 
+GiveMoneyForBusStop(playerid, route, bool:finish)
+{
+	new money;
+	switch(route)
+	{
+		case 55: { money = 920; }
+		case 72: { money = 800; }
+		case 96: { money = 1240; }
+		case 82: { money = 2400; }
+		case 85: { money = 1080; }
+	}
+
+	if(finish == true)
+	{
+		money *= 3; // bonus x3 za ukoñczenie ca³ej trasy
+	}
+
+	SendClientMessage(playerid, COLOR_GREEN, sprintf("+%d$", money));
+	DajKase(playerid, money);
+	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %d", GetLogName(playerid), money, route);
+}
+
 /*forward NextPrzystanek(playerid, msg[]);
 public Next(playerid, msg[])
 {
