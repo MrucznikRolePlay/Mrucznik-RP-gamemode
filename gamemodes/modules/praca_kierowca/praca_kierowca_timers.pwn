@@ -38,6 +38,12 @@ Driver_JednaSekundaTimer(playerid)
 		new Float:tx, Float:ty, Float:tz;
 		GetPlayerPos(taxidriver, tx, ty, tz);
 		new Float:distanceGain = (VectorSize(SavePlayerPos[taxidriver][LastX] - tx, SavePlayerPos[taxidriver][LastY] - ty, SavePlayerPos[taxidriver][LastZ]-tz)/1000)*3;
+
+        SavePlayerPos[taxidriver][LastX] = tx;
+        SavePlayerPos[taxidriver][LastY] = ty;
+        SavePlayerPos[taxidriver][LastZ] = tz;
+		SetPlayerPVarInt(taxidriver, "dont-update-pos", 1);
+
 		if(distanceGain > 0.1) // próg 360km/h (100m/s) ?
 		{
 			distanceGain = 0.1;
@@ -56,6 +62,7 @@ Driver_JednaSekundaTimer(playerid)
 
 		PlayerTextDrawShow(playerid, TAXI_COST[playerid]);
 		PlayerTextDrawShow(taxidriver, TAXI_COST[taxidriver]);
+		return 1;
 	}
 
 	if(TaxiCallTime[playerid] > 0)
@@ -80,6 +87,7 @@ Driver_JednaSekundaTimer(playerid)
 			}
 		}
 	}
+	return 0;
 }
 
 //end

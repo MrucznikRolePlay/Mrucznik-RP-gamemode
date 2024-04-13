@@ -2300,9 +2300,13 @@ public JednaSekundaTimer()
 		    	PlayerInfo[i][pWL] = 0;
 		    }
 		}
-        SavePlayerPos[i][LastX] = x;
-        SavePlayerPos[i][LastY] = y;
-        SavePlayerPos[i][LastZ] = z;
+
+		if(GetPVarInt(i, "dont-update-pos") != 1)
+		{
+			SavePlayerPos[i][LastX] = x;
+			SavePlayerPos[i][LastY] = y;
+			SavePlayerPos[i][LastZ] = z;
+		}
 
         /*if(GetPlayerWeapon(i) != 0 && GetPlayerWeapon(i) != 1 && GetPVarInt(i, "obezwladniony") > gettime())
         {

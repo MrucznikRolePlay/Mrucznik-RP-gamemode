@@ -32,6 +32,7 @@ Driver_OnPlayerDisconnect(playerid)
 {
     if(TransportDist[playerid] > 0.0 && TransportDriver[playerid] < 999)
 	{
+		MruMessageBadInfoF(TransportDriver[playerid], "Gracz %s opuœci³ taksówkê (/q).", GetNick(playerid));
         Taxi_Pay(playerid);
 	}
 
