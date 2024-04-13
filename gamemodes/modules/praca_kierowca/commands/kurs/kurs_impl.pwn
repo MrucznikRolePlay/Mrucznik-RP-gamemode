@@ -81,6 +81,10 @@ command_kurs_Impl(playerid, price)
 		GetPlayerName(playerid,sendername,sizeof(sendername));
 		format(string, sizeof(string), "Kierowca autobusu %s jest na s³u¿bie, cena biletu: %d$", sendername, TransportValue[playerid]);
 		OOCNews(COLOR_YELLOW,string);
+
+		new text3d = CreateDynamic3DTextLabel(sprintf("Bilet: $%d", price), 
+			COLOR_YELLOW, 0.0, 0.0, 0.3, 10.0, INVALID_PLAYER_ID, vehicleid);
+		MAP_insert_val_val(VehicleFareInfo, _:vehicleid, text3d);
 	}
 	else if(IsATaxi(vehicleid))
 	{
@@ -106,6 +110,10 @@ command_kurs_Impl(playerid, price)
 		GetPlayerName(playerid,sendername,sizeof(sendername));
 		format(string, sizeof(string), "Taksówkarz %s jest na s³u¿bie wpisz /wezwij taxi aby skorzystaæ z jego us³ug, koszt %d$ za kilometr", sendername, TransportValue[playerid]);
 		OOCNews(COLOR_YELLOW,string);
+
+		new text3d = CreateDynamic3DTextLabel(sprintf("Stawka kilometrowa: $%d", price), 
+			COLOR_YELLOW, 0.0, 0.0, 0.3, 10.0, INVALID_PLAYER_ID, vehicleid);
+		MAP_insert_val_val(VehicleFareInfo, _:vehicleid, text3d);
 	}
 	else if(IsAPlane(vehicleid) || IsAHeliModel(vehicleid))
 	{
@@ -125,6 +133,10 @@ command_kurs_Impl(playerid, price)
 		GetPlayerName(playerid,sendername,sizeof(sendername));
 		format(string, sizeof(string), "Pilot %s jest na s³u¿bie wpisz /wezwij heli aby skorzystaæ z jego us³ug, koszt %d$ za kilometr", sendername, TransportValue[playerid]);
 		OOCNews(COLOR_YELLOW,string);
+		
+		new text3d = CreateDynamic3DTextLabel(sprintf("Stawka kilometrowa: $%d", price), 
+			COLOR_YELLOW, 0.0, 0.0, 0.3, 10.0, INVALID_PLAYER_ID, vehicleid);
+		MAP_insert_val_val(VehicleFareInfo, _:vehicleid, text3d);
 	}
 	else if(IsATrain(vehicleid))
 	{

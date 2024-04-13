@@ -142,6 +142,18 @@ Taxi_FareEnd(playerid)
 	
 	TransportValue[playerid] = 0;
 	TransportDuty[playerid] = 0;
+
+	new vehicleid = GetPlayerVehicleID(playerid);
+	if(vehicleid < 0)
+	{
+		vehicleid = gLastCar[playerid];
+	}
+	if(vehicleid > 0)
+	{
+		new text3d = MAP_get_val_val(VehicleFareInfo, _:vehicleid);
+		MAP_remove_val(VehicleFareInfo, _:vehicleid);
+		DestroyDynamic3DTextLabel(text3d);
+	}
 	
 	SetPlayerToTeamColor(playerid);
 

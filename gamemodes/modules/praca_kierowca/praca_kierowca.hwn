@@ -40,6 +40,8 @@ new BusCallTime[MAX_PLAYERS];
 new BusAccepted[MAX_PLAYERS];
 new TaxiCallTime[MAX_PLAYERS];
 new TaxiAccepted[MAX_PLAYERS];
+
+new Map:VehicleFareInfo;
 //------------------<[ Forwardy: ]>--------------------
 
 //-----------------<[ Zerowanie: ]>-------------------
