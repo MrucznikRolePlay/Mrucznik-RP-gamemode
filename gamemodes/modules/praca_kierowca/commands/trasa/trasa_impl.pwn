@@ -127,7 +127,7 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pNatrasiejest] = 0;
 						SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje j¹ sygna³ GPS. ");
 						Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Commerce\n {808080}Zatrzymuje siê na przystankach");
-						SendClientMessage(playerid, COLOR_ALLDEPT, " Pamiêtaj! {C0C0C0}Odstawiony do zajezdni autobus to szczêœliwy autobus :) ");
+						SendClientMessage(playerid, COLOR_ALLDEPT, " KT przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczêœliwy autobus :) ");
 					}
 					else if (PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
 					{
@@ -140,7 +140,7 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 						PlayerInfo[playerid][pNatrasiejest] = 0;
 						SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje j¹ sygna³ GPS. ");
 						Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Ocean Docks\n {808080}Zatrzymuje siê na przystankach");
-						SendClientMessage(playerid, COLOR_ALLDEPT, " KT przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczêœliwy autobus :) ");
+						SendClientMessage(playerid, COLOR_ALLDEPT, " LSBD przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczêœliwy autobus :) ");
 					}
 				}
 				case 7:
