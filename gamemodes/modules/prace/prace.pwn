@@ -257,10 +257,6 @@ CanPlayerTakeJob(playerid, job)
 				return 0;
 			}
 		}
-		if(job == JOB_GUNDEALER && !IsADilerBroni(playerid))
-		{
-			return 0;
-		}
 	}
 	return 1;
 }
