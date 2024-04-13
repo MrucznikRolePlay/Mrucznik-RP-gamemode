@@ -241,15 +241,32 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 	return 1;
 }
 
-//-----------------<[ Timery: ]>-------------------
-
-ShowPlayerJobMessage(playerid, playerState)
+CanPlayerTakeJob(playerid, jobid)
 {
-	if(playerState != 1)
+	if(job == JOB_DRIVER || job == JOB_PROSTITUTE)
 	{
-		return 0; // wyswietlaj komunikaty tylko gdy gracz jest pieszo
+		return 1;
 	}
 
+	if(GetPlayerFraction(playerid) > 0 || GetPlayerOrg(playerid) != 0)
+	{
+		if(IsAPrzestepca(playerid))
+		{
+			if(job != JOB_DRUG_DEALER && job != JOB_CARTHIEF && job != JOB_GUNDEALER && job != JOB_SMUGGLER)
+			{
+				return 0;
+			}
+		}
+		if(job == JOB_GUNDEALER && !IsADilerBroni(playerid))
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+
+GetJobIfPlayerCloseEnough(playerid)
+{
 	for(new jobid = 1; jobid < sizeof(JobInfo); jobid++)
 	{
 		for(new i; i < MAX_JOB_JOINS; i++)
@@ -259,14 +276,33 @@ ShowPlayerJobMessage(playerid, playerState)
 				break;
 			}
 
-			if(IsPlayerInRangeOfPoint(playerid, 2.0, 
-				JobJoinPositions[jobid][i][JOB_JOIN_X], JobJoinPositions[jobid][i][JOB_JOIN_Y], JobJoinPositions[jobid][i][JOB_JOIN_Z]))
+			if(IsPlayerInRangeOfPoint(playerid, JOB_JOIN_MAX_PROXIMITY, 
+				JobJoinPositions[jobid][i][JOB_JOIN_X], 
+				JobJoinPositions[jobid][i][JOB_JOIN_Y], 
+				JobJoinPositions[jobid][i][JOB_JOIN_Z]))
 			{
-				GameTextForPlayer(playerid, sprintf("~g~Witaj,~n~~y~mozesz tu dolaczyc do pracy: ~r~%s~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 
-					GetJobName(i)), 5000, 3); 
-				return 1;
+				return jobid;
 			}
 		}
+	}
+	return 0;
+}
+
+//-----------------<[ Timery: ]>-------------------
+
+ShowPlayerJobMessage(playerid, playerState)
+{
+	if(playerState != 1)
+	{
+		return 0; // wyswietlaj komunikaty tylko gdy gracz jest pieszo
+	}
+
+	new job = GetJobIfPlayerCloseEnough(playerid);
+	if(job> 0)
+	{
+		GameTextForPlayer(playerid, sprintf("~g~Witaj,~n~~y~mozesz tu dolaczyc do pracy: ~r~%s~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 
+			GetJobName(job)), 5000, 3);
+		return 1;
 	}
 	return 0;
 }

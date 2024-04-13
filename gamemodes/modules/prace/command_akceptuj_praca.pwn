@@ -29,25 +29,9 @@
 command_akceptuj_praca(playerid)
 {
     new job = GettingJob[playerid];
-    new bool:canTakeJob = true;
     if(job > 0)
     {
-        if(PlayerInfo[playerid][pMember] > 0 || PlayerInfo[playerid][pLider] > 0 || PlayerInfo[playerid][pOrg] != 0)
-        {
-            if(IsAPrzestepca(playerid))
-            {
-                if(job != JOB_DRUG_DEALER && job != JOB_CARTHIEF && job != JOB_GUNDEALER && job != JOB_SMUGGLER)
-                {
-                    canTakeJob = false;
-                }
-            }
-            if(job != JOB_DRIVER)
-            {
-                canTakeJob = false;
-            }
-        }
-
-        if(!canTakeJob)
+        if(!CanPlayerTakeJob(playerid, job))
         {
             SendClientMessage(playerid, COLOR_GREY, "   Nie mo¿esz wzi¹æ tej pracy, jesteœ we frakcji!");
             return 1;
