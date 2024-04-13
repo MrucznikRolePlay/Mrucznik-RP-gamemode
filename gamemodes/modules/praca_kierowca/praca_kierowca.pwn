@@ -141,6 +141,7 @@ Taxi_FareEnd(playerid)
     for(new i=0;i<4;i++) if(TransportClient[playerid][i] != INVALID_PLAYER_ID) Taxi_Pay(TransportClient[playerid][i]); //Handle to 4 passenger
 	
 	TransportValue[playerid] = 0;
+	TransportDuty[playerid] = 0;
 	
 	SetPlayerToTeamColor(playerid);
 
