@@ -1107,6 +1107,28 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					pojazdid[playerid] = 545;
 					CenaPojazdu[playerid] = 550000;
 				}
+				case 6:
+				{
+					if(GetPlayerJobSkill(playerid, JOB_DRIVER) < 4)
+					{
+						MruMessageFail(playerid, "By kupiæ w³asn¹ taksówkê, musisz mieæ 4 skill kierowcy.");
+						return 1;
+					}
+					ShowPlayerDialogEx(playerid, 4905, DIALOG_STYLE_MSGBOX, "Kupowanie Taxi", "Taxi\n\nCena: 1.500.000$\nPrêdkoœæ Maksymalna: 180km/h\nIloœæ miejsc: 4\nOpis: Mo¿esz komercyjnie przewoziæ ludzi! Wymaga pracy kierowcy i 4 skilla.", "Kup!", "Wróæ");
+					pojazdid[playerid] = 420;
+					CenaPojazdu[playerid] = 1500000;
+				}
+				case 7:
+				{
+					if(GetPlayerJobSkill(playerid, JOB_DRIVER) < 4)
+					{
+						MruMessageFail(playerid, "By kupiæ w³asn¹ taksówkê, musisz mieæ 4 skill kierowcy.");
+						return 1;
+					}
+					ShowPlayerDialogEx(playerid, 4905, DIALOG_STYLE_MSGBOX, "Kupowanie Kaufman Cab", "Kaufman Cab\n\nCena: 1.250.000$\nPrêdkoœæ Maksymalna: 160km/h\nIloœæ miejsc: 4\nOpis: Mo¿esz komercyjnie przewoziæ ludzi! Wymaga pracy kierowcy i 4 skilla.", "Kup!", "Wróæ");
+					pojazdid[playerid] = 438;
+					CenaPojazdu[playerid] = 1250000;
+				}
 			}
 		}
 		if(!response)
@@ -1249,7 +1271,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(!response)
 		{
-			ShowPlayerDialogEx(playerid, 459, DIALOG_STYLE_LIST, "Inne pojazdy", "Burrito 350tys\nBandito 1,3mln\nHotknife 1,3mln\nCamper 350tys\nKamping 700tys\nHustler 550tys", "Wybierz", "Wróæ");
+			ShowPlayerDialogEx(playerid, 459, DIALOG_STYLE_LIST, "Inne pojazdy", "Burrito 350tys\nBandito 1,3mln\nHotknife 1,3mln\nCamper 350tys\nKamping 700tys\nHustler 550tys\nTaxi (4 skill kierowcy) 1 500 000$\nKaufman Cab (4 skill kierowcy) 1 250 000$", "Wybierz", "Wróæ");
 			pojazdid[playerid] = 0;
 			CenaPojazdu[playerid] = 0;
 		}
