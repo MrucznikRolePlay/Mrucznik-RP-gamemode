@@ -56,7 +56,7 @@ Driver_JednaSekundaTimer(playerid)
 		PlayerTextDrawShow(playerid, TAXI_DIST[playerid]);
 		PlayerTextDrawShow(taxidriver, TAXI_DIST[taxidriver]);
 
-		format(string, sizeof(string), "$%d", floatround((TransportDist[playerid] * TransportValue[taxidriver])+TransportValue[taxidriver]));
+		format(string, sizeof(string), "$%d", floatround((TransportDist[playerid] * TransportValue[taxidriver]) + TransportValue[taxidriver]));
 		PlayerTextDrawSetString(playerid, TAXI_COST[playerid], string);
 		PlayerTextDrawSetString(taxidriver, TAXI_COST[taxidriver], string);
 

@@ -99,8 +99,6 @@ Driver_OnPassengerEnterVeh(driverid, passengerid)
 			SendClientMessage(passengerid, COLOR_LIGHTBLUE, string);
 			format(string, sizeof(string), "* Klient %s wszed³ do Twojej taryfy.", GetNick(passengerid));
 			SendClientMessage(driverid, COLOR_LIGHTBLUE, string);
-			ZabierzKase(passengerid, TransportValue[driverid]);
-			DajKase(driverid, TransportValue[driverid]);
 			SetPVarInt(passengerid, "taxi-slot", GetPlayerVehicleSeat(passengerid)-1);
 			TransportDist[driverid] = 0.0;
 			TransportDist[passengerid] = 0.0;

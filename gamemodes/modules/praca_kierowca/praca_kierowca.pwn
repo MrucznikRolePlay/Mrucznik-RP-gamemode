@@ -155,7 +155,7 @@ Taxi_Pay(playerid)
 	{
         new slot = GetPVarInt(playerid, "taxi-slot");
         new string[64];
-        new cost = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
+        new cost = TransportValue[taxidriver] + floatround(TransportValue[taxidriver]*TransportDist[playerid]);
 		
 		if(kaska[playerid] < cost)
 		{
