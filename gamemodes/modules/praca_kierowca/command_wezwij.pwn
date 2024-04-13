@@ -42,6 +42,7 @@ wezwij_taxi(playerid)
 	}
 	format(string, sizeof(string), "** %s potrzebuje transportu. (wpisz /akceptuj taxi aby zaaceptowaæ zg³oszenie)", GetNick(playerid));
 	SendFamilyMessage(10, 0xE88A2DFF, string);
+	SendJobMessage(JOB_DRIVER, 0xE88A2DFF, string);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po taksówkê, czekaj na akceptacje.");
 	TaxiCall = playerid;
 	AntySpam[playerid] = 1;
@@ -65,6 +66,7 @@ wezwij_heli(playerid)
 
 	format(string, sizeof(string), "** %s potrzebuje transportu. (wpisz /akceptuj heli aby zaaceptowaæ zg³oszenie)", GetNick(playerid));
 	SendFamilyMessage(10, 0xE88A2DFF, string);
+	SendJobMessage(JOB_DRIVER, 0xE88A2DFF, string);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Wezwa³eœ helikopter, czekaj na miejscu.");
 	HeliCall = playerid;
 	AntySpam[playerid] = 1;
@@ -87,7 +89,7 @@ wezwij_bus(playerid)
 	}
 	format(string, sizeof(string), "** %s potrzebuje autobusu. (wpisz /akceptuj bus aby zaakceptowaæ zlecenie)", GetNick(playerid));
 	SendFamilyMessage(10, 0xE88A2DFF, string);
-	SendJobMessage(10, 0xE88A2DFF, string);
+	SendJobMessage(JOB_DRIVER, 0xE88A2DFF, string);
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Zadzwoni³eœ po autobus, czekaj na akceptacje.");
 	BusCall = playerid;
 	AntySpam[playerid] = 1;
