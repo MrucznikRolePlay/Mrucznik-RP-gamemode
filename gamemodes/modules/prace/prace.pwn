@@ -302,7 +302,7 @@ GiveTaxiBonusForUniquePlayer(playerid, clientid)
 	}
 
 	Redis_SetInt(RedisClient, redisKey, 1);
-	Redis_Expire(RedisClient, redisKey, 86_400); // expire after 24h
+	Redis_Expire(redisKey, 86_400); // expire after 24h
 
 	MruMessageGoodInfoF(playerid, "Otrzymujesz %d$ bonusu za przewiezienie unikalnego gracza!", bonus);
 	DajKase(playerid, bonus);
