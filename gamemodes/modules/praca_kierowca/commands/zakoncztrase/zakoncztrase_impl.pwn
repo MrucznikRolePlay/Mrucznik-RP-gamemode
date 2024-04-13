@@ -36,7 +36,7 @@ command_zakoncztrase_Impl(playerid)
 			PlayerInfo[playerid][pLinia82] = 0;
 			PlayerInfo[playerid][pLinia96] = 0;
 			PlayerInfo[playerid][pNatrasiejest] = 0;
-			Przystanek(playerid, COLOR_PURPLE, "Los Santos Bus Departament\nKomunikacja miejska");
+			Przystanek(playerid, COLOR_YELLOW, "° Komunikacja miejska °");
 			sendTipMessage(playerid, "Zakoñczy³eœ trasê i wygasi³eœ tablice");
 			return 1;
 		}

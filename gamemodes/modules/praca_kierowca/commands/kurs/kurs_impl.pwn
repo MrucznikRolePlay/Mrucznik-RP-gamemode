@@ -99,7 +99,7 @@ command_kurs_Impl(playerid, price)
 		new maxPrice = 100 + 100 * GetPlayerJobSkill(playerid, JOB_DRIVER);
 		if(price < 25 || price > maxPrice) 
 		{ 
-			MruMessageFailF(playerid, "Cena biletu od $25 do $%d!", maxPrice); 
+			MruMessageFailF(playerid, "Cena za kilometr od $25 do $%d!", maxPrice); 
 			return 1; 
 		}
 		TaxiDrivers += 1; TransportDuty[playerid] = 1; TransportValue[playerid] = price;
@@ -118,7 +118,7 @@ command_kurs_Impl(playerid, price)
 		new maxPrice = 1000 + 1000 * GetPlayerJobSkill(playerid, JOB_DRIVER);
 		if(price < 25 || price > maxPrice) 
 		{ 
-			MruMessageFailF(playerid, "Cena biletu od $25 do $%d!", maxPrice); 
+			MruMessageFailF(playerid, "Cena za kilometr od $25 do $%d!", maxPrice); 
 			return 1; 
 		}
 		TaxiDrivers += 1; TransportDuty[playerid] = 1; TransportValue[playerid] = price;
