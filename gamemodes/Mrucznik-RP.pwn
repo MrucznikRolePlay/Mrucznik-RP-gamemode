@@ -1027,7 +1027,13 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!Player_CanUseCar(playerid, vehicleid))
         	return Player_RemoveFromVeh(playerid);
     }
-	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_DRIVER && !ispassenger) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpocz¹æ pracê");
+	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_DRIVER && !ispassenger) 
+	{
+		if(IsABus(vehicleid) || IsAMiniBus(vehicleid))
+		{
+			MruMessageInfo(playerid, "Wpisz /trasa aby rozpocz¹æ trasê autobusow¹.");
+		}
+	}
 	// -- customowe parametry dla poszczególnych pojazdów
 	if(IsARower(vehicleid))
 	{
