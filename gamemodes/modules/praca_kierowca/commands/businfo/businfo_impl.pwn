@@ -29,10 +29,15 @@ command_businfo_Impl(playerid)
     {
         if(GUIExit[playerid] == 0)
     	{
-        	ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesuj¹c¹ ciê zagadnienie", "Linia 55 - skill 1\nLinia 72 - skill 1\nLinia 82 - skill 2\nLinia 96 - skill 2\nLinia 85 - skill 2\nObecnie w trasie\nWycieczki\nInformacje\nPomoc", "Wybierz", "WyjdŸ");
+            command_businfo_showDialog(playerid);
 		}
 	}
     return 1;
+}
+
+command_businfo_showDialog(playerid)
+{
+    ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesuj¹c¹ ciê zagadnienie", "Linia 55 - skill 1\nLinia 72 - skill 1\nLinia 82 - skill 2\nLinia 96 - skill 2\nLinia 85 - skill 2\nInformacje\nPomoc", "Wybierz", "WyjdŸ");
 }
 
 command_businfo_dialog(playerid, dialogid, response, listitem, inputtext[])
@@ -70,17 +75,9 @@ command_businfo_dialog(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 5:
                 {
-                    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","W budowie","Wróæ","WyjdŸ");
-                }
-                case 6:
-                {
-                        ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","Informacje o wycieczkach s¹ zamieszczane na czatach g³ównych\n Oczywiœcie nie ma nic za darmo\n San News zarabia na reklamach zaœ KT tradycyjnei na biletach\n pamiêtaj ¿e na wycieczki nie bierzemy w³asnego samochodu\n lecz korzystamy z podstawionych przez organizatora autobusów\n Wycieczka to œwietna zabawa i mnóstwo konkursów z nagrodami, dlatego warto siê na nich pojawiaæ.","Wróæ","WyjdŸ");
-                }
-                case 7:
-                {
                     ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Informacje","Z autobusu najlepiej korzystaæ wtedy gdy jesteœ pewien ¿e dana linia jest w trasie\n\nPamiêtaj, ze autobusy oznaczone numeremm linii poruszaj¹ siê zgodnie z okreœlon¹ tras¹\n\nJak zostaæ kierowc¹ autobusu?\nNale¿y z³o¿yæ podanie na forum do Korporacji Transportowej\nMo¿na równie¿ podj¹æ siê pracy kierowcy dostêpnej przy basenie","Wróæ","WyjdŸ");
                 }
-                case 8:
+                case 6:
                 {
                     ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Komendy","Dla pasa¿era:\n\n/businfo - wyœwietla informacje o autobusach\n/wezwij bus - pozwala wezwaæ autobus ktory podwiezie ciê w dowolne miejsce\n/anuluj bus - kasuje wezwanie autobusu\n\n\nDla Kierowcy:\n/fare [cena] - pozwala wejœæ na s³u¿bê i ustaliæ cenê za bilet\n/trasa - rozpoczyna kurs wed³ug wyznaczonej trasy\n/zakoncztrase - przerywa trasê\n/zd - zamyka drzwi i umo¿liwia ruszenie z przystanku","Wróæ","WyjdŸ");
                 }
@@ -92,7 +89,7 @@ command_businfo_dialog(playerid, dialogid, response, listitem, inputtext[])
     {
         if(response)
         {
-            ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesuj¹c¹ ciê zagadnienie", "Linia 55\nLinia 72\nLinia 82\nLinia 96\nLinia 85\nWycieczki\nInformacje\nPomoc", "Wybierz", "WyjdŸ");
+            command_businfo_showDialog(playerid);
         }
         return 1;
     }
