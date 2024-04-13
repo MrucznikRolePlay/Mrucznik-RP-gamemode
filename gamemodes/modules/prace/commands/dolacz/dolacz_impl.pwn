@@ -37,7 +37,7 @@ command_dolacz_Impl(playerid)
 		return 1;
 	}
 
-	if(GetPlayerState(playerid) == 1)
+	if(GetPlayerState(playerid) != 1)
 	{
 		MruMessageFail(playerid, "Kontrakt podpisujemy na pieszo.");
 		return 1;
