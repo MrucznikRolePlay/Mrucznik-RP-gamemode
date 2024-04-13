@@ -91,15 +91,15 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Prostytutka
-        {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307, false},
+        {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307, 2, 2 false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler narkotyków
-        {"Diler narkotyków - Los Santos", 2166.2034, -1675.3135, 15.0859, 0.0, false},
+        {"Diler narkotyków - Los Santos", 2166.2034, -1675.3135, 15.0859, 0.0, 0, 0 false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Z³odziej aut
-        {"Z³odziej aut - Los Santos", 2414.7239, -1414.2733, 24.1029, 88.5546, false},
+        {"Z³odziej aut - Los Santos", 2414.7239, -1414.2733, 24.1029, 88.5546, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Reporter
@@ -114,7 +114,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler broni
-        {"Diler broni - Los Santos", 1417.2240, -1327.4694, 13.5599, 270.0, false},
+        {"Diler broni - Los Santos", 1417.2240, -1327.4694, 13.5599, 270.0, 0, 0 false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Kierowca
@@ -146,12 +146,12 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
 
 enum eJobJoinPosition {
     JOB_JOIN_NAME[32],
-    JOB_JOIN_X,
-    JOB_JOIN_Y,
-    JOB_JOIN_Z,
-    JOB_JOIN_DRAW_DISTANCE
+    Float:JOB_JOIN_X,
+    Float:JOB_JOIN_Y,
+    Float:JOB_JOIN_Z,
+    Float:JOB_JOIN_DRAW_DISTANCE
 }
-new JobJoinPositions[Jobs][MAX_JOB_SPAWNS][eJobJoinPosition] = {
+new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
     { // empty job
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     },

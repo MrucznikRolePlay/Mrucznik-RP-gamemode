@@ -24,7 +24,7 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 #define MAX_JOB_NAME 32
-#define MAX_JOB_JOINS 10
-#define MAX_JOB_SPAWNS 10
+#define MAX_JOB_JOINS 3
+#define MAX_JOB_SPAWNS 5
 
 //end
