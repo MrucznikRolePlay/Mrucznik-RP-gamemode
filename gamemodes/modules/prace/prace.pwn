@@ -317,8 +317,8 @@ ShowPlayerJobMessage(playerid, playerState)
 	new job = GetJobIfPlayerCloseEnough(playerid);
 	if(job> 0)
 	{
-		GameTextForPlayer(playerid, sprintf("~g~Witaj,~n~~y~mozesz tu dolaczyc do pracy: ~r~%s~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 
-			GetJobName(job)), 5000, 3);
+		GameTextForPlayer(playerid, sprintf("~g~Witaj,~n~~y~mozesz tu dolaczyc do pracy:\n~r~%s~n~~w~Wpisz /dolacz jesli chcesz nim zostac", 
+			Odpolszcz(GetJobName(job))), 5000, 3);
 		return 1;
 	}
 	return 0;
