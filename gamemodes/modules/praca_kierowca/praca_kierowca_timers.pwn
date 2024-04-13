@@ -29,13 +29,15 @@
 Driver_JednaSekundaTimer(playerid)
 {
 	new string[MAX_MESSAGE_LENGTH];
-	new taxidriver = TransportDriver[playerid];
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
 
+	new taxidriver = TransportDriver[playerid];
 	if(taxidriver != 999) //Taxi
 	{
-		new Float:distanceGain = (VectorSize(SavePlayerPos[playerid][LastX] - x, SavePlayerPos[playerid][LastY] - y, SavePlayerPos[playerid][LastZ]-z)/1000)*3;
+		new Float:tx, Float:ty, Float:tz;
+		GetPlayerPos(taxidriver, x, y, z);
+		new Float:distanceGain = (VectorSize(SavePlayerPos[taxidriver][LastX] - tx, SavePlayerPos[taxidriver][LastY] - ty, SavePlayerPos[taxidriver][LastZ]-tz)/1000)*3;
 		if(distanceGain > 0.1) // próg 360km/h (100m/s) ?
 		{
 			distanceGain = 0.1;
