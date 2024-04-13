@@ -73,6 +73,7 @@ IsVehicleWithTaxometr(vehicleID)
 	{
 		return 1;
 	}
+	return 0;
 }
 
 CanPlayerUseTaxometr(playerid, vehicleID)

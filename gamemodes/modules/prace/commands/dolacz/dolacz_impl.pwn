@@ -37,12 +37,6 @@ command_dolacz_Impl(playerid)
 		return 1;
 	}
 
-	if(!CanPlayerTakeJob(playerid, job))
-	{
-		MruMessageFail(playerid, "Musisz byæ cywilem albo cz³onkiem rodziny/mafii/gangu aby wzi¹æ pracê.");
-		return 1;
-	}
-
 	if(GetPlayerState(playerid) == 1)
 	{
 		MruMessageFail(playerid, "Kontrakt podpisujemy na pieszo.");
@@ -53,6 +47,12 @@ command_dolacz_Impl(playerid)
 	if(!job)
 	{
 		MruMessageFail(playerid, "Nie znajdujesz siê w miejscu w którym mo¿na wzi¹æ prace.");
+		return 1;
+	}
+
+	if(!CanPlayerTakeJob(playerid, job))
+	{
+		MruMessageFail(playerid, "Musisz byæ cywilem albo cz³onkiem rodziny/mafii/gangu aby wzi¹æ pracê.");
 		return 1;
 	}
 

@@ -49,8 +49,14 @@ command_kurs_Impl(playerid, price)
 		return 1;
 	}
 
-	new string[128], sendername[MAX_PLAYER_NAME];
 	new vehicleid = GetPlayerVehicleID(playerid);
+	if(!CanPlayerUseTaxometr(playerid, vehicleid))
+	{
+		MruMessageFail(playerid, "W tym pojeŸdzie nie ma zamontowanego taskometru lub nie masz uprawnieñ by z niego korzystaæ.");
+		return 1;
+	}
+
+	new string[128], sendername[MAX_PLAYER_NAME];
 	if(IsVehicleWithTaxometr(vehicleid))
 	{
 		new maxPrice = 100 + 100 * GetPlayerJobSkill(playerid, JOB_DRIVER);

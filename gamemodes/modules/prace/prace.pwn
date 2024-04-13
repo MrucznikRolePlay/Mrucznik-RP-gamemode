@@ -241,7 +241,7 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 	return 1;
 }
 
-CanPlayerTakeJob(playerid, jobid)
+CanPlayerTakeJob(playerid, job)
 {
 	if(job == JOB_DRIVER || job == JOB_PROSTITUTE)
 	{

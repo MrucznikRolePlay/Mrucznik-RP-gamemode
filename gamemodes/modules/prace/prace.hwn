@@ -91,11 +91,11 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Prostytutka
-        {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307, 2, 2 false},
+        {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307, 2, 2, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler narkotyków
-        {"Diler narkotyków - Los Santos", 2166.2034, -1675.3135, 15.0859, 0.0, 0, 0 false},
+        {"Diler narkotyków - Los Santos", 2166.2034, -1675.3135, 15.0859, 0.0, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Z³odziej aut
@@ -114,7 +114,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler broni
-        {"Diler broni - Los Santos", 1417.2240, -1327.4694, 13.5599, 270.0, 0, 0 false},
+        {"Diler broni - Los Santos", 1417.2240, -1327.4694, 13.5599, 270.0, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Kierowca
