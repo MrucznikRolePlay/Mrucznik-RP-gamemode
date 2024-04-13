@@ -29,7 +29,7 @@ command_businfo_Impl(playerid)
     {
         if(GUIExit[playerid] == 0)
     	{
-        	ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesuj¹c¹ ciê zagadnienie", "Linia 55 - skill 1\nLinia 72 - skill 2\nLinia 82 - skill 2\nLinia 96 - skill 2\nLinia 85 - skill 1\nObecnie w trasie\nWycieczki\nInformacje\nPomoc", "Wybierz", "WyjdŸ");
+        	ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesuj¹c¹ ciê zagadnienie", "Linia 55 - skill 1\nLinia 72 - skill 1\nLinia 82 - skill 2\nLinia 96 - skill 2\nLinia 85 - skill 2\nObecnie w trasie\nWycieczki\nInformacje\nPomoc", "Wybierz", "WyjdŸ");
 		}
 	}
     return 1;
