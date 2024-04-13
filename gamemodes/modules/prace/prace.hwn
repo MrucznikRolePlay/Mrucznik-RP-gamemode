@@ -91,7 +91,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Prostytutka
-        {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307},
+        {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler narkotyk闚
@@ -99,7 +99,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Z這dziej aut
-        {"Z這dziej aut - Los Santos", 0.0, 0.0, 0.0, 0.0},
+        {"Z這dziej aut - Los Santos", 2414.7239, -1414.2733, 24.1029, 88.5546, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Reporter
@@ -114,7 +114,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler broni
-        {"Diler broni - Los Santos", 0.0, 0.0, 0.0, 0.0},
+        {"Diler broni - Los Santos", 1417.2240, -1327.4694, 13.5599, 270.0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Kierowca
@@ -172,7 +172,7 @@ new JobJoinPositions[Jobs][MAX_JOB_SPAWNS][eJobJoinPosition] = {
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     },
     { // Z這dziej aut
-        {"Praca Z這dzieja Aut", 1109.3318, -1796.3042, 16.5938, 30.0}, // Los Santos, Basen Tsunami
+        {"Praca Z這dzieja Aut", 2413.6899, -1425.9191, 23.9847, 30.0}, // Los Santos, Basen Tsunami
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     },
     { // Reporter
