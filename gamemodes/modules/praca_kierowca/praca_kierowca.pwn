@@ -73,6 +73,16 @@ IsVehicleWithTaxometr(vehicleID)
 	{
 		return 1;
 	}
+
+	if(IsAPlane(GetVehicleModel(vehicleID)) || IsAHeliModel(GetVehicleModel(vehicleID)))
+	{
+		return 1;
+	}
+
+	if(IsATrain(vehicleID))
+	{
+		return 1;
+	}
 	return 0;
 }
 
@@ -88,8 +98,7 @@ CanPlayerUseTaxometr(playerid, vehicleID)
 		return 1;
 	}
 
-	if((IsATaxi(vehicleID) || IsABus(vehicleID) || IsAMiniBus(vehicleID)) && 
-		IsCarOwner(vehicleID) && GetPlayerJobSkill(playerid, JOB_DRIVER) == 5)
+	if(IsCarOwner(playerid, vehicleID))
 	{
 		return 1;
 	}
@@ -170,7 +179,7 @@ Taxi_Pay(playerid)
 				ZabierzKase(playerid, floatround(kaska[playerid] + 5000));//moneycheat
 				doZaplaty = floatround(kaska[playerid] + 5000);
 				PoziomPoszukiwania[playerid] += 1;
-				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarza(brak pieniêdzy na sp³ate)");
+				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarska (brak pieniêdzy na sp³ate)");
 				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
 				SendClientMessage(taxidriver, COLOR_RED, string);
 			}
@@ -187,7 +196,7 @@ Taxi_Pay(playerid)
 				ZabierzKase(playerid, floatround(kaska[playerid] + 10000));//moneycheat
 				doZaplaty = floatround(kaska[playerid] + 10000);
 				PoziomPoszukiwania[playerid] += 1;
-				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarza(brak pieniêdzy na sp³ate)");
+				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarska (brak pieniêdzy na sp³ate)");
 				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
 				SendClientMessage(taxidriver, COLOR_RED, string);
 			}
@@ -198,6 +207,12 @@ Taxi_Pay(playerid)
 			}
 	    }
 		
+		if(TransportDist[playerid] > 5) 
+		{
+			GiveTaxiBonusForUniquePlayer(taxidriver, playerid);
+			IncreasePlayerJobSkill(taxidriver, JOB_DRIVER, 3);
+		}
+
 		TransportMoney[taxidriver] += doZaplaty;
 
 	    format(string, sizeof(string), "~w~Klient opuscil taxi~n~~g~Zarobiles $%d",doZaplaty+TransportValue[taxidriver]);
@@ -241,8 +256,6 @@ Taxi_ShowHUD(playerid)
     PlayerTextDrawShow(playerid, TAXI_DIST[playerid]);
     PlayerTextDrawShow(playerid, TAXI_COST[playerid]);
 }
-
-
 
 StartBusRoute(playerid, listitem)
 {
