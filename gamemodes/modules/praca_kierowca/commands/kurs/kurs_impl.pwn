@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kurs_Impl(playerid, price)
 {
-    if(GetPlayerJob(playerid) != JOB_DRIVER && PlayerInfo[playerid][pMember] != 10 && PlayerInfo[playerid][pLider] == 10)
+    if(GetPlayerJob(playerid) != JOB_DRIVER && GetPlayerFraction(playerid) != 10)
 	{
 		MruMessageFail(playerid, "Nie jesteœ kierowc¹ taksówki/autobusu.");
 		return 1;

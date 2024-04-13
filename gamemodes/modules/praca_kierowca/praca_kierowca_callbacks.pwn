@@ -86,7 +86,7 @@ Driver_OnPassengerEnterVeh(driverid, passengerid)
 	new string[MAX_MESSAGE_LENGTH];
 	if(kaska[passengerid] < TransportValue[driverid])
 	{
-		format(string, sizeof(string), "* Nie posiadasz przy sobie $%d na zakup biletu u kierowcy. Opuszczasz pojazd.", TransportValue[driverid]);
+		format(string, sizeof(string), "* Nie posiadasz przy sobie $%d ¿eby pokryæ koszt transportu. Opuszczasz pojazd.", TransportValue[driverid]);
 		SendClientMessage(passengerid, COLOR_LIGHTBLUE, string);
 		RemovePlayerFromVehicleEx(passengerid);
 	}
@@ -98,16 +98,8 @@ Driver_OnPassengerEnterVeh(driverid, passengerid)
 			SendClientMessage(passengerid, COLOR_LIGHTBLUE, string);
 			format(string, sizeof(string), "* Klient %s wszed³ do Twojej taryfy.", GetNick(passengerid));
 			SendClientMessage(driverid, COLOR_LIGHTBLUE, string);
-			if(PlayerInfo[passengerid][pLevel] < 3)
-			{
-				ZabierzKase(passengerid, floatround(TransportValue[driverid]/4));//moneycheat
-				sendTipMessageEx(passengerid, COLOR_LIGHTBLUE, "Jesteœ nowym graczem, obowi¹zuje Cie rabat 75 procent na taksówkê.");
-			}
-			else
-			{
-				ZabierzKase(passengerid, floatround(TransportValue[driverid]));//moneycheat
-			}
-			TransportMoney[driverid] += TransportValue[driverid];
+			ZabierzKase(passengerid, TransportValue[driverid]);
+			DajKase(driverid, TransportValue[driverid]);
 			SetPVarInt(passengerid, "taxi-slot", GetPlayerVehicleSeat(passengerid)-1);
 			TransportDist[driverid] = 0.0;
 			TransportDist[passengerid] = 0.0;
@@ -123,7 +115,7 @@ Driver_OnPassengerEnterVeh(driverid, passengerid)
 			format(string, sizeof(string), "* Klient %s wszed³ do autobusu i skasowa³ bilet.", GetNick(passengerid));
 			SendClientMessage(driverid, COLOR_LIGHTBLUE, string);
 			ZabierzKase(passengerid, TransportValue[driverid]);//moneycheat
-			TransportMoney[driverid] += TransportValue[driverid];
+			DajKase(driverid, TransportValue[driverid]);
 		}
 	}
 	return 1;

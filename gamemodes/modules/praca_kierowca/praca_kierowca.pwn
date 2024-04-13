@@ -130,7 +130,6 @@ IsCarOwnedByDriverJob(vehicleID)
 
 Taxi_FareEnd(playerid)
 {
-    new string[128];
     if(TransportDuty[playerid] == 1)
 	{
 		TaxiDrivers -= 1;
@@ -140,26 +139,12 @@ Taxi_FareEnd(playerid)
 		BusDrivers -= 1;
 	}
     for(new i=0;i<4;i++) if(TransportClient[playerid][i] != INVALID_PLAYER_ID) Taxi_Pay(TransportClient[playerid][i]); //Handle to 4 passenger
-
-	TransportDuty[playerid] = 0;
-	format(string, sizeof(string), "Zakoñczy³eœ s³u¿bê, zarobi³eœ $%d", TransportMoney[playerid]);
-
-	_MruGracz(playerid, string);
-
-
-	if(GetPlayerFraction(playerid) != FRAC_KT) 
-	{
-		DajKase(playerid, TransportMoney[playerid]);
-		Log(payLog, INFO, "%s zarobi³ $%d na s³u¿bie taksówkarza.", GetPlayerLogName(playerid), TransportMoney[playerid]);
-	}
-    else
-    {
-        Sejf_Add(FRAC_KT, TransportMoney[playerid]);
-		Log(payLog, INFO, "%s zarobil $%d dla KT na s³u¿bie taksówkarza.", GetPlayerLogName(playerid), TransportMoney[playerid]);
-    }
-	TransportValue[playerid] = 0; TransportMoney[playerid] = 0;
+	
+	TransportValue[playerid] = 0;
 	
 	SetPlayerToTeamColor(playerid);
+
+	MruMessageGoodInfo(playerid, "Wy³¹czy³eœ taksometr i zakoñczy³eœ s³u¿bê kierowcy.");
 }
 
 Taxi_Pay(playerid)
@@ -169,43 +154,15 @@ Taxi_Pay(playerid)
 	{
         new slot = GetPVarInt(playerid, "taxi-slot");
         new string[64];
-		new doZaplaty = 0;
-        TransportCost[playerid] = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
+        new cost = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
 		
-	    if(PlayerInfo[playerid][pLevel] < 3)
-	    {
-			if(kaska[playerid] < floatround(TransportCost[playerid]*0.25))
-			{
-				ZabierzKase(playerid, floatround(kaska[playerid] + 5000));//moneycheat
-				doZaplaty = floatround(kaska[playerid] + 5000);
-				PoziomPoszukiwania[playerid] += 1;
-				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarska (brak pieniêdzy na sp³ate)");
-				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
-				SendClientMessage(taxidriver, COLOR_RED, string);
-			}
-			else
-			{
-				ZabierzKase(playerid, floatround(TransportCost[playerid]*0.25));//moneycheat
-				doZaplaty = floatround(TransportCost[playerid]*0.25);
-			} 
-	    }
-	    else
-	    {
-	    	if(kaska[playerid] < floatround(TransportCost[playerid]))
-			{
-				ZabierzKase(playerid, floatround(kaska[playerid] + 10000));//moneycheat
-				doZaplaty = floatround(kaska[playerid] + 10000);
-				PoziomPoszukiwania[playerid] += 1;
-				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarska (brak pieniêdzy na sp³ate)");
-				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
-				SendClientMessage(taxidriver, COLOR_RED, string);
-			}
-			else 
-			{
-				ZabierzKase(playerid, floatround(TransportCost[playerid]));//moneycheat
-				doZaplaty = floatround(TransportCost[playerid]);
-			}
-	    }
+		if(kaska[playerid] < cost)
+		{
+			PoziomPoszukiwania[playerid] += 1;
+			SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarska (brak pieniêdzy na sp³ate)");
+			format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
+			SendClientMessage(taxidriver, COLOR_RED, string);
+		}
 		
 		if(TransportDist[playerid] > 5) 
 		{
@@ -213,12 +170,16 @@ Taxi_Pay(playerid)
 			IncreasePlayerJobSkill(taxidriver, JOB_DRIVER, 3);
 		}
 
-		TransportMoney[taxidriver] += doZaplaty;
+		ZabierzKase(playerid, cost);
+		DajKase(taxidriver, cost);
+		Log(payLog, INFO, "%s zarobi³ $%d za podwiezienie %s", GetPlayerLogName(taxidriver), cost, GetPlayerLogName(playerid));
 
-	    format(string, sizeof(string), "~w~Klient opuscil taxi~n~~g~Zarobiles $%d",doZaplaty+TransportValue[taxidriver]);
+	    format(string, sizeof(string), "~w~Klient opuscil taxi~n~~g~Zarobiles $%d", cost);
 	    GameTextForPlayer(taxidriver, string, 5000, 1);
 
-		TransportCost[playerid] = 0;
+	    format(string, sizeof(string), "~w~Opusciles taksowke~n~~g~Zaplaciles $%d", cost);
+	    GameTextForPlayer(playerid, string, 5000, 1);
+
         TransportDist[playerid] = 0.0;
 
         TransportClient[taxidriver][slot] = INVALID_PLAYER_ID;

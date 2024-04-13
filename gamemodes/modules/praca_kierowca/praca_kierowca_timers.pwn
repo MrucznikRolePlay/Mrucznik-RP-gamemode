@@ -36,7 +36,7 @@ Driver_JednaSekundaTimer(playerid)
 	if(taxidriver != 999) //Taxi
 	{
 		new Float:tx, Float:ty, Float:tz;
-		GetPlayerPos(taxidriver, x, y, z);
+		GetPlayerPos(taxidriver, tx, ty, tz);
 		new Float:distanceGain = (VectorSize(SavePlayerPos[taxidriver][LastX] - tx, SavePlayerPos[taxidriver][LastY] - ty, SavePlayerPos[taxidriver][LastZ]-tz)/1000)*3;
 		if(distanceGain > 0.1) // próg 360km/h (100m/s) ?
 		{
