@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                objectsdebug                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,28 +16,32 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 13.04.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "gotovc\gotovc.pwn"
-#include "objectsdebug\objectsdebug.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_objectsdebug_Impl(playerid)
 {
-    command_gotovc();
-    command_objectsdebug();
-    
+    if(PlayerInfo[playerid][pAdmin] < 1)
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
+
+    if(GetPVarInt(playerid, "debug-objects") == 1)
+    {
+        DeletePVar(playerid, "debug-objects");
+        MruMessageGoodInfo(playerid, "Wy³¹czy³eœ debug obiektów.");
+    }
+    else
+    {
+        SetPVarInt(playerid, "debug-objects", 1);
+        MruMessageGoodInfo(playerid, "W³¹czy³eœ debug obiektów - gdy w nie strzelisz, dostaniesz informacje o obiekcie.");
+    }
+    return 1;
 }
+
+//end

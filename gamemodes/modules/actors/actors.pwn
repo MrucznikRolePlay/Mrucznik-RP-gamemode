@@ -81,11 +81,11 @@ hook OnDynamicActorStreamIn(actorid, forplayerid)
 	SetDynamicActorPos(actorid, x, y, z);
 }
 
-stock RepairActors(worldID, interiorID)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza'
+stock RepairActors(worldID, interiorid)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza'
 {
 	for(new i; i<valActor; i++)
 	{
-		if(Actors[i][a_VW] == worldID && Actors[i][a_INT] == interiorID)
+		if(Actors[i][a_VW] == worldID && Actors[i][a_INT] == interiorid)
 		{
 			SetDynamicActorPos(actorUID[i], Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]); 
 			SetDynamicActorFacingAngle(actorUID[i], Actors[i][a_posR]);

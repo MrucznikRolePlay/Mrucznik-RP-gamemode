@@ -16,12 +16,51 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
+// Autor: Roger Costa '[Ds]NikO', edited by mrucznik
 // Data utworzenia: 13.04.2024
 
 //
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+
+// Streamer defines
+#define GetDynamicObjectModel(%0) Streamer_GetIntData(STREAMER_TYPE_OBJECT, %0, E_STREAMER_MODEL_ID)
+// How much objects appears simultaneously for player. Low number increase permonfance. Note: max objects is 2000 
+#define STREAMER_VISIBLEITENS           1000
+
+// Virtual World of Vice City
+#define VICECITY_VWORLD                 0
+// All maps are extracted in coordinates original from GTA United 1.2, but in SAMP Vice City needs move for not conflict with SA MAP, define bottom move original X + value defined
+#define VICECITY_MOVE_X                 3000
+// If 1 map load with my custom textures, 0 for not
+#define VICECITY_CUSTOM_TEXTURES 1
+// Use define bottom if your want to use vice city map holding key
+#define VICECITY_USE_MAP
+#if defined VICECITY_USE_MAP
+	#define HOLDING_KEY                 KEY_NO
+#endif
+
+// 1 = entrance/exit of interior have Text 3D to help players, 0 for disable
+#define INTERIORS_USE_TEXT3D 1 
+
+#define HOLDING(%0) \
+    ((newkeys & (%0)) == (%0))
+#define RELEASED(%0) \
+    (((newkeys & (%0)) != (%0)) && ((oldkeys & (%0)) == (%0)))
+
+
+/* Custom Objects */
+#define DFF_PATH                        "vc4samp/dff/"
+#define TXD_PATH                        "vc4samp/txd/"
+
+
+// Positions of Screen Map (pressing N) in textdraws canvas
+#define SCREEN_MAP_CENTER_X         320.0
+#define SCREEN_MAP_CENTER_Y         241.0
+#define SCREEN_MAP_MAX_Y            91.0
+#define SCREEN_MAP_MIN_Y            391.0
+#define SCREEN_MAP_MAX_X            470.0
+#define SCREEN_MAP_MIN_X            170.0
 
 //end

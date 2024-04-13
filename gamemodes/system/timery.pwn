@@ -2058,6 +2058,7 @@ public JednaSekundaTimer()
         vehicleid = GetPlayerVehicleID(i);
 
 		JednaSekundaTimer_Kajdanki(i);
+		ViceCity_JednaSekundaTimer();
 		
 		//dzwonek telefonu
 		if(RingTone[i] > 0 && Mobile[i] >= 0)
