@@ -76,6 +76,7 @@
 #include "antycheat\antycheat.def"
 #include "komendy\komendy.def"
 #include "praca_mechanik\praca_mechanik.def"
+#include "vicecity\vicecity.def"
 #include "choroby\choroby.def"
 #include "listaip\listaip.def"
 #include "praca_kierowca\praca_kierowca.def"
@@ -130,6 +131,7 @@
 #include "antycheat\antycheat.hwn"
 #include "komendy\komendy.hwn"
 #include "praca_mechanik\praca_mechanik.hwn"
+#include "vicecity\vicecity.hwn"
 #include "choroby\choroby.hwn"
 #include "listaip\listaip.hwn"
 #include "praca_kierowca\praca_kierowca.hwn"
@@ -184,6 +186,7 @@
 #include "antycheat\antycheat.pwn"
 #include "komendy\komendy.pwn"
 #include "praca_mechanik\praca_mechanik.pwn"
+#include "vicecity\vicecity.pwn"
 #include "choroby\choroby.pwn"
 #include "listaip\listaip.pwn"
 #include "praca_kierowca\praca_kierowca.pwn"
@@ -209,6 +212,7 @@
 #include "premium\premium_timers.pwn"
 #include "urzadls\urzadls_timers.pwn"
 #include "praca_mechanik\praca_mechanik_timers.pwn"
+#include "vicecity\vicecity_timers.pwn"
 #include "choroby\choroby_timers.pwn"
 #include "praca_kierowca\praca_kierowca_timers.pwn"
 
@@ -230,6 +234,7 @@
 
 //-------<[ others ]>-------
 #include "03DL\resources.pwn"
+#include "vicecity\map.pwn"
 #include "choroby\choroby_effects.pwn"
 
 
@@ -258,6 +263,7 @@
 #include "organizacje\organizacje_callbacks.pwn"
 #include "premium\premium_callbacks.pwn"
 #include "antycheat\antycheat_callbacks.pwn"
+#include "vicecity\vicecity_callbacks.pwn"
 #include "choroby\choroby_callbacks.pwn"
 #include "listaip\listaip_callbacks.pwn"
 #include "praca_kierowca\praca_kierowca_callbacks.pwn"
@@ -301,6 +307,7 @@
 #include "antycheat\commands\antycheat_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "praca_mechanik\commands\praca_mechanik_commands.pwn"
+#include "vicecity\commands\vicecity_commands.pwn"
 #include "choroby\commands\choroby_commands.pwn"
 #include "listaip\commands\listaip_commands.pwn"
 #include "praca_kierowca\commands\praca_kierowca_commands.pwn"
