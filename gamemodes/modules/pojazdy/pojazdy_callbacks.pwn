@@ -394,7 +394,7 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					ShowPlayerDialogEx(playerid, 459, DIALOG_STYLE_LIST, 
 						"Inne pojazdy", 
-						"Burrito 350tys\nBandito 1,3mln\nHotknife 1,3mln\nCamper 350tys\nKamping 700tys\nHustler 550tys", 
+						"Burrito 350tys\nBandito 1,3mln\nHotknife 1,3mln\nCamper 350tys\nKamping 700tys\nHustler 550tys\nTaxi (4 skill kierowcy) 1 500 000$\nKaufman Cab (4 skill kierowcy) 1 250 000$", 
 						"Wybierz", "Wróæ"
 					);
 				}
