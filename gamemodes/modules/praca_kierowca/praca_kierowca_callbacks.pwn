@@ -86,7 +86,7 @@ Driver_OnPassengerEnterVeh(driverid, passengerid)
 	new string[MAX_MESSAGE_LENGTH];
 	if(kaska[passengerid] < TransportValue[driverid])
 	{
-		format(string, sizeof(string), "* Potrzebujesz $%d aby wejœæ.", TransportValue[driverid]);
+		format(string, sizeof(string), "* Nie posiadasz przy sobie $%d na zakup biletu u kierowcy. Opuszczasz pojazd.", TransportValue[driverid]);
 		SendClientMessage(passengerid, COLOR_LIGHTBLUE, string);
 		RemovePlayerFromVehicleEx(passengerid);
 	}
