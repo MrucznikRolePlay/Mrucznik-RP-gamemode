@@ -217,6 +217,78 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
     }
 };
 
+
+enum eJobIconPosition {
+    Float:JOB_ICON_X,
+    Float:JOB_ICON_Y,
+    Float:JOB_ICON_Z,
+}
+new JobIconPositions[Jobs][MAX_JOB_JOINS][eJobIconPosition] = {
+    { // empty job
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // £owca nagród
+        {292.85711669922, -1530.8516845703, 13.818398475647}, // Los Santos, Mrucznik Tower
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Prawnik
+        {310.3626, -1503.3282, 13.8096}, // Los Santos, Mrucznik Tower
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Prostytutka
+        {2438.2761, -1221.3833, 25.1847}, // Los Santos, Pig Pen
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Diler narkotyków
+        {2166.3772, -1675.3829, 15.0859}, // Los Santos, Melina
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Z³odziej aut
+        {2413.6899, -1425.9191, 23.9847}, // Los Santos, Basen Tsunami
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Reporter
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Mechanik
+        {2769.8376, -1610.7819, 10.9219}, // Los Santos, Baza mechaników
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Przemytnik
+        {2226.1716, -1718.1792, 13.5165}, // Los Santos, Obok Si³owni Szamboa
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Diler broni
+        {1366.4325, -1275.2096, 13.5469}, // Los Santos, AmmuNation
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Kierowca
+        {1154.2208, -1770.8203, 16.5992}, // Los Santos, Basen Tsunami
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Lekarz
+        {2029.4490, -1404.7776, 17.2507}, // Los Santos, Szpital obok skate parku
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Bokser
+        {1765.1974, -2063.2681, 13.3357}, // Los Santos, Si³ownia
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // reserved 1
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // reserved 2
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // reserved 3
+        {0.0, 0.0, 0.0}, ...
+    },
+    { // Kurier
+        {1751.4445, -2054.9761, 14.5}, // Los Santos, Unity Station
+        {0.0, 0.0, 0.0}, ...
+    }
+};
+
 //-----------------<[ Zmienne: ]>-------------------
 
 

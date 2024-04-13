@@ -58,7 +58,7 @@ InitializeJobIcons(playerid)
 		for(new i; i < MAX_JOB_JOINS; i++)
 		{
 			SetPlayerMapIcon(playerid, 61, 
-				JobJoinPositions[jobid][i][JOB_JOIN_X], JobJoinPositions[jobid][i][JOB_JOIN_Y], JobJoinPositions[jobid][i][JOB_JOIN_Z], 
+				JobIconPositions[jobid][i][JOB_ICON_X], JobIconPositions[jobid][i][JOB_ICON_Y], JobIconPositions[jobid][i][JOB_ICON_Z], 
 				56, 0);
 		}
 	}
