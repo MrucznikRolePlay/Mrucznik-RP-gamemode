@@ -15597,7 +15597,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				HireCar[playerid] = 0;
 				return 0;
 			}
-			if(kaska[playerid] < BIKE_COST)
+			new cost = GetVehicleHireCost(veh);
+			if(kaska[playerid] < cost)
    			{
    				sendErrorMessage(playerid, "Nie masz tyle kasy!");
 				return 0;
@@ -15607,7 +15608,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 15*60*1000, 0, "ii", playerid, veh));
 
     		TogglePlayerControllable(playerid, 1);
-    		ZabierzKase(playerid, BIKE_COST); 
+    		ZabierzKase(playerid, cost); 
     		HireCar[playerid] = veh;
     		SetPVarInt(playerid, "rentCar", veh);
 		}

@@ -853,6 +853,30 @@ IsAHeliModel(carid)
     return 0;
 }
 
+IsAWodolot(vehicleid)
+{
+    return GetVehicleModel(vehicleid) == 460; // Skimmer
+}
+
+GetVehicleHireCost(vehicleid)
+{
+    if(IsAWodolot(vehicleid))
+    {
+        return WODOLOT_COST;
+    }
+    new model = GetVehicleModel(vehicleid);
+    if(model == 495)
+    {
+        return SANDKING_COST;
+    }
+    if(model == 494)
+    {
+        return HOTRING_COST;
+    }
+
+    return BIKE_COST;
+}
+
 Car_PrintOwner(car)
 {
     new string[64];
