@@ -605,13 +605,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			case 1:
 			{
+				ShowViceCityRadioDialog(playerid, DIALOGID_MUZYKA_VC, "Odtwarzacz mp3.");
+			}
+			case 2:
+			{
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANUno);
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 2:
+			case 3:
 			{
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
@@ -619,7 +623,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 3:
+			case 4:
 			{
 			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
@@ -627,7 +631,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 4:
+			case 5:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
@@ -635,7 +639,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 5:
+			case 6:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
@@ -643,7 +647,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 6:
+			case 7:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
@@ -651,20 +655,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 7:
+			case 8:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18148/LepaStation/");
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			}
-			case 8:
+			case 9:
 			{
 				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W³asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
-			case 9:
+			case 10:
 			{
 			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
@@ -693,6 +697,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//}
 		}
 		return 1;
+	}
+	else if(dialogid == DIALOGID_MUZYKA_VC)
+	{
+		if(!response) return 1;
+		StopAudioStreamForPlayer(playerid);
+		PlayAudioStreamForPlayer(playerid, GetViceCityRadioStream(listitem));
+		SetPVarInt(playerid, "HaveAMp3Stream", 1);
 	}
     else if(dialogid == D_VEHOPIS)
     {
@@ -10779,6 +10790,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
                 }
+				else if(strfind(inputtext, "Vice City Radio") != -1)
+                {
+                    if(!response) return 1;
+                    dont_override = true;
+                    if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) 
+					{
+						ShowViceCityRadioDialog(playerid, 671, "Radio Vice City");
+					}
+                }
                 else if(strfind(inputtext, "Radio SAN1") != -1)
                 {
                     if(RadioSANUno[0] != EOF)
@@ -10887,22 +10907,45 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
 		}
-		else if(dialogid == 670) {
+		else if(dialogid == 670) 
+		{
 			if(response)
 			{
 				new veh = GetPlayerVehicleID(playerid);
 				//if(IsAValidURL(inputtext))
 				//{
-				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
-					foreach(new i : Player) {
-						if(IsPlayerInVehicle(i, veh)) {
+				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) 
+				{
+					foreach(new i : Player) 
+					{
+						if(IsPlayerInVehicle(i, veh)) 
+						{
 							PlayAudioStreamForPlayer(i, inputtext);
 						}
 					}
 					SetPVarString(playerid, "radioUrl", inputtext);
 					SetPVarInt(playerid, "sanlisten", 3);
 				}
-				//}
+			}
+			return 1;
+		}
+		else if(dialogid == 671) 
+		{
+			if(response)
+			{
+				new veh = GetPlayerVehicleID(playerid);
+				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) 
+				{
+					foreach(new i : Player) 
+					{
+						if(IsPlayerInVehicle(i, veh)) 
+						{
+							PlayAudioStreamForPlayer(i, GetViceCityRadioStream(listitem));
+						}
+					}
+					SetPVarString(playerid, "radioUrl", GetViceCityRadioStream(listitem));
+					SetPVarInt(playerid, "sanlisten", 3);
+				}
 			}
 			return 1;
 		}

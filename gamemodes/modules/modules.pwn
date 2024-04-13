@@ -234,7 +234,6 @@
 
 //-------<[ others ]>-------
 #include "03DL\resources.pwn"
-#include "vicecity\map.pwn"
 #include "choroby\choroby_effects.pwn"
 
 

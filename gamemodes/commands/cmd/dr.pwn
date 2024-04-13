@@ -75,7 +75,7 @@ YCMD:dr(playerid, params[], help)
     			}
             }
             //sizemax: komunikat = 112char
-            format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
+            format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nVice City Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
             //sizefinel: komunikat = 148char limit (256) OK.
 			ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		}
