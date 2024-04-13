@@ -42,7 +42,7 @@ YCMD:setstat(playerid, params[], help)
 			SendClientMessage(playerid, COLOR_GRAD3, "|5 KontoBankowe |6 NumerTelefonu |7 PunktyRespektu ");
 			SendClientMessage(playerid, COLOR_GRAD2, "|8 KluczDomowy |9 KluczBiznesu |10 KontoPremium |11 Rodzina");
 			SendClientMessage(playerid, COLOR_GRAD2, "|12 £owca Nagród |13 Prawnik |14 Mechanik |15 Reporter |16 ZlodziejAut |17 Diler Zio³a");
-            SendClientMessage(playerid, COLOR_GRAD2, "|18 Prostututka |19 Bokser |20 Diler Broni |21 Rybak |22 Busiarz |23 Kurier | 24 Praca | 25 Czas Kontraktu");
+            SendClientMessage(playerid, COLOR_GRAD2, "|18 Prostututka |19 Bokser |20 Diler Broni |21 Rybak |22 Kierowca |23 Kurier | 24 Praca | 25 Czas Kontraktu");
 			return 1;
 		}
 
@@ -169,7 +169,7 @@ YCMD:setstat(playerid, params[], help)
 						case 22:
 						{
 							PlayerInfo[giveplayerid][pCarSkill] = amount;
-							format(string, sizeof(string), "Skill Busiarza gracza zmieniony na %d", amount);
+							format(string, sizeof(string), "Skill Kierowcy gracza zmieniony na %d", amount);
 						}
                         case 23:
 						{

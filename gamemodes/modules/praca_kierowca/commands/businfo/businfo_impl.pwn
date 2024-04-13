@@ -78,7 +78,7 @@ command_businfo_dialog(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 7:
                 {
-                    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Informacje","Z autobusu najlepiej korzystaæ wtedy gdy jesteœ pewien ¿e dana linia jest w trasie\n\nPamiêtaj, ze autobusy oznaczone numeremm linii poruszaj¹ siê zgodnie z okreœlon¹ tras¹\n\nJak zostaæ kierowc¹ autobusu?\nNale¿y z³o¿yæ podanie na forum do Korporacji Transportowej\nMozna równie¿ podj¹æ siê pracy kierowcy minibusa dostêpnej przy basenie","Wróæ","WyjdŸ");
+                    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Informacje","Z autobusu najlepiej korzystaæ wtedy gdy jesteœ pewien ¿e dana linia jest w trasie\n\nPamiêtaj, ze autobusy oznaczone numeremm linii poruszaj¹ siê zgodnie z okreœlon¹ tras¹\n\nJak zostaæ kierowc¹ autobusu?\nNale¿y z³o¿yæ podanie na forum do Korporacji Transportowej\nMo¿na równie¿ podj¹æ siê pracy kierowcy dostêpnej przy basenie","Wróæ","WyjdŸ");
                 }
                 case 8:
                 {

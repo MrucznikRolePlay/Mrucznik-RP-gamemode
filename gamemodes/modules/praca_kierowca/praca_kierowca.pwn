@@ -142,7 +142,7 @@ Taxi_FareEnd(playerid)
     for(new i=0;i<4;i++) if(TransportClient[playerid][i] != INVALID_PLAYER_ID) Taxi_Pay(TransportClient[playerid][i]); //Handle to 4 passenger
 
 	TransportDuty[playerid] = 0;
-	format(string, sizeof(string), "Zakoñczy³eœ s³u¿bê, zarobi³eœ $%d dla Korporacji Transportowej", TransportMoney[playerid]);
+	format(string, sizeof(string), "Zakoñczy³eœ s³u¿bê, zarobi³eœ $%d", TransportMoney[playerid]);
 
 	_MruGracz(playerid, string);
 

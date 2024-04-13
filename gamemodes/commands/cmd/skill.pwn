@@ -38,7 +38,7 @@ YCMD:skill(playerid, params[], help)
 		SendClientMessage(playerid, COLOR_WHITE, "U¯YJ: /skill [numer]");
 		SendClientMessage(playerid, COLOR_GREY, "| 1: £owca Nagród        6: Rybak");
 		SendClientMessage(playerid, COLOR_GREY, "| 2: Prawnik             7: Mechanik");
-		SendClientMessage(playerid, COLOR_GREY, "| 3: Prostytutka         8: Busiarz");
+		SendClientMessage(playerid, COLOR_GREY, "| 3: Prostytutka         8: Kierowca");
 		SendClientMessage(playerid, COLOR_GREY, "| 4: Diler Dragów        9: Boxer");
 		SendClientMessage(playerid, COLOR_GREY, "| 5: Z³odziej aut        10: Diler Broni");
 		SendClientMessage(playerid, COLOR_GREY, "| 11: Kurier             12: --------");
@@ -121,11 +121,11 @@ YCMD:skill(playerid, params[], help)
 	else if (level == 8)//Car Dealer
 	{
 		level = PlayerInfo[playerid][pCarSkill];
-		if(level >= 0 && level <= 50) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy Autobusu s¹ na poziomie = 1."); format(string, sizeof(string), "Musisz wykonaæ %d tras aby zwiêkszyæ skill.", 50 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 51 && level <= 100) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy Autobusu s¹ na poziomie = 2."); format(string, sizeof(string), "Musisz wykonaæ %d tras aby zwiêkszyæ skill.", 100 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 101 && level <= 200) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy Autobusu s¹ na poziomie = 3."); format(string, sizeof(string), "Musisz wykonaæ %d tras aby zwiêkszyæ skill.", 200 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy Autobusu s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz wykonaæ %d tras aby zwiêkszyæ skill.", 400 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
-		else if(level >= 401) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy Autobusu s¹ na poziomie = 5."); }
+		if(level >= 0 && level <= 50) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy s¹ na poziomie = 1."); format(string, sizeof(string), "Musisz wykonaæ %d tras aby zwiêkszyæ skill.", 50 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 51 && level <= 100) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy s¹ na poziomie = 2."); format(string, sizeof(string), "Musisz wykonaæ %d tras aby zwiêkszyæ skill.", 100 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 101 && level <= 200) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy s¹ na poziomie = 3."); format(string, sizeof(string), "Musisz wykonaæ %d tras aby zwiêkszyæ skill.", 200 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 201 && level <= 400) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy s¹ na poziomie = 4."); format(string, sizeof(string), "Musisz wykonaæ %d tras aby zwiêkszyæ skill.", 400 - level); SendClientMessage(playerid, COLOR_YELLOW, string); }
+		else if(level >= 401) { SendClientMessage(playerid, COLOR_YELLOW, "Twoje umiejêtnoœci Kierowcy s¹ na poziomie = 5."); }
 	}
 	else if (level == 9)//Boxer
 	{

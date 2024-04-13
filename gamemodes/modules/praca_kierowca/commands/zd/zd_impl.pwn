@@ -50,14 +50,14 @@ command_zd_Impl(playerid)
 			}
 			else
 			{
-				sendErrorMessage(playerid, "Nie jesteœ w autobusie Korporacji !");
+				sendErrorMessage(playerid, "Nie jesteœ w autobusie !");
 			}
 			return 1;
 		}
 	}
 	else
 	{
-		sendErrorMessage(playerid, "Nie jesteœ z Korporacji Transportowej !");
+		sendErrorMessage(playerid, "Nie jesteœ kierowc¹ lub pracownikiem Korporacji Transportowej !");
 	}
     return 1;
 }

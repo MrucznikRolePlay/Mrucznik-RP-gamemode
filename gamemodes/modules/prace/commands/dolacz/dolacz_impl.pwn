@@ -167,14 +167,15 @@ command_dolacz_Impl(playerid)
 				sendTipMessage(playerid, "Do tej pracy wymagane jest prawo jazdy - Kategoria B!"); 
 				return 1;
 			}
-			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Kierowc¹ Autobusu, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Kierowc¹, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 			SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
-			SendClientMessage(playerid, COLOR_WHITE, "   Pod¹¿asz wyznaczonymi trasami, zatrzymujesz siê na przystankach i wozisz mieszkañcow Los Santos. Busy jako taksówki? Zapomnij, to tylko dla najepszych.");
+			SendClientMessage(playerid, COLOR_WHITE, "   Pod¹¿asz wyznaczonymi trasami, zatrzymujesz siê na przystankach i wozisz mieszkañcow Los Santos..");
 			SendClientMessage(playerid, COLOR_WHITE, "   Pocz¹tkuj¹cy kierowcy maj¹ ma³y wybór tras a ich jedynym pojazdem jest Moonbeam - czyli mini bus.");
-			SendClientMessage(playerid, COLOR_WHITE, "   Wy¿szy skill to  g³ównie wy¿sze zarobki, ale doœwiadczeni busiarze dzia³aj¹ tak¿e jako tanie taksówki, organizuj¹ wycieczki lub realizuj¹ kursy miêdzymiastowe.");
-			SendClientMessage(playerid, COLOR_WHITE, "   Przeciêtny pracowity kierowca zarabia ok. 10k na godzinê. Najlepsi mog¹ zarobiæ nawet kilkaset tysiêcy.");
-			SendClientMessage(playerid, COLOR_WHITE, "   To praca dla tych którzy lubi¹ komunikacjê publiczn¹. Inaczej stanie siê ona doœæ monotonna. P³acimy po zakoñczneniu trasy lub s³u¿by.");
+			SendClientMessage(playerid, COLOR_WHITE, "   Wy¿szy skill to g³ównie wy¿sze zarobki, ale doœwiadczeni kierowcy dzia³aj¹ tak¿e jako taksówki (tak¿e powietrzne!).");
+			SendClientMessage(playerid, COLOR_WHITE, "   Kierowcy z najwy¿szymi umiejêtnoœciami zyskuj¹ mo¿liwoœæ uczestniczenia w zrzutach kontrabandy oraz dostêp do wodolotów.");
+			SendClientMessage(playerid, COLOR_WHITE, "   Przeciêtny pracowity kierowca zarabia ok. 30k na godzinê. Najlepsi mog¹ zarobiæ nawet kilkaset tysiêcy.");
+			SendClientMessage(playerid, COLOR_WHITE, "   To praca dla tych którzy lubi¹ komunikacjê publiczn¹. P³acimy po zakoñczneniu trasy lub s³u¿by.");
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
 		}
 		case JOB_MEDIC:
@@ -184,11 +185,12 @@ command_dolacz_Impl(playerid)
 			SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
 			SendClientMessage(playerid, COLOR_WHITE, "   Uzdrawiaj graczy, nieœ pomoc rannym, diagnozuj choroby i przeprowadzaj kuracje.");
 			SendClientMessage(playerid, COLOR_WHITE, "   Kuracje, diagnozy oraz leczenie sprzedajesz po stawce, któr¹ sk³onny jest zap³aciæ gracz.");
-			SendClientMessage(playerid, COLOR_WHITE, "   Za ka¿d¹ sprzedan¹ apteczkê zarobisz 20k.");
+			SendClientMessage(playerid, COLOR_WHITE, "   Za ka¿d¹ sprzedan¹ apteczkê medyczn¹ zarobisz 20 000$.");
 			SendClientMessage(playerid, COLOR_WHITE, "   A jeœli to ciê znudzi - z³ap gaœnicê w d³oñ i gaœ po¿ary w Los Santos.");
-			SendClientMessage(playerid, COLOR_WHITE, "   Za zgaszony po¿ar dostaniesz 80 000$, po¿ary pojawiaj¹ siê co godzinê.");
-			SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz te¿ usuwaæ plamy oleju, za co dostajez 12 500$.");
-			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
+			SendClientMessage(playerid, COLOR_WHITE, "   Za zgaszony po¿ar dostaniesz 80 000$ - po¿ary pojawiaj¹ siê losowo co godzinê.");
+			SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz te¿ usuwaæ plamy oleju dostaj¹c 12 500$ za sprz¹tniêcie substancji niebezpiecznej.");
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca."); 
+
 		}
 		case JOB_BOXER:
 		{

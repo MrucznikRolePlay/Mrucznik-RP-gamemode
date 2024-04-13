@@ -104,7 +104,7 @@ anuluj_taxicall(playerid)
         }
         else
         {
-            sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z Korporacji !");
+            sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ kierowc¹ / pracownikiem Korporacji Transportowej !");
         }
     }
 }
