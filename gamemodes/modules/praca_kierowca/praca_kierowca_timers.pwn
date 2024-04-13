@@ -42,7 +42,7 @@ Driver_JednaSekundaTimer(playerid)
         SavePlayerPos[taxidriver][LastX] = tx;
         SavePlayerPos[taxidriver][LastY] = ty;
         SavePlayerPos[taxidriver][LastZ] = tz;
-		SetPlayerPVarInt(taxidriver, "dont-update-pos", 1);
+		SetPVarInt(taxidriver, "dont-update-pos", 1);
 
 		if(distanceGain > 0.1) // próg 360km/h (100m/s) ?
 		{

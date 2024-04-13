@@ -184,7 +184,7 @@ Taxi_Pay(playerid)
         TransportDist[playerid] = 0.0;
 
         TransportClient[taxidriver][slot] = INVALID_PLAYER_ID;
-		SetPlayerPVarInt(taxidriver, "dont-update-pos", 1);
+		SetPVarInt(taxidriver, "dont-update-pos", 1);
 
         Taxi_HideHUD(playerid);
         new bool:hide=true;
@@ -198,7 +198,7 @@ Taxi_Pay(playerid)
         }
         if(hide) 
 		{
-			SetPlayerPVarInt(taxidriver, "dont-update-pos", 0);
+			SetPVarInt(taxidriver, "dont-update-pos", 0);
 			Taxi_HideHUD(taxidriver);
 		}
 
