@@ -84,22 +84,27 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // £owca nagród
         {"£owca nagród - Los Santos", 322.0553894043, 303.41961669922, 999.1484375, 0.0, 5, 0, false},
+        {"£owca nagród - Vice City", 4128.7817, -1634.7278, 10.6806, 323.6496, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Prawnik
         {"Prawnik - Los Santos", 319.72470092773, -1548.3374023438, 14.555289230347, 230.0, 0, 0, true},
+        {"Prawnik - Vice City", 4424.9683, -155.2108, 22.3382, 90.1704, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Prostytutka
         {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307, 2, 2, false},
+        {"Prostytutka - Vice City", 5096.9316, -2421.1750, 9.8919, 208.0519, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler narkotyków
         {"Diler narkotyków - Los Santos", 2166.2034, -1675.3135, 15.0859, 0.0, 0, 0, false},
+        {"Diler narkotyków - Vice City", 4120.5952, -1525.4886, 10.7275, 275.4100, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Z³odziej aut
         {"Z³odziej aut - Los Santos", 2414.7239, -1414.2733, 24.1029, 88.5546, 0, 0, false},
+        {"Z³odziej aut - Vice City", 3716.1843, -803.8253, 10.9169, 180.4315, 0, 0, false}, // opcjonalnie: 3693.2422,-794.5903,11.0221,184.8183
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Reporter
@@ -107,26 +112,33 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Mechanik
         {"Mechanik - Los Santos", 2794.5515,-1619.3689,10.9219, 80.0, 0, 0, false},
+        {"Mechanik - Vice City", 4024.4978, -1790.1896, 6.2640, 2.7053, 0, 0, false}, // TODO: spawn w salonie
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Przemytnik
         {"Przemytnik - Los Santos", 2207.4038, -1725.1147, 13.4060, 0.0, 0, 0, false},
+        {"Przemytnik - Vice City", 4713.5313, -2687.3469, 5.3266, 270.6958, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler broni
         {"Diler broni - Los Santos", 1417.2240, -1327.4694, 13.5599, 270.0, 0, 0, false},
+        {"Diler broni - Vice City", 3898.2285, -606.6735, 10.7196, 271.1541, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Kierowca
         {"Kierowca - Los Santos", 1108.1042, -1796.3079, 16.5938, 90.0, 0, 0, false},
+        {"Kierowca - Vice City", 4005.1975, -763.2137, 11.8840, 353.7065, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Lekarz
         {"Lekarz - Los Santos", 2025.4443, -1423.2101, 16.9922, 133.0, 0, 0, false},
+        {"Lekarz - Vice City Ocean Beach", 4861.7690, -1931.8264, 9.9212, 279.7419, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
+        {"Lekarz - Vice City Downtown", 4176.9443, 199.7706, 11.8687, 2.9617, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Bokser
         {"Bokser - Los Santos", 766.0804, 14.5133, 1000.7004, 0.0, 5, 0, false},
+        {"Bokser - Vice City", 3885.4304, -1646.6052, 11.2530, 6.4954, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // reserved 1
@@ -156,51 +168,62 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     },
     { // £owca nagród
-        {"Praca Kierowcy", 322.3034, 317.0233, 999.1484, 30.0}, // Los Santos, Mrucznik Tower
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca £owcy Nagród", 322.3034, 317.0233, 999.1484, 30.0}, // Los Santos, Mrucznik Tower
+        {"Praca £owcy Nagród", 4125.8921, -1633.2418, 10.7238, 30.0}, // Vice City, Komisariat na œrodku drugiego miasta
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Prawnik
         {"Praca Prawnika", 310.3626, -1503.3282, 13.8096, 10.0}, // Los Santos, Mrucznik Tower
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Prawnika", 4438.0664, -157.4707, 22.3382, 30.0}, // Vice City, Biurowiec Downtown
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Prostytutka
         {"Praca Prostytutki", 2438.2761, -1221.3833, 25.1847, 15.0}, // Los Santos, Pig Pen
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Prostytutki", 5084.7656,-2385.2180,1003.0234, 30.0}, // Vice City, Pole Postion Club
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Diler narkotyków
         {"Praca Dilera Narkotyków", 2166.3772, -1675.3829, 15.0859, 30.0}, // Los Santos, Melina
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Dilera Narkotyków", 4116.7119,-1530.9713,14.5089, 30.0}, // Vice City, Lodziarnia
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Z³odziej aut
         {"Praca Z³odzieja Aut", 2413.6899, -1425.9191, 23.9847, 30.0}, // Los Santos, Basen Tsunami
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Z³odzieja Aut", 3699.5020, -776.1353, 10.9229, 30.0}, // Vice City, Z³omowisko
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Reporter
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     },
     { // Mechanik
         {"Praca Mechanika", 2769.8376, -1610.7819, 10.9219, 30.0}, // Los Santos, Baza mechaników
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Mechanika", 4024.4978, -1790.1896, 6.2640, 30.0}, // Vice City, Sunshine Autos
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Przemytnik
         {"Praca Przemytnika", 2226.1716, -1718.1792, 13.5165, 30.0}, // Los Santos, Obok Si³owni Szamboa
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Przemytnika", 4713.5313, -2687.3469, 5.3266, 30.0}, // Vice City, Dom na wodzie VCS 2 HQ
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Diler broni
         {"Praca Dilera Broni", 1366.4325, -1275.2096, 13.5469, 30.0}, // Los Santos, AmmuNation
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Dilera Broni", 3902.4358,-601.8051,10.9409, 30.0}, // Vice City, Phils Place
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Kierowca
         {"Praca Kierowcy", 1154.2208, -1770.8203, 16.5992, 30.0}, // Los Santos, Basen Tsunami
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Kierowcy", 4003.0847,-765.3975,11.8915, 30.0}, // Vice City, Kaufman Cab
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Lekarz
         {"Praca Lekarza", 2029.4490, -1404.7776, 17.2507, 30.0}, // Los Santos, Szpital obok skate parku
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Lekarza", 4861.7690, -1931.8264, 9.9212, 30.0}, // Vice City, Ocean Beach Hospital
+        {"Praca Lekarza", 4176.9443, 199.7706, 11.8687, 30.0} // Vice City, Downtown Hospital
     },
     { // Bokser
         {"Praca Boksera", 766.0804, 14.5133, 1000.7004, 30.0}, // Los Santos, Si³ownia
-        {"", 0.0, 0.0, 0.0, 0.0}, ...
+        {"Praca Boksera", 3885.4304, -1646.6052, 11.2530, 30.0}, // Vice City, Little Haiti
+        {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // reserved 1
         {"", 0.0, 0.0, 0.0, 0.0}, ...
@@ -212,7 +235,7 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     },
     { // Kurier
-        {"Praca kuriera", 1751.4445, -2054.9761, 14.5, 25.0}, // Los Santos, Unity Station
+        {"Praca Kuriera", 1751.4445, -2054.9761, 14.5, 25.0}, // Los Santos, Unity Station
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     }
 };
