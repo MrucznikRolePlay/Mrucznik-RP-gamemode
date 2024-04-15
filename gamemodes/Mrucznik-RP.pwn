@@ -1172,6 +1172,7 @@ public OnPlayerConnect(playerid)
 	{
 		printf("FATAL ERROR: to many icons");
 		SendRconCommand("exit");
+		return 1;
 	}
 	
 	//biz
