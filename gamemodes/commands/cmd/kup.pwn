@@ -38,7 +38,7 @@ YCMD:kup(playerid, params[], help)
 	if(IsPlayerConnected(playerid))
 	{
 		new string[256];
-		if (PlayerToPoint(100, playerid,-30.875, -88.9609, 1004.53))//centerpoint 24-7
+		if (IsAt247(playerid))//centerpoint 24-7
 		{
 			if(GUIExit[playerid] == 0)
 			{

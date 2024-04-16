@@ -3336,6 +3336,12 @@ IsAtClothShop(playerid)
 	}
 	return 0;
 }
+
+IsAt247(playerid)
+{
+	return PlayerToPoint(100, playerid,-30.875, -88.9609, 1004.53);
+}
+
 IsAtTicketMachine(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -3345,9 +3351,6 @@ IsAtTicketMachine(playerid)
 		
 			return 1;
 		}
-	
-	
-	
 	}
 	return 0;
 
