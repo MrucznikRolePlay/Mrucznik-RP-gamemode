@@ -20,12 +20,13 @@ AddInterior(outName[], Float:outX, Float:outY, Float:outZ, outInt, outVw, inName
 
 ViceCityInteriors()
 {
-    new VCVW = 7111; // vice city interiors virtual world
+    new VCVW = 7110; // vice city standard interiors virtual world
 
     // ------ [ Rz¹d ] ------
     AddInterior( // Ratusz Downtown, Interior Planning Department (DMV GF)
         "Ratusz", 4302.2539, -246.4274, 11.5759, 0, 0,
         "Wyjœcie", 386.52, 173.63, 1008.38, 3, VCVW);
+
 
     // ------ [ Komisariaty ] ------
     AddInterior( // Komisariat 1 Miasto, Interior San Fierro Police Department
@@ -44,6 +45,7 @@ ViceCityInteriors()
         "Biuro Armii", 3278.8284, -1106.3940, 14.3275, 0, 0,
         "Wyjœcie", 316.50, -167.62, 999.59, 6, VCVW);
 
+
     // ------ [ Szpitale ] ------
     AddInterior( // Ocean Beach Hospital
         "Szpital", 4861.7690, -1931.8264, 9.9212, 0, 0,
@@ -61,10 +63,18 @@ ViceCityInteriors()
         "Szpital", 4113.2056, -1420.4075, 12.5683, 0, 0,
         "Wyjœcie", 0.0, 0.0, 0.0, 0, VCVW); // TODO
 
+
     // ------ [ Bank ] ------
     AddInterior(
         "Bank", 4104.6421, -1291.2079, 12.8773, 0, 0,
         "Wyjœcie", 0.0, 0.0, 0.0, 0, VCVW); // TODO
+
+
+    // ------ [ Inne ] ------
+    AddInterior( // hotel z basenem obok pizza washington beach
+        "Wejœcie", 5531.7842,-1068.9264,12.7963, 0, 0,
+        "Wyjœcie", 5531.8521,-1086.9178,35.8695, 0, 0);
+
 
     // AddInterior(
     //     "", XYZ, 0, 0,
