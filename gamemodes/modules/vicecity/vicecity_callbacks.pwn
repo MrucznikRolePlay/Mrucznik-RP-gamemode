@@ -30,6 +30,8 @@
 //-----------------<[ Callbacki: ]>-----------------
 hook OnGameModeInit()
 {
+	ViceCityInteriors();
+
     new totalModels, timedModels, normalModels;
 
     foreach(new i : Player) {

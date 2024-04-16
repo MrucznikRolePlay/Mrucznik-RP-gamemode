@@ -13,6 +13,64 @@
     http://forum.sa-mp.com/showthread.php?t=649394
 */
 
+AddInterior(outName[], Float:outX, Float:outY, Float:outZ, outInt, outVw, inName[], Float:inX, Float:inY, Float:inZ, inInt, inVw)
+{
+    return DodajWejscie(outX, outY, outZ, inX, inY, inZ, outInt, outVw, inInt, inVw, outName, inName);
+}
+
+ViceCityInteriors()
+{
+    new VCVW = 7111; // vice city interiors virtual world
+
+    // ------ [ Rz¹d ] ------
+    AddInterior( // Ratusz Downtown, Interior Planning Department (DMV GF)
+        "Ratusz", 4302.2539, -246.4274, 11.5759, 0, 0,
+        "Wyjœcie", 386.52, 173.63, 1008.38, 3, VCVW);
+
+    // ------ [ Komisariaty ] ------
+    AddInterior( // Komisariat 1 Miasto, Interior San Fierro Police Department
+        "Komisariat", 5397.2466, -1422.1250, 11.5215, 0, 0,
+        "Wyjœcie", 246.06, 108.97, 1003.21, 10, VCVW);
+
+    AddInterior( // Komisariat ³owców nagród, Interior Los Santos Police Department
+        "Biuro £owców Nagród", 4127.8545, -1633.3948, 10.6903, 0, 0,
+        "Wyjœcie", 246.66, 65.80, 1003.64, 6, VCVW);
+
+    AddInterior( // Komisariat Downtown (FBI), Interior Las Venturas Police Department
+        "Biuro FBI", 4342.9004, -187.4002, 11.0599, 0, 0,
+        "Wyjœcie", 288.47, 170.06, 1007.17, 3, VCVW);
+
+    AddInterior( // Baza Wojskowa, Ammu-nation 5
+        "Biuro Armii", 3278.8284, -1106.3940, 14.3275, 0, 0,
+        "Wyjœcie", 316.50, -167.62, 999.59, 6, VCVW);
+
+    // ------ [ Szpitale ] ------
+    AddInterior( // Ocean Beach Hospital
+        "Szpital", 4861.7690, -1931.8264, 9.9212, 0, 0,
+        "Wyjœcie", 0.0, 0.0, 0.0, 0, VCVW); // TODO
+
+    AddInterior( // Vice Point Hospital
+        "Szpital", 5497.7246, -247.1620, 11.5608, 0, 0,
+        "Wyjœcie", 0.0, 0.0, 0.0, 0, VCVW); // TODO
+
+    AddInterior( // Downtown Hospital
+        "Szpital", 4176.9443, 199.7706, 11.8687, 0, 0,
+        "Wyjœcie", 0.0, 0.0, 0.0, 0, VCVW); // TODO
+
+    AddInterior( // Szpital œrodek drugiego miasta
+        "Szpital", 4113.2056, -1420.4075, 12.5683, 0, 0,
+        "Wyjœcie", 0.0, 0.0, 0.0, 0, VCVW); // TODO
+
+    // ------ [ Bank ] ------
+    AddInterior(
+        "Bank", 4104.6421, -1291.2079, 12.8773, 0, 0,
+        "Wyjœcie", 0.0, 0.0, 0.0, 0, VCVW); // TODO
+
+    // AddInterior(
+    //     "", XYZ, 0, 0,
+    //     "Wyjœcie", XYZ, 0, VCVW);
+}
+
 enum ideFormat {
 	modelID,
 	dff_name[25 char],
