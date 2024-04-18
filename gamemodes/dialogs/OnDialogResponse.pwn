@@ -86,6 +86,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(command_transport_OnDialogResp(playerid, dialogid, response, listitem, inputtext)) return 1;
 
 	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 

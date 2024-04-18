@@ -23,6 +23,9 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define VEHICLE_TRANSPORT_COST 20_000
+
+/// ------ [ Mapa Vice City ] ------
 
 // Streamer defines
 #define GetDynamicObjectModel(%0) Streamer_GetIntData(STREAMER_TYPE_OBJECT, %0, E_STREAMER_MODEL_ID)

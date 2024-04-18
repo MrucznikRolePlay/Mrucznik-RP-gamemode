@@ -26,7 +26,6 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-
 GetViceCityRadioStream(station)
 {
 	new url[128];
@@ -48,6 +47,36 @@ GetViceCityRadioStream(station)
 ShowViceCityRadioDialog(playerid, dialogid, title[])
 {
 	ShowPlayerDialogEx(playerid, dialogid, DIALOG_STYLE_LIST, title,"Wildstyle\nFlash FM\nK-CHAT\nFever 105\nV-ROCK\nVCPR\nRadio Espantoso\nEmotion 98.3\nWave 103","Start",""); //zmieñ dialogid
+}
+
+GetPlayerShippingPlace(playerid)
+{
+	if(IsPlayerInRangeOfPoint(playerid, 15.0, 0.0,0.0,0.0)) // TODO: Los Santos Pos
+	{
+		return 1; // Los Santos Cargo Terminal
+	}
+	if(IsPlayerInRangeOfPoint(playerid, 15.0, 3775.2874,-2193.3118,14.3248))
+	{
+		return 2; // Vice City Cargo Terminal
+	}
+	return 0;
+}
+
+GetTransportDestinationName(terminalType)
+{
+    new where[32];
+    switch(terminalType)
+    {
+        case 1: // Los Santos Cargo Terminal
+        {
+            strcat(where, "na wyspê Vice City");
+        }
+        case 2: // Vice City Cargo Terminal
+        {
+            strcat(where, "do Los Santos");
+        }
+    }
+	return where;
 }
 
 //-----------------<[ Mapa vice city: ]>-------------------
