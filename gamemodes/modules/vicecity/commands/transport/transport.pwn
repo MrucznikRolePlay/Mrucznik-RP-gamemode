@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 transport                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "transport\transport.pwn"
-#include "gotovc\gotovc.pwn"
-#include "objectsdebug\objectsdebug.pwn"
-
+#include "transport_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_transport()
 {
-    command_transport();
-    command_gotovc();
-    command_objectsdebug();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:transport(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Przetransportuj swój samochód na wyspê Vice City.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_transport_Impl(playerid);
 }
