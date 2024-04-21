@@ -77,6 +77,11 @@ command_gotojob_Impl(playerid, job, index, type)
 
             SetPlayerPos(playerid, JobJoinPositions[job][index][JOB_ICON_X], JobIconPositions[job][index][JOB_ICON_Y], JobJoinPositions[job][index][JOB_ICON_Z]);
         }
+        default:
+        {
+            MruMessageFail(playerid, "Niepoprawny typ. U¿yj: 0 - pozycja do³¹czenia do pracy, 1 - spawn pracy, 2 - ikonka pracy.");
+            return 1;
+        }
     }
     MruMessageGoodInfoF(playerid, "Teleportowa³eœ siê do pracy %s", GetJobName(job));
     return 1;
