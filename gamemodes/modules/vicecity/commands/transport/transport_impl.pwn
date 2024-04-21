@@ -122,7 +122,7 @@ TransportPlayerVehicle(playerid, terminalType)
 	defer TeleportVehicle(vehicleID, vehicleUID, x, y, z, a);
 }
 
-timer TeleportVehicle[1500](vehicleID, vehicleUID, Float:x, Float:y, Float:z, Float:a)
+timer TeleportVehicle[2500](vehicleID, vehicleUID, Float:x, Float:y, Float:z, Float:a)
 {
 	CarData[vehicleUID][c_Pos][0] = x;
 	CarData[vehicleUID][c_Pos][1] = y;
