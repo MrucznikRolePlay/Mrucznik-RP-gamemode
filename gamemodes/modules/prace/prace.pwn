@@ -57,7 +57,7 @@ InitializeJob(Jobs:jobid)
 	}
 }
 
-InitializeJobIcons(playerid)
+InitializeJobIcons()
 {
 	for(new jobid = 1; jobid < sizeof(JobInfo); jobid++)
 	{
