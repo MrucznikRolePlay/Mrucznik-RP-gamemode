@@ -179,6 +179,64 @@ IsAtFishPlace(playerid)
 		{
 			return 1;
 		}
+		// Vice City
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4195.1348, -1272.4592, 7.7526))
+		{ // molo rybackie 2 miasto 5m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.1558, -1275.4037, 7.7526))
+		{ // molo rybackie 2 miasto 5m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.4019, -1281.9413, 7.7526))
+		{ // molo rybackie 2 miasto 5m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.2681, -1288.9069, 7.7526))
+		{ // molo rybackie 2 miasto 5m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.5981, -1295.7142, 7.7526))
+		{ // molo rybackie 2 miasto 5m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.2632, -1303.0806, 7.7526))
+		{ // molo rybackie 2 miasto 5m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.4736, -1309.2416, 7.7526))
+		{ // molo rybackie 2 miasto 5m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4194.1665, -1312.9655, 7.7526))
+		{ // molo rybackie 2 miasto 5m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4626.1807, -1172.5938, 8.5813))
+		{ // prywatne molo rybackie
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5245.6401, -649.5212, 7.5536))
+		{ // molo rybackie 1 miasto
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5333.7188, -379.5435, 7.8307))
+		{ // molo rybackie 1 miasto
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 25.0, 5303.0806, -2652.2378, 8.5437))
+		{ // molo rybackie 1 miasto obok latarni - 25m
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5267.5693, -2651.1758, 8.5474))
+		{ // molo rybackie 1 miasto obok latarni - poczatek mostu
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5326.4194, -2651.4761, 8.5393))
+		{ // molo rybackie 1 miasto obok latarni - koniec mostu
+			return 1;
+		}
+
 	}
 	return 0;
 }
