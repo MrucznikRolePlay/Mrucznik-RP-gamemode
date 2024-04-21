@@ -3332,7 +3332,7 @@ PayDay()
 					if(PlayerInfo[i][pAccount] != 0) {
 						interestRate = (float(interest)/float(PlayerInfo[i][pAccount])) * 100.0;
 					}
-					if(IsPlayerAtViceCity(playerid))
+					if(IsPlayerAtViceCity(i))
 					{
 						interestRate *= 1.25;
 					}
