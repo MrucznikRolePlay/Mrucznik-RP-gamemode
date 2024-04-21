@@ -38,9 +38,9 @@ command_gotojob_Impl(playerid, job, index, type)
         return 1;
     }
 
-    if(index <= 0)
+    if(index < 0)
     {
-        MruMessageFail(playerid, "Index musi byæ wiêkszy ni¿ 0.");
+        MruMessageFail(playerid, "Index musi byæ wiêkszy lub równy 0.");
         return 1;
     }
 
