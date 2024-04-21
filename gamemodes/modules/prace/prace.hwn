@@ -240,13 +240,7 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
     }
 };
 
-
-enum eJobIconPosition {
-    Float:JOB_ICON_X,
-    Float:JOB_ICON_Y,
-    Float:JOB_ICON_Z,
-}
-new JobIconPositions[Jobs][MAX_JOB_JOINS][eJobIconPosition] = {
+new Float:JobIconPositions[Jobs][MAX_JOB_JOINS][3] = {
     { // empty job
         {0.0, 0.0, 0.0}, ...
     },

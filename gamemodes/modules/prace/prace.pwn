@@ -60,9 +60,9 @@ InitializeJobIcons(playerid, iconsOffset)
 	{
 		for(new i; i < MAX_JOB_JOINS; i++)
 		{
-			new x = JobIconPositions[jobid][i][JOB_ICON_X];
-			new y = JobIconPositions[jobid][i][JOB_ICON_Y];
-			new z = JobIconPositions[jobid][i][JOB_ICON_Z];
+			new Float:x = JobIconPositions[jobid][i][0];
+			new Float:y = JobIconPositions[jobid][i][1];
+			new Float:z = JobIconPositions[jobid][i][2];
 
 			if(x != 0.0 && y != 0.0 && z != 0.0)
 			{
