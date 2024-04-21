@@ -51,7 +51,7 @@ InitializeJob(Jobs:jobid)
 	}
 }
 
-InitializeJobIcons(playerid)
+InitializeJobIcons(playerid, iconsOffset)
 {
 	new icons = 0;
 	for(new jobid = 1; jobid < sizeof(JobInfo); jobid++)
@@ -64,7 +64,7 @@ InitializeJobIcons(playerid)
 
 			if(x != 0.0 && y != 0.0 && z != 0.0)
 			{
-				SetPlayerMapIcon(playerid, 61, x, y, z, 56, 0);
+				SetPlayerMapIcon(playerid, iconsOffset + icons, x, y, z, 56, 0);
 				icons++;
 			}
 		}

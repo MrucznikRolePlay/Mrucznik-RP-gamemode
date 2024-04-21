@@ -15,7 +15,7 @@
 
 AddInterior(outName[], Float:outX, Float:outY, Float:outZ, outInt, outVw, inName[], Float:inX, Float:inY, Float:inZ, inInt, inVw)
 {
-    return DodajWejscie(outX, outY, outZ, inX, inY, inZ, outInt, outVw, inInt, inVw, outName, inName);
+    return DodajWejscie(outX, outY, outZ, inX, inY, inZ, outVw, outInt, inVw, inInt, outName, inName);
 }
 
 ViceCityInteriors()

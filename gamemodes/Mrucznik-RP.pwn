@@ -1166,7 +1166,7 @@ public OnPlayerConnect(playerid)
     SetPlayerMapIcon(playerid, icons++, 1383.4578, 461.5694, 19.8450, 42, 0); //Stacja benzynowa w Montgomery
     SetPlayerMapIcon(playerid, icons++, 2202.3503, 2474.2419, 10.5474, 42, 0); //Stacja w LV V2
 
-	icons += InitializeJobIcons(playerid);
+	icons += InitializeJobIcons(playerid, icons);
 
 	if(icons > 99) 
 	{
