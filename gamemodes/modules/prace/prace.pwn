@@ -69,7 +69,7 @@ InitializeJobIcons()
 
 			if(x != 0.0 && y != 0.0 && z != 0.0)
 			{
-				CreateDynamicMapIcon(x, y, z, 56, -1, -1, -1, -1, 1000.0);
+				CreateDynamicMapIcon(x, y, z, 56, -1, -1, -1, -1, 10000.0);
 			}
 		}
 	}
