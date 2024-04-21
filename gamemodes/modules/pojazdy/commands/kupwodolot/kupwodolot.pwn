@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 kupwodolot                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,21 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "lidercar\lidercar.pwn"
-#include "spawnall\spawnall.pwn"
-#include "sprzedajneon\sprzedajneon.pwn"
-#include "kupwodolot\kupwodolot.pwn"
-
+#include "kupwodolot_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_kupwodolot()
 {
-    command_lidercar();
-    command_spawnall();
-    command_sprzedajneon();
-    command_kupwodolot();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:kupwodolot(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Kupujesz wodolot.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_kupwodolot_Impl(playerid);
 }

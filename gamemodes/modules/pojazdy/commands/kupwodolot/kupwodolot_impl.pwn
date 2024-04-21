@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 kupwodolot                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,26 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 21.04.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "lidercar\lidercar.pwn"
-#include "spawnall\spawnall.pwn"
-#include "sprzedajneon\sprzedajneon.pwn"
-#include "kupwodolot\kupwodolot.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_kupwodolot_Impl(playerid)
 {
-    command_lidercar();
-    command_spawnall();
-    command_sprzedajneon();
-    command_kupwodolot();
-    
+    if(!IsPlayerInRangeOfPoint(playerid, 5.0, 4703.3, -2687.7, 5.32))
+    {
+        MruMessageFail(playerid, "Musisz byæ w domu na wodzie, gdzie kupuje siê wodoloty.");
+        return 1;
+    }
+
+    SetPVarInt(playerid, "kupowanie-wodolotu", 1);
+    ShowPlayerDialogEx(playerid, 411, DIALOG_STYLE_MSGBOX, "Kupowanie Wodolotu", "Wodolot\n\nCena: 25.000.000$\nPrêdkoœæ lotu poziomego: 150km/h\nWielkosc: Ma³y\nOpis:", "Kup!", "WyjdŸ");
+    pojazdid[playerid] = 460;
+    CenaPojazdu[playerid] = 25000000;
+    return 1;
 }
+
+//end
