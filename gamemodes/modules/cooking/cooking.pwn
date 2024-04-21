@@ -111,7 +111,7 @@ InitializeFoodPlaces()
 		CreateDynamicPickup(1582, 2, FoodPlaces[i][0], FoodPlaces[i][1], FoodPlaces[i][2]);
 		CreateDynamic3DTextLabel("/zjedz", COLOR_NEWS, 
 			FoodPlaces[i][0], FoodPlaces[i][1], FoodPlaces[i][2] + 0.5,
-			5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
+			10.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
 	}
 }
 
@@ -119,7 +119,7 @@ IsAtFoodPlace(playerid)
 {
 	for(new i; i<sizeof(FoodPlaces); i++)
 	{
-		if(IsPlayerInRangeOfPoint(playerid, 4.0, FoodPlaces[i][0], FoodPlaces[i][1], FoodPlaces[i][2]))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, FoodPlaces[i][0], FoodPlaces[i][1], FoodPlaces[i][2]))
 		{
 			return 1;
 		}
