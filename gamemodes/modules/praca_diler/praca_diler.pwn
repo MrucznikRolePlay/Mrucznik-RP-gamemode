@@ -28,6 +28,22 @@
 #include "command_wez_dragi.pwn"
 
 //-----------------<[ Funkcje: ]>-------------------
+InitializeDrugsPickup()
+{
+	for(new i = 0; i < sizeof(DrugsTakingPoints); i++)
+	{
+		new Float:x = DrugsTakingPoints[i][0];
+		new Float:y = DrugsTakingPoints[i][1];
+		new Float:z = DrugsTakingPoints[i][2];
+
+		CreateDynamic3DTextLabel("/wez dragi", COLOR_NEWS, 
+			x, y, z + 0.25,
+			10.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
+
+		CreateDynamicPickup(1578, 1, x, y, z - 0.25);
+	}
+}
+
 IsPlayerInDrugCar(playerid)
 {
 	new vehicleID = GetPlayerVehicleID(playerid);
