@@ -328,6 +328,7 @@ public OnGameModeInit()
     ZaladujTrasy(); //System wyœcigów
 	ZaladujPickupy();
 	CreateFakePayNSprayPickups();
+	InitializeFoodPlaces();
 	ZaladujSamochodyDoKradziezy(); //Auta do kradziezy
 	LoadDeluxeCarsForStealing(); //Auta deluxe do kradziezy
 	Zaladuj3DTexty();

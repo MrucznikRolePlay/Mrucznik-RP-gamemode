@@ -43,6 +43,14 @@ new MealModels[] = {
 	2703
 };
 
+new FoodPlaces[][3] = {
+	{5392.7432, 159.6183, 1218.9940}, // shaft hot dogs inside north point mall
+	{5376.6992, 152.4913, 1219.0455}, // beef bandit inside north point mall
+	{5376.2573, 197.3952, 1219.0421}, // burger shot inside north point mall
+	{5390.6396, 192.0234, 1219.0061}, // the cheesy crust pizza inside north point mall
+	{5385.3687, 263.1339, 1218.9324} // sprunk point inside north point mall
+};
+
 //-----------------<[ Zmienne: ]>-------------------
 new Groceries[MAX_PLAYERS][pGroceries];
 //------------------<[ Forwardy: ]>--------------------

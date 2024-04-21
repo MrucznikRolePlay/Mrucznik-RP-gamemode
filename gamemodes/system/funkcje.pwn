@@ -3364,6 +3364,7 @@ IsAtTicketMachine(playerid)
 	return 0;
 
 }
+
 IsAtGasStation(playerid)
 {
     if(IsPlayerConnected(playerid))

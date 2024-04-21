@@ -46,6 +46,14 @@ command_zjedz_Impl(playerid)
         return 1;
     }
 
+    if(IsAtFoodPlace(playerid))
+    {
+        SetPlayerHealth(playerid, 100.0);
+        ZabierzKase(playerid, 100);
+        GameTextForPlayer(playerid, "~r~-100$", 5000, 1);
+        return 1;
+    }
+
     MruMySQL_CookedMealsDialog(playerid);
     return 1;
 }
