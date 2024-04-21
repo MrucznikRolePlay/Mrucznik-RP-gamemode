@@ -1151,7 +1151,9 @@ Player_CanUseCar(playerid, vehicleid)
 
 RedisGetRadioKey(vehicleUID)
 {
-    return sprintf("vehicles:%d:radio", vehicleUID);
+    new key[128];
+    format(key, sizeof(key), "vehicles:%d:radio", vehicleUID);
+    return key;
 }
 
 SetVehicleRadio(vehicleid, radio[])
