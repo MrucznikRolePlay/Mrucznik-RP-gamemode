@@ -28,9 +28,10 @@ new DRUG_SELL_MAX_PRICE = 20000;
 
 new Map:VehicleDrugInfo;
 
-new Float:DrugsTakingPoints[2][3] = {
+new Float:DrugsTakingPoints[3][3] = {
     {322.6724, 1117.9385, 1083.8828}, // melina LS
-    {-1022.34930420, -2158.46484375, 33.91813278} // pole marichuany w górach LS
+    {-1022.34930420, -2158.46484375, 33.91813278}, // pole marichuany w górach LS
+    {4116.7119, -1530.9713, 14.5089} // Vice City lodziarnia
 };
 //------------------<[ Forwardy: ]>--------------------
 

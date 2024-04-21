@@ -112,7 +112,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Mechanik
         {"Mechanik - Los Santos", 2794.5515,-1619.3689,10.9219, 80.0, 0, 0, false},
-        {"Mechanik - Vice City", 4024.4978, -1790.1896, 6.2640, 2.7053, 0, 0, false}, // TODO: spawn w salonie
+        {"Mechanik - Vice City", 3987.13, -1811.8, 12.6, 128.0, 0, 0, false}, // TODO: spawn w salonie
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Przemytnik
@@ -132,7 +132,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Lekarz
         {"Lekarz - Los Santos", 2025.4443, -1423.2101, 16.9922, 133.0, 0, 0, false},
-        {"Lekarz - Vice City Ocean Beach", 4861.7690, -1931.8264, 9.9212, 279.7419, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
+        {"Lekarz - Vice City Ocean Beach", 4860.3, -1928.6264, 9.9212, 279.7419, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
         {"Lekarz - Vice City Downtown", 4176.9443, 199.7706, 11.8687, 2.9617, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
@@ -184,7 +184,7 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
     },
     { // Diler narkotyków
         {"Praca Dilera Narkotyków", 2166.3772, -1675.3829, 15.0859, 30.0}, // Los Santos, Melina
-        {"Praca Dilera Narkotyków", 4116.7119,-1530.9713,14.5089, 30.0}, // Vice City, Lodziarnia
+        {"Praca Dilera Narkotyków", 4120.8, -1525.47, 10.8, 30.0}, // Vice City, Lodziarnia
         {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Z³odziej aut
@@ -197,12 +197,12 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
     },
     { // Mechanik
         {"Praca Mechanika", 2769.8376, -1610.7819, 10.9219, 30.0}, // Los Santos, Baza mechaników
-        {"Praca Mechanika", 4024.4978, -1790.1896, 6.2640, 30.0}, // Vice City, Sunshine Autos
+        {"Praca Mechanika", 3966.5, -1792.3, 12.6, 30.0}, // Vice City, Sunshine Autos
         {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Przemytnik
         {"Praca Przemytnika", 2226.1716, -1718.1792, 13.5165, 30.0}, // Los Santos, Obok Si³owni Szamboa
-        {"Praca Przemytnika", 4713.5313, -2687.3469, 5.3266, 30.0}, // Vice City, Dom na wodzie VCS 2 HQ
+        {"Praca Przemytnika", 4704.0, -2684.0, 5.4, 30.0}, // Vice City, Dom na wodzie VCS 2 HQ
         {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Diler broni
@@ -217,7 +217,7 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
     },
     { // Lekarz
         {"Praca Lekarza", 2029.4490, -1404.7776, 17.2507, 30.0}, // Los Santos, Szpital obok skate parku
-        {"Praca Lekarza", 4861.7690, -1931.8264, 9.9212, 30.0}, // Vice City, Ocean Beach Hospital
+        {"Praca Lekarza", 4862.3, -1934.7, 9.9, 30.0}, // Vice City, Ocean Beach Hospital
         {"Praca Lekarza", 4176.9443, 199.7706, 11.8687, 30.0} // Vice City, Downtown Hospital
     },
     { // Bokser

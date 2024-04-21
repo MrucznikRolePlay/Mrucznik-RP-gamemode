@@ -52,7 +52,7 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 	else  
 	{
 		new Float:range = (int1 == 0 && vw1 == 0) ? EXTERIOR_3DTEXT_RANGE : INTERIOR_3DTEXT_RANGE;
-		CreateDynamic3DTextLabel(nazwain, COLOR_LIGHTGREEN, fx1, fy1, fz1, range, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, vw1, int1);
+		CreateDynamic3DTextLabel(nazwain, COLOR_BROWN, fx1, fy1, fz1, range, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, vw1, int1);
 	}
 	if(isnull(nazwaout)) 
 	{
@@ -61,7 +61,7 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 	else 
 	{
 		new Float:range = ((int2 == 0 && vw2 == 0) ? (EXTERIOR_3DTEXT_RANGE) : (INTERIOR_3DTEXT_RANGE));
-		CreateDynamic3DTextLabel(nazwaout, COLOR_LIGHTGREEN, fx2, fy2, fz2, range, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, vw2, int2);
+		CreateDynamic3DTextLabel(nazwaout, COLOR_BROWN, fx2, fy2, fz2, range, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, vw2, int2);
 	}
 	
 	return iloscwejsc++;

@@ -124,7 +124,7 @@ BusinessPayDay(playerid)
 			format(string, sizeof(string), "  Dochód z biznesu: $%d", moneyForPlayer);
 			SendClientMessage(playerid,COLOR_WHITE, string);
 			SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
-			SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ maksimum"); 
+			SendClientMessage(playerid,COLOR_WHITE, "Twój biznes wygenerowa³ {37AC45}maksymalne przychody!"); 
 			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 			DajKase(playerid, moneyForPlayer);
 		}
@@ -137,7 +137,7 @@ BusinessPayDay(playerid)
 			format(string, sizeof(string), "  Dochód z biznesu: $%d", moneyForPlayer);
 			SendClientMessage(playerid,COLOR_WHITE, string);
 			SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
-			SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ po³owiczny zysk"); 
+			SendClientMessage(playerid,COLOR_WHITE, "Twój biznes wygenerowa³ {37AC45}po³owiczne przychody"); 
 			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 			DajKase(playerid, moneyForPlayer);
 		}
@@ -150,7 +150,7 @@ BusinessPayDay(playerid)
 			format(string, sizeof(string), "  Dochód z biznesu: $%d", moneyForPlayer);
 			SendClientMessage(playerid,COLOR_WHITE, string);
 			SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
-			SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {FF0000}nie przyniós³ zysku"); 
+			SendClientMessage(playerid,COLOR_WHITE, "Twój biznes {999999}nie przyniós³ zysku"); 
 			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 		}
 		else if(randomValue >= 8)// 30 % na strate po³owiczn¹ 
