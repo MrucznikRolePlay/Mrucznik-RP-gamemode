@@ -330,6 +330,7 @@ public OnGameModeInit()
 	CreateFakePayNSprayPickups();
 	InitializeFoodPlaces();
 	InitializeDrugsPickup();
+	CreateShopPickups();
 	ZaladujSamochodyDoKradziezy(); //Auta do kradziezy
 	LoadDeluxeCarsForStealing(); //Auta deluxe do kradziezy
 	Zaladuj3DTexty();
@@ -2952,14 +2953,18 @@ public OnPlayerObjectMoved(playerid, objectid)
 
 public OnPlayerPickUpDynamicPickup(playerid, pickupid)
 {
-    if(pickupid == PickupSklep01)
-    {
-        SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina - dostêpne komendy_______________|");
-        SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
-        SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty.");
-        SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
-        SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
-    }
+	for(new i; i<sizeof(ShopPickups); i++)
+	{
+		if(ShopPickups[i] == pickupid)
+		{
+			SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina - dostêpne komendy_______________|");
+			SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
+			SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty.");
+			SendClientMessage(playerid,COLOR_WHITE,"{ADFF2F}/uniform{FFFFFF}- pozwala na zmianê uniformu s³u¿bowego. Tylko dla cz³onków frakcji z pominiêciem liderów.");
+			SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
+			return 1;
+		}
+	}
 
 	CollectMoneyPickup(playerid, pickupid);
 	return 1;

@@ -615,6 +615,15 @@ AntyCzitText(result[])
 		return 0;
 }
 
+
+CreateShopPickups()
+{
+	for(new i; i<sizeof(ShopPickupsPos); i++)
+	{
+		ShopPickups[i] = CreateDynamicPickup(1275, 1, ShopPickupsPos[i][0], ShopPickupsPos[i][1], ShopPickupsPos[i][2]);
+	}
+}
+
 //--------------------------------------------------------
 //---------------------[Mini Timery:]---------------------
 //--------------------------------------------------------
