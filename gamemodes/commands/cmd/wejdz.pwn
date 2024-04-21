@@ -728,7 +728,7 @@ YCMD:wejdz(playerid, params[], help)
             for(new i=0; i<=BusinessLoaded; i++)
             {
                 if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ])
-                && GetPlayerVirtualWorld(playerid) == 0)
+                && GetPlayerVirtualWorld(playerid) == Business[i][b_enVw] && GetPlayerInterior(playerid) == Business[i][b_enInt])
                 {
                     if(BizOpenStatus[i] == 1 
                     && PlayerInfo[playerid][pBusinessOwner] != i

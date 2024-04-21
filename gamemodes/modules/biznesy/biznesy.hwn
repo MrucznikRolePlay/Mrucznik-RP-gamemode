@@ -39,6 +39,8 @@ enum eBusiness {
 	Float:b_exX,
 	Float:b_exY,
 	Float:b_exZ,
+	b_enInt,
+	b_enVw,
 	b_int,
 	b_vw,
 	b_pLocal,

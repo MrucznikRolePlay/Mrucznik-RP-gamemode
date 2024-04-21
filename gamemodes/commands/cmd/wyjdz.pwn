@@ -519,8 +519,8 @@ YCMD:wyjdz(playerid, params[], help)
                if(IsPlayerInRangeOfPoint(playerid, 4.2, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ])
                 && GetPlayerVirtualWorld(playerid) == Business[i][b_vw])
                 {
-                    SetPlayerVirtualWorld(playerid, 0); 
-                    SetPlayerInterior(playerid, 0); 
+                    SetPlayerVirtualWorld(playerid, Business[i][b_enVw]); 
+                    SetPlayerInterior(playerid, Business[i][b_enInt]); 
                     SetPLocal(playerid, PLOCAL_DEFAULT); 
                     SetPlayerPos(playerid, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]);
 					return 1; 

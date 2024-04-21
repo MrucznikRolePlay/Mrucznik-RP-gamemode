@@ -50,7 +50,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	new CurrentBID = 1;
 	while(CurrentBID <= MAX_BIZNES)
 	{
-		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
+		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `enVw`, `enInt`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
 
 		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
 		mysql_query(lStr);
@@ -58,7 +58,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 		if (mysql_num_rows())
 		{
 			mysql_fetch_row_format(lStr, "|");
-			sscanf(lStr, "p<|>dds[32]s[64]ffffffddddds[64]d",
+			sscanf(lStr, "p<|>dds[32]s[64]ffffffddddddds[64]d",
 			Business[CurrentBID][b_ID], 
 			Business[CurrentBID][b_ownerUID],
 			Business[CurrentBID][b_Name_Owner],
@@ -69,6 +69,8 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 			Business[CurrentBID][b_exX],
 			Business[CurrentBID][b_exY],
 			Business[CurrentBID][b_exZ],
+			Business[CurrentBID][b_enVw],
+			Business[CurrentBID][b_enInt],
 			Business[CurrentBID][b_vw],
 			Business[CurrentBID][b_int],
 			Business[CurrentBID][b_pLocal],
