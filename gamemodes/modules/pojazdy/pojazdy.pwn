@@ -701,6 +701,13 @@ Car_Spawn(lUID, bool:loaddesc=true)
     SetVehicleParamsEx(vehicleid, 0, 0, 0, 0, 0, 0, 0);
 
     if(loaddesc) MruMySQL_WczytajOpis(vehicleid, CarData[lUID][c_UID], 2);
+
+    if(IsCarAtViceCity(vehicleid) && !IsCarWithRadio(vehicleid))
+    {
+        new radio[128];
+        strcat(radio, GetViceCityRadioStream(random(9)));
+        SetVehicleRadio(vehicleid, radio);
+    }
     return vehicleid;
 }
 
@@ -1142,7 +1149,49 @@ Player_CanUseCar(playerid, vehicleid)
 	return 1;
 }
 
+RedisGetRadioKey(vehicleUID)
+{
+    return sprintf("vehicles:%d:radio", vehicleUID);
+}
 
+SetVehicleRadio(vehicleid, radio[])
+{
+    new vehicleUID = VehicleUID[vehicleid][vUID];
+    if(vehicleUID > 0)
+    {
+        Redis_SetString(RedisClient, RedisGetRadioKey(vehicleUID), radio);
+    }
+}
+
+DisableVehicleRadio(vehicleid)
+{
+    new vehicleUID = VehicleUID[vehicleid][vUID];
+    if(vehicleUID > 0)
+    {
+        Redis_Delete(RedisGetRadioKey(vehicleUID));
+    }
+}
+
+GetVehicleRadio(vehicleid)
+{
+    new radio[128];
+    new vehicleUID = VehicleUID[vehicleid][vUID];
+    if(vehicleUID > 0)
+    {
+        Redis_GetString(RedisClient, RedisGetRadioKey(vehicleUID), radio);
+    }
+    return radio;
+}
+
+IsCarWithRadio(vehicleid)
+{
+    new vehicleUID = VehicleUID[vehicleid][vUID];
+    if(vehicleUID > 0)
+    {
+        return Redis_Exists(RedisClient, RedisGetRadioKey(vehicleUID));
+    }
+    return 0;
+}
 
 //-----------------<[ Timery: ]>--------------------
 /*

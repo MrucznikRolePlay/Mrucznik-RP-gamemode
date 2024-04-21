@@ -60,6 +60,13 @@ Redis_IncrBy(const key[], value)
 	Redis_Command(RedisClient, string);
 }
 
+Redis_Delete(const key[])
+{
+	new string[128];
+	format(string, sizeof(string), "DEL %s", key);
+	Redis_Command(RedisClient, string);
+}
+
 // Expires key, default ttl = 1 month.
 Redis_Expire(const key[], ttl=2629800)
 {

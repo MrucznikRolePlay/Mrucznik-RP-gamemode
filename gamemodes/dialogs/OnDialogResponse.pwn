@@ -10874,6 +10874,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                                 SetPVarInt(i, "sanlisten", 0);
                             }
                         }
+						DisableVehicleRadio(veh);
                     }
                 }
                 //
@@ -10904,7 +10905,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					else format(taknieNeo, sizeof(taknieNeo), "W³¹cz");
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
-                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
+                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nVice City Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy³¹cz radio", komunikat); //+ 35char
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
 		}
@@ -10925,6 +10926,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
 					SetPVarString(playerid, "radioUrl", inputtext);
+					SetVehicleRadio(playerid, inputtext);
 					SetPVarInt(playerid, "sanlisten", 3);
 				}
 			}
@@ -10945,6 +10947,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
 					SetPVarString(playerid, "radioUrl", GetViceCityRadioStream(listitem));
+					SetVehicleRadio(playerid, GetViceCityRadioStream(listitem));
 					SetPVarInt(playerid, "sanlisten", 3);
 				}
 			}

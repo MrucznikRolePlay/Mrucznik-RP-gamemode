@@ -79,6 +79,26 @@ GetTransportDestinationName(terminalType)
 	return where;
 }
 
+IsPlayerAtViceCity(playerid)
+{
+	if(IsPlayerInDynamicArea(playerid, areaViceCity))
+	{
+		return 1;
+	}
+	return 0;
+}
+
+IsCarAtViceCity(vehicleid)
+{
+	new Float:x, Float:y, Float:z;
+	GetVehiclePos(vehicleid, x, y, z);
+	if(IsPointInDynamicArea(areaViceCity, x, y, z))
+	{
+		return 1;
+	}
+	return 0;
+}
+
 //-----------------<[ Mapa vice city: ]>-------------------
 /* Function created by Y_Less */
 stock Float:positive(Float:number) {

@@ -1020,6 +1020,14 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
 
+	new radio[128];
+	strcat(radio, GetVehicleRadio(vehicleid));
+	if(!isnull(radio))
+	{
+		PlayAudioStreamForPlayer(playerid, radio);
+		SetPVarInt(playerid, "sanlisten", 3);
+	}
+
     new engine, lights, alarm, doors, bonnet, boot, objective;
  	GetVehicleParamsEx(vehicleid, engine, lights ,alarm, doors, bonnet, boot, objective);
     if(!ispassenger)
