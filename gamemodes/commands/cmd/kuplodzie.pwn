@@ -30,7 +30,9 @@
 
 YCMD:kuplodzie(playerid, params[], help)
 {
-    if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666))
+    if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666) || 
+	IsPlayerInRangeOfPoint(playerid, 5.0, 4769.6387,-2250.5742,8.5730) || 
+	IsPlayerInRangeOfPoint(playerid, 5.0, 4358.7139,-2435.2607,13.2627))
     {
 		if(IsPlayerInAnyVehicle(playerid))
 		{

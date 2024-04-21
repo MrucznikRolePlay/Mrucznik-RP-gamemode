@@ -30,7 +30,8 @@
 
 YCMD:kupsamoloty(playerid, params[], help)
 {
-    if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392))//kupowanie samolotu
+    if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392) ||
+		IsPlayerInRangeOfPoint(playerid, 5.0, 3314.7239,-1883.0383,14.3252))//kupowanie samolotu
     {
 		if(IsPlayerInAnyVehicle(playerid))
 		{

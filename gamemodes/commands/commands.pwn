@@ -840,6 +840,8 @@ static Aliases()
 	//kuppojazd
 	Command_AddAltNamed("kuppojazd", "kupsamochod");
 	Command_AddAltNamed("kuppojazd", "kupauto");
+	Command_AddAltNamed("kuppojazd", "kupmotor");
+	Command_AddAltNamed("kuppojazd", "kupmotocykl");
 	Command_AddAltNamed("kuppojazd", "buycar");
 
 	//kupsamoloty

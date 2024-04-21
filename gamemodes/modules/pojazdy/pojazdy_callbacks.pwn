@@ -1062,6 +1062,11 @@ pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if(!response)
 		{
+			if(GetPVarInt(playerid, "kupuje-motor") == 1)
+			{
+				DeletePVar(playerid, "kupuje-motor");
+				return 1;
+			}
 			ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriê kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa ka¿d¹ kieszeñ\nMotory\nInne pojazdy", "Wybierz", "WyjdŸ");
 		}
 	}

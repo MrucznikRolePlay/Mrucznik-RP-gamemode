@@ -170,7 +170,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(!PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
+			if(!PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372) && !PlayerToPoint(10.0, playerid, 3965.4802,-1796.3794,12.5452))
 			{
 				_MruGracz(playerid, "Aby kupiæ pojazd unikatowy musisz znajdowaæ siê przy salonie aut.");
 				DialogPojazdyPremium(playerid);
