@@ -45,11 +45,15 @@ InitializeJob(Jobs:jobid)
 			break;
 		}
 
+		new Float:x = JobJoinPositions[jobid][i][JOB_JOIN_X];
+		new Float:y = JobJoinPositions[jobid][i][JOB_JOIN_Y];
+		new Float:z = JobJoinPositions[jobid][i][JOB_JOIN_Z];
+
 		CreateDynamic3DTextLabel(JobJoinPositions[jobid][i][JOB_JOIN_NAME], COLOR_NEWS, 
-			JobJoinPositions[jobid][i][JOB_JOIN_X], JobJoinPositions[jobid][i][JOB_JOIN_Y], JobJoinPositions[jobid][i][JOB_JOIN_Z] + 0.5,
+			x, y, z + 0.5,
 			JobJoinPositions[jobid][i][JOB_JOIN_DRAW_DISTANCE], INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
 
-		CreateDynamicPickup(1210, 2, JobJoinPositions[jobid][i][JOB_JOIN_X], JobJoinPositions[jobid][i][JOB_JOIN_Y], JobJoinPositions[jobid][i][JOB_JOIN_Z]);
+		CreateDynamicPickup(1210, 2, x, y, z);
 	}
 }
 

@@ -65,6 +65,8 @@ command_gotojob_Impl(playerid, job, index, type)
             }
 
             SetPlayerPos(playerid, JobSpawns[job][index][JOB_SPAWN_X], JobSpawns[job][index][JOB_SPAWN_Y], JobSpawns[job][index][JOB_SPAWN_Z]);
+            SetPlayerVirtualWorld(playerid, JobSpawns[job][index][JOB_SPAWN_VW]);
+            SetPlayerInterior(playerid, JobSpawns[job][index][JOB_SPAWN_INT]);
             SetPlayerFacingAngle(playerid, JobSpawns[job][index][JOB_SPAWN_A]);
         }
         case 2: // icon
