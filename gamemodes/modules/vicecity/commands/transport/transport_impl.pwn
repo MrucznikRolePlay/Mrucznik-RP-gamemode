@@ -97,21 +97,21 @@ TransportPlayerVehicle(playerid, terminalType)
     new Float:x, Float:y, Float:z, Float:a;
     switch(terminalType)
     {
-        case 1: // To Los Santos
-        {
-            new rand = random(sizeof(LosSantosVehCargoParking));
-            x = LosSantosVehCargoParking[rand][0];
-            y = LosSantosVehCargoParking[rand][1];
-            z = LosSantosVehCargoParking[rand][2];
-            a = LosSantosVehCargoParking[rand][3];
-        }
-        case 2: // To Vice City
+        case 1: // From Los Santos to Vice City
         {
             new rand = random(sizeof(ViceCityVehCargoParking));
             x = ViceCityVehCargoParking[rand][0];
             y = ViceCityVehCargoParking[rand][1];
             z = ViceCityVehCargoParking[rand][2];
             a = ViceCityVehCargoParking[rand][3];
+        }
+        case 2: // From Vice City to Los Santos
+        {
+            new rand = random(sizeof(LosSantosVehCargoParking));
+            x = LosSantosVehCargoParking[rand][0];
+            y = LosSantosVehCargoParking[rand][1];
+            z = LosSantosVehCargoParking[rand][2];
+            a = LosSantosVehCargoParking[rand][3];
         }
     }
     

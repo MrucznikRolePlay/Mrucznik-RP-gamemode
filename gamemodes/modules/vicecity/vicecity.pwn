@@ -49,9 +49,22 @@ ShowViceCityRadioDialog(playerid, dialogid, title[])
 	ShowPlayerDialogEx(playerid, dialogid, DIALOG_STYLE_LIST, title,"Wildstyle\nFlash FM\nK-CHAT\nFever 105\nV-ROCK\nVCPR\nRadio Espantoso\nEmotion 98.3\nWave 103","Start",""); //zmieñ dialogid
 }
 
+CreateShippingPlacePickups()
+{
+	CreateDynamicPickup(1318, 1, 2696.2197,-2226.9309,13.5501);
+	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO VICE CITY\n/transport", COLOR_GREEN, 
+		2696.2197,-2226.9309,13.5501,
+		15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
+
+	CreateDynamicPickup(1318, 1, 3775.2874,-2193.3118,14.3248);
+	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO LOS SANTOS\n/transport", COLOR_GREEN, 
+		3775.2874,-2193.3118,14.3248,
+		15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
+}
+
 GetPlayerShippingPlace(playerid)
 {
-	if(IsPlayerInRangeOfPoint(playerid, 15.0, 0.0,0.0,0.0)) // TODO: Los Santos Pos
+	if(IsPlayerInRangeOfPoint(playerid, 15.0, 2696.2197,-2226.9309,13.5501))
 	{
 		return 1; // Los Santos Cargo Terminal
 	}

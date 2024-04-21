@@ -331,6 +331,7 @@ public OnGameModeInit()
 	InitializeFoodPlaces();
 	InitializeDrugsPickup();
 	CreateShopPickups();
+	CreateShippingPlacePickups();
 	ZaladujSamochodyDoKradziezy(); //Auta do kradziezy
 	LoadDeluxeCarsForStealing(); //Auta deluxe do kradziezy
 	Zaladuj3DTexty();
