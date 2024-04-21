@@ -3312,6 +3312,15 @@ GraczBankomat(playerid)
 	{
 		return 1;
 	}
+	// Vice City
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5357.5029, 180.7435, 1224.7744))
+	{// North Point Mall
+		return 1;
+	}
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5357.7056, 178.2677, 1224.8038))
+	{// North Point Mall
+		return 1;
+	}
 	
 	return 0;
 }
@@ -3421,6 +3430,14 @@ IsAtGasStation(playerid)
 		}
 		else if(PlayerToPoint(10.0,playerid,2489.6565,-2101.3022,13.5620)) 
 		{//stacja w bazie KT
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 10.0, 5038.2017,-2007.2606,10.0713))
+		{// stacja benzynowa ocean beach
+			return 1;
+		}
+		if(IsPlayerInRangeOfPoint(playerid, 10.0, 5057.6924,-2025.0481,10.0713))
+		{// stacja benzynowa ocean beach 2
 			return 1;
 		}
 	}
