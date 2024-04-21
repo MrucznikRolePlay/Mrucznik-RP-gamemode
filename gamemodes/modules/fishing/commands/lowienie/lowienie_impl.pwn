@@ -100,6 +100,11 @@ command_lowienie_Impl(playerid)
                 SendClientMessage(playerid, COLOR_PANICRED, "twoja postaæ sta³a siê fanatykiem wêdkarstwa. £owisz wiêksze ryby, ale idzie te¿ za tym pewien koszt...");
             }
         }
+
+        if(IsPlayerAtViceCity(playerid))
+        {
+            Caught *= 1.25;
+        }
         
         SetTimerEx("Lowienie", 30000 ,0,"d",playerid);
         FishGood[playerid] = 1;

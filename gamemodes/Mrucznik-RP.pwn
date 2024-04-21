@@ -3332,6 +3332,11 @@ PayDay()
 					if(PlayerInfo[i][pAccount] != 0) {
 						interestRate = (float(interest)/float(PlayerInfo[i][pAccount])) * 100.0;
 					}
+					if(IsPlayerAtViceCity(playerid))
+					{
+						interestRate *= 1.25;
+					}
+
 					PlayerInfo[i][pExp]++;
 					PlayerPlayMusic(i);
 					if(PlayerInfo[i][pAccount] <= 100000000)
