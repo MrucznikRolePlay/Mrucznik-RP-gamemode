@@ -94,7 +94,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Prostytutka
         {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307, 2, 2, false},
-        {"Prostytutka - Vice City", 5096.9316, -2421.1750, 9.8919, 208.0519, 0, 0, false},
+        {"Prostytutka - Vice City", 5100.0, -2419.0, 10.0, 208.0519, 0, 0, false},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler narkotyków
@@ -179,7 +179,7 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
     },
     { // Prostytutka
         {"Praca Prostytutki", 2438.2761, -1221.3833, 25.1847, 15.0}, // Los Santos, Pig Pen
-        {"Praca Prostytutki", 5084.7656,-2385.2180,1003.0234, 30.0}, // Vice City, Pole Postion Club
+        {"Praca Prostytutki", 5084.7656, -2385.2180, 1003.0234, 30.0}, // Vice City, Pole Postion Club
         {"", 0.0, 0.0, 0.0, 0.0}
     },
     { // Diler narkotyków
@@ -256,7 +256,7 @@ new Float:JobIconPositions[Jobs][MAX_JOB_JOINS][3] = {
     },
     { // Prostytutka
         {2438.2761, -1221.3833, 25.1847}, // Los Santos, Pig Pen
-        {5088.4043, -2389.4717, 1003.0234}, // Vice City, Pole Postion Club
+        {5100.0, -2419.0, 10.0}, // Vice City, Pole Postion Club
         {0.0, 0.0, 0.0}
     },
     { // Diler narkotyków

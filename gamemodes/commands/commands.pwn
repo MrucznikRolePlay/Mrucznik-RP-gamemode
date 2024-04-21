@@ -655,6 +655,8 @@ static Aliases()
 	Command_AddAltNamed("cbradio", "cb");
 	Command_AddAltNamed("cbradio", "cb_radio");
 
+	Command_AddAltNamed("getposp", "getpos");
+
 	//checktank
 	Command_AddAltNamed("checktank", "checktankmode");
 	Command_AddAltNamed("checktank", "checktankmod");
