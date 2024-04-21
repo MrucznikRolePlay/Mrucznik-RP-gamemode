@@ -144,7 +144,7 @@ Taxi_FareEnd(playerid)
 	TransportDuty[playerid] = 0;
 
 	new vehicleid = GetPlayerVehicleID(playerid);
-	if(vehicleid < 0)
+	if(vehicleid <= 0)
 	{
 		vehicleid = gLastCar[playerid];
 	}
