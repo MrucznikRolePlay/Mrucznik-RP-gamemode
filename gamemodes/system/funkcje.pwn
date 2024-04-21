@@ -3495,6 +3495,10 @@ IsAtBar(playerid)
 		{//bar       glenpark
 		  	return 1;
 		}
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5467.5771, -1006.0907, 1003.5313))
+		{ // bar malibu
+			return 1;
+		}
 	}
 	return 0;
 }

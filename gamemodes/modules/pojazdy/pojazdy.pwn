@@ -1195,6 +1195,28 @@ IsCarWithRadio(vehicleid)
     return 0;
 }
 
+CreateFakePayNSprayPickups()
+{
+    for(new i; i<sizeof(FakePayNSpray); i++)
+    {
+        FakePayNSprayPickups[i] = CreateDynamicPickup(19607, 14, 
+            FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2]
+        );
+    }
+}
+
+IsPickupPayNSprayPickup(pickupid)
+{
+    for(new i; i<sizeof(FakePayNSpray); i++)
+    {
+        if(pickupid == FakePayNSprayPickups[i])
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 //-----------------<[ Timery: ]>--------------------
 /*
 

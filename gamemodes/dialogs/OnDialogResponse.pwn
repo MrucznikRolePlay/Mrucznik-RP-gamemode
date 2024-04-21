@@ -90,6 +90,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
+	if(dialogid == 92145)
+	{
+		if(response)
+		{
+			new cena_naprawy = 7500;
+			sendTipMessageFormat(playerid, "Zap³aci³eœ $%d za wizytê w warsztacie", cena_naprawy);
+			ZabierzKase(playerid, cena_naprawy);
+			RepairVehicle(GetPlayerVehicleID(playerid));
+			naprawiony[playerid] = 1;
+			SetTimerEx("Naprawianie",10000,0,"d",playerid);
+		}
+	}
+
 	//2.7.5 - nadal nie 3.0
 	if(dialogid == DIALOGID_UNIFORM_FRAKCJA)
 	{

@@ -22,6 +22,16 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+new Float:FakePayNSpray[6][3] = {
+    {4988.7808, -2207.5691, 9.9267}, // pay n spray ocean beach
+    {5327.7080, -519.6098, 10.8135}, // waschington bech pay n spray
+    {4088.7883, -2217.4561, 11.2747}, // pay n spray doki pos
+    {4129.1362, -1068.3549, 10.5625}, // pay n spray little haiti
+    {3991.9048, -1789.3201, 6.8265}, // sunshine auto pay n spray
+    {3830.1980, -2349.7175, 10.7164} // 8ball doki
+};
+new FakePayNSprayPickups[6];
+
 //-----------------<[ Zmienne: ]>-------------------
 new Car_SlotQueue[1024];
 new pCruiseSpeed[MAX_PLAYERS];
