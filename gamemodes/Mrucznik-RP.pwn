@@ -2960,14 +2960,6 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
         SendClientMessage(playerid,COLOR_LIGHTBLUE,"|___________________________________________________________|");
     }
 
-	new Float:health;
-	GetVehicleHealth(GetPlayerVehicleID(playerid), health);
-	if(health <= 1000.0 && IsPickupPayNSprayPickup(pickupid))
-	{
-		ShowPlayerDialogEx(playerid, 92145, DIALOG_STYLE_MSGBOX, "Naprawa pojazdu", "Czy chcesz naprawiæ swój pojazd za 5000$?", "Napraw", "WyjdŸ");
-		return 1;
-	}
-
 	CollectMoneyPickup(playerid, pickupid);
 	return 1;
 }

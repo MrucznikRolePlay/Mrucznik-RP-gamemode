@@ -1202,14 +1202,17 @@ CreateFakePayNSprayPickups()
         FakePayNSprayPickups[i] = CreateDynamicPickup(1318, 14, 
             FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2]
         );
+		CreateDynamic3DTextLabel("Naprawa pojazdu", COLOR_GREEN, 
+			FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2] + 0.5,
+			15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
     }
 }
 
-IsPickupPayNSprayPickup(pickupid)
+IsPlayerAtPayNSpray(playerid)
 {
     for(new i; i<sizeof(FakePayNSpray); i++)
     {
-        if(pickupid == FakePayNSprayPickups[i])
+        if(IsPlayerInRangeOfPoint(playerid, 5.0, FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2]))
         {
             return 1;
         }
