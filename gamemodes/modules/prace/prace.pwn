@@ -57,9 +57,8 @@ InitializeJob(Jobs:jobid)
 	}
 }
 
-InitializeJobIcons(playerid, iconsOffset)
+InitializeJobIcons(playerid)
 {
-	new icons = 0;
 	for(new jobid = 1; jobid < sizeof(JobInfo); jobid++)
 	{
 		for(new i; i < MAX_JOB_JOINS; i++)
@@ -70,12 +69,10 @@ InitializeJobIcons(playerid, iconsOffset)
 
 			if(x != 0.0 && y != 0.0 && z != 0.0)
 			{
-				SetPlayerMapIcon(playerid, iconsOffset + icons, x, y, z, 56, 0);
-				icons++;
+				CreateDynamicMapIcon(x, y, z, 56, -1, -1, -1, -1, 1000.0);
 			}
 		}
 	}
-	return icons;
 }
 
 //-----------------<[ Funkcje: ]>-------------------
