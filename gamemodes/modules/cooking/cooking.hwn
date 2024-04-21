@@ -43,7 +43,7 @@ new MealModels[] = {
 	2703
 };
 
-new FoodPlaces[][3] = {
+new Float:FoodPlaces[][3] = {
 	{5392.7432, 159.6183, 1218.9940}, // shaft hot dogs inside north point mall
 	{5376.6992, 152.4913, 1219.0455}, // beef bandit inside north point mall
 	{5376.2573, 197.3952, 1219.0421}, // burger shot inside north point mall
