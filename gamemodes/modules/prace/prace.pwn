@@ -53,7 +53,7 @@ InitializeJob(Jobs:jobid)
 			x, y, z + 0.5,
 			JobJoinPositions[jobid][i][JOB_JOIN_DRAW_DISTANCE], INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
 
-		CreateDynamicPickup(1210, 2, x, y, z);
+		CreateDynamicPickup(1210, 1, x, y, z);
 	}
 }
 
