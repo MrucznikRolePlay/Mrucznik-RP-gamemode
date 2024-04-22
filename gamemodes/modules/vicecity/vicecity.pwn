@@ -52,14 +52,14 @@ ShowViceCityRadioDialog(playerid, dialogid, title[])
 CreateShippingPlacePickups()
 {
 	CreateDynamicPickup(2510, 1, 2696.2197,-2226.9309,13.5501);
-	CreateDynamicMapIcon(2696.2197,-2226.9309,13.5501, 51, 0);
-	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO VICE CITY\n/transport", COLOR_NEUTRALGREEN, 
+	CreateDynamicMapIcon(2696.2197,-2226.9309,13.5501, 51, 0, -1, -1, -1, -1, MAPICON_GLOBAL);
+	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO VICE CITY\n/transport", COLOR_LIGHTBROWN, 
 		2696.2197,-2226.9309,13.5501,
 		15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
 
 	CreateDynamicPickup(2510, 1, 3775.2874,-2193.3118,14.3248);
-	CreateDynamicMapIcon(3775.2874,-2193.3118,14.3248, 51, 0);
-	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO LOS SANTOS\n/transport", COLOR_NEUTRALGREEN, 
+	CreateDynamicMapIcon(3775.2874,-2193.3118,14.3248, 51, 0, -1, -1, -1, -1, MAPICON_GLOBAL);
+	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO LOS SANTOS\n/transport", COLOR_LIGHTBROWN, 
 		3775.2874,-2193.3118,14.3248,
 		15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
 }
