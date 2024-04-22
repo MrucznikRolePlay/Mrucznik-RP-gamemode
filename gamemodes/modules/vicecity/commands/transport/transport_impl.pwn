@@ -94,7 +94,7 @@ TransportPlayerVehicle(playerid, terminalType)
 {
     GetTransportDestinationName(terminalType);
 
-    new Float:x, Float:y, Float:z, Float:a;
+    new Float:x, Float:y, Float:z, Float:lowerZ, Float:a;
     switch(terminalType)
     {
         case 1: // From Los Santos to Vice City
@@ -103,6 +103,7 @@ TransportPlayerVehicle(playerid, terminalType)
             x = ViceCityVehCargoParking[rand][0];
             y = ViceCityVehCargoParking[rand][1];
             z = ViceCityVehCargoParking[rand][2];
+            lowerZ = z - 0.6;
             a = ViceCityVehCargoParking[rand][3];
         }
         case 2: // From Vice City to Los Santos
@@ -111,6 +112,7 @@ TransportPlayerVehicle(playerid, terminalType)
             x = LosSantosVehCargoParking[rand][0];
             y = LosSantosVehCargoParking[rand][1];
             z = LosSantosVehCargoParking[rand][2];
+            lowerZ = z;
             a = LosSantosVehCargoParking[rand][3];
         }
     }
@@ -118,7 +120,8 @@ TransportPlayerVehicle(playerid, terminalType)
     new vehicleID = GetPlayerVehicleID(playerid);
     new vehicleUID = VehicleUID[vehicleID][vUID];
     RemovePlayerFromVehicle(playerid);
-    SetPlayerCheckpoint(playerid, x, y, z, 5);
+    SetPlayerCheckpoint(playerid, x, y, lowerZ, 5);
+    SetPVarInt(playerid, "transport-checkpoint", 1);
 	defer TeleportVehicle(vehicleID, vehicleUID, x, y, z, a);
 }
 

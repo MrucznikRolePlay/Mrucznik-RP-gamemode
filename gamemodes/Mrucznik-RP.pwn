@@ -2570,6 +2570,12 @@ public OnPlayerEnterCheckpoint(playerid)
 	        okregi[playerid] ++;
 	    }
 	}
+
+	if(GetPVarInt(playerid, "transport-checkpoint"))
+	{
+		DeletePVar(playerid, "transport-checkpoint");
+	    DisablePlayerCheckpoint(playerid);
+	}
 	return 1;
 }
 
