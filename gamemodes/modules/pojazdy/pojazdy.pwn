@@ -1199,7 +1199,7 @@ CreateFakePayNSprayPickups()
 {
     for(new i; i<sizeof(FakePayNSpray); i++)
     {
-        FakePayNSprayPickups[i] = CreateDynamicPickup(1318, 1, 
+        FakePayNSprayPickups[i] = CreateDynamicPickup(19627, 1, 
             FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2]
         );
 		CreateDynamic3DTextLabel("Naprawa pojazdu", COLOR_GREEN, 
