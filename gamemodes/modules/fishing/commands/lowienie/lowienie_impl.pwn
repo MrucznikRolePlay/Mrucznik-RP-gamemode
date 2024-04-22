@@ -103,7 +103,12 @@ command_lowienie_Impl(playerid)
 
         if(IsPlayerAtViceCity(playerid))
         {
-            Caught *= 1.25;
+            new hour,unused;
+            gettime(hour,unused,unused);
+            if(hour >= 18 && hour <= 24)
+            {
+                Caught *= 1.25;
+            }
         }
         
         SetTimerEx("Lowienie", 30000 ,0,"d",playerid);

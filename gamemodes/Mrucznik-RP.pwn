@@ -3292,6 +3292,8 @@ CalculateInterest(playerid)
 PayDay()
 {
 	new string[128], account,playername2[MAX_PLAYER_NAME], checks, ebill;
+	new hour,minuite,second;
+	gettime(hour,minuite,second);
 
 	foreach(new i : Player)
 	{
@@ -3338,7 +3340,7 @@ PayDay()
 					if(PlayerInfo[i][pAccount] != 0) {
 						interestRate = (float(interest)/float(PlayerInfo[i][pAccount])) * 100.0;
 					}
-					if(IsPlayerAtViceCity(i))
+					if(IsPlayerAtViceCity(i) && hour >= 18 && hour <= 24)
 					{
 						interestRate *= 1.25;
 					}
@@ -3437,9 +3439,7 @@ PayDay()
     printf("-> Updating GangZones");
     Zone_GangUpdate(true);
 
-	new hour,minuite,second;
 	new rand = random(80);
-	gettime(hour,minuite,second);
     FixHour(hour);
 	if(10 <= shifthour <= 22)
 	{
