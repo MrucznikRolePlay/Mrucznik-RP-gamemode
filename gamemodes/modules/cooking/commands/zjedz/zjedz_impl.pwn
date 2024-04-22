@@ -46,7 +46,7 @@ command_zjedz_Impl(playerid)
         return 1;
     }
 
-    if(IsAtFoodPlace(playerid) && kaska[playerid] > 100)
+    if(IsAtFoodPlace(playerid) && kaska[playerid] >= 100)
     {
         SetPlayerHealth(playerid, 100.0);
         ZabierzKase(playerid, 100);
