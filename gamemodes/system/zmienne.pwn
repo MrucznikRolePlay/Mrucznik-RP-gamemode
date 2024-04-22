@@ -1038,13 +1038,14 @@ new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
 new arePlayerDescTurnedOn[MAX_PLAYERS] = {true, ...};
 new ZaufaniON = true;
 
-new Float:ShopPickupsPos[4][3] = {
+new Float:ShopPickupsPos[5][3] = {
 	{207.5669, -100.3860, 1005.2578}, // binco ls
 	{161.3583, -83.6028, 1001.8047}, // zip ls
 	{206.3739, -8.1625, 1001.2109}, // victim ls
-	{206.9117, -129.4907, 1003.5078} // prolabs
+	{206.9117, -129.4907, 1003.5078}, // prolabs
+	{203.8627, -43.8014, 1001.8047} // sub urban
 };
-new ShopPickups[4];
+new ShopPickups[5];
 
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
