@@ -51,7 +51,14 @@ command_transport_checks(playerid)
     new vehicleID = GetPlayerVehicleID(playerid);
     if(!IsCarOwner(playerid, vehicleID) && !IsPlayerOwnFractionCar(playerid, vehicleID)) 
     { 
-        return sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Ciebie!");
+        MruMessageFail(playerid, "Mo¿esz transportowaæ tylko pojazdy, których jesteœ w³aœcicielem.");
+        return 1;
+    }
+
+    if(kaska[playerid] < VEHICLE_TRANSPORT_COST)
+    {
+        MruMessageFailF(playerid, "Nie staæ ciê, transport pojazdu kosztuje %d$.", VEHICLE_TRANSPORT_COST);
+        return 1;
     }
     return 0;
 }
