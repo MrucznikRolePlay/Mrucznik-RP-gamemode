@@ -40,8 +40,8 @@ command_gotovc_Impl(playerid)
     #endif
 
 	// Set player position and facing angle
-	SetPlayerPos(playerid, 5642.7227,-1217.4832,13.2865);
-	SetPlayerFacingAngle(playerid, 180);
+	SetPlayerPos(playerid, 5183.5313,-1399.5190,10.3443);
+	SetPlayerFacingAngle(playerid, 90);
 	SetCameraBehindPlayer(playerid);
 
 	SendClientMessage(playerid, 0xFF0000FF, "* You teleported to Vice City!");
