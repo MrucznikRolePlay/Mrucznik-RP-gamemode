@@ -67,7 +67,7 @@ ViceCityInteriors()
     // ------ [ Bank ] ------
     AddInterior(
         "Bank", 4104.6421, -1291.2079, 12.8773, 0, 0,
-        "Wyjœcie", 0.0, 0.0, 0.0, 0, VCVW); // TODO
+        "Wyjœcie", 1387.3058,-26.9497,1000.8729, 2, VCVW);
 
 
     // ------ [ Inne ] ------
