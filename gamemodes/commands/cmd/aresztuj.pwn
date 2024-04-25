@@ -131,7 +131,9 @@ YCMD:aresztuj(playerid, params[], help)
 								{
 									new Float:z;
 									GetPlayerPos(playerid, z, z, z); // zeby nie wsadzali z recepcji
-									if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z) && !(PlayerToPoint(20.0,playerid,599.1960,-1489.5380,82.1648) && z < 84))
+									if(!PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z) && !(PlayerToPoint(20.0,playerid,599.1960,-1489.5380,82.1648) && z < 84) && !
+									(PlayerToPoint(10.0,playerid,194.6258,158.0858,1003.0234) // komi las venturas interior
+									|| PlayerToPoint(10.0,playerid,193.9191,179.0882,1003.0234))) // komi las venturas interior)
 									{
 								    	sendTipMessageEx(playerid, COLOR_GRAD3, "Ten gracz ma za du¿y WL alby wsadziæ go do zwyk³ej celi. WsadŸcie go do stanowego.");
 									}
