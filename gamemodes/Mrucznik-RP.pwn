@@ -2882,6 +2882,12 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
 	{
 		if(ShopPickups[i] == pickupid)
 		{
+			
+			if(gettime() - GetPVarInt(playerid, "picked-up") < 60)
+			{
+				return 1;	
+			}
+			SetPVarInt(playerid, "picked-up", gettime());
 			SendClientMessage(playerid,COLOR_LIGHTBLUE,"|_______________Wybór skina - dostêpne komendy_______________|");
 			SendClientMessage(playerid,COLOR_WHITE,"{3CB371}/ubranie{FFFFFF}- zabija i przenosi do zwyk³ego menu wyboru skinów (wybiera³ka). Tylko dla cywili.");
 			SendClientMessage(playerid,COLOR_WHITE,"{CD5C5C}/wybierzskin{FFFFFF}- pozwala wybraæ skin przydzielany po s³u¿bie. Tylko dla frakcji z dzia³aj¹cym /duty.");
