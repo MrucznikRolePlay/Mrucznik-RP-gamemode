@@ -46,8 +46,13 @@ command_zjedz_Impl(playerid)
         return 1;
     }
 
-    if(IsAtFoodPlace(playerid) && kaska[playerid] >= 100)
+    if(IsAtFoodPlace(playerid))
     {
+        if(kaska[playerid] < 100)
+        {
+            MruMessageFail(playerid, "Nie staæ Ciê, potrzebujesz 100$.");
+            return 1;
+        }
         SetPlayerHealth(playerid, 100.0);
         ZabierzKase(playerid, 100);
         GameTextForPlayer(playerid, "~r~-100$", 5000, 1);
