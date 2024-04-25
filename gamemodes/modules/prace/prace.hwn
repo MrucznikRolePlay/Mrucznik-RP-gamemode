@@ -235,7 +235,7 @@ new JobJoinPositions[Jobs][MAX_JOB_JOINS][eJobJoinPosition] = {
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     },
     { // Kurier
-        {"Praca Kuriera", 1751.4445, -2054.9761, 14.5, 25.0}, // Los Santos, Unity Station
+        {"Praca Kuriera", 1751.4047, -2055.0581, 13.9922, 25.0}, // Los Santos, Unity Station
         {"", 0.0, 0.0, 0.0, 0.0}, ...
     }
 };

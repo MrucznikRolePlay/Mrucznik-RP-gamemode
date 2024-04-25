@@ -26,6 +26,6 @@
 #define MAX_JOB_NAME 32
 #define MAX_JOB_JOINS 3
 #define MAX_JOB_SPAWNS 5
-#define JOB_JOIN_MAX_PROXIMITY 4.0
+#define JOB_JOIN_MAX_PROXIMITY 3.0
 
 //end
