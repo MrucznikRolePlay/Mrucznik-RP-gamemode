@@ -1213,7 +1213,7 @@ IsPlayerAtPayNSpray(playerid)
 {
     for(new i; i<sizeof(FakePayNSpray); i++)
     {
-        if(IsPlayerInRangeOfPoint(playerid, 5.0, FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2]))
+        if(IsPlayerInRangeOfPoint(playerid, 7.0, FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2]))
         {
             return 1;
         }
