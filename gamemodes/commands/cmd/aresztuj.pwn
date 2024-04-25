@@ -44,7 +44,9 @@ YCMD:aresztuj(playerid, params[], help)
 			|| PlayerToPoint(5, playerid, 1560.0333,-1638.6797,28.4881)//nowe komi 1
 			|| PlayerToPoint(5, playerid, 1559.8517,-1646.9373,28.4881)//nowe komi 2
 			|| PlayerToPoint(20.0,playerid,NG_JAIL_X, NG_JAIL_Y, NG_JAIL_Z) // stanowe
-			|| PlayerToPoint(20.0,playerid,599.1960,-1489.5380,82.1648)) // areszt fbi
+			|| PlayerToPoint(20.0,playerid,599.1960,-1489.5380,82.1648) // areszt fbi
+			|| PlayerToPoint(10.0,playerid,194.6258,158.0858,1003.0234) // komi las venturas interior
+			|| PlayerToPoint(10.0,playerid,193.9191,179.0882,1003.0234)) // komi las venturas interior
 			{
 
 		   	    new playa;
