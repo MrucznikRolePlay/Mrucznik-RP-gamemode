@@ -77,7 +77,7 @@ command_gotojob_Impl(playerid, job, index, type)
                 return 1;
             }
 
-            SetPlayerPos(playerid, JobJoinPositions[job][index][0], JobIconPositions[job][index][1], JobJoinPositions[job][index][2]);
+            SetPlayerPos(playerid, JobIconPositions[job][index][0], JobIconPositions[job][index][1], JobIconPositions[job][index][2]);
         }
         default:
         {
