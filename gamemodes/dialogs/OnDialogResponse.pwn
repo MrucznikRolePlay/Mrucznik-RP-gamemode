@@ -3019,7 +3019,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "CB-RADIO Zakupione.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-	     					SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /cb w pojezdzie aby rozmawiaæ z innymi.");
+	     					SendClientMessage(playerid, COLOR_WHITE, "WSKAZÓWKA: Wpisz /cb w pojeŸdzie, aby rozmawiaæ z innymi.");
 							PlayerInfo[playerid][pCB] = 1;
 							return 1;
 						}
