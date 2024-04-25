@@ -3528,13 +3528,27 @@ IsABike(carid)
 	{
 		return 1;
 	}
-	if(GetVehicleModel(carid) == 462 || GetVehicleModel(carid) == 448 || GetVehicleModel(carid) == 581 || GetVehicleModel(carid) == 522 || GetVehicleModel(carid) == 461 || GetVehicleModel(carid) == 521 || GetVehicleModel(carid) == 523 || GetVehicleModel(carid) == 463 || GetVehicleModel(carid) == 586 || GetVehicleModel(carid) == 468)//motory
+	if(GetVehicleModel(carid) == 462 || GetVehicleModel(carid) == 448 || GetVehicleModel(carid) == 581 || GetVehicleModel(carid) == 522 
+	|| GetVehicleModel(carid) == 461 || GetVehicleModel(carid) == 521 || GetVehicleModel(carid) == 523 || GetVehicleModel(carid) == 463 
+	|| GetVehicleModel(carid) == 586 || GetVehicleModel(carid) == 468)//motory
 	{
 		return 1;
 	}
 	if(GetVehicleModel(carid) == 471)//quad
 	{
 		return 1;
+	}
+	return 0;
+}
+
+IsABikeModel(model)
+{
+	switch(model)
+	{
+		case 509, 481, 510, 462, 448, 581, 522, 461, 521, 523, 463, 586, 468, 471:
+		{
+			return 1;
+		}
 	}
 	return 0;
 }
@@ -4973,29 +4987,107 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
         SendClientMessage(playerid, COLOR_YELLOW, "Nie masz wolnych slotów.");
         return 0;
     }
-    new losuj = random(sizeof(LosowyParking));
-	new losuj2 = random(sizeof(LosowyParkingLodz));
-	new losuj3 = random(sizeof(LosowyParkingLot));
-	new losuj4 = random(sizeof(LosowyParkingHeli));
 	new carid;
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, sizeof(nick));
 
     //Create
+	new Float:x, Float:y, Float:z, Float:a;
+
     if(IsABoatModel(model))
 	{
-	    carid = Car_Create(model, LosowyParkingLodz[losuj2][0],LosowyParkingLodz[losuj2][1],LosowyParkingLodz[losuj2][2], LosowyParkingLodz[losuj2][3], 228, 228);
+		if(IsPlayerAtViceCity(playerid))
+		{
+    		new losuj = random(sizeof(LosowyParkingLodzVC));
+			x = LosowyParkingLodzVC[losuj][0];
+			y = LosowyParkingLodzVC[losuj][1];
+			z = LosowyParkingLodzVC[losuj][2];
+			a = LosowyParkingLodzVC[losuj][3];
+		}
+		else
+		{
+    		new losuj = random(sizeof(LosowyParkingLodz));
+			x = LosowyParkingLodz[losuj][0];
+			y = LosowyParkingLodz[losuj][1];
+			z = LosowyParkingLodz[losuj][2];
+			a = LosowyParkingLodz[losuj][3];
+		}
 	}
 	else if(IsAPlaneModel(model))
 	{
-	    carid = Car_Create(model, LosowyParkingLot[losuj3][0],LosowyParkingLot[losuj3][1],LosowyParkingLot[losuj3][2], LosowyParkingLot[losuj3][3], 228, 228);
+		if(IsPlayerAtViceCity(playerid))
+		{
+    		new losuj = random(sizeof(LosowyParkingLotVC));
+			x = LosowyParkingLotVC[losuj][0];
+			y = LosowyParkingLotVC[losuj][1];
+			z = LosowyParkingLotVC[losuj][2];
+			a = LosowyParkingLotVC[losuj][3];
+		}
+		else
+		{
+    		new losuj = random(sizeof(LosowyParkingLot));
+			x = LosowyParkingLot[losuj][0];
+			y = LosowyParkingLot[losuj][1];
+			z = LosowyParkingLot[losuj][2];
+			a = LosowyParkingLot[losuj][3];
+		}
 	}
 	else if(IsAHeliModel(model))
 	{
-	    carid = Car_Create(model, LosowyParkingLot[losuj4][0],LosowyParkingHeli[losuj4][1],LosowyParkingHeli[losuj4][2], LosowyParkingHeli[losuj4][3], 228, 228);
+		if(IsPlayerAtViceCity(playerid))
+		{
+    		new losuj = random(sizeof(LosowyParkingHeliVC));
+			x = LosowyParkingHeliVC[losuj][0];
+			y = LosowyParkingHeliVC[losuj][1];
+			z = LosowyParkingHeliVC[losuj][2];
+			a = LosowyParkingHeliVC[losuj][3];
+		}
+		else
+		{
+    		new losuj = random(sizeof(LosowyParkingHeli));
+			x = LosowyParkingHeli[losuj][0];
+			y = LosowyParkingHeli[losuj][1];
+			z = LosowyParkingHeli[losuj][2];
+			a = LosowyParkingHeli[losuj][3];
+		}
 	}
-    else carid = Car_Create(model, LosowyParking[losuj][0],LosowyParking[losuj][1],LosowyParking[losuj][2], LosowyParking[losuj][3], 228, 228);
+	else if(IsABikeModel(model) && IsPlayerAtViceCity(playerid))
+	{
+		new losuj = random(sizeof(LosowyParkingMotorVC));
+		x = LosowyParkingMotorVC[losuj][0];
+		y = LosowyParkingMotorVC[losuj][1];
+		z = LosowyParkingMotorVC[losuj][2];
+		a = LosowyParkingMotorVC[losuj][3];
+	}
+	else if(IsAWodolotModel(model))
+	{
+		new losuj = random(sizeof(LosowyParkingWodolotVC));
+		x = LosowyParkingWodolotVC[losuj][0];
+		y = LosowyParkingWodolotVC[losuj][1];
+		z = LosowyParkingWodolotVC[losuj][2];
+		a = LosowyParkingWodolotVC[losuj][3];
+	}
+    else 
+	{
+		if(IsPlayerAtViceCity(playerid))
+		{
+    		new losuj = random(sizeof(LosowyParkingVC));
+			x = LosowyParkingVC[losuj][0];
+			y = LosowyParkingVC[losuj][1];
+			a = LosowyParkingVC[losuj][3];
+			z = LosowyParkingVC[losuj][2];
+		}
+		else
+		{
+    		new losuj = random(sizeof(LosowyParking));
+			x = LosowyParking[losuj][0];
+			y = LosowyParking[losuj][1];
+			z = LosowyParking[losuj][2];
+			a = LosowyParking[losuj][3];
+		}
+	}
 
+	carid = Car_Create(model, x, y, z, a, 228, 228);
     if(carid == -1)
     {
         SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Rekord nie zosta³ dodany do bazy.");
@@ -5033,29 +5125,106 @@ KupowaniePojazdu(playerid, model, kolor1, kolor2, cena)
 	    if(model >= 400 && model <= 611)
 	    {
             if(CountPlayerCars(playerid) >= PlayerInfo[playerid][pCarSlots]) return SendClientMessage(playerid, COLOR_YELLOW, "Nie masz wolnych slotów.");
-			new losuj = random(sizeof(LosowyParking));
-			new losuj2 = random(sizeof(LosowyParkingLodz));
-			new losuj3 = random(sizeof(LosowyParkingLot));
-			new losuj4 = random(sizeof(LosowyParkingHeli));
 			new carid;
 			new nick[MAX_PLAYER_NAME];
 			GetPlayerName(playerid, nick, sizeof(nick));
 
             //Create
-            if(IsABoatModel(model))
+			new Float:x, Float:y, Float:z, Float:a;
+			if(IsABoatModel(model))
 			{
-			    carid = Car_Create(model, LosowyParkingLodz[losuj2][0],LosowyParkingLodz[losuj2][1],LosowyParkingLodz[losuj2][2], LosowyParkingLodz[losuj2][3], kolor1, kolor2);
+				if(IsPlayerAtViceCity(playerid))
+				{
+					new losuj = random(sizeof(LosowyParkingLodzVC));
+					x = LosowyParkingLodzVC[losuj][0];
+					y = LosowyParkingLodzVC[losuj][1];
+					z = LosowyParkingLodzVC[losuj][2];
+					a = LosowyParkingLodzVC[losuj][3];
+				}
+				else
+				{
+					new losuj = random(sizeof(LosowyParkingLodz));
+					x = LosowyParkingLodz[losuj][0];
+					y = LosowyParkingLodz[losuj][1];
+					z = LosowyParkingLodz[losuj][2];
+					a = LosowyParkingLodz[losuj][3];
+				}
 			}
 			else if(IsAPlaneModel(model))
 			{
-			    carid = Car_Create(model, LosowyParkingLot[losuj3][0],LosowyParkingLot[losuj3][1],LosowyParkingLot[losuj3][2], LosowyParkingLot[losuj3][3], kolor1, kolor2);
+				if(IsPlayerAtViceCity(playerid))
+				{
+					new losuj = random(sizeof(LosowyParkingLotVC));
+					x = LosowyParkingLotVC[losuj][0];
+					y = LosowyParkingLotVC[losuj][1];
+					z = LosowyParkingLotVC[losuj][2];
+					a = LosowyParkingLotVC[losuj][3];
+				}
+				else
+				{
+					new losuj = random(sizeof(LosowyParkingLot));
+					x = LosowyParkingLot[losuj][0];
+					y = LosowyParkingLot[losuj][1];
+					z = LosowyParkingLot[losuj][2];
+					a = LosowyParkingLot[losuj][3];
+				}
 			}
 			else if(IsAHeliModel(model))
 			{
-			    carid = Car_Create(model, LosowyParkingLot[losuj4][0],LosowyParkingHeli[losuj4][1],LosowyParkingHeli[losuj4][2], LosowyParkingHeli[losuj4][3], kolor1, kolor2);
+				if(IsPlayerAtViceCity(playerid))
+				{
+					new losuj = random(sizeof(LosowyParkingHeliVC));
+					x = LosowyParkingHeliVC[losuj][0];
+					y = LosowyParkingHeliVC[losuj][1];
+					z = LosowyParkingHeliVC[losuj][2];
+					a = LosowyParkingHeliVC[losuj][3];
+				}
+				else
+				{
+					new losuj = random(sizeof(LosowyParkingHeli));
+					x = LosowyParkingHeli[losuj][0];
+					y = LosowyParkingHeli[losuj][1];
+					z = LosowyParkingHeli[losuj][2];
+					a = LosowyParkingHeli[losuj][3];
+				}
 			}
-            else carid = Car_Create(model, LosowyParking[losuj][0],LosowyParking[losuj][1],LosowyParking[losuj][2], LosowyParking[losuj][3], kolor1, kolor2);
-
+			else if(IsABikeModel(model) && IsPlayerAtViceCity(playerid))
+			{
+				new losuj = random(sizeof(LosowyParkingMotorVC));
+				x = LosowyParkingMotorVC[losuj][0];
+				y = LosowyParkingMotorVC[losuj][1];
+				z = LosowyParkingMotorVC[losuj][2];
+				a = LosowyParkingMotorVC[losuj][3];
+			}
+			else if(IsAWodolotModel(model))
+			{
+				new losuj = random(sizeof(LosowyParkingWodolotVC));
+				x = LosowyParkingWodolotVC[losuj][0];
+				y = LosowyParkingWodolotVC[losuj][1];
+				z = LosowyParkingWodolotVC[losuj][2];
+				a = LosowyParkingWodolotVC[losuj][3];
+			}
+			else 
+			{
+				if(IsPlayerAtViceCity(playerid))
+				{
+					new losuj = random(sizeof(LosowyParkingVC));
+					x = LosowyParkingVC[losuj][0];
+					y = LosowyParkingVC[losuj][1];
+					a = LosowyParkingVC[losuj][3];
+					z = LosowyParkingVC[losuj][2];
+				}
+				else
+				{
+					new losuj = random(sizeof(LosowyParking));
+					x = LosowyParking[losuj][0];
+					y = LosowyParking[losuj][1];
+					z = LosowyParking[losuj][2];
+					a = LosowyParking[losuj][3];
+				}
+			}
+            
+			carid = Car_Create(model, x, y, z, a, kolor1, kolor2);
             if(carid == -1) return SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Rekord nie zosta³ dodany do bazy.");
             //Assign
             Car_MakePlayerOwner(playerid, carid);

@@ -1048,7 +1048,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		}
 	}
 	// -- customowe parametry dla poszczególnych pojazdów
-	if(IsARower(vehicleid))
+	if(IsARower(vehicleid) || IsAWodolot(vehicleid))
 	{
 		SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
 		engine = 1;

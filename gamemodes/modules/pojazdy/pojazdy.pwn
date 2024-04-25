@@ -860,6 +860,11 @@ IsAHeliModel(carid)
     return 0;
 }
 
+IsAWodolotModel(model)
+{
+    return model == 460;
+}
+
 IsAWodolot(vehicleid)
 {
     return GetVehicleModel(vehicleid) == 460; // Skimmer
