@@ -1971,6 +1971,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			lowcap[playerid] = 0;
 			return 1;
 	    }
+		if(dialogid == 93687)
+		{
+			if(!response)
+			{
+				SetPlayerSpawnPos(playerid);
+			}
+		}
 	    //OnDialogResposne OKNA DMV
 		if(dialogid == 99)
 		{

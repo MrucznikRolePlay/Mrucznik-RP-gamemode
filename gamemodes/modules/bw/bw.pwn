@@ -548,6 +548,8 @@ BWTimer(playerid)
 			GameTextForPlayer(i, "~n~~n~~g~~h~Obudziles sie", 5000, 5);
 			format(string, sizeof(string), "{AAF542}Obudzi³eœ siê! {FFFFFF}Twoja postaæ odnios³a obra¿enia, które zalecamy odgrywaæ.");
 			SendClientMessage(i, COLOR_NEWS, string);
+
+			ShowPlayerDialogEx(playerid, 93687, DIALOG_STYLE_MSGBOX, "Spawn", "Mo¿esz wybraæ, czy chcesz zostaæ w szpitalu, czy zespawnowaæ siê na swoim spawnie.", "Szpital", "Spawn");
 		}
 		SetCameraBehindPlayer(i);
 	}
