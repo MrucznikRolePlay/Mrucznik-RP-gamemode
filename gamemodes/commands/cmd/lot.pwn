@@ -57,7 +57,7 @@ YCMD:lot(playerid, params[], help)
 			return 1;
 		}
 
-		MruMessageGoodInfoF(playerid, "Zap³aci³eœ %d$ za przelot samolotem do %s.", ticketPrice, dane);
+		MruMessageGoodInfoF(playerid, "Zap³aci³eœ %d$ za przelot samolotem do %s.", ticketPrice, data);
 		ZabierzKase(playerid, ticketPrice);
 		Log(payLog, INFO, "%s zap³aci³ %d za bilet do %s", GetPlayerLogName(playerid), ticketPrice, data);
 
