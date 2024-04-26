@@ -10948,7 +10948,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
 					SetPVarString(playerid, "radioUrl", inputtext);
-					SetVehicleRadio(playerid, inputtext);
+					SetVehicleRadio(GetPlayerVehicleID(playerid), inputtext);
 					SetPVarInt(playerid, "sanlisten", 3);
 				}
 			}
@@ -10969,7 +10969,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
 					SetPVarString(playerid, "radioUrl", GetViceCityRadioStream(listitem));
-					SetVehicleRadio(playerid, GetViceCityRadioStream(listitem));
+					SetVehicleRadio(GetPlayerVehicleID(playerid), GetViceCityRadioStream(listitem));
 					SetPVarInt(playerid, "sanlisten", 3);
 				}
 			}

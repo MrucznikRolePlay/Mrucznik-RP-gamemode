@@ -39,6 +39,8 @@ command_fixvc_Impl(playerid)
     }
 
     new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+    
     new Float:collX, Float:collY, Float:collZ;
     new coll = CA_RayCastLine(x, y, z, x, y, z + 50, collX, collY, collZ);
     if(coll == WATER_OBJECT)
