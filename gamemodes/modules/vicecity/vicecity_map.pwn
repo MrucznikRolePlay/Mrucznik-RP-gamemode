@@ -13,9 +13,10 @@
     http://forum.sa-mp.com/showthread.php?t=649394
 */
 
-AddInterior(outName[], Float:outX, Float:outY, Float:outZ, outInt, outVw, inName[], Float:inX, Float:inY, Float:inZ, inInt, inVw)
+AddInterior(outName[], Float:outX, Float:outY, Float:outZ, outInt, outVw, inName[], Float:inX, Float:inY, Float:inZ, inInt, inVw, wejdzUID=0, playerLocal=255, bool:specialCome=false)
 {
-    return DodajWejscie(outX, outY, outZ, inX, inY, inZ, outVw, outInt, inVw, inInt, outName, inName);
+    return DodajWejscie(outX, outY, outZ, inX, inY, inZ, outVw, outInt, inVw, inInt, outName, inName,
+        wejdzUID, playerLocal, specialCome);
 }
 
 ViceCityInteriors()
@@ -67,7 +68,8 @@ ViceCityInteriors()
     // ------ [ Bank ] ------
     AddInterior(
         "Bank", 4104.6421, -1291.2079, 12.8773, 0, 0,
-        "Wyjœcie", 1387.3058,-26.9497,1000.8729, 2, VCVW);
+        "Wyjœcie", 1387.3058,-26.9497,1000.8729, 2, VCVW,
+        0, 103);
 
 
     // ------ [ Inne ] ------
