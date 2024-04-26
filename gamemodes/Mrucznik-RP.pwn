@@ -5859,10 +5859,10 @@ timer CheckViceCityCar[3000](vehicleid, Float:x, Float:y, Float:z, Float:a)
 	if(currZ < z && CA_IsVehicleInWater(vehicleid, unused, unused))
 	{
 		new Float:collX, Float:collY, Float:collZ;
-		new coll = CA_RayCastLine(currX, currY, currZ, x, y, z, collX, collY, collZ);
+		new coll = CA_RayCastLine(currX, currY, currZ + 1, x, y, z, collX, collY, collZ);
 		if(coll == WATER_OBJECT)
 		{
-			coll = CA_RayCastLine(collX, collY, collZ+1, x, y, z, collX, collY, collZ);
+			coll = CA_RayCastLine(collX, collY, collZ + 3, x, y, z, collX, collY, collZ);
 		}
 
 		if(coll >= 1)
