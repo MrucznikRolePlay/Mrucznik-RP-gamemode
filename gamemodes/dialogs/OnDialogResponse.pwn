@@ -6656,7 +6656,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 3:// Spawn w Vice City
 		            {
-	                    PlayerInfo[playerid][pSpawn] = 2;
+	                    PlayerInfo[playerid][pSpawn] = 3;
 	                    SendClientMessage(playerid, COLOR_NEWS, "Bêdziesz siê teraz spawnowa³ w Vice City");
 
 						if(GetPVarInt(playerid, "spawnchange")) 
