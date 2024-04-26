@@ -5835,6 +5835,44 @@ public OnPlayerStreamIn(playerid, forplayerid)
     return 1;
 }
 
+public OnVehicleStreamIn(vehicleid, forplayerid)
+{
+	// Vice City cars under objects fix
+	new Float:unused;
+	if(IsPlayerAtViceCity(forplayerid) 
+	&& !IsVehicleOccupied(vehicleid)
+	&& !CA_IsVehicleInWater(vehicleid, unused, unused))
+	{
+		new Float:x, Float:y, Float:z, Float:a;
+		GetVehiclePos(vehicleid, x, y, z);
+		GetVehicleZAngle(vehicleid, a);
+
+		CheckViceCityCar(vehicleid, x, y, z, a);
+	}
+	return 1;
+}
+
+timer CheckViceCityCar[3000](vehicleid, Float:x, Float:y, Float:z, Float:a)
+{
+	new Float:currX, Float:currY, Float:currZ, Float:unused;
+	GetVehiclePos(vehicleid, currX, currY, currZ);
+	if(currZ < z && CA_IsVehicleInWater(vehicleid, unused, unused))
+	{
+		new Float:collX, Float:collY, Float:collZ;
+		new coll = CA_RayCastLine(currX, currY, currZ, x, y, z, collX, collY, collZ);
+		if(coll == WATER_OBJECT)
+		{
+			coll = CA_RayCastLine(collX, collY, collZ+1, x, y, z, collX, collY, collZ);
+		}
+
+		if(coll >= 1)
+		{
+			SetVehiclePos(vehicleid, x, y, z);
+			SetVehicleZAngle(vehicleid, a);
+		}
+	}
+}
+
 public OnVehicleMod(playerid, vehicleid, componentid)
 {
 	return 0; //turn off singleplayer workshops

@@ -12139,7 +12139,19 @@ stock GetVehicleDriverID(vehicleid)
 		}
 	}
     return -1;
-}  
+}
+
+stock IsVehicleOccupied(vehicleid)
+{
+    foreach(new i : Player) 
+	{
+		if(GetPlayerState(i) == PLAYER_STATE_DRIVER && IsPlayerInVehicle(i, vehicleid))
+		{
+			return 1;
+		}
+	}
+    return 0;
+}
 
 stock IsVehicleRangeOfPoint(vehicleid,Float:range,Float:x,Float:y,Float:z)
 {

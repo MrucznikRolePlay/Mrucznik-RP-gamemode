@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   fixvc                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,21 +27,35 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "transport\transport.pwn"
-#include "fixvc\fixvc.pwn"
-#include "gotovc\gotovc.pwn"
-#include "objectsdebug\objectsdebug.pwn"
-
+#include "fixvc_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_fixvc()
 {
-    command_transport();
-    command_fixvc();
-    command_gotovc();
-    command_objectsdebug();
+    new command = Command_GetID("fixvc");
+
+    //aliases
+    Command_AddAlt(command, "fixvicecity");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:fixvc(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Naprawia pozycjê, jeœli wpad³eœ pod textury bêd¹c w Vice City.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_fixvc_Impl(playerid);
 }
