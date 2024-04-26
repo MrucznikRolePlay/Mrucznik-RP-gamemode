@@ -6601,6 +6601,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                PlayerInfo[playerid][pSpawn] = 0;
 		                SendClientMessage(playerid, COLOR_NEWS, "Bêdziesz siê teraz spawnowa³ na swoim normalnym spawnie");
+
+						if(GetPVarInt(playerid, "spawnchange")) 
+						{
+							DeletePVar(playerid, "spawnchange");
+							return 1;
+						}
 		                if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	 					{
 							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwórz\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
@@ -6614,6 +6620,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                PlayerInfo[playerid][pSpawn] = 1;
 		                SendClientMessage(playerid, COLOR_NEWS, "Bêdziesz siê teraz spawnowa³ przed domem");
+
+						if(GetPVarInt(playerid, "spawnchange")) 
+						{
+							DeletePVar(playerid, "spawnchange");
+							return 1;
+						}
 		                if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 		    			{
 							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwórz\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
@@ -6627,6 +6639,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 	                    PlayerInfo[playerid][pSpawn] = 2;
 	                    SendClientMessage(playerid, COLOR_NEWS, "Bêdziesz siê teraz spawnowa³ wewn¹trz domu");
+
+						if(GetPVarInt(playerid, "spawnchange")) 
+						{
+							DeletePVar(playerid, "spawnchange");
+							return 1;
+						}
 	                    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	 					{
 							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwórz\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
@@ -6640,11 +6658,30 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 	                    PlayerInfo[playerid][pSpawn] = 2;
 	                    SendClientMessage(playerid, COLOR_NEWS, "Bêdziesz siê teraz spawnowa³ w Vice City");
+
+						if(GetPVarInt(playerid, "spawnchange")) 
+						{
+							DeletePVar(playerid, "spawnchange");
+							return 1;
+						}
+	                    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
+	 					{
+							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwórz\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+						}
+						else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
+						{
+		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+						}
 		            }
 				}
 			}
 			if(!response)
 			{
+				if(GetPVarInt(playerid, "spawnchange")) 
+				{
+					DeletePVar(playerid, "spawnchange");
+					return 1;
+				}
 				if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	   			{
 					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwórz\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");

@@ -32,6 +32,7 @@ YCMD:innyspawn(playerid, params[], help)
 {
     if(IsPlayerConnected(playerid))
     {
+        SetPVarInt(playerid, "spawnchange", 1);
         ShowSpawnChangeDialog(playerid);
     }
     return 1;
