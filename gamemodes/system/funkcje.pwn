@@ -5038,6 +5038,14 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
 			a = LosowyParkingLodz[losuj][3];
 		}
 	}
+	else if(IsAWodolotModel(model))
+	{
+		new losuj = random(sizeof(LosowyParkingWodolotVC));
+		x = LosowyParkingWodolotVC[losuj][0];
+		y = LosowyParkingWodolotVC[losuj][1];
+		z = LosowyParkingWodolotVC[losuj][2];
+		a = LosowyParkingWodolotVC[losuj][3];
+	}
 	else if(IsAPlaneModel(model))
 	{
 		if(IsPlayerAtViceCity(playerid))
@@ -5083,14 +5091,6 @@ public MRP_ShopPurchaseCar(playerid, model, cena)
 		y = LosowyParkingMotorVC[losuj][1];
 		z = LosowyParkingMotorVC[losuj][2];
 		a = LosowyParkingMotorVC[losuj][3];
-	}
-	else if(IsAWodolotModel(model))
-	{
-		new losuj = random(sizeof(LosowyParkingWodolotVC));
-		x = LosowyParkingWodolotVC[losuj][0];
-		y = LosowyParkingWodolotVC[losuj][1];
-		z = LosowyParkingWodolotVC[losuj][2];
-		a = LosowyParkingWodolotVC[losuj][3];
 	}
     else 
 	{
