@@ -2042,7 +2042,7 @@ SetPlayerSpawnPos(playerid)
 	//BW:
 	else if(PlayerInfo[playerid][pBW] > 0 || GetPVarInt(playerid, "kill-bw") == 1)
 	{
-		ZespawnujGraczaSzpitalBW(playerid);
+		ZespawnujGraczaSzpitalBW(playerid, PlayerInfo[playerid][pSpawn] >= 3);
 	}
 	else if(PlayerInfo[playerid][pInjury] > 0)
 	{

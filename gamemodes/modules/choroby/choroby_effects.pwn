@@ -360,9 +360,6 @@ public BlackoutEffect(playerid, disease, value)
 }
 public DeathEffect(playerid, disease, value)
 {
-	/*ChatMe(playerid, "umar³ na skutek choroby.");
-	NadajBW(playerid, INJURY_TIME_DISEASES);
-	ZespawnujGraczaSzpitalBW(playerid);*/
 	ChatMe(playerid, "straci³ przytomnoœæ na skutek choroby");
 	NadajRanny(playerid, INJURY_TIME_DISEASES);
 	return 1;

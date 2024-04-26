@@ -120,7 +120,7 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 			killerid = GetPVarInt(playerid, "bw-killerid");
 		}
 	}
-	ZespawnujGraczaSzpitalBW(playerid);
+	ZespawnujGraczaSzpitalBW(playerid, IsPlayerAtViceCity(playerid));
 
 	if(IsPlayerConnected(killerid))
 	{
@@ -554,22 +554,39 @@ BWTimer(playerid)
 	return 1;
 }
 
-ZespawnujGraczaSzpitalBW(playerid)
+ZespawnujGraczaSzpitalBW(playerid, viceCity=false)
 {
-	//SendClientMessageToAll(COLOR_GRAD2, "#9: ZespawnujGraczaSzpitalBW");
-	new randbed = random(sizeof(HospitalBeds));
-	SetPVarInt(playerid, "bw-vw", 90);
-	SetPVarInt(playerid, "bw-int", 0);
-	SetPVarFloat(playerid, "bw-faceangle", HospitalBeds[randbed][3]);
-	PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
-	PlayerInfo[playerid][pPos_x] = HospitalBeds[randbed][0];
-	PlayerInfo[playerid][pPos_y] = HospitalBeds[randbed][1];
-	PlayerInfo[playerid][pPos_z] = HospitalBeds[randbed][2];		
-	PlayerInfo[playerid][pMuted] = 1;
-	ZespawnujGraczaBW(playerid);
-	SetPlayerCameraPos(playerid,HospitalBeds[randbed][0] + 3, HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
-	SetPlayerCameraLookAt(playerid,HospitalBeds[randbed][0], HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
-	Wchodzenie(playerid);
+	if(viceCity)
+	{
+		new randbed = random(sizeof(HospitalBedsVC));
+		SetPVarInt(playerid, "bw-vw", 7110);
+		SetPVarInt(playerid, "bw-int", 3);
+		SetPVarFloat(playerid, "bw-faceangle", HospitalBedsVC[randbed][3]);
+		PlayerInfo[playerid][pPos_x] = HospitalBedsVC[randbed][0];
+		PlayerInfo[playerid][pPos_y] = HospitalBedsVC[randbed][1];
+		PlayerInfo[playerid][pPos_z] = HospitalBedsVC[randbed][2];		
+		PlayerInfo[playerid][pMuted] = 1;
+		ZespawnujGraczaBW(playerid);
+		SetPlayerCameraPos(playerid,HospitalBedsVC[randbed][0] + 3, HospitalBedsVC[randbed][1], HospitalBedsVC[randbed][2]);
+		SetPlayerCameraLookAt(playerid,HospitalBedsVC[randbed][0], HospitalBedsVC[randbed][1], HospitalBedsVC[randbed][2]);
+		Wchodzenie(playerid);
+	}
+	else
+	{
+		new randbed = random(sizeof(HospitalBeds));
+		SetPVarInt(playerid, "bw-vw", 90);
+		SetPVarInt(playerid, "bw-int", 0);
+		SetPVarFloat(playerid, "bw-faceangle", HospitalBeds[randbed][3]);
+		PlayerInfo[playerid][pLocal] = PLOCAL_FRAC_LSMC;
+		PlayerInfo[playerid][pPos_x] = HospitalBeds[randbed][0];
+		PlayerInfo[playerid][pPos_y] = HospitalBeds[randbed][1];
+		PlayerInfo[playerid][pPos_z] = HospitalBeds[randbed][2];		
+		PlayerInfo[playerid][pMuted] = 1;
+		ZespawnujGraczaBW(playerid);
+		SetPlayerCameraPos(playerid,HospitalBeds[randbed][0] + 3, HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
+		SetPlayerCameraLookAt(playerid,HospitalBeds[randbed][0], HospitalBeds[randbed][1], HospitalBeds[randbed][2]);
+		Wchodzenie(playerid);
+	}
 	return 1;
 }
 
