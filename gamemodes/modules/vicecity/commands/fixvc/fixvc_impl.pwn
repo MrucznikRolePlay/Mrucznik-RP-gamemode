@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_fixvc_Impl(playerid)
 {
-    if(IsPlayerAtViceCity(playerid))
+    if(!IsPlayerAtViceCity(playerid))
     {
         MruMessageFail(playerid, "Nie jesteœ w Vice City.");
         return 1;
