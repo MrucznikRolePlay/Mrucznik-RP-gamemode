@@ -57,6 +57,7 @@ YCMD:lot(playerid, params[], help)
 			return 1;
 		}
 
+		MruMessageGoodInfoF(playerid, "Zap³aci³eœ %d$ za przelot samolotem do %s.", ticketPrice, dane);
 		ZabierzKase(playerid, ticketPrice);
 		Log(payLog, INFO, "%s zap³aci³ %d za bilet do %s", GetPlayerLogName(playerid), ticketPrice, data);
 
@@ -80,6 +81,7 @@ YCMD:lot(playerid, params[], help)
 			GameTextForPlayer(playerid, "Witaj w ~r~Las Venturas~w~!", 5000, 1);
 			SetPlayerPos(playerid, 1673.3000488281, 1447.8000488281, 10.89999961853);
 		}
+		return 1;
 	}
 	else if(strcmp(data,"bilet",true) == 0)
 	{
