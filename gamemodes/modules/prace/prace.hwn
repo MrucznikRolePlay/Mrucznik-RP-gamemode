@@ -84,7 +84,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // £owca nagród
         {"£owca nagród - Los Santos", 322.0553894043, 303.41961669922, 999.1484375, 0.0, 5, 0, false},
-        {"£owca nagród - Vice City", 4128.7817, -1634.7278, 10.6806, 323.6496, 0, 0, false},
+        {"£owca nagród - Vice City", 4128.7817, -1634.7278, 10.6806, 323.6496, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Prawnik
@@ -94,17 +94,17 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Prostytutka
         {"Prostytutka - Los Santos", 1210.9187, 3.9104, 1000.9219, 179.7307, 2, 2, false},
-        {"Prostytutka - Vice City", 5100.0, -2419.0, 10.0, 208.0519, 0, 0, false},
+        {"Prostytutka - Vice City", 5100.0, -2419.0, 10.0, 208.0519, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler narkotyków
         {"Diler narkotyków - Los Santos", 2166.2034, -1675.3135, 15.0859, 0.0, 0, 0, false},
-        {"Diler narkotyków - Vice City", 4120.5952, -1525.4886, 10.7275, 275.4100, 0, 0, false},
+        {"Diler narkotyków - Vice City", 4120.5952, -1525.4886, 10.7275, 275.4100, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Z³odziej aut
         {"Z³odziej aut - Los Santos", 2414.7239, -1414.2733, 24.1029, 88.5546, 0, 0, false},
-        {"Z³odziej aut - Vice City", 3716.1843, -803.8253, 10.9169, 180.4315, 0, 0, false}, // opcjonalnie: 3693.2422,-794.5903,11.0221,184.8183
+        {"Z³odziej aut - Vice City", 3716.1843, -803.8253, 10.9169, 180.4315, 0, 0, true}, // opcjonalnie: 3693.2422,-794.5903,11.0221,184.8183
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Reporter
@@ -112,33 +112,33 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Mechanik
         {"Mechanik - Los Santos", 2794.5515,-1619.3689,10.9219, 80.0, 0, 0, false},
-        {"Mechanik - Vice City", 3987.13, -1811.8, 12.6, 128.0, 0, 0, false}, // TODO: spawn w salonie
+        {"Mechanik - Vice City", 3987.13, -1811.8, 12.6, 128.0, 0, 0, true}, // TODO: spawn w salonie
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Przemytnik
         {"Przemytnik - Los Santos", 2207.4038, -1725.1147, 13.4060, 0.0, 0, 0, false},
-        {"Przemytnik - Vice City", 4713.5313, -2687.3469, 5.3266, 270.6958, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
+        {"Przemytnik - Vice City", 4713.5313, -2687.3469, 5.3266, 270.6958, 0, 0, true}, // TODO: spawn gdzie indziej niz praca
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler broni
         {"Diler broni - Los Santos", 1417.2240, -1327.4694, 13.5599, 270.0, 0, 0, false},
-        {"Diler broni - Vice City", 3898.2285, -606.6735, 10.7196, 271.1541, 0, 0, false},
+        {"Diler broni - Vice City", 3898.2285, -606.6735, 10.7196, 271.1541, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Kierowca
         {"Kierowca - Los Santos", 1108.1042, -1796.3079, 16.5938, 90.0, 0, 0, false},
-        {"Kierowca - Vice City", 4005.1975, -763.2137, 11.8840, 353.7065, 0, 0, false},
+        {"Kierowca - Vice City", 4005.1975, -763.2137, 11.8840, 353.7065, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Lekarz
         {"Lekarz - Los Santos", 2025.4443, -1423.2101, 16.9922, 133.0, 0, 0, false},
-        {"Lekarz - Vice City Ocean Beach", 4860.3, -1928.6264, 9.9212, 279.7419, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
-        {"Lekarz - Vice City Downtown", 4176.9443, 199.7706, 11.8687, 2.9617, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
+        {"Lekarz - Vice City Ocean Beach", 4860.3, -1928.6264, 9.9212, 279.7419, 0, 0, true}, // TODO: spawn gdzie indziej niz praca
+        {"Lekarz - Vice City Downtown", 4176.9443, 199.7706, 11.8687, 2.9617, 0, 0, true}, // TODO: spawn gdzie indziej niz praca
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Bokser
         {"Bokser - Los Santos", 766.0804, 14.5133, 1000.7004, 0.0, 5, 0, false},
-        {"Bokser - Vice City", 3885.4304, -1646.6052, 11.2530, 6.4954, 0, 0, false}, // TODO: spawn gdzie indziej niz praca
+        {"Bokser - Vice City", 3885.4304, -1646.6052, 11.2530, 6.4954, 0, 0, true}, // TODO: spawn gdzie indziej niz praca
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // reserved 1

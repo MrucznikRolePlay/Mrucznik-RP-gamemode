@@ -2070,7 +2070,8 @@ SetPlayerSpawnPos(playerid)
 		}
 		else
 		{
-		    if(PlayerInfo[playerid][pSpawn] == 0) //Normalny spawn
+			new spawnType = PlayerInfo[playerid][pSpawn];
+		    if(spawnType == 0 || spawnType >= 3) //Normalny spawn
 		    {
 		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
@@ -2082,34 +2083,88 @@ SetPlayerSpawnPos(playerid)
 				    {
 						case FRAC_LSPD: //1
 						{
-						    new rand = random(sizeof(gCopPlayerSpawns));
-							SetPlayerPos(playerid, gCopPlayerSpawns[rand][0], gCopPlayerSpawns[rand][1], gCopPlayerSpawns[rand][2]);
-							SetPlayerFacingAngle(playerid, 90.0);
+							if(spawnType == 0)
+							{ // Los Santos
+								new rand = random(sizeof(gCopPlayerSpawns));
+								SetPlayerPos(playerid, gCopPlayerSpawns[rand][0], gCopPlayerSpawns[rand][1], gCopPlayerSpawns[rand][2]);
+								SetPlayerFacingAngle(playerid, 90.0);
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 5397.2466,-1422.1250,11.5215);
+								SetPlayerFacingAngle(playerid, 316.0);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_FBI: //2
 						{
-							SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
-							SetPlayerFacingAngle(playerid, 270.0);
+							if(spawnType == 0)
+							{ // Los Santos
+								SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
+								SetPlayerFacingAngle(playerid, 270.0);
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 4342.9678,-187.4431,11.0599);
+								SetPlayerFacingAngle(playerid, 136.0);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_NG: //3
 						{
-						    SetPlayerPos(playerid, 261.8342, 71.2429, 1003.2422);// stara: 2515.0200, -2459.5896, 13.8187
-							SetPlayerInterior(playerid, 6);
-							SetPlayerVirtualWorld(playerid, 88);
-							Wchodzenie(playerid);
+							if(spawnType == 0)
+							{ // Los Santos
+								SetPlayerPos(playerid, 261.8342, 71.2429, 1003.2422);// stara: 2515.0200, -2459.5896, 13.8187
+								SetPlayerInterior(playerid, 6);
+								SetPlayerVirtualWorld(playerid, 88);
+								Wchodzenie(playerid);
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 3278.8284,-1106.3940,14.3275);
+								SetPlayerFacingAngle(playerid, 265.0);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_ERS:  //4
 						{
-						    SetPlayerPos(playerid, 1148.4323,-1315.4225,13.9841);
-		    				SetPlayerFacingAngle(playerid,358.0);
+							if(spawnType == 0)
+							{ // Los Santos
+								SetPlayerPos(playerid, 1148.4323,-1315.4225,13.9841);
+								SetPlayerFacingAngle(playerid,358.0);
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 4112.7622,-1420.3684,12.5683);
+								SetPlayerFacingAngle(playerid, 266.7065);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_LCN: //5
 						{
-						    SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
+							if(spawnType == 0)
+							{ // Los Santos
+						    	SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 5229.6646,-2227.3933,11.5385);
+								SetPlayerFacingAngle(playerid, 252.7065);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_YKZ: //6
 						{
-                            SetPlayerPos(playerid, 2794.8042,-1087.1310,30.7188);
+							if(spawnType == 0)
+							{ // Los Santos
+                            	SetPlayerPos(playerid, 2794.8042,-1087.1310,30.7188);
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 5229.6646,-2227.3933,11.5385);
+								SetPlayerFacingAngle(playerid, 252.7065);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_BOR: //7
 						{
@@ -2117,63 +2172,99 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_HA: //8
 						{
-						    SetPlayerPos(playerid, -50.400001525879,-279.20001220703,6.0999999046326);
+							if(spawnType == 0)
+							{ // Los Santos
+						    	SetPlayerPos(playerid, -50.400001525879,-279.20001220703,6.0999999046326);
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 5074.9429,140.3920,18.2164);
+								SetPlayerFacingAngle(playerid, 180.7065);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_SN: //9
 						{
-							if(PlayerInfo[playerid][pRank] <= 1)
-							{
-								SetPlayerPos(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
-								Wchodzenie(playerid);
-								sendTipMessage(playerid, "Zrespi³eœ siê na dachu San News"); 
+							if(spawnType == 0)
+							{ // Los Santos
+								if(PlayerInfo[playerid][pRank] <= 1)
+								{
+									SetPlayerPos(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
+									Wchodzenie(playerid);
+									sendTipMessage(playerid, "Zrespi³eœ siê na dachu San News"); 
+								}
+								else if(PlayerInfo[playerid][pRank] >= 2 && PlayerInfo[playerid][pRank] < 7) 
+								{
+									SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
+									Wchodzenie(playerid);
+								}
+								else if(PlayerInfo[playerid][pRank] >= 8)
+								{
+									SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
+									Wchodzenie(playerid);
+								}
+								// SetPlayerPos(playerid, 735.2266,-1336.5826,13.5358);
 							}
-							else if(PlayerInfo[playerid][pRank] >= 2 && PlayerInfo[playerid][pRank] < 7) 
-							{
-								SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 4561.9756,158.1313,10.5328);
+								SetPlayerFacingAngle(playerid, 180.7065);
 								Wchodzenie(playerid);
 							}
-							else if(PlayerInfo[playerid][pRank] >= 8)
-							{
-								SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
-								Wchodzenie(playerid);
-							}
-						   // SetPlayerPos(playerid, 735.2266,-1336.5826,13.5358);
 						}
 						case FRAC_KT: //10
 						{
-							SetPlayerPos(playerid,2468.3796,-2082.9690,13.5580);
-                            SetPlayerFacingAngle(playerid, 89.1901);
+							if(spawnType == 0)
+							{ // Los Santos
+								SetPlayerPos(playerid,2468.3796,-2082.9690,13.5580);
+								SetPlayerFacingAngle(playerid, 89.1901);
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 4005.1975,-763.2137,11.8840);
+								SetPlayerFacingAngle(playerid, 353.7065);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_GOV: //11
 						{
-							if(PlayerInfo[playerid][pLider] == 11)
-							{
-							    SetPlayerPos(playerid, 1460.4297,-1853.9827,81.9475);
-							    SetPlayerVirtualWorld(playerid, 50);
-							    SetPlayerInterior(playerid, 0);
-								PlayerInfo[playerid][pLocal] = 108;
-			                    Wchodzenie(playerid);
-								SetTimerEx("Wchodzenie", 1000, false, "i", playerid);
-							}
-							else
-							{
-							    if(PlayerInfo[playerid][pRank] >= 1)
+							if(spawnType == 0)
+							{ // Los Santos
+								if(PlayerInfo[playerid][pLider] == 11)
 								{
-								    SetPlayerPos(playerid, 1445.3516,-1827.1736,81.4602);
-									SetPlayerFacingAngle(playerid, 0.0);
+									SetPlayerPos(playerid, 1460.4297,-1853.9827,81.9475);
 									SetPlayerVirtualWorld(playerid, 50);
 									SetPlayerInterior(playerid, 0);
 									PlayerInfo[playerid][pLocal] = 108;
+									Wchodzenie(playerid);
+									SetTimerEx("Wchodzenie", 1000, false, "i", playerid);
 								}
 								else
 								{
-								    SetPlayerPos(playerid, 1471.8883,-1811.8147,77.9612);
-									SetPlayerFacingAngle(playerid, 4.6505);
-									SetPlayerVirtualWorld(playerid, 50);
-									SetPlayerInterior(playerid, 0);
-									PlayerInfo[playerid][pLocal] = 108;
+									if(PlayerInfo[playerid][pRank] >= 1)
+									{
+										SetPlayerPos(playerid, 1445.3516,-1827.1736,81.4602);
+										SetPlayerFacingAngle(playerid, 0.0);
+										SetPlayerVirtualWorld(playerid, 50);
+										SetPlayerInterior(playerid, 0);
+										PlayerInfo[playerid][pLocal] = 108;
+									}
+									else
+									{
+										SetPlayerPos(playerid, 1471.8883,-1811.8147,77.9612);
+										SetPlayerFacingAngle(playerid, 4.6505);
+										SetPlayerVirtualWorld(playerid, 50);
+										SetPlayerInterior(playerid, 0);
+										PlayerInfo[playerid][pLocal] = 108;
+									}
 								}
-	   						}
+							}
+							else
+							{ // Vice City
+								SetPlayerPos(playerid, 4302.2539,-246.4274,11.5759);
+								SetPlayerFacingAngle(playerid, 269.8782);
+								Wchodzenie(playerid);
+							}
 						}
 						case FRAC_GROOVE: //12
 						{
@@ -2222,7 +2313,20 @@ SetPlayerSpawnPos(playerid)
 				else if(PlayerInfo[playerid][pJob] > 0) //Spawn Prac
 				{
 					new job = PlayerInfo[playerid][pJob];
-					new i = 0; // TODO: get this from player spawn options
+					new i;
+					if(spawnType == 0)
+					{ // Los Santos
+						i = 0;
+					}
+					else
+					{ // Vice City
+						i = spawnType - 2;
+						if(i > MAX_JOB_SPAWNS)
+						{
+							MruMessageError(playerid, "B£¥D! Z£Y SPAWN");
+							return 1;
+						}
+					}
 
 					if(job <= 0 || job >= sizeof(JobInfo) || isnull(JobSpawns[job][i][JOB_SPAWN_NAME]))
 					{
@@ -2231,6 +2335,7 @@ SetPlayerSpawnPos(playerid)
 							//Spawn cywila
 							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
 							SetPlayerFacingAngle(playerid, 0.94);
+							MruMessageError(playerid, "B£¥D! Masz niepoprawn¹ pracê, zg³oœ siê do admina.");
 						}
 					}
 					else
@@ -2256,8 +2361,17 @@ SetPlayerSpawnPos(playerid)
 				{
 					if(PlayerCanSpawnWihoutTutorial(playerid))
 					{
-						SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-						SetPlayerFacingAngle(playerid, 0.94);
+						if(spawnType == 0)
+						{ // Los Santos
+							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+							SetPlayerFacingAngle(playerid, 0.94);
+						}
+						else
+						{ // Vice City
+							SetPlayerPos(playerid, 5229.6646, -2227.3933, 11.5385);
+							SetPlayerFacingAngle(playerid, 252.4531);
+							Wchodzenie(playerid);
+						}
 					}
 				}
 		    }

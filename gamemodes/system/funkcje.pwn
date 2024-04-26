@@ -6391,6 +6391,11 @@ DialogZbrojowni(playerid)
     ShowPlayerDialogEx(playerid, 8282, DIALOG_STYLE_LIST, "Kup przystosowanie do przechowywania:", "Kastetu\t\t\t\t\t1 000$\nSpadochronu\t\t\t\t5 000$\nSpreju, gaœnicy i aparatu\t\t40 000$\nWibratorów,kwiatów i laski\t\t50 000$\nBroni bia³ej\t\t\t\t750 000$\nPistoletów\t\t\t\t250 000$\nStrzelb\t\t\t\t\t450 000$\nPistoletów maszynowych\t\t550 000$\nKarabinów szturmowych\t\t850 000$\nSnajperek\t\t\t\t700 000$\nBroni ciê¿kiej\t\t\t\t2 000 000$\n£adunków wybuchowych\t\t4 000 000$", "Wybierz", "Cofnij");
 }
 
+ShowSpawnChangeDialog(playerid)
+{
+	ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu\nSpawn w Vice City", "Wybierz", "Wróæ");
+}
+
 Mnoznik(zone[])
 {
 	new mnoznik;

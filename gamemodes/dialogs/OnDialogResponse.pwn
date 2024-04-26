@@ -6409,7 +6409,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 5://Spawn
 		            {
-		                ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "Wróæ");
+						ShowSpawnChangeDialog(playerid);
 		            }
 		            case 6://Kupowanie dodatków
 		            {
@@ -6602,7 +6602,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-		                //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "Wróæ");
 		            }
 		            case 1:// Spawn przed domem
 		            {
@@ -6616,7 +6615,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-		                //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "Wróæ");
 		            }
 		            case 2:// Spawn w domu
 		            {
@@ -6630,7 +6628,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatków\nOœwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-	                    //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "Wróæ");
+		            }
+		            case 3:// Spawn w Vice City
+		            {
+	                    PlayerInfo[playerid][pSpawn] = 2;
+	                    SendClientMessage(playerid, COLOR_NEWS, "Bêdziesz siê teraz spawnowa³ w Vice City");
 		            }
 				}
 			}
