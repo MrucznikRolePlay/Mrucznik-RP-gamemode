@@ -3355,6 +3355,31 @@ IsAtClothShop(playerid)
 	return 0;
 }
 
+IsAtAirport(playerid)
+{
+	if(IsPlayerInRangeOfPoint(playerid, 7.0, 1585.2,-2286.6,13.7)
+	|| IsPlayerInRangeOfPoint(playerid, 7.0, 1886.1,-2286.4,14))
+	{ // Lotnisko LS
+		return 1;
+	}
+	if(IsPlayerInRangeOfPoint(playerid, 7.0, -1421.4000244141,-287.29998779297,14.10000038147) 
+	|| IsPlayerInRangeOfPoint(playerid, 7.0, -1376.3000488281,-261.10000610352,14.300000190735))
+	{ // Lotnisko SF
+		return 1;
+	}
+	if(IsPlayerInRangeOfPoint(playerid, 7.0, 1673.3000488281, 1447.8000488281, 10.89999961853)
+	|| IsPlayerInRangeOfPoint(playerid, 7.0, 1597.6999511719, 1448.3000488281, 10.89999961853))
+	{ // Lotnisko LV
+		return 1;
+	}
+	if(IsPlayerInRangeOfPoint(playerid, 7.0, 3609.7063,-1817.9374,14.3325) 
+	|| IsPlayerInRangeOfPoint(playerid, 7.0, 3351.1587,-1480.8884,14.3242))
+	{ // Lotnisko VC
+		return 1;
+	}
+	return 0;
+}
+
 IsAt247(playerid)
 {
 	return PlayerToPoint(100, playerid,-30.875, -88.9609, 1004.53);

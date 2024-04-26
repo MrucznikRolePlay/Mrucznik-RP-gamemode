@@ -34,7 +34,7 @@ YCMD:lot(playerid, params[], help)
     if(sscanf(params, "s[32]S()[128]", data, sub))
     {
 		sendTipMessageEx(playerid, COLOR_WHITE, "U¿yj /lot [nazwa]");
-		sendTipMessageEx(playerid, COLOR_WHITE, "Dostepne Nazwy: bilet.");
+		sendTipMessageEx(playerid, COLOR_WHITE, "Dostepne Nazwy: bilet, vicecity, lossantos, sanfierro, lasventuras.");
 		if(GetPlayerFraction(playerid) == FRAC_KT)
 	    {
 	    	sendTipMessageEx(playerid, COLOR_WHITE, "Pracownik: start, stop, (k)omunikat, koszt, drzwi, skoki.");
@@ -42,7 +42,46 @@ YCMD:lot(playerid, params[], help)
 		return 1;
 	}
     new string[128], sendername[MAX_PLAYER_NAME];
-	if(strcmp(data,"bilet",true) == 0)
+	if(strcmp(data,"vicecity",true) == 0 || strcmp(data,"lossantos",true) == 0 || strcmp(data,"sanfierro",true) == 0 || strcmp(data,"lasventuras",true) == 0)
+	{
+		new ticketPrice = 10_000;
+		if(kaska[playerid] < ticketPrice)
+		{
+			MruMessageFailF(playerid, "Nie staæ Ciê, potrzebujesz %d$.", ticketPrice);
+			return 1;
+		}
+
+		if(!IsAtAirport(playerid))
+		{
+			MruMessageFail(playerid, "Musisz byæ na lotnisku!");
+			return 1;
+		}
+
+		ZabierzKase(playerid, ticketPrice);
+		Log(payLog, INFO, "%s zap³aci³ %d za bilet do %s", GetPlayerLogName(playerid), ticketPrice, data);
+
+		if(strcmp(data,"vicecity",true) == 0)
+		{
+			GameTextForPlayer(playerid, "Witaj w ~p~Vice City~w~!", 5000, 1);
+			SetPlayerPos(playerid, 3610.7532,-1831.8528,20.3582);
+		}
+		else if(strcmp(data,"lossantos",true) == 0)
+		{
+			GameTextForPlayer(playerid, "Witaj w ~g~Los Santos~w~!", 5000, 1);
+			SetPlayerPos(playerid, 1585.2,-2286.6,13.7);
+		}
+		else if(strcmp(data,"sanfierro",true) == 0)
+		{
+			GameTextForPlayer(playerid, "Witaj w ~b~San Fierro~w~!", 5000, 1);
+			SetPlayerPos(playerid, -1421.4000244141,-287.29998779297,14.10000038147);
+		}
+		else if(strcmp(data,"lasventuras",true) == 0)
+		{
+			GameTextForPlayer(playerid, "Witaj w ~r~Las Venturas~w~!", 5000, 1);
+			SetPlayerPos(playerid, 1673.3000488281, 1447.8000488281, 10.89999961853);
+		}
+	}
+	else if(strcmp(data,"bilet",true) == 0)
 	{
         if(PlayerToPoint(3.0,playerid,1593.3000488281,-2285.6000976563,-75)||PlayerToPoint(3.0,playerid,1593.3000488281,-2280,-75)||PlayerToPoint(3.0,playerid,1674.8, 1442.3, 14.8)||PlayerToPoint(1.5,playerid,-1391.9000244141,-299.79998779297,-74.699996948242))
 	    {
