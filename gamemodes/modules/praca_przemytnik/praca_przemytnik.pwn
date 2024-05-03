@@ -174,7 +174,7 @@ CreateSmugglingPickupCheckpoint(playerid, actionID)
 CreateDropPointFlare(actionID)
 {
 	SmugglingAction[actionID][DropPointFlareObject] = CreateDynamicObject(18728, 
-		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ], 
+		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ] - 0.5, 
 		0, 0, 0.0, 150.0);
 }
 
