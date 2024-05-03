@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                            sprzedajkontrabande                                            //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,32 +16,16 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 03.05.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "setkontrabanda\setkontrabanda.pwn"
-#include "sprzedajkontrabande\sprzedajkontrabande.pwn"
-#include "przemyt\przemyt.pwn"
-#include "ochrona\ochrona.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_sprzedajkontrabande_Impl(playerid, giveplayerid, count, price)
 {
-    command_setkontrabanda();
-    command_sprzedajkontrabande();
-    command_przemyt();
-    command_ochrona();
-    
+    return 1;
 }
+
+//end

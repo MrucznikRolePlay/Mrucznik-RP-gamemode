@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                               setkontrabanda                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,21 +27,44 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "setkontrabanda\setkontrabanda.pwn"
-#include "sprzedajkontrabande\sprzedajkontrabande.pwn"
-#include "przemyt\przemyt.pwn"
-#include "ochrona\ochrona.pwn"
-
+#include "setkontrabanda_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_setkontrabanda()
 {
-    command_setkontrabanda();
-    command_sprzedajkontrabande();
-    command_przemyt();
-    command_ochrona();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:setkontrabanda(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Ustaw graczowi kontrabande.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, value;
+    if(sscanf(params, "rd", giveplayerid, value))
+    {
+        sendTipMessage(playerid, "U¿yj /setkontrabanda [Nick/ID] [value] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_setkontrabanda_Impl(playerid, giveplayerid, value);
 }

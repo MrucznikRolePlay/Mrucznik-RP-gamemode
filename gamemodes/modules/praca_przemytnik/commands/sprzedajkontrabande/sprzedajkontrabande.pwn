@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                            sprzedajkontrabande                                            //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,21 +27,44 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "setkontrabanda\setkontrabanda.pwn"
-#include "sprzedajkontrabande\sprzedajkontrabande.pwn"
-#include "przemyt\przemyt.pwn"
-#include "ochrona\ochrona.pwn"
-
+#include "sprzedajkontrabande_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_sprzedajkontrabande()
 {
-    command_setkontrabanda();
-    command_sprzedajkontrabande();
-    command_przemyt();
-    command_ochrona();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:sprzedajkontrabande(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Sprzedaj graczowi swoj¹ kontrabandê.");
+        return 1;
+    }
+    //fetching params
+    new giveplayerid, count, price;
+    if(sscanf(params, "rdd", giveplayerid, count, price))
+    {
+        sendTipMessage(playerid, "U¿yj /sprzedajkontrabande [Nick/ID] [liczba] [cena] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
+    //command body
+    return command_sprzedajkontrabande_Impl(playerid, giveplayerid, count, price);
 }
