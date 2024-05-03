@@ -4406,7 +4406,7 @@ ShowStats(playerid,targetid)
 		new warrests = PlayerInfo[targetid][pWantedDeaths];
 		new drugs = PlayerInfo[targetid][pDrugs];
 		new mats = PlayerInfo[targetid][pMats];
-		new kontrabanda = PlayerInfo[targetid][pKontrabanda];
+		new kontrabanda = PlayerInfo[targetid][pContraband];
 		new wanted = PoziomPoszukiwania[targetid];
 		new level = PlayerInfo[targetid][pLevel];
 		new exp = PlayerInfo[targetid][pExp];

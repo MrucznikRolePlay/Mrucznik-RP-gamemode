@@ -881,7 +881,7 @@ enum pInfo
 	pJailed,
 	pJailTime,
 	pMats,
-	pKontrabanda,
+	pContraband,
 	pDrugs,//tymczasowe
 	//pZiolo,
 	pLider,

@@ -26,5 +26,22 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+GiveContraband(playerid, value)
+{
+	PlayerInfo[playerid][pContraband] += value;
+}
+
+TakeContraband(playerid, value)
+{
+	PlayerInfo[playerid][pContraband] -= value;
+}
+
+GetContraband(playerid)
+{
+	return PlayerInfo[playerid][pContraband];
+}
+
+
+
 
 //end
