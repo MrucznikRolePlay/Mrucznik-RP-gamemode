@@ -30,14 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "gspanel\gspanel.pwn"
 #include "sprzedajmatsbot\sprzedajmatsbot.pwn"
+#include "gspanel\gspanel.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_gspanel();
     command_sprzedajmatsbot();
+    command_gspanel();
     
 }

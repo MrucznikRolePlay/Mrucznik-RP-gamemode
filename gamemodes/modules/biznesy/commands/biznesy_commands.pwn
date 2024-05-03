@@ -30,44 +30,44 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-#include "biznespomoc\biznespomoc.pwn"
-#include "bizlock\bizlock.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "obiz\obiz.pwn"
 #include "bizinfo\bizinfo.pwn"
-#include "dajbiznes\dajbiznes.pwn"
+#include "biznespomoc\biznespomoc.pwn"
+#include "zabierzbiznes\zabierzbiznes.pwn"
 #include "biz\biz.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
+#include "bpracownicy\bpracownicy.pwn"
+#include "usunbiznes\usunbiznes.pwn"
+#include "quitbusiness\quitbusiness.pwn"
+#include "gotobiz\gotobiz.pwn"
+#include "bizlock\bizlock.pwn"
 #include "stworzbiznes\stworzbiznes.pwn"
+#include "panelbiznesu\panelbiznesu.pwn"
+#include "obiz\obiz.pwn"
+#include "dajbiznes\dajbiznes.pwn"
+#include "zlomujbiznes\zlomujbiznes.pwn"
+#include "kupbiznes\kupbiznes.pwn"
+#include "sprzedajbiznes\sprzedajbiznes.pwn"
+#include "edytujbiznes\edytujbiznes.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_panelbiznesu();
-    command_quitbusiness();
-    command_zabierzbiznes();
-    command_gotobiz();
-    command_kupbiznes();
-    command_usunbiznes();
-    command_zlomujbiznes();
-    command_biznespomoc();
-    command_bizlock();
-    command_sprzedajbiznes();
-    command_bpracownicy();
-    command_obiz();
     command_bizinfo();
-    command_dajbiznes();
+    command_biznespomoc();
+    command_zabierzbiznes();
     command_biz();
-    command_edytujbiznes();
+    command_bpracownicy();
+    command_usunbiznes();
+    command_quitbusiness();
+    command_gotobiz();
+    command_bizlock();
     command_stworzbiznes();
+    command_panelbiznesu();
+    command_obiz();
+    command_dajbiznes();
+    command_zlomujbiznes();
+    command_kupbiznes();
+    command_sprzedajbiznes();
+    command_edytujbiznes();
     
 }

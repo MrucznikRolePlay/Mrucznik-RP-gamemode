@@ -30,24 +30,24 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "hq\hq.pwn"
-#include "lkiz\lkiz.pwn"
 #include "fpanel\fpanel.pwn"
-#include "opis\opis.pwn"
-#include "togopis\togopis.pwn"
-#include "usunopis\usunopis.pwn"
 #include "togvopis\togvopis.pwn"
+#include "togopis\togopis.pwn"
+#include "hq\hq.pwn"
+#include "opis\opis.pwn"
+#include "lkiz\lkiz.pwn"
+#include "usunopis\usunopis.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_hq();
-    command_lkiz();
     command_fpanel();
-    command_opis();
-    command_togopis();
-    command_usunopis();
     command_togvopis();
+    command_togopis();
+    command_hq();
+    command_opis();
+    command_lkiz();
+    command_usunopis();
     
 }

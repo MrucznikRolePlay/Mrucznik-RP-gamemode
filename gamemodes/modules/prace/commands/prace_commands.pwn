@@ -30,14 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "dolacz\dolacz.pwn"
 #include "gotojob\gotojob.pwn"
+#include "dolacz\dolacz.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_dolacz();
     command_gotojob();
+    command_dolacz();
     
 }

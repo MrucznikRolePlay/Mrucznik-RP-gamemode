@@ -31,15 +31,15 @@
 
 //-------<[ include ]>-------
 #include "otworz\otworz.pwn"
-#include "zamknij\zamknij.pwn"
 #include "sekta\sekta.pwn"
+#include "zamknij\zamknij.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
     command_otworz();
-    command_zamknij();
     command_sekta();
+    command_zamknij();
     
 }

@@ -30,10 +30,10 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "rybypomoc\rybypomoc.pwn"
-#include "ryby\ryby.pwn"
-#include "wywalryby\wywalryby.pwn"
 #include "sprzedajrybe\sprzedajrybe.pwn"
+#include "rybypomoc\rybypomoc.pwn"
+#include "wywalryby\wywalryby.pwn"
+#include "ryby\ryby.pwn"
 #include "lowienie\lowienie.pwn"
 #include "wypuscrybe\wypuscrybe.pwn"
 
@@ -41,10 +41,10 @@
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_rybypomoc();
-    command_ryby();
-    command_wywalryby();
     command_sprzedajrybe();
+    command_rybypomoc();
+    command_wywalryby();
+    command_ryby();
     command_lowienie();
     command_wypuscrybe();
     

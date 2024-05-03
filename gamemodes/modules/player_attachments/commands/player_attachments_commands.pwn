@@ -30,9 +30,9 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "zabierzobiekt\zabierzobiekt.pwn"
 #include "dodatki\dodatki.pwn"
 #include "zdejmij\zdejmij.pwn"
-#include "zabierzobiekt\zabierzobiekt.pwn"
 #include "dnobiekt\dnobiekt.pwn"
 #include "dajobiekt\dajobiekt.pwn"
 
@@ -40,9 +40,9 @@
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_zabierzobiekt();
     command_dodatki();
     command_zdejmij();
-    command_zabierzobiekt();
     command_dnobiekt();
     command_dajobiekt();
     
