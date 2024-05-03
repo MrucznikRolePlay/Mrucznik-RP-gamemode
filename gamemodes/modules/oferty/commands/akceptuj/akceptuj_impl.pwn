@@ -803,6 +803,10 @@ command_akceptuj_Impl(playerid, x_job[32])
     {
         command_akceptuj_drugs(playerid);
     }
+    else if(strcmp(x_job,"kontrabande",true) == 0 || strcmp(x_job,"kontrabanda",true) == 0)
+    {
+        command_akceptuj_kontrabande(playerid);
+    }
     else if(strcmp(x_job,"sex",true) == 0)
     {
         if(SexOffer[playerid] < 999)

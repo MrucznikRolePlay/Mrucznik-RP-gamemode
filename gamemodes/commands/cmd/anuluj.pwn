@@ -42,6 +42,7 @@ YCMD:anuluj(playerid, params[], help)
 	}
 	if(strcmp(x_job,"sex",true) == 0) {	SexOffer[playerid] = 999; SexPrice[playerid] = 0; }
 	else if(strcmp(x_job,"dragi",true) == 0) { DrugOffer[playerid] = 999; DrugPrice[playerid] = 0; DrugGram[playerid] = 0; }
+	else if(strcmp(x_job,"kontrabanda",true) == 0) { ContrabandOffer[playerid] = 999; ContrabandPrice[playerid] = 0; ContrabandCount[playerid] = 0; }
 	else if(strcmp(x_job,"naprawa",true) == 0) {	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; }
 	else if(strcmp(x_job,"prawnik",true) == 0) { WantLawyer[playerid] = 0; CallLawyer[playerid] = 0; }
 	else if(strcmp(x_job,"ochrona",true) == 0 || strcmp(x_job,"pancerz",true) == 0) { GuardOffer[playerid] = 999; GuardPrice[playerid] = 0; }

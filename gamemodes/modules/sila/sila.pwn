@@ -58,7 +58,7 @@ AddStrong(playerid, wartosc)
 	return 1;
 }
 
-TakeStrong(playerid, wartosc)
+stock TakeStrong(playerid, wartosc)
 {
 	if(PlayerInfo[playerid][pStrong] >= wartosc)
 	{
