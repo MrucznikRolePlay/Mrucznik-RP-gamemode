@@ -1194,6 +1194,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pJailed] = 0;
 	PlayerInfo[playerid][pJailTime] = 0;
 	PlayerInfo[playerid][pMats] = 0;
+	PlayerInfo[playerid][pKontrabanda] = 0;
 	PlayerInfo[playerid][pDrugs] = 0;
 	PlayerInfo[playerid][pLider] = 0;
 	PlayerInfo[playerid][pMember] = 0;

@@ -249,6 +249,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	`AJreason`='%s',\
 	`JailTime`='%d',\
 	`Materials`='%d',\
+	`Kontrabanda`='%d',\
 	`Drugs`='%d',\
 	`Member`='%d',\
 	`FMember`='%d',\
@@ -280,6 +281,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pAJreason],
 	PlayerInfo[playerid][pJailTime],
 	PlayerInfo[playerid][pMats],
+	PlayerInfo[playerid][pKontrabanda],
 	PlayerInfo[playerid][pDrugs],
 	PlayerInfo[playerid][pMember],
 	PlayerInfo[playerid][pOrg],
@@ -598,7 +600,7 @@ public MruMySQL_LoadAccount(playerid)
 
 	new lStr[1024], id=0;
 
-    lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `AJreason`, `JailTime`, `Materials`,`Drugs`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
+    lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `AJreason`, `JailTime`, `Materials`, `Kontrabanda`, `Drugs`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
 
     format(lStr, sizeof(lStr), "SELECT %s FROM `mru_konta` WHERE `Nick`='%s'", lStr, GetNickEx(playerid));
 	mysql_query(lStr);
@@ -641,7 +643,8 @@ public MruMySQL_LoadAccount(playerid)
 		PlayerInfo[playerid][pJailed], 
 		PlayerInfo[playerid][pAJreason],
 		PlayerInfo[playerid][pJailTime], 
-		PlayerInfo[playerid][pMats], 
+		PlayerInfo[playerid][pMats],
+		PlayerInfo[playerid][pKontrabanda],
 		PlayerInfo[playerid][pDrugs], 
 		PlayerInfo[playerid][pMember], 
 		PlayerInfo[playerid][pOrg],

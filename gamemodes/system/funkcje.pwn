@@ -4406,6 +4406,7 @@ ShowStats(playerid,targetid)
 		new warrests = PlayerInfo[targetid][pWantedDeaths];
 		new drugs = PlayerInfo[targetid][pDrugs];
 		new mats = PlayerInfo[targetid][pMats];
+		new kontrabanda = PlayerInfo[targetid][pKontrabanda];
 		new wanted = PoziomPoszukiwania[targetid];
 		new level = PlayerInfo[targetid][pLevel];
 		new exp = PlayerInfo[targetid][pExp];
@@ -4438,7 +4439,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD3,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s] Skin ID:[%d]",kills,deaths,costlevel,exp,expamount,wanted,f2text, skin);
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d] Si³a:[%d]",drugs,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick, PlayerInfo[targetid][pStrong]);
+		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Kontrabanda:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,kontrabanda,mats,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Uniform[%d] JobSkin[%d] Apteczki[%d] Zestawy [%d]", PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin], PlayerInfo[targetid][pHealthPacks],PlayerInfo[targetid][pFixKit]);
 		SendClientMessage(playerid, COLOR_GRAD5, coordsstring); 
