@@ -3985,6 +3985,7 @@ OnPlayerLogin(playerid, password[])
 		Load_MySQL_Leader(playerid); 
 
 		AC_OnPlayerLogin(playerid);
+		Przemytnik_OnPlayerLogin(playerid);
 
 		//Powitanie:
 		format(string, sizeof(string), "Witaj na serwerze Mrucznik Role Play, %s!",nick);
@@ -4758,6 +4759,13 @@ public OnPlayerText(playerid, text[])
 	if(PlayerInfo[playerid][pMuted] == 1)
 	{
 		sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz mówiæ gdy¿ jesteœ uciszony");
+		return 0;
+	}
+	if(Przemytnik_OnPlayerText(playerid, text))
+	{
+		GetPlayerName(playerid, sendername, sizeof(sendername));
+		format(string, sizeof(string), "%s mówi (telefon): %s", sendername, text);
+		ProxDetector(20.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
 		return 0;
 	}
 	

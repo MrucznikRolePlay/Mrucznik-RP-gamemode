@@ -25,6 +25,164 @@
 //------------------<[ Implementacja: ]>-------------------
 command_przemyt_Impl(playerid)
 {
+    if(GetPlayerJob(playerid) != JOB_SMUGGLER)
+    {
+        MruMessageFail(playerid, "Nie jesteœ przemytnikiem.");
+        return 1;
+    }
+    if(!IsAPrzestepca(playerid))
+    {
+        MruMessageFail(playerid, "Nie jesteœ w organizacji przestêpczej, tylko organizacje przestêpcze mog¹ organizowaæ przemyt.");
+        return 1;
+    }
+
+    if(IsPlayerSmuggling(playerid))
+    {
+        new actionID = GetPlayerSmugglingActionID(playerid);
+        if(actionID == -1)
+        {
+            MruMessageError(playerid, "Nie uda³o siê pobraæ ID akcji przemytniczej. Zg³oœ b³¹d adminom.");
+            return 1;
+        }
+
+        switch(SmugglingAction[actionID][SmugglingStage])
+        {
+            case SMUGGLING_STAGE_PICKUP:
+            {
+                przemyt_StagePickup(playerid, actionID);
+            }
+            case SMUGGLING_STAGE_DROP:
+            {
+                przemyt_StageDrop(playerid, actionID);
+            }
+            case SMUGGLING_STAGE_GATHER:
+            {
+                przemyt_StageGather(playerid, actionID);
+            }
+            case SMUGGLING_STAGE_DOCUMENTS:
+            {
+                przemyt_StageDocuments(playerid, actionID);
+            }
+            case SMUGGLING_STAGE_SEND:
+            {
+                przemyt_StageSend(playerid, actionID);
+            }
+            case SMUGGLING_STAGE_DELIVERED:
+            {
+                przemyt_StageDelivered(playerid, actionID);
+            }
+        }
+        return 1;
+    }
+
+    ChatMe(playerid, "wyci¹ga telefon i dzwoni umówiæ akcjê przemytnicz¹");
+
+    new hour,minute,second;
+    gettime(hour, minute, second);
+    if(hour < 18 || hour > 21)
+    {
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie ma dostêpnych przemytów w tym momencie. Zadzwoñ miêdzy 18 a 23.");
+        SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+        return 1;
+    }
+
+    if(SmugglingActionsCount >= SMUGGLING_ACTIONS_PER_DAY)
+    {
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): przemyciliœmy ju¿ zbyt du¿o dzisiejszego dnia. Musimy przystopowaæ, by nikt siê nie po³apa³.");
+        SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+        return 1;
+    }
+
+    // TODO: tylko wyspa mainland vice city
+    if(!(IsPlayerAtViceCity(playerid) && GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0))
+    {
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Twój telefon mo¿e znajdowaæ siê na pods³uchu, zadzwoñ ustaliæ szczegó³y gdy bêdziesz na wyspie Mainland w Vice City.");
+        SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+        return 1;
+    }
+
+    new players;
+    foreach(new i : Player)
+    {
+        if(IsAPolicja(i) || GetPlayerJob(i) == JOB_SMUGGLER || GetPlayerJob(i) == JOB_LOWCA)
+        {
+            players++;
+        }
+    }
+    if(players < 3)
+    {
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): niestety, ma³y ruch w interesie, nie ma z kim organizowaæ akcji przemytniczych. Zadzwoñ, gdy w mieœcie bêdzie wiêcej ruchu.");
+        SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+        return 1;
+    }
+
+    SetPVarInt(playerid, "smuggling", 1);
+    MruMessageInfo(playerid, "Rozpocz¹³eœ umawianie akcji przemytniczej, aby z niej zrezygnowaæ, wpisz: /z");
+    SetPlayerSpecialAction(playerid, SPECIAL_ACTION_USECELLPHONE);
+
+    SendClientMessage(playerid, COLOR_YELLOW, sprintf("Telefon (Marcepan_Marks): dobrze, ¿e dzwonisz. W³aœnie zmierzamy z kontraband¹ do Vice City. Sprzedajemy j¹ za %d$. Zainteresowany zorganizowaniem akcji przemytniczej?", PRZEMYT_COST));
+    MruMessageInfo(playerid, "Wpisz 'tak' aby kontynuowaæ.");
+    return 1;
+}
+
+
+przemyt_StagePickup(playerid, actionID)
+{
+    if(GetPlayerSmugglingRole(playerid) != SMUGGLING_ROLE_INITIATOR)
+    {
+        MruMessageFail(playerid, "Tylko inicjator akcji przemytniczej mo¿e odebraæ kontrabandê z punktu odbioru.");
+        return 1;
+    }
+
+    if(!IsPlayerInRangeOfPoint(playerid, 15.0, SmugglingAction[actionID][PickupPointX], SmugglingAction[actionID][PickupPointY], SmugglingAction[actionID][PickupPointZ]))
+    {
+        MruMessageFail(playerid, "Nie jesteœ przy punkcie odbioru kontrabandy.");
+        return 1;
+    }
+
+    if(!IsPlayerInAnyVehicle(playerid) || !IsAWodolot(GetPlayerVehicleID(playerid)))
+    {
+        MruMessageFail(playerid, "Musisz znajdowaæ siê w wodolocie by odebraæ kontrabandê.");
+        return 1;
+    }
+
+    if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+    {
+        MruMessageFail(playerid, "Musisz byæ pasa¿erem wodolotu. Twój kierowca powinien nim kierowaæ.");
+        return 1;
+    }
+
+    // start next stage - flying to Prawn Island checkpoint
+    return 1;
+}
+
+
+przemyt_StageDrop(playerid, actionID)
+{
+    return 1;
+}
+
+przemyt_StageGather(playerid, actionID)
+{
+
+    return 1;
+}
+
+przemyt_StageDocuments(playerid, actionID)
+{
+
+    return 1;
+}
+
+przemyt_StageSend(playerid, actionID)
+{
+
+    return 1;
+}
+
+przemyt_StageDelivered(playerid, actionID)
+{
+
     return 1;
 }
 

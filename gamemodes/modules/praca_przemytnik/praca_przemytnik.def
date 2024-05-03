@@ -23,5 +23,7 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define SMUGGLING_ACTIONS_PER_DAY 10
+#define PRZEMYT_COST 1_000_000
 
 //end

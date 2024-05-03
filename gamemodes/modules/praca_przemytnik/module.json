@@ -3,7 +3,7 @@
     "description": "Praca przemytnika.",
     "author": "mrucznik",
     "timers": false,
-    "callbacks": false,
+    "callbacks": true,
     "mysql": false,
     "files": [],
     "commands": true,

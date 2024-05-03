@@ -1,0 +1,200 @@
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                              praca_przemytnik                                             //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: mrucznik
+// Data utworzenia: 31.03.2024
+//Opis:
+/*
+	Praca przemytnika.
+*/
+
+//
+
+#include <YSI\y_hooks>
+
+//-----------------<[ Callbacki: ]>-----------------
+Przemytnik_OnPlayerText(playerid, text[])
+{
+	switch(GetPVarInt(playerid, "smuggling"))
+	{
+		case 0:
+		{
+			return 0;
+		}
+		case 1: // pocz¹tek rozmowy
+		{
+			if(strcmp(text, "tak", true) == 0)
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): podaj mi jak nazywa siê Twój kierowca.");
+				SetPVarInt(playerid, "smuggling", 2);
+			}
+			else
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): w takim razie ¿egnam.");
+				SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+			}
+		}
+		case 2: // podaj kierowcê
+		{
+			new giveplayerid;
+			if(sscanf(text, "r", giveplayerid) || !IsPlayerConnected(giveplayerid))
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie znam nikogo takiego, na pewno poda³eœ mi prawid³owe Imiê_Nazwisko?");
+				return 1;
+			}
+
+			if(GetPlayerJob(giveplayerid) != JOB_DRIVER)
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): ten goœæ nie jest zawodowym kierowc¹, nie ufam mu.");
+				return 1;
+			}
+
+			if(GetPlayerJobSkill(giveplayerid, JOB_DRIVER) >= 5)
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): ten goœæ ma zbyt ma³e umiejêtnoœci by braæ udzia³ w akcji przemytniczej, znajdŸ kogoœ bardziej doœwiadczonego (5 skill).");
+				return 1;
+			}
+
+			if(IsPlayerSmuggling(giveplayerid))
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): zdaje sie, ¿e ta osoba jest ju¿ zajêta i bierze udzia³ w innej akcji przemytniczej.");
+				return 1;
+			}
+
+			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): podaj mi imiê swojego kolejnego wspólnika, który bêdzie podnosi³ paczki.");
+			SendClientMessage(playerid, COLOR_GRAD2, "Jeœli nie masz wiêcej wspólników, wpisz: 'to wszyscy'.");
+			SetPVarInt(playerid, "smuggling", 3);
+			SetPVarInt(playerid, "smuggling-driver-id", giveplayerid);
+			SetPVarInt(playerid, "smuggling-driver-uid", PlayerInfo[giveplayerid][pUID]);
+		}
+		case 3: // podaj wspólników
+		{
+			if(strcmp(text, "to wszyscy", true) == 0)
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): ok, w takim razie ustalmy miejsce zebrania kontrabandy. Gdy bêdziesz gotowy, powiedz: 'tutaj' a pobiore Twoje koordynaty.");
+				SetPVarInt(playerid, "smuggling", 4);
+				return 1;
+			}
+
+			new giveplayerid;
+			if(sscanf(text, "r", giveplayerid) || !IsPlayerConnected(giveplayerid))
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie znam nikogo takiego, na pewno poda³eœ mi prawid³owe Imiê_Nazwisko?");
+				return 1;
+			}
+
+			if(GetPlayerJob(giveplayerid) != JOB_SMUGGLER)
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie chcemy jako wspólników osób postronnych, tylko doœwiadczeni przemytnicy s¹ gwarantem udanej akcji.");
+				return 1;
+			}
+
+			if(IsPlayerSmuggling(giveplayerid))
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): zdaje sie, ¿e ta osoba jest ju¿ zajêta i bierze udzia³ w innej akcji przemytniczej.");
+				return 1;
+			}
+
+			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): ok, czy to wszyscy, czy masz jeszcze jakiegoœ wspólnika?");
+			SendClientMessage(playerid, COLOR_GRAD2, "Jeœli nie masz wiêcej wspólników, wpisz: 'to wszyscy'.");
+			
+			new index = GetPVarInt(playerid, "smuggling-partner-index");
+			SetPVarInt(playerid, sprintf("smuggling-partner-%d-id", index), giveplayerid);
+			SetPVarInt(playerid, sprintf("smuggling-partner-%d-uid", index), PlayerInfo[giveplayerid][pUID]);
+			SetPVarInt(playerid, "smuggling-partner-index", index+1);
+		}
+		case 4: // podaj pozycjê
+		{
+			if(strcmp(text, "tutaj", true) == 0)
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): ok, pobra³em twoj¹ pozycjê, przywiozê tam kontener do którego bêdziesz musia³ dostarczyæ ³adunek.");
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): wykup kontrabandy od nas to 1 000 000$, chcesz zap³aciæ przelewem czy gotówk¹?");
+				SetPVarInt(playerid, "smuggling", 5);
+				new Float:x, Float:y, Float:z;
+				GetPlayerPos(playerid, x, y, z);
+				SetPVarFloat(playerid, "smuggling-x", x);
+				SetPVarFloat(playerid, "smuggling-y", y);
+				SetPVarFloat(playerid, "smuggling-z", z);
+				return 1;
+			}
+			else
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie marnuj mojego czasu, gdy bêdziesz gotowy, powiedz: 'tutaj' a pobiore Twoje koordynaty.");
+			}
+		}
+		case 5: // zap³aæ
+		{
+			if(strcmp(text, "gotowka", true) == 0 || strcmp(text, "gotówk¹", true) == 0)
+			{
+				if(kaska[playerid] < PRZEMYT_COST)
+				{
+					SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie próbuj mnie oszukaæ, jesteœ go³odupcem. Wróæ jak zarobisz na kupno kontrabandy.");
+					SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+					DeletePVar(playerid, "smuggling");
+					return 1;
+				}
+				ZabierzKase(playerid, PRZEMYT_COST);
+			}
+			else if(strcmp(text, "przelewem", true) == 0 || strcmp(text, "przelew", true) == 0)
+			{
+				if(PlayerInfo[playerid][pAccount] < PRZEMYT_COST)
+				{
+					SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie próbuj mnie oszukaæ, jesteœ go³odupcem. Wróæ jak zarobisz na kupno kontrabandy.");
+					SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+					DeletePVar(playerid, "smuggling");
+					return 1;
+				}
+				PlayerInfo[playerid][pAccount] -= PRZEMYT_COST;
+			}
+			else
+			{
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): zap³acisz przelewem czy gotówk¹?");
+				SendClientMessage(playerid, COLOR_GRAD2, "Wpisz 'przelewem' lub 'gotówk¹'.");
+				return 1;
+			}
+
+			Log(payLog, INFO, "%s zorganizowa³ przemyt za %d$", GetNick(playerid), PRZEMYT_COST);
+
+			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): w porz¹dku, wysy³am Ci koordynaty naszego statku. Udaj siê tam wodolotem wraz ze swoim kierowc¹ aby odebraæ kontrabandê.");
+			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): udanej akcji, leæ nisko!");
+        	SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+
+			StartSmuggling(playerid);
+			DeletePVar(playerid, "smuggling");
+		}
+		default:
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+
+Przemytnik_OnPlayerLogin(playerid)
+{
+	new actionID = GetPlayerSmugglingActionID(playerid);
+	if(actionID == -1)
+	{
+		return 1;
+	}
+
+	CreateSmugglingPickupCheckpoint(playerid, actionID);
+	return 1;
+}
+
+//end

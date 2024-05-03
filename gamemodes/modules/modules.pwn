@@ -257,6 +257,7 @@
 #include "biznesy\biznesy_callbacks.pwn"
 #include "vehicle_attachments\vehicle_attachments_callbacks.pwn"
 #include "convoy\convoy_callbacks.pwn"
+#include "praca_przemytnik\praca_przemytnik_callbacks.pwn"
 #include "logi\logi_callbacks.pwn"
 #include "praca_diler\praca_diler_callbacks.pwn"
 #include "player_attachments\player_attachments_callbacks.pwn"
