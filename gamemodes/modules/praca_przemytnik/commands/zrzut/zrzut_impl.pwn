@@ -84,6 +84,7 @@ command_zrzut_Impl(playerid)
     if(SmugglingAction[actionID][ContrabandPackagesToDrop] == 0)
     {
         // last package dropped, start gather stage
+        SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_GATHER;
         MruMessageGoodInfo(playerid, "To by³a ostatnia paczka kontrabandy, teraz udaj siê do punktu zboru.");
     }
     else 
