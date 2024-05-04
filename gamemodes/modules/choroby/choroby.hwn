@@ -40,7 +40,10 @@ enum eDiseases {
     GANGRENA,
     PTSD,
     OK_DISEASE,
-    FANATYK_WEDKARSTWA
+    FANATYK_WEDKARSTWA,
+    DRUG_GOOD,
+    DRUG_BAD,
+    DRUG_ADDICT
 };
 
 enum eEffectData {
@@ -89,7 +92,10 @@ new DiseaseData[eDiseases][eDiseaseData] = {
     {"gangrena", "Gangrena", 7500, 60, 35, 0.001, true, VECTOR_NULL},
     {"PTSD", "PTSD", 15000, 30, 40, 0.0, false, VECTOR_NULL},
     {"0k-zaraza", "0k", 1000, 10, 0, 0.0, false, VECTOR_NULL},
-    {"wedkarz", "Fanatyk Wêdkarstwa", 50000, 30, 10, 0.0, false, VECTOR_NULL}
+    {"wedkarz", "Fanatyk Wêdkarstwa", 50000, 30, 10, 0.0, false, VECTOR_NULL},
+    {"narkotyk", "Pod wp³ywem narkotyku", 0, 0, 0, 0.0, false, VECTOR_NULL},
+    {"zjazd", "Efekt odstawienia narkotyku", 0, 0, 0, 0.0, false, VECTOR_NULL},
+    {"uzaleznienie", "Efekt uzale¿nienia od narkotyku", 10000, 120, 0, 0.0, false, VECTOR_NULL}
 };
 
 //TODO: wiêcej tików
@@ -208,10 +214,22 @@ forward PrzyczepWedke(playerid, disease, value);
 forward Ryboglowy(playerid, disease, value);
 forward UpuscRybe(playerid, disease, value);
 
+// Pod wp³ywem narkotyku
+forward NarkotycznyBuff(playerid, disease, value);
+
+// Efekt odstawienia narkotyku
+forward NarkotycznyDebuff(playerid, disease, value);
+
+// Efekt uzale¿nienia
+forward Uzalezniony(playerid, disease, value);
+
 
 choroby_InitEffects()
 {
-    //eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, pernament, contagiousRange, infectionChance, additionalValue)
+    //eDiseases:disease, activateCallback[32], deactivateCallback[32], 
+    // minTime, timeRange, 
+    // pernament, contagiousRange, infectionChance,
+    // additionalValue)
     AddEffect(KORONAWIRUS, "WuhanCouching", "", 
         ONE_MINUTE*2, ONE_MINUTE*5, 
         false, 7.0, 10, 
@@ -463,6 +481,28 @@ choroby_InitEffects()
         false, 0.0, 0, 
         0
     );
+
+    // Pod wp³ywem narkotyku
+    AddEffect(DRUG_GOOD, "NarkotycznyBuff", "",
+        30_000, 15_000, // co 15-45s
+        false, 0.0, 0, 
+        0
+    );
+
+    // Efekt odstawienia narkotyku
+    AddEffect(DRUG_BAD, "NarkotycznyDebuff", "",
+        ONE_MINUTE*15, ONE_MINUTE*5, // co +- 10 minut
+        false, 0.0, 0, 
+        0
+    );
+
+    // Efekt uzale¿nienia
+    AddEffect(DRUG_ADDICT, "Uzalezniony", "",
+        ONE_MINUTE*15, ONE_MINUTE*5, 
+        false, 0.0, 0, 
+        0
+    );
+
     return 1;
 }
 

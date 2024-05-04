@@ -52,9 +52,9 @@ YCMD:teczka(playerid, params[], help)
 			    return 1;
 			}
 
-			if(PlayerInfo[playerid][pLevel] < 3)
+			if(PlayerInfo[playerid][pLevel] < 2)
 			{
-				sendTipMessage(playerid, "Musisz mieæ 3 level aby p³aciæ teczk¹");
+				sendTipMessage(playerid, "Musisz mieæ 2 level aby p³aciæ teczk¹");
 				return 1;
 			}
 			if(moneys < 1 || moneys > 1000001)

@@ -59,7 +59,7 @@ YCMD:pokazdowod(playerid, params[], help)
 					GetPlayerName(playerid, sendername, sizeof(sendername));
 				    new atext[20];
 				    //new otext[20];
-				    new jtext[20];
+				    new jtext[32];
                     new otext[8];
 				    new age = PlayerInfo[playerid][pAge];
                     if(PlayerInfo[playerid][pSex] == 1) { atext = "Mê¿czyzna"; }
@@ -72,7 +72,7 @@ YCMD:pokazdowod(playerid, params[], help)
 					if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1) { ttext = "Komisariat LSPD"; }
 					else if(PlayerInfo[playerid][pMember] == 2 || PlayerInfo[playerid][pLider] == 2) { ttext = "Biuro FBI"; }
 					else if(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3) { ttext = "NG"; }
-					else if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4) { ttext = "Szpital"; }
+					else if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == FRAC_ERS) { ttext = "Szpital"; }
 					else if(PlayerInfo[playerid][pMember] == 5 || PlayerInfo[playerid][pLider] == 5) { ttext = "Jetty Lounge"; }
 					else if(PlayerInfo[playerid][pMember] == 6 || PlayerInfo[playerid][pLider] == 6) { ttext = "Agencja Ochrony"; }
 					else if(PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7) { ttext = "BOR"; }
@@ -94,20 +94,7 @@ YCMD:pokazdowod(playerid, params[], help)
                         case 3: otext = "Azja";
                     }
                     // 
-                    if(PlayerInfo[playerid][pJob] == 1) { jtext = "£owca Nagród"; }
-                    else if(PlayerInfo[playerid][pJob] == 2) { jtext = "Prawnik"; }
-                    else if(PlayerInfo[playerid][pJob] == 3) { jtext = "Prostytutka"; }
-                    //else if(PlayerInfo[playerid][pJob] == 4) { jtext = "Diler Zio³a"; }
-                    //else if(PlayerInfo[playerid][pJob] == 5) { jtext = "Z³odziej Aut"; }
-                    else if(PlayerInfo[playerid][pJob] == 6) { jtext = "Reporter"; }
-                    else if(PlayerInfo[playerid][pJob] == 7) { jtext = "Mechanik"; }
-                    else if(PlayerInfo[playerid][pJob] == 8) { jtext = "Ochroniarz"; }
-                    //else if(PlayerInfo[playerid][pJob] == 9) { jtext = "Diler Broni"; }
-                    else if(PlayerInfo[playerid][pJob] == 10) { jtext = "Kierowca Autobusu"; }
-	                else if(PlayerInfo[playerid][pJob] == 12) { jtext = "Bokser"; }
-                    else if(PlayerInfo[playerid][pJob] == 14) { jtext = "Taksówkarz"; }
-                    else if(PlayerInfo[playerid][pJob] == 15) { jtext = "Gazeciarz"; }
-                    else if(PlayerInfo[playerid][pJob] == 16) { jtext = "Kurier"; }
+                    if(PlayerInfo[playerid][pJob] != 0) { strcat(jtext, GetJobName(GetPlayerJob(playerid))); }
                     else { jtext = "Bezrobotny"; }
 			       //
        				SendClientMessage(giveplayerid, COLOR_NEWS, "|______________ Dowód Osobisty ______________|");

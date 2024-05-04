@@ -6,6 +6,24 @@ stock Float:GetDistanceBetweenPoints(Float:x1, Float:y1, Float:z1, Float:x2, Flo
     return VectorSize(x1-x2, y1-y2, z1-z2);
 }
 
+stock GetXYInFrontOfPlayer(playerid, &Float:x, &Float:y, Float:distance)
+{
+	// Created by Y_Less
+
+	new Float:a;
+
+	GetPlayerPos(playerid, x, y, a);
+	GetPlayerFacingAngle(playerid, a);
+
+	if (GetPlayerVehicleID(playerid)) {
+	    GetVehicleZAngle(GetPlayerVehicleID(playerid), a);
+	}
+
+	x += (distance * floatsin(-a, degrees));
+	y += (distance * floatcos(-a, degrees));
+}
+
+
 /* SSCANF FIX */
 SSCANF:fix(string[])
 {
@@ -427,127 +445,6 @@ Uprawnienia(playerid, flags, bool:part=false)
     else return 0;
 }
 
-Taxi_FareEnd(playerid)
-{
-    new string[128];
-    if(TransportDuty[playerid] == 1)
-	{
-		TaxiDrivers -= 1;
-	}
-	else if(TransportDuty[playerid] == 2)
-	{
-		BusDrivers -= 1;
-	}
-    for(new i=0;i<4;i++) if(TransportClient[playerid][i] != INVALID_PLAYER_ID) Taxi_Pay(TransportClient[playerid][i]); //Handle to 4 passenger
-
-	TransportDuty[playerid] = 0;
-	format(string, sizeof(string), "Zakoñczy³eœ s³u¿bê, zarobi³eœ $%d dla Korporacji Transportowej", TransportMoney[playerid]);
-
-	_MruGracz(playerid, string);
-
-
-	if(GetPlayerFraction(playerid) != FRAC_KT) 
-	{
-		DajKase(playerid, TransportMoney[playerid]);
-		Log(payLog, INFO, "%s zarobi³ $%d na s³u¿bie taksówkarza.", GetPlayerLogName(playerid), TransportMoney[playerid]);
-	}
-    else
-    {
-        Sejf_Add(FRAC_KT, TransportMoney[playerid]);
-		Log(payLog, INFO, "%s zarobil $%d dla KT na s³u¿bie taksówkarza.", GetPlayerLogName(playerid), TransportMoney[playerid]);
-    }
-	TransportValue[playerid] = 0; TransportMoney[playerid] = 0;
-}
-
-Taxi_Pay(playerid)
-{
-    new taxidriver = TransportDriver[playerid];
-    if(IsPlayerConnected(taxidriver))
-	{
-        new slot = GetPVarInt(playerid, "taxi-slot");
-        new string[64];
-		new doZaplaty = 0;
-        TransportCost[playerid] = floatround(TransportValue[taxidriver]*TransportDist[playerid]);
-		
-	    if(PlayerInfo[playerid][pLevel] < 3)
-	    {
-			if(kaska[playerid] < floatround(TransportCost[playerid]*0.25))
-			{
-				ZabierzKase(playerid, floatround(kaska[playerid] + 5000));//moneycheat
-				doZaplaty = floatround(kaska[playerid] + 5000);
-				PoziomPoszukiwania[playerid] += 1;
-				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarza(brak pieniêdzy na sp³ate)");
-				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
-				SendClientMessage(taxidriver, COLOR_RED, string);
-			}
-			else
-			{
-				ZabierzKase(playerid, floatround(TransportCost[playerid]*0.25));//moneycheat
-				doZaplaty = floatround(TransportCost[playerid]*0.25);
-			} 
-	    }
-	    else
-	    {
-	    	if(kaska[playerid] < floatround(TransportCost[playerid]))
-			{
-				ZabierzKase(playerid, floatround(kaska[playerid] + 10000));//moneycheat
-				doZaplaty = floatround(kaska[playerid] + 10000);
-				PoziomPoszukiwania[playerid] += 1;
-				SetPlayerCriminal(playerid,INVALID_PLAYER_ID, "Kradzie¿ taksówkarza(brak pieniêdzy na sp³ate)");
-				format(string, sizeof(string), "Klient nie posiada³ pe³nej kwoty.");
-				SendClientMessage(taxidriver, COLOR_RED, string);
-			}
-			else 
-			{
-				ZabierzKase(playerid, floatround(TransportCost[playerid]));//moneycheat
-				doZaplaty = floatround(TransportCost[playerid]);
-			}
-	    }
-		
-		TransportMoney[taxidriver] += doZaplaty;
-
-	    format(string, sizeof(string), "~w~Klient opuscil taxi~n~~g~Zarobiles $%d",doZaplaty+TransportValue[taxidriver]);
-	    GameTextForPlayer(taxidriver, string, 5000, 1);
-
-		TransportCost[playerid] = 0;
-        TransportDist[playerid] = 0.0;
-
-        TransportClient[taxidriver][slot] = INVALID_PLAYER_ID;
-
-        Taxi_HideHUD(playerid);
-        new bool:hide=true;
-        for(new i=0;i<4;i++)
-        {
-            if(TransportClient[taxidriver][slot] != INVALID_PLAYER_ID)
-            {
-                hide = false;
-                break;
-            }
-        }
-        if(hide) Taxi_HideHUD(taxidriver);
-
-        TransportDriver[playerid] = 999;
-	}
-}
-
-Taxi_HideHUD(playerid)
-{
-    TextDrawHideForPlayer(playerid, TAXI_BG[0]);
-    TextDrawHideForPlayer(playerid, TAXI_BG[1]);
-    PlayerTextDrawHide(playerid, TAXI_DIST[playerid]);
-    PlayerTextDrawHide(playerid, TAXI_COST[playerid]);
-}
-
-Taxi_ShowHUD(playerid)
-{
-    TextDrawShowForPlayer(playerid, TAXI_BG[0]);
-    TextDrawShowForPlayer(playerid, TAXI_BG[1]);
-    PlayerTextDrawSetString(playerid, TAXI_DIST[playerid], "_");
-    PlayerTextDrawSetString(playerid, TAXI_COST[playerid], "_");
-    PlayerTextDrawShow(playerid, TAXI_DIST[playerid]);
-    PlayerTextDrawShow(playerid, TAXI_COST[playerid]);
-}
-
 stock Have_Worek(playerid)
 {
     TextDrawShowForPlayer(playerid, TXD_Worek);
@@ -819,63 +716,6 @@ forward func_SetPVarInt(playerid, key[], value);
 public func_SetPVarInt(playerid, key[], value)
 {
 	SetPVarInt(playerid, key, value);
-	return 1;
-}
-
-public ZestawNaprawczy_CountDown(playerid, vehicleid)
-{
-	new Float:pos[3];
-	new string[128];
-	GetVehiclePos(vehicleid, pos[0],pos[1],pos[2]);
-	if(GetVehicleSpeed(vehicleid) > 10)
-	{
-		ZestawNaprawczy_Warning[playerid] = 8;
-	}
-	if(ZestawNaprawczy_Warning[playerid] == 8)
-	{
-		SendClientMessage(playerid, COLOR_PANICRED, "* [ZESTAW NAPRAWCZY] Anulowano naprawê pojazdu.");
-		ZestawNaprawczy_Timer[playerid] = 30;
-		ZestawNaprawczy_Warning[playerid] = 0;
-		DeletePVar(playerid, "Use_ZestawNaprawczy");
-		return 1;
-	}
-	if (ZestawNaprawczy_Timer[playerid] > 0)
-	{
-		if (IsPlayerInRangeOfPoint(playerid, 3.0, pos[0], pos[1], pos[2]))
-		{
-			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~y~Pozostalo %ds", ZestawNaprawczy_Timer[playerid]);
-			GameTextForPlayer(playerid, string, 2500, 3);
-			SetPlayerChatBubble(playerid, "** naprawia pojazd **", COLOR_PURPLE, 30.0, 2500);
-			ZestawNaprawczy_Timer[playerid]--;
-			ZestawNaprawczy_Warning[playerid] = 0;
-			SetTimerEx("ZestawNaprawczy_CountDown", 1000, false, "ii", playerid, vehicleid);
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 10.0, pos[0], pos[1], pos[2]))
-		{
-			format(string, sizeof(string), "~n~~n~~n~~n~~n~~n~~r~Podejdz do auta! %ds", 8-ZestawNaprawczy_Warning[playerid]);
-			GameTextForPlayer(playerid, string, 2500, 3);
-			ZestawNaprawczy_Warning[playerid]++;
-			SetTimerEx("ZestawNaprawczy_CountDown", 1000, false, "ii", playerid, vehicleid);
-		}
-		else
-		{
-			SendClientMessage(playerid, COLOR_PANICRED, "* [ZESTAW NAPRAWCZY] Anulowano naprawê pojazdu. Nie by³eœ w dostatecznie blisko pojazdu.");
-			ZestawNaprawczy_Timer[playerid] = 30;
-			ZestawNaprawczy_Warning[playerid] = 0;
-			DeletePVar(playerid, "Use_ZestawNaprawczy");
-		}
-	}
-	else
-	{
-		GameTextForPlayer(playerid, "~g~Naprawiono!", 2500, 6);
-		ZestawNaprawczy_Timer[playerid] = 30;
-		ZestawNaprawczy_Warning[playerid] = 0;
-		PlayerInfo[playerid][pFixKit]--;
-		RepairVehicle(vehicleid);
-        SetVehicleHealth(vehicleid, 1000);
-		CarData[VehicleUID[vehicleid][vUID]][c_HP] = 1000.0;
-		DeletePVar(playerid, "Use_ZestawNaprawczy");
-	}
 	return 1;
 }
 
@@ -1152,16 +992,6 @@ public spamujebronia(playerid){
 zmatsowany[playerid] = 0;
 return 1;
 }
-
-/*forward NextPrzystanek(playerid, msg[]);
-public Next(playerid, msg[])
-{
-	SendClientMessage(playerid, COLOR_WHITE, msg);
-    ProxDetector(15.0, playerid, msg, COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);//system autobusów
-    return 1;
-    printf("second has passed, also we have a message: %s", msg);
-    return 1;
-}*/
 
 public odpalanie(playerid)
 {
@@ -2225,34 +2055,7 @@ IsAMafia(playerid)
 	}
 	return 0;
 }
-IsADilerBroni(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-		if(PlayerInfo[playerid][pRank] > 0)
-		{
-			if(member==5 || member==6 || member==12 || member==13 || member==14 || member==16)
-			{
-				return 1;
-			}
-			else if(leader==5 || leader==6 || leader==12  || leader==13 || leader==14 || leader==16)
-			{
-				return 1;
-			}
-			else if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
-			{
-				return 1;
-			}
-			else if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
-			{
-				return 1;
-			}
-		}
-	}
-	return 0;
-}
+
 IsASklepZBronia(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2292,11 +2095,6 @@ IsPlayerInFraction(playerid, frac, adminlvl=-1)
 	return 0;
 }
 
-IsAMechazordWarsztatowy(playerid)
-{
-	return IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19;
-}
-
 IsAMedyk(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2311,10 +2109,13 @@ IsAMedyk(playerid)
 		{
 		    return 1;
 		}
+		if(GetPlayerJob(playerid) == JOB_MEDIC)
+		{
+			return 1;
+		}
 	}
 	return 0;
 }
-
 
 IsANoA(playerid)
 {
@@ -2687,7 +2488,7 @@ DajBronieFrakcyjne(playerid)
 	        playerWeapons[playerid][weaponLegal10] = 1;
 	    }
 	}
-	else if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+	else if(PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS)
 	{
 	    if(PlayerInfo[playerid][pGun9] == 0 || PlayerInfo[playerid][pGun9] == 42 && PlayerInfo[playerid][pAmmo9] < 500 || PlayerInfo[playerid][pAmmo9] <= 30 )
 	    {
@@ -2835,7 +2636,7 @@ DajBroniePracy(playerid)
 				playerWeapons[playerid][weaponLegal2] = 1;
 			}
 		}
-		case JOB_DRAGDEALER:
+		case JOB_DRUG_DEALER:
 		{
 			if(PlayerInfo[playerid][pGun1] == 0)
 			{
@@ -3678,34 +3479,6 @@ IsAtBar(playerid)
 	return 0;
 }
 
-IsAtWarsztat(playerid)
-{
-    if(IsPlayerConnected(playerid))
-	{
-		if(IsPlayerInRangeOfPoint(playerid, 18.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 18.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 18.0, 1805.4418,-1713.5634,13.5176))
-		{//Warsztat czerwony
-		    return 1;
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 40.0, 2333.7273,-1241.2806,22.0628))
-		{//warsztat niebieski
-		    return 1;
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 20.0, 644.3516,-503.4102,15.8941))
-		{//warsztat dillmore
-		  	return 1;
-		}
-        else if(IsPlayerInRangeOfPoint(playerid, 30.0, 1017.75, -1353.33, 13.3825))
-		{//warsztat przy p1czkarni
-		  	return 1;
-		}
-		else if(IsPlayerInRangeOfPoint(playerid, 50.0, 1099.7108,-1240.7935,15.8203)) {
-			// WARSZTAT NA MARKET XD
-			return 1;
-		}
-	}
-	return 0;
-}
-
 IsARower(carid)
 {
 	if(GetVehicleModel(carid) == 509 || GetVehicleModel(carid) == 481 || GetVehicleModel(carid) == 510)//rowery
@@ -3775,6 +3548,7 @@ IsAnAmbulance(carid)
     {
         if(CarData[lID][c_Owner] == FRAC_ERS) return 1;
     }
+	if(GetVehicleModel(carid) == 416) return 1;
 	return 0;
 }
 
@@ -3784,46 +3558,6 @@ IsAInteriorVehicle(model)
 	return (model == 484 || model == 519 || model == 553 || model == 409 || model == 416 || model == 508 || model == 582 || model == 431 || model == 427 || model == 570);
 }
 
-IS_KomunikacjaMiejsca(carid)
-{
-    new lID = VehicleUID[carid][vUID];
-    if(lID == 0) return 0;
-    if((CarData[lID][c_Owner] == FRAC_KT && CarData[lID][c_OwnerType] == CAR_OWNER_FRACTION &&(CarData[lID][c_Model] == 431 || CarData[lID][c_Model] == 437 || CarData[lID][c_Model] == 418)) || (CarData[lID][c_Owner] == JOB_BUSDRIVER && CarData[lID][c_OwnerType] == CAR_OWNER_JOB)) return 1;
-	return 0;
-}
-
-IsATaxiCar(carid)
-{
-    new lID = VehicleUID[carid][vUID];
-    if(lID == 0) return 0;
-    if(CarData[lID][c_OwnerType] == CAR_OWNER_FRACTION)
-    {
-        if(CarData[lID][c_Owner] == FRAC_KT) return 1;
-    }
-	return 0;
-}
-
-IsAMiniBus(carid)
-{
-    new lID = VehicleUID[carid][vUID];
-    if(lID == 0) return 0;
-    if(CarData[lID][c_OwnerType] == CAR_OWNER_JOB)
-    {
-        if(CarData[lID][c_Owner] == JOB_BUSDRIVER) return 1;
-    }
-	return 0;
-}
-
-IsATrain(carid)
-{
-    new lID = VehicleUID[carid][vUID];
-    if(lID == 0) return 0;
-    if(CarData[lID][c_OwnerType] == CAR_OWNER_FRACTION)
-    {
-        if(CarData[lID][c_Owner] == FRAC_KT && GetVehicleModel(carid) == 538) return 1;
-    }
-	return 0;
-}
 WejdzInt(playerid, Float:x, Float:y, Float:z, Float:x2, Float:y2, Float:z2, Float:tolerancja, interior, vw, komunikat[]="", local, gametext[]="")
 {
     if (IsPlayerInRangeOfPoint(playerid, tolerancja, x, y, z))
@@ -4343,7 +4077,7 @@ ShowStats2(playerid)
 	format(plMats, sizeof(plMats), "Mats: %d", PlayerInfo[playerid][pMats]);
 	format(plDrugs, sizeof(plDrugs), "Drugs: %d", PlayerInfo[playerid][pDrugs]); 
 	format(plAdmin, sizeof(plAdmin), "Admin: %d", PlayerInfo[playerid][pAdmin]); 
-	format(plPraca, sizeof(plPraca), "Praca: %s", JobNames[PlayerInfo[playerid][pJob]]); 
+	format(plPraca, sizeof(plPraca), "Praca: %s", GetJobName(PlayerInfo[playerid][pJob])); 
 	format(plDom, sizeof(plDom), "Dom: %d", PlayerInfo[playerid][pDom]);
 	format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: Unknow"); 
 	format(plRespekt, sizeof(plRespekt), "Respekt: %d/%d", PlayerInfo[playerid][pExp], ((PlayerInfo[playerid][pLevel]+1)*levelexp)); 
@@ -4583,7 +4317,7 @@ ShowStats(playerid,targetid)
 		}
         else rtext = "Brak";
         new jtext[20];
-        format(jtext, 20, "%s", JobNames[PlayerInfo[targetid][pJob]]);
+        format(jtext, 20, "%s", GetJobName(PlayerInfo[targetid][pJob]));
 		new drank[20];
 		if(IsPlayerPremiumOld(targetid)) { drank = "Sponsor"; }
 		else { drank = "Zwykly wieprz"; }
@@ -4704,7 +4438,7 @@ SetPlayerToTeamColor(playerid)
 		        SetPlayerColor(playerid,TEAM_HIT_COLOR); // white
 		    }
 		}
-		else if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+		else if(PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS || GetPlayerJob(playerid) == JOB_MEDIC)
 		{
 		    if(JobDuty[playerid])
 		    {
@@ -6429,14 +6163,6 @@ DialogZbrojowni(playerid)
     ShowPlayerDialogEx(playerid, 8282, DIALOG_STYLE_LIST, "Kup przystosowanie do przechowywania:", "Kastetu\t\t\t\t\t1 000$\nSpadochronu\t\t\t\t5 000$\nSpreju, gaœnicy i aparatu\t\t40 000$\nWibratorów,kwiatów i laski\t\t50 000$\nBroni bia³ej\t\t\t\t750 000$\nPistoletów\t\t\t\t250 000$\nStrzelb\t\t\t\t\t450 000$\nPistoletów maszynowych\t\t550 000$\nKarabinów szturmowych\t\t850 000$\nSnajperek\t\t\t\t700 000$\nBroni ciê¿kiej\t\t\t\t2 000 000$\n£adunków wybuchowych\t\t4 000 000$", "Wybierz", "Cofnij");
 }
 
-Przystanek(playerid, color, tekst[])
-{
-    new car = GetPlayerVehicleID(playerid);
-    if(KomunikacjaMiejsca[car] == -1) return 0;
-	UpdateDynamic3DTextLabelText(Busnapisn[KomunikacjaMiejsca[car]], color, tekst);
-    return 1;
-}
-
 Mnoznik(zone[])
 {
 	new mnoznik;
@@ -7469,23 +7195,6 @@ SendFamilyMessage(family, color, string[], onduty = false)
 	}
 }
 
-SendTajniakMessage(family, color, string[])
-{
-	foreach(new i : Player)
-	{
-		if(IsPlayerConnected(i))
-		{
-		    if(PlayerInfo[i][pTajniak] == family)
-		    {
-                if(!gFam[i])
-                {
-					SendClientMessage(i, color, string);
-				}
-			}
-		}
-	}
-}
-
 SendIRCMessage(channel, color, string[])
 {
 	foreach(new i : Player)
@@ -7801,7 +7510,7 @@ AddCar(car, model = -1, col1 = -1, col2 = 1, respawnDelay = -1)
 	}
 	if(model == -1)
 	{
-		new randomModelIdx = GetRandomVehicleForStealingModel();
+		new randomModelIdx = GetRandomStealableVehModel();
 		model = RandCars[randomModelIdx][0];
 	}
 	new id = AddStaticVehicleEx(model, CarSpawns[car][pos_x], CarSpawns[car][pos_y], CarSpawns[car][pos_z], CarSpawns[car][z_angle], col1, col2, respawnDelay);
@@ -8670,25 +8379,6 @@ IsNickCorrect(nick[])
 	}
 	return 0;
 }
-
-/*NickCensoreCorrect(nick[])
-{
-    if(strfind(nick,"Sandra_Rabucha",true) != -1) return 0; //Rozalka
-    else if(strfind(nick,"rabuc",true) != -1) return 0;
-    else if(strfind(nick,"rebuc",true) != -1) return 0;
-	else if(strfind(nick,"Damian_Szymanski",true) != -1) return 0; //Creative
-	else if(strfind(nick,"szymanski",true) != -1) return 0;
-	else if(strfind(nick,"szymansky",true) != -1) return 0;
-	else if(strfind(nick,"szymanczak",true) != -1) return 0;
-	else if(strfind(nick,"Szymon_Gajda",true) != -1) return 0; //Mrucznik
-	else if(strfind(nick,"gajda",true) != -1) return 0;
-	else if(strfind(nick,"Kalisiewicz",true) != -1) return 0; //Telehama
-	else if(strfind(nick,"kalisie",true) != -1) return 0;
-	else if(strfind(nick,"kalisio",true) != -1) return 0;
-	else if(strfind(nick,"kalisia",true) != -1) return 0;
-	return 1;
-}
-*/
 
 CheckAlfaNumeric(password[])
 {
@@ -9695,6 +9385,14 @@ Car_Lock(playerid, veh)
 }
 
 
+SetVehicleAsObjective(vehicleid, bool:objective)
+{
+	new bool:engine, bool:lights, bool:alarm, bool:doors, bool:bonnet, bool:boot, bool:unused;
+
+	GetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, unused);
+	SetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
+}
+
 //13.08
 //--------------------------------------------------
 
@@ -10233,7 +9931,7 @@ GPSMode(playerid, bool:red = false)
 	{
 		foreach(new i : Player)
 		{
-			if(IsAPolicja(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+			if(IsAPolicja(i) || GetPlayerFraction(i) == FRAC_ERS || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
 			{
 				if(zawodnik[i] == 0)
 					DisablePlayerCheckpoint(i);
@@ -10736,10 +10434,10 @@ Oil_Destroy(lID)
         TextDrawHideForPlayer(i, OilTXD_BG[0]);
         TextDrawHideForPlayer(i, OilTXD_BG[1]);
         ApplyAnimation(i, "BOMBER", "BOM_Plant_Crouch_Out", 4.0, 0, 0, 0, 0, -1);
-        SendClientMessage(i, COLOR_WHITE, "[ERS] Usun¹³eœ plamê oleju! Otrzymujesz 7 500$! [ERS]");
-        DajKase(i, 7500);
-        SendFamilyMessage(4, COLOR_GREEN, "[ERS] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 12 500$! [ERS]");
-        Sejf_Add(FRAC_ERS, 12500);
+        SendClientMessage(i, COLOR_WHITE, "[ERS] Usun¹³eœ plamê oleju! Otrzymujesz 12 500$! [ERS]");
+        DajKase(i, 12500);
+        SendFamilyMessage(4, COLOR_GREEN, "[ERS] Stra¿ak usun¹³ plamê oleju! Na konto frakcji wp³ywa 5 000$! [ERS]");
+        Sejf_Add(FRAC_ERS, 5000);
     }
 }
 
@@ -11245,40 +10943,6 @@ TJD_CheckForUsedBox(vehicleid)
     }
 }
 
-// AddSkillJob(playerid, quant)
-// {
-// pDetSkill,
-// 	pSexSkill,
-// 	pBoxSkill,
-// 	pLawSkill,
-// 	pMechSkill,
-// 	pJackSkill,
-// 	pCarSkill,
-// 	pNewsSkill,
-// 	pDrugsSkill,
-// 	pCookSkill,
-// 	pFishSkill,
-// 	pGunSkill,
-//     pTruckSkill,
-// 	switch(PlayerInfo[playerid][pJob])
-// 	{
-// 		case JOB_LOWCA: PlayerInfo[playerid][pDetSkill] + quant;
-// 		case JOB_LAWYER: PlayerInfo[playerid][pLawSkill] + quant;
-// 		case JOB_PROSTITUTE: PlayerInfo[playerid][pSexSkill] + quant;
-// 		case JOB_DRAGDEALER: PlayerInfo[playerid][pDrugsSkill] + quant;
-// 		case JOB_CARTHIEF: PlayerInfo[playerid][pJackSkill] + quant;
-// 		case JOB_REPORTER: PlayerInfo[playerid][pNewsSkill] + quant;
-// 		case JOB_MECHANIC: PlayerInfo[playerid][pMechSkill] + quant;
-// 		case JOB_BODYGUARD: PlayerInfo[playerid][
-// 		case JOB_GUNDEALER: PlayerInfo[playerid][pGunSkill] + quant;
-// 		case JOB_BUDSRIVER: PlayerInfo[playerid][
-// 		case JOB_PIZZA: PlayerInfo[playerid][
-// 		case JOB_BOXER: PlayerInfo[playerid][
-// 		case JOB_PAPERMAN: PlayerInfo[playerid][
-// 		case JOB_TRUCKER: PlayerInfo[playerid][
-// 	}
-// }
-
 TJD_TryPickup(playerid, veh)
 {
     if(TJDVehBox[veh] == 0)
@@ -11753,7 +11417,7 @@ public TourCamera(playerid, step)
 }
 //--------------------------------------------------
 
-GetRandomVehicleForStealingModel()
+GetRandomStealableVehModel()
 {
 	new randa = true_random(53);
 	new model;
@@ -12617,7 +12281,7 @@ GetVehicleBoundingBox(vehicleid, Float:bbox[][])
 }
 
 // wyznaczanie d³ugoœci nad³u¿szej przek¹tnej prostopad³oœcianu wyznaczaj¹cego granice pojazdu
-Flaot:GetVehicleBoundingBoxDiagonal(vehicleid)
+Float:GetVehicleBoundingBoxDiagonal(vehicleid)
 {
 	new vm = GetVehicleModel(vehicleid);
 	new Float:wx, Float:wy, Float:wz;

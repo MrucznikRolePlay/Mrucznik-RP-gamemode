@@ -38,35 +38,41 @@ YCMD:pomoc2(playerid, params[], help)
     SendClientMessage(playerid, COLOR_GRAD3,"*** CHAT *** (/w)iadomosc (/o)oc (/k)rzyk (/s)zept (/l)ocal (/b) (/og)loszenie (/f)amily /me (/n)ewbie /sprobuj /apteczka");
     SendClientMessage(playerid, COLOR_GRAD3,"*** BLOKADY *** /togooc /togdepo /togfam /togw /togtel /toglicznik /tognewbie /togadmin /togopis /togvopis");
     SendClientMessage(playerid, COLOR_GRAD4,"*** BANK *** /stan /wyplac /bank /przelew /kb(kontobankowe)");
-    if(PlayerInfo[playerid][pJob] == 1) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /namierz /wanted /poddajsie /zlecenie (/m)egafon"); }
-    else if(PlayerInfo[playerid][pJob] == 2) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /uwolnij /oczyscmdc /zbijwl /wanted /kuppozwolenie"); }
-    else if(PlayerInfo[playerid][pJob] == 3) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sex"); }
-    else if(PlayerInfo[playerid][pJob] == 4) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sprzedajdragi /get drugs /wezdragi"); }
-    else if(PlayerInfo[playerid][pJob] == 5) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ukradnij"); }
-    else if(PlayerInfo[playerid][pMember] == 9) {
+
+    switch(GetPlayerJob(playerid))
+    {
+        case JOB_LOWCA: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /namierz /wanted /poddajsie /zlecenie (/m)egafon"); }
+        case JOB_LAWYER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /uwolnij /oczyscmdc /zbijwl /wanted /kuppozwolenie"); }
+		case JOB_PROSTITUTE: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sex"); }
+		case JOB_DRUG_DEALER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sprzedajdragi /get drugs /wezdragi /diluj"); }
+		case JOB_CARTHIEF: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ukradnij"); }
+		// case JOB_REPORTER: { }
+		case JOB_MECHANIC: 
+        { 
+            SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw /sprzedajneon");
+            SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /nitro /hydraulika /maluj /felga /zderzaki /kolory /malunki /felgi");
+        }
+		case JOB_SMUGGLER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /pancerz"); }
+		case JOB_GUNDEALER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
+		case JOB_DRIVER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /kurs /duty /businfo /trasa /zakoncztrase /zd "); }
+		case JOB_MEDIC: { 
+            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sluzba /czysc /wez gasnice /wez mundur /rezonans /zmienplec");
+            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sprzedajapteczke /ulecz /apteczka /zastrzyk /diagnoza /kuracja /maseczka"); 
+        }
+		case JOB_BOXER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /walka /boxstats /naucz"); }
+		// case JOB_RESERVED_1: { }
+		// case JOB_RESERVED_2: { }
+		// case JOB_RESERVED_3: { }
+		case JOB_TRUCKER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /zlecenie - nowe zlecenia s¹ od wy¿szego skilla!"); }
+    }
+    
+    if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /wywiad /news [text] /reflektor /studia /glosnik /radiostacja");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** P³atny numer SMS - /sms [od 100 do 150], dostajesz tyle stówek ile jest po 1 (nr. 125 to 25 * 100 = 2500$)");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /zamknijlinie /otworzlinie /linie"); }
-    else if(PlayerInfo[playerid][pJob] == 7) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw"); }// /nitro /hydraulika /maluj /felga /zderzak");
-    //SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /kolory /malunki /felgi /sluzba"); }
-    else if(PlayerInfo[playerid][pJob] == 8) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ochrona"); }
-    else if(PlayerInfo[playerid][pJob] == 9) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
-    else if(PlayerInfo[playerid][pJob] == 12) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /walka /boxstats /naucz"); }
-    else if(PlayerInfo[playerid][pJob] == JOB_TRUCKER) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /zlecenie - nowe zlecenia s¹ od wy¿szego skilla!"); }
-    else if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || PlayerInfo[playerid][pJob] == 10) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /fare /businfo"); }
-    else if(PlayerInfo[playerid][pJob] == 15) {
-    SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /gazety /wezgazete /gazeta"); }
+    else if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10) {
+        SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /kurs /duty /businfo /trasa /zakoncztrase /zd ");
+    }
     if(PlayerInfo[playerid][pMember] == 11||PlayerInfo[playerid][pLider] == 11){
     SendClientMessage(playerid,COLOR_GRAD5,"*** DMV *** /startlekcja /stoplekcja /zaliczegz /dajlicencje /odmv /cdmv"); }
     if(PlayerInfo[playerid][pMember] == 8||PlayerInfo[playerid][pLider] == 8){
@@ -74,7 +80,7 @@ YCMD:pomoc2(playerid, params[], help)
     if(PlayerInfo[playerid][pMember] == 7||PlayerInfo[playerid][pLider] == 7){
     SendClientMessage(playerid,COLOR_GRAD5,"*** GSA *** /wywalzdmv /radio /family"); }
     if(PlayerInfo[playerid][pMember] == 15||PlayerInfo[playerid][pLider] == 15){
-    SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /sprzedajneon /napraw /tankowanie /nitro /hydraulika /maluj /felga /zderzak");
+    SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /sprzedajneon /napraw /tankowanie /nitro /hydraulika /maluj /felga /zderzaki");
     SendClientMessage(playerid,COLOR_GRAD5,"*** FDU *** /kolory /malunki /felgi /sluzba");
     SendClientMessage(playerid,COLOR_GRAD5,"*** WYSCIGI *** /stworzwyscig /wyscigi /wyscig /wyscig_start /wyscig_stop /cp /cp-usun /meta");         }
     if(IsAPrzestepca(playerid)){
@@ -84,7 +90,7 @@ YCMD:pomoc2(playerid, params[], help)
     if(GetPlayerOrg(playerid) == FAMILY_IBIZA) SendClientMessage(playerid,COLOR_GRAD5,"*** Klub *** /dajbilet /ibiza /konsola  /sprzedajalkohol /wywalibiza /zabierzbilet /glosnik");
     if (IsAPolicja(playerid))
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat /wywaz /gps /odznaka /maska");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /przeszukaj /zabierz /mandat /wywaz /gps /odznaka /maska /podszyj");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /barierka /kajdanki /rozkuj /mdc /aresztuj /sluzba /poszukiwani /dutycd");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** (/r)adio (/d)epartment /ro(radiooc) /depo(departamentooc) (/m)egafon (/su)spect");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Policja *** /togcrime /pozwolenie /finfo /red /c /tablet /togro /fed /togglepozwo");
@@ -95,9 +101,9 @@ YCMD:pomoc2(playerid, params[], help)
     }
     if (PlayerInfo[playerid][pMember] == 17 || PlayerInfo[playerid][pLider] == 17)
     {
-        SendClientMessage(playerid, COLOR_GRAD5, "*** Stra¿ *** /straz /megafon /ro /r /duty /czysc");
+        SendClientMessage(playerid, COLOR_GRAD5, "*** Stra¿ *** /straz /megafon /ro /r /duty /czysc /wez gasnice /wez mundur");
     }
-    if (PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+    if (PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS)
     {
         SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz *** (/r)adio (/d)epartment /sluzba /finfo /sprzedajapteczke /togbw /togdepo");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz ***/ulecz /apteczka /zastrzyk /diagnoza /zmienplec /kuracja /maseczka");

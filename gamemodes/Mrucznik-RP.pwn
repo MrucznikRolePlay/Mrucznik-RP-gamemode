@@ -88,7 +88,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //redefinition from y_playerarray.inc
 #undef PlayerArray
 
+#define MAX_CA_OBJECTS 50000
 #include <colandreas>
+#define MAX_DYNAMIC_OBJECTS 100000
 #include <colandreas_streamer_integrate>
 
 #include <sort-inline>
@@ -299,6 +301,8 @@ public OnGameModeInit()
     NowaWybieralka_Init();
 	LoadBusiness(); 
 	LoadBusinessPickup(); 	
+	InitializeJobs();
+
 	//-------<[ actors ]>-------
 	PushActors(); 
 	LoadActors();
@@ -356,7 +360,7 @@ public OnGameModeInit()
 	
 	graffiti_LoadMySQL();
 	//discordconnect
-	DiscordConnectInit();
+	//DiscordConnectInit();
 
 	LoadGsPanelPrices();
 
@@ -431,7 +435,7 @@ public OnGameModeInit()
 	}
 	TimeUpdater();
 	//timery
-	SetTimer("AktywujPozar", 10800000, true);//System Po¿arów v0.1
+	SetTimer("AktywujPozar", 3600_000 * 1, true);//System Po¿arów v0.1 - po¿ar co godzinê
     SetTimer("MainTimer", 1000, true);
 	SetTimer("CheckChangeWeapon", 450, true);
     SetTimer("RPGTimer", 100, true);
@@ -871,6 +875,8 @@ public OnDynamicActorStreamIn(actorid, forplayerid)
 
 public OnPlayerEnterDynamicArea(playerid, areaid)
 {
+	ZA_OnPlayerEnterDynamicArea(playerid, areaid); // z³odziej aut
+
     if(IsPlayerInAnyVehicle(playerid))
     {
         new kolid=-1;
@@ -1021,7 +1027,13 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
         if(!Player_CanUseCar(playerid, vehicleid))
         	return Player_RemoveFromVeh(playerid);
     }
-	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_BUSDRIVER && !ispassenger) sendTipMessageEx(playerid, COLOR_YELLOW, "SERVER: Wpisz /trasa aby rozpocz¹æ pracê");
+	if(CarData[VehicleUID[vehicleid][vUID]][c_Owner] == JOB_DRIVER && !ispassenger) 
+	{
+		if(IsABus(vehicleid) || IsAMiniBus(vehicleid))
+		{
+			MruMessageInfo(playerid, "Wpisz /trasa aby rozpocz¹æ trasê autobusow¹.");
+		}
+	}
 	// -- customowe parametry dla poszczególnych pojazdów
 	if(IsARower(vehicleid))
 	{
@@ -1064,12 +1076,6 @@ public OnPlayerConnect(playerid)
 	//Poprawny nick:
 	new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
-   	/*if(!NickCensoreCorrect(nick))
-    {
-        SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
-		KickEx(playerid);
-		return 1;
-    }*/
 	if(regex_match(nick, NICK_REGEX) <= 0)
 	{
 		SendClientMessage(playerid, COLOR_NEWS, "SERWER: Twój nick jest niepoprawny! Nick musi posiadaæ formê: Imiê_Nazwisko!");
@@ -1088,85 +1094,85 @@ public OnPlayerConnect(playerid)
     saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*60*1000, 1, "i", playerid);
 
     //Ikony
-    SetPlayerMapIcon(playerid, 1, 1172.0771, -1323.3496, 15.4030, 22, 0); //Szpital
-    SetPlayerMapIcon(playerid, 2, 1024.7610, -1025.5515, 38.2944, 63, 0); //Paint & Spray (Temple)
-    SetPlayerMapIcon(playerid, 3, 544.3761, -1276.2046, 17.2482, 55, 0); //Grotti (wypo¿yczalnia aut)
-    SetPlayerMapIcon(playerid, 4, 501.9365, -1358.5668, 16.1252, 45, 0); //Prolaps (za San News)
-    SetPlayerMapIcon(playerid, 5, 328.9384, -1512.9458, 36.0391, 56, 0); //Mrucznik Tower
-    SetPlayerMapIcon(playerid, 6, 459.0327, -1502.2711, 31.0314, 45, 0); //Victim (Rodeo)
-    SetPlayerMapIcon(playerid, 7, 487.6090, -1739.3744, 10.8613, 63, 0); //Paint & Spray (Idlewood)
-    SetPlayerMapIcon(playerid, 8, 606.5818, -1458.5319, 14.3820, 30, 0); //FBI
-    SetPlayerMapIcon(playerid, 9, 648.0233, -1357.3239, 13.5716, 60, 0); //San News
-    SetPlayerMapIcon(playerid, 10, 725.6099, -1439.8906, 13.5318, 50, 0); //Jetty Lounge
-    SetPlayerMapIcon(playerid, 11, 816.2141, -1386.5956, 13.6068, 48, 0); //Vinyl Club
-    SetPlayerMapIcon(playerid, 12, 815.2556, -1616.2010, 13.7077, 10, 0); //Burger Marina
-    SetPlayerMapIcon(playerid, 13, 925.6270, -1353.1003, 13.3768, 14, 0); //Kurczak Market
-    SetPlayerMapIcon(playerid, 14, 1038.1844, -1339.7595, 13.7266, 17, 0); //P¹czkarnia Allen
-    SetPlayerMapIcon(playerid, 15, 1100.9039, -1235.4445, 15.5474, 27, 0); //FDU
-    SetPlayerMapIcon(playerid, 16, 1022.4534, -1122.0057, 23.8715, 25, 0); //Kasyno
-    SetPlayerMapIcon(playerid, 17, 1459.2233, -1140.6903, 24.0593, 45, 0); //ZIP
-    SetPlayerMapIcon(playerid, 18, 1462.3813, -1012.1696, 26.8438, 52, 0); //Bank
-    SetPlayerMapIcon(playerid, 19, 1763.3892, -1130.4873, 24.0859, 20, 0); //Remiza
-    SetPlayerMapIcon(playerid, 20, 2130.8472, -1144.4091, 24.5245, 55, 0); //Salon Aut
-    SetPlayerMapIcon(playerid, 21, 2255.2629, -1333.2920, 23.9816, 12, 0); //Koœció³
-    SetPlayerMapIcon(playerid, 22, 2245.2217, -1662.6310, 15.4690, 45, 0); //Binco
-    SetPlayerMapIcon(playerid, 23, 2068.5596, -1831.6167, 13.2740, 63, 0); //Paint & Spray Idlewood
-    SetPlayerMapIcon(playerid, 24, 2102.2976, -1806.5530, 13.5547, 29, 0); //Pizzeria Idlewood
-    SetPlayerMapIcon(playerid, 25, 53.2336, -1531.4541, 5.2757, 57, 0); //Granica LS - SF
-    SetPlayerMapIcon(playerid, 26, 630.3970, -571.7601, 16.3359, 30, 0); //Komisariat w Dillimore
-    SetPlayerMapIcon(playerid, 27, 655.9221, -564.6913, 16.0630, 42, 0); //Stacja Benzynowa w Dillimore
-    SetPlayerMapIcon(playerid, 28, 720.0000, -459.2647, 16.0630, 63, 0); //Paint & Spray Dillimore
-    SetPlayerMapIcon(playerid, 29, 713.9889, -498.1104, 16.0630, 18, 0); //AmmuNation Dillimore
-    SetPlayerMapIcon(playerid, 30, 1006.5273, -936.9426, 41.8934, 42, 0); //Stacja Benzynowa na Temple
-    SetPlayerMapIcon(playerid, 31, 997.5923, -921.3640, 41.9068, 36, 0); //24/7 na Temple
-    SetPlayerMapIcon(playerid, 32, 997.2347, -917.5255, 41.9068, 52, 0); //Bankomat na Temple
-    SetPlayerMapIcon(playerid, 33, 1199.9893, -923.6624, 42.7465, 10, 0); //Burger Temple
-    SetPlayerMapIcon(playerid, 34, 1315.3838, -904.4830, 38.6174, 36, 0); //24/7 na Temple (2)
-    SetPlayerMapIcon(playerid, 35, 1310.2568, -1370.4567, 13.3031, 34, 0); //S¹d
-    SetPlayerMapIcon(playerid, 36, 1481.2053, -1768.3350, 18.5228, 34, 0); //Urz¹d
-    SetPlayerMapIcon(playerid, 37, 1551.8835, -1676.2306, 15.5495, 30, 0); //Komisariat G³ówny
-    SetPlayerMapIcon(playerid, 38, 1939.0436, -1773.6844, 13.1137, 42, 0); //Stacja Benzynowa na Idlewood
-    SetPlayerMapIcon(playerid, 39, 2073.7549, -1827.9742, 13.2739, 52, 0); //Bankomat (1)
-    SetPlayerMapIcon(playerid, 40, 2227.1052, -1723.2871, 13.2840, 54, 0); //Si³ownia
-    SetPlayerMapIcon(playerid, 41, 2844.5139, -1562.8854, 10.8208, 52, 0); //Bankomat (2)
-    SetPlayerMapIcon(playerid, 42, 1699.7645, 411.4212, 30.6384, 57, 0); //Granica LS - LV
-    SetPlayerMapIcon(playerid, 43, 2269.7112, -74.8501, 26.7724, 34, 0); //Urz¹d w PC
-    SetPlayerMapIcon(playerid, 44, 2302.0964, -16.2240, 26.4844, 52, 0); //Bank w PC
-    SetPlayerMapIcon(playerid, 45, 2112.7124, -1213.1012, 23.6923, 45, 0); //Suburban obok Salonu Aut
-    SetPlayerMapIcon(playerid, 46, 2421.2805, -1223.2761, 24.9988, 21, 0); //Pig Pen
-    SetPlayerMapIcon(playerid, 47, 2770.6140, -1610.7180, 10.6489, 56, 0); //Mechanik (Praca)
-    SetPlayerMapIcon(playerid, 48, 1961.5001, -2194.4309, 13.2740, 5, 0); //Lotnisko
-    SetPlayerMapIcon(playerid, 49, 1941.3965, -2116.1799, 13.3525, 21, 0); //Dziki Tygrys
-    SetPlayerMapIcon(playerid, 50, 1765.1974, -2063.2681, 13.3357, 56, 0); //Praca na Las Colinas (nie pamiêtam nazwy)
-    SetPlayerMapIcon(playerid, 51, 1352.4242, -1758.4613, 13.5078, 36, 0); //24/7 obok Urzêdu
-    SetPlayerMapIcon(playerid, 52, 1109.1722, -1796.2472, 16.5938, 56, 0); //Z³odziej Aut
-    SetPlayerMapIcon(playerid, 53, 1154.2104, -1770.6967, 16.5938, 56, 0); //Busiarz
-    SetPlayerMapIcon(playerid, 54, 900.8502, -1101.3074, 23.5000, 12, 0); //Cmentarz
-    SetPlayerMapIcon(playerid, 55, 1365.9257, -1275.1326, 13.5469, 56, 0); //Diler Broni
-    SetPlayerMapIcon(playerid, 56, 1790.5382,-1164.7021,23.8281, 18, 0); //GunShop obok Remizy
-    SetPlayerMapIcon(playerid, 57, 2166.2034, -1675.3135, 15.0859, 56, 0); //Diler Dragów
-    SetPlayerMapIcon(playerid, 58, 1787.4432, -1866.6737, 13.5711, 52, 0); //Bankomat obok Dworca G³ównego
-    SetPlayerMapIcon(playerid, 59, 1833.0537, -1842.6494, 13.5781, 36, 0); //24/7 na Idlewood
-    SetPlayerMapIcon(playerid, 60, 2226.0696, -1718.3290, 13.5182, 56, 0); //Ochroniarz (Praca)
-    SetPlayerMapIcon(playerid, 61, 2103.4141, -1798.7494, 13.6504, 56, 0); //Pizzerman (Praca)
-    SetPlayerMapIcon(playerid, 62, 382.8541, -2079.4890, 7.5630, 9, 0); //Miejsce do wêdkowania
-    SetPlayerMapIcon(playerid, 63, 342.0005, -1518.7524, 33.2482, 52, 0); //Bankomat obok Mrucznik Tower
-    SetPlayerMapIcon(playerid, 64, 660.0374, -575.8544, 16.3359, 52, 0); //Bankomat obok stacji w Dillimore
-    SetPlayerMapIcon(playerid, 65, 2273.1931, -77.6219, 26.5704, 52, 0); //Bankomat obok Urzêdu w PC
-    SetPlayerMapIcon(playerid, 66, 2115.5796, 920.2349, 10.5474, 42, 0); //Stacja benzynowa w LV
-    SetPlayerMapIcon(playerid, 67, 1973.2526, 2162.1948, 10.8001, 63, 0); //Paint & Spray w LV
-    SetPlayerMapIcon(playerid, 68, -1675.5817, 414.0347, 6.9068, 42, 0); //Stacja benzynowa w SF
-    SetPlayerMapIcon(playerid, 69, -1904.4862, 281.9908, 40.774, 63, 0); //Paint & Spray w SF
-    SetPlayerMapIcon(playerid, 70, -1932.1078, 274.0641, 40.7720, 56, 0); //Mechanik SF (Praca)
-    SetPlayerMapIcon(playerid, 71, -2029.1031, 157.1051, 28.5630, 42, 0); //Stacja benzynowa w SF V2
-    SetPlayerMapIcon(playerid, 72, -2405.7351, 975.3979, 45.0239, 42, 0); //Stacja benzynowa w SF V3
-    SetPlayerMapIcon(playerid, 73, -2425.5703, 1023.0456, 50.1247, 63, 0); //Paint & Spray w SF V2 (Juniper Hollow)
-    SetPlayerMapIcon(playerid, 74, -100.5483, 1114.7805, 19.4688, 63, 0); //Paint & Spray w Fort Carson
-    SetPlayerMapIcon(playerid, 75, 70.4944, 1219.0317, 18.5391, 42, 0); //Stacja benzynowa w Fort Carson
-    SetPlayerMapIcon(playerid, 76, 611.6107, 1694.4340, 6.7193, 42, 0); //Stacja benzynowa w Bone County
-    SetPlayerMapIcon(playerid, 77, 2582.2329, 61.6251, 26.2817, 42, 0); //Stacja benzynowa w PC
-    SetPlayerMapIcon(playerid, 78, 1383.4578, 461.5694, 19.8450, 42, 0); //Stacja benzynowa w Montgomery
-    SetPlayerMapIcon(playerid, 79, 2202.3503, 2474.2419, 10.5474, 42, 0); //Stacja w LV V2
+
+	new icons = 0;
+    SetPlayerMapIcon(playerid, icons++, 1172.0771, -1323.3496, 15.4030, 22, 0); //Szpital
+    SetPlayerMapIcon(playerid, icons++, 1024.7610, -1025.5515, 38.2944, 63, 0); //Paint & Spray (Temple)
+    SetPlayerMapIcon(playerid, icons++, 544.3761, -1276.2046, 17.2482, 55, 0); //Grotti (wypo¿yczalnia aut)
+    SetPlayerMapIcon(playerid, icons++, 501.9365, -1358.5668, 16.1252, 45, 0); //Prolaps (za San News)
+    SetPlayerMapIcon(playerid, icons++, 459.0327, -1502.2711, 31.0314, 45, 0); //Victim (Rodeo)
+    SetPlayerMapIcon(playerid, icons++, 487.6090, -1739.3744, 10.8613, 63, 0); //Paint & Spray (Idlewood)
+    SetPlayerMapIcon(playerid, icons++, 606.5818, -1458.5319, 14.3820, 30, 0); //FBI
+    SetPlayerMapIcon(playerid, icons++, 648.0233, -1357.3239, 13.5716, 60, 0); //San News
+    SetPlayerMapIcon(playerid, icons++, 725.6099, -1439.8906, 13.5318, 50, 0); //Jetty Lounge
+    SetPlayerMapIcon(playerid, icons++, 816.2141, -1386.5956, 13.6068, 48, 0); //Vinyl Club
+    SetPlayerMapIcon(playerid, icons++, 815.2556, -1616.2010, 13.7077, 10, 0); //Burger Marina
+    SetPlayerMapIcon(playerid, icons++, 925.6270, -1353.1003, 13.3768, 14, 0); //Kurczak Market
+    SetPlayerMapIcon(playerid, icons++, 1038.1844, -1339.7595, 13.7266, 17, 0); //P¹czkarnia Allen
+    SetPlayerMapIcon(playerid, icons++, 1100.9039, -1235.4445, 15.5474, 27, 0); //FDU
+    SetPlayerMapIcon(playerid, icons++, 1022.4534, -1122.0057, 23.8715, 25, 0); //Kasyno
+    SetPlayerMapIcon(playerid, icons++, 1459.2233, -1140.6903, 24.0593, 45, 0); //ZIP
+    SetPlayerMapIcon(playerid, icons++, 1462.3813, -1012.1696, 26.8438, 52, 0); //Bank
+    SetPlayerMapIcon(playerid, icons++, 1763.3892, -1130.4873, 24.0859, 20, 0); //Remiza
+    SetPlayerMapIcon(playerid, icons++, 2130.8472, -1144.4091, 24.5245, 55, 0); //Salon Aut
+    SetPlayerMapIcon(playerid, icons++, 2255.2629, -1333.2920, 23.9816, 12, 0); //Koœció³
+    SetPlayerMapIcon(playerid, icons++, 2245.2217, -1662.6310, 15.4690, 45, 0); //Binco
+    SetPlayerMapIcon(playerid, icons++, 2068.5596, -1831.6167, 13.2740, 63, 0); //Paint & Spray Idlewood
+    SetPlayerMapIcon(playerid, icons++, 2102.2976, -1806.5530, 13.5547, 29, 0); //Pizzeria Idlewood
+    SetPlayerMapIcon(playerid, icons++, 53.2336, -1531.4541, 5.2757, 57, 0); //Granica LS - SF
+    SetPlayerMapIcon(playerid, icons++, 630.3970, -571.7601, 16.3359, 30, 0); //Komisariat w Dillimore
+    SetPlayerMapIcon(playerid, icons++, 655.9221, -564.6913, 16.0630, 42, 0); //Stacja Benzynowa w Dillimore
+    SetPlayerMapIcon(playerid, icons++, 720.0000, -459.2647, 16.0630, 63, 0); //Paint & Spray Dillimore
+    SetPlayerMapIcon(playerid, icons++, 713.9889, -498.1104, 16.0630, 18, 0); //AmmuNation Dillimore
+    SetPlayerMapIcon(playerid, icons++, 1006.5273, -936.9426, 41.8934, 42, 0); //Stacja Benzynowa na Temple
+    SetPlayerMapIcon(playerid, icons++, 997.5923, -921.3640, 41.9068, 36, 0); //24/7 na Temple
+    SetPlayerMapIcon(playerid, icons++, 997.2347, -917.5255, 41.9068, 52, 0); //Bankomat na Temple
+    SetPlayerMapIcon(playerid, icons++, 1199.9893, -923.6624, 42.7465, 10, 0); //Burger Temple
+    SetPlayerMapIcon(playerid, icons++, 1315.3838, -904.4830, 38.6174, 36, 0); //24/7 na Temple (2)
+    SetPlayerMapIcon(playerid, icons++, 1310.2568, -1370.4567, 13.3031, 34, 0); //S¹d
+    SetPlayerMapIcon(playerid, icons++, 1481.2053, -1768.3350, 18.5228, 34, 0); //Urz¹d
+    SetPlayerMapIcon(playerid, icons++, 1551.8835, -1676.2306, 15.5495, 30, 0); //Komisariat G³ówny
+    SetPlayerMapIcon(playerid, icons++, 1939.0436, -1773.6844, 13.1137, 42, 0); //Stacja Benzynowa na Idlewood
+    SetPlayerMapIcon(playerid, icons++, 2073.7549, -1827.9742, 13.2739, 52, 0); //Bankomat (1)
+    SetPlayerMapIcon(playerid, icons++, 2227.1052, -1723.2871, 13.2840, 54, 0); //Si³ownia
+    SetPlayerMapIcon(playerid, icons++, 2844.5139, -1562.8854, 10.8208, 52, 0); //Bankomat (2)
+    SetPlayerMapIcon(playerid, icons++, 1699.7645, 411.4212, 30.6384, 57, 0); //Granica LS - LV
+    SetPlayerMapIcon(playerid, icons++, 2269.7112, -74.8501, 26.7724, 34, 0); //Urz¹d w PC
+    SetPlayerMapIcon(playerid, icons++, 2302.0964, -16.2240, 26.4844, 52, 0); //Bank w PC
+    SetPlayerMapIcon(playerid, icons++, 2112.7124, -1213.1012, 23.6923, 45, 0); //Suburban obok Salonu Aut
+    SetPlayerMapIcon(playerid, icons++, 2421.2805, -1223.2761, 24.9988, 21, 0); //Pig Pen
+    SetPlayerMapIcon(playerid, icons++, 1961.5001, -2194.4309, 13.2740, 5, 0); //Lotnisko
+    SetPlayerMapIcon(playerid, icons++, 1941.3965, -2116.1799, 13.3525, 21, 0); //Dziki Tygrys
+    SetPlayerMapIcon(playerid, icons++, 1352.4242, -1758.4613, 13.5078, 36, 0); //24/7 obok Urzêdu
+    SetPlayerMapIcon(playerid, icons++, 900.8502, -1101.3074, 23.5000, 12, 0); //Cmentarz
+    SetPlayerMapIcon(playerid, icons++, 1790.5382,-1164.7021,23.8281, 18, 0); //GunShop obok Remizy
+    SetPlayerMapIcon(playerid, icons++, 1787.4432, -1866.6737, 13.5711, 52, 0); //Bankomat obok Dworca G³ównego
+    SetPlayerMapIcon(playerid, icons++, 1833.0537, -1842.6494, 13.5781, 36, 0); //24/7 na Idlewood
+    SetPlayerMapIcon(playerid, icons++, 382.8541, -2079.4890, 7.5630, 9, 0); //Miejsce do wêdkowania
+    SetPlayerMapIcon(playerid, icons++, 342.0005, -1518.7524, 33.2482, 52, 0); //Bankomat obok Mrucznik Tower
+    SetPlayerMapIcon(playerid, icons++, 660.0374, -575.8544, 16.3359, 52, 0); //Bankomat obok stacji w Dillimore
+    SetPlayerMapIcon(playerid, icons++, 2273.1931, -77.6219, 26.5704, 52, 0); //Bankomat obok Urzêdu w PC
+    SetPlayerMapIcon(playerid, icons++, 2115.5796, 920.2349, 10.5474, 42, 0); //Stacja benzynowa w LV
+    SetPlayerMapIcon(playerid, icons++, 1973.2526, 2162.1948, 10.8001, 63, 0); //Paint & Spray w LV
+    SetPlayerMapIcon(playerid, icons++, -1675.5817, 414.0347, 6.9068, 42, 0); //Stacja benzynowa w SF
+    SetPlayerMapIcon(playerid, icons++, -1904.4862, 281.9908, 40.774, 63, 0); //Paint & Spray w SF
+    SetPlayerMapIcon(playerid, icons++, -2029.1031, 157.1051, 28.5630, 42, 0); //Stacja benzynowa w SF V2
+    SetPlayerMapIcon(playerid, icons++, -2405.7351, 975.3979, 45.0239, 42, 0); //Stacja benzynowa w SF V3
+    SetPlayerMapIcon(playerid, icons++, -2425.5703, 1023.0456, 50.1247, 63, 0); //Paint & Spray w SF V2 (Juniper Hollow)
+    SetPlayerMapIcon(playerid, icons++, -100.5483, 1114.7805, 19.4688, 63, 0); //Paint & Spray w Fort Carson
+    SetPlayerMapIcon(playerid, icons++, 70.4944, 1219.0317, 18.5391, 42, 0); //Stacja benzynowa w Fort Carson
+    SetPlayerMapIcon(playerid, icons++, 611.6107, 1694.4340, 6.7193, 42, 0); //Stacja benzynowa w Bone County
+    SetPlayerMapIcon(playerid, icons++, 2582.2329, 61.6251, 26.2817, 42, 0); //Stacja benzynowa w PC
+    SetPlayerMapIcon(playerid, icons++, 1383.4578, 461.5694, 19.8450, 42, 0); //Stacja benzynowa w Montgomery
+    SetPlayerMapIcon(playerid, icons++, 2202.3503, 2474.2419, 10.5474, 42, 0); //Stacja w LV V2
+
+	icons += InitializeJobIcons(playerid);
+
+	if(icons > 99) 
+	{
+		printf("FATAL ERROR: to many icons");
+		SendRconCommand("exit");
+	}
 	
 	//biz
 	ResetBizOffer(playerid);
@@ -1207,6 +1213,9 @@ public OnPlayerDisconnect(playerid, reason)
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
 	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //l
+
+	// modules:
+	DrugDealer_OnPlayerDiconnect(playerid);
 
 	new reString[128];
     new DisconnectReason[4][] =
@@ -1487,10 +1496,7 @@ public OnPlayerDisconnect(playerid, reason)
 		SetPlayerWantedLevel(playerid, 0);
 	}
 
-    if(TransportDist[playerid] > 0.0 && TransportDriver[playerid] < 999)
-	{
-        Taxi_Pay(playerid);
-	}
+	Driver_OnPlayerDisconnect(playerid);
 
     //System aut
     Car_UnloadForPlayer(playerid);
@@ -1559,7 +1565,7 @@ public OnPlayerDisconnect(playerid, reason)
 	{
 		foreach(new i : Player)
 		{
-			if(IsAPolicja(i) || IsAMedyk(i) || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1) || GetPVarInt(playerid, "RozpoczalBieg") == 0)
+			if(IsAPolicja(i) || GetPlayerFraction(i) == FRAC_ERS || GetPlayerFraction(i) == FRAC_BOR || GetPlayerFraction(i) == FRAC_ERS || (PlayerInfo[i][pMember] == 9 && SanDuty[i] == 1) || (PlayerInfo[i][pLider] == 9 && SanDuty[i] == 1))
 				DisablePlayerCheckpoint(i);
 		}
 	}
@@ -1598,33 +1604,6 @@ public OnPlayerDisconnect(playerid, reason)
 
     TextDrawHideForPlayer(playerid, TXD_Info);
 
-	//Komunikaty dla graczy na serwerze:
-	foreach(new i : Player)
-	{
-	    if(IsPlayerConnected(i) && i != playerid)
-	    {
-	        if(TaxiAccepted[i] < 500)
-	        {
-		        if(TaxiAccepted[i] == playerid)
-		        {
-		            TaxiAccepted[i] = 999;
-		            GameTextForPlayer(i, "~w~Klient Taxi~n~~r~Wyszedl z gry", 5000, 1);
-		            TaxiCallTime[i] = 0;
-		            DisablePlayerCheckpoint(i);
-		        }
-	        }
-	        else if(BusAccepted[i] < 500)
-	        {
-		        if(BusAccepted[i] == playerid)
-		        {
-		            BusAccepted[i] = 999;
-		            GameTextForPlayer(i, "~w~Klient autobusu~n~~r~Wyszedl z gry", 5000, 1);
-		            BusCallTime[i] = 0;
-		            DisablePlayerCheckpoint(i);
-		        }
-	        }
-	    }
-	}
 	if(GotHit[playerid] > 0)
 	{
 	    if(GetChased[playerid] < 500)
@@ -1675,14 +1654,6 @@ public OnPlayerDisconnect(playerid, reason)
 		Boxer1 = 255;
 		Boxer2 = 255;
 		TBoxer = 255;
-	}
-    if(TransportDuty[playerid] == 1)
-	{
-		TaxiDrivers -= 1;
-	}
-    else if(TransportDuty[playerid] == 2)
-	{
-		BusDrivers -= 1;
 	}
 	if(PlayerInfo[playerid][pJob] == 11)
 	{
@@ -1933,12 +1904,6 @@ public OnPlayerSpawn(playerid)
 	{
     	SetPlayerWeatherEx(playerid, 3);//Pogoda
 	}
-	//Diler Broni
-	if(PlayerInfo[playerid][pJob] == 9 && (!IsADilerBroni(playerid) || PlayerInfo[playerid][pRank] == 0))
-	{
-	    PlayerInfo[playerid][pJob] = 0;
-	    SendClientMessage(playerid, COLOR_WHITE, "Zosta³eœ wyrzucony z pracy!");
-	}
     // usuwanie
     if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
         PlayerInfo[playerid][pRank] = 0;
@@ -1946,7 +1911,7 @@ public OnPlayerSpawn(playerid)
         PlayerInfo[playerid][pMember] = 0;
         PlayerInfo[playerid][pRank] = 0;
         PlayerInfo[playerid][pUniform] = 0;
-        PlayerInfo[playerid][pTajniak] = 0;
+        SecretAgent[playerid] = 0;
         MruMySQL_SetAccInt("Rank", GetNick(playerid), 0);
         MruMySQL_SetAccInt("Member", GetNick(playerid), 0);
         UsunBron(playerid);
@@ -2191,42 +2156,8 @@ SetPlayerSpawnPos(playerid)
 						}
 						case FRAC_FBI: //2
 						{
-						    if(PlayerInfo[playerid][pTajniak] == 0)
-						    {
-                                SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
-								SetPlayerFacingAngle(playerid, 270.0);
-		  					}
-		  					else if(PlayerInfo[playerid][pTajniak] == 1)
-		  					{
-		  					    SetPlayerPos(playerid, 2495.2163,-1687.2322,13.5150);
-		  					}
-		  					else if(PlayerInfo[playerid][pTajniak] == 2)
-		  					{
-		  					    SetPlayerPos(playerid, 1939.1940,-1116.3353,27.0151);
-		  					}
-		  					else if(PlayerInfo[playerid][pTajniak] == 3)
-		  					{
-                                SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
-		  					}
-         					else if(PlayerInfo[playerid][pTajniak] == 4)
-		  					{
-                                SetPlayerPos(playerid, 2801.0273,-1089.4576,30.7188);
-		  					}
-		  					else if(PlayerInfo[playerid][pTajniak] == 5)
-		  					{
-		  					    SetPlayerPos(playerid, 2467.5117,-1278.2054,29.9264);
-							}
-		  					else if(PlayerInfo[playerid][pTajniak] == 6)
-		  					{
-								new rand = random(sizeof(gTajniakSpawn));
-								SetPlayerPos(playerid, gTajniakSpawn[rand][0], gTajniakSpawn[rand][1], gTajniakSpawn[rand][2]); // Warp the player
-								SetPlayerFacingAngle(playerid, 270.0);
-		  					}
-		  					else
-		  					{
-                                SetPlayerPos(playerid, 2467.5117,-1278.2054,29.9264);
-		  					}
-
+							SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
+							SetPlayerFacingAngle(playerid, 270.0);
 						}
 						case FRAC_NG: //3
 						{
@@ -2358,51 +2289,36 @@ SetPlayerSpawnPos(playerid)
 				}
 				else if(PlayerInfo[playerid][pJob] > 0) //Spawn Prac
 				{
-				    switch(PlayerInfo[playerid][pJob])
-				    {
-						case JOB_MECHANIC:
+					new job = PlayerInfo[playerid][pJob];
+					new i = 0; // TODO: get this from player spawn options
+
+					if(job <= 0 || job >= sizeof(JobInfo) || isnull(JobSpawns[job][i][JOB_SPAWN_NAME]))
+					{
+						if(PlayerCanSpawnWihoutTutorial(playerid))
 						{
-						    SetPlayerPos(playerid,2794.5515,-1619.3689,10.9219);
-		    				SetPlayerFacingAngle(playerid, 80.0);
+							//Spawn cywila
+							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
+							SetPlayerFacingAngle(playerid, 0.94);
 						}
-						case JOB_LAWYER:
+					}
+					else
+					{
+						SetPlayerPos(playerid, 
+							JobSpawns[job][i][JOB_SPAWN_X], 
+							JobSpawns[job][i][JOB_SPAWN_Y], 
+							JobSpawns[job][i][JOB_SPAWN_Z]);
+						SetPlayerFacingAngle(playerid,
+							JobSpawns[job][i][JOB_SPAWN_A]);
+						SetPlayerInterior(playerid,
+							JobSpawns[job][i][JOB_SPAWN_INT]);
+						SetPlayerVirtualWorld(playerid,
+							JobSpawns[job][i][JOB_SPAWN_VW]);
+
+						if(JobSpawns[job][i][JOB_SPAWN_ANTI_FALL])
 						{
 							Wchodzenie(playerid);
-						    SetPlayerPos(playerid,319.72470092773, -1548.3374023438, 14.555289230347);
-		    				SetPlayerFacingAngle(playerid, 230.0);
 						}
-						case JOB_LOWCA:
-						{
-						    SetPlayerPos(playerid,322.0553894043, 303.41961669922, 999.1484375);
-		    				SetPlayerInterior(playerid,5);
-						}
-						case JOB_BOXER:
-						{
-						    SetPlayerPos(playerid,766.0804,14.5133,1000.7004);
-		    				SetPlayerInterior(playerid, 5);
-						}
-						case JOB_TRUCKER:
-						{
-						    SetPlayerPos(playerid, 1751.4445, -2054.9761, 13.0593);
-		    				SetPlayerFacingAngle(playerid, 180.0);
-						}
-						case JOB_BUSDRIVER:
-						{
-						    SetPlayerPos(playerid, 1143.0999755859,-1754.0999755859,13.60000038147);
-						}
-						case JOB_BODYGUARD:
-						{
-						    SetPlayerPos(playerid, 2207.4038,-1725.1147,13.4060);
-						}
-						default: //Spawn cywila
-						{
-							if(PlayerCanSpawnWihoutTutorial(playerid))
-							{
-								SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
-								SetPlayerFacingAngle(playerid, 0.94);
-							}
-						}
-				    }
+					}
 				}
 				else //Spawn cywila
 				{
@@ -2479,7 +2395,7 @@ SetPlayerSpawnWeapon(playerid)
     //HP:
 	if(PlayerInfo[playerid][pInjury] == 0 && PlayerInfo[playerid][pBW] == 0)
 	{
-		if(IsAPolicja(playerid) && OnDuty[playerid] == 1 && PlayerInfo[playerid][pTajniak] != 6)
+		if(IsAPolicja(playerid) && OnDuty[playerid] == 1)
 		{
 			SetPlayerHealth(playerid, PlayerInfo[playerid][pSHealth]+50.0);
 			//f(PlayerInfo[playerid][pMember] != 1 || PlayerInfo[playerid][pLider] != 1)
@@ -2524,1527 +2440,36 @@ public OnPlayerEnterCheckpoint(playerid)
 {
 	new string[128];
 	new name[MAX_PLAYER_NAME];
-    DisablePlayerCheckpoint(playerid);
 
-	if(GetPVarInt(playerid, "RozpoczalBieg") == 1)
+	if(Sila_OnPlayerEnterCheckpoint(playerid))
 	{
-		if(GetPVarInt(playerid, "WybralBieg") == 1)
-		{
-			if(OszukujewBiegu[playerid] == 0)
-			{
-				if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
-				{
-					CreateNewRunCheckPoint(playerid, 1709.3523,-1461.3938,13.5469, 3, "Zaliczy³eœ pierwszy przystanek, kolejny jest ju¿ oznaczony!", 0, true);
-				}
-				if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
-				{
-					CreateNewRunCheckPoint(playerid, 1707.8762,-1584.3118,13.5453, 3, "Zaliczy³eœ drugi przystanek, kolejny jest ju¿ oznaczony!", 0, true); 
-				}
-				if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
-				{
-					CreateNewRunCheckPoint(playerid, 1625.7415,-1608.9004,13.7188, 3, "Zaliczy³eœ trzeci przystanek, kolejny jest ju¿ oznaczony!", 5,true); 
-				}
-				if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
-				{
-					CreateNewRunCheckPoint(playerid, 1538.9513,-1724.1267,13.5469, 3, "Zaliczy³eœ czwarty przystanek, kolejny jest ju¿ oznaczony!", 0, true); 
-				}
-				if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
-				{
-					CreateNewRunCheckPoint(playerid, 1322.6306,-1724.9469,13.5469, 3, "Zaliczy³eœ pi¹ty przystanek, kolejny jest ju¿ oznaczony!", 0, true); 
-				}
-				if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
-				{
-					CreateNewRunCheckPoint(playerid, 1318.4052,-1841.7726,13.5469, 3, "Zaliczy³eœ szósty przystanek, kolejny jest ju¿ oznaczony!", 0, true); 
-				}
-				if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
-				{
-					CreateNewRunCheckPoint(playerid,  1382.2340,-1811.7761,13.5469, 3, "Zaliczy³eœ siódmy (przedostatni) przystanek, kolejny jest ju¿ oznaczony!", 0, true); 
-				}
-				if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
-				{
-					EndRunPlayer(playerid, 10);
-				}
-			}
-			else
-			{
-				sendTipMessageEx(playerid, COLOR_RED, "WYKRYTO OSZUSTWO! TWÓJ BIEG ZOSTAJE PRZERWANY"); 
-				DisablePlayerCheckpoint(playerid);
-				SetPVarInt(playerid, "ZaliczylBaze", 0);
-				SetPVarInt(playerid, "WybralBieg", 0);
-				SetPVarInt(playerid, "RozpoczalBieg", 0);
-			}
-		}
-		else if(GetPVarInt(playerid, "WybralBieg") == 2)
-		{
-			if(GetPVarInt(playerid, "ZaliczylBaze") == 0)
-			{
-				CreateNewRunCheckPoint(playerid,  535.0668,-1364.9790,15.8432, 2, "Zaliczy³eœ pierwszy checkpoint! Nastêpny zosta³ ju¿ oznaczony", 0, true); 
-			}
-			if(GetPVarInt(playerid, "ZaliczylBaze") == 1)
-			{
-				CreateNewRunCheckPoint(playerid,  339.2540,-1526.9476,33.3757, 2, "Zaliczy³eœ drugi checkpoint! Nastêpny zosta³ oznaczony", 0, true); 
-			}
-			if(GetPVarInt(playerid, "ZaliczylBaze") == 2)
-			{
-				CreateNewRunCheckPoint(playerid,  317.4830,-1632.8326,33.3125, 2, "Zaliczy³eœ trzeci checkpoint! Nastêpny zosta³ oznaczony, a ty siê nie poddajesz!", 5, true); 
-			}
-			if(GetPVarInt(playerid, "ZaliczylBaze") == 3)
-			{
-				CreateNewRunCheckPoint(playerid,  364.1078,-1805.8809,7.8380, 2, "Zaliczy³eœ czwarty checkpoint! Pi¹ty jest ju¿ oznaczony!", 0, true); 
-			}
-			if(GetPVarInt(playerid, "ZaliczylBaze") == 4)
-			{
-				CreateNewRunCheckPoint(playerid,  664.4612,-1859.3246,5.4609, 2, "Zaliczy³eœ Pi¹ty checkpoint! Zosta³y jeszcze dwa!", 5, true); 
-			}
-			if(GetPVarInt(playerid, "ZaliczylBaze") == 5)
-			{
-				CreateNewRunCheckPoint(playerid,  966.9481,-1834.9043,12.6000, 2, "Szósty przystanek zaliczony! Biegnij do kolejnego", 0, true); 
-
-			}
-			if(GetPVarInt(playerid, "ZaliczylBaze") == 6)
-			{
-				CreateNewRunCheckPoint(playerid,  1000.8669,-1857.4419,12.8146, 2, "Zaliczy³eœ siódmy checkpoint! Ju¿ widaæ ostatni", 5, true); 
-			}
-			if(GetPVarInt(playerid, "ZaliczylBaze") == 7)//Ostatni
-			{
-				EndRunPlayer(playerid, 5);
-			}
-		}
-		else//Jeœli wybra³ dialog do pokazania punktu startowego trasy
-		{
-			DisablePlayerCheckpoint(playerid);
-			sendTipMessageEx(playerid, COLOR_P@, "Aby rozpocz¹æ bieg wpisz w tym miejscu [/biegnij]"); 
-			SetPVarInt(playerid, "RozpoczalBieg", 0);
-		}
+		return 1;
 	}
-	if(PizzaJob[playerid] != 0)
+
+	if(Driver_OnPlayerEnterCheckpoint(playerid))
 	{
-	    SetTimerEx("PizzaJobTimer01", 4000, false, "i", playerid);
-	    GameTextForPlayer(playerid, "KLIENT ZABIERA PIZZE", 4000, 3);
-	    TogglePlayerControllable(playerid,0);
+		return 1;
 	}
 
     TJD_CallCheckpoint(playerid, GetPlayerVehicleID(playerid));
 
-	if(TaxiCallTime[playerid] > 0 && TaxiAccepted[playerid] < 999)
+	// medic checkpoints
+	if(MedicCallTime[playerid] > 0)
 	{
-	    TaxiAccepted[playerid] = 999;
-		GameTextForPlayer(playerid, "~w~Dotarles do celu", 5000, 1);
-		TaxiCallTime[playerid] = 0;
-		DisablePlayerCheckpoint(playerid);
+		MedicCallTime[playerid] = 0;
+	    DisablePlayerCheckpoint(playerid);
+		return 1;
 	}
-	else if(BusCallTime[playerid] > 0 && BusAccepted[playerid] < 999)
-	{
-	    BusAccepted[playerid] = 999;
-		GameTextForPlayer(playerid, "~w~Dotarles do celu", 5000, 1);
-		BusCallTime[playerid] = 0;
-		DisablePlayerCheckpoint(playerid);
-	}
-	if(CP[playerid]>=550 && CP[playerid]<=999)//Wywo³uje otwieranie drzwi gdy jest w CP od 550 do 999
-	{
-		Otwieramdrzwibusa(playerid);
-	}
-	if(CP[playerid]==1200)
-	{
-	    SendClientMessage(playerid, COLOR_GREY, "Dojecha³eœ do zajezdni i zakoñczy³eœ pracê.");
-		Przystanek(playerid, COLOR_GREEN, "Korporacja Transportowa\n Wydzia³ Komunikacji Autbusowej");
-		DisablePlayerCheckpoint(playerid);
-		CP[playerid] = 0;
-	}
-	if(CP[playerid]==1201)
-	{
-	    SendClientMessage(playerid, COLOR_GREY, "Dojecha³eœ do zajezdni i zakoñczy³eœ pracê.");
-		Przystanek(playerid, COLOR_YELLOW, "Los Santos Bus Department\n Komunikacja Miejska");
-		DisablePlayerCheckpoint(playerid);
-		CP[playerid] = 0;
-	}
-	//Linia numer 55 autobusa SYSTEM AUTOBUSÓW
-	if(PlayerInfo[playerid][pLinia55]==1)
-	{
-		if(CP[playerid]==551) //Sprawdza czy dojecha³ do nastepnego
-		{
 
-			DisablePlayerCheckpoint(playerid); //usuwa cp i...
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Przypomnienie_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpocz¹æ s³u¿by!!!");
-			SendClientMessage(playerid, COLOR_GREEN, "Wpisz {FFFF00}/fare [cena]");
-			SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyæ po wjechaniu w przystanek wpisz /zd");
-			SendClientMessage(playerid, COLOR_GREEN, "Je¿eli bêdziesz chcia³ przerwaæ trasê wczeœniej wpisz /zakoncztrase");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>/fare<<_____________|");
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Jefferson - Glen Park - Idlewood - El Corona - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Motel Jefferson");
-			ProxDetector(10.0, playerid, "Linia numer: {3333FF}55 (niebieska) {FFFF00} Kierunek ==> {3333FF}MRUCZNIK TOWER", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SetPlayerCheckpoint(playerid, 2248.4707,-1139.6617,25.7001, 4); //... ustawia nastepnego
-			CP[playerid]=552; //przypisuje id dla cp
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-
-		}
-		else if(CP[playerid]==552)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Jefferson – Motel Jefferson", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1967.2327,-1198.9353,25.2217, 4);
-			CP[playerid]=553;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Glen Park - Idlewood - El Corona - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Glen Park");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-		}
-		else if(CP[playerid]==553)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Glen Park", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1844.0139,-1361.4354,12.9694, 4);
-			CP[playerid]=554;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - El Corona - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Skate Park");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-		}
-		else if(CP[playerid]==554)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Idlewood – Skate Park", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1742.6479,-1816.3966,12.9351, 4);
-			CP[playerid]=555;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: El Corona - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Unity Station");
-		}
-		else if(CP[playerid]==555)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}El Corona – Unity Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1532.3134,-1648.4254,12.9485, 4); //Przystanek Komisariat
-			CP[playerid]=556;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Komisariat / Urz¹d Miasta");
-		}
-		else if(CP[playerid]==556)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Pershing Square – Komisariat / Urz¹d Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1452.3877,-1031.1976,23.2277, 4);
-			CP[playerid]=557;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Verte Bank ");
-		}
-		else if(CP[playerid]==557)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Downtown – Bank", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1008.5986,-1140.0272,23.2408, 4);
-			CP[playerid]=558;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Market - Rodeo\n{808080}Nastêpny przystanek: Bymber Casino ");
-		}
-		else if(CP[playerid]==558)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Market – Bymber Casino", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 836.6970,-1318.8370,12.9458, 4);
-			CP[playerid]=559;
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Na najbli¿szym skrzy¿owaniu W LEWO");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Market - Rodeo\n{808080}Nastêpny przystanek: Market Station");
-		}
-		else if(CP[playerid]==559)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Market Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 708.8574,-1391.8915,13.0002, 4);
-			CP[playerid]=560;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Rodeo\n{808080}Nastêpny przystanek: Centrala SAN");
-		}
-		else if(CP[playerid]==560)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Rodeo- Centrala SAN", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 625.2355,-1470.5664,13.9573, 4);
-			CP[playerid]=1008;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Rodeo\n{808080}Nastêpny przystanek: G³ówna siedziba FBI (N/¯)");
-		}
-		else if(CP[playerid]==1008)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Rodeo – G³ówna siedziba FBI (N/¯)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 354.7779,-1643.9617,32.4429, 4);
-			CP[playerid]=562;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \n Kierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Rodeo\n{808080}Nastêpny przystanek: Molo Wêdkarskie ");
-		}
-		else if(CP[playerid]==562)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Rodeo – Molo Wêdkarskie", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 378.3281,-1424.5344,34.2901, 4); //nawrotka CP
-			CP[playerid]=1001;
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Przygotuj siê do wykonania NAWROTU");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			Przystanek(playerid, COLOR_BLUE, "Linia numer 55 \nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Rodeo\n{808080}Nastêpny przystanek: MRUCZNIK TOWER ");
-		}
-		else if(CP[playerid]==1001)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek koñcowy {EE82EE}Rodeo – Biurowiec 'Mrucznik Tower'", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 341.5396,-1531.1141,32.8992, 4); //CP mrucznik tower
-			TogglePlayerControllable(playerid, 1);
-			CP[playerid]=563;
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Za chwilê zbli¿ysz siê do koñca trasy! (1/2 zadania).");
-			SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz odpocz¹æ nie wje¿d¿aj¹c w kolejny checkpoint lub ruszyæ dalej.");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55 \nKierunek: Koœció³\n{778899}Trasa: Rodeo - Market - Downtown - Urz¹d Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Odjazd nast¹pi po sygnale");
-		}
-		else if(CP[playerid]==563)
-		{
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 359.0248,-1647.8008,32.3386, 4); //molo wêdkarskie
-			CP[playerid]=564;
-			ProxDetector(10.0, playerid, "Linia numer: {3333FF}55 (niebieska) {FFFF00} Kierunek ==> {3333FF}KOŒCIÓ£", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Rodeo - Market - Downtown - Urz¹d Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: Molo Wêdkarskie");
-		}
-		else if(CP[playerid]==564)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Rodeo – Molo Wêdkarskie", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 639.6337,-1452.6040,13.7631, 4);
-			CP[playerid]=1007;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Rodeo - Market - Downtown - Urz¹d Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: G³ówna siedziba FBI (N/¯) ");
-		}
-		else if(CP[playerid]==1007)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Rodeo – G³ówna siedziba FBI (N/¯)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 723.2538,-1407.2189,12.9320, 4);
-			CP[playerid]=566;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Rodeo - Market - Downtown - Urz¹d Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: Centrala SAN ");
-		}
-		else if(CP[playerid]==566)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Rodeo- Centrala SAN", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 830.8025,-1330.0034,13.5437, 4);
-			CP[playerid]=567;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Market - Downtown - Urz¹d Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: Market Station ");
-		}
-		else if(CP[playerid]==567)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Market Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1034.3179,-1150.8452,23.2292, 4); //Bymber Kasyno
-			CP[playerid]=568;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Market - Downtown - Urz¹d Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: Bymber Casino ");
-		}
-		else if(CP[playerid]==568)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Market – Bymber Casino", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1449.7135,-1037.4396,23.2312, 4); //Bank
-			CP[playerid]=569;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Downtown - Urz¹d Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: Verte Bank ");
-		}
-		else if(CP[playerid]==569)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Downtown – Bank", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1527.9624,-1695.4071,12.9535, 4); //Komisariat LS
-			CP[playerid]=570;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Urz¹d Miasta - El Corona - Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: Komisariat / Urz¹d Miasta ");
-		}
-		else if(CP[playerid]==570)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Pershing Square – Komisariat", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1791.1583,-1833.9706,12.9519, 4);
-			CP[playerid]=571;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: El Corona - Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: Unity Station ");
-		}
-		else if(CP[playerid]==571)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}El Corona – Unity Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1853.2744,-1393.1622,12.9655, 4);
-			CP[playerid]=572;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Idlewood - Glen Park - Jefferson\n{808080}Nastêpny przystanek: Skate Park ");
-		}
-		else if(CP[playerid]==572)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Idlewood – Skate Park", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1972.9082,-1198.7592,25.2214, 4);
-			CP[playerid]=573;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Glen Park - Jefferson\n{808080}Nastêpny przystanek: Glen Park ");
-		}
-		else if(CP[playerid]==573)
-		{
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Glen Park", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2255.2795,-1145.6331,26.0940, 4);
-			CP[playerid]=574;
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Jefferson\n{808080}Nastêpny przystanek: Motel Jefferson ");
-		}
-		else if(CP[playerid]==574)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2210.0313,-1440.1292,23.3929, 4); //Koñcowy CP po drugiej stronie
-			CP[playerid]=575;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 55: {FFFF00}Przystanek {EE82EE}Jefferson – Motel Jefferson", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+230$");
-			Przystanek(playerid, COLOR_BLUE, "Linia nr 55\nKierunek: Koœció³\n{778899}Trasa: Jefferson\n{808080}Nastêpny przystanek: KOŒCIÓ£ ");
-		}
-		else if(CP[playerid]==575)
-		{
-			if(BusCzit[playerid] == 1)
-			{
-				KickEx(playerid);
-			}
-			else
-			{
-				ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}Jefferson – Koœció³", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-				DisablePlayerCheckpoint(playerid);
-				//TogglePlayerControllable(playerid, 0);//Zamra¿amy do póki nie odpowie co robi dalej
-				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi³eœ pe³n¹ trasê. Co zamierzasz teraz zrobiæ?\n\nWciœnij Ponów aby wczytaæ trasê jeszcze raz.\nWciœnij Inn¹ aby wybraæ inn¹ trasê.", "Ponów", "Inn¹");
-				SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 55 zakoñczona!_____________|");
-				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 5980$ premii za dwukrotne przejechanie trasy! (26 przystanków)");
-				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
-				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez GPS).");
-				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				SendClientMessage(playerid, COLOR_GRAD1, "Skill +2");
-				PlayerInfo[playerid][pCarSkill] += 2;
-				if(GetPlayerFraction(playerid) == FRAC_KT) Sejf_Add(FRAC_KT, 5980);
-				else DajKase(playerid, 5980);
-				CP[playerid] = 0;
-				PlayerInfo[playerid][pLinia55] = 0;
-				PlayerInfo[playerid][pNatrasiejest] = 0;
-				ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz swój kurs:", "Linia 55 -niebieska (230$/p , 9min, 21p, +2)\nLinia 72- pomarañczowa (200$/p, 6min, 15p, +1)\nLinia 96 - zielona 4s (310$/p, 8min, 24p, +1)\nLinia 82 ¿ó³ta 5s (510$/p , 11min, 18p, +3)\nLinia 85 3s (270$/p , ? min, 24p, +2)\nWycieczka 5s\nPowrót do bazy\nPomoc", "Wybierz", "Wyjdz");
-				if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
-				{
-				Przystanek(playerid, COLOR_BLUE, "Linia ZAJ\nLinia 55 do zajezdni Ocean Docks\n{778899}Trasa: Idlewood - Willowfield\n{808080}Zatrzymuje siê na przystankach");
-				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
-				CP[playerid]=1200;
-				}
-				else if(PlayerInfo[playerid][pJob] == 10)
-				{
-				Przystanek(playerid, COLOR_BLUE, "Linia ZAJ\nLinia 55 do zajezdni Commerce\n{778899}Trasa: Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
-				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
-				CP[playerid]=1201;
-				}
-
-			}
-		}
-	}
-	// KONIEC LINII 55 AUTOBUSÓW
-
-	//Linia numer 72 autobusa SYSTEM AUTOBUSÓW
-	if(PlayerInfo[playerid][pLinia72]==1)
+	// mechanic checkpoints
+	if(MechanicCallTime[playerid] > 0)
 	{
-		if(CP[playerid]==721) //Sprawdza czy dojecha³ do nastepnego
-		{
-			DisablePlayerCheckpoint(playerid); //usuwa cp i...
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Przypomnienie_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpocz¹æ s³u¿by!!!");
-			SendClientMessage(playerid, COLOR_GREEN, "Wpisz {FFFF00}/fare [cena]");
-			SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyæ po wjechaniu w przystanek wpisz /zd");
-			SendClientMessage(playerid, COLOR_GREEN, "Je¿eli bêdziesz chcia³ przerwaæ trasê wczeœniej wpisz /zakoncztrase");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>/fare<<_____________|");
-			ProxDetector(10.0, playerid, "Linia numer: {FFA500}72 (pomarañczowa)  {FFFF00}Kierunek ==> {FFA500}MRUCZNIK TOWER", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SetPlayerCheckpoint(playerid, 2572.6025,-1728.8365,13.3093, 4);
-			CP[playerid]=740; //przypisuje id dla cp up
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Ganton - Idlewood - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Grove Street");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);//
-		}
-		//nowe ganton GS lewo 2471,-1735.9000244141,13.39999961853
-		//nowe ganton GS prawy 2590.6999511719,-1728.8000488281,13.39999961853
-		else if(CP[playerid]==740)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2297.6785,-1655.4948,14.3767, 4);
-			CP[playerid]=1009;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Ganton – Grove Street", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+100$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Ganton - Idlewood - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Bar Ten Green Bottles (N/¯)");
-		}
-		else if(CP[playerid]==1009)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2182.5671,-1708.4637,13.4766, 4); //
-			CP[playerid]=722;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Ganton – Bar Ten Green Bottles (N/¯)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+50$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Si³ownia");
-		}
-		else if(CP[playerid]==722)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid,  1890.3834,-1749.6218,12.9520, 4);//
-			CP[playerid]=723;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Idlewood – Si³ownia", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Idlewood - Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Stacja Benzynowa");
-		}
-		else if(CP[playerid]==723)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1532.3134,-1648.4254,12.9485, 4);
-			CP[playerid]=724;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Idlewood – Stacja Benzynowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Urz¹d Miasta - Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Komisariat / Urz¹d Miasta ");
-		}
-		else if(CP[playerid]==724)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1452.3877,-1031.1976,23.2277, 4);
-			CP[playerid]=725;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Pershing Square – Komisariat / Urz¹d Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Verte Bank (jedn.) ");
-		}
-		else if(CP[playerid]==725)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1340.7183,-1346.4941,12.9510, 4); //stacja benz prawa
-			CP[playerid]=726;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Downtown – Bank (jednokierunkowy)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Downtown - Market - Rodeo\n{808080}Nastêpny przystanek: Ammu-Nation (jedn.)");
-		}
-		else if(CP[playerid]==726)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1208.1235,-1314.7834,12.9645, 4);
-			CP[playerid]=727;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Downtown - Ammu-Nation(jednokierunkowy)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Market - Rodeo\n{808080}Nastêpny przystanek: Szpital");
-		}
-		else if(CP[playerid]==727)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 836.6970,-1318.8370,12.9458, 4);
-			CP[playerid]=728;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Market – Szpital", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Market - Rodeo\n{808080}Nastêpny przystanek: Market Station ");
-		}
-		else if(CP[playerid]==728)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 341.5396,-1531.1141,32.8992, 4); //mrucznik tower
-			CP[playerid]=729;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Market Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Biurowiec 'Mrucznik Tower'\n{778899}Trasa: Rodeo\n{808080}Nastêpny przystanek: MRUCZNIK TOWER ");
-		}
-		else if(CP[playerid]==729)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 260.5440,-1531.3761,32.1662, 4); //nawrotka przy mrucznik tower
-			CP[playerid]=1003;
-			ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}Rodeo – Biurowiec 'Mrucznik Tower'", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! Ukoñczy³eœ trasê do Mrucznik Tower! (1/2 zadania). Mo¿esz tu odpocz¹æ.");
-			SendClientMessage(playerid, COLOR_GREEN, "Je¿eli chcesz jechaæ dalej wykonaj nawrót kieruj¹c siê do kolejnego checkpointu!");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa: Market - Downtown - Urz¹d Miasta - Idlewood - Ganton - East Los Santos\n{808080}Odjazd nast¹pi po sygnale!");
-		}
-		else if(CP[playerid]==1003)
-		{
-			TogglePlayerControllable(playerid, 1);
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 830.8025,-1330.0034,13.5437, 4);
-			CP[playerid]=730;
-			ProxDetector(10.0, playerid, "Linia numer: {FFA500}72 (pomarañczowa)  {FFFF00}Kierunek ==> {FFA500}BAZA MECHANIKÓW", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa: Market - Downtown - Urz¹d Miasta - Idlewood - Ganton - East Los Santos\n{808080}Nastêpny przystanek: Market Station ");
-		}
-		else if(CP[playerid]==730)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1193.7321,-1358.3251,12.9416, 4);
-			CP[playerid]=731;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Market Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa:  Market - Downtown - Urz¹d Miasta - Idlewood - Ganton - East Los Santos\n{808080}Nastêpny przystanek: Szpital ");
+		MechanicCallTime[playerid] = 0;
+	    DisablePlayerCheckpoint(playerid);
+		return 1;
+	}
 
-		}
-		else if(CP[playerid]==731)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1527.9624,-1695.4071,12.9535, 4);//komi LS
-			CP[playerid]=734;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Market - Szpital", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa: Downtown - Urz¹d Miasta - Idlewood - Ganton - East Los Santos\n{808080}Nastêpny przystanek: Urz¹d Miasta/Komisariat ");
-		}
-		else if(CP[playerid]==734)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1924.6978,-1754.4702,12.9486, 4);
-			CP[playerid]=735;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Pershing Square – Komisariat / Urz¹d Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa: Idlewood - Ganton - East Los Santos\n{808080}Nastêpny przystanek: Stacja Benzynowa ");
-		}
-		else if(CP[playerid]==735)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2162.4690,-1754.0964,12.9439, 4);
-			CP[playerid]=736;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Idlewood – Stacja Benzynowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa: Idlewood - Ganton - East Los Santos\n{808080}Nastêpny przystanek: Si³ownia");
-		}
-		else if(CP[playerid]==736)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2314.7969,-1661.7714,13.8587  , 4);
-			CP[playerid]=1010;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Idlewood - Szamboa Gym", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+200$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa: Ganton - East Los Santos\n{808080}Nastêpny przystanek: Bar Ten Green Bottles (N/¯) ");
-		}
-		else if(CP[playerid]==1010)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2489.3118,-1735.8690,13.3172 , 4);
-			CP[playerid]=742;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Ganton - Bar Ten Green Bottles (N/¯)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+50$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa: Ganton - East Los Santos\n{808080}Nastêpny przystanek: Grove Street ");
-		}
-		else if(CP[playerid]==742)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2818.4243,-1576.9399,10.9287, 4);
-			CP[playerid]=737;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 72: {FFFF00}Przystanek {EE82EE}Ganton - Grove Street", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+100$");
-			Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia nr 72\nKierunek: Baza Mechaników\n{778899}Trasa: Ganton - East Los Santos\n{808080}Nastêpny przystanek: BAZA MECHANIKÓW (pêtla) ");
-		}
-		else if(CP[playerid]==737)
-		{
-			if(BusCzit[playerid] == 1)
-			{
-				KickEx(playerid);
-			}
-			else
-			{
-				ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}East Los Santos - Baza Mechaników (pêtla)", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-				DisablePlayerCheckpoint(playerid);
-				TogglePlayerControllable(playerid, 0);//Zamra¿amy do póki nie odpowie co robi dalej
-				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi³eœ pe³n¹ trasê. Co zamierzasz teraz zrobiæ?\n\nWciœnij Ponów aby wczytaæ trasê jeszcze raz.\nWciœnij Inn¹ aby wybraæ inn¹ trasê.", "Ponów", "Inn¹");
-				SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 72 zakoñczona!_____________|");
-				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 3300$ premii za dwukrotne przejechanie trasy! (19 przystanków)");
-				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
-				SendClientMessage(playerid, COLOR_GREEN, "Chc¹c powtórzyæ t¹ trasê zawróæ wykorzystuj¹c parking znajduj¹cy siê na skrzy¿owaniu w w lewo.");
-				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez GPS).");
-				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				SendClientMessage(playerid, COLOR_GRAD1, "Skill +1");
-				PlayerInfo[playerid][pCarSkill] ++;
-				if(GetPlayerFraction(playerid) == FRAC_KT) Sejf_Add(FRAC_KT, 3300);
-				else DajKase(playerid, 3300);
-				CP[playerid] = 0;
-				PlayerInfo[playerid][pLinia72] = 0;
-				PlayerInfo[playerid][pNatrasiejest] = 0;
-				ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz swój kurs:", "Linia 55 -niebieska (230$/p , 9min, 21p, +2)\nLinia 72- pomarañczowa (200$/p, 6min, 15p, +1)\nLinia 96 - zielona 4s (310$/p, 8min, 24p, +1)\nLinia 82 ¿ó³ta 5s (510$/p , 11min, 18p, +3)\nLinia 85 3s (270$/p , ? min, 24p, +2)\nWycieczka 5s\nPowrót do bazy\nPomoc", "Wybierz", "Wyjdz");
-				if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
-				{
-				Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia ZAJ\nLinia 72 do zajezdni Ocean Docks\n{778899}Trasa: Idlewood - Willowfield\n{808080}Zatrzymuje siê na przystankach");
-				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
-				CP[playerid]=1200;
-				}
-				else if(PlayerInfo[playerid][pJob] == 10)
-				{
-				Przystanek(playerid, 0xAFAFAFFF, "{FFA500}Linia ZAJ\nLinia 72 do zajezdni Commerce\n{778899}Trasa: Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
-				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
-				CP[playerid]=1201;
-				}
-			}
-		}
-	}
-	// KONIEC LINII 72 AUTOBUSÓW
-	//Linia numer 82 autobusa SYSTEM AUTOBUSÓW
-	if(PlayerInfo[playerid][pLinia82]==1)
-	{
-		if(CP[playerid]==821) //Sprawdza czy dojecha³ do nastepnego
-		{
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Przypomnienie_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpocz¹æ s³u¿by!!!");
-			SendClientMessage(playerid, COLOR_GREEN, "Wpisz {FFFF00}/fare [cena]");
-			SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyæ po wjechaniu w przystanek wpisz /zd");
-			SendClientMessage(playerid, COLOR_GREEN, "Je¿eli bêdziesz chcia³ przerwaæ trasê wczeœniej wpisz /zakoncztrase");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>/fare<<_____________|");
-			ProxDetector(10.0, playerid, "Linia numer: {DAA520}82 (¿ó³ta) {FFFF00}Kierunek ==> {DAA520}BAY SIDE", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SetPlayerCheckpoint(playerid, 1532.3134,-1648.4254,12.9485, 4); //... ustawia nastepnego KOMi (jedn)
-			CP[playerid]=822; //przypisuje id dla cp up
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);//
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Urz¹d Miasta - East Los Santos - Palomino Creek - Dillimore - Bluberry - Las Venturas\n{808080}Nastêpny przystanek: Komisariat / Urz¹d Miasta ");
-		}
-		else if(CP[playerid]==822)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2864.6250,-1539.0991,10.4947, 4);
-			CP[playerid]=823;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Pershing Square – Komisariat / Urz¹d Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do Mechaników_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Kieruj siê do Alhambry, potem w LEWO.");
-			SendClientMessage(playerid, COLOR_GREEN, "WjedŸ na autostradê, nastêpnie prosto do bazy mechaników.");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: East Los Santos - Palomino Creek - Dillimore - Bluberry - Las Venturas\n{808080}Nastêpny przystanek: Baza Mechaników ");
-
-		}
-		else if(CP[playerid]==823)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2839.9409,-1098.3546,23.5453, 4);
-			CP[playerid]=824;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}East Los Santos – Baza Mechaników", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: East Los Santos - Palomino Creek - Dillimore - Bluberry - Las Venturas\n{808080}Nastêpny przystanek: Agencja Ochrony ");
-		}
-		else if(CP[playerid]==824)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2339.9377,39.4851,26.3359, 4);
-			CP[playerid]=825;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}East Los Santos – Agencja Ochrony", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do PC_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "JedŸ ci¹gle prosto zwyk³¹ drog¹. Nie zje¿d¿aj na autostradê.");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Palomino Creek - Dillimore - Bluberry - Las Venturas\n{808080}Nastêpny przystanek: miasteczko Palomino Creek ");
-		}
-		else if(CP[playerid]==825)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1051.7797,-444.1544,51.0848, 4); //Przystanek PC
-			CP[playerid]=826;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Palomino Creek", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do Dillimore_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gdy przejedziesz po moœcie za 400m SKRÊÆ W LEWO na most.");
-			SendClientMessage(playerid, COLOR_GREEN, "PóŸneij kieruj siê do tunelu. Ca³y czas prosto");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Dillimore - Bluberry - Las Venturas\n{808080}Nastêpny przystanek: Hilltop Farm ");
-		}
-		else if(CP[playerid]==826)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 661.4372,-597.9591,15.7536, 4);
-			CP[playerid]=827;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Dillimore – Hilltop Farm", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Dillimore - Bluberry - Las Venturas\n{808080}Nastêpny przystanek: miasteczko Dillimore ");
-		}
-		else if(CP[playerid]==827)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 235.2872,-54.7197,1.5620, 4);
-			CP[playerid]=828;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Dillimore", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do Bluberry_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gdy miniesz komisariat SKRÊÆ W LEWO.");
-			SendClientMessage(playerid, COLOR_GREEN, "JedŸ prosto drog¹ do i SKRÊÆ W LEWO do wyjazdu przy Cowboy Bar. Potem prosto.");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Bluberry - Las Venturas\n{808080}Nastêpny przystanek: miasteczko Bluberry ");
-		}
-		else if(CP[playerid]==828)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, -2494.9761,2333.7603,4.9693, 4);//bay side koñcowy
-			CP[playerid]=829;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Bluberry", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do Bay Side_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Po wyjeŸdzie z Bluberry SKRÊÆ W LEWO");
-			SendClientMessage(playerid, COLOR_GREEN, "Po przejechaniu 800m SKRÊÆ W PRAWO na most");
-			SendClientMessage(playerid, COLOR_GREEN, "Nastêpnie za 300m SKRÊÆ W LEWO na autostrade. Dalej ca³y czas prosto.");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Las Venturas\n{808080}Nastêpny przystanek: miasteczko Bay Side ");
-		}
-		else if(CP[playerid]==829)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, -2538.2993,2333.5835,4.8281, 4);
-			CP[playerid]=1000;
-			ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}Bay Side", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! Ukoñczy³eœ trasê do Bay Side! (1/2 zadania)");
-			SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz chwilkê odpocz¹æ, wjedŸ w kolejny checkpoint aby ruszyæ dalej!");
-			SendClientMessage(playerid, COLOR_GREEN, "Dodatkowo otrzymujesz premiê paliwow¹ z uwagi na utrudniony dostêp do mechaników.");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Gas[GetPlayerVehicleID(playerid)] = 100;
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Dworzec Commerce\n{778899}Trasa: Bluberry - Dillimore - Palomino Creek - East Los Santos - Commerce\n{808080}Odjazd nast¹pi po sygnale ");
-		}
-		else if(CP[playerid]==1000)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 229.9310,-170.9327,1.0001, 4);
-			CP[playerid]=830;
-			ProxDetector(10.0, playerid, "Linia numer: {DAA520}82 (¿ó³ta) {FFFF00}Kierunek ==> {DAA520}DWORZEC AUTOBUSOWY COMMERCE", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			TogglePlayerControllable(playerid, 1);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Dworzec Autobusowy\n{778899}Trasa: Bluberry - Dillimore - Palomino Creek - East Los Santos - Commerce\n{808080}Nastêpny przystanek: miasteczko Bluberry");
-		}
-		else if(CP[playerid]==830)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 684.2634,-569.5635,16.3208, 4);
-			CP[playerid]=831;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Bluberry", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek:Dworzec Autobusowy\n{778899}Trasa: Dillimore - Palomino Creek - East Los Santos - Commerce\n{808080}Nastêpny przystanek: miasteczko Dillimore");
-		}
-		else if(CP[playerid]==831)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1014.1871,-466.1351,50.5591, 4);
-			CP[playerid]=832;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Dillimore", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Dworzec Autobusowy\n{778899}Trasa: Dillimore - Palomino Creek - East Los Santos - Commerce\n{808080}Nastêpny przystanek: Hilltop Farm");
-		}
-		else if(CP[playerid]==832)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2577.4602,39.4546,26.3359, 4); //PC prawa
-			CP[playerid]=833;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Dillimore – Hilltop Farm", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Dworzec Autobusowy\n{778899}Trasa: Palomino Creek - East Los Santos - Commerce\n{808080}Nastêpny przystanek: miasteczko Palomino Creek");
-		}
-		else if(CP[playerid]==833)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2835.9119,-1100.0378,23.6009, 4); //nakijima prawa
-			CP[playerid]=834;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}Palomino Creek", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Dworzec Autobusowy\n{778899}Trasa: East Los Santos - Commerce\n{808080}Nastêpny przystanek: Agencja Ochrony");
-		}
-		else if(CP[playerid]==834)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2852.0789,-1563.2421,10.4871, 4);
-			CP[playerid]=835;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}East Los Santos – Agencja Ochrony", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: East Los Santos  - Commerce\n{808080}Nastêpny przystanek: Baza Mechaników");
-		}
-		else if(CP[playerid]==835)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1181.8771,-1748.0386,12.9679, 4);
-			CP[playerid]=836;
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 82: {FFFF00}Przystanek {EE82EE}East Los Santos – Baza Mechaników", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Droga do Dworca_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "JedŸ ci¹gle autostrad¹.");
-			SendClientMessage(playerid, COLOR_GREEN, "WyjedŸ na Idlewoo i kieruj siê ca³y czas prosto.");
-			SendClientMessage(playerid, COLOR_GREEN, "Po przejechaniu spowalniacza, SKRÊÆ w LEWO i kieruj siê na dworzec.");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+510$");
-			Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia nr 82\nKierunek: Bay Side\n{778899}Trasa: Commerce\n{808080}Nastêpny przystanek: Dworzec Autobusowy / Basen");
-		}
-		else if(CP[playerid]==836)
-		{
-			if(BusCzit[playerid] == 1)
-			{
-				KickEx(playerid);
-			}
-			else
-			{
-				ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}Commerce – Dworzec Autobusowy / Basen", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-				DisablePlayerCheckpoint(playerid);
-				TogglePlayerControllable(playerid, 0);//Zamra¿amy do póki nie odpowie co robi dalej
-				//ShowPlayerDialogEx(playerid, 8888, DIALOG_STYLE_MSGBOX, "Trasa", "Zrobi³eœ pe³n¹ trasê. Co zamierzasz teraz zrobiæ?\n\nWciœnij Ponów aby wczytaæ trasê jeszcze raz.\nWciœnij Inn¹ aby wybraæ inn¹ trasê.", "Ponów", "Inn¹");
-				SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 82 zakoñczona!_____________|");
-				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 8670$ premii za dwukrotne przejechanie trasy! (17 przystanków)");
-				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
-				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez GPS).");
-				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				SendClientMessage(playerid, COLOR_GRAD1, "Skill +3");
-				PlayerInfo[playerid][pCarSkill] += 3;
-				if(GetPlayerFraction(playerid) == FRAC_KT) Sejf_Add(FRAC_KT, 8670);
-				else DajKase(playerid, 8670);
-				CP[playerid] = 0;
-				PlayerInfo[playerid][pLinia82] = 0;
-				PlayerInfo[playerid][pNatrasiejest] = 0;
-				ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz swój kurs:", "Linia 55 -niebieska (230$/p , 9min, 21p, +2)\nLinia 72- pomarañczowa (200$/p, 6min, 15p, +1)\nLinia 96 - zielona 4s (310$/p, 8min, 24p, +1)\nLinia 82 ¿ó³ta 5s (510$/p , 11min, 18p, +3)\nLinia 85 3s (270$/p , ? min, 24p, +2)\nWycieczka 5s\nPowrót do bazy\nPomoc", "Wybierz", "Wyjdz");
-				if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
-				{
-				Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia ZAJ\nLinia 82 do zajezdni Ocean Docks\n{778899}Trasa: Pershing Square - Idlewood - Willowfield\n{808080}Zatrzymuje siê na przystankach");
-				SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
-				CP[playerid]=1200;
-				}
-				else if(PlayerInfo[playerid][pJob] == 10)
-				{
-				Przystanek(playerid, 0xAFAFAFFF, "{DAA520}Linia ZAJ\nLinia 82 do zajezdni Commerce\n{778899}Trasa: Commerce\n{808080}Zatrzymuje siê na przystankach");
-				SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
-				CP[playerid]=1201;
-				}
-			}
-		}
- 	}
-	// KONIEC LINII 82 AUTOBUSÓW system autobusów
-    if(PlayerInfo[playerid][pLinia96]==1)
-	{
-		if(CP[playerid]==961) //Sprawdza czy dojecha³ do nastepnego
-		{
-	        DisablePlayerCheckpoint(playerid);
-			/*GetPlayerName(playerid,sendername,sizeof(sendername));
-			format(string, sizeof(string), "%s rozpocz¹³ trasê  na linii autobusowej numer {ADFF2F}96 Biurowiec <==> Baza Wojskowa{00D900C8}. Szczegó³owe informacje o trasach na /businfo", sendername);
-			OOCNews(TEAM_GROVE_COLOR,string);*/
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Ocean Docks - Lotnisko - El Corona - Commerce - Market - Marina - Rodeo\n{808080}Nastêpny przystanek: Baza Wojskowa");
-			ProxDetector(10.0, playerid, "Linia numer: {ADFF2F}96 (zielona) {FFFF00}Kierunek ==> {ADFF2F}MRUCZNIK TOWER", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SetPlayerCheckpoint(playerid, 2512.0193,-2434.2727,13.7151, 4); //... ustawia nastepnego
-			CP[playerid]=985; //przypisuje id dla cp up
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);//
-		}
-		else if(CP[playerid]==985)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2228.8030,-2198.2109,12.9153, 4);//uszkodzony
-			CP[playerid]=962;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Lotnisko - El Corona - Commerce - Market - Marina - Rodeo\n{808080}Nastêpny przystanek: Fabryka");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocean Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==962)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1992.8591,-2163.2961,13.3828, 4);//uszkodzony
-			CP[playerid]=963;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Lotnisko - El Corona - Commerce - Market - Marina - Rodeo\n{808080}Nastêpny przystanek: Pas Startowy");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocean Docks – Fabryka", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==963)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1895.3,-1935.31,13.399, 4);
-			CP[playerid]=964;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: El Corona - Commerce - Market - Marina - Rodeo\n{808080}Nastêpny przystanek: Wiadukt");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Lotnisko – Pas Startowy", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==964)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1742.6479,-1816.3966,12.9351, 4);
-			CP[playerid]=965;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: El Corona - Commerce - Market - Marina - Rodeo\n{808080}Nastêpny przystanek: Unity Station");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}El Corona – Wiadukt", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==965)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1463.1995,-1868.8994,13.3999, 4); //Przystanek commerce VB prawa
-			CP[playerid]=966;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Commerce - Market - Marina - Rodeo\n{808080}Nastêpny przystanek: Verdant Bluffs / Urz¹d Miasta");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}El Corona – Unity Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==966)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1181.8771,-1748.0386,12.9679, 4);
-			CP[playerid]=967;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Commerce - Market - Marina - Rodeo\n{808080}Nastêpny przystanek: Zajezdnia Autobusowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Commerce – Verdant Bluffs / Urz¹d Miasta", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==967)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1084.2205,-1569.8024,12.9443, 4);
-			CP[playerid]=968;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Market - Marina - Rodeo\n{808080}Nastêpny przystanek: Galerie Handlowe");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Commerce – Basen „Tsunami” / Zajezdnia Autobusowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==968)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 824.0928,-1624.2281,12.9477, 4);
-			CP[playerid]=969;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Marina - Rodeo\n{808080}Nastêpny przystanek: Burger Shot");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Market – Galerie handlowe", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==969)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 639.6337,-1452.6040,13.7631, 4);
-			CP[playerid]=970;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Rodeo\n{808080}Nastêpny przystanek: G³ówna Siedziba FBI");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Marina – Burger Shot", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==970)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 535.0409,-1243.6492,16.0884, 4);// wypozyczalnia prawa
-			CP[playerid]=971;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Rodeo\n{808080}Nastêpny przystanek: Wypo¿yczalnia Aut");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Rodeo – G³ówna siedziba FBI", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==971)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 341.5396,-1531.1141,32.8992, 4);
-			CP[playerid]=972;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Mrucznik Tower\n{778899}Trasa: Rodeo\n{808080}Nastêpny przystanek: MRUCZNIK TOWER");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Rodeo – Wypo¿yczalnia Pojazdów", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==972)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 276.5778,-1575.9937,32.8686, 4); //Koñcowy CP
-			CP[playerid]=1004;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Rodeo - Marina - Market - Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Odjazd nast¹pi po sygnale");
-			ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}Rodeo - Mrucznik Tower", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! Ukoñczy³eœ trasê do Mrucznik Tower! (1/2 zadania). Mo¿esz odpocz¹æ.");
-			SendClientMessage(playerid, COLOR_GREEN, "Je¿eli chcesz jechaæ dalej wykonaj nawrót kieruj¹c siê do kolejnego checkpointu!");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==1004)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 577.4726,-1236.8068,17.0600, 4); //Druga strona ulicy CP
-			CP[playerid]=973;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Rodeo - Marina - Market - Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: Wypo¿yczalnia Aut");
-			ProxDetector(10.0, playerid, "Linia numer: {ADFF2F}96 (zielona) {FFFF00}Kierunek ==> {ADFF2F}WIÊZIENIE STANOWE", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-	        TogglePlayerControllable(playerid, 1);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==973)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 625.2355,-1470.5664,13.9573, 4); //Druga strona ulicy CP
-			CP[playerid]=974;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Rodeo - Marina - Market - Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: G³ówna Siedziba FBI");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Rodeo – Wypo¿yczalnia Pojazdów", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==974)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 840.9546,-1614.0339,12.9483, 4);
-			CP[playerid]=975;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Marina - Market - Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: Burger Shot");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Rodeo – G³ówna siedziba FBI", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==975)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1105.6156,-1574.0813,12.9401, 4);
-			CP[playerid]=976;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Market - Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: Galerie Handlowe");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Marina – Burger Shot", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==976)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1173.1520,-1825.2843,13.1789, 4);
-			CP[playerid]=977;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: Zajezdnia Autobusowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Market – Galerie handlowe", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==977)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1492,-1875.8005,13.9999, 4);
-			CP[playerid]=978;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Commerce - El Corona - Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: Verdant Bluffs / Urz¹d Miasta");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Commerce – Basen „Tsunami” / Zajezdnia Autobusowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==978)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1791.1583,-1833.9706,12.9519, 4); //wiadukt lewy
-			CP[playerid]=979;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: El Corona - Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: Unity Station");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Commerce – Verdant Bluffs", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==979)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1895.3,-1935.31,13.399, 4);
-			CP[playerid]=980;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: El Corona - Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: Wiadukt");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}El Corona – Unity Station", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==980)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1977.1256,-2168.7412,12.9419, 4);
-			CP[playerid]=981;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Lotnisko - Ocean Docks\n{808080}Nastêpny przystanek: Pas Startowy");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}El Corona – Wiadukt", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==981)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2228.8030,-2198.2109,12.9153, 4);
-			CP[playerid]=982;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Fabryka");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Lotnisko – Pas Startowy", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==982)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2335.9858,-2355.0427,13.3828, 4);
-			CP[playerid]=983;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Baza Wosjkowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Fabryka", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==983)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2495.6113,-2408.0415,13.5445, 4);
-			CP[playerid]=984;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: Baza Wosjkowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==984)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
-			CP[playerid]=985;
-			Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia nr. 96\nKierunek: Wiêzienie Stanowe\n{778899}Trasa: Ocean Docks\n{808080}Nastêpny przystanek: WIÊZIENIE STANOWE");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 96: {FFFF00}Przystanek {EE82EE}Ocen Docks – Baza Wosjkowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+310$");
-		}
-		else if(CP[playerid]==985)
-		{
-		    if(BusCzit[playerid] == 1)
-			{
-			    KickEx(playerid);
-			}
-			else
-			{
-			    ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}Ocean Docks – Wiêzienie Stanowe", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-	   			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 96 zakoñczona!_____________|");
-				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 7440$ premii za dwukrotne przejechanie trasy! (24 przystanki)");
-				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
-				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez sygan³ GPS).");
-				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				SendClientMessage(playerid, COLOR_GRAD1, "Skill +1");
-				PlayerInfo[playerid][pCarSkill] ++;
-                if(GetPlayerFraction(playerid) == FRAC_KT) Sejf_Add(FRAC_KT, 7440);
-                else DajKase(playerid, 7440);
-				CP[playerid] = 0;
-				PlayerInfo[playerid][pLinia96] = 0;
-				PlayerInfo[playerid][pNatrasiejest] = 0;
-				ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz swój kurs:", "Linia 55 - niebieska (230$/p , 9min, 21p, +2)\nLinia 72 - pomarañczowa (200$/p, 6min, 15p, +1)\nLinia 96 - zielona 4s (310$/p, 8min, 24p, +1)\nLinia 82 ¿ó³ta 5s (510$/p , 11min, 18p, +3)\nLinia 85 3s (270$/p , ? min, 24p, +2)\nWycieczka 5s\nPowrót do bazy\nPomoc", "Wybierz", "Wyjdz");
-				if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
-				{
-					Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia ZAJ\nLinia 96 do zajezdni Ocean Docks\n{778899}Trasa: Ocean Docks\n{808080}Zatrzymuje siê na przystankach");
-					SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
-					CP[playerid]=1200;
-				}
-				else if(PlayerInfo[playerid][pJob] == 10)
-				{
-					Przystanek(playerid, 0xAFAFAFFF, "{ADFF2F}Linia ZAJ\nLinia 96 do zajezdni Commerce\n{778899}Trasa: Ocean Docks - Lotnisko - El Corona - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
-					SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
-					CP[playerid]=1201;
-    			}
-			}
-		}
-	}
-	if(PlayerInfo[playerid][pLinia85]==1)//linia 85 system autobusów
-	{
-		if(CP[playerid]==501) //Sprawdza czy dojecha³ do nastepnego
-		{
-		    DisablePlayerCheckpoint(playerid);
-			/*GetPlayerName(playerid,sendername,sizeof(sendername));
-			format(string, sizeof(string), "%s rozpocz¹³ trasê  na linii autobusowej numer {FF00FF}85 Wysypisko <==> Szpital{00D900C8}. Szczegó³owe informacje o trasach na /businfo", sendername);
-			OOCNews(TEAM_GROVE_COLOR,string);*/
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Willowfield - East Los Santos - Las Colinas - Jefferson - Glen Park - Downtown - Market\n{808080}Nastêpny przystanek: Cluckin Bell");
-			ProxDetector(10.0, playerid, "Linia numer: {FF00FF}85 (ró¿owa) {FFFF00}Kierunek ==> {FF00FF}SZPITAL", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SetPlayerCheckpoint(playerid, 2415.8232,-1912.1696,12.9518, 4); //... ustawia nastepnego
-			CP[playerid]=502; //przypisuje id dla cp up
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);//
-		}
-		else if(CP[playerid]==502)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2488.0164,-1506.9924,23.3944, 4);//uszkodzony
-			CP[playerid]=503;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: East Los Santos - Las Colinas - Jefferson - Glen Park - Downtown - Market\n{808080}Nastêpny przystanek: Myjnia Samochodowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Willowfield – Cluck'in Bell", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==503)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2852.0789,-1563.2421,10.4871, 4);
-			CP[playerid]=504;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: East Los Santos - Las Colinas - Jefferson - Glen Park - Downtown - Market\n{808080}Nastêpny przystanek: Baza Mechaników");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Willowfield – Myjnia Samochodowa", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==504)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2835.9119,-1100.0378,23.6009, 4);
-			CP[playerid]=505;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: East Los Santos - Las Colinas - Jefferson - Glen Park - Downtown - Market\n{808080}Nastêpny przystanek: Agencja Ochrony");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}East Los Santos – Baza Mechaników", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==505)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2541.5476,-1050.6461,68.9680, 4); //Przystanek commerce VB prawa
-			CP[playerid]=506;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Las Colinas - Jefferson - Glen Park - Downtown - Market\n{808080}Nastêpny przystanek: Las Colinas 13");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}East Los Santos – Agencja Ochrony", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==506)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2202.1843,-1011.6302,61.2425, 4);
-			CP[playerid]=507;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Las Colinas - Jefferson - Glen Park - Downtown - Market\n{808080}Nastêpny przystanek: Las Colinas 32");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Las Colinas 13", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==507)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2248.4707,-1139.6617,25.7001, 4);
-			CP[playerid]=508;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Jefferson - Glen Park - Downtown - Market\n{808080}Nastêpny przystanek: Motel Jefferson");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Las Colinas 34", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==508)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1967.2327,-1198.9353,25.2217, 4);
-			CP[playerid]=509;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Glen Park - Downtown - Market\n{808080}Nastêpny przystanek: Glen Park");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Jefferson – Motel Jefferson", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==509)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1810.9371,-1181.5383,23.2077, 4);
-			CP[playerid]=510;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Downtown - Market\n{808080}Nastêpny przystanek: Mrucznikowy Gun Shop");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Glen Park", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==510)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1449.7135,-1037.4396,23.2312, 4);// wypozyczalnia prawa
-			CP[playerid]=511;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Downtown - Market\n{808080}Nastêpny przystanek: Verte Bank");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Downtown – Mrucznikowy Gun Shop", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==511)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1193.7321,-1358.3251,12.9416, 4);
-			CP[playerid]=512;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Szpital\n{778899}Trasa: Market\n{808080}Nastêpny przystanek: SZPITAL");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Downtown – Bank", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==512)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1203.7321,-1358.3251,12.9416, 4); //Koñcowy CP
-			CP[playerid]=1005;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Market - Downtown - Glen Park - Jefferson - Las Colinas - East LS - Willowfield\n{808080}Odjazd nast¹pi po sygnale");
-			ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}Market – Szpital", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Komunikat_____________|");
-			SendClientMessage(playerid, COLOR_GREEN, "Gratulacje! Ukoñczy³eœ trasê do Mrucznik Tower! (1/2 zadania). Mo¿esz odpocz¹æ.");
-			SendClientMessage(playerid, COLOR_GREEN, "Je¿eli chcesz jechaæ dalej wykonaj nawrót kieruj¹c siê do kolejnego checkpointu!");
-			SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD GPS<<_____________|");
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==1005)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1452.3877,-1031.1976,23.2277, 4); //Druga strona ulicy CP
-			CP[playerid]=513;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Downtown - Glen Park - Jefferson - Las Colinas - East LS - Willowfield\n{808080}Nastêpny przystanek: Verte Bank");
-			ProxDetector(10.0, playerid, "Linia numer: {FF00FF}85 (ró¿owa) {FF00FF}Kierunek ==> {ADFF2F}WYSYPISKO", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-	        TogglePlayerControllable(playerid, 1);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==513)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1781.2218,-1167.9779,23.2261, 4); //Druga strona ulicy CP
-			CP[playerid]=514;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Downtown - Glen Park - Jefferson - Las Colinas - East LS - Willowfield\n{808080}Nastêpny przystanek: Mrucznikowy Gun Shop");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Downtown – Bank", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==514)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 1972.9082,-1198.7592,25.2214, 4);
-			CP[playerid]=515;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Glen Park - Jefferson - Las Colinas - East LS - Willowfield\n{808080}Nastêpny przystanek: Glen Park");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Downtown – Mrucznikowy Gun Shop", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==515)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2255.2795,-1145.6331,26.0940, 4);
-			CP[playerid]=516;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Jefferson - Las Colinas - East Los Santos - Willowfield\n{808080}Nastêpny przystanek: Motel Jefferson");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Glen Park", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==516)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2193.2642,-1012.3875,61.8830, 4);
-			CP[playerid]=517;
-		    Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Las Colinas - East Lost Santos - Willowfield\n{808080}Nastêpny przystanek: Las Colinas 34");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Jefferson – Motel Jefferson", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==517)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2520.0220,-1044.3973,68.9851, 4);
-			CP[playerid]=518;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Las Colinas - East Lost Santos - Willowfield\n{808080}Nastêpny przystanek: Las Colinas 13");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Las Colinas 34", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==518)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2839.9409,-1098.3546,23.5453, 4); //wiadukt lewy
-			CP[playerid]=519;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: East Lost Santos - Willowfield\n{808080}Nastêpny przystanek: Agencja Ochrony");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Las Colinas 13", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==519)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2864.6250,-1539.0991,10.4947, 4);
-			CP[playerid]=520;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: East Lost Santos - Willowfield\n{808080}Nastêpny przystanek: Baza Mechaników");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}East Los Santos – Agencja Ochrony", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==520)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2514.7009,-1501.5859,23.8281, 4);
-			CP[playerid]=521;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Willowfield\n{808080}Nastêpny przystanek: Myjnia Samochodowa");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}East Los Santos – Baza Mechaników", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==521)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2411.1692,-1908.5591,12.9485, 4);
-			CP[playerid]=522;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Willowfield\n{808080}Nastêpny przystanek: Cluckin Bell");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Willowfield – Myjnia", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==522)
-		{
-			DisablePlayerCheckpoint(playerid);
-			SetPlayerCheckpoint(playerid, 2118.5024,-1891.6978,12.9058, 4);
-			CP[playerid]=523;
-			Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia nr. 85\nKierunek: Wysypisko\n{778899}Trasa: Willowfield\n{808080}Nastêpny przystanek: WYSYPISKO");
-			ProxDetector(10.0, playerid, "{FFFFFF}Linia 85: {FFFF00}Przystanek {EE82EE}Willowfield – Clukin Bell", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-			PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
-			SendClientMessage(playerid, COLOR_GREEN, "+270$");
-		}
-		else if(CP[playerid]==523)
-		{
-		    if(BusCzit[playerid] == 1)
-			{
-			    KickEx(playerid);
-			}
-			else
-			{
-			    Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia ZAJ\nLinia 85 do zajezdni Ocead Docks\n{778899}Trasa: Willowfield\n{808080}Zatrzymuje siê na przystankach");
-			    ProxDetector(10.0, playerid, "Przystanek koñcowy: {EE82EE}Willowfield – Wysypisko", COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-	   			SendClientMessage(playerid, COLOR_YELLOW, "|_____________Trasa linii 85 zakoñczona!_____________|");
-				SendClientMessage(playerid, COLOR_GREEN, "Otrzymujesz 6480$ premii za dwukrotne przejechanie trasy! (24 przystanki)");
-				SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
-				SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni LSBD (wskazanej przez GPS).");
-				SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>Los Santos Bus Department<<_____________|");
-				SendClientMessage(playerid, COLOR_GRAD1, "Skill +2");
-				PlayerInfo[playerid][pCarSkill] += 2;
-                if(GetPlayerFraction(playerid) == FRAC_KT) Sejf_Add(FRAC_KT, 6480);
-                else DajKase(playerid, 6480);
-				CP[playerid] = 0;
-				PlayerInfo[playerid][pLinia96] = 0;
-				PlayerInfo[playerid][pNatrasiejest] = 0;
-				ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz swój kurs:", "Linia 55 -niebieska (230$/p , 9min, 21p, +2)\nLinia 72- pomarañczowa (200$/p, 6min, 15p, +1)\nLinia 96 - zielona 4s (310$/p, 8min, 24p, +1)\nLinia 82 ¿ó³ta 5s (510$/p , 11min, 18p, +3)\nLinia 85 3s (270$/p , ? min, 24p, +2)\nWycieczka 5s\nPowrót do bazy\nPomoc", "Wybierz", "Wyjdz");
-				if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10)
-				{
-					Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia ZAJ\nLinia 85 do zajezdni Ocean Docks\n{778899}Trasa: Willowfield - Ocean Docks\n{808080}Zatrzymuje siê na przystankach");
-					SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
-					CP[playerid]=1200;
-				}
-				else if(PlayerInfo[playerid][pJob] == 10)
-				{
-					Przystanek(playerid, 0xAFAFAFFF, "{FF00FF}Linia ZAJ\nLinia 85 do zajezdni Commerce\n{778899}Trasa: Willowfield - Idlewood - Pershing Square - Commerce\n{808080}Zatrzymuje siê na przystankach");
-					SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
-					CP[playerid]=1201;
-    			}
-			}
-		}
-	}
-//koniec linii 85 i system autobusów
-	else if(CP[playerid] == 5)
+	if(CP[playerid] == 5)
 	{
 	    GameTextForPlayer(playerid, "~y~W punkcie misji", 2500, 1);
 		CP[playerid] = 0;
@@ -4118,94 +2543,6 @@ public OnPlayerEnterCheckpoint(playerid)
 				}
 	        }
 	    }
-	}
-	else if(MissionCheckpoint[playerid] > 0 && PlayMission[kToggle] == 1)//Missions + Checkpoint on toggle
-	{
-		    switch(MissionCheckpoint[playerid])
-		    {
-	        	case 1:
-		        {
-					format(string, sizeof(string), "%s", PlayMission[kGText1]);
-					GameTextForPlayer(playerid, string, 8000, 3);
-					format(string, sizeof(string), "%s", PlayMission[kText4]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText5]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText6]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					DisablePlayerCheckpoint(playerid);
-					SetPlayerCheckpoint(playerid, PlayMission[kCP2][0], PlayMission[kCP2][1], PlayMission[kCP2][2], 8);
-					MissionCheckpoint[playerid] = 2;
-		        }
-		        case 2:
-		        {
-		            format(string, sizeof(string), "%s", PlayMission[kGText2]);
-					GameTextForPlayer(playerid, string, 8000, 3);
-					format(string, sizeof(string), "%s", PlayMission[kText7]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText8]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText9]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					DisablePlayerCheckpoint(playerid);
-					SetPlayerCheckpoint(playerid, PlayMission[kCP3][0], PlayMission[kCP3][1], PlayMission[kCP3][2], 8);
-					MissionCheckpoint[playerid] = 3;
-		        }
-		        case 3:
-		        {
-		            format(string, sizeof(string), "%s", PlayMission[kGText3]);
-					GameTextForPlayer(playerid, string, 8000, 3);
-					format(string, sizeof(string), "%s", PlayMission[kText10]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText11]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText12]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					DisablePlayerCheckpoint(playerid);
-					SetPlayerCheckpoint(playerid, PlayMission[kCP4][0], PlayMission[kCP4][1], PlayMission[kCP4][2], 8);
-					MissionCheckpoint[playerid] = 4;
-		        }
-		        case 4:
-		        {
-		            format(string, sizeof(string), "%s", PlayMission[kGText4]);
-					GameTextForPlayer(playerid, string, 8000, 3);
-					format(string, sizeof(string), "%s", PlayMission[kText13]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText14]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText15]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					DisablePlayerCheckpoint(playerid);
-					SetPlayerCheckpoint(playerid, PlayMission[kCP5][0], PlayMission[kCP5][1], PlayMission[kCP5][2], 8);
-					MissionCheckpoint[playerid] = 5;
-		        }
-		        case 5:
-		        {
-		            format(string, sizeof(string), "%s", PlayMission[kGText5]);
-					GameTextForPlayer(playerid, string, 8000, 3);
-					format(string, sizeof(string), "%s", PlayMission[kText16]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText17]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					format(string, sizeof(string), "%s", PlayMission[kText18]);
-					SendClientMessage(playerid, COLOR_YELLOW2, string);
-					DisablePlayerCheckpoint(playerid);
-					SetPlayerCheckpoint(playerid, PlayMission[kCP6][0], PlayMission[kCP6][1], PlayMission[kCP6][2], 8);
-					MissionCheckpoint[playerid] = 6;
-		        }
-		        case 6:
-		        {
-		            format(string, sizeof(string), "%s", PlayMission[kGText6]);
-					GameTextForPlayer(playerid, string, 8000, 3);
-					format(string, sizeof(string), "..:: Ukoñczona Misje: %s | Zap³ata: $%d ::..", PlayMission[kTitle], PlayMission[kReward]);
-					SendClientMessage(playerid, COLOR_GREEN, string);
-					DisablePlayerCheckpoint(playerid);
-		  			DajKase(playerid, PlayMission[kReward]);//moneycheat
-					PlayerInfo[playerid][pMissionNr] = PlayerOnMission[playerid];
-					MissionCheckpoint[playerid] = 0;
-					PlayerOnMission[playerid] = 0;
-		        }
-		    }
 	}
 	else if(zawodnik[playerid] == 1)
 	{
@@ -4655,8 +2992,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					if (CarData[lcarid][c_Rang]-1 != playerid)
 					{
 						new stringDialog[128];
-						new costBike = BIKE_COST;
-						format(stringDialog, sizeof(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 15 minut", costBike);
+						new cost = GetVehicleHireCost(vehicleid);
+						format(stringDialog, sizeof(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 15 minut", cost);
 		    			TogglePlayerControllable(playerid, 0);
 						HireCar[playerid] = vehicleid;
 						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", stringDialog, "Wynajmij", "WyjdŸ");
@@ -4694,7 +3031,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		if(IsACopCar(GetPlayerVehicleID(playerid)) && IsAPolicja(playerid)) sendTipMessageEx(playerid, COLOR_BLUE, "Po³¹czy³eœ siê z komputerem policyjnym, wpisz /mdc aby zobaczyæ kartotekê policyjn¹");
         if(newstate == PLAYER_STATE_DRIVER) TJD_CallEnterVeh(playerid, GetPlayerVehicleID(playerid));
     }
-    else if(oldstate == PLAYER_STATE_DRIVER)
+    else if(oldstate == PLAYER_STATE_DRIVER || oldstate == PLAYER_STATE_EXIT_VEHICLE)
     {
 		DisableCarBlinking(GetPVarInt(playerid, "blink-car"));
         new vehicleid = GetPVarInt(playerid, "car-id");
@@ -4711,6 +3048,9 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		{
             Taxi_FareEnd(playerid);
 		}
+
+		DrugDealer_OnPlayerExitVehicle(playerid);
+
         TJD_CallExitVeh(playerid);
 
         if(NieSpamujKradnij[playerid] == 1 || HireCar[playerid] != 0)
@@ -4728,10 +3068,8 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     }
     if(oldstate == PLAYER_STATE_PASSENGER)
     {
-		if(TransportDist[playerid] > 0.0 && TransportDriver[playerid] < 999) //Taxi client pay
-		{
-            Taxi_Pay(playerid);
-		}
+		Driver_OnPassengerExitVehicle(playerid);
+
 		PlayerTextDrawHide(playerid, Licznik[playerid]);
     }
 	if(newstate == PLAYER_STATE_ONFOOT)
@@ -4761,57 +3099,16 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
             if(RadioSANDos[0] != EOF)
 				PlayAudioStreamForPlayer(playerid, RadioSANDos);
         }
-	    new name[MAX_PLAYER_NAME];
-	    GetPlayerName(playerid, name, sizeof(name));
+
 	    new vehicleid = GetPlayerVehicleID(playerid);
 	    foreach(new i : Player)
-	    {
-			if(IsPlayerInVehicle(i, vehicleid) && GetPlayerState(i) == 2 && TransportDuty[i] > 0)
+		{
+			if(IsPlayerInVehicle(i, vehicleid) && GetPlayerState(i) == 2)
 			{
-				if(kaska[playerid] < TransportValue[i])
-				{
-					format(string, sizeof(string), "* Potrzebujesz $%d aby wejœæ.", TransportValue[i]);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-					RemovePlayerFromVehicleEx(playerid);
-				}
-				else
-				{
-					if(TransportDuty[i] == 1)
-					{
-						format(string, sizeof(string), "* Stawka wynosi $%d za kilometr.", TransportValue[i]);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Klient %s wszed³ do Twojej taryfy.", name);
-						SendClientMessage(i, COLOR_LIGHTBLUE, string);
-                        if(PlayerInfo[playerid][pLevel] < 3)
-                        {
-                            ZabierzKase(playerid, floatround(TransportValue[i]/4));//moneycheat
-                            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Jesteœ nowym graczem, obowi¹zuje Cie rabat 75 procent na taksówkê.");
-                        }
-                        else
-                        {
-                            ZabierzKase(playerid, floatround(TransportValue[i]));//moneycheat
-                        }
-                        TransportMoney[i] += TransportValue[i];
-                        SetPVarInt(playerid, "taxi-slot", GetPlayerVehicleSeat(playerid)-1);
-						TransportDist[i] = 0.0;
-						TransportDist[playerid] = 0.0;
-						TransportDriver[playerid] = i;
-                        TransportClient[i][GetPVarInt(playerid, "taxi-slot")] = playerid;
-                        Taxi_ShowHUD(playerid);
-                        Taxi_ShowHUD(i);
-					}
-					else if(TransportDuty[i] == 2)
-					{
-						format(string, sizeof(string), "* Zap³aci³eœ $%d Za bilet.", TransportValue[i]);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Klient %s wszed³ do autobusu i skasowa³ bilet.", name);
-						SendClientMessage(i, COLOR_LIGHTBLUE, string);
-                        ZabierzKase(playerid, TransportValue[i]);//moneycheat
-					    TransportMoney[i] += TransportValue[i];
-					}
-				}
+				Driver_OnPassengerEnterVeh(i, playerid);
+				break;
 			}
-	    }
+		}
 	}
 	if(newstate == PLAYER_STATE_WASTED)
 	{
@@ -4821,7 +3118,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 	{// 38 / 49 / 56 = SS
 		new newcar = GetPlayerVehicleID(playerid);
         //NOWY SYSTEM AUT FRAKCYJNYCH I PUBLICZNYCH
-        if(newcar <= CAR_End) //do kradziezy
+        if(Car_IsStealable(newcar)) //do kradziezy
         {
 			new is_veh_deluxe = false, steal_impossible = false;
 
@@ -4856,7 +3153,10 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 				if(engine) SetVehicleParamsEx(newcar, 0, lights, alarm, doors, bonnet, boot, objective);
 			}
         }
-		gLastCar[playerid] = newcar;
+		if(newcar != INVALID_VEHICLE_ID) 
+		{
+			gLastCar[playerid] = newcar;
+		}
 	}
 	if(newstate == PLAYER_STATE_SPAWNED)
 	{
@@ -5597,7 +3897,7 @@ OnPlayerLogin(playerid, password[])
 				PlayerInfo[playerid][pWL] = 10; 
 				sendTipMessage(playerid, "Masz ju¿ 10 poziom poszukiwania! Czêœæ jest spowodowana d³ugami! Zrób coœ z tym!"); 
 			}
-			ZabierzKase(playerid, -PlayerInfo[playerid][pCash]);
+			ZabierzKase(playerid, PlayerInfo[playerid][pCash]);
 		}
 		else if(PlayerInfo[playerid][pCash] >= 0)
 		{
@@ -7372,10 +5672,7 @@ public OnTrailerUpdate(playerid, vehicleid)
 
 public OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
-	// if(IsVehicleInCarPark(vehicleid))
-	// {
-	// 	return 0;//Testowe dzia³anie
-	// }
+	AC_OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, new_x, new_y, new_z, vel_x, vel_y, vel_z);
     return 1;
 }
 

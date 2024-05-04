@@ -58,12 +58,17 @@ DiagnosePlayer(playerid, diagnoserid)
 	return 1;
 }
 
-ShowDiseaseList(playerid)
+ShowDiseaseList(playerid, showAll=false)
 {
 	SendClientMessage(playerid, COLOR_WHITE, "|__________________ Choroby __________________|");
 	new string[144];
 	for(new i; i<_:eDiseases; i++) 
 	{
+		if(DiseaseData[i][CureCost] == 0 && !showAll)
+		{
+			continue;
+		}
+
 		if(i%5 == 0) 
 		{
 			if(i != 0) SendClientMessage(playerid, COLOR_GREY, string);

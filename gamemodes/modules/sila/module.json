@@ -2,6 +2,7 @@
     "name": "sila",
     "description": "System siły.",
     "author": "Simeone",
+    "callbacks": true,
     "commands": true,
     "date": "04.05.2019"
 }

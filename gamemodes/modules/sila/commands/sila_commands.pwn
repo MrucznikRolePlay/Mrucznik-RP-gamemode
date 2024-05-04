@@ -30,10 +30,12 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "biegnij\biegnij.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_biegnij();
     
 }

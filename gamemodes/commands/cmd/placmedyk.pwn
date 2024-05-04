@@ -46,7 +46,7 @@ YCMD:placmedyk(playerid, params[], help)
 	{
 	    if(giveplayerid != INVALID_PLAYER_ID)
 	    {
-	        if(ProxDetectorS(8.0, playerid, giveplayerid) && PlayerInfo[giveplayerid][pMember] == 4)
+	        if(ProxDetectorS(8.0, playerid, giveplayerid) && PlayerInfo[giveplayerid][pMember] == FRAC_ERS)
 			{
 			    if(giveplayerid == playerid)
 			    {

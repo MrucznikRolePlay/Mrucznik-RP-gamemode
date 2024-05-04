@@ -69,6 +69,9 @@
 #define NOT_FOUND					-1			//u¿ywane do strfind
 
 #define BIKE_COST 30000
+#define SANDKING_COST 250000
+#define HOTRING_COST 500000
+#define WODOLOT_COST 500000
 //KB
 #define MAX_MONEY_IN_BANK 100000000
 
@@ -175,23 +178,6 @@
 #define NG_JAIL_Z 53.6603
 
 #define MAX_DOORS   20 //tymczasowe
-
-#define JOB_LOWCA       1
-#define JOB_LAWYER      2
-#define JOB_PROSTITUTE  3
-#define JOB_DRAGDEALER  4
-#define JOB_CARTHIEF    5
-#define JOB_REPORTER    6
-#define JOB_MECHANIC    7
-#define JOB_BODYGUARD   8
-#define JOB_GUNDEALER   9
-#define JOB_BUSDRIVER   10
-#define JOB_PIZZA       11
-#define JOB_BOXER       12
-//#define JOB_UNKNOWN
-//#define JOB_UNKNOWN
-#define JOB_PAPERMAN    15
-#define JOB_TRUCKER     16
 
 //13.06.2014
 #define FRAC_NONE   0
@@ -543,6 +529,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define CAR_OWNER_JOB       4
 #define CAR_OWNER_SPECIAL   5
 #define CAR_OWNER_PUBLIC    6
+#define CAR_OWNER_STEAL     7
 
 //Czêœci cia³a
 #define BONE_HEAD 2

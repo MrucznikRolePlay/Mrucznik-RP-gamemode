@@ -64,7 +64,7 @@ YCMD:dr(playerid, params[], help)
                 else format(cbr, 16, "Wy³¹cz");
                 format(komunikat, sizeof(komunikat), "%s\nCB-Radio (%s)", komunikat, cbr); //+ 18char
             }
-            if(veh > CAR_End)
+            if(!Car_IsStealable(veh))
             {
                 if(CarData[VehicleUID[veh][vUID]][c_Neon] != 0)
     			{

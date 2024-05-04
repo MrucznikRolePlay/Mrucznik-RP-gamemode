@@ -69,15 +69,7 @@ YCMD:sluzba(playerid, params[], help)
         GetPlayerName(playerid, sendername, sizeof(sendername));
         if(frac == 1)
         {
-            if (PlayerToPoint(3, playerid,255.3,77.4,1003.6)
-            || PlayerToPoint(5, playerid, 266.7904,118.9303,1004.6172)
-            || PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609) //STARE DUTY
-            || PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
-            || PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
-            || PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
-			|| PlayerToPoint(3, playerid, 2522.8916,-2441.6270,13.6435)
-            || (PlayerToPoint(4,playerid, 1562.0536,-1649.9120,28.5040) && GetPlayerVirtualWorld(playerid) == 27))//nowe komi by charlie)//nowe komi by dywan
-
+            if (IsAtDutyPlace(playerid))
             {
                 if(OnDuty[playerid]==0)
                 {
@@ -98,6 +90,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerHealth(playerid, 100);
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     SetPlayerArmour(playerid, 0.0);
                     PrzywrocBron(playerid);
                     SetPlayerToTeamColor(playerid);
@@ -112,11 +105,7 @@ YCMD:sluzba(playerid, params[], help)
         }
         else if(frac == 2)
         {
-            new vw = GetPlayerVirtualWorld(playerid);
-            if ((vw == 2 && PlayerToPoint(3.5, playerid,592.5598,-1477.5116,82.4736)) //nowe FBI by Ubunteq
-            || (vw == 2 && PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5))//nowe domy
-            || (vw == 2 && PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5))//nowe domy /duty w domu
-            || (vw == 0 && PlayerToPoint(2, playerid, 596.5255, -1489.2544, 15.3587))) // winda fbi
+            if (IsAtDutyPlace(playerid))
             {
                 if(OnDuty[playerid]==0)
                 {
@@ -136,6 +125,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     PrzywrocBron(playerid);
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
@@ -149,7 +139,7 @@ YCMD:sluzba(playerid, params[], help)
         }
         else if(frac == 3)
         {
-            if ( IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) || IsPlayerInRangeOfPoint(playerid, 5.0, 609.0364,-555.1090,19.4573) ) //PlayerToPoint(3, playerid,255.3,77.4,1003.6) || PlayerToPoint(3,playerid,266.7904,118.9303,1004.6172) || PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
+            if(IsAtDutyPlace(playerid))
             {
                 if(OnDuty[playerid]==0)
                 {
@@ -169,6 +159,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     SetPlayerToTeamColor(playerid);
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     PrzywrocBron(playerid);
@@ -204,6 +195,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0.0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     PrzywrocBron(playerid);
                 }
@@ -234,6 +226,23 @@ YCMD:sluzba(playerid, params[], help)
             {
                 sendTipMessage(playerid, "Nie jesteœ w szatni !");
                 return 1;
+            }
+        }
+        else if(GetPlayerJob(playerid) == JOB_MEDIC)
+        {
+            if(JobDuty[playerid] == 1)
+            {
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie LSRS, nie bêdziesz widzia³ zg³oszeñ.");
+                JobDuty[playerid] = 0;
+                Medics -= 1;
+                SetPlayerToTeamColor(playerid);
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie LSRS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
+                JobDuty[playerid] = 1;
+                Medics += 1;
+                SetPlayerToTeamColor(playerid);
             }
         }
         else if(frac == 11)
@@ -276,6 +285,7 @@ YCMD:sluzba(playerid, params[], help)
                     SetPlayerArmour(playerid, 0);
                     SetPlayerHealth(playerid, 100);
                     OnDuty[playerid] = 0;
+					SecretAgent[playerid] = 0;
                     SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                     SetPlayerToTeamColor(playerid);
                     PrzywrocBron(playerid);

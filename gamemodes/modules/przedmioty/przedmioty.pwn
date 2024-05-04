@@ -333,6 +333,7 @@ PrzedmiotyZmienBron(playerid, weaponid, weapondata = 0)
 		}
 	}
 
+    SetTimerEx("AntySpamTimer",2000,0,"d",playerid);
 	AntySpam[playerid] = 1;
 	//new timerid = SetTimerEx("PlayerChangeWeapon", GetWeaponChangeDelay(MyWeapon[playerid], weaponid), false, "dd", playerid, weaponid);
 	new timerid = 1;

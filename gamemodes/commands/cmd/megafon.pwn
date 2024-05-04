@@ -139,7 +139,7 @@ YCMD:megafon(playerid, params[], help)
 		    format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
 		}
-		else if(PlayerInfo[playerid][pMember] == 4 || PlayerInfo[playerid][pLider] == 4)
+		else if(PlayerInfo[playerid][pMember] == FRAC_ERS || PlayerInfo[playerid][pLider] == FRAC_ERS)
 		{
 		    format(string, sizeof(string), "[%s:o< %s]", sendername, params);
 		    ProxDetector(60.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);

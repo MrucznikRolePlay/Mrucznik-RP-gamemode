@@ -530,6 +530,18 @@ stock ChatMe(playerid, text[], Float:zasieg=ME_RANGE)
 	return 1;
 }
 
+stock ChatMePrefixed(playerid, prefix[], text[], Float:zasieg=ME_RANGE)
+{
+    new string[256];
+	format(string, sizeof(string), "* %s %s *", prefix, text);
+	SetPlayerChatBubble(playerid,string, COLOR_PURPLE, zasieg, CHATBUBBLE_TIME);
+    format(string, sizeof(string), "* %s %s %s", prefix, GetNick(playerid), text);
+    RangeMessage(playerid, COLOR_PURPLE, string, zasieg);
+	format(string, sizeof(string), "--/me:-- %s", text);
+	Log(chatLog, INFO, "Chat me: %s", text);
+	return 1;
+}
+
 stock ChatDo(playerid, text[], Float:zasieg=ME_RANGE)
 {
     new string[256];
@@ -590,60 +602,15 @@ stock MruMessageToAll(kolor, text[])
 	return 1;
 }
 
-stock MruMessageF(playerid, color, fstring[], {Float, _}:...) //by Y_Less edited by Mrucznik
+stock MruMessageF(playerid, color, message[]) //by Y_Less edited by Mrucznik
 {
-    static const STATIC_ARGS = 3;
-    new n = (numargs() - STATIC_ARGS) * BYTES_PER_CELL;
-    if(n)
-    {
-        new message[256],arg_start,arg_end;
-        #emit CONST.alt        fstring
-        #emit LCTRL          5
-        #emit ADD
-        #emit STOR.S.pri        arg_start
-
-        #emit LOAD.S.alt        n
-        #emit ADD
-        #emit STOR.S.pri        arg_end
-        do
-        {
-            #emit LOAD.I
-            #emit PUSH.pri
-            arg_end -= BYTES_PER_CELL;
-            #emit LOAD.S.pri      arg_end
-        }
-        while(arg_end > arg_start);
-
-        #emit PUSH.S          fstring
-        #emit PUSH.C          256
-        #emit PUSH.ADR         message
-
-        n += BYTES_PER_CELL * 3;
-        #emit PUSH.S          n
-        #emit SYSREQ.C         format
-
-        n += BYTES_PER_CELL;
-        #emit LCTRL          4
-        #emit LOAD.S.alt        n
-        #emit ADD
-        #emit SCTRL          4
-
-        if(playerid == INVALID_PLAYER_ID)
-        {
-            #pragma unused playerid
-            return MruMessageToAll(color, message);
-        } else {
-            return MruMessage(playerid, color, message);
-        }
-    } else {
-        if(playerid == INVALID_PLAYER_ID)
-        {
-            #pragma unused playerid
-            return MruMessageToAll(color, fstring);
-        } else {
-            return MruMessage(playerid, color, fstring);
-        }
-    }
+	if(playerid == INVALID_PLAYER_ID)
+	{
+		#pragma unused playerid
+		return MruMessageToAll(color, message);
+	} else {
+		return MruMessage(playerid, color, message);
+	}
 }
 
 stock SystemRangeMessage(Float:x, Float:y, Float:z, vw, kolor, text[], Float:zasieg=30.0)

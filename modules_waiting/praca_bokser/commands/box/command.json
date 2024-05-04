@@ -1,0 +1,17 @@
+{
+    "name": "box",
+    "description": "Rozpocznij sparing bokserski.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "boks"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "31.03.2024"
+}

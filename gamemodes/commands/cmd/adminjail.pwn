@@ -75,6 +75,7 @@ YCMD:adminjail(playerid, params[], help)
 					if(OnDuty[playa] == 1 || OnDutyCD[playa] == 1)
 					{
 					    OnDuty[playa] = 0;
+						SecretAgent[playa] = 0;
 					    OnDutyCD[playa] = 0;
 						RmvLSPDMemberFromThiefMapIcons(playa);
 					}

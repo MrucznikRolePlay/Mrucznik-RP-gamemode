@@ -86,7 +86,6 @@ YCMD:namierz(playerid, params[], help)
 			PlayerInfo[playerid][pDetSkill] ++;
 			UsedFind[playerid] = 1;
             new msg[128];
-			//TaxiAccepted[playerid] = giveplayerid;
 			new pZone[MAX_ZONE_NAME];
 			GetPlayer2DZone(giveplayerid, pZone, MAX_ZONE_NAME);
             format(msg, sizeof(msg), "Numer telefonu %d znajduje siê w okolicy %s. Strefa zaznaczona na mapie kolorem ró¿owym.", givenumber, pZone);

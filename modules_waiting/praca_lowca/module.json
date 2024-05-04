@@ -1,0 +1,11 @@
+{
+    "name": "praca_lowca",
+    "description": "Praca £owcy Nagród",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "31.03.2024"
+}

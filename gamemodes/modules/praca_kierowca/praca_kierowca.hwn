@@ -1,0 +1,62 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                               praca_kierowca                                              //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: mrucznik
+// Data utworzenia: 31.03.2024
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+//-----------------<[ Zmienne: ]>-------------------
+new TaxiDrivers = 0;
+new HeliDrivers = 0;
+new TaxiCall = 999;
+new HeliCall = 999;
+new BusDrivers = 0;
+new BusCall = 999;
+
+new TransportDuty[MAX_PLAYERS];
+new TransportValue[MAX_PLAYERS];
+new TransportDriver[MAX_PLAYERS];
+new TransportClient[MAX_PLAYERS][4];
+new Float:TransportDist[MAX_PLAYERS];
+
+new BusCallTime[MAX_PLAYERS];
+new BusAccepted[MAX_PLAYERS];
+new TaxiCallTime[MAX_PLAYERS];
+new TaxiAccepted[MAX_PLAYERS];
+
+new Map:VehicleFareInfo;
+//------------------<[ Forwardy: ]>--------------------
+
+//-----------------<[ Zerowanie: ]>-------------------
+Driver_ZerujZmienne(playerid)
+{
+	TransportDuty[playerid] = 0;
+	TransportValue[playerid] = 0;
+    TransportDist[playerid] = 0.0;
+	TransportDriver[playerid] = 999;
+    for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
+
+    BusCallTime[playerid] = 0;
+	BusAccepted[playerid] = 999;
+    TaxiCallTime[playerid] = 0;
+	TaxiAccepted[playerid] = 999;
+}
+
+//end

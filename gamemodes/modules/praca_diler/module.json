@@ -1,0 +1,11 @@
+{
+    "name": "praca_diler",
+    "description": "Praca Dilera Narkotyków.",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "31.03.2024"
+}

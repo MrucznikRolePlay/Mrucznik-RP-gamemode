@@ -60,7 +60,7 @@ YCMD:sprzedajauto(playerid, params[], help)
  		if(GetDistanceBetweenPlayers(playerid,playa) > 5) return sendErrorMessage(playerid, "Ten gracz jest za daleko!");
 		if(!(cena > 0 && cena < 900000001)) return sendErrorMessage(playerid, "Cena od 1 do 900 000 000$ !");
 
-        if(lVeh <= CAR_End) return sendErrorMessage(playerid, "Tego pojazdu nie mo¿na sprzedaæ");
+        if(Car_IsStealable(lVeh)) return sendErrorMessage(playerid, "Tego pojazdu nie mo¿na sprzedaæ");
 
 	    if(kaska[playa] == 0) return sendErrorMessage(playerid, "B³¹d");
 

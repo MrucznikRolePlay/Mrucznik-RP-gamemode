@@ -2,7 +2,6 @@
 
 forward KomunikatTimer();
 forward SprzedajMatsTimer(playerid,giveplayerid);
-forward PizzaJobTimer01(playerid);
 forward Naprawa(playerid);//
 forward Lowienie(playerid);
 
@@ -78,7 +77,6 @@ forward Dopalaj(playerid); // Dopalacz auta
 forward StopMusic();
 forward PlayerFixRadio2();
 forward CountDownVehsRespawn();
-forward ZestawNaprawczy_CountDown(playerid, vehicleid);
 forward EditObj(playerid, obj); //Timer do edycji obiektów
 forward PaintballEnded();
 forward obiekty_timer(wartosc);
@@ -149,4 +147,6 @@ forward closeGate(i, j, playerid);
 forward DamagedHP(playerid);
 
 forward DeathAdminWarning(playerid, killerid, reason);
+
+forward Float:GetVehicleBoundingBoxDiagonal(vehicleid);
 //EOF

@@ -1,0 +1,11 @@
+{
+    "name": "praca_bokser",
+    "description": "Praca Boksera.",
+    "author": "mrucznik",
+    "timers": false,
+    "callbacks": false,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "31.03.2024"
+}

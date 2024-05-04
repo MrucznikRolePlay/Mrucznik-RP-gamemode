@@ -1289,7 +1289,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
@@ -1304,7 +1304,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
@@ -1339,7 +1339,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
                 case 9:
 				{
-					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
@@ -4179,23 +4179,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WYJDè");
+				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
 	        }
 	    }
 	    else if(dialogid == 51)
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WYJDè");
+	            ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
 	        }
+			else
+			{
+				ShowPlayerDialogEx(playerid, 50, DIALOG_STYLE_MSGBOX, "DostÍpne malunki wozÛw","LovRider`s:\n(Savanna,Tornado,Blade)\n0- ØÛ≥te p≥omienie\n1- Czerwono øÛ≥te paski\n2- Czerwone p≥omienie z przodu\n3- WyczyúÊ malunek\n\nRemington\n\n0- Brπzowe hieroglify\n1- Czerwono øÛ≥te p≥omienie\n2- Niebieskie p≥omienie\n3- WyczyúÊ malunek\n\nSlamvan \n\n0- Czarny z rÛøowymi paskami\n1- Kolorowe p≥omyczki\n2- ØÛ≥te p≥omienie\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ aby zobaczyÊ dalszπ listÍ","DALEJ","WYJDè");
+			}
 	    }
 	    else if(dialogid == 52)
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid,53,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Flash\n\n0- Czerwono øÛ≥ty z grafikπ\n1- Fioletowo czerwony z grafikπ\n2- Niebiesko fioletowy z grafikπ\n3- WyczyúÊ malunek\n\nBroadway\n\n0- ØÛ≥te p≥omienie na ca≥ym aucie\n1- Czerwone p≥omienie z przodu\n2 i 3- wyczyúÊ malunek\n\nCapmer\n\n0- Hipisowski malnuek\n1, 2 i 3 - wyszyúÊ malunek\n\n Tylko na wymienionych autach moøna namalowaÊ malunek.","WYJDè","WYJDè");
+	            ShowPlayerDialogEx(playerid,53,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Flash\n\n0- Czerwono øÛ≥ty z grafikπ\n1- Fioletowo czerwony z grafikπ\n2- Niebiesko fioletowy z grafikπ\n3- WyczyúÊ malunek\n\nBroadway\n\n0- ØÛ≥te p≥omienie na ca≥ym aucie\n1- Czerwone p≥omienie z przodu\n2 i 3- wyczyúÊ malunek\n\nCapmer\n\n0- Hipisowski malnuek\n1, 2 i 3 - wyszyúÊ malunek\n\n Tylko na wymienionych autach moøna namalowaÊ malunek.","WYJDè","WSTECZ");
 	        }
+			else
+			{
+				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
+			}
 	    }
+		else if(dialogid == 53)
+		{
+			if(!response)
+			{
+				ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","WYJDè","WSTECZ");
+			}
+		}
         else if(dialogid == 501)
 	    {
 	        if(response)
@@ -5500,62 +5515,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            ShowPlayerDialogEx(playerid, 740, DIALOG_STYLE_INPUT, "Gun Shop - Rifle", "Wpisz iloúÊ naboi(1 nabÛj = 50$)", "Kup", "WrÛÊ");
 			}
 		}
-	    else if(dialogid == 5000)
-	    {
-	        if(response)
-	        {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-		        		ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 55","Przystanki koÒcowe:\nKoúciÛ≥ <==> Mrucznik Tower\n\nCzas przejazdu trasy: 9minut \n\nIloúÊ przystankÛw: 13\n\nSzczegÛ≥owy rozpis trasy:\n KoúciÛ≥\n Motel Jefferson\n Glen Park\n Skate Park\n Unity Station\n Urzπd Miasta\n Bank\n Kasyno\n Market Station\n Baza San News i Restauracja\n Siedziba FBI\n Molo WÍdkarskie\n Mrucznik Tower","WrÛÊ","Wyjdü");
-						//\n\nOpis:\n Wsiadajπc do tego autobusu na pewno odwiedzisz\n kaøde miejsce naprawdÍ warte twojej uwagi\n Jednak z powodu duøej liczby przystnakÛw\n czas podrÛøy znacznie siÍ wyd≥uøa.
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 72","Przystanki koÒcowe:\nBaza MechanikÛw <==> Mrucznik Tower\n\nCzas przejazdu trasy: 3min 50s\n\nIloúÊ przystankÛw: 9\n\nSzczegÛ≥owy rozpis trasy:\n Mrucznik Tower (praca prawnika i ≥owcy)\n Market Station\n Szpital\n AmmuNation (praca dilera broni)\n Bank)\n Urzπd Miasta (wyrÛb licencji)\n Stacja Benzynowa\n Si≥ownia (praca ochroniarza - sprzedaje pancerze i boksera)\n Willowfield\n Baza MechanikÛw","WrÛÊ","Wyjdü");
-						//\n\nOpis:\n Szybka linia zapewniajπca g≥Ûwnie cywilom szybki\n transport miÍdzy kluczowymi punktami w mieúcie\n Najwaøniejsza i najszybsza linia LSBD
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 82","Przystanki koÒcowe:\nZajezdnia Commerce <==> Bay Side LV\n\nCzas przejazdu trasy:  11 minut \n\nIloúÊ przystankÛw:  9\n\nSzczegÛ≥owy rozpis trasy:\n Zajezdnia Commerce / Basen 'tsunami'\n Urzπd Miasta\n Baza MechanikÛw\n Agencja Ochrony\n miasteczko Palomino Creek\n Hilltop Farm\n Dillimore\n Bluberry\n Bay Side","WrÛÊ","Wyjdü");
-						// \n Trasa po Red County jest bardzo malownicza\n zaú droga do bay side usypiajπca\n Najd≥uøsza trasa LSDB
-					}
-	    			case 3:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 96","W Przystanki koÒcowe:\nBaza Wojskowa <==> Mrucznik Tower\n\nCzas przejazdu trasy:  ? \n\nIloúÊ przystankÛw:  12\n\nSzczegÛ≥owy rozpis trasy:\n Baza Wojskowa\n Fabryka (dostawa matsÛw)\n Pas Startowy \n Wiadukt\n Unity Station\n Verdant Bluffs (ty≥y UrzÍdu Miasta)\n Zajezdnia Commerce\n Galerie Handlowe\n Burger Shot Marina\n Baza FBI\n Wypoøyczalnia aut (odbiÛr matsÛw)\n Mrucznik Tower","WrÛÊ","Wyjdü");
-						 //\n\nOpis:\nKolejna trasa ze wschodu na zachÛd, jednak tym razem\n szlakiem mniej uczÍszczanych miejsc\n Ulubiona trasa poczπtkujπcych dilerÛw broni
-					}
-  					case 4:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 85","Przystanki koÒcowe:\nWysypisko <==> Szpital\n\nCzas przejazdu trasy:  ? \n\nIloúÊ przystankÛw:  12\n\nSzczegÛ≥owy rozpis trasy:\n Wysypisko\n Clukin Bell Willofield\n Myjnia Samochodowa\n Baza MechanikÛw\n Agencja Ochrony\n Las Colinas \n Motel Jefferson\n Glen Park\n Mrucznikowy GS\n Bank\n Szpital\n\n Opis:\n Niebezpieczna trasa prowadzπce przez tereny prawie wszytkich gangÛw","WrÛÊ","Wyjdü");
-					}
-  					case 5:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","W budowie","WrÛÊ","Wyjdü");
-					}
-  					case 6:
-					{
-        				 ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","Informacje o wycieczkach sπ zamieszczane na czatach g≥Ûwnych\n Oczywiúcie nie ma nic za darmo\n San News zarabia na reklamach zaú KT tradycyjnei na biletach\n pamiÍtaj øe na wycieczki nie bierzemy w≥asnego samochodu\n lecz korzystamy z podstawionych przez organizatora autobusÛw\n Wycieczka to úwietna zabawa i mnÛstwo konkursÛw z nagrodami, dlatego warto siÍ na nich pojawiaÊ.","WrÛÊ","Wyjdü");
-					}
-					case 7:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Informacje","Z autobusu najlepiej korzystaÊ wtedy gdy jesteú pewien øe dana linia jest w trasie\n\nPamiÍtaj, ze autobusy oznaczone numeremm linii poruszajπ siÍ zgodnie z okreúlonπ trasπ\n\nJak zostaÊ kierowcπ autobusu?\nNaleøy z≥oøyÊ podanie na forum do Korporacji Transportowej\nMozna rÛwnieø podjπÊ siÍ pracy kierowcy minibusa dostÍpnej przy basenie","WrÛÊ","Wyjdü");
-					}
-					case 8:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Komendy","Dla pasaøera:\n\n/businfo - wyúwietla informacje o autobusach\n/wezwij bus - pozwala wezwaÊ autobus ktory podwiezie ciÍ w dowolne miejsce\n/anuluj bus - kasuje wezwanie autobusu\n\n\nDla Kierowcy:\n/fare [cena] - pozwala wejúÊ na s≥uøbÍ i ustaliÊ cenÍ za bilet\n/trasa - rozpoczyna kurs wed≥ug wyznaczonej trasy\n/zakoncztrase - przerywa trasÍ\n/zd - zamyka drzwi i umoøliwia ruszenie z przystanku","WrÛÊ","Wyjdü");
-					}
-				}
-			}
+	    else if(command_businfo_dialog(playerid, dialogid, response, listitem, inputtext))
+		{
+			return 1;
 		}
-		else if(dialogid == 5003 || dialogid == 5002 || dialogid == 5001)
-	    {
-	        if(response)
-	        {
-	            ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesujπcπ ciÍ zagadnienie", "Linia 55\nLinia 72\nLinia 82\nLinia 96\nLinia 85\nWycieczki\nInformacje\nPomoc", "Wybierz", "Wyjdü");
-	        }
-	    }
 	 	if(dialogid == D_PJTEST)
 		{
 			if(response == 1)
@@ -12704,199 +12667,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
 
         }  */
-	   	if(dialogid == 8155)//SYstem autobusÛw - tablice
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0:
-				   	{
-				   		if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-						    if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 50) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-							    PlayerInfo[playerid][pLinia55]=1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS.");
-								SetPlayerCheckpoint(playerid, 2215.8428,-1436.8223,23.4033, 4); // Ustawiamy poczπtkowy CP
-								CP[playerid] = 551; //Przypisek CP do dalszych
-								PlayerInfo[playerid][pNatrasiejest] = 1; //Kierowca jest w trasie
-	   							Przystanek(playerid, COLOR_BLUE, "Linia nr. 55\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-	   							SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
-							}
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 2skill aby rozpoczπÊ tπ trasÍ");
-							}
-   						}
-				    	else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-				   	}
-				   	case 1:
-				   	{
-				   		if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-							    PlayerInfo[playerid][pLinia72]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS.");
-								SetPlayerCheckpoint(playerid, 2818.4243,-1576.9399,10.9287, 4);
-								CP[playerid] = 721;
-								PlayerInfo[playerid][pNatrasiejest] = 1;
-					   			Przystanek(playerid, COLOR_NEWS, "Linia nr. 72 (dojazd)\n{808080}Kierunek: BAZA MECHANIK”W (pÍtla) \nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-					   			SetTimerEx("AntyBusCzit", 60000*5, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
-	   					}
-				   		else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-				   	}
-				   	case 2:
-					{
-						if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-						 	if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 200) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-							    PlayerInfo[playerid][pLinia96]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
-								SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
-								CP[playerid] = 961;
-								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid, COLOR_GREEN, "Linia nr. 96\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-								SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
- 							}
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 4skill aby rozpoczπÊ tπ trasÍ");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-					}
-					case 3:
-					{
-						if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-							    PlayerInfo[playerid][pLinia82]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
-								SetPlayerCheckpoint(playerid, 1173.1520,-1825.2843,13.1789, 4);
-								CP[playerid] = 821;
-								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid,COLOR_YELLOW, "Linia nr. 82\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-								SetTimerEx("AntyBusCzit", 60000*8, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
-                            }
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 5skill aby rozpoczπÊ tπ trasÍ");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-					}
-					case 4:
-					{
-						if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-							    PlayerInfo[playerid][pLinia85]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
-								SetPlayerCheckpoint(playerid, 2119.7363,-1896.8149,13.1345, 4);
-								CP[playerid] = 501;
-								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid, COLOR_GREEN, "Linia nr. 85\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-								SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
- 							}
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 3skill aby rozpoczπÊ tπ trasÍ");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-					}
-					case 5:
-					{
-						if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-								Przystanek(playerid, COLOR_BLUE, "Wycieczka\nKoszt: 7500$\n WiÍcej informacji u kierowcy.");
-				    			/*BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= 15000;
-							    GetPlayerName(playerid,sendername,sizeof(sendername));
-			    				format(string, sizeof(string), "Przewodnik %s zaprasza wszytkich na wycieczkÍ autobusowπ, koszt: $15000", sendername, TransportValue[playerid]);
-			    				OOCNews(TEAM_GROVE_COLOR,string);*/
- 							}
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 5skill lub 4 rangi aby organizowaÊ wycieczki.");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-					}
-					case 6:
-					{
-				    	if(PlayerInfo[playerid][pJob] == 10)
-			    			{
-           						SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
-								CP[playerid]=1201;
-								PlayerInfo[playerid][pLinia55] = 0;
-								PlayerInfo[playerid][pLinia72] = 0;
-								PlayerInfo[playerid][pLinia82] = 0;
-								PlayerInfo[playerid][pLinia96] = 0;
-								PlayerInfo[playerid][pNatrasiejest] = 0;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje jπ sygna≥ GPS. ");
-				       			Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Commerce\n {808080}Zatrzymuje siÍ na przystankach");
-				       			SendClientMessage(playerid, COLOR_ALLDEPT, " KT przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczÍúliwy autobus :) ");
-							}
-							else if (PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-							{
-								SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
-								CP[playerid]=1200;
-								PlayerInfo[playerid][pLinia55] = 0;
-								PlayerInfo[playerid][pLinia72] = 0;
-								PlayerInfo[playerid][pLinia82] = 0;
-								PlayerInfo[playerid][pLinia96] = 0;
-								PlayerInfo[playerid][pNatrasiejest] = 0;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje jπ sygna≥ GPS. ");
-				       			Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Ocean Docks\n {808080}Zatrzymuje siÍ na przystankach");
-				       			SendClientMessage(playerid, COLOR_ALLDEPT, " LSBD przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczÍúliwy autobus :) ");
-							}
-				   	}
-				   	case 7:
-				   	{
-						SendClientMessage(playerid, COLOR_YELLOW, "|_____________Objaúnienia_____________|");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}50$/p {FFFFF0}- okreúla premiÍ za kaødy przystanek");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}5min{FFFFF0} - orientacyjny czas przejazdy ca≥ej trasy (dwa okrπøenia)");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}13p{FFFFF0} - liczba przystankÛw na trasie");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/businfo{FFFFF0} - wyúwietla informacje o systemie autobusÛw (w budowie)");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/zakoncztrase{FFFFF0} - przerywa wykonywanπ trasÍ i zmienia tablicÍ na domyúlnπ");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/zd{FFFFF0} - zamyka drzwi w autobusie i umoøliwa dalszπ jazdÍ");
-						SendClientMessage(playerid, COLOR_GREEN, "Wyp≥atÍ za przejechane przystanki otrzymuje siÍ DOPIERO po przejechaniu ca≥ej trasy!");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}Podpowiedü:{FFFFF0} najszybsze zarobki gwarantuje linia 72");
-						SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD<<_____________|");
-					}
-			   	}
-		   	}
-	   	}
-   }
-   
+		if(command_trasa_dialog(playerid, dialogid, response, listitem, inputtext))
+		{
+			return 1;
+		}
+	}
 	if(dialogid == 1888)
 	{
 	    if(response)
@@ -14114,7 +13889,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case 1:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Brak\nFrakcja\nOrganizacja\nGracz\nPraca\nSpecjalny\nPubliczny", "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Brak\nFrakcja\nOrganizacja\nGracz\nPraca\nSpecjalny\nPubliczny\nDo kradniÍcia", "Wybierz", "WrÛÊ");
             }
             case 2:
             {
@@ -14289,7 +14064,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new string[512];
         switch(listitem)
         {
-            case 0:
+            case INVALID_CAR_OWNER:
             {
                 new lSlot;
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
@@ -14329,7 +14104,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na 0", GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
-            case 1:
+            case CAR_OWNER_FRACTION:
             {
                 for(new i=0;i<sizeof(FractionNames);i++)
                 {
@@ -14338,27 +14113,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", string, "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 2:
+            case CAR_OWNER_FAMILY:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj UID organizacji:", "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 3:
+            case CAR_OWNER_PLAYER:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj UID gracza:", "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 4:
+            case CAR_OWNER_JOB:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj ID pracy:", "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 5:
+            case CAR_OWNER_SPECIAL:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj typ pojazdu specjalnego:\n\n1. Wypoøyczalnia\n2. GoKart\n3. Øuøel", "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 6:
+            case CAR_OWNER_PUBLIC:
             {
                 new lSlot;
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
@@ -14392,10 +14167,49 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
                 }
-                CarData[car][c_OwnerType] = 6;
+                CarData[car][c_OwnerType] = CAR_OWNER_PUBLIC;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
 				Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na 6",  GetPlayerLogName(playerid), GetCarDataLogName(car));
+            }
+			case CAR_OWNER_STEAL:
+            {
+                new lSlot;
+                if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
+                {
+                    new lUID = Car_GetOwner(car);
+					if(lUID != 0)
+					{
+						foreach(new i : Player)
+						{
+							if(PlayerInfo[i][pUID] == lUID)
+							{
+								for(new j=0;j<MAX_CAR_SLOT;j++)
+								{
+									if(PlayerInfo[i][pCars][j] == car)
+									{
+										PlayerInfo[i][pCars][j] = 0;
+										lSlot = j+1;
+										break;
+									}
+								}
+
+								format(string, sizeof(string), " UsuniÍto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								Log(adminLog, INFO, "Admin %s usunπ≥ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
+								break;
+							}
+						}
+					}
+                }
+                CarData[car][c_OwnerType] = CAR_OWNER_STEAL;
+                Car_Save(car, CAR_SAVE_OWNER);
+				
+				Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na 7",  GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
         }
         ShowCarEditDialog(playerid);
@@ -15783,7 +15597,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				HireCar[playerid] = 0;
 				return 0;
 			}
-			if(kaska[playerid] < BIKE_COST)
+			new cost = GetVehicleHireCost(veh);
+			if(kaska[playerid] < cost)
    			{
    				sendErrorMessage(playerid, "Nie masz tyle kasy!");
 				return 0;
@@ -15793,7 +15608,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 15*60*1000, 0, "ii", playerid, veh));
 
     		TogglePlayerControllable(playerid, 1);
-    		ZabierzKase(playerid, BIKE_COST); 
+    		ZabierzKase(playerid, cost); 
     		HireCar[playerid] = veh;
     		SetPVarInt(playerid, "rentCar", veh);
 		}

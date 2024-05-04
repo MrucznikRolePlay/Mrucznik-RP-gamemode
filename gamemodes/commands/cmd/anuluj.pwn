@@ -34,9 +34,9 @@ YCMD:anuluj(playerid, params[], help)
 	if( sscanf(params, "s[16]", x_job))
 	{
 		SendClientMessage(playerid, COLOR_WHITE, "|__________________ Cancel __________________|");
-		SendClientMessage(playerid, COLOR_WHITE, "U¯YJ: /anuluj [nazwa]");
-		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Sex, Dragi, Naprawa, Prawnik, Ochrona, Wywiad, Tankowanie, Auto, Boks, Kontrakt");
-		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: Taxi, Bus, Medyk, Mechanik, Gazeta, Mandat, Swiadek, Slub, Rozwod, taxicall");
+		SendClientMessage(playerid, COLOR_WHITE, "U¿yj: /anuluj [nazwa]");
+		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: sex, dragi, naprawa, prawnik, pancerz, wywiad, tankowanie, auto, boks, kontrakt");
+		SendClientMessage(playerid, COLOR_GREY, "Dostêpne nazwy: taxi, bus, medyk, mechanik, mandat, swiadek, slub, rozwod, taxicall");
 		SendClientMessage(playerid, COLOR_WHITE, "|____________________________________________|");
 		return 1;
 	}
@@ -44,7 +44,7 @@ YCMD:anuluj(playerid, params[], help)
 	else if(strcmp(x_job,"dragi",true) == 0) { DrugOffer[playerid] = 999; DrugPrice[playerid] = 0; DrugGram[playerid] = 0; }
 	else if(strcmp(x_job,"naprawa",true) == 0) {	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; }
 	else if(strcmp(x_job,"prawnik",true) == 0) { WantLawyer[playerid] = 0; CallLawyer[playerid] = 0; }
-	else if(strcmp(x_job,"ochrona",true) == 0) { GuardOffer[playerid] = 999; GuardPrice[playerid] = 0; }
+	else if(strcmp(x_job,"ochrona",true) == 0 || strcmp(x_job,"pancerz",true) == 0) { GuardOffer[playerid] = 999; GuardPrice[playerid] = 0; }
 	else if(strcmp(x_job,"wywiad",true) == 0) { LiveOffer[playerid] = 999; }
 	else if(strcmp(x_job,"tankowanie",true) == 0) { RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; }
 	else if(strcmp(x_job,"auto",true) == 0) { CarOffer[playerid] = 999; CarPrice[playerid] = 0; CarID[playerid] = 0; }
@@ -57,83 +57,11 @@ YCMD:anuluj(playerid, params[], help)
 	else if(strcmp(x_job,"mechanik",true) == 0) { if(IsPlayerConnected(MechanicCall)) { if(MechanicCall == playerid) { MechanicCall = 999; } else { SendClientMessage(playerid, COLOR_GREY, "   Nie zamawia³eœ  mechanika !"); return 1; } } }
 	else if(strcmp(x_job,"taxi",true) == 0)
 	{
-	    if(TaxiCall < 999 ||  TaxiCallTime[playerid] > 0)
-	    {
-	        if(TransportDuty[playerid] == 1 && TaxiCallTime[playerid] > 0)
-	        {
-                GameTextForPlayer(TaxiAccepted[playerid], "~w~Kierowca anulowal~n~~r~wezwanie", 5000, 1);
-	            TaxiAccepted[playerid] = 999;
-				GameTextForPlayer(playerid, "~w~Anulowales~n~~r~Wezwanie", 5000, 1);
-				TaxiCallTime[playerid] = 0;
-				DisablePlayerCheckpoint(playerid);
-				TaxiCall = 999;
-	        }
-	        else
-	        {
-				if(IsPlayerConnected(TaxiCall)) { if(TaxiCall == playerid) { TaxiCall = 999; } }
-				foreach(new i : Player)
-				{
-				    if(IsPlayerConnected(i))
-				    {
-				        if(TaxiAccepted[i] < 999)
-				        {
-					        if(TaxiAccepted[i] == playerid)
-					        {
-					            TaxiAccepted[i] = 999;
-					            GameTextForPlayer(i, "~w~Klient~n~~r~Anulowal wezwanie", 5000, 1);
-					            SendClientMessage(TaxiCall, COLOR_RED, "Klient Anulowal wezwanie");
-					            TaxiCallTime[i] = 0;
-					            DisablePlayerCheckpoint(i);
-					            DisablePlayerCheckpoint(TaxiCall);
-
-					        }
-				        }
-				    }
-				}
-			}
-		}
+	    anuluj_taxi(playerid);
 	}
 	else if(strcmp(x_job,"taxicall",true) == 0)
 	{
-		if(PlayerInfo[playerid][pMember]==10 || PlayerInfo[playerid][pLider]==10)
- 		{
-   			if(TaxiCall < 999)
-      		{
-        		if(TransportDuty[playerid] == 1 && TaxiCallTime[playerid] > 0)
-          		{
-            		TaxiAccepted[playerid] = 999;
-              		GameTextForPlayer(playerid, "~w~Anulowano~n~~r~wezwanie", 5000, 1);
-                	TaxiCallTime[playerid] = 0;
-                 	DisablePlayerCheckpoint(playerid);
-                  	TaxiCall = 999;
-                  	DisablePlayerCheckpoint(TaxiCall);
-                 }
-                 else
-                 {
-                 	if(IsPlayerConnected(TaxiCall)) { if(TaxiCall == playerid) { TaxiCall = 999; } }
-                  	foreach(new i : Player)
-                   	{
-                    	if(IsPlayerConnected(i))
-                     	{
-                      		if(TaxiAccepted[i] < 999)
-                        	{
-                         		if(TaxiAccepted[i] == playerid)
-                           		{
-                             		TaxiAccepted[i] = 999;
-                               		GameTextForPlayer(i, "~r~Anulowano wezwanie", 5000, 1);
-                                 	TaxiCallTime[i] = 0;
-                                  	DisablePlayerCheckpoint(i);
-                             	}
-                             }
-                         }
-                     }
-                 }
-   			}
-   			else
-   			{
-	           sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ z Korporacji !");
-   			}
-   		}
+		anuluj_taxicall(playerid);
    	}
 	else if(strcmp(x_job,"kontrakt",true) == 0)
 	{
@@ -155,40 +83,7 @@ YCMD:anuluj(playerid, params[], help)
    	}
 	else if(strcmp(x_job,"bus",true) == 0)
 	{
-	    if(BusCall < 999)
-	    {
-	        if(TransportDuty[playerid] == 2 && BusCallTime[playerid] > 0)
-	        {
-	           	BusAccepted[playerid] = 999;
-				GameTextForPlayer(playerid, "~w~Anulowales~n~~r~Wezwanie", 5000, 1);
-				BusCallTime[playerid] = 0;
-				DisablePlayerCheckpoint(playerid);
-				BusCall = 999;
-				DisablePlayerCheckpoint(BusCall);
-	        }
-	        else
-	        {
-				if(IsPlayerConnected(BusCall)) { if(BusCall == playerid) { BusCall = 999; } }
-				foreach(new i : Player)
-				{
-				    if(IsPlayerConnected(i))
-				    {
-				        if(BusAccepted[i] < 999)
-				        {
-					        if(BusAccepted[i] == playerid)
-					        {
-					            BusAccepted[i] = 999;
-					            GameTextForPlayer(BusCall, "~w~Klient~n~~r~Anulowal wezwanie", 5000, 1);
-					            SendClientMessage(BusCall, COLOR_RED, "Klient Anulowal wezwanie");
-					            BusCallTime[i] = 0;
-					            DisablePlayerCheckpoint(i);
-					            DisablePlayerCheckpoint(BusCall);
-					        }
-				        }
-				    }
-				}
-			}
-		}
+	    anuluj_bus(playerid);
 	}
 	else
 	{ return 1; }

@@ -462,6 +462,31 @@ ELSE
 END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ZWROC_BANK` (IN `name` VARCHAR(21), IN `hajs` INT)  MODIFIES SQL DATA
+    DETERMINISTIC
+BEGIN
+DECLARE message VARCHAR(256);
+DECLARE playerConnected INT;
+DECLARE player_uid INTEGER;
+
+SELECT connected INTO playerConnected FROM mru_konta WHERE `Nick`=name;
+SELECT `UID` INTO player_uid FROM mru_konta WHERE Nick LIKE name;
+
+IF playerConnected = 0 THEN
+    # log
+    SET message = CONCAT('Oddano ', hajs, '$ graczowi: ', name);
+    INSERT INTO actions (Data, Caller, Action) VALUES (NOW(), USER(), message);
+    
+    # action
+    UPDATE mru_konta SET `Bank`=`Bank`+hajs WHERE `UID`=player_uid;
+    
+    # feedback
+    SELECT message AS komunikat;
+ELSE
+	SELECT 'Gracz jest na serwerze/nie ma takiego gracza.' AS komunikat;
+END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ZWROC_HASLO` (IN `name` VARCHAR(21))  MODIFIES SQL DATA
     DETERMINISTIC
 BEGIN
