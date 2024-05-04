@@ -50,6 +50,8 @@ enum eSmugglingData {
     EnableContrabandDrop,
     ContrabandPackagesToDrop,
     SmugglingCheckpoints[MAX_SMUGGLING_CHECKPOINTS],
+    ContrabandDropObjects[PACKAGES_TO_DROP],
+    ContrabandFlareObjects[PACKAGES_TO_DROP],
     Float:GatherPointX,
     Float:GatherPointY,
     Float:GatherPointZ,

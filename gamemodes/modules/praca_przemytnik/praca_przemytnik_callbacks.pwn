@@ -141,25 +141,25 @@ Przemytnik_OnPlayerText(playerid, text[])
 		{
 			if(strcmp(text, "gotowka", true) == 0 || strcmp(text, "gotówk¹", true) == 0)
 			{
-				if(kaska[playerid] < PRZEMYT_COST)
+				if(kaska[playerid] < SMUGGLING_COST)
 				{
 					SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie próbuj mnie oszukaæ, jesteœ go³odupcem. Wróæ jak zarobisz na kupno kontrabandy.");
 					SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
 					DeletePVar(playerid, "smuggling");
 					return 1;
 				}
-				ZabierzKase(playerid, PRZEMYT_COST);
+				ZabierzKase(playerid, SMUGGLING_COST);
 			}
 			else if(strcmp(text, "przelewem", true) == 0 || strcmp(text, "przelew", true) == 0)
 			{
-				if(PlayerInfo[playerid][pAccount] < PRZEMYT_COST)
+				if(PlayerInfo[playerid][pAccount] < SMUGGLING_COST)
 				{
 					SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie próbuj mnie oszukaæ, jesteœ go³odupcem. Wróæ jak zarobisz na kupno kontrabandy.");
 					SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
 					DeletePVar(playerid, "smuggling");
 					return 1;
 				}
-				PlayerInfo[playerid][pAccount] -= PRZEMYT_COST;
+				PlayerInfo[playerid][pAccount] -= SMUGGLING_COST;
 			}
 			else
 			{
@@ -168,7 +168,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 				return 1;
 			}
 
-			Log(payLog, INFO, "%s zorganizowa³ przemyt za %d$", GetNick(playerid), PRZEMYT_COST);
+			Log(payLog, INFO, "%s zorganizowa³ przemyt za %d$", GetNick(playerid), SMUGGLING_COST);
 
 			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): w porz¹dku, wysy³am Ci koordynaty naszego statku. Udaj siê tam wodolotem wraz ze swoim kierowc¹ aby odebraæ kontrabandê.");
 			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): udanej akcji, leæ nisko!");

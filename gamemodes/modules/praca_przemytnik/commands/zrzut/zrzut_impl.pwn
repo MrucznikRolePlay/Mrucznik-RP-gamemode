@@ -25,6 +25,71 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zrzut_Impl(playerid)
 {
+    new vehicleID = GetPlayerVehicleID(playerid);
+    if(!IsAWodolot(vehicleID))
+    {
+        MruMessageFail(playerid, "Musisz znajdowaæ siê w wodolocie by zrzuciæ kontrabandê.");
+        return 1;
+    }
+
+    new actionID = GetPlayerSmugglingActionID(playerid);
+    if(actionID == -1)
+    {
+        MruMessageFail(playerid, "Nie organizujesz akcji przemytniczej.");
+        return 1;
+    }
+
+    new role = GetPlayerSmugglingRole(playerid);
+    if(role != SMUGGLING_ROLE_INITIATOR)
+    {
+        MruMessageFail(playerid, "Nie jesteœ inicjatorem akcji przemytniczej - nie mo¿esz zrzucaæ paczek z kontraband¹");
+        return 1;
+    }
+
+    if(SmugglingAction[actionID][EnableContrabandDrop] < 1)
+    {
+        MruMessageFail(playerid, "Musisz przelecieæ przez 3 checkpointy by móc zrzuciæ 1 paczkê kontrabandy.");
+        return 1;
+    }
+
+    new driverid = GetVehicleDriverID(vehicleID);
+    if(GetPlayerSmugglingRole(driverid) != SMUGGLING_ROLE_DRIVER || PlayerInfo[driverid][pUID] != SmugglingAction[actionID][SmugglingDriverUID])
+    {
+        MruMessageFail(playerid, "Gracz który jest kierowc¹ wodolotu nie zosta³ wybrany jako kierowca w tej akcji przemytniczej.");
+        return 1;
+    }
+
+
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+    if(z <= 20.0)
+    {
+        MruMessageFail(playerid, "Jesteœ za nisko, powiec kierowcy by wzlecia³ wy¿ej.");
+        return 1;
+    }
+
+    if(z >= 60.0)
+    {
+        MruMessageFail(playerid, "Jesteœ za wysoko, powiedz kierowcy by zni¿y³ lot");
+        return 1;
+    }
+
+    ChatMe(playerid, "wyrzuca z wodolotu paczkê z kontraband¹");
+    SmugglingAction[actionID][EnableContrabandDrop]--;
+    SmugglingAction[actionID][ContrabandPackagesToDrop]--;
+
+    GetPosBehindVehicle(vehicleID, x, y, z, 1.0);
+    CreateContrabandDrop(actionID, x, y, z, SmugglingAction[actionID][ContrabandPackagesToDrop]);
+
+    if(SmugglingAction[actionID][ContrabandPackagesToDrop] == 0)
+    {
+        // last package dropped, start gather stage
+        MruMessageGoodInfo(playerid, "To by³a ostatnia paczka kontrabandy, teraz udaj siê do punktu zboru.");
+    }
+    else 
+    {
+        MruMessageGoodInfo(playerid, "Zrzuci³eœ paczkê kontrabandy!");
+    }
     return 1;
 }
 

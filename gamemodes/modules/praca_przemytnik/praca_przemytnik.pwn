@@ -78,11 +78,11 @@ RedisStartSmuggling(UID, redisActionID, role)
 	new redisKey[64];
 	format(redisKey, sizeof(redisKey), "player:%d:smuggling", UID);
 	Redis_SetInt(RedisClient, redisKey, redisActionID);
-	Redis_Expire(redisKey, 3600);
+	Redis_Expire(redisKey, SMUGGLING_MAX_TIME/1000);
 
 	format(redisKey, sizeof(redisKey), "player:%d:smuggling:role", UID);
 	Redis_SetInt(RedisClient, redisKey, role);
-	Redis_Expire(redisKey, 3600);
+	Redis_Expire(redisKey, SMUGGLING_MAX_TIME/1000);
 }
 
 StartSmuggling(playerid)
@@ -102,6 +102,7 @@ StartSmuggling(playerid)
 	// fill up smuggling action data
 	SmugglingAction[actionID][SmugglingActionID] = redisActionID;
 	SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_PICKUP;
+	SmugglingAction[actionID][ContrabandPackagesToDrop] = PACKAGES_TO_DROP;
 
 	SmugglingAction[actionID][GatherPointX] = x;
 	SmugglingAction[actionID][GatherPointY] = y;
@@ -148,11 +149,26 @@ StartSmuggling(playerid)
 	SmugglingActionsCount++;
 }
 
-timer DeactivateSmuggling[3600000](actionID)
+timer DeactivateSmuggling[SMUGGLING_MAX_TIME](actionID)
 {
+	if(SmugglingAction[actionID][SmugglingStage] >= SMUGGLING_STAGE_DOCUMENTS)
+	{
+		return 1;
+	}
+
+	foreach(new i : Player)
+	{
+		new playerActionID = GetPlayerSmugglingActionID(i);
+		if(playerActionID == actionID)
+		{
+			MruMessageBadInfo(i, "Akcja przemytnicza nie uda³a siê. Kontrabanda przepada!");
+		}
+	}
+
+
 	switch(SmugglingAction[actionID][SmugglingStage])
 	{
-		case SMUGGLING_STAGE_PICKUP:
+		case SMUGGLING_STAGE_PICKUP, SMUGGLING_STAGE_FLY:
 		{
 			DestroyDynamicObject(SmugglingAction[actionID][DropPointFlareObject]);
 		}
@@ -162,6 +178,7 @@ timer DeactivateSmuggling[3600000](actionID)
 			DestroyDynamicObject(SmugglingAction[actionID][DropPointContainerObject]);
 		}
 	}
+	SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_NONE;
 }
 
 CreateSmugglingPickupCheckpoint(playerid, actionID)
@@ -253,6 +270,36 @@ NextSmugglingCheckpoint(playerid, actionID)
 		SkimmerDroppingCheckpoints[cpIdx][0], SkimmerDroppingCheckpoints[cpIdx][1], SkimmerDroppingCheckpoints[cpIdx][2],
 		fx, fy, fz,
 		CHECKPOINT_RADIUS);
+}
+
+CreateContrabandDrop(actionID, Float:x, Float:y, Float:z, index)
+{
+	// create parachute package object
+	new obj = CreateDynamicObject(18849, x, y, z, 0.0, 0.0, 0.0, 0, 0);
+
+	// get ground position
+	new Float:groundZ;
+	CA_FindZ_For2DCoord(x, y, groundZ);
+
+	// calculate speed of falling down, 5m/s is falling speed on parachute
+	new Float:speed = 5.0;
+	new fallTime = floatround((z - groundZ) / speed * 1000) + 500;
+
+	// start moving object
+	MoveDynamicObject(obj, x, y, groundZ, speed);
+
+	// timer to activate on fall ends
+	defer CreateContrabandPackage[fallTime](actionID, obj, index);
+}
+
+timer CreateContrabandPackage[0](actionID, parachuteObject, index)
+{
+	new Float:x, Float:y, Float:z;
+	GetDynamicObjectPos(parachuteObject, x, y, z);
+	DestroyDynamicObject(parachuteObject);
+
+	SmugglingAction[actionID][ContrabandFlareObjects][index] = CreateDynamicObject(18728, x, y, z, 0, 0, 0.0, 150.0);
+	SmugglingAction[actionID][ContrabandDropObjects][index] = CreateDynamicObject(1575, x, y, z, 0, 0, 0.0, 150.0);
 }
 
 
