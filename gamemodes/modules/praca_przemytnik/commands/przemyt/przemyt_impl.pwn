@@ -157,13 +157,6 @@ przemyt_StagePickup(playerid, actionID)
         return 1;
     }
 
-    new actionID = GetPlayerSmugglingActionID(playerid);
-    if(actionID == -1)
-    {
-        MruMessageError(playerid, "Nie uda³o siê pobraæ ID akcji przemytniczej.");
-        return 1;
-    }
-
     new driverid = GetVehicleDriverID(vehicleID);
     if(GetPlayerSmugglingRole(driverid) != SMUGGLING_ROLE_DRIVER || PlayerInfo[driverid][pUID] != SmugglingAction[actionID][SmugglingDriverUID])
     {
