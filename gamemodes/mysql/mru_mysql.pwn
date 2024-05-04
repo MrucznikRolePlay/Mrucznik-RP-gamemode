@@ -610,7 +610,7 @@ public MruMySQL_LoadAccount(playerid)
         mysql_fetch_row_format(lStr, "|");
         mysql_free_result();
         id++;
-		sscanf(lStr, "p<|>ds[24]ddddddddddddddddddddddddddddds[64]ddddddddd",
+		sscanf(lStr, "p<|>ds[24]dddddddddddddddddddddddddddds[64]dddddddddd",
 		PlayerInfo[playerid][pUID],
 		PlayerInfo[playerid][pNick],
 		PlayerInfo[playerid][pLevel], 
