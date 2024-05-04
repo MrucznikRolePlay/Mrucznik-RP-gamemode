@@ -153,7 +153,7 @@ timer DeactivateSmuggling[SMUGGLING_MAX_TIME](actionID)
 {
 	if(SmugglingAction[actionID][SmugglingStage] >= SMUGGLING_STAGE_DOCUMENTS)
 	{
-		return 1;
+		return;
 	}
 
 	foreach(new i : Player)
@@ -222,6 +222,9 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	new cp = SmugglingAction[actionID][SmugglingCheckpoints][0];
 	new type = 4; // CP_TYPE_AIR_FINISH
 	SetPlayerRaceCheckpoint(playerid, type, 5014.9385, 154.7287, 71.5396, 
+		SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
+		CHECKPOINT_RADIUS);
+	SetPlayerRaceCheckpoint(driverid, type, 5014.9385, 154.7287, 71.5396, 
 		SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
 		CHECKPOINT_RADIUS);
 
