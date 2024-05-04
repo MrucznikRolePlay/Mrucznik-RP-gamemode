@@ -49,27 +49,32 @@ command_przemyt_Impl(playerid)
         {
             case SMUGGLING_STAGE_PICKUP:
             {
-                przemyt_StagePickup(playerid, actionID);
+                return przemyt_StagePickup(playerid, actionID);
+            }
+            case SMUGGLING_STAGE_FLY:
+            {
+                MruMessageInfo(playerid, "Musisz teraz dolecieæ do punktu kontrolnego nad Prawn Island, Vice City");
+                return 1;
             }
             case SMUGGLING_STAGE_DROP:
             {
-                przemyt_StageDrop(playerid, actionID);
+                return przemyt_StageDrop(playerid, actionID);
             }
             case SMUGGLING_STAGE_GATHER:
             {
-                przemyt_StageGather(playerid, actionID);
+                return przemyt_StageGather(playerid, actionID);
             }
             case SMUGGLING_STAGE_DOCUMENTS:
             {
-                przemyt_StageDocuments(playerid, actionID);
+                return przemyt_StageDocuments(playerid, actionID);
             }
             case SMUGGLING_STAGE_SEND:
             {
-                przemyt_StageSend(playerid, actionID);
+                return przemyt_StageSend(playerid, actionID);
             }
             case SMUGGLING_STAGE_DELIVERED:
             {
-                przemyt_StageDelivered(playerid, actionID);
+                return przemyt_StageDelivered(playerid, actionID);
             }
         }
         return 1;
@@ -93,8 +98,7 @@ command_przemyt_Impl(playerid)
         return 1;
     }
 
-    // TODO: tylko wyspa mainland vice city
-    if(!(IsPlayerAtViceCity(playerid) && GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0))
+    if(!(IsPlayerAtViceCityMainland(playerid) && GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0))
     {
         SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Twój telefon mo¿e znajdowaæ siê na pods³uchu, zadzwoñ ustaliæ szczegó³y gdy bêdziesz na wyspie Mainland w Vice City.");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
@@ -140,7 +144,8 @@ przemyt_StagePickup(playerid, actionID)
         return 1;
     }
 
-    if(!IsPlayerInAnyVehicle(playerid) || !IsAWodolot(GetPlayerVehicleID(playerid)))
+    new vehicleID = GetPlayerVehicleID(playerid);
+    if(!IsPlayerInAnyVehicle(playerid) || !IsAWodolot(vehicleID))
     {
         MruMessageFail(playerid, "Musisz znajdowaæ siê w wodolocie by odebraæ kontrabandê.");
         return 1;
@@ -152,7 +157,24 @@ przemyt_StagePickup(playerid, actionID)
         return 1;
     }
 
-    // start next stage - flying to Prawn Island checkpoint
+    new actionID = GetPlayerSmugglingActionID(playerid);
+    if(actionID == -1)
+    {
+        MruMessageError(playerid, "Nie uda³o siê pobraæ ID akcji przemytniczej.");
+        return 1;
+    }
+
+    new driverid = GetVehicleDriverID(vehicleID);
+    if(GetPlayerSmugglingRole(driverid) != SMUGGLING_ROLE_DRIVER || PlayerInfo[driverid][pUID] != SmugglingAction[actionID][SmugglingDriverUID])
+    {
+        MruMessageFail(playerid, "Gracz który jest kierowc¹ wodolotu nie zosta³ wybrany jako kierowca w tej akcji przemytniczej.");
+        return 1;
+    }
+
+    DisablePlayerCheckpoint(playerid);
+    DisablePlayerCheckpoint(driverid);
+
+    StartSmugglingDrop(playerid, driverid, actionID);
     return 1;
 }
 

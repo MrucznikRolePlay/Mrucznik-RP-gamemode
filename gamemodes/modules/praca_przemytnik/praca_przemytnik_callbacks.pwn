@@ -193,7 +193,79 @@ Przemytnik_OnPlayerLogin(playerid)
 		return 1;
 	}
 
-	CreateSmugglingPickupCheckpoint(playerid, actionID);
+	if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_PICKUP)
+	{
+		new role = GetPlayerSmugglingRole(playerid);
+		if(role == SMUGGLING_ROLE_INITIATOR || role == SMUGGLING_ROLE_DRIVER)
+		{
+			MruMessageGoodInfo(playerid, "Twój udzia³ w akcji przemytniczej zosta³ przywrócony. Udaj siê do checkpointu.");
+			CreateSmugglingPickupCheckpoint(playerid, actionID);
+		}
+	}
+
+	return 1;
+}
+
+Przemytnik_OnPlayerEnterRaceCP(playerid)
+{
+	if(!IsAWodolot(GetPlayerVehicleID(playerid)))
+	{
+		return 0;
+	}
+
+	new actionID = GetPlayerSmugglingActionID(playerid);
+	if(actionID == -1)
+	{
+		return 0;
+	}
+
+	new role = GetPlayerSmugglingRole(playerid);
+    if(role != SMUGGLING_ROLE_INITIATOR && role != SMUGGLING_ROLE_DRIVER)
+    {
+		return 0;
+    }
+
+	if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_FLY)
+	{
+		if(role == SMUGGLING_ROLE_INITIATOR)
+		{
+			// start DROP stage
+			SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_DROP;
+			MruMessageGoodInfoF(playerid, "Musisz teraz przelecieæ przez %d checkpointy aby dokonaæ zrzutu kontrabandy.", CHECKPOINT_PER_DROP);
+		}
+		else
+		{
+			MruMessageGoodInfoF(playerid, "Musisz teraz przelecieæ przez %d checkpointy aby Twój partner móg³ dokonaæ zrzutu kontrabandy.", CHECKPOINT_PER_DROP);
+		}
+		NextSmugglingCheckpoint(playerid, actionID);
+		return 1;
+	}
+	else if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_DROP)
+	{
+		if(role == SMUGGLING_ROLE_INITIATOR)
+		{
+			SmugglingAction[actionID][CapturedCheckpoints] += 1;
+			if(SmugglingAction[actionID][CapturedCheckpoints] % CHECKPOINT_PER_DROP == 0)
+			{
+				SmugglingAction[actionID][CapturedCheckpoints] = 0;
+				SmugglingAction[actionID][EnableContrabandDrop] += 1;
+				MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy, mo¿esz teraz dokonaæ zrzutu na odpowidniej wysokoœci za pomoc¹ komendy /zrzut!", CHECKPOINT_PER_DROP);
+				GameTextForPlayer(playerid, "~g~Mozesz zrzucic kontrabande!", 5000, 6);
+			}
+		}
+
+		if(SmugglingAction[actionID][CapturedCheckpoints] >= MAX_SMUGGLING_CHECKPOINTS)
+		{
+			MruMessageGoodInfo(playerid, "Uda³o Ci siê przelecieæ przez wszystkie checkpointy.");
+			DisablePlayerRaceCheckpoint(playerid);
+			CreateSmugglingGatherCheckpoint(playerid, actionID);
+		}
+		else
+		{
+			NextSmugglingCheckpoint(playerid, actionID);
+		}
+	}
+	
 	return 1;
 }
 

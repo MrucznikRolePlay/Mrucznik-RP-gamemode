@@ -171,6 +171,13 @@ CreateSmugglingPickupCheckpoint(playerid, actionID)
 		10);
 }
 
+CreateSmugglingGatherCheckpoint(playerid, actionID)
+{
+	SetPlayerCheckpoint(playerid, 
+		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ], 
+		5);
+}
+
 CreateDropPointFlare(actionID)
 {
 	SmugglingAction[actionID][DropPointFlareObject] = CreateDynamicObject(18728, 
@@ -185,6 +192,68 @@ CreateDropPointContainer(actionID)
 		0, 0, 0.0, 150.0);
 }
 
+
+StartSmugglingDrop(playerid, driverid, actionID)
+{
+    SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_FLY;
+
+	for(new i; i < MAX_SMUGGLING_CHECKPOINTS; i++)
+	{
+		SmugglingAction[actionID][SmugglingCheckpoints][i] = random(sizeof(SkimmerDroppingCheckpoints));
+	}
+
+	new cp = SmugglingAction[actionID][SmugglingCheckpoints][0];
+	new type = 4; // CP_TYPE_AIR_FINISH
+	SetPlayerRaceCheckpoint(playerid, type, 5014.9385, 154.7287, 71.5396, 
+		SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
+		CHECKPOINT_RADIUS);
+
+	CreateDropPointContainer(actionID);
+	
+	// set marker of initiator for players in crew
+	foreach(new i : Player)
+	{
+		new playerActionID = GetPlayerSmugglingActionID(i);
+		if(playerActionID == actionID)
+		{
+			SetPlayerMarkerForPlayer(i, playerid, COLOR_PANICRED);
+			MruMessageGoodInfo(i, "Akcja przemytnicza rozpoczê³a siê! Zbieraj paczki zrzucone z wodolotu i dostarczaj je do miejsca zboru.");
+			CreateSmugglingGatherCheckpoint(i, actionID);
+		}
+	}
+}
+
+NextSmugglingCheckpoint(playerid, actionID)
+{
+	new cp = SmugglingAction[actionID][CapturedCheckpoints];
+	if(cp >= MAX_SMUGGLING_CHECKPOINTS)
+	{
+		return;
+	}
+
+	new type = 3; // CP_TYPE_AIR_NORMAL
+	new Float:fx, Float:fy, Float:fz;
+	new cpIdx = SmugglingAction[actionID][SmugglingCheckpoints][cp];
+	if(cp == MAX_SMUGGLING_CHECKPOINTS-1)
+	{
+		type = 4; // CP_TYPE_AIR_FINISH
+		fx = SkimmerDroppingCheckpoints[cpIdx][0];
+		fy = SkimmerDroppingCheckpoints[cpIdx][1];
+		fz = SkimmerDroppingCheckpoints[cpIdx][2];
+	}
+	else
+	{
+		new cpIdxNext = SmugglingAction[actionID][SmugglingCheckpoints][cp+1];
+		fx = SkimmerDroppingCheckpoints[cpIdxNext][0];
+		fy = SkimmerDroppingCheckpoints[cpIdxNext][1];
+		fz = SkimmerDroppingCheckpoints[cpIdxNext][2];
+	}
+
+	SetPlayerRaceCheckpoint(playerid, type, 
+		SkimmerDroppingCheckpoints[cpIdx][0], SkimmerDroppingCheckpoints[cpIdx][1], SkimmerDroppingCheckpoints[cpIdx][2],
+		fx, fy, fz,
+		CHECKPOINT_RADIUS);
+}
 
 
 //end

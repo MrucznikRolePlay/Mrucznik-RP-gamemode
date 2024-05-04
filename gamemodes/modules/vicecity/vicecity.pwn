@@ -103,6 +103,24 @@ IsPlayerAtViceCity(playerid)
 	return 0;
 }
 
+IsPlayerAtPrawnIsland(playerid)
+{
+	// TODO
+	return 1;
+}
+
+IsPlayerAtViceCityMainland(playerid)
+{
+	// TODO
+	return 1;
+}
+
+IsPlayerAtViceCityBeach(playerid)
+{
+	// TODO
+	return 1;
+}
+
 IsCarAtViceCity(vehicleid)
 {
 	new Float:x, Float:y, Float:z;

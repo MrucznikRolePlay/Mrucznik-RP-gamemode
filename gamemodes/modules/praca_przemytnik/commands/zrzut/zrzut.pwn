@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                   zrzut                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,23 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "setkontrabanda\setkontrabanda.pwn"
-#include "sprzedajkontrabande\sprzedajkontrabande.pwn"
-#include "przemyt\przemyt.pwn"
-#include "zrzut\zrzut.pwn"
-#include "ochrona\ochrona.pwn"
-
+#include "zrzut_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_zrzut()
 {
-    command_setkontrabanda();
-    command_sprzedajkontrabande();
-    command_przemyt();
-    command_zrzut();
-    command_ochrona();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:zrzut(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zrzuca paczkê z kontraband¹.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_zrzut_Impl(playerid);
 }

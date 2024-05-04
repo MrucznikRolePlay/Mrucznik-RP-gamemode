@@ -2700,6 +2700,11 @@ public OnPlayerLeaveCheckpoint(playerid)
 
 public OnPlayerEnterRaceCheckpoint(playerid)
 {
+	if(Przemytnik_OnPlayerEnterRaceCP(playerid))
+	{
+		return 1;
+	}
+
     TJD_CallRaceCheckpoint(playerid);
 	if(ScigaSie[playerid] != 666 && IloscCH[playerid] != 0 && Scigamy != 666)
 	{
