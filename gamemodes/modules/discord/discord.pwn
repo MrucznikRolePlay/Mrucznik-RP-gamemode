@@ -214,14 +214,14 @@ SendDiscordOrgMessage(orgid, message[])
 SendDiscordServerOnInfo()
 {
 	new message[64];
-	utf8encode(message, "Serwer zosta³ wy³¹czony :(");
+	utf8encode(message, "Serwer ju¿ dzia³a, wbijaj!");
 	DCC_SendChannelMessage(DC_PlayersCountChannel, message);
 }
 
 SendDiscordServerOffInfo()
 {
 	new message[64];
-	utf8encode(message, "Serwer ju¿ dzia³a, wbijaj!");
+	utf8encode(message, "Serwer zosta³ wy³¹czony :(");
 	DCC_SendChannelMessage(DC_PlayersCountChannel, message);
 }
 
