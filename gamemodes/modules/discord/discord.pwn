@@ -251,8 +251,17 @@ SendDiscordDisconnectInfo(playerid, reason[])
 	}
 
 	new message[256];
-	utf8encode(message, sprintf("Gracz %s wyszed³ z serwera (%s), gra tam teraz %d graczy!",
-		GetNick(playerid), reason, GetPlayersCount()));
+	new players = GetPlayersCount();
+	if(players <= 1) 
+	{
+		utf8encode(message, sprintf("Gracz %s wyszed³ z serwera (%s), na serwerze nikogo nie ma, b¹dŸ pierwszy!",
+			GetNick(playerid), reason, ));
+	}
+	else
+	{
+		utf8encode(message, sprintf("Gracz %s wyszed³ z serwera (%s), gra tam teraz %d graczy!",
+			GetNick(playerid), reason, ));
+	}
 	DCC_SendChannelMessage(DC_PlayersCountChannel, message);
 }
 
