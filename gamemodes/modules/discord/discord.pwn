@@ -50,6 +50,15 @@ LoadDiscordChannels()
 }
 DiscordConnectInit()
 {
+	if(IsAProductionServer())
+	{
+		DC_PlayersCountChannel = DCC_FindChannelById("1250784506453954590"); // ogólne/liczba-graczy
+	}
+	else 
+	{
+		DC_PlayersCountChannel = DCC_FindChannelById("1250788039819661324"); // test/liczba-graczy-test
+	}
+
 	// g_GSLSLOGChannelId=DCC_FindChannelById("723216208165601321"); // GS Los Santos log
 	// g_GSCMLOGChannelId=DCC_FindChannelById("723216292081041408"); // GS Commerce log
 	// g_GSWFLOGChannelId=DCC_FindChannelById("723216357835145376"); // GS Willowfield log
@@ -202,6 +211,26 @@ SendDiscordOrgMessage(orgid, message[])
 // 	return 0;
 // }
 
+SendDiscordConnectInfo(playerid)
+{
+	new players = GetPlayersCount();
+	if(players <= 1)
+	{
+		DCC_SendChannelMessage(DC_PlayersCountChannel, sprintf("Gracz %s do³¹czy³ na serwer. Nie zwlekaj - do³¹cz na serwer i zagraj razem z nim!", 
+			GetNick(playerid)));
+	}
+	else
+	{
+		DCC_SendChannelMessage(DC_PlayersCountChannel, sprintf("Gracz %s do³¹czy³ na serwer, gra tam teraz %d graczy!", 
+			GetNick(playerid), players));
+	}
+}
+
+SendDiscordDisconnectInfo(playerid, reason[])
+{
+	DCC_SendChannelMessage(DC_PlayersCountChannel, sprintf("Gracz %s wyszed³ z serwera (%s), gra tam teraz %d graczy!",
+		GetNick(playerid), reason, GetPlayersCount()));
+}
 
 //-----------------<[ Timery: ]>-------------------
 //------------------<[ MySQL: ]>--------------------

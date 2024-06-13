@@ -12753,6 +12753,16 @@ public DeathAdminWarning(playerid, killerid, reason)
 	return 1;
 }
 
+GetPlayersCount()
+{
+	new count;
+	foreach(new i : Player) 
+	{
+		count++;
+	}
+	return count;
+}
+
 forward TimeUpdater();
 public TimeUpdater()
 {

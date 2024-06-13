@@ -59,7 +59,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //#include <a_mysql> TODO: replace R5 plugin
 #include <whirlpool>
 #include <timestamptodate>
-// #include <discord-connector>
+#include <discord-connector>
 #include <memory>
 #include <profiler_plugin>
 //TODO: add plugins
@@ -1044,6 +1044,7 @@ public OnPlayerConnect(playerid)
 	new GPCI[41];
 	gpci(playerid, GPCI, sizeof(GPCI));
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNickEx(playerid), playerid, GetIp(playerid), GPCI);
+	SendDiscordConnectInfo(playerid);
 
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
@@ -1216,6 +1217,7 @@ public OnPlayerDisconnect(playerid, reason)
         "Kick/Ban",
 		"/login"
     };
+	SendDiscordDisconnectInfo(playerid, DisconnectReason[reason]);
     if(Spectate[playerid] == INVALID_PLAYER_ID)
     {
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
