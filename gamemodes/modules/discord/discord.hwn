@@ -23,6 +23,11 @@
 
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
+// new DCC_Channel:g_SanNewsChannelId, DCC_Channel:g_AdminChannelId[17], DCC_Channel:g_AdminChannelIdDefault, DCC_Channel:g_ReportChannelId; //discordconnect
+// new DCC_Channel:g_FracChannel[MAX_FRAC];
+// new DCC_Channel:g_OrgChannel[MAX_ORG];
+// new DCC_Channel:g_GSLSLOGChannelId, DCC_Channel:g_GSCMLOGChannelId, DCC_Channel:g_GSWFLOGChannelId;
+new DC_PlayersCountChannel;
 //------------------<[ Forwardy: ]>--------------------
 
 //end

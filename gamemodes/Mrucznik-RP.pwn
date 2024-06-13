@@ -59,7 +59,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 //#include <a_mysql> TODO: replace R5 plugin
 #include <whirlpool>
 #include <timestamptodate>
-// #include <discord-connector>
+#include <discord-connector>
 #include <memory>
 #include <profiler_plugin>
 //TODO: add plugins
@@ -477,6 +477,7 @@ public OnGameModeInit()
 
     pusteZgloszenia();
 	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
+	SendDiscordServerOnInfo();
     print("----- OnGameModeInit done.");
 	return 1;
 }
@@ -534,6 +535,7 @@ public OnGameModeExit()
 
 	DOF2_Exit();
     GLOBAL_EXIT = true;
+	SendDiscordServerOffInfo();
 	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     print("----- OnGameModeExit done.");
 	return 1;
@@ -1216,6 +1218,7 @@ public OnPlayerDisconnect(playerid, reason)
         "Kick/Ban",
 		"/login"
     };
+	SendDiscordDisconnectInfo(playerid, DisconnectReason[reason]);
     if(Spectate[playerid] == INVALID_PLAYER_ID)
     {
     	format(reString, sizeof(reString), "SERWER: Gracz znajduj¹cy siê w pobli¿u wyszed³ z serwera (%s, powód: %s).", GetNick(playerid), DisconnectReason[reason]);
@@ -5623,6 +5626,7 @@ OnPlayerLogin(playerid, password[])
 		format(string, sizeof(string), "Witaj na serwerze Mrucznik Role Play, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
 		printf("%s has logged in.",nick);
+		SendDiscordConnectInfo(playerid);
 		if (IsPlayerPremiumOld(playerid))
 		{
 			SendClientMessage(playerid, COLOR_WHITE,"Jesteœ posiadaczem {E2BA1B}Konta Premium.");
