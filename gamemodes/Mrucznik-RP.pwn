@@ -477,6 +477,7 @@ public OnGameModeInit()
 
     pusteZgloszenia();
 	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
+	SendDiscordServerOnInfo();
     print("----- OnGameModeInit done.");
 	return 1;
 }
@@ -534,6 +535,7 @@ public OnGameModeExit()
 
 	DOF2_Exit();
     GLOBAL_EXIT = true;
+	SendDiscordServerOffInfo();
 	Log(serverLog, INFO, "Serwer zosta³ wy³¹czony.");
     print("----- OnGameModeExit done.");
 	return 1;
@@ -1044,7 +1046,6 @@ public OnPlayerConnect(playerid)
 	new GPCI[41];
 	gpci(playerid, GPCI, sizeof(GPCI));
 	Log(connectLog, INFO, "Gracz %s[id: %d, ip: %s, gpci: %s] po³¹czy³ siê z serwerem", GetNickEx(playerid), playerid, GetIp(playerid), GPCI);
-	SendDiscordConnectInfo(playerid);
 
 	SetPlayerVirtualWorld(playerid, 1488);//AC przed omijaniem logowania
 
@@ -5625,6 +5626,7 @@ OnPlayerLogin(playerid, password[])
 		format(string, sizeof(string), "Witaj na serwerze Mrucznik Role Play, %s!",nick);
 		SendClientMessage(playerid, COLOR_WHITE,string);
 		printf("%s has logged in.",nick);
+		SendDiscordConnectInfo(playerid);
 		if (IsPlayerPremiumOld(playerid))
 		{
 			SendClientMessage(playerid, COLOR_WHITE,"Jesteœ posiadaczem {E2BA1B}Konta Premium.");

@@ -211,25 +211,49 @@ SendDiscordOrgMessage(orgid, message[])
 // 	return 0;
 // }
 
+SendDiscordServerOnInfo()
+{
+	new message[64];
+	utf8encode(message, "Serwer zosta³ wy³¹czony :(");
+	DCC_SendChannelMessage(DC_PlayersCountChannel, message);
+}
+
+SendDiscordServerOffInfo()
+{
+	new message[64];
+	utf8encode(message, "Serwer ju¿ dzia³a, wbijaj!");
+	DCC_SendChannelMessage(DC_PlayersCountChannel, message);
+}
+
 SendDiscordConnectInfo(playerid)
 {
+	new message[256];
 	new players = GetPlayersCount();
 	if(players <= 1)
 	{
-		DCC_SendChannelMessage(DC_PlayersCountChannel, sprintf("Gracz %s do³¹czy³ na serwer. Nie zwlekaj - do³¹cz na serwer i zagraj razem z nim!", 
+		utf8encode(message, sprintf("Gracz %s do³¹czy³ na serwer. Nie zwlekaj - do³¹cz na serwer i zagraj razem z nim!", 
 			GetNick(playerid)));
 	}
 	else
 	{
-		DCC_SendChannelMessage(DC_PlayersCountChannel, sprintf("Gracz %s do³¹czy³ na serwer, gra tam teraz %d graczy!", 
+		utf8encode(message, sprintf("Gracz %s do³¹czy³ na serwer, gra tam teraz %d graczy!", 
 			GetNick(playerid), players));
 	}
+
+	DCC_SendChannelMessage(DC_PlayersCountChannel, message);
 }
 
 SendDiscordDisconnectInfo(playerid, reason[])
 {
-	DCC_SendChannelMessage(DC_PlayersCountChannel, sprintf("Gracz %s wyszed³ z serwera (%s), gra tam teraz %d graczy!",
+	if(!gPlayerLogged[playerid])
+	{
+		return;
+	}
+
+	new message[256];
+	utf8encode(message, sprintf("Gracz %s wyszed³ z serwera (%s), gra tam teraz %d graczy!",
 		GetNick(playerid), reason, GetPlayersCount()));
+	DCC_SendChannelMessage(DC_PlayersCountChannel, message);
 }
 
 //-----------------<[ Timery: ]>-------------------
