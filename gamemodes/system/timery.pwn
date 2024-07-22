@@ -1897,21 +1897,21 @@ public CustomPickups()
 		}
 		if(mystate == PLAYER_STATE_DRIVER)
 		{
-			new Float:health;
-			GetVehicleHealth(GetPlayerVehicleID(i), health);
-			if(health <= 1000.0 && IsPlayerAtPayNSpray(i))
+			new cooldown = GetPVarInt(i, "pay-n-spray-dialog");
+			if(cooldown <= 0)
 			{
-				new cooldown = GetPVarInt(i, "pay-n-spray-dialog");
-				if(cooldown <= 0)
+				new Float:health;
+				GetVehicleHealth(GetPlayerVehicleID(i), health);
+				if(health <= 1000.0 && IsPlayerAtPayNSpray(i))
 				{
-					ShowPlayerDialogEx(i, 92145, DIALOG_STYLE_MSGBOX, "Naprawa pojazdu", "Czy chcesz naprawiæ swój pojazd za 7500$?", "Napraw", "WyjdŸ");
+					ShowPlayerDialogEx(i, 9145, DIALOG_STYLE_MSGBOX, "Naprawa pojazdu", "Czy chcesz naprawiæ swój pojazd za 7500$?", "Napraw", "WyjdŸ");
 					SetPVarInt(i, "pay-n-spray-dialog", 15);
+					return 1;
 				}
-				else
-				{
-					SetPVarInt(i, "pay-n-spray-dialog", cooldown - 1);
-				}
-				return 1;
+			}
+			else
+			{
+				SetPVarInt(i, "pay-n-spray-dialog", cooldown - 1);
 			}
 		}
 
