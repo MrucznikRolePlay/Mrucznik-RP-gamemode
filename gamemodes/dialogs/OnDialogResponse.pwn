@@ -90,7 +90,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
-	if(dialogid == 92145)
+	if(dialogid == 9145)
 	{
 		if(response)
 		{
