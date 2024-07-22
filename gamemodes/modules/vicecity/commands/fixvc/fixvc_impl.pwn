@@ -25,17 +25,20 @@
 //------------------<[ Implementacja: ]>-------------------
 command_fixvc_Impl(playerid)
 {
-    if(!IsPlayerAtViceCity(playerid))
+    if(GetPVarInt(playerid, "debug-objects") != 1)
     {
-        MruMessageFail(playerid, "Nie jesteœ w Vice City.");
-        return 1;
-    }
+        if(!IsPlayerAtViceCity(playerid))
+        {
+            MruMessageFail(playerid, "Nie jesteœ w Vice City.");
+            return 1;
+        }
 
-    new Float:unused;
-    if(!CA_IsPlayerInWater(playerid, unused, unused))
-    {
-        MruMessageFail(playerid, "Nie wpad³eœ do wody!");
-        return 1;
+        new Float:unused;
+        if(!CA_IsPlayerInWater(playerid, unused, unused))
+        {
+            MruMessageFail(playerid, "Nie wpad³eœ do wody!");
+            return 1;
+        }
     }
 
     new Float:x, Float:y, Float:z;
