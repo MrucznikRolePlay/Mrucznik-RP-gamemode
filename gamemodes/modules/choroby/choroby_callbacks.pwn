@@ -58,6 +58,7 @@ hook OnPlayerDisconnect(playerid, reason)
 	PTSDCounter[playerid] = 0;
 	Odpornosc_PlayerBarToggle[playerid] = 0;
 	OKActive[playerid] = 0;
+	DestroyPlayerProgressBar(PlayerImmunityBar[playerid]);
 	return 1;
 }
 
