@@ -44,6 +44,7 @@ command_gotojob_Impl(playerid, job, index, type)
         return 1;
     }
 
+    new Float:x, Float:y, Float:z;
     switch(type)
     {
         case 0: // join
@@ -54,7 +55,15 @@ command_gotojob_Impl(playerid, job, index, type)
                 return 1;
             }
 
-            SetPlayerPos(playerid, JobJoinPositions[job][index][JOB_JOIN_X], JobJoinPositions[job][index][JOB_JOIN_Y], JobJoinPositions[job][index][JOB_JOIN_Z]);
+			x = JobJoinPositions[job][index][JOB_JOIN_X];
+			y = JobJoinPositions[job][index][JOB_JOIN_Y];
+            z = JobJoinPositions[job][index][JOB_JOIN_Z];
+            if(x == 0.0 && y == 0.0 && z == 0.0) 
+            {
+                MruMessageFail(playerid, "Brak zapisanej pozycji pod tym ID.");
+                return 1;
+            }
+            SetPlayerPos(playerid, x, y, z);
         }
         case 1: // spawn
         {
@@ -64,7 +73,15 @@ command_gotojob_Impl(playerid, job, index, type)
                 return 1;
             }
 
-            SetPlayerPos(playerid, JobSpawns[job][index][JOB_SPAWN_X], JobSpawns[job][index][JOB_SPAWN_Y], JobSpawns[job][index][JOB_SPAWN_Z]);
+            x = JobSpawns[job][index][JOB_SPAWN_X];
+            y = JobSpawns[job][index][JOB_SPAWN_Y];
+            z = JobSpawns[job][index][JOB_SPAWN_Z];
+            if(x == 0.0 && y == 0.0 && z == 0.0) 
+            {
+                MruMessageFail(playerid, "Brak zapisanej pozycji pod tym ID.");
+                return 1;
+            }
+            SetPlayerPos(playerid, x, y, z);
             SetPlayerVirtualWorld(playerid, JobSpawns[job][index][JOB_SPAWN_VW]);
             SetPlayerInterior(playerid, JobSpawns[job][index][JOB_SPAWN_INT]);
             SetPlayerFacingAngle(playerid, JobSpawns[job][index][JOB_SPAWN_A]);
@@ -77,7 +94,15 @@ command_gotojob_Impl(playerid, job, index, type)
                 return 1;
             }
 
-            SetPlayerPos(playerid, JobIconPositions[job][index][0], JobIconPositions[job][index][1], JobIconPositions[job][index][2]);
+            x = JobIconPositions[job][index][0];
+            y = JobIconPositions[job][index][1];
+            z = JobIconPositions[job][index][2];
+            if(x == 0.0 && y == 0.0 && z == 0.0) 
+            {
+                MruMessageFail(playerid, "Brak zapisanej pozycji pod tym ID.");
+                return 1;
+            }
+            SetPlayerPos(playerid, x, y, z);
         }
         default:
         {
