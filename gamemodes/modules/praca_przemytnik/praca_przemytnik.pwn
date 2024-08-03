@@ -198,15 +198,17 @@ CreateSmugglingGatherCheckpoint(playerid, actionID)
 CreateDropPointFlare(actionID)
 {
 	SmugglingAction[actionID][DropPointFlareObject] = CreateDynamicObject(18728, 
-		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ] - 0.5, 
-		0, 0, 0.0, 150.0);
+		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ] - 0.5,
+		0.0, 0.0, 0.0,
+		0, 0);
 }
 
 CreateDropPointContainer(actionID)
 {
 	SmugglingAction[actionID][DropPointFlareObject] = CreateDynamicObject(1334, 
 		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ], 
-		0, 0, 0.0, 150.0);
+		0.0, 0.0, 0.0,
+		0, 0);
 }
 
 
@@ -305,8 +307,8 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index)
 	GetDynamicObjectPos(parachuteObject, x, y, z);
 	DestroyDynamicObject(parachuteObject);
 
-	SmugglingAction[actionID][ContrabandFlareObjects][index] = CreateDynamicObject(18728, x, y, z, 0, 0, 0.0, 150.0);
-	SmugglingAction[actionID][ContrabandDropObjects][index] = CreateDynamicObject(1575, x, y, z, 0, 0, 0.0, 150.0);
+	SmugglingAction[actionID][ContrabandFlareObjects][index] = CreateDynamicObject(18728, x, y, z, 0.0, 0.0, 0.0, 0, 0);
+	SmugglingAction[actionID][ContrabandDropObjects][index] = CreateDynamicObject(1575, x, y, z, 0.0, 0.0, 0.0, 0, 0);
 }
 
 MarcepanPhone(playerid, string[])
