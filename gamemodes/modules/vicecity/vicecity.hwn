@@ -151,6 +151,10 @@ new VC_interiors[][E_ENEX] = {
 //-----------------<[ Zmienne: ]>-------------------
 // Areas
 new areaViceCity;
+new areaViceCityBeach;
+new areaViceCityMainland;
+new areaPrawnIsland;
+new areaStarfishIsland;
 
 /* Map on Screen for player view your localization */
 new bool:ViewingMap[MAX_PLAYERS];

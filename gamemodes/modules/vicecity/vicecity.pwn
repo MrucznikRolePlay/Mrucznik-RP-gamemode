@@ -114,19 +114,37 @@ IsPointInViceCity(Float:x, Float:y, Float:z)
 
 IsPlayerAtPrawnIsland(playerid)
 {
-	// TODO
+	if(IsPlayerInDynamicArea(playerid, areaPrawnIsland))
+	{
+		return 1;
+	}
+	return 1;
+}
+
+IsPlayerAtStarfishIsland(playerid)
+{
+	if(IsPlayerInDynamicArea(playerid, areaStarfishIsland))
+	{
+		return 1;
+	}
 	return 1;
 }
 
 IsPlayerAtViceCityMainland(playerid)
 {
-	// TODO
+	if(IsPlayerInDynamicArea(playerid, areaViceCityMainland))
+	{
+		return 1;
+	}
 	return 1;
 }
 
 IsPlayerAtViceCityBeach(playerid)
 {
-	// TODO
+	if(IsPlayerInDynamicArea(playerid, areaViceCityBeach))
+	{
+		return 1;
+	}
 	return 1;
 }
 
