@@ -298,7 +298,7 @@ new Float:JobIconPositions[Jobs][MAX_JOB_JOINS][3] = {
         {4176.9443, 199.7706, 11.8687} // Vice City, Downtown Hospital
     },
     { // Bokser
-        {1765.1974, -2063.2681, 13.3357}, // Los Santos, Si³ownia
+        {2246.7415, -1711.7833, 22.8527}, // Los Santos, Si³ownia
         {3885.4304, -1646.6052, 11.2530}, // Vice City, Little Haiti
         {0.0, 0.0, 0.0}
     },

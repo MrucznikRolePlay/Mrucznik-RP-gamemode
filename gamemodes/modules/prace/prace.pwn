@@ -69,7 +69,15 @@ InitializeJobIcons()
 
 			if(x != 0.0 && y != 0.0 && z != 0.0)
 			{
-				CreateDynamicMapIcon(x, y, z, 56, -1, -1, -1, -1, -1, MAPICON_GLOBAL);
+				CreateDynamicMapIcon(x, y, z, 
+					56, // type https://www.open.mp/docs/scripting/resources/mapicons
+					-1, // color, This should only be used with the square icon (ID: 0)
+					0, // worldid
+					0, // interiorid
+					-1, // playerid
+					-1, // streamdistance -1 = inifnite
+					MAPICON_GLOBAL, // style https://www.open.mp/docs/scripting/resources/mapiconstyles
+				);
 			}
 		}
 	}
