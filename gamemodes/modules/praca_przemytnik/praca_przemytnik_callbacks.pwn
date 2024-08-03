@@ -174,6 +174,9 @@ Przemytnik_OnPlayerText(playerid, text[])
 			MarcepanPhone(playerid, "Telefon (Marcepan_Marks): udanej akcji, leæ nisko!");
         	SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
 
+			SendClientMessage(playerid, COLOR_PANICRED, "WA¯NE! By wystartowaæ wodolotem, ustaw /fpslimit 30 i upewnij siê, ¿e masz w³¹czony frame limiter w ustawieniach GTA SA");
+			SendClientMessage(playerid, COLOR_PANICRED, "Aby wejœæ do wodolotu jako pasa¿er, u¿yj komendy /wejdzw");
+
 			StartSmuggling(playerid);
 			DeletePVar(playerid, "smuggling");
 		}
@@ -288,6 +291,7 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 			CreateSmugglingGatherCheckpoint(playerid, actionID);
 			PlayerPlaySound(playerid, 1139, 0, 0, 0);
 		}
+		return 1;
 	}
 	else if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_GATHER)
 	{

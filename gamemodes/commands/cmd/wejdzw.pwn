@@ -45,12 +45,17 @@ YCMD:wejdzw(playerid, params[], help)
 		    for(new v; v < MAX_VEHICLES; v++)
 		    {
 				new model = GetVehicleModel(v);
-				if(IsAInteriorVehicle(model))
+				if(IsAInteriorVehicle(model) || IsAWodolotModel(model))
 				{
 	   				new Float:vehx, Float:vehy, Float:vehz;
 	          		GetVehiclePos(v, vehx, vehy, vehz);
 	          		if(IsPlayerInRangeOfPoint(playerid, 15.0, vehx, vehy, vehz))
 	          		{
+						if(IsAWodolotModel(model))
+						{
+							PutPlayerInVehicleEx(playerid, v, 1);
+							return 1;
+						}
                         if(PlayerInfo[playerid][pJailed] != 0)
                         {
                             if(PlayerInfo[playerid][pJailed] == 3)
