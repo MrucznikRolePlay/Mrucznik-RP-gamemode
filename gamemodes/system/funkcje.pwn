@@ -5413,14 +5413,14 @@ ZaladujDomy()
 				if(Dom[i][hKupiony] == 0)
 				{
 				    Dom[i][hPickup] = CreateDynamicPickup(1273, 1, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], -1, -1, -1, 125.0);
-				    //Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+				    //Dom[i][hIkonka] = MruCreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], 31, 1, -1, -1, -1, 125.0);
 				}
 				else
 				{
 				    Dom[i][hPickup] = CreateDynamicPickup(1239, 1, Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], -1, -1, -1, 125.0);
 					if(Dom[i][hWynajem] != 0)
 					{
-						//Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], 32, 1, -1, -1, -1, 125.0);
+						//Dom[i][hIkonka] = MruCreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], 32, 1, -1, -1, -1, 125.0);
 					}
 				}
 	        }
@@ -5792,7 +5792,7 @@ StworzDom(playerid, interior, oplata)
 		Dom[dld][hS_A11] = 0;
 	    Dom[dld][hPickup] = CreateDynamicPickup(1273, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
 	    Dom[dld][hIkonka] = -1;
-	    //Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    //Dom[dld][hIkonka] = MruCreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
 		dini_IntSet("Domy/NRD.ini", "NrDomow", dld);
 		new intcena = IntInfo[Dom[dld][hDomNr]][Cena];
 		new Float:koxX = mnoznik/10;
@@ -6104,7 +6104,7 @@ L_StworzDom(playerid, kategoria, oplata)
 		Dom[dld][hS_A10] = 0;
 		Dom[dld][hS_A11] = 0;
 		Dom[dld][hPickup] = CreateDynamicPickup(1273, 1, Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], -1, -1, -1, 125.0);
-	    //Dom[dld][hIkonka] = CreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
+	    //Dom[dld][hIkonka] = MruCreateDynamicMapIcon(Dom[dld][hWej_X], Dom[dld][hWej_Y], Dom[dld][hWej_Z], 31, 1, -1, -1, -1, 125.0);
 	    Dom[dld][hIkonka] = -1;
 		dini_IntSet("Domy/NRD.ini", "NrDomow", dld);
 		new intcena = IntInfo[Dom[dld][hDomNr]][Cena];

@@ -52,13 +52,13 @@ ShowViceCityRadioDialog(playerid, dialogid, title[])
 CreateShippingPlacePickups()
 {
 	CreateDynamicPickup(2510, 1, 2696.2197,-2226.9309,13.5501);
-	CreateDynamicMapIcon(2696.2197,-2226.9309,13.5501, 51, 0, -1, -1, -1, -1, MAPICON_GLOBAL);
+	MruCreateDynamicMapIcon(2696.2197,-2226.9309,13.5501, 51, 0, -1, -1, -1, -1, MAPICON_GLOBAL);
 	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO VICE CITY\n/transport", COLOR_LIGHTBROWN, 
 		2696.2197,-2226.9309,13.5501,
 		15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
 
 	CreateDynamicPickup(2510, 1, 3778.3586,-2190.5291,14.1532);
-	CreateDynamicMapIcon(3778.3586,-2190.5291,14.1532, 51, 0, -1, -1, -1, -1, MAPICON_GLOBAL);
+	MruCreateDynamicMapIcon(3778.3586,-2190.5291,14.1532, 51, 0, -1, -1, -1, -1, MAPICON_GLOBAL);
 	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO LOS SANTOS\n/transport", COLOR_LIGHTBROWN, 
 		3778.3586,-2190.5291,14.1532,
 		15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
@@ -97,6 +97,15 @@ GetTransportDestinationName(terminalType)
 IsPlayerAtViceCity(playerid)
 {
 	if(IsPlayerInDynamicArea(playerid, areaViceCity))
+	{
+		return 1;
+	}
+	return 0;
+}
+
+IsPointInViceCity(Float:x, Float:y, Float:z)
+{
+	if(IsPointInDynamicArea(areaViceCity, x, y, z))
 	{
 		return 1;
 	}

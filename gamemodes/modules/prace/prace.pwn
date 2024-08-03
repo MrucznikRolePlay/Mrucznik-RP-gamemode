@@ -69,7 +69,7 @@ InitializeJobIcons()
 
 			if(x != 0.0 && y != 0.0 && z != 0.0)
 			{
-				CreateDynamicMapIcon(x, y, z, 
+				MruCreateDynamicMapIcon(x, y, z, 
 					56, // type https://www.open.mp/docs/scripting/resources/mapicons
 					-1, // color, This should only be used with the square icon (ID: 0)
 					0, // worldid

@@ -276,7 +276,7 @@ EnableCarThiefCheckpoint(playerid)
 		SendClientMessage(playerid, COLOR_YELLOW, "Dostarcz ukradziony pojazd do dziupli - jej lokalizacja zosta³a zaznaczona na mapie.");
 		SendClientMessage(playerid, COLOR_YELLOW, "Postaraj siê jechaæ ostro¿nie - im mniej uszkodzisz pojazd, tym wiêcej zarobisz.");
 
-		stole_a_car_checkpoint[playerid][0] = CreateDynamicMapIcon(chop_shop_pos[0], chop_shop_pos[1], chop_shop_pos[2], 0, 0xFF1111FF, -1, -1, playerid, 12000.0, MAPICON_GLOBAL_CHECKPOINT);
+		stole_a_car_checkpoint[playerid][0] = MruCreateDynamicMapIcon(chop_shop_pos[0], chop_shop_pos[1], chop_shop_pos[2], 0, 0xFF1111FF, -1, -1, playerid, 12000.0, MAPICON_GLOBAL_CHECKPOINT);
 		stole_a_car_checkpoint[playerid][1] = CreateDynamicCircle(chop_shop_pos[0], chop_shop_pos[1], 16.0, -1, -1, playerid);
 		stole_a_car_checkpoint[playerid][2] = SetTimerEx("CarThiefMissionGoalTimer", 750, 1, "d", playerid);
 	}

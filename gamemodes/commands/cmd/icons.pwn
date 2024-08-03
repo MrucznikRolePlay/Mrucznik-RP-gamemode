@@ -63,7 +63,7 @@ YCMD:icons(playerid, params[], help)
             {
                 if(Dom[i][hIkonka] == -1)
                 {
-                    Dom[i][hIkonka] = CreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], icon_type, 1, -1, -1, playerid, 125.0);
+                    Dom[i][hIkonka] = MruCreateDynamicMapIcon(Dom[i][hWej_X], Dom[i][hWej_Y], Dom[i][hWej_Z], icon_type, 1, -1, -1, playerid, 125.0);
                 }
                 else if(!Streamer_IsInArrayData(STREAMER_TYPE_MAP_ICON, Dom[i][hIkonka], E_STREAMER_PLAYER_ID, playerid))
                 {
