@@ -75,11 +75,12 @@ command_zrzut_Impl(playerid)
     }
 
     ChatMe(playerid, "wyrzuca z wodolotu paczkê z kontraband¹");
-    SmugglingAction[actionID][EnableContrabandDrop]--;
+    SmugglingAction[actionID][EnableContrabandDrop] = 0;
     SmugglingAction[actionID][ContrabandPackagesToDrop]--;
 
     GetPosBehindVehicle(vehicleID, x, y, z, 1.0);
     CreateContrabandDrop(actionID, x, y, z, SmugglingAction[actionID][ContrabandPackagesToDrop]);
+    PlayerPlaySound(playerid, 1039, 0, 0, 0);
 
     if(SmugglingAction[actionID][ContrabandPackagesToDrop] == 0)
     {
@@ -90,6 +91,7 @@ command_zrzut_Impl(playerid)
     else 
     {
         MruMessageGoodInfo(playerid, "Zrzuci³eœ paczkê kontrabandy!");
+        NextSmugglingCheckpoint(playerid, actionID);
     }
     return 1;
 }

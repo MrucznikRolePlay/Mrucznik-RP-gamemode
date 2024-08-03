@@ -225,6 +225,12 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 		return 0;
     }
 
+    if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER && role == SMUGGLING_ROLE_INITIATOR)
+    {
+        MruMessageFail(playerid, "Musisz byæ pasa¿erem wodolotu. Twój kierowca powinien nim kierowaæ.");
+        return 1;
+    }
+
 	if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_FLY)
 	{
 		if(role == SMUGGLING_ROLE_INITIATOR)
@@ -238,20 +244,41 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 			MruMessageGoodInfoF(playerid, "Musisz teraz przelecieæ przez %d checkpointy aby Twój partner móg³ dokonaæ zrzutu kontrabandy.", CHECKPOINT_PER_DROP);
 		}
 		NextSmugglingCheckpoint(playerid, actionID);
+		PlayerPlaySound(playerid, 1138, 0, 0, 0);
 		return 1;
 	}
 	else if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_DROP)
 	{
+		if(SmugglingAction[actionID][EnableContrabandDrop])
+		{
+        	MruMessageFail(playerid, "Aby kontynuowaæ zbieranie checkpointów - zrzuæcie paczkê z kontraband¹.");
+			return 1;
+		}
+
 		if(role == SMUGGLING_ROLE_INITIATOR)
 		{
 			SmugglingAction[actionID][CapturedCheckpoints] += 1;
 			if(SmugglingAction[actionID][CapturedCheckpoints] % CHECKPOINT_PER_DROP == 0)
 			{
 				SmugglingAction[actionID][CapturedCheckpoints] = 0;
-				SmugglingAction[actionID][EnableContrabandDrop] += 1;
+				SmugglingAction[actionID][EnableContrabandDrop] = 1;
 				MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy, mo¿esz teraz dokonaæ zrzutu na odpowidniej wysokoœci za pomoc¹ komendy /zrzut!", CHECKPOINT_PER_DROP);
+				ChatMe(playerid, "przygotowuje siê do zrzutu paczki z kontraband¹");
 				GameTextForPlayer(playerid, "~g~Mozesz zrzucic kontrabande!", 5000, 6);
+				DisablePlayerRaceCheckpoint(playerid);
+				PlayerPlaySound(playerid, 1137, 0, 0, 0);
 			}
+			else
+			{
+				PlayerPlaySound(playerid, 1138, 0, 0, 0);
+				NextSmugglingCheckpoint(playerid, actionID);
+			}
+		}
+		else
+		{
+			MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy!", CHECKPOINT_PER_DROP);
+			PlayerPlaySound(playerid, 1138, 0, 0, 0);
+			NextSmugglingCheckpoint(playerid, actionID);
 		}
 
 		if(SmugglingAction[actionID][CapturedCheckpoints] >= MAX_SMUGGLING_CHECKPOINTS)
@@ -259,11 +286,15 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 			MruMessageGoodInfo(playerid, "Uda³o Ci siê przelecieæ przez wszystkie checkpointy.");
 			DisablePlayerRaceCheckpoint(playerid);
 			CreateSmugglingGatherCheckpoint(playerid, actionID);
+			PlayerPlaySound(playerid, 1139, 0, 0, 0);
 		}
-		else
-		{
-			NextSmugglingCheckpoint(playerid, actionID);
-		}
+	}
+	else if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_GATHER)
+	{
+			MruMessageGoodInfo(playerid, "Uda³o Ci siê przelecieæ przez wszystkie checkpointy.");
+			DisablePlayerRaceCheckpoint(playerid);
+			CreateSmugglingGatherCheckpoint(playerid, actionID);
+			PlayerPlaySound(playerid, 1139, 0, 0, 0);
 	}
 	
 	return 1;
