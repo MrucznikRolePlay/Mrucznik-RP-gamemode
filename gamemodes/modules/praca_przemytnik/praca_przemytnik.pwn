@@ -305,5 +305,15 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index)
 	SmugglingAction[actionID][ContrabandDropObjects][index] = CreateDynamicObject(1575, x, y, z, 0, 0, 0.0, 150.0);
 }
 
+MarcepanPhone(playerid, string[])
+{
+	new delay = 500 + random(2000);
+	defer MarcepanPhoneTimer[delay](playerid, string);
+}
+
+timer MarcepanPhoneTimer[1000](playerid, string[])
+{
+	SendClientMessage(playerid, COLOR_YELLOW, string);
+}
 
 //end
