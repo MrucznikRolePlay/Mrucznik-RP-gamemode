@@ -283,6 +283,10 @@ CreateContrabandDrop(actionID, Float:x, Float:y, Float:z, index)
 	// get ground position
 	new Float:groundZ;
 	CA_FindZ_For2DCoord(x, y, groundZ);
+	if(groundZ < 0.0) 
+	{
+		groundZ = 0.0;
+	}
 
 	// calculate speed of falling down, 5m/s is falling speed on parachute
 	new Float:speed = 5.0;
@@ -311,7 +315,7 @@ MarcepanPhone(playerid, string[])
 	defer MarcepanPhoneTimer[delay](playerid, string);
 }
 
-timer MarcepanPhoneTimer[1000](playerid, string[])
+timer MarcepanPhoneTimer[1000](playerid, string:string[])
 {
 	SendClientMessage(playerid, COLOR_YELLOW, string);
 }
