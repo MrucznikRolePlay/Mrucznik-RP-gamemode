@@ -8,3 +8,5 @@ cd ../
 rm -rf indirection
 git clone git@github.com:MrucznikRolePlay/indirection
 cd ../
+
+sed -i 's/MAX_CA_OBJECTS > 50000/MAX_CA_OBJECTS > 100000/g' ./dependencies/ColAndreas/Server/include/colandreas.inc
