@@ -47,6 +47,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <a_samp>
 #define FIX_ispacked 0 
 #define FIX_OnClientCheckResponse 0
+#define FIXES_OneRandomVehicleColour 1
 #include <fixes>
 
 //-------<[ Pluginy ]>-------
@@ -123,8 +124,9 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 	#include "obiekty\colandreas_removebuildings.pwn"
 	hook OnGameModeInit()
 	{
-		printf("ColAndreas - usuwanie budynków i inicjalizacja mapy.");
+		printf("ColAndreas - usuwanie budynkow i inicjalizacja mapy.");
 		ColAndreas_UsunBudynki();
+		ViceCity_AddCollisions();
 		CA_Init();
 	}
 #endif

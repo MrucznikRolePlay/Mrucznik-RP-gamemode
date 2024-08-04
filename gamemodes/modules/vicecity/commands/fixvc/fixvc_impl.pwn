@@ -43,11 +43,20 @@ command_fixvc_Impl(playerid)
 
     new Float:x, Float:y, Float:z;
     GetPlayerPos(playerid, x, y, z);
-    
-    new Float:groundZ;
-    CA_FindZ_For2DCoord(x, y, groundZ);
+      
+    new obj = CA_RayCastLine(x, y, 700.0, x, y, -1000.0, x, y, z);
+    if(obj == 0)
+    {
+        MruMessageFail(playerid, "Niestety, nie uda³o siê naprawiæ pozycji - nie ma nad Tob¹ ¿adnego obiektu.");
+        return 1;
+    }
+    else if(obj == WATER_OBJECT)
+    {
+        MruMessageFail(playerid, "Niestety, nie uda³o siê naprawiæ pozycji - wykryto tylko wodê.");
+        return 1;
+    }
 
-    SetPlayerPos(playerid, x, y, groundZ + 1.5);
+    SetPlayerPos(playerid, x, y, z + 1.5);
     GameTextForPlayer(playerid, "Naprawiles swoja pozycje!", 5000, 1);
     return 1;
 }

@@ -185,6 +185,7 @@ hook OnGameModeInit()
         // Timed Objects
         if(ide_infos[i][timeon] != 0) {
             AddSimpleModelTimed(VICECITY_VWORLD, 19379, ide_infos[i][modelID], unpackDFF, unpackTXD, ide_infos[i][timeon], ide_infos[i][timeoff]);
+			CA_LoadFromDff(ide_infos[i][modelID], unpackDFF);
             timedModels++;
             totalModels++;
         // Non Timed Objects
@@ -197,6 +198,7 @@ hook OnGameModeInit()
             || ide_infos[i][modelID] == -9175 || ide_infos[i][modelID] == -9176 || ide_infos[i][modelID] == -9177
             || ide_infos[i][modelID] == -9263) { // Don't create objects with "lod" in dff_name.
                 AddSimpleModel(VICECITY_VWORLD, 19379, ide_infos[i][modelID], unpackDFF, unpackTXD);
+				CA_LoadFromDff(ide_infos[i][modelID], unpackDFF);
                 totalModels++;
                 normalModels++;
             }
@@ -217,12 +219,11 @@ hook OnGameModeInit()
             new Float:erx, Float:ery, Float:erz;
             QuatToEulerZXY(ipl_infos[i][ipl_rx], ipl_infos[i][ipl_ry], ipl_infos[i][ipl_rz], ipl_infos[i][ipl_rw], erx, ery, erz);
 
-
             if(ipl_infos[i][interiorID] != 0) {
-                objectid = CreateDynamicObject(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z], erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 150.0, 150.0, -1, 0);    
+                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z], erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 150.0, 150.0, -1, 0);    
             }
             else {
-                objectid = CreateDynamicObject(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z], erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 1000.0, 1000.0, -1, 0);     
+                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z], erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 1000.0, 1000.0, -1, 0);     
             }
 
 			new ModelID = ipl_infos[i][modelID];
@@ -265,6 +266,26 @@ hook OnGameModeInit()
 	
     printf("Vice City | Total Objects: %d - Total Models: %d - Timed Objects: %d - Normal Models: %d", Streamer_CountItems(STREAMER_TYPE_OBJECT, 0), totalModels, timedModels, normalModels);
     return 1;
+}
+
+ViceCity_AddCollisions()
+{
+    for(new i, k = sizeof(ide_infos); i < k; i++) {
+        new unpackDFF[40];
+
+        strunpack(unpackDFF, ide_infos[i][dff_name]);
+        strins(unpackDFF, DFF_PATH, 0);
+
+		if(strfind(ide_infos[i][dff_name], "lod", true) == -1 || ide_infos[i][modelID] == -9150
+		|| ide_infos[i][modelID] == -9151 || ide_infos[i][modelID] == -9152 || ide_infos[i][modelID] == -9153
+		|| ide_infos[i][modelID] == -9888 || ide_infos[i][modelID] == -9887 || ide_infos[i][modelID] == -9893
+		|| ide_infos[i][modelID] == -9889 || ide_infos[i][modelID] == -9892 || ide_infos[i][modelID] == -9894
+		|| ide_infos[i][modelID] == -9261 || ide_infos[i][modelID] == -9262 || ide_infos[i][modelID] == -9207
+		|| ide_infos[i][modelID] == -9175 || ide_infos[i][modelID] == -9176 || ide_infos[i][modelID] == -9177
+		|| ide_infos[i][modelID] == -9263) { // Don't add collisions to models with "lod" in dff_name.
+			CA_LoadFromDff(ide_infos[i][modelID], unpackDFF);
+		}
+    }
 }
 
 hook OnGameModeExit() {
