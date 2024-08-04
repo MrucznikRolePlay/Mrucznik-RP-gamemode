@@ -60,7 +60,7 @@ stock GetPlayerSmugglingActionID(playerid)
 	{
 		if(SmugglingAction[i][SmugglingActionID] == redisActionID)
 		{
-			return 1;
+			return i;
 		}
 	}
 	return -1;
@@ -119,6 +119,9 @@ StartSmuggling(playerid)
 	CreateDropPointFlare(actionID);
 	CreateSmugglingPickupCheckpoint(playerid, actionID);
 
+	// reset special action
+	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
+
 	// set info about smuggling for action initiator
 	RedisStartSmuggling(PlayerInfo[playerid][pUID], redisActionID, SMUGGLING_ROLE_INITIATOR);
 	MruMessageGoodInfo(playerid, "Rozpocz¹³eœ akcjê przemytnicz¹.");
@@ -130,7 +133,8 @@ StartSmuggling(playerid)
 	new driverUID = GetPVarInt(playerid, "smuggling-driver-uid");
 	if(IsPlayerConnected(driverID) && PlayerInfo[driverID][pUID] == driverUID)
 	{
-		MruMessageGoodInfoF(driverID, "%s rozpocz¹³ z Tob¹ akcjê przemytnicz¹ - mainowa³ Ciê pilotem wodolotu. Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj przemyt", GetNick(playerid));
+		MruMessageGoodInfoF(driverID, "%s rozpocz¹³ z Tob¹ akcjê przemytnicz¹ - mianowa³ Ciê pilotem wodolotu.", GetNick(playerid));
+		MruMessageGoodInfo(driverID, "Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj przemyt");
 	}
 	RedisStartSmuggling(driverUID, redisActionID, SMUGGLING_ROLE_DRIVER);
 
@@ -141,7 +145,8 @@ StartSmuggling(playerid)
 		new partnerUID = GetPVarInt(playerid, sprintf("smugging-partner-%d-uid", i));
 		if(IsPlayerConnected(partnerID) && PlayerInfo[partnerID][pUID] == partnerUID)
 		{
-			MruMessageGoodInfoF(partnerID, "%s rozpocz¹³ z Tob¹ akcjê przemytnicz¹. Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj przemyt", GetNick(playerid));
+			MruMessageGoodInfoF(partnerID, "%s rozpocz¹³ z Tob¹ akcjê przemytnicz¹.", GetNick(playerid));
+			MruMessageGoodInfo(partnerID, "Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj przemyt");
 		}
 		RedisStartSmuggling(partnerUID, redisActionID, SMUGGLING_ROLE_PARTNER);
 	}

@@ -64,9 +64,9 @@ Przemytnik_OnPlayerText(playerid, text[])
 				return 1;
 			}
 
-			if(GetPlayerJobSkill(giveplayerid, JOB_DRIVER) >= 5)
+			if(GetPlayerJobSkill(giveplayerid, JOB_DRIVER) < 5)
 			{
-				MarcepanPhone(playerid, "Telefon (Marcepan_Marks): ten goœæ ma zbyt ma³e umiejêtnoœci by braæ udzia³ w akcji przemytniczej, znajdŸ kogoœ bardziej doœwiadczonego (5 skill).");
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): ten goœæ ma zbyt ma³e umiejêtnoœci by braæ udzia³ w akcji, znajdŸ kogoœ bardziej doœwiadczonego (5 skill).");
 				return 1;
 			}
 
@@ -86,7 +86,8 @@ Przemytnik_OnPlayerText(playerid, text[])
 		{
 			if(strcmp(text, "to wszyscy", true) == 0)
 			{
-				MarcepanPhone(playerid, "Telefon (Marcepan_Marks): ok, w takim razie ustalmy miejsce zebrania kontrabandy. Gdy bêdziesz gotowy, powiedz: 'tutaj' a pobiore Twoje koordynaty.");
+				SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): ok, w takim razie ustalmy miejsce zebrania kontrabandy.");
+				SendClientMessage(playerid, COLOR_YELLOW, "Gdy bêdziesz gotowy, powiedz: 'tutaj' a pobiore Twoje koordynaty.");
 				SetPVarInt(playerid, "smuggling", 4);
 				return 1;
 			}
@@ -170,8 +171,9 @@ Przemytnik_OnPlayerText(playerid, text[])
 
 			Log(payLog, INFO, "%s zorganizowa³ przemyt za %d$", GetNick(playerid), SMUGGLING_COST);
 
-			MarcepanPhone(playerid, "Telefon (Marcepan_Marks): w porz¹dku, wysy³am Ci koordynaty naszego statku. Udaj siê tam wodolotem wraz ze swoim kierowc¹ aby odebraæ kontrabandê.");
-			MarcepanPhone(playerid, "Telefon (Marcepan_Marks): udanej akcji, leæ nisko!");
+			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): w porz¹dku, wysy³am Ci koordynaty naszego statku.");
+			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Udaj siê tam wodolotem wraz ze swoim kierowc¹ aby odebraæ kontrabandê.");
+			SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Udanej akcji, leæ nisko!");
         	SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
 
 			SendClientMessage(playerid, COLOR_PANICRED, "WA¯NE! By wystartowaæ wodolotem, ustaw /fpslimit 30 i upewnij siê, ¿e masz w³¹czony frame limiter w ustawieniach GTA SA");

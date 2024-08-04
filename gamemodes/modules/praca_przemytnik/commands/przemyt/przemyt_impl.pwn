@@ -30,6 +30,7 @@ command_przemyt_Impl(playerid)
         MruMessageFail(playerid, "Nie jesteœ przemytnikiem.");
         return 1;
     }
+
     if(!IsAPrzestepca(playerid))
     {
         MruMessageFail(playerid, "Nie jesteœ w organizacji przestêpczej, tylko organizacje przestêpcze mog¹ organizowaæ przemyt.");
@@ -41,7 +42,7 @@ command_przemyt_Impl(playerid)
         new actionID = GetPlayerSmugglingActionID(playerid);
         if(actionID == -1)
         {
-            MruMessageError(playerid, "Nie uda³o siê pobraæ ID akcji przemytniczej. Zg³oœ b³¹d adminom.");
+            MruMessageError(playerid, "Nie uda³o siê pobraæ ID akcji przemytniczej. Zg³oœ b³¹d adminom.");
             return 1;
         }
 
@@ -76,6 +77,10 @@ command_przemyt_Impl(playerid)
             {
                 return przemyt_StageDelivered(playerid, actionID);
             }
+            default:
+            {
+                MruMessageError(playerid, "B³¹d - zg³oœ go Mrucznikowi.");
+            }
         }
         return 1;
     }
@@ -84,7 +89,7 @@ command_przemyt_Impl(playerid)
 
     new hour,minute,second;
     gettime(hour, minute, second);
-    if(hour < 18 || hour > 21)
+    if(hour < 18 || hour > 23)
     {
         SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie ma dostêpnych przemytów w tym momencie. Zadzwoñ miêdzy 18 a 23.");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
@@ -100,7 +105,8 @@ command_przemyt_Impl(playerid)
 
     if(!(IsPlayerAtViceCityMainland(playerid) && GetPlayerInterior(playerid) == 0 && GetPlayerVirtualWorld(playerid) == 0))
     {
-        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Twój telefon mo¿e znajdowaæ siê na pods³uchu, zadzwoñ ustaliæ szczegó³y gdy bêdziesz na wyspie Mainland w Vice City.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Twój telefon mo¿e znajdowaæ siê na pods³uchu!");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Zadzwoñ ustaliæ szczegó³y gdy bêdziesz na wyspie Mainland w Vice City!");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
         return 1;
     }
@@ -115,7 +121,8 @@ command_przemyt_Impl(playerid)
     }
     if(players < 3)
     {
-        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): niestety, ma³y ruch w interesie, nie ma z kim organizowaæ akcji przemytniczych. Zadzwoñ, gdy w mieœcie bêdzie wiêcej ruchu.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): niestety, ma³y ruch w interesie, nie ma z kim organizowaæ akcji przemytniczych.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): zadzwoñ, gdy w mieœcie bêdzie wiêcej ruchu.");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
         return 1;
     }
@@ -124,7 +131,8 @@ command_przemyt_Impl(playerid)
     MruMessageInfo(playerid, "Rozpocz¹³eœ umawianie akcji przemytniczej, aby z niej zrezygnowaæ, wpisz: /z");
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_USECELLPHONE);
 
-    SendClientMessage(playerid, COLOR_YELLOW, sprintf("Telefon (Marcepan_Marks): dobrze, ¿e dzwonisz. W³aœnie zmierzamy z kontraband¹ do Vice City. Sprzedajemy j¹ za %d$. Zainteresowany zorganizowaniem akcji przemytniczej?", SMUGGLING_COST));
+    SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): dobrze, ¿e dzwonisz. W³aœnie zmierzamy z kontraband¹ do Vice City.");
+    SendClientMessage(playerid, COLOR_YELLOW, sprintf("Telefon (Marcepan_Marks): Sprzedajemy j¹ za %d$. Zainteresowany zorganizowaniem akcji przemytniczej?", SMUGGLING_COST));
     MruMessageInfo(playerid, "Wpisz 'tak' aby kontynuowaæ.");
     return 1;
 }

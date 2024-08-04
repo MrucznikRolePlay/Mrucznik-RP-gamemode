@@ -30,17 +30,17 @@
 
 YCMD:z(playerid, params[], help)
 {
-	if(Mobile[playerid] == INVALID_PLAYER_ID)
-	{
-		sendErrorMessage(playerid, "Nikt do Ciebie nie dzwoni.");
-		return 1;
-	}
-
 	if(GetPVarInt(playerid, "smuggling") >= 1)
 	{
 		SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 		sendTipMessageEx(playerid, COLOR_GRAD2, "Zakoñczono rozmowê.");
 		DeletePVar(playerid, "smuggling");
+		return 1;
+	}
+
+	if(Mobile[playerid] == INVALID_PLAYER_ID)
+	{
+		sendErrorMessage(playerid, "Nikt do Ciebie nie dzwoni.");
 		return 1;
 	}
 	
