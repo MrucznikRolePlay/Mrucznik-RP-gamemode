@@ -12345,6 +12345,11 @@ ShowPlayerDamage(playerid, forplayerid)
 	return 1;
 }
 
+IsPlayerInFight(playerid, time=60)
+{
+	return gettime() - GetPVarInt(playerid, "lastDamage") < time;
+}
+
 
 IsReasonAPursuitReason(result[])
 {

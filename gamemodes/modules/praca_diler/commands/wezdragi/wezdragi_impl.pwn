@@ -37,7 +37,7 @@ command_wezdragi_Impl(playerid)
 		return 1;
 	}
 
-    if(gettime() - GetPVarInt(playerid, "lastDamage") < 60)
+    if(IsPlayerInFight(playerid))
     {
         MruMessageFail(playerid, "Nie mo¿esz braæ narkotyków podczas walki (60 sekund po otrzymaniu obra¿eñ)!");
         return 1;

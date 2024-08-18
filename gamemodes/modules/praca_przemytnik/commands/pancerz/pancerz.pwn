@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                   zjedz                                                   //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  pancerz                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,52 +16,45 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 03.03.2020
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-zjedz_OnDialogResponse(playerid, listitem)
+
+//-------<[ include ]>-------
+#include "pancerz_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_pancerz()
 {
-    MruMySQL_EatCookedMeal(playerid, DynamicGui_GetValue(playerid, listitem));
-    MruMySQL_CookedMealsDialog(playerid);
-    return 1;
+    
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
 }
 
-command_zjedz_Impl(playerid)
+//-------<[ command ]>-------
+YCMD:pancerz(playerid, params[], help)
 {
-    new Float:hp;
-    GetPlayerHealth(playerid, hp);
-    if(hp >= 100.0)
+    if (help)
     {
-        sendErrorMessage(playerid, "Jesteœ tak najedzony, ¿e nie zmieœcisz ju¿ wiêcej (masz pe³ne hp).");
+        sendTipMessage(playerid, "Zak³adasz kamizelkê kuloodporn¹.");
         return 1;
     }
     
-    if(IsPlayerInFight(playerid))
-    {
-        sendErrorMessage(playerid, "Nie mo¿esz jeœæ podczas walki!");
-        return 1;
-    }
-
-    if(IsAtFoodPlace(playerid))
-    {
-        if(kaska[playerid] < 100)
-        {
-            MruMessageFail(playerid, "Nie staæ Ciê, potrzebujesz 100$.");
-            return 1;
-        }
-        ApplyAnimation(playerid, "FOOD", "EAT_Burger", 4.1, 0, 1, 1, 1, 1, 1);
-        SetPlayerHealth(playerid, 100.0);
-        ZabierzKase(playerid, 100);
-        GameTextForPlayer(playerid, "~r~-100$", 5000, 1);
-        return 1;
-    }
-
-    MruMySQL_CookedMealsDialog(playerid);
-    return 1;
+    
+    //command body
+    return command_pancerz_Impl(playerid);
 }
-
-//end

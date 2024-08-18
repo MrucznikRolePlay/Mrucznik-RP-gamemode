@@ -36,6 +36,7 @@
 #include "przemyt\przemyt.pwn"
 #include "zrzut\zrzut.pwn"
 #include "sprzedajprzemyt\sprzedajprzemyt.pwn"
+#include "pancerz\pancerz.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -47,5 +48,6 @@ hook OnGameModeInit()
     command_przemyt();
     command_zrzut();
     command_sprzedajprzemyt();
+    command_pancerz();
     
 }
