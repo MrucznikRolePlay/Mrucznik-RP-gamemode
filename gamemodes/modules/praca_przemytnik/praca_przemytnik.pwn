@@ -331,11 +331,13 @@ timer MarcepanPhoneTimer[1000](playerid, color, string:string[])
 UseJetpack(playerid)
 {
 	JetpackEnabled[playerid] = true;
+	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_USEJETPACK);
 }
 
 DisableJetpack(playerid)
 {
 	JetpackEnabled[playerid] = false;
+	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 }
 
 PlayerOwnsJetpack(playerid)
@@ -345,7 +347,7 @@ PlayerOwnsJetpack(playerid)
 	return owns == 1;
 }
 
-LegalJetpack(playerid) 
+LegalJetpack(playerid)
 {
 	return JetpackEnabled[playerid];
 }

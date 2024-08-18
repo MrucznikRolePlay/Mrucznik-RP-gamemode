@@ -34,12 +34,12 @@ command_jetpack_Impl(playerid)
     if(GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USEJETPACK)
     {
         DisableJetpack(playerid);
-        ChatMe(playerid, "zak³ada plecak odrzutowy i odpala go.");
+        ChatMe(playerid, "gasi plecak odrzutowy po czym go zdjemuje.");
     }
     else
     {
         UseJetpack(playerid);
-        ChatMe(playerid, "gasi plecak odrzutowy po czym go zdjemuje.");
+        ChatMe(playerid, "zak³ada plecak odrzutowy i odpala go.");
     }
     return 1;
 }
