@@ -43,14 +43,6 @@ hook OnGameModeInit()
     // AddSimpleModel for Screen Map
     AddSimpleModel(-1, 19379, -3001, "vc4samp/fbi_logo_large.dff", "vc4samp/fbi_logo.txd");
 
-    // Creating Text3D, if enabled
-    #if INTERIORS_USE_TEXT3D == 1
-        for(new i = 0, k = sizeof(VC_interiors); i < k; i++) {
-            VC_interiors[i][intEntrance] = CreateDynamic3DTextLabel("Press 'CTRL' to exit.", 0xFFFFFFFF, VC_interiors[i][enexX1], VC_interiors[i][enexY1], VC_interiors[i][enexZ1], 10.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, VICECITY_VWORLD, VC_interiors[i][enexInt1], -1, 10.0, -1, 0);
-            VC_interiors[i][intExit] = CreateDynamic3DTextLabel("Press 'CTRL' to enter.", 0xFFFFFFFF, VC_interiors[i][enexX2], VC_interiors[i][enexY2], VC_interiors[i][enexZ2], 30.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, VICECITY_VWORLD, VC_interiors[i][enexInt2], -1, 20.0, -1, 0);
-        }
-    #endif
-
     // Creating textdraws
     #if defined VICECITY_USE_MAP
 		screenVCMap = TextDrawCreate(170.000000, 91.000000, "mdl-3001:fbi_logo1");
@@ -306,20 +298,7 @@ hook OnPlayerConnect(playerid) {
 }
 
 hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
-    if(newkeys & KEY_FIRE) {
-        for(new i = 0, k = sizeof(VC_interiors); i < k; i++) {
-            if(IsPlayerInRangeOfPoint(playerid, 1.5, VC_interiors[i][enexX1], VC_interiors[i][enexY1], VC_interiors[i][enexZ1]) && GetPlayerInterior(playerid) == VC_interiors[i][enexInt1]) {
-                SetPlayerPos(playerid, VC_interiors[i][enexX2], VC_interiors[i][enexY2], VC_interiors[i][enexZ2]+1.0);
-                SetPlayerInterior(playerid, VC_interiors[i][enexInt2]);
-            }
-            else if(IsPlayerInRangeOfPoint(playerid, 1.5, VC_interiors[i][enexX2], VC_interiors[i][enexY2], VC_interiors[i][enexZ2]) && GetPlayerInterior(playerid) == VC_interiors[i][enexInt2]) {
-                SetPlayerPos(playerid, VC_interiors[i][enexX1], VC_interiors[i][enexY1], VC_interiors[i][enexZ1]+1.0);
-                SetPlayerInterior(playerid, VC_interiors[i][enexInt1]);
-            }
-        }
-    }
-
-	else if(HOLDING(HOLDING_KEY) && IsPlayerInDynamicArea(playerid, areaViceCity, 0)) {
+	if(HOLDING(HOLDING_KEY) && IsPlayerInDynamicArea(playerid, areaViceCity, 0)) {
         TextDrawShowForPlayer(playerid, screenVCMap);
 	    for(new i = 0, k = sizeof(screenVCPlaces); i < k; i++) {
 			TextDrawShowForPlayer(playerid, screenVCPlaces[i]);

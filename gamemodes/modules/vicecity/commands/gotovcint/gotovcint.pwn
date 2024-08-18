@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 gotovcint                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,23 +27,40 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "objectsdebug\objectsdebug.pwn"
-#include "gotovc\gotovc.pwn"
-#include "fixvc\fixvc.pwn"
-#include "transport\transport.pwn"
-#include "gotovcint\gotovcint.pwn"
-
+#include "gotovcint_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_gotovcint()
 {
-    command_objectsdebug();
-    command_gotovc();
-    command_fixvc();
-    command_transport();
-    command_gotovcint();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:gotovcint(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Teleport do interioru vice city");
+        return 1;
+    }
+    //fetching params
+    new intnum, inout;
+    if(sscanf(params, "dd", intnum, inout))
+    {
+        sendTipMessage(playerid, "U¿yj /gotovcint [Numer interioru] [Wejœcie/Wyjœcie (0/1)] ");
+        return 1;
+    }
+    
+    //command body
+    return command_gotovcint_Impl(playerid, intnum, inout);
 }

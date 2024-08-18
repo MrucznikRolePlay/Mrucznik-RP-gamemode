@@ -42,9 +42,6 @@
 	#define HOLDING_KEY                 KEY_NO
 #endif
 
-// 1 = entrance/exit of interior have Text 3D to help players, 0 for disable
-#define INTERIORS_USE_TEXT3D 1 
-
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
 #define RELEASED(%0) \
