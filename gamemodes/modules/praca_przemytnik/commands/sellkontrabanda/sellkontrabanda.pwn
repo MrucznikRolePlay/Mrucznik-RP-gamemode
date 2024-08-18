@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                            sprzedajkontrabande                                            //
+//                                              sellkontrabanda                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,14 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "sprzedajkontrabande_impl.pwn"
+#include "sellkontrabanda_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_sprzedajkontrabande()
+command_sellkontrabanda()
 {
-    
+    new command = Command_GetID("sellkontrabanda");
 
     //aliases
+    Command_AddAlt(command, "sprzedajkontrabande");
     
 
     //permissions
@@ -46,7 +47,7 @@ command_sprzedajkontrabande()
 }
 
 //-------<[ command ]>-------
-YCMD:sprzedajkontrabande(playerid, params[], help)
+YCMD:sellkontrabanda(playerid, params[], help)
 {
     if (help)
     {
@@ -57,7 +58,7 @@ YCMD:sprzedajkontrabande(playerid, params[], help)
     new giveplayerid, count, price;
     if(sscanf(params, "rdd", giveplayerid, count, price))
     {
-        sendTipMessage(playerid, "U¿yj /sprzedajkontrabande [Nick/ID] [liczba] [cena] ");
+        sendTipMessage(playerid, "U¿yj /sellkontrabanda [Nick/ID] [liczba] [cena] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -66,5 +67,5 @@ YCMD:sprzedajkontrabande(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_sprzedajkontrabande_Impl(playerid, giveplayerid, count, price);
+    return command_sellkontrabanda_Impl(playerid, giveplayerid, count, price);
 }

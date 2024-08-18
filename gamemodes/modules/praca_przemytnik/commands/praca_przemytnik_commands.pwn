@@ -31,7 +31,7 @@
 
 //-------<[ include ]>-------
 #include "setkontrabanda\setkontrabanda.pwn"
-#include "sprzedajkontrabande\sprzedajkontrabande.pwn"
+#include "sellkontrabanda\sellkontrabanda.pwn"
 #include "przemyt\przemyt.pwn"
 #include "zrzut\zrzut.pwn"
 #include "ochrona\ochrona.pwn"
@@ -41,7 +41,7 @@
 hook OnGameModeInit()
 {
     command_setkontrabanda();
-    command_sprzedajkontrabande();
+    command_sellkontrabanda();
     command_przemyt();
     command_zrzut();
     command_ochrona();

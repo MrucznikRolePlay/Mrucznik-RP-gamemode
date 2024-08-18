@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                            sprzedajkontrabande                                            //
+//                                              sellkontrabanda                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_sprzedajkontrabande_Impl(playerid, giveplayerid, count, price)
+command_sellkontrabanda_Impl(playerid, giveplayerid, count, price)
 {
     if(GetPlayerJob(playerid) != JOB_SMUGGLER)
 	{
@@ -115,6 +115,5 @@ command_akceptuj_kontrabande(playerid)
     ContrabandCount[playerid] = 0;
     return 1;
 }
-
 
 //end
