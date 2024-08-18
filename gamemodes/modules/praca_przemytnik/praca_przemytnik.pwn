@@ -327,4 +327,27 @@ timer MarcepanPhoneTimer[1000](playerid, color, string:string[])
 	SendClientMessage(playerid, color, string);
 }
 
+// ------------- przedmioty przemytnicze --------------------
+UseJetpack(playerid)
+{
+	JetpackEnabled[playerid] = true;
+}
+
+DisableJetpack(playerid)
+{
+	JetpackEnabled[playerid] = false;
+}
+
+PlayerOwnsJetpack(playerid)
+{
+	new owns;
+	Redis_GetInt(RedisClient, sprintf("player:%d:jetpack", PlayerInfo[playerid][pUID]), owns);
+	return owns == 1;
+}
+
+LegalJetpack(playerid) 
+{
+	return JetpackEnabled[playerid];
+}
+
 //end

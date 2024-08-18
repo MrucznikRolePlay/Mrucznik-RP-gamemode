@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  jetpack                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,25 +27,34 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "setkontrabanda\setkontrabanda.pwn"
-#include "sellkontrabanda\sellkontrabanda.pwn"
-#include "jetpack\jetpack.pwn"
-#include "przemyt\przemyt.pwn"
-#include "zrzut\zrzut.pwn"
-#include "ochrona\ochrona.pwn"
-
+#include "jetpack_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_jetpack()
 {
-    command_setkontrabanda();
-    command_sellkontrabanda();
-    command_jetpack();
-    command_przemyt();
-    command_zrzut();
-    command_ochrona();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:jetpack(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Uruchamia jetpack.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_jetpack_Impl(playerid);
 }

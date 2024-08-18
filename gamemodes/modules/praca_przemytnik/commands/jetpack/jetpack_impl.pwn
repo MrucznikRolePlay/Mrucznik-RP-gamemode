@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  jetpack                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,36 +16,32 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 18.08.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "setkontrabanda\setkontrabanda.pwn"
-#include "sellkontrabanda\sellkontrabanda.pwn"
-#include "jetpack\jetpack.pwn"
-#include "przemyt\przemyt.pwn"
-#include "zrzut\zrzut.pwn"
-#include "ochrona\ochrona.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_jetpack_Impl(playerid)
 {
-    command_setkontrabanda();
-    command_sellkontrabanda();
-    command_jetpack();
-    command_przemyt();
-    command_zrzut();
-    command_ochrona();
-    
+    if(!PlayerOwnsJetpack(playerid))
+    {
+        MruMessageFail(playerid, "Nie posiadasz plecaka odrzutowego, musisz kupiæ go od przemytnika!");
+        return 1;
+    }
+
+    if(GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USEJETPACK)
+    {
+        DisableJetpack(playerid);
+        ChatMe(playerid, "zak³ada plecak odrzutowy i odpala go.");
+    }
+    else
+    {
+        UseJetpack(playerid);
+        ChatMe(playerid, "gasi plecak odrzutowy po czym go zdjemuje.");
+    }
+    return 1;
 }
+
+//end

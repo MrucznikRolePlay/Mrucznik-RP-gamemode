@@ -1095,7 +1095,10 @@ public Spectator()
 		}
 		if(GetPlayerSpecialAction(i) == SPECIAL_ACTION_USEJETPACK)
 		{
-			KickEx(i);
+			if(!LegalJetpack(i))
+			{
+				KickEx(i);
+			}
 		}
 
         weaponID = GetPlayerWeapon(i);

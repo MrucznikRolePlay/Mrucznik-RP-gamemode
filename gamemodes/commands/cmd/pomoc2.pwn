@@ -52,7 +52,7 @@ YCMD:pomoc2(playerid, params[], help)
             SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw /sprzedajneon");
             SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /nitro /hydraulika /maluj /felga /zderzaki /kolory /malunki /felgi");
         }
-		case JOB_SMUGGLER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /pancerz"); }
+		case JOB_SMUGGLER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /ochrona /przemyt /zrzut /sprzedajkontrabande"); }
 		case JOB_GUNDEALER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
 		case JOB_DRIVER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /kurs /duty /businfo /trasa /zakoncztrase /zd "); }
 		case JOB_MEDIC: { 
