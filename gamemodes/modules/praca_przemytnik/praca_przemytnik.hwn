@@ -38,7 +38,7 @@ enum SmugglingRoles {
     SMUGGLING_ROLE_INITIATOR,
     SMUGGLING_ROLE_DRIVER,
     SMUGGLING_ROLE_PARTNER
-}
+};
 
 enum eSmugglingData {
     SmugglingActionID,
@@ -61,6 +61,22 @@ enum eSmugglingData {
 };
 
 new SmugglingAction[SMUGGLING_ACTIONS_PER_DAY][eSmugglingData];
+
+enum SmuglingItems {
+    SMUGGLING_ITEM_UNKNOWN = -1,
+    SMUGGLING_ITEM_ARMOR,
+    SMUGGLING_ITEM_JETPACK
+}
+
+enum eSmugglingItems {
+    ShortName[16],
+    Name[64],
+    Cost
+};
+new SmugglingItemsData[][eSmugglingItems] = {
+    {"pancerz", "kamizelka kuloodporna", 1},
+    {"jetpack", "plecak odrzutowy", 10_000}
+};
 
 //-----------------<[ Zmienne: ]>-------------------
 new Float:ContrabandPickupPoints[][3] = {

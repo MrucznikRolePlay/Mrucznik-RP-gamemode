@@ -35,7 +35,7 @@
 #include "jetpack\jetpack.pwn"
 #include "przemyt\przemyt.pwn"
 #include "zrzut\zrzut.pwn"
-#include "ochrona\ochrona.pwn"
+#include "sprzedajprzemyt\sprzedajprzemyt.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -46,6 +46,6 @@ hook OnGameModeInit()
     command_jetpack();
     command_przemyt();
     command_zrzut();
-    command_ochrona();
+    command_sprzedajprzemyt();
     
 }

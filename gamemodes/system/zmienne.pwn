@@ -695,8 +695,6 @@ new SelectCharID[MAX_PLAYERS];
 new SelectCharPlace[MAX_PLAYERS];
 new ChosenSkin[MAX_PLAYERS];
 new GettingJob[MAX_PLAYERS];
-new GuardOffer[MAX_PLAYERS];
-new GuardPrice[MAX_PLAYERS];
 new ApprovedLawyer[MAX_PLAYERS];
 new CallLawyer[MAX_PLAYERS];
 new WantLawyer[MAX_PLAYERS];
@@ -708,6 +706,9 @@ new SexPrice[MAX_PLAYERS];
 new pSessionStart[MAX_PLAYERS] = {0, ...}; // czas wbicia gracza na serwer
 
 //---------------
+new SmugglingOffer[MAX_PLAYERS];
+new SmugglingOfferPrice[MAX_PLAYERS];
+new SmugglingOfferItem[MAX_PLAYERS];
 new RepairOffer[MAX_PLAYERS];
 new RepairPrice[MAX_PLAYERS];
 new RefillOffer[MAX_PLAYERS];
@@ -1128,7 +1129,7 @@ ZerujZmienne(playerid)
 	dajeKontrakt[playerid] = 9999;
 	SelectChar[playerid] = 0; HidePM[playerid] = 0; PhoneOnline[playerid] = 0; LastSMSNumber[playerid] = 0; spamwl[playerid] = 0; okradziony[playerid] = false;
 	SelectCharID[playerid] = 0; SelectCharPlace[playerid] = 0; ChosenSkin[playerid] = 0;
-	GettingJob[playerid] = 0; GuardOffer[playerid] = 999; GuardPrice[playerid] = 0;
+	GettingJob[playerid] = 0;
     ApprovedLawyer[playerid] = 0; CallLawyer[playerid] = 0; WantLawyer[playerid] = 0; UsedFind[playerid] = 0;
 	CP[playerid] = 0; ScigaSie[playerid] = 666;
 	CarOffer[playerid] = 999; CarPrice[playerid] = 0; CarID[playerid] = 0; CarCalls[playerid] = 0; GraczDajacy[playerid] = 999; GraczDajacyNeon[playerid] = 999;

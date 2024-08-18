@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  ochrona                                                  //
+//                                              sprzedajprzemyt                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,18 +28,16 @@
 
 
 //-------<[ include ]>-------
-#include "ochrona_impl.pwn"
+#include "sprzedajprzemyt_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_ochrona()
+command_sprzedajprzemyt()
 {
-    new command = Command_GetID("ochrona");
+    new command = Command_GetID("sprzedajprzemyt");
 
     //aliases
-    Command_AddAlt(command, "pancerz");
-    Command_AddAlt(command, "sprzedajkamizelke");
-    Command_AddAlt(command, "sprzedajpancerz");
-    Command_AddAlt(command, "sellarmor");
+    Command_AddAlt(command, "sprzedajprzemyt");
+    Command_AddAlt(command, "sellsmuggled");
     
 
     //permissions
@@ -50,18 +48,18 @@ command_ochrona()
 }
 
 //-------<[ command ]>-------
-YCMD:ochrona(playerid, params[], help)
+YCMD:sprzedajprzemyt(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Oferuje graczowi kamizelkê kuloodporn¹.");
+        sendTipMessage(playerid, "Oferuje graczowi przedmiot z przemytu na sprzeda¿.");
         return 1;
     }
     //fetching params
-    new giveplayerid, price;
-    if(sscanf(params, "rd", giveplayerid, price))
+    new giveplayerid, nazwa[32], price;
+    if(sscanf(params, "rs[32]d", giveplayerid, nazwa, price))
     {
-        sendTipMessage(playerid, "U¿yj /ochrona [Nick/ID] [cena] ");
+        sendTipMessage(playerid, "U¿yj /sprzedajprzemyt [Nick/ID] [Nazwa przedmiotu] [cena] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
@@ -70,5 +68,5 @@ YCMD:ochrona(playerid, params[], help)
         return 1;
     }
     //command body
-    return command_ochrona_Impl(playerid, giveplayerid, price);
+    return command_sprzedajprzemyt_Impl(playerid, giveplayerid, nazwa, price);
 }

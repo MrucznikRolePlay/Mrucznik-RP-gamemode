@@ -795,7 +795,7 @@ command_akceptuj_Impl(playerid, x_job[32])
         }
         
     }
-    else if(strcmp(x_job,"pancerz",true) == 0 ||strcmp(x_job,"ochrona",true) == 0)
+    else if(strcmp(x_job,"pancerz",true) == 0 ||strcmp(x_job,"przemyt",true) == 0)
     {
         command_akceptuj_pancerz(playerid);
     }

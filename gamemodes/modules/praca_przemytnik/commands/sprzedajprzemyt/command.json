@@ -1,19 +1,23 @@
 {
-    "name": "ochrona",
-    "description": "Oferuje graczowi kamizelkê kuloodporn¹.",
+    "name": "sprzedajprzemyt",
+    "description": "Oferuje graczowi przedmiot z przemytu na sprzeda¿.",
     "permissions": [],
     "author": "mrucznik",
     "aliases": [
-        "pancerz",
-        "sprzedajkamizelke",
-        "sprzedajpancerz",
-        "sellarmor"
+        "sprzedajprzemyt",
+        "sellsmuggled"
     ],
     "parameters": [
         {
             "type": "player",
             "name": "giveplayerid",
             "description": "Nick/ID"
+        },
+        {
+            "type": "string",
+            "size": "32",
+            "name": "nazwa",
+            "description": "Nazwa przedmiotu"
         },
         {
             "type": "integer",

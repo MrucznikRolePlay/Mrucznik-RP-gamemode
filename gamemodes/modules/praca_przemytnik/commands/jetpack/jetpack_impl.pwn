@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_jetpack_Impl(playerid)
 {
-    if(!PlayerOwnsJetpack(playerid))
+    if(!IsOwnerOfSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK))
     {
         MruMessageFail(playerid, "Nie posiadasz plecaka odrzutowego, musisz kupiæ go od przemytnika!");
         return 1;

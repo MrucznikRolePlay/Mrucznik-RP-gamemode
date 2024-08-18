@@ -73,6 +73,18 @@ stock GetPlayerSmugglingRole(playerid)
 	return role;
 }
 
+stock GetSmugglingItemFromString(str[])
+{
+	for(new i; i<sizeof(SmugglingItemsData); i++)
+	{
+		if(strcmp(str, SmugglingItemsData[i][Name], true) == 0)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
 RedisStartSmuggling(UID, redisActionID, role)
 {
 	new redisKey[64];
@@ -328,6 +340,49 @@ timer MarcepanPhoneTimer[1000](playerid, color, string:string[])
 }
 
 // ------------- przedmioty przemytnicze --------------------
+CreateAndGiveSmugglingItem(playerid, smugglerid, item)
+{
+    new itemCost = SmugglingItemsData[item][Cost];
+    TakeContraband(smugglerid, itemCost);
+
+    GiveSmugglingItem(playerid, item);
+	switch(item)
+	{
+		case SMUGGLING_ITEM_ARMOR:
+		{
+			MruMessageGoodInfo(playerid, "Masz teraz pancerz! Aby go u¿yæ, wpisz /pancerz");
+		}
+		case SMUGGLING_ITEM_JETPACK:
+		{
+			MruMessageGoodInfo(playerid, "Masz teraz plecak odrzutowy! Aby go u¿yæ, wpisz /jetpack");
+		}
+	}
+}
+
+GiveSmugglingItem(playerid, item)
+{
+	Redis_IncrBy(RedisSmugglingItemKey(playerid, item), 1);
+}
+
+TakeSmugglingItem(playerid, item)
+{
+	Redis_IncrBy(RedisSmugglingItemKey(playerid, item), -1);
+}
+
+IsOwnerOfSmugglingItem(playerid, item)
+{
+	new value;
+	Redis_GetInt(RedisClient, RedisSmugglingItemKey(playerid, item), value);
+	return value > 0;
+}
+
+RedisSmugglingItemKey(playerid, item)
+{
+	new redisKey[128];
+	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
+	return redisKey;
+}
+
 UseJetpack(playerid)
 {
 	JetpackEnabled[playerid] = true;
@@ -338,13 +393,6 @@ DisableJetpack(playerid)
 {
 	JetpackEnabled[playerid] = false;
 	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
-}
-
-PlayerOwnsJetpack(playerid)
-{
-	new owns;
-	Redis_GetInt(RedisClient, sprintf("player:%d:jetpack", PlayerInfo[playerid][pUID]), owns);
-	return owns == 1;
 }
 
 LegalJetpack(playerid)
