@@ -1052,6 +1052,10 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 	// -- customowe parametry dla poszczególnych pojazdów
 	if(IsARower(vehicleid) || IsAWodolot(vehicleid))
 	{
+		if(IsAWodolot(vehicleid))
+		{
+			SendClientMessage(playerid, COLOR_PANICRED, "By wystartowaæ wodolotem, ustaw /fpslimit 30 i upewnij siê, ¿e masz w³¹czony frame limiter w ustawieniach GTA SA.");
+		}
 		SetVehicleParamsEx(vehicleid, 1, lights, alarm, doors, bonnet, boot, objective);
 		engine = 1;
 	}
