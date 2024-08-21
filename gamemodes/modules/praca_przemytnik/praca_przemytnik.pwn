@@ -77,7 +77,7 @@ stock GetSmugglingItemFromString(str[])
 {
 	for(new i; i<sizeof(SmugglingItemsData); i++)
 	{
-		if(strcmp(str, SmugglingItemsData[i][Name], true) == 0)
+		if(strcmp(str, SmugglingItemsData[i][ShortName], true) == 0)
 		{
 			return i;
 		}
