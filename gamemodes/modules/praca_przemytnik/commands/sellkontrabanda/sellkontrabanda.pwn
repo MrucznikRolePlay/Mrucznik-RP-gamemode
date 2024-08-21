@@ -37,6 +37,9 @@ command_sellkontrabanda()
 
     //aliases
     Command_AddAlt(command, "sprzedajkontrabande");
+    Command_AddAlt(command, "sellkontraband");
+    Command_AddAlt(command, "sellkontrabande");
+    Command_AddAlt(command, "sellcontraband");
     
 
     //permissions

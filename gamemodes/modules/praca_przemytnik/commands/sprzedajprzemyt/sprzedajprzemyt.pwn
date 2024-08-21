@@ -38,6 +38,7 @@ command_sprzedajprzemyt()
     //aliases
     Command_AddAlt(command, "sprzedajprzemyt");
     Command_AddAlt(command, "sellsmuggled");
+    Command_AddAlt(command, "sellprzemyt");
     
 
     //permissions
@@ -59,7 +60,7 @@ YCMD:sprzedajprzemyt(playerid, params[], help)
     new giveplayerid, nazwa[32], price;
     if(sscanf(params, "rs[32]d", giveplayerid, nazwa, price))
     {
-        sendTipMessage(playerid, "U¿yj /sprzedajprzemyt [Nick/ID] [Nazwa przedmiotu] [cena] ");
+        sendTipMessage(playerid, "U¿yj /sprzedajprzemyt [Nick/ID] [jetpack/pancerz] [cena] ");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))
