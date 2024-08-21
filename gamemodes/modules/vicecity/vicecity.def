@@ -33,7 +33,7 @@
 #define STREAMER_VISIBLEITENS           1000
 
 // Virtual World of Vice City
-#define VICECITY_VWORLD                 0
+#define VICECITY_VWORLD                 -1
 // All maps are extracted in coordinates original from GTA United 1.2, but in SAMP Vice City needs move for not conflict with SA MAP, define bottom move original X + value defined
 #define VICECITY_MOVE_X                 3000
 // Use define bottom if your want to use vice city map holding key
