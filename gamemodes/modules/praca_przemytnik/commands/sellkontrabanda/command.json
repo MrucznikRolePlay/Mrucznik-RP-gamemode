@@ -3,7 +3,7 @@
     "description": "Sprzedaj graczowi swoj¹ kontrabandê.",
     "permissions": [],
     "author": "mrucznik",
-    "aliases": ["sprzedajkontrabande"],
+    "aliases": ["sprzedajkontrabande", "sellkontraband", "sellkontrabande", "sellcontraband"],
     "parameters": [
         {
             "type": "player",
