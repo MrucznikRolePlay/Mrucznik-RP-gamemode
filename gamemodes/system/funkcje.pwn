@@ -3330,6 +3330,27 @@ GraczBankomat(playerid)
 	{// North Point Mall
 		return 1;
 	}
+
+	// Vice City centrum handlowe
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5003.0098, -1878.6378, 15.5760))
+	{
+		return 1;
+	}
+
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5004.9746, -1878.7086, 15.5760))
+	{
+		return 1;
+	}
+
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5002.9194, -1899.4532, 15.5760))
+	{
+		return 1;
+	}
+
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5004.9019, -1899.6617, 15.5760))
+	{
+		return 1;
+	}
 	
 	return 0;
 }
