@@ -8091,19 +8091,16 @@ public OPCLogin(playerid)
     new nick[MAX_PLAYER_NAME];
 	GetPlayerName(playerid, nick, MAX_PLAYER_NAME);
 
-    //new rand = random(AUDIO_LoginTotal);
     TogglePlayerControllable(playerid, 0);
-    // str[128];
-    //format(str, 128, "http://mrucznik-loginsound.lqs.pl/game/audio/%s.%s", AUDIO_LoginData[rand], AUDIO_LoginFormat);
-    //PlayAudioStreamForPlayer(playerid, str);
-	
-    /*SetPlayerPos(playerid, 1868.1099, -1936.2098, -10.0);
-    SetPlayerCameraPos(playerid, 1868.1099, -1936.2098, 48.0756);
-    SetPlayerCameraLookAt(playerid, 1867.2410, -1935.7166, 47.7502);*/
     SetPlayerVirtualWorld(playerid, 0);
     SetPlayerInterior(playerid, 0);
+    TogglePlayerControllable(playerid, 0);
 
-    TourCamera(playerid, 0);
+	// Zwyk³a kamera w Los Santos
+    //TourCamera(playerid, 0);
+	// Kamera Vice City
+	TourCameraViceCity(playerid, 0);
+
 	if(GetPVarInt(playerid, "IsDownloadingContent") == 1) DeletePVar(playerid, "IsDownloadingContent");
     //Strefy load
     ZonePTXD_Load(playerid);
@@ -11668,6 +11665,143 @@ public TourCamera(playerid, step)
     }
     if(lTime != 0)
         SetPVarInt(playerid, "tourcameratimer", SetTimerEx("TourCamera", lTime, 0, "dd", playerid, step+1));
+    return 1;
+}
+
+timer TourCameraViceCity[100](playerid, step)
+{
+    if(GetPlayerState(playerid) != 0) 
+	{
+		return 0;
+	}
+
+	new transitionTime;
+    switch(step)
+    {
+        case 0:
+        {
+			// Look at motel Vice City Beach
+			InterpolateCameraPos(playerid,
+				5241.6602, -2255.2471, 40.6349,
+				5245.7026, -2207.6990, 36.8739,
+				12000, CAMERA_MOVE);
+			InterpolateCameraLookAt(playerid,
+				5263.3911, -2298.9348, 57.7042,
+				5248.3208, -2263.9758, 43.2425,
+				11000, CAMERA_MOVE);
+			SetPlayerPos(playerid, 5238.5874, -2228.5591, 0.0);
+			Streamer_UpdateEx(playerid, 5238.5874, -2228.5591, 0.0);
+			transitionTime = 13000;
+        }
+        case 1:
+        {
+            // Look at motel Vice City Beach from far away
+			InterpolateCameraPos(playerid,
+				5410.5400, -2526.5215, 75.5040,
+				5392.1787, -2482.6750, 70.7091,
+				12000, CAMERA_MOVE);
+			InterpolateCameraLookAt(playerid,
+				5261.7671, -2268.5955, 45.0869,
+				5244.5781, -2243.7019, 38.4688,
+				11000, CAMERA_MOVE);
+			SetPlayerPos(playerid, 5238.5874, -2228.5591, 0.0);
+			Streamer_UpdateEx(playerid, 5238.5874, -2228.5591, 0.0);
+            transitionTime = 13000;
+        }
+        case 2:
+        {
+            // Look at Malibu Club
+			InterpolateCameraPos(playerid,
+				5482.9595, -1070.0116, 35.3759,
+				5484.5854, -1048.0042, 33.1499,
+				12000, CAMERA_MOVE);
+			InterpolateCameraLookAt(playerid,
+				5517.3687, -1054.7716, 31.6211,
+				5504.0610, -1041.5916, 31.6843,
+				11000, CAMERA_MOVE);
+			SetPlayerPos(playerid, 5495.1118, -1035.1361, 0.0);
+			Streamer_UpdateEx(playerid, 5495.1118, -1035.1361, 0.0);
+            transitionTime = 12000;
+        }
+        case 3:
+        {
+            // Look at Malibu Club c.d.
+			InterpolateCameraPos(playerid,
+				5517.3687, -1054.7716, 31.6211,
+				5504.0610, -1041.5916, 31.6843,
+				12000, CAMERA_MOVE);
+			InterpolateCameraLookAt(playerid,
+				5526.0845, -1008.8565, 34.1,
+				5507.5811, -1008.8839, 32.7,
+				11000, CAMERA_MOVE);
+			SetPlayerPos(playerid, 5495.1118, -1035.1361, 0.0);
+			Streamer_UpdateEx(playerid, 5495.1118, -1035.1361, 0.0);
+            transitionTime = 12000;
+        }
+        case 4:
+        {
+            // Look at Vercetti's Mansion
+			InterpolateCameraPos(playerid,
+				4625.0313, -1683.4607, 56.5133,
+				4625.4526, -1631.7551, 43.7434,
+				12000, CAMERA_MOVE);
+			InterpolateCameraLookAt(playerid,
+				4621.2734, -1570.2161, 31.9646,
+				4621.3149, -1554.9303, 30.5163,
+				11000, CAMERA_MOVE);
+			SetPlayerPos(playerid, 4620.1636, -1568.9320, 0.0);
+			Streamer_UpdateEx(playerid, 4620.1636, -1568.9320, 0.0);
+            transitionTime = 13000;
+        }
+        case 5:
+        {
+            // Look at Love Fist street
+			InterpolateCameraPos(playerid,
+				4127.4678, -134.4979, 45.3969,
+				4129.5210, -108.6659, 43.7814,
+				8000, CAMERA_MOVE);
+			InterpolateCameraLookAt(playerid,
+				4137.3408, 183.1745, 37.9014,
+				4137.7461, 212.9454, 37.0244,
+				8000, CAMERA_MOVE);
+			SetPlayerPos(playerid, 4137.2896, 214.4953, 0.0);
+			Streamer_UpdateEx(playerid, 4137.2896, 214.4953, 0.0);
+            transitionTime = 8000;
+        }
+		case 6:
+		{
+			// Look at motel halway Window
+			InterpolateCameraPos(playerid,
+				5573.1597, -932.2980, 73.5019,
+				5557.1724, -932.7851, 73.2095,
+				8000, CAMERA_MOVE);
+			InterpolateCameraLookAt(playerid,
+				5558.8369, -932.5709, 73.7707,
+				5545.7163, -932.9548, 71.7247,
+				12000, CAMERA_MOVE);
+			SetPlayerPos(playerid, 5567.8003, -938.5177, 0.0);
+			Streamer_UpdateEx(playerid, 5567.8003, -938.5177, 0.0);
+            transitionTime = 12000;
+		}
+		case 7:
+		{
+			// Look at destroyed building
+			InterpolateCameraPos(playerid,
+				5065.7905, -1141.6709, 54.3655,
+				5083.1147, -1177.5134, 56.0486,
+				12000, CAMERA_MOVE);
+			InterpolateCameraLookAt(playerid,
+				5150.7114, -1335.8698, 48.7590,
+				5133.9253, -1371.4156, 49.9903,
+				11000, CAMERA_MOVE);
+			SetPlayerPos(playerid, 5136.9741, -1334.8270, 0.0);
+			Streamer_UpdateEx(playerid, 5136.9741, -1334.8270, 0.0);
+		}
+    }
+    if(transitionTime != 0)
+	{
+		defer TourCameraViceCity[transitionTime](playerid, step + 1);
+	}
     return 1;
 }
 //--------------------------------------------------
