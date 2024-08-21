@@ -228,7 +228,6 @@
 #include "cmd/ksam.pwn"
 #include "cmd/ksiazkatel.pwn"
 #include "cmd/kup.pwn"
-#include "cmd/kuparmor.pwn"
 #include "cmd/kupbiletpociag.pwn"
 #include "cmd/kupdildo.pwn"
 #include "cmd/kuphelikopter.pwn"

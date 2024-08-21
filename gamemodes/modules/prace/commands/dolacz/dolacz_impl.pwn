@@ -139,13 +139,13 @@ command_dolacz_Impl(playerid)
 		}
 		case JOB_SMUGGLER:
 		{
-			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Ochroniarzem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
+			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Przemytnikiem, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");
 			SendClientMessage(playerid, COLOR_P@, "   -----Informacje o pracy i warunki kontraktu-----");
-			SendClientMessage(playerid, COLOR_WHITE, "   Mo¿esz ochraniaæ ludzi, jednak jest to tylko przykrywka dla sprzedawania pancerzy - tym masz siê przede wszytkim zajmowaæ.");
-			SendClientMessage(playerid, COLOR_WHITE, "   Praca jest doœæ monotonna gdy¿ praktycznie polega na wciskaniu wszytkim kamizelki kuloodpornej.");
-			SendClientMessage(playerid, COLOR_WHITE, "   Podobno niektórzy przy du¿ym szczêœciu potrafia zarobiæ nawet 90k-130k. Jednak norm¹ jest 10k a przy du¿ym pechu 2k.");
-			SendClientMessage(playerid, COLOR_WHITE, "   Praca nie posiada systemu skilla. To co zarobisz wyp³acamy co godzinê (w Pay Day).");
+			SendClientMessage(playerid, COLOR_WHITE, "   Sprzedajesz paczki kontrabandy oraz specjalne przedmioty, które mo¿esz stworzyæ za ich pomoc¹.");
+			SendClientMessage(playerid, COLOR_WHITE, "   Aby je pozyskaæ, musisz przeprowadziæ akcjê przemytnicz¹ zrzucaj¹c kontrabandê z wodolotu.");
+			SendClientMessage(playerid, COLOR_WHITE, "   By zorganizowaæ tak¹ akcjê, musisz byæ we frakcji, mieæ wodolot oraz znaleŸæ kierowce z 5 skillem.");
+			SendClientMessage(playerid, COLOR_WHITE, "   Przemytnicy bez takich zasobów mog¹ kraœæ paczki tym, którzy organizuj¹ akcjê b¹dŸ zdobywaæ je od ³odzi p³ywaj¹cych po Vice City.");
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
 		}
 		case JOB_GUNDEALER:

@@ -56,7 +56,7 @@ command_businfo_dialog(playerid, dialogid, response, listitem, inputtext[])
                 }
                 case 1:
                 {
-                    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 72","Przystanki koñcowe:\nBaza Mechaników <==> Mrucznik Tower\n\nCzas przejazdu trasy: 3min 50s\n\nIloœæ przystanków: 9\n\nSzczegó³owy rozpis trasy:\n Mrucznik Tower (praca prawnika i ³owcy)\n Market Station\n Szpital\n AmmuNation (praca dilera broni)\n Bank)\n Urz¹d Miasta (wyrób licencji)\n Stacja Benzynowa\n Si³ownia (praca ochroniarza - sprzedaje pancerze i boksera)\n Willowfield\n Baza Mechaników","Wróæ","WyjdŸ");
+                    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 72","Przystanki koñcowe:\nBaza Mechaników <==> Mrucznik Tower\n\nCzas przejazdu trasy: 3min 50s\n\nIloœæ przystanków: 9\n\nSzczegó³owy rozpis trasy:\n Mrucznik Tower (praca prawnika i ³owcy)\n Market Station\n Szpital\n AmmuNation (praca dilera broni)\n Bank)\n Urz¹d Miasta (wyrób licencji)\n Stacja Benzynowa\n Si³ownia (praca boksera)\n Willowfield\n Baza Mechaników","Wróæ","WyjdŸ");
                     //\n\nOpis:\n Szybka linia zapewniaj¹ca g³ównie cywilom szybki\n transport miêdzy kluczowymi punktami w mieœcie\n Najwa¿niejsza i najszybsza linia LSBD
                 }
                 case 2:
