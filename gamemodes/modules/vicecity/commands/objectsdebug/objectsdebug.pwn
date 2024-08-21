@@ -54,6 +54,7 @@ YCMD:objectsdebug(playerid, params[], help)
         return 1;
     }
     
+    TourCameraViceCity(playerid, 0, true);
     
     //command body
     return command_objectsdebug_Impl(playerid);
