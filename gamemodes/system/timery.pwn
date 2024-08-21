@@ -1097,7 +1097,7 @@ public Spectator()
 		{
 			if(!LegalJetpack(i))
 			{
-				KickEx(i);
+				SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 			}
 		}
 
