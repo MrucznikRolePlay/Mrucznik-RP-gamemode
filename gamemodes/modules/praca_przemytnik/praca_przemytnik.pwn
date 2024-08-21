@@ -376,7 +376,7 @@ IsOwnerOfSmugglingItem(playerid, item)
 	return value > 0;
 }
 
-RedisSmugglingItemKey(playerid, item)
+stock RedisSmugglingItemKey(playerid, item)
 {
 	new redisKey[128];
 	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
