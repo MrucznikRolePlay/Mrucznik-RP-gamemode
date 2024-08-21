@@ -17,7 +17,7 @@
             "type": "string",
             "size": "32",
             "name": "nazwa",
-            "description": "Nazwa przedmiotu"
+            "description": "jetpack/pancerz"
         },
         {
             "type": "integer",

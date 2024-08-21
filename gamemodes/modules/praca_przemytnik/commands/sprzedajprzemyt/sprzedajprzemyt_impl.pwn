@@ -40,13 +40,7 @@ command_sprzedajprzemyt_Impl(playerid, giveplayerid, nazwa[], price)
     new item = GetSmugglingItemFromString(nazwa);
     if(item == SMUGGLING_ITEM_UNKNOWN)
     {
-        MruMessageFail(playerid, "Niepoprawna nazwa przedmiotu, dostêpne nazwy:");
-        new nazwy[MAX_MESSAGE_LENGTH];
-        for(new i; i<sizeof(SmugglingItemsData); i++)
-        {
-            format(nazwy, sizeof(nazwy), "%s%s,", nazwy, SmugglingItemsData[i][ShortName]);
-        }
-        MruMessageFailV(playerid, nazwy);
+        MruMessageFail(playerid, "Niepoprawna nazwa przedmiotu, dostêpne nazwy: jetpack, pancerz");
         return 1;
     }
 
