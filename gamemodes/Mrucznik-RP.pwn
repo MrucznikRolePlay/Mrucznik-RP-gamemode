@@ -1083,12 +1083,12 @@ public OnPlayerConnect(playerid)
 			{
 				strcat(npcIP, GetIp(playerid));
 			}
-			printf("Bot %s joined server", GetNick(playerid));
+			printf("Bot %s joined server (ip: %s)", GetNick(playerid), GetIp(playerid));
 		}
 		else
 		{
-			printf("ERROR: unauthorized NPC: %s", GetNick(playerid));
-			Kick(playerid);
+			printf("ERROR: unauthorized NPC: %s (ip: %s)", GetNick(playerid), GetIp(playerid));
+			//Kick(playerid);
 		}
 		return 1;
 	}
