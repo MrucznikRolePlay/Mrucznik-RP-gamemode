@@ -1069,6 +1069,24 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 
 public OnPlayerConnect(playerid)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		if(strcmp(GetIp(playerid), npcIP) != 0)
+		{
+			if(strlen(npcIP) == 0)
+			{
+				strcat(npcIP, GetIp(playerid));
+			}
+			printf("Bot %s joined server", GetNick(playerid));
+		}
+		else
+		{
+			printf("ERROR: unauthorized NPC: %s", GetNick(playerid));
+			Kick(playerid);
+		}
+		return 1;
+	}
+
 	BottomBar(playerid, 0);
 	LoadingShow(playerid);
 
