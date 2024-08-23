@@ -186,6 +186,9 @@ native gpci (playerid, serial [], len);
 //-------<[ Timery ]>-------
 #include "system\timery.pwn"
 
+//-------<[ NPC ]>-------
+#include "system\npc.pwn"
+
 //-------<[ Obiekty ]>-------
 #include "obiekty\obiekty.pwn"
 #include "obiekty\pickupy.pwn"
@@ -487,6 +490,9 @@ public OnGameModeInit()
     }
 
     pusteZgloszenia();
+
+	LoadNPCs();
+
 	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
     print("----- OnGameModeInit done.");
 	return 1;
@@ -1162,6 +1168,12 @@ public OnPlayerDisconnect(playerid, reason)
 {
 	if(playerid == INVALID_PLAYER_ID || playerid > MAX_PLAYERS)
 		return 0;
+
+	if(IsPlayerNPC(playerid))
+	{
+		printf("NPC %s disconnected", GetNick(playerid));
+		return 1;
+	}
 
 	//Pobieranie starej pozycji:
 	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNickEx(playerid), playerid, reason);
