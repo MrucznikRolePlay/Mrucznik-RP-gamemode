@@ -1945,6 +1945,10 @@ public IdleKick()
 {
 	foreach(new i : Player)
 	{
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
 		if(PlayerInfo[i][pAdmin] < 1 || PlayerInfo[i][pNewAP] < 1)
 		{
 			GetPlayerPos(i, PlayerPos[i][0], PlayerPos[i][1], PlayerPos[i][2]);
@@ -2019,6 +2023,10 @@ public SlapperTimer()
 {
 	foreach(new i : Player)
 	{
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
 		if(GetPlayerState(i) == PLAYER_STATE_ONFOOT)
 		{
 			new Float:pAC_Pos[3],Float:VS ;

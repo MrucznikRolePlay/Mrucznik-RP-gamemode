@@ -141,6 +141,11 @@ hook OnPlayerStateChange(playerid, newstate, oldstate)
 
         SetPVarInt(playerid, "iLastDrive", gettime());
     } */
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
 	if(gPlayerLogged[playerid] == 0)
 	{
 		if(newstate == PLAYER_STATE_SPAWNED || newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)

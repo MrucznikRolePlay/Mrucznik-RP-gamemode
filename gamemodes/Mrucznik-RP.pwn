@@ -1812,6 +1812,10 @@ public OnPlayerDeath(playerid, killerid, reason)
 public OnPlayerSpawn(playerid)
 {
 	SetPlayerTeam(playerid, NO_TEAM);
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
 	//Czyszczenie zmiennych
 	if(gPlayerLogged[playerid] != 1)
 	{
