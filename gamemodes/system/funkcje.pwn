@@ -879,6 +879,11 @@ return 1;
 
 public KickEx(playerid)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		PrintBacktrace();
+	}
+
 	SetTimerEx("KickExTimer",250,0,"d",playerid);
 	return 1;
 }
