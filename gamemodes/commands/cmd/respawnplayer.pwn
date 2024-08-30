@@ -77,16 +77,3 @@ YCMD:spawnplayer(playerid, params[], help)
     SpawnPlayer(giveplayerid);
     return 1;
 }
-
-
-YCMD:connectbot(playerid, params[], help)
-{
-    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
-
-
-    new botName[MAX_PLAYER_NAME], botScript[32];
-    if(sscanf(params, "s["#MAX_PLAYER_NAME"]s[32]", botName, botScript)) return sendTipMessage(playerid, "U¿yj /connectbot [botName] [botScript]");
-
-    ConnectNPC(botName, botScript);
-    return 1;
-}

@@ -491,8 +491,6 @@ public OnGameModeInit()
 
     pusteZgloszenia();
 
-	defer LoadNPCs();
-
 	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
     print("----- OnGameModeInit done.");
 	return 1;
