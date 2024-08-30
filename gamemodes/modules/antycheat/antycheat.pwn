@@ -240,6 +240,10 @@ public AntyCheatON(playerid)
 forward OznaczCzitera(playerid);
 public OznaczCzitera(playerid)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
 	new string[71+MAX_PLAYER_NAME];
 	SetPVarInt(playerid, "AC_oznaczony", 1);
 	if(gettime() > GetPVarInt(playerid, "lastSobMsg"))

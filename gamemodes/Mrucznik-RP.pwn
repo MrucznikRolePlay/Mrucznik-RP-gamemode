@@ -3364,6 +3364,11 @@ public OnPlayerRequestClass(playerid, classid)
 {
 	SetSpawnInfo(playerid, 0, PlayerInfo[playerid][pSkin], PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z], 0.0, -1, -1, -1, -1, -1, -1);
 
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
 	if(gPlayerLogged[playerid] != 1)
 	{
 		TogglePlayerSpectating(playerid, true);

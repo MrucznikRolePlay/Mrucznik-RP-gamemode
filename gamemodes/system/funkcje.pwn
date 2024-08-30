@@ -8104,7 +8104,7 @@ public OPCLogin(playerid)
 	// Zwyk³a kamera w Los Santos
     //TourCamera(playerid, 0);
 	// Kamera Vice City
-	TourCameraViceCity(playerid, false);
+	ViceCityTour(playerid, false);
 
 	if(GetPVarInt(playerid, "IsDownloadingContent") == 1) DeletePVar(playerid, "IsDownloadingContent");
     //Strefy load
@@ -11673,7 +11673,7 @@ public TourCamera(playerid, step)
     return 1;
 }
 
-timer TourCameraViceCity[5000](playerid, bool:debugMode)
+timer ViceCityTour[5000](playerid, bool:debugMode)
 {
 	if(gPlayerLogged[playerid])
 	{
@@ -11810,7 +11810,7 @@ timer TourCameraViceCity[5000](playerid, bool:debugMode)
     }
     if(transitionTime != 0)
 	{
-		defer TourCameraViceCity[transitionTime](playerid, debugMode);
+		defer ViceCityTour[transitionTime](playerid, debugMode);
 	}
     return 1;
 }
