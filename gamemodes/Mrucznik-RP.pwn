@@ -1077,12 +1077,8 @@ public OnPlayerConnect(playerid)
 {
 	if(IsPlayerNPC(playerid))
 	{
-		if(strcmp(GetIp(playerid), npcIP) != 0)
+		if(strcmp(GetIp(playerid), "127.0.0.1") == 0)
 		{
-			if(strlen(npcIP) == 0)
-			{
-				strcat(npcIP, GetIp(playerid));
-			}
 			printf("Bot %s joined server (ip: %s)", GetNick(playerid), GetIp(playerid));
 		}
 		else

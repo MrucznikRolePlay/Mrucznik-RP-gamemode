@@ -32,8 +32,6 @@ new unoccupiedVehToCheckPlayersAC[MAX_VEHICLES][MAX_PLAYERS] = {{false, ...}, ..
 new unoccupiedVehBlockAC[MAX_PLAYERS] = {false, ...}; // true je¿eli na gracza zosta³a za³o¿ona blokada synchronizacji pojazdów bez kierowcy
 new performUnoccupiedVehCheckAC = false; // true je¿eli pozycja któregokolwiek pojazdu zosta³a zmieniona w przeci¹gu ostatnich 3 sekund przez synchronizacjê typu UnoccupiedSync
 
-new npcIP[16];
-
 //doors
 new noAccessCome[MAX_PLAYERS]; 
 
