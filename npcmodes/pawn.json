@@ -1,0 +1,10 @@
+{
+	"user": "mrucznik",
+	"repo": "npcmodes",
+	"tag": "0.0.1",
+	"entry": "lodka_przemytnicza.pwn",
+	"output": "gamemodes/lodka_przemytnicza.amx",
+	"dependencies": [
+		"pawn-lang/samp-stdlib"
+	]
+}
