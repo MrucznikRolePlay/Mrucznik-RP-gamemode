@@ -108,6 +108,11 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 hook OnPlayerUpdate(playerid)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
 	if(gPlayerLogged[playerid] == 0)
 	{
 		if(GetPlayerVirtualWorld(playerid) != 1488)

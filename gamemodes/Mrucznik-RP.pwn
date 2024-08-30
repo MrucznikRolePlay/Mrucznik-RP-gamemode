@@ -3685,6 +3685,11 @@ PayDay()
 
 public OnPlayerUpdate(playerid)
 {			
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
 	if((PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0) && IsPlayerAimingEx(playerid))
 	{
 		return FreezePlayerOnInjury(playerid);
