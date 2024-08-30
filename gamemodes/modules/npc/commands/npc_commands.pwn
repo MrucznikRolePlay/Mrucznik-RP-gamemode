@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                objectsdebug                                               //
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,34 +27,17 @@
 // ================= UWAGA! =================
 
 
+#include <YSI\y_hooks>
+
 //-------<[ include ]>-------
-#include "objectsdebug_impl.pwn"
+#include "stoprecord\stoprecord.pwn"
+#include "record\record.pwn"
+
 
 //-------<[ initialize ]>-------
-command_objectsdebug()
+hook OnGameModeInit()
 {
+    command_stoprecord();
+    command_record();
     
-
-    //aliases
-    
-
-    //permissions
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:objectsdebug(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "W³¹cz dynamiczny debug obiektów.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_objectsdebug_Impl(playerid);
 }

@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                objectsdebug                                               //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 stoprecord                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,45 +16,24 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 30.08.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "objectsdebug_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_objectsdebug()
+//------------------<[ Implementacja: ]>-------------------
+command_stoprecord_Impl(playerid, giveplayerid)
 {
-    
+	if(PlayerInfo[playerid][pAdmin] <= 0)
+	{
+		noAccessMessage(playerid);
+		return 1;
+	}
 
-    //aliases
-    
-
-    //permissions
-    
-
-    //prefix
-    
+    StopRecordingPlayerData(giveplayerid);
+    MruMessageGoodInfo(playerid, "Zatrzyma³eœ nagrywanie gracza");
+    return 1;
 }
 
-//-------<[ command ]>-------
-YCMD:objectsdebug(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "W³¹cz dynamiczny debug obiektów.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_objectsdebug_Impl(playerid);
-}
+//end

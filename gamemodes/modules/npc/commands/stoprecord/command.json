@@ -1,0 +1,17 @@
+{
+    "name": "stoprecord",
+    "description": "Zatrzymuje nagrywanie ruchu gracza.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "stoprecordnpc", "stoprec"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "30.08.2024"
+}

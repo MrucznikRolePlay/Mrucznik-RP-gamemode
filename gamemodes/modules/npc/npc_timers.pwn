@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                objectsdebug                                               //
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                    npc                                                    //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,45 +16,15 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 30.08.2024
+//Opis:
+/*
+	Obs³uga botów NPC.
+*/
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//-----------------<[ Timery: ]>-------------------
 
-//-------<[ include ]>-------
-#include "objectsdebug_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_objectsdebug()
-{
-    
-
-    //aliases
-    
-
-    //permissions
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:objectsdebug(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "W³¹cz dynamiczny debug obiektów.");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_objectsdebug_Impl(playerid);
-}
+//end

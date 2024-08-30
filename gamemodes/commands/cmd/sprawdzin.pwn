@@ -37,6 +37,12 @@ YCMD:sprawdzin(playerid, params[], help)
 		SendClientMessage(playerid, -1, "U¿yj /sprawdzin [playerid/CzêœæNicku]");
 		return 1;
 	}
+	if(PlayerInfo[playerid][pAdmin] <= 0)
+	{
+		noAccessMessage(playerid);
+		return 1;
+	}
+
 	if(GetPlayerState(giveplayerid) == PLAYER_STATE_NONE) // If the killer was in a vehicle
     {
 		SendClientMessage(playerid, -1, "Gracz is none.");

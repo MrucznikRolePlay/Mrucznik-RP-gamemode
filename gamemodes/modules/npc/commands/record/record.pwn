@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                objectsdebug                                               //
+//                                                   record                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,14 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "objectsdebug_impl.pwn"
+#include "record_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_objectsdebug()
+command_record()
 {
-    
+    new command = Command_GetID("record");
 
     //aliases
+    Command_AddAlt(command, "recordnpc");
     
 
     //permissions
@@ -46,15 +47,25 @@ command_objectsdebug()
 }
 
 //-------<[ command ]>-------
-YCMD:objectsdebug(playerid, params[], help)
+YCMD:record(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "W³¹cz dynamiczny debug obiektów.");
+        sendTipMessage(playerid, "Nagrywa gracza.");
         return 1;
     }
-    
-    
+    //fetching params
+    new giveplayerid, type, filename[64];
+    if(sscanf(params, "rds[64]", giveplayerid, type, filename))
+    {
+        sendTipMessage(playerid, "U¿yj /record [Nick/ID] [typ nagrywania, 1 - kierowca, 2 - pieszy] [nazwa pliku] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
     //command body
-    return command_objectsdebug_Impl(playerid);
+    return command_record_Impl(playerid, giveplayerid, type, filename);
 }

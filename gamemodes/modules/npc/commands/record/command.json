@@ -1,0 +1,28 @@
+{
+    "name": "record",
+    "description": "Nagrywa gracza.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "recordnpc", "rec"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "type",
+            "description": "typ nagrywania, 1 - kierowca, 2 - pieszy"
+        },
+        {
+            "type": "string",
+            "name": "filename",
+            "description": "nazwa pliku",
+            "size": "64"
+        }
+    ],
+    "date": "30.08.2024"
+}

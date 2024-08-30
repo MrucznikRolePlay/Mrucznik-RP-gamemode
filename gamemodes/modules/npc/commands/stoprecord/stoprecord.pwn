@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                objectsdebug                                               //
+//                                                 stoprecord                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,14 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "objectsdebug_impl.pwn"
+#include "stoprecord_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_objectsdebug()
+command_stoprecord()
 {
-    
+    new command = Command_GetID("stoprecord");
 
     //aliases
+    Command_AddAlt(command, "stoprecordnpc");
     
 
     //permissions
@@ -46,15 +47,25 @@ command_objectsdebug()
 }
 
 //-------<[ command ]>-------
-YCMD:objectsdebug(playerid, params[], help)
+YCMD:stoprecord(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "W³¹cz dynamiczny debug obiektów.");
+        sendTipMessage(playerid, "Zatrzymuje nagrywanie ruchu gracza.");
         return 1;
     }
-    
-    
+    //fetching params
+    new giveplayerid;
+    if(sscanf(params, "r", giveplayerid))
+    {
+        sendTipMessage(playerid, "U¿yj /stoprecord [Nick/ID] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
     //command body
-    return command_objectsdebug_Impl(playerid);
+    return command_stoprecord_Impl(playerid, giveplayerid);
 }
