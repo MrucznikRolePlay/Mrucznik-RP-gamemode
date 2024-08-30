@@ -212,10 +212,10 @@ hook OnGameModeInit()
             QuatToEulerZXY(ipl_infos[i][ipl_rx], ipl_infos[i][ipl_ry], ipl_infos[i][ipl_rz], ipl_infos[i][ipl_rw], erx, ery, erz);
 
             if(ipl_infos[i][interiorID] != 0) {
-                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z], erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 150.0, 150.0, -1, 0);    
+                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z] - VICECITY_MOVE_Z, erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 150.0, 150.0, -1, 0);    
             }
             else {
-                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z], erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 1000.0, 1000.0, -1, 0);     
+                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z] - VICECITY_MOVE_Z, erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 1000.0, 1000.0, -1, 0);     
             }
 
 			new ModelID = ipl_infos[i][modelID];
