@@ -64,3 +64,16 @@ YCMD:respawnplayer(playerid, params[], help)
     SetPlayerSpawn(v);
     return 1;
 }
+
+
+YCMD:spawnplayer(playerid, params[], help)
+{
+    if(PlayerInfo[playerid][pAdmin] < 1 && PlayerInfo[playerid][pNewAP] < 1) return 1;
+
+
+    new giveplayerid;
+    if(sscanf(params, "k<fix>", giveplayerid)) return sendTipMessage(playerid, "U¿yj /respawnplayer [ID/Nick]");
+
+    SpawnPlayer(giveplayerid);
+    return 1;
+}

@@ -1077,7 +1077,6 @@ public OnPlayerConnect(playerid)
 {
 	if(IsPlayerNPC(playerid))
 	{
-		SpawnPlayer(playerid);
 		if(strcmp(GetIp(playerid), npcIP) != 0)
 		{
 			if(strlen(npcIP) == 0)
