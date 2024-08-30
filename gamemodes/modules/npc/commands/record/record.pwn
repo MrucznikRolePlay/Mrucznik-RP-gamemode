@@ -37,6 +37,7 @@ command_record()
 
     //aliases
     Command_AddAlt(command, "recordnpc");
+    Command_AddAlt(command, "rec");
     
 
     //permissions

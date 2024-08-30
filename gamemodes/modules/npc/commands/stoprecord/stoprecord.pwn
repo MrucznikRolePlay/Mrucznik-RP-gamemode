@@ -37,6 +37,7 @@ command_stoprecord()
 
     //aliases
     Command_AddAlt(command, "stoprecordnpc");
+    Command_AddAlt(command, "stoprec");
     
 
     //permissions
