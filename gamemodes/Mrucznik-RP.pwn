@@ -1077,6 +1077,7 @@ public OnPlayerConnect(playerid)
 {
 	if(IsPlayerNPC(playerid))
 	{
+		SpawnPlayer(playerid);
 		if(strcmp(GetIp(playerid), npcIP) != 0)
 		{
 			if(strlen(npcIP) == 0)
@@ -3072,6 +3073,11 @@ public OnPlayerExitedMenu(playerid)
 
 public OnPlayerStateChange(playerid, newstate, oldstate)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
 	new string[256];
 
 	// Zapobieganie wsiadania do pojazdu podczas BW:	
@@ -3343,6 +3349,11 @@ public OnPlayerExitVehicle(playerid, vehicleid)
 
 public OnPlayerRequestSpawn(playerid)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
     //Zwrócenie 0 uniemo¿liwi spawn.
 	if(gPlayerLogged[playerid] != 1)
 	{
@@ -5842,6 +5853,11 @@ public OnDynamicObjectMoved(objectid)
 }
 public OnPlayerRequestDownload(playerid, type, crc)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
 	if(!IsPlayerConnected(playerid))
 	{
 		return 0;

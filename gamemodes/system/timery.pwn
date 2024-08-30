@@ -716,6 +716,11 @@ public WstalPoOB(playerid)
 forward PlayerAFK(playerid, afktime, breaktime);
 public PlayerAFK(playerid, afktime, breaktime)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
 	if(IsPlayerPaused(playerid))
 	{
 		new caption[32];
@@ -807,6 +812,11 @@ public CheckChangeWeapon()
 {
 	foreach (new i : Player)
 	{
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
+
 		new weaponID = GetPlayerWeapon(i);
 		new playerState = GetPlayerState(i);
 		if(MyWeapon[i]!=weaponID)
