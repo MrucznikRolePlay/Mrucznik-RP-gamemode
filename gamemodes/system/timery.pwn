@@ -1002,6 +1002,10 @@ public Spectator()
 	foreach(new i : Player)
 	{
         if(!IsPlayerConnected(i)) continue;
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
 
         if(ScenaCreated)
         {
@@ -1733,6 +1737,10 @@ public CustomPickups()
 	new mystate;
 	foreach(new i : Player)
 	{
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
         mystate = GetPlayerState(i);
 
 		if(ShowPlayerJobMessage(i, mystate))
@@ -2014,6 +2022,10 @@ public RPGTimer()
 {
 	foreach(new i : Player)
 	{
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
 	    if(!IsPlayerConnected(i)) continue;
 		new rpggun;
         new rpgammo;
@@ -2091,6 +2103,10 @@ public JednaSekundaTimer()
 
     foreach(new i : Player)
 	{
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
         if(!IsPlayerConnected(i)) continue;
         State = GetPlayerState(i);
         GetPlayerPos(i, x, y, z);
@@ -3033,6 +3049,10 @@ public CheckGas()
 	new string[128], vehicle, engine,lights,alarm,doors,bonnet,boot,objective;
 	foreach(new i : Player)
 	{
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
 		if(GetPlayerState(i) == PLAYER_STATE_DRIVER)
 		{
 			vehicle = GetPlayerVehicleID(i);
@@ -3071,6 +3091,10 @@ public Fillup()
     new VID, FillUp, string[128];
 	foreach(new i : Player)
    	{
+		if(IsPlayerNPC(i))
+		{
+			continue;
+		}
 		VID = GetPlayerVehicleID(i);
 		if(Gas[VID] <= 100) FillUp = GasMax - Gas[VID];
 		else FillUp = 0;
@@ -3119,6 +3143,10 @@ public PlayersCheckerMinute()
 {
 	foreach(new j : Player)
 	{
+		if(IsPlayerNPC(j))
+		{
+			continue;
+		}
 		if(gPlayerLogged[j] > 0)
 		{
 			if(GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
@@ -3144,6 +3172,10 @@ public CarCheck()
 	new string[128], lTime = gettime();
 	foreach(new j : Player)
 	{
+		if(IsPlayerNPC(j))
+		{
+			continue;
+		}
         if(kaska[j] < 0)
 		{
 			if(MoneyMessage[j]==0)
