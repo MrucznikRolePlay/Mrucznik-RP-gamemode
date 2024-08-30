@@ -40,7 +40,7 @@ command_gotovc_Impl(playerid)
     #endif
 
 	// Set player position and facing angle
-	SetPlayerPos(playerid, 5183.5313,-1399.5190,10.3443);
+	SetPlayerPos(playerid, 5183.5313,-1399.5190,5.3443);
 	SetPlayerFacingAngle(playerid, 90);
 	SetCameraBehindPlayer(playerid);
 

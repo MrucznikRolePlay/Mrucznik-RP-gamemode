@@ -3327,32 +3327,32 @@ GraczBankomat(playerid)
 		return 1;
 	}
 	// Vice City
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5357.5029, 180.7435, 1224.7744))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5357.5029, 180.7435, 1219.7744))
 	{// North Point Mall
 		return 1;
 	}
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5357.7056, 178.2677, 1224.8038))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5357.7056, 178.2677, 1219.8038))
 	{// North Point Mall
 		return 1;
 	}
 
 	// Vice City centrum handlowe
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5003.0098, -1878.6378, 15.5760))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5003.0098, -1878.6378, 10.5760))
 	{
 		return 1;
 	}
 
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5004.9746, -1878.7086, 15.5760))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5004.9746, -1878.7086, 10.5760))
 	{
 		return 1;
 	}
 
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5002.9194, -1899.4532, 15.5760))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5002.9194, -1899.4532, 10.5760))
 	{
 		return 1;
 	}
 
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5004.9019, -1899.6617, 15.5760))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5004.9019, -1899.6617, 10.5760))
 	{
 		return 1;
 	}
@@ -11691,12 +11691,12 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
         {
 			// Look at motel Vice City Beach
 			InterpolateCameraPos(playerid,
-				5263.3911, -2298.9348, 37.7042,
-				5241.6602, -2255.2471, 20.6349,
+				5263.3911, -2298.9348, 32.7042,
+				5241.6602, -2255.2471, 15.6349,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5248.3208, -2263.9758, 23.2425,
-				5245.7026, -2207.6990, 16.8739,
+				5248.3208, -2263.9758, 18.2425,
+				5245.7026, -2207.6990, 11.8739,
 				11000, CAMERA_MOVE);
 			SetPlayerPos(playerid, 5238.5874, -2228.5591, 0.0);
 			Streamer_UpdateEx(playerid, 5238.5874, -2228.5591, 0.0);
@@ -11706,12 +11706,12 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
         {
             // Look at motel Vice City Beach from far away
 			InterpolateCameraPos(playerid,
-				5410.5400, -2526.5215, 55.5040,
-				5261.7671, -2268.5955, 45.0869,
+				5410.5400, -2526.5215, 50.5040,
+				5261.7671, -2268.5955, 40.0869,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5392.1787, -2482.6750, 50.7091,
-				5244.5781, -2243.7019, 18.4688,
+				5392.1787, -2482.6750, 45.7091,
+				5244.5781, -2243.7019, 13.4688,
 				11000, CAMERA_MOVE);
 			SetPlayerPos(playerid, 5238.5874, -2228.5591, 0.0);
 			Streamer_UpdateEx(playerid, 5238.5874, -2228.5591, 0.0);
@@ -11721,12 +11721,12 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
         {
             // Look at Malibu Club
 			InterpolateCameraPos(playerid,
-				5482.9595, -1070.0116, 15.3759,
-				5517.3687, -1054.7716, 11.6211,
+				5482.9595, -1070.0116, 10.3759,
+				5517.3687, -1054.7716, 6.6211,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5484.5854, -1048.0042, 13.1499,
-				5504.0610, -1041.5916, 11.6843,
+				5484.5854, -1048.0042, 8.1499,
+				5504.0610, -1041.5916, 6.6843,
 				11000, CAMERA_MOVE);
 			SetPlayerPos(playerid, 5495.1118, -1035.1361, 0.0);
 			Streamer_UpdateEx(playerid, 5495.1118, -1035.1361, 0.0);
@@ -11736,12 +11736,12 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
         {
             // Look at Malibu Club c.d.
 			InterpolateCameraPos(playerid,
-				5517.3687, -1054.7716, 11.6211,
-				5526.0845, -1008.8565, 14.1,
+				5517.3687, -1054.7716, 6.6211,
+				5526.0845, -1008.8565, 7.1,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5504.0610, -1041.5916, 11.6843,
-				5507.5811, -1008.8839, 12.7,
+				5504.0610, -1041.5916, 6.6843,
+				5507.5811, -1008.8839, 7.7,
 				11000, CAMERA_MOVE);
 			SetPlayerPos(playerid, 5495.1118, -1035.1361, 0.0);
 			Streamer_UpdateEx(playerid, 5495.1118, -1035.1361, 0.0);
@@ -11751,12 +11751,12 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
         {
             // Look at Vercetti's Mansion
 			InterpolateCameraPos(playerid,
-				4625.0313, -1683.4607, 36.5133,
-				4621.2734, -1570.2161, 11.9646,
+				4625.0313, -1683.4607, 31.5133,
+				4621.2734, -1570.2161, 6.9646,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				4625.4526, -1631.7551, 23.7434,
-				4621.3149, -1554.9303, 10.5163,
+				4625.4526, -1631.7551, 18.7434,
+				4621.3149, -1554.9303, 5.5163,
 				11000, CAMERA_MOVE);
 			SetPlayerPos(playerid, 4620.1636, -1568.9320, 0.0);
 			Streamer_UpdateEx(playerid, 4620.1636, -1568.9320, 0.0);
@@ -11766,12 +11766,12 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
         {
             // Look at Love Fist street
 			InterpolateCameraPos(playerid,
-				4127.4678, -134.4979, 25.3969,
-				4137.3408, 183.1745, 17.9014,
+				4127.4678, -134.4979, 20.3969,
+				4137.3408, 183.1745, 12.9014,
 				8000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				4129.5210, -108.6659, 23.7814,
-				4137.7461, 212.9454, 17.0244,
+				4129.5210, -108.6659, 18.7814,
+				4137.7461, 212.9454, 12.0244,
 				8000, CAMERA_MOVE);
 			SetPlayerPos(playerid, 4137.2896, 214.4953, 0.0);
 			Streamer_UpdateEx(playerid, 4137.2896, 214.4953, 0.0);
@@ -11781,12 +11781,12 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
 		{
 			// Look at motel halway Window
 			InterpolateCameraPos(playerid,
-				5573.1597, -932.2980, 53.5019,
-				5558.8369, -932.5709, 53.7707,
+				5573.1597, -932.2980, 48.5019,
+				5558.8369, -932.5709, 48.7707,
 				8000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5557.1724, -932.7851, 53.2095,
-				5545.7163, -932.9548, 51.7247,
+				5557.1724, -932.7851, 48.2095,
+				5545.7163, -932.9548, 46.7247,
 				12000, CAMERA_MOVE);
 			SetPlayerPos(playerid, 5567.8003, -938.5177, 0.0);
 			Streamer_UpdateEx(playerid, 5567.8003, -938.5177, 0.0);
@@ -11796,12 +11796,12 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
 		{
 			// Look at destroyed building
 			InterpolateCameraPos(playerid,
-				5065.7905, -1141.6709, 34.3655,
-				5150.7114, -1335.8698, 28.7590,
+				5065.7905, -1141.6709, 29.3655,
+				5150.7114, -1335.8698, 23.7590,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5083.1147, -1177.5134, 36.0486,
-				5133.9253, -1371.4156, 29.9903,
+				5083.1147, -1177.5134, 31.0486,
+				5133.9253, -1371.4156, 24.9903,
 				11000, CAMERA_MOVE);
 			SetPlayerPos(playerid, 5136.9741, -1334.8270, 0.0);
 			Streamer_UpdateEx(playerid, 5136.9741, -1334.8270, 0.0);
