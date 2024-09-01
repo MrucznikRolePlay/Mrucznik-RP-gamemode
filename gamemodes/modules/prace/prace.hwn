@@ -89,7 +89,7 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Prawnik
         {"Prawnik - Los Santos", 319.72470092773, -1548.3374023438, 14.555289230347, 230.0, 0, 0, true},
-        {"Prawnik - Vice City", 4424.9683, -155.2108, 7.3382, 90.1704, 0, 0, true},
+        {"Prawnik - Vice City", 4424.9683, -155.2108, 17.3382, 90.1704, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Prostytutka
