@@ -144,7 +144,7 @@ GetPlayerJobSkillPoints(playerid, Jobs:jobid)
 		{
 			return 1; // no skill
 		}
-		case JOB_GUNDEALER:
+		case JOB_GUN_DEALER:
 		{
 			skill = PlayerInfo[playerid][pGunSkill];
 		}
@@ -217,7 +217,7 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 		{
 			return 1; // no skill
 		}
-		case JOB_GUNDEALER:
+		case JOB_GUN_DEALER:
 		{
 			PlayerInfo[playerid][pGunSkill] += value;
 		}
@@ -271,7 +271,7 @@ CanPlayerTakeJob(playerid, job)
 	{
 		if(IsAPrzestepca(playerid))
 		{
-			if(job != JOB_DRUG_DEALER && job != JOB_CARTHIEF && job != JOB_GUNDEALER && job != JOB_SMUGGLER)
+			if(job != JOB_DRUG_DEALER && job != JOB_CARTHIEF && job != JOB_GUN_DEALER && job != JOB_SMUGGLER)
 			{
 				return 0;
 			}

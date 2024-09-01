@@ -32,7 +32,7 @@ enum Jobs {
     JOB_REPORTER,   // 6
     JOB_MECHANIC,   // 7
     JOB_SMUGGLER,   // 8
-    JOB_GUNDEALER,  // 9
+    JOB_GUN_DEALER,  // 9
     JOB_DRIVER,     // 10
     JOB_MEDIC,      // 11 medyk
     JOB_BOXER,      // 12

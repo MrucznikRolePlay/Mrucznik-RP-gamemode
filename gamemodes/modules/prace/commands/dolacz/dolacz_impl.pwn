@@ -148,7 +148,7 @@ command_dolacz_Impl(playerid)
 			SendClientMessage(playerid, COLOR_WHITE, "   Przemytnicy bez takich zasobów mog¹ kraœæ paczki tym, którzy organizuj¹ akcjê b¹dŸ zdobywaæ je od ³odzi p³ywaj¹cych po Vice City.");
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jeœli akceptujesz zasady kontraktu wpisz /akceptuj praca.");
 		}
-		case JOB_GUNDEALER:
+		case JOB_GUN_DEALER:
 		{
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Chcesz zostaæ Dilerem Broni, lecz najpierw musisz podpisaæ kontrakt na 5 godzin.");
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Aby zrezygnowaæ z tej pracy musi min¹æ czas kontraktu, dopiero wtedy bêdziesz móg³ siê zwolniæ.");

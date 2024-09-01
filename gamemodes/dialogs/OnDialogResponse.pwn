@@ -16083,25 +16083,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra³eœ licencje na latanie!"); 
 					Log(payLog, INFO, "%s kupi³ licencje na latanie za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
-				/* na póŸniej
-				case 8: //rejestracja pojazdu
-				{
-					sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
-					return 1;
-				}
-				case 9: // w³asna tablica rejestracyjna
-				{
-					if(IsPlayerPremiumOld(playerid))
-					{
-						sendTipMessage(playerid, "Ta opcja bêdzie dostêpna ju¿ niebawem!"); 
-					}
-					else
-					{
-						sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.");
-					}
-					return 1;
-				}
-				*/
 			}
 			Sejf_Add(FRAC_GOV, DmvLicenseCost[listitem]);
 			ZabierzKase(playerid, DmvLicenseCost[listitem]);

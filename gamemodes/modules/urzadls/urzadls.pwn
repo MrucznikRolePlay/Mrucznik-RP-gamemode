@@ -120,16 +120,14 @@ DestroyActorsInDMV(playerid)
 }
 DefaultItems_LicenseCost()
 {
-	DmvLicenseCost[0] = 5000;
-	DmvLicenseCost[1] = 10000;
-	DmvLicenseCost[2] = 500000;
-	DmvLicenseCost[3] = 350000;
-	DmvLicenseCost[4] = 10000;
-	DmvLicenseCost[5] = 15000;
-	DmvLicenseCost[6] = 20000;
-	DmvLicenseCost[7] = 5000000;
-	DmvLicenseCost[8] = 10000;
-	DmvLicenseCost[9] = 350000;
+	DmvLicenseCost[0] = 5_000; // dowód
+	DmvLicenseCost[1] = 10_000; // karta wêdkarsaka
+	DmvLicenseCost[2] = 50_000; // pozwolenie na broñ
+	DmvLicenseCost[3] = 100_000; // patent ¿eglarski
+	DmvLicenseCost[4] = 5_000; // prawo jazdy - teoria
+	DmvLicenseCost[5] = 7_500; // prawo jazdy - praktyka
+	DmvLicenseCost[6] = 5_000; // prawo jazdy - odbiór
+	DmvLicenseCost[7] = 500_000; // licencja pilota
 	return 1; 
 }
 //end
