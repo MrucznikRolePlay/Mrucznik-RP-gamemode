@@ -2402,7 +2402,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						else
 						{ // Vice City
-							SetPlayerPos(playerid, 5229.6646, -2227.3933, 11.5385);
+							SetPlayerPos(playerid, 5229.6646, -2227.3933, 6.5385);
 							SetPlayerFacingAngle(playerid, 252.4531);
 							Wchodzenie(playerid);
 						}
