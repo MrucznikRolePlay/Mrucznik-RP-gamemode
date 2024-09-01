@@ -1002,11 +1002,6 @@ BusCzit[playerid] = 0;
 return 1;
 }
 
-public spamujebronia(playerid){
-zmatsowany[playerid] = 0;
-return 1;
-}
-
 public odpalanie(playerid)
 {
 	new engine, lights, alarm, doors, bonnet, boot, objective, Float:health, sendername[MAX_PLAYER_NAME], string[256];
@@ -2027,7 +2022,7 @@ IsAPrzestepca(playerid)
 	}
 	return 0;
 }
-IsAGang(playerid)
+stock IsAGang(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -2048,7 +2043,7 @@ IsAGang(playerid)
 	}
 	return 0;
 }
-IsAMafia(playerid)
+stock IsAMafia(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
@@ -3096,13 +3091,14 @@ PrzyczepKogut(playerid, veh)
     AttachDynamicObjectToVehicle(VehicleUID[veh][vSiren], veh, x,y,z, 0.0, 0.0, 0.0);
 	return 1;
 }
-IsAtAmmunationLosSantos(playerid)
+
+stock IsAtAmmunationLosSantos(playerid)
 {
 	if(GetPlayerVirtualWorld(playerid) == 5 && IsPlayerInRangeOfPoint(playerid, 100.0, 1815.6812,-1172.1915,61.5103)) return 1;
 	return 0;
 }
 
-IsNearSecuricar(playerid)
+stock IsNearSecuricar(playerid)
 {
 	new vehicleid = GetClosestCar(playerid, 3.5);
 	if(vehicleid != -1) 

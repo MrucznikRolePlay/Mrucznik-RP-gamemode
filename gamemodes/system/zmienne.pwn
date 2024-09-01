@@ -931,7 +931,6 @@ new poddaje[MAX_PLAYERS];//poddaje siê
 new lowcap[MAX_PLAYERS];//³owca nagród który proponowa³ poddanie siê
 new lowcaz[MAX_PLAYERS];//³owca nagród dostaje zlecenie
 new okradziony[MAX_PLAYERS];//zabierzportfel
-new zmatsowany[MAX_PLAYERS];//diler brono
 new BusCzit[MAX_PLAYERS];
 new IDDomu[MAX_PLAYERS];//SYSTEM DOMÓW
 new MatsGood[MAX_PLAYERS];
