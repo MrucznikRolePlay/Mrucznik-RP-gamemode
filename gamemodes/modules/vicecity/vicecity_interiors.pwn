@@ -82,8 +82,9 @@ ViceCityInteriors()
     // ------ [ Bank ] ------
     AddInterior(
         "Bank", 4104.6421, -1291.2079, 7.8773, 0, 0,
-        "Wyjúcie", 1387.3058,-26.9497,1000.8729, 2, VCVW,
+        "Wyjúcie", 4100.0, -1291.11, 999.0, 6, VCVW, // interior banku z internetu: 1387.3058,-26.9497,1000.8729
         0, 103);
+    
 
 
     // ------ [ Inne ] ------
@@ -93,8 +94,8 @@ ViceCityInteriors()
 
 
     // AddInterior(
-    //     "", XYZ, int, vw,
-    //     "Wyj≈õcie", XYZ, int, vw);
+    //     "Wejúcie", XYZ, int, vw, // pozycja po /wyjdz
+    //     "Wyjúcie", XYZ, int, vw); // pozycja po /wejdz
 
 
     // Add vice city interiors from Vice City Map
