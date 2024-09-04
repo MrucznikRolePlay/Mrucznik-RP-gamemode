@@ -37,7 +37,7 @@ YCMD:atakuj(playerid, params[], help)
     }
     new frac = GetPlayerFraction(playerid);
     new fam = GetPlayerOrg(playerid);
-    if((FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG) && PlayerInfo[playerid][pRank] > 3)
+    if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG && PlayerInfo[playerid][pRank] > 3)
     {
         if(GetPVarInt(playerid, "zoneid") == -1) return sendTipMessageEx(playerid, -1, "Nie jestes na strefie.");
         if(ZoneAttack[GetPVarInt(playerid, "zoneid")])

@@ -27,7 +27,7 @@ command_grafiti_Impl(playerid, opcja[24])
 {
     new frac = GetPlayerFraction(playerid);
 
-    if(GetPlayerOrg(playerid) == 0 && (frac < FRAC_GROOVE && frac > FRAC_VAGOS) && frac != FRAC_WPS) return sendTipMessageEx(playerid, COLOR_GRAD2, "Graffiti tylko dla gangów!");
+    if(GetPlayerOrg(playerid) == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Graffiti tylko dla gangów!");
     if(frac == 0 && GetPlayerOrgType(playerid) != ORG_TYPE_GANG) return sendTipMessageEx(playerid, COLOR_GRAD2, "Graffiti tylko dla organizacji typu gang!");
     if(strcmp(opcja,"stworz",true) == 0)
     {

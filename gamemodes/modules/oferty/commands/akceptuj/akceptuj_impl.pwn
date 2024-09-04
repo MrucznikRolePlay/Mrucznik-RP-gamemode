@@ -109,7 +109,6 @@ command_akceptuj_Impl(playerid, x_job[32])
                                 Log(payLog, INFO, "%s kupi³ od %s neony do auta %s za 3000000$", GetPlayerLogName(playerid), GetPlayerLogName(dawacz), GetVehicleLogName(pojazd));
                                 ZabierzKase(playerid, 3000000);
                                 DajKase(dawacz, 75000);
-                                Sejf_Add(FRAC_NOA, 50000);//wplacanie kasy
                                 IloscAut[playerid] = VehicleUID[pojazd][vUID];
                                 if(IsPlayerPremiumOld(playerid))
                                 {

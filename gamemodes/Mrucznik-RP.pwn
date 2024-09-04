@@ -2173,33 +2173,7 @@ SetPlayerSpawnPos(playerid)
 								SetPlayerFacingAngle(playerid, 266.7065);
 								Wchodzenie(playerid);
 							}
-						}
-						case FRAC_LCN: //5
-						{
-							if(spawnType == 0)
-							{ // Los Santos
-						    	SetPlayerPos(playerid, 738.8827,-1429.9484,13.5234);
-							}
-							else
-							{ // Vice City
-								SetPlayerPos(playerid, 5229.6646,-2227.3933,6.5385);
-								SetPlayerFacingAngle(playerid, 252.7065);
-								Wchodzenie(playerid);
-							}
-						}
-						case FRAC_YKZ: //6
-						{
-							if(spawnType == 0)
-							{ // Los Santos
-                            	SetPlayerPos(playerid, 2794.8042,-1087.1310,30.7188);
-							}
-							else
-							{ // Vice City
-								SetPlayerPos(playerid, 5229.6646,-2227.3933,6.5385);
-								SetPlayerFacingAngle(playerid, 252.7065);
-								Wchodzenie(playerid);
-							}
-						}
+						} // 5,6 empty
 						case FRAC_BOR: //7
 						{
 						    SetPlayerPos(playerid, 1519.0970,-1449.6099,13.5391);
@@ -2300,29 +2274,11 @@ SetPlayerSpawnPos(playerid)
 								Wchodzenie(playerid);
 							}
 						}
-						case FRAC_GROOVE: //12
-						{
-          					SetPlayerPos(playerid,2496.8523,-1685.3225,13.4172);
-                            SetPlayerFacingAngle(playerid, 345.4405);
-						}
-						case FRAC_BALLAS: //13
-						{
-						    SetPlayerPos(playerid,2254.6958,-1411.2048,24.0000);
-                            SetPlayerFacingAngle(playerid, 180.6268);
-						}
-						case FRAC_VAGOS: //14
-						{
-						    SetPlayerPos(playerid, 2177.1636,-984.1085,64.4688);
-							SetPlayerFacingAngle(playerid, 316.333);
-						}
-						case FRAC_NOA: //15
-						{
-						    SetPlayerPos(playerid, 1104.4066,-1224.0862,15.8435);
-		    				SetPlayerFacingAngle(playerid, 181.0);
-						}
-						case FRAC_WPS: //16
-						{
-						    SetPlayerPos(playerid, 2508.0671,-2019.8987,13.9482);
+						default:
+						{ // Vice City
+							SetPlayerPos(playerid, 5229.6646,-2227.3933,6.5385);
+							SetPlayerFacingAngle(playerid, 252.7065);
+							Wchodzenie(playerid);
 						}
 				    }
 				}
@@ -5735,7 +5691,7 @@ public OnPlayerEnterGangZone(playerid, zoneid)
 {
     if(ZONE_DISABLED == 0) {
         new frac=GetPlayerFraction(playerid), org = GetPlayerOrg(playerid);
-        if(FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
+        if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
         {
             ZoneTXD_Show(playerid, zoneid);
             if(ZonePlayerTimer[playerid] == 0) ZonePlayerTimer[playerid] = SetTimerEx("Zone_HideInfo", 30000, 0, "i", playerid);

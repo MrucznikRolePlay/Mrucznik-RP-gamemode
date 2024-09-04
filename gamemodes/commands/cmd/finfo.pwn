@@ -35,11 +35,7 @@ YCMD:finfo(playerid, params[], help)
 	if(IsPlayerConnected(playerid))
 	{
 		if(GetPlayerFraction(playerid) == 0 
-		|| GetPlayerFraction(playerid) == 8
-		|| GetPlayerFraction(playerid) == 12
-		|| GetPlayerFraction(playerid) == 13
-		|| GetPlayerFraction(playerid) == 14
-		|| GetPlayerFraction(playerid) == 16)
+		|| GetPlayerFraction(playerid) == 8)
 		{
 			noAccessMessage(playerid);
 			return 1;

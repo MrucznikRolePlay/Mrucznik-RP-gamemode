@@ -323,7 +323,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if (GetPlayerFraction(playerid) == FRAC_NOA || PlayerInfo[playerid][pAdmin] >= 1000 || GetPlayerOrg(playerid) == 16)//warsztat niebieski
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || GetPlayerOrg(playerid) == 16)//warsztat niebieski
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 20, 2313.5000000,-1217.6999512,24.7000008) || IsPlayerInRangeOfPoint(playerid, 12, 2313.5000000,-1217.6999512,24.7000008))
 			{

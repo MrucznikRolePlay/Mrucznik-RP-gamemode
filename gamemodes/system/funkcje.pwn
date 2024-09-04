@@ -2007,14 +2007,6 @@ IsAPrzestepca(playerid)
 	{
 	    new leader = PlayerInfo[playerid][pLider];
 	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==8 || member==12 || member==13 || member==14 || member==15 || member==16)
-		{
-		    return 1;
-		}
-		else if(leader==5 || leader==6 || leader==8 || leader==12  || leader==13 || leader==14 || leader==15 || leader==16)
-		{
-		    return 1;
-		}
 		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA || GetPlayerOrgType(playerid) == ORG_TYPE_RACE)
 		{
 		    return 1;
@@ -2022,42 +2014,24 @@ IsAPrzestepca(playerid)
 	}
 	return 0;
 }
+
 stock IsAGang(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==12 || member==13 || member==14)
-		{
-		    return 1;
-		}
-		else if(leader==12  || leader==13 || leader==14)
-		{
-		    return 1;
-		}
-		else if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
+		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
 		{
 		    return 1;
 		}
 	}
 	return 0;
 }
+
 stock IsAMafia(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==16 || member==13)
-		{
-		    return 1;
-		}
-		else if(leader==5 || leader==6 || member==16 || member==13)
-		{
-		    return 1;
-		}
-		else if(GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+		if(GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
 		{
 		    return 1;
 		}
@@ -2209,29 +2183,6 @@ IsAPorzadkowy(playerid)
 	return IsAPolicja(playerid) || IsAMedyk(playerid) || IsABOR(playerid);
 }
 
-/*
-MozePobic(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==5 || member==6 || member==8 || member==12 || member==13 || member==14 || member==1 || member==2 || member==3 || member==15)
-		{
-		    return 1;
-		}
-		if(leader==5 || leader==6 || leader==8 || leader==12 || leader== 13 || leader== 14 || leader==1 || leader==2 || leader==3 || leader==15)
-		{
-		    return 1;
-		}
-		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-*/
 MozeMowicNaFamily(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -2260,24 +2211,6 @@ IsAFBI(playerid)
 	}
 	return 0;
 }
-
-/*IsAMafia(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member == 5 || member == 6)
-		{
-		    return 1;
-		}
-		if(leader == 5 || leader == 6)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}*/
 
 IsASpojler(vehid)
 {
@@ -8108,11 +8041,7 @@ public OPCLogin(playerid)
     ZonePlayerTimer[playerid]=0;
     for(new j=0;j<MAX_ZONES;j++)
     {
-        if(ZoneControl[j] == FRAC_GROOVE) GangZoneShowForPlayer(playerid, j, ZONE_COLOR_GROOVE | 0x44);
-        else if(ZoneControl[j] == FRAC_BALLAS) GangZoneShowForPlayer(playerid, j, ZONE_COLOR_BALLAZ | 0x44);
-        else if(ZoneControl[j] == FRAC_VAGOS) GangZoneShowForPlayer(playerid, j, ZONE_COLOR_VAGOS | 0x44);
-        else if(ZoneControl[j] == FRAC_WPS) GangZoneShowForPlayer(playerid, j, ZONE_COLOR_WPS | 0x44);
-        else if(ZoneControl[j] > 100) GangZoneShowForPlayer(playerid, j, OrgInfo[clamp(orgID(ZoneControl[j]-100), 0, MAX_ORG-1)][o_Color] | 0x44);
+        if(ZoneControl[j] > 100) GangZoneShowForPlayer(playerid, j, OrgInfo[clamp(orgID(ZoneControl[j]-100), 0, MAX_ORG-1)][o_Color] | 0x44);
         else GangZoneShowForPlayer(playerid, j, 0xC6E2F144);
     }
 
@@ -9167,31 +9096,8 @@ public Zone_AttackEnd(zoneid, attacker, defender)
         new thisorg = orgID(ZoneControl[zoneid]-100);
         foreach(new i : Player)
         {
-            if(ZoneControl[zoneid] == FRAC_GROOVE)
-            {
-                GangZoneHideForPlayer(i, zoneid);
-                GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_GROOVE | 0x44);
-            }
-            else if(ZoneControl[zoneid] == FRAC_BALLAS)
-            {
-                GangZoneHideForPlayer(i, zoneid);
-                GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_BALLAZ | 0x44);
-            }
-            else if(ZoneControl[zoneid] == FRAC_VAGOS)
-            {
-                GangZoneHideForPlayer(i, zoneid);
-                GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_VAGOS | 0x44);
-            }
-            else if(ZoneControl[zoneid] == FRAC_WPS)
-            {
-                GangZoneHideForPlayer(i, zoneid);
-                GangZoneShowForPlayer(i, zoneid, ZONE_COLOR_WPS | 0x44);
-            }
-            else
-            {
-                GangZoneHideForPlayer(i, zoneid);
-                GangZoneShowForPlayer(i, zoneid, OrgInfo[thisorg][o_Color] | 0x44);
-            }
+			GangZoneHideForPlayer(i, zoneid);
+			GangZoneShowForPlayer(i, zoneid, OrgInfo[thisorg][o_Color] | 0x44);
         }
         
         if(attacker > 100) //gangi
@@ -9515,7 +9421,7 @@ ZoneTXD_Show(playerid, zoneid)
 {
     new bool:gang=false;
     new frac=GetPlayerFraction(playerid);
-    if((FRAC_GROOVE <= frac <= FRAC_VAGOS || frac == FRAC_WPS || GetPlayerOrgType(playerid) == ORG_TYPE_GANG) && PlayerInfo[playerid][pRank] > 3) gang = true;
+    if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG && PlayerInfo[playerid][pRank] > 3) gang = true;
     if(ZoneControl[zoneid] != 0 && (ZoneControl[zoneid] == frac || ZoneControl[zoneid]-100==GetPlayerOrg(playerid))) gang = false;
 
     for(new i=0;i<3;i++)

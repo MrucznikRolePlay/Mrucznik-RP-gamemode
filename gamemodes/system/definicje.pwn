@@ -185,18 +185,13 @@
 #define FRAC_FBI    2
 #define FRAC_NG     3
 #define FRAC_ERS    4
-#define FRAC_LCN    5
-#define FRAC_YKZ    6
+#define FRAC_LCN    5 // usuniête, zosta³o dla bram
+//#define FRAC_YKZ  6 // usuniête
 #define FRAC_BOR    7
 #define FRAC_HA     8
 #define FRAC_SN     9
 #define FRAC_KT     10
 #define FRAC_GOV    11
-#define FRAC_GROOVE 12
-#define FRAC_BALLAS 13
-#define FRAC_VAGOS  14
-#define FRAC_NOA    15
-#define FRAC_WPS    16 
 #define SPOILER_D 200000
 #define ZDERZAK_D 250000
 #define FELGA_D 250000

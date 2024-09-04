@@ -30,7 +30,7 @@
 
 YCMD:barierka(playerid, params[], help)
 {
-    if(!(IsAPolicja(playerid) || GetPlayerFraction(playerid) == FRAC_BOR || GetPlayerOrg(playerid) == 12 || GetPlayerFraction(playerid) == FRAC_ERS))
+    if(!(IsAPolicja(playerid) || GetPlayerFraction(playerid) == FRAC_BOR || GetPlayerFraction(playerid) == FRAC_ERS))
 	{
 		sendErrorMessage(playerid, "Nie masz uprawnieñ do u¿ycia tej komendy.");
 		return 1;

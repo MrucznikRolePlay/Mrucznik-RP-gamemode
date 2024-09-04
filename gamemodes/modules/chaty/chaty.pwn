@@ -325,7 +325,7 @@ PlayerTalkOOC(playerid, text[], Float:rangeTalk)
 
 GetFractionColor(fraction)
 {
-	new fracColor;
+	new fracColor = COLOR_WHITE;
 	if(fraction == 1)
 	{
 		fracColor = COLOR_LIGHTBLUE;
@@ -341,14 +341,6 @@ GetFractionColor(fraction)
 	if(fraction == 4)
 	{
 		fracColor = COLOR_LIGHTBLUE; 
-	}
-	if(fraction == 5)
-	{
-		fracColor = COLOR_WHITE;
-	}
-	if(fraction == 6)
-	{
-		fracColor = COLOR_WHITE; 
 	}
 	if(fraction == 7)
 	{
@@ -369,34 +361,6 @@ GetFractionColor(fraction)
 	if(fraction == 11)
 	{
 		fracColor = COLOR_LIGHTGREEN;
-	}
-	if(fraction == 12)
-	{
-		fracColor = COLOR_WHITE;
-	}
-	if(fraction == 13)
-	{
-		fracColor = COLOR_WHITE;
-	}
-	if(fraction == 14)
-	{
-		fracColor = COLOR_WHITE;
-	}
-	if(fraction == 15)
-	{
-		fracColor = COLOR_BROWN;
-	}
-	if(fraction == 16)
-	{
-		fracColor = COLOR_WHITE;
-	}
-	if(fraction == 17)
-	{
-		fracColor = COLOR_LIGHTRED;
-	}
-	if(fraction == 18)
-	{
-		fracColor = COLOR_WHITE;
 	}
 	return fracColor;
 }

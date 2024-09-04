@@ -42,33 +42,10 @@ YCMD:setzonecontrol(playerid, params[], help)
 
         foreach(new i : Player)
         {
-            if(frac == FRAC_GROOVE)
+            if(frac > 100)
             {
                 GangZoneHideForPlayer(i, id);
-                GangZoneShowForPlayer(i, id, ZONE_COLOR_GROOVE | 0x44);
-            }
-            else if(frac == FRAC_BALLAS)
-            {
-                GangZoneHideForPlayer(i, id);
-                GangZoneShowForPlayer(i, id, ZONE_COLOR_BALLAZ | 0x44);
-            }
-            else if(frac == FRAC_VAGOS)
-            {
-                GangZoneHideForPlayer(i, id);
-                GangZoneShowForPlayer(i, id, ZONE_COLOR_VAGOS | 0x44);
-            }
-            else if(frac == FRAC_WPS)
-            {
-                GangZoneHideForPlayer(i, id);
-                GangZoneShowForPlayer(i, id, ZONE_COLOR_WPS | 0x44);
-            }
-            else
-            {
-                if(frac > 100)
-                {
-                    GangZoneHideForPlayer(i, id);
-                    GangZoneShowForPlayer(i, id, OrgInfo[org][o_Color] | 0x44);
-                }
+                GangZoneShowForPlayer(i, id, OrgInfo[org][o_Color] | 0x44);
             }
         }
 
