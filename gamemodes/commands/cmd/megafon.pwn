@@ -172,7 +172,7 @@ YCMD:megafon(playerid, params[], help)
                 return sendTipMessage(playerid, "Jako wyk³adowca mo¿esz u¿ywaæ mikrofonu tylko na sali wyk³adowczej!");
             }
         }
-		else if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] > 1)
+		else if(IsAClub(playerid) && PlayerInfo[playerid][pRank] > 1)
         {
 			new player_vw;
 			player_vw = GetPlayerVirtualWorld(playerid);
@@ -185,20 +185,6 @@ YCMD:megafon(playerid, params[], help)
 				}
 			}
 		}
-        else if(GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
-        {
-            if(IsPlayerInRangeOfPoint(playerid,5,1315.6835,-1348.1102,73.9968)
-        	|| IsPlayerInRangeOfPoint(playerid,5,1315.5305,-1308.1102,73.9968)
-        	|| IsPlayerInRangeOfPoint(playerid,10,1309.9856,-1278.9166,81.7088))
-            {
-                format(string, sizeof(string), "[Sêdzia %s: %s]", sendername, params);
-			    ProxDetector(100.0, playerid, string,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW,COLOR_YELLOW);
-            }
-            else
-            {
-                return sendTipMessage(playerid, "Jako sêdzia mo¿esz u¿ywaæ mikrofonu tylko na sali rozpraw!");
-            }
-        }
 		else
 		{
 		    noAccessMessage(playerid);

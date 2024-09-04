@@ -88,9 +88,5 @@ YCMD:przebierz(playerid, params[], help)
 		format(string, sizeof(string), "Aktualny stan kredytów to %d", Kredyty[playerid]);
 		sendTipMessage(playerid, string);
 	}
-    if(GetPlayerOrg(playerid) == FAMILY_FDU)
-    {
-        if(IsPlayerInRangeOfPoint(playerid, 10.0, 1102.9858, -1227.3788, 14.8155)) ShowPlayerDialogEx(playerid, D_PRZEBIERZ_FDU, DIALOG_STYLE_LIST, "{FFFFFF}Uniform rodziny » Wybierz ubranie", "{C0FF9C}Kobieta w czerwonej sukience\n{C0FF9C}Mechanik\n{C0FF9C}Kobieta w czarnej bluzce\n{C0FF9C}Ryder\n{C0FF9C}Ziomek z niebiesk¹ CapBack\n{C0FF9C}Japoñczyk z czarn¹ chust¹\n{C0FF9C}Sweet", "Ubierz", "Anuluj");
-    }
 	return 1;
 }

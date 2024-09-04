@@ -90,7 +90,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                     new pojazd;
                     if((pojazd = GetPlayerVehicleID(playerid)) != 0 && IsCarOwner(playerid, GetPlayerVehicleID(playerid)))
                     {
-                        if(IsANoA(dawacz))
+                        if(IsAMechazordWarsztatowy(dawacz))
                         {
                             if(IsABoat(pojazd) || IsAPlane(pojazd) || IsABike(pojazd))
                             {

@@ -131,7 +131,7 @@ YCMD:brama(playerid, params[], help)
     			}
         }
         //S?D bramy
-        if(IsPlayerInFraction(playerid, FRAC_BOR, 5000) || GetPlayerOrg(playerid) == FAMILY_SAD)// || IsAHA(playerid))
+        if(IsPlayerInFraction(playerid, FRAC_BOR, 5000))
         {
 
 			if(IsPlayerInRangeOfPoint(playerid,9,1310.15649, -1384.96997, 13.20500))
@@ -182,7 +182,7 @@ YCMD:brama(playerid, params[], help)
         	}
         }
         //Bramy FDU
-        if(GetPlayerOrg(playerid) == FAMILY_FDU || IsANoA(playerid))
+        if(IsAMechazordWarsztatowy(playerid))
         {
             if(IsPlayerInRangeOfPoint(playerid,10,1074.1450, -1205.0692, 18.6206))
         	{
@@ -1837,7 +1837,7 @@ YCMD:brama(playerid, params[], help)
         		return 1;
         	}
         }
-        if(GetPlayerOrg(playerid) == FAMILY_IBIZA)
+        if(IsAClub(playerid))
         {
             if(IsPlayerInRangeOfPoint(playerid, 5.0, 1903.2273,-2466.0583,17.9950) && PlayerInfo[playerid][pRank] > 5 && GetPlayerVirtualWorld(playerid) == 1) //RANGA
         	{
@@ -1883,7 +1883,7 @@ YCMD:brama(playerid, params[], help)
         		return 1;
         	}
         }
-        else if(GetPlayerOrg(playerid) == FAMILY_VINYL)
+        else if(IsAClub(playerid))
         {
             if (IsPlayerInRangeOfPoint(playerid,8.0,853.63031, -1384.23206, 13.65440))
             {

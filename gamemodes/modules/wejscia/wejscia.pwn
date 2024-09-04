@@ -307,14 +307,6 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		}
 		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
 	}
-	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
-	{
-		if(SektaKey[playerid] == 0 && GetPlayerOrg(playerid) != FAMILY_SEKTA) 
-    	{
-			noAccessCome[playerid] = 1; 
-			return 1;
-		}
-	}
 	else if(Check_ID == 18 || Check_ID == 19) //ibiza audio
 	{
 		PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
@@ -344,14 +336,6 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 	else if(Check_ID == 6)
 	{
 		StopAudioStreamForPlayer(playerid);	
-	}
-	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
-	{
-		if(SektaKey[playerid] == 0 && GetPlayerOrg(playerid) != FAMILY_SEKTA) 
-    	{
-			noAccessCome[playerid] = 1; 
-			return 1;
-		}
 	}
 	else if(Check_ID == 2)
 	{

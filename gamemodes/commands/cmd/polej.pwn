@@ -30,7 +30,7 @@
 
 YCMD:polej(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pRank] >=3 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+	if(PlayerInfo[playerid][pRank] >=3 && IsAClub(playerid)) //RANGA
 	{
 		if(!IsPlayerInRangeOfPoint(playerid, 50.0, 1904.3759,-2494.4448,13.6266) || GetPlayerVirtualWorld(playerid) != 1) return sendTipMessageEx(playerid, 0xB52E2BFF, "Jesteœ za daleko od baru klubu Ibiza");
 		new id, drink;

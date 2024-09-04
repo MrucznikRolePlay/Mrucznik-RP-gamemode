@@ -291,7 +291,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] == 0)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     sendErrorMessage(playerid, "Nie posiadasz biletu do Ibizy!"); 
                     return 1;
@@ -334,7 +334,7 @@ YCMD:wejdz(playerid, params[], help)
         //wejscie na scene/konsole
         else if(PlayerToPoint(1.5, playerid, 430.4849,-1837.2827,-65.5105))
         {
-            if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+            if(!IsAClub(playerid))
             {
                 GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1); 
                 return 1;
@@ -347,7 +347,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -361,7 +361,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -375,7 +375,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -389,7 +389,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -404,7 +404,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 2)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -418,7 +418,7 @@ YCMD:wejdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 2)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     GameTextForPlayer(playerid, "~r~Brak dostepu", 5000, 1);
                     return 1;
@@ -619,7 +619,7 @@ YCMD:wejdz(playerid, params[], help)
 
         }
         //wejœcie do bileterki
-        else if(IsPlayerInRangeOfPoint(playerid, 12.0, 1740.8485,-2471.0625,14.2266) && GetPlayerOrg(playerid) == FAMILY_IBIZA && GetPlayerVirtualWorld(playerid) == 1) //RANGA
+        else if(IsPlayerInRangeOfPoint(playerid, 12.0, 1740.8485,-2471.0625,14.2266) && IsAClub(playerid) && GetPlayerVirtualWorld(playerid) == 1) //RANGA
         {
             SetPlayerPos(playerid, 397.6122,-1806.0079,7.8381);
             SetPlayerFacingAngle(playerid, 0.8024);
@@ -634,7 +634,7 @@ YCMD:wejdz(playerid, params[], help)
         else if(IsPlayerInRangeOfPoint(playerid, 2.0, 394.2784,-1805.9104,7.8302) && GetPlayerVirtualWorld(playerid) == 0 )
         {
             if(IbizaZamek) return sendTipMessageEx(playerid, 0xB52E2BFF, "Klub jest w tej chwili zamkniêty");
-            if(!GetPVarInt(playerid, "IbizaBilet") && GetPlayerOrg(playerid) != FAMILY_IBIZA) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie posiadasz biletu, kup go w kasie"); //RANGA
+            if(!GetPVarInt(playerid, "IbizaBilet") && !IsAClub(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie posiadasz biletu, kup go w kasie"); //RANGA
             TogglePlayerControllable(playerid, false);
             Wchodzenie(playerid);
             SetPlayerPos(playerid, 1741.5828,-2473.1572,14.2266);
@@ -660,7 +660,7 @@ YCMD:wejdz(playerid, params[], help)
             return 1;
         }
         // BAR - wejscie
-        else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1898.4817,-2494.8752,13.6266) && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+        else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1898.4817,-2494.8752,13.6266) && GetPlayerVirtualWorld(playerid) == 1 && IsAClub(playerid)) //RANGA
         {
             SetPlayerPos(playerid, 1900.5961,-2494.9373,13.6266);
             SetPlayerFacingAngle(playerid, 271.5300);
@@ -679,7 +679,7 @@ YCMD:wejdz(playerid, params[], help)
         else if(IsPlayerInRangeOfPoint(playerid, 2.0, 386.2871,-1817.9784,7.8410) && GetPlayerVirtualWorld(playerid) == 0)
         {
             if(IbizaZamek) return sendTipMessageEx(playerid, 0xB52E2BFF, "Klub jest w tej chwili zamkniêty");
-            if(GetPlayerOrg(playerid) != FAMILY_IBIZA) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie mo¿esz têdy przejœæ, nie jesteœ z Ibiza Club!"); //RANGA
+            if(!IsAClub(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie mo¿esz têdy przejœæ, nie jesteœ z Ibiza Club!"); //RANGA
             TogglePlayerControllable(playerid, false);
             SetPlayerPos(playerid, 1917.3785,-2465.4368,15.4266);
             SetPlayerFacingAngle(playerid, 180.7695);

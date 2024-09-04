@@ -28,7 +28,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 IsAMechazordWarsztatowy(playerid)
 {
-	return IsANoA(playerid) || GetPlayerOrg(playerid) == 15 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == 19;
+	return GetPlayerOrgType(playerid) == ORG_TYPE_RACE;
 }
 
 IsAtWarsztat(playerid)

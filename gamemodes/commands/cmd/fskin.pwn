@@ -37,8 +37,7 @@ YCMD:fskin(playerid, params[], help)
 			sendErrorMessage(playerid, "Nie mo¿esz tego u¿yæ  podczas @Duty! ZejdŸ ze s³u¿by u¿ywaj¹c /adminduty");
 			return 1;
 		}
-		if (IsAtClothShop(playerid) || (GetPlayerOrg(playerid) == FAMILY_RSC && 
-            IsPlayerInRangeOfPoint(playerid, 4.0, 1636.9476,-1813.6195,13.5263)) ||
+		if (IsAtClothShop(playerid) ||
             IsPlayerInRangeOfPoint(playerid, 4.0, 1147.3623,-1314.4891,13.6743) || //duty ers
             IsPlayerInRangeOfPoint(playerid, 4.0, GetPVarFloat(playerid,"xposspawn"),GetPVarFloat(playerid,"yposspawn"),GetPVarFloat(playerid,"zposspawn")))
 		{

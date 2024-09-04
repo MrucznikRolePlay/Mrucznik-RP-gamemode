@@ -32,7 +32,7 @@ YCMD:finisz(playerid, params[], help)
 {
 	new string[128];
 
-	if(IsANoA(playerid))
+	if(IsAMechazordWarsztatowy(playerid))
 	{
 		if(PlayerInfo[playerid][pRank] >= 4)
 		{

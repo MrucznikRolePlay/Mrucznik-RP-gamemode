@@ -30,7 +30,7 @@
 
 YCMD:wyscig_start(playerid, params[], help)
 {
-    if(IsANoA(playerid))
+    if(IsAMechazordWarsztatowy(playerid))
     {
 		if(PlayerInfo[playerid][pRank] >= 2)
 		{

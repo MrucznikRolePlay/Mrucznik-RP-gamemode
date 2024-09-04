@@ -277,7 +277,7 @@ YCMD:wyjdz(playerid, params[], help)
 		//wejscie na scene/konsole
         else if(PlayerToPoint(1.5, playerid, 434.7581, -1841.0632, -64.2206))
         {
-			if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+			if(!IsAClub(playerid))
             {
                 return 1;
             }
@@ -289,7 +289,7 @@ YCMD:wyjdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     return 1;
                 }
@@ -301,7 +301,7 @@ YCMD:wyjdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     return 1;
                 }
@@ -313,7 +313,7 @@ YCMD:wyjdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     return 1;
                 }
@@ -325,7 +325,7 @@ YCMD:wyjdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 1)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     return 1;
                 }
@@ -338,7 +338,7 @@ YCMD:wyjdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 2)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     return 1;
                 }
@@ -350,7 +350,7 @@ YCMD:wyjdz(playerid, params[], help)
         {
             if(IbizaTicket[playerid] <= 2)
             {
-                if(GetPlayerOrg(playerid) != FAMILY_IBIZA)
+                if(!IsAClub(playerid))
                 {
                     return 1;
                 }
@@ -362,7 +362,7 @@ YCMD:wyjdz(playerid, params[], help)
 			return 1;
         }
     	//wyjœcie bileterki
-    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 397.6174,-1806.2030,7.8381) && GetPlayerOrg(playerid) == FAMILY_IBIZA && GetPlayerVirtualWorld(playerid) == 0) //RANGA
+    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 397.6174,-1806.2030,7.8381) && IsAClub(playerid) && GetPlayerVirtualWorld(playerid) == 0) //RANGA
     	{
     		TogglePlayerControllable(playerid, false);
     		SetPlayerPos(playerid, 1740.5719,-2471.0737,14.2266);
@@ -411,7 +411,7 @@ YCMD:wyjdz(playerid, params[], help)
     		return 1;
     	}
     	// BAR - wyjscie
-    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1900.5961,-2494.9373,13.6266) && PlayerInfo[playerid][pRank] && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1900.5961,-2494.9373,13.6266) && PlayerInfo[playerid][pRank] && GetPlayerVirtualWorld(playerid) == 1 && IsAClub(playerid)) //RANGA
     	{
     		SetPlayerPos(playerid, 1898.4817,-2494.8752,13.6266);
     		SetPlayerFacingAngle(playerid, 271.3850);
@@ -428,7 +428,7 @@ YCMD:wyjdz(playerid, params[], help)
     		return 1;
     	}
     	//wyjœcie boczne
-    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1917.3785,-2465.4368,15.4266) && GetPlayerVirtualWorld(playerid) == 1 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+    	else if(IsPlayerInRangeOfPoint(playerid, 2.0, 1917.3785,-2465.4368,15.4266) && GetPlayerVirtualWorld(playerid) == 1 && IsAClub(playerid)) //RANGA
     	{
     		SetPlayerPos(playerid, 386.2871,-1817.9784,7.8410);
     		SetPlayerFacingAngle(playerid, 94.4268);

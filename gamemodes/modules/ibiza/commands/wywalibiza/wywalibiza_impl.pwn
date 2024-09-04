@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_wywalibiza_Impl(playerid, giveplayerid)
 {
-    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 2) 
+    if(IsAClub(playerid) && PlayerInfo[playerid][pRank] >= 2) 
     {
         new Float:x,
             Float:y,
@@ -41,7 +41,7 @@ command_wywalibiza_Impl(playerid, giveplayerid)
                 format(var, sizeof(var), "** %s wyrzuca %s z ibizy.", GetNick(playerid), GetNick(giveplayerid));
                 ProxDetector(20.0, playerid, var, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                 format(var, sizeof(var), "[IBIZA_INFO]%s wyrzuci³ %s z ibizy!", GetNick(playerid), GetNick(giveplayerid));
-                SendNewFamilyMessage(FAMILY_IBIZA, COLOR_P@, var);
+                SendNewFamilyMessage(GetPlayerOrg(playerid), COLOR_P@, var);
                 Wchodzenie(giveplayerid);
                 SetPlayerVirtualWorld(giveplayerid, 0);
                 SetPlayerPos(giveplayerid, 397.3062, -1805.8008, 7.8380);

@@ -30,7 +30,7 @@
 
 YCMD:alarm(playerid,cmdtext[], help)
 {
-    if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2 || GetPlayerOrg(playerid) == FAMILY_SAD && PlayerInfo[playerid][pRank] > 2)
+    if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2)
 	{
         if(IsPlayerInRangeOfPoint(playerid,5,1315.6504,-1271.2982,82.3418)
         || IsPlayerInRangeOfPoint(playerid,5,1315.0375,-1355.7534,62.0792)
@@ -49,7 +49,6 @@ YCMD:alarm(playerid,cmdtext[], help)
 				format(akcja,sizeof(akcja),"* %s wciska czerwony guzik i w³¹cza alarm.",GetNick(playerid));
                 ProxDetector(30.0, playerid, akcja, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
                 format(akcja, 150, "> %s uruchomi³ alarm w s¹dzie!", GetNick(playerid));
-                SendNewFamilyMessage(FAMILY_SAD, TEAM_AZTECAS_COLOR, akcja);
                 SendFamilyMessage(FRAC_BOR, 0xFFFF0000, akcja);
 				GATE_SAD_ALARM=true;
     		}

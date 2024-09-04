@@ -36,7 +36,7 @@ YCMD:sprzedajalkohol(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAPrzestepca(playerid) || PlayerInfo[playerid][pAdmin] >= 1 || GetPlayerOrg(playerid) == 16 || GetPlayerOrg(playerid) == FAMILY_IBIZA)
+        if(IsAPrzestepca(playerid) || PlayerInfo[playerid][pAdmin] >= 1)
         {
 			
      		new x_nr[16];

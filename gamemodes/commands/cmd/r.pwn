@@ -59,18 +59,6 @@ YCMD:r(playerid, params[], help)
 			format(string, sizeof(string), "Radio: %s", params);
 			SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
         }
-        else if(GetPlayerOrg(playerid) == FAMILY_SAD) //SAD i BOR po³aczenie+DMV
-        {
-            member = GetPlayerOrg(playerid);
-            format(string, sizeof(string), "** %s %s: %s **", FamRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
-            SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
-			SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string); 
-            SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
-            format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid), params);
-			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);
-            format(string, sizeof(string), "Radio: %s", params);
-			SetPlayerChatBubble(playerid,string,COLOR_YELLOW,10.0,8000);
-        }
 		else
 		{
 			noAccessMessage(playerid);

@@ -199,29 +199,12 @@ YCMD:odznaka(playerid, params[], help)
 						}
 						SendClientMessage(giveplayerid, COLOR_PURPLE, "|_____ United States Secret Service _____|");
 					}
-					if (GetPlayerOrg(playerid) == FAMILY_SAD)
-					{
-						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|______________ Legitymacja SCoSA _____________|");
-						format(string, sizeof(string), "Imiê i nazwisko: %s.", sendername);
-						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-                        format(string, sizeof(string), "Ranga: %s", FamRang[FAMILY_SAD][PlayerInfo[playerid][pRank]]);
-						SendClientMessage(giveplayerid,COLOR_WHITE,string);
-						if(PlayerInfo[playerid][pRank] > 3)
-						{
-							SendClientMessage(giveplayerid,COLOR_GREEN,"TA OSOBA POSIADA IMMUNITET!");
-						}
-						else
-						{
-							SendClientMessage(giveplayerid,COLOR_RED,"TA OSOBA NIE POSIADA IMMUNITETU!");
-						}
-						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|______________ Legitymacja SCoSA _____________|");
-					}
 					if (GetPlayerFraction(playerid) == FRAC_GOV)
 					{
 						SendClientMessage(giveplayerid, COLOR_LIGHTGREEN, "|___________ Legitymacja Urzêdu Miasta __________|");
 						format(string, sizeof(string), "Imiê i nazwisko: %s.", sendername);
 						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-                        format(string, sizeof(string), "Stopieñ: %s", FamRang[FAMILY_SAD][PlayerInfo[playerid][pRank]]);
+                        format(string, sizeof(string), "Stopieñ: %s", FracRang[FRAC_GOV][PlayerInfo[playerid][pRank]]);
 						SendClientMessage(giveplayerid,COLOR_WHITE,string);
 						if(PlayerInfo[playerid][pRank] > 7)
 						{

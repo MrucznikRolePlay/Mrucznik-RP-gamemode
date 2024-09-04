@@ -116,7 +116,7 @@ YCMD:windalock(playerid, params[], help)
         || IsPlayerInRangeOfPoint(playerid,3,1310.1989,-1328.8876,82.5859) // 2 biura
         || IsPlayerInRangeOfPoint(playerid,3,1310.2946,-1321.2517,74.6955) // 3 socjal
         || IsPlayerInRangeOfPoint(playerid,3,1310.3961,-1319.0530,35.6587))// 4 dach
-		&& GetPlayerOrg(playerid) == FAMILY_SAD)
+		&& (GetPlayerFraction(playerid) == FRAC_GOV || GetPlayerFraction(playerid) == FRAC_BOR))
 		{
 		    if(level > 4 || level < -1)
 			{

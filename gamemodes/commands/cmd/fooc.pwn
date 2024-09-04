@@ -72,7 +72,6 @@ YCMD:fooc(playerid, params[], help)
             format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
     		SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
-			SendNewFamilyMessage(FAMILY_SAD, TEAM_BLUE_COLOR, string);
             Log(chatLog, INFO, "%s radio frakcji %d OOC: %s", GetPlayerLogName(playerid), member, params);
         }
 		else

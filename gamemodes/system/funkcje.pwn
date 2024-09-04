@@ -2005,9 +2005,7 @@ IsAPrzestepca(playerid)
 {
 	if(IsPlayerConnected(playerid))
 	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG || GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA || GetPlayerOrgType(playerid) == ORG_TYPE_RACE)
+		if(GetPlayerOrg(playerid) > 0)
 		{
 		    return 1;
 		}
@@ -2037,6 +2035,11 @@ stock IsAMafia(playerid)
 		}
 	}
 	return 0;
+}
+
+IsAClub(playerid)
+{
+	return GetPlayerOrgType(playerid) == ORG_TYPE_CLUB;
 }
 
 IsASklepZBronia(playerid)
@@ -2095,24 +2098,6 @@ IsAMedyk(playerid)
 		if(GetPlayerJob(playerid) == JOB_MEDIC)
 		{
 			return 1;
-		}
-	}
-	return 0;
-}
-
-IsANoA(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==15)
-		{
-		    return 1;
-		}
-		if(leader==15)
-		{
-		    return 1;
 		}
 	}
 	return 0;
@@ -2526,32 +2511,6 @@ DajBronieFrakcyjne(playerid)
 
 DajBronieOganizacji(playerid)
 {
-	if( GetPlayerOrg(playerid) == 7) /* darki HA */
-	{
-		if(PlayerInfo[playerid][pGun1] == 0)
-		{
-			PlayerInfo[playerid][pGun1] = 4; PlayerInfo[playerid][pAmmo1] = 1;
-			playerWeapons[playerid][weaponLegal2] = 1;
-		}
-     	if(PlayerInfo[playerid][pGun2] == 0 || PlayerInfo[playerid][pGun2] == 24 && PlayerInfo[playerid][pAmmo2] < 25 || PlayerInfo[playerid][pAmmo2] <= 7)
-	    {
-	        PlayerInfo[playerid][pGun2] = 24; PlayerInfo[playerid][pAmmo2] = 107;
-	        playerWeapons[playerid][weaponLegal3] = 0;
-	    }
-	    if(PlayerInfo[playerid][pGun5] == 0 || PlayerInfo[playerid][pGun5] == 30 && PlayerInfo[playerid][pAmmo5] < 50 || PlayerInfo[playerid][pAmmo5] <= 20)
-	    {
-	        PlayerInfo[playerid][pGun5] = 30; PlayerInfo[playerid][pAmmo5] = 250;
-	        playerWeapons[playerid][weaponLegal6] = 0;
-	    }
-	}
-	if(GetPlayerOrg(playerid) == FAMILY_SEKTA)
-	{
-		if(PlayerInfo[playerid][pGun1] == 0)
-		{
-			PlayerInfo[playerid][pGun1] = 4; PlayerInfo[playerid][pAmmo1] = 1;
-			playerWeapons[playerid][weaponLegal2] = 1;
-		}
-	}
 	switch(GetPlayerOrg(playerid))
 	{
 		default:
@@ -8387,52 +8346,6 @@ WczytajSkiny()
     print("Wczytano skiny");
 }
 
-Config_FamilyScript()
-{
-    new query[256], id, nazwa[20];
-    mysql_query("SELECT * FROM `mru_rodziny`");
-    mysql_store_result();
-    while(mysql_fetch_row_format(query, "|"))
-    {
-        sscanf(query, "p<|>s[20]d",nazwa, id);
-        if(strcmp(nazwa, "FAMILY_SAD") == 0)
-        {
-            FAMILY_SAD = id;
-            printf("FAMILY_SAD = %d", FAMILY_SAD);
-        }
-        if(strcmp(nazwa, "FAMILY_RSC") == 0)
-        {
-            FAMILY_RSC = id;
-            printf("FAMILY_RSC = %d", FAMILY_RSC);
-        }
-        if(strcmp(nazwa, "FAMILY_ALHAMBRA") == 0)
-        {
-            FAMILY_ALHAMBRA = id;
-            printf("FAMILY_ALHAMBRA = %d", FAMILY_ALHAMBRA);
-        }
-        if(strcmp(nazwa, "FAMILY_VINYL") == 0)
-        {
-            FAMILY_VINYL = id;
-            printf("FAMILY_VINYL = %d", FAMILY_VINYL);
-        }
-        if(strcmp(nazwa, "FAMILY_IBIZA") == 0)
-        {
-            FAMILY_IBIZA = id;
-            printf("FAMILY_IBIZA = %d", FAMILY_IBIZA);
-        }
-        if(strcmp(nazwa, "FAMILY_FDU") == 0)
-        {
-            FAMILY_FDU = id;
-            printf("FAMILY_FDU = %d", FAMILY_FDU);
-        }
-		if(strcmp(nazwa, "FAMILY_SEKTA") == 0)
-        {
-            FAMILY_SEKTA = id;
-            printf("FAMILY_SEKTA = %d", FAMILY_SEKTA);
-        }
-    }
-    mysql_free_result();
-}
 
 WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
 {

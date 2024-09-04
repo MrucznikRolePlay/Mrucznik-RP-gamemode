@@ -32,7 +32,7 @@ YCMD:trasy(playerid, params[], help)
 {
 	if(GUIExit[playerid] == 0)
 	{
-		if(IsANoA(playerid))
+		if(IsAMechazordWarsztatowy(playerid))
 		{
 			if(PlayerInfo[playerid][pRank] >= 4)
 			{

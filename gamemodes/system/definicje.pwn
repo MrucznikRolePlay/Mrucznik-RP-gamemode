@@ -192,14 +192,11 @@
 #define FRAC_SN     9
 #define FRAC_KT     10
 #define FRAC_GOV    11
-#define SPOILER_D 200000
-#define ZDERZAK_D 250000
-#define FELGA_D 250000
-#define NITRO_D 500000
-#define HYDRA_D 250000
-
-new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
-    FAMILY_FDU = -1, FAMILY_SEKTA = -1;
+#define SPOILER_D   200000
+#define ZDERZAK_D   250000
+#define FELGA_D     250000
+#define NITRO_D     500000
+#define HYDRA_D     250000
 
 //2015.09.12
 #define TAJNIAK_FBI		0

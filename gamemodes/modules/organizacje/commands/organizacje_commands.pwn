@@ -31,7 +31,6 @@
 
 //-------<[ include ]>-------
 #include "otworz\otworz.pwn"
-#include "sekta\sekta.pwn"
 #include "zamknij\zamknij.pwn"
 
 
@@ -39,7 +38,6 @@
 hook OnGameModeInit()
 {
     command_otworz();
-    command_sekta();
     command_zamknij();
     
 }

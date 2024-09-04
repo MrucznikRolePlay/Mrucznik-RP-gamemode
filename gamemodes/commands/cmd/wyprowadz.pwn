@@ -30,7 +30,7 @@
 
 YCMD:wyprowadz(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pRank] >= 2 && GetPlayerOrg(playerid) == FAMILY_IBIZA) //RANGA
+	if(PlayerInfo[playerid][pRank] >= 2 && IsAClub(playerid)) //RANGA
 	{
 		new id;
 		if(sscanf(params, "d", id)) return sendTipMessage(playerid, "U¿yj /wyprowadz [id]");
@@ -39,7 +39,7 @@ YCMD:wyprowadz(playerid, params[], help)
 		new Float:x, Float:y, Float:z;
 		GetPlayerPos(id, x, y, z);
 		if(!IsPlayerInRangeOfPoint(playerid, 4.0, x, y, z) || GetPlayerVirtualWorld(id) != 1) return sendTipMessageEx(playerid, 0xB52E2BFF, "Ten gracz jest za daleko od ciebie");
-		if(GetPlayerOrg(id) == FAMILY_IBIZA) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie mo¿esz wyprowadziæ cz³onka klubu Ibiza");
+		if(IsAClub(playerid)) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie mo¿esz wyprowadziæ cz³onka klubu Ibiza");
 		SetPVarInt(id, "IbizaWejdz", 0);
 		SetPVarInt(id, "IbizaBilet", 0);
 		SetPlayerPos(id, 394.2784,-1805.9104,7.8302);

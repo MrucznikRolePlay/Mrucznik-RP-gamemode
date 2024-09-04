@@ -30,7 +30,7 @@
 
 YCMD:owarsztat(playerid, params[], help)
 {
-	if(IsANoA(playerid))
+	if(IsAMechazordWarsztatowy(playerid))
 	{
 		if(!openwarsztat)
 		{

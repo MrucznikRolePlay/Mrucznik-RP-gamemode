@@ -34,7 +34,7 @@ YCMD:wyscig(playerid, params[], help)
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
-	if(IsANoA(playerid))
+	if(IsAMechazordWarsztatowy(playerid))
 	{
 		if(PlayerInfo[playerid][pRank] >= 2)
 		{
