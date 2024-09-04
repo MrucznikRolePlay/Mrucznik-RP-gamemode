@@ -33,9 +33,8 @@ YCMD:wrzuc(playerid, params[], help)
 	new string[128];
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
-    new frac = GetPlayerFraction(playerid), fam = GetPlayerOrgType(playerid);
 
-    if(!(frac == FRAC_HA || fam == ORG_TYPE_GANG || fam == ORG_TYPE_MAFIA))
+    if(!IsAPrzestepca(playerid))
     {
         return sendErrorMessage(playerid, "Nie mo¿esz tego zrobiæ!");
 	}

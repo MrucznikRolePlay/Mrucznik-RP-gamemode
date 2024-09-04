@@ -1087,7 +1087,6 @@ ZerujZmienne(playerid)
 	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
-	organizacje_clearCache(playerid);
 	//z disconecta
 
 	timeFakeVehRespawn[playerid] = 0;

@@ -36,7 +36,7 @@ YCMD:sad(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-		if(GetPlayerFraction(playerid) != FAMILY_GOV && PlayerInfo[playerid][pRank] > 4)
+		if(GetPlayerFraction(playerid) != FRAC_GOV && PlayerInfo[playerid][pRank] > 4)
 		{
  			sendErrorMessage(playerid, "Nie jesteœ z s¹du!");
 		    return 1;

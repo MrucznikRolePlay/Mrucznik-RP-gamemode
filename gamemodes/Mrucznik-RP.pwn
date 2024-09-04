@@ -319,9 +319,6 @@ public OnGameModeInit()
     WczytajRangi();
     WczytajSkiny();
 
-    //Konfiguracja ID skryptu dla rodzin  - daj -1 w bazie aby wy³¹czyæ korzystanie ze skryptu dla slotu
-    Config_FamilyScript();
-    //
     BARIERKA_Init();
 
 	obiekty_OnGameModeInit();
