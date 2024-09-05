@@ -171,36 +171,6 @@ YCMD:sluzba(playerid, params[], help)
                 return 1;
             }
         }
-		else if(GetPlayerOrg(playerid) == 12)
-		{
-			if ( IsPlayerInRangeOfPoint(playerid, 5.0, 2522.8916,-2441.6270,13.6435) )
-            {
-				if(OnDuty[playerid]==0)
-                {
-                    format(string, sizeof(string), "* ¯o³nierz %s bierze odznakê i broñ ze swojej szafki.", sendername);
-                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    SetPlayerArmour(playerid, 90);
-                    SetPlayerHealth(playerid, 100);
-					
-					if(PlayerInfo[playerid][pSex] == 1)
-						SetPlayerSkinEx(playerid, 287);
-					else
-						SetPlayerSkinEx(playerid, 191);
-                    OnDuty[playerid] = 1;
-                }
-                else if(OnDuty[playerid]==1)
-                {
-                    format(string, sizeof(string), "* ¯o³nierz %s odk³ada odznakê i broñ do swojej szafki.", sendername);
-                    ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-                    SetPlayerArmour(playerid, 0.0);
-                    SetPlayerHealth(playerid, 100);
-                    OnDuty[playerid] = 0;
-					SecretAgent[playerid] = 0;
-                    SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
-                    PrzywrocBron(playerid);
-                }
-			}
-		}
         else if(frac == 4)
         {
             if (PlayerToPoint(4, playerid,1147.3623,-1314.4891,13.6743))

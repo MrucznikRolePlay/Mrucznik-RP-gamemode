@@ -1,0 +1,78 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                               front_business                                              //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: mrucznik
+// Data utworzenia: 05.09.2024
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+enum BIZ_TYPE {
+    FRONT_BIZ_TYPE_GUNSHOP,
+	FRONT_BIZ_TYPE_RACE,
+	FRONT_BIZ_TYPE_RESTAURANT,
+	FRONT_BIZ_TYPE_CLUB,
+	FRONT_BIZ_TYPE_PIZZA,
+	FRONT_BIZ_TYPE_BURGER,
+	FRONT_BIZ_TYPE_CHICKEN,
+    FRONT_BIZ_TYPE_CASINO,
+	FRONT_BIZ_TYPE_GYM,
+	FRONT_BIZ_TYPE_CLOTH,
+	FRONT_BIZ_TYPE_BARBER,
+	FRONT_BIZ_TYPE_BOAT,
+	FRONT_BIZ_TYPE_SPRAY
+};
+
+enum eFrontBusinessInfo {
+    // hardcoded info
+    Name[64], Type,
+    Float:OutX, Float:OutY, Float:OutZ, OutInt, OutVw,
+    Float:InX, Float:InY, Float:InZ, InInt, InVw,
+    Float:TakeoverX, Float:TakeoverY, Float:TakeoverZ, TakeoverInt, TakeoverVw,
+    BaseIncome, IncomePerPlayer,
+    // created from hardcoded info
+    BizGangZone,
+    GangZoneArea,
+    TakeoverArea,
+    TakeoverCheckpoint,
+    // taken from redis
+    TakeoverHour, TakeoverMinute, TakeoverTime, 
+    BizColor,
+    Owner,
+    // only in memory
+    TakeoverActive,
+    TakeoverStartTime,
+    TakingOver[MAX_ORG],
+    TakingOverScore[MAX_ORG],
+    CopTakingOver,
+    CopTakingOverScore
+};
+//-----------------<[ Zmienne: ]>-------------------
+new FrontBusiness[][eFrontBusinessInfo] = {
+    {
+        "Test", 
+        0.0, 0.0, 0.0, 0, 0,
+        0.0, 0.0, 0.0, 0, 0,
+        0.0, 0.0, 0.0, 0, 0,
+        100, 1000,
+        16, 30
+    }
+};
+//------------------<[ Forwardy: ]>--------------------
+
+//end

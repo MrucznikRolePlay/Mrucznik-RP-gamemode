@@ -27,7 +27,24 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255, bool:specialCome=false)
+DodajWejscieNoPickup(Float:fx1, Float:fy1, Float:fz1, vw1=0, int1=0, Float:fx2, Float:fy2, Float:fz2, vw2=0, int2=0, wejdzUID=0, playerLocal=255)
+{
+	wejscia[iloscwejsc][w_x1] = fx1;
+	wejscia[iloscwejsc][w_y1] = fy1;
+	wejscia[iloscwejsc][w_z1] = fz1;
+	wejscia[iloscwejsc][w_x2] = fx2;
+	wejscia[iloscwejsc][w_y2] = fy2;
+	wejscia[iloscwejsc][w_z2] = fz2;
+	wejscia[iloscwejsc][w_vw1] = vw1;
+	wejscia[iloscwejsc][w_int1] = int1;
+	wejscia[iloscwejsc][w_vw2] = vw2;
+	wejscia[iloscwejsc][w_int2] = int2;
+	wejscia[iloscwejsc][w_pLocal] = playerLocal;
+	wejscia[iloscwejsc][w_UID] = wejdzUID;
+	return iloscwejsc++;
+}
+
+DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255, bool:specialCome=false, outPickup=1239, inPickup=1239)
 {
 	wejscia[iloscwejsc][w_x1] = fx1;
 	wejscia[iloscwejsc][w_y1] = fy1;
@@ -47,7 +64,7 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 	}
 	if(isnull(nazwain)) 
 	{
-		CreateDynamicPickup(1239, 2, fx1, fy1, fz1, vw1, int1);
+		CreateDynamicPickup(inPickup, 2, fx1, fy1, fz1, vw1, int1);
 	}
 	else  
 	{
@@ -56,7 +73,7 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 	}
 	if(isnull(nazwaout)) 
 	{
-		CreateDynamicPickup(1239, 2, fx1, fy1, fz1, vw2, int2);
+		CreateDynamicPickup(outPickup, 2, fx1, fy1, fz1, vw2, int2);
 	}
 	else 
 	{

@@ -306,6 +306,7 @@ public OnGameModeInit()
     NowaWybieralka_Init();
 	LoadBusiness(); 
 	LoadBusinessPickup(); 	
+	LoadFrontBusinesses();
 	InitializeJobs();
 
 	//-------<[ actors ]>-------
@@ -884,6 +885,7 @@ public OnDynamicActorStreamIn(actorid, forplayerid)
 public OnPlayerEnterDynamicArea(playerid, areaid)
 {
 	ZA_OnPlayerEnterDynamicArea(playerid, areaid); // z³odziej aut
+	FB_OnPlayerEnterDynamicArea(playerid, areaid); // front business
 
     if(IsPlayerInAnyVehicle(playerid))
     {
@@ -916,6 +918,12 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
             return 1;
         }
     }
+	return 1;
+}
+
+public OnPlayerLeaveDynamicArea(playerid, areaid)
+{
+	FB_OnPlayerLeaveDynamicArea(playerid, areaid);
 	return 1;
 }
 
