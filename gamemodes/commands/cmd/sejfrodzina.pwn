@@ -30,7 +30,7 @@
 
 YCMD:sejfrodzina(playerid, params[], help)
 {
-	if(orgIsLeader(playerid))
+	if(IsPlayerOrgLeader(playerid))
     {
 		SejfR_Show(playerid);
     }

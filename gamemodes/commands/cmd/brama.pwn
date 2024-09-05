@@ -1837,7 +1837,7 @@ YCMD:brama(playerid, params[], help)
         		return 1;
         	}
         }
-        if(IsAClub(playerid))
+        if(IsAClubBusinessOwner(playerid))
         {
             if(IsPlayerInRangeOfPoint(playerid, 5.0, 1903.2273,-2466.0583,17.9950) && PlayerInfo[playerid][pRank] > 5 && GetPlayerVirtualWorld(playerid) == 1) //RANGA
         	{
@@ -1883,7 +1883,7 @@ YCMD:brama(playerid, params[], help)
         		return 1;
         	}
         }
-        else if(IsAClub(playerid))
+        else if(IsAClubBusinessOwner(playerid))
         {
             if (IsPlayerInRangeOfPoint(playerid,8.0,853.63031, -1384.23206, 13.65440))
             {

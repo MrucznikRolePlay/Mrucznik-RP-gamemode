@@ -30,7 +30,7 @@
 
 YCMD:mikser(playerid, params[], help)
 {
-	if(PlayerInfo[playerid][pRank] >=5 && IsAClub(playerid))  //RANGA
+	if(PlayerInfo[playerid][pRank] >=5 && IsAClubBusinessOwner(playerid))  //RANGA
 	{
 		if(!IsPlayerInRangeOfPoint(playerid, 5.0, 1942.0912,-2468.7349,15.5266) || GetPlayerVirtualWorld(playerid) !=1) return sendTipMessageEx(playerid, 0xB52E2BFF, "Nie jesteœ przy konsoli klubu Ibiza");
 		MikserDialog(playerid);

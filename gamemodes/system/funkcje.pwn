@@ -911,17 +911,6 @@ MatsGood[playerid] = 0;
 return 1;
 }
 
-/*forward zabezpieczeniewoz(playerid);
-public zabezpieczeniewoz(playerid)
-{
-	if(IsPlayerInAnyVehicle(playerid))
-	{
-	    SendClientMessage(playerid, COLOR_PANICRED, "Dosta³eœ kicka za prawdopodobieñstwo u¿ycia czitów. Jeœli to bug, napisz na forum: www.mrucznik-rp.net");
-		KickEx(playerid);
-	}
-	return 1;
-}*/
-
 public togczastimer(playerid)
 {
     if(IsPlayerConnected(playerid))
@@ -1965,143 +1954,6 @@ IsAProductionServer()
 	return dini_Exists("production.info");
 }
 
-IsAnInstructor(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==11)
-		{
-		    return 1;
-		}
-		if(leader==11)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsAPolicja(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==1 || member==2 || member==3)
-		{
-		    return 1;
-		}
-		else if(leader==1 || leader==2 || leader==3)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsAPrzestepca(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerOrg(playerid) > 0)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-stock IsAGang(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-stock IsAMafia(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsAClub(playerid)
-{
-	return GetPlayerOrgType(playerid) == ORG_TYPE_CLUB;
-}
-
-IsASklepZBronia(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsAHA(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==8)
-		{
-		    return 1;
-		}
-		if(leader==8)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsPlayerInFraction(playerid, frac, adminlvl=-1)
-{
-    new leader = PlayerInfo[playerid][pLider];
-    new member = PlayerInfo[playerid][pMember];
-    if(member==frac || leader == frac) return 1;
-    else if(adminlvl != -1 && PlayerInfo[playerid][pAdmin] >= adminlvl) return 1;
-	return 0;
-}
-
-IsAMedyk(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==4)
-		{
-		    return 1;
-		}
-		if(leader==4)
-		{
-		    return 1;
-		}
-		if(GetPlayerJob(playerid) == JOB_MEDIC)
-		{
-			return 1;
-		}
-	}
-	return 0;
-}
 
 IsAWyscigOrganizowany()
 {
@@ -2127,76 +1979,6 @@ IsAWyscigTworzony()
 	return -1;
 }
 
-IsAUrzednik(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==11)
-		{
-		    return 1;
-		}
-		else if(leader==11 )
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsABOR(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member==7)
-		{
-		    return 1;
-		}
-		else if(leader==7 )
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
-IsAPorzadkowy(playerid)
-{
-	return IsAPolicja(playerid) || IsAMedyk(playerid) || IsABOR(playerid);
-}
-
-MozeMowicNaFamily(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    if(4 < GetPlayerFraction(playerid) < 7 || 7 < GetPlayerFraction(playerid) < 11 || 11 < GetPlayerFraction(playerid) < 17)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-IsAFBI(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    new leader = PlayerInfo[playerid][pLider];
-	    new member = PlayerInfo[playerid][pMember];
-	    if(member == 2)
-		{
-		    return 1;
-		}
-		if(leader == 2)
-		{
-		    return 1;
-		}
-	}
-	return 0;
-}
-
 IsASpojler(vehid)
 {
 	new wozspojler = GetVehicleModel(vehid);
@@ -2210,34 +1992,6 @@ IsASpojler(vehid)
 	}
 	return 0;
 }
-
-/*IsBusStop(playerid)
-{
-	if(IsPlayerConnected(playerid))
-	{
-	    if(PlayerToPoint(5.0,playerid,2298.1984863281,-1651.3073730469,14.745365142822) || PlayerToPoint(5.0,playerid,2649.0324707031,-1686.6606445313,10.840973854065) || PlayerToPoint(5.0,playerid,1583.9058837891,-2286.2392578125,13.539621353149) || PlayerToPoint(5.0,playerid,1275.4959716797,-2062.037109375,59.199634552002))
-	    {//Pierwsze 4 (Green Bar, Stadion, Lotnisko, Bia³y Dom)
-	        return 1;
-	    }
-	    else if(PlayerToPoint(5.0,playerid,1370.4241943359,-1738.8614501953,13.546875) || PlayerToPoint(5.0,playerid,1524.1988525391,-1674.310546875,13.546875) || PlayerToPoint(5.0,playerid,1503.8745117188,-1028.2069091797,23.795171737671) || PlayerToPoint(5.0,playerid,1800.5361328125,-1169.9978027344,23.828125))
-		{//Drugie 4 (24/7 DMV, Komisariat, Bank, Mrucznikowy GS)
-		    return 1;
-		}
-		else if(PlayerToPoint(5.0,playerid,374.65921020508,-1996.0040283203,7.8359375) || PlayerToPoint(5.0,playerid,360.93704223633,-1503.9656982422,32.828647613525) || PlayerToPoint(5.0,playerid,364.40408325195, -1358.9102783203, 14.809542655945) || PlayerToPoint(5.0,playerid,1827.2419433594,-1709.5623779297,13.546875))
-		{//Trzecie 4 (Motel(nie ma), Molo?, Zwi¹zek Emerytów, Salon Samochodowy)
-		    return 1;
-		}
-		else if(PlayerToPoint(5.0,playerid,1190.0697021484,-1360.7618408203,13.55712890625) || PlayerToPoint(5.0,playerid,1841.7498779297,-1414.1690673828,13.5625) || PlayerToPoint(5.0,playerid,1326.9821777344,-918.90075683594,37.077602386475) || PlayerToPoint(5.0,playerid,997.08544921875,-1135.2745361328,23.828125))
-		{//Czwarte 4 (Alahambra, Szpital, Studio San News, 24/7 Winnewood)
-		    return 1;
-		}
-		else if(PlayerToPoint(5.0,playerid,1731.9656982422,-1861.1456298828,13.577872276306) || PlayerToPoint(5.0,playerid,570.83056640625,-1243.8570556641,17.4817943573) || PlayerToPoint(5.0,playerid,2490.0905761719,-1509.2993164063,23.828125) || PlayerToPoint(5.0,playerid,2563.310546875, -2404.4309082031, 13.640625) || PlayerToPoint(5.0,playerid,2152.5356445313, -1109.5147705078, 25.406316757202))
-		{//Pi¹te 4 (Kasyno Liderowe, Cywilarnia, Wyporzyczalnia wozów, Salon Samochodów Terenowych + ten motel co nie by³o w trzeciej 4 zmieniony na bazê wojskow¹)
-		    return 1;
-		}
-	}
-	return 0;
-}*/
 
 UsunBron(playerid)
 {
@@ -2504,22 +2258,6 @@ DajBronieFrakcyjne(playerid)
 		{
 			PlayerInfo[playerid][pGun1] = 2; PlayerInfo[playerid][pAmmo1] = 1;
 			playerWeapons[playerid][weaponLegal1] = 1;
-		}
-	}
-	return 1;
-}
-
-DajBronieOganizacji(playerid)
-{
-	switch(GetPlayerOrg(playerid))
-	{
-		default:
-		{
-			if(PlayerInfo[playerid][pGun1] == 0)
-			{
-				PlayerInfo[playerid][pGun1] = 5; PlayerInfo[playerid][pAmmo1] = 1;
-				playerWeapons[playerid][weaponLegal2] = 1;
-			}
 		}
 	}
 	return 1;
@@ -2987,17 +2725,6 @@ PrzyczepKogut(playerid, veh)
 stock IsAtAmmunationLosSantos(playerid)
 {
 	if(GetPlayerVirtualWorld(playerid) == 5 && IsPlayerInRangeOfPoint(playerid, 100.0, 1815.6812,-1172.1915,61.5103)) return 1;
-	return 0;
-}
-
-stock IsNearSecuricar(playerid)
-{
-	new vehicleid = GetClosestCar(playerid, 3.5);
-	if(vehicleid != -1) 
-	{	
-		new lcarid = VehicleUID[vehicleid][vUID];
-		if(GetVehicleModel(vehicleid) == 428 && Car_GetOwnerType(vehicleid) == CAR_OWNER_FAMILY && CarData[lcarid][c_Owner] == GetPlayerOrg(playerid)) return 1;
-	}
 	return 0;
 }
 
@@ -4600,199 +4327,6 @@ SaveIRC()
 	}
 	return 1;
 }
-
-//--------------------------------------------------- SYTEM ORGANIZACJI --------------------------------------------
-
-orgLoad()
-{
-    new lQuery[256], lID, lRow;
-    mysql_query("SELECT * FROM `mru_org`");
-    mysql_store_result();
-    while(mysql_fetch_row_format(lQuery, "|"))
-    {
-        sscanf(lQuery, "p<|>de<dds[32]s[128]hffffdd>", lRow, OrgInfo[lID]);
-        lID++;
-    }
-    mysql_free_result();
-    printf("%d | Wczytano organizacje", lID);
-}
-
-orgSave(lID, savetype)
-{
-    if(!orgIsValid(lID)) return 0;
-    if(!MYSQL_SAVING) return 1;
-    new lQuery[512];
-	new name_escaped[32];
-	new motd_escaped[128];
-	mysql_real_escape_string(OrgInfo[lID][o_Name], name_escaped);
-	mysql_real_escape_string(OrgInfo[lID][o_Motd], motd_escaped);
-	
-    switch(savetype)
-    {
-        case ORG_SAVE_TYPE_BASIC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `UID`='%d'",
-        OrgInfo[lID][o_Type],OrgInfo[lID][o_Color],OrgInfo[lID][o_Spawn][0],OrgInfo[lID][o_Spawn][1],OrgInfo[lID][o_Spawn][2],OrgInfo[lID][o_Spawn][3], OrgInfo[lID][o_Int], OrgInfo[lID][o_VW], OrgInfo[lID][o_UID]);
-        case ORG_SAVE_TYPE_DESC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Name`='%s', `Motd`='%s' WHERE `UID`='%d'", name_escaped, motd_escaped, OrgInfo[lID][o_UID]);
-    }
-    if(lQuery[0]) mysql_query(lQuery);
-    return 1;
-}
-
-orgAdd(typ, name[], uid, id)
-{
-    OrgInfo[id][o_UID] = uid;
-    OrgInfo[id][o_Type] = typ;
-    OrgInfo[id][o_Color] = 0xFF0000;
-    orgSetName(id, name);
-    new lStr[128];
-	new name_escaped[32];
-	mysql_real_escape_string(OrgInfo[id][o_Name], name_escaped);
-    format(lStr, 128, "INSERT INTO `mru_org` (`UID`, `Name`, `Type`) VALUES ('%d', '%s', '%d')", uid, name_escaped, typ);
-    mysql_query(lStr);
-}
-
-GetPlayerOrgType(playerid) return orgType(gPlayerOrg[playerid]);
-orgType(lID)
-{
-    if(lID == 0xFFFF) return 0;
-    return OrgInfo[lID][o_Type];
-}
-GetPlayerOrg(playerid) return PlayerInfo[playerid][pOrg];
-
-orgID(uid)
-{
-    for(new i=0;i<MAX_ORG;i++)
-    {
-        if(OrgInfo[i][o_UID] == uid)
-        {
-            return i;
-        }
-    }
-    return 0xFFFF;
-}
-
-orgIsValid(orgid)
-{
-    if(orgid < 0 || orgid > MAX_ORG-1) return 0;
-    if(OrgInfo[orgid][o_UID] == 0) return 0;
-    return 1;
-}
-orgGetFreeSlot()
-{
-    for(new i=0;i<MAX_ORG;i++)
-    {
-        if(OrgInfo[i][o_UID] == 0)
-        {
-            return i;
-        }
-    }
-    return 0xFFFF;
-}
-
-orgInvitePlayer(playerid, orguid)
-{
-    new orgid = orgID(orguid);
-    if(!orgIsValid(orgid)) return 0;
-    gPlayerOrg[playerid] = orgid;
-    PlayerInfo[playerid][pOrg] = orguid;
-	if(FAM_SKINS[orguid][0] > 0)
-	{
-		PlayerInfo[playerid][pUniform] = FAM_SKINS[orguid][0];
-	}
-    gPlayerOrgLeader[playerid] = false;
-    new lStr[64];
-    format(lStr, 64, "ORG » Zosta³eœ przyjêty do organizacji %s.", OrgInfo[orgid][o_Name]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
-	MruMySQL_SavePlayerFamily(playerid);
-    return 1;
-}
-
-orgUnInvitePlayer(playerid)
-{
-    new orgid = gPlayerOrg[playerid];
-    PlayerInfo[playerid][pOrg] = 0;
-	PlayerInfo[playerid][pRank] = 0;
-    PlayerInfo[playerid][pUniform] = 0;
-    gPlayerOrg[playerid] = 0xFFFF;
-    new lStr[64];
-    if(!orgIsValid(orgid)) return 0;
-    format(lStr, 64, "ORG » Zosta³eœ wyproszony z organizacji %s.", OrgInfo[orgid][o_Name]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
-    gPlayerOrgLeader[playerid] = false;
-	MruMySQL_SavePlayerFamily(playerid);
-    return 1;
-}
-
-orgSetName(orgid, name[])
-{
-    if(!orgIsValid(orgid)) return 0;
-    if(strlen(name) < 3 || strlen(name) > 31) return 0;
-    format(OrgInfo[orgid][o_Name], 32, "%s", name);
-    return 1;
-}
-
-orgSetMotd(orgid, lMotd[])
-{
-    if(!orgIsValid(orgid)) return 0;
-    if(strlen(lMotd) > 127) return 0;
-    if(strlen(lMotd) == 0) strdel(OrgInfo[orgid][o_Motd], 0, 128);
-    else format(OrgInfo[orgid][o_Motd], 128, "%s", lMotd);
-    return 1;
-}
-
-orgSetSpawnAtPlayerPos(playerid, orgid)
-{
-    if(!orgIsValid(orgid)) return 0;
-    GetPlayerPos(playerid, OrgInfo[orgid][o_Spawn][0], OrgInfo[orgid][o_Spawn][1], OrgInfo[orgid][o_Spawn][2]);
-    GetPlayerFacingAngle(playerid, OrgInfo[orgid][o_Spawn][3]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, "ORG » Spawn zmieniony.");
-	orgSave(orgid, ORG_SAVE_TYPE_BASIC);
-    return 1;
-}
-
-orgGivePlayerRank(playerid, callerid, rankid)
-{
-    new orgid = gPlayerOrg[playerid];
-    if(!orgIsValid(orgid)) return 0;
-    new lStr[128];
-    format(lStr, 128, "ORG » Otrzyma³eœ %d rangê (%s) w organizacji %s. Nada³: %s.", rankid, (strlen(FamRang[PlayerInfo[playerid][pOrg]][rankid]) > 1) ? (FamRang[PlayerInfo[playerid][pOrg]][rankid]) : (FamRang[0][rankid]), OrgInfo[orgid][o_Name], (callerid == INVALID_PLAYER_ID) ? ("SYSTEM") : (GetNick(callerid)));
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
-    PlayerInfo[playerid][pRank] = rankid;
-	MruMySQL_SetAccInt("Rank", GetNickEx(playerid), rankid);
-    return 1;
-}
-
-orgIsLeader(playerid)
-{
-    new orgid = gPlayerOrg[playerid];
-    if(!orgIsValid(orgid)) return 0;
-    return gPlayerOrgLeader[playerid];
-}
-
-GetFractionMembersNumber(fractionid, bool:withOnDutyCheck)
-{
-	new membersNumber;
-	foreach(new i : Player)
-	{
-		if(PlayerInfo[i][pMember] == fractionid || PlayerInfo[i][pLider] == fractionid)
-		{
-			if(withOnDutyCheck)
-			{
-				if(fractionid == FRAC_SN && SanDuty[i] == 0)
-					continue;
-				else if((fractionid == FRAC_LSPD || fractionid == FRAC_FBI || fractionid == FRAC_NG || fractionid == FRAC_BOR) && OnDuty[i] == 0)
-					continue;
-				else if( (fractionid == FRAC_ERS || fractionid == FRAC_GOV || fractionid == FRAC_KT) && JobDuty[i])
-					continue;
-			}
-			membersNumber++;
-		}
-	}
-	return membersNumber;
-}
-
-//--------------------------------------------------- SYTEM ORGANIZACJI --------------------------------------------
-//                                                        END
-
 
 GetClosestPlayer(p1)
 {
@@ -7283,19 +6817,7 @@ SendJobMessage(job, color, string[])
 	}
 }
 
-SendNewFamilyMessage(family, color, string[])
-{
-	foreach(new i : Player)
-	{
-		if(GetPlayerOrg(i) == family)
-		{
-			if(!gFam[i])
-			{
-				SendClientMessage(i, color, string);
-			}
-		}
-	}
-}
+
 GetPlayerIDFromName(playerName[])
 {
 	foreach(new i : Player)
@@ -8435,7 +7957,7 @@ Sejf_Save(frakcja)
     if(!SafeLoaded) return;
     new query[128];
     format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d WHERE `ID`=%d AND `typ`=1", Sejf_Frakcji[frakcja], Frakcja_Mats[frakcja], frakcja);
-    if(MYSQL_SAVING) mysql_query(query);
+    mysql_query(query);
 }
 
 SejfR_Save(frakcja)
@@ -8443,7 +7965,7 @@ SejfR_Save(frakcja)
     if(!SafeLoaded) return;
     new query[128];
     format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d WHERE `ID`=%d AND `typ`=2", Sejf_Rodziny[frakcja], Rodzina_Mats[frakcja], frakcja);
-    if(MYSQL_SAVING) mysql_query(query);
+    mysql_query(query);
 }
 
 SejfR_Show(playerid) {
@@ -10695,7 +10217,7 @@ TJD_Exit()
 
     new lStr[64];
     format(lStr, 64, "UPDATE mru_config SET `trucker_magazyn`='%d'", TJD_Materials);
-    if(MYSQL_SAVING) mysql_query(lStr);
+    mysql_query(lStr);
 }
 
 TJD_Load()

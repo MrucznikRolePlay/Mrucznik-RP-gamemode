@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_lidercar_Impl(playerid, akcja[16], opcje[256])
 {
-    if(!orgIsLeader(playerid) && PlayerInfo[playerid][pLider] == 0)
+    if(!IsPlayerOrgLeader(playerid) && PlayerInfo[playerid][pLider] == 0)
     {
         sendErrorMessage(playerid, "Nie jesteœ liderem!");
         return 1;
@@ -139,7 +139,7 @@ command_lidercar_przejmij(playerid, vehicleUID)
         CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FRACTION;
         CarData[vehicleUID][c_Owner] = PlayerInfo[playerid][pLider];
     }
-    else if(orgIsLeader(playerid))
+    else if(IsPlayerOrgLeader(playerid))
     {
         CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FAMILY;
         CarData[vehicleUID][c_Owner] = gPlayerOrg[playerid];

@@ -125,7 +125,7 @@ YCMD:odznaka(playerid, params[], help)
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"wszytkimi jednostami s³u¿b. porz. podczas akcji. Prezydent.");
 						SendClientMessage(giveplayerid, COLOR_FBI, "|____ Federal Bureau of Investigation ____|");
 					}
-					if(GetPlayerOrg(playerid) == 23 || GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22)
+					if(IsAGunShopBusinessOwner(playerid))
 					{
 						SendClientMessage(giveplayerid, COLOR_GREEN, "|______________ Dokumenty GS ______________|");
 						format(string, sizeof(string), "Numer seryjny: %d%d%d%d", PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);

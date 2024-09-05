@@ -44,7 +44,7 @@ YCMD:fooc(playerid, params[], help)
 			sendTipMessage(playerid, "U¿yj (/fo)oc [tekst]");
 			return 1;
 		}
-		if (GetPlayerOrg(playerid) != 0 || MozeMowicNaFamily(playerid))
+		if (CheckFamilyChatPermission(playerid))
 		{
 		    new member = GetPlayerFraction(playerid);
             if(member > 0)

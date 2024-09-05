@@ -100,7 +100,7 @@ YCMD:sprzedajbron(playerid, params[], help)
         return 1;
     }
 
-    if(IsASklepZBronia(playerid))
+    if(IsAGunShopBusinessOwner(playerid))
     {
         if(PlayerInfo[giveplayerid][pGunLic] != 1 || strcmp(x_weapon,"pistolety",true) == 0)
         {
@@ -181,7 +181,7 @@ YCMD:sprzedajbron(playerid, params[], help)
     }
 
     // give weapon, etc
-    new legalWeapon = IsASklepZBronia(playerid);
+    new legalWeapon = IsAGunShopBusinessOwner(playerid);
     GivePlayerWeaponEx(giveplayerid, GunInfo[weaponid][GunId], GunInfo[weaponid][GunAmmo], legalWeapon);
     if(GunInfo[weaponid][GunId] == 39) //C4
     {

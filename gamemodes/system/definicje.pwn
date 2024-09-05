@@ -213,15 +213,6 @@
 #define WARN_BAN            2
 #define WARN_BLOCK          1
 
-//07.10 ORG
-#define ORG_SAVE_TYPE_BASIC 1
-#define ORG_SAVE_TYPE_DESC  2
-#define ORG_TYPE_NONE       0
-#define ORG_TYPE_GANG       1
-#define ORG_TYPE_MAFIA      2
-#define ORG_TYPE_RACE       3
-#define ORG_TYPE_BIZNES     4
-#define ORG_TYPE_CLUB       5
 //-----------------------------------------------------------------------------
 //                              PLOCAL
 //-----------------------------------------------------------------------------

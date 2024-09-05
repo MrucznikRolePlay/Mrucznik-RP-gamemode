@@ -53,14 +53,14 @@ ConnectToRedis()
 	return;
 }
 
-Redis_IncrBy(const key[], value)
+stock Redis_IncrBy(const key[], value)
 {
 	new string[128];
 	format(string, sizeof(string), "INCRBY %s %d", key, value);
 	Redis_Command(RedisClient, string);
 }
 
-Redis_Delete(const key[])
+stock Redis_Delete(const key[])
 {
 	new string[128];
 	format(string, sizeof(string), "DEL %s", key);
@@ -68,11 +68,64 @@ Redis_Delete(const key[])
 }
 
 // Expires key, default ttl = 1 month.
-Redis_Expire(const key[], ttl=2629800)
+stock Redis_Expire(const key[], ttl=2629800)
 {
 	new string[128];
 	format(string, sizeof(string), "EXPIRE %s %d", key, ttl);
 	Redis_Command(RedisClient, string);
+}
+
+// ------------[ Redis with Cache ]------------
+// -------[ use when key is read often ]-------
+stock CRedis_GetInt(const key[], &value)
+{
+	if(MAP_contains_str(RedisCache_Int, key))
+	{
+		value = MAP_get_str_val(RedisCache_Int, key);
+		return;
+	}
+
+	return Redis_GetInt(RedisClient, key, value);
+}
+
+stock CRedis_GetFloat(const key[], &Float:value)
+{
+	if(MAP_contains_str(RedisCache_Float, key))
+	{
+		value = MAP_get_str_val(RedisCache_Float, key);
+		return;
+	}
+
+	return Redis_GetFloat(RedisClient, key, value);
+}
+
+stock CRedis_GetString(const key[], value[], len = sizeof(value))
+{
+	if(MAP_contains_str(RedisCache_String, key))
+	{
+		MAP_get_str_arr(RedisCache_Float, key, value, len);
+		return;
+	}
+
+	return Redis_GetString(RedisClient, key, value, len);
+}
+
+stock CRedis_SetInt(const key[], value)
+{
+	MAP_insert_str_val(RedisCache_Int, key, value);
+	return Redis_SetInt(RedisClient, key, value);
+}
+
+stock CRedis_SetFloat(const key[], Float:value)
+{
+	MAP_insert_str_val(RedisCache_Int, key, value);
+	return Redis_SetFloat(RedisClient, key, value);
+}
+
+stock CRedis_SetString(const key[], const value[], len = sizeof(value))
+{
+	MAP_insert_str_arr(RedisCache_Int, key, value, len);
+	return Redis_SetString(RedisClient, key, value);
 }
 
 //end

@@ -172,7 +172,7 @@ YCMD:megafon(playerid, params[], help)
                 return sendTipMessage(playerid, "Jako wyk³adowca mo¿esz u¿ywaæ mikrofonu tylko na sali wyk³adowczej!");
             }
         }
-		else if(IsAClub(playerid) && PlayerInfo[playerid][pRank] > 1)
+		else if(IsAClubBusinessOwner(playerid) && PlayerInfo[playerid][pRank] > 1)
         {
 			new player_vw;
 			player_vw = GetPlayerVirtualWorld(playerid);

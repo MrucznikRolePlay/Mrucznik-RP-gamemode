@@ -621,7 +621,7 @@ IsPlayerOwnFractionCar(playerid, vehicleID)
         lider > 0;
     new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
         org == CarData[vehicleUID][c_Owner] && \
-        orgIsLeader(playerid);
+        IsPlayerOrgLeader(playerid);
 
     return liderOwner || orgOwner;
 }

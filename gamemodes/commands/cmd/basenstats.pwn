@@ -30,12 +30,11 @@
 
 YCMD:basenstats(playerid, params[], help)
 {
-	if(GetPlayerOrg(playerid) == 43)
+	if(IsAPoolBusinessOwner(playerid))
 	{
 		new string[128];
 		format(string, sizeof(string), "Zarobiona kasa: %d$\nSprzedane kredyty: %d\nOdwiedzin Sauny: %d\nWejœæ na basen: %d\nKorzystania z trampoliny: %d", poolCashStats, poolCreditStatus, poolSaunaStats, poolStats, poolTrampolineStats);
 		ShowPlayerDialogEx(playerid, 1095, DIALOG_STYLE_MSGBOX, "Statystyki", string, "Akceptuj", "");
-	
 	}
 	else
 	{

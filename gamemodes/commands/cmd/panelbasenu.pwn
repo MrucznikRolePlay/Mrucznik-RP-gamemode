@@ -32,7 +32,7 @@ YCMD:panelbasenu(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{
-		if(GetPlayerOrg(playerid) == 43)
+		if(IsAPoolBusinessOwner(playerid))
 		{
 			if(gPlayerOrgLeader[playerid])
 			{

@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_wywalibiza_Impl(playerid, giveplayerid)
 {
-    if(IsAClub(playerid) && PlayerInfo[playerid][pRank] >= 2) 
+    if(IsAClubBusinessOwner(playerid) && PlayerInfo[playerid][pRank] >= 2) 
     {
         new Float:x,
             Float:y,

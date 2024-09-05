@@ -174,7 +174,6 @@ new bool:InitMyItems[MAX_PLAYERS];
 //03.12
 //8.12 2016
 new bool:RANG_ApplyChanges[2][MAX_ORG];
-//new bool:SEJF_ApplyChanges[2][MAX_ORG];
 //
 new AUDIO_LoginFormat[8];
 new PlayerMC[MAX_PLAYERS];
@@ -315,14 +314,6 @@ new ZONE_DISABLED = 0;
 new ZONE_DEF_TIME = 900000;
 new ERS_mundur[MAX_PLAYERS] = 0;
 //21.07 PayDay fix
-/*new TRAIN_Checkpoints[6][3] = {
-    {1770.9999, -1953.9802, 14.9781},
-    {2288.9980, -1172.9340, 26.9344},
-    {2864.4058, 1320.2103, 11.5472},
-    {1400.0333, 2636.2949, 12.1870},
-    {-1948.4125, 117.5107, 26.7656},
-    {838.1317, -1387.9299, -0.4705}
-}; */
 new Blink[MAX_VEHICLES][4];
 new BlinkSide[MAX_VEHICLES];
 new Float:BlinkR[MAX_VEHICLES];
@@ -530,7 +521,6 @@ new drinkName4[32] = "Twoja Stara";
 //---------------------------------------------//
 
 //abram01
-//new plac2;
 new bor;
 new bor1;
 new bormove;
@@ -598,7 +588,6 @@ new haHajs[MAX_PLAYERS];
 //N!ree
 new cbradijo[MAX_PLAYERS];
 new adminpodgladcb[MAX_PLAYERS];
-//new togczas[MAX_PLAYERS];
 new matogczas[MAX_PLAYERS];
 //---
 new Security = 0;
@@ -777,7 +766,6 @@ new studion;
 new biurosan;
 new reflektor;
 new rexl;
-//new OnPlayerUpdate_ON = 0;
 new addtimer = 60000;
 new Float:stareVHP[MAX_PLAYERS];//zapis uszkodzen
 new SANradio = 0;
@@ -798,7 +786,6 @@ new planeisstopped;
 new Wodliczanie;
 new Float:MatsPoint[3] = {2138.2078,-2290.4888,20.6646};
 
-//koniec wozy Ballas
 //stary komisariat (old komi)
 new DrzwiPDKomi;
 new DrzwiPDKomi2;
@@ -1004,8 +991,6 @@ new timeshift = -1;
 new shifthour;
 
 new levelexp = 4;
-//new Float:ChangePos[MAX_PLAYERS][3];
-new ChangePos2[MAX_PLAYERS][2];
 new Float:PlayerPos[MAX_PLAYERS][6];
 new Float:TeleportDest[MAX_PLAYERS][3];
 
@@ -1023,13 +1008,6 @@ new GunshopLSLock = 1;
 // new DCC_Channel:g_FracChannel[MAX_FRAC];
 // new DCC_Channel:g_OrgChannel[MAX_ORG];
 // new DCC_Channel:g_GSLSLOGChannelId, DCC_Channel:g_GSCMLOGChannelId, DCC_Channel:g_GSWFLOGChannelId;
-/*
-new chpIDHunter[MAX_PLAYERS];
-new hunterSeeMe[MAX_PLAYERS]; 
-new hunterStatus[MAX_PLAYERS]; 
-new wantedValuePlayer;
-new timerForHunter[MAX_PLAYERS];*/
-//new newsTypePlayer[MAX_PLAYERS] = 3; 
 new AllLeaders; 
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
@@ -1058,10 +1036,6 @@ ClearVariableConnect(playerid)
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
 	fixActorsTimer[playerid] = 0; 
-/*	chpIDHunter[playerid] =0;
-	hunterSeeMe[playerid]=0;
-	hunterStatus[playerid]=0;
-	timerForHunter[playerid]=0;*/
 	playerTargetSpec[playerid] = INVALID_SPECTATE_ID;
 	playerSeeSpec[playerid] = INVALID_SPECTATE_ID; 
 	isNaked[playerid] = 0; 
@@ -1143,7 +1117,7 @@ ZerujZmienne(playerid)
 	JailPrice[playerid] = 0; MedicTime[playerid] = 0; NeedMedicTime[playerid] = 0; MedicBill[playerid] = 0; GotHit[playerid] = 0;
 	GoChase[playerid] = 999; GetChased[playerid] = 999;
 	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; SecretAgent[playerid] = 0; PoziomPoszukiwania[playerid] = 0;
-	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; ChangePos2[playerid][1] = 0; iddialog[playerid] = -1;
+	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; iddialog[playerid] = -1;
 	weryfikacja[playerid] = 0;
 	MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;
 	FindTimePoints[playerid] = 0; FindTime[playerid] = 0; JobDuty[playerid] = 0; SanDuty[playerid] = 0; WarningDuty[playerid] = 175; NJDuty[playerid] = 0; DeathWarning[playerid] = 1;

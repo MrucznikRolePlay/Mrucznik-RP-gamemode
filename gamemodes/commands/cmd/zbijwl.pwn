@@ -124,12 +124,6 @@ YCMD:zbijwl(playerid, params[], help)
 										PlayerInfo[playerid][pLawSkill] ++;
 										SendClientMessage(playerid, COLOR_GRAD2, "Skill +1");
 										PlayerPlaySound(playa, 1150, 0.0, 0.0, 0.0);
-									/*	if(hunterSeeMe[playa] > 0)
-										{
-											format(string, sizeof(string), "Poszukiwany %s przez lewiznê Policjantów zosta³ oczyszczony z zarzutów ((prawnik))", GetNick(playa));
-											sendTipMessageEx(hunterSeeMe[playa], COLOR_RED, string);
-											DestroyDynamicCP(chpIDHunter[playa]); 
-										}*/
 									}
 									else
 									{

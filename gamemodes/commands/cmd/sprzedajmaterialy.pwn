@@ -62,7 +62,7 @@ YCMD:sprzedajmaterialy(playerid, params[], help)
 							if(IsPlayerInAnyVehicle(giveplayerid) || IsPlayerInAnyVehicle(playerid)) return sendErrorMessage(playerid, "Jeden z was znajduje siê w pojeŸdzie!");
                             if(GetPVarInt(giveplayerid, "OKupMats") == 1) return sendErrorMessage(playerid, "Gracz ma ju¿ ofertê!");
                             if(GetPVarInt(playerid, "OSprzedajMats") == 1) return sendErrorMessage(playerid, "Oferujesz ju¿ komuœ sprzeda¿!");
-                          //  if(IsASklepZBronia(playerid) && !IsASklepZBronia(giveplayerid)) return sendErrorMessage(playerid, "Pracownik GunShopu mo¿e oferowaæ sprzeda¿ tylko innemu pracownikowi GunShopu!");
+                          //  if(IsAGunShopBusinessOwner(playerid) && !IsAGunShopBusinessOwner(giveplayerid)) return sendErrorMessage(playerid, "Pracownik GunShopu mo¿e oferowaæ sprzeda¿ tylko innemu pracownikowi GunShopu!");
 
                             new string[128];
 							format(string, sizeof(string),"%s oferuje %d materia³ów za %d $.", GetNick(playerid), moneys, kasa);

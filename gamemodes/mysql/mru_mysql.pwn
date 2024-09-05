@@ -1,7 +1,6 @@
 //mru_mysql.pwn
 
 new bool:MYSQL_ON = true;
-new bool:MYSQL_SAVING = true;
 
 new MYSQL_HOST[32];
 new MYSQL_USER[32];

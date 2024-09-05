@@ -94,7 +94,7 @@ GetTransportDestinationName(terminalType)
 	return where;
 }
 
-IsPlayerAtViceCity(playerid)
+stock IsPlayerAtViceCity(playerid)
 {
 	if(IsPlayerInDynamicArea(playerid, areaViceCity))
 	{
@@ -103,7 +103,7 @@ IsPlayerAtViceCity(playerid)
 	return 0;
 }
 
-IsPointInViceCity(Float:x, Float:y, Float:z)
+stock IsPointInViceCity(Float:x, Float:y, Float:z)
 {
 	if(IsPointInDynamicArea(areaViceCity, x, y, z))
 	{
@@ -112,7 +112,7 @@ IsPointInViceCity(Float:x, Float:y, Float:z)
 	return 0;
 }
 
-IsPlayerAtPrawnIsland(playerid)
+stock IsPlayerAtPrawnIsland(playerid)
 {
 	if(IsPlayerInDynamicArea(playerid, areaPrawnIsland))
 	{
@@ -121,7 +121,7 @@ IsPlayerAtPrawnIsland(playerid)
 	return 1;
 }
 
-IsPlayerAtStarfishIsland(playerid)
+stock IsPlayerAtStarfishIsland(playerid)
 {
 	if(IsPlayerInDynamicArea(playerid, areaStarfishIsland))
 	{
@@ -130,7 +130,7 @@ IsPlayerAtStarfishIsland(playerid)
 	return 1;
 }
 
-IsPlayerAtViceCityMainland(playerid)
+stock IsPlayerAtViceCityMainland(playerid)
 {
 	if(IsPlayerInDynamicArea(playerid, areaViceCityMainland))
 	{
@@ -139,7 +139,7 @@ IsPlayerAtViceCityMainland(playerid)
 	return 1;
 }
 
-IsPlayerAtViceCityBeach(playerid)
+stock IsPlayerAtViceCityBeach(playerid)
 {
 	if(IsPlayerInDynamicArea(playerid, areaViceCityBeach))
 	{
@@ -148,7 +148,7 @@ IsPlayerAtViceCityBeach(playerid)
 	return 1;
 }
 
-IsCarAtViceCity(vehicleid)
+stock IsCarAtViceCity(vehicleid)
 {
 	new Float:x, Float:y, Float:z;
 	GetVehiclePos(vehicleid, x, y, z);

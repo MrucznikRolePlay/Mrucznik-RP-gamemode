@@ -1980,43 +1980,8 @@ public IdleKick()
 		}
 	}
 	return 1;
-}/*
-forward PlayerShowForHunter(playerid);
-public PlayerShowForHunter(playerid)
-{
-	hunterStatus[playerid]++; 
-	new string[128];
-	if(hunterStatus[playerid] == 1 || hunterStatus[playerid] == 6 || hunterStatus[playerid] == 18)//Aktualizacja 
-	{
-		foreach(new i : Player)
-		{
-			if(PlayerInfo[i][pWL] >= 10)
-			{
-				if(i == playerid)
-				{
-					continue;
-				}
-				DestroyDynamicCP(chpIDHunter[i]);
-				new Float:posX, Float:posY, Float:posZ;
-				GetPlayerPos(i, posX, posY, posZ); 
-				chpIDHunter[i] = CreateDynamicCP(posX, posY, posZ, 2.5, GetPlayerInterior(i), GetPlayerInterior(i), playerid);
-				hunterSeeMe[i] = playerid; 
-				wantedValuePlayer++; 
-			}
-		}
-		sendTipMessageEx(playerid, COLOR_GREEN, ">======[KOMPUTER £OWCY]======<");
-		format(string, sizeof(string), "Iloœæ osób z Wanted Level +10 to %d", wantedValuePlayer); 
-		sendTipMessage(playerid, string);
-		sendTipMessage(playerid, "Pomyœlnie zaktualizowano po³o¿enia na GPS"); 
-		sendTipMessageEx(playerid, COLOR_GREEN, ">============================<");
-		wantedValuePlayer=0;
-		if(hunterStatus[playerid] >= 18)
-		{
-			hunterStatus[playerid]=1; 
-		}
-	}
-	return 1;
-}*/
+}
+
 forward RPGTimer();
 public RPGTimer()
 {
