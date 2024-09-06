@@ -103,6 +103,28 @@ StopFrontBizTakeover(bizId)
 	}
 }
 
+TriggerTakingOver(bizId, org)
+{
+	new color = FrontBusiness[bizId][BizColor];
+	new invertedColor = (color & 0xFF000000) | (~color & 0x00FFFFFF);
+	GangZoneFlashForAll(FrontBusiness[bizId][BizGangZone], invertedColor);
+
+	if(FrontBusiness[bizId][TakingOverScore][org] == 0)
+	{
+		new orgUid = OrgInfo[org][o_UID];
+		SendNewFamilyMessage(orgUid, COLOR_PANICRED, "UWAGA! AGRESJA!");
+		SendNewFamilyMessage(orgUid, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
+	}
+}
+
+StopTakingOver(bizId, org)
+{
+	GangZoneStopFlashForAll(FrontBusiness[bizId][BizGangZone]);
+	
+	new orgUid = OrgInfo[org][o_UID];
+	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, sprintf("Uda³o siê odeprzeæ atak na biznes %s!", FrontBusiness[bizId][Name]));
+}
+
 GetFrontBusinessIcon(type)
 {
 	switch(type)

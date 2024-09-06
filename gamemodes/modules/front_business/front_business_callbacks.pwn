@@ -58,6 +58,11 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 			SetPVarInt(playerid, "taking-over", i + 1);
 			FrontBusiness[i][TakingOver][org]++;
 
+			if(FrontBusiness[i][TakingOver][org] == TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD)
+			{
+				TriggerTakingOver(i, org);
+			}
+
 			// message
 			new isDefense = FrontBusiness[i][Owner] == OrgInfo[org][o_UID];
 			SendEnterTakeoverAreaMessage(playerid, i, org, isDefense);
@@ -126,6 +131,11 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 		{
 			DeletePVar(playerid, "taking-over");
 			FrontBusiness[i][TakingOver][org]--;
+
+			if(FrontBusiness[i][TakingOver][org] == TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD-1)
+			{
+				StopTakingOver(i, org);
+			}
 
 			// message
 			new isDefense = FrontBusiness[i][Owner] == OrgInfo[org][o_UID];
