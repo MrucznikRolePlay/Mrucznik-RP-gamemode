@@ -323,12 +323,6 @@
 #define D_CREATE            1260
 #define D_EDIT              1261
 
-#define D_EDIT_ORG          1303
-#define D_EDIT_ORG_LIST     1304
-#define D_EDIT_ORG_TYP      1305
-#define D_EDIT_ORG_NAME     1306
-#define D_EDIT_ORG_DELETE   1308
-
 #define D_EDIT_CAR          1309
 #define D_EDIT_CAR_MENU     1310
 #define D_EDIT_CAR_MODEL    1311

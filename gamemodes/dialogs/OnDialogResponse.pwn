@@ -12941,16 +12941,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         {
             case 1:
             {
-                if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieñ");
-                for(new i=0;i<MAX_ORG;i++)
-                {
-                    if(!IsOrgValid(i)) continue;
-                    format(lStr, 1024, "%s%d.\t%s\n", lStr, i, OrgInfo[i][o_Name]);
-                }
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG, DIALOG_STYLE_LIST, "Edycja organizacji", lStr, "Dalej", "Wróæ");
-            }
-            case 2:
-            {
                 if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieñ");
                 new Float:x, Float:y, Float:z;
                 GetPlayerPos(playerid, x ,y ,z);
@@ -12965,105 +12955,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 strcat(lStr, "WprowadŸ UID pojazdu, który chcesz edytowaæ:");
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", lStr, "Dalej", "Wróæ");
             }
-            case 3:
+            case 2:
             {
                 if(!Uprawnienia(playerid, ACCESS_EDITRANG)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieñ");
 
                 ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
             }
         }
-        return 1;
-    }
-    //EDYCJA ORGANIZACJI
-    else if(dialogid == D_EDIT_ORG)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        SetPVarInt(playerid, "edit_org", strval(inputtext));
-        ShowPlayerDialogEx(playerid, D_EDIT_ORG_LIST, DIALOG_STYLE_LIST, "Edycja organizacji", "Zmieñ typ\nZmieñ nazwê\nUsuñ lidera(ów)\nUsuñ organizacje", "Wybierz", "Wróæ");
-        return 1;
-    }
-    else if(dialogid == D_EDIT_ORG_LIST)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        new lStr[256];
-        switch(listitem)
-        {
-            case 0:
-            {
-                for(new i=0;i<sizeof(OrgTypes);i++)
-                {
-                    format(lStr, 256, "%s%d.\t%s\n", lStr, i+1, OrgTypes[i]);
-                    ShowPlayerDialogEx(playerid, D_EDIT_ORG_TYP, DIALOG_STYLE_LIST, "Edycja", lStr, "Zmieñ", "Wróæ");
-                }
-            }
-            case 1:
-            {
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "WprowadŸ now¹ nazwê", "Zmieñ", "Wróæ");
-            }
-            case 2:
-            {
-                SendClientMessage(playerid, COLOR_GREEN, "W budowie");
-            }
-            case 3:
-            {
-                if(!Uprawnienia(playerid, ACCESS_DELETEORG)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieñ");
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG_DELETE, DIALOG_STYLE_MSGBOX, "Potwierdzenie", "Czy na pewno chcesz usun¹æ organizacjê?", "Usuñ", "Wróæ");
-            }
-        }
-        return 1;
-    }
-    else if(dialogid == D_EDIT_ORG_TYP)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        OrgInfo[id][o_Type] = listitem;
-        format(lStr, 128, "Zmieniono typ organizacji %s na %s", OrgInfo[id][o_Name], OrgTypes[listitem]);
-        SendClientMessage(playerid, COLOR_GREEN, lStr);
-
-        SaveOrg(id, ORG_SAVE_TYPE_BASIC);
-        return 1;
-    }
-    else if(dialogid == D_EDIT_ORG_NAME)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "WprowadŸ now¹ nazwê", "Zmieñ", "Wróæ");
-        format(lStr, 128, "Zmieniono nazwê organizacji %s na %s", OrgInfo[id][o_Name], inputtext);
-        SendClientMessage(playerid, COLOR_GREEN, lStr);
-        SetOrgName(id, inputtext);
-
-        SaveOrg(id, ORG_SAVE_TYPE_DESC);
-        return 1;
-    }
-    else if(dialogid == D_EDIT_ORG_DELETE)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        format(lStr, sizeof(lStr), "Usuniêto organizacjê %s.", OrgInfo[id][o_Name]);
-        SendClientMessage(playerid, COLOR_GREEN, lStr);
-        format(lStr, sizeof(lStr), "Organizacja usuniêta przez %s.", GetNickEx(playerid));
-        foreach(new i : Player)
-        {
-            if(GetPlayerOrg(i) == id)
-            {
-                SendClientMessage(i, COLOR_RED, lStr);
-                RemovePlayerFromOrg(i);
-            }
-        }
-		MruMySQL_UsunOrganizacje(id);
-
-        for(new j=0;j<MAX_ZONES;j++)
-        {
-            if(ZoneControl[j]-100 == id)
-            {
-                GangZoneShowForAll(j, 0xC6E2F144);
-                ZoneControl[j] = 0;
-            }
-        }
-
-        OrgInfo[id][o_Type] = 0;
-        strdel(OrgInfo[id][o_Name], 0, 32);
-        strdel(OrgInfo[id][o_Motd], 0, 128);
         return 1;
     }
     //EDYCJA POJAZDÓW
