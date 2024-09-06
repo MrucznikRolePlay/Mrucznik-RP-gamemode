@@ -32,6 +32,7 @@
 //-------<[ include ]>-------
 #include "otworz\otworz.pwn"
 #include "zamknij\zamknij.pwn"
+#include "orgs\orgs.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -39,5 +40,6 @@ hook OnGameModeInit()
 {
     command_otworz();
     command_zamknij();
+    command_orgs();
     
 }

@@ -1,0 +1,16 @@
+{
+    "name": "orgs",
+    "description": "Pokazuje liste organizacji i ich pracowników.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": ["organizacje"],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "orgid",
+            "description": "id organizacji",
+            "defaultValue": "-1"
+        }
+    ],
+    "date": "06.09.2024"
+}

@@ -87,6 +87,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(command_transport_OnDialogResp(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(cmd_organizacje_OnDialogResp(playerid, dialogid, response, listitem, inputtext)) return 1;
 
 	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
@@ -12930,33 +12931,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(response) return 1;
         TextDrawHideForPlayer(playerid, TXD_Info);
-        return 1;
-    }
-    else if(dialogid == D_ORGS)
-    {
-        if(!response) return 1;
-        new lStr[512];
-        for(new i=0;i<MAX_ORG;i++)
-        {
-            if(!IsOrgValid(i)) continue;
-            if(GetOrgType(i) == listitem)
-            {
-                format(lStr, 512, "%s{000000}%d\t{FFFFFF}%s\n", lStr, i, OrgInfo[i][o_Name]);
-            }
-        }
-        if(strlen(lStr) > 3)
-        {
-            ShowPlayerDialogEx(playerid, D_ORGS_SELECT, DIALOG_STYLE_LIST, "Lista organizacji", lStr, "Cz³onkowie", "Wróæ");
-        }
-        return 1;
-    }
-    else if(dialogid == D_ORGS_SELECT)
-    {
-        if(!response) return RunCommand(playerid, "/organizacje",  "");
-        new id = strval(inputtext);
-        new lStr[16];
-        valstr(lStr, id);
-        RunCommand(playerid, "/organizacje",  lStr);
         return 1;
     }
     else if(dialogid == D_EDIT)

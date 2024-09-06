@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//----------------------------------------------[ organizacje ]----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                    orgs                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,43 +16,52 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "orgs_impl.pwn"
 
-YCMD:organizacje(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_orgs()
 {
-    new lStr[128];
-    if(isnull(params))
+    new command = Command_GetID("orgs");
+
+    //aliases
+    Command_AddAlt(command, "organizacje");
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:orgs(playerid, params[], help)
+{
+    if (help)
     {
-        for(new i=0;i<sizeof(OrgTypes);i++)
-        {
-            format(lStr, 128, "%s%s\n", lStr, OrgTypes[i]);
-        }
-        ShowPlayerDialogEx(playerid, D_ORGS, DIALOG_STYLE_LIST, "Spis organizacji", lStr, "Wybierz", "WyjdŸ");
+        sendTipMessage(playerid, "Pokazuje liste organizacji i ich pracowników.");
         return 1;
     }
-    new lID;
-    sscanf(params, "d", lID);
-    if(!IsOrgValid(lID)) return 1;
-    format(lStr, 128, "|| Cz³onkowie ONLINE w %s ||", OrgInfo[lID][o_Name]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
-    foreach(new i : Player)
+    //fetching params
+    new orgid;
+    if(sscanf(params, "D(-1)", orgid))
     {
-        if(GetPlayerOrg(i) == lID)
-        {
-            if(IsPlayerOrgLeader(i)) format(lStr, 128, "* %s (LIDER)", GetNick(i));
-            else format(lStr, 128, "* %s (Ranga: %d)", GetNick(i), PlayerInfo[i][pRank]);
-            SendClientMessage(playerid, COLOR_GRAD2, lStr);
-        }
+        sendTipMessage(playerid, "U¿yj /orgs [id organizacji] ");
+        return 1;
     }
-    return 1;
+    
+    //command body
+    return command_orgs_Impl(playerid, orgid);
 }
