@@ -35,7 +35,7 @@ YCMD:boombox(playerid, params[], help)
 
     new frac = GetPlayerFraction(playerid);
     if(GetPlayerOrg(playerid) == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla gangów!");
-    if(frac == 0 && GetPlayerOrgType(playerid) != ORG_TYPE_GANG && GetPlayerOrgType(playerid) != ORG_TYPE_CLUB && GetPlayerOrgType(playerid) != ORG_TYPE_BIZNES) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla organizacji typu gang/biznes/klub!");
+    if(frac == 0 && !IsAGang(playerid) && IsAClubBusinessOwner(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Boombox tylko dla organizacji typu gang/biznes/klub!");
     new owner;
 
     if(frac == 0) owner = 100+GetPlayerOrg(playerid);

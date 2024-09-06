@@ -284,7 +284,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerInfo[playerid][pDrugs],
 	PlayerInfo[playerid][pMember],
 	PlayerInfo[playerid][pOrg],
-	(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]),
+	PlayerInfo[playerid][pRank],
 	PlayerInfo[playerid][pChar],
 	PlayerInfo[playerid][pSkin],
 	PlayerInfo[playerid][pContractTime],
@@ -1425,7 +1425,7 @@ stock MruMySQL_SavePlayerFamily(playerid) {
 	new string[256];
 	format(string, sizeof(string), "UPDATE `mru_konta` SET `FMember`=%i, `Rank`=%i, `Uniform`=%i, `Team`=%i WHERE `UID`=%i",
 		PlayerInfo[playerid][pOrg],
-		(gPlayerOrgLeader[playerid]) ? (PlayerInfo[playerid][pRank]+1000) : (PlayerInfo[playerid][pRank]),
+		PlayerInfo[playerid][pRank],
 		PlayerInfo[playerid][pUniform],
 		PlayerInfo[playerid][pTeam],
 		PlayerInfo[playerid][pUID]);

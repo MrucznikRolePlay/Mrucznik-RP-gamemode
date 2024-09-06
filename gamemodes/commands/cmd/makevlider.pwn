@@ -69,7 +69,7 @@ YCMD:makevleader(playerid, params[], help)
 						PlayerInfo[giveplayerid][pMember] = 0;
 						PlayerInfo[giveplayerid][pLider] = 0;
 						PlayerInfo[giveplayerid][pJob] = 0;
-						orgUnInvitePlayer(giveplayerid);
+						RemovePlayerFromOrg(giveplayerid);
 						MedicBill[giveplayerid] = 0;
 						SetPlayerSpawn(giveplayerid);
 						format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(giveplayerid));

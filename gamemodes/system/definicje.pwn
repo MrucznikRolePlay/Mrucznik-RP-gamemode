@@ -323,9 +323,6 @@
 #define D_CREATE            1260
 #define D_EDIT              1261
 
-#define D_CREATE_ORG        1300
-#define D_CREATE_ORG_NAME   1301
-#define D_CREATE_ORG_UID    1302
 #define D_EDIT_ORG          1303
 #define D_EDIT_ORG_LIST     1304
 #define D_EDIT_ORG_TYP      1305

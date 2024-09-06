@@ -45,7 +45,7 @@ YCMD:qf(playerid, params[], help)
 			Log(serverLog, INFO, "Gracz %s opuœci³ frakcjê %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pMember]);
 			PlayerInfo[playerid][pMember] = 0;
 			PlayerInfo[playerid][pRank] = 0;
-            orgUnInvitePlayer(playerid);
+            RemovePlayerFromOrg(playerid);
 			MedicBill[playerid] = 0;
 			SetPlayerSpawnSkin(playerid);
 			return 1;

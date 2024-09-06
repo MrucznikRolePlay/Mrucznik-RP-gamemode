@@ -138,9 +138,8 @@ TriggerTakingOver(bizId, org)
 
 	if(FrontBusiness[bizId][TakingOverScore][org] == 0)
 	{
-		new orgUid = OrgInfo[org][o_UID];
-		SendNewFamilyMessage(orgUid, COLOR_PANICRED, "UWAGA! AGRESJA!");
-		SendNewFamilyMessage(orgUid, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
+		SendNewFamilyMessage(org, COLOR_PANICRED, "UWAGA! AGRESJA!");
+		SendNewFamilyMessage(org, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
 	}
 }
 
@@ -148,8 +147,7 @@ StopTakingOver(bizId, org)
 {
 	GangZoneStopFlashForAll(FrontBusiness[bizId][BizGangZone]);
 
-	new orgUid = OrgInfo[org][o_UID];
-	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, sprintf("Uda³o siê odeprzeæ atak na biznes %s!", FrontBusiness[bizId][Name]));
+	SendNewFamilyMessage(org, COLOR_LIGHTGREEN, sprintf("Uda³o siê odeprzeæ atak na biznes %s!", FrontBusiness[bizId][Name]));
 }
 
 TakeOverFrontBusiness(bizId, org)
@@ -163,21 +161,18 @@ TakeOverFrontBusiness(bizId, org)
 
 SuccessfulDefenceMessage(bizId, org)
 {
-	new orgUid = OrgInfo[org][o_UID];
-	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
+	SendNewFamilyMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
 }
 
 SuccessfulAttackMessage(bizId, org, oldOwner)
 {
-	new orgUid = OrgInfo[org][o_UID];
-	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
-	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
+	SendNewFamilyMessage(org, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
+	SendNewFamilyMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
 
-	if(orgIsValid(oldOwner))
+	if(IsOrgValid(oldOwner))
 	{
-		new oldOrgOwner = OrgInfo[oldOwner][o_UID];
-		SendNewFamilyMessage(oldOrgOwner, COLOR_PANICRED, "TRAGEDIA!");
-		SendNewFamilyMessage(oldOrgOwner, COLOR_PANICRED, sprintf("Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));
+		SendNewFamilyMessage(oldOwner, COLOR_PANICRED, "TRAGEDIA!");
+		SendNewFamilyMessage(oldOwner, COLOR_PANICRED, sprintf("Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));
 	}
 }
 

@@ -321,5 +321,6 @@ new Float:JobIconPositions[Jobs][MAX_JOB_JOINS][3] = {
 
 
 //------------------<[ Forwardy: ]>--------------------
+forward Jobs:GetPlayerJob(playerid);
 
 //end

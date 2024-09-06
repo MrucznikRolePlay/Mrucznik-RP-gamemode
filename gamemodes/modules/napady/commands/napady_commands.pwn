@@ -30,16 +30,16 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "napadoff\napadoff.pwn"
-#include "napadon\napadon.pwn"
 #include "napad\napad.pwn"
+#include "napadon\napadon.pwn"
+#include "napadoff\napadoff.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_napadoff();
-    command_napadon();
     command_napad();
+    command_napadon();
+    command_napadoff();
     
 }

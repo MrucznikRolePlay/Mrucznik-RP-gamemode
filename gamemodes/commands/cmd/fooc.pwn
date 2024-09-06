@@ -57,9 +57,9 @@ YCMD:fooc(playerid, params[], help)
 		    {
                 member = GetPlayerOrg(playerid);
                 //Przypisane rangi
-                if(strlen(FamRang[member][PlayerInfo[playerid][pRank]]) > 1) format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", FamRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
+                if(strlen(OrgRank[member][PlayerInfo[playerid][pRank]]) > 1) format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", OrgRank[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 //Rangi podstawowe
-                else format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FamRang[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
+                else format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", OrgRank[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
 				SendDiscordOrgMessage(member, string);
 			}

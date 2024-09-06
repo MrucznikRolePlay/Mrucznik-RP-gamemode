@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                               setzonecontrol                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,32 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 06.09.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "transport\transport.pwn"
-#include "fixvc\fixvc.pwn"
-#include "gotovcint\gotovcint.pwn"
-#include "gotovc\gotovc.pwn"
-#include "objectsdebug\objectsdebug.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_setzonecontrol_Impl(playerid, zoneid, org)
 {
-    command_transport();
-    command_fixvc();
-    command_gotovcint();
-    command_gotovc();
-    command_objectsdebug();
+    if(!IsAHeadAdmin(playerid) && !IsAScripter(playerid)) {
+        noAccessMessage(playerid);
+    }
     
+    if(zoneid < 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Numer od 0");
+
+    ZoneControl[zoneid] = org;
+    MruMySQL_SetZoneControl(org, zoneid);
+
+    foreach(new i : Player)
+    {
+        GangZoneHideForPlayer(i, zoneid);
+        GangZoneShowForPlayer(i, zoneid, OrgInfo[org][o_Color] | 0x44);
+    }
+
+    SendClientMessage(playerid, COLOR_GRAD2, "SET.");
+    return 1;
 }
+
+//end

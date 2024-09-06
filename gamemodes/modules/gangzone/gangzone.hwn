@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-------------------------------------------------[ stworz ]------------------------------------------------//
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                  gangzone                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,21 +16,27 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Autor: mrucznik
+// Data utworzenia: 06.09.2024
 
-// Opis:
-/*
-	
-*/
+//
 
+//------------------<[ Enumy: ]>--------------------
+//-----------------<[ Zmienne: ]>-------------------
+new Zone_Points[2];
+new Float:Zone_Area[81];
+new ZoneControl[MAX_ZONES];
+new ZonePlayerTimer[MAX_PLAYERS];
+new bool:ZoneAttack[MAX_ZONES]={false, ...};
+new ZoneAttackTimer[MAX_ZONES];
+new ZoneAttackData[MAX_ZONES][4];
+new bool:ZoneGangLimit[200]={true, ...};
+new bool:ZoneAttacker[MAX_PLAYERS];
+new bool:ZoneDefender[MAX_PLAYERS];
+new ZoneProtect[MAX_ZONES];
+new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
+new ZONE_DISABLED = 0;
+new ZONE_DEF_TIME = 900000;
+//------------------<[ Forwardy: ]>--------------------
 
-// Notatki skryptera:
-/*
-	
-*/
-
-YCMD:stworz(playerid, params[], help)
-{
-    if(!Uprawnienia(playerid, ACCESS_PANEL)) return 1;
-    ShowPlayerDialogEx(playerid, D_CREATE, DIALOG_STYLE_LIST, "Panel Boga", "Wybierz co chcesz stworzyæ:\n1.\tOrganizacja", "Wybierz", "WyjdŸ");
-    return 1;
-}
+//end

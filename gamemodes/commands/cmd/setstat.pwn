@@ -113,7 +113,7 @@ YCMD:setstat(playerid, params[], help)
 						}
 						case 11:
 						{
-                            orgInvitePlayer(giveplayerid, amount);
+                            InvitePlayerToOrg(giveplayerid, amount);
 							format(string, sizeof(string), "Rodzina gracza zmieniono na %d", amount);
 						}
 						case 12:

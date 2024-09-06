@@ -22,10 +22,40 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-//-----------------<[ Zmienne: ]>-------------------
+enum e_OrgTypes {
+    ORG_TYPE_INACTIVE,
+    ORG_TYPE_GANG,
+    ORG_TYPE_MAFIA,
 
-//SEKTA
+    // TODO: remove
+    ORG_TYPE_RACE,
+    ORG_TYPE_CLUB
+};
+
+enum eOrg {
+    o_Type,
+    o_Name[32],
+    o_Motd[128],
+    o_Color,
+    Float:o_Spawn[4],
+    o_Int,
+    o_VW
+};
+
+new OrgTypes[][16] = {
+    "Rodzina",
+    "Gang",
+    "Mafia",
+    "Szajka",
+    "Biznes",
+    "Klub"
+};
+
+//-----------------<[ Zmienne: ]>-------------------
+new OrgInfo[MAX_ORG][eOrg];
+new OrgRank[MAX_ORG][MAX_RANG][MAX_RANG_LEN];   //4kB
+new OrgSkins[MAX_ORG][MAX_SKIN_SELECT];
+
 //------------------<[ Forwardy: ]>--------------------
-forward Float:GetDistanceBetweenPlayers(p1,p2);
 
 //end

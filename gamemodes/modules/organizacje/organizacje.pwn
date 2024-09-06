@@ -25,164 +25,151 @@
 
 //
 //-----------------<[ Funkcje: ]>-------------------
-orgLoad()
+LoadOrganisations()
 {
-    new lQuery[256], lID, lRow;
-    mysql_query("SELECT * FROM `mru_org`");
+    new lQuery[256], rowCount, lRow;
+    mysql_query("SELECT * FROM `mru_org` ORDER BY ID");
     mysql_store_result();
     while(mysql_fetch_row_format(lQuery, "|"))
     {
-        sscanf(lQuery, "p<|>de<dds[32]s[128]hffffdd>", lRow, OrgInfo[lID]);
-        lID++;
+        sscanf(lQuery, "p<|>de<ds[32]s[128]hffffdd>", lRow, OrgInfo[rowCount]);
+        rowCount++;
     }
     mysql_free_result();
-    printf("%d | Wczytano organizacje", lID);
+    printf("%d | Wczytano organizacje", rowCount);
 }
 
-orgSave(lID, savetype)
+SaveOrg(id, savetype)
 {
-    if(!orgIsValid(lID)) return 0;
-    new lQuery[512];
+    new query[512];
 	new name_escaped[32];
 	new motd_escaped[128];
-	mysql_real_escape_string(OrgInfo[lID][o_Name], name_escaped);
-	mysql_real_escape_string(OrgInfo[lID][o_Motd], motd_escaped);
+	mysql_real_escape_string(OrgInfo[id][o_Name], name_escaped);
+	mysql_real_escape_string(OrgInfo[id][o_Motd], motd_escaped);
 	
     switch(savetype)
     {
-        case ORG_SAVE_TYPE_BASIC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `UID`='%d'",
-        OrgInfo[lID][o_Type],OrgInfo[lID][o_Color],OrgInfo[lID][o_Spawn][0],OrgInfo[lID][o_Spawn][1],OrgInfo[lID][o_Spawn][2],OrgInfo[lID][o_Spawn][3], OrgInfo[lID][o_Int], OrgInfo[lID][o_VW], OrgInfo[lID][o_UID]);
-        case ORG_SAVE_TYPE_DESC: format(lQuery, sizeof(lQuery), "UPDATE `mru_org` SET `Name`='%s', `Motd`='%s' WHERE `UID`='%d'", name_escaped, motd_escaped, OrgInfo[lID][o_UID]);
+        case ORG_SAVE_TYPE_BASIC: 
+        {
+            format(query, sizeof(query), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `ID`='%d'",
+                OrgInfo[id][o_Type], 
+                OrgInfo[id][o_Color], 
+                OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], 
+                OrgInfo[id][o_Int], OrgInfo[id][o_VW], 
+                id);
+        }
+        case ORG_SAVE_TYPE_DESC: 
+        {
+            format(query, sizeof(query), "UPDATE `mru_org` SET `Name`='%s', `Motd`='%s' WHERE `ID`='%d'", 
+                name_escaped, motd_escaped, id);
+        }
     }
-    if(lQuery[0]) mysql_query(lQuery);
+    mysql_query(query);
     return 1;
-}
-
-orgAdd(typ, name[], uid, id)
-{
-    OrgInfo[id][o_UID] = uid;
-    OrgInfo[id][o_Type] = typ;
-    OrgInfo[id][o_Color] = 0xFF0000;
-    orgSetName(id, name);
-    new lStr[128];
-	new name_escaped[32];
-	mysql_real_escape_string(OrgInfo[id][o_Name], name_escaped);
-    format(lStr, 128, "INSERT INTO `mru_org` (`UID`, `Name`, `Type`) VALUES ('%d', '%s', '%d')", uid, name_escaped, typ);
-    mysql_query(lStr);
 }
 
 GetPlayerOrgType(playerid) 
 {
-	return orgType(gPlayerOrg[playerid]);
+	return GetOrgType(GetPlayerOrg(playerid));
 }
 
-orgType(lID)
+GetOrgType(id)
 {
-    if(lID == 0xFFFF) return 0;
-    return OrgInfo[lID][o_Type];
+    if(!IsOrgValid(id)) return ORG_TYPE_INACTIVE;
+    return OrgInfo[id][o_Type];
 }
 
-orgID(uid)
+IsOrgValid(id)
 {
-    for(new i=0;i<MAX_ORG;i++)
-    {
-        if(OrgInfo[i][o_UID] == uid)
-        {
-            return i;
-        }
-    }
-    return 0xFFFF;
-}
-
-orgIsValid(orgid)
-{
-    if(orgid < 0 || orgid > MAX_ORG-1) return 0;
-    if(OrgInfo[orgid][o_UID] == 0) return 0;
+    if(id <= 0 || id >= MAX_ORG) return 0;
+    if(OrgInfo[id][o_Type] == ORG_TYPE_INACTIVE) return 0;
     return 1;
 }
 
-orgGetFreeSlot()
+GetFreeOrgSlot()
 {
-    for(new i=0;i<MAX_ORG;i++)
+    for(new i=0; i<MAX_ORG; i++)
     {
-        if(OrgInfo[i][o_UID] == 0)
+        if(OrgInfo[i][o_Type] == ORG_TYPE_INACTIVE)
         {
             return i;
         }
     }
-    return 0xFFFF;
+    return -1;
 }
 
-orgInvitePlayer(playerid, orguid)
+InvitePlayerToOrg(playerid, org, leader=false)
 {
-    new orgid = orgID(orguid);
-    if(!orgIsValid(orgid)) return 0;
-    gPlayerOrg[playerid] = orgid;
-    PlayerInfo[playerid][pOrg] = orguid;
-	if(FAM_SKINS[orguid][0] > 0)
+    if(!IsOrgValid(org)) return 0;
+
+    PlayerInfo[playerid][pOrg] = org;
+	if(OrgSkins[org][0] > 0)
 	{
-		PlayerInfo[playerid][pUniform] = FAM_SKINS[orguid][0];
+		PlayerInfo[playerid][pUniform] = OrgSkins[org][0];
 	}
-    gPlayerOrgLeader[playerid] = false;
-    new lStr[64];
-    format(lStr, 64, "ORG » Zosta³eœ przyjêty do organizacji %s.", OrgInfo[orgid][o_Name]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
+    if(leader)
+    {
+        PlayerInfo[playerid][pRank] = 1000;
+    }
+
+    MruMessageGoodInfoF(playerid, "Zosta³eœ przyjêty do organizacji %s.", OrgInfo[org][o_Name]);
 	MruMySQL_SavePlayerFamily(playerid);
     return 1;
 }
 
-orgUnInvitePlayer(playerid)
+RemovePlayerFromOrg(playerid)
 {
-    new orgid = gPlayerOrg[playerid];
+    new org = PlayerInfo[playerid][pOrg];
     PlayerInfo[playerid][pOrg] = 0;
 	PlayerInfo[playerid][pRank] = 0;
     PlayerInfo[playerid][pUniform] = 0;
-    gPlayerOrg[playerid] = 0xFFFF;
-    new lStr[64];
-    if(!orgIsValid(orgid)) return 0;
-    format(lStr, 64, "ORG » Zosta³eœ wyproszony z organizacji %s.", OrgInfo[orgid][o_Name]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
-    gPlayerOrgLeader[playerid] = false;
 	MruMySQL_SavePlayerFamily(playerid);
+
+    if(!IsOrgValid(org)) return 0;
+    MruMessageBadInfoF(playerid, "Zosta³eœ wyrzucony z organizacji %s.", OrgInfo[org][o_Name]);
     return 1;
 }
 
-orgSetName(orgid, name[])
+SetOrgName(orgid, name[])
 {
-    if(!orgIsValid(orgid)) return 0;
+    if(!IsOrgValid(orgid)) return 0;
     if(strlen(name) < 3 || strlen(name) > 31) return 0;
+
     format(OrgInfo[orgid][o_Name], 32, "%s", name);
     return 1;
 }
 
-orgSetMotd(orgid, lMotd[])
+SetOrgMOTD(org, lMotd[])
 {
-    if(!orgIsValid(orgid)) return 0;
+    if(!IsOrgValid(org)) return 0;
     if(strlen(lMotd) > 127) return 0;
-    if(strlen(lMotd) == 0) strdel(OrgInfo[orgid][o_Motd], 0, 128);
-    else format(OrgInfo[orgid][o_Motd], 128, "%s", lMotd);
+
+    if(strlen(lMotd) == 0) strdel(OrgInfo[org][o_Motd], 0, 128);
+    else format(OrgInfo[org][o_Motd], 128, "%s", lMotd);
     return 1;
 }
 
-orgSetSpawnAtPlayerPos(playerid, orgid)
+SetOrgSpawnAtPlayerPos(playerid, org)
 {
-    if(!orgIsValid(orgid)) return 0;
-    GetPlayerPos(playerid, OrgInfo[orgid][o_Spawn][0], OrgInfo[orgid][o_Spawn][1], OrgInfo[orgid][o_Spawn][2]);
-    GetPlayerFacingAngle(playerid, OrgInfo[orgid][o_Spawn][3]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, "ORG » Spawn zmieniony.");
-	orgSave(orgid, ORG_SAVE_TYPE_BASIC);
+    if(!IsOrgValid(org)) return 0;
+
+    GetPlayerPos(playerid, OrgInfo[org][o_Spawn][0], OrgInfo[org][o_Spawn][1], OrgInfo[org][o_Spawn][2]);
+    GetPlayerFacingAngle(playerid, OrgInfo[org][o_Spawn][3]);
+	SaveOrg(org, ORG_SAVE_TYPE_BASIC);
+
+    MruMessageGoodInfo(playerid, "Spawn organizacji ustawiony w tym miejscu zmieniony.");
     return 1;
 }
 
-orgGivePlayerRank(playerid, callerid, rankid)
+GivePlayerOrgRank(playerid, callerid, rank)
 {
-    new orgid = gPlayerOrg[playerid];
-    if(!orgIsValid(orgid)) return 0;
-    new lStr[128];
-    format(lStr, 128, "ORG » Otrzyma³eœ %d rangê (%s) w organizacji %s. Nada³: %s.", rankid, (strlen(FamRang[PlayerInfo[playerid][pOrg]][rankid]) > 1) ? (FamRang[PlayerInfo[playerid][pOrg]][rankid]) : (FamRang[0][rankid]), OrgInfo[orgid][o_Name], (callerid == INVALID_PLAYER_ID) ? ("SYSTEM") : (GetNick(callerid)));
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
-    PlayerInfo[playerid][pRank] = rankid;
-	MruMySQL_SetAccInt("Rank", GetNickEx(playerid), rankid);
+    new org = PlayerInfo[playerid][pOrg];
+    if(!IsOrgValid(org)) return 0;
+
+    PlayerInfo[playerid][pRank] = rank;
+	MruMySQL_SetAccInt("Rank", GetNickEx(playerid), rank);
+
+    MruMessageGoodInfoF(playerid, "Otrzyma³eœ %d rangê (%s) w organizacji %s. Nada³: %s.", rank, (strlen(OrgRank[org][rank]) > 1) ? (OrgRank[PlayerInfo[playerid][pOrg]][rank]) : (OrgRank[0][rank]), OrgInfo[org][o_Name], (callerid == INVALID_PLAYER_ID) ? ("SYSTEM") : (GetNick(callerid)));
     return 1;
 }
 
@@ -191,15 +178,24 @@ GetPlayerOrg(playerid)
 	return PlayerInfo[playerid][pOrg];
 }
 
-IsPlayerOrgLeader(playerid)
+IsPlayerOrgLeader(playerid, checkOrg=-1)
 {
-    new orgid = gPlayerOrg[playerid];
-    if(!orgIsValid(orgid)) return 0;
-    return gPlayerOrgLeader[playerid];
+    new org = GetPlayerOrg(playerid);
+    if(!IsOrgValid(org)) return false;
+    if(checkOrg != -1 && checkOrg != org) return false;
+
+    return GetPlayerRank(playerid) >= 1000;
+}
+
+GetPlayerRank(playerid)
+{
+    return PlayerInfo[playerid][pRank];
 }
 
 SendNewFamilyMessage(family, color, string[])
 {
+    if(family == 0) return;
+
 	foreach(new i : Player)
 	{
 		if(GetPlayerOrg(i) == family)

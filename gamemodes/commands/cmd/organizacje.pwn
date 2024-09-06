@@ -42,14 +42,14 @@ YCMD:organizacje(playerid, params[], help)
     }
     new lID;
     sscanf(params, "d", lID);
-    if(!orgIsValid(orgID(lID))) return 1;
-    format(lStr, 128, "|| Cz³onkowie ONLINE w %s ||", OrgInfo[orgID(lID)][o_Name]);
+    if(!IsOrgValid(lID)) return 1;
+    format(lStr, 128, "|| Cz³onkowie ONLINE w %s ||", OrgInfo[lID][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, lStr);
     foreach(new i : Player)
     {
         if(GetPlayerOrg(i) == lID)
         {
-            if(gPlayerOrgLeader[i]) format(lStr, 128, "* %s (LIDER)", GetNick(i));
+            if(IsPlayerOrgLeader(i)) format(lStr, 128, "* %s (LIDER)", GetNick(i));
             else format(lStr, 128, "* %s (Ranga: %d)", GetNick(i), PlayerInfo[i][pRank]);
             SendClientMessage(playerid, COLOR_GRAD2, lStr);
         }

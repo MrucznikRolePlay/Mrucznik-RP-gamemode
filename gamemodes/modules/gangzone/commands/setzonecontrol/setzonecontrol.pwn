@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                               setzonecontrol                                              //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,23 +27,40 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "transport\transport.pwn"
-#include "fixvc\fixvc.pwn"
-#include "gotovcint\gotovcint.pwn"
-#include "gotovc\gotovc.pwn"
-#include "objectsdebug\objectsdebug.pwn"
-
+#include "setzonecontrol_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_setzonecontrol()
 {
-    command_transport();
-    command_fixvc();
-    command_gotovcint();
-    command_gotovc();
-    command_objectsdebug();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:setzonecontrol(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Nadaje kontrole nad dan¹ stref¹.");
+        return 1;
+    }
+    //fetching params
+    new zoneid, org;
+    if(sscanf(params, "dd", zoneid, org))
+    {
+        sendTipMessage(playerid, "U¿yj /setzonecontrol [ID strefy] [ID organizacji] ");
+        return 1;
+    }
+    
+    //command body
+    return command_setzonecontrol_Impl(playerid, zoneid, org);
 }

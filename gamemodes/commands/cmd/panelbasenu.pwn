@@ -34,7 +34,7 @@ YCMD:panelbasenu(playerid, params[], help)
 	{
 		if(IsAPoolBusinessOwner(playerid))
 		{
-			if(gPlayerOrgLeader[playerid])
+			if(IsPlayerOrgLeader(playerid))
 			{
 				if(IsPlayerInRangeOfPoint(playerid, 3.0, 1203.39294, -1772.58777, 13.71199))
 				{

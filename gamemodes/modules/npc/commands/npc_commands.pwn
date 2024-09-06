@@ -30,14 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "stoprecord\stoprecord.pwn"
 #include "record\record.pwn"
+#include "stoprecord\stoprecord.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_stoprecord();
     command_record();
+    command_stoprecord();
     
 }

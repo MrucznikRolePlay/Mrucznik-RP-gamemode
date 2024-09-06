@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                  gangzone                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,34 +16,15 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 06.09.2024
+//Opis:
+/*
+	System wojen gangów.
+*/
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//-----------------<[ Timery: ]>-------------------
 
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "transport\transport.pwn"
-#include "fixvc\fixvc.pwn"
-#include "gotovcint\gotovcint.pwn"
-#include "gotovc\gotovc.pwn"
-#include "objectsdebug\objectsdebug.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
-{
-    command_transport();
-    command_fixvc();
-    command_gotovcint();
-    command_gotovc();
-    command_objectsdebug();
-    
-}
+//end

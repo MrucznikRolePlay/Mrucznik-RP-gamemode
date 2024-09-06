@@ -30,20 +30,12 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "transport\transport.pwn"
-#include "fixvc\fixvc.pwn"
-#include "gotovcint\gotovcint.pwn"
-#include "gotovc\gotovc.pwn"
-#include "objectsdebug\objectsdebug.pwn"
+#include "setzonecontrol\setzonecontrol.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_transport();
-    command_fixvc();
-    command_gotovcint();
-    command_gotovc();
-    command_objectsdebug();
+    command_setzonecontrol();
     
 }

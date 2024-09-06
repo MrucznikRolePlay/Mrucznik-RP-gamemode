@@ -902,7 +902,7 @@ Car_PrintOwner(car)
         }
         case CAR_OWNER_FAMILY:
         {
-            format(string, sizeof(string), "%s", OrgInfo[orgID(CarData[car][c_Owner])][o_Name]);
+            format(string, sizeof(string), "%s", OrgInfo[CarData[car][c_Owner]][o_Name]);
         }
         case CAR_OWNER_PLAYER:
         {

@@ -38,18 +38,16 @@ YCMD:dajlideraorg(playerid, params[], help)
     {
         if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Brak takiego gracza!");
         if(GetPlayerFraction(id) != 0 || GetPlayerOrg(id) != 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz ma frakcje lub rodzine!");
-        orgInvitePlayer(id, family);
-        gPlayerOrgLeader[id] = true;
+        InvitePlayerToOrg(id, family, true);
     }
     new str[128];
     if(id != -1)
     {
-		new orgUID = orgID(family);
-		if(orgUID != 0xFFFF)
+		if(IsOrgValid(family))
 		{
-			format(str, sizeof(str), "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNickEx(playerid), OrgInfo[orgUID][o_Name], family);
+			format(str, sizeof(str), "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNickEx(playerid), OrgInfo[family][o_Name], family);
 			SendClientMessage(id, COLOR_LIGHTBLUE, str);
-			format(str, sizeof(str), "Da³eœ kontrolê nad rodzin¹ %s (%d) graczowi %s", OrgInfo[orgUID][o_Name], family, GetNick(id));
+			format(str, sizeof(str), "Da³eœ kontrolê nad rodzin¹ %s (%d) graczowi %s", OrgInfo[family][o_Name], family, GetNick(id));
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, str);
 			
 			//logi

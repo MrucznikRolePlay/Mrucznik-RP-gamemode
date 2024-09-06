@@ -330,8 +330,8 @@ DialogListaSkinowFamily(family)
 	new skiny[1024];
 	for(new i=0;i<MAX_SKIN_SELECT;i++)
 	{
-		if(FAM_SKINS[family][i] == 0) break;
-		format(skiny, sizeof(skiny), "%s%d\n", skiny, FAM_SKINS[family][i], i);
+		if(OrgSkins[family][i] == 0) break;
+		format(skiny, sizeof(skiny), "%s%d\n", skiny, OrgSkins[family][i], i);
 	}
 	strdel(skiny, strlen(skiny)-1, strlen(skiny));
 	safe_return skiny;
@@ -3815,19 +3815,20 @@ ShowStats2(playerid)
 	{
 		format(plSlub, sizeof(plSlub), "Slub: Brak"); 
 	}
-		
-	if(GetPlayerOrg(playerid) != 0)
+	
+	new org = GetPlayerOrg(playerid);
+	if(org != 0)
 	{
-		if(orgIsValid(gPlayerOrg[playerid])) format(plRodzina, 30, "Rodzina: %s",OrgInfo[gPlayerOrg[playerid]][o_Name]);
+		if(IsOrgValid(org)) format(plRodzina, 30, "Rodzina: %s",OrgInfo[org][o_Name]);
 		//Przypisane rangi
-		if(strlen(FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]) > 1)
+		if(strlen(OrgRank[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]) > 1)
 		{
-			format(plRodzinkaRank, sizeof(plRodzinkaRank), "%s", FamRang[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]);
+			format(plRodzinkaRank, sizeof(plRodzinkaRank), "%s", OrgRank[org][PlayerInfo[playerid][pRank]]);
 		}
 		//Rangi podstawowe
 		else
 		{
-			format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: %s", FamRang[0][PlayerInfo[playerid][pRank]]);
+			format(plRodzinkaRank, sizeof(plRodzinkaRank), "Ranga: %s", OrgRank[0][PlayerInfo[playerid][pRank]]);
 		}
 		plFraction = "Frakcja: Brak";
 		plFractionRank = "Ranga: Brak"; 
@@ -4012,18 +4013,19 @@ ShowStats(playerid,targetid)
 	    new ftext[40];
         format(ftext, 40, "%s", FractionNames[GetPlayerFraction(targetid)]);
 		new f2text[30];
-	    if(GetPlayerOrg(targetid) != 0)
+		new org = GetPlayerOrg(targetid);
+	    if(IsOrgValid(org))
         {
-            if(orgIsValid(gPlayerOrg[targetid])) format(f2text, 30, "%s",OrgInfo[gPlayerOrg[targetid]][o_Name]);
+            format(f2text, 30, "%s",OrgInfo[org][o_Name]);
         }
 		else f2text = "Brak";
 	    new rtext[64];
-	    if(GetPlayerOrg(targetid) != 0)//The 2 Organisations
+	    if(org)//The 2 Organisations
 	    {
             //Przypisane rangi
-            if(strlen(FamRang[GetPlayerOrg(targetid)][PlayerInfo[targetid][pRank]]) > 1) format(rtext, sizeof(rtext), "%s", FamRang[GetPlayerOrg(targetid)][PlayerInfo[targetid][pRank]]);
+            if(strlen(OrgRank[org][PlayerInfo[targetid][pRank]]) > 1) format(rtext, sizeof(rtext), "%s", OrgRank[org][PlayerInfo[targetid][pRank]]);
             //Rangi podstawowe
-            else format(rtext, sizeof(rtext), "%s", FamRang[0][PlayerInfo[targetid][pRank]]);
+            else format(rtext, sizeof(rtext), "%s", OrgRank[0][PlayerInfo[targetid][pRank]]);
 		}
 		else if(GetPlayerFraction(targetid) > 0)//PD Ranks
 		{
@@ -4102,7 +4104,7 @@ RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - givep
 			PlayerInfo[i][pMember] = 0;
 			PlayerInfo[i][pLider] = 0;
 			PlayerInfo[i][pJob] = 0;
-			orgUnInvitePlayer(i);
+			RemovePlayerFromOrg(i);
 			MedicBill[i] = 0;
 			SetPlayerSpawn(i);
 			format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(i));
@@ -4121,7 +4123,7 @@ RemoveLeadersFromFraction(giveplayerid, playerid)//Usuwa liderów frakcji - givep
 	PlayerInfo[giveplayerid][pMember] = 0;
 	PlayerInfo[giveplayerid][pLider] = 0;
 	PlayerInfo[giveplayerid][pJob] = 0;
-	orgUnInvitePlayer(giveplayerid);
+	RemovePlayerFromOrg(giveplayerid);
 	MedicBill[giveplayerid] = 0;
 	SetPlayerSpawn(giveplayerid);
 	format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(giveplayerid));
@@ -7522,7 +7524,7 @@ public OPCLogin(playerid)
     ZonePlayerTimer[playerid]=0;
     for(new j=0;j<MAX_ZONES;j++)
     {
-        if(ZoneControl[j] > 100) GangZoneShowForPlayer(playerid, j, OrgInfo[clamp(orgID(ZoneControl[j]-100), 0, MAX_ORG-1)][o_Color] | 0x44);
+        if(ZoneControl[j] > 100) GangZoneShowForPlayer(playerid, j, OrgInfo[clamp(ZoneControl[j]-100, 0, MAX_ORG-1)][o_Color] | 0x44);
         else GangZoneShowForPlayer(playerid, j, 0xC6E2F144);
     }
 
@@ -7629,7 +7631,7 @@ UnFrakcja(playerid, para1, bool:respawn = true)
 	PlayerInfo[para1][pMember] = 0;
 	PlayerInfo[para1][pLider] = 0;
 	PlayerInfo[para1][pJob] = 0;
-	orgUnInvitePlayer(para1);
+	RemovePlayerFromOrg(para1);
 	MedicBill[para1] = 0;
 	if(respawn)
 	{
@@ -7830,7 +7832,7 @@ WczytajRangi()
         {
             for(new i=0;i<MAX_RANG;i++)
             {
-                if(strlen(ranga[i]) > 1) format(FamRang[id][i], 25, "%s", ranga[i]);
+                if(strlen(ranga[i]) > 1) format(OrgRank[id][i], 25, "%s", ranga[i]);
             }
         }
     }
@@ -7860,7 +7862,7 @@ WczytajSkiny()
         {
             for(new i=0;i<MAX_SKIN_SELECT;i++)
             {
-                if(skin[i] > 0) FAM_SKINS[id][i] = skin[i];
+                if(skin[i] > 0) OrgSkins[id][i] = skin[i];
             }
         }
     }
@@ -8370,566 +8372,6 @@ public B_TrailerCheck()
     }
 }
 
-//25.07     SYSTEM STREF GANGÓW
-public Zone_HideInfo(playerid)
-{
-    ZoneTXD_Hide(playerid);
-    ZonePlayerTimer[playerid]=0;
-}
-
-ZoneTXD_Unload()
-{
-    for(new i=0;i<4;i++) TextDrawDestroy(Text:i);
-}
-
-
-Zone_StartAttack(zoneid, attacker, defender)
-{
-    ZoneAttack[zoneid] = true; //make
-
-    if(attacker > 100) //gangi
-    {
-        if(defender > 100) //gang-gang
-        {
-            foreach(new i : Player)
-            {
-                if(GetPlayerOrg(i) == attacker-100)
-                {
-                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
-                }
-                else if(GetPlayerOrg(i) == defender-100)
-                {
-                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
-                }
-            }
-        }
-        else
-        {
-            foreach(new i : Player) //gang-frac
-            {
-                if(GetPlayerOrg(i) == attacker-100)
-                {
-                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
-                }
-                else if(defender != 0 && GetPlayerFraction(i) == defender)
-                {
-                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
-                }
-            }
-        }
-    }
-    else  //frac
-    {
-        if(defender > 100) //frac - gang
-        {
-            foreach(new i : Player)
-            {
-                if(GetPlayerFraction(i) == attacker)
-                {
-                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
-                }
-                else if(GetPlayerOrg(i) == defender-100)
-                {
-                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
-                }
-            }
-        }
-        else
-        {
-            foreach(new i : Player) //frac - frac
-            {
-                if(GetPlayerFraction(i) == attacker)
-                {
-                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttacker[i] = true;
-                    SetPlayerCriminal(i, INVALID_PLAYER_ID, "Wojna gangów", false);
-                }
-                else if(defender != 0 && GetPlayerFraction(i) == defender)
-                {
-                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_pod_atakiem!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(i, zoneid, 0xFF000066);  //yey flash
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneDefender[i] = true;
-                }
-            }
-        }
-    }
-
-    new str[128];
-    format(str, 128, "DELETE FROM `mru_strefylimit` WHERE `gang`='%d'", attacker);
-    mysql_query(str);
-    format(str, 128, "INSERT INTO `mru_strefylimit` (`gang`, `data`) VALUES ('%d', '%d')", attacker, gettime());
-    mysql_query(str);
-    format(str, 128, "UPDATE `mru_strefy` SET `expire`='%d' WHERE `id`='%d'", gettime()+86400, zoneid);
-    mysql_query(str);
-
-    ZoneProtect[zoneid] = 1;
-    ZoneAttackData[zoneid][2] = attacker;
-    ZoneAttackData[zoneid][3] = defender;
-    ZoneGangLimit[attacker] = false;
-    format(str, 128, "ZONEDEFTIME_%d", zoneid);
-    SetSVarInt(str, ZONE_DEF_TIME);
-    ZoneAttackTimer[zoneid] = SetTimerEx("Zone_AttackEnd", ZONE_DEF_TIME*1000, 0, "iii", zoneid, attacker, defender);
-    printf("[GangZone] Atak na strefê %d przez %d. Atakuje %d osób broni %d osób.", zoneid, attacker, ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
-}
-
-Zone_GangUpdate(bool:cash=false)
-{
-    new string[256];
-    new gangid, timegang;
-    mysql_query("SELECT * FROM `mru_strefylimit`");
-    mysql_store_result();
-    while(mysql_fetch_row_format(string, "|"))
-    {
-        sscanf(string, "p<|>dd", gangid, timegang);
-        if(!(0 <= gangid <= MAX_FRAC)) continue;
-        if(gettime()-timegang >= 86400) ZoneGangLimit[gangid] = true; //1 day
-        else ZoneGangLimit[gangid] = false;
-    }
-    mysql_free_result();
-    if(cash)
-    {
-        for(new i=0;i<MAX_ZONES;i++)
-        {
-            if(ZoneControl[i] > 0 && ZoneControl[i] < 100)
-            {
-                //Sejf_Add(ZoneControl[i], Zone_GetCash(i));
-            }
-            else if(ZoneControl[i]>100)
-            {
-                //SejfR_Add(ZoneControl[i]-100, Zone_GetCash(i));
-            }
-        }
-    }
-}
-
-public Zone_AttackEnd(zoneid, attacker, defender)
-{
-    ZoneAttack[zoneid] = false;
-    new str[128];
-    if(ZoneAttackData[zoneid][1] < ZoneAttackData[zoneid][0]) //win
-    {
-        format(str, 128, "UPDATE `mru_strefy` SET `gang`='%d' WHERE `id`='%d'", attacker, zoneid);
-        mysql_query(str);
-
-        ZoneControl[zoneid] = attacker;
-        new thisorg = orgID(ZoneControl[zoneid]-100);
-        foreach(new i : Player)
-        {
-			GangZoneHideForPlayer(i, zoneid);
-			GangZoneShowForPlayer(i, zoneid, OrgInfo[thisorg][o_Color] | 0x44);
-        }
-        
-        if(attacker > 100) //gangi
-        {
-            if(defender > 100) //gang-gang
-            {
-                foreach(new i : Player)
-                {
-                    if(GetPlayerOrg(i) == attacker-100)
-                    {
-                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                    else if(GetPlayerOrg(i) == defender-100)
-                    {
-                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                }
-            }
-            else
-            {
-                foreach(new i : Player) //gang-frac
-                {
-                    if(GetPlayerOrg(i) == attacker-100)
-                    {
-                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                    else if(defender != 0 && GetPlayerFraction(i) == defender)
-                    {
-                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                }
-            }
-        }
-        else  //frac
-        {
-            if(defender > 100) //frac - gang
-            {
-                foreach(new i : Player)
-                {
-                    if(GetPlayerFraction(i) == attacker)
-                    {
-                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                    else if(GetPlayerOrg(i) == defender-100)
-                    {
-                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                }
-            }
-            else
-            {
-                foreach(new i : Player) //frac - frac
-                {
-                    if(GetPlayerFraction(i) == attacker)
-                    {
-                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_przejeta!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                    else if(defender != 0 && GetPlayerFraction(i) == defender)
-                    {
-                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Strefa_utracona!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                }
-            }
-        }
-    }
-    else
-    {
-
-        if(attacker > 100) //gangi
-        {
-            if(defender > 100) //gang-gang
-            {
-                foreach(new i : Player)
-                {
-                    if(GetPlayerOrg(i) == attacker-100)
-                    {
-                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                    else if(GetPlayerOrg(i) == defender-100)
-                    {
-                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                }
-            }
-            else
-            {
-                foreach(new i : Player) //gang-frac
-                {
-                    if(GetPlayerOrg(i) == attacker-100)
-                    {
-                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                    else if(defender != 0 && GetPlayerFraction(i) == defender)
-                    {
-                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                }
-            }
-        }
-        else  //frac
-        {
-            if(defender > 100) //frac - gang
-            {
-                foreach(new i : Player)
-                {
-                    if(GetPlayerFraction(i) == attacker)
-                    {
-                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                    else if(GetPlayerOrg(i) == defender-100)
-                    {
-                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                }
-            }
-            else
-            {
-                foreach(new i : Player) //frac - frac
-                {
-                    if(GetPlayerFraction(i) == attacker)
-                    {
-                        MSGBOX_Show(i, "~r~[Strefy]_~>~_Przejecie_nieudane!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                    else if(defender != 0 && GetPlayerFraction(i) == defender)
-                    {
-                        MSGBOX_Show(i, "~g~[Strefy]_~>~_Strefa_obroniona!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    }
-                }
-            }
-        }
-    }
-    format(str, 128, "ZONEDEFTIME_%d", zoneid);
-    DeleteSVar(str);
-    printf("FINAL Attackers: %d Defenders: %d", ZoneAttackData[zoneid][0], ZoneAttackData[zoneid][1]);
-    GangZoneStopFlashForAll(zoneid);
-    ZoneAttackData[zoneid][0] = 0;
-    ZoneAttackData[zoneid][1] = 0;
-}
-
-Zone_Sync(playerid)
-{
-    new frac = GetPlayerFraction(playerid);
-    if(frac == 0) frac = GetPlayerOrg(playerid);
-    for(new i=0;i<MAX_ZONES;i++)
-    {
-        if(ZoneAttack[i])
-        {
-            if(ZoneAttackData[i][2] > 100)
-            {
-                if(frac == ZoneAttackData[i][2]-100)
-                {
-                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atakujesz_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(playerid, i, 0xFF000066);  //yey flash
-                }
-                else if(frac == ZoneAttackData[i][3]-100)
-                {
-                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(playerid, i, 0xFF000066);  //yey flash
-                }
-            }
-            else
-            {
-                if(frac == ZoneAttackData[i][2])
-                {
-                    MSGBOX_Show(i, "~g~[Strefy]_~>~_Atakujesz_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(playerid, i, 0xFF000066);  //yey flash
-                }
-                else if(frac == ZoneAttackData[i][3])
-                {
-                    MSGBOX_Show(i, "~r~[Strefy]_~>~_Atak_na_strefe!", MSGBOX_ICON_TYPE_POLICE, 5);
-                    GangZoneFlashForPlayer(playerid, i, 0xFF000066);  //yey flash
-                }
-            }
-        }
-    }
-}
-
-Zone_Load()
-{
-    new query[128];
-    mysql_query("SELECT * FROM `mru_strefy`");
-    mysql_store_result();
-    new id, kontrol, expire, time=gettime();
-    while(mysql_fetch_row_format(query, "|"))
-    {
-        sscanf(query, "p<|>ddd", id, kontrol, expire);
-        ZoneControl[id] = kontrol;
-        if(expire == -1) ZoneProtect[id] = 1;
-        else if(time - expire < 86400) ZoneProtect[id] = 1;
-        else ZoneProtect[id] = 0;
-    }
-    mysql_free_result();
-
-    if(ZoneControl[id] > 100)
-    {
-        if(orgID(ZoneControl[id]-100) == 0xFFFF)
-        {
-            ZoneControl[id] = 0;
-            ZoneProtect[id] = 0;
-        }
-    }
-
-    Zone_GangUpdate();
-
-    for(new i=0;i<MAX_ZONES;i++)
-    {
-        id = GangZoneCreate(Zone_Data[i][0],Zone_Data[i][1],Zone_Data[i][2],Zone_Data[i][3]);
-        if(i == 0) Zone_Points[0] = id;
-
-        Zone_Area[i] = ((Zone_Data[i][2]-Zone_Data[i][0])*(Zone_Data[i][3]-Zone_Data[i][1]));
-    }
-    Zone_Points[1] = id;
-}
-
-Zone_CheckPossToAttack(playerid, zoneid)
-{
-    if(ZoneProtect[zoneid] == 1)
-    {
-        MSGBOX_Show(playerid, "Strefa_chroniona", MSGBOX_ICON_TYPE_WARNING);
-        return false;
-    }
-    new fam = GetPlayerOrg(playerid);
-    if(fam != 0)
-    {
-        if(OrgInfo[gPlayerOrg[playerid]][o_Color] & 0xFF000069 == 0xFF000069)
-        {
-            MSGBOX_Show(playerid, "Zmien_kolor_swojej_rodziny_(/pr_kolor)", MSGBOX_ICON_TYPE_WARNING);
-            return false;
-        }
-    }
-    new vic, att;
-    if(ZoneControl[zoneid] == 0) //neutralne
-    {
-        new org = GetPlayerFraction(playerid);
-        foreach(new i : Player)
-        {
-            if(GetPVarInt(i, "zoneid") == zoneid)
-            {
-                if(org != 0)
-                {
-                    if(org == GetPlayerFraction(i))
-                    {
-                        att++;
-                    }
-                }
-                else
-                {
-                    if(fam == GetPlayerOrg(i))
-                    {
-                        att++;
-                    }
-                }
-            }
-        }
-        if(att < Zone_MinimumPeople(zoneid))
-        {
-            MSGBOX_Show(playerid, "Brak_wymaganej_liczby_atakujacych!", MSGBOX_ICON_TYPE_WARNING);
-            return false;
-        }
-    }
-    else
-    {
-        new
-            zonec = ZoneControl[zoneid],
-            org = GetPlayerFraction(playerid);
-        if(zonec == org || zonec-100 == fam) return false;
-        new Float:x, Float:y, Float:z;
-        GetPlayerPos(playerid, x, y, z);
-        foreach(new i : Player)
-        {
-            if(zonec > 100)
-            {
-                if(GetPlayerOrg(i) == zonec-100)
-                {
-                    vic++;
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttackData[zoneid][1]++;
-                }
-            }
-            else
-            {
-                if(GetPlayerFraction(i) == zonec)
-                {
-                    vic++;
-                    if(GetPVarInt(i, "zoneid") == zoneid) ZoneAttackData[zoneid][1]++;
-                }
-            }
-            if(IsPlayerInRangeOfPoint(i, 20.0, x, y, z))
-            {
-                if(org != 0)
-                {
-                    if(org == GetPlayerFraction(i))
-                    {
-                        att++;
-                    }
-                }
-                else
-                {
-                    if(fam == GetPlayerOrg(i))
-                    {
-                        att++;
-                    }
-                }
-            }
-        }
-        if(att < Zone_MinimumPeople(zoneid))
-        {
-            MSGBOX_Show(playerid, "Brak_wymaganej_liczby_atakujacych!", MSGBOX_ICON_TYPE_WARNING);
-            return false;
-        }
-        if(vic < att)
-        {
-            MSGBOX_Show(playerid, "Brak_aktywnych_obroncow!", MSGBOX_ICON_TYPE_WARNING);
-            return false;
-        }
-    }
-    ZoneAttackData[zoneid][0] = att;
-    return true;
-}
-
-ZoneTXD_Show(playerid, zoneid)
-{
-    new bool:gang=false;
-    new frac=GetPlayerFraction(playerid);
-    if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG && PlayerInfo[playerid][pRank] > 3) gang = true;
-    if(ZoneControl[zoneid] != 0 && (ZoneControl[zoneid] == frac || ZoneControl[zoneid]-100==GetPlayerOrg(playerid))) gang = false;
-
-    for(new i=0;i<3;i++)
-    {
-        TextDrawShowForPlayer(playerid, ZoneTXD[i]);
-    }
-    if(gang && ZoneProtect[zoneid] == 0) TextDrawShowForPlayer(playerid, ZoneTXD[3]);
-
-    new str[128];
-    if(ZoneControl[zoneid] != 0)
-    {
-        new orgid = orgID(ZoneControl[zoneid]-100);
-        if(ZoneControl[zoneid] <= 100)
-            format(str, 128, "Kontrolowana~n~przez: ~g~~h~%s", FractionNames[ZoneControl[zoneid]]);
-        else if(orgid < MAX_ORG)
-            format(str, 128, "Kontrolowana~n~przez: ~g~~h~%s", OrgInfo[orgid][o_Name]);
-    }
-    else format(str, 128, "Kontrolowana~n~przez: %s", "Brak");
-    PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], str);
-    PlayerTextDrawShow(playerid, ZonePTXD_Name[playerid]);
-
-    format(str, 128, "Zysk:~n~____%d$", Zone_GetCash(zoneid));
-    PlayerTextDrawSetString(playerid, ZonePTXD_Cash[playerid], str);
-    PlayerTextDrawShow(playerid, ZonePTXD_Cash[playerid]);
-
-    format(str, 128, "Powierzchnia:~n~____%.2f km", Zone_Area[zoneid]/10000);
-    PlayerTextDrawSetString(playerid, ZonePTXD_Area[playerid], str);
-    PlayerTextDrawShow(playerid, ZonePTXD_Area[playerid]);
-
-    format(str, 128, "Wymagana liczba~n~atakujacych:____%d", Zone_MinimumPeople(zoneid));
-    PlayerTextDrawSetString(playerid, ZonePTXD_Member[playerid], str);
-    PlayerTextDrawShow(playerid, ZonePTXD_Member[playerid]);
-
-    SetPVarInt(playerid, "zoneid", zoneid);
-}
-
-ZoneTXD_Hide(playerid)
-{
-    for(new i=0;i<4;i++)
-    {
-        TextDrawHideForPlayer(playerid, ZoneTXD[i]);
-    }
-    PlayerTextDrawHide(playerid, ZonePTXD_Name[playerid]);
-    PlayerTextDrawHide(playerid, ZonePTXD_Cash[playerid]);
-    PlayerTextDrawHide(playerid, ZonePTXD_Area[playerid]);
-    PlayerTextDrawHide(playerid, ZonePTXD_Member[playerid]);
-}
-
-Zone_MinimumPeople(zoneid)
-{
-    new Float:area = Zone_Area[zoneid]/10000;
-    new ppl;
-    if(0 < area < 1.0) ppl = 3;
-    else if(1.0 <= area < 2.0) ppl = 5;
-    else if(2.0 <= area < 4.0) ppl = 7;
-    else if(4.0 <= area < 8.0) ppl = 10;
-    else if(8.0 <= area < 12.0) ppl = 15;
-    else if(12.0 <= area < 15.0) ppl = 25;
-    else if(15.0 <= area < 20.0) ppl = 35;
-    else ppl = 40;
-    #if defined ZONE_REMOVE_LIMIT
-    ppl = 1;
-    #endif
-    return ppl;
-}
-
-Zone_GetCash(zoneid)
-{
-    new Float:area = Zone_Area[zoneid]/10000;
-    // za 1km^2 - 1.000 co PayDay?
-    if(zoneid == 0 || zoneid == 19 || zoneid == 47 || zoneid == 59) area = 2.5;
-    return floatround(area*750);
-}
 //END SYSTEM
 
 /*public Speedo_CalculateSpeed(playerid, veh)
@@ -10128,7 +9570,7 @@ ChangePlayerName(playerid, name[])
 		return 0;
 	}
 
-    orgUnInvitePlayer(playerid);
+    RemovePlayerFromOrg(playerid);
     PlayerInfo[playerid][pZmienilNick]--;
 	PlayerInfo[playerid][pMember] = 0;
 	if(PlayerInfo[playerid][pLider] > 0)
@@ -10900,10 +10342,10 @@ EDIT_ShowRangNames(playerid, typ, uid, bool:edit=false)
     new str[512];
     for(new i=0;i<10;i++)
     {
-        if(strlen((typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i])) < 2)
+        if(strlen((typ == 0) ? (FracRang[uid][i]) : (OrgRank[uid][i])) < 2)
             format(str, 512, "%s[%d] -\n", str, i);
         else
-            format(str, 512, "%s[%d] %s\n", str, i, (typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i]));
+            format(str, 512, "%s[%d] %s\n", str, i, (typ == 0) ? (FracRang[uid][i]) : (OrgRank[uid][i]));
     }
     if(edit) ShowPlayerDialogEx(playerid, D_EDIT_RANG_SET, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", str, "Zmieñ", "Wróæ");
     else ShowPlayerDialogEx(playerid, D_INFO, DIALOG_STYLE_LIST, "{8FCB04}Nazwy {FFFFFF}rang", str, "Wyjdz", "");
@@ -10916,10 +10358,10 @@ EDIT_SaveRangs(typ, uid)
 
     for(new i=0;i<MAX_RANG;i++)
     {
-        if(strlen((typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i])) < 2)
+        if(strlen((typ == 0) ? (FracRang[uid][i]) : (OrgRank[uid][i])) < 2)
             format(lStr, 256, "%s-, ", lStr);
         else
-            format(lStr, 256, "%s%s, ", lStr, (typ == 0) ? (FracRang[uid][i]) : (FamRang[uid][i]));
+            format(lStr, 256, "%s%s, ", lStr, (typ == 0) ? (FracRang[uid][i]) : (OrgRank[uid][i]));
     }
     strdel(lStr, strlen(lStr)-2, strlen(lStr));
 

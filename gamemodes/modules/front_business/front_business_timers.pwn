@@ -56,7 +56,7 @@ UpdateTakeoverPoints(bizId)
 	for(new i; i<MAX_ORG; i++)
 	{
 		new playersThreshold, pointsIncr, pointsDecr, defend;
-		if(OrgInfo[i][o_UID] == FrontBusiness[bizId][Owner])
+		if(i == FrontBusiness[bizId][Owner])
 		{
 			// defence
 			defend = true;
@@ -117,7 +117,7 @@ DecreaseAllAttackerPoints(bizId, points)
 DecreaseDefenderPoints(bizId, points)
 {
 	new owner = FrontBusiness[bizId][Owner];
-	if(!orgIsValid(owner))
+	if(!IsOrgValid(owner))
 	{
 		return false;
 	}

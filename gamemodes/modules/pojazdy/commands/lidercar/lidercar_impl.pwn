@@ -142,7 +142,7 @@ command_lidercar_przejmij(playerid, vehicleUID)
     else if(IsPlayerOrgLeader(playerid))
     {
         CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FAMILY;
-        CarData[vehicleUID][c_Owner] = gPlayerOrg[playerid];
+        CarData[vehicleUID][c_Owner] = GetPlayerOrg(playerid);
     }
     else
     {

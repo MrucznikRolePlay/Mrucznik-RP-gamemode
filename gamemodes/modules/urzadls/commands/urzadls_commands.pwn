@@ -30,14 +30,14 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "ustawcena\ustawcena.pwn"
 #include "kuplicencje\kuplicencje.pwn"
+#include "ustawcena\ustawcena.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_ustawcena();
     command_kuplicencje();
+    command_ustawcena();
     
 }

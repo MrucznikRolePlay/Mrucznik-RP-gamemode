@@ -325,7 +325,7 @@ public OnGameModeInit()
 	obiekty_OnGameModeInit();
 
     ZaladujDomy();
-    orgLoad();
+    LoadOrganisations();
     Zone_Load();
 
     ZaladujTrasy(); //System wyœcigów
@@ -504,8 +504,8 @@ public OnGameModeExit()
 	}
     for(new i=0;i<MAX_ORG;i++)
     {
-        orgSave(i, ORG_SAVE_TYPE_BASIC);
-        orgSave(i, ORG_SAVE_TYPE_DESC);
+        SaveOrg(i, ORG_SAVE_TYPE_BASIC);
+        SaveOrg(i, ORG_SAVE_TYPE_DESC);
     }
     for(new i=0;i<MAX_FRAC;i++)
     {
@@ -524,10 +524,9 @@ public OnGameModeExit()
     UnloadTXD();
     Patrol_Unload();
     TJD_Exit();
-    for(new i=Zone_Points[0];i<=Zone_Points[1];i++)
-    {
-        GangZoneDestroy(i);
-    }
+    
+	DestroyGangzones();
+
     for(new i=0;i<MAX_VEHICLES;i++) DisableCarBlinking(i);
 	for(new i = 0; i < MAX_PLAYERS; i++)
     {
@@ -2284,7 +2283,7 @@ SetPlayerSpawnPos(playerid)
 				}
 				else if(GetPlayerOrg(playerid) > 0) //Spawn Organizacji
 				{
-                    new org = gPlayerOrg[playerid];
+                    new org = GetPlayerOrg(playerid);
 		            if(OrgInfo[org][o_Spawn][0] != 0.0)
 		            {
 		                SetPlayerVirtualWorld(playerid, OrgInfo[org][o_VW]);
@@ -4158,26 +4157,12 @@ OnPlayerLogin(playerid, password[])
     Zone_Sync(playerid);
     if(strlen(ServerInfo) > 1) TextDrawShowForPlayer(playerid, TXD_Info); //Show info
 
-    //Sync org
-    if(GetPlayerOrg(playerid) == 255) PlayerInfo[playerid][pOrg] = 0;
-
     //Info o rodzinie:
-	if(GetPlayerOrg(playerid) != 0)
+	new org = GetPlayerOrg(playerid);
+	if(org != 0)
 	{
-        gPlayerOrg[playerid] = orgID(PlayerInfo[playerid][pOrg]);
-        if(PlayerInfo[playerid][pRank] >= 1000) gPlayerOrgLeader[playerid] = true, PlayerInfo[playerid][pRank]-=1000;
-
-        if(gPlayerOrg[playerid] == 0xFFFF) SendClientMessage(playerid, COLOR_PANICRED, "B£¥D PRZYPISANIA TWOJEJ RODZINY!!!");
-        else if(strlen(OrgInfo[gPlayerOrg[playerid]][o_Motd]) > 3)
-        {
-    		format(string, sizeof(string), "Rodzina MOTD: %s.", OrgInfo[gPlayerOrg[playerid]][o_Motd]);
-    		SendClientMessage(playerid, OrgInfo[gPlayerOrg[playerid]][o_Color], string);
-        }
-        if(PlayerInfo[playerid][pRank] < 0 || PlayerInfo[playerid][pRank] > 9) PlayerInfo[playerid][pRank] = 9;
+		SendClientMessage(playerid, OrgInfo[org][o_Color], sprintf("Rodzina MOTD: %s.", OrgInfo[org][o_Motd]));
 	}
-
-    //Konwersja pojazdów:
-    //CONVERT_PlayerCar(playerid);
 
 	//Teleportacja do poprzedniej pozycji:
 	if (PlayerInfo[playerid][pTut] == 1)
@@ -5691,7 +5676,7 @@ public OnPlayerEnterGangZone(playerid, zoneid)
 {
     if(ZONE_DISABLED == 0) {
         new frac=GetPlayerFraction(playerid), org = GetPlayerOrg(playerid);
-        if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
+        if(IsAGang(playerid))
         {
             ZoneTXD_Show(playerid, zoneid);
             if(ZonePlayerTimer[playerid] == 0) ZonePlayerTimer[playerid] = SetTimerEx("Zone_HideInfo", 30000, 0, "i", playerid);

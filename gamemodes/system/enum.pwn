@@ -126,26 +126,6 @@ enum eTransportJobData {
     eTJDMaxItems,
     eTJDMats
 };
-//07.10
-enum eOrg {
-    o_UID,
-    o_Type,
-    o_Name[32],
-    o_Motd[128],
-    o_Color,
-    Float:o_Spawn[4],
-    o_Int,
-    o_VW
-};
-
-new OrgTypes[][16] = {
-    "Zwyk³a",
-    "Gang",
-    "Mafia",
-    "Szajka",
-    "Biznes",
-    "Klub"
-};
 
 //19.06
 enum eOilData {
@@ -778,11 +758,10 @@ new Float:LosowyParkingWodolotVC[][4] = {
 };
 
 
-new Float:gRandomPlayerSpawns[3][4] = {// 1481.1666,-1790.2205,159.2722
+new Float:gRandomPlayerSpawns[3][4] = {
 {1742.9796,-1863.2355,13.5753, 0.0}, // unity station
 {806.3165,-1343.0020,-0.5078, 140.0}, // market station
 {2230.3362,-1159.5715,25.8186, 90.0} // jefferson
-//{1644.0403,-2284.4883,-1.1994, 270.0} // lotnisko
 };
 
 //respawn count

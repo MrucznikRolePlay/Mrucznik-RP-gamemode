@@ -228,10 +228,6 @@ new Float:TJD_BoxPos[7][3] = {
     {1734.61047, -2054.55151, 13.11370}
 };
 
-//07.10
-new OrgInfo[MAX_ORG][eOrg];
-new gPlayerOrg[MAX_PLAYERS];
-new bool:gPlayerOrgLeader[MAX_PLAYERS];
 //03.10
 new bool:SafeLoaded=false;
 //01.10 server info
@@ -297,21 +293,6 @@ new bool:GATE_SAD_ALARM = false;
 //01.08 speedometer
 new bool:ToggleSpeedo[MAX_PLAYERS],
     bool:ToggleSpeedoGPS[MAX_PLAYERS];
-//25.07 strefy gangów
-new Zone_Points[2];
-new Float:Zone_Area[81];
-new ZoneControl[MAX_ZONES];
-new ZonePlayerTimer[MAX_PLAYERS];
-new bool:ZoneAttack[MAX_ZONES]={false, ...};
-new ZoneAttackTimer[MAX_ZONES];
-new ZoneAttackData[MAX_ZONES][4];
-new bool:ZoneGangLimit[200]={true, ...};
-new bool:ZoneAttacker[MAX_PLAYERS];
-new bool:ZoneDefender[MAX_PLAYERS];
-new ZoneProtect[MAX_ZONES];
-new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
-new ZONE_DISABLED = 0;
-new ZONE_DEF_TIME = 900000;
 new ERS_mundur[MAX_PLAYERS] = 0;
 //21.07 PayDay fix
 new Blink[MAX_VEHICLES][4];
@@ -328,7 +309,6 @@ new bool:BarierState[MAX_FRAC][10];
 
 //13.07  system skinow frakcyjnych mysql
 new FRAC_SKINS[MAX_FRAC][MAX_SKIN_SELECT];
-new FAM_SKINS[MAX_ORG][MAX_SKIN_SELECT];
 
 //frac
 new LeadersValue[LEADERS_TYPES][MAX_FRAC]; //a
@@ -359,8 +339,6 @@ new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,71.0}; 
 new VINYL_Stream[128];
 //22.06  system rang mysql
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
-//new FracLiderRang[MAX_FRAC][MAX_RANG_LEN];      //0.4kB
-new FamRang[MAX_ORG][MAX_RANG][MAX_RANG_LEN];   //4kB
 //18.06 uprawnienia
 new ACCESS[MAX_PLAYERS], OLD_ACCESS[MAX_PLAYERS];
 //15.06 system aut kradziezy
@@ -1339,13 +1317,10 @@ ZerujZmienne(playerid)
 	ACCESS[playerid]=0b0;
 	OLD_ACCESS[playerid]=0b0;
 
-    ZoneAttacker[playerid] = false;
-    ZoneDefender[playerid] = false;
+	Zone_ClearVariables(playerid);
 
     ToggleSpeedo[playerid] = false;
     ToggleSpeedoGPS[playerid] = false;
-
-    for(new i=0;i<MAX_ZONES;i++) bInZone[playerid][i] = false;
 
     Unspec[playerid][Coords][0] = 0.0;
     Unspec[playerid][Coords][1] = 0.0;
@@ -1362,8 +1337,6 @@ ZerujZmienne(playerid)
 	noclipdata[playerid][accelmul]   	= 0.0;
     noclipdata[playerid][fireobject]    = 0;
 
-    gPlayerOrg[playerid] = 0xFFFF;
-    gPlayerOrgLeader[playerid] = false;
     PlayerInfo[playerid][pCarSlots] = 4;
 
 

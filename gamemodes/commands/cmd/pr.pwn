@@ -39,8 +39,8 @@ YCMD:pr(playerid, params[], help)
             sendErrorMessage(playerid, "Nie jestes w rodzinie !");
             return 1;
         }
-        new org = gPlayerOrg[playerid];
-        if(gPlayerOrgLeader[playerid])
+        new org = GetPlayerOrg(playerid);
+        if(IsPlayerOrgLeader(playerid))
 		{
 		    new x_nr[16];
 
@@ -59,8 +59,8 @@ YCMD:pr(playerid, params[], help)
 					return 1;
 				}
                 mysql_real_escape_string(name, name);
-                if(orgSetName(org, name)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ nazwê swojej rodziny.");
-				orgSave(org, ORG_SAVE_TYPE_DESC);
+                if(SetOrgName(org, name)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ nazwê swojej rodziny.");
+				SaveOrg(org, ORG_SAVE_TYPE_DESC);
 			}
 			else if(strcmp(x_nr,"motd",true) == 0)
 			{
@@ -71,8 +71,8 @@ YCMD:pr(playerid, params[], help)
 					return 1;
 				}
                 mysql_real_escape_string(lStr, lStr);
-			    if(orgSetMotd(org, lStr)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ MOTD rodziny.");
-				orgSave(org, ORG_SAVE_TYPE_DESC);
+			    if(SetOrgMOTD(org, lStr)) sendTipMessageEx(playerid, COLOR_WHITE, "Zmieni³eœ MOTD rodziny.");
+				SaveOrg(org, ORG_SAVE_TYPE_DESC);
 			}
 			else if(strcmp(x_nr,"color",true) == 0 || strcmp(x_nr,"kolor",true) == 0)
 			{
@@ -90,11 +90,11 @@ YCMD:pr(playerid, params[], help)
                 hexa = (hexa << 8);
                 OrgInfo[org][o_Color] = hexa;
 			    sendTipMessageEx(playerid, hexa, "Zmieni³eœ kolor rodziny.");
-				orgSave(org, ORG_SAVE_TYPE_BASIC);
+				SaveOrg(org, ORG_SAVE_TYPE_BASIC);
 			}
 			else if(strcmp(x_nr,"spawn",true) == 0)
 			{
-			    orgSetSpawnAtPlayerPos(playerid, org);
+			    SetOrgSpawnAtPlayerPos(playerid, org);
 			}
 			else if(strcmp(x_nr,"invite",true) == 0 || strcmp(x_nr,"przyjmij",true) == 0)
 			{
@@ -123,7 +123,7 @@ YCMD:pr(playerid, params[], help)
 				        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, string);
 				        format(string, sizeof(string), "* %s przyj¹³ Ciê do rodziny.",GetNick(playerid));
 				        sendTipMessageEx(giveplayerid, COLOR_LIGHTBLUE, string);
-                        orgInvitePlayer(giveplayerid, GetPlayerOrg(playerid));
+                        InvitePlayerToOrg(giveplayerid, GetPlayerOrg(playerid));
 						Log(serverLog, INFO, "Lider %s przyj¹³ %s do rodziny %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetPlayerOrg(playerid));
 				        return 1;
 				    }
@@ -153,12 +153,12 @@ YCMD:pr(playerid, params[], help)
 				            sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz nie jest w rodzinie!");
 				            return 1;
 				        }
-                        if(gPlayerOrgLeader[giveplayerid]) return SendClientMessage(playerid, COLOR_GREY, "Chcesz wyrzuciæ swojego pana?");
+                        if(IsPlayerOrgLeader(giveplayerid)) return SendClientMessage(playerid, COLOR_GREY, "Chcesz wyrzuciæ swojego pana?");
 				        format(string, sizeof(string), "* Wyrzuci³eœ %s ze swojej rodziny.",GetNick(giveplayerid));
 				        SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 				        format(string, sizeof(string), "* Lider %s wyrzuci³ ciê z rodziny.",GetNick(playerid));
 				        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-                        orgUnInvitePlayer(giveplayerid);
+                        RemovePlayerFromOrg(giveplayerid);
 						Log(serverLog, INFO, "Lider %s wyrzuci³ %s z rodziny %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetPlayerOrg(playerid));
 				        return 1;
 				    }
@@ -192,12 +192,12 @@ YCMD:pr(playerid, params[], help)
 				        }
 
                         new bool:moze=false;
-                        if(strlen(FamRang[GetPlayerOrg(playerid)][rank]) > 1) moze=true;
-                        else if(strlen(FamRang[0][rank]) > 1) moze=true;
+                        if(strlen(OrgRank[GetPlayerOrg(playerid)][rank]) > 1) moze=true;
+                        else if(strlen(OrgRank[0][rank]) > 1) moze=true;
                         if(!moze) return sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
                         format(string, sizeof string, "Da³es %d rangê graczowi %s", rank, GetNick(giveplayerid));
                         SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-                        orgGivePlayerRank(giveplayerid, playerid, rank);
+                        GivePlayerOrgRank(giveplayerid, playerid, rank);
 						Log(serverLog, INFO, "Lider %s rodziny %d da³ %s rangê %d.", GetPlayerLogName(playerid), GetPlayerOrg(playerid), GetPlayerLogName(giveplayerid), rank);
 				        return 1;
 				    }
@@ -225,7 +225,7 @@ YCMD:pr(playerid, params[], help)
 							rank -= 1000;
 							strcat(str_rank, "LIDER");
 						} else {
-							format(str_rank, sizeof(str_rank), "[%i] %s", rank, FamRang[GetPlayerOrg(playerid)][rank]);
+							format(str_rank, sizeof(str_rank), "[%i] %s", rank, OrgRank[GetPlayerOrg(playerid)][rank]);
 						}
 						AddDialogListitem(playerid, "%s\t%s\t{%s}%s", nick, str_rank, isconnected ? ("00FF00") : ("FF0000"), isconnected ? ("ONLINE") : ("OFFLINE"));
 						VECTOR_push_back_val(VMembersOrg[playerid], uid);
@@ -276,7 +276,7 @@ DialogPages:RodzinaPracownicy(playerid, response, listitem, inputtext[]) {
 		return 1;
 	}
 	SetPVarInt(playerid, "prpanel_uid", uid);
-	strcat(rankName, FamRang[GetPlayerOrg(playerid)][rank]);
+	strcat(rankName, OrgRank[GetPlayerOrg(playerid)][rank]);
     format(str, sizeof(str), ""#KARA_STRZALKA"    »» "#KARA_TEKST"Nick: "#KARA_TEKST"%s", nick);
     format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Ranga: "#KARA_TEKST"%s", str, rankName);
     format(str, sizeof(str), "%s\n ", str);

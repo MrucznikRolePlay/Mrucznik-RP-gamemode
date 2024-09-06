@@ -5,7 +5,7 @@ IsDialogProtected(dialogid)
 {
     switch(dialogid)
     {
-        case D_PANEL_KAR_NADAJ..D_PANEL_KAR_ZNAJDZ_INFO, D_PERM, D_CREATE_ORG_NAME, D_CREATE_ORG_UID, D_PANEL_CHECKPLAYER, D_EDIT_RANG_NAME, D_OPIS_UPDATE, D_VEHOPIS_UPDATE: return true;
+        case D_PANEL_KAR_NADAJ..D_PANEL_KAR_ZNAJDZ_INFO, D_PERM, D_PANEL_CHECKPLAYER, D_EDIT_RANG_NAME, D_OPIS_UPDATE, D_VEHOPIS_UPDATE: return true;
     }
     return false; //dodac dialogi z mysql
 }
@@ -121,7 +121,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[64];
-			new skin = FAM_SKINS[GetPlayerOrg(playerid)][listitem];
+			new skin = OrgSkins[GetPlayerOrg(playerid)][listitem];
 			SetPlayerSkinEx(playerid, skin);
 			PlayerInfo[playerid][pUniform] = skin;
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));
@@ -1773,7 +1773,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			PlayerInfo[id_Lidera][pMember] = 0;
 			PlayerInfo[id_Lidera][pLider] = 0;
 			PlayerInfo[id_Lidera][pJob] = 0;
-			orgUnInvitePlayer(id_Lidera);
+			RemovePlayerFromOrg(id_Lidera);
 			MedicBill[id_Lidera] = 0;
 			SetPlayerSpawn(id_Lidera);
 			format(string, sizeof(string), "  Wyrzuci³es %s z frakcji.", GetNick(id_Lidera));
@@ -12938,10 +12938,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new lStr[512];
         for(new i=0;i<MAX_ORG;i++)
         {
-            if(!orgIsValid(i)) continue;
-            if(orgType(i) == listitem)
+            if(!IsOrgValid(i)) continue;
+            if(GetOrgType(i) == listitem)
             {
-                format(lStr, 512, "%s{000000}%d\t{FFFFFF}%s\n", lStr, OrgInfo[i][o_UID], OrgInfo[i][o_Name]);
+                format(lStr, 512, "%s{000000}%d\t{FFFFFF}%s\n", lStr, i, OrgInfo[i][o_Name]);
             }
         }
         if(strlen(lStr) > 3)
@@ -12959,24 +12959,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         RunCommand(playerid, "/organizacje",  lStr);
         return 1;
     }
-    else if(dialogid == D_CREATE)
-    {
-        if(!response) return 1;
-        new lStr[256];
-        switch(listitem)
-        {
-            case 1:
-            {
-                if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieñ");
-                for(new i=0;i<sizeof(OrgTypes);i++)
-                {
-                    format(lStr, 256, "%s%d.\t%s\n", lStr, i+1, OrgTypes[i]);
-                }
-                ShowPlayerDialogEx(playerid, D_CREATE_ORG, DIALOG_STYLE_LIST, "Tworzenie organizacji", lStr, "Dalej", "Wróæ");
-            }
-        }
-        return 1;
-    }
     else if(dialogid == D_EDIT)
     {
         if(!response) return 1;
@@ -12988,7 +12970,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieñ");
                 for(new i=0;i<MAX_ORG;i++)
                 {
-                    if(!orgIsValid(i)) continue;
+                    if(!IsOrgValid(i)) continue;
                     format(lStr, 1024, "%s%d.\t%s\n", lStr, i, OrgInfo[i][o_Name]);
                 }
                 ShowPlayerDialogEx(playerid, D_EDIT_ORG, DIALOG_STYLE_LIST, "Edycja organizacji", lStr, "Dalej", "Wróæ");
@@ -13016,51 +12998,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
             }
         }
-        return 1;
-    }
-    //TWORZENIE ORGANIZACJI
-    else if(dialogid == D_CREATE_ORG)
-    {
-        if(!response) return RunCommand(playerid, "/stworz",  "");
-        SetPVarInt(playerid, "create_org_typ", listitem);
-        ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwê rodziny:", "Dalej", "Wróæ");
-        return 1;
-    }
-    else if(dialogid == D_CREATE_ORG_NAME)
-    {
-        if(!response) return RunCommand(playerid, "/stworz",  "");
-        if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwê rodziny:", "Dalej", "Wróæ");
-        SetPVarString(playerid, "create_org_name", inputtext);
-        new lStr[256] = "Wybierz wolny slot (ID)\n";
-        new lTab[MAX_ORG];
-        for(new i=0;i<MAX_ORG;i++)
-        {
-            if(OrgInfo[i][o_UID] != 0)
-            {
-                lTab[i] = OrgInfo[i][o_UID];
-            }
-        }
-        new bool:lFree=true;
-        for(new i=1;i<=MAX_ORG;i++)
-        {
-            lFree=true;
-            for(new j=0;j<MAX_ORG;j++) if(lTab[j] == i) lFree=false;
-
-            if(lFree) format(lStr, 256, "%s%d\n", lStr, i);
-        }
-        ShowPlayerDialogEx(playerid, D_CREATE_ORG_UID, DIALOG_STYLE_LIST, "Tworzenie organizacji", lStr, "Dalej", "Wróæ");
-        return 1;
-    }
-    else if(dialogid == D_CREATE_ORG_UID)
-    {
-        if(!response) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwê rodziny:", "Dalej", "Wróæ");
-        new id = strval(inputtext);
-        if(orgIsValid(orgID(id))) return SendClientMessage(playerid, -1, "Kolizja UID?");
-        new lStr[128];
-        GetPVarString(playerid, "create_org_name", lStr, 32);
-        orgAdd(GetPVarInt(playerid, "create_org_typ"),lStr, id, orgGetFreeSlot());
-        format(lStr, 128, "Stworzono organizacjê typu %s o nazwie %s UID %d", OrgTypes[GetPVarInt(playerid, "create_org_typ")], lStr, id);
-        SendClientMessage(playerid, COLOR_GREEN, lStr);
         return 1;
     }
     //EDYCJA ORGANIZACJI
@@ -13109,7 +13046,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         format(lStr, 128, "Zmieniono typ organizacji %s na %s", OrgInfo[id][o_Name], OrgTypes[listitem]);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
 
-        orgSave(id, ORG_SAVE_TYPE_BASIC);
+        SaveOrg(id, ORG_SAVE_TYPE_BASIC);
         return 1;
     }
     else if(dialogid == D_EDIT_ORG_NAME)
@@ -13119,9 +13056,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "WprowadŸ now¹ nazwê", "Zmieñ", "Wróæ");
         format(lStr, 128, "Zmieniono nazwê organizacji %s na %s", OrgInfo[id][o_Name], inputtext);
         SendClientMessage(playerid, COLOR_GREEN, lStr);
-        orgSetName(id, inputtext);
+        SetOrgName(id, inputtext);
 
-        orgSave(id, ORG_SAVE_TYPE_DESC);
+        SaveOrg(id, ORG_SAVE_TYPE_DESC);
         return 1;
     }
     else if(dialogid == D_EDIT_ORG_DELETE)
@@ -13133,24 +13070,23 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         format(lStr, sizeof(lStr), "Organizacja usuniêta przez %s.", GetNickEx(playerid));
         foreach(new i : Player)
         {
-            if(GetPlayerOrg(i) == OrgInfo[id][o_UID])
+            if(GetPlayerOrg(i) == id)
             {
                 SendClientMessage(i, COLOR_RED, lStr);
-                orgUnInvitePlayer(i);
+                RemovePlayerFromOrg(i);
             }
         }
 		MruMySQL_UsunOrganizacje(id);
 
         for(new j=0;j<MAX_ZONES;j++)
         {
-            if(ZoneControl[j]-100 == OrgInfo[id][o_UID])
+            if(ZoneControl[j]-100 == id)
             {
                 GangZoneShowForAll(j, 0xC6E2F144);
                 ZoneControl[j] = 0;
             }
         }
 
-        OrgInfo[id][o_UID] = 0;
         OrgInfo[id][o_Type] = 0;
         strdel(OrgInfo[id][o_Name], 0, 32);
         strdel(OrgInfo[id][o_Motd], 0, 128);
@@ -13644,8 +13580,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         else
         {
-            new uid = orgID(id);
-            if(!orgIsValid(uid)) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
+            if(!IsOrgValid(id)) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
         }
         SetPVarInt(playerid, "edit_rang_id", id);
         EDIT_ShowRangNames(playerid, typ, id, true);
@@ -13675,12 +13610,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(inputtext[0] == '-')
         {
             if(typ == 0) strdel(FracRang[id][idx], 0, MAX_RANG_LEN);
-            else if(typ == 1) strdel(FamRang[id][idx], 0, MAX_RANG_LEN);
+            else if(typ == 1) strdel(OrgRank[id][idx], 0, MAX_RANG_LEN);
         }
         else
         {
             if(typ == 0) format(FracRang[id][idx], MAX_RANG_LEN, "%s", name);
-            else if(typ == 1) format(FamRang[id][idx], MAX_RANG_LEN, "%s", name);
+            else if(typ == 1) format(OrgRank[id][idx], MAX_RANG_LEN, "%s", name);
         }
         //EDIT_SaveRangs(typ, id);
         RANG_ApplyChanges[typ][id] = true;
@@ -16068,7 +16003,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 	}
 	else if (dialogid == D_ORGMEMBER) {
-		if (!gPlayerOrgLeader[playerid]) {
+		if (!IsPlayerOrgLeader(playerid)) {
 			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
 			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 			DeletePVar(playerid, "prpanel_uid");
@@ -16099,10 +16034,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new str[512];
 					for(new i=0;i<10;i++)
 					{
-						if(strlen(FamRang[org][i]) < 2)
+						if(strlen(OrgRank[org][i]) < 2)
 							format(str, 512, "%s[%d] -\n", str, i);
 						else
-							format(str, 512, "%s[%d] %s\n", str, i, FamRang[org][i]);
+							format(str, 512, "%s[%d] %s\n", str, i, OrgRank[org][i]);
 					}
 
 					return ShowPlayerDialogEx(playerid, D_ORGMEMBER_RANK, DIALOG_STYLE_LIST, "Wybierz rangê, któr¹ chcesz nadaæ graczowi", str, "Nadaj", "Anuluj");
@@ -16117,7 +16052,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		return 1;
 	}
 	else if (dialogid == D_ORGMEMBER_RANK) {
-		if (!gPlayerOrgLeader[playerid]) {
+		if (!IsPlayerOrgLeader(playerid)) {
 			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
 			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 			DeletePVar(playerid, "prpanel_uid");
@@ -16125,7 +16060,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		}
 		if (response) {
 			new org = GetPlayerOrg(playerid);
-			if(listitem >= MAX_RANG || listitem < 0 || strlen(FamRang[org][listitem]) < 1) {
+			if(listitem >= MAX_RANG || listitem < 0 || strlen(OrgRank[org][listitem]) < 1) {
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
 				DeletePVar(playerid, "prpanel_uid");
 				Command_ReProcess(playerid, "pr pracownicy", false);

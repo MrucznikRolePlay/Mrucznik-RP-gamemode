@@ -52,7 +52,7 @@ YCMD:komunikat(playerid, params[], help)
         SendClientMessage(playerid, TEAM_CYAN_COLOR, string);
         return 1;
     }
-    format(string, sizeof(string), "|___________ %s ___________|", OrgInfo[gPlayerOrg[playerid]][o_Name]);
+    format(string, sizeof(string), "|___________ %s ___________|", OrgInfo[org][o_Name]);
     SendClientMessageToAll(COLOR_WHITE, string);
     format(string, sizeof(string), "%s: %s", sendername, params);
     SendClientMessageToAll(COLOR_BLUE, string);

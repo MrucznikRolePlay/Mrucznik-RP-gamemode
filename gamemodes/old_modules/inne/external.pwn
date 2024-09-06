@@ -36,7 +36,7 @@ public MRP_IsInPolice(playerid)
 }
 public MRP_IsInGang(playerid)
 {
-    if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG) return 1;
+    if(IsAGang(playerid)) return 1;
     return 0;
 }
 

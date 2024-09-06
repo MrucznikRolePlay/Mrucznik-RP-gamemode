@@ -50,8 +50,8 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
-			new org = gPlayerOrg[playerid];
-			if(!orgIsValid(org))
+			new org = GetPlayerOrg(playerid);
+			if(!IsOrgValid(org))
 			{
 				return;
 			}
@@ -64,7 +64,7 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 			}
 
 			// message
-			new isDefense = FrontBusiness[i][Owner] == OrgInfo[org][o_UID];
+			new isDefense = FrontBusiness[i][Owner] == org;
 			SendEnterTakeoverAreaMessage(playerid, i, org, isDefense);
 		}
 	}
@@ -138,7 +138,7 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 			}
 
 			// message
-			new isDefense = FrontBusiness[i][Owner] == OrgInfo[org][o_UID];
+			new isDefense = FrontBusiness[i][Owner] == org;
 			SendExitTakeoverAreaMessage(playerid, i, org, isDefense);
 		}
 	}
