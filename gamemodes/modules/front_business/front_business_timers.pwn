@@ -32,37 +32,54 @@ task BusinessTakeoverTimer[1000]()
 	gettime(hour, minute);
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(!FrontBusiness[i][TakeoverActive])
+		if(FrontBusiness[i][TakeoverActive])
 		{
-			if(FrontBusiness[i][TakeoverHour] == hour && FrontBusiness[i][TakeoverMinute]  == minute)
-			{
-				StartFrontBizTakeover(i);
-			}
-		}
-		else
-		{
-			DecreaseTakeoverPoints(i);
+			UpdateTakeoverPoints(i);
 
 			if(FrontBusiness[i][TakeoverStartTime] + FrontBusiness[i][TakeoverTime] < gettime())
 			{
 				StopFrontBizTakeover(i);
 			}
 		}
+		else
+		{
+			if(FrontBusiness[i][TakeoverHour] == hour && FrontBusiness[i][TakeoverMinute]  == minute)
+			{
+				StartFrontBizTakeover(i);
+			}
+		}
 	}
 }
 
-DecreaseTakeoverPoints(bizId)
+UpdateTakeoverPoints(bizId)
 {
 	for(new i; i<MAX_ORG; i++)
 	{
-		if(FrontBusiness[bizId][TakingOverScore][i] > 0)
+		new playersThreshold, pointsIncr, pointsDecr;
+		if(OrgInfo[i][o_UID] == FrontBusiness[bizId][Owner])
 		{
-			FrontBusiness[bizId][TakingOverScore][i]--;
+			// defence
+			playersThreshold = TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD;
+			pointsIncr = TAKING_OVER_DEFENCE_SCORE_INCREASE;
+			pointsDecr = TAKING_OVER_DEFENCE_SCORE_DECREASE;
 		}
-	}
-	if(FrontBusiness[bizId][CopTakingOverScore] > 0)
-	{
-		FrontBusiness[bizId][CopTakingOverScore]--;
+		else
+		{
+			// attack
+			playersThreshold = TAKING_OVER_ATTACK_PLAYERS_THRESHOLD;
+			pointsIncr = TAKING_OVER_ATTACK_SCORE_INCREASE;
+			pointsDecr = TAKING_OVER_ATTACK_SCORE_DECREASE;
+		}
+
+		// modify points
+		if(FrontBusiness[bizId][TakingOver][i] >= playersThreshold)
+		{
+			FrontBusiness[bizId][TakingOverScore][i] += pointsIncr;
+		}
+		else if(FrontBusiness[bizId][TakingOver][i] == 0)
+		{
+			FrontBusiness[bizId][TakingOverScore][i] -= pointsDecr;
+		}
 	}
 }
 

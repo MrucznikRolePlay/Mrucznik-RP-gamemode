@@ -51,54 +51,52 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
 			new org = gPlayerOrg[playerid];
-			if(IsAPolicja(playerid))
+			if(!orgIsValid(org))
 			{
-				FrontBusiness[i][CopTakingOver] ++;
-				if(FrontBusiness[i][CopTakingOver] >= 3)
-				{
-					GameTextForPlayer(playerid, "~b~Rozpoczales obrone biznesu przed bandytami", 5000, 1);
-				}
-				else if(FrontBusiness[i][CopTakingOver] < 3)
-				{
-					GameTextForPlayer(playerid, "Jestes w strefe obrony biznesu~n~potrzeba 3 strozow prawa by skutecznie~n~zapobiec przejeciu biznesu!", 5000, 1);
-				}
+				return;
 			}
-			else if(FrontBusiness[i][Owner] == org)
-			{
-				// defense
-				FrontBusiness[i][TakingOver][org]++;
+			SetPVarInt(playerid, "taking-over", i + 1);
+			FrontBusiness[i][TakingOver][org]++;
 
-				if(FrontBusiness[i][TakingOver][org] == 1)
-				{
-					GameTextForPlayer(playerid, "~b~Rozpoczêto obrone biznesu", 5000, 1);
-				}
-				else if(FrontBusiness[i][TakingOver][org] == 3)
-				{
-					GameTextForPlayer(playerid, "~b~Rozpoczales ~g~skuteczna ~b~obrone biznesu", 5000, 1);
-				}
-				else
-				{
-					GameTextForPlayer(playerid, "Dolaczyles do obrony biznesu", 5000, 1);
-				}
-			}
-			else
-			{
-				// attack
-				FrontBusiness[i][TakingOver][org]++;
+			// message
+			new isDefense = FrontBusiness[i][Owner] == OrgInfo[org][o_UID];
+			SendEnterTakeoverAreaMessage(playerid, i, org, isDefense);
+		}
+	}
+}
 
-				if(FrontBusiness[i][TakingOver][org] == 3)
-				{
-					GameTextForPlayer(playerid, "~r~Rozpoczêto przejmowanie biznesu", 5000, 1);
-				}
-				else if(FrontBusiness[i][TakingOver][org] > 3)
-				{
-					GameTextForPlayer(playerid, "~r~Dolaczyles do przejmowania biznesu", 5000, 1);
-				}
-				else
-				{
-					GameTextForPlayer(playerid, "Jestes w strefe przejecia biznesu~n~potrzeba 3 osob z organizacji by przejac biznes", 5000, 1);
-				}
-			}
+SendEnterTakeoverAreaMessage(playerid, bizId, org, isDefense)
+{
+	if(isDefense)
+	{
+		// defense
+		if(FrontBusiness[bizId][TakingOver][org] == TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD)
+		{
+			GameTextForPlayer(playerid, "~b~Rozpoczêto obrone biznesu", 5000, 1);
+		}
+		else if(FrontBusiness[bizId][TakingOver][org] > TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD)
+		{
+			GameTextForPlayer(playerid, "Dolaczyles do obrony biznesu", 5000, 1);
+		}
+		else
+		{
+			GameTextForPlayer(playerid, "Jestes w strefe przejecia biznesu~n~potrzeba "#TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD" osob z organizacji by obronic biznes", 5000, 1);
+		}
+	}
+	else
+	{
+		// attack
+		if(FrontBusiness[bizId][TakingOver][org] == TAKING_OVER_ATTACK_PLAYERS_THRESHOLD)
+		{
+			GameTextForPlayer(playerid, "~r~Rozpoczêto przejmowanie biznesu", 5000, 1);
+		}
+		else if(FrontBusiness[bizId][TakingOver][org] > TAKING_OVER_ATTACK_PLAYERS_THRESHOLD)
+		{
+			GameTextForPlayer(playerid, "~r~Dolaczyles do przejmowania biznesu", 5000, 1);
+		}
+		else
+		{
+			GameTextForPlayer(playerid, "Jestes w strefe przejecia biznesu~n~potrzeba "#TAKING_OVER_ATTACK_PLAYERS_THRESHOLD" osob z organizacji by przejac biznes", 5000, 1);
 		}
 	}
 }
@@ -112,7 +110,8 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 			return;
 		}
 
-		if(GetPlayerOrg(playerid) == 0 && !IsAPolicja(playerid))
+		new org = GetPVarInt(playerid, "taking-over") - 1;
+		if(org < 0)
 		{
 			return;
 		}
@@ -122,50 +121,43 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 			DeletePVar(playerid, "show-takeover-info");
 			return;
 		}
+		
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
-			new org = gPlayerOrg[playerid];
-			if(IsAPolicja(playerid))
-			{
-				FrontBusiness[i][CopTakingOver]--;
+			DeletePVar(playerid, "taking-over");
+			FrontBusiness[i][TakingOver][org]--;
 
-				if(FrontBusiness[i][CopTakingOver] >= 3)
-				{
-					GameTextForPlayer(playerid, "Opusciles strefe obrony biznesu", 5000, 1);
-				}
-				else if(FrontBusiness[i][CopTakingOver] < 3)
-				{
-					GameTextForPlayer(playerid, "~r~Przestales bronic biznesu przed przestepcami!", 5000, 1);
-				}
-			}
-			else if(FrontBusiness[i][Owner] == org)
-			{
-				// defense
-				FrontBusiness[i][TakingOver][org]--;
+			// message
+			new isDefense = FrontBusiness[i][Owner] == OrgInfo[org][o_UID];
+			SendExitTakeoverAreaMessage(playerid, i, org, isDefense);
+		}
+	}
+}
 
-				if(FrontBusiness[i][TakingOver][org] >= 3)
-				{
-					GameTextForPlayer(playerid, "Opusciles strefe obrony biznesu", 5000, 1);
-				}
-				else if(FrontBusiness[i][TakingOver][org] < 3)
-				{
-					GameTextForPlayer(playerid, "~r~Twoja organizacja przestala bronic biznes!", 5000, 1);
-				}
-			}
-			else
-			{
-				// attack
-				FrontBusiness[i][TakingOver][org]--;
-
-				if(FrontBusiness[i][TakingOver][org] >= 3)
-				{
-					GameTextForPlayer(playerid, "Opusciles strefe przejmowanie biznesu", 5000, 1);
-				}
-				else if(FrontBusiness[i][TakingOver][org] < 3)
-				{
-					GameTextForPlayer(playerid, "~r~Twoja organizacja przestala przejmowac biznes!", 5000, 1);
-				}
-			}
+SendExitTakeoverAreaMessage(playerid, bizId, org, isDefense)
+{
+	if(isDefense)
+	{
+		// defense
+		if(FrontBusiness[bizId][TakingOver][org] >= TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD)
+		{
+			GameTextForPlayer(playerid, "Opusciles strefe obrony biznesu", 5000, 1);
+		}
+		else if(FrontBusiness[bizId][TakingOver][org] < TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD)
+		{
+			GameTextForPlayer(playerid, "~r~Twoja organizacja przestala bronic biznes!", 5000, 1);
+		}
+	}
+	else
+	{
+		// attack
+		if(FrontBusiness[bizId][TakingOver][org] >= TAKING_OVER_ATTACK_PLAYERS_THRESHOLD)
+		{
+			GameTextForPlayer(playerid, "Opusciles strefe przejmowanie biznesu", 5000, 1);
+		}
+		else if(FrontBusiness[bizId][TakingOver][org] < TAKING_OVER_ATTACK_PLAYERS_THRESHOLD)
+		{
+			GameTextForPlayer(playerid, "~r~Twoja organizacja przestala przejmowac biznes!", 5000, 1);
 		}
 	}
 }
