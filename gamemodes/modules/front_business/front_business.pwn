@@ -97,9 +97,34 @@ StopFrontBizTakeover(bizId)
 {
 	FrontBusiness[bizId][TakeoverActive] = false;
 
+	new winner = -1, maxScore;
 	for(new i; i<MAX_ORG; i++)
 	{
 		FrontBusiness[bizId][TakingOver][i] = 0;
+
+		new score = FrontBusiness[bizId][TakingOverScore][i];
+		if(score > maxScore)
+		{
+			maxScore = score;
+			winner = i;
+		}
+	}
+
+	// Check the winner
+	if(winner != -1)
+	{
+		if(winner == FrontBusiness[bizId][Owner] && maxScore > 0)
+		{
+			// successful defence
+			SuccessfulDefenceMessage(bizId, winner);
+		}
+		else if(maxScore > TAKE_OVER_POINT_THRESHOLD)
+		{
+			// successful attack
+			new oldOwner = FrontBusiness[bizId][Owner];
+			TakeOverFrontBusiness(bizId, winner);
+			SuccessfulAttackMessage(bizId, winner, oldOwner);
+		}
 	}
 }
 
@@ -120,9 +145,38 @@ TriggerTakingOver(bizId, org)
 StopTakingOver(bizId, org)
 {
 	GangZoneStopFlashForAll(FrontBusiness[bizId][BizGangZone]);
-	
+
 	new orgUid = OrgInfo[org][o_UID];
 	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, sprintf("Uda³o siê odeprzeæ atak na biznes %s!", FrontBusiness[bizId][Name]));
+}
+
+TakeOverFrontBusiness(bizId, org)
+{
+	new color = OrgInfo[org][o_Color];
+	FrontBusiness[bizId][Owner] = org;
+	FrontBusiness[bizId][BizColor] = color;
+	Redis_GetInt(RedisClient, RedisFrontBizKey(bizId, "color"), color);
+	Redis_GetInt(RedisClient, RedisFrontBizKey(bizId, "owner"), org);
+}
+
+SuccessfulDefenceMessage(bizId, org)
+{
+	new orgUid = OrgInfo[org][o_UID];
+	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
+}
+
+SuccessfulAttackMessage(bizId, org, oldOwner)
+{
+	new orgUid = OrgInfo[org][o_UID];
+	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
+	SendNewFamilyMessage(orgUid, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
+
+	if(orgIsValid(oldOwner))
+	{
+		new oldOrgOwner = OrgInfo[oldOwner][o_UID];
+		SendNewFamilyMessage(oldOrgOwner, COLOR_PANICRED, "TRAGEDIA!");
+		SendNewFamilyMessage(oldOrgOwner, COLOR_PANICRED, sprintf("Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));
+	}
 }
 
 GetFrontBusinessIcon(type)

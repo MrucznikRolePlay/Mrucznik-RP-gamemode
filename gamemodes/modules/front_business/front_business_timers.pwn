@@ -43,7 +43,7 @@ task BusinessTakeoverTimer[1000]()
 		}
 		else
 		{
-			if(FrontBusiness[i][TakeoverHour] == hour && FrontBusiness[i][TakeoverMinute]  == minute)
+			if(FrontBusiness[i][TakeoverHour] == hour && FrontBusiness[i][TakeoverMinute] == minute)
 			{
 				StartFrontBizTakeover(i);
 			}
