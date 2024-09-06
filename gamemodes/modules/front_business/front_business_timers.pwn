@@ -55,10 +55,11 @@ UpdateTakeoverPoints(bizId)
 {
 	for(new i; i<MAX_ORG; i++)
 	{
-		new playersThreshold, pointsIncr, pointsDecr;
+		new playersThreshold, pointsIncr, pointsDecr, defend;
 		if(OrgInfo[i][o_UID] == FrontBusiness[bizId][Owner])
 		{
 			// defence
+			defend = true;
 			playersThreshold = TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD;
 			pointsIncr = TAKING_OVER_DEFENCE_SCORE_INCREASE;
 			pointsDecr = TAKING_OVER_DEFENCE_SCORE_DECREASE;
@@ -66,6 +67,7 @@ UpdateTakeoverPoints(bizId)
 		else
 		{
 			// attack
+			defend = false;
 			playersThreshold = TAKING_OVER_ATTACK_PLAYERS_THRESHOLD;
 			pointsIncr = TAKING_OVER_ATTACK_SCORE_INCREASE;
 			pointsDecr = TAKING_OVER_ATTACK_SCORE_DECREASE;
@@ -74,13 +76,53 @@ UpdateTakeoverPoints(bizId)
 		// modify points
 		if(FrontBusiness[bizId][TakingOver][i] >= playersThreshold)
 		{
-			FrontBusiness[bizId][TakingOverScore][i] += pointsIncr;
+			if(defend)
+			{
+				new battlingAttackers = DecreaseAllAttackerPoints(bizId, pointsIncr);
+				if(!battlingAttackers)
+				{
+					FrontBusiness[bizId][TakingOverScore][i] += pointsIncr;
+				}
+			}
+			else
+			{
+				new battlingDefenders = DecreaseDefenderPoints(bizId, pointsIncr);
+				if(!battlingDefenders)
+				{
+					FrontBusiness[bizId][TakingOverScore][i] += pointsIncr;
+				}
+			}
 		}
-		else if(FrontBusiness[bizId][TakingOver][i] == 0)
+		else if(FrontBusiness[bizId][TakingOver][i] == 0 && FrontBusiness[bizId][TakingOverScore][i] > 0)
 		{
 			FrontBusiness[bizId][TakingOverScore][i] -= pointsDecr;
 		}
 	}
+}
+
+DecreaseAllAttackerPoints(bizId, points)
+{
+	new decreased = false;
+	for(new i; i<MAX_ORG; i++)
+	{
+		if(FrontBusiness[bizId][TakingOverScore][i])
+		{
+			FrontBusiness[bizId][TakingOverScore][i] -= points;
+			decreased = true;
+		}
+	}
+	return decreased;
+}
+
+DecreaseDefenderPoints(bizId, points)
+{
+	new owner = FrontBusiness[bizId][Owner];
+	if(FrontBusiness[bizId][TakingOverScore][owner])
+	{
+		FrontBusiness[bizId][TakingOverScore][owner] -= points;
+		return true;
+	}
+	return false;
 }
 
 ptask TakeoverCheck[1000](playerid)

@@ -113,12 +113,12 @@ StopFrontBizTakeover(bizId)
 	// Check the winner
 	if(winner != -1)
 	{
-		if(winner == FrontBusiness[bizId][Owner] && maxScore > 0)
+		if(winner == FrontBusiness[bizId][Owner] && maxScore > 0 || maxScore < TAKE_OVER_POINT_THRESHOLD)
 		{
 			// successful defence
 			SuccessfulDefenceMessage(bizId, winner);
 		}
-		else if(maxScore > TAKE_OVER_POINT_THRESHOLD)
+		else if(maxScore >= TAKE_OVER_POINT_THRESHOLD)
 		{
 			// successful attack
 			new oldOwner = FrontBusiness[bizId][Owner];
