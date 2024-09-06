@@ -31,6 +31,11 @@ enum e_OrgTypes {
     ORG_TYPE_RACE,
     ORG_TYPE_CLUB
 };
+new OrgTypes[][16] = {
+    "",
+    "Gang",
+    "Mafia"
+};
 
 enum eOrg {
     o_Type,
@@ -40,15 +45,6 @@ enum eOrg {
     Float:o_Spawn[4],
     o_Int,
     o_VW
-};
-
-new OrgTypes[][16] = {
-    "Rodzina",
-    "Gang",
-    "Mafia",
-    "Szajka",
-    "Biznes",
-    "Klub"
 };
 
 //-----------------<[ Zmienne: ]>-------------------
