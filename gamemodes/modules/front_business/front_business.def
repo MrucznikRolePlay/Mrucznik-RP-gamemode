@@ -33,6 +33,8 @@
 #define TAKING_OVER_ATTACK_SCORE_INCREASE 10
 #define TAKING_OVER_ATTACK_SCORE_DECREASE 5
 
+#define TAKE_OVER_POINT_THRESHOLD (TAKING_OVER_ATTACK_SCORE_INCREASE * 300) // 5 minutes
+
 //------------------<[ Makra: ]>-------------------
 #define RedisFrontBizKey(%0,%1) sprintf("front_biz:%d:%s", %0, %1)
 

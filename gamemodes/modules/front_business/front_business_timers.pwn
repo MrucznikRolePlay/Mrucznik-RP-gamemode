@@ -93,16 +93,19 @@ ptask TakeoverCheck[1000](playerid)
 		new anyPoints;
 		for(new i; i<MAX_ORG; i++)
 		{
-			if(FrontBusiness[bizId][TakingOverScore][i] > 0)
+			new score = FrontBusiness[bizId][TakingOverScore][i];
+			if(score > 0)
 			{
-				format(string, sizeof(string), "%s~n~%s: %d", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
+				if(score > TAKE_OVER_POINT_THRESHOLD)
+				{
+					format(string, sizeof(string), "%s~n~~y~%s~w~: ~r~%d~w~", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
+				}
+				else
+				{
+					format(string, sizeof(string), "%s~n~~y~%s~w~: %d", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
+				}
 				anyPoints++;
 			}
-		}
-		if(FrontBusiness[bizId][CopTakingOverScore] > 0)
-		{
-			format(string, sizeof(string), "%s~n~Gliniarze: %d", FrontBusiness[bizId][CopTakingOverScore]);
-			anyPoints++;
 		}
 		if(anyPoints > 0)
 		{
