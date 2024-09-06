@@ -113,7 +113,7 @@ InvitePlayerToOrg(playerid, org, leader=false)
     }
 
     MruMessageGoodInfoF(playerid, "Zosta³eœ przyjêty do organizacji %s.", OrgInfo[org][o_Name]);
-	MruMySQL_SavePlayerFamily(playerid);
+	MruMySQL_SavePlayerOrganisation(playerid);
     return 1;
 }
 
@@ -123,7 +123,7 @@ RemovePlayerFromOrg(playerid)
     PlayerInfo[playerid][pOrg] = 0;
 	PlayerInfo[playerid][pRank] = 0;
     PlayerInfo[playerid][pUniform] = 0;
-	MruMySQL_SavePlayerFamily(playerid);
+	MruMySQL_SavePlayerOrganisation(playerid);
 
     if(!IsOrgValid(org)) return 0;
     MruMessageBadInfoF(playerid, "Zosta³eœ wyrzucony z organizacji %s.", OrgInfo[org][o_Name]);

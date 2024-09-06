@@ -1381,7 +1381,8 @@ stock MruMySQL_DeletePhoneContact(uid)
 	return 1;
 }
 
-stock MruMySQL_UpdateFish(playerid, fish) {
+stock MruMySQL_UpdateFish(playerid, fish) 
+{
 	if(!IsPlayerConnected(playerid))
 		return 0;
 	new sql_fish[20], sql_weight, sql_fid;
@@ -1419,15 +1420,16 @@ stock MruMySQL_UpdateFish(playerid, fish) {
 	mysql_query(string);
 	return 1;
 }
-stock MruMySQL_SavePlayerFamily(playerid) {
+
+stock MruMySQL_SavePlayerOrganisation(playerid) 
+{
 	if(!IsPlayerConnected(playerid))
 		return 0;
 	new string[256];
-	format(string, sizeof(string), "UPDATE `mru_konta` SET `FMember`=%i, `Rank`=%i, `Uniform`=%i, `Team`=%i WHERE `UID`=%i",
+	format(string, sizeof(string), "UPDATE `mru_konta` SET `FMember`=%i, `Rank`=%i, `Uniform`=%i WHERE `UID`=%i",
 		PlayerInfo[playerid][pOrg],
 		PlayerInfo[playerid][pRank],
 		PlayerInfo[playerid][pUniform],
-		PlayerInfo[playerid][pTeam],
 		PlayerInfo[playerid][pUID]);
 	mysql_query(string);
 	return 1;
