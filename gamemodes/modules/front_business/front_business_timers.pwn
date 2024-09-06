@@ -117,6 +117,10 @@ DecreaseAllAttackerPoints(bizId, points)
 DecreaseDefenderPoints(bizId, points)
 {
 	new owner = FrontBusiness[bizId][Owner];
+	if(!orgIsValid(owner))
+	{
+		return false;
+	}
 	if(FrontBusiness[bizId][TakingOverScore][owner])
 	{
 		FrontBusiness[bizId][TakingOverScore][owner] -= points;

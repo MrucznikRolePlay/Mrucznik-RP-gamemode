@@ -100,25 +100,27 @@ StopFrontBizTakeover(bizId)
 	new winner = -1, maxScore;
 	for(new i; i<MAX_ORG; i++)
 	{
-		FrontBusiness[bizId][TakingOver][i] = 0;
-
 		new score = FrontBusiness[bizId][TakingOverScore][i];
 		if(score > maxScore)
 		{
 			maxScore = score;
 			winner = i;
 		}
+
+		// cleanup
+		FrontBusiness[bizId][TakingOver][i] = 0;
+		FrontBusiness[bizId][TakingOverScore][i] = 0;
 	}
 
 	// Check the winner
 	if(winner != -1)
 	{
-		if(winner == FrontBusiness[bizId][Owner] && maxScore > 0 || maxScore < TAKE_OVER_POINT_THRESHOLD)
+		if(winner == FrontBusiness[bizId][Owner] || maxScore < TAKE_OVER_POINT_THRESHOLD)
 		{
 			// successful defence
 			SuccessfulDefenceMessage(bizId, winner);
 		}
-		else if(maxScore >= TAKE_OVER_POINT_THRESHOLD)
+		else
 		{
 			// successful attack
 			new oldOwner = FrontBusiness[bizId][Owner];
