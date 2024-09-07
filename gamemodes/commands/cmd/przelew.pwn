@@ -34,9 +34,9 @@ YCMD:przelew(playerid, params[], help)
 	
 	if(IsPlayerConnected(playerid))
 	{
-		if(GetPLocal(playerid) != PLOCAL_INNE_BANK)
+		if(!IsAtBank(playerid))
 		{
-			sendErrorMessage(playerid, "Nie znajdujesz siê w banku lub nie posiadasz smartfona!"); 
+			sendErrorMessage(playerid, "Nie znajdujesz siê w banku!"); 
 			return 1;
 		}
 		if(PlayerPersonalization[playerid][PERS_KB] == 0)

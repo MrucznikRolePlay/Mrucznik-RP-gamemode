@@ -138,8 +138,8 @@ TriggerTakingOver(bizId, org)
 
 	if(FrontBusiness[bizId][TakingOverScore][org] == 0)
 	{
-		SendNewFamilyMessage(org, COLOR_PANICRED, "UWAGA! AGRESJA!");
-		SendNewFamilyMessage(org, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
+		SendOrgMessage(org, COLOR_PANICRED, "UWAGA! AGRESJA!");
+		SendOrgMessage(org, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
 	}
 }
 
@@ -147,7 +147,7 @@ StopTakingOver(bizId, org)
 {
 	GangZoneStopFlashForAll(FrontBusiness[bizId][BizGangZone]);
 
-	SendNewFamilyMessage(org, COLOR_LIGHTGREEN, sprintf("Uda³o siê odeprzeæ atak na biznes %s!", FrontBusiness[bizId][Name]));
+	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Uda³o siê odeprzeæ atak na biznes %s!", FrontBusiness[bizId][Name]));
 }
 
 TakeOverFrontBusiness(bizId, org)
@@ -161,19 +161,39 @@ TakeOverFrontBusiness(bizId, org)
 
 SuccessfulDefenceMessage(bizId, org)
 {
-	SendNewFamilyMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
+	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
 }
 
 SuccessfulAttackMessage(bizId, org, oldOwner)
 {
-	SendNewFamilyMessage(org, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
-	SendNewFamilyMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
+	SendOrgMessage(org, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
+	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
 
 	if(IsOrgValid(oldOwner))
 	{
-		SendNewFamilyMessage(oldOwner, COLOR_PANICRED, "TRAGEDIA!");
-		SendNewFamilyMessage(oldOwner, COLOR_PANICRED, sprintf("Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));
+		SendOrgMessage(oldOwner, COLOR_PANICRED, "TRAGEDIA!");
+		SendOrgMessage(oldOwner, COLOR_PANICRED, sprintf("Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));
 	}
+}
+
+IsPlayerNearOwnFrontBusiness(playerid, Float:proximity=5.0)
+{
+	new bizId = IsPlayerAtFrontBusinnesZone(playerid);
+	if(bizId <= 0)
+	{
+		return 0;
+	}
+
+	if(!IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId))
+	{
+		return 0;
+	}
+
+	if(GetPlayerFrontBusinessProximity(playerid, bizId) > proximity)
+	{
+		return 0;
+	}
+	return 1;
 }
 
 IsPlayerAtFrontBusinnesZone(playerid)
@@ -191,6 +211,11 @@ IsPlayerAtFrontBusinnesZone(playerid)
 GetPlayerFrontBusinessProximity(playerid, bizId)
 {
 	return GetPlayerDistanceFromPoint(playerid, FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], FrontBusiness[bizId][OutZ]);
+}
+
+IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId)
+{
+	return FrontBusiness[bizId][Owner] == GetPlayerOrg(playerid);
 }
 
 GetFrontBusinessIcon(type)

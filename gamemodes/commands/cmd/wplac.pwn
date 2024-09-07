@@ -36,7 +36,7 @@ YCMD:wplac(playerid, params[], help)
     {
         if(gPlayerLogged[playerid] == 1)
         {
-	        if(PlayerInfo[playerid][pLocal] != 103 && !GraczBankomat(playerid))
+	        if(!IsAtBank(playerid) && !IsAtBankomat(playerid))
 	        {
           		sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie !");
 	            return 1;
@@ -47,7 +47,7 @@ YCMD:wplac(playerid, params[], help)
 				sendTipMessage(playerid, "U¿yj /wplac [kwota]");
 				format(string, sizeof(string), "Masz teraz $%d na swoim koncie.", PlayerInfo[playerid][pAccount]);
 				sendTipMessage(playerid, string);
-                if(GraczBankomat(playerid)) {
+                if(IsAtBankomat(playerid)) {
                     sendTipMessage(playerid, "UWAGA! Przy wp³atach przez bankomat prowizja to 6 procent!", COLOR_LIGHTBLUE);
                 }
 				return 1;
@@ -67,7 +67,7 @@ YCMD:wplac(playerid, params[], help)
 				return 1;
 			}
 
-			if(GraczBankomat(playerid)) {
+			if(IsAtBankomat(playerid)) {
 				bankomat_fee = floatround(((cashdeposit/100) * 6), floatround_round);
 			}
 
@@ -77,7 +77,7 @@ YCMD:wplac(playerid, params[], help)
 
 			Log(payLog, INFO, "%s wp³aci³ na swoje konto %d$. Koszt wp³aty %d, nowy stan %d$.", GetPlayerLogName(playerid), cashdeposit-bankomat_fee, bankomat_fee, PlayerInfo[playerid][pAccount]);
 
-            if(GraczBankomat(playerid)) {
+            if(IsAtBankomat(playerid)) {
                 format(string, sizeof(string), "Wp³aci³eœ $%d na swoje konto (prowizja %d), obecny stan to: $%d ", cashdeposit-bankomat_fee, bankomat_fee, PlayerInfo[playerid][pAccount]);
                 SendClientMessage(playerid, COLOR_YELLOW, string);
             } else {

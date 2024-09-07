@@ -55,6 +55,8 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ nazwê frakcji z: \"%s\" na: \"%s\".", GetNick(playerid), OrgInfo[org][o_Name], name));
+
 		SetOrgName(org, name);
 		TakeContraband(playerid, CHANGE_ORG_NAME_COST);
 		MruMessageGoodInfoF(playerid, "Zmieni³eœ nazwê swojej organizacji na %s, wykorzysta³eœ "#CHANGE_ORG_NAME_COST" paczkê kontrabandy.", name);
@@ -75,6 +77,8 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			MruMessageFail(playerid, "Zmiana motta organizacji kosztuje "#CHANGE_ORG_MOTTO_COST"$, a Ty tyle nie masz.");
 			return 1;
 		}
+
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ motto frakcji z: \"%s\" na: \"%s\".", GetNick(playerid), OrgInfo[org][o_Motto], motto));
 
 		SetOrgMotto(org, motto);
 		ZabierzKase(playerid, CHANGE_ORG_MOTTO_COST);
@@ -102,6 +106,8 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ kolor frakcji.", GetNick(playerid)));
+
 		color = (color << 8); // aplha channel
 		OrgInfo[org][o_Color] = color;
 		TakeContraband(playerid, CHANGE_ORG_COLOR_COST);
@@ -126,6 +132,8 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			}
 			return 1;
 		}
+
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ spawn frakcji.", GetNick(playerid)));
 
 		TakeContraband(playerid, CHANGE_ORG_SPAWN_COST);
 		SetOrgSpawnAtPlayerPos(playerid, org);
@@ -316,6 +324,8 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s odda³ frakcjê w rêce %s.", GetNick(playerid), GetNick(giveplayerid)));
+
 		TakeContraband(playerid, PASS_ORG_COST);
 		GivePlayerOrgRank(playerid, 9);
 		GivePlayerOrgRank(giveplayerid, 1000);
@@ -335,6 +345,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		RemovePlayerFromOrg(playerid);
 		RemoveOrganisation(org);
+
 		MruMessageBadInfo(playerid, "Usun¹³eœ swoj¹ organizacje wraz ca³ym maj¹tkiem i zwolni³eœ wszystkich cz³onków.");
 		Log(serverLog, INFO, "Lider %s rodziny %d usunal swoja organizacje.", GetPlayerLogName(playerid), org);
 	}

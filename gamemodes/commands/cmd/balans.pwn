@@ -30,25 +30,16 @@
 
 YCMD:balans(playerid, params[], help)
 {
-/*
 	new string[64];
-
-    if(IsPlayerConnected(playerid))
-    {
-		if(PlayerInfo[playerid][pLocal] == 103 || GraczBankomat(playerid))
-        {
-			format(string, sizeof(string), "Masz teraz $%d na swoim koncie.",PlayerInfo[playerid][pAccount]);
-			sendTipMessageEx(playerid, COLOR_YELLOW, string);
-		}
-		else
-		{
-			sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie !");
-            return 1;
-        }
-	}*/
-	if(IsPlayerConnected(playerid))
+	if(IsAtBank(playerid) || IsAtBankomat(playerid))
 	{
-		sendTipMessage(playerid, "U¿yj /kontobankowe (W skrócie /kb)"); 
+		format(string, sizeof(string), "Masz teraz $%d na swoim koncie.",PlayerInfo[playerid][pAccount]);
+		sendTipMessageEx(playerid, COLOR_YELLOW, string);
+	}
+	else
+	{
+		sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie !");
+		return 1;
 	}
 	return 1;
 }

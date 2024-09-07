@@ -40,8 +40,7 @@ YCMD:liderpomoc(playerid, params[], help)
 	}
 	else if(IsPlayerOrgLeader(playerid))
 	{
-		SendClientMessage(playerid, COLOR_GREEN,"___________________Lider____________________");
-		SendClientMessage(playerid, COLOR_WHITE, "Komendy: /pr /lidercar /liderranga /pracownicy");
+		ShowOrgLeaderCommands(playerid);
 	}
 	else
 	{

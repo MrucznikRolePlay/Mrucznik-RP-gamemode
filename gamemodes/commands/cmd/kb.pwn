@@ -38,7 +38,7 @@ YCMD:kb(playerid, params[], help)
 			new string[128];
 			if(PlayerInfo[playerid][pLevel] >= 3)
 			{
-				if(PlayerInfo[playerid][pLocal] == 103)
+				if(IsAtBank(playerid))
 				{
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);

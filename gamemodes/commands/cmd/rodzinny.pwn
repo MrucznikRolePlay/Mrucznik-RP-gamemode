@@ -64,7 +64,7 @@ YCMD:rodzinny(playerid, params[], help)
                 if(strlen(OrgRank[member][PlayerInfo[playerid][pRank]]) > 1) format(string, sizeof(string), "** %s %s: %s **", OrgRank[member][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
                 //Rangi podstawowe
                 else format(string, sizeof(string), "** %s %s: %s **", OrgRank[0][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
-				SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+				SendOrgMessage(member, TEAM_AZTECAS_COLOR, string);
 			}
             format(string, sizeof(string), "%s mówi przez radio: %s", GetNick(playerid), params);
 			ProxDetector(10.0, playerid, string,COLOR_FADE1,COLOR_FADE2,COLOR_FADE3,COLOR_FADE4,COLOR_FADE5);

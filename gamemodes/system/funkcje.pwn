@@ -2821,7 +2821,12 @@ IsAtHealingPlace(playerid)
 	return 0;
 }
 
-GraczBankomat(playerid)
+IsAtBank(playerid)
+{
+	return PlayerInfo[playerid][pLocal] == PLOCAL_INNE_BANK;
+}
+
+IsAtBankomat(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 2.5, 2127.66210938,-1153.92480469,23.48433304))
     {

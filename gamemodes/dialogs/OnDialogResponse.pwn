@@ -11402,14 +11402,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							poolStatus = 1;
 							sendTipMessage(playerid, "Otworzy³eœ basen Tsunami");
 							format(string, sizeof(string), "%s otworzy³ basen.", GetNick(playerid));
-							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
+							SendOrgMessage(43, TEAM_BLUE_COLOR, string);
 						}
 						else
 						{
 							poolStatus = 0;
 							sendTipMessage(playerid, "Zamkn¹³eœ basen Tsunami");
 							format(string, sizeof(string), "%s zamkn¹³ basen - Koniec p³ywania!", GetNick(playerid));
-							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
+							SendOrgMessage(43, TEAM_BLUE_COLOR, string);
 						
 						}
 					}

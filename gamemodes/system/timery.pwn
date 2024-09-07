@@ -1762,7 +1762,7 @@ public CustomPickups()
 			{
 				GameTextForPlayer(i, "~g~Wpisz ~w~/kamera-w ~g~aby ogladac kamere", 5000, 3);
 			}
-			else if (GraczBankomat(i))
+			else if (IsAtBankomat(i))
 			{
 				GameTextForPlayer(i, "~g~Uzyj ~w~/wplac ~g~lub ~w~/wyplac~n~ ~g~aby skorzystac z bankomatu", 5000, 3);
 			}

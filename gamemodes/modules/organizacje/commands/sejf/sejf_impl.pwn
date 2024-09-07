@@ -25,11 +25,19 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sejf_Impl(playerid)
 {
-	if(IsPlayerOrgLeader(playerid))
+    if(!IsPlayerOrgLeader(playerid))
     {
-		SejfR_Show(playerid);
+        noAccessMessage(playerid);
+        return 1;
     }
-	noAccessMessage(playerid);
+
+    if(!IsAtBank(playerid) && !IsAtBankomat(playerid) && !IsPlayerNearOwnFrontBusiness(playerid))
+    {
+        MruMessageFail(playerid, "Nie znajdujesz siê w banku / bankomacie / przejêtym biznesie-przykrywce!"); 
+        return 1;
+    }
+
+    SejfR_Show(playerid);
     return 1;
 }
 

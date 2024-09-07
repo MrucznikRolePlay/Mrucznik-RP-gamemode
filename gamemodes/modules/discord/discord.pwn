@@ -183,7 +183,7 @@ SendDiscordOrgMessage(orgid, message[])
 // 			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, textMsg);
 // 			utf8decode(dest, str);
 // 			strreplace(dest,"%","#");
-// 			SendNewFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
+// 			SendOrgMessage(i, TEAM_AZTECAS_COLOR, dest);
 // 			return 1;
 // 		}
 //     }

@@ -60,7 +60,7 @@ YCMD:fooc(playerid, params[], help)
                 if(strlen(OrgRank[member][PlayerInfo[playerid][pRank]]) > 1) format(string, sizeof(string), "** (( %s [%d] %s: %s. )) **", OrgRank[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
                 //Rangi podstawowe
                 else format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", OrgRank[0][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank], GetNickEx(playerid), params);
-                SendNewFamilyMessage(member, TEAM_AZTECAS_COLOR, string);
+                SendOrgMessage(member, TEAM_AZTECAS_COLOR, string);
 				SendDiscordOrgMessage(member, string);
 			}
             Log(chatLog, INFO, "%s radio rodziny %d OOC: %s", GetPlayerLogName(playerid), member, params);

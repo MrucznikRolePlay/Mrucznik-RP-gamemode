@@ -34,7 +34,7 @@ YCMD:wyplac(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(PlayerInfo[playerid][pLocal] == 103 || GraczBankomat(playerid))
+        if(IsAtBank(playerid) || IsAtBankomat(playerid))
         {
 			new cashdeposit;
 			if( sscanf(params, "s[32]", string))

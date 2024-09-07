@@ -35,7 +35,7 @@ YCMD:stan(playerid, params[], help)
     {
         if(gPlayerLogged[playerid] == 1)
         {
-	        if(PlayerInfo[playerid][pLocal] != 103 && !GraczBankomat(playerid))
+	        if(!IsAtBank(playerid) && !IsAtBankomat(playerid))
 	        {
           		sendTipMessage(playerid, "Nie jesteœ w Banku ani przy bankomacie!");
 	            return 1;

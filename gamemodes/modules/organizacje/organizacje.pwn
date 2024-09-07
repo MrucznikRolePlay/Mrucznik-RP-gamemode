@@ -25,6 +25,12 @@
 
 //
 //-----------------<[ Funkcje: ]>-------------------
+ShowOrgLeaderCommands(playerid)
+{
+    SendClientMessage(playerid, COLOR_GREEN,"___________________Lider____________________");
+    SendClientMessage(playerid, COLOR_WHITE, "Komendy: /pr /sejf /lidercar /liderranga /pracownicy");
+}
+
 LoadOrganisations()
 {
     new lQuery[256], rowCount, lRow;
@@ -231,7 +237,7 @@ GetPlayerRank(playerid)
     return PlayerInfo[playerid][pRank];
 }
 
-SendNewFamilyMessage(family, color, string[])
+SendOrgMessage(family, color, string[])
 {
     if(family == 0) return;
 

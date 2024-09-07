@@ -2092,7 +2092,7 @@ SetPlayerSpawnPos(playerid)
 			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
 			if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
 			else SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
-			if(GetPLocal(playerid) == PLOCAL_INNE_BANK || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
+			if(IsAtBank(playerid) || GetPLocal(playerid) == PLOCAL_FRAC_DMV)
 	        {
 				sendTipMessage(playerid, "W banku nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
 				SetPVarInt(playerid, "mozeUsunacBronie", 1);
