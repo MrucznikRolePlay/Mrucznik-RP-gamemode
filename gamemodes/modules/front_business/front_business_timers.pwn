@@ -160,4 +160,19 @@ ptask TakeoverCheck[1000](playerid)
 	}
 }
 
+ptask BusinessInfoTimer[1000](playerid)
+{
+	for(new i; i<sizeof(FrontBusiness); i++)
+	{
+		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][GangZoneArea]))
+		{
+			if(GetPlayerFrontBusinessProximity(playerid, i) < 3.0)
+			{
+				ShowFrontBusinessInfo(playerid, i);
+				return;
+			}
+		}
+	}
+}
+
 //end

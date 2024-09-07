@@ -74,5 +74,6 @@ new FrontBusiness[][eFrontBusinessInfo] = {
     }
 };
 //------------------<[ Forwardy: ]>--------------------
+forward Float:GetPlayerFrontBusinessProximity(playerid, bizId);
 
 //end

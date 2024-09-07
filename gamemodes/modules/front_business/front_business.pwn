@@ -208,7 +208,7 @@ IsPlayerAtFrontBusinnesZone(playerid)
 	return 0;
 }
 
-GetPlayerFrontBusinessProximity(playerid, bizId)
+Float:GetPlayerFrontBusinessProximity(playerid, bizId)
 {
 	return GetPlayerDistanceFromPoint(playerid, FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], FrontBusiness[bizId][OutZ]);
 }
@@ -216,6 +216,21 @@ GetPlayerFrontBusinessProximity(playerid, bizId)
 IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId)
 {
 	return FrontBusiness[bizId][Owner] == GetPlayerOrg(playerid);
+}
+
+ShowFrontBusinessInfo(playerid, bizId)
+{
+	new string[256], owner[32];
+	if(FrontBusiness[bizId][Owner] == 0)
+		strcat(owner, "Brak");
+	else
+		strcat(owner, OrgInfo[FrontBusiness[bizId][Owner]][o_Name]);
+
+	format(string, sizeof(string), "Biznes: %s~n~~w~Wlasciciel: ~b~%s~n~~w~Godzina przejecia: ~b~%02d:%02d~n~~w~Czas przejêcia: %d minut~n~~w~Bazowy zysk: ~b~%d$~n~~w~Bonus za gracza online: ~b~%d",
+		FrontBusiness[bizId][Name], owner,
+		FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60,
+		FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]);
+	GameTextForPlayer(playerid, string, 1100, 15);
 }
 
 GetFrontBusinessIcon(type)
