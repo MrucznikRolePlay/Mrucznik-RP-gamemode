@@ -13452,7 +13452,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         else
         {
-            if(!IsOrgValid(id)) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
+            if(!IsActiveOrg(id)) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "Wróæ");
         }
         SetPVarInt(playerid, "edit_rang_id", id);
         EDIT_ShowRangNames(playerid, typ, id, true);

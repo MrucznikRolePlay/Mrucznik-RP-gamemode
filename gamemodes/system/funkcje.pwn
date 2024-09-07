@@ -3824,7 +3824,7 @@ ShowStats2(playerid)
 	new org = GetPlayerOrg(playerid);
 	if(org != 0)
 	{
-		if(IsOrgValid(org)) format(plRodzina, 30, "Rodzina: %s",OrgInfo[org][o_Name]);
+		if(IsActiveOrg(org)) format(plRodzina, 30, "Rodzina: %s",OrgInfo[org][o_Name]);
 		//Przypisane rangi
 		if(strlen(OrgRank[GetPlayerOrg(playerid)][PlayerInfo[playerid][pRank]]) > 1)
 		{
@@ -4019,7 +4019,7 @@ ShowStats(playerid,targetid)
         format(ftext, 40, "%s", FractionNames[GetPlayerFraction(targetid)]);
 		new f2text[30];
 		new org = GetPlayerOrg(targetid);
-	    if(IsOrgValid(org))
+	    if(IsActiveOrg(org))
         {
             format(f2text, 30, "%s",OrgInfo[org][o_Name]);
         }

@@ -122,6 +122,50 @@ RemoveOrganisation(org)
     SaveOrg(org, ORG_SAVE_TYPE_DESC);
 }
 
+AccountOrgsCosts()
+{
+    new membersCost[MAX_ORG];
+
+    // members cost
+	new query[512];
+	format(query, sizeof(query), "SELECT UID, FMember FROM `mru_konta` WHERE FMember!=0");
+	mysql_query(query);
+	mysql_store_result();
+	if(mysql_num_rows()) 
+    {
+		while(mysql_fetch_row_format(query, "|")) 
+        {
+			new playerUID, org;
+			sscanf(query, "p<|>ii", playerUID, org);
+            
+            if(IsActiveOrg(org))
+            {
+                membersCost[org] += ORG_DAILY_MEMBER_COST;
+                AccountOrgBenefitForPlayerUID(playerUID, org, -ORG_DAILY_MEMBER_COST);
+            }
+		}
+	}
+	mysql_free_result();
+
+    for(new i=1; i<MAX_ORG; i++)
+    {
+        new cost = ORG_DAILY_COST + membersCost[i];
+        SejfR_Add(i, -cost);
+        Log(serverLog, INFO, "Dzienny koszt dla organizacji %d: %d$, nowy sejf: %d", i, cost, Sejf_Rodziny[i]);
+
+        if(Sejf_Rodziny[i] <= DELETE_ORG_THRESHOLD)
+        {
+            RemoveOrganisation(i);
+            Log(serverLog, INFO, "Organizacja zostala automatycznie usunieta z powodu dlugu %d$", Sejf_Rodziny[i]);
+        }
+    }
+}
+
+AccountOrgBenefitForPlayerUID(playerUID, org, benefit)
+{
+    Redis_IncrBy(sprintf("player:%d:org:%d:benefit", playerUID, org), benefit);
+}
+
 GetPlayerOrgType(playerid) 
 {
 	return GetOrgType(GetPlayerOrg(playerid));
@@ -129,11 +173,11 @@ GetPlayerOrgType(playerid)
 
 GetOrgType(id)
 {
-    if(!IsOrgValid(id)) return ORG_TYPE_INACTIVE;
+    if(!IsActiveOrg(id)) return ORG_TYPE_INACTIVE;
     return OrgInfo[id][o_Type];
 }
 
-IsOrgValid(id)
+IsActiveOrg(id)
 {
     if(id <= 0 || id >= MAX_ORG) return 0;
     if(OrgInfo[id][o_Type] == ORG_TYPE_INACTIVE) return 0;
@@ -154,7 +198,7 @@ GetFreeOrgSlot()
 
 InvitePlayerToOrg(playerid, org, rank=0)
 {
-    if(!IsOrgValid(org)) return 0;
+    if(!IsActiveOrg(org)) return 0;
 
     PlayerInfo[playerid][pOrg] = org;
 	if(OrgSkins[org][0] > 0)
@@ -175,14 +219,14 @@ RemovePlayerFromOrg(playerid)
     PlayerInfo[playerid][pUniform] = 0;
 	MruMySQL_SavePlayerOrganisation(playerid);
 
-    if(!IsOrgValid(org)) return 0;
+    if(!IsActiveOrg(org)) return 0;
     MruMessageBadInfoF(playerid, "Zosta³eœ wyrzucony z organizacji %s.", OrgInfo[org][o_Name]);
     return 1;
 }
 
 SetOrgName(org, name[])
 {
-    if(!IsOrgValid(org)) return 0;
+    if(!IsActiveOrg(org)) return 0;
 
     format(OrgInfo[org][o_Name], 32, "%s", name);
     SaveOrg(org, ORG_SAVE_TYPE_DESC);
@@ -191,7 +235,7 @@ SetOrgName(org, name[])
 
 SetOrgMotto(org, motto[])
 {
-    if(!IsOrgValid(org)) return 0;
+    if(!IsActiveOrg(org)) return 0;
 
     format(OrgInfo[org][o_Motto], 128, "%s", motto);
     SaveOrg(org, ORG_SAVE_TYPE_DESC);
@@ -200,7 +244,7 @@ SetOrgMotto(org, motto[])
 
 SetOrgSpawnAtPlayerPos(playerid, org)
 {
-    if(!IsOrgValid(org)) return 0;
+    if(!IsActiveOrg(org)) return 0;
 
     GetPlayerPos(playerid, OrgInfo[org][o_Spawn][0], OrgInfo[org][o_Spawn][1], OrgInfo[org][o_Spawn][2]);
     GetPlayerFacingAngle(playerid, OrgInfo[org][o_Spawn][3]);
@@ -211,7 +255,7 @@ SetOrgSpawnAtPlayerPos(playerid, org)
 GivePlayerOrgRank(playerid, rank)
 {
     new org = PlayerInfo[playerid][pOrg];
-    if(!IsOrgValid(org)) return 0;
+    if(!IsActiveOrg(org)) return 0;
 
     PlayerInfo[playerid][pRank] = rank;
 	MruMySQL_SetAccInt("Rank", GetNickEx(playerid), rank);
@@ -226,7 +270,7 @@ GetPlayerOrg(playerid)
 IsPlayerOrgLeader(playerid, checkOrg=-1)
 {
     new org = GetPlayerOrg(playerid);
-    if(!IsOrgValid(org)) return false;
+    if(!IsActiveOrg(org)) return false;
     if(checkOrg != -1 && checkOrg != org) return false;
 
     return GetPlayerRank(playerid) == MAIN_LEADER_RANK;

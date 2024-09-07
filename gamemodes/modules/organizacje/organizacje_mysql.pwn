@@ -30,7 +30,7 @@
 MruMySQL_RemoveOrgAssets(org)
 {
     new string[128];
-    format(string, sizeof(string), "UPDATE `mru_konta` SET `FMember`=0, `Rank`=0 WHERE `FMember`='%d'", org);
+    format(string, sizeof(string), "UPDATE `mru_konta` SET `FMember`=0, `Member`=99, `Rank`=99 WHERE `FMember`='%d'", org);
     mysql_query(string);
 
     format(string, sizeof(string), "REMOVE FROM `mru_pojazdy` WHERE `ownertype`=2 AND `owner`=%d", org);

@@ -3605,6 +3605,8 @@ PayDay()
 			}
 	    }
 		ZapiszDomy();
+
+		AccountOrgsCosts();
 	}
 	else if(shifthour == 4)
 	{

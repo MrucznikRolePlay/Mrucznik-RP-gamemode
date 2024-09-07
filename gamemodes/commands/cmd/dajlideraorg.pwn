@@ -43,7 +43,7 @@ YCMD:dajlideraorg(playerid, params[], help)
     new str[128];
     if(id != -1)
     {
-		if(IsOrgValid(family))
+		if(IsActiveOrg(family))
 		{
 			format(str, sizeof(str), "Admin %s da³ Tobie kontrolê nad rodzin¹ %s (%d) - /pr", GetNickEx(playerid), OrgInfo[family][o_Name], family);
 			SendClientMessage(id, COLOR_LIGHTBLUE, str);

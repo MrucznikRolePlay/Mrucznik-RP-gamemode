@@ -36,7 +36,7 @@ command_orgs_Impl(playerid, orgid)
         return 1;
     }
     
-    if(!IsOrgValid(orgid)) return 1;
+    if(!IsActiveOrg(orgid)) return 1;
     format(string, sizeof(string), "|| Cz³onkowie ONLINE w %s ||", OrgInfo[orgid][o_Name]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
     foreach(new i : Player)
@@ -62,7 +62,7 @@ cmd_organizacje_OnDialogResp(playerid, dialogid, response, listitem, inputtext[]
         new string[512];
         for(new i=0;i<MAX_ORG;i++)
         {
-            if(!IsOrgValid(i)) continue;
+            if(!IsActiveOrg(i)) continue;
             if(GetOrgType(i) == listitem)
             {
                 format(string, sizeof(string), "%s{000000}%d\t{FFFFFF}%s\n", string, i, OrgInfo[i][o_Name]);

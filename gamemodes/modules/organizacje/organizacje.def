@@ -45,4 +45,6 @@
 #define CHANGE_ORG_SPAWN_COST 1
 #define PASS_ORG_COST 50
 
+#define DELETE_ORG_THRESHOLD -100_000
+
 //end

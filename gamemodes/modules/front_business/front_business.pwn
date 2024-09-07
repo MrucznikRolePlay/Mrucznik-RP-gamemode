@@ -169,7 +169,7 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 	SendOrgMessage(org, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
 	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
 
-	if(IsOrgValid(oldOwner))
+	if(IsActiveOrg(oldOwner))
 	{
 		SendOrgMessage(oldOwner, COLOR_PANICRED, "TRAGEDIA!");
 		SendOrgMessage(oldOwner, COLOR_PANICRED, sprintf("Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));

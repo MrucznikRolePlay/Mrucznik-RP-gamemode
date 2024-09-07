@@ -51,7 +51,7 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
 			new org = GetPlayerOrg(playerid);
-			if(!IsOrgValid(org))
+			if(!IsActiveOrg(org))
 			{
 				return;
 			}
