@@ -1,0 +1,29 @@
+{
+    "name": "orgpanel",
+    "description": "Panel lidera organizacji przestêpczej.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "pr",
+        "panelrodziny",
+        "panelorganizacji",
+        "panelorg",
+        "rpanel"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "16",
+            "name": "action",
+            "description": "nazwa/motto/kolor/spawn/przyjmij/zwolnij/ranga/pracownicy/oddaj/usun"
+        },
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "parametry akcji",
+            "defaultValue": ""
+        }
+    ],
+    "date": "07.09.2024"
+}

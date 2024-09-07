@@ -323,8 +323,6 @@
 #include "cmd/pomoc2.pwn"
 #include "cmd/pomocdom.pwn"
 #include "cmd/pozwolenie.pwn"
-#include "cmd/pr.pwn"
-#include "cmd/pracownicy.pwn"
 #include "cmd/przebierz.pwn"
 #include "cmd/przejazd.pwn"
 #include "cmd/przelew.pwn"

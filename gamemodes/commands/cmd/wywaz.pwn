@@ -101,7 +101,7 @@ YCMD:wywaz(playerid, params[], help)
 		}
 		else
 		{
-		    sendErrorMessage(playerid, "Nie ma takiego gracza !");
+		    sendErrorMessage(playerid, "Nie ma takiego gracza!");
 		    return 1;
 		}
 	}

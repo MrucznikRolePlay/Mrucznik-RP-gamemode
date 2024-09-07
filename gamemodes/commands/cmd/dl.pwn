@@ -51,7 +51,7 @@ YCMD:dl(playerid, params[], help)
 								
 				if(!IsPlayerConnected(giveplayerid))
 				{
-					sendErrorMessage(playerid, "Nie ma takiego gracza !");
+					sendErrorMessage(playerid, "Nie ma takiego gracza!");
 					return 1;
 				}
 				
@@ -133,7 +133,7 @@ YCMD:dl(playerid, params[], help)
 							}
 							else
 							{
-							    sendErrorMessage(playerid, "Nie ma takiego gracza !");
+							    sendErrorMessage(playerid, "Nie ma takiego gracza!");
 							    return 1;
 							}
 	                    }
@@ -181,7 +181,7 @@ YCMD:dl(playerid, params[], help)
 							}
 							else
 							{
-							    sendErrorMessage(playerid, "Nie ma takiego gracza !");
+							    sendErrorMessage(playerid, "Nie ma takiego gracza!");
 							    return 1;
 							}
 						}
@@ -227,7 +227,7 @@ YCMD:dl(playerid, params[], help)
 						}
 						else
 						{
-						    sendErrorMessage(playerid, "Nie ma takiego gracza !");
+						    sendErrorMessage(playerid, "Nie ma takiego gracza!");
 						    return 1;
 						}
 					}
@@ -270,7 +270,7 @@ YCMD:dl(playerid, params[], help)
 							}
 							else
 							{
-							    sendErrorMessage(playerid, "Nie ma takiego gracza !");
+							    sendErrorMessage(playerid, "Nie ma takiego gracza!");
 							    return 1;
 							}
 						}

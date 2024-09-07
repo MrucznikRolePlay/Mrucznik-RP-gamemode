@@ -1,5 +1,5 @@
-//-----------------------------------------------<< MySQL >>-------------------------------------------------//
-//                                                organizacje                                                //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                 pracownicy                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,28 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 15.05.2019
-//Opis:
-/*
-	System organizacji przestêpczych.
-*/
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ MySQL: ]>--------------------
 
-MruMySQL_RemoveOrgAssets(org)
+//-------<[ include ]>-------
+#include "pracownicy_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_pracownicy()
 {
-    new string[128];
-    format(string, sizeof(string), "UPDATE `mru_konta` SET `FMember`=0, `Rank`=0 WHERE `FMember`='%d'", org);
-    mysql_query(string);
+    new command = Command_GetID("pracownicy");
 
-    format(string, sizeof(string), "REMOVE FROM `mru_pojazdy` WHERE `ownertype`=2 AND `owner`=%d", org);
-    mysql_query(string);
+    //aliases
+    Command_AddAlt(command, "czlonkowie");
+    
 
-    format(string, sizeof(string), "UPDATE `mru_strefy` SET `gang`=0 WHERE `gang`='%d'", org);
-    mysql_query(string);
+    //permissions
+    
+
+    //prefix
+    
 }
 
-//end
+//-------<[ command ]>-------
+YCMD:pracownicy(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Lista pracowników frakcji/organizacji w której jesteœ.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_pracownicy_Impl(playerid);
+}

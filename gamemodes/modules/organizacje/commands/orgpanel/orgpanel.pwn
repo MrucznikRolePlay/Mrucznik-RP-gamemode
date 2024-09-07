@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Komenda >>-----------------------------------------------//
-//-----------------------------------------------[ pracownicy ]----------------------------------------------//
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  orgpanel                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,37 +16,56 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-// Opis:
-/*
-	
-*/
+// ================= UWAGA! =================
+//
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-// Notatki skryptera:
-/*
-	
-*/
+//-------<[ include ]>-------
+#include "orgpanel_impl.pwn"
 
-YCMD:pracownicy(playerid, params[], help)
+//-------<[ initialize ]>-------
+command_orgpanel()
 {
-    new frac = GetPlayerFraction(playerid);
-	new string[64];
-	if(frac != 0 && PlayerInfo[playerid][pRank] >= 1)
-	{
-	    SendClientMessage(playerid, COLOR_GREEN, "Pracownicy Online:");
-		foreach(new i : Player)
-		{
-		    if(frac == GetPlayerFraction(i))
-		    {
-		        format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][pRank]);
-		        SendClientMessage(playerid, COLOR_GRAD1, string);
-		    }
-		}
-	}
-	else
-	{
-	    sendErrorMessage(playerid, "Nie jesteœ liderem lub osob¹ z 1 rang¹!");
-	}
-	return 1;
+    new command = Command_GetID("orgpanel");
+
+    //aliases
+    Command_AddAlt(command, "pr");
+    Command_AddAlt(command, "panelrodziny");
+    Command_AddAlt(command, "panelorganizacji");
+    Command_AddAlt(command, "panelorg");
+    Command_AddAlt(command, "rpanel");
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:orgpanel(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Panel lidera organizacji przestêpczej.");
+        return 1;
+    }
+    //fetching params
+    new action[16], param[256];
+    if(sscanf(params, "s[16]S()[256]", action, param))
+    {
+        sendTipMessage(playerid, "U¿yj /orgpanel [nazwa/motto/kolor/spawn/przyjmij/zwolnij/ranga/stworzrange/pracownicy/oddaj/usun] [parametry akcji] ");
+        return 1;
+    }
+    
+    //command body
+    return command_orgpanel_Impl(playerid, action, param);
 }

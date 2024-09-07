@@ -32,6 +32,8 @@
 //-------<[ include ]>-------
 #include "otworz\otworz.pwn"
 #include "zamknij\zamknij.pwn"
+#include "pracownicy\pracownicy.pwn"
+#include "orgpanel\orgpanel.pwn"
 #include "orgs\orgs.pwn"
 
 
@@ -40,6 +42,8 @@ hook OnGameModeInit()
 {
     command_otworz();
     command_zamknij();
+    command_pracownicy();
+    command_orgpanel();
     command_orgs();
     
 }

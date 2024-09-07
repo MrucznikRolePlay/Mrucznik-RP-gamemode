@@ -82,7 +82,7 @@ YCMD:pjtest(playerid, params[], help)
     		}
     		else {sendErrorMessage(playerid, "Ten gracz jest w trakcie testu !"); return 1;}
 		}
-	    else {sendErrorMessage(playerid, "Nie ma takiego gracza !"); return 1;}
+	    else {sendErrorMessage(playerid, "Nie ma takiego gracza!"); return 1;}
 	}
 	else
 	{

@@ -57,7 +57,7 @@ YCMD:zabierz(playerid, params[], help)
 
 			if(!IsPlayerConnected(giveplayerid))
 			{
-				sendErrorMessage(playerid, "Nie ma takiego gracza !");
+				sendErrorMessage(playerid, "Nie ma takiego gracza!");
 				return 1;
 			}
 

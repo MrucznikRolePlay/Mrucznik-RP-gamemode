@@ -61,7 +61,7 @@ YCMD:rozwiaz(playerid, params[], help)
 
 	if(giveplayerid == INVALID_PLAYER_ID || !IsPlayerConnected(giveplayerid))
 	{
-		sendErrorMessage(playerid, "Nie ma takiego gracza !");
+		sendErrorMessage(playerid, "Nie ma takiego gracza!");
 		return 1;
 	}
 	if (!ProxDetectorS(8.0, playerid, giveplayerid))

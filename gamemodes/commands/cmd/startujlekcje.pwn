@@ -80,7 +80,7 @@ YCMD:startujlekcje(playerid, params[], help)
 			}
 			else
 			{
-			    sendTipMessageEx(playerid, COLOR_GREY, "Nie ma takiego gracza !");
+			    sendTipMessageEx(playerid, COLOR_GREY, "Nie ma takiego gracza!");
 			    return 1;
 			}
         }

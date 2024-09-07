@@ -1878,7 +1878,7 @@ public OnPlayerSpawn(playerid)
     if(PlayerInfo[playerid][pRank] == 99 && PlayerInfo[playerid][pMember] == 99) {
         PlayerInfo[playerid][pRank] = 0;
         PlayerInfo[playerid][pMember] = 0;
-        PlayerInfo[playerid][pMember] = 0;
+        PlayerInfo[playerid][pOrg] = 0;
         PlayerInfo[playerid][pRank] = 0;
         PlayerInfo[playerid][pUniform] = 0;
         SecretAgent[playerid] = 0;
@@ -4161,7 +4161,7 @@ OnPlayerLogin(playerid, password[])
 	new org = GetPlayerOrg(playerid);
 	if(org != 0)
 	{
-		SendClientMessage(playerid, OrgInfo[org][o_Color], sprintf("Rodzina MOTD: %s.", OrgInfo[org][o_Motd]));
+		SendClientMessage(playerid, OrgInfo[org][o_Color], sprintf("Rodzina MOTD: %s.", OrgInfo[org][o_Motto]));
 	}
 
 	//Teleportacja do poprzedniej pozycji:

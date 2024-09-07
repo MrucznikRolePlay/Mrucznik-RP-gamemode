@@ -40,7 +40,7 @@ new OrgTypes[][16] = {
 enum eOrg {
     o_Type,
     o_Name[32],
-    o_Motd[128],
+    o_Motto[128],
     o_Color,
     Float:o_Spawn[4],
     o_Int,
@@ -49,7 +49,7 @@ enum eOrg {
 
 //-----------------<[ Zmienne: ]>-------------------
 new OrgInfo[MAX_ORG][eOrg];
-new OrgRank[MAX_ORG][MAX_RANG][MAX_RANG_LEN];   //4kB
+new OrgRank[MAX_ORG][MAX_RANG][MAX_RANG_LEN];
 new OrgSkins[MAX_ORG][MAX_SKIN_SELECT];
 
 //------------------<[ Forwardy: ]>--------------------
