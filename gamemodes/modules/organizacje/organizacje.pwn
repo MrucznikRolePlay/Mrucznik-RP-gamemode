@@ -166,6 +166,13 @@ AccountOrgBenefitForPlayerUID(playerUID, org, benefit)
     Redis_IncrBy(sprintf("player:%d:org:%d:benefit", playerUID, org), benefit);
 }
 
+GetPlayerOrgBenefit(playerUID, org)
+{
+    new benefit;
+    Redis_GetInt(RedisClient, sprintf("player:%d:org:%d:benefit", playerUID, org), benefit);
+    return benefit;
+}
+
 GetPlayerOrgType(playerid) 
 {
 	return GetOrgType(GetPlayerOrg(playerid));

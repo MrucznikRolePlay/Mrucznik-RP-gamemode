@@ -376,7 +376,8 @@ ShowMemberList(playerid, org)
 			} else {
 				format(str_rank, sizeof(str_rank), "[%i] %s", rank, OrgRank[GetPlayerOrg(playerid)][rank]);
 			}
-			AddDialogListitem(playerid, "%s\t%s\t{%s}%s", nick, str_rank, isconnected ? ("00FF00") : ("FF0000"), isconnected ? ("ONLINE") : ("OFFLINE"));
+			new benefit = GetPlayerOrgBenefit(uid, org);
+			AddDialogListitem(playerid, "%s\t%s\t%s%d$\t{%s}%s", nick, str_rank, benefit > 0 ? ("00FF00") : ("FF0000"), benefit, isconnected ? ("00FF00") : ("FF0000"), isconnected ? ("ONLINE") : ("OFFLINE"));
 			VECTOR_push_back_val(VMembersOrg[playerid], uid);
 		}
 		ShowPlayerDialogPages(playerid, "RodzinaPracownicy", DIALOG_STYLE_TABLIST, sprintf("Cz³onkowie %s", OrgInfo[org][o_Name]), "OK", "Zamknij", 15, "{888888}Nastêpna strona >>>", "{888888}<<< Poprzednia strona");
@@ -393,7 +394,7 @@ DialogPages:RodzinaPracownicy(playerid, response, listitem, inputtext[]) {
 	foreach(new i: Player) {
 		if(PlayerInfo[i][pUID] == uid) {
 			sendTipMessage(playerid, "Gracz jest online, uzyj /pr aby nim zarz¹dzaæ");
-			Command_ReProcess(playerid, "pr pracownicy", false);
+			Command_ReProcess(playerid, "orgpanel pracownicy", false);
 			return 1;
 		}
 	}
@@ -407,13 +408,16 @@ DialogPages:RodzinaPracownicy(playerid, response, listitem, inputtext[]) {
     lider = rank > 1000;
 	if (lider) {
 		sendTipMessage(playerid, "Nie mo¿esz zarz¹dzaæ liderem!");
-		Command_ReProcess(playerid, "pr pracownicy", false);
+		Command_ReProcess(playerid, "orgpanel pracownicy", false);
 		return 1;
 	}
 	SetPVarInt(playerid, "prpanel_uid", uid);
-	strcat(rankName, OrgRank[GetPlayerOrg(playerid)][rank]);
+	new org = GetPlayerOrg(playerid);
+	new benefit = GetPlayerOrgBenefit(uid, org);
+	strcat(rankName, OrgRank[org][rank]);
     format(str, sizeof(str), ""#KARA_STRZALKA"    »» "#KARA_TEKST"Nick: "#KARA_TEKST"%s", nick);
     format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Ranga: "#KARA_TEKST"%s", str, rankName);
+    format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Przychod z org: "#KARA_TEKST"%d", str, benefit);
     format(str, sizeof(str), "%s\n ", str);
     format(str, sizeof(str), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Wyrzuæ cz³onka", str);  
     format(str, sizeof(str), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Zmieñ rangê", str);  
@@ -438,7 +442,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			switch(listitem) 
 			{
-				case 3: 
+				case 4: 
 				{ // zwolnij
 					new uid = GetPVarInt(playerid, "prpanel_uid");
 					new nick[MAX_PLAYER_NAME];
@@ -457,7 +461,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
 					DeletePVar(playerid, "prpanel_uid");
 				}
-				case 4: 
+				case 5: 
 				{ // ranga
 					new org = GetPlayerOrg(playerid);
 					new str[512];
@@ -473,14 +477,14 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				default:
 				{
-					Command_ReProcess(playerid, "pr pracownicy", false);
+					Command_ReProcess(playerid, "orgpanel pracownicy", false);
 				}
 			}
 		} 
 		else 
 		{
 			DeletePVar(playerid, "prpanel_uid");
-			Command_ReProcess(playerid, "pr pracownicy", false);
+			Command_ReProcess(playerid, "orgpanel pracownicy", false);
 		}
 		return 1;
 	}
@@ -500,7 +504,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
 				DeletePVar(playerid, "prpanel_uid");
-				Command_ReProcess(playerid, "pr pracownicy", false);
+				Command_ReProcess(playerid, "orgpanel pracownicy", false);
 				return 1;
 			}
 			new uid = GetPVarInt(playerid, "prpanel_uid");
@@ -521,7 +525,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
 		}
 		DeletePVar(playerid, "fpanel_uid");
-		Command_ReProcess(playerid, "pr pracownicy", false);
+		Command_ReProcess(playerid, "orgpanel pracownicy", false);
 		return 1;
 	}
 	return 0;
