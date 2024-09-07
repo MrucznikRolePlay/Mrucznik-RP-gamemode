@@ -182,30 +182,31 @@ przemyt_StagePickup(playerid, actionID)
 
 przemyt_StageDrop(playerid, actionID)
 {
+    #pragma unused playerid, actionID // TODO
     return 1;
 }
 
 przemyt_StageGather(playerid, actionID)
 {
-
+    #pragma unused playerid, actionID // TODO
     return 1;
 }
 
 przemyt_StageDocuments(playerid, actionID)
 {
-
+    #pragma unused playerid, actionID // TODO
     return 1;
 }
 
 przemyt_StageSend(playerid, actionID)
 {
-
+    #pragma unused playerid, actionID // TODO
     return 1;
 }
 
 przemyt_StageDelivered(playerid, actionID)
 {
-
+    #pragma unused playerid, actionID // TODO
     return 1;
 }
 
