@@ -3,7 +3,7 @@
     "description": "Pokazuje liste organizacji i ich pracowników.",
     "permissions": [],
     "author": "mrucznik",
-    "aliases": ["organizacje"],
+    "aliases": ["organizacje", "rodziny", "biznesy", "mafie", "gangi"],
     "parameters": [
         {
             "type": "integer",

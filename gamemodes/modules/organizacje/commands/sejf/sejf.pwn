@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                organizacje                                                //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                    sejf                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 15.05.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define ORG_SAVE_TYPE_BASIC 1
-#define ORG_SAVE_TYPE_DESC  2
 
-#define MAX_MEMBER_RANK 8
-#define MAIN_LEADER_RANK 9
+//-------<[ include ]>-------
+#include "sejf_impl.pwn"
 
-#define ORG_SPAWN_BUSINESS_PROXIMITY_MAX 100
-#define ORG_SPAWN_BUSINESS_PROXIMITY_MIN 30
+//-------<[ initialize ]>-------
+command_sejf()
+{
+    new command = Command_GetID("sejf");
 
-#define CREATE_ORG_COST 5_000_000
-#define CREATE_ORG_CONTRABAND_COST 100
+    //aliases
+    Command_AddAlt(command, "sejfr");
+    
 
-#define JOIN_MEMBER_COST 10000
-#define CHANGE_ORG_NAME_COST 1
-#define CHANGE_ORG_MOTTO_COST 2000
-#define CHANGE_ORG_COLOR_COST 1
-#define CHANGE_ORG_SPAWN_COST 1
-#define PASS_ORG_COST 50
+    //permissions
+    
 
-//end
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:sejf(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Sejf organizacji");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_sejf_Impl(playerid);
+}

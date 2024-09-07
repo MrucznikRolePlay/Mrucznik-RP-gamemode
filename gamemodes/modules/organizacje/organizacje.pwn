@@ -68,6 +68,23 @@ SaveOrg(id, savetype)
     return 1;
 }
 
+CreateOrganisation(org, name[32], color, type)
+{
+    OrgInfo[org][o_Type] = type;
+    format(OrgInfo[org][o_Name], 32, name);
+    format(OrgInfo[org][o_Motto], 128, "");
+    OrgInfo[org][o_Color] = color << 8;
+    OrgInfo[org][o_Spawn][0] = 5229.6646; // TODO: change to little haiti
+    OrgInfo[org][o_Spawn][1] = -2227.3933;
+    OrgInfo[org][o_Spawn][2] = 6.5385;
+    OrgInfo[org][o_Spawn][3] = 252.4531;
+    OrgInfo[org][o_Int] = 0;
+    OrgInfo[org][o_VW] = 0;
+
+    SaveOrg(org, ORG_SAVE_TYPE_BASIC);
+    SaveOrg(org, ORG_SAVE_TYPE_DESC);
+}
+
 RemoveOrganisation(org)
 {
     foreach(new i : Player)
@@ -80,6 +97,10 @@ RemoveOrganisation(org)
     }
 
     MruMySQL_RemoveOrgAssets(org);
+
+    Sejf_Rodziny[org] = 0;
+    Rodzina_Mats[org] = 0;
+    SejfR_Save(org);
 
     OrgInfo[org][o_Type] = ORG_TYPE_INACTIVE;
     format(OrgInfo[org][o_Name], 32, "");
@@ -115,7 +136,7 @@ IsOrgValid(id)
 
 GetFreeOrgSlot()
 {
-    for(new i=0; i<MAX_ORG; i++)
+    for(new i=1; i<MAX_ORG; i++)
     {
         if(OrgInfo[i][o_Type] == ORG_TYPE_INACTIVE)
         {
@@ -125,7 +146,7 @@ GetFreeOrgSlot()
     return -1;
 }
 
-InvitePlayerToOrg(playerid, org, leader=false)
+InvitePlayerToOrg(playerid, org, rank=0)
 {
     if(!IsOrgValid(org)) return 0;
 
@@ -134,16 +155,8 @@ InvitePlayerToOrg(playerid, org, leader=false)
 	{
 		PlayerInfo[playerid][pUniform] = OrgSkins[org][0];
 	}
-    if(leader)
-    {
-        PlayerInfo[playerid][pRank] = 1000;
-    }
-    else
-    {
-        PlayerInfo[playerid][pRank] = 0;
-    }
+    PlayerInfo[playerid][pRank] = rank;
 
-    MruMessageGoodInfoF(playerid, "Zosta³eœ przyjêty do organizacji %s.", OrgInfo[org][o_Name]);
 	MruMySQL_SavePlayerOrganisation(playerid);
     return 1;
 }
@@ -210,7 +223,7 @@ IsPlayerOrgLeader(playerid, checkOrg=-1)
     if(!IsOrgValid(org)) return false;
     if(checkOrg != -1 && checkOrg != org) return false;
 
-    return GetPlayerRank(playerid) >= 1000;
+    return GetPlayerRank(playerid) == MAIN_LEADER_RANK;
 }
 
 GetPlayerRank(playerid)

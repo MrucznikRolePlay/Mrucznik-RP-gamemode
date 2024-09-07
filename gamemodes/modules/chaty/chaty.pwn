@@ -42,6 +42,11 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
+MruMessageFail(playerid, message[])
+{
+    MruMessage(playerid, COLOR_FAIL, sprintf("»» %s", message));
+}
+
 CheckStars(const text[])
 {
     new Message[256];

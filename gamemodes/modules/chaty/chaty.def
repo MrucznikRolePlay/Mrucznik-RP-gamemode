@@ -25,7 +25,7 @@
 //Wiadomoœci serwerowe:
 #define MruMessageError(%0,%1) 			MruMessage(%0,COLOR_WHITE,"[ERROR] {C00010}"%1)
 #define MruMessageWarning(%0,%1) 		MruMessage(%0,COLOR_WHITE,"[WARNING] {F09040}"%1)
-#define MruMessageFail(%0,%1) 			MruMessage(%0,COLOR_FAIL,"»» "%1)
+// #define MruMessageFail(%0,%1) 			MruMessage(%0,COLOR_FAIL,"»» "%1) // caused literal table overflow :/
 #define MruMessageTip(%0,%1) 			MruMessage(%0,COLOR_TIP,"»» "%1)
 #define MruMessageInfo(%0,%1) 			MruMessage(%0,COLOR_INFO,"»» "%1)
 #define MruMessageGoodInfo(%0,%1) 		MruMessage(%0,COLOR_GINFO,"»» "%1)

@@ -38,7 +38,7 @@ YCMD:dajlideraorg(playerid, params[], help)
     {
         if(!IsPlayerConnected(id)) return sendErrorMessage(playerid, "Brak takiego gracza!");
         if(GetPlayerFraction(id) != 0 || GetPlayerOrg(id) != 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Ten gracz ma frakcje lub rodzine!");
-        InvitePlayerToOrg(id, family, true);
+        InvitePlayerToOrg(id, family, MAIN_LEADER_RANK);
     }
     new str[128];
     if(id != -1)

@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                    orgs                                                   //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   kuporg                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,56 +16,55 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 07.09.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "orgs_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_orgs()
+//------------------<[ Implementacja: ]>-------------------
+command_kuporg_Impl(playerid, name[32], color, orgType)
 {
-    new command = Command_GetID("orgs");
-
-    //aliases
-    Command_AddAlt(command, "organizacje");
-    Command_AddAlt(command, "rodziny");
-    Command_AddAlt(command, "biznesy");
-    Command_AddAlt(command, "mafie");
-    Command_AddAlt(command, "gangi");
-    
-
-    //permissions
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:orgs(playerid, params[], help)
-{
-    if (help)
+    if(kaska[playerid] < CREATE_ORG_COST)
     {
-        sendTipMessage(playerid, "Pokazuje liste organizacji i ich pracowników.");
+        MruMessageFail(playerid, "Stworzenie organizacji kosztuje "#CREATE_ORG_COST"$, a Ty tyle nie masz.");
         return 1;
     }
-    //fetching params
-    new orgid;
-    if(sscanf(params, "D(-1)", orgid))
+
+    if(GetContraband(playerid) < CREATE_ORG_CONTRABAND_COST)
     {
-        sendTipMessage(playerid, "U¿yj /orgs [id organizacji] ");
+        MruMessageFail(playerid, "Stworzenie organizacji kosztuje "#CREATE_ORG_CONTRABAND_COST" kontrabandy, a Ty tyle nie masz.");
         return 1;
     }
-    
-    //command body
-    return command_orgs_Impl(playerid, orgid);
+
+    if(orgType != ORG_TYPE_GANG && orgType != ORG_TYPE_MAFIA)
+    {
+        MruMessageFail(playerid, "Dostêpne typy organizacji: 1 - Gang, 2 - Mafia.");
+        return 1;
+    }
+
+    new org = GetFreeOrgSlot();
+    if(org <= 0)
+    {
+        MruMessageFail(playerid, "Aktualnie nie ma wolnego slotu na organizacje.");
+        return 1;
+    }
+
+    if(GetPlayerFraction(playerid) != 0 || GetPlayerOrg(playerid) != 0 || GetPlayerJob(playerid) != 0)
+    {
+        MruMessageFail(playerid, "By zostaæ liderem organizacji nie mo¿esz byæ we frakcji/organizacji/pracy.");
+        return 1;
+    }
+
+    CreateOrganisation(org, name, color, orgType);
+    InvitePlayerToOrg(playerid, org, MAIN_LEADER_RANK);
+
+    ZabierzKase(playerid, CREATE_ORG_COST);
+    TakeContraband(playerid, CREATE_ORG_CONTRABAND_COST);
+
+    MruMessageGoodInfoF(playerid, "Gratulacje! Stworzy³eœ now¹ organizacjê o nazwie \"%s\" i typie %s", name, OrgTypes[orgType]);
+    MruMessageGoodInfo(playerid, "Aby zobaczyæ dostêpne komendy wpisz /liderpomoc. Udanego liderownia!");
+    return 1;
 }
+
+//end

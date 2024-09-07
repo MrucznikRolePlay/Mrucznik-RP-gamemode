@@ -176,6 +176,23 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 	}
 }
 
+IsPlayerAtFrontBusinnesZone(playerid)
+{
+	for(new i; i<sizeof(FrontBusiness); i++)
+	{
+		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][GangZoneArea]))
+		{
+			return i;
+		}
+	}
+	return 0;
+}
+
+GetPlayerFrontBusinessProximity(playerid, bizId)
+{
+	return GetPlayerDistanceFromPoint(playerid, FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], FrontBusiness[bizId][OutZ]);
+}
+
 GetFrontBusinessIcon(type)
 {
 	switch(type)

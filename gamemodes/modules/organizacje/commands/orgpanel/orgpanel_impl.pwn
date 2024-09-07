@@ -87,6 +87,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		if( sscanf(params, "h", color))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel kolor [kolor rodziny w formacie hex (np. F1A151)]");
+			sendTipMessage(playerid, "Koszt komendy: "#CHANGE_ORG_COLOR_COST" kontrabandy.");
 			return 1;
 		}
 		if(color <= 0x0 || color >= 0xFFFFFF)
@@ -115,6 +116,17 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
+		new bizId = IsPlayerAtFrontBusinnesZone(playerid);
+		if(bizId == 0 || FrontBusiness[bizId][Owner] != org)
+		{
+			new Float:proximity = GetPlayerFrontBusinessProximity(playerid, bizId);
+			if(proximity > ORG_SPAWN_BUSINESS_PROXIMITY_MAX || proximity < ORG_SPAWN_BUSINESS_PROXIMITY_MIN)
+			{
+				MruMessageFail(playerid, "Spawn organizacji musi znajdowaæ siê w promieniu "#ORG_SPAWN_BUSINESS_PROXIMITY_MAX" metrów od przejêtego biznesu, ale nie bli¿ej ni¿ "#ORG_SPAWN_BUSINESS_PROXIMITY_MIN" metrów.");
+			}
+			return 1;
+		}
+
 		TakeContraband(playerid, CHANGE_ORG_SPAWN_COST);
 		SetOrgSpawnAtPlayerPos(playerid, org);
     	MruMessageGoodInfo(playerid, "Spawn organizacji ustawiony w tym miejscu zmieniony.");
@@ -125,6 +137,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		if( sscanf(params, "k<fix>", giveplayerid))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel przyjmij [playerid/CzêœæNicku]");
+			sendTipMessage(playerid, "Koszt komendy: "#JOIN_MEMBER_COST"$.");
 			return 1;
 		}
 
@@ -215,9 +228,9 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		if(rank < 0 || rank > 9) 
+		if(rank < 0 || rank > MAX_MEMBER_RANK) 
 		{ 
-			MruMessageFail(playerid, "Ranga od 0 do 9 !"); 
+			MruMessageFail(playerid, "Ranga od 0 do "#MAX_MEMBER_RANK"!"); 
 			return 1; 
 		}
 
@@ -268,13 +281,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		if( sscanf(params, "k<fix>S[32]()",giveplayerid, confimation))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel oddaj [playerid/CzêœæNicku]");
-			return 1;
-		}
-
-		if(strcmp(confimation, "definitywnie", true) != 0)
-		{
-			SendClientMessage(playerid, COLOR_PANICRED, "Czy jesteœ pewny, ¿e chcesz oddaæ swoj¹ organizacje razem z jej cz³onkami i maj¹tkiem?");
-			SendClientMessage(playerid, COLOR_PANICRED, "Jeœli tak, wpisz /orgpanel oddaj [id] definitywnie.");
+			sendTipMessage(playerid, "Koszt komendy: "#PASS_ORG_COST" kontrabandy.");
 			return 1;
 		}
 		
@@ -296,6 +303,20 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
+		if(GetContraband(playerid) < PASS_ORG_COST)
+		{
+			MruMessageFail(playerid, "Przekazanie organizacji kosztuje "#PASS_ORG_COST" kontrabandy, a Ty tyle nie masz.");
+			return 1;
+		}
+
+		if(strcmp(confimation, "definitywnie", true) != 0)
+		{
+			SendClientMessage(playerid, COLOR_PANICRED, "Czy jesteœ pewny, ¿e chcesz oddaæ swoj¹ organizacje razem z jej cz³onkami i maj¹tkiem?");
+			SendClientMessage(playerid, COLOR_PANICRED, "Jeœli tak, wpisz /orgpanel oddaj [id] definitywnie.");
+			return 1;
+		}
+
+		TakeContraband(playerid, PASS_ORG_COST);
 		GivePlayerOrgRank(playerid, 9);
 		GivePlayerOrgRank(giveplayerid, 1000);
 

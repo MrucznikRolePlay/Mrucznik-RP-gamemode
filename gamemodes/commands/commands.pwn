@@ -371,9 +371,7 @@
 #include "cmd/scenaallow.pwn"
 #include "cmd/scenadisallow.pwn"
 #include "cmd/screenshot.pwn"
-#include "cmd/sejffrakcja.pwn"
 #include "cmd/sejfpomoc.pwn"
-#include "cmd/sejfrodzina.pwn"
 #include "cmd/selldom.pwn"
 #include "cmd/setarmor.pwn"
 #include "cmd/setcarhp.pwn"
@@ -927,10 +925,6 @@ static Aliases()
 	Command_AddAltNamed("opuscdom", "zlomujdom");
 	Command_AddAltNamed("opuscdom", "zlomujhouse");
 
-	//organizacje
-	Command_AddAltNamed("organizacje", "rodziny");
-	Command_AddAltNamed("organizacje", "biznesy");
-
 	//paliwo
 	Command_AddAltNamed("paliwo", "fuel");
 	Command_AddAltNamed("paliwo", "licznikpaliwa");
@@ -970,9 +964,6 @@ static Aliases()
 	//pomocdom
 	Command_AddAltNamed("pomocdom", "dompomoc");
 	Command_AddAltNamed("pomocdom", "househelp");
-
-	//pr
-	Command_AddAltNamed("pr", "panelrodzinny");
 
 	//przelew
 	Command_AddAltNamed("przelew", "transfer");
@@ -1048,15 +1039,9 @@ static Aliases()
 	//screenshot
 	Command_AddAltNamed("screenshot", "ss");
 
-	//sejffrakcja
-	Command_AddAltNamed("sejffrakcja", "sejff");
-
 	//sejfpomoc
 	Command_AddAltNamed("sejfpomoc", "sejf");
 	Command_AddAltNamed("sejfpomoc", "sejfpanel");
-
-	//sejfrodzina
-	Command_AddAltNamed("sejfrodzina", "sejfr");
 
 	//selldom
 	Command_AddAltNamed("selldom", "sprzedajdom");
