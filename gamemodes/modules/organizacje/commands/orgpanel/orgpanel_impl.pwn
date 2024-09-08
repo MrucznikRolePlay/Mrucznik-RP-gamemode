@@ -371,6 +371,18 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		MruMessageBadInfo(playerid, "Usun¹³eœ swoj¹ organizacje wraz ca³ym maj¹tkiem i zwolni³eœ wszystkich cz³onków.");
 		Log(serverLog, INFO, "Lider %s rodziny %d usunal swoja organizacje.", GetPlayerLogName(playerid), org);
 	}
+	else if(strcmp(action, "stworzrange",true) == 0)
+	{
+        RunCommand(playerid, "/liderranga",  params);
+	}
+	else if(strcmp(action, "pojazd",true) == 0)
+	{
+        RunCommand(playerid, "/lidercar",  params);
+	}
+	else if(strcmp(action, "sejf",true) == 0)
+	{
+        RunCommand(playerid, "/sejf",  params);
+	}
 	else
 	{
 		sendTipMessageEx(playerid, COLOR_GREY, "Z³a nazwa panelu!");

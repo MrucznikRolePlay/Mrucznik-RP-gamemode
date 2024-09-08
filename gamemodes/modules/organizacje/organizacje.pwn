@@ -28,7 +28,7 @@
 ShowOrgLeaderCommands(playerid)
 {
     SendClientMessage(playerid, COLOR_GREEN,"___________________Lider____________________");
-    SendClientMessage(playerid, COLOR_WHITE, "Komendy: /pr /sejf /lidercar /liderranga /pracownicy");
+    SendClientMessage(playerid, COLOR_WHITE, "Komendy: /orgpanel /sejf /lidercar /liderranga /pracownicy");
 }
 
 LoadOrganisations()
