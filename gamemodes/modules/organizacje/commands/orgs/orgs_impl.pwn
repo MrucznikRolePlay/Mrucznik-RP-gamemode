@@ -26,7 +26,7 @@
 command_orgs_Impl(playerid, orgid)
 {
     new string[1024];
-    if(orgid == -1)
+    if(orgid != -1)
     {
         if(PlayerInfo[playerid][pAdmin] > 0)
         {

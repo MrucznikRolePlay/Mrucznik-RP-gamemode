@@ -57,13 +57,22 @@ SaveOrg(id, savetype)
     {
         case ORG_SAVE_TYPE_BASIC: 
         {
-            format(query, sizeof(query), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d', `LeaderStake`='%d' WHERE `ID`='%d'",
+            format(query, sizeof(query), 
+                "INSERT INTO `mru_org` SET (`ID`, `Type`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW`, `LeaderStake`) " \
+                "VALUES ('%d', '%d', '%08x', '%f', '%f', '%f', '%f', '%d', '%d', '%d') ON DUPLICATE KEY UPDATE" \
+                "`Type`='%d', `Color`='%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d', `LeaderStake`='%d'",
+                id,
                 OrgInfo[id][o_Type], 
                 OrgInfo[id][o_Color], 
                 OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], 
                 OrgInfo[id][o_Int], OrgInfo[id][o_VW], 
                 OrgInfo[id][o_LeaderStake],
-                id);
+                // update
+                OrgInfo[id][o_Type], 
+                OrgInfo[id][o_Color], 
+                OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], 
+                OrgInfo[id][o_Int], OrgInfo[id][o_VW], 
+                OrgInfo[id][o_LeaderStake]);
         }
         case ORG_SAVE_TYPE_DESC: 
         {

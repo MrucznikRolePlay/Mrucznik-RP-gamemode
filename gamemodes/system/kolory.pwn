@@ -140,7 +140,7 @@
 //Podstawowe kolory:
 #define INCOLOR_WHITE		"{FFFFFF}"
 #define INCOLOR_BLACK		"{000000}"
-#define INCOLOR_GREY		"{808080}"
+#define INCOLOR_GREY		"{AFAFAF}"
 #define INCOLOR_LIGHTGREY	"{A0A0A0}"
 #define INCOLOR_DARKGREY	"{606060}"
 #define INCOLOR_SILVER		"{C0C0C0}"
