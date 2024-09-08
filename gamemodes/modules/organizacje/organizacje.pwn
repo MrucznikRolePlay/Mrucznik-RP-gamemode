@@ -45,7 +45,7 @@ LoadOrganisations()
     printf("%d | Wczytano organizacje", rowCount);
 }
 
-SaveOrg(id, savetype)
+SaveOrg(id)
 {
     new query[1024];
 	new name_escaped[32];

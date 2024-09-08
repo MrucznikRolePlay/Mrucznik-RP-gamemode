@@ -4074,8 +4074,6 @@ ShowStats(playerid,targetid)
 		new Float:px,Float:py,Float:pz;
 		GetPlayerPos(targetid, px, py, pz);
 		new coordsstring[256];
-		//new busiMem = PlayerInfo[targetid][pBusinessMember];
-		//new busiOwn = PlayerInfo[targetid][pBusinessOwner]; 
 		SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 		format(coordsstring, sizeof(coordsstring),"*** %s ({8FCB04}UID: %d{FFFFFF}) ***",name, PlayerInfo[targetid][pUID]);
 		SendClientMessage(playerid, COLOR_WHITE,coordsstring);
