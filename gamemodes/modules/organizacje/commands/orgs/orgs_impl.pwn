@@ -26,7 +26,7 @@
 command_orgs_Impl(playerid, orgid)
 {
     new string[1024];
-    if(orgid != -1)
+    if(orgid == -1)
     {
         if(PlayerInfo[playerid][pAdmin] > 0)
         {
@@ -40,6 +40,7 @@ command_orgs_Impl(playerid, orgid)
                 }
             }
         }
+        return 1;
     }
 
     for(new i=1;i<MAX_ORG;i++)
