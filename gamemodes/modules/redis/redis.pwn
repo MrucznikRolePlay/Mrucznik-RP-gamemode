@@ -128,4 +128,12 @@ stock CRedis_SetString(const key[], const value[], len = sizeof(value))
 	return Redis_SetString(RedisClient, key, value);
 }
 
+stock CRedis_IncrBy(const key[], value)
+{
+	new currentVal = MAP_get_str_val(RedisCache_Int, key);
+	new newVal = currentVal + value;
+	MAP_insert_str_val(RedisCache_Int, key, newVal);
+	return Redis_SetInt(RedisClient, key, newVal);
+}
+
 //end

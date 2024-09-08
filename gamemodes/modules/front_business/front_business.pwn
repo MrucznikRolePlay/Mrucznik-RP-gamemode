@@ -36,13 +36,23 @@ LoadFrontBusinesses()
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverHour"), 16 + random(7));
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverMinute"), 30 * random(2));
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverTime"), 3600); // 30 minutes
+
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), COLOR_GREY);
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "owner"), 0);
+
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "profit"), 0);
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "leaderProfit"), 0);
+
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "initialized"), 1);
 		}
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "takeoverHour"), FrontBusiness[i][TakeoverHour]);
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "takeoverMinute"), FrontBusiness[i][TakeoverMinute]);
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "takeoverTime"),  FrontBusiness[i][TakeoverTime]);
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "color"), FrontBusiness[i][BizColor]);
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "owner"), FrontBusiness[i][Owner]);
+		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "leaderStake"), FrontBusiness[i][Owner]);
+		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "owner"), FrontBusiness[i][Owner]);
+
 
 		MruCreateDynamicMapIcon(FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
 			GetFrontBusinessIcon(FrontBusiness[i][Type]),
@@ -93,17 +103,17 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverActive] = true;
 	FrontBusiness[bizId][TakeoverStartTime] = gettime();
 
-	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(
-		FrontBusiness[i][TakeoverX], FrontBusiness[i][TakeoverY], FrontBusiness[i][TakeoverZ], 
-		TAKEOVER_ZONE_SIZE, 
-		FrontBusiness[i][TakeoverVw], FrontBusiness[i][TakeoverInt], 
-		INVALID_PLAYER_ID, STREAMER_CP_SD, FrontBusiness[i][GangZoneArea]);
+	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicObject(19945, 
+		FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5, 
+		0.0, 0.0, 0.0, 
+		FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
+		INVALID_PLAYER_ID, STREAMER_CP_SD, STREAMER_OBJECT_DD, FrontBusiness[bizId][GangZoneArea]);
 }
 
 StopFrontBizTakeover(bizId)
 {
 	FrontBusiness[bizId][TakeoverActive] = false;
-	DestroyDynamicCP(FrontBusiness[bizId][TakeoverCheckpoint]);
+	DestroyDynamicObject(FrontBusiness[bizId][TakeoverCheckpoint]);
 
 	new winner = -1, maxScore;
 	for(new i; i<MAX_ORG; i++)

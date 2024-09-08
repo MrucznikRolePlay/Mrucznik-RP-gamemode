@@ -35,12 +35,28 @@ command_orgbiz_Impl(playerid, action[16], params[128])
     if(strcmp(action, "lista", true) == 0 || strcmp(action, "list", true) == 0)
     {
         SendClientMessage(playerid, COLOR_GREEN, "|_______________ Biznesy organizacji _______________|");
+        new string[MAX_MESSAGE_LENGTH];
         for(new i=1; i<sizeof(FrontBusiness); i++)
         {
             if(FrontBusiness[i][Owner] == org)
             {
-                SendClientMessage(playerid, COLOR_WHITE, sprintf("- [%d] %s | Godzina przejêcia: %02d:%02d", 
-                    i, FrontBusiness[i][Name], FrontBusiness[i][TakeoverHour], FrontBusiness[i][TakeoverMinute]));
+                if(IsPlayerOrgLeader(playerid))
+                {
+                    new profit, leaderProfit;
+                    Redis_GetInt(RedisClient, RedisFrontBizKey(i, "profit"), profit);
+                    Redis_GetInt(RedisClient, RedisFrontBizKey(i, "leaderProfit"), leaderProfit);
+                    format(string, sizeof(string), "- [%d] %s | Godzina przejêcia: %02d:%02d | Wygenerowany przychód: %d$ (%d$ do sejfu)", 
+                        i, FrontBusiness[i][Name], 
+                        FrontBusiness[i][TakeoverHour], FrontBusiness[i][TakeoverMinute],
+                        profit, leaderProfit);
+                }
+                else
+                {
+                    format(string, sizeof(string), "- [%d] %s | Godzina przejêcia: %02d:%02d", 
+                        i, FrontBusiness[i][Name], 
+                        FrontBusiness[i][TakeoverHour], FrontBusiness[i][TakeoverMinute]);
+                }
+                SendClientMessage(playerid, COLOR_WHITE, string);
             }
         }
     }

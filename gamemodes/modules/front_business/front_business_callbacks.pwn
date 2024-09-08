@@ -172,4 +172,42 @@ SendExitTakeoverAreaMessage(playerid, bizId, org, isDefense)
 	}
 }
 
+FrontBiz_OnPayDay(playerid)
+{
+	new org = GetPlayerOrg(playerid);
+	if(org == 0)
+	{
+		return;
+	}
+
+	new totalIncome;
+	new memberIncome;
+	new leaderIncome;
+	for(new i=1; i<sizeof(FrontBusiness); i++)
+	{
+		if(IsFrontBusinnesOwnedByOrg(i, org))
+		{
+			// wzór: podstawowy_dochód + dochód_za_gracza * log2(liczba_graczy)
+			new Float:perPlayerIncome = float(IncomePerPlayer) * floatlog(float(Iter_Count(Player)), 2.0);
+			new frontBizIncome = floatround(perPlayerIncome) + BaseIncome;
+
+			new singleBizLeaderIncome = (frontBizIncome * LeaderStakePercent) / 100;
+			new singleBizMemberIncome = frontBizIncome - singleBizLeaderIncome;
+
+			totalIncome += frontBizIncome;
+			PlayerInfo[playerid][pAccount] += singleBizMemberIncome;
+			SejfR_Add(org, singleBizLeaderIncome);
+
+			Redis_IncrBy(RedisFrontBizKey(i, "profit"), frontBizIncome);
+			Redis_IncrBy(RedisFrontBizKey(i, "leaderProfit"), singleBizLeaderIncome);
+		}
+	}
+
+	AccountOrgBenefitForPlayerUID(PlayerInfo[playerid][pUID], org, memberIncome);
+
+	// messages
+	SendClientMessage(playerid, COLOR_GREY, sprintf("  Dochód z biznesów organizacji: %d$.", totalIncome));
+	SendClientMessage(playerid, COLOR_GREY, sprintf("  Dostajez z tego: "INCOLOR_GREEN"%d$"INCOLOR_GREY" a "INCOLOR_RED"%d$"INCOLOR_GREY" idzie dla lidera.", memberIncome, leaderIncome));
+}
+
 //end

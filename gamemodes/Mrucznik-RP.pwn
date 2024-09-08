@@ -3504,6 +3504,9 @@ PayDay()
 						format(string, sizeof(string), "  Strata z podatku $0");
 						SendClientMessage(i, COLOR_GRAD3, string);
 					}
+
+					FrontBiz_OnPayDay(i);
+
 					SendClientMessage(i, COLOR_GRAD4, "|--------------------------------------|");
 					format(string, sizeof(string), "  Nowy Stan Konta: $%d", PlayerInfo[i][pAccount]);
 					SendClientMessage(i, COLOR_GRAD5, string);
