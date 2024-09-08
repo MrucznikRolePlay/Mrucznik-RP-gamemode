@@ -81,6 +81,22 @@ hook OnDynamicActorStreamIn(actorid, forplayerid)
 	SetDynamicActorPos(actorid, x, y, z);
 }
 
+task RestreamActors[5000]()
+{
+	for(new i; i<valActor; i++)
+	{
+		SetDynamicActorPos(actorUID[i], Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]); 
+		SetDynamicActorFacingAngle(actorUID[i], Actors[i][a_posR]);
+		if(strlen(Actors[i][a_animLib]) > 3 && strlen(Actors[i][a_animName]) > 3)
+		{
+			new aalib[40], aaName[40];
+			strcat(Actors[i][a_animLib], aalib);
+			strcat(Actors[i][a_animName], aaName); 
+			SetActorAnimationEx(actorUID[i], aalib, aaName, 1, 1, 1); 
+		}
+	}
+}
+
 stock RepairActors(worldID, interiorid)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza'
 {
 	for(new i; i<valActor; i++)
