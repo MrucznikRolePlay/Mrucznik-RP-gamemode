@@ -112,7 +112,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		OrgInfo[org][o_Color] = color;
 		TakeContraband(playerid, CHANGE_ORG_COLOR_COST);
 		SendClientMessage(playerid, color, "Teraz Twoja organizacja bêdzie w takim kolorze.");
-		SaveOrg(org, ORG_SAVE_TYPE_BASIC);
+		SaveOrg(org);
 	}
 	else if(strcmp(action, "spawn", true) == 0)
 	{
@@ -300,7 +300,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		}
 
 		OrgInfo[org][o_LeaderStake] = stake;
-		SaveOrg(org, ORG_SAVE_TYPE_BASIC);
+		SaveOrg(org);
 
 		MruMessageGoodInfoF(playerid, "Ustawi³eœ procent zarobków z przejêtych biznesów, który potr¹cisz pracownikom podczas PayDay'a na %d%%", stake);
 		Log(serverLog, INFO, "Lider %s rodziny %d ustawil swoj procent na %d.", GetPlayerLogName(playerid), org, stake);

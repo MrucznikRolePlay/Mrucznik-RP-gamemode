@@ -23,9 +23,6 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
-#define ORG_SAVE_TYPE_BASIC 1
-#define ORG_SAVE_TYPE_DESC  2
-
 #define MAX_MEMBER_RANK 8
 #define MAIN_LEADER_RANK 9
 

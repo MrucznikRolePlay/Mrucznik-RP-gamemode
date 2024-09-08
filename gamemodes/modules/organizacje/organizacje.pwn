@@ -47,39 +47,32 @@ LoadOrganisations()
 
 SaveOrg(id, savetype)
 {
-    new query[512];
+    new query[1024];
 	new name_escaped[32];
 	new motto_escaped[128];
 	mysql_real_escape_string(OrgInfo[id][o_Name], name_escaped);
 	mysql_real_escape_string(OrgInfo[id][o_Motto], motto_escaped);
 	
-    switch(savetype)
-    {
-        case ORG_SAVE_TYPE_BASIC: 
-        {
-            format(query, sizeof(query), 
-                "INSERT INTO `mru_org` SET (`ID`, `Type`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW`, `LeaderStake`) " \
-                "VALUES ('%d', '%d', '%08x', '%f', '%f', '%f', '%f', '%d', '%d', '%d') ON DUPLICATE KEY UPDATE " \
-                "`Type`='%d', `Color`='%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d', `LeaderStake`='%d'",
-                id,
-                OrgInfo[id][o_Type], 
-                OrgInfo[id][o_Color], 
-                OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], 
-                OrgInfo[id][o_Int], OrgInfo[id][o_VW], 
-                OrgInfo[id][o_LeaderStake],
-                // update
-                OrgInfo[id][o_Type], 
-                OrgInfo[id][o_Color], 
-                OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], 
-                OrgInfo[id][o_Int], OrgInfo[id][o_VW], 
-                OrgInfo[id][o_LeaderStake]);
-        }
-        case ORG_SAVE_TYPE_DESC: 
-        {
-            format(query, sizeof(query), "UPDATE `mru_org` SET `Name`='%s', `Motd`='%s' WHERE `ID`='%d'", 
-                name_escaped, motto_escaped, id);
-        }
-    }
+    format(query, sizeof(query), 
+        "INSERT INTO `mru_org` (`ID`, `Type`, `Name`, `Motd`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW`, `LeaderStake`) " \
+        "VALUES ('%d', '%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%d', '%d', '%d') ON DUPLICATE KEY UPDATE " \
+        "`Type`='%d', `Name`='%s', `Motd`='%s', `Color`='%d', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d', `LeaderStake`='%d'",
+        id,
+        OrgInfo[id][o_Type], 
+        OrgInfo[id][o_Name], 
+        OrgInfo[id][o_Motto], 
+        OrgInfo[id][o_Color], 
+        OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], 
+        OrgInfo[id][o_Int], OrgInfo[id][o_VW], 
+        OrgInfo[id][o_LeaderStake],
+        // update
+        OrgInfo[id][o_Type], 
+        OrgInfo[id][o_Name], 
+        OrgInfo[id][o_Motto], 
+        OrgInfo[id][o_Color], 
+        OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], 
+        OrgInfo[id][o_Int], OrgInfo[id][o_VW], 
+        OrgInfo[id][o_LeaderStake]);
     mysql_query(query);
     return 1;
 }
@@ -98,8 +91,8 @@ CreateOrganisation(org, name[32], color, type)
     OrgInfo[org][o_VW] = 0;
     OrgInfo[org][o_LeaderStake] = 5;
 
-    SaveOrg(org, ORG_SAVE_TYPE_BASIC);
-    SaveOrg(org, ORG_SAVE_TYPE_DESC);
+    SaveOrg(org);
+    SaveOrg(org);
 }
 
 RemoveOrganisation(org)
@@ -131,8 +124,8 @@ RemoveOrganisation(org)
     OrgInfo[org][o_VW] = 0;
     OrgInfo[org][o_LeaderStake] = 5;
 
-    SaveOrg(org, ORG_SAVE_TYPE_BASIC);
-    SaveOrg(org, ORG_SAVE_TYPE_DESC);
+    SaveOrg(org);
+    SaveOrg(org);
 }
 
 AccountOrgsCosts()
@@ -263,7 +256,7 @@ SetOrgName(org, name[])
     if(!IsActiveOrg(org)) return 0;
 
     format(OrgInfo[org][o_Name], 32, "%s", name);
-    SaveOrg(org, ORG_SAVE_TYPE_DESC);
+    SaveOrg(org);
     return 1;
 }
 
@@ -272,7 +265,7 @@ SetOrgMotto(org, motto[])
     if(!IsActiveOrg(org)) return 0;
 
     format(OrgInfo[org][o_Motto], 128, "%s", motto);
-    SaveOrg(org, ORG_SAVE_TYPE_DESC);
+    SaveOrg(org);
     return 1;
 }
 
@@ -282,7 +275,7 @@ SetOrgSpawnAtPlayerPos(playerid, org)
 
     GetPlayerPos(playerid, OrgInfo[org][o_Spawn][0], OrgInfo[org][o_Spawn][1], OrgInfo[org][o_Spawn][2]);
     GetPlayerFacingAngle(playerid, OrgInfo[org][o_Spawn][3]);
-	SaveOrg(org, ORG_SAVE_TYPE_BASIC);
+	SaveOrg(org);
     return 1;
 }
 
