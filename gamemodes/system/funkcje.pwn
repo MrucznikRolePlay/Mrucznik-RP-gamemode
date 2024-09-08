@@ -4017,11 +4017,11 @@ ShowStats(playerid,targetid)
 
 	    new ftext[40];
         format(ftext, 40, "%s", FractionNames[GetPlayerFraction(targetid)]);
-		new f2text[30];
+		new f2text[32];
 		new org = GetPlayerOrg(targetid);
 	    if(IsActiveOrg(org))
         {
-            format(f2text, 30, "%s",OrgInfo[org][o_Name]);
+            format(f2text, 32, "%s",OrgInfo[org][o_Name]);
         }
 		else f2text = "Brak";
 	    new rtext[64];
