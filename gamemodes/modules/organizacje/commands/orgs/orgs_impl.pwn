@@ -28,16 +28,25 @@ command_orgs_Impl(playerid, orgid)
     new string[1024];
     if(orgid != -1)
     {
-        if(PlayerInfo[playerid][pAdmin] > 0)
+        if(PlayerInfo[playerid][pAdmin] <= 0)
         {
-            SendClientMessage(playerid, COLOR_GREEN, "Cz³onkowie Online:");
-            foreach(new i : Player)
+            noAccessMessage(playerid);
+            return 1;
+        }
+
+        if(!IsActiveOrg(orgid))
+        {
+            MruMessageFail(playerid, "Nie ma takiej organizacji na serwerze.");
+            return 1;
+        }
+        
+        SendClientMessage(playerid, COLOR_GREEN, "Cz³onkowie Online:");
+        foreach(new i : Player)
+        {
+            if(GetPlayerOrg(i) == orgid)
             {
-                if(GetPlayerOrg(i) == orgid)
-                {
-                    format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][pRank]);
-                    SendClientMessage(playerid, COLOR_GRAD1, string);
-                }
+                format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][pRank]);
+                SendClientMessage(playerid, COLOR_GRAD1, string);
             }
         }
         return 1;

@@ -59,7 +59,7 @@ SaveOrg(id, savetype)
         {
             format(query, sizeof(query), 
                 "INSERT INTO `mru_org` SET (`ID`, `Type`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW`, `LeaderStake`) " \
-                "VALUES ('%d', '%d', '%08x', '%f', '%f', '%f', '%f', '%d', '%d', '%d') ON DUPLICATE KEY UPDATE" \
+                "VALUES ('%d', '%d', '%08x', '%f', '%f', '%f', '%f', '%d', '%d', '%d') ON DUPLICATE KEY UPDATE " \
                 "`Type`='%d', `Color`='%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d', `LeaderStake`='%d'",
                 id,
                 OrgInfo[id][o_Type], 
