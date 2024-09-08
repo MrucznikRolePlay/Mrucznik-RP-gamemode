@@ -56,7 +56,7 @@ YCMD:lockdown(playerid, params[], help)
     }
     //fetching params
     new typ;
-    if(sscanf(params, "d(-1)", typ))
+    if(sscanf(params, "D(-1)", typ))
     {
         sendTipMessage(playerid, "U¿yj /lockdown [0 = Wy³¹czenie, 1 = W³¹czenie dla kont z 0h, 2 = W³¹czenie dla kont z mniej ni¿ 3h] ");
         return 1;

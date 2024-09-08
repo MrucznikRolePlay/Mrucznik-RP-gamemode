@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  orgpanel                                                 //
+//                                                gotofrontbiz                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,19 +28,15 @@
 
 
 //-------<[ include ]>-------
-#include "orgpanel_impl.pwn"
+#include "gotofrontbiz_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_orgpanel()
+command_gotofrontbiz()
 {
-    new command = Command_GetID("orgpanel");
+    new command = Command_GetID("gotofrontbiz");
 
     //aliases
-    Command_AddAlt(command, "pr");
-    Command_AddAlt(command, "panelrodziny");
-    Command_AddAlt(command, "panelorganizacji");
-    Command_AddAlt(command, "panelorg");
-    Command_AddAlt(command, "rpanel");
+    Command_AddAlt(command, "gotofb");
     
 
     //permissions
@@ -51,22 +47,21 @@ command_orgpanel()
 }
 
 //-------<[ command ]>-------
-YCMD:orgpanel(playerid, params[], help)
+YCMD:gotofrontbiz(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "Panel lidera organizacji przestêpczej.");
+        sendTipMessage(playerid, "Teleportuje Ciê do biznesu-przykrywki.");
         return 1;
     }
     //fetching params
-    new action[16], param[256];
-    if(sscanf(params, "s[16]S()[256]", action, param))
+    new bizid, position;
+    if(sscanf(params, "dd", bizid, position))
     {
-        sendTipMessage(playerid, "U¿yj /orgpanel [akcja] [parametry akcji] ");
-        sendTipMessage(playerid, "Dostêpne akcje: nazwa / motto / kolor / spawn / przyjmij / zwolnij / ranga / pracownicy / stawka / oddaj / usun");
+        sendTipMessage(playerid, "U¿yj /gotofrontbiz [id biznesu] [id pozycji] ");
         return 1;
     }
     
     //command body
-    return command_orgpanel_Impl(playerid, action, param);
+    return command_gotofrontbiz_Impl(playerid, bizid, position);
 }

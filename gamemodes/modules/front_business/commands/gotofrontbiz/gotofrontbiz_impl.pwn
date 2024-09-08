@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                  gotojob                                                  //
+//                                                gotofrontbiz                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,13 +17,13 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: mrucznik
-// Data utworzenia: 21.04.2024
+// Data utworzenia: 08.09.2024
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotojob_Impl(playerid, job, index, type)
+command_gotofrontbiz_Impl(playerid, bizId, position)
 {
     if(PlayerInfo[playerid][pAdmin] < 1)
     {
@@ -31,81 +31,60 @@ command_gotojob_Impl(playerid, job, index, type)
         return 1;
     }
 
-    if(job <= 0 || job >= Jobs)
+    if(bizId < 0 || bizId >= sizeof(FrontBusiness))
     {
-        MruMessageFailF(playerid, "Praca musi byæ wiêksza ni¿ 0 i mniejsza ni¿ %d", Jobs-1);
-        return 1;
-    }
-
-    if(index < 0)
-    {
-        MruMessageFail(playerid, "Index musi byæ wiêkszy lub równy 0.");
+        MruMessageFailF(playerid, "IS biznesu musi byæ wiêksze lub równe 0 i mniejsza ni¿ %d", sizeof(FrontBusiness) -1);
         return 1;
     }
 
     new Float:x, Float:y, Float:z;
-    switch(type)
+    switch(position)
     {
-        case 0: // join
+        case 0: // wejœcie
         {
-            if(index >= MAX_JOB_JOINS)
-            {
-                MruMessageFailF(playerid, "Index musi byæ mniejszy ni¿ %d.", MAX_JOB_JOINS);
-                return 1;
-            }
-
-			x = JobJoinPositions[job][index][JOB_JOIN_X];
-			y = JobJoinPositions[job][index][JOB_JOIN_Y];
-            z = JobJoinPositions[job][index][JOB_JOIN_Z];
+			x = FrontBusiness[bizId][OutX];
+			y = FrontBusiness[bizId][OutY];
+            z = FrontBusiness[bizId][OutZ];
             if(x == 0.0 && y == 0.0 && z == 0.0) 
             {
                 MruMessageFail(playerid, "Brak zapisanej pozycji pod tym ID.");
                 return 1;
             }
             SetPlayerPos(playerid, x, y, z);
+            SetPlayerVirtualWorld(playerid, FrontBusiness[bizId][OutVw]);
+            SetPlayerInterior(playerid, FrontBusiness[bizId][OutInt]);
         }
-        case 1: // spawn
+        case 1: // wyjdŸ
         {
-            if(index >= MAX_JOB_SPAWNS)
-            {
-                MruMessageFailF(playerid, "Index musi byæ mniejszy ni¿ %d.", MAX_JOB_SPAWNS);
-                return 1;
-            }
-
-            x = JobSpawns[job][index][JOB_SPAWN_X];
-            y = JobSpawns[job][index][JOB_SPAWN_Y];
-            z = JobSpawns[job][index][JOB_SPAWN_Z];
+			x = FrontBusiness[bizId][InX];
+			y = FrontBusiness[bizId][InY];
+            z = FrontBusiness[bizId][InZ];
             if(x == 0.0 && y == 0.0 && z == 0.0) 
             {
                 MruMessageFail(playerid, "Brak zapisanej pozycji pod tym ID.");
                 return 1;
             }
             SetPlayerPos(playerid, x, y, z);
-            SetPlayerVirtualWorld(playerid, JobSpawns[job][index][JOB_SPAWN_VW]);
-            SetPlayerInterior(playerid, JobSpawns[job][index][JOB_SPAWN_INT]);
-            SetPlayerFacingAngle(playerid, JobSpawns[job][index][JOB_SPAWN_A]);
+            SetPlayerVirtualWorld(playerid, FrontBusiness[bizId][InVw]);
+            SetPlayerInterior(playerid, FrontBusiness[bizId][InInt]);
         }
-        case 2: // icon
+        case 2: // przejmowanie
         {
-            if(index >= MAX_JOB_JOINS)
-            {
-                MruMessageFailF(playerid, "Index musi byæ mniejszy ni¿ %d.", MAX_JOB_JOINS);
-                return 1;
-            }
-
-            x = JobIconPositions[job][index][0];
-            y = JobIconPositions[job][index][1];
-            z = JobIconPositions[job][index][2];
+			x = FrontBusiness[bizId][TakeoverX];
+			y = FrontBusiness[bizId][TakeoverY];
+            z = FrontBusiness[bizId][TakeoverZ];
             if(x == 0.0 && y == 0.0 && z == 0.0) 
             {
                 MruMessageFail(playerid, "Brak zapisanej pozycji pod tym ID.");
                 return 1;
             }
             SetPlayerPos(playerid, x, y, z);
+            SetPlayerVirtualWorld(playerid, FrontBusiness[bizId][TakeoverVw]);
+            SetPlayerInterior(playerid, FrontBusiness[bizId][TakeoverInt]);
         }
         default:
         {
-            MruMessageFail(playerid, "Niepoprawny typ. U¿yj: 0 - pozycja do³¹czenia do pracy, 1 - spawn pracy, 2 - ikonka pracy.");
+            MruMessageFail(playerid, "Dostêpne pozycje: 0 - wejœcie, 1 - wyjœcie, 2 - przejmowanie.");
             return 1;
         }
     }

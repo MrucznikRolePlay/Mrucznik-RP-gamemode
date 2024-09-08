@@ -56,7 +56,7 @@ YCMD:dnobiekt(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, index, model, bone, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, materialcolor1, materialcolor2;
-    if(sscanf(params, "k<fix>dddf(0.0)f(0.0)f(0.0)f(0.0)f(0.0)f(0.0)f(1.0)f(1.0)f(1.0)d(0)d(0)", giveplayerid, index, model, bone, x, y, z, rx, ry, rz, sx, sy, sz, materialcolor1, materialcolor2))
+    if(sscanf(params, "k<fix>dddF(0.0)F(0.0)F(0.0)F(0.0)F(0.0)F(0.0)F(1.0)F(1.0)F(1.0)D(0)D(0)", giveplayerid, index, model, bone, x, y, z, rx, ry, rz, sx, sy, sz, materialcolor1, materialcolor2))
     {
         sendTipMessage(playerid, "U¿yj /dnobiekt [Nick/ID] [index] [model] [kosc] [x] [y] [z] [rx] [ry] [rz] [sx] [sy] [sz] [materialcolor1] [materialcolor2] ");
         return 1;

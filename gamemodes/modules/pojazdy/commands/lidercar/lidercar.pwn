@@ -58,7 +58,7 @@ YCMD:lidercar(playerid, params[], help)
     }
     //fetching params
     new akcja[16], opcje[256];
-    if(sscanf(params, "s[16]s()[256]", akcja, opcje))
+    if(sscanf(params, "s[16]S()[256]", akcja, opcje))
     {
         sendTipMessage(playerid, "U¿yj /lidercar [parkuj/przemaluj/ranga/przejmij] [opcje specyficzne dla wybranej akcji] ");
         return 1;

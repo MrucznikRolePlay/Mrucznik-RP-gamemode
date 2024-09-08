@@ -106,12 +106,12 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ kolor frakcji.", GetNick(playerid)));
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ kolor organizacji.", GetNick(playerid)));
 
 		color = (color << 8); // aplha channel
 		OrgInfo[org][o_Color] = color;
 		TakeContraband(playerid, CHANGE_ORG_COLOR_COST);
-		SendClientMessage(playerid, color, "Zmieni³eœ kolor rodziny.");
+		SendClientMessage(playerid, color, "Teraz Twoja organizacja bêdzie w takim kolorze.");
 		SaveOrg(org, ORG_SAVE_TYPE_BASIC);
 	}
 	else if(strcmp(action, "spawn", true) == 0)

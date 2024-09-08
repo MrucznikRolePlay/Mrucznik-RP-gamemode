@@ -60,7 +60,7 @@ YCMD:liderranga(playerid, params[], help)
     }
     //fetching params
     new rank, rankName[32];
-    if(sscanf(params, "ds()[32]", rank, rankName))
+    if(sscanf(params, "dS()[32]", rank, rankName))
     {
         sendTipMessage(playerid, "U¿yj /liderranga [numer rangi] [nazwa rangi (wpisz - aby usun¹æ, lub nic aby podejrzeæ)] ");
         return 1;

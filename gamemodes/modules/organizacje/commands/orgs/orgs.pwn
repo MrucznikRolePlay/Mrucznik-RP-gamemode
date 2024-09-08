@@ -60,7 +60,7 @@ YCMD:orgs(playerid, params[], help)
     }
     //fetching params
     new orgid;
-    if(sscanf(params, "d(-1)", orgid))
+    if(sscanf(params, "D(-1)", orgid))
     {
         sendTipMessage(playerid, "U¿yj /orgs [id organizacji] ");
         return 1;

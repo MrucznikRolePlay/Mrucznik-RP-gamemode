@@ -57,7 +57,7 @@ YCMD:agraffiti(playerid, params[], help)
     }
     //fetching params
     new opcja[36], id;
-    if(sscanf(params, "s[36]d(-1)", opcja, id))
+    if(sscanf(params, "s[36]D(-1)", opcja, id))
     {
         sendTipMessage(playerid, "U¿yj /agraffiti [Sprawdz, Reload, Goto, Lista, usun] [GOTO->ID | Lista->ID] ");
         return 1;

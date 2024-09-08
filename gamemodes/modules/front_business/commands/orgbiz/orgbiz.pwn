@@ -58,7 +58,7 @@ YCMD:orgbiz(playerid, params[], help)
     }
     //fetching params
     new action[16], param[128];
-    if(sscanf(params, "s[16]s()[128]", action, param))
+    if(sscanf(params, "s[16]S()[128]", action, param))
     {
         sendTipMessage(playerid, "U¿yj /orgbiz [akcja] [parametry] ");
         sendTipMessage(playerid, "Dostêpne parametry: lista / zmienczas");
