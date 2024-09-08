@@ -64,6 +64,7 @@ YCMD:orgpanel(playerid, params[], help)
     {
         sendTipMessage(playerid, "U¿yj /orgpanel [akcja] [parametry akcji] ");
         sendTipMessage(playerid, "Dostêpne akcje: nazwa / motto / kolor / spawn / przyjmij / zwolnij / ranga / pracownicy / stawka / oddaj / usun");
+        sendTipMessage(playerid, "Dostêpne akcje: stworzrange / pojazd / sejf");
         return 1;
     }
     

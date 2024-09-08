@@ -58,7 +58,7 @@ YCMD:gotofrontbiz(playerid, params[], help)
     new bizid, position;
     if(sscanf(params, "dd", bizid, position))
     {
-        sendTipMessage(playerid, "U¿yj /gotofrontbiz [id biznesu] [id pozycji] ");
+        sendTipMessage(playerid, "U¿yj /gotofrontbiz [id biznesu] [id pozycji, 0-wejscie, 1-wyjscie, 2-przejmowanie] ");
         return 1;
     }
     
