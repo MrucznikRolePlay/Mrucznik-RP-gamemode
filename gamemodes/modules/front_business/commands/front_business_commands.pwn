@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                               front_business                                              //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,33 +16,26 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 05.09.2024
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
-
-//------------------<[ Define: ]>-------------------
-#define FRONT_BUSINESS_GANGZONE_SIZE 50.0
-#define TAKEOVER_ZONE_SIZE 10.0
-
-#define TAKING_OVER_MODE_DEFENCE 0
-#define TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD 1
-#define TAKING_OVER_DEFENCE_SCORE_INCREASE 10
-#define TAKING_OVER_DEFENCE_SCORE_DECREASE 5
-
-#define TAKING_OVER_MODE_ATTACK 1
-#define TAKING_OVER_ATTACK_PLAYERS_THRESHOLD 3
-#define TAKING_OVER_ATTACK_SCORE_INCREASE 10
-#define TAKING_OVER_ATTACK_SCORE_DECREASE 5
-
-#define TAKE_OVER_POINT_THRESHOLD (TAKING_OVER_ATTACK_SCORE_INCREASE * 300) // 5 minutes
-
-#define CHANGE_TAKEOVER_TIME_COST 50 // paczki kontrabandy
-#define MIN_TAKEOVER_HOUR 16
-#define MAX_TAKEOVER_HOUR 22
-
-//------------------<[ Makra: ]>-------------------
-#define RedisFrontBizKey(%0,%1) sprintf("front_biz:%d:%s", %0, %1)
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-//end
+#include <YSI\y_hooks>
+
+//-------<[ include ]>-------
+#include "orgbiz\orgbiz.pwn"
+
+
+//-------<[ initialize ]>-------
+hook OnGameModeInit()
+{
+    command_orgbiz();
+    
+}

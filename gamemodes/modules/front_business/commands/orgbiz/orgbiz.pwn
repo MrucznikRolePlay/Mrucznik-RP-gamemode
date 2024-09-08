@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                               front_business                                              //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                   orgbiz                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,33 +16,55 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: mrucznik
-// Data utworzenia: 05.09.2024
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
-
-//------------------<[ Define: ]>-------------------
-#define FRONT_BUSINESS_GANGZONE_SIZE 50.0
-#define TAKEOVER_ZONE_SIZE 10.0
-
-#define TAKING_OVER_MODE_DEFENCE 0
-#define TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD 1
-#define TAKING_OVER_DEFENCE_SCORE_INCREASE 10
-#define TAKING_OVER_DEFENCE_SCORE_DECREASE 5
-
-#define TAKING_OVER_MODE_ATTACK 1
-#define TAKING_OVER_ATTACK_PLAYERS_THRESHOLD 3
-#define TAKING_OVER_ATTACK_SCORE_INCREASE 10
-#define TAKING_OVER_ATTACK_SCORE_DECREASE 5
-
-#define TAKE_OVER_POINT_THRESHOLD (TAKING_OVER_ATTACK_SCORE_INCREASE * 300) // 5 minutes
-
-#define CHANGE_TAKEOVER_TIME_COST 50 // paczki kontrabandy
-#define MIN_TAKEOVER_HOUR 16
-#define MAX_TAKEOVER_HOUR 22
-
-//------------------<[ Makra: ]>-------------------
-#define RedisFrontBizKey(%0,%1) sprintf("front_biz:%d:%s", %0, %1)
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
 
-//end
+//-------<[ include ]>-------
+#include "orgbiz_impl.pwn"
+
+//-------<[ initialize ]>-------
+command_orgbiz()
+{
+    new command = Command_GetID("orgbiz");
+
+    //aliases
+    Command_AddAlt(command, "orgbiznes");
+    Command_AddAlt(command, "bizorg");
+    Command_AddAlt(command, "orgb");
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:orgbiz(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Zarz¹dzanie biznesem organizacyjnym.");
+        return 1;
+    }
+    //fetching params
+    new action[16], param[128];
+    if(sscanf(params, "s[16]S()[128]", action, param))
+    {
+        sendTipMessage(playerid, "U¿yj /orgbiz [akcja] [parametry] ");
+        sendTipMessage(playerid, "Dostêpne parametry: lista / zmienczas");
+        return 1;
+    }
+    
+    //command body
+    return command_orgbiz_Impl(playerid, action, param);
+}

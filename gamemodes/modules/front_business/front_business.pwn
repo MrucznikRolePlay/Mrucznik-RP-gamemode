@@ -218,6 +218,11 @@ IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId)
 	return FrontBusiness[bizId][Owner] == GetPlayerOrg(playerid);
 }
 
+IsFrontBusinnesOwnedByOrg(bizId, org)
+{
+	return FrontBusiness[bizId][Owner] == org;
+}
+
 ShowFrontBusinessInfo(playerid, bizId)
 {
 	new string[256], owner[32];

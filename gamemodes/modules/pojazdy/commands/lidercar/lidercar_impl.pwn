@@ -101,7 +101,7 @@ command_lidercar_przemaluj(playerid, vehicleID, opcje[256])
     MRP_ChangeVehicleColor(vehicleID, color1, color2);
 
     // send message, take money
-    SendClientMessage(playerid, COLOR_PINK, "Pojazd przemalowany! -1500$");
+    MruMessageGoodInfo(playerid, "Pojazd przemalowany! -1500$");
     ZabierzKase(playerid, 1500);
     return 1;
 }
@@ -126,9 +126,7 @@ command_lidercar_ranga(playerid, vehicleUID, opcje[256])
     Car_Save(vehicleUID, CAR_SAVE_OWNER);
 
     // send message
-    new string[128];
-    format(string, sizeof(string), "Od teraz tylko osoby z %d rang¹ bêd¹ mog³y u¿ywaæ tego pojazdu.", rank);
-    SendClientMessage(playerid, COLOR_PINK, string);
+    MruMessageGoodInfoF(playerid, "Od teraz tylko osoby z %d rang¹ bêd¹ mog³y u¿ywaæ tego pojazdu.", rank);
     return 1;
 }
 
@@ -159,9 +157,9 @@ command_lidercar_przejmij(playerid, vehicleUID)
     Car_Save(vehicleUID, CAR_SAVE_OWNER);
 
     // send message
-    new string[128];
-    format(string, sizeof(string), "Od teraz Twoja frakcja jest w³aœcicielem tego pojazdu.");
-    SendClientMessage(playerid, COLOR_PINK, string);
+    new moneyReturn = GetVehPrice(CarData[vehicleUID][c_Model]) / 2;
+    DajKase(playerid, moneyReturn);
+    MruMessageGoodInfoF(playerid, "Od teraz Twoja frakcja jest w³aœcicielem tego pojazdu, otrzymujesz %d$ zwrotu za pojazd.", moneyReturn);
     return 1;
 }
 

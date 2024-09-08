@@ -73,7 +73,7 @@ command_liderranga_Impl(playerid, rank, rawRankName[32])
         else if(type == 1) format(OrgRank[orgId][rank], MAX_RANG_LEN, "%s", rankName);
     }
     EDIT_SaveRangs(type, orgId);
-    SendClientMessage(playerid, COLOR_PINK, "Ranga zmieniona!");
+    MruMessageGoodInfo(playerid, "Ranga zmieniona!");
     command_liderranga_showRank(playerid, type, orgId, rank);
     return 1;
 }

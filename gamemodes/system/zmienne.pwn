@@ -642,7 +642,6 @@ new FindTime[MAX_PLAYERS];
 new BoxWaitTime[MAX_PLAYERS];
 new BoxOffer[MAX_PLAYERS];
 new CarOffer[MAX_PLAYERS];
-new CarPrice[MAX_PLAYERS];
 new CarID[MAX_PLAYERS];
 new CarCalls[MAX_PLAYERS];
 new GotHit[MAX_PLAYERS];
@@ -1082,7 +1081,7 @@ ZerujZmienne(playerid)
 	GettingJob[playerid] = 0;
     ApprovedLawyer[playerid] = 0; CallLawyer[playerid] = 0; WantLawyer[playerid] = 0; UsedFind[playerid] = 0;
 	CP[playerid] = 0; ScigaSie[playerid] = 666;
-	CarOffer[playerid] = 999; CarPrice[playerid] = 0; CarID[playerid] = 0; CarCalls[playerid] = 0; GraczDajacy[playerid] = 999; GraczDajacyNeon[playerid] = 999;
+	CarOffer[playerid] = 999; CarID[playerid] = 0; CarCalls[playerid] = 0; GraczDajacy[playerid] = 999; GraczDajacyNeon[playerid] = 999;
 	MoneyMessage[playerid] = 0; Condom[playerid] = 0; GraczDajacyLodz[playerid] = 999; IDAuta[playerid] = 0; //JaKupuje[playerid] = 0; JaWymieniam[playerid] = 0;
 	SexOffer[playerid] = 999; SexPrice[playerid] = 0; GraczDajacySamolot[playerid] = 999; IDLodzi[playerid] = 0; IDSamolotu[playerid] = 0;
 	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; WynajemOffer[playerid] = 999; DomOffer[playerid] = 999; DomCena[playerid] = 0;

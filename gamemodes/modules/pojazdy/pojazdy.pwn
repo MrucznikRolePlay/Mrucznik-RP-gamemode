@@ -1226,6 +1226,15 @@ IsPlayerAtPayNSpray(playerid)
     return 0;
 }
 
+GetVehPrice(veh)
+{
+    if(veh < 400 || veh > 611)
+    {
+        return 0;
+    }
+    return CarPrices[veh-400];
+}
+
 //-----------------<[ Timery: ]>--------------------
 /*
 

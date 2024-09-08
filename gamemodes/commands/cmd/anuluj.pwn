@@ -48,7 +48,7 @@ YCMD:anuluj(playerid, params[], help)
 	else if(strcmp(x_job,"przemyt",true) == 0 || strcmp(x_job,"pancerz",true) == 0) { SmugglingOffer[playerid] = 999; SmugglingOfferPrice[playerid] = 0; }
 	else if(strcmp(x_job,"wywiad",true) == 0) { LiveOffer[playerid] = 999; }
 	else if(strcmp(x_job,"tankowanie",true) == 0) { RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; }
-	else if(strcmp(x_job,"auto",true) == 0) { CarOffer[playerid] = 999; CarPrice[playerid] = 0; CarID[playerid] = 0; }
+	else if(strcmp(x_job,"auto",true) == 0) { CarOffer[playerid] = 999; CarID[playerid] = 0; }
 	else if(strcmp(x_job,"boks",true) == 0) { BoxOffer[playerid] = 999; }
 	else if(strcmp(x_job,"swiadek",true) == 0) { MarryWitnessOffer[playerid] = 999; }
 	else if(strcmp(x_job,"slub",true) == 0) { ProposeOffer[playerid] = 999; }

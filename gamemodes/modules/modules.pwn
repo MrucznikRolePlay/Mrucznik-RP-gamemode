@@ -285,6 +285,7 @@
 
 
 //-------<[ commands ]>-------
+#include "front_business\commands\front_business_commands.pwn"
 #include "frakcje\commands\frakcje_commands.pwn"
 #include "admin\commands\admin_commands.pwn"
 #include "pojazdy\commands\pojazdy_commands.pwn"
