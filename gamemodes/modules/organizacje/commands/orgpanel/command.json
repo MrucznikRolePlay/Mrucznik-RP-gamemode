@@ -1,7 +1,7 @@
 {
     "name": "orgpanel",
     "description": "Panel lidera organizacji przestêpczej.",
-    "command_tips": ["Dostêpne akcje: nazwa / motto / kolor / spawn / przyjmij / zwolnij / ranga / pracownicy / oddaj / usun"],
+    "command_tips": ["Dostêpne akcje: nazwa / motto / kolor / spawn / przyjmij / zwolnij / ranga / pracownicy / stawka / oddaj / usun"],
     "permissions": [],
     "author": "mrucznik",
     "aliases": [

@@ -33,12 +33,12 @@ ShowOrgLeaderCommands(playerid)
 
 LoadOrganisations()
 {
-    new lQuery[256], rowCount, lRow;
+    new query[256], rowCount, row;
     mysql_query("SELECT * FROM `mru_org` ORDER BY ID");
     mysql_store_result();
-    while(mysql_fetch_row_format(lQuery, "|"))
+    while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(lQuery, "p<|>de<ds[32]s[128]hffffdd>", lRow, OrgInfo[rowCount]);
+        sscanf(query, "p<|>de<ds[32]s[128]hffffddd>", row, OrgInfo[rowCount]);
         rowCount++;
     }
     mysql_free_result();
@@ -57,11 +57,12 @@ SaveOrg(id, savetype)
     {
         case ORG_SAVE_TYPE_BASIC: 
         {
-            format(query, sizeof(query), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d' WHERE `ID`='%d'",
+            format(query, sizeof(query), "UPDATE `mru_org` SET `Type`='%d', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d', `LeaderStake`='%d' WHERE `ID`='%d'",
                 OrgInfo[id][o_Type], 
                 OrgInfo[id][o_Color], 
                 OrgInfo[id][o_Spawn][0],OrgInfo[id][o_Spawn][1],OrgInfo[id][o_Spawn][2],OrgInfo[id][o_Spawn][3], 
                 OrgInfo[id][o_Int], OrgInfo[id][o_VW], 
+                OrgInfo[id][o_LeaderStake],
                 id);
         }
         case ORG_SAVE_TYPE_DESC: 
@@ -86,6 +87,7 @@ CreateOrganisation(org, name[32], color, type)
     OrgInfo[org][o_Spawn][3] = 252.4531;
     OrgInfo[org][o_Int] = 0;
     OrgInfo[org][o_VW] = 0;
+    OrgInfo[org][o_LeaderStake] = 5;
 
     SaveOrg(org, ORG_SAVE_TYPE_BASIC);
     SaveOrg(org, ORG_SAVE_TYPE_DESC);
@@ -118,6 +120,8 @@ RemoveOrganisation(org)
     OrgInfo[org][o_Spawn][3] = 0.0;
     OrgInfo[org][o_Int] = 0;
     OrgInfo[org][o_VW] = 0;
+    OrgInfo[org][o_LeaderStake] = 5;
+    
     SaveOrg(org, ORG_SAVE_TYPE_BASIC);
     SaveOrg(org, ORG_SAVE_TYPE_DESC);
 }

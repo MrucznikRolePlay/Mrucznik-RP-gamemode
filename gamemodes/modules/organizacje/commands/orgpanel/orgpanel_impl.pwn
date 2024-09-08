@@ -283,6 +283,28 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 	{
 		ShowMemberList(playerid, GetPlayerOrg(playerid));
 	}
+	else if(strcmp(action, "stawka", true) == 0)
+	{
+		new stake;
+		if( sscanf(params, "d", stake))
+		{
+			sendTipMessage(playerid, "U¿yj /orgpanel stawka [procent lidera (min "#MIN_LEADER_STAKE" max "#MAX_LEADER_STAKE")]");
+			sendTipMessage(playerid, "Procent lidera to procent zarobków z przejêtych biznesów, który potr¹cisz pracownikom podczas PayDay'a.");
+			return 1;
+		}
+
+		if(stake < MIN_LEADER_STAKE || stake > MAX_LEADER_STAKE)
+		{
+			MruMessageFail(playerid, "Procent lidera musi byæ w granicach od "#MIN_LEADER_STAKE" do "#MAX_LEADER_STAKE".");
+			return 1;
+		}
+
+		OrgInfo[org][o_LeaderStake] = stake;
+		SaveOrg(org, ORG_SAVE_TYPE_BASIC);
+
+		MruMessageGoodInfoF(playerid, "Ustawi³eœ procent zarobków z przejêtych biznesów, który potr¹cisz pracownikom podczas PayDay'a na %d%%", stake);
+		Log(serverLog, INFO, "Lider %s rodziny %d ustawil swoj procent na %d.", GetPlayerLogName(playerid), org, stake);
+	}
 	else if(strcmp(action, "oddaj",true) == 0)
 	{
 		new giveplayerid, confimation[32];

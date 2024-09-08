@@ -191,7 +191,7 @@ FrontBiz_OnPayDay(playerid)
 			new Float:perPlayerIncome = float(IncomePerPlayer) * floatlog(float(Iter_Count(Player)), 2.0);
 			new frontBizIncome = floatround(perPlayerIncome) + BaseIncome;
 
-			new singleBizLeaderIncome = (frontBizIncome * LeaderStakePercent) / 100;
+			new singleBizLeaderIncome = (frontBizIncome * OrgInfo[org][o_LeaderStake]) / 100;
 			new singleBizMemberIncome = frontBizIncome - singleBizLeaderIncome;
 
 			totalIncome += frontBizIncome;

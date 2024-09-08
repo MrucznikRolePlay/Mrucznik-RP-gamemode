@@ -44,7 +44,8 @@ enum eOrg {
     o_Color,
     Float:o_Spawn[4],
     o_Int,
-    o_VW
+    o_VW,
+    o_LeaderStake
 };
 
 //-----------------<[ Zmienne: ]>-------------------

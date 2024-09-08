@@ -54,7 +54,6 @@ enum eFrontBusinessInfo {
     TakeoverHour, TakeoverMinute, TakeoverTime, 
     BizColor,
     Owner,
-    LeaderStakePercent,
     // only in memory
     TakeoverActive,
     TakeoverStartTime,
