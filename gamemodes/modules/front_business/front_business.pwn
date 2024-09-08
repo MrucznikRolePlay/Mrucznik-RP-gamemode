@@ -63,7 +63,8 @@ LoadFrontBusinesses()
 
 		FrontBusiness[i][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
-		FrontBusiness[i][TakeoverArea] = CreateDynamicCircle(FrontBusiness[i][OutX], FrontBusiness[i][OutY], 
+		FrontBusiness[i][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[i][OutX], FrontBusiness[i][OutY], 
+			FrontBusiness[i][OutZ], FrontBusiness[i][OutZ] + 10, 
 			TAKEOVER_ZONE_SIZE, FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 
 		CreateDynamicPickup(GetFrontBusinessPickup(FrontBusiness[i][Type]), 1, 
@@ -91,11 +92,18 @@ StartFrontBizTakeover(bizId)
 {
 	FrontBusiness[bizId][TakeoverActive] = true;
 	FrontBusiness[bizId][TakeoverStartTime] = gettime();
+
+	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(
+		FrontBusiness[i][TakeoverX], FrontBusiness[i][TakeoverY], FrontBusiness[i][TakeoverZ], 
+		TAKEOVER_ZONE_SIZE, 
+		FrontBusiness[i][TakeoverVw], FrontBusiness[i][TakeoverInt], 
+		INVALID_PLAYER_ID, STREAMER_CP_SD, FrontBusiness[i][GangZoneArea]);
 }
 
 StopFrontBizTakeover(bizId)
 {
 	FrontBusiness[bizId][TakeoverActive] = false;
+	DestroyDynamicCP(FrontBusiness[bizId][TakeoverCheckpoint]);
 
 	new winner = -1, maxScore;
 	for(new i; i<MAX_ORG; i++)
