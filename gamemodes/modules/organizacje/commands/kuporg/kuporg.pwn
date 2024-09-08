@@ -56,10 +56,10 @@ YCMD:kuporg(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new name[32], color, orgType;
-    if(sscanf(params, "s[32]hd", name, color, orgType))
+    new color, orgType, name[32];
+    if(sscanf(params, "hds[32]", color, orgType, name))
     {
-        sendTipMessage(playerid, "U¿yj /kuporg [nazwa] [kolor w formacie hex (np. F1A151)] [typ organizacji (1 - Gang, 2 - Mafia)] ");
+        sendTipMessage(playerid, "U¿yj /kuporg [kolor w formacie hex (np. F1A151)] [typ organizacji (1 - Gang, 2 - Mafia)] [nazwa] ");
         sendTipMessage(playerid, "Koszt stworzenia organizacji: "#CREATE_ORG_COST"$ i "#CREATE_ORG_CONTRABAND_COST" kontrabandy.");
         sendTipMessage(playerid, "Gangi mog¹ przejmowaæ strefy gangów w Los Santos.");
         sendTipMessage(playerid, "Mafie mog¹ przejmowaæ biznesy w Vice City.");
@@ -67,5 +67,5 @@ YCMD:kuporg(playerid, params[], help)
     }
     
     //command body
-    return command_kuporg_Impl(playerid, name, color, orgType);
+    return command_kuporg_Impl(playerid, color, orgType, name);
 }

@@ -55,7 +55,7 @@ YCMD:dajbiznes(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, valueBiz;
-    if(sscanf(params, "rd", giveplayerid, valueBiz))
+    if(sscanf(params, "k<fix>d", giveplayerid, valueBiz))
     {
         sendTipMessage(playerid, "U¿yj /dajbiznes [Nick/ID] [BIZ_ID] ");
         return 1;

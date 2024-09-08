@@ -57,7 +57,7 @@ YCMD:dajobiekt(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, bone, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, materialcolor1, materialcolor2;
-    if(sscanf(params, "rddF(0.0)F(0.0)F(0.0)F(0.0)F(0.0)F(0.0)F(1.0)F(1.0)F(1.0)D(0)D(0)", giveplayerid, bone, model, x, y, z, rx, ry, rz, sx, sy, sz, materialcolor1, materialcolor2))
+    if(sscanf(params, "k<fix>ddf(0.0)f(0.0)f(0.0)f(0.0)f(0.0)f(0.0)f(1.0)f(1.0)f(1.0)d(0)d(0)", giveplayerid, bone, model, x, y, z, rx, ry, rz, sx, sy, sz, materialcolor1, materialcolor2))
     {
         sendTipMessage(playerid, "U¿yj /dajobiekt [Nick/ID] [koœæ] [obiekt] [x] [y] [z] [rx] [ry] [rz] [sx] [sy] [sz] [materialcolor1] [materialcolor2] ");
         return 1;

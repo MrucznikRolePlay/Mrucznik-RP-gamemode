@@ -57,7 +57,7 @@ YCMD:selldrugs(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, weight, price;
-    if(sscanf(params, "rdd", giveplayerid, weight, price))
+    if(sscanf(params, "k<fix>dd", giveplayerid, weight, price))
     {
         sendTipMessage(playerid, "U¿yj /selldrugs [Nick/ID] [waga (gram)] [cena] ");
         return 1;

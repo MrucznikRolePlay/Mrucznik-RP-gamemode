@@ -37,7 +37,7 @@ LoadFrontBusinesses()
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverMinute"), 30 * random(2));
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverTime"), 3600); // 30 minutes
 
-			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), COLOR_GREY);
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), COLOR_BROWN);
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "owner"), 0);
 
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "profit"), 0);
@@ -81,7 +81,8 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ],
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 
-		CreateDynamic3DTextLabel(FrontBusiness[i][Name], FrontBusiness[i][BizColor], FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
+		CreateDynamic3DTextLabel(FrontBusiness[i][Name], FrontBusiness[i][BizColor], 
+			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
 			EXTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 		if(FrontBusiness[i][InX] != 0.0) 

@@ -55,7 +55,7 @@ YCMD:setkontrabanda(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, value;
-    if(sscanf(params, "rd", giveplayerid, value))
+    if(sscanf(params, "k<fix>d", giveplayerid, value))
     {
         sendTipMessage(playerid, "U¿yj /setkontrabanda [Nick/ID] [value] ");
         return 1;

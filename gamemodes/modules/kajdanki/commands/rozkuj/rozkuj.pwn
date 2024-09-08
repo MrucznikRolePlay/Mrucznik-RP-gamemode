@@ -62,7 +62,7 @@ YCMD:rozkuj(playerid, params[], help)
     }
     //fetching params
     new uncuffedplayerid;
-    if(sscanf(params, "r", uncuffedplayerid))
+    if(sscanf(params, "k<fix>", uncuffedplayerid))
     {
         sendTipMessage(playerid, "U¿yj /rozkuj [Nick/ID] ");
         return 1;

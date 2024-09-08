@@ -61,7 +61,7 @@ YCMD:skuj(playerid, params[], help)
     }
     //fetching params
     new cuffedplayerid;
-    if(sscanf(params, "r", cuffedplayerid))
+    if(sscanf(params, "k<fix>", cuffedplayerid))
     {
         sendTipMessage(playerid, "U¿yj /skuj [Nick/ID] ");
         return 1;

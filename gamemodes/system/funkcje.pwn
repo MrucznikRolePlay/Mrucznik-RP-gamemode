@@ -4085,7 +4085,7 @@ ShowStats(playerid,targetid)
 		SendClientMessage(playerid, COLOR_GRAD2,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] Przestêpstwa:[%d] Czas Aresztu:[%d] Smierci bêd¹c Poszukiwanym:[%d]", fishes,bigfish,crimes,arrests,warrests );
 		SendClientMessage(playerid, COLOR_GRAD3,coordsstring);
-		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Rodzina:[%s] Skin ID:[%d]",kills,deaths,costlevel,exp,expamount,wanted,f2text, skin);
+		format(coordsstring, sizeof(coordsstring), "Zabiæ:[%d] Œmierci:[%d] Bonus Levelowy:[$%d] Respekt:[%d/%d] WL:[%d] Organizacja:[%s] Skin ID:[%d]",kills,deaths,costlevel,exp,expamount,wanted,f2text, skin);
 		SendClientMessage(playerid, COLOR_GRAD4,coordsstring);
 		format(coordsstring, sizeof(coordsstring), "Drugs:[%d] Mats:[%d] Kontrabanda:[%d] Frakcja:[%s] Ranga:[%s] Warny:[%d] Dostêpnych zmian nicków:[%d]",drugs,mats,kontrabanda,ftext,rtext,PlayerInfo[targetid][pWarns],znick);
 		SendClientMessage(playerid, COLOR_GRAD5,coordsstring);

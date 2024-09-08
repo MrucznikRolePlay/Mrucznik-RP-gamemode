@@ -55,7 +55,7 @@ YCMD:pobij(playerid, params[], help)
     }
     //fetching params
     new opponentid;
-    if(sscanf(params, "r", opponentid))
+    if(sscanf(params, "k<fix>", opponentid))
     {
         sendTipMessage(playerid, "U¿yj /pobij [Nick/ID] ");
         return 1;

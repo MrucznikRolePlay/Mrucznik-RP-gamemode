@@ -85,14 +85,9 @@ task RestreamActors[5000]()
 {
 	for(new i; i<valActor; i++)
 	{
-		SetDynamicActorPos(actorUID[i], Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]); 
-		SetDynamicActorFacingAngle(actorUID[i], Actors[i][a_posR]);
-		if(strlen(Actors[i][a_animLib]) > 3 && strlen(Actors[i][a_animName]) > 3)
+		if(strlen(Actors[i][a_animLib]) > 0 && strlen(Actors[i][a_animName]) > 0)
 		{
-			new aalib[40], aaName[40];
-			strcat(Actors[i][a_animLib], aalib);
-			strcat(Actors[i][a_animName], aaName); 
-			SetActorAnimationEx(actorUID[i], aalib, aaName, 1, 1, 1); 
+			ApplyDynamicActorAnimation(actorUID[i], Actors[i][a_animLib], Actors[i][a_animName], 4.1, 1, 1, 1, 0, 0);
 		}
 	}
 }

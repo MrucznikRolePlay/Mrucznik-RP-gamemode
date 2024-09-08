@@ -319,7 +319,7 @@
 #define D_SUPPORT_LIST      1214
 
 #define D_ORGS              1255
-#define D_ORGS_SELECT       1256
+
 #define D_CREATE            1260
 #define D_EDIT              1261
 

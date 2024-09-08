@@ -25,62 +25,54 @@
 //------------------<[ Implementacja: ]>-------------------
 command_orgs_Impl(playerid, orgid)
 {
-    new string[256];
-    if(orgid == -1)
+    new string[1024];
+    if(orgid != -1)
     {
-        for(new i=0;i<sizeof(OrgTypes);i++)
+        if(PlayerInfo[playerid][pAdmin] > 0)
         {
-            format(string, sizeof(string), "%s%s\n", string, OrgTypes[i]);
+            SendClientMessage(playerid, COLOR_GREEN, "Cz≥onkowie Online:");
+            foreach(new i : Player)
+            {
+                if(GetPlayerOrg(i) == orgid)
+                {
+                    format(string, sizeof(string), "{%06x}%s{B4B5B7} [%d] ranga %d", (GetPlayerColor(i) >>> 8), GetNick(i), i, PlayerInfo[i][pRank]);
+                    SendClientMessage(playerid, COLOR_GRAD1, string);
+                }
+            }
         }
-        ShowPlayerDialogEx(playerid, D_ORGS, DIALOG_STYLE_LIST, "Spis organizacji", string, "Wybierz", "Wyjdü");
+    }
+
+    for(new i=1;i<MAX_ORG;i++)
+    {
+        if(!IsActiveOrg(i)) continue;
+        format(string, sizeof(string), "%s{000000}%d\t{FFFFFF}%s\t%s\n", string, i, OrgInfo[i][o_Name], OrgTypes[OrgInfo[i][o_Type]]);
+    }
+    if(strlen(string) == 0)
+    {
+        MruMessageFail(playerid, "Brak organizacji na serwerze.");
         return 1;
     }
-    
-    if(!IsActiveOrg(orgid)) return 1;
-    format(string, sizeof(string), "|| Cz≥onkowie ONLINE w %s ||", OrgInfo[orgid][o_Name]);
-    SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-    foreach(new i : Player)
-    {
-        if(GetPlayerOrg(i) == orgid)
-        {
-            if(IsPlayerOrgLeader(i)) format(string, sizeof(string), "* %s (LIDER)", GetNick(i));
-            else format(string, sizeof(string), "* %s (Ranga: %d)", GetNick(i), PlayerInfo[i][pRank]);
-            SendClientMessage(playerid, COLOR_GRAD2, string);
-        }
-    }
+
+    if(PlayerInfo[playerid][pAdmin] > 0)
+        ShowPlayerDialogEx(playerid, D_ORGS, DIALOG_STYLE_LIST, "Lista organizacji", string, "Cz≥onkowie", "Wyjdü");
+    else
+        ShowPlayerDialogEx(playerid, D_ORGS, DIALOG_STYLE_LIST, "Lista organizacji", string, "Wyjdü", "");
     return 1;
 }
 
 cmd_organizacje_OnDialogResp(playerid, dialogid, response, listitem, inputtext[])
 {
-    #pragma unused inputtext
+    #pragma unused listitem
 
     if(dialogid == D_ORGS)
     {
-        if(!response) return 1;
-
-        new string[512];
-        for(new i=0;i<MAX_ORG;i++)
+        if(response && PlayerInfo[playerid][pAdmin] > 0)
         {
-            if(!IsActiveOrg(i)) continue;
-            if(GetOrgType(i) == listitem)
-            {
-                format(string, sizeof(string), "%s{000000}%d\t{FFFFFF}%s\n", string, i, OrgInfo[i][o_Name]);
-            }
+            new id = strval(inputtext);
+            new string[16];
+            valstr(string, id);
+            RunCommand(playerid, "/organizacje", string);
         }
-        if(strlen(string) > 3)
-        {
-            ShowPlayerDialogEx(playerid, D_ORGS_SELECT, DIALOG_STYLE_LIST, "Lista organizacji", string, "Cz≥onkowie", "WrÛÊ");
-        }
-        return 1;
-    }
-    else if(dialogid == D_ORGS_SELECT)
-    {
-        if(!response) return RunCommand(playerid, "/organizacje",  "");
-        new id = strval(inputtext);
-        new string[16];
-        valstr(string, id);
-        RunCommand(playerid, "/organizacje", string);
         return 1;
     }
     return 0;

@@ -2202,15 +2202,9 @@ CREATE TABLE IF NOT EXISTS `mru_org` (
   `a` float NOT NULL DEFAULT '0',
   `Int` int(11) NOT NULL DEFAULT '0',
   `VW` int(11) NOT NULL DEFAULT '0',
+  `LeaderStake` int(11) NOT NULL DEFAULT '0'
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=708 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `mru_org`
---
-
-INSERT INTO `mru_org` (`ID`, `Type`, `Name`, `Motd`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW`) VALUES
-(0, 0, '', '', 0, 0.0, 0.0, 0.0, 0.0, 0, 0);
 
 -- --------------------------------------------------------
 

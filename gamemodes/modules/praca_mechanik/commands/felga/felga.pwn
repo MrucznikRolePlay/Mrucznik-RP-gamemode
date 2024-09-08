@@ -55,7 +55,7 @@ YCMD:felga(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, felga;
-    if(sscanf(params, "rd", giveplayerid, felga))
+    if(sscanf(params, "k<fix>d", giveplayerid, felga))
     {
         sendTipMessage(playerid, "U¿yj /felga [Nick/ID] [felga] ");
         return 1;

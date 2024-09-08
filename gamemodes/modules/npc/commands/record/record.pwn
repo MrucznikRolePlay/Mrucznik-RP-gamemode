@@ -57,7 +57,7 @@ YCMD:record(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, type, filename[64];
-    if(sscanf(params, "rds[64]", giveplayerid, type, filename))
+    if(sscanf(params, "k<fix>ds[64]", giveplayerid, type, filename))
     {
         sendTipMessage(playerid, "U¿yj /record [Nick/ID] [typ nagrywania, 1 - kierowca, 2 - pieszy] [nazwa pliku] ");
         return 1;

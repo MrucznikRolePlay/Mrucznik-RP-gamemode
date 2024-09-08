@@ -56,7 +56,7 @@ YCMD:dajbilet(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, opcja[24];
-    if(sscanf(params, "rs[24]", giveplayerid, opcja))
+    if(sscanf(params, "k<fix>s[24]", giveplayerid, opcja))
     {
         sendTipMessage(playerid, "U¿yj /dajbilet [Nick/ID] [normal[1], vip[2], supervip[3]] ");
         return 1;

@@ -14,12 +14,6 @@
     ],
     "parameters": [
         {
-            "type": "string",
-            "size": "32",
-            "name": "name",
-            "description": "nazwa"
-        },
-        {
             "type": "hex",
             "name": "color",
             "description": "kolor w formacie hex (np. F1A151)"
@@ -28,6 +22,12 @@
             "type": "integer",
             "name": "orgType",
             "description": "typ organizacji (1 - Gang, 2 - Mafia)"
+        },
+        {
+            "type": "string",
+            "size": "32",
+            "name": "name",
+            "description": "nazwa"
         }
     ],
     "date": "07.09.2024"

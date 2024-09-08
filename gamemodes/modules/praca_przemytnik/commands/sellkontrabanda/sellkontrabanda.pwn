@@ -59,7 +59,7 @@ YCMD:sellkontrabanda(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, count, price;
-    if(sscanf(params, "rdd", giveplayerid, count, price))
+    if(sscanf(params, "k<fix>dd", giveplayerid, count, price))
     {
         sendTipMessage(playerid, "U¿yj /sellkontrabanda [Nick/ID] [liczba] [cena] ");
         return 1;

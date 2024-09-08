@@ -55,7 +55,7 @@ YCMD:dajlideraorg(playerid, params[], help)
 		}
 		else
 		{
-			SendClientMessage(playerid, COLOR_RED, "ERROR! Wyst¹pi³ b³¹d, zg³oœ okolicznoœci do Mrucznika na slacku.");
+			SendClientMessage(playerid, COLOR_RED, "Ta organizacja jest nieaktywna, musisz stworzyæ organizacje /kuporg jeœli chcesz dodaæ now¹.");
 		}
     }
     else

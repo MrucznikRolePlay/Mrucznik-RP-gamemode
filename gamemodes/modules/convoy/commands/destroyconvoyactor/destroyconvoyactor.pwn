@@ -56,7 +56,7 @@ YCMD:destroyconvoyactor(playerid, params[], help)
     }
     //fetching params
     new actor;
-    if(sscanf(params, "D(-1)", actor))
+    if(sscanf(params, "d(-1)", actor))
     {
         sendTipMessage(playerid, "U¿yj /destroyconvoyactor [actor] ");
         return 1;

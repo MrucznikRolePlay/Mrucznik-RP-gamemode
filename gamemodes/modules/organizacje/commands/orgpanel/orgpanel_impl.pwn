@@ -399,7 +399,7 @@ ShowMemberList(playerid, org)
 				format(str_rank, sizeof(str_rank), "[%i] %s", rank, OrgRank[GetPlayerOrg(playerid)][rank]);
 			}
 			new benefit = GetPlayerOrgBenefit(uid, org);
-			AddDialogListitem(playerid, "%s\t%s\t%s%d$\t{%s}%s", nick, str_rank, benefit > 0 ? ("00FF00") : ("FF0000"), benefit, isconnected ? ("00FF00") : ("FF0000"), isconnected ? ("ONLINE") : ("OFFLINE"));
+			AddDialogListitem(playerid, "%s\t%s\t{%s}%d$\t{%s}%s", nick, str_rank, benefit > 0 ? ("00FF00") : ("FF0000"), benefit, isconnected ? ("00FF00") : ("FF0000"), isconnected ? ("ONLINE") : ("OFFLINE"));
 			VECTOR_push_back_val(VMembersOrg[playerid], uid);
 		}
 		ShowPlayerDialogPages(playerid, "RodzinaPracownicy", DIALOG_STYLE_TABLIST, sprintf("Cz³onkowie %s", OrgInfo[org][o_Name]), "OK", "Zamknij", 15, "{888888}Nastêpna strona >>>", "{888888}<<< Poprzednia strona");
@@ -415,7 +415,7 @@ DialogPages:RodzinaPracownicy(playerid, response, listitem, inputtext[]) {
 
 	foreach(new i: Player) {
 		if(PlayerInfo[i][pUID] == uid) {
-			sendTipMessage(playerid, "Gracz jest online, uzyj /pr aby nim zarz¹dzaæ");
+			sendTipMessage(playerid, "Gracz jest online, uzyj /orgpanel aby nim zarz¹dzaæ");
 			Command_ReProcess(playerid, "orgpanel pracownicy", false);
 			return 1;
 		}

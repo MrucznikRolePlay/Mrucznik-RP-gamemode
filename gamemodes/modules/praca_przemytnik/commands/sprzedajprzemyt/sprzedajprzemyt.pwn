@@ -58,7 +58,7 @@ YCMD:sprzedajprzemyt(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, nazwa[32], price;
-    if(sscanf(params, "rs[32]d", giveplayerid, nazwa, price))
+    if(sscanf(params, "k<fix>s[32]d", giveplayerid, nazwa, price))
     {
         sendTipMessage(playerid, "U¿yj /sprzedajprzemyt [Nick/ID] [jetpack/pancerz] [cena] ");
         return 1;

@@ -56,7 +56,7 @@ YCMD:malunek(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, paintjob;
-    if(sscanf(params, "rd", giveplayerid, paintjob))
+    if(sscanf(params, "k<fix>d", giveplayerid, paintjob))
     {
         sendTipMessage(playerid, "U¿yj /malunek [Nick/ID] [id malunku] ");
         return 1;
