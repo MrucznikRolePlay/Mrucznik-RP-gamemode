@@ -88,7 +88,7 @@ command_gotofrontbiz_Impl(playerid, bizId, position)
             return 1;
         }
     }
-    MruMessageGoodInfoF(playerid, "Teleportowa³eœ siê do pracy %s", GetJobName(job));
+    MruMessageGoodInfoF(playerid, "Teleportowa³eœ siê do biznesu %s", FrontBusiness[bizId][Name]);
     return 1;
 }
 
