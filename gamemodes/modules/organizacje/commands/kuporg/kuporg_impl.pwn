@@ -63,7 +63,7 @@ command_kuporg_Impl(playerid, color, orgType, name[32])
     TakeContraband(playerid, CREATE_ORG_CONTRABAND_COST);
 
     MruMessageGoodInfoF(playerid, "Gratulacje! Stworzy³eœ now¹ organizacjê o nazwie \"%s\" i typie %s", name, OrgTypes[orgType]);
-    MruMessageGoodInfo(playerid, "Ka¿dego dnia z sejfu frakcji pobierana jest kwota "#ORG_DAILY_COST"$ za prowadzenie frakcji i "#ORG_DAILY_MEMBER_COST"$ za ka¿dego pracownika.");
+    MruMessageGoodInfo(playerid, "Ka¿dego dnia z sejfu organizacji pobierana jest kwota "#ORG_DAILY_COST"$ za prowadzenie organizacji i "#ORG_DAILY_MEMBER_COST"$ za ka¿dego pracownika.");
     MruMessageGoodInfo(playerid, "UWAGA! Pilnuj by d³ug w sejfie Twojej organizacji nie przekroczy³ -100 000$, inaczej Twoja organizacja zostanie usuniêta!");
     MruMessageGoodInfo(playerid, "Aby zobaczyæ dostêpne komendy wpisz /liderpomoc.");
     return 1;

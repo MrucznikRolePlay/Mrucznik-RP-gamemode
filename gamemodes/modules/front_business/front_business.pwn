@@ -87,7 +87,8 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 		if(FrontBusiness[i][InX] != 0.0) 
 		{
-			CreateDynamic3DTextLabel("Wyjœcie", FrontBusiness[i][BizColor], FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ], 
+			CreateDynamic3DTextLabel("Wyjœcie", FrontBusiness[i][BizColor], 
+				FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ], 
 				INTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 				FrontBusiness[i][InVw], FrontBusiness[i][InInt]);
 		}
