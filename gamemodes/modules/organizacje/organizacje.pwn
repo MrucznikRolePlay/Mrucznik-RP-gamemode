@@ -121,7 +121,7 @@ RemoveOrganisation(org)
     OrgInfo[org][o_Int] = 0;
     OrgInfo[org][o_VW] = 0;
     OrgInfo[org][o_LeaderStake] = 5;
-    
+
     SaveOrg(org, ORG_SAVE_TYPE_BASIC);
     SaveOrg(org, ORG_SAVE_TYPE_DESC);
 }
@@ -175,6 +175,20 @@ GetPlayerOrgBenefit(playerUID, org)
     new benefit;
     Redis_GetInt(RedisClient, sprintf("player:%d:org:%d:benefit", playerUID, org), benefit);
     return benefit;
+}
+
+GetPlayerTakeoverPoints(playerUID, org)
+{
+    new points;
+    Redis_GetInt(RedisClient, sprintf("player:%d:org:%d:takeoverPoints", playerUID, org), points);
+    return points;
+}
+
+IncrPlayerTakeoverPoints(playerid, org, value=1)
+{
+    new points;
+    Redis_IncrBy(sprintf("player:%d:org:%d:takeoverPoints", PlayerInfo[playerid][pUID], org), value);
+    return points;
 }
 
 GetPlayerOrgType(playerid) 

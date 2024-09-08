@@ -195,15 +195,17 @@ FrontBiz_OnPayDay(playerid)
 			new singleBizMemberIncome = frontBizIncome - singleBizLeaderIncome;
 
 			totalIncome += frontBizIncome;
-			PlayerInfo[playerid][pAccount] += singleBizMemberIncome;
-			SejfR_Add(org, singleBizLeaderIncome);
+			memberIncome += singleBizMemberIncome;
+			leaderIncome += singleBizLeaderIncome;
 
 			Redis_IncrBy(RedisFrontBizKey(i, "profit"), frontBizIncome);
 			Redis_IncrBy(RedisFrontBizKey(i, "leaderProfit"), singleBizLeaderIncome);
 		}
 	}
 
-	AccountOrgBenefitForPlayerUID(PlayerInfo[playerid][pUID], org, memberIncome);
+	PlayerInfo[playerid][pAccount] += memberIncome;
+	SejfR_Add(org, leaderIncome);
+	AccountOrgBenefitForPlayerUID(PlayerInfo[playerid][pUID], org, leaderIncome);
 
 	// messages
 	SendClientMessage(playerid, COLOR_GREY, sprintf("  Dochód z biznesów organizacji: %d$.", totalIncome));

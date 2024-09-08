@@ -436,10 +436,12 @@ DialogPages:RodzinaPracownicy(playerid, response, listitem, inputtext[]) {
 	SetPVarInt(playerid, "prpanel_uid", uid);
 	new org = GetPlayerOrg(playerid);
 	new benefit = GetPlayerOrgBenefit(uid, org);
+	new points = GetPlayerTakeoverPoints(uid, org);
 	strcat(rankName, OrgRank[org][rank]);
     format(str, sizeof(str), ""#KARA_STRZALKA"    »» "#KARA_TEKST"Nick: "#KARA_TEKST"%s", nick);
     format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Ranga: "#KARA_TEKST"%s", str, rankName);
-    format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Przychod z org: "#KARA_TEKST"%d", str, benefit);
+    format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Dochód z pracownika: "#KARA_TEKST"%d", str, benefit);
+    format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Punkty przejêcia: "#KARA_TEKST"%d", str, points);
     format(str, sizeof(str), "%s\n ", str);
     format(str, sizeof(str), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Wyrzuæ cz³onka", str);  
     format(str, sizeof(str), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Zmieñ rangê", str);  
@@ -464,7 +466,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			switch(listitem) 
 			{
-				case 4: 
+				case 5: 
 				{ // zwolnij
 					new uid = GetPVarInt(playerid, "prpanel_uid");
 					new nick[MAX_PLAYER_NAME];
@@ -483,7 +485,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
 					DeletePVar(playerid, "prpanel_uid");
 				}
-				case 5: 
+				case 6: 
 				{ // ranga
 					new org = GetPlayerOrg(playerid);
 					new str[512];

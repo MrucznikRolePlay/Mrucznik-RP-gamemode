@@ -62,6 +62,7 @@ enum eFrontBusinessInfo {
     CopTakingOver,
     CopTakingOverScore
 };
+
 //-----------------<[ Zmienne: ]>-------------------
 new FrontBusiness[][eFrontBusinessInfo] = {
     {

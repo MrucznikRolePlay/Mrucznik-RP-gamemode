@@ -168,6 +168,20 @@ StopTakingOver(bizId, org)
 	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Uda³o siê odeprzeæ atak na biznes %s!", FrontBusiness[bizId][Name]));
 }
 
+IncrTakeoverPointsStat(org)
+{
+	foreach(new i : Player)
+	{
+		new playerTakeoverOrg = GetPVarInt(i, "taking-over") - 1;
+		if(playerTakeoverOrg != org || playerTakeoverOrg == 0)
+		{
+			continue;
+		}
+
+		IncrPlayerTakeoverPoints(i, org, 1); // TODO: optimize
+	}
+}
+
 TakeOverFrontBusiness(bizId, org)
 {
 	new color = OrgInfo[org][o_Color];

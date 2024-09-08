@@ -92,6 +92,7 @@ UpdateTakeoverPoints(bizId)
 					FrontBusiness[bizId][TakingOverScore][i] += pointsIncr;
 				}
 			}
+			IncrTakeoverPointsStat(i);
 		}
 		else if(FrontBusiness[bizId][TakingOver][i] == 0 && FrontBusiness[bizId][TakingOverScore][i] > 0)
 		{
