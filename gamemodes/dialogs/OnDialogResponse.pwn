@@ -10571,17 +10571,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 0:
 		            {
 						format(stan, sizeof(stan), "%s\n%s", stan, stanmats);
-		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_TABLIST, "Sejf rodzinny - stan", stan, "Wróæ", "Wróæ");
+		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_TABLIST, "Sejf organizacji - stan", stan, "Wróæ", "Wróæ");
 		            }
 		            case 1:
-						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
+						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf organizacji - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
 		            case 2:
-						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp³acanie", stan, "Wp³aæ", "Wróæ");
+						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf organizacji - wp³acanie", stan, "Wp³aæ", "Wróæ");
 					case 3:
-						ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wyp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+						ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf organizacji mats - wyp³acanie", stanmats, "Wyp³aæ", "Wróæ");
 					case 4: {
 						format(stan, sizeof(stan), "%s\n{F8F8FF}Iloœæ materia³ów które posiadasz:\t\t{008080}%d", stanmats, PlayerInfo[playerid][pMats]);
-						ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wp³acanie", stan, "Wp³aæ", "Wróæ");
+						ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf organizacji mats - wp³acanie", stan, "Wp³aæ", "Wróæ");
 					}
 		        }
 		    }
@@ -10620,7 +10620,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
 					new stan[256];
 					format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-					ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
+					ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf organizacji - wyp³acanie", stan, "Wyp³aæ", "Wróæ");
 				}
 		    }
 		    else
@@ -10663,7 +10663,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloœæ!");
 		            new stan[256];
 	                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-					ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp³acanie", stan, "Wp³aæ", "Wróæ");
+					ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf organizacji - wp³acanie", stan, "Wp³aæ", "Wróæ");
 		        }
 		    }
 		    else
@@ -10701,7 +10701,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
 					new stanmats[128];
 					format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
-					ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wyp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+					ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf organizacji mats - wyp³acanie", stanmats, "Wyp³aæ", "Wróæ");
 				}
 		    }
 		    else
@@ -10739,7 +10739,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloœæ!");
 					new stanmats[256];
 					format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d\n{F8F8FF}Iloœæ materia³ów które posiadasz:\t\t{008080}%d", Rodzina_Mats[lider], PlayerInfo[playerid][pMats]);
-					ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wp³acanie", stanmats, "Wyp³aæ", "Wróæ");
+					ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf organizacji mats - wp³acanie", stanmats, "Wyp³aæ", "Wróæ");
 		        }
 		    }
 		    else

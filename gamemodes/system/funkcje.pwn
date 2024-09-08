@@ -7976,7 +7976,7 @@ SejfR_Save(frakcja)
 }
 
 SejfR_Show(playerid) {
-	ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf rodzinny", "Stan\nWyp³aæ\nWp³aæ\nWyp³aæ materia³y\nWp³aæ materia³y", "Wybierz", "WyjdŸ");
+	ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf organizacji", "Stan\nWyp³aæ\nWp³aæ\nWyp³aæ materia³y\nWp³aæ materia³y", "Wybierz", "WyjdŸ");
 }
 
 Sejf_Load()
