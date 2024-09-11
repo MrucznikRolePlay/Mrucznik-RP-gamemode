@@ -423,7 +423,7 @@ Zone_CheckPossToAttack(playerid, zoneid)
     {
         if(OrgInfo[fam][o_Color] & 0xFF000069 == 0xFF000069)
         {
-            MSGBOX_Show(playerid, "Zmien_kolor_swojej_rodziny_(/pr_kolor)", MSGBOX_ICON_TYPE_WARNING);
+            MSGBOX_Show(playerid, "Zmien_kolor_swojej_organizacji_(/pr_kolor)", MSGBOX_ICON_TYPE_WARNING);
             return false;
         }
     }

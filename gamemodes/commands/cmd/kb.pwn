@@ -42,7 +42,7 @@ YCMD:kb(playerid, params[], help)
 				{
 					GetPlayerName(playerid, giveplayer, sizeof(giveplayer));
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
-					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\nPrzelew\n>>Frakcyjne\n>>Rodzinne", "Wybierz", "Wyjdü");
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\nPrzelew\n>>Frakcyjne\n>>Organizacyjne", "Wybierz", "Wyjdü");
 				}
 				else
 				{

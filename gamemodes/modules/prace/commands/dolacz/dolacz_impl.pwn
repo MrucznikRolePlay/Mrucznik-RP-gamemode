@@ -52,7 +52,7 @@ command_dolacz_Impl(playerid)
 
 	if(!CanPlayerTakeJob(playerid, job))
 	{
-		MruMessageFail(playerid, "Musisz byæ cywilem albo cz³onkiem rodziny/mafii/gangu aby wzi¹æ pracê.");
+		MruMessageFail(playerid, "Musisz byæ cywilem albo cz³onkiem organizacji aby wzi¹æ pracê.");
 		return 1;
 	}
 

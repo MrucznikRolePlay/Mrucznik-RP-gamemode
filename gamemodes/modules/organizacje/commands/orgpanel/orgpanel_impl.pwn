@@ -104,7 +104,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		new color;
 		if( sscanf(params, "h", color))
 		{
-			sendTipMessage(playerid, "U¿yj /orgpanel kolor [kolor rodziny w formacie hex (np. F1A151)]");
+			sendTipMessage(playerid, "U¿yj /orgpanel kolor [kolor organizacji w formacie hex (np. F1A151)]");
 			sendTipMessage(playerid, "Koszt komendy: "#CHANGE_ORG_COLOR_COST" kontrabandy.");
 			return 1;
 		}
@@ -198,7 +198,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		MruMessageGoodInfoF(playerid, "Przyj¹³eœ %s do swojej organizacji, zap³aci³eœ "#JOIN_MEMBER_COST"$",GetNick(giveplayerid));
 		MruMessageGoodInfoF(giveplayerid, "%s przyj¹³ Ciê do organizacji %s.",GetNick(playerid), OrgInfo[org][o_Name]);
-		Log(serverLog, INFO, "Lider %s przyj¹³ %s do rodziny %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), org);
+		Log(serverLog, INFO, "Lider %s przyj¹³ %s do organizacji %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), org);
 		return 1;
 	}
 	else if(strcmp(action, "uninvite", true) == 0 || strcmp(action, "zwolnij", true) == 0)
@@ -236,9 +236,9 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		RemovePlayerFromOrg(giveplayerid);
 
-		MruMessageGoodInfoF(playerid, "Wyrzuci³eœ %s ze swojej rodziny.",GetNick(giveplayerid));
-		MruMessageBadInfoF(giveplayerid, "Lider %s wyrzuci³ ciê z rodziny.",GetNick(playerid));
-		Log(serverLog, INFO, "Lider %s wyrzuci³ %s z rodziny %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), org);
+		MruMessageGoodInfoF(playerid, "Wyrzuci³eœ %s ze swojej organizacji.",GetNick(giveplayerid));
+		MruMessageBadInfoF(giveplayerid, "Lider %s wyrzuci³ ciê z organizacji.",GetNick(playerid));
+		Log(serverLog, INFO, "Lider %s wyrzuci³ %s z organizacji %d.", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), org);
 		return 1;
 	}
 	else if(strcmp(action, "rank", true) == 0 || strcmp(action, "ranga", true) == 0)
@@ -290,7 +290,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		MruMessageGoodInfoF(playerid, "Da³es %d rangê graczowi %s", rank, GetNick(giveplayerid));
 		MruMessageGoodInfoF(giveplayerid, "Otrzyma³eœ %d rangê (%s) w organizacji %s od lidera %s.", rank, OrgRank[org][rank], OrgInfo[org][o_Name], GetNick(playerid));
-		Log(serverLog, INFO, "Lider %s rodziny %d da³ %s rangê %d.", GetPlayerLogName(playerid), org, GetPlayerLogName(giveplayerid), rank);
+		Log(serverLog, INFO, "Lider %s organizacji %d da³ %s rangê %d.", GetPlayerLogName(playerid), org, GetPlayerLogName(giveplayerid), rank);
 		return 1;
 	}
 	else if(strcmp(action, "pracownicy", true) == 0 || strcmp(action, "members",true) == 0)
@@ -317,7 +317,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		SaveOrg(org);
 
 		MruMessageGoodInfoF(playerid, "Ustawi³eœ procent zarobków z przejêtych biznesów, który potr¹cisz pracownikom podczas PayDay'a na %d%%", stake);
-		Log(serverLog, INFO, "Lider %s rodziny %d ustawil swoj procent na %d.", GetPlayerLogName(playerid), org, stake);
+		Log(serverLog, INFO, "Lider %s organizacji %d ustawil swoj procent na %d.", GetPlayerLogName(playerid), org, stake);
 	}
 	else if(strcmp(action, "oddaj",true) == 0)
 	{
@@ -368,7 +368,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		MruMessageGoodInfoF(playerid, "Przekaza³eœ swoj¹ organizacjê graczowi %s", GetNick(giveplayerid));
 		MruMessageGoodInfoF(giveplayerid, "Otrzyma³eœ kontrolê na organizacj¹ %s od by³ego lidera %s.", OrgInfo[org][o_Name], GetNick(playerid));
-		Log(serverLog, INFO, "Lider %s rodziny %d dal kontrole nad organizacja %s.", GetPlayerLogName(playerid), org, GetPlayerLogName(giveplayerid));
+		Log(serverLog, INFO, "Lider %s organizacji %d dal kontrole nad organizacja %s.", GetPlayerLogName(playerid), org, GetPlayerLogName(giveplayerid));
 	}
 	else if(strcmp(action, "usun",true) == 0)
 	{
@@ -383,7 +383,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		RemoveOrganisation(org);
 
 		MruMessageBadInfo(playerid, "Usun¹³eœ swoj¹ organizacje wraz ca³ym maj¹tkiem i zwolni³eœ wszystkich cz³onków.");
-		Log(serverLog, INFO, "Lider %s rodziny %d usunal swoja organizacje.", GetPlayerLogName(playerid), org);
+		Log(serverLog, INFO, "Lider %s organizacji %d usunal swoja organizacje.", GetPlayerLogName(playerid), org);
 	}
 	else if(strcmp(action, "stworzrange",true) == 0)
 	{
@@ -465,7 +465,7 @@ DialogPages:RodzinaPracownicy(playerid, response, listitem, inputtext[]) {
     format(str, sizeof(str), "%s\n ", str);
     format(str, sizeof(str), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Wyrzuæ cz³onka", str);  
     format(str, sizeof(str), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Zmieñ rangê", str);  
-    ShowPlayerDialogEx(playerid, D_ORGMEMBER, DIALOG_STYLE_LIST, "Zarz¹dzanie cz³onkiem rodziny", str, "Ok", "Wstecz");
+    ShowPlayerDialogEx(playerid, D_ORGMEMBER, DIALOG_STYLE_LIST, "Zarz¹dzanie cz³onkiem organizacji", str, "Ok", "Wstecz");
     return 1;
 }
 
@@ -477,7 +477,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!IsPlayerOrgLeader(playerid)) 
 		{
-			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
+			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
 			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 			DeletePVar(playerid, "prpanel_uid");
 			return 1;
@@ -493,7 +493,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					strcat(nick, MruMySQL_GetNameFromUID(uid));
 					new rodzina = MruMySQL_GetAccInt("FMember", nick);
 					if(rodzina != GetPlayerOrg(playerid)) {
-						Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
+						Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
 						sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!)");
 						DeletePVar(playerid, "prpanel_uid");
 						return 1;
@@ -501,7 +501,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new msg[1024];
 					format(msg, sizeof(msg), "UPDATE `mru_konta` SET `FMember`=0, `Rank`=99, `Member`=99, `Uniform`=0, `Team`=3 WHERE `UID`=%i AND `Rank`<1000", uid);
 					mysql_query(msg);
-					format(msg, sizeof(msg), "* Wyrzuci³eœ %s ze swojej rodziny.", nick);
+					format(msg, sizeof(msg), "* Wyrzuci³eœ %s ze swojej organizacji.", nick);
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
 					DeletePVar(playerid, "prpanel_uid");
 				}
@@ -536,7 +536,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(!IsPlayerOrgLeader(playerid)) 
 		{
-			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
+			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
 			sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 			DeletePVar(playerid, "prpanel_uid");
 			return 1;
@@ -557,7 +557,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new rodzina = MruMySQL_GetAccInt("FMember", nick);
 			if(rodzina != GetPlayerOrg(playerid)) 
 			{
-				Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
+				Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
 				sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 				DeletePVar(playerid, "prpanel_uid");
 				return 1;

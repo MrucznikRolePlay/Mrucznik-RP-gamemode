@@ -264,7 +264,7 @@ YCMD:rentroom(playerid, params[], help)
 										    }
 										    else
 										    {
-										    	format(string, sizeof(string), "Nie spe³niasz warunku wynajmu. Tylko ludzie z rodziny %d moga wynaj¹æ ten dom.", Dom[i][hTWW]);
+										    	format(string, sizeof(string), "Nie spe³niasz warunku wynajmu. Tylko ludzie z organizacji %d moga wynaj¹æ ten dom.", Dom[i][hTWW]);
 										        sendTipMessage(playerid, string);
 							        			return 1;
 										    }

@@ -63,7 +63,7 @@ YCMD:fooc(playerid, params[], help)
                 SendOrgMessage(member, TEAM_AZTECAS_COLOR, string);
 				SendDiscordOrgMessage(member, string);
 			}
-            Log(chatLog, INFO, "%s radio rodziny %d OOC: %s", GetPlayerLogName(playerid), member, params);
+            Log(chatLog, INFO, "%s radio organizacji %d OOC: %s", GetPlayerLogName(playerid), member, params);
 			return 1;
 		}
         else if(GetPlayerFraction(playerid) == FRAC_GOV || GetPlayerFraction(playerid) == FRAC_BOR|| GetPlayerOrg(playerid) == 1) //DMV i BOR po³aczenie

@@ -1885,7 +1885,7 @@ public OnPlayerSpawn(playerid)
         MruMySQL_SetAccInt("Rank", GetNick(playerid), 0);
         MruMySQL_SetAccInt("Member", GetNick(playerid), 0);
         UsunBron(playerid);
-        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta³eœ wyrzucony z pracy przez lidera, gdy by³eœ offline!");
+        sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Zosta³eœ wyrzucony z organizacji/frakcji przez lidera, gdy by³eœ offline!");
     }
     SetPVarInt(playerid, "mozeUsunacBronie", 0);
     // zabieranie prawka //

@@ -32,7 +32,7 @@ YCMD:wezportfel(playerid, params[], help)
 {
 	if(!IsAPrzestepca(playerid))
 	{
-		sendErrorMessage(playerid, "Nie jesteœ cz³onkiem / liderem rodziny !");
+		sendErrorMessage(playerid, "Nie jesteœ cz³onkiem organizacji!");
 		return 1;
 	}
 	if(PlayerInfo[playerid][pRank] < 2)

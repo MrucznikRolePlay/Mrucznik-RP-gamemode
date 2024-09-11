@@ -6745,7 +6745,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 2:// Tryb wynajmu
 		            {
-		                ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		            }
 		            case 3:// Cena wynajmu
 		            {
@@ -6961,21 +6961,21 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    SendClientMessage(playerid, COLOR_P@, "Nie wynajmujesz domu. Wszyscy wynajmujπcy zostali wyeksmitowani.");
 					    Dom[dom][hWynajem] = 0;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		            }
 		            case 1:// Wynajem dla kaødego
 		            {
 	                    SendClientMessage(playerid, COLOR_P@, "Teraz kaødy moøe wynajπÊ twÛj dom po wpisaniu komendy /wynajmuj pod drzwiami.");
 					    Dom[dom][hWynajem] = 1;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		            }
 		            case 2:// LokatorÛw ustala w≥aúciciel
 		            {
 					    SendClientMessage(playerid, COLOR_P@, "Teraz ty ustalasz kto ma wynajmowaÊ pokÛj komendπ /dajpokoj [id].");
 					    Dom[dom][hWynajem] = 2;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		            }
 		            case 3:// Wynajem tylko jeøeli ktoú spe≥nia dany warunek
 		            {
@@ -7015,7 +7015,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+		        ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		    }
 		}
 		if(dialogid == 820)//warunek - frakcja
@@ -7153,191 +7153,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 		    if(response)
 		    {
-
 		        new dom = PlayerInfo[playerid][pDom];
-		        switch(listitem)
-		        {
-		            case 0:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 1 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 0;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 1:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 2 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 1;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 2:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 3 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 2;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 3:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 4 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 3;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 4:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 5 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 4;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 5:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 6 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 5;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 6:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 7 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 6;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 7:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 8 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 7;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 8:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 9 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 8;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 9:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 10 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 9;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 10:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 11 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 10;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 11:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 12 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 11;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 12:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 13 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 12;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 13:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 14 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 13;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 14:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 15 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 14;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 15:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 16 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 15;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 16:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 17 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 16;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 17:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 18 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 17;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 18:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 19 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 18;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 19:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 20 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 19;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-		        }
+				SendClientMessage(playerid, COLOR_P@, sprintf("Teraz tylko ludzie z organizacji %d bÍdπ mogli wynajmowaÊ u ciebie dom.", listitem));
+				Dom[dom][hWynajem] = 3;
+				Dom[dom][hWW] = 2;
+				Dom[dom][hTWW] = listitem;
+				ZapiszDom(dom);
+				ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+
 			}
 		    if(!response)
 		    {
@@ -10605,9 +10428,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAccount] += kasa;
 
 					new komunikat[256];
-					format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp≥acone pieniπdze sπ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
+					format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d$ z sejfu organizacji. Jest w nim teraz %d$. Wyp≥acone pieniπdze sπ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyp≥aci≥ z sejfu rodziny %d kwotÍ %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wyp≥aci≥ z sejfu organizacji %d kwotÍ %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
 						lider,
 						kasa,
@@ -10648,9 +10471,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SejfR_Add(lider, kasa);
 
 					new komunikat[256];
-					format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
+					format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d$ do sejfu organizacji. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wp≥aci≥ do sejfu rodziny %d kwotÍ %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wp≥aci≥ do sejfu organizacji %d kwotÍ %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
 						lider,
 						kasa,
@@ -10686,9 +10509,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pMats] += mats;
 
 					new komunikat[256];
-					format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d matsÛw z sejfu rodzinnego. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
+					format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d matsÛw z sejfu organizacji. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyp≥aci≥ z sejfu rodziny %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wyp≥aci≥ z sejfu organizacji %d %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
 						lider,
 						mats,
@@ -10724,9 +10547,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SejfR_AddMats(lider, mats);
 
 					new komunikat[256];
-					format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d mats do sejfu rodzinnego. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
+					format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d mats do sejfu organizacji. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wp≥aci≥ do sejfu rodziny %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wp≥aci≥ do sejfu organizacji %d %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
 						lider,
 						mats,
@@ -13437,7 +13260,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         else
         {
-            ShowPlayerDialogEx(playerid, D_EDIT_RANG_2, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Wprowadü UID organizacji (/rodziny UID):", "Wybierz", "WrÛÊ");
+            ShowPlayerDialogEx(playerid, D_EDIT_RANG_2, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Wprowadü UID organizacji (/organizacje UID):", "Wybierz", "WrÛÊ");
         }
         return 1;
     }
@@ -13732,7 +13555,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 5://Konto rodziny
 				{
-					sendTipMessage(playerid, "Uøyj /sejfr!"); 
+					sendTipMessage(playerid, "Uøyj /sejf!"); 
 				}
 				
             }
@@ -13847,7 +13670,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{	
 					
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
-					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne\n>>Rodzinne", "Wybierz", "Wyjdü");
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne\n>>Organizacyjne", "Wybierz", "Wyjdü");
 				
 				}
 			

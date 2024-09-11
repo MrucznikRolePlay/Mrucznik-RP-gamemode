@@ -167,9 +167,9 @@
 		> dajzaufanego - nadaje zaufanego dla gracza o ID
 		> makeircadmin - nadaje administratora chatu IRC dla gracza o ID
 		> forceskin - wymusza otworzenie wybiera³ki, gdy gracz o ID jest we frakcji
-		> dajlideraorg - nadaje lidera organizacji (rodziny) dla gracza o ID X
+		> dajlideraorg - nadaje lidera organizacji (organizacji) dla gracza o ID X
 		> makemember - nadaje stopieñ [0] graczowi o ID we frakcji X
-		> zabierzlideraorg - zabiera lidera organizacji (rodziny) dla gracza o ID
+		> zabierzlideraorg - zabiera lidera organizacji (organizacji) dla gracza o ID
 		> makeleader - daje graczowi o ID lidera frakcji o ID X
 		> gotopos - teleportuje nas do pozycji X,Y,Z
 		> gotols - teleportuje pod komisariat LS
