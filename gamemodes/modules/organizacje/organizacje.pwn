@@ -34,7 +34,7 @@ ShowOrgLeaderCommands(playerid)
 LoadOrganisations()
 {
     new query[256], rowCount, row;
-    mysql_query("SELECT * FROM `mru_org` ORDER BY ID");
+    mysql_query("SELECT * FROM `mru_org` ORDER BY ID WHERE ID < "#MAX_ORG);
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
@@ -55,8 +55,8 @@ SaveOrg(id)
 	
     format(query, sizeof(query), 
         "INSERT INTO `mru_org` (`ID`, `Type`, `Name`, `Motd`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW`, `LeaderStake`) " \
-        "VALUES ('%d', '%d', '%s', '%s', '%d', '%f', '%f', '%f', '%f', '%d', '%d', '%d') ON DUPLICATE KEY UPDATE " \
-        "`Type`='%d', `Name`='%s', `Motd`='%s', `Color`='%d', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d', `LeaderStake`='%d'",
+        "VALUES ('%d', '%d', '%s', '%s', x'%08x', '%f', '%f', '%f', '%f', '%d', '%d', '%d') ON DUPLICATE KEY UPDATE " \
+        "`Type`='%d', `Name`='%s', `Motd`='%s', `Color`=x'%08x', `x`='%f', `y`='%f', `z`='%f', `a`='%f', `Int`='%d', `VW`='%d', `LeaderStake`='%d'",
         id,
         OrgInfo[id][o_Type], 
         OrgInfo[id][o_Name], 

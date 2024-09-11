@@ -159,7 +159,7 @@ command_lidercar_przejmij(playerid, vehicleUID)
     // send message
     new moneyReturn = GetVehPrice(CarData[vehicleUID][c_Model]) / 2;
     DajKase(playerid, moneyReturn);
-    MruMessageGoodInfoF(playerid, "Od teraz Twoja frakcja jest w³aœcicielem tego pojazdu, otrzymujesz %d$ zwrotu za pojazd.", moneyReturn);
+    MruMessageGoodInfoF(playerid, "Od teraz Twoja frakcja/organizacja jest w³aœcicielem tego pojazdu, otrzymujesz %d$ zwrotu za pojazd.", moneyReturn);
     return 1;
 }
 
