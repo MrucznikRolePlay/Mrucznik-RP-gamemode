@@ -242,7 +242,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1; 
 		}
 
-		if(IsPlayerConnected(giveplayerid))
+		if(!IsPlayerConnected(giveplayerid))
 		{
 			MruMessageFail(playerid, "Nie ma takiego gracza!");
 			return 1;
