@@ -40,14 +40,20 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 	if(strcmp(action, "name",true) == 0 || strcmp(action, "nazwa",true) == 0)
 	{
-		new name[32];
-		if( sscanf(params, "s[32]", name))
+		new name[33];
+		if( sscanf(params, "s[33]", name))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel nazwa [nowa nazwa organizacji]");
 			sendTipMessage(playerid, "Koszt komendy: "#CHANGE_ORG_NAME_COST" kontrabandy.");
 			return 1;
 		}
 		mysql_real_escape_string(name, name);
+
+		if(strlen(name) > 32)
+		{
+			MruMessageFail(playerid, "Nazwa mo¿e mieæ maksymalnie 32 znaki.");
+			return 1;
+		}
 
 		if(GetContraband(playerid) < CHANGE_ORG_NAME_COST)
 		{
@@ -63,14 +69,20 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 	}
 	else if(strcmp(action, "motto",true) == 0)
 	{
-		new motto[128];
-		if( sscanf(params, "s[128]", motto))
+		new motto[129];
+		if( sscanf(params, "s[129]", motto))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel motto [motto organizacji]");
 			sendTipMessage(playerid, "Koszt komendy: "#CHANGE_ORG_MOTTO_COST"$.");
 			return 1;
 		}
 		mysql_real_escape_string(motto, motto);
+		
+		if(strlen(motto) > 32)
+		{
+			MruMessageFail(playerid, "Motto mo¿e mieæ maksymalnie 128 znaków.");
+			return 1;
+		}
 
 		if(kaska[playerid] < CHANGE_ORG_MOTTO_COST)
 		{
