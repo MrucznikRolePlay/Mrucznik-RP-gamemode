@@ -34,7 +34,7 @@ YCMD:komunikat(playerid, params[], help)
     GetPlayerName(playerid, sendername, sizeof(sendername));
     if(!IsPlayerConnected(playerid)) return 1;
     org = GetPlayerOrg(playerid);
-    if(!org) return sendErrorMessage(playerid, "Nie jesteœ w ¿adnej rodzinie!");
+    if(!org) return sendErrorMessage(playerid, "Nie jesteœ w ¿adnej organizacji!");
     if(PlayerInfo[playerid][pRank] < 5) 
     {
         return sendErrorMessage(playerid, "Musisz mieæ 5 range aby tego u¿ywaæ !");

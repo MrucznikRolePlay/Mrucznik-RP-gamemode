@@ -49,7 +49,7 @@ YCMD:lock(playerid, params[], help)
                 Car_Lock(playerid, newcar);
             }
         }
-        else if(Car_GetOwnerType(newcar) == CAR_OWNER_FAMILY) //rodziny
+        else if(Car_GetOwnerType(newcar) == CAR_OWNER_FAMILY) //organizacyjny
         {
             if(Car_GetOwner(newcar) == PlayerInfo[playerid][pOrg])
             {

@@ -6724,7 +6724,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                        }
 	                        else if(Dom[dom][hWW] == 2)
 	                        {
-	                            wynajem = "z warunkiem (rodzina)";
+	                            wynajem = "z warunkiem (organizacja)";
 	                        }
 	                        else if(Dom[dom][hWW] == 3)
 	                        {
@@ -6979,7 +6979,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 3:// Wynajem tylko jeøeli ktoú spe≥nia dany warunek
 		            {
-	                    ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+	                    ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		            }
 		        }
 		    }
@@ -6999,9 +6999,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                ShowPlayerDialogEx(playerid, 820, DIALOG_STYLE_LIST, "Warunek wynajmu - frakcja", "Policja\nFBI\nWojsko\nSAM-ERS\nLa Cosa Nostra\nYakuza\nHitman Agency\nSA News\nTaxi Corporation\nUrzÍdnicy\nGrove Street\nPurpz\nLatin Kings", "Wybierz", "WrÛÊ");
 		            }
-		            case 1:// Warunek wynajmu: odpowiednia rodzina
+		            case 1:// Warunek wynajmu: odpowiednia organizacja
 		            {
-		                ShowPlayerDialogEx(playerid, 821, DIALOG_STYLE_LIST, "Warunek wynajmu - rodzina", "Rodzina 1\nRodzina 2\nRodzina 3\nRodzina 4\nRodzina 5\nRodzina 6\nRodzina 7\nRodzina 8\nRodzina 9\nRodzina 10\nRodzina 11\nRodzina 12\nRodzina 13\nRodzina 14\nRodzina 15\nRodzina 16\nRodzina 17\nRodzina 18\nRodzina 19\nRodzina 20\n", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 821, DIALOG_STYLE_LIST, "Warunek wynajmu - organizacja", "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49", "Wybierz", "WrÛÊ");
 		            }
 		            case 2:// Warunek wynajmu: odpowiednio wysoki level
 		            {
@@ -7146,10 +7146,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		    }
 		}
-		if(dialogid == 821)//warunek - rodzina
+		if(dialogid == 821)//warunek - organizacja
 		{
 		    if(response)
 		    {
@@ -7164,7 +7164,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		    }
 		}
 		if(dialogid == 822)
@@ -7191,7 +7191,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		    }
 		}
 	    if(dialogid == 823)
@@ -7218,7 +7218,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		    }
 		}
 		if(dialogid == 824)

@@ -1731,7 +1731,7 @@ BARIERKA_Remove(frakcja, id)
 
 BARIERKA_Init()
 {
-    for(new j=0;j<=4;j++) //rodziny, LSPD, FBI, NG LSMC
+    for(new j=0;j<=4;j++) //organizacje, LSPD, FBI, NG LSMC
     {
         for(new i=0;i<10;i++)
         {

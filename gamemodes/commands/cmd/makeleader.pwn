@@ -67,7 +67,7 @@ YCMD:makeleader(playerid, params[], help)
 		}
 		if(PlayerInfo[para1][pMember] > 0|| GetPlayerOrg(para1) != 0 )
 		{
-			sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest we frakcji jako cz³onek lub w rodzinie !");
+			sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest we frakcji lub w organizacji !");
 			return 1;
 		}
 		/*if((LeadersValue[LEADER_FRAC][level]+1) > MAX_LEADERS_ON_FRAC)

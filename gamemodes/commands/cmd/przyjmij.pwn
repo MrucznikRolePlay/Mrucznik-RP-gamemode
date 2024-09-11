@@ -74,7 +74,7 @@ YCMD:przyjmij(playerid, params[], help)
 					}
 					else
 					{
-					    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest obecnie poszukiwany / ma inn¹ frakcjê / jest w rodzinie.");
+					    sendTipMessageEx(playerid, COLOR_GREY, "Ten gracz jest obecnie poszukiwany / ma inn¹ frakcjê / jest w organizacji.");
 					    return 1;
 					}
 				}

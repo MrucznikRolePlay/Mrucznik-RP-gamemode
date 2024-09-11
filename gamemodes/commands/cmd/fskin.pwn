@@ -57,9 +57,9 @@ YCMD:fskin(playerid, params[], help)
                 //FAM_SKINS
                 if(OrgSkins[fam][0] == 0)
                 {
-                    return SendClientMessage(playerid, COLOR_GRAD2, "Twoja rodzina nie ma w³asnych skinów.");
+                    return SendClientMessage(playerid, COLOR_GRAD2, "Twoja organizacja nie ma w³asnych skinów.");
                 }
-                ShowPlayerDialogEx(playerid, DIALOGID_UNIFORM_FAMILY, DIALOG_STYLE_PREVIEW_MODEL, "Zmien skin rodzinny", DialogListaSkinowFamily(fam), "Zmien skin", "Anuluj"); //zmieñ dialogid
+                ShowPlayerDialogEx(playerid, DIALOGID_UNIFORM_FAMILY, DIALOG_STYLE_PREVIEW_MODEL, "Zmien skin organizacji", DialogListaSkinowFamily(fam), "Zmien skin", "Anuluj"); //zmieñ dialogid
                 
             }
             else return SendClientMessage(playerid, COLOR_GRAD2, "Nie mo¿esz tego u¿yæ.");

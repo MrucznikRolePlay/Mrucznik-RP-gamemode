@@ -28,7 +28,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 	new org = GetPlayerOrg(playerid);
 	if(GetPlayerOrg(playerid) == 0)
 	{
-		sendErrorMessage(playerid, "Nie jestes w rodzinie !");
+		sendErrorMessage(playerid, "Nie jesteœ w organizacji!");
 		return 1;
 	}
 
@@ -493,7 +493,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					strcat(nick, MruMySQL_GetNameFromUID(uid));
 					new rodzina = MruMySQL_GetAccInt("FMember", nick);
 					if(rodzina != GetPlayerOrg(playerid)) {
-						Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
+						Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, organizacja=%i]", uid, rodzina);
 						sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!)");
 						DeletePVar(playerid, "prpanel_uid");
 						return 1;
@@ -557,7 +557,7 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			new rodzina = MruMySQL_GetAccInt("FMember", nick);
 			if(rodzina != GetPlayerOrg(playerid)) 
 			{
-				Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
+				Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem organizacji ale nie nalezy do niej! [prpanel_uid=%i, organizacja=%i]", uid, rodzina);
 				sendErrorMessage(playerid, "Wyst¹pi³ b³¹d!");
 				DeletePVar(playerid, "prpanel_uid");
 				return 1;

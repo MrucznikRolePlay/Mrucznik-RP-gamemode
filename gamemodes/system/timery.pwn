@@ -3125,7 +3125,7 @@ public PlayersCheckerMinute()
 					//PlayerInfo[j][pSkin] = 299; na potem
 					SetPlayerSkinEx(j, 299);
 					sendTipMessage(j, "Posiada³eœ skin CJ-a ID [0] - przywróciliœmy Ci domyœlny skin. Uwa¿asz, ¿e to b³¹d? Zg³oœ utratê w dziale b³êdów.");
-					sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w rodzinie, frakcji. Pomocna bêdzie ka¿da informacja.");
+					sendTipMessage(j, "[.] opisz dok³adnie co siê sta³o, np. dosta³eœ unfrakcjê lub jesteœ w organizacji, frakcji. Pomocna bêdzie ka¿da informacja.");
 				}
 			}
 		}

@@ -2293,7 +2293,7 @@ SetPlayerSpawnPos(playerid)
 		            }
 		            else
 		            {
-						SendClientMessage(playerid, COLOR_YELLOW, "Twoja rodzina nie ma jeszcza spawnu - spawnujesz siê jako cywil");
+						SendClientMessage(playerid, COLOR_YELLOW, "Twoja organizacja nie ma jeszcza spawnu - spawnujesz siê jako cywil");
                         new rand = random(sizeof(gRandomPlayerSpawns));
 			    		SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
 			    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
@@ -4162,11 +4162,11 @@ OnPlayerLogin(playerid, password[])
     Zone_Sync(playerid);
     if(strlen(ServerInfo) > 1) TextDrawShowForPlayer(playerid, TXD_Info); //Show info
 
-    //Info o rodzinie:
+    //Info o organizacji:
 	new org = GetPlayerOrg(playerid);
 	if(org != 0)
 	{
-		SendClientMessage(playerid, OrgInfo[org][o_Color], sprintf("Rodzina MOTD: %s.", OrgInfo[org][o_Motto]));
+		SendClientMessage(playerid, OrgInfo[org][o_Color], sprintf("Motto organizacji: %s.", OrgInfo[org][o_Motto]));
 	}
 
 	//Teleportacja do poprzedniej pozycji:

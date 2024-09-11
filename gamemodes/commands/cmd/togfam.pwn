@@ -35,12 +35,12 @@ YCMD:togfam(playerid, params[], help)
 		if (!gFam[playerid])
 		{
 			gFam[playerid] = 1;
-            MSGBOX_Show(playerid, "Czat rodzinny ~r~OFF", MSGBOX_ICON_TYPE_OK);
+            MSGBOX_Show(playerid, "Czat organizacji ~r~OFF", MSGBOX_ICON_TYPE_OK);
 		}
 		else if (gFam[playerid])
 		{
 			gFam[playerid] = 0;
-            MSGBOX_Show(playerid, "Czat rodzinny ~g~ON", MSGBOX_ICON_TYPE_OK);
+            MSGBOX_Show(playerid, "Czat organizacji ~g~ON", MSGBOX_ICON_TYPE_OK);
 		}
 	}
 	return 1;

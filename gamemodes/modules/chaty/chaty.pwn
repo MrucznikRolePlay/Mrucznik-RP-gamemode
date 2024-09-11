@@ -25,10 +25,10 @@
 		- [ic] /ad 
 		- /live (/wywiad)
 		- /news
-		- /ro (rodziny ooc)
+		- /ro (radio ooc)
 		- /fo (fraction ooc)
-		- /r (rodziny ic)
-		- /f (frakcje ic)
+		- /r (radio ic)
+		- /f (radio ic)
 		- lokalny /l
 		- krzyk /k
 		- szept /s
