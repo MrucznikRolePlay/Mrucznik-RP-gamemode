@@ -61,7 +61,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ nazwê frakcji z: \"%s\" na: \"%s\".", GetNick(playerid), OrgInfo[org][o_Name], name));
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ nazwê organizacji z: \"%s\" na: \"%s\".", GetNick(playerid), OrgInfo[org][o_Name], name));
 
 		SetOrgName(org, name);
 		TakeContraband(playerid, CHANGE_ORG_NAME_COST);
@@ -90,7 +90,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ motto frakcji z: \"%s\" na: \"%s\".", GetNick(playerid), OrgInfo[org][o_Motto], motto));
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ motto organizacji z: \"%s\" na: \"%s\".", GetNick(playerid), OrgInfo[org][o_Motto], motto));
 
 		SetOrgMotto(org, motto);
 		ZabierzKase(playerid, CHANGE_ORG_MOTTO_COST);
@@ -145,7 +145,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ spawn frakcji.", GetNick(playerid)));
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ spawn organizacji.", GetNick(playerid)));
 
 		TakeContraband(playerid, CHANGE_ORG_SPAWN_COST);
 		SetOrgSpawnAtPlayerPos(playerid, org);
