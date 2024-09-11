@@ -90,11 +90,13 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ motto organizacji z: \"%s\" na: \"%s\".", GetNick(playerid), OrgInfo[org][o_Motto], motto));
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ motto organizacji z: \"%s\" na:.", GetNick(playerid)));
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, motto);
 
 		SetOrgMotto(org, motto);
 		ZabierzKase(playerid, CHANGE_ORG_MOTTO_COST);
-		MruMessageGoodInfoF(playerid, "Zmieni³eœ motto organizacji na: %s.", motto);
+		MruMessageGoodInfo(playerid, "Zmieni³eœ motto organizacji na:");
+		SendClientMessage(playerid, OrgInfo[org][o_Color], motto);
 		
 	}
 	else if(strcmp(action, "color", true) == 0 || strcmp(action, "kolor", true) == 0)
