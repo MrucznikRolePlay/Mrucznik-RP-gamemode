@@ -416,14 +416,8 @@ ShowMemberList(playerid, org)
 		while(mysql_fetch_row_format(query, "|")) {
 			new uid, nick[MAX_PLAYER_NAME], rank, isconnected;
 			sscanf(query, "p<|>is[24]ii", uid, nick, rank, isconnected);
-			new lider = rank >= 1000;
-			new str_rank[64];
-			if(lider) {
-				rank -= 1000;
-				strcat(str_rank, "LIDER");
-			} else {
-				format(str_rank, sizeof(str_rank), "[%i] %s", rank, OrgRank[GetPlayerOrg(playerid)][rank]);
-			}
+			new str_rank[32];
+			format(str_rank, sizeof(str_rank), "[%d] %s", rank, OrgRank[org][rank]);
 			new benefit = GetPlayerOrgBenefit(uid, org);
 			AddDialogListitem(playerid, "%s\t%s\t{%s}%d$\t{%s}%s", nick, str_rank, benefit > 0 ? ("00FF00") : ("FF0000"), benefit, isconnected ? ("00FF00") : ("FF0000"), isconnected ? ("ONLINE") : ("OFFLINE"));
 			VECTOR_push_back_val(VMembersOrg[playerid], uid);

@@ -7828,14 +7828,15 @@ WczytajRangi()
         {
             for(new i=0;i<MAX_RANG;i++)
             {
-                if(strlen(ranga[i]) > 1) format(FracRang[id][i], 25, "%s", ranga[i]);
+                if(strlen(ranga[i]) > 1) format(FracRang[id][i], MAX_RANG_LEN, "%s", ranga[i]);
             }
         }
         else
         {
             for(new i=0;i<MAX_RANG;i++)
             {
-                if(strlen(ranga[i]) > 1) format(OrgRank[id][i], 25, "%s", ranga[i]);
+                if(strlen(ranga[i]) > 1) format(OrgRank[id][i], MAX_RANG_LEN, "%s", ranga[i]);
+				else format(OrgRank[id][i], MAX_RANG_LEN, "Brak");
             }
         }
     }
