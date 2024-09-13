@@ -137,13 +137,16 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		}
 
 		new bizId = IsPlayerAtFrontBusinnesZone(playerid);
-		if(bizId == 0 || FrontBusiness[bizId][Owner] != org)
+		if(bizId == -1 || FrontBusiness[bizId][Owner] != org)
 		{
-			new Float:proximity = GetPlayerFrontBusinessProximity(playerid, bizId);
-			if(proximity > ORG_SPAWN_BUSINESS_PROXIMITY_MAX || proximity < ORG_SPAWN_BUSINESS_PROXIMITY_MIN)
-			{
-				MruMessageFail(playerid, "Spawn organizacji musi znajdowaæ siê w promieniu "#ORG_SPAWN_BUSINESS_PROXIMITY_MAX" metrów od przejêtego biznesu, ale nie bli¿ej ni¿ "#ORG_SPAWN_BUSINESS_PROXIMITY_MIN" metrów.");
-			}
+			MruMessageFail(playerid, "Spawn organizacji musi znajdowaæ siê w promieniu "#ORG_SPAWN_BUSINESS_PROXIMITY_MAX" metrów od przejêtego biznesu, ale nie bli¿ej ni¿ "#ORG_SPAWN_BUSINESS_PROXIMITY_MIN" metrów.");
+			return 1;
+		}
+
+		new Float:proximity = GetPlayerFrontBusinessProximity(playerid, bizId);
+		if(proximity > ORG_SPAWN_BUSINESS_PROXIMITY_MAX || proximity < ORG_SPAWN_BUSINESS_PROXIMITY_MIN)
+		{
+			MruMessageFail(playerid, "Spawn organizacji musi znajdowaæ siê w promieniu "#ORG_SPAWN_BUSINESS_PROXIMITY_MAX" metrów od przejêtego biznesu, ale nie bli¿ej ni¿ "#ORG_SPAWN_BUSINESS_PROXIMITY_MIN" metrów.");
 			return 1;
 		}
 

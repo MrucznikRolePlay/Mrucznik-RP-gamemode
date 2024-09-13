@@ -172,6 +172,14 @@ ptask BusinessInfoTimer[1000](playerid)
 				ShowFrontBusinessInfo(playerid, i);
 				return;
 			}
+			else
+			{
+				if(GetPVarInt(playerid, "business-info") == 1)
+				{
+					ZoneTXD_Hide(playerid);
+					DeletePVar(playerid, "business-info");
+				}
+			}
 		}
 	}
 }

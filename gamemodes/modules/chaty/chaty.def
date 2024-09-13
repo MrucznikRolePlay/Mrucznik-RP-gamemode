@@ -28,7 +28,7 @@
 // #define MruMessageFail(%0,%1) 			MruMessage(%0,COLOR_FAIL,"»» "%1) // caused literal table overflow :/
 #define MruMessageTip(%0,%1) 			MruMessage(%0,COLOR_TIP,"»» "%1)
 #define MruMessageInfo(%0,%1) 			MruMessage(%0,COLOR_INFO,"»» "%1)
-#define MruMessageGoodInfo(%0,%1) 		MruMessage(%0,COLOR_GINFO,"»» "%1)
+// #define MruMessageGoodInfo(%0,%1) 		MruMessage(%0,COLOR_GINFO,"»» "%1)
 #define MruMessageBadInfo(%0,%1) 		MruMessage(%0,COLOR_BINFO,"»» "%1)
 #define MruMessageOffer(%0,%1) 		    MruMessage(%0,COLOR_OFERTA,"** "%1)
 #define MruMessagePunishment(%0,%1) 	MruMessage(%0,COLOR_KARA,"AdmCmd: "%1)

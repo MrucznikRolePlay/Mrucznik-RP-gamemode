@@ -35,7 +35,7 @@ LoadFrontBusinesses()
 			// default values
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverHour"), 16 + random(7));
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverMinute"), 30 * random(2));
-			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverTime"), 3600); // 30 minutes
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverTime"), 3600); // 60 minutes
 
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), COLOR_BROWN);
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "owner"), 0);
@@ -69,7 +69,7 @@ LoadFrontBusinesses()
 		new areaMaxX = FrontBusiness[i][OutX] + FRONT_BUSINESS_GANGZONE_SIZE;
 		new areaMaxY = FrontBusiness[i][OutY] + FRONT_BUSINESS_GANGZONE_SIZE;
 		FrontBusiness[i][BizGangZone] = GangZoneCreate(areaMinX, areaMinY, areaMaxX, areaMaxY);
-		GangZoneShowForAll(FrontBusiness[i][BizGangZone], FrontBusiness[i][BizColor]);
+		GangZoneShowForAll(FrontBusiness[i][BizGangZone], FrontBusiness[i][BizColor] | 0x44);
 
 		FrontBusiness[i][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
@@ -152,9 +152,9 @@ StopFrontBizTakeover(bizId)
 
 TriggerTakingOver(bizId, org)
 {
-	new color = FrontBusiness[bizId][BizColor];
-	new invertedColor = (color & 0xFF000000) | (~color & 0x00FFFFFF);
-	GangZoneFlashForAll(FrontBusiness[bizId][BizGangZone], invertedColor);
+	// new color = FrontBusiness[bizId][BizColor];
+	//new invertedColor = (color & 0xFF000000) | (~color & 0x00FFFFFF);
+	GangZoneFlashForAll(FrontBusiness[bizId][BizGangZone], 0xFF000066);
 
 	if(FrontBusiness[bizId][TakingOverScore][org] == 0)
 	{
@@ -213,7 +213,7 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 IsPlayerNearOwnFrontBusiness(playerid, Float:proximity=5.0)
 {
 	new bizId = IsPlayerAtFrontBusinnesZone(playerid);
-	if(bizId <= 0)
+	if(bizId < 0)
 	{
 		return 0;
 	}
@@ -239,7 +239,7 @@ IsPlayerAtFrontBusinnesZone(playerid)
 			return i;
 		}
 	}
-	return 0;
+	return -1;
 }
 
 Float:GetPlayerFrontBusinessProximity(playerid, bizId)
@@ -259,17 +259,30 @@ IsFrontBusinnesOwnedByOrg(bizId, org)
 
 ShowFrontBusinessInfo(playerid, bizId)
 {
-	new string[256], owner[32];
+	new owner[32];
 	if(FrontBusiness[bizId][Owner] == 0)
 		strcat(owner, "Brak");
 	else
 		strcat(owner, OrgInfo[FrontBusiness[bizId][Owner]][o_Name]);
 
-	format(string, sizeof(string), "Biznes: %s~n~~w~Wlasciciel: ~b~%s~n~~w~Godzina przejecia: ~b~%02d:%02d~n~~w~Czas przejêcia: %d minut~n~~w~Bazowy zysk: ~b~%d$~n~~w~Bonus za gracza online: ~b~%d",
-		FrontBusiness[bizId][Name], owner,
-		FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60,
-		FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]);
-	GameTextForPlayer(playerid, string, 1100, 15);
+    for(new i=0;i<3;i++)
+    {
+        TextDrawShowForPlayer(playerid, ZoneTXD[i]);
+    }
+
+    PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], sprintf("Biznes: ~g~~h~%s", FrontBusiness[bizId][Name]));
+    PlayerTextDrawShow(playerid, ZonePTXD_Name[playerid]);
+
+    PlayerTextDrawSetString(playerid, ZonePTXD_Cash[playerid], sprintf("Wlasciciel: ~n~%s", owner));
+    PlayerTextDrawShow(playerid, ZonePTXD_Cash[playerid]);
+
+    PlayerTextDrawSetString(playerid, ZonePTXD_Area[playerid], sprintf("Godzina przejecia: ~n~%02d:%02d (%dm)", FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60));
+    PlayerTextDrawShow(playerid, ZonePTXD_Area[playerid]);
+
+    PlayerTextDrawSetString(playerid, ZonePTXD_Member[playerid], sprintf("Zysk na godzinê + bonus za graczy online: ~n~%d + %d", FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]));
+    PlayerTextDrawShow(playerid, ZonePTXD_Member[playerid]);
+
+	SetPVarInt(playerid, "business-info", 1);
 }
 
 GetFrontBusinessIcon(type)

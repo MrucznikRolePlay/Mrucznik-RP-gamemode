@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  fbadmin                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,30 +16,39 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 14.09.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "gotofrontbiz\gotofrontbiz.pwn"
-#include "fbadmin\fbadmin.pwn"
-#include "orgbiz\orgbiz.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_fbadmin_Impl(playerid, bizId, params[256])
 {
-    command_gotofrontbiz();
-    command_fbadmin();
-    command_orgbiz();
-    
+    if(PlayerInfo[playerid][pAdmin] != 5000)
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
+
+    if(bizId < 0 || bizId >= sizeof(FrontBusiness))
+    {
+        MruMessageFail(playerid, sprintf("ID biznesu od 0 do %d.", sizeof(FrontBusiness)));
+        return 1;
+    }
+
+    if(strcmp(params, "takeover", true) == 0)
+    {
+        if(FrontBusiness[bizId][TakeoverActive]) 
+        {
+            StopFrontBizTakeover(bizId);
+        }
+        else
+        {
+            StartFrontBizTakeover(bizId);
+        }
+    }
+    return 1;
 }
+
+//end

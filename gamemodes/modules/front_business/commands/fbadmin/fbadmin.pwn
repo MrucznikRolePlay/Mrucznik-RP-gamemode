@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                  fbadmin                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,19 +27,40 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "gotofrontbiz\gotofrontbiz.pwn"
-#include "fbadmin\fbadmin.pwn"
-#include "orgbiz\orgbiz.pwn"
-
+#include "fbadmin_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_fbadmin()
 {
-    command_gotofrontbiz();
-    command_fbadmin();
-    command_orgbiz();
     
+
+    //aliases
+    
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:fbadmin(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Administracja biznesami przykrywkami.");
+        return 1;
+    }
+    //fetching params
+    new bizId, param[256];
+    if(sscanf(params, "ds[256]", bizId, param))
+    {
+        sendTipMessage(playerid, "U¿yj /fbadmin [id biznesu] [opcja] ");
+        return 1;
+    }
+    
+    //command body
+    return command_fbadmin_Impl(playerid, bizId, param);
 }

@@ -66,14 +66,14 @@ enum eFrontBusinessInfo {
 //-----------------<[ Zmienne: ]>-------------------
 new FrontBusiness[][eFrontBusinessInfo] = {
     {
-        "Pole Postion Club", ORG_TYPE_MAFIA,
+        "Pole Postion Club", FRONT_BIZ_TYPE_CLUB,
         5096.764648, -2420.861572, 4.346032, 0, 0, // wejœcie
         4033.094238, -1645.181884, 993.963928, 6, 0, // wyjœcie
         5096.764648, -2420.861572, 4.346032, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
-        "Burger Shot", ORG_TYPE_MAFIA,
+        "Burger Shot", FRONT_BIZ_TYPE_BURGER,
         5532.618164, -180.268325, 5.152462, 0, 0, // wejœcie
         363.413, -74.5786, 1001.51, 10, FRONT_BUSINESS_VW, // wyjœcie
         5532.618164, -180.268325, 5.152462, 0, 0, // przejmowanie
