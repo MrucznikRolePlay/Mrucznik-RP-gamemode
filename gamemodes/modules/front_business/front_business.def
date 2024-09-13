@@ -41,6 +41,8 @@
 #define MIN_TAKEOVER_HOUR 16
 #define MAX_TAKEOVER_HOUR 22
 
+#define FRONT_BUSINESS_VW 8800
+
 //------------------<[ Makra: ]>-------------------
 #define RedisFrontBizKey(%0,%1) sprintf("front_biz:%d:%s", %0, %1)
 
