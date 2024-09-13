@@ -94,8 +94,8 @@ LoadFrontBusinesses()
 		}
 
 		DodajWejscieNoPickup(
-			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], FrontBusiness[i][OutInt], FrontBusiness[i][OutVw],
-			FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ], FrontBusiness[i][InInt], FrontBusiness[i][InVw]
+			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], FrontBusiness[i][OutVw], FrontBusiness[i][OutInt],
+			FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ], FrontBusiness[i][InVw], FrontBusiness[i][InInt]
 		);
 	}
 }
