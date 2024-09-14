@@ -283,9 +283,9 @@ ShowFrontBusinessInfo(playerid, bizId)
 	GetOrgTakeoverTimeWindow(bizId, hour, minute, endHour, endMinute);
 
 	new string[1024]; // TODO: rozszerzyc textdraw
-	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~Wlasciciel: %s~n~" \
-		"Typ biznesu: ~g~~h~%s~n~~n~" \
-		"Do przejecia od: ~n~~g~~h~%02d:%02d - %02d:%02d~n~" \
+	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~Typ biznesu: ~g~~h~%s~n~" \
+		"Wlasciciel: ~n~  %s~n~" \
+		"Do przejecia od: ~n~~g~~h~  %02d:%02d - %02d:%02d~n~~n~" \
 		"Zysk na godzine: ~g~~h~%d$~n~Bonus za gracza online: ~g~~h~%d$", 
 		FrontBusiness[bizId][Name], owner,
 		FrontBusinessType[FrontBusiness[bizId][Type]],
