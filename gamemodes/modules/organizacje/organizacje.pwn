@@ -34,11 +34,11 @@ ShowOrgLeaderCommands(playerid)
 LoadOrganisations()
 {
     new query[256], rowCount, row;
-    mysql_query("SELECT * FROM `mru_org` WHERE ID < "#MAX_ORG" ORDER BY ID");
+    mysql_query("SELECT `ID`, `Type`, `Name`, `Motd`, `Color`, `x`, `y`, `z`, `a`, `Int`, `Vw`, `LeaderStake` FROM `mru_org` WHERE ID < "#MAX_ORG" ORDER BY ID");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>de<ds[32]s[128]hffffddd>", row, OrgInfo[rowCount]);
+        sscanf(query, "p<|>de<dds[32]s[128]hffffddd>", row, OrgInfo[rowCount]);
         rowCount++;
     }
     mysql_free_result();
