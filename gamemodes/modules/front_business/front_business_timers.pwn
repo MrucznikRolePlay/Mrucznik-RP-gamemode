@@ -107,6 +107,11 @@ DecreaseAllAttackerPoints(bizId, points)
 	new decreased = false;
 	for(new i; i<MAX_ORG; i++)
 	{
+		if(FrontBusiness[bizId][Owner] == i)
+		{
+			continue;
+		}
+
 		if(FrontBusiness[bizId][TakingOverScore][i])
 		{
 			FrontBusiness[bizId][TakingOverScore][i] -= points;
