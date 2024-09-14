@@ -14,7 +14,7 @@
             "type": "string",
             "size": "256",
             "name": "param",
-            "description": "opcja"
+            "description": "opcja (takeover/give)"
         }
     ],
     "date": "14.09.2024"

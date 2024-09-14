@@ -4056,7 +4056,6 @@ OnPlayerLogin(playerid, password[])
 		PlayerInfo[playerid][pTeam] = 3;
 		PlayerInfo[playerid][pSkin] = 136;
 		PlayerInfo[playerid][pUniform] = 0;
-		PlayerInfo[playerid][pJobSkin] = 0; 
 		PlayerInfo[playerid][pPnumber] = 0;
 		PlayerInfo[playerid][pDom] = 0;
 		PlayerInfo[playerid][pPbiskey] = 255;
