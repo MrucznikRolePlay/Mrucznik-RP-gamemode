@@ -103,9 +103,9 @@ command_orgbiz_Impl(playerid, action[16], params[128])
             return 1;
         }
 
-        if(minute < 0 || minute > 60)
+        if(minute < 0 || minute > 59)
         {
-            MruMessageFail(playerid, "Minuta musi byæ w przedziale 0-60.");
+            MruMessageFail(playerid, "Minuta musi byæ w przedziale 0-59.");
             return 1;
         }
 
