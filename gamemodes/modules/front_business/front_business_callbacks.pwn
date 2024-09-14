@@ -101,7 +101,7 @@ SendEnterTakeoverAreaMessage(playerid, bizId, org, isDefense)
 		// attack
 		if(FrontBusiness[bizId][TakingOver][org] == TAKING_OVER_ATTACK_PLAYERS_THRESHOLD)
 		{
-			GameTextForPlayer(playerid, "~r~Rozpoczêto przejmowanie biznesu", 5000, 1);
+			GameTextForPlayer(playerid, "~r~Rozpoczeto przejmowanie biznesu", 5000, 1);
 		}
 		else if(FrontBusiness[bizId][TakingOver][org] > TAKING_OVER_ATTACK_PLAYERS_THRESHOLD)
 		{
