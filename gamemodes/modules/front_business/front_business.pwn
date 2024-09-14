@@ -51,14 +51,13 @@ LoadFrontBusinesses()
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "color"), FrontBusiness[i][BizColor]);
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "owner"), FrontBusiness[i][Owner]);
 
-
 		MruCreateDynamicMapIcon(FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
 			GetFrontBusinessIcon(FrontBusiness[i][Type]),
 			-1, // color, This should only be used with the square icon (ID: 0)
-			FrontBusiness[i][OutInt], // worldid
-			FrontBusiness[i][OutVw], // interiorid
+			FrontBusiness[i][OutVw], // worldid
+			FrontBusiness[i][OutInt], // interiorid
 			-1, // playerid
-			-1, // streamdistance -1 = inifnite
+			2000.0, // streamdistance -1 = inifnite
 			MAPICON_LOCAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
 		);
 
@@ -313,7 +312,7 @@ GetFrontBusinessIcon(type)
 		case FRONT_BIZ_TYPE_BOAT: { return 9; }
 		case FRONT_BIZ_TYPE_SPRAY: { return 63; }
 	}
-	return 0;
+	return 52;
 }
 
 GetFrontBusinessPickup(type)

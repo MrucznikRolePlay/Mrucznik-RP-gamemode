@@ -94,9 +94,15 @@ command_orgbiz_Impl(playerid, action[16], params[128])
             return 1;
         }
 
-        if(hour < MIN_TAKEOVER_HOUR || hour > MAX_TAKEOVER_HOUR)
+        if(hour < MIN_TAKEOVER_HOUR || hour >= MAX_TAKEOVER_HOUR)
         {
             MruMessageFail(playerid, "Godzina musi byæ w przedziale "#MIN_TAKEOVER_HOUR" - "#MAX_TAKEOVER_HOUR".");
+            return 1;
+        }
+
+        if(minute < 0 || minute > 60)
+        {
+            MruMessageFail(playerid, "Minuta musi byæ w przedziale 0-60.");
             return 1;
         }
 
