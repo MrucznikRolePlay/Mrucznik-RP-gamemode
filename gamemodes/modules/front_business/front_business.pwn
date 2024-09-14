@@ -58,7 +58,7 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutInt], // interiorid
 			-1, // playerid
 			2000.0, // streamdistance -1 = inifnite
-			MAPICON_LOCAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
+			MAPICON_GLOBAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
 		);
 
 		new Float:areaMinX = FrontBusiness[i][OutX] - FRONT_BUSINESS_GANGZONE_SIZE;
@@ -304,8 +304,7 @@ GetOrgTakeoverTimeWindow(bizId, &hour, &minute, &endHour, &endMinute)
 	new takeoverTimeMinutes = FrontBusiness[bizId][TakeoverTime];
 	new increasedMinutes = minute + (takeoverTimeMinutes/60);
 	endHour = hour + (increasedMinutes/60);
-	endMinute = minute + (takeoverTimeMinutes/60);
-	if(endMinute >= 60) endMinute = endMinute % 60;
+	endMinute = (minute + (takeoverTimeMinutes/60)) % 60;
 }
 
 GetFrontBusinessIcon(type)
