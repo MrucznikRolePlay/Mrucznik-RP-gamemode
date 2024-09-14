@@ -305,7 +305,7 @@ GetOrgTakeoverTimeWindow(bizId, &hour, &minute, &endHour, &endMinute)
 	new increasedMinutes = minute + (takeoverTimeMinutes/60);
 	endHour = hour + (increasedMinutes/60);
 	endMinute = minute + (takeoverTimeMinutes/60);
-	if(endMinute > 60) endMinute = endMinute % 60;
+	if(endMinute >= 60) endMinute = endMinute % 60;
 }
 
 GetFrontBusinessIcon(type)
