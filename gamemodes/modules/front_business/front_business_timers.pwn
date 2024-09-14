@@ -138,25 +138,57 @@ ptask TakeoverCheck[1000](playerid)
 		new string[512];
 		strcat(string, "Punkty przejecia:");
 		new anyPoints;
+
+		new maxScore;
+		for(new i; i<MAX_ORG; i++)
+		{
+			new score = FrontBusiness[bizId][TakingOverScore][i];
+			if(maxScore < score)
+			{
+				maxScore = score;
+			}
+		}
+
 		for(new i; i<MAX_ORG; i++)
 		{
 			new score = FrontBusiness[bizId][TakingOverScore][i];
 			if(score > 0)
 			{
-				if(score > TAKE_OVER_POINT_THRESHOLD)
+				new orgName[64];
+				if(i == 0)
 				{
-					format(string, sizeof(string), " ~n~%s~n~~y~%s~w~: ~r~%d~w~", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
+					format(orgName, sizeof(orgName), "~b~%s", OrgInfo[i][o_Name]);
+				}
+				else if(i == FrontBusiness[bizId][Owner])
+				{
+					format(orgName, sizeof(orgName), "~g~%s", OrgInfo[i][o_Name]);
 				}
 				else
 				{
-					format(string, sizeof(string), " ~n~%s~n~~y~%s~w~: %d", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
+					format(orgName, sizeof(orgName), "~r~%s", OrgInfo[i][o_Name]);
 				}
+
+				new points[32];
+				if(score == maxScore)
+				{
+					format(points, sizeof(points), "~p~%d", FrontBusiness[bizId][TakingOverScore][i]);
+				}
+				if(score > TAKE_OVER_POINT_THRESHOLD)
+				{
+					format(points, sizeof(points), "~y~%d", FrontBusiness[bizId][TakingOverScore][i]);
+				}
+				else
+				{
+					format(points, sizeof(points), "~w~%d", FrontBusiness[bizId][TakingOverScore][i]);
+				}
+
+				format(string, sizeof(string), "%s%s: %d~n~", string, orgName, points);
 				anyPoints++;
 			}
 		}
 		if(anyPoints > 0)
 		{
-			GameTextForPlayer(playerid, string, 1100, 12);
+			GameTextForPlayer(playerid, string, 1100, 13);
 		}
 	}
 }
@@ -167,17 +199,15 @@ ptask BusinessInfoTimer[1000](playerid)
 	{
 		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][TakeoverArea]) || GetPlayerFrontBusinessProximity(playerid, i) < 3.0)
 		{
-			MruMessage(playerid, COLOR_PINK, "Siema pl 1");
 			ShowFrontBusinessInfo(playerid, i);
+			return;
 		}
-		else
-		{
-			if(GetPVarInt(playerid, "business-info") == 1)
-			{
-				ZoneTXD_Hide(playerid);
-				DeletePVar(playerid, "business-info");
-			}
-		}
+	}
+
+	if(GetPVarInt(playerid, "business-info") == 1)
+	{
+		ZoneTXD_Hide(playerid);
+		DeletePVar(playerid, "business-info");
 	}
 }
 

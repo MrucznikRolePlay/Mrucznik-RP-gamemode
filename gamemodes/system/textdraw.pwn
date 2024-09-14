@@ -53,7 +53,7 @@ new PlayerText:CRUISECONTROL_AMOUNT[MAX_PLAYERS];
 //TXD   Stanowe - Textdrawy keypad
 new Text:NG_GateTD[8];
 //25.07 stefy
-new Text:ZoneTXD[4];
+new Text:ZoneTXD[5];
 new PlayerText:ZonePTXD_Name[MAX_PLAYERS];
 new PlayerText:ZonePTXD_Cash[MAX_PLAYERS];
 new PlayerText:ZonePTXD_Area[MAX_PLAYERS];
@@ -1440,6 +1440,16 @@ ZoneTXD_Load()
     TextDrawBackgroundColor(ZoneTXD[1], 51);
     TextDrawFont(ZoneTXD[1], 2);
     TextDrawSetProportional(ZoneTXD[1], 1);
+
+    ZoneTXD[4] = TextDrawCreate(524.000122, 205.955596, "b m~n~i a~n~z f~n~n i~n~e i~n~s");
+    TextDrawLetterSize(ZoneTXD[4], 0.265333, 1.645630);
+    TextDrawAlignment(ZoneTXD[4], 1);
+    TextDrawColor(ZoneTXD[4], 16777215);
+    TextDrawSetShadow(ZoneTXD[4], 0);
+    TextDrawSetOutline(ZoneTXD[4], 1);
+    TextDrawBackgroundColor(ZoneTXD[4], 51);
+    TextDrawFont(ZoneTXD[4], 2);
+    TextDrawSetProportional(ZoneTXD[4], 1);
 
     ZoneTXD[2] = TextDrawCreate(546.666687, 204.966674, "usebox");
     TextDrawLetterSize(ZoneTXD[2], 0.000000, 10.396911);

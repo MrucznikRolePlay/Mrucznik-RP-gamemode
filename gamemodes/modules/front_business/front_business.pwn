@@ -109,7 +109,7 @@ StartFrontBizTakeover(bizId)
 		FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5, 
 		0.0, 0.0, 0.0, 
 		FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
-		INVALID_PLAYER_ID, STREAMER_CP_SD, STREAMER_OBJECT_DD, FrontBusiness[bizId][GangZoneArea]);
+		INVALID_PLAYER_ID, STREAMER_OBJECT_SD, STREAMER_OBJECT_DD, FrontBusiness[bizId][GangZoneArea]);
 }
 
 StopFrontBizTakeover(bizId)
@@ -259,27 +259,26 @@ IsFrontBusinnesOwnedByOrg(bizId, org)
 
 ShowFrontBusinessInfo(playerid, bizId)
 {
-	new owner[32];
+	new owner[40];
 	if(FrontBusiness[bizId][Owner] == 0)
-		strcat(owner, "Brak");
+		strcat(owner, "~r~~h~Brak");
 	else
-		strcat(owner, OrgInfo[FrontBusiness[bizId][Owner]][o_Name]);
+		format(owner, sizeof(owner), "~r~~h~%s", OrgInfo[FrontBusiness[bizId][Owner]][o_Name]);
 
-    for(new i=0;i<3;i++)
-    {
-        TextDrawShowForPlayer(playerid, ZoneTXD[i]);
-    }
+	TextDrawShowForPlayer(playerid, ZoneTXD[0]);
+	TextDrawShowForPlayer(playerid, ZoneTXD[4]);
+	TextDrawShowForPlayer(playerid, ZoneTXD[2]);
 
-    PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], sprintf("Biznes: ~g~~h~%s", FrontBusiness[bizId][Name]));
+    PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], sprintf("Biznes: ~g~~h~%s~n~Wlasciciel: %s", FrontBusiness[bizId][Name], owner));
     PlayerTextDrawShow(playerid, ZonePTXD_Name[playerid]);
 
-    PlayerTextDrawSetString(playerid, ZonePTXD_Cash[playerid], sprintf("Wlasciciel: ~n~%s", owner));
+    PlayerTextDrawSetString(playerid, ZonePTXD_Cash[playerid], sprintf("Typ biznesu: ~g~~h~%s", FrontBusinessType[FrontBusiness[bizId][Type]]));
     PlayerTextDrawShow(playerid, ZonePTXD_Cash[playerid]);
 
-    PlayerTextDrawSetString(playerid, ZonePTXD_Area[playerid], sprintf("Godzina przejecia: ~n~%02d:%02d (%dm)", FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60));
+    PlayerTextDrawSetString(playerid, ZonePTXD_Area[playerid], sprintf("Godzina przejecia: ~g~~h~%02d:%02d~n~Czas przejecia: ~g~~h~%dm", FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60));
     PlayerTextDrawShow(playerid, ZonePTXD_Area[playerid]);
 
-    PlayerTextDrawSetString(playerid, ZonePTXD_Member[playerid], sprintf("Zysk na godzinê + bonus za graczy online: ~n~%d + %d", FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]));
+    PlayerTextDrawSetString(playerid, ZonePTXD_Member[playerid], sprintf("Zysk na godzinê: ~g~~h~%d~n~Bonus per gracz online: ~g~~h~%d", FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]));
     PlayerTextDrawShow(playerid, ZonePTXD_Member[playerid]);
 
 	SetPVarInt(playerid, "business-info", 1);

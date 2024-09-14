@@ -38,6 +38,22 @@ enum BIZ_TYPE {
 	FRONT_BIZ_TYPE_BOAT,
 	FRONT_BIZ_TYPE_SPRAY
 };
+new FrontBusinessType[BIZ_TYPE][32] = {
+    "Biznes",
+    "Gunshop",
+	"Warsztat",
+	"Restauracja",
+	"Klub",
+	"Pizzeria",
+	"Burgerownia",
+	"Kurczakownia",
+    "Kasyno",
+	"Si³ownia",
+	"Sklep z ubraniami",
+	"Fryzjer",
+	"Klub jachtowy",
+	"Pay 'n' Spray"
+};
 
 enum eFrontBusinessInfo {
     // hardcoded info

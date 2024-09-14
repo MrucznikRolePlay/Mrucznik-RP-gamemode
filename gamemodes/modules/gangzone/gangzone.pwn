@@ -43,7 +43,7 @@ public Zone_HideInfo(playerid)
 
 ZoneTXD_Unload()
 {
-    for(new i=0;i<4;i++) TextDrawDestroy(Text:i);
+    for(new i=0;i<5;i++) TextDrawDestroy(Text:i);
 }
 
 
@@ -559,7 +559,7 @@ ZoneTXD_Show(playerid, zoneid)
 
 ZoneTXD_Hide(playerid)
 {
-    for(new i=0;i<4;i++)
+    for(new i=0;i<5;i++)
     {
         TextDrawHideForPlayer(playerid, ZoneTXD[i]);
     }
