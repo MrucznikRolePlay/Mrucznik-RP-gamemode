@@ -31,6 +31,11 @@ command_payday_Impl(playerid)
         return 1;
     }
     
+    foreach(new i : Player)
+    {
+        PlayerInfo[i][pPayDay] = 5;
+    }
+
     PayDay();
     MruMessageGoodInfo(playerid, "Wygenerowa³eœ payday");
     return 1;
