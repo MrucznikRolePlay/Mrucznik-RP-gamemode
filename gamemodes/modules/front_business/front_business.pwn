@@ -280,16 +280,16 @@ ShowFrontBusinessInfo(playerid, bizId)
 	TextDrawShowForPlayer(playerid, ZoneTXD[2]);
 
 	new hour, minute, endHour, endMinute;
-	GetOrgTakeoverTimeWindow(bizId, &hour, &minute, &endHour, &endMinute)
+	GetOrgTakeoverTimeWindow(bizId, hour, minute, endHour, endMinute);
 
 	new string[1024]; // TODO: rozszerzyc textdraw
 	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~Wlasciciel: %s~n~" \
 		"Typ biznesu: ~g~~h~%s~n~~n~" \
-		"Godzina przejecia: ~g~~h~%02d:%02d~n~Czas przejecia: ~g~~h~%dm~n~~n~" \
+		"Do przejecia od: ~n~~g~~h~%02d:%02d - %02d:%02d~n~" \
 		"Zysk na godzine: ~g~~h~%d$~n~Bonus za gracza online: ~g~~h~%d$", 
 		FrontBusiness[bizId][Name], owner,
 		FrontBusinessType[FrontBusiness[bizId][Type]],
-		FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60,
+		hour, minute, endHour, endMinute,
 		FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]);
     PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], string);
     PlayerTextDrawShow(playerid, ZonePTXD_Name[playerid]);
