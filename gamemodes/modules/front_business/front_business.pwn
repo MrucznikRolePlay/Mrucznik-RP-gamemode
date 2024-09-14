@@ -162,8 +162,12 @@ TriggerTakingOver(bizId, org)
 
 	if(FrontBusiness[bizId][TakingOverScore][org] == 0)
 	{
-		SendOrgMessage(org, COLOR_PANICRED, "UWAGA! AGRESJA!");
-		SendOrgMessage(org, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
+		new ownerOrg = FrontBusiness[bizId][Owner];
+		if(IsActiveOrg(ownerOrg))
+		{
+			SendOrgMessage(org, COLOR_PANICRED, "UWAGA! AGRESJA!");
+			SendOrgMessage(org, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
+		}
 	}
 }
 

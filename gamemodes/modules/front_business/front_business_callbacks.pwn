@@ -113,6 +113,8 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 	{
 		if(!FrontBusiness[i][TakeoverActive])
 		{
+			DeletePVar(playerid, "taking-over");
+			DeletePVar(playerid, "show-takeover-info");
 			return;
 		}
 
