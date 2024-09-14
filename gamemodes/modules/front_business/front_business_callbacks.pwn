@@ -115,15 +115,15 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 			return;
 		}
 
-		new org = GetPVarInt(playerid, "taking-over") - 1;
-		if(org < 0)
-		{
-			return;
-		}
-
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
 			DeletePVar(playerid, "show-takeover-info");
+			return;
+		}
+
+		new org = GetPVarInt(playerid, "taking-over") - 1;
+		if(org < 0)
+		{
 			return;
 		}
 		

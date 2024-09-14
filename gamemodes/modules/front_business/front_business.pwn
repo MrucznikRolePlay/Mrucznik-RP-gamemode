@@ -109,7 +109,7 @@ StartFrontBizTakeover(bizId)
 		FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5, 
 		0.0, 0.0, 0.0, 
 		FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
-		INVALID_PLAYER_ID, STREAMER_OBJECT_SD, STREAMER_OBJECT_DD, FrontBusiness[bizId][GangZoneArea]);
+		INVALID_PLAYER_ID, STREAMER_OBJECT_SD, STREAMER_OBJECT_DD, -1); // FrontBusiness[bizId][GangZoneArea]
 }
 
 StopFrontBizTakeover(bizId)
