@@ -50,9 +50,27 @@ command_fbadmin_Impl(playerid, bizId, params[256])
             MruMessageGoodInfo(playerid, "Rozpocz¹³eœ przejmowanie biznesu.");
         }
     }
+    if(strcmp(params, "give", true) == 0)
+    {
+        new org;
+        if(sscanf(params, "d", org))
+        {
+            sendTipMessage(playerid, "U¿yj /fbadmin [bizID] give [orgID]");
+            return 1;
+        }
+
+        if(org < 0 || org >= MAX_ORG)
+        {
+            MruMessageFail(playerid, "OrgID od 0 do "#MAX_ORG);
+            return 1;
+        }
+
+        TakeOverFrontBusiness(bizId, org);
+        MruMessageGoodInfoF(playerid, "Da³eœ biznes %d organizacji %d", bizId, org);
+    }
     else
     {
-        MruMessageFail(playerid, "Dostêpne opcje: takeover");
+        MruMessageFail(playerid, "Dostêpne opcje: takeover / give");
     }
     return 1;
 }
