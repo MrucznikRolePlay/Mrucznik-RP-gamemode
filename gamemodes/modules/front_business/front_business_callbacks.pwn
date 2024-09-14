@@ -203,7 +203,7 @@ FrontBiz_OnPayDay(playerid)
 	new totalIncome;
 	new memberIncome;
 	new leaderIncome;
-	for(new i=1; i<sizeof(FrontBusiness); i++)
+	for(new i; i<sizeof(FrontBusiness); i++)
 	{
 		if(IsFrontBusinnesOwnedByOrg(i, org))
 		{

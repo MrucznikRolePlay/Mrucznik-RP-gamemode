@@ -1978,6 +1978,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				SetPlayerSpawnPos(playerid);
 			}
+			return 1;
 		}
 	    //OnDialogResposne OKNA DMV
 		if(dialogid == 99)

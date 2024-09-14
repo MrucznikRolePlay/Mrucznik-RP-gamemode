@@ -282,7 +282,7 @@ ShowFrontBusinessInfo(playerid, bizId)
 	TextDrawShowForPlayer(playerid, ZoneTXD[4]);
 	TextDrawShowForPlayer(playerid, ZoneTXD[2]);
 
-	new string[1024];
+	new string[1024]; // TODO: rozszerzyc textdraw
 	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~Wlasciciel: %s~n~" \
 		"Typ biznesu: ~g~~h~%s~n~~n~" \
 		"Godzina przejecia: ~g~~h~%02d:%02d~n~Czas przejecia: ~g~~h~%dm~n~~n~" \

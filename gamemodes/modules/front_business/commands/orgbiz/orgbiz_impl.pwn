@@ -36,7 +36,7 @@ command_orgbiz_Impl(playerid, action[16], params[128])
     {
         SendClientMessage(playerid, COLOR_GREEN, "|_______________ Biznesy organizacji _______________|");
         new string[MAX_MESSAGE_LENGTH];
-        for(new i=1; i<sizeof(FrontBusiness); i++)
+        for(new i; i<sizeof(FrontBusiness); i++)
         {
             if(FrontBusiness[i][Owner] == org)
             {
@@ -62,14 +62,14 @@ command_orgbiz_Impl(playerid, action[16], params[128])
     }
     else if(strcmp(action, "zmienczas", true) == 0)
     {
-        if(IsPlayerOrgLeader(playerid))
+        if(!IsPlayerOrgLeader(playerid))
         {
             MruMessageFail(playerid, "Ta opcja jest tylko dla lidera organizacji.");
             return 1;
         }
 
 		new bizId, hour, minute;
-		if( sscanf(params, "ddd", bizId, hour, minute))
+		if(sscanf(params, "ddd", bizId, hour, minute))
 		{
 			sendTipMessage(playerid, "U¿yj /orgbiz zmienczas [id biznesu] [godzina (w przedziale "#MIN_TAKEOVER_HOUR" - "#MAX_TAKEOVER_HOUR")] [minuta]");
 			sendTipMessage(playerid, "Koszt komendy: "#CHANGE_TAKEOVER_TIME_COST" kontrabandy.");
@@ -91,6 +91,12 @@ command_orgbiz_Impl(playerid, action[16], params[128])
         if(!IsFrontBusinnesOwnedByOrg(bizId, org))
         {
             MruMessageFailF(playerid, "Biznes %d (%s) nie jest posiadany przez Twoj¹ organizacjê.", bizId, FrontBusiness[bizId][Name]);
+            return 1;
+        }
+
+        if(hour < MIN_TAKEOVER_HOUR || hour > MAX_TAKEOVER_HOUR)
+        {
+            MruMessageFail(playerid, "Godzina musi byæ w przedziale "#MIN_TAKEOVER_HOUR" - "#MAX_TAKEOVER_HOUR".");
             return 1;
         }
 
