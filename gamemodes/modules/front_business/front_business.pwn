@@ -279,6 +279,9 @@ ShowFrontBusinessInfo(playerid, bizId)
 	TextDrawShowForPlayer(playerid, ZoneTXD[4]);
 	TextDrawShowForPlayer(playerid, ZoneTXD[2]);
 
+	new hour, minute, endHour, endMinute;
+	GetOrgTakeoverTimeWindow(bizId, &hour, &minute, &endHour, &endMinute)
+
 	new string[1024]; // TODO: rozszerzyc textdraw
 	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~Wlasciciel: %s~n~" \
 		"Typ biznesu: ~g~~h~%s~n~~n~" \
@@ -292,6 +295,17 @@ ShowFrontBusinessInfo(playerid, bizId)
     PlayerTextDrawShow(playerid, ZonePTXD_Name[playerid]);
 
 	SetPVarInt(playerid, "business-info", 1);
+}
+
+GetOrgTakeoverTimeWindow(bizId, &hour, &minute, &endHour, &endMinute)
+{
+	hour = FrontBusiness[bizId][TakeoverHour];
+	minute = FrontBusiness[bizId][TakeoverMinute];
+	new takeoverTimeMinutes = FrontBusiness[bizId][TakeoverTime];
+	new increasedMinutes = minute + (takeoverTimeMinutes/60);
+	endHour = hour + (increasedMinutes/60);
+	endMinute = minute + (takeoverTimeMinutes/60);
+	if(endMinute > 60) endMinute = endMinute % 60;
 }
 
 GetFrontBusinessIcon(type)

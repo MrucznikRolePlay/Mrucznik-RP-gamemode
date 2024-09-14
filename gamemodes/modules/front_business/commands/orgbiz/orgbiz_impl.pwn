@@ -40,21 +40,24 @@ command_orgbiz_Impl(playerid, action[16], params[128])
         {
             if(FrontBusiness[i][Owner] == org)
             {
+                new hour, minute, endHour, endMinute;
+                GetOrgTakeoverTimeWindow(i, hour, minute, endHour, endMinute);
                 if(IsPlayerOrgLeader(playerid))
                 {
                     new profit, leaderProfit;
                     Redis_GetInt(RedisClient, RedisFrontBizKey(i, "profit"), profit);
                     Redis_GetInt(RedisClient, RedisFrontBizKey(i, "leaderProfit"), leaderProfit);
-                    format(string, sizeof(string), "- [%d] %s | Godzina przejêcia: %02d:%02d | Wygenerowany przychód: %d$ (%d$ do sejfu)", 
+
+                    format(string, sizeof(string), "- [%d] %s | Do przejêcia w godzinach: %02d:%02d - %02d:%02d | Wygenerowany przychód: %d$ (%d$ do sejfu)", 
                         i, FrontBusiness[i][Name], 
-                        FrontBusiness[i][TakeoverHour], FrontBusiness[i][TakeoverMinute],
+                        hour, minute, endHour, endMinute,
                         profit, leaderProfit);
                 }
                 else
                 {
-                    format(string, sizeof(string), "- [%d] %s | Godzina przejêcia: %02d:%02d", 
+                    format(string, sizeof(string), "- [%d] %s | Do przejêcia w godzinach: %02d:%02d - %02d:%02d", 
                         i, FrontBusiness[i][Name], 
-                        FrontBusiness[i][TakeoverHour], FrontBusiness[i][TakeoverMinute]);
+                        hour, minute, endHour, endMinute);
                 }
                 SendClientMessage(playerid, COLOR_WHITE, string);
             }

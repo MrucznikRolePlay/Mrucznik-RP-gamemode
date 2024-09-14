@@ -437,14 +437,6 @@ DialogPages:RodzinaPracownicy(playerid, response, listitem, inputtext[]) {
 	VECTOR_clear(VMembersOrg[playerid]);
 	if (!response) return 1;
 
-	foreach(new i: Player) {
-		if(PlayerInfo[i][pUID] == uid) {
-			sendTipMessage(playerid, "Gracz jest online, uzyj /orgpanel aby nim zarz¹dzaæ");
-			Command_ReProcess(playerid, "orgpanel pracownicy", false);
-			return 1;
-		}
-	}
-
 	// skopiowane z fpanel
 	new nick[MAX_PLAYER_NAME], rank, rankName[32], lider;
 	new str[1024];
@@ -464,7 +456,7 @@ DialogPages:RodzinaPracownicy(playerid, response, listitem, inputtext[]) {
 	strcat(rankName, OrgRank[org][rank]);
     format(str, sizeof(str), ""#KARA_STRZALKA"    »» "#KARA_TEKST"Nick: "#KARA_TEKST"%s", nick);
     format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Ranga: "#KARA_TEKST"%s", str, rankName);
-    format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Dochód z pracownika: "#KARA_TEKST"%d", str, benefit);
+    format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Dochód z pracownika: "#KARA_TEKST"%d$", str, benefit);
     format(str, sizeof(str), "%s\n"#KARA_STRZALKA"    »» "#KARA_TEKST"Punkty przejêcia: "#KARA_TEKST"%d", str, points);
     format(str, sizeof(str), "%s\n ", str);
     format(str, sizeof(str), "%s\n"#HQ_COLOR_STRZALKA"    »» {dafc10}Wyrzuæ cz³onka", str);  
@@ -493,6 +485,20 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				case 5: 
 				{ // zwolnij
 					new uid = GetPVarInt(playerid, "prpanel_uid");
+					foreach(new i: Player) 
+					{
+						if(PlayerInfo[i][pUID] == uid) 
+						{
+							if(IsPlayerOrgLeader(i))
+							{
+								MruMessageFail(playerid, "Nie mo¿esz zwolniæ lidera.");
+								return 1;
+							}
+							Command_ReProcess(playerid, sprintf("orgpanel zwolnij %d", i), false);
+							return 1;
+						}
+					}
+
 					new nick[MAX_PLAYER_NAME];
 					strcat(nick, MruMySQL_GetNameFromUID(uid));
 					new rodzina = MruMySQL_GetAccInt("FMember", nick);
@@ -556,6 +562,20 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				return 1;
 			}
 			new uid = GetPVarInt(playerid, "prpanel_uid");
+			foreach(new i: Player) 
+			{
+				if(PlayerInfo[i][pUID] == uid)
+				{
+					if(IsPlayerOrgLeader(i))
+					{
+						MruMessageFail(playerid, "Nie mo¿esz zmieniæ rangi liderowi.");
+						return 1;
+					}
+					Command_ReProcess(playerid, sprintf("orgpanel ranga %d %d", i, listitem), false);
+					return 1;
+				}
+			}
+
 			new nick[MAX_PLAYER_NAME];
 			strcat(nick, MruMySQL_GetNameFromUID(uid));
 			new rodzina = MruMySQL_GetAccInt("FMember", nick);

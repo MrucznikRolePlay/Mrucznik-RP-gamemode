@@ -45,6 +45,7 @@ YCMD:komenda(playerid, params[], help)
     }
     else
     {
+        StaryCzas[playerid] = GetTickCount()-101;
         Command_ReProcess(playerid, params, true);
     }
     return 1;

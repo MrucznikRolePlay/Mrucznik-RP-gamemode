@@ -54,13 +54,13 @@ YCMD:fbadmin(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new bizId, param[256];
-    if(sscanf(params, "ds[256]", bizId, param))
+    new bizId, action[32], param[256];
+    if(sscanf(params, "ds[32]S()[256]", bizId, action, param))
     {
-        sendTipMessage(playerid, "U¿yj /fbadmin [id biznesu] [opcja (takeover/give)] ");
+        sendTipMessage(playerid, "U¿yj /fbadmin [id biznesu] [opcja (takeover/give)] [parametry] ");
         return 1;
     }
     
     //command body
-    return command_fbadmin_Impl(playerid, bizId, param);
+    return command_fbadmin_Impl(playerid, bizId, action, param);
 }

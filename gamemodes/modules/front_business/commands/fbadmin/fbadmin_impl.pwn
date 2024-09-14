@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_fbadmin_Impl(playerid, bizId, params[256])
+command_fbadmin_Impl(playerid, bizId, action[32], params[256])
 {
     if(PlayerInfo[playerid][pAdmin] != 5000)
     {
@@ -37,7 +37,7 @@ command_fbadmin_Impl(playerid, bizId, params[256])
         return 1;
     }
 
-    if(strcmp(params, "takeover", true) == 0)
+    if(strcmp(action, "takeover", true) == 0)
     {
         if(FrontBusiness[bizId][TakeoverActive]) 
         {
@@ -50,7 +50,7 @@ command_fbadmin_Impl(playerid, bizId, params[256])
             MruMessageGoodInfo(playerid, "Rozpocz¹³eœ przejmowanie biznesu.");
         }
     }
-    else if(strcmp(params, "give", true) == 0)
+    else if(strcmp(action, "give", true) == 0)
     {
         new org;
         if(sscanf(params, "d", org))

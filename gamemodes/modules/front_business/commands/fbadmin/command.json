@@ -12,9 +12,16 @@
         },
         {
             "type": "string",
+            "size": "32",
+            "name": "action",
+            "description": "opcja (takeover/give)"
+        },
+        {
+            "type": "string",
             "size": "256",
             "name": "param",
-            "description": "opcja (takeover/give)"
+            "description": "parametry",
+            "defaultValue": ""
         }
     ],
     "date": "14.09.2024"
