@@ -960,14 +960,13 @@ new gsecond = 0;
 new dollah = 1000; // Amount player recieves on spawn.
 new realtime = 1;
 new wtime = 15;
+new levelexp = 4;
 new levelcost = 10000;
-//new deathcost = 500;
 new callcost = 5; //1 second
 new realchat = 1;
 new timeshift = -1;
 new shifthour;
 
-new levelexp = 4;
 new Float:PlayerPos[MAX_PLAYERS][6];
 new Float:TeleportDest[MAX_PLAYERS][3];
 
