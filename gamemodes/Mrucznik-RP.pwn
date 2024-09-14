@@ -505,7 +505,6 @@ public OnGameModeExit()
     for(new i=0;i<MAX_ORG;i++)
     {
         SaveOrg(i);
-        SaveOrg(i);
     }
     for(new i=0;i<MAX_FRAC;i++)
     {
