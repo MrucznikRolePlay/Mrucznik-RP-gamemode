@@ -133,7 +133,7 @@ DecreaseDefenderPoints(bizId, points)
 
 ptask TakeoverScoreboard[100](playerid)
 {
-	if(GetPlayerOrg(playerid) == 0 && !IsACop(playerid))
+	if(GetPlayerOrg(playerid) == 0 && !IsAPolicja(playerid))
 	{
 		return;
 	}
@@ -141,7 +141,7 @@ ptask TakeoverScoreboard[100](playerid)
 	new bizId = GetPVarInt(playerid, "in-business-gangzone") - 1;
 	if(bizId >= 0 && FrontBusiness[bizId][TakeoverActive])
 	{	
-		if(GetPlayerVisibleDynamicCP(playeridddddddd) != FrontBusiness[bizId][TakeoverCheckpoint])
+		if(GetPlayerVisibleDynamicCP(playerid) != FrontBusiness[bizId][TakeoverCheckpoint])
 		{
 			TogglePlayerDynamicCP(playerid, FrontBusiness[bizId][TakeoverCheckpoint], true);
 		}

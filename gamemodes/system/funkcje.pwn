@@ -4042,7 +4042,7 @@ ShowStats(playerid, targetid)
 			PlayerInfo[targetid][pArrested], PlayerInfo[targetid][pCrimes], PlayerInfo[targetid][pPK], PlayerInfo[targetid][pWantedDeaths], PlayerInfo[targetid][pKills], PlayerInfo[targetid][pDeaths], PoziomPoszukiwania[targetid]));
 		SendClientMessage(playerid, COLOR_GRAD5, sprintf("Œlub z:[%s] Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] LottoNr:[%d] Warny: [%d]", 
 			PlayerInfo[targetid][pMarriedTo], CalculateFishes(targetid), PlayerInfo[targetid][pBiggestFish], PlayerInfo[targetid][pLottoNr], PlayerInfo[targetid][pWarns]));
-		SendClientMessage(playerid, COLOR_GRAD6, sprintf("Praca:[%s] Organizacja:[%s] Frakcja:[%s] Ranga:[%d] Skin ID:[%d] Uniform:[%d] JobSkin:[%d]", 
+		SendClientMessage(playerid, COLOR_GRAD6, sprintf("Praca:[%s] Frakcja:[%s] Organizacja:[%s] Ranga:[%d] Skin ID:[%d] Uniform:[%d] JobSkin:[%d]", 
 			GetJobName(PlayerInfo[targetid][pJob]), fracText, orgText, PlayerInfo[targetid][pRank], PlayerInfo[targetid][pSkin], PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin]));
 		SendClientMessage(playerid, COLOR_GREEN,"_____________________________________________________");
 	}
