@@ -757,13 +757,6 @@ new Float:LosowyParkingWodolotVC[][4] = {
 {4679.4233, -2693.7141, 2.1052, 6.5168}
 };
 
-
-new Float:gRandomPlayerSpawns[3][4] = {
-{1742.9796,-1863.2355,13.5753, 0.0}, // unity station
-{806.3165,-1343.0020,-0.5078, 140.0}, // market station
-{2230.3362,-1159.5715,25.8186, 90.0} // jefferson
-};
-
 //respawn count
 new Count = 20;
 

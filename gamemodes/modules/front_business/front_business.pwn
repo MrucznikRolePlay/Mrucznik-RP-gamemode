@@ -105,17 +105,21 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverActive] = true;
 	FrontBusiness[bizId][TakeoverStartTime] = gettime();
 
-	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicObject(19945, 
-		FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5, 
-		0.0, 0.0, 0.0, 
-		FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
-		INVALID_PLAYER_ID, STREAMER_OBJECT_SD, STREAMER_OBJECT_DD, -1); // FrontBusiness[bizId][GangZoneArea]
+	CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
+		20.0, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
+		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, -1);
+	// FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicObject(19945, 
+	// 	FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5, 
+	// 	0.0, 0.0, 0.0, 
+	// 	FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
+	// 	INVALID_PLAYER_ID, STREAMER_OBJECT_SD, STREAMER_OBJECT_DD, -1); // FrontBusiness[bizId][GangZoneArea]
 }
 
 StopFrontBizTakeover(bizId)
 {
 	FrontBusiness[bizId][TakeoverActive] = false;
-	DestroyDynamicObject(FrontBusiness[bizId][TakeoverCheckpoint]);
+	DestroyDynamicCP(FrontBusiness[bizId][TakeoverCheckpoint]);
+	// DestroyDynamicObject(FrontBusiness[bizId][TakeoverCheckpoint]);
 
 	new winner = -1, maxScore;
 	for(new i; i<MAX_ORG; i++)
@@ -278,7 +282,7 @@ ShowFrontBusinessInfo(playerid, bizId)
     PlayerTextDrawSetString(playerid, ZonePTXD_Area[playerid], sprintf("Godzina przejecia: ~g~~h~%02d:%02d~n~Czas przejecia: ~g~~h~%dm", FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60));
     PlayerTextDrawShow(playerid, ZonePTXD_Area[playerid]);
 
-    PlayerTextDrawSetString(playerid, ZonePTXD_Member[playerid], sprintf("Zysk na godzinê: ~g~~h~%d~n~Bonus per gracz online: ~g~~h~%d", FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]));
+    PlayerTextDrawSetString(playerid, ZonePTXD_Member[playerid], sprintf("Zysk na godzinê: ~g~~h~%d$~n~Bonus per gracz online: ~g~~h~%d$", FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]));
     PlayerTextDrawShow(playerid, ZonePTXD_Member[playerid]);
 
 	SetPVarInt(playerid, "business-info", 1);

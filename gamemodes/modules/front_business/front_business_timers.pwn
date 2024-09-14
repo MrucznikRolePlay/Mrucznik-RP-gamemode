@@ -77,7 +77,7 @@ UpdateTakeoverPoints(bizId)
 		if(FrontBusiness[bizId][TakingOver][i] >= playersThreshold)
 		{
 			if(defend)
-			{
+			{ // active defending
 				new battlingAttackers = DecreaseAllAttackerPoints(bizId, pointsIncr);
 				if(!battlingAttackers)
 				{
@@ -85,7 +85,7 @@ UpdateTakeoverPoints(bizId)
 				}
 			}
 			else
-			{
+			{ // active attacking
 				new battlingDefenders = DecreaseDefenderPoints(bizId, pointsIncr);
 				if(!battlingDefenders)
 				{
@@ -96,6 +96,7 @@ UpdateTakeoverPoints(bizId)
 		}
 		else if(FrontBusiness[bizId][TakingOver][i] == 0 && FrontBusiness[bizId][TakingOverScore][i] > 0)
 		{
+			// decreasing points - no one in takeover area
 			FrontBusiness[bizId][TakingOverScore][i] -= pointsDecr;
 		}
 	}
@@ -136,7 +137,7 @@ ptask TakeoverCheck[1000](playerid)
 	if(bizId >= 0)
 	{	
 		new string[512];
-		strcat(string, "Punkty przejecia:");
+		strcat(string, "Punkty przejecia:~n~");
 		new anyPoints;
 
 		new maxScore;
@@ -173,7 +174,7 @@ ptask TakeoverCheck[1000](playerid)
 				{
 					format(points, sizeof(points), "~p~%d", FrontBusiness[bizId][TakingOverScore][i]);
 				}
-				if(score > TAKE_OVER_POINT_THRESHOLD)
+				else if(score > TAKE_OVER_POINT_THRESHOLD)
 				{
 					format(points, sizeof(points), "~y~%d", FrontBusiness[bizId][TakingOverScore][i]);
 				}

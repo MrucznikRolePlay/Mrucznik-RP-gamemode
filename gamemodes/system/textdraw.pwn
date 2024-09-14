@@ -1441,7 +1441,7 @@ ZoneTXD_Load()
     TextDrawFont(ZoneTXD[1], 2);
     TextDrawSetProportional(ZoneTXD[1], 1);
 
-    ZoneTXD[4] = TextDrawCreate(524.000122, 205.955596, "b m~n~i a~n~z f~n~n i~n~e i~n~s");
+    ZoneTXD[4] = TextDrawCreate(524.000122, 205.955596, "b m~n~i  a~n~z f~n~n i~n~e i~n~s");
     TextDrawLetterSize(ZoneTXD[4], 0.265333, 1.645630);
     TextDrawAlignment(ZoneTXD[4], 1);
     TextDrawColor(ZoneTXD[4], 16777215);

@@ -883,6 +883,11 @@ public OnDynamicActorStreamIn(actorid, forplayerid)
 
 public OnPlayerEnterDynamicArea(playerid, STREAMER_TAG_AREA:areaid)
 {
+	if(GetPVarInt(playerid, "debug-objects"))
+	{
+		SendClientMessage(playerid, COLOR_PINK, sprintf("OnPlayerEnterDynamicArea: %d", areaid));
+	}
+
 	ZA_OnPlayerEnterDynamicArea(playerid, areaid); // z³odziej aut
 	FB_OnPlayerEnterDynamicArea(playerid, areaid); // front business
 
@@ -922,6 +927,10 @@ public OnPlayerEnterDynamicArea(playerid, STREAMER_TAG_AREA:areaid)
 
 public OnPlayerLeaveDynamicArea(playerid, STREAMER_TAG_AREA:areaid)
 {
+	if(GetPVarInt(playerid, "debug-objects"))
+	{
+		SendClientMessage(playerid, COLOR_PINK, sprintf("OnPlayerLeaveDynamicArea: %d", areaid));
+	}
 	FB_OnPlayerLeaveDynamicArea(playerid, areaid);
 	return 1;
 }
@@ -2294,9 +2303,7 @@ SetPlayerSpawnPos(playerid)
 		            else
 		            {
 						SendClientMessage(playerid, COLOR_YELLOW, "Twoja organizacja nie ma jeszcza spawnu - spawnujesz siê jako cywil");
-                        new rand = random(sizeof(gRandomPlayerSpawns));
-			    		SetPlayerPos(playerid, gRandomPlayerSpawns[rand][0], gRandomPlayerSpawns[rand][1], gRandomPlayerSpawns[rand][2]);
-			    		SetPlayerFacingAngle(playerid, gRandomPlayerSpawns[rand][3]);
+						SetPlayerPos(playerid, 5229.6646,-2227.3933,6.5385);
 					}
 				}
 				else if(PlayerInfo[playerid][pJob] > 0) //Spawn Prac
