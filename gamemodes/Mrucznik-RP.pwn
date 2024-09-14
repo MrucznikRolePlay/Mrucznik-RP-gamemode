@@ -209,7 +209,7 @@ main()
 	print("\n----------------------------------");
 	print("M | --- Mrucznik Role Play --- | M");
 	print("R | ---        ****        --- | R");
-	print("U | ---        v2.6        --- | U");
+	print("U | ---        v2.8        --- | U");
 	print("C | ---        ****        --- | C");
 	print("Z | ---    by Mrucznik     --- | Z");
 	print("N | ---                    --- | N");
