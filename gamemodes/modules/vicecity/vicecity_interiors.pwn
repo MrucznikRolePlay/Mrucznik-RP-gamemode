@@ -80,7 +80,7 @@ ViceCityInteriors()
     // ------ [ Bank ] ------
     AddInterior(
         "Bank", 4104.6421, -1291.2079, 7.8773, 0, 0,
-        "Wyjœcie", 4100.0, -1291.11, 999.0, 6, VCVW, // interior banku z internetu: 1387.3058,-26.9497,1000.8729
+        "Wyjœcie", 4100.0, -1291.11, 994.0, 6, VCVW, // interior banku z internetu: 1387.3058,-26.9497,1000.8729
         0, 103);
 
 

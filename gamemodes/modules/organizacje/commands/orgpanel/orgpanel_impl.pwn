@@ -308,6 +308,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel stawka [procent lidera (min "#MIN_LEADER_STAKE" max "#MAX_LEADER_STAKE")]");
 			sendTipMessage(playerid, "Procent lidera to procent zarobków z przejêtych biznesów, który potr¹cisz pracownikom podczas PayDay'a.");
+			MruMessageGoodInfoF(playerid, "Aktualna stawka: %d$.", OrgInfo[org][o_LeaderStake]);
 			return 1;
 		}
 
