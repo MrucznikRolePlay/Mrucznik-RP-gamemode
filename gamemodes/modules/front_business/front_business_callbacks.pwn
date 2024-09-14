@@ -155,6 +155,8 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 			}
 
 			FrontBusiness[i][TakingOver][org]--;
+			if(FrontBusiness[i][TakingOver][org] < 0)
+				FrontBusiness[i][TakingOver][org] = 0;
 
 			// message
 			SendExitTakeoverAreaMessage(playerid, i, org, isDefense);
