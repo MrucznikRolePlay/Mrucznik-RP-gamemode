@@ -145,18 +145,18 @@ ptask TakeoverCheck[1000](playerid)
 			{
 				if(score > TAKE_OVER_POINT_THRESHOLD)
 				{
-					format(string, sizeof(string), "%s~n~~y~%s~w~: ~r~%d~w~", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
+					format(string, sizeof(string), " ~n~%s~n~~y~%s~w~: ~r~%d~w~", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
 				}
 				else
 				{
-					format(string, sizeof(string), "%s~n~~y~%s~w~: %d", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
+					format(string, sizeof(string), " ~n~%s~n~~y~%s~w~: %d", OrgInfo[i][o_Name], FrontBusiness[bizId][TakingOverScore][i]);
 				}
 				anyPoints++;
 			}
 		}
 		if(anyPoints > 0)
 		{
-			GameTextForPlayer(playerid, string, 1100, 15);
+			GameTextForPlayer(playerid, string, 1100, 12);
 		}
 	}
 }
@@ -165,20 +165,17 @@ ptask BusinessInfoTimer[1000](playerid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][GangZoneArea]))
+		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][TakeoverArea]) || GetPlayerFrontBusinessProximity(playerid, i) < 3.0)
 		{
-			if(GetPlayerFrontBusinessProximity(playerid, i) < 3.0)
+			MruMessage(playerid, COLOR_PINK, "Siema pl 1");
+			ShowFrontBusinessInfo(playerid, i);
+		}
+		else
+		{
+			if(GetPVarInt(playerid, "business-info") == 1)
 			{
-				ShowFrontBusinessInfo(playerid, i);
-				return;
-			}
-			else
-			{
-				if(GetPVarInt(playerid, "business-info") == 1)
-				{
-					ZoneTXD_Hide(playerid);
-					DeletePVar(playerid, "business-info");
-				}
+				ZoneTXD_Hide(playerid);
+				DeletePVar(playerid, "business-info");
 			}
 		}
 	}

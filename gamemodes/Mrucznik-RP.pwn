@@ -881,7 +881,7 @@ public OnDynamicActorStreamIn(actorid, forplayerid)
 	return 1;
 }
 
-public OnPlayerEnterDynamicArea(playerid, areaid)
+public OnPlayerEnterDynamicArea(playerid, STREAMER_TAG_AREA:areaid)
 {
 	ZA_OnPlayerEnterDynamicArea(playerid, areaid); // z³odziej aut
 	FB_OnPlayerEnterDynamicArea(playerid, areaid); // front business
@@ -920,7 +920,7 @@ public OnPlayerEnterDynamicArea(playerid, areaid)
 	return 1;
 }
 
-public OnPlayerLeaveDynamicArea(playerid, areaid)
+public OnPlayerLeaveDynamicArea(playerid, STREAMER_TAG_AREA:areaid)
 {
 	FB_OnPlayerLeaveDynamicArea(playerid, areaid);
 	return 1;

@@ -32,6 +32,11 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
+		if(areaid == FrontBusiness[i][GangZoneArea])
+		{
+			SendClientMessage(playerid, COLOR_PINK, "Siema pl 2");
+		}
+
 		if(!FrontBusiness[i][TakeoverActive])
 		{
 			return;

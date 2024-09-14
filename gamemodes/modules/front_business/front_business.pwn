@@ -64,10 +64,10 @@ LoadFrontBusinesses()
 			MAPICON_LOCAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
 		);
 
-		new areaMinX = FrontBusiness[i][OutX] - FRONT_BUSINESS_GANGZONE_SIZE;
-		new areaMinY = FrontBusiness[i][OutY] - FRONT_BUSINESS_GANGZONE_SIZE;
-		new areaMaxX = FrontBusiness[i][OutX] + FRONT_BUSINESS_GANGZONE_SIZE;
-		new areaMaxY = FrontBusiness[i][OutY] + FRONT_BUSINESS_GANGZONE_SIZE;
+		new Float:areaMinX = FrontBusiness[i][OutX] - FRONT_BUSINESS_GANGZONE_SIZE;
+		new Float:areaMinY = FrontBusiness[i][OutY] - FRONT_BUSINESS_GANGZONE_SIZE;
+		new Float:areaMaxX = FrontBusiness[i][OutX] + FRONT_BUSINESS_GANGZONE_SIZE;
+		new Float:areaMaxY = FrontBusiness[i][OutY] + FRONT_BUSINESS_GANGZONE_SIZE;
 		FrontBusiness[i][BizGangZone] = GangZoneCreate(areaMinX, areaMinY, areaMaxX, areaMaxY);
 		GangZoneShowForAll(FrontBusiness[i][BizGangZone], FrontBusiness[i][BizColor] | 0x44);
 
@@ -82,13 +82,13 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 
 		CreateDynamic3DTextLabel(FrontBusiness[i][Name], FrontBusiness[i][BizColor], 
-			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
+			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ] + 0.2, 
 			EXTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 		if(FrontBusiness[i][InX] != 0.0) 
 		{
 			CreateDynamic3DTextLabel("Wyjœcie", FrontBusiness[i][BizColor], 
-				FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ], 
+				FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ] + 0.2, 
 				INTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 				FrontBusiness[i][InVw], FrontBusiness[i][InInt]);
 		}

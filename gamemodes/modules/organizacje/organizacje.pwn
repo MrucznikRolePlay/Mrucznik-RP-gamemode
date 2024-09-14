@@ -34,7 +34,7 @@ ShowOrgLeaderCommands(playerid)
 LoadOrganisations()
 {
     new query[256], rowCount, row;
-    mysql_query("SELECT * FROM `mru_org` ORDER BY ID WHERE ID < "#MAX_ORG);
+    mysql_query("SELECT * FROM `mru_org` WHERE ID < "#MAX_ORG" ORDER BY ID");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
