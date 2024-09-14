@@ -4023,9 +4023,9 @@ ShowStats(playerid, targetid)
 	    if(IsActiveOrg(org)) { format(orgText, sizeof(orgText), "%s", OrgInfo[org][o_Name]); }
 		else { orgText = "Brak"; }
 
-		new nxtlevel = PlayerInfo[targetid][pLevel]+1;
-		new expamount = nxtlevel*levelexp;
-		new costlevel = nxtlevel*levelcost;
+		new nextLevel = PlayerInfo[targetid][pLevel]+1;
+		new nextLevelExp = nextLevel * levelexp;
+		new nextLevelCost = nextLevel * levelcost;
 		new name[MAX_PLAYER_NAME];
 		GetPlayerName(targetid, name, sizeof(name));
 
@@ -4035,12 +4035,12 @@ ShowStats(playerid, targetid)
 		SendClientMessage(playerid, COLOR_GRAD1, sprintf("Level:[%d] P³eæ:[%s] Wiek:[%d] Pochodzenie:[%s] Kasa:[$%d] Bank:[$%d]", 
 			PlayerInfo[targetid][pLevel], atext, PlayerInfo[targetid][pAge], otext, kaska[targetid], PlayerInfo[targetid][pAccount]));
 		SendClientMessage(playerid, COLOR_GRAD2, sprintf("Konto Premium:[%s] MruCoins:[%d] Zmian nicków:[%d] On-Line:[%d] Respekt:[%d/%d] Bonus Levelowy:[$%d]", 
-			drank, PremiumInfo[targetid][pMC], PlayerInfo[targetid][pZmienilNick], PlayerInfo[targetid][pConnectTime], PlayerInfo[targetid][pExp], expamount, costlevel));
+			drank, PremiumInfo[targetid][pMC], PlayerInfo[targetid][pZmienilNick], PlayerInfo[targetid][pConnectTime], PlayerInfo[targetid][pExp], nextLevelExp, nextLevelCost));
 		SendClientMessage(playerid, COLOR_GRAD3, sprintf("Telefon:[%d] Dom:[%d] Klucz Wozu: [%d] Drugs:[%d] Mats:[%d] Kontrabanda:[%d] Apteczki:[%d] Zestawy naprawcze:[%d]", 
 			PlayerInfo[targetid][pPnumber], PlayerInfo[targetid][pDom], PlayerInfo[targetid][pKluczeAuta], PlayerInfo[targetid][pDrugs], PlayerInfo[targetid][pMats], PlayerInfo[targetid][pContraband], PlayerInfo[targetid][pHealthPacks], PlayerInfo[targetid][pFixKit]));
 		SendClientMessage(playerid, COLOR_GRAD4, sprintf("Aresztowañ:[%d] Przestêpstwa:[%d] Punkty karne:[%d] Smierci bêd¹c Poszukiwanym:[%d] Zabiæ:[%d] Œmierci:[%d] WL:[%d]", 
 			PlayerInfo[targetid][pArrested], PlayerInfo[targetid][pCrimes], PlayerInfo[targetid][pPK], PlayerInfo[targetid][pWantedDeaths], PlayerInfo[targetid][pKills], PlayerInfo[targetid][pDeaths], PoziomPoszukiwania[targetid]));
-		SendClientMessage(playerid, COLOR_GRAD5, sprintf("Œlub z:[%s] Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] LottoNr:[%d] Warny: [%d]", 
+		SendClientMessage(playerid, COLOR_GRAD5, sprintf("Œlub z:[%s] Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] LottoNr:[%d] Warny:[%d]", 
 			PlayerInfo[targetid][pMarriedTo], CalculateFishes(targetid), PlayerInfo[targetid][pBiggestFish], PlayerInfo[targetid][pLottoNr], PlayerInfo[targetid][pWarns]));
 		SendClientMessage(playerid, COLOR_GRAD6, sprintf("Praca:[%s] Frakcja:[%s] Organizacja:[%s] Ranga:[%d] Skin ID:[%d] Uniform:[%d]", 
 			GetJobName(PlayerInfo[targetid][pJob]), fracText, orgText, PlayerInfo[targetid][pRank], PlayerInfo[targetid][pSkin], PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pUniform]));
