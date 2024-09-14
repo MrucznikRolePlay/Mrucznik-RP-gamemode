@@ -207,13 +207,13 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 	else if(strcmp(action, "uninvite", true) == 0 || strcmp(action, "zwolnij", true) == 0)
 	{
 		new giveplayerid;
-		if( sscanf(params, "k<fix>",giveplayerid))
+		if(sscanf(params, "k<fix>", giveplayerid))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel zwolnij [playerid/CzêœæNicku]");
 			return 1;
 		}
 
-		if(IsPlayerConnected(giveplayerid))
+		if(!IsPlayerConnected(giveplayerid))
 		{
 			MruMessageFail(playerid, "Nie ma takiego gracza!");
 			return 1;
@@ -247,7 +247,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 	else if(strcmp(action, "rank", true) == 0 || strcmp(action, "ranga", true) == 0)
 	{
 		new giveplayerid, rank;
-		if( sscanf(params, "k<fix>d",giveplayerid, rank))
+		if(sscanf(params, "k<fix>d", giveplayerid, rank))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel ranga [playerid/CzêœæNicku] [ranga]");
 			return 1;
@@ -277,7 +277,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		if(strlen(OrgRank[org][rank]) > 1)
+		if(strlen(OrgRank[org][rank]) <= 1)
 		{
 			MruMessageFail(playerid, "Ta ranga nie jest stworzona, u¿yj: /liderranga");
 			return 1;
@@ -303,7 +303,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 	else if(strcmp(action, "stawka", true) == 0)
 	{
 		new stake;
-		if( sscanf(params, "d", stake))
+		if(sscanf(params, "d", stake))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel stawka [procent lidera (min "#MIN_LEADER_STAKE" max "#MAX_LEADER_STAKE")]");
 			sendTipMessage(playerid, "Procent lidera to procent zarobków z przejêtych biznesów, który potr¹cisz pracownikom podczas PayDay'a.");

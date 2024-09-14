@@ -282,15 +282,16 @@ ShowFrontBusinessInfo(playerid, bizId)
 	TextDrawShowForPlayer(playerid, ZoneTXD[4]);
 	TextDrawShowForPlayer(playerid, ZoneTXD[2]);
 
-    PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], sprintf(
-		"Biznes: ~g~~h~%s~n~Wlasciciel: %s~n~~n~" \
+	new string[1024];
+	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~Wlasciciel: %s~n~" \
 		"Typ biznesu: ~g~~h~%s~n~~n~" \
-		"Godzina przejecia: ~g~~h~%02d:%02d~n~Czas przejecia: ~g~~h~%dm~n~" \
+		"Godzina przejecia: ~g~~h~%02d:%02d~n~Czas przejecia: ~g~~h~%dm~n~~n~" \
 		"Zysk na godzine: ~g~~h~%d$~n~Bonus za gracza online: ~g~~h~%d$", 
 		FrontBusiness[bizId][Name], owner,
 		FrontBusinessType[FrontBusiness[bizId][Type]],
 		FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60,
-		FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]));
+		FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]);
+    PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], string);
     PlayerTextDrawShow(playerid, ZonePTXD_Name[playerid]);
 
 	SetPVarInt(playerid, "business-info", 1);

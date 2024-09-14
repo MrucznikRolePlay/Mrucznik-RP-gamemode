@@ -361,26 +361,25 @@ CreateAndGiveSmugglingItem(playerid, smugglerid, item)
 
 GiveSmugglingItem(playerid, item)
 {
-	Redis_IncrBy(RedisSmugglingItemKey(playerid, item), 1);
+	new redisKey[128];
+	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
+	Redis_IncrBy(redisKey, 1);
 }
 
 TakeSmugglingItem(playerid, item)
 {
-	Redis_IncrBy(RedisSmugglingItemKey(playerid, item), -1);
+	new redisKey[128];
+	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
+	Redis_IncrBy(redisKey, -1);
 }
 
 IsOwnerOfSmugglingItem(playerid, item)
 {
 	new value;
-	Redis_GetInt(RedisClient, RedisSmugglingItemKey(playerid, item), value);
-	return value > 0;
-}
-
-stock RedisSmugglingItemKey(playerid, item)
-{
 	new redisKey[128];
 	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
-	return redisKey;
+	Redis_GetInt(RedisClient, redisKey, value);
+	return value > 0;
 }
 
 UseJetpack(playerid)
