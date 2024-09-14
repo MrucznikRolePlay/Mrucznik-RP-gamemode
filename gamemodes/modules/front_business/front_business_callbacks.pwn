@@ -44,6 +44,7 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
+			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], true);
 			SetPVarInt(playerid, "show-takeover-info", i+1);
 			return;
 		}
@@ -117,6 +118,7 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
+			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], false);
 			DeletePVar(playerid, "show-takeover-info");
 			return;
 		}

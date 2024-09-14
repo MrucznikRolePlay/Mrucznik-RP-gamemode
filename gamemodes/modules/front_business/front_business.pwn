@@ -105,9 +105,9 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverActive] = true;
 	FrontBusiness[bizId][TakeoverStartTime] = gettime();
 
-	CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
+	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
 		20.0, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
-		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, -1);
+		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][GangZoneArea]);
 	// FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicObject(19945, 
 	// 	FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5, 
 	// 	0.0, 0.0, 0.0, 
