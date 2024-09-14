@@ -41,7 +41,7 @@ command_pancerz_Impl(playerid)
 
     SetPlayerArmour(playerid, 100);
     ChatMe(playerid, "zak³ada kamizelkê kuloodporn¹");
-    ApplyAnimation(playerid, "BOMBER", "BOM_Plant", 1.0, 0, 0, 0, 1, 0, 1);
+    ApplyAnimation(playerid, "BOMBER", "BOM_Plant", 4.1, false, false, false, false, 0, 1);
     return 1;
 }
 
