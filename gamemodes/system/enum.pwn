@@ -1020,7 +1020,6 @@ enum pPInfo
 	PERS_AD,//Personalizacja wyœwietlania og³oszeñ
 	PERS_LICZNIK,//Wyœwietlanie licznika
 	PERS_FINFO,//Og³oszenia frakcji
-	PERS_FAMINFO,//OG£OSZENIA RODZIN
 	PERS_NICKNAMES,//Wyœwietlanie nicków nad g³owami postaci
 	PERS_CB,//Wyœwietlanie CB radia
 	PERS_REPORT,//Wyœwietlanie reportów bez @Duty

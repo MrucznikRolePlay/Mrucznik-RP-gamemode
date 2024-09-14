@@ -518,7 +518,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 		`Ogloszenia`, \
 		`LicznikPojazdu`, \
 		`OgloszeniaFrakcji`, \
-		`OgloszeniaRodzin`, \
 		`OldNick`, \
 		`CBRadio`, \
 		`Report`, \
@@ -535,7 +534,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 		`Ogloszenia` = %d, \
 		`LicznikPojazdu` = %d, \
 		`OgloszeniaFrakcji` = %d, \
-		`OgloszeniaRodzin` = %d, \
 		`OldNick` = %d, \
 		`CBRadio` = %d, \
 		`Report` = %d, \
@@ -549,7 +547,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_AD],
 	PlayerPersonalization[playerid][PERS_LICZNIK],
 	PlayerPersonalization[playerid][PERS_FINFO],
-	PlayerPersonalization[playerid][PERS_FAMINFO],
 	PlayerPersonalization[playerid][PERS_NICKNAMES],
 	PlayerPersonalization[playerid][PERS_CB],
 	PlayerPersonalization[playerid][PERS_REPORT],
@@ -563,7 +560,6 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_AD],
 	PlayerPersonalization[playerid][PERS_LICZNIK],
 	PlayerPersonalization[playerid][PERS_FINFO],
-	PlayerPersonalization[playerid][PERS_FAMINFO],
 	PlayerPersonalization[playerid][PERS_NICKNAMES],
 	PlayerPersonalization[playerid][PERS_CB],
 	PlayerPersonalization[playerid][PERS_REPORT],
@@ -823,19 +819,18 @@ public MruMySQL_LoadAccount(playerid)
 	} 
 	mysql_free_result();
 	//Wczytaj personalizacje
-	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OgloszeniaRodzin`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`, `BronieScroll`";
+	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`, `BronieScroll`";
 	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())
 	{
 		mysql_fetch_row_format(lStr, "|"); 
-		sscanf(lStr, "p<|>ddddddddddddd", 
+		sscanf(lStr, "p<|>dddddddddddd", 
 		PlayerPersonalization[playerid][PERS_KB],
 		PlayerPersonalization[playerid][PERS_AD],
 		PlayerPersonalization[playerid][PERS_LICZNIK],
 		PlayerPersonalization[playerid][PERS_FINFO],
-		PlayerPersonalization[playerid][PERS_FAMINFO],
 		PlayerPersonalization[playerid][PERS_NICKNAMES],
 		PlayerPersonalization[playerid][PERS_CB],
 		PlayerPersonalization[playerid][PERS_REPORT],

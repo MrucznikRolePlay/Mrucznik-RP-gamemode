@@ -14976,19 +14976,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						sendTipMessage(playerid, "W³¹czy³eœ komunikaty od frakcji"); 
 					}
 				}
-				case 3:
-				{
-					if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
-					{
-						PlayerPersonalization[playerid][PERS_FAMINFO] = 1;
-						sendTipMessage(playerid, "Wy³¹czy³eœ komunikaty od rodzin!"); 
-					}
-					else
-					{
-						PlayerPersonalization[playerid][PERS_FAMINFO] = 0;
-						sendTipMessage(playerid, "W³¹czy³eœ komunikaty od rodzin!"); 
-					}
-				}
 			}
 		}
 	}

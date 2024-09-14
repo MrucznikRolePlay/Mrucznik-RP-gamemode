@@ -10861,17 +10861,7 @@ ShowPersonalization(playerid, value)
 			strdel(persona_C, 0, 64);
 			strins(persona_C, "Og³oszenia FRAKCJI\t{80FF00}ON\n", 0);	
 		}
-		if(PlayerPersonalization[playerid][PERS_FAMINFO] == 1)
-		{
-			strdel(persona_D, 0, 64);
-			strins(persona_D, "Og³oszenia RODZIN\t{FF6A6A}OFF\n", 0);	
-		}
-		else if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
-		{
-			strdel(persona_D, 0, 64);
-			strins(persona_D, "Og³oszenia RODZIN\t{80FF00}ON\n", 0);	
-		}
-		format(string, sizeof(string), "%s%s%s%s", persona_A, persona_B, persona_C, persona_D);
+		format(string, sizeof(string), "%s%s%s", persona_A, persona_B, persona_C);
 		ShowPlayerDialogEx(playerid, D_PERS_CHAT, DIALOG_STYLE_TABLIST, "Mrucznik RP", string, "Akceptuj", "Odrzuæ"); 
 
 	}

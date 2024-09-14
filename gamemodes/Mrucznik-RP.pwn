@@ -2463,11 +2463,7 @@ SetPlayerSpawnSkin(playerid)
 		PlayerInfo[playerid][pSkin] = 299;
 	}
 
-	if(GetPlayerOrg(playerid) != 0 && PlayerInfo[playerid][pUniform] != 0) 
-	{
-		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
-	}
-	else if((JobDuty[playerid] == 1 || OnDuty[playerid] == 1) && PlayerInfo[playerid][pUniform] > 0) {
+	if((JobDuty[playerid] == 1 || OnDuty[playerid] == 1) && PlayerInfo[playerid][pUniform] > 0) {
 		SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
 	}
 	else
