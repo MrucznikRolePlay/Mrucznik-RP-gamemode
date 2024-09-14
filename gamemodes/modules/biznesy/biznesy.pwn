@@ -97,6 +97,7 @@ SendMessageToBiz(bizID, mess[], color, type)
 	}
 	return 1; 
 }
+
 BusinessPayDay(playerid) 
 {
 	new randomValue = random(10); 
@@ -104,7 +105,7 @@ BusinessPayDay(playerid)
 	new string[124]; 
 	if(PlayerInfo[playerid][pBusinessOwner] == INVALID_BIZ_ID)
 	{
-		sendTipMessage(playerid, "Nie posiadasz w³asego biznesu"); 
+		sendTipMessage(playerid, "Nie posiadasz w³asnego biznesu"); 
 		return 1;
 	}
 	if(randomValue == 0)

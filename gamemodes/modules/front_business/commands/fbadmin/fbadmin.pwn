@@ -57,7 +57,7 @@ YCMD:fbadmin(playerid, params[], help)
     new bizId, param[256];
     if(sscanf(params, "ds[256]", bizId, param))
     {
-        sendTipMessage(playerid, "U¿yj /fbadmin [id biznesu] [opcja] ");
+        sendTipMessage(playerid, "U¿yj /fbadmin [id biznesu] [opcja (takeover/give)] ");
         return 1;
     }
     

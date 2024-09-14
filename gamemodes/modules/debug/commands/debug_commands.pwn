@@ -30,10 +30,12 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
+#include "payday\payday.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
+    command_payday();
     
 }
