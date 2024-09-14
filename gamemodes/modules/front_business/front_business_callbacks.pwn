@@ -121,24 +121,31 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 			return;
 		}
 
-		new org = GetPVarInt(playerid, "taking-over") - 1;
-		if(org < 0)
+		new org = GetPlayerOrg(playerid);
+		if(org <= 0)
 		{
 			return;
 		}
 		
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
+			new isDefense = FrontBusiness[i][Owner] == org;
 			DeletePVar(playerid, "taking-over");
-			FrontBusiness[i][TakingOver][org]--;
 
-			if(FrontBusiness[i][TakingOver][org] == TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD-1)
+			new threshold;
+			if(isDefense)
+				threshold = TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD-1;
+			else
+				threshold = TAKING_OVER_ATTACK_PLAYERS_THRESHOLD-1;
+
+			if(FrontBusiness[i][TakingOver][org] == threshold)
 			{
 				StopTakingOver(i, org);
 			}
 
+			FrontBusiness[i][TakingOver][org]--;
+
 			// message
-			new isDefense = FrontBusiness[i][Owner] == org;
 			SendExitTakeoverAreaMessage(playerid, i, org, isDefense);
 		}
 	}

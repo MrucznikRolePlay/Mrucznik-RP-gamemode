@@ -42,7 +42,7 @@ LoadOrganisations()
         rowCount++;
     }
     mysql_free_result();
-    printf("%d | Wczytano organizacje", rowCount);
+    printf("Wczytano %d organizacji", rowCount);
 }
 
 SaveOrg(id)

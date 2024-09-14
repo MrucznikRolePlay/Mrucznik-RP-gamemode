@@ -183,7 +183,7 @@ ptask TakeoverCheck[1000](playerid)
 					format(points, sizeof(points), "~w~%d", FrontBusiness[bizId][TakingOverScore][i]);
 				}
 
-				format(string, sizeof(string), "%s%s: %d~n~", string, orgName, points);
+				format(string, sizeof(string), "%s%s: %s~n~", string, orgName, points);
 				anyPoints++;
 			}
 		}

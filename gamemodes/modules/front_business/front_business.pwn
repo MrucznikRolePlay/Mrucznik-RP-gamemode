@@ -178,8 +178,13 @@ IncrTakeoverPointsStat(org)
 {
 	foreach(new i : Player)
 	{
-		new playerTakeoverOrg = GetPVarInt(i, "taking-over") - 1;
+		new playerTakeoverOrg = GetPlayerOrg(i);
 		if(playerTakeoverOrg != org || playerTakeoverOrg == 0)
+		{
+			continue;
+		}
+
+		if(GetPVarInt(i, "taking-over") == 0)
 		{
 			continue;
 		}
