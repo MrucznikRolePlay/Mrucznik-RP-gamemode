@@ -50,8 +50,6 @@ LoadFrontBusinesses()
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "takeoverTime"),  FrontBusiness[i][TakeoverTime]);
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "color"), FrontBusiness[i][BizColor]);
 		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "owner"), FrontBusiness[i][Owner]);
-		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "leaderStake"), FrontBusiness[i][Owner]);
-		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "owner"), FrontBusiness[i][Owner]);
 
 
 		MruCreateDynamicMapIcon(FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
@@ -199,8 +197,8 @@ TakeOverFrontBusiness(bizId, org)
 	new color = OrgInfo[org][o_Color];
 	FrontBusiness[bizId][Owner] = org;
 	FrontBusiness[bizId][BizColor] = color;
-	Redis_GetInt(RedisClient, RedisFrontBizKey(bizId, "color"), color);
-	Redis_GetInt(RedisClient, RedisFrontBizKey(bizId, "owner"), org);
+	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "color"), color);
+	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "owner"), org);
 
 	GangZoneShowForAll(FrontBusiness[bizId][BizGangZone], color);
 	GangZoneStopFlashForPlayer(FrontBusiness[bizId][BizGangZone], color);
