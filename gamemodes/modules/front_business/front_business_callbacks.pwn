@@ -85,7 +85,7 @@ SendEnterTakeoverAreaMessage(playerid, bizId, org, isDefense)
 		// defense
 		if(FrontBusiness[bizId][TakingOver][org] == TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD)
 		{
-			GameTextForPlayer(playerid, "~b~Rozpoczêto obrone biznesu", 5000, 1);
+			GameTextForPlayer(playerid, "~b~Rozpoczeto obrone biznesu", 5000, 1);
 		}
 		else if(FrontBusiness[bizId][TakingOver][org] > TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD)
 		{

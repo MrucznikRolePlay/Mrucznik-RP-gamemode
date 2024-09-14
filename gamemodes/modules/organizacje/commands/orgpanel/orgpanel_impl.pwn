@@ -61,7 +61,8 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ nazwê organizacji z: \"%s\" na: \"%s\".", GetNick(playerid), OrgInfo[org][o_Name], name));
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ nazwê organizacji z: \"%s\" na:", GetNick(playerid), OrgInfo[org][o_Name], name));
+		SendOrgMessage(org, TEAM_AZTECAS_COLOR, name);
 
 		SetOrgName(org, name);
 		TakeContraband(playerid, CHANGE_ORG_NAME_COST);
@@ -78,7 +79,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		}
 		mysql_real_escape_string(motto, motto);
 		
-		if(strlen(motto) > 32)
+		if(strlen(motto) > 128)
 		{
 			MruMessageFail(playerid, "Motto mo¿e mieæ maksymalnie 128 znaków.");
 			return 1;
