@@ -26,7 +26,7 @@
 //
 
 //-----------------<[ Timery: ]>-------------------
-task BusinessTakeoverTimer[1000]()
+task BusinessTakeoverTimer[100]()
 {
 	new hour, minute;
 	gettime(hour, minute);
@@ -131,10 +131,10 @@ DecreaseDefenderPoints(bizId, points)
 	return false;
 }
 
-ptask TakeoverCheck[1000](playerid)
+ptask TakeoverScoreboard[100](playerid)
 {
-	new bizId = GetPVarInt(playerid, "show-takeover-info") - 1;
-	if(bizId >= 0)
+	new bizId = GetPVarInt(playerid, "in-business-gangzone") - 1;
+	if(bizId >= 0 && FrontBusiness[bizId][TakeoverActive])
 	{	
 		new string[512];
 		strcat(string, "Punkty przejecia:~n~");
@@ -174,13 +174,14 @@ ptask TakeoverCheck[1000](playerid)
 				{
 					format(points, sizeof(points), "~p~%d", FrontBusiness[bizId][TakingOverScore][i]);
 				}
-				else if(score > TAKE_OVER_POINT_THRESHOLD)
-				{
-					format(points, sizeof(points), "~y~%d", FrontBusiness[bizId][TakingOverScore][i]);
-				}
 				else
 				{
 					format(points, sizeof(points), "~w~%d", FrontBusiness[bizId][TakingOverScore][i]);
+				}
+				
+				if(score > TAKE_OVER_POINT_THRESHOLD)
+				{
+					strcat(points, " (przekroczony próg!)");
 				}
 
 				format(string, sizeof(string), "%s%s: %s~n~", string, orgName, points);
@@ -189,7 +190,7 @@ ptask TakeoverCheck[1000](playerid)
 		}
 		if(anyPoints > 0)
 		{
-			GameTextForPlayer(playerid, string, 1100, 13);
+			GameTextForPlayer(playerid, string, 110, 13);
 		}
 	}
 }

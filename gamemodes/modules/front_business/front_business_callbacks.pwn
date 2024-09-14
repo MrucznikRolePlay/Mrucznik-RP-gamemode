@@ -32,6 +32,15 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
+		if(areaid == FrontBusiness[i][GangZoneArea])
+		{
+			SetPVarInt(playerid, "in-business-gangzone", i+1);
+		}
+		if(areaid == FrontBusiness[i][TakeoverArea])
+		{
+			SetPVarInt(playerid, "in-takeover-zone", i + 1);
+		}
+
 		if(!FrontBusiness[i][TakeoverActive])
 		{
 			return;
@@ -45,7 +54,6 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
 			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], true);
-			SetPVarInt(playerid, "show-takeover-info", i+1);
 			return;
 		}
 
@@ -56,7 +64,6 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 			{
 				return;
 			}
-			SetPVarInt(playerid, "taking-over", i + 1);
 			FrontBusiness[i][TakingOver][org]++;
 
 			if(FrontBusiness[i][TakingOver][org] == TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD)
@@ -112,6 +119,15 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
+		if(areaid == FrontBusiness[i][GangZoneArea])
+		{
+			DeletePVar(playerid, "in-business-gangzone");
+		}
+		if(areaid == FrontBusiness[i][TakeoverArea])
+		{
+			DeletePVar(playerid, "in-takeover-zone");
+		}
+
 		if(!FrontBusiness[i][TakeoverActive])
 		{
 			return;
@@ -120,7 +136,6 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
 			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], false);
-			DeletePVar(playerid, "show-takeover-info");
 			return;
 		}
 
@@ -133,7 +148,6 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
 			new isDefense = FrontBusiness[i][Owner] == org;
-			DeletePVar(playerid, "taking-over");
 
 			new threshold;
 			if(isDefense)
@@ -141,9 +155,9 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 			else
 				threshold = TAKING_OVER_ATTACK_PLAYERS_THRESHOLD-1;
 
-			if(FrontBusiness[i][TakingOver][org] == threshold)
+			if(FrontBusiness[i][TakingOver][org] <= threshold)
 			{
-				StopTakingOver(i, org);
+				StopTakingOver(i);
 			}
 
 			FrontBusiness[i][TakingOver][org]--;

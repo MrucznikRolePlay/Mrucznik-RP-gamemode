@@ -108,18 +108,12 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
 		20.0, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
 		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][GangZoneArea]);
-	// FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicObject(19945, 
-	// 	FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5, 
-	// 	0.0, 0.0, 0.0, 
-	// 	FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
-	// 	INVALID_PLAYER_ID, STREAMER_OBJECT_SD, STREAMER_OBJECT_DD, -1); // FrontBusiness[bizId][GangZoneArea]
 }
 
 StopFrontBizTakeover(bizId)
 {
 	FrontBusiness[bizId][TakeoverActive] = false;
 	DestroyDynamicCP(FrontBusiness[bizId][TakeoverCheckpoint]);
-	// DestroyDynamicObject(FrontBusiness[bizId][TakeoverCheckpoint]);
 
 	new winner = -1, maxScore;
 	for(new i; i<MAX_ORG; i++)
@@ -156,9 +150,9 @@ StopFrontBizTakeover(bizId)
 
 TriggerTakingOver(bizId, org)
 {
-	// new color = FrontBusiness[bizId][BizColor];
-	//new invertedColor = (color & 0xFF000000) | (~color & 0x00FFFFFF);
-	GangZoneFlashForAll(FrontBusiness[bizId][BizGangZone], 0xFF000066);
+	new color = FrontBusiness[bizId][BizColor];
+	new invertedColor = (color & 0xFF000000) | (~color & 0x00FFFFFF);
+	GangZoneFlashForAll(FrontBusiness[bizId][BizGangZone], invertedColor);
 
 	if(FrontBusiness[bizId][TakingOverScore][org] == 0)
 	{
@@ -171,11 +165,15 @@ TriggerTakingOver(bizId, org)
 	}
 }
 
-StopTakingOver(bizId, org)
+StopTakingOver(bizId)
 {
+	new ownerOrg = FrontBusiness[bizId][Owner];
 	GangZoneStopFlashForAll(FrontBusiness[bizId][BizGangZone]);
 
-	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Uda³o siê odeprzeæ atak na biznes %s!", FrontBusiness[bizId][Name]));
+	if(IsActiveOrg(ownerOrg))
+	{
+		SendOrgMessage(ownerOrg, COLOR_LIGHTGREEN, sprintf("Atakuj¹cy przestali przejmowaæ biznes %s!", FrontBusiness[bizId][Name]));
+	}
 }
 
 IncrTakeoverPointsStat(org)
@@ -188,7 +186,8 @@ IncrTakeoverPointsStat(org)
 			continue;
 		}
 
-		if(GetPVarInt(i, "taking-over") == 0)
+		new bizId = GetPVarInt(i, "in-takeover-zone") - 1;
+		if(bizId < 0)
 		{
 			continue;
 		}
