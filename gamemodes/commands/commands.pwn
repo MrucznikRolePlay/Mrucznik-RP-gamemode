@@ -19,7 +19,6 @@
 #include "cmd/a.pwn"
 #include "cmd/adajrange.pwn"
 #include "cmd/addcar.pwn"
-#include "cmd/adds.pwn"
 #include "cmd/addshelp.pwn"
 #include "cmd/adminjail.pwn"
 #include "cmd/adminduty.pwn"
