@@ -27,7 +27,7 @@
             "type": "string",
             "size": "32",
             "name": "name",
-            "description": "nazwa"
+            "description": "nazwa (max 32 znaki)"
         }
     ],
     "date": "07.09.2024"
