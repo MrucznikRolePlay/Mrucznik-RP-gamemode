@@ -50,7 +50,7 @@ command_fbadmin_Impl(playerid, bizId, params[256])
             MruMessageGoodInfo(playerid, "Rozpocz¹³eœ przejmowanie biznesu.");
         }
     }
-    if(strcmp(params, "give", true) == 0)
+    else if(strcmp(params, "give", true) == 0)
     {
         new org;
         if(sscanf(params, "d", org))

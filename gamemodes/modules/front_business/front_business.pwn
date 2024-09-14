@@ -150,17 +150,15 @@ StopFrontBizTakeover(bizId)
 
 TriggerTakingOver(bizId, org)
 {
-	new color = FrontBusiness[bizId][BizColor];
-	new invertedColor = (color & 0xFF000000) | (~color & 0x00FFFFFF);
-	GangZoneFlashForAll(FrontBusiness[bizId][BizGangZone], invertedColor);
+	GangZoneFlashForAll(FrontBusiness[bizId][BizGangZone], 0xFF000066);
 
 	if(FrontBusiness[bizId][TakingOverScore][org] == 0)
 	{
 		new ownerOrg = FrontBusiness[bizId][Owner];
 		if(IsActiveOrg(ownerOrg))
 		{
-			SendOrgMessage(org, COLOR_PANICRED, "UWAGA! AGRESJA!");
-			SendOrgMessage(org, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
+			SendOrgMessage(ownerOrg, COLOR_PANICRED, "UWAGA! AGRESJA!");
+			SendOrgMessage(ownerOrg, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
 		}
 	}
 }
@@ -203,6 +201,9 @@ TakeOverFrontBusiness(bizId, org)
 	FrontBusiness[bizId][BizColor] = color;
 	Redis_GetInt(RedisClient, RedisFrontBizKey(bizId, "color"), color);
 	Redis_GetInt(RedisClient, RedisFrontBizKey(bizId, "owner"), org);
+
+	GangZoneShowForAll(FrontBusiness[bizId][BizGangZone], color);
+	GangZoneStopFlashForPlayer(FrontBusiness[bizId][BizGangZone], color);
 }
 
 SuccessfulDefenceMessage(bizId, org)
@@ -275,23 +276,22 @@ ShowFrontBusinessInfo(playerid, bizId)
 	if(FrontBusiness[bizId][Owner] == 0)
 		strcat(owner, "~r~~h~Brak");
 	else
-		format(owner, sizeof(owner), "~r~~h~%s", OrgInfo[FrontBusiness[bizId][Owner]][o_Name]);
+		format(owner, sizeof(owner), "~g~~h~%s", OrgInfo[FrontBusiness[bizId][Owner]][o_Name]);
 
 	TextDrawShowForPlayer(playerid, ZoneTXD[0]);
 	TextDrawShowForPlayer(playerid, ZoneTXD[4]);
 	TextDrawShowForPlayer(playerid, ZoneTXD[2]);
 
-    PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], sprintf("Biznes: ~g~~h~%s~n~Wlasciciel: %s", FrontBusiness[bizId][Name], owner));
+    PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], sprintf(
+		"Biznes: ~g~~h~%s~n~Wlasciciel: %s~n~~n~" \
+		"Typ biznesu: ~g~~h~%s~n~~n~" \
+		"Godzina przejecia: ~g~~h~%02d:%02d~n~Czas przejecia: ~g~~h~%dm~n~" \
+		"Zysk na godzine: ~g~~h~%d$~n~Bonus za gracza online: ~g~~h~%d$", 
+		FrontBusiness[bizId][Name], owner,
+		FrontBusinessType[FrontBusiness[bizId][Type]],
+		FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60,
+		FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]));
     PlayerTextDrawShow(playerid, ZonePTXD_Name[playerid]);
-
-    PlayerTextDrawSetString(playerid, ZonePTXD_Cash[playerid], sprintf("Typ biznesu: ~g~~h~%s", FrontBusinessType[FrontBusiness[bizId][Type]]));
-    PlayerTextDrawShow(playerid, ZonePTXD_Cash[playerid]);
-
-    PlayerTextDrawSetString(playerid, ZonePTXD_Area[playerid], sprintf("Godzina przejecia: ~g~~h~%02d:%02d~n~Czas przejecia: ~g~~h~%dm", FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute], FrontBusiness[bizId][TakeoverTime] / 60));
-    PlayerTextDrawShow(playerid, ZonePTXD_Area[playerid]);
-
-    PlayerTextDrawSetString(playerid, ZonePTXD_Member[playerid], sprintf("Zysk na godzinê: ~g~~h~%d$~n~Bonus per gracz online: ~g~~h~%d$", FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]));
-    PlayerTextDrawShow(playerid, ZonePTXD_Member[playerid]);
 
 	SetPVarInt(playerid, "business-info", 1);
 }

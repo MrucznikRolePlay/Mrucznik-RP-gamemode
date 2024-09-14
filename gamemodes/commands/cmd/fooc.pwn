@@ -34,11 +34,6 @@ YCMD:fooc(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-	    /*if(PlayerInfo[playerid][pMuted] == 1)
-		{
-			sendTipMessageEx(playerid, TEAM_CYAN_COLOR, "Nie mo¿esz pisaæ poniewa¿ jesteœ wyciszony");
-			return 1;
-		}*/
 		if(isnull(params))
 		{
 			sendTipMessage(playerid, "U¿yj (/fo)oc [tekst]");
@@ -76,7 +71,7 @@ YCMD:fooc(playerid, params[], help)
         }
 		else
 		{
-			sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jesteœ we frakcji!");
+			sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jesteœ we frakcji/organizacji!");
 			return 1;
 		}
 	}

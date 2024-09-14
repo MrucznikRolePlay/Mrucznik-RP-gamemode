@@ -73,10 +73,10 @@ YCMD:rodzinny(playerid, params[], help)
 	    	Log(chatLog, INFO, "%s radio organizacji %d IC: %s", GetPlayerLogName(playerid), GetPlayerOrg(playerid), params);
 			return 1;
 		}
-        else if(GetPlayerFraction(playerid) == FRAC_GOV || GetPlayerFraction(playerid) == FRAC_BOR|| GetPlayerOrg(playerid) == 1) //DMV i BOR po³aczenie + S¹d
+        else if(GetPlayerFraction(playerid) == FRAC_GOV || GetPlayerFraction(playerid) == FRAC_BOR) //DMV i BOR
         {
             new member = GetPlayerFraction(playerid);
-            format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
+            format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]], GetNick(playerid), params);
     		SendFamilyMessage(FRAC_GOV, TEAM_AZTECAS_COLOR, string);
             SendFamilyMessage(FRAC_BOR, TEAM_AZTECAS_COLOR, string);
 	    	Log(chatLog, INFO, "%s radio frakcji %d IC: %s", GetPlayerLogName(playerid), GetPlayerFraction(playerid), params);
@@ -88,7 +88,7 @@ YCMD:rodzinny(playerid, params[], help)
         }
 		else
 		{
-			sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jesteœ we frakcji!");
+			sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jesteœ we frakcji/organizacji!");
 			return 1;
 		}
 	}//not connected

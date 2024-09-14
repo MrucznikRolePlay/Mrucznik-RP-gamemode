@@ -133,9 +133,19 @@ DecreaseDefenderPoints(bizId, points)
 
 ptask TakeoverScoreboard[100](playerid)
 {
+	if(GetPlayerOrg(playerid) == 0 && !IsACop(playerid))
+	{
+		return;
+	}
+
 	new bizId = GetPVarInt(playerid, "in-business-gangzone") - 1;
 	if(bizId >= 0 && FrontBusiness[bizId][TakeoverActive])
 	{	
+		if(GetPlayerVisibleDynamicCP(playeridddddddd) != FrontBusiness[bizId][TakeoverCheckpoint])
+		{
+			TogglePlayerDynamicCP(playerid, FrontBusiness[bizId][TakeoverCheckpoint], true);
+		}
+
 		new string[512];
 		strcat(string, "Punkty przejecia:~n~");
 		new anyPoints;
@@ -181,7 +191,7 @@ ptask TakeoverScoreboard[100](playerid)
 				
 				if(score > TAKE_OVER_POINT_THRESHOLD)
 				{
-					strcat(points, " (przekroczony próg!)");
+					strcat(points, " (przekroczony prog!)");
 				}
 
 				format(string, sizeof(string), "%s%s: %s~n~", string, orgName, points);
@@ -190,7 +200,7 @@ ptask TakeoverScoreboard[100](playerid)
 		}
 		if(anyPoints > 0)
 		{
-			GameTextForPlayer(playerid, string, 110, 13);
+			GameTextForPlayer(playerid, string, 1000, 13);
 		}
 	}
 }

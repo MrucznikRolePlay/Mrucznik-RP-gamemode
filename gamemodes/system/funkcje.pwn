@@ -4034,14 +4034,14 @@ ShowStats(playerid, targetid)
 			name, PlayerInfo[targetid][pUID]));
 		SendClientMessage(playerid, COLOR_GRAD1, sprintf("Level:[%d] P³eæ:[%s] Wiek:[%d] Pochodzenie:[%s] Kasa:[$%d] Bank:[$%d]", 
 			PlayerInfo[targetid][pLevel], atext, PlayerInfo[targetid][pAge], otext, kaska[targetid], PlayerInfo[targetid][pAccount]));
-		SendClientMessage(playerid, COLOR_GRAD2, sprintf("Konto Premium:[%s] MruCoins:[%d] Dostêpnych zmian nicków:[%d] On-Line:[%d] Respekt:[%d/%d] Bonus Levelowy:[$%d] Warny: [%d]", 
-			drank, PremiumInfo[targetid][pMC], PlayerInfo[targetid][pZmienilNick], PlayerInfo[targetid][pConnectTime], PlayerInfo[targetid][pExp], expamount, costlevel,  PlayerInfo[targetid][pWarns]));
+		SendClientMessage(playerid, COLOR_GRAD2, sprintf("Konto Premium:[%s] MruCoins:[%d] Zmian nicków:[%d] On-Line:[%d] Respekt:[%d/%d] Bonus Levelowy:[$%d]", 
+			drank, PremiumInfo[targetid][pMC], PlayerInfo[targetid][pZmienilNick], PlayerInfo[targetid][pConnectTime], PlayerInfo[targetid][pExp], expamount, costlevel));
 		SendClientMessage(playerid, COLOR_GRAD3, sprintf("Telefon:[%d] Dom:[%d] Klucz Wozu: [%d] Drugs:[%d] Mats:[%d] Kontrabanda:[%d] Apteczki:[%d] Zestawy naprawcze:[%d]", 
 			PlayerInfo[targetid][pPnumber], PlayerInfo[targetid][pDom], PlayerInfo[targetid][pKluczeAuta], PlayerInfo[targetid][pDrugs], PlayerInfo[targetid][pMats], PlayerInfo[targetid][pContraband], PlayerInfo[targetid][pHealthPacks], PlayerInfo[targetid][pFixKit]));
-		SendClientMessage(playerid, COLOR_GRAD4, sprintf("Liczba aresztowañ:[%d] Przestêpstwa:[%d] Punkty karne:[%d] Smierci bêd¹c Poszukiwanym:[%d] Zabiæ:[%d] Œmierci:[%d] WL:[%d]", 
+		SendClientMessage(playerid, COLOR_GRAD4, sprintf("Aresztowañ:[%d] Przestêpstwa:[%d] Punkty karne:[%d] Smierci bêd¹c Poszukiwanym:[%d] Zabiæ:[%d] Œmierci:[%d] WL:[%d]", 
 			PlayerInfo[targetid][pArrested], PlayerInfo[targetid][pCrimes], PlayerInfo[targetid][pPK], PlayerInfo[targetid][pWantedDeaths], PlayerInfo[targetid][pKills], PlayerInfo[targetid][pDeaths], PoziomPoszukiwania[targetid]));
-		SendClientMessage(playerid, COLOR_GRAD5, sprintf("Œlub z:[%s] Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] LottoNr:[%d]", 
-			PlayerInfo[targetid][pMarriedTo], CalculateFishes(targetid), PlayerInfo[targetid][pBiggestFish], PlayerInfo[targetid][pLottoNr]));
+		SendClientMessage(playerid, COLOR_GRAD5, sprintf("Œlub z:[%s] Ryb Z³owionych:[%d] Najwiêksza Ryba:[%d] LottoNr:[%d] Warny: [%d]", 
+			PlayerInfo[targetid][pMarriedTo], CalculateFishes(targetid), PlayerInfo[targetid][pBiggestFish], PlayerInfo[targetid][pLottoNr], PlayerInfo[targetid][pWarns]));
 		SendClientMessage(playerid, COLOR_GRAD6, sprintf("Praca:[%s] Organizacja:[%s] Frakcja:[%s] Ranga:[%d] Skin ID:[%d] Uniform:[%d] JobSkin:[%d]", 
 			GetJobName(PlayerInfo[targetid][pJob]), fracText, orgText, PlayerInfo[targetid][pRank], PlayerInfo[targetid][pSkin], PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pUniform], PlayerInfo[targetid][pJobSkin]));
 		SendClientMessage(playerid, COLOR_GREEN,"_____________________________________________________");
