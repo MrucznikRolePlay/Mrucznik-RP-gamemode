@@ -262,6 +262,24 @@ IsFrontBusinnesOwnedByPlayerOrg(playerid, bizId)
 	return FrontBusiness[bizId][Owner] == GetPlayerOrg(playerid);
 }
 
+IsBusinessTypeOwnedByPlayerOrg(playerid, type)
+{
+	new org = GetPlayerOrg(playerid);
+	if(!IsActiveOrg(org))
+	{
+		return 0;
+	}
+
+	for(new i; i<sizeof(FrontBusiness); i++)
+	{
+		if(FrontBusiness[i][Type] == type && FrontBusiness[i][Owner] == org)
+		{
+			return 1;
+		}
+	}
+	return 0;
+}
+
 IsFrontBusinnesOwnedByOrg(bizId, org)
 {
 	return FrontBusiness[bizId][Owner] == org;
@@ -283,14 +301,20 @@ ShowFrontBusinessInfo(playerid, bizId)
 	GetOrgTakeoverTimeWindow(bizId, hour, minute, endHour, endMinute);
 
 	new string[1024]; // TODO: rozszerzyc textdraw
-	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~Typ biznesu: ~g~~h~%s~n~" \
+	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~" \
+		"Typ biznesu: ~g~~h~%s~n~" \
 		"Wlasciciel: ~n~  %s~n~" \
-		"Do przejecia od: ~n~~g~~h~  %02d:%02d - %02d:%02d~n~~n~" \
-		"Zysk na godzine: ~g~~h~%d$~n~Bonus za gracza online: ~g~~h~%d$", 
-		FrontBusiness[bizId][Name], owner,
+		"Do przejecia od: ~n~~g~~h~  %02d:%02d - %02d:%02d~n~" \
+		"Zysk na godzine: ~g~~h~%d$~n~" \
+		"Bonus za gracza online: ~g~~h~%d$~n~" \
+		"+ %s", 
+		FrontBusiness[bizId][Name], 
 		FrontBusinessType[FrontBusiness[bizId][Type]],
+		owner,
 		hour, minute, endHour, endMinute,
-		FrontBusiness[bizId][BaseIncome], FrontBusiness[bizId][IncomePerPlayer]);
+		FrontBusiness[bizId][BaseIncome], 
+		FrontBusiness[bizId][IncomePerPlayer],
+		FrontBusinessBenefits[FrontBusiness[bizId][Type]]);
     PlayerTextDrawSetString(playerid, ZonePTXD_Name[playerid], string);
     PlayerTextDrawShow(playerid, ZonePTXD_Name[playerid]);
 
@@ -315,13 +339,8 @@ GetFrontBusinessIcon(type)
 		case FRONT_BIZ_TYPE_RACE: { return 53; }
 		case FRONT_BIZ_TYPE_RESTAURANT: { return 49; }
 		case FRONT_BIZ_TYPE_CLUB: { return 48; }
-		case FRONT_BIZ_TYPE_PIZZA: { return 29; }
-		case FRONT_BIZ_TYPE_BURGER: { return 10; }
-		case FRONT_BIZ_TYPE_CHICKEN: { return 14; }
     	case FRONT_BIZ_TYPE_CASINO: { return 25; }
-		case FRONT_BIZ_TYPE_GYM: { return 54; }
 		case FRONT_BIZ_TYPE_CLOTH: { return 45; }
-		case FRONT_BIZ_TYPE_BARBER: { return 7; }
 		case FRONT_BIZ_TYPE_BOAT: { return 9; }
 		case FRONT_BIZ_TYPE_SPRAY: { return 63; }
 	}
@@ -337,12 +356,7 @@ GetFrontBusinessPickup(type)
 		case FRONT_BIZ_TYPE_RACE: { return 19306; }
 		case FRONT_BIZ_TYPE_RESTAURANT: { return 19819; }
 		case FRONT_BIZ_TYPE_CLUB: { return 19143; }
-		case FRONT_BIZ_TYPE_PIZZA: { return 19580; }
-		case FRONT_BIZ_TYPE_BURGER: { return 19811; }
-		case FRONT_BIZ_TYPE_GYM: { return 3071; }
-		case FRONT_BIZ_TYPE_CHICKEN: { return 2770; }
 		case FRONT_BIZ_TYPE_CLOTH: { return 1275; }
-		case FRONT_BIZ_TYPE_BARBER: { return 2750; }
 		case FRONT_BIZ_TYPE_BOAT: { return 19630; }
 		case FRONT_BIZ_TYPE_SPRAY: { return 19627; }
 	}

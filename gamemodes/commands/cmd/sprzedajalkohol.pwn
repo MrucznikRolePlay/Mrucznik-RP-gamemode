@@ -30,88 +30,69 @@
 
 YCMD:sprzedajalkohol(playerid, params[], help)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
-	new giveplayer[MAX_PLAYER_NAME];
+	if(!IsAPrzestepca(playerid))
+	{
+		MruMessageFail(playerid, "Nie jesteœ w organizacji!");
+		return 1;
+	}
 
-    if(IsPlayerConnected(playerid))
-    {
-        if(IsAPrzestepca(playerid) || PlayerInfo[playerid][pAdmin] >= 1)
-        {
-			
-     		new x_nr[16];
-			new giveplayerid;
-			if( sscanf(params, "s[16] u", x_nr, giveplayerid))
-			{
-				sendTipMessage(playerid, "U¯YJ: /sprzedaja [nazwa] [playerid]");
-				sendTipMessage(playerid, "Dostêpne nazwy: Piwo, Wino, Sprunk, Cygaro");
-				return 1;
-			}
-			
-			if(IsPlayerConnected(giveplayerid) || giveplayerid != INVALID_PLAYER_ID)
-			{
-				if(GetDistanceBetweenPlayers(playerid,giveplayerid) < 5)
-				{
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-					if(strcmp(x_nr,"piwo",true) == 0)
-					{
-						format(string, sizeof(string), "* Sprzeda³eœ Piwo graczowi: %s, koszt sprzeda¿y: 40$.",giveplayer);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Gracz %s sprzeda³ tobie 5 Piw 'Mruczny Gul'.",sendername);
-						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-						PlayerInfo[giveplayerid][pPiwo] = 5;
-						ZabierzKase(playerid, 40);
-						return 1;
-					}
-					else if(strcmp(x_nr,"wino",true) == 0)
-					{
-						format(string, sizeof(string), "* Sprzeda³eœ Wino graczowi: %s, koszt sprzeda¿y: 50$.",giveplayer);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Gracz %s sprzeda³ tobie 5 Win 'Komandos'.",sendername);
-						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-						PlayerInfo[giveplayerid][pWino] = 5;
-						ZabierzKase(playerid, 50);
-						return 1;
-					}
-					else if(strcmp(x_nr,"sprunk",true) == 0)
-					{
-						format(string, sizeof(string), "* Sprzeda³eœ Sprunka graczowi: %s, koszt sprzeda¿y: 30$.",giveplayer);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Gracz %s sprzeda³ tobie 5 Sprunków.",sendername);
-						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-						PlayerInfo[giveplayerid][pSprunk] = 5;
-						ZabierzKase(playerid, 30);
-						return 1;
-					}
-					else if(strcmp(x_nr,"cygaro",true) == 0)
-					{
-						format(string, sizeof(string), "* Sprzeda³eœ Paczkê Cygar graczowi: %s, koszt sprzeda¿y: 75$.",giveplayer);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
-						format(string, sizeof(string), "* Gracz %s sprzeda³ tobie paczkê 5 cygar kolumbijskich.",sendername);
-						SendClientMessage(giveplayerid, COLOR_LIGHTBLUE, string);
-						PlayerInfo[giveplayerid][pCygaro] = 5;
-						ZabierzKase(playerid, 75);
-						return 1;
-					}
-				}
-				else
-				{
-					format(string, sizeof(string), "Jesteœ zbyt daleko od gracza %s.",giveplayer);
-					sendErrorMessage(playerid, string);
-				}
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Gracz jest nieaktywny!");
-				return 1;
-			}
-        }
-        else
-        {
-            sendErrorMessage(playerid, "Nie masz czego sprzedaæ / nie jesteœ z Mafii !");
-            return 1;
-        }
-    }
+	if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_CLUB))
+	{
+		MruMessageFail(playerid, "Tylko organizacje które posiadaj¹ klub maj¹ dostêp do tej komendy.");
+		return 1;
+	}
+
+	new x_nr[16];
+	new giveplayerid;
+	if(!sscanf(params, "s[16]k<fix>", x_nr, giveplayerid))
+	{	
+		if(!IsPlayerConnected(giveplayerid))
+		{
+			MruMessageFail(playerid, "Nie ma takiego gracza!");
+			return 1;
+		}
+
+		if(GetDistanceBetweenPlayers(playerid,giveplayerid) > 5)
+		{
+			MruMessageFail(playerid, "Gracz jest za daleko!");
+			return 1;
+		}
+
+		if(strcmp(x_nr,"piwo",true) == 0)
+		{
+			MruMessageGoodInfoF(playerid, "Sprzeda³eœ Piwo graczowi: %s, koszt sprzeda¿y: 40$.", GetNick(giveplayerid));
+			MruMessageGoodInfoF(giveplayerid, "Gracz %s sprzeda³ tobie 5 Piw 'Mruczny Gul'.", GetNick(playerid));
+			PlayerInfo[giveplayerid][pPiwo] = 5;
+			ZabierzKase(playerid, 400);
+			return 1;
+		}
+		else if(strcmp(x_nr,"wino",true) == 0)
+		{
+			MruMessageGoodInfoF(playerid, "Sprzeda³eœ Wino graczowi: %s, koszt sprzeda¿y: 50$.", GetNick(giveplayerid));
+			MruMessageGoodInfoF(giveplayerid, "Gracz %s sprzeda³ tobie 5 Win 'Komandos'.", GetNick(playerid));
+			PlayerInfo[giveplayerid][pWino] = 5;
+			ZabierzKase(playerid, 500);
+			return 1;
+		}
+		else if(strcmp(x_nr,"sprunk",true) == 0)
+		{
+			MruMessageGoodInfoF(playerid, "Sprzeda³eœ Sprunka graczowi: %s, koszt sprzeda¿y: 30$.", GetNick(giveplayerid));
+			MruMessageGoodInfoF(giveplayerid, "Gracz %s sprzeda³ tobie 5 Sprunków.", GetNick(playerid));
+			PlayerInfo[giveplayerid][pSprunk] = 5;
+			ZabierzKase(playerid, 300);
+			return 1;
+		}
+		else if(strcmp(x_nr,"cygaro",true) == 0)
+		{
+			MruMessageGoodInfoF(playerid, "Sprzeda³eœ Paczkê Cygar graczowi: %s, koszt sprzeda¿y: 75$.", GetNick(giveplayerid));
+			MruMessageGoodInfoF(giveplayerid, "Gracz %s sprzeda³ tobie paczkê 5 cygar kolumbijskich.", GetNick(playerid));
+			PlayerInfo[giveplayerid][pCygaro] = 5;
+			ZabierzKase(playerid, 750);
+			return 1;
+		}
+	}
+
+	sendTipMessage(playerid, "U¯YJ: /sprzedaja [nazwa] [playerid]");
+	sendTipMessage(playerid, "Dostêpne nazwy: Piwo, Wino, Sprunk, Cygaro");
     return 1;
 }

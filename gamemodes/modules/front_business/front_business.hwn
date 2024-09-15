@@ -28,31 +28,35 @@ enum BIZ_TYPE {
 	FRONT_BIZ_TYPE_RACE,
 	FRONT_BIZ_TYPE_RESTAURANT,
 	FRONT_BIZ_TYPE_CLUB,
-	FRONT_BIZ_TYPE_PIZZA,
-	FRONT_BIZ_TYPE_BURGER,
-	FRONT_BIZ_TYPE_CHICKEN,
     FRONT_BIZ_TYPE_CASINO,
-	FRONT_BIZ_TYPE_GYM,
 	FRONT_BIZ_TYPE_CLOTH,
-	FRONT_BIZ_TYPE_BARBER,
 	FRONT_BIZ_TYPE_BOAT,
-	FRONT_BIZ_TYPE_SPRAY
+	FRONT_BIZ_TYPE_SPRAY,
+    FRONT_BIZ_TYPE_GAS_STATION
 };
 new FrontBusinessType[BIZ_TYPE][32] = {
     "Biznes",
     "Gunshop",
-	"Warsztat",
+	"Tor wyœcigowy",
 	"Restauracja",
 	"Klub",
-	"Pizzeria",
-	"Burgerownia",
-	"Kurczakownia",
     "Kasyno",
-	"Si³ownia",
 	"Sklep z ubraniami",
-	"Fryzjer",
 	"Klub jachtowy",
-	"Pay 'n' Spray"
+	"Pay 'n' Spray",
+    "Stacja benzynowa"
+};
+new FrontBusinessBenefits[BIZ_TYPE][32] = {
+    "Brak",
+    "NPC sprzedaj¹cy broñ",
+	"Tworzenie wyœcigów",
+	"Zysk z ryb w biznesie +50\%",
+	"Sprzeda¿ alkoholu",
+    "Procent od hazardu w biznesie",
+	"50\% tañsze skiny",
+	"25\% wiêcej kontrabandy z przemytu",
+	"75\% tañsza naprawa",
+    "Darmowe tankowanie"
 };
 
 enum eFrontBusinessInfo {
@@ -90,7 +94,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         100, 200 // hajs
     },
     {
-        "Burger Shot", FRONT_BIZ_TYPE_BURGER,
+        "Burger Shot", FRONT_BIZ_TYPE_RESTAURANT,
         5532.618164, -180.268325, 5.652462, 0, 0, // wejœcie
         363.413, -74.5786, 1001.51, 10, FRONT_BUSINESS_VW, // wyjœcie
         5532.618164, -180.268325, 5.652462, 0, 0, // przejmowanie
