@@ -18,10 +18,7 @@ public SpawnPosInfo(playerid)
     SetPVarFloat(playerid,"yposspawn",y);
     SetPVarFloat(playerid,"zposspawn",z);
 }
-public KomunikatTimer()
-{
-	CMDKomunikat = 0;
-}
+
 public SprzedajMatsTimer(playerid,giveplayerid)
 {
 	if(GetPVarInt(giveplayerid, "OKupMats") == 1)

@@ -9,7 +9,6 @@ new ServerSecret[MAX_SERVER_SECRET_LENGTH];
 
 new prawoJazdyLosowanie[9];
 
-new CMDKomunikat;
 new PozwolenieBot = 1;
 
 new LastVehicleID[MAX_PLAYERS];

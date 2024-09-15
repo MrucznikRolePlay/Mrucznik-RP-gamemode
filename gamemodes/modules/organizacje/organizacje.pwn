@@ -350,9 +350,9 @@ IsAClubBusinessOwner(playerid)
 	return 0;
 }
 
-IsAPoolBusinessOwner(playerid) // TODO: change
+IsAPoolBusinessOwner(playerid)
 {
-    return 1;
+    return IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_BOAT);
 }
 
 CheckFamilyChatPermission(playerid)

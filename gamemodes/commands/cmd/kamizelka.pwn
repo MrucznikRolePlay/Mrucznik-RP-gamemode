@@ -36,7 +36,7 @@ YCMD:kamizelka(playerid, params[], help)
     if(IsPlayerConnected(playerid))
     {
         GetPlayerName(playerid, sendername, sizeof(sendername));
-        if(IsAPolicja(playerid) || PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7 || GetPlayerOrg(playerid) == 12)
+        if(IsAPolicja(playerid) || PlayerInfo[playerid][pMember] == 7 || PlayerInfo[playerid][pLider] == 7)
         {
             if (PlayerToPoint(3,playerid, -1674.8365, 866.0356, -52.4141)
 			|| PlayerToPoint(3, playerid,255.3,77.4,1003.6)

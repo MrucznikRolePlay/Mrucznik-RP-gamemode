@@ -51,7 +51,7 @@ YCMD:winda(playerid, params[], help)
 				}
 			}
 		}
-		if(IsPlayerInRangeOfPoint(playerid,3,507.63, -1493.10, 46.57) && GetPlayerOrg(playerid) == 16 || IsPlayerInRangeOfPoint(playerid,3,507.63, -1493.10, 49.87) && GetPlayerOrg(playerid) == 16)
+		if(IsPlayerInRangeOfPoint(playerid,3,507.63, -1493.10, 46.57) && IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY) || IsPlayerInRangeOfPoint(playerid,3,507.63, -1493.10, 49.87) && IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
 		{
 		    if(movegate[0] == 0)
 		    {

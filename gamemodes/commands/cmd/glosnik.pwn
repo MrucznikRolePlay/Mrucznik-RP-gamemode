@@ -30,7 +30,7 @@
 
 YCMD:glosnik(playerid, params[], help)
 {
-    if(((PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 3) || PlayerInfo[playerid][pLider] == 9) || (GetPlayerOrg(playerid) == 19 && IsPlayerInRangeOfPoint(playerid, 75.0 , 578.6193,-2195.7708,1.6288) && PlayerInfo[playerid][pRank] >= 3) || (IsAClubBusinessOwner(playerid) && PlayerInfo[playerid][pRank] >= 6))
+    if(((PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 3) || PlayerInfo[playerid][pLider] == 9) || (IsAClubBusinessOwner(playerid) && PlayerInfo[playerid][pRank] >= 3))
     {
         if(SanDuty[playerid] == 0 && PlayerInfo[playerid][pMember] == 9) return sendErrorMessage(playerid, "Musisz byæ na s³u¿bie San News");
 		if(PlayerInfo[playerid][pMember] == 9)
@@ -104,7 +104,7 @@ YCMD:glosnik(playerid, params[], help)
 	}
 	else
 	{
-	    sendErrorMessage(playerid, "Nie jesteœ z SAN News/Ibizy!");
+	    sendErrorMessage(playerid, "Nie jesteœ z SAN News/Organizacji posiadaj¹cej biznes typu Klub, lub nie masz 3 rangi!");
 	    return 1;
 	}
     return 1;

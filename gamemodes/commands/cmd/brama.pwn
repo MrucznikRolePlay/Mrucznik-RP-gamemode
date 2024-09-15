@@ -323,7 +323,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if (PlayerInfo[playerid][pAdmin] >= 1000 || GetPlayerOrg(playerid) == 16)//warsztat niebieski
+		if (PlayerInfo[playerid][pAdmin] >= 1000 || IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))//warsztat niebieski
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 20, 2313.5000000,-1217.6999512,24.7000008) || IsPlayerInRangeOfPoint(playerid, 12, 2313.5000000,-1217.6999512,24.7000008))
 			{
@@ -1718,7 +1718,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(GetPlayerOrg(playerid) == 16 && PlayerInfo[playerid][pRank] >= 3)
+		if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY) && PlayerInfo[playerid][pRank] >= 3)
 		{
 			if(IsPlayerInRangeOfPoint(playerid,3, 482.15, -1523.25, 45.01))//drzwi vipa
 			{
@@ -1734,7 +1734,7 @@ YCMD:brama(playerid, params[], help)
 				}
 			}
 		}
-		if(IsPlayerInRangeOfPoint(playerid,5,505.0200, -1497.8800, 45.8200) && GetPlayerOrg(playerid) == 16|| IsPlayerInRangeOfPoint(playerid,5,488.2908,-1492.8959,43.6700) && GetPlayerOrg(playerid) == 16)
+		if(IsPlayerInRangeOfPoint(playerid,5,505.0200, -1497.8800, 45.8200) && IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY) | IsPlayerInRangeOfPoint(playerid,5,488.2908,-1492.8959,43.6700) && IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
 		{
 			if(movegate[2] == 0)
 			{

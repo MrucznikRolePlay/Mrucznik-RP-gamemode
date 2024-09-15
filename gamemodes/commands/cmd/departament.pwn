@@ -55,7 +55,7 @@ YCMD:departament(playerid, params[], help)
 			}
             new member = GetPlayerFraction(playerid);
 			
-            if(0 < member <= 4 || member == FRAC_BOR)// || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
+            if(0 < member <= 4 || member == FRAC_BOR)
             {
                 format(string, sizeof(string), "** %s %s: %s **", FracRang[member][PlayerInfo[playerid][pRank]],GetNick(playerid), params);
                 SendTeamMessage(4, COLOR_ALLDEPT, string);

@@ -36,7 +36,7 @@ YCMD:po(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if( (IsABOR(playerid) || IsAPolicja(playerid)) && OnDuty[playerid] == 1 || GetPlayerOrg(playerid) == 12 && OnDuty[playerid] == 1)
+        if( (IsABOR(playerid) || IsAPolicja(playerid)) && OnDuty[playerid] == 1)
         {
     		if (PlayerInfo[playerid][pMember] == 2 && PlayerInfo[playerid][pRank] == 3 && PlayerInfo[playerid][pRank] == 4)
     		{

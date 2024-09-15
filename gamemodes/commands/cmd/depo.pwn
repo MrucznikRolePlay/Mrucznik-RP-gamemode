@@ -43,7 +43,7 @@ YCMD:depo(playerid, params[], help)
         }
         if(gMuteDepo[playerid] == 1) return sendTipMessage(playerid, "Nie mo¿esz pisaæ na depo, zablokowa³eœ ten czat (U¿yj /togdepo)");
         new member = GetPlayerFraction(playerid);
-        if(0 < member <= 4 || member == FRAC_BOR)// || GetPlayerOrg(playerid) == 12)
+        if(0 < member <= 4 || member == FRAC_BOR)
         {
 			format(string, sizeof(string), "** (( %s [%d] %s: %s )) **", FracRang[member][PlayerInfo[playerid][pRank]],PlayerInfo[playerid][pRank],GetNickEx(playerid), params);
 			SendTeamMessage(4, COLOR_ALLDEPT, string, 1);

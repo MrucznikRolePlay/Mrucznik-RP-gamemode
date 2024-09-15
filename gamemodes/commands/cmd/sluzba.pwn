@@ -52,7 +52,7 @@ YCMD:sluzba(playerid, params[], help)
 		}
 
         new frac = GetPlayerFraction(playerid);
-        if((FracGetsUniformOnDuty(frac) || GetPlayerOrg(playerid) == 12) && PlayerInfo[playerid][pUniform] == 0)
+        if(FracGetsUniformOnDuty(frac) && PlayerInfo[playerid][pUniform] == 0)
         {
             sendTipMessage(playerid, "Nie masz skina frakcyjnego, u¿yj /fskin !");
             return 1;
