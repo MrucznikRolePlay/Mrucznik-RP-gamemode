@@ -34,11 +34,13 @@ if __name__ == "__main__":
             except:
                 with open(json_file, 'r', encoding='windows-1250') as file:
                     data = json.load(file)
+            data['module'] = json_file.split('/')[8]
+            print(data['module'])
             all_data.append(data)
             all_keys.update(data.keys())
 
     output_csv = "out.csv"
-    headers = ['Nazwa','Aliasy','Parametry','Opis','Dodatkowe porady','Uprawnienia','Autor','Data stworzenia']
+    headers = ['Nazwa','Aliasy','Parametry','Opis','Dodatkowe porady','Uprawnienia','Grupa','Moduł','Autor','Data stworzenia']
     with open(output_csv, mode='w', newline='', encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=headers, delimiter=',')
         writer.writeheader()
@@ -50,6 +52,8 @@ if __name__ == "__main__":
                 'Opis': data["description"],
                 'Dodatkowe porady': ','.join(data.get("command_tips", [])),
                 'Uprawnienia': ','.join(data.get("permissions", [])),
+                'Grupa': '',
+                'Moduł': data["module"],
                 'Autor': data["author"],
                 'Data stworzenia': data["date"],
             })
