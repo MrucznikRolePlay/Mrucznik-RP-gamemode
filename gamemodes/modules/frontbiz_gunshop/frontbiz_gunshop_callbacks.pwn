@@ -28,7 +28,8 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
-gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
+gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) 
+{
 	#pragma unused inputtext
 	if(dialogid==D_GSPANEL) 
 	{

@@ -45,12 +45,15 @@ stock UpdateMats3DText(gsid)
     UpdateDynamic3DTextLabelText(GS_Text[gsid], COLOR_BLUE, str);
 }
 
-stock dgspanel(playerid) {
+stock dgspanel(playerid) 
+{
     new caption[64];
     format(caption, 64, "Panel gunshopu - %s", OrgInfo[GetPlayerOrg(playerid)][o_Name]);
     ShowPlayerDialogEx(playerid, D_GSPANEL, DIALOG_STYLE_LIST, caption, "Ustaw ceny broni\nUstaw ceny mats u bota", "Wybierz", "Anuluj");
 }
-stock dgspanel_bronie(playerid) {
+
+stock dgspanel_bronie(playerid) 
+{
 	new gsid = GetPlayerOrg(playerid)-21;
     new bronie[] = {8, 22, 25, 23, 24, 29, 30, 31, 33, 27, 28, 34, 9, 39, 37};
     new string[1024];
