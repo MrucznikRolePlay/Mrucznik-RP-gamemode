@@ -215,7 +215,6 @@
 #include "cmd/komenda.pwn"
 #include "cmd/komendy.pwn"
 #include "cmd/komentuj.pwn"
-#include "cmd/komunikat.pwn"
 #include "cmd/konsola.pwn"
 #include "cmd/kontakty.pwn"
 #include "cmd/kontrakt.pwn"
