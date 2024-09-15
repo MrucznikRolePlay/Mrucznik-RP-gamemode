@@ -441,8 +441,6 @@
 #include "cmd/temat.pwn"
 #include "cmd/ticketend.pwn"
 #include "cmd/tickets.pwn"
-#include "cmd/tjdcp1.pwn"
-#include "cmd/tjdcp2.pwn"
 #include "cmd/tod.pwn"
 #include "cmd/togadmin.pwn"
 #include "cmd/togadminmess.pwn"
