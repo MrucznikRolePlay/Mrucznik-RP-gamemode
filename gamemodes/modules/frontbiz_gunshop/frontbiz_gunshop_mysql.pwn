@@ -26,7 +26,8 @@
 //
 
 //------------------<[ MySQL: ]>--------------------
-LoadGsPanelPrices() {
+LoadGsPanelPrices() 
+{
 	new str[1024];
 	mysql_query("SELECT * FROM `mru_gspanel`");
 	mysql_store_result();
@@ -34,10 +35,16 @@ LoadGsPanelPrices() {
 		new orgid, gunid, cena;
 		sscanf(str, "p<|>ddd", orgid, gunid, cena);
 		new gsid = orgid-21;
-		if(gsid >= 3) continue;
+		if(gsid >= 3)
+		{
+			continue;
+		}
 		if (gunid == 0) // mats
+		{
 			GS_MatsCena[gsid] = cena;
-		else {
+		}
+		else 
+		{
 			if(gunid >= 47) continue;
 			GS_BronCena[gsid][gunid] = cena;
 		}
@@ -45,7 +52,9 @@ LoadGsPanelPrices() {
 	mysql_free_result();
 	LoadMats3DText();
 }
-SaveGsPanelPrice(gsid, gunid) {
+
+SaveGsPanelPrice(gsid, gunid) 
+{
 	new str[256];
 	new cena;
 	if(gunid == 0) cena = GS_MatsCena[gsid];

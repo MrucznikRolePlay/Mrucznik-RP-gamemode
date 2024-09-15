@@ -26,13 +26,16 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-stock LoadMats3DText() {
-    for(new i=0; i<3; i++) {
+stock LoadMats3DText() 
+{
+    for(new i=0; i<3; i++) 
+    {
         GS_Text[i] = CreateDynamic3DTextLabel("/sprzedajmatsbot", COLOR_BLUE, GS_MatsBot[i][0], GS_MatsBot[i][1], GS_MatsBot[i][2], 6.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, GS_MatsBotVw[i]);
         UpdateMats3DText(i);
     }
 }
-stock UpdateMats3DText(gsid) {
+stock UpdateMats3DText(gsid) 
+{
     new cena = GS_MatsCena[gsid];
     new str[128];
     if(cena)
@@ -52,7 +55,8 @@ stock dgspanel_bronie(playerid) {
     new bronie[] = {8, 22, 25, 23, 24, 29, 30, 31, 33, 27, 28, 34, 9, 39, 37};
     new string[1024];
     DynamicGui_Init(playerid);
-    for(new i=0; i<sizeof(bronie); i++) {
+    for(new i=0; i<sizeof(bronie); i++) 
+    {
         new gunName[32];
         GetWeaponName(bronie[i], gunName, 32);
         format(string, sizeof(string), "%s{FFFFFF}%s\t{008000}%i$\n", string, gunName, GS_BronCena[gsid][bronie[i]]);
