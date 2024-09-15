@@ -1,0 +1,20 @@
+{
+    "name": "wypij",
+    "description": "",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "drink",
+        "pij"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

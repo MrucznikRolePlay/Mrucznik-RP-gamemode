@@ -45,6 +45,11 @@
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
 
+#define sendTipMessageFormat(%0,%1,%2) \
+	(format(scm_buf, sizeof scm_buf, %1,%2), sendTipMessage(%0,scm_buf))
+#define sendTipMessageFormatEx(%0,%1,%2,%3) \
+	(format(scm_buf, sizeof scm_buf, %2,%3), sendTipMessageEx(%0,%1,scm_buf))	
+
 //podgl¹d PW
 #define MAX_SENT_MESSAGES 25
 

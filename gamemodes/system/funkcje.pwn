@@ -178,12 +178,6 @@ saveKevlarPos(playerid, recurention=1)
 	}
 }
 
-
-new scm_buf[144];
-#define sendTipMessageFormat(%0,%1,%2) \
-	(format(scm_buf, sizeof scm_buf, %1,%2), sendTipMessage(%0,scm_buf))
-#define sendTipMessageFormatEx(%0,%1,%2,%3) \
-	(format(scm_buf, sizeof scm_buf, %2,%3), sendTipMessageEx(%0,%1,scm_buf))	
 pusteZgloszenia() {
 	for(new i = 0, j=OSTATNIE_ZGLOSZENIA; i<j; i++) {
 		new Hour, Minute;
@@ -6657,7 +6651,8 @@ OOCNews(color,const string[])
 		}
 	}
 }
-/*
+
+
 SendNews_2(const txdString[])
 {
 	foreach(new i : Player)
@@ -6669,7 +6664,7 @@ SendNews_2(const txdString[])
 		}
 	}
 }
-*/
+
 SendTeamMessage(team, color, string[], isDepo = 0)
 {
 	foreach(new i : Player)

@@ -1,0 +1,22 @@
+{
+    "name": "reset_ulepszen",
+    "description": "",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "resetupgrades",
+        "resetujulepszenia",
+        "resetulepszen",
+        "resetuj_ulepszenia"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

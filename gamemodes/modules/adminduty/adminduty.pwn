@@ -38,6 +38,7 @@ GetPlayerAdminDutyStatus(playerid)
 	new valueAdminStatus = GetPVarInt(playerid, "dutyadmin");
 	return valueAdminStatus; 
 }
+
 AdminDutyPlayer(playerid, status)
 {
 	SetPVarInt(playerid, "dutyadmin", status); 

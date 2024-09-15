@@ -1,0 +1,19 @@
+{
+    "name": "przeszukaj",
+    "description": "",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "frisk"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

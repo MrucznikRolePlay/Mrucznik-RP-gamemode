@@ -1,0 +1,19 @@
+{
+    "name": "komendacmd",
+    "description": "Komenda s³u¿y do wyœwietlania informacji o innych komendach.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "command", "komenda", "cmd"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

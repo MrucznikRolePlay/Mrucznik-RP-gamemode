@@ -1,0 +1,20 @@
+{
+    "name": "toglicznik",
+    "description": "",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "togtextdraw",
+        "togspeed"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

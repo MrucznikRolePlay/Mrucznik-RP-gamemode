@@ -1,0 +1,20 @@
+{
+    "name": "kupowaniedomu",
+    "description": "",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "kupdom",
+        "buyhouse"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

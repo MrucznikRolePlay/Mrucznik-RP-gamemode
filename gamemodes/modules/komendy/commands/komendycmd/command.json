@@ -1,0 +1,19 @@
+{
+    "name": "komendycmd",
+    "description": "",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "commands", "komendy", "cmds"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "Komenda wyœwietlaj¹ca listê wszystkich komend, jakie mo¿esz u¿yæ.",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

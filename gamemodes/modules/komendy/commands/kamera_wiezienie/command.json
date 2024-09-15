@@ -1,0 +1,23 @@
+{
+    "name": "kamera_wiezienie",
+    "description": "",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "kameraw",
+        "kamera_w",
+        "kamerawiezienie",
+        "kamera_wiezienna",
+        "kamerawiezienna"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

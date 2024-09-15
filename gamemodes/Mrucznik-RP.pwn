@@ -160,7 +160,7 @@ native gpci (playerid, serial [], len);
 #include "old_modules\niceczlowiek\general.pwn"
 #include "old_modules\niceczlowiek\dynamicgui.pwn"
 #include "old_modules\niceczlowiek\noysi.pwn"
-#include "old_modules\niceczlowiek\wybieralka.pwn"
+#include "old_modules\niceczlowiek\script_wybieralka.pwn"
 
 //-------<[ 3.0 style ]>-------
 #include "modules\modules.pwn"
@@ -178,7 +178,6 @@ native gpci (playerid, serial [], len);
 #include "modules\ActorSystem\actors.def"
 */
 //-------<[ Inne ]>-------
-#include "old_modules\inne\ibiza.inc"
 #include "old_modules\inne\external.pwn"
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
@@ -195,10 +194,6 @@ native gpci (playerid, serial [], len);
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
 #include "obiekty\actorsOnWorld.pwn"
-
-
-//-------<[ Komendy ]>-------
-#include "commands\commands.pwn"
 
 //-------<[ Dialogi ]>-------
 #include "dialogs\OnDialogResponse.pwn"
@@ -297,9 +292,6 @@ public OnGameModeInit()
 
 	//-------<[ Redis ]>-------
 	ConnectToRedis();
-
-	//-------<[ commands ]>-------
-	InitCommands();
 
 	//-------<[ modules ]>-------
     systempozarow_init();
