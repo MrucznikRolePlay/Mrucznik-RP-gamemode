@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kostka2_Impl(playerid, params[256])
+command_kostka2_Impl(playerid)
 {
     new string[64];
 	new sendername[MAX_PLAYER_NAME];

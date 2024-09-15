@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zniszczobiekty_Impl(playerid, params[256])
+command_zniszczobiekty_Impl(playerid)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {

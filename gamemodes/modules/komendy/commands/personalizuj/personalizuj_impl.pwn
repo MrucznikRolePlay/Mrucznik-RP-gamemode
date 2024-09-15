@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_personalizuj_Impl(playerid, params[256])
+command_personalizuj_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

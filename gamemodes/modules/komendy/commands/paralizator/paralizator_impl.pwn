@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_paralizator_Impl(playerid, params[256])
+command_paralizator_Impl(playerid)
 {
     if(gPlayerLogged[playerid] == 1 && IsPlayerConnected(playerid))
     {

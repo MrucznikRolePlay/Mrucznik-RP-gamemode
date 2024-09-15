@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_reset_ulepszen_Impl(playerid, params[256])
+command_reset_ulepszen_Impl(playerid)
 {
     new string[128];
 

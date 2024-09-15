@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_mi_Impl(playerid, params[256])
+command_mi_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

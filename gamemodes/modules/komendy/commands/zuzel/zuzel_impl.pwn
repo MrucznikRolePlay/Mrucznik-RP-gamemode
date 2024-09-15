@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zuzel_Impl(playerid, params[256])
+command_zuzel_Impl(playerid)
 {
     if(GUIExit[playerid] == 0)
     {

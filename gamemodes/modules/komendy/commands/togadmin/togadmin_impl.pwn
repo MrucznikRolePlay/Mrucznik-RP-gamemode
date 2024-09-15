@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togadmin_Impl(playerid, params[256])
+command_togadmin_Impl(playerid)
 {
     if(GetPVarInt(playerid, "togadmincmd") == 0)
 	{

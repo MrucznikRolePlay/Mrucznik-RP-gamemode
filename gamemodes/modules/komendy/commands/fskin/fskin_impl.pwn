@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_fskin_Impl(playerid, params[256])
+command_fskin_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

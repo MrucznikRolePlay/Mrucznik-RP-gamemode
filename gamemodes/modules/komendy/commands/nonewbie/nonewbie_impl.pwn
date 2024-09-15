@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_nonewbie_Impl(playerid, params[256])
+command_nonewbie_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

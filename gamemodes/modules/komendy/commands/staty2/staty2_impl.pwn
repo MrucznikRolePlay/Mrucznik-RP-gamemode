@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_staty2_Impl(playerid, params[256])
+command_staty2_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

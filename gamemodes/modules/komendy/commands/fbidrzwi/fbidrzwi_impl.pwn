@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_fbidrzwi_Impl(playerid, params[256])
+command_fbidrzwi_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

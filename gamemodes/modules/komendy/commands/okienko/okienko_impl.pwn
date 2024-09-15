@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_okienko_Impl(playerid, params[256])
+command_okienko_Impl(playerid)
 {
     if (IsAUrzednik(playerid))
 	{

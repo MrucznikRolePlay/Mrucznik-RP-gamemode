@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_przejazd_Impl(playerid, params[256])
+command_przejazd_Impl(playerid)
 {
     if(!gPlayerLogged[playerid]) return sendErrorMessage(playerid, "Nope!");
 	if(GetPVarInt(playerid, "wybramkowany") == 1) return sendErrorMessage(playerid, "Poczekaj na zamkniêcie siê poprzedniej bramki!");

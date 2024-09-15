@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kupskin_Impl(playerid, params[256])
+command_kupskin_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

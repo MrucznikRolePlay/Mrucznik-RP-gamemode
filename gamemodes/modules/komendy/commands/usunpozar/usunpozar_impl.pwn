@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_usunpozar_Impl(playerid, params[256])
+command_usunpozar_Impl(playerid)
 {
     if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{

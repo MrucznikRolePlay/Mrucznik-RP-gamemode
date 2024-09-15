@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_scena_Impl(playerid, params[256])
+command_scena_Impl(playerid)
 {
     if(GetPlayerFraction(playerid) == FRAC_SN && PlayerInfo[playerid][pAdmin] < 1)
     {

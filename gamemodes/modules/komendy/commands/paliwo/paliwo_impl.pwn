@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_paliwo_Impl(playerid, params[256])
+command_paliwo_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

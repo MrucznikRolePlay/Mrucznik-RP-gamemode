@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotoszpital_Impl(playerid, params[256])
+command_gotoszpital_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

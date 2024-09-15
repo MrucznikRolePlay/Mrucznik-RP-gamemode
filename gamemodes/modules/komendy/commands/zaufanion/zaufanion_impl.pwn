@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zaufanion_Impl(playerid, params[256])
+command_zaufanion_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] < 1) {
         noAccessMessage(playerid);

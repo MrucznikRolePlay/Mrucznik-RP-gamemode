@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_sprawdzkredyty_Impl(playerid, params[256])
+command_sprawdzkredyty_Impl(playerid)
 {
     new string[64];
 	format(string, sizeof(string), "Masz %d kredytów", Kredyty[playerid]);

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_blokujnoba_Impl(playerid, params[256])
+command_blokujnoba_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

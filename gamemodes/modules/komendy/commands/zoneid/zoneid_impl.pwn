@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zoneid_Impl(playerid, params[256])
+command_zoneid_Impl(playerid)
 {
     if(GetPVarInt(playerid, "zoneid") != -1)
     {

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotoczit_Impl(playerid, params[256])
+command_gotoczit_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] > 1 || IsAScripter(playerid))
     {

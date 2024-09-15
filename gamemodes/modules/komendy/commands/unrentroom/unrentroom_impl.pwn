@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_unrentroom_Impl(playerid, params[256])
+command_unrentroom_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

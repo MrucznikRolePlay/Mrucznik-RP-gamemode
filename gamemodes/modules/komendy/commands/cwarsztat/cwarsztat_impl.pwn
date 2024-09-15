@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_cwarsztat_Impl(playerid, params[256])
+command_cwarsztat_Impl(playerid)
 {
     if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
 	{

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotostacja_Impl(playerid, params[256])
+command_gotostacja_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid)) {
         SetPlayerInterior(playerid, 0);

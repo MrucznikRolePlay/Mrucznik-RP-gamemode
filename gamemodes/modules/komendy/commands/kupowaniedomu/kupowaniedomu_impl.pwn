@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kupowaniedomu_Impl(playerid, params[256])
+command_kupowaniedomu_Impl(playerid)
 {
     new string[128];
 

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_cca_Impl(playerid, params[256])
+command_cca_Impl(playerid)
 {
     new string[64];
 

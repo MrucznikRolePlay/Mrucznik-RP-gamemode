@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zuzel_stop_Impl(playerid, params[256])
+command_zuzel_stop_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

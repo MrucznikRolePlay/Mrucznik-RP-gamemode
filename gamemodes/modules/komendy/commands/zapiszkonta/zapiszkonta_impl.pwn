@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zapiszkonta_Impl(playerid, params[256])
+command_zapiszkonta_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_roleta_Impl(playerid, params[256])
+command_roleta_Impl(playerid)
 {
     if(open == 0)
 	{

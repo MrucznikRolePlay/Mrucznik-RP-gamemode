@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_fly_Impl(playerid, params[256])
+command_fly_Impl(playerid)
 {
     if (PlayerInfo[playerid][pAdmin] >= 1)
 	{

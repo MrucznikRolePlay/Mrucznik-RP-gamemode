@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togglepozwo_Impl(playerid, params[256])
+command_togglepozwo_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

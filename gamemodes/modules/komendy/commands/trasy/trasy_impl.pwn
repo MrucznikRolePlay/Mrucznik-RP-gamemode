@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_trasy_Impl(playerid, params[256])
+command_trasy_Impl(playerid)
 {
     if(GUIExit[playerid] == 0)
 	{

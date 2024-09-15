@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_mojeauta_Impl(playerid, params[256])
+command_mojeauta_Impl(playerid)
 {
     new string[256];
 	new sendername[MAX_PLAYER_NAME];

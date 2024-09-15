@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_sejfpomoc_Impl(playerid, params[256])
+command_sejfpomoc_Impl(playerid)
 {
     //SendClientMessage(playerid, COLOR_PANICRED, "Sejf wy³¹czony na czas naprawy. Przepraszamy za uniedogodnienia.");
     if(IsPlayerConnected(playerid))

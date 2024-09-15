@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_fixallveh_Impl(playerid, params[256])
+command_fixallveh_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

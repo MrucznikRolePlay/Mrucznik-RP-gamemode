@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wywaltelefon_Impl(playerid, params[256])
+command_wywaltelefon_Impl(playerid)
 {
     if(!IsPlayerConnected(playerid)) return 1;
     PlayerInfo[playerid][pPnumber] = 0;

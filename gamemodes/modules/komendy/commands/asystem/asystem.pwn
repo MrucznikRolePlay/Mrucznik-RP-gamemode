@@ -53,14 +53,8 @@ YCMD:asystem(playerid, params[], help)
         sendTipMessage(playerid, "");
         return 1;
     }
-    //fetching params
-    new param[256];
-    if(sscanf(params, "S()[256]", param))
-    {
-        sendTipMessage(playerid, "U¿yj /asystem [] ");
-        return 1;
-    }
+    
     
     //command body
-    return command_asystem_Impl(playerid, param);
+    return command_asystem_Impl(playerid);
 }

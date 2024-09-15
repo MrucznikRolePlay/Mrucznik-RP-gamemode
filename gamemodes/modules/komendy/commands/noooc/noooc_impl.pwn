@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_noooc_Impl(playerid, params[256])
+command_noooc_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

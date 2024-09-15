@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_armor_Impl(playerid, params[256])
+command_armor_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

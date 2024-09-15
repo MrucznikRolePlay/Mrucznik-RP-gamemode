@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_komendycmd_Impl(playerid, params[256])
+command_komendycmd_Impl(playerid)
 {
     new count = Command_GetPlayerCommandCount(playerid);
     for (new i = 0; i != count; ++i)

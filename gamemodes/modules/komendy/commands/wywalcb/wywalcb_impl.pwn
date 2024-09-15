@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wywalcb_Impl(playerid, params[256])
+command_wywalcb_Impl(playerid)
 {
     if(PlayerInfo[playerid][pCB] == 0)
 	{

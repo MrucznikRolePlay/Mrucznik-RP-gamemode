@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_vinyl_Impl(playerid, params[256])
+command_vinyl_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

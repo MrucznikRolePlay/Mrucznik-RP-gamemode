@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_dajpodatek_Impl(playerid, params[256])
+command_dajpodatek_Impl(playerid)
 {
     new string[128];
 

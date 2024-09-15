@@ -53,14 +53,8 @@ YCMD:fixveh(playerid, params[], help)
         sendTipMessage(playerid, "");
         return 1;
     }
-    //fetching params
-    new param[256];
-    if(sscanf(params, "S()[256]", param))
-    {
-        sendTipMessage(playerid, "U¿yj /fixveh [] ");
-        return 1;
-    }
+    
     
     //command body
-    return command_fixveh_Impl(playerid, param);
+    return command_fixveh_Impl(playerid);
 }

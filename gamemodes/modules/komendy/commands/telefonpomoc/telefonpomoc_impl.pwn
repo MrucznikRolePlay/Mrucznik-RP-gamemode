@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_telefonpomoc_Impl(playerid, params[256])
+command_telefonpomoc_Impl(playerid)
 {
     SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	if (PlayerInfo[playerid][pPnumber] > 0)

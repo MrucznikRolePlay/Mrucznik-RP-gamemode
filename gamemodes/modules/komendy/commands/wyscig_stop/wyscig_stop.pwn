@@ -53,14 +53,8 @@ YCMD:wyscig_stop(playerid, params[], help)
         sendTipMessage(playerid, "");
         return 1;
     }
-    //fetching params
-    new param[256];
-    if(sscanf(params, "S()[256]", param))
-    {
-        sendTipMessage(playerid, "U¿yj /wyscig_stop [] ");
-        return 1;
-    }
+    
     
     //command body
-    return command_wyscig_stop_Impl(playerid, param);
+    return command_wyscig_stop_Impl(playerid);
 }

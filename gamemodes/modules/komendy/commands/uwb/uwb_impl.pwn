@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_uwb_Impl(playerid, params[256])
+command_uwb_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

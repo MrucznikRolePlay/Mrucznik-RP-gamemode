@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kuplodzie_Impl(playerid, params[256])
+command_kuplodzie_Impl(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666) || 
 	IsPlayerInRangeOfPoint(playerid, 5.0, 4769.6387,-2250.5742,8.5730) || 

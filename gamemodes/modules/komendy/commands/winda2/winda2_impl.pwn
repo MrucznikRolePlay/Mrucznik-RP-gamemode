@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_winda2_Impl(playerid, params[256])
+command_winda2_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

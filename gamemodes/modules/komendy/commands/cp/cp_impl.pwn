@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_cp_Impl(playerid, params[256])
+command_cp_Impl(playerid)
 {
     new string[128];
 

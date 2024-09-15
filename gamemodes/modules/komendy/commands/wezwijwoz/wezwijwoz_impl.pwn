@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wezwijwoz_Impl(playerid, params[256])
+command_wezwijwoz_Impl(playerid)
 {
     new string[128];
 

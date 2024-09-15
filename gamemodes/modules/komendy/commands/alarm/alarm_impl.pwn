@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_alarm_Impl(playerid, params[256])
+command_alarm_Impl(playerid)
 {
     if(GetPlayerFraction(playerid) == FRAC_BOR && PlayerInfo[playerid][pRank] > 2)
 	{

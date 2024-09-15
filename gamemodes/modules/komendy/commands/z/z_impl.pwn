@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_z_Impl(playerid, params[256])
+command_z_Impl(playerid)
 {
     if(GetPVarInt(playerid, "smuggling") >= 1)
 	{

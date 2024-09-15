@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_showkary_Impl(playerid, params[256])
+command_showkary_Impl(playerid)
 {
     if(IsAScripter(playerid) || PlayerInfo[playerid][pAdmin] > 4500)
 	{

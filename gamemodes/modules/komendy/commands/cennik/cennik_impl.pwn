@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_cennik_Impl(playerid, params[256])
+command_cennik_Impl(playerid)
 {
     if(!(IsPlayerInRangeOfPoint(playerid, 5.0, 1904.3759,-2494.4448,13.6266) && GetPlayerVirtualWorld(playerid) == 1)) 
 	{

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_losowypozar_Impl(playerid, params[256])
+command_losowypozar_Impl(playerid)
 {
     if (PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid))
 	{

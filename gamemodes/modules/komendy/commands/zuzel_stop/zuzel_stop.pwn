@@ -53,14 +53,8 @@ YCMD:zuzel_stop(playerid, params[], help)
         sendTipMessage(playerid, "");
         return 1;
     }
-    //fetching params
-    new param[256];
-    if(sscanf(params, "S()[256]", param))
-    {
-        sendTipMessage(playerid, "U¿yj /zuzel_stop [] ");
-        return 1;
-    }
+    
     
     //command body
-    return command_zuzel_stop_Impl(playerid, param);
+    return command_zuzel_stop_Impl(playerid);
 }

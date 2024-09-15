@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_carjump_Impl(playerid, params[256])
+command_carjump_Impl(playerid)
 {
     if(IsPlayerInAnyVehicle(playerid))
 	{

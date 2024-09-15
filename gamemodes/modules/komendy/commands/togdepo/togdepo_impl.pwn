@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togdepo_Impl(playerid, params[256])
+command_togdepo_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

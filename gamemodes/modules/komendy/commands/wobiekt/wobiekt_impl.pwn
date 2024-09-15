@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wobiekt_Impl(playerid, params[256])
+command_wobiekt_Impl(playerid)
 {
     new player, slot;
 	if (sscanf(params, "k<fix>d", player, slot)) return 1;

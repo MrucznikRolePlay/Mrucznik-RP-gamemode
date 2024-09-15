@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_panelbasenu_Impl(playerid, params[256])
+command_panelbasenu_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

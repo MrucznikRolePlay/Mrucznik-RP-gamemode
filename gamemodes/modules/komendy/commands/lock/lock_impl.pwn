@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_lock_Impl(playerid, params[256])
+command_lock_Impl(playerid)
 {
     new newcar=0, Float:dis=2.75, Float:x, Float:y, Float:z, Float:currdist;
     for(new i=0;i<MAX_VEHICLES;i++)

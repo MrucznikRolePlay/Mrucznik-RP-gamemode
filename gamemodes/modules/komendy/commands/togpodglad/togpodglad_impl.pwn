@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togpodglad_Impl(playerid, params[256])
+command_togpodglad_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

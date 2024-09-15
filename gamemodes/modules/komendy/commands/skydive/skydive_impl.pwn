@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_skydive_Impl(playerid, params[256])
+command_skydive_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

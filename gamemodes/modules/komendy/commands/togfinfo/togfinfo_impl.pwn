@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togfinfo_Impl(playerid, params[256])
+command_togfinfo_Impl(playerid)
 {
     if(GetPVarInt(playerid, "TOG_frakcja_info") == 0)
 	{

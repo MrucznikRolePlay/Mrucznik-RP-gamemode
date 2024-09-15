@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zapiszdomy_Impl(playerid, params[256])
+command_zapiszdomy_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 5000)
 	{

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_marcepan_Impl(playerid, params[256])
+command_marcepan_Impl(playerid)
 {
     //komenda tymczasowo wy³¹czona
     /*

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_dr_Impl(playerid, params[256])
+command_dr_Impl(playerid)
 {
     if(IsPlayerInAnyVehicle(playerid))
 	{

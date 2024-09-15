@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zdejmijkevlar_Impl(playerid, params[256])
+command_zdejmijkevlar_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

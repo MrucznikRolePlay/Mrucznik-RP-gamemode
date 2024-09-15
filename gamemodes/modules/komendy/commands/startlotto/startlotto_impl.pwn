@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_startlotto_Impl(playerid, params[256])
+command_startlotto_Impl(playerid)
 {
     new string[128];
 

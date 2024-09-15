@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kickall_Impl(playerid, params[256])
+command_kickall_Impl(playerid)
 {
     if(IsAHeadAdmin(playerid))
 	{

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wyrzucbronie_Impl(playerid, params[256])
+command_wyrzucbronie_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

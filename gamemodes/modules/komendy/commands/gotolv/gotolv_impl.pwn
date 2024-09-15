@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotolv_Impl(playerid, params[256])
+command_gotolv_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

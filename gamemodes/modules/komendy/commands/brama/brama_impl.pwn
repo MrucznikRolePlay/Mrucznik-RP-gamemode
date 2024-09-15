@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_brama_Impl(playerid, params[256])
+command_brama_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

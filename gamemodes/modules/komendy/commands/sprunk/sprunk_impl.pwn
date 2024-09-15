@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_sprunk_Impl(playerid, params[256])
+command_sprunk_Impl(playerid)
 {
     if(PlayerInfo[playerid][pSprunk] >= 1)
     {

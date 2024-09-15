@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_tognewbie_Impl(playerid, params[256])
+command_tognewbie_Impl(playerid)
 {
     if(GetPVarInt(playerid, "TOG_newbie") == 0)
 	{

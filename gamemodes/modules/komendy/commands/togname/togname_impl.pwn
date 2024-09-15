@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togname_Impl(playerid, params[256])
+command_togname_Impl(playerid)
 {
     if(GetPVarInt(playerid, "tognick") == 1)
     {

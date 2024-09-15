@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wyjedz_Impl(playerid, params[256])
+command_wyjedz_Impl(playerid)
 {
     if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Nie mo¿esz u¿ywaæ tej komendy w trakcie weryfikacji.");
 	if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)

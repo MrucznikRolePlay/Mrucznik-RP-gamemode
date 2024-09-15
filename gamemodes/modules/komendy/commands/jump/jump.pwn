@@ -53,14 +53,8 @@ YCMD:jump(playerid, params[], help)
         sendTipMessage(playerid, "");
         return 1;
     }
-    //fetching params
-    new param[256];
-    if(sscanf(params, "S()[256]", param))
-    {
-        sendTipMessage(playerid, "U¿yj /jump [] ");
-        return 1;
-    }
+    
     
     //command body
-    return command_jump_Impl(playerid, param);
+    return command_jump_Impl(playerid);
 }

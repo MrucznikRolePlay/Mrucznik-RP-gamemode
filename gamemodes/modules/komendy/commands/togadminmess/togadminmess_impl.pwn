@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togadminmess_Impl(playerid, params[256])
+command_togadminmess_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

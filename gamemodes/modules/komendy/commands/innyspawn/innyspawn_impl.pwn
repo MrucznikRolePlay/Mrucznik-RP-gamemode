@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_innyspawn_Impl(playerid, params[256])
+command_innyspawn_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

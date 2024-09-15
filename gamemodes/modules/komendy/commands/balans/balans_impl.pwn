@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_balans_Impl(playerid, params[256])
+command_balans_Impl(playerid)
 {
     new string[64];
 	if(IsAtBank(playerid) || IsAtBankomat(playerid))

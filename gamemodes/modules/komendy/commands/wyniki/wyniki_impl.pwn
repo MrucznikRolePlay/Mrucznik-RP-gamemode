@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wyniki_Impl(playerid, params[256])
+command_wyniki_Impl(playerid)
 {
     new string[64];
 

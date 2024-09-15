@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_przebierz_Impl(playerid, params[256])
+command_przebierz_Impl(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 2.5, 1212.3590,-1796.6627,70.0682) || IsPlayerInRangeOfPoint(playerid, 2.5, 1211.8776,-1803.4086,70.0682) || IsPlayerInRangeOfPoint(playerid, 2.5, 1222.4368,-1803.4390,70.0682))
     {

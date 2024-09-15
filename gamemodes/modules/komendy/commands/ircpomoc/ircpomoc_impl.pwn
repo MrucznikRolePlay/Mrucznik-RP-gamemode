@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_ircpomoc_Impl(playerid, params[256])
+command_ircpomoc_Impl(playerid)
 {
     SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
     SendClientMessage(playerid, COLOR_WHITE,"*** IRC POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");

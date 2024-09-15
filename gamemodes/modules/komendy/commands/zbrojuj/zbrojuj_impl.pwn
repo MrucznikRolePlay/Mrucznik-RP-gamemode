@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zbrojuj_Impl(playerid, params[256])
+command_zbrojuj_Impl(playerid)
 {
     /*
     if(IsPlayerConnected(playerid))

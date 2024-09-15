@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_fixr_Impl(playerid, params[256])
+command_fixr_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

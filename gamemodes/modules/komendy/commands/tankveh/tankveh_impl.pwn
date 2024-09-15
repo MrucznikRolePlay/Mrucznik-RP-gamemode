@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_tankveh_Impl(playerid, params[256])
+command_tankveh_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

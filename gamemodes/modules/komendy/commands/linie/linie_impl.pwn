@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_linie_Impl(playerid, params[256])
+command_linie_Impl(playerid)
 {
     if(IsPlayerInFraction(playerid, FRAC_SN, 1000))
     {

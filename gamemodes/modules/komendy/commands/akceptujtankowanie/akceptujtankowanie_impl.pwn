@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_akceptujtankowanie_Impl(playerid, params[256])
+command_akceptujtankowanie_Impl(playerid)
 {
     RunCommand(playerid, "/akceptuj",  "tankowanie");
     return 1;

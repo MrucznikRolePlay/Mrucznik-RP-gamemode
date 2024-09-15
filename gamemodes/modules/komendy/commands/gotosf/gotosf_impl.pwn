@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotosf_Impl(playerid, params[256])
+command_gotosf_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

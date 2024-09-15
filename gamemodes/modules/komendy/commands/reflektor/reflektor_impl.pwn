@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_reflektor_Impl(playerid, params[256])
+command_reflektor_Impl(playerid)
 {
     if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
     {

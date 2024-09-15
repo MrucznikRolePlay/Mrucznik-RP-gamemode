@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_loadinfo_Impl(playerid, params[256])
+command_loadinfo_Impl(playerid)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     SendClientMessage(playerid, -1, "Wczytujê informacje...");

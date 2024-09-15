@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wynajempomoc_Impl(playerid, params[256])
+command_wynajempomoc_Impl(playerid)
 {
     SendClientMessage(playerid, COLOR_GREEN,"_______________________________________");
 	SendClientMessage(playerid, COLOR_WHITE,"*** WYNAJMOWANIE POMOC *** wpisz komende aby uzyskaæ wiêcej pomocy");

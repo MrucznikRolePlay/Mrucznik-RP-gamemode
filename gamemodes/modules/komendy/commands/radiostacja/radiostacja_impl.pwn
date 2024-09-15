@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_radiostacja_Impl(playerid, params[256])
+command_radiostacja_Impl(playerid)
 {
     if(GetPLocal(playerid) == PLOCAL_ORG_SN)
     {

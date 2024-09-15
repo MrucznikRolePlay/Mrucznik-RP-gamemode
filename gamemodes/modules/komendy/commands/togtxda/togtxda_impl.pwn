@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togtxda_Impl(playerid, params[256])
+command_togtxda_Impl(playerid)
 {
     if(togADMTXD[playerid] == 0)
 	{

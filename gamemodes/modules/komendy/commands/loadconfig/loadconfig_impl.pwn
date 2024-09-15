@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_loadconfig_Impl(playerid, params[256])
+command_loadconfig_Impl(playerid)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     SendClientMessage(playerid, -1, "Wczytujê konfiguracjê serwera.");

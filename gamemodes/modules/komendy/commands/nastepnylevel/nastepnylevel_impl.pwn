@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_nastepnylevel_Impl(playerid, params[256])
+command_nastepnylevel_Impl(playerid)
 {
     new string[128];
 

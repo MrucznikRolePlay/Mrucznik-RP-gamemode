@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_spoilery_Impl(playerid, params[256])
+command_spoilery_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_czysc_Impl(playerid, params[256])
+command_czysc_Impl(playerid)
 {
     if(GetPlayerFraction(playerid) != FRAC_ERS && GetPlayerJob(playerid) != JOB_MEDIC) return sendTipMessageEx(playerid, COLOR_GRAD2, "Dostêpne tylko dla pracy stra¿aków.");
     if(JobDuty[playerid] == 0) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes na s³u¿bie.");

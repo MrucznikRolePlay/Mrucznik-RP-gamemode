@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_skille_Impl(playerid, params[256])
+command_skille_Impl(playerid)
 {
     PlayerInfo[playerid][pDetSkill] = 5000;
     PlayerInfo[playerid][pLawSkill] = 5000;

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_house_Impl(playerid, params[256])
+command_house_Impl(playerid)
 {
     new string[128];
 

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_stworztrase_Impl(playerid, params[256])
+command_stworztrase_Impl(playerid)
 {
     new string[128];
 

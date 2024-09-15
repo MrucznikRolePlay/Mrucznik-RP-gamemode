@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_quitpraca_Impl(playerid, params[256])
+command_quitpraca_Impl(playerid)
 {
     new string[128];
 

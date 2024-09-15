@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_icons_Impl(playerid, params[256])
+command_icons_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

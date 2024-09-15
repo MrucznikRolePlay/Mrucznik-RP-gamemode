@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zmienskin_Impl(playerid, params[256])
+command_zmienskin_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

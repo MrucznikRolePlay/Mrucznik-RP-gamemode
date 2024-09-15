@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_edytuj_Impl(playerid, params[256])
+command_edytuj_Impl(playerid)
 {
     if(!Uprawnienia(playerid, ACCESS_PANEL)) return 1;
     ShowPlayerDialogEx(playerid, D_EDIT, DIALOG_STYLE_LIST, "Panel Boga", "Wybierz co chcesz edytowaæ:\n1.\tPojazd\n2.\tNazwy rang", "Wybierz", "WyjdŸ");

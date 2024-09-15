@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_akceptujnaprawe_Impl(playerid, params[256])
+command_akceptujnaprawe_Impl(playerid)
 {
     RunCommand(playerid, "/akceptuj",  "naprawe");
     return 1;

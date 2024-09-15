@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_restart_Impl(playerid, params[256])
+command_restart_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

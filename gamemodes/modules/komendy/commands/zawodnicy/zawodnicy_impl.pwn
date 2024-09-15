@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zawodnicy_Impl(playerid, params[256])
+command_zawodnicy_Impl(playerid)
 {
     new string[32];
 

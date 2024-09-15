@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_pakietmrucznika_Impl(playerid, params[256])
+command_pakietmrucznika_Impl(playerid)
 {
     if(gettime() < GetPVarInt(playerid, "pakietl")) return sendTipMessage(playerid, "{dafc10}Mo¿esz u¿ywaæ tego co 60s");
 

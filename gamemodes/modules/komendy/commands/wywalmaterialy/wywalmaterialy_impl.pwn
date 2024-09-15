@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wywalmaterialy_Impl(playerid, params[256])
+command_wywalmaterialy_Impl(playerid)
 {
     if(PlayerInfo[playerid][pMats] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie materia³ów");
 	new nick[MAX_PLAYER_NAME], string[128];

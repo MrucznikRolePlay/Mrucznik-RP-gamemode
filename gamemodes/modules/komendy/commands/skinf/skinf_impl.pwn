@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_skinf_Impl(playerid, params[256])
+command_skinf_Impl(playerid)
 {
     if(!IsPlayerConnected(playerid) || !gPlayerLogged[playerid]) return 1;
     if(GetPlayerFraction(playerid) == 0) return sendErrorMessage(playerid, "Nie jesteœ we frakcji!");

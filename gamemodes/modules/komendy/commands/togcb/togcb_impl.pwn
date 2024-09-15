@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togcb_Impl(playerid, params[256])
+command_togcb_Impl(playerid)
 {
     if(PlayerInfo[playerid][pCB] == 1)
 	{

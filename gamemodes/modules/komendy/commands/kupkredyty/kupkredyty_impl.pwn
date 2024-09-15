@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kupkredyty_Impl(playerid, params[256])
+command_kupkredyty_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

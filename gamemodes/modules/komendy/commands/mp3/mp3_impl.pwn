@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_mp3_Impl(playerid, params[256])
+command_mp3_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

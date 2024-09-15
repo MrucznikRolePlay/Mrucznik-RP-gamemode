@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_basenstats_Impl(playerid, params[256])
+command_basenstats_Impl(playerid)
 {
     if(IsAPoolBusinessOwner(playerid))
 	{

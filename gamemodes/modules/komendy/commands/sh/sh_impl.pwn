@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_sh_Impl(playerid, params[256])
+command_sh_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 15)
     {

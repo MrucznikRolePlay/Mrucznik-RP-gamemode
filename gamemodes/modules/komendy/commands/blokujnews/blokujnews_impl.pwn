@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_blokujnews_Impl(playerid, params[256])
+command_blokujnews_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

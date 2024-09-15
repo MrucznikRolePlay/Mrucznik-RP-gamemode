@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_mojskin_Impl(playerid, params[256])
+command_mojskin_Impl(playerid)
 {
     new str[32];
     format(str, 32, "ID Twojego skina: %d", GetPlayerSkin(playerid));

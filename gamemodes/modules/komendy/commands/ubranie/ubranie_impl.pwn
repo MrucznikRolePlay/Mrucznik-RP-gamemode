@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_ubranie_Impl(playerid, params[256])
+command_ubranie_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

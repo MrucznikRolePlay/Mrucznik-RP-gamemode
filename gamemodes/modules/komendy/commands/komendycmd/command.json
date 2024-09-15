@@ -4,16 +4,10 @@
     "permissions": [],
     "author": "mrucznik",
     "aliases": [
-        "commands", "komendy", "cmds"
+        "commands",
+        "komendy",
+        "cmds"
     ],
-    "parameters": [
-        {
-            "type": "string",
-            "size": "256",
-            "name": "param",
-            "description": "Komenda wyœwietlaj¹ca listê wszystkich komend, jakie mo¿esz u¿yæ.",
-            "defaultValue": ""
-        }
-    ],
+    "parameters": [],
     "date": "15.09.2024"
 }

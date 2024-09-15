@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_atakuj_Impl(playerid, params[256])
+command_atakuj_Impl(playerid)
 {
     if(ZONE_DISABLED == 1)
     {

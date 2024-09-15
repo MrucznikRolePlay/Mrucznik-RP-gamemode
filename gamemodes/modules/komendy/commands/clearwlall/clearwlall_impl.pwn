@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_clearwlall_Impl(playerid, params[256])
+command_clearwlall_Impl(playerid)
 {
     new string[128];
 

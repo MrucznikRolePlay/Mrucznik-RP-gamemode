@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_poszukuj_Impl(playerid, params[256])
+command_poszukuj_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

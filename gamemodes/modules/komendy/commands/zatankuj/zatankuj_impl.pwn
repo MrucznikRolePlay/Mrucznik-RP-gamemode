@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zatankuj_Impl(playerid, params[256])
+command_zatankuj_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

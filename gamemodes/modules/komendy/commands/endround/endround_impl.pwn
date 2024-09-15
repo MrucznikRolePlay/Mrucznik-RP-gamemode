@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_endround_Impl(playerid, params[256])
+command_endround_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

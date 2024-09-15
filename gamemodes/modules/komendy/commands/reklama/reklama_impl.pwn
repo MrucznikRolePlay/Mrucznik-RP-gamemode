@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_reklama_Impl(playerid, params[256])
+command_reklama_Impl(playerid)
 {
     if(!IsAHA(playerid))
 	{

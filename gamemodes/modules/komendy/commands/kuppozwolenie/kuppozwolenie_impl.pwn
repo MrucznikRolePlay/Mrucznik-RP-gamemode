@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kuppozwolenie_Impl(playerid, params[256])
+command_kuppozwolenie_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

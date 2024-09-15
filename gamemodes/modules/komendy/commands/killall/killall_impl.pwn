@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_killall_Impl(playerid, params[256])
+command_killall_Impl(playerid)
 {
     new string[128];
 

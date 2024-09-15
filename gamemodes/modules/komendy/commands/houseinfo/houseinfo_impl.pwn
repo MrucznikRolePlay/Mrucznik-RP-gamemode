@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_houseinfo_Impl(playerid, params[256])
+command_houseinfo_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

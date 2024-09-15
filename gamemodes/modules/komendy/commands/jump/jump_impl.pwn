@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_jump_Impl(playerid, params[256])
+command_jump_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 1)
     {

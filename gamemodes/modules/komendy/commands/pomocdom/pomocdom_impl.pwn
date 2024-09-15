@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_pomocdom_Impl(playerid, params[256])
+command_pomocdom_Impl(playerid)
 {
     if(gPlayerLogged[playerid] == 1)
     {

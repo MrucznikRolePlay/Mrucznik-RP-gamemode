@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_poddajesie_Impl(playerid, params[256])
+command_poddajesie_Impl(playerid)
 {
     new string[128];
 	new sendername[MAX_PLAYER_NAME];

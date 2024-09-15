@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_asystem_Impl(playerid, params[256])
+command_asystem_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

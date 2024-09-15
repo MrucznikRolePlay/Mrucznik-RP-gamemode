@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zaparkuj_Impl(playerid, params[256])
+command_zaparkuj_Impl(playerid)
 {
     new string[256];
 	if(IsPlayerInAnyVehicle(playerid))

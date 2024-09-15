@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_laptop_Impl(playerid, params[256])
+command_laptop_Impl(playerid)
 {
     new sendername[MAX_PLAYER_NAME];
 

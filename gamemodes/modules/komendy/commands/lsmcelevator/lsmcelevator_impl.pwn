@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_lsmcelevator_Impl(playerid, params[256])
+command_lsmcelevator_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] < 20) return 1;
     ChangeLSMCElevatorState();

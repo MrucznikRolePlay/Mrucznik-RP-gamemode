@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kmwyniki_Impl(playerid, params[256])
+command_kmwyniki_Impl(playerid)
 {
     new string[128];
     new kmName[MAX_PLAYER_NAME];

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_vopispomoc_Impl(playerid, params[256])
+command_vopispomoc_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

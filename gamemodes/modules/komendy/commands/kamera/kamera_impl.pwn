@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kamera_Impl(playerid, params[256])
+command_kamera_Impl(playerid)
 {
     if(PlayerInfo[playerid][pRank] >= 6 && IsAClubBusinessOwner(playerid) && IsPlayerInRangeOfPoint(playerid, 50.0, 1896.3619,-2445.5969,18.5559) && GetPlayerVirtualWorld(playerid) == 1) //RANGA
 	{

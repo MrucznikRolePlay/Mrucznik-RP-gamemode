@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wejdzw_Impl(playerid, params[256])
+command_wejdzw_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

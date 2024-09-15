@@ -8,14 +8,6 @@
         "kuplevel",
         "nextlevel"
     ],
-    "parameters": [
-        {
-            "type": "string",
-            "size": "256",
-            "name": "param",
-            "description": "",
-            "defaultValue": ""
-        }
-    ],
+    "parameters": [],
     "date": "15.09.2024"
 }

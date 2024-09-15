@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togbw_Impl(playerid, params[256])
+command_togbw_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

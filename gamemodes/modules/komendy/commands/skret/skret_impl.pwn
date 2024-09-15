@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_skret_Impl(playerid, params[256])
+command_skret_Impl(playerid)
 {
     if(PlayerInfo[playerid][pCygaro] >= 1)
     {

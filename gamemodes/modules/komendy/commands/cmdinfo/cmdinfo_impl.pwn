@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_cmdinfo_Impl(playerid, params[256])
+command_cmdinfo_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

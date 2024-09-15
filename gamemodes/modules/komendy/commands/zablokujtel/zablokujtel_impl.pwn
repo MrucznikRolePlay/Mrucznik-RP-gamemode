@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zablokujtel_Impl(playerid, params[256])
+command_zablokujtel_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

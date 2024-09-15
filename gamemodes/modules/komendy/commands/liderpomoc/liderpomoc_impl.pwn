@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_liderpomoc_Impl(playerid, params[256])
+command_liderpomoc_Impl(playerid)
 {
     if (PlayerInfo[playerid][pLider] >= 1)
 	{

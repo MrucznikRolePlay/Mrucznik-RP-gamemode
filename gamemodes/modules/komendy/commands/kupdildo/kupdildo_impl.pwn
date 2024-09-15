@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kupdildo_Impl(playerid, params[256])
+command_kupdildo_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

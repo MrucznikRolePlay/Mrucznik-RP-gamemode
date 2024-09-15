@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotoin_Impl(playerid, params[256])
+command_gotoin_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

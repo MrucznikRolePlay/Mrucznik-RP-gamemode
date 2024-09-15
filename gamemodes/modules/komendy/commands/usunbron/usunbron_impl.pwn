@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_usunbron_Impl(playerid, params[256])
+command_usunbron_Impl(playerid)
 {
     if(GetPVarInt(playerid, "mozeUsunacBronie") == 1) return sendErrorMessage(playerid, "Nie mo¿esz usun¹æ broni do czasu zrespienia siê, u¿y³eœ /wb");
 

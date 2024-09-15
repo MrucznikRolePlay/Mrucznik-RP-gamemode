@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_idz_Impl(playerid, params[256])
+command_idz_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

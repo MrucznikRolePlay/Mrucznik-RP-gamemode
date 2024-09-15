@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_tankujauta_Impl(playerid, params[256])
+command_tankujauta_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

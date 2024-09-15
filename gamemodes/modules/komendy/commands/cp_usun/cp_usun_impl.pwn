@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_cp_usun_Impl(playerid, params[256])
+command_cp_usun_Impl(playerid)
 {
     new string[128];
 

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotols_Impl(playerid, params[256])
+command_gotols_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

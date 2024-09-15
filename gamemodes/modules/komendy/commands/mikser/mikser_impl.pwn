@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_mikser_Impl(playerid, params[256])
+command_mikser_Impl(playerid)
 {
     if(PlayerInfo[playerid][pRank] >=5 && IsAClubBusinessOwner(playerid))  //RANGA
 	{

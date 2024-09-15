@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotobank_Impl(playerid, params[256])
+command_gotobank_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 1 || IsAScripter(playerid)) {
         SetPlayerInterior(playerid, 0);

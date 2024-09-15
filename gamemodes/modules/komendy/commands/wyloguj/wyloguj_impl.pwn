@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wyloguj_Impl(playerid, params[256])
+command_wyloguj_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

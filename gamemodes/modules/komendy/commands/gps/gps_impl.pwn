@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gps_Impl(playerid, params[256])
+command_gps_Impl(playerid)
 {
     if(!IsAPolicja(playerid) && !GetPlayerFraction(playerid) != FRAC_ERS && GetPlayerFraction(playerid) != FRAC_BOR)
 	{

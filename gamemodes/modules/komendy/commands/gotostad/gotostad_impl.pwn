@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotostad_Impl(playerid, params[256])
+command_gotostad_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

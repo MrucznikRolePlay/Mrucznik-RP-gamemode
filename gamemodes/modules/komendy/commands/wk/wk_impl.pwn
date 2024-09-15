@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wk_Impl(playerid, params[256])
+command_wk_Impl(playerid)
 {
     if(PlayerInfo[playerid][pKluczeAuta] != 0)
     {

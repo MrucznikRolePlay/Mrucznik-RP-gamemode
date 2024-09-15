@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zasady_Impl(playerid, params[256])
+command_zasady_Impl(playerid)
 {
     SendClientMessage(playerid,COLOR_P@,"|_________________Zasady ruletki i Black Jack'a_________________|");
 	SendClientMessage(playerid,COLOR_WHITE,"Black Jack - gracz stara siê pokonac krupiera poprzez uzyskanie sumy najbli¿szej 21pkt.");

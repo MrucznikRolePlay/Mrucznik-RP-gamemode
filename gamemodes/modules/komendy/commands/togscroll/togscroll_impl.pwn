@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togscroll_Impl(playerid, params[256])
+command_togscroll_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_stopanim_Impl(playerid, params[256])
+command_stopanim_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

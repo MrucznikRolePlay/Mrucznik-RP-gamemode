@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_komandos_Impl(playerid, params[256])
+command_komandos_Impl(playerid)
 {
     if(PlayerInfo[playerid][pWino] >= 1)
     {

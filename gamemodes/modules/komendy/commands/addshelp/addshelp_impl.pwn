@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_addshelp_Impl(playerid, params[256])
+command_addshelp_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

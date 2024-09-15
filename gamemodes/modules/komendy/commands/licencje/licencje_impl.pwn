@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_licencje_Impl(playerid, params[256])
+command_licencje_Impl(playerid)
 {
     new string[128];
 

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_uprawnienia_Impl(playerid, params[256])
+command_uprawnienia_Impl(playerid)
 {
     new str[512];
     strcat(str, "\t\t\tUPRAWNIENIA\n");

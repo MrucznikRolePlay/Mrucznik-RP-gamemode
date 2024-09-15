@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_screenshot_Impl(playerid, params[256])
+command_screenshot_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

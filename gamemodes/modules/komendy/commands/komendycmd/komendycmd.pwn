@@ -56,14 +56,8 @@ YCMD:komendycmd(playerid, params[], help)
         sendTipMessage(playerid, "");
         return 1;
     }
-    //fetching params
-    new param[256];
-    if(sscanf(params, "S()[256]", param))
-    {
-        sendTipMessage(playerid, "U¿yj /komendycmd [Komenda wyœwietlaj¹ca listê wszystkich komend, jakie mo¿esz u¿yæ.] ");
-        return 1;
-    }
+    
     
     //command body
-    return command_komendycmd_Impl(playerid, param);
+    return command_komendycmd_Impl(playerid);
 }

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_respawn_Impl(playerid, params[256])
+command_respawn_Impl(playerid)
 {
     new string[128];
 	

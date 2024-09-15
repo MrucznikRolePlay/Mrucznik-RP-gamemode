@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wywaldragi_Impl(playerid, params[256])
+command_wywaldragi_Impl(playerid)
 {
     if(PlayerInfo[playerid][pDrugs] == 0) return sendErrorMessage(playerid, "Nie masz przy sobie narkotyków");
 	new nick[MAX_PLAYER_NAME], string[128];

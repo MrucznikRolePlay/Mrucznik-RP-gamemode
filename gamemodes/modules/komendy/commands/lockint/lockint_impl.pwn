@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_lockint_Impl(playerid, params[256])
+command_lockint_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

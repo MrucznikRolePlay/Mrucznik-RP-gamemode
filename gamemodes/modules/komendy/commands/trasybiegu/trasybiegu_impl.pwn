@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_trasybiegu_Impl(playerid, params[256])
+command_trasybiegu_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

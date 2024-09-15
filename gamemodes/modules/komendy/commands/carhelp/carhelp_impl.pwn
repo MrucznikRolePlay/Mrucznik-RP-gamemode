@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_carhelp_Impl(playerid, params[256])
+command_carhelp_Impl(playerid)
 {
     if(GUIExit[playerid] == 0)
     {

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_resetsejfhasla_Impl(playerid, params[256])
+command_resetsejfhasla_Impl(playerid)
 {
     new string[64];
 

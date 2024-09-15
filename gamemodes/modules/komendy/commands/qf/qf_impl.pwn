@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_qf_Impl(playerid, params[256])
+command_qf_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
 	{

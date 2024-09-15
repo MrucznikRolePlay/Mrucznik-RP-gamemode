@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zaznacz_Impl(playerid, params[256])
+command_zaznacz_Impl(playerid)
 {
     SelectTextDraw(playerid, 0x00FF00FF);
     return 1;

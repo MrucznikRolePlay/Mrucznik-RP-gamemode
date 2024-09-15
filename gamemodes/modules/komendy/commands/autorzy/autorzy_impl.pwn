@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_autorzy_Impl(playerid, params[256])
+command_autorzy_Impl(playerid)
 {
     ShowPlayerDialogEx(playerid, 9494, DIALOG_STYLE_TABLIST, "Mrucznik Role Play", 
 	"{37AC45}===[2009+]===\nMrucznik\tW³aœciciel\n{37AC45}===[2015+]====\nKubi\tSkrypter\nAkil\tSkrypter\nVeroon\tSkrypter\n{37AC45}===[2017+]===\nniceCzlowiek\tSkrypter\nPecet\tSkrypter\n{37AC45}===[2018+]===\nSimeone\tG³ówny Skrypter\n{37AC45}===[Pomocnicy:]===\n_Kamil\nSniper", "Okej", ""); 

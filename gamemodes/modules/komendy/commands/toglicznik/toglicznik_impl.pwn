@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_toglicznik_Impl(playerid, params[256])
+command_toglicznik_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

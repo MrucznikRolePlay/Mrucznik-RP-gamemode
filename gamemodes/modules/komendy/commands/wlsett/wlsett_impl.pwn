@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wlsett_Impl(playerid, params[256])
+command_wlsett_Impl(playerid)
 {
     if(IsAHeadAdmin(playerid) || IsAScripter(playerid))
     {

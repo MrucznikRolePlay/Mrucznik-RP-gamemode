@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kolejka_Impl(playerid, params[256])
+command_kolejka_Impl(playerid)
 {
     if(VAR_Kolejka)
     {

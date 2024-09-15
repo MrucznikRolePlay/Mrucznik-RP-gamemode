@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_szukani_Impl(playerid, params[256])
+command_szukani_Impl(playerid)
 {
     new string[128];
 	new giveplayer[MAX_PLAYER_NAME];

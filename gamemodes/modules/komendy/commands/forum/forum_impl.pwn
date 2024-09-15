@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_forum_Impl(playerid, params[256])
+command_forum_Impl(playerid)
 {
     new string[128];
 

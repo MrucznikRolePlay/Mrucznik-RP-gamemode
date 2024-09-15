@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_cygaro_Impl(playerid, params[256])
+command_cygaro_Impl(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 3.5, 833.8511,-1391.2689,-17.6433))
 	{

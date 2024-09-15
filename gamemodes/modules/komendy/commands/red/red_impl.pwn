@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_red_Impl(playerid, params[256])
+command_red_Impl(playerid)
 {
     new frac;
     frac = GetPlayerFraction(playerid);

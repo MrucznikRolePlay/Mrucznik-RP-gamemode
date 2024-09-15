@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_stan_Impl(playerid, params[256])
+command_stan_Impl(playerid)
 {
     new string[128];
     if(IsPlayerConnected(playerid))

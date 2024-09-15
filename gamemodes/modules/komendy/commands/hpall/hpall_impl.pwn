@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_hpall_Impl(playerid, params[256])
+command_hpall_Impl(playerid)
 {
     new string[64];
 

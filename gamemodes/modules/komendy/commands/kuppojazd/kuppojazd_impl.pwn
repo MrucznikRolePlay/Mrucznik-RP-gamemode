@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kuppojazd_Impl(playerid, params[256])
+command_kuppojazd_Impl(playerid)
 {
     if(IsPlayerInAnyVehicle(playerid))
 	{

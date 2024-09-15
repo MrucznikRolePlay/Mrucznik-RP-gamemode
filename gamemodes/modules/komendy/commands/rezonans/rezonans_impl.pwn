@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_rezonans_Impl(playerid, params[256])
+command_rezonans_Impl(playerid)
 {
     if(!IsAMedyk(playerid)) return 1;
 	if(IsPlayerInRangeOfPoint(playerid,8,1157.257324, -1325.527221, 133.955657))

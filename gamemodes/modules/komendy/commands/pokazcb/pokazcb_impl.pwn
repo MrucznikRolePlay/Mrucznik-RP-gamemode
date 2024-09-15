@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_pokazcb_Impl(playerid, params[256])
+command_pokazcb_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] >= 1)
 	{

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_zrobkolejke_Impl(playerid, params[256])
+command_zrobkolejke_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] < 5000) return 1;
     if(!VAR_Kolejka)

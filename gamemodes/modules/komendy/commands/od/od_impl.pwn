@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_od_Impl(playerid, params[256])
+command_od_Impl(playerid)
 {
     new string[64];
 

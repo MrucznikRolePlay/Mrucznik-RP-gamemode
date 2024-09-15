@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kb_Impl(playerid, params[256])
+command_kb_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

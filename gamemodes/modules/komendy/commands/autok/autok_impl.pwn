@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_autok_Impl(playerid, params[256])
+command_autok_Impl(playerid)
 {
     if(PlayerInfo[playerid][pKluczeAuta] > 0)
 	{

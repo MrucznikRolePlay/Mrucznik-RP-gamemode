@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_oldcar_Impl(playerid, params[256])
+command_oldcar_Impl(playerid)
 {
     new string[64];
 

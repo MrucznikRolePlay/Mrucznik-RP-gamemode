@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_startskinevent_Impl(playerid, params[256])
+command_startskinevent_Impl(playerid)
 {
     // new string[256];
 	// new value; 

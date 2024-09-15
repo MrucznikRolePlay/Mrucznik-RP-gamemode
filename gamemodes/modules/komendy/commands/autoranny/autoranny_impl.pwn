@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_autoranny_Impl(playerid, params[256])
+command_autoranny_Impl(playerid)
 {
     new string[128];
 	ApplyAnimation(playerid,"PED","CAR_dead_LHS",4.1,0,1,1,1,1);

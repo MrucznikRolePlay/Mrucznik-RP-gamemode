@@ -53,14 +53,8 @@ YCMD:mojskin(playerid, params[], help)
         sendTipMessage(playerid, "");
         return 1;
     }
-    //fetching params
-    new param[256];
-    if(sscanf(params, "S()[256]", param))
-    {
-        sendTipMessage(playerid, "U¿yj /mojskin [] ");
-        return 1;
-    }
+    
     
     //command body
-    return command_mojskin_Impl(playerid, param);
+    return command_mojskin_Impl(playerid);
 }

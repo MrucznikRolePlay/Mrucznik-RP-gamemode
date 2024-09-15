@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_app_Impl(playerid, params[256])
+command_app_Impl(playerid)
 {
     if(GetPVarInt(playerid, "pozwolenie-oferuje") == 999) return sendErrorMessage(playerid, "Nikt nie oferowa³ Ci pozwolenia prawniczego!");
     new ofertaod = GetPVarInt(playerid, "pozwolenie-oferuje");

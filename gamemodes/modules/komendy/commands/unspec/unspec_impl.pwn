@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_unspec_Impl(playerid, params[256])
+command_unspec_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

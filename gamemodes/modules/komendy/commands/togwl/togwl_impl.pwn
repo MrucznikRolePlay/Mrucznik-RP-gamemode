@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_togwl_Impl(playerid, params[256])
+command_togwl_Impl(playerid)
 {
     if(IsPlayerConnected(playerid))
     {

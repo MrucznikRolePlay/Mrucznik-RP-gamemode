@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_konsola_Impl(playerid, params[256])
+command_konsola_Impl(playerid)
 {
     if(IsAClubBusinessOwner(playerid) || GetPlayerFraction(playerid) == FRAC_SN)
     {

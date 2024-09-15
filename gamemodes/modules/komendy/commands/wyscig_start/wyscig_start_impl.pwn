@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wyscig_start_Impl(playerid, params[256])
+command_wyscig_start_Impl(playerid)
 {
     if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
     {

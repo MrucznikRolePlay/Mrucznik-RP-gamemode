@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_glosnik_Impl(playerid, params[256])
+command_glosnik_Impl(playerid)
 {
     if(((PlayerInfo[playerid][pMember] == 9 && PlayerInfo[playerid][pRank] >= 3) || PlayerInfo[playerid][pLider] == 9) || (IsAClubBusinessOwner(playerid) && PlayerInfo[playerid][pRank] >= 3))
     {

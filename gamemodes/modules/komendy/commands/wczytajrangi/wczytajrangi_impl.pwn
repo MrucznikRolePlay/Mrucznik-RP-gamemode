@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wczytajrangi_Impl(playerid, params[256])
+command_wczytajrangi_Impl(playerid)
 {
     if(!Uprawnienia(playerid, ACCESS_OWNER)) return 1;
     SendClientMessage(playerid, -1, "Wczytujê rangi.");

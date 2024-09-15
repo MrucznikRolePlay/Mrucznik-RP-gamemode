@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_gotomechy_Impl(playerid, params[256])
+command_gotomechy_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] > 0 || IsAScripter(playerid)) {
 		SetPlayerInterior(playerid,0);

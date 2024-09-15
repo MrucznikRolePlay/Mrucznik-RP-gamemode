@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_czas_Impl(playerid, params[256])
+command_czas_Impl(playerid)
 {
     new string[256];
 

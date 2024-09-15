@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_ranny_Impl(playerid, params[256])
+command_ranny_Impl(playerid)
 {
     new string[128];
 	ApplyAnimation(playerid,"CRACK","crckidle1",4.1,0,1,1,1,1);
