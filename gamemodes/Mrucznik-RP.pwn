@@ -84,7 +84,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <YSI\y_bintree>
 #include <YSI\y_master>
 #include <YSI\y_timers>
-#include <indirection>
 #include <amx_assembly\addressof>
 //redefinition from y_playerarray.inc
 #undef PlayerArray
