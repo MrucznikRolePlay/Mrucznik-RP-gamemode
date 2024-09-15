@@ -28,7 +28,8 @@
 	
 */
 
-YCMD:uwb(playerid, params[], help)//usuñ wszystkie bronie
+//usuñ wszystkie bronie
+YCMD:uwb(playerid, params[], help)
 {
 	if(IsPlayerConnected(playerid))
 	{

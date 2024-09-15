@@ -28,8 +28,8 @@
 	
 */
 
-YCMD:veh(playerid, params[], help) //TODO: naprawiæ/usun¹æ
-{
+YCMD:veh(playerid, params[], help)
+{//TODO: naprawiæ/usun¹æ
 	new string[64];
 
     if(IsPlayerConnected(playerid))
