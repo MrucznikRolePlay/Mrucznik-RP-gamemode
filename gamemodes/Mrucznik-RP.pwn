@@ -171,14 +171,6 @@ native gpci (playerid, serial [], len);
 #include "mysql\mysql_noysi.pwn"
 #include "mysql\mysql_OnDialogResponse.pwn"
 
-
-/*
-#include "modules\ActorSystem\actors.pwn"
-#include "modules\ActorSystem\actors.hwn"
-#include "modules\ActorSystem\actors.def"
-*/
-//-------<[ Inne ]>-------
-#include "old_modules\inne\external.pwn"
 //-------<[ Funkcje ]>-------
 #include "system\funkcje.pwn"
 

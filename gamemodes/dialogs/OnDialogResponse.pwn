@@ -2747,7 +2747,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							Log(payLog, INFO, "Gracz %s kupi³ telefon o numerze %d [Poprzedni: %d]", 
 								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
 							);
-							MRP_SetPlayerPhone(playerid, randphone);
+							PlayerInfo[playerid][pPnumber] = randphone;
+							MruMySQL_SetAccInt("PhoneNr", GetNickEx(playerid), randphone);
 							return 1;
 						}
 					}
@@ -13412,8 +13413,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     else if(dialogid == D_DODATKI_TYP)
     {
         if(!response) return 1;
-        if(listitem == 2 && !MRP_IsInPolice(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w policji!");
-        if(listitem == 4 && !MRP_IsInGang(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w gangu!");
+        if(listitem == 2 && !IsAPolicja(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w policji!");
+        if(listitem == 4 && !IsAGang(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w gangu!");
         CallRemoteFunction("SEC_Dodatki_Show", "dd", playerid, listitem);
         return 1;
     }

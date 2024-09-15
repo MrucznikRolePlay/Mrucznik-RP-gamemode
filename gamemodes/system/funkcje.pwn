@@ -4399,7 +4399,7 @@ ZapiszTrase(trasa)
 }
 
 
-public MRP_ShopPurchaseCar(playerid, model, cena)
+MRP_ShopPurchaseCar(playerid, model, cena)
 {
     if(IsPlayerInAnyVehicle(playerid))
     {
@@ -7325,25 +7325,6 @@ FixHour(hour)
 	return 1;
 }
 
-public MRP_ForceDialog(playerid, dialogid)
-{
-    if(dialogid != -1) GUIExit[playerid] = 1;
-    else GUIExit[playerid] = 0;
-    iddialog[playerid] = dialogid;
-    return 1;
-}
-/*
-forward ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[]);
-public ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[], button2[])
-{
-	
-	ShowPlayerDialog(playerid, dialogid, style, caption, info, button1, button2);
-	iddialog[playerid] = dialogid;
-	antyHider[playerid] = 1;
-	
-	return 1;
-}
-*/
 stock ShowPlayerInfoDialog(playerid, caption[], info[], bool:dialogTimer=false)
 {
 	if(dialAccess[playerid] == 0)

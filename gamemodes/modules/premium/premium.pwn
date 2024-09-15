@@ -282,18 +282,19 @@ KupSlotPojazdu(playerid)
 		return DialogSlotyPojazdu(playerid);
 	}
 
-	if(MRP_GetPlayerCarSlots(playerid) >= 10)
+	if(PlayerInfo[playerid][pCarSlots] >= 10)
 	{
 		sendErrorMessage(playerid, "Masz ju¿ maksymaln¹ iloœæ slotów.");
 		return DialogMenuDotacje(playerid);
 	}
 
 	ZabierzMC(playerid, CAR_SLOT_CENA);
-	MRP_SetPlayerCarSlots(playerid, MRP_GetPlayerCarSlots(playerid)+1);
+	PlayerInfo[playerid][pCarSlots] += 1;
+    MruMySQL_SaveAccount(playerid);
 
 	Log(premiumLog, INFO, "%s kupi³ slot wozu za "#CAR_SLOT_CENA"MC",
 		GetPlayerLogName(playerid));
-	_MruAdmin(playerid, sprintf("Kupi³eœ sobie slot na auto za %d MC. Masz teraz %d slotów.", CAR_SLOT_CENA, MRP_GetPlayerCarSlots(playerid)));
+	_MruAdmin(playerid, sprintf("Kupi³eœ sobie slot na auto za %d MC. Masz teraz %d slotów.", CAR_SLOT_CENA, PlayerInfo[playerid][pCarSlots]));
 
 	premium_printMcBalance(playerid);
 	DialogMenuDotacje(playerid);
@@ -311,11 +312,11 @@ KupZmianeNicku(playerid)
 	}
 
 	ZabierzMC(playerid, ZMIANA_NICKU_CENA);
-	MRP_SetPlayerNickChanges(playerid, MRP_GetPlayerNickChanges(playerid)+1);
+	PlayerInfo[playerid][pZmienilNick] += 1;
 
 	Log(premiumLog, INFO, "%s kupil zmiane nicku za "#ZMIANA_NICKU_CENA"MC",
 		GetPlayerLogName(playerid));
-	_MruAdmin(playerid, sprintf("Kupi³eœ sobie zmianê nicku za %d MC. Masz teraz %d zmian nicku.", ZMIANA_NICKU_CENA, MRP_GetPlayerNickChanges(playerid)));
+	_MruAdmin(playerid, sprintf("Kupi³eœ sobie zmianê nicku za %d MC. Masz teraz %d zmian nicku.", ZMIANA_NICKU_CENA, PlayerInfo[playerid][pZmienilNick]));
 
 	premium_printMcBalance(playerid);
 	DialogMenuDotacje(playerid);
@@ -378,7 +379,8 @@ KupNumerTelefonu(playerid, string:_numer[])
 		}
 
 		ZabierzMC(playerid, cena);
-		MRP_SetPlayerPhone(playerid, numer);
+		PlayerInfo[playerid][pPnumber] = numer;
+		MruMySQL_SetAccInt("PhoneNr", GetNickEx(playerid), numer);
 
 		_MruAdmin(playerid, sprintf("Twój nowy numer telefonu: %d.", numer));
 		Log(premiumLog, INFO, "%s kupil numer telefonu %d za %dMC.",

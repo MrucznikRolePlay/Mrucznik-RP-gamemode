@@ -179,7 +179,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 
     if(PlayerInfo[playerid][pLevel] == 0)
     {
-        Log(mysqlLog, ERROR, "MySQL:: %s - b��d zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
+        Log(mysqlLog, ERROR, "MySQL:: %s - blad zapisu konta (zerowy level)!!!", GetPlayerLogName(playerid));
         return 0;
     }
 
