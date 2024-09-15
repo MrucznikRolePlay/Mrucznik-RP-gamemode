@@ -316,54 +316,46 @@ SendOrgMessage(family, color, string[])
 
 IsAPrzestepca(playerid)
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerOrg(playerid) > 0)
-		{
-		    return 1;
-		}
-	}
+    if(GetPlayerOrg(playerid) > 0)
+    {
+        return 1;
+    }
 	return 0;
 }
 
 stock IsAGang(playerid)
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
-		{
-		    return 1;
-		}
-	}
+    if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
+    {
+        return 1;
+    }
 	return 0;
 }
 
 stock IsAMafia(playerid)
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
-		{
-		    return 1;
-		}
-	}
+    if(GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
+    {
+        return 1;
+    }
 	return 0;
 }
 
 IsAClubBusinessOwner(playerid)
 {
-	return GetPlayerOrgType(playerid) == ORG_TYPE_CLUB;
+    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_CLUB))
+    {
+        return 1;
+    }
+	return 0;
 }
 
-IsAGunShopBusinessOwner(playerid) // TODO: change
+IsAGunShopBusinessOwner(playerid) // TODO: remove
 {
-	if(IsPlayerConnected(playerid))
-	{
-		if(GetPlayerOrg(playerid) == 21 || GetPlayerOrg(playerid) == 22 || GetPlayerOrg(playerid) == 23)
-		{
-		    return 1;
-		}
-	}
+    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
+    {
+        return 1;
+    }
 	return 0;
 }
 

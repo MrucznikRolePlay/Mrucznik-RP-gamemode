@@ -182,7 +182,7 @@ YCMD:brama(playerid, params[], help)
         	}
         }
         //Bramy FDU
-        if(IsAMechazordWarsztatowy(playerid))
+        if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
         {
             if(IsPlayerInRangeOfPoint(playerid,10,1074.1450, -1205.0692, 18.6206))
         	{

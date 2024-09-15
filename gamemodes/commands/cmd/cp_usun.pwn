@@ -32,7 +32,7 @@ YCMD:cp_usun(playerid, params[], help)
 {
 	new string[128];
 
-	if(IsAMechazordWarsztatowy(playerid))
+	if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
 	{
 		if(PlayerInfo[playerid][pRank] >= 4)
 		{
@@ -67,7 +67,7 @@ YCMD:cp_usun(playerid, params[], help)
 	}
 	else
 	{
-		sendErrorMessage(playerid, "Nie jesteœ z NoA!");
+		sendErrorMessage(playerid, "Twoja organizacja nie posiada biznesu Toru wyœcigowego!");
 	}
 	return 1;
 }

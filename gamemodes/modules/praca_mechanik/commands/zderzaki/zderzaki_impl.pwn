@@ -26,7 +26,7 @@
 command_zderzaki_Impl(playerid, giveplayerid)
 {
     new cost = 10_000;
-    if(IsAMechazordWarsztatowy(playerid))
+    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
     {
         cost /= 2;
     }

@@ -34,7 +34,7 @@ YCMD:wyscig(playerid, params[], help)
 	new giveplayer[MAX_PLAYER_NAME];
 	new sendername[MAX_PLAYER_NAME];
 
-	if(IsAMechazordWarsztatowy(playerid))
+	if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
 	{
 		if(PlayerInfo[playerid][pRank] >= 2)
 		{
@@ -77,7 +77,7 @@ YCMD:wyscig(playerid, params[], help)
 	}
 	else
 	{
-		sendErrorMessage(playerid, "Nie jesteœ z NoA");
+		sendErrorMessage(playerid, "Twoja organizacja nie posiada biznesu Toru wyœcigowego.");
 	}
 	return 1;
 }

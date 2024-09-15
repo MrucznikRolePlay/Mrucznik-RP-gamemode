@@ -46,7 +46,7 @@ new FrontBusinessType[BIZ_TYPE][32] = {
 	"Pay 'n' Spray",
     "Stacja benzynowa"
 };
-new FrontBusinessBenefits[BIZ_TYPE][32] = {
+new FrontBusinessBenefits[BIZ_TYPE][64] = {
     "Brak",
     "NPC sprzedaj¹cy broñ",
 	"Tworzenie wyœcigów",
@@ -54,8 +54,8 @@ new FrontBusinessBenefits[BIZ_TYPE][32] = {
 	"Sprzeda¿ alkoholu",
     "Procent od hazardu w biznesie",
 	"50\% tañsze skiny",
-	"25\% wiêcej kontrabandy z przemytu",
-	"75\% tañsza naprawa",
+	"20\% wiêcej kontrabandy",
+	"neony + 50\% tañsza naprawa, tuning",
     "Darmowe tankowanie"
 };
 

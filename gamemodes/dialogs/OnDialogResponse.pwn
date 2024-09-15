@@ -96,6 +96,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new cena_naprawy = 7500;
+			if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
+			{
+				cena_naprawy /= 2;
+			}
 			sendTipMessageFormat(playerid, "Zap³aci³eœ $%d za wizytê w warsztacie", cena_naprawy);
 			ZabierzKase(playerid, cena_naprawy);
 			RepairVehicle(GetPlayerVehicleID(playerid));
@@ -11575,7 +11579,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-				if(IsAMechazordWarsztatowy(playerid))
+				if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
@@ -11611,7 +11615,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        if(IsAMechazordWarsztatowy(playerid))
+		        if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
@@ -11643,7 +11647,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 		    {
-                if(IsAMechazordWarsztatowy(playerid))
+                if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
@@ -11677,7 +11681,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        if(IsAMechazordWarsztatowy(playerid))
+		        if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {

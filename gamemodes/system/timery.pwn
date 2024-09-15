@@ -1925,7 +1925,12 @@ public CustomPickups()
 				GetVehicleHealth(GetPlayerVehicleID(i), health);
 				if(health <= 1000.0 && IsPlayerAtPayNSpray(i))
 				{
-					ShowPlayerDialogEx(i, 9145, DIALOG_STYLE_MSGBOX, "Naprawa pojazdu", "Czy chcesz naprawiæ swój pojazd za 7500$?", "Napraw", "WyjdŸ");
+					new price = 7500;
+					if(IsBusinessTypeOwnedByPlayerOrg(i, FRONT_BIZ_TYPE_SPRAY))
+					{
+						price /= 2;
+					}
+					ShowPlayerDialogEx(i, 9145, DIALOG_STYLE_MSGBOX, "Naprawa pojazdu", sprintf("Czy chcesz naprawiæ swój pojazd za %d$?", price), "Napraw", "WyjdŸ");
 					SetPVarInt(i, "pay-n-spray-dialog", 15);
 					return 1;
 				}
@@ -2281,6 +2286,10 @@ public JednaSekundaTimer()
 								cena_naprawy = price_half;
 								SendClientMessage(i, COLOR_LIGHTBLUE,"Po³owa kosztów naprawy zosta³a op³acona ze œrodków frakcji.");
 							}
+						}
+						if(IsBusinessTypeOwnedByPlayerOrg(i, FRONT_BIZ_TYPE_SPRAY))
+						{
+							cena_naprawy /= 2;
 						}
 
 				        sendTipMessageFormat(i, "Zap³aci³eœ $%d za wizytê w warsztacie", cena_naprawy);

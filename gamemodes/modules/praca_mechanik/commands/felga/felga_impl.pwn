@@ -26,7 +26,7 @@
 command_felga_Impl(playerid, giveplayerid, felga)
 {
     new cost = 15_000;
-    if(IsAMechazordWarsztatowy(playerid))
+    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
     {
         cost /= 2;
     }

@@ -32,7 +32,7 @@ YCMD:trasy(playerid, params[], help)
 {
 	if(GUIExit[playerid] == 0)
 	{
-		if(IsAMechazordWarsztatowy(playerid))
+		if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
 		{
 			if(PlayerInfo[playerid][pRank] >= 4)
 			{

@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sprzedajzestaw_Impl(playerid, giveplayerid)
 {
-	if(!IsAMechazordWarsztatowy(playerid) && PlayerInfo[playerid][pJob] != 7)
+	if(PlayerInfo[playerid][pJob] != 7)
     {
         MruMessageFail(playerid, "Nie jesteœ mechanikiem lub pracownikiem warsztatu.");
         return 1;

@@ -52,8 +52,4 @@
 #define ORG_TYPE_GANG 1
 #define ORG_TYPE_MAFIA 2
 
-// TODO: remove
-#define ORG_TYPE_RACE 3
-#define ORG_TYPE_CLUB 4
-
 //end

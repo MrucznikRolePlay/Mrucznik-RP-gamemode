@@ -25,9 +25,9 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sprawdzneon_Impl(playerid, giveplayerid)
 {
-	if(!IsAMechazordWarsztatowy(playerid) && PlayerInfo[playerid][pJob] != 7)
+	if(PlayerInfo[playerid][pJob] != 7)
     {
-        MruMessageFail(playerid, "Nie jesteœ mechanikiem lub pracownikiem warsztatu.");
+        MruMessageFail(playerid, "Nie jesteœ mechanikiem.");
         return 1;
     }
 

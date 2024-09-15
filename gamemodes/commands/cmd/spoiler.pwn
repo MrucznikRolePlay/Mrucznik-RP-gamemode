@@ -36,10 +36,10 @@ YCMD:spoiler(playerid, params[], help)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsAMechazordWarsztatowy(playerid) || PlayerInfo[playerid][pJob] == 7)
+        if(PlayerInfo[playerid][pJob] == 7)
         {
             new cost = 25000;
-            if(IsAMechazordWarsztatowy(playerid))
+            if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
             {
                 cost /= 2;
             }

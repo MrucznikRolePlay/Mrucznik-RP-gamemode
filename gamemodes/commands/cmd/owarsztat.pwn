@@ -30,7 +30,7 @@
 
 YCMD:owarsztat(playerid, params[], help)
 {
-	if(IsAMechazordWarsztatowy(playerid))
+	if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
 	{
 		if(!openwarsztat)
 		{
@@ -49,7 +49,7 @@ YCMD:owarsztat(playerid, params[], help)
 	}
 	else
 	{
-		sendErrorMessage(playerid,"Nie jesteœ z FDU");
+		sendErrorMessage(playerid,"Twoja organizacja nie posiada biznesu Pay'N'Spray.");
 	}
 	return 1;
 }

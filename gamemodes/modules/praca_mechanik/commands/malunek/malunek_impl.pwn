@@ -26,7 +26,7 @@
 command_malunek_Impl(playerid, giveplayerid, paintjob)
 {
     new cost = 20_000;
-    if(IsAMechazordWarsztatowy(playerid))
+    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
     {
         cost /= 2;
     }
