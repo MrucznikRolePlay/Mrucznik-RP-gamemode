@@ -350,18 +350,9 @@ IsAClubBusinessOwner(playerid)
 	return 0;
 }
 
-IsAGunShopBusinessOwner(playerid) // TODO: remove
-{
-    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
-    {
-        return 1;
-    }
-	return 0;
-}
-
 IsAPoolBusinessOwner(playerid) // TODO: change
 {
-    return IsAPoolBusinessOwner(playerid);
+    return 1;
 }
 
 CheckFamilyChatPermission(playerid)

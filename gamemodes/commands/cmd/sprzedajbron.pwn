@@ -100,15 +100,6 @@ YCMD:sprzedajbron(playerid, params[], help)
         return 1;
     }
 
-    if(IsAGunShopBusinessOwner(playerid))
-    {
-        if(PlayerInfo[giveplayerid][pGunLic] != 1 || strcmp(x_weapon,"pistolety",true) == 0)
-        {
-            MruMessageFail(playerid, "Ten gracz nie ma licencji na broñ. Mo¿esz sprzedaæ mu tylko pistolety.");
-            return 1;
-        }
-    }
-
     if(IsPlayerInAnyVehicle(giveplayerid)) 
     {
         MruMessageFail(playerid, "Klient nie mo¿e byæ w pojeŸdzie.");
@@ -181,7 +172,7 @@ YCMD:sprzedajbron(playerid, params[], help)
     }
 
     // give weapon, etc
-    new legalWeapon = IsAGunShopBusinessOwner(playerid);
+    new legalWeapon = IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP);
     GivePlayerWeaponEx(giveplayerid, GunInfo[weaponid][GunId], GunInfo[weaponid][GunAmmo], legalWeapon);
     if(GunInfo[weaponid][GunId] == 39) //C4
     {
@@ -214,7 +205,6 @@ YCMD:sprzedajbron(playerid, params[], help)
     PlayerPlaySound(giveplayerid, 1052, 0.0, 0.0, 0.0);
 
     Log(payLog, INFO, "Gracz %s sprzeda³ graczowi %s broñ %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetWeaponLogName(GunInfo[weaponid][GunId], GunInfo[weaponid][GunAmmo]));
-
     return 1;
 }
 

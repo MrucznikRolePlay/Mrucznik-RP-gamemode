@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sprzedajmatsbot_Impl(playerid, mats)
 {
-    if(!IsAGunShopBusinessOwner(playerid))
+    if(!IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
         return noAccessMessage(playerid);
     if(mats < 5000 || mats > 50000) {
         sendErrorMessage(playerid, "Zakres od 5 000 do 50 000!");

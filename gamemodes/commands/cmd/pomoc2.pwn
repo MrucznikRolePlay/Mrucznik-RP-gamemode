@@ -107,7 +107,7 @@ YCMD:pomoc2(playerid, params[], help)
         SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz *** (/r)adio (/d)epartment /sluzba /finfo /sprzedajapteczke /togbw /togdepo");
         SendClientMessage(playerid, COLOR_GRAD5, "*** Lekarz ***/ulecz /apteczka /zastrzyk /diagnoza /zmienplec /kuracja /maseczka");
     }
-    if (IsAGunShopBusinessOwner(playerid))
+    if (IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
     {
         if(IsPlayerOrgLeader(playerid))
             SendClientMessage(playerid, COLOR_GRAD5, "*** GUNSHOP *** /sprzedajmatsbot /gspanel");

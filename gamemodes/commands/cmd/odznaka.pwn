@@ -125,19 +125,6 @@ YCMD:odznaka(playerid, params[], help)
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"wszytkimi jednostami s³u¿b. porz. podczas akcji. Prezydent.");
 						SendClientMessage(giveplayerid, COLOR_FBI, "|____ Federal Bureau of Investigation ____|");
 					}
-					if(IsAGunShopBusinessOwner(playerid))
-					{
-						SendClientMessage(giveplayerid, COLOR_GREEN, "|______________ Dokumenty GS ______________|");
-						format(string, sizeof(string), "Numer seryjny: %d%d%d%d", PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
-						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
-						SendClientMessage(giveplayerid, COLOR_WHITE, string);
-                        format(string, sizeof(string), "Stopieñ: [%d]", PlayerInfo[playerid][pRank]);
-						SendClientMessage(giveplayerid,COLOR_WHITE,string);
-						SendClientMessage(giveplayerid,COLOR_WHITE,"* Upowa¿nia do posiadania materia³ów i sprzeda¿y broni");
-						SendClientMessage(giveplayerid,COLOR_RED,"* Nie upowa¿nia do posiadania broni ciê¿kiej");
-						SendClientMessage(giveplayerid, COLOR_GREEN, "|_________________ Gunshop ________________|");
-					}
 					if(GetPlayerFraction(playerid) == FRAC_NG)
 					{
 						SendClientMessage(giveplayerid, COLOR_GREEN, "|______________ Odznaka NGSA ______________|");
@@ -236,6 +223,19 @@ YCMD:odznaka(playerid, params[], help)
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"Identyfikator uprawnia do obserwacji wszytkich dzia³añ");
 						SendClientMessage(giveplayerid,COLOR_GRAD2,"jedn. adm. pub. oraz otrzymywania informacji o tych dzia³aniach.");
 						SendClientMessage(giveplayerid, COLOR_NEWS, "|_____ San Andreas Network _____|");
+					}
+					if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
+					{
+						SendClientMessage(giveplayerid, COLOR_GREEN, "|______________ Dokumenty GS ______________|");
+						format(string, sizeof(string), "Numer seryjny: %d%d%d%d", PlayerInfo[playerid][pSex], PlayerInfo[playerid][pRank], PlayerInfo[playerid][pPnumber], PlayerInfo[playerid][pCrimes]);
+						SendClientMessage(giveplayerid, COLOR_WHITE, string);
+						format(string, sizeof(string), "Imiê i Nazwisko: %s.", sendername);
+						SendClientMessage(giveplayerid, COLOR_WHITE, string);
+                        format(string, sizeof(string), "Stopieñ: [%d]", PlayerInfo[playerid][pRank]);
+						SendClientMessage(giveplayerid,COLOR_WHITE,string);
+						SendClientMessage(giveplayerid,COLOR_WHITE,"* Upowa¿nia do posiadania materia³ów i sprzeda¿y broni");
+						SendClientMessage(giveplayerid,COLOR_RED,"* Nie upowa¿nia do posiadania broni ciê¿kiej");
+						SendClientMessage(giveplayerid, COLOR_GREEN, "|_________________ Gunshop ________________|");
 					}
 					//
 					format(string, sizeof(string), "* %s pokazuje dokumenty %s.", sendername ,giveplayer);
