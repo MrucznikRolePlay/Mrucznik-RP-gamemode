@@ -23,11 +23,15 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_wobiekt_Impl(playerid)
+command_wobiekt_Impl(playerid, giveplayerid, slot)
 {
-    new player, slot;
-	if (sscanf(params, "k<fix>d", player, slot)) return 1;
-	RemovePlayerAttachedObject(player, slot);
+	if(PlayerInfo[playerid][pAdmin] < 1)
+	{
+		noAccessMessage(playerid);
+		return 1;
+	}
+	RemovePlayerAttachedObject(giveplayerid, slot);
+	MruMessageGoodInfoF(playerid, "Usun¹³eœ obiekt ze slotu %d graczowi %s", slot, GetNick(giveplayerid));
 	return 1;
 }
 

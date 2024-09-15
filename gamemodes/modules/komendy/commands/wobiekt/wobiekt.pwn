@@ -53,8 +53,18 @@ YCMD:wobiekt(playerid, params[], help)
         sendTipMessage(playerid, "");
         return 1;
     }
-    
-    
+    //fetching params
+    new giveplayerid, slot;
+    if(sscanf(params, "k<fix>d", giveplayerid, slot))
+    {
+        sendTipMessage(playerid, "U¿yj /wobiekt [Nick/ID] [slot] ");
+        return 1;
+    }
+    if(!IsPlayerConnected(giveplayerid))
+    {
+        sendErrorMessage(playerid, "Nie znaleziono gracza o nicku/id podanym w parametrze.");
+        return 1;
+    }
     //command body
-    return command_wobiekt_Impl(playerid);
+    return command_wobiekt_Impl(playerid, giveplayerid, slot);
 }

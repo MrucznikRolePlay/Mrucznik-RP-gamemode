@@ -154,7 +154,6 @@
 #include "odmv\odmv.pwn"
 #include "kasa\kasa.pwn"
 #include "sprzedajbron\sprzedajbron.pwn"
-#include "poddajsie2\poddajsie2.pwn"
 #include "asystem\asystem.pwn"
 #include "fdaj\fdaj.pwn"
 #include "po\po.pwn"
@@ -180,7 +179,6 @@
 #include "wlsett\wlsett.pwn"
 #include "brama\brama.pwn"
 #include "spoiler\spoiler.pwn"
-#include "marcepan\marcepan.pwn"
 #include "getposp\getposp.pwn"
 #include "dajfiltr\dajfiltr.pwn"
 #include "rooc\rooc.pwn"
@@ -194,7 +192,6 @@
 #include "kostka2\kostka2.pwn"
 #include "dajdowozu\dajdowozu.pwn"
 #include "endround\endround.pwn"
-#include "opis2\opis2.pwn"
 #include "awans\awans.pwn"
 #include "pojazdygracza\pojazdygracza.pwn"
 #include "setcarvw\setcarvw.pwn"
@@ -269,7 +266,6 @@
 #include "walka\walka.pwn"
 #include "fbidrzwi\fbidrzwi.pwn"
 #include "setdrunk\setdrunk.pwn"
-#include "zbrojuj\zbrojuj.pwn"
 #include "depo\depo.pwn"
 #include "ban\ban.pwn"
 #include "banip\banip.pwn"
@@ -755,7 +751,6 @@ hook OnGameModeInit()
     command_odmv();
     command_kasa();
     command_sprzedajbron();
-    command_poddajsie2();
     command_asystem();
     command_fdaj();
     command_po();
@@ -781,7 +776,6 @@ hook OnGameModeInit()
     command_wlsett();
     command_brama();
     command_spoiler();
-    command_marcepan();
     command_getposp();
     command_dajfiltr();
     command_rooc();
@@ -795,7 +789,6 @@ hook OnGameModeInit()
     command_kostka2();
     command_dajdowozu();
     command_endround();
-    command_opis2();
     command_awans();
     command_pojazdygracza();
     command_setcarvw();
@@ -870,7 +863,6 @@ hook OnGameModeInit()
     command_walka();
     command_fbidrzwi();
     command_setdrunk();
-    command_zbrojuj();
     command_depo();
     command_ban();
     command_banip();

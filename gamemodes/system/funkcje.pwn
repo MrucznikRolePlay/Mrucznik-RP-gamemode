@@ -6938,16 +6938,16 @@ StopACallForPlayer(playerid)
 	SetPlayerSpecialAction(playerid,SPECIAL_ACTION_NONE);
 }
 
-bool:CzyGraczMaKontakty(playerid)
+CzyGraczMaKontakty(playerid)
 {
 	for(new i; i<MAX_KONTAKTY; i++)
 	{
 		if(Kontakty[playerid][i][eNumer] != 0)
 		{
-			return true;
+			return 1;
 		}
 	}
-	return false;
+	return 0;
 }
 
 PobierzSlotKontaktuPoNumerze(playerid, numer)
