@@ -1,0 +1,12 @@
+{
+    "name": "help",
+    "description": "Pokazuje dostêpne komendy.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "pomoc",
+        "komendy"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}

@@ -1,0 +1,11 @@
+{
+    "name": "rybypomoc",
+    "description": "Komendy dotycz¹ce ³owienia ryb.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "fishhelp"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}

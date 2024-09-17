@@ -65,7 +65,6 @@
 #include "kupdildo\kupdildo.pwn"
 #include "kuphelikopter\kuphelikopter.pwn"
 #include "check\check.pwn"
-#include "telefonpomoc\telefonpomoc.pwn"
 #include "barierka\barierka.pwn"
 #include "clearzone\clearzone.pwn"
 #include "losowypozar\losowypozar.pwn"
@@ -91,7 +90,6 @@
 #include "armor\armor.pwn"
 #include "id\id.pwn"
 #include "sprobuj\sprobuj.pwn"
-#include "carhelp\carhelp.pwn"
 #include "spoilery\spoilery.pwn"
 #include "zablokujtel\zablokujtel.pwn"
 #include "wylogujgracz\wylogujgracz.pwn"
@@ -434,7 +432,6 @@
 #include "wyjdz\wyjdz.pwn"
 #include "setplocal\setplocal.pwn"
 #include "ubranie\ubranie.pwn"
-#include "vopispomoc\vopispomoc.pwn"
 #include "togadminmess\togadminmess.pwn"
 #include "linie\linie.pwn"
 #include "mole\mole.pwn"
@@ -480,7 +477,6 @@
 #include "czyjtonumer\czyjtonumer.pwn"
 #include "wywaltelefon\wywaltelefon.pwn"
 #include "naucz\naucz.pwn"
-#include "wynajempomoc\wynajempomoc.pwn"
 #include "crimereport\crimereport.pwn"
 #include "raport\raport.pwn"
 #include "gotomark\gotomark.pwn"
@@ -510,7 +506,6 @@
 #include "zniszczobiekty\zniszczobiekty.pwn"
 #include "unrentroom\unrentroom.pwn"
 #include "adajrange\adajrange.pwn"
-#include "liderpomoc\liderpomoc.pwn"
 #include "skill\skill.pwn"
 #include "dodajweryfikacje\dodajweryfikacje.pwn"
 #include "icons\icons.pwn"
@@ -558,7 +553,6 @@
 #include "uprawnienia\uprawnienia.pwn"
 #include "dajkase\dajkase.pwn"
 #include "togwl\togwl.pwn"
-#include "pomocdom\pomocdom.pwn"
 #include "roleta\roleta.pwn"
 #include "zmiendomk\zmiendomk.pwn"
 #include "balans\balans.pwn"
@@ -580,7 +574,6 @@
 #include "stan\stan.pwn"
 #include "paj\paj.pwn"
 #include "laptop\laptop.pwn"
-#include "ircpomoc\ircpomoc.pwn"
 #include "fskin\fskin.pwn"
 #include "zaznacz\zaznacz.pwn"
 #include "gotoszpital\gotoszpital.pwn"
@@ -598,7 +591,6 @@
 #include "dopasuj\dopasuj.pwn"
 #include "lot\lot.pwn"
 #include "komendacmd\komendacmd.pwn"
-#include "opispomoc\opispomoc.pwn"
 #include "startskinevent\startskinevent.pwn"
 #include "wk\wk.pwn"
 #include "wezwijwoz\wezwijwoz.pwn"
@@ -661,7 +653,6 @@ hook OnGameModeInit()
     command_kupdildo();
     command_kuphelikopter();
     command_check();
-    command_telefonpomoc();
     command_barierka();
     command_clearzone();
     command_losowypozar();
@@ -687,7 +678,6 @@ hook OnGameModeInit()
     command_armor();
     command_id();
     command_sprobuj();
-    command_carhelp();
     command_spoilery();
     command_zablokujtel();
     command_wylogujgracz();
@@ -1030,7 +1020,6 @@ hook OnGameModeInit()
     command_wyjdz();
     command_setplocal();
     command_ubranie();
-    command_vopispomoc();
     command_togadminmess();
     command_linie();
     command_mole();
@@ -1076,7 +1065,6 @@ hook OnGameModeInit()
     command_czyjtonumer();
     command_wywaltelefon();
     command_naucz();
-    command_wynajempomoc();
     command_crimereport();
     command_raport();
     command_gotomark();
@@ -1106,7 +1094,6 @@ hook OnGameModeInit()
     command_zniszczobiekty();
     command_unrentroom();
     command_adajrange();
-    command_liderpomoc();
     command_skill();
     command_dodajweryfikacje();
     command_icons();
@@ -1154,7 +1141,6 @@ hook OnGameModeInit()
     command_uprawnienia();
     command_dajkase();
     command_togwl();
-    command_pomocdom();
     command_roleta();
     command_zmiendomk();
     command_balans();
@@ -1176,7 +1162,6 @@ hook OnGameModeInit()
     command_stan();
     command_paj();
     command_laptop();
-    command_ircpomoc();
     command_fskin();
     command_zaznacz();
     command_gotoszpital();
@@ -1194,7 +1179,6 @@ hook OnGameModeInit()
     command_dopasuj();
     command_lot();
     command_komendacmd();
-    command_opispomoc();
     command_startskinevent();
     command_wk();
     command_wezwijwoz();

@@ -1,0 +1,11 @@
+{
+    "name": "dompomoc",
+    "description": "Komendy dotycz¹ce domów.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "househelp"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}

@@ -1,0 +1,14 @@
+{
+    "name": "autopomoc",
+    "description": "Komendy dotycz¹ce pojazdów.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "carhelp",
+        "vehiclehelp",
+        "pojazdpomoc",
+        "samochodpomoc"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}

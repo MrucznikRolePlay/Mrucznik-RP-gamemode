@@ -25,12 +25,6 @@
 
 //
 //-----------------<[ Funkcje: ]>-------------------
-ShowOrgLeaderCommands(playerid)
-{
-    SendClientMessage(playerid, COLOR_GREEN,"___________________Lider____________________");
-    SendClientMessage(playerid, COLOR_WHITE, "Komendy: /orgpanel /sejf /lidercar /liderranga /pracownicy");
-}
-
 LoadOrganisations()
 {
     new query[512], rowCount;

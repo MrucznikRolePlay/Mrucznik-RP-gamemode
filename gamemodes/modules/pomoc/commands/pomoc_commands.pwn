@@ -30,42 +30,32 @@
 #include <YSI\y_hooks>
 
 //-------<[ include ]>-------
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-#include "bizlock\bizlock.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "obiz\obiz.pwn"
-#include "bizinfo\bizinfo.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "biz\biz.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "stworzbiznes\stworzbiznes.pwn"
+#include "rybypomoc\rybypomoc.pwn"
+#include "telefonpomoc\telefonpomoc.pwn"
+#include "bizpomoc\bizpomoc.pwn"
+#include "dompomoc\dompomoc.pwn"
+#include "autopomoc\autopomoc.pwn"
+#include "vopispomoc\vopispomoc.pwn"
+#include "wynajempomoc\wynajempomoc.pwn"
+#include "liderpomoc\liderpomoc.pwn"
+#include "ircpomoc\ircpomoc.pwn"
+#include "help\help.pwn"
+#include "opispomoc\opispomoc.pwn"
 
 
 //-------<[ initialize ]>-------
 hook OnGameModeInit()
 {
-    command_panelbiznesu();
-    command_quitbusiness();
-    command_zabierzbiznes();
-    command_gotobiz();
-    command_kupbiznes();
-    command_usunbiznes();
-    command_zlomujbiznes();
-    command_bizlock();
-    command_sprzedajbiznes();
-    command_bpracownicy();
-    command_obiz();
-    command_bizinfo();
-    command_dajbiznes();
-    command_biz();
-    command_edytujbiznes();
-    command_stworzbiznes();
+    command_rybypomoc();
+    command_telefonpomoc();
+    command_bizpomoc();
+    command_dompomoc();
+    command_autopomoc();
+    command_vopispomoc();
+    command_wynajempomoc();
+    command_liderpomoc();
+    command_ircpomoc();
+    command_help();
+    command_opispomoc();
     
 }

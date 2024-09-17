@@ -1,0 +1,11 @@
+{
+    "name": "wynajempomoc",
+    "description": "Pomoc odnoœnie wynajmu domów.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "renthelp"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}

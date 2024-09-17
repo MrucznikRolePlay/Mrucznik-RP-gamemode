@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  ircpomoc                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,56 +16,24 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 17.09.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-#include "bizlock\bizlock.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "obiz\obiz.pwn"
-#include "bizinfo\bizinfo.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "biz\biz.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "stworzbiznes\stworzbiznes.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_ircpomoc_Impl(playerid)
 {
-    command_panelbiznesu();
-    command_quitbusiness();
-    command_zabierzbiznes();
-    command_gotobiz();
-    command_kupbiznes();
-    command_usunbiznes();
-    command_zlomujbiznes();
-    command_bizlock();
-    command_sprzedajbiznes();
-    command_bpracownicy();
-    command_obiz();
-    command_bizinfo();
-    command_dajbiznes();
-    command_biz();
-    command_edytujbiznes();
-    command_stworzbiznes();
-    
+    SendClientMessage(playerid, COLOR_GREEN, "_______________________IRC POMOC_______________________");
+    SendClientMessage(playerid, COLOR_WHITE, "*** Wpisz komendê, aby uzyskaæ wiêcej pomocy.");
+    SendClientMessage(playerid, COLOR_WHITE, "** IRC ** (/irc join [nrkana³u] or /irc join [nrkana³u] [password]) (/irc leave)");
+    SendClientMessage(playerid, COLOR_WHITE, "** IRC ** (/irc Password [nrkana³u])  (/irc NeedPass [nrkana³u])  (/irc Lock [nrkana³u])");
+    SendClientMessage(playerid, COLOR_WHITE, "** IRC ** (/irc Admins)  (/irc MOTD [motdtext]) (/irc status [nrkana³u]) (/i [text])");
+    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /autopomoc /bizpomoc /dompomoc /liderpomoc /opispomoc /rybypomoc /telefonpomoc");
+    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /vopispomoc /wynajempomoc");
+    SendClientMessage(playerid, COLOR_GREEN, "_______________________________________________________");
+    return 1;
 }
+
+//end

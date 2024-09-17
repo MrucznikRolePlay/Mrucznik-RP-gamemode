@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                    help                                                   //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,45 +27,36 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "panelbiznesu\panelbiznesu.pwn"
-#include "quitbusiness\quitbusiness.pwn"
-#include "zabierzbiznes\zabierzbiznes.pwn"
-#include "gotobiz\gotobiz.pwn"
-#include "kupbiznes\kupbiznes.pwn"
-#include "usunbiznes\usunbiznes.pwn"
-#include "zlomujbiznes\zlomujbiznes.pwn"
-#include "bizlock\bizlock.pwn"
-#include "sprzedajbiznes\sprzedajbiznes.pwn"
-#include "bpracownicy\bpracownicy.pwn"
-#include "obiz\obiz.pwn"
-#include "bizinfo\bizinfo.pwn"
-#include "dajbiznes\dajbiznes.pwn"
-#include "biz\biz.pwn"
-#include "edytujbiznes\edytujbiznes.pwn"
-#include "stworzbiznes\stworzbiznes.pwn"
-
+#include "help_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_help()
 {
-    command_panelbiznesu();
-    command_quitbusiness();
-    command_zabierzbiznes();
-    command_gotobiz();
-    command_kupbiznes();
-    command_usunbiznes();
-    command_zlomujbiznes();
-    command_bizlock();
-    command_sprzedajbiznes();
-    command_bpracownicy();
-    command_obiz();
-    command_bizinfo();
-    command_dajbiznes();
-    command_biz();
-    command_edytujbiznes();
-    command_stworzbiznes();
+    new command = Command_GetID("help");
+
+    //aliases
+    Command_AddAlt(command, "pomoc");
+    Command_AddAlt(command, "komendy");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:help(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Pokazuje dostêpne komendy.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_help_Impl(playerid);
 }
