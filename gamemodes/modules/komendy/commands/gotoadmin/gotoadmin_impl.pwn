@@ -27,7 +27,7 @@ command_gotoadmin_Impl(playerid)
 {
     if(PlayerInfo[playerid][pAdmin] < 1) return 1;
     SetPlayerVirtualWorld(playerid, 5000);
-	SetPlayerPos(playerid, 3524.550292, -236.021621, 35.619190);
+	SetPlayerPos(playerid, 3524.550292, -36.021621, 35.619190);
     Wchodzenie(playerid);
     return 1;
 }

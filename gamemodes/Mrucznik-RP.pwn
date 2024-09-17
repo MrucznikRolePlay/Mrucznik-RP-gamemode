@@ -31,7 +31,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 		Simeone - Kox przez x
 		Creative - mo¿liwe ¿e coœ potrafi
 		Sanda³ - skleci³ modu³ animacji
-
 */
 //----------------------------------------------------*------------------------------------------------------//
 
