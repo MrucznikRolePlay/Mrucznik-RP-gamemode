@@ -311,7 +311,6 @@
 #include "licencje\licencje.pwn"
 #include "lock\lock.pwn"
 #include "paliwo\paliwo.pwn"
-#include "pomoc2\pomoc2.pwn"
 #include "wyprowadz\wyprowadz.pwn"
 #include "czas\czas.pwn"
 #include "kod\kod.pwn"
@@ -899,7 +898,6 @@ hook OnGameModeInit()
     command_licencje();
     command_lock();
     command_paliwo();
-    command_pomoc2();
     command_wyprowadz();
     command_czas();
     command_kod();
