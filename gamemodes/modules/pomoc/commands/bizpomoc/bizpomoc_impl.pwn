@@ -31,7 +31,7 @@ command_bizpomoc_Impl(playerid)
     SendClientMessage(playerid, COLOR_WHITE, "** BIZNES Los Santos ** /bizlock /biz /obiz /bizpanel");
     SendClientMessage(playerid, COLOR_WHITE, "** BIZNES Vice City ** /orgbiz(orgbiznes)");
     SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /autopomoc /dompomoc /ircpomoc /liderpomoc /opispomoc /rybypomoc /telefonpomoc");
-    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /vopispomoc /wynajempomoc");
+    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc");
     SendClientMessage(playerid, COLOR_GREEN, "_______________________________________________________");
     return 1;
 }

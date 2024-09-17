@@ -29,7 +29,7 @@ command_telefonpomoc_Impl(playerid)
     SendClientMessage(playerid, COLOR_WHITE, "*** Wpisz komendê, aby uzyskaæ wiêcej pomocy.");
     SendClientMessage(playerid, COLOR_WHITE, "** TELEFON ** /dzwon | na policje:'/dzwon 911' | /sms /resms (/od)bierz (/z)akoncz /numer /wizytowka /kontakty");
     SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /autopomoc /bizpomoc /dompomoc /ircpomoc /liderpomoc /opispomoc /rybypomoc");
-    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /vopispomoc /wynajempomoc");
+    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc");
     SendClientMessage(playerid, COLOR_GREEN, "_____________________________________________________");
     return 1;
 }

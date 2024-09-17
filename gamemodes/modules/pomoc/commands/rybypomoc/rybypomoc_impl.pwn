@@ -31,7 +31,7 @@ command_rybypomoc_Impl(playerid)
     SendClientMessage(playerid, COLOR_WHITE, "** WÊDKOWANIE ** /wywalrybe (wywala ostatni¹ z³apan¹ rybê) /wywalryby (wywala wszystkie ryby)");
     SendClientMessage(playerid, COLOR_WHITE, "** WÊDKOWANIE ** /sprzedajrybe (sprzedaje wybran¹ rybê w sklepie 24/7)");
     SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /autopomoc /bizpomoc /dompomoc /ircpomoc /liderpomoc /opispomoc /telefonpomoc");
-    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /vopispomoc /wynajempomoc");
+    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc");
     SendClientMessage(playerid, COLOR_GREEN, "______________________________________________________");
     return 1;
 }
