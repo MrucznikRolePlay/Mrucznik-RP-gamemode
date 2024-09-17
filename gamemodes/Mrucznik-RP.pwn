@@ -1624,7 +1624,6 @@ public OnPlayerDisconnect(playerid, reason)
 	TransportDuty[playerid] = 0;
 	JobDuty[playerid] = 0;
     gPlayerLogged[playerid] = 0; //wylogowany
-    MRP_PremiumHours[playerid] = 0;
 	return 1;
 }
 public OnPlayerEnterDynamicCP(playerid, checkpointid)
@@ -3509,7 +3508,6 @@ PayDay()
 					PlayerInfo[i][pPayCheck] = 0;
 					PlayerInfo[i][pConnectTime] += 1;
 					PlayerGames[i] = 0;
-                    MRP_PremiumHours[i]++;
 					if(PlayerInfo[i][pBP] >= 1)
 					{
 					    PlayerInfo[i][pBP]--;

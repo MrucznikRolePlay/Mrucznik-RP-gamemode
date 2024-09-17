@@ -168,8 +168,6 @@ new bool:GATE_ORGSAD_S[2]={false, false};
 //04.12
 new PlayerDesc[MAX_PLAYERS][128 char];
 new CarDesc[MAX_VEHICLES][128];
-new MRP_PremiumHours[MAX_PLAYERS];
-new bool:InitMyItems[MAX_PLAYERS];
 //03.12
 //8.12 2016
 new bool:RANG_ApplyChanges[2][MAX_ORG];
@@ -1337,10 +1335,6 @@ ZerujZmienne(playerid)
 
     PlayerInfo[playerid][pCarSlots] = 4;
 
-
-
-    MRP_PremiumHours[playerid]=0;
-    InitMyItems[playerid] = false;
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;
