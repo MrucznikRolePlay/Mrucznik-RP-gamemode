@@ -102,7 +102,6 @@
 #include "dajlideraorg\dajlideraorg.pwn"
 #include "usunzaufanego\usunzaufanego.pwn"
 #include "wejdzw\wejdzw.pwn"
-#include "addshelp\addshelp.pwn"
 #include "kanister\kanister.pwn"
 #include "staty2\staty2.pwn"
 #include "checkcar\checkcar.pwn"
@@ -699,7 +698,6 @@ hook OnGameModeInit()
     command_dajlideraorg();
     command_usunzaufanego();
     command_wejdzw();
-    command_addshelp();
     command_kanister();
     command_staty2();
     command_checkcar();

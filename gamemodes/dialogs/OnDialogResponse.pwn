@@ -7439,7 +7439,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							//PlayerInfo[playerid][pZiolo] -= dragdrag;
 							PlayerInfo[playerid][pDrugs] -= dragdrag;
 							ZabierzKase(playerid, dmdm);
-							format(str3, sizeof(str3), "Kupi³eœ %d level Sejfu za %d$, %d dragów oraz %d matsów. Aby go u¿yæ wpisz /sejf.", Dom[dom][hSejf], dmdm, 4*Dom[dom][hSejf], matsmats);
+							format(str3, sizeof(str3), "Kupi³eœ %d level Sejfu za %d$, %d dragów oraz %d matsów. Aby go u¿yæ wpisz /sejfpanel.", Dom[dom][hSejf], dmdm, 4*Dom[dom][hSejf], matsmats);
 							SendClientMessage(playerid, COLOR_P@, str3);
 							format(str3, sizeof(str3), "Pojemnoœæ sejfu: Kasa: %d$, Materia³y: %d, Marihuana: %d, Heroina: %d", dmdm, matsmats*2, dragdrag*5, dragdrag*5);
 							SendClientMessage(playerid, COLOR_P@, str3);
@@ -7474,7 +7474,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							//PlayerInfo[playerid][pZiolo] -= dragdrag;
 							PlayerInfo[playerid][pDrugs] -= dragdrag;
 							ZabierzKase(playerid, dmdm);
-							format(str3, sizeof(str3), "Kupi³eœ %d level Sejfu za %d$, %d dragów oraz %d matsów. Aby go u¿yæ wpisz /sejf.", Dom[dom][hSejf], 1000000*(Dom[dom][hSejf]-10), 4*Dom[dom][hSejf], 5000*Dom[dom][hSejf]);
+							format(str3, sizeof(str3), "Kupi³eœ %d level Sejfu za %d$, %d dragów oraz %d matsów. Aby go u¿yæ wpisz /sejfpanel.", Dom[dom][hSejf], 1000000*(Dom[dom][hSejf]-10), 4*Dom[dom][hSejf], 5000*Dom[dom][hSejf]);
 							SendClientMessage(playerid, COLOR_P@, str3);
 							format(str3, sizeof(str3), "Pojemnoœæ sejfu: Kasa: %d$, Materia³y: %d, Marihuana: %d, Heroina: %d", dmdm, 100000*((Dom[dom][hSejf]-10)+1), dragdrag*10, dragdrag*10);
 							SendClientMessage(playerid, COLOR_P@, str3);
