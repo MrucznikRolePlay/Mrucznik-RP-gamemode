@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                                     a                                                     //
+//                                                  orgpomoc                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -17,71 +17,15 @@
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
 // Autor: mrucznik
-// Data utworzenia: 15.09.2024
+// Data utworzenia: 17.09.2024
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_pomoc2_Impl(playerid)
+command_orgpomoc_Impl(playerid)
 {
-    SendClientMessage(playerid, COLOR_WHITE, "________________________POMOC_______________________________");
-    SendClientMessage(playerid, COLOR_WHITE, " *** KONTO *** /czas /stats /skill /nextlevel /ulepszenia /resetulepszen(100k) /personalizuj /zmienspawn /kp(premium)");
-    SendClientMessage(playerid, COLOR_WHITE, " *** PREMIUM *** /dodatki /zdejmij /skiny /premiumskin /kp");
-    SendClientMessage(playerid, COLOR_WHITE, " *** CMD *** /id /plac /datek /upusc /wezwij /pobij /lotto /kup /licencje /pl(pokazlicencje) /opis /vopis /ss(screenshot)");
-    SendClientMessage(playerid, COLOR_WHITE, " *** CMD *** /akceptuj /anuluj /zaznacz /apteczka /kanister /kontrakt /muzyka /naprawpojazd /pancerz /pij /tankuj /ugotuj");
-    SendClientMessage(playerid, COLOR_WHITE, " *** CMD *** /orgs(organizacje /anim(animacje) /stopanim /wb(wyrzucbronie) /wywalmaterialy /wywaldragi /wyœcigi");
-    SendClientMessage(playerid, COLOR_WHITE, " *** BANK *** /stan /wplac /wyplac /bank /przelew /kb(kontobankowe)");
-    SendClientMessage(playerid, COLOR_WHITE, " *** CHAT *** (/w)iadomosc (/cb)radio (/k)rzyk (/s)zept (/og)loszenie (/l)ocal (/b) (/n)ewbie (/o)oc /me /do /spróbuj");
-    SendClientMessage(playerid, COLOR_WHITE, " *** BLOKADY *** /togooc /togdepo /togfam /togw /togtel /toglicznik /tognewbie /togadmin /togopis /togvopis");
-    SendClientMessage(playerid, COLOR_WHITE, "");
-    SendClientMessage(playerid, COLOR_WHITE, " *** INNE *** /autopomoc /bizpomoc /dompomoc /ircpomoc /liderpomoc /opispomoc /rybypomoc /telefonpomoc");
-    SendClientMessage(playerid, COLOR_WHITE, " *** INNE *** /rybypomoc /telefonpomoc /vopispomoc /wynajempomoc");
-    SendClientMessage(playerid, COLOR_WHITE, " *** INNE *** Wsparcie i zg³oszenia graczy: /zapytaj /report");
-    SendClientMessage(playerid, COLOR_WHITE, "_______________________________________________________");
-
-
-
-
-
-
-
-    SendClientMessage(playerid, COLOR_GRAD1,"*** KONTO *** /stats /nextlevel /ulepszenia /personalizuj");
-    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /plac /datek /czas /kup /wyrzucbronie /dajkluczyki /id /pij /muzyka /pokazlicencje /ubranie");
-    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /resetulepszen(100k) /lock /skill /licencje /lotto /zmienspawn /stopani /pobij /wyscigi");
-    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** /report /anuluj /akceptuj /wywal /kontrakt /tankuj /kanister /oczysc /wezwij /organizacje");
-    SendClientMessage(playerid, COLOR_GRAD2,"*** CMD *** (/p)rzedmioty /naprawpojazd /wywalmaterialy /wywaldragi /ugotuj /screenshot /pancerz"); 
-    SendClientMessage(playerid, COLOR_GRAD3,"*** CHAT *** (/w)iadomosc (/o)oc (/k)rzyk (/s)zept (/l)ocal (/b) (/og)loszenie (/f)amily /me (/n)ewbie /sprobuj /apteczka");
-    SendClientMessage(playerid, COLOR_GRAD3,"*** BLOKADY *** /togooc /togdepo /togfam /togw /togtel /toglicznik /tognewbie /togadmin /togopis /togvopis");
-    SendClientMessage(playerid, COLOR_GRAD4,"*** BANK *** /stan /wyplac /bank /przelew /kb(kontobankowe)");
-
-    switch(GetPlayerJob(playerid))
-    {
-        case JOB_LOWCA: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /namierz /wanted /poddajsie /zlecenie (/m)egafon"); }
-        case JOB_LAWYER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /uwolnij /oczyscmdc /zbijwl /wanted /kuppozwolenie"); }
-		case JOB_PROSTITUTE: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sex"); }
-		case JOB_DRUG_DEALER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /sprzedajdragi /get drugs /wezdragi /diluj"); }
-		case JOB_CARTHIEF: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /ukradnij"); }
-		// case JOB_REPORTER: { }
-		case JOB_MECHANIC: 
-        { 
-            SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /napraw /tankowanie /sluzba /sprawdzneon /sprzedajzestaw /sprzedajneon");
-            SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /nitro /hydraulika /maluj /felga /zderzaki /kolory /malunki /felgi");
-        }
-		case JOB_SMUGGLER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /sprzedajprzemyt /przemyt /zrzut /sprzedajkontrabande"); }
-		case JOB_GUN_DEALER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /materialy /sprzedajbron"); }
-		case JOB_DRIVER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /kurs /duty /businfo /trasa /zakoncztrase /zd "); }
-		case JOB_MEDIC: { 
-            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sluzba /czysc /wez gasnice /wez mundur /rezonans /zmienplec");
-            SendClientMessage(playerid, COLOR_GRAD5, "*** PRACA *** /sprzedajapteczke /ulecz /apteczka /zastrzyk /diagnoza /kuracja /maseczka"); 
-        }
-		case JOB_BOXER: { SendClientMessage(playerid, COLOR_GRAD5,"*** PRACA *** /walka /boxstats /naucz"); }
-		// case JOB_RESERVED_1: { }
-		// case JOB_RESERVED_2: { }
-		// case JOB_RESERVED_3: { }
-		case JOB_TRUCKER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /zlecenie - nowe zlecenia s¹ od wy¿szego skilla!"); }
-    }
-    
+    SendClientMessage(playerid, COLOR_GREEN, "______________________ORG POMOC______________________");
     if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9) {
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** /wywiad /news [text] /reflektor /studia /glosnik /radiostacja");
     SendClientMessage(playerid,COLOR_GRAD5,"*** SAN NEWS *** P³atny numer SMS - /sms [od 100 do 150], dostajesz tyle stówek ile jest po 1 (nr. 125 to 25 * 100 = 2500$)");
@@ -130,12 +74,7 @@ command_pomoc2_Impl(playerid)
         else
             SendClientMessage(playerid, COLOR_GRAD5, "*** GUNSHOP *** /sprzedajmatsbot");
     }
-    if (PlayerInfo[playerid][pAdmin] >= 1)
-    {
-        SendClientMessage(playerid, COLOR_GRAD6, "*** ADMIN *** (/a)dmin (/ah)elp");
-    }
-    SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** /telefonpomoc /dompomoc /wynajempomoc /bizpomoc /liderpomoc /rybypomoc /ircpomoc /anim");
-    SendClientMessage(playerid, COLOR_GRAD6,"*** INNE *** Pomoc od supportu: {FFFFFF}/zapytaj");
+    SendClientMessage(playerid, COLOR_GREEN, "_______________________________________________________");
     return 1;
 }
 

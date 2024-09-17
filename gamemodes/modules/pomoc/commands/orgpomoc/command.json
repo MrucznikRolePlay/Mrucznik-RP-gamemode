@@ -1,0 +1,17 @@
+{
+    "name": "orgpomoc",
+    "description": "Komendy dotycz¹ce frakcji/organizacji.",
+    "permissions": [],
+    "author": "mrucznik",
+    "aliases": [
+        "orghelp",
+        "organizacjapomoc",
+        "organizationhelp",
+        "frachelp",
+        "fractionhelp",
+        "fracpomoc",
+        "frakcjapomoc"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}

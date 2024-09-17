@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 pracapomoc                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,39 +27,36 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "rybypomoc\rybypomoc.pwn"
-#include "telefonpomoc\telefonpomoc.pwn"
-#include "orgpomoc\orgpomoc.pwn"
-#include "bizpomoc\bizpomoc.pwn"
-#include "dompomoc\dompomoc.pwn"
-#include "autopomoc\autopomoc.pwn"
-#include "vopispomoc\vopispomoc.pwn"
-#include "pracapomoc\pracapomoc.pwn"
-#include "wynajempomoc\wynajempomoc.pwn"
-#include "liderpomoc\liderpomoc.pwn"
-#include "ircpomoc\ircpomoc.pwn"
-#include "help\help.pwn"
-#include "opispomoc\opispomoc.pwn"
-
+#include "pracapomoc_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_pracapomoc()
 {
-    command_rybypomoc();
-    command_telefonpomoc();
-    command_orgpomoc();
-    command_bizpomoc();
-    command_dompomoc();
-    command_autopomoc();
-    command_vopispomoc();
-    command_pracapomoc();
-    command_wynajempomoc();
-    command_liderpomoc();
-    command_ircpomoc();
-    command_help();
-    command_opispomoc();
+    new command = Command_GetID("pracapomoc");
+
+    //aliases
+    Command_AddAlt(command, "jobhelp");
+    Command_AddAlt(command, "jobpomoc");
     
+
+    //permissions
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:pracapomoc(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Komendy dotycz¹ce pracy cywila.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_pracapomoc_Impl(playerid);
 }

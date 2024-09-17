@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                   pomoc2                                                  //
+//                                                  orgpomoc                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,17 +28,21 @@
 
 
 //-------<[ include ]>-------
-#include "pomoc2_impl.pwn"
+#include "orgpomoc_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_pomoc2()
+command_orgpomoc()
 {
-    new command = Command_GetID("pomoc2");
+    new command = Command_GetID("orgpomoc");
 
     //aliases
-    Command_AddAlt(command, "help");
-    Command_AddAlt(command, "pomoc");
-    Command_AddAlt(command, "komendy");
+    Command_AddAlt(command, "orghelp");
+    Command_AddAlt(command, "organizacjapomoc");
+    Command_AddAlt(command, "organizationhelp");
+    Command_AddAlt(command, "frachelp");
+    Command_AddAlt(command, "fractionhelp");
+    Command_AddAlt(command, "fracpomoc");
+    Command_AddAlt(command, "frakcjapomoc");
     
 
     //permissions
@@ -49,15 +53,15 @@ command_pomoc2()
 }
 
 //-------<[ command ]>-------
-YCMD:pomoc2(playerid, params[], help)
+YCMD:orgpomoc(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "");
+        sendTipMessage(playerid, "Komendy dotycz¹ce frakcji/organizacji.");
         return 1;
     }
     
     
     //command body
-    return command_pomoc2_Impl(playerid);
+    return command_orgpomoc_Impl(playerid);
 }
