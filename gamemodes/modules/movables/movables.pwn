@@ -39,6 +39,8 @@ CreateBox(objectid, type, value, Float:x, Float:y, Float:z, Float:rx=0.0, Float:
 	Boxes[id][box_y] = y;
 	Boxes[id][box_z] = z;
 	Boxes[id][box_bonus] = value;
+
+	if(maxBoxID < id) maxBoxID = id;
 	return id;
 }
 
@@ -49,9 +51,11 @@ DestroyBox(boxid)
 	{
 		DestroyDynamicObject(Boxes[boxid][box_object]);
 	}
-	if(Boxes[boxid][box_player] != -1)
+	new playerid = Boxes[boxid][box_player];
+	if(playerid != -1)
 	{
 		RemovePlayerAttachedObject(Boxes[boxid][box_player], Boxes[boxid][box_attachedSlot]);
+		carryingBox[playerid] = -1;
 	}
 	return 1;
 }
@@ -85,6 +89,8 @@ PickupBox(playerid, boxid)
 DropBox(playerid)
 {
 	new boxid = carryingBox[playerid];
+	if(boxid == -1) return -1;
+
 	new Float:x, Float:y, Float:z, Float:angle;
 	GetPlayerPos(playerid, x, y, z);
 	GetPlayerFacingAngle(playerid, angle);
@@ -93,7 +99,7 @@ DropBox(playerid)
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 
 	defer AfterDropBox(playerid, boxid, x, y, z, angle);
-	return 1;
+	return boxid;
 }
 
 timer AfterDropBox[113](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)

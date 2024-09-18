@@ -24,7 +24,8 @@
 //------------------<[ Enumy: ]>--------------------
 enum eBoxType {
     BOX_TYPE_NONE,
-    BOX_TYPE_CONVOY
+    BOX_TYPE_CONVOY,
+    BOX_TYPE_CONTRABAND
 }
 
 enum eBox 
@@ -41,6 +42,8 @@ enum eBox
 }
 
 //-----------------<[ Zmienne: ]>-------------------
+new maxBoxID;
+
 new Boxes[MAX_MOVABLES][eBox];
 new carryingBox[MAX_PLAYERS];
 

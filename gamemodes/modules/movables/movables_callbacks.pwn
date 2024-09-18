@@ -31,13 +31,21 @@
 OnPlayerDropMovableObject(playerid, boxid, boxType, Float:x, Float:y, Float:z, Float:angle)
 {
 	if(Convoy_OnPlayerDropMovable(playerid, boxid, boxType, x, y, z, angle)) return;
+	if(Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, x, y, z, angle)) return;
 	return;
 }
 
 OnPlayerPickupMovableObject(playerid, boxid, boxType)
 {
 	if(Convoy_OnPlayerPickupMovable(playerid, boxid, boxType)) return;
+	if(Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)) return;
 	return;
+}
+
+OnPlayerShootMovableObject(playerid, weaponid, boxid, boxType, Float:x, Float:y, Float:z)
+{
+	if(Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, x, y, z)) return 1;
+	return 0;
 }
 
 //-----------------<[ Hooki: ]>-----------------
@@ -59,6 +67,18 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 		}
 	}
 	return 1;
+}
+
+Movable_OnPlayerShootObject(playerid, weaponid, STREAMER_TAG_OBJECT:objectid, Float:x, Float:y, Float:z)
+{
+	for(new i; i<maxBoxID; i++)
+	{
+		if(Boxes[i][box_object] == objectid)
+		{
+			return OnPlayerShootMovableObject(playerid, weaponid, i, Boxes[i][box_type], x, y, z);
+		}
+	}
+	return 0;
 }
 
 hook OnPlayerDeath(playerid)

@@ -306,4 +306,50 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 	return 1;
 }
 
+Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z, Float:angle)
+{
+	if(boxType != BOX_TYPE_CONTRABAND)
+	{
+		return 0;
+	}
+
+	
+	return 1;
+}
+
+Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
+{
+	if(boxType != BOX_TYPE_CONTRABAND)
+	{
+		return 0;
+	}
+
+	
+	return 1;
+}
+
+Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:y, Float:z)
+{
+	if(boxType != BOX_TYPE_CONTRABAND)
+	{
+		return 0;
+	}
+
+	new rand = random(5);
+	if(rand == 0) // 20% chances to take damage
+	{
+		Boxes[boxid][box_bonus] -= 1;
+		if(Boxes[boxid][box_bonus] <= 0)
+		{
+			DestroyBox(boxid);
+			PlayerPlaySound(playerid, 1131, x, y, z); // hit wooden object? (SOUND_AMMUNATION_GUN_COLLISION)
+		}
+		else
+		{
+			PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED)
+		}
+	}
+	return 1;
+}
+
 //end

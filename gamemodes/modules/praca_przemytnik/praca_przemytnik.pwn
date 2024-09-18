@@ -325,7 +325,8 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index)
 	DestroyDynamicObject(parachuteObject);
 
 	SmugglingAction[actionID][ContrabandFlareObjects][index] = CreateDynamicObject(18728, x, y, z, 0.0, 0.0, 0.0, 0, 0);
-	SmugglingAction[actionID][ContrabandDropObjects][index] = CreateDynamicObject(1575, x, y, z, 0.0, 0.0, 0.0, 0, 0);
+	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND, BIG_PACKAGE_CONTRABAND_AMMOUNT, x, y, z);
+	SmugglingAction[actionID][ContrabandDropObjects][index] = boxid;
 }
 
 MarcepanPhone(playerid, color, string[])
