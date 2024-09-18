@@ -59,23 +59,13 @@ command_przemyt_Impl(playerid)
             }
             case SMUGGLING_STAGE_DROP:
             {
+                // TODO: info 
                 return przemyt_StageDrop(playerid, actionID);
             }
             case SMUGGLING_STAGE_GATHER:
             {
+                // TODO: info
                 return przemyt_StageGather(playerid, actionID);
-            }
-            case SMUGGLING_STAGE_DOCUMENTS:
-            {
-                return przemyt_StageDocuments(playerid, actionID);
-            }
-            case SMUGGLING_STAGE_SEND:
-            {
-                return przemyt_StageSend(playerid, actionID);
-            }
-            case SMUGGLING_STAGE_DELIVERED:
-            {
-                return przemyt_StageDelivered(playerid, actionID);
             }
             default:
             {
