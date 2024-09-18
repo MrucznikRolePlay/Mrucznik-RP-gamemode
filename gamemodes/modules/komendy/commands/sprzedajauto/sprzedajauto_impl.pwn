@@ -73,7 +73,6 @@ command_sprzedajauto_Impl(playerid, params[256])
 		odczekajTimer[playerid] = SetTimerEx("odczekaj15sec", 15000, false, "i", playerid);
 	    format(string, sizeof(string), "%s oferuje ci sprzeda¿ %s za %d$. Jeœli chcesz kupiæ to auto wpisz /akceptuj pojazd aby kupiæ.", sendername, VehicleNames[GetVehicleModel(GetPlayerVehicleID(playerid))-400], cena);
         SendClientMessage(playa, 0xFFC0CB, string);
-        //TODO
         if(!IsPlayerPremiumOld(playa))
         {
             if(CarData[vehid][c_Neon] != 18652 && CarData[vehid][c_Neon] != 0)

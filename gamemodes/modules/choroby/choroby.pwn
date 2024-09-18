@@ -335,7 +335,7 @@ CurePlayer(playerid, eDiseases:disease)
 //-----------------<[ Disease effects: ]>-------------------
 AddEffect(eDiseases:disease, activateCallback[32], deactivateCallback[32], minTime, timeRange, bool:pernament=false, Float:contagiousRange=0.0, infectionChance=0, additionalValue=0)
 {
-	new array[eEffectData]; //TODO: Czy mo¿na to zrobiæ inicjalizacj¹ {}?
+	new array[eEffectData];
 	strcat(array[ActivateCallback], activateCallback, 32);
 	strcat(array[DeactivateCallback], deactivateCallback, 32);
 	array[MinTime] = minTime;

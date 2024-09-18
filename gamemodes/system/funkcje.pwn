@@ -4532,7 +4532,6 @@ MRP_ShopPurchaseCar(playerid, model, cena)
 	//SendClientMessage(playerid,COLOR_NEWS, komunikat);
 
 	Log(premiumLog, INFO, "%s kupi³ unikatowy pojazd %s za %dMC", GetPlayerLogName(playerid), GetVehicleLogName(CarData[carid][c_ID]), cena);
-    //TODO
     if(carid >= MAX_CARS)
     {
         sendErrorMessage(playerid, "Nie mo¿na stworzyæ pojazdu! Mo¿liwe przepe³nienie, auto zosta³o kupione lecz nie mo¿esz go u¿yæ.");
@@ -4662,7 +4661,6 @@ KupowaniePojazdu(playerid, model, kolor1, kolor2, cena)
             ZabierzKase(playerid, cena);
 
 			Log(payLog, INFO, "%s kupi³ pojazd %s za %d$", GetPlayerLogName(playerid), GetVehicleLogName(CarData[carid][c_ID]), cena);
-            //TODO
             if(carid >= MAX_CARS) return SendClientMessage(playerid, COLOR_PANICRED, "Nie mo¿na stworzyæ pojazdu! Mo¿liwe przepe³nienie, auto zosta³o kupione lecz nie mo¿esz go u¿yæ.");
 
 			PutPlayerInVehicleEx(playerid, CarData[carid][c_ID], 0);
@@ -10066,7 +10064,7 @@ public TJD_UnloadTime(playerid, count, maxcount)
         SetPVarInt(playerid, "trans", 0);
         new str[64], Float:speed, ile;
         DisablePlayerCheckpoint(playerid);
-		if(idx == -1) return; //TODO: check
+		if(idx == -1) return;
 
         if(TransportJobData[idx][eTJDStartX] == 0.0) speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[0][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[0][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[0][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));
         else speed = floatdiv(VectorSize(TransportJobData[idx][eTJDEndX] - TransportJobData[idx][eTJDStartX], TransportJobData[idx][eTJDEndY] - TransportJobData[idx][eTJDStartY], TransportJobData[idx][eTJDEndZ] - TransportJobData[idx][eTJDStartZ]),(gettime()-GetPVarInt(playerid, "transtime")));

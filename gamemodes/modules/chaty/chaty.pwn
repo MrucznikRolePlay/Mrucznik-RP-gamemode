@@ -426,7 +426,7 @@ stock ChatIC(playerid, text[])
 	return 1;
 }
 
-stock ActorChat(actorid, actor[], text[]) //TODO: better actor chat
+stock ActorChat(actorid, actor[], text[])
 {
 	new Float:x, Float:y, Float:z;
 	GetDynamicActorPos(actorid, x, y, z);

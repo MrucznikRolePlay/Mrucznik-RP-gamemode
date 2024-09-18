@@ -192,22 +192,4 @@ przemyt_StageGather(playerid, actionID)
     return 1;
 }
 
-przemyt_StageDocuments(playerid, actionID)
-{
-    #pragma unused playerid, actionID // TODO
-    return 1;
-}
-
-przemyt_StageSend(playerid, actionID)
-{
-    #pragma unused playerid, actionID // TODO
-    return 1;
-}
-
-przemyt_StageDelivered(playerid, actionID)
-{
-    #pragma unused playerid, actionID // TODO
-    return 1;
-}
-
 //end

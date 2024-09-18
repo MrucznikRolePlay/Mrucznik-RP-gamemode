@@ -5435,7 +5435,7 @@ public OnPlayerText(playerid, text[])
 		new SanNews_nick[MAX_PLAYER_NAME];
 		GetPlayerName(playerid, SanNews_nick, sizeof(SanNews_nick));
 		if(PlayerInfo[playerid][pMember] == 9 || PlayerInfo[playerid][pLider] == 9)
-		{//todo
+		{
 			if(strlen(text) < 78)
 			{
 				if(strfind(text, "@here", true) != -1 || strfind(text, "@everyone", true) != -1 || strfind(text, "<@", true) != -1) 

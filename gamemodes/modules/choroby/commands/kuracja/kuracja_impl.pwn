@@ -132,8 +132,6 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
         return 1;
     }
 
-    //TODO: Check czy gracz jest w szpitalu
-
     new cost = money + DiseaseData[diseaseID][CureCost];
     new chance = 100 - DiseaseData[diseaseID][DrugResistance];
     

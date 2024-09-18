@@ -75,7 +75,7 @@ enum ePrzedmiotyPremium
 }
 
 //-----------------<[ Zmienne: ]>-------------------
-new Vector:VPremiumSkins[MAX_PLAYERS]; //TODO: Maybe zamieniæ na bintree, bo w sumie wiecej szukania niz wkladania.
+new Vector:VPremiumSkins[MAX_PLAYERS];
 
 new PremiumInfo[MAX_PLAYERS][ePremiumInfo];
 
