@@ -28,12 +28,13 @@
 //-----------------<[ Funkcje: ]>-------------------
 stock LoadMats3DText() 
 {
-    for(new i=0; i<3; i++) 
+    for(new i=0; i<3; i++)
     {
         GS_Text[i] = CreateDynamic3DTextLabel("/sprzedajmatsbot", COLOR_BLUE, GS_MatsBot[i][0], GS_MatsBot[i][1], GS_MatsBot[i][2], 6.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, GS_MatsBotVw[i]);
         UpdateMats3DText(i);
     }
 }
+
 stock UpdateMats3DText(gsid) 
 {
     new cena = GS_MatsCena[gsid];

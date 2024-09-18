@@ -1,0 +1,11 @@
+{
+    "name": "movables",
+    "description": "System przedmiotów, które mo¿na przenosiæ i upuszczaæ.",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": false,
+    "date": "18.09.2024"
+}

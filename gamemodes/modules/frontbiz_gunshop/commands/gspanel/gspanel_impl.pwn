@@ -26,7 +26,10 @@
 command_gspanel_Impl(playerid)
 {
     if(!IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP) || !IsPlayerOrgLeader(playerid))
+    {
         return noAccessMessage(playerid);
+    }
+    
     dgspanel(playerid);
     return 1;
 }

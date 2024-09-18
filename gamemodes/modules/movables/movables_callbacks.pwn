@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Timers >>------------------------------------------------//
-//                                                   convoy                                                  //
+//----------------------------------------------<< Callbacks >>----------------------------------------------//
+//                                                  movables                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,54 +16,73 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 20.10.2019
+// Autor: mrucznik
+// Data utworzenia: 18.09.2024
 //Opis:
 /*
-	System konwojów.
+	System przedmiotów, które mo¿na przenosiæ i upuszczaæ.
 */
 
 //
 
-//-----------------<[ Timery: ]>-------------------
-task ConvoyTimer[100]()
+#include <YSI\y_hooks>
+
+//-----------------<[ Own Callbacks: ]>-----------------
+OnPlayerDropMovableObject(playerid, boxid, boxType, Float:x, Float:y, Float:z, Float:angle)
 {
-	if(convoyCar != -1)
-	{
-		new Float:health;
-		GetVehicleHealth(convoyCar, Float:health);
-
-		//utrata hp przez pojazd konwojowy
-		if(health < CONVOY_HP_DROP_LIMIT && health < convoyCarHP)
-		{
-			convoyCarHPAcc += convoyCarHP - health;
-			convoyCarHP = health;
-		}
-
-		new Float:hp_dif = CONVOY_HP_PER_PACKAGE;
-		if(convoyCarHPAcc >= hp_dif)
-		{
-			convoyCarHPAcc -= hp_dif;
-			DropConvoyBox(convoyCar);
-		}
-
-		//zniszczenie pojazdu konwojowego
-		if(health < 350) {
-			StopConvoy(CONVOY_STOP_VEHICLE_DESTROYED);
-		}
-	}
+	if(Convoy_OnPlayerDropMovable(playerid, boxid, boxType, x, y, z, angle)) return;
+	return;
 }
 
-timer ConvoyDelay[10800]()
+OnPlayerPickupMovableObject(playerid, boxid, boxType)
 {
-	convoyDelayed = false;
-	foreach(new i : Player)
+	if(Convoy_OnPlayerPickupMovable(playerid, boxid, boxType)) return;
+	return;
+}
+
+//-----------------<[ Hooki: ]>-----------------
+hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+{
+	if(PRESSED(KEY_CROUCH))
 	{
-		if(IsInAConvoyTeam(i))
+		new boxid = GetNearestBox(playerid);
+		if(boxid != -1)
 		{
-			SendClientMessage(i, COLOR_LFBI, "HQ: Kolejny konwój z towarem czeka na zorganizowanie.");
+			PickupBox(playerid, boxid);
 		}
 	}
+	else if(PRESSED(KEY_SECONDARY_ATTACK))
+	{
+		if(IsPlayerCarryingBox(playerid) && !IsPlayerInAnyVehicle(playerid))
+		{
+			DropBox(playerid);
+		}
+	}
+	return 1;
+}
+
+hook OnPlayerDeath(playerid)
+{
+	if(IsPlayerCarryingBox(playerid)) 
+	{
+		DropBox(playerid);
+	}
+	return 1;
+}
+
+hook OnPlayerDisconnect(playerid, reason)
+{
+	if(IsPlayerCarryingBox(playerid)) 
+	{
+		DropBox(playerid);
+	}
+	return 1;
+}
+
+hook OnPlayerConnect(playerid)
+{
+	carryingBox[playerid] = -1;
+	return 1;
 }
 
 //end

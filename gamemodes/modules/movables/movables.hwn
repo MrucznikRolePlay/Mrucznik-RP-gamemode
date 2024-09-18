@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Timers >>------------------------------------------------//
-//                                                   convoy                                                  //
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                  movables                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,54 +16,34 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 20.10.2019
-//Opis:
-/*
-	System konwojów.
-*/
+// Autor: mrucznik
+// Data utworzenia: 18.09.2024
 
 //
 
-//-----------------<[ Timery: ]>-------------------
-task ConvoyTimer[100]()
-{
-	if(convoyCar != -1)
-	{
-		new Float:health;
-		GetVehicleHealth(convoyCar, Float:health);
-
-		//utrata hp przez pojazd konwojowy
-		if(health < CONVOY_HP_DROP_LIMIT && health < convoyCarHP)
-		{
-			convoyCarHPAcc += convoyCarHP - health;
-			convoyCarHP = health;
-		}
-
-		new Float:hp_dif = CONVOY_HP_PER_PACKAGE;
-		if(convoyCarHPAcc >= hp_dif)
-		{
-			convoyCarHPAcc -= hp_dif;
-			DropConvoyBox(convoyCar);
-		}
-
-		//zniszczenie pojazdu konwojowego
-		if(health < 350) {
-			StopConvoy(CONVOY_STOP_VEHICLE_DESTROYED);
-		}
-	}
+//------------------<[ Enumy: ]>--------------------
+enum eBoxType {
+    BOX_TYPE_NONE,
+    BOX_TYPE_CONVOY
 }
 
-timer ConvoyDelay[10800]()
+enum eBox 
 {
-	convoyDelayed = false;
-	foreach(new i : Player)
-	{
-		if(IsInAConvoyTeam(i))
-		{
-			SendClientMessage(i, COLOR_LFBI, "HQ: Kolejny konwój z towarem czeka na zorganizowanie.");
-		}
-	}
+    bool:box_used,
+    box_type,
+    box_object,
+    box_player,
+    box_attachedSlot,
+    Float:box_x,
+    Float:box_y,
+    Float:box_z,
+    box_bonus
 }
+
+//-----------------<[ Zmienne: ]>-------------------
+new Boxes[MAX_MOVABLES][eBox];
+new carryingBox[MAX_PLAYERS];
+
+//------------------<[ Forwardy: ]>--------------------
 
 //end

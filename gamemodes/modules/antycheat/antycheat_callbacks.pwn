@@ -132,20 +132,6 @@ hook OnPlayerUpdate(playerid)
 
 hook OnPlayerStateChange(playerid, newstate, oldstate)
 {
-    //---------------------------------------------- Anti Cheat ------------------------------------//
-   /* if(newstate == PLAYER_STATE_DRIVER) {
-        if(GetPVarInt(playerid, "iLastDrive") != 0 && (gettime() - GetPVarInt(playerid, "iLastDrive")) <= 1) {
-            SetPVarInt(playerid, "iFlags", GetPVarInt(playerid, "iLastDrive")+1);
-            if(GetPVarInt(playerid, "iLastDrive") >= 2) {
-                format(string, 256, "%s podejrzany o tepanie aut. Dostal kicka. LVL: %d (%dh online)", GetNick(playerid), PlayerInfo[playerid][pLevel], PlayerInfo[playerid][pConnectTime]);
-                SendAdminMessage(COLOR_LIGHTRED, string);
-                Kick(playerid);
-                return true;
-            }
-        }
-
-        SetPVarInt(playerid, "iLastDrive", gettime());
-    } */
 	if(IsPlayerNPC(playerid))
 	{
 		return 1;
