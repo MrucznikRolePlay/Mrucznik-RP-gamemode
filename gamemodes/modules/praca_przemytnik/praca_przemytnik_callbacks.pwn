@@ -308,47 +308,136 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 
 Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z, Float:angle)
 {
-	if(boxType != BOX_TYPE_CONTRABAND)
+	#pragma unused x,y,z,angle
+	if(boxType != BOX_TYPE_CONTRABAND_ACTION && boxType != BOX_TYPE_CONTRABAND)
 	{
 		return 0;
 	}
 
-	
+	if(GetPlayerJob(playerid) == JOB_SMUGGLER)
+	{
+		new actionID = GetPlayerSmugglingActionID(playerid);
+		if(actionID == -1) // przemytnik z akcji
+		{
+			if(IsPlayerInRangeOfPoint(playerid, 5.0,
+				SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ]))
+			{
+				MruMessageGoodInfo(playerid, "Uda³o Ci siê dostarczyæ paczkê z kontraband¹ do punktu zboru!");
+				if(boxType == BOX_TYPE_CONTRABAND_ACTION)
+				{
+					GatherPackage(actionID, boxid, Boxes[boxid][box_bonus]);
+					// TODO: komunikat o dostarczeniu paczki dla ekipy przemycaj¹cej
+				}
+			}
+		}
+		else // zwyk³y przemytnik
+		{
+			if(IsPlayerInRangeOfPoint(playerid, 5.0, SmugglersHole[0], SmugglersHole[1], SmugglersHole[2]))
+			{
+				new contraband;
+				if(boxType == BOX_TYPE_CONTRABAND_ACTION)
+				{
+					contraband = Boxes[boxid][box_bonus] / 2;
+					actionID = GetSmugglingActionByBoxID(boxid);
+					GatherPackage(actionID, boxid, 0);
+					// TODO: komunikat o przechwyceniu paczki dla ekipy przemycaj¹cej
+				}
+				else
+				{
+					contraband = Boxes[boxid][box_bonus];
+				}
+				MruMessageGoodInfo(playerid, "Uda³o Ci siê dostarczyæ paczkê z kontraband¹ do dziupli przemytniczej!");
+				MruMessageGoodInfoF(playerid, "Znajdowa³o siê w niej %d kontrabandy. Jest teraz Twoja!", contraband);
+				GiveContraband(playerid, contraband);
+			}
+		}
+	}
+
+	ChatMe(playerid, "upuszcza paczkê z kontraband¹.");
 	return 1;
 }
 
 Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 {
-	if(boxType != BOX_TYPE_CONTRABAND)
+	if(boxType != BOX_TYPE_CONTRABAND_ACTION && boxType != BOX_TYPE_CONTRABAND)
 	{
 		return 0;
 	}
 
-	
+	if(boxType == BOX_TYPE_CONTRABAND_ACTION)
+	{
+		new actionID = GetSmugglingActionByBoxID(boxid);
+		DestroySmugglingBoxFlare(actionID);
+	}
+
+	// ³owca / LSPD
+	if(IsAPolicja(playerid) || GetPlayerJob(playerid) == JOB_LOWCA)
+	{
+		MruMessageGoodInfo(playerid, "Podnios³eœ paczkê z przemytem! Zniszcz te nielegalne przedmioty aby uzyskaæ nagrodê.");
+		MruMessageGoodInfoF(playerid, "Aby to zrobiæ upuœæ j¹ i zacznij do niej strzelaæ (potrzeba %d strza³ów by j¹ zniszczyæ).", Boxes[boxid][box_bonus]);
+	}
+	if(GetPlayerJob(playerid) == JOB_SMUGGLER)
+	{
+		new smugglingAction = GetPlayerSmugglingActionID(playerid);
+		if(smugglingAction == -1) // przemytnik z akcji
+		{
+			MruMessageGoodInfo(playerid, "Uda³o Ci siê zebraæ paczkê z kontraband¹ zrzucon¹ przez Twoj¹ ekipê. Dostarcz j¹ do punktu zboru!");
+			// TODO: stworz checkpoint
+		}
+		else // zwyk³y przemytnik
+		{
+			MruMessageGoodInfo(playerid, "Uda³o Ci siê zebraæ paczkê z kontraband¹ zrzucon¹ przez wrog¹ ekipê. Dostarcz j¹ do dziupli przemytniczej (checkpoint)!");
+			// TODO: stworz checkpoint
+		}
+	}
+
+	ChatMe(playerid, "podnosi paczkê z kontraband¹.");
 	return 1;
 }
 
 Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:y, Float:z)
 {
-	if(boxType != BOX_TYPE_CONTRABAND)
+	#pragma unused weaponid
+	if(boxType != BOX_TYPE_CONTRABAND_ACTION && boxType != BOX_TYPE_CONTRABAND)
 	{
 		return 0;
 	}
 
-	new rand = random(5);
-	if(rand == 0) // 20% chances to take damage
+	new rand;
+	if(boxType == BOX_TYPE_CONTRABAND)
+	{
+		rand = random(10); // 10% chances to take damage
+	}
+	if(rand == 0) 
 	{
 		Boxes[boxid][box_bonus] -= 1;
 		if(Boxes[boxid][box_bonus] <= 0)
 		{
-			DestroyBox(boxid);
+			if(boxType == BOX_TYPE_CONTRABAND_ACTION)
+			{
+				new actionID = GetSmugglingActionByBoxID(boxid);
+				DestroySmugglingBoxFlare(actionID);
+				GatherPackage(actionID, boxid, 0);
+				// TODO: komunikat o zniszczeniu paczki dla ekipy przemycaj¹cej
+			}
+
 			PlayerPlaySound(playerid, 1131, x, y, z); // hit wooden object? (SOUND_AMMUNATION_GUN_COLLISION)
-		}
-		else
-		{
-			PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED)
+
+			if(IsAPolicja(playerid) || GetPlayerJob(playerid) == JOB_LOWCA)
+			{
+				new reward;
+				if(boxType == BOX_TYPE_CONTRABAND_ACTION) 
+					reward = DESTROY_CONTRABAND_REWARD;
+				else if(boxType == BOX_TYPE_CONTRABAND) 
+					reward = DESTROY_CONTRABAND_SMALL_REWARD;
+				MruMessageGoodInfoF(playerid, "Uda³o Ci siê zniszczyæ nielegaln¹ kontrabandê! Otrzymujesz %d$ nagrody.", reward);
+				DajKase(playerid, reward);
+			}
+			return 1;
 		}
 	}
+
+	PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED)
 	return 1;
 }
 

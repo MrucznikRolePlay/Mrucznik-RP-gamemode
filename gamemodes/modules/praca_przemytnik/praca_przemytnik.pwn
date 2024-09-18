@@ -228,7 +228,6 @@ CreateDropPointContainer(actionID)
 		0, 0);
 }
 
-
 StartSmugglingDrop(playerid, driverid, actionID)
 {
     SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_FLY;
@@ -325,7 +324,7 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index)
 	DestroyDynamicObject(parachuteObject);
 
 	SmugglingAction[actionID][ContrabandFlareObjects][index] = CreateDynamicObject(18728, x, y, z, 0.0, 0.0, 0.0, 0, 0);
-	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND, BIG_PACKAGE_CONTRABAND_AMMOUNT, x, y, z);
+	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, BIG_PACKAGE_CONTRABAND_AMMOUNT, x, y, z);
 	SmugglingAction[actionID][ContrabandDropObjects][index] = boxid;
 }
 
@@ -338,6 +337,48 @@ MarcepanPhone(playerid, color, string[])
 timer MarcepanPhoneTimer[1000](playerid, color, string:string[])
 {
 	SendClientMessage(playerid, color, string);
+}
+
+// ------- ostatni etap
+GetSmugglingActionByBoxID(boxid)
+{
+	for(new i; i<SMUGGLING_ACTIONS_PER_DAY; i++)
+	{
+		for(new j; j<PACKAGES_TO_DROP; j++)
+		{
+			if(boxid == SmugglingAction[i][ContrabandDropObjects][j])
+			{
+				return i;
+			}
+		}
+	}
+	return -1;
+}
+
+DestroySmugglingBoxFlare(boxid)
+{
+	new actionID = GetSmugglingActionByBoxID(boxid);
+	if(SmugglingAction[actionID][ContrabandFlareObjects] != -1) {
+		DestroyDynamicObject(SmugglingAction[actionID][ContrabandFlareObjects]);
+		SmugglingAction[actionID][ContrabandFlareObjects] = -1;
+	}
+}
+
+GatherPackage(actionID, boxid, contraband)
+{
+	DestroyBox(boxid);
+
+	SmugglingAction[actionID][PackagesDone]++;
+	SmugglingAction[actionID][ContrabandGathered] += contraband;
+	if(SmugglingAction[actionID][PackagesDone] >= PACKAGES_TO_DROP)
+	{
+		EndSmuggling(actionID);
+	}
+}
+
+EndSmuggling(actionID)
+{
+	// TODO: end smuggling - give contraband to leader, send messages, clear objects
 }
 
 // ------------- przedmioty przemytnicze --------------------

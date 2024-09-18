@@ -52,6 +52,8 @@ enum eSmugglingData {
     SmugglingCheckpoints[MAX_SMUGGLING_CHECKPOINTS],
     ContrabandDropObjects[PACKAGES_TO_DROP],
     ContrabandFlareObjects[PACKAGES_TO_DROP],
+    PackagesDone,
+    ContrabandGathered,
     Float:GatherPointX,
     Float:GatherPointY,
     Float:GatherPointZ,
@@ -112,6 +114,10 @@ new Float:SkimmerDroppingCheckpoints[][3] = {
     {5320.8530, -233.3804, 50.0783},
     {5576.4302, -172.9612, 47.2107},
     {5553.5435, -585.7772, 122.1414}
+};
+
+new Float:SmugglersHole[3] = {
+    4713.5313, -2687.3469, 5.3266 // TODO: gdzie ma byc dziupla przemytnicza?
 };
 
 new SmugglingActionsCount;
