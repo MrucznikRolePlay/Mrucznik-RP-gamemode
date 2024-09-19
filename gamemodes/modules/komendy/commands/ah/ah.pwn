@@ -36,6 +36,8 @@ command_ah()
     new command = Command_GetID("ah");
 
     //aliases
+    Command_AddAlt(command, "adminhelp");
+    Command_AddAlt(command, "adminpomoc");
     
 
     //permissions

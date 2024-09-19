@@ -37,6 +37,10 @@ ShowHelpCommands(playerid, color, command[])
 
     format(string, sizeof(string), " *** POMOC *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc /samppomoc ");
 	strreplace(string, commandWithSpace, "");
+	if(PlayerInfo[playerid][pAdmin] > 0)
+	{
+		strcat(string, " /adminpomoc");
+	}	
 	SendClientMessage(playerid, color, string);
 }
 

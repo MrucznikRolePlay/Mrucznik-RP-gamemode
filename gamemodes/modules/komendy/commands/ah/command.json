@@ -3,7 +3,10 @@
     "description": "",
     "permissions": ["global"],
     "author": "mrucznik",
-    "aliases": [],
+    "aliases": [
+        "adminhelp",
+        "adminpomoc"
+    ],
     "parameters": [],
     "date": "15.09.2024"
 }
