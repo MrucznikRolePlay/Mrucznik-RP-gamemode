@@ -1,7 +1,7 @@
 {
     "name": "owarsztat",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_apteczka()
 {
-    
+    new command = Command_GetID("apteczka");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

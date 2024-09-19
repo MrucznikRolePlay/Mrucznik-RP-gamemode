@@ -1,7 +1,7 @@
 {
     "name": "pobij",
     "description": "Spróbuj pobiæ gracza. Konkurencja polegaj¹ca na szybkim i dok³adnym przepisywaniu tekstu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "NikodemBanan",
     "aliases": [],
     "parameters": [

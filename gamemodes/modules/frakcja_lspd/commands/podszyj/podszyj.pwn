@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_podszyj()
 {
-    
+    new command = Command_GetID("podszyj");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

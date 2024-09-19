@@ -1,7 +1,7 @@
 {
     "name": "mandacik",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "ticket",

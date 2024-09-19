@@ -1,7 +1,7 @@
 {
     "name": "sad",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

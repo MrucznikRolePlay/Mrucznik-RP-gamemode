@@ -1,7 +1,7 @@
 {
     "name": "stopbieg",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

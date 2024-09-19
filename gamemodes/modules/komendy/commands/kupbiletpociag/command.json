@@ -1,7 +1,7 @@
 {
     "name": "kupbiletpociag",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "kbpo",

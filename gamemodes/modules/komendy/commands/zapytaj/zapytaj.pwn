@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zapytaj()
 {
-    
+    new command = Command_GetID("zapytaj");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

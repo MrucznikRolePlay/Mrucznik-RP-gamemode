@@ -1,7 +1,7 @@
 {
     "name": "wk",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wyrzuckluczyki",

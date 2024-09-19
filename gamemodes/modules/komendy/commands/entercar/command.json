@@ -1,7 +1,7 @@
 {
     "name": "entercar",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

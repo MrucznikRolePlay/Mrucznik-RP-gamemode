@@ -1,7 +1,7 @@
 {
     "name": "przeszukaj",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "frisk"

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_uwb()
 {
-    
+    new command = Command_GetID("uwb");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

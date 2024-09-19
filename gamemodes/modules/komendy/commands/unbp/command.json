@@ -1,7 +1,7 @@
 {
     "name": "unbp",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "zdejmijbp"

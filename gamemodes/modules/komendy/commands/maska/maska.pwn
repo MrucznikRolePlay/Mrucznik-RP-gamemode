@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_maska()
 {
-    
+    new command = Command_GetID("maska");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

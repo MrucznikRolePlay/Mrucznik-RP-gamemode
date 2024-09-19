@@ -1,7 +1,7 @@
 {
     "name": "crimereport",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

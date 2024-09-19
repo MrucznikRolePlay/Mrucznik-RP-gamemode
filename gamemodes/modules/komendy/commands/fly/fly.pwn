@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_fly()
 {
-    
+    new command = Command_GetID("fly");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

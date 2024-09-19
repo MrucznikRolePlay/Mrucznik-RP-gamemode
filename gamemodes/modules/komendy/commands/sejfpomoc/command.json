@@ -1,7 +1,7 @@
 {
     "name": "sejfpomoc",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "sejf",

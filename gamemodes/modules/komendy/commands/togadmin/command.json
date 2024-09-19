@@ -1,7 +1,7 @@
 {
     "name": "togadmin",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "togadm"

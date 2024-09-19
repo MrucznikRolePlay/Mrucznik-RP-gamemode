@@ -1,7 +1,7 @@
 {
     "name": "gotobiz",
     "description": "Komenda, która teleportuje nas do biznesu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Simeone",
     "aliases": [],
     "parameters": [

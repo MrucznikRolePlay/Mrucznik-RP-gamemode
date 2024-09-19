@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zamek()
 {
-    
+    new command = Command_GetID("zamek");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

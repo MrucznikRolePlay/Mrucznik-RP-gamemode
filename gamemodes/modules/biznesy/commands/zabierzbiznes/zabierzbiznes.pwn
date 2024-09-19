@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zabierzbiznes()
 {
-    
+    new command = Command_GetID("zabierzbiznes");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

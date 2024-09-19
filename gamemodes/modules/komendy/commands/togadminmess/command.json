@@ -1,7 +1,7 @@
 {
     "name": "togadminmess",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

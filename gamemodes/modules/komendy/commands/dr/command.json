@@ -1,7 +1,7 @@
 {
     "name": "dr",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

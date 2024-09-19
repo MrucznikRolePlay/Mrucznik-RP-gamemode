@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_startlotto()
 {
-    
+    new command = Command_GetID("startlotto");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

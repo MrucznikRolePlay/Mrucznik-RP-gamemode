@@ -41,6 +41,7 @@ command_liderpomoc()
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

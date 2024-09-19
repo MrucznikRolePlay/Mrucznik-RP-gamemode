@@ -1,7 +1,7 @@
 {
     "name": "clearwlall",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

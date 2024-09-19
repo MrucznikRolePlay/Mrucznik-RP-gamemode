@@ -1,7 +1,7 @@
 {
     "name": "bizlock",
     "description": "Pozwala zamkn¹æ b¹dŸ otworzyæ twój biznes. Mo¿e j¹ u¿yæ zarówno cz³onek jak i w³asciciel biznesu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Simeone",
     "aliases": [
         "zamknijbiznes",

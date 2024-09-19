@@ -1,7 +1,7 @@
 {
     "name": "zlomujbiznes",
     "description": "Komenda, która pozwala zez³omowaæ biznes. Musisz byæ w³aœcicielem. ",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Simeone",
     "aliases": [],
     "parameters": [],

@@ -1,7 +1,7 @@
 {
     "name": "car",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "auto",

@@ -1,7 +1,7 @@
 {
     "name": "cp_usun",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "czekpoint_usun",

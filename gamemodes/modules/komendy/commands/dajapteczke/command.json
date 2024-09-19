@@ -1,7 +1,7 @@
 {
     "name": "dajapteczke",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "dajapteczka"

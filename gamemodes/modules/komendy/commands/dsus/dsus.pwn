@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_dsus()
 {
-    
+    new command = Command_GetID("dsus");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

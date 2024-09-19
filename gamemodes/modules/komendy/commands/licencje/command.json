@@ -1,7 +1,7 @@
 {
     "name": "licencje",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "licenses"

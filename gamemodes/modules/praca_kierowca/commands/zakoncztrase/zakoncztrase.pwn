@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zakoncztrase()
 {
-    
+    new command = Command_GetID("zakoncztrase");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

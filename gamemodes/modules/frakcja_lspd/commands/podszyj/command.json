@@ -1,7 +1,7 @@
 {
     "name": "podszyj",
     "description": "Podszyj siê pod ¿ula.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

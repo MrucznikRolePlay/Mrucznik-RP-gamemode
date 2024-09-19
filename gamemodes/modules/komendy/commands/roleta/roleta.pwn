@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_roleta()
 {
-    
+    new command = Command_GetID("roleta");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "sluzba",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "duty"

@@ -1,7 +1,7 @@
 {
     "name": "liderranga",
     "description": "Edycja rang frakcji.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "liderrank",

@@ -1,7 +1,7 @@
 {
     "name": "zabierzbiznes",
     "description": "Komenda, która pozwala zabraæ biznes graczu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Simeone",
     "aliases": [],
     "parameters": [],

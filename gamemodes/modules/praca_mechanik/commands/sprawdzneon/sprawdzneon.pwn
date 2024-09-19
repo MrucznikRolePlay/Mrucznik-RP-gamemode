@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_sprawdzneon()
 {
-    
+    new command = Command_GetID("sprawdzneon");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

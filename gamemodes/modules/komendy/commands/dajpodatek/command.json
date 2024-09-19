@@ -1,7 +1,7 @@
 {
     "name": "dajpodatek",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "givetax"

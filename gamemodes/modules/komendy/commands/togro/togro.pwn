@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_togro()
 {
-    
+    new command = Command_GetID("togro");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "gspanel",
     "description": "Panel zarzadzania sklepem z bronia",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "wiger",
     "aliases": [],
     "parameters": [],

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_loadconfig()
 {
-    
+    new command = Command_GetID("loadconfig");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

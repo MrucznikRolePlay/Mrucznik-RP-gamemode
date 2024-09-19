@@ -1,7 +1,7 @@
 {
     "name": "boombox",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

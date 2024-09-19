@@ -1,7 +1,7 @@
 {
     "name": "houseinfo",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "dominfo",

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_winda()
 {
-    
+    new command = Command_GetID("winda");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

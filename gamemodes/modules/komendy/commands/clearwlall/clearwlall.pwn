@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_clearwlall()
 {
-    
+    new command = Command_GetID("clearwlall");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_edytujupr()
 {
-    
+    new command = Command_GetID("edytujupr");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

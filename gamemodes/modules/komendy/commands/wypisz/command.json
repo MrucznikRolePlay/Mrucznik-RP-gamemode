@@ -1,7 +1,7 @@
 {
     "name": "wypisz",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wydaj"

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_setactoranime()
 {
-    
+    new command = Command_GetID("setactoranime");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

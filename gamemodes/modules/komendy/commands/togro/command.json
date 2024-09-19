@@ -1,7 +1,7 @@
 {
     "name": "togro",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

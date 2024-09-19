@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_checkbw()
 {
-    
+    new command = Command_GetID("checkbw");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_disabletruckerjob()
 {
-    
+    new command = Command_GetID("disabletruckerjob");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

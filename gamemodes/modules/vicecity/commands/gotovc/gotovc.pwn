@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_gotovc()
 {
-    
+    new command = Command_GetID("gotovc");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

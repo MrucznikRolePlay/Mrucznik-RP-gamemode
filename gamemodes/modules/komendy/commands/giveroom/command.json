@@ -1,7 +1,7 @@
 {
     "name": "giveroom",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "dajpokoj",

@@ -42,6 +42,7 @@ command_przelew()
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

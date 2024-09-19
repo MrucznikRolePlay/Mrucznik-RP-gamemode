@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_wczytajskiny()
 {
-    
+    new command = Command_GetID("wczytajskiny");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

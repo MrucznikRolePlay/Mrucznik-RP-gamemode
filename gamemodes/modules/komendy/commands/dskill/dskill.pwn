@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_dskill()
 {
-    
+    new command = Command_GetID("dskill");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

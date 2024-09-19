@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_dajfiltr()
 {
-    
+    new command = Command_GetID("dajfiltr");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

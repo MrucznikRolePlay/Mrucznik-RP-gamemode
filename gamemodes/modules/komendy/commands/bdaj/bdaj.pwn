@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_bdaj()
 {
-    
+    new command = Command_GetID("bdaj");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

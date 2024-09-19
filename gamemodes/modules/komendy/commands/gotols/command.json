@@ -1,7 +1,7 @@
 {
     "name": "gotols",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

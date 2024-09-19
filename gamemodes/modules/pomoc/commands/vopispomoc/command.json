@@ -1,7 +1,7 @@
 {
     "name": "vopispomoc",
     "description": "Pomoc odnoœnie opisu dla pojazdów.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "vopishelp",

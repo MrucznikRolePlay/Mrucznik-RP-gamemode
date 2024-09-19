@@ -1,7 +1,7 @@
 {
     "name": "trasa",
     "description": "Rozpoczyna trasê autobusow¹.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

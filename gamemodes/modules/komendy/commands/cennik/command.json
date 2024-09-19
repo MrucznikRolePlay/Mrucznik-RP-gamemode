@@ -1,7 +1,7 @@
 {
     "name": "cennik",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

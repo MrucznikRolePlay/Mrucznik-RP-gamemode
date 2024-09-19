@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_makeircadmin()
 {
-    
+    new command = Command_GetID("makeircadmin");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

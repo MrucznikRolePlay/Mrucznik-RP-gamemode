@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_flip()
 {
-    
+    new command = Command_GetID("flip");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

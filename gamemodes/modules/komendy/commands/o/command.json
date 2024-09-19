@@ -1,7 +1,7 @@
 {
     "name": "o",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "ooc"

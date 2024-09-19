@@ -1,7 +1,7 @@
 {
     "name": "resetsejfhasla",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

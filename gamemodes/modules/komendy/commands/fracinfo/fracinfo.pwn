@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_fracinfo()
 {
-    
+    new command = Command_GetID("fracinfo");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

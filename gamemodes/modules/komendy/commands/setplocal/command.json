@@ -1,7 +1,7 @@
 {
     "name": "setplocal",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

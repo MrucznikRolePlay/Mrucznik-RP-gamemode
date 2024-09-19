@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_aresztuj()
 {
-    
+    new command = Command_GetID("aresztuj");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

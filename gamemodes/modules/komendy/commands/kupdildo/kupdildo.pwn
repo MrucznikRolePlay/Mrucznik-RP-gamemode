@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_kupdildo()
 {
-    
+    new command = Command_GetID("kupdildo");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

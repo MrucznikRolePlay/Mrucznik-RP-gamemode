@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zapiszkonta()
 {
-    
+    new command = Command_GetID("zapiszkonta");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

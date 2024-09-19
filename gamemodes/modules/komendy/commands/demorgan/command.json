@@ -1,7 +1,7 @@
 {
     "name": "demorgan",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "prison"

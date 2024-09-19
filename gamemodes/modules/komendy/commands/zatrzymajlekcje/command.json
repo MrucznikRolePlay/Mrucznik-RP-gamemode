@@ -1,7 +1,7 @@
 {
     "name": "zatrzymajlekcje",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "stoplesson",

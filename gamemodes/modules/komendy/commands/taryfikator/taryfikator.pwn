@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_taryfikator()
 {
-    
+    new command = Command_GetID("taryfikator");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

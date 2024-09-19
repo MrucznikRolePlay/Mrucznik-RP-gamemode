@@ -1,7 +1,7 @@
 {
     "name": "wynajempomoc",
     "description": "Pomoc odnoœnie wynajmu domów.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "renthelp"

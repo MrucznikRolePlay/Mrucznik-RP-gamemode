@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_placmedyk()
 {
-    
+    new command = Command_GetID("placmedyk");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "specshow",
     "description": "Komenda, która pozwala spojrzeæ kogo podgl¹da dany administrator.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Simeone",
     "aliases": [
         "specshow"

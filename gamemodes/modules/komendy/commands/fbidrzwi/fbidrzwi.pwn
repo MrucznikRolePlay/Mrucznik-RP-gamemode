@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_fbidrzwi()
 {
-    
+    new command = Command_GetID("fbidrzwi");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

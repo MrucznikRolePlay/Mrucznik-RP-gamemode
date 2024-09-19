@@ -1,7 +1,7 @@
 {
     "name": "wez",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "get"

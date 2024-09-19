@@ -1,7 +1,7 @@
 {
     "name": "objectsdebug",
     "description": "W³¹cz dynamiczny debug obiektów.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

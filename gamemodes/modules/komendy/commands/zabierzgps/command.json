@@ -1,7 +1,7 @@
 {
     "name": "zabierzgps",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "takegps"

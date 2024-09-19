@@ -1,7 +1,7 @@
 {
     "name": "zamknij",
     "description": "Zamyka GSLS",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Sanda³",
     "aliases": [],
     "parameters": [],

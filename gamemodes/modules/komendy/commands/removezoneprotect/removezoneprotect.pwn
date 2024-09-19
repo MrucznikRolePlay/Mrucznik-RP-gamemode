@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_removezoneprotect()
 {
-    
+    new command = Command_GetID("removezoneprotect");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

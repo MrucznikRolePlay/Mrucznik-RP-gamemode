@@ -1,7 +1,7 @@
 {
     "name": "mp3",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "music",

@@ -1,7 +1,7 @@
 {
     "name": "banip",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

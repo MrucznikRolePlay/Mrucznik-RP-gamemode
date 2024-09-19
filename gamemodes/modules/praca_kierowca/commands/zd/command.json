@@ -1,7 +1,7 @@
 {
     "name": "zd",
     "description": "Zamyka drzwi autobusu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

@@ -1,7 +1,7 @@
 {
     "name": "dajscene",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

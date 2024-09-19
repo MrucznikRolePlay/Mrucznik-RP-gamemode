@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_cnnn()
 {
-    
+    new command = Command_GetID("cnnn");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

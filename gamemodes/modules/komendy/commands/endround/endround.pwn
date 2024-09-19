@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_endround()
 {
-    
+    new command = Command_GetID("endround");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

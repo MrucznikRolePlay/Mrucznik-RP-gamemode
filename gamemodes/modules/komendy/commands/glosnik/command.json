@@ -1,7 +1,7 @@
 {
     "name": "glosnik",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "sanradio"

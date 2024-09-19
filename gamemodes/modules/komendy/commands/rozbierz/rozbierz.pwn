@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_rozbierz()
 {
-    
+    new command = Command_GetID("rozbierz");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

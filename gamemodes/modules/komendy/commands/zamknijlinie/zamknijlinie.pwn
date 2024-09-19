@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zamknijlinie()
 {
-    
+    new command = Command_GetID("zamknijlinie");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

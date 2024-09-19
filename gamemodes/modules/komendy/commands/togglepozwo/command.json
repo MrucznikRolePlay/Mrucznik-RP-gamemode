@@ -1,7 +1,7 @@
 {
     "name": "togglepozwo",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

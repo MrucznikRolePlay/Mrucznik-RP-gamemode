@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_setskin()
 {
-    
+    new command = Command_GetID("setskin");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

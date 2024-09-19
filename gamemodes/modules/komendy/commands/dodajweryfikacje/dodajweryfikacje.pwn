@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_dodajweryfikacje()
 {
-    
+    new command = Command_GetID("dodajweryfikacje");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

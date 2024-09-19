@@ -1,7 +1,7 @@
 {
     "name": "sh",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

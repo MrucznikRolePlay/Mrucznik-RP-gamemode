@@ -1,7 +1,7 @@
 {
     "name": "cwarsztat",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

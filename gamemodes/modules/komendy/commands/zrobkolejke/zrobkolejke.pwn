@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zrobkolejke()
 {
-    
+    new command = Command_GetID("zrobkolejke");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

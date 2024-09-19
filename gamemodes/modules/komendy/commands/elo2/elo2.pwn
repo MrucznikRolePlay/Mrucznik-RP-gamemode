@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_elo2()
 {
-    
+    new command = Command_GetID("elo2");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

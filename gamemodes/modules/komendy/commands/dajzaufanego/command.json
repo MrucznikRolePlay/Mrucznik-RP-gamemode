@@ -1,7 +1,7 @@
 {
     "name": "dajzaufanego",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

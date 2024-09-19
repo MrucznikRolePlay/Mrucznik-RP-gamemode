@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_bandana()
 {
-    
+    new command = Command_GetID("bandana");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

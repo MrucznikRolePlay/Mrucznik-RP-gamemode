@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_payday()
 {
-    
+    new command = Command_GetID("payday");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

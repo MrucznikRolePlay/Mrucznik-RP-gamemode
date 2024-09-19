@@ -1,7 +1,7 @@
 {
     "name": "togtxda",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

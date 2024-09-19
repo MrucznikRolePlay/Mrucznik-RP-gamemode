@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_temat()
 {
-    
+    new command = Command_GetID("temat");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

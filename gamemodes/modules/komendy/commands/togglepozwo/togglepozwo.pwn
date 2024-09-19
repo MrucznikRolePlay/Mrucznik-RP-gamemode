@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_togglepozwo()
 {
-    
+    new command = Command_GetID("togglepozwo");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

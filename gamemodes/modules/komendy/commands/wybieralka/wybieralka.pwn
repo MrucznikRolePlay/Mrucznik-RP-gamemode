@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_wybieralka()
 {
-    
+    new command = Command_GetID("wybieralka");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_dajskryptera()
 {
-    
+    new command = Command_GetID("dajskryptera");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

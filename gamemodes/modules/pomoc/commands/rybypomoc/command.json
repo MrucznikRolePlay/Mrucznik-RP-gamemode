@@ -1,7 +1,7 @@
 {
     "name": "rybypomoc",
     "description": "Komendy dotycz¹ce ³owienia ryb.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "fishhelp"

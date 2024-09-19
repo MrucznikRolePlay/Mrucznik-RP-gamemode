@@ -1,7 +1,7 @@
 {
     "name": "usunbron",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "ub"

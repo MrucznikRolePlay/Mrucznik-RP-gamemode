@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_sprawdzinv()
 {
-    
+    new command = Command_GetID("sprawdzinv");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

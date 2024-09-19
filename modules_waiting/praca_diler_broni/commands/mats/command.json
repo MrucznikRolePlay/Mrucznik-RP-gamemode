@@ -1,7 +1,7 @@
 {
     "name": "mats",
     "description": "Zarz¹dzanie materia³ami do sprzeda¿y broni.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "materialy"

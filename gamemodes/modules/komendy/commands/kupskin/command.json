@@ -1,7 +1,7 @@
 {
     "name": "kupskin",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wybierzskin"

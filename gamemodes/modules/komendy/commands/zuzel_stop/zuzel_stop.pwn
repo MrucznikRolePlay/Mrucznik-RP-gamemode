@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zuzel_stop()
 {
-    
+    new command = Command_GetID("zuzel_stop");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

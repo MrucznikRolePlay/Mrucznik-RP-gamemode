@@ -1,7 +1,7 @@
 {
     "name": "poddajesie",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

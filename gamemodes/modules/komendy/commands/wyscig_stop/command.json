@@ -1,7 +1,7 @@
 {
     "name": "wyscig_stop",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

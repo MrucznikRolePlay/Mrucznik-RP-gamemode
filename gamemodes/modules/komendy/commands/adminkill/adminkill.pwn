@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_adminkill()
 {
-    
+    new command = Command_GetID("adminkill");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "makeleader",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

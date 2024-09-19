@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_koxubankot()
 {
-    
+    new command = Command_GetID("koxubankot");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

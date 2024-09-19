@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_gotoszpital()
 {
-    
+    new command = Command_GetID("gotoszpital");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_panelvinyl()
 {
-    
+    new command = Command_GetID("panelvinyl");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "finisz",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "meta"

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_skret()
 {
-    
+    new command = Command_GetID("skret");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

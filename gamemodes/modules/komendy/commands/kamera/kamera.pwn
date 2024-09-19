@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_kamera()
 {
-    
+    new command = Command_GetID("kamera");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

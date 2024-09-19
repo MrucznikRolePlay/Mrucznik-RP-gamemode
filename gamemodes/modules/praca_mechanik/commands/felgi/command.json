@@ -1,7 +1,7 @@
 {
     "name": "felgi",
     "description": "Lista dostêpnych felg do tuningu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

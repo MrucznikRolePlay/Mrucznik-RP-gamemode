@@ -1,7 +1,7 @@
 {
     "name": "wylogujgracz",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "logoutpl"

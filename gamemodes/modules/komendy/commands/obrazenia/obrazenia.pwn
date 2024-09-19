@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_obrazenia()
 {
-    
+    new command = Command_GetID("obrazenia");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "getposp",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "getpos"

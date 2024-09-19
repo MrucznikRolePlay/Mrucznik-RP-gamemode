@@ -1,7 +1,7 @@
 {
     "name": "pracownicy",
     "description": "Lista pracowników frakcji/organizacji w której jesteœ.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "czlonkowie"

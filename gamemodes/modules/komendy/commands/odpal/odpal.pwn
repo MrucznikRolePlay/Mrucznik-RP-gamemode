@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_odpal()
 {
-    
+    new command = Command_GetID("odpal");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

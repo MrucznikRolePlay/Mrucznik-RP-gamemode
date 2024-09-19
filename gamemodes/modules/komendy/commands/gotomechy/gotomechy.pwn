@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_gotomechy()
 {
-    
+    new command = Command_GetID("gotomechy");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

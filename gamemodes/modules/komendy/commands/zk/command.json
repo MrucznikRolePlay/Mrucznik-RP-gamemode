@@ -1,7 +1,7 @@
 {
     "name": "zk",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "odbierzkluczyki",

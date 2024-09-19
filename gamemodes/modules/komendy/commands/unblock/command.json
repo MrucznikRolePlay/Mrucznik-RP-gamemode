@@ -1,7 +1,7 @@
 {
     "name": "unblock",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

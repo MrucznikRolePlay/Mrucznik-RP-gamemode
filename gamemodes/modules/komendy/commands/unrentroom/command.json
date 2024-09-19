@@ -1,7 +1,7 @@
 {
     "name": "unrentroom",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "unrent",

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zbijwl()
 {
-    
+    new command = Command_GetID("zbijwl");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

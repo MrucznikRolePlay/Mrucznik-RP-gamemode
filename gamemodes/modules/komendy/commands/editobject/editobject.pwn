@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_editobject()
 {
-    
+    new command = Command_GetID("editobject");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

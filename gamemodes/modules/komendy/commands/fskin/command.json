@@ -1,7 +1,7 @@
 {
     "name": "fskin",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "mundur",

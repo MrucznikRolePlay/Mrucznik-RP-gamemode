@@ -1,7 +1,7 @@
 {
     "name": "dajdowozu",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

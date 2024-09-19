@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_fixallveh()
 {
-    
+    new command = Command_GetID("fixallveh");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

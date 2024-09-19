@@ -1,7 +1,7 @@
 {
     "name": "hydraulika",
     "description": "Montowanie hydrauliki w pojeüdzie.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

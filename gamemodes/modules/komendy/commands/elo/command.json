@@ -1,7 +1,7 @@
 {
     "name": "elo",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

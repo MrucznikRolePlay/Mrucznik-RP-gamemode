@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zgas()
 {
-    
+    new command = Command_GetID("zgas");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

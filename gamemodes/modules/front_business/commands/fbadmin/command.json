@@ -1,7 +1,7 @@
 {
     "name": "fbadmin",
     "description": "Administracja biznesami przykrywkami.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

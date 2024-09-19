@@ -1,7 +1,7 @@
 {
     "name": "checkadminstats",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

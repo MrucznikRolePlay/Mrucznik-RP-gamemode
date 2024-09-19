@@ -2,7 +2,7 @@
     "name": "orgbiz",
     "description": "Zarz¹dzanie biznesem organizacyjnym.",
     "command_tips": ["Dostêpne parametry: lista / zmienczas"],
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "orgbiznes",

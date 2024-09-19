@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_paka()
 {
-    
+    new command = Command_GetID("paka");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

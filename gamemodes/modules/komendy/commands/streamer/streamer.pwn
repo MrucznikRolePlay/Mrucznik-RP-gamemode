@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_streamer()
 {
-    
+    new command = Command_GetID("streamer");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

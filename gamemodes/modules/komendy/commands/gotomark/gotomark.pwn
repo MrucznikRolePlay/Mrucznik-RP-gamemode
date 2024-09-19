@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_gotomark()
 {
-    
+    new command = Command_GetID("gotomark");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

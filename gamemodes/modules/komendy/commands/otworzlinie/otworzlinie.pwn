@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_otworzlinie()
 {
-    
+    new command = Command_GetID("otworzlinie");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

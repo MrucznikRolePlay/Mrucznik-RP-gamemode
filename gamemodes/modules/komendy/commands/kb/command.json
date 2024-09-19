@@ -1,7 +1,7 @@
 {
     "name": "kb",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "kontobankowe"

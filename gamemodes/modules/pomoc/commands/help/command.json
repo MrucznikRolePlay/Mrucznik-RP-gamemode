@@ -1,7 +1,7 @@
 {
     "name": "help",
     "description": "Pokazuje dostêpne komendy.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "pomoc",

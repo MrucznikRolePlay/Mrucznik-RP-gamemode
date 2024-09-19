@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_skydive()
 {
-    
+    new command = Command_GetID("skydive");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

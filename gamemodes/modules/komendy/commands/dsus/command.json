@@ -1,7 +1,7 @@
 {
     "name": "dsus",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

@@ -1,7 +1,7 @@
 {
     "name": "togname",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

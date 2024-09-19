@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_delete3dtext()
 {
-    
+    new command = Command_GetID("delete3dtext");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

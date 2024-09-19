@@ -1,7 +1,7 @@
 {
     "name": "sprzedajzestaw",
     "description": "Sprzedaj graczowi zestaw naprawczy pojazdu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

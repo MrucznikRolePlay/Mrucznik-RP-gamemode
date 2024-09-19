@@ -1,7 +1,7 @@
 {
     "name": "wywalzsad",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

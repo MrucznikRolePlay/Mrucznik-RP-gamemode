@@ -1,7 +1,7 @@
 {
     "name": "dzwon",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "call"

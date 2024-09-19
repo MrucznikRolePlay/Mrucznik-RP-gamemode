@@ -1,7 +1,7 @@
 {
     "name": "gotovc",
     "description": "Teleportuje Ciê do Vice City",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

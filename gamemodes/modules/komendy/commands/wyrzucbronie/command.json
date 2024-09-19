@@ -1,7 +1,7 @@
 {
     "name": "wyrzucbronie",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wb"

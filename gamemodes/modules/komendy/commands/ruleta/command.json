@@ -1,7 +1,7 @@
 {
     "name": "ruleta",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "ruletka"

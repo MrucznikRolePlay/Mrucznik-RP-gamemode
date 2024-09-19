@@ -1,7 +1,7 @@
 {
     "name": "zwolnij",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "uninvite"

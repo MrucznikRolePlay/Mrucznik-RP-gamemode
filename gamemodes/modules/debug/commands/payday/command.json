@@ -1,7 +1,7 @@
 {
     "name": "payday",
     "description": "Generuje payday.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

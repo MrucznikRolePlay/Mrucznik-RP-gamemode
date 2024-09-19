@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_autoranny()
 {
-    
+    new command = Command_GetID("autoranny");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

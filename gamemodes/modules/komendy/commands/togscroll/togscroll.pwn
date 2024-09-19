@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_togscroll()
 {
-    
+    new command = Command_GetID("togscroll");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

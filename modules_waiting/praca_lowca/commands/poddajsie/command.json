@@ -1,7 +1,7 @@
 {
     "name": "poddajsie",
     "description": "Zaoferuj graczowi poddanie siê.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

@@ -1,7 +1,7 @@
 {
     "name": "tognewbie",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "togn"

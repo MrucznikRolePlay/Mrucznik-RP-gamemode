@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_setvw()
 {
-    
+    new command = Command_GetID("setvw");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

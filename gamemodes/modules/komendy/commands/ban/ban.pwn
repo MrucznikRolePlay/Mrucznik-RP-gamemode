@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_ban()
 {
-    
+    new command = Command_GetID("ban");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -41,6 +41,7 @@ command_kupdragi()
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

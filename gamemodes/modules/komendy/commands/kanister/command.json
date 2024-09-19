@@ -1,7 +1,7 @@
 {
     "name": "kanister",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "fillcar"

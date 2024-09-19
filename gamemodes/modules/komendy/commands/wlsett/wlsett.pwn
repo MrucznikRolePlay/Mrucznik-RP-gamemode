@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_wlsett()
 {
-    
+    new command = Command_GetID("wlsett");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

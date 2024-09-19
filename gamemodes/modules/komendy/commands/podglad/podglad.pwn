@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_podglad()
 {
-    
+    new command = Command_GetID("podglad");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

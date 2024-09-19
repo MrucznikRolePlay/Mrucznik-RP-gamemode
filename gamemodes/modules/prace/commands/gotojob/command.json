@@ -1,7 +1,7 @@
 {
     "name": "gotojob",
     "description": "Teleportuje Ciê do pracy.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

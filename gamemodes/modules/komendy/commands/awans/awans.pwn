@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_awans()
 {
-    
+    new command = Command_GetID("awans");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "przemyt",
     "description": "Rozpoczyna przemyt.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

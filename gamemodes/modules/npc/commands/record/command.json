@@ -1,7 +1,7 @@
 {
     "name": "record",
     "description": "Nagrywa gracza.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "recordnpc", "rec"

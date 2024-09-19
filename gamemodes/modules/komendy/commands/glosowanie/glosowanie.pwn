@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_glosowanie()
 {
-    
+    new command = Command_GetID("glosowanie");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

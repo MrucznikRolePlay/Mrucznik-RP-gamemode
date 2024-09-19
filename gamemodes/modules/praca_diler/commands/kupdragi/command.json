@@ -1,7 +1,7 @@
 {
     "name": "kupdragi",
     "description": "Kup narkotyki od dilera w lodziarni.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "kupnarkotyki",

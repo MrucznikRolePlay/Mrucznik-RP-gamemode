@@ -1,7 +1,7 @@
 {
     "name": "tankowanie",
     "description": "Oferuje graczowi dodankowanie jego pojazdu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "refill"

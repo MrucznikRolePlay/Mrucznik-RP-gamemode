@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_getcar()
 {
-    
+    new command = Command_GetID("getcar");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

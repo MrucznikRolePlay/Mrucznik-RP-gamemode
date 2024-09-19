@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zmienskin()
 {
-    
+    new command = Command_GetID("zmienskin");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

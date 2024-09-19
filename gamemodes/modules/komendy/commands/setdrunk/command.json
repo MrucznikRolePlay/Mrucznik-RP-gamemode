@@ -1,7 +1,7 @@
 {
     "name": "setdrunk",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

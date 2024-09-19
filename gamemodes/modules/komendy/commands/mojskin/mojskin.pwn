@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_mojskin()
 {
-    
+    new command = Command_GetID("mojskin");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

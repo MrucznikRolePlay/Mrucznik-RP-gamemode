@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zniszczobiekty()
 {
-    
+    new command = Command_GetID("zniszczobiekty");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

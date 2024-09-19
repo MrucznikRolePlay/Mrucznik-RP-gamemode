@@ -1,7 +1,7 @@
 {
     "name": "togwl",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "togcrime",

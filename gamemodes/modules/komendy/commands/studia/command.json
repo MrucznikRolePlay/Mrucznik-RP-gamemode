@@ -1,7 +1,7 @@
 {
     "name": "studia",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

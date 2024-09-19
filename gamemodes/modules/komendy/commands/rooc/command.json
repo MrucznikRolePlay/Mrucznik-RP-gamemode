@@ -1,7 +1,7 @@
 {
     "name": "rooc",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "radioooc",

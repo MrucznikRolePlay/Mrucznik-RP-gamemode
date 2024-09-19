@@ -1,7 +1,7 @@
 {
     "name": "mojskin",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

@@ -1,7 +1,7 @@
 {
     "name": "kamera_wiezienie",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "kameraw",

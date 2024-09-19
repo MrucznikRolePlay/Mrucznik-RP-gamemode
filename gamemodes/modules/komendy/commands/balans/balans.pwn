@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_balans()
 {
-    
+    new command = Command_GetID("balans");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

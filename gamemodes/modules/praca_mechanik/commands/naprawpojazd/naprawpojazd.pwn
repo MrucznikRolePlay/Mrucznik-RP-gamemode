@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_naprawpojazd()
 {
-    
+    new command = Command_GetID("naprawpojazd");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "materialy",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "materials",

@@ -1,7 +1,7 @@
 {
     "name": "zbijwl",
     "description": "Zbij graczowi Poziom Poszukiwania.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

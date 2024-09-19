@@ -1,7 +1,7 @@
 {
     "name": "news",
     "description": "Komenda pozwala wypowiadaæ siê na chacie San News - g³ównie uznawanym za radio.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Simeone",
     "aliases": [
         "wiadomosc"

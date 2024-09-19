@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_makemember()
 {
-    
+    new command = Command_GetID("makemember");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

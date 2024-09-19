@@ -1,7 +1,7 @@
 {
     "name": "raport",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "report"

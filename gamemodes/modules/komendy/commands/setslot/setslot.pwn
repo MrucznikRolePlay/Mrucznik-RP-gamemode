@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_setslot()
 {
-    
+    new command = Command_GetID("setslot");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

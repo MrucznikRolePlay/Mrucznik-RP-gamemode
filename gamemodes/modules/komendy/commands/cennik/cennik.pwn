@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_cennik()
 {
-    
+    new command = Command_GetID("cennik");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

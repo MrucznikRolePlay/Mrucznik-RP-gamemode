@@ -1,7 +1,7 @@
 {
     "name": "icons",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "ikonki",

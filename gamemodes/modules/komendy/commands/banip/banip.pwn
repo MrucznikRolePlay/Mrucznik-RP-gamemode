@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_banip()
 {
-    
+    new command = Command_GetID("banip");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

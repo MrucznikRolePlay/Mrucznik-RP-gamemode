@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_przemyt()
 {
-    
+    new command = Command_GetID("przemyt");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

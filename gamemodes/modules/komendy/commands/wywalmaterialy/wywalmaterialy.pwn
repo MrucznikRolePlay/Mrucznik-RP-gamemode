@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_wywalmaterialy()
 {
-    
+    new command = Command_GetID("wywalmaterialy");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

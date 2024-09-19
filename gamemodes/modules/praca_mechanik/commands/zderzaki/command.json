@@ -1,7 +1,7 @@
 {
     "name": "zderzaki",
     "description": "Montowanie zderzaków na samochodzie.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "zderzak"

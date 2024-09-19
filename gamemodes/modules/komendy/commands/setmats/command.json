@@ -1,7 +1,7 @@
 {
     "name": "setmats",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

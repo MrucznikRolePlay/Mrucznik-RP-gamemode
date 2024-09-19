@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_alkomat()
 {
-    
+    new command = Command_GetID("alkomat");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

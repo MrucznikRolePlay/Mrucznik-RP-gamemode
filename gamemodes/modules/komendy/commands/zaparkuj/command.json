@@ -1,7 +1,7 @@
 {
     "name": "zaparkuj",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "parkuj"

@@ -1,7 +1,7 @@
 {
     "name": "mi",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "deathwarning",

@@ -1,7 +1,7 @@
 {
     "name": "fbidrzwi",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

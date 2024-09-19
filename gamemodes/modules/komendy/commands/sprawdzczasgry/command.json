@@ -1,7 +1,7 @@
 {
     "name": "sprawdzczasgry",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "getplaytime"

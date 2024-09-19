@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_dmvoff()
 {
-    
+    new command = Command_GetID("dmvoff");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

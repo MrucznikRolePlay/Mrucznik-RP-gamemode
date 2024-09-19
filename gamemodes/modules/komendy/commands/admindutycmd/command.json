@@ -1,7 +1,7 @@
 {
     "name": "admindutycmd",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "aduty",

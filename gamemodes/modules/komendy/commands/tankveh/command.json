@@ -1,7 +1,7 @@
 {
     "name": "tankveh",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "fuelcar",

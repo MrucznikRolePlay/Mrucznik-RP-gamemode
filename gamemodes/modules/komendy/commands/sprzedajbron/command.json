@@ -1,7 +1,7 @@
 {
     "name": "sprzedajbron",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "sellgun"

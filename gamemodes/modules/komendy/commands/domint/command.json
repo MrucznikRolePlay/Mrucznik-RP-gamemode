@@ -1,7 +1,7 @@
 {
     "name": "domint",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

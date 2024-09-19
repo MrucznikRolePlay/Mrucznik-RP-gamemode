@@ -1,7 +1,7 @@
 {
     "name": "wypij",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "drink",

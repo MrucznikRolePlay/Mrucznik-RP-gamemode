@@ -1,7 +1,7 @@
 {
     "name": "bpracownicy",
     "description": "Wyœwietla listê pracowników online biznesu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Simeone",
     "aliases": [
         "biznespracownicy",

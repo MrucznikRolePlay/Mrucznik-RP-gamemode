@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_skinf()
 {
-    
+    new command = Command_GetID("skinf");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

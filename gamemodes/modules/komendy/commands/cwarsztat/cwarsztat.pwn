@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_cwarsztat()
 {
-    
+    new command = Command_GetID("cwarsztat");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

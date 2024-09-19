@@ -1,7 +1,7 @@
 {
     "name": "sprawdzdom",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "checkdom"

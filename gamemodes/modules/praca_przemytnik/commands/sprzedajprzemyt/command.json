@@ -1,7 +1,7 @@
 {
     "name": "sprzedajprzemyt",
     "description": "Oferuje graczowi przedmiot z przemytu na sprzeda¿.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "sprzedajprzemyt",

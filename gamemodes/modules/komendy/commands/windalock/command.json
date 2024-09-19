@@ -1,7 +1,7 @@
 {
     "name": "windalock",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

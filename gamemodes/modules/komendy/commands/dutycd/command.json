@@ -1,7 +1,7 @@
 {
     "name": "dutycd",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "dutysbi"

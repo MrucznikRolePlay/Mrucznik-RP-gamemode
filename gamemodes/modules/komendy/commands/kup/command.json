@@ -1,7 +1,7 @@
 {
     "name": "kup",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "buy"

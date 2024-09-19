@@ -1,7 +1,7 @@
 {
     "name": "pancerz",
     "description": "Zak³adasz kamizelkê kuloodporn¹.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

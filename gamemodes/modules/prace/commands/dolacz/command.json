@@ -1,7 +1,7 @@
 {
     "name": "dolacz",
     "description": "Do³¹cz do pracy dorywczej.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "join"

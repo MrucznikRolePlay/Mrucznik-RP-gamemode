@@ -1,7 +1,7 @@
 {
     "name": "sprawdzneon",
     "description": "Sprawdza, jaki neon jest zamontowany w pojeüdzie gracza.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

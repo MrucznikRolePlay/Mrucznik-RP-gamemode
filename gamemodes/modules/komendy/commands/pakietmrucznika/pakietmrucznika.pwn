@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_pakietmrucznika()
 {
-    
+    new command = Command_GetID("pakietmrucznika");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "wywaltelefon",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wywaltel"

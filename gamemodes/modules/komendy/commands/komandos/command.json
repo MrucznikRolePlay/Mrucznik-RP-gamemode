@@ -1,7 +1,7 @@
 {
     "name": "komandos",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wino"

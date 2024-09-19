@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_wezportfel()
 {
-    
+    new command = Command_GetID("wezportfel");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "konsola",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

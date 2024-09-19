@@ -1,7 +1,7 @@
 {
     "name": "ustawmistrz",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "setchamp",

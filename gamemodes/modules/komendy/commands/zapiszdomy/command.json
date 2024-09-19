@@ -1,7 +1,7 @@
 {
     "name": "zapiszdomy",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

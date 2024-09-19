@@ -1,7 +1,7 @@
 {
     "name": "zamroz",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "freeze"

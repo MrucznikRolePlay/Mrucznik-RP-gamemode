@@ -1,7 +1,7 @@
 {
     "name": "czyjtonumer",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_okienko()
 {
-    
+    new command = Command_GetID("okienko");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

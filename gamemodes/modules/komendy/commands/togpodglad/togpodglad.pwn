@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_togpodglad()
 {
-    
+    new command = Command_GetID("togpodglad");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

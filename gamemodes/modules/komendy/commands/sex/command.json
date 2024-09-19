@@ -1,7 +1,7 @@
 {
     "name": "sex",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

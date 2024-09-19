@@ -1,7 +1,7 @@
 {
     "name": "od",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "odbierz"

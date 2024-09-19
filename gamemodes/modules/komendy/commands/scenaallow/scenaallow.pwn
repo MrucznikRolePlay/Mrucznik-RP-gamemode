@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_scenaallow()
 {
-    
+    new command = Command_GetID("scenaallow");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

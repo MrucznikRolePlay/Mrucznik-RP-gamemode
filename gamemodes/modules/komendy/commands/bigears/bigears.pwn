@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_bigears()
 {
-    
+    new command = Command_GetID("bigears");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

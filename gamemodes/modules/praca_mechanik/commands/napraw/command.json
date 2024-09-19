@@ -1,7 +1,7 @@
 {
     "name": "napraw",
     "description": "Oferuje graczowi naprawê auta.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "repair"

@@ -1,7 +1,7 @@
 {
     "name": "uwb",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

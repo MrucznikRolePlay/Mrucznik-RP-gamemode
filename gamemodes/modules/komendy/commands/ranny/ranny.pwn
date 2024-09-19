@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_ranny()
 {
-    
+    new command = Command_GetID("ranny");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

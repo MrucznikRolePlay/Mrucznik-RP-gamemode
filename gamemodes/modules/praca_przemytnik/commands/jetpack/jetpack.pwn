@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_jetpack()
 {
-    
+    new command = Command_GetID("jetpack");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

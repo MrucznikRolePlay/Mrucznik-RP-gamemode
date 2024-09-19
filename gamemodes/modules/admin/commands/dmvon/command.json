@@ -1,7 +1,7 @@
 {
     "name": "dmvon",
     "description": "Komenda, która pozwala w³¹czyæ/wy³¹czyæ boty w urzêdzie Miasta.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "Simeone",
     "aliases": [],
     "parameters": [],

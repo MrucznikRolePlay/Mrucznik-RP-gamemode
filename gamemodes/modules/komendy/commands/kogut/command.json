@@ -1,7 +1,7 @@
 {
     "name": "kogut",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "syrena",

@@ -1,7 +1,7 @@
 {
     "name": "usunpozar",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

@@ -1,7 +1,7 @@
 {
     "name": "trasy",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wyscigi"

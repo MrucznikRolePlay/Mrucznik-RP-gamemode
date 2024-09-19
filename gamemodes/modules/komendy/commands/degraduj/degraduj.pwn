@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_degraduj()
 {
-    
+    new command = Command_GetID("degraduj");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

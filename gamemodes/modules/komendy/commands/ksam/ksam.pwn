@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_ksam()
 {
-    
+    new command = Command_GetID("ksam");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

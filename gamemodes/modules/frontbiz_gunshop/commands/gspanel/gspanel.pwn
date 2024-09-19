@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_gspanel()
 {
-    
+    new command = Command_GetID("gspanel");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

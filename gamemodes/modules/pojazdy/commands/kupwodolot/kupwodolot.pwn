@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_kupwodolot()
 {
-    
+    new command = Command_GetID("kupwodolot");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

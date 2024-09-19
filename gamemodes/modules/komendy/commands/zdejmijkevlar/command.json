@@ -1,7 +1,7 @@
 {
     "name": "zdejmijkevlar",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wyrzuckami",

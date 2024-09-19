@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_trasa()
 {
-    
+    new command = Command_GetID("trasa");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

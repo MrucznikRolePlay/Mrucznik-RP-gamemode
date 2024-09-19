@@ -1,7 +1,7 @@
 {
     "name": "wezwijwoz",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "callcar"

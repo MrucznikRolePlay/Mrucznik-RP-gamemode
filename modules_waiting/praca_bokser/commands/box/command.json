@@ -1,7 +1,7 @@
 {
     "name": "box",
     "description": "Rozpocznij sparing bokserski.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "boks"

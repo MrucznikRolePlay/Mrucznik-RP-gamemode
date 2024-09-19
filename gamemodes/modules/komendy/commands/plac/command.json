@@ -1,7 +1,7 @@
 {
     "name": "plac",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "pay",

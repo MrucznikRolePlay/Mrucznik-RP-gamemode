@@ -1,7 +1,7 @@
 {
     "name": "opispomoc",
     "description": "Komendy dotycz¹ce opisów.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "deschelp",

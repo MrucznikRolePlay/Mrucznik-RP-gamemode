@@ -1,7 +1,7 @@
 {
     "name": "wejdzw",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wyjdzw"

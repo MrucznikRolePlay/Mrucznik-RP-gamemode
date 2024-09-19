@@ -1,7 +1,7 @@
 {
     "name": "wezdragi",
     "description": "Za¿yj narkotyki.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "usedrugs",

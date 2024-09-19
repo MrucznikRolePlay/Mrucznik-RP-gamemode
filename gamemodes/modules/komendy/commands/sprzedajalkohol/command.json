@@ -1,7 +1,7 @@
 {
     "name": "sprzedajalkohol",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "sprzedaja",

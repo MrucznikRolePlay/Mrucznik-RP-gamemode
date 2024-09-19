@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_mikser()
 {
-    
+    new command = Command_GetID("mikser");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

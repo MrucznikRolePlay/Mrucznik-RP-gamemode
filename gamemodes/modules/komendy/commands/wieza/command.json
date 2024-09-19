@@ -1,7 +1,7 @@
 {
     "name": "wieza",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "tower"

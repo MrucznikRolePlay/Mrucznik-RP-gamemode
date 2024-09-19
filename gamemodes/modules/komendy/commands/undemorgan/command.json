@@ -1,7 +1,7 @@
 {
     "name": "undemorgan",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "prisonoff",

@@ -1,7 +1,7 @@
 {
     "name": "wezzlecenie",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "zlecenie"

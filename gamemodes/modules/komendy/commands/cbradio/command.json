@@ -1,7 +1,7 @@
 {
     "name": "cbradio",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "cb",

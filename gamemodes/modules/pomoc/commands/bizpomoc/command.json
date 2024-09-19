@@ -1,7 +1,7 @@
 {
     "name": "bizpomoc",
     "description": "Komendy dotycz¹ce biznesów.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "biznespomoc",

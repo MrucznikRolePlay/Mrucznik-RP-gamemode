@@ -1,7 +1,7 @@
 {
     "name": "naprawpojazd",
     "description": "Naprawia pojazd za pomoc¹ zestawu naprawczego kupionego od mechanika.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

@@ -1,7 +1,7 @@
 {
     "name": "qf",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "quitfrakcja"

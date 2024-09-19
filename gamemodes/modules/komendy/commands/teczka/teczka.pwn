@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_teczka()
 {
-    
+    new command = Command_GetID("teczka");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

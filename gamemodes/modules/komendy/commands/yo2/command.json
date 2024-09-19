@@ -1,7 +1,7 @@
 {
     "name": "yo2",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

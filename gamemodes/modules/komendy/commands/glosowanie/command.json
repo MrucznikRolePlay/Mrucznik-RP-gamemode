@@ -1,7 +1,7 @@
 {
     "name": "glosowanie",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

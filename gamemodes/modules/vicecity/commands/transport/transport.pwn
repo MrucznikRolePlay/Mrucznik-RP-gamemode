@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_transport()
 {
-    
+    new command = Command_GetID("transport");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

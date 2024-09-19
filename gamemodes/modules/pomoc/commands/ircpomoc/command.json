@@ -1,7 +1,7 @@
 {
     "name": "ircpomoc",
     "description": "Komendy dotycz¹ce chatu IRC.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "irchelp"

@@ -1,7 +1,7 @@
 {
     "name": "dajklucze",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "kluczyki",

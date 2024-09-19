@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_ip5()
 {
-    
+    new command = Command_GetID("ip5");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

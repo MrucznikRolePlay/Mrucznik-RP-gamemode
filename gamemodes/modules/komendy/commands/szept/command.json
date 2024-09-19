@@ -1,7 +1,7 @@
 {
     "name": "szept",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "cicho",

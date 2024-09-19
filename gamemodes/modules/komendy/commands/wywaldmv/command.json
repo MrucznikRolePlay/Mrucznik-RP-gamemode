@@ -1,7 +1,7 @@
 {
     "name": "wywaldmv",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wywalzdmv"

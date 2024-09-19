@@ -1,7 +1,7 @@
 {
     "name": "screenshot",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "ss"

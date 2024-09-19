@@ -1,7 +1,7 @@
 {
     "name": "setzonecontrol",
     "description": "Nadaje kontrole nad dan¹ stref¹.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_dajkm()
 {
-    
+    new command = Command_GetID("dajkm");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

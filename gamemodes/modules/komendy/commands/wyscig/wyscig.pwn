@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_wyscig()
 {
-    
+    new command = Command_GetID("wyscig");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

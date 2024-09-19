@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_kostka()
 {
-    
+    new command = Command_GetID("kostka");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

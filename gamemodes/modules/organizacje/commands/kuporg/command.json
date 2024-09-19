@@ -6,7 +6,7 @@
         "Gangi mog¹ przejmowaæ strefy gangów w Los Santos.",
         "Mafie mog¹ przejmowaæ biznesy w Vice City."
     ],
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "kuporganizacje",

@@ -1,7 +1,7 @@
 {
     "name": "wywaldragi",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "wd",

@@ -1,7 +1,7 @@
 {
     "name": "nastepnylevel",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "buylevel",

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_blokujnoba()
 {
-    
+    new command = Command_GetID("blokujnoba");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

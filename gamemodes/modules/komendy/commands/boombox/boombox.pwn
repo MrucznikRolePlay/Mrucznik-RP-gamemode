@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_boombox()
 {
-    
+    new command = Command_GetID("boombox");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

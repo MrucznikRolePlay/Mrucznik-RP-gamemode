@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_kolejka()
 {
-    
+    new command = Command_GetID("kolejka");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

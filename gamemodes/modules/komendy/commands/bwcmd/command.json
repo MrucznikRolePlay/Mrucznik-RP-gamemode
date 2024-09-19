@@ -1,7 +1,7 @@
 {
     "name": "bwcmd",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": ["bw"],
     "parameters": [

@@ -1,7 +1,7 @@
 {
     "name": "ulepsz",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "upgrade",

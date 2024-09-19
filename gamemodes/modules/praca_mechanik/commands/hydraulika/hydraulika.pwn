@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_hydraulika()
 {
-    
+    new command = Command_GetID("hydraulika");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

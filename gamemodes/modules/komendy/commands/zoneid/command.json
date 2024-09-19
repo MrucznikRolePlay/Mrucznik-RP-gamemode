@@ -1,7 +1,7 @@
 {
     "name": "zoneid",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

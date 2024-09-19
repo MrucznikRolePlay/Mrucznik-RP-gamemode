@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_setkontrabanda()
 {
-    
+    new command = Command_GetID("setkontrabanda");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

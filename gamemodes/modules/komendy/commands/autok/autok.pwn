@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_autok()
 {
-    
+    new command = Command_GetID("autok");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

@@ -1,7 +1,7 @@
 {
     "name": "telefonpomoc",
     "description": "Komendy dotycz¹ce telefonu.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [
         "phonehelp",

@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_rezonans()
 {
-    
+    new command = Command_GetID("rezonans");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

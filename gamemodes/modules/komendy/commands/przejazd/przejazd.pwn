@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_przejazd()
 {
-    
+    new command = Command_GetID("przejazd");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

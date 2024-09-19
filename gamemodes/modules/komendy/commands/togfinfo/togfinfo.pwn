@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_togfinfo()
 {
-    
+    new command = Command_GetID("togfinfo");
 
     //aliases
     
 
     //permissions
+    Group_SetCommand(Group_GetID("global"), command, true);
     
 
     //prefix

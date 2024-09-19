@@ -1,7 +1,7 @@
 {
     "name": "forceskin",
     "description": "",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

@@ -1,7 +1,7 @@
 {
     "name": "diluj",
     "description": "Rozpoczyna dilerkê narkotyków w pojeŸdzie do dilowania.",
-    "permissions": [],
+    "permissions": ["global"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [
