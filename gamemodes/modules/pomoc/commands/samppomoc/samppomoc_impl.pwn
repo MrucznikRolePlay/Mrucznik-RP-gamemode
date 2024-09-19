@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 samppomoc                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,52 +16,23 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 19.09.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "rybypomoc\rybypomoc.pwn"
-#include "telefonpomoc\telefonpomoc.pwn"
-#include "orgpomoc\orgpomoc.pwn"
-#include "bizpomoc\bizpomoc.pwn"
-#include "dompomoc\dompomoc.pwn"
-#include "autopomoc\autopomoc.pwn"
-#include "samppomoc\samppomoc.pwn"
-#include "vopispomoc\vopispomoc.pwn"
-#include "pracapomoc\pracapomoc.pwn"
-#include "wynajempomoc\wynajempomoc.pwn"
-#include "liderpomoc\liderpomoc.pwn"
-#include "ircpomoc\ircpomoc.pwn"
-#include "help\help.pwn"
-#include "opispomoc\opispomoc.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_samppomoc_Impl(playerid)
 {
-    command_rybypomoc();
-    command_telefonpomoc();
-    command_orgpomoc();
-    command_bizpomoc();
-    command_dompomoc();
-    command_autopomoc();
-    command_samppomoc();
-    command_vopispomoc();
-    command_pracapomoc();
-    command_wynajempomoc();
-    command_liderpomoc();
-    command_ircpomoc();
-    command_help();
-    command_opispomoc();
-    
+    SendClientMessage(playerid, COLOR_GREEN, "______________________SAMP POMOC______________________");
+    SendClientMessage(playerid, COLOR_WHITE, "*** Wpisz komendê, aby uzyskaæ wiêcej pomocy.");
+    SendClientMessage(playerid, COLOR_WHITE, "** SAMP ** /pagesize /headmove /fpslimit /fontsize /ctd /nametagstatus");
+    SendClientMessage(playerid, COLOR_WHITE, "** SAMP ** /save /rs /interior /timestamp /mem /dl /audiomsg /q");
+    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /autopomoc /bizpomoc /dompomoc /ircpomoc /liderpomoc /opispomoc /telefonpomoc");
+    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc");
+    SendClientMessage(playerid, COLOR_GREEN, "______________________________________________________");
+    return 1;
 }
+
+//end

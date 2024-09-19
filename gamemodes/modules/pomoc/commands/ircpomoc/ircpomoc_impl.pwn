@@ -31,7 +31,7 @@ command_ircpomoc_Impl(playerid)
     SendClientMessage(playerid, COLOR_WHITE, "** IRC ** (/irc Password [nrkana³u])  (/irc NeedPass [nrkana³u])  (/irc Lock [nrkana³u])");
     SendClientMessage(playerid, COLOR_WHITE, "** IRC ** (/irc Admins)  (/irc MOTD [motdtext]) (/irc status [nrkana³u]) (/i [text])");
     SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /autopomoc /bizpomoc /dompomoc /liderpomoc /opispomoc /rybypomoc /telefonpomoc");
-    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc");
+    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc /samppomoc");
     SendClientMessage(playerid, COLOR_GREEN, "_______________________________________________________");
     return 1;
 }
