@@ -33,11 +33,11 @@ ShowHelpCommands(playerid, color, command[])
 	format(commandWithSpace, sizeof(commandWithSpace), "%s ", command);
 	format(string, sizeof(string), " *** POMOC *** /autopomoc /bizpomoc /dompomoc /ircpomoc /liderpomoc /opispomoc /rybypomoc /telefonpomoc ");
 	strreplace(string, commandWithSpace, "");
-	SendClientMessage(playerid, COLOR_WHITE, string);
+	SendClientMessage(playerid, color, string);
 
     format(string, sizeof(string), " *** POMOC *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc /samppomoc ");
 	strreplace(string, commandWithSpace, "");
-	SendClientMessage(playerid, COLOR_WHITE, string);
+	SendClientMessage(playerid, color, string);
 }
 
 //end
