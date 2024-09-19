@@ -52,10 +52,6 @@ command_pracapomoc_Impl(playerid)
 		// case JOB_RESERVED_3: { }
 		case JOB_TRUCKER: { SendClientMessage(playerid,COLOR_GRAD5,"*** PRACA *** /zlecenie - nowe zlecenia s¹ od wy¿szego skilla!"); }
     }
-    if (PlayerInfo[playerid][pAdmin] >= 1)
-    {
-        SendClientMessage(playerid, COLOR_GRAD6, "*** ADMIN *** (/a)dmin (/ah)elp");
-    }
     SendClientMessage(playerid, COLOR_GREEN, "_______________________________________________________");
     return 1;
 }
