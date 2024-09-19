@@ -34,8 +34,7 @@ command_help_Impl(playerid)
     SendClientMessage(playerid, COLOR_WHITE, " *** BANK *** /stan /wplac /wyplac /bank /przelew /kb(kontobankowe)");
     SendClientMessage(playerid, COLOR_WHITE, " *** CHAT *** (/w)iadomosc (/cb)radio (/k)rzyk (/s)zept (/og)loszenie (/l)ocal (/b) (/n)ewbie (/o)oc /me /do /spróbuj");
     SendClientMessage(playerid, COLOR_WHITE, " *** BLOKADY *** /togooc /togdepo /togfam /togw /togtel /toglicznik /tognewbie /togadmin /togopis /togvopis");
-    SendClientMessage(playerid, COLOR_WHITE, " *** POMOC *** /autopomoc /bizpomoc /dompomoc /ircpomoc /liderpomoc /opispomoc /rybypomoc /telefonpomoc");
-    SendClientMessage(playerid, COLOR_WHITE, " *** POMOC *** /vopispomoc /wynajempomoc /samppomoc");
+    ShowHelpCommands(playerid, COLOR_WHITE, "/pomoc");
     SendClientMessage(playerid, COLOR_WHITE, " *** INNE *** Wsparcie i zg³oszenia graczy: /zapytaj /report");
     SendClientMessage(playerid, COLOR_GREEN, "_______________________________________________________");
     return 1;

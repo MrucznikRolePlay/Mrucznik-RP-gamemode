@@ -29,8 +29,7 @@ command_samppomoc_Impl(playerid)
     SendClientMessage(playerid, COLOR_WHITE, "*** Wpisz komendê, aby uzyskaæ wiêcej pomocy.");
     SendClientMessage(playerid, COLOR_WHITE, "** SAMP ** /pagesize /headmove /fpslimit /fontsize /ctd /nametagstatus");
     SendClientMessage(playerid, COLOR_WHITE, "** SAMP ** /save /rs /interior /timestamp /mem /dl /audiomsg /q");
-    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /autopomoc /bizpomoc /dompomoc /ircpomoc /liderpomoc /opispomoc /telefonpomoc");
-    SendClientMessage(playerid, COLOR_WHITE, "*** INNE *** /orgpomoc /pracapomoc /vopispomoc /wynajempomoc");
+    ShowHelpCommands(playerid, COLOR_WHITE, "/samppomoc");
     SendClientMessage(playerid, COLOR_GREEN, "______________________________________________________");
     return 1;
 }
