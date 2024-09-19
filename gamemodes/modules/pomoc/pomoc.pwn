@@ -39,7 +39,7 @@ ShowHelpCommands(playerid, color, command[])
 	strreplace(string, commandWithSpace, "");
 	if(PlayerInfo[playerid][pAdmin] > 0)
 	{
-		strcat(string, " /adminpomoc");
+		strcat(string, " /adminpomoc ");
 	}	
 	SendClientMessage(playerid, color, string);
 }
