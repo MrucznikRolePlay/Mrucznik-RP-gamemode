@@ -1085,6 +1085,7 @@ ZerujZmienne(playerid)
 	TalkingLive[playerid] = INVALID_PLAYER_ID; LiveOffer[playerid] = 999; TakingLesson[playerid] = 0; CenaDawanegoSamolot[playerid] = 999;
 	RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; MapIconsShown[playerid] = 0; CenaDawanegoAuta[playerid] = 999; AntySpam[playerid] = 0; poscig[playerid] = 0;
 	DrugOffer[playerid] = 999; CenaDawanegoLodz[playerid] = 999;
+	SmugglingOffer[playerid] = 999;
 	ContrabandOffer[playerid] = 999; ContrabandCount[playerid] = 0; ContrabandPrice[playerid] = 0;
 	DrugPrice[playerid] = 0; OnCK[playerid] = 999; GettingCK[playerid] = 999; OdpalanieSpam[playerid] = 0;
 	DrugGram[playerid] = 0; ConnectedToPC[playerid] = 0; OrderReady[playerid] = 0;

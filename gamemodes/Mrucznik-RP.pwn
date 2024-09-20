@@ -2116,7 +2116,7 @@ SetPlayerSpawnPos(playerid)
 		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
 				if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
-				else SetPlayerVirtualWorld(playerid, 0); 
+				else SetPlayerVirtualWorld(playerid, 0);
 				if(GetPlayerFraction(playerid) > 0) //Spawn Frakcji
 				{
 				    switch(GetPlayerFraction(playerid))
