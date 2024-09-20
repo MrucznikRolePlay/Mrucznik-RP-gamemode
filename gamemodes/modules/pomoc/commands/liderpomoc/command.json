@@ -1,7 +1,7 @@
 {
     "name": "liderpomoc",
     "description": "Komendy liderów frakcji i organizacji.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "leaderhelp",

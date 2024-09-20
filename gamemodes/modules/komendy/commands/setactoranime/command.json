@@ -1,7 +1,7 @@
 {
     "name": "setactoranime",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

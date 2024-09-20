@@ -1,7 +1,7 @@
 {
     "name": "lidercar",
     "description": "Komenda dla liderów frakcji i organizacji pozwalaj¹ca zarz¹dzaæ ich pojazdem.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "liderveh",

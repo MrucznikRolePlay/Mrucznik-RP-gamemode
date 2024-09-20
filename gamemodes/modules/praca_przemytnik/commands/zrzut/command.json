@@ -1,7 +1,7 @@
 {
     "name": "zrzut",
     "description": "Zrzuca paczkê z kontraband¹.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

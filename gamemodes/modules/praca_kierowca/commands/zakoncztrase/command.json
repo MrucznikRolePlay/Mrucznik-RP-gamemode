@@ -1,7 +1,7 @@
 {
     "name": "zakoncztrase",
     "description": "Koñczy trasê autobusow¹.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

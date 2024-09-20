@@ -1,7 +1,7 @@
 {
     "name": "wypusc",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "free",

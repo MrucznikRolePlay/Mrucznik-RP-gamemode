@@ -1,7 +1,7 @@
 {
     "name": "fixvc",
     "description": "Naprawia pozycjê, jeœli wpad³eœ pod textury bêd¹c w Vice City.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "fixvicecity"

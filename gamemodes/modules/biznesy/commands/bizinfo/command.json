@@ -1,7 +1,7 @@
 {
     "name": "bizinfo",
     "description": "Wyœwietla podstawowe informacje o biznesie.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "Simeone",
     "aliases": [],
     "parameters": [],

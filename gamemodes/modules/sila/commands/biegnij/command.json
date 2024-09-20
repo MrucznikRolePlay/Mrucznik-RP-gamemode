@@ -1,7 +1,7 @@
 {
     "name": "biegnij",
     "description": "Rozpoczyna bieg.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "Simeone",
     "aliases": [],
     "parameters": [],

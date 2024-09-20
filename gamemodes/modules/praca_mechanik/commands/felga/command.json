@@ -1,7 +1,7 @@
 {
     "name": "felga",
     "description": "Montowanie innej felgi w samochodzie.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

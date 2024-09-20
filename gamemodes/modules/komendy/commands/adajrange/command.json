@@ -1,7 +1,7 @@
 {
     "name": "adajrange",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "admindajrange"

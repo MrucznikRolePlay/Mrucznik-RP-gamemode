@@ -1,7 +1,7 @@
 {
     "name": "setkontrabanda",
     "description": "Ustaw graczowi kontrabande.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [

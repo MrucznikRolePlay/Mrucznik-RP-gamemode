@@ -1,7 +1,7 @@
 {
     "name": "stoprecord",
     "description": "Zatrzymuje nagrywanie ruchu gracza.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "stoprecordnpc", "stoprec"

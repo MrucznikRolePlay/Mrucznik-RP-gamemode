@@ -1,7 +1,7 @@
 {
     "name": "departament",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "d"

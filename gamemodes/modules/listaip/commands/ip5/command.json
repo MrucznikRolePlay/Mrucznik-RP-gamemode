@@ -1,7 +1,7 @@
 {
     "name": "ip5",
     "description": "Wyœwietlanie 5 ostatnich adresów IP, na których gra³ gracz pod danym nickiem.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "NikodemBanan",
     "aliases": [],
     "parameters": [

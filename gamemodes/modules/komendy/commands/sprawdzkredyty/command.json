@@ -1,7 +1,7 @@
 {
     "name": "sprawdzkredyty",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

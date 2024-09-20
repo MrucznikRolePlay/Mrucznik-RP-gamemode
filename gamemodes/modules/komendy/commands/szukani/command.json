@@ -1,7 +1,7 @@
 {
     "name": "szukani",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "wanted",

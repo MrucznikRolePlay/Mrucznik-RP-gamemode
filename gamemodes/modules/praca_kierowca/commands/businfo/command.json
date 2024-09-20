@@ -1,7 +1,7 @@
 {
     "name": "businfo",
     "description": "Informacje o trasach autobusowych.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "bus"

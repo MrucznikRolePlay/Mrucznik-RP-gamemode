@@ -1,7 +1,7 @@
 {
     "name": "spoiler",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "spojler"

@@ -1,7 +1,7 @@
 {
     "name": "blackjack",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

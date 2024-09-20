@@ -1,7 +1,7 @@
 {
     "name": "togvopis",
     "description": "W³¹czenie/wy³¹czenie wyœwietlania opisów pojazdów.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "NikodemBanan",
     "aliases": [],
     "parameters": [],

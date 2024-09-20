@@ -5,7 +5,7 @@
         "Dostêpne akcje: nazwa / motto / kolor / spawn / przyjmij / zwolnij / ranga / pracownicy / stawka / oddaj / usun",
         "Dostêpne akcje: stworzrange / pojazd / sejf"
     ],
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "pr",

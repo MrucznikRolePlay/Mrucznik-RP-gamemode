@@ -1,7 +1,7 @@
 {
     "name": "sprzedajmatsbot",
     "description": "Sprzedaj materialy botowi w GS",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "wiger",
     "aliases": [],
     "parameters": [

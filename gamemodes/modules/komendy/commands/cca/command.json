@@ -1,7 +1,7 @@
 {
     "name": "cca",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "cc"

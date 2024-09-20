@@ -1,7 +1,7 @@
 {
     "name": "sejf",
     "description": "Sejf organizacji",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "sejfr"

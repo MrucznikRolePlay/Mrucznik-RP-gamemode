@@ -1,7 +1,7 @@
 {
     "name": "sblok",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "sblock"

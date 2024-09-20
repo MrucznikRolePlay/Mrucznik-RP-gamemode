@@ -1,7 +1,7 @@
 {
     "name": "pracapomoc",
     "description": "Komendy dotycz¹ce pracy cywila.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "jobhelp",

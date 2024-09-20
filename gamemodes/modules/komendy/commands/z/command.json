@@ -1,7 +1,7 @@
 {
     "name": "z",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "hangup",

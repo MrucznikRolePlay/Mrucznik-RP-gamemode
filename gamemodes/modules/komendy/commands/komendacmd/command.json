@@ -1,7 +1,7 @@
 {
     "name": "komendacmd",
     "description": "Komenda s³u¿y do wyœwietlania informacji o innych komendach.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "command", "komenda", "cmd"

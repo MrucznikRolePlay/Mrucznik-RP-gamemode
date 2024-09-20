@@ -1,7 +1,7 @@
 {
     "name": "orgs",
     "description": "Pokazuje liste organizacji i ich pracowników.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": ["organizacje", "rodziny", "biznesy", "mafie", "gangi"],
     "parameters": [

@@ -1,7 +1,7 @@
 {
     "name": "ja",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "me"

@@ -1,7 +1,7 @@
 {
     "name": "upusc",
     "description": "Upuszcza gotówkê.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "drop"

@@ -1,7 +1,7 @@
 {
     "name": "namierz",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "find",

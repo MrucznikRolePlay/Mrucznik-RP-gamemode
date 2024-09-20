@@ -1,7 +1,7 @@
 {
     "name": "transport",
     "description": "Przetransportuj swój samochód na wyspê Vice City.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

@@ -1,7 +1,7 @@
 {
     "name": "selldrugs",
     "description": "Sprzeda¿ narkotyków.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "sprzedajnarkotyki",

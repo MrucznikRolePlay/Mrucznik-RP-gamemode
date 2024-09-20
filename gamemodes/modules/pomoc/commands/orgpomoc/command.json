@@ -1,7 +1,7 @@
 {
     "name": "orgpomoc",
     "description": "Komendy dotycz¹ce frakcji/organizacji.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "orghelp",

@@ -1,7 +1,7 @@
 {
     "name": "malunki",
     "description": "Lista dostêpnych painjobów dla samochodów.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "paintjobs"

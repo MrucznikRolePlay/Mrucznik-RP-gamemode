@@ -1,7 +1,7 @@
 {
     "name": "kupwodolot",
     "description": "Kupujesz wodolot.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [],
     "parameters": [],

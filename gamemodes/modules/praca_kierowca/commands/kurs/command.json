@@ -1,7 +1,7 @@
 {
     "name": "kurs",
     "description": "Ustaw stawkê za kilometr na swoim taksometrze.",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "fare"

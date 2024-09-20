@@ -1,7 +1,7 @@
 {
     "name": "setpogoda",
     "description": "",
-    "permissions": ["global"],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "setweather",
