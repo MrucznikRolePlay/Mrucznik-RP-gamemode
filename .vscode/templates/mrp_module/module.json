@@ -5,7 +5,7 @@
         {
             "name": "kick",
             "description": "Komenda kickuje graczy",
-            "permissions": ["global", "admin"],
+            "permissions": ["everyone", "admin"],
             "aliases": ["kickuj", "wyjebnooba"],
             "parameters": [
                 {
@@ -19,7 +19,7 @@
         {
             "name": "kick",
             "description": "Komenda kickuje graczy",
-            "permissions": ["global", "admin"],
+            "permissions": ["everyone", "admin"],
             "aliases": ["kickuj", "wyjebnooba"],
             "parameters": [
                 {

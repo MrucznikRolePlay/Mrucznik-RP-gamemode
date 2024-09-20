@@ -39,7 +39,7 @@ command_c()
     
 
     //permissions
-    Group_SetCommand(Group_GetID("global"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

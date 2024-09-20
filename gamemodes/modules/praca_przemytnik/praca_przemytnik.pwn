@@ -378,6 +378,7 @@ GatherPackage(actionID, boxid, contraband)
 
 EndSmuggling(actionID)
 {
+	MruMessageGoodInfo(playerid, "Akcja przemytnicza zosta³a zakoñczona!");
 	// TODO: end smuggling - give contraband to leader, send messages, clear objects
 }
 
