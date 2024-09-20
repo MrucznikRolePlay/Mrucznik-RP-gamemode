@@ -73,7 +73,7 @@ PickupBox(playerid, boxid)
 	new itemSlot = GetFreeAttachedObjectSlot(playerid);
 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
-    SetPlayerAttachedObject(playerid, itemSlot, Boxes[id][box_object], 5, 0.110999, 0.287000, 0.178999, 5.699999, 18.999992, 5.999998);
+    SetPlayerAttachedObject(playerid, itemSlot, Boxes[boxid][box_object], 5, 0.110999, 0.287000, 0.178999, 5.699999, 18.999992, 5.999998);
 	DestroyDynamicObject(Boxes[boxid][box_object]);
     ApplyAnimation(playerid,"CARRY","liftup", 4.0, 0, 0, 0, 0, 0);
 
