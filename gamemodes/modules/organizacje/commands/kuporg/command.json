@@ -25,7 +25,7 @@
         },
         {
             "type": "string",
-            "size": "32",
+            "size": "34",
             "name": "name",
             "description": "nazwa (max 32 znaki)"
         }

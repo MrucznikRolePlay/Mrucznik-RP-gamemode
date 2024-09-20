@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kuporg_Impl(playerid, color, orgType, name[32])
+command_kuporg_Impl(playerid, color, orgType, name[34])
 {
     if(kaska[playerid] < CREATE_ORG_COST)
     {
@@ -53,6 +53,12 @@ command_kuporg_Impl(playerid, color, orgType, name[32])
     if(GetPlayerFraction(playerid) != 0 || GetPlayerOrg(playerid) != 0 || GetPlayerJob(playerid) != 0)
     {
         MruMessageFail(playerid, "By zostaæ liderem organizacji nie mo¿esz byæ we frakcji/organizacji/pracy.");
+        return 1;
+    }
+
+    if(strlen(name) > 32)
+    {
+        MruMessageFail(playerid, "Nazwa organizacji nie mo¿e byæ d³u¿sza ni¿ 32 znaki.");
         return 1;
     }
 

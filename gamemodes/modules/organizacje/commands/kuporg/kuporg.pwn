@@ -57,8 +57,8 @@ YCMD:kuporg(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new color, orgType, name[32];
-    if(sscanf(params, "hds[32]", color, orgType, name))
+    new color, orgType, name[34];
+    if(sscanf(params, "hds[34]", color, orgType, name))
     {
         sendTipMessage(playerid, "U¿yj /kuporg [kolor w formacie hex (np. F1A151)] [typ organizacji (1 - Gang, 2 - Mafia)] [nazwa (max 32 znaki)] ");
         sendTipMessage(playerid, "Koszt stworzenia organizacji: "#CREATE_ORG_COST"$ i "#CREATE_ORG_CONTRABAND_COST" kontrabandy.");

@@ -63,7 +63,7 @@ SaveOrg(id)
     return 1;
 }
 
-CreateOrganisation(org, name[32], color, type)
+CreateOrganisation(org, name[], color, type)
 {
     OrgInfo[org][o_Type] = type;
     format(OrgInfo[org][o_Name], 32, name);
