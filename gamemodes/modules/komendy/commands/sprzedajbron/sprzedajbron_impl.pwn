@@ -217,7 +217,7 @@ SprzedajBronTip(playerid)
 
     for(new i; i<sizeof(GunInfo); i++)
     {
-        new skill = GunInfo[i][GunSkill];
+        new skill = GunInfo[i][GunSkill] - 1;
         if(GunInfo[i][GunContrabandCost] > 0)
         {
             strcat(contrabandGuns[skill], sprintf("%s(%d + %d) "));
