@@ -81,8 +81,9 @@ Movable_OnPlayerShootObject(playerid, weaponid, STREAMER_TAG_OBJECT:objectid, Fl
 	return 0;
 }
 
-hook OnPlayerDeath(playerid)
+hook OnPlayerDeath(playerid, killerid, reason)
 {
+	#pragma unused killerid, reason
 	if(IsPlayerCarryingBox(playerid)) 
 	{
 		DropBox(playerid);

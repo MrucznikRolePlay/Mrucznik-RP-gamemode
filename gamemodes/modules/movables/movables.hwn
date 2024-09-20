@@ -46,7 +46,7 @@ enum eBox
 new maxBoxID;
 
 new Boxes[MAX_MOVABLES][eBox];
-new carryingBox[MAX_PLAYERS];
+new carryingBox[MAX_PLAYERS] = {-1, ...};
 
 //------------------<[ Forwardy: ]>--------------------
 

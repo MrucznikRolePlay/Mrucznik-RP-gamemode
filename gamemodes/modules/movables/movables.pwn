@@ -73,7 +73,7 @@ PickupBox(playerid, boxid)
 	new itemSlot = GetFreeAttachedObjectSlot(playerid);
 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
-    SetPlayerAttachedObject(playerid, itemSlot, BOX_OBJECT, 5, 0.110999, 0.287000, 0.178999, 5.699999, 18.999992, 5.999998);
+    SetPlayerAttachedObject(playerid, itemSlot, Boxes[id][box_object], 5, 0.110999, 0.287000, 0.178999, 5.699999, 18.999992, 5.999998);
 	DestroyDynamicObject(Boxes[boxid][box_object]);
     ApplyAnimation(playerid,"CARRY","liftup", 4.0, 0, 0, 0, 0, 0);
 
@@ -98,22 +98,26 @@ DropBox(playerid)
 	ApplyAnimation(playerid, "CARRY", "putdwn", 4.1, 0, 0, 0, 0, 113); 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
 
-	defer AfterDropBox(playerid, boxid, x, y, z, angle);
-	return boxid;
-}
-
-timer AfterDropBox[113](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
-{
-	RemovePlayerAttachedObject(playerid, Boxes[boxid][box_attachedSlot]);
 	carryingBox[playerid] = -1;
 	Boxes[boxid][box_player] = -1;
 
 	Boxes[boxid][box_x] = x;
 	Boxes[boxid][box_y] = y;
 	Boxes[boxid][box_z] = z;
-	Boxes[boxid][box_object] = CreateDynamicObject(BOX_OBJECT, x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
 
 	OnPlayerDropMovableObject(playerid, boxid, Boxes[boxid][box_type], x, y, z, angle);
+
+	defer AfterDropBox(playerid, boxid, x, y, z, angle);
+	return boxid;
+}
+
+timer AfterDropBox[113](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
+{
+	Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_object], x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
+	if(IsPlayerConnected(playerid)) 
+	{
+		RemovePlayerAttachedObject(playerid, Boxes[boxid][box_attachedSlot]);
+	}
 	return 1;
 }
 
