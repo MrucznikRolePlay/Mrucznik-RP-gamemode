@@ -49,9 +49,9 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		}
 		mysql_real_escape_string(name, name);
 
-		if(strlen(name) > 32)
+		if(strlen(name) > MAX_FRONT_BUSINESS_NAME_LENGTH)
 		{
-			MruMessageFail(playerid, "Nazwa mo¿e mieæ maksymalnie 32 znaki.");
+			MruMessageFail(playerid, "Nazwa mo¿e mieæ maksymalnie "#MAX_FRONT_BUSINESS_NAME_LENGTH" znaki.");
 			return 1;
 		}
 

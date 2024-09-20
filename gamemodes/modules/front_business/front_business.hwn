@@ -48,14 +48,14 @@ new FrontBusinessType[BIZ_TYPE][32] = {
 };
 new FrontBusinessBenefits[BIZ_TYPE][64] = {
     "Brak",
-    "NPC sprzedaj¹cy broñ",
-	"Tworzenie wyœcigów",
+    "NPC sprzedaj¹cy bron",
+	"Tworzenie wyscigow",
 	"Zysk z ryb w biznesie +50\%",
-	"Sprzeda¿ alkoholu",
+	"Sprzedaz alkoholu",
     "Procent od hazardu w biznesie",
-	"50\% tañsze skiny",
-	"20\% wiêcej kontrabandy",
-	"neony + 50\% tañsza naprawa, tuning",
+	"50\% tansze skiny",
+	"20\% wiecej kontrabandy",
+	"neony + 50\% tansza naprawa, tuning",
     "Darmowe tankowanie"
 };
 

@@ -308,7 +308,7 @@ ShowFrontBusinessInfo(playerid, bizId)
 		"Zysk na godzine: ~g~~h~%d$~n~" \
 		"Bonus za gracza online: ~g~~h~%d$~n~" \
 		"+ %s", 
-		FrontBusiness[bizId][Name], 
+		Odpolszcz(FrontBusiness[bizId][Name]), 
 		FrontBusinessType[FrontBusiness[bizId][Type]],
 		owner,
 		hour, minute, endHour, endMinute,

@@ -43,6 +43,8 @@
 
 #define FRONT_BUSINESS_VW 8800
 
+#define MAX_FRONT_BUSINESS_NAME_LENGTH 32
+
 //------------------<[ Makra: ]>-------------------
 #define RedisFrontBizKey(%0,%1) sprintf("front_biz:%d:%s", %0, %1)
 
