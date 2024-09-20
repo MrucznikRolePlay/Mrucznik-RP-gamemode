@@ -87,15 +87,16 @@ command_akceptuj_pancerz(playerid)
     new itemPrice = SmugglingOfferPrice[playerid];
     new item = SmugglingOfferItem[playerid];
     new itemCost = SmugglingItemsData[item][Cost];
-    if(IsPlayerConnected(smugglerid))
+
+    if(smugglerid >= 999)
     {
         MruMessageFail(playerid, "Nikt nie zaoferowa³ ci przemiotu z przemytu.");
         return 1;
     }
 
-    if(smugglerid >= 999)
+    if(IsPlayerConnected(smugglerid))
     {
-        MruMessageFail(playerid, "Nikt nie zaoferowa³ ci przemiotu z przemytu.");
+        MruMessageFail(playerid, "Gracz który zaoferowa³ ci przedmiot jest ju¿ offline.");
         return 1;
     }
 
