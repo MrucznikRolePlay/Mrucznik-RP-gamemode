@@ -2,11 +2,7 @@
     "name": "rozkuj",
     "description": "Rozkucie kajdanek.",
     "permissions": [
-        "admini",
-        "frakcja_LSPD",
-        "frakcja_FBI",
-        "frakcja_SASP",
-        "frakcja_USSS"
+        "admini"
     ],
     "author": "NikodemBanan",
     "aliases": [

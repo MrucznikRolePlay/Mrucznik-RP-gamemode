@@ -258,6 +258,7 @@
 
 //-------<[ callbacks ]>-------
 #include "front_business\front_business_callbacks.pwn"
+#include "admin\admin_callbacks.pwn"
 #include "pojazdy\pojazdy_callbacks.pwn"
 #include "npc\npc_callbacks.pwn"
 #include "praca_przemytnik\praca_przemytnik_callbacks.pwn"

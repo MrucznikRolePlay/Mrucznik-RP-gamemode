@@ -42,10 +42,6 @@ command_rozkuj()
 
     //permissions
     Group_SetCommand(Group_GetID("admini"), command, true);
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
-    Group_SetCommand(Group_GetID("frakcja_FBI"), command, true);
-    Group_SetCommand(Group_GetID("frakcja_SASP"), command, true);
-    Group_SetCommand(Group_GetID("frakcja_USSS"), command, true);
     
 
     //prefix

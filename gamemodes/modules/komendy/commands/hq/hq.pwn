@@ -39,7 +39,7 @@ command_hq()
     
 
     //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
