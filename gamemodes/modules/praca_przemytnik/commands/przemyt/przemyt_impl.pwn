@@ -112,7 +112,7 @@ command_przemyt_Impl(playerid)
     if(players < 3)
     {
         SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): niestety, ma³y ruch w interesie, nie ma z kim organizowaæ akcji przemytniczych.");
-        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): zadzwoñ, gdy w mieœcie bêdzie wiêcej ruchu.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): zadzwoñ, gdy w mieœcie bêdzie wiêcej ruchu. ((minimum 3 graczy na serwerze))");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
         return 1;
     }

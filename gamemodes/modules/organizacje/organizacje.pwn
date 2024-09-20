@@ -229,6 +229,7 @@ RemovePlayerFromOrg(playerid)
 	PlayerInfo[playerid][pRank] = 0;
     PlayerInfo[playerid][pUniform] = 0;
 	MruMySQL_SavePlayerOrganisation(playerid);
+    ResetPlayerOrgStatistics(playerid);
 
     if(!IsActiveOrg(org)) return 0;
     MruMessageBadInfoF(playerid, "Zosta³eœ wyrzucony z organizacji %s.", OrgInfo[org][o_Name]);
@@ -372,6 +373,12 @@ GivePlayerOrgGun(playerid)
         }
     }
 	return 1;
+}
+
+ResetPlayerOrgStatistics(playerid)
+{
+    Redis_Delete(sprintf("player:%d:org:%d:benefit", PlayerInfo[playerid][pUID], GetPlayerOrg(playerid)));
+    Redis_Delete(sprintf("player:%d:org:%d:takeoverPoints", PlayerInfo[playerid][pUID], GetPlayerOrg(playerid)));
 }
 
 //-----------------<[ Timery: ]>-------------------
