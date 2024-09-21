@@ -198,7 +198,7 @@ CreateSmugglingGatherCheckpoint(playerid, actionID)
 CreateDropPointFlare(actionID)
 {
 	SmugglingAction[actionID][s_gatherFlare] = CreateDynamicObject(18728, 
-		SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ] - 0.5,
+		SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ] - 1.5,
 		0.0, 0.0, 0.0,
 		0, 0);
 }
@@ -306,7 +306,7 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index)
 	GetDynamicObjectPos(parachuteObject, x, y, z);
 	DestroyDynamicObject(parachuteObject);
 
-	SmugglingAction[actionID][s_flareObjects][index] = CreateDynamicObject(18728, x, y, z - 1.25, 0.0, 0.0, 0.0, 0, 0, 300.0, 300.0);
+	SmugglingAction[actionID][s_flareObjects][index] = CreateDynamicObject(18728, x, y, z - 0.5, 0.0, 0.0, 0.0, 0, 0, 300.0, 300.0);
 	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, BIG_PACKAGE_CONTRABAND_AMMOUNT, x, y, z);
 	SmugglingAction[actionID][s_dropBoxes][index] = boxid;
 }

@@ -123,7 +123,7 @@ command_przemyt_Impl(playerid)
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_USECELLPHONE);
 
     SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): dobrze, ¿e dzwonisz. W³aœnie zmierzamy z kontraband¹ do Vice City.");
-    SendClientMessage(playerid, COLOR_YELLOW, sprintf("Telefon (Marcepan_Marks): Sprzedajemy j¹ za %d$. Zainteresowany zorganizowaniem akcji przemytniczej?", SMUGGLING_COST));
+    SendClientMessage(playerid, COLOR_YELLOW, sprintf("Telefon (Marcepan_Marks): sprzedajemy j¹ za %d$. Zainteresowany zorganizowaniem akcji przemytniczej?", SMUGGLING_COST));
     MruMessageInfo(playerid, "Wpisz 'tak' aby kontynuowaæ.");
     return 1;
 }
