@@ -137,7 +137,7 @@ StartSmuggling(playerid)
 	// set info about smuggling for action initiator
 	RedisStartSmuggling(PlayerInfo[playerid][pUID], redisActionID, SMUGGLING_ROLE_INITIATOR);
 	MruMessageGoodInfo(playerid, "Rozpocz¹³eœ akcjê przemytnicz¹.");
-	MruMessageGoodInfo(playerid, "Udaj siê do czerwonego markera a nastêpnie wpisz komendê /przemyt, gdy bêdziesz znajdowa³ siê w wyznaczonym miejscu w wodolocie wraz ze swoim kierowc¹.");
+	MruMessageGoodInfo(playerid, "Udaj siê do czerwonego markera a nastêpnie wpisz komendê /przemyt, gdy bêdziesz znajdowa³ siê w wyznaczonym miejscu.");
 	MruMessageGoodInfo(playerid, "Jeœli nie uda Ci siê odebraæ przemytu w godziny, przepadnie on.");
 
 	// set info about smuggling for all drivers
@@ -159,6 +159,7 @@ StartSmuggling(playerid)
 		{
 			MruMessageGoodInfoF(partnerID, "%s rozpocz¹³ z Tob¹ akcjê przemytnicz¹.", GetNick(playerid));
 			MruMessageGoodInfo(partnerID, "Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj przemyt");
+			Group_SetPlayer(SmugglingAction[actionID][s_crewGroup], partnerID, true);
 		}
 		RedisStartSmuggling(partnerUID, redisActionID, SMUGGLING_ROLE_PARTNER);
 	}
@@ -168,11 +169,6 @@ StartSmuggling(playerid)
 
 timer DeactivateSmuggling[SMUGGLING_MAX_TIME](actionID)
 {
-	if(SmugglingAction[actionID][s_stage] >= SMUGGLING_STAGE_DOCUMENTS)
-	{
-		return;
-	}
-
 	foreach(new i : Player)
 	{
 		new playerActionID = GetPlayerSmugglingActionID(i);
@@ -191,6 +187,11 @@ timer DeactivateSmuggling[SMUGGLING_MAX_TIME](actionID)
 		}
 		case SMUGGLING_STAGE_DROP:
 		{
+			for(new i; i<PACKAGES_TO_DROP; i++)
+			{
+				DestroyDynamicObject(SmugglingAction[actionID][s_flareObjects][i]);
+				DestroyBox(SmugglingAction[actionID][s_dropBoxes][i]);
+			}
 			DestroyDynamicObject(SmugglingAction[actionID][s_gatherFlare]);
 			DestroyDynamicObject(SmugglingAction[actionID][s_gatherContainer]);
 		}
@@ -325,7 +326,7 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index)
 
 	SmugglingAction[actionID][s_flareObjects][index] = CreateDynamicObject(18728, x, y, z - 1.25, 0.0, 0.0, 0.0, 0, 0, 300.0, 300.0);
 	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, BIG_PACKAGE_CONTRABAND_AMMOUNT, x, y, z);
-	SmugglingAction[actionID][s_dropObjects][index] = boxid;
+	SmugglingAction[actionID][s_dropBoxes][index] = boxid;
 }
 
 MarcepanPhone(playerid, color, string[])
@@ -339,15 +340,11 @@ timer MarcepanPhoneTimer[1000](playerid, color, string:string[])
 	SendClientMessage(playerid, color, string);
 }
 
-SendSmugglingCrewMessage(playerid, color, string[])
+SendSmugglingCrewMessage(actionID, color, string[])
 {
-	foreach(new i : Player)
+	foreach(new i : GroupMember(SmugglingAction[actionID][s_crewGroup]))
 	{
-		new playerActionID = GetPlayerSmugglingActionID(i);
-		if(playerActionID == actionID)
-		{
-			SendClientMessage(i, color, string);
-		}
+		SendClientMessage(i, color, string);
 	}
 }
 // ------- ostatni etap
@@ -357,7 +354,7 @@ GetSmugglingActionByBoxID(boxid)
 	{
 		for(new j; j<PACKAGES_TO_DROP; j++)
 		{
-			if(boxid == SmugglingAction[i][s_dropObjects][j])
+			if(boxid == SmugglingAction[i][s_dropBoxes][j])
 			{
 				return i;
 			}
@@ -389,7 +386,7 @@ GatherPackage(actionID, boxid, contraband)
 
 EndSmuggling(actionID)
 {
-	// TODO: end smuggling - give contraband to leader, send messages, clear objects
+	SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Akcja przemytnicza zosta³a zakoñczona!");
 }
 
 // ------------- przedmioty przemytnicze --------------------

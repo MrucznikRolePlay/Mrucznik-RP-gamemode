@@ -86,11 +86,13 @@ command_zrzut_Impl(playerid)
     {
         // last package dropped, start gather stage
         SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_GATHER;
-        MruMessageGoodInfo(playerid, "To by³a ostatnia paczka kontrabandy, teraz udaj siê do punktu zboru.");
+        MruMessageGoodInfo(playerid, "To by³a ostatnia paczka kontrabandy, teraz udaj siê do punktu zboru i czekaj a¿ Twoi wspólnicy zbior¹ wszystkie paczki.");
+        SendSmugglingCrewMessage(playerid, TEAM_AZTECAS_COLOR, sprintf("%s zrzuci³ ostatni¹ paczkê z kontraband¹.", GetNick(playerid)));
     }
     else 
     {
         MruMessageGoodInfo(playerid, "Zrzuci³eœ paczkê kontrabandy!");
+        SendSmugglingCrewMessage(playerid, TEAM_AZTECAS_COLOR, sprintf("%s zrzuci³ paczkê z kontraband¹.", GetNick(playerid)));
         ShowSmugglingCheckpoint(playerid, actionID);
     }
     return 1;

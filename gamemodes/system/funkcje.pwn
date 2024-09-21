@@ -4013,7 +4013,7 @@ ShowStats(playerid, targetid)
 	    new fracText[40];
         format(fracText, sizeof(fracText), "%s", FractionNames[GetPlayerFraction(targetid)]);
 		new org = GetPlayerOrg(targetid);
-		new orgText[32];
+		new orgText[MAX_ORG_NAME_LENGTH];
 	    if(IsActiveOrg(org)) { format(orgText, sizeof(orgText), "%s", OrgInfo[org][o_Name]); }
 		else { orgText = "Brak"; }
 

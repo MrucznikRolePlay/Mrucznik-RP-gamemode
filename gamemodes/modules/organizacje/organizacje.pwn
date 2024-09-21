@@ -66,7 +66,7 @@ SaveOrg(id)
 CreateOrganisation(org, name[], color, type)
 {
     OrgInfo[org][o_Type] = type;
-    format(OrgInfo[org][o_Name], 32, name);
+    format(OrgInfo[org][o_Name], MAX_ORG_NAME_LENGTH, name);
     format(OrgInfo[org][o_Motto], 128, "");
     OrgInfo[org][o_Color] = color << 8;
     OrgInfo[org][o_Spawn][0] = 5229.6646; // TODO: change to little haiti
@@ -98,7 +98,7 @@ RemoveOrganisation(org)
     SejfR_Save(org);
 
     OrgInfo[org][o_Type] = ORG_TYPE_INACTIVE;
-    format(OrgInfo[org][o_Name], 32, "");
+    format(OrgInfo[org][o_Name], MAX_ORG_NAME_LENGTH, "");
     format(OrgInfo[org][o_Motto], 128, "");
     OrgInfo[org][o_Color] = 0xFFFFFFFF;
     OrgInfo[org][o_Spawn][0] = 0.0;
@@ -240,7 +240,7 @@ SetOrgName(org, name[])
 {
     if(!IsActiveOrg(org)) return 0;
 
-    format(OrgInfo[org][o_Name], 32, "%s", name);
+    format(OrgInfo[org][o_Name], MAX_ORG_NAME_LENGTH, "%s", name);
     SaveOrg(org);
     return 1;
 }

@@ -41,7 +41,10 @@ enum eSmugglingData {
     // action data
     s_actionID,
     s_stage,
+
+    // crew data
     s_driverUID,
+    Group:s_crewGroup,
 
     // dropping packages data
     s_packagesToDrop,
@@ -49,7 +52,7 @@ enum eSmugglingData {
     s_capturedCheckpoints,
     s_enableContrabandDrop,
     s_flyCheckpoints[MAX_SMUGGLING_CHECKPOINTS],
-    s_dropObjects[PACKAGES_TO_DROP],
+    s_dropBoxes[PACKAGES_TO_DROP],
     s_flareObjects[PACKAGES_TO_DROP],
 
     // gatherinng point data

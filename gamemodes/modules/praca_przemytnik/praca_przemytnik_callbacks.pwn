@@ -52,7 +52,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 		case 2: // podaj kierowcê
 		{
 			new giveplayerid;
-			if(sscanf(text, "r", giveplayerid) || !IsPlayerConnected(giveplayerid))
+			if(sscanf(text, "k<fix>", giveplayerid) || !IsPlayerConnected(giveplayerid))
 			{
 				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie znam nikogo takiego, na pewno poda³eœ mi prawid³owe Imiê_Nazwisko?");
 				return 1;
@@ -93,7 +93,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 			}
 
 			new giveplayerid;
-			if(sscanf(text, "r", giveplayerid) || !IsPlayerConnected(giveplayerid))
+			if(sscanf(text, "k<fix>", giveplayerid) || !IsPlayerConnected(giveplayerid))
 			{
 				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie znam nikogo takiego, na pewno poda³eœ mi prawid³owe Imiê_Nazwisko?");
 				return 1;
@@ -199,6 +199,8 @@ Przemytnik_OnPlayerLogin(playerid)
 		return 1;
 	}
 
+	Group_SetPlayer(SmugglingAction[actionID][s_crewGroup], playerid, true);
+
 	new role = GetPlayerSmugglingRole(playerid);
 	if(role == SMUGGLING_ROLE_INITIATOR || role == SMUGGLING_ROLE_DRIVER)
 	{
@@ -301,7 +303,7 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 			{
 				SmugglingAction[actionID][s_capturedCheckpoints] = 0;
 				SmugglingAction[actionID][s_enableContrabandDrop] = 1;
-				MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy, mo¿esz teraz dokonaæ zrzutu na odpowidniej wysokoœci za pomoc¹ komendy /zrzut!", CHECKPOINT_PER_DROP);
+				MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy, mo¿esz teraz dokonaæ zrzutu na odpowiedniej wysokoœci za pomoc¹ komendy /zrzut!", CHECKPOINT_PER_DROP);
 				ChatMe(playerid, "przygotowuje siê do zrzutu paczki z kontraband¹");
 				GameTextForPlayer(playerid, "~g~Mozesz zrzucic kontrabande!", 5000, 6);
 				DisablePlayerRaceCheckpoint(playerid);
@@ -416,12 +418,12 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 		if(smugglingAction == -1) // przemytnik z akcji
 		{
 			MruMessageGoodInfo(playerid, "Uda³o Ci siê zebraæ paczkê z kontraband¹ zrzucon¹ przez Twoj¹ ekipê. Dostarcz j¹ do punktu zboru!");
-			// TODO: stworz checkpoint
+			CreateSmugglingGatherCheckpoint(playerid, smugglingAction);
 		}
 		else // zwyk³y przemytnik
 		{
 			MruMessageGoodInfo(playerid, "Uda³o Ci siê zebraæ paczkê z kontraband¹ zrzucon¹ przez wrog¹ ekipê. Dostarcz j¹ do dziupli przemytniczej (checkpoint)!");
-			// TODO: stworz checkpoint
+			CreateSmugglingGatherCheckpoint(playerid, smugglingAction);
 		}
 	}
 

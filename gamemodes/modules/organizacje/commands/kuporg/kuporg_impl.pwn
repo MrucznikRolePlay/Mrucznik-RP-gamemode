@@ -56,9 +56,9 @@ command_kuporg_Impl(playerid, color, orgType, name[34])
         return 1;
     }
 
-    if(strlen(name) > MAX_FRONT_BUSINESS_NAME_LENGTH)
+    if(strlen(name) > MAX_ORG_NAME_LENGTH)
     {
-        MruMessageFail(playerid, "Nazwa organizacji nie mo¿e byæ d³u¿sza ni¿ "#MAX_FRONT_BUSINESS_NAME_LENGTH" znaki.");
+        MruMessageFail(playerid, "Nazwa organizacji nie mo¿e byæ d³u¿sza ni¿ "#MAX_ORG_NAME_LENGTH" znaki.");
         return 1;
     }
 

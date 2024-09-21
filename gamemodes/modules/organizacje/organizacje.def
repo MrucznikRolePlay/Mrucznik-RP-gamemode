@@ -23,6 +23,8 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define MAX_ORG_NAME_LENGTH 32
+
 #define MAX_MEMBER_RANK 8
 #define MAIN_LEADER_RANK 9
 

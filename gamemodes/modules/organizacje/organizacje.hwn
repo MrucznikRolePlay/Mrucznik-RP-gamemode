@@ -32,7 +32,7 @@ new OrgTypes[][16] = {
 
 enum eOrg {
     o_Type,
-    o_Name[32],
+    o_Name[MAX_ORG_NAME_LENGTH],
     o_Motto[128],
     o_Color,
     Float:o_Spawn[4],
