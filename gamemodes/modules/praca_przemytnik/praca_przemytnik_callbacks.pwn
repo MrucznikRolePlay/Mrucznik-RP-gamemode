@@ -123,6 +123,12 @@ Przemytnik_OnPlayerText(playerid, text[])
 		{
 			if(strcmp(text, "tutaj", true) == 0)
 			{
+				if(!IsPlayerAtViceCityMainland(playerid))
+				{
+					MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): punkt zboru musi znajdowaæ siê w Vice City Mainland.");
+					return 1;
+				}
+
 				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): ok, pobra³em twoj¹ pozycjê, przywiozê tam kontener do którego bêdziesz musia³ dostarczyæ ³adunek.");
 				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): wykup kontrabandy od nas to 1 000 000$, chcesz zap³aciæ przelewem czy gotówk¹?");
 				SetPVarInt(playerid, "smuggling", 5);
