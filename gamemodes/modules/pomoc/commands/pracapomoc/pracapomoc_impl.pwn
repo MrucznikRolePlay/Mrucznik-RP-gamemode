@@ -25,6 +25,13 @@
 //------------------<[ Implementacja: ]>-------------------
 command_pracapomoc_Impl(playerid)
 {
+    if(GetPlayerJob(playerid) == 0)
+    {
+        MruMessageFail(playerid, "Nie masz ¿adnej pracy.");
+        return 1;
+    }
+
+    if(IsPlayerCarryingBox(playerid))
     SendClientMessage(playerid, COLOR_GREEN, "______________________PRACA POMOC______________________");
     switch(GetPlayerJob(playerid))
     {

@@ -82,14 +82,14 @@ command_przemyt_Impl(playerid)
     gettime(hour, minute, second);
     if(hour < 18 || hour > 23)
     {
-        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): nie ma dostêpnych przemytów w tym momencie. Zadzwoñ miêdzy 18 a 23.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Nie ma dostêpnych przemytów w tym momencie. Zadzwoñ miêdzy 18 a 23.");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
         return 1;
     }
 
     if(SmugglingActionsCount >= SMUGGLING_ACTIONS_PER_DAY)
     {
-        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): przemyciliœmy ju¿ zbyt du¿o dzisiejszego dnia. Musimy przystopowaæ, by nikt siê nie po³apa³.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Przemyciliœmy ju¿ zbyt du¿o dzisiejszego dnia. Musimy przystopowaæ, by nikt siê nie po³apa³.");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
         return 1;
     }
@@ -112,8 +112,8 @@ command_przemyt_Impl(playerid)
     }
     if(players < 3)
     {
-        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): niestety, ma³y ruch w interesie, nie ma z kim organizowaæ akcji przemytniczych.");
-        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): zadzwoñ, gdy w mieœcie bêdzie wiêcej ruchu. ((minimum 3 graczy z prac¹ ³owcy/przemytnika/policjanta na serwerze))");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Niestety, ma³y ruch w interesie, nie ma z kim organizowaæ akcji przemytniczych.");
+        SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Zadzwoñ, gdy w mieœcie bêdzie wiêcej ruchu. ((minimum 3 graczy z prac¹ ³owcy/przemytnika/policjanta na serwerze))");
         SendClientMessage(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
         return 1;
     }
@@ -122,8 +122,8 @@ command_przemyt_Impl(playerid)
     MruMessageInfo(playerid, "Rozpocz¹³eœ umawianie akcji przemytniczej, aby z niej zrezygnowaæ, wpisz: /z");
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_USECELLPHONE);
 
-    SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): dobrze, ¿e dzwonisz. W³aœnie zmierzamy z kontraband¹ do Vice City.");
-    SendClientMessage(playerid, COLOR_YELLOW, sprintf("Telefon (Marcepan_Marks): sprzedajemy j¹ za %d$. Zainteresowany zorganizowaniem akcji przemytniczej?", SMUGGLING_COST));
+    SendClientMessage(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Dobrze, ¿e dzwonisz. W³aœnie zmierzamy z kontraband¹ do Vice City.");
+    SendClientMessage(playerid, COLOR_YELLOW, sprintf("Telefon (Marcepan_Marks): Sprzedajemy j¹ za %d$. Zainteresowany zorganizowaniem akcji przemytniczej?", SMUGGLING_COST));
     MruMessageInfo(playerid, "Wpisz 'tak' aby kontynuowaæ.");
     return 1;
 }
