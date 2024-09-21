@@ -33,6 +33,7 @@ enum eBox
 {
     bool:box_used,
     box_type,
+    box_model,
     box_object,
     box_player,
     box_attachedSlot,
