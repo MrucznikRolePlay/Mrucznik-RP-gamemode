@@ -42,7 +42,9 @@ command_przemyt_Impl(playerid)
         new actionID = GetPlayerSmugglingActionID(playerid);
         if(actionID == -1)
         {
-            MruMessageError(playerid, "Nie uda³o siê pobraæ ID akcji przemytniczej. Zg³oœ b³¹d adminom.");
+            MruMessageError(playerid, "Nie uda³o siê pobraæ ID akcji przemytniczej. Zg³oœ b³¹d adminom. Twój udzia³ w akcji zosta³ anulowany.");
+            Redis_Delete(sprintf("player:%d:smuggling", PlayerInfo[playerid][pUID]));
+            Redis_Delete(sprintf("player:%d:smuggling:role", PlayerInfo[playerid][pUID]));
             return 1;
         }
 
