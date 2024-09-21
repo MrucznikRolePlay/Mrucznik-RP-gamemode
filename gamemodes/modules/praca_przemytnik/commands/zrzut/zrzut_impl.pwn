@@ -59,7 +59,7 @@ command_zrzut_Impl(playerid)
         return 1;
     }
 
-    if(!IsAtViceCityMainland(playerid))
+    if(!IsPlayerAtViceCityMainland(playerid)(playerid))
     {
         MruMessageFail(playerid, "Zrzucaæ paczki mo¿esz tylko w Vice City Beach.");
         return 1;
