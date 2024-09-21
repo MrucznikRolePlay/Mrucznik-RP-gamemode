@@ -346,10 +346,11 @@ timer Driver_ShowSmugglingCP[100](playerid, actionID)
 		return 1;
 	}
 
-	if(SmugglingAction[actionID][s_capturedCheckpoints] == 0)
+	if(SmugglingAction[actionID][s_enableContrabandDrop] == 0)
 	{
 		ShowSmugglingCheckpoint(playerid, actionID);
 	}
+	return 1;
 }
 
 Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z, Float:angle)
