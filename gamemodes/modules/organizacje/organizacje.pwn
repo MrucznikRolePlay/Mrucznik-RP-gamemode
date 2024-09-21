@@ -224,12 +224,13 @@ InvitePlayerToOrg(playerid, org, rank=0)
 
 RemovePlayerFromOrg(playerid)
 {
+    ResetPlayerOrgStatistics(playerid);
+    
     new org = PlayerInfo[playerid][pOrg];
     PlayerInfo[playerid][pOrg] = 0;
 	PlayerInfo[playerid][pRank] = 0;
     PlayerInfo[playerid][pUniform] = 0;
 	MruMySQL_SavePlayerOrganisation(playerid);
-    ResetPlayerOrgStatistics(playerid);
 
     if(!IsActiveOrg(org)) return 0;
     MruMessageBadInfoF(playerid, "Zosta³eœ wyrzucony z organizacji %s.", OrgInfo[org][o_Name]);

@@ -73,7 +73,7 @@ Movable_OnPlayerShootObject(playerid, weaponid, STREAMER_TAG_OBJECT:objectid, Fl
 {
 	for(new i; i<maxBoxID; i++)
 	{
-		if(Boxes[i][box_object] == objectid)
+		if(Boxes[i][box_used] && Boxes[i][box_object] == objectid)
 		{
 			return OnPlayerShootMovableObject(playerid, weaponid, i, Boxes[i][box_type], x, y, z);
 		}

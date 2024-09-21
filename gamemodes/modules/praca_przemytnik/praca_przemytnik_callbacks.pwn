@@ -439,7 +439,7 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 		return 0;
 	}
 
-	new rand;
+	new rand=0;
 	if(boxType == BOX_TYPE_CONTRABAND)
 	{
 		rand = random(10); // 10% chances to take damage
@@ -454,7 +454,7 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 				new actionID = GetSmugglingActionByBoxID(boxid);
 				DestroySmugglingBoxFlare(actionID);
 				GatherPackage(actionID, boxid, 0);
-				// TODO: komunikat o zniszczeniu paczki dla ekipy przemycaj¹cej
+				SendSmugglingCrewMessage(actionID, COLOR_PANICRED, "Ktoœ zniszczy³ zrzucon¹ paczkê z kontraband¹!");
 			}
 
 			PlayerPlaySound(playerid, 1131, x, y, z); // hit wooden object? (SOUND_AMMUNATION_GUN_COLLISION)
