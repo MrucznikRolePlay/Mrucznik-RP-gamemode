@@ -99,6 +99,9 @@ RedisStartSmuggling(UID, redisActionID, role)
 
 StartSmuggling(playerid)
 {
+	new driverID = GetPVarInt(playerid, "smuggling-driver-id");
+	new driverUID = GetPVarInt(playerid, "smuggling-driver-uid");
+
 	new actionID = SmugglingActionsCount;
 	new Float:x, Float:y, Float:z;
 	x = GetPVarFloat(playerid, "smuggling-x");
@@ -110,7 +113,7 @@ StartSmuggling(playerid)
 	Redis_SetInt(RedisClient, "smuggling:index", redisActionID+1);
 	Redis_SetInt(RedisClient, sprintf("smuggling:%d:stage", redisActionID), SMUGGLING_STAGE_PICKUP);
 	Redis_Expire(sprintf("smuggling:%d:stage", redisActionID), 3600); // 1 hour
-
+	
 	// fill up smuggling action data
 	SmugglingAction[actionID][s_actionID] = redisActionID;
 	SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_PICKUP;
@@ -130,6 +133,7 @@ StartSmuggling(playerid)
 	// create object & checkpoint
 	CreateDropPointFlare(actionID);
 	CreateSmugglingPickupCheckpoint(playerid, actionID);
+	CreateSmugglingPickupCheckpoint(driverid, actionID);
 
 	// reset special action
 	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
@@ -141,8 +145,6 @@ StartSmuggling(playerid)
 	MruMessageGoodInfo(playerid, "Jeœli nie uda Ci siê odebraæ przemytu w godziny, przepadnie on.");
 
 	// set info about smuggling for all drivers
-	new driverID = GetPVarInt(playerid, "smuggling-driver-id");
-	new driverUID = GetPVarInt(playerid, "smuggling-driver-uid");
 	if(IsPlayerConnected(driverID) && PlayerInfo[driverID][pUID] == driverUID)
 	{
 		MruMessageGoodInfoF(driverID, "%s rozpocz¹³ z Tob¹ akcjê przemytnicz¹ - mianowa³ Ciê pilotem wodolotu.", GetNick(playerid));
