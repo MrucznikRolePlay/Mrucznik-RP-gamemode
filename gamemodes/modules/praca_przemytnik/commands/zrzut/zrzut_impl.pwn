@@ -48,7 +48,7 @@ command_zrzut_Impl(playerid)
 
     if(SmugglingAction[actionID][s_enableContrabandDrop] < 1)
     {
-        MruMessageFail(playerid, "Musisz przelecieæ przez 3 checkpointy by móc zrzuciæ 1 paczkê kontrabandy.");
+        MruMessageFail(playerid, "Musisz przelecieæ przez "#CHECKPOINT_PER_DROP" checkpointy by móc zrzuciæ 1 paczkê kontrabandy.");
         return 1;
     }
 
@@ -94,6 +94,13 @@ command_zrzut_Impl(playerid)
         MruMessageGoodInfo(playerid, "Zrzuci³eœ paczkê kontrabandy!");
         SendSmugglingCrewMessage(playerid, TEAM_AZTECAS_COLOR, sprintf("%s zrzuci³ paczkê z kontraband¹.", GetNick(playerid)));
         ShowSmugglingCheckpoint(playerid, actionID);
+        foreach(new i : Player)
+        {
+            if(PlayerInfo[playerid][pUID] == SmugglingAction[actionID][s_driverUID])
+            {
+                ShowSmugglingCheckpoint(i, actionID);
+            }
+        }
     }
     return 1;
 }

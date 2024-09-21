@@ -276,13 +276,12 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 	{
 		if(role == SMUGGLING_ROLE_INITIATOR)
 		{
-			// start DROP stage
 			SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_DROP;
-			MruMessageGoodInfoF(playerid, "Musisz teraz przelecieæ przez %d checkpointy aby dokonaæ zrzutu kontrabandy.", CHECKPOINT_PER_DROP);
+			MruMessageGoodInfo(playerid, "Musisz teraz przelecieæ przez "#CHECKPOINT_PER_DROP" checkpointy aby dokonaæ zrzutu kontrabandy.");
 		}
 		else
 		{
-			MruMessageGoodInfoF(playerid, "Musisz teraz przelecieæ przez %d checkpointy aby Twój partner móg³ dokonaæ zrzutu kontrabandy.", CHECKPOINT_PER_DROP);
+			MruMessageGoodInfo(playerid, "Musisz teraz przelecieæ przez "#CHECKPOINT_PER_DROP" checkpointy aby Twój partner móg³ dokonaæ zrzutu kontrabandy.");
 		}
 		ShowSmugglingCheckpoint(playerid, actionID);
 		PlayerPlaySound(playerid, 1138, 0, 0, 0);
@@ -301,7 +300,6 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 			SmugglingAction[actionID][s_capturedCheckpoints] += 1;
 			if(SmugglingAction[actionID][s_capturedCheckpoints] % CHECKPOINT_PER_DROP == 0)
 			{
-				SmugglingAction[actionID][s_capturedCheckpoints] = 0;
 				SmugglingAction[actionID][s_enableContrabandDrop] = 1;
 				MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy, mo¿esz teraz dokonaæ zrzutu na odpowiedniej wysokoœci za pomoc¹ komendy /zrzut!", CHECKPOINT_PER_DROP);
 				ChatMe(playerid, "przygotowuje siê do zrzutu paczki z kontraband¹");
@@ -317,9 +315,9 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 		}
 		else
 		{
-			MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy!", CHECKPOINT_PER_DROP);
 			PlayerPlaySound(playerid, 1138, 0, 0, 0);
-			ShowSmugglingCheckpoint(playerid, actionID);
+			DisablePlayerRaceCheckpoint(playerid);
+			defer Driver_ShowSmugglingCP(playerid, actionID); // defer this call to make sure that the initiator process the checkpoint logic first
 		}
 
 		if(SmugglingAction[actionID][s_capturedCheckpoints] >= MAX_SMUGGLING_CHECKPOINTS)
@@ -338,8 +336,20 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 			CreateSmugglingGatherCheckpoint(playerid, actionID);
 			PlayerPlaySound(playerid, 1139, 0, 0, 0);
 	}
-	
 	return 1;
+}
+
+timer Driver_ShowSmugglingCP[100](playerid, actionID)
+{
+	if(!IsPlayerConnected(playerid))
+	{
+		return 1;
+	}
+
+	if(SmugglingAction[actionID][s_capturedCheckpoints] == 0)
+	{
+		ShowSmugglingCheckpoint(playerid, actionID);
+	}
 }
 
 Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z, Float:angle)
