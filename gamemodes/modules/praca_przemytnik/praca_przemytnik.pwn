@@ -133,7 +133,7 @@ StartSmuggling(playerid)
 	// create object & checkpoint
 	CreateDropPointFlare(actionID);
 	CreateSmugglingPickupCheckpoint(playerid, actionID);
-	CreateSmugglingPickupCheckpoint(driverid, actionID);
+	CreateSmugglingPickupCheckpoint(driverID, actionID);
 
 	// reset special action
 	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
