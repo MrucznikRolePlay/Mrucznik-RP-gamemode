@@ -366,9 +366,9 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 		return 0;
 	}
 
-	if(GetPlayerJob(playerid) == JOB_SMUGGLER)
+	new actionID = GetPlayerSmugglingActionID(playerid);
+	if(GetPlayerJob(playerid) == JOB_SMUGGLER || actionID != -1)
 	{
-		new actionID = GetPlayerSmugglingActionID(playerid);
 		if(actionID != -1) // przemytnik z akcji
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 10.0,
