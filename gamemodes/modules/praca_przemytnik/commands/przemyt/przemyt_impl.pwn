@@ -50,22 +50,19 @@ command_przemyt_Impl(playerid)
         {
             case SMUGGLING_STAGE_PICKUP:
             {
-                return przemyt_StagePickup(playerid, actionID);
+                przemyt_StagePickup(playerid, actionID);
             }
             case SMUGGLING_STAGE_FLY:
             {
                 MruMessageInfo(playerid, "Musisz teraz dolecieæ do punktu kontrolnego nad Prawn Island, Vice City");
-                return 1;
             }
             case SMUGGLING_STAGE_DROP:
             {
-                // TODO: info 
-                return przemyt_StageDrop(playerid, actionID);
+                MruMessageInfo(playerid, "Musisz teraz zrzuciæ 5 paczek kontrabandy, a nastêpnie Twoi partnerzy lub Ty powinni dostarczyæ je do punktu odbioru.");
             }
             case SMUGGLING_STAGE_GATHER:
             {
-                // TODO: info
-                return przemyt_StageGather(playerid, actionID);
+                MruMessageInfo(playerid, "Wszystkie paczki zosta³y zrzucione, teraz musisz dostarczyæ je do punktu odbioru.");
             }
             default:
             {
@@ -166,19 +163,6 @@ przemyt_StagePickup(playerid, actionID)
     DisablePlayerCheckpoint(driverid);
 
     StartSmugglingDrop(playerid, driverid, actionID);
-    return 1;
-}
-
-
-przemyt_StageDrop(playerid, actionID)
-{
-    #pragma unused playerid, actionID // TODO
-    return 1;
-}
-
-przemyt_StageGather(playerid, actionID)
-{
-    #pragma unused playerid, actionID // TODO
     return 1;
 }
 

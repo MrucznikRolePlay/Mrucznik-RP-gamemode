@@ -417,11 +417,15 @@ TakeSmugglingItem(playerid, item)
 
 IsOwnerOfSmugglingItem(playerid, item)
 {
-	new value;
+	new value = 0;
 	new redisKey[128];
 	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
 	Redis_GetInt(RedisClient, redisKey, value);
-	return value > 0;
+	if(value > 0)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 UseJetpack(playerid)
