@@ -13413,7 +13413,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     {
         if(!response) return 1;
         if(listitem == 2 && !IsAPolicja(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w policji!");
-        if(listitem == 4 && !IsAGang(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w gangu!");
+        if(listitem == 4 && !IsAPrzestepca(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w organizacji przestepczej!");
         CallRemoteFunction("SEC_Dodatki_Show", "dd", playerid, listitem);
         return 1;
     }

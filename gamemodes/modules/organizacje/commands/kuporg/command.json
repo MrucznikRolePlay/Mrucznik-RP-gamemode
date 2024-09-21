@@ -2,9 +2,7 @@
     "name": "kuporg",
     "description": "Kup slot na organizacje.",
     "command_tips": [
-        "Koszt stworzenia organizacji: \"#CREATE_ORG_COST\"$ i \"#CREATE_ORG_CONTRABAND_COST\" kontrabandy.",
-        "Gangi mog¹ przejmowaæ strefy gangów w Los Santos.",
-        "Mafie mog¹ przejmowaæ biznesy w Vice City."
+        "Koszt stworzenia organizacji: \"#CREATE_ORG_COST\"$ i \"#CREATE_ORG_CONTRABAND_COST\" kontrabandy."
     ],
     "permissions": ["everyone"],
     "author": "mrucznik",
@@ -16,12 +14,7 @@
         {
             "type": "hex",
             "name": "color",
-            "description": "kolor w formacie hex (np. F1A151)"
-        },
-        {
-            "type": "integer",
-            "name": "orgType",
-            "description": "typ organizacji (1 - Gang, 2 - Mafia)"
+            "description": "kolor w formacie hex (np. F1A151FF)"
         },
         {
             "type": "string",

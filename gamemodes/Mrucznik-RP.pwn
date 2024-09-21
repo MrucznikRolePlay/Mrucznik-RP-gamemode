@@ -5646,7 +5646,7 @@ public OnPlayerEnterGangZone(playerid, zoneid)
 {
     if(ZONE_DISABLED == 0) {
         new frac=GetPlayerFraction(playerid), org = GetPlayerOrg(playerid);
-        if(IsAGang(playerid))
+        if(IsAPrzestepca(playerid))
         {
             ZoneTXD_Show(playerid, zoneid);
             if(ZonePlayerTimer[playerid] == 0) ZonePlayerTimer[playerid] = SetTimerEx("Zone_HideInfo", 30000, 0, "i", playerid);

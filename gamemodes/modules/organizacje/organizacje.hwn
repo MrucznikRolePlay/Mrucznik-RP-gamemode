@@ -22,14 +22,6 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-new OrgTypes[][16] = {
-    "",
-    "Gang",
-    "Mafia",
-    "Race",
-    "Club"
-};
-
 enum eOrg {
     o_Type,
     o_Name[MAX_ORG_NAME_LENGTH],

@@ -32,7 +32,7 @@ command_atakuj_Impl(playerid)
     }
     new frac = GetPlayerFraction(playerid);
     new fam = GetPlayerOrg(playerid);
-    if(IsAGang(playerid) && PlayerInfo[playerid][pRank] > 3)
+    if(IsAPrzestepca(playerid) && PlayerInfo[playerid][pRank] > 3)
     {
         if(GetPVarInt(playerid, "zoneid") == -1) return sendTipMessageEx(playerid, -1, "Nie jestes na strefie.");
         if(ZoneAttack[GetPVarInt(playerid, "zoneid")])

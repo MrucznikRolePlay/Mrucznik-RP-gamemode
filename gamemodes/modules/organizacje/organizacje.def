@@ -51,7 +51,6 @@
 
 
 #define ORG_TYPE_INACTIVE 0
-#define ORG_TYPE_GANG 1
-#define ORG_TYPE_MAFIA 2
+#define ORG_TYPE_ORGANIZATION 1
 
 //end

@@ -63,9 +63,9 @@ SaveOrg(id)
     return 1;
 }
 
-CreateOrganisation(org, name[], color, type)
+CreateOrganisation(org, name[], color)
 {
-    OrgInfo[org][o_Type] = type;
+    OrgInfo[org][o_Type] = ORG_TYPE_ORGANIZATION;
     format(OrgInfo[org][o_Name], MAX_ORG_NAME_LENGTH, name);
     format(OrgInfo[org][o_Motto], 128, "");
     OrgInfo[org][o_Color] = color << 8;
@@ -175,17 +175,6 @@ IncrPlayerTakeoverPoints(playerid, org, value=1)
     new points;
     Redis_IncrBy(sprintf("player:%d:org:%d:takeoverPoints", PlayerInfo[playerid][pUID], org), value);
     return points;
-}
-
-GetPlayerOrgType(playerid) 
-{
-	return GetOrgType(GetPlayerOrg(playerid));
-}
-
-GetOrgType(id)
-{
-    if(!IsActiveOrg(id)) return ORG_TYPE_INACTIVE;
-    return OrgInfo[id][o_Type];
 }
 
 IsActiveOrg(id)
@@ -313,24 +302,6 @@ SendOrgMessage(family, color, string[])
 IsAPrzestepca(playerid)
 {
     if(GetPlayerOrg(playerid) > 0)
-    {
-        return 1;
-    }
-	return 0;
-}
-
-stock IsAGang(playerid)
-{
-    if(GetPlayerOrgType(playerid) == ORG_TYPE_GANG)
-    {
-        return 1;
-    }
-	return 0;
-}
-
-stock IsAMafia(playerid)
-{
-    if(GetPlayerOrgType(playerid) == ORG_TYPE_MAFIA)
     {
         return 1;
     }

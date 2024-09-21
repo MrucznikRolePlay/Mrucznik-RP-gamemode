@@ -520,7 +520,7 @@ ZoneTXD_Show(playerid, zoneid)
 {
     new bool:gang=false;
     new frac=GetPlayerFraction(playerid);
-    if(IsAGang(playerid) && PlayerInfo[playerid][pRank] > 3) gang = true;
+    if(IsAPrzestepca(playerid) && PlayerInfo[playerid][pRank] > 3) gang = true;
     if(ZoneControl[zoneid] != 0 && (ZoneControl[zoneid] == frac || ZoneControl[zoneid]-100==GetPlayerOrg(playerid))) gang = false;
 
     for(new i=0;i<3;i++)

@@ -55,7 +55,7 @@ command_orgs_Impl(playerid, orgid)
     for(new i=1;i<MAX_ORG;i++)
     {
         if(!IsActiveOrg(i)) continue;
-        format(string, sizeof(string), "%s{000000}%d\t{FFFFFF}%s\t%s\n", string, i, OrgInfo[i][o_Name], OrgTypes[OrgInfo[i][o_Type]]);
+        format(string, sizeof(string), "%s{000000}%d\t{FFFFFF}%s\n", string, i, OrgInfo[i][o_Name]);
     }
     if(strlen(string) == 0)
     {

@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_kuporg_Impl(playerid, color, orgType, name[34])
+command_kuporg_Impl(playerid, color, name[34])
 {
     if(kaska[playerid] < CREATE_ORG_COST)
     {
@@ -34,12 +34,6 @@ command_kuporg_Impl(playerid, color, orgType, name[34])
     if(GetContraband(playerid) < CREATE_ORG_CONTRABAND_COST)
     {
         MruMessageFail(playerid, "Stworzenie organizacji kosztuje "#CREATE_ORG_CONTRABAND_COST" kontrabandy, a Ty tyle nie masz.");
-        return 1;
-    }
-
-    if(orgType != ORG_TYPE_GANG && orgType != ORG_TYPE_MAFIA)
-    {
-        MruMessageFail(playerid, "Dostêpne typy organizacji: 1 - Gang, 2 - Mafia.");
         return 1;
     }
 
@@ -62,13 +56,13 @@ command_kuporg_Impl(playerid, color, orgType, name[34])
         return 1;
     }
 
-    CreateOrganisation(org, name, color, orgType);
+    CreateOrganisation(org, name, color);
     InvitePlayerToOrg(playerid, org, MAIN_LEADER_RANK);
 
     ZabierzKase(playerid, CREATE_ORG_COST);
     TakeContraband(playerid, CREATE_ORG_CONTRABAND_COST);
 
-    MruMessageGoodInfoF(playerid, "Gratulacje! Stworzy³eœ now¹ organizacjê o nazwie \"%s\" i typie %s", name, OrgTypes[orgType]);
+    MruMessageGoodInfoF(playerid, "Gratulacje! Stworzy³eœ now¹ organizacjê o nazwie \"%s\"", name);
     MruMessageGoodInfo(playerid, "Ka¿dego dnia z sejfu organizacji pobierana jest kwota "#ORG_DAILY_COST"$ za prowadzenie organizacji i "#ORG_DAILY_MEMBER_COST"$ za ka¿dego pracownika.");
     MruMessageGoodInfo(playerid, "UWAGA! Pilnuj by d³ug w sejfie Twojej organizacji nie przekroczy³ -100 000$, inaczej Twoja organizacja zostanie usuniêta!");
     MruMessageGoodInfo(playerid, "Aby zobaczyæ dostêpne komendy wpisz /liderpomoc.");
