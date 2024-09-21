@@ -313,7 +313,7 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index)
 	GetDynamicObjectPos(parachuteObject, x, y, z);
 	DestroyDynamicObject(parachuteObject);
 
-	SmugglingAction[actionID][s_flareObjects][index] = CreateDynamicObject(18728, x, y, z - 0.5, 0.0, 0.0, 0.0, 0, 0, -1, 300.0, 300.0);
+	SmugglingAction[actionID][s_flareObjects][index] = CreateDynamicObject(18728, x, y, z - 0.5, 0.0, 0.0, 0.0, 0, 0, -1, 300.0, 300.0, -1, 1);
 	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, BIG_PACKAGE_CONTRABAND_AMMOUNT, x, y, z);
 	SmugglingAction[actionID][s_dropBoxes][index] = boxid;
 }
