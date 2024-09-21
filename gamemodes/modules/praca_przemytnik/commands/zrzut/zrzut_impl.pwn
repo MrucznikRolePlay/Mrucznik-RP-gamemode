@@ -101,7 +101,7 @@ command_zrzut_Impl(playerid)
         ShowSmugglingCheckpoint(playerid, actionID);
         foreach(new i : Player)
         {
-            if(PlayerInfo[playerid][pUID] == SmugglingAction[actionID][s_driverUID])
+            if(PlayerInfo[i][pUID] == SmugglingAction[actionID][s_driverUID])
             {
                 ShowSmugglingCheckpoint(i, actionID);
             }
