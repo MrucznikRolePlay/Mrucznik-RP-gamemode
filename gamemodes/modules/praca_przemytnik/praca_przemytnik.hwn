@@ -90,8 +90,8 @@ new SmugglingItemsData[][eSmugglingItems] = {
 //-----------------<[ Zmienne: ]>-------------------
 new Float:ContrabandPickupPoints[][3] = {
     // TODO: postawiæ statki przemytnicze i dodaæ nowe pozycje
-    {4415.5601, -2817.6489, 1.0610},
-    {5589.6211, 584.9725, 28.7805}
+    {4415.5601, -2817.6489, 0.0},
+    {5589.6211, 584.9725, 0.0}
 };
 
 new Float:SkimmerDroppingCheckpoints[][3] = {

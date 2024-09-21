@@ -232,16 +232,14 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	CreateDropPointContainer(actionID);
 	
 	// set marker of initiator for players in crew
-	foreach(new i : Player)
+	SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Akcja przemytnicza rozpoczê³a siê! Zbieraj paczki zrzucone z wodolotu i dostarczaj je do miejsca zboru.");
+	foreach(new i : GroupMember(SmugglingAction[actionID][s_crewGroup]))
 	{
-		new playerActionID = GetPlayerSmugglingActionID(i);
-		if(playerActionID == actionID)
-		{
-			SetPlayerMarkerForPlayer(i, playerid, COLOR_PANICRED);
-			MruMessageGoodInfo(i, "Akcja przemytnicza rozpoczê³a siê! Zbieraj paczki zrzucone z wodolotu i dostarczaj je do miejsca zboru.");
-			CreateSmugglingGatherCheckpoint(i, actionID);
-		}
+		SetPlayerMarkerForPlayer(i, playerid, TEAM_AZTECAS_COLOR); // TODO: disable when smuggling ends
+		CreateSmugglingGatherCheckpoint(i, actionID);
 	}
+	DisablePlayerCheckpoint(playerid);
+	DisablePlayerCheckpoint(driverid);
 }
 
 ShowSmugglingCheckpoint(playerid, actionID)
