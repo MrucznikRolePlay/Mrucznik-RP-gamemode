@@ -47,6 +47,8 @@ CreateBox(model, type, value, Float:x, Float:y, Float:z, Float:rx=0.0, Float:ry=
 
 DestroyBox(boxid)
 {
+	if(!Boxes[boxid][box_used]) return 0;
+	
 	Boxes[boxid][box_used] = false;
 	if(Boxes[boxid][box_object] != -1) 
 	{
@@ -114,10 +116,12 @@ DropBox(playerid)
 
 timer AfterDropBox[113](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
 {
-	if(!Boxes[boxid][box_used]) return 1;
+	if(Boxes[boxid][box_used])
+	{
+		Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_model], x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
+	}
 
-	Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_model], x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
-	if(IsPlayerConnected(playerid)) 
+	if(IsPlayerConnected(playerid))
 	{
 		RemovePlayerAttachedObject(playerid, Boxes[boxid][box_attachedSlot]);
 	}
