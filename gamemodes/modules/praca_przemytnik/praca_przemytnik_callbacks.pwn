@@ -192,22 +192,56 @@ Przemytnik_OnPlayerText(playerid, text[])
 
 Przemytnik_OnPlayerLogin(playerid)
 {
+	// TODO: gdy akcja przemytnicza siê skoñczy, nie przywracaj graczom ich udzia³u
 	new actionID = GetPlayerSmugglingActionID(playerid);
 	if(actionID == -1)
 	{
 		return 1;
 	}
 
-	if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_PICKUP)
+	new role = GetPlayerSmugglingRole(playerid);
+	if(role == SMUGGLING_ROLE_INITIATOR || role == SMUGGLING_ROLE_DRIVER)
 	{
-		new role = GetPlayerSmugglingRole(playerid);
-		if(role == SMUGGLING_ROLE_INITIATOR || role == SMUGGLING_ROLE_DRIVER)
-		{
-			MruMessageGoodInfo(playerid, "Twój udzia³ w akcji przemytniczej zosta³ przywrócony. Udaj siê do checkpointu.");
-			CreateSmugglingPickupCheckpoint(playerid, actionID);
+		switch(SmugglingAction[actionID][s_stage])
+		{	
+			case SMUGGLING_STAGE_PICKUP:
+			{
+				MruMessageGoodInfo(playerid, "Twój udzia³ w akcji przemytniczej zosta³ przywrócony. Udaj siê do checkpointu.");
+				CreateSmugglingPickupCheckpoint(playerid, actionID);
+			}
+			case SMUGGLING_STAGE_FLY:
+			{
+				MruMessageGoodInfo(playerid, "Twój udzia³ w akcji przemytniczej zosta³ przywrócony. Wracaj do wodolotu zrzucaæ paczki!");
+				ShowSmugglingCheckpoint(playerid, actionID);
+			}
+			case SMUGGLING_STAGE_DROP:
+			{
+				MruMessageGoodInfo(playerid, "Twój udzia³ w akcji przemytniczej zosta³ przywrócony. Wracaj do wodolotu zrzucaæ paczki!");
+				ShowSmugglingCheckpoint(playerid, actionID);
+			}
+			case SMUGGLING_STAGE_GATHER:
+			{
+				MruMessageGoodInfo(playerid, "Twój udzia³ w akcji przemytniczej zosta³ przywrócony. Wracaj dostraczaæ paczki do strefy zboru!");
+				CreateSmugglingGatherCheckpoint(playerid, actionID);
+			}
 		}
 	}
-
+	else
+	{
+		switch(SmugglingAction[actionID][s_stage])
+		{	
+			case SMUGGLING_STAGE_PICKUP:
+			{
+				MruMessageGoodInfo(playerid, "Twój udzia³ w akcji przemytniczej zosta³ przywrócony.");
+				CreateSmugglingGatherCheckpoint(playerid, actionID);
+			}
+			default:
+			{
+				MruMessageGoodInfo(playerid, "Twój udzia³ w akcji przemytniczej zosta³ przywrócony. Wracaj dostraczaæ paczki do strefy zboru!");
+				CreateSmugglingGatherCheckpoint(playerid, actionID);
+			}
+		}
+	}
 	return 1;
 }
 
@@ -236,25 +270,25 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
         return 1;
     }
 
-	if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_FLY)
+	if(SmugglingAction[actionID][s_stage] == SMUGGLING_STAGE_FLY)
 	{
 		if(role == SMUGGLING_ROLE_INITIATOR)
 		{
 			// start DROP stage
-			SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_DROP;
+			SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_DROP;
 			MruMessageGoodInfoF(playerid, "Musisz teraz przelecieæ przez %d checkpointy aby dokonaæ zrzutu kontrabandy.", CHECKPOINT_PER_DROP);
 		}
 		else
 		{
 			MruMessageGoodInfoF(playerid, "Musisz teraz przelecieæ przez %d checkpointy aby Twój partner móg³ dokonaæ zrzutu kontrabandy.", CHECKPOINT_PER_DROP);
 		}
-		NextSmugglingCheckpoint(playerid, actionID);
+		ShowSmugglingCheckpoint(playerid, actionID);
 		PlayerPlaySound(playerid, 1138, 0, 0, 0);
 		return 1;
 	}
-	else if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_DROP)
+	else if(SmugglingAction[actionID][s_stage] == SMUGGLING_STAGE_DROP)
 	{
-		if(SmugglingAction[actionID][EnableContrabandDrop])
+		if(SmugglingAction[actionID][s_enableContrabandDrop])
 		{
         	MruMessageFail(playerid, "Aby kontynuowaæ zbieranie checkpointów - zrzuæcie paczkê z kontraband¹.");
 			return 1;
@@ -262,11 +296,11 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 
 		if(role == SMUGGLING_ROLE_INITIATOR)
 		{
-			SmugglingAction[actionID][CapturedCheckpoints] += 1;
-			if(SmugglingAction[actionID][CapturedCheckpoints] % CHECKPOINT_PER_DROP == 0)
+			SmugglingAction[actionID][s_capturedCheckpoints] += 1;
+			if(SmugglingAction[actionID][s_capturedCheckpoints] % CHECKPOINT_PER_DROP == 0)
 			{
-				SmugglingAction[actionID][CapturedCheckpoints] = 0;
-				SmugglingAction[actionID][EnableContrabandDrop] = 1;
+				SmugglingAction[actionID][s_capturedCheckpoints] = 0;
+				SmugglingAction[actionID][s_enableContrabandDrop] = 1;
 				MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy, mo¿esz teraz dokonaæ zrzutu na odpowidniej wysokoœci za pomoc¹ komendy /zrzut!", CHECKPOINT_PER_DROP);
 				ChatMe(playerid, "przygotowuje siê do zrzutu paczki z kontraband¹");
 				GameTextForPlayer(playerid, "~g~Mozesz zrzucic kontrabande!", 5000, 6);
@@ -276,17 +310,17 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 			else
 			{
 				PlayerPlaySound(playerid, 1138, 0, 0, 0);
-				NextSmugglingCheckpoint(playerid, actionID);
+				ShowSmugglingCheckpoint(playerid, actionID);
 			}
 		}
 		else
 		{
 			MruMessageGoodInfoF(playerid, "Uda³o Ci siê przelecieæ przez %d checkpointy!", CHECKPOINT_PER_DROP);
 			PlayerPlaySound(playerid, 1138, 0, 0, 0);
-			NextSmugglingCheckpoint(playerid, actionID);
+			ShowSmugglingCheckpoint(playerid, actionID);
 		}
 
-		if(SmugglingAction[actionID][CapturedCheckpoints] >= MAX_SMUGGLING_CHECKPOINTS)
+		if(SmugglingAction[actionID][s_capturedCheckpoints] >= MAX_SMUGGLING_CHECKPOINTS)
 		{
 			MruMessageGoodInfo(playerid, "Uda³o Ci siê przelecieæ przez wszystkie checkpointy.");
 			DisablePlayerRaceCheckpoint(playerid);
@@ -295,7 +329,7 @@ Przemytnik_OnPlayerEnterRaceCP(playerid)
 		}
 		return 1;
 	}
-	else if(SmugglingAction[actionID][SmugglingStage] == SMUGGLING_STAGE_GATHER)
+	else if(SmugglingAction[actionID][s_stage] == SMUGGLING_STAGE_GATHER)
 	{
 			MruMessageGoodInfo(playerid, "Uda³o Ci siê przelecieæ przez wszystkie checkpointy.");
 			DisablePlayerRaceCheckpoint(playerid);
@@ -320,7 +354,7 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 		if(actionID == -1) // przemytnik z akcji
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 5.0,
-				SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ]))
+				SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ]))
 			{
 				MruMessageGoodInfo(playerid, "Uda³o Ci siê dostarczyæ paczkê z kontraband¹ do punktu zboru!");
 				if(boxType == BOX_TYPE_CONTRABAND_ACTION)

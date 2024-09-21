@@ -27,10 +27,7 @@ enum SugglingStages {
     SMUGGLING_STAGE_PICKUP,
     SMUGGLING_STAGE_FLY,
     SMUGGLING_STAGE_DROP,
-    SMUGGLING_STAGE_GATHER,
-    SMUGGLING_STAGE_DOCUMENTS,
-    SMUGGLING_STAGE_SEND,
-    SMUGGLING_STAGE_DELIVERED,
+    SMUGGLING_STAGE_GATHER
 };
 
 enum SmugglingRoles {
@@ -41,25 +38,30 @@ enum SmugglingRoles {
 };
 
 enum eSmugglingData {
-    SmugglingActionID,
-    SmugglingStage,
-    DropPointFlareObject,
-    DropPointContainerObject,
-    SmugglingDriverUID,
-    CapturedCheckpoints,
-    EnableContrabandDrop,
-    ContrabandPackagesToDrop,
-    SmugglingCheckpoints[MAX_SMUGGLING_CHECKPOINTS],
-    ContrabandDropObjects[PACKAGES_TO_DROP],
-    ContrabandFlareObjects[PACKAGES_TO_DROP],
-    PackagesDone,
-    ContrabandGathered,
-    Float:GatherPointX,
-    Float:GatherPointY,
-    Float:GatherPointZ,
-    Float:PickupPointX,
-    Float:PickupPointY,
-    Float:PickupPointZ
+    // action data
+    s_actionID,
+    s_stage,
+    s_driverUID,
+
+    // dropping packages data
+    s_packagesToDrop,
+    s_packagesDropped,
+    s_capturedCheckpoints,
+    s_enableContrabandDrop,
+    s_flyCheckpoints[MAX_SMUGGLING_CHECKPOINTS],
+    s_dropObjects[PACKAGES_TO_DROP],
+    s_flareObjects[PACKAGES_TO_DROP],
+
+    // gatherinng point data
+    s_gatherFlare,
+    s_gatherContainer,
+    s_contrabandGathered,
+    Float:s_gatherPointX,
+    Float:s_gatherPointY,
+    Float:s_gatherPointZ,
+    Float:s_pickupPointX,
+    Float:s_pickupPointY,
+    Float:s_pickupPointZ
 };
 
 new SmugglingAction[SMUGGLING_ACTIONS_PER_DAY][eSmugglingData];

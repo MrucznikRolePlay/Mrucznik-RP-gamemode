@@ -58,7 +58,7 @@ stock GetPlayerSmugglingActionID(playerid)
 
 	for(new i; i<SMUGGLING_ACTIONS_PER_DAY; i++)
 	{
-		if(SmugglingAction[i][SmugglingActionID] == redisActionID)
+		if(SmugglingAction[i][s_actionID] == redisActionID)
 		{
 			return i;
 		}
@@ -112,20 +112,20 @@ StartSmuggling(playerid)
 	Redis_Expire(sprintf("smuggling:%d:stage", redisActionID), 3600); // 1 hour
 
 	// fill up smuggling action data
-	SmugglingAction[actionID][SmugglingActionID] = redisActionID;
-	SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_PICKUP;
-	SmugglingAction[actionID][ContrabandPackagesToDrop] = PACKAGES_TO_DROP;
+	SmugglingAction[actionID][s_actionID] = redisActionID;
+	SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_PICKUP;
+	SmugglingAction[actionID][s_packagesToDrop] = PACKAGES_TO_DROP;
 
-	SmugglingAction[actionID][GatherPointX] = x;
-	SmugglingAction[actionID][GatherPointY] = y;
-	SmugglingAction[actionID][GatherPointZ] = z;
+	SmugglingAction[actionID][s_gatherPointX] = x;
+	SmugglingAction[actionID][s_gatherPointY] = y;
+	SmugglingAction[actionID][s_gatherPointZ] = z;
 
 	new rand = random(sizeof(ContrabandPickupPoints));
-	SmugglingAction[actionID][PickupPointX] = ContrabandPickupPoints[rand][0];
-	SmugglingAction[actionID][PickupPointY] = ContrabandPickupPoints[rand][1];
-	SmugglingAction[actionID][PickupPointZ] = ContrabandPickupPoints[rand][2];
+	SmugglingAction[actionID][s_pickupPointX] = ContrabandPickupPoints[rand][0];
+	SmugglingAction[actionID][s_pickupPointY] = ContrabandPickupPoints[rand][1];
+	SmugglingAction[actionID][s_pickupPointZ] = ContrabandPickupPoints[rand][2];
 
-	SmugglingAction[actionID][SmugglingDriverUID] = GetPVarInt(playerid, "smuggling-driver-uid");
+	SmugglingAction[actionID][s_driverUID] = GetPVarInt(playerid, "smuggling-driver-uid");
 
 	// create object & checkpoint
 	CreateDropPointFlare(actionID);
@@ -168,7 +168,7 @@ StartSmuggling(playerid)
 
 timer DeactivateSmuggling[SMUGGLING_MAX_TIME](actionID)
 {
-	if(SmugglingAction[actionID][SmugglingStage] >= SMUGGLING_STAGE_DOCUMENTS)
+	if(SmugglingAction[actionID][s_stage] >= SMUGGLING_STAGE_DOCUMENTS)
 	{
 		return;
 	}
@@ -183,61 +183,61 @@ timer DeactivateSmuggling[SMUGGLING_MAX_TIME](actionID)
 	}
 
 
-	switch(SmugglingAction[actionID][SmugglingStage])
+	switch(SmugglingAction[actionID][s_stage])
 	{
 		case SMUGGLING_STAGE_PICKUP, SMUGGLING_STAGE_FLY:
 		{
-			DestroyDynamicObject(SmugglingAction[actionID][DropPointFlareObject]);
+			DestroyDynamicObject(SmugglingAction[actionID][s_gatherFlare]);
 		}
 		case SMUGGLING_STAGE_DROP:
 		{
-			DestroyDynamicObject(SmugglingAction[actionID][DropPointFlareObject]);
-			DestroyDynamicObject(SmugglingAction[actionID][DropPointContainerObject]);
+			DestroyDynamicObject(SmugglingAction[actionID][s_gatherFlare]);
+			DestroyDynamicObject(SmugglingAction[actionID][s_gatherContainer]);
 		}
 	}
-	SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_NONE;
+	SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_NONE;
 }
 
 CreateSmugglingPickupCheckpoint(playerid, actionID)
 {
 	SetPlayerCheckpoint(playerid, 
-		SmugglingAction[actionID][PickupPointX], SmugglingAction[actionID][PickupPointY], SmugglingAction[actionID][PickupPointZ], 
+		SmugglingAction[actionID][s_pickupPointX], SmugglingAction[actionID][s_pickupPointY], SmugglingAction[actionID][s_pickupPointZ], 
 		10);
 }
 
 CreateSmugglingGatherCheckpoint(playerid, actionID)
 {
 	SetPlayerCheckpoint(playerid, 
-		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ], 
+		SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ], 
 		5);
 }
 
 CreateDropPointFlare(actionID)
 {
-	SmugglingAction[actionID][DropPointFlareObject] = CreateDynamicObject(18728, 
-		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ] - 0.5,
+	SmugglingAction[actionID][s_gatherFlare] = CreateDynamicObject(18728, 
+		SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ] - 0.5,
 		0.0, 0.0, 0.0,
 		0, 0);
 }
 
 CreateDropPointContainer(actionID)
 {
-	SmugglingAction[actionID][DropPointFlareObject] = CreateDynamicObject(1334, 
-		SmugglingAction[actionID][GatherPointX], SmugglingAction[actionID][GatherPointY], SmugglingAction[actionID][GatherPointZ], 
+	SmugglingAction[actionID][s_gatherFlare] = CreateDynamicObject(1334, 
+		SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ], 
 		0.0, 0.0, 0.0,
 		0, 0);
 }
 
 StartSmugglingDrop(playerid, driverid, actionID)
 {
-    SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_FLY;
+    SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_FLY;
 
 	for(new i; i < MAX_SMUGGLING_CHECKPOINTS; i++)
 	{
-		SmugglingAction[actionID][SmugglingCheckpoints][i] = random(sizeof(SkimmerDroppingCheckpoints));
+		SmugglingAction[actionID][s_flyCheckpoints][i] = random(sizeof(SkimmerDroppingCheckpoints));
 	}
 
-	new cp = SmugglingAction[actionID][SmugglingCheckpoints][0];
+	new cp = SmugglingAction[actionID][s_flyCheckpoints][0];
 	new type = 4; // CP_TYPE_AIR_FINISH
 	SetPlayerRaceCheckpoint(playerid, type, 5014.9385, 154.7287, 71.5396, 
 		SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
@@ -261,9 +261,9 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	}
 }
 
-NextSmugglingCheckpoint(playerid, actionID)
+ShowSmugglingCheckpoint(playerid, actionID)
 {
-	new cp = SmugglingAction[actionID][CapturedCheckpoints];
+	new cp = SmugglingAction[actionID][s_capturedCheckpoints];
 	if(cp >= MAX_SMUGGLING_CHECKPOINTS)
 	{
 		return;
@@ -271,7 +271,7 @@ NextSmugglingCheckpoint(playerid, actionID)
 
 	new type = 3; // CP_TYPE_AIR_NORMAL
 	new Float:fx, Float:fy, Float:fz;
-	new cpIdx = SmugglingAction[actionID][SmugglingCheckpoints][cp];
+	new cpIdx = SmugglingAction[actionID][s_flyCheckpoints][cp];
 	if(cp == MAX_SMUGGLING_CHECKPOINTS-1)
 	{
 		type = 4; // CP_TYPE_AIR_FINISH
@@ -281,7 +281,7 @@ NextSmugglingCheckpoint(playerid, actionID)
 	}
 	else
 	{
-		new cpIdxNext = SmugglingAction[actionID][SmugglingCheckpoints][cp+1];
+		new cpIdxNext = SmugglingAction[actionID][s_flyCheckpoints][cp+1];
 		fx = SkimmerDroppingCheckpoints[cpIdxNext][0];
 		fy = SkimmerDroppingCheckpoints[cpIdxNext][1];
 		fz = SkimmerDroppingCheckpoints[cpIdxNext][2];
@@ -323,9 +323,9 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index)
 	GetDynamicObjectPos(parachuteObject, x, y, z);
 	DestroyDynamicObject(parachuteObject);
 
-	SmugglingAction[actionID][ContrabandFlareObjects][index] = CreateDynamicObject(18728, x, y, z - 1.25, 0.0, 0.0, 0.0, 0, 0, 300.0, 300.0);
+	SmugglingAction[actionID][s_flareObjects][index] = CreateDynamicObject(18728, x, y, z - 1.25, 0.0, 0.0, 0.0, 0, 0, 300.0, 300.0);
 	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, BIG_PACKAGE_CONTRABAND_AMMOUNT, x, y, z);
-	SmugglingAction[actionID][ContrabandDropObjects][index] = boxid;
+	SmugglingAction[actionID][s_dropObjects][index] = boxid;
 }
 
 MarcepanPhone(playerid, color, string[])
@@ -339,6 +339,17 @@ timer MarcepanPhoneTimer[1000](playerid, color, string:string[])
 	SendClientMessage(playerid, color, string);
 }
 
+SendSmugglingCrewMessage(playerid, color, string[])
+{
+	foreach(new i : Player)
+	{
+		new playerActionID = GetPlayerSmugglingActionID(i);
+		if(playerActionID == actionID)
+		{
+			SendClientMessage(i, color, string);
+		}
+	}
+}
 // ------- ostatni etap
 GetSmugglingActionByBoxID(boxid)
 {
@@ -346,7 +357,7 @@ GetSmugglingActionByBoxID(boxid)
 	{
 		for(new j; j<PACKAGES_TO_DROP; j++)
 		{
-			if(boxid == SmugglingAction[i][ContrabandDropObjects][j])
+			if(boxid == SmugglingAction[i][s_dropObjects][j])
 			{
 				return i;
 			}
@@ -358,9 +369,9 @@ GetSmugglingActionByBoxID(boxid)
 DestroySmugglingBoxFlare(boxid)
 {
 	new actionID = GetSmugglingActionByBoxID(boxid);
-	if(SmugglingAction[actionID][ContrabandFlareObjects] != -1) {
-		DestroyDynamicObject(SmugglingAction[actionID][ContrabandFlareObjects]);
-		SmugglingAction[actionID][ContrabandFlareObjects] = -1;
+	if(SmugglingAction[actionID][s_flareObjects] != -1) {
+		DestroyDynamicObject(SmugglingAction[actionID][s_flareObjects]);
+		SmugglingAction[actionID][s_flareObjects] = -1;
 	}
 }
 
@@ -368,9 +379,9 @@ GatherPackage(actionID, boxid, contraband)
 {
 	DestroyBox(boxid);
 
-	SmugglingAction[actionID][PackagesDone]++;
-	SmugglingAction[actionID][ContrabandGathered] += contraband;
-	if(SmugglingAction[actionID][PackagesDone] >= PACKAGES_TO_DROP)
+	SmugglingAction[actionID][s_packagesDropped]++;
+	SmugglingAction[actionID][s_contrabandGathered] += contraband;
+	if(SmugglingAction[actionID][s_packagesDropped] >= PACKAGES_TO_DROP)
 	{
 		EndSmuggling(actionID);
 	}

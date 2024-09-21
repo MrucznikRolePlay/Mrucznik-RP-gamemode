@@ -46,7 +46,7 @@ command_przemyt_Impl(playerid)
             return 1;
         }
 
-        switch(SmugglingAction[actionID][SmugglingStage])
+        switch(SmugglingAction[actionID][s_stage])
         {
             case SMUGGLING_STAGE_PICKUP:
             {
@@ -133,7 +133,7 @@ przemyt_StagePickup(playerid, actionID)
         return 1;
     }
 
-    if(!IsPlayerInRangeOfPoint(playerid, 15.0, SmugglingAction[actionID][PickupPointX], SmugglingAction[actionID][PickupPointY], SmugglingAction[actionID][PickupPointZ]))
+    if(!IsPlayerInRangeOfPoint(playerid, 15.0, SmugglingAction[actionID][s_pickupPointX], SmugglingAction[actionID][s_pickupPointY], SmugglingAction[actionID][s_pickupPointZ]))
     {
         MruMessageFail(playerid, "Nie jesteœ przy punkcie odbioru kontrabandy.");
         return 1;
@@ -153,7 +153,7 @@ przemyt_StagePickup(playerid, actionID)
     }
 
     new driverid = GetVehicleDriverID(vehicleID);
-    if(GetPlayerSmugglingRole(driverid) != SMUGGLING_ROLE_DRIVER || PlayerInfo[driverid][pUID] != SmugglingAction[actionID][SmugglingDriverUID])
+    if(GetPlayerSmugglingRole(driverid) != SMUGGLING_ROLE_DRIVER || PlayerInfo[driverid][pUID] != SmugglingAction[actionID][s_driverUID])
     {
         MruMessageFail(playerid, "Gracz który jest kierowc¹ wodolotu nie zosta³ wybrany jako kierowca w tej akcji przemytniczej.");
         return 1;

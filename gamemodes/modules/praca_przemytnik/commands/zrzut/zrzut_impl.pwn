@@ -46,14 +46,14 @@ command_zrzut_Impl(playerid)
         return 1;
     }
 
-    if(SmugglingAction[actionID][EnableContrabandDrop] < 1)
+    if(SmugglingAction[actionID][s_enableContrabandDrop] < 1)
     {
         MruMessageFail(playerid, "Musisz przelecieæ przez 3 checkpointy by móc zrzuciæ 1 paczkê kontrabandy.");
         return 1;
     }
 
     new driverid = GetVehicleDriverID(vehicleID);
-    if(GetPlayerSmugglingRole(driverid) != SMUGGLING_ROLE_DRIVER || PlayerInfo[driverid][pUID] != SmugglingAction[actionID][SmugglingDriverUID])
+    if(GetPlayerSmugglingRole(driverid) != SMUGGLING_ROLE_DRIVER || PlayerInfo[driverid][pUID] != SmugglingAction[actionID][s_driverUID])
     {
         MruMessageFail(playerid, "Gracz który jest kierowc¹ wodolotu nie zosta³ wybrany jako kierowca w tej akcji przemytniczej.");
         return 1;
@@ -75,23 +75,23 @@ command_zrzut_Impl(playerid)
     }
 
     ChatMe(playerid, "wyrzuca z wodolotu paczkê z kontraband¹");
-    SmugglingAction[actionID][EnableContrabandDrop] = 0;
-    SmugglingAction[actionID][ContrabandPackagesToDrop]--;
+    SmugglingAction[actionID][s_enableContrabandDrop] = 0;
+    SmugglingAction[actionID][s_packagesToDrop]--;
 
     GetPosBehindVehicle(vehicleID, x, y, z, 1.0);
-    CreateContrabandDrop(actionID, x, y, z, SmugglingAction[actionID][ContrabandPackagesToDrop]);
+    CreateContrabandDrop(actionID, x, y, z, SmugglingAction[actionID][s_packagesToDrop]);
     PlayerPlaySound(playerid, 1039, 0, 0, 0);
 
-    if(SmugglingAction[actionID][ContrabandPackagesToDrop] == 0)
+    if(SmugglingAction[actionID][s_packagesToDrop] == 0)
     {
         // last package dropped, start gather stage
-        SmugglingAction[actionID][SmugglingStage] = SMUGGLING_STAGE_GATHER;
+        SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_GATHER;
         MruMessageGoodInfo(playerid, "To by³a ostatnia paczka kontrabandy, teraz udaj siê do punktu zboru.");
     }
     else 
     {
         MruMessageGoodInfo(playerid, "Zrzuci³eœ paczkê kontrabandy!");
-        NextSmugglingCheckpoint(playerid, actionID);
+        ShowSmugglingCheckpoint(playerid, actionID);
     }
     return 1;
 }
