@@ -369,7 +369,7 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 	if(GetPlayerJob(playerid) == JOB_SMUGGLER)
 	{
 		new actionID = GetPlayerSmugglingActionID(playerid);
-		if(actionID == -1) // przemytnik z akcji
+		if(actionID != -1) // przemytnik z akcji
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 10.0,
 				SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ]))
@@ -433,7 +433,7 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 	if(GetPlayerJob(playerid) == JOB_SMUGGLER)
 	{
 		new smugglingAction = GetPlayerSmugglingActionID(playerid);
-		if(smugglingAction == -1) // przemytnik z akcji
+		if(smugglingAction != -1) // przemytnik z akcji
 		{
 			MruMessageGoodInfo(playerid, "Uda³o Ci siê zebraæ paczkê z kontraband¹ zrzucon¹ przez Twoj¹ ekipê. Dostarcz j¹ do punktu zboru!");
 			CreateSmugglingGatherCheckpoint(playerid, smugglingAction);
