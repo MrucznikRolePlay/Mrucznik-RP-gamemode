@@ -361,9 +361,19 @@ GetSmugglingActionByBoxID(boxid)
 DestroySmugglingBoxFlare(boxid)
 {
 	new actionID = GetSmugglingActionByBoxID(boxid);
-	if(SmugglingAction[actionID][s_flareObjects] != -1) {
-		DestroyDynamicObject(SmugglingAction[actionID][s_flareObjects]);
-		SmugglingAction[actionID][s_flareObjects] = -1;
+	new idx;
+	for(new i; i<PACKAGES_TO_DROP; i++)
+	{
+		if(boxid == SmugglingAction[actionID][s_dropBoxes][i])
+		{
+			idx = i;
+			break;
+		}
+	}
+
+	if(SmugglingAction[actionID][s_flareObjects][idx] != -1) {
+		DestroyDynamicObject(SmugglingAction[actionID][s_flareObjects][idx]);
+		SmugglingAction[actionID][s_flareObjects][idx] = -1;
 	}
 }
 
