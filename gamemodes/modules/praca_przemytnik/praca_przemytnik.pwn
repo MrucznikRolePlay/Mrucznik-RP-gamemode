@@ -82,7 +82,7 @@ stock GetSmugglingItemFromString(str[])
 			return i;
 		}
 	}
-	return -1;
+	return SMUGGLING_ITEM_UNKNOWN;
 }
 
 RedisStartSmuggling(UID, redisActionID, role)
