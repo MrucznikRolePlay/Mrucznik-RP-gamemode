@@ -178,25 +178,7 @@ timer DeactivateSmuggling[SMUGGLING_MAX_TIME](actionID)
 		}
 	}
 
-
-	switch(SmugglingAction[actionID][s_stage])
-	{
-		case SMUGGLING_STAGE_PICKUP, SMUGGLING_STAGE_FLY:
-		{
-			DestroyDynamicObject(SmugglingAction[actionID][s_gatherFlare]);
-		}
-		case SMUGGLING_STAGE_DROP:
-		{
-			for(new i; i<PACKAGES_TO_DROP; i++)
-			{
-				DestroyDynamicObject(SmugglingAction[actionID][s_flareObjects][i]);
-				DestroyBox(SmugglingAction[actionID][s_dropBoxes][i]);
-			}
-			DestroyDynamicObject(SmugglingAction[actionID][s_gatherFlare]);
-			DestroyDynamicObject(SmugglingAction[actionID][s_gatherContainer]);
-		}
-	}
-	SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_NONE;
+	EndSmuggling(actionID);
 }
 
 CreateSmugglingPickupCheckpoint(playerid, actionID)
@@ -380,13 +362,47 @@ GatherPackage(actionID, boxid, contraband)
 	SmugglingAction[actionID][s_contrabandGathered] += contraband;
 	if(SmugglingAction[actionID][s_packagesDropped] >= PACKAGES_TO_DROP)
 	{
-		EndSmuggling(actionID);
+		SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Wszystkie paczki zosta³y dostaczone lub znisczone. Teraz organizator mo¿e zebraæ kontrabandê z punktu zbioru (/przemyt).");
+		SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_END;
 	}
 }
 
 EndSmuggling(actionID)
 {
-	SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Akcja przemytnicza zosta³a zakoñczona!");
+    // Reset SmugglingAction table to default values
+	SmugglingAction[actionID][s_actionID] = -1;
+    SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_NONE;
+    SmugglingAction[actionID][s_driverUID] = 0;
+    SmugglingAction[actionID][s_pickupPointX] = 0.0;
+    SmugglingAction[actionID][s_pickupPointY] = 0.0;
+    SmugglingAction[actionID][s_pickupPointZ] = 0.0;
+    SmugglingAction[actionID][s_gatherPointX] = 0.0;
+    SmugglingAction[actionID][s_gatherPointY] = 0.0;
+    SmugglingAction[actionID][s_gatherPointZ] = 0.0;
+    SmugglingAction[actionID][s_packagesDropped] = 0;
+    SmugglingAction[actionID][s_contrabandGathered] = 0;
+    SmugglingAction[actionID][s_enableContrabandDrop] = 0;
+
+	foreach(new i : GroupMember(SmugglingAction[actionID][s_crewGroup]))
+	{
+		Redis_Delete(sprintf("player:%d:smuggling", PlayerInfo[i][pUID]));
+		Redis_Delete(sprintf("player:%d:smuggling:role", PlayerInfo[i][pUID]));
+	}
+
+	Group_Destroy(SmugglingAction[actionID][s_crewGroup]);
+    for(new i = 0; i < PACKAGES_TO_DROP; i++)
+    {
+		DestroyBox(SmugglingAction[actionID][s_dropBoxes][i]);
+    }
+
+    if(SmugglingAction[actionID][s_flareObjects] != -1)
+    {
+        DestroyDynamicObject(SmugglingAction[actionID][s_flareObjects]);
+        SmugglingAction[actionID][s_flareObjects] = -1;
+    }
+
+	DestroyDynamicObject(SmugglingAction[actionID][s_gatherContainer]);
+	DestroyDynamicObject(SmugglingAction[actionID][s_gatherFlare]);
 }
 
 // ------------- przedmioty przemytnicze --------------------

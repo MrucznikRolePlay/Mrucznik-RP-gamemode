@@ -92,7 +92,7 @@ command_zrzut_Impl(playerid)
     else 
     {
         MruMessageGoodInfo(playerid, "Zrzuci³eœ paczkê kontrabandy!");
-        SendSmugglingCrewMessage(playerid, TEAM_AZTECAS_COLOR, sprintf("%s zrzuci³ paczkê z kontraband¹.", GetNick(playerid)));
+        SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, sprintf("%s zrzuci³ paczkê z kontraband¹.", GetNick(playerid)));
         ShowSmugglingCheckpoint(playerid, actionID);
         foreach(new i : Player)
         {

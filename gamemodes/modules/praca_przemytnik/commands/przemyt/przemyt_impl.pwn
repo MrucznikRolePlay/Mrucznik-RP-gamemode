@@ -64,6 +64,10 @@ command_przemyt_Impl(playerid)
             {
                 MruMessageInfo(playerid, "Wszystkie paczki zosta³y zrzucione, teraz musisz dostarczyæ je do punktu odbioru.");
             }
+            case SMUGGLING_STAGE_END:
+            {
+                przemyt_StageEnd(playerid, actionID);
+            }
             default:
             {
                 MruMessageError(playerid, "B³¹d - zg³oœ go Mrucznikowi.");
@@ -163,6 +167,32 @@ przemyt_StagePickup(playerid, actionID)
     DisablePlayerCheckpoint(driverid);
 
     StartSmugglingDrop(playerid, driverid, actionID);
+    return 1;
+}
+
+przemyt_StageEnd(playerid, actionID)
+{
+    if(GetPlayerSmugglingRole(playerid) != SMUGGLING_ROLE_INITIATOR)
+    {
+        MruMessageFail(playerid, "Tylko inicjator akcji przemytniczej mo¿e odebraæ kontrabandê z punktu zboru.");
+        return 1;
+    }
+
+    if(!IsPlayerInRangeOfPoint(playerid, 15.0, SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ]))
+    {
+        MruMessageFail(playerid, "Nie jesteœ przy punkcie zboru.");
+        return 1;
+    }
+
+    ChatMe(playerid, "zabiera paczki kontrabandy z punktu zboru.");
+
+    MruMessageGoodInfo(playerid, "Gratulacje! Uda³o Ci siê zakoñczyæ akcjê przemytnicz¹.");
+    MruMessageGoodInfoF(playerid, "Uda³o Ci siê zdobyæ %d paczek kontrabandy.", SmugglingAction[actionID][s_contrabandGathered]);
+    SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, sprintf("%s zgarn¹³ %d paczek kontrabandy.", GetNick(playerid), SmugglingAction[actionID][s_contrabandGathered]));
+
+    GiveContraband(playerid, SmugglingAction[actionID][s_contrabandGathered]);
+
+    EndSmuggling(actionID);
     return 1;
 }
 

@@ -192,7 +192,6 @@ Przemytnik_OnPlayerText(playerid, text[])
 
 Przemytnik_OnPlayerLogin(playerid)
 {
-	// TODO: gdy akcja przemytnicza siê skoñczy, nie przywracaj graczom ich udzia³u
 	new actionID = GetPlayerSmugglingActionID(playerid);
 	if(actionID == -1)
 	{
@@ -373,7 +372,7 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 				if(boxType == BOX_TYPE_CONTRABAND_ACTION)
 				{
 					GatherPackage(actionID, boxid, Boxes[boxid][box_bonus]);
-					// TODO: komunikat o dostarczeniu paczki dla ekipy przemycaj¹cej
+					SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, sprintf("%s dostarczy³ paczkê z kontraband¹ do punktu zboru!", GetNick(playerid)));
 				}
 			}
 		}
@@ -387,7 +386,7 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 					contraband = Boxes[boxid][box_bonus] / 2;
 					actionID = GetSmugglingActionByBoxID(boxid);
 					GatherPackage(actionID, boxid, 0);
-					// TODO: komunikat o przechwyceniu paczki dla ekipy przemycaj¹cej
+					SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Wrogi przemytnik zgarn¹³ wasz¹ paczkê z kontraband¹!");
 				}
 				else
 				{
