@@ -402,6 +402,7 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 				MruMessageGoodInfo(playerid, "Uda³o Ci siê dostarczyæ paczkê z kontraband¹ do dziupli przemytniczej!");
 				MruMessageGoodInfoF(playerid, "Znajdowa³o siê w niej %d kontrabandy. Jest teraz Twoja!", contraband);
 				GiveContraband(playerid, contraband);
+				DisablePlayerCheckpoint(playerid);
 			}
 		}
 	}
@@ -440,7 +441,7 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 		else // zwyk³y przemytnik
 		{
 			MruMessageGoodInfo(playerid, "Uda³o Ci siê zebraæ paczkê z kontraband¹ zrzucon¹ przez wrog¹ ekipê. Dostarcz j¹ do dziupli przemytniczej (checkpoint)!");
-			CreateSmugglingGatherCheckpoint(playerid, smugglingAction);
+			CreateSmugglingGatherCheckpoint(playerid, smugglingAction, false);
 		}
 	}
 

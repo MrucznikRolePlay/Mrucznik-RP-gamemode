@@ -188,11 +188,20 @@ CreateSmugglingPickupCheckpoint(playerid, actionID)
 		10);
 }
 
-CreateSmugglingGatherCheckpoint(playerid, actionID)
+CreateSmugglingGatherCheckpoint(playerid, actionID, bool:hole=false)
 {
-	SetPlayerCheckpoint(playerid, 
-		SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ], 
-		5);
+	if(hole)
+	{
+		SetPlayerCheckpoint(playerid,
+			SmugglersHole[0], SmugglersHole[1], SmugglersHole[2],
+			5);
+	}
+	else
+	{
+		SetPlayerCheckpoint(playerid, 
+			SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ], 
+			5);
+	}
 }
 
 CreateDropPointFlare(actionID)
@@ -385,6 +394,7 @@ EndSmuggling(actionID)
 	{
 		Redis_Delete(sprintf("player:%d:smuggling", PlayerInfo[i][pUID]));
 		Redis_Delete(sprintf("player:%d:smuggling:role", PlayerInfo[i][pUID]));
+		DisablePlayerCheckpoint(i);
 	}
 
 	Group_Destroy(SmugglingAction[actionID][s_crewGroup]);
