@@ -481,7 +481,7 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 	return 1;
 }
 
-Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:y, Float:z)
+Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 {
 	#pragma unused weaponid
 	if(boxType != BOX_TYPE_CONTRABAND_ACTION && boxType != BOX_TYPE_CONTRABAND)
@@ -492,6 +492,9 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 	new rand = random(100);
 	if(rand <= DMG_CHANCE) 
 	{
+		new Float:x, Float:y, Float:z;
+		GetDynamicObjectPos(Boxes[boxid][box_object], x, y, z);
+
 		Boxes[boxid][box_bonus] -= floatround(GetWeaponMaxDamage(weaponid), floatround_ceil);
 		if(Boxes[boxid][box_bonus] <= 0)
 		{
@@ -520,9 +523,9 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 				DajKase(playerid, reward);
 			}
 		}
-		PlayerPlaySound(playerid, 1135, 0.0, 0.0, 0.0); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
-		SendClientMessage(playerid, 0xFFFFFFFF, sprintf("hit %f %f %f", x, y, z));
-		defer DeferedDestroyObject(CreateDynamicObject(18680, x, y, z-1.0, 0.0, 0.0, 0.0, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid)));
+
+		PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
+		defer DeferedDestroyObject(CreateDynamicObject(18680, x, y, z-1.0, 0.0, 0.0, float(random(360)), GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid)));
 		Streamer_Update(playerid);
 	}
 

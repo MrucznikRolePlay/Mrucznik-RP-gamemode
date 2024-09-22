@@ -42,9 +42,9 @@ OnPlayerPickupMovableObject(playerid, boxid, boxType)
 	return;
 }
 
-OnPlayerShootMovableObject(playerid, weaponid, boxid, boxType, Float:x, Float:y, Float:z)
+OnPlayerShootMovableObject(playerid, weaponid, boxid, boxType)
 {
-	if(Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, x, y, z)) return 1;
+	if(Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)) return 1;
 	return 0;
 }
 
@@ -69,13 +69,13 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 	return 1;
 }
 
-Movable_OnPlayerShootObject(playerid, weaponid, STREAMER_TAG_OBJECT:objectid, Float:x, Float:y, Float:z)
+Movable_OnPlayerShootObject(playerid, weaponid, STREAMER_TAG_OBJECT:objectid)
 {
 	for(new i; i<MAX_MOVABLES; i++)
 	{
 		if(Boxes[i][box_used] && Boxes[i][box_object] == objectid)
 		{
-			return OnPlayerShootMovableObject(playerid, weaponid, i, Boxes[i][box_type], x, y, z);
+			return OnPlayerShootMovableObject(playerid, weaponid, i, Boxes[i][box_type]);
 		}
 	}
 	return 0;

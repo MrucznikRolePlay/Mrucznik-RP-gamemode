@@ -683,7 +683,7 @@ public OnPlayerShootDynamicObject(playerid, weaponid, objectid, Float:x, Float:y
 	}
 
 
-	if(Movable_OnPlayerShootObject(playerid, weaponid, objectid, x, y, z)) return 1;
+	if(Movable_OnPlayerShootObject(playerid, weaponid, objectid)) return 1;
     return 1;
 }
 
