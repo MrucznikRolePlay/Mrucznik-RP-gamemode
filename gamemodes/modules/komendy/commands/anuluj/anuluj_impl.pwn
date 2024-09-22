@@ -40,7 +40,21 @@ command_anuluj_Impl(playerid, params[256])
 	else if(strcmp(x_job,"kontrabanda",true) == 0) { ContrabandOffer[playerid] = 999; ContrabandPrice[playerid] = 0; ContrabandCount[playerid] = 0; }
 	else if(strcmp(x_job,"naprawa",true) == 0) {	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; }
 	else if(strcmp(x_job,"prawnik",true) == 0) { WantLawyer[playerid] = 0; CallLawyer[playerid] = 0; }
-	else if(strcmp(x_job,"przemyt",true) == 0 || strcmp(x_job,"pancerz",true) == 0) { SmugglingOffer[playerid] = 999; SmugglingOfferPrice[playerid] = 0; }
+	else if(strcmp(x_job,"przemyt",true) == 0 || strcmp(x_job,"pancerz",true) == 0) 
+	{ 
+		SmugglingOffer[playerid] = 999; SmugglingOfferPrice[playerid] = 0; 
+	}
+	else if(strcmp(x_job,"akcjaprzemyt",true) == 0) 
+	{
+		new actionID = GetPlayerSmugglingActionID(playerid);
+		if(actionID != -1)
+		{
+			Group_SetPlayer(SmugglingAction[actionID][s_crewGroup], playerid, false);
+			Redis_Delete(sprintf("player:%d:smuggling", PlayerInfo[playerid][pUID]));
+			Redis_Delete(sprintf("player:%d:smuggling:role", PlayerInfo[playerid][pUID]));
+			DisablePlayerCheckpoint(playerid);
+		}
+	}
 	else if(strcmp(x_job,"wywiad",true) == 0) { LiveOffer[playerid] = 999; }
 	else if(strcmp(x_job,"tankowanie",true) == 0) { RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; }
 	else if(strcmp(x_job,"auto",true) == 0) { CarOffer[playerid] = 999; CarID[playerid] = 0; }

@@ -148,7 +148,7 @@ StartSmuggling(playerid)
 	if(IsPlayerConnected(driverID) && PlayerInfo[driverID][pUID] == driverUID)
 	{
 		MruMessageGoodInfoF(driverID, "%s rozpocz¹³ z Tob¹ akcjê przemytnicz¹ - mianowa³ Ciê pilotem wodolotu.", GetNick(playerid));
-		MruMessageGoodInfo(driverID, "Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj przemyt");
+		MruMessageGoodInfo(driverID, "Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj akcjaprzemyt");
 	}
 	RedisStartSmuggling(driverUID, redisActionID, SMUGGLING_ROLE_DRIVER);
 
@@ -160,7 +160,7 @@ StartSmuggling(playerid)
 		if(IsPlayerConnected(partnerID) && PlayerInfo[partnerID][pUID] == partnerUID)
 		{
 			MruMessageGoodInfoF(partnerID, "%s rozpocz¹³ z Tob¹ akcjê przemytnicz¹.", GetNick(playerid));
-			MruMessageGoodInfo(partnerID, "Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj przemyt");
+			MruMessageGoodInfo(partnerID, "Jeœli nie chcesz w niej uczestniczyæ, wpisz /anuluj akcjaprzemyt");
 			Group_SetPlayer(SmugglingAction[actionID][s_crewGroup], partnerID, true);
 		}
 		RedisStartSmuggling(partnerUID, redisActionID, SMUGGLING_ROLE_PARTNER);
