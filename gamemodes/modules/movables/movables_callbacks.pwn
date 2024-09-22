@@ -106,24 +106,4 @@ hook OnPlayerConnect(playerid)
 	return 1;
 }
 
-CreateRandomContrabandBoxes()
-{
-	new Float:x, Float:y, Float:z;
-	// Create random boxes with contraband around the map
-	for(new i = 0; i < 5;) // Create 5 random boxes
-	{
-		// Vice City
-		x = 159.508300+VICECITY_MOVE_X + float(random(3173));
-		y = -2710.853271 + float(random(3374.0));
-		CA_FindZ_For2DCoord(x, y, z);
-		
-		if(z > 0.0) // Only create if above water level
-		{
-			CreateBox(1579, BOX_TYPE_CONTRABAND, random(5) + 1, x, y, z + 0.05, 0, 0, random(360));
-			i++;
-		}
-	}
-	return 1;
-}
-
 //end

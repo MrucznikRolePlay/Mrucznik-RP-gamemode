@@ -373,17 +373,14 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 	}
 	if(GetPlayerJob(playerid) == JOB_SMUGGLER || actionID != -1)
 	{
-		if(actionID != -1) // przemytnik z akcji
+		if(actionID != -1 && boxType == BOX_TYPE_CONTRABAND_ACTION) // przemytnik z akcji
 		{
 			if(IsPlayerInRangeOfPoint(playerid, 10.0,
 				SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ]))
 			{
 				MruMessageGoodInfo(playerid, "Uda³o Ci siê dostarczyæ paczkê z kontraband¹ do punktu zboru!");
-				if(boxType == BOX_TYPE_CONTRABAND_ACTION)
-				{
-					GatherPackage(actionID, boxid, Boxes[boxid][box_bonus]);
-					SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, sprintf("%s dostarczy³ paczkê z kontraband¹ do punktu zboru!", GetNick(playerid)));
-				}
+				GatherPackage(actionID, boxid, Boxes[boxid][box_bonus]);
+				SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, sprintf("%s dostarczy³ paczkê z kontraband¹ do punktu zboru!", GetNick(playerid)));
 			}
 		}
 		else // zwyk³y przemytnik
@@ -431,17 +428,24 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 	}
 
 	new packageState[32];
-	if(Boxes[boxid][box_bonus] == BIG_PACKAGE_CONTRABAND_AMMOUNT)
+	if(boxType == BOX_TYPE_CONTRABAND_ACTION)
 	{
-		format(packageState, sizeof(packageState), "du¿¹");
-	}
-	else if(Boxes[boxid][box_bonus] >= BIG_PACKAGE_CONTRABAND_AMMOUNT/2)
-	{
-		format(packageState, sizeof(packageState), "uszkodzon¹");
+		if(Boxes[boxid][box_bonus] == BIG_PACKAGE_CONTRABAND_AMMOUNT)
+		{
+			format(packageState, sizeof(packageState), "du¿¹");
+		}
+		else if(Boxes[boxid][box_bonus] >= BIG_PACKAGE_CONTRABAND_AMMOUNT/2)
+		{
+			format(packageState, sizeof(packageState), "uszkodzon¹");
+		}
+		else
+		{
+			format(packageState, sizeof(packageState), "mocno uszkodzon¹");
+		}
 	}
 	else
 	{
-		format(packageState, sizeof(packageState), "mocno uszkodzon¹");
+		format(packageState, sizeof(packageState), "ma³¹");
 	}
 
 	// ³owca / LSPD
@@ -453,14 +457,21 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 
 	if(GetPlayerJob(playerid) == JOB_SMUGGLER || smugglingAction != -1)
 	{
-		if(smugglingAction != -1) // przemytnik z akcji
+		if(smugglingAction != -1 && boxType == BOX_TYPE_CONTRABAND_ACTION) // przemytnik z akcji
 		{
 			MruMessageGoodInfoF(playerid, "Uda³o Ci siê zebraæ %s paczkê z kontraband¹ zrzucon¹ przez Twoj¹ ekipê. Dostarcz j¹ do punktu zboru!", packageState);
 			CreateSmugglingGatherCheckpoint(playerid, smugglingAction);
 		}
 		else // zwyk³y przemytnik
 		{
-			MruMessageGoodInfoF(playerid, "Uda³o Ci siê zebraæ %s paczkê z kontraband¹ zrzucon¹ przez wrog¹ ekipê. Dostarcz j¹ do dziupli przemytniczej (checkpoint)!", packageState);
+			if(boxType == BOX_TYPE_CONTRABAND_ACTION)
+			{
+				MruMessageGoodInfoF(playerid, "Uda³o Ci siê zebraæ %s paczkê z kontraband¹ zrzucon¹ przez wrog¹ ekipê. Dostarcz j¹ do dziupli przemytniczej (checkpoint)!", packageState);
+			}
+			else
+			{
+				MruMessageGoodInfo(playerid, "Uda³o Ci siê podnieœæ paczkê z kontraband¹! Dostarcz j¹ do dziupli przemytniczej (checkpoint)!");
+			}
 			CreateSmugglingGatherCheckpoint(playerid, smugglingAction, false);
 		}
 	}
