@@ -521,7 +521,8 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 			}
 		}
 		PlayerPlaySound(playerid, 1135, 0.0, 0.0, 0.0); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
-		defer DeferedDestroyObject(CreateDynamicObject(18648, x, y, z, 0.0, 0.0, 0.0));
+		defer DeferedDestroyObject(CreateDynamicObject(18680, x, y, z-1.0, 0.0, 0.0, 0.0));
+		Streamer_Update(playerid);
 	}
 
 	return 1;
