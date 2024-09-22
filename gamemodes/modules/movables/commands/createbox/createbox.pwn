@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 createbox                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,17 +27,41 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "createbox\createbox.pwn"
-#include "gotobox\gotobox.pwn"
-
+#include "createbox_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_createbox()
 {
-    command_createbox();
-    command_gotobox();
+    new command = Command_GetID("createbox");
+
+    //aliases
     
+
+    //permissions
+    Group_SetCommand(Group_GetID("admini"), command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:createbox(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Tworzy obiekt, który mo¿na przenosiæ.");
+        return 1;
+    }
+    //fetching params
+    new model, typ, bonus;
+    if(sscanf(params, "ddd", model, typ, bonus))
+    {
+        sendTipMessage(playerid, "U¿yj /createbox [model] [typ (1 - MC, 2 - kontrabanda)] [bonus] ");
+        return 1;
+    }
+    
+    //command body
+    return command_createbox_Impl(playerid, model, typ, bonus);
 }

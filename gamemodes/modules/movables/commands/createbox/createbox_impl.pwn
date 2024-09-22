@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 createbox                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,28 +16,39 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 22.09.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "createbox\createbox.pwn"
-#include "gotobox\gotobox.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_createbox_Impl(playerid, model, typ, bonus)
 {
-    command_createbox();
-    command_gotobox();
-    
+    if(PlayerInfo[playerid][pAdmin] != 5000)
+    {
+        noAccessMessage(playerid);
+        return 1;
+    }
+
+    if(typ != 1 && typ != 2)
+    {
+        MruMessageFail(playerid, "Nieprawid³owy typ obiektu.");
+        return 1;
+    }
+
+    if(bonus < 0)
+    {
+        MruMessageFail(playerid, "Bonus musi byæ wiêkszy od 0.");
+        return 1;
+    }
+
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+
+    new boxid = CreateBox(model, typ, bonus, x, y, z, 0, 0, 0);
+    MruMessageGoodInfoF(playerid, "Stworzy³eœ obiekt o ID %d.", boxid);
+    return 1;
 }
+
+//end
