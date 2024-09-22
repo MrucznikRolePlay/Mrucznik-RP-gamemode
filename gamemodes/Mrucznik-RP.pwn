@@ -117,6 +117,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <mapfix>
 #include <getvehiclerotationquat_fix>
 #include <ndialog-pages>
+#include <modelsizes>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
