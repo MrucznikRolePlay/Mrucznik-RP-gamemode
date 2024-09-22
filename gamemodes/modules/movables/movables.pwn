@@ -34,7 +34,7 @@ CreateBox(model, type, value, Float:x, Float:y, Float:z, int=0, vw=0, Float:angl
 	Boxes[id][box_used] = true;
 	Boxes[id][box_type] = type;
 	Boxes[id][box_model] = model;
-	Boxes[id][box_object] = CreateDynamicObject(model, x, y, z, 0.0, 0.0, angle, 0, 0);
+	Boxes[id][box_object] = CreateDynamicObject(model, x, y, z, 0.0, 0.0, angle, vw, int);
 	Boxes[id][box_player] = -1;
 	Boxes[id][box_x] = x;
 	Boxes[id][box_y] = y;
@@ -127,7 +127,7 @@ timer AfterDropBox[113](playerid, boxid, Float:x, Float:y, Float:z, Float:angle,
 {
 	if(Boxes[boxid][box_used])
 	{
-		Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_model], x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, int, vw);
+		Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_model], x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, vw, int);
 	}
 
 	if(IsPlayerConnected(playerid))
