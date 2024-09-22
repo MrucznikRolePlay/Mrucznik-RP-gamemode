@@ -74,7 +74,7 @@ stock randomString(strDest[], strLen) // credits go to: RyDeR`
         strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
 }
 
-timer DeferedDestroyObject[500](objectid) 
+timer DeferedDestroyObject[2000](objectid) 
 {
 	DestroyDynamicObject(objectid);
 	return 1;
