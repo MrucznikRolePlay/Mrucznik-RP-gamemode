@@ -106,7 +106,7 @@ hook OnPlayerConnect(playerid)
 	return 1;
 }
 
-hook OnGameModeInit()
+CreateRandomContrabandBoxes()
 {
 	new Float:x, Float:y, Float:z;
 	// Create random boxes with contraband around the map

@@ -118,17 +118,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <getvehiclerotationquat_fix>
 #include <ndialog-pages>
 
-#if defined _colandreas_included
-	#include "obiekty\colandreas_removebuildings.pwn"
-	hook OnGameModeInit()
-	{
-		printf("ColAndreas - usuwanie budynkow i inicjalizacja mapy.");
-		ColAndreas_UsunBudynki();
-		ViceCity_AddCollisions();
-		CA_Init();
-	}
-#endif
-
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
 #include "VERSION.pwn"
@@ -184,6 +173,7 @@ native gpci (playerid, serial [], len);
 #include "obiekty\3dtexty.pwn"
 #include "obiekty\ikony.pwn"
 #include "obiekty\actorsOnWorld.pwn"
+#include "obiekty\colandreas_removebuildings.pwn"
 
 //-------<[ Dialogi ]>-------
 #include "dialogs\OnDialogResponse.pwn"
@@ -283,6 +273,12 @@ public OnGameModeInit()
 	//-------<[ Redis ]>-------
 	ConnectToRedis();
 
+	// -------<[ ColAndreas ]>-------
+	printf("ColAndreas - usuwanie budynkow i inicjalizacja mapy.");
+	ColAndreas_UsunBudynki();
+	ViceCity_AddCollisions();
+	CA_Init();
+
 	//-------<[ modules ]>-------
     systempozarow_init();
     NowaWybieralka_Init();
@@ -290,6 +286,7 @@ public OnGameModeInit()
 	LoadBusinessPickup(); 	
 	LoadFrontBusinesses();
 	InitializeJobs();
+	CreateRandomContrabandBoxes();
 
 	//-------<[ actors ]>-------
 	PushActors(); 

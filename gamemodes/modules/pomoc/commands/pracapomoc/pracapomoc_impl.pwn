@@ -31,7 +31,6 @@ command_pracapomoc_Impl(playerid)
         return 1;
     }
 
-    if(IsPlayerCarryingBox(playerid))
     SendClientMessage(playerid, COLOR_GREEN, "______________________PRACA POMOC______________________");
     switch(GetPlayerJob(playerid))
     {
