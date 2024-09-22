@@ -452,7 +452,8 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 	if(IsAPolicja(playerid) || GetPlayerJob(playerid) == JOB_LOWCA)
 	{
 		MruMessageGoodInfo(playerid, "Podnios³eœ paczkê z przemytem! Zniszcz te nielegalne przedmioty aby uzyskaæ nagrodê.");
-		MruMessageGoodInfoF(playerid, "Aby to zrobiæ upuœæ j¹ i zacznij do niej strzelaæ (potrzeba %d strza³ów by j¹ zniszczyæ).", Boxes[boxid][box_bonus]);
+		new shootCount = 1+ Boxes[boxid][box_bonus] / SHOOTS_RATIO;
+		MruMessageGoodInfoF(playerid, "Aby to zrobiæ upuœæ j¹ i zacznij do niej strzelaæ (potrzeba oko³o %d strza³ów by j¹ zniszczyæ).", shootCount);
 	}
 
 	if(GetPlayerJob(playerid) == JOB_SMUGGLER || smugglingAction != -1)
@@ -488,14 +489,10 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 		return 0;
 	}
 
-	new rand=0;
-	if(boxType == BOX_TYPE_CONTRABAND)
+	new rand = random(100);
+	if(rand <= DMG_CHANCE) 
 	{
-		rand = random(10); // 10% chances to take damage
-	}
-	if(rand == 0) 
-	{
-		Boxes[boxid][box_bonus] -= 1;
+		Boxes[boxid][box_bonus] -= floatround(GetWeaponMaxDamage(weaponid), floatround_ceil);
 		if(Boxes[boxid][box_bonus] <= 0)
 		{
 			if(boxType == BOX_TYPE_CONTRABAND_ACTION)
@@ -523,10 +520,10 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 				DajKase(playerid, reward);
 			}
 		}
+		PlayerPlaySound(playerid, 1135, 0.0, 0.0, 0.0); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
+		defer DeferedDestroyObject(CreateDynamicObject(18648, x, y, z, 0.0, 0.0, 0.0));
 	}
 
-	PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
-	GameTextForPlayer(playerid, "~r~debug hit!", 1000, 6);
 	return 1;
 }
 

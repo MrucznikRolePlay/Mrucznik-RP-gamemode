@@ -74,6 +74,12 @@ stock randomString(strDest[], strLen) // credits go to: RyDeR`
         strDest[strLen] = random(2) ? (random(26) + (random(2) ? 'a' : 'A')) : (random(10) + '0');
 }
 
+timer DeferedDestroyObject[500](objectid) 
+{
+	DestroyDynamicObject(objectid);
+	return 1;
+}
+
 GetTickDiff(newtick, oldtick)
 {
 	if (oldtick < 0 && newtick >= 0) {
@@ -10940,59 +10946,6 @@ RespawnVehicleEx(vehID)
 	SetVehicleToRespawn(vehID);
 	SetVehicleVirtualWorld(vehID, CarData[VehicleUID[vehID][vUID]][c_VW]);
 	return 1;
-}
-GetWeaponSlot(weapon)
-{
-    new slot;
-    switch (weapon)
-    {
-        case 0: slot = 0;
-        case 1: slot = 0;
-        case 2: slot = 1;
-        case 3: slot = 1;
-        case 4: slot = 1;
-        case 5: slot = 1;
-        case 6: slot = 1;
-        case 7: slot = 1;
-        case 8: slot = 1;
-        case 9: slot = 1;
-        case 22: slot = 2;
-        case 23: slot = 2;
-        case 24: slot = 2;
-        case 25: slot = 3;
-        case 26: slot = 3;
-        case 27: slot = 3;
-        case 28: slot = 4;
-        case 29: slot = 4;
-        case 32: slot = 4;
-        case 30: slot = 5;
-        case 31: slot = 5;
-        case 33: slot = 6;
-        case 34: slot = 6;
-        case 35: slot = 7;
-        case 36: slot = 7;
-        case 37: slot = 7;
-        case 38: slot = 7;
-        case 16: slot = 8;
-        case 17: slot = 8;
-        case 18: slot = 8;
-        case 39: slot = 8;
-        case 41: slot = 9;
-        case 42: slot = 9;
-        case 43: slot = 9;
-        case 10: slot = 10;
-        case 11: slot = 10;
-        case 12: slot = 10;
-        case 13: slot = 10;
-        case 14: slot = 10;
-        case 15: slot = 10;
-        case 44: slot = 11;
-        case 45: slot = 11;
-        case 46: slot = 11;
-        case 40: slot = 12;
-		default: slot = 0;
-    }
-    return slot;
 }
 
 stock GetVehicleDriverID(vehicleid)
