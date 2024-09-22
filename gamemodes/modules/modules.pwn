@@ -331,6 +331,7 @@
 #include "premium\commands\premium_commands.pwn"
 #include "urzadls\commands\urzadls_commands.pwn"
 #include "ibiza\commands\ibiza_commands.pwn"
+#include "movables\commands\movables_commands.pwn"
 #include "antycheat\commands\antycheat_commands.pwn"
 #include "komendy\commands\komendy_commands.pwn"
 #include "gangzone\commands\gangzone_commands.pwn"

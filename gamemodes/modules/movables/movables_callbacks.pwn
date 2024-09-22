@@ -119,7 +119,7 @@ CreateRandomContrabandBoxes()
 		
 		if(z > 0.0) // Only create if above water level
 		{
-			CreateBox(1579, BOX_TYPE_CONTRABAND, random(5) + 1, x, y, z + 0.05, 0.0, 0.0, random(360));
+			CreateBox(1579, BOX_TYPE_CONTRABAND, random(5) + 1, x, y, z + 0.05, 0, 0, random(360));
 			i++;
 		}
 	}

@@ -26,7 +26,7 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-CreateBox(model, type, value, Float:x, Float:y, Float:z, Float:rx=0.0, Float:ry=0.0, Float:rz=0.0)
+CreateBox(model, type, value, Float:x, Float:y, Float:z, int=0, vw=0, Float:angle=-1.0)
 {
 	new id = GetFreeBoxId();
 	if(id == -1) return -1;
@@ -34,11 +34,15 @@ CreateBox(model, type, value, Float:x, Float:y, Float:z, Float:rx=0.0, Float:ry=
 	Boxes[id][box_used] = true;
 	Boxes[id][box_type] = type;
 	Boxes[id][box_model] = model;
-	Boxes[id][box_object] = CreateDynamicObject(model, x, y, z, rx, ry, rz, 0, 0);
+	Boxes[id][box_object] = CreateDynamicObject(model, x, y, z, 0.0, 0.0, angle, 0, 0);
 	Boxes[id][box_player] = -1;
 	Boxes[id][box_x] = x;
 	Boxes[id][box_y] = y;
 	Boxes[id][box_z] = z;
+	if(angle == -1.0) Boxes[id][box_angle] = float(random(360));
+	else Boxes[id][box_angle] = angle;
+	Boxes[id][box_int] = int;
+	Boxes[id][box_vw] = vw;
 	Boxes[id][box_bonus] = value;
 
 	if(maxBoxID < id) maxBoxID = id;
@@ -97,6 +101,8 @@ DropBox(playerid)
 	new Float:x, Float:y, Float:z, Float:angle;
 	GetPlayerPos(playerid, x, y, z);
 	GetPlayerFacingAngle(playerid, angle);
+	new int = GetPlayerInterior(playerid);
+	new vw = GetPlayerVirtualWorld(playerid);
 
 	ApplyAnimation(playerid, "CARRY", "putdwn", 4.1, 0, 0, 0, 0, 113); 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
@@ -107,18 +113,21 @@ DropBox(playerid)
 	Boxes[boxid][box_x] = x;
 	Boxes[boxid][box_y] = y;
 	Boxes[boxid][box_z] = z;
+	Boxes[boxid][box_angle] = angle;
+	Boxes[boxid][box_int] = int;
+	Boxes[boxid][box_vw] = vw;
 
 	OnPlayerDropMovableObject(playerid, boxid, Boxes[boxid][box_type], x, y, z, angle);
 
-	defer AfterDropBox(playerid, boxid, x, y, z, angle);
+	defer AfterDropBox(playerid, boxid, x, y, z, angle, int, vw);
 	return boxid;
 }
 
-timer AfterDropBox[113](playerid, boxid, Float:x, Float:y, Float:z, Float:angle)
+timer AfterDropBox[113](playerid, boxid, Float:x, Float:y, Float:z, Float:angle, int, vw)
 {
 	if(Boxes[boxid][box_used])
 	{
-		Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_model], x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, 0, 0);
+		Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_model], x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, int, vw);
 	}
 
 	if(IsPlayerConnected(playerid))
@@ -146,7 +155,10 @@ GetNearestBox(playerid)
 {
 	for(new i; i<MAX_BOXES; i++)
 	{
-		if(Boxes[i][box_used] && Boxes[i][box_player] == -1 && IsPlayerInRangeOfPoint(playerid, PICKUP_BOX_RANGE, Boxes[i][box_x], Boxes[i][box_y], Boxes[i][box_z]))
+		if(Boxes[i][box_used] && Boxes[i][box_player] == -1 && 
+			GetPlayerVirtualWorld(playerid) == Boxes[i][box_vw] && 
+			GetPlayerInterior(playerid) == Boxes[i][box_int] &&
+			IsPlayerInRangeOfPoint(playerid, PICKUP_BOX_RANGE, Boxes[i][box_x], Boxes[i][box_y], Boxes[i][box_z]))
 		{
 			return i;
 		}
@@ -156,10 +168,11 @@ GetNearestBox(playerid)
 
 DropBoxFromCar(objectid, type, value, carid)
 {
-	new Float:x, Float:y, Float:z;
+	new Float:x, Float:y, Float:z, Float:angle;
 	GetPosBehindVehicle(carid, x, y, z);
+	GetVehicleZAngle(carid, angle);
 
-	return CreateBox(objectid, type, value, x, y, z-BOX_VEHICLE_Z_OFFSET);
+	return CreateBox(objectid, type, value, x, y, z-BOX_VEHICLE_Z_OFFSET, 0, 0, angle);
 }
 
 //-----------------<[ 3rd party: ]>-------------------

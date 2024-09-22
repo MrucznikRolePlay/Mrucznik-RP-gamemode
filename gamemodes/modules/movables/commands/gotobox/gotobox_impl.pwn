@@ -1,5 +1,5 @@
 //-----------------------------------------------<< Source >>------------------------------------------------//
-//                                              createconvoybox                                              //
+//                                                  gotobox                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,37 +16,35 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 20.10.2019
+// Autor: mrucznik
+// Data utworzenia: 22.09.2024
 
 
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_createconvoybox_Impl(playerid)
+command_gotobox_Impl(playerid, boxid)
 {
-    if(PlayerInfo[playerid][pAdmin] < 5000)
+    if(PlayerInfo[playerid][pAdmin] != 5000)
     {
         noAccessMessage(playerid);
         return 1;
     }
 
-    new Float:x, Float:y, Float:z, Float:ang;
-    GetPlayerPos(playerid, x, y, z);
-    GetPlayerFacingAngle(playerid, Float:ang);
-
-    new boxid, bonus = random(BOX_BONUS)+BOX_BONUS_BASE;
-    if(IsPlayerInAnyVehicle(playerid)) {
-        boxid = DropBoxFromCar(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, GetPlayerVehicleID(playerid));
-    } else {
-        boxid = CreateBox(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, x, y, z-BOX_ONFOOT_Z_OFFSET, GetPlayerInterior(playerid), GetPlayerVirtualWorld(playerid), ang);
+    if(boxid < 0 || boxid >= MAX_MOVABLES)
+    {
+        MruMessageFail(playerid, "ID obiektu musi byæ wiêksze od 0 i mniejsze od "#MAX_MOVABLES".");
+        return 1;
     }
-    if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
-    SendClientMessage(playerid, -1, sprintf("Stworzy³eœ box o id %d", boxid));
 
-    Log(adminLog, INFO, "Admin %s stworzy³ box konwojowy", 
-        GetPlayerLogName(playerid)
-    );
+    if(!Boxes[boxid][box_used])
+    {
+        MruMessageFail(playerid, "Pod tym ID nie ma stworzonego obiektu.");
+        return 1;
+    }
+
+    SetPlayerPos(playerid, Boxes[boxid][box_x], Boxes[boxid][box_y], Boxes[boxid][box_z]);
+    MruMessageGoodInfoF(playerid, "Teleportowa³eœ siê do obiektu o ID %d.", boxid);
     return 1;
 }
 

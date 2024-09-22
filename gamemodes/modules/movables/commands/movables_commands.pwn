@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Source >>------------------------------------------------//
-//                                              createconvoybox                                              //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,38 +16,26 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Mrucznik
-// Data utworzenia: 20.10.2019
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
-
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Implementacja: ]>-------------------
-command_createconvoybox_Impl(playerid)
+
+#include <YSI\y_hooks>
+
+//-------<[ include ]>-------
+#include "gotobox\gotobox.pwn"
+
+
+//-------<[ initialize ]>-------
+hook OnGameModeInit()
 {
-    if(PlayerInfo[playerid][pAdmin] < 5000)
-    {
-        noAccessMessage(playerid);
-        return 1;
-    }
-
-    new Float:x, Float:y, Float:z, Float:ang;
-    GetPlayerPos(playerid, x, y, z);
-    GetPlayerFacingAngle(playerid, Float:ang);
-
-    new boxid, bonus = random(BOX_BONUS)+BOX_BONUS_BASE;
-    if(IsPlayerInAnyVehicle(playerid)) {
-        boxid = DropBoxFromCar(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, GetPlayerVehicleID(playerid));
-    } else {
-        boxid = CreateBox(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, x, y, z-BOX_ONFOOT_Z_OFFSET, GetPlayerInterior(playerid), GetPlayerVirtualWorld(playerid), ang);
-    }
-    if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
-    SendClientMessage(playerid, -1, sprintf("Stworzy³eœ box o id %d", boxid));
-
-    Log(adminLog, INFO, "Admin %s stworzy³ box konwojowy", 
-        GetPlayerLogName(playerid)
-    );
-    return 1;
+    command_gotobox();
+    
 }
-
-//end

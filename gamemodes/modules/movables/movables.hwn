@@ -40,6 +40,9 @@ enum eBox
     Float:box_x,
     Float:box_y,
     Float:box_z,
+    Float:box_angle,
+    box_int,
+    box_vw,
     box_bonus
 }
 
