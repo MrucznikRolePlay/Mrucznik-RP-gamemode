@@ -366,7 +366,11 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 		return 0;
 	}
 
-	new actionID = GetPlayerSmugglingActionID(playerid);
+	new actionID = -1;
+	if(boxType == BOX_TYPE_CONTRABAND_ACTION)
+	{
+		actionID = GetSmugglingActionByBoxID(boxid);
+	}
 	if(GetPlayerJob(playerid) == JOB_SMUGGLER || actionID != -1)
 	{
 		if(actionID != -1) // przemytnik z akcji
@@ -418,9 +422,11 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 		return 0;
 	}
 
+	new smugglingAction = -1;
 	if(boxType == BOX_TYPE_CONTRABAND_ACTION)
 	{
 		new actionID = GetSmugglingActionByBoxID(boxid);
+		smugglingAction = GetPlayerSmugglingActionID(playerid);
 		DestroySmugglingBoxFlare(actionID);
 	}
 
@@ -444,9 +450,9 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 		MruMessageGoodInfo(playerid, "Podnios³eœ paczkê z przemytem! Zniszcz te nielegalne przedmioty aby uzyskaæ nagrodê.");
 		MruMessageGoodInfoF(playerid, "Aby to zrobiæ upuœæ j¹ i zacznij do niej strzelaæ (potrzeba %d strza³ów by j¹ zniszczyæ).", Boxes[boxid][box_bonus]);
 	}
-	if(GetPlayerJob(playerid) == JOB_SMUGGLER)
+
+	if(GetPlayerJob(playerid) == JOB_SMUGGLER || smugglingAction != -1)
 	{
-		new smugglingAction = GetPlayerSmugglingActionID(playerid);
 		if(smugglingAction != -1) // przemytnik z akcji
 		{
 			MruMessageGoodInfoF(playerid, "Uda³o Ci siê zebraæ %s paczkê z kontraband¹ zrzucon¹ przez Twoj¹ ekipê. Dostarcz j¹ do punktu zboru!", packageState);
