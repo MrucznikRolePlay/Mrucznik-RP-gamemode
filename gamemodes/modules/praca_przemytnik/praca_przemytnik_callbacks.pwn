@@ -424,6 +424,20 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 		DestroySmugglingBoxFlare(actionID);
 	}
 
+	new packageState[32];
+	if(Boxes[boxid][box_bonus] == BIG_PACKAGE_CONTRABAND_AMMOUNT)
+	{
+		format(packageState, sizeof(packageState), "du¿¹");
+	}
+	else if(Boxes[boxid][box_bonus] >= BIG_PACKAGE_CONTRABAND_AMMOUNT/2)
+	{
+		format(packageState, sizeof(packageState), "uszkodzon¹");
+	}
+	else
+	{
+		format(packageState, sizeof(packageState), "mocno uszkodzon¹");
+	}
+
 	// ³owca / LSPD
 	if(IsAPolicja(playerid) || GetPlayerJob(playerid) == JOB_LOWCA)
 	{
@@ -435,17 +449,17 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 		new smugglingAction = GetPlayerSmugglingActionID(playerid);
 		if(smugglingAction != -1) // przemytnik z akcji
 		{
-			MruMessageGoodInfo(playerid, "Uda³o Ci siê zebraæ paczkê z kontraband¹ zrzucon¹ przez Twoj¹ ekipê. Dostarcz j¹ do punktu zboru!");
+			MruMessageGoodInfoF(playerid, "Uda³o Ci siê zebraæ %s paczkê z kontraband¹ zrzucon¹ przez Twoj¹ ekipê. Dostarcz j¹ do punktu zboru!", packageState);
 			CreateSmugglingGatherCheckpoint(playerid, smugglingAction);
 		}
 		else // zwyk³y przemytnik
 		{
-			MruMessageGoodInfo(playerid, "Uda³o Ci siê zebraæ paczkê z kontraband¹ zrzucon¹ przez wrog¹ ekipê. Dostarcz j¹ do dziupli przemytniczej (checkpoint)!");
+			MruMessageGoodInfoF(playerid, "Uda³o Ci siê zebraæ %s paczkê z kontraband¹ zrzucon¹ przez wrog¹ ekipê. Dostarcz j¹ do dziupli przemytniczej (checkpoint)!", packageState);
 			CreateSmugglingGatherCheckpoint(playerid, smugglingAction, false);
 		}
 	}
 
-	ChatMe(playerid, "podnosi paczkê z kontraband¹.");
+	ChatMe(playerid, sprintf("podnosi %s paczkê z kontraband¹.", packageState));
 	return 1;
 }
 
