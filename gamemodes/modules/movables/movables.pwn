@@ -43,6 +43,7 @@ CreateBox(model, type, value, Float:x, Float:y, Float:z, int=0, vw=0, Float:angl
 	else Boxes[id][box_angle] = angle;
 	Boxes[id][box_int] = int;
 	Boxes[id][box_vw] = vw;
+	Boxes[id][box_initialBonus] = value;
 	Boxes[id][box_bonus] = value;
 	return id;
 }

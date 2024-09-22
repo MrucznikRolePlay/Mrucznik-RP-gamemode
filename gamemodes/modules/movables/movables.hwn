@@ -43,6 +43,7 @@ enum eBox
     Float:box_angle,
     box_int,
     box_vw,
+    box_initialBonus,
     box_bonus
 }
 

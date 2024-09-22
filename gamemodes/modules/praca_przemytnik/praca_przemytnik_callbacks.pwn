@@ -514,17 +514,14 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 
 			if(IsAPolicja(playerid) || GetPlayerJob(playerid) == JOB_LOWCA)
 			{
-				new reward;
-				if(boxType == BOX_TYPE_CONTRABAND_ACTION) 
-					reward = DESTROY_CONTRABAND_REWARD;
-				else if(boxType == BOX_TYPE_CONTRABAND) 
-					reward = DESTROY_CONTRABAND_SMALL_REWARD;
+				new reward = Boxes[boxid][box_initialBonus] * DESTROY_CONTRABAND_REWARD_PER_PACKAGE;
 				MruMessageGoodInfoF(playerid, "Uda³o Ci siê zniszczyæ nielegaln¹ kontrabandê! Otrzymujesz %d$ nagrody.", reward);
 				DajKase(playerid, reward);
 			}
 		}
 
 		PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
+		SendClientMessage(playerid, 0xFFFFFFFF, sprintf("hit %f %f %f", x, y, z));
 		defer DeferedDestroyObject(CreateDynamicObject(18680, x, y, z-1.0, 0.0, 0.0, float(random(360)), GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid)));
 		Streamer_Update(playerid);
 	}
