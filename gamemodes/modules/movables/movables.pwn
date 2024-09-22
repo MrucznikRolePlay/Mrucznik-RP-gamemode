@@ -44,8 +44,6 @@ CreateBox(model, type, value, Float:x, Float:y, Float:z, int=0, vw=0, Float:angl
 	Boxes[id][box_int] = int;
 	Boxes[id][box_vw] = vw;
 	Boxes[id][box_bonus] = value;
-
-	if(maxBoxID < id) maxBoxID = id;
 	return id;
 }
 
@@ -78,9 +76,12 @@ DestroyBoxes()
 PickupBox(playerid, boxid)
 {
 	new itemSlot = GetFreeAttachedObjectSlot(playerid);
+	new type = Boxes[boxid][box_type];
 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_CARRY);
-    SetPlayerAttachedObject(playerid, itemSlot, Boxes[boxid][box_model], 5, 0.110999, 0.287000, 0.178999, 5.699999, 18.999992, 5.999998);
+    SetPlayerAttachedObject(playerid, itemSlot, Boxes[boxid][box_model], 5, 
+		ObjectHoldingPos[type][0], ObjectHoldingPos[type][1], ObjectHoldingPos[type][2], 
+		ObjectHoldingPos[type][3], ObjectHoldingPos[type][4], ObjectHoldingPos[type][5]);
 	DestroyDynamicObject(Boxes[boxid][box_object]);
     ApplyAnimation(playerid,"CARRY","liftup", 4.0, 0, 0, 0, 0, 0);
 
@@ -89,7 +90,7 @@ PickupBox(playerid, boxid)
 	Boxes[boxid][box_player] = playerid;
 	Boxes[boxid][box_attachedSlot] = itemSlot;
 
-	OnPlayerPickupMovableObject(playerid, boxid, Boxes[boxid][box_type]);
+	OnPlayerPickupMovableObject(playerid, boxid, type);
     return 1;
 }
 

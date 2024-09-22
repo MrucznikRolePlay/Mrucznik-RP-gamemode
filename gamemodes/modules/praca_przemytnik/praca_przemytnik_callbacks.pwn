@@ -505,8 +505,12 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 				GatherPackage(actionID, boxid, 0);
 				SendSmugglingCrewMessage(actionID, COLOR_PANICRED, "Ktoœ zniszczy³ zrzucon¹ paczkê z kontraband¹!");
 			}
+			else
+			{
+				DestroyBox(boxid);
+			}
 
-			PlayerPlaySound(playerid, 1131, x, y, z); // hit wooden object? (SOUND_AMMUNATION_GUN_COLLISION)
+			ChatMe(playerid, "zniszczy³ paczkê z kontraband¹.");
 
 			if(IsAPolicja(playerid) || GetPlayerJob(playerid) == JOB_LOWCA)
 			{
@@ -518,11 +522,11 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType, Float:x, Float:
 				MruMessageGoodInfoF(playerid, "Uda³o Ci siê zniszczyæ nielegaln¹ kontrabandê! Otrzymujesz %d$ nagrody.", reward);
 				DajKase(playerid, reward);
 			}
-			return 1;
 		}
 	}
 
-	PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED)
+	PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
+	GameTextForPlayer(playerid, "~r~debug hit!", 1000, 6);
 	return 1;
 }
 

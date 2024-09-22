@@ -71,7 +71,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 
 Movable_OnPlayerShootObject(playerid, weaponid, STREAMER_TAG_OBJECT:objectid, Float:x, Float:y, Float:z)
 {
-	for(new i; i<maxBoxID; i++)
+	for(new i; i<MAX_MOVABLES; i++)
 	{
 		if(Boxes[i][box_used] && Boxes[i][box_object] == objectid)
 		{
