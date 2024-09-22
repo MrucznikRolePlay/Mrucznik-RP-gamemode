@@ -142,7 +142,7 @@ StartSmuggling(playerid)
 	RedisStartSmuggling(PlayerInfo[playerid][pUID], redisActionID, SMUGGLING_ROLE_INITIATOR);
 	MruMessageGoodInfo(playerid, "Rozpocz¹³eœ akcjê przemytnicz¹.");
 	MruMessageGoodInfo(playerid, "Udaj siê do czerwonego markera a nastêpnie wpisz komendê /przemyt, gdy bêdziesz znajdowa³ siê w wyznaczonym miejscu.");
-	MruMessageGoodInfo(playerid, "Jeœli nie uda Ci siê odebraæ przemytu w godziny, przepadnie on.");
+	MruMessageGoodInfo(playerid, "Jeœli nie uda Ci siê odebraæ przemytu w 1 godzinê, przepadnie on.");
 
 	// set info about smuggling for all drivers
 	if(IsPlayerConnected(driverID) && PlayerInfo[driverID][pUID] == driverUID)
