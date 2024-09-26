@@ -51,10 +51,10 @@ ShowViceCityRadioDialog(playerid, dialogid, title[])
 
 CreateShippingPlacePickups()
 {
-	CreateDynamicPickup(2510, 1, 2696.2197,-2226.9309,13.5501);
-	MruCreateDynamicMapIcon(2696.2197,-2226.9309,13.5501, 51, 0, -1, -1, -1, 2000.0, MAPICON_GLOBAL);
+	CreateDynamicPickup(2510, 1, 2696.2197 + VICECITY_MOVE_X, -2226.9309 + VICECITY_MOVE_Y, 13.5501);
+	MruCreateDynamicMapIcon(2696.2197 + VICECITY_MOVE_X, -2226.9309 + VICECITY_MOVE_Y, 13.5501, 51, 0, -1, -1, -1, 2000.0, MAPICON_GLOBAL);
 	CreateDynamic3DTextLabel("WYSY£KA POJAZDÓW DO VICE CITY\n/transport", COLOR_LIGHTBROWN, 
-		2696.2197,-2226.9309,13.5501,
+		2696.2197 + VICECITY_MOVE_X, -2226.9309 + VICECITY_MOVE_Y, 13.5501,
 		15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
 
 	CreateDynamicPickup(2510, 1, 3778.3586,-2190.5291,9.1532);
@@ -70,7 +70,7 @@ GetPlayerShippingPlace(playerid)
 	{
 		return 1; // Los Santos Cargo Terminal
 	}
-	if(IsPlayerInRangeOfPoint(playerid, 15.0, 3778.3586,-2190.5291,9.1532))
+	if(IsPlayerInRangeOfPoint(playerid, 15.0, 3778.3586 + VICECITY_MOVE_X, -2190.5291 + VICECITY_MOVE_Y, 9.1532))
 	{
 		return 2; // Vice City Cargo Terminal
 	}
@@ -168,6 +168,8 @@ stock Float:positive(Float:number) {
 
 // Voc? passa o X e Y do mapa (2 primeirps parâmetros) e os 2 últimos retorna o X Y da tela correspondente ao X.Y do mapa
 stock GetXYForScreenMap(Float:x, Float:y, &Float:rmap_x, &Float:rmap_y) {
+	x -= VICECITY_MOVE_X;
+	y -= VICECITY_MOVE_Y;
 	rmap_x = SCREEN_MAP_MIN_X + ((positive(x) - 2981.0) / 10.6);
 	
 	if(positive(y) <= 1036) {

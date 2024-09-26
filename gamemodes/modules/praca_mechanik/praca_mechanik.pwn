@@ -34,7 +34,7 @@ IsAtWarsztat(playerid)
 		{//Warsztat w bazie mechaników
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 40.0, 3966.5, -1792.3, 7.6)) 
+		if(IsPlayerInRangeOfPoint(playerid, 40.0, 3966.5 + VICECITY_MOVE_X, -1792.3 + VICECITY_MOVE_Y, 7.6)) 
 		{ // Sunshine Autos Vice City
 			return 1;
 		}

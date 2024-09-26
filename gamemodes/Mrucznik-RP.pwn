@@ -2147,7 +2147,7 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{ // Vice City
-								SetPlayerPos(playerid, 5397.2466,-1422.1250,6.5215);
+								SetPlayerPos(playerid, 5397.2466 + VICECITY_MOVE_X, -1422.1250 + VICECITY_MOVE_Y,6.5215);
 								SetPlayerFacingAngle(playerid, 316.0);
 								Wchodzenie(playerid);
 							}
@@ -2161,7 +2161,7 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{ // Vice City
-								SetPlayerPos(playerid, 4342.9678,-187.4431,6.0599);
+								SetPlayerPos(playerid, 4342.9678 + VICECITY_MOVE_X, -187.4431 + VICECITY_MOVE_Y, 6.0599);
 								SetPlayerFacingAngle(playerid, 136.0);
 								Wchodzenie(playerid);
 							}
@@ -2177,7 +2177,7 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{ // Vice City
-								SetPlayerPos(playerid, 3278.8284,-1106.3940,9.3275);
+								SetPlayerPos(playerid, 3278.8284 + VICECITY_MOVE_X, -1106.3940 + VICECITY_MOVE_Y, 9.3275);
 								SetPlayerFacingAngle(playerid, 265.0);
 								Wchodzenie(playerid);
 							}
@@ -2191,7 +2191,7 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{ // Vice City
-								SetPlayerPos(playerid, 4112.7622,-1420.3684,7.5683);
+								SetPlayerPos(playerid, 4112.7622 + VICECITY_MOVE_X, -1420.3684 + VICECITY_MOVE_Y, 7.5683);
 								SetPlayerFacingAngle(playerid, 266.7065);
 								Wchodzenie(playerid);
 							}
@@ -2208,7 +2208,7 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{ // Vice City
-								SetPlayerPos(playerid, 5074.9429,140.3920,13.2164);
+								SetPlayerPos(playerid, 5074.9429 + VICECITY_MOVE_X, 140.3920 + VICECITY_MOVE_Y, 13.2164);
 								SetPlayerFacingAngle(playerid, 180.7065);
 								Wchodzenie(playerid);
 							}
@@ -2237,7 +2237,7 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{ // Vice City
-								SetPlayerPos(playerid, 4561.9756,158.1313,5.5328);
+								SetPlayerPos(playerid, 4561.9756 + VICECITY_MOVE_X, 158.1313 + VICECITY_MOVE_Y, 5.5328);
 								SetPlayerFacingAngle(playerid, 180.7065);
 								Wchodzenie(playerid);
 							}
@@ -2251,7 +2251,7 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{ // Vice City
-								SetPlayerPos(playerid, 4005.1975,-763.2137,6.8840);
+								SetPlayerPos(playerid, 4005.1975 + VICECITY_MOVE_X, -763.2137 + VICECITY_MOVE_Y, 6.8840);
 								SetPlayerFacingAngle(playerid, 353.7065);
 								Wchodzenie(playerid);
 							}
@@ -2291,14 +2291,14 @@ SetPlayerSpawnPos(playerid)
 							}
 							else
 							{ // Vice City
-								SetPlayerPos(playerid, 4302.2539,-246.4274,6.5759);
+								SetPlayerPos(playerid, 4302.2539 + VICECITY_MOVE_X, -246.4274 + VICECITY_MOVE_Y, 6.5759);
 								SetPlayerFacingAngle(playerid, 269.8782);
 								Wchodzenie(playerid);
 							}
 						}
 						default:
 						{ // Vice City
-							SetPlayerPos(playerid, 5229.6646,-2227.3933,6.5385);
+							SetPlayerPos(playerid, 5229.6646 + VICECITY_MOVE_X, -2227.3933 + VICECITY_MOVE_Y, 6.5385);
 							SetPlayerFacingAngle(playerid, 252.7065);
 							Wchodzenie(playerid);
 						}
@@ -2317,7 +2317,7 @@ SetPlayerSpawnPos(playerid)
 		            else
 		            {
 						SendClientMessage(playerid, COLOR_YELLOW, "Twoja organizacja nie ma jeszcza spawnu - spawnujesz siê jako cywil");
-						SetPlayerPos(playerid, 5229.6646,-2227.3933,6.5385);
+						SetPlayerPos(playerid, 5229.6646 + VICECITY_MOVE_X, -2227.3933 + VICECITY_MOVE_Y, 6.5385); // Vice City motel
 					}
 				}
 				else if(PlayerInfo[playerid][pJob] > 0) //Spawn Prac
@@ -2378,7 +2378,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						else
 						{ // Vice City
-							SetPlayerPos(playerid, 5229.6646, -2227.3933, 6.5385);
+							SetPlayerPos(playerid, 5229.6646 + VICECITY_MOVE_X, -2227.3933 + VICECITY_MOVE_Y, 6.5385); // Vice City motel
 							SetPlayerFacingAngle(playerid, 252.4531);
 							Wchodzenie(playerid);
 						}

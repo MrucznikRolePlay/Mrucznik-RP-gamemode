@@ -88,16 +88,16 @@ enum eFrontBusinessInfo {
 new FrontBusiness[][eFrontBusinessInfo] = {
     {
         "Pole Postion Club", FRONT_BIZ_TYPE_CLUB,
-        5096.764648, -2420.861572, 4.846032, 0, 0, // wejœcie
-        5096.011718, -2404.743408, 997.500000, 6, 0, // wyjœcie
-        5096.764648, -2420.861572, 4.846032, 0, 0, // przejmowanie
+        5096.764648 + VICECITY_MOVE_X, -2420.861572 + VICECITY_MOVE_Y, 4.846032, 0, 0, // wejœcie
+        5096.011718 + VICECITY_MOVE_X, -2404.743408 + VICECITY_MOVE_Y, 997.500000, 6, 0, // wyjœcie
+        5096.764648 + VICECITY_MOVE_X, -2420.861572 + VICECITY_MOVE_Y, 4.846032, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Burger Shot", FRONT_BIZ_TYPE_RESTAURANT,
-        5532.618164, -180.268325, 5.652462, 0, 0, // wejœcie
-        363.413, -74.5786, 1001.51, 10, FRONT_BUSINESS_VW, // wyjœcie
-        5532.618164, -180.268325, 5.652462, 0, 0, // przejmowanie
+        5532.618164 + VICECITY_MOVE_X, -180.268325 + VICECITY_MOVE_Y, 5.652462, 0, 0, // wejœcie
+        363.413 + VICECITY_MOVE_X, -74.5786 + VICECITY_MOVE_Y, 1001.51, 10, FRONT_BUSINESS_VW, // wyjœcie
+        5532.618164 + VICECITY_MOVE_X, -180.268325 + VICECITY_MOVE_Y, 5.652462, 0, 0, // przejmowanie
         100, 400 // hajs
     }
 };
