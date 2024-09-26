@@ -180,59 +180,59 @@ IsAtFishPlace(playerid)
 			return 1;
 		}
 		// Vice City
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4195.1348 + VICECITY_MOVE_X, -1272.4592 + VICECITY_MOVE_Y, 2.7526))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -5004.8652, 1927.5408, 2.7526))
 		{ // molo rybackie 2 miasto 5m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.1558 + VICECITY_MOVE_X, -1275.4037 + VICECITY_MOVE_Y, 2.7526))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -5002.8442, 1924.5963, 2.7526))
 		{ // molo rybackie 2 miasto 5m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.4019 + VICECITY_MOVE_X, -1281.9413 + VICECITY_MOVE_Y, 2.7526))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -5002.5981, 1918.0587, 2.7526))
 		{ // molo rybackie 2 miasto 5m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.2681 + VICECITY_MOVE_X, -1288.9069 + VICECITY_MOVE_Y, 2.7526))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -5002.7319, 1911.0931, 2.7526))
 		{ // molo rybackie 2 miasto 5m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.5981 + VICECITY_MOVE_X, -1295.7142 + VICECITY_MOVE_Y, 2.7526))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -5002.4019, 1904.2858, 2.7526))
 		{ // molo rybackie 2 miasto 5m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.2632 + VICECITY_MOVE_X, -1303.0806 + VICECITY_MOVE_Y, 2.7526))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -5002.7368, 1896.9194, 2.7526))
 		{ // molo rybackie 2 miasto 5m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4197.4736 + VICECITY_MOVE_X, -1309.2416 + VICECITY_MOVE_Y, 2.7526))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -5002.5264, 1890.7584, 2.7526))
 		{ // molo rybackie 2 miasto 5m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4194.1665 + VICECITY_MOVE_X, -1312.9655 + VICECITY_MOVE_Y, 2.7526))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -5005.8335, 1887.0345, 2.7526))
 		{ // molo rybackie 2 miasto 5m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 4626.1807 + VICECITY_MOVE_X, -1172.5938 + VICECITY_MOVE_Y, 3.5813))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -4573.8193, 2027.4062, 3.5813))
 		{ // prywatne molo rybackie
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5245.6401 + VICECITY_MOVE_X, -649.5212 + VICECITY_MOVE_Y, 2.5536))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -3954.3599, 2550.4788, 2.5536))
 		{ // molo rybackie 1 miasto
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5333.7188 + VICECITY_MOVE_X, -379.5435 + VICECITY_MOVE_Y, 2.8307))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -3866.2812, 2820.4565, 2.8307))
 		{ // molo rybackie 1 miasto
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 25.0, 5303.0806 + VICECITY_MOVE_X, -2652.2378 + VICECITY_MOVE_Y, 3.5437))
+		if(IsPlayerInRangeOfPoint(playerid, 25.0, -3896.9194, 547.7622, 3.5437))
 		{ // molo rybackie 1 miasto obok latarni - 25m
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5267.5693 + VICECITY_MOVE_X, -2651.1758 + VICECITY_MOVE_Y, 3.5474))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -3932.4307, 548.8242, 3.5474))
 		{ // molo rybackie 1 miasto obok latarni - poczatek mostu
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 5.0, 5326.4194 + VICECITY_MOVE_X, -2651.4761 + VICECITY_MOVE_Y, 3.5393))
+		if(IsPlayerInRangeOfPoint(playerid, 5.0, -3873.5806, 548.5239, 3.5393))
 		{ // molo rybackie 1 miasto obok latarni - koniec mostu
 			return 1;
 		}

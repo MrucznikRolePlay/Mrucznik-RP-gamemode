@@ -59,7 +59,7 @@ command_lot_Impl(playerid, params[256])
 		if(strcmp(data,"vicecity",true) == 0)
 		{
 			GameTextForPlayer(playerid, "Witaj w ~p~Vice City~w~!", 5000, 1);
-			SetPlayerPos(playerid, 3610.7532 + VICECITY_MOVE_X, -1831.8528 + VICECITY_MOVE_Y, 20.3582);
+			SetPlayerPos(playerid, -5589.2468, 1368.1472, 20.3582);
 		}
 		else if(strcmp(data,"lossantos",true) == 0)
 		{

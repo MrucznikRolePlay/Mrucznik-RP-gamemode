@@ -2947,32 +2947,32 @@ IsAtBankomat(playerid)
 		return 1;
 	}
 	// Vice City
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5357.5029 + VICECITY_MOVE_X, 180.7435 + VICECITY_MOVE_Y, 1219.7744))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, -3842.4971, 3380.7435, 1219.7744))
 	{// North Point Mall
 		return 1;
 	}
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5357.7056 + VICECITY_MOVE_X, 178.2677 + VICECITY_MOVE_Y, 1219.8038))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, -3842.2944, 3378.2677, 1219.8038))
 	{// North Point Mall
 		return 1;
 	}
 
 	// Vice City centrum handlowe
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5003.0098 + VICECITY_MOVE_X, -1878.6378 + VICECITY_MOVE_Y, 10.5760))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, -4196.9902, 1321.3622, 10.5760))
 	{
 		return 1;
 	}
 
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5004.9746 + VICECITY_MOVE_X, -1878.7086 + VICECITY_MOVE_Y, 10.5760))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, -4195.0254, 1321.2914, 10.5760))
 	{
 		return 1;
 	}
 
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5002.9194 + VICECITY_MOVE_X, -1899.4532 + VICECITY_MOVE_Y, 10.5760))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, -4197.0806, 1300.5468, 10.5760))
 	{
 		return 1;
 	}
 
-	if(IsPlayerInRangeOfPoint(playerid, 2.5, 5004.9019 + VICECITY_MOVE_X, -1899.6617 + VICECITY_MOVE_Y, 10.5760))
+	if(IsPlayerInRangeOfPoint(playerid, 2.5, -4195.0981, 1300.3383, 10.5760))
 	{
 		return 1;
 	}
@@ -10407,120 +10407,120 @@ timer ViceCityTour[5000](playerid, bool:debugMode)
         {
 			// Look at motel Vice City Beach
 			InterpolateCameraPos(playerid,
-				5263.3911 + VICECITY_MOVE_X, -2298.9348 + VICECITY_MOVE_Y, 32.7042,
-				5241.6602 + VICECITY_MOVE_X, -2255.2471 + VICECITY_MOVE_Y, 15.6349,
+				-3936.6089, 901.0652, 32.7042,
+				-3958.3398, 944.7529, 15.6349,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5248.3208 + VICECITY_MOVE_X, -2263.9758 + VICECITY_MOVE_Y, 18.2425,
-				5245.7026 + VICECITY_MOVE_X, -2207.6990 + VICECITY_MOVE_Y, 11.8739,
+				-3951.6792, 936.0242, 18.2425,
+				-3954.2974, 992.3010, 11.8739,
 				11000, CAMERA_MOVE);
-			SetPlayerPos(playerid, 5238.5874 + VICECITY_MOVE_X, -2228.5591 + VICECITY_MOVE_Y, 0.0);
-			Streamer_UpdateEx(playerid, 5238.5874 + VICECITY_MOVE_X, -2228.5591 + VICECITY_MOVE_Y, 0.0);
+			SetPlayerPos(playerid, -3961.4126, 971.4409, 0.0);
+			Streamer_UpdateEx(playerid, -3961.4126, 971.4409, 0.0);
 			transitionTime = 13000;
         }
         case 1:
         {
             // Look at motel Vice City Beach from far away
 			InterpolateCameraPos(playerid,
-				5410.5400 + VICECITY_MOVE_X, -2526.5215 + VICECITY_MOVE_Y, 50.5040,
-				5261.7671 + VICECITY_MOVE_X, -2268.5955 + VICECITY_MOVE_Y, 40.0869,
+				-3789.4600, 673.4785, 50.5040,
+				-3938.2329, 931.4045, 40.0869,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5392.1787 + VICECITY_MOVE_X, -2482.6750 + VICECITY_MOVE_Y, 45.7091,
-				5244.5781 + VICECITY_MOVE_X, -2243.7019 + VICECITY_MOVE_Y, 13.4688,
+				-3807.8213, 717.3250, 45.7091,
+				-3955.4219, 956.2981, 13.4688,
 				11000, CAMERA_MOVE);
-			SetPlayerPos(playerid, 5238.5874 + VICECITY_MOVE_X, -2228.5591 + VICECITY_MOVE_Y, 0.0);
-			Streamer_UpdateEx(playerid, 5238.5874 + VICECITY_MOVE_X, -2228.5591 + VICECITY_MOVE_Y, 0.0);
+			SetPlayerPos(playerid, -3961.4126, 971.4409, 0.0);
+			Streamer_UpdateEx(playerid, -3961.4126, 971.4409, 0.0);
             transitionTime = 13000;
         }
         case 2:
         {
             // Look at Malibu Club
 			InterpolateCameraPos(playerid,
-				5482.9595 + VICECITY_MOVE_X, -1070.0116 + VICECITY_MOVE_Y, 10.3759,
-				5517.3687 + VICECITY_MOVE_X, -1054.7716 + VICECITY_MOVE_Y, 6.6211,
+				-3717.0405, 2129.9884, 10.3759,
+				-3682.6313, 2145.2284, 6.6211,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5484.5854 + VICECITY_MOVE_X, -1048.0042 + VICECITY_MOVE_Y, 8.1499,
-				5504.0610 + VICECITY_MOVE_X, -1041.5916 + VICECITY_MOVE_Y, 6.6843,
+				-3715.4146, 2151.9958, 8.1499,
+				-3695.9390, 2158.4084, 6.6843,
 				11000, CAMERA_MOVE);
-			SetPlayerPos(playerid, 5495.1118 + VICECITY_MOVE_X, -1035.1361 + VICECITY_MOVE_Y, 0.0);
-			Streamer_UpdateEx(playerid, 5495.1118 + VICECITY_MOVE_X, -1035.1361 + VICECITY_MOVE_Y, 0.0);
+			SetPlayerPos(playerid, -3704.8882, 2164.8639, 0.0);
+			Streamer_UpdateEx(playerid, -3704.8882, 2164.8639, 0.0);
             transitionTime = 12000;
         }
         case 3:
         {
             // Look at Malibu Club c.d.
 			InterpolateCameraPos(playerid,
-				5517.3687 + VICECITY_MOVE_X, -1054.7716 + VICECITY_MOVE_Y, 6.6211,
-				5526.0845 + VICECITY_MOVE_X, -1008.8565 + VICECITY_MOVE_Y, 7.1,
+				-3682.6313, 2145.2284, 6.6211,
+				-3673.9155, 2191.1435, 7.1,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5504.0610 + VICECITY_MOVE_X, -1041.5916 + VICECITY_MOVE_Y, 6.6843,
-				5507.5811 + VICECITY_MOVE_X, -1008.8839 + VICECITY_MOVE_Y, 7.7,
+				-3695.9390, 2158.4084, 6.6843,
+				-3692.4189, 2191.1161, 7.7,
 				11000, CAMERA_MOVE);
-			SetPlayerPos(playerid, 5495.1118 + VICECITY_MOVE_X, -1035.1361 + VICECITY_MOVE_Y, 0.0);
-			Streamer_UpdateEx(playerid, 5495.1118 + VICECITY_MOVE_X, -1035.1361 + VICECITY_MOVE_Y, 0.0);
+			SetPlayerPos(playerid, -3704.8882, 2164.8639, 0.0);
+			Streamer_UpdateEx(playerid, -3704.8882, 2164.8639, 0.0);
             transitionTime = 12000;
         }
         case 4:
         {
             // Look at Vercetti's Mansion
 			InterpolateCameraPos(playerid,
-				4625.0313 + VICECITY_MOVE_X, -1683.4607 + VICECITY_MOVE_Y, 31.5133,
-				4621.2734 + VICECITY_MOVE_X, -1570.2161 + VICECITY_MOVE_Y, 6.9646,
+				-4574.9687, 1516.5393, 31.5133,
+				-4578.7266, 1629.7839, 6.9646,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				4625.4526 + VICECITY_MOVE_X, -1631.7551 + VICECITY_MOVE_Y, 18.7434,
-				4621.3149 + VICECITY_MOVE_X, -1554.9303 + VICECITY_MOVE_Y, 5.5163,
+				-4574.5474, 1568.2449, 18.7434,
+				-4578.6851, 1645.0697, 5.5163,
 				11000, CAMERA_MOVE);
-			SetPlayerPos(playerid, 4620.1636 + VICECITY_MOVE_X, -1568.9320 + VICECITY_MOVE_Y, 0.0);
-			Streamer_UpdateEx(playerid, 4620.1636 + VICECITY_MOVE_X, -1568.9320 + VICECITY_MOVE_Y, 0.0);
+			SetPlayerPos(playerid, -4579.8364, 1631.0680, 0.0);
+			Streamer_UpdateEx(playerid, -4579.8364, 1631.0680, 0.0);
             transitionTime = 13000;
         }
         case 5:
         {
             // Look at Love Fist street
 			InterpolateCameraPos(playerid,
-				4127.4678 + VICECITY_MOVE_X, -134.4979 + VICECITY_MOVE_Y, 20.3969,
-				4137.3408 + VICECITY_MOVE_X, 183.1745 + VICECITY_MOVE_Y, 12.9014,
+				-5072.5322, 3065.5021, 20.3969,
+				-5062.6592, 3383.1745, 12.9014,
 				8000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				4129.5210 + VICECITY_MOVE_X, -108.6659 + VICECITY_MOVE_Y, 18.7814,
-				4137.7461 + VICECITY_MOVE_X, 212.9454 + VICECITY_MOVE_Y, 12.0244,
+				-5070.4790, 3091.3341, 18.7814,
+				-5062.2539, 3412.9454, 12.0244,
 				8000, CAMERA_MOVE);
-			SetPlayerPos(playerid, 4137.2896 + VICECITY_MOVE_X, 214.4953 + VICECITY_MOVE_Y, 0.0);
-			Streamer_UpdateEx(playerid, 4137.2896 + VICECITY_MOVE_X, 214.4953 + VICECITY_MOVE_Y, 0.0);
+			SetPlayerPos(playerid, -5062.7104, 3414.4953, 0.0);
+			Streamer_UpdateEx(playerid, -5062.7104, 3414.4953, 0.0);
             transitionTime = 8000;
         }
 		case 6:
 		{
 			// Look at motel halway Window
 			InterpolateCameraPos(playerid,
-				5573.1597 + VICECITY_MOVE_X, -932.2980 + VICECITY_MOVE_Y, 48.5019,
-				5558.8369 + VICECITY_MOVE_X, -932.5709 + VICECITY_MOVE_Y, 48.7707,
+				-3626.8403, 2267.7020, 48.5019,
+				-3641.1631, 2267.4291, 48.7707,
 				8000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5557.1724 + VICECITY_MOVE_X, -932.7851 + VICECITY_MOVE_Y, 48.2095,
-				5545.7163 + VICECITY_MOVE_X, -932.9548 + VICECITY_MOVE_Y, 46.7247,
+				-3642.8276, 2267.2149, 48.2095,
+				-3654.2837, 2267.0452, 46.7247,
 				12000, CAMERA_MOVE);
-			SetPlayerPos(playerid, 5567.8003 + VICECITY_MOVE_X, -938.5177 + VICECITY_MOVE_Y, 0.0);
-			Streamer_UpdateEx(playerid, 5567.8003 + VICECITY_MOVE_X, -938.5177 + VICECITY_MOVE_Y, 0.0);
+			SetPlayerPos(playerid, -3632.1997, 2261.4823, 0.0);
+			Streamer_UpdateEx(playerid, -3632.1997, 2261.4823, 0.0);
             transitionTime = 12000;
 		}
 		case 7:
 		{
 			// Look at destroyed building
 			InterpolateCameraPos(playerid,
-				5065.7905 + VICECITY_MOVE_X, -1141.6709 + VICECITY_MOVE_Y, 29.3655,
-				5150.7114 + VICECITY_MOVE_X, -1335.8698 + VICECITY_MOVE_Y, 23.7590,
+				-4134.2095, 2058.3291, 29.3655,
+				-4049.2886, 1864.1302, 23.7590,
 				12000, CAMERA_MOVE);
 			InterpolateCameraLookAt(playerid,
-				5083.1147 + VICECITY_MOVE_X, -1177.5134 + VICECITY_MOVE_Y, 31.0486,
-				5133.9253 + VICECITY_MOVE_X, -1371.4156 + VICECITY_MOVE_Y, 24.9903,
+				-4116.8853, 2022.4866, 31.0486,
+				-4066.0747, 1828.5844, 24.9903,
 				11000, CAMERA_MOVE);
-			SetPlayerPos(playerid, 5136.9741 + VICECITY_MOVE_X, -1334.8270 + VICECITY_MOVE_Y, 0.0);
-			Streamer_UpdateEx(playerid, 5136.9741 + VICECITY_MOVE_X, -1334.8270 + VICECITY_MOVE_Y, 0.0);
+			SetPlayerPos(playerid, -4063.0259, 1865.1730, 0.0);
+			Streamer_UpdateEx(playerid, -4063.0259, 1865.1730, 0.0);
 			transitionTime = 13000;
 		}
     }

@@ -159,11 +159,11 @@ hook OnGameModeInit()
 	#endif
 	
     // Creating Areas
-    areaViceCity = CreateDynamicRectangle(3159.508300 + VICECITY_MOVE_X, -2710.853271 + VICECITY_MOVE_Y, 6173.678222 + VICECITY_MOVE_X, 664.557983 + VICECITY_MOVE_Y, -1, 0, -1);
-	areaViceCityBeach = CreateDynamicRectangle(5950.0 + VICECITY_MOVE_X, 335.0 + VICECITY_MOVE_Y, 4697.0 + VICECITY_MOVE_X, -2705.0 + VICECITY_MOVE_Y, -1, 0, -1);
-	areaViceCityMainland = CreateDynamicRectangle(4794.0 + VICECITY_MOVE_X, 574.0 + VICECITY_MOVE_Y, 3239.0 + VICECITY_MOVE_X, -2714.0 + VICECITY_MOVE_Y, -1, 0, -1);
-    areaPrawnIsland = CreateDynamicRectangle(5104.6719 + VICECITY_MOVE_X, 282.4290 + VICECITY_MOVE_Y, 4866.2646 + VICECITY_MOVE_X, -111.6745 + VICECITY_MOVE_Y, -1, 0, -1);
-	areaStarfishIsland = CreateDynamicRectangle(4820.0117 + VICECITY_MOVE_X, -1183.2548 + VICECITY_MOVE_Y, 4276.8662 + VICECITY_MOVE_X, -1587.1974 + VICECITY_MOVE_Y, -1, 0, -1);
+    areaViceCity = CreateDynamicRectangle(-6040.4917, 489.1467, -3026.3218, 3864.5580, -1, 0, -1);
+	areaViceCityBeach = CreateDynamicRectangle(-3250.0000, 3535.0000, -4503.0000, 495.0000, -1, 0, -1);
+	areaViceCityMainland = CreateDynamicRectangle(-4406.0000, 3774.0000, -5961.0000, 486.0000, -1, 0, -1);
+    areaPrawnIsland = CreateDynamicRectangle(-4095.3281, 3482.4290, -4333.7354, 3088.3255, -1, 0, -1);
+	areaStarfishIsland = CreateDynamicRectangle(-4379.9883, 2016.7452, -4923.1338, 1612.8026, -1, 0, -1);
 
     // Searching for IDE and creating objects and timed objects
     for(new i, k = sizeof(ide_infos); i < k; i++) {

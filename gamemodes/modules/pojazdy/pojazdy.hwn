@@ -24,12 +24,12 @@
 //------------------<[ Enumy: ]>--------------------
 // Vice City
 new Float:FakePayNSpray[6][3] = {
-    {4988.7808 + VICECITY_MOVE_X, -2207.5691 + VICECITY_MOVE_Y, 4.9267}, // pay n spray ocean beach
-    {5327.7080 + VICECITY_MOVE_X, -519.6098 + VICECITY_MOVE_Y, 5.8135}, // waschington bech pay n spray
-    {4088.7883 + VICECITY_MOVE_X, -2217.4561 + VICECITY_MOVE_Y, 6.2747}, // pay n spray doki pos
-    {4129.1362 + VICECITY_MOVE_X, -1068.3549 + VICECITY_MOVE_Y, 5.5625}, // pay n spray little haiti
-    {3991.9048 + VICECITY_MOVE_X, -1789.3201 + VICECITY_MOVE_Y, 1.8265}, // sunshine auto pay n spray
-    {3830.1980 + VICECITY_MOVE_X, -2349.7175 + VICECITY_MOVE_Y, 5.7164} // 8ball doki
+    {-4211.2192, 992.4309, 4.9267}, // pay n spray ocean beach
+    {-3872.2920, 2680.3902, 5.8135}, // waschington bech pay n spray
+    {-5111.2117, 982.5439, 6.2747}, // pay n spray doki pos
+    {-5070.8638, 2131.6451, 5.5625}, // pay n spray little haiti
+    {-5208.0952, 1410.6799, 1.8265}, // sunshine auto pay n spray
+    {-5369.8020, 850.2825, 5.7164} // 8ball doki
 };
 new FakePayNSprayPickups[6];
 

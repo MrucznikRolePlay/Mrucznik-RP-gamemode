@@ -234,10 +234,10 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	new cp = SmugglingAction[actionID][s_flyCheckpoints][0];
 	new type = 4; // CP_TYPE_AIR_FINISH
 	// first checkpoint at prawn island Vice City
-	SetPlayerRaceCheckpoint(playerid, type, 5014.9385 + VICECITY_MOVE_X, 154.7287 + VICECITY_MOVE_Y, 71.5396, 
+	SetPlayerRaceCheckpoint(playerid, type, -4185.0615, 3354.7287, 71.5396, 
 		SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
 		CHECKPOINT_RADIUS);
-	SetPlayerRaceCheckpoint(driverid, type, 5014.9385 + VICECITY_MOVE_X, 154.7287 + VICECITY_MOVE_Y, 71.5396, 
+	SetPlayerRaceCheckpoint(driverid, type, -4185.0615, 3354.7287, 71.5396, 
 		SkimmerDroppingCheckpoints[cp][0], SkimmerDroppingCheckpoints[cp][1], SkimmerDroppingCheckpoints[cp][2], 
 		CHECKPOINT_RADIUS);
 
@@ -439,8 +439,8 @@ CreateRandomContrabandBoxes()
 	for(new i = 0; i < 5;) // Create 5 random boxes
 	{
 		// Vice City
-		x = 3159.508300 + VICECITY_MOVE_X + float(random(3173));
-		y = -2710.853271 + VICECITY_MOVE_Y + float(random(3374));
+		x = -6040.4917 + float(random(3173));
+		y = 489.1467 + float(random(3374));
 		CA_FindZ_For2DCoord(x, y, z);
 		
 		if(z > 0.0) // Only create if above water level
