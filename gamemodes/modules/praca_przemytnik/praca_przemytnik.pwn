@@ -438,7 +438,7 @@ CreateRandomContrabandBoxes()
 	for(new i = 0; i < 5;) // Create 5 random boxes
 	{
 		// Vice City
-		x = 159.508300+VICECITY_MOVE_X + float(random(3173));
+		x = 3159.508300 + float(random(3173));
 		y = -2710.853271 + float(random(3374));
 		CA_FindZ_For2DCoord(x, y, z);
 		
