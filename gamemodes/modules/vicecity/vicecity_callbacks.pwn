@@ -159,11 +159,11 @@ hook OnGameModeInit()
 	#endif
 	
     // Creating Areas
-    areaViceCity = CreateDynamicRectangle(3159.508300, -2710.853271z, 6173.678222, 664.557983, -1, 0, -1);
-	areaViceCityBeach = CreateDynamicRectangle(5950.0, 335.0, 4697.0, -2705.0, -1, 0, -1);
-	areaViceCityMainland = CreateDynamicRectangle(4794.0, 574.0, 3239.0, -2714.0, -1, 0, -1);
-    areaPrawnIsland = CreateDynamicRectangle(5104.6719, 282.4290, 4866.2646, -111.6745, -1, 0, -1);
-	areaStarfishIsland = CreateDynamicRectangle(4820.0117, -1183.2548, 4276.8662, -1587.1974, -1, 0, -1);
+    areaViceCity = CreateDynamicRectangle(3159.508300 + VICECITY_MOVE_X, -2710.853271 + VICECITY_MOVE_Y, 6173.678222 + VICECITY_MOVE_X, 664.557983 + VICECITY_MOVE_Y, -1, 0, -1);
+	areaViceCityBeach = CreateDynamicRectangle(5950.0 + VICECITY_MOVE_X, 335.0 + VICECITY_MOVE_Y, 4697.0 + VICECITY_MOVE_X, -2705.0 + VICECITY_MOVE_Y, -1, 0, -1);
+	areaViceCityMainland = CreateDynamicRectangle(4794.0 + VICECITY_MOVE_X, 574.0 + VICECITY_MOVE_Y, 3239.0 + VICECITY_MOVE_X, -2714.0 + VICECITY_MOVE_Y, -1, 0, -1);
+    areaPrawnIsland = CreateDynamicRectangle(5104.6719 + VICECITY_MOVE_X, 282.4290 + VICECITY_MOVE_Y, 4866.2646 + VICECITY_MOVE_X, -111.6745 + VICECITY_MOVE_Y, -1, 0, -1);
+	areaStarfishIsland = CreateDynamicRectangle(4820.0117 + VICECITY_MOVE_X, -1183.2548 + VICECITY_MOVE_Y, 4276.8662 + VICECITY_MOVE_X, -1587.1974 + VICECITY_MOVE_Y, -1, 0, -1);
 
     // Searching for IDE and creating objects and timed objects
     for(new i, k = sizeof(ide_infos); i < k; i++) {
@@ -212,10 +212,10 @@ hook OnGameModeInit()
             QuatToEulerZXY(ipl_infos[i][ipl_rx], ipl_infos[i][ipl_ry], ipl_infos[i][ipl_rz], ipl_infos[i][ipl_rw], erx, ery, erz);
 
             if(ipl_infos[i][interiorID] != 0) {
-                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z] + VICECITY_MOVE_Z, erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 150.0, 150.0, -1, 0);    
+                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x] + VICECITY_MOVE_X, ipl_infos[i][ipl_y] + VICECITY_MOVE_Y, ipl_infos[i][ipl_z] + VICECITY_MOVE_Z, erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 150.0, 150.0, -1, 0);    
             }
             else {
-                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x], ipl_infos[i][ipl_y], ipl_infos[i][ipl_z] + VICECITY_MOVE_Z, erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 1000.0, 1000.0, -1, 0);     
+                objectid = CA_auto_CreateDynamicObjectVC(ipl_infos[i][modelID], ipl_infos[i][ipl_x] + VICECITY_MOVE_X, ipl_infos[i][ipl_y] + VICECITY_MOVE_Y, ipl_infos[i][ipl_z] + VICECITY_MOVE_Z, erx, ery, erz, VICECITY_VWORLD, ipl_infos[i][interiorID], -1, 1000.0, 1000.0, -1, 0);     
             }
 
 			new ModelID = ipl_infos[i][modelID];
