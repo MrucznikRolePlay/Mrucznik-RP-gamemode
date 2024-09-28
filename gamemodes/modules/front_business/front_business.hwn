@@ -114,93 +114,93 @@ new FrontBusiness[][eFrontBusinessInfo] = {
     // from businesses - TODO: convert positions
     {
         "Taco Apocalypse", FRONT_BIZ_TYPE_RESTAURANT,
-        4246.2383, 392.8860, 11.2281, 0, 0, // wejœcie
+        -4953.7617, 3592.8860, 11.2281, 0, 0, // wejœcie
         378.02, -190.51, 1000.63, 17, FRONT_BUSINESS_VW, // wyjœcie
-        4246.2383, 392.8860, 11.2281, 0, 0, // przejmowanie
+        -4953.7617, 3592.8860, 11.2281, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Mars Cafe", FRONT_BIZ_TYPE_RESTAURANT,
-        4229.3848, 354.1434, 11.0488, 0, 0, // wejœcie
+        -4970.6152, 3554.1434, 11.0488, 0, 0, // wejœcie
         -227.57, 1401.55, 27.76, 18, FRONT_BUSINESS_VW, // wyjœcie
-        4229.3848, 354.1434, 11.0488, 0, 0, // przejmowanie
+        -4970.6152, 3554.1434, 11.0488, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Restauracja v1", FRONT_BIZ_TYPE_RESTAURANT,
-        4246.9282, -704.2689, 15.7819, 0, 0, // wejœcie
+        -4953.0718, 2495.7311, 15.7819, 0, 0, // wejœcie
         681.62, -451.89, -25.61, 1, FRONT_BUSINESS_VW, // wyjœcie
-        4246.9282, -704.2689, 15.7819, 0, 0, // przejmowanie
+        -4953.0718, 2495.7311, 15.7819, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
-        "Mansion Weinfall", FRONT_BIZ_TYPE_RESTAURANT,  
-        5104.6309, -2515.3276, 9.9740, 0, 0, // wejœcie
+        "Mansion Weinfall", FRONT_BIZ_TYPE_RESTAURANT,
+        -4095.3691, 684.6724, 9.9740, 0, 0, // wejœcie
         445.60, -6.98, 1000.73, 1, FRONT_BUSINESS_VW, // wyjœcie
-        5104.6309, -2515.3276, 9.9740, 0, 0, // przejmowanie
+        -4095.3691, 684.6724, 9.9740, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
-        "Cafe Under Tree", FRONT_BIZ_TYPE_RESTAURANT,  
-        4086.9419, -899.1306, 9.9824, 0, 0, // wejœcie
+        "Cafe Under Tree", FRONT_BIZ_TYPE_RESTAURANT,
+        -5113.0581, 2300.8694, 9.9824, 0, 0, // wejœcie
         -227.57, 1401.55, 27.76, 18, FRONT_BUSINESS_VW, // wyjœcie
-        4086.9419, -899.1306, 9.9824, 0, 0, // przejmowanie
+        -5113.0581, 2300.8694, 9.9824, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
-        "Tarbrush Cafe", FRONT_BIZ_TYPE_RESTAURANT,  
-        5463.3408, 59.9176, 1218.6469, 0, 0, // wejœcie
+        "Tarbrush Cafe", FRONT_BIZ_TYPE_RESTAURANT,
+        -3736.6592, 3259.9176, 1218.6469, 0, 0, // wejœcie
         378.02, -190.51, 1000.63, 17, FRONT_BUSINESS_VW, // wyjœcie
-        5463.3408, 59.9176, 1218.6469, 0, 0, // przejmowanie
+        -3736.6592, 3259.9176, 1218.6469, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Restauracja v2", FRONT_BIZ_TYPE_RESTAURANT,
-        5189.6211, -1959.6339, 10.9354, 0, 0, // wejœcie
+        -4010.3789, 1240.3661, 10.9354, 0, 0, // wejœcie
         681.62, -451.89, -25.61, 1, FRONT_BUSINESS_VW, // wyjœcie
-        5189.6211, -1959.6339, 10.9354, 0, 0, // przejmowanie
+        -4010.3789, 1240.3661, 10.9354, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "The Crab Bar", FRONT_BIZ_TYPE_RESTAURANT,
-        4169.9536, -202.9492, 10.7478, 0, 0, // wejœcie
+        -5030.0464, 2997.0508, 10.7478, 0, 0, // wejœcie
         454.98, -107.25, 999.43, 5, FRONT_BUSINESS_VW, // wyjœcie
-        4169.9536, -202.9492, 10.7478, 0, 0, // przejmowanie
+        -5030.0464, 2997.0508, 10.7478, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Crocs Bar", FRONT_BIZ_TYPE_RESTAURANT,
-        3906.4409, -825.4670, 10.7193, 0, 0, // wejœcie
+        -5293.5591, 2374.5330, 10.7193, 0, 0, // wejœcie
         501.95, -70.56, 998.75, 11, FRONT_BUSINESS_VW, // wyjœcie
-        3906.4409, -825.4670, 10.7193, 0, 0, // przejmowanie
+        -5293.5591, 2374.5330, 10.7193, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Ammu-Nation v1", FRONT_BIZ_TYPE_GUNSHOP,
-        4940.8335, -2431.2209, 9.9649, 0, 0, // wejœcie
-        285.76,-86.13,1001.51, 4, FRONT_BUSINESS_VW, // wyjœcie
-        4940.8335, -2431.2209, 9.9649, 0, 0, // przejmowanie
+        -4259.1665, 768.7791, 9.9649, 0, 0, // wejœcie
+        285.76, -86.13, 1001.51, 4, FRONT_BUSINESS_VW, // wyjœcie
+        -4259.1665, 768.7791, 9.9649, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Ammu-Nation v2", FRONT_BIZ_TYPE_GUNSHOP,
-        5369.3096, 106.6473, 1218.6429, 0, 0, // wejœcie
-        315.24,-140.88,999.60, 7, FRONT_BUSINESS_VW, // wyjœcie
-        5369.3096, 106.6473, 1218.6429, 0, 0, // przejmowanie
+        -3830.6904, 3306.6473, 1218.6429, 0, 0, // wejœcie
+        315.24, -140.88, 999.60, 7, FRONT_BUSINESS_VW, // wyjœcie
+        -3830.6904, 3306.6473, 1218.6429, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Ammu-Nation v3", FRONT_BIZ_TYPE_GUNSHOP,
-        4323.6851, 250.6712, 10.5365, 0, 0, // wejœcie
-        285.83,-39.01,1001.51, 1, FRONT_BUSINESS_VW, // wyjœcie
-        4323.6851, 250.6712, 10.5365, 0, 0, // przejmowanie
+        -4876.3149, 3450.6712, 10.5365, 0, 0, // wejœcie
+        285.83, -39.01, 1001.51, 1, FRONT_BUSINESS_VW, // wyjœcie
+        -4876.3149, 3450.6712, 10.5365, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Stacja benzynowa", FRONT_BIZ_TYPE_GAS_STATION,
-        5037.9370, -2020.6713, 9.9239, 0, 0, // wejœcie
-        -26.6916, -55.7149, 1003.55, 6, FRONT_BUSINESS_VW, // wyjœcie
-        5037.9370, -2020.6713, 9.9239, 0, 0, // przejmowanie
+        -4162.0630, 1179.3287, 9.9239, 0, 0, // wejœcie
+        -9226.69, 3144.29, 1003.55, 6, FRONT_BUSINESS_VW, // wyjœcie
+        -4162.0630, 1179.3287, 9.9239, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     // Poprawne pozycje:
