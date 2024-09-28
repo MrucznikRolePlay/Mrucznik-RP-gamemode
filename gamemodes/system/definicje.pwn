@@ -129,7 +129,7 @@
 #define MAX_STRING2 255
 //#define MAX_CHATBUBBLE_LENGTH 144
 #define MAX_3DTEXT 1024
-#define MAX_DOM 2000
+#define MAX_DOM 3000
 #define MAX_NrDOM 53
 #define MAX_REMOVED_OBJECTS 100
 #define GasMax 100
