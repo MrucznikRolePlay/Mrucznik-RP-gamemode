@@ -3113,11 +3113,12 @@ IsAtGasStation(playerid)
 		{//stacja w bazie KT
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 10.0, 5038.2017,-2007.2606,10.0713))
+		// Vice City
+		if(IsPlayerInRangeOfPoint(playerid, 10.0, -4161.6709,1193.3607,4.9239))
 		{// stacja benzynowa ocean beach
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, 10.0, 5057.6924,-2025.0481,10.0713))
+		if(IsPlayerInRangeOfPoint(playerid, 10.0, -4142.6313,1174.8871,4.9239))
 		{// stacja benzynowa ocean beach 2
 			return 1;
 		}
