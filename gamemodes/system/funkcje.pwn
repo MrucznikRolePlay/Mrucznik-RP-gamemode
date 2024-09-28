@@ -3018,9 +3018,9 @@ IsAtAirport(playerid)
 	{ // Lotnisko LV
 		return 1;
 	}
-	if(IsPlayerInRangeOfPoint(playerid, 7.0, 3609.7063,-1817.9374,14.3325) 
-	|| IsPlayerInRangeOfPoint(playerid, 7.0, 3351.1587,-1480.8884,14.3242))
-	{ // Lotnisko VC
+	if(IsPlayerInRangeOfPoint(playerid, 7.0, -5590.2937,1382.0626,9.3325) 
+	|| IsPlayerInRangeOfPoint(playerid, 7.0, -5848.8413,1719.1116,9.3242))
+	{ // Lotnisko Vice City
 		return 1;
 	}
 	return 0;
