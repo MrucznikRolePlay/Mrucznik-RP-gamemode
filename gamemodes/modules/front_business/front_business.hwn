@@ -39,11 +39,10 @@ new FrontBusinessType[BIZ_TYPE][32] = {
 	"Tor wyœcigowy",
 	"Restauracja",
 	"Klub",
-    "Kasyno",
-	"Sklep z ubraniami",
 	"Klub jachtowy",
 	"Pay 'n' Spray",
-    "Stacja benzynowa"
+    "Stacja benzynowa",
+    "Kasyno"
 };
 new FrontBusinessBenefits[BIZ_TYPE][64] = {
     "Brak",
@@ -51,11 +50,10 @@ new FrontBusinessBenefits[BIZ_TYPE][64] = {
 	"Tworzenie wyscigow",
 	"Zysk z ryb w biznesie +50\%",
 	"Sprzedaz alkoholu",
-    "Procent od hazardu w biznesie",
-	"50\% tansze skiny",
 	"20\% wiecej kontrabandy",
 	"neony + 50\% tansza naprawa, tuning",
-    "Darmowe tankowanie"
+    "Darmowe tankowanie",
+    "Procent od hazardu w biznesie"
 };
 
 enum eFrontBusinessInfo {
