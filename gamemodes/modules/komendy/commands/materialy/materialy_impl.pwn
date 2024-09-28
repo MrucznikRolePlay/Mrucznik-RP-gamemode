@@ -45,7 +45,8 @@ command_materialy_Impl(playerid, params[256])
 		}
 		if(strcmp(x_nr,"get",true) == 0 || strcmp(x_nr,"wez",true) == 0)
 		{
-		    if(PlayerToPoint(3.0,playerid,597.1277,-1248.6479,18.2734))
+		    if(PlayerToPoint(3.0,playerid,597.1277,-1248.6479,18.2734) ||
+				IsPlayerInRangeOfPoint(playerid, 3.0, -4889.9229,661.9466,6.9799)) // Vice City
 		    {
 		        if(MatsHolding[playerid] >= 10)
 		        {
@@ -86,7 +87,8 @@ command_materialy_Impl(playerid, params[256])
 		else if(strcmp(x_nr,"deliver",true) == 0 || strcmp(x_nr,"dostarcz",true) == 0)
 		{
 
-            if(IsPlayerInRangeOfPoint(playerid, 1.5, MatsPoint[0], MatsPoint[1], MatsPoint[2])) 
+            if(IsPlayerInRangeOfPoint(playerid, 1.5, MatsPoint[0], MatsPoint[1], MatsPoint[2]) ||
+				IsPlayerInRangeOfPoint(playerid, 1.5, MatsPointVC[0], MatsPointVC[1], MatsPointVC[2])) 
 		    {
 		        if(MatsHolding[playerid] > 0)
 		        {
