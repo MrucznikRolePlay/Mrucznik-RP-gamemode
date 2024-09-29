@@ -53,7 +53,6 @@ public ActorsFix(playerid)
 	{
 		sendTipMessage(playerid, "Reset Aktorów - UDANY"); 
 	}
-	KillTimer(fixActorsTimer[playerid]); 
 	return 1;
 }
 //Naprawianie timer

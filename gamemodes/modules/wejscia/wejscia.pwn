@@ -443,7 +443,7 @@ SprawdzWejscia(playerid)
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
 			SetInteriorTimeAndWeather(playerid);
-			fixActorsTimer[playerid] = SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
+			SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}
@@ -460,7 +460,7 @@ SprawdzWejscia(playerid)
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 			PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 			SetServerWeatherAndTime(playerid);
-			fixActorsTimer[playerid] = SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
+			SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}
