@@ -48,7 +48,7 @@ new FrontBusinessType[BIZ_TYPE][32] = {
 };
 new FrontBusinessBenefits[BIZ_TYPE][64] = {
     "Brak",
-    "NPC sprzedaj¹cy bron",
+    "NPC sprzedajacy bron",
 	"Tworzenie wyscigow",
 	"Zysk z ryb w biznesie +50\%",
 	"Sprzedaz alkoholu",
