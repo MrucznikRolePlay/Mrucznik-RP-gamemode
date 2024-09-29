@@ -117,7 +117,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
     {
         "Taco Apocalypse", FRONT_BIZ_TYPE_RESTAURANT,
         -4953.7617, 3592.8860, 6.2281, 0, 0, // wejœcie
-        378.02, -190.51, 1000.63, 17, FRONT_BUSINESS_VW, // wyjœcie
+        376.8967, -192.6109, 1000.6328, 17, FRONT_BUSINESS_VW, // wyjœcie
         -4959.1753,3587.3225,6.2281, 0, 0, // przejmowanie
         100, 200 // hajs
     },
@@ -152,14 +152,14 @@ new FrontBusiness[][eFrontBusinessInfo] = {
     {
         "The Crab Bar", FRONT_BIZ_TYPE_RESTAURANT,
         -5030.0464, 2997.0508, 5.7478, 0, 0, // wejœcie
-        454.98, -107.25, 999.43, 5, FRONT_BUSINESS_VW, // wyjœcie
+        459.0599, -110.7151, 999.5413, 5, FRONT_BUSINESS_VW, // wyjœcie
         -5072.7065,2942.3091,5.5446, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Crocs Bar", FRONT_BIZ_TYPE_RESTAURANT,
         -5293.5591, 2374.5330, 5.7193, 0, 0, // wejœcie
-        501.95, -70.56, 998.75, 11, FRONT_BUSINESS_VW, // wyjœcie
+        501.8354, -68.1877, 998.7578, 11, FRONT_BUSINESS_VW, // wyjœcie
         -5320.6577,2367.3425,5.5865, 0, 0, // przejmowanie
         100, 200 // hajs
     },
