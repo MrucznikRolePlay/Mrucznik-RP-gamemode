@@ -2042,11 +2042,11 @@ SetPlayerSpawnPos(playerid)
 		if(GetPVarInt(playerid, "DostalAJkomunikat") == 0) 
 		{
 			format(string, sizeof(string), "Wracasz do Admin Jaila. {FFFFFF}Powód: %s", PlayerInfo[playerid][pAJreason]);
+			SendClientMessage(playerid, COLOR_PANICRED, string);
 			SetPVarInt(playerid, "DostalAJkomunikat", 1);
 		}
 		if(strfind(PlayerInfo[playerid][pAJreason], "DM2", true) != -1 || 
 		strfind(PlayerInfo[playerid][pAJreason], "Death Match 2", true) != -1) SetPVarInt(playerid, "DostalDM2", 1);
-		SendClientMessage(playerid, COLOR_PANICRED, string);
 	}
 	else if(PlayerInfo[playerid][pJailed] == 10)//Marcepan Admin Jail
 	{
