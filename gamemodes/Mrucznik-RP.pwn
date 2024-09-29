@@ -679,7 +679,7 @@ public OnPlayerShootDynamicObject(playerid, weaponid, objectid, Float:x, Float:y
 		GetDynamicObjectPos(objectid, px, py, pz);
 		GetDynamicObjectRot(objectid, rx, ry, rz);
 		format(str, sizeof str, "ID: %d | Model: %d | Pos: %f, %f, %f, %f, %f, %f", objectid, GetDynamicObjectModel(objectid), px, py, pz, rx, ry, rz);
-		SendClientMessageToAll(-1, str);
+		SendClientMessage(playerid, COLOR_WHITE, str);
 	}
 
 
