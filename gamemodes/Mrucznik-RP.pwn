@@ -141,6 +141,7 @@ native gpci (playerid, serial [], len);
 #include "system\textdraw.pwn"
 #include "system\enum.pwn"
 #include "system\zmienne.pwn"
+#include "system\hooks.pwn"
 
 //do implementacji w g³ówny kod (mo¿liwie w modu³y)
 #include "system\doimplementacji\vinylscript.pwn"
