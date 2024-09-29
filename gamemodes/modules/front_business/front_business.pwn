@@ -336,13 +336,14 @@ GetFrontBusinessIcon(type)
 {
 	switch(type)
 	{
-    	case FRONT_BIZ_TYPE_GUNSHOP: { return 2044; }
+    	case FRONT_BIZ_TYPE_GUNSHOP: { return 6; }
 		case FRONT_BIZ_TYPE_RACE: { return 53; }
 		case FRONT_BIZ_TYPE_RESTAURANT: { return 50; }
 		case FRONT_BIZ_TYPE_CLUB: { return 49; }
     	case FRONT_BIZ_TYPE_CASINO: { return 25; }
 		case FRONT_BIZ_TYPE_BOAT: { return 9; }
 		case FRONT_BIZ_TYPE_SPRAY: { return 63; }
+		case FRONT_BIZ_TYPE_MATS: { return 37; }
 	}
 	return 52;
 }
@@ -351,13 +352,14 @@ GetFrontBusinessPickup(type)
 {
 	switch(type)
 	{
-    	case FRONT_BIZ_TYPE_GUNSHOP: { return 6; }
+    	case FRONT_BIZ_TYPE_GUNSHOP: { return 2044; }
     	case FRONT_BIZ_TYPE_CASINO: { return 1851; }
 		case FRONT_BIZ_TYPE_RACE: { return 19306; }
-		case FRONT_BIZ_TYPE_RESTAURANT: { return 2880; }
+		case FRONT_BIZ_TYPE_RESTAURANT: { return 2703; }
 		case FRONT_BIZ_TYPE_CLUB: { return 19819; }
 		case FRONT_BIZ_TYPE_BOAT: { return 19630; }
 		case FRONT_BIZ_TYPE_SPRAY: { return 19627; }
+		case FRONT_BIZ_TYPE_MATS: { return 2061; }
 	}
 	return 19523;
 }

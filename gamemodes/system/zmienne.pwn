@@ -759,7 +759,7 @@ new osoby;
 new planeisstopped;
 new Wodliczanie;
 new Float:MatsPoint[3] = {2138.2078,-2290.4888,20.6646};
-new Float:MatsPointVC[3] = {-4170.8286,3161.0359,5.4166};
+new Float:MatsPointVC[3] = {-4116.5503,3196.7097,5.2720};
 
 //stary komisariat (old komi)
 new DrzwiPDKomi;
