@@ -114,7 +114,7 @@ command_akceptuj_przemyt(playerid)
     }
 
     MruMessageGoodInfoF(playerid, "Akceptowa³eœ %s, zap³aci³eœ $%d przemytnikowi %s.", SmugglingItemsData[item][Name], itemPrice, GetNick(smugglerid));
-    MruMessageGoodInfoF(smugglerid, "%s akceptowa³ %s, dostajesz $%d.", SmugglingItemsData[item][Name], GetNick(playerid), itemPrice);
+    MruMessageGoodInfoF(smugglerid, "%s akceptowa³ %s, dostajesz $%d.", GetNick(playerid), SmugglingItemsData[item][Name], itemPrice);
 
     CreateAndGiveSmugglingItem(playerid, smugglerid, item);
 
