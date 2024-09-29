@@ -2160,9 +2160,14 @@ public JednaSekundaTimer()
 				Dis = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
 
 				GetPlayer2DZone(i, pZone, MAX_ZONE_NAME);
-				format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: OK\%~n~GPS: %s~n~Jetpack" , 
+				format(string, 128, "Speed: %dkm/h~n~Paliwo: %d~n~Stan: OK\%~n~GPS: %s~n~Jetpack" , 
 					floatround(Dis), floatround(JetpackGas[i]), pZone);
 				PlayerTextDrawSetString(i, Licznik[i], string);
+			}
+
+			if(GetPVarInt(i, "jetpack-licznik") == 0)
+			{
+				PlayerTextDrawShow(i, Licznik[i]);
 			}
 
 			// decrease jet fuel
@@ -2175,7 +2180,7 @@ public JednaSekundaTimer()
 			}
 			OldCoordsX[i] = x; OldCoordsY[i] = y;
 		}
-		else if(GetPVarInt(i, "jetpack-licznik") == 1)
+		else if(GetPVarInt(i, "jetpack-licznik") >= 1)
 		{
 			DeletePVar(i, "jetpack-licznik");
 			PlayerTextDrawHide(i, Licznik[i]);
