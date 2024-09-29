@@ -480,35 +480,29 @@ CreateAndGiveSmugglingItem(playerid, smugglerid, item)
 
 GiveSmugglingItem(playerid, item, ammount=1)
 {
-	new redisKey[128];
-	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
-	Redis_IncrBy(redisKey, ammount);
+	Redis_IncrBy(sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), ammount);
 }
 
 TakeSmugglingItem(playerid, item, ammount=1)
 {
-	new redisKey[128];
-	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
-	Redis_IncrBy(redisKey, -ammount);
+	Redis_IncrBy(sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), -ammount);
 }
 
 SetSmugglingItem(playerid, item, ammount)
 {
-	new redisKey[128];
-	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
-	Redis_SetInt(RedisClient, redisKey, ammount);
+	Redis_SetInt(RedisClient, sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), ammount);
 }
 
 GetPlayerSmugglingItem(playerid, item)
 {
 	new value = 0;
-	new redisKey[128];
-	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
-	Redis_GetInt(RedisClient, redisKey, value);
+	new redisdebug = Redis_GetInt(RedisClient, sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), value);
 	if(value > 0)
 	{
 		return value;
 	}
+	printf("debug redis, playerid: %d, item: %d, value: %d, redisdebug: %d", playerid, item, value, redisdebug);
+	printf("debug redis, key: %s", sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]));
 	return 0;
 }
 

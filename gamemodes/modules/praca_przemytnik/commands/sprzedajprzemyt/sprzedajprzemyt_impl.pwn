@@ -73,7 +73,7 @@ command_sprzedajprzemyt_Impl(playerid, giveplayerid, nazwa[], price)
     }
     
     MruMessageGoodInfoF(playerid, "Oferujesz %s graczowi %s za $%d.", SmugglingItemsData[item][Name], GetNick(giveplayerid), price);
-    MruMessageGoodInfoF(giveplayerid, "Przemtynik %s oferuje ci %s za $%d, (wpisz /akceptuj przemyt) aby akceptowaæ", GetNick(playerid), SmugglingItemsData[item][Name], price);
+    MruMessageGoodInfoF(giveplayerid, "Przemytnik %s oferuje ci %s za $%d, (wpisz /akceptuj przemyt) aby akceptowaæ", GetNick(playerid), SmugglingItemsData[item][Name], price);
     
     SmugglingOffer[giveplayerid] = playerid;
     SmugglingOfferPrice[giveplayerid] = price;
