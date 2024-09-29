@@ -593,7 +593,7 @@ public MruMySQL_LoadAccount(playerid)
 {
 	if(!MYSQL_ON) return false;
 
-	new lStr[1024], id=0;
+	new lStr[2048], id=0;
 
     lStr = "`UID`, `Nick`, `Level`, `Admin`, `DonateRank`, `UpgradePoints`, `ConnectedTime`, `Registered`, `Sex`, `Age`, `Origin`, `CK`, `Muted`, `Respect`, `Money`, `Bank`, `Crimes`, `Kills`, `Deaths`, `Arrested`, `WantedDeaths`, `Phonebook`, `LottoNr`, `Fishes`, `BiggestFish`, `Job`, `Paycheck`, `HeadValue`, `BlokadaPisania`, `Jailed`, `AJreason`, `JailTime`, `Materials`, `Kontrabanda`, `Drugs`, `Member`, `FMember`, `Rank`, `Char`, `Skin`, `ContractTime`";
 
@@ -805,7 +805,7 @@ public MruMySQL_LoadAccount(playerid)
 
 	//Wczytaj lider�w
 	lStr = "`NICK`, `UID`, `FracID`, `LiderValue`";
-	format(lStr, 1024, "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", lStr, GetNickEx(playerid));
+	format(lStr, sizeof(lStr), "SELECT %s FROM `mru_liderzy` WHERE `NICK`='%s'", lStr, GetNickEx(playerid));
 	mysql_query(lStr);
 	mysql_store_result(); 
 	if(mysql_num_rows())
@@ -820,7 +820,7 @@ public MruMySQL_LoadAccount(playerid)
 	mysql_free_result();
 	//Wczytaj personalizacje
 	lStr = "`KontoBankowe`, `Ogloszenia`, `LicznikPojazdu`, `OgloszeniaFrakcji`, `OldNick`, `CBRadio`, `Report`, `DeathWarning`, `KaryTXD`, `NewNick`, `newbie`, `BronieScroll`";
-	format(lStr, 1024, "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
+	format(lStr, sizeof(lStr), "SELECT %s FROM `mru_personalization` WHERE `UID`=%d", lStr, PlayerInfo[playerid][pUID]);
 	mysql_query(lStr); 
 	mysql_store_result(); 
 	if(mysql_num_rows())
@@ -843,7 +843,7 @@ public MruMySQL_LoadAccount(playerid)
 	mysql_free_result();
 
 	// fishes
-	format(lStr, 1024, "SELECT * FROM `mru_ryby` WHERE `Player`=%d", PlayerInfo[playerid][pUID]);
+	format(lStr, sizeof(lStr), "SELECT * FROM `mru_ryby` WHERE `Player`=%d", PlayerInfo[playerid][pUID]);
 	mysql_query(lStr);
 	mysql_store_result();
 	if(mysql_num_rows()) {
