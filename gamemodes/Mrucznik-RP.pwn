@@ -2823,6 +2823,7 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 		if(GetPVarInt(playerid, "Allow-edit"))
 		{
 			MoveDynamicObject(objectid, x, y, z, 10.0, rx, ry, rz);
+			SendClientMessage(playerid, COLOR_WHITE, sprintf("Object moved to: X: %.4f, Y: %.4f, Z: %.4f, RX: %.4f, RY: %.4f, RZ: %.4f", x, y, z, rx, ry, rz));
 		}
 
         if(response < EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "Barier-id") != 0)
@@ -5759,7 +5760,7 @@ public OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 		new Float:z;
 		CA_FindZ_For2DCoord(fX, fY, z);
 		SetPlayerPos(playerid, fX, fY, z);
-		SendClientMessage(playerid, COLOR_WHITET, sprintf("Map position to: X: %.4f, Y: %.4f, Z: %.4f", fX, fY, z));
+		SendClientMessage(playerid, COLOR_WHITE, sprintf("Map position to: X: %.4f, Y: %.4f, Z: %.4f", fX, fY, z));
 	}
     return 1;
 }
