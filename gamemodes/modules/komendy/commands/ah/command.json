@@ -1,7 +1,7 @@
 {
     "name": "ah",
     "description": "",
-    "permissions": ["everyone"],
+    "permissions": ["admini"],
     "author": "mrucznik",
     "aliases": [
         "adminhelp",
