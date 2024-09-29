@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_pancerz_Impl(playerid)
 {
-    if(!IsOwnerOfSmugglingItem(playerid, SMUGGLING_ITEM_ARMOR))
+    if(GetPlayerSmugglingItem(playerid, SMUGGLING_ITEM_ARMOR) == 0)
     {
         MruMessageFail(playerid, "Najpierw musisz kupiæ kamizelkê kuloodporn¹ u przemytnika.");
         return 1;

@@ -25,13 +25,13 @@
 //------------------<[ Implementacja: ]>-------------------
 command_jetpack_Impl(playerid)
 {
-    if(!IsOwnerOfSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK))
+    if(GetPlayerSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK) == 0)
     {
         MruMessageFail(playerid, "Nie posiadasz plecaka odrzutowego, musisz kupiæ go od przemytnika!");
         return 1;
     }
 
-    if(!IsOwnerOfSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS))
+    if(GetPlayerSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS) == 0)
     {
         MruMessageFail(playerid, "Skoñczy³o Ci siê paliwo do plecaka odrzutowego, kup wiêcej od przemytnika.");
         return 1;

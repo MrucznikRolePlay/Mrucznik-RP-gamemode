@@ -499,7 +499,7 @@ SetSmugglingItem(playerid, item, ammount)
 	Redis_SetInt(RedisClient, redisKey, ammount);
 }
 
-IsOwnerOfSmugglingItem(playerid, item)
+GetPlayerSmugglingItem(playerid, item)
 {
 	new value = 0;
 	new redisKey[128];
@@ -515,7 +515,7 @@ IsOwnerOfSmugglingItem(playerid, item)
 UseJetpack(playerid)
 {
 	JetpackEnabled[playerid] = true;
-	JetpackGas[playerid] = IsOwnerOfSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS);
+	JetpackGas[playerid] = GetPlayerSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS);
 	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_USEJETPACK);
 }
 

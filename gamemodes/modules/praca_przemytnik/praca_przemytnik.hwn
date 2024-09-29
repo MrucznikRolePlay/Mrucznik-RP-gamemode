@@ -70,13 +70,6 @@ enum eSmugglingData {
 
 new SmugglingAction[SMUGGLING_ACTIONS_PER_DAY][eSmugglingData];
 
-enum SmuglingItems {
-    SMUGGLING_ITEM_UNKNOWN,
-    SMUGGLING_ITEM_ARMOR,
-    SMUGGLING_ITEM_JETPACK,
-    SMUGGLING_ITEM_JETPACK_GAS
-}
-
 enum eSmugglingItems {
     ShortName[16],
     Name[64],

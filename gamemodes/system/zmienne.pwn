@@ -1001,7 +1001,7 @@ new Float:ShopPickupsPos[][3] = {
 	{203.8627, -43.8014, 1001.8047}, // sub urban
 	{204.1287, -159.6113, 1000.5234} // didier sachs
 };
-new ShopPickups[5];
+new ShopPickups[sizeof(ShopPickupsPos)];
 new scm_buf[144];
 
 //-----------------------------------------------
