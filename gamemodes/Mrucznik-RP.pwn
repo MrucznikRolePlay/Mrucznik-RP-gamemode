@@ -5759,7 +5759,7 @@ public OnPlayerClickMap(playerid, Float:fX, Float:fY, Float:fZ)
 	{
 		new Float:z;
 		CA_FindZ_For2DCoord(fX, fY, z);
-		SetPlayerPos(playerid, fX, fY, z);
+		SetPlayerPos(playerid, fX, fY, z + 0.5);
 		SendClientMessage(playerid, COLOR_WHITE, sprintf("Map position to: X: %.4f, Y: %.4f, Z: %.4f", fX, fY, z));
 	}
     return 1;
