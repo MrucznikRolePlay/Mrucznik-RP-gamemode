@@ -40,7 +40,7 @@ new FrontBusinessType[BIZ_TYPE][32] = {
 	"Tor wyscigowy",
 	"Restauracja",
 	"Klub",
-	"Klub jachtowy",
+	"Stocznia",
 	"Pay 'n' Spray",
     "Stacja benzynowa",
     "Kasyno",
@@ -208,7 +208,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
     {
         "Dirt Ring", FRONT_BIZ_TYPE_RACE,  
         -5313.6543,3581.0801,14.5747, 0, 0, // wejœcie
-        -1420.42,1616.92,1052.53, 14, FRONT_BUSINESS_VW, // wyjœcie
+        -1464.6763, 1556.9542, 1052.5313, 14, FRONT_BUSINESS_VW, // wyjœcie
         -5310.0615,3772.7156,6.4419, 0, 0, // przejmowanie
         100, 200 // hajs
     },
@@ -252,6 +252,20 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -4110.3911,2522.2766,16.2319, 0, 0, // wejœcie
         1133.34, -7.84, 1000.67, 12, FRONT_BUSINESS_VW, // wyjœcie
         -4204.1138,2486.4773,20.5883, 0, 0, // przejmowanie
+        100, 200 // hajs
+    },
+    {
+        "Klub Jachtowy", FRONT_BIZ_TYPE_BOAT,  
+        -4430.2266,947.7992,3.5730, 0, 0, // wejœcie
+        -2029.798339,-106.675910,1035.171875, 3, FRONT_BUSINESS_VW, // wyjœcie
+        -4521.7612,888.9827,2.5730, 0, 0, // przejmowanie
+        100, 200 // hajs
+    },
+    {
+        "Stocznia", FRONT_BIZ_TYPE_BOAT,  
+        -4943.0801,728.6068,7.777, 0, 0, // wejœcie
+        1494.325195,1304.942871,1093.289062, 3, FRONT_BUSINESS_VW, // wyjœcie
+        -4958.0239,649.8201,18.1950, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
