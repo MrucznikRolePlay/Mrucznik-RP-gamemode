@@ -529,4 +529,13 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 	return 1;
 }
 
+hook OnPlayerDisconnect(playerid, reason)
+{
+	if(JetpackGas[playerid] > 0)
+	{
+		SetSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS, JetpackGas[playerid]);
+	}
+	return 1;
+}
+
 //end

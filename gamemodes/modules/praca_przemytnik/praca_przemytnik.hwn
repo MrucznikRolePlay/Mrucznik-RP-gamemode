@@ -73,7 +73,8 @@ new SmugglingAction[SMUGGLING_ACTIONS_PER_DAY][eSmugglingData];
 enum SmuglingItems {
     SMUGGLING_ITEM_UNKNOWN,
     SMUGGLING_ITEM_ARMOR,
-    SMUGGLING_ITEM_JETPACK
+    SMUGGLING_ITEM_JETPACK,
+    SMUGGLING_ITEM_JETPACK_GAS
 }
 
 enum eSmugglingItems {
@@ -84,8 +85,11 @@ enum eSmugglingItems {
 new SmugglingItemsData[][eSmugglingItems] = {
     {"", "", 0},
     {"pancerz", "kamizelka kuloodporna", 1},
-    {"jetpack", "plecak odrzutowy", 10_000}
+    {"jetpack", "plecak odrzutowy", 10_000},
+    {"paliwo", "paliwo do plecaka odrzutowego", 50}
 };
+
+new JetpackGas[MAX_PLAYERS];
 
 //-----------------<[ Zmienne: ]>-------------------
 new Float:ContrabandPickupPoints[][3] = {

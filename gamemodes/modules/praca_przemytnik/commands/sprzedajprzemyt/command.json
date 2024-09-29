@@ -1,6 +1,7 @@
 {
     "name": "sprzedajprzemyt",
     "description": "Oferuje graczowi przedmiot z przemytu na sprzeda¿.",
+    "command_tips": ["Dostêpne przedmioty: pancerz, jetpack, paliwo"],
     "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [

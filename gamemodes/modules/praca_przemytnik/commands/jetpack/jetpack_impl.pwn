@@ -31,6 +31,12 @@ command_jetpack_Impl(playerid)
         return 1;
     }
 
+    if(!IsOwnerOfSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS))
+    {
+        MruMessageFail(playerid, "Skoñczy³o Ci siê paliwo do plecaka odrzutowego, kup wiêcej od przemytnika.");
+        return 1;
+    }
+
     if(GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USEJETPACK)
     {
         DisableJetpack(playerid);

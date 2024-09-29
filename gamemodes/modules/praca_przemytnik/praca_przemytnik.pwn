@@ -467,23 +467,36 @@ CreateAndGiveSmugglingItem(playerid, smugglerid, item)
 		}
 		case SMUGGLING_ITEM_JETPACK:
 		{
+			GiveSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS, 600);
 			MruMessageGoodInfo(playerid, "Masz teraz plecak odrzutowy! Aby go u¿yæ, wpisz /jetpack");
+		}
+		case SMUGGLING_ITEM_JETPACK_GAS:
+		{
+			GiveSmugglingItem(playerid, item, 600);
+			MruMessageGoodInfo(playerid, "Masz teraz paliwo do plecaka odrzutowego! Powinno starczyæ na 10 minut lotu.");
 		}
 	}
 }
 
-GiveSmugglingItem(playerid, item)
+GiveSmugglingItem(playerid, item, ammount=1)
 {
 	new redisKey[128];
 	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
-	Redis_IncrBy(redisKey, 1);
+	Redis_IncrBy(redisKey, ammount);
 }
 
-TakeSmugglingItem(playerid, item)
+TakeSmugglingItem(playerid, item, ammount=1)
 {
 	new redisKey[128];
 	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
-	Redis_IncrBy(redisKey, -1);
+	Redis_IncrBy(redisKey, -ammount);
+}
+
+SetSmugglingItem(playerid, item, ammount)
+{
+	new redisKey[128];
+	format(redisKey, sizeof(redisKey), "player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]);
+	Redis_SetInt(RedisClient, redisKey, ammount);
 }
 
 IsOwnerOfSmugglingItem(playerid, item)
@@ -494,7 +507,7 @@ IsOwnerOfSmugglingItem(playerid, item)
 	Redis_GetInt(RedisClient, redisKey, value);
 	if(value > 0)
 	{
-		return 1;
+		return value;
 	}
 	return 0;
 }
@@ -502,6 +515,7 @@ IsOwnerOfSmugglingItem(playerid, item)
 UseJetpack(playerid)
 {
 	JetpackEnabled[playerid] = true;
+	JetpackGas[playerid] = IsOwnerOfSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS);
 	SetPlayerSpecialAction(playerid, SPECIAL_ACTION_USEJETPACK);
 }
 

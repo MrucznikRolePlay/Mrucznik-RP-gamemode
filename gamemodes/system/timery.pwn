@@ -2147,6 +2147,29 @@ public JednaSekundaTimer()
 					format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: %d\%~n~GPS: %s~n~%s" ,floatround(Dis), floatround(Gas[vehicleid]),floatround(health/10), pZone, VehicleNames[GetVehicleModel(vehicleid)-400]);
 					PlayerTextDrawSetString(i, Licznik[i], string);
 				}
+				else if(GetPlayerSpecialAction(i) == SPECIAL_ACTION_USEJETPACK)
+				{
+					GetPlayerVelocity(i, vel[0], vel[1], vel[2]);
+					Dis = VectorSize(vel[0], vel[1], vel[2]) * 166.666666;
+
+					GetPlayer2DZone(i, pZone, MAX_ZONE_NAME);
+					format(string, 128,"Speed: %dkm/h~n~Paliwo: %d~n~Stan: OK\%~n~GPS: %s~n~Jetpack" , 
+						floatround(Dis), floatround(JetpackGas[i]), pZone);
+					PlayerTextDrawSetString(i, Licznik[i], string);
+					SetPVarInt(i, "jetpack-licznik", 1);
+					JetpackGas[i] --;
+					if(JetpackGas[i] <= 0)
+					{
+						DisableJetpack(i);
+						ChatDo(i, "plecak odrzutowy przesta³ dzia³aæ z powodu braku paliwa.");
+					}
+				}
+				else if(GetPVarInt(i, "jetpack-licznik") == 1)
+				{
+					DeletePVar(i, "jetpack-licznik");
+					PlayerTextDrawHide(i, Licznik[i]);
+					SetSmugglingItem(i, SMUGGLING_ITEM_JETPACK_GAS, JetpackGas[i]);
+				}
 
 				OldCoordsX[i] = x; OldCoordsY[i] = y;
 			}
