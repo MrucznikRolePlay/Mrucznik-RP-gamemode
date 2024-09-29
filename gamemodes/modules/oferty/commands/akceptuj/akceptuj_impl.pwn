@@ -794,9 +794,9 @@ command_akceptuj_Impl(playerid, x_job[32])
         }
         
     }
-    else if(strcmp(x_job,"pancerz",true) == 0 ||strcmp(x_job,"przemyt",true) == 0)
+    else if(strcmp(x_job,"pancerz",true) == 0 || strcmp(x_job,"przemyt",true) == 0)
     {
-        command_akceptuj_pancerz(playerid);
+        command_akceptuj_przemyt(playerid);
     }
     else if(strcmp(x_job,"drugs",true) == 0 || strcmp(x_job,"dragi",true) == 0 || strcmp(x_job,"narkotyki",true) == 0)
     {

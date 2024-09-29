@@ -81,7 +81,7 @@ command_sprzedajprzemyt_Impl(playerid, giveplayerid, nazwa[], price)
     return 1;
 }
 
-command_akceptuj_pancerz(playerid)
+command_akceptuj_przemyt(playerid)
 {
     new smugglerid = SmugglingOffer[playerid];
     new itemPrice = SmugglingOfferPrice[playerid];
@@ -94,7 +94,7 @@ command_akceptuj_pancerz(playerid)
         return 1;
     }
 
-    if(IsPlayerConnected(smugglerid))
+    if(!IsPlayerConnected(smugglerid))
     {
         MruMessageFail(playerid, "Gracz który zaoferowa³ ci przedmiot jest ju¿ offline.");
         return 1;
