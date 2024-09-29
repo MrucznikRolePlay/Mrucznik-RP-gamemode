@@ -1,6 +1,9 @@
-stock Mru_SetPlayerPos(playerid, Float:x, Float:y, Float:z)
+stock Mru_SetPlayerPos(playerid, Float:x, Float:y, Float:z, checkfall = 1)
 {
-	defer Mru_CheckPosAfterSet(playerid, z);
+    if(checkfall)
+    {
+        defer Mru_CheckPosAfterSet(playerid, z);
+    }
     SetPlayerPos(playerid, x, y, z);
     return 1;
 }
@@ -23,6 +26,6 @@ timer Mru_CheckPosAfterSet[300](playerid, Float:setZ)
     // player fall and is below ground
 	if(z - setZ < 0.5 && z < groundZ + 0.2)
 	{
-		SetPlayerPos(playerid, x, y, setZ);
+		Mru_SetPlayerPos(playerid, x, y, setZ, 0);
 	}
 }
