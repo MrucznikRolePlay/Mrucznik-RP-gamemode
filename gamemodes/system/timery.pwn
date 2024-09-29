@@ -1908,8 +1908,8 @@ public CustomPickups()
 
 					new redisKey[40];
 					format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[i][pUID]);
-					Redis_IncrBy(redisKey, -1);
-					Redis_Expire(redisKey);
+					RedisIncrBy(redisKey, -1);
+					RedisExpire(redisKey);
 				}
 			}
 		}

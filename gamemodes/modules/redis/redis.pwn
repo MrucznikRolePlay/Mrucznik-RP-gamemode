@@ -41,8 +41,7 @@ ConnectToRedis()
 
 	Redis_Connect(host, port, password, RedisClient);
 
-	new mrucznikRedis;
-	Redis_GetInt(RedisClient, "server:mrucznik-redis", mrucznikRedis);
+	new mrucznikRedis = RedisGetInt("server:mrucznik-redis");
 	if(mrucznikRedis != 1)
 	{
 		printf("cannot connect to redis or redis key server:mrucznik-redis is not 1");
@@ -53,14 +52,25 @@ ConnectToRedis()
 	return;
 }
 
-stock Redis_IncrBy(const key[], value)
+stock RedisGetInt(const key[])
+{
+	new value = 0;
+	new status = Redis_GetInt(RedisClient, key, value);
+	if(status != 0)
+	{
+		return 0;
+	}
+	return value;
+}
+
+stock RedisIncrBy(const key[], value)
 {
 	new string[128];
 	format(string, sizeof(string), "INCRBY %s %d", key, value);
 	Redis_Command(RedisClient, string);
 }
 
-stock Redis_Delete(const key[])
+stock RedisDelete(const key[])
 {
 	new string[128];
 	format(string, sizeof(string), "DEL %s", key);
@@ -68,7 +78,7 @@ stock Redis_Delete(const key[])
 }
 
 // Expires key, default ttl = 1 month.
-stock Redis_Expire(const key[], ttl=2629800)
+stock RedisExpire(const key[], ttl=2629800)
 {
 	new string[128];
 	format(string, sizeof(string), "EXPIRE %s %d", key, ttl);
@@ -85,7 +95,8 @@ stock CRedis_GetInt(const key[], &value)
 		return;
 	}
 
-	return Redis_GetInt(RedisClient, key, value);
+	value = RedisGetInt(key);
+	return value;
 }
 
 stock CRedis_GetFloat(const key[], &Float:value)
@@ -128,7 +139,7 @@ stock CRedis_SetString(const key[], const value[], len = sizeof(value))
 	return Redis_SetString(RedisClient, key, value);
 }
 
-stock CRedis_IncrBy(const key[], value)
+stock CRedisIncrBy(const key[], value)
 {
 	new currentVal = MAP_get_str_val(RedisCache_Int, key);
 	new newVal = currentVal + value;

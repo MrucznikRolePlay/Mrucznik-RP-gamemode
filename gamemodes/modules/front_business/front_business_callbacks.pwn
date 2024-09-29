@@ -218,8 +218,8 @@ FrontBiz_OnPayDay(playerid)
 			memberIncome += singleBizMemberIncome;
 			leaderIncome += singleBizLeaderIncome;
 
-			Redis_IncrBy(RedisFrontBizKey(i, "profit"), frontBizIncome);
-			Redis_IncrBy(RedisFrontBizKey(i, "leaderProfit"), singleBizLeaderIncome);
+			RedisIncrBy(RedisFrontBizKey(i, "profit"), frontBizIncome);
+			RedisIncrBy(RedisFrontBizKey(i, "leaderProfit"), singleBizLeaderIncome);
 		}
 	}
 

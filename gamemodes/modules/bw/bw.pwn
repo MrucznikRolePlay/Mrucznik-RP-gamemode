@@ -417,8 +417,8 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 
 			new redisKey[40];
 			format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[killerid][pUID]);
-			Redis_IncrBy(redisKey, 1);
-			Redis_Expire(redisKey);
+			RedisIncrBy(redisKey, 1);
+			RedisExpire(redisKey);
 		}
 	}
 	new Float:faceangle, interior, vw;

@@ -53,9 +53,7 @@ stock GetPlayerSmugglingActionID(playerid)
 		return -1;
 	}
 
-	new redisActionID;
-	Redis_GetInt(RedisClient, sprintf("player:%d:smuggling", PlayerInfo[playerid][pUID]), redisActionID);
-
+	new redisActionID = RedisGetInt(sprintf("player:%d:smuggling", PlayerInfo[playerid][pUID]));
 	for(new i; i<SMUGGLING_ACTIONS_PER_DAY; i++)
 	{
 		if(SmugglingAction[i][s_actionID] == redisActionID)
@@ -68,9 +66,7 @@ stock GetPlayerSmugglingActionID(playerid)
 
 stock GetPlayerSmugglingRole(playerid)
 {
-	new role;
-	Redis_GetInt(RedisClient, sprintf("player:%d:smuggling:role", PlayerInfo[playerid][pUID]), role);
-	return role;
+	return RedisGetInt(sprintf("player:%d:smuggling:role", PlayerInfo[playerid][pUID]));
 }
 
 stock GetSmugglingItemFromString(str[])
@@ -90,11 +86,11 @@ RedisStartSmuggling(UID, redisActionID, role)
 	new redisKey[64];
 	format(redisKey, sizeof(redisKey), "player:%d:smuggling", UID);
 	Redis_SetInt(RedisClient, redisKey, redisActionID);
-	Redis_Expire(redisKey, SMUGGLING_MAX_TIME/1000);
+	RedisExpire(redisKey, SMUGGLING_MAX_TIME/1000);
 
 	format(redisKey, sizeof(redisKey), "player:%d:smuggling:role", UID);
 	Redis_SetInt(RedisClient, redisKey, role);
-	Redis_Expire(redisKey, SMUGGLING_MAX_TIME/1000);
+	RedisExpire(redisKey, SMUGGLING_MAX_TIME/1000);
 }
 
 StartSmuggling(playerid)
@@ -108,11 +104,10 @@ StartSmuggling(playerid)
 	y = GetPVarFloat(playerid, "smuggling-y");
 	z = GetPVarFloat(playerid, "smuggling-z");
 	
-	new redisActionID;
-	Redis_GetInt(RedisClient, "smuggling:index", redisActionID);
+	new redisActionID = RedisGetInt("smuggling:index");
 	Redis_SetInt(RedisClient, "smuggling:index", redisActionID+1);
 	Redis_SetInt(RedisClient, sprintf("smuggling:%d:stage", redisActionID), SMUGGLING_STAGE_PICKUP);
-	Redis_Expire(sprintf("smuggling:%d:stage", redisActionID), 3600); // 1 hour
+	RedisExpire(sprintf("smuggling:%d:stage", redisActionID), 3600); // 1 hour
 	
 	// fill up smuggling action data
 	SmugglingAction[actionID][s_actionID] = redisActionID;
@@ -409,8 +404,8 @@ EndSmuggling(actionID)
 
 	foreach(new i : GroupMember(SmugglingAction[actionID][s_crewGroup]))
 	{
-		Redis_Delete(sprintf("player:%d:smuggling", PlayerInfo[i][pUID]));
-		Redis_Delete(sprintf("player:%d:smuggling:role", PlayerInfo[i][pUID]));
+		RedisDelete(sprintf("player:%d:smuggling", PlayerInfo[i][pUID]));
+		RedisDelete(sprintf("player:%d:smuggling:role", PlayerInfo[i][pUID]));
 		DisablePlayerCheckpoint(i);
 	}
 
@@ -480,12 +475,12 @@ CreateAndGiveSmugglingItem(playerid, smugglerid, item)
 
 GiveSmugglingItem(playerid, item, ammount=1)
 {
-	Redis_IncrBy(sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), ammount);
+	RedisIncrBy(sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), ammount);
 }
 
 TakeSmugglingItem(playerid, item, ammount=1)
 {
-	Redis_IncrBy(sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), -ammount);
+	RedisIncrBy(sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), -ammount);
 }
 
 SetSmugglingItem(playerid, item, ammount)
@@ -495,10 +490,7 @@ SetSmugglingItem(playerid, item, ammount)
 
 GetPlayerSmugglingItem(playerid, item)
 {
-	new value = 0;
-	new redisdebug = Redis_GetInt(RedisClient, sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), value);
-	printf("debug redis, playerid: %d, item: %d, value: %d, redisdebug: %d", playerid, item, value, redisdebug);
-	printf("debug redis, key: %s", sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]));
+	new value = RedisGetInt(sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]));
 	if(value > 0)
 	{
 		return value;

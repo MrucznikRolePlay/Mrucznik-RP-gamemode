@@ -50,8 +50,8 @@ command_anuluj_Impl(playerid, params[256])
 		if(actionID != -1)
 		{
 			Group_SetPlayer(SmugglingAction[actionID][s_crewGroup], playerid, false);
-			Redis_Delete(sprintf("player:%d:smuggling", PlayerInfo[playerid][pUID]));
-			Redis_Delete(sprintf("player:%d:smuggling:role", PlayerInfo[playerid][pUID]));
+			RedisDelete(sprintf("player:%d:smuggling", PlayerInfo[playerid][pUID]));
+			RedisDelete(sprintf("player:%d:smuggling:role", PlayerInfo[playerid][pUID]));
 			DisablePlayerCheckpoint(playerid);
 		}
 	}

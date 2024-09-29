@@ -45,11 +45,11 @@ LoadFrontBusinesses()
 
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "initialized"), 1);
 		}
-		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "takeoverHour"), FrontBusiness[i][TakeoverHour]);
-		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "takeoverMinute"), FrontBusiness[i][TakeoverMinute]);
-		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "takeoverTime"),  FrontBusiness[i][TakeoverTime]);
-		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "color"), FrontBusiness[i][BizColor]);
-		Redis_GetInt(RedisClient, RedisFrontBizKey(i, "owner"), FrontBusiness[i][Owner]);
+		FrontBusiness[i][TakeoverHour] = RedisGetInt(RedisFrontBizKey(i, "takeoverHour"));
+		FrontBusiness[i][TakeoverMinute] = RedisGetInt(RedisFrontBizKey(i, "takeoverMinute"));
+		FrontBusiness[i][TakeoverTime] = RedisGetInt(RedisFrontBizKey(i, "takeoverTime"));
+		FrontBusiness[i][BizColor] = RedisGetInt(RedisFrontBizKey(i, "color"));
+		FrontBusiness[i][Owner] = RedisGetInt(RedisFrontBizKey(i, "owner"));
 
 		MruCreateDynamicMapIcon(FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
 			GetFrontBusinessIcon(FrontBusiness[i][Type]),

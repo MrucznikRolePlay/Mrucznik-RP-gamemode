@@ -5184,10 +5184,7 @@ public OnPlayerText(playerid, text[])
 		        return 0;
 		    }
 
-			new contractsDone;
-			new redisKey[40];
-			format(redisKey, sizeof(redisKey), "player:%d:contracts-done", PlayerInfo[playerid][pUID]);
-			Redis_GetInt(RedisClient, redisKey, contractsDone);
+			new contractsDone = RedisGetInt(sprintf("player:%d:contracts-done", PlayerInfo[playerid][pUID]));
 			if(contractsDone <= 0)
 			{
 		        SendClientMessage(playerid, COLOR_GREY, "Nie wykona³eœ ¿adnego kontraktu! Aby dostaæ paczkê z broni¹, musisz zas³u¿yæ siê dla Hitman Agency i wykonaæ kontrakt.");

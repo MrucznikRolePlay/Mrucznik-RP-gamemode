@@ -1175,7 +1175,7 @@ DisableVehicleRadio(vehicleid)
     new vehicleUID = VehicleUID[vehicleid][vUID];
     if(vehicleUID > 0)
     {
-        Redis_Delete(RedisGetRadioKey(vehicleUID));
+        RedisDelete(RedisGetRadioKey(vehicleUID));
     }
 }
 

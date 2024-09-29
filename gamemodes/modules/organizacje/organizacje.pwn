@@ -153,28 +153,22 @@ AccountOrgsCosts()
 
 AccountOrgBenefitForPlayerUID(playerUID, org, benefit)
 {
-    Redis_IncrBy(sprintf("player:%d:org:%d:benefit", playerUID, org), benefit);
+    RedisIncrBy(sprintf("player:%d:org:%d:benefit", playerUID, org), benefit);
 }
 
 GetPlayerOrgBenefit(playerUID, org)
 {
-    new benefit;
-    Redis_GetInt(RedisClient, sprintf("player:%d:org:%d:benefit", playerUID, org), benefit);
-    return benefit;
+    return RedisGetInt(sprintf("player:%d:org:%d:benefit", playerUID, org));
 }
 
 GetPlayerTakeoverPoints(playerUID, org)
 {
-    new points;
-    Redis_GetInt(RedisClient, sprintf("player:%d:org:%d:takeoverPoints", playerUID, org), points);
-    return points;
+    return RedisGetInt(sprintf("player:%d:org:%d:takeoverPoints", playerUID, org));
 }
 
 IncrPlayerTakeoverPoints(playerid, org, value=1)
 {
-    new points;
-    Redis_IncrBy(sprintf("player:%d:org:%d:takeoverPoints", PlayerInfo[playerid][pUID], org), value);
-    return points;
+    RedisIncrBy(sprintf("player:%d:org:%d:takeoverPoints", PlayerInfo[playerid][pUID], org), value);
 }
 
 IsActiveOrg(id)
@@ -349,8 +343,8 @@ GivePlayerOrgGun(playerid)
 
 ResetPlayerOrgStatistics(playerid)
 {
-    Redis_Delete(sprintf("player:%d:org:%d:benefit", PlayerInfo[playerid][pUID], GetPlayerOrg(playerid)));
-    Redis_Delete(sprintf("player:%d:org:%d:takeoverPoints", PlayerInfo[playerid][pUID], GetPlayerOrg(playerid)));
+    RedisDelete(sprintf("player:%d:org:%d:benefit", PlayerInfo[playerid][pUID], GetPlayerOrg(playerid)));
+    RedisDelete(sprintf("player:%d:org:%d:takeoverPoints", PlayerInfo[playerid][pUID], GetPlayerOrg(playerid)));
 }
 
 //-----------------<[ Timery: ]>-------------------
