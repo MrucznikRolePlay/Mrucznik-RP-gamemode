@@ -1210,7 +1210,6 @@ CreateFakePayNSprayPickups()
 		CreateDynamic3DTextLabel("Naprawa pojazdu", COLOR_GREEN, 
 			FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2] + 0.5,
 			15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
-        MruCreateDynamicMapIcon(FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2], 63, -1, -1, -1, -1, 2000.0, MAPICON_GLOBAL);
     }
 }
 
