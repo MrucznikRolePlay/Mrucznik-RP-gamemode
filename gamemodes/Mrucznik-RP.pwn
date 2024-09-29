@@ -2298,7 +2298,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						default:
 						{ // Vice City
-							SetPlayerPos(playerid, -3970.3354, 972.6067, 6.5385);
+							SetPlayerPos(playerid, -3970.3354, 972.6067, 7.0385);
 							SetPlayerFacingAngle(playerid, 252.7065);
 							Wchodzenie(playerid);
 						}
@@ -2317,7 +2317,7 @@ SetPlayerSpawnPos(playerid)
 		            else
 		            {
 						SendClientMessage(playerid, COLOR_YELLOW, "Twoja organizacja nie ma jeszcza spawnu - spawnujesz siê jako cywil");
-						SetPlayerPos(playerid, -3970.3354, 972.6067, 6.5385); // Vice City motel
+						SetPlayerPos(playerid, -3970.3354, 972.6067, 7.0385); // Vice City motel
 					}
 				}
 				else if(PlayerInfo[playerid][pJob] > 0) //Spawn Prac
@@ -2378,7 +2378,7 @@ SetPlayerSpawnPos(playerid)
 						}
 						else
 						{ // Vice City
-							SetPlayerPos(playerid, -3970.3354, 972.6067, 6.5385); // Vice City motel
+							SetPlayerPos(playerid, -3970.3354, 972.6067, 7.0385); // Vice City motel
 							SetPlayerFacingAngle(playerid, 252.4531);
 							Wchodzenie(playerid);
 						}

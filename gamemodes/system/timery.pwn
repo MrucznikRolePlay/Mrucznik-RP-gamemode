@@ -2172,11 +2172,15 @@ public JednaSekundaTimer()
 
 			// decrease jet fuel
 			SetPVarInt(i, "jetpack-licznik", 1);
-			JetpackGas[i] --;
 			if(JetpackGas[i] <= 0)
 			{
+				if(JetpackEnabled[i]) 
+				{ // check so if player is afk there is no spam of messages
+					ChatDo(i, "Plecak odrzutowy przesta³ dzia³aæ z powodu braku paliwa.");
+				}
 				DisableJetpack(i);
-				ChatDo(i, "Plecak odrzutowy przesta³ dzia³aæ z powodu braku paliwa.");
+			} else {
+				JetpackGas[i] --;
 			}
 			OldCoordsX[i] = x; OldCoordsY[i] = y;
 		}
