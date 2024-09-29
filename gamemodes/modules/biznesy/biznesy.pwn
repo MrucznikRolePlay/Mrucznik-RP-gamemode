@@ -298,11 +298,6 @@ stock CorrectPlayerBusiness(playerid)
 	{
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
-
-		/*sendErrorMessage(playerid, "Posiada³eœ b³êdny biznes - zosta³ on WYZEROWANY!");
-		sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d - zg³oœ to na naszym forum!"); 
-		Log(serverLog, ERROR, "%s wyzerowanie biznesu %d", GetPlayerLogName(playerid), PlayerInfo[playerid][pBusinessOwner]);
-		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;*/
 	}
 	if(PlayerInfo[playerid][pBusinessMember] == 0)
 	{
@@ -333,18 +328,6 @@ CheckPlayerBusiness(playerid)
 
 stock GetFreeBizID()
 {
-	/*new bID = BusinessLoaded+1; 
-	for(new i; i<BusinessLoaded; i++)
-	{
-		if(i != 0)
-		{
-			if(strlen(Business[i][b_Name]) <= 3)
-			{
-				bID = i; 
-				return bID; 
-			}
-		}
-	}*/ 
 	new bID = BusinessLoaded++; 
 	return bID; 
 }
@@ -356,6 +339,18 @@ stock LoadBusinessPickup()
 		{	
 			BizPickUp[i] = CreateDynamicPickup(1272, 1, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 0, 0 -1);
 			Biz3DText[i] = CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.6, 20.0);
+			if(Business[i][b_icon] != 0) 
+			{
+				MruCreateDynamicMapIcon(Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 
+					Business[i][b_icon], // type https://www.open.mp/docs/scripting/resources/mapicons
+					-1, // color, This should only be used with the square icon (ID: 0)
+					Business[i][b_vw], // worldid
+					Business[i][b_int], // interiorid
+					-1, // playerid
+					2000.0, // streamdistance -1 = inifnite
+					MAPICON_GLOBAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
+				);	
+			}
 		}
 	}
 	return 1;
@@ -378,6 +373,7 @@ stock UnLoadBusiness(idBIZ)
 	Business[idBIZ][b_pLocal] = 255; 
 	Business[idBIZ][b_maxMoney] = 0;
 	Business[idBIZ][b_cost] = 0;
+	Business[idBIZ][b_icon] = 0;
 	format(stringName, sizeof(stringName), " ");
 	Business[idBIZ][b_Location] = stringName; 
 	format(stringNamed, sizeof(stringNamed), " ");

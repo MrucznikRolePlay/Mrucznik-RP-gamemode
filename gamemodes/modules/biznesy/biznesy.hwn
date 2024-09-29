@@ -47,7 +47,8 @@ enum eBusiness {
 	b_maxMoney, 
 	b_Location[64],
 	b_cost,
-	b_moneyPocket
+	b_moneyPocket,
+	b_icon
 };
 new Business[MAX_BIZNES][eBusiness]; 
 

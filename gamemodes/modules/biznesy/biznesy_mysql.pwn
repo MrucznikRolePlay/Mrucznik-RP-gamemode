@@ -50,7 +50,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 	new CurrentBID = 1;
 	while(CurrentBID <= MAX_BIZNES)
 	{
-		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `enVw`, `enInt`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`";
+		lStr = "`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `enVw`, `enInt`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`, `Icon`";
 
 		format(lStr, 1024, "SELECT %s FROM `mru_business` WHERE `ID`='%d'", lStr, CurrentBID);
 		mysql_query(lStr);
@@ -58,7 +58,7 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 		if (mysql_num_rows())
 		{
 			mysql_fetch_row_format(lStr, "|");
-			sscanf(lStr, "p<|>dds[32]s[64]ffffffddddddds[64]d",
+			sscanf(lStr, "p<|>dds[32]s[64]ffffffddddddds[64]dd",
 			Business[CurrentBID][b_ID], 
 			Business[CurrentBID][b_ownerUID],
 			Business[CurrentBID][b_Name_Owner],
@@ -77,7 +77,8 @@ LoadBusiness()//?adowanie biznesów z bazy danych
 			Business[CurrentBID][b_maxMoney],
 			Business[CurrentBID][b_cost],
 			Business[CurrentBID][b_Location],
-			Business[CurrentBID][b_moneyPocket]);
+			Business[CurrentBID][b_moneyPocket],
+			Business[CurrentBID][b_icon]);
 
 			if(strlen(Business[CurrentBID][b_Name]) >= 3)
 			{
@@ -107,8 +108,8 @@ Create_BusinessMySQL(bus_ID)
 {
 	new query[1024];
 
-	format(query, sizeof(query), "INSERT INTO `mru_business` (`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`) VALUES\
-	('%d', '%d', '%s', '%s', '%f', '%f', '%f', '%f', '%f', '%f', '%d', '%d', '%d', '%d', '%d', '%s', '%d')", 
+	format(query, sizeof(query), "INSERT INTO `mru_business` (`ID`, `ownerUID`, `ownerName`, `Name`, `enX`, `enY`, `enZ`, `exX`, `exY`, `exZ`, `exVW`, `exINT`, `pLocal`, `Money`, `Cost`, `Location`, `MoneyPocket`, `Icon`) VALUES\
+	('%d', '%d', '%s', '%s', '%f', '%f', '%f', '%f', '%f', '%f', '%d', '%d', '%d', '%d', '%d', '%s', '%d', '%d')", 
 	bus_ID, 
 	Business[bus_ID][b_ownerUID],
 	Business[bus_ID][b_Name_Owner],
@@ -125,7 +126,8 @@ Create_BusinessMySQL(bus_ID)
 	Business[bus_ID][b_maxMoney],
 	Business[bus_ID][b_cost],
 	Business[bus_ID][b_Location],
-	Business[bus_ID][b_moneyPocket]);
+	Business[bus_ID][b_moneyPocket],
+	Business[bus_ID][b_icon]);
 
 	mysql_query(query);
 	return 1;

@@ -2982,22 +2982,13 @@ IsAtBankomat(playerid)
 
 IsAtClothShop(playerid)
 {
-    if(IsPlayerConnected(playerid))
+	for(new i; i < sizeof(ShopPickupsPos); i++)
 	{
-        if(PlayerToPoint(25.0,playerid,207.5627,-103.7291,1005.2578) || PlayerToPoint(25.0,playerid,203.9068,-41.0728,1001.8047))
-		{//Binco & Suburban
-		    return 1;
-		}
-		else if(PlayerToPoint(30.0,playerid,214.4470,-7.6471,1001.2109) || PlayerToPoint(50.0,playerid,161.3765,-83.8416,1001.8047))
-		{//Zip & Victim
+		if(PlayerToPoint(5.0,playerid,ShopPickupsPos[i][0],ShopPickupsPos[i][1],ShopPickupsPos[i][2]))
+		{
 			return 1;
-
 		}
-		else if(PlayerToPoint(50.0,playerid,206.4627,-137.7076,1003.0938))
-		{//pro laps
-		    return 1;
-		}
-	}
+	}	
 	return 0;
 }
 
