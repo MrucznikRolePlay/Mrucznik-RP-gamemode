@@ -2171,7 +2171,7 @@ public JednaSekundaTimer()
 			if(JetpackGas[i] <= 0)
 			{
 				DisableJetpack(i);
-				ChatDo(i, "plecak odrzutowy przesta³ dzia³aæ z powodu braku paliwa.");
+				ChatDo(i, "Plecak odrzutowy przesta³ dzia³aæ z powodu braku paliwa.");
 			}
 			OldCoordsX[i] = x; OldCoordsY[i] = y;
 		}
