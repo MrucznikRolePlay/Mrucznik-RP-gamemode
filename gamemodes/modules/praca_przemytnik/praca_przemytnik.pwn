@@ -497,12 +497,12 @@ GetPlayerSmugglingItem(playerid, item)
 {
 	new value = 0;
 	new redisdebug = Redis_GetInt(RedisClient, sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]), value);
+	printf("debug redis, playerid: %d, item: %d, value: %d, redisdebug: %d", playerid, item, value, redisdebug);
+	printf("debug redis, key: %s", sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]));
 	if(value > 0)
 	{
 		return value;
 	}
-	printf("debug redis, playerid: %d, item: %d, value: %d, redisdebug: %d", playerid, item, value, redisdebug);
-	printf("debug redis, key: %s", sprintf("player:%d:%s", PlayerInfo[playerid][pUID], SmugglingItemsData[item][ShortName]));
 	return 0;
 }
 

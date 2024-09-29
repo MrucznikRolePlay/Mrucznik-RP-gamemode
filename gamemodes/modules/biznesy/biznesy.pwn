@@ -338,9 +338,11 @@ stock LoadBusinessPickup()
 		if(strlen(Business[i][b_Name]) >= 3 && Business[i][b_enX] != 0.0 && Business[i][b_enY] != 0.0)
 		{	
 			BizPickUp[i] = CreateDynamicPickup(1272, 1, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], Business[i][b_enVw], Business[i][b_enInt]);
-			Biz3DText[i] = CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.6, 20.0,
-				-1, -1, 0, Business[i][b_enVw], Business[i][b_enInt]);
-			if(Business[i][b_icon] != 0) 
+			Biz3DText[i] = CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, 
+				Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.6, 
+				20.0, -1, -1, 0, 
+				Business[i][b_enVw], Business[i][b_enInt]);
+			if(Business[i][b_icon] != 0)
 			{
 				new iconVw, iconInt;
 				if(Business[i][b_enVw] != 0)
@@ -351,6 +353,7 @@ stock LoadBusinessPickup()
 				{
 					iconInt = -1;
 				}
+				
 				MruCreateDynamicMapIcon(Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 
 					Business[i][b_icon], // type https://www.open.mp/docs/scripting/resources/mapicons
 					-1, // color, This should only be used with the square icon (ID: 0)
