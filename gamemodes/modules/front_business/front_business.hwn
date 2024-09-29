@@ -37,7 +37,7 @@ enum BIZ_TYPE {
 new FrontBusinessType[BIZ_TYPE][32] = {
     "Biznes",
     "Gunshop",
-	"Tor wyœcigowy",
+	"Tor wyscigowy",
 	"Restauracja",
 	"Klub",
 	"Klub jachtowy",
@@ -213,7 +213,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         100, 200 // hajs
     },
     {
-        "Rockstar Casino", FRONT_BIZ_TYPE_RACE,  
+        "Rockstar Casino", FRONT_BIZ_TYPE_CASINO,  
         -4757.4282,3420.2366,5.7971, 0, 0, // wejœcie
         2233.93,1711.80,1011.63, 1, FRONT_BUSINESS_VW, // wyjœcie
         -4735.3853,3448.8762,2.0027, 0, 0, // przejmowanie
@@ -229,14 +229,14 @@ new FrontBusiness[][eFrontBusinessInfo] = {
     {
         "Pay 'n' Spray Vice Point", FRONT_BIZ_TYPE_SPRAY,  
         -3870.9456,2687.8132,5.7383, 0, 0, // wejœcie
-        612.21,-123.90,997.99, 2, FRONT_BUSINESS_VW+1, // wyjœcie
+        612.21,-123.90,997.99, 3, FRONT_BUSINESS_VW+1, // wyjœcie
         -3909.0776,2714.0652,4.4578, 0, 0, // przejmowanie
         100, 200 // hajs
     },
     {
         "Pay 'n' Spray Vice Port", FRONT_BIZ_TYPE_SPRAY,  
         -5104.7036,981.4591,6.2644, 0, 0, // wejœcie
-        612.21,-123.90,997.99, 2, FRONT_BUSINESS_VW+2, // wyjœcie
+        612.21,-123.90,997.99, 3, FRONT_BUSINESS_VW+2, // wyjœcie
         -5079.3208,992.8764,6.1893, 0, 0, // przejmowanie
         100, 200 // hajs
     },
