@@ -39,7 +39,7 @@ command_createconvoybox_Impl(playerid)
     if(IsPlayerInAnyVehicle(playerid)) {
         boxid = DropBoxFromCar(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, GetPlayerVehicleID(playerid));
     } else {
-        boxid = CreateBox(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, x, y, z-BOX_ONFOOT_Z_OFFSET, GetPlayerInterior(playerid), GetPlayerVirtualWorld(playerid), ang);
+        boxid = CreateBox(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, x, y, z-0.7, GetPlayerInterior(playerid), GetPlayerVirtualWorld(playerid), ang);
     }
     if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
     SendClientMessage(playerid, -1, sprintf("Stworzy³eœ box o id %d", boxid));

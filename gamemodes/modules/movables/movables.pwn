@@ -131,7 +131,7 @@ timer AfterDropBox[113](playerid, boxid, Float:x, Float:y, Float:z, Float:angle,
 {
 	if(Boxes[boxid][box_used])
 	{
-		Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_model], x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, angle, vw, int);
+		Boxes[boxid][box_object] = CreateDynamicObject(Boxes[boxid][box_model], x, y, z, 0.0, 0.0, angle, vw, int);
 		Streamer_Update(playerid);
 	}
 
@@ -177,7 +177,10 @@ DropBoxFromCar(objectid, type, value, carid)
 	GetPosBehindVehicle(carid, x, y, z);
 	GetVehicleZAngle(carid, angle);
 
-	return CreateBox(objectid, type, value, x, y, z-BOX_VEHICLE_Z_OFFSET, 0, 0, angle);
+	CA_FindZ_For2DCoord(x, y, z);
+	z += GetColSphereRadius(objectid) * 2.0 - 0.1;
+
+	return CreateBox(objectid, type, value, x, y, z, 0, 0, angle);
 }
 
 //-----------------<[ 3rd party: ]>-------------------

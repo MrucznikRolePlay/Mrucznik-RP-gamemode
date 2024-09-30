@@ -24,8 +24,6 @@
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
 #define MAX_MOVABLES 1000
-#define BOX_ONFOOT_Z_OFFSET 0.7
-#define BOX_VEHICLE_Z_OFFSET 0.85
 
 #define DMG_CHANCE 20
 #define AVG_DMG_PER_SHOT 20

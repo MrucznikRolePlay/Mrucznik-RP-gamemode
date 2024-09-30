@@ -521,7 +521,6 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 		}
 
 		PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
-		SendClientMessage(playerid, 0xFFFFFFFF, sprintf("hit %f %f %f", x, y, z));
 		defer DeferedDestroyObject(CreateDynamicObject(18680, x, y, z-1.0, 0.0, 0.0, float(random(360)), GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid)));
 		Streamer_Update(playerid);
 	}
@@ -537,12 +536,27 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 		return;
 	}
 
-	// drop box with 0.1% chance
-	new rand = random(2);
+	new driverid = INVALID_PLAYER_ID;
+    foreach(new i : NPC)
+	{
+		if(IsPlayerNPC(i) && IsPlayerInVehicle(i, vehicleid))
+		{
+			driverid = i;
+		}
+	}
+	
+	if(driverid == INVALID_PLAYER_ID)
+	{
+		return;
+	}
+	
+	new Float:x, Float:y, Float:z, Float:hp;
+	GetVehiclePos(vehicleid, x, y, z);
+
+	// drop box with 0.5% chance
+	new rand = random(200);
 	if(rand < 1)
 	{
-		new Float:x, Float:y, Float:z, Float:hp;
-		GetVehiclePos(vehicleid, x, y, z);
 		GetVehicleHealth(vehicleid, hp);
 		SetVehicleHealth(vehicleid, hp-200.0);
 		
@@ -552,6 +566,11 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 			MruMessageGoodInfo(playerid, "Trafi³eœ w ³ódŸ przemytników! Wypad³a z niej ma³a paczka kontrabandy.");
 		}
 		BotSmugglingPackages--;
+		PlayerPlaySound(playerid, 31205, x, y, z);
+	}
+	else
+	{
+		PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
 	}
 }
 
