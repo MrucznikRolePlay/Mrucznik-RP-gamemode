@@ -112,12 +112,12 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Mechanik
         {"Mechanik - Los Santos", 2794.5515,-1619.3689,10.9219, 80.0, 0, 0, false},
-        {"Mechanik - Vice City", -5212.8700, 1388.2000, 7.6, 128.0, 0, 0, true}, // TODO: spawn w salonie
+        {"Mechanik - Vice City", -5212.8700, 1388.2000, 7.6, 128.0, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Przemytnik
         {"Przemytnik - Los Santos", 2207.4038, -1725.1147, 13.4060, 0.0, 0, 0, false},
-        {"Przemytnik - Vice City", -4486.4687, 512.6531, 5.3266, 270.6958, 0, 0, true}, // TODO: spawn gdzie indziej niz praca
+        {"Przemytnik - Vice City", -4486.4687, 512.6531, 5.3266, 270.6958, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Diler broni
@@ -132,13 +132,13 @@ new JobSpawns[Jobs][MAX_JOB_SPAWNS][eJobSpawn] = {
     },
     { // Lekarz
         {"Lekarz - Los Santos", 2025.4443, -1423.2101, 16.9922, 133.0, 0, 0, false},
-        {"Lekarz - Vice City Ocean Beach", -4339.7000, 1271.3736, 4.9212, 279.7419, 0, 0, true}, // TODO: spawn gdzie indziej niz praca
-        {"Lekarz - Vice City Downtown", -5023.0557, 3399.7706, 6.8687, 2.9617, 0, 0, true}, // TODO: spawn gdzie indziej niz praca
+        {"Lekarz - Vice City Ocean Beach", -4339.7000, 1271.3736, 4.9212, 279.7419, 0, 0, true},
+        {"Lekarz - Vice City Downtown", -5023.0557, 3399.7706, 6.8687, 2.9617, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // Bokser
         {"Bokser - Los Santos", 766.0804, 14.5133, 1000.7004, 0.0, 5, 0, false},
-        {"Bokser - Vice City", -5314.5696, 1553.3948, 6.2530, 6.4954, 0, 0, true}, // TODO: spawn gdzie indziej niz praca
+        {"Bokser - Vice City", -5314.5696, 1553.3948, 6.2530, 6.4954, 0, 0, true},
         {"", 0.0, 0.0, 0.0, 0.0, 0, 0, false}, ...
     },
     { // reserved 1

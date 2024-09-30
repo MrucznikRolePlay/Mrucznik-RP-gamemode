@@ -134,7 +134,7 @@ new Float:SkimmerDroppingCheckpoints[][3] = {
 };
 
 new Float:SmugglersHole[3] = {
-    -4486.4687, 512.6531, 5.3266 // TODO: gdzie ma byc dziupla przemytnicza?
+    -4486.4687, 512.6531, 5.3266
 };
 
 new SmugglingActionsCount;

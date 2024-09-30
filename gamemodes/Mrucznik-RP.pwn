@@ -1023,7 +1023,7 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		return JailDeMorgan(playerid);
 	}
 	// Zapobieganie wsiadania do pojazdu podczas BW:							
-	if(!isPlayerCuffed[playerid] && (PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0)) //TODO: inna animacja dla bw
+	if(!isPlayerCuffed[playerid] && (PlayerInfo[playerid][pInjury] > 0 || PlayerInfo[playerid][pBW] > 0))
 	{
 		PlayerEnterVehOnInjury(playerid);
 		return FreezePlayerOnInjury(playerid);
@@ -1803,7 +1803,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 	);
 	DeathAdminWarning(playerid, killerid, reason);
 
-	// save player death pos, TODO: is this needed?
+	// save player death pos
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 
 	// bomboox

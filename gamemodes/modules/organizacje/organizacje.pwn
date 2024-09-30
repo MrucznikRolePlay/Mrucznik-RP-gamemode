@@ -69,9 +69,9 @@ CreateOrganisation(org, name[], color)
     format(OrgInfo[org][o_Name], MAX_ORG_NAME_LENGTH, name);
     format(OrgInfo[org][o_Motto], 128, "");
     OrgInfo[org][o_Color] = color << 8;
-    OrgInfo[org][o_Spawn][0] = 5229.6646; // TODO: change to little haiti
-    OrgInfo[org][o_Spawn][1] = -2227.3933;
-    OrgInfo[org][o_Spawn][2] = 6.5385;
+    OrgInfo[org][o_Spawn][0] = -5223.47;
+    OrgInfo[org][o_Spawn][1] = 2167.22;
+    OrgInfo[org][o_Spawn][2] = 5.3412;
     OrgInfo[org][o_Spawn][3] = 252.4531;
     OrgInfo[org][o_Int] = 0;
     OrgInfo[org][o_VW] = 0;

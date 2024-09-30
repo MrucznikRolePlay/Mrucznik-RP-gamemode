@@ -242,7 +242,6 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Akcja przemytnicza rozpoczê³a siê! Zbieraj paczki zrzucone z wodolotu i dostarczaj je do miejsca zboru.");
 	foreach(new i : GroupMember(SmugglingAction[actionID][s_crewGroup]))
 	{
-		SetPlayerMarkerForPlayer(i, playerid, TEAM_AZTECAS_COLOR); // TODO: disable when smuggling ends
 		CreateSmugglingGatherCheckpoint(i, actionID);
 	}
 	DisablePlayerCheckpoint(playerid);

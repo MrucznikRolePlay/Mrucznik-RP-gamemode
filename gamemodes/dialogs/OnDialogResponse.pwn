@@ -1950,7 +1950,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-	else if(dialogid == iddialog[playerid]) //TODO: WTF
+	else if(dialogid == iddialog[playerid])
 	{
 		if(dialogid == 1)
 	    {

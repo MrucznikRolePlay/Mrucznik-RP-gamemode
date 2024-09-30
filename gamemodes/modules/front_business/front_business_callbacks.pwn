@@ -114,7 +114,6 @@ SendEnterTakeoverAreaMessage(playerid, bizId, org, isDefense)
 	}
 }
 
-// TODO: obs³u¿yæ przypadki, gdzie takeover w³¹cza siê podczas stania w kó³ku i gdy siê wy³¹czy - trzeba to zrobiæ jakoœ sprytniej
 FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)

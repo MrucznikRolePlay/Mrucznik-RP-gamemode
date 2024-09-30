@@ -50,6 +50,7 @@ LoadFrontBusinesses()
 		FrontBusiness[i][TakeoverTime] = RedisGetInt(RedisFrontBizKey(i, "takeoverTime"));
 		FrontBusiness[i][BizColor] = RedisGetInt(RedisFrontBizKey(i, "color"));
 		FrontBusiness[i][Owner] = RedisGetInt(RedisFrontBizKey(i, "owner"));
+		FrontBusiness[i][TakeoverArea] = -1;
 
 		MruCreateDynamicMapIcon(FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
 			GetFrontBusinessIcon(FrontBusiness[i][Type]),
@@ -70,9 +71,6 @@ LoadFrontBusinesses()
 
 		FrontBusiness[i][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
-		FrontBusiness[i][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[i][OutX], FrontBusiness[i][OutY], 
-			FrontBusiness[i][OutZ], FrontBusiness[i][OutZ] + 10, 
-			TAKEOVER_ZONE_SIZE, FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 
 		CreateDynamicPickup(GetFrontBusinessPickup(FrontBusiness[i][Type]), 1, 
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ],
@@ -106,12 +104,18 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
 		20.0, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
 		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][GangZoneArea]);
+	
+	FrontBusiness[bizId][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], 
+		FrontBusiness[bizId][OutZ], FrontBusiness[bizId][OutZ] + 10, 
+		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][OutVw], FrontBusiness[bizId][OutInt]);
 }
 
 StopFrontBizTakeover(bizId)
 {
 	FrontBusiness[bizId][TakeoverActive] = false;
 	DestroyDynamicCP(FrontBusiness[bizId][TakeoverCheckpoint]);
+	DestroyDynamicArea(FrontBusiness[bizId][TakeoverArea]);
+	FrontBusiness[bizId][TakeoverArea] = -1;
 
 	new winner = -1, maxScore;
 	for(new i; i<MAX_ORG; i++)
@@ -301,7 +305,7 @@ ShowFrontBusinessInfo(playerid, bizId)
 	new hour, minute, endHour, endMinute;
 	GetOrgTakeoverTimeWindow(bizId, hour, minute, endHour, endMinute);
 
-	new string[1024]; // TODO: rozszerzyc textdraw
+	new string[1024];
 	format(string, sizeof(string), "Biznes: ~g~~h~%s~n~" \
 		"Typ biznesu: ~g~~h~%s~n~" \
 		"Wlasciciel: ~n~  %s~n~" \
