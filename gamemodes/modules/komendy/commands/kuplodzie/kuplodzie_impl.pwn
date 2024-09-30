@@ -26,8 +26,8 @@
 command_kuplodzie_Impl(playerid)
 {
     if(IsPlayerInRangeOfPoint(playerid, 5.0, 857.3464,-2100.0881,9.8666) || 
-	IsPlayerInRangeOfPoint(playerid, 5.0, 4769.6387,-2250.5742,8.5730) || 
-	IsPlayerInRangeOfPoint(playerid, 5.0, 4358.7139,-2435.2607,13.2627))
+	IsPlayerInRangeOfPoint(playerid, 5.0, -4430.3613, 949.4258, 3.5730) || // Vice City Beach
+	IsPlayerInRangeOfPoint(playerid, 5.0, -4841.2861, 764.7393, 8.2627)) // Vice City Doki
     {
 		if(IsPlayerInAnyVehicle(playerid))
 		{

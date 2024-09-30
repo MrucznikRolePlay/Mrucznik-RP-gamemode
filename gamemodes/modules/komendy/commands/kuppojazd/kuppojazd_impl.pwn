@@ -30,11 +30,12 @@ command_kuppojazd_Impl(playerid)
 		sendErrorMessage(playerid, "Aby tego u¿yæ musisz wyjœæ z pojazdu"); 
 		return 1;
 	}
-    if(PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372) || PlayerToPoint(10.0, playerid, 3965.4802,-1796.3794,12.5452))
+    if(PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372) || 
+		PlayerToPoint(10.0, playerid, -5234.5198, 1403.6206, 7.5452)) // Vice City Sunshine Autos
     {
         ShowPlayerDialogEx(playerid, 440, DIALOG_STYLE_LIST, "Wybierz kategoriê kupowanego pojazdu", "Samochody sportowe\nSamochody osobowe\nSamochody luksusowe\nSamochody terenowe\nPick-up`y\nKabriolety\nLowridery\nNa ka¿d¹ kieszeñ\nMotory\nInne pojazdy", "Wybierz", "WyjdŸ");
 	}
-	else if(PlayerToPoint(10.0, playerid, 4397.9204,-278.1076,10.5407))
+	else if(PlayerToPoint(10.0, playerid, -4802.0796, 2921.8924, 5.5407)) // Vice City
 	{
 		SetPVarInt(playerid, "kupuje-motor", 1);
 		ShowPlayerDialogEx(playerid, 458, DIALOG_STYLE_LIST, 

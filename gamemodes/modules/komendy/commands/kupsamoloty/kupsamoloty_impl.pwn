@@ -25,8 +25,8 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kupsamoloty_Impl(playerid)
 {
-    if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392) ||
-		IsPlayerInRangeOfPoint(playerid, 5.0, 3314.7239,-1883.0383,14.3252))//kupowanie samolotu
+    if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392) || // Kupowanie samolotów Los Santos
+		IsPlayerInRangeOfPoint(playerid, 5.0, -5885.2761, 1316.9617, 9.3252)) // Kupowanie samolotów Vice City
     {
 		if(IsPlayerInAnyVehicle(playerid))
 		{

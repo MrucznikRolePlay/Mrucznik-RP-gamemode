@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kupwodolot_Impl(playerid)
 {
-    if(!IsPlayerInRangeOfPoint(playerid, 5.0, 4703.3, -2687.7, 5.32))
+    if(!IsPlayerInRangeOfPoint(playerid, 5.0, -4496.7000, 512.3000, 5.32))
     {
         MruMessageFail(playerid, "Musisz byæ w domu na wodzie, gdzie kupuje siê wodoloty.");
         return 1;

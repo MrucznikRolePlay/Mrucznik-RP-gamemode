@@ -25,8 +25,8 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kuphelikopter_Impl(playerid)
 {
-    if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392) ||
-		IsPlayerInRangeOfPoint(playerid, 5.0, 3314.7239,-1883.0383,14.3252))//kupowanie heli
+    if(IsPlayerInRangeOfPoint(playerid, 5.0, -1262.5095,40.3263,14.1392) || // Kupowanie helikopterów Los Santos
+		IsPlayerInRangeOfPoint(playerid, 5.0, -5885.2761, 1316.9617, 9.3252)) // Kupowanie helikopterów Vice City
     {
 		if(IsPlayerInAnyVehicle(playerid))
 		{

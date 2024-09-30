@@ -2071,6 +2071,14 @@ public JednaSekundaTimer()
 	{
 		if(IsPlayerNPC(i))
 		{
+			if(strcmp(GetNick(i), "Bot_Przemytnik", true) == 0)
+			{
+				// TODO: wrzuæ do ³odzi
+			}
+			if(strcmp(GetNick(i), "Bot_Przemytniczy", true) == 0)
+			{
+				// TODO: wrzuæ do ³odzi
+			}
 			continue;
 		}
         if(!IsPlayerConnected(i)) continue;

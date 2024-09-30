@@ -1097,6 +1097,13 @@ public OnPlayerConnect(playerid)
 		}
 		return 1;
 	}
+	else
+	{
+		if(strcmp(GetNick(playerid), "Bot_Przemytnik", true) == 0 || strcmp(GetNick(playerid), "Bot_Przemytniczy", true) == 0)
+		{
+			Kick(playerid);
+		}
+	}
 
 	BottomBar(playerid, 0);
 	LoadingShow(playerid);
