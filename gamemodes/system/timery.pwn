@@ -2071,7 +2071,7 @@ public JednaSekundaTimer()
 	{
 		if(IsPlayerNPC(i))
 		{
-			if(BotSmugglingPackages > 0 && IsPlayerInAnyVehicle(i))
+			if(BotSmugglingPackages > 0 && !IsPlayerInAnyVehicle(i))
 			{
 				if(strcmp(GetNick(i), "Bot_Przemytnik", true) == 0)
 				{
