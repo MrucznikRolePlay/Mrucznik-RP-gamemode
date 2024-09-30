@@ -526,6 +526,7 @@
 #define RENT_CAR        1
 #define GO_KART         2
 #define CAR_ZUZEL       3
+#define CAR_SMUGGLING   4
 
 #define CAR_SAVE_OWNER      1
 #define CAR_SAVE_STATE      2

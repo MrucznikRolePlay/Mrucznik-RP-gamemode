@@ -141,6 +141,9 @@ new SmugglingActionsCount;
 
 new JetpackEnabled[MAX_PLAYERS];
 
+new BotSmugglingPackages = 10;
+new SmugglingBoat;
+
 //------------------<[ Forwardy: ]>--------------------
 
 //end

@@ -344,6 +344,7 @@ public OnGameModeInit()
     //30.10
     TJD_Load();
     Car_Load(); //Wszystkie pojazdy MySQL
+	Przemyt_OnGameModeInit(); // koniecznie pod Cars_Load();
 
     //noYsi
     LoadPrzewinienia();
@@ -656,7 +657,13 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 		}
 		case BULLET_HIT_TYPE_VEHICLE:
 		{
-			//else
+			if(hitid != INVALID_VEHICLE_ID)
+			{
+				if(Car_GetOwnerType(hitid) == CAR_OWNER_SPECIAL && Car_GetOwner(hitid) == CAR_SMUGGLING)
+				{
+					OnPlayerShootSmugglingBoat(playerid, hitid);
+				}
+			}
 		}
 		case BULLET_HIT_TYPE_OBJECT:
 		{

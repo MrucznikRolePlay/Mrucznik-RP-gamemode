@@ -529,6 +529,32 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 	return 1;
 }
 
+OnPlayerShootSmugglingBoat(playerid, vehicleid)
+{
+	if(BotSmugglingPackages <= 0)
+	{
+		SetVehicleHealth(vehicleid, 20.0);
+		return;
+	}
+
+	// drop box with 0.1% chance
+	new rand = random(2);
+	if(rand < 1)
+	{
+		new Float:x, Float:y, Float:z, Float:hp;
+		GetVehiclePos(vehicleid, x, y, z);
+		GetVehicleHealth(vehicleid, hp);
+		SetVehicleHealth(vehicleid, hp-200.0);
+		
+		new boxid = DropBoxFromCar(1580, BOX_TYPE_CONTRABAND, random(6), vehicleid); 
+		if(boxid != -1)
+		{
+			MruMessageGoodInfo(playerid, "Trafi³eœ w ³ódŸ przemytników! Wypad³a z niej ma³a paczka kontrabandy.");
+		}
+		BotSmugglingPackages--;
+	}
+}
+
 hook OnPlayerDisconnect(playerid, reason)
 {
 	if(JetpackGas[playerid] > 0)
@@ -536,6 +562,11 @@ hook OnPlayerDisconnect(playerid, reason)
 		SetSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS, JetpackGas[playerid]);
 	}
 	return 1;
+}
+
+Przemyt_OnGameModeInit()
+{
+	SmugglingBoat = Car_GetIDXFromUID(2477);
 }
 
 //end
