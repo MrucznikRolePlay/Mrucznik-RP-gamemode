@@ -247,6 +247,18 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	}
 	DisablePlayerCheckpoint(playerid);
 	DisablePlayerCheckpoint(driverid);
+
+	// Komunikaty dla ³owców
+	SendJobMessage(JOB_LOWCA, COLOR_RED, "|___________ KOMUNIKAT £OWCÓW NAGRÓD ___________|");
+	SendJobMessage(JOB_LOWCA, COLOR_RED, "UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
+	SendJobMessage(JOB_LOWCA, COLOR_RED, "|_______________________________________________|");
+	// Komunikat dla porz¹dkowych
+	for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
+	{
+		SendFamilyMessage(FRAC_LSPD, COLOR_RED, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
+		SendFamilyMessage(FRAC_LSPD, COLOR_RED, "UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
+		SendFamilyMessage(FRAC_LSPD, COLOR_RED, "|__________________________________________________|");
+	}
 }
 
 ShowSmugglingCheckpoint(playerid, actionID)

@@ -93,6 +93,18 @@ command_zrzut_Impl(playerid)
         SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_GATHER;
         MruMessageGoodInfo(playerid, "To by³a ostatnia paczka kontrabandy, teraz udaj siê do punktu zboru i czekaj a¿ Twoi wspólnicy zbior¹ wszystkie paczki.");
         SendSmugglingCrewMessage(playerid, TEAM_AZTECAS_COLOR, sprintf("%s zrzuci³ ostatni¹ paczkê z kontraband¹.", GetNick(playerid)));
+
+        // Komunikaty dla ³owców
+        SendJobMessage(JOB_LOWCA, COLOR_RED, "|___________ KOMUNIKAT £OWCÓW NAGRÓD ___________|");
+        SendJobMessage(JOB_LOWCA, COLOR_RED, "Ktoœ zrzuci³ paczki z kontraband¹ na wyspê Vice City Beach, zniszcz je i otrzymaj nagrodê!");
+        SendJobMessage(JOB_LOWCA, COLOR_RED, "|_______________________________________________|");
+        // Komunikat dla porz¹dkowych
+        for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
+        {
+            SendFamilyMessage(FRAC_LSPD, COLOR_RED, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
+            SendFamilyMessage(FRAC_LSPD, COLOR_RED, "Ktoœ zrzuci³ paczki z kontraband¹ na wyspê Vice City Beach, zniszcz je i otrzymaj premiê!");
+            SendFamilyMessage(FRAC_LSPD, COLOR_RED, "|__________________________________________________|");
+        }
     }
     else 
     {
