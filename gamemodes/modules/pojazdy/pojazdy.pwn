@@ -342,6 +342,13 @@ Car_Load()
 			else if(CarData[i][c_Model] == 560)
 				PDTuneSultan(vid);
 		}
+        else if(CarData[i][c_Siren] == 2)
+        {
+            if(CarData[i][c_Model] == 446) // squallo przemytnicze
+            {
+                SmugglersSquallo(vid);
+            }
+        }
         //Opis dla pojazdów z wypo¿yczalni
         if(CarData[i][c_OwnerType] == CAR_OWNER_SPECIAL && CarData[i][c_Owner] == RENT_CAR)
         {

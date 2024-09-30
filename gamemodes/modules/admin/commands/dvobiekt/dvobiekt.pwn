@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ah                                                    //
+//                                                  dvobiekt                                                 //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,16 +28,14 @@
 
 
 //-------<[ include ]>-------
-#include "ah_impl.pwn"
+#include "dvobiekt_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_ah()
+command_dvobiekt()
 {
-    new command = Command_GetID("ah");
+    new command = Command_GetID("dvobiekt");
 
     //aliases
-    Command_AddAlt(command, "adminhelp");
-    Command_AddAlt(command, "adminpomoc");
     
 
     //permissions
@@ -49,15 +47,21 @@ command_ah()
 }
 
 //-------<[ command ]>-------
-YCMD:ah(playerid, params[], help)
+YCMD:dvobiekt(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "");
+        sendTipMessage(playerid, "Przyczepia obiekt do pojazdu.");
+        return 1;
+    }
+    //fetching params
+    new model, vehicleid, Float:ox, Float:oy, Float:oz, Float:rx, Float:ry, Float:rz;
+    if(sscanf(params, "ddffffff", model, vehicleid, ox, oy, oz, rx, ry, rz))
+    {
+        sendTipMessage(playerid, "U¿yj /dvobiekt [model] [veh] [ox] [oy] [oz] [rx] [ry] [rz] ");
         return 1;
     }
     
-    
     //command body
-    return command_ah_Impl(playerid);
+    return command_dvobiekt_Impl(playerid, model, vehicleid, ox, oy, oz, rx, ry, rz);
 }

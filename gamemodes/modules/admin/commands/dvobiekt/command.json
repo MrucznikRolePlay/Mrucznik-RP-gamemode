@@ -1,0 +1,52 @@
+{
+    "name": "dvobiekt",
+    "description": "Przyczepia obiekt do pojazdu.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "model",
+            "description": "model"
+        },
+        {
+            "type": "integer",
+            "name": "vehicleid",
+            "description": "veh"
+        },
+        {
+            "type": "float",
+            "name": "ox",
+            "description": "ox"
+        },
+        {
+            "type": "float",
+            "name": "oy",
+            "description": "oy"
+        },
+        {
+            "type": "float",
+            "name": "oz",
+            "description": "oz"
+        },
+        {
+            "type": "float",
+            "name": "rx",
+            "description": "rx"
+        },
+        {
+            "type": "float",
+            "name": "ry",
+            "description": "ry"
+        },
+        {
+            "type": "float",
+            "name": "rz",
+            "description": "rz"
+        }
+    ],
+    "date": "30.09.2024"
+}

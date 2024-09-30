@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ah                                                    //
+//                                                createobject                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,16 +28,14 @@
 
 
 //-------<[ include ]>-------
-#include "ah_impl.pwn"
+#include "createobject_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_ah()
+command_createobject()
 {
-    new command = Command_GetID("ah");
+    new command = Command_GetID("createobject");
 
     //aliases
-    Command_AddAlt(command, "adminhelp");
-    Command_AddAlt(command, "adminpomoc");
     
 
     //permissions
@@ -49,15 +47,21 @@ command_ah()
 }
 
 //-------<[ command ]>-------
-YCMD:ah(playerid, params[], help)
+YCMD:createobject(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "");
+        sendTipMessage(playerid, "Tworzenie obiektu.");
+        return 1;
+    }
+    //fetching params
+    new model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz;
+    if(sscanf(params, "dfffF(0.0)F(0.0)F(0.0)", model, x, y, z, rx, ry, rz))
+    {
+        sendTipMessage(playerid, "U¿yj /createobject [model] [x] [y] [z] [rx] [ry] [rz] ");
         return 1;
     }
     
-    
     //command body
-    return command_ah_Impl(playerid);
+    return command_createobject_Impl(playerid, model, x, y, z, rx, ry, rz);
 }

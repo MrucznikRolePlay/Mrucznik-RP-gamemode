@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ah                                                    //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                createobject                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,18 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 30.09.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "ah_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_ah()
+//------------------<[ Implementacja: ]>-------------------
+command_createobject_Impl(playerid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
 {
-    new command = Command_GetID("ah");
-
-    //aliases
-    Command_AddAlt(command, "adminhelp");
-    Command_AddAlt(command, "adminpomoc");
-    
-
-    //permissions
-    Group_SetCommand(Group_GetID("admini"), command, true);
-    
-
-    //prefix
-    
+    new obj = CreateDynamicObject(model, x, y, z, rx, ry, rz);
+    SendClientMessage(playerid, COLOR_WHITE, sprintf("Stworzono obiekt: %d", obj));
+    return 1;
 }
 
-//-------<[ command ]>-------
-YCMD:ah(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_ah_Impl(playerid);
-}
+//end

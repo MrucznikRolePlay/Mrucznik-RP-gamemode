@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                     ah                                                    //
+//                                               destroyobject                                               //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,16 +28,14 @@
 
 
 //-------<[ include ]>-------
-#include "ah_impl.pwn"
+#include "destroyobject_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_ah()
+command_destroyobject()
 {
-    new command = Command_GetID("ah");
+    new command = Command_GetID("destroyobject");
 
     //aliases
-    Command_AddAlt(command, "adminhelp");
-    Command_AddAlt(command, "adminpomoc");
     
 
     //permissions
@@ -49,15 +47,21 @@ command_ah()
 }
 
 //-------<[ command ]>-------
-YCMD:ah(playerid, params[], help)
+YCMD:destroyobject(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "");
+        sendTipMessage(playerid, "Niszczy obiekt.");
+        return 1;
+    }
+    //fetching params
+    new objectid;
+    if(sscanf(params, "d", objectid))
+    {
+        sendTipMessage(playerid, "U¿yj /destroyobject [objectid] ");
         return 1;
     }
     
-    
     //command body
-    return command_ah_Impl(playerid);
+    return command_destroyobject_Impl(playerid, objectid);
 }

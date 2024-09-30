@@ -512,7 +512,6 @@
 #include "goto\goto.pwn"
 #include "tablet\tablet.pwn"
 #include "odznaka\odznaka.pwn"
-#include "editobject\editobject.pwn"
 #include "og\og.pwn"
 #include "alarm\alarm.pwn"
 #include "kupsamoloty\kupsamoloty.pwn"
@@ -1099,7 +1098,6 @@ hook OnGameModeInit()
     command_goto();
     command_tablet();
     command_odznaka();
-    command_editobject();
     command_og();
     command_alarm();
     command_kupsamoloty();

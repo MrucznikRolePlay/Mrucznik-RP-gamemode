@@ -527,4 +527,9 @@ LegalJetpack(playerid)
 	return JetpackEnabled[playerid];
 }
 
+SmugglersSquallo(vehicleid)
+{
+	AttachDynamicObjectToVehicle(BOX_OBJECT, vehicleid, 2.0, 2.0, 2.0, 0.0, 0.0, 0.0);
+}
+
 //end

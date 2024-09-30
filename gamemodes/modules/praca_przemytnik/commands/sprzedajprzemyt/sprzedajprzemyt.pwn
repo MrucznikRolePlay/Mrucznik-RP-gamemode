@@ -62,6 +62,7 @@ YCMD:sprzedajprzemyt(playerid, params[], help)
     if(sscanf(params, "k<fix>s[32]d", giveplayerid, nazwa, price))
     {
         sendTipMessage(playerid, "U¿yj /sprzedajprzemyt [Nick/ID] [jetpack/pancerz] [cena] ");
+        sendTipMessage(playerid, "Dostêpne przedmioty: pancerz, jetpack, paliwo");
         return 1;
     }
     if(!IsPlayerConnected(giveplayerid))

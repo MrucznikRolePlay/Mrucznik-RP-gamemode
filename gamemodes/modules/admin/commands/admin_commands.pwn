@@ -34,8 +34,13 @@
 #include "setvregistration\setvregistration.pwn"
 #include "specshow\specshow.pwn"
 #include "dmvoff\dmvoff.pwn"
+#include "dvobiekt\dvobiekt.pwn"
 #include "zmienwiek\zmienwiek.pwn"
+#include "editobject\editobject.pwn"
+#include "dnobiekt\dnobiekt.pwn"
 #include "dmvon\dmvon.pwn"
+#include "destroyobject\destroyobject.pwn"
+#include "createobject\createobject.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -45,7 +50,12 @@ hook OnGameModeInit()
     command_setvregistration();
     command_specshow();
     command_dmvoff();
+    command_dvobiekt();
     command_zmienwiek();
+    command_editobject();
+    command_dnobiekt();
     command_dmvon();
+    command_destroyobject();
+    command_createobject();
     
 }
