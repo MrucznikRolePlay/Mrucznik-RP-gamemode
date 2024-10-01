@@ -530,9 +530,8 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 
 OnPlayerShootSmugglingBoat(playerid, vehicleid)
 {
-	if(BotSmugglingPackages <= 0)
+	if(GetPlayerJob(playerid) != JOB_SMUGGLER)
 	{
-		SetVehicleHealth(vehicleid, 20.0);
 		return;
 	}
 
@@ -543,6 +542,13 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 		{
 			driverid = i;
 		}
+	}
+
+	if(BotSmugglingPackages <= 0)
+	{
+		RemovePlayerFromVehicle(driverid);
+		SetVehicleHealth(vehicleid, 20.0);
+		return;
 	}
 	
 	if(driverid == INVALID_PLAYER_ID)

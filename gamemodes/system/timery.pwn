@@ -2071,6 +2071,7 @@ public JednaSekundaTimer()
 	{
 		if(BotSmugglingPackages > 0 && !IsPlayerInAnyVehicle(i) && strcmp(GetNick(i), "Bot_Przemytnik", true) == 0)
 		{
+			SetPlayerSkin(i, 1);
 			PutPlayerInVehicle(i, SmugglingBoat, 0);
 		}
 	}
