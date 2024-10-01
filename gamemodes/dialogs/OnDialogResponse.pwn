@@ -105,6 +105,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			RepairVehicle(GetPlayerVehicleID(playerid));
 			naprawiony[playerid] = 1;
 			SetTimerEx("Naprawianie",10000,0,"d",playerid);
+
+			// give 50% of the money to the owner of the spray
+			new bizId = IsPlayerAtFrontBusinnesZone(playerid);
+			if(bizId != -1)
+			{
+				GenerateFrontBusinessIncome(bizId, cena_naprawy/2);
+			}
 		}
 	}
 

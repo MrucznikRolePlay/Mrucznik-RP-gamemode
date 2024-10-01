@@ -336,6 +336,16 @@ GetOrgTakeoverTimeWindow(bizId, &hour, &minute, &endHour, &endMinute)
 	endMinute = (minute + (takeoverTimeMinutes/60)) % 60;
 }
 
+GenerateFrontBusinessIncome(bizId, profit)
+{
+	new org = FrontBusiness[bizId][Owner];
+	if(IsActiveOrg(org))
+	{
+		SejfR_Add(org, profit);
+	}
+	RedisIncrBy(RedisFrontBizKey(bizId, "leaderProfit"), profit);
+}
+
 GetFrontBusinessIcon(type)
 {
 	switch(type)

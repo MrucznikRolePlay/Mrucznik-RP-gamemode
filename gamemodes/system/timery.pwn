@@ -3128,20 +3128,16 @@ public Fillup()
 				}
 			}
 
-			if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GAS_STATION))
+			if(IsBusinessTypeOwnedByPlayerOrg(i, FRONT_BIZ_TYPE_GAS_STATION))
 			{
 				FillUpPrice = price_half;
 			}
 			
 			// 50% of gas price goes to the owner of the gas station
-			new bizId = IsPlayerAtFrontBusinnesZone(playerid);
+			new bizId = IsPlayerAtFrontBusinnesZone(i);
 			if(bizId != -1)
 			{
-				new org = FrontBusiness[bizId][Owner];
-				if(IsActiveOrg(org))
-				{
-					SejfR_Add(org, FillUpPrice/2);
-				}
+				GenerateFrontBusinessIncome(bizId, FillUpPrice/2);
 			}
 
 			if(kaska[i] >= FillUpPrice)
