@@ -95,6 +95,11 @@ command_materialy_Impl(playerid, params[256])
 		            if(MatsGood[playerid] != 1)
 		            {
 			            new payout = (50)*(MatsHolding[playerid]);
+						if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_MATS))
+						{
+							payout *= 2;
+							MruMessageGoodInfo(playerid, "Twoja organizacja posiada fabrykê materia³ów, dziêki czemu otrzymujesz 2 razy wiêcej materia³ów");
+						}
 			            format(string, sizeof(string), "Dosta³eœ od handlarza %d materia³ów z twoich %d paczek mats", payout, MatsHolding[playerid]);
 					    sendTipMessage(playerid, string);
                         if(PlayerInfo[playerid][pMiserPerk] > 0) {
