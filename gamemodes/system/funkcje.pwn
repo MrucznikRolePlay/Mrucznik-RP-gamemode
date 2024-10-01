@@ -1493,9 +1493,15 @@ Kostka_Wygrana(playerid, loser, kasa, bool:quit=false)
         SetPVarInt(playerid, "kostka-wait", 0);
         SetPVarInt(playerid, "kostka-player", 0);
     }
+
+	// podatek do sejfu
+	new bizId = IsAtFrontBusinessInteriorType(playerid, FRONT_BIZ_TYPE_CASINO);
+	if(bizId != -1)
+	{
+		GenerateFrontBusinessIncome(bizId, podatek / 2);
+	}
+
     Log(payLog, INFO, "%s wygra³ rzuty kostk¹ z %s na kwotê %d$ %s", GetPlayerLogName(playerid), GetPlayerLogName(loser), kasa, quit ? "(quit)" : "");
-
-
     return 1;
 }
 //system barierek by Kubi

@@ -30,7 +30,7 @@ command_sprawdzkase_Impl(playerid, params[256])
 
     if(IsPlayerConnected(playerid))
     {
-		if (IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969))
+		if (IsAtCasino(playerid))
 		{
 			new giveplayerid;
 			if( sscanf(params, "k<fix>", giveplayerid))
@@ -44,7 +44,7 @@ command_sprawdzkase_Impl(playerid, params[256])
 			{
 			    if(giveplayerid != INVALID_PLAYER_ID)
 			    {
-			        if(IsPlayerInRangeOfPoint(giveplayerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969))
+			        if(IsAtCasino(giveplayerid))
 			        {
       					GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
 						format(string, sizeof(string),"|__________________Wnêtrze portfela %s:__________________|",giveplayer);

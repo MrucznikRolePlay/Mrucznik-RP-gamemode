@@ -25,7 +25,11 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kostka_Impl(playerid, params[256])
 {
-    if(!IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969)) return sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "Tylko w kasynie!");
+    if(!IsAtCasino(playerid)) 
+    {
+        return sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "Tylko w kasynie!");
+    }
+
     if(strcmp(params, "akceptuj", true) == 0 || strcmp(params, "a", true) == 0)
     {
         if(GetPVarInt(playerid, "kostka-wait") == 0) return sendTipMessageEx(playerid, COLOR_PAPAYAWHIP, "Nikt nie oferowa³ Ci gry!");

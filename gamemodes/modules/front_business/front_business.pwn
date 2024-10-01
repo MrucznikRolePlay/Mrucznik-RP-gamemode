@@ -89,7 +89,8 @@ LoadFrontBusinesses()
 				
 			DodajWejscieNoPickup(
 				FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], FrontBusiness[i][OutVw], FrontBusiness[i][OutInt],
-				FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ], FrontBusiness[i][InVw], FrontBusiness[i][InInt]
+				FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ], FrontBusiness[i][InVw], FrontBusiness[i][InInt],
+				0, 1000+i
 			);
 		}
 
@@ -344,6 +345,33 @@ GenerateFrontBusinessIncome(bizId, profit)
 		SejfR_Add(org, profit);
 	}
 	RedisIncrBy(RedisFrontBizKey(bizId, "leaderProfit"), profit);
+}
+
+IsAtFrontBusinessInteriorType(playerid, type)
+{
+	new bizId = PlayerInfo[playerid][pLocal] - 1000;
+	if(bizId > 0 && bizId < sizeof(FrontBusiness))
+	{
+		if(FrontBusiness[bizId][Type] == type)
+		{
+			return bizId;
+		}
+	}
+	return -1;
+}
+
+IsAtCasino(playerid)
+{
+	if(IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969))
+	{
+		return 1;
+	}
+
+	if(IsAtFrontBusinessInteriorType(playerid, FRONT_BIZ_TYPE_CASINO) != -1)
+	{
+		return 1;
+	}
+	return 0;
 }
 
 GetFrontBusinessIcon(type)

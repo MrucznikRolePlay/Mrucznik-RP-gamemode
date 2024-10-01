@@ -37,7 +37,7 @@ command_kostka2_Impl(playerid)
 			format(string, sizeof(string), "* %s rzuca kostk¹ i wypada liczba %d", sendername,dice);
 			ProxDetector(5.0, playerid, string, TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR,TEAM_GREEN_COLOR);
 		}
-		else if(IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969))
+		else if(IsAtCasino(playerid))
 		{
 			sendTipMessageEx(playerid, TEAM_AZTECAS_COLOR, "U¿yj /kostka");
 		}

@@ -30,7 +30,7 @@ command_ruleta_Impl(playerid)
 
     if(IsPlayerConnected(playerid))
     {
-        if(IsPlayerInRangeOfPoint(playerid, 5.0, 1038.22924805,-1090.59741211,-67.52223969))
+        if(IsAtCasino(playerid))
         {
 			if(kaska[playerid] < 10000) 
 			{
