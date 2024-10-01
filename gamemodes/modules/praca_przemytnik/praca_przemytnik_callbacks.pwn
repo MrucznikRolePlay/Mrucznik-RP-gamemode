@@ -543,16 +543,16 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 			driverid = i;
 		}
 	}
+	
+	if(driverid == INVALID_PLAYER_ID)
+	{
+		return;
+	}
 
 	if(BotSmugglingPackages <= 0)
 	{
 		RemovePlayerFromVehicle(driverid);
 		SetVehicleHealth(vehicleid, 20.0);
-		return;
-	}
-	
-	if(driverid == INVALID_PLAYER_ID)
-	{
 		return;
 	}
 
