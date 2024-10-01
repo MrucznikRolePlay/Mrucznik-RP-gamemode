@@ -566,11 +566,11 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 			MruMessageGoodInfo(playerid, "Trafi³eœ w ³ódŸ przemytników! Wypad³a z niej ma³a paczka kontrabandy.");
 		}
 		BotSmugglingPackages--;
-		PlayerPlaySound(playerid, 31205, x, y, z);
+		PlayerPlaySound(playerid, 31205, 0.0, 0.0, 0.0);
 	}
 	else
 	{
-		PlayerPlaySound(playerid, 1135, x, y, z); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
+		PlayerPlaySound(playerid, 1135, 0.0, 0.0, 0.0); // hit (SOUND_BASEBALL_BAT_HIT_PED) - metaliczny dŸwiêk
 	}
 }
 
