@@ -252,9 +252,9 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	SendJobMessage(JOB_LOWCA, COLOR_RED, "UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
 	SendJobMessage(JOB_LOWCA, COLOR_WHITE, "|_______________________________________________|");
 	// Komunikaty dla przemytników
-	SendJobMessage(JOB_PRZEMYTNIK, COLOR_WHITE, "|___________________ POG£OSKI __________________|");
-	SendJobMessage(JOB_PRZEMYTNIK, COLOR_RED, "Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
-	SendJobMessage(JOB_PRZEMYTNIK, COLOR_WHITE, "|_______________________________________________|");
+	SendJobMessage(JOB_SMUGGLER, COLOR_WHITE, "|___________________ POG£OSKI __________________|");
+	SendJobMessage(JOB_SMUGGLER, COLOR_RED, "Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
+	SendJobMessage(JOB_SMUGGLER, COLOR_WHITE, "|_______________________________________________|");
 	// Komunikat dla porz¹dkowych
 	for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
 	{
