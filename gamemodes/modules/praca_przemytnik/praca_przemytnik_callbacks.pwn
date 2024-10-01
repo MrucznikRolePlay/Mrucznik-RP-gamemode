@@ -400,6 +400,12 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 					contraband = Boxes[boxid][box_bonus];
 					DestroyBox(boxid);
 				}
+
+				if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_BOAT))
+				{
+					contraband = floatround(contraband * 1.2); // +20%
+				}
+
 				MruMessageGoodInfo(playerid, "Uda³o Ci siê dostarczyæ paczkê z kontraband¹ do dziupli przemytniczej!");
 				MruMessageGoodInfoF(playerid, "Znajdowa³o siê w niej %d kontrabandy. Jest teraz Twoja!", contraband);
 				GiveContraband(playerid, contraband);

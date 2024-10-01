@@ -186,13 +186,19 @@ przemyt_StageEnd(playerid, actionID)
         return 1;
     }
 
+    new contraband = SmugglingAction[actionID][s_contrabandGathered];
+    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_BOAT))
+    {
+        contraband = floatround(contraband * 1.2); // +20%
+    }
+
     ChatMe(playerid, "zabiera paczki kontrabandy z punktu zboru.");
 
     MruMessageGoodInfo(playerid, "Gratulacje! Uda³o Ci siê zakoñczyæ akcjê przemytnicz¹.");
-    MruMessageGoodInfoF(playerid, "Uda³o Ci siê zdobyæ %d paczek kontrabandy.", SmugglingAction[actionID][s_contrabandGathered]);
-    SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, sprintf("%s zgarn¹³ %d paczek kontrabandy.", GetNick(playerid), SmugglingAction[actionID][s_contrabandGathered]));
+    MruMessageGoodInfoF(playerid, "Uda³o Ci siê zdobyæ %d paczek kontrabandy.", contraband);
+    SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, sprintf("%s zgarn¹³ %d paczek kontrabandy.", GetNick(playerid), contraband));
 
-    GiveContraband(playerid, SmugglingAction[actionID][s_contrabandGathered]);
+    GiveContraband(playerid, contraband);
 
     EndSmuggling(actionID);
     return 1;
