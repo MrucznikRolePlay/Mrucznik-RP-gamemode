@@ -549,12 +549,12 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 	{
 		return;
 	}
-	
+
 	new Float:x, Float:y, Float:z, Float:hp;
 	GetVehiclePos(vehicleid, x, y, z);
 
-	// drop box with 0.5% chance
-	new rand = random(200);
+	// drop box with 5% chance
+	new rand = random(20);
 	if(rand < 1)
 	{
 		GetVehicleHealth(vehicleid, hp);
