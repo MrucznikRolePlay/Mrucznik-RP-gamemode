@@ -29,47 +29,56 @@ AddInterior(outName[], Float:outX, Float:outY, Float:outZ, outInt, outVw, inName
 ViceCityInteriors()
 {
     new VCVW = 7110; // vice city standard interiors virtual world
+    new iconType = MAPICON_GLOBAL;
+    new Float:streamDist = 2000.0;
 
     // ------ [ Rz¹d ] ------
     AddInterior( // Ratusz Downtown, Interior Planning Department (DMV GF)
         "Ratusz", -4897.7461, 2953.5726, 6.5759, 0, 0,
         "Wyjœcie", -8813.4800, 3373.6300, 1008.38, 3, VCVW);
-
+    MruCreateDynamicMapIcon(-4897.7461, 2953.5726, 6.5759, 34, -1, -1, -1, -1, streamDist, iconType); // Ratusz
 
     // ------ [ Komisariaty ] ------
     AddInterior( // Komisariat 1 Miasto, Interior San Fierro Police Department
         "Komisariat", -3802.7534, 1777.8750, 6.5215, 0, 0,
         "Wyjœcie", -8953.9400, 3308.9700, 1003.21, 10, VCVW);
+    MruCreateDynamicMapIcon(-3802.7534, 1777.8750,6.5215, 30, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Komisariat £owców nagród, Interior Los Santos Police Department
         "Biuro £owców Nagród", -5072.1455, 1566.6052, 5.6903, 0, 0,
         "Wyjœcie", -8953.3400, 3265.8000, 1003.64, 6, VCVW);
+    MruCreateDynamicMapIcon(-5072.1455, 1566.6052, 5.6903, 16, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Komisariat Downtown (FBI), Interior Las Venturas Police Department
         "Biuro FBI", -4857.0996, 3012.5998, 6.0599, 0, 0,
         "Wyjœcie", -8911.5300, 3370.0600, 1007.17, 3, VCVW);
+    MruCreateDynamicMapIcon(-4857.0322, 3012.5569, 6.0599, 30, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Baza Wojskowa, Ammu-nation 5
         "Biuro Armii", -5921.1716, 2093.6060, 9.3275, 0, 0,
         "Wyjœcie", -8883.5000, 3032.3800, 999.59, 6, VCVW);
-
+    MruCreateDynamicMapIcon(-5921.1716, 2093.6060, 9.3275, 19, -1, -1, -1, -1, streamDist, iconType);
 
     // ------ [ Szpitale ] ------
     AddInterior( // Ocean Beach Hospital
         "Szpital", -4338.2310, 1268.1736, 4.9212, 0, 0,
         "Wyjœcie", -7797.4419, 3173.5120, 1000.9105, 3, 7110);
+    MruCreateDynamicMapIcon(-4338.2310, 1268.1736, 4.9212, 22, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Vice Point Hospital
         "Szpital", -3702.2754, 2952.8380, 6.5608, 0, 0,
         "Wyjœcie", -7797.4419, 3173.5120, 1000.9105, 3, 7111);
+    MruCreateDynamicMapIcon(-3702.2754, 2952.8380, 6.5608, 22, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Downtown Hospital
         "Szpital", -5023.0557, 3399.7706, 6.8687, 0, 0,
         "Wyjœcie", -7797.4419, 3173.5120, 1000.9105, 3, 7112);
+    MruCreateDynamicMapIcon(-5023.0557, 3399.7706, 6.8687, 22, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Szpital Œrodek drugiego miasta
         "Szpital", -5086.7944, 1779.5925, 7.5683, 0, 0,
         "Wyjœcie", -7797.4419, 3173.5120, 1000.9105, 3, 7113);
+    MruCreateDynamicMapIcon(-5087.2378, 1779.6316, 7.5683, 22, -1, -1, -1, -1, streamDist, iconType); // Szpital
 
 
     // ------ [ Bank ] ------
@@ -77,6 +86,7 @@ ViceCityInteriors()
         "Bank", -5095.3579, 1908.7921, 7.8773, 0, 0,
         "Wyjœcie", -5100.0000, 1908.8900, 994.0, 6, 0, // interior banku z internetu: 1387.3058,-26.9497,1000.8729
         0, 103);
+    MruCreateDynamicMapIcon(-5095.3579, 1908.7921, 7.8773, 52, -1, -1, -1, -1, streamDist, iconType); // Bank Vice City
 
 
     // ------ [ Inne ] ------
