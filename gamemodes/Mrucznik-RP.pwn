@@ -344,7 +344,6 @@ public OnGameModeInit()
     //30.10
     TJD_Load();
     Car_Load(); //Wszystkie pojazdy MySQL
-	Przemyt_OnGameModeInit(); // koniecznie pod Cars_Load();
 
     //noYsi
     LoadPrzewinienia();

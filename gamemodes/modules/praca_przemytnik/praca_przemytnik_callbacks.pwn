@@ -538,7 +538,7 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 	new driverid = INVALID_PLAYER_ID;
     foreach(new i : NPC)
 	{
-		if(IsPlayerNPC(i) && IsPlayerInVehicle(i, vehicleid))
+		if(IsPlayerInVehicle(i, vehicleid))
 		{
 			driverid = i;
 		}
@@ -587,11 +587,6 @@ hook OnPlayerDisconnect(playerid, reason)
 		SetSmugglingItem(playerid, SMUGGLING_ITEM_JETPACK_GAS, JetpackGas[playerid]);
 	}
 	return 1;
-}
-
-Przemyt_OnGameModeInit()
-{
-	SmugglingBoat = Car_GetIDXFromUID(2477);
 }
 
 //end
