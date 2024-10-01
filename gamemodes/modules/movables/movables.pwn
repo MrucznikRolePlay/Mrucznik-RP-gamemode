@@ -106,7 +106,7 @@ DropBox(playerid)
 	new int = GetPlayerInterior(playerid);
 	new vw = GetPlayerVirtualWorld(playerid);
 	CA_FindZ_For2DCoord(x, y, z);
-	z += GetColSphereRadius(Boxes[boxid][box_model]) * 2.0 - 0.1;
+	z += GetColSphereRadius(Boxes[boxid][box_model]) * 2.0 - 0.8;
 
 	ApplyAnimation(playerid, "CARRY", "putdwn", 4.1, 0, 0, 0, 0, 113); 
     SetPlayerSpecialAction(playerid, SPECIAL_ACTION_NONE);
@@ -178,7 +178,7 @@ DropBoxFromCar(objectid, type, value, carid)
 	GetVehicleZAngle(carid, angle);
 
 	CA_FindZ_For2DCoord(x, y, z);
-	z += GetColSphereRadius(objectid) * 2.0 - 0.1;
+	z += GetColSphereRadius(objectid) * 2.0 - 0.8;
 
 	return CreateBox(objectid, type, value, x, y, z, 0, 0, angle);
 }
