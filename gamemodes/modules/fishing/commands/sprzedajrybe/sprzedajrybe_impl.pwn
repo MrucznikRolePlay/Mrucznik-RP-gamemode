@@ -63,7 +63,7 @@ command_sprzedajrybe_Impl(playerid, fishid)
     return 1;
 }
 
-SprzedajeRybe(playerid, fishid = 0, isAtOwnRestaurant = 0)
+SprzedajeRybe(playerid, fishid, isAtOwnRestaurant)
 {
 	if(!fishid) return 0;
 	new FishWeight, FishName[20];
