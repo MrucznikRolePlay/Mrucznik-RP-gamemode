@@ -2067,23 +2067,16 @@ public JednaSekundaTimer()
 	    EndingKartRound = 1;
 	}
 
+	foreach(new i : NPC)
+	{
+		if(BotSmugglingPackages > 0 && !IsPlayerInAnyVehicle(i) && strcmp(GetNick(i), "Bot_Przemytnik", true) == 0)
+		{
+			PutPlayerInVehicle(i, SmugglingBoat, 0);
+		}
+	}
+
     foreach(new i : Player)
 	{
-		if(IsPlayerNPC(i))
-		{
-			if(BotSmugglingPackages > 0 && !IsPlayerInAnyVehicle(i))
-			{
-				if(strcmp(GetNick(i), "Bot_Przemytnik", true) == 0)
-				{
-					PutPlayerInVehicle(i, SmugglingBoat, 0);
-				}
-				if(strcmp(GetNick(i), "Bot_Przemytniczy", true) == 0)
-				{
-					PutPlayerInVehicle(i, SmugglingBoat, 0); // TODO: nagraæ kuter rybacki
-				}
-			}
-			continue;
-		}
         if(!IsPlayerConnected(i)) continue;
         State = GetPlayerState(i);
         GetPlayerPos(i, x, y, z);
