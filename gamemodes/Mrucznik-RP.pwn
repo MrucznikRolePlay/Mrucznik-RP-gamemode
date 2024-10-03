@@ -114,11 +114,14 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <PreviewModelDialog>
 #include <vector>
 #include <map>
+#include <list>
 #include <mapfix>
 #include <getvehiclerotationquat_fix>
 #include <ndialog-pages>
 #include <modelsizes>
 #include <weapon-data>
+#define CAMSEQ_DEBUG true
+#include <camera-sequencer>
 
 //--------------------------------------<[ G³ówne ustawienia ]>----------------------------------------------//
 //-                                                                                                         -//
@@ -941,6 +944,8 @@ public OnPlayerLeaveDynamicArea(playerid, STREAMER_TAG_AREA:areaid)
 
 public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
 {
+	camera_OnPlayerClickPTD(playerid, playertextid);
+
 	if(GetPVarInt(playerid, "gatechose_active") == 1)   //Barierki
     {
     	new curpage = GetPVarInt(playerid, "gatechose_page");
@@ -4216,6 +4221,8 @@ OnPlayerLogin(playerid, password[])
 
 public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 {
+	camera_OnPlayerKeyStateChange(playerid, newkeys, oldkeys);
+
     //09.06.2014
     if(Teleturniejstart == 1)
 	{

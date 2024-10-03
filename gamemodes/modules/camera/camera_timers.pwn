@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  zaznacz                                                  //
+//-----------------------------------------------<< Timers >>------------------------------------------------//
+//                                                   camera                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,15 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Southclaws
+// Data utworzenia: 03.10.2024
+//Opis:
+/*
+	Skrypty dotycz¹ce kamery w grze.
+*/
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//-----------------<[ Timery: ]>-------------------
 
-//-------<[ include ]>-------
-#include "zaznacz_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_zaznacz()
-{
-    new command = Command_GetID("zaznacz");
-
-    //aliases
-    Command_AddAlt(command, "mouse");
-    Command_AddAlt(command, "kursor");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:zaznacz(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_zaznacz_Impl(playerid);
-}
+//end

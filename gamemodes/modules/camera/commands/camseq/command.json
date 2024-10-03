@@ -1,0 +1,13 @@
+{
+    "name": "camseq",
+    "description": "Zarz¹dzanie sekwencjami kamery.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "camerasequence", "seqcam"
+    ],
+    "parameters": [],
+    "date": "03.10.2024"
+}

@@ -1,0 +1,11 @@
+{
+    "name": "camera",
+    "description": "Skrypty dotycz¹ce kamery w grze.",
+    "author": "Southclaws",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "03.10.2024"
+}

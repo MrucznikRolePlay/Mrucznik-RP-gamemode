@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  zaznacz                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                   camseq                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,17 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 03.10.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "zaznacz_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_zaznacz()
+//------------------<[ Implementacja: ]>-------------------
+command_camseq_Impl(playerid)
 {
-    new command = Command_GetID("zaznacz");
-
-    //aliases
-    Command_AddAlt(command, "mouse");
-    Command_AddAlt(command, "kursor");
-    
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
+    FormatMainMenu(playerid);
+    return 1;
 }
 
-//-------<[ command ]>-------
-YCMD:zaznacz(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_zaznacz_Impl(playerid);
-}
+//end

@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  zaznacz                                                  //
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                                   camera                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,23 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: Southclaws
+// Data utworzenia: 03.10.2024
 
-// ================= UWAGA! =================
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+#define INDEX_FILE      "camseq/index.txt"
+#define strcpy(%0,%1)   strcat((%0[0] = '\0', %0), %1)
 
-//-------<[ include ]>-------
-#include "zaznacz_impl.pwn"
+// Set up your camera speed defaults here
+#define CAM_SPEED       (10.0)  // Standard speed
+#define CAM_HI_SPEED    (40.0)  // When pressing SPRINT (Space default)
+#define CAM_LO_SPEED    (3.0)   // When pressing WALK (Alt default)
 
-//-------<[ initialize ]>-------
-command_zaznacz()
-{
-    new command = Command_GetID("zaznacz");
+#define DIALOG_OFFSET 4960
 
-    //aliases
-    Command_AddAlt(command, "mouse");
-    Command_AddAlt(command, "kursor");
-    
+#define MAX_CAMDATA (32)
 
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:zaznacz(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_zaznacz_Impl(playerid);
-}
+//end

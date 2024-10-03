@@ -8488,7 +8488,6 @@ CancelFlyMode(playerid)
 }
 
 //--------------------------------------------------
-
 FlyMode(playerid, typ)
 {
 	// Create an invisible object for the players camera to be attached to

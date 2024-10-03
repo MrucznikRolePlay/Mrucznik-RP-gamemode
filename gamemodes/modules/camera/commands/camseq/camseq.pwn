@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  zaznacz                                                  //
+//                                                   camseq                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,20 +28,20 @@
 
 
 //-------<[ include ]>-------
-#include "zaznacz_impl.pwn"
+#include "camseq_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_zaznacz()
+command_camseq()
 {
-    new command = Command_GetID("zaznacz");
+    new command = Command_GetID("camseq");
 
     //aliases
-    Command_AddAlt(command, "mouse");
-    Command_AddAlt(command, "kursor");
+    Command_AddAlt(command, "camerasequence");
+    Command_AddAlt(command, "seqcam");
     
 
     //permissions
-    Group_SetGlobalCommand(command, true);
+    Group_SetCommand(Group_GetID("admini"), command, true);
     
 
     //prefix
@@ -49,15 +49,15 @@ command_zaznacz()
 }
 
 //-------<[ command ]>-------
-YCMD:zaznacz(playerid, params[], help)
+YCMD:camseq(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "");
+        sendTipMessage(playerid, "Zarz¹dzanie sekwencjami kamery.");
         return 1;
     }
     
     
     //command body
-    return command_zaznacz_Impl(playerid);
+    return command_camseq_Impl(playerid);
 }

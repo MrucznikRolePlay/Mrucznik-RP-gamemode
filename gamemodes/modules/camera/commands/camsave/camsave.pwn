@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  zaznacz                                                  //
+//                                                  camsave                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -28,20 +28,21 @@
 
 
 //-------<[ include ]>-------
-#include "zaznacz_impl.pwn"
+#include "camsave_impl.pwn"
 
 //-------<[ initialize ]>-------
-command_zaznacz()
+command_camsave()
 {
-    new command = Command_GetID("zaznacz");
+    new command = Command_GetID("camsave");
 
     //aliases
-    Command_AddAlt(command, "mouse");
-    Command_AddAlt(command, "kursor");
+    Command_AddAlt(command, "camerasave");
+    Command_AddAlt(command, "savecamera");
+    Command_AddAlt(command, "savecam");
     
 
     //permissions
-    Group_SetGlobalCommand(command, true);
+    Group_SetCommand(Group_GetID("admini"), command, true);
     
 
     //prefix
@@ -49,15 +50,21 @@ command_zaznacz()
 }
 
 //-------<[ command ]>-------
-YCMD:zaznacz(playerid, params[], help)
+YCMD:camsave(playerid, params[], help)
 {
     if (help)
     {
-        sendTipMessage(playerid, "");
+        sendTipMessage(playerid, "Zapisuje pozycje kamery do scriptfiles/camera.txt");
+        return 1;
+    }
+    //fetching params
+    new comment[128];
+    if(sscanf(params, "S()[128]", comment))
+    {
+        sendTipMessage(playerid, "U¿yj /camsave [komentarz] ");
         return 1;
     }
     
-    
     //command body
-    return command_zaznacz_Impl(playerid);
+    return command_camsave_Impl(playerid, comment);
 }

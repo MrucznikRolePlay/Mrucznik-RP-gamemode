@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  zaznacz                                                  //
+//-----------------------------------------------[ Commands ]------------------------------------------------//
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,37 +27,17 @@
 // ================= UWAGA! =================
 
 
+#include <YSI\y_hooks>
+
 //-------<[ include ]>-------
-#include "zaznacz_impl.pwn"
+#include "camsave\camsave.pwn"
+#include "camseq\camseq.pwn"
+
 
 //-------<[ initialize ]>-------
-command_zaznacz()
+hook OnGameModeInit()
 {
-    new command = Command_GetID("zaznacz");
-
-    //aliases
-    Command_AddAlt(command, "mouse");
-    Command_AddAlt(command, "kursor");
+    command_camsave();
+    command_camseq();
     
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:zaznacz(playerid, params[], help)
-{
-    if (help)
-    {
-        sendTipMessage(playerid, "");
-        return 1;
-    }
-    
-    
-    //command body
-    return command_zaznacz_Impl(playerid);
 }

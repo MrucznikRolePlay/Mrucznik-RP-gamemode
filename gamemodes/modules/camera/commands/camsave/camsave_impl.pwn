@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//                                                  zaznacz                                                  //
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                  camsave                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,48 +16,42 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 03.10.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-//-------<[ include ]>-------
-#include "zaznacz_impl.pwn"
-
-//-------<[ initialize ]>-------
-command_zaznacz()
+//------------------<[ Implementacja: ]>-------------------
+command_camsave_Impl(playerid, comment[128])
 {
-    new command = Command_GetID("zaznacz");
-
-    //aliases
-    Command_AddAlt(command, "mouse");
-    Command_AddAlt(command, "kursor");
+    new Float:camX, Float:camY, Float:camZ;
+    new Float:vecX, Float:vecY, Float:vecZ;
+    GetPlayerCameraPos(playerid, camX, camY, camZ);
+    GetPlayerCameraFrontVector(playerid, vecX, vecY, vecZ);
     
-
-    //permissions
-    Group_SetGlobalCommand(command, true);
-    
-
-    //prefix
-    
-}
-
-//-------<[ command ]>-------
-YCMD:zaznacz(playerid, params[], help)
-{
-    if (help)
+    new File:file = fopen("camera.txt", io_append);
+    if(file)
     {
-        sendTipMessage(playerid, "");
-        return 1;
+        new buffer[256];
+        if(strlen(comment) > 0)
+        {
+            format(buffer, sizeof(buffer), "// %s\n", comment);
+            fwrite(file, buffer);
+        }
+        format(buffer, sizeof(buffer), "SetPlayerCameraPos(playerid, %.4f, %.4f, %.4f);\n", camX, camY, camZ);
+        fwrite(file, buffer);
+        format(buffer, sizeof(buffer), "SetPlayerCameraLookAt(playerid, %.4f, %.4f, %.4f);\n", camX + vecX, camY + vecY, camZ + vecZ);
+        fwrite(file, buffer);
+        fwrite(file, "\n");
+        fclose(file);
+        SendClientMessage(playerid, -1, "Camera position saved to scriptfiles/camera.txt");
     }
-    
-    
-    //command body
-    return command_zaznacz_Impl(playerid);
+    else
+    {
+        SendClientMessage(playerid, -1, "Error: Could not open camera.txt for writing");
+    }
+    return 1;
 }
+
+//end
