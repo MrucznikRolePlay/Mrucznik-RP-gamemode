@@ -127,8 +127,8 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(listitem == 0) EditCameraMover(playerid, LoadCameraMover(indexData[SelectedCamera[playerid]]));
-			if(listitem == 1) PlayCameraMover(playerid, LoadCameraMover(indexData[SelectedCamera[playerid]]));
+			if(listitem == 0) EditCameraMover(playerid, LoadCameraSequencer(indexData[SelectedCamera[playerid]]));
+			if(listitem == 1) PlayCameraSequenceForPlayer(playerid, LoadCameraSequencer(indexData[SelectedCamera[playerid]]));
 		}
 		else FormatMainMenu(playerid);
 	}

@@ -424,16 +424,6 @@ GetCameraMaxNodes(camera)
 	return camMaxNodes[camera];
 }
 
-LoadCameraMover(filename[])
-{
-	return LoadCameraSequencer(filename);
-}
-
-PlayCameraMover(playerid, camera, loop=false, relative=false)
-{
-	PlayCameraSequenceForPlayer(playerid, camera, loop, relative);
-}
-
 camera_LoadTextDraws(playerid)
 {
 	// Background
