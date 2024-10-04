@@ -174,7 +174,7 @@ SendDiscordOrgMessage(orgid, message[])
 // 		return 1;
 // 	}
 	
-// 	for(new i=0;i<MAX_ORG;i++)
+// 	for(new i=1;i<MAX_ORG;i++)
 //     {
 // 		if(channel == g_OrgChannel[i] && IsBot == false) 
 // 		{

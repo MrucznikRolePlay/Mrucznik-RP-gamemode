@@ -959,7 +959,7 @@ public ServerStuffSave()
         Sejf_Save(i);
         if(RANG_ApplyChanges[0][i]) EDIT_SaveRangs(0, i);
     }
-    for(new i=0;i<MAX_ORG;i++)
+    for(new i=1;i<MAX_ORG;i++)
     {
         SejfR_Save(i);
         if(RANG_ApplyChanges[1][i]) EDIT_SaveRangs(1, i);

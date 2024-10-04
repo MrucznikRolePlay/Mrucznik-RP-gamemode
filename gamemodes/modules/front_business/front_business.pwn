@@ -119,7 +119,7 @@ StopFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverArea] = -1;
 
 	new winner = -1, maxScore;
-	for(new i; i<MAX_ORG; i++)
+	for(new i=1; i<MAX_ORG; i++)
 	{
 		new score = FrontBusiness[bizId][TakingOverScore][i];
 		if(score > maxScore)
