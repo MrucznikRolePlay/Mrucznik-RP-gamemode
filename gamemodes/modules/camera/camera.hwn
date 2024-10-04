@@ -89,8 +89,6 @@ new PlayerText:cam_buttonAddN;
 
 new camMaxNodes[MAX_CAMERAS];
 
-new temp_camid;
-
 //------------------<[ Forwardy: ]>--------------------
 forward editor_OnCamMove(playerid, node, bool:cont);
 

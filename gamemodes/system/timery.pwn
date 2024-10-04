@@ -3135,7 +3135,7 @@ public Fillup()
 			
 			// 50% of gas price goes to the owner of the gas station
 			new bizId = IsPlayerAtFrontBusinnesZone(i);
-			if(bizId != -1)
+			if(bizId != -1 && FrontBusiness[bizId][Type] == FRONT_BIZ_TYPE_GAS_STATION)
 			{
 				GenerateFrontBusinessIncome(bizId, FillUpPrice/2);
 			}
