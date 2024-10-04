@@ -79,9 +79,7 @@ enum eFrontBusinessInfo {
     TakeoverActive,
     TakeoverStartTime,
     TakingOver[MAX_ORG],
-    TakingOverScore[MAX_ORG],
-    CopTakingOver,
-    CopTakingOverScore
+    TakingOverScore[MAX_ORG]
 };
 
 //-----------------<[ Zmienne: ]>-------------------
@@ -275,20 +273,6 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -4134.1094,3174.4536,10.2910, 0, 0, // przejmowanie
         100, 200 // hajs
     }
-    // {
-    //     "Mars Cafe", FRONT_BIZ_TYPE_RESTAURANT,
-    //     -4970.6152, 3554.1434, 11.0488, 0, 0, // wejœcie
-    //     -227.57, 1401.55, 27.76, 18, FRONT_BUSINESS_VW, // wyjœcie
-    //     -4970.6152, 3554.1434, 11.0488, 0, 0, // przejmowanie
-    //     100, 200 // hajs
-    // },
-    // {
-    //     "Tarbrush Cafe", FRONT_BIZ_TYPE_RESTAURANT,
-    //     -3736.6592, 3259.9176, 1213.6469, 0, 0, // wejœcie
-    //     378.02, -190.51, 1000.63, 17, FRONT_BUSINESS_VW, // wyjœcie
-    //     -3736.6592, 3259.9176, 1213.6469, 0, 0, // przejmowanie
-    //     100, 200 // hajs
-    // },
 };
 
 //------------------<[ Forwardy: ]>--------------------

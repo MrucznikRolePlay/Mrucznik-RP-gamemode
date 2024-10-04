@@ -31,9 +31,9 @@ command_sprzedajalkohol_Impl(playerid, params[256])
 		return 1;
 	}
 
-	if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_CLUB))
+	if(!IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_CLUB) && !IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RESTAURANT))
 	{
-		MruMessageFail(playerid, "Tylko organizacje które posiadaj¹ klub maj¹ dostêp do tej komendy.");
+		MruMessageFail(playerid, "Tylko organizacje które posiadaj¹ klub lub restauracje maj¹ dostêp do tej komendy.");
 		return 1;
 	}
 
