@@ -91,6 +91,14 @@ RemoveOrganisation(org)
         }
     }
 
+    for(new i; i<sizeof(FrontBusiness); i++)
+    {
+        if(FrontBusiness[i][Owner] == org)
+        {
+            FrontBusiness[i][Owner] = 0;
+        }
+    }
+
     MruMySQL_RemoveOrgAssets(org);
 
     Sejf_Rodziny[org] = 0;
