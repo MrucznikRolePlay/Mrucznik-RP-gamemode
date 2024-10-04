@@ -155,34 +155,34 @@ SaveCameraMover(playerid, exportmode=0)
 	{
 		if(!exportmode)
 		{
-			if (camData[tmpCam][tmpNode][cam_moveTime] == tmpData[0] &&
-				camData[tmpCam][tmpNode][cam_waitTime] == tmpData[1] &&
-				camData[tmpCam][tmpNode][cam_moveType] == tmpData[2] )
+			if (cam_NodeData[tmpCam][tmpNode][cam_moveTime] == tmpData[0] &&
+				cam_NodeData[tmpCam][tmpNode][cam_waitTime] == tmpData[1] &&
+				cam_NodeData[tmpCam][tmpNode][cam_moveType] == tmpData[2] )
 			{ // All the data is the same as the last one, ignore it and leave optionals blank
 				format(tmpLine, 256, "%f, %f, %f, %f, %f, %f\r\n",
-					camData[tmpCam][tmpNode][cam_cPosX],
-					camData[tmpCam][tmpNode][cam_cPosY],
-					camData[tmpCam][tmpNode][cam_cPosZ],
-					camData[tmpCam][tmpNode][cam_lPosX],
-					camData[tmpCam][tmpNode][cam_lPosY],
-					camData[tmpCam][tmpNode][cam_lPosZ] );
+					cam_NodeData[tmpCam][tmpNode][cam_cPosX],
+					cam_NodeData[tmpCam][tmpNode][cam_cPosY],
+					cam_NodeData[tmpCam][tmpNode][cam_cPosZ],
+					cam_NodeData[tmpCam][tmpNode][cam_lPosX],
+					cam_NodeData[tmpCam][tmpNode][cam_lPosY],
+					cam_NodeData[tmpCam][tmpNode][cam_lPosZ] );
 			}
 			else
 			{ // Data is different, write the new data to the line
 				format(tmpLine, 256, "%f, %f, %f, %f, %f, %f, %d, %d, %d\r\n",
-					camData[tmpCam][tmpNode][cam_cPosX],
-					camData[tmpCam][tmpNode][cam_cPosY],
-					camData[tmpCam][tmpNode][cam_cPosZ],
-					camData[tmpCam][tmpNode][cam_lPosX],
-					camData[tmpCam][tmpNode][cam_lPosY],
-					camData[tmpCam][tmpNode][cam_lPosZ],
-					camData[tmpCam][tmpNode][cam_moveTime],
-					camData[tmpCam][tmpNode][cam_waitTime],
-					camData[tmpCam][tmpNode][cam_moveType] );
+					cam_NodeData[tmpCam][tmpNode][cam_cPosX],
+					cam_NodeData[tmpCam][tmpNode][cam_cPosY],
+					cam_NodeData[tmpCam][tmpNode][cam_cPosZ],
+					cam_NodeData[tmpCam][tmpNode][cam_lPosX],
+					cam_NodeData[tmpCam][tmpNode][cam_lPosY],
+					cam_NodeData[tmpCam][tmpNode][cam_lPosZ],
+					cam_NodeData[tmpCam][tmpNode][cam_moveTime],
+					cam_NodeData[tmpCam][tmpNode][cam_waitTime],
+					cam_NodeData[tmpCam][tmpNode][cam_moveType] );
 
-				tmpData[0] = camData[tmpCam][tmpNode][cam_moveTime];
-				tmpData[1] = camData[tmpCam][tmpNode][cam_waitTime];
-				tmpData[2] = camData[tmpCam][tmpNode][cam_moveType];
+				tmpData[0] = cam_NodeData[tmpCam][tmpNode][cam_moveTime];
+				tmpData[1] = cam_NodeData[tmpCam][tmpNode][cam_waitTime];
+				tmpData[2] = cam_NodeData[tmpCam][tmpNode][cam_moveType];
 			}
 		}
 		else
@@ -194,23 +194,23 @@ SaveCameraMover(playerid, exportmode=0)
 					"InterpolateCameraPos(playerid, %f, %f, %f, %f, %f, %f, %d, %d);\r\n\
 					InterpolateCameraLookAt(playerid, %f, %f, %f, %f, %f, %f, %d, %d);\r\n",
 
-					camData[tmpCam][tmpNode][cam_cPosX],
-					camData[tmpCam][tmpNode][cam_cPosY],
-					camData[tmpCam][tmpNode][cam_cPosZ],
-					camData[tmpCam][tmpNode+1][cam_cPosX],
-					camData[tmpCam][tmpNode+1][cam_cPosY],
-					camData[tmpCam][tmpNode+1][cam_cPosZ],
-					camData[tmpCam][tmpNode][cam_moveTime],
-					camData[tmpCam][tmpNode][cam_moveType],
+					cam_NodeData[tmpCam][tmpNode][cam_cPosX],
+					cam_NodeData[tmpCam][tmpNode][cam_cPosY],
+					cam_NodeData[tmpCam][tmpNode][cam_cPosZ],
+					cam_NodeData[tmpCam][tmpNode+1][cam_cPosX],
+					cam_NodeData[tmpCam][tmpNode+1][cam_cPosY],
+					cam_NodeData[tmpCam][tmpNode+1][cam_cPosZ],
+					cam_NodeData[tmpCam][tmpNode][cam_moveTime],
+					cam_NodeData[tmpCam][tmpNode][cam_moveType],
 
-					camData[tmpCam][tmpNode][cam_lPosX],
-					camData[tmpCam][tmpNode][cam_lPosY],
-					camData[tmpCam][tmpNode][cam_lPosZ],
-					camData[tmpCam][tmpNode+1][cam_lPosX],
-					camData[tmpCam][tmpNode+1][cam_lPosY],
-					camData[tmpCam][tmpNode+1][cam_lPosZ],
-					camData[tmpCam][tmpNode][cam_moveTime],
-					camData[tmpCam][tmpNode][cam_moveType] );
+					cam_NodeData[tmpCam][tmpNode][cam_lPosX],
+					cam_NodeData[tmpCam][tmpNode][cam_lPosY],
+					cam_NodeData[tmpCam][tmpNode][cam_lPosZ],
+					cam_NodeData[tmpCam][tmpNode+1][cam_lPosX],
+					cam_NodeData[tmpCam][tmpNode+1][cam_lPosY],
+					cam_NodeData[tmpCam][tmpNode+1][cam_lPosZ],
+					cam_NodeData[tmpCam][tmpNode][cam_moveTime],
+					cam_NodeData[tmpCam][tmpNode][cam_moveType] );
 			}
 		}
 		fwrite(camFile_Main, tmpLine);
@@ -281,15 +281,15 @@ UpdateGUI(playerid)
 	PlayerTextDrawSetString(playerid, cam_row1Data, dataStr);
 	PlayerTextDrawShow(playerid, cam_row1Data);
 
-	format(dataStr, 16, "%d", camData[tmpCam][tmpNode][cam_moveTime]);
+	format(dataStr, 16, "%d", cam_NodeData[tmpCam][tmpNode][cam_moveTime]);
 	PlayerTextDrawSetString(playerid, cam_row2Data, dataStr);
 	PlayerTextDrawShow(playerid, cam_row2Data);
 
-	format(dataStr, 16, "%d", camData[tmpCam][tmpNode][cam_waitTime]);
+	format(dataStr, 16, "%d", cam_NodeData[tmpCam][tmpNode][cam_waitTime]);
 	PlayerTextDrawSetString(playerid, cam_row3Data, dataStr);
 	PlayerTextDrawShow(playerid, cam_row3Data);
 
-	format(dataStr, 16, "%s(%d)", MoveTypeName[ _:camData[tmpCam][tmpNode][cam_moveType] ], camData[tmpCam][tmpNode][cam_moveType]);
+	format(dataStr, 16, "%s(%d)", MoveTypeName[ _:cam_NodeData[tmpCam][tmpNode][cam_moveType] ], cam_NodeData[tmpCam][tmpNode][cam_moveType]);
 	PlayerTextDrawSetString(playerid, cam_row4Data, dataStr);
 	PlayerTextDrawShow(playerid, cam_row4Data);
 }
@@ -299,8 +299,8 @@ JumpToNode(playerid, node)
 	new
 		camera = gPlayerCamData[playerid][p_CamID];
 
-	SetPlayerCameraPos(playerid, camData[camera][node][cam_cPosX], camData[camera][node][cam_cPosY], camData[camera][node][cam_cPosZ]);
-	SetPlayerCameraLookAt(playerid, camData[camera][node][cam_lPosX], camData[camera][node][cam_lPosY], camData[camera][node][cam_lPosZ]);
+	SetPlayerCameraPos(playerid, cam_NodeData[camera][node][cam_cPosX], cam_NodeData[camera][node][cam_cPosY], cam_NodeData[camera][node][cam_cPosZ]);
+	SetPlayerCameraLookAt(playerid, cam_NodeData[camera][node][cam_lPosX], cam_NodeData[camera][node][cam_lPosY], cam_NodeData[camera][node][cam_lPosZ]);
 
 	gPlayerCamData[playerid][p_Node] = node;
 	UpdateGUI(playerid);
@@ -319,12 +319,12 @@ CommitCurrentNode(playerid)
 		tmpNode = gPlayerCamData[playerid][p_Node],
 		Float:vecX, Float:vecY, Float:vecZ;
 
-	GetPlayerCameraPos(playerid, camData[tmpCam][tmpNode][cam_cPosX], camData[tmpCam][tmpNode][cam_cPosY], camData[tmpCam][tmpNode][cam_cPosZ]);
+	GetPlayerCameraPos(playerid, cam_NodeData[tmpCam][tmpNode][cam_cPosX], cam_NodeData[tmpCam][tmpNode][cam_cPosY], cam_NodeData[tmpCam][tmpNode][cam_cPosZ]);
 	GetPlayerCameraFrontVector(playerid, vecX, vecY, vecZ);
 
-	camData[tmpCam][tmpNode][cam_lPosX] = camData[tmpCam][tmpNode][cam_cPosX]+(vecX*4); // x4 just to give the LookAt node a little distance, I didn't know if this would affect anything
-	camData[tmpCam][tmpNode][cam_lPosY] = camData[tmpCam][tmpNode][cam_cPosY]+(vecY*4);
-	camData[tmpCam][tmpNode][cam_lPosZ] = camData[tmpCam][tmpNode][cam_cPosZ]+(vecZ*4);
+	cam_NodeData[tmpCam][tmpNode][cam_lPosX] = cam_NodeData[tmpCam][tmpNode][cam_cPosX]+(vecX*4); // x4 just to give the LookAt node a little distance, I didn't know if this would affect anything
+	cam_NodeData[tmpCam][tmpNode][cam_lPosY] = cam_NodeData[tmpCam][tmpNode][cam_cPosY]+(vecY*4);
+	cam_NodeData[tmpCam][tmpNode][cam_lPosZ] = cam_NodeData[tmpCam][tmpNode][cam_cPosZ]+(vecZ*4);
 
 	gPlayerEditingNode[playerid] = false;
 	ExitFreeCam(playerid);
@@ -348,7 +348,7 @@ EnterFreeCam(playerid)
 	CancelSelectTextDraw(playerid);
 	ToggleEditGUI(playerid, false);
 
-	SetDynamicObjectPos(noclipdata[playerid][flyobject], camData[tmpCam][tmpNode][cam_cPosX], camData[tmpCam][tmpNode][cam_cPosY], camData[tmpCam][tmpNode][cam_cPosZ]);
+	SetDynamicObjectPos(noclipdata[playerid][flyobject], cam_NodeData[tmpCam][tmpNode][cam_cPosX], cam_NodeData[tmpCam][tmpNode][cam_cPosY], cam_NodeData[tmpCam][tmpNode][cam_cPosZ]);
 	JumpToNode(playerid, gPlayerCamData[playerid][p_Node]);
 }
 
@@ -391,7 +391,7 @@ ShiftNodeArray(camera, startnode, direction=0)
 		{
 			for(new e;e<MAX_CAMDATA;e++) // Shift all the data to the next node cell
 			{
-				camData[camera][i+1][CAM_DATA_ENUM:e] = camData[camera][i][CAM_DATA_ENUM:e];
+				cam_NodeData[camera][i+1][CAM_DATA_ENUM:e] = cam_NodeData[camera][i][CAM_DATA_ENUM:e];
 			}
 			i--;
 		}
@@ -403,13 +403,13 @@ ShiftNodeArray(camera, startnode, direction=0)
 		{
 			for(new e;e<MAX_CAMDATA;e++)
 			{
-				camData[camera][i][CAM_DATA_ENUM:e] = camData[camera][i+1][CAM_DATA_ENUM:e];
+				cam_NodeData[camera][i][CAM_DATA_ENUM:e] = cam_NodeData[camera][i+1][CAM_DATA_ENUM:e];
 			}
 			i++;
 		}
 		for(new e;e<MAX_CAMDATA;e++)
 		{
-			camData[camera][camMaxNodes[camera]][CAM_DATA_ENUM:e] = 0;
+			cam_NodeData[camera][camMaxNodes[camera]][CAM_DATA_ENUM:e] = 0;
 		}
 		// I didn't want to have to call two loops
 		// But I'm not sure how do to it otherwise!

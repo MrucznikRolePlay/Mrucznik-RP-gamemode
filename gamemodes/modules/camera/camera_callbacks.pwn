@@ -162,7 +162,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 		if(tmpMoveTime > 0)
 		{
-			camData[tmpCam][tmpNode][cam_moveTime] = tmpMoveTime;
+			cam_NodeData[tmpCam][tmpNode][cam_moveTime] = tmpMoveTime;
 			UpdateGUI(playerid);
 		}
 		else
@@ -180,7 +180,7 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 		if(tmpWaitTime > 0)
 		{
-			camData[tmpCam][tmpNode][cam_waitTime] = tmpWaitTime;
+			cam_NodeData[tmpCam][tmpNode][cam_waitTime] = tmpWaitTime;
 			UpdateGUI(playerid);
 		}
 		else
@@ -197,12 +197,12 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 		if(!response)
 		{
-			camData[tmpCam][tmpNode][cam_moveType] = CAMERA_MOVE;
+			cam_NodeData[tmpCam][tmpNode][cam_moveType] = CAMERA_MOVE;
 			UpdateGUI(playerid);
 		}
 		else
 		{
-			camData[tmpCam][tmpNode][cam_moveType] = CAMERA_CUT;
+			cam_NodeData[tmpCam][tmpNode][cam_moveType] = CAMERA_CUT;
 			UpdateGUI(playerid);
 		}
 	}
@@ -217,9 +217,9 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		else
 		{
 			SetDynamicObjectPos(noclipdata[playerid][flyobject],
-				camData[tmpCam][tmpNode][cam_cPosX],
-				camData[tmpCam][tmpNode][cam_cPosY],
-				camData[tmpCam][tmpNode][cam_cPosZ]);
+				cam_NodeData[tmpCam][tmpNode][cam_cPosX],
+				cam_NodeData[tmpCam][tmpNode][cam_cPosY],
+				cam_NodeData[tmpCam][tmpNode][cam_cPosZ]);
 		}
 	}
 

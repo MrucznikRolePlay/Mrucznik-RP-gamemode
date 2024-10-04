@@ -87,7 +87,6 @@ new PlayerText:cam_buttonDelt;
 new PlayerText:cam_buttonPrev;
 new PlayerText:cam_buttonAddN;
 
-new camData[MAX_CAMERAS][MAX_CAMNODE][CAM_DATA_ENUM];
 new camMaxNodes[MAX_CAMERAS];
 
 new temp_camid;
