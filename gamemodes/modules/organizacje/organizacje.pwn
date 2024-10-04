@@ -209,6 +209,7 @@ InvitePlayerToOrg(playerid, org, rank=0)
 	}
     PlayerInfo[playerid][pRank] = rank;
 
+    ResetPlayerOrgStatistics(playerid);
 	MruMySQL_SavePlayerOrganisation(playerid);
     return 1;
 }
