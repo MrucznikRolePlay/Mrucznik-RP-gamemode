@@ -573,7 +573,6 @@ SprawdzWjazdy(playerid)
 			// vehicle
 			SetVehicleVirtualWorld(vehicleid, wjazdy[i][wj_VW]);
 			LinkVehicleToInterior(vehicleid, wjazdy[i][wj_Int]);
-			SetVehiclePos(vehicleid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
 			defer ResetPosition(vehicleid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z], 5);
 
 			foreach(new i2 : Player)
@@ -592,14 +591,13 @@ SprawdzWjazdy(playerid)
 			IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
 		{
 			// player
-			SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
-			SetPlayerInterior(playerid, wjazdy[i][wj_Int]);
+			SetPlayerVirtualWorld(playerid, 0);
+			SetPlayerInterior(playerid, 0);
 			SetInteriorTimeAndWeather(playerid);
 			SetPlayerLocal(playerid, PLOCAL_DEFAULT);
 			// vehicle
 			SetVehicleVirtualWorld(vehicleid, 0);
 			LinkVehicleToInterior(vehicleid, 0);
-			SetVehiclePos(vehicleid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 			defer ResetPosition(vehicleid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z], 5);
 
 			SetServerWeatherAndTime(playerid); 
