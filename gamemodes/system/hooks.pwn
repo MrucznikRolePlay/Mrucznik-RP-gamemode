@@ -69,19 +69,16 @@ timer AnimateObjectPickup[1000](obj, Float:x, Float:y, Float:z, step)
     else if(step % 4 == 1)
     {
         newZ = z - 0.1;
-        MoveDynamicObject(obj, x, y, z + 0.01, 100.0, 0.0, 0.0, 0.0); // reset rotation
         MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 90.0);
     }
     else if(step % 4 == 2)
     {
         newZ = z + 0.1;
-        MoveDynamicObject(obj, x, y, z + 0.01, 100.0, 0.0, 0.0, 0.0); // reset rotation
         MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 180.0);
     }
     else if(step % 4 == 3)
     {
         newZ = z - 0.1;
-        MoveDynamicObject(obj, x, y, z - 0.01, 100.0, 0.0, 0.0, 0.0); // reset rotation
         MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 270.0);
     }
 
