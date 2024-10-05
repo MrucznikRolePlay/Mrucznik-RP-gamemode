@@ -47,7 +47,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_
 	if(success == COMMAND_OK) {
 		Log(commandLog, E_LOGLEVEL:DEBUG, "%s wykona³ komendê %s", GetPlayerLogName(playerid), cmdtext);
 	}
-	return COMMAND_OK;
+	return success;
 }
 
 /*
@@ -126,11 +126,6 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	}
 
 	return COMMAND_OK;
-}
-
-public OnPlayerCommandPerformed(playerid, cmdtext[], success)
-{
-    return true; 
 }
 
 //-----------------<[ Funkcje: ]>-------------------
