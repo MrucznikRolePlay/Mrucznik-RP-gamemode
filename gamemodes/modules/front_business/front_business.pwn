@@ -136,10 +136,18 @@ StopFrontBizTakeover(bizId)
 	// Check the winner
 	if(winner != -1)
 	{
-		if(winner == FrontBusiness[bizId][Owner] || maxScore < TAKE_OVER_POINT_THRESHOLD)
+		if(winner == FrontBusiness[bizId][Owner])
 		{
 			// successful defence
 			SuccessfulDefenceMessage(bizId, winner);
+		}
+		else if(maxScore < TAKE_OVER_POINT_THRESHOLD)
+		{
+			SuccessfulDefenceMessage(bizId, FrontBusiness[bizId][Owner]);
+			SendFamilyMessage(winner, COLOR_RED, "Koniec przejmowania!");
+			SendFamilyMessage(winner, COLOR_RED, sprintf(
+				"Niestety, Twojej organizacji nie uda³o siê prekroczyæ progu %d punktów wymaganego do przejêcia biznesu",
+				TAKE_OVER_POINT_THRESHOLD));
 		}
 		else
 		{
@@ -211,6 +219,10 @@ TakeOverFrontBusiness(bizId, org)
 
 SuccessfulDefenceMessage(bizId, org)
 {
+	if(!IsActiveOrg(org))
+	{
+		return;
+	}
 	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
 }
 
