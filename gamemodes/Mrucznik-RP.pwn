@@ -685,7 +685,7 @@ public OnPlayerShootDynamicObject(playerid, weaponid, objectid, Float:x, Float:y
 {
 	if(GetPVarInt(playerid, "debug-objects") == 1)
 	{
-		new str[128], Float:px, Float:py, Float:pz, Float:rx, Float:ry, Float:rz;
+		new str[MAX_MESSAGE_LENGTH], Float:px, Float:py, Float:pz, Float:rx, Float:ry, Float:rz;
 		GetDynamicObjectPos(objectid, px, py, pz);
 		GetDynamicObjectRot(objectid, rx, ry, rz);
 		format(str, sizeof str, "ID: %d | Model: %d | Pos: %f, %f, %f, %f, %f, %f", objectid, GetDynamicObjectModel(objectid), px, py, pz, rx, ry, rz);
