@@ -115,8 +115,8 @@ StartFrontBizTakeover(bizId)
 		20.0, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
 		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][GangZoneArea]);
 	
-	FrontBusiness[bizId][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], 
-		FrontBusiness[bizId][OutZ], FrontBusiness[bizId][OutZ] + 10, 
+	FrontBusiness[bizId][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], 
+		FrontBusiness[bizId][TakeoverZ], FrontBusiness[bizId][TakeoverZ] + 10, 
 		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][OutVw], FrontBusiness[bizId][OutInt]);
 }
 
@@ -221,6 +221,8 @@ TakeOverFrontBusiness(bizId, org)
 	FrontBusiness[bizId][BizColor] = color;
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "color"), color);
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "owner"), org);
+	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "profit"), 0);
+	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "leaderProfit"), 0);
 
 	GangZoneShowForAll(FrontBusiness[bizId][BizGangZone], color);
 	GangZoneStopFlashForPlayer(FrontBusiness[bizId][BizGangZone], color);
@@ -397,6 +399,22 @@ UpdateColorForOrgBusinesses(org, color)
 			}
 		}
 	}
+}
+
+ResetOrgBusinessesToDefault(org)
+{
+    for(new i; i<sizeof(FrontBusiness); i++)
+    {
+        if(FrontBusiness[i][Owner] == org)
+        {
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "owner"), 0);
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), COLOR_BROWN);
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "profit"), 0);
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "leaderProfit"), 0);
+            FrontBusiness[i][Owner] = 0;
+            FrontBusiness[i][BizColor] = COLOR_BROWN;
+        }
+    }
 }
 
 IsAtCasino(playerid)

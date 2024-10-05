@@ -103,7 +103,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 	else if(strcmp(action, "color", true) == 0 || strcmp(action, "kolor", true) == 0)
 	{
 		new color;
-		if( sscanf(params, "h", color))
+		if(sscanf(params, "h", color))
 		{
 			sendTipMessage(playerid, "U¿yj /orgpanel kolor [kolor organizacji w formacie hex (np. F1A151)]");
 			sendTipMessage(playerid, "Koszt komendy: "#CHANGE_ORG_COLOR_COST" kontrabandy.");

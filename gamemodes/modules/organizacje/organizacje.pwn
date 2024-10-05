@@ -28,7 +28,7 @@
 LoadOrganisations()
 {
     new query[512], rowCount;
-    mysql_query("SELECT `Type`, `Name`, `Motd`, `Color`, `x`, `y`, `z`, `a`, `Int`, `Vw`, `LeaderStake` FROM `mru_org` WHERE ID < "#MAX_ORG" ORDER BY ID");
+    mysql_query("SELECT `Type`, `Name`, `Motd`, HEX(`Color`), `x`, `y`, `z`, `a`, `Int`, `Vw`, `LeaderStake` FROM `mru_org` WHERE ID < "#MAX_ORG" ORDER BY ID");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
@@ -91,14 +91,7 @@ RemoveOrganisation(org)
         }
     }
 
-    for(new i; i<sizeof(FrontBusiness); i++)
-    {
-        if(FrontBusiness[i][Owner] == org)
-        {
-            FrontBusiness[i][Owner] = 0;
-        }
-    }
-
+    ResetOrgBusinessesToDefault(org);
     MruMySQL_RemoveOrgAssets(org);
 
     Sejf_Rodziny[org] = 0;
