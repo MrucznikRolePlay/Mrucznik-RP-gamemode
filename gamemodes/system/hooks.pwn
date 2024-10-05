@@ -62,5 +62,5 @@ timer AnimateObjectPickup[1000](obj, Float:x, Float:y, Float:z, Float:rot, step)
 {
     new Float:newZ = z + (step % 2 == 0 ? 0.1 : -0.1);
     MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, rot);
-    defer AnimateObjectPickup(obj, x, y, newZ, rot + 360.0, step+1);
+    defer AnimateObjectPickup(obj, x, y, newZ, rot + 359.9, step+1);
 }
