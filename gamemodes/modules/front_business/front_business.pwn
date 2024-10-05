@@ -76,13 +76,14 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ],
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 
-		CreateDynamic3DTextLabel(FrontBusiness[i][Name], FrontBusiness[i][BizColor], 
+		FrontBusiness[i][Out3DText] = CreateDynamic3DTextLabel(FrontBusiness[i][Name], FrontBusiness[i][BizColor], 
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ] + 0.2, 
 			EXTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
+
 		if(FrontBusiness[i][InX] != 0.0) 
 		{
-			CreateDynamic3DTextLabel("Wyjœcie", FrontBusiness[i][BizColor], 
+			FrontBusiness[i][In3DText] = CreateDynamic3DTextLabel("Wyjœcie", FrontBusiness[i][BizColor], 
 				FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ] + 0.2, 
 				INTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 				FrontBusiness[i][InVw], FrontBusiness[i][InInt]);
@@ -378,6 +379,24 @@ IsAtFrontBusinessInteriorType(playerid, type)
 		}
 	}
 	return -1;
+}
+
+UpdateColorForOrgBusinesses(org, color)
+{
+	for(new i; i<sizeof(FrontBusiness); i++)
+	{
+		if(FrontBusiness[i][Owner] == org)
+		{
+			FrontBusiness[i][BizColor] = color;
+			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), color);
+			GangZoneShowForAll(FrontBusiness[i][BizGangZone], color | 0x44);
+			UpdateDynamic3DTextLabelText(FrontBusiness[i][Out3DText], color, FrontBusiness[i][Name]);
+			if(FrontBusiness[i][InX] != 0.0)
+			{
+				UpdateDynamic3DTextLabelText(FrontBusiness[i][In3DText], color, "Wyjœcie");
+			}
+		}
+	}
 }
 
 IsAtCasino(playerid)

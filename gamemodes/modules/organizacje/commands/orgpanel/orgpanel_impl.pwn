@@ -125,6 +125,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		color = (color << 8); // aplha channel
 		OrgInfo[org][o_Color] = color;
+		UpdateColorForOrgBusinesses(org, color);
 		TakeContraband(playerid, CHANGE_ORG_COLOR_COST);
 		SendClientMessage(playerid, color, "Teraz Twoja organizacja bêdzie w takim kolorze.");
 		SaveOrg(org);

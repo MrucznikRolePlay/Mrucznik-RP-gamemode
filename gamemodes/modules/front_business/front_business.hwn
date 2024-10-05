@@ -111,7 +111,9 @@ enum eFrontBusinessInfo {
     TakeoverActive,
     TakeoverStartTime,
     TakingOver[MAX_ORG],
-    TakingOverScore[MAX_ORG]
+    TakingOverScore[MAX_ORG],
+    STREAMER_TAG_3D_TEXT_LABEL:Out3DText, 
+    STREAMER_TAG_3D_TEXT_LABEL:In3DText
 };
 
 //-----------------<[ Zmienne: ]>-------------------
