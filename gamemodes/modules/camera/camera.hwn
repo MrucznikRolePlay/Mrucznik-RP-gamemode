@@ -24,7 +24,7 @@
 //------------------<[ Enumy: ]>--------------------
 enum
 {
-	d_MainMenu = DIALOG_OFFSET,
+	d_MainMenu = 3960,
 	d_NewCamName,
 	d_ProjectOptions,
 	d_ExportDialog,

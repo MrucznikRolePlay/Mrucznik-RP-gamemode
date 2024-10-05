@@ -31,8 +31,6 @@
 #define CAM_HI_SPEED    (40.0)  // When pressing SPRINT (Space default)
 #define CAM_LO_SPEED    (3.0)   // When pressing WALK (Alt default)
 
-#define DIALOG_OFFSET 4960
-
 #define MAX_CAMDATA (32)
 
 //end

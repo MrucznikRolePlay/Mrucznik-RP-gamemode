@@ -18,7 +18,7 @@ CheckDialogId(playerid, dialogid)
         if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B³êdne ID GUI.");
-        Log(serverLog, WARNING, "B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
+        Log(serverLog, WARNING, "B³êdne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid, iddialog[playerid]);
         return 0;
     }
 	return 1;
