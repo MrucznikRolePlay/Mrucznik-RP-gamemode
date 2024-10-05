@@ -55,8 +55,8 @@ new FrontBusinessBenefits[BIZ_TYPE][64] = {
 	"20\% wiecej kontrabandy",
 	"neony, 50\% tansza naprawa~n~50\% tanszy tuning",
     "Darmowe tankowanie",
-    "Procent od hazardu w biznesie",
-    "2 razy wiecej materialow za kurs"
+    "2.5 procent od hazardu~n~w tym kasynie",
+    "2 razy wiecej materialow"
 };
 GetFrontBusinessIcon(type)
 {
