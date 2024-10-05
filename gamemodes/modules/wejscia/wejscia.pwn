@@ -574,6 +574,7 @@ SprawdzWjazdy(playerid)
 			LinkVehicleToInterior(vehicleid, wjazdy[i][wj_Int]);
 			SetVehiclePos(vehicleid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
 			SetPlayerLocal(playerid, wjazdy[i][wj_PLOCAL]);
+			defer ResetPosition(vehicleid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z], 5);
 
 			foreach(new i2 : Player)
 			{
@@ -617,6 +618,12 @@ SprawdzWjazdy(playerid)
 		
 	}
 	return 0;
+}
+
+timer ResetPosition[100](vehicleid, Float:x, Float:y, Float:z, times)
+{
+	SetVehiclePos(vehicleid, x, y, z);
+	defer ResetPosition(vehicleid, x, y, z, times-1);
 }
 
 //------------------<[ MySQL: ]>--------------------
