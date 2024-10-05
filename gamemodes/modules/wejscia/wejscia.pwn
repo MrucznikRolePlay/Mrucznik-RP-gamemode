@@ -504,7 +504,7 @@ SprawdzWejscia(playerid)
 //-------------------
 //-----[ Wjedz ]-----
 //-------------------
-StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
+StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, Int=0, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
 {
 	wjazdy[valueWjedz][wj_X] = wjedzX;
 	wjazdy[valueWjedz][wj_Y] = wjedzY;

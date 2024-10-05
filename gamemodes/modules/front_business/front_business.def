@@ -43,6 +43,8 @@
 
 #define FRONT_BUSINESS_VW 8800
 
+#define LOCAL_PAY_N_SPRAY 888
+
 //------------------<[ Makra: ]>-------------------
 #define RedisFrontBizKey(%0,%1) sprintf("front_biz:%d:%s", %0, %1)
 

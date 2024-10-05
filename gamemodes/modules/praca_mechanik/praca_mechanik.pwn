@@ -38,6 +38,10 @@ IsAtWarsztat(playerid)
 		{ // Sunshine Autos Vice City
 			return 1;
 		}
+		if(PlayerInfo[playerid][pLocal] == LOCAL_PAY_N_SPRAY)
+		{ // Interiory Pay'N'Spray
+			return 1;
+		}
 		
 		if(IsPlayerInRangeOfPoint(playerid, 18.0, 1788.2085,-1694.2456,13.1814) || IsPlayerInRangeOfPoint(playerid, 18.0, 1779.0632,-1693.1831,13.1608) || IsPlayerInRangeOfPoint(playerid, 18.0, 1805.4418,-1713.5634,13.5176))
 		{//Warsztat czerwony
