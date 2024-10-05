@@ -67,7 +67,7 @@ LoadFrontBusinesses()
 		new Float:areaMaxX = FrontBusiness[i][OutX] + FRONT_BUSINESS_GANGZONE_SIZE;
 		new Float:areaMaxY = FrontBusiness[i][OutY] + FRONT_BUSINESS_GANGZONE_SIZE;
 		FrontBusiness[i][BizGangZone] = GangZoneCreate(areaMinX, areaMinY, areaMaxX, areaMaxY);
-		GangZoneShowForAll(FrontBusiness[i][BizGangZone], FrontBusiness[i][BizColor] | 0x44);
+		GangZoneShowForAll(FrontBusiness[i][BizGangZone], FrontBusiness[i][BizColor] & 0xFFFFFF44);
 
 		FrontBusiness[i][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
@@ -224,8 +224,8 @@ TakeOverFrontBusiness(bizId, org)
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "profit"), 0);
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "leaderProfit"), 0);
 
-	GangZoneShowForAll(FrontBusiness[bizId][BizGangZone], color);
-	GangZoneStopFlashForPlayer(FrontBusiness[bizId][BizGangZone], color);
+	GangZoneShowForAll(FrontBusiness[bizId][BizGangZone], color & 0xFFFFFF44);
+	GangZoneStopFlashForAll(FrontBusiness[bizId][BizGangZone]);
 }
 
 SuccessfulDefenceMessage(bizId, org)
@@ -391,7 +391,7 @@ UpdateColorForOrgBusinesses(org, color)
 		{
 			FrontBusiness[i][BizColor] = color;
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), color);
-			GangZoneShowForAll(FrontBusiness[i][BizGangZone], color | 0x44);
+			GangZoneShowForAll(FrontBusiness[i][BizGangZone], color & 0xFFFFFF44);
 			UpdateDynamic3DTextLabelText(FrontBusiness[i][Out3DText], color, FrontBusiness[i][Name]);
 			if(FrontBusiness[i][InX] != 0.0)
 			{
