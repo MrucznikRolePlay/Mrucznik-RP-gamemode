@@ -96,9 +96,11 @@ LoadFrontBusinesses()
 
 		if(FrontBusiness[i][Type] == FRONT_BIZ_TYPE_SPRAY)
 		{
-			StworzWjedz(FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ], 
+			new idx = FrontBizPayNSprayID;
+			StworzWjedz(FakePayNSpray[idx][0], FakePayNSpray[idx][1], FakePayNSpray[idx][2], 
 				FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ], 
 				25.0, FrontBusiness[i][InVw], FrontBusiness[i][InInt], " ", " ", 0, 0, LOCAL_PAY_N_SPRAY);
+			FrontBizPayNSprayID++;
 		}
 	}
 }

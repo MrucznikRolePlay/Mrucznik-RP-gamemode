@@ -23,9 +23,10 @@
 
 //------------------<[ Enumy: ]>--------------------
 // Vice City
+new FrontBizPayNSprayID;
 new Float:FakePayNSpray[6][3] = {
     {-4211.2192, 992.4309, 4.9267}, // pay n spray ocean beach
-    {-3872.2920, 2680.3902, 5.8135}, // waschington bech pay n spray
+    {-3872.2920, 2680.3902, 5.8135}, // vice point pay n spray
     {-5111.2117, 982.5439, 6.2747}, // pay n spray doki pos
     {-5070.8638, 2131.6451, 5.5625}, // pay n spray little haiti
     {-5208.0952, 1410.6799, 1.8265}, // sunshine auto pay n spray
