@@ -403,16 +403,16 @@ UpdateColorForOrgBusinesses(org, color)
 
 ResetOrgBusinessesToDefault(org)
 {
+	UpdateColorForOrgBusinesses(org, COLOR_BROWN);
     for(new i; i<sizeof(FrontBusiness); i++)
     {
         if(FrontBusiness[i][Owner] == org)
         {
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "owner"), 0);
-			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), COLOR_BROWN);
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "profit"), 0);
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "leaderProfit"), 0);
             FrontBusiness[i][Owner] = 0;
-            FrontBusiness[i][BizColor] = COLOR_BROWN;
+
         }
     }
 }
