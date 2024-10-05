@@ -623,7 +623,10 @@ SprawdzWjazdy(playerid)
 timer ResetPosition[100](vehicleid, Float:x, Float:y, Float:z, times)
 {
 	SetVehiclePos(vehicleid, x, y, z);
-	defer ResetPosition(vehicleid, x, y, z, times-1);
+	if(times > 0)
+	{
+		defer ResetPosition(vehicleid, x, y, z, times-1);
+	}
 }
 
 //------------------<[ MySQL: ]>--------------------

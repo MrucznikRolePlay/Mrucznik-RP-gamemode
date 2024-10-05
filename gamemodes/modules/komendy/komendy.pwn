@@ -92,12 +92,10 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		case COMMAND_ZERO_RET:
 		{
 			sendErrorMessage(playerid, "Komenda zwróci³a wartoœæ zerow¹.");
-			return COMMAND_ZERO_RET;
 		}
 		case COMMAND_BAD_PREFIX:
 		{
 			sendErrorMessage(playerid, "Z³y prefix! U¿yj \"/\".");
-			return COMMAND_BAD_PREFIX;
 		}
 		case COMMAND_DENIED:
 		{
@@ -107,17 +105,14 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		case COMMAND_INVALID_INPUT:
 		{
 			sendErrorMessage(playerid, "Podano nieprawid³owe argumenty do komendy.");
-			return COMMAND_INVALID_INPUT;
 		}
 		case COMMAND_NO_PLAYER:
 		{
 			sendErrorMessage(playerid, "Nie powinieneœ istnieæ.");
-			return COMMAND_NO_PLAYER;
 		}
 		case COMMAND_UNDEFINED, COMMAND_HIDDEN:
 		{
 			sendErrorMessage(playerid, "Ta komenda nie istnieje. Wpisz /komendy aby zobaczyæ listê dostêpnych komend.");
-			return COMMAND_UNDEFINED;
 		}
 	}
 

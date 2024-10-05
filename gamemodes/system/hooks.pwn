@@ -60,7 +60,7 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
 
 timer AnimateObjectPickup[120000](obj, Float:x, Float:y, Float:z, Float:rot)
 {
-    MoveDynamicObject(obj, x, y, z, 0.1, 0.0, 0.0, rot);
+    MoveDynamicObject(obj, x, y, z + 0.1, 1.0, 0.0, 0.0, rot);
     
     new Float:newRot = rot > 1.0 ? 259.0 : 0.0;
     defer AnimateObjectPickup[1000](obj, x, y, z, newRot);
