@@ -57,7 +57,7 @@ CreateActorsInDMV(playerid)
 	{
 		if(Actors[i][a_Group] == AGROUP_DMV)
 		{
-			if(freePlace < 8)
+			if(freePlace < sizeof(okienkoPos))
 			{
 				//SetActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
 				SetDynamicActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
@@ -100,7 +100,7 @@ DestroyActorsInDMV(playerid)
 	{
 		if(Actors[i][a_Group] == AGROUP_DMV)
 		{
-			if(freePlace < 8)
+			if(freePlace < sizeof(okienkoPos))
 			{
 				SetDynamicActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]+10);
 				if(playerid != INVALID_PLAYER_ID)
