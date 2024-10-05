@@ -58,7 +58,7 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
 // Reroute future calls to our function.
 #define CreateDynamicPickup Mru_CreateDynamicPickup
 
-timer AnimateObjectPickup[1000](obj, Float:x, Float:y, Float:z, step)
+timer AnimateObjectPickup[950](obj, Float:x, Float:y, Float:z, step)
 {
     new Float:newZ;
     if(step % 4 == 0)
