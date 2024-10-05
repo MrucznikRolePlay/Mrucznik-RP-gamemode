@@ -128,6 +128,11 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 	return COMMAND_OK;
 }
 
+public OnPlayerCommandPerformed(playerid, cmdtext[], success)
+{
+    return true; 
+}
+
 //-----------------<[ Funkcje: ]>-------------------
 RunCommand(playerid, command[], params[]) //temporary
 {
