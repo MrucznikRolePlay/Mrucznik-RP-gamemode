@@ -123,7 +123,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ kolor organizacji.", GetNick(playerid)));
 
-		color = (color << 8); // aplha channel
+		color = (color << 8) | 0x000000FF; // aplha channel
 		OrgInfo[org][o_Color] = color;
 		UpdateColorForOrgBusinesses(org, color);
 		TakeContraband(playerid, CHANGE_ORG_COLOR_COST);
