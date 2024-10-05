@@ -565,17 +565,23 @@ SprawdzWjazdy(playerid)
 				return 0;
 			}
 
-			SetVehiclePos(vehicleid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
+			// player
+			SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+			SetPlayerInterior(playerid, wjazdy[i][wj_Int]);
+			SetInteriorTimeAndWeather(playerid);
+			// vehicle
 			SetVehicleVirtualWorld(vehicleid, wjazdy[i][wj_VW]);
 			LinkVehicleToInterior(vehicleid, wjazdy[i][wj_Int]);
+			SetVehiclePos(vehicleid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
 			SetPlayerLocal(playerid, wjazdy[i][wj_PLOCAL]);
 
-			SetInteriorTimeAndWeather(playerid);
 			foreach(new i2 : Player)
 			{
 				if(GetPlayerVehicleID(i2) == vehicleid && GetPlayerVehicleSeat(i2) != 0)
 				{
 					SetInteriorTimeAndWeather(i2);
+					SetPlayerVirtualWorld(i2, wjazdy[i][wj_VW]);
+					SetPlayerInterior(i2, wjazdy[i][wj_Int]);
 					SetPlayerLocal(i2, wjazdy[i][wj_PLOCAL]);
 				}
 			}
@@ -584,6 +590,12 @@ SprawdzWjazdy(playerid)
 		else if(GetPlayerVirtualWorld(playerid) == wjazdy[i][wj_VW] &&
 			IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
 		{
+
+			// player
+			SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+			SetPlayerInterior(playerid, wjazdy[i][wj_Int]);
+			SetInteriorTimeAndWeather(playerid);
+			// vehicle
 			SetVehiclePos(vehicleid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
 			SetVehicleVirtualWorld(vehicleid, 0);
 			LinkVehicleToInterior(vehicleid, 0);
@@ -595,6 +607,8 @@ SprawdzWjazdy(playerid)
 				if(GetPlayerVehicleID(i2) == vehicleid && GetPlayerVehicleSeat(i2) != 0)
 				{
 					SetServerWeatherAndTime(i2);
+					SetPlayerVirtualWorld(i2, 0);
+					SetPlayerInterior(i2, 0);
 					SetPlayerLocal(i2, PLOCAL_DEFAULT);
 				}
 			}

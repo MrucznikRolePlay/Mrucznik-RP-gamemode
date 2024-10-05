@@ -42,7 +42,7 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
     if(x >= 4096.0 || x <= -4096.0 || y >= 4096.0 || y <= -4096.0)
     {
         new obj = CreateDynamicObject(modelid, x, y, z, 0.0, 0.0, 0.0, worldid, interiorid, playerid, streamdistance, streamdistance, areaid, priority);
-        defer AnimateObjectPickup(obj, 259.0);
+        defer AnimateObjectPickup(obj, x, y, z, 259.0);
     }
     else
     {
@@ -58,12 +58,10 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
 // Reroute future calls to our function.
 #define CreateDynamicPickup Mru_CreateDynamicPickup
 
-timer AnimateObjectPickup[10000](obj, Float:rot)
+timer AnimateObjectPickup[120000](obj, Float:x, Float:y, Float:z, Float:rot)
 {
-    new Float:x, Float:y, Float:z;
-    GetDynamicObjectPos(obj, x, y, z);
     MoveDynamicObject(obj, x, y, z, 0.1, 0.0, 0.0, rot);
     
     new Float:newRot = rot > 1.0 ? 259.0 : 0.0;
-    defer AnimateObjectPickup[1000](obj, newRot);
+    defer AnimateObjectPickup[1000](obj, x, y, z, newRot);
 }
