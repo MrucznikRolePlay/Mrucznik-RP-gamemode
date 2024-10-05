@@ -341,10 +341,6 @@ CancelCurrentNodeEdit(playerid)
 
 EnterFreeCam(playerid)
 {
-	new
-		tmpCam = gPlayerCamData[playerid][p_CamID],
-		tmpNode = gPlayerCamData[playerid][p_Node];
-
 	CancelSelectTextDraw(playerid);
 	ToggleEditGUI(playerid, false);
 
