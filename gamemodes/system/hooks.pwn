@@ -42,7 +42,7 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
     if(x >= 4096.0 || x <= -4096.0 || y >= 4096.0 || y <= -4096.0)
     {
         new obj = CreateDynamicObject(modelid, x, y, z, 0.0, 0.0, 0.0, worldid, interiorid, playerid, streamdistance, streamdistance, areaid, priority);
-        defer AnimateObjectPickup(obj, x, y, z, 0.0);
+        defer AnimateObjectPickup(obj, x, y, z, 0.0, 0);
     }
     else
     {
