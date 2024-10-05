@@ -601,6 +601,7 @@ SprawdzWjazdy(playerid)
 			SetVehicleVirtualWorld(vehicleid, 0);
 			LinkVehicleToInterior(vehicleid, 0);
 			SetVehiclePos(vehicleid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
+			defer ResetPosition(vehicleid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z], 5);
 
 			SetServerWeatherAndTime(playerid); 
 			foreach(new i2 : Player)
