@@ -473,6 +473,7 @@ SprawdzWejscia(playerid)
 			{
 				if(wjazdy[iduo][pFracOwn] == 0 && wjazdy[iduo][pOrgOwn] == 0)
 				{
+					SetPlayerInterior(playerid, wjazdy[iduo][wj_Int]);
 					SetPlayerVirtualWorld(playerid, wjazdy[iduo][wj_VW]);
 					SetPLocal(playerid, wjazdy[iduo][wj_PLOCAL]);
 					SetPlayerPos(playerid, wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]);
@@ -482,6 +483,7 @@ SprawdzWejscia(playerid)
 				{
 					if(GetPlayerFraction(playerid) == wjazdy[iduo][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[iduo][pOrgOwn])
 					{
+						SetPlayerInterior(playerid, wjazdy[iduo][wj_Int]);
 						SetPlayerVirtualWorld(playerid, wjazdy[iduo][wj_VW]);
 						SetPLocal(playerid, wjazdy[iduo][wj_PLOCAL]);
 						SetPlayerPos(playerid, wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]);
@@ -489,8 +491,10 @@ SprawdzWejscia(playerid)
 				}
 				
 			}
-			if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]))
+			if(GetPlayerVirtualWorld(playerid) == wjazdy[iduo][wj_VW] &&
+				IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]))
 			{
+				SetPlayerInterior(playerid, 0);
 				SetPlayerVirtualWorld(playerid, 0);
 				SetPLocal(playerid, PLOCAL_DEFAULT);
 				SetPlayerPos(playerid, wjazdy[iduo][wj_X], wjazdy[iduo][wj_Y], wjazdy[iduo][wj_Z]);
@@ -504,7 +508,7 @@ SprawdzWejscia(playerid)
 //-------------------
 //-----[ Wjedz ]-----
 //-------------------
-StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, Int=0, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
+StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, int=0, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
 {
 	wjazdy[valueWjedz][wj_X] = wjedzX;
 	wjazdy[valueWjedz][wj_Y] = wjedzY;
@@ -513,6 +517,7 @@ StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjed
 	wjazdy[valueWjedz][wy_Y] = wyjedzY;
 	wjazdy[valueWjedz][wy_Z] = wyjedzZ;
 	wjazdy[valueWjedz][wj_VW] = VW;
+	wjazdy[valueWjedz][wj_Int] = int;
 	wjazdy[valueWjedz][wj_PLOCAL] = local;
 	wjazdy[valueWjedz][pFracOwn] = FracOwner;
 	wjazdy[valueWjedz][pOrgOwn] = OrgOwner;
@@ -660,7 +665,8 @@ SprawdzWjazdy(playerid)
 			}
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
+		if(GetPlayerVirtualWorld(playerid) == wjazdy[i][wj_VW] &&
+			IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
 		{
 			if(IsPlayerInAnyVehicle(playerid))
 			{
@@ -706,7 +712,6 @@ public WjedzTimerDebug(playerid)
 	{
 		for(new i; i<valueWjedz; i++)
 		{
-		
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
 			{
 				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
@@ -720,6 +725,7 @@ public WjedzTimerDebug(playerid)
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);	
+				LinkVehicleToInterior(pVehAcID, wjazdy[i][wj_Int]);
 			}
 			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
 			{
@@ -734,6 +740,7 @@ public WjedzTimerDebug(playerid)
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, 0);
 				SetVehicleVirtualWorld(pVehAcID, 0);
+				LinkVehicleToInterior(pVehAcID, 0);
 			}
 			
 		}
