@@ -591,7 +591,6 @@ SprawdzWjazdy(playerid)
 		else if(GetPlayerVirtualWorld(playerid) == wjazdy[i][wj_VW] &&
 			IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
 		{
-
 			// player
 			SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
 			SetPlayerInterior(playerid, wjazdy[i][wj_Int]);

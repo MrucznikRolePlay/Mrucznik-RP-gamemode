@@ -3175,7 +3175,7 @@ public PlayersCheckerMinute()
 		}
 		if(gPlayerLogged[j] > 0)
 		{
-			if(GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "JestPodczasWjezdzania") == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
+			if(GetPlayerSkin(j) == 0 && GetPlayerAdminDutyStatus(j) == 0 && GetPVarInt(j, "IsAGetInTheCar") == 0)
 			{
 				if(PlayerInfo[j][pSkin] > 0)
 				{

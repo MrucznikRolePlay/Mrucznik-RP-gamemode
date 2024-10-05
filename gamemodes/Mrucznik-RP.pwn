@@ -4464,35 +4464,16 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 	}
 	if((newkeys & KEY_HANDBRAKE) && (newkeys & KEY_CROUCH) && (GetPlayerState(playerid)==PLAYER_STATE_DRIVER))
 	{
-		if(GetPVarInt(playerid, "JestPodczasWjezdzania") == 1)
-		{
-			sendTipMessage(playerid, "Jesteœ podczas wje¿d¿ania!"); 
-			return 1;
-		}
 		if(GetPVarInt(playerid, "IsAGetInTheCar") == 1)
 		{
 			sendErrorMessage(playerid, "Jesteœ podczas wsiadania - odczekaj chwile.");
 			return 1;
 		}	
-		if(SprawdzWjazdy(playerid))
-		{
-		
-		}
-		else
-		{
-			
-		}
+		SprawdzWjazdy(playerid);
 	}
 	if((newkeys & KEY_SPRINT) && newkeys & KEY_WALK)
 	{
-		if(SprawdzBramy(playerid))
-		{
-		
-		}
-		else if(SprawdzWejscia(playerid))
-		{
-		
-		}
+		SprawdzBramy(playerid) || SprawdzWejscia(playerid);
 	}
 	if(newkeys & KEY_SECONDARY_ATTACK)
 	{
