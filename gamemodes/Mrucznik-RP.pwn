@@ -1053,14 +1053,6 @@ public OnPlayerEnterVehicle(playerid, vehicleid, ispassenger)
 		SetPlayerPos(playerid, pX,pY,pZ+2);
 	}
 
-	new radio[128];
-	strcat(radio, GetVehicleRadio(vehicleid));
-	if(!isnull(radio))
-	{
-		PlayAudioStreamForPlayer(playerid, radio);
-		SetPVarInt(playerid, "sanlisten", 3);
-	}
-
     new engine, lights, alarm, doors, bonnet, boot, objective;
  	GetVehicleParamsEx(vehicleid, engine, lights ,alarm, doors, bonnet, boot, objective);
     if(!ispassenger)
@@ -3087,7 +3079,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 		if(newstate == PLAYER_STATE_DRIVER)
         {
 			SetPlayerArmedWeapon(playerid, PlayerInfo[playerid][pGun0]); //anty driveby
-        	new vehicleid = GetPlayerVehicleID(playerid);
+			new vehicleid = GetPlayerVehicleID(playerid);
         	new lcarid = VehicleUID[vehicleid][vUID];
         	if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL)
         	{
@@ -3173,7 +3165,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     if(oldstate == PLAYER_STATE_PASSENGER)
     {
 		Driver_OnPassengerExitVehicle(playerid);
-
 		PlayerTextDrawHide(playerid, Licznik[playerid]);
     }
 	if(newstate == PLAYER_STATE_ONFOOT)

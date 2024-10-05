@@ -317,4 +317,27 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys) {
 	return 1;
 }
 
+hook OnPlayerStateChange(playerid, newstate, oldstate)
+{
+	if(newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
+	{
+		new radio[128];
+		new vehicleid = GetPlayerVehicleID(playerid);
+		strcat(radio, GetVehicleRadio(vehicleid));
+		if(!isnull(radio))
+		{
+			PlayAudioStreamForPlayer(playerid, radio);
+			SetPVarInt(playerid, "sanlisten", 3);
+		}
+	}
+	else if(oldstate == PLAYER_STATE_DRIVER || oldstate == PLAYER_STATE_EXIT_VEHICLE || oldstate == PLAYER_STATE_PASSENGER)
+	{
+		if(GetPVarInt(playerid, "sanlisten") > 0)
+		{
+			DeletePVar(playerid, "sanlisten");
+			StopAudioStreamForPlayer(playerid);
+		}
+	}
+}
+
 //end
