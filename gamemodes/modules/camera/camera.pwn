@@ -348,7 +348,6 @@ EnterFreeCam(playerid)
 	CancelSelectTextDraw(playerid);
 	ToggleEditGUI(playerid, false);
 
-	SetDynamicObjectPos(noclipdata[playerid][flyobject], cam_NodeData[tmpCam][tmpNode][cam_cPosX], cam_NodeData[tmpCam][tmpNode][cam_cPosY], cam_NodeData[tmpCam][tmpNode][cam_cPosZ]);
 	JumpToNode(playerid, gPlayerCamData[playerid][p_Node]);
 }
 
