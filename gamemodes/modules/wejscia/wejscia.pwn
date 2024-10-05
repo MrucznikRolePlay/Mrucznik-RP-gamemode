@@ -718,12 +718,14 @@ public WjedzTimerDebug(playerid)
 				{
 					TogglePlayerControllable(playerid, 1);
 					SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+					SetPlayerInterior(playerid, wjazdy[i][wj_Int]);
 					TogglePlayerControllable(playerid, 0);
 					sendTipMessage(playerid, "Ustalanie VW - Ustalono"); 
 					return 1;
 				}
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+				SetPlayerInterior(playerid, wjazdy[i][wj_Int]);
 				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);	
 				LinkVehicleToInterior(pVehAcID, wjazdy[i][wj_Int]);
 			}
@@ -739,6 +741,7 @@ public WjedzTimerDebug(playerid)
 				}
 				RemovePlayerFromVehicle(playerid);
 				SetPlayerVirtualWorld(playerid, 0);
+				SetPlayerInterior(playerid, 0);
 				SetVehicleVirtualWorld(pVehAcID, 0);
 				LinkVehicleToInterior(pVehAcID, 0);
 			}
