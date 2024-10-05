@@ -62,6 +62,7 @@ timer AnimateObjectPickup[1](obj, Float:rot)
 {
     new Float:x, Float:y, Float:z;
     GetDynamicObjectPos(obj, x, y, z);
-    new moveTime = MoveDynamicObject(obj, x, y, z, 1.0, rot, rot, rot);
+    new addZ = rot > 0 ? -0.1 : 0.1;
+    new moveTime = MoveDynamicObject(obj, x, y, z + addZ, 0.1, 0.0, 0.0, rot);
     defer AnimateObjectPickup[moveTime](obj, rot > 0 ? 360.0 : 0.0);
 }
