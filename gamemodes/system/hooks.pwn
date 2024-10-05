@@ -42,7 +42,7 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
     if(x >= 4096.0 || x <= -4096.0 || y >= 4096.0 || y <= -4096.0)
     {
         new obj = CreateDynamicObject(modelid, x, y, z, 0.0, 0.0, 0.0, worldid, interiorid, playerid, streamdistance, streamdistance, areaid, priority);
-        defer AnimateObjectPickup(obj, x, y, z, 0.0, 0);
+        defer AnimateObjectPickup(obj, x, y, z, 0);
     }
     else
     {
@@ -58,9 +58,32 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
 // Reroute future calls to our function.
 #define CreateDynamicPickup Mru_CreateDynamicPickup
 
-timer AnimateObjectPickup[1000](obj, Float:x, Float:y, Float:z, Float:rot, step)
+timer AnimateObjectPickup[1000](obj, Float:x, Float:y, Float:z, step)
 {
-    new Float:newZ = z + (step % 2 == 0 ? 0.1 : -0.1);
-    MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, rot);
-    defer AnimateObjectPickup(obj, x, y, newZ, rot + 359.9, step+1);
+    new Float:newZ;
+    if(step % 4 == 0)
+    {
+        newZ = z + 0.1;
+        MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 0.0);
+    }
+    else if(step % 4 == 1)
+    {
+        newZ = z - 0.1;
+        MoveDynamicObject(obj, x, y, z + 0.01, 100.0, 0.0, 0.0, 0.0); // reset rotation
+        MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 90.0);
+    }
+    else if(step % 4 == 2)
+    {
+        newZ = z + 0.1;
+        MoveDynamicObject(obj, x, y, z + 0.01, 100.0, 0.0, 0.0, 0.0); // reset rotation
+        MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 180.0);
+    }
+    else if(step % 4 == 3)
+    {
+        newZ = z - 0.1;
+        MoveDynamicObject(obj, x, y, z - 0.01, 100.0, 0.0, 0.0, 0.0); // reset rotation
+        MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 270.0);
+    }
+
+    defer AnimateObjectPickup(obj, x, y, newZ, step+1);
 }
