@@ -45,7 +45,7 @@ command_setplocal_Impl(playerid, params[256])
 		}
 		format(string, sizeof(string), "PLocal gracza %s zosta³ zmieniony przez admina %s na %d", GetNick(giveplayerid), GetNickEx(playerid), wartosc);
 		SendPunishMessage(string, giveplayerid);
-		SetPLocal(giveplayerid, wartosc);
+		SetPlayerLocal(giveplayerid, wartosc);
 	}
 	return 1;
 }

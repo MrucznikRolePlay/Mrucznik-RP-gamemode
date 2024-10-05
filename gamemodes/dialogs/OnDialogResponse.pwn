@@ -2113,7 +2113,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPos(playerid,288.0914,-1609.7465,17.9994);
     	            	SetServerWeatherAndTime(playerid); 
-						SetPLocal(playerid, PLOCAL_DEFAULT);
+						SetPlayerLocal(playerid, PLOCAL_DEFAULT);
     	            }
 					case 1://wejscie do budynku
 					{
@@ -2128,7 +2128,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid); 
 						SetPlayerPos(playerid, 287.7476,-1609.9395,33.0723); 
-						SetPLocal(playerid, PLOCAL_DEFAULT);
+						SetPlayerLocal(playerid, PLOCAL_DEFAULT);
 					}
     	            case 2://recepcja
     	            {
@@ -2143,7 +2143,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPos(playerid, 292.0818,-1610.0715,124.7512);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone", 5000, 1);
-						SetPLocal(playerid, PLOCAL_ORG_SN);
+						SetPlayerLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 3://studia
     	            {
@@ -2158,7 +2158,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPos(playerid,296.9033,-1598.3610,117.0619);
 						SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
-						SetPLocal(playerid, PLOCAL_ORG_SN);
+						SetPlayerLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 4://Akademia
     	            {
@@ -2173,7 +2173,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPos(playerid,295.1328,-1609.4705,115.6818);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
-						SetPLocal(playerid, PLOCAL_ORG_SN);
+						SetPlayerLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 5:
     	            {
@@ -2188,7 +2188,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPos(playerid,290.7577,-1604.3273,134.6113);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
-						SetPLocal(playerid, PLOCAL_ORG_SN);
+						SetPlayerLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 6://dach
     	            {
@@ -2200,7 +2200,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPos(playerid,285.8397,-1596.4153,114.5687);
     	                SetServerWeatherAndTime(playerid);
-						SetPLocal(playerid, PLOCAL_DEFAULT);
+						SetPlayerLocal(playerid, PLOCAL_DEFAULT);
     	            }
     	        }
     	    }

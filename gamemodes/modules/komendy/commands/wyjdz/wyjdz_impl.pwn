@@ -255,7 +255,7 @@ command_wyjdz_Impl(playerid)
 			SetPlayerVirtualWorld(playerid, 72);
 			SetPlayerPos(playerid, 816.5667, -1415.4117, -22.5834);
 			GameTextForPlayer(playerid, "~w~Impreza dalej trwa~n~~r~bez ciebie", 5000, 1);
-			SetPLocal(playerid, PLOCAL_DEFAULT); 
+			SetPlayerLocal(playerid, PLOCAL_DEFAULT); 
 			return 1;
 		}
         //IBIZA
@@ -516,7 +516,7 @@ command_wyjdz_Impl(playerid)
                 {
                     SetPlayerVirtualWorld(playerid, Business[i][b_enVw]); 
                     SetPlayerInterior(playerid, Business[i][b_enInt]); 
-                    SetPLocal(playerid, PLOCAL_DEFAULT); 
+                    SetPlayerLocal(playerid, PLOCAL_DEFAULT); 
                     SetPlayerPos(playerid, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]);
 					return 1; 
                 }

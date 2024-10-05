@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_radiostacja_Impl(playerid)
 {
-    if(GetPLocal(playerid) == PLOCAL_ORG_SN)
+    if(GetPlayerLocal(playerid) == PLOCAL_ORG_SN)
     {
         if(IsPlayerInFraction(playerid, FRAC_SN))
 	    {

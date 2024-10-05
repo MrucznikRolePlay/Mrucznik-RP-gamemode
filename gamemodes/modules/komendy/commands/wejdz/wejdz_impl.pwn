@@ -273,7 +273,7 @@ command_wejdz_Impl(playerid)
                 sendErrorMessage(playerid, "Nie posiadasz biletu do Vinyla!"); 
                 return 1;
             }
-            SetPLocal(playerid, PLOCAL_ORG_SN); 
+            SetPlayerLocal(playerid, PLOCAL_ORG_SN); 
             SetPlayerVirtualWorld(playerid, 71);
             SetPlayerPos(playerid, 816.4222, -1413.7644, -22.5834);
             GameTextForPlayer(playerid, "~w~Witamy w klubie", 5000, 1);
@@ -756,7 +756,7 @@ command_wejdz_Impl(playerid)
                     }
                     SetPlayerVirtualWorld(playerid, Business[i][b_vw]); 
                     SetPlayerInterior(playerid, Business[i][b_int]); 
-                    SetPLocal(playerid, Business[i][b_pLocal]); 
+                    SetPlayerLocal(playerid, Business[i][b_pLocal]); 
                     SetPlayerPos(playerid, Business[i][b_exX], Business[i][b_exY], Business[i][b_exZ]);
                     Wchodzenie(playerid);
                     return 1;  

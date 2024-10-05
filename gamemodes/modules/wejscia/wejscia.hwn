@@ -23,7 +23,7 @@
 
 //-----------------<[ Zmienne: ]>-------------------
 new iloscwejsc;
-new valueWjedz;
+new CurrentMaxCarEntrance;
 
 
 //------------------<[ Enumy: ]>--------------------

@@ -10742,13 +10742,12 @@ BuyDrinkOnClub(playerid, const dName[], dCost, dLVL, dAction)
 	}
 	return 1;
 }
-SetPLocal(playerid, wartosc)
+SetPlayerLocal(playerid, wartosc)
 {
 	PlayerInfo[playerid][pLocal] = wartosc;
-	
 	return 1;
 }
-GetPLocal(playerid)
+GetPlayerLocal(playerid)
 {
 	new wartoscLocalu; 
 	wartoscLocalu = PlayerInfo[playerid][pLocal];

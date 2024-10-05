@@ -831,7 +831,6 @@ new FBImove3 = 0;
 new FBImove5 = 0;
 new Celaki[3];
 
-new WjedzTimer[MAX_PLAYERS];
 new timeSecWjedz[MAX_PLAYERS];
 
 //koniecfbi

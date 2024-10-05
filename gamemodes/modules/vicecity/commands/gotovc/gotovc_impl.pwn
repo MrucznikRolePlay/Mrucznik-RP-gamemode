@@ -40,10 +40,19 @@ command_gotovc_Impl(playerid)
     #endif
 
 	// Set player position and facing angle
-	SetPlayerPos(playerid, -4016.4687, 1800.4810, 10.3443 + VICECITY_MOVE_Z);
-	SetPlayerFacingAngle(playerid, 90);
-	SetCameraBehindPlayer(playerid);
+    if (GetPlayerState(playerid) == 2)
+    {
+        new vehicleid = GetPlayerVehicleID(playerid);
+        SetVehiclePos(vehicleid, -4016.4687, 1800.4810, 5.3443);
+        SetVehicleZAngle(vehicleid, 90.0);
+    }
+    else
+    {
+        SetPlayerPos(playerid, -4016.4687, 1800.4810, 5.3443);
+	    SetPlayerFacingAngle(playerid, 90.0);
+    }
 
+	SetCameraBehindPlayer(playerid);
 	SendClientMessage(playerid, 0xFF0000FF, "* You teleported to Vice City!");
 	GameTextForPlayer(playerid, "~b~~h~Vice City", 3000, 3);
     return 1;

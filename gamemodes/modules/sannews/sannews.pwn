@@ -71,7 +71,7 @@ stock PlayerConditionToNews(playerid)
 	{
 		return true; 
 	}
-	if(GetPLocal(playerid) == PLOCAL_ORG_SN)
+	if(GetPlayerLocal(playerid) == PLOCAL_ORG_SN)
 	{
 		return true; 
 	}
