@@ -69,6 +69,15 @@ InitializeJobIcons()
 
 			if(x != 0.0 && y != 0.0 && z != 0.0)
 			{
+				if(jobid == JOB_MEDIC && i == 1)
+				{
+					x = -4313.8228; y = 1274.1133; z = 4.9235; // fix overlapping icons
+				}
+				if(jobid == JOB_PROSTITUTE && i == 1)
+				{
+					x = -4126.5010; y = 821.9366; z = 19.4500; // fix overlapping icons
+				}
+
 				MruCreateDynamicMapIcon(x, y, z, 
 					56, // type https://www.open.mp/docs/scripting/resources/mapicons
 					-1, // color, This should only be used with the square icon (ID: 0)
