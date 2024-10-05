@@ -62,22 +62,22 @@ ViceCityInteriors()
     // ------ [ Szpitale ] ------
     AddInterior( // Ocean Beach Hospital
         "Szpital", -4338.2310, 1268.1736, 4.9212, 0, 0,
-        "Wyjœcie", 1402.5581 + MOVE_SZPITA_Z_NETA, -26.4880, 1000.9105, 3, 7110);
+        "Wyjœcie", 1390.5581, -26.4880, 1000.9105, 3, 7110);
     MruCreateDynamicMapIcon(-4338.2310, 1268.1736, 4.9212, 22, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Vice Point Hospital
         "Szpital", -3702.2754, 2952.8380, 6.5608, 0, 0,
-        "Wyjœcie", 1402.5581 + MOVE_SZPITA_Z_NETA, -26.4880, 1000.9105, 3, 7111);
+        "Wyjœcie", 1390.5581, -26.4880, 1000.9105, 3, 7111);
     MruCreateDynamicMapIcon(-3702.2754, 2952.8380, 6.5608, 22, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Downtown Hospital
         "Szpital", -5023.0557, 3399.7706, 6.8687, 0, 0,
-        "Wyjœcie", 1402.5581 + MOVE_SZPITA_Z_NETA, -26.4880, 1000.9105, 3, 7112);
+        "Wyjœcie", 1390.5581, -26.4880, 1000.9105, 3, 7112);
     MruCreateDynamicMapIcon(-5023.0557, 3399.7706, 6.8687, 22, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Szpital Œrodek drugiego miasta
         "Szpital", -5086.7944, 1779.5925, 7.5683, 0, 0,
-        "Wyjœcie", 1402.5581 + MOVE_SZPITA_Z_NETA, -26.4880, 1000.9105, 3, 7113);
+        "Wyjœcie", 1390.5581, -26.4880, 1000.9105, 3, 7113);
     MruCreateDynamicMapIcon(-5087.2378, 1779.6316, 7.5683, 22, -1, -1, -1, -1, streamDist, iconType); // Szpital
 
 
