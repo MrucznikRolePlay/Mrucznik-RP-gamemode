@@ -268,6 +268,7 @@ SuccessfulDefenceMessage(bizId, org)
 		new string[MAX_MESSAGE_LENGTH];
 		format(string, sizeof(string), "S³u¿y porz¹dkowe z sukcesem obroni³y biznes %s przed infiltracj¹ przez mafiê", FrontBusiness[bizId][Name]);
 		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, TEAM_AZTECAS_COLOR, string);
+		RedisIncrBy("business_defended_by_lspd", 1);
 		return;
 	}
 	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
@@ -285,7 +286,7 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 		new string[MAX_MESSAGE_LENGTH];
 		format(string, sizeof(string), "S³u¿y porz¹dkowe z sukcesem rozpracowa³y próby przejêcia biznesu %s pod nielegaln¹ przykrywkê.", FrontBusiness[bizId][Name]);
 		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, TEAM_AZTECAS_COLOR, string);
-		Redis_Incr("business_defended_by_lspd", 1);
+		RedisIncrBy("business_takeover_by_lspd", 1);
 	}
 
 	if(IsActiveOrg(oldOwner))
@@ -296,7 +297,7 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 	else if(oldOwner == 0)
 	{
 		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, COLOR_PANICRED, "Biznes %s przeszed³ pod wp³ywy mafii.", FrontBusiness[bizId][Name]);
-		Redis_Incr("business_lost_from_lspd", 1);
+		RedisIncrBy("business_lost_from_lspd", 1);
 	}
 }
 
