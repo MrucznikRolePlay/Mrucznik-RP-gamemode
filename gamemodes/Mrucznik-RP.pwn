@@ -290,7 +290,8 @@ public OnGameModeInit()
     NowaWybieralka_Init();
 	LoadBusiness(); 
 	LoadBusinessPickup(); 	
-	LoadFrontBusinesses();
+    LoadOrganisations();
+	LoadFrontBusinesses(); // must be after LoadOrganisations
 	InitializeJobs();
 	CreateRandomContrabandBoxes();
 
@@ -310,7 +311,6 @@ public OnGameModeInit()
 	obiekty_OnGameModeInit();
 
     ZaladujDomy();
-    LoadOrganisations();
     Zone_Load();
 
     ZaladujTrasy(); //System wyœcigów
