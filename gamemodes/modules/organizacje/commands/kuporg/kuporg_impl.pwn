@@ -56,7 +56,13 @@ command_kuporg_Impl(playerid, color, name[34])
         return 1;
     }
 
-    CreateOrganisation(org, name, color);
+    if(color <= 0x0 || color >= 0xFFFFFF)
+    {
+        MruMessageFail(playerid, "  Niepoprawny kolor, zakres od 0 do FFFFFF.");
+        return 1;
+    }
+
+    CreateOrganisation(org, name, (color << 8) | 0x000000FF);
     InvitePlayerToOrg(playerid, org, MAIN_LEADER_RANK);
 
     ZabierzKase(playerid, CREATE_ORG_COST);

@@ -60,7 +60,7 @@ YCMD:kuporg(playerid, params[], help)
     new color, name[34];
     if(sscanf(params, "hs[34]", color, name))
     {
-        sendTipMessage(playerid, "U¿yj /kuporg [kolor w formacie hex (np. F1A151FF)] [nazwa (max 32 znaki)] ");
+        sendTipMessage(playerid, "U¿yj /kuporg [kolor w formacie hex RRGGBB (np. F1A151FF)] [nazwa (max 32 znaki)] ");
         sendTipMessage(playerid, "Koszt stworzenia organizacji: "#CREATE_ORG_COST"$ i "#CREATE_ORG_CONTRABAND_COST" kontrabandy.");
         return 1;
     }

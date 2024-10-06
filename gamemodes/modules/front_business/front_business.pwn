@@ -48,7 +48,6 @@ LoadFrontBusinesses()
 		FrontBusiness[i][TakeoverHour] = RedisGetInt(RedisFrontBizKey(i, "takeoverHour"));
 		FrontBusiness[i][TakeoverMinute] = RedisGetInt(RedisFrontBizKey(i, "takeoverMinute"));
 		FrontBusiness[i][TakeoverTime] = RedisGetInt(RedisFrontBizKey(i, "takeoverTime"));
-		FrontBusiness[i][BizColor] = RedisGetInt(RedisFrontBizKey(i, "color"));
 		FrontBusiness[i][Owner] = RedisGetInt(RedisFrontBizKey(i, "owner"));
 		FrontBusiness[i][TakeoverArea] = -1;
 
@@ -67,7 +66,8 @@ LoadFrontBusinesses()
 		new Float:areaMaxX = FrontBusiness[i][OutX] + FRONT_BUSINESS_GANGZONE_SIZE;
 		new Float:areaMaxY = FrontBusiness[i][OutY] + FRONT_BUSINESS_GANGZONE_SIZE;
 		FrontBusiness[i][BizGangZone] = GangZoneCreate(areaMinX, areaMinY, areaMaxX, areaMaxY);
-		GangZoneShowForAll(FrontBusiness[i][BizGangZone], FrontBusiness[i][BizColor] & 0xFFFFFF66);
+		new color = OrgInfo[FrontBusiness[i][Owner]][o_Color];
+		GangZoneShowForAll(FrontBusiness[i][BizGangZone], color & 0xFFFFFF66);
 
 		FrontBusiness[i][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
@@ -76,7 +76,7 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ],
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 
-		FrontBusiness[i][Out3DText] = CreateDynamic3DTextLabel(FrontBusiness[i][Name], FrontBusiness[i][BizColor], 
+		FrontBusiness[i][Out3DText] = CreateDynamic3DTextLabel(FrontBusiness[i][Name], color, 
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ] + 0.2, 
 			EXTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
@@ -87,7 +87,7 @@ LoadFrontBusinesses()
 
 		if(FrontBusiness[i][InX] != 0.0) 
 		{
-			FrontBusiness[i][In3DText] = CreateDynamic3DTextLabel("Wyjœcie", FrontBusiness[i][BizColor], 
+			FrontBusiness[i][In3DText] = CreateDynamic3DTextLabel("Wyjœcie", color, 
 				FrontBusiness[i][InX], FrontBusiness[i][InY], FrontBusiness[i][InZ] + 0.2, 
 				INTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 				FrontBusiness[i][InVw], FrontBusiness[i][InInt]);
@@ -262,8 +262,6 @@ TakeOverFrontBusiness(bizId, org)
 {
 	new color = OrgInfo[org][o_Color];
 	FrontBusiness[bizId][Owner] = org;
-	FrontBusiness[bizId][BizColor] = color;
-	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "color"), color);
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "owner"), org);
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "profit"), 0);
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "leaderProfit"), 0);
@@ -456,8 +454,6 @@ UpdateColorForOrgBusinesses(org, color)
 	{
 		if(FrontBusiness[i][Owner] == org)
 		{
-			FrontBusiness[i][BizColor] = color;
-			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), color);
 			GangZoneShowForAll(FrontBusiness[i][BizGangZone], color & 0xFFFFFF66);
 			UpdateDynamic3DTextLabelText(FrontBusiness[i][Out3DText], color, FrontBusiness[i][Name]);
 			if(FrontBusiness[i][InX] != 0.0)

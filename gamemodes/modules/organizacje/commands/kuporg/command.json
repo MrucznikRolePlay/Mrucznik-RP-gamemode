@@ -14,7 +14,7 @@
         {
             "type": "hex",
             "name": "color",
-            "description": "kolor w formacie hex (np. F1A151FF)"
+            "description": "kolor w formacie hex RRGGBB (np. F1A151FF)"
         },
         {
             "type": "string",

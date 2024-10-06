@@ -105,8 +105,7 @@ enum eFrontBusinessInfo {
     TakeoverPickup,
     TakeoverCheckpoint,
     // taken from redis
-    TakeoverHour, TakeoverMinute, TakeoverTime, 
-    BizColor,
+    TakeoverHour, TakeoverMinute, TakeoverTime,
     Owner,
     // only in memory
     TakeoverActive,
