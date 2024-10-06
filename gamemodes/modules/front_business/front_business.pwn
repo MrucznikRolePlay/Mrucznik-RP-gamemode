@@ -194,6 +194,15 @@ TriggerTakingOver(bizId, org)
 			SendOrgMessage(ownerOrg, COLOR_PANICRED, "UWAGA! AGRESJA!");
 			SendOrgMessage(ownerOrg, COLOR_PANICRED, sprintf("Ktoœ atakuje nale¿¹cy do waszej organizacji biznes %s!", FrontBusiness[bizId][Name]));
 		}
+		else if(ownerOrg == 0)
+		{
+			for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
+			{
+				SendFamilyMessage(i, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
+				SendFamilyMessage(i, COLOR_RED, sprintf("Ktoœ próbuje przej¹æ biznes %s!", FrontBusiness[bizId][Name]));
+				SendFamilyMessage(i, COLOR_WHITE, "|__________________________________________________|");
+			}
+		}
 	}
 }
 
@@ -205,6 +214,15 @@ StopTakingOver(bizId)
 	if(IsActiveOrg(ownerOrg))
 	{
 		SendOrgMessage(ownerOrg, COLOR_LIGHTGREEN, sprintf("Atakuj¹cy przestali przejmowaæ biznes %s!", FrontBusiness[bizId][Name]));
+	}
+	else if(ownerOrg == 0)
+	{
+		for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
+		{
+			SendFamilyMessage(i, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
+			SendFamilyMessage(i, COLOR_LIGHTGREEN, sprintf("Sytuacja opanowana, agresorzy przestali atakowaæ biznes %s!", FrontBusiness[bizId][Name]));
+			SendFamilyMessage(i, COLOR_WHITE, "|__________________________________________________|");
+		}
 	}
 }
 
@@ -244,14 +262,12 @@ TakeOverFrontBusiness(bizId, org)
 
 SuccessfulDefenceMessage(bizId, org)
 {
-	if(!IsActiveOrg(org))
+	if(org == 0)
 	{
 		// LSPD
 		new string[MAX_MESSAGE_LENGTH];
 		format(string, sizeof(string), "S³u¿y porz¹dkowe z sukcesem obroni³y biznes %s przed infiltracj¹ przez mafiê", FrontBusiness[bizId][Name]);
-		SendFamilyMessage(FRAC_LSPD, TEAM_AZTECAS_COLOR, string);
-		SendFamilyMessage(FRAC_FBI, TEAM_AZTECAS_COLOR, string);
-		SendFamilyMessage(FRAC_NG, TEAM_AZTECAS_COLOR, string);
+		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, TEAM_AZTECAS_COLOR, string);
 		return;
 	}
 	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
@@ -268,15 +284,17 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 	{
 		new string[MAX_MESSAGE_LENGTH];
 		format(string, sizeof(string), "S³u¿y porz¹dkowe z sukcesem rozpracowa³y nielegaln¹ przykrywkê %s", FrontBusiness[bizId][Name]);
-		SendFamilyMessage(FRAC_LSPD, TEAM_AZTECAS_COLOR, string);
-		SendFamilyMessage(FRAC_FBI, TEAM_AZTECAS_COLOR, string);
-		SendFamilyMessage(FRAC_NG, TEAM_AZTECAS_COLOR, string);
+		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, TEAM_AZTECAS_COLOR, string);
 	}
 
 	if(IsActiveOrg(oldOwner))
 	{
 		SendOrgMessage(oldOwner, COLOR_PANICRED, "TRAGEDIA!");
 		SendOrgMessage(oldOwner, COLOR_PANICRED, sprintf("Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));
+	}
+	else if(oldOwner == 0)
+	{
+		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, COLOR_PANICRED, "Biznes %s przeszed³ pod wp³ywy mafii.", FrontBusiness[bizId][Name]);
 	}
 }
 

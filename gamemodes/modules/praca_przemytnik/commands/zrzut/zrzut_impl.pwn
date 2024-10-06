@@ -105,9 +105,9 @@ command_zrzut_Impl(playerid)
         // Komunikat dla porz¹dkowych
         for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
         {
-            SendFamilyMessage(FRAC_LSPD, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
-            SendFamilyMessage(FRAC_LSPD, COLOR_RED, "Ktoœ zrzuci³ paczki z kontraband¹ na wyspê Vice City Beach, zniszcz je i otrzymaj premiê!");
-            SendFamilyMessage(FRAC_LSPD, COLOR_WHITE, "|__________________________________________________|");
+            SendFamilyMessage(i, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
+            SendFamilyMessage(i, COLOR_RED, "Ktoœ zrzuci³ paczki z kontraband¹ na wyspê Vice City Beach, zniszcz je i otrzymaj premiê!");
+            SendFamilyMessage(i, COLOR_WHITE, "|__________________________________________________|");
         }
     }
     else 

@@ -148,13 +148,10 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 		
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
-			if(!cop)
+			new isDefense = FrontBusiness[i][Owner] == org;
+			if(FrontBusiness[i][TakingOver][org] <= TAKING_OVER_ATTACK_PLAYERS_THRESHOLD && !isDefense)
 			{
-				new isDefense = FrontBusiness[i][Owner] == org;
-				if(FrontBusiness[i][TakingOver][org] <= TAKING_OVER_ATTACK_PLAYERS_THRESHOLD && !isDefense)
-				{
-					StopTakingOver(i);
-				}
+				StopTakingOver(i);
 			}
 
 			FrontBusiness[i][TakingOver][org]--;

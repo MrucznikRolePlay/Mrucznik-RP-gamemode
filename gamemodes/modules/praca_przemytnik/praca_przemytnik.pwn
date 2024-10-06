@@ -259,9 +259,9 @@ StartSmugglingDrop(playerid, driverid, actionID)
 	// Komunikat dla porz¹dkowych
 	for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
 	{
-		SendFamilyMessage(FRAC_LSPD, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
-		SendFamilyMessage(FRAC_LSPD, COLOR_RED, "UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
-		SendFamilyMessage(FRAC_LSPD, COLOR_WHITE, "|__________________________________________________|");
+		SendFamilyMessage(i, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
+		SendFamilyMessage(i, COLOR_RED, "UWAGA! Kr¹¿¹ pog³oski, ¿e ktoœ próbuje przemyciæ kontrabandê do Vice City!");
+		SendFamilyMessage(i, COLOR_WHITE, "|__________________________________________________|");
 	}
 }
 
