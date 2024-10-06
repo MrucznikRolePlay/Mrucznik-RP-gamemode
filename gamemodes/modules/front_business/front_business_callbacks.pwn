@@ -34,19 +34,19 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 	{
 		if(!FrontBusiness[i][TakeoverActive])
 		{
-			continue;
+			return;
 		}
 
 		new cop = IsAPolicja(playerid);
 		if(GetPlayerOrg(playerid) == 0 && !cop)
 		{
-			continue;
+			return;
 		}
 
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
 			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], true);
-			continue;
+			return;
 		}
 
 		if(areaid == FrontBusiness[i][TakeoverArea])
@@ -55,7 +55,7 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 			new isDefense = FrontBusiness[i][Owner] == org;
 			if(!IsActiveOrg(org) && !cop)
 			{
-				continue;
+				return;
 			}
 			FrontBusiness[i][TakingOver][org]++;
 
@@ -112,20 +112,20 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 	{
 		if(!FrontBusiness[i][TakeoverActive])
 		{
-			continue;
+			return;
 		}
 
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
 			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], false);
-			continue;
+			return;
 		}
 
 		new cop = IsAPolicja(playerid);
 		new org = GetPlayerOrg(playerid);
 		if(org <= 0 && !cop)
 		{
-			continue;
+			return;
 		}
 		
 		if(areaid == FrontBusiness[i][TakeoverArea])

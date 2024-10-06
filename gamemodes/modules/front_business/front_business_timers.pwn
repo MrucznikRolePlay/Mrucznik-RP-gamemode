@@ -35,7 +35,7 @@ task BusinessTakeoverTimer[100]()
 		if(FrontBusiness[i][TakeoverActive])
 		{
 			UpdateTakeoverPoints(i);
-
+			
 			if(FrontBusiness[i][TakeoverStartTime] + FrontBusiness[i][TakeoverTime] < gettime())
 			{
 				StopFrontBizTakeover(i);
@@ -112,7 +112,7 @@ DecreaseAllAttackerPoints(bizId, points)
 			continue;
 		}
 
-		if(FrontBusiness[bizId][TakingOverScore][i])
+		if(FrontBusiness[bizId][TakingOverScore][i] > 0)
 		{
 			FrontBusiness[bizId][TakingOverScore][i] -= points;
 			decreased = true;
@@ -145,8 +145,8 @@ ptask TakeoverScoreboard[100](playerid)
 
 	for(new bizId; bizId < sizeof(FrontBusiness); bizId++)
 	{
-		if(FrontBusiness[bizId][TakeoverActive] && IsPlayerInDynamicArea(playerid, FrontBusiness[bizId][TakeoverArea]))
-		{	
+		if(FrontBusiness[bizId][TakeoverActive] && IsPlayerInDynamicArea(playerid, FrontBusiness[bizId][GangZoneArea]))
+		{
 			if(GetPlayerVisibleDynamicCP(playerid) != FrontBusiness[bizId][TakeoverCheckpoint])
 			{
 				TogglePlayerDynamicCP(playerid, FrontBusiness[bizId][TakeoverCheckpoint], true);
@@ -217,7 +217,7 @@ ptask BusinessInfoTimer[1000](playerid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][TakeoverArea]) || GetPlayerFrontBusinessProximity(playerid, i) < 3.0)
+		if(GetPlayerFrontBusinessProximity(playerid, i) < 3.0)
 		{
 			ShowFrontBusinessInfo(playerid, i);
 			return;
