@@ -252,8 +252,13 @@ TakeOverFrontBusiness(bizId, org)
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "profit"), 0);
 	Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "leaderProfit"), 0);
 
-	GangZoneShowForAll(FrontBusiness[bizId][BizGangZone], color & 0xFFFFFF66);
 	GangZoneStopFlashForAll(FrontBusiness[bizId][BizGangZone]);
+	GangZoneShowForAll(FrontBusiness[bizId][BizGangZone], color & 0xFFFFFF66);
+	UpdateDynamic3DTextLabelText(FrontBusiness[bizId][Out3DText], color, FrontBusiness[bizId][Name]);
+	if(FrontBusiness[bizId][InX] != 0.0)
+	{
+		UpdateDynamic3DTextLabelText(FrontBusiness[bizId][In3DText], color, "Wyjœcie");
+	}
 }
 
 SuccessfulDefenceMessage(bizId, org)
@@ -287,12 +292,11 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 
 	if(IsActiveOrg(oldOwner))
 	{
-		SendOrgMessage(oldOwner, COLOR_PANICRED, "TRAGEDIA!");
-		SendOrgMessage(oldOwner, COLOR_PANICRED, sprintf("Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));
+		SendOrgMessage(oldOwner, COLOR_PANICRED, sprintf("TRAGEDIA! Twoja organizacja straci³a kontrolê nad biznesem %s", FrontBusiness[bizId][Name]));
 	}
 	else if(oldOwner == 0)
 	{
-		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, COLOR_PANICRED, "Biznes %s przeszed³ pod wp³ywy mafii.", FrontBusiness[bizId][Name]);
+		for(new i=FRAC_LSPD; i<=FRAC_NG; i++) SendFamilyMessage(i, COLOR_PANICRED, sprintf("Biznes %s przeszed³ pod wp³ywy mafii.", FrontBusiness[bizId][Name]));
 		RedisIncrBy("business_lost_from_lspd", 1);
 	}
 }
