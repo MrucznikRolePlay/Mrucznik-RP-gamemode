@@ -125,11 +125,11 @@ StartFrontBizTakeover(bizId)
 
 	foreach(new i : Player)
 	{
-		if(IsPlayerInDynamicArea(FrontBusiness[bizId][GangZoneArea]))
+		if(IsPlayerInDynamicArea(i, FrontBusiness[bizId][GangZoneArea]))
 		{
 			FB_OnPlayerEnterDynamicArea(i, FrontBusiness[bizId][GangZoneArea]);
 		}
-		if(IsPlayerInDynamicArea(FrontBusiness[bizId][TakeoverArea]))
+		if(IsPlayerInDynamicArea(i, FrontBusiness[bizId][TakeoverArea]))
 		{
 			FB_OnPlayerEnterDynamicArea(i, FrontBusiness[bizId][TakeoverArea]);
 		}

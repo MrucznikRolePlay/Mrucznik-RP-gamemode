@@ -216,7 +216,15 @@ FrontBiz_OnPayDay(playerid)
 
 hook OnPlayerPause(playerid)
 {
-	new bizId = GetPVarInt(playerid, "in-takeover-zone") - 1;
+	new bizId = -1;
+	foreach(new i : Player)
+	{
+		if(IsPlayerInDynamicArea(i, FrontBusiness[bizId][TakeoverArea]))
+		{
+			bizId = i;
+			break;
+		}
+	}
 	if(bizId >= 0)
 	{
 		new areaid = FrontBusiness[bizId][TakeoverArea];
