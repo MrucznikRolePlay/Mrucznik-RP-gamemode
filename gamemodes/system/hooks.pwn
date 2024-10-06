@@ -37,6 +37,7 @@ timer Mru_CheckPosAfterSet[500](playerid, Float:setX, Float:setY, Float:setZ)
 }
 
 // ----[ Pickups fix ]----
+const animationSpeed = 2.0;
 stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid = -1, interiorid = -1, playerid = -1, Float:streamdistance = STREAMER_PICKUP_SD, STREAMER_TAG_AREA:areaid = STREAMER_TAG_AREA:-1, priority=0)
 {
     if(x >= 4096.0 || x <= -4096.0 || y >= 4096.0 || y <= -4096.0)
@@ -58,28 +59,28 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
 // Reroute future calls to our function.
 #define CreateDynamicPickup Mru_CreateDynamicPickup
 
-timer AnimateObjectPickup[950](obj, Float:x, Float:y, Float:z, step)
+timer AnimateObjectPickup[475](obj, Float:x, Float:y, Float:z, step)
 {
     new Float:newZ;
     if(step % 4 == 0)
     {
         newZ = z + 0.1;
-        MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 0.0);
+        MoveDynamicObject(obj, x, y, newZ, animationSpeed, 0.0, 0.0, 0.0);
     }
     else if(step % 4 == 1)
     {
         newZ = z - 0.1;
-        MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 90.0);
+        MoveDynamicObject(obj, x, y, newZ, animationSpeed, 0.0, 0.0, 90.0);
     }
     else if(step % 4 == 2)
     {
         newZ = z + 0.1;
-        MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 180.0);
+        MoveDynamicObject(obj, x, y, newZ, animationSpeed, 0.0, 0.0, 180.0);
     }
     else if(step % 4 == 3)
     {
         newZ = z - 0.1;
-        MoveDynamicObject(obj, x, y, newZ, 0.1, 0.0, 0.0, 270.0);
+        MoveDynamicObject(obj, x, y, newZ, animationSpeed, 0.0, 0.0, 270.0);
     }
 
     defer AnimateObjectPickup(obj, x, y, newZ, step+1);
