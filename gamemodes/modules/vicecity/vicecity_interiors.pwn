@@ -42,6 +42,9 @@ ViceCityInteriors()
     AddInterior( // Komisariat 1 Miasto, Interior San Fierro Police Department
         "Komisariat", -3802.7534, 1777.8750, 6.5215, 0, 0,
         "Wyjœcie", 246.06, 108.97, 1003.21, 10, VCVW);
+    AddInterior( // Komisariat 1 Miasto, Interior San Fierro Police Department - Tylne wejœcie
+        "Komisariat", -3802.7534, 1777.8750, 6.5215, 0, 0,
+        "Wyjœcie", 246.06, 108.97, 1003.21, 10, VCVW);
     MruCreateDynamicMapIcon(-3802.7534, 1777.8750,6.5215, 30, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Komisariat £owców nagród, Interior Los Santos Police Department
@@ -52,6 +55,9 @@ ViceCityInteriors()
     AddInterior( // Komisariat Downtown (FBI), Interior Las Venturas Police Department
         "Biuro FBI", -4857.0996, 3012.5998, 6.0599, 0, 0,
         "Wyjœcie", 288.47, 170.06, 1007.17, 3, VCVW);
+    AddInterior( // Komisariat Downtown (FBI), Interior Las Venturas Police Department - Tylne wyjœcie
+        "Biuro FBI - Tylne wejœcie", -4803.4712,3029.7275,6.0562, 0, 0,
+        "Wyjœcie", 238.6436,139.6419,1003.0234, 3, VCVW);
     MruCreateDynamicMapIcon(-4857.0322, 3012.5569, 6.0599, 30, -1, -1, -1, -1, streamDist, iconType);
 
     AddInterior( // Baza Wojskowa, Ammu-nation 5
