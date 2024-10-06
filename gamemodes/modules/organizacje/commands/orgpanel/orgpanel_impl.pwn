@@ -156,7 +156,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 
 		TakeContraband(playerid, CHANGE_ORG_SPAWN_COST);
 		SetOrgSpawnAtPlayerPos(playerid, org);
-    	MruMessageGoodInfo(playerid, "Spawn organizacji ustawiony w tym miejscu zmieniony.");
+    	MruMessageGoodInfo(playerid, "Spawn organizacji zosta³ zmieniony na tê pozycjê.");
 	}
 	else if(strcmp(action, "invite", true) == 0 || strcmp(action, "przyjmij", true) == 0)
 	{

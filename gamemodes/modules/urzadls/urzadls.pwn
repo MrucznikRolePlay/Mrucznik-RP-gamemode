@@ -59,7 +59,6 @@ CreateActorsInDMV(playerid)
 		{
 			if(freePlace < sizeof(okienkoPos))
 			{
-				//SetActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
 				SetDynamicActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
 				if(playerid != INVALID_PLAYER_ID)
 				{
@@ -67,9 +66,11 @@ CreateActorsInDMV(playerid)
 					sendTipMessage(playerid, string); 
 				}
 				SetDynamicActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
-				SetDynamicActorVirtualWorld(actorUID[i], 50); 
+				if(i < 8) SetDynamicActorVirtualWorld(actorUID[i], 50);
+				else SetDynamicActorVirtualWorld(actorUID[i], 7110);
 				UpdateActorText(actorUID[i]);
-				format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1);
+				if(i < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1);
+				else format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1-8);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
 				if(playerid != INVALID_PLAYER_ID)
 				{
@@ -102,7 +103,7 @@ DestroyActorsInDMV(playerid)
 		{
 			if(freePlace < sizeof(okienkoPos))
 			{
-				SetDynamicActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]+10);
+				SetDynamicActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], 0.0);
 				if(playerid != INVALID_PLAYER_ID)
 				{
 					format(string,sizeof(string), "Ustawiono aktorowi [%d] pozycjê, wzrok i VW", actorUID[i]);
