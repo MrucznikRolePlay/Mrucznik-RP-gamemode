@@ -469,14 +469,6 @@ command_wejdz_Impl(playerid)
             SetPlayerInterior(playerid, 1);
             return 1;
         }
-        else if (PlayerToPoint(5.0, playerid,2420.9360,112.8245,29.0433)) //taras PD w PC
-        {
-            SetPlayerPos(playerid,214.9873,121.0619,999.0156); //Komisariat piwnice
-            GameTextForPlayer(playerid, "~w~Witamy w Komisariacie.", 5000, 1);
-            SetPlayerInterior(playerid,10);
-            PlayerInfo[playerid][pInt] = 10;
-            return 1;
-        }
         else if(IsPlayerInRangeOfPoint(playerid,5,-1674.5769,903.1641,-48.9141) )//nowe komi wejscie prawnicze
         {
             if(ApprovedLawyer[playerid] == 1 || PlayerInfo[playerid][pMember] == FRAC_FBI)

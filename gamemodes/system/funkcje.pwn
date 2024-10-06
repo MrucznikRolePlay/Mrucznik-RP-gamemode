@@ -279,7 +279,6 @@ JailDeMorgan(playerid)
 	PlayerInfo[playerid][pJailed] = 2;
 	GameTextForPlayer(playerid, "~w~Witamy ~r~w sztumie!", 5000, 1);
 	return 1;
-	//SetPlayerWorldBounds(giveplayerid, NG_BOUNDS_maxX, NG_BOUNDS_minX, NG_BOUNDS_maxY, NG_BOUNDS_minY); //337.5694,101.5826,1940.9759,1798.7453 || Stara strefa de morgan
 }
 
 // WYPUSZCZANIE z DEMORGAN

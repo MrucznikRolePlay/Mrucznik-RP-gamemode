@@ -34,12 +34,7 @@ command_wyczysc_Impl(playerid, params[256])
    	    new tmpcar = GetPlayerVehicleID(playerid);
  		if(IsAPolicja(playerid))
 		{
-			if ((tmpcar != INVALID_VEHICLE_ID && IsACopCar(tmpcar)) || 
-			PlayerToPoint(15.0, playerid, 253.9280,69.6094,1003.6406) || 
-			PlayerToPoint(20.0, playerid, 246.3568,120.3933,1003.2682) || 
-			PlayerToPoint(50, playerid, 1189.5999755859,-1574.6999511719,-54.5 ) || 
-			PlayerToPoint(50, playerid, -1672.8372,890.2657,-48.9141 ) || //komisariat LSPD
-			PlayerInfo[playerid][pLocal] == 210)
+			if((tmpcar != INVALID_VEHICLE_ID && IsACopCar(tmpcar)) || IsAtClearCrimesPlace(playerid))
 			{
 				new giveplayerid;
 				if( sscanf(params, "k<fix>",giveplayerid))

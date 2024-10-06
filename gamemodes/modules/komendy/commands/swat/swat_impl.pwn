@@ -33,14 +33,7 @@ command_swat_Impl(playerid)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(IsAPolicja(playerid))
 		{
-			if (PlayerToPoint(3, playerid,255.3,77.4,1003.6)
-			|| PlayerToPoint(3,playerid,266.7904,118.9303,1004.6172)
-			|| PlayerToPoint(3,playerid,225.9369,157.1783,1003.0300)
-			|| PlayerToPoint(5, playerid, 185.3000488281,-1571.0999755859,-54.5)
-			|| PlayerToPoint(5, playerid, 1189.5999755859,-1574.6999511719,-54.5 )
-			|| PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
-			|| (PlayerToPoint(4,playerid, 1562.0536,-1649.9120,28.5040) && GetPlayerVirtualWorld(playerid) == 27)//nowe komi by charlie
-			|| PlayerToPoint(3.8, playerid, 597.1039,-1474.2688,80.4357))//nowe FBI by ubunteq
+			if(IsAtDutyPlace(playerid))
 			{
 				if(OnDuty[playerid] == 1)
 				{

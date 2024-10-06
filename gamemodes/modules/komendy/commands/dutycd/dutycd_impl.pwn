@@ -47,15 +47,7 @@ command_dutycd_Impl(playerid)
 		GetPlayerName(playerid, sendername, sizeof(sendername));
 		if(PlayerInfo[playerid][pMember] == 1 || PlayerInfo[playerid][pLider] == 1)
 		{
-			if (PlayerToPoint(3, playerid,255.3,77.4,1003.6)
-			|| PlayerToPoint(5, playerid, 266.7904,118.9303,1004.6172)
-			|| PlayerToPoint(3, playerid, 1579.6711,-1635.4512,13.5609)
-			|| PlayerToPoint(3, playerid, -2614.1667,2264.6279,8.2109)
-			|| PlayerToPoint(3, playerid, 2425.6,117.69,26.5)//nowe domy
-			|| PlayerToPoint(3, playerid, -1649.6832,885.4910,-45.4141)//nowe komi by dywan
-			|| PlayerToPoint(3, playerid, -1645.3046,895.2336,-45.4141)
-            || PlayerToPoint(3, playerid, 1572.1919,-1631.5922,13.3991))//KILSON NOWY SPAWN
-
+			if(IsAtDutyPlace(playerid))
 			{
 				if(OnDuty[playerid]==0 && OnDutyCD[playerid] == 0)
 		        {
@@ -127,7 +119,7 @@ command_dutycd_Impl(playerid)
 		}
 		else if(PlayerInfo[playerid][pMember] == 3 || PlayerInfo[playerid][pLider] == 3)
         {
-            if ( IsPlayerInRangeOfPoint(playerid, 5.0, 254.1888,77.0841,1003.6406) || IsPlayerInRangeOfPoint(playerid, 5.0, 609.0364,-555.1090,19.4573) ) //PlayerToPoint(3, playerid,255.3,77.4,1003.6) || PlayerToPoint(3,playerid,266.7904,118.9303,1004.6172) || PlayerToPoint(10.0,playerid, 2515.0200, -2459.5896, 13.8187)
+            if (IsAtDutyPlace(playerid))
             {
                 if(OnDuty[playerid]==0 && OnDutyCD[playerid] == 0)
                 {

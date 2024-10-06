@@ -29,7 +29,7 @@ command_kuppozwolenie_Impl(playerid)
     {
         if(PlayerInfo[playerid][pJob] == 2)
         {
-            if(IsPlayerInRangeOfPoint(playerid, 3.0, 1582.2563,-1677.6565,62.2363) && (GetPlayerVirtualWorld(playerid)==25)) 
+            if(IsAtClearCrimesPlace(playerid)) 
             {
                 if(ApprovedLawyer[playerid] == 0)
                 {
@@ -43,7 +43,7 @@ command_kuppozwolenie_Impl(playerid)
                         ZabierzKase(playerid, CENA_POZWOLENIE);
                         Sejf_Add(FRAC_LSPD, CENA_POZWOLENIE);
                         ApprovedLawyer[playerid] = 1;
-                        Log(payLog, INFO, "%s zakupi³ pozwolenie od aktora za "#CENA_POZWOLENIE"$", GetPlayerLogName(playerid));
+                        Log(payLog, INFO, "%s zakupi³ pozwolenie za "#CENA_POZWOLENIE"$", GetPlayerLogName(playerid));
                         sendTipMessage(playerid, "Zakupi³eœ pozwolenie za "#CENA_POZWOLENIE"$");
                         return 1; 
                     }

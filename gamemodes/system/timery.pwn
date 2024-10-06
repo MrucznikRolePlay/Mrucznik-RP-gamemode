@@ -2219,7 +2219,8 @@ public JednaSekundaTimer()
 				new losuj= random(sizeof(SpawnStanowe));
 				if(!IsPlayerInRangeOfPoint(i, 90.0, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]))
 				{
-					SetPlayerSpawn(i); 
+					SetPlayerSpawn(i);
+					sendErrorMessage(i, "Nie znajdujesz siê w Wiêzieniu Stanowym! Pozycja przywrócona do poprawnej!");
 				}
 			}
 			if(PlayerInfo[i][pJailed] == 3)
@@ -2240,8 +2241,6 @@ public JednaSekundaTimer()
 				}
 				else if(PlayerInfo[i][pJailed] == 2)
 				{
-					//SetPlayerWorldBounds(i,20000.0000,-20000.0000,20000.0000,-20000.0000); //Reset world to player
-                    //SetPlayerPos(i, NG_JAIL_X,NG_JAIL_Y,NG_JAIL_Z);
 					UnJailDeMorgan(i);
 				}
 				else if(PlayerInfo[i][pJailed] == 3)
