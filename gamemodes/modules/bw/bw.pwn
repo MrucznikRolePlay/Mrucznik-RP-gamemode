@@ -377,6 +377,8 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	vw = GetPlayerVirtualWorld(playerid);
 	GetPlayerFacingAngle(playerid, faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
+	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); 
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 	SetPVarInt(playerid, "bw-vw", vw);
 	SetPVarInt(playerid, "bw-int", interior);
@@ -426,6 +428,8 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	vw = GetPlayerVirtualWorld(playerid);
 	GetPlayerFacingAngle(playerid, faceangle);
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
+	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); 
 	SetPVarInt(playerid, "bw-skin",  GetPlayerSkin(playerid));
 	SetPVarInt(playerid, "bw-vw", vw);
 	SetPVarInt(playerid, "bw-int", interior);
@@ -484,6 +488,8 @@ ZespawnujGraczaBW(playerid)
 	SendClientMessage(playerid, COLOR_WHITE, string);
 	ApplyAnimation(playerid, "SWEET", "Sweet_injuredloop", 4.0, 1, 0, 0, 1, 0, 1); 
 	SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
+	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); 
 	SetPlayerHealth(playerid, INJURY_HP);
 	if(GetPVarInt(playerid, "timer_DamagedHP"))
 	{
@@ -566,7 +572,7 @@ ZespawnujGraczaSzpitalBW(playerid, viceCity=false)
 		SetPVarFloat(playerid, "bw-faceangle", HospitalBedsVC[randbed][3]);
 		PlayerInfo[playerid][pPos_x] = HospitalBedsVC[randbed][0];
 		PlayerInfo[playerid][pPos_y] = HospitalBedsVC[randbed][1];
-		PlayerInfo[playerid][pPos_z] = HospitalBedsVC[randbed][2];		
+		PlayerInfo[playerid][pPos_z] = HospitalBedsVC[randbed][2];
 		PlayerInfo[playerid][pMuted] = 1;
 		ZespawnujGraczaBW(playerid);
 		SetPlayerCameraPos(playerid,HospitalBedsVC[randbed][0] + 3, HospitalBedsVC[randbed][1], HospitalBedsVC[randbed][2]);

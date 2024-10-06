@@ -1815,6 +1815,8 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 	// save player death pos
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
+	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
+	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); 
 
 	// bomboox
 	new bbxid = GetPVarInt(playerid, "boomboxid");
