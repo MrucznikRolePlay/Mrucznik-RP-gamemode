@@ -1213,7 +1213,12 @@ public OnPlayerDisconnect(playerid, reason)
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
 	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
-	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid); //l
+	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid);
+
+	if(IsPlayerAtViceCity(playerid) && PlayerInfo[playerid][pSpawn] == 0)
+	{
+		PlayerInfo[playerid][pSpawn] = 3;
+	}
 
 	// modules:
 	DrugDealer_OnPlayerDiconnect(playerid);
@@ -2111,7 +2116,8 @@ SetPlayerSpawnPos(playerid)
 	//BW:
 	else if(PlayerInfo[playerid][pBW] > 0 || GetPVarInt(playerid, "kill-bw") == 1)
 	{
-		ZespawnujGraczaSzpitalBW(playerid, PlayerInfo[playerid][pSpawn] >= 3);
+		new spawnViceCity = PlayerInfo[playerid][pSpawn] >= 3 || IsPlayerAtViceCity(playerid);
+		ZespawnujGraczaSzpitalBW(playerid, spawnViceCity);
 	}
 	else if(PlayerInfo[playerid][pInjury] > 0)
 	{

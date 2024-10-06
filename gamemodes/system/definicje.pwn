@@ -65,7 +65,7 @@
 #define OSTATNIE_ZGLOSZENIA 10
 #define OSTATNIE_ZGLOSZENIASASP 10
 
-#define MOVE_SZPITA_Z_NETA 12.0
+#define MOVE_SZPITAL_Z_NETA -12.0
 
 #define MAX_MESSAGE_LENGTH 			144 		//maksymalna liczba znaków jaka mo¿e zostaæ wyœwietlona na ekranie
 #define MAX_STREAM_LENGTH 			128			//maksymalna d³ugoœæ linku dla PlayAudioStreamForPlayer
