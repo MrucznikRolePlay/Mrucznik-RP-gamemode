@@ -109,9 +109,9 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverStartTime] = gettime();
 
 	// recreated areas
-	DestroyDynamicArea(FrontBusiness[i][GangZoneArea]);
+	DestroyDynamicArea(FrontBusiness[bizId][GangZoneArea]);
 	FrontBusiness[bizId][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
-		FrontBusiness[bizId][OutVw], FrontBusiness[i][OutInt]);
+		FrontBusiness[bizId][OutVw], FrontBusiness[bizId][OutInt]);
 
 	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
 		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
