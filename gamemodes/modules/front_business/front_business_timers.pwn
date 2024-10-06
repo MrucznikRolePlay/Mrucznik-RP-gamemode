@@ -207,8 +207,8 @@ ptask TakeoverScoreboard[100](playerid)
 			if(anyPoints > 0)
 			{
 				GameTextForPlayer(playerid, string, 1000, 13);
+				return;
 			}
-			return;
 		}
 	}
 }

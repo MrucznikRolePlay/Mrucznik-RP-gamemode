@@ -30,28 +30,31 @@
 //-----------------<[ Callbacki: ]>-----------------
 FB_OnPlayerEnterDynamicArea(playerid, areaid)
 {
+	new cop = IsAPolicja(playerid);
+	new org = GetPlayerOrg(playerid);
+	if(org <= 0 && !cop)
+	{
+		return;
+	}
+
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(!FrontBusiness[i][TakeoverActive])
-		{
-			return;
-		}
-
-		new cop = IsAPolicja(playerid);
-		if(GetPlayerOrg(playerid) == 0 && !cop)
-		{
-			return;
-		}
-
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
+			if(!FrontBusiness[i][TakeoverActive])
+			{
+				return;
+			}
 			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], true);
 			return;
 		}
 
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
-			new org = GetPlayerOrg(playerid);
+			if(!FrontBusiness[i][TakeoverActive])
+			{
+				return;
+			}
 			new isDefense = FrontBusiness[i][Owner] == org;
 			if(!IsActiveOrg(org) && !cop)
 			{
@@ -66,6 +69,7 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 
 			// message
 			SendEnterTakeoverAreaMessage(playerid, i, org, isDefense);
+			return;
 		}
 	}
 }
@@ -108,28 +112,32 @@ SendEnterTakeoverAreaMessage(playerid, bizId, org, isDefense)
 
 FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 {
+	new cop = IsAPolicja(playerid);
+	new org = GetPlayerOrg(playerid);
+	if(org <= 0 && !cop)
+	{
+		return;
+	}
+
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(!FrontBusiness[i][TakeoverActive])
-		{
-			return;
-		}
-
 		if(areaid == FrontBusiness[i][GangZoneArea])
 		{
+			if(!FrontBusiness[i][TakeoverActive])
+			{
+				return;
+			}
 			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], false);
-			return;
-		}
-
-		new cop = IsAPolicja(playerid);
-		new org = GetPlayerOrg(playerid);
-		if(org <= 0 && !cop)
-		{
 			return;
 		}
 		
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
+			if(!FrontBusiness[i][TakeoverActive])
+			{
+				return;
+			}
+
 			new isDefense = FrontBusiness[i][Owner] == org;
 			if(FrontBusiness[i][TakingOver][org] <= TAKING_OVER_ATTACK_PLAYERS_THRESHOLD && !isDefense)
 			{
@@ -142,6 +150,7 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 
 			// message
 			SendExitTakeoverAreaMessage(playerid, i, org, isDefense);
+			return;
 		}
 	}
 }
