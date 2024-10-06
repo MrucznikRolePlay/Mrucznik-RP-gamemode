@@ -595,4 +595,34 @@ hook OnPlayerDisconnect(playerid, reason)
 	return 1;
 }
 
+hook OnVehicleDeath(vehicleid, killerid)
+{
+	if(IsAWodolot(vehicleid))
+	{
+		for(new i; i<SMUGGLING_ACTIONS_PER_DAY; i++)
+		{
+			if(SmugglingAction[i][s_SkimmerID] == vehicleid)
+			{
+				// drop package with half of the drop
+				SendSmugglingCrewMessage(i, TEAM_AZTECAS_COLOR, "Wodolot zosta³ zniszczony! Wypad³a z niego paczka przemytnicza z uszkodzonym towarem.");
+
+				SmugglingAction[i][s_enableContrabandDrop] = 0;
+				SmugglingAction[i][s_packagesToDrop]--;
+
+				new Float:x, Float:y, Float:z;
+				GetVehiclePos(vehicleid, x, y, z);
+				GetPosBehindVehicle(vehicleid, x, y, z, 1.0);
+				CreateContrabandDrop(i, x, y, z, SmugglingAction[i][s_packagesToDrop], true);
+
+				if(SmugglingAction[i][s_packagesToDrop] == 0)
+				{
+					// last package dropped, start gather stage
+					SmugglingAction[i][s_stage] = SMUGGLING_STAGE_GATHER;
+					SendSmugglingCrewMessage(i, TEAM_AZTECAS_COLOR, "To by³a ostatnia paczka, teraz czas zebraæ je wszystkie.");
+				}
+			}
+		}
+	}
+}
+
 //end

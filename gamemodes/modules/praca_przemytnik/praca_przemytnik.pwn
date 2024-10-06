@@ -220,6 +220,7 @@ CreateDropPointContainer(actionID)
 StartSmugglingDrop(playerid, driverid, actionID)
 {
     SmugglingAction[actionID][s_stage] = SMUGGLING_STAGE_FLY;
+	SmugglingAction[actionID][s_SkimmerID] = GetPlayerVehicleID(driverid);
 
 	for(new i; i < MAX_SMUGGLING_CHECKPOINTS; i++)
 	{
@@ -296,7 +297,7 @@ ShowSmugglingCheckpoint(playerid, actionID)
 		CHECKPOINT_RADIUS);
 }
 
-CreateContrabandDrop(actionID, Float:x, Float:y, Float:z, index)
+CreateContrabandDrop(actionID, Float:x, Float:y, Float:z, index, damaged=false)
 {
 	// create parachute package object
 	new obj = CreateDynamicObject(18849, x, y, z, 0.0, 0.0, 0.0, 0, 0);
@@ -317,17 +318,19 @@ CreateContrabandDrop(actionID, Float:x, Float:y, Float:z, index)
 	MoveDynamicObject(obj, x, y, groundZ, speed);
 
 	// timer to activate on fall ends
-	defer CreateContrabandPackage[fallTime](actionID, obj, index);
+	defer CreateContrabandPackage[fallTime](actionID, obj, index, damaged);
 }
 
-timer CreateContrabandPackage[0](actionID, parachuteObject, index)
+timer CreateContrabandPackage[0](actionID, parachuteObject, index, damaged)
 {
 	new Float:x, Float:y, Float:z;
 	GetDynamicObjectPos(parachuteObject, x, y, z);
 	DestroyDynamicObject(parachuteObject);
 
 	SmugglingAction[actionID][s_flareObjects][index] = CreateDynamicObject(18728, x, y, z - 1.0, 0.0, 0.0, 0.0, 0, 0, -1, 700.0, 700.0, -1, 1);
-	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, BIG_PACKAGE_CONTRABAND_AMMOUNT, x, y, z, 0, 0);
+	new contraband = BIG_PACKAGE_CONTRABAND_AMMOUNT;
+	if(damaged) contraband /= 2;
+	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, contraband, x, y, z, 0, 0);
 	SmugglingAction[actionID][s_dropBoxes][index] = boxid;
 }
 

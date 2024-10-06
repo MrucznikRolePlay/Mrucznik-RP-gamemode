@@ -65,7 +65,10 @@ enum eSmugglingData {
     Float:s_gatherPointZ,
     Float:s_pickupPointX,
     Float:s_pickupPointY,
-    Float:s_pickupPointZ
+    Float:s_pickupPointZ,
+
+    // Wodolot
+    s_SkimmerID
 };
 
 new SmugglingAction[SMUGGLING_ACTIONS_PER_DAY][eSmugglingData];
