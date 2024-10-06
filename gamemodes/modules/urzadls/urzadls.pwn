@@ -127,6 +127,9 @@ DestroyActorsInDMV(playerid)
 		}
 	}
 	dmv = 0;
+
+	format(string, sizeof(string), "|____________Urz¹d Miasta zamkniêty przez %s_____________|", GetNick(playerid));
+	SendClientMessageToAll(COLOR_RED, string);
 	return 1;
 }
 
