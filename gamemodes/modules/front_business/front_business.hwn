@@ -102,6 +102,7 @@ enum eFrontBusinessInfo {
     BizGangZone,
     GangZoneArea,
     TakeoverArea,
+    TakeoverPickup,
     TakeoverCheckpoint,
     // taken from redis
     TakeoverHour, TakeoverMinute, TakeoverTime, 

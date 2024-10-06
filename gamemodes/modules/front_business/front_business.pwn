@@ -80,6 +80,10 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ] + 0.2, 
 			EXTERIOR_3DTEXT_RANGE, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1,
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
+	
+		FrontBusiness[i][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[i][TakeoverX], FrontBusiness[i][TakeoverY], 
+			FrontBusiness[i][TakeoverZ], FrontBusiness[i][TakeoverZ] + 10, 
+			TAKEOVER_ZONE_SIZE, FrontBusiness[i][TakeoverVw], FrontBusiness[i][TakeoverInt]);
 
 		if(FrontBusiness[i][InX] != 0.0) 
 		{
@@ -114,10 +118,10 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
 		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
 		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][GangZoneArea]);
-	
-	FrontBusiness[bizId][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], 
-		FrontBusiness[bizId][TakeoverZ], FrontBusiness[bizId][TakeoverZ] + 10, 
-		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt]);
+
+	FrontBusiness[bizId][TakeoverPickup] = CreateDynamicPickup(1313, 1, 
+		FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ], 
+		FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt]); 
 
 	foreach(new i : Player)
 	{
@@ -132,7 +136,7 @@ StopFrontBizTakeover(bizId)
 {
 	FrontBusiness[bizId][TakeoverActive] = false;
 	DestroyDynamicCP(FrontBusiness[bizId][TakeoverCheckpoint]);
-	DestroyDynamicArea(FrontBusiness[bizId][TakeoverArea]);
+	DestroyDynamicPickup(FrontBusiness[bizId][TakeoverPickup]);
 	FrontBusiness[bizId][TakeoverArea] = -1;
 
 	new winner = -1, maxScore;
