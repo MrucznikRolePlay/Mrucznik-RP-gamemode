@@ -67,10 +67,10 @@ CreateActorsInDMV(playerid)
 					sendTipMessage(playerid, string); 
 				}
 				SetDynamicActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
-				if(i < 8) SetDynamicActorVirtualWorld(actorUID[i], 50);
+				if(freePlace < 8) SetDynamicActorVirtualWorld(actorUID[i], 50);
 				else SetDynamicActorVirtualWorld(actorUID[i], 7110);
 				UpdateActorText(actorUID[i]);
-				if(i < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1);
+				if(freePlace < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1);
 				else format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1-8);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
 				if(playerid != INVALID_PLAYER_ID)
@@ -114,7 +114,7 @@ DestroyActorsInDMV(playerid)
 				SetDynamicActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
 				SetDynamicActorVirtualWorld(actorUID[i], 50); 
 				UpdateActorText(actorUID[i]);
-				if(i < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
+				if(freePlace < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
 				else format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
 				if(playerid != INVALID_PLAYER_ID)
