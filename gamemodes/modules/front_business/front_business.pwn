@@ -128,7 +128,7 @@ StopFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverArea] = -1;
 
 	new winner = -1, maxScore;
-	for(new i=1; i<MAX_ORG; i++)
+	for(new i=0; i<MAX_ORG; i++)
 	{
 		new score = FrontBusiness[bizId][TakingOverScore][i];
 		if(score > maxScore)
@@ -153,10 +153,24 @@ StopFrontBizTakeover(bizId)
 		else if(maxScore < TAKE_OVER_POINT_THRESHOLD)
 		{
 			SuccessfulDefenceMessage(bizId, FrontBusiness[bizId][Owner]);
-			SendFamilyMessage(winner, COLOR_RED, "Koniec przejmowania!");
-			SendFamilyMessage(winner, COLOR_RED, sprintf(
-				"Niestety, Twojej organizacji nie uda³o siê prekroczyæ progu %d punktów wymaganego do przejêcia biznesu",
-				TAKE_OVER_POINT_THRESHOLD));
+			if(winner != 0)
+			{
+				SendOrgMessage(winner, COLOR_RED, "Koniec przejmowania!");
+				SendOrgMessage(winner, COLOR_RED, sprintf(
+					"Niestety, Twojej organizacji nie uda³o siê prekroczyæ progu %d punktów wymaganego do przejêcia biznesu",
+					TAKE_OVER_POINT_THRESHOLD));
+			}
+			else
+			{
+				new string[MAX_MESSAGE_LENGTH];
+				format(string, sizeof(string), "Niestety - nie uda³o siê przekroczyæ progu %d punktów i przej¹æ biznesu z r¹k przestêpców.", TAKE_OVER_POINT_THRESHOLD);
+				SendFamilyMessage(FRAC_LSPD, COLOR_RED, "Koniec przejmowania!");
+				SendFamilyMessage(FRAC_FBI, COLOR_RED, "Koniec przejmowania!");
+				SendFamilyMessage(FRAC_NG, COLOR_RED, "Koniec przejmowania!");
+				SendFamilyMessage(FRAC_LSPD, COLOR_RED, string);
+				SendFamilyMessage(FRAC_FBI, COLOR_RED, string);
+				SendFamilyMessage(FRAC_NG, COLOR_RED, string);
+			}
 		}
 		else
 		{
@@ -232,6 +246,12 @@ SuccessfulDefenceMessage(bizId, org)
 {
 	if(!IsActiveOrg(org))
 	{
+		// LSPD
+		new string[MAX_MESSAGE_LENGTH];
+		format(string, sizeof(string), "S³u¿y porz¹dkowe z sukcesem obroni³y biznes %s przed infiltracj¹ przez mafiê", FrontBusiness[bizId][Name]);
+		SendFamilyMessage(FRAC_LSPD, TEAM_AZTECAS_COLOR, string);
+		SendFamilyMessage(FRAC_FBI, TEAM_AZTECAS_COLOR, string);
+		SendFamilyMessage(FRAC_NG, TEAM_AZTECAS_COLOR, string);
 		return;
 	}
 	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja z sukcesem obroni³a biznes %s", FrontBusiness[bizId][Name]));
@@ -239,8 +259,19 @@ SuccessfulDefenceMessage(bizId, org)
 
 SuccessfulAttackMessage(bizId, org, oldOwner)
 {
-	SendOrgMessage(org, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
-	SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
+	if(IsActiveOrg(org))
+	{
+		SendOrgMessage(org, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
+		SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
+	}
+	else // LSPD
+	{
+		new string[MAX_MESSAGE_LENGTH];
+		format(string, sizeof(string), "S³u¿y porz¹dkowe z sukcesem rozpracowa³y nielegaln¹ przykrywkê %s", FrontBusiness[bizId][Name]);
+		SendFamilyMessage(FRAC_LSPD, TEAM_AZTECAS_COLOR, string);
+		SendFamilyMessage(FRAC_FBI, TEAM_AZTECAS_COLOR, string);
+		SendFamilyMessage(FRAC_NG, TEAM_AZTECAS_COLOR, string);
+	}
 
 	if(IsActiveOrg(oldOwner))
 	{

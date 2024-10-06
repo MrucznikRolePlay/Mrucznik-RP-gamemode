@@ -46,7 +46,8 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 			return;
 		}
 
-		if(GetPlayerOrg(playerid) == 0 && !IsAPolicja(playerid))
+		new cop = IsAPolicja(playerid);
+		if(GetPlayerOrg(playerid) == 0 && !cop)
 		{
 			return;
 		}
@@ -61,13 +62,13 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 		{
 			new org = GetPlayerOrg(playerid);
 			new isDefense = FrontBusiness[i][Owner] == org;
-			if(!IsActiveOrg(org))
+			if(!IsActiveOrg(org) && !cop)
 			{
 				return;
 			}
 			FrontBusiness[i][TakingOver][org]++;
 
-			if(FrontBusiness[i][TakingOver][org] == TAKING_OVER_DEFENCE_PLAYERS_THRESHOLD && !isDefense)
+			if(FrontBusiness[i][TakingOver][org] == TAKING_OVER_ATTACK_PLAYERS_THRESHOLD && !isDefense)
 			{
 				TriggerTakingOver(i, org);
 			}
@@ -138,19 +139,22 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 			return;
 		}
 
+		new cop = IsAPolicja(playerid);
 		new org = GetPlayerOrg(playerid);
-		if(org <= 0)
+		if(org <= 0 && !cop)
 		{
 			return;
 		}
 		
 		if(areaid == FrontBusiness[i][TakeoverArea])
 		{
-			new isDefense = FrontBusiness[i][Owner] == org;
-
-			if(FrontBusiness[i][TakingOver][org] <= TAKING_OVER_ATTACK_PLAYERS_THRESHOLD && !isDefense)
+			if(!cop)
 			{
-				StopTakingOver(i);
+				new isDefense = FrontBusiness[i][Owner] == org;
+				if(FrontBusiness[i][TakingOver][org] <= TAKING_OVER_ATTACK_PLAYERS_THRESHOLD && !isDefense)
+				{
+					StopTakingOver(i);
+				}
 			}
 
 			FrontBusiness[i][TakingOver][org]--;

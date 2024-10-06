@@ -53,7 +53,7 @@ task BusinessTakeoverTimer[100]()
 
 UpdateTakeoverPoints(bizId)
 {
-	for(new i=1; i<MAX_ORG; i++)
+	for(new i=0; i<MAX_ORG; i++)
 	{
 		new playersThreshold, pointsIncr, pointsDecr, defend;
 		if(i == FrontBusiness[bizId][Owner])
@@ -105,7 +105,7 @@ UpdateTakeoverPoints(bizId)
 DecreaseAllAttackerPoints(bizId, points)
 {
 	new decreased = false;
-	for(new i=1; i<MAX_ORG; i++)
+	for(new i=0; i<MAX_ORG; i++)
 	{
 		if(FrontBusiness[bizId][Owner] == i)
 		{
@@ -156,7 +156,7 @@ ptask TakeoverScoreboard[100](playerid)
 		new anyPoints;
 
 		new maxScore;
-		for(new i=1; i<MAX_ORG; i++)
+		for(new i=0; i<MAX_ORG; i++)
 		{
 			new score = FrontBusiness[bizId][TakingOverScore][i];
 			if(maxScore < score)
@@ -165,7 +165,7 @@ ptask TakeoverScoreboard[100](playerid)
 			}
 		}
 
-		for(new i=1; i<MAX_ORG; i++)
+		for(new i=0; i<MAX_ORG; i++)
 		{
 			new score = FrontBusiness[bizId][TakingOverScore][i];
 			if(score > 0)
@@ -173,7 +173,7 @@ ptask TakeoverScoreboard[100](playerid)
 				new orgName[64];
 				if(i == 0)
 				{
-					format(orgName, sizeof(orgName), "~b~%s", OrgInfo[i][o_Name]);
+					format(orgName, sizeof(orgName), "~b~LSPD");
 				}
 				else if(i == FrontBusiness[bizId][Owner])
 				{
