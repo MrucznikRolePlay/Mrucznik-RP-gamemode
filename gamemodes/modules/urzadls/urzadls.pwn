@@ -35,6 +35,7 @@ PlayerInDmvPoint(playerid)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9628,-1791.4224,77.9453)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9757,-1794.6508,77.9453)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9752,-1797.7997,77.9453)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1445.2811,-1801.1071,77.9612)
 	// Vice City
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2977, 186.2629, 1008.3762)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2976, 182.4774, 1008.3762)
