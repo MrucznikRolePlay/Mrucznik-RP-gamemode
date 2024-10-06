@@ -82,7 +82,7 @@ LoadFrontBusinesses()
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 	
 		FrontBusiness[i][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[i][TakeoverX], FrontBusiness[i][TakeoverY], 
-			FrontBusiness[i][TakeoverZ], FrontBusiness[i][TakeoverZ] + 10, 
+			FrontBusiness[i][TakeoverZ] - 1.0, FrontBusiness[i][TakeoverZ] + 10.0, 
 			TAKEOVER_ZONE_SIZE, FrontBusiness[i][TakeoverVw], FrontBusiness[i][TakeoverInt]);
 
 		if(FrontBusiness[i][InX] != 0.0) 
