@@ -217,9 +217,9 @@ FrontBiz_OnPayDay(playerid)
 hook OnPlayerPause(playerid)
 {
 	new bizId = -1;
-	foreach(new i : Player)
+	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(IsPlayerInDynamicArea(i, FrontBusiness[bizId][TakeoverArea]))
+		if(IsPlayerInDynamicArea(playerid, FrontBusiness[i][TakeoverArea]))
 		{
 			bizId = i;
 			break;
