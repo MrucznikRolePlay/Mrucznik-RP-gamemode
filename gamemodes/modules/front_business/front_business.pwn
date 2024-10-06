@@ -117,7 +117,7 @@ StartFrontBizTakeover(bizId)
 	
 	FrontBusiness[bizId][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], 
 		FrontBusiness[bizId][TakeoverZ], FrontBusiness[bizId][TakeoverZ] + 10, 
-		12.0, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt]);
+		TAKEOVER_ZONE_SIZE * 1.2, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt]);
 }
 
 StopFrontBizTakeover(bizId)
