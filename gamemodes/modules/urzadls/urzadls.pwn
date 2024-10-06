@@ -114,7 +114,8 @@ DestroyActorsInDMV(playerid)
 				SetDynamicActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
 				SetDynamicActorVirtualWorld(actorUID[i], 50); 
 				UpdateActorText(actorUID[i]);
-				format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
+				if(i < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
+				else format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
 				if(playerid != INVALID_PLAYER_ID)
 				{
