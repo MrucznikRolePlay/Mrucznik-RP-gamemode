@@ -48,7 +48,7 @@ command_wejdz_Impl(playerid)
         if(GetPVarInt(playerid, "AC-izolacja") != 0) return sendTipMessageEx(playerid, COLOR_PANICRED, "Jesteœ odizolowany, nie mo¿esz u¿ywaæ tej komendy.");
         if(SprawdzWejscia(playerid))
         {
-            if(GetPlayerVirtualWorld(playerid) != 0 || GetPlayerInterior(playerid) != 0)
+            if(GetPlayerVirtualWorld(playerid) != 0 && GetPlayerInterior(playerid) != 0)
             {
                 SetInteriorTimeAndWeather(playerid); 
             }
