@@ -36,18 +36,19 @@ PlayerInDmvPoint(playerid)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9757,-1794.6508,77.9453)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9752,-1797.7997,77.9453)
 	// Vice City
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 356.2977, 186.2629, 1008.3762)
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 356.2976, 182.4774, 1008.3762)
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 356.2930, 178.5167, 1008.3762)
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 356.2979, 168.9292, 1008.3762)
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 356.2966, 166.2234, 1008.3762)
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 356.3013, 163.1573, 1008.3762)
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 359.7069, 173.6590, 1008.3893))
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2977, 186.2629, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2976, 182.4774, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2930, 178.5167, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2979, 168.9292, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2966, 166.2234, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.3013, 163.1573, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 359.7069, 173.6590, 1008.3893))
 	{
 		return true;
 	}
 	return false;
 }
+
 CreateActorsInDMV(playerid)
 {
 	DmvActorStatus=true; 
@@ -92,6 +93,7 @@ CreateActorsInDMV(playerid)
 	SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 	return 1;
 }
+
 DestroyActorsInDMV(playerid)
 {
 	DmvActorStatus=false; 
@@ -126,6 +128,7 @@ DestroyActorsInDMV(playerid)
 	dmv = 0;
 	return 1;
 }
+
 DefaultItems_LicenseCost()
 {
 	DmvLicenseCost[0] = 5_000; // dowód

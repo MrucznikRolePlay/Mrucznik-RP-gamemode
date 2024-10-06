@@ -29,7 +29,7 @@ command_dmvoff_Impl(playerid)
     {
         new string[124];
         DestroyActorsInDMV(playerid);
-        sendTipMessage(playerid, "Wy³¹czy³ boty w urzêdzie miasta LS!"); 
+        sendTipMessage(playerid, "Wy³¹czy³ boty w urzêdzie miasta LS i VC!"); 
         format(string, sizeof(string), "Urzêdnik %s wy³¹czy³ zautomatyzowany Urz¹d miasta!", GetNickEx(playerid)); 
         SendMessageToAdminEx(string, COLOR_P@, 2);
     }
