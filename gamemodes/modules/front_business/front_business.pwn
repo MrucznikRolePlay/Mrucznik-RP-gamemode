@@ -179,13 +179,9 @@ StopFrontBizTakeover(bizId)
 			else
 			{
 				new string[MAX_MESSAGE_LENGTH];
-				format(string, sizeof(string), "Niestety - nie uda³o siê przekroczyæ progu %d punktów i przej¹æ biznesu z r¹k przestêpców.", TAKE_OVER_POINT_THRESHOLD);
-				SendFamilyMessage(FRAC_LSPD, COLOR_RED, "Koniec przejmowania!");
-				SendFamilyMessage(FRAC_FBI, COLOR_RED, "Koniec przejmowania!");
-				SendFamilyMessage(FRAC_NG, COLOR_RED, "Koniec przejmowania!");
-				SendFamilyMessage(FRAC_LSPD, COLOR_RED, string);
-				SendFamilyMessage(FRAC_FBI, COLOR_RED, string);
-				SendFamilyMessage(FRAC_NG, COLOR_RED, string);
+				format(string, sizeof(string), "Koniec przejmowania! Niestety - nie uda³o siê przekroczyæ progu %d punktów i przej¹æ biznesu z r¹k przestêpców.", TAKE_OVER_POINT_THRESHOLD);
+				for(new i=FRAC_LSPD; i<=FRAC_NG; i++) 
+					SendFamilyMessage(i, COLOR_RED, string);
 			}
 		}
 		else
@@ -212,10 +208,8 @@ TriggerTakingOver(bizId, org)
 		}
 		else if(ownerOrg == 0)
 		{
-			for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
-			{
+			for(new i=FRAC_LSPD; i<=FRAC_NG; i++) 
 				SendFamilyMessage(i, COLOR_WHITE, sprintf("{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000} Ktoœ próbuje przej¹æ biznes %s!", FrontBusiness[bizId][Name]));
-			}
 		}
 	}
 }
