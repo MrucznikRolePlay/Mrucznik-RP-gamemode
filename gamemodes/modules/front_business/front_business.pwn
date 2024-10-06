@@ -69,9 +69,6 @@ LoadFrontBusinesses()
 		FrontBusiness[i][BizGangZone] = GangZoneCreate(areaMinX, areaMinY, areaMaxX, areaMaxY);
 		GangZoneShowForAll(FrontBusiness[i][BizGangZone], FrontBusiness[i][BizColor] & 0xFFFFFF66);
 
-		FrontBusiness[i][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
-			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
-
 		CreateDynamicPickup(GetFrontBusinessPickup(FrontBusiness[i][Type]), 1, 
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ],
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
@@ -111,11 +108,17 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverActive] = true;
 	FrontBusiness[bizId][TakeoverStartTime] = gettime();
 
+	// recreated areas
+	DestroyDynamicArea(FrontBusiness[i][GangZoneArea]);
+	FrontBusiness[bizId][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
+		FrontBusiness[bizId][OutVw], FrontBusiness[i][OutInt]);
+
 	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
 		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
 		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][GangZoneArea]);
 	
-	FrontBusiness[bizId][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], 
+	FrontBusiness[bizId][TakeoverArea] = CreateDynamicCylinder(
+		FrontBusiness[bizId][TakeoverX] - TAKEOVER_ZONE_SIZE/2, FrontBusiness[bizId][TakeoverY]- TAKEOVER_ZONE_SIZE/2, 
 		FrontBusiness[bizId][TakeoverZ], FrontBusiness[bizId][TakeoverZ] + 10, 
 		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt]);
 }
