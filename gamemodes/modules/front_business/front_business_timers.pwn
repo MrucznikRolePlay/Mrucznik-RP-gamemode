@@ -143,7 +143,7 @@ ptask TakeoverScoreboard[100](playerid)
 		return;
 	}
 
-	for(new bizId; bizId < sizoef(FrontBusiness); bizId++)
+	for(new bizId; bizId < sizeof(FrontBusiness); bizId++)
 	{
 		if(FrontBusiness[bizId][TakeoverActive])
 		{	
