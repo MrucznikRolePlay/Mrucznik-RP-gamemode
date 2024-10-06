@@ -62,9 +62,7 @@ stock Mru_CreateDynamicPickup(modelid, type, Float:x, Float:y, Float:z, worldid 
 
 timer AnimateObjectPickup[475](obj, Float:x, Float:y, Float:z, step)
 {
-    new active;
-    MAP_get_val_val(MruDynamicPickupTimers, active);
-    if(!active)
+    if(MAP_get_val_val(MruDynamicPickupTimers, obj) == 0)
     {
         return;
     }
