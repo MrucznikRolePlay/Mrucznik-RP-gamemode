@@ -145,7 +145,7 @@ ptask TakeoverScoreboard[100](playerid)
 
 	for(new bizId; bizId < sizeof(FrontBusiness); bizId++)
 	{
-		if(FrontBusiness[bizId][TakeoverActive])
+		if(FrontBusiness[bizId][TakeoverActive] && IsPlayerInDynamicArea(playerid, FrontBusiness[bizId][TakeoverArea]))
 		{	
 			if(GetPlayerVisibleDynamicCP(playerid) != FrontBusiness[bizId][TakeoverCheckpoint])
 			{
