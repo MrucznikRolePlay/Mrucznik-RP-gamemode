@@ -138,20 +138,6 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
-		new bizId = IsPlayerAtFrontBusinnesZone(playerid);
-		if(bizId == -1 || FrontBusiness[bizId][Owner] != org)
-		{
-			MruMessageFail(playerid, "Spawn organizacji musi znajdowaæ siê w promieniu "#ORG_SPAWN_BUSINESS_PROXIMITY_MAX" metrów od przejêtego biznesu, ale nie bli¿ej ni¿ "#ORG_SPAWN_BUSINESS_PROXIMITY_MIN" metrów.");
-			return 1;
-		}
-
-		new Float:proximity = GetPlayerFrontBusinessProximity(playerid, bizId);
-		if(proximity > ORG_SPAWN_BUSINESS_PROXIMITY_MAX || proximity < ORG_SPAWN_BUSINESS_PROXIMITY_MIN)
-		{
-			MruMessageFail(playerid, "Spawn organizacji musi znajdowaæ siê w promieniu "#ORG_SPAWN_BUSINESS_PROXIMITY_MAX" metrów od przejêtego biznesu, ale nie bli¿ej ni¿ "#ORG_SPAWN_BUSINESS_PROXIMITY_MIN" metrów.");
-			return 1;
-		}
-
 		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ spawn organizacji.", GetNick(playerid)));
 
 		TakeContraband(playerid, CHANGE_ORG_SPAWN_COST);
