@@ -279,8 +279,7 @@ SuccessfulAttackMessage(bizId, org, oldOwner)
 {
 	if(IsActiveOrg(org))
 	{
-		SendOrgMessage(org, COLOR_LIGHTGREEN, "UDA£O SIÊ!");
-		SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
+		SendOrgMessage(org, COLOR_LIGHTGREEN, sprintf("UDA£O SIÊ! Twoja organizacja przejê³a biznes %s", FrontBusiness[bizId][Name]));
 	}
 	else // LSPD
 	{
