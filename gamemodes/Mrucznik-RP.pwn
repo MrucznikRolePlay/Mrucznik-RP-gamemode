@@ -2168,7 +2168,6 @@ SetPlayerSpawnPos(playerid)
 							{ // Vice City
 								SetPlayerPos(playerid, -3802.7534, 1777.8750,6.5215);
 								SetPlayerFacingAngle(playerid, 316.0);
-								Wchodzenie(playerid);
 							}
 						}
 						case FRAC_FBI: //2
@@ -2182,7 +2181,6 @@ SetPlayerSpawnPos(playerid)
 							{ // Vice City
 								SetPlayerPos(playerid, -4857.0322, 3012.5569, 6.0599);
 								SetPlayerFacingAngle(playerid, 136.0);
-								Wchodzenie(playerid);
 							}
 						}
 						case FRAC_NG: //3
@@ -2192,13 +2190,11 @@ SetPlayerSpawnPos(playerid)
 								SetPlayerPos(playerid, 261.8342, 71.2429, 1003.2422);// stara: 2515.0200, -2459.5896, 13.8187
 								SetPlayerInterior(playerid, 6);
 								SetPlayerVirtualWorld(playerid, 88);
-								Wchodzenie(playerid);
 							}
 							else
 							{ // Vice City
 								SetPlayerPos(playerid, -5921.1716, 2093.6060, 9.3275);
 								SetPlayerFacingAngle(playerid, 265.0);
-								Wchodzenie(playerid);
 							}
 						}
 						case FRAC_ERS:  //4
@@ -2212,7 +2208,6 @@ SetPlayerSpawnPos(playerid)
 							{ // Vice City
 								SetPlayerPos(playerid, -5087.2378, 1779.6316, 7.5683);
 								SetPlayerFacingAngle(playerid, 266.7065);
-								Wchodzenie(playerid);
 							}
 						} // 5,6 empty
 						case FRAC_BOR: //7
@@ -2229,7 +2224,6 @@ SetPlayerSpawnPos(playerid)
 							{ // Vice City
 								SetPlayerPos(playerid, -4125.0571, 3340.3920, 13.2164);
 								SetPlayerFacingAngle(playerid, 180.7065);
-								Wchodzenie(playerid);
 							}
 						}
 						case FRAC_SN: //9
@@ -2239,26 +2233,21 @@ SetPlayerSpawnPos(playerid)
 								if(PlayerInfo[playerid][pRank] <= 1)
 								{
 									SetPlayerPos(playerid, 297.7128,-1612.1783,114.4219);//Dach SN
-									Wchodzenie(playerid);
 									sendTipMessage(playerid, "Zrespi³eœ siê na dachu San News"); 
 								}
 								else if(PlayerInfo[playerid][pRank] >= 2 && PlayerInfo[playerid][pRank] < 7) 
 								{
-									SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
-									Wchodzenie(playerid);
+									SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994);
 								}
 								else if(PlayerInfo[playerid][pRank] >= 8)
 								{
-									SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994); 
-									Wchodzenie(playerid);
+									SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994);
 								}
-								// SetPlayerPos(playerid, 735.2266,-1336.5826,13.5358);
 							}
 							else
 							{ // Vice City
 								SetPlayerPos(playerid, -4638.0244, 3358.1313, 5.5328);
 								SetPlayerFacingAngle(playerid, 180.7065);
-								Wchodzenie(playerid);
 							}
 						}
 						case FRAC_KT: //10
@@ -2272,7 +2261,6 @@ SetPlayerSpawnPos(playerid)
 							{ // Vice City
 								SetPlayerPos(playerid, -5194.8025, 2436.7863, 6.8840);
 								SetPlayerFacingAngle(playerid, 353.7065);
-								Wchodzenie(playerid);
 							}
 						}
 						case FRAC_GOV: //11
@@ -2285,7 +2273,6 @@ SetPlayerSpawnPos(playerid)
 									SetPlayerVirtualWorld(playerid, 50);
 									SetPlayerInterior(playerid, 0);
 									PlayerInfo[playerid][pLocal] = 108;
-									Wchodzenie(playerid);
 									SetTimerEx("Wchodzenie", 1000, false, "i", playerid);
 								}
 								else
@@ -2312,14 +2299,12 @@ SetPlayerSpawnPos(playerid)
 							{ // Vice City
 								SetPlayerPos(playerid, -4897.7461, 2953.5726, 6.5759);
 								SetPlayerFacingAngle(playerid, 269.8782);
-								Wchodzenie(playerid);
 							}
 						}
 						default:
 						{ // Vice City
 							SetPlayerPos(playerid, -3970.3354, 972.6067, 7.0385);
 							SetPlayerFacingAngle(playerid, 252.7065);
-							Wchodzenie(playerid);
 						}
 				    }
 				}
@@ -2399,7 +2384,6 @@ SetPlayerSpawnPos(playerid)
 						{ // Vice City
 							SetPlayerPos(playerid, -3970.3354, 972.6067, 7.0385); // Vice City motel
 							SetPlayerFacingAngle(playerid, 252.4531);
-							Wchodzenie(playerid);
 						}
 					}
 				}
