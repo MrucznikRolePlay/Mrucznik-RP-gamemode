@@ -143,69 +143,72 @@ ptask TakeoverScoreboard[100](playerid)
 		return;
 	}
 
-	new bizId = GetPVarInt(playerid, "in-business-gangzone") - 1;
-	if(bizId >= 0 && FrontBusiness[bizId][TakeoverActive])
-	{	
-		if(GetPlayerVisibleDynamicCP(playerid) != FrontBusiness[bizId][TakeoverCheckpoint])
-		{
-			TogglePlayerDynamicCP(playerid, FrontBusiness[bizId][TakeoverCheckpoint], true);
-		}
-
-		new string[512];
-		strcat(string, "Punkty przejecia:~n~");
-		new anyPoints;
-
-		new maxScore;
-		for(new i=0; i<MAX_ORG; i++)
-		{
-			new score = FrontBusiness[bizId][TakingOverScore][i];
-			if(maxScore < score)
+	for(new bizId; bizId < sizoef(FrontBusiness); bizId++)
+	{
+		if(FrontBusiness[bizId][TakeoverActive])
+		{	
+			if(GetPlayerVisibleDynamicCP(playerid) != FrontBusiness[bizId][TakeoverCheckpoint])
 			{
-				maxScore = score;
+				TogglePlayerDynamicCP(playerid, FrontBusiness[bizId][TakeoverCheckpoint], true);
 			}
-		}
 
-		for(new i=0; i<MAX_ORG; i++)
-		{
-			new score = FrontBusiness[bizId][TakingOverScore][i];
-			if(score > 0)
+			new string[512];
+			strcat(string, "Punkty przejecia:~n~");
+			new anyPoints;
+
+			new maxScore;
+			for(new i=0; i<MAX_ORG; i++)
 			{
-				new orgName[64];
-				if(i == 0)
+				new score = FrontBusiness[bizId][TakingOverScore][i];
+				if(maxScore < score)
 				{
-					format(orgName, sizeof(orgName), "~b~LSPD");
+					maxScore = score;
 				}
-				else if(i == FrontBusiness[bizId][Owner])
-				{
-					format(orgName, sizeof(orgName), "~g~%s", OrgInfo[i][o_Name]);
-				}
-				else
-				{
-					format(orgName, sizeof(orgName), "~r~%s", OrgInfo[i][o_Name]);
-				}
-
-				new points[32];
-				if(score == maxScore)
-				{
-					format(points, sizeof(points), "~p~%d", FrontBusiness[bizId][TakingOverScore][i]);
-				}
-				else
-				{
-					format(points, sizeof(points), "~w~%d", FrontBusiness[bizId][TakingOverScore][i]);
-				}
-				
-				if(score > TAKE_OVER_POINT_THRESHOLD)
-				{
-					strcat(points, " (przekroczony prog!)");
-				}
-
-				format(string, sizeof(string), "%s%s: %s~n~", string, orgName, points);
-				anyPoints++;
 			}
-		}
-		if(anyPoints > 0)
-		{
-			GameTextForPlayer(playerid, string, 1000, 13);
+
+			for(new i=0; i<MAX_ORG; i++)
+			{
+				new score = FrontBusiness[bizId][TakingOverScore][i];
+				if(score > 0)
+				{
+					new orgName[64];
+					if(i == 0)
+					{
+						format(orgName, sizeof(orgName), "~b~LSPD");
+					}
+					else if(i == FrontBusiness[bizId][Owner])
+					{
+						format(orgName, sizeof(orgName), "~g~%s", OrgInfo[i][o_Name]);
+					}
+					else
+					{
+						format(orgName, sizeof(orgName), "~r~%s", OrgInfo[i][o_Name]);
+					}
+
+					new points[32];
+					if(score == maxScore)
+					{
+						format(points, sizeof(points), "~p~%d", FrontBusiness[bizId][TakingOverScore][i]);
+					}
+					else
+					{
+						format(points, sizeof(points), "~w~%d", FrontBusiness[bizId][TakingOverScore][i]);
+					}
+					
+					if(score > TAKE_OVER_POINT_THRESHOLD)
+					{
+						strcat(points, " (przekroczony prog!)");
+					}
+
+					format(string, sizeof(string), "%s%s: %s~n~", string, orgName, points);
+					anyPoints++;
+				}
+			}
+			if(anyPoints > 0)
+			{
+				GameTextForPlayer(playerid, string, 1000, 13);
+			}
+			return;
 		}
 	}
 }

@@ -83,7 +83,7 @@ LoadFrontBusinesses()
 	
 		FrontBusiness[i][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[i][TakeoverX], FrontBusiness[i][TakeoverY], 
 			FrontBusiness[i][TakeoverZ] - 1.0, FrontBusiness[i][TakeoverZ] + 10.0, 
-			TAKEOVER_ZONE_SIZE, FrontBusiness[i][TakeoverVw], FrontBusiness[i][TakeoverInt]);
+			TAKEOVER_ZONE_SIZE / 2.0, FrontBusiness[i][TakeoverVw], FrontBusiness[i][TakeoverInt]);
 
 		if(FrontBusiness[i][InX] != 0.0) 
 		{
@@ -121,13 +121,17 @@ StartFrontBizTakeover(bizId)
 
 	FrontBusiness[bizId][TakeoverPickup] = CreateDynamicPickup(1313, 1, 
 		FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ], 
-		FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt]); 
+		FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt]);
 
 	foreach(new i : Player)
 	{
-		if(IsPlayerInDynamicArea(i, FrontBusiness[bizId][GangZoneArea]))
+		if(IsPlayerInDynamicArea(FrontBusiness[bizId][GangZoneArea]))
 		{
-			TogglePlayerDynamicCP(i, FrontBusiness[bizId][TakeoverCheckpoint], true);
+			FB_OnPlayerEnterDynamicArea(i, FrontBusiness[bizId][GangZoneArea]);
+		}
+		if(IsPlayerInDynamicArea(FrontBusiness[bizId][TakeoverArea]))
+		{
+			FB_OnPlayerEnterDynamicArea(i, FrontBusiness[bizId][TakeoverArea]);
 		}
 	}
 }

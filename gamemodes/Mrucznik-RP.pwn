@@ -1176,24 +1176,11 @@ public OnPlayerPause(playerid)
 	{
 		afk_timer[playerid] = SetTimerEx("PlayerAFK", 1000, false, "iii", playerid, 1, 0);
 	}
-	new bizId = GetPVarInt(playerid, "in-takeover-zone") - 1;
-	if(bizId >= 0)
-	{
-		new areaid = FrontBusiness[bizId][TakeoverArea];
-		SetPVarInt(playerid, "takeover-afk", areaid);
-		FB_OnPlayerLeaveDynamicArea(playerid, areaid);
-	}
 	return 1;
 }
 
 public OnPlayerResume(playerid)
 {
-	new areaid = GetPVarInt(playerid, "takeover-afk");
-	if(areaid > 0)
-	{
-		FB_OnPlayerEnterDynamicArea(playerid, areaid);
-		DeletePVar(playerid, "takeover-afk");
-	}
 	return 1;
 }
 

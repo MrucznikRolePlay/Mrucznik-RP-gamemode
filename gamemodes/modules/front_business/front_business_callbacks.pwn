@@ -32,15 +32,6 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(areaid == FrontBusiness[i][GangZoneArea])
-		{
-			SetPVarInt(playerid, "in-business-gangzone", i+1);
-		}
-		if(areaid == FrontBusiness[i][TakeoverArea])
-		{
-			SetPVarInt(playerid, "in-takeover-zone", i + 1);
-		}
-
 		if(!FrontBusiness[i][TakeoverActive])
 		{
 			return;
@@ -119,15 +110,6 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(areaid == FrontBusiness[i][GangZoneArea] && GetPVarInt(playerid, "in-business-gangzone")-1 == i)
-		{
-			DeletePVar(playerid, "in-business-gangzone");
-		}
-		if(areaid == FrontBusiness[i][TakeoverArea] && GetPVarInt(playerid, "in-takeover-zone")-1 == i)
-		{
-			DeletePVar(playerid, "in-takeover-zone");
-		}
-
 		if(!FrontBusiness[i][TakeoverActive])
 		{
 			return;
@@ -230,6 +212,27 @@ FrontBiz_OnPayDay(playerid)
 	// messages
 	SendClientMessage(playerid, COLOR_GREY, sprintf("  Dochód z biznesów organizacji: %d$.", totalIncome));
 	SendClientMessage(playerid, COLOR_GREY, sprintf("  Dostajesz z tego: "INCOLOR_GREEN"%d$"INCOLOR_GREY" a "INCOLOR_RED"%d$"INCOLOR_GREY" idzie dla lidera.", memberIncome, leaderIncome));
+}
+
+hook OnPlayerPause(playerid)
+{
+	new bizId = GetPVarInt(playerid, "in-takeover-zone") - 1;
+	if(bizId >= 0)
+	{
+		new areaid = FrontBusiness[bizId][TakeoverArea];
+		SetPVarInt(playerid, "takeover-afk", areaid);
+		FB_OnPlayerLeaveDynamicArea(playerid, areaid);
+	}
+}
+
+hook OnPlayerResume(playerid)
+{
+	new areaid = GetPVarInt(playerid, "takeover-afk");
+	if(areaid > 0)
+	{
+		FB_OnPlayerEnterDynamicArea(playerid, areaid);
+		DeletePVar(playerid, "takeover-afk");
+	}
 }
 
 //end
