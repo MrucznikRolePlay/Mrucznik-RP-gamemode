@@ -206,7 +206,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         "Ammu-Nation North Point", FRONT_BIZ_TYPE_GUNSHOP,
         -3830.6904, 3306.6473, 1213.6429, 6, 0, // wejœcie
         315.24, -140.88, 999.60, 7, FRONT_BUSINESS_VW, // wyjœcie
-        -3823.0588,3313.9470,1213.5977, 0, 0, // przejmowanie
+        -3823.0588,3313.9470,1213.5977, 6, 0, // przejmowanie
         100, 200 // hajs
     },
     {

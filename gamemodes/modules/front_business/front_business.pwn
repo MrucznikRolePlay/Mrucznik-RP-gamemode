@@ -112,12 +112,12 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverStartTime] = gettime();
 
 	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
-		FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
+		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
 		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][GangZoneArea]);
 	
 	FrontBusiness[bizId][TakeoverArea] = CreateDynamicCylinder(FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], 
 		FrontBusiness[bizId][TakeoverZ], FrontBusiness[bizId][TakeoverZ] + 10, 
-		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][OutVw], FrontBusiness[bizId][OutInt]);
+		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt]);
 }
 
 StopFrontBizTakeover(bizId)
@@ -198,9 +198,7 @@ TriggerTakingOver(bizId, org)
 		{
 			for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
 			{
-				SendFamilyMessage(i, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
-				SendFamilyMessage(i, COLOR_RED, sprintf("Ktoœ próbuje przej¹æ biznes %s!", FrontBusiness[bizId][Name]));
-				SendFamilyMessage(i, COLOR_WHITE, "|__________________________________________________|");
+				SendFamilyMessage(i, COLOR_WHITE, sprintf("{FFFFFF}»»{6A5ACD} CENTRALA: {FF0000} Ktoœ próbuje przej¹æ biznes %s!", FrontBusiness[bizId][Name]));
 			}
 		}
 	}
@@ -219,9 +217,7 @@ StopTakingOver(bizId)
 	{
 		for(new i=FRAC_LSPD; i<=FRAC_NG; i++)
 		{
-			SendFamilyMessage(i, COLOR_WHITE, "|___________ DO WSZYSTKICH JEDNOSTEK ___________|");
-			SendFamilyMessage(i, COLOR_LIGHTGREEN, sprintf("Sytuacja opanowana, agresorzy przestali atakowaæ biznes %s!", FrontBusiness[bizId][Name]));
-			SendFamilyMessage(i, COLOR_WHITE, "|__________________________________________________|");
+			SendFamilyMessage(i, COLOR_WHITE, sprintf("{FFFFFF}»»{6A5ACD} CENTRALA: "INCOLOR_LIGHTGREEN" Sytuacja opanowana, agresorzy przestali atakowaæ biznes %s!", FrontBusiness[bizId][Name]));
 		}
 	}
 }
