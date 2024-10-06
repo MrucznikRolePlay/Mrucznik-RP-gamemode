@@ -22,7 +22,7 @@
 //
 
 //------------------<[ Define: ]>-------------------
-#define FRONT_BUSINESS_GANGZONE_SIZE 50.0
+#define FRONT_BUSINESS_GANGZONE_SIZE 75.0
 #define TAKEOVER_ZONE_SIZE 20.0
 
 #define TAKING_OVER_MODE_DEFENCE 0

@@ -119,11 +119,11 @@ FB_OnPlayerLeaveDynamicArea(playerid, areaid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		if(areaid == FrontBusiness[i][GangZoneArea])
+		if(areaid == FrontBusiness[i][GangZoneArea] && GetPVarInt(playerid, "in-business-gangzone")-1 == i)
 		{
 			DeletePVar(playerid, "in-business-gangzone");
 		}
-		if(areaid == FrontBusiness[i][TakeoverArea])
+		if(areaid == FrontBusiness[i][TakeoverArea] && GetPVarInt(playerid, "in-takeover-zone")-1 == i)
 		{
 			DeletePVar(playerid, "in-takeover-zone");
 		}
