@@ -227,7 +227,15 @@ hook OnPlayerConnect(playerid)
 {
 	for(new i; i<sizeof(FrontBusiness); i++)
 	{
-		new color = OrgInfo[FrontBusiness[i][Owner]][o_Color];
+		new color;
+		if(IsActiveOrg(FrontBusiness[i][Owner]))
+		{
+			color = OrgInfo[FrontBusiness[i][Owner]][o_Color];
+		}
+		else 
+		{
+			color = COLOR_WHITE;
+		}
 		GangZoneShowForPlayer(playerid, FrontBusiness[i][BizGangZone], color & 0xFFFFFF66);
 	}
 }

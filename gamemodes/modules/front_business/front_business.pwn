@@ -37,7 +37,6 @@ LoadFrontBusinesses()
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverMinute"), 30 * random(2));
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "takeoverTime"), 3600); // 60 minutes
 
-			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "color"), COLOR_BROWN);
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "owner"), 0);
 
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "profit"), 0);
