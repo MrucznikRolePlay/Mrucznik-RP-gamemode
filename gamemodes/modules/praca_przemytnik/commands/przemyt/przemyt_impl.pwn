@@ -33,7 +33,7 @@ command_przemyt_Impl(playerid)
 
     if(!IsAPrzestepca(playerid))
     {
-        MruMessageFail(playerid, "Nie jesteœ w organizacji przestêpczej, tylko organizacje przestêpcze mog¹ organizowaæ przemyt.");
+        MruMessageFail(playerid, "Nie jesteœ w organizacji przestêpczej - tylko organizacje przestêpcze mog¹ organizowaæ przemyt.");
         return 1;
     }
 
