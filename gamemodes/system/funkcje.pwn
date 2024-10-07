@@ -7450,8 +7450,8 @@ public OPCLogin(playerid)
     ZonePlayerTimer[playerid]=0;
     for(new j=0;j<MAX_ZONES;j++)
     {
-        if(ZoneControl[j] > 100) GangZoneShowForPlayer(playerid, j, OrgInfo[clamp(ZoneControl[j]-100, 0, MAX_ORG-1)][o_Color] | 0x44);
-        else GangZoneShowForPlayer(playerid, j, 0xC6E2F144);
+        if(ZoneControl[j] > 100) GangZoneShowForPlayer(playerid, ZoneIDs[j], OrgInfo[clamp(ZoneControl[j]-100, 0, MAX_ORG-1)][o_Color] | 0x44);
+        else GangZoneShowForPlayer(playerid, ZoneIDs[j], 0xC6E2F144);
     }
 
 	SetPlayerHealth(playerid, 100);

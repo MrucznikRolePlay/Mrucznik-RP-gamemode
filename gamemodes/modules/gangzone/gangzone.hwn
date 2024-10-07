@@ -23,7 +23,7 @@
 
 //------------------<[ Enumy: ]>--------------------
 //-----------------<[ Zmienne: ]>-------------------
-new Zone_Points[2];
+new ZoneIDs[MAX_ZONES];
 new Float:Zone_Area[81];
 new ZoneControl[MAX_ZONES];
 new ZonePlayerTimer[MAX_PLAYERS];

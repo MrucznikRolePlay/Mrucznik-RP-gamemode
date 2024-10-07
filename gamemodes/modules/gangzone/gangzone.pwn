@@ -28,9 +28,9 @@
 //-----------------<[ Funkcje: ]>-------------------
 DestroyGangzones()
 {
-	for(new i=Zone_Points[0];i<=Zone_Points[1];i++)
+	for(new i;i<MAX_ZONES;i++)
     {
-        GangZoneDestroy(i);
+        GangZoneDestroy(ZoneIDs[i]);
     }
 }
 
@@ -404,11 +404,9 @@ Zone_Load()
     for(new i=0;i<MAX_ZONES;i++)
     {
         id = GangZoneCreate(Zone_Data[i][0],Zone_Data[i][1],Zone_Data[i][2],Zone_Data[i][3]);
-        if(i == 0) Zone_Points[0] = id;
-
+        ZoneIDs[i] = id;
         Zone_Area[i] = ((Zone_Data[i][2]-Zone_Data[i][0])*(Zone_Data[i][3]-Zone_Data[i][1]));
     }
-    Zone_Points[1] = id;
 }
 
 Zone_CheckPossToAttack(playerid, zoneid)
