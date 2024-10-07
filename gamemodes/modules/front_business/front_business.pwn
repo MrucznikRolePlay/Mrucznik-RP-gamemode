@@ -61,10 +61,10 @@ LoadFrontBusinesses()
 			MAPICON_GLOBAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
 		);
 
-		new Float:areaMinX = FrontBusiness[i][OutX] - FRONT_BUSINESS_GANGZONE_SIZE;
-		new Float:areaMinY = FrontBusiness[i][OutY] - FRONT_BUSINESS_GANGZONE_SIZE;
-		new Float:areaMaxX = FrontBusiness[i][OutX] + FRONT_BUSINESS_GANGZONE_SIZE;
-		new Float:areaMaxY = FrontBusiness[i][OutY] + FRONT_BUSINESS_GANGZONE_SIZE;
+		new Float:areaMinX = FrontBusiness[i][OutX] - FrontBusiness[i][BizGangZoneSize];
+		new Float:areaMinY = FrontBusiness[i][OutY] - FrontBusiness[i][BizGangZoneSize];
+		new Float:areaMaxX = FrontBusiness[i][OutX] + FrontBusiness[i][BizGangZoneSize];
+		new Float:areaMaxY = FrontBusiness[i][OutY] + FrontBusiness[i][BizGangZoneSize];
 		FrontBusiness[i][BizGangZone] = GangZoneCreate(areaMinX, areaMinY, areaMaxX, areaMaxY);
 		new color = OrgInfo[FrontBusiness[i][Owner]][o_Color];
 		GangZoneShowForAll(FrontBusiness[i][BizGangZone], color & 0xFFFFFF66);
@@ -118,7 +118,7 @@ StartFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverCheckpoint] = CreateDynamicCP(
 		FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ] - 0.5,
 		TAKEOVER_ZONE_SIZE, FrontBusiness[bizId][TakeoverVw], FrontBusiness[bizId][TakeoverInt],
-		INVALID_PLAYER_ID, FRONT_BUSINESS_GANGZONE_SIZE, FrontBusiness[bizId][GangZoneArea]);
+		INVALID_PLAYER_ID, 75.0, FrontBusiness[bizId][GangZoneArea]);
 
 	FrontBusiness[bizId][TakeoverPickup] = CreateDynamicPickup(1313, 1, 
 		FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ], 
