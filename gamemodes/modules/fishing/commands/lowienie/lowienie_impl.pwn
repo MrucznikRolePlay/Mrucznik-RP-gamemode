@@ -107,7 +107,7 @@ command_lowienie_Impl(playerid)
             gettime(hour,unused,unused);
             if(hour >= 18 && hour <= 24)
             {
-                Caught *= 1.25;
+                Caught = floatround(Caught * 1.25, floatround_ceil);
             }
         }
         
