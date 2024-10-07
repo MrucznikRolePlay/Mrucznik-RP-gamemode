@@ -124,7 +124,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -4103.2354, 779.1384, 4.846032, 0, 0, // wejœcie
         -4103.9883, 795.2566, 997.800000, 6, FRONT_BUSINESS_VW, // wyjœcie
         -4053.7173, 768.6839, 5.1413, 0, 0, // przejmowanie
-        90.0, // size of gangzone
+        85.0, // size of gangzone
         100, 200 // hajs
     },
     {
@@ -132,7 +132,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -3708.4888, 2172.1705, 5.555270, 0, 0, // wejœcie
         -3711.6045, 2173.2814, 998.300000, 6, FRONT_BUSINESS_VW, // wyjœcie
         -3740.8557, 2166.4524, 5.9461, 0, 0, // przejmowanie
-        150.0, // size of gangzone
+        100.0, // size of gangzone
         100, 200 // hajs
     },
     {
@@ -172,7 +172,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -4095.3691, 684.6724, 4.9740, 0, 0, // wejœcie
         445.60, -6.98, 1000.73, 1, FRONT_BUSINESS_VW, // wyjœcie
         -4075.2205,702.8980,5.4794, 0, 0, // przejmowanie
-        75.0, // size of gangzone
+        30.0, // size of gangzone
         100, 200 // hajs
     },
     {
