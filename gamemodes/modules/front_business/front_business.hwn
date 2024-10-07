@@ -324,7 +324,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -4943.0801,728.6068,7.777, 0, 0, // wejœcie
         1494.325195,1304.942871,1093.289062, 3, FRONT_BUSINESS_VW, // wyjœcie
         -4958.0239,649.8201,18.1950, 0, 0, // przejmowanie
-        100.0, // size of gangzone
+        125.0, // size of gangzone
         150, 200 // hajs
     },
     {
