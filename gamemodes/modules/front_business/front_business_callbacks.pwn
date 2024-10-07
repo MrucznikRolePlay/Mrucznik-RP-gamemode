@@ -223,6 +223,15 @@ FrontBiz_OnPayDay(playerid)
 	SendClientMessage(playerid, COLOR_GREY, sprintf("  Dostajesz z tego: "INCOLOR_GREEN"%d$"INCOLOR_GREY" a "INCOLOR_RED"%d$"INCOLOR_GREY" idzie dla lidera.", memberIncome, leaderIncome));
 }
 
+hook OnPlayerConnect(playerid)
+{
+	for(new i; i<sizeof(FrontBusiness); i++)
+	{
+		new color = OrgInfo[FrontBusiness[i][Owner]][o_Color];
+		GangZoneShowForPlayer(FrontBusiness[i][BizGangZone], color & 0xFFFFFF66);
+	}
+}
+
 hook OnPlayerPause(playerid)
 {
 	new bizId = -1;

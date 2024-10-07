@@ -68,7 +68,7 @@ LoadFrontBusinesses()
 		FrontBusiness[i][BizGangZone] = GangZoneCreate(areaMinX, areaMinY, areaMaxX, areaMaxY);
 		new color = OrgInfo[FrontBusiness[i][Owner]][o_Color];
 		GangZoneShowForAll(FrontBusiness[i][BizGangZone], color & 0xFFFFFF66);
-
+		
 		FrontBusiness[i][GangZoneArea] = CreateDynamicRectangle(areaMinX, areaMinY, areaMaxX, areaMaxY, 
 			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
 
