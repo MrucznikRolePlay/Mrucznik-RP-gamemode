@@ -6667,6 +6667,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 3:// Spawn w Vice City
 		            {
+						if(!IsPlayerAtViceCity(playerid))
+						{
+							MruMessageFail(playerid, "Spawn w Vice City mo¿esz ustawiæ tylko wtedy, gdy znajdujesz siê w tym mieœcie.");
+							ShowSpawnChangeDialog(playerid);
+							return 1;
+						}
+
 	                    PlayerInfo[playerid][pSpawn] = 3;
 	                    SendClientMessage(playerid, COLOR_NEWS, "Bêdziesz siê teraz spawnowa³ w Vice City");
 
