@@ -44,9 +44,16 @@ command_kuporg_Impl(playerid, color, name[34])
         return 1;
     }
 
-    if(GetPlayerFraction(playerid) != 0 || GetPlayerOrg(playerid) != 0 || GetPlayerJob(playerid) != 0)
+    if(GetPlayerFraction(playerid) != 0 || GetPlayerOrg(playerid) != 0)
     {
-        MruMessageFail(playerid, "By zostaæ liderem organizacji nie mo¿esz byæ we frakcji/organizacji/pracy.");
+        MruMessageFail(playerid, "By zostaæ liderem organizacji nie mo¿esz byæ we frakcji/organizacji.");
+        return 1;
+    }
+
+    new job = GetPlayerJob(playerid);
+    if(job != 0 && IsAJobForAll(job) && !IsACrimeJob(job))
+    {
+        MruMessageFail(playerid, "By zostaæ liderem organizacji nie mo¿esz byæ w legalnej pracy.");
         return 1;
     }
 

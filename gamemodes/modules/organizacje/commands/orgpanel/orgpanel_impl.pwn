@@ -172,6 +172,13 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
+		new job = GetPlayerJob(playerid);
+		if(job != 0 && IsAJobForAll(job) && !IsACrimeJob(job))
+		{
+			MruMessageFail(playerid, "Ten gracz jest w legalnej pracy, nie mo¿esz go przyj¹æ!");
+			return 1;
+		}
+
 		if(kaska[playerid] < JOIN_MEMBER_COST)
 		{
 			MruMessageFail(playerid, "Przyjêcie nowego pracownika kosztuje "#JOIN_MEMBER_COST"$, a Ty tyle nie masz.");

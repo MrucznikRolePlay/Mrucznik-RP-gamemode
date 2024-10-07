@@ -271,24 +271,35 @@ IncreasePlayerJobSkill(playerid, Jobs:jobid, value)
 
 CanPlayerTakeJob(playerid, job)
 {
-	if(job == JOB_DRIVER || job == JOB_PROSTITUTE)
+	if(IsAJobForAll(job))
 	{
 		return 1;
 	}
 
-	if(GetPlayerFraction(playerid) > 0 || GetPlayerOrg(playerid) != 0)
+	if(IsAPrzestepca(playerid) && IsACrimeJob(job))
 	{
-		if(IsAPrzestepca(playerid))
-		{
-			if(job != JOB_DRUG_DEALER && job != JOB_CARTHIEF && job != JOB_GUN_DEALER && job != JOB_SMUGGLER)
-			{
-				return 0;
-			}
-			return 1;
-		}
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+
+	if(GetPlayerFraction(playerid) > 0)
+	{
 		return 0;
 	}
 	return 1;
+}
+
+IsAJobForAll(job)
+{
+	return job == JOB_DRIVER || job == JOB_PROSTITUTE;
+}
+
+IsACrimeJob(job)
+{
+	return job == JOB_DRUG_DEALER || job == JOB_CARTHIEF || job == JOB_GUN_DEALER || job == JOB_SMUGGLER;
 }
 
 GetJobIfPlayerCloseEnough(playerid)
