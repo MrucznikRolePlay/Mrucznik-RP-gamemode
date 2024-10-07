@@ -90,7 +90,7 @@ ViceCityInteriors()
     // ------ [ Bank ] ------
     AddInterior(
         "Bank", -5095.3579, 1908.7921, 7.8773, 0, 0,
-        "Wyjœcie", -5100.0000, 1908.8900, 994.0, 6, 0, // interior banku z internetu: 1387.3058,-26.9497,1000.8729
+        "Wyjœcie", -5100.0000, 1908.8900, 994.0, 6, VCVW, // interior banku z internetu: 1387.3058,-26.9497,1000.8729
         0, 103);
     MruCreateDynamicMapIcon(-5095.3579, 1908.7921, 7.8773, 52, -1, -1, -1, -1, streamDist, iconType); // Bank Vice City
 
