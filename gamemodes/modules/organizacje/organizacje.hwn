@@ -24,13 +24,13 @@
 //------------------<[ Enumy: ]>--------------------
 enum eOrg {
     o_Type,
-    o_Name[MAX_ORG_NAME_LENGTH],
-    o_Motto[128],
     o_Color,
     Float:o_Spawn[4],
     o_Int,
     o_VW,
-    o_LeaderStake
+    o_LeaderStake,
+    o_Name[MAX_ORG_NAME_LENGTH],
+    o_Motto[128],
 };
 
 //-----------------<[ Zmienne: ]>-------------------
