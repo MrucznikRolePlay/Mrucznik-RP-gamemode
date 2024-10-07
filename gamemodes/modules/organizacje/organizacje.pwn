@@ -28,11 +28,11 @@
 LoadOrganisations()
 {
     new query[512], rowCount;
-    mysql_query("SELECT `Type`, `Name`, `Motd`, HEX(`Color`), `x`, `y`, `z`, `a`, `Int`, `Vw`, `LeaderStake` FROM `mru_org` WHERE ID < "#MAX_ORG" ORDER BY ID");
+    mysql_query("SELECT `Type`, HEX(`Color`), `x`, `y`, `z`, `a`, `Int`, `Vw`, `LeaderStake`, `Name`, `Motd` FROM `mru_org` WHERE ID < "#MAX_ORG" ORDER BY ID");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>e<ds[32]s[128]hffffddd>", OrgInfo[rowCount]);
+        sscanf(query, "p<|>e<dhffffddds[128]s[32]>", OrgInfo[rowCount]);
         rowCount++;
     }
     mysql_free_result();
