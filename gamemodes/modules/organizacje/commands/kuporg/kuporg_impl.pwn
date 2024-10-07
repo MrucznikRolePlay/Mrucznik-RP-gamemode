@@ -51,7 +51,7 @@ command_kuporg_Impl(playerid, color, name[34])
     }
 
     new job = GetPlayerJob(playerid);
-    if(job != 0 && IsAJobForAll(job) && !IsACrimeJob(job))
+    if(job != 0 && !IsAJobForAll(job) && !IsACrimeJob(job))
     {
         MruMessageFail(playerid, "By zostaæ liderem organizacji nie mo¿esz byæ w legalnej pracy.");
         return 1;

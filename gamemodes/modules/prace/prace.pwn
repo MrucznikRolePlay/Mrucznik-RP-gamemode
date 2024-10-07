@@ -276,11 +276,7 @@ CanPlayerTakeJob(playerid, job)
 		return 1;
 	}
 
-	if(IsAPrzestepca(playerid) && IsACrimeJob(job))
-	{
-		return 1;
-	}
-	else
+	if(IsAPrzestepca(playerid) && !IsACrimeJob(job))
 	{
 		return 0;
 	}

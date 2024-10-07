@@ -173,7 +173,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		}
 
 		new job = GetPlayerJob(playerid);
-		if(job != 0 && IsAJobForAll(job) && !IsACrimeJob(job))
+		if(job != 0 && !IsAJobForAll(job) && !IsACrimeJob(job))
 		{
 			MruMessageFail(playerid, "Ten gracz jest w legalnej pracy, nie mo¿esz go przyj¹æ!");
 			return 1;
