@@ -2643,7 +2643,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[256];
 				switch(listitem)
 	            {
-					case 0..19:
+					case 0..18:
 					{
 						ShowShopDialog(playerid);
 					}
