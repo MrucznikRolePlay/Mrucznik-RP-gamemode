@@ -527,7 +527,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 		`newbie`, \
 		`BronieScroll`) \
 	VALUES ( \
-		%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d \
+		%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d \
 	) \
 	ON DUPLICATE KEY UPDATE \
 		`KontoBankowe` = %d, \
