@@ -1124,6 +1124,14 @@ Player_CanUseCar(playerid, vehicleid)
 	       		return 0;
 	       	}
         }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL && CarData[lcarid][c_Owner] == CAR_SMUGGLING)
+        {
+            if(!IsPlayerNPC(playerid))
+            {
+                sendTipMessageEx(playerid, COLOR_GREY, "Ten pojazd mog¹ prowadziæ tylko NPC.");
+                return 0;
+            }
+        }
     }
 	if(IsACopCar(vehicleid))
 	{
