@@ -345,6 +345,15 @@ GivePlayerOrgGun(playerid)
 	return 1;
 }
 
+GetOrgSkinsCount(org)
+{
+	for(new i=0;i<MAX_SKIN_SELECT;i++)
+	{
+		if(OrgSkins[org][i] == 0) return i;
+	}
+	return 0;
+}
+
 ResetPlayerOrgStatistics(playerid)
 {
     RedisDelete(sprintf("player:%d:org:%d:benefit", PlayerInfo[playerid][pUID], GetPlayerOrg(playerid)));

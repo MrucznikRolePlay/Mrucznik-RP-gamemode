@@ -32,9 +32,13 @@ enum eOrg {
     o_Name[MAX_ORG_NAME_LENGTH],
     o_Motto[128],
 };
+new OrgInfo[MAX_ORG][eOrg];
+
+new AvailableOrgSkins[][eSkinInfo] = {
+    {1, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN} // 
+};
 
 //-----------------<[ Zmienne: ]>-------------------
-new OrgInfo[MAX_ORG][eOrg];
 new OrgRank[MAX_ORG][MAX_RANG][MAX_RANG_LEN];
 new OrgSkins[MAX_ORG][MAX_SKIN_SELECT];
 

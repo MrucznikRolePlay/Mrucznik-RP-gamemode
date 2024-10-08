@@ -384,6 +384,33 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		MruMessageBadInfo(playerid, "Usun¹³eœ swoj¹ organizacje wraz ca³ym maj¹tkiem i zwolni³eœ wszystkich cz³onków.");
 		Log(serverLog, INFO, "Lider %s organizacji %d usunal swoja organizacje.", GetPlayerLogName(playerid), org);
 	}
+	else if(strcmp(action, "skiny", true) == 0 || strcmp(action, "skiny", true) == 0)
+	{
+		if(IsAtClothShop(playerid))
+		{
+			MruMessageFail(playerid, "Skinami mo¿esz zarz¹dzaæ tylko bêd¹c w sklepie z ubraniami.");
+			return 1;
+		}
+
+		if(strcmp(params, "kup", true) == 0)
+		{
+			if(GetOrgSkinsCount(org) >= MAX_SKIN_SELECT)
+			{
+				MruMessageFail(playerid, "Twoja organizacja osi¹gnê³a limit 100 posiadanych skinów.");
+				return 1;
+			}
+			
+			ShowBuyOrgSkinDialog(playerid);
+		}
+		else if(strcmp(params, "sprzedaj", true) == 0)
+		{
+			ShowSellOrgSkinDialog(playerid);
+		}
+		else
+		{
+        	sendTipMessage(playerid, "U¿yj /orgpanel skiny [kup/sprzedaj]");
+		}
+	}
 	else if(strcmp(action, "stworzrange",true) == 0)
 	{
         RunCommand(playerid, "/liderranga",  params);
@@ -593,5 +620,89 @@ orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	}
 	return 0;
 }
+
+ShowBuyOrgSkinDialog(playerid)
+{	
+	new org = GetPlayerOrg(playerid);
+	new Map:ownedSkins;
+	for(new i; i<MAX_SKIN_SELECT; i++)
+	{
+		if(OrgSkins[org][i] == 0)
+		{
+			break;
+		}
+		MAP_insert_val_val(ownedSkins, OrgSkins[org][i], 1);
+	}
+
+	new string[4096];
+	for(new i; i < sizeof(AvailableOrgSkins); i++)
+	{
+		new skin = AvailableOrgSkins[i][SKIN_ID];
+		if(MAP_get_val_val(ownedSkins, skin))
+		{
+			strcat(string, sprintf("%i\t~r~posiadany\n", skin));
+		}
+		else
+		{
+			strcat(string, sprintf("%i\t~g~%d$\t~y~%d kontrabandy\n", 
+				skin, AvailableOrgSkins[i][SKIN_PRICE],  AvailableOrgSkins[i][SKIN_PRICE_CONTRABAND]));
+		}
+	}
+	string[strlen(string)-1] = '\0';
+
+	ShowPlayerDialogEx(playerid, 5211, DIALOG_STYLE_PREVIEW_MODEL, "Kup skin organizacji", string, "Kup skin", "Anuluj");
+	MAP_clear(ownedSkins);
+}
+
+BuyOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	if(dialogid == 5211)
+	{
+		if(response)
+		{
+			if(strfind(inputtext, "posiadany", true) != -1)
+			{
+				MruMessageFail(playerid, "Nie mo¿esz kupiæ posiadanego skina.");
+				ShowBuyOrgSkinDialog(playerid);
+				return 1;
+			}
+
+			new skin = AvailableOrgSkins[listitem][SKIN_ID];
+			new price = AvailableOrgSkins[listitem][SKIN_PRICE];
+			new contraband = AvailableOrgSkins[listitem][SKIN_PRICE_CONTRABAND];
+			new org = GetPlayerOrg(playerid);
+		
+			AddOrgSkin(org, skin);
+			ZabierzKase(playerid, price);
+			TakeContraband(playerid, contraband);
+
+			MruMessageGoodInfo(playerid, sprintf("Kupi³eœ skin o ID %d za %d$ i %d kontrabandy. Cz³onkowie mog¹ go teraz ubraæ u¿ywaj¹c komendy /uniform.", skin, price, contraband));
+			Log(payLog, INFO, "Lider %s kupil skin %d za %d$ i %d paczek kontrabandy.", GetPlayerLogName(playerid), skin, price, contraband);
+		}
+		return 1;
+	}
+	return 0;
+}
+
+ShowSellOrgSkinDialog(playerid)
+{
+	new org = GetPlayerOrg(playerid);
+	ShowPlayerDialogEx(playerid, 5212, DIALOG_STYLE_PREVIEW_MODEL, "Kup skin organizacji", DialogListaSkinowFamily(org), "Kup skin", "Anuluj");
+}
+
+SellOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
+{
+	#pragma unused inputtext
+	if(dialogid == 5212)
+	{
+		if(response)
+		{
+
+		}
+		return 1;
+	}
+	return 0;
+}
+
 
 //end

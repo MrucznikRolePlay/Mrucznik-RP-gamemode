@@ -7736,68 +7736,6 @@ LoadConfig()
     print("Wczytano podstawow¹ konfiguracjê");
 }
 
-WczytajRangi()
-{
-    new query[512], id, typ, rangi[256],ranga[MAX_RANG][MAX_RANG_LEN];
-    mysql_query("SELECT * FROM `mru_nazwyrang`");
-    mysql_store_result();
-
-    while(mysql_fetch_row_format(query, "|"))
-    {
-        sscanf(query, "p<|>dds[256]", id, typ, rangi);
-        sscanf(rangi, "p<,>A<s[25]>()[10]", ranga);
-        //Assign true rangs
-        if(typ == 1)
-        {
-            for(new i=0;i<MAX_RANG;i++)
-            {
-                if(strlen(ranga[i]) > 1) format(FracRang[id][i], MAX_RANG_LEN, "%s", ranga[i]);
-            }
-        }
-        else
-        {
-            for(new i=0;i<MAX_RANG;i++)
-            {
-                if(strlen(ranga[i]) > 1) format(OrgRank[id][i], MAX_RANG_LEN, "%s", ranga[i]);
-				else format(OrgRank[id][i], MAX_RANG_LEN, "Brak");
-            }
-        }
-    }
-    mysql_free_result();
-    print("Wczytano rangi");
-}
-
-WczytajSkiny()
-{
-    new query[1124], id, typ, skiny[1024],skin[MAX_SKIN_SELECT];
-    mysql_query("SELECT * FROM `mru_skins`");
-    mysql_store_result();
-
-    while(mysql_fetch_row_format(query, "|"))
-    {
-        sscanf(query, "p<|>dds[1024]", typ, id, skiny);
-        sscanf(skiny, "p<,>A<d>(0)["#MAX_SKIN_SELECT"]", skin);
-
-        if(typ == 1)
-        {
-            for(new i=0;i<MAX_SKIN_SELECT;i++)
-            {
-                if(skin[i] > 0) FRAC_SKINS[id][i] = skin[i];
-            }
-        }
-        else
-        {
-            for(new i=0;i<MAX_SKIN_SELECT;i++)
-            {
-                if(skin[i] > 0) OrgSkins[id][i] = skin[i];
-            }
-        }
-    }
-    mysql_free_result();
-    print("Wczytano skiny");
-}
-
-
 WordWrap(source[], bool:spaces, dest[], size = sizeof(dest), chars = 30)
 {
     new length = strlen(source);

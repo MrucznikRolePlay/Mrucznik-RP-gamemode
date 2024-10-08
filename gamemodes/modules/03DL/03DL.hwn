@@ -49,348 +49,349 @@ enum eSkinInfo {
     SKIN_ID,
     eSkinType:SKIN_TYPE,
     SKIN_PRICE,
+    SKIN_PRICE_CONTRABAND,
     eSkinSex:SKIN_SEX,
     eSkinRace:SKIN_RACE
 }
 
 new const ShopSkins[][eSkinInfo] = {
-    {1, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_1.png
-    {2, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_2.png
-    {4, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_4.png
-    {5, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_5.png
-    {10, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_10.png
-    {11, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_11.png
-    {12, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_12.png
-    {13, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_13.png
-    {14, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_14.png
-    {15, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_15.png
-    {16, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_16.png
-    {17, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_17.png
-    {18, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_18.png
-    {19, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_19.png
-    {20, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_20.png
-    {21, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_21.png
-    {22, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_22.png
-    {23, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_23.png
-    {24, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_24.png
-    {25, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_25.png
-    {26, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_26.png
-    {27, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_27.png
-    {28, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_28.png
-    {29, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_29.png
-    {30, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_30.png
-    {31, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_31.png
-    {32, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_32.png
-    {33, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_33.png
-    {34, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_34.png
-    {35, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_35.png
-    {36, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_36.png
-    {37, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_37.png
-    {38, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_38.png
-    {39, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_39.png
-    {41, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_41.png
-    {43, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_43.png
-    {44, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_44.png
-    {45, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_45.png
-    {47, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_47.png
-    {49, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_49.png
-    {50, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_50.png
-    {51, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_51.png
-    {52, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_52.png
-    {53, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_53.png
-    {54, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_54.png
-    {55, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_55.png
-    {56, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_56.png
-    {58, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_58.png
-    {62, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_62.png
-    {63, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_63.png
-    {64, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_64.png
-    {66, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_66.png
-    {67, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_67.png
-    {68, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_68.png
-    {69, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_69.png
-    {72, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_72.png
-    {73, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_73.png
-    {75, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_75.png
-    {76, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_76.png
-    {77, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_77.png
-    {78, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_78.png
-    {79, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_79.png
-    {80, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_80.png
-    {81, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_81.png
-    {82, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_82.png
-    {83, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_83.png
-    {84, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_84.png
-    {85, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_85.png
-    {87, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_87.png
-    {88, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_88.png
-    {89, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_89.png
-    {90, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_90.png
-    {91, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_91.png
-    {92, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_92.png
-    {94, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_94.png
-    {95, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_95.png
-    {96, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_96.png
-    {97, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_97.png
-    {99, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_99.png
-    {100, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_100.png
-    {128, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_128.png
-    {129, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_129.png
-    {130, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_130.png
-    {131, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_131.png
-    {132, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_132.png
-    {134, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_134.png
-    {135, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_135.png
-    {136, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_136.png
-    {137, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_137.png
-    {138, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_138.png
-    {139, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_139.png
-    {140, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_140.png
-    {142, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_142.png
-    {143, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_143.png
-    {144, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_144.png
-    {145, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_145.png
-    {146, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_146.png
-    {151, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_151.png
-    {152, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_152.png
-    {153, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_153.png
-    {154, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_154.png
-    {155, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_155.png
-    {156, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_156.png
-    {157, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_157.png
-    {158, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_158.png
-    {159, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_159.png
-    {160, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_160.png
-    {161, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_161.png
-    {162, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_162.png
-    {167, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_167.png
-    {168, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_168.png
-    {170, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_170.png
-    {172, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_172.png
-    {173, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_173.png
-    {174, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_174.png
-    {175, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_175.png
-    {176, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_176.png
-    {178, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_178.png
-    {179, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_179.png
-    {180, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_180.png
-    {181, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_181.png
-    {182, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_182.png
-    {183, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_183.png
-    {184, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_184.png
-    {185, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_185.png
-    {193, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_193.png
-    {194, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_194.png
-    {195, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_195.png
-    {196, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_196.png
-    {197, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_197.png
-    {198, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_198.png
-    {199, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_199.png
-    {200, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_200.png
-    {201, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_201.png
-    {203, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_203.png
-    {204, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_204.png
-    {205, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_205.png
-    {207, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_207.png
-    {209, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_209.png
-    {210, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_210.png
-    {212, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_212.png
-    {213, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_213.png
-    {215, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_215.png
-    {216, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_216.png
-    {218, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_218.png
-    {219, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_219.png
-    {220, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_220.png
-    {221, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_221.png
-    {222, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_222.png
-    {223, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_223.png
-    {224, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_224.png
-    {225, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_225.png
-    {226, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_226.png
-    {229, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_229.png
-    {230, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_230.png
-    {231, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_231.png
-    {232, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_232.png
-    {233, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_233.png
-    {235, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_235.png
-    {236, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_236.png
-    {237, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_237.png
-    {238, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_238.png
-    {239, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_239.png
-    {241, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_241.png
-    {242, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_242.png
-    {243, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_243.png
-    {244, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_244.png
-    {245, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_245.png
-    {246, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_246.png
-    {247, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_247.png
-    {248, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_248.png
-    {249, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_249.png
-    {251, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_251.png
-    {252, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_252.png
-    {253, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_253.png
-    {254, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_254.png
-    {255, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_255.png
-    {256, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_256.png
-    {257, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_257.png
-    {258, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_258.png
-    {259, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_259.png
-    {260, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_260.png
-    {261, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_261.png
-    {262, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_262.png
-    {263, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_263.png
-    {264, SKIN_TYPE_DEFAULT, 5000, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_264.png
+    {1, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_1.png
+    {2, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_2.png
+    {4, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_4.png
+    {5, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_5.png
+    {10, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_10.png
+    {11, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_11.png
+    {12, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_12.png
+    {13, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_13.png
+    {14, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_14.png
+    {15, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_15.png
+    {16, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_16.png
+    {17, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_17.png
+    {18, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_18.png
+    {19, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_19.png
+    {20, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_20.png
+    {21, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_21.png
+    {22, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_22.png
+    {23, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_23.png
+    {24, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_24.png
+    {25, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_25.png
+    {26, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_26.png
+    {27, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_27.png
+    {28, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_28.png
+    {29, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_29.png
+    {30, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_30.png
+    {31, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_31.png
+    {32, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_32.png
+    {33, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_33.png
+    {34, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_34.png
+    {35, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_35.png
+    {36, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_36.png
+    {37, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_37.png
+    {38, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_38.png
+    {39, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_39.png
+    {41, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_41.png
+    {43, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_43.png
+    {44, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_44.png
+    {45, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_45.png
+    {47, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_47.png
+    {49, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_49.png
+    {50, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_50.png
+    {51, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_51.png
+    {52, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_52.png
+    {53, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_53.png
+    {54, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_54.png
+    {55, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_55.png
+    {56, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_56.png
+    {58, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_58.png
+    {62, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_62.png
+    {63, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_63.png
+    {64, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_64.png
+    {66, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_66.png
+    {67, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_67.png
+    {68, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_68.png
+    {69, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_69.png
+    {72, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_72.png
+    {73, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_73.png
+    {75, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_75.png
+    {76, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_76.png
+    {77, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_77.png
+    {78, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_78.png
+    {79, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_79.png
+    {80, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_80.png
+    {81, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_81.png
+    {82, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_82.png
+    {83, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_83.png
+    {84, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_84.png
+    {85, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_85.png
+    {87, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_87.png
+    {88, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_88.png
+    {89, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_89.png
+    {90, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_90.png
+    {91, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_91.png
+    {92, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_92.png
+    {94, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_94.png
+    {95, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_95.png
+    {96, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_96.png
+    {97, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_97.png
+    {99, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_99.png
+    {100, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_100.png
+    {128, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_128.png
+    {129, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_129.png
+    {130, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_130.png
+    {131, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_131.png
+    {132, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_132.png
+    {134, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_134.png
+    {135, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_135.png
+    {136, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_136.png
+    {137, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_137.png
+    {138, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_138.png
+    {139, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_139.png
+    {140, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_140.png
+    {142, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_142.png
+    {143, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_143.png
+    {144, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_144.png
+    {145, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_145.png
+    {146, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_146.png
+    {151, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_151.png
+    {152, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_152.png
+    {153, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_153.png
+    {154, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_154.png
+    {155, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_155.png
+    {156, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_156.png
+    {157, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_157.png
+    {158, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_158.png
+    {159, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_159.png
+    {160, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_160.png
+    {161, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_161.png
+    {162, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_162.png
+    {167, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_167.png
+    {168, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_168.png
+    {170, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_170.png
+    {172, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_172.png
+    {173, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_173.png
+    {174, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_174.png
+    {175, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_175.png
+    {176, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_176.png
+    {178, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_178.png
+    {179, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_179.png
+    {180, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_180.png
+    {181, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_181.png
+    {182, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_182.png
+    {183, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_183.png
+    {184, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_184.png
+    {185, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_185.png
+    {193, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_193.png
+    {194, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_194.png
+    {195, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_195.png
+    {196, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_196.png
+    {197, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_197.png
+    {198, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_198.png
+    {199, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_199.png
+    {200, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_200.png
+    {201, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_201.png
+    {203, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_203.png
+    {204, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_204.png
+    {205, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_205.png
+    {207, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_207.png
+    {209, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_209.png
+    {210, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_210.png
+    {212, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_212.png
+    {213, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_213.png
+    {215, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_215.png
+    {216, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_216.png
+    {218, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_218.png
+    {219, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_219.png
+    {220, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_220.png
+    {221, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_221.png
+    {222, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_222.png
+    {223, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_223.png
+    {224, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_224.png
+    {225, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_225.png
+    {226, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_226.png
+    {229, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_229.png
+    {230, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_230.png
+    {231, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_231.png
+    {232, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_232.png
+    {233, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_233.png
+    {235, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_235.png
+    {236, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_236.png
+    {237, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_237.png
+    {238, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_238.png
+    {239, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_239.png
+    {241, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_241.png
+    {242, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_242.png
+    {243, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_243.png
+    {244, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_244.png
+    {245, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_245.png
+    {246, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_246.png
+    {247, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_247.png
+    {248, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_248.png
+    {249, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_249.png
+    {251, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_251.png
+    {252, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_252.png
+    {253, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_253.png
+    {254, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_254.png
+    {255, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_255.png
+    {256, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_256.png
+    {257, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_257.png
+    {258, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_258.png
+    {259, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_259.png
+    {260, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_260.png
+    {261, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_261.png
+    {262, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_262.png
+    {263, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_263.png
+    {264, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // https://wiki.sa-mp.com/wiki/Image:Skin_264.png
     
 	//ZWYK£E SKINY 20.401 - BRAK
-	{20401, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20402, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20403, SKIN_TYPE_DEFAULT, 7500, SKIN_MEN, SKIN_BLACK},
-	{20404, SKIN_TYPE_DEFAULT, 10000, SKIN_MEN, SKIN_WHITE},
-	{20405, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20406, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_BLACK},
-	{20407, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_BLACK},
-	{20408, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20409, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20410, SKIN_TYPE_DEFAULT, 12500, SKIN_MEN, SKIN_WHITE},
-	{20411, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20412, SKIN_TYPE_DEFAULT, 12500, SKIN_MEN, SKIN_YELLOW},
-	{20413, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20414, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20415, SKIN_TYPE_DEFAULT, 20000, SKIN_WOMEN, SKIN_WHITE},
-	{20416, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20417, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20418, SKIN_TYPE_DEFAULT, 20000, SKIN_WOMEN, SKIN_WHITE},
-	{20419, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_ANOTHER},
-	{20420, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_BLACK},
-	{20421, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20422, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20423, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20424, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20425, SKIN_TYPE_DEFAULT, 20000, SKIN_MEN, SKIN_WHITE},
-	{20426, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20427, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20428, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20429, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20430, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_ANOTHER},
-	{20431, SKIN_TYPE_DEFAULT, 15000, eSkinSex:UNKNOWN, SKIN_ANOTHER},
-	{20432, SKIN_TYPE_DEFAULT, 15000, eSkinSex:UNKNOWN, SKIN_ANOTHER},
-	{20433, SKIN_TYPE_DEFAULT, 17500, SKIN_MEN, SKIN_WHITE},
-	{20434, SKIN_TYPE_DEFAULT, 15000, SKIN_MEN, SKIN_WHITE},
-	{20435, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20436, SKIN_TYPE_DEFAULT, 20000, SKIN_WOMEN, SKIN_WHITE},
-	{20437, SKIN_TYPE_DEFAULT, 17500, SKIN_WOMEN, SKIN_YELLOW},
-	{20438, SKIN_TYPE_DEFAULT, 10000, SKIN_WOMEN, SKIN_WHITE},
-	{20439, SKIN_TYPE_DEFAULT, 10000, SKIN_WOMEN, SKIN_YELLOW},
-	{20440, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20441, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20442, SKIN_TYPE_DEFAULT, 15000, SKIN_WOMEN, SKIN_WHITE},
-	{20443, SKIN_TYPE_DEFAULT, 15500, SKIN_WOMEN, SKIN_WHITE},
-	{20444, SKIN_TYPE_DEFAULT, 10500, SKIN_WOMEN, SKIN_WHITE},
-	{20445, SKIN_TYPE_DEFAULT, 17500, SKIN_WOMEN, SKIN_BLACK},
-	{20446, SKIN_TYPE_DEFAULT, 15500, SKIN_MEN, SKIN_WHITE},
-	{20447, SKIN_TYPE_DEFAULT, 15500, SKIN_WOMEN, SKIN_WHITE},
-	{20448, SKIN_TYPE_DEFAULT, 12000, SKIN_WOMEN, SKIN_BLACK},
-	{20449, SKIN_TYPE_DEFAULT, 12000, SKIN_WOMEN, SKIN_BLACK},
-	{20450, SKIN_TYPE_DEFAULT, 12000, SKIN_MEN, SKIN_WHITE},
-	{20451, SKIN_TYPE_DEFAULT, 12000, SKIN_WOMEN, SKIN_BLACK},
-	{20452, SKIN_TYPE_DEFAULT, 12000, SKIN_WOMEN, SKIN_BLACK},
-	{20453, SKIN_TYPE_DEFAULT, 12000, SKIN_MEN, SKIN_WHITE},
+	{20401, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20402, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20403, SKIN_TYPE_DEFAULT, 7500, 0, SKIN_MEN, SKIN_BLACK},
+	{20404, SKIN_TYPE_DEFAULT, 10000, 0, SKIN_MEN, SKIN_WHITE},
+	{20405, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20406, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_BLACK},
+	{20407, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_BLACK},
+	{20408, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20409, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20410, SKIN_TYPE_DEFAULT, 12500, 0, SKIN_MEN, SKIN_WHITE},
+	{20411, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20412, SKIN_TYPE_DEFAULT, 12500, 0, SKIN_MEN, SKIN_YELLOW},
+	{20413, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20414, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20415, SKIN_TYPE_DEFAULT, 20000, 0, SKIN_MEN, SKIN_WHITE},
+	{20416, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20417, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20418, SKIN_TYPE_DEFAULT, 20000, 0, SKIN_MEN, SKIN_WHITE},
+	{20419, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_ANOTHER},
+	{20420, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_BLACK},
+	{20421, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20422, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20423, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20424, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20425, SKIN_TYPE_DEFAULT, 20000, 0, SKIN_MEN, SKIN_WHITE},
+	{20426, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20427, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20428, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20429, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20430, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_ANOTHER},
+	{20431, SKIN_TYPE_DEFAULT, 15000, 0, eSkinSex:UNKNOWN, SKIN_ANOTHER},
+	{20432, SKIN_TYPE_DEFAULT, 15000, 0, eSkinSex:UNKNOWN, SKIN_ANOTHER},
+	{20433, SKIN_TYPE_DEFAULT, 17500, 0, SKIN_MEN, SKIN_WHITE},
+	{20434, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20435, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20436, SKIN_TYPE_DEFAULT, 20000, 0, SKIN_MEN, SKIN_WHITE},
+	{20437, SKIN_TYPE_DEFAULT, 17500, 0, SKIN_MEN, SKIN_YELLOW},
+	{20438, SKIN_TYPE_DEFAULT, 10000, 0, SKIN_MEN, SKIN_WHITE},
+	{20439, SKIN_TYPE_DEFAULT, 10000, 0, SKIN_MEN, SKIN_YELLOW},
+	{20440, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20441, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20442, SKIN_TYPE_DEFAULT, 15000, 0, SKIN_MEN, SKIN_WHITE},
+	{20443, SKIN_TYPE_DEFAULT, 15500, 0, SKIN_MEN, SKIN_WHITE},
+	{20444, SKIN_TYPE_DEFAULT, 10500, 0, SKIN_MEN, SKIN_WHITE},
+	{20445, SKIN_TYPE_DEFAULT, 17500, 0, SKIN_MEN, SKIN_BLACK},
+	{20446, SKIN_TYPE_DEFAULT, 15500, 0, SKIN_MEN, SKIN_WHITE},
+	{20447, SKIN_TYPE_DEFAULT, 15500, 0, SKIN_MEN, SKIN_WHITE},
+	{20448, SKIN_TYPE_DEFAULT, 12000, 0, SKIN_MEN, SKIN_BLACK},
+	{20449, SKIN_TYPE_DEFAULT, 12000, 0, SKIN_MEN, SKIN_BLACK},
+	{20450, SKIN_TYPE_DEFAULT, 12000, 0, SKIN_MEN, SKIN_WHITE},
+	{20451, SKIN_TYPE_DEFAULT, 12000, 0, SKIN_MEN, SKIN_BLACK},
+	{20452, SKIN_TYPE_DEFAULT, 12000, 0, SKIN_MEN, SKIN_BLACK},
+	{20453, SKIN_TYPE_DEFAULT, 12000, 0, SKIN_MEN, SKIN_WHITE},
 
-    {20524, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    //{20525, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20526, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20527, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20528, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20529, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    //{20530, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20531, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20532, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20533, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20534, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20535, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20536, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20537, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20538, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20539, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20540, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20541, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20542, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20543, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20544, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20545, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20546, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20547, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20548, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20549, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20550, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20551, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20552, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20553, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20554, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20555, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20556, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20557, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20558, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20559, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
+    {20524, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    //{20525, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20526, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20527, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20528, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20529, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    //{20530, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20531, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20532, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20533, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20534, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20535, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20536, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20537, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20538, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20539, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20540, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20541, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20542, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20543, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20544, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20545, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20546, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20547, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20548, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20549, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20550, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20551, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20552, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20553, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20554, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20555, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20556, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20557, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20558, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20559, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
     
-    {20579, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20580, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20581, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20582, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20583, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20584, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20585, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20586, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20587, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20588, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20589, SKIN_TYPE_DEFAULT, 100000, SKIN_WOMEN, SKIN_WHITE},
-    {20590, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20591, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20592, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20593, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE},
-    {20594, SKIN_TYPE_DEFAULT, 100000, SKIN_MEN, SKIN_WHITE}
+    {20579, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20580, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20581, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20582, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20583, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20584, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20585, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20586, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20587, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20588, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20589, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20590, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20591, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20592, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20593, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE},
+    {20594, SKIN_TYPE_DEFAULT, 100000, 0, SKIN_MEN, SKIN_WHITE}
 
     // //skiny 0.3DL
-	// {20001, SKIN_TYPE_EVENT, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
-	// {20002, SKIN_TYPE_EVENT, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
-	// {20003, SKIN_TYPE_EVENT, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
-	// {20004, SKIN_TYPE_EVENT, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
-	// {20005, SKIN_TYPE_EVENT, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
-	// {20006, SKIN_TYPE_EVENT, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
-	// {20007, SKIN_TYPE_EVENT, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
-	// {20008, SKIN_TYPE_EVENT, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
-	// {20009, SKIN_TYPE_EVENT, 17500, SKIN_WOMEN, SKIN_WHITE},
-	// {20010, SKIN_TYPE_EVENT, 17500, SKIN_WOMEN, SKIN_BLACK},
-	// {20011, SKIN_TYPE_EVENT, 15500, SKIN_WOMEN, SKIN_BLACK},
-	// {20012, SKIN_TYPE_EVENT, 25000, SKIN_WOMEN, SKIN_BLACK},
+	// {20001, SKIN_TYPE_EVENT, 0, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
+	// {20002, SKIN_TYPE_EVENT, 0, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
+	// {20003, SKIN_TYPE_EVENT, 0, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
+	// {20004, SKIN_TYPE_EVENT, 0, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
+	// {20005, SKIN_TYPE_EVENT, 0, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
+	// {20006, SKIN_TYPE_EVENT, 0, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
+	// {20007, SKIN_TYPE_EVENT, 0, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
+	// {20008, SKIN_TYPE_EVENT, 0, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN},
+	// {20009, SKIN_TYPE_EVENT, 17500, 0, SKIN_MEN, SKIN_WHITE},
+	// {20010, SKIN_TYPE_EVENT, 17500, 0, SKIN_MEN, SKIN_BLACK},
+	// {20011, SKIN_TYPE_EVENT, 15500, 0, SKIN_MEN, SKIN_BLACK},
+	// {20012, SKIN_TYPE_EVENT, 25000, 0, SKIN_MEN, SKIN_BLACK},
 	
 	// //SKINY PRZEZNACZONE DLA FRAKCJI 20.101-20.300
-	// {20101, SKIN_TYPE_FRACTION, 0, SKIN_MEN, SKIN_WHITE},
-	// {20102, SKIN_TYPE_FRACTION, 0, SKIN_WOMEN, SKIN_WHITE},
-	// {20103, SKIN_TYPE_FRACTION, 0, SKIN_MEN, SKIN_BLACK},
-	// {20104, SKIN_TYPE_FRACTION, 0, SKIN_MEN, SKIN_WHITE},
-	// {20105, SKIN_TYPE_FRACTION, 0, SKIN_MEN, SKIN_WHITE},
-	// {20106, SKIN_TYPE_FRACTION, 0, SKIN_MEN, SKIN_WHITE},
-	// {20107, SKIN_TYPE_FRACTION, 0, SKIN_MEN, SKIN_WHITE},
-	// {20108, SKIN_TYPE_FRACTION, 0, SKIN_WOMEN, SKIN_WHITE},
+	// {20101, SKIN_TYPE_FRACTION, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20102, SKIN_TYPE_FRACTION, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20103, SKIN_TYPE_FRACTION, 0, 0, SKIN_MEN, SKIN_BLACK},
+	// {20104, SKIN_TYPE_FRACTION, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20105, SKIN_TYPE_FRACTION, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20106, SKIN_TYPE_FRACTION, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20107, SKIN_TYPE_FRACTION, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20108, SKIN_TYPE_FRACTION, 0, 0, SKIN_MEN, SKIN_WHITE},
 
 	// //SKINY PRZEZNACZONE POD UNIKATY 20.301-20.400
-	// {20301, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_BLACK},
-	// {20302, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_WHITE},
-	// {20303, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_WHITE},
-	// {20304, SKIN_TYPE_PREMIUM, 0, SKIN_WOMEN, SKIN_WHITE},
-	// {20305, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_BLACK},
-	// {20306, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_WHITE},
-	// {20307, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_BLACK},
-	// {20308, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_BLACK},
-	// {20309, SKIN_TYPE_PREMIUM, 0, SKIN_WOMEN, SKIN_BLACK},
-	// {20310, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_BLACK},
-	// {20311, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_WHITE},
-	// {20312, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_WHITE},
-	// {20313, SKIN_TYPE_PREMIUM, 0, SKIN_WOMEN, SKIN_WHITE},
-	// {20314, SKIN_TYPE_PREMIUM, 0, SKIN_MEN, SKIN_WHITE},
-	// {20315, SKIN_TYPE  148869_PREMIUM, 0, SKIN_MEN, SKIN_WHITE},
-	// {20316, SKIN_TYPE_PREMIUM, 55000, SKIN_MEN, SKIN_WHITE}
+	// {20301, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_BLACK},
+	// {20302, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20303, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20304, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20305, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_BLACK},
+	// {20306, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20307, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_BLACK},
+	// {20308, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_BLACK},
+	// {20309, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_BLACK},
+	// {20310, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_BLACK},
+	// {20311, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20312, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20313, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20314, SKIN_TYPE_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20315, SKIN_TYPE  148869_PREMIUM, 0, 0, SKIN_MEN, SKIN_WHITE},
+	// {20316, SKIN_TYPE_PREMIUM, 55000, 0, SKIN_MEN, SKIN_WHITE}
 };
 //------------------<[ Forwardy: ]>--------------------
 

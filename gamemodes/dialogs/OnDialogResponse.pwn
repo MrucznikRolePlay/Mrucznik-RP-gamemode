@@ -88,6 +88,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(command_transport_OnDialogResp(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(cmd_organizacje_OnDialogResp(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(BuyOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(SellOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
 	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
 
