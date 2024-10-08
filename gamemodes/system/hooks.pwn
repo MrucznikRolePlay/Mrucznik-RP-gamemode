@@ -120,3 +120,17 @@ stock Mru_DestroyDynamicPickup(pickupid)
 #endif
 // Reroute future calls to our function.
 #define DestroyDynamicPickup Mru_DestroyDynamicPickup
+
+// ----[ Interiors won't save fix ]----
+stock Mru_SetPlayerInterior(playerid, interiorid)
+{
+    SetPlayerInterior(playerid, interiorid);
+    PlayerInfo[playerid][pInt] = interiorid;
+}
+#if defined _ALS_SetPlayerInterior
+    #undef SetPlayerInterior
+#else
+    #define _ALS_SetPlayerInterior
+#endif
+// Reroute future calls to our function.
+#define SetPlayerInterior Mru_SetPlayerInterior
