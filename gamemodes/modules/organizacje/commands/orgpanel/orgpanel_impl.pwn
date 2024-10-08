@@ -644,7 +644,7 @@ ShowBuyOrgSkinDialog(playerid)
 		}
 		else
 		{
-			strcat(string, sprintf("%i\t~g~%d$\t~y~%d kontrabandy\n", 
+			strcat(string, sprintf("%i\t~g~%d$\t~n~~y~%d kontrabandy\n", 
 				skin, AvailableOrgSkins[i][SKIN_PRICE],  AvailableOrgSkins[i][SKIN_PRICE_CONTRABAND]));
 		}
 	}
@@ -656,21 +656,39 @@ ShowBuyOrgSkinDialog(playerid)
 
 BuyOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 {
+	#pragma unused inputtext
 	if(dialogid == 5211)
 	{
 		if(response)
 		{
-			if(strfind(inputtext, "posiadany", true) != -1)
-			{
-				MruMessageFail(playerid, "Nie mo¿esz kupiæ posiadanego skina.");
-				ShowBuyOrgSkinDialog(playerid);
-				return 1;
-			}
-
 			new skin = AvailableOrgSkins[listitem][SKIN_ID];
 			new price = AvailableOrgSkins[listitem][SKIN_PRICE];
 			new contraband = AvailableOrgSkins[listitem][SKIN_PRICE_CONTRABAND];
 			new org = GetPlayerOrg(playerid);
+
+			for(new i; i<MAX_SKIN_SELECT; i++)
+			{
+				if(OrgSkins[org][i] == skin)
+				{
+					MruMessageFail(playerid, "Nie mo¿esz kupiæ posiadanego skina.");
+					ShowBuyOrgSkinDialog(playerid);
+					return 1;
+				}
+			}
+
+			if(kaska[playerid] < price)
+			{
+				MruMessageFail(playerid, sprintf("By kupiæ tego skina potrzebujesz %d$.", price));
+				ShowBuyOrgSkinDialog(playerid);
+				return 1;
+			}
+
+			if(GetContraband(playerid) < contraband)
+			{
+				MruMessageFail(playerid, sprintf("By kupiæ tego skina potrzebujesz %d kontrabandy."));
+				ShowBuyOrgSkinDialog(playerid);
+				return 1;
+			}
 		
 			AddOrgSkin(org, skin);
 			ZabierzKase(playerid, price);
@@ -706,10 +724,6 @@ ShowSellOrgSkinDialog(playerid)
 			strcat(string, sprintf("%i\t~r~%d$\t~y~%d kontrabandy\n", 
 				skin, AvailableOrgSkins[i][SKIN_PRICE]/2,  AvailableOrgSkins[i][SKIN_PRICE_CONTRABAND]/2));
 		}
-		else
-		{
-			strcat(string, sprintf("%i\t~r~0$\t~y~0 kontrabandy\n", skin));
-		}
 	}
 	string[strlen(string)-1] = '\0';
 
@@ -731,11 +745,12 @@ SellOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(AvailableOrgSkins[i][SKIN_ID] == skin)
 				{
-					skin = AvailableOrgSkins[listitem][SKIN_PRICE] / 2;
+					price = AvailableOrgSkins[listitem][SKIN_PRICE] / 2;
 					contraband = AvailableOrgSkins[listitem][SKIN_PRICE_CONTRABAND] / 2;
 					break;
 				}
 			}
+
 			if(skin == 0)
 			{
 				MruMessageError(playerid, "ERROR - zglos to do Mrucznika");
