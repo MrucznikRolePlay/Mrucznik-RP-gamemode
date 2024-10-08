@@ -32,6 +32,8 @@ OnPlayerDropMovableObject(playerid, boxid, boxType, Float:x, Float:y, Float:z, F
 {
 	if(Convoy_OnPlayerDropMovable(playerid, boxid, boxType, x, y, z, angle)) return;
 	if(Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, x, y, z, angle)) return;
+
+	Log(serverLog, INFO, "Gracz %s upuscil box o id %d i typie %d", GetPlayerLogName(playerid), boxid, boxType);
 	return;
 }
 
@@ -39,6 +41,8 @@ OnPlayerPickupMovableObject(playerid, boxid, boxType)
 {
 	if(Convoy_OnPlayerPickupMovable(playerid, boxid, boxType)) return;
 	if(Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)) return;
+
+	Log(serverLog, INFO, "Gracz %s podniosl box o id %d i typie %d", GetPlayerLogName(playerid), boxid, boxType);
 	return;
 }
 

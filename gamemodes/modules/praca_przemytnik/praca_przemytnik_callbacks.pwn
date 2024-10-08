@@ -524,6 +524,7 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 				new reward = Boxes[boxid][box_initialBonus] * DESTROY_CONTRABAND_REWARD_PER_PACKAGE;
 				MruMessageGoodInfoF(playerid, "Uda³o Ci siê zniszczyæ nielegaln¹ kontrabandê! Otrzymujesz %d$ nagrody.", reward);
 				DajKase(playerid, reward);
+				Log(payLog, INFO, "Gracz %s dostal %d$ za zniszczenie paczki z kontrabanda", GetPlayerLogName(playerid), reward);
 			}
 		}
 
