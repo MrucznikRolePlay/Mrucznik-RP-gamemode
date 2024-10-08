@@ -120,4 +120,25 @@ AddOrgSkin(org, skin)
     mysql_query(query);
 }
 
+RemoveOrgSkin(org, skin)
+{
+    new skins[4096];
+    for(new i; i<MAX_SKIN_SELECT; i++)
+    {
+        if(OrgSkins[org][i] == 0)
+        {
+            break;
+        }
+        if(OrgSkins[org][i] != skin)
+        {
+            strcat(skins, sprintf("%d,", OrgSkins[org][i]));
+        }
+    }
+	skins[strlen(skins)-1] = '\0';
+
+    new query[4096];
+    format(query, sizeof(query), "UPDATE `mru_skins` SET skiny='%s' WHERE id=%d AND typ=2", skins, org);
+    mysql_query(query);
+}
+
 //end

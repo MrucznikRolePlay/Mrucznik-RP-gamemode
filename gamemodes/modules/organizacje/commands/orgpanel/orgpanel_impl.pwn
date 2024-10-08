@@ -687,7 +687,34 @@ BuyOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 ShowSellOrgSkinDialog(playerid)
 {
 	new org = GetPlayerOrg(playerid);
-	ShowPlayerDialogEx(playerid, 5212, DIALOG_STYLE_PREVIEW_MODEL, "Kup skin organizacji", DialogListaSkinowFamily(org), "Kup skin", "Anuluj");
+	new Map:ownedSkins;
+	for(new i; i<MAX_SKIN_SELECT; i++)
+	{
+		if(OrgSkins[org][i] == 0)
+		{
+			break;
+		}
+		MAP_insert_val_val(ownedSkins, OrgSkins[org][i], 1);
+	}
+
+	new string[4096];
+	for(new i; i < sizeof(AvailableOrgSkins); i++)
+	{
+		new skin = AvailableOrgSkins[i][SKIN_ID];
+		if(MAP_get_val_val(ownedSkins, skin))
+		{
+			strcat(string, sprintf("%i\t~r~%d$\t~y~%d kontrabandy\n", 
+				skin, AvailableOrgSkins[i][SKIN_PRICE]/2,  AvailableOrgSkins[i][SKIN_PRICE_CONTRABAND]/2));
+		}
+		else
+		{
+			strcat(string, sprintf("%i\t~r~0$\t~y~0 kontrabandy\n", skin));
+		}
+	}
+	string[strlen(string)-1] = '\0';
+
+	ShowPlayerDialogEx(playerid, 5212, DIALOG_STYLE_PREVIEW_MODEL, "Sprzedaj skin organizacji", string, "Sprzedaj", "Anuluj");
+	MAP_clear(ownedSkins);
 }
 
 SellOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
@@ -697,7 +724,30 @@ SellOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
+			new org = GetPlayerOrg(playerid);
+			new skin = strval(inputtext);
+			new price, contraband;
+			for(new i; i < sizeof(AvailableOrgSkins); i++)
+			{
+				if(AvailableOrgSkins[i][SKIN_ID] == skin)
+				{
+					skin = AvailableOrgSkins[listitem][SKIN_PRICE] / 2;
+					contraband = AvailableOrgSkins[listitem][SKIN_PRICE_CONTRABAND] / 2;
+					break;
+				}
+			}
+			if(skin == 0)
+			{
+				MruMessageError(playerid, "ERROR - zglos to do Mrucznika");
+				return 1;
+			}
 
+			RemoveOrgSkin(org, skin);
+			DajKase(playerid, price);
+			GiveContraband(playerid, contraband);
+
+			MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ skin %d za %d$ i %d kontrabandy.", skin, price, contraband));
+			Log(payLog, INFO, "Lider %s sprzedal skin %d za %d$ i %d paczek kontrabandy.", GetPlayerLogName(playerid), skin, price, contraband);
 		}
 		return 1;
 	}

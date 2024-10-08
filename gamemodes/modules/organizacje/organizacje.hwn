@@ -35,7 +35,9 @@ enum eOrg {
 new OrgInfo[MAX_ORG][eOrg];
 
 new AvailableOrgSkins[][eSkinInfo] = {
-    {1, SKIN_TYPE_DEFAULT, 5000, 0, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN} // 
+    {1, SKIN_TYPE_DEFAULT, 5000, 1, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // 
+    {2, SKIN_TYPE_DEFAULT, 5000, 1, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN}, // 
+    {3, SKIN_TYPE_DEFAULT, 5000, 1, eSkinSex:UNKNOWN, eSkinRace:UNKNOWN} // 
 };
 
 //-----------------<[ Zmienne: ]>-------------------
