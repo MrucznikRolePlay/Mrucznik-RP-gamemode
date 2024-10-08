@@ -140,6 +140,8 @@ AccountOrgsCosts()
 
     for(new i=1; i<MAX_ORG; i++)
     {
+        if(!IsActiveOrg(i)) continue;
+
         new cost = ORG_DAILY_COST + membersCost[i];
         SejfR_Add(i, -cost);
         Log(serverLog, INFO, "Dzienny koszt dla organizacji %d: %d$, nowy sejf: %d", i, cost, Sejf_Rodziny[i]);
