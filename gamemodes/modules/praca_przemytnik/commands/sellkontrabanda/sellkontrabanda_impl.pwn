@@ -102,7 +102,7 @@ command_akceptuj_kontrabande(playerid)
     MruMessageGoodInfoF(playerid, "Kupi³eœ %d paczek kontrabandy za $%d od Przemytnika %s.", count, price, GetNick(giveplayerid));
     MruMessageGoodInfoF(giveplayerid, "%s kupi³ od ciebie %d paczek kontrabandy, zarobi³eœ $%d.", GetNick(playerid), count, price);
 
-    Log(payLog, INFO, "%s kupi³ od %s paczkê %d kontrabandy za %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), count, price);
+    Log(payLog, INFO, "%s kupil od %s paczke %d kontrabandy za %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), count, price);
 
     ZabierzKase(playerid, price);
     GiveContraband(playerid, count);

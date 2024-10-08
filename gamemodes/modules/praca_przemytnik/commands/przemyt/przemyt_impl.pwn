@@ -199,6 +199,7 @@ przemyt_StageEnd(playerid, actionID)
     SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, sprintf("%s zgarn¹³ %d paczek kontrabandy.", GetNick(playerid), contraband));
 
     GiveContraband(playerid, contraband);
+    Log(payLog, INFO, "Gracz %s odebral %d kontrabandy z akcji przemytniczej.", GetPlayerLogName(playerid));
 
     EndSmuggling(actionID);
     return 1;
