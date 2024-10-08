@@ -171,7 +171,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
         
     }
 
-	new query[1024], bool:fault=true;
+	new query[2048], bool:fault=true;
 
 	if(forcegmx == false) GetPlayerHealth(playerid,PlayerInfo[playerid][pHealth]);
 
@@ -569,7 +569,7 @@ MruMySQL_SaveAccount(playerid, bool:forcegmx = false, bool:forcequit = false)
 	PlayerPersonalization[playerid][PERS_NEWBIE],
 	PlayerPersonalization[playerid][PERS_GUNSCROLL]); 
 
-	//przywrï¿½ï¿½ maskowanie nicku (pNick)
+	//przywróæ maskowanie nicku (pNick)
 	if(GetPVarString(playerid, "maska_nick", maska_nick, 24))
 	{
 		new playernickname[MAX_PLAYER_NAME];
