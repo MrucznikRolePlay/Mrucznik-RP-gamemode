@@ -3531,7 +3531,7 @@ PayDay()
 					PlayerInfo[i][pPayDay] = 0;
 					PlayerInfo[i][pPayCheck] = 0;
 					PlayerInfo[i][pConnectTime] += 1;
-					PlayerGames[i] = 0;
+					Redis_SetInt(RedisClient, sprintf("player:%d:zdrapka", PlayerInfo[i][pUID]), 0);
 					if(PlayerInfo[i][pBP] >= 1)
 					{
 					    PlayerInfo[i][pBP]--;
@@ -4138,7 +4138,8 @@ OnPlayerLogin(playerid, password[])
 	new org = GetPlayerOrg(playerid);
 	if(org != 0)
 	{
-		SendClientMessage(playerid, OrgInfo[org][o_Color], sprintf("Motto organizacji: %s.", OrgInfo[org][o_Motto]));
+		if(isnull(OrgInfo[org][o_Motto])) SendClientMessage(playerid, COLOR_YELLOW, "Twoja organizacja nie ma jeszcze ustawionego Motto.");
+		else SendClientMessage(playerid, OrgInfo[org][o_Color], sprintf("Motto organizacji: %s.", OrgInfo[org][o_Motto]));
 	}
 
 	//Teleportacja do poprzedniej pozycji:

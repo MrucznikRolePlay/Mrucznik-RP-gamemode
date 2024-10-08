@@ -2654,7 +2654,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] > 56500)
 						{
-							if(PlayerGames[playerid] >= 4)
+							new redisKey[64];
+							format(redisKey, sizeof(redisKey), "player:%d:zdrapka", PlayerInfo[playerid][pUID]);
+							if(RedisGetInt(redisKey) >= 4)
 							{
 								sendTipMessage(playerid, "Przepraszamy, zu¿y³eœ wszystkie zdrapki na naszym magazynie!"); 
 								sendTipMessage(playerid, "Spróbuj przyjœæ za godzinê, mo¿e przyjd¹ nowe."); 
@@ -2665,6 +2667,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
 							ZabierzKase(playerid, 56500);
+							RedisIncrBy(redisKey, 1);
+							RedisExpire(redisKey, 3600); // 1hour expire time
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    { 
 								if(playerValue > winValue && playerValue >= 85)
@@ -2691,7 +2695,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									format(string, sizeof(string), "Po zdrapaniu widaæ napis ''Graj dalej'' ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 								}
-								PlayerGames[playerid]++; 
 							}
 							else
 							{
@@ -2718,7 +2721,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									format(string, sizeof(string), "Po zdrapaniu widaæ napis ''Graj dalej'' ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 								}
-								PlayerGames[playerid]++; 
 							}
 							return 1;
 						}
@@ -13091,7 +13093,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case CAR_OWNER_SPECIAL:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj typ pojazdu specjalnego:\n\n1. Wypo¿yczalnia\n2. GoKart\n3. ¯u¿el\n4. Przemytniczy", "Ustaw", "Wróæ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj typ pojazdu specjalnego:\n\n1. Wypo¿yczalnia\n2. GoKart\n3. ¯u¿el\n4.", "Ustaw", "Wróæ");
                 return 1;
             }
             case CAR_OWNER_PUBLIC:
