@@ -674,6 +674,7 @@ BuyOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ShowBuyOrgSkinDialog(playerid);
 					return 1;
 				}
+				if(OrgSkins[org][i] == 0) break;
 			}
 
 			if(kaska[playerid] < price)
