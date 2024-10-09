@@ -3,7 +3,7 @@
     "description": "Panel lidera organizacji przestêpczej.",
     "command_tips": [
         "Dostêpne akcje: nazwa / motto / kolor / spawn / przyjmij / zwolnij / ranga / pracownicy / stawka / oddaj / usun",
-        "Dostêpne akcje: stworzrange / pojazd / sejf"
+        "Dostêpne akcje: stworzrange / pojazd / sejf / skin [kup/sprzedaj]"
     ],
     "permissions": ["everyone"],
     "author": "mrucznik",
