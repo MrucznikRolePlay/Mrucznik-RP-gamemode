@@ -13095,7 +13095,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case CAR_OWNER_SPECIAL:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj typ pojazdu specjalnego:\n\n1. Wypo¿yczalnia\n2. GoKart\n3. ¯u¿el\n4.", "Ustaw", "Wróæ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdów", "Podaj typ pojazdu specjalnego:\n\n1. Wypo¿yczalnia\n2. GoKart\n3. ¯u¿el\n4. Pojazd botów przemytniczych", "Ustaw", "Wróæ");
                 return 1;
             }
             case CAR_OWNER_PUBLIC:
