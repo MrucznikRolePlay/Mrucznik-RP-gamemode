@@ -116,7 +116,7 @@ AddOrgSkin(org, skin)
     }
 
     new query[4096];
-    format(query, sizeof(query), "UPDATE `mru_skins` SET skiny='%s' WHERE id=%d AND typ=2", skins, org);
+    format(query, sizeof(query), "UPDATE `mru_skins` SET skins='%s' WHERE id=%d AND typ=2", skins, org);
     mysql_query(query);
 }
 
@@ -163,7 +163,7 @@ RemoveOrgSkin(org, skin)
     }
 
     new query[4096];
-    format(query, sizeof(query), "UPDATE `mru_skins` SET skiny='%s' WHERE id=%d AND typ=2", skins, org);
+    format(query, sizeof(query), "UPDATE `mru_skins` SET skins='%s' WHERE id=%d AND typ=2", skins, org);
     mysql_query(query);
 }
 
