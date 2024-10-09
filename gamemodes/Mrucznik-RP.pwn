@@ -1199,7 +1199,6 @@ public OnPlayerDisconnect(playerid, reason)
 	Log(connectLog, INFO, "Gracz %s[id: %d] roz³¹czy³ siê, powód: %d", GetNickEx(playerid), playerid, reason);
 
 	GetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-	PlayerInfo[playerid][pInt] = GetPlayerInterior(playerid);
 	PlayerInfo[playerid][pVW] = GetPlayerVirtualWorld(playerid);
 
 	if(IsPlayerAtViceCity(playerid) && PlayerInfo[playerid][pSpawn] == 0)
