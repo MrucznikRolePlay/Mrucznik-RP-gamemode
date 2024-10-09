@@ -384,9 +384,9 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 		MruMessageBadInfo(playerid, "Usun¹³eœ swoj¹ organizacje wraz ca³ym maj¹tkiem i zwolni³eœ wszystkich cz³onków.");
 		Log(serverLog, INFO, "Lider %s organizacji %d usunal swoja organizacje.", GetPlayerLogName(playerid), org);
 	}
-	else if(strcmp(action, "skiny", true) == 0 || strcmp(action, "skiny", true) == 0)
+	else if(strcmp(action, "skiny", true) == 0 || strcmp(action, "skin", true) == 0)
 	{
-		if(IsAtClothShop(playerid))
+		if(!IsAtClothShop(playerid))
 		{
 			MruMessageFail(playerid, "Skinami mo¿esz zarz¹dzaæ tylko bêd¹c w sklepie z ubraniami.");
 			return 1;
@@ -722,7 +722,7 @@ ShowSellOrgSkinDialog(playerid)
 		new skin = AvailableOrgSkins[i][SKIN_ID];
 		if(MAP_get_val_val(ownedSkins, skin))
 		{
-			strcat(string, sprintf("%i\t~r~%d$\t~y~%d kontrabandy\n", 
+			strcat(string, sprintf("%i\t~r~%d$\t~n~~y~%d kontrabandy\n", 
 				skin, AvailableOrgSkins[i][SKIN_PRICE]/2,  AvailableOrgSkins[i][SKIN_PRICE_CONTRABAND]/2));
 		}
 	}

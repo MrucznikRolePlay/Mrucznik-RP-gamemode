@@ -133,8 +133,34 @@ RemoveOrgSkin(org, skin)
         {
             strcat(skins, sprintf("%d,", OrgSkins[org][i]));
         }
+        else
+        {
+            OrgSkins[org][i] = 0;
+        }
     }
 	skins[strlen(skins)-1] = '\0';
+
+    // move other skins
+    new replace;
+    for(new i; i<MAX_SKIN_SELECT; i++)
+    {
+        if(OrgSkins[org][i] == skin)
+        {
+            replace = true;
+        }
+
+        new nextIdx = i + 1;
+        if(nextIdx >= MAX_SKIN_SELECT) 
+        {
+            break;
+        }
+
+        if(replace)
+        {
+            OrgSkins[org][i] = OrgSkins[org][nextIdx];
+            OrgSkins[org][nextIdx] = 0;
+        }
+    }
 
     new query[4096];
     format(query, sizeof(query), "UPDATE `mru_skins` SET skiny='%s' WHERE id=%d AND typ=2", skins, org);
