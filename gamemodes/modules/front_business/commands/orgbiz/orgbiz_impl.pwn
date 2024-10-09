@@ -111,8 +111,8 @@ command_orgbiz_Impl(playerid, action[16], params[128])
         TakeContraband(playerid, CHANGE_TAKEOVER_TIME_COST);
         Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "takeoverHour"), hour);
         Redis_SetInt(RedisClient, RedisFrontBizKey(bizId, "takeoverMinute"), minute);
-        FrontBusiness[bizId][TakeoverHour] = hour;
-        FrontBusiness[bizId][TakeoverMinute] = minute;
+        MruMessageGoodInfo(playerid, sprintf("Zmieni³eœ czas przejmowania biznesu %s na %02d:%02d. Zmiana bêdzie widoczna dopiero nastêpnego dnia.", 
+            FrontBusiness[bizId][Name], FrontBusiness[bizId][TakeoverHour], FrontBusiness[bizId][TakeoverMinute]));
     }
     return 1;
 }
