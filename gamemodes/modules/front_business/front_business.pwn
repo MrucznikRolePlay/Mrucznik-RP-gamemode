@@ -460,7 +460,7 @@ UpdateColorForOrgBusinesses(org, color)
 
 ResetOrgBusinessesToDefault(org)
 {
-	UpdateColorForOrgBusinesses(org, COLOR_BROWN);
+	UpdateColorForOrgBusinesses(org, COLOR_WHITE);
     for(new i; i<sizeof(FrontBusiness); i++)
     {
         if(FrontBusiness[i][Owner] == org)
@@ -469,7 +469,7 @@ ResetOrgBusinessesToDefault(org)
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "profit"), 0);
 			Redis_SetInt(RedisClient, RedisFrontBizKey(i, "leaderProfit"), 0);
             FrontBusiness[i][Owner] = 0;
-
+			break;
         }
     }
 }
