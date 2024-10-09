@@ -141,7 +141,6 @@ StopFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverActive] = false;
 	DestroyDynamicCP(FrontBusiness[bizId][TakeoverCheckpoint]);
 	DestroyDynamicPickup(FrontBusiness[bizId][TakeoverPickup]);
-	FrontBusiness[bizId][TakeoverArea] = -1;
 
 	new winner = -1, maxScore;
 	for(new i=0; i<MAX_ORG; i++)
