@@ -61,7 +61,7 @@ command_fskin_Impl(playerid)
 		}
 		else
 		{
-			SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w sklepie z ubraniami lub na miejscu spawnu!");
+			SendClientMessage(playerid, COLOR_GRAD2, "Nie jesteœ w sklepie z ubraniami obok ikonki ubrania lub na miejscu spawnu!");
 			return 1;
 		}
 	}

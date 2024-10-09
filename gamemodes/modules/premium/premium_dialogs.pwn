@@ -190,7 +190,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(!IsAtClothShop(playerid))
 			{
-				_MruGracz(playerid, "Aby kupiæ unikatowy przedmiot, musisz znajdowaæ siê w sklepie z ubraniami.");
+				_MruGracz(playerid, "Aby kupiæ unikatowy przedmiot, musisz znajdowaæ siê w sklepie z ubraniami obok ikonki ubrania.");
 				DialogPrzedmioty(playerid);
 				return 1;
 			}
@@ -242,7 +242,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			if(!IsAtClothShop(playerid))
 			{
-				_MruGracz(playerid, "Aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami.");
+				_MruGracz(playerid, "Aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami obok ikonki ubrania.");
 				DialogSkiny(playerid);
 				return 1;
 			}

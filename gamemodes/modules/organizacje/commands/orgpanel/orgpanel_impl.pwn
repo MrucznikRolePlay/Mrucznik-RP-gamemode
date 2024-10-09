@@ -388,7 +388,7 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 	{
 		if(!IsAtClothShop(playerid))
 		{
-			MruMessageFail(playerid, "Skinami mo¿esz zarz¹dzaæ tylko bêd¹c w sklepie z ubraniami.");
+			MruMessageFail(playerid, "Skinami mo¿esz zarz¹dzaæ tylko bêd¹c w sklepie z ubraniami obok ikonki ubrania.");
 			return 1;
 		}
 

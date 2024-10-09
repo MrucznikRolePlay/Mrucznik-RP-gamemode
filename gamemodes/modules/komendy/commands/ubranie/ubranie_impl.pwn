@@ -33,7 +33,7 @@ command_ubranie_Impl(playerid)
 		}
 		else
 		{
-		    sendErrorMessage(playerid, "Nie jesteœ w sklepie z ubraniami!");
+		    sendErrorMessage(playerid, "Nie jesteœ w sklepie z ubraniami obok ikonki ubrania!");
 		}
 	}
 	return 1;
