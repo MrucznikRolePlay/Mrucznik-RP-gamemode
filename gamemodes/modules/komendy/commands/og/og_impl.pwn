@@ -60,22 +60,14 @@ command_og_Impl(playerid, params[256])
 				return SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
 			}
 			ZabierzKase(playerid, payout);
-			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d", params, PlayerInfo[playerid][pPnumber]);
-			format(admstring, sizeof(admstring), "Og³oszenie: %s, Kontakt: %d [%s]", params, PlayerInfo[playerid][pPnumber], GetNick(playerid));
+			format(string, sizeof(string), "Og³oszenie: %s, Kontakt: %d [%s]", params, PlayerInfo[playerid][pPnumber], GetNick(playerid));
 			foreach(new i : Player)
 			{
 				if(IsPlayerConnected(i))
 				{
 					if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)
 					{
-						if(GetPlayerAdminDutyStatus(i) == 1)
-						{
-							SendClientMessage(i, TEAM_GROVE_COLOR, admstring);
-						}
-						else
-						{
-							SendClientMessage(i, TEAM_GROVE_COLOR, string);
-						}
+						SendClientMessage(i, TEAM_GROVE_COLOR, string);
 					}
 				}
 			}

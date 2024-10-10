@@ -37,7 +37,6 @@ command_do_Impl(playerid, params[256])
 	}
     new string[256];
     
-    params[0] = toupper(params[0]);
     if(strlen(params) < 78)
     {
         //format(string, sizeof(string), "* %s %s", GetNick(playerid, true), params);
