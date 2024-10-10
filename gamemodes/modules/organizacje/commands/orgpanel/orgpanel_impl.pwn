@@ -138,6 +138,13 @@ command_orgpanel_Impl(playerid, action[16], params[256])
 			return 1;
 		}
 
+		new bizId = IsPlayerAtFrontBusinnesZone(playerid);
+		if(bizId != -1 && GetPlayerDistanceFromPoint(playerid, FrontBusiness[bizId][TakeoverX], FrontBusiness[bizId][TakeoverY], FrontBusiness[bizId][TakeoverZ]) < 30.0)
+		{
+			MruMessageFail(playerid, "Nie mo¿esz zapisaæ pozycji tak blisko strefy przejmowania.");
+			return 1;
+		}
+
 		SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Lider %s zmieni³ spawn organizacji.", GetNick(playerid)));
 
 		TakeContraband(playerid, CHANGE_ORG_SPAWN_COST);

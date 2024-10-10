@@ -763,7 +763,9 @@ GivePBlockForPlayer(player[], adminid, result[])
 
 AppendToPlayerObjectFiles(playerid, objectid)
 {
-	MAP_insert_val_val(AdminObjects[playerid], objectid, 1);
+	new string[128];
+	GetPVarString(playerid, "edit-object-comment", string);
+	MAP_insert_val_str(AdminObjects[playerid], objectid, string);
 	defer SaveObjectsFile(playerid);
 }
 
@@ -778,6 +780,8 @@ timer SaveObjectsFile[10000](playerid)
 		new Pointer:value_ptr;
 		for(new Map:temp_map = MAP_iter_get(AdminObjects[playerid], key_ptr, value_ptr); temp_map != MAP_NULL; temp_map = MAP_iter_next(temp_map, MAP_NULL, key_ptr, value_ptr))
 		{
+			new comment[128];
+			MEM_get_arr(value_ptr, _, comment);
 			objectid = MEM_get_val(key_ptr);
 			model = GetDynamicObjectModel(objectid);
 			GetDynamicObjectPos(objectid, x, y, z);
@@ -785,8 +789,8 @@ timer SaveObjectsFile[10000](playerid)
 			vw = GetPlayerVirtualWorld(playerid);
 			interior = GetPlayerInterior(playerid);
 
-			fwrite(objectsFile, sprintf("CreateDynamicObject(%d, %f, %f, %f, %f, %f, %f, %d, %d);\n",
-				model, x, y, z, rx, ry, rz, vw, interior));
+			fwrite(objectsFile, sprintf("CreateDynamicObject(%d, %f, %f, %f, %f, %f, %f, %d, %d); // %s\n",
+				model, x, y, z, rx, ry, rz, vw, interior, comment));
 		}
 		fclose(objectsFile);
 	}

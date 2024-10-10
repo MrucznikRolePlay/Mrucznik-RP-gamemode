@@ -28,7 +28,9 @@ command_editobject_Impl(playerid, params[256])
     if(PlayerInfo[playerid][pAdmin] != 5000) return 1;
     SetPVarInt(playerid, "Allow-edit", 1);
     new id=-1;
-    sscanf(params, "D(-1)", id);
+    new comment[128];
+    sscanf(params, "D(-1)S[128]()", id, comment);
+    SetPVarString(playerid, "edit-object-comment", comment);
     if(id == -1) SelectObject(playerid);
     else
     {
