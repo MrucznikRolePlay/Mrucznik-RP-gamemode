@@ -3611,11 +3611,14 @@ PayDay()
 	    SendClientMessageToAll(COLOR_YELLOW, "Trwa aktualizacja systemu domów, czas na laga");
 	    for(new h; h <= dini_Int("Domy/NRD.ini", "NrDomow"); h++)
 	    {
-			Dom[h][hData_DD] ++;
-			if(Dom[h][hData_DD] >= 30)
+			if(Dom[h][hKupiony])
 			{
-			    ZlomowanieDomu(9999, h);
-			    Log(serverLog, INFO, "Dom %s zosta³ zez³omowany z powodu up³ywu czasu.", GetHouseLogName(h));
+				Dom[h][hData_DD] ++;
+				if(Dom[h][hData_DD] >= 30)
+				{
+					ZlomowanieDomu(9999, h);
+					Log(serverLog, INFO, "Dom %s zosta³ zez³omowany z powodu up³ywu czasu.", GetHouseLogName(h));
+				}
 			}
 	    }
 		ZapiszDomy();
