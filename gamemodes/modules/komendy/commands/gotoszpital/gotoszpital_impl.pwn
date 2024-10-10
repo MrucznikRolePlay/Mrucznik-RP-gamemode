@@ -41,7 +41,6 @@ command_gotoszpital_Impl(playerid)
 				SetPlayerPos(playerid, 1177.5322,-1323.6294,14.0753);
 			}
 			sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany!");
-			PlayerInfo[playerid][pInt] = 0;
 		}
 		else
 		{

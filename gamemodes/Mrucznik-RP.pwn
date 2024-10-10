@@ -2127,14 +2127,12 @@ SetPlayerSpawnPos(playerid)
                 ResetPlayerWeapons(playerid);
 				return 1;
 			}
-
 		}
 		else
 		{
 			new spawnType = PlayerInfo[playerid][pSpawn];
 		    if(spawnType == 0 || spawnType >= 3) //Normalny spawn
 		    {
-		        SetPlayerInteriorEx(playerid, 0);
 		        PlayerInfo[playerid][pLocal] = 255;
 				if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
 				else SetPlayerVirtualWorld(playerid, 0);
@@ -2300,7 +2298,7 @@ SetPlayerSpawnPos(playerid)
 		            if(OrgInfo[org][o_Spawn][0] != 0.0)
 		            {
 		                SetPlayerVirtualWorld(playerid, OrgInfo[org][o_VW]);
-		    		    SetPlayerInteriorEx(playerid, OrgInfo[org][o_Int]);
+		    		    SetPlayerInterior(playerid, OrgInfo[org][o_Int]);
 		    		    SetPlayerPos(playerid, OrgInfo[org][o_Spawn][0], OrgInfo[org][o_Spawn][1], OrgInfo[org][o_Spawn][2]);
 		    		    SetPlayerFacingAngle(playerid, OrgInfo[org][o_Spawn][3]);
 		            }
@@ -2408,7 +2406,7 @@ SetPlayerSpawnPos(playerid)
      			PlayerInfo[playerid][pDomT] = h;
                 PlayerInfo[playerid][pDomWKJ] = PlayerInfo[playerid][pDom];
                 SetPlayerPos(playerid, Dom[i][hInt_X], Dom[i][hInt_Y], Dom[i][hInt_Z]);
-                SetPlayerInteriorEx(playerid, Dom[i][hInterior]);
+                SetPlayerInterior(playerid, Dom[i][hInterior]);
                 SetPlayerVirtualWorld(playerid, Dom[i][hVW]);
                 GameTextForPlayer(playerid, "~g~Witamy w domu", 5000, 1);
 	  		}

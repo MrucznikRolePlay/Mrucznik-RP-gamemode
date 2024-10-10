@@ -38,7 +38,6 @@ command_gotomechy_Impl(playerid)
 			SetPlayerPos(playerid, 2778.0833,-1612.0159,10.9219);
 		}
         sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany na bazê mechaników, ³opata w d³oñ! ");
-        PlayerInfo[playerid][pInt] = 0;
     }
     return 1;
 }

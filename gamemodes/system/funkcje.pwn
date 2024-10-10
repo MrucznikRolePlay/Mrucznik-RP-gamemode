@@ -10586,13 +10586,6 @@ RGBAtoRGB(color)
     return (color & ~0xFF) >>> 8;
 }
 
-SetPlayerInteriorEx(playerid, int)
-{
-	SetPlayerInterior(playerid, int);
-	PlayerInfo[playerid][pInt] = int;
-	return 1;
-}
-
 WeaponAC(playerid)
 {	
 	new weapons[13][2];

@@ -2220,7 +2220,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
                         }
 						else if(ApprovedLawyer[playerid] == 1)
 						{
@@ -2229,7 +2228,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2247,7 +2245,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom -1]~n~~b~Parking Dolny", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
                         }
 						else
 						{
@@ -2265,7 +2262,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom 0]~n~~b~Parking Gorny", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
                         }
 						else
 						{
@@ -2281,7 +2277,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerInterior(playerid,0);
 						Wchodzenie(playerid);
 		                GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Recepcja i glowny hol", 5000, 1);
-						PlayerInfo[playerid][pInt] = 0;
 		            }
 		            case 4:
 		            {
@@ -2293,7 +2288,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 							GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Biuro komendanta", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2311,7 +2305,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 							GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2329,7 +2322,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Konferencyjne", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2347,7 +2339,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale przesluchan", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2363,7 +2354,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerInterior(playerid,0);
 							GameTextForPlayer(playerid, "~w~ [Poziom 7]~n~~b~Dach", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{

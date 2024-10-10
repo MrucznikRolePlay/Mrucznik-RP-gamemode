@@ -37,7 +37,6 @@ command_gotostacja_Impl(playerid)
             SetPlayerPos(playerid, 1931.9171,-1807.5239,13.5728);
         }
         sendTipMessageEx(playerid, COLOR_GRAD1, "Zosta³eœ teleportowany ");
-        PlayerInfo[playerid][pInt] = 0;
     }
     return 1;
 }
