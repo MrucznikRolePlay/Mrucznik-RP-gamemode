@@ -33,7 +33,9 @@ command_lockint_Impl(playerid)
 			new model = GetVehicleModel(vehicleid);
 			if(IsAInteriorVehicle(model))
 			{
-                if(!(IsCarOwner(playerid, vehicleid) || (Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && Car_GetOwner(vehicleid) == GetPlayerFraction(playerid)) ))
+                if(!(IsCarOwner(playerid, vehicleid) || 
+					(Car_GetOwnerType(vehicleid) == CAR_OWNER_FRACTION && Car_GetOwner(vehicleid) == GetPlayerFraction(playerid)) || 
+					(Car_GetOwnerType(vehicleid) == CAR_OWNER_JOB && Car_GetOwner(vehicleid) == GetPlayerJob(playerid))))
 				{
 					return sendTipMessageEx(playerid, COLOR_LIGHTGREEN, "Ten pojazd nie nale¿y do Ciebie!");
 				}

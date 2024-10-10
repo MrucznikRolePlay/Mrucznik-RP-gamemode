@@ -35,6 +35,13 @@ command_deleteobject_Impl(playerid, params[256])
         sendTipMessageEx(playerid, -1, "Extra: Distance dla 1 (VW)");
         return 1;
     }
+    
+    if(MAP_contains_val(AdminObjects[playerid], data))
+    {
+        MAP_remove_val(AdminObjects[playerid], data);
+        defer SaveObjectsFile[1](playerid);
+    }
+
     if(typ == 0)
     {
         if(!IsValidDynamicObject(data)) return sendTipMessageEx(playerid, -1, "Niepoprawne ID obiektu");

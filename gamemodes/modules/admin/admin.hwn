@@ -28,6 +28,8 @@ new kary_TXD_Status = 1;
 new togADMTXD[MAX_PLAYERS];
 new karaTimer;
 
+new Map:AdminObjects[MAX_PLAYERS];
+
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------
 
