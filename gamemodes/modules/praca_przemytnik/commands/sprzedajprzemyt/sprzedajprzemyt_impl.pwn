@@ -121,7 +121,7 @@ command_akceptuj_przemyt(playerid)
     DajKase(smugglerid, itemPrice);
     ZabierzKase(playerid, itemPrice);
 
-    Log(payLog, INFO, "%s kupi³ %s od przemytnika %s za $%d", SmugglingItemsData[item][ShortName], GetPlayerLogName(playerid), GetPlayerLogName(smugglerid), itemPrice);
+    Log(payLog, INFO, "%s kupi³ %s od przemytnika %s za $%d", GetPlayerLogName(playerid), SmugglingItemsData[item][ShortName], GetPlayerLogName(smugglerid), itemPrice);
     SmugglingOffer[playerid] = 999;
     SmugglingOfferPrice[playerid] = 0;
     return 1;
