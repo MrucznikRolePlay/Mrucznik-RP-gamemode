@@ -61,4 +61,24 @@ command_fixvc_Impl(playerid)
     return 1;
 }
 
+ptask CheckFixVc[1000](playerid)
+{
+    new Float:unused;
+    new now = gettime();
+    if(IsPlayerAtViceCity(playerid) && 
+        CA_IsPlayerInWater(playerid, unused, unused) &&
+        now - GetPVarInt(playerid, "fixvc-message") > 300_000) // message every 5min
+    {
+        new Float:x, Float:y, Float:z, Float:foundZ;
+        GetPlayerPos(playerid, x, y, z);
+        
+        CA_FindZ_For2DCoord(x, y, foundZ);
+        if(foundZ < z)
+        {
+            MruMessageBadInfo(playerid, "Serwer wykry³, ¿e wpad³eœ pod textury. Jeœli to prawda, wpisz /fixvc aby naprawiæ swoj¹ pozycjê.");
+            SetPVarInt(playerid, "fixvc-message", now);
+        }
+    }
+}
+
 //end
