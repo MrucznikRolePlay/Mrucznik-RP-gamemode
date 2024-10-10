@@ -37,6 +37,7 @@ admini_OnPlayerLogin(playerid)
 {
 	if(PlayerInfo[playerid][pAdmin] > 0)
 	{
+		AdminObjectsVer[playerid] += 1;
 		MAP_clear(AdminObjects[playerid]);
 		Group_SetPlayer(adminGroup, playerid, true);
 	}

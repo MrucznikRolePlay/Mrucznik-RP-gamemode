@@ -29,6 +29,7 @@ new togADMTXD[MAX_PLAYERS];
 new karaTimer;
 
 new Map:AdminObjects[MAX_PLAYERS];
+new AdminObjectsVer[MAX_PLAYERS];
 
 //------------------<[ Enumy: ]>--------------------
 //------------------<[ Forwardy: ]>--------------------

@@ -773,7 +773,9 @@ timer SaveObjectsFile[10000](playerid)
 {
 	new objectid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, interior, vw;
 	new File:objectsFile;
-	objectsFile = fopen(sprintf("%s_objects.txt", GetNick(playerid)), io_write);
+	new year, month, day;
+	getdate(year, month, day);
+	objectsFile = fopen(sprintf("%s_objects_%d_%d_%d_%d.txt", GetNick(playerid), year, month, day, AdminObjectsVer[playerid]), io_write);
 	if(objectsFile)
 	{
 		new Pointer:key_ptr;
