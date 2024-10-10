@@ -2117,9 +2117,9 @@ SetPlayerSpawnPos(playerid)
 		{
 			Wchodzenie(playerid);
 			SetPlayerPos(playerid, PlayerInfo[playerid][pPos_x], PlayerInfo[playerid][pPos_y], PlayerInfo[playerid][pPos_z]);
-			SetPlayerInterior(playerid, PlayerInfo[playerid][pInt]);
+			SetPlayerInterior(playerid, GetPVarInt(playerid, "last-pos-int"));
 			if(GetPVarInt(playerid, "Lockdown-izolacja") != 0) ALockdown_SetLockdownVW(playerid);
-			else SetPlayerVirtualWorld(playerid, PlayerInfo[playerid][pVW]);
+			else SetPlayerVirtualWorld(playerid, GetPVarInt(playerid, "last-pos-vw"));
 			if(IsAtBank(playerid) || GetPlayerLocal(playerid) == PLOCAL_FRAC_DMV)
 	        {
 				sendTipMessage(playerid, "W banku nie wolno mieæ broni! Zostanie Ci ona przywrócona po œmierci.");
@@ -4017,6 +4017,10 @@ OnPlayerLogin(playerid, password[])
 
 		AC_OnPlayerLogin(playerid);
 		Przemytnik_OnPlayerLogin(playerid);
+
+		// Pozycja:
+		SetPVarInt(playerid, "last-pos-int", PlayerInfo[playerid][pInt]);
+		SetPVarInt(playerid, "last-pos-vw", PlayerInfo[playerid][pVW]);
 
 		//Powitanie:
 		format(string, sizeof(string), "Witaj na serwerze Mrucznik Role Play, %s!",nick);
