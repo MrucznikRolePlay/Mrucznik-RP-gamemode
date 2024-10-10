@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_og_Impl(playerid, params[256])
 {
-    new string[256], admstring[256];
+    new string[256];
     if(IsPlayerConnected(playerid))
     {
         if(gPlayerLogged[playerid] == 0) return SendClientMessage(playerid, COLOR_GREY, "Nie jesteœ zalogowany!");
