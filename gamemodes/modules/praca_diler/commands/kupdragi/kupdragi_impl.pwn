@@ -72,6 +72,9 @@ command_kupdragi_Impl(playerid, weight)
     MruMessageGoodInfoF(playerid, "Kupi³eœ od dilera %s %d gram narkotyku za %d$.", GetNick(dealerid), weight, price);
     ChatMe(playerid, sprintf("odbiera zupe³nie niepodejrzanego loda od lodziarza %s", GetNick(dealerid)));
 
+    new redisKey[64];
+    format(redisKey, sizeof(redisKey), "player:%d:deconspired", PlayerInfo[playerid][pUID]);
+
     // zdemaskowanie
     if(IsAPolicja(playerid) && OnDuty[playerid] && SecretAgent[playerid] > 0 && spamwl[dealerid] == 0)
     {
@@ -82,15 +85,24 @@ command_kupdragi_Impl(playerid, weight)
 
         PursuitMode(playerid, dealerid);
 
-        new reward = 75_000;
-        DajKase(playerid, reward);
-        Log(payLog, INFO, "%s z³apa³ dilera %s na gor¹cym uczynku i dosta³ 75000$", GetPlayerLogName(playerid), GetPlayerLogName(dealerid));
-
+        if(RedisGetInt(redisKey))
+        {
+            new reward = 75_000;
+            DajKase(playerid, reward);
+            Log(payLog, INFO, "%s z³apa³ dilera %s na gor¹cym uczynku i dosta³ 75000$", GetPlayerLogName(playerid), GetPlayerLogName(dealerid));
+            MruMessageGoodInfoF(playerid, "Nakry³eœ %s na sprzeda¿y narkotyków! Dostajesz %d$ za wykonywanie swojej pracy.", GetNick(dealerid), reward);
+        }
+        else
+        {
+            MruMessageGoodInfoF(playerid, "Nakry³eœ %s na sprzeda¿y narkotyków! Ju¿ raz nakry³eœ tego gracza w przeci¹gu 24h wiêc nie dostajesz bonusu.", GetNick(dealerid));
+        }
         MruMessageBadInfoF(dealerid, "Tajny agent %s nakry³ Ciê na sprzeda¿y narkotyków! Masz teraz %d Poziom Poszukiwania.", GetNick(playerid), PoziomPoszukiwania[dealerid]);
-        MruMessageGoodInfoF(playerid, "Nakry³eœ %s na sprzeda¿y narkotyków! Dostajesz %d$ za wykonywanie swojej pracy.", GetNick(dealerid), reward);
 
         SetTimerEx("spamujewl",300_000,0,"d",dealerid); //5min anty-wl
         spamwl[dealerid] = 1;
+
+        Redis_SetInt(RedisClient, redisKey, 1);
+        RedisExpire(redisKey, 24 * 3600);
     }
     else
     {

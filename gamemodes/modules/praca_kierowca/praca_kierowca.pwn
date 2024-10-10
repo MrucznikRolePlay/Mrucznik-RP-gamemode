@@ -177,7 +177,7 @@ Taxi_Pay(playerid)
 			SendClientMessage(taxidriver, COLOR_RED, string);
 		}
 		
-		if(TransportDist[playerid] > 5) 
+		if(TransportDist[playerid] > 5)
 		{
 			GiveTaxiBonusForUniquePlayer(taxidriver, playerid);
 			IncreasePlayerJobSkill(taxidriver, JOB_DRIVER, 3);
