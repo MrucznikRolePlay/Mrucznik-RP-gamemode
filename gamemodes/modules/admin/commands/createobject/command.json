@@ -15,17 +15,20 @@
         {
             "type": "float",
             "name": "x",
-            "description": "x"
+            "description": "x",
+            "defaultValue": "-1.0"
         },
         {
             "type": "float",
             "name": "y",
-            "description": "y"
+            "description": "y",
+            "defaultValue": "-1.0"
         },
         {
             "type": "float",
             "name": "z",
-            "description": "z"
+            "description": "z",
+            "defaultValue": "-1.0"
         },
         {
             "type": "float",

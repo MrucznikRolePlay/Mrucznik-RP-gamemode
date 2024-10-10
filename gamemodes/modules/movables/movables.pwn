@@ -171,16 +171,16 @@ GetNearestBox(playerid)
 	return -1;
 }
 
-DropBoxFromCar(objectid, type, value, carid)
+DropBoxFromCar(model, type, value, carid)
 {
 	new Float:x, Float:y, Float:z, Float:angle;
 	GetPosBehindVehicle(carid, x, y, z);
 	GetVehicleZAngle(carid, angle);
 
 	CA_FindZ_For2DCoord(x, y, z);
-	z += GetColSphereRadius(objectid) * 2.0 - 0.8;
+	z += GetColSphereRadius(model) * 2.0 - 0.8;
 
-	return CreateBox(objectid, type, value, x, y, z, 0, 0, angle);
+	return CreateBox(model, type, value, x, y, z, 0, 0, angle);
 }
 
 //-----------------<[ 3rd party: ]>-------------------

@@ -56,7 +56,7 @@ YCMD:createobject(playerid, params[], help)
     }
     //fetching params
     new model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz;
-    if(sscanf(params, "dfffF(0.0)F(0.0)F(0.0)", model, x, y, z, rx, ry, rz))
+    if(sscanf(params, "dF(-1.0)F(-1.0)F(-1.0)F(0.0)F(0.0)F(0.0)", model, x, y, z, rx, ry, rz))
     {
         sendTipMessage(playerid, "U¿yj /createobject [model] [x] [y] [z] [rx] [ry] [rz] ");
         return 1;
