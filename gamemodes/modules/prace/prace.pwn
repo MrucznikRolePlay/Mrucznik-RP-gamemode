@@ -339,7 +339,7 @@ GiveTaxiBonusForUniquePlayer(playerid, clientid)
 
 	MruMessageGoodInfoF(playerid, "Otrzymujesz %d$ bonusu za przewiezienie unikalnego gracza!", bonus);
 	DajKase(playerid, bonus);
-	Log(payLog, INFO, "%s otrzyma³ %d$ za przewiezienie unikalnego gracza taxówk¹", GetPlayerLogName(playerid), bonus);
+	Log(payLog, INFO, "%s otrzyma³ %d$ za przewiezienie unikalnego gracza %s taxówk¹", GetPlayerLogName(playerid), GetPlayerLogName(clientid), bonus);
 }
 
 //-----------------<[ Timery: ]>-------------------
