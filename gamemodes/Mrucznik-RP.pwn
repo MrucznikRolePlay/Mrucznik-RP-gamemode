@@ -2809,10 +2809,13 @@ public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y,
 	{
 		if(GetPVarInt(playerid, "Allow-edit") && response == EDIT_RESPONSE_FINAL)
 		{
+			new year, month, day;
+			getdate(year, month, day);
 			MoveDynamicObject(objectid, x, y, z, 10.0, rx, ry, rz);
 			SendClientMessage(playerid, COLOR_WHITE, sprintf(
 				"Object moved to: X: %.4f, Y: %.4f, Z: %.4f, RX: %.4f, RY: %.4f, RZ: %.4f and saved to file %s_objects_%d_%d_%d_%d.txt", 
 				x, y, z, rx, ry, rz, GetNick(playerid), year, month, day, AdminObjectsVer[playerid]));
+			AppendToPlayerObjectFiles(playerid, objectid);
 		}
 
         if(response < EDIT_RESPONSE_UPDATE && GetPVarInt(playerid, "Barier-id") != 0)
