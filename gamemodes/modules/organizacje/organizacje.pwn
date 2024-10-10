@@ -148,8 +148,8 @@ AccountOrgsCosts()
 
         if(Sejf_Rodziny[i] <= DELETE_ORG_THRESHOLD)
         {
-            RemoveOrganisation(i);
             Log(serverLog, INFO, "Organizacja zostala automatycznie usunieta z powodu dlugu %d$", Sejf_Rodziny[i]);
+            RemoveOrganisation(i);
         }
     }
 }
