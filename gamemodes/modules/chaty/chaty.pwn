@@ -74,7 +74,6 @@ CheckEmoji(const text[])
 	strcat(emojiMessFix, text); 
 	regex_replace(emojiMessFix, ":D+", "{C2A2DA}**œmieje siê**{FFFFFF}");
 	regex_replace(emojiMessFix, ":P+", "{C2A2DA}**wystawia jêzyk**{FFFFFF}");
-	regex_replace(emojiMessFix, "[xX][dD]+", "{C2A2DA}**œmieje siê**{FFFFFF}");
 	regex_replace(emojiMessFix, ";\\)+", "{C2A2DA}**puszcza oczko**{FFFFFF}");
 	regex_replace(emojiMessFix, ";D+", "{C2A2DA}**puszcza oczko i œmieje siê**{FFFFFF}");
 	regex_replace(emojiMessFix, ";d+", "{C2A2DA}**wystawia jêzyk i puszcza oczko**{FFFFFF}");
@@ -235,7 +234,7 @@ PlayerTalkIC(playerid, text[], jakMowi[], Float:rangeTalk,  bool:chatBooble=true
 			return 1;
 		}
 		if(strfind(text[ostatnialitera], ".", true, 0)  != -1 || strfind(text[ostatnialitera], "?", true, 0)  != -1 || strfind(text[ostatnialitera], "!", true, 0) != -1 || strfind(text[ostatnialitera], ":", true, 0)  != -1 || strfind(text[ostatnialitera], "*", true, 0) != -1 || strfind(text[ostatnialitera], " ", true, 0)  != -1) format(string, sizeof(string), "%s %s: %s", GetNick(playerid), jakMowi, text);
-		else format(string, sizeof(string), "%s %s: %s.", GetNick(playerid), jakMowi, text);
+		else format(string, sizeof(string), "%s %s: %s", GetNick(playerid), jakMowi, text);
 		ProxDetector(rangeTalk, playerid, CorrectICForm(string), COLOR_FADE1, COLOR_FADE2, COLOR_FADE3, COLOR_FADE4, COLOR_FADE5);
 	}
 	else
