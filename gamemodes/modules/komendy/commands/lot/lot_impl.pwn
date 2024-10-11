@@ -58,21 +58,25 @@ command_lot_Impl(playerid, params[256])
 
 		if(strcmp(data,"vicecity",true) == 0)
 		{
+			if(PlayerInfo[playerid][pSpawn] == 0) PlayerInfo[playerid][pSpawn] = 3;
 			GameTextForPlayer(playerid, "Witaj w ~p~Vice City~w~!", 5000, 1);
 			SetPlayerPos(playerid, -5589.2468, 1368.1472, 15.3582);
 		}
 		else if(strcmp(data,"lossantos",true) == 0)
 		{
+			if(PlayerInfo[playerid][pSpawn] == 3) PlayerInfo[playerid][pSpawn] = 0;
 			GameTextForPlayer(playerid, "Witaj w ~g~Los Santos~w~!", 5000, 1);
 			SetPlayerPos(playerid, 1585.2,-2286.6,13.7);
 		}
 		else if(strcmp(data,"sanfierro",true) == 0)
 		{
+			if(PlayerInfo[playerid][pSpawn] == 3) PlayerInfo[playerid][pSpawn] = 0;
 			GameTextForPlayer(playerid, "Witaj w ~b~San Fierro~w~!", 5000, 1);
 			SetPlayerPos(playerid, -1421.4000244141,-287.29998779297,14.10000038147);
 		}
 		else if(strcmp(data,"lasventuras",true) == 0)
 		{
+			if(PlayerInfo[playerid][pSpawn] == 3) PlayerInfo[playerid][pSpawn] = 0;
 			GameTextForPlayer(playerid, "Witaj w ~r~Las Venturas~w~!", 5000, 1);
 			SetPlayerPos(playerid, 1673.3000488281, 1447.8000488281, 10.89999961853);
 		}

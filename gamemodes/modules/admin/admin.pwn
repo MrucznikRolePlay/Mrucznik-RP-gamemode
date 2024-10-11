@@ -765,7 +765,7 @@ AppendToPlayerObjectFiles(playerid, objectid)
 {
 	new string[128];
 	GetPVarString(playerid, "edit-object-comment", string);
-	MAP_insert_val_str(AdminObjects[playerid], objectid, string);
+	MAP_insert_val_arr(AdminObjects[playerid], objectid, string);
 	defer SaveObjectsFile(playerid);
 }
 

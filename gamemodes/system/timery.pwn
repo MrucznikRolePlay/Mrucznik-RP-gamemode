@@ -2377,18 +2377,11 @@ public JednaSekundaTimer()
 			SavePlayerPos[i][LastY] = y;
 			SavePlayerPos[i][LastZ] = z;
 		}
-
-        /*if(GetPlayerWeapon(i) != 0 && GetPlayerWeapon(i) != 1 && GetPVarInt(i, "obezwladniony") > gettime())
-        {
-        	SetPlayerArmedWeapon(i, 0);
-        	MruDialog(i, "Informacja", "Niedawno zosta³es obezw³adniony, nie mo¿esz korzystaæ z broni przez pewien czas!");
-        }*/
-
-		// serce zapisu broni
+// serce zapisu broni
 		if(State >= 1 && State <= 6)
 		{
 			if(GetPVarInt(i, "ammohackdetect") == 1) KickEx(i);
-			if(MaZapisanaBron(i))//if(PlayerInfo[i][pGun2] >= 2) - dziwne, ¿e wczeœniej nikt tego b³êdu nie zauwa¿y³.
+			if(MaZapisanaBron(i))
 			{
                 weaponID = GetPlayerWeapon(i);
                 ammo = GetPlayerAmmo(i);
@@ -2429,7 +2422,6 @@ public JednaSekundaTimer()
 				{
 					if(weaponState >= 1 && PlayerInfo[i][pAmmo5] >= 0)
 					{
-
 						if(PlayerInfo[i][pAmmo5] != ammo && ammo >= 1)
 						{
 							PlayerInfo[i][pAmmo5] = ammo;
@@ -2440,7 +2432,6 @@ public JednaSekundaTimer()
 				{
 					if(weaponState >= 1 && PlayerInfo[i][pAmmo6] >= 0)
 					{
-
 						if(PlayerInfo[i][pAmmo6] != ammo && ammo >= 1)
 						{
 							PlayerInfo[i][pAmmo6] = ammo;
@@ -2451,7 +2442,6 @@ public JednaSekundaTimer()
 				{
 					if(weaponState >= 1 && PlayerInfo[i][pAmmo7] >= 0)
 					{
-
 						if(PlayerInfo[i][pAmmo7] != ammo && ammo >= 1)
 						{
 							PlayerInfo[i][pAmmo7] = ammo;
@@ -2462,7 +2452,6 @@ public JednaSekundaTimer()
 				{
 					if(weaponState >= 1 && PlayerInfo[i][pAmmo8] >= 0)
 					{
-
 						if(PlayerInfo[i][pAmmo8] != ammo && ammo >= 1)
 						{
 							PlayerInfo[i][pAmmo8] = ammo;
@@ -2473,7 +2462,6 @@ public JednaSekundaTimer()
 				{
 					if(weaponState >= 1 && PlayerInfo[i][pAmmo9] >= 0)
 					{
-
 						if(PlayerInfo[i][pAmmo9] != ammo && ammo >= 1)
 						{
 							PlayerInfo[i][pAmmo9] = ammo;
@@ -2493,7 +2481,7 @@ public JednaSekundaTimer()
 				}
 			}
 		}
-
+		
 
         if(UsedFind[i] >= 1)
 		{
