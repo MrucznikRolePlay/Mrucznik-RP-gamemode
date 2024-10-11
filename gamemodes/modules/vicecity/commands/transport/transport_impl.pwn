@@ -68,7 +68,7 @@ command_transport_ShowDialog(playerid)
     new terminalType = GetPlayerShippingPlace(playerid);
 
     ShowPlayerDialogEx(playerid, 7110, DIALOG_STYLE_MSGBOX, "Transport samochodu", 
-        sprintf("Tutaj mo¿esz zleciæ transport swojego pojazdu %s!\nPo zleceniu transportu, twój pojazd pojawi siê na jedym z parkingów w dokach\noraz zostanie oznaczony czerwonym markerem.\nKoszt: $%d", GetTransportDestinationName(terminalType), VEHICLE_TRANSPORT_COST),
+        sprintf("Tutaj mo¿esz zleciæ transport swojego pojazdu %s!\nPo zleceniu transportu, Twój pojazd pojawi siê na jednym z parkingów w dokach\noraz zostanie oznaczony czerwonym markerem.\nKoszt: $%d", GetTransportDestinationName(terminalType), VEHICLE_TRANSPORT_COST),
         "Transportuj", "WyjdŸ");
 }
 
@@ -110,7 +110,7 @@ TransportPlayerVehicle(playerid, terminalType)
             x = ViceCityVehCargoParking[rand][0];
             y = ViceCityVehCargoParking[rand][1];
             z = ViceCityVehCargoParking[rand][2];
-            lowerZ = z - 0.6;
+            lowerZ = z - 2.0;
             a = ViceCityVehCargoParking[rand][3];
         }
         case 2: // From Vice City to Los Santos
@@ -119,7 +119,7 @@ TransportPlayerVehicle(playerid, terminalType)
             x = LosSantosVehCargoParking[rand][0];
             y = LosSantosVehCargoParking[rand][1];
             z = LosSantosVehCargoParking[rand][2];
-            lowerZ = z;
+            lowerZ = z - 1.0;
             a = LosSantosVehCargoParking[rand][3];
         }
     }
