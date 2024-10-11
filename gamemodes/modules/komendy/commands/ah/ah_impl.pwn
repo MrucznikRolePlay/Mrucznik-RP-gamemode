@@ -141,6 +141,7 @@ command_ah_Impl(playerid)
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /setmats /setkontrabanda /setskin /setjob /setdom /setdomk /setwiek /setname /setstat /money /givemoney");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /zrobdom /lzrobdom /usundom /blokujdom /resetsejfhasla /zapiszdomy /zapiszkonta");
 		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /rodzinalider /scena /houseowner /domint /dajskryptera");
+		SendClientMessage(playerid, COLOR_GRAD6,"*** 5000 *** /createobject /editobject /destroyobject");
 	}
 	if (IsAHeadAdmin(playerid) || IsAScripter(playerid))
 	{
