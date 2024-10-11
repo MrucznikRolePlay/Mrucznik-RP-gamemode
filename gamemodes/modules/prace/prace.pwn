@@ -276,7 +276,7 @@ CanPlayerTakeJob(playerid, job)
 		return 1;
 	}
 
-	if(IsAPrzestepca(playerid) && !IsACrimeJob(job))
+	if(IsAPrzestepca(playerid) && !IsACrimeJob(playerid, job))
 	{
 		return 0;
 	}
@@ -293,9 +293,17 @@ IsAJobForAll(job)
 	return job == JOB_DRIVER || job == JOB_PROSTITUTE;
 }
 
-IsACrimeJob(job)
+IsACrimeJob(playerid, job)
 {
-	return job == JOB_DRUG_DEALER || job == JOB_CARTHIEF || job == JOB_GUN_DEALER || job == JOB_SMUGGLER;
+	if(job == JOB_DRUG_DEALER || job == JOB_CARTHIEF || job == JOB_GUN_DEALER || job == JOB_SMUGGLER)
+	{
+		return 1;
+	}
+	if(job == JOB_MECHANIC && (IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE) || IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY)))
+	{
+		return 1;
+	}
+	return 0;
 }
 
 GetJobIfPlayerCloseEnough(playerid)

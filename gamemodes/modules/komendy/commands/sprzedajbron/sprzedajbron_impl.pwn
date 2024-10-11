@@ -177,7 +177,7 @@ command_sprzedajbron_Impl(playerid, params[256])
     if(PlayerInfo[giveplayerid][pGunLic] != 1)
     {
         PoziomPoszukiwania[giveplayerid] += 1;
-        SetPlayerCriminal(giveplayerid, INVALID_PLAYER_ID, "posiadanie nielegalnej broni");
+        SetPlayerCriminal(giveplayerid, INVALID_PLAYER_ID, "nielegalne posiadanie broni");
         SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);   
     }
 
@@ -199,6 +199,38 @@ command_sprzedajbron_Impl(playerid, params[256])
 
     PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
     PlayerPlaySound(giveplayerid, 1052, 0.0, 0.0, 0.0);
+
+    // Tajniak
+    new redisKey[64];
+    format(redisKey, sizeof(redisKey), "player:%d:deconspired", PlayerInfo[playerid][pUID]);
+    if(!legalWeapon && IsAPolicja(playerid) && OnDuty[playerid] && SecretAgent[playerid] > 0 && spamwl[giveplayerid] == 0)
+    {
+        PoziomPoszukiwania[giveplayerid] += 4;
+        PlayCrimeReportForPlayer(playerid, giveplayerid, 14);
+        SetPlayerCriminal(giveplayerid, playerid, "nielegalna sprzeda¿ broni");
+        SetPlayerWantedLevel(giveplayerid, PoziomPoszukiwania[giveplayerid]);
+
+        PursuitMode(playerid, giveplayerid);
+
+        if(RedisGetInt(redisKey))
+        {
+            new reward = 125_000;
+            DajKase(playerid, reward);
+            Log(payLog, INFO, "%s z³apa³ dilera broni %s na gor¹cym uczynku i dosta³ %d$", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), reward);
+            MruMessageGoodInfoF(playerid, "Nakry³eœ %s na sprzeda¿y nielegalnej broni! Dostajesz %d$ za wykonywanie swojej pracy.", GetNick(giveplayerid), reward);
+        }
+        else
+        {
+            MruMessageGoodInfoF(playerid, "Nakry³eœ %s na sprzeda¿y nielegalnej broni! Ju¿ raz nakry³eœ tego gracza w przeci¹gu 24h wiêc nie dostajesz bonusu.", GetNick(giveplayerid));
+        }
+        MruMessageBadInfoF(giveplayerid, "Tajny agent %s nakry³ Ciê na sprzeda¿y nielegalnej broni! Masz teraz %d Poziom Poszukiwania.", GetNick(playerid), PoziomPoszukiwania[giveplayerid]);
+
+        SetTimerEx("spamujewl",300_000,0,"d",giveplayerid); //5min anty-wl
+        spamwl[giveplayerid] = 1;
+
+        Redis_SetInt(RedisClient, redisKey, 1);
+        RedisExpire(redisKey, 24 * 3600);
+    }
 
     Log(payLog, INFO, "Gracz %s sprzeda³ graczowi %s broñ %s", GetPlayerLogName(playerid), GetPlayerLogName(giveplayerid), GetWeaponLogName(GunInfo[weaponid][GunId], GunInfo[weaponid][GunAmmo]));
     return 1;

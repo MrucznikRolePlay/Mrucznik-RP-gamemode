@@ -72,10 +72,9 @@ command_kupdragi_Impl(playerid, weight)
     MruMessageGoodInfoF(playerid, "Kupi³eœ od dilera %s %d gram narkotyku za %d$.", GetNick(dealerid), weight, price);
     ChatMe(playerid, sprintf("odbiera zupe³nie niepodejrzanego loda od lodziarza %s", GetNick(dealerid)));
 
+    // zdemaskowanie
     new redisKey[64];
     format(redisKey, sizeof(redisKey), "player:%d:deconspired", PlayerInfo[playerid][pUID]);
-
-    // zdemaskowanie
     if(IsAPolicja(playerid) && OnDuty[playerid] && SecretAgent[playerid] > 0 && spamwl[dealerid] == 0)
     {
         PoziomPoszukiwania[dealerid] += 4;
@@ -87,9 +86,9 @@ command_kupdragi_Impl(playerid, weight)
 
         if(RedisGetInt(redisKey))
         {
-            new reward = 75_000;
+            new reward = 125_000;
             DajKase(playerid, reward);
-            Log(payLog, INFO, "%s z³apa³ dilera %s na gor¹cym uczynku i dosta³ 75000$", GetPlayerLogName(playerid), GetPlayerLogName(dealerid));
+            Log(payLog, INFO, "%s z³apa³ dilera %s na gor¹cym uczynku i dosta³ %d$", GetPlayerLogName(playerid), GetPlayerLogName(dealerid), reward);
             MruMessageGoodInfoF(playerid, "Nakry³eœ %s na sprzeda¿y narkotyków! Dostajesz %d$ za wykonywanie swojej pracy.", GetNick(dealerid), reward);
         }
         else

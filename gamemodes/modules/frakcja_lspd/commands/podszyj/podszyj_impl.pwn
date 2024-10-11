@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_podszyj_Impl(playerid)
 {
-    if(!IsAPolicja(playerid))
+    if(GetPlayerFraction(playerid) != FRAC_FBI)
     {
         noAccessMessage(playerid);
         return 1;
@@ -67,7 +67,7 @@ command_podszyj_Impl(playerid)
         SecretAgent[playerid] = 6;
         SetPlayerSkinEx(playerid, skin);
         SetPlayerColor(playerid,TEAM_HIT_COLOR);
-        MruMessageGoodInfo(playerid, "Podszy³eœ siê pod ¿ula. Mo¿esz teraz inflitrowaæ dilerów narkotyków.");
+        MruMessageGoodInfo(playerid, "Podszy³eœ siê pod ¿ula. Mo¿esz teraz inflitrowaæ dilerów narkotyków i broni.");
     }
     return 1;
 }
