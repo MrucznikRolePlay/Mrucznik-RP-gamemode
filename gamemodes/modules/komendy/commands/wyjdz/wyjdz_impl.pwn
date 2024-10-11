@@ -49,6 +49,23 @@ command_wyjdz_Impl(playerid)
             TogglePlayerControllable(playerid,0);
             Wchodzenie(playerid);
         }
+        else if (IsPlayerInRangeOfPoint(playerid, 5.0, 2371.5246582031, 586.56274414063, 4893.2431640625)) // Pokój przes³uchañ sro
+        {
+            if(IsAPolicja(playerid))
+            {
+                SetPlayerPos(playerid, 276.32934570313,122.20029449463,1004.1166992188); // Pokój przes³uchañ wejs 
+                TogglePlayerControllable(playerid, 0);
+                Wchodzenie(playerid);
+                SetPlayerInterior(playerid, 10);
+                SetPlayerVirtualWorld(playerid, 7110);
+                return 1;
+            }
+            else
+            {
+                SendClientMessage(playerid, COLOR_GREY, "Tylko dla policjantów i wiêŸniów w kajdankach");
+                return 1;
+            }
+        }
 		else if(IsPlayerInRangeOfPoint(playerid, 4, 1213.3364,-1807.0619,70.0682)) //basen œrodek 
 		{
 			SetPlayerPos(playerid, 1205.45874, -1765.66833, 13.54815); // basen tsunami
