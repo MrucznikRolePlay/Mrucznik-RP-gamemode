@@ -500,6 +500,7 @@ command_wejdz_Impl(playerid)
                 TogglePlayerControllable(playerid, 0);
                 Wchodzenie(playerid);
                 SetPlayerInterior(playerid, 10);
+                SetPlayerVirtualWorld(playerid, 0);
                 return 1;
             }
             else
