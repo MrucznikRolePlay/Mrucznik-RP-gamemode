@@ -414,9 +414,9 @@ UkradnijVerify(playerid, veh_id)
 
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
-	if(x < 0.0 || y > -790)
+	if(!IsPlayerAtViceCity(playerid))
 	{
-		sendTipMessageEx(playerid, COLOR_GREY, "U¿yj /ukradnij w Los Santos!");
+		sendTipMessageEx(playerid, COLOR_GREY, "U¿yj /ukradnij w Vice City!");
 		return 0;
 	}
 
