@@ -50,17 +50,17 @@ SetPlayerStateArrestPos(playerid)
 {
 	if(PlayerInfo[playerid][pSpawn] == 3)	
 	{
-		new losuj= random(sizeof(SpawnStanowe));
+		new losuj= random(sizeof(SpawnStanoweVC));
 		SetPlayerInterior(playerid, 0);
 		SetPlayerVirtualWorld(playerid, 1);
-		SetPlayerPos(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
+		SetPlayerPos(playerid, SpawnStanoweVC[losuj][0], SpawnStanoweVC[losuj][1], SpawnStanoweVC[losuj][2]);
 	}
 	else
 	{
-		new losuj= random(sizeof(SpawnStanoweVC));
+		new losuj= random(sizeof(SpawnStanowe));
 		SetPlayerInterior(playerid, 3);
 		SetPlayerVirtualWorld(playerid, 7110);
-		SetPlayerPos(playerid, SpawnStanoweVC[losuj][0], SpawnStanoweVC[losuj][1], SpawnStanoweVC[losuj][2]);
+		SetPlayerPos(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
 	}
 }
 
