@@ -2162,11 +2162,13 @@ SetPlayerSpawnPos(playerid)
 								new rand = random(sizeof(gCopPlayerSpawns));
 								SetPlayerPos(playerid, gCopPlayerSpawns[rand][0], gCopPlayerSpawns[rand][1], gCopPlayerSpawns[rand][2]);
 								SetPlayerFacingAngle(playerid, 90.0);
+								SetPlayerInterior(playerid, 0);
 							}
 							else
 							{ // Vice City
 								SetPlayerPos(playerid, -3802.7534, 1777.8750,6.5215);
 								SetPlayerFacingAngle(playerid, 316.0);
+								SetPlayerInterior(playerid, 0);
 							}
 						}
 						case FRAC_FBI: //2
@@ -2175,11 +2177,13 @@ SetPlayerSpawnPos(playerid)
 							{ // Los Santos
 								SetPlayerPos(playerid, 598.2130,-1491.1135,15.1351);
 								SetPlayerFacingAngle(playerid, 270.0);
+								SetPlayerInterior(playerid, 0);
 							}
 							else
 							{ // Vice City
 								SetPlayerPos(playerid, -4857.0322, 3012.5569, 6.0599);
 								SetPlayerFacingAngle(playerid, 136.0);
+								SetPlayerInterior(playerid, 0);
 							}
 						}
 						case FRAC_NG: //3
@@ -2194,6 +2198,7 @@ SetPlayerSpawnPos(playerid)
 							{ // Vice City
 								SetPlayerPos(playerid, -5921.1716, 2093.6060, 9.3275);
 								SetPlayerFacingAngle(playerid, 265.0);
+								SetPlayerInterior(playerid, 0);
 							}
 						}
 						case FRAC_ERS:  //4
@@ -2202,27 +2207,32 @@ SetPlayerSpawnPos(playerid)
 							{ // Los Santos
 								SetPlayerPos(playerid, 1148.4323,-1315.4225,13.9841);
 								SetPlayerFacingAngle(playerid,358.0);
+								SetPlayerInterior(playerid, 0);
 							}
 							else
 							{ // Vice City
 								SetPlayerPos(playerid, -5087.2378, 1779.6316, 7.5683);
 								SetPlayerFacingAngle(playerid, 266.7065);
+								SetPlayerInterior(playerid, 0);
 							}
 						} // 5,6 empty
 						case FRAC_BOR: //7
 						{
 						    SetPlayerPos(playerid, 1519.0970,-1449.6099,13.5391);
+							SetPlayerInterior(playerid, 0);
 						}
 						case FRAC_HA: //8
 						{
 							if(spawnType == 0)
 							{ // Los Santos
 						    	SetPlayerPos(playerid, -50.400001525879,-279.20001220703,6.0999999046326);
+								SetPlayerInterior(playerid, 0);
 							}
 							else
 							{ // Vice City
 								SetPlayerPos(playerid, -4125.0571, 3340.3920, 13.2164);
 								SetPlayerFacingAngle(playerid, 180.7065);
+								SetPlayerInterior(playerid, 0);
 							}
 						}
 						case FRAC_SN: //9
@@ -2242,11 +2252,13 @@ SetPlayerSpawnPos(playerid)
 								{
 									SetPlayerPos(playerid, 288.0914,-1609.7465,17.9994);
 								}
+								SetPlayerInterior(playerid, 0);
 							}
 							else
 							{ // Vice City
 								SetPlayerPos(playerid, -4638.0244, 3358.1313, 5.5328);
 								SetPlayerFacingAngle(playerid, 180.7065);
+								SetPlayerInterior(playerid, 0);
 							}
 						}
 						case FRAC_KT: //10
@@ -2255,11 +2267,13 @@ SetPlayerSpawnPos(playerid)
 							{ // Los Santos
 								SetPlayerPos(playerid,2468.3796,-2082.9690,13.5580);
 								SetPlayerFacingAngle(playerid, 89.1901);
+								SetPlayerInterior(playerid, 0);
 							}
 							else
 							{ // Vice City
 								SetPlayerPos(playerid, -5194.8025, 2436.7863, 6.8840);
 								SetPlayerFacingAngle(playerid, 353.7065);
+								SetPlayerInterior(playerid, 0);
 							}
 						}
 						case FRAC_GOV: //11
@@ -2298,12 +2312,14 @@ SetPlayerSpawnPos(playerid)
 							{ // Vice City
 								SetPlayerPos(playerid, -4897.7461, 2953.5726, 6.5759);
 								SetPlayerFacingAngle(playerid, 269.8782);
+								SetPlayerInterior(playerid, 0);
 							}
 						}
 						default:
 						{ // Vice City
 							SetPlayerPos(playerid, -3970.3354, 972.6067, 7.0385);
 							SetPlayerFacingAngle(playerid, 252.7065);
+							SetPlayerInterior(playerid, 0);
 						}
 				    }
 				}
@@ -2348,6 +2364,7 @@ SetPlayerSpawnPos(playerid)
 							//Spawn cywila
 							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
 							SetPlayerFacingAngle(playerid, 0.94);
+							SetPlayerInterior(playerid, 0);
 							MruMessageError(playerid, "B£¥D! Masz niepoprawn¹ pracê, zg³oœ siê do admina.");
 						}
 					}
@@ -2378,11 +2395,13 @@ SetPlayerSpawnPos(playerid)
 						{ // Los Santos
 							SetPlayerPos(playerid, 1742.9498, -1860.8604, 13.5782);
 							SetPlayerFacingAngle(playerid, 0.94);
+							SetPlayerInterior(playerid, 0);
 						}
 						else
 						{ // Vice City
 							SetPlayerPos(playerid, -3970.3354, 972.6067, 7.0385); // Vice City motel
 							SetPlayerFacingAngle(playerid, 252.4531);
+							SetPlayerInterior(playerid, 0);
 						}
 					}
 				}
