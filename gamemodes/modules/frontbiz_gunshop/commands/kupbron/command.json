@@ -1,0 +1,11 @@
+{
+    "name": "kupbron",
+    "description": "Kupowanie broni w gunshopach.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "12.10.2024"
+}

@@ -36,6 +36,7 @@ command_gspanel()
     new command = Command_GetID("gspanel");
 
     //aliases
+    Command_AddAlt(command, "gunshop");
     
 
     //permissions

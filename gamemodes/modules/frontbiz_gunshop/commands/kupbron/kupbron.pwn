@@ -1,5 +1,5 @@
-//-----------------------------------------------<< Defines >>-----------------------------------------------//
-//                                                gunshoppanel                                               //
+//------------------------------------------<< Generated source >>-------------------------------------------//
+//                                                  kupbron                                                  //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,19 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: wiger
-// Data utworzenia: 18.02.2024
+// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
 
+// ================= UWAGA! =================
 //
+// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
+// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
+// > mrucznikctl build
+//
+// ================= UWAGA! =================
 
-//------------------<[ Makra: ]>-------------------
-//------------------<[ Define: ]>-------------------
-#define D_GSPANEL 20123
-#define D_GSPANEL_BRONIE 20124
-#define D_GSPANEL_BRONIE_SET 20125
-#define D_GSPANEL_MATS 20126
-#define D_GSPANEL_KUPBRON 20127
 
-#define GUNSHOP_FIRST_ID 11
+//-------<[ include ]>-------
+#include "kupbron_impl.pwn"
 
-//end
+//-------<[ initialize ]>-------
+command_kupbron()
+{
+    new command = Command_GetID("kupbron");
+
+    //aliases
+    
+
+    //permissions
+    Group_SetGlobalCommand(command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:kupbron(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Kupowanie broni w gunshopach.");
+        return 1;
+    }
+    
+    
+    //command body
+    return command_kupbron_Impl(playerid);
+}

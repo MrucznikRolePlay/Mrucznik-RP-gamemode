@@ -91,7 +91,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(BuyOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(SellOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
-	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	if(GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
 	if(dialogid == 9145)
 	{

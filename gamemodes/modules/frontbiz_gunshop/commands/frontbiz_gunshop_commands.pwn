@@ -32,6 +32,7 @@
 //-------<[ include ]>-------
 #include "gspanel\gspanel.pwn"
 #include "sprzedajmatsbot\sprzedajmatsbot.pwn"
+#include "kupbron\kupbron.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -39,5 +40,6 @@ hook OnGameModeInit()
 {
     command_gspanel();
     command_sprzedajmatsbot();
+    command_kupbron();
     
 }

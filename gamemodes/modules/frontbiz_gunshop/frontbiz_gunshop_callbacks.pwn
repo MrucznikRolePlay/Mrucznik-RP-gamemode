@@ -28,7 +28,7 @@
 #include <YSI\y_hooks>
 
 //-----------------<[ Callbacki: ]>-----------------
-gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) 
+GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) 
 {
 	#pragma unused inputtext
 	if(dialogid==D_GSPANEL) 
@@ -63,7 +63,7 @@ gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 			GetWeaponName(gunid, gunName, 32);
 			format(caption, sizeof(caption), "Panel gunshopu > Ceny broni > %s", gunName);
 			format(string, sizeof(string), "Podaj now¹ cenê broni: %s\nTa kwota trafi do twojego sejfu za ka¿dy sprzedany egzemplarz.\nObecna cena: %d$, koszt wytworzenia broni: %d materia³ów", 
-				gunName, GS_BronCena[gsid][gunid], floatround(GunInfo[gunid][GunMaterialsCost] * 1.5));
+				gunName, GS_BronCena[gsid][gunid], GunInfo[gunid][GunMaterialsCost] * 2);
 			ShowPlayerDialogEx(playerid, D_GSPANEL_BRONIE_SET, DIALOG_STYLE_INPUT, caption, string, "Akceptuj", "Wróæ");
 			SetPVarInt(playerid, "gspanel_gunid", gunid);
 		} 
@@ -129,6 +129,64 @@ gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[
 		GunShopPanel(playerid);
 		return 1;
 	}
+    else if(dialogid == D_GSPANEL_KUPBRON)
+    {
+        if(response)
+        {
+            switch(listitem)
+            {
+                case 0:
+                {
+                    ShowBuyGunDialog(playerid);
+                }
+                default:
+                {
+                    new bizId = GetPVarInt(playerid, "gunshop_bizId");
+                    new gsid = GetPVarInt(playerid, "gunshop_gsid");
+                    new gunid = GS_Guns[listitem - 1];
+					new gunPrice = GS_BronCena[gsid][gunid];
+					new matsPrice = GunInfo[gunid][GunMaterialsCost] * 2;
+					new org = FrontBusiness[bizId][Owner];
+					new weaponName[32];
+					GetWeaponName(gunid, weaponName);
+
+					if(gunPrice <= 0)
+					{
+						MruMessageFail(playerid, "Nie sprzedajemy tej broni!");
+						ShowBuyGunDialog(playerid);
+						return 1;
+					}
+
+					if(kaska[playerid] < gunPrice)
+					{
+						MruMessageFail(playerid, "Nie staæ ciê na t¹ broñ!");
+						ShowBuyGunDialog(playerid);
+						return 1;
+					}
+
+					if(Rodzina_Mats[org] < GunInfo[gunid][GunMaterialsCost] * 2)
+					{
+						MruMessageFail(playerid, "Gun Shop nie ma tyle materia³ów, by sprzedaæ Ci t¹ broñ.");
+						ShowBuyGunDialog(playerid);
+						return 1;
+					}
+
+					GivePlayerWeaponEx(playerid, gunid, GunInfo[gunid][GunAmmo], true);
+
+					ZabierzKase(playerid, gunPrice);
+					SejfR_Add(org, gunPrice);
+					SejfR_AddMats(org, -matsPrice);
+
+					MruMessageGoodInfo(playerid, sprintf("Kupi³eœ broñ %s za %d$.", weaponName, gunPrice));
+					SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %d, stan materia³ów: %d", 
+						FrontBusiness[bizId][Name], GetNick(playerid), weaponName, gunPrice, matsPrice, Rodzina_Mats[org]));
+					Log(payLog, INFO, "Gracz %s kupi³ %s za %d$ od organizacji %d biznes %d koszt materia³ów %d stan materia³ów %d", 
+						GetPlayerLogName(playerid), weaponName, gunPrice, org, bizId, matsPrice, Rodzina_Mats[org]);
+                }
+            }
+        }
+        return 1;
+    }
 	return 0;
 }
 
