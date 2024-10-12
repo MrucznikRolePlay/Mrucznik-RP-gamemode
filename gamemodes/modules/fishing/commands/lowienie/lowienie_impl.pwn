@@ -276,7 +276,7 @@ command_lowienie_Impl(playerid)
         else if(PlayerInfo[playerid][pFishSkill] == 400)
         { SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci rybaka wynosz¹ teraz 5, mo¿esz ³owiæ wiêksze ryby."); }
         if (PlayerInfo[playerid][pFishes] == 5)
-            PlayerInfo[playerid][pFishes] = gettime() + 60 * 30; // 30 minutes
+            PlayerInfo[playerid][pFishes] = gettime() + 60 * 15; // 15 minutes
         MruMySQL_UpdateFish(playerid, Fishes[playerid][pLastFish]);
     }
     else
