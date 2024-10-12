@@ -556,7 +556,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 		new model = GetPVarInt(playerid, "shooting-object");
 		new obj = CreateDynamicObject(model, shotX, shotY, shotZ, 0.0, 0.0, rotZ, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid));
 		AppendToPlayerObjectFiles(playerid, obj);
-		SendClientMessage(playerid, -1, sprintf("Object id %d created at: %.4f, %.4f, %.4f.", obj));
+		SendClientMessage(playerid, -1, sprintf("Object id %d created at: %.4f, %.4f, %.4f.", obj, shotX, shotY, shotZ));
 	}
 	switch (hittype)
 	{
