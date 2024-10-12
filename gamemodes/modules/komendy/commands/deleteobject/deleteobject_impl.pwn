@@ -39,7 +39,7 @@ command_deleteobject_Impl(playerid, params[256])
     if(MAP_contains_val(AdminObjects[playerid], data))
     {
         MAP_remove_val(AdminObjects[playerid], data);
-        defer SaveObjectsFile[1](playerid);
+        SaveObjectsFile(playerid);
     }
 
     if(typ == 0)

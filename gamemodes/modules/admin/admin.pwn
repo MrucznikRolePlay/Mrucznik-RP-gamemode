@@ -766,10 +766,10 @@ AppendToPlayerObjectFiles(playerid, objectid)
 	new string[128];
 	GetPVarString(playerid, "edit-object-comment", string);
 	MAP_insert_val_arr(AdminObjects[playerid], objectid, string);
-	defer SaveObjectsFile(playerid);
+	SaveObjectsFile(playerid);
 }
 
-timer SaveObjectsFile[10000](playerid)
+SaveObjectsFile(playerid)
 {
 	new objectid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, interior, vw;
 	new File:objectsFile;

@@ -27,7 +27,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 LoadOrganisations()
 {
-    new query[512], rowCount;
+    new query[1024], rowCount;
     mysql_query("SELECT `Type`, HEX(`Color`), `x`, `y`, `z`, `a`, `Int`, `Vw`, `LeaderStake`, `Name`, `Motd` FROM `mru_org` WHERE ID < "#MAX_ORG" ORDER BY ID");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
