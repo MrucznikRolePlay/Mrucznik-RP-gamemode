@@ -270,10 +270,7 @@ ToggleInwigilacja(playerid, adminid)
 //WRZUCANIE DO DEMORGAN
 JailDeMorgan(playerid)
 {
-	new losuj= random(sizeof(SpawnStanowe));
-	SetPlayerInterior(playerid, 0);
-	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPos(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
+	SetPlayerStateArrestPos(playerid);
 	SetCameraBehindPlayer(playerid);
 	Wchodzenie(playerid);
 	PlayerInfo[playerid][pJailed] = 2;
@@ -284,9 +281,21 @@ JailDeMorgan(playerid)
 // WYPUSZCZANIE z DEMORGAN
 UnJailDeMorgan(playerid)
 {
-	SetPlayerVirtualWorld(playerid, 1);
-	SetPlayerPos(playerid, -499.12, 2592.85, 53.56);
-	SetPlayerFacingAngle(playerid, 270.0);
+	if(PlayerInfo[playerid][pSpawn] == 3)
+	{
+		// Vice City
+		SetPlayerInterior(playerid, 0);
+		SetPlayerInterior(playerid, 3);
+		SetPlayerVirtualWorld(playerid, 7110);
+		SetPlayerPos(playerid, StateArrestFreePositionVC[0], StateArrestFreePositionVC[1], StateArrestFreePositionVC[2]);
+		SetPlayerFacingAngle(playerid, StateArrestFreePositionVC[3]);
+	}
+	else
+	{
+		SetPlayerVirtualWorld(playerid, 1);
+		SetPlayerPos(playerid, StateArrestFreePosition[0], StateArrestFreePosition[1], StateArrestFreePosition[2]);
+		SetPlayerFacingAngle(playerid, StateArrestFreePosition[3]);
+	}
 	Wchodzenie(playerid);
 	GameTextForPlayer(playerid, "~w~Dostales szanse na bycie ~n~~r~lepszym obywatelem", 5000, 3);
 	PoziomPoszukiwania[playerid] = 0;

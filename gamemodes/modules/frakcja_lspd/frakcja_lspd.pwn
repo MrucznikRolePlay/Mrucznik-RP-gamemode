@@ -46,6 +46,40 @@ SetPlayerArrestPos(playerid)
 	}
 }
 
+SetPlayerStateArrestPos(playerid)
+{
+	if(PlayerInfo[playerid][pSpawn] == 3)	
+	{
+		new losuj= random(sizeof(SpawnStanowe));
+		SetPlayerInterior(playerid, 0);
+		SetPlayerVirtualWorld(playerid, 1);
+		SetPlayerPos(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
+	}
+	else
+	{
+		new losuj= random(sizeof(SpawnStanoweVC));
+		SetPlayerInterior(playerid, 3);
+		SetPlayerVirtualWorld(playerid, 7110);
+		SetPlayerPos(playerid, SpawnStanoweVC[losuj][0], SpawnStanoweVC[losuj][1], SpawnStanoweVC[losuj][2]);
+	}
+}
+
+SetPlayerArrestFreePos(playerid)
+{
+	if(PlayerInfo[playerid][pSpawn] == 3)
+	{
+		SetPlayerInterior(playerid, 10);
+		SetPlayerVirtualWorld(playerid, 7110);
+		SetPlayerPos(playerid, ArrestFreePositionVC[0], ArrestFreePositionVC[1], ArrestFreePositionVC[2]);
+		SetPlayerFacingAngle(playerid, ArrestFreePositionVC[3]);
+	}
+	else
+	{
+		SetPlayerPos(playerid, ArrestFreePosition[0], ArrestFreePosition[1], ArrestFreePosition[2]);
+		SetPlayerFacingAngle(playerid, ArrestFreePosition[3]);
+	}
+}
+
 IsAtDutyPlace(playerid)
 {
 	for(new i; i<sizeof(DutyPositions); i++)

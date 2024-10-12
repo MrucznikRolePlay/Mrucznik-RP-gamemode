@@ -54,11 +54,27 @@ new Float:ArrestPositions[][4] = {
     {5.0, 1559.8517, -1646.9373, 28.4881} // Komisariat by Charlie
 };
 
+new Float:ArrestFreePosition[4] = {
+    1550.1117,-1643.1370,28.4881,0.0
+};
+
+new Float:ArrestFreePositionVC[4] = {
+    215.4444,126.1699,999.0216,267.4085
+};
+
 new Float:StateArrestPositions[][4] = {
     {20.0, -554.7513, 2590.4070, 53.6603}, // Baza NG
     {20.0, 599.1960, -1489.5380, 82.1648}, // Wiêzienie stanowe FBI
     {10.0, 194.6258, 158.0858, 1003.0234}, // Komisariat LV z GTA SA
     {10.0, 193.9191, 179.0882, 1003.0234} // Komisariat LV z GTA SA
+};
+
+new Float:StateArrestFreePosition[4] = {
+    -499.12, 2592.85, 53.56, 270.0 // Interior -, Virtual World 1
+};
+
+new Float:StateArrestFreePositionVC[4] = {
+    194.6258, 158.0858, 1003.0234, 0.0
 };
 
 new Float:Cela[8][3] = {
@@ -83,6 +99,13 @@ new Float:SpawnStanowe[3][3] = {
     {-540.3912,2594.4626,87.3739},
     {-551.7859,2605.2214,86.1356},
     {-541.7159,2599.8838,86.1356}
+};
+
+new Float:SpawnStanoweVC[4][3] = {
+    {197.4311,175.1556,1003.0234},
+    {193.1369,174.9865,1003.0234},
+    {189.0654,175.0290,1003.0098},
+    {198.5425,161.8336,1003.0300}
 };
 
 new Float:ClearCrimesPositions[][4] = {

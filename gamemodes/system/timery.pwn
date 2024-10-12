@@ -2216,10 +2216,9 @@ public JednaSekundaTimer()
 			}
 			if(PlayerInfo[i][pJailed] == 2)
 			{
-				new losuj= random(sizeof(SpawnStanowe));
-				if(!IsPlayerInRangeOfPoint(i, 90.0, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]))
+				if(!IsPlayerInRangeOfPoint(i, 90.0, SpawnStanowe[0][0], SpawnStanowe[0][1], SpawnStanowe[0][2]) && !IsPlayerInRangeOfPoint(i, 90.0, SpawnStanoweVC[0][0], SpawnStanoweVC[0][1], SpawnStanoweVC[0][2]))
 				{
-					SetPlayerSpawn(i);
+					SetPlayerStateArrestPos(i);
 					sendErrorMessage(i, "Nie znajdujesz siê w Wiêzieniu Stanowym! Pozycja przywrócona do poprawnej!");
 				}
 			}
@@ -2236,12 +2235,13 @@ public JednaSekundaTimer()
 				PlayerInfo[i][pJailTime] = 0;
 				if(PlayerInfo[i][pJailed] == 1)
 				{
-					SetPlayerInterior(i, 0);
-					SetPlayerPos(i,1550.1117,-1643.1370,28.4881);
+					SetPlayerArrestFreePos(i);
+					GameTextForPlayer(i, "~w~Wolnosc!", 5000, 1);
 				}
 				else if(PlayerInfo[i][pJailed] == 2)
 				{
 					UnJailDeMorgan(i);
+					GameTextForPlayer(i, "~w~Wolnosc!", 5000, 1);
 				}
 				else if(PlayerInfo[i][pJailed] == 3)
 				{
