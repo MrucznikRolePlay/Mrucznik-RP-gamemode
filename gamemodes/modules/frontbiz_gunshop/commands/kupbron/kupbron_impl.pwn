@@ -75,7 +75,7 @@ ShowBuyGunDialog(playerid)
         }
         else
         {
-            strcat(string, sprintf(INCOLOR_DIALOG"%s\t%d\t%d\n", gunName, GunInfo[gunIdx][GunAmmo], GS_BronCena[gsid][gunid]));
+            strcat(string, sprintf(INCOLOR_DIALOG"%s\t%d\t"INCOLOR_GREEN"%d$\n", gunName, GunInfo[gunIdx][GunAmmo], GS_BronCena[gsid][gunid]));
         }
     }
 

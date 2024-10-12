@@ -71,7 +71,8 @@ command_sprzedajmatsbot_Impl(playerid, mats)
     SejfR_Add(org, -cena);
 
     MruMessageGoodInfo(playerid, sprintf("Sprzeda³eœ botowi %i matsów za $%i", mats, cena));
-    SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Diler broni %s sprzeda³ botowi %i mats za $%i", GetNick(playerid), mats, cena));
+    SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("Diler broni %s sprzeda³ botowi %i mats za $%i, nowy stan sejfu: %d$ i %d materia³ów", 
+        GetNick(playerid), mats, cena, Sejf_Rodziny[org], Rodzina_Mats[org]));
     Log(payLog, INFO, "Gracz %s sprzeda³ botowi %d mats za $%d", GetPlayerLogName(playerid),  mats, cena);
     return 1;
 }
