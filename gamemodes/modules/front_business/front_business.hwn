@@ -336,6 +336,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         100, 1000 // hajs
     }
 };
+new ActiveFire = -1;
 
 //------------------<[ Forwardy: ]>--------------------
 forward Float:GetPlayerFrontBusinessProximity(playerid, bizId);

@@ -5858,6 +5858,16 @@ public OnVehicleMod(playerid, vehicleid, componentid)
 	return 0; //turn off singleplayer workshops
 }
 
+public OnFireDeath(fireid, playerid)
+{
+	SendFamilyMessage(FRAC_ERS, 0xFFFFFFAA, "--------[Los Santos Rescue Service]--------");
+	SendFamilyMessage(FRAC_ERS, 0xAA3333AA, "[RADIO] Centrala do LSRS: Po¿ar zosta³‚ ugaszony!");
+
+	SendJobMessage(JOB_MEDIC, 0xFFFFFFAA, "--------[Los Santos Rescue Service]--------");
+	SendJobMessage(JOB_MEDIC, 0xAA3333AA, "[RADIO] Centrala do LSRS: Po¿ar zosta³‚ ugaszony!");
+	ActiveFire = -1;
+}
+
 AntiDeAMX() //suprise motherfucker
 {
     new whack[][] =

@@ -198,6 +198,11 @@ FrontBiz_OnPayDay(playerid)
 	{
 		if(IsFrontBusinnesOwnedByOrg(i, org))
 		{
+			if(ActiveFire == i)
+			{
+				SendClientMessage(playerid, COLOR_RED, sprintf("  Biznes Twojej organizacji %s p³onie, wiêc nie generuje zysku!", FrontBusiness[i][Name]));
+				continue;
+			}
 			// wzór: podstawowy_dochód + dochód_za_gracza * log2(liczba_graczy)
 			new Float:perPlayerIncome = float(IncomePerPlayer) * floatlog(float(Iter_Count(Player)), 2.0);
 			new frontBizIncome = floatround(perPlayerIncome) + BaseIncome;
