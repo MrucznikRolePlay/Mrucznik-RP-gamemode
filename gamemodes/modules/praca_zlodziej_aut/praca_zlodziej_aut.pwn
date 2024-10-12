@@ -315,7 +315,13 @@ ChooseChopShop(playerid, chop_shop_pos[], is_car_deluxe)
 {
 		new Float:chop_shops_positions[3][3];
 
-		if(is_car_deluxe)
+		if(IsPlayerAtViceCity(playerid))
+		{
+			chop_shops_positions[0] = {-5507.7612,2380.1775,5.9174};
+			chop_shops_positions[1] = {-4136.6187,3123.8940,5.2135};
+			chop_shops_positions[2] = {-4285.8408,860.2109,4.9211};
+		}
+		else if(is_car_deluxe)
 		{
 			chop_shops_positions[0] = {-1548.3618, 123.6438, 3.2966};
 			chop_shops_positions[1] = {577.5023, 1222.4153, 11.7113};
