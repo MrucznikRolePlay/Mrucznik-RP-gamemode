@@ -2020,10 +2020,8 @@ SetPlayerSpawnPos(playerid)
 	else if(PlayerInfo[playerid][pJailed] == 1)
 	{
 		if(PlayerInfo[playerid][pInjury] > 0) ZdejmijBW(playerid, 3000);
-		SetPlayerInterior(playerid, 0);
-	    SetPlayerVirtualWorld(playerid, 29);
-	    new losuj= random(sizeof(Cela));
-		SetPlayerPos(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+
+		SetPlayerArrestPos(playerid);
 		SendClientMessage(playerid, COLOR_LIGHTRED, "Twój wyrok nie dobieg³ koñca, wracasz do wiêzienia.");
 		TogglePlayerControllable(playerid, 0);
 		Wchodzenie(playerid);

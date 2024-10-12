@@ -107,9 +107,7 @@ command_paka_Impl(playerid, params[256])
 					SetPlayerSpecialAction(suspect,SPECIAL_ACTION_NONE);
 					RemovePlayerAttachedObject(suspect, 0);
 									
-					SetPlayerInterior(suspect, 10);
-				    new losuj= random(sizeof(Cela));
-					SetPlayerPos(suspect, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+		            SetPlayerArrestPos(suspect);
 					PlayerInfo[suspect][pJailTime] = time * 60;
 					if(bail == 1)
 					{

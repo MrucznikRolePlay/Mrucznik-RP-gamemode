@@ -106,12 +106,8 @@ command_aresztuj_Impl(playerid, params[256])
 		ClearAnimations(giveplayerid);
 		SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
 		RemovePlayerAttachedObject(giveplayerid, 0);
-		Wchodzenie(giveplayerid);
-		SetPlayerVirtualWorld(giveplayerid, 29);
-		new losuj= random(sizeof(Cela));
-		SetPlayerPos(giveplayerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+		SetPlayerArrestPos(giveplayerid);
 		TogglePlayerControllable(giveplayerid, 0);
-		Wchodzenie(giveplayerid);
 		JailPrice[giveplayerid] = bail;
 		SetPVarInt(giveplayerid, "kaucja-dlaKogo", PlayerInfo[playerid][pMember]);
 		RemovePlayerWeaponsTemporarity(giveplayerid);//usun bron

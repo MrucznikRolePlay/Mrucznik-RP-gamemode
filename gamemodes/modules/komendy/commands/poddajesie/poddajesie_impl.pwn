@@ -46,13 +46,10 @@ command_poddajesie_Impl(playerid)
 		        ZabierzKase(playerid, punishment);
 				PlayerInfo[playerid][pJailed] = 1;
 			    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(200);
-				SetPlayerVirtualWorld(playerid, 29);
 				JailPrice[playerid] = bail;
 				WantLawyer[playerid] = 1;
-				new losuj= random(sizeof(Cela));
-				SetPlayerPos(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
 				TogglePlayerControllable(playerid, 0);
-                Wchodzenie(playerid);
+				SetPlayerArrestPos(playerid);
 				format(string, sizeof(string), "* %s podda³ siê, dostajesz %d nagrody za z³apanie ¿ywego przestêpcy",sendername, reward);
 		        SendClientMessage(lowcap[playerid], COLOR_LIGHTBLUE, string);
 		        SendClientMessage(lowcap[playerid], COLOR_GRAD3, "Skill + 4");

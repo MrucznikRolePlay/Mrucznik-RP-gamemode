@@ -26,6 +26,26 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
+SetPlayerArrestPos(playerid)
+{
+	if(PlayerInfo[playerid][pSpawn] == 3)
+	{
+		SetPlayerInterior(playerid, 10);
+		SetPlayerVirtualWorld(playerid, 7110);
+		new losuj= random(sizeof(CelaVC));
+		SetPlayerPos(playerid, CelaVC[losuj][0], CelaVC[losuj][1], CelaVC[losuj][2]);
+		SetPlayerFacingAngle(playerid, CelaVC[losuj][3]);
+	}
+	else
+	{
+		SetPlayerInterior(playerid, 0);
+		SetPlayerVirtualWorld(playerid, 29);
+		new losuj= random(sizeof(Cela));
+		SetPlayerPos(playerid, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+		Wchodzenie(playerid);
+	}
+}
+
 IsAtDutyPlace(playerid)
 {
 	for(new i; i<sizeof(DutyPositions); i++)

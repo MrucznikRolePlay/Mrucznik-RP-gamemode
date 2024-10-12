@@ -57,13 +57,9 @@ command_jail_Impl(playerid, params[256])
                     PoziomPoszukiwania[playa] = 0;
                     PlayerInfo[playa][pJailed] = 1;
                     PlayerInfo[playa][pJailTime] = money * 60;
-                    SetPlayerInterior(playa, 0);
-                    SetPlayerVirtualWorld(playa, 29);
-                    new losuj= random(sizeof(Cela));
-                    SetPlayerPos(playa, Cela[losuj][0], Cela[losuj][1], Cela[losuj][2]);
+		            SetPlayerArrestPos(playa);
                     format(string, sizeof(string), "Zosta³eœ uwiêziony na %s minut.   Kaucja: Niedostêpna", money);
                     SendClientMessage(playa, COLOR_LIGHTBLUE, string);
-                    Wchodzenie(playa);
                 }
             }
         } else
