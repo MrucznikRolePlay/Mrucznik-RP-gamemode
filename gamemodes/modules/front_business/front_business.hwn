@@ -125,7 +125,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -4103.9883, 795.2566, 997.800000, 6, FRONT_BUSINESS_VW, // wyjœcie
         -4053.7173, 768.6839, 5.1413, 0, 0, // przejmowanie
         85.0, // size of gangzone
-        100, 200 // hajs
+        150, 1500 // hajs
     },
     {
         "Malibu Club", FRONT_BIZ_TYPE_CLUB,
@@ -133,7 +133,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -3711.6045, 2173.2814, 998.300000, 6, FRONT_BUSINESS_VW, // wyjœcie
         -3740.8557, 2166.4524, 5.9461, 0, 0, // przejmowanie
         100.0, // size of gangzone
-        100, 200 // hajs
+        750, 3000 // hajs
     },
     {
         "Love Fist", FRONT_BIZ_TYPE_CLUB,
@@ -141,7 +141,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -4797.1875, 2900.3365, 995.950878, 6, FRONT_BUSINESS_VW, // wyjœcie
         -5121.6206, 3374.7727, 5.6323, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        100, 1000 // hajs
     },
     {
         "Cafe Robina", FRONT_BIZ_TYPE_RESTAURANT,
@@ -149,7 +149,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -5369.8499, 1640.9092, 1001.201489, 6, FRONT_BUSINESS_VW, // wyjœcie
         -5349.2705, 1630.2562, 12.9698, 0, 0, // przejmowanie
         100.0, // size of gangzone
-        100, 200 // hajs
+        90, 500 // hajs
     },
     {
         "Taco Apocalypse", FRONT_BIZ_TYPE_RESTAURANT,
@@ -157,7 +157,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         376.8967, -192.6109, 1000.6328, 17, FRONT_BUSINESS_VW, // wyjœcie
         -4959.1753,3587.3225,6.2281, 0, 0, // przejmowanie
         40.0, // size of gangzone
-        100, 200 // hajs
+        50, 1000 // hajs
     },
     {
         "Niebieski Parasol", FRONT_BIZ_TYPE_RESTAURANT,
@@ -165,7 +165,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         681.62, -451.89, -25.61, 1, FRONT_BUSINESS_VW, // wyjœcie
         -4939.6528,2530.0579,10.7819, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        110, 500 // hajs
     },
     {
         "Mansion Weinfall", FRONT_BIZ_TYPE_RESTAURANT,
@@ -173,7 +173,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         445.60, -6.98, 1000.73, 1, FRONT_BUSINESS_VW, // wyjœcie
         -4075.2205,702.8980,5.4794, 0, 0, // przejmowanie
         30.0, // size of gangzone
-        100, 200 // hajs
+        150, 600 // hajs
     },
     {
         "Cafe Under Tree", FRONT_BIZ_TYPE_RESTAURANT,
@@ -181,7 +181,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -227.57, 1401.55, 27.76, 18, FRONT_BUSINESS_VW, // wyjœcie
         -5086.6357,2331.0901,10.4086, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        65, 400 // hajs
     },
     {
         "Palm Restaurant", FRONT_BIZ_TYPE_RESTAURANT,
@@ -189,7 +189,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         681.62, -451.89, -25.61, 1, FRONT_BUSINESS_VW, // wyjœcie
         -4037.2188,1226.4510,4.7950, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        80, 500 // hajs
     },
     {
         "The Crab Bar", FRONT_BIZ_TYPE_RESTAURANT,
@@ -197,7 +197,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         459.0599, -110.7151, 999.5413, 5, FRONT_BUSINESS_VW, // wyjœcie
         -5072.7065,2942.3091,5.5446, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        75, 500 // hajs
     },
     {
         "Crocs Bar", FRONT_BIZ_TYPE_RESTAURANT,
@@ -205,7 +205,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         501.8354, -68.1877, 998.7578, 11, FRONT_BUSINESS_VW, // wyjœcie
         -5320.6577,2367.3425,5.5865, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        70, 1000 // hajs
     },
     {
         "Ammu-Nation Ocean Beach", FRONT_BIZ_TYPE_GUNSHOP,
@@ -213,7 +213,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         285.76, -86.13, 1001.51, 4, FRONT_BUSINESS_VW, // wyjœcie
         -4274.7412,789.4274,4.9086, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        50, 1500 // hajs
     },
     {
         "Ammu-Nation North Point", FRONT_BIZ_TYPE_GUNSHOP,
@@ -221,7 +221,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         315.24, -140.88, 999.60, 7, FRONT_BUSINESS_VW, // wyjœcie
         -3823.0588,3313.9470,1213.5977, 6, 0, // przejmowanie
         100.0, // size of gangzone
-        100, 200 // hajs
+        50, 1500 // hajs
     },
     {
         "Ammu-Nation Downtown", FRONT_BIZ_TYPE_GUNSHOP,
@@ -229,7 +229,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         285.83, -39.01, 1001.51, 1, FRONT_BUSINESS_VW, // wyjœcie
         -4916.4878,3518.0281,6.2309, 0, 0, // przejmowanie
         90.0, // size of gangzone
-        100, 200 // hajs
+        50, 1500 // hajs
     },
     {
         "Stacja benzynowa", FRONT_BIZ_TYPE_GAS_STATION,
@@ -237,7 +237,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -26.6916, -55.7149, 1003.55, 6, FRONT_BUSINESS_VW, // wyjœcie PROBLEM
         -4173.4482,1161.0813,4.9317, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        100, 3000 // hajs
     },
     {
         "Tor wyœcigowy na pla¿y", FRONT_BIZ_TYPE_RACE,  
@@ -245,7 +245,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         0.0, 0.0, 0.0, 0, 0, // wyjœcie
         -3397.5598,3045.8728,11.4018, 0, 0, // przejmowanie
         170.0, // size of gangzone
-        100, 200 // hajs
+        50, 1250 // hajs
     },
     {
         "Tor wyœcigowy dirt", FRONT_BIZ_TYPE_RACE,  
@@ -253,7 +253,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         0.0, 0.0, 0.0, 0, 0, // wyjœcie
         -4698.4185,3697.4314,8.8209, 0, 0, // przejmowanie
         170.0, // size of gangzone
-        100, 200 // hajs
+        50, 1250 // hajs
     },
     {
         "Dirt Ring", FRONT_BIZ_TYPE_RACE,  
@@ -261,7 +261,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -1464.6763, 1556.9542, 1052.5313, 14, FRONT_BUSINESS_VW, // wyjœcie
         -5288.8252,3581.1265,17.1556, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        150, 3000 // hajs
     },
     {
         "Rockstar Casino", FRONT_BIZ_TYPE_CASINO,  
@@ -269,7 +269,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         2233.93,1711.80,1011.63, 1, FRONT_BUSINESS_VW, // wyjœcie
         -4735.3853,3448.8762,2.0027, 0, 0, // przejmowanie
         50.0, // size of gangzone
-        100, 200 // hajs
+        50, 1200 // hajs
     },
     {
         "Pay 'n' Spray Ocean Beach", FRONT_BIZ_TYPE_SPRAY,  
@@ -277,7 +277,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         611.35,-77.55,997.99, 2, FRONT_BUSINESS_VW, // wyjœcie
         -4186.0249,975.0332,4.9267, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        100, 1000 // hajs
     },
     {
         "Pay 'n' Spray Vice Point", FRONT_BIZ_TYPE_SPRAY,  
@@ -285,7 +285,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         612.21,-123.90,997.99, 3, FRONT_BUSINESS_VW+1, // wyjœcie
         -3909.0776,2714.0652,4.4578, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        100, 1000 // hajs
     },
     {
         "Pay 'n' Spray Vice Port", FRONT_BIZ_TYPE_SPRAY,  
@@ -293,7 +293,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         612.21,-123.90,997.99, 3, FRONT_BUSINESS_VW+2, // wyjœcie
         -5079.3208,992.8764,6.1893, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        100, 1000 // hajs
     },
     {
         "Pay 'n' Spray Little Haiti", FRONT_BIZ_TYPE_SPRAY,  
@@ -301,7 +301,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         611.35,-77.55,997.99, 2, FRONT_BUSINESS_VW+3, // wyjœcie
         -5089.5332,2139.4678,5.5672, 0, 0, // przejmowanie
         75.0, // size of gangzone
-        100, 200 // hajs
+        100, 1000 // hajs
     },
     {
         "Klub Golfowy", FRONT_BIZ_TYPE_CASINO,  
@@ -309,7 +309,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1133.34, -7.84, 1000.67, 12, FRONT_BUSINESS_VW, // wyjœcie
         -4204.1138,2486.4773,20.5883, 0, 0, // przejmowanie
         120.0, // size of gangzone
-        100, 200 // hajs
+        25, 2500 // hajs
     },
     {
         "Klub Jachtowy", FRONT_BIZ_TYPE_BOAT,  
@@ -317,7 +317,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         -2029.798339,-106.675910,1035.171875, 3, FRONT_BUSINESS_VW, // wyjœcie
         -4521.7612,888.9827,2.5730, 0, 0, // przejmowanie
         110.0, // size of gangzone
-        100, 200 // hajs
+        200, 1200 // hajs
     },
     {
         "Stocznia", FRONT_BIZ_TYPE_BOAT,  
@@ -325,7 +325,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1494.325195,1304.942871,1093.289062, 3, FRONT_BUSINESS_VW, // wyjœcie
         -4958.0239,649.8201,18.1950, 0, 0, // przejmowanie
         125.0, // size of gangzone
-        150, 200 // hajs
+        100, 800 // hajs
     },
     {
         "Fabryka Broni", FRONT_BIZ_TYPE_MATS,  
@@ -333,7 +333,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         1290.41,1.95,1001.02, 18, FRONT_BUSINESS_VW, // wyjœcie
         -4134.1094,3174.4536,10.2910, 0, 0, // przejmowanie
         100.0, // size of gangzone
-        100, 200 // hajs
+        100, 1000 // hajs
     }
 };
 
