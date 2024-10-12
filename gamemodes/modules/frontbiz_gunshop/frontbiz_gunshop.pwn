@@ -26,36 +26,40 @@
 //
 
 //-----------------<[ Funkcje: ]>-------------------
-stock LoadMats3DText() 
+LoadMats3DText() 
 {
     for(new i=0; i<3; i++)
     {
-        GS_Text[i] = CreateDynamic3DTextLabel("/sprzedajmatsbot", COLOR_BLUE, GS_MatsBot[i][0], GS_MatsBot[i][1], GS_MatsBot[i][2], 6.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, GS_MatsBotVw[i]);
+        GS_Text[i] = CreateDynamic3DTextLabel("/kupbron /sprzedajmatsbot", COLOR_BLUE, 
+            GS_MatsBot[i][0], GS_MatsBot[i][1], GS_MatsBot[i][2], 6.0, 
+            INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, GS_MatsBotVw[i]);
         UpdateMats3DText(i);
     }
 }
 
-stock UpdateMats3DText(gsid) 
+UpdateMats3DText(gsid) 
 {
     new cena = GS_MatsCena[gsid];
     new str[128];
     if(cena)
-        format(str, 128, "/sprzedajmatsbot\nCena za 5000 mats: {00FFFF}$%i", cena*5000);
+        format(str, 128, "/kupbron /sprzedajmatsbot\nCena za 5000 mats: {00FFFF}$%i", cena*5000);
     else
-        strcat(str, "/sprzedajmatsbot\n{FF0000}Sprzeda¿ wy³¹czona!");
+        strcat(str, "/kupbron /sprzedajmatsbot\n{FF0000}Sprzeda¿ wy³¹czona!");
     UpdateDynamic3DTextLabelText(GS_Text[gsid], COLOR_BLUE, str);
 }
 
-stock dgspanel(playerid) 
+GunShopPanel(playerid) 
 {
-    new caption[64];
-    format(caption, 64, "Panel gunshopu - %s", OrgInfo[GetPlayerOrg(playerid)][o_Name]);
-    ShowPlayerDialogEx(playerid, D_GSPANEL, DIALOG_STYLE_LIST, caption, "Ustaw ceny broni\nUstaw ceny mats u bota", "Wybierz", "Anuluj");
+    new bizId = GetPVarInt(playerid, "gspanel_bizId");
+    ShowPlayerDialogEx(playerid, D_GSPANEL, DIALOG_STYLE_LIST, 
+        sprintf("Panel gunshopu - %s", FrontBusiness[bizId][Name]), 
+        "Ustaw ceny broni\nUstaw ceny mats u bota", "Wybierz", "Anuluj");
 }
 
-stock dgspanel_bronie(playerid) 
+GunShopPanel_Bronie(playerid) 
 {
-	new gsid = GetPlayerOrg(playerid)-21;
+    new bizId = GetPVarInt(playerid, "gspanel_bizId");
+    new gsid = bizId - GUNSHOP_FIRST_ID;
     new bronie[] = {8, 22, 25, 23, 24, 29, 30, 31, 33, 27, 28, 34, 9, 39, 37};
     new string[1024];
     DynamicGui_Init(playerid);

@@ -103,7 +103,7 @@ command_orgpomoc_Impl(playerid)
     if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
     {
         if(IsPlayerOrgLeader(playerid))
-            SendClientMessage(playerid, COLOR_GRAD5, "*** Gunshop *** /sprzedajmatsbot /gspanel");
+            SendClientMessage(playerid, COLOR_GRAD5, "*** Gunshop *** /sprzedajmatsbot /gunshop");
         else
             SendClientMessage(playerid, COLOR_GRAD5, "*** Gunshop *** /sprzedajmatsbot");
     }

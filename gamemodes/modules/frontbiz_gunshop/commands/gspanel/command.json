@@ -3,7 +3,7 @@
     "description": "Panel zarzadzania sklepem z bronia",
     "permissions": ["everyone"],
     "author": "wiger",
-    "aliases": [],
+    "aliases": ["gunshop"],
     "parameters": [],
     "date": "18.02.2024"
 }

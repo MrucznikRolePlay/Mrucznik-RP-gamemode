@@ -699,55 +699,9 @@ command_akceptuj_Impl(playerid, x_job[32])
             return 1;
         }
     }
-    else if(strcmp(x_job,"lawyer",true) == 0 || strcmp(x_job,"prawnik",true) == 0 || strcmp(x_job,"prawnika",true) == 0)
-    {
-            /* if(giveplayerid == -1)
-        {
-            SendClientMessage(playerid, COLOR_GRAD2, "U¯YJ: /akceptuj prawnik");
-            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Pamiêtaj, ze pieni¹dze ($10 000) zostan¹ pobrane z Twojego portfela!");
-            return 1;
-        }
-
-        if (IsAPolicja(playerid))
-        {
-            if(IsPlayerConnected(giveplayerid))
-            {
-                if(giveplayerid != INVALID_PLAYER_ID)
-                {
-                    if(PlayerInfo[giveplayerid][pJob] == 2)
-                    {
-                        if(kaska[playerid] < 20000) return sendErrorMessage(playerid, "Koszt wydania pozwolenia prawniczego to $10 000. Nie masz tyle!");
-                        GetPlayerName(giveplayerid, giveplayer, sizeof(giveplayer));
-                        GetPlayerName(playerid, sendername, sizeof(sendername));
-                        format(string, sizeof(string), "* Da³eœ zgodê %s na uwolnienie wiêŸnia z celi. Tracisz $10 000 z portfela", giveplayer);
-                        SendClientMessage(playerid, COLOR_LIGHTBLUE,string);
-                        format(string, sizeof(string), "* Policjant %s da³ ci zgodê na uwolnienie wiêŸnia z celi. (wpisz /uwolnij)", sendername);
-                        SendClientMessage(giveplayerid, COLOR_LIGHTBLUE,string);
-                        format(string, sizeof(string), "* %s da³ zgodê na uwolnienie wiêŸnia prawnikowi %s.", sendername, giveplayer);
-                        SendRadioMessage(1, COLOR_PANICRED, string);
-                        SendRadioMessage(2, COLOR_PANICRED, string);
-                        SendRadioMessage(3, COLOR_PANICRED, string);
-                        ZabierzKase(playerid, 20000);
-                        Sejf_Add(PlayerInfo[playerid][pMember], 10000);
-                        ApprovedLawyer[giveplayerid] = 1;
-                        return 1;
-                    }
-                }
-            }
-            return 1;
-        }
-        else
-        {
-            SendClientMessage(playerid, COLOR_GREY, "B³¹d! (Nie jesteœ policjantem / Gracz nie jest prawnikiem / Z³e ID)");
-            return 1;
-        } */
-    
-    
-    }
     else if(strcmp(x_job, "uwolnienie", true) == 0 || strcmp(x_job, "wolnosc", true) == 0)
     {
         new money = OfferPrice[playerid];
-        //SetPVarInt(playerid, "idPrawnika", playerid);
         if(kaska[playerid] >= money)
         {
             if(OfferPlayer[playerid] == -1)

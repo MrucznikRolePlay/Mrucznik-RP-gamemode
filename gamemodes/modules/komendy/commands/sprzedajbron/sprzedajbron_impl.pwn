@@ -23,49 +23,6 @@
 //
 
 
-enum eGunInfo {
-    GunName[16],
-    GunSkill,
-    GunId,
-    GunSlot,
-    GunAmmo,
-    GunMaterialsCost,
-    GunContrabandCost
-};
-new GunInfo[][eGunInfo] = {
-    // name,    skill,  gunid,  slot,   ammo,   materials, contraband
-    // broñ bia³a
-    {"katana",      1,      8,      1,      1,      100,        0},
-    {"pila",        4,      9,      1,      1,      1000,       20},
-    {"noz",         5,      4,      1,      1,      100,        100},
-    // pistolety
-    {"pistolety",   1,      22,     2,      200,    75,         0},
-    {"sdpistol",    2,      23,     2,      114,    125,        0},
-    {"eagle",       3,      24,     2,      107,    200,        0},
-    // strzelby
-    {"shotgun",     1,      25,     3,      50,     125,        0},
-    {"spas12",      4,      27,     3,      57,     1500,       0},
-    {"obrzyn",      4,      26,     3,      100,    1500,       35},
-    // pistolety maszynowe
-    {"mp5",         2,      29,     4,      700,    225,        0},
-    {"tec9",        3,      32,     4,      750,    875,        20},
-    {"uzi",         4,      28,     4,      750,    900,        15},
-    // karabiny
-    {"ak47",        3,      30,     5,      550,    650,        1},
-    {"m4",          4,      31,     5,      550,    700,        1},
-    // karabiny wyborowe
-    {"rifle",       3,      33,     6,      51,     325,        0},
-    {"sniper",      4,      34,     6,      51,     1000,       1},
-    // bronie specjalne
-    {"ogniomiotacz",5,      37,     7,      200,    10000,      50},
-    {"rpg",         5,      35,     7,      10,     15000,      200},
-    {"minigun",     5,      38,     7,      100,    50000,      1000},
-    // ³adunki wybuchowe
-    {"molotov",     3,      18,     8,      10,     2500,       25},
-    {"granaty",     4,      16,     8,      10,     2500,       35},
-    {"c4",          5,      39,     8,      10,     2500,       50}
-};
-
 //------------------<[ Implementacja: ]>-------------------
 command_sprzedajbron_Impl(playerid, params[256])
 {

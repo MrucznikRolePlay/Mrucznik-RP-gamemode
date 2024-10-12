@@ -28,4 +28,6 @@
 #define D_GSPANEL_BRONIE_SET 20125
 #define D_GSPANEL_MATS 20126
 
+#define GUNSHOP_FIRST_ID 11
+
 //end
