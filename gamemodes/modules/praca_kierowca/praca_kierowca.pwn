@@ -327,7 +327,7 @@ GiveMoneyForBusStop(playerid, route, finish=false)
 
 GiveTaxiBonusForUniquePlayer(playerid, clientid)
 {
-	if(PlayerInfo[clientid] <= 1)
+	if(PlayerInfo[clientid][pLevel] <= 1)
 	{
 		MruMessageBadInfo(playerid, "Niestety, nie dostaniesz bonusu za tego gracza - ma za niski level (potrzeba minimum 2).");
 		return;
