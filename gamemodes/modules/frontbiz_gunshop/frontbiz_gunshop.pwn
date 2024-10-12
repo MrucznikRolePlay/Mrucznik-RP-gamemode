@@ -72,4 +72,13 @@ GunShopPanel_Bronie(playerid)
     ShowPlayerDialogEx(playerid, D_GSPANEL_BRONIE, DIALOG_STYLE_TABLIST, "Panel gunshopu > Ceny broni", string, "Wybierz", "Wróæ");
 }
 
+GetGunIndex(gunid)
+{
+    for(new i; i<sizeof(GunInfo); i++)
+    {
+        if(GunInfo[i][GunId] == gunid) return i;
+    }
+    return -1;
+}
+
 //end

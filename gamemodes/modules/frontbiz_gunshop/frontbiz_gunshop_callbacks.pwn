@@ -59,11 +59,12 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			new gsid = GetPVarInt(playerid, "gspanel_gsid");
 			new gunid = DynamicGui_GetValue(playerid, listitem);
+			new gunIdx = GetGunIndex(gunid);
 			new gunName[32], caption[128], string[256];
 			GetWeaponName(gunid, gunName, 32);
 			format(caption, sizeof(caption), "Panel gunshopu > Ceny broni > %s", gunName);
 			format(string, sizeof(string), "Podaj now¹ cenê broni: %s\nTa kwota trafi do twojego sejfu za ka¿dy sprzedany egzemplarz.\nObecna cena: %d$, koszt wytworzenia broni: %d materia³ów", 
-				gunName, GS_BronCena[gsid][gunid], GunInfo[gunid][GunMaterialsCost] * 2);
+				gunName, GS_BronCena[gsid][gunid], GunInfo[gunIdx][GunMaterialsCost] * 2);
 			ShowPlayerDialogEx(playerid, D_GSPANEL_BRONIE_SET, DIALOG_STYLE_INPUT, caption, string, "Akceptuj", "Wróæ");
 			SetPVarInt(playerid, "gspanel_gunid", gunid);
 		} 
@@ -145,7 +146,8 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                     new gsid = GetPVarInt(playerid, "gunshop_gsid");
                     new gunid = GS_Guns[listitem - 1];
 					new gunPrice = GS_BronCena[gsid][gunid];
-					new matsPrice = GunInfo[gunid][GunMaterialsCost] * 2;
+					new gunIdx = GetGunIndex(gunid);
+					new matsPrice = GunInfo[gunIdx][GunMaterialsCost] * 2;
 					new org = FrontBusiness[bizId][Owner];
 					new weaponName[32];
 					GetWeaponName(gunid, weaponName);
@@ -164,14 +166,14 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						return 1;
 					}
 
-					if(Rodzina_Mats[org] < GunInfo[gunid][GunMaterialsCost] * 2)
+					if(Rodzina_Mats[org] < GunInfo[gunIdx][GunMaterialsCost] * 2)
 					{
 						MruMessageFail(playerid, "Gun Shop nie ma tyle materia³ów, by sprzedaæ Ci t¹ broñ.");
 						ShowBuyGunDialog(playerid);
 						return 1;
 					}
 
-					GivePlayerWeaponEx(playerid, gunid, GunInfo[gunid][GunAmmo], true);
+					GivePlayerWeaponEx(playerid, gunid, GunInfo[gunIdx][GunAmmo], true);
 
 					ZabierzKase(playerid, gunPrice);
 					SejfR_Add(org, gunPrice);

@@ -62,19 +62,20 @@ ShowBuyGunDialog(playerid)
     for(new i; i<sizeof(GS_Guns); i++)
     {
         new gunid = GS_Guns[i];
+        new gunIdx = GetGunIndex(gunid);
         new gunName[32];
         GetWeaponName(gunid, gunName);
         if(GS_BronCena[gsid][gunid] <= 0)
         {
             strcat(string, sprintf(INCOLOR_RED"%s\tnie sprzedajemy\n", gunName));
         }
-        else if(Rodzina_Mats[org] < GunInfo[gunid][GunMaterialsCost] * 2)
+        else if(Rodzina_Mats[org] < GunInfo[gunIdx][GunMaterialsCost] * 2)
         {
             strcat(string, sprintf(INCOLOR_RED"%s\tbrak materia³ów\n", gunName));
         }
         else
         {
-            strcat(string, sprintf(INCOLOR_DIALOG"%s\t%d\t%d\n", gunName, GunInfo[gunid][GunAmmo], GS_BronCena[gsid][gunid]));
+            strcat(string, sprintf(INCOLOR_DIALOG"%s\t%d\t%d\n", gunName, GunInfo[gunIdx][GunAmmo], GS_BronCena[gsid][gunid]));
         }
     }
 
