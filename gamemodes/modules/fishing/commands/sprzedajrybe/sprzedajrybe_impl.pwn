@@ -41,13 +41,6 @@ command_sprzedajrybe_Impl(playerid, fishid)
 		SendClientMessage(playerid, COLOR_WHITE, "Rybê mo¿esz sprzedaæ tylko w 24/7 lub restauracji posiadanej przez Twoj¹ organizacjê!");
 		return 1;
     }
-    if(FishGood[playerid] == 1)
-    {
-        SendPunishMessage(sprintf("AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport (ryby)", GetNickEx(playerid)), playerid);
-        Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: teleport (ryby)");
-        KickEx(playerid);
-        return 1;
-    }
 
     switch(fishid)
     {
@@ -107,8 +100,7 @@ SprzedajeRybe(playerid, fishid, isAtOwnRestaurant)
 	ClearFishID(playerid, fishid);
 	Fishes[playerid][pLastFish] = 0;
 	Fishes[playerid][pFishID] = 0;
-	FishGood[playerid] = 0;
-
+	
 	if(IsPlayerSick(playerid, FANATYK_WEDKARSTWA))
 	{
 		if(random(100) <= 5)

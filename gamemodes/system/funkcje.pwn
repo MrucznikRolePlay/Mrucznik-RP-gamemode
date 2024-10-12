@@ -108,11 +108,6 @@ RemovePlayerFromVehicleEx(playerid)
     RemovePlayerFromVehicle(playerid);
 }
 
-public Lowienie(playerid)
-{
-	FishGood[playerid] = 0;
-	return 1;
-}
 
 saveLegale(playerid) {
 	//LEGAL

@@ -2,8 +2,7 @@
 
 forward KomunikatTimer();
 forward SprzedajMatsTimer(playerid,giveplayerid);
-forward Naprawa(playerid);//
-forward Lowienie(playerid);
+forward Naprawa(playerid);
 
 forward PrepareKarting();
 forward PreparePaintball();

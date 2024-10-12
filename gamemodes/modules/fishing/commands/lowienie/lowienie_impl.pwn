@@ -111,9 +111,6 @@ command_lowienie_Impl(playerid)
             }
         }
         
-        SetTimerEx("Lowienie", 30000 ,0,"d",playerid);
-        FishGood[playerid] = 1;
-        
         if(Caught <= 0)
         {
             sendTipMessageEx(playerid, COLOR_GREY, "¯y³ka pêk³a!");

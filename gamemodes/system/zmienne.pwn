@@ -48,9 +48,7 @@ new cenaVIP = 80000;
 new kasjerkaWolna = 666;
 
 //sn
-new SN_ACCESS[MAX_PLAYERS]; 
-//FishGood
-new FishGood[MAX_PLAYERS];
+new SN_ACCESS[MAX_PLAYERS];
 //Sad
 new SadWinda[6] = {1,0,0,1,1,0};
 
