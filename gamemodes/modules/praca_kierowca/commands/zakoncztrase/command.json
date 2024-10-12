@@ -1,0 +1,9 @@
+{
+    "name": "zakoncztrase",
+    "description": "Koñczy trasê autobusow¹.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "06.04.2024"
+}

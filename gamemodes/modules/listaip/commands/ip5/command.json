@@ -1,19 +1,15 @@
 {
     "name": "ip5",
     "description": "Wyœwietlanie 5 ostatnich adresów IP, na których gra³ gracz pod danym nickiem.",
-    "permissions": [],
+    "permissions": ["everyone"],
     "author": "NikodemBanan",
     "aliases": [],
     "parameters": [
         {
-            "type": "player",
+            "type": "string",
+            "size": "32",
             "name": "giveplayer",
             "description": "Nick/ID"
-        },
-        {
-            "type": "bool",
-            "name": "isOffline",
-            "description": "Czy gracz offline"
         }
     ],
     "date": "20.03.2024"

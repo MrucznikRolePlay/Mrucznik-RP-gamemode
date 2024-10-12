@@ -1,0 +1,11 @@
+{
+    "name": "pracownicy",
+    "description": "Lista pracowników frakcji/organizacji w której jesteœ.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "czlonkowie"
+    ],
+    "parameters": [],
+    "date": "07.09.2024"
+}

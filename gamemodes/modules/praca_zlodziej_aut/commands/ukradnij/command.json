@@ -1,0 +1,9 @@
+{
+    "name": "ukradnij",
+    "description": "Komenda dla z³odzieja aut, umo¿liwiaj¹ca mu kradzie¿ pojazdu za pieni¹dze.",
+    "permissions": ["everyone"],
+    "author": "NikodemBanan",
+    "aliases": [],
+    "parameters": [],
+    "date": "13.02.2024"
+}

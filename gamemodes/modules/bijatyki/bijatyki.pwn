@@ -117,7 +117,7 @@ IsPobijInvalid(playerid, opponentid)
 		sendErrorMessage(playerid, "Nie mo¿esz uzywaæ tej komendy");
 		return 1;
 	}
-	if(IsPlayerInRangeOfPoint(playerid, 50.0, 1038.22924805,-1090.59741211,-67.52223969))
+	if(IsAtCasino(playerid))
 	{
 		SendClientMessage(playerid, COLOR_GRAD2, "Komenda nie dzia³a w kasynie!");
 		return 1;

@@ -1,0 +1,13 @@
+{
+    "name": "zlomuj",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "spawnuj",
+        "przemaluj",
+        "nauto"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

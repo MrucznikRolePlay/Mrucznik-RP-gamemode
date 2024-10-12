@@ -1,7 +1,7 @@
 {
     "name": "kill",
     "description": "Przenosi Twoj¹ rann¹ postaæ do szpitala.",
-    "permissions": [],
+    "permissions": ["everyone"],
     "author": "mrucznik",
     "aliases": [
         "smierc",

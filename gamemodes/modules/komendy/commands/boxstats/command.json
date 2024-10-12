@@ -1,0 +1,11 @@
+{
+    "name": "boxstats",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "boksstats"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

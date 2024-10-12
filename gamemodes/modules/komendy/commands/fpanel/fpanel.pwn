@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_fpanel()
 {
-    
+    new command = Command_GetID("fpanel");
 
     //aliases
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

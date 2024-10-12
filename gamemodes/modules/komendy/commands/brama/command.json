@@ -1,0 +1,11 @@
+{
+    "name": "brama",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "br"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

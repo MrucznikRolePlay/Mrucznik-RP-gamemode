@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zamknij_Impl(playerid)
 {
-    if(GetPlayerOrg(playerid) != 23)
+    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
     {
         sendTipMessage(playerid, "Komenda dostêpna tylko dla Gunshop Los Santos.");
         return 1;

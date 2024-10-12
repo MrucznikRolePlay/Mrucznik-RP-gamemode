@@ -1,0 +1,11 @@
+{
+    "name": "wezwijwoz",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "callcar"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

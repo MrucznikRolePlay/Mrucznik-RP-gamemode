@@ -1,0 +1,11 @@
+{
+    "name": "gangzone",
+    "description": "System wojen gangów.",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "06.09.2024"
+}

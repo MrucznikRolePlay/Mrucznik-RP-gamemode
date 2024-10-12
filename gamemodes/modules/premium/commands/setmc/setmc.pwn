@@ -56,7 +56,7 @@ YCMD:setmc(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, value;
-    if(sscanf(params, "rd", giveplayerid, value))
+    if(sscanf(params, "k<fix>d", giveplayerid, value))
     {
         sendTipMessage(playerid, "U¿yj /setmc [Nick/ID] [iloœæ mrucznik coinów] ");
         return 1;

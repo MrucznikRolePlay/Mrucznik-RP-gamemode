@@ -1,0 +1,16 @@
+{
+    "name": "orgs",
+    "description": "Pokazuje liste organizacji i ich pracowników.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": ["organizacje", "rodziny", "biznesy", "mafie", "gangi"],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "orgid",
+            "description": "id organizacji",
+            "defaultValue": "-1"
+        }
+    ],
+    "date": "06.09.2024"
+}

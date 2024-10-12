@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_sprzedajbiznes()
 {
-    
+    new command = Command_GetID("sprzedajbiznes");
 
     //aliases
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
@@ -55,7 +56,7 @@ YCMD:sprzedajbiznes(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, valueCost;
-    if(sscanf(params, "rd", giveplayerid, valueCost))
+    if(sscanf(params, "k<fix>d", giveplayerid, valueCost))
     {
         sendTipMessage(playerid, "U¿yj /sprzedajbiznes [ID/NICK] [Cena] ");
         return 1;

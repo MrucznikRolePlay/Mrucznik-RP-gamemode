@@ -1,0 +1,17 @@
+{
+    "name": "zderzaki",
+    "description": "Montowanie zderzaków na samochodzie.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "zderzak"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "01.04.2024"
+}

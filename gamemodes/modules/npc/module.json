@@ -1,0 +1,11 @@
+{
+    "name": "npc",
+    "description": "Obs³uga botów NPC.",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "30.08.2024"
+}

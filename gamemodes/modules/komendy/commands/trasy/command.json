@@ -1,0 +1,11 @@
+{
+    "name": "trasy",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "wyscigi"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -1,0 +1,11 @@
+{
+    "name": "kostka2",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "dice"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

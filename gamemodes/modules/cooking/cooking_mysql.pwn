@@ -62,14 +62,14 @@ MruMySQL_CookedMealsDialog(playerid)
 			}
 			if(strlen(string) < 2)
 			{
-				sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
+				sendErrorMessage(playerid, "Nie masz nic do zjedzenia / nie jesteœ w miejscu, gdzie mo¿esz coœ zjeœæ.");
 				return 1;
 			}
 			string[strlen(string)-1] = '\0';
 		}
 		else
 		{
-			sendErrorMessage(playerid, "Nie masz nic do zjedzenia.");
+			sendErrorMessage(playerid, "Nie masz nic do zjedzenia / nie jesteœ w miejscu, gdzie mo¿esz coœ zjeœæ.");
 			return 1;
 		}
 		mysql_free_result();

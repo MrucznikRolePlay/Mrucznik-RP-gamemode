@@ -1,0 +1,11 @@
+{
+    "name": "wyloguj",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "logout"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

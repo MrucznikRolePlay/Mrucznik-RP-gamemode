@@ -1,0 +1,44 @@
+//-----------------------------------------------<< Defines >>-----------------------------------------------//
+//                                              praca_przemytnik                                             //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: mrucznik
+// Data utworzenia: 31.03.2024
+
+//
+
+//------------------<[ Makra: ]>-------------------
+//------------------<[ Define: ]>-------------------
+#define SMUGGLING_ACTIONS_PER_DAY 10
+#define SMUGGLING_COST 1_000_000
+#define SMUGGLING_MAX_TIME (3_600_000*4)
+
+#define CHECKPOINT_RADIUS 12.0
+#define CHECKPOINT_PER_DROP 3
+#define PACKAGES_TO_DROP 5
+#define SMALL_PACKAGE_CONTRABAND_AMMOUNT 1
+#define BIG_PACKAGE_CONTRABAND_AMMOUNT 200
+#define MAX_SMUGGLING_CHECKPOINTS (PACKAGES_TO_DROP*CHECKPOINT_PER_DROP)
+
+#define DESTROY_CONTRABAND_REWARD_PER_PACKAGE 500
+
+#define SMUGGLING_ITEM_UNKNOWN 0
+#define SMUGGLING_ITEM_ARMOR 1
+#define SMUGGLING_ITEM_JETPACK 2
+#define SMUGGLING_ITEM_JETPACK_GAS 3
+
+//end

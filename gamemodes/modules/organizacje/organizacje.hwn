@@ -22,12 +22,140 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-//-----------------<[ Zmienne: ]>-------------------
+enum eOrg {
+    o_Type,
+    o_Color,
+    Float:o_Spawn[4],
+    o_Int,
+    o_VW,
+    o_LeaderStake,
+    o_Name[MAX_ORG_NAME_LENGTH],
+    o_Motto[128],
+};
+new OrgInfo[MAX_ORG][eOrg];
 
-//SEKTA
-new SektaKey[MAX_PLAYERS];
-new SektaUwieziony[MAX_PLAYERS];
+new AvailableOrgSkins[][eSkinInfo] = {
+     // Skiny dla organizacji
+    {86, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},           // Ryder https://sampwiki.blast.hk/wiki/Image:Skin_86.png
+    {102, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Ballas https://sampwiki.blast.hk/wiki/Image:Skin_102.png
+    {103, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Ballas https://sampwiki.blast.hk/wiki/Image:Skin_103.png
+    {104, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Ballas https://sampwiki.blast.hk/wiki/Image:Skin_104.png
+    {105, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Grove https://sampwiki.blast.hk/wiki/Image:Skin_105.png
+    {106, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Grove https://sampwiki.blast.hk/wiki/Image:Skin_106.png
+    {107, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Grove https://sampwiki.blast.hk/wiki/Image:Skin_107.png
+    {108, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_OTHER},          // Vagos https://sampwiki.blast.hk/wiki/Image:Skin_108.png
+    {109, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_OTHER},          // Vagos https://sampwiki.blast.hk/wiki/Image:Skin_109.png
+    {110, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_OTHER},          // Vagos https://sampwiki.blast.hk/wiki/Image:Skin_110.png
+    {111, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Mafia Russia https://sampwiki.blast.hk/wiki/Image:Skin_111.png
+    {112, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Mafia Russia https://sampwiki.blast.hk/wiki/Image:Skin_112.png
+    {113, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Mafia Russia https://sampwiki.blast.hk/wiki/Image:Skin_113.png
+    {114, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Varios https://sampwiki.blast.hk/wiki/Image:Skin_114.png
+    {115, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Varios https://sampwiki.blast.hk/wiki/Image:Skin_115.png
+    {116, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Varios https://sampwiki.blast.hk/wiki/Image:Skin_116.png
+    {117, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Triad https://sampwiki.blast.hk/wiki/Image:Skin_117.png
+    {118, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Triad https://sampwiki.blast.hk/wiki/Image:Skin_118.png
+    {119, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_OTHER},          // Sindaco https://sampwiki.blast.hk/wiki/Image:Skin_119.png
+    {120, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Triad Boss https://sampwiki.blast.hk/wiki/Image:Skin_120.png
+    {121, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Da Nang Boy https://sampwiki.blast.hk/wiki/Image:Skin_121.png
+    {122, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Da Nang Boy https://sampwiki.blast.hk/wiki/Image:Skin_122.png
+    {123, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Da Nang Boy https://sampwiki.blast.hk/wiki/Image:Skin_123.png
+    {124, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Mafia https://sampwiki.blast.hk/wiki/Image:Skin_124.png
+    {125, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Mafia https://sampwiki.blast.hk/wiki/Image:Skin_125.png
+    {126, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Mafia https://sampwiki.blast.hk/wiki/Image:Skin_126.png
+    {147, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Businnessman https://sampwiki.blast.hk/wiki/Image:Skin_128.png
+    {148, SKIN_TYPE_ORG, 100000, 5, SKIN_WOMEN, SKIN_WHITE},        // Businnesswoman https://sampwiki.blast.hk/wiki/Image:Skin_128.png
+    {149, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Big Smoke https://sampwiki.blast.hk/wiki/Image:Skin_149.png
+    {15, SKIN_TYPE_ORG, 100000, 5, SKIN_WOMEN, SKIN_WHITE},        // Businnesswoman https://sampwiki.blast.hk/wiki/Image:Skin_150.png
+    {163, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Bouncer https://sampwiki.blast.hk/wiki/Image:Skin_163.png
+    {164, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Bouncer https://sampwiki.blast.hk/wiki/Image:Skin_164.png
+    {165, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Agent MIB https://sampwiki.blast.hk/wiki/Image:Skin_165.png
+    {166, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Agent MIB https://sampwiki.blast.hk/wiki/Image:Skin_166.png
+    {173, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_OTHER},          // Rifa https://sampwiki.blast.hk/wiki/Image:Skin_173.png
+    {174, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_OTHER},          // Rifa https://sampwiki.blast.hk/wiki/Image:Skin_174.png
+    {175, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_OTHER},          // Rifa https://sampwiki.blast.hk/wiki/Image:Skin_175.png
+    {186, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Businessman https://sampwiki.blast.hk/wiki/Image:Skin_186.png
+    {187, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Businessman https://sampwiki.blast.hk/wiki/Image:Skin_187.png
+    {208, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Suzie https://sampwiki.blast.hk/wiki/Image:Skin_208.png
+    {211, SKIN_TYPE_ORG, 100000, 5, SKIN_WOMEN, SKIN_WHITE},        // Shop staff https://sampwiki.blast.hk/wiki/Image:Skin_211.png
+    {214, SKIN_TYPE_ORG, 100000, 5, SKIN_WOMEN, SKIN_BLACK},        // Waintress https://sampwiki.blast.hk/wiki/Image:Skin_214.png
+    {217, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Shop staff https://sampwiki.blast.hk/wiki/Image:Skin_217.png
+    {224, SKIN_TYPE_ORG, 100000, 5, SKIN_WOMEN, SKIN_YELLOW},       // Women Triad https://sampwiki.blast.hk/wiki/Image:Skin_224.png
+    {225, SKIN_TYPE_ORG, 100000, 5, SKIN_WOMEN, SKIN_YELLOW},       // Women Triad https://sampwiki.blast.hk/wiki/Image:Skin_225.png
+    {227, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Businnessman https://sampwiki.blast.hk/wiki/Image:Skin_227.png
+    {228, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Businnessman https://sampwiki.blast.hk/wiki/Image:Skin_228.png
+    {263, SKIN_TYPE_ORG, 100000, 5, SKIN_WOMEN, SKIN_YELLOW},       // Women Triad https://sampwiki.blast.hk/wiki/Image:Skin_263.png
+    {269, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Grove https://sampwiki.blast.hk/wiki/Image:Skin_269.png
+    {270, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Grove https://sampwiki.blast.hk/wiki/Image:Skin_270.png
+    {271, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Grove https://sampwiki.blast.hk/wiki/Image:Skin_271.png
+    {272, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Mafia https://sampwiki.blast.hk/wiki/Image:Skin_272.png
+    {273, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Mafia https://sampwiki.blast.hk/wiki/Image:Skin_273.png
+    {294, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Triad https://sampwiki.blast.hk/wiki/Image:Skin_294.png
+    {20307, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_BLACK},       // Pink Grove - custom from resource server 
+    {20311, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Businnessman - custom from resource server 
+    {20316, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_YELLOW},      // Triad - custom from resource server
+    {20401, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20408, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20424, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20432, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20433, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20433, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20434, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20526, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20527, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20528, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20529, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20531, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20532, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20533, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20534, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20535, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20536, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20537, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20538, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20539, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20540, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20541, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20542, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20543, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20544, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20545, SKIN_TYPE_ORG, 150000, 8, SKIN_WOMEN, SKIN_WHITE},     // Bikers Gang - custom from resource server
+    {20546, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20547, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20548, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20549, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20550, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20558, SKIN_TYPE_ORG, 150000, 8, SKIN_WOMEN, SKIN_WHITE},     // Bikers Gang - custom from resource server
+    {20594, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_OTHER},       // Skinhead Gang - custom from resource server
+    {20601, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20602, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20610, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Mafia - custom from resource server
+    {20611, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Businnessman - custom from resource server 
+    {20617, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_OTHER},       // Gang - custom from resource server
+    {20618, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Gang - custom from resource server
+    {20619, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Skinhead Gang - custom from resource server
+    {20638, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20639, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20640, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20641, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20642, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20642, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20642, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20642, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20642, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Allah Akbar - custom from resource server
+    {20664, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Robbery in mask - custom from resource server
+    {20679, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20680, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Bikers Gang - custom from resource server
+    {20683, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Chef restaurant - custom from resource server
+    {20830, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Robbery in mask - custom from resource server
+    {20831, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Robbery in mask - custom from resource server
+    {20832, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Robbery in mask - custom from resource server
+    {20837, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE}       // worker restaurant - custom from resource server
+};
+
+//-----------------<[ Zmienne: ]>-------------------
+new OrgRank[MAX_ORG][MAX_RANG][MAX_RANG_LEN];
+new OrgSkins[MAX_ORG][MAX_SKIN_SELECT];
+
 //------------------<[ Forwardy: ]>--------------------
-forward Float:GetDistanceBetweenPlayers(p1,p2);
 
 //end

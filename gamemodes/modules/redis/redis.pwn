@@ -41,8 +41,7 @@ ConnectToRedis()
 
 	Redis_Connect(host, port, password, RedisClient);
 
-	new mrucznikRedis;
-	Redis_GetInt(RedisClient, "server:mrucznik-redis", mrucznikRedis);
+	new mrucznikRedis = RedisGetInt("server:mrucznik-redis");
 	if(mrucznikRedis != 1)
 	{
 		printf("cannot connect to redis or redis key server:mrucznik-redis is not 1");
@@ -53,19 +52,99 @@ ConnectToRedis()
 	return;
 }
 
-Redis_IncrBy(const key[], value)
+stock RedisGetInt(const key[])
+{
+	new value = 0;
+	new status = Redis_GetInt(RedisClient, key, value);
+	if(status != 0)
+	{
+		return 0;
+	}
+	return value;
+}
+
+stock RedisIncrBy(const key[], value)
 {
 	new string[128];
 	format(string, sizeof(string), "INCRBY %s %d", key, value);
 	Redis_Command(RedisClient, string);
 }
 
+stock RedisDelete(const key[])
+{
+	new string[128];
+	format(string, sizeof(string), "DEL %s", key);
+	Redis_Command(RedisClient, string);
+}
+
 // Expires key, default ttl = 1 month.
-Redis_Expire(const key[], ttl=2629800)
+stock RedisExpire(const key[], ttl=2629800)
 {
 	new string[128];
 	format(string, sizeof(string), "EXPIRE %s %d", key, ttl);
 	Redis_Command(RedisClient, string);
+}
+
+// ------------[ Redis with Cache ]------------
+// -------[ use when key is read often ]-------
+stock CRedis_GetInt(const key[], &value)
+{
+	if(MAP_contains_str(RedisCache_Int, key))
+	{
+		value = MAP_get_str_val(RedisCache_Int, key);
+		return;
+	}
+
+	value = RedisGetInt(key);
+	return value;
+}
+
+stock CRedis_GetFloat(const key[], &Float:value)
+{
+	if(MAP_contains_str(RedisCache_Float, key))
+	{
+		value = MAP_get_str_val(RedisCache_Float, key);
+		return;
+	}
+
+	return Redis_GetFloat(RedisClient, key, value);
+}
+
+stock CRedis_GetString(const key[], value[], len = sizeof(value))
+{
+	if(MAP_contains_str(RedisCache_String, key))
+	{
+		MAP_get_str_arr(RedisCache_Float, key, value, len);
+		return;
+	}
+
+	return Redis_GetString(RedisClient, key, value, len);
+}
+
+stock CRedis_SetInt(const key[], value)
+{
+	MAP_insert_str_val(RedisCache_Int, key, value);
+	return Redis_SetInt(RedisClient, key, value);
+}
+
+stock CRedis_SetFloat(const key[], Float:value)
+{
+	MAP_insert_str_val(RedisCache_Int, key, value);
+	return Redis_SetFloat(RedisClient, key, value);
+}
+
+stock CRedis_SetString(const key[], const value[], len = sizeof(value))
+{
+	MAP_insert_str_arr(RedisCache_Int, key, value, len);
+	return Redis_SetString(RedisClient, key, value);
+}
+
+stock CRedisIncrBy(const key[], value)
+{
+	new currentVal = MAP_get_str_val(RedisCache_Int, key);
+	new newVal = currentVal + value;
+	MAP_insert_str_val(RedisCache_Int, key, newVal);
+	return Redis_SetInt(RedisClient, key, newVal);
 }
 
 //end

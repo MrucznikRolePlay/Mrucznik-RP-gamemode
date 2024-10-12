@@ -80,9 +80,9 @@ maseczka_akceptuj(playerid)
 
 command_maseczka_Impl(playerid, giveplayerid, price)
 {
-	if ( !(IsAMedyk(playerid) && PlayerInfo[playerid][pRank] >= 1))
+	if (!IsAMedyk(playerid))
 	{
-		sendErrorMessage(playerid, "Nie masz 1 rangi lub nie jesteœ medykiem!");
+		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
         return 1;
 	}
     

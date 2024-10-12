@@ -16,12 +16,46 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Autor: Sandaï¿½
+// Autor: Sanda³
 // Data utworzenia: 01.02.2020
 
 //
 
 //------------------<[ Enumy: ]>--------------------
+new Float:IbizaKameryLA[12][3] = { {1946.757446, -2490.115966, 13.635937},
+								   {1933.881591, -2493.383544, 13.626562},
+								   {1903.059204, -2486.899902, 14.019104},
+								   {1902.456176, -2479.868896, 13.626562},
+								   {1899.978881, -2484.652343, 13.626562},
+								   {1746.502685, -2471.337158, 14.226562},
+								   {1538.020629, -2553.440185, 13.588956},
+								   {1538.020629, -2553.440185, 13.588956},
+								   {377.942779, -1823.872558, 7.835937},
+								   {402.687744, -1797.629028, 7.834552},
+								   {403.977600, -1797.482543, 7.828125},
+								   {329.497589, -1792.312377, 4.824112}
+}; //pozycja na któr¹ patrzy kamera
+new IbizaKoloryTelebim[] = { 0xFFFFFFFF, 0xFFff8400, 0xFF0f62d3, 0xFF0fd318, 0xFFfcff00};
+							//   bia³y		  pomarañcz   niebieski   zielony    ¿ó³ty
+
+
+new IbizaStream[][128] = {"", "http://listen.slotex.pl/7490.pls", "http://ts.avatat.pl:8000/listen.pls"};
+new  IbizaCzcionkiTelebim[][25] = {"Arial", "Verdana", "Courier New", "Comic Sans MS", "Tahoma" };
+new IbizaDrinkiNazwy[][20] = {	
+"Ibiza",
+"Godfather", 
+"Kamikaze",
+"A day at the Beach", 
+"Dry Martini",
+"Blue Lagoon",
+"Ballantine's",
+"Margherita",
+"Amaretto Cobbler",
+"Cuba Libre",
+"Casablanca",
+"Tequila Sunrise"
+};
+
 //-----------------<[ Zmienne: ]>-------------------
 new IbizaTicket[MAX_PLAYERS];
 //ibiza club
@@ -43,6 +77,57 @@ new ibizaSmoke1, ibizaSmoke2;
 new txt_ibiza_klub[512];
 new txt_ibiza_tickets[128];
 
+
+
+new IbizaStreamID = 1;
+new bool:IbizaStrobo = false;
+new IbizaStroboObiekty[28];
+new bool:IbizaRury = false;
+new IbizaRuryObiekty[4];
+new bool:IbizaDym = false;
+new IbizaDymObiekty[10];
+new IbizaKafle[4];
+new IbizaBilet;
+new bool:IbizaSwiatla = true;
+new IbizaBarierkiObiekty[3];
+new bool:IbizaZamek = true;
+new IbizaKanciapaObiekt;
+new bool:IbizaKanciapa = false;
+
+new IbizaPiasek[4];
+new bool:IbizaBrama[2] = {true, true};
+new IbizaBramaObiekty[2];
+new bool:IbizaBiuro = false;
+new bool:IbizaDach = false;
+new Text:TDIbiza[3];
+new IbizaKameryObiekty[12];
+new IbizaKameryVW[12] = {1,1,1,1,1,1,1,2,0,0,0,0};
+
+
+new IbizaDrinkiCeny[12];
+
+enum telebim{
+	tID,
+	tCzcionkaKolor,
+	tTekstAnim[128],
+	tSzybkosc,
+	tIndex,
+	tSize,
+	tFSize,
+	tBold,
+	tRuchomy,
+	tWRuchu,
+	tBackg,
+	tAli,
+	tTekst[128],
+	tCzcionka[25]
+};
+
+new Telebim[telebim];
+
 //------------------<[ Forwardy: ]>--------------------
+forward TelebimAnim(ile);
+forward Odmrozenie(playerid);
+forward FreezeVeh(vehicleid, ddriver, repeat);
 
 //end

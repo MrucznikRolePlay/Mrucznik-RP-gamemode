@@ -115,9 +115,9 @@ sprzedajneon_akceptuj(playerid)
 
 command_sprzedajneon_Impl(playerid, giveplayerid, commission)
 {
-    if(!IsAMechazordWarsztatowy(playerid)) 
+    if(!IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
     {
-        sendErrorMessage(playerid, "Nie jesteœ mechanikiem warsztatowym, nie mo¿esz sprzedawaæ neonów.");
+        sendErrorMessage(playerid, "Aby sprzedawaæ neony musisz byæ w organizacji, która ma przejêty biznes Pay N Spray.");
         return 1;
     }
 

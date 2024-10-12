@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zweryfikuj_Impl(playerid, giveplayerid)
 {
-    if(PlayerInfo[playerid][pAdmin] >= 1)
+    if(PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] == 10)
     {
         if(ALockdown_SearchTable(giveplayerid))
             return sendTipMessage(playerid, "Ten gracz otrzyma³ ju¿ weryfikacje!");

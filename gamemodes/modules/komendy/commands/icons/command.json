@@ -1,0 +1,12 @@
+{
+    "name": "icons",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "ikonki",
+        "ikony"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

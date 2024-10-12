@@ -71,7 +71,7 @@ stock PlayerConditionToNews(playerid)
 	{
 		return true; 
 	}
-	if(GetPLocal(playerid) == PLOCAL_ORG_SN)
+	if(GetPlayerLocal(playerid) == PLOCAL_ORG_SN)
 	{
 		return true; 
 	}
@@ -86,7 +86,7 @@ TalkOnNews(playerid, const text[])
 	{
 		if(IsPlayerConnected(i))
 		{
-		    if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)//TODO: Zmieniæ po stworzeniu modu³u TOGOWANIA
+		    if(!gNews[i] && PlayerPersonalization[i][PERS_AD] == 0)
 		    {
 				SendClientMessage(i, COLOR_NEWS, string);
 			}

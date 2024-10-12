@@ -57,7 +57,7 @@ YCMD:zaraz(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, disease[32];
-    if(sscanf(params, "rs[32]", giveplayerid, disease))
+    if(sscanf(params, "k<fix>s[32]", giveplayerid, disease))
     {
         sendTipMessage(playerid, "U¿yj /zaraz [Nick/ID] [choroba] ");
         return 1;

@@ -360,9 +360,6 @@ public BlackoutEffect(playerid, disease, value)
 }
 public DeathEffect(playerid, disease, value)
 {
-	/*ChatMe(playerid, "umar³ na skutek choroby.");
-	NadajBW(playerid, INJURY_TIME_DISEASES);
-	ZespawnujGraczaSzpitalBW(playerid);*/
 	ChatMe(playerid, "straci³ przytomnoœæ na skutek choroby");
 	NadajRanny(playerid, INJURY_TIME_DISEASES);
 	return 1;
@@ -409,6 +406,65 @@ timer LoweringHP[500](playerid, uid, hpLoss, bool:death, bool:freeze)
 	SetPlayerHealth(playerid, hp-1);
 
 	defer LoweringHP(playerid, uid, hpLoss-1, death, freeze);
+}
+
+timer LoweringArmor[500](playerid, uid, armorLoss)
+{
+	if(!IsPlayerConnected(playerid) || uid != PlayerInfo[playerid][pUID]) 
+		return;
+
+	if(armorLoss <= 0) 
+	{
+		return;
+	}
+
+	new Float:armor;
+	GetPlayerArmour(playerid, armor);
+	if(armor <= 0.0)
+	{
+		return;
+	}
+	SetPlayerArmour(playerid, armor-1);
+
+	defer LoweringArmor(playerid, uid, armorLoss-1);
+}
+
+timer AddingHP[500](playerid, uid, hpBuff)
+{
+	if(!IsPlayerConnected(playerid) || uid != PlayerInfo[playerid][pUID]) 
+		return;
+
+	if(hpBuff <= 0)
+		return;
+
+	new Float:hp;
+	GetPlayerHealth(playerid, hp);
+	if(hp >= 100)
+	{
+		return;
+	}
+
+	SetPlayerHealth(playerid, hp+1);
+	defer AddingHP(playerid, uid, hpBuff-1);
+}
+
+timer AddingArmor[500](playerid, uid, armorBuff)
+{
+	if(!IsPlayerConnected(playerid) || uid != PlayerInfo[playerid][pUID]) 
+		return;
+
+	if(armorBuff <= 0)
+		return;
+
+	new Float:armor;
+	GetPlayerArmour(playerid, armor);
+	if(armor >= 100)
+	{
+		return;
+	}
+
+	SetPlayerArmour(playerid, armor+1);
+	defer AddingArmor(playerid, uid, armorBuff-1);
 }
 
 timer HallucinationsOff[60000](playerid)
@@ -474,6 +530,98 @@ public UpuscRybe(playerid, disease, value)
 timer DestroyRyba[600000](rybaid)
 {
 	DestroyDynamicObject(rybaid);
+}
+
+// Pod wp³ywem narkotyku
+public NarkotycznyBuff(playerid, disease, value)
+{
+	new Float:hp, Float:armor;
+	GetPlayerHealth(playerid, hp);
+	GetPlayerArmour(playerid, armor);
+	if(hp >= 99.9 && armor >= 99.9) {
+		return;
+	}
+
+	if(random(100) < (10 - PlayerInfo[playerid][pDrugPerk])) 
+	{
+		MruMessageBadInfo(playerid, "Narkotyk przesta³ dzia³aæ. Otrzymujesz efekt odstawienia.");
+		CurePlayer(playerid, DRUG_GOOD);
+		InfectPlayer(playerid, DRUG_BAD);
+		return;
+	}
+
+	if(IsPlayerSick(playerid, DRUG_BAD))
+		return;
+	
+	PlayerPlaySound(playerid, 5202, 0.0, 0.0, 0.0);
+	ChatMe(playerid, "regeneruje siê dziêki narkotykom zawartym w jego organizmie.");
+
+	new buff = 10;
+	if(IsPlayerSick(playerid, DRUG_ADDICT))
+	{
+		buff /= 2;
+	}
+	defer AddingHP(playerid, PlayerInfo[playerid][pUID], buff);
+	defer AddingArmor(playerid, PlayerInfo[playerid][pUID], buff);
+}
+
+// Efekt odstawienia narkotyku
+public NarkotycznyDebuff(playerid, disease, value)
+{
+	new cureChance = (10 + 5 * PlayerInfo[playerid][pDrugPerk]);
+	if(IsPlayerSick(playerid, DRUG_ADDICT))
+	{
+		cureChance = 5 + 2 * PlayerInfo[playerid][pDrugPerk];
+		
+		if(random(5) == 0)
+		{
+			ApplyAnimation(playerid, "CRACK", "crckdeth2", 4.1, 0, 1, 1, 1, 1, 1);
+		}
+	}
+
+	if(random(100) < cureChance)
+	{
+		MruMessageGoodInfo(playerid, "Ju¿ nie jesteœ na narkotykowym g³odzie, Twoja postaæ funkcjonuje normalnie.");
+		CurePlayer(playerid, DRUG_BAD);
+		return;
+	}
+
+	if(IsPlayerSick(playerid, DRUG_GOOD))
+		return;
+		
+	PlayerPlaySound(playerid, 5204, 0.0, 0.0, 0.0);
+	ChatMe(playerid, "trzêsie siê i czuje niebywa³y g³ód, by za¿yæ kolejn¹ dawkê narkotyku.");
+
+	new Float:hp;
+	GetPlayerHealth(playerid, hp);
+	if(hp >= 50.0) {
+		defer LoweringHP(playerid, PlayerInfo[playerid][pUID], 10, false, false);
+	}
+	defer LoweringArmor(playerid, PlayerInfo[playerid][pUID], 10);
+}
+
+// Efekt uzale¿nienia
+public Uzalezniony(playerid, disease, value)
+{
+	if(!IsPlayerSick(playerid, DRUG_GOOD) && !IsPlayerSick(playerid, DRUG_BAD))
+	{
+		ChatMe(playerid, "walczy z uzale¿nieniem od narkotyku, ale kosztuje go to wiele wysi³ku.");
+
+		new cureChance = 1 + 1 * PlayerInfo[playerid][pDrugPerk];
+		if(random(100) < cureChance)
+		{
+			MruMessageGoodInfo(playerid, "Ju¿ nie jesteœ uzale¿niony od narkotyków, Twoja postaæ funkcjonuje normalnie.");
+			CurePlayer(playerid, DRUG_ADDICT);
+			return;
+		}
+
+		new Float:hp;
+		GetPlayerHealth(playerid, hp);
+		if(hp >= 50.0) {
+			defer LoweringHP(playerid, PlayerInfo[playerid][pUID], 5, false, false);
+		}
+		defer LoweringArmor(playerid, PlayerInfo[playerid][pUID], 5);
+	}
 }
 
 

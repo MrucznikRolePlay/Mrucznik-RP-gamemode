@@ -103,6 +103,8 @@
 #define KOLOR_BEZOWY 0xFFFFA6FF
 #define KOLOR_BORDOWY 0x800000FF
 #define COLOR_GOLD 0xFCAD43FF
+#define COLOR_VIOLET 0x9955DEEE
+
 #define ADMIN 				"{FF6A6A}"
 #define MAPA 				"{88FFFF}"
 #define AC 					"{FF80C0}"
@@ -138,7 +140,7 @@
 //Podstawowe kolory:
 #define INCOLOR_WHITE		"{FFFFFF}"
 #define INCOLOR_BLACK		"{000000}"
-#define INCOLOR_GREY		"{808080}"
+#define INCOLOR_GREY		"{AFAFAF}"
 #define INCOLOR_LIGHTGREY	"{A0A0A0}"
 #define INCOLOR_DARKGREY	"{606060}"
 #define INCOLOR_SILVER		"{C0C0C0}"

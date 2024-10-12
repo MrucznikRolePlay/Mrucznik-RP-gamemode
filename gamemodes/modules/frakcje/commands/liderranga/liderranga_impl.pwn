@@ -31,7 +31,7 @@ command_liderranga_Impl(playerid, rank, rawRankName[32])
     if(PlayerInfo[playerid][pLider] > 0) {
         type = 0;
         orgId = PlayerInfo[playerid][pLider];
-    } else if(GetPlayerOrg(playerid) > 0 && gPlayerOrgLeader[playerid]){
+    } else if(GetPlayerOrg(playerid) > 0 && IsPlayerOrgLeader(playerid)){
         type = 1;
         orgId = GetPlayerOrg(playerid);
     } else {
@@ -64,16 +64,16 @@ command_liderranga_Impl(playerid, rank, rawRankName[32])
     {
         // delete rank
         if(type == 0) strdel(FracRang[orgId][rank], 0, MAX_RANG_LEN);
-        else if(type == 1) strdel(FamRang[orgId][rank], 0, MAX_RANG_LEN);
+        else if(type == 1) strdel(OrgRank[orgId][rank], 0, MAX_RANG_LEN);
     }
     else
     {
         // edit rank
         if(type == 0) format(FracRang[orgId][rank], MAX_RANG_LEN, "%s", rankName);
-        else if(type == 1) format(FamRang[orgId][rank], MAX_RANG_LEN, "%s", rankName);
+        else if(type == 1) format(OrgRank[orgId][rank], MAX_RANG_LEN, "%s", rankName);
     }
     EDIT_SaveRangs(type, orgId);
-    SendClientMessage(playerid, COLOR_PINK, "Ranga zmieniona!");
+    MruMessageGoodInfo(playerid, "Ranga zmieniona!");
     command_liderranga_showRank(playerid, type, orgId, rank);
     return 1;
 }
@@ -82,7 +82,7 @@ command_liderranga_showRank(playerid, type, orgId, rank)
 {
     new string[128];
     if(type == 0) format(string, sizeof(string), "Aktualna ranga %d: %s", rank, FracRang[orgId][rank]);
-    else if(type == 1) format(string, sizeof(string), "Aktualna ranga %d: %s", rank, FamRang[orgId][rank]);
+    else if(type == 1) format(string, sizeof(string), "Aktualna ranga %d: %s", rank, OrgRank[orgId][rank]);
     SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
     return 1;
 }

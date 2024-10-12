@@ -1,0 +1,14 @@
+{
+    "name": "wk",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "wyrzuckluczyki",
+        "wywalklucze",
+        "wywalkluczyki",
+        "wyrzucklucze"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

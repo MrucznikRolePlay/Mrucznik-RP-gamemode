@@ -1,0 +1,11 @@
+{
+    "name": "togooc",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "zablokujooc"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

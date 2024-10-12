@@ -1,0 +1,11 @@
+{
+    "name": "kb",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "kontobankowe"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -1,0 +1,11 @@
+{
+    "name": "akceptujnaprawe",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "an"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

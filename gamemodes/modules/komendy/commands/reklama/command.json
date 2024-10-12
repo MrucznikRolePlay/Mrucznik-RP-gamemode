@@ -1,0 +1,11 @@
+{
+    "name": "reklama",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "ha"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

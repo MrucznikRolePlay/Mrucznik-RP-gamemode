@@ -25,5 +25,8 @@
 //-----------------<[ Zmienne: ]>-------------------
 new Redis:RedisClient;
 //------------------<[ Forwardy: ]>--------------------
+new Map:RedisCache_Int;
+new Map:RedisCache_Float;
+new Map:RedisCache_String;
 
 //end

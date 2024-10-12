@@ -47,7 +47,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandPerformed(playerid, cmdtext[], e_COMMAND_
 	if(success == COMMAND_OK) {
 		Log(commandLog, E_LOGLEVEL:DEBUG, "%s wykona³ komendê %s", GetPlayerLogName(playerid), cmdtext);
 	}
-	return COMMAND_OK;
+	return success;
 }
 
 /*
@@ -100,6 +100,7 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		case COMMAND_DENIED:
 		{
 			sendErrorMessage(playerid, "Nie jesteœ uprawniony do u¿ywania tej komendy.");
+			return COMMAND_DENIED;
 		}
 		case COMMAND_INVALID_INPUT:
 		{
@@ -112,18 +113,6 @@ public e_COMMAND_ERRORS:OnPlayerCommandReceived(playerid, cmdtext[], e_COMMAND_E
 		case COMMAND_UNDEFINED, COMMAND_HIDDEN:
 		{
 			sendErrorMessage(playerid, "Ta komenda nie istnieje. Wpisz /komendy aby zobaczyæ listê dostêpnych komend.");
-			/*if(PlayerInfo[playerid][pLevel] <= 1)//Anty slapper X_D - na LVL 1, pomo¿e troszkê ogarn¹æ sytuacje
-			{
-				if(IsPlayerInAnyVehicle(playerid))
-				{
-					if(GetPlayerVehicleSeat(playerid) != 0)
-					{
-						Player_RemoveFromVeh(playerid);
-						sendTipMessageEx(playerid, COLOR_GREEN, "[Mru-AC] Zosta³eœ wyrzucony z pojazdu z powodu podejrzeñ slappera!"); 
-					}
-				}
-			}
-			*/
 		}
 	}
 

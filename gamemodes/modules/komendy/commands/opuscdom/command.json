@@ -1,0 +1,12 @@
+{
+    "name": "opuscdom",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "zlomujdom",
+        "zlomujhouse"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

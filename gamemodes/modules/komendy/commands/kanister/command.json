@@ -1,0 +1,11 @@
+{
+    "name": "kanister",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "fillcar"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

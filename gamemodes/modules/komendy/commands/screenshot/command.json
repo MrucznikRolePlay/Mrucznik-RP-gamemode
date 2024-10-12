@@ -1,0 +1,11 @@
+{
+    "name": "screenshot",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "ss"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -1,0 +1,11 @@
+{
+    "name": "spoilery",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "spojlery"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

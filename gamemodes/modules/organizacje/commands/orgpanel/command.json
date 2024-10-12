@@ -1,0 +1,33 @@
+{
+    "name": "orgpanel",
+    "description": "Panel lidera organizacji przestêpczej.",
+    "command_tips": [
+        "Dostêpne akcje: nazwa / motto / kolor / spawn / przyjmij / zwolnij / ranga / pracownicy / stawka / oddaj / usun",
+        "Dostêpne akcje: stworzrange / pojazd / sejf / skin [kup/sprzedaj]"
+    ],
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "pr",
+        "panelrodziny",
+        "panelorganizacji",
+        "panelorg",
+        "rpanel"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "16",
+            "name": "action",
+            "description": "akcja"
+        },
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "parametry akcji",
+            "defaultValue": ""
+        }
+    ],
+    "date": "07.09.2024"
+}

@@ -170,7 +170,8 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			if(!PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372))
+			if(!PlayerToPoint(10.0, playerid, 2132.0371,-1149.7332,24.2372) && 
+				!PlayerToPoint(10.0, playerid, -5234.5198, 1403.6206, 7.5452)) // Vice City Sunshine Autos
 			{
 				_MruGracz(playerid, "Aby kupiæ pojazd unikatowy musisz znajdowaæ siê przy salonie aut.");
 				DialogPojazdyPremium(playerid);
@@ -189,7 +190,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			if(!IsAtClothShop(playerid))
 			{
-				_MruGracz(playerid, "Aby kupiæ unikatowy przedmiot, musisz znajdowaæ siê w sklepie z ubraniami.");
+				_MruGracz(playerid, "Aby kupiæ unikatowy przedmiot, musisz znajdowaæ siê w sklepie z ubraniami obok ikonki ubrania.");
 				DialogPrzedmioty(playerid);
 				return 1;
 			}
@@ -241,7 +242,7 @@ premium_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 
 			if(!IsAtClothShop(playerid))
 			{
-				_MruGracz(playerid, "Aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami.");
+				_MruGracz(playerid, "Aby kupiæ unikatowy skin, musisz znajdowaæ siê w sklepie z ubraniami obok ikonki ubrania.");
 				DialogSkiny(playerid);
 				return 1;
 			}

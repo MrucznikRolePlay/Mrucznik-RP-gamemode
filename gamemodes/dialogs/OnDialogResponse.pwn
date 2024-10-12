@@ -5,7 +5,7 @@ IsDialogProtected(dialogid)
 {
     switch(dialogid)
     {
-        case D_PANEL_KAR_NADAJ..D_PANEL_KAR_ZNAJDZ_INFO, D_PERM, D_CREATE_ORG_NAME, D_CREATE_ORG_UID, D_PANEL_CHECKPLAYER, D_EDIT_RANG_NAME, D_OPIS_UPDATE, D_VEHOPIS_UPDATE: return true;
+        case D_PANEL_KAR_NADAJ..D_PANEL_KAR_ZNAJDZ_INFO, D_PERM, D_PANEL_CHECKPLAYER, D_EDIT_RANG_NAME, D_OPIS_UPDATE, D_VEHOPIS_UPDATE: return true;
     }
     return false; //dodac dialogi z mysql
 }
@@ -18,7 +18,7 @@ CheckDialogId(playerid, dialogid)
         if(dialogid > 10000 && dialogid < 10100) return 0;
         GUIExit[playerid] = 0;
         SendClientMessage(playerid, COLOR_RED, "B≥Ídne ID GUI.");
-        Log(serverLog, WARNING, "B≥Ídne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid,iddialog[playerid]);
+        Log(serverLog, WARNING, "B≥Ídne ID dialogu dla [%d] aktualny [%d] przypisany %d", playerid, dialogid, iddialog[playerid]);
         return 0;
     }
 	return 1;
@@ -86,8 +86,36 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	if(biznesy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(attachemnts_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 	if(pojazdy_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(command_transport_OnDialogResp(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(cmd_organizacje_OnDialogResp(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(BuyOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+	if(SellOrgSkinDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
 
-	gunshoppanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext);
+	if(GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+
+	if(dialogid == 9145)
+	{
+		if(response)
+		{
+			new cena_naprawy = 7500;
+			if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_SPRAY))
+			{
+				cena_naprawy /= 2;
+			}
+			sendTipMessageFormat(playerid, "Zap≥aci≥eú $%d za wizytÍ w warsztacie", cena_naprawy);
+			ZabierzKase(playerid, cena_naprawy);
+			RepairVehicle(GetPlayerVehicleID(playerid));
+			naprawiony[playerid] = 1;
+			SetTimerEx("Naprawianie",10000,0,"d",playerid);
+
+			// give 50% of the money to the owner of the spray
+			new bizId = IsPlayerAtFrontBusinnesZone(playerid);
+			if(bizId != -1)
+			{
+				GenerateFrontBusinessIncome(bizId, cena_naprawy/2);
+			}
+		}
+	}
 
 	//2.7.5 - nadal nie 3.0
 	if(dialogid == DIALOGID_UNIFORM_FRAKCJA)
@@ -107,7 +135,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 			new string[64];
-			new skin = FAM_SKINS[GetPlayerOrg(playerid)][listitem];
+			new skin = OrgSkins[GetPlayerOrg(playerid)][listitem];
 			SetPlayerSkinEx(playerid, skin);
 			PlayerInfo[playerid][pUniform] = skin;
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak≥ada nowe.", GetNick(playerid));
@@ -605,13 +633,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			case 1:
 			{
+				ShowViceCityRadioDialog(playerid, DIALOGID_MUZYKA_VC, "Odtwarzacz mp3.");
+			}
+			case 2:
+			{
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
 				PlayAudioStreamForPlayer(playerid, RadioSANUno);
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 2:
+			case 3:
 			{
 			    if(!response) return 1;
 				PlayerFixRadio(playerid);
@@ -619,7 +651,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 3:
+			case 4:
 			{
 			    if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
@@ -627,7 +659,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 4:
+			case 5:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
@@ -635,7 +667,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 5:
+			case 6:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
@@ -643,7 +675,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 6:
+			case 7:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
@@ -651,20 +683,20 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 				return 1;
 			}
-			case 7:
+			case 8:
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
 				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18148/LepaStation/");
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			}
-			case 8:
+			case 9:
 			{
 				if(!response) return 1;
 				ShowPlayerDialogEx(playerid, DIALOGID_MUZYKA_URL, DIALOG_STYLE_INPUT, "W≥asne MP3", "Wprowadz adres URL do radia/piosenki.", "Start", "Anuluj");
 				return 1;
 			}
-			case 9:
+			case 10:
 			{
 			    if(!response) return 1;
 				GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~r~MP3 Off", 5000, 5);
@@ -693,6 +725,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			//}
 		}
 		return 1;
+	}
+	else if(dialogid == DIALOGID_MUZYKA_VC)
+	{
+		if(!response) return 1;
+		StopAudioStreamForPlayer(playerid);
+		PlayAudioStreamForPlayer(playerid, GetViceCityRadioStream(listitem));
+		SetPVarInt(playerid, "HaveAMp3Stream", 1);
 	}
     else if(dialogid == D_VEHOPIS)
     {
@@ -764,7 +803,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				SendClientMessage(playerid, COLOR_GRAD1, "Znaleziono niedozwolony kolor.");
 				return 1;
 			}
-			//todo: kolorowe opisy tylko dla KP
 			new startpos, endpos;
 			if(regex_search(givenString, "[^a-zA-Z0-9πÊÍ≥ÒÛúøü•∆ £—”åØè |\\/@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
 			{
@@ -1289,7 +1327,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 1:
 				{
-					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap0 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
@@ -1304,7 +1342,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 3:
 				{
-					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap2 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
@@ -1339,7 +1377,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
                 case 9:
 				{
-					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != 4)
+					if(LSMCWindap8 == 1 && PlayerInfo[playerid][pMember] != FRAC_ERS)
 					{
 						SendClientMessage(playerid, -1, "Poziom zablokowany.");
 						return 1;
@@ -1748,7 +1786,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			PlayerInfo[id_Lidera][pMember] = 0;
 			PlayerInfo[id_Lidera][pLider] = 0;
 			PlayerInfo[id_Lidera][pJob] = 0;
-			orgUnInvitePlayer(id_Lidera);
+			RemovePlayerFromOrg(id_Lidera);
 			MedicBill[id_Lidera] = 0;
 			SetPlayerSpawn(id_Lidera);
 			format(string, sizeof(string), "  Wyrzuci≥es %s z frakcji.", GetNick(id_Lidera));
@@ -1921,7 +1959,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 		}
 	}
-	else if(dialogid == iddialog[playerid]) //TODO: WTF
+	else if(dialogid == iddialog[playerid])
 	{
 		if(dialogid == 1)
 	    {
@@ -1946,6 +1984,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			lowcap[playerid] = 0;
 			return 1;
 	    }
+		if(dialogid == 9687)
+		{
+			if(!response)
+			{
+				SetPlayerSpawnPos(playerid);
+			}
+			return 1;
+		}
 	    //OnDialogResposne OKNA DMV
 		if(dialogid == 99)
 		{
@@ -1962,8 +2008,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			        {
 						if(PlayerInfo[playerid][pRank] == 0)
 						{
-							
-							
 							format(string, sizeof(string), "Urzπd Miasta Los Santos\n\n{0080FF}___Okienko %d___\n[%s: %s]\n{FF0000}[ID: %d]\n {00FFCC}Dowody Osobiste\n Karty WÍdkarskie\n Egzaminy Praktyczne", okienkoid+1,FracRang[11][PlayerInfo[playerid][pRank]],mojeimie,playerid);
 							UpdateDynamic3DTextLabelText(okienko[okienkoid], 0xFFFFFFFF, string);
 						}
@@ -2069,7 +2113,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPos(playerid,288.0914,-1609.7465,17.9994);
     	            	SetServerWeatherAndTime(playerid); 
-						SetPLocal(playerid, PLOCAL_DEFAULT);
+						SetPlayerLocal(playerid, PLOCAL_DEFAULT);
     	            }
 					case 1://wejscie do budynku
 					{
@@ -2084,7 +2128,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						TogglePlayerControllable(playerid, 0);
 						Wchodzenie(playerid); 
 						SetPlayerPos(playerid, 287.7476,-1609.9395,33.0723); 
-						SetPLocal(playerid, PLOCAL_DEFAULT);
+						SetPlayerLocal(playerid, PLOCAL_DEFAULT);
 					}
     	            case 2://recepcja
     	            {
@@ -2099,7 +2143,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPos(playerid, 292.0818,-1610.0715,124.7512);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone", 5000, 1);
-						SetPLocal(playerid, PLOCAL_ORG_SN);
+						SetPlayerLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 3://studia
     	            {
@@ -2114,7 +2158,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPos(playerid,296.9033,-1598.3610,117.0619);
 						SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
-						SetPLocal(playerid, PLOCAL_ORG_SN);
+						SetPlayerLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 4://Akademia
     	            {
@@ -2129,7 +2173,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPos(playerid,295.1328,-1609.4705,115.6818);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
-						SetPLocal(playerid, PLOCAL_ORG_SN);
+						SetPlayerLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 5:
     	            {
@@ -2144,7 +2188,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     				    SetPlayerPos(playerid,290.7577,-1604.3273,134.6113);
     				    SetInteriorTimeAndWeather(playerid); 
 						GameTextForPlayer(playerid, "~w~By~n~~r~Simeone & Rozalka", 5000, 1);
-						SetPLocal(playerid, PLOCAL_ORG_SN);
+						SetPlayerLocal(playerid, PLOCAL_ORG_SN);
     	            }
     	            case 6://dach
     	            {
@@ -2156,7 +2200,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	                SetPlayerVirtualWorld(playerid,0);
     	                SetPlayerPos(playerid,285.8397,-1596.4153,114.5687);
     	                SetServerWeatherAndTime(playerid);
-						SetPLocal(playerid, PLOCAL_DEFAULT);
+						SetPlayerLocal(playerid, PLOCAL_DEFAULT);
     	            }
     	        }
     	    }
@@ -2176,7 +2220,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
                         }
 						else if(ApprovedLawyer[playerid] == 1)
 						{
@@ -2185,7 +2228,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom -2]~n~~r~Wiezienie", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2203,7 +2245,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom -1]~n~~b~Parking Dolny", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
                         }
 						else
 						{
@@ -2221,7 +2262,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			                TogglePlayerControllable(playerid,0);
 							Wchodzenie(playerid);
 			                GameTextForPlayer(playerid, "~w~ [Poziom 0]~n~~b~Parking Gorny", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
                         }
 						else
 						{
@@ -2237,7 +2277,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						SetPlayerInterior(playerid,0);
 						Wchodzenie(playerid);
 		                GameTextForPlayer(playerid, "~w~ [Poziom 1]~n~~b~Recepcja i glowny hol", 5000, 1);
-						PlayerInfo[playerid][pInt] = 0;
 		            }
 		            case 4:
 		            {
@@ -2249,7 +2288,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 							GameTextForPlayer(playerid, "~w~ [Poziom 2]~n~~b~Biuro komendanta", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2267,7 +2305,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 							GameTextForPlayer(playerid, "~w~ [Poziom 3]~n~~b~Biura", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2285,7 +2322,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Konferencyjne", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2303,7 +2339,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerInterior(playerid,0);
 							Wchodzenie(playerid);
 							GameTextForPlayer(playerid, "~w~ [Poziom 4]~n~~b~Sale przesluchan", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2319,7 +2354,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							SetPlayerVirtualWorld(playerid,0);
 							SetPlayerInterior(playerid,0);
 							GameTextForPlayer(playerid, "~w~ [Poziom 7]~n~~b~Dach", 5000, 1);
-							PlayerInfo[playerid][pInt] = 0;
 						}
 						else
 						{
@@ -2601,7 +2635,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new string[256];
 				switch(listitem)
 	            {
-					case 0..19:
+					case 0..18:
 					{
 						ShowShopDialog(playerid);
 					}
@@ -2612,7 +2646,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						if (kaska[playerid] > 56500)
 						{
-							if(PlayerGames[playerid] >= 4)
+							new redisKey[64];
+							format(redisKey, sizeof(redisKey), "player:%d:zdrapka", PlayerInfo[playerid][pUID]);
+							if(RedisGetInt(redisKey) >= 4)
 							{
 								sendTipMessage(playerid, "Przepraszamy, zuøy≥eú wszystkie zdrapki na naszym magazynie!"); 
 								sendTipMessage(playerid, "SprÛbuj przyjúÊ za godzinÍ, moøe przyjdπ nowe."); 
@@ -2623,6 +2659,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							new winValue = true_random(100);
 							new playerValue = true_random(100);
 							ZabierzKase(playerid, 56500);
+							RedisIncrBy(redisKey, 1);
+							RedisExpire(redisKey, 3600); // 1hour expire time
 						    if(PlayerInfo[playerid][pTraderPerk] > 0)
 						    { 
 								if(playerValue > winValue && playerValue >= 85)
@@ -2649,7 +2687,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									format(string, sizeof(string), "Po zdrapaniu widaÊ napis ''Graj dalej'' ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 								}
-								PlayerGames[playerid]++; 
 							}
 							else
 							{
@@ -2676,7 +2713,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 									format(string, sizeof(string), "Po zdrapaniu widaÊ napis ''Graj dalej'' ((%s))", GetNick(playerid));
 									ProxDetector(20.0, playerid, string,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
 								}
-								PlayerGames[playerid]++; 
 							}
 							return 1;
 						}
@@ -2709,7 +2745,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							Log(payLog, INFO, "Gracz %s kupi≥ telefon o numerze %d [Poprzedni: %d]", 
 								GetPlayerLogName(playerid), randphone, PlayerInfo[playerid][pPnumber]
 							);
-							MRP_SetPlayerPhone(playerid, randphone);
+							PlayerInfo[playerid][pPnumber] = randphone;
+							MruMySQL_SetAccInt("PhoneNr", GetNickEx(playerid), randphone);
 							return 1;
 						}
 					}
@@ -2994,7 +3031,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							PlayerPlaySound(playerid, 1052, 0.0, 0.0, 0.0);
 							format(string, sizeof(string), "CB-RADIO Zakupione.");
 							SendClientMessage(playerid, COLOR_GRAD4, string);
-	     					SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /cb w pojezdzie aby rozawiwac z innymi");
+	     					SendClientMessage(playerid, COLOR_WHITE, "WSKAZ”WKA: Wpisz /cb w pojeüdzie, aby rozmawiaÊ z innymi.");
 							PlayerInfo[playerid][pCB] = 1;
 							return 1;
 						}
@@ -3991,7 +4028,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4007,7 +4044,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4023,7 +4060,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4039,7 +4076,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4055,7 +4092,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4071,7 +4108,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4087,7 +4124,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4103,7 +4140,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4119,7 +4156,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4135,7 +4172,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4151,7 +4188,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 2,5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa≥eú kontrakt z firmπ taksÛwkarsπ na 5h, idü po swojπ taryfÍ! (Aby siÍ zwolniÊ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4179,23 +4216,38 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	    {
 	        if(response)
 	        {
-				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WYJDè");
+				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
 	        }
 	    }
 	    else if(dialogid == 51)
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WYJDè");
+	            ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
 	        }
+			else
+			{
+				ShowPlayerDialogEx(playerid, 50, DIALOG_STYLE_MSGBOX, "DostÍpne malunki wozÛw","LovRider`s:\n(Savanna,Tornado,Blade)\n0- ØÛ≥te p≥omienie\n1- Czerwono øÛ≥te paski\n2- Czerwone p≥omienie z przodu\n3- WyczyúÊ malunek\n\nRemington\n\n0- Brπzowe hieroglify\n1- Czerwono øÛ≥te p≥omienie\n2- Niebieskie p≥omienie\n3- WyczyúÊ malunek\n\nSlamvan \n\n0- Czarny z rÛøowymi paskami\n1- Kolorowe p≥omyczki\n2- ØÛ≥te p≥omienie\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ aby zobaczyÊ dalszπ listÍ","DALEJ","WYJDè");
+			}
 	    }
 	    else if(dialogid == 52)
 	    {
 	        if(response)
 	        {
-	            ShowPlayerDialogEx(playerid,53,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Flash\n\n0- Czerwono øÛ≥ty z grafikπ\n1- Fioletowo czerwony z grafikπ\n2- Niebiesko fioletowy z grafikπ\n3- WyczyúÊ malunek\n\nBroadway\n\n0- ØÛ≥te p≥omienie na ca≥ym aucie\n1- Czerwone p≥omienie z przodu\n2 i 3- wyczyúÊ malunek\n\nCapmer\n\n0- Hipisowski malnuek\n1, 2 i 3 - wyszyúÊ malunek\n\n Tylko na wymienionych autach moøna namalowaÊ malunek.","WYJDè","WYJDè");
+	            ShowPlayerDialogEx(playerid,53,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Flash\n\n0- Czerwono øÛ≥ty z grafikπ\n1- Fioletowo czerwony z grafikπ\n2- Niebiesko fioletowy z grafikπ\n3- WyczyúÊ malunek\n\nBroadway\n\n0- ØÛ≥te p≥omienie na ca≥ym aucie\n1- Czerwone p≥omienie z przodu\n2 i 3- wyczyúÊ malunek\n\nCapmer\n\n0- Hipisowski malnuek\n1, 2 i 3 - wyszyúÊ malunek\n\n Tylko na wymienionych autach moøna namalowaÊ malunek.","WYJDè","WSTECZ");
 	        }
+			else
+			{
+				ShowPlayerDialogEx(playerid,51,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Uranus\n\n0- Niebiesko øÛ≥ty kolor\n1-Niebiesko fioletowy kolor + grafika po bokach\n2- Niebieski kolor z b≥yskawicami\n3- WyczyúÊ malunek\n\nJester\n\n0-ØÛ≥to pomaraÒczowy kolor z pazurami tygrysa\n1-Niebiesko fioletowy kolor z grafikπ po bokach\n2-Zielony przÛd, ciemno zielony ty≥\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","DALEJ","WSTECZ");
+			}
 	    }
+		else if(dialogid == 53)
+		{
+			if(!response)
+			{
+				ShowPlayerDialogEx(playerid,52,DIALOG_STYLE_MSGBOX,"DostÍpne malunki wozÛw","Sultan\n\n0- Alien (fioletowy malunek)\n1- Niebieski kolor z rajdowπ grafikπ\n2- X-flow (niebiesko szary kolor)\n3- WyczyúÊ malunek\n\nStratum\n\n0- Fioletowy kolor z tÍczowπ grafikπ\n1- Acces (czerowny z grafikπ)\n2- Sprunk\n3- WyczyúÊ malunek\n\nElegy\n\n0- Niebieski kolor z p≥omieniami\n1- Acces (pomaraÒczowy z grafikπ)\n2- Fioletowy z grafikπ po bokach\n3- WyczyúÊ malunek\n\nNaciúnij DALEJ","WYJDè","WSTECZ");
+			}
+		}
         else if(dialogid == 501)
 	    {
 	        if(response)
@@ -5500,62 +5552,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	            ShowPlayerDialogEx(playerid, 740, DIALOG_STYLE_INPUT, "Gun Shop - Rifle", "Wpisz iloúÊ naboi(1 nabÛj = 50$)", "Kup", "WrÛÊ");
 			}
 		}
-	    else if(dialogid == 5000)
-	    {
-	        if(response)
-	        {
-		        switch(listitem)
-				{
-				    case 0:
-					{
-		        		ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 55","Przystanki koÒcowe:\nKoúciÛ≥ <==> Mrucznik Tower\n\nCzas przejazdu trasy: 9minut \n\nIloúÊ przystankÛw: 13\n\nSzczegÛ≥owy rozpis trasy:\n KoúciÛ≥\n Motel Jefferson\n Glen Park\n Skate Park\n Unity Station\n Urzπd Miasta\n Bank\n Kasyno\n Market Station\n Baza San News i Restauracja\n Siedziba FBI\n Molo WÍdkarskie\n Mrucznik Tower","WrÛÊ","Wyjdü");
-						//\n\nOpis:\n Wsiadajπc do tego autobusu na pewno odwiedzisz\n kaøde miejsce naprawdÍ warte twojej uwagi\n Jednak z powodu duøej liczby przystnakÛw\n czas podrÛøy znacznie siÍ wyd≥uøa.
-					}
-					case 1:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 72","Przystanki koÒcowe:\nBaza MechanikÛw <==> Mrucznik Tower\n\nCzas przejazdu trasy: 3min 50s\n\nIloúÊ przystankÛw: 9\n\nSzczegÛ≥owy rozpis trasy:\n Mrucznik Tower (praca prawnika i ≥owcy)\n Market Station\n Szpital\n AmmuNation (praca dilera broni)\n Bank)\n Urzπd Miasta (wyrÛb licencji)\n Stacja Benzynowa\n Si≥ownia (praca ochroniarza - sprzedaje pancerze i boksera)\n Willowfield\n Baza MechanikÛw","WrÛÊ","Wyjdü");
-						//\n\nOpis:\n Szybka linia zapewniajπca g≥Ûwnie cywilom szybki\n transport miÍdzy kluczowymi punktami w mieúcie\n Najwaøniejsza i najszybsza linia LSBD
-					}
-					case 2:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 82","Przystanki koÒcowe:\nZajezdnia Commerce <==> Bay Side LV\n\nCzas przejazdu trasy:  11 minut \n\nIloúÊ przystankÛw:  9\n\nSzczegÛ≥owy rozpis trasy:\n Zajezdnia Commerce / Basen 'tsunami'\n Urzπd Miasta\n Baza MechanikÛw\n Agencja Ochrony\n miasteczko Palomino Creek\n Hilltop Farm\n Dillimore\n Bluberry\n Bay Side","WrÛÊ","Wyjdü");
-						// \n Trasa po Red County jest bardzo malownicza\n zaú droga do bay side usypiajπca\n Najd≥uøsza trasa LSDB
-					}
-	    			case 3:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 96","W Przystanki koÒcowe:\nBaza Wojskowa <==> Mrucznik Tower\n\nCzas przejazdu trasy:  ? \n\nIloúÊ przystankÛw:  12\n\nSzczegÛ≥owy rozpis trasy:\n Baza Wojskowa\n Fabryka (dostawa matsÛw)\n Pas Startowy \n Wiadukt\n Unity Station\n Verdant Bluffs (ty≥y UrzÍdu Miasta)\n Zajezdnia Commerce\n Galerie Handlowe\n Burger Shot Marina\n Baza FBI\n Wypoøyczalnia aut (odbiÛr matsÛw)\n Mrucznik Tower","WrÛÊ","Wyjdü");
-						 //\n\nOpis:\nKolejna trasa ze wschodu na zachÛd, jednak tym razem\n szlakiem mniej uczÍszczanych miejsc\n Ulubiona trasa poczπtkujπcych dilerÛw broni
-					}
-  					case 4:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Linia 85","Przystanki koÒcowe:\nWysypisko <==> Szpital\n\nCzas przejazdu trasy:  ? \n\nIloúÊ przystankÛw:  12\n\nSzczegÛ≥owy rozpis trasy:\n Wysypisko\n Clukin Bell Willofield\n Myjnia Samochodowa\n Baza MechanikÛw\n Agencja Ochrony\n Las Colinas \n Motel Jefferson\n Glen Park\n Mrucznikowy GS\n Bank\n Szpital\n\n Opis:\n Niebezpieczna trasa prowadzπce przez tereny prawie wszytkich gangÛw","WrÛÊ","Wyjdü");
-					}
-  					case 5:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","W budowie","WrÛÊ","Wyjdü");
-					}
-  					case 6:
-					{
-        				 ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Wycieczki","Informacje o wycieczkach sπ zamieszczane na czatach g≥Ûwnych\n Oczywiúcie nie ma nic za darmo\n San News zarabia na reklamach zaú KT tradycyjnei na biletach\n pamiÍtaj øe na wycieczki nie bierzemy w≥asnego samochodu\n lecz korzystamy z podstawionych przez organizatora autobusÛw\n Wycieczka to úwietna zabawa i mnÛstwo konkursÛw z nagrodami, dlatego warto siÍ na nich pojawiaÊ.","WrÛÊ","Wyjdü");
-					}
-					case 7:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Informacje","Z autobusu najlepiej korzystaÊ wtedy gdy jesteú pewien øe dana linia jest w trasie\n\nPamiÍtaj, ze autobusy oznaczone numeremm linii poruszajπ siÍ zgodnie z okreúlonπ trasπ\n\nJak zostaÊ kierowcπ autobusu?\nNaleøy z≥oøyÊ podanie na forum do Korporacji Transportowej\nMozna rÛwnieø podjπÊ siÍ pracy kierowcy minibusa dostÍpnej przy basenie","WrÛÊ","Wyjdü");
-					}
-					case 8:
-					{
-					    ShowPlayerDialogEx(playerid,5001,DIALOG_STYLE_MSGBOX,"Komendy","Dla pasaøera:\n\n/businfo - wyúwietla informacje o autobusach\n/wezwij bus - pozwala wezwaÊ autobus ktory podwiezie ciÍ w dowolne miejsce\n/anuluj bus - kasuje wezwanie autobusu\n\n\nDla Kierowcy:\n/fare [cena] - pozwala wejúÊ na s≥uøbÍ i ustaliÊ cenÍ za bilet\n/trasa - rozpoczyna kurs wed≥ug wyznaczonej trasy\n/zakoncztrase - przerywa trasÍ\n/zd - zamyka drzwi i umoøliwia ruszenie z przystanku","WrÛÊ","Wyjdü");
-					}
-				}
-			}
+	    else if(command_businfo_dialog(playerid, dialogid, response, listitem, inputtext))
+		{
+			return 1;
 		}
-		else if(dialogid == 5003 || dialogid == 5002 || dialogid == 5001)
-	    {
-	        if(response)
-	        {
-	            ShowPlayerDialogEx(playerid, 5000, DIALOG_STYLE_LIST, "Wybierz interesujπcπ ciÍ zagadnienie", "Linia 55\nLinia 72\nLinia 82\nLinia 96\nLinia 85\nWycieczki\nInformacje\nPomoc", "Wybierz", "Wyjdü");
-	        }
-	    }
 	 	if(dialogid == D_PJTEST)
 		{
 			if(response == 1)
@@ -6421,7 +6421,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 5://Spawn
 		            {
-		                ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
+						ShowSpawnChangeDialog(playerid);
 		            }
 		            case 6://Kupowanie dodatkÛw
 		            {
@@ -6606,6 +6606,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                PlayerInfo[playerid][pSpawn] = 0;
 		                SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ na swoim normalnym spawnie");
+
+						if(GetPVarInt(playerid, "spawnchange")) 
+						{
+							DeletePVar(playerid, "spawnchange");
+							return 1;
+						}
 		                if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	 					{
 							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
@@ -6614,12 +6620,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 						    ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-		                //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
 		            }
 		            case 1:// Spawn przed domem
 		            {
 		                PlayerInfo[playerid][pSpawn] = 1;
 		                SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ przed domem");
+
+						if(GetPVarInt(playerid, "spawnchange")) 
+						{
+							DeletePVar(playerid, "spawnchange");
+							return 1;
+						}
 		                if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 		    			{
 							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
@@ -6628,12 +6639,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-		                //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
 		            }
 		            case 2:// Spawn w domu
 		            {
 	                    PlayerInfo[playerid][pSpawn] = 2;
 	                    SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ wewnπtrz domu");
+
+						if(GetPVarInt(playerid, "spawnchange")) 
+						{
+							DeletePVar(playerid, "spawnchange");
+							return 1;
+						}
 	                    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	 					{
 							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
@@ -6642,12 +6658,42 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						{
 		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
 						}
-	                    //ShowPlayerDialogEx(playerid, 814, DIALOG_STYLE_LIST, "Wybierz typ spawnu", "Normalny spawn\nSpawn przed domem\nSpawn w domu", "Wybierz", "WrÛÊ");
+		            }
+		            case 3:// Spawn w Vice City
+		            {
+						if(!IsPlayerAtViceCity(playerid))
+						{
+							MruMessageFail(playerid, "Spawn w Vice City moøesz ustawiÊ tylko wtedy, gdy znajdujesz siÍ w tym mieúcie.");
+							ShowSpawnChangeDialog(playerid);
+							return 1;
+						}
+
+	                    PlayerInfo[playerid][pSpawn] = 3;
+	                    SendClientMessage(playerid, COLOR_NEWS, "BÍdziesz siÍ teraz spawnowa≥ w Vice City");
+
+						if(GetPVarInt(playerid, "spawnchange")) 
+						{
+							DeletePVar(playerid, "spawnchange");
+							return 1;
+						}
+	                    if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
+	 					{
+							ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+						}
+						else if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 1)
+						{
+		    				ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nZamknij\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
+						}
 		            }
 				}
 			}
 			if(!response)
 			{
+				if(GetPVarInt(playerid, "spawnchange")) 
+				{
+					DeletePVar(playerid, "spawnchange");
+					return 1;
+				}
 				if(Dom[PlayerInfo[playerid][pDom]][hZamek] == 0)
 	   			{
 					ShowPlayerDialogEx(playerid, 810, DIALOG_STYLE_LIST, "Panel Domu", "Informacje o domu\nOtwÛrz\nWynajem\nPanel dodatkÛw\nOúwietlenie\nSpawn\nKup dodatki\nPomoc", "Wybierz", "Anuluj");
@@ -6689,7 +6735,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	                        }
 	                        else if(Dom[dom][hWW] == 2)
 	                        {
-	                            wynajem = "z warunkiem (rodzina)";
+	                            wynajem = "z warunkiem (organizacja)";
 	                        }
 	                        else if(Dom[dom][hWW] == 3)
 	                        {
@@ -6710,7 +6756,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            }
 		            case 2:// Tryb wynajmu
 		            {
-		                ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		            }
 		            case 3:// Cena wynajmu
 		            {
@@ -6926,25 +6972,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					    SendClientMessage(playerid, COLOR_P@, "Nie wynajmujesz domu. Wszyscy wynajmujπcy zostali wyeksmitowani.");
 					    Dom[dom][hWynajem] = 0;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		            }
 		            case 1:// Wynajem dla kaødego
 		            {
 	                    SendClientMessage(playerid, COLOR_P@, "Teraz kaødy moøe wynajπÊ twÛj dom po wpisaniu komendy /wynajmuj pod drzwiami.");
 					    Dom[dom][hWynajem] = 1;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		            }
 		            case 2:// LokatorÛw ustala w≥aúciciel
 		            {
 					    SendClientMessage(playerid, COLOR_P@, "Teraz ty ustalasz kto ma wynajmowaÊ pokÛj komendπ /dajpokoj [id].");
 					    Dom[dom][hWynajem] = 2;
 					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+					    ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		            }
 		            case 3:// Wynajem tylko jeøeli ktoú spe≥nia dany warunek
 		            {
-	                    ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+	                    ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		            }
 		        }
 		    }
@@ -6964,9 +7010,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            {
 		                ShowPlayerDialogEx(playerid, 820, DIALOG_STYLE_LIST, "Warunek wynajmu - frakcja", "Policja\nFBI\nWojsko\nSAM-ERS\nLa Cosa Nostra\nYakuza\nHitman Agency\nSA News\nTaxi Corporation\nUrzÍdnicy\nGrove Street\nPurpz\nLatin Kings", "Wybierz", "WrÛÊ");
 		            }
-		            case 1:// Warunek wynajmu: odpowiednia rodzina
+		            case 1:// Warunek wynajmu: odpowiednia organizacja
 		            {
-		                ShowPlayerDialogEx(playerid, 821, DIALOG_STYLE_LIST, "Warunek wynajmu - rodzina", "Rodzina 1\nRodzina 2\nRodzina 3\nRodzina 4\nRodzina 5\nRodzina 6\nRodzina 7\nRodzina 8\nRodzina 9\nRodzina 10\nRodzina 11\nRodzina 12\nRodzina 13\nRodzina 14\nRodzina 15\nRodzina 16\nRodzina 17\nRodzina 18\nRodzina 19\nRodzina 20\n", "Wybierz", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 821, DIALOG_STYLE_LIST, "Warunek wynajmu - organizacja", "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49", "Wybierz", "WrÛÊ");
 		            }
 		            case 2:// Warunek wynajmu: odpowiednio wysoki level
 		            {
@@ -6980,7 +7026,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/rodziny/KP", "Wybierz", "WrÛÊ");
+		        ShowPlayerDialogEx(playerid, 818, DIALOG_STYLE_LIST, "Tryb wynajmu", "Brak wynajmu\nDla wszystkich\nWybrane osoby\nDla frakcji/organizacji/KP", "Wybierz", "WrÛÊ");
 		    }
 		}
 		if(dialogid == 820)//warunek - frakcja
@@ -7111,202 +7157,25 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		    }
 		}
-		if(dialogid == 821)//warunek - rodzina
+		if(dialogid == 821)//warunek - organizacja
 		{
 		    if(response)
 		    {
-
 		        new dom = PlayerInfo[playerid][pDom];
-		        switch(listitem)
-		        {
-		            case 0:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 1 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 0;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 1:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 2 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 1;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 2:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 3 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 2;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 3:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 4 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 3;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 4:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 5 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 4;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 5:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 6 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 5;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 6:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 7 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 6;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 7:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 8 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 7;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 8:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 9 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 8;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 9:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 10 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 9;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 10:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 11 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 10;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 11:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 12 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 11;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 12:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 13 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 12;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 13:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 14 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 13;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 14:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 15 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 14;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 15:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 16 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 15;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 16:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 17 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 16;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 17:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 18 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 17;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 18:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 19 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 18;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-			        case 19:
-		            {
-		            	SendClientMessage(playerid, COLOR_P@, "Teraz tylko ludzie z Rodziny 20 bÍdπ mogli wynajmowaÊ u ciebie dom.");
-			    		Dom[dom][hWynajem] = 3;
-			    		Dom[dom][hWW] = 2;
-			    		Dom[dom][hTWW] = 19;
-					    ZapiszDom(dom);
-					    ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
-			        }
-		        }
+				SendClientMessage(playerid, COLOR_P@, sprintf("Teraz tylko ludzie z organizacji %d bÍdπ mogli wynajmowaÊ u ciebie dom.", listitem));
+				Dom[dom][hWynajem] = 3;
+				Dom[dom][hWW] = 2;
+				Dom[dom][hTWW] = listitem;
+				ZapiszDom(dom);
+				ShowPlayerDialogEx(playerid, 815, DIALOG_STYLE_LIST, "Panel wynajmu", "Informacje ogÛlne\nZarzπdzaj lokatorami\nTryb wynajmu\nCena wynajmu\nInfomacja dla lokatorÛw\nUprawnienia lokatorÛw", "Wybierz", "Wyjdü");
+
 			}
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		    }
 		}
 		if(dialogid == 822)
@@ -7333,7 +7202,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		    }
 		}
 	    if(dialogid == 823)
@@ -7360,7 +7229,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia rodzina\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
+		        ShowPlayerDialogEx(playerid, 819, DIALOG_STYLE_LIST, "Warunek wynajmu", "Odpowiednia frakcja\nOdpowiednia organizacja\nOdpowiedni level\nLevel Konta Premium", "Wybierz", "Wyjdü");
 		    }
 		}
 		if(dialogid == 824)
@@ -7575,7 +7444,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							//PlayerInfo[playerid][pZiolo] -= dragdrag;
 							PlayerInfo[playerid][pDrugs] -= dragdrag;
 							ZabierzKase(playerid, dmdm);
-							format(str3, sizeof(str3), "Kupi≥eú %d level Sejfu za %d$, %d dragÛw oraz %d matsÛw. Aby go uøyÊ wpisz /sejf.", Dom[dom][hSejf], dmdm, 4*Dom[dom][hSejf], matsmats);
+							format(str3, sizeof(str3), "Kupi≥eú %d level Sejfu za %d$, %d dragÛw oraz %d matsÛw. Aby go uøyÊ wpisz /sejfpanel.", Dom[dom][hSejf], dmdm, 4*Dom[dom][hSejf], matsmats);
 							SendClientMessage(playerid, COLOR_P@, str3);
 							format(str3, sizeof(str3), "PojemnoúÊ sejfu: Kasa: %d$, Materia≥y: %d, Marihuana: %d, Heroina: %d", dmdm, matsmats*2, dragdrag*5, dragdrag*5);
 							SendClientMessage(playerid, COLOR_P@, str3);
@@ -7610,7 +7479,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							//PlayerInfo[playerid][pZiolo] -= dragdrag;
 							PlayerInfo[playerid][pDrugs] -= dragdrag;
 							ZabierzKase(playerid, dmdm);
-							format(str3, sizeof(str3), "Kupi≥eú %d level Sejfu za %d$, %d dragÛw oraz %d matsÛw. Aby go uøyÊ wpisz /sejf.", Dom[dom][hSejf], 1000000*(Dom[dom][hSejf]-10), 4*Dom[dom][hSejf], 5000*Dom[dom][hSejf]);
+							format(str3, sizeof(str3), "Kupi≥eú %d level Sejfu za %d$, %d dragÛw oraz %d matsÛw. Aby go uøyÊ wpisz /sejfpanel.", Dom[dom][hSejf], 1000000*(Dom[dom][hSejf]-10), 4*Dom[dom][hSejf], 5000*Dom[dom][hSejf]);
 							SendClientMessage(playerid, COLOR_P@, str3);
 							format(str3, sizeof(str3), "PojemnoúÊ sejfu: Kasa: %d$, Materia≥y: %d, Marihuana: %d, Heroina: %d", dmdm, 100000*((Dom[dom][hSejf]-10)+1), dragdrag*10, dragdrag*10);
 							SendClientMessage(playerid, COLOR_P@, str3);
@@ -10536,17 +10405,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            case 0:
 		            {
 						format(stan, sizeof(stan), "%s\n%s", stan, stanmats);
-		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_TABLIST, "Sejf rodzinny - stan", stan, "WrÛÊ", "WrÛÊ");
+		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_TABLIST, "Sejf organizacji - stan konta", stan, "WrÛÊ", "WrÛÊ");
 		            }
 		            case 1:
-						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp≥acanie", stan, "Wyp≥aÊ", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf organizacji - wyp≥acanie gotÛwki", stan, "Wyp≥aÊ", "WrÛÊ");
 		            case 2:
-						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp≥acanie", stan, "Wp≥aÊ", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf organizacji - wp≥acanie gotÛwki", stan, "Wp≥aÊ", "WrÛÊ");
 					case 3:
-						ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wyp≥acanie", stanmats, "Wyp≥aÊ", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf organizacji mats - wyciπganie", stanmats, "Wyp≥aÊ", "WrÛÊ");
 					case 4: {
 						format(stan, sizeof(stan), "%s\n{F8F8FF}IloúÊ materia≥Ûw ktÛre posiadasz:\t\t{008080}%d", stanmats, PlayerInfo[playerid][pMats]);
-						ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wp≥acanie", stan, "Wp≥aÊ", "WrÛÊ");
+						ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf organizacji mats - chowanie", stan, "Wp≥aÊ", "WrÛÊ");
 					}
 		        }
 		    }
@@ -10570,9 +10439,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pAccount] += kasa;
 
 					new komunikat[256];
-					format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d$ z sejfu rodzinnego. Jest w nim teraz %d$. Wyp≥acone pieniπdze sπ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
+					format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d$ z sejfu organizacji. Jest w nim teraz %d$. Wyp≥acone pieniπdze sπ teraz na twoim koncie bankowym.", kasa, Sejf_Rodziny[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyp≥aci≥ z sejfu rodziny %d kwotÍ %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wyp≥aci≥ z sejfu organizacji %d kwotÍ %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
 						lider,
 						kasa,
@@ -10585,7 +10454,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siÍ aø tyle");
 					new stan[256];
 					format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-					ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf rodzinny - wyp≥acanie", stan, "Wyp≥aÊ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, 497, DIALOG_STYLE_INPUT, "Sejf organizacji - wyp≥acanie gotÛwki", stan, "Wyp≥aÊ", "WrÛÊ");
 				}
 		    }
 		    else
@@ -10613,9 +10482,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SejfR_Add(lider, kasa);
 
 					new komunikat[256];
-					format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d$ do sejfu rodzinnego. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
+					format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d$ do sejfu organizacji. Jest w nim teraz %d$.", kasa, Sejf_Rodziny[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wp≥aci≥ do sejfu rodziny %d kwotÍ %d$. Nowy stan: %d$", 
+					Log(payLog, INFO, "%s wp≥aci≥ do sejfu organizacji %d kwotÍ %d$. Nowy stan: %d$", 
 						GetPlayerLogName(playerid),
 						lider,
 						kasa,
@@ -10628,7 +10497,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloúÊ!");
 		            new stan[256];
 	                format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t{008000}%d$", Sejf_Rodziny[lider]);
-					ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf rodzinny - wp≥acanie", stan, "Wp≥aÊ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf organizacji - wp≥acanie gotÛwki", stan, "Wp≥aÊ", "WrÛÊ");
 		        }
 		    }
 		    else
@@ -10651,9 +10520,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					PlayerInfo[playerid][pMats] += mats;
 
 					new komunikat[256];
-					format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d matsÛw z sejfu rodzinnego. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
+					format(komunikat, sizeof(komunikat), "Wyp≥aci≥eú %d matsÛw z sejfu organizacji. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wyp≥aci≥ z sejfu rodziny %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wyp≥aci≥ z sejfu organizacji %d %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
 						lider,
 						mats,
@@ -10666,7 +10535,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siÍ aø tyle");
 					new stanmats[128];
 					format(stanmats, sizeof(stanmats), "{F8F8FF}IloúÊ materia≥Ûw w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
-					ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wyp≥acanie", stanmats, "Wyp≥aÊ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf organizacji mats - wyciπganie", stanmats, "Wyp≥aÊ", "WrÛÊ");
 				}
 		    }
 		    else
@@ -10689,9 +10558,9 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SejfR_AddMats(lider, mats);
 
 					new komunikat[256];
-					format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d mats do sejfu rodzinnego. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
+					format(komunikat, sizeof(komunikat), "Wp≥aci≥eú %d mats do sejfu organizacji. Jest w nim teraz %d mats.", mats, Rodzina_Mats[lider]);
 					SendClientMessage(playerid, COLOR_P@, komunikat);
-					Log(payLog, INFO, "%s wp≥aci≥ do sejfu rodziny %d %d mats. Nowy stan: %d", 
+					Log(payLog, INFO, "%s wp≥aci≥ do sejfu organizacji %d %d mats. Nowy stan: %d", 
 						GetPlayerLogName(playerid),
 						lider,
 						mats,
@@ -10704,7 +10573,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		            SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloúÊ!");
 					new stanmats[256];
 					format(stanmats, sizeof(stanmats), "{F8F8FF}IloúÊ materia≥Ûw w sejfie:\t\t{008080}%d\n{F8F8FF}IloúÊ materia≥Ûw ktÛre posiadasz:\t\t{008080}%d", Rodzina_Mats[lider], PlayerInfo[playerid][pMats]);
-					ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf rodzinny mats - wp≥acanie", stanmats, "Wyp≥aÊ", "WrÛÊ");
+					ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf organizacji mats - chowanie", stanmats, "Wyp≥aÊ", "WrÛÊ");
 		        }
 		    }
 		    else
@@ -10816,6 +10685,15 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
                 }
+				else if(strfind(inputtext, "Vice City Radio") != -1)
+                {
+                    if(!response) return 1;
+                    dont_override = true;
+                    if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) 
+					{
+						ShowViceCityRadioDialog(playerid, 671, "Radio Vice City");
+					}
+                }
                 else if(strfind(inputtext, "Radio SAN1") != -1)
                 {
                     if(RadioSANUno[0] != EOF)
@@ -10890,6 +10768,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                                 SetPVarInt(i, "sanlisten", 0);
                             }
                         }
+						DisableVehicleRadio(veh);
                     }
                 }
                 //
@@ -10920,26 +10799,51 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					else format(taknieNeo, sizeof(taknieNeo), "W≥πcz");
                     format(komunikat, sizeof(komunikat), "%s\nNeony (%s)", komunikat, taknieNeo);
 				}
-                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy≥πcz radio", komunikat); //+ 35char
+                format(komunikat, sizeof(komunikat), "%s\nMrucznik Radio\nVice City Radio\nRadio SAN1\nRadio SAN2\nLepa Station\nWlasny Stream\nWy≥πcz radio", komunikat); //+ 35char
                 if(!dont_override) ShowPlayerDialogEx(playerid, 666, DIALOG_STYLE_LIST, "Deska rozdzielcza", komunikat, "Wybierz", "Anuluj");
 		    }
 		}
-		else if(dialogid == 670) {
+		else if(dialogid == 670) 
+		{
 			if(response)
 			{
 				new veh = GetPlayerVehicleID(playerid);
 				//if(IsAValidURL(inputtext))
 				//{
-				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) {
-					foreach(new i : Player) {
-						if(IsPlayerInVehicle(i, veh)) {
+				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) 
+				{
+					foreach(new i : Player) 
+					{
+						if(IsPlayerInVehicle(i, veh)) 
+						{
 							PlayAudioStreamForPlayer(i, inputtext);
 						}
 					}
 					SetPVarString(playerid, "radioUrl", inputtext);
+					SetVehicleRadio(GetPlayerVehicleID(playerid), inputtext);
 					SetPVarInt(playerid, "sanlisten", 3);
 				}
-				//}
+			}
+			return 1;
+		}
+		else if(dialogid == 671) 
+		{
+			if(response)
+			{
+				new veh = GetPlayerVehicleID(playerid);
+				if(IsPlayerInAnyVehicle(playerid) && GetPlayerState(playerid) == PLAYER_STATE_DRIVER) 
+				{
+					foreach(new i : Player) 
+					{
+						if(IsPlayerInVehicle(i, veh)) 
+						{
+							PlayAudioStreamForPlayer(i, GetViceCityRadioStream(listitem));
+						}
+					}
+					SetPVarString(playerid, "radioUrl", GetViceCityRadioStream(listitem));
+					SetVehicleRadio(GetPlayerVehicleID(playerid), GetViceCityRadioStream(listitem));
+					SetPVarInt(playerid, "sanlisten", 3);
+				}
 			}
 			return 1;
 		}
@@ -11332,14 +11236,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 							poolStatus = 1;
 							sendTipMessage(playerid, "Otworzy≥eú basen Tsunami");
 							format(string, sizeof(string), "%s otworzy≥ basen.", GetNick(playerid));
-							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
+							SendOrgMessage(43, TEAM_BLUE_COLOR, string);
 						}
 						else
 						{
 							poolStatus = 0;
 							sendTipMessage(playerid, "Zamknπ≥eú basen Tsunami");
 							format(string, sizeof(string), "%s zamknπ≥ basen - Koniec p≥ywania!", GetNick(playerid));
-							SendNewFamilyMessage(43, TEAM_BLUE_COLOR, string);
+							SendOrgMessage(43, TEAM_BLUE_COLOR, string);
 						
 						}
 					}
@@ -11681,7 +11585,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 			{
-				if(IsANoA(playerid))
+				if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
@@ -11717,7 +11621,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        if(IsANoA(playerid))
+		        if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
@@ -11749,7 +11653,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			if(!response)
 		    {
-                if(IsANoA(playerid))
+                if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
@@ -11783,7 +11687,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    }
 		    if(!response)
 		    {
-		        if(IsANoA(playerid))
+		        if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_RACE))
  				{
  				    if(PlayerInfo[playerid][pRank] >= 4)
  				    {
@@ -11819,7 +11723,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wyúcig zorganizowany! Udaj siÍ na start i zaproú osoby do wyscigu komendπ /wyscig [id].");
 					SetPlayerRaceCheckpoint(playerid,1,wCheckpoint[tworzenietrasy[playerid]][0][0], wCheckpoint[tworzenietrasy[playerid]][0][1], wCheckpoint[tworzenietrasy[playerid]][0][2],wCheckpoint[tworzenietrasy[playerid]][1][0], wCheckpoint[tworzenietrasy[playerid]][1][1], wCheckpoint[tworzenietrasy[playerid]][1][2], 10);
 					ZabierzKase(playerid, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
-					Sejf_Add(FRAC_NOA, (Wyscig[tworzenietrasy[playerid]][wCheckpointy]+1)*2000);
 					ZabierzKase(playerid, Wyscig[tworzenietrasy[playerid]][wNagroda]);
 					
 					Log(payLog, INFO, "%s zorganizowa≥ wyúcig %s. Koszt organizacji: %d$, nagroda: %d$",
@@ -12178,725 +12081,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        //testowanie wyúcigu
 		    }
 		}
-        /*
-		if(dialogid == 7004)//wybiera≥ka GUI
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0://Lekarz
-				   	{
-					   	PlayerInfo[playerid][pSkin] = 70;
-					   	SetPlayerSkinEx(playerid, 70);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 70 jest teraz twoim nowym skinem frakcyjnym.");
-					}
-					case 1://Sanitariusz Latynos
-					{
-						PlayerInfo[playerid][pSkin] = 275;
-					   	SetPlayerSkinEx(playerid, 275);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 275");
-					}
-					case 2://Sanitariusz Murzyn
-					{
-						PlayerInfo[playerid][pSkin] = 274;
-					   	SetPlayerSkinEx(playerid, 274);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 274");
-					}
-					case 3://Sanitariusz Bia≥y
-					{
-						PlayerInfo[playerid][pSkin] = 276;
-					   	SetPlayerSkinEx(playerid, 276);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 276");
-					}
-					case 4://Lekarka
-					{
-						PlayerInfo[playerid][pSkin] = 219;
-					   	SetPlayerSkinEx(playerid, 219);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 219");
-					}
-					case 5://PielÍgniarka Latynoska
-					{
-						PlayerInfo[playerid][pSkin] = 69;
-					   	SetPlayerSkinEx(playerid, 69);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 69");
-					}
-					case 6://PielÍgniarka Murzynka
-					{
-						PlayerInfo[playerid][pSkin] = 148;
-					   	SetPlayerSkinEx(playerid, 148);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 148");
-					}
-					case 7://PielÍgniarka Bia≥a
-					{
-						PlayerInfo[playerid][pSkin] = 216;
-					   	SetPlayerSkinEx(playerid, 216);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 216");
-					}
-				}
-   			}
-  		}
-  		//	--------------------------------------------------------------
- 		if(dialogid == 7001)//wybiera≥ka GUI
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0://Policjant bia≥y(Pulaski)
-				   	{
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 93 : 266;
-						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
-					}
-					case 1://Policjant tempeny
-					{
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 211 : 265;
-						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
-					}
-					case 2://Policjant Latynos
-					{	
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 192 : 267;
-						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
-					}
-					case 3://Policjant bia≥y
-					{	
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 148 : 280;
-						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
-					}
-					case 4://Policjant bia≥y(z wπsem)
-					{	
-						new skin = (PlayerInfo[playerid][pSex] == 2) ? 141 : 281;
-						PlayerInfo[playerid][pSkin] = skin;
-						SetPlayerSkinEx(playerid, skin);
-						SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
-					}
-					case 5://Policjant z Las Venturas
-					{
-						PlayerInfo[playerid][pSkin] = 282;
-					   	SetPlayerSkinEx(playerid, 282);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 282");
-					}
-					case 6://Policjant w kapeluszu
-					{
-						PlayerInfo[playerid][pSkin] = 283;
-					   	SetPlayerSkinEx(playerid, 283);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 283");
-					}
-					case 7://Policjant w kasku
-					{
-						PlayerInfo[playerid][pSkin] = 284;
-					   	SetPlayerSkinEx(playerid, 284);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 284");
-					}
-					case 8://Policjant w SWAT
-					{
-						PlayerInfo[playerid][pSkin] = 285;
-					   	SetPlayerSkinEx(playerid, 285);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 285");
-					}
-					case 9://Kadet
-					{
-						PlayerInfo[playerid][pSkin] = 71;
-					   	SetPlayerSkinEx(playerid, 71);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 71");
-					}
-				}
-   			}
-  		}
-  		//	--------------------------------------------------------------
- 		if(dialogid == 7003)//wybiera≥ka GUI
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0://Poborowy
-				   	{
-					   	PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 287 jest teraz twoim nowym skinem frakcyjnym.");
-					}
-					case 1://SZEREGOWY
-					{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
-					}
-					case 2://KAPRAL
-					{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
-					}
-					case 3://PORUCZNIK
-					{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
-					}
-					case 4://MAJOR
-					{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
-					}
-					case 5://PU£KOWNIK
-					{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 287");
-					}
-					case 6://GERA£
-					{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID:287");
-					}
-					case 7://SWAT
-					{
-						PlayerInfo[playerid][pSkin] = 285;
-					   	SetPlayerSkinEx(playerid, 285);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 285");
-					}
-					case 8://Kobiekta
-					{
-						PlayerInfo[playerid][pSkin] = 191;
-					   	SetPlayerSkinEx(playerid, 191);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 191");
-					}
-				}
-   			}
-  		}
-  			//	--------------------------------------------------------------
- 		if(dialogid == 7002)//wybiera≥ka GUI
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0://Kadet
-				   	{
-					   	PlayerInfo[playerid][pSkin] = 286;
-					   	SetPlayerSkinEx(playerid, 286);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 286 jest teraz twoim nowym skinem frakcyjnym.");
-					}
-					case 1://Agent Federalny
-					{
-						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkinEx(playerid, 165);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 165");
-					}
-					case 2://Agent åledczy
-					{
-						PlayerInfo[playerid][pSkin] = 166;
-					   	SetPlayerSkinEx(playerid, 166);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 166");
-					}
-					case 3://Koordynator åledczy
-					{
-						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkinEx(playerid, 165);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 165");
-					}
-					case 4://Tajny Agent
-					{
-						PlayerInfo[playerid][pSkin] = 166;
-					   	SetPlayerSkinEx(playerid, 166);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 166");
-					}
-					case 5://Agent Specjalny
-					{
-						PlayerInfo[playerid][pSkin] = 165;
-					   	SetPlayerSkinEx(playerid, 165);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 165");
-					}
-					case 6://Dyrektor
-					{
-						PlayerInfo[playerid][pSkin] = 295;
-					   	SetPlayerSkinEx(playerid, 295);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 295");
-					}
-				}
-   			}
-  		}
-  			//	--------------------------------------------------------------
- 		if(dialogid == 7006)//wybiera≥ka GUI (Yakuza to rangi 5/6) Z£E SKINY
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0://Ochrona 1
-				   	{
-					   	PlayerInfo[playerid][pSkin] = 163;
-					   	SetPlayerSkinEx(playerid, 163);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 163 jest teraz twoim nowym skinem frakcyjnym.");
-					}
-					case 1://Technik 1
-					{
-						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkinEx(playerid, 164);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
-					}
-					case 2://Ochrona 2
-					{
-						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkinEx(playerid, 164);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
-					}
-					case 3://Technik 2
-					{
-						PlayerInfo[playerid][pSkin] = 164;
-					   	SetPlayerSkinEx(playerid, 164);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 164");
-					}
-					case 4://Shatei
-					{
-	    				if(PlayerInfo[playerid][pRank] <= 2)
-		 				{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
-					   	}
-		   				else
-					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 2 rangÍ aby wybraÊ ten skin!");
-					   	}
-					}
-					case 5://Gosho
-					{
-	    				if(PlayerInfo[playerid][pRank] <= 2)
-		 				{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
-					 	}
-		   				else
-					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 2 rangÍ aby wybraÊ ten skin!");
-					   	}
-					}
-					case 6://Taka Hosho
-					{
-	    				if(PlayerInfo[playerid][pRank] <= 2)
-		 				{
-						PlayerInfo[playerid][pSkin] = 287;
-					   	SetPlayerSkinEx(playerid, 287);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 287");
-					   	}
-		   				else
-					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 2 rangÍ aby wybraÊ ten skin!");
-					   	}
-					}
-    				case 7://Daimao
-					{
-	    				if(PlayerInfo[playerid][pRank] <= 5)
-		 				{
-						PlayerInfo[playerid][pSkin] = 186;
-					   	SetPlayerSkinEx(playerid, 186);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybranoskin ID: 186");
-					   	}
-		   				else
-					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 5 rangÍ aby wybraÊ ten skin!");
-					   	}
-					}
-					case 8://Oyabun
-					{
-	    				if(PlayerInfo[playerid][pRank] <= 5)
-		 				{
-						PlayerInfo[playerid][pSkin] = 120;
-					   	SetPlayerSkinEx(playerid, 120);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 120");
-					   	}
-		   				else
-					   	{
-						   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Musisz mieÊ minimum 5 rangÍ aby wybraÊ ten skin!");
-					   	}
-					}
-				}
-   			}
-  		}
-//Ykz Koniec
-	//	--------------------------------------------------------------
- 		if(dialogid == 7011)//wybiera≥ka GUI DMV
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0://Staøysta
-				   	{
-					   	PlayerInfo[playerid][pSkin] = 76;
-					   	SetPlayerSkinEx(playerid, 76);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 76 jest teraz twoim nowym skinem frakcyjnym.");
-					}
-					case 1://Staøysta1
-					{
-						PlayerInfo[playerid][pSkin] = 60;
-					   	SetPlayerSkinEx(playerid, 60);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 60");
-					}
-					case 2://Egzaminator
-					{
-						PlayerInfo[playerid][pSkin] = 59;
-					   	SetPlayerSkinEx(playerid, 59);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 59");
-					}
-					case 3://Egzaminator1
-					{
-						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkinEx(playerid, 150);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
-					}
-					case 4://Instruktor
-					{
-						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkinEx(playerid, 150);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
-					}
-					case 5://Instruktor1
-					{
-						PlayerInfo[playerid][pSkin] = 59;
-					   	SetPlayerSkinEx(playerid, 59);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 59");
-					}
-					case 6://UrzÍdnik
-					{
-						PlayerInfo[playerid][pSkin] = 240;
-					   	SetPlayerSkinEx(playerid, 240);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 240");
-					}
-					case 7://UrzÍdnik1
-					{
-						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkinEx(playerid, 150);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
-					}
-					case 8://Menager
-					{
-						PlayerInfo[playerid][pSkin] = 150;
-					   	SetPlayerSkinEx(playerid, 150);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 150");
-					}
-					case 9://Menager1
-					{
-						PlayerInfo[playerid][pSkin] = 240;
-					   	SetPlayerSkinEx(playerid, 240);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 240");
-					}
-					case 10://Z-ca Burmistrza
-					{
-						PlayerInfo[playerid][pSkin] =  141;
-					   	SetPlayerSkinEx(playerid, 141);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 141");
-					}
-					case 11://Z-ca Burmistrza1
-					{
-						PlayerInfo[playerid][pSkin] = 57;
-					   	SetPlayerSkinEx(playerid, 57);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 57");
-					}
-					case 12://Burmistrz
-					{
-						PlayerInfo[playerid][pSkin] = 147;
-					   	SetPlayerSkinEx(playerid, 147);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 147");
-					}
-				}
-   			}
-  		}
-//----------------------------------
- 		if(dialogid == 7016)//wybiera≥ka GUI WPS
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0://£ysy
-				   	{
-					   	PlayerInfo[playerid][pSkin] = 112;
-					   	SetPlayerSkinEx(playerid, 112);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Skin ID: 112 jest teraz twoim nowym skinem frakcyjnym.");
-					}
-					case 1://skoúnooki skin
-					{
-						PlayerInfo[playerid][pSkin] = 121;
-					   	SetPlayerSkinEx(playerid, 121);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 121");
-					}
-					case 2://wsiowy kox
-					{
-						PlayerInfo[playerid][pSkin] = 206;
-					   	SetPlayerSkinEx(playerid, 206);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 206");
-					}
-					case 3://tirowiec
-					{
-						PlayerInfo[playerid][pSkin] = 202;
-					   	SetPlayerSkinEx(playerid, 202);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 202");
-					}
-					case 4://stary metal
-					{
-						PlayerInfo[playerid][pSkin] = 133;
-					   	SetPlayerSkinEx(playerid, 133);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 133");
-					}
-					case 5://∆pun
-					{
-						PlayerInfo[playerid][pSkin] = 291;
-					   	SetPlayerSkinEx(playerid, 291);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano 291");
-					}
-					case 6://SkinÛwa
-					{
-						PlayerInfo[playerid][pSkin] = 191;
-					   	SetPlayerSkinEx(playerid, 191);
-					   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Wybrano skin ID: 191");
-					}
-				}
-   			}
-  		}
-        if(dialogid == D_UNIFORM_RSC)
-        {
-            if(PlayerInfo[playerid][pFMember] != FAMILY_RSC) return 1;
-            new skin = strval(inputtext);
-		   	SetPlayerSkinEx(playerid, skin);
-		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Przebra≥es siÍ na chwile.");
-        }
-        if(7007 <= dialogid <= 7010 || 7012 <= dialogid <= 7015 || dialogid == 7017)
-        {
-            if(dialogid - GetPlayerFraction(playerid) != 7000) return 1;
-            new skin = strval(inputtext);
-            PlayerInfo[playerid][pSkin] = skin;
-		   	SetPlayerSkinEx(playerid, skin);
-		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
-        }
-        if(dialogid == D_UNIFORM_LCN)
-        {
-            if(!response) return 1;
-            new skin;
-            switch(listitem)
-            {
-                case 0: skin = 98;
-                case 1: skin = 111;
-                case 2: skin = 113;
-                case 3: skin = 124;
-                case 4: skin = 125;
-                case 5: skin = 126;
-                case 6: skin = 214;
-                case 7: skin = 272;
-                case 8: skin = 40;
-                default: skin = PlayerInfo[playerid][pSkin];
-            }
-            PlayerInfo[playerid][pSkin] = skin;
-		   	SetPlayerSkinEx(playerid, skin);
-		   	SendClientMessage(playerid, COLOR_LIGHTBLUE, "Zmieni≥eú swÛj uniform.");
-
-        }  */
-	   	if(dialogid == 8155)//SYstem autobusÛw - tablice
-	   	{
-		   	if(response == 1)
-		    {
-			   	switch(listitem)
-			   	{
-				   	case 0:
-				   	{
-				   		if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-						    if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 50) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-							    PlayerInfo[playerid][pLinia55]=1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS.");
-								SetPlayerCheckpoint(playerid, 2215.8428,-1436.8223,23.4033, 4); // Ustawiamy poczπtkowy CP
-								CP[playerid] = 551; //Przypisek CP do dalszych
-								PlayerInfo[playerid][pNatrasiejest] = 1; //Kierowca jest w trasie
-	   							Przystanek(playerid, COLOR_BLUE, "Linia nr. 55\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-	   							SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
-							}
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 2skill aby rozpoczπÊ tπ trasÍ");
-							}
-   						}
-				    	else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-				   	}
-				   	case 1:
-				   	{
-				   		if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-							    PlayerInfo[playerid][pLinia72]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS.");
-								SetPlayerCheckpoint(playerid, 2818.4243,-1576.9399,10.9287, 4);
-								CP[playerid] = 721;
-								PlayerInfo[playerid][pNatrasiejest] = 1;
-					   			Przystanek(playerid, COLOR_NEWS, "Linia nr. 72 (dojazd)\n{808080}Kierunek: BAZA MECHANIK”W (pÍtla) \nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-					   			SetTimerEx("AntyBusCzit", 60000*5, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
-	   					}
-				   		else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-				   	}
-				   	case 2:
-					{
-						if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-						 	if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 200) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-							    PlayerInfo[playerid][pLinia96]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
-								SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
-								CP[playerid] = 961;
-								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid, COLOR_GREEN, "Linia nr. 96\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-								SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
- 							}
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 4skill aby rozpoczπÊ tπ trasÍ");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-					}
-					case 3:
-					{
-						if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-							    PlayerInfo[playerid][pLinia82]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
-								SetPlayerCheckpoint(playerid, 1173.1520,-1825.2843,13.1789, 4);
-								CP[playerid] = 821;
-								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid,COLOR_YELLOW, "Linia nr. 82\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-								SetTimerEx("AntyBusCzit", 60000*8, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
-                            }
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 5skill aby rozpoczπÊ tπ trasÍ");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-					}
-					case 4:
-					{
-						if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 100) || PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-							    PlayerInfo[playerid][pLinia85]= 1;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczonπ trasÍ. Podπøaj za sygna≥em GPS");
-								SetPlayerCheckpoint(playerid, 2119.7363,-1896.8149,13.1345, 4);
-								CP[playerid] = 501;
-								PlayerInfo[playerid][pNatrasiejest] = 1;
-								Przystanek(playerid, COLOR_GREEN, "Linia nr. 85\n{808080}Dojazd do trasy.\nWszytkie przystanki NA Ø•DANIE (N/Ø)");
-								SetTimerEx("AntyBusCzit", 60000*6, 0, "d", playerid);
-	   							BusCzit[playerid] = 1;
- 							}
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 3skill aby rozpoczπÊ tπ trasÍ");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-					}
-					case 5:
-					{
-						if(PlayerInfo[playerid][pNatrasiejest] == 0)
-						{
-							if( (PlayerInfo[playerid][pJob] == 10 && PlayerInfo[playerid][pCarSkill] >= 400) || PlayerInfo[playerid][pMember] == 10 && PlayerInfo[playerid][pRank] >= 4 ||PlayerInfo[playerid][pLider] == 10)
-						    {
-								Przystanek(playerid, COLOR_BLUE, "Wycieczka\nKoszt: 7500$\n WiÍcej informacji u kierowcy.");
-				    			/*BusDrivers += 1; TransportDuty[playerid] = 2; TransportValue[playerid]= 15000;
-							    GetPlayerName(playerid,sendername,sizeof(sendername));
-			    				format(string, sizeof(string), "Przewodnik %s zaprasza wszytkich na wycieczkÍ autobusowπ, koszt: $15000", sendername, TransportValue[playerid]);
-			    				OOCNews(TEAM_GROVE_COLOR,string);*/
- 							}
-							else
-							{
-							    SendClientMessage(playerid, COLOR_GREY, " Potrzebujesz 5skill lub 4 rangi aby organizowaÊ wycieczki.");
-							}
-						}
-						else
-						{
-							SendClientMessage(playerid, COLOR_GREY, " Jesteú juø w trasie !");
-						}
-					}
-					case 6:
-					{
-				    	if(PlayerInfo[playerid][pJob] == 10)
-			    			{
-           						SetPlayerCheckpoint(playerid, 1138.5,-1738.3,13.5, 4);
-								CP[playerid]=1201;
-								PlayerInfo[playerid][pLinia55] = 0;
-								PlayerInfo[playerid][pLinia72] = 0;
-								PlayerInfo[playerid][pLinia82] = 0;
-								PlayerInfo[playerid][pLinia96] = 0;
-								PlayerInfo[playerid][pNatrasiejest] = 0;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje jπ sygna≥ GPS. ");
-				       			Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Commerce\n {808080}Zatrzymuje siÍ na przystankach");
-				       			SendClientMessage(playerid, COLOR_ALLDEPT, " KT przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczÍúliwy autobus :) ");
-							}
-							else if (PlayerInfo[playerid][pMember] == 10 ||PlayerInfo[playerid][pLider] == 10)
-							{
-								SetPlayerCheckpoint(playerid, 2431.2551,-2094.0959,13.5469, 4);
-								CP[playerid]=1200;
-								PlayerInfo[playerid][pLinia55] = 0;
-								PlayerInfo[playerid][pLinia72] = 0;
-								PlayerInfo[playerid][pLinia82] = 0;
-								PlayerInfo[playerid][pLinia96] = 0;
-								PlayerInfo[playerid][pNatrasiejest] = 0;
-								SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz zjazd do zajezdni, wskazuje jπ sygna≥ GPS. ");
-				       			Przystanek(playerid, COLOR_BLUE, "Linia ZAJ \n Kierunek: Zajezdnia Ocean Docks\n {808080}Zatrzymuje siÍ na przystankach");
-				       			SendClientMessage(playerid, COLOR_ALLDEPT, " LSBD przypomina: {C0C0C0}Odstawiony do zajezdni autobus to szczÍúliwy autobus :) ");
-							}
-				   	}
-				   	case 7:
-				   	{
-						SendClientMessage(playerid, COLOR_YELLOW, "|_____________Objaúnienia_____________|");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}50$/p {FFFFF0}- okreúla premiÍ za kaødy przystanek");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}5min{FFFFF0} - orientacyjny czas przejazdy ca≥ej trasy (dwa okrπøenia)");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}13p{FFFFF0} - liczba przystankÛw na trasie");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/businfo{FFFFF0} - wyúwietla informacje o systemie autobusÛw (w budowie)");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/zakoncztrase{FFFFF0} - przerywa wykonywanπ trasÍ i zmienia tablicÍ na domyúlnπ");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}/zd{FFFFF0} - zamyka drzwi w autobusie i umoøliwa dalszπ jazdÍ");
-						SendClientMessage(playerid, COLOR_GREEN, "Wyp≥atÍ za przejechane przystanki otrzymuje siÍ DOPIERO po przejechaniu ca≥ej trasy!");
-						SendClientMessage(playerid, COLOR_GREEN, "{FF00FF}Podpowiedü:{FFFFF0} najszybsze zarobki gwarantuje linia 72");
-						SendClientMessage(playerid, COLOR_YELLOW, "|_____________>>LSBD<<_____________|");
-					}
-			   	}
-		   	}
-	   	}
-   }
-   
+		if(command_trasa_dialog(playerid, dialogid, response, listitem, inputtext))
+		{
+			return 1;
+		}
+	}
 	if(dialogid == 1888)
 	{
 	    if(response)
@@ -12925,267 +12114,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             ShowPlayerDialogEx(playerid, 0, DIALOG_STYLE_INPUT, "Tworzenie weryfikacji", gf, "OK", "");
       	}
 	}
-
-    //IBIZA
-	/*
-    if(dialogid==DIALOG_IBIZA_IBIZA)
-	{
-		if(response)
-		{
-			switch(listitem)
-			{
-				case 0: //sejf
-				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "Wpisz /sejfr", "WrÛÊ", "");
-					return 1;
-				}
-				case 1: //drzwi
-				{
-					if(IbizaZamek)
-					{
-						IbizaZamek=false;
-						SendClientMessage(playerid, 0x00FF00FF, "Otworzy≥eú klub!");
-					}
-					else
-					{
-						IbizaZamek=true;
-						SendClientMessage(playerid, 0xFF0000FF, "Zamknπ≥eú klub!");
-					}
-				}
-				case 2: //cena biletu
-				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_BILET_CENA, DIALOG_STYLE_INPUT, "Zmiana ceny biletu", "Wpisz poniøej nowπ cenÍ biletu dla Ibiza Club", "ZmieÒ", "Anuluj");
-					return 1;
-				}
-				case 3: //ceny na barze
-				{
-					new string[300];
-					for(new i=0; i< sizeof IbizaDrinkiCeny; i++)
-					{
-						format(string, sizeof string, "%s%d. %s - $%d\n", string, i+1, IbizaDrinkiNazwy[i], IbizaDrinkiCeny[i]);
-					}
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN, DIALOG_STYLE_LIST, "Cennik drinkÛw", string, "ZmieÒ", "WrÛÊ");
-					return 1;
-				}
-				case 4: //barierki
-				{
-					if(IbizaBarierki)
-					{
-						MoveDynamicObject(IbizaBarierkiObiekty[0], 1953.8400, -2470.7100, 14.0833, 2.0  );
-						MoveDynamicObject(IbizaBarierkiObiekty[1], 1951.9301, -2470.8201, 14.0691, 2.0  );
-						MoveDynamicObject(IbizaBarierkiObiekty[2], 1950.0100, -2470.8701, 14.0762, 2.0  );
-						IbizaBarierki=false;
-					}
-					else
-					{
-						MoveDynamicObject(IbizaBarierkiObiekty[0], 1953.8400000,-2470.7100000,14.9000000, 2.0  );
-						MoveDynamicObject(IbizaBarierkiObiekty[1], 1951.9300, -2470.8200, 14.9000, 2.0  );
-						MoveDynamicObject(IbizaBarierkiObiekty[2], 1950.0100000,-2470.8700000,14.9000000, 2.0  );
-						IbizaBarierki=true;
-					}
-				}
-				case 5:
-				{
-					MikserDialog(playerid);
-					return 1;
-				}
-				case 6:
-				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PARKIET, DIALOG_STYLE_LIST, "Zmiana parkietu", "Piasek\nDrewniane panele\nKolorowe kafelki", "ZmieÒ", "Anuluj");
-					return 1;
-				}
-				case 7:
-				{
-					if(IbizaBiuro) //otwarte
-					{
-						IbizaBiuro=false;
-						SendClientMessage(playerid, 0xFF0000FF, "Zamknπ≥eú biuro");
-					}
-					else //zamkniete
-					{
-						IbizaBiuro= true;
-						SendClientMessage(playerid, 0x00FF00FF, "Otworzy≥eú biuro");
-					}
-				}
-				case 8:
-				{
-					if(IbizaDach) //otwarte
-					{
-						IbizaDach=false;
-						SendClientMessage(playerid, 0xFF0000FF, "Zamknπ≥eú wyjúcie na dach");
-					}
-					else //zamkniete
-					{
-						IbizaDach= true;
-						SendClientMessage(playerid, 0x00FF00FF, "Otworzy≥eú wyjúcie na dach");
-					}
-
-				}
-			}
-			return PrezesDialog(playerid);
-		}
-
-
-	}
-	if(dialogid==DIALOG_IBIZA_PARKIET)
-	{
-		if(response)
-		{
-			if(listitem==IbizaParkiet) {SendClientMessage(playerid, -1, "Ten parkiet jest obiecnie ustawiony"); return  ShowPlayerDialogEx(playerid, DIALOG_IBIZA_PARKIET, DIALOG_STYLE_LIST, "Zmiana parkietu", "Piasek\nDrewniane panele\nKolorowe kafelki", "ZmieÒ", "Anuluj"); }
-			//niszczenie obiektu
-			switch(IbizaParkiet)
-			{
-				case 0: //piach
-				{
-					DestroyDynamicObject(IbizaPiasek[0]);
-					DestroyDynamicObject(IbizaPiasek[1]);
-					DestroyDynamicObject(IbizaPiasek[2]);
-					DestroyDynamicObject(IbizaPiasek[3]);
-				}
-				case 1: //drewno
-				{
-					DestroyDynamicObject(IbizaPodloga[0]);
-				}
-				case 2: //kafle
-				{
-					DestroyDynamicObject(IbizaPodloga[1]);
-				}
-			}
-			//tworzenie nowego
-			switch(listitem)
-			{
-				case 0: //piach
-				{
-					IbizaPiasek[0] = CreateDynamicObject(19377,1939.8800000,-2485.0000000,12.5500000,0.0000000,90.0000000,0.0000000, 1, 0, -1);
-					IbizaPiasek[1] = CreateDynamicObject(19377,1950.3800000,-2485.0000000,12.5500000,0.0000000,90.0000000,0.0000000, 1, 0, -1);
-					IbizaPiasek[2] = CreateDynamicObject(19377,1939.8800000,-2494.6300000,12.5500000,0.0000000,90.0000000,0.0000000, 1, 0, -1);
-					IbizaPiasek[3] = CreateDynamicObject(19377,1950.3800000,-2494.6300000,12.5500000,0.0000000,90.0000000,0.0000000, 1, 0, -1);
-				}
-				case 1:
-				{
-					IbizaPodloga[0] = CreateDynamicObject(18783, 1944.61, -2490.16, 10.13,   0.00, 0.00, 0.00, 1, 0, -1);
-				}
-				case 2:
-				{
-					IbizaPodloga[1] = CreateDynamicObject(19129, 1944.68, -2490.16, 12.59,   0.00, 0.00, 0.00, 1, 0, -1);
-				}
-
-			}
-			IbizaOdswiezObiekty();
-			IbizaParkiet = listitem;
-		}
-		return PrezesDialog(playerid);
-
-	}
-	if(dialogid==DIALOG_IBIZA_BILET_CENA)
-	{
-		if(response)
-		{
-            if(!IsNumeric(inputtext)) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota");
-			new cena = strval(inputtext);
-            if(cena < 0 || cena > 1000000) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota (od 0 do 1kk)");
-			IbizaBilet = cena;
-			new string[128];
-			format(string, sizeof string, "Zmieni≥eú cenÍ biletu do Ibizy na %d$", cena);
-			SendClientMessage(playerid, 0x00FF00FF, string);
-		}
-		return PrezesDialog(playerid);
-	}
-	if(dialogid==DIALOG_IBIZA_CENNIK_ZMIEN)
-	{
-		if(response)
-		{
-			new string[128];
-			format(string, sizeof string, "Wpisz nowπ cenÍ dla drinka %s", IbizaDrinkiNazwy[listitem]);
-			ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN_2, DIALOG_STYLE_INPUT, "Cennik drinkÛw", string, "ZmieÒ", "Anuluj");
-			SetPVarInt(playerid, "CenaDrinka", listitem);
-		}
-		else PrezesDialog(playerid);
-		return 1;
-	}
-	if(dialogid==DIALOG_IBIZA_CENNIK_ZMIEN_2)
-	{
-		if(response)
-		{
-            if(!IsNumeric(inputtext)) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota");
-			new hajsy=strval(inputtext);
-            if(hajsy < 0 || hajsy > 1000000) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota (od 0 do 1kk)");
-			new index = GetPVarInt(playerid, "CenaDrinka");
-			IbizaDrinkiCeny[index] = hajsy;
-			DeletePVar(playerid, "CenaDrinka");
-			new string[128];
-			format(string, sizeof string, "Zmieni≥eú cenÍ drinka %s na %d$", IbizaDrinkiNazwy[index], IbizaDrinkiCeny[index]);
-			SendClientMessage(playerid, -1, string);
-		}
-		new string[300];
-		for(new i=0; i< sizeof IbizaDrinkiCeny; i++)
-		{
-			format(string, sizeof string, "%s%d. %s - $%d\n", string, i+1, IbizaDrinkiNazwy[i], IbizaDrinkiCeny[i]);
-		}
-		ShowPlayerDialogEx(playerid, DIALOG_IBIZA_CENNIK_ZMIEN, DIALOG_STYLE_LIST, "Cennik drinkÛw", string, "ZmieÒ", "WrÛÊ");
-	}
-	*/
-	/*if(dialogid==DIALOG_IBIZA_SEJF)
-	{
-		if(response)
-		{
-			switch(listitem)
-			{
-				case 0: //zawartoúÊ
-				{
-					new hajs, string[128];
-					hajs = IbizaZawartoscSejfu();
-					format(string, sizeof string, "W sejfie jest %d$", hajs);
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_INFO, DIALOG_STYLE_MSGBOX, "Ibiza Sejf", string, "Ok", "");
-				}
-				case 1: //Wp≥ata
-				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_WPLATA, DIALOG_STYLE_INPUT, "Wp≥ata do sejfu", "Wpisz poniøej kwotÍ jakπ chcia≥byú wp≥aciÊ do sejfu", "Wp≥aÊ", "Anuluj");
-				}
-				case 2: //Wyp≥ata
-				{
-					ShowPlayerDialogEx(playerid, DIALOG_IBIZA_WYPLATA, DIALOG_STYLE_INPUT, "Wyp≥ata pieniÍdzy z sejfu", "Wpisz poniøej kwotÍ jakπ chcia≥byú wyp≥aciÊ z sejfu", "Wyp≥aÊ", "Anuluj");
-				}
-			}
-		}
-		else PrezesDialog(playerid);
-		return 1;
-	}
-	if(dialogid==DIALOG_IBIZA_WYPLATA)
-	{
-		if(response)
-		{
-			new hajs = strval(inputtext);
-			if(hajs <=0) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota");
-			new sejf = IbizaZawartoscSejfu();
-			if(hajs > sejf) return SendClientMessage(playerid, -1, "W sejfie nie ma tyle pieniÍdzy");
-			DajKase(playerid, hajs); //HAJS  dodaÊ dodawanie pieniÍdzy graczowi do struktury
-			IbizaWplac(-hajs);
-			new string[128];
-			format(string, sizeof string, "Wyp≥aci≥eú %d$ z sejfu Ibizy", hajs);
-			SendClientMessage(playerid, -1, string);
-            format(string, sizeof string, "Lider %s wyp≥aci≥ %d$ z Ibizy", GetNick(playerid), hajs);
-            Log(payLog, INFO, string);
-		}
-		return ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "ZawartoúÊ\nWp≥ata\nWyp≥ata", "Wybierz", "WrÛÊ");
-	}
-	if(dialogid==DIALOG_IBIZA_WPLATA)
-	{
-		if(response)
-		{
-			new hajs = strval(inputtext);
-			if(hajs<=0) return SendClientMessage(playerid, 0xFF0000FF, "Niepoprawna kwota");
-			if(hajs > kaska[playerid]) return SendClientMessage(playerid, -1, "Nie masz tyle hajsu");
-			DajKase(playerid, -hajs); //HAJS zabraÊ pieniπdze ze struktury
-			IbizaWplac(hajs);
-			new string[128];
-			format(string, sizeof string, "Wp≥aci≥eú %d$ do sejfu Ibizy", hajs);
-			SendClientMessage(playerid, -1, string);
-            format(string, sizeof string, "Lider %s wp≥aci≥ %d$ do Ibizy", GetNick(playerid), hajs);
-            Log(payLog, INFO, string);
-		}
-		return ShowPlayerDialogEx(playerid, DIALOG_IBIZA_SEJF, DIALOG_STYLE_LIST, "Sejf Klubu Ibiza", "ZawartoúÊ\nWp≥ata\nWyp≥ata", "Wybierz", "WrÛÊ");
-	}*/
 	if(dialogid==DIALOG_IBIZA_MIKSER)
 	{
 		if(response)
@@ -13486,7 +12414,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new id = GetPVarInt(playerid, "IbizaBiletSell");
 		if(response)
 		{
-			//if(PlayerInfo[playerid][pCash] < IbizaBilet) return SendClientMessage(playerid, -1, "Nie masz wystarczajπcej iloúci pieniÍdzy");
 			new hajs = kaska[playerid];
 			if(hajs < IbizaBilet)
 			{
@@ -13495,9 +12422,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
 			else
 			{
-				//PlayerInfo[playerid][pCash]-=IbizaBilet;
-				ZabierzKase(playerid, IbizaBilet); //HAJS coú takiego jak wyøej, nwm dok≥adnie jak macie
-				SejfR_Add(FAMILY_IBIZA, IbizaBilet);
+				if(IbizaBilet < 0) return 1;
+				ZabierzKase(playerid, IbizaBilet);
 				SetPVarInt(playerid, "IbizaBilet", 1);
 				format(string, sizeof string, "%s kupi≥Ç od Ciebie bilet", PlayerName(playerid));
 				SendClientMessage(id, 0x0080D0FF, string);
@@ -13521,15 +12447,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		if(response)
 		{
 
-			new hajs = kaska[playerid]; //HAJS zmieniÊ na pobieranie ze struktury
+			new hajs = kaska[playerid];
 			new drink = GetPVarInt(playerid, "IbizaDrink");
-			if(hajs >=IbizaDrinkiCeny[drink]) //if(PlayerInfo[playerid][pCash] >= IbizaDrinkiCeny[drink] )
+			if(hajs >=IbizaDrinkiCeny[drink])
 			{
-				ZabierzKase(playerid, IbizaDrinkiCeny[drink]); //HAJS zabranie pieniÍdzy ze struktury
-				SejfR_Add(FAMILY_IBIZA, IbizaDrinkiCeny[drink]);
+				ZabierzKase(playerid, IbizaDrinkiCeny[drink]);
 				SetPlayerSpecialAction(playerid, 22);
-				//DO   **Marcepan_Marks kupuje w barze [nazwa drinka]**
-
 			}
 			else
 			{
@@ -13844,51 +12767,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         TextDrawHideForPlayer(playerid, TXD_Info);
         return 1;
     }
-    else if(dialogid == D_ORGS)
-    {
-        if(!response) return 1;
-        new lStr[512];
-        for(new i=0;i<MAX_ORG;i++)
-        {
-            if(!orgIsValid(i)) continue;
-            if(orgType(i) == listitem)
-            {
-                format(lStr, 512, "%s{000000}%d\t{FFFFFF}%s\n", lStr, OrgInfo[i][o_UID], OrgInfo[i][o_Name]);
-            }
-        }
-        if(strlen(lStr) > 3)
-        {
-            ShowPlayerDialogEx(playerid, D_ORGS_SELECT, DIALOG_STYLE_LIST, "Lista organizacji", lStr, "Cz≥onkowie", "WrÛÊ");
-        }
-        return 1;
-    }
-    else if(dialogid == D_ORGS_SELECT)
-    {
-        if(!response) return RunCommand(playerid, "/organizacje",  "");
-        new id = strval(inputtext);
-        new lStr[16];
-        valstr(lStr, id);
-        RunCommand(playerid, "/organizacje",  lStr);
-        return 1;
-    }
-    else if(dialogid == D_CREATE)
-    {
-        if(!response) return 1;
-        new lStr[256];
-        switch(listitem)
-        {
-            case 1:
-            {
-                if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
-                for(new i=0;i<sizeof(OrgTypes);i++)
-                {
-                    format(lStr, 256, "%s%d.\t%s\n", lStr, i+1, OrgTypes[i]);
-                }
-                ShowPlayerDialogEx(playerid, D_CREATE_ORG, DIALOG_STYLE_LIST, "Tworzenie organizacji", lStr, "Dalej", "WrÛÊ");
-            }
-        }
-        return 1;
-    }
     else if(dialogid == D_EDIT)
     {
         if(!response) return 1;
@@ -13896,16 +12774,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         switch(listitem)
         {
             case 1:
-            {
-                if(!Uprawnienia(playerid, ACCESS_MAKEFAMILY)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
-                for(new i=0;i<MAX_ORG;i++)
-                {
-                    if(!orgIsValid(i)) continue;
-                    format(lStr, 1024, "%s%d.\t%s\n", lStr, i, OrgInfo[i][o_Name]);
-                }
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG, DIALOG_STYLE_LIST, "Edycja organizacji", lStr, "Dalej", "WrÛÊ");
-            }
-            case 2:
             {
                 if(!Uprawnienia(playerid, ACCESS_EDITCAR)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
                 new Float:x, Float:y, Float:z;
@@ -13921,151 +12789,13 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 strcat(lStr, "Wprowadü UID pojazdu, ktÛry chcesz edytowaÊ:");
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", lStr, "Dalej", "WrÛÊ");
             }
-            case 3:
+            case 2:
             {
                 if(!Uprawnienia(playerid, ACCESS_EDITRANG)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
 
                 ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÛÊ");
             }
         }
-        return 1;
-    }
-    //TWORZENIE ORGANIZACJI
-    else if(dialogid == D_CREATE_ORG)
-    {
-        if(!response) return RunCommand(playerid, "/stworz",  "");
-        SetPVarInt(playerid, "create_org_typ", listitem);
-        ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÍ rodziny:", "Dalej", "WrÛÊ");
-        return 1;
-    }
-    else if(dialogid == D_CREATE_ORG_NAME)
-    {
-        if(!response) return RunCommand(playerid, "/stworz",  "");
-        if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÍ rodziny:", "Dalej", "WrÛÊ");
-        SetPVarString(playerid, "create_org_name", inputtext);
-        new lStr[256] = "Wybierz wolny slot (ID)\n";
-        new lTab[MAX_ORG];
-        for(new i=0;i<MAX_ORG;i++)
-        {
-            if(OrgInfo[i][o_UID] != 0)
-            {
-                lTab[i] = OrgInfo[i][o_UID];
-            }
-        }
-        new bool:lFree=true;
-        for(new i=1;i<=MAX_ORG;i++)
-        {
-            lFree=true;
-            for(new j=0;j<MAX_ORG;j++) if(lTab[j] == i) lFree=false;
-
-            if(lFree) format(lStr, 256, "%s%d\n", lStr, i);
-        }
-        ShowPlayerDialogEx(playerid, D_CREATE_ORG_UID, DIALOG_STYLE_LIST, "Tworzenie organizacji", lStr, "Dalej", "WrÛÊ");
-        return 1;
-    }
-    else if(dialogid == D_CREATE_ORG_UID)
-    {
-        if(!response) return ShowPlayerDialogEx(playerid, D_CREATE_ORG_NAME, DIALOG_STYLE_INPUT, "Tworzenie organizacji", "Wprowadz nazwÍ rodziny:", "Dalej", "WrÛÊ");
-        new id = strval(inputtext);
-        if(orgIsValid(orgID(id))) return SendClientMessage(playerid, -1, "Kolizja UID?");
-        new lStr[128];
-        GetPVarString(playerid, "create_org_name", lStr, 32);
-        orgAdd(GetPVarInt(playerid, "create_org_typ"),lStr, id, orgGetFreeSlot());
-        format(lStr, 128, "Stworzono organizacjÍ typu %s o nazwie %s UID %d", OrgTypes[GetPVarInt(playerid, "create_org_typ")], lStr, id);
-        SendClientMessage(playerid, COLOR_GREEN, lStr);
-        return 1;
-    }
-    //EDYCJA ORGANIZACJI
-    else if(dialogid == D_EDIT_ORG)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        SetPVarInt(playerid, "edit_org", strval(inputtext));
-        ShowPlayerDialogEx(playerid, D_EDIT_ORG_LIST, DIALOG_STYLE_LIST, "Edycja organizacji", "ZmieÒ typ\nZmieÒ nazwÍ\nUsuÒ lidera(Ûw)\nUsuÒ organizacje", "Wybierz", "WrÛÊ");
-        return 1;
-    }
-    else if(dialogid == D_EDIT_ORG_LIST)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        new lStr[256];
-        switch(listitem)
-        {
-            case 0:
-            {
-                for(new i=0;i<sizeof(OrgTypes);i++)
-                {
-                    format(lStr, 256, "%s%d.\t%s\n", lStr, i+1, OrgTypes[i]);
-                    ShowPlayerDialogEx(playerid, D_EDIT_ORG_TYP, DIALOG_STYLE_LIST, "Edycja", lStr, "ZmieÒ", "WrÛÊ");
-                }
-            }
-            case 1:
-            {
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "Wprowadü nowπ nazwÍ", "ZmieÒ", "WrÛÊ");
-            }
-            case 2:
-            {
-                SendClientMessage(playerid, COLOR_GREEN, "W budowie");
-            }
-            case 3:
-            {
-                if(!Uprawnienia(playerid, ACCESS_DELETEORG)) return SendClientMessage(playerid, COLOR_RED, "Brak uprawnieÒ");
-                ShowPlayerDialogEx(playerid, D_EDIT_ORG_DELETE, DIALOG_STYLE_MSGBOX, "Potwierdzenie", "Czy na pewno chcesz usunπÊ organizacjÍ?", "UsuÒ", "WrÛÊ");
-            }
-        }
-        return 1;
-    }
-    else if(dialogid == D_EDIT_ORG_TYP)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        OrgInfo[id][o_Type] = listitem;
-        format(lStr, 128, "Zmieniono typ organizacji %s na %s", OrgInfo[id][o_Name], OrgTypes[listitem]);
-        SendClientMessage(playerid, COLOR_GREEN, lStr);
-
-        orgSave(id, ORG_SAVE_TYPE_BASIC);
-        return 1;
-    }
-    else if(dialogid == D_EDIT_ORG_NAME)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        if(strlen(inputtext) > 31 || strlen(inputtext) < 1) return ShowPlayerDialogEx(playerid, D_EDIT_ORG_NAME, DIALOG_STYLE_INPUT, "Edycja", "Wprowadü nowπ nazwÍ", "ZmieÒ", "WrÛÊ");
-        format(lStr, 128, "Zmieniono nazwÍ organizacji %s na %s", OrgInfo[id][o_Name], inputtext);
-        SendClientMessage(playerid, COLOR_GREEN, lStr);
-        orgSetName(id, inputtext);
-
-        orgSave(id, ORG_SAVE_TYPE_DESC);
-        return 1;
-    }
-    else if(dialogid == D_EDIT_ORG_DELETE)
-    {
-        if(!response) return RunCommand(playerid, "/edytuj",  "");
-        new id = GetPVarInt(playerid, "edit_org"), lStr[128];
-        format(lStr, sizeof(lStr), "UsuniÍto organizacjÍ %s.", OrgInfo[id][o_Name]);
-        SendClientMessage(playerid, COLOR_GREEN, lStr);
-        format(lStr, sizeof(lStr), "Organizacja usuniÍta przez %s.", GetNickEx(playerid));
-        foreach(new i : Player)
-        {
-            if(GetPlayerOrg(i) == OrgInfo[id][o_UID])
-            {
-                SendClientMessage(i, COLOR_RED, lStr);
-                orgUnInvitePlayer(i);
-            }
-        }
-		MruMySQL_UsunOrganizacje(id);
-
-        for(new j=0;j<MAX_ZONES;j++)
-        {
-            if(ZoneControl[j]-100 == OrgInfo[id][o_UID])
-            {
-                GangZoneShowForAll(j, 0xC6E2F144);
-                ZoneControl[j] = 0;
-            }
-        }
-
-        OrgInfo[id][o_UID] = 0;
-        OrgInfo[id][o_Type] = 0;
-        strdel(OrgInfo[id][o_Name], 0, 32);
-        strdel(OrgInfo[id][o_Motd], 0, 128);
         return 1;
     }
     //EDYCJA POJAZD”W
@@ -14114,7 +12844,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
             }
             case 1:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Brak\nFrakcja\nOrganizacja\nGracz\nPraca\nSpecjalny\nPubliczny", "Wybierz", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Brak\nFrakcja\nOrganizacja\nGracz\nPraca\nSpecjalny\nPubliczny\nDo kradniÍcia", "Wybierz", "WrÛÊ");
             }
             case 2:
             {
@@ -14289,7 +13019,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         new string[512];
         switch(listitem)
         {
-            case 0:
+            case INVALID_CAR_OWNER:
             {
                 new lSlot;
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
@@ -14329,7 +13059,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				
 				Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na 0", GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
-            case 1:
+            case CAR_OWNER_FRACTION:
             {
                 for(new i=0;i<sizeof(FractionNames);i++)
                 {
@@ -14338,27 +13068,27 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", string, "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 2:
+            case CAR_OWNER_FAMILY:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj UID organizacji:", "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 3:
+            case CAR_OWNER_PLAYER:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj UID gracza:", "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 4:
+            case CAR_OWNER_JOB:
             {
                 ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj ID pracy:", "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 5:
+            case CAR_OWNER_SPECIAL:
             {
-                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj typ pojazdu specjalnego:\n\n1. Wypoøyczalnia\n2. GoKart\n3. Øuøel", "Ustaw", "WrÛÊ");
+                ShowPlayerDialogEx(playerid, D_EDIT_CAR_OWNER_APPLY, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}pojazdÛw", "Podaj typ pojazdu specjalnego:\n\n1. Wypoøyczalnia\n2. GoKart\n3. Øuøel\n4. Pojazd botÛw przemytniczych", "Ustaw", "WrÛÊ");
                 return 1;
             }
-            case 6:
+            case CAR_OWNER_PUBLIC:
             {
                 new lSlot;
                 if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
@@ -14392,10 +13122,49 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						}
 					}
                 }
-                CarData[car][c_OwnerType] = 6;
+                CarData[car][c_OwnerType] = CAR_OWNER_PUBLIC;
                 Car_Save(car, CAR_SAVE_OWNER);
 				
 				Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na 6",  GetPlayerLogName(playerid), GetCarDataLogName(car));
+            }
+			case CAR_OWNER_STEAL:
+            {
+                new lSlot;
+                if(CarData[car][c_OwnerType] == CAR_OWNER_PLAYER)
+                {
+                    new lUID = Car_GetOwner(car);
+					if(lUID != 0)
+					{
+						foreach(new i : Player)
+						{
+							if(PlayerInfo[i][pUID] == lUID)
+							{
+								for(new j=0;j<MAX_CAR_SLOT;j++)
+								{
+									if(PlayerInfo[i][pCars][j] == car)
+									{
+										PlayerInfo[i][pCars][j] = 0;
+										lSlot = j+1;
+										break;
+									}
+								}
+
+								format(string, sizeof(string), " UsuniÍto pojazd ze slotu %d graczowi %s.", lSlot, GetNick(i));
+								SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+								Log(adminLog, INFO, "Admin %s usunπ≥ %s pojazd %s ze slotu %d", 
+									GetPlayerLogName(playerid), 
+									GetPlayerLogName(i),
+									GetCarDataLogName(car),
+									lSlot);
+								break;
+							}
+						}
+					}
+                }
+                CarData[car][c_OwnerType] = CAR_OWNER_STEAL;
+                Car_Save(car, CAR_SAVE_OWNER);
+				
+				Log(adminLog, INFO, "Admin %s zmieni≥ w %s typ pojazdu na 7",  GetPlayerLogName(playerid), GetCarDataLogName(car));
             }
         }
         ShowCarEditDialog(playerid);
@@ -14502,7 +13271,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         else
         {
-            ShowPlayerDialogEx(playerid, D_EDIT_RANG_2, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Wprowadü UID organizacji (/rodziny UID):", "Wybierz", "WrÛÊ");
+            ShowPlayerDialogEx(playerid, D_EDIT_RANG_2, DIALOG_STYLE_INPUT, "{8FCB04}Edycja {FFFFFF}rang", "Wprowadü UID organizacji (/organizacje UID):", "Wybierz", "WrÛÊ");
         }
         return 1;
     }
@@ -14517,8 +13286,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         }
         else
         {
-            new uid = orgID(id);
-            if(!orgIsValid(uid)) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÛÊ");
+            if(!IsActiveOrg(id)) return ShowPlayerDialogEx(playerid, D_EDIT_RANG, DIALOG_STYLE_LIST, "{8FCB04}Edycja {FFFFFF}rang", "Frakcja\nOrganizacja", "Wybierz", "WrÛÊ");
         }
         SetPVarInt(playerid, "edit_rang_id", id);
         EDIT_ShowRangNames(playerid, typ, id, true);
@@ -14548,12 +13316,12 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
         if(inputtext[0] == '-')
         {
             if(typ == 0) strdel(FracRang[id][idx], 0, MAX_RANG_LEN);
-            else if(typ == 1) strdel(FamRang[id][idx], 0, MAX_RANG_LEN);
+            else if(typ == 1) strdel(OrgRank[id][idx], 0, MAX_RANG_LEN);
         }
         else
         {
             if(typ == 0) format(FracRang[id][idx], MAX_RANG_LEN, "%s", name);
-            else if(typ == 1) format(FamRang[id][idx], MAX_RANG_LEN, "%s", name);
+            else if(typ == 1) format(OrgRank[id][idx], MAX_RANG_LEN, "%s", name);
         }
         //EDIT_SaveRangs(typ, id);
         RANG_ApplyChanges[typ][id] = true;
@@ -14650,8 +13418,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     else if(dialogid == D_DODATKI_TYP)
     {
         if(!response) return 1;
-        if(listitem == 2 && !MRP_IsInPolice(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w policji!");
-        if(listitem == 4 && !MRP_IsInGang(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w gangu!");
+        if(listitem == 2 && !IsAPolicja(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w policji!");
+        if(listitem == 4 && !IsAPrzestepca(playerid)) return sendTipMessageEx(playerid, COLOR_GRAD2, "Nie jestes w organizacji przestepczej!");
         CallRemoteFunction("SEC_Dodatki_Show", "dd", playerid, listitem);
         return 1;
     }
@@ -14798,7 +13566,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				}
 				case 5://Konto rodziny
 				{
-					sendTipMessage(playerid, "Uøyj /sejfr!"); 
+					sendTipMessage(playerid, "Uøyj /sejf!"); 
 				}
 				
             }
@@ -14913,7 +13681,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{	
 					
 					format(string, sizeof(string), "Konto Bankowe >> %s", giveplayer);
-					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne\n>>Rodzinne", "Wybierz", "Wyjdü");
+					ShowPlayerDialogEx(playerid, 1067, DIALOG_STYLE_LIST, string, "Stan konta\n\nWp≥aÊ\nWyp≥aÊ\n>>Frakcyjne\n>>Organizacyjne", "Wybierz", "Wyjdü");
 				
 				}
 			
@@ -15783,7 +14551,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				HireCar[playerid] = 0;
 				return 0;
 			}
-			if(kaska[playerid] < BIKE_COST)
+			new cost = GetVehicleHireCost(veh);
+			if(kaska[playerid] < cost)
    			{
    				sendErrorMessage(playerid, "Nie masz tyle kasy!");
 				return 0;
@@ -15793,7 +14562,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 15*60*1000, 0, "ii", playerid, veh));
 
     		TogglePlayerControllable(playerid, 1);
-    		ZabierzKase(playerid, BIKE_COST); 
+    		ZabierzKase(playerid, cost); 
     		HireCar[playerid] = veh;
     		SetPVarInt(playerid, "rentCar", veh);
 		}
@@ -16162,25 +14931,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Odebra≥eú licencje na latanie!"); 
 					Log(payLog, INFO, "%s kupi≥ licencje na latanie za %d$", GetPlayerLogName(playerid), DmvLicenseCost[listitem]);
 				}
-				/* na pÛüniej
-				case 8: //rejestracja pojazdu
-				{
-					sendTipMessage(playerid, "Ta opcja bÍdzie dostÍpna juø niebawem!"); 
-					return 1;
-				}
-				case 9: // w≥asna tablica rejestracyjna
-				{
-					if(IsPlayerPremiumOld(playerid))
-					{
-						sendTipMessage(playerid, "Ta opcja bÍdzie dostÍpna juø niebawem!"); 
-					}
-					else
-					{
-						sendTipMessage(playerid, "Nie posiadasz konta premium! Wpisz /kp.");
-					}
-					return 1;
-				}
-				*/
 			}
 			Sejf_Add(FRAC_GOV, DmvLicenseCost[listitem]);
 			ZabierzKase(playerid, DmvLicenseCost[listitem]);
@@ -16234,19 +14984,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					{
 						PlayerPersonalization[playerid][PERS_FINFO] = 0;
 						sendTipMessage(playerid, "W≥πczy≥eú komunikaty od frakcji"); 
-					}
-				}
-				case 3:
-				{
-					if(PlayerPersonalization[playerid][PERS_FAMINFO] == 0)
-					{
-						PlayerPersonalization[playerid][PERS_FAMINFO] = 1;
-						sendTipMessage(playerid, "Wy≥πczy≥eú komunikaty od rodzin!"); 
-					}
-					else
-					{
-						PlayerPersonalization[playerid][PERS_FAMINFO] = 0;
-						sendTipMessage(playerid, "W≥πczy≥eú komunikaty od rodzin!"); 
 					}
 				}
 			}
@@ -16958,88 +15695,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			return 1;
 		}
 	}
-	else if (dialogid == D_ORGMEMBER) {
-		if (!gPlayerOrgLeader[playerid]) {
-			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
-			sendErrorMessage(playerid, "Wystπpi≥ b≥πd!");
-			DeletePVar(playerid, "prpanel_uid");
-			return 1;
-		}
-		if (response) {
-			switch(listitem) {
-				case 3: { // zwolnij
-					new uid = GetPVarInt(playerid, "prpanel_uid");
-					new nick[MAX_PLAYER_NAME];
-					strcat(nick, MruMySQL_GetNameFromUID(uid));
-					new rodzina = MruMySQL_GetAccInt("FMember", nick);
-					if(rodzina != GetPlayerOrg(playerid)) {
-						Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
-						sendErrorMessage(playerid, "Wystπpi≥ b≥πd!)");
-						DeletePVar(playerid, "prpanel_uid");
-						return 1;
-					}
-					new msg[1024];
-					format(msg, sizeof(msg), "UPDATE `mru_konta` SET `FMember`=0, `Rank`=99, `Member`=99, `Uniform`=0, `Team`=3 WHERE `UID`=%i AND `Rank`<1000", uid);
-					mysql_query(msg);
-					format(msg, sizeof(msg), "* Wyrzuci≥eú %s ze swojej rodziny.", nick);
-					SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
-					DeletePVar(playerid, "prpanel_uid");
-				}
-				case 4: { // ranga
-					new org = GetPlayerOrg(playerid);
-					new str[512];
-					for(new i=0;i<10;i++)
-					{
-						if(strlen(FamRang[org][i]) < 2)
-							format(str, 512, "%s[%d] -\n", str, i);
-						else
-							format(str, 512, "%s[%d] %s\n", str, i, FamRang[org][i]);
-					}
-
-					return ShowPlayerDialogEx(playerid, D_ORGMEMBER_RANK, DIALOG_STYLE_LIST, "Wybierz rangÍ, ktÛrπ chcesz nadaÊ graczowi", str, "Nadaj", "Anuluj");
-				}
-				default:
-					Command_ReProcess(playerid, "pr pracownicy", false);
-			}
-		} else {
-			DeletePVar(playerid, "prpanel_uid");
-			Command_ReProcess(playerid, "pr pracownicy", false);
-		}
-		return 1;
-	}
-	else if (dialogid == D_ORGMEMBER_RANK) {
-		if (!gPlayerOrgLeader[playerid]) {
-			Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny nie bedac liderem! [prpanel_uid=%i]", GetPVarInt(playerid, "prpanel_uid"));
-			sendErrorMessage(playerid, "Wystπpi≥ b≥πd!");
-			DeletePVar(playerid, "prpanel_uid");
-			return 1;
-		}
-		if (response) {
-			new org = GetPlayerOrg(playerid);
-			if(listitem >= MAX_RANG || listitem < 0 || strlen(FamRang[org][listitem]) < 1) {
-				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Ta ranga nie jest stworzona!");
-				DeletePVar(playerid, "prpanel_uid");
-				Command_ReProcess(playerid, "pr pracownicy", false);
-				return 1;
-			}
-			new uid = GetPVarInt(playerid, "prpanel_uid");
-			new nick[MAX_PLAYER_NAME];
-			strcat(nick, MruMySQL_GetNameFromUID(uid));
-			new rodzina = MruMySQL_GetAccInt("FMember", nick);
-			if(rodzina != GetPlayerOrg(playerid)) {
-				Log(serverLog, ERROR, "Gracz %s probowal zarzadzac czlonkiem rodziny ale nie nalezy do niej! [prpanel_uid=%i, rodzina=%i]", uid, rodzina);
-				sendErrorMessage(playerid, "Wystπpi≥ b≥πd!");
-				DeletePVar(playerid, "prpanel_uid");
-				return 1;
-			}
-			new msg[1024];
-			format(msg, sizeof(msg), "UPDATE `mru_konta` SET `Rank`=%i WHERE `UID`=%i AND `Rank`<1000", listitem, uid);
-			mysql_query(msg);
-			format(msg, sizeof(msg), "Da≥es %d rangÍ graczowi %s", listitem, nick);
-			SendClientMessage(playerid, COLOR_LIGHTBLUE, msg);
-		}
-		DeletePVar(playerid, "fpanel_uid");
-		Command_ReProcess(playerid, "pr pracownicy", false);
+	else if(orgpanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))
+	{
 		return 1;
 	}
 	else if(mru_ac_OnDialogResponse(playerid, dialogid, response, listitem, inputtext))

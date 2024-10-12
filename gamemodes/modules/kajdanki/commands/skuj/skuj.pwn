@@ -41,10 +41,7 @@ command_skuj()
     
 
     //permissions
-    Group_SetCommand(Group_GetID("frakcja_LSPD"), command, true);
-    Group_SetCommand(Group_GetID("frakcja_FBI"), command, true);
-    Group_SetCommand(Group_GetID("frakcja_SASP"), command, true);
-    Group_SetCommand(Group_GetID("frakcja_USSS"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
@@ -61,7 +58,7 @@ YCMD:skuj(playerid, params[], help)
     }
     //fetching params
     new cuffedplayerid;
-    if(sscanf(params, "r", cuffedplayerid))
+    if(sscanf(params, "k<fix>", cuffedplayerid))
     {
         sendTipMessage(playerid, "U¿yj /skuj [Nick/ID] ");
         return 1;

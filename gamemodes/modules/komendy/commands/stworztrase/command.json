@@ -1,0 +1,11 @@
+{
+    "name": "stworztrase",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "stworzwyscig"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

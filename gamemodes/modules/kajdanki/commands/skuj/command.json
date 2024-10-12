@@ -2,10 +2,7 @@
     "name": "skuj",
     "description": "Zak³adanie kajdanek.",
     "permissions": [
-        "frakcja_LSPD",
-        "frakcja_FBI",
-        "frakcja_SASP",
-        "frakcja_USSS"
+        "everyone"
     ],
     "author": "NikodemBanan",
     "aliases": [

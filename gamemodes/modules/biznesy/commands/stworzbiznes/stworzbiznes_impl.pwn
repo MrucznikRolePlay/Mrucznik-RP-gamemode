@@ -111,7 +111,7 @@ command_stworzbiznes_Impl(playerid)
                     mysql_real_escape_string(nameOwn, Business[ID_BUSINESS][b_Name_Owner]); 
                     Business[ID_BUSINESS][b_int] = GetPlayerInterior(playerid);   
                     Business[ID_BUSINESS][b_vw] = GetPlayerVirtualWorld(playerid); 
-                    Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 
+                    Business[ID_BUSINESS][b_pLocal] = GetPlayerLocal(playerid); 
                     Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
                     Business[ID_BUSINESS][b_cost] = bizCost;
                     mysql_real_escape_string(bizLoc, Business[ID_BUSINESS][b_Location]); 
@@ -146,7 +146,7 @@ command_stworzbiznes_Impl(playerid)
                 mysql_real_escape_string(nameOwn, Business[ID_BUSINESS][b_Name_Owner]); 
                 Business[ID_BUSINESS][b_int] = GetPlayerInterior(playerid);   
                 Business[ID_BUSINESS][b_vw] = GetPlayerVirtualWorld(playerid); 
-                Business[ID_BUSINESS][b_pLocal] = GetPLocal(playerid); 
+                Business[ID_BUSINESS][b_pLocal] = GetPlayerLocal(playerid); 
                 Business[ID_BUSINESS][b_maxMoney] = bizMoneyPD;
                 Business[ID_BUSINESS][b_cost] = bizCost;
                 mysql_real_escape_string(bizLoc, Business[ID_BUSINESS][b_Location]); 

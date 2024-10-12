@@ -1,0 +1,11 @@
+{
+    "name": "stan",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "stankonta"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

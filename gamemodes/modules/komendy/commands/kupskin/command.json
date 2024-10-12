@@ -1,0 +1,11 @@
+{
+    "name": "kupskin",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "wybierzskin"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -1,0 +1,12 @@
+{
+    "name": "kupbiletpociag",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "kbpo",
+        "kpociag"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

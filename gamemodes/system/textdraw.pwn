@@ -53,21 +53,12 @@ new PlayerText:CRUISECONTROL_AMOUNT[MAX_PLAYERS];
 //TXD   Stanowe - Textdrawy keypad
 new Text:NG_GateTD[8];
 //25.07 stefy
-new Text:ZoneTXD[4];
+new Text:ZoneTXD[5];
 new PlayerText:ZonePTXD_Name[MAX_PLAYERS];
 new PlayerText:ZonePTXD_Cash[MAX_PLAYERS];
 new PlayerText:ZonePTXD_Area[MAX_PLAYERS];
 new PlayerText:ZonePTXD_Member[MAX_PLAYERS];
 //speedo
-/*new Text:Speedo_BG[6];
-new Text:Speedo_ToggleGPS;
-new Text:Speedo_ToggleStan;
-new PlayerText:Speedo_Engine[MAX_PLAYERS];
-new PlayerText:Speedo_Lights[MAX_PLAYERS];
-new PlayerText:Speedo_Speed[MAX_PLAYERS];
-new PlayerText:Speedo_Fuel[MAX_PLAYERS][5];
-new PlayerText:Speedo_Paliwo[MAX_PLAYERS];
-new PlayerText:Speedo_GPS[MAX_PLAYERS]; */
 new PlayerText:Licznik[MAX_PLAYERS];
 
 new Text:Loading_Box;
@@ -1441,6 +1432,16 @@ ZoneTXD_Load()
     TextDrawFont(ZoneTXD[1], 2);
     TextDrawSetProportional(ZoneTXD[1], 1);
 
+    ZoneTXD[4] = TextDrawCreate(524.000122, 205.955596, "b  ~n~i   ~n~z  ~n~n  ~n~e  ~n~s");
+    TextDrawLetterSize(ZoneTXD[4], 0.265333, 1.645630);
+    TextDrawAlignment(ZoneTXD[4], 1);
+    TextDrawColor(ZoneTXD[4], 16777215);
+    TextDrawSetShadow(ZoneTXD[4], 0);
+    TextDrawSetOutline(ZoneTXD[4], 1);
+    TextDrawBackgroundColor(ZoneTXD[4], 51);
+    TextDrawFont(ZoneTXD[4], 2);
+    TextDrawSetProportional(ZoneTXD[4], 1);
+
     ZoneTXD[2] = TextDrawCreate(546.666687, 204.966674, "usebox");
     TextDrawLetterSize(ZoneTXD[2], 0.000000, 10.396911);
     TextDrawTextSize(ZoneTXD[2], 543.333312, 0.000000);
@@ -1466,228 +1467,8 @@ ZoneTXD_Load()
 	blackmap = GangZoneCreate(-3000.0,-3000.0,3000.0,3000.0);
 }
 
-/*stock Speedo_Load()
-{
-    Speedo_BG[0] = TextDrawCreate(527.000000, 335.000000, "LD_POOL:ball");
-	TextDrawAlignment(Speedo_BG[0], 2);
-	TextDrawBackgroundColor(Speedo_BG[0], 255);
-	TextDrawFont(Speedo_BG[0], 4);
-	TextDrawLetterSize(Speedo_BG[0], 0.500000, 1.000000);
-	TextDrawColor(Speedo_BG[0], 255);
-	TextDrawSetOutline(Speedo_BG[0], 0);
-	TextDrawSetProportional(Speedo_BG[0], 1);
-	TextDrawSetShadow(Speedo_BG[0], 1);
-	TextDrawUseBox(Speedo_BG[0], 1);
-	TextDrawBoxColor(Speedo_BG[0], 255);
-	TextDrawTextSize(Speedo_BG[0], 102.000000, 102.000000);
-	TextDrawSetSelectable(Speedo_BG[0], 0);
-
-	Speedo_BG[1] = TextDrawCreate(528.000000, 336.000000, "LD_POOL:ball");
-	TextDrawAlignment(Speedo_BG[1], 2);
-	TextDrawBackgroundColor(Speedo_BG[1], 255);
-	TextDrawFont(Speedo_BG[1], 4);
-	TextDrawLetterSize(Speedo_BG[1], 0.500000, 1.000000);
-	TextDrawColor(Speedo_BG[1], 65535);
-	TextDrawSetOutline(Speedo_BG[1], 0);
-	TextDrawSetProportional(Speedo_BG[1], 1);
-	TextDrawSetShadow(Speedo_BG[1], 1);
-	TextDrawUseBox(Speedo_BG[1], 1);
-	TextDrawBoxColor(Speedo_BG[1], 255);
-	TextDrawTextSize(Speedo_BG[1], 100.000000, 100.000000);
-	TextDrawSetSelectable(Speedo_BG[1], 0);
-
-	Speedo_BG[2] = TextDrawCreate(530.000000, 338.000000, "LD_POOL:ball");
-	TextDrawAlignment(Speedo_BG[2], 2);
-	TextDrawBackgroundColor(Speedo_BG[2], 255);
-	TextDrawFont(Speedo_BG[2], 4);
-	TextDrawLetterSize(Speedo_BG[2], 0.500000, 1.000000);
-	TextDrawColor(Speedo_BG[2], 255);
-	TextDrawSetOutline(Speedo_BG[2], 0);
-	TextDrawSetProportional(Speedo_BG[2], 1);
-	TextDrawSetShadow(Speedo_BG[2], 1);
-	TextDrawUseBox(Speedo_BG[2], 1);
-	TextDrawBoxColor(Speedo_BG[2], 255);
-	TextDrawTextSize(Speedo_BG[2], 96.000000, 96.000000);
-	TextDrawSetSelectable(Speedo_BG[2], 0);
-
-	Speedo_BG[3] = TextDrawCreate(533.000000, 332.000000, "bg");
-	TextDrawBackgroundColor(Speedo_BG[3], 0);
-	TextDrawFont(Speedo_BG[3], 5);
-	TextDrawLetterSize(Speedo_BG[3], 0.900000, -0.199999);
-	TextDrawColor(Speedo_BG[3], 65535);
-	TextDrawSetOutline(Speedo_BG[3], 0);
-	TextDrawSetProportional(Speedo_BG[3], 1);
-	TextDrawSetShadow(Speedo_BG[3], 1);
-	TextDrawUseBox(Speedo_BG[3], 1);
-	TextDrawBoxColor(Speedo_BG[3], 255);
-	TextDrawTextSize(Speedo_BG[3], 90.000000, 90.000000);
-    TextDrawSetPreviewModel(Speedo_BG[3], 18851);
-    TextDrawSetPreviewRot(Speedo_BG[3], 0.000000, 0.000000, 90.000000, 0.699998);
-	TextDrawSetSelectable(Speedo_BG[3], 0);
-
-    Speedo_BG[4] = TextDrawCreate(584.000000, 410.000000, "FUEL");
-    TextDrawAlignment(Speedo_BG[4], 3);
-    TextDrawBackgroundColor(Speedo_BG[4], 255);
-    TextDrawFont(Speedo_BG[4], 1);
-    TextDrawLetterSize(Speedo_BG[4], 0.170000, 0.799999);
-    TextDrawColor(Speedo_BG[4], -1);
-    TextDrawSetOutline(Speedo_BG[4], 0);
-    TextDrawSetProportional(Speedo_BG[4], 1);
-    TextDrawSetShadow(Speedo_BG[4], 1);
-    TextDrawSetSelectable(Speedo_BG[4], 0);
-
-    Speedo_BG[5] = TextDrawCreate(586.000000, 364.000000, "km/h");
-    TextDrawAlignment(Speedo_BG[5], 3);
-    TextDrawBackgroundColor(Speedo_BG[5], 255);
-    TextDrawFont(Speedo_BG[5], 1);
-    TextDrawLetterSize(Speedo_BG[5], 0.170000, 0.799999);
-    TextDrawColor(Speedo_BG[5], -1);
-    TextDrawSetOutline(Speedo_BG[5], 0);
-    TextDrawSetProportional(Speedo_BG[5], 1);
-    TextDrawSetShadow(Speedo_BG[5], 1);
-    TextDrawSetSelectable(Speedo_BG[5], 0);
-
-    Speedo_ToggleGPS = TextDrawCreate(574.000000, 410.000000, ".");
-    TextDrawAlignment(Speedo_ToggleGPS, 3);
-    TextDrawBackgroundColor(Speedo_ToggleGPS, 255);
-    TextDrawFont(Speedo_ToggleGPS, 3);
-    TextDrawLetterSize(Speedo_ToggleGPS, 0.500000, 2.000000);
-    TextDrawColor(Speedo_ToggleGPS, -1);
-    TextDrawSetOutline(Speedo_ToggleGPS, 0);
-    TextDrawSetProportional(Speedo_ToggleGPS, 1);
-    TextDrawSetShadow(Speedo_ToggleGPS, 1);
-    TextDrawTextSize(Speedo_ToggleGPS, 584.000000, 420.000000);
-    TextDrawSetSelectable(Speedo_ToggleGPS, 1);
-
-    Speedo_ToggleStan = TextDrawCreate(587.000000, 410.000000, ".");
-    TextDrawAlignment(Speedo_ToggleStan, 3);
-    TextDrawBackgroundColor(Speedo_ToggleStan, 255);
-    TextDrawFont(Speedo_ToggleStan, 3);
-    TextDrawLetterSize(Speedo_ToggleStan, 0.500000, 2.000000);
-    TextDrawColor(Speedo_ToggleStan, -1);
-    TextDrawSetOutline(Speedo_ToggleStan, 0);
-    TextDrawSetProportional(Speedo_ToggleStan, 1);
-    TextDrawSetShadow(Speedo_ToggleStan, 1);
-    TextDrawTextSize(Speedo_ToggleStan, 597.000000, 420.000000);
-    TextDrawSetSelectable(Speedo_ToggleStan, 1);
-}
-
-Speedo_Unload()
-{
-    for(new i=0;i<sizeof(Speedo_BG);i++) TextDrawDestroy(Speedo_BG[i]);
-    TextDrawDestroy(Speedo_ToggleStan);
-    TextDrawDestroy(Speedo_ToggleGPS);
-}*/
-
 Speedo_PlayerLoad(playerid)
 {
-    /*Speedo_Engine[playerid] = CreatePlayerTextDraw(playerid, 594.000000, 414.000000, "E");
-	PlayerTextDrawBackgroundColor(playerid, Speedo_Engine[playerid], 255);
-	PlayerTextDrawFont(playerid, Speedo_Engine[playerid], 1);
-	PlayerTextDrawLetterSize(playerid, Speedo_Engine[playerid], 0.500000, 1.000000);
-	PlayerTextDrawColor(playerid, Speedo_Engine[playerid], -16776961);
-	PlayerTextDrawSetOutline(playerid, Speedo_Engine[playerid], 0);
-	PlayerTextDrawSetProportional(playerid, Speedo_Engine[playerid], 1);
-	PlayerTextDrawSetShadow(playerid, Speedo_Engine[playerid], 1);
-	PlayerTextDrawSetSelectable(playerid, Speedo_Engine[playerid], 0);
-
-	Speedo_Lights[playerid] = CreatePlayerTextDraw(playerid, 552.000000, 414.000000, "D");
-	PlayerTextDrawBackgroundColor(playerid, Speedo_Lights[playerid], 255);
-	PlayerTextDrawFont(playerid, Speedo_Lights[playerid], 1);
-	PlayerTextDrawLetterSize(playerid, Speedo_Lights[playerid], 0.500000, 1.000000);
-	PlayerTextDrawColor(playerid, Speedo_Lights[playerid], 16711935);
-	PlayerTextDrawSetOutline(playerid, Speedo_Lights[playerid], 0);
-	PlayerTextDrawSetProportional(playerid, Speedo_Lights[playerid], 1);
-	PlayerTextDrawSetShadow(playerid, Speedo_Lights[playerid], 1);
-	PlayerTextDrawSetSelectable(playerid, Speedo_Lights[playerid], 0);
-
-    Speedo_Speed[playerid] = CreatePlayerTextDraw(playerid,587.000000, 369.000000, "0");
-    PlayerTextDrawAlignment(playerid,Speedo_Speed[playerid], 3);
-    PlayerTextDrawBackgroundColor(playerid,Speedo_Speed[playerid], 255);
-    PlayerTextDrawFont(playerid,Speedo_Speed[playerid], 3);
-    PlayerTextDrawLetterSize(playerid,Speedo_Speed[playerid], 0.500000, 2.000000);
-    PlayerTextDrawColor(playerid,Speedo_Speed[playerid], -1);
-    PlayerTextDrawSetOutline(playerid,Speedo_Speed[playerid], 0);
-    PlayerTextDrawSetProportional(playerid,Speedo_Speed[playerid], 1);
-    PlayerTextDrawSetShadow(playerid,Speedo_Speed[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid,Speedo_Speed[playerid], 0);
-
-    Speedo_Fuel[playerid][0] = CreatePlayerTextDraw(playerid,598.000000, 381.000000, "-");
-    PlayerTextDrawAlignment(playerid,Speedo_Fuel[playerid][0], 2);
-    PlayerTextDrawBackgroundColor(playerid,Speedo_Fuel[playerid][0], 255);
-    PlayerTextDrawFont(playerid,Speedo_Fuel[playerid][0], 3);
-    PlayerTextDrawLetterSize(playerid,Speedo_Fuel[playerid][0], 1.300000, 4.000000);
-    PlayerTextDrawColor(playerid,Speedo_Fuel[playerid][0], -1);
-    PlayerTextDrawSetOutline(playerid,Speedo_Fuel[playerid][0], 0);
-    PlayerTextDrawSetProportional(playerid,Speedo_Fuel[playerid][0], 1);
-    PlayerTextDrawSetShadow(playerid,Speedo_Fuel[playerid][0], 1);
-    PlayerTextDrawSetSelectable(playerid,Speedo_Fuel[playerid][0], 0);
-
-    Speedo_Fuel[playerid][1] = CreatePlayerTextDraw(playerid,598.000000, 371.000000, "-");
-    PlayerTextDrawAlignment(playerid,Speedo_Fuel[playerid][1], 2);
-    PlayerTextDrawBackgroundColor(playerid,Speedo_Fuel[playerid][1], 255);
-    PlayerTextDrawFont(playerid,Speedo_Fuel[playerid][1], 3);
-    PlayerTextDrawLetterSize(playerid,Speedo_Fuel[playerid][1], 1.300000, 4.000000);
-    PlayerTextDrawColor(playerid,Speedo_Fuel[playerid][1], -1);
-    PlayerTextDrawSetOutline(playerid,Speedo_Fuel[playerid][1], 0);
-    PlayerTextDrawSetProportional(playerid,Speedo_Fuel[playerid][1], 1);
-    PlayerTextDrawSetShadow(playerid,Speedo_Fuel[playerid][1], 1);
-    PlayerTextDrawSetSelectable(playerid,Speedo_Fuel[playerid][1], 0);
-
-    Speedo_Fuel[playerid][2] = CreatePlayerTextDraw(playerid,598.000000, 361.000000, "-");
-    PlayerTextDrawAlignment(playerid,Speedo_Fuel[playerid][2], 2);
-    PlayerTextDrawBackgroundColor(playerid,Speedo_Fuel[playerid][2], 255);
-    PlayerTextDrawFont(playerid,Speedo_Fuel[playerid][2], 3);
-    PlayerTextDrawLetterSize(playerid,Speedo_Fuel[playerid][2], 1.300000, 4.000000);
-    PlayerTextDrawColor(playerid,Speedo_Fuel[playerid][2], -1);
-    PlayerTextDrawSetOutline(playerid,Speedo_Fuel[playerid][2], 0);
-    PlayerTextDrawSetProportional(playerid,Speedo_Fuel[playerid][2], 1);
-    PlayerTextDrawSetShadow(playerid,Speedo_Fuel[playerid][2], 1);
-    PlayerTextDrawSetSelectable(playerid,Speedo_Fuel[playerid][2], 0);
-
-    Speedo_Fuel[playerid][3] = CreatePlayerTextDraw(playerid,598.000000, 351.000000, "-");
-    PlayerTextDrawAlignment(playerid,Speedo_Fuel[playerid][3], 2);
-    PlayerTextDrawBackgroundColor(playerid,Speedo_Fuel[playerid][3], 255);
-    PlayerTextDrawFont(playerid,Speedo_Fuel[playerid][3], 3);
-    PlayerTextDrawLetterSize(playerid,Speedo_Fuel[playerid][3], 1.300000, 4.000000);
-    PlayerTextDrawColor(playerid,Speedo_Fuel[playerid][3], -1);
-    PlayerTextDrawSetOutline(playerid,Speedo_Fuel[playerid][3], 0);
-    PlayerTextDrawSetProportional(playerid,Speedo_Fuel[playerid][3], 1);
-    PlayerTextDrawSetShadow(playerid,Speedo_Fuel[playerid][3], 1);
-    PlayerTextDrawSetSelectable(playerid,Speedo_Fuel[playerid][3], 0);
-
-    Speedo_Fuel[playerid][4] = CreatePlayerTextDraw(playerid,598.000000, 341.000000, "-");
-    PlayerTextDrawAlignment(playerid,Speedo_Fuel[playerid][4], 2);
-    PlayerTextDrawBackgroundColor(playerid,Speedo_Fuel[playerid][4], 255);
-    PlayerTextDrawFont(playerid,Speedo_Fuel[playerid][4], 3);
-    PlayerTextDrawLetterSize(playerid,Speedo_Fuel[playerid][4], 1.300000, 4.000000);
-    PlayerTextDrawColor(playerid,Speedo_Fuel[playerid][4], -1);
-    PlayerTextDrawSetOutline(playerid,Speedo_Fuel[playerid][4], 0);
-    PlayerTextDrawSetProportional(playerid,Speedo_Fuel[playerid][4], 1);
-    PlayerTextDrawSetShadow(playerid,Speedo_Fuel[playerid][4], 1);
-    PlayerTextDrawSetSelectable(playerid,Speedo_Fuel[playerid][4], 0);
-
-    Speedo_Paliwo[playerid] = CreatePlayerTextDraw(playerid,578.000000, 399.000000, "100");
-    PlayerTextDrawAlignment(playerid,Speedo_Paliwo[playerid], 2);
-    PlayerTextDrawBackgroundColor(playerid,Speedo_Paliwo[playerid], 255);
-    PlayerTextDrawFont(playerid,Speedo_Paliwo[playerid], 3);
-    PlayerTextDrawLetterSize(playerid,Speedo_Paliwo[playerid], 0.300000, 1.000000);
-    PlayerTextDrawColor(playerid,Speedo_Paliwo[playerid], -1);
-    PlayerTextDrawSetOutline(playerid,Speedo_Paliwo[playerid], 0);
-    PlayerTextDrawSetProportional(playerid,Speedo_Paliwo[playerid], 1);
-    PlayerTextDrawSetShadow(playerid,Speedo_Paliwo[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid,Speedo_Paliwo[playerid], 0);
-
-    Speedo_GPS[playerid] = CreatePlayerTextDraw(playerid,89.000000, 427.000000, "_");
-    PlayerTextDrawAlignment(playerid,Speedo_GPS[playerid], 2);
-    PlayerTextDrawBackgroundColor(playerid,Speedo_GPS[playerid], 255);
-    PlayerTextDrawFont(playerid,Speedo_GPS[playerid], 1);
-    PlayerTextDrawLetterSize(playerid,Speedo_GPS[playerid], 0.300000, 1.500000);
-    PlayerTextDrawColor(playerid,Speedo_GPS[playerid], -1);
-    PlayerTextDrawSetOutline(playerid,Speedo_GPS[playerid], 0);
-    PlayerTextDrawSetProportional(playerid,Speedo_GPS[playerid], 1);
-    PlayerTextDrawSetShadow(playerid,Speedo_GPS[playerid], 1);
-    PlayerTextDrawSetSelectable(playerid,Speedo_GPS[playerid], 0); */
 
     Licznik[playerid] = CreatePlayerTextDraw(playerid,529.000000, 379.000000, "Speed: 320 km/h~n~Paliwo: 320/320l~n~Stan:   100~n~GPS: Los Santos Airport");
     PlayerTextDrawBackgroundColor(playerid,Licznik[playerid], 153);
@@ -1704,14 +1485,6 @@ Speedo_PlayerLoad(playerid)
 
 Speedo_PlayerUnload(playerid)
 {
-    /*PlayerTextDrawDestroy(playerid, Speedo_Lights[playerid]);
-    PlayerTextDrawDestroy(playerid, Speedo_Engine[playerid]);
-
-    for(new i=0;i<5;i++) PlayerTextDrawDestroy(playerid, Speedo_Fuel[playerid][i]);
-    PlayerTextDrawDestroy(playerid, Speedo_Paliwo[playerid]);
-    PlayerTextDrawDestroy(playerid, Speedo_Speed[playerid]);
-
-    PlayerTextDrawDestroy(playerid, Speedo_GPS[playerid]);*/
     PlayerTextDrawDestroy(playerid, Licznik[playerid]);
 }
 

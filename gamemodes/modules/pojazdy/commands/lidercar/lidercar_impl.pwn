@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_lidercar_Impl(playerid, akcja[16], opcje[256])
 {
-    if(!orgIsLeader(playerid) && PlayerInfo[playerid][pLider] == 0)
+    if(!IsPlayerOrgLeader(playerid) && PlayerInfo[playerid][pLider] == 0)
     {
         sendErrorMessage(playerid, "Nie jesteœ liderem!");
         return 1;
@@ -59,7 +59,7 @@ command_lidercar_Impl(playerid, akcja[16], opcje[256])
     }
 
     if(strcmp(akcja, "", true) != 0)
-        Log(serverLog, INFO, "Lider %s u¿y³ /lidercar, akcja: %s", GetNick(playerid), akcja);
+        Log(serverLog, INFO, "Lider %s u¿y³ /lidercar, akcja: %s, pojazd %s", GetPlayerLogName(playerid), akcja, GetVehicleLogName(vehicleID));
 
     // choose command action
 	if(opcjaParkuj) {
@@ -101,7 +101,7 @@ command_lidercar_przemaluj(playerid, vehicleID, opcje[256])
     MRP_ChangeVehicleColor(vehicleID, color1, color2);
 
     // send message, take money
-    SendClientMessage(playerid, COLOR_PINK, "Pojazd przemalowany! -1500$");
+    MruMessageGoodInfo(playerid, "Pojazd przemalowany! -1500$");
     ZabierzKase(playerid, 1500);
     return 1;
 }
@@ -126,9 +126,7 @@ command_lidercar_ranga(playerid, vehicleUID, opcje[256])
     Car_Save(vehicleUID, CAR_SAVE_OWNER);
 
     // send message
-    new string[128];
-    format(string, sizeof(string), "Od teraz tylko osoby z %d rang¹ bêd¹ mog³y u¿ywaæ tego pojazdu.", rank);
-    SendClientMessage(playerid, COLOR_PINK, string);
+    MruMessageGoodInfoF(playerid, "Od teraz tylko osoby z %d rang¹ bêd¹ mog³y u¿ywaæ tego pojazdu.", rank);
     return 1;
 }
 
@@ -139,10 +137,10 @@ command_lidercar_przejmij(playerid, vehicleUID)
         CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FRACTION;
         CarData[vehicleUID][c_Owner] = PlayerInfo[playerid][pLider];
     }
-    else if(orgIsLeader(playerid))
+    else if(IsPlayerOrgLeader(playerid))
     {
         CarData[vehicleUID][c_OwnerType] = CAR_OWNER_FAMILY;
-        CarData[vehicleUID][c_Owner] = gPlayerOrg[playerid];
+        CarData[vehicleUID][c_Owner] = GetPlayerOrg(playerid);
     }
     else
     {
@@ -159,9 +157,9 @@ command_lidercar_przejmij(playerid, vehicleUID)
     Car_Save(vehicleUID, CAR_SAVE_OWNER);
 
     // send message
-    new string[128];
-    format(string, sizeof(string), "Od teraz Twoja frakcja jest w³aœcicielem tego pojazdu.");
-    SendClientMessage(playerid, COLOR_PINK, string);
+    new moneyReturn = GetVehPrice(CarData[vehicleUID][c_Model]) / 2;
+    DajKase(playerid, moneyReturn);
+    MruMessageGoodInfoF(playerid, "Od teraz Twoja frakcja/organizacja jest w³aœcicielem tego pojazdu, otrzymujesz %d$ zwrotu za pojazd.", moneyReturn);
     return 1;
 }
 

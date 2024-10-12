@@ -1,0 +1,14 @@
+{
+    "name": "rentroom",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "wynajmij",
+        "wynajmuj",
+        "wynajem",
+        "wynajmijpokoj"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

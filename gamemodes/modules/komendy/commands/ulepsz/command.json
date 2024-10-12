@@ -1,0 +1,20 @@
+{
+    "name": "ulepsz",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "upgrade",
+        "ulepszenia"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

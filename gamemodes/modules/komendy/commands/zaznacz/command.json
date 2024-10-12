@@ -1,0 +1,9 @@
+{
+    "name": "zaznacz",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": ["mouse", "kursor"],
+    "parameters": [],
+    "date": "15.09.2024"
+}

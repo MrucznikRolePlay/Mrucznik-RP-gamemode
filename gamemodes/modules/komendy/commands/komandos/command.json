@@ -1,0 +1,11 @@
+{
+    "name": "komandos",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "wino"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

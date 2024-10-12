@@ -1,7 +1,7 @@
 {
     "name": "sprzedajbiznes",
     "description": "Komenda, która pozwala sprzedaæ biznes - o ile siê go posiada.",
-    "permissions": [],
+    "permissions": ["everyone"],
     "author": "Simeone",
     "aliases": [],
     "parameters": [

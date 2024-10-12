@@ -51,7 +51,7 @@ command_lowienie_Impl(playerid)
 
         if(Level >= 0 && Level <= 50) { Caught = random(200)-70; }
         else if(Level >= 51 && Level <= 100) { Caught = random(500)-200; }
-        else if(Level >= 101 && Level <= 200) { Caught = random(1000)-500; }
+        else if(Level >= 101 && Level <= 200) { Caught = random(1000)-400; }
         else if(Level >= 201 && Level <= 400) { Caught = random(1600)-600; }
         else if(Level >= 401) { Caught = random(1800)-700; }
         rand = random(sizeof(FishNames));
@@ -100,40 +100,47 @@ command_lowienie_Impl(playerid)
                 SendClientMessage(playerid, COLOR_PANICRED, "twoja postaæ sta³a siê fanatykiem wêdkarstwa. £owisz wiêksze ryby, ale idzie te¿ za tym pewien koszt...");
             }
         }
-        
-        SetTimerEx("Lowienie", 30000 ,0,"d",playerid);
-        FishGood[playerid] = 1;
+
+        if(IsPlayerAtViceCity(playerid))
+        {
+            new hour,unused;
+            gettime(hour,unused,unused);
+            if(hour >= 18 && hour <= 24)
+            {
+                Caught = floatround(Caught * 1.25, floatround_ceil);
+            }
+        }
         
         if(Caught <= 0)
         {
-            sendTipMessageEx(playerid, COLOR_GREY, "¯y³ka pêk³a !");
+            sendTipMessageEx(playerid, COLOR_GREY, "¯y³ka pêk³a!");
             return 1;
         }
         else if(rand == 0)
         {
-            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ Kie³basê wiêc j¹ zjadasz !");
+            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ Kie³basê, wiêc j¹ zjadasz!");
             GetPlayerHealth(playerid, health);
             SetPlayerHealth(playerid, health + 1.0);
             return 1;
         }
         else if(rand == 4)
         {
-            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ stare gacie wiêc je zak³adasz !");
+            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ stare gacie, wiêc je zak³adasz!");
             return 1;
         }
         else if(rand == 7)
         {
-            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ mu³ wiêc go wyrzucasz !");
+            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ mu³, wiêc go wyrzucasz!");
             return 1;
         }
         else if(rand == 10)
         {
-            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ Stare Kalosze wiêc je zak³adasz !");
+            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ Stare Kalosze, wiêc je zak³adasz!");
             return 1;
         }
         else if(rand == 13)
         {
-            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ smalec wiêc go zjadasz !");
+            sendTipMessageEx(playerid, COLOR_GREY, "Z³owi³eœ smalec, wiêc go zjadasz!");
             GetPlayerHealth(playerid, health);
             SetPlayerHealth(playerid, health + 1.0);
             return 1;
@@ -266,7 +273,7 @@ command_lowienie_Impl(playerid)
         else if(PlayerInfo[playerid][pFishSkill] == 400)
         { SendClientMessage(playerid, COLOR_YELLOW, "* Twoje umiejêtnoœci rybaka wynosz¹ teraz 5, mo¿esz ³owiæ wiêksze ryby."); }
         if (PlayerInfo[playerid][pFishes] == 5)
-            PlayerInfo[playerid][pFishes] = gettime() + 900; // 15 minutes
+            PlayerInfo[playerid][pFishes] = gettime() + 60 * 15; // 15 minutes
         MruMySQL_UpdateFish(playerid, Fishes[playerid][pLastFish]);
     }
     else

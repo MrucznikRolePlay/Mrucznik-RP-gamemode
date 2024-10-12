@@ -1,0 +1,27 @@
+{
+    "name": "createbox",
+    "description": "Tworzy obiekt, który mo¿na przenosiæ.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "model",
+            "description": "model"
+        },
+        {
+            "type": "integer",
+            "name": "typ",
+            "description": "typ (1 - MC, 2 - kontrabanda)"
+        },
+        {
+            "type": "integer",
+            "name": "bonus",
+            "description": "bonus"
+        }
+    ],
+    "date": "22.09.2024"
+}

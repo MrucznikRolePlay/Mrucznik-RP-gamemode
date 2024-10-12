@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_ustawcena()
 {
-    
+    new command = Command_GetID("ustawcena");
 
     //aliases
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

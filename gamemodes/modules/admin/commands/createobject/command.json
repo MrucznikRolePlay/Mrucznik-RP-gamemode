@@ -1,0 +1,53 @@
+{
+    "name": "createobject",
+    "description": "Tworzenie obiektu.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "model",
+            "description": "model"
+        },
+        {
+            "type": "float",
+            "name": "x",
+            "description": "x",
+            "defaultValue": "-1.0"
+        },
+        {
+            "type": "float",
+            "name": "y",
+            "description": "y",
+            "defaultValue": "-1.0"
+        },
+        {
+            "type": "float",
+            "name": "z",
+            "description": "z",
+            "defaultValue": "-1.0"
+        },
+        {
+            "type": "float",
+            "name": "rx",
+            "description": "rx",
+            "defaultValue": "0.0"
+        },
+        {
+            "type": "float",
+            "name": "ry",
+            "description": "ry",
+            "defaultValue": "0.0"
+        },
+        {
+            "type": "float",
+            "name": "rz",
+            "description": "rz",
+            "defaultValue": "0.0"
+        }
+    ],
+    "date": "30.09.2024"
+}

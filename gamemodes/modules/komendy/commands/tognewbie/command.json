@@ -1,0 +1,11 @@
+{
+    "name": "tognewbie",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "togn"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

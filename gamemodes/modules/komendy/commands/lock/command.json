@@ -1,0 +1,11 @@
+{
+    "name": "lock",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "unlock"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

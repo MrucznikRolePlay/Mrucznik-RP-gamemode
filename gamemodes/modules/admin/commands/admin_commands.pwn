@@ -33,9 +33,13 @@
 #include "profiler\profiler.pwn"
 #include "setvregistration\setvregistration.pwn"
 #include "specshow\specshow.pwn"
-#include "dmvoff\dmvoff.pwn"
+#include "shotobject\shotobject.pwn"
+#include "dvobiekt\dvobiekt.pwn"
 #include "zmienwiek\zmienwiek.pwn"
-#include "dmvon\dmvon.pwn"
+#include "editobject\editobject.pwn"
+#include "dnobiekt\dnobiekt.pwn"
+#include "destroyobject\destroyobject.pwn"
+#include "createobject\createobject.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -44,8 +48,12 @@ hook OnGameModeInit()
     command_profiler();
     command_setvregistration();
     command_specshow();
-    command_dmvoff();
+    command_shotobject();
+    command_dvobiekt();
     command_zmienwiek();
-    command_dmvon();
+    command_editobject();
+    command_dnobiekt();
+    command_destroyobject();
+    command_createobject();
     
 }

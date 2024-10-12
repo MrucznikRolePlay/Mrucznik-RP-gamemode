@@ -1,0 +1,11 @@
+{
+    "name": "licencje",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "licenses"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

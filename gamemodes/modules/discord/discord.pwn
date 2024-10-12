@@ -27,11 +27,11 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
-LoadDiscordChannels()
-{
-    // new query[512], type, org_id, channel_id[64];
-    // mysql_query("SELECT `type`, `org_id`, `channel_id` FROM `mru_discord` ORDER BY `id` ASC");
-    // mysql_store_result();
+// LoadDiscordChannels()
+// {
+//     new query[512], type, org_id, channel_id[64];
+//     mysql_query("SELECT `type`, `org_id`, `channel_id` FROM `mru_discord` ORDER BY `id` ASC");
+//     mysql_store_result();
 
     // while(mysql_fetch_row_format(query, "|"))
     // {
@@ -83,11 +83,10 @@ DiscordConnectInit()
 	// g_AdminChannelId[16]=DCC_FindChannelById("721816785631838208"); //ig-admin
 	// g_ReportChannelId=DCC_FindChannelById("697009695495422012"); //ig-report
 
-	// LoadDiscordChannels();
-	return 1;
-}
 SendDiscordMessage(channel, message[])
 {
+	// TODO: make discord plugin coexists with requests plugin and enable it
+	#pragma unused channel, message
 	// new dest[512];
 	// utf8encode(dest, message);
 	// switch(channel)
@@ -124,6 +123,8 @@ SendDiscordMessage(channel, message[])
 
 SendDiscordFracMessage(fractionid, message[])
 {
+	// TODO: make discord plugin coexists with requests plugin and enable it
+	#pragma unused fractionid, message
 	// new dest[512];
 	// utf8encode(dest, message);
 	// DCC_SendChannelMessage(g_FracChannel[fractionid], dest);
@@ -132,6 +133,8 @@ SendDiscordFracMessage(fractionid, message[])
 }
 SendDiscordOrgMessage(orgid, message[])
 {
+	// TODO: make discord plugin coexists with requests plugin and enable it
+	#pragma unused orgid, message
 	// if(_:g_OrgChannel[orgid] == 0) return 1;
 
 	// new dest[512];
@@ -175,7 +178,7 @@ SendDiscordOrgMessage(orgid, message[])
 // 		return 1;
 // 	}
 	
-// 	for(new i=0;i<MAX_ORG;i++)
+// 	for(new i=1;i<MAX_ORG;i++)
 //     {
 // 		if(channel == g_OrgChannel[i] && IsBot == false) 
 // 		{
@@ -184,7 +187,7 @@ SendDiscordOrgMessage(orgid, message[])
 // 			format(str,sizeof(str), "[DISCORD] %s: %s",user_name, textMsg);
 // 			utf8decode(dest, str);
 // 			strreplace(dest,"%","#");
-// 			SendNewFamilyMessage(i, TEAM_AZTECAS_COLOR, dest);
+// 			SendOrgMessage(i, TEAM_AZTECAS_COLOR, dest);
 // 			return 1;
 // 		}
 //     }

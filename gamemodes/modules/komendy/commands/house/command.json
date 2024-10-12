@@ -1,0 +1,11 @@
+{
+    "name": "house",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "dom"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

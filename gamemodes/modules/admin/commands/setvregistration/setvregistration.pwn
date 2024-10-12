@@ -41,6 +41,7 @@ command_setvregistration()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

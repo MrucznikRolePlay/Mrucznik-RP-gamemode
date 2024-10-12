@@ -37,7 +37,6 @@
 #include "kupbiznes\kupbiznes.pwn"
 #include "usunbiznes\usunbiznes.pwn"
 #include "zlomujbiznes\zlomujbiznes.pwn"
-#include "biznespomoc\biznespomoc.pwn"
 #include "bizlock\bizlock.pwn"
 #include "sprzedajbiznes\sprzedajbiznes.pwn"
 #include "bpracownicy\bpracownicy.pwn"
@@ -59,7 +58,6 @@ hook OnGameModeInit()
     command_kupbiznes();
     command_usunbiznes();
     command_zlomujbiznes();
-    command_biznespomoc();
     command_bizlock();
     command_sprzedajbiznes();
     command_bpracownicy();

@@ -1,0 +1,12 @@
+{
+    "name": "fskin",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "mundur",
+        "uniform"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

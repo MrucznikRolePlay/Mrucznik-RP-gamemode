@@ -60,7 +60,7 @@ YCMD:sprzedajneon(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, commission;
-    if(sscanf(params, "rd", giveplayerid, commission))
+    if(sscanf(params, "k<fix>d", giveplayerid, commission))
     {
         sendTipMessage(playerid, "U¿yj /sprzedajneon [Nick/ID] [prowizja] ");
         return 1;

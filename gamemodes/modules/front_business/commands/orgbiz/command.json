@@ -1,0 +1,28 @@
+{
+    "name": "orgbiz",
+    "description": "Zarz¹dzanie biznesem organizacyjnym.",
+    "command_tips": ["Dostêpne parametry: lista / zmienczas"],
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "orgbiznes",
+        "bizorg",
+        "orgb"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "16",
+            "name": "action",
+            "description": "akcja"
+        },
+        {
+            "type": "string",
+            "size": "128",
+            "name": "param",
+            "description": "parametry",
+            "defaultValue": ""
+        }
+    ],
+    "date": "08.09.2024"
+}

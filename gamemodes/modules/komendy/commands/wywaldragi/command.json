@@ -1,0 +1,12 @@
+{
+    "name": "wywaldragi",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "wd",
+        "wyrzucdragi"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

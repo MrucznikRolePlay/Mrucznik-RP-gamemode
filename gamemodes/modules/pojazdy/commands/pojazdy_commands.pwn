@@ -33,6 +33,7 @@
 #include "lidercar\lidercar.pwn"
 #include "spawnall\spawnall.pwn"
 #include "sprzedajneon\sprzedajneon.pwn"
+#include "kupwodolot\kupwodolot.pwn"
 
 
 //-------<[ initialize ]>-------
@@ -41,5 +42,6 @@ hook OnGameModeInit()
     command_lidercar();
     command_spawnall();
     command_sprzedajneon();
+    command_kupwodolot();
     
 }

@@ -81,11 +81,22 @@ hook OnDynamicActorStreamIn(actorid, forplayerid)
 	SetDynamicActorPos(actorid, x, y, z);
 }
 
-stock RepairActors(worldID, interiorID)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza'
+task RestreamActors[5000]()
 {
 	for(new i; i<valActor; i++)
 	{
-		if(Actors[i][a_VW] == worldID && Actors[i][a_INT] == interiorID)
+		if(strlen(Actors[i][a_animLib]) > 0 && strlen(Actors[i][a_animName]) > 0)
+		{
+			ApplyDynamicActorAnimation(actorUID[i], Actors[i][a_animLib], Actors[i][a_animName], 4.1, 1, 1, 1, 0, 0);
+		}
+	}
+}
+
+stock RepairActors(worldID, interiorid)//Funkcja naprawiaj¹ce aktorów - gdy zgin¹ dla gracza'
+{
+	for(new i; i<valActor; i++)
+	{
+		if(Actors[i][a_VW] == worldID && Actors[i][a_INT] == interiorid)
 		{
 			SetDynamicActorPos(actorUID[i], Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]); 
 			SetDynamicActorFacingAngle(actorUID[i], Actors[i][a_posR]);
@@ -129,7 +140,18 @@ stock LoadActors()//Wczytywanie actorów, tworzenie textów nad g³ow¹.
 		{
 			new textnamed[64];
 			format(textnamed, sizeof(textnamed), "%s\n[ID: %d]", Actors[i][a_Name], i); 
-			Actors[i][a_TextLabel] = CreateDynamic3DTextLabel(textnamed, COLOR_WHITE, Actors[i][a_posX], Actors[i][a_posY], Actors[i][a_posZ]+0.98, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, Actors[i][a_VW], Actors[i][a_INT], Actors[i][a_Player]);
+
+			new Float:z;
+			if(Actors[i][a_posZ] == 0.0)
+			{
+				z = -1000.0;
+			}
+			else
+			{
+				z = Actors[i][a_posZ];
+			}
+			Actors[i][a_TextLabel] = CreateDynamic3DTextLabel(textnamed, COLOR_WHITE, 
+				Actors[i][a_posX], Actors[i][a_posY], z+0.98, 5.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, Actors[i][a_VW], Actors[i][a_INT], Actors[i][a_Player]);
 		}
 		if(strlen(Actors[i][a_animLib]) > 3 && strlen(Actors[i][a_animName]) > 3)
 		{

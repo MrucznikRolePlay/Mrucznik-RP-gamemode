@@ -1,0 +1,15 @@
+{
+    "name": "kuppojazd",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "kupsamochod",
+        "kupauto",
+        "kupmotor",
+        "kupmotocykl",
+        "buycar"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

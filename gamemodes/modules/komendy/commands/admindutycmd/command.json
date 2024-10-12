@@ -1,0 +1,12 @@
+{
+    "name": "admindutycmd",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "aduty",
+        "adminduty"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

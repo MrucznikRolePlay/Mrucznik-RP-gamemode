@@ -1,0 +1,22 @@
+{
+    "name": "gotofrontbiz",
+    "description": "Teleportuje Ciê do biznesu-przykrywki.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "gotofb"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "bizid",
+            "description": "id biznesu"
+        },
+        {
+            "type": "integer",
+            "name": "position",
+            "description": "id pozycji, 0-wejscie, 1-wyjscie, 2-przejmowanie"
+        }
+    ],
+    "date": "08.09.2024"
+}

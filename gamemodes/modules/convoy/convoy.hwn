@@ -22,18 +22,6 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
-enum eBox 
-{
-    bool:box_used,
-    box_object,
-    box_player,
-    box_attachedSlot,
-    Float:box_x,
-    Float:box_y,
-    Float:box_z,
-    box_bonus
-}
-
 enum CONVOY_STOP_REASONS
 {
     CONVOY_STOP_VEHICLE_DESTROYED,
@@ -44,9 +32,6 @@ enum CONVOY_STOP_REASONS
 //-----------------<[ Zmienne: ]>-------------------
 new Vector:VConvoyActors;
 new Map:MActors3DTexts;
-
-new Boxes[MAX_BOXES][eBox];
-new carryingBox[MAX_PLAYERS];
 
 new bool:ConvoyStarted = false;
 new bool:convoyDelayed = false;

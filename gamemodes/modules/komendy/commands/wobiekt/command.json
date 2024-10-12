@@ -1,0 +1,20 @@
+{
+    "name": "wobiekt",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "slot",
+            "description": "slot"
+        }
+    ],
+    "date": "15.09.2024"
+}

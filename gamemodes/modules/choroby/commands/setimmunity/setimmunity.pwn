@@ -57,7 +57,7 @@ YCMD:setimmunity(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, immunity;
-    if(sscanf(params, "rd", giveplayerid, immunity))
+    if(sscanf(params, "k<fix>d", giveplayerid, immunity))
     {
         sendTipMessage(playerid, "U¿yj /setimmunity [Nick/ID] [immunity] ");
         return 1;

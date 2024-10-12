@@ -27,7 +27,24 @@
 
 //-----------------<[ Callbacki: ]>-------------------
 //-----------------<[ Funkcje: ]>-------------------
-DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255, bool:specialCome=false)
+DodajWejscieNoPickup(Float:fx1, Float:fy1, Float:fz1, vw1=0, int1=0, Float:fx2, Float:fy2, Float:fz2, vw2=0, int2=0, wejdzUID=0, playerLocal=255)
+{
+	wejscia[iloscwejsc][w_x1] = fx1;
+	wejscia[iloscwejsc][w_y1] = fy1;
+	wejscia[iloscwejsc][w_z1] = fz1;
+	wejscia[iloscwejsc][w_x2] = fx2;
+	wejscia[iloscwejsc][w_y2] = fy2;
+	wejscia[iloscwejsc][w_z2] = fz2;
+	wejscia[iloscwejsc][w_vw1] = vw1;
+	wejscia[iloscwejsc][w_int1] = int1;
+	wejscia[iloscwejsc][w_vw2] = vw2;
+	wejscia[iloscwejsc][w_int2] = int2;
+	wejscia[iloscwejsc][w_pLocal] = playerLocal;
+	wejscia[iloscwejsc][w_UID] = wejdzUID;
+	return iloscwejsc++;
+}
+
+DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, vw1=0, int1=0, vw2=0, int2=0, nazwain[]="", nazwaout[]="", wejdzUID=0, playerLocal=255, bool:specialCome=false, outPickup=1239, inPickup=1239)
 {
 	wejscia[iloscwejsc][w_x1] = fx1;
 	wejscia[iloscwejsc][w_y1] = fy1;
@@ -47,21 +64,21 @@ DodajWejscie(Float:fx1, Float:fy1, Float:fz1, Float:fx2, Float:fy2, Float:fz2, v
 	}
 	if(isnull(nazwain)) 
 	{
-		CreateDynamicPickup(1239, 2, fx1, fy1, fz1, vw1, int1);
+		CreateDynamicPickup(inPickup, 2, fx1, fy1, fz1, vw1, int1);
 	}
 	else  
 	{
 		new Float:range = (int1 == 0 && vw1 == 0) ? EXTERIOR_3DTEXT_RANGE : INTERIOR_3DTEXT_RANGE;
-		CreateDynamic3DTextLabel(nazwain, COLOR_PURPLE, fx1, fy1, fz1, range, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, vw1, int1);
+		CreateDynamic3DTextLabel(nazwain, COLOR_BROWN, fx1, fy1, fz1, range, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, vw1, int1);
 	}
 	if(isnull(nazwaout)) 
 	{
-		CreateDynamicPickup(1239, 2, fx1, fy1, fz1, vw2, int2);
+		CreateDynamicPickup(outPickup, 2, fx1, fy1, fz1, vw2, int2);
 	}
 	else 
 	{
 		new Float:range = ((int2 == 0 && vw2 == 0) ? (EXTERIOR_3DTEXT_RANGE) : (INTERIOR_3DTEXT_RANGE));
-		CreateDynamic3DTextLabel(nazwaout, COLOR_PURPLE, fx2, fy2, fz2, range, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, vw2, int2);
+		CreateDynamic3DTextLabel(nazwaout, COLOR_BROWN, fx2, fy2, fz2, range, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, vw2, int2);
 	}
 	
 	return iloscwejsc++;
@@ -307,14 +324,6 @@ Sprawdz_UID_Wchodzenie(playerid, Check_ID)
 		}
 		GameTextForPlayer(playerid, "~w~by~n~Simeone & Rozalka", 5000, 1);
 	}
-	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
-	{
-		if(SektaKey[playerid] == 0 && GetPlayerOrg(playerid) != FAMILY_SEKTA) 
-    	{
-			noAccessCome[playerid] = 1; 
-			return 1;
-		}
-	}
 	else if(Check_ID == 18 || Check_ID == 19) //ibiza audio
 	{
 		PlayAudioStreamForPlayer(playerid, IBIZA_Stream,VinylAudioPos[0],VinylAudioPos[1],VinylAudioPos[2], VinylAudioPos[3], 1);
@@ -344,14 +353,6 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 	else if(Check_ID == 6)
 	{
 		StopAudioStreamForPlayer(playerid);	
-	}
-	else if(Check_ID == 17)//Sekta rozalki, vw=20 pod cmenatrzem przy kasynie
-	{
-		if(SektaKey[playerid] == 0 && GetPlayerOrg(playerid) != FAMILY_SEKTA) 
-    	{
-			noAccessCome[playerid] = 1; 
-			return 1;
-		}
 	}
 	else if(Check_ID == 2)
 	{
@@ -425,6 +426,7 @@ Sprawdz_UID_Wychodzenie(playerid, Check_ID)
 	}
 	return 0; 
 }
+
 SprawdzWejscia(playerid)
 {
 	for(new i; i<iloscwejsc; i++)
@@ -442,7 +444,7 @@ SprawdzWejscia(playerid)
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw2]);
 			PlayerInfo[playerid][pLocal] = wejscia[i][w_pLocal];
 			SetInteriorTimeAndWeather(playerid);
-			fixActorsTimer[playerid] = SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
+			SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}
@@ -459,39 +461,39 @@ SprawdzWejscia(playerid)
 			SetPlayerVirtualWorld(playerid, wejscia[i][w_vw1]);
 			PlayerInfo[playerid][pLocal] = PLOCAL_DEFAULT;
 			SetServerWeatherAndTime(playerid);
-			fixActorsTimer[playerid] = SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
+			SetTimerEx("ActorsFix", 4000, 0, "i", playerid);
 			Wchodzenie(playerid);
 			return 1;
 		}
 	}
 	if(!IsPlayerInAnyVehicle(playerid))
 	{
-		for(new iduo; iduo<valueWjedz; iduo++)
+		for(new iduo; iduo<CurrentMaxCarEntrance; iduo++)
 		{
 			if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wj_X], wjazdy[iduo][wj_Y], wjazdy[iduo][wj_Z]))//Wejœcie
 			{
-				if(wjazdy[iduo][pFracOwn] == 0 && wjazdy[iduo][pOrgOwn] == 0)
+				if(wjazdy[iduo][pFracOwn] != 0 && wjazdy[iduo][pFracOwn] != GetPlayerFraction(playerid))
 				{
-					SetPlayerVirtualWorld(playerid, wjazdy[iduo][wj_VW]);
-					SetPLocal(playerid, wjazdy[iduo][wj_PLOCAL]);
-					SetPlayerPos(playerid, wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]);
-					return 1;
+					return 0;
 				}
-				if(wjazdy[iduo][pFracOwn] > 0 || wjazdy[iduo][pOrgOwn] > 0)
+				if(wjazdy[iduo][pOrgOwn] != 0 && wjazdy[iduo][pOrgOwn] != GetPlayerOrg(playerid))
 				{
-					if(GetPlayerFraction(playerid) == wjazdy[iduo][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[iduo][pOrgOwn])
-					{
-						SetPlayerVirtualWorld(playerid, wjazdy[iduo][wj_VW]);
-						SetPLocal(playerid, wjazdy[iduo][wj_PLOCAL]);
-						SetPlayerPos(playerid, wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]);
-					}
+					return 0;
 				}
+				SetPlayerInterior(playerid, wjazdy[iduo][wj_Int]);
+				SetPlayerVirtualWorld(playerid, wjazdy[iduo][wj_VW]);
+				SetPlayerLocal(playerid, wjazdy[iduo][wj_PLOCAL]);
+				SetPlayerPos(playerid, wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]);
+				return 1;
 				
 			}
-			if(IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]))
+			if(GetPlayerVirtualWorld(playerid) == wjazdy[iduo][wj_VW] && 
+				GetPlayerInterior(playerid) == wjazdy[iduo][wj_VW] &&
+				IsPlayerInRangeOfPoint(playerid, wjazdy[iduo][RangeofPoint], wjazdy[iduo][wy_X], wjazdy[iduo][wy_Y], wjazdy[iduo][wy_Z]))
 			{
+				SetPlayerInterior(playerid, 0);
 				SetPlayerVirtualWorld(playerid, 0);
-				SetPLocal(playerid, PLOCAL_DEFAULT);
+				SetPlayerLocal(playerid, PLOCAL_DEFAULT);
 				SetPlayerPos(playerid, wjazdy[iduo][wj_X], wjazdy[iduo][wj_Y], wjazdy[iduo][wj_Z]);
 			}
 		
@@ -503,25 +505,22 @@ SprawdzWejscia(playerid)
 //-------------------
 //-----[ Wjedz ]-----
 //-------------------
-StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
+StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjedzY, Float:wyjedzZ, Float:RangePoint, VW, int=0, MessageIN[]=" ", MessageOut[]=" ", FracOwner=0, OrgOwner=0, local)
 {
-	wjazdy[valueWjedz][wj_X] = wjedzX;
-	wjazdy[valueWjedz][wj_Y] = wjedzY;
-	wjazdy[valueWjedz][wj_Z] = wjedzZ;
-	wjazdy[valueWjedz][wy_X] = wyjedzX;
-	wjazdy[valueWjedz][wy_Y] = wyjedzY;
-	wjazdy[valueWjedz][wy_Z] = wyjedzZ;
-	wjazdy[valueWjedz][wj_VW] = VW;
-	wjazdy[valueWjedz][wj_PLOCAL] = local;
-	wjazdy[valueWjedz][pFracOwn] = FracOwner;
-	wjazdy[valueWjedz][pOrgOwn] = OrgOwner;
-	wjazdy[valueWjedz][RangeofPoint] = RangePoint;
+	new idx = CurrentMaxCarEntrance;
+	wjazdy[idx][wj_X] = wjedzX;
+	wjazdy[idx][wj_Y] = wjedzY;
+	wjazdy[idx][wj_Z] = wjedzZ;
+	wjazdy[idx][wy_X] = wyjedzX;
+	wjazdy[idx][wy_Y] = wyjedzY;
+	wjazdy[idx][wy_Z] = wyjedzZ;
+	wjazdy[idx][wj_VW] = VW;
+	wjazdy[idx][wj_Int] = int;
+	wjazdy[idx][wj_PLOCAL] = local;
+	wjazdy[idx][pFracOwn] = FracOwner;
+	wjazdy[idx][pOrgOwn] = OrgOwner;
+	wjazdy[idx][RangeofPoint] = RangePoint;
 
-/*
-	CreateDynamicPickup(1239, 2, wjedzX, wjedzY, wjedzZ, 0, 0);
-	CreateDynamicPickup(1239, 2, wyjedzX, wyjedzY, wyjedzZ, VW, 0);
-	
-*/
 	if(isnull(MessageIN)) 
 	{
 		CreateDynamicPickup(1239, 2, wjedzX, wyjedzY, wjedzZ, 0, 0);
@@ -539,156 +538,78 @@ StworzWjedz(Float:wjedzX, Float:wjedzY, Float:wjedzZ, Float:wyjedzX, Float:wyjed
 		CreateDynamic3DTextLabel(MessageOut, COLOR_RED, wyjedzX, wyjedzY, wyjedzZ, 9.5, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, VW, 0);
 	}
 	
-	return valueWjedz++;
+	return CurrentMaxCarEntrance++;
 }
 //new 
 SprawdzWjazdy(playerid)
 {
-	if(GetPlayerVehicleSeat(playerid) != 0)
+	if(!IsPlayerInAnyVehicle(playerid) || GetPlayerVehicleSeat(playerid) != 0)
 	{
 		sendErrorMessage(playerid, "Nie jesteœ kierowc¹"); 
 		return 1;
 	}
-	new pVehAcID = GetPlayerVehicleID(playerid);
-	for(new i; i<valueWjedz; i++)
+	
+	new vehicleid = GetPlayerVehicleID(playerid);
+	for(new i; i<CurrentMaxCarEntrance; i++)
 	{
 		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
 		{
-			if(wjazdy[i][pFracOwn] > 0 && wjazdy[i][pOrgOwn] > 0)
+			if(wjazdy[i][pFracOwn] != 0 && wjazdy[i][pFracOwn] != GetPlayerFraction(playerid))
 			{
-				if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn] || GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
-				{
-					if(IsPlayerInAnyVehicle(playerid))
-					{
-						TogglePlayerControllable(playerid, 0);
-						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-						PlayerTextDrawShow(playerid, textwjedz[playerid]);
-						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);//
-						SetPVarInt(playerid, "CodeACDisable", 1);
-						SetInteriorTimeAndWeather(playerid);
-					}
-					else
-					{
-						sendTipMessage(playerid, "U¿yj /wejdz"); 
-						return 1;
-					}
-				}
-				else
-				{
-					sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ"); 
-				}
+				sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ"); 
+				return 0;
 			}
-			else if(wjazdy[i][pFracOwn] > 0  && wjazdy[i][pOrgOwn] == 0)
+			if(wjazdy[i][pOrgOwn] != 0 && wjazdy[i][pOrgOwn] != GetPlayerOrg(playerid))
 			{
-				if(GetPlayerFraction(playerid) == wjazdy[i][pFracOwn])
-				{
-					if(IsPlayerInAnyVehicle(playerid))
-					{
-						TogglePlayerControllable(playerid, 0);
-						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-						PlayerTextDrawShow(playerid, textwjedz[playerid]);
-						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
-						SetPVarInt(playerid, "CodeACDisable", 1);//wylaczenie ac
-						SetInteriorTimeAndWeather(playerid);
-					}
-					else
-					{
-						sendTipMessage(playerid, "U¿yj /wejdz");
-						return 1;
-					}
-				}
-				else
-				{
-					sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ"); 
-				}
-			
+				sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ"); 
+				return 0;
 			}
-			else if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] > 0)
-			{
-				if(GetPlayerOrg(playerid) == wjazdy[i][pOrgOwn])
-				{
-					if(IsPlayerInAnyVehicle(playerid))
-					{
-						TogglePlayerControllable(playerid, 0);
-						WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-						PlayerTextDrawShow(playerid, textwjedz[playerid]);
-						SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
-						SetPVarInt(playerid, "CodeACDisable", 1);//wylaczenie ac
-						SetInteriorTimeAndWeather(playerid);
-					}
-					else
-					{
-						sendTipMessage(playerid, "* U¿yj /wejdz"); 
-						return 1;
-					}
-				}
-				else
-				{
-					sendTipMessage(playerid, "Nie mo¿esz tutaj wjechaæ"); 
-				}
-			
-			}
-			else if(wjazdy[i][pFracOwn] == 0 && wjazdy[i][pOrgOwn] == 0)
-			{
-				if(IsPlayerInAnyVehicle(playerid))
-				{
-					TogglePlayerControllable(playerid, 0);
-					WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-					PlayerTextDrawShow(playerid, textwjedz[playerid]);
-					SetPVarInt(playerid, "JestPodczasWjezdzania", 1);
-					SetPVarInt(playerid, "CodeACDisable", 1);//wylaczenie ac
-					SetInteriorTimeAndWeather(playerid);
-				}
-				else
-				{
-					sendTipMessage(playerid, "U¿yj /wejdz"); 
-					return 1;
-				}
-			}
+
+			// player
+			SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
+			SetPlayerInterior(playerid, wjazdy[i][wj_Int]);
+			SetInteriorTimeAndWeather(playerid);
+			SetPlayerLocal(playerid, wjazdy[i][wj_PLOCAL]);
+			// vehicle
+			SetVehicleVirtualWorld(vehicleid, wjazdy[i][wj_VW]);
+			LinkVehicleToInterior(vehicleid, wjazdy[i][wj_Int]);
+			defer ResetPosition(vehicleid, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z], 5);
+
 			foreach(new i2 : Player)
 			{
-				if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
+				if(GetPlayerVehicleID(i2) == vehicleid && GetPlayerVehicleSeat(i2) != 0)
 				{
-					WjedzTimer[i2] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", i2);
-					SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
-					SetPVarInt(i2, "CodeACDisable", 1);//wylaczenie ac
-					SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
-					TogglePlayerControllable(i2, 0);
 					SetInteriorTimeAndWeather(i2);
+					SetPlayerVirtualWorld(i2, wjazdy[i][wj_VW]);
+					SetPlayerInterior(i2, wjazdy[i][wj_Int]);
+					SetPlayerLocal(i2, wjazdy[i][wj_PLOCAL]);
 				}
 			}
 			return 1;
 		}
-		if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
+		else if(GetPlayerVirtualWorld(playerid) == wjazdy[i][wj_VW] &&
+			IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//wyjcie
 		{
-			if(IsPlayerInAnyVehicle(playerid))
+			// player
+			SetPlayerVirtualWorld(playerid, 0);
+			SetPlayerInterior(playerid, 0);
+			SetInteriorTimeAndWeather(playerid);
+			SetPlayerLocal(playerid, PLOCAL_DEFAULT);
+			// vehicle
+			SetVehicleVirtualWorld(vehicleid, 0);
+			LinkVehicleToInterior(vehicleid, 0);
+			defer ResetPosition(vehicleid, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z], 5);
+
+			SetServerWeatherAndTime(playerid); 
+			foreach(new i2 : Player)
 			{
-				TogglePlayerControllable(playerid, 0);
-				WjedzTimer[playerid] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", playerid);
-				PlayerTextDrawShow(playerid, textwjedz[playerid]);
-				SetAntyCheatForPlayer(playerid, 4);
-				SetPVarInt(playerid, "JestPodczasWjezdzania", 1); 
-				SetServerWeatherAndTime(playerid); 
-				
-				foreach(new i2 : Player)
+				if(GetPlayerVehicleID(i2) == vehicleid && GetPlayerVehicleSeat(i2) != 0)
 				{
-					if(GetPlayerVehicleID(i2) == pVehAcID && GetPlayerVehicleSeat(i2) != 0)
-					{
-						KillTimer(WjedzTimer[i2]);
-						WjedzTimer[i2] = SetTimerEx("WjedzTimerDebug", 2500, true, "i", i2);
-						SetPVarInt(i2, "JestPodczasWjezdzaniaPasazer", 1);
-						SetPVarInt(i2, "pSeatIDE", GetPlayerVehicleSeat(i2));
-						TogglePlayerControllable(i2, 0); 
-						SetServerWeatherAndTime(i2); 
-						SetAntyCheatForPlayer(i2, 4);
-						sendTipMessage(playerid, "Zmienianie pogody - pomyœlnie wykonano!");
-					}
+					SetServerWeatherAndTime(i2);
+					SetPlayerVirtualWorld(i2, 0);
+					SetPlayerInterior(i2, 0);
+					SetPlayerLocal(i2, PLOCAL_DEFAULT);
 				}
-			}
-			else
-			{
-				sendTipMessage(playerid, "U¿yj /wejdz"); 
-				return 1;
 			}
 			return 1;
 		}
@@ -696,99 +617,14 @@ SprawdzWjazdy(playerid)
 	}
 	return 0;
 }
-forward WjedzTimerDebug(playerid);
-public WjedzTimerDebug(playerid)
+
+timer ResetPosition[100](vehicleid, Float:x, Float:y, Float:z, times)
 {
-	new pVehAcID = GetPlayerVehicleID(playerid);
-	timeSecWjedz[playerid]++; 
-	if(timeSecWjedz[playerid] == 2)
+	SetVehiclePos(vehicleid, x, y, z);
+	if(times > 0)
 	{
-		for(new i; i<valueWjedz; i++)
-		{
-		
-			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
-			{
-				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
-				{
-					TogglePlayerControllable(playerid, 1);
-					SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
-					TogglePlayerControllable(playerid, 0);
-					sendTipMessage(playerid, "Ustalanie VW - Ustalono"); 
-					return 1;
-				}
-				RemovePlayerFromVehicle(playerid);
-				SetPlayerVirtualWorld(playerid, wjazdy[i][wj_VW]);
-				SetVehicleVirtualWorld(pVehAcID, wjazdy[i][wj_VW]);	
-			}
-			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wyjscie
-			{
-				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
-				{
-					TogglePlayerControllable(playerid, 0);
-					SetPlayerVirtualWorld(playerid, 0);
-					TogglePlayerControllable(playerid, 1);
-					sendTipMessage(playerid, "Ustalanie VW - Ustawiono"); 
-					return 1;
-				}
-				RemovePlayerFromVehicle(playerid);
-				SetPlayerVirtualWorld(playerid, 0);
-				SetVehicleVirtualWorld(pVehAcID, 0);
-			}
-			
-		}
-		PutPlayerInVehicle(playerid, pVehAcID, 0);
+		defer ResetPosition(vehicleid, x, y, z, times-1);
 	}
-	if(timeSecWjedz[playerid] == 3)
-	{
-		for(new i; i<valueWjedz; i++)
-		{
-			if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]))//Wejœcie
-			{
-				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
-				{
-					new pSeat = GetPVarInt(playerid, "pSeatIDE"); 
-					TogglePlayerControllable(playerid, 1);
-					PutPlayerInVehicle(playerid, pVehAcID, pSeat);
-					KillTimer(WjedzTimer[playerid]);
-					SetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer", 0);
-					SetPVarInt(playerid, "CodeACDisable", 0);
-					SetAntyCheatForPlayer(playerid, 0);
-					sendTipMessage(playerid, "Wykonano wjedŸ dla pasa¿era"); 
-					timeSecWjedz[playerid]=0; 
-					return 1;
-				}
-				SetVehiclePos(pVehAcID, wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]);
-				new pVeh2 = GetPlayerVehicleID(playerid);
-				CarData[VehicleUID[pVeh2][vUID]][c_VW] = wjazdy[i][wj_VW]; 
-				SetAntyCheatForPlayer(playerid, 0);
-			}
-			else if(IsPlayerInRangeOfPoint(playerid, wjazdy[i][RangeofPoint], wjazdy[i][wy_X], wjazdy[i][wy_Y], wjazdy[i][wy_Z]))//Wejœcie
-			{
-				if(GetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer") == 1)
-				{
-					new pSeat = GetPVarInt(playerid, "pSeatIDE"); 
-					TogglePlayerControllable(playerid, 1);
-					PutPlayerInVehicle(playerid, pVehAcID, pSeat);
-					KillTimer(WjedzTimer[playerid]);
-					SetPVarInt(playerid, "JestPodczasWjezdzaniaPasazer", 0);
-					SetPVarInt(playerid, "CodeACDisable", 0);
-					SetAntyCheatForPlayer(playerid, 0);
-					sendTipMessage(playerid, "Wykonano wyjedŸ dla pasa¿era!"); 
-					timeSecWjedz[playerid] = 0; 
-					return 1;
-				}
-				SetVehiclePos(pVehAcID, wjazdy[i][wj_X], wjazdy[i][wj_Y], wjazdy[i][wj_Z]);
-			}
-		}
-		PlayerTextDrawHide(playerid, textwjedz[playerid]);
-		TogglePlayerControllable(playerid, 1);
-		timeSecWjedz[playerid] = 0;
-		SetPVarInt(playerid, "JestPodczasWjezdzania", 0);
-		KillTimer(WjedzTimer[playerid]);
-		SetPVarInt(playerid, "CodeACDisable", 0);
-		SetAntyCheatForPlayer(playerid, 0);
-	}
-	return 1;
 }
 
 //------------------<[ MySQL: ]>--------------------

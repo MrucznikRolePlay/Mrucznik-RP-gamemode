@@ -97,6 +97,7 @@ SendMessageToBiz(bizID, mess[], color, type)
 	}
 	return 1; 
 }
+
 BusinessPayDay(playerid) 
 {
 	new randomValue = random(10); 
@@ -104,7 +105,7 @@ BusinessPayDay(playerid)
 	new string[124]; 
 	if(PlayerInfo[playerid][pBusinessOwner] == INVALID_BIZ_ID)
 	{
-		sendTipMessage(playerid, "Nie posiadasz w³asego biznesu"); 
+		sendTipMessage(playerid, "Nie posiadasz w³asnego biznesu"); 
 		return 1;
 	}
 	if(randomValue == 0)
@@ -124,7 +125,7 @@ BusinessPayDay(playerid)
 			format(string, sizeof(string), "  Dochód z biznesu: $%d", moneyForPlayer);
 			SendClientMessage(playerid,COLOR_WHITE, string);
 			SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
-			SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ maksimum"); 
+			SendClientMessage(playerid,COLOR_WHITE, "Twój biznes wygenerowa³ {37AC45}maksymalne przychody!"); 
 			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 			DajKase(playerid, moneyForPlayer);
 		}
@@ -137,7 +138,7 @@ BusinessPayDay(playerid)
 			format(string, sizeof(string), "  Dochód z biznesu: $%d", moneyForPlayer);
 			SendClientMessage(playerid,COLOR_WHITE, string);
 			SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
-			SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {37AC45}osi¹gn¹³ po³owiczny zysk"); 
+			SendClientMessage(playerid,COLOR_WHITE, "Twój biznes wygenerowa³ {37AC45}po³owiczne przychody"); 
 			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 			DajKase(playerid, moneyForPlayer);
 		}
@@ -150,7 +151,7 @@ BusinessPayDay(playerid)
 			format(string, sizeof(string), "  Dochód z biznesu: $%d", moneyForPlayer);
 			SendClientMessage(playerid,COLOR_WHITE, string);
 			SendClientMessage(playerid, COLOR_WHITE, "Bonusy: {FFFF00}Konto Premium");
-			SendClientMessage(playerid,COLOR_WHITE, "Twój dochód z biznesu {FF0000}nie przyniós³ zysku"); 
+			SendClientMessage(playerid,COLOR_WHITE, "Twój biznes {999999}nie przyniós³ zysku"); 
 			SendClientMessage(playerid,COLOR_LIGHTBLUE, "|_________________________|");
 		}
 		else if(randomValue >= 8)// 30 % na strate po³owiczn¹ 
@@ -297,11 +298,6 @@ stock CorrectPlayerBusiness(playerid)
 	{
 		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;
 		PlayerInfo[playerid][pBusinessMember] = INVALID_BIZ_ID; 
-
-		/*sendErrorMessage(playerid, "Posiada³eœ b³êdny biznes - zosta³ on WYZEROWANY!");
-		sendTipMessage(playerid, "Je¿eli uwa¿asz to za b³¹d - zg³oœ to na naszym forum!"); 
-		Log(serverLog, ERROR, "%s wyzerowanie biznesu %d", GetPlayerLogName(playerid), PlayerInfo[playerid][pBusinessOwner]);
-		PlayerInfo[playerid][pBusinessOwner] = INVALID_BIZ_ID;*/
 	}
 	if(PlayerInfo[playerid][pBusinessMember] == 0)
 	{
@@ -332,18 +328,6 @@ CheckPlayerBusiness(playerid)
 
 stock GetFreeBizID()
 {
-	/*new bID = BusinessLoaded+1; 
-	for(new i; i<BusinessLoaded; i++)
-	{
-		if(i != 0)
-		{
-			if(strlen(Business[i][b_Name]) <= 3)
-			{
-				bID = i; 
-				return bID; 
-			}
-		}
-	}*/ 
 	new bID = BusinessLoaded++; 
 	return bID; 
 }
@@ -353,8 +337,34 @@ stock LoadBusinessPickup()
 	{
 		if(strlen(Business[i][b_Name]) >= 3 && Business[i][b_enX] != 0.0 && Business[i][b_enY] != 0.0)
 		{	
-			BizPickUp[i] = CreateDynamicPickup(1272, 1, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 0, 0 -1);
-			Biz3DText[i] = CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.6, 20.0);
+			BizPickUp[i] = CreateDynamicPickup(1272, 1, Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], Business[i][b_enVw], Business[i][b_enInt]);
+			Biz3DText[i] = CreateDynamic3DTextLabel(Business[i][b_Name], 0x008080FF, 
+				Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ]+0.6, 
+				20.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 1, 
+				Business[i][b_enVw], Business[i][b_enInt]);
+			
+			if(Business[i][b_icon] != 0)
+			{
+				new iconVw, iconInt;
+				if(Business[i][b_enVw] != 0)
+				{
+					iconVw = -1;
+				}
+				if(Business[i][b_enInt] != 0)
+				{
+					iconInt = -1;
+				}
+				
+				MruCreateDynamicMapIcon(Business[i][b_enX], Business[i][b_enY], Business[i][b_enZ], 
+					Business[i][b_icon], // type https://www.open.mp/docs/scripting/resources/mapicons
+					-1, // color, This should only be used with the square icon (ID: 0)
+					iconVw, // worldid
+					iconInt, // interiorid
+					-1, // playerid
+					2000.0, // streamdistance -1 = inifnite
+					MAPICON_GLOBAL // style https://www.open.mp/docs/scripting/resources/mapiconstyles
+				);	
+			}
 		}
 	}
 	return 1;
@@ -377,6 +387,7 @@ stock UnLoadBusiness(idBIZ)
 	Business[idBIZ][b_pLocal] = 255; 
 	Business[idBIZ][b_maxMoney] = 0;
 	Business[idBIZ][b_cost] = 0;
+	Business[idBIZ][b_icon] = 0;
 	format(stringName, sizeof(stringName), " ");
 	Business[idBIZ][b_Location] = stringName; 
 	format(stringNamed, sizeof(stringNamed), " ");

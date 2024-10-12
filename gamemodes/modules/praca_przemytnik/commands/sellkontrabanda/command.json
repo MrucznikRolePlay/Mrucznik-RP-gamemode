@@ -1,0 +1,25 @@
+{
+    "name": "sellkontrabanda",
+    "description": "Sprzedaj graczowi swoj¹ kontrabandê.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": ["sprzedajkontrabande", "sellkontraband", "sellkontrabande", "sellcontraband"],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "count",
+            "description": "liczba"
+        },
+        {
+            "type": "integer",
+            "name": "price",
+            "description": "cena"
+        }
+    ],
+    "date": "03.05.2024"
+}

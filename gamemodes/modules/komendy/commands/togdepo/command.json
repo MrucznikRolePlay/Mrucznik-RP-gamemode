@@ -1,0 +1,11 @@
+{
+    "name": "togdepo",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "zablokujdepo"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

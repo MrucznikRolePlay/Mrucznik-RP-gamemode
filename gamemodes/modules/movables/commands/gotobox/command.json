@@ -1,0 +1,17 @@
+{
+    "name": "gotobox",
+    "description": "Teleportuje Ciê do przenoszalnego obiektu.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "boxid",
+            "description": "boxid"
+        }
+    ],
+    "date": "22.09.2024"
+}

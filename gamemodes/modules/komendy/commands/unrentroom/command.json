@@ -1,0 +1,12 @@
+{
+    "name": "unrentroom",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "unrent",
+        "niewynajmuj"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

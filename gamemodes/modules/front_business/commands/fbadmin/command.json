@@ -1,0 +1,28 @@
+{
+    "name": "fbadmin",
+    "description": "Administracja biznesami przykrywkami.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "bizId",
+            "description": "id biznesu"
+        },
+        {
+            "type": "string",
+            "size": "32",
+            "name": "action",
+            "description": "opcja (takeover/give)"
+        },
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "parametry",
+            "defaultValue": ""
+        }
+    ],
+    "date": "14.09.2024"
+}

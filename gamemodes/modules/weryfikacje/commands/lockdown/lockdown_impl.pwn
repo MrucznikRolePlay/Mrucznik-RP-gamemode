@@ -46,7 +46,7 @@ command_lockdown_Impl(playerid, typLock)
         return 1;
     }
 
-    if( IsPlayerConnected(playerid) && PlayerInfo[playerid][pAdmin] >= 1 && (typLock >= 0 && typLock <= 2) )
+    if( IsPlayerConnected(playerid) && (PlayerInfo[playerid][pAdmin] >= 1 || PlayerInfo[playerid][pZG] == 10) && (typLock >= 0 && typLock <= 2) )
     {
         switch(typLock)
         {

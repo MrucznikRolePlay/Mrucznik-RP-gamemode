@@ -35,6 +35,10 @@ static const UNOCCUPIED_SYNC = 209;
 //-----------------<[ Funkcje: ]>-------------------
 ProcessACCode(playerid, code)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return;
+	}
 	new ip[16];
 	GetPlayerIp(playerid, ip, sizeof(ip));
 	switch(nexac_additional_settings[code])
@@ -236,6 +240,10 @@ public AntyCheatON(playerid)
 forward OznaczCzitera(playerid);
 public OznaczCzitera(playerid)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
 	new string[71+MAX_PLAYER_NAME];
 	SetPVarInt(playerid, "AC_oznaczony", 1);
 	if(gettime() > GetPVarInt(playerid, "lastSobMsg"))

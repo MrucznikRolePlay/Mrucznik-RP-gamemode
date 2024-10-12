@@ -1,0 +1,9 @@
+{
+    "name": "gspanel",
+    "description": "Panel zarzadzania sklepem z bronia",
+    "permissions": ["everyone"],
+    "author": "wiger",
+    "aliases": ["gunshop"],
+    "parameters": [],
+    "date": "18.02.2024"
+}

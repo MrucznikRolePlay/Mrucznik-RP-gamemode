@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_dajbilet_Impl(playerid, giveplayerid, opcja[24]="1")
 {
-    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
+    if(IsAClubBusinessOwner(playerid) && PlayerInfo[playerid][pRank] >= 6) 
     {
         if(strcmp(opcja,"1",true) == 0 || strcmp(opcja,"normal",true) == 0) IbizaNadajBilet(playerid, giveplayerid, 1);
         if(strcmp(opcja,"2",true) == 0 || strcmp(opcja,"vip",true) == 0) IbizaNadajBilet(playerid, giveplayerid, 2);

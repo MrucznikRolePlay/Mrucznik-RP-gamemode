@@ -40,7 +40,6 @@ command_opis_Impl(playerid, text[])
 			SendClientMessage(playerid, COLOR_GRAD1, "Znaleziono niedozwolony kolor.");
 			return 1;
 		}
-		//todo: kolorowe opisy tylko dla KP
 		new startpos, endpos;
 		if(regex_search(givenString, "[^a-zA-Z0-9¹æê³ñóœ¿Ÿ¥ÆÊ£ÑÓŒ¯ |\\//@:;+?!,.&\\(\\)\\[\\]\\-]", startpos, endpos) && startpos != -1 && endpos != -1)
 		{

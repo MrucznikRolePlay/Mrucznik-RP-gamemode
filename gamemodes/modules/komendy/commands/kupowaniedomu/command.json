@@ -1,0 +1,12 @@
+{
+    "name": "kupowaniedomu",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "kupdom",
+        "buyhouse"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

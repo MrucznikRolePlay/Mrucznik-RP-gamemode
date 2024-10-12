@@ -1,0 +1,11 @@
+{
+    "name": "usunbron",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "ub"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -1,0 +1,19 @@
+{
+    "name": "zabierz",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "take"
+    ],
+    "parameters": [
+        {
+            "type": "string",
+            "size": "256",
+            "name": "param",
+            "description": "",
+            "defaultValue": ""
+        }
+    ],
+    "date": "15.09.2024"
+}

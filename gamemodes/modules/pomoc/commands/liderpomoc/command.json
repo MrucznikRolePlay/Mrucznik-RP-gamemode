@@ -1,0 +1,12 @@
+{
+    "name": "liderpomoc",
+    "description": "Komendy liderów frakcji i organizacji.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "leaderhelp",
+        "liderhelp"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}
