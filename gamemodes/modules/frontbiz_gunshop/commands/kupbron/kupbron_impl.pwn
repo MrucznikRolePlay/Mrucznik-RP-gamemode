@@ -26,7 +26,7 @@
 command_kupbron_Impl(playerid)
 {
     new bizId = IsAtFrontBusinessInteriorType(playerid, FRONT_BIZ_TYPE_GUNSHOP);
-    if(bizId != -1)
+    if(bizId == -1)
     {
         MruMessageFail(playerid, "By kupiæ broñ, musisz znajdowaæ siê w gunshopie.");
         return 1;

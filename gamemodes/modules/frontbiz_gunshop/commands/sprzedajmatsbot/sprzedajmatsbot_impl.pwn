@@ -38,7 +38,7 @@ command_sprzedajmatsbot_Impl(playerid, mats)
     }
 
     new bizId = IsAtFrontBusinessInteriorType(playerid, FRONT_BIZ_TYPE_GUNSHOP);
-    if(bizId != -1)
+    if(bizId == -1)
     {
         MruMessageFail(playerid, "By sprzedaæ materia³y botowi, musisz znajdowaæ siê w gunshopie.");
         return 1;

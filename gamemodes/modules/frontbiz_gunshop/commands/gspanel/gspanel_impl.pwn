@@ -31,7 +31,7 @@ command_gspanel_Impl(playerid)
     }
 
     new bizId = IsAtFrontBusinessInteriorType(playerid, FRONT_BIZ_TYPE_GUNSHOP);
-    if(bizId != -1)
+    if(bizId == -1)
     {
         MruMessageFail(playerid, "By zarz¹dzaæ gunshopem, musisz znajdowaæ siê w jego interiorze.");
         return 1;
