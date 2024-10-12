@@ -76,7 +76,7 @@ new GunInfo[][eGunInfo] = {
     // bronie specjalne
     {"ogniomiotacz",5,      37,     7,      200,    10000,      50},
     {"rpg",         5,      35,     7,      10,     15000,      200},
-    {"minigun",     5,      38,     7,      100,    50000,      1000},
+    // {"minigun",     5,      38,     7,      100,    50000,      1000},
     // ³adunki wybuchowe
     {"molotov",     3,      18,     8,      10,     2500,       25},
     {"granaty",     4,      16,     8,      10,     2500,       35},
