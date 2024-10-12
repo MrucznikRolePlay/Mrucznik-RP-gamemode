@@ -52,7 +52,7 @@ enum eGunInfo {
 new GunInfo[][eGunInfo] = {
     // name,    skill,  gunid,  slot,   ammo,   materials, contraband
     // broñ bia³a
-    {"katana",      1,      8,      1,      1,      100,        0},
+    {"katana",      1,      8,      1,      1,      25,        0},
     {"pila",        4,      9,      1,      1,      1000,       20},
     {"noz",         5,      4,      1,      1,      100,        100},
     // pistolety
