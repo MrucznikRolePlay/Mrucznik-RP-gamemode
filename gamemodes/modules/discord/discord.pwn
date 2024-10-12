@@ -27,6 +27,18 @@
 
 //-----------------<[ Callbacki: ]>-----------------
 //-----------------<[ Funkcje: ]>-------------------
+
+DiscordConnectInit()
+{
+	if(IsAProductionServer())
+	{
+		DC_PlayersCountChannel = DCC_FindChannelById("1250784506453954590"); // ogólne/liczba-graczy
+	}
+	else 
+	{
+		DC_PlayersCountChannel = DCC_FindChannelById("1250788039819661324"); // test/liczba-graczy-test
+	}
+}
 // LoadDiscordChannels()
 // {
 //     new query[512], type, org_id, channel_id[64];
@@ -47,18 +59,6 @@
     // }
     // mysql_free_result();
     // print("Wczytano kana³y discord");
-}
-DiscordConnectInit()
-{
-	if(IsAProductionServer())
-	{
-		DC_PlayersCountChannel = DCC_FindChannelById("1250784506453954590"); // ogólne/liczba-graczy
-	}
-	else 
-	{
-		DC_PlayersCountChannel = DCC_FindChannelById("1250788039819661324"); // test/liczba-graczy-test
-	}
-
 	// g_GSLSLOGChannelId=DCC_FindChannelById("723216208165601321"); // GS Los Santos log
 	// g_GSCMLOGChannelId=DCC_FindChannelById("723216292081041408"); // GS Commerce log
 	// g_GSWFLOGChannelId=DCC_FindChannelById("723216357835145376"); // GS Willowfield log
@@ -82,6 +82,7 @@ DiscordConnectInit()
 	// g_AdminChannelId[15]=DCC_FindChannelById("721816814094647418"); //ig-admin
 	// g_AdminChannelId[16]=DCC_FindChannelById("721816785631838208"); //ig-admin
 	// g_ReportChannelId=DCC_FindChannelById("697009695495422012"); //ig-report
+// }
 
 SendDiscordMessage(channel, message[])
 {
