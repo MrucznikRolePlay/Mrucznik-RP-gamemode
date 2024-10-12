@@ -37,7 +37,7 @@ command_gspanel_Impl(playerid)
         return 1;
     }
 
-    if(IsFrontBusinnesOwnedByOrg(bizId, GetPlayerOrg(playerid)))
+    if(!IsFrontBusinnesOwnedByOrg(bizId, GetPlayerOrg(playerid)))
     {
         MruMessageFail(playerid, "Twoja organizacja nie kontroluje tego gunshopu.");
         return 1;
