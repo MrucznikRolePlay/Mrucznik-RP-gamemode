@@ -47,6 +47,7 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #define FIX_ispacked 0 
 #define FIX_OnClientCheckResponse 0
 #define FIXES_OneRandomVehicleColour 1
+#define FIXES_CountFilterscripts 0
 #include <fixes>
 
 //-------<[ Pluginy ]>-------
