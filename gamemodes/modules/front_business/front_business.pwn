@@ -141,6 +141,7 @@ StopFrontBizTakeover(bizId)
 	FrontBusiness[bizId][TakeoverActive] = false;
 	DestroyDynamicCP(FrontBusiness[bizId][TakeoverCheckpoint]);
 	DestroyDynamicPickup(FrontBusiness[bizId][TakeoverPickup]);
+	GangZoneStopFlashForAll(FrontBusiness[bizId][BizGangZone]);
 
 	new winner = -1, maxScore;
 	for(new i=0; i<MAX_ORG; i++)
