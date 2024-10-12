@@ -50,7 +50,7 @@ command_trasa_Impl(playerid)
 
 comand_trasa_dialog_show(playerid)
 {
-	ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz swój kurs:", "Linia 55 - niebieska (920$/p , 9min, 21p, +2)\nLinia 72 - pomarañczowa (800$/p, 6min, 15p, +1)\nLinia 96 - zielona 4s (1240$/p, 8min, 24p, +1)\nLinia 82 ¿ó³ta 5s (2400$/p , 11min, 18p, +3)\nLinia 85 3s (1080$/p , ? min, 24p, +2)\nWycieczka 5s\nPowrót do bazy\nPomoc", "Wybierz", "Wyjdz");
+	ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz swój kurs:", "Linia 55 - niebieska (460$/p , 9min, 21p, +2)\nLinia 72 - pomarañczowa (400$/p, 6min, 15p, +1)\nLinia 96 - zielona 4s (620$/p, 8min, 24p, +1)\nLinia 82 ¿ó³ta 5s (1200$/p , 11min, 18p, +3)\nLinia 85 3s (540$/p , ? min, 24p, +2)\nWycieczka 5s\nPowrót do bazy\nPomoc", "Wybierz", "Wyjdz");
 }
 
 command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])

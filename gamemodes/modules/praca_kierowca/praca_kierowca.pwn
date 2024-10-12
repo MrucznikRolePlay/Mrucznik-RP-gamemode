@@ -308,11 +308,11 @@ GiveMoneyForBusStop(playerid, route, finish=false)
 	new money;
 	switch(route)
 	{
-		case 55: { money = 920; }
-		case 72: { money = 800; }
-		case 96: { money = 1240; }
-		case 82: { money = 2400; }
-		case 85: { money = 1080; }
+		case 55: { money = 460; }
+		case 72: { money = 400; }
+		case 96: { money = 620; }
+		case 82: { money = 1200; }
+		case 85: { money = 540; }
 	}
 
 	if(finish)
