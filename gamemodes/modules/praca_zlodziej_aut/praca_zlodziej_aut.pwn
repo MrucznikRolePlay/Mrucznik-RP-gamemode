@@ -315,24 +315,24 @@ ChooseChopShop(playerid, chop_shop_pos[], is_car_deluxe)
 {
 		new Float:chop_shops_positions[3][3];
 
-		chop_shops_positions[0] = {-5507.7612,2380.1775,5.9174};
-		chop_shops_positions[1] = {-4136.6187,3123.8940,5.2135};
-		chop_shops_positions[2] = {-4285.8408,860.2109,4.9211};
-		// if(IsPlayerAtViceCity(playerid))
-		// {
-		// }
-		// else if(is_car_deluxe)
-		// {
-		// 	chop_shops_positions[0] = {-1548.3618, 123.6438, 3.2966};
-		// 	chop_shops_positions[1] = {577.5023, 1222.4153, 11.7113};
-		// 	chop_shops_positions[2] = {2282.3511, -2018.0242, 13.4167};
-		// }
-		// else
-		// {
-		// 	chop_shops_positions[0] = {2282.3511, -2018.0242, 13.4167};
-		// 	chop_shops_positions[1] = {1410.6040, -135.5417, 22.2146};
-		// 	chop_shops_positions[2] = {-419.6872, -1737.5532, 7.9339};
-		// }
+		if(IsPlayerAtViceCity(playerid))
+		{
+			chop_shops_positions[0] = {-5507.7612,2380.1775,5.9174};
+			chop_shops_positions[1] = {-4136.6187,3123.8940,5.2135};
+			chop_shops_positions[2] = {-4285.8408,860.2109,4.9211};
+		}
+		else if(is_car_deluxe)
+		{
+			chop_shops_positions[0] = {-1548.3618, 123.6438, 3.2966};
+			chop_shops_positions[1] = {577.5023, 1222.4153, 11.7113};
+			chop_shops_positions[2] = {2282.3511, -2018.0242, 13.4167};
+		}
+		else
+		{
+			chop_shops_positions[0] = {2282.3511, -2018.0242, 13.4167};
+			chop_shops_positions[1] = {1410.6040, -135.5417, 22.2146};
+			chop_shops_positions[2] = {-419.6872, -1737.5532, 7.9339};
+		}
 
 		new Float:cs_distances[sizeof(chop_shops_positions)], Float:cs_distance_sum = 0.0, Float:cs_distance_roulette_sum = 0.0;
 		new Float:chop_shop_random = float(true_random(100)) / 100.0, chop_shop_id = 0;
