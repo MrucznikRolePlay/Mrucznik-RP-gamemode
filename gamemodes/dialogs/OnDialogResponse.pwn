@@ -4028,7 +4028,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4044,7 +4044,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4060,7 +4060,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4076,7 +4076,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4092,7 +4092,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4108,7 +4108,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4124,7 +4124,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4140,7 +4140,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4156,7 +4156,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4172,7 +4172,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
@@ -4188,7 +4188,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		                    PlayerInfo[playerid][pJob] = 14;
 
 					        PlayerInfo[playerid][pRank] = 0;
-					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 2,5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
+					        SendClientMessage(playerid, COLOR_LIGHTBLUE, "Podpisa³eœ kontrakt z firm¹ taksówkars¹ na 5h, idŸ po swoj¹ taryfê! (Aby siê zwolniæ wpisz /quitjob)");
 					    }
 					    else
 					    {
