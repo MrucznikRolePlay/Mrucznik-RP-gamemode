@@ -1,0 +1,10 @@
+{
+    "name": "vicecity",
+    "description": "Vice City",
+    "author": "Roger Costa '[Ds]NikO', edited by mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "commands": true,
+    "date": "13.04.2024"
+}

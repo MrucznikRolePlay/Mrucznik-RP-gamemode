@@ -58,7 +58,7 @@ YCMD:addmc(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, value;
-    if(sscanf(params, "rd", giveplayerid, value))
+    if(sscanf(params, "k<fix>d", giveplayerid, value))
     {
         sendTipMessage(playerid, "U¿yj /addmc [Nick/ID] [mrucznik coiny] ");
         return 1;

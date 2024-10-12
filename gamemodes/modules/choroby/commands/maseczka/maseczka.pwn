@@ -58,7 +58,7 @@ YCMD:maseczka(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, price;
-    if(sscanf(params, "rd", giveplayerid, price))
+    if(sscanf(params, "k<fix>d", giveplayerid, price))
     {
         sendTipMessage(playerid, "U¿yj /maseczka [Nick/ID] [cena] ");
         return 1;

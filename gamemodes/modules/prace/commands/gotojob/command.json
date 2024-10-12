@@ -1,0 +1,25 @@
+{
+    "name": "gotojob",
+    "description": "Teleportuje Ciê do pracy.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "job",
+            "description": "praca"
+        },
+        {
+            "type": "integer",
+            "name": "index",
+            "description": "index pozycji"
+        },
+        {
+            "type": "integer",
+            "name": "type",
+            "description": "typ (0=join,1=spawn,2=icon)"
+        }
+    ],
+    "date": "21.04.2024"
+}

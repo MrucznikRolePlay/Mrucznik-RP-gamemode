@@ -1,0 +1,17 @@
+{
+    "name": "upusc",
+    "description": "Upuszcza gotówkê.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "drop"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "money",
+            "description": "iloœæ pieniêdzy"
+        }
+    ],
+    "date": "31.03.2024"
+}

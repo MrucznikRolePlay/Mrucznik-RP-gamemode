@@ -1,0 +1,13 @@
+{
+    "name": "kupsamoloty",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "kupsamolot",
+        "kuplot",
+        "buyplane"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

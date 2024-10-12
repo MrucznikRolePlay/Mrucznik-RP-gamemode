@@ -9,9 +9,6 @@ new ServerSecret[MAX_SERVER_SECRET_LENGTH];
 
 new prawoJazdyLosowanie[9];
 
-new PickupSklep01;//ZIP
-
-new CMDKomunikat;
 new PozwolenieBot = 1;
 
 new LastVehicleID[MAX_PLAYERS];
@@ -51,12 +48,7 @@ new cenaVIP = 80000;
 new kasjerkaWolna = 666;
 
 //sn
-new SN_ACCESS[MAX_PLAYERS]; 
-//PizzaJob
-new PizzaJob[MAX_PLAYERS];
-new Actor01;
-//FishGood
-new FishGood[MAX_PLAYERS];
+new SN_ACCESS[MAX_PLAYERS];
 //Sad
 new SadWinda[6] = {1,0,0,1,1,0};
 
@@ -174,12 +166,9 @@ new bool:GATE_ORGSAD_S[2]={false, false};
 //04.12
 new PlayerDesc[MAX_PLAYERS][128 char];
 new CarDesc[MAX_VEHICLES][128];
-new MRP_PremiumHours[MAX_PLAYERS];
-new bool:InitMyItems[MAX_PLAYERS];
 //03.12
 //8.12 2016
 new bool:RANG_ApplyChanges[2][MAX_ORG];
-//new bool:SEJF_ApplyChanges[2][MAX_ORG];
 //
 new AUDIO_LoginFormat[8];
 new PlayerMC[MAX_PLAYERS];
@@ -234,10 +223,6 @@ new Float:TJD_BoxPos[7][3] = {
     {1734.61047, -2054.55151, 13.11370}
 };
 
-//07.10
-new OrgInfo[MAX_ORG][eOrg];
-new gPlayerOrg[MAX_PLAYERS];
-new bool:gPlayerOrgLeader[MAX_PLAYERS];
 //03.10
 new bool:SafeLoaded=false;
 //01.10 server info
@@ -303,31 +288,8 @@ new bool:GATE_SAD_ALARM = false;
 //01.08 speedometer
 new bool:ToggleSpeedo[MAX_PLAYERS],
     bool:ToggleSpeedoGPS[MAX_PLAYERS];
-//25.07 strefy gangów
-new Zone_Points[2];
-new Float:Zone_Area[81];
-new ZoneControl[MAX_ZONES];
-new ZonePlayerTimer[MAX_PLAYERS];
-new bool:ZoneAttack[MAX_ZONES]={false, ...};
-new ZoneAttackTimer[MAX_ZONES];
-new ZoneAttackData[MAX_ZONES][4];
-new bool:ZoneGangLimit[200]={true, ...};
-new bool:ZoneAttacker[MAX_PLAYERS];
-new bool:ZoneDefender[MAX_PLAYERS];
-new ZoneProtect[MAX_ZONES];
-new bool:bInZone[MAX_PLAYERS][MAX_ZONES];
-new ZONE_DISABLED = 0;
-new ZONE_DEF_TIME = 900000;
 new ERS_mundur[MAX_PLAYERS] = 0;
 //21.07 PayDay fix
-/*new TRAIN_Checkpoints[6][3] = {
-    {1770.9999, -1953.9802, 14.9781},
-    {2288.9980, -1172.9340, 26.9344},
-    {2864.4058, 1320.2103, 11.5472},
-    {1400.0333, 2636.2949, 12.1870},
-    {-1948.4125, 117.5107, 26.7656},
-    {838.1317, -1387.9299, -0.4705}
-}; */
 new Blink[MAX_VEHICLES][4];
 new BlinkSide[MAX_VEHICLES];
 new Float:BlinkR[MAX_VEHICLES];
@@ -342,7 +304,6 @@ new bool:BarierState[MAX_FRAC][10];
 
 //13.07  system skinow frakcyjnych mysql
 new FRAC_SKINS[MAX_FRAC][MAX_SKIN_SELECT];
-new FAM_SKINS[MAX_ORG][MAX_SKIN_SELECT];
 
 //frac
 new LeadersValue[LEADERS_TYPES][MAX_FRAC]; //a
@@ -373,8 +334,6 @@ new Float:VinylAudioPos[5] = {798.357666, -1413.888061, -22.609298,800.0,71.0}; 
 new VINYL_Stream[128];
 //22.06  system rang mysql
 new FracRang[MAX_FRAC][MAX_RANG][MAX_RANG_LEN]; //4kB
-//new FracLiderRang[MAX_FRAC][MAX_RANG_LEN];      //0.4kB
-new FamRang[MAX_ORG][MAX_RANG][MAX_RANG_LEN];   //4kB
 //18.06 uprawnienia
 new ACCESS[MAX_PLAYERS], OLD_ACCESS[MAX_PLAYERS];
 //15.06 system aut kradziezy
@@ -535,7 +494,6 @@ new drinkName4[32] = "Twoja Stara";
 //---------------------------------------------//
 
 //abram01
-//new plac2;
 new bor;
 new bor1;
 new bormove;
@@ -603,7 +561,6 @@ new haHajs[MAX_PLAYERS];
 //N!ree
 new cbradijo[MAX_PLAYERS];
 new adminpodgladcb[MAX_PLAYERS];
-//new togczas[MAX_PLAYERS];
 new matogczas[MAX_PLAYERS];
 //---
 new Security = 0;
@@ -642,23 +599,6 @@ new MedicCallTime[MAX_PLAYERS];
 new Mechanics = 0;
 new MechanicCall = 999;
 new MechanicCallTime[MAX_PLAYERS];
-new TaxiDrivers = 0;
-new HeliDrivers = 0;
-new TaxiCall = 999;
-new HeliCall = 999;
-new TaxiCallTime[MAX_PLAYERS];
-new TaxiAccepted[MAX_PLAYERS];
-new BusDrivers = 0;
-new BusCall = 999;
-new BusCallTime[MAX_PLAYERS];
-new BusAccepted[MAX_PLAYERS];
-new TransportDuty[MAX_PLAYERS];
-new TransportValue[MAX_PLAYERS];
-new TransportMoney[MAX_PLAYERS];
-new TransportClient[MAX_PLAYERS][4];
-new Float:TransportDist[MAX_PLAYERS];
-new TransportCost[MAX_PLAYERS];
-new TransportDriver[MAX_PLAYERS];
 new JobDuty[MAX_PLAYERS];
 new SanDuty[MAX_PLAYERS];
 new sanwyjdz[MAX_PLAYERS];
@@ -675,9 +615,6 @@ new SchoolSpawn[MAX_PLAYERS];
 new TakingLesson[MAX_PLAYERS];
 new UsedFind[MAX_PLAYERS];
 new PlayersChannel[MAX_PLAYERS];
-new PlayerOnMission[MAX_PLAYERS];
-new MissionCheckpoint[MAX_PLAYERS];
-new WatchingTV[MAX_PLAYERS];
 new MatsHolding[MAX_PLAYERS];
 new DivorceOffer[MAX_PLAYERS];
 new MarriageCeremoney[MAX_PLAYERS];
@@ -688,8 +625,6 @@ new MarryWitness[MAX_PLAYERS];
 new MarryWitnessOffer[MAX_PLAYERS];
 new TicketOffer[MAX_PLAYERS];
 new TicketMoney[MAX_PLAYERS];
-new PlayerStoned[MAX_PLAYERS];
-new PlayerStonedStop[MAX_PLAYERS];
 new AntySpawnBroni[MAX_PLAYERS];
 new AntyWlamSejf[MAX_PLAYERS];
 new FishCount[MAX_PLAYERS];
@@ -702,7 +637,6 @@ new FindTime[MAX_PLAYERS];
 new BoxWaitTime[MAX_PLAYERS];
 new BoxOffer[MAX_PLAYERS];
 new CarOffer[MAX_PLAYERS];
-new CarPrice[MAX_PLAYERS];
 new CarID[MAX_PLAYERS];
 new CarCalls[MAX_PLAYERS];
 new GotHit[MAX_PLAYERS];
@@ -722,13 +656,9 @@ new SelectCharID[MAX_PLAYERS];
 new SelectCharPlace[MAX_PLAYERS];
 new ChosenSkin[MAX_PLAYERS];
 new GettingJob[MAX_PLAYERS];
-new GuardOffer[MAX_PLAYERS];
-new GuardPrice[MAX_PLAYERS];
 new ApprovedLawyer[MAX_PLAYERS];
 new CallLawyer[MAX_PLAYERS];
 new WantLawyer[MAX_PLAYERS];
-new Robbed[MAX_PLAYERS];
-new RobbedTime[MAX_PLAYERS];
 new CP[MAX_PLAYERS];
 new MoneyMessage[MAX_PLAYERS];
 new Condom[MAX_PLAYERS];
@@ -737,6 +667,9 @@ new SexPrice[MAX_PLAYERS];
 new pSessionStart[MAX_PLAYERS] = {0, ...}; // czas wbicia gracza na serwer
 
 //---------------
+new SmugglingOffer[MAX_PLAYERS];
+new SmugglingOfferPrice[MAX_PLAYERS];
+new SmugglingOfferItem[MAX_PLAYERS];
 new RepairOffer[MAX_PLAYERS];
 new RepairPrice[MAX_PLAYERS];
 new RefillOffer[MAX_PLAYERS];
@@ -745,6 +678,9 @@ new RepairCar[MAX_PLAYERS];
 new DrugOffer[MAX_PLAYERS];
 new DrugPrice[MAX_PLAYERS];
 new DrugGram[MAX_PLAYERS];
+new ContrabandOffer[MAX_PLAYERS];
+new ContrabandCount[MAX_PLAYERS];
+new ContrabandPrice[MAX_PLAYERS];
 new JailPrice[MAX_PLAYERS];
 new WynajemOffer[MAX_PLAYERS];
 new DomOffer[MAX_PLAYERS];
@@ -754,6 +690,7 @@ new poscig[MAX_PLAYERS];
 new PoziomPoszukiwania[MAX_PLAYERS];
 new OnDuty[MAX_PLAYERS];
 new OnDutyCD[MAX_PLAYERS];
+new SecretAgent[MAX_PLAYERS];
 new gPlayerLogged[MAX_PLAYERS];
 new gPlayerLogTries[MAX_PLAYERS];
 new gPlayerSpawned[MAX_PLAYERS];
@@ -801,7 +738,6 @@ new studion;
 new biurosan;
 new reflektor;
 new rexl;
-//new OnPlayerUpdate_ON = 0;
 new addtimer = 60000;
 new Float:stareVHP[MAX_PLAYERS];//zapis uszkodzen
 new SANradio = 0;
@@ -821,8 +757,8 @@ new osoby;
 new planeisstopped;
 new Wodliczanie;
 new Float:MatsPoint[3] = {2138.2078,-2290.4888,20.6646};
+new Float:MatsPointVC[3] = {-4116.5503,3196.7097,5.2720};
 
-//koniec wozy Ballas
 //stary komisariat (old komi)
 new DrzwiPDKomi;
 new DrzwiPDKomi2;
@@ -880,8 +816,6 @@ new const AnimLibs[][] = {
   "WAYFARER",     "WEAPONS",      "WOP",          "WUZI"
 };
 
-//zdrapki
-new PlayerGames[MAX_PLAYERS];
 
 //new BramaWDolS = 1;
 //fbi
@@ -893,7 +827,6 @@ new FBImove3 = 0;
 new FBImove5 = 0;
 new Celaki[3];
 
-new WjedzTimer[MAX_PLAYERS];
 new timeSecWjedz[MAX_PLAYERS];
 
 //koniecfbi
@@ -932,7 +865,7 @@ new WindaYKZ;
 new WindaYKZ2 = 0;
 new WindaYKZKrata;
 new WindaYKZKratas = 1;
-new Text3D:okienko[8];
+new STREAMER_TAG_3D_TEXT_LABEL:okienko[15];
 
 new bramadmv[19];
 new movedmv[20];
@@ -955,7 +888,6 @@ new poddaje[MAX_PLAYERS];//poddaje siê
 new lowcap[MAX_PLAYERS];//³owca nagród który proponowa³ poddanie siê
 new lowcaz[MAX_PLAYERS];//³owca nagród dostaje zlecenie
 new okradziony[MAX_PLAYERS];//zabierzportfel
-new zmatsowany[MAX_PLAYERS];//diler brono
 new BusCzit[MAX_PLAYERS];
 new IDDomu[MAX_PLAYERS];//SYSTEM DOMÓW
 new MatsGood[MAX_PLAYERS];
@@ -1021,16 +953,13 @@ new gsecond = 0;
 new dollah = 1000; // Amount player recieves on spawn.
 new realtime = 1;
 new wtime = 15;
+new levelexp = 4;
 new levelcost = 10000;
-//new deathcost = 500;
 new callcost = 5; //1 second
 new realchat = 1;
 new timeshift = -1;
 new shifthour;
 
-new levelexp = 4;
-//new Float:ChangePos[MAX_PLAYERS][3];
-new ChangePos2[MAX_PLAYERS][2];
 new Float:PlayerPos[MAX_PLAYERS][6];
 new Float:TeleportDest[MAX_PLAYERS][3];
 
@@ -1039,7 +968,6 @@ new Float:OldCoordsX[MAX_PLAYERS], Float:OldCoordsY[MAX_PLAYERS];
 new Gas[CAR_AMOUNT];
 new Refueling[MAX_PLAYERS];
 new Naprawiasie[MAX_PLAYERS];
-new fixActorsTimer[MAX_PLAYERS]; 
 
 new TiPJTGBKubi[MAX_PLAYERS];
 new CenaBiletuPociag = 10000;
@@ -1048,13 +976,6 @@ new GunshopLSLock = 1;
 // new DCC_Channel:g_FracChannel[MAX_FRAC];
 // new DCC_Channel:g_OrgChannel[MAX_ORG];
 // new DCC_Channel:g_GSLSLOGChannelId, DCC_Channel:g_GSCMLOGChannelId, DCC_Channel:g_GSWFLOGChannelId;
-/*
-new chpIDHunter[MAX_PLAYERS];
-new hunterSeeMe[MAX_PLAYERS]; 
-new hunterStatus[MAX_PLAYERS]; 
-new wantedValuePlayer;
-new timerForHunter[MAX_PLAYERS];*/
-//new newsTypePlayer[MAX_PLAYERS] = 3; 
 new AllLeaders; 
 new playerTargetSpec[MAX_PLAYERS];
 new playerSeeSpec[MAX_PLAYERS];
@@ -1065,6 +986,18 @@ new Vector:VMembersOrg[MAX_PLAYERS]; // /pr members
 new areVehicleDescTurnedOn[MAX_PLAYERS] = {true, ...};
 new arePlayerDescTurnedOn[MAX_PLAYERS] = {true, ...};
 new ZaufaniON = true;
+
+new Float:ShopPickupsPos[][3] = {
+	{207.5669, -100.3860, 1005.2578}, // binco ls
+	{161.3583, -83.6028, 1001.8047}, // zip ls
+	{206.3739, -8.1625, 1001.2109}, // victim ls
+	{206.9117, -129.4907, 1003.5078}, // prolabs
+	{203.8627, -43.8014, 1001.8047}, // sub urban
+	{204.1287, -159.6113, 1000.5234} // didier sachs
+};
+new ShopPickups[sizeof(ShopPickupsPos)];
+new scm_buf[144];
+
 //-----------------------------------------------
 //------------[Funkcje:]-------------------------
 //-----------------------------------------------
@@ -1072,11 +1005,6 @@ ClearVariableConnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	PlayerInfo[playerid][pBiletpociag] = 0;//Bilet do poci¹gu
-	fixActorsTimer[playerid] = 0; 
-/*	chpIDHunter[playerid] =0;
-	hunterSeeMe[playerid]=0;
-	hunterStatus[playerid]=0;
-	timerForHunter[playerid]=0;*/
 	playerTargetSpec[playerid] = INVALID_SPECTATE_ID;
 	playerSeeSpec[playerid] = INVALID_SPECTATE_ID; 
 	isNaked[playerid] = 0; 
@@ -1086,7 +1014,6 @@ ClearVariableDisconnect(playerid)
 {
 	OfferPlayer[playerid] = -1;//Prawnik oferuje /uwolnij (Check)
 	SN_ACCESS[playerid] = 0;//Pozwolenie na scenê (pobór op³at - 2kk)
-	PlayerGames[playerid] = 0;//Zdrapki 
 	return 1;
 }
 ZerujZmienne(playerid)
@@ -1102,7 +1029,6 @@ ZerujZmienne(playerid)
 	SetPlayerDrunkLevel(playerid, 0);
 	ibiza_clearCache(playerid);
     premium_clearCache(playerid);
-	organizacje_clearCache(playerid);
 	//z disconecta
 
 	timeFakeVehRespawn[playerid] = 0;
@@ -1143,24 +1069,26 @@ ZerujZmienne(playerid)
 	dajeKontrakt[playerid] = 9999;
 	SelectChar[playerid] = 0; HidePM[playerid] = 0; PhoneOnline[playerid] = 0; LastSMSNumber[playerid] = 0; spamwl[playerid] = 0; okradziony[playerid] = false;
 	SelectCharID[playerid] = 0; SelectCharPlace[playerid] = 0; ChosenSkin[playerid] = 0;
-	GettingJob[playerid] = 0; GuardOffer[playerid] = 999; GuardPrice[playerid] = 0;
+	GettingJob[playerid] = 0;
     ApprovedLawyer[playerid] = 0; CallLawyer[playerid] = 0; WantLawyer[playerid] = 0; UsedFind[playerid] = 0;
-	CP[playerid] = 0; Robbed[playerid] = 0; ScigaSie[playerid] = 666;
-	CarOffer[playerid] = 999; CarPrice[playerid] = 0; CarID[playerid] = 0; CarCalls[playerid] = 0; GraczDajacy[playerid] = 999; GraczDajacyNeon[playerid] = 999;
-	RobbedTime[playerid] = 0; MoneyMessage[playerid] = 0; Condom[playerid] = 0; GraczDajacyLodz[playerid] = 999; IDAuta[playerid] = 0; //JaKupuje[playerid] = 0; JaWymieniam[playerid] = 0;
+	CP[playerid] = 0; ScigaSie[playerid] = 666;
+	CarOffer[playerid] = 999; CarID[playerid] = 0; CarCalls[playerid] = 0; GraczDajacy[playerid] = 999; GraczDajacyNeon[playerid] = 999;
+	MoneyMessage[playerid] = 0; Condom[playerid] = 0; GraczDajacyLodz[playerid] = 999; IDAuta[playerid] = 0; //JaKupuje[playerid] = 0; JaWymieniam[playerid] = 0;
 	SexOffer[playerid] = 999; SexPrice[playerid] = 0; GraczDajacySamolot[playerid] = 999; IDLodzi[playerid] = 0; IDSamolotu[playerid] = 0;
 	RepairOffer[playerid] = 999; RepairPrice[playerid] = 0; RepairCar[playerid] = 0; WynajemOffer[playerid] = 999; DomOffer[playerid] = 999; DomCena[playerid] = 0;
 	TalkingLive[playerid] = INVALID_PLAYER_ID; LiveOffer[playerid] = 999; TakingLesson[playerid] = 0; CenaDawanegoSamolot[playerid] = 999;
 	RefillOffer[playerid] = 999; RefillPrice[playerid] = 0; MapIconsShown[playerid] = 0; CenaDawanegoAuta[playerid] = 999; AntySpam[playerid] = 0; poscig[playerid] = 0;
 	DrugOffer[playerid] = 999; CenaDawanegoLodz[playerid] = 999;
+	SmugglingOffer[playerid] = 999;
+	ContrabandOffer[playerid] = 999; ContrabandCount[playerid] = 0; ContrabandPrice[playerid] = 0;
 	DrugPrice[playerid] = 0; OnCK[playerid] = 999; GettingCK[playerid] = 999; OdpalanieSpam[playerid] = 0;
 	DrugGram[playerid] = 0; ConnectedToPC[playerid] = 0; OrderReady[playerid] = 0;
 	JailPrice[playerid] = 0; MedicTime[playerid] = 0; NeedMedicTime[playerid] = 0; MedicBill[playerid] = 0; GotHit[playerid] = 0;
 	GoChase[playerid] = 999; GetChased[playerid] = 999;
-	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; PoziomPoszukiwania[playerid] = 0;
-	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; ChangePos2[playerid][1] = 0; iddialog[playerid] = -1;
-	TransportDuty[playerid] = 0; weryfikacja[playerid] = 0;
-	BusCallTime[playerid] = 0; TaxiCallTime[playerid] = 0; MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;
+	OnDuty[playerid] = 0; OnDutyCD[playerid] = 0; SecretAgent[playerid] = 0; PoziomPoszukiwania[playerid] = 0;
+	BoxWaitTime[playerid] = 0; SchoolSpawn[playerid] = 0; iddialog[playerid] = -1;
+	weryfikacja[playerid] = 0;
+	MedicCallTime[playerid] = 0; MechanicCallTime[playerid] = 0;
 	FindTimePoints[playerid] = 0; FindTime[playerid] = 0; JobDuty[playerid] = 0; SanDuty[playerid] = 0; WarningDuty[playerid] = 175; NJDuty[playerid] = 0; DeathWarning[playerid] = 1;
 	Mobile[playerid] = INVALID_PLAYER_ID; Callin[playerid] = CALL_NONE; CellTime[playerid] = 0; Music[playerid] = 0; BoxOffer[playerid] = 999; PlayerBoxing[playerid] = 0;
 	Spectate[playerid] = INVALID_PLAYER_ID; PlayerDrunk[playerid] = 0; PlayerDrunkTime[playerid] = 0; WnetrzeWozu[playerid] = 0;
@@ -1171,18 +1099,17 @@ ZerujZmienne(playerid)
  	gGas[playerid] = 0; GUIExit[playerid] = 0; gMuteDepo[playerid] = 0;
 	gPlayerLogged[playerid] = 0; gPlayerLogTries[playerid] = 0; gPlayerAccount[playerid] = 0;
 	gPlayerSpawned[playerid] = 0; PlayerKarting[playerid] = 0; PlayerInKart[playerid] = 0;
-	PlayerTazeTime[playerid] = 0; PlayerStoned[playerid] = 0; PlayerStonedStop[playerid] = 0;
+	PlayerTazeTime[playerid] = 0;
 	StartTime[playerid] = 0; TicketOffer[playerid] = 999; TicketMoney[playerid] = 0;
 	MatsHolding[playerid] = 0; TutTime[playerid] = 0; stareVHP[playerid] = 0;
-	gPlayerMission[playerid] = 0; TaxiAccepted[playerid] = 999; BusAccepted[playerid] = 999; vKickEx[playerid] = 0;
+	gPlayerMission[playerid] = 0; vKickEx[playerid] = 0;
 	//BusTime[playerid] = 0; BusTime2[playerid] = 0; BusTime3[playerid] = 0; BusTime4[playerid] = 0; BusTime5[playerid] = 0;//bustime
 	//BusTime6[playerid] = 0; BusTime7[playerid] = 0; BusTime8[playerid] = 0; BusTime9[playerid] = 0; BusTime10[playerid] = 0; BusTime11[playerid] = 0; BusTime12[playerid] = 0; BusTime13[playerid] = 0;//bustime
 	//BusTime14[playerid] = 0; BusTime15[playerid] = 0; BusTime16[playerid] = 0; BusTime17[playerid] = 0; BusTime18[playerid] = 0; BusTime19[playerid] = 0; BusTime20[playerid] = 0;//bustime
 	PlayerInfo[playerid][pCash] = dollah; Respawn[playerid] = 0;//Respawn
 	HireCar[playerid] = 0; PlayersChannel[playerid] = 999;
-	TransportValue[playerid] = 0; TransportMoney[playerid] = 0; TransportCost[playerid] = 0; TransportDriver[playerid] = 999;
-	Locator[playerid] = 0; PlayerOnMission[playerid] = 0; MissionCheckpoint[playerid] = 0;
-	WatchingTV[playerid] = 0; PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
+	Locator[playerid] = 0;
+	PlayerPaintballing[playerid] = 0; PlayerPaintballKills[playerid] = 0;
 	ProposeOffer[playerid] = 999; MarryWitness[playerid] = 999; MarryWitnessOffer[playerid] = 999; MarriageCeremoney[playerid] = 0; ProposedTo[playerid] = 999; GotProposedBy[playerid] = 999; DivorceOffer[playerid] = 999; GraczWymiany[playerid] = 999;
 	BiletAlhambra[playerid] = 0;
 	PlayerInfo[playerid][pLevel] = 0;
@@ -1213,6 +1140,7 @@ ZerujZmienne(playerid)
 	PlayerInfo[playerid][pJailed] = 0;
 	PlayerInfo[playerid][pJailTime] = 0;
 	PlayerInfo[playerid][pMats] = 0;
+	PlayerInfo[playerid][pContraband] = 0;
 	PlayerInfo[playerid][pDrugs] = 0;
 	PlayerInfo[playerid][pLider] = 0;
 	PlayerInfo[playerid][pMember] = 0;
@@ -1361,9 +1289,10 @@ ZerujZmienne(playerid)
 	ClearFishes(playerid);
 	ClearMarriage(playerid);
 
+	Driver_ZerujZmienne(playerid);
+
 
     grajacy[playerid]=0;
-    for(new i=0;i<4;i++) TransportClient[playerid][i] = INVALID_PLAYER_ID;
 	ObrazeniaIndex[playerid] = 0;
 	for(new i = 0; i<10; i++) Obrazenia[playerid][i][DAMAGE] = 0.0;
 	if(tworzenietrasy[playerid] != 666)
@@ -1379,13 +1308,10 @@ ZerujZmienne(playerid)
 	ACCESS[playerid]=0b0;
 	OLD_ACCESS[playerid]=0b0;
 
-    ZoneAttacker[playerid] = false;
-    ZoneDefender[playerid] = false;
+	Zone_ClearVariables(playerid);
 
     ToggleSpeedo[playerid] = false;
     ToggleSpeedoGPS[playerid] = false;
-
-    for(new i=0;i<MAX_ZONES;i++) bInZone[playerid][i] = false;
 
     Unspec[playerid][Coords][0] = 0.0;
     Unspec[playerid][Coords][1] = 0.0;
@@ -1402,14 +1328,8 @@ ZerujZmienne(playerid)
 	noclipdata[playerid][accelmul]   	= 0.0;
     noclipdata[playerid][fireobject]    = 0;
 
-    gPlayerOrg[playerid] = 0xFFFF;
-    gPlayerOrgLeader[playerid] = false;
     PlayerInfo[playerid][pCarSlots] = 4;
 
-
-
-    MRP_PremiumHours[playerid]=0;
-    InitMyItems[playerid] = false;
     PlayerMC[playerid] = 0;
 
 	ParachuteHit[playerid] = 0;

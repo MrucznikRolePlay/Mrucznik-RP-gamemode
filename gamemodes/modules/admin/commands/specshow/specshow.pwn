@@ -40,6 +40,7 @@ command_specshow()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

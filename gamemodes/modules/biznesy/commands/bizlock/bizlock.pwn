@@ -42,6 +42,7 @@ command_bizlock()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

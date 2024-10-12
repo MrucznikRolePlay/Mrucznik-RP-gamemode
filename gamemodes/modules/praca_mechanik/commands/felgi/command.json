@@ -1,0 +1,9 @@
+{
+    "name": "felgi",
+    "description": "Lista dostêpnych felg do tuningu.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "01.04.2024"
+}

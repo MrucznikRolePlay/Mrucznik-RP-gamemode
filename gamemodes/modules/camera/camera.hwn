@@ -1,0 +1,96 @@
+//-----------------------------------------------<< Header >>------------------------------------------------//
+//                                                   camera                                                  //
+//----------------------------------------------------*------------------------------------------------------//
+//----[                                                                                                 ]----//
+//----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
+//----[        ||| |||           ||| |||                      |||     ||||     |||     ||||             ]----//
+//----[       |||   |||         |||   |||                     |||       |||    |||       |||            ]----//
+//----[       ||     ||         ||     ||                     |||       |||    |||       |||            ]----//
+//----[      |||     |||       |||     |||                    |||     ||||     |||     ||||             ]----//
+//----[      ||       ||       ||       ||     __________     ||||||||||       ||||||||||               ]----//
+//----[     |||       |||     |||       |||                   |||    |||       |||                      ]----//
+//----[     ||         ||     ||         ||                   |||     ||       |||                      ]----//
+//----[    |||         |||   |||         |||                  |||     |||      |||                      ]----//
+//----[    ||           ||   ||           ||                  |||      ||      |||                      ]----//
+//----[   |||           ||| |||           |||                 |||      |||     |||                      ]----//
+//----[  |||             |||||             |||                |||       |||    |||                      ]----//
+//----[                                                                                                 ]----//
+//----------------------------------------------------*------------------------------------------------------//
+// Autor: Southclaws
+// Data utworzenia: 03.10.2024
+
+//
+
+//------------------<[ Enumy: ]>--------------------
+enum
+{
+	d_MainMenu = 3960,
+	d_NewCamName,
+	d_ProjectOptions,
+	d_ExportDialog,
+
+	d_NodeID,
+	d_MoveTime,
+	d_WaitTime,
+	d_MoveType,
+
+	d_confirmNodeCommit,
+
+	d_ConfirmQuit
+}
+
+enum CAM_DATA_ENUM
+{
+	Float:cam_cPosX,		// Position coords
+	Float:cam_cPosY,
+	Float:cam_cPosZ,
+	Float:cam_lPosX,		// Lookat coords
+	Float:cam_lPosY,
+	Float:cam_lPosZ,
+	cam_moveTime,			// Time in MS to move between each node
+	cam_waitTime,			// Time in MS to wait before moving
+	cam_moveType			// Camera move type (Cut or Move)
+}
+
+enum ENUM_DATA_TYPES
+{
+	p_CamID,
+	p_Node
+}
+new gPlayerCamData[MAX_PLAYERS][ENUM_DATA_TYPES];
+
+//-----------------<[ Zmienne: ]>-------------------
+new SelectedCamera[MAX_PLAYERS];
+new bool:gPlayerEditing[MAX_PLAYERS];
+new bool:gPlayerEditingNode[MAX_PLAYERS];
+
+new indexData[MAX_CAMERAS][MAX_CAMERA_FILENAME];
+
+new PlayerText:cam_buttonBack;
+new PlayerText:cam_boxBackground;
+new PlayerText:cam_arrowLeft;
+new PlayerText:cam_arrowRight;
+
+new PlayerText:cam_row1;
+new PlayerText:cam_row2;
+new PlayerText:cam_row3;
+new PlayerText:cam_row4;
+
+new PlayerText:cam_row1Data;
+new PlayerText:cam_row2Data;
+new PlayerText:cam_row3Data;
+new PlayerText:cam_row4Data;
+
+new PlayerText:cam_buttonEdit;
+new PlayerText:cam_buttonSave;
+new PlayerText:cam_buttonDelt;
+new PlayerText:cam_buttonPrev;
+new PlayerText:cam_buttonAddN;
+
+new camMaxNodes[MAX_CAMERAS];
+
+//------------------<[ Forwardy: ]>--------------------
+forward editor_OnCamMove(playerid, node, bool:cont);
+
+
+//end

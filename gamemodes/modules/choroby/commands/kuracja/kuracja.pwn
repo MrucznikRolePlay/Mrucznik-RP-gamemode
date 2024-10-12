@@ -56,7 +56,7 @@ YCMD:kuracja(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, disease[32], money;
-    if(sscanf(params, "rs[32]d", giveplayerid, disease, money))
+    if(sscanf(params, "k<fix>s[32]d", giveplayerid, disease, money))
     {
         sendTipMessage(playerid, "U¿yj /kuracja [Nick/ID] [choroba] [prowizja] ");
         return 1;

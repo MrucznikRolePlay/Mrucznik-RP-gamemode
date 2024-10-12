@@ -1,0 +1,12 @@
+{
+    "name": "tankveh",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "fuelcar",
+        "tankujauto"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

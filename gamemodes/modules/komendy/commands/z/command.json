@@ -1,0 +1,13 @@
+{
+    "name": "z",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "hangup",
+        "h",
+        "zakoncz"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

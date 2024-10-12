@@ -1,0 +1,17 @@
+{
+    "name": "destroyobject",
+    "description": "Niszczy obiekt.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "objectid",
+            "description": "objectid"
+        }
+    ],
+    "date": "30.09.2024"
+}

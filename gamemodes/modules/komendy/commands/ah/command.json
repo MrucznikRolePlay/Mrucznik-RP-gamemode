@@ -1,0 +1,12 @@
+{
+    "name": "ah",
+    "description": "",
+    "permissions": ["admini"],
+    "author": "mrucznik",
+    "aliases": [
+        "adminhelp",
+        "adminpomoc"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

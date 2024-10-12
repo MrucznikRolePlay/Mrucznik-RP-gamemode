@@ -462,6 +462,31 @@ ELSE
 END IF;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ZWROC_BANK` (IN `name` VARCHAR(21), IN `hajs` INT)  MODIFIES SQL DATA
+    DETERMINISTIC
+BEGIN
+DECLARE message VARCHAR(256);
+DECLARE playerConnected INT;
+DECLARE player_uid INTEGER;
+
+SELECT connected INTO playerConnected FROM mru_konta WHERE `Nick`=name;
+SELECT `UID` INTO player_uid FROM mru_konta WHERE Nick LIKE name;
+
+IF playerConnected = 0 THEN
+    # log
+    SET message = CONCAT('Oddano ', hajs, '$ graczowi: ', name);
+    INSERT INTO actions (Data, Caller, Action) VALUES (NOW(), USER(), message);
+    
+    # action
+    UPDATE mru_konta SET `Bank`=`Bank`+hajs WHERE `UID`=player_uid;
+    
+    # feedback
+    SELECT message AS komunikat;
+ELSE
+	SELECT 'Gracz jest na serwerze/nie ma takiego gracza.' AS komunikat;
+END IF;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ZWROC_HASLO` (IN `name` VARCHAR(21))  MODIFIES SQL DATA
     DETERMINISTIC
 BEGIN
@@ -2167,7 +2192,6 @@ CREATE TABLE IF NOT EXISTS `mru_opisy` (
 
 CREATE TABLE IF NOT EXISTS `mru_org` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `UID` int(11) NOT NULL,
   `Type` int(11) NOT NULL,
   `Name` varchar(32) COLLATE utf8_polish_ci NOT NULL,
   `Motd` varchar(128) COLLATE utf8_polish_ci DEFAULT '0',
@@ -2178,32 +2202,9 @@ CREATE TABLE IF NOT EXISTS `mru_org` (
   `a` float NOT NULL DEFAULT '0',
   `Int` int(11) NOT NULL DEFAULT '0',
   `VW` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `UID` (`UID`)
+  `LeaderStake` int(11) NOT NULL DEFAULT '0'
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=708 DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `mru_org`
---
-
-INSERT INTO `mru_org` (`ID`, `UID`, `Type`, `Name`, `Motd`, `Color`, `x`, `y`, `z`, `a`, `Int`, `VW`) VALUES
-(549, 18, 5, 'Ibiza Club', 'Pozdrawiam, Jasia, Sylke,Daniela,Kube,Paprote,Klocucha,Bakusia', 897131520, 410.421, -1808.11, 5.54688, 62.6014, 0, 0),
-(550, 17, 5, 'Vinyl Club', '2.11.2018 - 20;00 IMPREZA', 0, 816.221, -1386.19, 13.5996, 46.9039, 0, 0),
-(575, 45, 0, 'Wydzial Ulepszen (SEJF KU)', '16711680', 0, 1472.9, -1013.24, 27.2578, 11.1092, 0, 0),
-(588, 6, 0, 'Komisja Organizacyjna', '16711680', 0, 1464.36, -1027.38, 23.8281, 358.892, 0, 0),
-(639, 26, 4, 'Solarin Industries', '?O PANIE, KTO PANU TAK SPIERDOLI??', 2441482312, 853.849, -602.477, 18.4219, 6.0748, 0, 0),
-(644, 31, 4, 'Cowboy Bar', 'Jezeli nie wpisales sie na liste itp. Napisz po hasla do matijas i zrob to jak najszybciej!', 1199012102, 681.287, -475.89, 16.3359, 182.733, 0, 0),
-(659, 0, 0, '', '0', 0, 0, 0, 0, 0, 0, 0),
-(664, 1, 0, 'Supreme Court of San Andreas', '--', 2504626984, 1310.2, -1368.53, 13.5505, 179.737, 0, 0),
-(676, 16, 4, 'EVS CAR SERVICE', 'Pam?taj aby trzyma? si? regulaminu i stosowa? si? do cen. Milej Gierki :)', 362252420, 1031.11, -1363.64, 13.5742, 254.143, 0, 0),
-(684, 22, 4, 'AmmuNation Commerce', 'Hej misiaki tu wasz suggar daddy ', 2203123848, 1708.54, -1504.62, 13.5534, 100.306, 0, 0),
-(691, 9, 2, 'Islamic State of Iraq and Sham', 'Wchodz?c pod slot automatycznie wyra?asz zgode na FCK/Okaleczanie. Zmienili?my spawn!', 1231120744, -781.498, 1559.85, 27.1172, 206.767, 0, 0),
-(702, 40, 4, 'Dude Company', 'Pracujemy na wysokim poziomie!', 155735808, 939.24, -1745.16, 13.5469, 95.204, 0, 0),
-(703, 23, 4, 'ammunation los santos', 'Alex Stanley tu by?', 18968920, 1779.54, -1144.99, 23.9772, 171.368, 0, 0),
-(704, 2, 1, 'Varrios Los Aztecas', '0', 0, 0, 0, 0, 0, 0, 0),
-(705, 28, 1, '54 Jeff Crips', 'Automatycznie bedac pod slotem wyrazasz zgode na CK', 70744328, 2208.08, -1231.01, 23.9788, 357.464, 0, 0),
-(706, 3, 2, 'Promienna 14', 'prawdziwe patusy', 103220356, 2758.87, -1944.55, 13.551, 268.24, 0, 0),
-(707, 15, 4, 'Dos Santos Car Service Idlewood', 'Jesli nie jestes na Discordzie warsztatu. Zg?os sie na forum do ToKioo I 4D1a9e', 1939437858, 1797.4, -1703.49, 13.5294, 3.71309, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2299,37 +2300,6 @@ CREATE TABLE IF NOT EXISTS `mru_premium_skins` (
   `s_ID` int(11) NOT NULL,
   PRIMARY KEY (`s_charUID`,`s_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `mru_rodziny`
---
-
-CREATE TABLE IF NOT EXISTS `mru_rodziny` (
-  `name` varchar(20) COLLATE utf8_polish_ci NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `mru_rodziny`
---
-
-INSERT INTO `mru_rodziny` (`name`, `id`) VALUES
-('FAMILY_SAD', 1),
-('FAMILY_RSC', -1),
-('FAMILY_ALHAMBRA', 16),
-('FAMILY_VINYL', 17),
-('FAMILY_IBIZA', 18),
-('FAMILY_FDU', 14),
-('FAMILY_LCN', 40),
-('FAMILY_YKZ', 41),
-('FAMILY_GROVE', 42),
-('FAMILY_BALLAS', 43),
-('FAMILY_VAGOS', 44),
-('FAMILY_NOA', 45),
-('FAMILY_WPS', 46),
-('FAMILY_SEKTA', 27);
 
 -- --------------------------------------------------------
 

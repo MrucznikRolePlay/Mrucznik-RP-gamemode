@@ -1,0 +1,11 @@
+{
+    "name": "zdmv",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "cdmv"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

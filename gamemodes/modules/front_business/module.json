@@ -1,0 +1,11 @@
+{
+    "name": "front_business",
+    "description": "System bzinesów-przykrywek dla organizacji przestêpczych",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "05.09.2024"
+}

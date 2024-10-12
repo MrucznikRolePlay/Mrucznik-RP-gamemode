@@ -1,0 +1,11 @@
+{
+    "name": "dajpodatek",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "givetax"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

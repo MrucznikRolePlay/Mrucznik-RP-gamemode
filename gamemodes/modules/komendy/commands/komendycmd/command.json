@@ -1,0 +1,13 @@
+{
+    "name": "komendycmd",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "commands",
+        "komendy",
+        "cmds"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

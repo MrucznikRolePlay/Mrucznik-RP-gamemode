@@ -43,6 +43,15 @@ new MealModels[] = {
 	2703
 };
 
+new Float:FoodPlaces[][3] = {
+	// Vice City
+	{-3807.2568, 3359.6183, 1213.9940}, // shaft hot dogs inside north point mall
+	{-3823.3008, 3352.4913, 1214.0455}, // beef bandit inside north point mall
+	{-3823.7427, 3397.3952, 1214.0421}, // burger shot inside north point mall
+	{-3809.3604, 3392.0234, 1214.0061}, // the cheesy crust pizza inside north point mall
+	{-3814.6313, 3463.1339, 1213.9324} // sprunk point inside north point mall
+};
+
 //-----------------<[ Zmienne: ]>-------------------
 new Groceries[MAX_PLAYERS][pGroceries];
 //------------------<[ Forwardy: ]>--------------------

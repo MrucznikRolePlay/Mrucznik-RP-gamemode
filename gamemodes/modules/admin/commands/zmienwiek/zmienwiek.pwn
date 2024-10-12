@@ -40,6 +40,7 @@ command_zmienwiek()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
@@ -56,7 +57,7 @@ YCMD:zmienwiek(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, valueWiek;
-    if(sscanf(params, "rd", giveplayerid, valueWiek))
+    if(sscanf(params, "k<fix>d", giveplayerid, valueWiek))
     {
         sendTipMessage(playerid, "U¿yj /zmienwiek [Nick/ID] [Nowy wiek] ");
         return 1;

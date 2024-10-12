@@ -1,0 +1,13 @@
+{
+    "name": "personalizuj",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "personalizacja",
+        "personalize",
+        "ustawienia"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

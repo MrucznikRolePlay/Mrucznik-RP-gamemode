@@ -1,0 +1,13 @@
+{
+    "name": "kuplodzie",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "kuplodz",
+        "kupstatek",
+        "buyboat"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

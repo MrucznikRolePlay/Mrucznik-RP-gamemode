@@ -39,7 +39,7 @@ kuracja_akceptuj(playerid)
 
     if(!IsAtHealingPlace(playerid))
     {
-        sendErrorMessage(playerid, "Kuracjê mo¿na akceptowaæ tylko w szpitalu / wnêtrzu karetki.");
+        sendErrorMessage(playerid, "Kuracjê mo¿na akceptowaæ tylko w szpitalu / wnêtrzu karetki (/wejdzw).");
         return 1;
     }
 
@@ -89,15 +89,15 @@ kuracja_akceptuj(playerid)
 
 command_kuracja_Impl(playerid, giveplayerid, disease[], money)
 {
-	if (!(IsAMedyk(playerid) && PlayerInfo[playerid][pRank] >= 1))
+	if (!IsAMedyk(playerid))
 	{
-		sendErrorMessage(playerid, "Nie masz 1 rangi lub nie jesteœ medykiem!");
+		sendErrorMessage(playerid, "Nie jesteœ medykiem!");
         return 1;
 	}
 
     if(!IsAtHealingPlace(playerid))
     {
-        sendErrorMessage(playerid, "Kuracjê mo¿na oferowaæ tylko w szpitalu / wnêtrzu karetki.");
+        sendErrorMessage(playerid, "Kuracjê mo¿na oferowaæ tylko w szpitalu / wnêtrzu karetki (/wejdzw).");
         return 1;
     }
 
@@ -105,6 +105,12 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
     if(diseaseID == eDiseases:NONE) 
     {
         ShowDiseaseList(playerid);
+        return 1;
+    }
+
+    if(DiseaseData[diseaseID][CureCost] == 0)
+    {
+        sendErrorMessage(playerid, "Tej choroby nie da siê wyleczyæ.");
         return 1;
     }
     
@@ -125,8 +131,6 @@ command_kuracja_Impl(playerid, giveplayerid, disease[], money)
         sendErrorMessage(playerid, "Ten gracz ma ju¿ przeprowadzan¹ kuracjê.");
         return 1;
     }
-
-    //TODO: Check czy gracz jest w szpitalu
 
     new cost = money + DiseaseData[diseaseID][CureCost];
     new chance = 100 - DiseaseData[diseaseID][DrugResistance];

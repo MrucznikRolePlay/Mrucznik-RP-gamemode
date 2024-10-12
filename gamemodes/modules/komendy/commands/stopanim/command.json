@@ -1,0 +1,11 @@
+{
+    "name": "stopanim",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "stopani"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

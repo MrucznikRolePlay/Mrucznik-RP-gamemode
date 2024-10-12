@@ -1,0 +1,12 @@
+{
+    "name": "quitpraca",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "quitjob",
+        "opuscprace"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

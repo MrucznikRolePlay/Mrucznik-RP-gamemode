@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_zlomujbiznes()
 {
-    
+    new command = Command_GetID("zlomujbiznes");
 
     //aliases
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

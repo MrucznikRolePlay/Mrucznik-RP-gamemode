@@ -33,12 +33,13 @@
 //-------<[ initialize ]>-------
 command_togopis()
 {
-    
+    new command = Command_GetID("togopis");
 
     //aliases
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

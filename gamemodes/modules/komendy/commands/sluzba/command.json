@@ -1,0 +1,11 @@
+{
+    "name": "sluzba",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "duty"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

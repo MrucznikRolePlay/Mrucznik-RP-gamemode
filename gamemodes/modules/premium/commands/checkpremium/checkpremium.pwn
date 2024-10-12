@@ -58,7 +58,7 @@ YCMD:checkpremium(playerid, params[], help)
     }
     //fetching params
     new giveplayerid;
-    if(sscanf(params, "r", giveplayerid))
+    if(sscanf(params, "k<fix>", giveplayerid))
     {
         sendTipMessage(playerid, "U¿yj /checkpremium [Nick/ID] ");
         return 1;

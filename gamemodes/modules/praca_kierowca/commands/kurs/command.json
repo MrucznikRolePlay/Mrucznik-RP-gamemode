@@ -1,0 +1,17 @@
+{
+    "name": "kurs",
+    "description": "Ustaw stawkê za kilometr na swoim taksometrze.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "fare"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "price",
+            "description": "cena"
+        }
+    ],
+    "date": "31.03.2024"
+}

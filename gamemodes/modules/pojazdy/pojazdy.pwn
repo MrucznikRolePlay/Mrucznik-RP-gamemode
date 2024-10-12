@@ -342,16 +342,11 @@ Car_Load()
 			else if(CarData[i][c_Model] == 560)
 				PDTuneSultan(vid);
 		}
-
-        //Komunikacja miejska napis nad pojazdem
-        if((CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_KT && (CarData[i][c_Model] == 431 || CarData[i][c_Model] == 437 || CarData[i][c_Model] == 418)) || (CarData[i][c_OwnerType] == CAR_OWNER_JOB && CarData[i][c_Owner] == JOB_BUSDRIVER))
+        else if(CarData[i][c_Siren] == 2)
         {
-            if(gKMCounter < sizeof(Busnapisn))
+            if(CarData[i][c_Model] == 446) // squallo przemytnicze
             {
-                KomunikacjaMiejsca[CarData[i][c_ID]] = gKMCounter;
-                if(CarData[i][c_Model] == 431 || CarData[i][c_Model] == 437) Busnapisn[gKMCounter] = CreateDynamic3DTextLabel("° Komunikacja miejska °", COLOR_BLUE, 0.0,0.0,3.5, 30.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
-                else Busnapisn[gKMCounter] = CreateDynamic3DTextLabel("° Komunikacja miejska °", COLOR_BLUE, 0.0,0.0,1.5, 30.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
-                gKMCounter++;
+                SmugglersSquallo(vid);
             }
         }
         //Opis dla pojazdów z wypo¿yczalni
@@ -359,13 +354,27 @@ Car_Load()
         {
             Car3dTextDesc[CarData[i][c_ID]] = CreateDynamic3DTextLabel("Wypo¿yczalnia pojazdów\nGROTTI", COLOR_PURPLE, 0.0, 0.0, -0.2, 5.0, INVALID_PLAYER_ID, CarData[i][c_ID], 1, -1, -1, -1, 10.0);
         }
+
+        //Komunikacja miejska napis nad pojazdem
+        if(IsAPublicTransport(vid))
+        {
+            if(gKMCounter < sizeof(Busnapisn))
+            {
+                KomunikacjaMiejsca[CarData[i][c_ID]] = gKMCounter;
+                new Float:height = 1.5;
+                if(CarData[i][c_Model] == 431 || CarData[i][c_Model] == 437) height = 3.5;
+                Busnapisn[gKMCounter] = CreateDynamic3DTextLabel("° Komunikacja miejska °", COLOR_YELLOW, 0.0, 0.0, height, 30.0, INVALID_PLAYER_ID, CarData[i][c_ID]);
+                gKMCounter++;
+            }
+        }
         //Obiekty na dachach taxówek
-        if(CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_KT)
+        if(IsCarOwnedByKT(vid) || IsCarOwnedByDriverJob(vid))
         {
             if(CarData[i][c_Model] == 560) AttachDynamicObjectToVehicle(CreateDynamicObject(19310, 0, 0, 0, 0, 0, 0), CarData[i][c_ID], 0.000000, -0.424999, 0.919999, 0.000000, 0.000000, 0.000000); //sultan
             else if(CarData[i][c_Model] == 409) AttachDynamicObjectToVehicle(CreateDynamicObject(19310, 0, 0, 0, 0, 0, 0), CarData[i][c_ID], 0.000000, 0.349999, 0.929999, 0.000000, 0.000000, 0.000000); //lima
             else if(CarData[i][c_Model] == 487) AttachDynamicObjectToVehicle(CreateDynamicObject(19311, 0, 0, 0, 0, 0, 0), CarData[i][c_ID], 0.000000, 1.284999, 1.629998, 0.000000, -0.000001, 90.449951); //heli
         }
+
         //Obiekty na dachach pojazdów DMV
         if(CarData[i][c_OwnerType] == CAR_OWNER_FRACTION && CarData[i][c_Owner] == FRAC_GOV)
         {
@@ -619,7 +628,7 @@ IsPlayerOwnFractionCar(playerid, vehicleID)
         lider > 0;
     new orgOwner = CarData[vehicleUID][c_OwnerType] == CAR_OWNER_FAMILY && \
         org == CarData[vehicleUID][c_Owner] && \
-        orgIsLeader(playerid);
+        IsPlayerOrgLeader(playerid);
 
     return liderOwner || orgOwner;
 }
@@ -628,6 +637,19 @@ Car_IsValid(vehicleid)
 {
     if(VehicleUID[vehicleid][vUID] == 0) return 0;
     return 1;
+}
+
+Car_IsStealable(vehicleid)
+{
+    if(vehicleid <= CAR_End)
+    {
+        return 1;
+    }
+    if(Car_GetOwnerType(vehicleid) == CAR_OWNER_STEAL)
+    {
+        return 1;
+    }
+    return 0;
 }
 
 Car_GetOwnerType(vehicleid)
@@ -686,6 +708,13 @@ Car_Spawn(lUID, bool:loaddesc=true)
     SetVehicleParamsEx(vehicleid, 0, 0, 0, 0, 0, 0, 0);
 
     if(loaddesc) MruMySQL_WczytajOpis(vehicleid, CarData[lUID][c_UID], 2);
+
+    if(IsCarAtViceCity(vehicleid) && !IsCarWithRadio(vehicleid))
+    {
+        new radio[128];
+        strcat(radio, GetViceCityRadioStream(random(9)));
+        SetVehicleRadio(vehicleid, radio);
+    }
     return vehicleid;
 }
 
@@ -838,6 +867,35 @@ IsAHeliModel(carid)
     return 0;
 }
 
+IsAWodolotModel(model)
+{
+    return model == 460;
+}
+
+IsAWodolot(vehicleid)
+{
+    return GetVehicleModel(vehicleid) == 460; // Skimmer
+}
+
+GetVehicleHireCost(vehicleid)
+{
+    if(IsAWodolot(vehicleid))
+    {
+        return WODOLOT_COST;
+    }
+    new model = GetVehicleModel(vehicleid);
+    if(model == 495)
+    {
+        return SANDKING_COST;
+    }
+    if(model == 494)
+    {
+        return HOTRING_COST;
+    }
+
+    return BIKE_COST;
+}
+
 Car_PrintOwner(car)
 {
     new string[64];
@@ -851,7 +909,7 @@ Car_PrintOwner(car)
         }
         case CAR_OWNER_FAMILY:
         {
-            format(string, sizeof(string), "%s", OrgInfo[orgID(CarData[car][c_Owner])][o_Name]);
+            format(string, sizeof(string), "%s", OrgInfo[CarData[car][c_Owner]][o_Name]);
         }
         case CAR_OWNER_PLAYER:
         {
@@ -870,7 +928,7 @@ Car_PrintOwner(car)
         }
         case CAR_OWNER_JOB:
         {
-            format(string, sizeof(string), "%s", JobNames[CarData[car][c_Owner]]);
+            format(string, sizeof(string), "%s", GetJobName(CarData[car][c_Owner]));
         }
         case CAR_OWNER_SPECIAL:
         {
@@ -911,6 +969,285 @@ stock GetVehicleSpeed(carid)
     return final_speed;
 }
 
+Player_RemoveFromVeh(playerid)
+{
+	new Float:slx, Float:sly, Float:slz;
+	GetPlayerPos(playerid, slx, sly, slz);
+	SetPlayerPos(playerid, slx, sly, slz+1);
+	ClearAnimations(playerid);	
+
+	return true;
+}
+
+
+Player_CanUseCar(playerid, vehicleid)
+{
+	if(IsAScripter(playerid) || IsAHeadAdmin(playerid)) return 1;
+	
+	new string[128];
+	if(GetVehicleModel(vehicleid) == 577 && !IsPlayerInFraction(playerid, FRAC_KT, 5000))
+    {
+		return 0;
+	}
+	if (IsAnAmbulance(vehicleid))
+	{
+		if(!IsAMedyk(playerid))
+		{
+			sendTipMessageEx(playerid, COLOR_GRAD1, "Nie jesteœ medykiem!");
+			return 0;
+		}
+	}
+
+	if(VehicleUID[vehicleid][vUID] != 0)
+    {
+        new lcarid = VehicleUID[vehicleid][vUID];
+	    if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FRACTION)// wszystkie auta frakcji
+	    {
+            if(CarData[lcarid][c_Owner] != GetPlayerFraction(playerid) && CarData[lcarid][c_Owner] != 11)
+            {
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
+                return 0;
+            }
+            if(CarData[lcarid][c_Owner] == 11)
+            {
+                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][pRank] >= CarData[lcarid][c_Rang]) return 1;
+                if(GetPlayerFraction(playerid) == 11 && PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+	        	{
+                	format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
+		        	sendTipMessageEx(playerid,COLOR_GREY,string);
+		        	return 0;
+	        	}
+                if(TakingLesson[playerid] == 1) return 1;
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
+                return 0;
+            }
+	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+	        {
+                format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
+		        sendTipMessageEx(playerid,COLOR_GREY,string);
+		        return 0;
+	        }
+	    }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL) //specjalne
+        {
+            if(CarData[lcarid][c_Owner] == CAR_ZUZEL)
+            {
+                if(zawodnik[playerid] != 1)
+    		    {
+    				sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "Nie jesteœ zawodnikiem ¿u¿lowym, zg³oœ siê do administracji jeœli chcesz nim zostaæ.");
+    				return 0;
+    			}
+            }
+        }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_JOB) //reszta do pracy
+        {
+            if(CarData[lcarid][c_Owner] == PlayerInfo[playerid][pJob])
+            {
+                new bool:wywal;
+                switch(PlayerInfo[playerid][pJob])
+                {
+                    case JOB_LOWCA: if(PlayerInfo[playerid][pDetSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_LAWYER: if(PlayerInfo[playerid][pLawSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_MECHANIC: if(PlayerInfo[playerid][pMechSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_DRIVER: if(PlayerInfo[playerid][pCarSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    case JOB_TRUCKER: if(PlayerInfo[playerid][pTruckSkill] < CarData[lcarid][c_Rang]) wywal=true;
+                    default: wywal=false;
+                }
+                if(wywal)
+                {
+					new skill = 0;
+					switch(PlayerInfo[playerid][pJob])
+					{
+						case JOB_LOWCA: skill = PlayerInfo[playerid][pDetSkill];
+						case JOB_LAWYER: skill = PlayerInfo[playerid][pLawSkill];
+						case JOB_MECHANIC: skill = PlayerInfo[playerid][pMechSkill];
+						case JOB_DRIVER: skill = PlayerInfo[playerid][pCarSkill];
+						case JOB_TRUCKER: skill = PlayerInfo[playerid][pTruckSkill];
+						default: wywal=false;
+					}
+                    sendTipMessageEx(playerid,COLOR_GREY,sprintf("Aby prowadziæ ten pojazd potrzebujesz %d skilla w zawodzie %s.", CarData[lcarid][c_Rang], GetJobName(CarData[lcarid][c_Owner])));
+					sendTipMessageEx(playerid,COLOR_GREY,sprintf("Twoje punkty skilla w zawodzie %s wynosz¹: %d pkt", GetJobName(CarData[lcarid][c_Owner]), skill));
+                    return 0;
+                }
+				if(GetVehicleModel(vehicleid) == 578 && PlayerInfo[playerid][pLevel] == 1)
+				{
+					format(string, sizeof(string), "Musisz mieæ 2 level aby prowadziæ tym pojazdem.");
+                    sendTipMessageEx(playerid,COLOR_GREY,string);
+					return 0;
+				}
+            }
+            else
+            {
+                if(CarData[lcarid][c_Owner] == JOB_DRIVER)
+                {
+                    if(GetPlayerFraction(playerid) == FRAC_KT) return 1;
+                }
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+                format(string, sizeof(string), "Aby prowadziæ ten pojazd musisz byæ w zawodzie %s.", GetJobName(CarData[lcarid][c_Owner]));
+                sendTipMessageEx(playerid,COLOR_GREY,string);
+				return 0;
+            }
+        }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_FAMILY)// wszystkie auta RODZIN
+	    {
+            if(CarData[lcarid][c_Owner] != GetPlayerOrg(playerid))
+            {
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+                sendTipMessageEx(playerid,COLOR_GREY, "Nie jesteœ uprawniony do kierownia tym pojazdem.");
+                return 0;
+            }
+	        if(PlayerInfo[playerid][pRank] < CarData[lcarid][c_Rang])
+	        {
+                if(PlayerInfo[playerid][pAdmin] >= 5000) return 1;
+                format(string, sizeof(string), "Aby kierowaæ tym pojazdem potrzebujesz %d rangi!", CarData[lcarid][c_Rang]);
+		        sendTipMessageEx(playerid,COLOR_GREY,string);
+		        return 0;
+	        }
+	    }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_PLAYER) //Pojazdy graczy
+        {
+            if(IsCarOwner(playerid, vehicleid, true))
+	        {
+                if(CarData[lcarid][c_Keys] != 0 && CarData[lcarid][c_Owner] != PlayerInfo[playerid][pUID])
+                {
+                    if(CarData[lcarid][c_Keys] != PlayerInfo[playerid][pUID])
+    	       	    {
+                        sendTipMessageEx(playerid, COLOR_NEWS, "Kluczyki od tego pojazdu zosta³y zabrane przez w³aœciciela.");
+                        PlayerInfo[playerid][pKluczeAuta] = 0;
+    				   	return 0;
+    	       	    }
+                }
+	       	}
+	       	else
+	       	{
+	       	    sendTipMessageEx(playerid, COLOR_NEWS, "Nie masz kluczy do tego pojazdu, a zabezpieczenia s¹ zbyt dobre abyœ móg³ go ukraœæ.");
+	       		return 0;
+	       	}
+        }
+        else if(CarData[lcarid][c_OwnerType] == CAR_OWNER_SPECIAL && CarData[lcarid][c_Owner] == CAR_SMUGGLING)
+        {
+            if(!IsPlayerNPC(playerid))
+            {
+                sendTipMessageEx(playerid, COLOR_GREY, "Ten pojazd mog¹ prowadziæ tylko NPC.");
+                return 0;
+            }
+        }
+    }
+	if(IsACopCar(vehicleid))
+	{
+	    if(IsAPolicja(playerid))
+	    {
+	        if(OnDuty[playerid] == 0)
+	        {
+	            if(GetVehicleModel(vehicleid) != 445)
+	            {
+	            	sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ na s³u¿bie aby jeŸdziæ autem policyjnym !");
+                    return 0;
+	            }
+	        }
+	    }
+	}
+
+	if(IsABoat(vehicleid))
+	{
+	    if(PlayerInfo[playerid][pBoatLic] < 1)
+		{
+		    sendTipMessageEx(playerid, COLOR_GREY, "Nie wiesz w jaki sposób p³ywaæ ³odzi¹, wiêc decydujesz siê j¹ opuœciæ !");
+		    return 0;
+		}
+	}
+	else if(IsAPlane(vehicleid))
+	{
+	    antyczolg[playerid] ++;
+	    if(PlayerInfo[playerid][pFlyLic] < 1)
+		{
+			sendTipMessageEx(playerid, COLOR_GREY, "Nie wiesz w jaki sposób lataæ samolotem, wiêc decydujesz siê go opuœciæ !");
+			return 0;
+		}
+	}
+
+	return 1;
+}
+
+RedisGetRadioKey(vehicleUID)
+{
+    new key[128];
+    format(key, sizeof(key), "vehicles:%d:radio", vehicleUID);
+    return key;
+}
+
+SetVehicleRadio(vehicleid, radio[])
+{
+    new vehicleUID = VehicleUID[vehicleid][vUID];
+    if(vehicleUID > 0)
+    {
+        Redis_SetString(RedisClient, RedisGetRadioKey(vehicleUID), radio);
+    }
+}
+
+DisableVehicleRadio(vehicleid)
+{
+    new vehicleUID = VehicleUID[vehicleid][vUID];
+    if(vehicleUID > 0)
+    {
+        RedisDelete(RedisGetRadioKey(vehicleUID));
+    }
+}
+
+GetVehicleRadio(vehicleid)
+{
+    new radio[128];
+    new vehicleUID = VehicleUID[vehicleid][vUID];
+    if(vehicleUID > 0)
+    {
+        Redis_GetString(RedisClient, RedisGetRadioKey(vehicleUID), radio);
+    }
+    return radio;
+}
+
+IsCarWithRadio(vehicleid)
+{
+    new vehicleUID = VehicleUID[vehicleid][vUID];
+    if(vehicleUID > 0)
+    {
+        return Redis_Exists(RedisClient, RedisGetRadioKey(vehicleUID));
+    }
+    return 0;
+}
+
+CreateFakePayNSprayPickups()
+{
+    for(new i; i<sizeof(FakePayNSpray); i++)
+    {
+        FakePayNSprayPickups[i] = CreateDynamicPickup(19627, 1, 
+            FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2]
+        );
+		CreateDynamic3DTextLabel("Naprawa pojazdu", COLOR_GREEN, 
+			FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2] + 0.5,
+			15.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, true);
+    }
+}
+
+IsPlayerAtPayNSpray(playerid)
+{
+    for(new i; i<sizeof(FakePayNSpray); i++)
+    {
+        if(IsPlayerInRangeOfPoint(playerid, 10.0, FakePayNSpray[i][0], FakePayNSpray[i][1], FakePayNSpray[i][2]))
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+GetVehPrice(veh)
+{
+    if(veh < 400 || veh > 611)
+    {
+        return 0;
+    }
+    return CarPrices[veh-400];
+}
 
 //-----------------<[ Timery: ]>--------------------
 /*

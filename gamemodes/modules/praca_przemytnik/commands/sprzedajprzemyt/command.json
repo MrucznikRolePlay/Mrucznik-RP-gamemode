@@ -1,0 +1,31 @@
+{
+    "name": "sprzedajprzemyt",
+    "description": "Oferuje graczowi przedmiot z przemytu na sprzeda¿.",
+    "command_tips": ["Dostêpne przedmioty: pancerz, jetpack, paliwo"],
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "sprzedajprzemyt",
+        "sellsmuggled",
+        "sellprzemyt"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "string",
+            "size": "32",
+            "name": "nazwa",
+            "description": "jetpack/pancerz"
+        },
+        {
+            "type": "integer",
+            "name": "price",
+            "description": "cena"
+        }
+    ],
+    "date": "06.04.2024"
+}

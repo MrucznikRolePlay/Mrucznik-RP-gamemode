@@ -33,6 +33,8 @@ command_gotobiz_Impl(playerid, businessID)
             return 1;
         }
         SetPlayerPos(playerid, Business[businessID][b_enX], Business[businessID][b_enY], Business[businessID][b_enZ]); 
+        SetPlayerVirtualWorld(playerid, Business[businessID][b_enVw]);
+        SetPlayerInterior(playerid, Business[businessID][b_enInt]);
         sendTipMessage(playerid, "Teleportowano Ciê do biznesu!"); 
     }
     else

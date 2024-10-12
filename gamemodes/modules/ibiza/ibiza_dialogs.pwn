@@ -35,7 +35,6 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						IbizaTicket[playerid] = IBIZA_NORMAL;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu!");
-						SejfR_Add(FAMILY_IBIZA, ibiza_priceNormal);
 						Log(payLog, INFO, "%s kupi³ bilet normalny (Ibiza) za $ %d", GetPlayerLogName(playerid), ibiza_priceNormal);
 					}else{
 						if(ibiza_priceNormal == 0) SendClientMessage(playerid, -1, "Klub jest zamkniêty.");
@@ -48,7 +47,6 @@ ibiza_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						IbizaTicket[playerid] = IBIZA_VIP;
 						SetPlayerWeather(playerid, 27);
 						SendClientMessage(playerid, -1, "Kasjerka mówi: Dziêkujemy za zakup biletu VIP!");
-						SejfR_Add(FAMILY_IBIZA, ibiza_priceVIP);
 						Log(payLog, INFO, "%s kupi³ bilet VIP (Ibiza) za $ %d", GetPlayerLogName(playerid), ibiza_priceNormal);
 					}else{
 						if(ibiza_priceVIP == 0) SendClientMessage(playerid, -1, "Klub jest zamkniêty.");

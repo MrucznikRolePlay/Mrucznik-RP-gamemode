@@ -1,0 +1,11 @@
+{
+    "name": "togadmin",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "togadm"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

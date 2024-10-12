@@ -23,7 +23,7 @@
 
 //-----------------<[ Zmienne: ]>-------------------
 new iloscwejsc;
-new valueWjedz;
+new CurrentMaxCarEntrance;
 
 
 //------------------<[ Enumy: ]>--------------------
@@ -54,6 +54,7 @@ enum eWjedz
 	Float:wy_Y,
 	Float:wy_Z,
 	wj_VW,
+	wj_Int,
 	wj_PLOCAL,
 	pFracOwn,
 	pOrgOwn,

@@ -25,9 +25,9 @@
 //------------------<[ Implementacja: ]>-------------------
 command_otworz_Impl(playerid)
 {
-    if(GetPlayerOrg(playerid) != 23)
+    if(IsBusinessTypeOwnedByPlayerOrg(playerid, FRONT_BIZ_TYPE_GUNSHOP))
     {
-        sendTipMessage(playerid, "Komenda dostêpna tylko dla Gunshop Los Santos.");
+        sendTipMessage(playerid, "Komenda dostêpna tylko dla organizacji posiadaj¹cych biznes typu Gunshop.");
         return 1;
     }
     if(PlayerInfo[playerid][pRank] <= 3)

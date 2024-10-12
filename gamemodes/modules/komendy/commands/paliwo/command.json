@@ -1,0 +1,12 @@
+{
+    "name": "paliwo",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "fuel",
+        "licznikpaliwa"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

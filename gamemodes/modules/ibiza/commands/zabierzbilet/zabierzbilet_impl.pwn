@@ -25,7 +25,7 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zabierzbilet_Impl(playerid, giveplayerid)
 {
-    if(GetPlayerOrg(playerid) == FAMILY_IBIZA && PlayerInfo[playerid][pRank] >= 6) 
+    if(IsAClubBusinessOwner(playerid) && PlayerInfo[playerid][pRank] >= 6) 
     {
         new var[128];
         if(IbizaTicket[giveplayerid] > 0)

@@ -41,6 +41,7 @@ command_bpracownicy()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

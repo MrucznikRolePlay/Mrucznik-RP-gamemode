@@ -1,0 +1,11 @@
+{
+    "name": "dolacz",
+    "description": "Do³¹cz do pracy dorywczej.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "join"
+    ],
+    "parameters": [],
+    "date": "12.04.2024"
+}

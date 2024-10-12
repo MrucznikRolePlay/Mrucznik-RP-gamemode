@@ -82,15 +82,6 @@ MruMySQL_Unwarn(nick[])
     mysql_query(str);
 }
 
-MruMySQL_UpdateFamily(id, nazwa[])
-{
-    new query[75];
-	new nazwa_escaped[32];
-	mysql_real_escape_string(nazwa, nazwa_escaped);
-    format(query, sizeof(query), "UPDATE `mru_rodziny` SET `id`=%d WHERE `name`='%s'", id, nazwa_escaped);
-    mysql_query(query);
-}
-
 MruMySQL_SetZoneControl(frac, id)
 {
     new str[128];

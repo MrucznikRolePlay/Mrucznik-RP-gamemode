@@ -35,11 +35,11 @@ command_createconvoybox_Impl(playerid)
     GetPlayerPos(playerid, x, y, z);
     GetPlayerFacingAngle(playerid, Float:ang);
 
-    new boxid;
+    new boxid, bonus = random(BOX_BONUS)+BOX_BONUS_BASE;
     if(IsPlayerInAnyVehicle(playerid)) {
-        boxid = DropBoxFromCar(GetPlayerVehicleID(playerid));
+        boxid = DropBoxFromCar(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, GetPlayerVehicleID(playerid));
     } else {
-        boxid = CreateBox(x, y, z-BOX_ONFOOT_Z_OFFSET, 0.0, 0.0, ang);
+        boxid = CreateBox(BOX_OBJECT, BOX_TYPE_CONVOY, bonus, x, y, z-0.7, GetPlayerInterior(playerid), GetPlayerVirtualWorld(playerid), ang);
     }
     if(boxid == -1) return SendClientMessage(playerid, -1, "Brak miejsca");
     SendClientMessage(playerid, -1, sprintf("Stworzy³eœ box o id %d", boxid));

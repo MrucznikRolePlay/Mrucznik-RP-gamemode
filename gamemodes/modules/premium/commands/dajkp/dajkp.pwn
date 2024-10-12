@@ -56,7 +56,7 @@ YCMD:dajkp(playerid, params[], help)
     }
     //fetching params
     new giveplayerid, time;
-    if(sscanf(params, "rd", giveplayerid, time))
+    if(sscanf(params, "k<fix>d", giveplayerid, time))
     {
         sendTipMessage(playerid, "U¿yj /dajkp [Nick/ID] [czas] ");
         return 1;

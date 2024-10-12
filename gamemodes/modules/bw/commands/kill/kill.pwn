@@ -41,6 +41,7 @@ command_kill()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

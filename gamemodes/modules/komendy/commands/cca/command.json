@@ -1,0 +1,11 @@
+{
+    "name": "cca",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "cc"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -121,16 +121,14 @@ fPanel_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     	} 
     	else if(listitem == 4)
     	{
-
     		new fracid = PlayerInfo[playerid][pLider];
-    		new typ = 0;
     		new str[512];
 		    for(new i=0;i<10;i++)
 		    {
-		        if(strlen((typ == 0) ? (FracRang[fracid][i]) : (FamRang[fracid][i])) < 2)
+		        if(strlen(FracRang[fracid][i]) < 2)
 		            format(str, 512, "%s[%d] -\n", str, i);
 		        else
-		            format(str, 512, "%s[%d] %s\n", str, i, (typ == 0) ? (FracRang[fracid][i]) : (FamRang[fracid][i]));
+		            format(str, 512, "%s[%d] %s\n", str, i, FracRang[fracid][i]);
 		    }
 
 		    return ShowPlayerDialogEx(playerid, 1966, DIALOG_STYLE_LIST, "Wybierz rangê, któr¹ chcesz nadaæ graczowi", str, "Nadaj", "Anuluj");

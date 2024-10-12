@@ -1,0 +1,12 @@
+{
+    "name": "cp_usun",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "czekpoint_usun",
+        "checkpoint_usun"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -1,0 +1,13 @@
+{
+    "name": "samppomoc",
+    "description": "Domyœlne komendy SA-MP.",
+    "permissions": [
+        "everyone"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "samphelp"
+    ],
+    "parameters": [],
+    "date": "19.09.2024"
+}

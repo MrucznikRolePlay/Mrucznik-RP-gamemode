@@ -1,0 +1,13 @@
+{
+    "name": "innyspawn",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "spawnchange",
+        "zmianaspawnu",
+        "zmienspawn"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

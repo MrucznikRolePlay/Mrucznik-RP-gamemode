@@ -167,9 +167,9 @@
 		> dajzaufanego - nadaje zaufanego dla gracza o ID
 		> makeircadmin - nadaje administratora chatu IRC dla gracza o ID
 		> forceskin - wymusza otworzenie wybiera³ki, gdy gracz o ID jest we frakcji
-		> dajlideraorg - nadaje lidera organizacji (rodziny) dla gracza o ID X
+		> dajlideraorg - nadaje lidera organizacji (organizacji) dla gracza o ID X
 		> makemember - nadaje stopieñ [0] graczowi o ID we frakcji X
-		> zabierzlideraorg - zabiera lidera organizacji (rodziny) dla gracza o ID
+		> zabierzlideraorg - zabiera lidera organizacji (organizacji) dla gracza o ID
 		> makeleader - daje graczowi o ID lidera frakcji o ID X
 		> gotopos - teleportuje nas do pozycji X,Y,Z
 		> gotols - teleportuje pod komisariat LS
@@ -759,6 +759,43 @@ GivePBlockForPlayer(player[], adminid, result[])
 		iloscPozaDuty[adminid]++; 
 	}
 	return 1;
+}
+
+AppendToPlayerObjectFiles(playerid, objectid)
+{
+	new string[128];
+	GetPVarString(playerid, "edit-object-comment", string);
+	MAP_insert_val_arr(AdminObjects[playerid], objectid, string);
+	SaveObjectsFile(playerid);
+}
+
+SaveObjectsFile(playerid)
+{
+	new objectid, model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, interior, vw;
+	new File:objectsFile;
+	new year, month, day;
+	getdate(year, month, day);
+	objectsFile = fopen(sprintf("%s_objects_%d_%d_%d_%d.txt", GetNick(playerid), year, month, day, AdminObjectsVer[playerid]), io_write);
+	if(objectsFile)
+	{
+		new Pointer:key_ptr;
+		new Pointer:value_ptr;
+		for(new Map:temp_map = MAP_iter_get(AdminObjects[playerid], key_ptr, value_ptr); temp_map != MAP_NULL; temp_map = MAP_iter_next(temp_map, MAP_NULL, key_ptr, value_ptr))
+		{
+			new comment[128];
+			MEM_get_arr(value_ptr, _, comment);
+			objectid = MEM_get_val(key_ptr);
+			model = GetDynamicObjectModel(objectid);
+			GetDynamicObjectPos(objectid, x, y, z);
+			GetDynamicObjectRot(objectid, rz, ry, rz);
+			vw = GetPlayerVirtualWorld(playerid);
+			interior = GetPlayerInterior(playerid);
+
+			fwrite(objectsFile, sprintf("CreateDynamicObject(%d, %f, %f, %f, %f, %f, %f, %d, %d); // %s\n",
+				model, x, y, z, rx, ry, rz, vw, interior, comment));
+		}
+		fclose(objectsFile);
+	}
 }
 
 //-----------------<[ Timery: ]>-------------------

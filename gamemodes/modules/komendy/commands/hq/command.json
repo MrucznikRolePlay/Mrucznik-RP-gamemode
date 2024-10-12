@@ -2,7 +2,7 @@
     "name": "hq",
     "description": "Wyœwietla listê zg³oszeñ z komputera g³ównego LSPD.",
     "permissions": [
-        "frakcja_LSPD"
+        "everyone"
     ],
     "author": "niceczlowiek",
     "aliases": [],

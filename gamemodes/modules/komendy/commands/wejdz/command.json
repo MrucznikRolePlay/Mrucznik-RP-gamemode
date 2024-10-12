@@ -1,0 +1,11 @@
+{
+    "name": "wejdz",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "enter"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

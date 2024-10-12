@@ -1,0 +1,27 @@
+{
+    "name": "kuporg",
+    "description": "Kup slot na organizacje.",
+    "command_tips": [
+        "Koszt stworzenia organizacji: \"#CREATE_ORG_COST\"$ i \"#CREATE_ORG_CONTRABAND_COST\" kontrabandy."
+    ],
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "kuporganizacje",
+        "zalozorganizacje"
+    ],
+    "parameters": [
+        {
+            "type": "hex",
+            "name": "color",
+            "description": "kolor w formacie hex RRGGBB (np. F1A151FF)"
+        },
+        {
+            "type": "string",
+            "size": "34",
+            "name": "name",
+            "description": "nazwa (max 32 znaki)"
+        }
+    ],
+    "date": "07.09.2024"
+}

@@ -120,16 +120,3 @@ MruMySQL_ZnajdzBanaPoNicku(playerid, unescaped_nick[])
     }
     mysql_free_result();
 }
-
-MruMySQL_UsunOrganizacje(id)
-{
-    new lStr[128];
-    format(lStr, sizeof(lStr), "UPDATE `mru_konta` SET `FMember`=0, `Rank`=0 WHERE `FMember`='%d'", OrgInfo[id][o_UID]);
-    mysql_query(lStr);
-
-    format(lStr, sizeof(lStr), "DELETE FROM `mru_org` WHERE `UID`='%d'", OrgInfo[id][o_UID]);
-    mysql_query(lStr);
-
-    format(lStr, sizeof(lStr), "UPDATE `mru_strefy` SET `gang`=0 WHERE `gang`='%d'", OrgInfo[id][o_UID]);
-    mysql_query(lStr);
-}

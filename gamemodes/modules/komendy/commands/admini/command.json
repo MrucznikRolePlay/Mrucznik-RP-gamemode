@@ -1,0 +1,11 @@
+{
+    "name": "admini",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "admins"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

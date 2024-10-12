@@ -1,0 +1,11 @@
+{
+    "name": "kup",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "buy"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

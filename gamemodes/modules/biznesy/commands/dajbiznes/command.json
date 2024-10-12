@@ -1,7 +1,7 @@
 {
     "name": "dajbiznes",
     "description": "Komenda, która nadaje biznes dla gracza. Niezale¿nie od odleg³oœci.",
-    "permissions": [],
+    "permissions": ["everyone"],
     "author": "Simeone",
     "aliases": [],
     "parameters": [

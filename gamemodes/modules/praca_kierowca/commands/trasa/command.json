@@ -1,0 +1,9 @@
+{
+    "name": "trasa",
+    "description": "Rozpoczyna trasê autobusow¹.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "06.04.2024"
+}

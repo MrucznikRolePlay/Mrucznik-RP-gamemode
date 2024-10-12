@@ -1,0 +1,11 @@
+{
+    "name": "finisz",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "meta"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

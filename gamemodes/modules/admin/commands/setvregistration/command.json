@@ -1,7 +1,7 @@
 {
     "name": "setvregistration",
     "description": "Ustawia rejestracje wozu, w którym aktualnie siê znajdujesz.",
-    "permissions": [],
+    "permissions": ["everyone"],
     "author": "Simeone",
     "aliases": [
         "setcarreg",

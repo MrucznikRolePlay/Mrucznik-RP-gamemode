@@ -1,0 +1,28 @@
+{
+    "name": "selldrugs",
+    "description": "Sprzeda¿ narkotyków.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "sprzedajnarkotyki",
+        "sprzedajdragi"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "weight",
+            "description": "waga (gram)"
+        },
+        {
+            "type": "integer",
+            "name": "price",
+            "description": "cena"
+        }
+    ],
+    "date": "06.04.2024"
+}

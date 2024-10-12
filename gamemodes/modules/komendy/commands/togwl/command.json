@@ -1,0 +1,12 @@
+{
+    "name": "togwl",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "togcrime",
+        "toghq"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

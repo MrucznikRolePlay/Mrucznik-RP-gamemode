@@ -1,0 +1,20 @@
+{
+    "name": "felga",
+    "description": "Montowanie innej felgi w samochodzie.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "felga",
+            "description": "felga"
+        }
+    ],
+    "date": "01.04.2024"
+}

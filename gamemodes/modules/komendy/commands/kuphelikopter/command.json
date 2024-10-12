@@ -1,0 +1,13 @@
+{
+    "name": "kuphelikopter",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "buyhelicopter",
+        "kupheli",
+        "buyheli"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

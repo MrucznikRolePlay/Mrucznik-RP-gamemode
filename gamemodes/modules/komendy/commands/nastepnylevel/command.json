@@ -1,0 +1,13 @@
+{
+    "name": "nastepnylevel",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "buylevel",
+        "kuplevel",
+        "nextlevel"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

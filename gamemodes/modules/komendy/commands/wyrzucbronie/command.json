@@ -1,0 +1,11 @@
+{
+    "name": "wyrzucbronie",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "wb"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

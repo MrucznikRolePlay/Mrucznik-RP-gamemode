@@ -1,0 +1,13 @@
+{
+    "name": "car",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "auto",
+        "pojazd",
+        "samochod"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -43,7 +43,7 @@ command_zaraz_Impl(playerid, giveplayerid, disease[32])
     new eDiseases:diseaseID = GetDiseaseID(disease);
     if(diseaseID == eDiseases:NONE) 
     {
-        ShowDiseaseList(playerid);
+        ShowDiseaseList(playerid, true);
         SendClientMessage(playerid, COLOR_WHITE, "Lub wpisz \"/zaraz [id] wylecz\", aby wyleczyæ");
         return 1;
     }

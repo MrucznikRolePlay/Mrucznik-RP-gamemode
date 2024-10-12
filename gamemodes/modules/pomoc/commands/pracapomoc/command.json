@@ -1,0 +1,12 @@
+{
+    "name": "pracapomoc",
+    "description": "Komendy dotycz¹ce pracy cywila.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "jobhelp",
+        "jobpomoc"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}

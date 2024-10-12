@@ -1,0 +1,11 @@
+{
+    "name": "carcolors",
+    "description": "Lista kolorów dla aut.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "kolory"
+    ],
+    "parameters": [],
+    "date": "01.04.2024"
+}

@@ -1,0 +1,12 @@
+{
+    "name": "staty2",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "stats2",
+        "stats"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

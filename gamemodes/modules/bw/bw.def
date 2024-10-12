@@ -30,10 +30,9 @@
 #define BW_TIME 62 //czas jak zostanie dobity = 1 min
 #define BW_TIME_CRIMINAL 62 // czas jak zostanie dobity przez przestêpce / hitmana = 1 min
 #define BW_TIME_KILL 242 // czas jak wpisze /kill = 4min
-#define MAX_HOSPITAL_BEDS 10
 #define MAX_HEALTH_PACKS 3 //maksymalna ilosc apteczek posiadanych przez gracza
-#define HEALTH_PACK_PRICE 40000 //cena apteczki (³¹cznie 50k z prowizj¹)
-#define HEALTH_PACK_AMOUNTDOCTOR 10000 //prowizja dla lekarza
+#define HEALTH_PACK_PRICE 10000 //cena apteczki (³¹cznie 30k z prowizj¹)
+#define HEALTH_PACK_AMOUNTDOCTOR 20000 //prowizja dla lekarza
 #define HEALTH_PACK_HP 50 //ile hp dawac po uzyciu apteczki
 #define HOSPITALIZATION_COST 2000 //ile $$ zabieraæ od gracza po odczekaniu BW za hospitalizacje
 

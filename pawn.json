@@ -5,7 +5,6 @@
 	"output": "gamemodes/Mrucznik-RP.amx",
 	"dependencies": [
 		"MrucznikRolePlay/amx_assembly:v4.69",
-		"MrucznikRolePlay/indirection",
 		"Zeex/samp-plugin-crashdetect:v4.20",
 		"samp-incognito/samp-streamer-plugin:v2.9.4",
 		"maddinat0r/sscanf:v2.8.3",
@@ -28,7 +27,11 @@
 		"katursis/Pawn.RakNet:1.6.0",
 		"MrucznikRolePlay/Regular-Expressions-Plugin-sampctl:v0.2.4",
 		"Southclaws/pawn-requests:0.10.0",
-		"Southclaws/pawn-redis:v1.2.0"
+		"Southclaws/pawn-redis:v1.2.0",
+		"Crayder/Model-Sizes-Plus",
+		"Southclaws/samp-weapon-data",
+		"Southclaws/samp-camera-sequencer:2.6.1",
+		"BigETI/pawn-list"
 	],
 	"runtime": {
 		"version": "0.3.DL-R1",

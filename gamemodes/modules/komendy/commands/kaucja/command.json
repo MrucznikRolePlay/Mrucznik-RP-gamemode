@@ -1,0 +1,11 @@
+{
+    "name": "kaucja",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "bail"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -1,0 +1,13 @@
+{
+    "name": "zablokujtel",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "togphone",
+        "togtel",
+        "togtelefon"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

@@ -1,0 +1,11 @@
+{
+    "name": "zaparkuj",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "parkuj"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

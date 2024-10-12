@@ -44,7 +44,7 @@ task ConvoyTimer[100]()
 		if(convoyCarHPAcc >= hp_dif)
 		{
 			convoyCarHPAcc -= hp_dif;
-			DropBoxFromCar(convoyCar);
+			DropConvoyBox(convoyCar);
 		}
 
 		//zniszczenie pojazdu konwojowego

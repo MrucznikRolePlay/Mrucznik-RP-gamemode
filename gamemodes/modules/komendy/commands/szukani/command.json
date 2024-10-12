@@ -1,0 +1,12 @@
+{
+    "name": "szukani",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "wanted",
+        "poszukiwani"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

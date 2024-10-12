@@ -1,0 +1,11 @@
+{
+    "name": "ircpomoc",
+    "description": "Komendy dotycz¹ce chatu IRC.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "irchelp"
+    ],
+    "parameters": [],
+    "date": "17.09.2024"
+}

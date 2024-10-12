@@ -1,0 +1,11 @@
+{
+    "name": "praca_kierowca",
+    "description": "Praca kierowcy.",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": true,
+    "date": "31.03.2024"
+}

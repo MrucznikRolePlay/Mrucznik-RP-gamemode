@@ -1,0 +1,13 @@
+{
+    "name": "mi",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "deathwarning",
+        "warningdeath",
+        "mordinfo"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

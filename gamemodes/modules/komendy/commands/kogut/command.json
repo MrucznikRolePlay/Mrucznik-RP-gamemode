@@ -1,0 +1,12 @@
+{
+    "name": "kogut",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "syrena",
+        "sygnal"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

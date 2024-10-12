@@ -106,3 +106,6 @@ serverfiles/
 
 # intellij idea
 .idea/
+
+# Mrucznikowe
+out.csv

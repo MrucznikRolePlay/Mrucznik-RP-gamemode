@@ -1,0 +1,11 @@
+{
+    "name": "od",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "odbierz"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

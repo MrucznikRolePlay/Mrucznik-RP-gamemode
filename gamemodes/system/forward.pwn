@@ -2,9 +2,7 @@
 
 forward KomunikatTimer();
 forward SprzedajMatsTimer(playerid,giveplayerid);
-forward PizzaJobTimer01(playerid);
-forward Naprawa(playerid);//
-forward Lowienie(playerid);
+forward Naprawa(playerid);
 
 forward PrepareKarting();
 forward PreparePaintball();
@@ -37,6 +35,8 @@ forward ServerStuffSave();
 //  09.06.2014
 //Przeniesione z funkcji
 forward Float:GetDistanceBetweenPoints(Float:x1, Float:y1, Float:z1, Float:x2, Float:y2, Float:z2);
+forward Float:GetDistanceBetweenPlayers(p1,p2);
+
 forward Wchodzenie(playerid);
 forward freezuj(playerid);
 forward ZamykanieDrzwi(playerid);
@@ -78,7 +78,6 @@ forward Dopalaj(playerid); // Dopalacz auta
 forward StopMusic();
 forward PlayerFixRadio2();
 forward CountDownVehsRespawn();
-forward ZestawNaprawczy_CountDown(playerid, vehicleid);
 forward EditObj(playerid, obj); //Timer do edycji obiektów
 forward PaintballEnded();
 forward obiekty_timer(wartosc);
@@ -149,4 +148,6 @@ forward closeGate(i, j, playerid);
 forward DamagedHP(playerid);
 
 forward DeathAdminWarning(playerid, killerid, reason);
+
+forward Float:GetVehicleBoundingBoxDiagonal(vehicleid);
 //EOF

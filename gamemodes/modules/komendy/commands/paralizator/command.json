@@ -1,0 +1,12 @@
+{
+    "name": "paralizator",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "taser",
+        "tazer"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

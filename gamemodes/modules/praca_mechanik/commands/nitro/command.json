@@ -1,0 +1,17 @@
+{
+    "name": "nitro",
+    "description": "Zamontuj nitro w pojeüdzie.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "nos"
+    ],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        }
+    ],
+    "date": "31.03.2024"
+}

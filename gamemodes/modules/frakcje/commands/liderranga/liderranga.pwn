@@ -44,6 +44,7 @@ command_liderranga()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

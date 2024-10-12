@@ -23,5 +23,34 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define MAX_ORG_NAME_LENGTH 32
+
+#define MAX_MEMBER_RANK 8
+#define MAIN_LEADER_RANK 9
+
+#define ORG_SPAWN_BUSINESS_PROXIMITY_MAX 100
+#define ORG_SPAWN_BUSINESS_PROXIMITY_MIN 30
+
+#define CREATE_ORG_COST 5000000
+#define CREATE_ORG_CONTRABAND_COST 100
+
+#define ORG_DAILY_COST 10000
+#define ORG_DAILY_MEMBER_COST 5000
+
+#define MIN_LEADER_STAKE 0
+#define MAX_LEADER_STAKE 25
+
+#define JOIN_MEMBER_COST 10000
+#define CHANGE_ORG_NAME_COST 1
+#define CHANGE_ORG_MOTTO_COST 2000
+#define CHANGE_ORG_COLOR_COST 1
+#define CHANGE_ORG_SPAWN_COST 1
+#define PASS_ORG_COST 50
+
+#define DELETE_ORG_THRESHOLD -100000
+
+
+#define ORG_TYPE_INACTIVE 0
+#define ORG_TYPE_ORGANIZATION 1
 
 //end

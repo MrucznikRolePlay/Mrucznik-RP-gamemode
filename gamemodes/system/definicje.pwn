@@ -45,6 +45,11 @@
 #define HOLDING(%0) \
     ((newkeys & (%0)) == (%0))
 
+#define sendTipMessageFormat(%0,%1,%2) \
+	(format(scm_buf, sizeof scm_buf, %1,%2), sendTipMessage(%0,scm_buf))
+#define sendTipMessageFormatEx(%0,%1,%2,%3) \
+	(format(scm_buf, sizeof scm_buf, %2,%3), sendTipMessageEx(%0,%1,scm_buf))	
+
 //podgl¹d PW
 #define MAX_SENT_MESSAGES 25
 
@@ -60,6 +65,7 @@
 #define OSTATNIE_ZGLOSZENIA 10
 #define OSTATNIE_ZGLOSZENIASASP 10
 
+#define MOVE_SZPITAL_Z_NETA -12.0
 
 #define MAX_MESSAGE_LENGTH 			144 		//maksymalna liczba znaków jaka mo¿e zostaæ wyœwietlona na ekranie
 #define MAX_STREAM_LENGTH 			128			//maksymalna d³ugoœæ linku dla PlayAudioStreamForPlayer
@@ -69,6 +75,9 @@
 #define NOT_FOUND					-1			//u¿ywane do strfind
 
 #define BIKE_COST 30000
+#define SANDKING_COST 250000
+#define HOTRING_COST 500000
+#define WODOLOT_COST 500000
 //KB
 #define MAX_MONEY_IN_BANK 100000000
 
@@ -121,7 +130,7 @@
 #define MAX_STRING2 255
 //#define MAX_CHATBUBBLE_LENGTH 144
 #define MAX_3DTEXT 1024
-#define MAX_DOM 2000
+#define MAX_DOM 3000
 #define MAX_NrDOM 53
 #define MAX_REMOVED_OBJECTS 100
 #define GasMax 100
@@ -169,29 +178,8 @@
 #define NG_BOUNDS_minY -2714.9104
 #define NG_BOUNDS_maxX 2809.2007
 #define NG_BOUNDS_maxY -2330.6167
-//Stanowe wiêzienie
-#define NG_JAIL_X -554.7513
-#define NG_JAIL_Y 2590.4070
-#define NG_JAIL_Z 53.6603
 
 #define MAX_DOORS   20 //tymczasowe
-
-#define JOB_LOWCA       1
-#define JOB_LAWYER      2
-#define JOB_PROSTITUTE  3
-#define JOB_DRAGDEALER  4
-#define JOB_CARTHIEF    5
-#define JOB_REPORTER    6
-#define JOB_MECHANIC    7
-#define JOB_BODYGUARD   8
-#define JOB_GUNDEALER   9
-#define JOB_BUSDRIVER   10
-#define JOB_PIZZA       11
-#define JOB_BOXER       12
-//#define JOB_UNKNOWN
-//#define JOB_UNKNOWN
-#define JOB_PAPERMAN    15
-#define JOB_TRUCKER     16
 
 //13.06.2014
 #define FRAC_NONE   0
@@ -199,26 +187,18 @@
 #define FRAC_FBI    2
 #define FRAC_NG     3
 #define FRAC_ERS    4
-#define FRAC_LCN    5
-#define FRAC_YKZ    6
+#define FRAC_LCN    5 // usuniête, zosta³o dla bram
+//#define FRAC_YKZ  6 // usuniête
 #define FRAC_BOR    7
 #define FRAC_HA     8
 #define FRAC_SN     9
 #define FRAC_KT     10
 #define FRAC_GOV    11
-#define FRAC_GROOVE 12
-#define FRAC_BALLAS 13
-#define FRAC_VAGOS  14
-#define FRAC_NOA    15
-#define FRAC_WPS    16 
-#define SPOILER_D 200000
-#define ZDERZAK_D 250000
-#define FELGA_D 250000
-#define NITRO_D 500000
-#define HYDRA_D 250000
-
-new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FAMILY_IBIZA = -1,
-    FAMILY_FDU = -1, FAMILY_SEKTA = -1;
+#define SPOILER_D   200000
+#define ZDERZAK_D   250000
+#define FELGA_D     250000
+#define NITRO_D     500000
+#define HYDRA_D     250000
 
 //2015.09.12
 #define TAJNIAK_FBI		0
@@ -235,15 +215,6 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define WARN_BAN            2
 #define WARN_BLOCK          1
 
-//07.10 ORG
-#define ORG_SAVE_TYPE_BASIC 1
-#define ORG_SAVE_TYPE_DESC  2
-#define ORG_TYPE_NONE       0
-#define ORG_TYPE_GANG       1
-#define ORG_TYPE_MAFIA      2
-#define ORG_TYPE_RACE       3
-#define ORG_TYPE_BIZNES     4
-#define ORG_TYPE_CLUB       5
 //-----------------------------------------------------------------------------
 //                              PLOCAL
 //-----------------------------------------------------------------------------
@@ -350,18 +321,9 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define D_SUPPORT_LIST      1214
 
 #define D_ORGS              1255
-#define D_ORGS_SELECT       1256
+
 #define D_CREATE            1260
 #define D_EDIT              1261
-
-#define D_CREATE_ORG        1300
-#define D_CREATE_ORG_NAME   1301
-#define D_CREATE_ORG_UID    1302
-#define D_EDIT_ORG          1303
-#define D_EDIT_ORG_LIST     1304
-#define D_EDIT_ORG_TYP      1305
-#define D_EDIT_ORG_NAME     1306
-#define D_EDIT_ORG_DELETE   1308
 
 #define D_EDIT_CAR          1309
 #define D_EDIT_CAR_MENU     1310
@@ -381,6 +343,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 
 #define DIALOGID_MUZYKA		3240
 #define DIALOGID_MUZYKA_URL	3241
+#define DIALOGID_MUZYKA_VC	3242
 
 #define DIALOG_HA_ZMIENSKIN(%0)			3345+%0
 #define DIALOGID_UNIFORM_FRAKCJA        3445
@@ -543,6 +506,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define CAR_OWNER_JOB       4
 #define CAR_OWNER_SPECIAL   5
 #define CAR_OWNER_PUBLIC    6
+#define CAR_OWNER_STEAL     7
 
 //Czêœci cia³a
 #define BONE_HEAD 2
@@ -559,6 +523,7 @@ new FAMILY_SAD = 1, FAMILY_RSC = -1, FAMILY_ALHAMBRA = -1, FAMILY_VINYL = -1, FA
 #define RENT_CAR        1
 #define GO_KART         2
 #define CAR_ZUZEL       3
+#define CAR_SMUGGLING   4
 
 #define CAR_SAVE_OWNER      1
 #define CAR_SAVE_STATE      2

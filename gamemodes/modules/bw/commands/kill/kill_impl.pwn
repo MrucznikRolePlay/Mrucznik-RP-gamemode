@@ -71,7 +71,7 @@ public DropDeathMoneyTimer(playerid, moneyLost, Float:x, Float:y, Float:z, int, 
     new wl = moneyLost / 200000;
     CreateMoneyPickup(x, y, z, int, vw, moneyLost, wl, PlayerInfo[playerid][pUID]);
     DeletePVar(playerid, "kill-bw");
-    ZespawnujGraczaSzpitalBW(playerid);
+    ZespawnujGraczaSzpitalBW(playerid, IsPlayerAtViceCity(playerid));
 }
 
 //end

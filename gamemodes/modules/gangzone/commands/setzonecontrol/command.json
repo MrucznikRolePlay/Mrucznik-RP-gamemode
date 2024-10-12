@@ -1,0 +1,20 @@
+{
+    "name": "setzonecontrol",
+    "description": "Nadaje kontrole nad dan¹ stref¹.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "zoneid",
+            "description": "ID strefy"
+        },
+        {
+            "type": "integer",
+            "name": "org",
+            "description": "ID organizacji"
+        }
+    ],
+    "date": "06.09.2024"
+}

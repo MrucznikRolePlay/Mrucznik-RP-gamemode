@@ -39,13 +39,16 @@ enum eBusiness {
 	Float:b_exX,
 	Float:b_exY,
 	Float:b_exZ,
+	b_enInt,
+	b_enVw,
 	b_int,
 	b_vw,
 	b_pLocal,
 	b_maxMoney, 
 	b_Location[64],
 	b_cost,
-	b_moneyPocket
+	b_moneyPocket,
+	b_icon
 };
 new Business[MAX_BIZNES][eBusiness]; 
 

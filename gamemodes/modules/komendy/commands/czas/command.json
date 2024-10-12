@@ -1,0 +1,11 @@
+{
+    "name": "czas",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "time"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

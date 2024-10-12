@@ -1,0 +1,11 @@
+{
+    "name": "dutycd",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "dutysbi"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

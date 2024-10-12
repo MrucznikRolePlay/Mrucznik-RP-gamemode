@@ -1,0 +1,20 @@
+{
+    "name": "gotovcint",
+    "description": "Teleport do interioru vice city",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "intnum",
+            "description": "Numer interioru"
+        },
+        {
+            "type": "integer",
+            "name": "inout",
+            "description": "Wejœcie/Wyjœcie (0/1)"
+        }
+    ],
+    "date": "18.08.2024"
+}

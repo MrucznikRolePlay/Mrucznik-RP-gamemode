@@ -108,6 +108,11 @@ public OnCheatDetected(playerid, ip_address[], type, code)
 
 hook OnPlayerUpdate(playerid)
 {
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
+
 	if(gPlayerLogged[playerid] == 0)
 	{
 		if(GetPlayerVirtualWorld(playerid) != 1488)
@@ -127,20 +132,11 @@ hook OnPlayerUpdate(playerid)
 
 hook OnPlayerStateChange(playerid, newstate, oldstate)
 {
-    //---------------------------------------------- Anti Cheat ------------------------------------//
-   /* if(newstate == PLAYER_STATE_DRIVER) {
-        if(GetPVarInt(playerid, "iLastDrive") != 0 && (gettime() - GetPVarInt(playerid, "iLastDrive")) <= 1) {
-            SetPVarInt(playerid, "iFlags", GetPVarInt(playerid, "iLastDrive")+1);
-            if(GetPVarInt(playerid, "iLastDrive") >= 2) {
-                format(string, 256, "%s podejrzany o tepanie aut. Dostal kicka. LVL: %d (%dh online)", GetNick(playerid), PlayerInfo[playerid][pLevel], PlayerInfo[playerid][pConnectTime]);
-                SendAdminMessage(COLOR_LIGHTRED, string);
-                Kick(playerid);
-                return true;
-            }
-        }
+	if(IsPlayerNPC(playerid))
+	{
+		return 1;
+	}
 
-        SetPVarInt(playerid, "iLastDrive", gettime());
-    } */
 	if(gPlayerLogged[playerid] == 0)
 	{
 		if(newstate == PLAYER_STATE_SPAWNED || newstate == PLAYER_STATE_DRIVER || newstate == PLAYER_STATE_PASSENGER)
@@ -197,8 +193,10 @@ AC_OnPlayerLogin(playerid)
 	}
 }
 
-hook OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
+AC_OnUnoccupiedVehicleUpdate(vehicleid, playerid, passenger_seat, Float:new_x, Float:new_y, Float:new_z, Float:vel_x, Float:vel_y, Float:vel_z)
 {
+	#pragma unused vel_z, vel_y, vel_x, passenger_seat
+
 	new Float:old_x, Float:old_y, Float:old_z;
 	GetVehiclePos(vehicleid, old_x, old_y, old_z);
 	if(old_x != new_x || old_y != new_y || old_z != new_z)

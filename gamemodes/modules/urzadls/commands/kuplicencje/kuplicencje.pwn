@@ -40,6 +40,7 @@ command_kuplicencje()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

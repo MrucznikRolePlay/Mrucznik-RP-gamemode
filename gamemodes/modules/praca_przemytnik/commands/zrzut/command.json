@@ -1,0 +1,9 @@
+{
+    "name": "zrzut",
+    "description": "Zrzuca paczkê z kontraband¹.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [],
+    "date": "04.05.2024"
+}

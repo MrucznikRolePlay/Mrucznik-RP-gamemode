@@ -1,0 +1,20 @@
+{
+    "name": "setkontrabanda",
+    "description": "Ustaw graczowi kontrabande.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "player",
+            "name": "giveplayerid",
+            "description": "Nick/ID"
+        },
+        {
+            "type": "integer",
+            "name": "value",
+            "description": "value"
+        }
+    ],
+    "date": "03.05.2024"
+}

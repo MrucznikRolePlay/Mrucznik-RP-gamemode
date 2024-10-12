@@ -1,0 +1,11 @@
+{
+    "name": "qf",
+    "description": "",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "quitfrakcja"
+    ],
+    "parameters": [],
+    "date": "15.09.2024"
+}

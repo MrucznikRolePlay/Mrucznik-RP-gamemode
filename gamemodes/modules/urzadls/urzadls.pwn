@@ -35,12 +35,21 @@ PlayerInDmvPoint(playerid)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9628,-1791.4224,77.9453)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9757,-1794.6508,77.9453)
 	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9752,-1797.7997,77.9453)
-	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1446.9729,-1800.9788,77.9453))
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE, 1445.2811,-1801.1071,77.9612)
+	// Vice City
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2977, 186.2629, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2976, 182.4774, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2930, 178.5167, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2979, 168.9292, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.2966, 166.2234, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 356.3013, 163.1573, 1008.3762)
+	|| IsPlayerInRangeOfPoint(playerid,OKIENKO_DMV_RANGE+1, 359.7069, 173.6590, 1008.3893))
 	{
 		return true;
 	}
 	return false;
 }
+
 CreateActorsInDMV(playerid)
 {
 	DmvActorStatus=true; 
@@ -50,9 +59,8 @@ CreateActorsInDMV(playerid)
 	{
 		if(Actors[i][a_Group] == AGROUP_DMV)
 		{
-			if(freePlace < 8)
+			if(freePlace < sizeof(okienkoPos))
 			{
-				//SetActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
 				SetDynamicActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]);
 				if(playerid != INVALID_PLAYER_ID)
 				{
@@ -60,9 +68,11 @@ CreateActorsInDMV(playerid)
 					sendTipMessage(playerid, string); 
 				}
 				SetDynamicActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
-				SetDynamicActorVirtualWorld(actorUID[i], 50); 
+				if(freePlace < 8) SetDynamicActorVirtualWorld(actorUID[i], 50);
+				else SetDynamicActorVirtualWorld(actorUID[i], 7110);
 				UpdateActorText(actorUID[i]);
-				format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1);
+				if(freePlace < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1);
+				else format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}[Wpisz /kuplicencje]", freePlace+1-8);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
 				if(playerid != INVALID_PLAYER_ID)
 				{
@@ -84,6 +94,7 @@ CreateActorsInDMV(playerid)
 	SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 	return 1;
 }
+
 DestroyActorsInDMV(playerid)
 {
 	DmvActorStatus=false; 
@@ -93,9 +104,9 @@ DestroyActorsInDMV(playerid)
 	{
 		if(Actors[i][a_Group] == AGROUP_DMV)
 		{
-			if(freePlace < 8)
+			if(freePlace < sizeof(okienkoPos))
 			{
-				SetDynamicActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], okienkoPos[freePlace][2]+10);
+				SetDynamicActorPos(actorUID[i], okienkoPos[freePlace][0], okienkoPos[freePlace][1], 0.0);
 				if(playerid != INVALID_PLAYER_ID)
 				{
 					format(string,sizeof(string), "Ustawiono aktorowi [%d] pozycjê, wzrok i VW", actorUID[i]);
@@ -104,7 +115,8 @@ DestroyActorsInDMV(playerid)
 				SetDynamicActorFacingAngle(actorUID[i], okienkoPos[freePlace][3]);
 				SetDynamicActorVirtualWorld(actorUID[i], 50); 
 				UpdateActorText(actorUID[i]);
-				format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
+				if(freePlace < 8) format(string, sizeof(string), "Urz¹d Miasta Los Santos\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
+				else format(string, sizeof(string), "Urz¹d Miasta Vice City\n{0080FF}Okienko %d \n {FF0000}Zamkniête!", freePlace+1);
 				UpdateDynamic3DTextLabelText(okienko[freePlace], 0xFFFFFFFF, string);
 				if(playerid != INVALID_PLAYER_ID)
 				{
@@ -116,20 +128,22 @@ DestroyActorsInDMV(playerid)
 		}
 	}
 	dmv = 0;
+
+	format(string, sizeof(string), "|____________Urz¹d Miasta zamkniêty przez %s_____________|", GetNick(playerid));
+	SendClientMessageToAll(COLOR_LIGHTGREEN, string);
 	return 1;
 }
+
 DefaultItems_LicenseCost()
 {
-	DmvLicenseCost[0] = 5000;
-	DmvLicenseCost[1] = 10000;
-	DmvLicenseCost[2] = 500000;
-	DmvLicenseCost[3] = 350000;
-	DmvLicenseCost[4] = 10000;
-	DmvLicenseCost[5] = 15000;
-	DmvLicenseCost[6] = 20000;
-	DmvLicenseCost[7] = 5000000;
-	DmvLicenseCost[8] = 10000;
-	DmvLicenseCost[9] = 350000;
+	DmvLicenseCost[0] = 5_000; // dowód
+	DmvLicenseCost[1] = 10_000; // karta wêdkarsaka
+	DmvLicenseCost[2] = 50_000; // pozwolenie na broñ
+	DmvLicenseCost[3] = 100_000; // patent ¿eglarski
+	DmvLicenseCost[4] = 5_000; // prawo jazdy - teoria
+	DmvLicenseCost[5] = 7_500; // prawo jazdy - praktyka
+	DmvLicenseCost[6] = 5_000; // prawo jazdy - odbiór
+	DmvLicenseCost[7] = 500_000; // licencja pilota
 	return 1; 
 }
 //end

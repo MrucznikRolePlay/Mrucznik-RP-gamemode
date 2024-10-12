@@ -1,7 +1,7 @@
 {
     "name": "zmienwiek",
     "description": "Komenda, która pozwala ustawiæ wiek dla gracza.",
-    "permissions": [],
+    "permissions": ["everyone"],
     "author": "Simeone",
     "aliases": [
         "setwiek"

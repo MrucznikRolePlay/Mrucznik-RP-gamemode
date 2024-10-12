@@ -25,24 +25,28 @@
 //------------------<[ Implementacja: ]>-------------------
 command_sprzedajrybe_Impl(playerid, fishid)
 {
-    if (!PlayerToPoint(100, playerid,-30.875, -88.9609, 1004.53))//centerpoint 24-7
+	new isAtOwnRestaurant = 0;
+	new bizId = IsPlayerAtFrontBusinnesZone(playerid);
+	new org = GetPlayerOrg(playerid);
+	if(bizId != -1 && IsActiveOrg(org) && 
+		FrontBusiness[bizId][Owner] == org && 
+		FrontBusiness[bizId][Type] == FRONT_BIZ_TYPE_RESTAURANT &&
+		GetPlayerFrontBusinessProximity(playerid, bizId) < 10.0)
+	{
+		isAtOwnRestaurant = 1;
+	}
+	
+    if(!PlayerToPoint(100, playerid, -30.875, -88.9609, 1004.53) && !isAtOwnRestaurant)//centerpoint 24-7
     {
-        SendClientMessage(playerid, COLOR_WHITE, "Rybê mo¿esz sprzedaæ tylko w 24/7!");
-        return 1;
-    }
-    if(FishGood[playerid] == 1)
-    {
-        SendPunishMessage(sprintf("AdmCmd: %s zostal zkickowany przez Admina: Marcepan_Marks, powód: teleport (ryby)", GetNickEx(playerid)), playerid);
-        Log(punishmentLog, INFO, "%s dosta³ kicka od antycheata, powód: teleport (ryby)");
-        KickEx(playerid);
-        return 1;
+		SendClientMessage(playerid, COLOR_WHITE, "Rybê mo¿esz sprzedaæ tylko w 24/7 lub restauracji posiadanej przez Twoj¹ organizacjê!");
+		return 1;
     }
 
     switch(fishid)
     {
         case 1..5:
         {
-            SprzedajeRybe(playerid, fishid);
+            SprzedajeRybe(playerid, fishid, isAtOwnRestaurant);
         }
         default:
         {
@@ -52,7 +56,7 @@ command_sprzedajrybe_Impl(playerid, fishid)
     return 1;
 }
 
-SprzedajeRybe(playerid, fishid = 0)
+SprzedajeRybe(playerid, fishid, isAtOwnRestaurant)
 {
 	if(!fishid) return 0;
 	new FishWeight, FishName[20];
@@ -85,15 +89,18 @@ SprzedajeRybe(playerid, fishid = 0)
 	if(FishWeight < 1) {
 		return SendClientMessage(playerid, COLOR_GREY, sprintf("** Nie z³owi³eœ ¿adnej ryby pod numerem [%d] !", fishid)); 
 	}
-	const moneyPerKg = 15;
+	new moneyPerKg = 14;
+	if(isAtOwnRestaurant)
+	{
+		moneyPerKg = 21;
+	}
 	SendClientMessage(playerid, COLOR_GREY, sprintf("** Sprzeda³eœ rybê numer [%d]!", fishid));
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", FishName, FishWeight, FishWeight * moneyPerKg));
 	DajKase(playerid, FishWeight * moneyPerKg);
 	ClearFishID(playerid, fishid);
 	Fishes[playerid][pLastFish] = 0;
 	Fishes[playerid][pFishID] = 0;
-	FishGood[playerid] = 0;
-
+	
 	if(IsPlayerSick(playerid, FANATYK_WEDKARSTWA))
 	{
 		if(random(100) <= 5)

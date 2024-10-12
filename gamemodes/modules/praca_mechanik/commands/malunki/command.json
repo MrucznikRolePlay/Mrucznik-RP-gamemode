@@ -1,0 +1,11 @@
+{
+    "name": "malunki",
+    "description": "Lista dostêpnych painjobów dla samochodów.",
+    "permissions": ["everyone"],
+    "author": "mrucznik",
+    "aliases": [
+        "paintjobs"
+    ],
+    "parameters": [],
+    "date": "31.03.2024"
+}

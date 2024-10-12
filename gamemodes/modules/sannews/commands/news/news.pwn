@@ -40,6 +40,7 @@ command_news()
     
 
     //permissions
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix

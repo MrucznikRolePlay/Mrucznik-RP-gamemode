@@ -47,10 +47,6 @@ command_kuplicencje_Impl(playerid)
         DmvLicenseCost[5],
         DmvLicenseCost[6],
         DmvLicenseCost[7]);
-        /* na póŸniej
-        DmvLicenseCost[8], - rejestracja pojazdu
-        DmvLicenseCost[9]); - w³asna tablica rejestracyjna
-        */
         ProxDetector(30.0, playerid, "Urzêdnik mówi: Witam Pana(i) w Urzêdzie Miasta! W czym mogê Panu(i) pomóc?", COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY,COLOR_GREY);
         ShowPlayerDialogEx(playerid, DIALOG_DMV, DIALOG_STYLE_TABLIST_HEADERS, "Wybierz dokument:", string, "Wyrób", "Wyjdz");
     }
