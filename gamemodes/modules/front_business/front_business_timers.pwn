@@ -174,7 +174,7 @@ ptask TakeoverScoreboard[100](playerid)
 					new orgName[64];
 					if(i == 0)
 					{
-						format(orgName, sizeof(orgName), "~b~LSPD");
+						format(orgName, sizeof(orgName), "~b~Porzadkowe");
 					}
 					else if(i == FrontBusiness[bizId][Owner])
 					{
