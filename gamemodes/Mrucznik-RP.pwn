@@ -557,6 +557,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 		new obj = CreateDynamicObject(model, shotX, shotY, shotZ, 0.0, 0.0, rotZ, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid));
 		AppendToPlayerObjectFiles(playerid, obj);
 		SendClientMessage(playerid, -1, sprintf("Object id %d created at: %.4f, %.4f, %.4f.", obj, shotX, shotY, shotZ));
+		Streamer_Update(playerid);
 	}
 	switch (hittype)
 	{
