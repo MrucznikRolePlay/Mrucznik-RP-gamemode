@@ -1,5 +1,5 @@
-//------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//-----------------------------------------------<< Source >>------------------------------------------------//
+//                                                 shotobject                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -16,44 +16,19 @@
 //----[  |||             |||||             |||                |||       |||    |||                      ]----//
 //----[                                                                                                 ]----//
 //----------------------------------------------------*------------------------------------------------------//
-// Kod wygenerowany automatycznie narzêdziem Mrucznik CTL
+// Autor: mrucznik
+// Data utworzenia: 12.10.2024
 
-// ================= UWAGA! =================
+
 //
-// WSZELKIE ZMIANY WPROWADZONE DO TEGO PLIKU
-// ZOSTAN¥ NADPISANE PO WYWO£ANIU KOMENDY
-// > mrucznikctl build
-//
-// ================= UWAGA! =================
 
-
-#include <YSI\y_hooks>
-
-//-------<[ include ]>-------
-#include "profiler\profiler.pwn"
-#include "setvregistration\setvregistration.pwn"
-#include "specshow\specshow.pwn"
-#include "shotobject\shotobject.pwn"
-#include "dvobiekt\dvobiekt.pwn"
-#include "zmienwiek\zmienwiek.pwn"
-#include "editobject\editobject.pwn"
-#include "dnobiekt\dnobiekt.pwn"
-#include "destroyobject\destroyobject.pwn"
-#include "createobject\createobject.pwn"
-
-
-//-------<[ initialize ]>-------
-hook OnGameModeInit()
+//------------------<[ Implementacja: ]>-------------------
+command_shotobject_Impl(playerid, model, comment[128])
 {
-    command_profiler();
-    command_setvregistration();
-    command_specshow();
-    command_shotobject();
-    command_dvobiekt();
-    command_zmienwiek();
-    command_editobject();
-    command_dnobiekt();
-    command_destroyobject();
-    command_createobject();
-    
+    SetPVarString(playerid, "edit-object-comment", comment);
+    SetPVarInt(playerid, "shooting-object", model);
+    MruMessageGoodInfo(playerid, sprintf("Strzelasz teraz obiektem o modelu %d. Wpisz /shotobject 0 by przestaæ.", model));
+    return 1;
 }
+
+//end

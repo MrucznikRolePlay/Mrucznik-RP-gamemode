@@ -543,6 +543,16 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
+	if(GetPVarInt(playerid, "debug-objects") == 1)
+	{
+		SendClientMessage(playerid, -1, sprintf("Shot at: %.4f, %.4f, %.4f", fX, fY, fZ));
+	}
+	if(GetPVarInt(playerid, "shooting-object") != 0)
+	{
+		new model = GetPVarInt(playerid, "shooting-object");
+		new obj = CreateDynamicObject(model, fX, fY, fZ, random(360), random(360), random(360), GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid));
+		AppendToPlayerObjectFiles(playerid, obj);
+	}
 	switch (hittype)
 	{
 		case BULLET_HIT_TYPE_NONE:
@@ -689,7 +699,7 @@ public OnPlayerShootDynamicObject(playerid, weaponid, objectid, Float:x, Float:y
 		new str[MAX_MESSAGE_LENGTH], Float:px, Float:py, Float:pz, Float:rx, Float:ry, Float:rz;
 		GetDynamicObjectPos(objectid, px, py, pz);
 		GetDynamicObjectRot(objectid, rx, ry, rz);
-		format(str, sizeof str, "ID: %d | Model: %d | Pos: %.4f, %.4f, %.4f, %.4f, %.4f, %.4f | Shoot: %.4f, %.4f, %.4f", 
+		format(str, sizeof str, "ID: %d | Model: %d | Pos: %.4f, %.4f, %.4f, %.4f, %.4f, %.4f", 
 			objectid, GetDynamicObjectModel(objectid), px, py, pz, rx, ry, rz, px + x, py + y, pz + z);
 		SendClientMessage(playerid, COLOR_WHITE, str);
 	}

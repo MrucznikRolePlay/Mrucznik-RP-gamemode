@@ -1,0 +1,26 @@
+{
+    "name": "shotobject",
+    "description": "Tworzysz obiekt w miejscu strza³u.",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [
+        "shootobject"
+    ],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "model",
+            "description": "model"
+        },
+        {
+            "type": "string",
+            "size": "128",
+            "name": "comment",
+            "description": "comment",
+            "defaultValue": ""
+        }
+    ],
+    "date": "12.10.2024"
+}

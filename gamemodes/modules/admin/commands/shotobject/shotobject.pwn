@@ -1,5 +1,5 @@
 //------------------------------------------<< Generated source >>-------------------------------------------//
-//-----------------------------------------------[ Commands ]------------------------------------------------//
+//                                                 shotobject                                                //
 //----------------------------------------------------*------------------------------------------------------//
 //----[                                                                                                 ]----//
 //----[         |||||             |||||                       ||||||||||       ||||||||||               ]----//
@@ -27,33 +27,42 @@
 // ================= UWAGA! =================
 
 
-#include <YSI\y_hooks>
-
 //-------<[ include ]>-------
-#include "profiler\profiler.pwn"
-#include "setvregistration\setvregistration.pwn"
-#include "specshow\specshow.pwn"
-#include "shotobject\shotobject.pwn"
-#include "dvobiekt\dvobiekt.pwn"
-#include "zmienwiek\zmienwiek.pwn"
-#include "editobject\editobject.pwn"
-#include "dnobiekt\dnobiekt.pwn"
-#include "destroyobject\destroyobject.pwn"
-#include "createobject\createobject.pwn"
-
+#include "shotobject_impl.pwn"
 
 //-------<[ initialize ]>-------
-hook OnGameModeInit()
+command_shotobject()
 {
-    command_profiler();
-    command_setvregistration();
-    command_specshow();
-    command_shotobject();
-    command_dvobiekt();
-    command_zmienwiek();
-    command_editobject();
-    command_dnobiekt();
-    command_destroyobject();
-    command_createobject();
+    new command = Command_GetID("shotobject");
+
+    //aliases
+    Command_AddAlt(command, "shootobject");
     
+
+    //permissions
+    Group_SetCommand(Group_GetID("admini"), command, true);
+    
+
+    //prefix
+    
+}
+
+//-------<[ command ]>-------
+YCMD:shotobject(playerid, params[], help)
+{
+    if (help)
+    {
+        sendTipMessage(playerid, "Tworzysz obiekt w miejscu strza³u.");
+        return 1;
+    }
+    //fetching params
+    new model, comment[128];
+    if(sscanf(params, "dS()[128]", model, comment))
+    {
+        sendTipMessage(playerid, "U¿yj /shotobject [model] [comment] ");
+        return 1;
+    }
+    
+    //command body
+    return command_shotobject_Impl(playerid, model, comment);
 }
