@@ -86,7 +86,7 @@ command_kupdragi_Impl(playerid, weight)
 
         if(RedisGetInt(redisKey))
         {
-            new reward = 125_000;
+            new reward = 75_000;
             DajKase(playerid, reward);
             Log(payLog, INFO, "%s z³apa³ dilera %s na gor¹cym uczynku i dosta³ %d$", GetPlayerLogName(playerid), GetPlayerLogName(dealerid), reward);
             MruMessageGoodInfoF(playerid, "Nakry³eœ %s na sprzeda¿y narkotyków! Dostajesz %d$ za wykonywanie swojej pracy.", GetNick(dealerid), reward);

@@ -37,7 +37,7 @@ command_sluzba_Impl(playerid)
         }
         if(IsAPolicja(playerid) && OnDutyCD[playerid] == 1)
         {
-            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /dutycd !");
+            sendTipMessageEx(playerid, COLOR_LIGHTBLUE, "U¿yj /dutycd!");
             return 1;
         }
 		if(GetPlayerAdminDutyStatus(playerid) == 1)
