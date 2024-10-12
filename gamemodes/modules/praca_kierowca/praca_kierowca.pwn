@@ -325,4 +325,31 @@ GiveMoneyForBusStop(playerid, route, finish=false)
 	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %d", GetPlayerLogName(playerid), money, route);
 }
 
+GiveTaxiBonusForUniquePlayer(playerid, clientid)
+{
+	if(PlayerInfo[clientid] <= 1)
+	{
+		MruMessageBadInfo(playerid, "Niestety, nie dostaniesz bonusu za tego gracza - ma za niski level (potrzeba minimum 2).");
+		return;
+	}
+
+	new bonus = 15_000;
+	new playerUID = PlayerInfo[playerid][pUID];
+	new clientUID = PlayerInfo[clientid][pUID];
+
+	new redisKey[64];
+	format(redisKey, sizeof(redisKey), "player:%d:taxi-client:%d", playerUID, clientUID);
+	if(Redis_Exists(RedisClient, redisKey))
+	{
+		return;
+	}
+
+	Redis_SetInt(RedisClient, redisKey, 1);
+	RedisExpire(redisKey, 86_400); // expire after 24h
+
+	MruMessageGoodInfoF(playerid, "Otrzymujesz %d$ bonusu za przewiezienie unikalnego gracza!", bonus);
+	DajKase(playerid, bonus);
+	Log(payLog, INFO, "%s otrzyma³ %d$ za przewiezienie unikalnego gracza %s taxówk¹", GetPlayerLogName(playerid), GetPlayerLogName(clientid), bonus);
+}
+
 //end
