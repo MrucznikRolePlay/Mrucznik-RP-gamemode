@@ -543,15 +543,20 @@ public OnPlayerClickPlayer(playerid, clickedplayerid, source)
 
 public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY, Float:fZ)
 {
+	new Float:shotX, Float:shotY, Float:shotZ, Float:unused;
+	GetPlayerLastShotVectors(playerid, unused, unused, unused, shotX, shotY, shotZ);
 	if(GetPVarInt(playerid, "debug-objects") == 1)
 	{
-		SendClientMessage(playerid, -1, sprintf("Shot at: %.4f, %.4f, %.4f", fX, fY, fZ));
+		SendClientMessage(playerid, -1, sprintf("Shot at: %.4f, %.4f, %.4f", shotX, shotY, shotZ));
 	}
 	if(GetPVarInt(playerid, "shooting-object") != 0)
 	{
+		new Float:rotZ;
+		GetPlayerFacingAngle(playerid, rotZ);
 		new model = GetPVarInt(playerid, "shooting-object");
-		new obj = CreateDynamicObject(model, fX, fY, fZ, random(360), random(360), random(360), GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid));
+		new obj = CreateDynamicObject(model, shotX, shotY, shotZ, 0.0, 0.0, rotZ, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid));
 		AppendToPlayerObjectFiles(playerid, obj);
+		SendClientMessage(playerid, -1, sprintf("Object id %d created at: %.4f, %.4f, %.4f.", obj));
 	}
 	switch (hittype)
 	{
