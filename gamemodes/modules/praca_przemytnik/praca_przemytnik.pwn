@@ -191,13 +191,13 @@ CreateSmugglingGatherCheckpoint(playerid, actionID, bool:hole=false)
 	{
 		SetPlayerCheckpoint(playerid,
 			SmugglersHole[0], SmugglersHole[1], SmugglersHole[2],
-			5);
+			5.0);
 	}
 	else
 	{
 		SetPlayerCheckpoint(playerid, 
 			SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ], 
-			5);
+			5.0);
 	}
 }
 

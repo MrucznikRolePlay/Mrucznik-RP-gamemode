@@ -480,7 +480,7 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 			{
 				MruMessageGoodInfo(playerid, "Uda³o Ci siê podnieœæ paczkê z kontraband¹! Dostarcz j¹ do dziupli przemytniczej (checkpoint)!");
 			}
-			CreateSmugglingGatherCheckpoint(playerid, smugglingAction, false);
+			CreateSmugglingGatherCheckpoint(playerid, smugglingAction, true);
 		}
 	}
 

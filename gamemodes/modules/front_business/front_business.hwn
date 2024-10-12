@@ -259,7 +259,7 @@ new FrontBusiness[][eFrontBusinessInfo] = {
         "Dirt Ring", FRONT_BIZ_TYPE_RACE,  
         -5313.6543,3581.0801,14.5747, 0, 0, // wejœcie
         -1464.6763, 1556.9542, 1052.5313, 14, FRONT_BUSINESS_VW, // wyjœcie
-        -5310.0615,3772.7156,6.4419, 0, 0, // przejmowanie
+        -5288.8252,3581.1265,17.1556, 0, 0, // przejmowanie
         75.0, // size of gangzone
         100, 200 // hajs
     },

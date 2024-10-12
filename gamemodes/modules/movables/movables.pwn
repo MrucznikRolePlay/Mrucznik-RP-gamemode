@@ -101,11 +101,12 @@ DropBox(playerid)
 	if(boxid == -1) return -1;
 
 	new Float:x, Float:y, Float:z, Float:angle;
+	GetPlayerPos(playerid, x, y, z);
 	GetXYInFrontOfPlayer(playerid, x, y, 0.5);	
 	GetPlayerFacingAngle(playerid, angle);
 	new int = GetPlayerInterior(playerid);
 	new vw = GetPlayerVirtualWorld(playerid);
-	CA_FindZ_For2DCoord(x, y, z);
+	CA_RayCastLine(x, y, z + 1.0, x, y, -1000.0, x, y, z);
 	z += GetColSphereRadius(Boxes[boxid][box_model]) * 2.0 - 0.8;
 
 	ApplyAnimation(playerid, "CARRY", "putdwn", 4.1, 0, 0, 0, 0, 113); 
