@@ -137,7 +137,7 @@ new Float:SkimmerDroppingCheckpoints[][3] = {
 };
 
 new Float:SmugglersHole[3] = {
-    -4486.4687, 512.6531, 5.3266
+    -5188.1104,2515.7537,3.2687
 };
 
 new SmugglingActionsCount;

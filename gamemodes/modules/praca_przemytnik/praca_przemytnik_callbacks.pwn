@@ -574,7 +574,7 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 		GetVehicleHealth(vehicleid, hp);
 		SetVehicleHealth(vehicleid, hp-200.0);
 		
-		new boxid = DropBoxFromCar(1580, BOX_TYPE_CONTRABAND, random(6), vehicleid); 
+		new boxid = DropBoxFromCar(1580, BOX_TYPE_CONTRABAND, 1 + random(20), vehicleid); 
 		if(boxid != -1)
 		{
 			MruMessageGoodInfo(playerid, "Trafi³eœ w ³ódŸ przemytników! Wypad³a z niej ma³a paczka kontrabandy.");
