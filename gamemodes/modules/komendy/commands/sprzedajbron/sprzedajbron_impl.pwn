@@ -210,25 +210,24 @@ SprzedajBronTip(playerid)
         new skill = GunInfo[i][GunSkill] - 1;
         if(GunInfo[i][GunContrabandCost] > 0)
         {
-            strcat(contrabandGuns[skill], sprintf("%s(%d + %d) ", GunInfo[i][GunName], GunInfo[i][GunMaterialsCost], GunInfo[i][GunContrabandCost]));
+            format(contrabandGuns[skill], MAX_MESSAGE_LENGTH, "%s%s(%d + %d) ", contrabandGuns[skill], GunInfo[i][GunName], GunInfo[i][GunMaterialsCost], GunInfo[i][GunContrabandCost]);
         }
         else
         {
-            strcat(guns[skill], sprintf("%s(%d + %d) ", GunInfo[i][GunName], GunInfo[i][GunMaterialsCost], GunInfo[i][GunContrabandCost]));
+            format(guns[skill], MAX_MESSAGE_LENGTH, "%s%s(%d + %d) ", guns[skill], GunInfo[i][GunName], GunInfo[i][GunMaterialsCost], GunInfo[i][GunContrabandCost]);
         }
     }
-
 
     SendClientMessage(playerid, COLOR_GREEN, "________________________________________________");
     SendClientMessage(playerid, COLOR_GRAD1, "U¿yj: /sprzedajbron [ID gracza] [nazwa broni]");
     SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI]----");
-    for(new i; i<5; i++)
+    for(new i; i < 5; i++)
     {
         if(strlen(guns[i]) == startlen) continue;
         SendClientMessage(playerid, COLOR_GREY, guns[i]);
     }
     SendClientMessage(playerid, COLOR_GREY, "----[DILER BRONI - KONTRABANDA]----");
-    for(new i; i<5; i++)
+    for(new i; i < 5; i++)
     {
         if(strlen(contrabandGuns[i]) == startlenContra) continue;
         SendClientMessage(playerid, COLOR_GREY, contrabandGuns[i]);
