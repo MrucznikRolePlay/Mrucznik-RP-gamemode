@@ -334,14 +334,15 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index, damaged)
 	SmugglingAction[actionID][s_dropBoxes][index] = boxid;
 }
 
-MarcepanPhone(playerid, color, string[])
+MarcepanPhone(playerid, color, string[MAX_MESSAGE_LENGTH])
 {
 	new delay = 500 + random(2000);
-	defer MarcepanPhoneTimer[delay](playerid, color, string, sizeof(string));
+	defer MarcepanPhoneTimer[delay](playerid, color, string, MAX_MESSAGE_LENGTH);
 }
 
 timer MarcepanPhoneTimer[1000](playerid, color, message[], len)
 {
+	#pragma unused len
 	SendClientMessage(playerid, color, message);
 }
 
