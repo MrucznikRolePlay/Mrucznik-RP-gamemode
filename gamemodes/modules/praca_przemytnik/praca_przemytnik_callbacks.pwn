@@ -45,7 +45,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 			}
 			else
 			{
-				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): W takim razie ¿egnam.");
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): W takim razie ¿egnam.", 450);
 				MarcepanPhone(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
 			}
 		}
@@ -76,7 +76,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 				return 1;
 			}
 
-			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Podaj mi imiê swojego kolejnego wspólnika, który bêdzie podnosi³ paczki.");
+			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Podaj mi imiê swojego kolejnego wspólnika, który bêdzie podnosi³ paczki.", 450);
 			MarcepanPhone(playerid, COLOR_GRAD2, "Jeœli nie masz wiêcej wspólników, wpisz: 'to wszyscy'.");
 			SetPVarInt(playerid, "smuggling", 3);
 			SetPVarInt(playerid, "smuggling-driver-id", giveplayerid);
@@ -86,7 +86,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 		{
 			if(strcmp(text, "to wszyscy", true) == 0)
 			{
-				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Ok, w takim razie ustalmy miejsce zebrania kontrabandy.");
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Ok, w takim razie ustalmy miejsce zebrania kontrabandy.", 450);
 				MarcepanPhone(playerid, COLOR_YELLOW, "Gdy bêdziesz gotowy, powiedz: 'tutaj' a pobiore Twoje koordynaty.");
 				SetPVarInt(playerid, "smuggling", 4);
 				return 1;
@@ -111,7 +111,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 				return 1;
 			}
 
-			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Ok, czy to wszyscy, czy masz jeszcze jakiegoœ wspólnika?");
+			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Ok, czy to wszyscy, czy masz jeszcze jakiegoœ wspólnika?", 450);
 			MarcepanPhone(playerid, COLOR_GRAD2, "Jeœli nie masz wiêcej wspólników, wpisz: 'to wszyscy'.");
 			
 			new index = GetPVarInt(playerid, "smuggling-partner-index");
@@ -129,7 +129,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 					return 1;
 				}
 
-				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Ok, pobra³em twoj¹ pozycjê, przywiozê tam kontener do którego bêdziesz musia³ dostarczyæ ³adunek.");
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Ok, pobra³em twoj¹ pozycjê, przywiozê tam kontener do którego bêdziesz musia³ dostarczyæ ³adunek.", 450);
 				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Wykup kontrabandy od nas to 1 000 000$, chcesz zap³aciæ przelewem czy gotówk¹?");
 				SetPVarInt(playerid, "smuggling", 5);
 				new Float:x, Float:y, Float:z;
@@ -150,7 +150,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 			{
 				if(kaska[playerid] < SMUGGLING_COST)
 				{
-					MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Nie próbuj mnie oszukaæ, jesteœ go³odupcem. Wróæ jak zarobisz na kupno kontrabandy.");
+					MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Nie próbuj mnie oszukaæ, jesteœ go³odupcem. Wróæ jak zarobisz na kupno kontrabandy.", 450);
 					MarcepanPhone(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
 					DeletePVar(playerid, "smuggling");
 					return 1;
@@ -161,7 +161,7 @@ Przemytnik_OnPlayerText(playerid, text[])
 			{
 				if(PlayerInfo[playerid][pAccount] < SMUGGLING_COST)
 				{
-					MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Nie próbuj mnie oszukaæ, jesteœ go³odupcem. Wróæ jak zarobisz na kupno kontrabandy.");
+					MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Nie próbuj mnie oszukaæ, jesteœ go³odupcem. Wróæ jak zarobisz na kupno kontrabandy.", 450);
 					MarcepanPhone(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
 					DeletePVar(playerid, "smuggling");
 					return 1;
@@ -170,20 +170,20 @@ Przemytnik_OnPlayerText(playerid, text[])
 			}
 			else
 			{
-				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Zap³acisz przelewem czy gotówk¹?");
+				MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Zap³acisz przelewem czy gotówk¹?", 450);
 				MarcepanPhone(playerid, COLOR_GRAD2, "Wpisz 'przelewem' lub 'gotówk¹'.");
 				return 1;
 			}
 
 			Log(payLog, INFO, "%s zorganizowa³ przemyt za %d$", GetNick(playerid), SMUGGLING_COST);
 
-			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): W porz¹dku, wysy³am Ci koordynaty naszego statku.");
-			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Udaj siê tam wodolotem wraz ze swoim kierowc¹ aby odebraæ kontrabandê.");
-			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Udanej akcji, leæ nisko!");
-        	MarcepanPhone(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.");
+			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): W porz¹dku, wysy³am Ci koordynaty naszego statku.", 450);
+			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Udaj siê tam wodolotem wraz ze swoim kierowc¹ aby odebraæ kontrabandê.", 700);
+			MarcepanPhone(playerid, COLOR_YELLOW, "Telefon (Marcepan_Marks): Udanej akcji, leæ nisko!", 800);
+        	MarcepanPhone(playerid, COLOR_GRAD2, "Marcepan_Marks roz³¹czy³ siê.", 1000);
 
-			MarcepanPhone(playerid, COLOR_PANICRED, "WA¯NE! By wystartowaæ wodolotem, ustaw /fpslimit 30 i upewnij siê, ¿e masz w³¹czony frame limiter w ustawieniach GTA SA");
-			MarcepanPhone(playerid, COLOR_PANICRED, "Aby wejœæ do wodolotu jako pasa¿er, u¿yj komendy /wejdzw");
+			MarcepanPhone(playerid, COLOR_PANICRED, "WA¯NE! By wystartowaæ wodolotem, ustaw /fpslimit 30 i upewnij siê, ¿e masz w³¹czony frame limiter w ustawieniach GTA SA", 1100);
+			MarcepanPhone(playerid, COLOR_PANICRED, "Aby wejœæ do wodolotu jako pasa¿er, u¿yj komendy /wejdzw", 1200);
 
 			StartSmuggling(playerid);
 			DeletePVar(playerid, "smuggling");
