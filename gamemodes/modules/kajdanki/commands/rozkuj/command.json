@@ -2,7 +2,7 @@
     "name": "rozkuj",
     "description": "Rozkucie kajdanek.",
     "permissions": [
-        "admini"
+        "everyone"
     ],
     "author": "NikodemBanan",
     "aliases": [
