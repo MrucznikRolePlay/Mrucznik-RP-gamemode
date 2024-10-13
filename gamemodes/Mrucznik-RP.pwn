@@ -473,6 +473,7 @@ public OnGameModeInit()
     }
 
     pusteZgloszenia();
+	CreateActorsInDMV(INVALID_PLAYER_ID);
 
 	Log(serverLog, INFO, "Serwer zosta³ pomyœlnie uruchomiony.");
 	SendDiscordServerOnInfo();
@@ -3643,11 +3644,7 @@ PayDay()
 	SendRconCommand("reloadlog");
 	SendRconCommand("reloadbans");
 	
-	if(DmvActorStatus && (shifthour < 9 || shifthour > 23))
-	{
-		DestroyActorsInDMV(INVALID_PLAYER_ID); 
-	}
-	else
+	if(!DmvActorStatus)
 	{
 		CreateActorsInDMV(INVALID_PLAYER_ID);
 	}
