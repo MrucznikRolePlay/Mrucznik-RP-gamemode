@@ -94,7 +94,7 @@ new AvailableOrgSkins[][eSkinInfo] = {
     {20830, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Robbery in mask - custom from resource server
     {20831, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Robbery in mask - custom from resource server
     {20832, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // Robbery in mask - custom from resource server
-    {20837, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE}       // worker restaurant - custom from resource server
+    {20837, SKIN_TYPE_ORG, 150000, 8, SKIN_MEN, SKIN_WHITE},       // worker restaurant - custom from resource server
      // Skiny dla organizacji
     {86, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},           // Ryder https://sampwiki.blast.hk/wiki/Image:Skin_86.png
     {102, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Ballas https://sampwiki.blast.hk/wiki/Image:Skin_102.png
@@ -149,7 +149,7 @@ new AvailableOrgSkins[][eSkinInfo] = {
     {271, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_BLACK},          // Grove https://sampwiki.blast.hk/wiki/Image:Skin_271.png
     {272, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Mafia https://sampwiki.blast.hk/wiki/Image:Skin_272.png
     {273, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_WHITE},          // Mafia https://sampwiki.blast.hk/wiki/Image:Skin_273.png
-    {294, SKIN_TYPE_ORG, 100000, 5, SKIN_MEN, SKIN_YELLOW},         // Triad https://sampwiki.blast.hk/wiki/Image:Skin_294.png
+    {294, SKIN_TYPE_ORG, 100000, 25, SKIN_MEN, SKIN_YELLOW}         // Triad https://sampwiki.blast.hk/wiki/Image:Skin_294.png
 };
 
 //-----------------<[ Zmienne: ]>-------------------

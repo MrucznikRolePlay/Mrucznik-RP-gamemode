@@ -107,7 +107,6 @@ command_aresztuj_Impl(playerid, params[256])
 		SetPlayerSpecialAction(giveplayerid,SPECIAL_ACTION_NONE);
 		RemovePlayerAttachedObject(giveplayerid, 0);
 		SetPlayerArrestPos(giveplayerid);
-		TogglePlayerControllable(giveplayerid, 0);
 		JailPrice[giveplayerid] = bail;
 		SetPVarInt(giveplayerid, "kaucja-dlaKogo", PlayerInfo[playerid][pMember]);
 		RemovePlayerWeaponsTemporarity(giveplayerid);//usun bron

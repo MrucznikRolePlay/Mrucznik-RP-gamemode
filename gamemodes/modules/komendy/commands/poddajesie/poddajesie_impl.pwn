@@ -48,7 +48,6 @@ command_poddajesie_Impl(playerid)
 			    PlayerInfo[playerid][pJailTime] = (PoziomPoszukiwania[playerid])*(200);
 				JailPrice[playerid] = bail;
 				WantLawyer[playerid] = 1;
-				TogglePlayerControllable(playerid, 0);
 				SetPlayerArrestPos(playerid);
 				format(string, sizeof(string), "* %s podda³ siê, dostajesz %d nagrody za z³apanie ¿ywego przestêpcy",sendername, reward);
 		        SendClientMessage(lowcap[playerid], COLOR_LIGHTBLUE, string);

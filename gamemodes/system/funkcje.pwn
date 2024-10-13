@@ -6010,7 +6010,6 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		SetPlayerInterior(playerid, 9);
 	    SetPlayerPos(playerid, 1935.6661376953, 1360.8430175781, 12313.875976563);
         Wchodzenie(playerid);
-	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~w~Witamy na ~b~jachcie", 5000, 1);
 	}
 	else if(model == 519)//shamal
@@ -6018,7 +6017,6 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		SetPlayerInterior(playerid, 9);
 	    SetPlayerPos(playerid, 1074.3032226563, -1843.8029785156, 10657.265625);
         Wchodzenie(playerid);
-	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~odrzutowcu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 553)//nevada
@@ -6032,7 +6030,6 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		SetPlayerInterior(playerid, 9);
 	    SetPlayerPos(playerid, 2985.498046875, 1866.7770996094, 371.35998535156);
         Wchodzenie(playerid);
-	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~limuzynie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 416)//karetka
@@ -6048,7 +6045,6 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		SetPlayerInterior(playerid, 1);
 	    SetPlayerPos(playerid, 2512.8455,-1729.0057,778.6371);
         Wchodzenie(playerid);
-	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Witaj w ~r~domu!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	else if(model == 431)//autobus
@@ -6056,7 +6052,6 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		SetPlayerInterior(playerid, 1);
 	    SetPlayerPos(playerid, 1450.3420,-1779.3888,3.6388);
         Wchodzenie(playerid);
-	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zapinaj Pasy - Jedziemy do piekla!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	
 	}
@@ -6065,7 +6060,6 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		SetPlayerInterior(playerid, 1);
 	    SetPlayerPos(playerid, 1479.1534,-1617.7773,-4.2809);
         Wchodzenie(playerid);
-	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Lap za bron!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	
 	}
@@ -6074,7 +6068,6 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 			SetPlayerInterior(playerid, 1);
 			SetPlayerPos(playerid, 1708.72290, -1953.05688, -17.18891);
 			Wchodzenie(playerid);
-			TogglePlayerControllable(playerid, 0);
 			GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Zajmuj miejsce, bo trzesie!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 			sendTipMessage(playerid, ">>Pomyœlnie wszed³eœ do poci¹gu! Bilet zosta³ zu¿yty!");
 			sendTipMessage(playerid, ">>>Interior stworzony przez: Charlie112");
@@ -6085,7 +6078,6 @@ Do_WnetrzaWozu(playerid, vehicleid, model)
 		SetPlayerInterior(playerid, 1);
 	    SetPlayerPos(playerid, 739.3749,-1365.0778,7.4080);
         Wchodzenie(playerid);
-	    TogglePlayerControllable(playerid, 0);
 	    GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~n~~w~Mikrofon w dlon!~n~~y~Wychodzisz ~p~/wyjdzw", 4000, 4);
 	}
 	SetPlayerVirtualWorld(playerid, vehicleid);
@@ -6144,7 +6136,6 @@ Z_WnetrzaWozu(playerid, vehicleid)
 	SetPlayerInterior(playerid, 0);
     WnetrzeWozu[playerid] = 0;
 	Wchodzenie(playerid);
-	TogglePlayerControllable(playerid, 0);
 	return 1;
 }
 
