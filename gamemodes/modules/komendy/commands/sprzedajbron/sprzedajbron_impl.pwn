@@ -34,7 +34,7 @@ command_sprzedajbron_Impl(playerid, params[256])
 
     new x_weapon[16];
     new giveplayerid;
-    if( sscanf(params, "k<fix>s[16]", giveplayerid, x_weapon))
+    if(sscanf(params, "k<fix>s[16]", giveplayerid, x_weapon))
     {
         SprzedajBronTip(playerid);
         return 1;
@@ -46,7 +46,7 @@ command_sprzedajbron_Impl(playerid, params[256])
         return 1;
     }
 
-    if(PlayerInfo[giveplayerid][pConnectTime] >= 3)
+    if(PlayerInfo[giveplayerid][pConnectTime] < 3)
     {
         MruMessageFail(playerid, "Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 3 godzinami online !");
         MruMessageFail(giveplayerid, "Broñ mog¹ posiadaæ tylko gracze z przegranymi minimum 3 godzinami online !");
