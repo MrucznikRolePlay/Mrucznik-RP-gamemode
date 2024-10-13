@@ -36,7 +36,7 @@ wezwij_taxi(playerid)
 	}
 	if(TransportDuty[playerid] > 0)
 	{
-		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnych taksówkarzy !");
+		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnych taksówkarzy!");
 		return 1;
 
 	}

@@ -68,7 +68,7 @@ command_transport_ShowDialog(playerid)
     new terminalType = GetPlayerShippingPlace(playerid);
 
     ShowPlayerDialogEx(playerid, 7110, DIALOG_STYLE_MSGBOX, "Transport samochodu", 
-        sprintf("Tutaj mo¿esz zleciæ transport swojego pojazdu %s!\nPo zleceniu transportu, Twój pojazd pojawi siê na jednym z parkingów w dokach\noraz zostanie oznaczony czerwonym markerem.\nKoszt: $%d", GetTransportDestinationName(terminalType), VEHICLE_TRANSPORT_COST),
+        sprintf("Tutaj mo¿esz zleciæ transport swojego pojazdu %s!\nPo zleceniu transportu, Twój pojazd pojawi siê na jednym z parkingów w dokach\na Ty zostaniesz przetransportowany wraz z nim.\nKoszt: $%d", GetTransportDestinationName(terminalType), VEHICLE_TRANSPORT_COST),
         "Transportuj", "WyjdŸ");
 }
 
@@ -86,7 +86,7 @@ command_transport_OnDialogResp(playerid, dialogid, response, listitem, inputtext
             new terminalType = GetPlayerShippingPlace(playerid);
             TransportPlayerVehicle(playerid, terminalType);
 
-            MruMessageGoodInfoF(playerid, "Twój pojazd zosta³ przetransportowany %s! Udaj siê do czerwonego markera aby go odnaleŸæ.", GetTransportDestinationName(terminalType));
+            MruMessageGoodInfoF(playerid, "Twój pojazd zosta³ przetransportowany %s! Zostajesz przetransportowany razem z nim.", GetTransportDestinationName(terminalType));
             GameTextForPlayer(playerid, sprintf("~r~-%d$", VEHICLE_TRANSPORT_COST), 5000, 1);
 
             ZabierzKase(playerid, VEHICLE_TRANSPORT_COST);
@@ -101,7 +101,7 @@ TransportPlayerVehicle(playerid, terminalType)
 {
     GetTransportDestinationName(terminalType);
 
-    new Float:x, Float:y, Float:z, Float:lowerZ, Float:a;
+    new Float:x, Float:y, Float:z, Float:a;
     switch(terminalType)
     {
         case 1: // From Los Santos to Vice City
@@ -110,7 +110,6 @@ TransportPlayerVehicle(playerid, terminalType)
             x = ViceCityVehCargoParking[rand][0];
             y = ViceCityVehCargoParking[rand][1];
             z = ViceCityVehCargoParking[rand][2];
-            lowerZ = z - 2.0;
             a = ViceCityVehCargoParking[rand][3];
         }
         case 2: // From Vice City to Los Santos
@@ -119,7 +118,6 @@ TransportPlayerVehicle(playerid, terminalType)
             x = LosSantosVehCargoParking[rand][0];
             y = LosSantosVehCargoParking[rand][1];
             z = LosSantosVehCargoParking[rand][2];
-            lowerZ = z - 1.0;
             a = LosSantosVehCargoParking[rand][3];
         }
     }
@@ -127,12 +125,11 @@ TransportPlayerVehicle(playerid, terminalType)
     new vehicleID = GetPlayerVehicleID(playerid);
     new vehicleUID = VehicleUID[vehicleID][vUID];
     RemovePlayerFromVehicle(playerid);
-    SetPlayerCheckpoint(playerid, x, y, lowerZ, 5);
-    SetPVarInt(playerid, "transport-checkpoint", 1);
-	defer TeleportVehicle(vehicleID, vehicleUID, x, y, z, a);
+    SetPlayerPos(playerid, x, y, z);
+	defer TeleportVehicle(playerid, vehicleID, vehicleUID, x, y, z, a);
 }
 
-timer TeleportVehicle[2500](vehicleID, vehicleUID, Float:x, Float:y, Float:z, Float:a)
+timer TeleportVehicle[2500](playerid, vehicleID, vehicleUID, Float:x, Float:y, Float:z, Float:a)
 {
 	CarData[vehicleUID][c_Pos][0] = x;
 	CarData[vehicleUID][c_Pos][1] = y;
@@ -142,7 +139,8 @@ timer TeleportVehicle[2500](vehicleID, vehicleUID, Float:x, Float:y, Float:z, Fl
 	Car_Save(vehicleUID, CAR_SAVE_STATE);
 
     Car_Unspawn(vehicleID);
-    Car_Spawn(vehicleUID);
+    new vehicleid = Car_Spawn(vehicleUID);
+    PutPlayerInVehicle(playerid, vehicleid, 0);
 }
 
 //end
