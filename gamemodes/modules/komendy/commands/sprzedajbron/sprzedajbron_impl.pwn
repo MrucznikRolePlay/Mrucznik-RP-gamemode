@@ -95,7 +95,7 @@ command_sprzedajbron_Impl(playerid, params[256])
         matsCost -= (mats)*(skill);
     }
 
-    if(GetPlayerJobSkill(playerid, JOB_DRUG_DEALER) < GunInfo[weaponid][GunSkill])
+    if(GetPlayerJobSkill(playerid, JOB_GUN_DEALER) < GunInfo[weaponid][GunSkill])
     {
         MruMessageFailF(playerid, "By sprzedaæ %s potrzebujesz %d skilla dilera broni.", x_weapon, GunInfo[weaponid][GunSkill]);
         return 1;
