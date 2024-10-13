@@ -211,11 +211,11 @@ SprzedajBronTip(playerid)
         new skill = GunInfo[i][GunSkill] - 1;
         if(GunInfo[i][GunContrabandCost] > 0)
         {
-            format(guns[skill], MAX_MESSAGE_LENGTH, "%s%s(%d + %d) ", guns[skill], GunInfo[i][GunName], GunInfo[i][GunMaterialsCost], GunInfo[i][GunContrabandCost]);
+            format(contrabandGuns[skill], MAX_MESSAGE_LENGTH, "%s%s(%d + %d) ", guns[skill], GunInfo[i][GunName], GunInfo[i][GunMaterialsCost], GunInfo[i][GunContrabandCost]);
         }
         else
         {
-            format(contrabandGuns[skill], MAX_MESSAGE_LENGTH, "%s%s(%d) ", contrabandGuns[skill], GunInfo[i][GunName], GunInfo[i][GunMaterialsCost]);
+            format(guns[skill], MAX_MESSAGE_LENGTH, "%s%s(%d) ", contrabandGuns[skill], GunInfo[i][GunName], GunInfo[i][GunMaterialsCost]);
         }
     }
 
