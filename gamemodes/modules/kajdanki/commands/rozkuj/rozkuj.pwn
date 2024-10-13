@@ -41,7 +41,7 @@ command_rozkuj()
     
 
     //permissions
-    Group_SetCommand(Group_GetID("admini"), command, true);
+    Group_SetGlobalCommand(command, true);
     
 
     //prefix
