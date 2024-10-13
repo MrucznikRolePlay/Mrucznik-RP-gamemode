@@ -90,7 +90,7 @@ command_szukani_Impl(playerid)
 		}
 		else if(PlayerInfo[playerid][pJob] == 1)
 		{
-		    if(PlayerToPoint(5.0,playerid,325.0463,306.9240,999.1484))
+		    if(PlayerToPoint(5.0,playerid,325.0463,306.9240,999.1484) || (PlayerToPoint(25.0,playerid,246.66,65.80,1003.64) && GetPlayerInterior(playerid) == 6))
 		    {
 			    if(PlayerInfo[playerid][pDetSkill] < 50)
 			    {
