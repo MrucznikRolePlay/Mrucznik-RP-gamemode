@@ -70,7 +70,7 @@ command_wezzlecenie_Impl(playerid, params[256])
 					        {
 								new deadReward = PoziomPoszukiwania[playa] * 5000;
 								new liveReward = PoziomPoszukiwania[playa] * 10000;
-					            if(PlayerToPoint(5.0,playerid,325.0463,306.9240,999.1484))
+					            if(PlayerToPoint(5.0,playerid,325.0463,306.9240,999.1484) || (PlayerToPoint(25.0,playerid,246.66,65.80,1003.64) && GetPlayerInterior(playerid) == 6))
 					            {
 						    		if(PlayerInfo[playerid][pDetSkill] <= 50)
 						    		{
