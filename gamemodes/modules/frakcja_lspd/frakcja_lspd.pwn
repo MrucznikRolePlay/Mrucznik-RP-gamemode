@@ -28,7 +28,7 @@
 //-----------------<[ Funkcje: ]>-------------------
 SetPlayerArrestPos(playerid)
 {
-	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110)
+	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110 || IsPlayerAtViceCity(playerid))
 	{
 		SetPlayerInterior(playerid, 10);
 		SetPlayerVirtualWorld(playerid, 7110);
@@ -50,7 +50,7 @@ SetPlayerArrestPos(playerid)
 
 SetPlayerStateArrestPos(playerid)
 {
-	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110)	
+	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110 || IsPlayerAtViceCity(playerid))	
 	{
 		new losuj= random(sizeof(SpawnStanoweVC));
 		SetPlayerInterior(playerid, 3);
@@ -70,7 +70,7 @@ SetPlayerStateArrestPos(playerid)
 
 SetPlayerArrestFreePos(playerid)
 {
-	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110)
+	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110 || IsPlayerAtViceCity(playerid))
 	{
 		SetPlayerInterior(playerid, 10);
 		SetPlayerVirtualWorld(playerid, 7110);
