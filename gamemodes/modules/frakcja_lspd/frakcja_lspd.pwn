@@ -36,6 +36,7 @@ SetPlayerArrestPos(playerid)
 		SetPlayerPos(playerid, CelaVC[losuj][0], CelaVC[losuj][1], CelaVC[losuj][2]);
 		SetPlayerFacingAngle(playerid, CelaVC[losuj][3]);
 		PlayerInfo[playerid][pSpawn] = 3;
+		TogglePlayerControllable(playerid, true);
 	}
 	else
 	{
@@ -64,6 +65,7 @@ SetPlayerStateArrestPos(playerid)
 		SetPlayerVirtualWorld(playerid, 1);
 		SetPlayerPos(playerid, SpawnStanowe[losuj][0], SpawnStanowe[losuj][1], SpawnStanowe[losuj][2]);
 	}
+	TogglePlayerControllable(playerid, true);
 }
 
 SetPlayerArrestFreePos(playerid)
@@ -81,6 +83,7 @@ SetPlayerArrestFreePos(playerid)
 		SetPlayerPos(playerid, ArrestFreePosition[0], ArrestFreePosition[1], ArrestFreePosition[2]);
 		SetPlayerFacingAngle(playerid, ArrestFreePosition[3]);
 	}
+	TogglePlayerControllable(playerid, true);
 }
 
 IsAtDutyPlace(playerid)
