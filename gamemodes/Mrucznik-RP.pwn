@@ -1108,6 +1108,7 @@ public OnPlayerConnect(playerid)
 {
 	if(IsPlayerNPC(playerid))
 	{
+		PlayerInfo[playerid][pUID] = 0;
 		if(strcmp(GetIp(playerid), "127.0.0.1") == 0)
 		{
 			printf("Bot %s joined server (ip: %s)", GetNick(playerid), GetIp(playerid));
@@ -4014,8 +4015,8 @@ OnPlayerLogin(playerid, password[])
 
 		//fix bug maska
 		foreach(new i : Player){
-			if(IsPlayerConnected(i) && playerid != INVALID_PLAYER_ID && i != playerid){
-				if(PlayerInfo[i][pUID] == PlayerInfo[playerid][pUID]){
+			if(IsPlayerConnected(i) && playerid != INVALID_PLAYER_ID && i != playerid && !IsPlayerNPC(playerid)) {
+				if(PlayerInfo[i][pUID] == PlayerInfo[playerid][pUID]) {
 					SendClientMessage(playerid, COLOR_PANICRED, "Konto jest juz zalogowane!");
 					KickEx(playerid);
 					return 1;
