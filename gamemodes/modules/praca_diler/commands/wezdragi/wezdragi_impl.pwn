@@ -91,6 +91,7 @@ command_wezdragi_Impl(playerid)
 		// good effect
 		PlayerPlaySound(playerid, 5202, 0.0, 0.0, 0.0);
 		InfectPlayer(playerid, DRUG_GOOD);
+		MruMessageGoodInfo(playerid, "Narkotyki doda³y Ci si³y, Twoja postaæ z czasem bêdzie zyskiwaæ HP i Pancerz.");
 	}
 	else if(rand < 97)
 	{
