@@ -449,7 +449,7 @@ CreateRandomContrabandBoxes()
 {
 	new Float:x, Float:y, Float:z;
 	// Create random boxes with contraband around the map
-	for(new i = 0; i < 10;) // Create 10 random boxes
+	for(new i = 0; i < 50;) // Create 50 random boxes
 	{
 		// Vice City
 		x = -6040.4917 + float(random(3173));
