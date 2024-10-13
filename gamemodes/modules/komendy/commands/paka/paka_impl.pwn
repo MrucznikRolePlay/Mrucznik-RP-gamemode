@@ -38,11 +38,8 @@ command_paka_Impl(playerid, params[256])
 			    sendTipMessageEx(playerid, COLOR_GREY, "Nie jesteœ na s³u¿bie!");
 			    return 1;
 			}
-            //267.8893,86.0968,1001.0391,172.1598,0,0,0,0,0,0); // kajdlsajdsa
-	        if(!(IsPlayerInRangeOfPoint(playerid, 10.0, 222.6395,114.3951,999.0156) 
-			|| IsPlayerInRangeOfPoint(playerid, 5.0, 1560.0333,-1638.6797,28.4881)
-			|| IsPlayerInRangeOfPoint(playerid, 5.0, 1559.8517,-1646.9373,28.4881)))
-			{// Jail spot
+	        if(!IsAtArrestPlace(playerid))
+			{
 			    sendTipMessageEx(playerid, COLOR_GREY, "Musisz byæ przy celach aby kogoœ zaaresztowaæ !");
 			    return 1;
 			}
@@ -69,8 +66,7 @@ command_paka_Impl(playerid, params[256])
 					    sendTipMessageEx(playerid, COLOR_GREY, "Gracz musi byæ poszukiwany (u¿yj na nim /su) !");
 					    return 1;
 					}
-					//format(string, sizeof(string), "* Aresztowany %s !", giveplayer);
-					//SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
+					
                     new depo2 = floatround(((moneys/100) * 80), floatround_round); // sejf
                     new depo3 = floatround(((moneys/100) * 20), floatround_round); //pd
                     DajKase(playerid, depo3);
