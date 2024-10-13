@@ -3631,7 +3631,7 @@ PayDay()
 
 	new rand = random(80);
     FixHour(hour);
-	if(10 <= shifthour <= 22)
+	if(10 <= shifthour <= 24)
 	{
 	 	if(rand == 0) rand = 1;
         printf("-> Starting lotto");
