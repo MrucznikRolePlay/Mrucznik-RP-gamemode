@@ -28,13 +28,14 @@
 //-----------------<[ Funkcje: ]>-------------------
 SetPlayerArrestPos(playerid)
 {
-	if(PlayerInfo[playerid][pSpawn] == 3)
+	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110)
 	{
 		SetPlayerInterior(playerid, 10);
 		SetPlayerVirtualWorld(playerid, 7110);
 		new losuj= random(sizeof(CelaVC));
 		SetPlayerPos(playerid, CelaVC[losuj][0], CelaVC[losuj][1], CelaVC[losuj][2]);
 		SetPlayerFacingAngle(playerid, CelaVC[losuj][3]);
+		PlayerInfo[playerid][pSpawn] = 3;
 	}
 	else
 	{
@@ -48,12 +49,13 @@ SetPlayerArrestPos(playerid)
 
 SetPlayerStateArrestPos(playerid)
 {
-	if(PlayerInfo[playerid][pSpawn] == 3)	
+	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110)	
 	{
 		new losuj= random(sizeof(SpawnStanoweVC));
 		SetPlayerInterior(playerid, 3);
 		SetPlayerVirtualWorld(playerid, 7110);
 		SetPlayerPos(playerid, SpawnStanoweVC[losuj][0], SpawnStanoweVC[losuj][1], SpawnStanoweVC[losuj][2]);
+		PlayerInfo[playerid][pSpawn] = 3;
 	}
 	else
 	{
@@ -66,12 +68,13 @@ SetPlayerStateArrestPos(playerid)
 
 SetPlayerArrestFreePos(playerid)
 {
-	if(PlayerInfo[playerid][pSpawn] == 3)
+	if(PlayerInfo[playerid][pSpawn] == 3 || GetPlayerVirtualWorld(playerid) == 7110)
 	{
 		SetPlayerInterior(playerid, 10);
 		SetPlayerVirtualWorld(playerid, 7110);
 		SetPlayerPos(playerid, ArrestFreePositionVC[0], ArrestFreePositionVC[1], ArrestFreePositionVC[2]);
 		SetPlayerFacingAngle(playerid, ArrestFreePositionVC[3]);
+		PlayerInfo[playerid][pSpawn] = 3;
 	}
 	else
 	{

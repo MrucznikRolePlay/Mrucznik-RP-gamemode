@@ -1818,6 +1818,11 @@ public OnPlayerDeath(playerid, killerid, reason)
 		return 1;
 	}
 
+	if(IsPlayerAtViceCity(playerid) && PlayerInfo[playerid][pSpawn] == 0)
+	{
+		PlayerInfo[playerid][pSpawn] = 3;
+	}
+
 	Log(damageLog, INFO, "%s zosta³ zabity przez %s, powód: %d", 
 		GetPlayerLogName(playerid),
 		IsPlayerConnected(killerid) ? GetPlayerLogName(killerid) : sprintf("%d", killerid),
