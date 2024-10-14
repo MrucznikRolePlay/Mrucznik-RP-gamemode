@@ -160,7 +160,7 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
             {
                 BusStops[route][i][bs_Active] = 1;
                 format(BusStops[route][i][bs_Name], MAX_BUS_STOP_NAME, "TODO");
-                format(BusStops[route][i][bs_District], MAX_BUS_STOP_NAME, "TODO");
+                format(BusStops[route][i][bs_District], MAX_BUS_STOP_DISTRICT, "TODO");
                 substract = 1;
                 continue;
             }

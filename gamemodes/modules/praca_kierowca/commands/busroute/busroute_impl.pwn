@@ -56,8 +56,8 @@ command_busroute_Impl(playerid, route, action[32], param[128])
             {
                 break;
             }
-            SendClientMessage(playerid, -1, sprintf("- Przystanek %s, Typ: %d, Checkpoint: %.4f, %.4f, %.4f, Obiekt: %.4f, %.4f, %.4f", 
-                BusStops[route][busstop][bs_Name], BusStops[route][busstop][bs_Type],
+            SendClientMessage(playerid, -1, sprintf("- Przystanek %s, Dzielnica: %s, Typ: %d, Checkpoint: %.4f, %.4f, %.4f, Obiekt: %.4f, %.4f, %.4f", 
+                BusStops[route][busstop][bs_Name],  BusStops[route][busstop][bs_District], BusStops[route][busstop][bs_Type],
                 BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ],
                 BusStops[route][busstop][bs_ObjectX], BusStops[route][busstop][bs_ObjectY], BusStops[route][busstop][bs_ObjectZ]));
         }

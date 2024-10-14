@@ -358,7 +358,7 @@ LoadBusRoutes()
 		file = fopen(filename, io_read);
 		if(file)
 		{
-			new buf[512];
+			new buf[1024];
 
 			// load route info
 			fread(file, buf);
@@ -403,14 +403,16 @@ SaveBusRoute(route)
 		{
 			if(!BusStops[route][busstop][bs_Active]) break;
 
-			fwrite(file, sprintf("%d|%s|%s|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f\n", 
+			new buf[1024];
+			format(buf, sizeof(buf), "%d|%s|%s|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f\n", 
 				BusStops[route][busstop][bs_Active],
 				BusStops[route][busstop][bs_Name],
 				BusStops[route][busstop][bs_District],
 				BusStops[route][busstop][bs_Type],
 				BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ],
 				BusStops[route][busstop][bs_ObjectX], BusStops[route][busstop][bs_ObjectY], BusStops[route][busstop][bs_ObjectZ],
-				BusStops[route][busstop][bs_ObjectRX], BusStops[route][busstop][bs_ObjectRY], BusStops[route][busstop][bs_ObjectRZ]));
+				BusStops[route][busstop][bs_ObjectRX], BusStops[route][busstop][bs_ObjectRY], BusStops[route][busstop][bs_ObjectRZ]);
+			fwrite(file, buf);
 		}
 		fclose(file);
 	}
@@ -448,7 +450,7 @@ CreateBusStops(route)
 
 			// bench
 			new Float:newX, Float:newY, Float:newZ;
-			MoveObjectLeft3D(-2.5, 
+			MoveObjectLeft3D(2.5, 
 				BusStops[route][busstop][bs_ObjectX],
 				BusStops[route][busstop][bs_ObjectY],
 				BusStops[route][busstop][bs_ObjectZ] - 1.05,
@@ -557,7 +559,7 @@ PlaceBusStop(route, busstop, type, Float:x, Float:y, Float:z, Float:rx, Float:ry
 	if(isnull(BusStops[route][busstop][bs_Name]))
 	{
 		format(BusStops[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "TODO");
-		format(BusStops[route][busstop][bs_District], MAX_BUS_STOP_NAME, "TODO");
+		format(BusStops[route][busstop][bs_District], MAX_BUS_STOP_DISTRICT, "TODO");
 	}
 	BusStops[route][busstop][bs_Active] = 1;
 	BusStops[route][busstop][bs_Type] = type;
