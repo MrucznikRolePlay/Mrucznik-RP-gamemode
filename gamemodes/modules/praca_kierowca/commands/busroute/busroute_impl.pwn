@@ -25,12 +25,17 @@
 //------------------<[ Implementacja: ]>-------------------
 command_busroute_Impl(playerid, route, action[32], param[128])
 {
+    if(PlayerInfo[playerid][pAdmin] != 5000)
+    {
+        noAccesMessage(playerid);
+        return 1;
+    }
+
     if(route < 0 || route >= MAX_BUS_ROUTES)
     {
         MruMessageFail(playerid, "ID Trasy od 0 do "#MAX_BUS_ROUTES);
         return 1;
     }
-
 
     if(strcmp(action, "describe", true) == 0)
     {

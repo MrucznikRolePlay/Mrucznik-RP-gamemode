@@ -25,6 +25,12 @@
 //------------------<[ Implementacja: ]>-------------------
 command_busstop_Impl(playerid, route, busstop, action[32], param[128])
 {
+    if(PlayerInfo[playerid][pAdmin] != 5000)
+    {
+        noAccesMessage(playerid);
+        return 1;
+    }
+
     if(route < 0 || route >= MAX_BUS_ROUTES)
     {
         MruMessageFail(playerid, "ID trasy od 0 do "#MAX_BUS_ROUTES);
