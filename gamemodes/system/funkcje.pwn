@@ -11292,8 +11292,8 @@ stock MoveObjectLeft3D(Float:distance, Float:x, Float:y, Float:z, Float:rx, Floa
 
     // Calculate the direction to move left (which is along the negative X-axis in the local space)
     // Left movement based on rotation around the Z axis
-    new Float:leftX = -distance * floatcos(rzRad);
-    new Float:leftY = -distance * floatsin(rzRad);
+    new Float:leftX = -distance * floatsin(rzRad);
+    new Float:leftY = -distance * floatcos(rzRad);
 
     // Apply the translation to the object's current position
     newX = x + leftX;

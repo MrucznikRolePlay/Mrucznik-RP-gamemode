@@ -460,7 +460,7 @@ CreateBusStops(route)
 				newX, newY, newZ,
 				BusStops[route][busstop][bs_ObjectRX],
 				BusStops[route][busstop][bs_ObjectRY],
-				BusStops[route][busstop][bs_ObjectRZ] + 90.0);
+				BusStops[route][busstop][bs_ObjectRZ]);
 		}
 		else if(type == BUS_STOP_TYPE_SMALL)
 		{
