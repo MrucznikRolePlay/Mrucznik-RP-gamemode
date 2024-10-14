@@ -450,7 +450,7 @@ CreateBusStops(route)
 
 			// bench
 			new Float:newX, Float:newY, Float:newZ;
-			MoveObjectLeft3D(2.5, 
+			MoveObjectLeft3D(3.5, 
 				BusStops[route][busstop][bs_ObjectX],
 				BusStops[route][busstop][bs_ObjectY],
 				BusStops[route][busstop][bs_ObjectZ] - 1.05,
