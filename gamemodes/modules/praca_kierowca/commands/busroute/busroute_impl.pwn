@@ -58,12 +58,8 @@ command_busroute_Impl(playerid, route, action[32], param[128])
 			sendTipMessage(playerid, "U¿yj /busroute color [kolor trafy w formacie RRGGBBAA (np. FF0000FF = czerwony, nieprzezroczysty)]");
 			return 1;
 		}
-		if(color <= 0x0 || color >= 0xFFFFFFFF)
-		{
-			MruMessageFail(playerid, "  Niepoprawny kolor, zakres od 0 do FFFFFFFF.");
-			return 1;
-		}
         BusRoute[route][br_Color] = color;
+        SendClientMessage(playerid, color, "TO JEST NOWY KOLOR LINII AUTOBUSOWEJ");
     }
     else if(strcmp(action, "money", true) == 0)
     {

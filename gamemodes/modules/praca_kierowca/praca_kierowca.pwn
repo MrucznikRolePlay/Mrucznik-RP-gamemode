@@ -417,7 +417,6 @@ SaveBusRoute(route)
 
 CreateBusStops(route)
 {
-	new lastBusStopName[MAX_BUS_STOP_NAME];
 	new lastBusStop;
 	for(lastBusStop=0; lastBusStop < MAX_BUS_STOPS; lastBusStop++)
 	{
@@ -427,11 +426,10 @@ CreateBusStops(route)
 			break;
 		}
 	}
-	if(lastBusStop == 0)
+	if(lastBusStop < 0)
 	{
 		return;
 	}
-	format(lastBusStopName, sizeof(lastBusStopName), BusStops[route][lastBusStop][bs_Name]);
 
 	for(new busstop; busstop < MAX_BUS_STOPS; busstop++)
 	{
@@ -442,7 +440,7 @@ CreateBusStops(route)
 		new type = BusStops[route][busstop][bs_Type];
 		new Float:textOffset;
 		new model;
-		if(type == BUS_STOP_TYPE_SMALL)
+		if(type == BUS_STOP_TYPE_SMALL_BENCH)
 		{
 			model = 1229;
 			textOffset = 1.4;
@@ -463,10 +461,20 @@ CreateBusStops(route)
 				BusStops[route][busstop][bs_ObjectRY],
 				BusStops[route][busstop][bs_ObjectRZ]);
 		}
-		else
+		else if(type == BUS_STOP_TYPE_SMALL)
+		{
+			model = 1229;
+			textOffset = 1.4;
+		}
+		else if(type == BUS_STOP_TYPE_BIG)
 		{
 			model = 1257;
-			textOffset = 1.4;
+			textOffset = 2.2;
+		}
+		else
+		{
+			model = type;
+			textOffset = 1.6;
 		}
 
 		BusStopsEntities[route][busstop][bs_BusStopObject] = CreateDynamicObject(model, 
@@ -478,30 +486,33 @@ CreateBusStops(route)
 			BusStops[route][busstop][bs_ObjectRZ]);
 
 		// Create bus stop description
-		new routeText[(MAX_BUS_STOP_NAME + 3) * MAX_BUS_STOPS + MAX_BUS_STOP_NAME];
-		for(new i; i < lastBusStop-busstop; i++)
+		new routeText[(MAX_BUS_STOP_NAME + 3) * MAX_BUS_STOPS + 32 * MAX_BUS_STOPS/10];
+		if(lastBusStop == busstop) 
 		{
-			if(i % 10 == 0)
+			strcat(routeText, "\n{A0A0A0}Przystanek koñcowy");
+		}
+		else
+		{
+			new add = busstop + 1;
+			for(new i=0; i + add <= lastBusStop; i++)
 			{
-				strcat(routeText, "\n{778899}Trasa:");
+				if(i % 6 == 0)
+				{
+					strcat(routeText, "\n{A0A0A0}Dalsza trasa:{e2dff3}");
+				}
+				strcat(routeText, BusStops[route][i + add][bs_Name]);
+				if(i+add != lastBusStop)
+				{
+					strcat(routeText, " - ");
+				}
 			}
-			new currStop = busstop + 1;
-			strcat(routeText, BusStops[route][currStop][bs_Name]);
-			strcat(routeText, " - ");
 		}
-		strcat(routeText, BusStops[route][lastBusStop][bs_Name]);
 
-		new busStopText[MAX_BUS_ROUTE_NAME + (MAX_BUS_STOP_NAME + 3) * MAX_BUS_STOPS + MAX_BUS_STOP_NAME + 16 + 32 + MAX_BUS_STOP_NAME];
-		format(busStopText, sizeof(busStopText), 
-			"%s\nKierunek: %s%s", 
-			BusRoute[route][br_Name], 
-			lastBusStopName, routeText);
-		new nextStop = busstop + 1;
-		if(nextStop < MAX_BUS_STOPS && BusStops[route][nextStop][bs_Active])
-		{
-			format(busStopText, sizeof(busStopText), "%s\n{808080}Nastêpny przystanek: %s",
-				busStopText, BusStops[route][nextStop][bs_Name]);
-		}
+		new busStopText[MAX_BUS_ROUTE_NAME + MAX_BUS_ROUTE_NAME + (MAX_BUS_STOP_NAME + 3) * MAX_BUS_STOPS + MAX_BUS_STOP_NAME + 16 + 128 + MAX_BUS_STOP_NAME];
+		strcat(busStopText, sprintf("%s\n", BusRoute[route][br_Name]));
+		strcat(busStopText, sprintf("{A0A0A0}Przystanek: {e2dff3}%s", BusStops[route][busstop][bs_Name]));
+		strcat(busStopText, routeText);
+
 		BusStopsEntities[route][busstop][bs_BusStop3DText] = CreateDynamic3DTextLabel(busStopText,  BusRoute[route][br_Color], 
 			BusStops[route][busstop][bs_ObjectX],
 			BusStops[route][busstop][bs_ObjectY],

@@ -70,9 +70,9 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
     else if(strcmp(action, "place", true) == 0)
     {
         new type = strval(param);
-        if(isnull(param) || type <= 0 || type > 1)
+        if(isnull(param))
         {
-            sendTipMessage(playerid, "U¿yj: /busstop place [typ 1 - du¿y przystanek, 2 - ma³y przystanek]");
+            sendTipMessage(playerid, "U¿yj: /busstop place [typ "#BUS_STOP_TYPE_BIG" - du¿y przystanek, "#BUS_STOP_TYPE_SMALL" - ma³y przystanek, "#BUS_STOP_TYPE_SMALL_BENCH" - ma³y przystanek z ³aweczk¹, inne = model]");
             return 1;
         }
         BusStops[route][busstop][bs_Type] = type;
@@ -83,17 +83,6 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
         MruMessageGoodInfo(playerid, "Teraz strzel w miejsce, gdzie chcesz by postawiæ przystanek.");
         return 1;
     }
-    else if(strcmp(action, "checkpoint", true) == 0)
-    {
-        new Float:x, Float:y, Float:z;
-        SetPlayerPos(playerid, x, y, z);
-        BusStops[route][busstop][bs_StopX] = x;
-        BusStops[route][busstop][bs_StopY] = y;
-        BusStops[route][busstop][bs_StopZ] = z;
-    
-        SetPlayerCheckpoint(playerid, x, y, z, 4.0);
-        MruMessageGoodInfo(playerid, "Checkpoint zapisany w miejscu, w którym stoisz.");
-    }
     else if(strcmp(action, "name", true) == 0)
     {
         format(BusStops[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "%s", param);
@@ -101,6 +90,17 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
         BusStops[route][busstop][bs_Active] = 1;
         RecreateBusStops(route);
         Streamer_Update(playerid);
+    }
+    else if(strcmp(action, "checkpoint", true) == 0)
+    {
+        new Float:x, Float:y, Float:z;
+        GetPlayerPos(playerid, x, y, z);
+        BusStops[route][busstop][bs_StopX] = x;
+        BusStops[route][busstop][bs_StopY] = y;
+        BusStops[route][busstop][bs_StopZ] = z;
+    
+        SetPlayerCheckpoint(playerid, x, y, z, 4.0);
+        MruMessageGoodInfo(playerid, "Checkpoint zapisany w miejscu, w którym stoisz.");
     }
     else if(strcmp(action, "delete", true) == 0)
     {

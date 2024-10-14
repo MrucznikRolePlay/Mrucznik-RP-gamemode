@@ -29,6 +29,7 @@
 #define MAX_BUS_ROUTES 10
 
 #define BUS_STOP_TYPE_BIG 1
-#define BUS_STOP_TYPE_SMALL 1
+#define BUS_STOP_TYPE_SMALL 2
+#define BUS_STOP_TYPE_SMALL_BENCH 3
 
 //end

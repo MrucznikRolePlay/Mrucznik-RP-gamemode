@@ -88,18 +88,22 @@ Driver_OnPlayerShoot(playerid, Float:x, Float:y, Float:z)
 	{
 		new type = GetPVarInt(playerid, "placing-bus-stop-type");
 		new model;
+		new Float:angle;
+		GetPlayerFacingAngle(playerid, angle);
 		if(type == BUS_STOP_TYPE_BIG)
 		{
 			model = 1257;
+			angle += 90.0;
 		}
-		else if(type == BUS_STOP_TYPE_SMALL)
+		else if(type == BUS_STOP_TYPE_SMALL || type == BUS_STOP_TYPE_SMALL_BENCH)
 		{
 			model = 1229;
 		}
 
-		new Float:angle;
-		GetPlayerFacingAngle(playerid, angle);
-		new obj = CreateDynamicObject(model, x, y, z, 0.0, 0.0, angle);
+		new Float:unused, Float:colH;
+		GetModelBoundingBox(model, unused, unused, colH, unused, unused, unused);
+
+		new obj = CreateDynamicObject(model, x, y, z - colH, 0.0, 0.0, angle);
 		EditDynamicObject(playerid, obj);
 		MruMessageGoodInfo(playerid, "Teraz edytuj pozycje obiektu.");
 		return 1;
@@ -123,6 +127,7 @@ Driver_OnPlayerEditObject(playerid, STREAMER_TAG_OBJECT:objectid, response, Floa
 			new busstop = GetPVarInt(playerid, "placing-bus-stop-id");
 			new type = GetPVarInt(playerid, "placing-bus-stop-type");
 
+			DestroyDynamicObject(objectid);
 			PlaceBusStop(route, busstop, type, x, y, z, rx, ry, rz);
 			Streamer_Update(playerid);
 			DeletePVar(playerid, "placing-bus-stop");
