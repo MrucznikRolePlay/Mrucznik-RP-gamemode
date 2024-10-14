@@ -1,7 +1,7 @@
 {
     "name": "busstop",
     "description": "Edytuje przystanek autobusowy.",
-    "command_tips": ["Dostêpne akcje: describe | goto | place | name | checkpoint | delete | insert"],
+    "command_tips": ["Dostêpne akcje: describe | goto | place | name | district | checkpoint | delete | insert"],
     "permissions": [
         "admini"
     ],

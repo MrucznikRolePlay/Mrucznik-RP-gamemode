@@ -59,7 +59,7 @@ YCMD:busstop(playerid, params[], help)
     if(sscanf(params, "dds[32]S()[128]", route, busstop, action, param))
     {
         sendTipMessage(playerid, "U¿yj /busstop [id trasy] [id przystanku] [akcja] [parametry] ");
-        sendTipMessage(playerid, "Dostêpne akcje: describe | goto | place | name | checkpoint | delete | insert");
+        sendTipMessage(playerid, "Dostêpne akcje: describe | goto | place | name | district | checkpoint | delete | insert");
         return 1;
     }
     
