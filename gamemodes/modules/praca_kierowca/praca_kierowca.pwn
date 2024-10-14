@@ -498,7 +498,7 @@ CreateBusStops(route)
 			{
 				if(i % 6 == 0)
 				{
-					strcat(routeText, "\n{A0A0A0}Dalsza trasa:{e2dff3}");
+					strcat(routeText, "\n{A0A0A0}Dalsza trasa:{e2dff3} ");
 				}
 				strcat(routeText, BusStops[route][i + add][bs_Name]);
 				if(i+add != lastBusStop)
