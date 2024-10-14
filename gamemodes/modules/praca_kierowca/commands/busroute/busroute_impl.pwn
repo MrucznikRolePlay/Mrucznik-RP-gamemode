@@ -27,7 +27,7 @@ command_busroute_Impl(playerid, route, action[32], param[128])
 {
     if(PlayerInfo[playerid][pAdmin] != 5000)
     {
-        noAccesMessage(playerid);
+        noAccessMessage(playerid);
         return 1;
     }
 
