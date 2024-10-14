@@ -22,6 +22,34 @@
 //
 
 //------------------<[ Enumy: ]>--------------------
+enum eBusStop 
+{
+	bs_Active,
+	bs_Name[64],
+	bs_Type,
+	Float:bs_StopX, Float:bs_StopY, Float:bs_StopZ,
+	Float:bs_ObjectX, Float:bs_ObjectY, Float:bs_ObjectZ,
+	Float:bs_ObjectRX, Float:bs_ObjectRY, Float:bs_ObjectRZ,
+};
+new BusStops[MAX_BUS_ROUTES][MAX_BUS_STOPS][eBusStop];
+
+enum eBusStopEntity 
+{
+	bs_BusStopObject,
+	bs_BusStopBench,
+	bs_BusStop3DText
+}
+new BusStopsEntities[MAX_BUS_ROUTES][MAX_BUS_STOPS][eBusStopEntity];
+
+enum eBusRouteInfo 
+{
+	br_Name[MAX_BUS_ROUTE_NAME],
+	br_Color,
+	br_MoneyPerStop,
+	br_Skill
+};
+new BusRoute[10][eBusRouteInfo];
+
 //-----------------<[ Zmienne: ]>-------------------
 new TaxiDrivers = 0;
 new HeliDrivers = 0;

@@ -82,6 +82,57 @@ Driver_OnPassengerExitVehicle(playerid)
 	}
 }
 
+Driver_OnPlayerShoot(playerid, Float:x, Float:y, Float:z)
+{
+	if(GetPVarInt(playerid, "placing-bus-stop") == 1)
+	{
+		new type = GetPVarInt(playerid, "placing-bus-stop-type");
+		new model;
+		if(type == BUS_STOP_TYPE_BIG)
+		{
+			model = 1257;
+		}
+		else if(type == BUS_STOP_TYPE_SMALL)
+		{
+			model = 1229;
+		}
+
+		new Float:angle;
+		GetPlayerFacingAngle(playerid, angle);
+		new obj = CreateDynamicObject(model, x, y, z, 0.0, 0.0, angle);
+		EditDynamicObject(playerid, obj);
+		MruMessageGoodInfo(playerid, "Teraz edytuj pozycje obiektu.");
+		return 1;
+	}
+	return 0;
+}
+
+Driver_OnPlayerEditObject(playerid, STREAMER_TAG_OBJECT:objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
+{
+	if(GetPVarInt(playerid, "placing-bus-stop") == 1)
+	{
+		if(response == EDIT_RESPONSE_CANCEL)
+		{
+			DestroyDynamicObject(objectid);
+			MruMessageBadInfo(playerid, "Anulowa³eœ stawianie przystanku");
+			DeletePVar(playerid, "placing-bus-stop");
+		}
+		else if(response == EDIT_RESPONSE_FINAL)
+		{
+			new route = GetPVarInt(playerid, "placing-bus-stop-route");
+			new busstop = GetPVarInt(playerid, "placing-bus-stop-id");
+			new type = GetPVarInt(playerid, "placing-bus-stop-type");
+
+			PlaceBusStop(route, busstop, type, x, y, z, rx, ry, rz);
+			Streamer_Update(playerid);
+			DeletePVar(playerid, "placing-bus-stop");
+			MruMessageGoodInfo(playerid, sprintf("Przystanek %d trasy %d o typie %d postawiony pomyœlnie.", busstop, route, type));
+		}
+		return 1;
+	}
+	return 0;
+}
+
 Driver_OnPassengerEnterVeh(driverid, passengerid)
 {
 	new string[MAX_MESSAGE_LENGTH];

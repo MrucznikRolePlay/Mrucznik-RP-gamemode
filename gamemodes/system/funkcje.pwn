@@ -11281,6 +11281,41 @@ stock IsVehicleUpsideDown(vehicleid)
     );
 }
 
+// Function to move an object to the left by a specified number of units, considering rotation in all axes (rx, ry, rz)
+stock MoveObjectLeft3D(Float:units, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, &Float:newX, &Float:newY, &Float:newZ)
+{
+	new Float:PI = 3.1415926535897932384626433832795028841971693993751058209749445923078164062;
+	new Float:degrees_to_radians = floatdiv(PI, 180.0);
+    // Convert degrees to radians for all angles
+    new Float:rxRad = floatmul(rx, degrees_to_radians);
+    new Float:ryRad = floatmul(ry, degrees_to_radians);
+    new Float:rzRad = floatmul(rz, degrees_to_radians);
+
+    // Calculate the 3D rotation matrix components for yaw, pitch, and roll
+    new Float:cosRy = floatcos(ryRad);
+    new Float:sinRy = floatsin(ryRad);
+    new Float:cosRx = floatcos(rxRad);
+    new Float:sinRx = floatsin(rxRad);
+    new Float:cosRz = floatcos(rzRad);
+    new Float:sinRz = floatsin(rzRad);
+
+    // The left direction vector (extracted from the right direction, negated)
+    // Here we calculate the components of the rotation matrix to extract the right vector
+    new Float:leftX = -(cosRy * cosRz - sinRy * sinRx * sinRz);
+    new Float:leftY = -(sinRy * cosRz + cosRy * sinRx * sinRz);
+    new Float:leftZ = -(cosRx * sinRz);
+
+    // Multiply the left direction by the number of units to move left
+    new Float:moveX = floatmul(leftX, units);
+    new Float:moveY = floatmul(leftY, units);
+    new Float:moveZ = floatmul(leftZ, units);
+
+    // Update the new position by adding the movement to the original position
+    newX = floatadd(x, moveX);
+    newY = floatadd(y, moveY);
+    newZ = floatadd(z, moveZ);
+}
+
 stock Zaufany(playerid) {
 	return ZaufaniON && PlayerInfo[playerid][pZG] == 10;
 }

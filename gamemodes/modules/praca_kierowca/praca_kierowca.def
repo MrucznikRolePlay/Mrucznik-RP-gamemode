@@ -23,5 +23,12 @@
 
 //------------------<[ Makra: ]>-------------------
 //------------------<[ Define: ]>-------------------
+#define MAX_BUS_ROUTE_NAME 64
+#define MAX_BUS_STOP_NAME 64
+#define MAX_BUS_STOPS 100
+#define MAX_BUS_ROUTES 10
+
+#define BUS_STOP_TYPE_BIG 1
+#define BUS_STOP_TYPE_SMALL 1
 
 //end

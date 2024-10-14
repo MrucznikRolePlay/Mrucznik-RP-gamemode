@@ -33,6 +33,8 @@
 #include "zakoncztrase\zakoncztrase.pwn"
 #include "trasa\trasa.pwn"
 #include "businfo\businfo.pwn"
+#include "busroute\busroute.pwn"
+#include "busstop\busstop.pwn"
 #include "zd\zd.pwn"
 #include "kurs\kurs.pwn"
 
@@ -43,6 +45,8 @@ hook OnGameModeInit()
     command_zakoncztrase();
     command_trasa();
     command_businfo();
+    command_busroute();
+    command_busstop();
     command_zd();
     command_kurs();
     

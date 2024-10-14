@@ -346,4 +346,209 @@ GiveTaxiBonusForUniquePlayer(playerid, clientid)
 	Log(payLog, INFO, "%s otrzyma³ %d$ za przewiezienie unikalnego gracza %s taxówk¹", GetPlayerLogName(playerid), GetPlayerLogName(clientid), bonus);
 }
 
+//-----------------<[ Bus Routes: ]>-------------------
+LoadBusRoutes()
+{	
+	// Load bus stops
+	for(new route; route<MAX_BUS_ROUTES; route++)
+	{
+		new File:file;
+		new filename[64];
+		format(filename, sizeof(filename), "bus/route_%d.txt", route);
+		file = fopen(filename, io_read);
+		if(file)
+		{
+			new buf[512];
+
+			// load route info
+			fread(file, buf);
+			sscanf(buf, "p<|>e<s[64]ddd>", BusRoute[route]);
+
+			// load bus stops
+			new busstop;
+			while(fread(file, buf))
+			{
+				if(busstop >= MAX_BUS_STOPS) break;
+        		sscanf(buf, "p<|>e<ds[64]dfffffffff>", BusStops[route][busstop]);
+				busstop++;
+			}
+			fclose(file);
+		}
+	}
+	
+	// Create bus stops
+	for(new route; route<MAX_BUS_ROUTES; route++)
+	{
+		CreateBusStops(route);
+	}
+}
+
+SaveBusRoute(route)
+{
+	new File:file;
+	new filename[64];
+	format(filename, sizeof(filename), "bus/route_%d.txt", route);
+	file = fopen(filename, io_write);
+	if(file)
+	{
+		// save route info
+		fwrite(file, sprintf("%s|%d|%d|%d\n", 
+			BusRoute[route][br_Name], 
+			BusRoute[route][br_Color], 
+			BusRoute[route][br_MoneyPerStop], 
+			BusRoute[route][br_Skill]));
+
+		// save bus stops info
+		for(new busstop; busstop < MAX_BUS_STOPS; busstop++)
+		{
+			if(!BusStops[route][busstop][bs_Active]) break;
+
+			fwrite(file, sprintf("%d|%s|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f\n", 
+				BusStops[route][busstop][bs_Active],
+				BusStops[route][busstop][bs_Name],
+				BusStops[route][busstop][bs_Type],
+				BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ],
+				BusStops[route][busstop][bs_ObjectX], BusStops[route][busstop][bs_ObjectY], BusStops[route][busstop][bs_ObjectZ],
+				BusStops[route][busstop][bs_ObjectRX], BusStops[route][busstop][bs_ObjectRY], BusStops[route][busstop][bs_ObjectRZ]));
+		}
+		fclose(file);
+	}
+}
+
+CreateBusStops(route)
+{
+	new lastBusStopName[MAX_BUS_STOP_NAME];
+	new lastBusStop;
+	for(lastBusStop=0; lastBusStop < MAX_BUS_STOPS; lastBusStop++)
+	{
+		if(!BusStops[route][lastBusStop][bs_Active])
+		{
+			lastBusStop--;
+			break;
+		}
+	}
+	if(lastBusStop == 0)
+	{
+		return;
+	}
+	format(lastBusStopName, sizeof(lastBusStopName), BusStops[route][lastBusStop][bs_Name]);
+
+	for(new busstop; busstop < MAX_BUS_STOPS; busstop++)
+	{
+		if(!BusStops[route][busstop][bs_Active])
+		{
+			break;
+		}
+		new type = BusStops[route][busstop][bs_Type];
+		new Float:textOffset;
+		new model;
+		if(type == BUS_STOP_TYPE_SMALL)
+		{
+			model = 1229;
+			textOffset = 1.4;
+
+			// bench
+			new Float:newX, newY, newZ;
+			MoveObjectLeft3D(3.5, 
+				BusStops[route][busstop][bs_ObjectX],
+				BusStops[route][busstop][bs_ObjectY],
+				BusStops[route][busstop][bs_ObjectZ] - 1.05,
+				BusStops[route][busstop][bs_ObjectRX],
+				BusStops[route][busstop][bs_ObjectRY],
+				BusStops[route][busstop][bs_ObjectRZ], 
+				newX, newY, newZ);
+			BusStopsEntities[route][busstop][bs_BusStopBench] = CreateDynamicObject(1280,
+				newX, newY, newZ,
+				BusStops[route][busstop][bs_ObjectRX],
+				BusStops[route][busstop][bs_ObjectRY],
+				BusStops[route][busstop][bs_ObjectRZ]);
+		}
+		else
+		{
+			model = 1257;
+			textOffset = 1.4;
+		}
+
+		BusStopsEntities[route][busstop][bs_BusStopObject] = CreateDynamicObject(model, 
+			BusStops[route][busstop][bs_ObjectX],
+			BusStops[route][busstop][bs_ObjectY],
+			BusStops[route][busstop][bs_ObjectZ],
+			BusStops[route][busstop][bs_ObjectRX],
+			BusStops[route][busstop][bs_ObjectRY],
+			BusStops[route][busstop][bs_ObjectRZ]);
+
+		// Create bus stop description
+		new routeText[(MAX_BUS_STOP_NAME + 3) * MAX_BUS_STOPS + MAX_BUS_STOP_NAME];
+		for(new i; i < lastBusStop-busstop; i++)
+		{
+			if(i % 10 == 0)
+			{
+				strcat(routeText, "\n{778899}Trasa:");
+			}
+			new currStop = busstop + 1;
+			strcat(routeText, BusStops[route][currStop][bs_Name]);
+			strcat(routeText, " - ");
+		}
+		strcat(routeText, BusStops[route][lastBusStop][bs_Name]);
+
+		new busStopText[MAX_BUS_ROUTE_NAME + (MAX_BUS_STOP_NAME + 3) * MAX_BUS_STOPS + MAX_BUS_STOP_NAME + 16 + 32 + MAX_BUS_STOP_NAME];
+		format(busStopText, sizeof(busStopText), 
+			"%s\nKierunek: %s%s", 
+			BusRoute[route][br_Name], 
+			lastBusStopName, routeText);
+		new nextStop = busstop + 1;
+		if(nextStop < MAX_BUS_STOPS && BusStops[route][nextStop][bs_Active])
+		{
+			format(busStopText, sizeof(busStopText), "%s\n{808080}Nastêpny przystanek: %s",
+				busStopText, BusStops[route][nextStop][bs_Name]);
+		}
+		BusStopsEntities[route][busstop][bs_BusStop3DText] = CreateDynamic3DTextLabel(busStopText,  BusRoute[route][br_Color], 
+			BusStops[route][busstop][bs_ObjectX],
+			BusStops[route][busstop][bs_ObjectY],
+			BusStops[route][busstop][bs_ObjectZ] + textOffset,
+			30.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 0);
+	}
+}
+
+RecreateBusStops(route)
+{
+	// destroy current bus stops
+	for(new busstop; busstop < MAX_BUS_STOPS; busstop++)
+	{
+		if(IsValidDynamicObject(BusStops[route][busstop][bs_BusStopObject]) && BusStops[route][busstop][bs_BusStopObject] != 0)
+		{
+			DestroyDynamicObject(BusStopsEntities[route][busstop][bs_BusStopObject]);
+		}
+		if(IsValidDynamicObject(BusStops[route][busstop][bs_BusStopBench]) && BusStops[route][busstop][bs_BusStopBench] != 0)
+		{
+			DestroyDynamicObject(BusStopsEntities[route][busstop][bs_BusStopBench]);
+		}
+		if(IsValidDynamic3DTextLabel(BusStopsEntities[route][busstop][bs_BusStop3DText]) && BusStopsEntities[route][busstop][bs_BusStop3DText] != 0)
+		{
+			DestroyDynamic3DTextLabel(BusStopsEntities[route][busstop][bs_BusStop3DText]);
+		}
+	}
+
+	// create new bus stops
+	CreateBusStops(route);
+}
+
+PlaceBusStop(route, busstop, type, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
+{
+	if(isnull(BusStops[route][busstop][bs_Name]))
+	{
+		format(BusStops[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "TODO");
+	}
+	BusStops[route][busstop][bs_Active] = 1;
+	BusStops[route][busstop][bs_Type] = type;
+	BusStops[route][busstop][bs_ObjectX] = x;
+	BusStops[route][busstop][bs_ObjectY] = y;
+	BusStops[route][busstop][bs_ObjectZ] = z;
+	BusStops[route][busstop][bs_ObjectRX] = rx;
+	BusStops[route][busstop][bs_ObjectRY] = ry;
+	BusStops[route][busstop][bs_ObjectRZ] = rz;
+	
+	RecreateBusStops(route);
+    SaveBusRoute(route);
+}
 //end

@@ -294,6 +294,7 @@ public OnGameModeInit()
 	LoadFrontBusinesses(); // must be after LoadOrganisations
 	InitializeJobs();
 	CreateRandomContrabandBoxes();
+	LoadBusRoutes();
 
 	//-------<[ actors ]>-------
 	PushActors(); 
@@ -561,6 +562,8 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 		SendClientMessage(playerid, -1, sprintf("Object id %d created at: %.4f, %.4f, %.4f.", obj, shotX, shotY, shotZ));
 		Streamer_Update(playerid);
 	}
+	if(Driver_OnPlayerShoot(playerid, shotX, shotY, shotZ)) return 1;
+
 	switch (hittype)
 	{
 		case BULLET_HIT_TYPE_NONE:
@@ -711,7 +714,6 @@ public OnPlayerShootDynamicObject(playerid, weaponid, objectid, Float:x, Float:y
 			objectid, GetDynamicObjectModel(objectid), px, py, pz, rx, ry, rz, px + x, py + y, pz + z);
 		SendClientMessage(playerid, COLOR_WHITE, str);
 	}
-
 
 	if(Movable_OnPlayerShootObject(playerid, weaponid, objectid)) return 1;
     return 1;
@@ -2843,6 +2845,8 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
 
 public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
 {
+	if(Driver_OnPlayerEditObject(playerid, objectid, response, x, y, z, rx, ry, rz)) return 1;
+
 	if(IsValidDynamicObject(objectid))
 	{
 		if(GetPVarInt(playerid, "Allow-edit") && response == EDIT_RESPONSE_FINAL)

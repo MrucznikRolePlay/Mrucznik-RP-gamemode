@@ -1,0 +1,36 @@
+{
+    "name": "busstop",
+    "description": "Edytuje przystanek autobusowy.",
+    "command_tips": "Dostêpne akcje: describe | goto | object | pickup | checkpoint | 3dtext | name | delete | insert",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "route",
+            "description": "id trasy"
+        },
+        {
+            "type": "integer",
+            "name": "busstop",
+            "description": "id przystanku"
+        },
+        {
+            "type": "string",
+            "size": "32",
+            "name": "action",
+            "description": "akcja"
+        },
+        {
+            "type": "string",
+            "size": "128",
+            "name": "param",
+            "description": "parametry",
+            "defaultValue": ""
+        }
+    ],
+    "date": "13.10.2024"
+}

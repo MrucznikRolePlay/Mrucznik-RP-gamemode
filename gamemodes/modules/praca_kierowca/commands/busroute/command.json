@@ -1,0 +1,31 @@
+{
+    "name": "busroute",
+    "description": "Edycja trasy autobusowej.",
+    "command_tips": "Dostêpne akcje: describe | name | color| money | skill | delete",
+    "permissions": [
+        "admini"
+    ],
+    "author": "mrucznik",
+    "aliases": [],
+    "parameters": [
+        {
+            "type": "integer",
+            "name": "route",
+            "description": "id trasy"
+        },
+        {
+            "type": "string",
+            "size": "32",
+            "name": "action",
+            "description": "akcja"
+        },
+        {
+            "type": "string",
+            "size": "128",
+            "name": "param",
+            "description": "parametry",
+            "defaultValue": ""
+        }
+    ],
+    "date": "13.10.2024"
+}
