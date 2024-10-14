@@ -5412,7 +5412,7 @@ public OnPlayerText(playerid, text[])
 		    GetPlayerName(playerid, sendername, sizeof(sendername));
 		    format(string, sizeof(string), "** %s jest w wiêzieniu i potrzebuje prawnika, jedŸ na komisariat.", sendername);
 	    	SendJobMessage(2, TEAM_AZTECAS_COLOR, string);
-	    	SendJobMessage(2, TEAM_AZTECAS_COLOR, "* Kiedy bêdziesz juz na komisariacie, spytaj siê policjanta o /akceptuj prawnik.");
+	    	SendJobMessage(2, TEAM_AZTECAS_COLOR, "* Kiedy bêdziesz juz na komisariacie, kup pozwolenie komend¹ /kuppozwolenie.");
 	    	SendClientMessage(playerid, COLOR_LIGHTRED, "Jeœli policjant siê zgodzi, prawnik bêdzie móg³ uwolniæ ciê za op³at¹.");
 	    	WantLawyer[playerid] = 0;
 			CallLawyer[playerid] = 0;
