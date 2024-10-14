@@ -369,7 +369,7 @@ LoadBusRoutes()
 			while(fread(file, buf))
 			{
 				if(busstop >= MAX_BUS_STOPS) break;
-        		sscanf(buf, "p<|>e<ds[64]dfffffffff>", BusStops[route][busstop]);
+        		sscanf(buf, "p<|>e<ds[64]s[64]dfffffffff>", BusStops[route][busstop]);
 				busstop++;
 			}
 			fclose(file);
@@ -403,9 +403,10 @@ SaveBusRoute(route)
 		{
 			if(!BusStops[route][busstop][bs_Active]) break;
 
-			fwrite(file, sprintf("%d|%s|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f\n", 
+			fwrite(file, sprintf("%d|%s|%s|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f\n", 
 				BusStops[route][busstop][bs_Active],
 				BusStops[route][busstop][bs_Name],
+				BusStops[route][busstop][bs_District],
 				BusStops[route][busstop][bs_Type],
 				BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ],
 				BusStops[route][busstop][bs_ObjectX], BusStops[route][busstop][bs_ObjectY], BusStops[route][busstop][bs_ObjectZ],
@@ -494,13 +495,20 @@ CreateBusStops(route)
 		else
 		{
 			new add = busstop + 1;
+			new uniqDistricts=0;
 			for(new i=0; i + add <= lastBusStop; i++)
 			{
-				if(i % 6 == 0)
+				if(uniqDistricts % 6 == 0)
 				{
 					strcat(routeText, "\n{A0A0A0}Dalsza trasa:{e2dff3} ");
 				}
-				strcat(routeText, BusStops[route][i + add][bs_Name]);
+				if(strfind(routeText, BusStops[route][i + add][bs_District], true) != -1)
+				{
+					continue;
+				}
+				uniqDistricts++;
+
+				strcat(routeText, BusStops[route][i + add][bs_District]);
 				if(i+add != lastBusStop)
 				{
 					strcat(routeText, " - ");
@@ -549,6 +557,7 @@ PlaceBusStop(route, busstop, type, Float:x, Float:y, Float:z, Float:rx, Float:ry
 	if(isnull(BusStops[route][busstop][bs_Name]))
 	{
 		format(BusStops[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "TODO");
+		format(BusStops[route][busstop][bs_District], MAX_BUS_STOP_NAME, "TODO");
 	}
 	BusStops[route][busstop][bs_Active] = 1;
 	BusStops[route][busstop][bs_Type] = type;

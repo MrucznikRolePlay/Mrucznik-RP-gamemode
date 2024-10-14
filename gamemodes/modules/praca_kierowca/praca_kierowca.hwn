@@ -25,7 +25,8 @@
 enum eBusStop 
 {
 	bs_Active,
-	bs_Name[64],
+	bs_Name[MAX_BUS_STOP_NAME],
+	bs_District[MAX_BUS_STOP_DISTRICT],
 	bs_Type,
 	Float:bs_StopX, Float:bs_StopY, Float:bs_StopZ,
 	Float:bs_ObjectX, Float:bs_ObjectY, Float:bs_ObjectZ,

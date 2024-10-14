@@ -47,8 +47,8 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
     {
         if(BusStops[route][busstop][bs_Active])
         {
-            MruMessageGoodInfo(playerid, sprintf("Przystanek %s, Checkpoint: %.4f, %.4f, %.4f, Obiekt: %.4f, %.4f, %.4f", 
-                BusStops[route][busstop][bs_Name],
+            MruMessageGoodInfo(playerid, sprintf("Przystanek %s, Dzielnica: %s, Checkpoint: %.4f, %.4f, %.4f, Obiekt: %.4f, %.4f, %.4f", 
+                BusStops[route][busstop][bs_Name], BusStops[route][busstop][bs_District],
                 BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ],
                 BusStops[route][busstop][bs_ObjectX], BusStops[route][busstop][bs_ObjectY], BusStops[route][busstop][bs_ObjectZ]));
 
@@ -93,6 +93,14 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
     {
         format(BusStops[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "%s", param);
         MruMessageGoodInfo(playerid, sprintf("Zmieni³eœ nazwê przystanku na %s", param));
+        BusStops[route][busstop][bs_Active] = 1;
+        RecreateBusStops(route);
+        Streamer_Update(playerid);
+    }
+    else if(strcmp(action, "district", true) == 0)
+    {
+        format(BusStops[route][busstop][bs_District], MAX_BUS_STOP_DISTRICT, "%s", param);
+        MruMessageGoodInfo(playerid, sprintf("Zmieni³eœ dzielnicê przystanku na %s", param));
         BusStops[route][busstop][bs_Active] = 1;
         RecreateBusStops(route);
         Streamer_Update(playerid);
@@ -152,6 +160,7 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
             {
                 BusStops[route][i][bs_Active] = 1;
                 format(BusStops[route][i][bs_Name], MAX_BUS_STOP_NAME, "TODO");
+                format(BusStops[route][i][bs_District], MAX_BUS_STOP_NAME, "TODO");
                 substract = 1;
                 continue;
             }
