@@ -27,7 +27,7 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
 {
     if(PlayerInfo[playerid][pAdmin] != 5000)
     {
-        noAccesMessage(playerid);
+        noAccessMessage(playerid);
         return 1;
     }
 
