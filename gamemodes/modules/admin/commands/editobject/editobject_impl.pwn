@@ -29,7 +29,7 @@ command_editobject_Impl(playerid, params[256])
     SetPVarInt(playerid, "Allow-edit", 1);
     new id=-1;
     new comment[128];
-    sscanf(params, "D(-1)S[128]()", id, comment);
+    sscanf(params, "D(-1)S()[128]", id, comment);
     SetPVarString(playerid, "edit-object-comment", comment);
     if(id == -1) SelectObject(playerid);
     else

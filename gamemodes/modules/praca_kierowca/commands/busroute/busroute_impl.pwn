@@ -42,8 +42,16 @@ command_busroute_Impl(playerid, route, action[32], param[128])
                 break;
             }
         }
-        SendClientMessage(playerid, -1, sprintf("Trasa autobusowa %s, hajs za przystanek: %d$, skill: %d, liczba przystanków: %d", 
+        MruMessageGoodInfo(playerid, sprintf("Trasa autobusowa %s, hajs za przystanek: %d$, skill: %d, liczba przystanków: %d", 
             BusRoute[route][br_Name], BusRoute[route][br_MoneyPerStop], BusRoute[route][br_Skill], busStops));
+        
+        for(new i; i<MAX_BUS_STOPS; i++)
+        {
+            MruMessageGoodInfo(playerid, sprintf("Przystanek %s, Checkpoint: %.4f, %.4f, %.4f, Obiekt: %.4f, %.4f, %.4f", 
+                BusStops[route][busstop][bs_Name],
+                BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ],
+                BusStops[route][busstop][bs_ObjectX], BusStops[route][busstop][bs_ObjectY], BusStops[route][busstop][bs_ObjectZ]));
+        }
         return 1;
     }
     else if(strcmp(action, "name", true) == 0)

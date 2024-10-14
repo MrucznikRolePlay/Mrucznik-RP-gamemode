@@ -446,8 +446,8 @@ CreateBusStops(route)
 			textOffset = 1.4;
 
 			// bench
-			new Float:newX, newY, newZ;
-			MoveObjectLeft3D(3.5, 
+			new Float:newX, Float:newY, Float:newZ;
+			MoveObjectLeft3D(-2.5, 
 				BusStops[route][busstop][bs_ObjectX],
 				BusStops[route][busstop][bs_ObjectY],
 				BusStops[route][busstop][bs_ObjectZ] - 1.05,
@@ -459,7 +459,7 @@ CreateBusStops(route)
 				newX, newY, newZ,
 				BusStops[route][busstop][bs_ObjectRX],
 				BusStops[route][busstop][bs_ObjectRY],
-				BusStops[route][busstop][bs_ObjectRZ]);
+				BusStops[route][busstop][bs_ObjectRZ] + 90.0);
 		}
 		else if(type == BUS_STOP_TYPE_SMALL)
 		{
