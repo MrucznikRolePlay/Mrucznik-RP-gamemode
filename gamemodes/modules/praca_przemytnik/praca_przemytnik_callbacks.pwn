@@ -567,6 +567,11 @@ OnPlayerShootSmugglingBoat(playerid, vehicleid)
 	new Float:x, Float:y, Float:z, Float:hp;
 	GetVehiclePos(vehicleid, x, y, z);
 
+	if(IsVehicleInRangeOfPoint(vehicleid, 20.0, -4448.16, 876.198, -0.700195)) // dont drop on spawn
+	{
+		return;
+	}
+
 	// drop box with 5% chance
 	new rand = random(20);
 	if(rand < 1)
