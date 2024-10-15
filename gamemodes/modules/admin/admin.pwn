@@ -775,7 +775,7 @@ SaveObjectsFile(playerid)
 	new File:objectsFile;
 	new year, month, day;
 	getdate(year, month, day);
-	objectsFile = fopen(sprintf("%s_objects_%d_%d_%d_%d.txt", GetNick(playerid), year, month, day, AdminObjectsVer[playerid]), io_write);
+	objectsFile = fopen(sprintf("objects/%s_%d_%d_%d_%d.txt", GetNick(playerid), year, month, day, AdminObjectsVer[playerid]), io_write);
 	if(objectsFile)
 	{
 		new Pointer:key_ptr;
