@@ -408,7 +408,7 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 
 				MruMessageGoodInfo(playerid, "Uda³o Ci siê dostarczyæ paczkê z kontraband¹ do dziupli przemytniczej!");
 				MruMessageGoodInfoF(playerid, "Znajdowa³o siê w niej %d kontrabandy. Jest teraz Twoja!", contraband);
-				Log(payLog, INFO, "Gracz %s odebral %d kontrabandy z paczki.", GetPlayerLogName(playerid));
+				Log(payLog, INFO, "Gracz %s odebral %d kontrabandy z paczki.", GetPlayerLogName(playerid), contraband);
 				GiveContraband(playerid, contraband);
 				DisablePlayerCheckpoint(playerid);
 			}
