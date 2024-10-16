@@ -117,13 +117,14 @@ command_wezdragi_Impl(playerid)
 	}
 	else // 1% szans na negatywne efekty
 	{
+		rand = random(3);
 		PlayerPlaySound(playerid, 5206, 0.0, 0.0, 0.0);
-		if(rand < 97)
+		if(rand == 0)
 		{
 			SendClientMessage(playerid, COLOR_FADE1, "Marcepan_Marks Szepcze: hera koka hasz LSD, ta zabawa po nocach siê œni... Lepiej idŸ do lekarza!");
 			InfectOrDecreaseImmunity(playerid, SCHIZOFRENIA);
 		}
-		else if(rand < 99)
+		else if(rand == 1)
 		{
 			MruMessageBadInfo(playerid, "Twoja postaæ zdaje siê traciæ panowanie nad swoimi zdolnoœciami motorycznymi... Lepiej idŸ do lekarza!");
 			InfectOrDecreaseImmunity(playerid, PADACZKA);
