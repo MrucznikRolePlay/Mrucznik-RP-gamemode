@@ -75,7 +75,7 @@ new Float:StateArrestFreePosition[4] = {
 };
 
 new Float:StateArrestFreePositionVC[4] = {
-    194.6258, 158.0858, 1003.0234, 0.0
+    211.0933, 179.4390, 1003.0313, 0.0
 };
 
 new Float:Cela[8][3] = {

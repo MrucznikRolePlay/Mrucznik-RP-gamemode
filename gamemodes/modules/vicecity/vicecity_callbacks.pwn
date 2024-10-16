@@ -31,6 +31,7 @@
 hook OnGameModeInit()
 {
 	ViceCityInteriors();
+	ViceCityGates();
 
     new totalModels, timedModels, normalModels;
 
