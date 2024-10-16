@@ -54,7 +54,6 @@ enum eSmugglingData {
     s_enableContrabandDrop,
     s_flyCheckpoints[MAX_SMUGGLING_CHECKPOINTS],
     s_dropBoxes[PACKAGES_TO_DROP],
-    s_flareObjects[PACKAGES_TO_DROP],
 
     // gatherinng point data
     s_gatherFlare,

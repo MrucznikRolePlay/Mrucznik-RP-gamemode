@@ -392,8 +392,11 @@ Przemyt_OnPlayerDropMovable(playerid, boxid, boxType, Float:x, Float:y, Float:z,
 				{
 					contraband = Boxes[boxid][box_bonus] / 2;
 					actionID = GetSmugglingActionByBoxID(boxid);
-					GatherPackage(actionID, boxid, 0);
-					SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Wrogi przemytnik zgarn¹³ wasz¹ paczkê z kontraband¹!");
+					if(actionID != -1)
+					{
+						GatherPackage(actionID, boxid, 0);
+						SendSmugglingCrewMessage(actionID, TEAM_AZTECAS_COLOR, "Wrogi przemytnik zgarn¹³ wasz¹ paczkê z kontraband¹!");
+					}
 				}
 				else
 				{
@@ -429,9 +432,7 @@ Przemyt_OnPlayerPickupMovable(playerid, boxid, boxType)
 	new smugglingAction = -1;
 	if(boxType == BOX_TYPE_CONTRABAND_ACTION)
 	{
-		new actionID = GetSmugglingActionByBoxID(boxid);
 		smugglingAction = GetPlayerSmugglingActionID(playerid);
-		DestroySmugglingBoxFlare(actionID);
 	}
 
 	new packageState[32];
@@ -508,9 +509,11 @@ Przemyt_OnPlayerShootMovable(playerid, weaponid, boxid, boxType)
 			if(boxType == BOX_TYPE_CONTRABAND_ACTION)
 			{
 				new actionID = GetSmugglingActionByBoxID(boxid);
-				DestroySmugglingBoxFlare(actionID);
-				GatherPackage(actionID, boxid, 0);
-				SendSmugglingCrewMessage(actionID, COLOR_PANICRED, "Ktoœ zniszczy³ zrzucon¹ paczkê z kontraband¹!");
+				if(actionID != -1)
+				{
+					GatherPackage(actionID, boxid, 0);
+					SendSmugglingCrewMessage(actionID, COLOR_PANICRED, "Ktoœ zniszczy³ zrzucon¹ paczkê z kontraband¹!");
+				}
 			}
 			else
 			{

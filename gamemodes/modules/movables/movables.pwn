@@ -35,6 +35,10 @@ CreateBox(model, type, value, Float:x, Float:y, Float:z, int=0, vw=0, Float:angl
 	Boxes[id][box_type] = type;
 	Boxes[id][box_model] = model;
 	Boxes[id][box_object] = CreateDynamicObject(model, x, y, z, 0.0, 0.0, angle, vw, int);
+	if(type == BOX_TYPE_CONTRABAND_ACTION)
+	{
+		Boxes[id][box_flare] = CreateDynamicObject(18728, x, y, z - 1.0, 0.0, 0.0, angle, vw, int);
+	}
 	Boxes[id][box_player] = -1;
 	Boxes[id][box_x] = x;
 	Boxes[id][box_y] = y;
@@ -56,6 +60,10 @@ DestroyBox(boxid)
 	if(Boxes[boxid][box_object] != -1) 
 	{
 		DestroyDynamicObject(Boxes[boxid][box_object]);
+	}
+	if(Boxes[boxid][box_flare] != -1)
+	{
+		DestroyDynamicObject(Boxes[boxid][box_flare]);
 	}
 	new playerid = Boxes[boxid][box_player];
 	if(playerid != -1)
@@ -83,11 +91,19 @@ PickupBox(playerid, boxid)
     SetPlayerAttachedObject(playerid, itemSlot, Boxes[boxid][box_model], 5, 
 		ObjectHoldingPos[type][0], ObjectHoldingPos[type][1], ObjectHoldingPos[type][2], 
 		ObjectHoldingPos[type][3], ObjectHoldingPos[type][4], ObjectHoldingPos[type][5]);
-	DestroyDynamicObject(Boxes[boxid][box_object]);
+	if(Boxes[boxid][box_object] != -1) 
+	{
+		DestroyDynamicObject(Boxes[boxid][box_object]);
+	}
+	if(Boxes[boxid][box_flare] != -1)
+	{
+		DestroyDynamicObject(Boxes[boxid][box_flare]);
+	}
     ApplyAnimation(playerid,"CARRY","liftup", 4.0, 0, 0, 0, 0, 0);
 
     carryingBox[playerid] = boxid;
 	Boxes[boxid][box_object] = -1;
+	Boxes[boxid][box_flare] = -1;
 	Boxes[boxid][box_player] = playerid;
 	Boxes[boxid][box_attachedSlot] = itemSlot;
 

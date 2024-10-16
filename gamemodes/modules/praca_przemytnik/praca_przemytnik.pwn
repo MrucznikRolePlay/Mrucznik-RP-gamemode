@@ -327,7 +327,6 @@ timer CreateContrabandPackage[0](actionID, parachuteObject, index, damaged)
 	GetDynamicObjectPos(parachuteObject, x, y, z);
 	DestroyDynamicObject(parachuteObject);
 
-	SmugglingAction[actionID][s_flareObjects][index] = CreateDynamicObject(18728, x, y, z - 1.0, 0.0, 0.0, 0.0, 0, 0, -1, 700.0, 700.0, -1, 1);
 	new contraband = BIG_PACKAGE_CONTRABAND_AMMOUNT;
 	if(damaged) contraband /= 2;
 	new boxid = CreateBox(1580, BOX_TYPE_CONTRABAND_ACTION, contraband, x, y, z, 0, 0);
@@ -364,25 +363,6 @@ GetSmugglingActionByBoxID(boxid)
 		}
 	}
 	return -1;
-}
-
-DestroySmugglingBoxFlare(boxid)
-{
-	new actionID = GetSmugglingActionByBoxID(boxid);
-	new idx;
-	for(new i; i<PACKAGES_TO_DROP; i++)
-	{
-		if(boxid == SmugglingAction[actionID][s_dropBoxes][i])
-		{
-			idx = i;
-			break;
-		}
-	}
-
-	if(SmugglingAction[actionID][s_flareObjects][idx] != -1) {
-		DestroyDynamicObject(SmugglingAction[actionID][s_flareObjects][idx]);
-		SmugglingAction[actionID][s_flareObjects][idx] = -1;
-	}
 }
 
 GatherPackage(actionID, boxid, contraband)
@@ -427,11 +407,6 @@ EndSmuggling(actionID)
 		DestroyBox(SmugglingAction[actionID][s_dropBoxes][i]);
     }
 
-    if(SmugglingAction[actionID][s_flareObjects] != -1)
-    {
-        DestroyDynamicObject(SmugglingAction[actionID][s_flareObjects]);
-        SmugglingAction[actionID][s_flareObjects] = -1;
-    }
 
 	DestroyDynamicObject(SmugglingAction[actionID][s_gatherContainer]);
 	DestroyDynamicObject(SmugglingAction[actionID][s_gatherFlare]);

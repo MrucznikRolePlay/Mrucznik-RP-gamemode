@@ -33,7 +33,7 @@ command_zaparkuj_Impl(playerid)
 
 		new ownerOfFractionCar = IsPlayerOwnFractionCar(playerid, vehicleID);
 
-		if( !IsCarOwner(playerid, vehicleID) && !ownerOfFractionCar) 
+		if(!IsCarOwner(playerid, vehicleID) && !ownerOfFractionCar) 
 		{ 
 			return sendErrorMessage(playerid, "Ten pojazd nie nale¿y do Ciebie!");
 		}
