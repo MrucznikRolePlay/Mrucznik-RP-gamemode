@@ -13710,7 +13710,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			}
     		CarData[VehicleUID[veh][vUID]][c_Rang] = (playerid+1);
 
-    		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 15*60*1000, 0, "ii", playerid, veh));
+    		SetPVarInt(playerid, "rentTimer", SetTimerEx("UnhireRentCar", 60*60*1000, 0, "ii", playerid, veh));
 
     		TogglePlayerControllable(playerid, 1);
     		ZabierzKase(playerid, cost); 

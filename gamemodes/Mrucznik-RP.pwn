@@ -3111,7 +3111,7 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
 					{
 						new stringDialog[128];
 						new cost = GetVehicleHireCost(vehicleid);
-						format(stringDialog, sizeof(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 15 minut", cost);
+						format(stringDialog, sizeof(stringDialog), "Mo¿esz wypo¿yczyæ ten pojazd\nCena: %d$ za 60 minut", cost);
 		    			TogglePlayerControllable(playerid, 0);
 						HireCar[playerid] = vehicleid;
 						ShowPlayerDialogEx(playerid, 7079, DIALOG_STYLE_MSGBOX, "Wypo¿yczalnia pojazdów", stringDialog, "Wynajmij", "WyjdŸ");
