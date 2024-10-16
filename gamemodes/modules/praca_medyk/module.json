@@ -1,0 +1,11 @@
+{
+    "name": "praca_medyk",
+    "description": "Praca medyka",
+    "author": "mrucznik",
+    "timers": true,
+    "callbacks": true,
+    "mysql": false,
+    "files": [],
+    "commands": false,
+    "date": "16.10.2024"
+}
