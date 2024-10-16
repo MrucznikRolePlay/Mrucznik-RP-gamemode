@@ -4,8 +4,6 @@ forward KomunikatTimer();
 forward SprzedajMatsTimer(playerid,giveplayerid);
 forward Naprawa(playerid);
 
-forward PrepareKarting();
-forward PreparePaintball();
 forward OtherTimer();
 forward PlayerFixRadio(playerid);
 forward PlayerFixRadio2();
@@ -25,9 +23,6 @@ forward Fillup();
 forward CheckGas();
 forward PlayersCheckerMinute();
 forward CarCheck();
-forward KartingEnded();
-forward StartKarting();
-forward StartPaintball();
 forward SetPlayerUnjail();
 forward StoppedVehicle();
 forward ServerStuffSave();
@@ -79,7 +74,6 @@ forward StopMusic();
 forward PlayerFixRadio2();
 forward CountDownVehsRespawn();
 forward EditObj(playerid, obj); //Timer do edycji obiektów
-forward PaintballEnded();
 forward obiekty_timer(wartosc);
 forward usuwanie_obiektow(playerid);
 

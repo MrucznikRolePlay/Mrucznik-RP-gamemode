@@ -300,7 +300,6 @@
 #include "kamera_wiezienie\kamera_wiezienie.pwn"
 #include "bandana\bandana.pwn"
 #include "jail\jail.pwn"
-#include "gokarty\gokarty.pwn"
 #include "poddajesie\poddajesie.pwn"
 #include "zdmv\zdmv.pwn"
 #include "tognewbie\tognewbie.pwn"
@@ -886,7 +885,6 @@ hook OnGameModeInit()
     command_kamera_wiezienie();
     command_bandana();
     command_jail();
-    command_gokarty();
     command_poddajesie();
     command_zdmv();
     command_tognewbie();

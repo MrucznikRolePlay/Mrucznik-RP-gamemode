@@ -1630,14 +1630,7 @@ public OnPlayerDisconnect(playerid, reason)
 			}
 	    }
 	}
-	if(PlayerPaintballing[playerid] != 0)
-	{
-	    PaintballPlayers --;
-	}
-	if(PlayerKarting[playerid] > 0 && PlayerInKart[playerid] > 0)
-	{
-	    KartingPlayers --;
-	}
+	
 	if(PlayersChannel[playerid] < 500)
 	{
 		IRCInfo[PlayersChannel[playerid]][iPlayers] --;
@@ -2116,15 +2109,6 @@ SetPlayerSpawnPos(playerid)
 			PlayerInfo[playerid][pMats] = PlayerInfo[playerid][pMats]/2;
 		}
 	}
-	//Paintball
-    else if(PlayerPaintballing[playerid] != 0)
-	{
-	    ResetPlayerWeapons(playerid);
-  		GivePlayerWeapon(playerid, 29, 999);
-	    new rand = random(sizeof(PaintballSpawns));
-		SetPlayerPos(playerid, PaintballSpawns[rand][0], PaintballSpawns[rand][1], PaintballSpawns[rand][2]);
-		SetCameraBehindPlayer(playerid);
-	}
 	//BW:
 	else if(PlayerInfo[playerid][pBW] > 0 || GetPVarInt(playerid, "kill-bw") == 1)
 	{
@@ -2559,82 +2543,8 @@ public OnPlayerEnterCheckpoint(playerid)
 		return 1;
 	}
 
-	if(CP[playerid] == 5)
-	{
-	    GameTextForPlayer(playerid, "~y~W punkcie misji", 2500, 1);
-		CP[playerid] = 0;
-	    DisablePlayerCheckpoint(playerid);
-	}
-	else if(CP[playerid] == 9)//Karting
-	{
-		GameTextForPlayer(playerid, "~r~Czekaj tutaj na wiecej gokardow", 4000, 3);
-		DisablePlayerCheckpoint(playerid);
-	}
-	else if(CP[playerid] == 10) { CP[playerid] = 11; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2258.7874,-2402.9712,12.7035,8.0); }
-	else if(CP[playerid] == 11) { CP[playerid] = 12; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2225.8755,-2461.3875,12.7190,8.0); }
-	else if(CP[playerid] == 12) { CP[playerid] = 13; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2276.9983,-2662.8328,12.8580,8.0); }
-	else if(CP[playerid] == 13) { CP[playerid] = 14; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2449.1399,-2663.0562,12.8138,8.0); }
-	else if(CP[playerid] == 14) { CP[playerid] = 15; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2566.9814,-2504.5686,12.7692,8.0); }
-	else if(CP[playerid] == 15) { CP[playerid] = 16; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2719.0520,-2503.5962,12.7706,8.0); }
-	else if(CP[playerid] == 16) { CP[playerid] = 17; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2720.7881,-2405.6589,12.7441,8.0); }
-	else if(CP[playerid] == 17) { CP[playerid] = 18; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2571.5195,-2401.1531,12.7528,8.0); }
-	else if(CP[playerid] == 18) { CP[playerid] = 19; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2406.6995,-2423.1182,12.6641,8.0); }
-	else if(CP[playerid] == 19) { CP[playerid] = 20; DisablePlayerCheckpoint(playerid); SetPlayerCheckpoint(playerid,2322.9194,-2341.5715,12.6664,8.0); }
-	else if(CP[playerid] == 20)//End of Karting
-	{
-	    CP[playerid] = 0;
-	    DisablePlayerCheckpoint(playerid);
-	    GetPlayerName(playerid, name, sizeof(name));
-	    if(FirstKartWinner == 999)
-	    {
-	        FirstKartWinner = playerid;
-	        foreach(new i : Player)
-	        {
-	            if(IsPlayerConnected(i))
-	            {
-		            if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
-		            {
-		                format(string, sizeof(string), "* %s ukoñczy³eœ wyœcig jako pierwszy !",name);
-		                SendClientMessage(i, COLOR_WHITE, string);
-		            }
-				}
-			}
-	    }
-	    else if(SecondKartWinner == 999)
-	    {
-	        SecondKartWinner = playerid;
-	        foreach(new i : Player)
-	        {
-	            if(IsPlayerConnected(i))
-	            {
-		            if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
-		            {
-		                format(string, sizeof(string), "* %s ukoñczy³eœ wyœcig jako drugi !",name);
-		                SendClientMessage(i, COLOR_WHITE, string);
-		            }
-				}
-			}
-	    }
-	    else if(ThirdKartWinner == 999)
-	    {
-	        ThirdKartWinner = playerid;
-	        foreach(new i : Player)
-	        {
-	            if(IsPlayerConnected(i))
-	            {
-		            if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
-		            {
-		                format(string, sizeof(string), "* %s ukoñczy³eœ wyœcig jako trzeci.",name);
-		                SendClientMessage(i, COLOR_WHITE, string);
-		                SendClientMessage(i, COLOR_WHITE, "** Koniec wyœcigu **");
-		                CP[i] = 0;
-		                DisablePlayerCheckpoint(i);
-		            }
-				}
-	        }
-	    }
-	}
-	else if(zawodnik[playerid] == 1)
+	// Wyœcigi ¿uŸlowe
+	if(zawodnik[playerid] == 1)
 	{
 		if(okregi[playerid] == 5)
 		{
@@ -3191,11 +3101,6 @@ public OnPlayerStateChange(playerid, newstate, oldstate)
     }
 	if(newstate == PLAYER_STATE_ONFOOT)
 	{
-	    if(PlayerKarting[playerid] > 0 && PlayerInKart[playerid] > 0)
-		{
-		    PlayerInKart[playerid] = 0;
-		    KartingPlayers --;
-		}
 		SetPVarInt(playerid, "IsAGetInTheCar", 0); 
 		SetPlayerArmedWeapon(playerid, MyWeapon[playerid]); //back weapon antydriveby
 	}

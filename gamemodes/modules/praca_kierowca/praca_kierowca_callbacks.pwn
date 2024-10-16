@@ -192,7 +192,11 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 		BusCallTime[playerid] = 0;
 		DisablePlayerCheckpoint(playerid);
 	}
-	if(CP[playerid]>=550 && CP[playerid]<=999)//Wywo³uje otwieranie drzwi gdy jest w CP od 550 do 999
+
+	
+
+	
+	if(CP[playerid]>=550 && CP[playerid]<=999)
 	{
 		Otwieramdrzwibusa(playerid);
 	}
@@ -210,7 +214,6 @@ Driver_OnPlayerEnterCheckpoint(playerid)
 		DisablePlayerCheckpoint(playerid);
 		CP[playerid] = 0;
 	}
-	//Linia numer 55 autobusa SYSTEM AUTOBUSÓW
 	if(PlayerInfo[playerid][pLinia55]==1)
 	{
 		if(CP[playerid]==551) //Sprawdza czy dojecha³ do nastepnego

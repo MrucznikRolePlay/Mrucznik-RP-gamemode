@@ -630,47 +630,6 @@ CreateShopPickups()
 //--------------------------------------------------------
 //---------------------[Mini Timery:]---------------------
 //--------------------------------------------------------
-
-
-public StartPaintball()
-{
-	PaintballRound = 1;
-	StartingPaintballRound = 0;
-	PaintballWinner = 999;
-	PaintballWinnerKills = 0;
-	foreach(new i : Player)
-	{
-	    if(IsPlayerConnected(i))
-	    {
-	        if(PlayerPaintballing[i] != 0)
-	        {
-	            ResetPlayerWeapons(i);
-	            GivePlayerWeapon(i, 29, 999);
-            	PlayerInfo[i][pGun1] = 29;
-            	PlayerInfo[i][pAmmo1] = 999;
-	            TogglePlayerControllable(i, 1);
-	            SendClientMessage(i, COLOR_YELLOW, "Mecz Pintballa rozpoczêty, skoñczy siê za 4 minuty.");
-	            PlayerPlaySound(i, 1057, 0.0, 0.0, 0.0);
-	        }
-	    }
-	}
-	SetTimer("PaintballEnded", 240000, 0);
-	return 1;
-}
-
-public PreparePaintball()
-{
-    foreach(new i : Player)
-	{
-		if(PlayerPaintballing[i] != 0)
-		{
-			SendClientMessage(i, COLOR_YELLOW, "Mecz Pintballa rozpocznie siê za 20 sekund, proszê czekaæ.");
-		}
-	}
- 	SetTimer("StartPaintball", 20000, 0);
-	return 1;
-}
-
 PlayerPlayMusic(playerid)
 {
 	if(IsPlayerConnected(playerid))
@@ -1888,34 +1847,6 @@ SearchingHit(playerid)
 	}
 	return 0;
 }
-
-public PaintballEnded()//nowe domy biznes wa¿ne
-{
-	new string[256];
-	new name[MAX_PLAYER_NAME];
-    foreach(new i : Player)
-	{
-	    if(IsPlayerConnected(i))
-	    {
-	        if(PlayerPaintballing[i] != 0)
-	        {
-	            if(IsPlayerConnected(PaintballWinner))
-	            {
-	                GetPlayerName(PaintballWinner, name, sizeof(name));
-	                format(string,sizeof(string), "** %s wygra³ mecz Pintballa z %d trafieniami **",name,PaintballWinnerKills);
-	                SendClientMessage(i, COLOR_WHITE, string);
-	            }
-	            ResetPlayerWeapons(i);
-	            PlayerPaintballing[i] = 0;
-	            SetPlayerPos(i, 1310.126586,-1367.812255,13.540800);
-	        }
-		}
-	}
-	AnnouncedPaintballRound = 0;
-    PaintballRound = 0;
-	return 1;
-}
-
 
 StartZuzling()
 {

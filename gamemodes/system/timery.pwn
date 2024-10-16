@@ -2266,23 +2266,6 @@ public JednaSekundaTimer()
 
     new plname[MAX_PLAYER_NAME],level, Float:angle,Lost = 0, trigger = 0,winner[MAX_PLAYER_NAME], loser[MAX_PLAYER_NAME],titel[MAX_PLAYER_NAME];
 
-	if(PaintballPlayers >= 2 && PaintballRound != 1 && StartingPaintballRound != 1)
-	{
-		StartingPaintballRound = 1;
-	   	SetTimer("PreparePaintball", 15000, 0);
-	}
-	if(KartingPlayers >= 2 && KartingRound != 1 && StartingKartRound != 1)
-	{
-	    StartingKartRound = 1;
-	    SetTimer("PrepareKarting", 15000, 0);
-	}
-	if(KartingRound != 0 && KartingPlayers < 2)
-	{
-	    StartingKartRound = 0;
-	    KartingRound = 0;
-	    EndingKartRound = 1;
-	}
-
 	foreach(new i : NPC)
 	{
 		if(BotSmugglingPackages > 0 && !IsPlayerInAnyVehicle(i) && strcmp(GetNick(i), "Bot_Przemytnik", true) == 0)
@@ -3170,30 +3153,6 @@ public JednaSekundaTimer()
                 PlayerTextDrawHide(i, TextInformacyjny[i]);
             }
         }
-		if(StartingPaintballRound == 1 && AnnouncedPaintballRound == 0)
-		{
-			AnnouncedPaintballRound = 1;
-			if(PlayerPaintballing[i] != 0)
-			{
-				SendClientMessage(i, COLOR_YELLOW, "Mecz Pintball`u rozpocznie siê za 15 sekund (Aby do³¹czy³o wiêcej uczestników).");
-			}
-		}
-		if(StartingKartRound == 1 && AnnouncedKartRound == 0)
-		{
-			AnnouncedKartRound = 1;
-			if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
-			{
-				SendClientMessage(i, COLOR_YELLOW, "Wyœcig gokartów rozpocznie siê za 15 sekund (Aby do³¹czy³o wiêcej uczestników).");
-			}
-		}
-		if(EndingKartRound == 1)
-		{
-			if(PlayerKarting[i] != 0 && PlayerInKart[i] != 0)
-			{
-				DisablePlayerCheckpoint(i);
-				CP[i] = 0;
-			}
-		}
 		if(FindTime[i] > 0)
 		{
 			if(FindTime[i] == FindTimePoints[i]) { FindTime[i] = 0; FindTimePoints[i] = 0; DisablePlayerCheckpoint(i); PlayerPlaySound(i, 1056, 0.0, 0.0, 0.0); GameTextForPlayer(i, "~r~Czerwony Marker ulegl destrukcji", 2500, 1); }
