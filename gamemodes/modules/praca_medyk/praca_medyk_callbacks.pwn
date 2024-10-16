@@ -37,7 +37,7 @@ public EndSmoke(id)
 {
 	if(FireSmoke[id] == 1)
 	{
-		DestroyObject(SmokeObj[id]);
+		DestroyDynamicObject(SmokeObj[id]);
 		FireSmoke[id] = 0;
 	}
 	return 1;
@@ -62,7 +62,7 @@ public systempozarow_OnPlayerUpdate(playerid)
 						if(FireSmoke[i] == 0)
 						{
 							FireSmoke[i]=1;
-							SmokeObj[i] = CreateObject(18716,  FirePos[i][0],  FirePos[i][1],  FirePos[i][2], 0, 0, 0.0);
+							SmokeObj[i] = CreateDynamicObject(18716,  FirePos[i][0],  FirePos[i][1],  FirePos[i][2], 0, 0, 0.0);
 							SetTimerEx("EndSmoke", 500, false, "i", i);
 						}
 			    		if(FireHealth[i] <= 0 && TotalFires == 1)
@@ -73,7 +73,7 @@ public systempozarow_OnPlayerUpdate(playerid)
 					    {
 							if(FireSmoke[i] == 1)
 							{
-								DestroyObject(SmokeObj[i]);
+								DestroyDynamicObject(SmokeObj[i]);
 							}
 							OgienUgaszony(playerid);
 							DeleteFire(i);
@@ -95,7 +95,7 @@ public systempozarow_OnPlayerUpdate(playerid)
 						if(FireSmoke[i] == 0)
 						{
 							FireSmoke[i]=1;
-							SmokeObj[i] = CreateObject(18716,  FirePos[i][0],  FirePos[i][1],  FirePos[i][2], 0, 0, 0.0);
+							SmokeObj[i] = CreateDynamicObject(18716,  FirePos[i][0],  FirePos[i][1],  FirePos[i][2], 0, 0, 0.0);
 							SetTimerEx("EndSmoke", 500, false, "i", i);
 						}
 			    		if(FireHealth[i] <= 0 && TotalFires == 1)
@@ -106,7 +106,7 @@ public systempozarow_OnPlayerUpdate(playerid)
 					    {
 							if(FireSmoke[i] == 1)
 							{
-								DestroyObject(SmokeObj[i]);
+								DestroyDynamicObject(SmokeObj[i]);
 							}
 							DeleteFire(i);
 							CallRemoteFunction("OnFireDeath", "dd", i, playerid);
@@ -131,7 +131,7 @@ public systempozarow_OnPlayerUpdate(playerid)
 						if(FireSmoke[i] == 0)
 						{
 							FireSmoke[i]=1;
-							SmokeObj[i] = CreateObject(18716,  FirePos[i][0],  FirePos[i][1],  FirePos[i][2], 0, 0, 0.0);
+							SmokeObj[i] = CreateDynamicObject(18716,  FirePos[i][0],  FirePos[i][1],  FirePos[i][2], 0, 0, 0.0);
 							SetTimerEx("EndSmoke", 500, false, "i", i);
 						}
 			    		if(FireHealth[i] <= 0 && TotalFires == 1)
@@ -142,7 +142,7 @@ public systempozarow_OnPlayerUpdate(playerid)
 					    {
 							if(FireSmoke[i] == 1)
 							{
-								DestroyObject(SmokeObj[i]);
+								DestroyDynamicObject(SmokeObj[i]);
 							}
 							DeleteFire(i);
 							CallRemoteFunction("OnFireDeath", "dd", i, playerid);

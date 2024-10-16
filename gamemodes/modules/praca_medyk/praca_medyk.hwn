@@ -30,7 +30,7 @@ new TotalFires = 0;
 new FireHealth[MaxFire];
 new FireHealthMax[MaxFire];
 
-new SmokeObj[MaxFire],
+new SmokeObj[MaxFire];
 new FireSmoke[MaxFire];
 
 //------------------<[ Forwardy: ]>--------------------

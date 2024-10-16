@@ -29,40 +29,39 @@
 stock AddFire(Float:x, Float:y, Float:z, Health)
 {
     TotalFires++;
-	new ID = TotalFires;
-	FireObj[ID] = CreateObject(18689, x, y, z, 0, 0, 0.0, 150.0);
-	FirePos[ID][0] = x, FirePos[ID][1] = y, FirePos[ID][2] = z;
-	FireHealth[ID] = Health;
-	FireHealthMax[ID] = Health;
-	FireSmoke[ID] = 0;
+	new fireID = TotalFires;
+	FireObj[fireID] = CreateDynamicObject(18689, x, y, z, 0, 0, 0.0, 150.0);
+	FirePos[fireID][0] = x, FirePos[fireID][1] = y, FirePos[fireID][2] = z;
+	FireHealth[fireID] = Health;
+	FireHealthMax[fireID] = Health;
+	FireSmoke[fireID] = 0;
 }
-stock DeleteFire(ID)
+
+stock DeleteFire(fireID)
 {
-	DestroyObject(FireObj[ID]);
+	DestroyDynamicObject(FireObj[fireID]);
 	TotalFires--;
-	FirePos[ID][0] = 0, FirePos[ID][1] = 0, FirePos[ID][2] = 0;
+	FirePos[fireID][0] = 0, FirePos[fireID][1] = 0, FirePos[fireID][2] = 0;
 }
 
 stock DeleteAllFire()
 {
-	new ID;
-	for(ID = 0; ID<MaxFire; ID++)
+	for(new fireID; fireID<MaxFire; fireID++)
 	{
-		DestroyObject(FireObj[ID]);
+		DestroyDynamicObject(FireObj[fireID]);
 		TotalFires= 0;
-		FirePos[ID][0] = 0, FirePos[ID][1] = 0, FirePos[ID][2] = 0;
+		FirePos[fireID][0] = 0, FirePos[fireID][1] = 0, FirePos[fireID][2] = 0;
 	}
 }
-stock IsValidFire(ID)
+stock IsValidFire(fireID)
 {
-	if( (FirePos[ID][0] != 0) && (FirePos[ID][1] != 0) && (FirePos[ID][2] != 0) ) return true;
+	if((FirePos[fireID][0] != 0) && (FirePos[fireID][1] != 0) && (FirePos[fireID][2] != 0) ) return true;
 	else return false;
 }
 
 stock GetClosestFire(playerid)
 {
-	new i;
-	for(i = 0; i<MaxFire; i++)
+	for(new i; i<MaxFire; i++)
 	{
 	    if(IsValidFire(i) && IsPlayerInRangeOfPoint(playerid, 2, FirePos[i][0],  FirePos[i][1],  FirePos[i][2]))
 	    {
@@ -82,7 +81,7 @@ PozarUgaszony(fireid, playerid)
 {
 	if(FireSmoke[fireid] == 1)
 	{
-		DestroyObject(SmokeObj[fireid]);
+		DestroyDynamicObject(SmokeObj[fireid]);
 	}
 	DeleteFire(fireid);
 	CallRemoteFunction("OnFireDeath", "dd", fireid, playerid);
@@ -112,11 +111,12 @@ Float:DistanceCameraTargetToLocation(Float:CamX, Float:CamY, Float:CamZ,   Float
 
 stock PlayerFaces(playerid, Float:x, Float:y, Float:z, Float:radius)
 {
-        new Float:cx,Float:cy,Float:cz,Float:fx,Float:fy,Float:fz;
-        GetPlayerCameraPos(playerid, cx, cy, cz);
-        GetPlayerCameraFrontVector(playerid, fx, fy, fz);
-        return (radius >= DistanceCameraTargetToLocation(cx, cy, cz, x, y, z, fx, fy, fz));
+	new Float:cameraX,Float:cameraY,Float:cameraZ,Float:fx,Float:fy,Float:fz;
+	GetPlayerCameraPos(playerid, cameraX, cameraY, cameraZ);
+	GetPlayerCameraFrontVector(playerid, fx, fy, fz);
+	return (radius >= DistanceCameraTargetToLocation(cx, cy, cz, x, y, z, fx, fy, fz));
 }
+
 IsAFireman(playerid)
 {
 	if(IsPlayerConnected(playerid))

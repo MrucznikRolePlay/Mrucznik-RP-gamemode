@@ -1227,39 +1227,6 @@ new RandCars[18][1] =
 	{543}//Sadler        // 49, 50, 51, 52 -> [17]
 };
 
-new GunPrice[30][1] = {
-{500}, //parachute 0
-{400}, //golfclub 1
-{300}, //nightstick 2
-{200}, //knife 3
-{700}, //basebalbat 4
-{300}, //shovel 5
-{100}, //poolcue 6
-{400}, //purpledildo 7
-{780}, //whitedildo 8
-{560}, //longwhitedildo 9
-{530}, //whitedildo2 10
-{200}, //flowers 11
-{600}, //cane 12
-{1000}, //sdpistol 13
-{2000}, //colt45 14
-{6000}, //deagle 15
-{4000}, //Tec9 16
-{6000}, //uzi 17
-{5000}, //mp5 18
-{6000}, //shotgun 19
-{12000}, //spas12 20
-{8000}, //sawnoff 21
-{10000}, //ak47 22
-{10000}, //m4 23
-{2000}, //rifle 24
-{25}, //pistolammo 25
-{40}, //shotgunammo 26
-{25}, //smgammo 27
-{40}, //assaultammo 28
-{50} //rifle 29
-};
-
 new const Przebierz[][] = {
 	{247},//CIVILIANS DOWN HERE
 	{248},{100},{256},{263},{262},{261},{260},{259},{258},{257},{256},{255},

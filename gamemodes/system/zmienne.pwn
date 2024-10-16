@@ -915,7 +915,6 @@ new GraczWymiany[MAX_PLAYERS];//SYSTEM AUT
 
 new IloscAut[MAX_PLAYERS];//SYSTEM AUT
 new GraczDajacyNeon[MAX_PLAYERS];//NEONY
-new CenaBroni[MAX_PLAYERS];//ALL W GUI
 new IDBroniZbrojownia[MAX_PLAYERS];//ALL W GUI
 new weryfikacja[MAX_PLAYERS];//ANTY HACKED
 new iddialog[MAX_PLAYERS];//ANTY HACKED
