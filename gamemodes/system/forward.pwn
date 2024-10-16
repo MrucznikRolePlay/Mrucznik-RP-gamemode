@@ -34,7 +34,6 @@ forward Float:GetDistanceBetweenPlayers(p1,p2);
 
 forward Wchodzenie(playerid);
 forward freezuj(playerid);
-forward ZamykanieDrzwi(playerid);
 forward AntySB(playerid);
 forward TiNzPJwGUI(playerid); //Koniec czasu na prawo jazdy
 forward Naprawianie(playerid);

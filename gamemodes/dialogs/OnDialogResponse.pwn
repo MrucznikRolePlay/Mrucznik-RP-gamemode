@@ -4707,6 +4707,10 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		{
 			return 1;
 		}
+	    else if(command_trasa_dialog(playerid, dialogid, response, listitem, inputtext))
+		{
+			return 1;
+		}
 	 	if(dialogid == D_PJTEST)
 		{
 			if(response == 1)
@@ -11231,10 +11235,6 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		    {
 		        //testowanie wyœcigu
 		    }
-		}
-		if(command_trasa_dialog(playerid, dialogid, response, listitem, inputtext))
-		{
-			return 1;
 		}
 	}
 	if(dialogid == 1888)

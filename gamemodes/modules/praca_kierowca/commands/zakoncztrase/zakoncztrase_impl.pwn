@@ -25,26 +25,28 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zakoncztrase_Impl(playerid)
 {
-	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || GetPlayerJob(playerid) == JOB_DRIVER)
+	if(GetPlayerFraction(playerid) != FRAC_KT && GetPlayerJob(playerid) != JOB_DRIVER)
 	{
-		if(IsPlayerConnected(playerid))
-		{
-			DisablePlayerCheckpoint(playerid);
-			CP[playerid] = 0;
-			PlayerInfo[playerid][pLinia55] = 0;
-			PlayerInfo[playerid][pLinia72] = 0;
-			PlayerInfo[playerid][pLinia82] = 0;
-			PlayerInfo[playerid][pLinia96] = 0;
-			PlayerInfo[playerid][pNatrasiejest] = 0;
-			Przystanek(playerid, COLOR_YELLOW, "° Komunikacja miejska °");
-			sendTipMessage(playerid, "Zakoñczy³eœ trasê i wygasi³eœ tablice");
-			return 1;
-		}
+		MruMessageFail(playerid, "Nie jesteœ kierowc¹ lub pracownikiem Korporacji Transportowej!");
+		return 1;
 	}
-	else
+	
+	new vehicleid = GetPlayerVehicleID(playerid);
+	if(!IsAPublicTransport(vehicleid))
 	{
-	    sendErrorMessage(playerid, "Nie jesteœ kierowc¹ lub pracownikiem Korporacji Transportowej!");
+		MruMessageFail(playerid, "Nie jesteœ w autobusie!");
+		return 1;
 	}
+
+	new route = DrivingBusRoute[playerid];
+	if(route != -1)
+	{
+		MruMessageFail(playerid, "Nie wykonujesz aktualnie ¿adnej trasy autobusowej.");
+		return 1;
+	}
+
+	EndBusRoute(playerid, vehicleid, route, true);
+	MruMessageGoodInfo(playerid, "Zakoñczy³eœ trasê i wygasi³eœ tablice.");
     return 1;
 }
 

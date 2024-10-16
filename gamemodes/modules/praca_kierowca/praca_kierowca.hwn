@@ -32,7 +32,7 @@ enum eBusStop
 	Float:bs_ObjectX, Float:bs_ObjectY, Float:bs_ObjectZ,
 	Float:bs_ObjectRX, Float:bs_ObjectRY, Float:bs_ObjectRZ,
 };
-new BusStops[MAX_BUS_ROUTES][MAX_BUS_STOPS][eBusStop];
+new BusStop[MAX_BUS_ROUTES][MAX_BUS_STOPS][eBusStop];
 
 enum eBusStopEntity 
 {
@@ -47,7 +47,11 @@ enum eBusRouteInfo
 	br_Name[MAX_BUS_ROUTE_NAME],
 	br_Color,
 	br_MoneyPerStop,
-	br_Skill
+	br_Skill,
+	br_SkillChance,
+	br_Time,
+	br_Enabled,
+	br_Description[MAX_BUS_ROUTE_DESCRIPTION]
 };
 new BusRoute[10][eBusRouteInfo];
 
@@ -71,6 +75,10 @@ new TaxiCallTime[MAX_PLAYERS];
 new TaxiAccepted[MAX_PLAYERS];
 
 new Map:VehicleFareInfo;
+
+new DrivingBusRoute[MAX_PLAYERS] = {-1, ...};
+new CurrentBusStop[MAX_PLAYERS];
+new BusDoors[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
 
 //-----------------<[ Zerowanie: ]>-------------------
@@ -86,6 +94,8 @@ Driver_ZerujZmienne(playerid)
 	BusAccepted[playerid] = 999;
     TaxiCallTime[playerid] = 0;
 	TaxiAccepted[playerid] = 999;
+	DrivingBusRoute[playerid] = -1;
+	CurrentBusStop[playerid] = 0;
 }
 
 //end

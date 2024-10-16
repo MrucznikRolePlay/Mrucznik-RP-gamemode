@@ -236,94 +236,6 @@ Taxi_ShowHUD(playerid)
     PlayerTextDrawShow(playerid, TAXI_COST[playerid]);
 }
 
-StartBusRoute(playerid, listitem)
-{
-	new routeTime;
-	switch(listitem)
-	{
-		case 0: // Linia 55
-		{
-			PlayerInfo[playerid][pLinia55] = 1;
-			CP[playerid] = 551;
-			routeTime = 60000*6;
-
-			SetPlayerCheckpoint(playerid, 2215.8428,-1436.8223,23.4033, 4);
-			Przystanek(playerid, COLOR_BLUE, "Linia nr. 55\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-		}
-		case 1: // linia 72
-		{
-			PlayerInfo[playerid][pLinia72] = 1;
-			CP[playerid] = 721;
-			routeTime = 60000*6;
-
-			SetPlayerCheckpoint(playerid, 2818.4243,-1576.9399,10.9287, 4);
-			Przystanek(playerid, COLOR_NEWS, "Linia nr. 72 (dojazd)\n{808080}Kierunek: BAZA MECHANIKÓW (pêtla) \nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-		}
-		case 2: // linia 96
-		{
-			PlayerInfo[playerid][pLinia96] = 1;
-			CP[playerid] = 961;
-			routeTime = 60000*5;
-
-			SetPlayerCheckpoint(playerid, 2687.6597,-2406.9775,13.6017, 4);
-			Przystanek(playerid, COLOR_GREEN, "Linia nr. 96\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-
-		}
-		case 3: // linia 82
-		{
-			PlayerInfo[playerid][pLinia82] = 1;
-			CP[playerid] = 821;
-			routeTime = 60000*6;
-
-			SetPlayerCheckpoint(playerid, 1173.1520,-1825.2843,13.1789, 4);
-			Przystanek(playerid,COLOR_YELLOW, "Linia nr. 82\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-		}
-		case 4: // linia 85
-		{
-			PlayerInfo[playerid][pLinia85] = 1;
-			CP[playerid] = 501;
-			routeTime = 60000*8;
-
-			SetPlayerCheckpoint(playerid, 2119.7363,-1896.8149,13.1345, 4);
-			Przystanek(playerid, COLOR_GREEN, "Linia nr. 85\n{808080}Dojazd do trasy.\nWszytkie przystanki NA ¯¥DANIE (N/¯)");
-		}
-	}
-
-	SendClientMessage(playerid, COLOR_YELLOW, " Rozpoczynasz wyznaczon¹ trasê. Pod¹¿aj za sygna³em GPS.");
-	PlayerInfo[playerid][pNatrasiejest] = 1;
-	SetTimerEx("AntyBusCzit", routeTime, 0, "d", playerid);
-	BusCzit[playerid] = 1;
-}
-
-Przystanek(playerid, color, tekst[])
-{
-    new car = GetPlayerVehicleID(playerid);
-    if(KomunikacjaMiejsca[car] == -1) return 0;
-	UpdateDynamic3DTextLabelText(Busnapisn[KomunikacjaMiejsca[car]], color, tekst);
-    return 1;
-}
-
-GiveMoneyForBusStop(playerid, route, finish=false)
-{
-	new money;
-	switch(route)
-	{
-		case 55: { money = 460; }
-		case 72: { money = 400; }
-		case 96: { money = 620; }
-		case 82: { money = 1200; }
-		case 85: { money = 540; }
-	}
-
-	if(finish)
-	{
-		money *= 3; // bonus x3 za ukoñczenie ca³ej trasy
-	}
-
-	SendClientMessage(playerid, COLOR_GREEN, sprintf("+%d$", money));
-	DajKase(playerid, money);
-	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %d", GetPlayerLogName(playerid), money, route);
-}
 
 GiveTaxiBonusForUniquePlayer(playerid, clientid)
 {
@@ -346,6 +258,125 @@ GiveTaxiBonusForUniquePlayer(playerid, clientid)
 	Log(payLog, INFO, "%s otrzyma³ %d$ za przewiezienie unikalnego gracza %s taxówk¹", GetPlayerLogName(playerid), GetPlayerLogName(clientid), bonus);
 }
 
+// ------------[ Kierowca Busa ]------------
+StartBusRoute(playerid, route)
+{
+	DrivingBusRoute[playerid] = route;
+	CurrentBusStop[playerid] = 0;
+	SetPlayerRaceCheckpoint(playerid, 0, 
+		BusStop[route][0][bs_StopX], BusStop[route][0][bs_StopY], BusStop[route][0][bs_StopZ],
+		BusStop[route][1][bs_StopX], BusStop[route][1][bs_StopY], BusStop[route][1][bs_StopZ],
+		4.0);
+
+	PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+	SendClientMessage(playerid, COLOR_YELLOW, sprintf("|________________%s_________________|", BusRoute[route][br_Name]));
+	SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpocz¹æ s³u¿by! Wpisz {FFFF00}/fare [cena]");
+	SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyæ po wjechaniu w przystanek wpisz {FFFF00}/zd");
+	SendClientMessage(playerid, COLOR_GREEN, "Je¿eli bêdziesz chcia³ przerwaæ trasê wczeœniej wpisz {FFFF00}/zakoncztrase");
+	SendClientMessage(playerid, COLOR_YELLOW,         "|_____________>>/fare<<_____________|");
+}
+
+Przystanek(playerid, vehicleid, route, busstop)
+{
+	new next = busstop + 1;
+	new afterNext = busstop + 2;
+	new end;
+	if(next == MAX_BUS_STOPS-1 || !BusStop[route][next][bs_Active])
+	{
+		end = 1;
+
+		// koniec trasy
+		PlayerPlaySound(playerid, 182, 0.0, 0.0, 0.0);
+		SetTimerEx("StopPlayerSound", 8200, false, "%d", playerid);
+	}
+	else if(afterNext == MAX_BUS_STOPS-1 || !BusStop[route][afterNext][bs_Active])
+	{
+		// ostatni przystanek
+		SetPlayerRaceCheckpoint(playerid, 1, 
+			BusStop[route][next][bs_StopX], BusStop[route][next][bs_StopY], BusStop[route][next][bs_StopZ],
+			0.0, 0.0, 0.0, 4.0);
+		PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+	}
+	else
+	{
+		SetPlayerRaceCheckpoint(playerid, 0, 
+			BusStop[route][next][bs_StopX], BusStop[route][next][bs_StopY], BusStop[route][next][bs_StopZ],
+			BusStop[route][afterNext][bs_StopX], BusStop[route][afterNext][bs_StopY], BusStop[route][afterNext][bs_StopZ],
+			4.0);
+		PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
+	}
+
+	new money = BusRoute[route][br_MoneyPerStop];
+	if(random(100) < BusRoute[route][br_SkillChance])
+	{
+		IncreasePlayerJobSkill(playerid, JOB_DRIVER, 1);
+	}
+
+	GameTextForPlayer(playerid, sprintf("~g~+%d$", money), 4000, 1);
+	DajKase(playerid, money);
+	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %s", GetPlayerLogName(playerid), money, BusRoute[route][br_Name]);
+
+	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd by zamkn¹æ))");
+	TogglePlayerControllable(playerid, 0);
+	BusDoors[playerid] = 1;
+
+	if(end)
+	{
+		EndBusRoute(playerid, vehicleid, route);
+	}
+	else
+	{
+		new routeText[1024];
+		new uniqDistricts;
+		for(new i=busstop+1; i <= MAX_BUS_STOPS; i++)
+		{
+			if(!BusStop[route][i][bs_Active])
+			{
+				break;
+			}
+			if(strfind(routeText, BusStop[route][i][bs_District], true) != -1)
+			{
+				continue;
+			}
+			if(uniqDistricts % 5 == 0)
+			{
+				strcat(routeText, "\n{A0A0A0}Trasa:{e2dff3} ");
+			}
+			uniqDistricts++;
+			strcat(routeText, BusStop[route][i][bs_District]);
+		}
+		new routeLen = strlen(routeText);
+		if(routeLen > 3)
+		routeText[strlen(routeText)-3] = '\0';
+
+		new busText[MAX_BUS_STOPS * (MAX_BUS_STOP_NAME + 3) + 1024];
+		format(busText, sizeof(busText), 
+			"%s\n\
+			{A0A0A0}Nastêpny przystanek: {e2dff3}%s\n\
+			%s", 
+			BusRoute[route][br_Name],
+			BusStop[route][next][br_Name],
+			routeText);
+		UpdateDynamic3DTextLabelText(Busnapisn[KomunikacjaMiejsca[vehicleid]], BusRoute[route][br_Color], busText);
+	}
+    return 1;
+}
+
+EndBusRoute(playerid, vehicleid, route, force=0)
+{
+	DrivingBusRoute[playerid] = -1;
+	CurrentBusStop[playerid] = 0;
+	if(!force) IncreasePlayerJobSkill(playerid, JOB_DRIVER, 1);
+	DisablePlayerRaceCheckpoint(playerid);
+
+	SendClientMessage(playerid, COLOR_YELLOW,sprintf("|_______________%s zakoñczona!_______________|", BusRoute[route][br_Name]));
+	SendClientMessage(playerid, COLOR_GREEN, "Mo¿esz znów rozpocz¹æ t¹ lub inn¹ trasê lub zrezygnowaæ poprzez zamkniêcie menu wyboru.");
+	SendClientMessage(playerid, COLOR_GREEN, "Je¿eli jednak chcesz zakoñczyæ pracê kieruj siê do zajezdni.");
+	SendClientMessage(playerid, COLOR_YELLOW,        "|_____________>>Bus Department<<_____________|");
+
+	UpdateDynamic3DTextLabelText(Busnapisn[KomunikacjaMiejsca[vehicleid]], COLOR_YELLOW, "° Komunikacja miejska °");
+}
+
 //-----------------<[ Bus Routes: ]>-------------------
 LoadBusRoutes()
 {	
@@ -362,14 +393,14 @@ LoadBusRoutes()
 
 			// load route info
 			fread(file, buf);
-			sscanf(buf, "p<|>e<s[64]ddd>", BusRoute[route]);
+			sscanf(buf, "p<|>e<s["#MAX_BUS_ROUTE_NAME"]dddddds["#MAX_BUS_ROUTE_DESCRIPTION"]>", BusRoute[route]);
 
 			// load bus stops
 			new busstop;
 			while(fread(file, buf))
 			{
 				if(busstop >= MAX_BUS_STOPS) break;
-        		sscanf(buf, "p<|>e<ds[64]s[64]dfffffffff>", BusStops[route][busstop]);
+        		sscanf(buf, "p<|>e<ds["#MAX_BUS_STOP_NAME"]s["#MAX_BUS_STOP_DISTRICT"]dfffffffff>", BusStop[route][busstop]);
 				busstop++;
 			}
 			fclose(file);
@@ -392,26 +423,30 @@ SaveBusRoute(route)
 	if(file)
 	{
 		// save route info
-		fwrite(file, sprintf("%s|%d|%d|%d\n", 
+		fwrite(file, sprintf("%s|%d|%d|%d|%d|%d|%d|%s\n", 
 			BusRoute[route][br_Name], 
 			BusRoute[route][br_Color], 
 			BusRoute[route][br_MoneyPerStop], 
-			BusRoute[route][br_Skill]));
+			BusRoute[route][br_Skill], 
+			BusRoute[route][br_Time], 
+			BusRoute[route][br_SkillChance], 
+			BusRoute[route][br_Enabled],
+			BusRoute[route][br_Description]));
 
 		// save bus stops info
 		for(new busstop; busstop < MAX_BUS_STOPS; busstop++)
 		{
-			if(!BusStops[route][busstop][bs_Active]) break;
+			if(!BusStop[route][busstop][bs_Active]) break;
 
 			new buf[1024];
 			format(buf, sizeof(buf), "%d|%s|%s|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f\n", 
-				BusStops[route][busstop][bs_Active],
-				BusStops[route][busstop][bs_Name],
-				BusStops[route][busstop][bs_District],
-				BusStops[route][busstop][bs_Type],
-				BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ],
-				BusStops[route][busstop][bs_ObjectX], BusStops[route][busstop][bs_ObjectY], BusStops[route][busstop][bs_ObjectZ],
-				BusStops[route][busstop][bs_ObjectRX], BusStops[route][busstop][bs_ObjectRY], BusStops[route][busstop][bs_ObjectRZ]);
+				BusStop[route][busstop][bs_Active],
+				BusStop[route][busstop][bs_Name],
+				BusStop[route][busstop][bs_District],
+				BusStop[route][busstop][bs_Type],
+				BusStop[route][busstop][bs_StopX], BusStop[route][busstop][bs_StopY], BusStop[route][busstop][bs_StopZ],
+				BusStop[route][busstop][bs_ObjectX], BusStop[route][busstop][bs_ObjectY], BusStop[route][busstop][bs_ObjectZ],
+				BusStop[route][busstop][bs_ObjectRX], BusStop[route][busstop][bs_ObjectRY], BusStop[route][busstop][bs_ObjectRZ]);
 			fwrite(file, buf);
 		}
 		fclose(file);
@@ -420,27 +455,13 @@ SaveBusRoute(route)
 
 CreateBusStops(route)
 {
-	new lastBusStop;
-	for(lastBusStop=0; lastBusStop < MAX_BUS_STOPS; lastBusStop++)
-	{
-		if(!BusStops[route][lastBusStop][bs_Active])
-		{
-			lastBusStop--;
-			break;
-		}
-	}
-	if(lastBusStop < 0)
-	{
-		return;
-	}
-
 	for(new busstop; busstop < MAX_BUS_STOPS; busstop++)
 	{
-		if(!BusStops[route][busstop][bs_Active])
+		if(!BusStop[route][busstop][bs_Active])
 		{
 			break;
 		}
-		new type = BusStops[route][busstop][bs_Type];
+		new type = BusStop[route][busstop][bs_Type];
 		new Float:textOffset;
 		new model;
 		if(type == BUS_STOP_TYPE_SMALL_BENCH)
@@ -451,18 +472,18 @@ CreateBusStops(route)
 			// bench
 			new Float:newX, Float:newY, Float:newZ;
 			MoveObjectLeft3D(3.5, 
-				BusStops[route][busstop][bs_ObjectX],
-				BusStops[route][busstop][bs_ObjectY],
-				BusStops[route][busstop][bs_ObjectZ] - 1.05,
-				BusStops[route][busstop][bs_ObjectRX],
-				BusStops[route][busstop][bs_ObjectRY],
-				BusStops[route][busstop][bs_ObjectRZ], 
+				BusStop[route][busstop][bs_ObjectX],
+				BusStop[route][busstop][bs_ObjectY],
+				BusStop[route][busstop][bs_ObjectZ] - 1.05,
+				BusStop[route][busstop][bs_ObjectRX],
+				BusStop[route][busstop][bs_ObjectRY],
+				BusStop[route][busstop][bs_ObjectRZ], 
 				newX, newY, newZ);
 			BusStopsEntities[route][busstop][bs_BusStopBench] = CreateDynamicObject(1280,
 				newX, newY, newZ,
-				BusStops[route][busstop][bs_ObjectRX],
-				BusStops[route][busstop][bs_ObjectRY],
-				BusStops[route][busstop][bs_ObjectRZ]);
+				BusStop[route][busstop][bs_ObjectRX],
+				BusStop[route][busstop][bs_ObjectRY],
+				BusStop[route][busstop][bs_ObjectRZ]);
 		}
 		else if(type == BUS_STOP_TYPE_SMALL)
 		{
@@ -481,52 +502,21 @@ CreateBusStops(route)
 		}
 
 		BusStopsEntities[route][busstop][bs_BusStopObject] = CreateDynamicObject(model, 
-			BusStops[route][busstop][bs_ObjectX],
-			BusStops[route][busstop][bs_ObjectY],
-			BusStops[route][busstop][bs_ObjectZ],
-			BusStops[route][busstop][bs_ObjectRX],
-			BusStops[route][busstop][bs_ObjectRY],
-			BusStops[route][busstop][bs_ObjectRZ]);
+			BusStop[route][busstop][bs_ObjectX],
+			BusStop[route][busstop][bs_ObjectY],
+			BusStop[route][busstop][bs_ObjectZ],
+			BusStop[route][busstop][bs_ObjectRX],
+			BusStop[route][busstop][bs_ObjectRY],
+			BusStop[route][busstop][bs_ObjectRZ]);
 
-		// Create bus stop description
-		new routeText[(MAX_BUS_STOP_NAME + 3) * MAX_BUS_STOPS + 32 * MAX_BUS_STOPS/10];
-		if(lastBusStop == busstop) 
-		{
-			strcat(routeText, "\n{A0A0A0}Przystanek koñcowy");
-		}
-		else
-		{
-			new add = busstop + 1;
-			new uniqDistricts=0;
-			for(new i=0; i + add <= lastBusStop; i++)
-			{
-				if(uniqDistricts % 6 == 0)
-				{
-					strcat(routeText, "\n{A0A0A0}Dalsza trasa:{e2dff3} ");
-				}
-				if(strfind(routeText, BusStops[route][i + add][bs_District], true) != -1)
-				{
-					continue;
-				}
-				uniqDistricts++;
-
-				strcat(routeText, BusStops[route][i + add][bs_District]);
-				if(i+add != lastBusStop)
-				{
-					strcat(routeText, " - ");
-				}
-			}
-		}
-
-		new busStopText[MAX_BUS_ROUTE_NAME + MAX_BUS_ROUTE_NAME + (MAX_BUS_STOP_NAME + 3) * MAX_BUS_STOPS + MAX_BUS_STOP_NAME + 16 + 128 + MAX_BUS_STOP_NAME];
+		new busStopText[512];
 		strcat(busStopText, sprintf("%s\n", BusRoute[route][br_Name]));
-		strcat(busStopText, sprintf("{A0A0A0}Przystanek: {e2dff3}%s", BusStops[route][busstop][bs_Name]));
-		strcat(busStopText, routeText);
+		strcat(busStopText, sprintf("{A0A0A0}Przystanek: {e2dff3}%s", BusStop[route][busstop][bs_Name]));
 
 		BusStopsEntities[route][busstop][bs_BusStop3DText] = CreateDynamic3DTextLabel(busStopText,  BusRoute[route][br_Color], 
-			BusStops[route][busstop][bs_ObjectX],
-			BusStops[route][busstop][bs_ObjectY],
-			BusStops[route][busstop][bs_ObjectZ] + textOffset,
+			BusStop[route][busstop][bs_ObjectX],
+			BusStop[route][busstop][bs_ObjectY],
+			BusStop[route][busstop][bs_ObjectZ] + textOffset,
 			30.0, INVALID_PLAYER_ID, INVALID_VEHICLE_ID, 0, 0, 0);
 	}
 }
@@ -536,11 +526,11 @@ RecreateBusStops(route)
 	// destroy current bus stops
 	for(new busstop; busstop < MAX_BUS_STOPS; busstop++)
 	{
-		if(IsValidDynamicObject(BusStops[route][busstop][bs_BusStopObject]) && BusStops[route][busstop][bs_BusStopObject] != 0)
+		if(IsValidDynamicObject(BusStop[route][busstop][bs_BusStopObject]) && BusStop[route][busstop][bs_BusStopObject] != 0)
 		{
 			DestroyDynamicObject(BusStopsEntities[route][busstop][bs_BusStopObject]);
 		}
-		if(IsValidDynamicObject(BusStops[route][busstop][bs_BusStopBench]) && BusStops[route][busstop][bs_BusStopBench] != 0)
+		if(IsValidDynamicObject(BusStop[route][busstop][bs_BusStopBench]) && BusStop[route][busstop][bs_BusStopBench] != 0)
 		{
 			DestroyDynamicObject(BusStopsEntities[route][busstop][bs_BusStopBench]);
 		}
@@ -556,21 +546,35 @@ RecreateBusStops(route)
 
 PlaceBusStop(route, busstop, type, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz)
 {
-	if(isnull(BusStops[route][busstop][bs_Name]))
+	if(isnull(BusStop[route][busstop][bs_Name]))
 	{
-		format(BusStops[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "TODO");
-		format(BusStops[route][busstop][bs_District], MAX_BUS_STOP_DISTRICT, "TODO");
+		format(BusStop[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "TODO");
+		format(BusStop[route][busstop][bs_District], MAX_BUS_STOP_DISTRICT, "TODO");
 	}
-	BusStops[route][busstop][bs_Active] = 1;
-	BusStops[route][busstop][bs_Type] = type;
-	BusStops[route][busstop][bs_ObjectX] = x;
-	BusStops[route][busstop][bs_ObjectY] = y;
-	BusStops[route][busstop][bs_ObjectZ] = z;
-	BusStops[route][busstop][bs_ObjectRX] = rx;
-	BusStops[route][busstop][bs_ObjectRY] = ry;
-	BusStops[route][busstop][bs_ObjectRZ] = rz;
+	BusStop[route][busstop][bs_Active] = 1;
+	BusStop[route][busstop][bs_Type] = type;
+	BusStop[route][busstop][bs_ObjectX] = x;
+	BusStop[route][busstop][bs_ObjectY] = y;
+	BusStop[route][busstop][bs_ObjectZ] = z;
+	BusStop[route][busstop][bs_ObjectRX] = rx;
+	BusStop[route][busstop][bs_ObjectRY] = ry;
+	BusStop[route][busstop][bs_ObjectRZ] = rz;
 	
 	RecreateBusStops(route);
     SaveBusRoute(route);
 }
+
+GetRouteBusStopsCount(route)
+{
+	new busStops;
+	for(busStops=0; busStops<MAX_BUS_STOPS; busStops++)
+	{
+		if(!BusStop[route][busStops][bs_Active])
+		{
+			break;
+		}
+	}
+	return busStops;
+}
+
 //end

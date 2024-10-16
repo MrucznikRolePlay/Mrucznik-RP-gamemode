@@ -25,41 +25,39 @@
 //------------------<[ Implementacja: ]>-------------------
 command_zd_Impl(playerid)
 {
-	new string[128];
-	new sendername[MAX_PLAYER_NAME];
+    new vehicleid = GetPlayerVehicleID(playerid);
+	if(GetPlayerFraction(playerid) != FRAC_KT && GetPlayerJob(playerid) != JOB_DRIVER)
+	{
+		MruMessageFail(playerid, "Nie jesteœ kierowc¹ lub pracownikiem Korporacji Transportowej!");
+		return 1;
+	}
+	
+	if(!IsAPublicTransport(vehicleid))
+	{
+		MruMessageFail(playerid, "Nie jesteœ w autobusie !");
+		return 1;
+	}
 
-    new Veh = GetPlayerVehicleID(playerid);
-	if(PlayerInfo[playerid][pMember] == 10 || PlayerInfo[playerid][pLider] == 10 || GetPlayerJob(playerid) == JOB_DRIVER)
+	if(BusDoors[playerid] == 0)
 	{
-		if(IsPlayerConnected(playerid))
-		{
-			if(IsAPublicTransport(Veh))
-			{
-				if(PlayerInfo[playerid][pDrzwibusazamkniete]==0)
-				{
-					GetPlayerName(playerid, sendername, sizeof(sendername));
-					format(string, sizeof(string), "* %s naciska guzik i powoli zamyka drzwi", sendername);
-					ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-					SetTimerEx("ZamykanieDrzwi",4000,0,"d",playerid);
-					GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Trwa zamykanie drzwi...", 4000, 3);
-				}
-				else
-				{
-					sendErrorMessage(playerid, "Drzwi autobusu s¹ ju¿ zamkniête !");
-				}
-			}
-			else
-			{
-				sendErrorMessage(playerid, "Nie jesteœ w autobusie !");
-			}
-			return 1;
-		}
+		MruMessageFail(playerid, "Drzwi autobusu s¹ ju¿ zamkniête !");
+		return 1;
 	}
-	else
-	{
-		sendErrorMessage(playerid, "Nie jesteœ kierowc¹ lub pracownikiem Korporacji Transportowej !");
-	}
+
+	ChatMe(playerid, "naciska guzik i powoli zamyka drzwi");
+	defer ZamykanieDrzwi(playerid);
+	GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Trwa zamykanie drzwi...", 4000, 3);
     return 1;
+}
+
+
+timer ZamykanieDrzwi[1000](playerid) 
+{
+	TogglePlayerControllable(playerid, 1);
+	PlayerPlaySound(playerid, 4203, 0.0, 0.0, 0.0);
+	GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~g~Drzwi zamkniete!", 4000, 3);
+	BusDoors[playerid] = 0;
+	return 1;
 }
 
 //end

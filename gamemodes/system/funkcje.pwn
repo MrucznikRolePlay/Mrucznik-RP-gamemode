@@ -802,14 +802,6 @@ TogglePlayerControllable(playerid, 0);
 return 1;
 }
 
-public ZamykanieDrzwi(playerid){
-TogglePlayerControllable(playerid, 1);
-PlayerPlaySound(playerid, 4203, 0.0, 0.0, 0.0);
-PlayerInfo[playerid][pDrzwibusazamkniete]=1;
-GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~~g~Drzwi zamkniete!", 4000, 3);
-return 1;
-}
-
 public AntySB(playerid)
 {
 	AntySpawnBroni[playerid] = 0;
@@ -7199,17 +7191,6 @@ stock ShowPlayerDialogEx(playerid, dialogid, style, caption[], info[], button1[]
 	{
 		sendErrorMessage(playerid, "Odczekaj 15 sekund przed wywo³aniem kolejnego dialogu"); 
 	}
-	return 1;
-}
-Otwieramdrzwibusa(playerid)
-{
-	new string[256];
-	new sendername[MAX_PLAYER_NAME];
-	GetPlayerName(playerid, sendername, sizeof(sendername));
-	format(string, sizeof(string), "* %s naciska przycisk na desce rozdzielczej i otwiera drzwi", sendername);
-	ProxDetector(15.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-	TogglePlayerControllable(playerid, 0);
-	PlayerInfo[playerid][pDrzwibusazamkniete]=0;
 	return 1;
 }
 

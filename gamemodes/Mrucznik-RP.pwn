@@ -2513,7 +2513,6 @@ SetPlayerSpawnSkin(playerid)
 public OnPlayerEnterCheckpoint(playerid)
 {
 	new string[128];
-	new name[MAX_PLAYER_NAME];
 
 	if(Sila_OnPlayerEnterCheckpoint(playerid))
 	{
@@ -2649,6 +2648,11 @@ public OnPlayerLeaveCheckpoint(playerid)
 public OnPlayerEnterRaceCheckpoint(playerid)
 {
 	if(Przemytnik_OnPlayerEnterRaceCP(playerid))
+	{
+		return 1;
+	}
+
+	if(Driver_OnPlayerEnterRaceCP(playerid))
 	{
 		return 1;
 	}

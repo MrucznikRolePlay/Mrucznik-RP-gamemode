@@ -329,6 +329,7 @@ MRP_DoAnimation(playerid, arg1[])
 	{
 		SetPlayerSpecialAction(playerid, 68);
 		SetPVarInt(playerid, "anim_do", 1);
+		PlayerPlaySound(playerid, 14200, 0.0, 0.0, 0.0);
 		return 1;
 	}
 	else if(strcmp(arg1, "@wolaj", true) == 0)

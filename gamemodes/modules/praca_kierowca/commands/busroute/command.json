@@ -1,7 +1,7 @@
 {
     "name": "busroute",
     "description": "Edycja trasy autobusowej.",
-    "command_tips": ["Dostêpne akcje: describe | name | color| money | skill"],
+    "command_tips": ["Dostêpne akcje: describe | name | color| money | skill | skillchance | time | enable"],
     "permissions": [
         "admini"
     ],
@@ -21,7 +21,7 @@
         },
         {
             "type": "string",
-            "size": "128",
+            "size": "256",
             "name": "param",
             "description": "parametry",
             "defaultValue": ""

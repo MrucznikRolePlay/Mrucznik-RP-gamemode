@@ -45,14 +45,14 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
 
     if(strcmp(action, "describe", true) == 0)
     {
-        if(BusStops[route][busstop][bs_Active])
+        if(BusStop[route][busstop][bs_Active])
         {
             MruMessageGoodInfo(playerid, sprintf("Przystanek %s, Dzielnica: %s, Checkpoint: %.4f, %.4f, %.4f, Obiekt: %.4f, %.4f, %.4f", 
-                BusStops[route][busstop][bs_Name], BusStops[route][busstop][bs_District],
-                BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ],
-                BusStops[route][busstop][bs_ObjectX], BusStops[route][busstop][bs_ObjectY], BusStops[route][busstop][bs_ObjectZ]));
+                BusStop[route][busstop][bs_Name], BusStop[route][busstop][bs_District],
+                BusStop[route][busstop][bs_StopX], BusStop[route][busstop][bs_StopY], BusStop[route][busstop][bs_StopZ],
+                BusStop[route][busstop][bs_ObjectX], BusStop[route][busstop][bs_ObjectY], BusStop[route][busstop][bs_ObjectZ]));
 
-            SetPlayerCheckpoint(playerid, BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ], 4.0);
+            SetPlayerCheckpoint(playerid, BusStop[route][busstop][bs_StopX], BusStop[route][busstop][bs_StopY], BusStop[route][busstop][bs_StopZ], 4.0);
         }
         else
         {
@@ -62,9 +62,9 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
     }
     else if(strcmp(action, "goto", true) == 0)
     {
-        if(BusStops[route][busstop][bs_Active])
+        if(BusStop[route][busstop][bs_Active])
         {
-            SetPlayerPos(playerid, BusStops[route][busstop][bs_StopX], BusStops[route][busstop][bs_StopY], BusStops[route][busstop][bs_StopZ]);
+            SetPlayerPos(playerid, BusStop[route][busstop][bs_StopX], BusStop[route][busstop][bs_StopY], BusStop[route][busstop][bs_StopZ]);
             MruMessageGoodInfo(playerid, sprintf("Teleportowa³eœ siê do przystanku nr %d trasy %s", busstop, BusRoute[route][br_Name]));
         }
         else
@@ -81,7 +81,7 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
             sendTipMessage(playerid, "U¿yj: /busstop place [typ "#BUS_STOP_TYPE_BIG" - du¿y przystanek, "#BUS_STOP_TYPE_SMALL" - ma³y przystanek, "#BUS_STOP_TYPE_SMALL_BENCH" - ma³y przystanek z ³aweczk¹, inne = model]");
             return 1;
         }
-        BusStops[route][busstop][bs_Type] = type;
+        BusStop[route][busstop][bs_Type] = type;
         SetPVarInt(playerid, "placing-bus-stop", 1);
         SetPVarInt(playerid, "placing-bus-stop-route", route);
         SetPVarInt(playerid, "placing-bus-stop-id", busstop);
@@ -91,17 +91,17 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
     }
     else if(strcmp(action, "name", true) == 0)
     {
-        format(BusStops[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "%s", param);
+        format(BusStop[route][busstop][bs_Name], MAX_BUS_STOP_NAME, "%s", param);
         MruMessageGoodInfo(playerid, sprintf("Zmieni³eœ nazwê przystanku na %s", param));
-        BusStops[route][busstop][bs_Active] = 1;
+        BusStop[route][busstop][bs_Active] = 1;
         RecreateBusStops(route);
         Streamer_Update(playerid);
     }
     else if(strcmp(action, "district", true) == 0)
     {
-        format(BusStops[route][busstop][bs_District], MAX_BUS_STOP_DISTRICT, "%s", param);
+        format(BusStop[route][busstop][bs_District], MAX_BUS_STOP_DISTRICT, "%s", param);
         MruMessageGoodInfo(playerid, sprintf("Zmieni³eœ dzielnicê przystanku na %s", param));
-        BusStops[route][busstop][bs_Active] = 1;
+        BusStop[route][busstop][bs_Active] = 1;
         RecreateBusStops(route);
         Streamer_Update(playerid);
     }
@@ -109,9 +109,9 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
     {
         new Float:x, Float:y, Float:z;
         GetPlayerPos(playerid, x, y, z);
-        BusStops[route][busstop][bs_StopX] = x;
-        BusStops[route][busstop][bs_StopY] = y;
-        BusStops[route][busstop][bs_StopZ] = z;
+        BusStop[route][busstop][bs_StopX] = x;
+        BusStop[route][busstop][bs_StopY] = y;
+        BusStop[route][busstop][bs_StopZ] = z;
     
         SetPlayerCheckpoint(playerid, x, y, z, 4.0);
         MruMessageGoodInfo(playerid, "Checkpoint zapisany w miejscu, w którym stoisz.");
@@ -123,7 +123,7 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
         {
             for(new j; j < eBusStop; j++)
             {
-                tmp[i][j] = BusStops[route][i][j];
+                tmp[i][j] = BusStop[route][i][j];
             }
         }
         new substract = 0;
@@ -136,7 +136,7 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
             }
             for(new j; j < eBusStop; j++)
             {
-                BusStops[route][i - substract][j] = tmp[i][j];
+                BusStop[route][i - substract][j] = tmp[i][j];
             }
         }
         RecreateBusStops(route);
@@ -150,7 +150,7 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
         {
             for(new j; j < eBusStop; j++)
             {
-                tmp[i][j] = BusStops[route][i][j];
+                tmp[i][j] = BusStop[route][i][j];
             }
         }
         new substract = 0;
@@ -158,15 +158,15 @@ command_busstop_Impl(playerid, route, busstop, action[32], param[128])
         {
             if(i == busstop)
             {
-                BusStops[route][i][bs_Active] = 1;
-                format(BusStops[route][i][bs_Name], MAX_BUS_STOP_NAME, "TODO");
-                format(BusStops[route][i][bs_District], MAX_BUS_STOP_DISTRICT, "TODO");
+                BusStop[route][i][bs_Active] = 1;
+                format(BusStop[route][i][bs_Name], MAX_BUS_STOP_NAME, "TODO");
+                format(BusStop[route][i][bs_District], MAX_BUS_STOP_DISTRICT, "TODO");
                 substract = 1;
                 continue;
             }
             for(new j; j < eBusStop; j++)
             {
-                BusStops[route][i][j] = tmp[i - substract][j];
+                BusStop[route][i][j] = tmp[i - substract][j];
             }
         }
         RecreateBusStops(route);

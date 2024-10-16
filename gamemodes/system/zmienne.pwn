@@ -641,7 +641,6 @@ new GettingJob[MAX_PLAYERS];
 new ApprovedLawyer[MAX_PLAYERS];
 new CallLawyer[MAX_PLAYERS];
 new WantLawyer[MAX_PLAYERS];
-new CP[MAX_PLAYERS];
 new MoneyMessage[MAX_PLAYERS];
 new Condom[MAX_PLAYERS];
 new SexOffer[MAX_PLAYERS];
@@ -1052,7 +1051,7 @@ ZerujZmienne(playerid)
 	SelectCharID[playerid] = 0; SelectCharPlace[playerid] = 0; ChosenSkin[playerid] = 0;
 	GettingJob[playerid] = 0;
     ApprovedLawyer[playerid] = 0; CallLawyer[playerid] = 0; WantLawyer[playerid] = 0; UsedFind[playerid] = 0;
-	CP[playerid] = 0; ScigaSie[playerid] = 666;
+	ScigaSie[playerid] = 666;
 	CarOffer[playerid] = 999; CarID[playerid] = 0; CarCalls[playerid] = 0; GraczDajacy[playerid] = 999; GraczDajacyNeon[playerid] = 999;
 	MoneyMessage[playerid] = 0; Condom[playerid] = 0; GraczDajacyLodz[playerid] = 999; IDAuta[playerid] = 0; //JaKupuje[playerid] = 0; JaWymieniam[playerid] = 0;
 	SexOffer[playerid] = 999; SexPrice[playerid] = 0; GraczDajacySamolot[playerid] = 999; IDLodzi[playerid] = 0; IDSamolotu[playerid] = 0;
@@ -1232,19 +1231,12 @@ ZerujZmienne(playerid)
 	//Kubi
     RADIO_CHANNEL[playerid] = 0.0;
     TOWER_Blocked[playerid] = false;
-	PlayerInfo[playerid][pNatrasiejest] = 0;
-	PlayerInfo[playerid][pDrzwibusazamkniete] = 0;
 	PlayerInfo[playerid][pPrawojazdypytania] = 0;
 	PlayerInfo[playerid][pPrawojazdydobreodp] = 0;
 	PlayerInfo[playerid][pPrawojazdyzleodp] = 0;
 	PlayerInfo[playerid][pSprawdzczyzdalprawko] = 0;
 	PlayerInfo[playerid][pMinalczasnazdpr] = 0;
 	PlayerInfo[playerid][pWtrakcietestprawa] = 0;
-	PlayerInfo[playerid][pLinia55] = 0;
-	PlayerInfo[playerid][pLinia72] = 0;
-	PlayerInfo[playerid][pLinia82] = 0;
-	PlayerInfo[playerid][pLinia85] = 0;
-	PlayerInfo[playerid][pLinia96] = 0;
 	PlayerInfo[playerid][pBiletsamolotowy] = 0;
  	PlayerInfo[playerid][pWsamolocieLS] = 0;
   	PlayerInfo[playerid][pWlociej] = 0;
