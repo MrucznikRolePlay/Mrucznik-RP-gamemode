@@ -427,6 +427,13 @@ GenerateFrontBusinessIncome(bizId, profit)
 		SejfR_Add(org, profit);
 	}
 	RedisIncrBy(RedisFrontBizKey(bizId, "leaderProfit"), profit);
+	RedisIncrBy(RedisFrontBizKey(bizId, "leaderProfit-global"), profit);
+}
+
+AccountBusinessProfit(bizId, profit)
+{
+	RedisIncrBy(RedisFrontBizKey(bizId, "profit"), profit);
+	RedisIncrBy(RedisFrontBizKey(bizId, "profit-global"), profit);
 }
 
 IsAtFrontBusinessInteriorType(playerid, type)

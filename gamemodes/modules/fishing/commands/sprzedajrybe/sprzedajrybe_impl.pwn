@@ -33,7 +33,7 @@ command_sprzedajrybe_Impl(playerid, fishid)
 		FrontBusiness[bizId][Type] == FRONT_BIZ_TYPE_RESTAURANT &&
 		GetPlayerFrontBusinessProximity(playerid, bizId) < 10.0)
 	{
-		isAtOwnRestaurant = 1;
+		isAtOwnRestaurant = bizId;
 	}
 	
     if(!PlayerToPoint(100, playerid, -30.875, -88.9609, 1004.53) && !isAtOwnRestaurant)//centerpoint 24-7
@@ -93,6 +93,7 @@ SprzedajeRybe(playerid, fishid, isAtOwnRestaurant)
 	if(isAtOwnRestaurant)
 	{
 		moneyPerKg = 21;
+		AccountBusinessProfit(isAtOwnRestaurant, moneyPerKg*7);
 	}
 	SendClientMessage(playerid, COLOR_GREY, sprintf("** Sprzeda³eœ rybê numer [%d]!", fishid));
 	SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("Sprzeda³eœ rybê: %s, wa¿¹c¹ %d kg. Otrzymujesz %d$.", FishName, FishWeight, FishWeight * moneyPerKg));

@@ -216,6 +216,8 @@ FrontBiz_OnPayDay(playerid)
 
 			RedisIncrBy(RedisFrontBizKey(i, "profit"), frontBizIncome);
 			RedisIncrBy(RedisFrontBizKey(i, "leaderProfit"), singleBizLeaderIncome);
+			RedisIncrBy(RedisFrontBizKey(i, "profit-player"), frontBizIncome);
+			RedisIncrBy(RedisFrontBizKey(i, "leaderProfit-player"), singleBizLeaderIncome);
 		}
 	}
 
