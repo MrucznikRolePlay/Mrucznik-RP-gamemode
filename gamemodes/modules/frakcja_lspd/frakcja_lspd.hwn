@@ -43,7 +43,8 @@ new Float:DutyPositions[][4] = {
     {5.0, 268.1760, 185.0269, 1008.1719}, // Komisariat w LV z GTA SA czesc druga
     {3.8, 597.1039, -1474.2688, 80.4357}, // Dach FBI
     {3.0, -3835.0269, 1744.9597, 6.7855}, // Ty³y komisariatu Vice City Washinnton Beach
-    {3.0, -3690.9272, 2763.6113, 6.5688} // Komisariat Vice City obok North Point Mall
+    {3.0, -3690.9272, 2763.6113, 6.5688}, // Komisariat Vice City obok North Point Mall
+    {3.0, -5880.9487, 2111.9150, 9.3275} // Duty baza NG Vice City
 };
 
 new Float:ArrestPositions[][4] = {
