@@ -1,7 +1,7 @@
 {
     "name": "praca_medyk",
     "description": "Praca medyka",
-    "author": "mrucznik",
+    "author": "PECET & mrucznik",
     "timers": true,
     "callbacks": true,
     "mysql": false,

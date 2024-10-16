@@ -109,7 +109,6 @@ Mrucznik® Role Play ----> stworzy³ Mrucznik
 #include <dialogs>
 #include <fadescreen>
 #include <timestamp>
-#include <systempozarow>   //System Po¿arów v0.1 by PECET
 #include <true_random>
 #include <PreviewModelDialog>
 #include <vector>
