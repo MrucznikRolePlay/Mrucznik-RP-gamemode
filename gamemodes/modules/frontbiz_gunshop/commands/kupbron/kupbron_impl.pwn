@@ -69,7 +69,7 @@ ShowBuyGunDialog(playerid)
         {
             strcat(string, sprintf(INCOLOR_RED"%s\tnie sprzedajemy\n", gunName));
         }
-        else if(Rodzina_Mats[org] < GunInfo[gunIdx][GunMaterialsCost] * 2)
+        else if(Rodzina_Mats[org] < GunInfo[gunIdx][GunMaterialsCost])
         {
             strcat(string, sprintf(INCOLOR_RED"%s\tbrak materia³ów\n", gunName));
         }
