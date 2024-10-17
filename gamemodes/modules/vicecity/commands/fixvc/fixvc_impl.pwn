@@ -67,7 +67,8 @@ ptask CheckFixVc[1000](playerid)
     new now = gettime();
     if(IsPlayerAtViceCity(playerid) && 
         CA_IsPlayerInWater(playerid, unused, unused) &&
-        now - GetPVarInt(playerid, "fixvc-message") > 300_000) // message every 5min
+        now - GetPVarInt(playerid, "fixvc-message") > 300_000 &&
+        GetPlayerState(playerid) != PLAYER_STATE_SPECTATING) // message every 5min
     {
         new Float:x, Float:y, Float:z, Float:foundZ;
         GetPlayerPos(playerid, x, y, z);

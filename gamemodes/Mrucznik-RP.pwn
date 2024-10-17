@@ -1171,7 +1171,7 @@ public OnPlayerConnect(playerid)
 
 
 	//Pocz¹tkowe ustawienia:
-    saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 15*1000, 1, "i", playerid);
+    saveMyAccountTimer[playerid] = SetTimerEx("SaveMyAccountTimer", 60*1000, 1, "i", playerid);
 	
 	//biz
 	ResetBizOffer(playerid);
