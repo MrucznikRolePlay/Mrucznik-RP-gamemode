@@ -79,6 +79,7 @@ new Map:VehicleFareInfo;
 new DrivingBusRoute[MAX_PLAYERS] = {-1, ...};
 new CurrentBusStop[MAX_PLAYERS];
 new BusDoors[MAX_PLAYERS];
+new BusStartTime[MAX_PLAYERS];
 //------------------<[ Forwardy: ]>--------------------
 
 //-----------------<[ Zerowanie: ]>-------------------
@@ -96,6 +97,7 @@ Driver_ZerujZmienne(playerid)
 	TaxiAccepted[playerid] = 999;
 	DrivingBusRoute[playerid] = -1;
 	CurrentBusStop[playerid] = 0;
+	BusStartTime[playerid] = 0;
 }
 
 //end

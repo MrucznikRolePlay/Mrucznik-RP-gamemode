@@ -869,7 +869,6 @@ new poddaje[MAX_PLAYERS];//poddaje siê
 new lowcap[MAX_PLAYERS];//³owca nagród który proponowa³ poddanie siê
 new lowcaz[MAX_PLAYERS];//³owca nagród dostaje zlecenie
 new okradziony[MAX_PLAYERS];//zabierzportfel
-new BusCzit[MAX_PLAYERS];
 new IDDomu[MAX_PLAYERS];//SYSTEM DOMÓW
 new MatsGood[MAX_PLAYERS];
 new KradniecieWozu[MAX_PLAYERS];
@@ -1023,7 +1022,6 @@ ZerujZmienne(playerid)
 	SpamujeMechanik[playerid] = 0;//mechanik
 	AntySpam[playerid] = 0;
 	CenaDawanegoAuta[playerid] = 0;
-	BusCzit[playerid] = 0;
 	GraczWymiany[playerid] = 999;
 	CenaWymiany[playerid] = 0;
 	PlayerInfo[playerid] [pBiletsamolotowy] = 0;

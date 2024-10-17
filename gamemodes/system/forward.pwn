@@ -47,7 +47,6 @@ forward spamujewl(playerid);
 forward AntySpamMechanik(playerid);
 forward PoscigTimer(playerid);
 forward AntySpamTimer(playerid);
-forward AntyBusCzit(playerid);
 forward spamujebronia(playerid);
 forward odpalanie(playerid);
 forward udalo1(playerid); //Odpalanie auta

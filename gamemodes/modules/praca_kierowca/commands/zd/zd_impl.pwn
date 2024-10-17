@@ -38,14 +38,34 @@ command_zd_Impl(playerid)
 		return 1;
 	}
 
+	new route = DrivingBusRoute[playerid];
+	if(route != -1)
+	{
+		MruMessageFail(playerid, "Nie wykonujesz aktualnie ¿adnej trasy autobusowej.");
+		return 1;
+	}
+
 	if(BusDoors[playerid] == 0)
 	{
 		MruMessageFail(playerid, "Drzwi autobusu s¹ ju¿ zamkniête !");
 		return 1;
 	}
 
+	new timerDelay = 1000;
+	if(BusRoute[route][br_Time] > 0)
+	{
+		new timeDiff = gettime() - BusStartTime[playerid];
+		new stops = GetRouteBusStopsCount(route);
+		new timePerStop = (BusRoute[route][br_Time] / 3) / stops;
+		new okDiff = timePerStop * CurrentBusStop[playerid];
+		if(timeDiff < okDiff)
+		{
+			timerDelay = okDiff - timeDiff;
+		}
+	}
+
 	ChatMe(playerid, "naciska guzik i powoli zamyka drzwi");
-	defer ZamykanieDrzwi(playerid);
+	defer ZamykanieDrzwi[timerDelay](playerid);
 	GameTextForPlayer(playerid, "~n~~n~~n~~n~~n~~n~~n~Trwa zamykanie drzwi...", 4000, 3);
     return 1;
 }

@@ -263,6 +263,7 @@ StartBusRoute(playerid, route)
 {
 	DrivingBusRoute[playerid] = route;
 	CurrentBusStop[playerid] = 0;
+	BusStartTime[playerid] = gettime();
 	SetPlayerRaceCheckpoint(playerid, 0, 
 		BusStop[route][0][bs_StopX], BusStop[route][0][bs_StopY], BusStop[route][0][bs_StopZ],
 		BusStop[route][1][bs_StopX], BusStop[route][1][bs_StopY], BusStop[route][1][bs_StopZ],
@@ -278,6 +279,13 @@ StartBusRoute(playerid, route)
 
 Przystanek(playerid, vehicleid, route, busstop)
 {
+	// AC
+	if(BusDoors[playerid] == 1)
+	{
+		ProcessACCode(playerid, AC_CODE_VEH_TP);
+		return 1;
+	}
+
 	new next = busstop + 1;
 	new afterNext = busstop + 2;
 	new end;

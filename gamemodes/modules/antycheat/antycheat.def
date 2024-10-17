@@ -33,5 +33,6 @@
 #define MAX_TAKEN_DAMAGE_ISSUERS 20
 
 #define AC_CODE_FAKEKILL 53
+#define AC_CODE_VEH_TP 3
 
 //end

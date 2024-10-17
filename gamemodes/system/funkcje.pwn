@@ -935,11 +935,6 @@ AntySpam[playerid] = 0;
 return 1;
 }
 
-public AntyBusCzit(playerid){
-BusCzit[playerid] = 0;
-return 1;
-}
-
 public odpalanie(playerid)
 {
 	new engine, lights, alarm, doors, bonnet, boot, objective, Float:health, sendername[MAX_PLAYER_NAME], string[256];
