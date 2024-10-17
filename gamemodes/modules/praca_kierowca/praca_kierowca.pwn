@@ -265,8 +265,8 @@ StartBusRoute(playerid, route)
 	CurrentBusStop[playerid] = 0;
 	BusStartTime[playerid] = gettime();
 	SetPlayerRaceCheckpoint(playerid, 0, 
-		BusStop[route][0][bs_StopX], BusStop[route][0][bs_StopY], BusStop[route][0][bs_StopZ],
-		BusStop[route][1][bs_StopX], BusStop[route][1][bs_StopY], BusStop[route][1][bs_StopZ],
+		BusStop[route][0][bs_StopX], BusStop[route][0][bs_StopY], BusStop[route][0][bs_StopZ] - 0.5,
+		BusStop[route][1][bs_StopX], BusStop[route][1][bs_StopY], BusStop[route][1][bs_StopZ] - 0.5,
 		4.0);
 
 	PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
@@ -295,21 +295,21 @@ Przystanek(playerid, vehicleid, route, busstop)
 
 		// koniec trasy
 		PlayerPlaySound(playerid, 182, 0.0, 0.0, 0.0);
-		SetTimerEx("StopPlayerSound", 8200, false, "%d", playerid);
+		SetTimerEx("StopPlayerSound", 7500, false, "%d", playerid);
 	}
 	else if(afterNext == MAX_BUS_STOPS-1 || !BusStop[route][afterNext][bs_Active])
 	{
 		// ostatni przystanek
 		SetPlayerRaceCheckpoint(playerid, 1, 
-			BusStop[route][next][bs_StopX], BusStop[route][next][bs_StopY], BusStop[route][next][bs_StopZ],
+			BusStop[route][next][bs_StopX], BusStop[route][next][bs_StopY], BusStop[route][next][bs_StopZ] - 0.5,
 			0.0, 0.0, 0.0, 4.0);
 		PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 	}
 	else
 	{
 		SetPlayerRaceCheckpoint(playerid, 0, 
-			BusStop[route][next][bs_StopX], BusStop[route][next][bs_StopY], BusStop[route][next][bs_StopZ],
-			BusStop[route][afterNext][bs_StopX], BusStop[route][afterNext][bs_StopY], BusStop[route][afterNext][bs_StopZ],
+			BusStop[route][next][bs_StopX], BusStop[route][next][bs_StopY], BusStop[route][next][bs_StopZ] - 0.5,
+			BusStop[route][afterNext][bs_StopX], BusStop[route][afterNext][bs_StopY], BusStop[route][afterNext][bs_StopZ] - 0.5,
 			4.0);
 		PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 	}
@@ -324,16 +324,17 @@ Przystanek(playerid, vehicleid, route, busstop)
 	DajKase(playerid, money);
 	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %s", GetPlayerLogName(playerid), money, BusRoute[route][br_Name]);
 
-	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd by zamkn¹æ))");
-	TogglePlayerControllable(playerid, 0);
-	BusDoors[playerid] = 1;
-
 	if(end)
 	{
 		EndBusRoute(playerid, vehicleid, route);
 	}
 	else
 	{
+		CurrentBusStop[playerid]++;
+		ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd by zamkn¹æ))");
+		TogglePlayerControllable(playerid, 0);
+		BusDoors[playerid] = 1;
+
 		new routeText[1024];
 		new uniqDistricts;
 		for(new i=busstop+1; i <= MAX_BUS_STOPS; i++)
@@ -348,10 +349,11 @@ Przystanek(playerid, vehicleid, route, busstop)
 			}
 			if(uniqDistricts % 5 == 0)
 			{
-				strcat(routeText, "\n{A0A0A0}Trasa:{e2dff3} ");
+				strcat(routeText, "\n");
 			}
 			uniqDistricts++;
 			strcat(routeText, BusStop[route][i][bs_District]);
+			strcat(routeText, " - ");
 		}
 		new routeLen = strlen(routeText);
 		if(routeLen > 3)
@@ -360,8 +362,8 @@ Przystanek(playerid, vehicleid, route, busstop)
 		new busText[MAX_BUS_STOPS * (MAX_BUS_STOP_NAME + 3) + 1024];
 		format(busText, sizeof(busText), 
 			"%s\n\
-			{A0A0A0}Nastêpny przystanek: {e2dff3}%s\n\
-			%s", 
+			{B0B040}Nastêpny przystanek: {e2dff3}%s\
+			{B0B040}Trasa:{e2dff3}%s", 
 			BusRoute[route][br_Name],
 			BusStop[route][next][br_Name],
 			routeText);

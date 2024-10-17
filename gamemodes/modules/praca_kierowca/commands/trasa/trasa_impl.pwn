@@ -75,11 +75,11 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-
 			new route = listitem;
 			new busStops = GetRouteBusStopsCount(route);
 			new string[4096];
 			new routeText[1024];
+			new uniqDistricts;
 			for(new i; i<MAX_BUS_STOPS; i++)
 			{
 				if(!BusStop[route][i][bs_Active])
@@ -90,6 +90,8 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 				{
 					continue;
 				}
+				uniqDistricts++;
+				if(uniqDistricts % 5 == 0) strcat(routeText, "\n");
 				strcat(routeText, sprintf("%s - ", BusStop[route][i][bs_District]));
 			}
 			new routeLen = strlen(routeText);
@@ -98,7 +100,7 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 
 			format(string, sizeof(string), INCOLOR_GREEN"%s\n\
 				"INCOLOR_DIALOG"%s\n\
-				Trasa: %s\n\
+				Trasa: %s\n\n\
 				Trasa dostêpna od %d skilla\n\
 				Ka¿dy przystanek to %d procent szans na zwiêkszenie skilla o 1 punkt\n\
 				Za ka¿dy przejechany przystanek dostaniesz %d$\n\
