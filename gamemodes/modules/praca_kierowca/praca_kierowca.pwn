@@ -272,7 +272,7 @@ StartBusRoute(playerid, route)
 	PlayerPlaySound(playerid, 6401, 0.0, 0.0, 0.0);
 	SendClientMessage(playerid, COLOR_YELLOW, sprintf("|________________%s_________________|", BusRoute[route][br_Name]));
 	SendClientMessage(playerid, COLOR_GREEN, "Nie zapomnij rozpocz¹æ s³u¿by! Wpisz {FFFF00}/fare [cena]");
-	SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyæ po wjechaniu w przystanek wpisz {FFFF00}/zd lub zatr¹b");
+	SendClientMessage(playerid, COLOR_GREEN, "Jezeli chcesz ruszyæ po wjechaniu w przystanek wpisz {FFFF00}/zd lub C");
 	SendClientMessage(playerid, COLOR_GREEN, "Je¿eli bêdziesz chcia³ przerwaæ trasê wczeœniej wpisz {FFFF00}/zakoncztrase");
 	SendClientMessage(playerid, COLOR_YELLOW,         "|_____________>>/fare<<_____________|");
 }
@@ -325,7 +325,7 @@ Przystanek(playerid, vehicleid, route, busstop)
 	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %s", GetPlayerLogName(playerid), money, BusRoute[route][br_Name]);
 
 	CurrentBusStop[playerid]++;
-	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd lub zatr¹b by zamkn¹æ))");
+	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd lub C by zamkn¹æ))");
 	TogglePlayerControllable(playerid, 0);
 	BusDoors[playerid] = 1;
 
