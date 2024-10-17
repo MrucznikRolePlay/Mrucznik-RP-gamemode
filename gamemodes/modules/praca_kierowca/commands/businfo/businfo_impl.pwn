@@ -68,7 +68,7 @@ command_businfo_dialog(playerid, dialogid, response, listitem, inputtext[])
                         /fare [cena] - pozwala wejœæ na s³u¿bê i ustaliæ cenê za bilet\n\
                         /trasa - rozpoczyna kurs wed³ug wyznaczonej trasy\n\
                         /zakoncztrase - przerywa trasê\n\
-                        /zd lub zatr¹bienie - zamyka drzwi i umo¿liwia ruszenie z przystanku\n",
+                        /zd lub C - zamyka drzwi i umo¿liwia ruszenie z przystanku\n",
                         "Wróæ","WyjdŸ");
                 }
             }
