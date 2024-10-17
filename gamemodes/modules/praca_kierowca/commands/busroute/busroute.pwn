@@ -55,11 +55,11 @@ YCMD:busroute(playerid, params[], help)
         return 1;
     }
     //fetching params
-    new route, action[32], param[128];
-    if(sscanf(params, "ds[32]S()[128]", route, action, param))
+    new route, action[32], param[256];
+    if(sscanf(params, "ds[32]S()[256]", route, action, param))
     {
         sendTipMessage(playerid, "U¿yj /busroute [id trasy] [akcja] [parametry] ");
-        sendTipMessage(playerid, "Dostêpne akcje: describe | name | color| money | skill | time | enable");
+        sendTipMessage(playerid, "Dostêpne akcje: describe | name | color| money | skill | skillchance | time | enable");
         return 1;
     }
     

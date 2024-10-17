@@ -4150,6 +4150,15 @@ public OnPlayerKeyStateChange(playerid,newkeys,oldkeys)
 {
 	camera_OnPlayerKeyStateChange(playerid, newkeys, oldkeys);
 
+	if(BusDoors[playerid] == 1 && IsPlayerInAnyVehicle(playerid))
+	{
+		if(PRESSED(KEY_CROUCH)) // horn
+		{
+			RunCommand(playerid, "/zd", "");
+			return 1;
+		}
+	}
+
     //09.06.2014
     if(Teleturniejstart == 1)
 	{

@@ -36,6 +36,8 @@ command_zaufanyggracz()
     new command = Command_GetID("zaufanyggracz");
 
     //aliases
+    Command_AddAlt(command, "zaufanygracz");
+    Command_AddAlt(command, "zg");
     
 
     //permissions

@@ -37,6 +37,7 @@ command_businfo()
 
     //aliases
     Command_AddAlt(command, "bus");
+    Command_AddAlt(command, "buspomoc");
     
 
     //permissions
