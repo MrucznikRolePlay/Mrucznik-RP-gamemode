@@ -510,13 +510,13 @@ timer RestrictFromBusinessArea[100](playerid, bizId)
 			new vehicleid = GetPlayerVehicleID(playerid);
 			SetVehicleOppositeVelocity(vehicleid, 
 				FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], FrontBusiness[bizId][OutZ],
-				5.0, 1.0);
+				0.5, 0.10);
 		}
 		else
 		{
 			SetPlayerOppositeVelocity(playerid, 
 				FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], FrontBusiness[bizId][OutZ],
-				5.0, 1.0);
+				0.5, 0.1);
 		}
 
 		defer RestrictFromBusinessArea(playerid, bizId);
