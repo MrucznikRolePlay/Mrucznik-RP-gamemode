@@ -3924,7 +3924,7 @@ OnPlayerLogin(playerid, password[])
 		//fix bug maska
 		foreach(new i : Player){
 			if(IsPlayerConnected(i) && playerid != INVALID_PLAYER_ID && i != playerid && !IsPlayerNPC(playerid)) {
-				if(PlayerInfo[i][pUID] == PlayerInfo[playerid][pUID]) {
+				if(PlayerInfo[i][pUID] == PlayerInfo[playerid][pUID] && PlayerInfo[playerid][pUID] != 0) {
 					SendClientMessage(playerid, COLOR_PANICRED, "Konto jest juz zalogowane!");
 					KickEx(playerid);
 					return 1;
