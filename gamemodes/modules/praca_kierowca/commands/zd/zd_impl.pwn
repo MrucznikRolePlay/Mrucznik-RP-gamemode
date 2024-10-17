@@ -56,7 +56,7 @@ command_zd_Impl(playerid)
 	{
 		new timeDiff = gettime() - BusStartTime[playerid];
 		new stops = GetRouteBusStopsCount(route);
-		new timePerStop = (BusRoute[route][br_Time] / 3) / stops;
+		new timePerStop = (BusRoute[route][br_Time] / 2) / stops;
 		new okDiff = timePerStop * CurrentBusStop[playerid];
 		if(timeDiff < okDiff)
 		{

@@ -324,17 +324,20 @@ Przystanek(playerid, vehicleid, route, busstop)
 	DajKase(playerid, money);
 	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %s", GetPlayerLogName(playerid), money, BusRoute[route][br_Name]);
 
+	CurrentBusStop[playerid]++;
+	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd by zamkn¹æ))");
+	TogglePlayerControllable(playerid, 0);
+	BusDoors[playerid] = 1;
+
 	if(end)
 	{
+		defer ZamykanieDrzwi(playerid);
+		MruMessageGoodInfo(playerid, "W nagrodê za ukoñczenie ca³ej trasy, Twój autobus zostaje zatankowany do pe³na.");
+		Gas[vehicleid] = GasMax;
 		EndBusRoute(playerid, vehicleid, route);
 	}
 	else
 	{
-		CurrentBusStop[playerid]++;
-		ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd by zamkn¹æ))");
-		TogglePlayerControllable(playerid, 0);
-		BusDoors[playerid] = 1;
-
 		new routeText[1024];
 		new uniqDistricts;
 		for(new i=busstop+1; i <= MAX_BUS_STOPS; i++)
@@ -362,7 +365,7 @@ Przystanek(playerid, vehicleid, route, busstop)
 		new busText[MAX_BUS_STOPS * (MAX_BUS_STOP_NAME + 3) + 1024];
 		format(busText, sizeof(busText), 
 			"%s\n\
-			{B0B040}Nastêpny przystanek: {e2dff3}%s\
+			{B0B040}Nastêpny przystanek: {e2dff3}%s\n\
 			{B0B040}Trasa:{e2dff3}%s", 
 			BusRoute[route][br_Name],
 			BusStop[route][next][br_Name],
