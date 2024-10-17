@@ -38,6 +38,13 @@ command_trasa_Impl(playerid)
 		return 1;
 	}
 
+	new route = DrivingBusRoute[playerid];
+	if(route != -1)
+	{
+		MruMessageFail(playerid, "Wykonujesz ju¿ trasê autobusow¹, jeœli chcesz j¹ zakoñczyæ i zmieniæ, wpisz /zakoncztrase.");
+		return 1;
+	}
+
 	ShowTrasaDialog(playerid);
     return 1;
 }

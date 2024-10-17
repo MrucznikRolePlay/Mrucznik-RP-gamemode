@@ -110,7 +110,7 @@ command_busroute_Impl(playerid, route, action[32], param[256])
         new time = strval(param);
         if(time <= 0)
         {
-            MruMessageFail(playerid, "Czas musi byæ wiêkszy od 0, lub 0 - brak sprawdzania czy gracz nie u¿ywa³ czitów.");
+            MruMessageFail(playerid, "Czas w sekundach musi byæ wiêkszy od 0, lub 0 - brak sprawdzania czy gracz nie u¿ywa³ czitów.");
             return 1;
         }
         BusRoute[route][br_Time] = time;
