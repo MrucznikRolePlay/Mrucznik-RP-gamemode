@@ -365,8 +365,8 @@ Przystanek(playerid, vehicleid, route, busstop)
 		new busText[MAX_BUS_STOPS * (MAX_BUS_STOP_NAME + 3) + 1024];
 		format(busText, sizeof(busText), 
 			"%s\n\
-			{B0B040}Nastêpny przystanek: {e2dff3}%s\n\
-			{B0B040}Trasa:{e2dff3}%s", 
+			{B0B040}Nastêpny przystanek:{e2dff3} %s\n\
+			{B0B040}Trasa:{e2dff3} %s", 
 			BusRoute[route][br_Name],
 			BusStop[route][next][br_Name],
 			routeText);
