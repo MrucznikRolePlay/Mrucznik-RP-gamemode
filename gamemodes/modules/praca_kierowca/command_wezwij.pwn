@@ -77,14 +77,14 @@ wezwij_heli(playerid)
 wezwij_bus(playerid)
 {
     new string[MAX_MESSAGE_LENGTH];
-	if(BusDrivers <= 1)
+	if(BusDrivers <= 0)
 	{
-		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma kierowców autobusu, spróbuj póŸniej !");
+		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma kierowców autobusu, spróbuj póŸniej!");
 		return 1;
 	}
 	if(TransportDuty[playerid] > 0)
 	{
-		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnych autobusów !");
+		sendTipMessageEx(playerid, COLOR_GREY, "Nie ma wolnych autobusów!");
 		return 1;
 	}
 	format(string, sizeof(string), "** %s potrzebuje autobusu. (wpisz /akceptuj bus aby zaakceptowaæ zlecenie)", GetNick(playerid));
