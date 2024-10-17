@@ -107,10 +107,10 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 				BusRoute[route][br_SkillChance],
 				BusRoute[route][br_MoneyPerStop],
 				busStops,
-				BusRoute[route][br_Time],
+				BusRoute[route][br_Time] / 60,
 				BusRoute[route][br_MoneyPerStop] * busStops);
 			
-			ShowPlayerDialogEx(playerid, 8156, DIALOG_STYLE_LIST, "Wybierz trasê autobusow¹", 
+			ShowPlayerDialogEx(playerid, 8156, DIALOG_STYLE_MSGBOX, "Wybierz trasê autobusow¹", 
 				string, "Rozpocznij", "Wróæ");
 			SetPVarInt(playerid, "bus-route", route);
 		}

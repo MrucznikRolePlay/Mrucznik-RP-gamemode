@@ -3035,6 +3035,10 @@ IsAtGasStation(playerid)
 		{// stacja benzynowa ocean beach 2
 			return 1;
 		}
+		if(IsPlayerInRangeOfPoint(playerid, 25.0, -5208.868164, 1355.265625, 6.349887))
+		{// stacja benzynowa mechy sunshine autos
+			return 1;
+		}
 	}
 	return 0;
 }
