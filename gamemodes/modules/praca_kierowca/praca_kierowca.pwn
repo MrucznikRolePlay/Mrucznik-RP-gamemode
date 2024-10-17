@@ -350,11 +350,11 @@ Przystanek(playerid, vehicleid, route, busstop)
 			{
 				continue;
 			}
+			uniqDistricts++;
 			if(uniqDistricts % 5 == 0)
 			{
 				strcat(routeText, "\n");
 			}
-			uniqDistricts++;
 			strcat(routeText, BusStop[route][i][bs_District]);
 			strcat(routeText, " - ");
 		}
