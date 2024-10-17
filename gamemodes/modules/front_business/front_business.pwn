@@ -503,7 +503,7 @@ timer RestrictFromBusinessArea[100](playerid, bizId)
 		{
 			return 1;
 		}
-		GameTextForPlayer(playerid, "~r~Umarles tutaj, nie mozesz brac udzialu w przejmowaniu.", 1000, 1);
+		GameTextForPlayer(playerid, "~r~Umarles tutaj, nie mozesz brac udzialu w przejmowaniu.", 5000, 1);
 
 		if(IsPlayerInAnyVehicle(playerid))
 		{
