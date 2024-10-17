@@ -23,7 +23,7 @@
 //
 
 //------------------<[ Implementacja: ]>-------------------
-command_busroute_Impl(playerid, route, action[32], param[128])
+command_busroute_Impl(playerid, route, action[32], param[256])
 {
     if(PlayerInfo[playerid][pAdmin] != 5000)
     {
