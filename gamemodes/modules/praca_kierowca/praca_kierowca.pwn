@@ -431,7 +431,7 @@ SaveBusRoute(route)
 	if(file)
 	{
 		// save route info
-		fwrite(file, sprintf("%s|%d|%d|%d|%d|%d|%d|%s\n", 
+		fwrite(file, sprintf("%s|%d|%d|%d|%d|%d|%d|%s\r\n", 
 			BusRoute[route][br_Name], 
 			BusRoute[route][br_Color], 
 			BusRoute[route][br_MoneyPerStop], 
@@ -447,7 +447,7 @@ SaveBusRoute(route)
 			if(!BusStop[route][busstop][bs_Active]) break;
 
 			new buf[1024];
-			format(buf, sizeof(buf), "%d|%s|%s|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f\n", 
+			format(buf, sizeof(buf), "%d|%s|%s|%d|%f|%f|%f|%f|%f|%f|%f|%f|%f\r\n", 
 				BusStop[route][busstop][bs_Active],
 				BusStop[route][busstop][bs_Name],
 				BusStop[route][busstop][bs_District],

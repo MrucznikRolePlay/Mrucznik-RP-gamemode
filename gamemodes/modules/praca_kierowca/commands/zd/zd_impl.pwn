@@ -39,7 +39,7 @@ command_zd_Impl(playerid)
 	}
 
 	new route = DrivingBusRoute[playerid];
-	if(route != -1)
+	if(route == -1)
 	{
 		MruMessageFail(playerid, "Nie wykonujesz aktualnie ¿adnej trasy autobusowej.");
 		return 1;
