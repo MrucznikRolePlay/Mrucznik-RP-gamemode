@@ -328,6 +328,7 @@
 #include "frontbiz_gunshop\commands\frontbiz_gunshop_commands.pwn"
 #include "camera\commands\camera_commands.pwn"
 #include "oferty\commands\oferty_commands.pwn"
+#include "praca_medyk\commands\praca_medyk_commands.pwn"
 #include "praca_diler\commands\praca_diler_commands.pwn"
 #include "player_attachments\commands\player_attachments_commands.pwn"
 #include "napady\commands\napady_commands.pwn"

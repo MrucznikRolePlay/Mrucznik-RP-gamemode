@@ -456,7 +456,6 @@
 #include "pban\pban.pwn"
 #include "pokazdowod\pokazdowod.pwn"
 #include "mi\mi.pwn"
-#include "sprzedajapteczka\sprzedajapteczka.pwn"
 #include "wyrzucbronie\wyrzucbronie.pwn"
 #include "sprzedajalkohol\sprzedajalkohol.pwn"
 #include "dajscene\dajscene.pwn"
@@ -1041,7 +1040,6 @@ hook OnGameModeInit()
     command_pban();
     command_pokazdowod();
     command_mi();
-    command_sprzedajapteczka();
     command_wyrzucbronie();
     command_sprzedajalkohol();
     command_dajscene();

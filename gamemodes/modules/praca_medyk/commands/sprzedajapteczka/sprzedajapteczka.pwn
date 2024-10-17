@@ -36,6 +36,7 @@ command_sprzedajapteczka()
     new command = Command_GetID("sprzedajapteczka");
 
     //aliases
+    Command_AddAlt(command, "sprzedajapteczke");
     
 
     //permissions
