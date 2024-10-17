@@ -73,7 +73,7 @@ LoadFrontBusinesses()
 
 		CreateDynamicPickup(GetFrontBusinessPickup(FrontBusiness[i][Type]), 1, 
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ],
-			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt]);
+			FrontBusiness[i][OutVw], FrontBusiness[i][OutInt], INVALID_PLAYER_ID, FrontBusiness[i][BizGangZoneSize]);
 
 		FrontBusiness[i][Out3DText] = CreateDynamic3DTextLabel(FrontBusiness[i][Name], color, 
 			FrontBusiness[i][OutX], FrontBusiness[i][OutY], FrontBusiness[i][OutZ] + 0.2, 
@@ -493,6 +493,35 @@ IsAtCasino(playerid)
 		return 1;
 	}
 	return 0;
+}
+
+timer RestrictFromBusinessArea[100](playerid, bizId)
+{
+	if(IsPlayerInDynamicArea(playerid, FrontBusiness[bizId][GangZoneArea]))
+	{
+		if(!FrontBusiness[bizId][TakeoverActive])
+		{
+			return 1;
+		}
+		GameTextForPlayer(playerid, "~r~Umarles tutaj, nie mozesz brac udzialu w przejmowaniu.", 1000, 1);
+
+		if(IsPlayerInAnyVehicle(playerid))
+		{
+			new vehicleid = GetPlayerVehicleID(playerid);
+			SetVehicleOppositeVelocity(vehicleid, 
+				FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], FrontBusiness[bizId][OutZ],
+				5.0, 1.0);
+		}
+		else
+		{
+			SetPlayerOppositeVelocity(playerid, 
+				FrontBusiness[bizId][OutX], FrontBusiness[bizId][OutY], FrontBusiness[bizId][OutZ],
+				5.0, 1.0);
+		}
+
+		defer RestrictFromBusinessArea(playerid, bizId);
+	}
+	return 1;
 }
 
 //end

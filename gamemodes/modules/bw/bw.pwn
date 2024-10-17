@@ -194,6 +194,27 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 			}
 		}
 
+		// œmieræ na strefie biznesu
+		new bizId = IsPlayerAtFrontBusinnesZone(playerid);
+		if(bizId != -1)
+		{
+			if(FrontBusiness[bizId][TakeoverActive])
+			{
+				new redisKey[64];
+				format(redisKey, sizeof(redisKey), "player:%d:restricted-area", PlayerInfo[playerid][pUID]);
+				Redis_SetInt(RedisClient, redisKey, bizId);
+				RedisExpire(redisKey, 3600);
+
+				// œmieræ podczas przejmowania biznesu - 15jmin BW
+				return NadajBW(playerid, 60 * 15);
+			}
+			if(IsPlayerConnected(killerid) && GetPlayerOrg(killerid) == FrontBusiness[bizId][Owner])
+			{
+				// œmieræ z rêki w³aœciciela biznesu - 10 min BW
+				return NadajBW(playerid, 60 * 10);
+			}
+		}
+
 		// œmieræ z r¹k przestêpcy
 		if(IsAPrzestepca(killerid)) 
 		{
@@ -395,6 +416,7 @@ NadajRanny(playerid, customtime = 0, bool:medicinformation = true)
 	}
 	return 1;
 }
+
 NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 {
 	new string[144];
@@ -451,6 +473,7 @@ NadajBW(playerid, customtime = 0, bool:medicinformation = true)
 	}
 	return 1;
 }
+
 FreezePlayerOnInjury(playerid)
 {
 	TogglePlayerControllable(playerid, 0);
@@ -458,18 +481,21 @@ FreezePlayerOnInjury(playerid)
 	SetTimerEx("FreezePlayer", 1500, false, "i", playerid);
 	return 1;
 }
+
 PlayerEnterVehOnInjury(playerid)
 {
 	Player_RemoveFromVeh(playerid);
 	ShowPlayerInfoDialog(playerid, "Mrucznik Role Play", "{FF542E}Jesteœ ranny!\n{FFFFFF}Nie mo¿esz wsi¹œæ do pojazdu.");
 	return 1;
 }
+
 PlayerChangeWeaponOnInjury(playerid)
 {
 	//SendClientMessageToAll(COLOR_GRAD2, "#5: PlayerChangeWeaponOnInjury");
 	SetPlayerArmedWeapon(playerid, MyWeapon[playerid]);
 	return 1;
 }
+
 ZespawnujGraczaBW(playerid)
 {
 	Wchodzenie(playerid);
@@ -497,6 +523,7 @@ ZespawnujGraczaBW(playerid)
 	}
 	return 1;
 }
+
 //-----------------<[ Timery: ]>-------------------
 RannyTimer(playerid)
 {

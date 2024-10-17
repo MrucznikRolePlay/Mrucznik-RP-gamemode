@@ -45,6 +45,15 @@ FB_OnPlayerEnterDynamicArea(playerid, areaid)
 			{
 				return;
 			}
+			else
+			{
+				new redisKey[64];
+				format(redisKey, sizeof(redisKey), "player:%d:restricted-area", PlayerInfo[playerid][pUID]);
+				if(RedisGetInt(redisKey) == i)
+				{
+					defer RestrictFromBusinessArea(playerid, i);
+				}
+			}
 			TogglePlayerDynamicCP(playerid, FrontBusiness[i][TakeoverCheckpoint], true);
 			return;
 		}

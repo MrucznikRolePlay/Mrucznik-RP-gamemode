@@ -11137,6 +11137,68 @@ stock MoveObjectLeft3D(Float:distance, Float:x, Float:y, Float:z, Float:rx, Floa
     newZ = z;  // No change in Z, since we're moving along the XY plane
 }
 
+// Function to set the player's velocity in the opposite direction of the specified coordinates
+stock SetPlayerOppositeVelocity(playerid, Float:targetX, Float:targetY, Float:targetZ, Float:speed, Float:boostZ=0.0)
+{
+    // Variables to store player's current position
+    new Float:playerX, Float:playerY, Float:playerZ;
+
+    // Get player's current position
+    GetPlayerPos(playerid, playerX, playerY, playerZ);
+
+    // Calculate the direction vector (from player to target)
+    new Float:dirX = targetX - playerX;
+    new Float:dirY = targetY - playerY;
+    new Float:dirZ = targetZ - playerZ;
+
+    // Normalize the direction vector (get its unit length)
+    new Float:length = floatsqroot(dirX * dirX + dirY * dirY + dirZ * dirZ);
+
+    if(length == 0.0) return 0; // Prevent division by zero in case the coordinates are the same
+
+    // Normalize the direction (to get unit vector)
+    dirX /= length;
+    dirY /= length;
+    dirZ /= length;
+
+    // Set velocity in the opposite direction (-dirX, -dirY, -dirZ) and scale by speed
+    SetPlayerVelocity(playerid, -dirX * speed, -dirY * speed, -dirZ * speed + boostZ);
+
+    return 1; // Successful execution
+}
+
+// Function to set the vehicle's velocity in the opposite direction of the specified coordinates
+stock SetVehicleOppositeVelocity(vehicleid, Float:targetX, Float:targetY, Float:targetZ, Float:speed, Float:boostZ=0.0)
+{
+    // Variables to store vehicle's current position
+    new Float:vehicleX, Float:vehicleY, Float:vehicleZ;
+
+    // Get vehicle's current position
+    GetVehiclePos(vehicleid, vehicleX, vehicleY, vehicleZ);
+
+    // Calculate the direction vector (from vehicle to target)
+    new Float:dirX = targetX - vehicleX;
+    new Float:dirY = targetY - vehicleY;
+    new Float:dirZ = targetZ - vehicleZ;
+
+    // Normalize the direction vector (get its unit length)
+    new Float:length = floatsqroot(dirX * dirX + dirY * dirY + dirZ * dirZ);
+
+    if(length == 0.0) return 0; // Prevent division by zero in case the coordinates are the same
+
+    // Normalize the direction (to get unit vector)
+    dirX /= length;
+    dirY /= length;
+    dirZ /= length;
+
+    // Set velocity in the opposite direction (-dirX, -dirY, -dirZ) and scale by speed
+    SetVehicleVelocity(vehicleid, -dirX * speed, -dirY * speed, -dirZ * speed + boostZ);
+
+    return 1; // Successful execution
+}
+
+
+
 stock Zaufany(playerid) {
 	return ZaufaniON && PlayerInfo[playerid][pZG] == 10;
 }
