@@ -82,6 +82,10 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 			new routeText[1024];
 			for(new i; i<MAX_BUS_STOPS; i++)
 			{
+				if(!BusStop[route][i][bs_Active])
+				{
+					break;
+				}
 				if(strfind(routeText, BusStop[route][i][bs_District], true) != -1)
 				{
 					continue;

@@ -3,7 +3,7 @@
     "description": "",
     "permissions": ["everyone"],
     "author": "mrucznik",
-    "aliases": [],
+    "aliases": ["zaufanygracz", "zg"],
     "parameters": [
         {
             "type": "string",
