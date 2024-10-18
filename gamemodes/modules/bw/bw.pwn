@@ -209,7 +209,8 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 				MruMessageBadInfo(playerid, "Zosta³eœ zabity na strefie biznesu podczas jego przejmowania - otrzymujesz d³u¿sze BW.");
 				return NadajBW(playerid, 60 * 15);
 			}
-			if(IsPlayerConnected(killerid) && GetPlayerOrg(killerid) == FrontBusiness[bizId][Owner])
+			new org = GetPlayerOrg(killerid);
+			if(org == FrontBusiness[bizId][Owner] && IsActiveOrg(org))
 			{
 				// œmieræ z rêki w³aœciciela biznesu - 10 min BW
 				MruMessageBadInfo(playerid, "Zosta³eœ zabity na strefie biznesu przez cz³onka organizacji, która go kontroluje - dostajesz d³u¿sze BW.");
