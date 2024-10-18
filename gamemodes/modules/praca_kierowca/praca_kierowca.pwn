@@ -413,6 +413,7 @@ LoadBusRoutes()
 			while(fread(file, buf))
 			{
 				if(busstop >= MAX_BUS_STOPS) break;
+				if(strlen(buf) < 3) continue;
         		sscanf(buf, "p<|>e<ds["#MAX_BUS_STOP_NAME"]s["#MAX_BUS_STOP_DISTRICT"]dfffffffff>", BusStop[route][busstop]);
 				busstop++;
 			}
