@@ -84,7 +84,6 @@
 #include "gps\gps.pwn"
 #include "kuppozwolenie\kuppozwolenie.pwn"
 #include "zoneid\zoneid.pwn"
-#include "skille\skille.pwn"
 #include "pogodaall\pogodaall.pwn"
 #include "mandacik\mandacik.pwn"
 #include "armor\armor.pwn"
@@ -668,7 +667,6 @@ hook OnGameModeInit()
     command_gps();
     command_kuppozwolenie();
     command_zoneid();
-    command_skille();
     command_pogodaall();
     command_mandacik();
     command_armor();
