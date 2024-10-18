@@ -9557,12 +9557,14 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				new stan[256];
 				format(stan, sizeof(stan), "{F8F8FF}Stan sejfu:\t\t{008000}%d$", Sejf_Rodziny[lider]);
 				new stanmats[128];
-				format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
+				format(stanmats, sizeof(stanmats), "{F8F8FF}Liczba materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
+				new stanContraband[128];
+				format(stanContraband, sizeof(stanContraband), "{F8F8FF}Liczba kontrabandy w sejfie:\t\t{008080}%d", Rodzina_Contraband[lider]);
 		        switch(listitem)
 		        {
 		            case 0:
 		            {
-						format(stan, sizeof(stan), "%s\n%s", stan, stanmats);
+						format(stan, sizeof(stan), "%s\n%s\n%s", stan, stanmats, stanContraband);
 		                ShowPlayerDialogEx(playerid, 496, DIALOG_STYLE_TABLIST, "Sejf organizacji - stan konta", stan, "Wróæ", "Wróæ");
 		            }
 		            case 1:
@@ -9571,9 +9573,17 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						ShowPlayerDialogEx(playerid, 498, DIALOG_STYLE_INPUT, "Sejf organizacji - wp³acanie gotówki", stan, "Wp³aæ", "Wróæ");
 					case 3:
 						ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf organizacji mats - wyci¹ganie", stanmats, "Wyp³aæ", "Wróæ");
-					case 4: {
-						format(stan, sizeof(stan), "%s\n{F8F8FF}Iloœæ materia³ów które posiadasz:\t\t{008080}%d", stanmats, PlayerInfo[playerid][pMats]);
+					case 4: 
+					{
+						format(stan, sizeof(stan), "%s\n{F8F8FF}Liczba materia³ów które posiadasz:\t\t{008080}%d", stanmats, PlayerInfo[playerid][pMats]);
 						ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf organizacji mats - chowanie", stan, "Wp³aæ", "Wróæ");
+					}
+					case 5:
+						ShowPlayerDialogEx(playerid, 5432, DIALOG_STYLE_INPUT, "Sejf kontrabanda - wyci¹ganie", stanContraband, "Wyp³aæ", "Wróæ");
+					case 6:
+					{
+						format(stanContraband, sizeof(stanContraband), "%s\n{F8F8FF}Liczba kontrabandy któr¹ posiadasz:\t\t{008080}%d", stanContraband, PlayerInfo[playerid][pContraband]);
+						ShowPlayerDialogEx(playerid, 5433, DIALOG_STYLE_INPUT, "Sejf kontrabanda - chowanie", stanContraband, "Wyp³aæ", "Wróæ");
 					}
 		        }
 		    }
@@ -9692,7 +9702,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 				{
 					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
 					new stanmats[128];
-					format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
+					format(stanmats, sizeof(stanmats), "{F8F8FF}Liczba materia³ów w sejfie:\t\t{008080}%d", Rodzina_Mats[lider]);
 					ShowPlayerDialogEx(playerid, 5430, DIALOG_STYLE_INPUT, "Sejf organizacji mats - wyci¹ganie", stanmats, "Wyp³aæ", "Wróæ");
 				}
 		    }
@@ -9730,8 +9740,84 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		        {
 		            SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloœæ!");
 					new stanmats[256];
-					format(stanmats, sizeof(stanmats), "{F8F8FF}Iloœæ materia³ów w sejfie:\t\t{008080}%d\n{F8F8FF}Iloœæ materia³ów które posiadasz:\t\t{008080}%d", Rodzina_Mats[lider], PlayerInfo[playerid][pMats]);
+					format(stanmats, sizeof(stanmats), "{F8F8FF}Liczba materia³ów w sejfie:\t\t{008080}%d\n{F8F8FF}Liczba materia³ów które posiadasz:\t\t{008080}%d", Rodzina_Mats[lider], PlayerInfo[playerid][pMats]);
 					ShowPlayerDialogEx(playerid, 5431, DIALOG_STYLE_INPUT, "Sejf organizacji mats - chowanie", stanmats, "Wyp³aæ", "Wróæ");
+		        }
+		    }
+		    else
+		    {
+		        SejfR_Show(playerid);
+		    }
+		}
+		if(dialogid == 5432)
+		{
+		    if(response)
+		    {
+                new contraband = FunkcjaK(inputtext);
+                new lider = GetPlayerOrg(playerid);
+				if(contraband > 0 && contraband <= Rodzina_Contraband[lider])
+				{
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
+
+					SejfR_AddContraband(lider, -contraband);
+					PlayerInfo[playerid][pContraband] += contraband;
+
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Wyci¹gn¹³eœ %d kontrabandy z sejfu organizacji. Jest w nim teraz %d kontrabandy.", contraband, Rodzina_Contraband[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s wyci¹gn¹³ z sejfu organizacji %d %d kontrabandy. Nowy stan: %d", 
+						GetPlayerLogName(playerid),
+						lider,
+						contraband,
+						Rodzina_Contraband[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
+				}
+				else
+				{
+					SendClientMessage(playerid, COLOR_P@, "W sejfie nie znajduje siê a¿ tyle");
+					new string[128];
+					format(string, sizeof(string), "{F8F8FF}Liczba kontrabandy w sejfie:\t\t{008080}%d", Rodzina_Contraband[lider]);
+					ShowPlayerDialogEx(playerid, 5432, DIALOG_STYLE_INPUT, "Sejf kontrabandy - wyci¹ganie", string, "Wyp³aæ", "Wróæ");
+				}
+		    }
+		    else
+		    {
+		        SejfR_Show(playerid);
+		    }
+		}
+		if(dialogid == 5433)
+		{
+		    if(response)
+		    {
+                new contraband = FunkcjaK(inputtext);
+                new lider = GetPlayerOrg(playerid);
+				if(contraband > 0 && PlayerInfo[playerid][pContraband] >= contraband)
+				{
+					new nick[MAX_PLAYER_NAME];
+					GetPlayerName(playerid, nick, sizeof(nick));
+
+					PlayerInfo[playerid][pContraband] -= contraband;
+					SejfR_AddMats(lider, contraband);
+
+					new komunikat[256];
+					format(komunikat, sizeof(komunikat), "Schowa³eœ %d kontrabandy do sejfu organizacji. Jest w nim teraz %d kontrabandy.", contraband, Rodzina_Contraband[lider]);
+					SendClientMessage(playerid, COLOR_P@, komunikat);
+					Log(payLog, INFO, "%s schowa³ do sejfu organizacji %d %d kontrabandy. Nowy stan: %d", 
+						GetPlayerLogName(playerid),
+						lider,
+						contraband,
+						Rodzina_Contraband[lider]);
+					SejfR_Save(lider);
+					SejfR_Show(playerid);
+				}
+		        else
+		        {
+		            SendClientMessage(playerid, COLOR_P@, "Niepoprawna iloœæ!");
+					new string[256];
+					format(string, sizeof(string), "{F8F8FF}Liczba kontrabandy w sejfie:\t\t{008080}%d\n{F8F8FF}Liczba kontrabandy, któr¹ posiadasz:\t\t{008080}%d", Rodzina_Contraband[lider], PlayerInfo[playerid][pContraband]);
+					ShowPlayerDialogEx(playerid, 5433, DIALOG_STYLE_INPUT, "Sejf organizacji mats - chowanie", string, "Wyp³aæ", "Wróæ");
 		        }
 		    }
 		    else

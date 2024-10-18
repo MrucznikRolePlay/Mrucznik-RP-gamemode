@@ -73,6 +73,10 @@ ShowBuyGunDialog(playerid)
         {
             strcat(string, sprintf(INCOLOR_RED"%s\tbrak materia³ów\n", gunName));
         }
+        else if(Rodzina_Contraband[org] < GunInfo[gunIdx][GunContrabandCost])
+        {
+            strcat(string, sprintf(INCOLOR_RED"%s\tbrak kontrabandy\n", gunName));
+        }
         else
         {
             strcat(string, sprintf(INCOLOR_DIALOG"%s\t%d\t"INCOLOR_GREEN"%d$\n", gunName, GunInfo[gunIdx][GunAmmo], GS_BronCena[gsid][gunid]));

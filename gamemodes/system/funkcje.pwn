@@ -7674,6 +7674,13 @@ SejfR_AddMats(frakcja, mats)
     Log(sejfLog, INFO, "SEJF MATS RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, mats, Rodzina_Mats[frakcja]);
 }
 
+SejfR_AddContraband(frakcja, contraband)
+{
+    Rodzina_Contraband[frakcja]+=contraband;
+    SejfR_Save(frakcja);
+    Log(sejfLog, INFO, "SEJF KONTRABANDA RODZINA [%d] + [%d] - poprzednio [%d]", frakcja, contraband, Rodzina_Contraband[frakcja]);
+}
+
 Sejf_Save(frakcja)
 {
     if(!SafeLoaded) return;
@@ -7686,24 +7693,25 @@ SejfR_Save(frakcja)
 {
     if(!SafeLoaded) return;
     new query[128];
-    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d WHERE `ID`=%d AND `typ`=2", Sejf_Rodziny[frakcja], Rodzina_Mats[frakcja], frakcja);
+    format(query, 128, "UPDATE `mru_sejfy` SET `kasa`=%d, `mats`=%d, `contraband`=%d WHERE `ID`=%d AND `typ`=2", 
+		Sejf_Rodziny[frakcja], Rodzina_Mats[frakcja], Rodzina_Contraband[frakcja], frakcja);
     mysql_query(query);
 }
 
 SejfR_Show(playerid) {
-	ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf organizacji", "Stan\nWyp³aæ\nWp³aæ\nWyp³aæ materia³y\nWp³aæ materia³y", "Wybierz", "WyjdŸ");
+	ShowPlayerDialogEx(playerid, 495, DIALOG_STYLE_LIST, "Sejf organizacji", "Stan\nWyp³aæ\nWp³aæ\nWyjmij materia³y\nSchowaj materia³y\nWyjmij kontrabandê\nSchowaj kontrabandê", "Wybierz", "WyjdŸ");
 }
 
 Sejf_Load()
 {
-    new query[128], id, typ, kasa, mats, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
-    mysql_query("SELECT * FROM `mru_sejfy`");
+    new query[128], id, typ, kasa, mats, contraband, bool:validF[MAX_FRAC]={false,...}, bool:validR[MAX_ORG]={false,...};
+    mysql_query("SELECT `ID`, `typ`, `kasa`, `mats`, `contraband` FROM `mru_sejfy`");
     mysql_store_result();
     while(mysql_fetch_row_format(query, "|"))
     {
-        sscanf(query, "p<|>dddd", id, typ, kasa, mats);
+        sscanf(query, "p<|>ddddd", id, typ, kasa, mats, contraband);
         if(typ == 1) Sejf_Frakcji[id] = kasa, Frakcja_Mats[id] = mats, validF[id] = true;
-        else if(typ == 2) Sejf_Rodziny[id] = kasa, Rodzina_Mats[id] = mats, validR[id] = true;
+        else if(typ == 2) Sejf_Rodziny[id] = kasa, Rodzina_Mats[id] = mats, Rodzina_Contraband[id] = contraband, validR[id] = true;
         SafeLoaded = true;
     }
     mysql_free_result();

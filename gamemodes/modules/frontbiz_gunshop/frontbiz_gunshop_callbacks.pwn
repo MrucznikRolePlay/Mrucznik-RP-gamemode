@@ -148,6 +148,7 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					new gunPrice = GS_BronCena[gsid][gunid];
 					new gunIdx = GetGunIndex(gunid);
 					new matsPrice = GunInfo[gunIdx][GunMaterialsCost];
+					new contrabandPrice = GunInfo[gunIdx][GunContrabandCost];
 					new org = FrontBusiness[bizId][Owner];
 					new weaponName[32];
 					GetWeaponName(gunid, weaponName);
@@ -166,9 +167,16 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 						return 1;
 					}
 
-					if(Rodzina_Mats[org] < GunInfo[gunIdx][GunMaterialsCost])
+					if(Rodzina_Mats[org] < matsPrice)
 					{
 						MruMessageFail(playerid, "Gun Shop nie ma tyle materia³ów, by sprzedaæ Ci t¹ broñ.");
+						ShowBuyGunDialog(playerid);
+						return 1;
+					}
+
+					if(Rodzina_Contraband[org] < contrabandPrice)
+					{
+						MruMessageFail(playerid, "Gun Shop nie ma tyle kontrabandy, by sprzedaæ Ci t¹ broñ.");
 						ShowBuyGunDialog(playerid);
 						return 1;
 					}
@@ -178,12 +186,13 @@ GunShop_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					ZabierzKase(playerid, gunPrice);
 					SejfR_Add(org, gunPrice);
 					SejfR_AddMats(org, -matsPrice);
+					SejfR_AddContraband(org, -contrabandPrice);
 
 					MruMessageGoodInfo(playerid, sprintf("Kupi³eœ broñ %s za %d$.", weaponName, gunPrice));
-					SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %d, stan materia³ów: %d", 
-						FrontBusiness[bizId][Name], GetNick(playerid), weaponName, gunPrice, matsPrice, Rodzina_Mats[org]));
-					Log(payLog, INFO, "Gracz %s kupi³ %s za %d$ od organizacji %d biznes %d koszt materia³ów %d stan materia³ów %d", 
-						GetPlayerLogName(playerid), weaponName, gunPrice, org, bizId, matsPrice, Rodzina_Mats[org]);
+					SendOrgMessage(org, TEAM_AZTECAS_COLOR, sprintf("%s: %s kupi³ %s za %d$, koszt stworzenia: %dm + %dc, stan materia³ów: %d", 
+						FrontBusiness[bizId][Name], GetNick(playerid), weaponName, gunPrice, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]));
+					Log(payLog, INFO, "Gracz %s kupi³ %s za %d$ od organizacji %d biznes %d koszt: %dm + %dc, stan: %dm + %dc", 
+						GetPlayerLogName(playerid), weaponName, gunPrice, org, bizId, matsPrice, contrabandPrice, Rodzina_Mats[org], Rodzina_Contraband[org]);
                 }
             }
         }

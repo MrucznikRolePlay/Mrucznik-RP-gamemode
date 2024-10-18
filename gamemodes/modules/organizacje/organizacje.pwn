@@ -96,6 +96,7 @@ RemoveOrganisation(org)
 
     Sejf_Rodziny[org] = 0;
     Rodzina_Mats[org] = 0;
+    Rodzina_Contraband[org] = 0;
     SejfR_Save(org);
 
     OrgInfo[org][o_Type] = ORG_TYPE_INACTIVE;
