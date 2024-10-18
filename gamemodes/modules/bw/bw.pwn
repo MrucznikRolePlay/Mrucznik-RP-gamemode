@@ -232,7 +232,7 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 	else // œmieræ z niczyjej rêki
 	{
 		// jeœli gracz otrzyma³ obrazenia od porz¹dkowych - wsadŸ do paki
-		if(PoziomPoszukiwania[playerid] >= 1 && IsPlayerDamagedByCop(playerid))
+		if(PoziomPoszukiwania[playerid] >= 1 && (IsPlayerDamagedByCop(playerid) || GetPVarInt(playerid, "kill-bw") == 1))
 		{
 			PutDeadPlayerInJail(playerid);
 			return 1; //zrespawnuj gracza w wiêzieniu
