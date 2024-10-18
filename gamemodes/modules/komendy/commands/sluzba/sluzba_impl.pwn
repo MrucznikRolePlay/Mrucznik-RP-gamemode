@@ -200,14 +200,23 @@ command_sluzba_Impl(playerid)
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Nie jesteœ ju¿ na s³u¿bie LSRS, nie bêdziesz widzia³ zg³oszeñ.");
                 JobDuty[playerid] = 0;
                 Medics -= 1;
+                SetPlayerSkinEx(playerid, PlayerInfo[playerid][pSkin]);
                 SetPlayerToTeamColor(playerid);
+                OOCNews(COLOR_LIGHTRED, sprintf("Medyk %s zszed³ ze s³u¿by.", GetNick(playerid)));
             }
             else
             {
                 SendClientMessage(playerid, COLOR_LIGHTBLUE, "* Jesteœ na s³u¿bie LSRS, kiedy ktoœ bêdzie potrzebowa³ pomocy zostanie wyœwietlony komunikat.");
                 JobDuty[playerid] = 1;
                 Medics += 1;
+                if(PlayerInfo[playerid][pUniform] == 0)
+                {
+                    if(PlayerInfo[playerid][pSex] == 1) PlayerInfo[playerid][pUniform] = 20743;
+                    else PlayerInfo[playerid][pUniform] = 20468;
+                }
+                SetPlayerSkinEx(playerid, PlayerInfo[playerid][pUniform]);
                 SetPlayerToTeamColor(playerid);
+                OOCNews(COLOR_LIGHTRED, sprintf("Medyk %s jest na s³u¿bie, wpisz /wezwij medyk jeœli potrzebujesz pomocy!", GetNick(playerid)));
             }
         }
         else if(frac == 11)

@@ -122,8 +122,11 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
+			new frac = GetPlayerFraction(playerid);
+			if(frac == 0 && GetPlayerJob(playerid) == JOB_MEDIC) frac = FRAC_ERS;
+
 			new string[64];
-			new skin = FRAC_SKINS[GetPlayerFraction(playerid)][listitem];
+			new skin = FRAC_SKINS[frac][listitem];
 			SetPlayerSkinEx(playerid, skin);
 			PlayerInfo[playerid][pUniform] = skin;
 			format(string, sizeof(string), "* %s zdejmuje ubrania i zak³ada nowe.", GetNick(playerid));

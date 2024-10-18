@@ -118,7 +118,16 @@ command_wez_Impl(playerid, params[256])
 						{
 							format(string, sizeof(string), "*** %s przebiera siê w specjalistyczny mundur ***", GetNick(playerid));
 							ProxDetector(30.0, playerid, string, COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE,COLOR_PURPLE);
-							SetPlayerSkinEx(playerid, 277);
+							if(PlayerInfo[playerid][pSex] == 1)
+							{
+								if(PlayerInfo[playerid][pOrigin] == 1) SetPlayerSkinEx(playerid, 20649); // USA
+								else if(PlayerInfo[playerid][pOrigin] == 2) SetPlayerSkinEx(playerid, 20651); // Eropa
+								else SetPlayerSkinEx(playerid, 20647); // Azja
+							}
+							else
+							{
+								SetPlayerSkinEx(playerid, 20645);
+							}
 							ERS_mundur[playerid] = 1;
 							return 1;
 						}

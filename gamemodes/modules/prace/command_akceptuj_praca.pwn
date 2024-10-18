@@ -41,6 +41,12 @@ command_akceptuj_praca(playerid)
         PlayerInfo[playerid][pJob] = GettingJob[playerid];
         Log(serverLog, INFO, "Gracz %s do³¹czy³ do pracy %d.", GetPlayerLogName(playerid), PlayerInfo[playerid][pJob]);
         GettingJob[playerid] = 0;
+
+        if(GetPlayerJob(playerid) == JOB_MEDIC)
+        {
+            if(PlayerInfo[playerid][pSex] == 1) PlayerInfo[playerid][pUniform] = 20743;
+            else PlayerInfo[playerid][pUniform] = 20468;
+        }
         return 1;
     }
     else
