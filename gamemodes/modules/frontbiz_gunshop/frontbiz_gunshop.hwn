@@ -39,7 +39,7 @@ new GS_MatsBotVw[3] = {FRONT_BUSINESS_VW, FRONT_BUSINESS_VW, FRONT_BUSINESS_VW};
 new GS_MatsBotInt[3] = {4, 7, 1};
 new Text3D:GS_Text[3];
 new GS_Guns[] = {
-    8, 9, 22, 23, 24, 25, 26, 27, 28, 32, 29, 30, 31, 33, 34, 37, 35, 16, 18, 39
+    8, 9, 4, 22, 23, 24, 25, 26, 27, 28, 32, 29, 30, 31, 33, 34, 37, 35, 16, 18, 39
 };
 
 enum eGunInfo {
