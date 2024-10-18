@@ -108,6 +108,35 @@ RemovePlayerFromVehicleEx(playerid)
     RemovePlayerFromVehicle(playerid);
 }
 
+IsAtGym(playerid)
+{
+	if(IsPlayerInRangeOfPoint(playerid, 20.0, 765.9343,0.2761,1000.7173))
+	{ // Los Santos gym
+		return 1;
+	}
+	if(IsPlayerInRangeOfPoint(playerid, 25.0, 766.6314,-68.7979,1001.5692))
+	{ // Vice City gym
+		return 1;
+	}
+	return 0;
+}
+
+SetPlayerBoxingPos(playerid, giveplayerid)
+{
+	if(PlayerToPoint(25.0, playerid, 766.6314,-68.7979,1001.5692))
+	{  // Gym Vice City
+		SetPlayerInterior(playerid, 7); SetPlayerInterior(giveplayerid, 7);
+		SetPlayerPos(playerid, 768.8528,-70.9904,1001.5692); SetPlayerFacingAngle(playerid, 47.6238);
+		SetPlayerPos(giveplayerid, 764.4429,-66.4150,1001.5692); SetPlayerFacingAngle(giveplayerid, 228.1055);
+	}
+	else
+	{ // Gym LS
+		SetPlayerInterior(playerid, 5); SetPlayerInterior(giveplayerid, 5);
+		SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
+		SetPlayerPos(giveplayerid, 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(giveplayerid, 313.1165);
+	}
+}
+
 
 saveLegale(playerid) {
 	//LEGAL

@@ -519,9 +519,7 @@ command_akceptuj_Impl(playerid, x_job[32])
                 SendClientMessage(BoxOffer[playerid], COLOR_LIGHTBLUE, string);
                 SetPlayerHealth(playerid, mypoints);
                 SetPlayerHealth(BoxOffer[playerid], points);
-                SetPlayerInterior(playerid, 5); SetPlayerInterior(BoxOffer[playerid], 5);
-                SetPlayerPos(playerid, 762.9852,2.4439,1001.5942); SetPlayerFacingAngle(playerid, 131.8632);
-                SetPlayerPos(BoxOffer[playerid], 758.7064,-1.8038,1001.5942); SetPlayerFacingAngle(BoxOffer[playerid], 313.1165);
+                SetPlayerBoxingPos(playerid, BoxOffer[playerid]);
                 TogglePlayerControllable(playerid, 0); TogglePlayerControllable(BoxOffer[playerid], 0);
                 GameTextForPlayer(playerid, "~r~Czekaj", 3000, 1); GameTextForPlayer(BoxOffer[playerid], "~r~Czekaj", 3000, 1);
                 new name[MAX_PLAYER_NAME];
