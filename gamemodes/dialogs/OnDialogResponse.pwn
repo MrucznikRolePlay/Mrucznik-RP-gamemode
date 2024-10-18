@@ -9799,7 +9799,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 					GetPlayerName(playerid, nick, sizeof(nick));
 
 					PlayerInfo[playerid][pContraband] -= contraband;
-					SejfR_AddMats(lider, contraband);
+					SejfR_AddContraband(lider, contraband);
 
 					new komunikat[256];
 					format(komunikat, sizeof(komunikat), "Schowa³eœ %d kontrabandy do sejfu organizacji. Jest w nim teraz %d kontrabandy.", contraband, Rodzina_Contraband[lider]);
