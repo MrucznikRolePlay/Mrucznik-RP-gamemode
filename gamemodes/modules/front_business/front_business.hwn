@@ -54,7 +54,7 @@ new FrontBusinessBenefits[BIZ_TYPE][64] = {
 	"Sprzedaz alkoholu",
 	"20\% wiecej kontrabandy",
 	"neony, 50\% tansza naprawa~n~50\% tanszy tuning",
-    "Darmowe tankowanie",
+    "Darmowe tankowanie~n~50\%$ z tankowania do sejfu",
     "2.5 procent od hazardu~n~w tym kasynie",
     "2 razy wiecej materialow"
 };
