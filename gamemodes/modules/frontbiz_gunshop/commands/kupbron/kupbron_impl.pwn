@@ -83,7 +83,7 @@ ShowBuyGunDialog(playerid)
         }
     }
 
-    ShowPlayerDialogEx(playerid, D_GSPANEL_KUPBRON, DIALOG_STYLE_LIST, sprintf("Gunshop %s", FrontBusiness[bizId][Name]), 
+    ShowPlayerDialogEx(playerid, D_GSPANEL_KUPBRON, DIALOG_STYLE_TABLIST_HEADERS, sprintf("Gunshop %s", FrontBusiness[bizId][Name]), 
         string, "Kup", "Wyjdü");
 }
 

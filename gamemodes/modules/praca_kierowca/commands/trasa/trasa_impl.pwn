@@ -53,16 +53,17 @@ command_trasa_Impl(playerid)
 ShowTrasaDialog(playerid)
 {
 	new string[256 * MAX_BUS_ROUTES];
+	strcat(string, "Linia\tSkill\tSzansa skill+1\tZysk\tCzas trasy\tPrzystanków\n");
 	for(new i; i<MAX_BUS_ROUTES; i++)
 	{
 		if(BusRoute[i][br_Enabled])
 		{
 			new busStops = GetRouteBusStopsCount(i);
-			strcat(string, sprintf(INCOLOR_DIALOG"%s\t"INCOLOR_WHITE"skill %d\t%d%% skill\t%d$/p\t%dmin\t%dp)\n", 
+			strcat(string, sprintf(INCOLOR_DIALOG"%s\t"INCOLOR_WHITE"%d\t"INCOLOR_WHITE"%d%%\t"INCOLOR_GREEN"%d$\t"INCOLOR_WHITE"%dmin\t"INCOLOR_WHITE"%d\n", 
 				BusRoute[i][br_Name], 
 				BusRoute[i][br_Skill],  
 				BusRoute[i][br_SkillChance],
-				BusRoute[i][br_MoneyPerStop],
+				BusRoute[i][br_MoneyPerStop] * busStops,
 				BusRoute[i][br_Time] / 60,
 				busStops));
 		}
@@ -71,7 +72,7 @@ ShowTrasaDialog(playerid)
 			strcat(string, INCOLOR_RED"Linia nieaktywna\n");
 		}
 	}
-	ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_LIST, "Wybierz trasê autobusow¹", 
+	ShowPlayerDialogEx(playerid, 8155, DIALOG_STYLE_TABLIST_HEADERS, "Wybierz trasê autobusow¹", 
 		string, "Wybierz", "Wyjdz");
 }
 
