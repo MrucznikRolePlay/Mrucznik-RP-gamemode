@@ -60,7 +60,7 @@ command_zd_Impl(playerid)
 		new okDiff = timePerStop * CurrentBusStop[playerid];
 		if(timeDiff < okDiff)
 		{
-			timerDelay = okDiff - timeDiff;
+			timerDelay = min(1000, okDiff - timeDiff);
 		}
 	}
 

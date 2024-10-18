@@ -53,7 +53,7 @@ command_trasa_Impl(playerid)
 ShowTrasaDialog(playerid)
 {
 	new string[256 * MAX_BUS_ROUTES];
-	strcat(string, "Linia\tSkill\tSzansa skill+1\tZysk\tCzas trasy\tPrzystanków\n");
+	strcat(string, "Linia\tSkill\tSkill+1\tZysk\tCzas\tPrzystanków\n");
 	for(new i; i<MAX_BUS_ROUTES; i++)
 	{
 		if(BusRoute[i][br_Enabled])
@@ -142,6 +142,7 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
+			new route = GetPVarInt(playerid, "bus-route");
 			if(GetPlayerJobSkill(playerid, JOB_DRIVER) < BusRoute[route][br_Skill])
 			{
 				MruMessageFail(playerid, sprintf("Ta trasa jest dostêpna od %d skill kierowcy (Ty masz %d)", 
