@@ -88,6 +88,14 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 			new string[4096];
 			new routeText[1024];
 			new uniqDistricts;
+
+			if(!BusRoute[route][br_Enabled])
+			{
+				MruMessageFail(playerid, "Linia nieaktywna");
+				ShowTrasaDialog(playerid);
+				return 1;
+			}
+
 			for(new i; i<MAX_BUS_STOPS; i++)
 			{
 				if(!BusStop[route][i][bs_Active])
@@ -134,7 +142,6 @@ command_trasa_dialog(playerid, dialogid, response, listitem, inputtext[])
 	{
 		if(response)
 		{
-			new route = GetPVarInt(playerid, "bus-route");
 			if(GetPlayerJobSkill(playerid, JOB_DRIVER) < BusRoute[route][br_Skill])
 			{
 				MruMessageFail(playerid, sprintf("Ta trasa jest dostêpna od %d skill kierowcy (Ty masz %d)", 
