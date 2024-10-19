@@ -325,9 +325,11 @@ Przystanek(playerid, vehicleid, route, busstop)
 	Log(payLog, INFO, "%s zarobi³ %d$ za przejechanie przystanku na linii %s", GetPlayerLogName(playerid), money, BusRoute[route][br_Name]);
 
 	CurrentBusStop[playerid]++;
-	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi. ((/zd lub C by zamkn¹æ))");
+	ChatMe(playerid, "naciska przycisk na desce rozdzielczej i otwiera drzwi.");
 	TogglePlayerControllable(playerid, 0);
 	BusDoors[playerid] = 1;
+
+	SendClientMessage(playerid, BusRoute[route][br_Color], sprintf("%s {33AA33}Przystanek: {FFFFFF}%s", BusRoute[route][br_Name], BusStop[route][afterNext][br_Name]));
 
 	if(end)
 	{
