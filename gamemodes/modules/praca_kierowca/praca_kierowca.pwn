@@ -364,10 +364,10 @@ Przystanek(playerid, vehicleid, route, busstop)
 
 		new busText[MAX_BUS_STOPS * (MAX_BUS_STOP_NAME + 3) + 1024];
 		format(busText, sizeof(busText), 
-			"%s\n{0080FF}Trasa: {E2DFF3}%s\n{0080FF}Nastêpny przystanek: {E2DFF3}%s", 
+			"%s\n{0080FF}Trasa: {E2DFF3}%s\n\n{0080FF}Nastêpny przystanek: {E2DFF3}%s", 
 			BusRoute[route][br_Name],
-			BusStop[route][next][br_Name],
-			routeText);
+			routeText,
+			BusStop[route][next][br_Name]);
 		UpdateDynamic3DTextLabelText(Busnapisn[KomunikacjaMiejsca[vehicleid]], BusRoute[route][br_Color], busText);
 	}
     return 1;
@@ -523,7 +523,7 @@ CreateBusStops(route)
 
 		new busStopText[512];
 		strcat(busStopText, sprintf("{0080FF}Przystanek: {E2DFF3}%s\n", BusStop[route][busstop][bs_Name]));
-		strcat(busStopText, sprintf("{0080FF}Kursuje: {%06X}%s", (BusRoute[route][br_Color] >>> 8), BusRoute[route][br_Name]));
+		strcat(busStopText, sprintf("{0080FF}Kursuje: {%06x}%s", (BusRoute[route][br_Color] >>> 8), BusRoute[route][br_Name]));
 
 		BusStopsEntities[route][busstop][bs_BusStop3DText] = CreateDynamic3DTextLabel(busStopText,  BusRoute[route][br_Color], 
 			BusStop[route][busstop][bs_ObjectX],
