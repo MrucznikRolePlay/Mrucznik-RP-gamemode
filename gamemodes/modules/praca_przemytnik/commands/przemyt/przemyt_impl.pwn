@@ -159,6 +159,12 @@ przemyt_StagePickup(playerid, actionID)
     }
 
     new driverid = GetVehicleDriverID(vehicleID);
+    if(driverid == INVALID_PLAYER_ID)
+    {
+        MruMessageFail(playerid, "W wodolocie nie ma kierowcy. Twój kierowca powinien nim kierowaæ.");
+        return 1;
+    }
+
     if(GetPlayerSmugglingRole(driverid) != SMUGGLING_ROLE_DRIVER || PlayerInfo[driverid][pUID] != SmugglingAction[actionID][s_driverUID])
     {
         MruMessageFail(playerid, "Gracz który jest kierowc¹ wodolotu nie zosta³ wybrany jako kierowca w tej akcji przemytniczej.");
