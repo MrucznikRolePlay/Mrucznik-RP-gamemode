@@ -196,7 +196,7 @@ CreateSmugglingGatherCheckpoint(playerid, actionID, bool:hole=false)
 	else
 	{
 		SetPlayerCheckpoint(playerid, 
-			SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ], 
+			SmugglingAction[actionID][s_gatherPointX], SmugglingAction[actionID][s_gatherPointY], SmugglingAction[actionID][s_gatherPointZ] - 1.0, 
 			5.0);
 	}
 }
