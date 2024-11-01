@@ -36,6 +36,12 @@ hook OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 		new proxMessage[256];
 		new copplayerid = whoIsCuffing[playerid];
 		new cuffingCopsCount = 0;
+
+		if(!IsPlayerConnected(copplayerid))
+		{
+			MruMessageError(playerid, "Policjant wyszed³ z gry.");
+			return 1;
+		}
 		
 		if(response)
 		{
