@@ -913,6 +913,16 @@ public MruMySQL_LoadAccount(playerid)
 
     MruMySQL_LoadAccess(playerid);
     //MruMySQL_WczytajOpis(playerid, PlayerInfo[playerid][pUID], 1);
+
+	if(!Redis_Exists(RedisClient, sprintf("player:%d:immunity-bar", PlayerInfo[playerid][pUID])))
+	{
+		Odpornosc_PlayerBarToggle[playerid] = 1;
+	}
+	else
+	{
+		Odpornosc_PlayerBarToggle[playerid] = RedisGetInt(sprintf("player:%d:immunity-bar", PlayerInfo[playerid][pUID]));
+	}
+
 	if(id != 4) return false;
 	return true;
 }
