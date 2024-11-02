@@ -51,7 +51,7 @@ command_malunek_Impl(playerid, giveplayerid, paintjob)
         return 1; 
     }
 
-    if(paintjob >= 0 && paintjob <= 3)
+    if(paintjob < 0 || paintjob > 3)
     {
         MruMessageFail(playerid, "ID malunku od 0 do 3 (wpisz /malunki aby zobaczyæ dostêpne malunki).");
         return 1;
