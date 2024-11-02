@@ -44,8 +44,11 @@ EatCookedMeal(playerid, name[], weight, type)
 	}
 	if(type < sizeof(FishNames))
 	{
-		IncreasePlayerImmunity(playerid, 1);
-		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp i 1pkt odpornoœci.", name, weight, weight/10));
+		new immunityBonus = weight/100;
+		if(immunityBonus == 0) immunityBonus = 1;
+		IncreasePlayerImmunity(playerid, immunityBonus);
+		SendClientMessage(playerid, COLOR_LIGHTBLUE, sprintf("* Zjad³eœ: %s o wadze %dg i dosta³eœ +%dhp i %dpkt odpornoœci.", 
+			name, weight, weight/10, immunityBonus));
 	}
 	else
 	{

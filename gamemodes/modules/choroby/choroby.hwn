@@ -55,6 +55,7 @@ enum eEffectData {
     bool:Pernament,
     Float:ContagiousRange,
     InfectionChance, // chance of getting disease if player is in contagious range
+    BreaksThroughImmunity, // breaks through player immunity
     AdditionalValue
 }
 
@@ -74,7 +75,7 @@ new Vector:VPlayerDiseases[MAX_PLAYERS];
 
 //TODO: Replace to dynamic arrays, vector or smth to create full dynamic system
 new DiseaseData[eDiseases][eDiseaseData] = {
-    //nazwa, cena, czas, lekoodpornosc, zarazliwosc, zarazanie przy kontakcie
+    //nazwa, nazwa wyswietlana, cena, czas, lekoodpornosc, zarazliwosc, zarazanie przy kontakcie
     {"", "", 0, 0, 0, 0.0, false, VECTOR_NULL},
     {"angina", "Angina", 100, 20, 30, 0.01, true, VECTOR_NULL}, //koronawirus
     {"grypa", "Grypa", 2500, 60, 5, 0.01, false, VECTOR_NULL},
@@ -228,278 +229,278 @@ choroby_InitEffects()
 {
     //eDiseases:disease, activateCallback[32], deactivateCallback[32], 
     // minTime, timeRange, 
-    // pernament, contagiousRange, infectionChance,
+    // pernament, contagiousRange, infectionChance, BreaksThroughImmunity,
     // additionalValue)
     AddEffect(KORONAWIRUS, "WuhanCouching", "", 
         ONE_MINUTE*2, ONE_MINUTE*5, 
-        false, 7.0, 10, 
+        false, 7.0, 10, false,
         0
     );
     AddEffect(KORONAWIRUS, "DusznosciEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 3.0, 10, 
+        false, 3.0, 10, false,
         15
     );
     AddEffect(KORONAWIRUS, "FeverEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 3.0, 10, 
+        false, 3.0, 10, false,
         30
     );
     AddEffect(KORONAWIRUS, "KoronawirusDeathEffect", "", 
         RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 5.0, 50, 
+        false, 5.0, 50, false,
         200
     );
 
     AddEffect(GRYPA, "FeelingBadEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 3.0, 10, 
+        false, 3.0, 10, false,
         0
     );
     AddEffect(GRYPA, "CouchingEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 10.0, 5, 
+        false, 10.0, 5, false,
         0
     );
     AddEffect(GRYPA, "HPLossEffect", "", 
         RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 5.0, 15, 
+        false, 5.0, 15, false,
         10
     );
 
     AddEffect(ZAPALENIE_PLUC, "FeelingBadEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 3.0, 5, 
+        false, 3.0, 5, false,
         0
     );
     AddEffect(ZAPALENIE_PLUC, "CouchingEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 10.0, 10, 
+        false, 10.0, 10, false,
         0
     );
     AddEffect(ZAPALENIE_PLUC, "HPLossEffect", "", 
         RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 5.0, 15, 
+        false, 5.0, 15, false,
         20
     );
 
     AddEffect(ZATRUCIE, "FartEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(ZATRUCIE, "DiarrheaEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 2.0, 5, 
+        false, 2.0, 5, false,
         0
     );
     AddEffect(ZATRUCIE, "ShittingEffect", "", 
         REGULAR_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 3.0, 10, 
+        false, 3.0, 10, false,
         0
     );
     AddEffect(ZATRUCIE, "AbdominalPainEffect", "", 
         REGULAR_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         15
     );
     AddEffect(ZATRUCIE, "VomitEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 3.0, 20, 
+        false, 3.0, 20, false,
         0
     );
 
     AddEffect(PADACZKA, "EpilepsyEffect", "", 
         ONE_MINUTE*20, ONE_MINUTE*20, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         50
     );
 
     AddEffect(TOURETT, "TourettPermanentEffect", "TourettPermanentEffect_Off", 
         0, 0, 
-        true, 0.0, 0, 
+        true, 0.0, 0, false,
         0
     );
     AddEffect(TOURETT, "TourettShoutEffect", "", 
         ONE_MINUTE, ONE_MINUTE*5, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
 
     AddEffect(ASTMA, "DusznosciEffect", "", 
         REGULAR_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         30
     );
     AddEffect(ASTMA, "AnaphylacticShock", "", 
         ONE_MINUTE*40, ONE_MINUTE*80, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         100
     );
 
     AddEffect(SCHIZOFRENIA, "HallucinationsEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
 
     AddEffect(ZOMBIE, "ZombieSkinEffect", "ZombieSkinEffect_Off", 
         0, 0, 
-        true, 0.0, 0, 
+        true, 0.0, 0, false,
         0
     );
     AddEffect(ZOMBIE, "ZombieTalkEffect", "", 
         ONE_MINUTE, ONE_MINUTE*3, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
 
     AddEffect(HIV, "ReducedImmunityEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(HIV, "RandomInfectionEffect", "", 
         ONE_MINUTE*60, ONE_MINUTE*80, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
 
     AddEffect(ASTYGMATYZM, "AstigmatismEffect", "AstigmatismEffect_Off", 
         0, 0, 
-        true, 0.0, 0, 
+        true, 0.0, 0, false,
         0
     );
 
     AddEffect(PARKINSON, "ShakingHandsEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(PARKINSON, "ShootingSkillEffect", "ShootingSkillEffect_Off", 
         0, 0, 
-        true, 0.0, 0, 
+        true, 0.0, 0, false,
         0
     );
 
     AddEffect(URAZ, "BleedingEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         15
     );
     AddEffect(URAZ, "FeelingBadEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         5
     );
     AddEffect(URAZ, "FaintEffect", "", 
         RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(URAZ, "GetGangreneEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE,
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
 
     AddEffect(GANGRENA, "PurulenceEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         25
     );
     AddEffect(GANGRENA, "RottenFleshEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         50
     );
     AddEffect(GANGRENA, "FaintEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
 
     AddEffect(PTSD, "HideWeaponEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(PTSD, "ThrowWeaponEffect", "", 
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(PTSD, "ThrowAllWeaponsEffect", "", 
         REGULAR_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(PTSD, "FearEffect", "", 
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
 
     AddEffect(OK_DISEASE, "OKPermanentEffect", "OKPermanentEffect_Off", 
         0, 0, 
-        true, 0.0, 0, 
+        true, 0.0, 0, false,
         0
     );
     AddEffect(OK_DISEASE, "OKEffect", "", 
         ONE_MINUTE, ONE_MINUTE*5, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(OK_DISEASE, "OKPermanentEffect_Off", "", 
         ONE_MINUTE*30, 0, 
-        true, 0.0, 0, 
+        true, 0.0, 0, false,
         0
     );
 
     AddEffect(FANATYK_WEDKARSTWA, "RzucTekstemZPasty", "",
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(FANATYK_WEDKARSTWA, "RzucMeZPasty", "",
         FREQUENT_EFFECT_MIN, FREQUENT_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(FANATYK_WEDKARSTWA, "PrzyczepWedke", "",
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(FANATYK_WEDKARSTWA, "Ryboglowy", "",
         RARE_EFFECT_MIN, RARE_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
     AddEffect(FANATYK_WEDKARSTWA, "UpuscRybe", "",
         REGULAR_EFFECT_MIN, REGULAR_EFFECT_RANGE, 
-        false, 0.0, 0, 
+        false, 0.0, 0, false,
         0
     );
 
     // Pod wp³ywem narkotyku
     AddEffect(DRUG_GOOD, "NarkotycznyBuff", "",
         30_000, 15_000, // co 15-45s
-        false, 0.0, 0, 
+        false, 0.0, 0, true,
         0
     );
 
     // Efekt odstawienia narkotyku
     AddEffect(DRUG_BAD, "NarkotycznyDebuff", "",
         ONE_MINUTE*15, ONE_MINUTE*5, // co +- 10 minut
-        false, 0.0, 0, 
+        false, 0.0, 0, true,
         0
     );
 
     // Efekt uzale¿nienia
     AddEffect(DRUG_ADDICT, "Uzalezniony", "",
         ONE_MINUTE*15, ONE_MINUTE*5, 
-        false, 0.0, 0, 
+        false, 0.0, 0, true,
         0
     );
 
