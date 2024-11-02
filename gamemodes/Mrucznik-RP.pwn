@@ -2961,7 +2961,6 @@ public OnPlayerPickUpDynamicPickup(playerid, pickupid)
 	{
 		if(ShopPickups[i] == pickupid)
 		{
-			
 			if(gettime() - GetPVarInt(playerid, "picked-up") < 60)
 			{
 				return 1;	
