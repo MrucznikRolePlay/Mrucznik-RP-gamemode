@@ -25,8 +25,8 @@
 //------------------<[ Implementacja: ]>-------------------
 command_kill_Impl(playerid)
 {
-    if(PlayerInfo[playerid][pInjury] == 0) {
-        sendTipMessage(playerid, "Twoja postaæ nie jest ranna, nie mo¿esz u¿yæ tej komendy.");
+    if(PlayerInfo[playerid][pInjury] == 0 && isPlayerCuffed[playerid] == 0) {
+        sendTipMessage(playerid, "Twoja postaæ nie jest ranna/skuta, nie mo¿esz u¿yæ tej komendy.");
         return 1;
     }
 
@@ -82,6 +82,12 @@ public DropDeathMoneyTimer(playerid, moneyLost, Float:x, Float:y, Float:z, int, 
     {
         MruMessageBadInfo(playerid, "Umar³eœ bêd¹c poszukiwanym - trafiasz do wiêzienia.");
         PutDeadPlayerInJail(playerid);
+
+        if(isPlayerCuffed[playerid])
+        {
+            UncuffPlayer(playerid);
+        }
+        
         jailed = PlayerInfo[playerid][pJailed];
         if(jailed == 1) SetPlayerArrestPos(playerid);
         else if(jailed == 2) SetPlayerStateArrestPos(playerid);
