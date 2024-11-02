@@ -71,7 +71,25 @@ public DropDeathMoneyTimer(playerid, moneyLost, Float:x, Float:y, Float:z, int, 
     new wl = moneyLost / 200000;
     CreateMoneyPickup(x, y, z, int, vw, moneyLost, wl, PlayerInfo[playerid][pUID]);
     DeletePVar(playerid, "kill-bw");
-    ZespawnujGraczaSzpitalBW(playerid, IsPlayerAtViceCity(playerid));
+
+    new jailed = PlayerInfo[playerid][pJailed];
+    if(jailed > 0)
+    {
+        if(jailed == 1) SetPlayerArrestPos(playerid);
+        else if(jailed == 2) SetPlayerStateArrestPos(playerid);
+    }
+    else if(PoziomPoszukiwania[playerid] > 0)
+    {
+        MruMessageBadInfo(playerid, "Umar³eœ bêd¹c poszukiwanym - trafiasz do wiêzienia.");
+        PutDeadPlayerInJail(playerid);
+        jailed = PlayerInfo[playerid][pJailed];
+        if(jailed == 1) SetPlayerArrestPos(playerid);
+        else if(jailed == 2) SetPlayerStateArrestPos(playerid);
+    }
+    else
+    {
+       ZespawnujGraczaSzpitalBW(playerid, IsPlayerAtViceCity(playerid));
+    }
 }
 
 //end
