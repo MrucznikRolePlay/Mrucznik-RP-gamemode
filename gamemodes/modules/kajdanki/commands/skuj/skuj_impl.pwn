@@ -50,13 +50,19 @@ command_skuj_Impl(playerid, cuffedplayerid)
         return 1;
     }
 
+    if(GetPlayerWeapon(cuffedplayerid) >= 22 && TazerAktywny[cuffedplayerid] == 0)
+    {
+        MruMessageFail(playerid, "Ten gracz trzyma niebezpieczn¹ broñ, jeœli chcesz go zakuæ musisz go najpierw sparali¿owaæ tazerem lub zmusiæ do schowania broni.");
+        return 1;
+    }
+
     new string[128];
 
     SetTimerEx("AntySpamTimer",10000,0,"d",playerid);
     AntySpam[playerid] = 1;
 
     // Automatyczny sukces
-    if(PlayerInfo[cuffedplayerid][pBW] >= 1 || PlayerInfo[cuffedplayerid][pInjury] >= 1 || GetPlayerSpecialAction(cuffedplayerid) == SPECIAL_ACTION_DUCK)
+    if(PlayerInfo[cuffedplayerid][pBW] >= 1 || PlayerInfo[cuffedplayerid][pInjury] >= 1)
     {
         CuffAutoSuccess(playerid, cuffedplayerid);
         return 1;

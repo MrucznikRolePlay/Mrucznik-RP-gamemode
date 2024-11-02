@@ -40,7 +40,7 @@ CuffAutoSuccess(playerid, cuffedplayerid)
 		format(cuffingDescription, sizeof(cuffingDescription), "* %s docisn¹³ do ziemi nieprzytomnego %s i sku³ go.", GetNick(playerid), GetNick(cuffedplayerid));
 		format(reasonForAutoSuccess, sizeof(reasonForAutoSuccess), "Jesteœ nieprzytomny");
 	}
-	else //if(GetPlayerSpecialAction(cuffedplayerid) == SPECIAL_ACTION_DUCK)
+	else
 	{
 		format(cuffingDescription, sizeof(cuffingDescription), "* %s docisn¹³ do ziemi %s, a nastêpnie zaku³ go w kajdanki.", GetNick(playerid), GetNick(cuffedplayerid));
 		format(reasonForAutoSuccess, sizeof(reasonForAutoSuccess), "Le¿a³eœ na ziemi");
