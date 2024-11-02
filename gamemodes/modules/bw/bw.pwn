@@ -198,7 +198,7 @@ BW_OnPlayerDeath(playerid, killerid, reason)
 		new bizId = IsPlayerAtFrontBusinnesZone(playerid);
 		if(bizId != -1)
 		{
-			if(FrontBusiness[bizId][TakeoverActive])
+			if(FrontBusiness[bizId][TakeoverActive] && IsAPolicja(playerid))
 			{
 				new redisKey[64];
 				format(redisKey, sizeof(redisKey), "player:%d:restricted-area", PlayerInfo[playerid][pUID]);
