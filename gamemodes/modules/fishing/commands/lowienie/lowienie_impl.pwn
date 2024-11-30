@@ -159,12 +159,22 @@ command_lowienie_Impl(playerid)
             {
                 Caught = 60000 + random(20000);
             }
+            else
+            {
+                sendTipMessageEx(playerid, COLOR_GREY, "¯y³ka pêk³a!");
+                return 1;
+            }
         }
         else if(rand == 23) // P³etwal b³êkitny
         {
             if(hour >= 18 && hour <= 22)
             {
                 Caught = 113000 + random(37000);
+            }
+            else
+            {
+                sendTipMessageEx(playerid, COLOR_GREY, "¯y³ka pêk³a!");
+                return 1;
             }
         }
         if(PlayerInfo[playerid][pFishLic] < 1)
