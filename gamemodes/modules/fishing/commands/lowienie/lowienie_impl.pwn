@@ -101,9 +101,9 @@ command_lowienie_Impl(playerid)
             }
         }
 
+        new hour,unused;
         if(IsPlayerAtViceCity(playerid))
         {
-            new hour,unused;
             gettime(hour,unused,unused);
             if(hour >= 18 && hour <= 24)
             {
@@ -152,6 +152,20 @@ command_lowienie_Impl(playerid)
             SendClientMessage(playerid, COLOR_LIGHTBLUE, string);
             DajKase(playerid, mrand);
             return 1;
+        }
+        else if(rand == 22) // Waleñ
+        {
+            if(hour >= 18 && hour <= 22)
+            {
+                Caught = 60000 + random(20000);
+            }
+        }
+        else if(rand == 23) // P³etwal b³êkitny
+        {
+            if(hour >= 18 && hour <= 22)
+            {
+                Caught = 113000 + random(37000);
+            }
         }
         if(PlayerInfo[playerid][pFishLic] < 1)
         {

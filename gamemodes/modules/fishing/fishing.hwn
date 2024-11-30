@@ -52,7 +52,7 @@ new FishNames[][20] = {
 	{"Ognica Pstra"},
 	{"Stare gacie"},
 	{"Pstr¹g"},
-	{"Blue Marlin"},
+	{"Makaira b³êkitna"},
 	{"£osoœ"},
 	{"Makrela"},
 	{"Bas"},
@@ -66,8 +66,10 @@ new FishNames[][20] = {
 	{"Rekin"},
 	{"¯ó³w"},
 	{"Sum"},
-	{"Sakiewka ze z³otem"},
-	{"Miecznik"}//21
+	{"Sakiewka ze z³otem"}, //20
+	{"Miecznik"},
+	{"Waleñ"}, //22
+	{"P³etwal b³êkitny"} //23
 };
 
 new FishModels[] = {
