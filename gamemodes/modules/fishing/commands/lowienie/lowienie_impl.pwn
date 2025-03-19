@@ -102,13 +102,10 @@ command_lowienie_Impl(playerid)
         }
 
         new hour,unused;
-        if(IsPlayerAtViceCity(playerid))
+        gettime(hour,unused,unused);
+        if((hour >= 18 && hour <= 24) || hour <= 2)
         {
-            gettime(hour,unused,unused);
-            if(hour >= 18 && hour <= 24)
-            {
-                Caught = floatround(Caught * 1.25, floatround_ceil);
-            }
+            Caught = floatround(Caught * 1.25, floatround_ceil);
         }
         
         if(Caught <= 0)
