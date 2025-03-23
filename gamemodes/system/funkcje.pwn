@@ -5630,7 +5630,9 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 	{
 		if(Dom[dom][hKupiony] == 0)
 		{
+			Dom[dom][hWlasciciel] = GetNickEx(playerid);
 			Dom[dom][hKupiony] = 1;
+			Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
 			ZapiszDom(dom);
 			SendClientMessage(playerid, COLOR_PANICRED, "Wykryto bug z niekupionym domem, zosta³ on automatycznie naprawiony. Je¿eli komunikat bêdzie siê powtarza³ lub wyst¹pi¹ inne bugi, zg³oœ to koniecznie na forum!");
 			Log(serverLog, WARNING, "%s posiada³ bug z niekupionym domem %s. Naprawiono.", GetPlayerLogName(playerid), GetHouseLogName(dom));
@@ -5640,16 +5642,23 @@ NaprawSpojnoscWlascicielaDomu(playerid)
 	{
 		if(Dom[dom][hKupiony] == 0)
 		{
-			DajKase(playerid, (Dom[dom][hCena]/2));
-			SendClientMessage(playerid, COLOR_PANICRED, "Twój dom zosta³ zabrany z powodu nieaktywnoœci, otrzymujesz po³owê wartosci domu!");
-			Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]/2);
-			PlayerInfo[playerid][pDom] = 0;
+			Dom[dom][hWlasciciel] = GetNickEx(playerid);
+			Dom[dom][hKupiony] = 1;
+			Dom[dom][hUID_W] = PlayerInfo[playerid][pUID];
+			ZapiszDom(dom);
+			SendClientMessage(playerid, COLOR_PANICRED, "Wykryto bug z niekupionym domem, zosta³ on automatycznie naprawiony. Je¿eli komunikat bêdzie siê powtarza³ lub wyst¹pi¹ inne bugi, zg³oœ to koniecznie na forum!");
+			Log(serverLog, WARNING, "%s posiada³ bug z niekupionym domem %s. Naprawiono.", GetPlayerLogName(playerid), GetHouseLogName(dom));
+
+			// DajKase(playerid, (Dom[dom][hCena]/2));
+			// SendClientMessage(playerid, COLOR_PANICRED, "Twój dom zosta³ zabrany z powodu nieaktywnoœci, otrzymujesz po³owê wartosci domu!");
+			// Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]/2);
+			// PlayerInfo[playerid][pDom] = 0;
 		}
 		else
 		{
-			DajKase(playerid, (Dom[dom][hCena]/2));
-			SendClientMessage(playerid, COLOR_PANICRED, "Wykro bug z dwoma w³aœcicielami! Jesteœ drugim w³aœcicielem, wiêc tracisz dom, otrzymujesz po³owê wartosci domu.");
-			Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci (2 w³aœcicieli) i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]/2);
+			DajKase(playerid, (Dom[dom][hCena]));
+			SendClientMessage(playerid, COLOR_PANICRED, "Wykro bug z dwoma w³aœcicielami! Jesteœ drugim w³aœcicielem, wiêc tracisz dom i otrzymujesz zwrot pieniêdzy.");
+			Log(payLog, INFO, "%s straci³ dom %s z powodu nieaktywnoœci (2 w³aœcicieli) i otrzyma³ %d$", GetPlayerLogName(playerid), GetHouseLogName(dom), Dom[dom][hCena]);
 			PlayerInfo[playerid][pDom] = 0;
 		}
 	}

@@ -3562,11 +3562,11 @@ PayDay()
 			if(Dom[h][hKupiony])
 			{
 				Dom[h][hData_DD] ++;
-				if(Dom[h][hData_DD] >= 30)
-				{
-					ZlomowanieDomu(9999, h);
-					Log(serverLog, INFO, "Dom %s zosta³ zez³omowany z powodu up³ywu czasu.", GetHouseLogName(h));
-				}
+				// if(Dom[h][hData_DD] >= 30)
+				// {
+				// 	ZlomowanieDomu(9999, h);
+				// 	Log(serverLog, INFO, "Dom %s zosta³ zez³omowany z powodu up³ywu czasu.", GetHouseLogName(h));
+				// }
 			}
 	    }
 		ZapiszDomy();
