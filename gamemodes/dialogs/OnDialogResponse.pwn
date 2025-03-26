@@ -690,7 +690,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
 			{
 				if(!response) return 1;
 				StopAudioStreamForPlayer(playerid);
-				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18148/LepaStation/");
+				PlayAudioStreamForPlayer(playerid, "http://4stream.pl:18214");
 				SetPVarInt(playerid, "HaveAMp3Stream", 1);
 			}
 			case 9:
@@ -9985,7 +9985,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
                             {
                                 if(IsPlayerInVehicle(i, veh))
                                 {
-                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18148/LepaStation/");
+                                    PlayAudioStreamForPlayer(i, "http://4stream.pl:18214/");
                                     SetPVarInt(i, "sanlisten", 2);
                                 }
                             }
