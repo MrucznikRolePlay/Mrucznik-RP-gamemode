@@ -36,7 +36,7 @@ MruMySQL_Connect()
 	if(!MYSQL_ON) return 0;
 	if(!LoadConnectionValues())
 	{
-		print("MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
+		print("FATAL ERROR MYSQL: Nieudane pobranie danych z MySQL/connect.ini");
 		SendRconCommand("gamemodetext Brak polaczenia MySQL");
 		SendRconCommand("exit");
 	}
@@ -49,7 +49,7 @@ MruMySQL_Connect()
 	}
 	else
 	{
-		print("MYSQL: Nieudane polaczenie z baza MySQL");
+		print("FATAL ERROR MYSQL: Nieudane polaczenie z baza MySQL");
 		SendRconCommand("gamemodetext Brak polaczenia MySQL");
 		SendRconCommand("exit");
 		return 0;
